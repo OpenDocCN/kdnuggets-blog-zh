@@ -1,22 +1,22 @@
-# 掌握计算机科学的10个GitHub资源库
+# 掌握计算机科学的 10 个 GitHub 资源库
 
-> 原文：[https://www.kdnuggets.com/10-github-repositories-to-master-computer-science](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
+> 原文：[`www.kdnuggets.com/10-github-repositories-to-master-computer-science`](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
 
-![掌握计算机科学的10个GitHub资源库](../Images/7e854be82ea681654b737a10d1a78f36.png)
+![掌握计算机科学的 10 个 GitHub 资源库](img/7e854be82ea681654b737a10d1a78f36.png)
 
 图片由 DALLE-3 生成
 
-从零开始学习计算机科学可能相当困难，你可能会在开始之前感到气馁。然而，GitHub上的开源社区创建了大量资源，可以指导你完成这段旅程。在这篇博客文章中，我们将探讨10个重要的GitHub资源库，帮助你学习必要的概念和工具，以掌握计算机科学并在顶级科技公司获得职位。
+从零开始学习计算机科学可能相当困难，你可能会在开始之前感到气馁。然而，GitHub 上的开源社区创建了大量资源，可以指导你完成这段旅程。在这篇博客文章中，我们将探讨 10 个重要的 GitHub 资源库，帮助你学习必要的概念和工具，以掌握计算机科学并在顶级科技公司获得职位。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 # 2\. 计算机科学学位课程
 
-**链接：** [ossu/computer-science](/enroll-in-a-4-year-computer-science-degree-program-for-free)
+**链接：** ossu/computer-science
 
 开源社会大学（OSSU）提供了一个免费的、全面的、社区驱动的计算机科学课程，提供了对计算机科学基本概念的完整教育。该课程根据领先大学本科计算机科学专业的学位要求设计，由麻省理工学院、哈佛大学和普林斯顿大学等著名学府的教授授课。
 
@@ -48,9 +48,9 @@ freeCodeCamp 是一个提供各种计算机技术免费课程和教程的平台�
 
 **链接：** [donnemartin/system-design-primer](https://github.com/donnemartin/system-design-primer)
 
-该资源库作为学习系统设计原则和准备系统设计面试的全面资源。它由Donne Martin维护，他是一名曾在Amazon和Google等公司工作的软件工程师。
+该资源库作为学习系统设计原则和准备系统设计面试的全面资源。它由 Donne Martin 维护，他是一名曾在 Amazon 和 Google 等公司工作的软件工程师。
 
-它涵盖了设计大型系统相关的广泛主题，包括：系统设计基础、分布式系统的关键特征、系统设计问题、Anki闪卡，以及系统设计面试问题及其解决方案。
+它涵盖了设计大型系统相关的广泛主题，包括：系统设计基础、分布式系统的关键特征、系统设计问题、Anki 闪卡，以及系统设计面试问题及其解决方案。
 
 # 5\. 免费编程书籍
 
@@ -66,7 +66,7 @@ freeCodeCamp 是一个提供各种计算机技术免费课程和教程的平台�
 
 这是一个为学生和专业人士提供的令人惊叹的计算机科学机会和资源列表。
 
-它涵盖了广泛的主题，包括竞争编程平台、网页开发教程、移动开发课程、DevOps训练营、数据科学竞赛、人工智能资源、计算机科学基础、开源项目、网络安全博客、在线课程（MOOCs）、奖学金和助学金、编程事件和黑客马拉松、学生包等一般机会，以及由社区驱动的演示项目。
+它涵盖了广泛的主题，包括竞争编程平台、网页开发教程、移动开发课程、DevOps 训练营、数据科学竞赛、人工智能资源、计算机科学基础、开源项目、网络安全博客、在线课程（MOOCs）、奖学金和助学金、编程事件和黑客马拉松、学生包等一般机会，以及由社区驱动的演示项目。
 
 该列表旨在提供一个全面的有价值资源集合，以帮助个人学习、练习并在计算机科学的各个领域中脱颖而出。
 
@@ -74,33 +74,33 @@ freeCodeCamp 是一个提供各种计算机技术免费课程和教程的平台�
 
 **链接：** [jwasham/coding-interview-university](https://github.com/jwasham/coding-interview-university)
 
-这个库包含了一个成为大型公司软件工程师的学习计划，由jwasham编写。它是为那些没有正规计算机科学教育或学位的个人准备的，就像作者一样。
+这个库包含了一个成为大型公司软件工程师的学习计划，由 jwasham 编写。它是为那些没有正规计算机科学教育或学位的个人准备的，就像作者一样。
 
 学习计划内容全面，旨在覆盖大学计算机科学课程中通常教授的大部分重要主题，重点关注数据结构、算法和编码面试准备。
 
 它提供了一种结构化的方法，包括目录、每日计划、编码实践和学习主题列表。
 
-# 8\. 自建X
+# 8\. 自建 X
 
 **链接：** [codecrafters-io/build-your-own-x](https://github.com/codecrafters-io/build-your-own-x)
 
 这是一个包含详细步骤指南的库，用于从头开始重建各种技术。它旨在通过从基础构建技术来提供学习和理解不同技术的好方法。
 
-这个库被分为不同的类别，每个类别关注特定类型的技术，如3D渲染器、增强现实、命令行工具、数据库、Docker、游戏、Git等。每个类别包含指向教程、文章和资源的链接，这些资源指导用户从头开始构建各种技术。
+这个库被分为不同的类别，每个类别关注特定类型的技术，如 3D 渲染器、增强现实、命令行工具、数据库、Docker、游戏、Git 等。每个类别包含指向教程、文章和资源的链接，这些资源指导用户从头开始构建各种技术。
 
-# 9\. 公共API
+# 9\. 公共 API
 
 **链接：** [public-apis/public-apis](https://github.com/public-apis/public-apis)
 
-公共API是一个策划的免费API列表，开发者可以轻松地探索并将其集成到自己的项目中。这些API涵盖了从动物和娱乐到金融和健康等各种类别，提供了数据和服务，这些数据和服务否则会耗费时间并且成本高昂。
+公共 API 是一个策划的免费 API 列表，开发者可以轻松地探索并将其集成到自己的项目中。这些 API 涵盖了从动物和娱乐到金融和健康等各种类别，提供了数据和服务，这些数据和服务否则会耗费时间并且成本高昂。
 
-使用公共API的一个关键优势是能够快速增强产品功能并快速构建MVP。例如，如果你正在构建一个与汽车相关的应用程序，你可以无缝集成提供不同类型汽车信息的公共API。这不仅节省了开发时间，还确保用户可以访问准确和最新的数据。
+使用公共 API 的一个关键优势是能够快速增强产品功能并快速构建 MVP。例如，如果你正在构建一个与汽车相关的应用程序，你可以无缝集成提供不同类型汽车信息的公共 API。这不仅节省了开发时间，还确保用户可以访问准确和最新的数据。
 
 # 10\. 精选列表
 
 **链接：** [sindresorhus/awesome](https://github.com/sindresorhus/awesome)
 
-这是一个在GitHub上策划的精彩列表，涵盖了各种有趣的主题。这些列表包含了按平台、编程语言、开发工具等类别组织的资源。
+这是一个在 GitHub 上策划的精彩列表，涵盖了各种有趣的主题。这些列表包含了按平台、编程语言、开发工具等类别组织的资源。
 
 精选列表是一个巨大的社区项目，社区成员创建拉取请求并更新现有列表。它是你学习计算机科学各种工具和概念时唯一需要的资源。精选列表对于希望构建耐用且安全应用程序的专业人士也非常有用。
 

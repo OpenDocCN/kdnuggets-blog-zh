@@ -1,8 +1,8 @@
 # 开发端到端数据科学管道，包括数据摄取、处理和可视化
 
-> 原文：[https://www.kdnuggets.com/developing-end-to-end-data-science-pipelines-with-data-ingestion-processing-and-visualization](https://www.kdnuggets.com/developing-end-to-end-data-science-pipelines-with-data-ingestion-processing-and-visualization)
+> 原文：[`www.kdnuggets.com/developing-end-to-end-data-science-pipelines-with-data-ingestion-processing-and-visualization`](https://www.kdnuggets.com/developing-end-to-end-data-science-pipelines-with-data-ingestion-processing-and-visualization)
 
-![开发端到端数据科学管道，包括数据摄取、处理和可视化](../Images/0451f63ff8c9c4f86db4caa973eda2d8.png)图片来源 [macrovector on Freepik](https://www.freepik.com/free-vector/ai-powered-content-creation-isometric-composition-with-human-characters-cute-robot-generating-art-computer-screen-3d-vector-illustration_43868976.htm#fromView=search&page=3&position=0&uuid=b4c38b5b-880f-4b62-97e8-75687fe757e3)
+![开发端到端数据科学管道，包括数据摄取、处理和可视化](img/0451f63ff8c9c4f86db4caa973eda2d8.png)图片来源 [macrovector on Freepik](https://www.freepik.com/free-vector/ai-powered-content-creation-isometric-composition-with-human-characters-cute-robot-generating-art-computer-screen-3d-vector-illustration_43868976.htm#fromView=search&page=3&position=0&uuid=b4c38b5b-880f-4b62-97e8-75687fe757e3)
 
 数据科学项目不仅仅是开发完成后就不再关注。它们涉及整个过程，从获取数据集到维护数据集。这个迭代过程确保模型始终能提供价值。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -274,18 +274,18 @@ plt.show()
 
 标准化端到端数据科学管道对于我们持续为业务提供价值至关重要。通过了解每一步的细节，特别是数据摄取、处理和可视化，我们可以提高项目质量，为解决业务问题提供最佳结果。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一位数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius在各种AI和机器学习主题上撰写文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一位数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 期间，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 在各种 AI 和机器学习主题上撰写文章。
 
 ### 更多相关主题
 
-+   [模型训练和推理的端到端隐私保护与Concrete ML](https://www.kdnuggets.com/end-to-end-privacy-for-model-training-and-inference-with-concrete-ml)
++   [模型训练和推理的端到端隐私保护与 Concrete ML](https://www.kdnuggets.com/end-to-end-privacy-for-model-training-and-inference-with-concrete-ml)
 
-+   [关于开发安全、可靠和值得信赖的AI框架的专家见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
++   [关于开发安全、可靠和值得信赖的 AI 框架的专家见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
 
 +   [将机器学习算法全面部署到……](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [5款最佳端到端开源MLOps工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
++   [5 款最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
 
-+   [使用HuggingFace实现的简单端到端项目](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)
++   [使用 HuggingFace 实现的简单端到端项目](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)
 
-+   [2024年必须尝试的7个端到端MLOps平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
++   [2024 年必须尝试的 7 个端到端 MLOps 平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)

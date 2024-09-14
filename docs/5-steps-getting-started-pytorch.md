@@ -1,8 +1,8 @@
 # 使用 PyTorch 的 5 步入门指南
 
-> 原文：[https://www.kdnuggets.com/5-steps-getting-started-pytorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
+> 原文：[`www.kdnuggets.com/5-steps-getting-started-pytorch`](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
 
-![使用 PyTorch 的 5 步入门指南](../Images/85ff1f259e44794911a7f7d810b43ab6.png)
+![使用 PyTorch 的 5 步入门指南](img/85ff1f259e44794911a7f7d810b43ab6.png)
 
 # PyTorch 和 PyTorch Lightning 简介
 
@@ -292,17 +292,17 @@ PyTorch 以其灵活性而闻名，特别是动态计算图，这对于研究和
 
 祝深度学习愉快！
 
-[**马修·梅奥**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 KDnuggets 的主编，马修的目标是让复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、机器学习算法以及探索新兴的人工智能。他致力于在数据科学社区中普及知识。马修从6岁起就开始编程。
+[**马修·梅奥**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 KDnuggets 的主编，马修的目标是让复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、机器学习算法以及探索新兴的人工智能。他致力于在数据科学社区中普及知识。马修从 6 岁起就开始编程。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 

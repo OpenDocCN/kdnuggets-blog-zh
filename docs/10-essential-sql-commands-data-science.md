@@ -1,28 +1,28 @@
-# 数据科学的10个基本SQL命令
+# 数据科学的 10 个基本 SQL 命令
 
-> 原文：[https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html`](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
 
-![数据科学的10个基本SQL命令](../Images/93b5f1ae3a5afebae36da396cd2653c7.png)
+![数据科学的 10 个基本 SQL 命令](img/93b5f1ae3a5afebae36da396cd2653c7.png)
 
 图片由作者提供
 
-这是学习SQL命令的新一天，这些命令将帮助你在数据科学职业中。你将使用SQL查询来提取、保存和修改数据库以满足你的需求。
+这是学习 SQL 命令的新一天，这些命令将帮助你在数据科学职业中。你将使用 SQL 查询来提取、保存和修改数据库以满足你的需求。
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-那么，是什么阻止你学习提取数据和在SQL数据库上执行快速分析的最常用命令呢？
+那么，是什么阻止你学习提取数据和在 SQL 数据库上执行快速分析的最常用命令呢？
 
-在这篇文章中，我们将通过使用[在线SQL编辑器](https://www.programiz.com/sql/online-compiler/)学习基本SQL命令及代码示例。它允许用户在线运行查询而不会遇到问题。该平台提供了一个编辑器和三个用于练习的SQL表。数据库包括三个表：**Customers**、**Orders**和**Shippings**。
+在这篇文章中，我们将通过使用[在线 SQL 编辑器](https://www.programiz.com/sql/online-compiler/)学习基本 SQL 命令及代码示例。它允许用户在线运行查询而不会遇到问题。该平台提供了一个编辑器和三个用于练习的 SQL 表。数据库包括三个表：**Customers**、**Orders**和**Shippings**。
 
 1.  选择
 
@@ -46,7 +46,7 @@
 
 # 选择
 
-SELECT命令允许我们从表中提取选择的或所有列。这是SQL查询的基本构建块。
+SELECT 命令允许我们从表中提取选择的或所有列。这是 SQL 查询的基本构建块。
 
 在我们的例子中，我们使用`*`从**Customer**表中显示所有列。
 
@@ -82,7 +82,7 @@ FROM Customers;
 
 # 唯一
 
-DISTINCT用于显示列中的唯一值。它现在只显示一个John，而不是两个John。
+DISTINCT 用于显示列中的唯一值。它现在只显示一个 John，而不是两个 John。
 
 ```py
 SELECT DISTINCT first_name
@@ -98,7 +98,7 @@ FROM Customers;
 
 # 条件
 
-WHERE命令用于条件和过滤。我们将过滤表以显示年龄大于25的客户。除了大于，你还可以使用小于**<**、小于或等于**<=**、大于或等于**>=**和等于**=**。
+WHERE 命令用于条件和过滤。我们将过滤表以显示年龄大于 25 的客户。除了大于，你还可以使用小于**<**、小于或等于**<=**、大于或等于**>=**和等于**=**。
 
 ```py
 SELECT *
@@ -106,14 +106,14 @@ FROM Customers
 WHERE age > 25;
 ```
 
-结果显示我们只有两个年龄大于25的客户。
+结果显示我们只有两个年龄大于 25 的客户。
 
 | **customer_id** | **first_name** | **last_name** | **age** | **country** |
 | --- | --- | --- | --- | --- |
 | 1 | John | Doe | 31 | 美国 |
 | 5 | Betty | Doe | 28 | 阿联酋 |
 
-你还可以使用**AND**、**OR**、**BETWEEN**和**IN**来组合两个或多个条件。在我们的案例中，我们正在寻找年龄大于25的美国客户。
+你还可以使用**AND**、**OR**、**BETWEEN**和**IN**来组合两个或多个条件。在我们的案例中，我们正在寻找年龄大于 25 的美国客户。
 
 ```py
 SELECT *
@@ -128,7 +128,7 @@ WHERE age > 25
 
 # LIKE
 
-LIKE命令用于字符串过滤。你提供表达式，它将用来查找匹配该表达式的值。例如，如果你想要所有以J开头的名字，可以使用“J%”。要查找以J结尾的名字，我们将使用“%J”。这很简单。
+LIKE 命令用于字符串过滤。你提供表达式，它将用来查找匹配该表达式的值。例如，如果你想要所有以 J 开头的名字，可以使用“J%”。要查找以 J 结尾的名字，我们将使用“%J”。这很简单。
 
 ```py
 SELECT *
@@ -141,7 +141,7 @@ WHERE first_name LIKE "J%";
 | 1 | John | Doe | 31 | 美国 |
 | 4 | John | Reinhardt | 25 | 英国 |
 
-尝试查找**first_name**以“J”开头且**last_name**以“e”结尾的客户。你可以通过阅读[SQL LIKE 操作符示例](/2022/09/sql-like-operator-examples.html)教程来了解更多创建表达式的其他方法。
+尝试查找**first_name**以“J”开头且**last_name**以“e”结尾的客户。你可以通过阅读 SQL LIKE 操作符示例教程来了解更多创建表达式的其他方法。
 
 ```py
 SELECT *
@@ -158,7 +158,7 @@ WHERE first_name LIKE "J%"
 
 # ORDER BY
 
-ORDER BY用于对查询结果进行排序。我们使用ORDER BY对结果进行基于**first_name**的升序排序。
+ORDER BY 用于对查询结果进行排序。我们使用 ORDER BY 对结果进行基于**first_name**的升序排序。
 
 ```py
 SELECT *
@@ -192,7 +192,7 @@ ORDER BY first_name DESC;
 
 # AS
 
-AS命令用于创建别名或重命名列名。在下面的示例中，我们将“customer_id”重命名为“ID”，将“first_name”重命名为“Name”。
+AS 命令用于创建别名或重命名列名。在下面的示例中，我们将“customer_id”重命名为“ID”，将“first_name”重命名为“Name”。
 
 ```py
 SELECT customer_id AS ID,
@@ -323,14 +323,14 @@ FROM Orders;
 
 ### 相关主题更多内容
 
-+   [数据科学的16个基本DVC命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
++   [数据科学的 16 个基本 DVC 命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
 
-+   [数据科学家的14个基本Git命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
++   [数据科学家的 14 个基本 Git 命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
 
-+   [Streamlit的12个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
++   [Streamlit 的 12 个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
 
-+   [KDnuggets 新闻，6月29日：数据科学的20个基本Linux命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基本 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)
 
-+   [数据科学初学者的20个基本Linux命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
++   [数据科学初学者的 20 个基本 Linux 命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
 
 +   [每位数据科学家都应了解的 12 个 Docker 命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)

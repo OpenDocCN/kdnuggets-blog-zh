@@ -1,8 +1,8 @@
 # 12 个数据科学必备的 VSCode 扩展
 
-> 原文：[https://www.kdnuggets.com/2022/07/12-essential-vscode-extensions-data-science.html](https://www.kdnuggets.com/2022/07/12-essential-vscode-extensions-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/07/12-essential-vscode-extensions-data-science.html`](https://www.kdnuggets.com/2022/07/12-essential-vscode-extensions-data-science.html)
 
-![12 Essential VSCode Extensions for Data Science](../Images/17e50825f5c5f246cac15911b1dc94da.png)
+![12 Essential VSCode Extensions for Data Science](img/17e50825f5c5f246cac15911b1dc94da.png)
 
 图片作者
 
@@ -58,29 +58,29 @@
 
 # 5\. Indent-rainbow
 
-[Indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow) 带来了**HTML**和Python编码世界的宁静。我现在可以看到干净且组织良好的缩进。这款扩展帮助我快速调试代码并编写有效的代码。Indent-rainbow 为文本前的缩进上色，每一步交替使用四种颜色。
+[Indent-rainbow](https://marketplace.visualstudio.com/items?itemName=oderwat.indent-rainbow) 带来了**HTML**和 Python 编码世界的宁静。我现在可以看到干净且组织良好的缩进。这款扩展帮助我快速调试代码并编写有效的代码。Indent-rainbow 为文本前的缩进上色，每一步交替使用四种颜色。
 
 # 6\. Jupyter
 
-[Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) 让你可以在VScode中编辑、运行和保存Python Jupyter Notebook。它简单易用，支持所有编程语言，例如**Julia**、**R**、**Scala**和**SQL**。它将Jupyter功能与VSCode扩展结合起来，提供终极的Python开发体验。Jupyter 包含快速的 `.ipynb` 文件加载、**notebook diff-tool**、Python和Pylance集成，以及代码折叠功能。
+[Jupyter](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter) 让你可以在 VScode 中编辑、运行和保存 Python Jupyter Notebook。它简单易用，支持所有编程语言，例如**Julia**、**R**、**Scala**和**SQL**。它将 Jupyter 功能与 VSCode 扩展结合起来，提供终极的 Python 开发体验。Jupyter 包含快速的 `.ipynb` 文件加载、**notebook diff-tool**、Python 和 Pylance 集成，以及代码折叠功能。
 
-我强烈推荐你在VSCode中使用Jupyter Notebook。
+我强烈推荐你在 VSCode 中使用 Jupyter Notebook。
 
 # 7\. Jupyter Notebook Renderers
 
-[Jupyter Notebook Renderers](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter-renderers) 与Jupyter扩展配合使用，提供交互式数据可视化。对于数据分析师、数据科学家和数据工程师来说，这是一个必备的扩展，能够可视化Plotly、Vega、Bokeh、GIF、PNG、SVG和JPEG输出。
+[Jupyter Notebook Renderers](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter-renderers) 与 Jupyter 扩展配合使用，提供交互式数据可视化。对于数据分析师、数据科学家和数据工程师来说，这是一个必备的扩展，能够可视化 Plotly、Vega、Bokeh、GIF、PNG、SVG 和 JPEG 输出。
 
 # 8\. R
 
-[R](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) 扩展提供丰富的语言支持。如果你是数据分析师或研究人员，你一定对R语言及其生态系统有所了解。VSCode扩展通过提供语法高亮、代码分析、R终端和对**R Markdown**的支持来增强你的体验。它还允许你查看数据、图表和变量。
+[R](https://marketplace.visualstudio.com/items?itemName=REditorSupport.r) 扩展提供丰富的语言支持。如果你是数据分析师或研究人员，你一定对 R 语言及其生态系统有所了解。VSCode 扩展通过提供语法高亮、代码分析、R 终端和对**R Markdown**的支持来增强你的体验。它还允许你查看数据、图表和变量。
 
 # 9\. Julia
 
-[Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) 扩展提供类似于Python和R的语言支持。在我看来，Julia 是机器学习和数据科学的未来。这个扩展带有语法高亮、代码片段、**Julia REPL**、代码补全、linter、悬停帮助和调试功能。类似于R，它提供了绘图画廊、表格数据的网格查看器，以及测试、构建和基准测试程序的能力。
+[Julia](https://marketplace.visualstudio.com/items?itemName=julialang.language-julia) 扩展提供类似于 Python 和 R 的语言支持。在我看来，Julia 是机器学习和数据科学的未来。这个扩展带有语法高亮、代码片段、**Julia REPL**、代码补全、linter、悬停帮助和调试功能。类似于 R，它提供了绘图画廊、表格数据的网格查看器，以及测试、构建和基准测试程序的能力。
 
 # 10\. DVC
 
-[DVC](https://marketplace.visualstudio.com/items?itemName=Iterative.dvc) 是一个新的扩展，我认为是**MVP**，用于版本控制和跟踪你的机器学习实验。每个数据团队都依赖它来对数据集进行版本控制，以确保可重现性。除了数据，你还可以对元数据、图表、模型进行版本控制，跟踪和存储实验，创建数据和ML管道，并像使用Git一样共享。该扩展提供了实验跟踪、仪表板、实时跟踪和基于GUI的数据管理功能。
+[DVC](https://marketplace.visualstudio.com/items?itemName=Iterative.dvc) 是一个新的扩展，我认为是**MVP**，用于版本控制和跟踪你的机器学习实验。每个数据团队都依赖它来对数据集进行版本控制，以确保可重现性。除了数据，你还可以对元数据、图表、模型进行版本控制，跟踪和存储实验，创建数据和 ML 管道，并像使用 Git 一样共享。该扩展提供了实验跟踪、仪表板、实时跟踪和基于 GUI 的数据管理功能。
 
 DVC 扩展使大文件版本控制变得更简单和容易。
 
@@ -106,24 +106,24 @@ DVC 扩展使大文件版本控制变得更简单和容易。
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你们组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你们组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，7月6日：12个必备的数据科学 VSCode…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode…](https://www.kdnuggets.com/2022/n27.html)
 
-+   [数据科学领域VSCode的7大替代方案](https://www.kdnuggets.com/top-7-alternatives-to-vscode-for-data-science)
++   [数据科学领域 VSCode 的 7 大替代方案](https://www.kdnuggets.com/top-7-alternatives-to-vscode-for-data-science)
 
-+   [12个针对Python开发的VSCode技巧和窍门](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
++   [12 个针对 Python 开发的 VSCode 技巧和窍门](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
 
-+   [KDnuggets 新闻，7月5日：一个糟糕的数据科学项目 • 10个AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
 
-+   [AI Chrome扩展程序为数据科学家提供的备忘单](https://www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html)
++   [AI Chrome 扩展程序为数据科学家提供的备忘单](https://www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html)
 
-+   [6个让人惊叹的ChatGPT扩展程序，适用于任何地方](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)
++   [6 个让人惊叹的 ChatGPT 扩展程序，适用于任何地方](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)

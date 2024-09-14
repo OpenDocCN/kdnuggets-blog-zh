@@ -1,8 +1,8 @@
 # 在 Google Colab 中使用 PyTorch 构建神经网络
 
-> 原文：[https://www.kdnuggets.com/2020/10/building-neural-networks-pytorch-google-colab.html](https://www.kdnuggets.com/2020/10/building-neural-networks-pytorch-google-colab.html)
+> 原文：[`www.kdnuggets.com/2020/10/building-neural-networks-pytorch-google-colab.html`](https://www.kdnuggets.com/2020/10/building-neural-networks-pytorch-google-colab.html)
 
-[评论](#comments)
+评论
 
 ### 在 Google Colab 中使用 PyTorch 进行深度学习
 
@@ -10,7 +10,7 @@
 
 即使拥有更实惠的深度学习系统选项，许多人仍然趋向于使用 PyTorch 和 Google Colab，因为他们逐渐适应了深度学习项目的工作。
 
-![PyTorch 和 Google Colab 标志](../Images/50078f8211f21460eba3628c9ee9bde6.png)
+![PyTorch 和 Google Colab 标志](img/50078f8211f21460eba3628c9ee9bde6.png)
 
 [来源](https://medium.com/@nrezaeis/pytorch-in-google-colab-640e5d166f13)
 
@@ -22,7 +22,7 @@ Google Colab 是由 Google 开发的，旨在帮助大众访问强大的 GPU 资
 
 ### **使用 Google Colab**
 
-![与 Google Colab 的关系](../Images/b7f138ecd96f19da537f64d45ea13155.png)
+![与 Google Colab 的关系](img/b7f138ecd96f19da537f64d45ea13155.png)
 
 [来源](https://zerowithdot.com/colab-github-workflow/)
 
@@ -34,7 +34,7 @@ Google Colab 提供了一个环境设置选项的组合，具有类似 Jupyter �
 
 ### **使用 PyTorch**
 
-![PyTorch 标志](../Images/c029a48084032c05aa34ef79f416f05d.png)
+![PyTorch 标志](img/c029a48084032c05aa34ef79f416f05d.png)
 
 [来源](https://engineering.fb.com/ai-research/facebook-accelerates-ai-development-with-new-partners-and-production-capabilities-for-pytorch-1-0/)
 
@@ -46,7 +46,7 @@ Tensor 的一个主要优点是它本身支持 GPU。Tensor 可以在 CPU 或 GP
 
 ### **为什么 GPU 更受青睐？**
 
-**![PyTorch 技术编译](../Images/929382124362cfa66fea0cb5796bccf0.png)**
+**![PyTorch 技术编译](img/929382124362cfa66fea0cb5796bccf0.png)**
 
 [来源](https://hackernoon.com/how-to-run-pytorch-with-gpu-and-cuda-9-2-support-on-google-colab-64d58ba3083a)
 
@@ -159,11 +159,11 @@ print("Accuracy: ", round(correct/total, 3))
 ### Accuracy:  0.915</nlllossbackward></nlllossbackward></nlllossbackward></nlllossbackward>
 ```
 
-### **PyTorch和Google Colab在数据科学中是绝佳选择**
+### **PyTorch 和 Google Colab 在数据科学中是绝佳选择**
 
-PyTorch和Google Colab都是有用、强大且简单的选择，尽管PyTorch于2017年（3年前）发布，而Google Colab于2018年（2年前）发布，但它们在数据科学社区中已被广泛采纳。
+PyTorch 和 Google Colab 都是有用、强大且简单的选择，尽管 PyTorch 于 2017 年（3 年前）发布，而 Google Colab 于 2018 年（2 年前）发布，但它们在数据科学社区中已被广泛采纳。
 
-这些环境在深度学习中已被证明是绝佳的选择，并且随着新开发的发布，它们可能成为最好的工具。两者都由科技界两大巨头Facebook和Google支持。PyTorch提供了全面的工具和模块，以尽可能简化深度学习过程，而Google Colab则提供了一个环境来管理你的编码和项目的可重现性。
+这些环境在深度学习中已被证明是绝佳的选择，并且随着新开发的发布，它们可能成为最好的工具。两者都由科技界两大巨头 Facebook 和 Google 支持。PyTorch 提供了全面的工具和模块，以尽可能简化深度学习过程，而 Google Colab 则提供了一个环境来管理你的编码和项目的可重现性。
 
 如果你已经在使用这些工具，你发现哪些对你的工作最有价值？
 
@@ -171,21 +171,21 @@ PyTorch和Google Colab都是有用、强大且简单的选择，尽管PyTorch于
 
 **相关内容：**
 
-+   [深度学习的4个最佳Jupyter Notebook环境](/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)
++   深度学习的 4 个最佳 Jupyter Notebook 环境
 
-+   [5个Google Colaboratory技巧](/2020/03/5-google-colaboratory-tips.html)
++   5 个 Google Colaboratory 技巧
 
-+   [Google Colab在深度学习中的完整指南](/2020/06/google-colab-deep-learning.html)
++   Google Colab 在深度学习中的完整指南
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -193,12 +193,12 @@ PyTorch和Google Colab都是有用、强大且简单的选择，尽管PyTorch于
 
 +   [停止学习数据科学以寻找目标，并以目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [90亿美元的AI失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

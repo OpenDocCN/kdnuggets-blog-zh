@@ -1,8 +1,8 @@
 # AutoGPT：你需要知道的一切
 
-> 原文：[https://www.kdnuggets.com/2023/04/autogpt-everything-need-know.html](https://www.kdnuggets.com/2023/04/autogpt-everything-need-know.html)
+> 原文：[`www.kdnuggets.com/2023/04/autogpt-everything-need-know.html`](https://www.kdnuggets.com/2023/04/autogpt-everything-need-know.html)
 
-![AutoGPT: Everything You Need To Know](../Images/34f1e76cdfbab9b444b26758bbd7feac.png)
+![AutoGPT: Everything You Need To Know](img/34f1e76cdfbab9b444b26758bbd7feac.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -108,9 +108,9 @@ pip install -r requirements.txt
 
 如何获取你的密钥：
 
-+   从 [https://platform.openai.com/account/api-keys](https://platform.openai.com/account/api-keys) 获取 OpenAI API 密钥。
++   从 [`platform.openai.com/account/api-keys`](https://platform.openai.com/account/api-keys) 获取 OpenAI API 密钥。
 
-+   从 [https://elevenlabs.io](https://elevenlabs.io/) 获取 ElevenLabs API 密钥。
++   从 [`elevenlabs.io`](https://elevenlabs.io/) 获取 ElevenLabs API 密钥。
 
 一旦完成并成功，你需要在 CMD、Bash 或 Powershell 窗口中运行：
 
@@ -138,7 +138,7 @@ python scripts/main.py
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
 

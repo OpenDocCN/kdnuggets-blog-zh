@@ -1,8 +1,8 @@
-# 数据科学项目管理的7个技巧
+# 数据科学项目管理的 7 个技巧
 
-> 原文：[https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html](https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html)
+> 原文：[`www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html`](https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html)
 
-![7个数据科学项目管理技巧](../Images/0807b250248a9c342c60e3c7b82dd592.png)
+![7 个数据科学项目管理技巧](img/0807b250248a9c342c60e3c7b82dd592.png)
 
 图片由 [freepik](https://www.freepik.com/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -38,7 +38,7 @@
 
 # 5\. 构建、评估和测试模型
 
-对于机器学习模型，如线性回归、分类或聚类，你需要构建、测试和评估你的模型。这将涉及将数据分为训练集和测试集。然后你需要确定适合的评估指标，如均方误差、R2得分、平均绝对误差、整体准确度、敏感性、特异性、混淆矩阵、交叉验证得分等。
+对于机器学习模型，如线性回归、分类或聚类，你需要构建、测试和评估你的模型。这将涉及将数据分为训练集和测试集。然后你需要确定适合的评估指标，如均方误差、R2 得分、平均绝对误差、整体准确度、敏感性、特异性、混淆矩阵、交叉验证得分等。
 
 # 6\. 决定是否需要团队
 
@@ -52,13 +52,13 @@
 
 总结一下，我们讨论了在管理数据科学项目时需要牢记的重要提示。谨慎的准备、规划和执行将帮助你高效、及时地完成数据科学项目。
 
-**[本杰明·O·泰约](https://www.linkedin.com/in/benjamin-o-tayo-ph-d-a2717511/)** 是一位物理学家、数据科学教育者和作家，同时也是DataScienceHub的创始人。之前，本杰明曾在中奥克拉荷马大学、大峡谷大学和匹兹堡州立大学教授工程学和物理学。
+**[本杰明·O·泰约](https://www.linkedin.com/in/benjamin-o-tayo-ph-d-a2717511/)** 是一位物理学家、数据科学教育者和作家，同时也是 DataScienceHub 的创始人。之前，本杰明曾在中奥克拉荷马大学、大峡谷大学和匹兹堡州立大学教授工程学和物理学。
 
 ### 更多相关话题
 
 +   [数据科学项目管理方法指南](https://www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html)
 
-+   [掌握数据科学项目管理的7个步骤：敏捷方法](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握数据科学项目管理的 7 个步骤：敏捷方法](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
 +   [为什么数据管理对数据科学如此重要？](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)
 
@@ -66,4 +66,4 @@
 
 +   [数据科学的数据管理原则](https://www.kdnuggets.com/data-management-principles-for-data-science)
 
-+   [免费的4周数据科学课程：人工智能质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费的 4 周数据科学课程：人工智能质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)

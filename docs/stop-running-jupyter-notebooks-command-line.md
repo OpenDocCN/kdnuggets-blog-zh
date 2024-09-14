@@ -1,12 +1,12 @@
 # 停止从命令行运行 Jupyter Notebooks
 
-> 原文：[https://www.kdnuggets.com/2020/10/stop-running-jupyter-notebooks-command-line.html](https://www.kdnuggets.com/2020/10/stop-running-jupyter-notebooks-command-line.html)
+> 原文：[`www.kdnuggets.com/2020/10/stop-running-jupyter-notebooks-command-line.html`](https://www.kdnuggets.com/2020/10/stop-running-jupyter-notebooks-command-line.html)
 
-[评论](#comments)
+评论
 
 **作者：[Ashton Sidhu](https://ashton-sidhu.github.io/blog/)，数据科学家**
 
-![图示](../Images/71c7a1dc81d79f1927e6950ff307f2ad.png)
+![图示](img/71c7a1dc81d79f1927e6950ff307f2ad.png)
 
 照片由 Justin Jairam 拍摄，来自 [@jusspreme](https://www.instagram.com/jusspreme/?hl=en)（已获许可）
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -44,7 +44,7 @@ JupyterHub 提供了预构建的 Docker 镜像，我们可以利用这些镜像�
 
 我们的 JupyterHub 服务器架构将由 2 个服务组成：JupyterHub 和 JupyterLab。JupyterHub 将是入口点，并为任何用户生成 JupyterLab 实例。这些服务将作为 Docker 容器存在于主机上。
 
-![图示](../Images/4274fafb126a3d97630213b781131a90.png)
+![图示](img/4274fafb126a3d97630213b781131a90.png)
 
 JupyterLab 架构图（图像作者提供）
 
@@ -150,13 +150,13 @@ c.DockerSpawner.volumes **=** {
 
 要启动服务器，只需运行`docker-compose up -d`，在浏览器中导航到`localhost:8000`，你应该能够看到 JupyterHub 登陆页面。
 
-![图像](../Images/dd920e50c9e82df320b0df5a1aa2ac6c.png)
+![图像](img/dd920e50c9e82df320b0df5a1aa2ac6c.png)
 
 JupyterHub 登陆页截图（图片由作者提供）
 
 要在网络上的其他设备如笔记本电脑、iPad 等上访问它，通过在 Unix 机器上运行`ifconfig`或在 Windows 上运行`ipconfig`来识别主机的 IP。
 
-![图像](../Images/47bd6ba427523bb8b68111ee95da1bd4.png)
+![图像](img/47bd6ba427523bb8b68111ee95da1bd4.png)
 
 Ipconfig（图片由作者提供）
 
@@ -172,7 +172,7 @@ Ipconfig（图片由作者提供）
 
 1) 查找 JupyterLab 容器 ID：`docker ps -a`
 
-![图像](../Images/0dbfc2280ebc3550541bd568d61b0405.png)
+![图像](img/0dbfc2280ebc3550541bd568d61b0405.png)
 
 JupyterLab 容器 ID（图像来源：作者）
 
@@ -194,11 +194,11 @@ JupyterLab 容器 ID（图像来源：作者）
 
 **相关内容：**
 
-+   [Google Colab 完全指南用于深度学习](/2020/06/google-colab-deep-learning.html)
++   Google Colab 完全指南用于深度学习
 
-+   [这里是最受欢迎的 Python IDE/编辑器](/2020/10/most-popular-python-ides-editors.html)
++   这里是最受欢迎的 Python IDE/编辑器
 
-+   [Netflix 的 Polynote 是一个新的开源框架，用于构建更好的数据科学笔记本](/2020/08/netflix-polynote-open-source-framework-better-data-science-notebooks.html)
++   Netflix 的 Polynote 是一个新的开源框架，用于构建更好的数据科学笔记本
 
 ### 了解更多相关话题
 

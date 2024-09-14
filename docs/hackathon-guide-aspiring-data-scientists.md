@@ -1,38 +1,38 @@
 # 对有志数据科学家的黑客马拉松指南
 
-> 原文：[https://www.kdnuggets.com/2019/07/hackathon-guide-aspiring-data-scientists.html](https://www.kdnuggets.com/2019/07/hackathon-guide-aspiring-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/07/hackathon-guide-aspiring-data-scientists.html`](https://www.kdnuggets.com/2019/07/hackathon-guide-aspiring-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/)，数据科学研究员**
 
-![Header image](../Images/18b62076dab11329f17d36947ebef5c1.png)
+![Header image](img/18b62076dab11329f17d36947ebef5c1.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 黑客马拉松是一种竞赛，各种人员，包括程序员、开发者和图形设计师，密集合作以在短时间内设计软件项目。黑客马拉松的目标是在活动结束时创建一个功能性产品。
 
-上个月，我有机会参加由Junction Ltd. 举办的 [JunctionX Seoul](https://seoul.hackjunction.com/) 黑客马拉松。我们的团队开发了一个iOS应用，利用图像搜索引擎为韩国美容产品提供优化的购物服务体验。这个应用可以帮助想要探索韩国美容产品的旅行者，因为他们可能因为明显的语言障碍而不知道尝试什么。用户只需扫描产品即可找到有用的数据，这些信息会被翻译成他们的本地语言。还有一个搜索历史页面，可以用于进一步的定制服务。你可以在 [**这里**](https://devpost.com/software/skana#_=_) 了解更多信息。
+上个月，我有机会参加由 Junction Ltd. 举办的 [JunctionX Seoul](https://seoul.hackjunction.com/) 黑客马拉松。我们的团队开发了一个 iOS 应用，利用图像搜索引擎为韩国美容产品提供优化的购物服务体验。这个应用可以帮助想要探索韩国美容产品的旅行者，因为他们可能因为明显的语言障碍而不知道尝试什么。用户只需扫描产品即可找到有用的数据，这些信息会被翻译成他们的本地语言。还有一个搜索历史页面，可以用于进一步的定制服务。你可以在 [**这里**](https://devpost.com/software/skana#_=_) 了解更多信息。
 
-![](../Images/87a1deb441979e9e2951c8845e951597.png)
+![](img/87a1deb441979e9e2951c8845e951597.png)
 
 这个应用，[Skana](https://drive.google.com/open?id=1NZ7DESxk2QWhWprcv5n5ZWlmr8x5J4DI)
 
-然而，我更愿意分享我在过程中学到的东西，而不是我做了什么。所以今天，我将讨论你应该申请黑客马拉松的4个理由（特别是如果你是一个有抱负的数据科学家），你应该如何准备以及我的一些小贴士。我希望这篇文章能激励你走出舒适区，像我一样获得深刻的灵感。
+然而，我更愿意分享我在过程中学到的东西，而不是我做了什么。所以今天，我将讨论你应该申请黑客马拉松的 4 个理由（特别是如果你是一个有抱负的数据科学家），你应该如何准备以及我的一些小贴士。我希望这篇文章能激励你走出舒适区，像我一样获得深刻的灵感。
 
 ### 1\. 为什么参加黑客马拉松
 
-如果你之前从未尝试过黑客马拉松或编程比赛，并问我是否值得尝试，我会毫不犹豫地点头。以下是你应该参加黑客马拉松的4个理由。
+如果你之前从未尝试过黑客马拉松或编程比赛，并问我是否值得尝试，我会毫不犹豫地点头。以下是你应该参加黑客马拉松的 4 个理由。
 
 ### 超越“建模”
 
@@ -52,11 +52,11 @@
 
 你可能已经见过很多人指出商业思维的重要性。发现用户的隐藏需求和观察市场中的问题。利用你的技术知识提出解决方案。开发可以盈利的服务。在黑客马拉松中，你被要求从这个角度深入思考和讨论。
 
-我听说过一个人，他赢得了超过15次编程比赛。他在赢得一次Google比赛后，退休于他的“奖品猎人”生涯。你知道他的秘密是什么吗？只是商业头脑和一点机智。通过创造一个聪明而有创意的产品，他让人们喊出“精彩！”这无疑给评委留下了深刻的印象。所以，如果你在寻找额外的获胜提示，具备商业价值和一些机智可能是一个很好的加分项。
+我听说过一个人，他赢得了超过 15 次编程比赛。他在赢得一次 Google 比赛后，退休于他的“奖品猎人”生涯。你知道他的秘密是什么吗？只是商业头脑和一点机智。通过创造一个聪明而有创意的产品，他让人们喊出“精彩！”这无疑给评委留下了深刻的印象。所以，如果你在寻找额外的获胜提示，具备商业价值和一些机智可能是一个很好的加分项。
 
 ### 处理极端压力的绝佳机会
 
-黑客马拉松的目标是在短时间内（通常是2或3天）创建一个功能产品。你被要求在这些日子里展示你的产品原型或演示。这一切都涉及到有限的时间、资源和精力问题。有时候，你可能会遇到事情出错的情况，你必须立刻找到解决方案。有时候你需要优先处理工作，这意味着什么先做，什么时候停止。你可能会感受到强烈的压力来完成所有任务，而不成为团队的负担。随着时间的推移，彻底疲惫和精疲力竭几乎是不可避免的！（更像是能量耗竭，直到最终“跌入”睡眠。）
+黑客马拉松的目标是在短时间内（通常是 2 或 3 天）创建一个功能产品。你被要求在这些日子里展示你的产品原型或演示。这一切都涉及到有限的时间、资源和精力问题。有时候，你可能会遇到事情出错的情况，你必须立刻找到解决方案。有时候你需要优先处理工作，这意味着什么先做，什么时候停止。你可能会感受到强烈的压力来完成所有任务，而不成为团队的负担。随着时间的推移，彻底疲惫和精疲力竭几乎是不可避免的！（更像是能量耗竭，直到最终“跌入”睡眠。）
 
 如果你像我一样，容易在极端压力时僵住，你甚至会被比赛大厅的空气所压倒。这是我第一次参加黑客马拉松，所以我经历了几次大脑瘫痪。我不得不去呼吸新鲜空气，放松一下以缓解紧张。但这也是一个很好的机会，让我学会如何应对压力。因为在工作中遇到那些意想不到的问题是不可避免的，我们必须管理那些要求很高的时刻。
 
@@ -68,7 +68,7 @@
 
 此外，关注其他人的工作也很重要。虽然你会忙得无暇顾及他人，但这将帮助你理解整个过程。毕竟，我们在这里是为了学习新东西！
 
-![](../Images/27318cf356f3210ab49817efe46c4710.png)
+![](img/27318cf356f3210ab49817efe46c4710.png)
 
 照片来自[JunctionXSeoul](https://seoul.hackjunction.com/)和我在进行演讲（右下角）
 
@@ -78,25 +78,25 @@
 
 ### 后端和部署
 
-这不是一个从导入数据开始、以一些评估图表结束的项目。你需要收集数据并根据团队项目建立数据库。在你完成数据分析或建模部分后，你需要将模型传递给前端。或者你可能需要自己将工作部署到网站上。因此，拥有数据库和Flask在你的工具包中可以是这个活动的巨大资产。
+这不是一个从导入数据开始、以一些评估图表结束的项目。你需要收集数据并根据团队项目建立数据库。在你完成数据分析或建模部分后，你需要将模型传递给前端。或者你可能需要自己将工作部署到网站上。因此，拥有数据库和 Flask 在你的工具包中可以是这个活动的巨大资产。
 
-如果你对数据库完全陌生，你可以从理解[*SQL和NoSQL的区别*](https://medium.com/xplenty-blog/the-sql-vs-nosql-difference-mysql-vs-mongodb-32c9980e67b2)开始学习。这里有一个紧凑的[*初学者SQL课程*](https://www.youtube.com/watch?v=xaWlS9HtWYw&list=PL-osiE80TeTsKOdPrKeSOp4rN3mza8VHN)，但除了这个，还有大量的数据库教程可以选择。所以，根据你的兴趣去挑选吧。
+如果你对数据库完全陌生，你可以从理解[*SQL 和 NoSQL 的区别*](https://medium.com/xplenty-blog/the-sql-vs-nosql-difference-mysql-vs-mongodb-32c9980e67b2)开始学习。这里有一个紧凑的[*初学者 SQL 课程*](https://www.youtube.com/watch?v=xaWlS9HtWYw&list=PL-osiE80TeTsKOdPrKeSOp4rN3mza8VHN)，但除了这个，还有大量的数据库教程可以选择。所以，根据你的兴趣去挑选吧。
 
-[Flask](http://flask.pocoo.org/)是一个用Python编写的微框架，易于学习，非常适合模型部署。这里有一个关于[*如何用Flask部署Keras深度学习模型*](https://towardsdatascience.com/deploying-keras-deep-learning-models-with-flask-5da4181436a2)的优秀教程，由[Ben Weber](https://towardsdatascience.com/u/a80e1f69e782)提供。你也可以在这里找到[*一系列Flask视频课程*](https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH)。
+[Flask](http://flask.pocoo.org/)是一个用 Python 编写的微框架，易于学习，非常适合模型部署。这里有一个关于[*如何用 Flask 部署 Keras 深度学习模型*](https://towardsdatascience.com/deploying-keras-deep-learning-models-with-flask-5da4181436a2)的优秀教程，由[Ben Weber](https://towardsdatascience.com/u/a80e1f69e782)提供。你也可以在这里找到[*一系列 Flask 视频课程*](https://www.youtube.com/playlist?list=PL-osiE80TeTs4UjLw5MM6OjgkjFeUxCYH)。
 
-### API和云服务
+### API 和云服务
 
-每个黑客松的条件可能不同，但我参与的那个非常依赖于API和云服务。比赛中有几个子轨道，参赛者被要求使用特定的API来参与给定的轨道。但除了这个条件，你无论如何都需要自己收集数据。你会从哪里获取数据？那训练的计算能力呢？你可能会把你的“超级计算机”留在家里。
+每个黑客松的条件可能不同，但我参与的那个非常依赖于 API 和云服务。比赛中有几个子轨道，参赛者被要求使用特定的 API 来参与给定的轨道。但除了这个条件，你无论如何都需要自己收集数据。你会从哪里获取数据？那训练的计算能力呢？你可能会把你的“超级计算机”留在家里。
 
-因此，最好有从API获取数据和处理JSON格式数据的经验。如果你对API不熟悉， [*这篇文章*](https://towardsdatascience.com/what-is-api-and-how-to-use-youtube-api-65525744f520?source=friends_link&sk=eedcecef15f918954df8ff6fbec0334a)可以向你解释API的相关内容。
+因此，最好有从 API 获取数据和处理 JSON 格式数据的经验。如果你对 API 不熟悉， [*这篇文章*](https://towardsdatascience.com/what-is-api-and-how-to-use-youtube-api-65525744f520?source=friends_link&sk=eedcecef15f918954df8ff6fbec0334a)可以向你解释 API 的相关内容。
 
-使用像AWS或Google Cloud GPU这样的云服务的能力也是必要的。这里是 [*AWS EC2的官方指南*](https://aws.amazon.com/ec2/getting-started/)，此外还有[*一段友好的视频*](https://www.notion.so/Junction-X-Seoul-9320fbe9fee94e0aac0b705bbbd7e17f)由AI学校提供。你还可以找到[*一个针对初学者的更详细教程*](https://www.datacamp.com/community/tutorials/aws-ec2-beginner-tutorial)由 [Michael Galarnyk](https://towardsdatascience.com/u/c07aac64b6e1)提供。
+使用像 AWS 或 Google Cloud GPU 这样的云服务的能力也是必要的。这里是 [*AWS EC2 的官方指南*](https://aws.amazon.com/ec2/getting-started/)，此外还有[*一段友好的视频*](https://www.notion.so/Junction-X-Seoul-9320fbe9fee94e0aac0b705bbbd7e17f)由 AI 学校提供。你还可以找到[*一个针对初学者的更详细教程*](https://www.datacamp.com/community/tutorials/aws-ec2-beginner-tutorial)由 [Michael Galarnyk](https://towardsdatascience.com/u/c07aac64b6e1)提供。
 
 ### 充分充电的自己
 
-充足的睡眠。掌控好你的状态。这不是开玩笑。在比赛期间，我总共睡了4小时。虽然少睡觉可能是一个好的策略，但你在进入比赛场地时需要保持良好的状态。此外，颈枕和猫毯对于小憩来说可能和“Flask”或“AWS”一样重要。??????? 
+充足的睡眠。掌控好你的状态。这不是开玩笑。在比赛期间，我总共睡了 4 小时。虽然少睡觉可能是一个好的策略，但你在进入比赛场地时需要保持良好的状态。此外，颈枕和猫毯对于小憩来说可能和“Flask”或“AWS”一样重要。??????? 
 
-![](../Images/d2936f0b25fd76d5f9f5f173c12b89dd.png)
+![](img/d2936f0b25fd76d5f9f5f173c12b89dd.png)
 
 图片来源于 [JunctionXSeoul](https://seoul.hackjunction.com/)
 
@@ -106,9 +106,9 @@
 
 ### 如何组建你的团队
 
-如果你是单独申请者，你需要从头开始组建你的团队。可以通过类似Slack这样的社交网络平台从其他申请者那里获取信息，并在活动开始前组建团队。你可能有机会加入一个已经组建好的团队，前提是有一个空缺。
+如果你是单独申请者，你需要从头开始组建你的团队。可以通过类似 Slack 这样的社交网络平台从其他申请者那里获取信息，并在活动开始前组建团队。你可能有机会加入一个已经组建好的团队，前提是有一个空缺。
 
-如果你有一个开发的想法，将其分解成几个部分，并寻找能够承担每部分的团队成员。你需要找到那些技能与我们不同的人（例如数据建模）。你需要的常见成员包括后端工程师、网页/应用开发者以及UI/UX设计师。
+如果你有一个开发的想法，将其分解成几个部分，并寻找能够承担每部分的团队成员。你需要找到那些技能与我们不同的人（例如数据建模）。你需要的常见成员包括后端工程师、网页/应用开发者以及 UI/UX 设计师。
 
 ### 对于你能做的事情要诚实
 
@@ -126,11 +126,11 @@
 
 **相关:**
 
-+   [构建一个 Flask API 来自动提取命名实体，使用 SpaCy](/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
++   构建一个 Flask API 来自动提取命名实体，使用 SpaCy
 
-+   [将你的 PyTorch 模型部署到生产环境](/2019/03/deploy-pytorch-model-production.html)
++   将你的 PyTorch 模型部署到生产环境
 
-+   [可持续数据科学、机器学习和人工智能产品开发的核心原则：研究作为核心驱动因素](/2019/01/core-principles-sustainable-data-science-machine-learning-ai-product-development.html)
++   可持续数据科学、机器学习和人工智能产品开发的核心原则：研究作为核心驱动因素
 
 ### 更多相关内容
 

@@ -1,8 +1,8 @@
 # 掌握数据工程的 5 门免费课程
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-to-master-data-engineering](https://www.kdnuggets.com/5-free-courses-to-master-data-engineering)
+> 原文：[`www.kdnuggets.com/5-free-courses-to-master-data-engineering`](https://www.kdnuggets.com/5-free-courses-to-master-data-engineering)
 
-![掌握数据工程的 5 门免费课程](../Images/1ab45c8f73193535b37bdc80a068f0e7.png)
+![掌握数据工程的 5 门免费课程](img/1ab45c8f73193535b37bdc80a068f0e7.png)
 
 图片由 [storyset](https://www.freepik.com/free-vector/server-room-concept-illustration_66198933.htm#query=data%20engineer&position=4&from_view=search&track=ais&uuid=b6bcb489-d189-4fcf-8864-4e1b9dae6636) 提供，来自 [Freepik](https://www.freepik.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的 Top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -66,9 +66,9 @@
 
 # Meta 数据库工程师专业证书
 
-让我们继续介绍由另一家知名公司Meta提供的免费数据工程课程。[Meta 数据库工程师专业证书](https://www.coursera.org/professional-certificates/meta-database-engineer)课程将重点提升数据工程师的技能，即数据库。
+让我们继续介绍由另一家知名公司 Meta 提供的免费数据工程课程。[Meta 数据库工程师专业证书](https://www.coursera.org/professional-certificates/meta-database-engineer)课程将重点提升数据工程师的技能，即数据库。
 
-数据工程师负责整个数据流；这一流的一个重要部分是拥有一个强大的数据库。如果没有可靠的数据库，整个数据生态系统将会崩溃。这就是为什么Meta为任何愿意在数据库领域开辟自己道路的人提供这门课程。
+数据工程师负责整个数据流；这一流的一个重要部分是拥有一个强大的数据库。如果没有可靠的数据库，整个数据生态系统将会崩溃。这就是为什么 Meta 为任何愿意在数据库领域开辟自己道路的人提供这门课程。
 
 在这门课程中，你将学习以下技能：
 
@@ -80,9 +80,9 @@
 
 +   版本控制
 
-+   高级MySQL
++   高级 MySQL
 
-通过9门课程和灵活的时间安排，你可以轻松提升自己的技能。
+通过 9 门课程和灵活的时间安排，你可以轻松提升自己的技能。
 
 # UC San Diego 大数据专业化
 
@@ -98,13 +98,13 @@
 
 +   图形分析与大数据
 
-该系列有6门课程，时间安排灵活。估计如果每周学习10小时，你可以在3个月内完成课程。
+该系列有 6 门课程，时间安排灵活。估计如果每周学习 10 小时，你可以在 3 个月内完成课程。
 
-# 数据工程Zoomcamp
+# 数据工程 Zoomcamp
 
-[数据工程Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp)是由[Ankush Khanna](https://linkedin.com/in/ankushkhanna2)、[Victoria Perez Mola](https://www.linkedin.com/in/victoriaperezmola/)和[Alexey Grigorev](https://linkedin.com/in/agrigorev)为初学者开设的免费课程，由社区提供支持。
+[数据工程 Zoomcamp](https://github.com/DataTalksClub/data-engineering-zoomcamp)是由[Ankush Khanna](https://linkedin.com/in/ankushkhanna2)、[Victoria Perez Mola](https://www.linkedin.com/in/victoriaperezmola/)和[Alexey Grigorev](https://linkedin.com/in/agrigorev)为初学者开设的免费课程，由社区提供支持。
 
-这些课程将从领域专家那里为你提供完整的数据工程视角，并为你准备好工作。通过9周的学习，你将掌握以下技能：
+这些课程将从领域专家那里为你提供完整的数据工程视角，并为你准备好工作。通过 9 周的学习，你将掌握以下技能：
 
 +   数据工程师基础
 
@@ -122,18 +122,18 @@
 
 为了做出数据驱动的决策，公司需要支持这一过程的数据基础设施。数据工程师承担着提供复杂数据工作流的任务。要掌握数据工程技能，我们可以通过本文讨论的五门课程进行学习。借助著名讲师提供的结构化课程，这些课程将帮助你了解一切，获得数据工程师职位。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一位数据科学助理经理和数据撰稿人。他在全职工作于印尼安联的同时，热衷于通过社交媒体和写作平台分享Python和数据技巧。Cornellius在各种AI和机器学习主题上撰写文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一位数据科学助理经理和数据撰稿人。他在全职工作于印尼安联的同时，热衷于通过社交媒体和写作平台分享 Python 和数据技巧。Cornellius 在各种 AI 和机器学习主题上撰写文章。
 
 ### 更多相关主题
 
-+   [25个免费课程掌握数据科学、数据工程、机器学习…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [25 个免费课程掌握数据科学、数据工程、机器学习…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
-+   [5个免费课程掌握数据科学中的SQL](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
++   [5 个免费课程掌握数据科学中的 SQL](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
 
-+   [5个免费课程掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
++   [5 个免费课程掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
 
-+   [5个免费课程掌握数据科学](https://www.kdnuggets.com/5-free-courses-to-master-data-science)
++   [5 个免费课程掌握数据科学](https://www.kdnuggets.com/5-free-courses-to-master-data-science)
 
-+   [5个免费课程掌握数据科学中的Python](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)
++   [5 个免费课程掌握数据科学中的 Python](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)
 
-+   [5个免费课程掌握数据科学中的统计学](https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science)
++   [5 个免费课程掌握数据科学中的统计学](https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science)

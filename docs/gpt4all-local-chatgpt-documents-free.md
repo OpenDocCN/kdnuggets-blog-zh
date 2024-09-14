@@ -1,10 +1,10 @@
 # GPT4All 是本地 ChatGPT，用于您的文档，并且它是免费的！
 
-> 原文：[https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)
+> 原文：[`www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html`](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)
 
 在这篇文章中，我们将学习 **如何在仅使用 CPU 的计算机上部署和使用 GPT4All 模型**（我使用的是 *Macbook Pro*，没有 GPU！）
 
-![GPT4All 是本地 ChatGPT，用于您的文档，并且它是免费的！](../Images/164c034be698c48aeca6a7141b048cc9.png)
+![GPT4All 是本地 ChatGPT，用于您的文档，并且它是免费的！](img/164c034be698c48aeca6a7141b048cc9.png)
 
 在您的计算机上使用 GPT4All — 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@ GTP4All 是一个生态系统，用于训练和部署 **强大的** 和 **定制
 
 # 它将如何运作？
 
-![GPT4All 是本地 ChatGPT，用于您的文档，并且它是免费的！](../Images/d2645a736b7389d955c7058f9ea42dc4.png)
+![GPT4All 是本地 ChatGPT，用于您的文档，并且它是免费的！](img/d2645a736b7389d955c7058f9ea42dc4.png)
 
 GPT4All 的问答工作流程 — 作者创建
 
@@ -79,7 +79,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-![GPT4All 是你的文档的本地 ChatGPT，并且是免费的！](../Images/3ee7e916d5dcc6c4d1a6da8715b77627.png)
+![GPT4All 是你的文档的本地 ChatGPT，并且是免费的！](img/3ee7e916d5dcc6c4d1a6da8715b77627.png)
 
 已激活虚拟环境
 
@@ -122,13 +122,13 @@ pip install -r requirements.txt
 
 对于项目，我们确实需要 GPT4All。Nomic AI 上描述的过程非常复杂，并且需要不是我们所有人都有的硬件（像我）。所以 [这是转换后的模型链接](https://huggingface.co/mrgaang/aira/blob/main/gpt4all-converted.bin)，已经转换并准备使用。只需点击下载。
 
-![GPT4All 是你的文档本地 ChatGPT，而且是免费的！](../Images/d2c094d736d30e97efaf5e8ca711fa8b.png)
+![GPT4All 是你的文档本地 ChatGPT，而且是免费的！](img/d2c094d736d30e97efaf5e8ca711fa8b.png)
 
 下载 GPT4All 模型
 
 正如简介中简要描述的，我们还需要用于嵌入的模型，一个可以在 CPU 上运行而不会崩溃的模型。点击 [这里的链接下载 alpaca-native-7B-ggml](https://huggingface.co/Pi3141/alpaca-native-7B-ggml/tree/397e872bf4c83f4c642317a5bf65ce84a105786e)，它已经转换为 4-bit，并准备作为我们的嵌入模型使用。
 
-![GPT4All 是你的文档本地 ChatGPT，而且是免费的！](../Images/c7ba2460adee0a81425d5fdcdd3541d4.png)
+![GPT4All 是你的文档本地 ChatGPT，而且是免费的！](img/c7ba2460adee0a81425d5fdcdd3541d4.png)
 
 点击 [ggml-model-q4_0.bin](https://huggingface.co/Pi3141/alpaca-native-7B-ggml/blob/397e872bf4c83f4c642317a5bf65ce84a105786e/ggml-model-q4_0.bin) 旁边的下载箭头
 
@@ -148,13 +148,13 @@ pip 包将从源代码编译库。Windows 通常默认未安装 CMake 或 C 编�
 
 为了避免这个问题 **你必须使用预编译的 wheel**。
 
-前往 [https://github.com/abetlen/llama-cpp-python/releases](https://github.com/abetlen/llama-cpp-python/releases)
+前往 [`github.com/abetlen/llama-cpp-python/releases`](https://github.com/abetlen/llama-cpp-python/releases)
 
 并且寻找与你的架构和 python 版本相匹配的编译好的 wheel — **你必须使用 Weels 版本 0.1.49**，因为更高版本不兼容。
 
-![GPT4All 是你的文档本地 ChatGPT，而且是免费的！](../Images/059c34d6ca9fb76e5db455d7252a6238.png)
+![GPT4All 是你的文档本地 ChatGPT，而且是免费的！](img/059c34d6ca9fb76e5db455d7252a6238.png)
 
-截图来自 [https://github.com/abetlen/llama-cpp-python/releases](https://github.com/abetlen/llama-cpp-python/releases)
+截图来自 [`github.com/abetlen/llama-cpp-python/releases`](https://github.com/abetlen/llama-cpp-python/releases)
 
 我的情况是 Windows 10，64 位，python 3.10
 
@@ -164,7 +164,7 @@ pip 包将从源代码编译库。Windows 通常默认未安装 CMake 或 C 编�
 
 下载后，你需要将两个模型放入模型目录，如下所示。
 
-![GPT4All 是你文档的本地 ChatGPT，并且是免费的！](../Images/2fdc93855b6963db59ee794c8fd8e21f.png)
+![GPT4All 是你文档的本地 ChatGPT，并且是免费的！](img/2fdc93855b6963db59ee794c8fd8e21f.png)
 
 目录结构以及模型文件的放置位置
 
@@ -200,7 +200,7 @@ python3 pygpt4all_test.py
 
 你应该看到模型的加载文本和句子的完成。根据你的硬件资源，这可能需要一点时间。
 
-![GPT4All 是你文档的本地 ChatGPT，并且是免费的！](../Images/2c46d0381e481042610ded3f36e4bde4.png)
+![GPT4All 是你文档的本地 ChatGPT，并且是免费的！](img/2c46d0381e481042610ded3f36e4bde4.png)
 
 结果可能与您的不同……但对我们来说，重要的是它在工作，我们可以继续使用 LangChain 创建一些高级功能。
 
@@ -289,7 +289,7 @@ python3 my_langchain.py
 
 你可能会得到与我不同的结果。令人惊讶的是，你可以看到 GPT4All 尝试为你找到答案的整个推理过程。调整问题也可能会给你更好的结果。
 
-![GPT4All 是您文档的本地 ChatGPT，它是免费的！](../Images/37f6fc0d50f8004779fd138b45aca20f.png)
+![GPT4All 是您文档的本地 ChatGPT，它是免费的！](img/37f6fc0d50f8004779fd138b45aca20f.png)
 
 Langchain 与 GPT4All 上的 Prompt Template
 
@@ -389,7 +389,7 @@ def similarity_search(query, index):
 
 现在我们可以测试 *docs* 目录中文档的索引生成：我们需要将所有 PDF 文件放到那里。*Langchain* 也有一个加载整个文件夹的方法，无论文件类型如何：由于后处理比较复杂，我将在下一篇关于 LaMini 模型的文章中介绍。
 
-![GPT4All 是您文档的本地 ChatGPT，并且是免费的！](../Images/08db5a1bdd2f487dab7db09671d6910f.png)
+![GPT4All 是您文档的本地 ChatGPT，并且是免费的！](img/08db5a1bdd2f487dab7db09671d6910f.png)
 
 我的 docs 目录包含 4 个 PDF 文件。
 
@@ -414,7 +414,7 @@ db0 = create_index(chunks)
 
 正如你所看到的，我们正在使用 [pyPDF 方法](https://python.langchain.com/en/latest/modules/indexes/document_loaders/examples/pdf.html?highlight=pypdf#using-pypdf)。这个方法使用起来有点长，因为你需要逐个加载文件，但使用 `pypdf` 加载 PDF 到文档数组中可以让你拥有一个数组，其中每个文档包含页面内容和带有 `page` 号的元数据。这在你想知道我们将给 GPT4All 查询的上下文来源时非常方便。这里是来自 readthedocs 的示例：
 
-![GPT4All 是您文档的本地 ChatGPT，并且是免费的！](../Images/57c5bcbffab238b4be4b1c8fdabbfa8f.png)
+![GPT4All 是您文档的本地 ChatGPT，并且是免费的！](img/57c5bcbffab238b4be4b1c8fdabbfa8f.png)
 
 来自 [Langchain 文档](https://python.langchain.com/en/latest/modules/indexes/document_loaders/examples/pdf.html) 的截图
 
@@ -426,7 +426,7 @@ python3 my_knowledge_qna.py
 
 在加载嵌入模型后，你会看到用于索引的 token 在工作：不要惊慌，因为这会花费一些时间，特别是如果你只在 CPU 上运行，就像我一样（花了 8 分钟）。
 
-![GPT4All 是您文档的本地 ChatGPT，并且是免费的！](../Images/7c0e84382e2c6cec24cb602d31b91ab4.png)
+![GPT4All 是您文档的本地 ChatGPT，并且是免费的！](img/7c0e84382e2c6cec24cb602d31b91ab4.png)
 
 第一个向量数据库的完成
 
@@ -498,7 +498,7 @@ print(f"All indexing completed in {general_elapsed}")
 print("-----------------------------------")
 ```
 
-![GPT4All 是你文档的本地 ChatGPT，而且是免费的！](../Images/b7462d11c62eb0ad963007bac8f2c01f.png)运行 Python 文件花费了 22 分钟
+![GPT4All 是你文档的本地 ChatGPT，而且是免费的！](img/b7462d11c62eb0ad963007bac8f2c01f.png)运行 Python 文件花费了 22 分钟
 
 ## 向 GPT4All 提问关于你的文档
 
@@ -585,7 +585,7 @@ print(docs[0])
 
 打印的文本是与查询最匹配的 3 个来源的列表，还包括文档名称和页码。
 
-![GPT4All 是你文档的本地 ChatGPT，而且是免费的！](../Images/cb666d32a09071a7e154c4b2610c1394.png)
+![GPT4All 是你文档的本地 ChatGPT，而且是免费的！](img/cb666d32a09071a7e154c4b2610c1394.png)
 
 运行文件*db_loading.py*的语义搜索结果
 

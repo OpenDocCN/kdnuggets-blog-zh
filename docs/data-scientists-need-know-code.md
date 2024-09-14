@@ -1,12 +1,12 @@
 # 数据科学家，你需要知道如何编码
 
-> 原文：[https://www.kdnuggets.com/2021/06/data-scientists-need-know-code.html](https://www.kdnuggets.com/2021/06/data-scientists-need-know-code.html)
+> 原文：[`www.kdnuggets.com/2021/06/data-scientists-need-know-code.html`](https://www.kdnuggets.com/2021/06/data-scientists-need-know-code.html)
 
-[评论](#comments)
+评论
 
-**由 [Tyler Folkman](https://learn.learningwithdata.com/)，Branded Entertainment Network 的AI负责人**
+**由 [Tyler Folkman](https://learn.learningwithdata.com/)，Branded Entertainment Network 的 AI 负责人**
 
-![](../Images/9e7a84b00952ec77bf2d2445db9c77d7.png)
+![](img/9e7a84b00952ec77bf2d2445db9c77d7.png)
 
 图片由 [Roman Synkevych](https://unsplash.com/@synkevych?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 我知道你在想什么——“我当然知道如何编码，你疯了吗？”
 
-你每天在Jupyter笔记本中编写大量代码，数百行。显然，你会编码。并不是说你是在手动或在Excel中训练机器学习模型（尽管这是可能的）。
+你每天在 Jupyter 笔记本中编写大量代码，数百行。显然，你会编码。并不是说你是在手动或在 Excel 中训练机器学习模型（尽管这是可能的）。
 
 那我可能是什么意思呢？
 
@@ -80,7 +80,7 @@
 
 PEP 8 可能是最广泛使用的 Python 风格指南。不过，还有很多其他风格指南。另一个受欢迎的风格指南来源是 Google，因为他们公开了内部风格指南。
 
-重要的是你选择一种并尽量坚持。一个让这变得更容易的方法是使你的IDE检查样式错误，并设置样式检查，如果不遵循样式指南，阻止代码被推送。你还可以进一步提交，使用自动格式化工具，它会自动格式化你的代码以符合标准。Python中一个流行的工具是Black。
+重要的是你选择一种并尽量坚持。一个让这变得更容易的方法是使你的 IDE 检查样式错误，并设置样式检查，如果不遵循样式指南，阻止代码被推送。你还可以进一步提交，使用自动格式化工具，它会自动格式化你的代码以符合标准。Python 中一个流行的工具是 Black。
 
 ### 编写测试
 
@@ -92,7 +92,7 @@ PEP 8 可能是最广泛使用的 Python 风格指南。不过，还有很多其
 
 不同的是，数据科学家通常会删除这些临时测试并继续前进。相反，你需要保存这些测试，并确保每次在代码推送之前都运行这些测试，以确保没有破坏。
 
-要开始使用Python，我建议使用pytest。使用pytest，你可以轻松创建测试，并一次性运行它们以确保它们通过。一个简单的开始方式是有一个名为“tests”的目录，在该目录内有以“test.”开头的Python文件。例如，你可以有“test_addition.py”。
+要开始使用 Python，我建议使用 pytest。使用 pytest，你可以轻松创建测试，并一次性运行它们以确保它们通过。一个简单的开始方式是有一个名为“tests”的目录，在该目录内有以“test.”开头的 Python 文件。例如，你可以有“test_addition.py”。
 
 ```py
 *# content of test_addition.py*
@@ -102,7 +102,7 @@ PEP 8 可能是最广泛使用的 Python 风格指南。不过，还有很多其
     **assert** add(3, 2) == 5
 ```
 
-通常，你会将实际的函数放在另一个Python文件中，并将其导入到你的测试模块中。你通常不需要测试Python加法，但这只是一个非常简单的例子。
+通常，你会将实际的函数放在另一个 Python 文件中，并将其导入到你的测试模块中。你通常不需要测试 Python 加法，但这只是一个非常简单的例子。
 
 在这些测试模块中，你可以保存你函数的所有“健康检查”。通常的好做法是不仅测试常见情况，还要测试边界情况和潜在错误情况。
 
@@ -120,40 +120,40 @@ PEP 8 可能是最广泛使用的 Python 风格指南。不过，还有很多其
 
 为了让审查你代码的人更容易理解，尽量保持新代码量的小规模。小而频繁的代码审查效果更好。不频繁的大规模代码审查效果很差。没有人愿意审查上千行代码。这些审查往往提供较差的反馈，因为审查者无法花足够的时间真正理解这么多代码。
 
-![](../Images/85c2e1cdfc60f4ed301d0b08cc628138.png)
+![](img/85c2e1cdfc60f4ed301d0b08cc628138.png)
 
 ### 提升你的编码技能
 
 我希望这篇文章能激励你花时间学习如何编写更好的代码。这并不一定很难，但确实需要时间和努力来提升。
 
-如果你遵循这5个建议，我相信你会注意到你的代码质量有显著提升。
+如果你遵循这 5 个建议，我相信你会注意到你的代码质量有显著提升。
 
 你的未来自己和同事会感谢你。
 
 查看我的 [免费课程](https://bit.ly/3ltZA4s)，了解如何部署机器学习模型。
 
-**简介：[泰勒·福克曼](https://learn.learningwithdata.com/)** 是 Branded Entertainment Network 的 AI 主管。获取泰勒的免费 [创建惊人数据科学项目的5步流程](http://bit.ly/39FyHGl)。
+**简介：[泰勒·福克曼](https://learn.learningwithdata.com/)** 是 Branded Entertainment Network 的 AI 主管。获取泰勒的免费 [创建惊人数据科学项目的 5 步流程](http://bit.ly/39FyHGl)。
 
 [原文](https://towardsdatascience.com/data-scientists-you-need-to-know-how-to-code-9142b2dc74e8)。经许可转载。
 
 **相关：**
 
-+   [顶级编程语言及其用途](/2021/05/top-programming-languages.html)
++   顶级编程语言及其用途
 
-+   [未来5年会出现数据科学工作短缺吗？](/2021/06/shortage-data-science-jobs-5-years.html)
++   未来 5 年会出现数据科学工作短缺吗？
 
-+   [这些软技能可能决定你的数据科学职业生涯的成败](/2021/05/soft-skills-data-science-career.html)
++   这些软技能可能决定你的数据科学职业生涯的成败
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该关注的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该关注的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [你可能不知道的7件低代码工具能做的事](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [你可能不知道的 7 件低代码工具能做的事](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
 +   [我们不需要数据科学家，我们需要数据工程师](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)
 
-+   [KDnuggets 新闻，4月27日：简要介绍带代码的论文；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：简要介绍带代码的论文；…](https://www.kdnuggets.com/2022/n17.html)
 
-+   [数据科学基础：你需要知道的10项必备技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：你需要知道的 10 项必备技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
 +   [数据中心 AI：你需要了解的最新研究](https://www.kdnuggets.com/2022/02/datacentric-ai-latest-research-need-know.html)

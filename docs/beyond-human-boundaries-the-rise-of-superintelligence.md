@@ -1,8 +1,8 @@
 # 超越人类界限：超级智能的崛起
 
-> 原文：[https://www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence](https://www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence)
+> 原文：[`www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence`](https://www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence)
 
-![超越人类界限：超级智能的崛起](../Images/4ab25dad8205174add38638c7bdcb86c.png)
+![超越人类界限：超级智能的崛起](img/4ab25dad8205174add38638c7bdcb86c.png)
 
 图片来源：Dall-E
 
@@ -12,47 +12,47 @@
 
 当我们站在一个新时代的面前，这个问题显得尤为重要：
 
-AI的未来会是怎样的？
+AI 的未来会是怎样的？
 
 跟随我，让我们一起发现一切！
 
-# AI革命
+# AI 革命
 
-AI已经取得了长足的进步，从简单的规则基础算法到模仿人类认知解决问题和做决定的深度学习模型。
+AI 已经取得了长足的进步，从简单的规则基础算法到模仿人类认知解决问题和做决定的深度学习模型。
 
-![超越人类界限：超级智能的崛起](../Images/333dd0032a5bfe8afee74cbd20be5a26.png)
+![超越人类界限：超级智能的崛起](img/333dd0032a5bfe8afee74cbd20be5a26.png)
 
 图片来源：作者
 
-AI技术根据其模仿人类特征的能力分为三大类。
+AI 技术根据其模仿人类特征的能力分为三大类。
 
-## 1. 人工窄智能（ANI）或具备专门能力的AI
+## 1. 人工窄智能（ANI）或具备专门能力的 AI
 
-ANI，通常被称为弱AI或窄AI，专注于特定应用或任务。它被设计用于执行单一任务，并尝试在有限的变量、限制和场景范围内模仿人类行为。
+ANI，通常被称为弱 AI 或窄 AI，专注于特定应用或任务。它被设计用于执行单一任务，并尝试在有限的变量、限制和场景范围内模仿人类行为。
 
-ANI的例子在技术中随处可见，如iPhone上的Siri语音和语言处理或自动驾驶车辆中的视觉识别能力。
+ANI 的例子在技术中随处可见，如 iPhone 上的 Siri 语音和语言处理或自动驾驶车辆中的视觉识别能力。
 
-## 2. 人工通用智能（AGI）或等同于人类水平的AI
+## 2. 人工通用智能（AGI）或等同于人类水平的 AI
 
-AGI，也称为强AI或深度AI，指的是机器理解、学习和使用智能来解决复杂问题的能力，类似于人类。AGI基于‘心智理论’框架，使其能够感知其他智能实体的情感、信念和思维过程。
+AGI，也称为强 AI 或深度 AI，指的是机器理解、学习和使用智能来解决复杂问题的能力，类似于人类。AGI 基于‘心智理论’框架，使其能够感知其他智能实体的情感、信念和思维过程。
 
-AGI仍然是一个理论概念，但已引起主要科技公司的极大兴趣。例如，微软通过OpenAI投资了10亿美元于AGI。如今，我们已经拥有ChatGPT-4，它能够处理广泛的问题并展示更高水平的认知技能，代表了一种早期形式的AGI。
+AGI 仍然是一个理论概念，但已引起主要科技公司的极大兴趣。例如，微软通过 OpenAI 投资了 10 亿美元于 AGI。如今，我们已经拥有 ChatGPT-4，它能够处理广泛的问题并展示更高水平的认知技能，代表了一种早期形式的 AGI。
 
-## 3. 人工超级智能（ASI）或超越人类智力的AI
+## 3. 人工超级智能（ASI）或超越人类智力的 AI
 
-ASI代表了一种超越人类智力的AI形式，能够在每项任务中超越人类。ASI不仅能够理解人类情感和体验，还被设想拥有自己的情感、信念和欲望。
+ASI 代表了一种超越人类智力的 AI 形式，能够在每项任务中超越人类。ASI 不仅能够理解人类情感和体验，还被设想拥有自己的情感、信念和欲望。
 
-虽然ASI目前是一个理论概念，但其预计的决策和问题解决能力预计将远远超越人类能力。
+虽然 ASI 目前是一个理论概念，但其预计的决策和问题解决能力预计将远远超越人类能力。
 
 在深入探讨这种超级智能之前，让我们稍微回顾一下……
 
-# AI的未来在早期过去是什么样的？
+# AI 的未来在早期过去是什么样的？
 
 人工智能的概念多年来在恐惧和迷人之间摇摆，早于实际术语的出现。普遍的看法是，真正的人工智能必须模仿人类形式，这掩盖了人工智能实际上已经运作了相当一段时间的现实。
 
 显著的成就，比如在[国际象棋](https://www.researchgate.net/publication/222544943_Deep_blue)中超越人类技能，仅仅是冰山一角。自 1980 年代以来，人工智能一直是各个行业的重要组成部分。
 
-![超越人类界限：超级智能的崛起](../Images/1fb69b59cc66e9b61f4d106e7fa66936.png)
+![超越人类界限：超级智能的崛起](img/1fb69b59cc66e9b61f4d106e7fa66936.png)
 
 加里·卡斯帕罗夫与深蓝棋手对弈的画面。
 
@@ -92,7 +92,7 @@ ASI代表了一种超越人类智力的AI形式，能够在每项任务中超越
 
 +   提供训练数据的创作者？
 
-随着人工智能系统在现有内容上进行训练，现在能够生成极具说服力的虚假内容，这一问题变得越来越复杂。这一困境甚至引发了法律纠纷，[例如Getty Images起诉Stability AI关于照片使用的问题。](https://apnews.com/article/getty-images-artificial-intelligence-ai-image-generator-stable-diffusion-a98eeaaeb2bf13c5e8874ceb6a8ce196#:~:text=In%20a%20lawsuit%20filed%20early,to%20build%20a%20competing%20business.%E2%80%9D)
+随着人工智能系统在现有内容上进行训练，现在能够生成极具说服力的虚假内容，这一问题变得越来越复杂。这一困境甚至引发了法律纠纷，[例如 Getty Images 起诉 Stability AI 关于照片使用的问题。](https://apnews.com/article/getty-images-artificial-intelligence-ai-image-generator-stable-diffusion-a98eeaaeb2bf13c5e8874ceb6a8ce196#:~:text=In%20a%20lawsuit%20filed%20early,to%20build%20a%20competing%20business.%E2%80%9D)
 
 ## 3\. 虚假信息挑战
 
@@ -118,9 +118,9 @@ ASI代表了一种超越人类智力的AI形式，能够在每项任务中超越
 
 # 奇点理论
 
-奇点理论最早由约翰·冯·诺依曼在1958年提出。对于那些不熟悉这一概念的人来说，它描述了一个假设的时刻，即人工智能要么发展出自我意识，要么获得如此先进的能力，以至于超越了人类的控制。
+奇点理论最早由约翰·冯·诺依曼在 1958 年提出。对于那些不熟悉这一概念的人来说，它描述了一个假设的时刻，即人工智能要么发展出自我意识，要么获得如此先进的能力，以至于超越了人类的控制。
 
-![超越人类边界：超级智能的崛起](../Images/58dd191f261f6af781ec7143fc0012f6.png)
+![超越人类边界：超级智能的崛起](img/58dd191f261f6af781ec7143fc0012f6.png)
 
 图片来源：[克雷格·贝拉米](https://www.craigbellamy.net/2023/03/03/the-singularity/)
 
@@ -146,7 +146,7 @@ ASI代表了一种超越人类智力的AI形式，能够在每项任务中超越
 
 未来的发展预示着更加复杂的汽车技术。此外，人工智能正在简化物流和供应链，提高效率，降低成本。
 
-**[Josep Ferrer](https://www.linkedin.com/in/josep-ferrer-sanchez)**是一位来自巴塞罗那的分析工程师。他拥有物理工程学位，目前在应用于人类流动性的数据科学领域工作。他还是一名兼职内容创作者，专注于数据科学和技术。Josep撰写有关人工智能的所有内容，涵盖了这一领域的持续爆炸性发展。
+**[Josep Ferrer](https://www.linkedin.com/in/josep-ferrer-sanchez)**是一位来自巴塞罗那的分析工程师。他拥有物理工程学位，目前在应用于人类流动性的数据科学领域工作。他还是一名兼职内容创作者，专注于数据科学和技术。Josep 撰写有关人工智能的所有内容，涵盖了这一领域的持续爆炸性发展。
 
 ### 了解更多相关话题
 
@@ -154,10 +154,10 @@ ASI代表了一种超越人类智力的AI形式，能够在每项任务中超越
 
 +   [拖放分析：无代码数据科学的崛起](https://www.kdnuggets.com/drag-drop-analyze-the-rise-of-nocode-data-science)
 
-+   [Prompt工程的兴衰：流行还是未来？](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)
++   [Prompt 工程的兴衰：流行还是未来？](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)
 
-+   [为何Emily Ekdahl选择co:rise来提升她的工作表现…](https://www.kdnuggets.com/2022/08/corise-emily-ekdahl-chose-corise-level-job-performance-machine-learning-engineer.html)
++   [为何 Emily Ekdahl 选择 co:rise 来提升她的工作表现…](https://www.kdnuggets.com/2022/08/corise-emily-ekdahl-chose-corise-level-job-performance-machine-learning-engineer.html)
 
-+   [ChatOps/LMOps的崛起](https://www.kdnuggets.com/2023/05/rise-chatopslmops.html)
++   [ChatOps/LMOps 的崛起](https://www.kdnuggets.com/2023/05/rise-chatopslmops.html)
 
 +   [首席人工智能官的崛起](https://www.kdnuggets.com/the-rise-of-chief-ai-officer)

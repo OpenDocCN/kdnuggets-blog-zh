@@ -1,20 +1,20 @@
 # 数据科学适合我吗？14 个自我审查问题值得考虑
 
-> 原文：[https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
+> 原文：[`www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html`](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
 
-[comments](#comments)
+comments
 
-![](../Images/9999772abaffcfebe7c2a7b6ebb65d0c.png)
+![](img/9999772abaffcfebe7c2a7b6ebb65d0c.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,27 +26,27 @@
 
 ### 1\. 什么是数据科学？
 
-数据科学是一个涵盖多个子领域的广泛领域，如数据准备和探索、数据表示和转换、数据可视化和展示、预测分析、机器学习、深度学习、人工智能等。可以考虑数据科学能力的三个级别（*基于一本优秀的机器学习教材《Python 机器学习》第三版的主题定义的3个级别*），即：**一级**（基础水平）；**二级**（中级水平）；和**三级**（高级水平）。能力从一级到三级逐渐增加，如下图**图 1**所示。
+数据科学是一个涵盖多个子领域的广泛领域，如数据准备和探索、数据表示和转换、数据可视化和展示、预测分析、机器学习、深度学习、人工智能等。可以考虑数据科学能力的三个级别（*基于一本优秀的机器学习教材《Python 机器学习》第三版的主题定义的 3 个级别*），即：**一级**（基础水平）；**二级**（中级水平）；和**三级**（高级水平）。能力从一级到三级逐渐增加，如下图**图 1**所示。
 
-![](../Images/d529f5d298cfc65687b4d75c89e81947.png)
+![](img/d529f5d298cfc65687b4d75c89e81947.png)
 
 ***图 1**. 数据科学能力的三个级别。图片由 Benjamin O. Tayo 提供*
 
 ### 2\. 数据科学家做什么？
 
-数据科学家利用数据来提取有意义的结论，并驱动机构或组织的决策。 他们的工作包括数据收集、数据转化、数据可视化和分析、构建预测模型，以及根据数据发现提供实施建议。 数据科学家在不同的领域工作，如医疗、政府、工业、能源、学术界、技术、娱乐等。 一些招聘数据科学家的顶级公司包括亚马逊、谷歌、微软、脸书、LinkedIn、Twitter、Netflix、IBM等。
+数据科学家利用数据来提取有意义的结论，并驱动机构或组织的决策。 他们的工作包括数据收集、数据转化、数据可视化和分析、构建预测模型，以及根据数据发现提供实施建议。 数据科学家在不同的领域工作，如医疗、政府、工业、能源、学术界、技术、娱乐等。 一些招聘数据科学家的顶级公司包括亚马逊、谷歌、微软、脸书、LinkedIn、Twitter、Netflix、IBM 等。
 
 ### 3\. 数据科学家的就业前景如何？
 
-数据科学家的就业前景非常积极。 [IBM预测](https://www.forbes.com/sites/louiscolumbus/2017/05/13/ibm-predicts-demand-for-data-scientists-will-soar-28-by-2020/#7e46c7607e3b) 数据科学家的需求将在2020年增长28%。 一项[近期研究](https://medium.com/towards-artificial-intelligence/top-10-tech-skills-in-2020-worldwide-ecef27c8d8ad)使用LinkedIn的职位搜索工具显示，2020年大多数顶尖科技职位都需要数据科学、商业分析、机器学习和云计算技能（见**图 2**）。
+数据科学家的就业前景非常积极。 [IBM 预测](https://www.forbes.com/sites/louiscolumbus/2017/05/13/ibm-predicts-demand-for-data-scientists-will-soar-28-by-2020/#7e46c7607e3b) 数据科学家的需求将在 2020 年增长 28%。 一项[近期研究](https://medium.com/towards-artificial-intelligence/top-10-tech-skills-in-2020-worldwide-ecef27c8d8ad)使用 LinkedIn 的职位搜索工具显示，2020 年大多数顶尖科技职位都需要数据科学、商业分析、机器学习和云计算技能（见**图 2**）。
 
-![](../Images/67eb06d4631d72bec20276b4ced1e003.png)
+![](img/67eb06d4631d72bec20276b4ced1e003.png)
 
-***图 2**. 使用LinkedIn的职位搜索工具显示的全球技能类别职位数量。图片由Benjamin O. Tayo提供。*
+***图 2**. 使用 LinkedIn 的职位搜索工具显示的全球技能类别职位数量。图片由 Benjamin O. Tayo 提供。*
 
 ### 4\. 数据科学家的收入是多少？
 
-你作为数据科学家的收入取决于你工作的组织或公司、你的教育背景、工作经验年限以及你的具体职位。数据科学家的收入范围从$50,000到$250,000， 中位数薪资约为$120,000。此[文章](https://towardsdatascience.com/how-much-do-data-scientists-make-cbd7ec2b458)讨论了更多关于数据科学家的薪资信息。
+你作为数据科学家的收入取决于你工作的组织或公司、你的教育背景、工作经验年限以及你的具体职位。数据科学家的收入范围从$50,000 到$250,000， 中位数薪资约为$120,000。此[文章](https://towardsdatascience.com/how-much-do-data-scientists-make-cbd7ec2b458)讨论了更多关于数据科学家的薪资信息。
 
 ### 5\. 我如何为数据科学职业做准备？
 
@@ -66,11 +66,11 @@
 
 ### 6\. 我应该重点关注哪些编程语言？
 
-如果你对学习数据科学基础感兴趣，你需要从某处开始。不要被[数据科学家职位广告中提到的荒谬编程语言清单](https://towardsdatascience.com/ridiculous-requirements-from-data-scientist-job-ads-d84fa716af73)所压倒。虽然学习尽可能多的数据科学工具很重要，但建议一开始只学一两种编程语言。一旦你建立了坚实的数据科学基础，你可以挑战自己学习不同的编程语言或不同的平台和生产力工具来提升你的技能。根据这篇[文章](https://towardsdatascience.com/python-and-r-unequivocal-champions-of-data-science-31ab4d1fa45e)，Python和R仍然是数据科学中使用的两大编程语言。我建议从Python开始，因为越来越多的学术培训项目和行业将其作为数据科学的默认语言。
+如果你对学习数据科学基础感兴趣，你需要从某处开始。不要被[数据科学家职位广告中提到的荒谬编程语言清单](https://towardsdatascience.com/ridiculous-requirements-from-data-scientist-job-ads-d84fa716af73)所压倒。虽然学习尽可能多的数据科学工具很重要，但建议一开始只学一两种编程语言。一旦你建立了坚实的数据科学基础，你可以挑战自己学习不同的编程语言或不同的平台和生产力工具来提升你的技能。根据这篇[文章](https://towardsdatascience.com/python-and-r-unequivocal-champions-of-data-science-31ab4d1fa45e)，Python 和 R 仍然是数据科学中使用的两大编程语言。我建议从 Python 开始，因为越来越多的学术培训项目和行业将其作为数据科学的默认语言。
 
 ### 7\. 成为数据科学家需要多长时间？
 
-如果你在分析学科如**物理学**、**数学**、**工程学**、**计算机科学**、**经济学**或**统计学**有坚实的基础，你基本上可以自学数据科学的基础知识。你可以从像edX、Coursera或DataCamp这样的免费在线课程开始。**一级**能力（见**图1**）可以在6到12个月内达到。**二级**能力可以在7到18个月内达到。**三级**能力可以在18到48个月内达到。获得某一水平的能力所需的时间取决于你的背景以及你愿意投入的数据科学学习时间。通常，有分析学科背景的人，如物理学、数学、科学、工程学、会计或计算机科学的背景，所需的时间较少，而背景与数据科学不相符的人则需要更多时间。
+如果你在分析学科如**物理学**、**数学**、**工程学**、**计算机科学**、**经济学**或**统计学**有坚实的基础，你基本上可以自学数据科学的基础知识。你可以从像 edX、Coursera 或 DataCamp 这样的免费在线课程开始。**一级**能力（见**图 1**）可以在 6 到 12 个月内达到。**二级**能力可以在 7 到 18 个月内达到。**三级**能力可以在 18 到 48 个月内达到。获得某一水平的能力所需的时间取决于你的背景以及你愿意投入的数据科学学习时间。通常，有分析学科背景的人，如物理学、数学、科学、工程学、会计或计算机科学的背景，所需的时间较少，而背景与数据科学不相符的人则需要更多时间。
 
 ### 8\. 我是否有足够的耐心，即使在项目遇到瓶颈时也能继续工作？
 
@@ -86,7 +86,7 @@
 
 ### 11\. 我是终身学习者吗？
 
-数据科学是一个不断发展的领域，因此要准备好接受和学习新技术。保持与领域发展联系的一种方式是与其他数据科学家建立网络。一些促进网络建设的平台有LinkedIn、GitHub以及medium（[Towards Data Science](https://towardsdatascience.com/)和[Towards AI](https://towardsai.net/)出版物）。这些平台对获取有关该领域最新发展的信息非常有用。
+数据科学是一个不断发展的领域，因此要准备好接受和学习新技术。保持与领域发展联系的一种方式是与其他数据科学家建立网络。一些促进网络建设的平台有 LinkedIn、GitHub 以及 medium（[Towards Data Science](https://towardsdatascience.com/)和[Towards AI](https://towardsai.net/)出版物）。这些平台对获取有关该领域最新发展的信息非常有用。
 
 ### 12\. 我是团队合作者吗？
 
@@ -106,15 +106,15 @@
 
 [数据科学专业证书（HarvardX，通过 edX）](https://www.edx.org/professional-certificate/harvardx-data-science)
 
-[分析：必要工具与方法（乔治亚理工X，通过 edX）](https://www.edx.org/micromasters/analytics-essential-tools-methods)
+[分析：必要工具与方法（乔治亚理工 X，通过 edX）](https://www.edx.org/micromasters/analytics-essential-tools-methods)
 
 [应用数据科学与 Python 专业（密歇根大学，通过 Coursera）](https://www.coursera.org/specializations/data-science-python)
 
 **推荐的书籍：**
 
-从教材中学习可以提供比在线课程更精炼和深入的知识。这本书提供了数据科学和机器学习的绝佳入门，包含代码：《Python 机器学习》，作者为 Sebastian Raschka。[https://github.com/rasbt/python-machine-learning-book-3rd-edition](https://github.com/rasbt/python-machine-learning-book-3rd-edition)
+从教材中学习可以提供比在线课程更精炼和深入的知识。这本书提供了数据科学和机器学习的绝佳入门，包含代码：《Python 机器学习》，作者为 Sebastian Raschka。[`github.com/rasbt/python-machine-learning-book-3rd-edition`](https://github.com/rasbt/python-machine-learning-book-3rd-edition)
 
-![](../Images/cd06ff6da6e38e28826a199709ef6dfa.png)
+![](img/cd06ff6da6e38e28826a199709ef6dfa.png)
 
 作者以非常易于理解的方式解释了机器学习的基本概念。此外，书中包含代码，因此你可以实际使用这些代码进行练习和构建自己的模型。我个人发现这本书在我的数据科学之旅中非常有用。我会推荐这本书给任何数据科学爱好者。你所需要的只是基础的线性代数和编程技能，就能理解这本书。
 
@@ -122,13 +122,13 @@
 
 ### 总结
 
-总结一下，我们讨论了14个数据科学 aspirants常见的重要问题。尽管不同个体的入门路径可能不同，但本文提供的答案可以为那些考虑数据科学领域的人提供一些指导。
+总结一下，我们讨论了 14 个数据科学 aspirants 常见的重要问题。尽管不同个体的入门路径可能不同，但本文提供的答案可以为那些考虑数据科学领域的人提供一些指导。
 
 **相关：**
 
 +   [如何在没有学位的情况下进入数据科学领域](https://www.kdnuggets.com/2020/11/data-science-without-degree.html)
 
-+   [如何成为10倍数据科学家](https://www.kdnuggets.com/2020/10/10x-data-scientist.html)
++   [如何成为 10 倍数据科学家](https://www.kdnuggets.com/2020/10/10x-data-scientist.html)
 
 +   [数据科学家还是机器学习工程师？哪个职业选择更好？](https://www.kdnuggets.com/2020/11/greatlearning-data-scientist-machine-learning-engineer.html)
 
@@ -138,10 +138,10 @@
 
 +   [学习数据科学统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

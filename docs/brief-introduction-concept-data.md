@@ -1,8 +1,8 @@
 # 数据概念简介
 
-> 原文：[https://www.kdnuggets.com/2021/07/brief-introduction-concept-data.html](https://www.kdnuggets.com/2021/07/brief-introduction-concept-data.html)
+> 原文：[`www.kdnuggets.com/2021/07/brief-introduction-concept-data.html`](https://www.kdnuggets.com/2021/07/brief-introduction-concept-data.html)
 
-[评论](#comments)
+评论
 
 **由 [Angelica Lo Duca](https://twitter.com/alod83) 提供，国家研究委员会信息学与电信研究所**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 数据可以是定量的也可以是定性的。理解定量数据和定性数据之间的区别非常重要，因为它们的处理和分析方式不同：例如，您不能对定性数据计算统计数据，或无法对定量数据应用自然语言处理技术。
 
-![Image](../Images/b764f18a99f0fe712aab2b642763f6f4.png)
+![Image](img/b764f18a99f0fe712aab2b642763f6f4.png)
 
 ## 定量数据
 
@@ -80,7 +80,7 @@
 
 根据数据类型，可以执行不同的分析：定量数据和定性数据的定量和定性分析。
 
-![Image](../Images/e8c779a0d8b7e9e55d04a2c739d62ef4.png)
+![Image](img/e8c779a0d8b7e9e55d04a2c739d62ef4.png)
 
 ## 定量分析
 
@@ -104,7 +104,7 @@
 
 推论统计包括以下类型的分析：
 
-+   假设检验（ANOVA，t检验，Box-Cox，…）
++   假设检验（ANOVA，t 检验，Box-Cox，…）
 
 +   置信区间估计
 
@@ -128,37 +128,37 @@
 
 [1] 剑桥词典：数据的定义：
 
-[https://dictionary.cambridge.org/dictionary/english/data](https://dictionary.cambridge.org/dictionary/english/data)
+[`dictionary.cambridge.org/dictionary/english/data`](https://dictionary.cambridge.org/dictionary/english/data)
 
 [2] 定性与定量数据：定义、分析、示例：
 
-[https://www.intellspot.com/qualitative-vs-quantitative-data/](https://www.intellspot.com/qualitative-vs-quantitative-data/)
+[`www.intellspot.com/qualitative-vs-quantitative-data/`](https://www.intellspot.com/qualitative-vs-quantitative-data/)
 
 [3] 如何理解您业务中的定量和定性数据：
 
-[https://laconteconsulting.com/2020/02/14/quantitative-qualitative-data/](https://laconteconsulting.com/2020/02/14/quantitative-qualitative-data/)
+[`laconteconsulting.com/2020/02/14/quantitative-qualitative-data/`](https://laconteconsulting.com/2020/02/14/quantitative-qualitative-data/)
 
 [4] 定量数据：定义、类型、分析和示例：
 
-[https://www.questionpro.com/blog/quantitative-data/](https://www.questionpro.com/blog/quantitative-data/)
+[`www.questionpro.com/blog/quantitative-data/`](https://www.questionpro.com/blog/quantitative-data/)
 
 [5] 直观介绍描述性分析：
 
-[https://medium.com/analytics-vidhya/a-gentle-introduction-to-descriptive-analytics-8b4e8e1ad238](https://medium.com/analytics-vidhya/a-gentle-introduction-to-descriptive-analytics-8b4e8e1ad238)
+[`medium.com/analytics-vidhya/a-gentle-introduction-to-descriptive-analytics-8b4e8e1ad238`](https://medium.com/analytics-vidhya/a-gentle-introduction-to-descriptive-analytics-8b4e8e1ad238)
 
 [6] 定性数据 – 定义、类型、分析和示例：
 
-[https://www.questionpro.com/blog/qualitative-data/](https://www.questionpro.com/blog/qualitative-data/)
+[`www.questionpro.com/blog/qualitative-data/`](https://www.questionpro.com/blog/qualitative-data/)
 
-**简介：[Angelica Lo Duca](https://twitter.com/alod83)**（[Medium](https://alod83.medium.com/)）在意大利比萨的国家研究委员会（IIT-CNR）信息学与远程通信研究所担任博士后研究员。她是比萨大学数字人文学科硕士课程中“数据新闻学”教授。她的研究兴趣包括数据科学、数据分析、文本分析、开放数据、网络应用程序和数据新闻学，应用于社会、旅游和文化遗产领域。她曾从事数据安全、语义网和关联数据的工作。Angelica也是一位热情的技术写作者。
+**简介：[Angelica Lo Duca](https://twitter.com/alod83)**（[Medium](https://alod83.medium.com/)）在意大利比萨的国家研究委员会（IIT-CNR）信息学与远程通信研究所担任博士后研究员。她是比萨大学数字人文学科硕士课程中“数据新闻学”教授。她的研究兴趣包括数据科学、数据分析、文本分析、开放数据、网络应用程序和数据新闻学，应用于社会、旅游和文化遗产领域。她曾从事数据安全、语义网和关联数据的工作。Angelica 也是一位热情的技术写作者。
 
 **相关：**
 
-+   [数据科学的残酷真相](/2021/07/brutal-truth-data-science.html)
++   数据科学的残酷真相
 
-+   [你为什么以及如何学习“高效数据科学”？](/2021/07/learn-productive-data-science.html)
++   你为什么以及如何学习“高效数据科学”？
 
-+   [初学者的前10个数据科学项目](/2021/06/top-10-data-science-projects-beginners.html)
++   初学者的前 10 个数据科学项目
 
 ### 更多相关内容
 
@@ -166,7 +166,7 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [每位数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 

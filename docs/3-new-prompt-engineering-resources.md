@@ -1,40 +1,40 @@
-# 3个新的提示工程资源推荐
+# 3 个新的提示工程资源推荐
 
-> 原文：[https://www.kdnuggets.com/3-new-prompt-engineering-resources](https://www.kdnuggets.com/3-new-prompt-engineering-resources)
+> 原文：[`www.kdnuggets.com/3-new-prompt-engineering-resources`](https://www.kdnuggets.com/3-new-prompt-engineering-resources)
 
-![3个新的提示工程工具推荐](../Images/add5f981bded3eda0e817e5882b5722e.png)
+![3 个新的提示工程工具推荐](img/add5f981bded3eda0e817e5882b5722e.png)
 
-作者使用Midjourney创建
+作者使用 Midjourney 创建
 
-我不会从提示工程的介绍开始，也不会谈论提示工程如何成为“AI最新的热门职业”或其他类似话题。你知道什么是提示工程，否则你不会在这里。你知道关于[其长期可行性](https://www.kdnuggets.com/prompt-engineering-an-integrated-dream)和是否是一个合法的职位头衔的讨论点。或其他。
+我不会从提示工程的介绍开始，也不会谈论提示工程如何成为“AI 最新的热门职业”或其他类似话题。你知道什么是提示工程，否则你不会在这里。你知道关于[其长期可行性](https://www.kdnuggets.com/prompt-engineering-an-integrated-dream)和是否是一个合法的职位头衔的讨论点。或其他。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 需求
 
 * * *
 
 即使了解了这些，你之所以在这里，是因为提示工程引起了你的兴趣。吸引了你。甚至可能令你着迷？
 
-如果你已经学习了[提示工程的基础知识](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)，并查看了[课程推荐](https://www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications)以将你的提示技巧提升到一个新水平，是时候转向一些最新的提示相关资源了。下面是3个最新的提示工程资源，帮助你将提示技能提升到一个新水平。
+如果你已经学习了[提示工程的基础知识](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)，并查看了[课程推荐](https://www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications)以将你的提示技巧提升到一个新水平，是时候转向一些最新的提示相关资源了。下面是 3 个最新的提示工程资源，帮助你将提示技能提升到一个新水平。
 
 ## 1\. 完美提示：提示工程备忘单
 
 你是否在寻找一个一站式的快捷参考提示工程需求的地方？那就看看[提示工程备忘单](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)吧。
 
-> 无论你是经验丰富的用户还是刚刚开始AI之旅，这份备忘单应作为与大型语言模型沟通的多领域口袋词典。
+> 无论你是经验丰富的用户还是刚刚开始 AI 之旅，这份备忘单应作为与大型语言模型沟通的多领域口袋词典。
 
-这是一个非常详细的资源，我对Maximilian Vogel和The Generator为制作并提供这份资源表示敬意。从基础提示到RAG及更高级的内容，这份备忘单覆盖了广泛的内容，对初学者提示工程师几乎没有留白。
+这是一个非常详细的资源，我对 Maximilian Vogel 和 The Generator 为制作并提供这份资源表示敬意。从基础提示到 RAG 及更高级的内容，这份备忘单覆盖了广泛的内容，对初学者提示工程师几乎没有留白。
 
 你将调查的主题包括：
 
-+   AUTOMAT和CO-STAR提示框架
++   AUTOMAT 和 CO-STAR 提示框架
 
 +   输出格式定义
 
@@ -50,7 +50,7 @@
 
 +   多提示方法
 
-![AUTOMAT 提示框架](../Images/de2bd194fd04dccdd26d31026ac80863.png)
+![AUTOMAT 提示框架](img/de2bd194fd04dccdd26d31026ac80863.png)
 
 AUTOMAT 提示框架的示例（[来源](https://medium.com/the-generator/the-perfect-prompt-prompt-engineering-cheat-sheet-d0b9c62a2bba)）
 
@@ -72,7 +72,7 @@ AUTOMAT 提示框架的示例（[来源](https://medium.com/the-generator/the-pe
 
 微软最近的一篇论文（好吧，*相当* 最近）标题为"[LongLLMLingua: Accelerating and Enhancing LLMs in Long Context Scenarios via Prompt Compression](https://arxiv.org/abs/2310.06839)"，介绍了一种提示压缩的方法，以减少成本和延迟，同时保持响应质量。
 
-![LLMLingua](../Images/259c6ad6948a12b0fed9c3d28d16afec.png)
+![LLMLingua](img/259c6ad6948a12b0fed9c3d28d16afec.png)
 
 使用 LLMLingua-2 的提示压缩示例（[来源](https://llmlingua.com/)）
 

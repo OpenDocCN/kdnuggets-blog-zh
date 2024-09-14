@@ -1,8 +1,8 @@
 # 50+ 有用的机器学习与预测 API，2018 年版
 
-> 原文：[https://www.kdnuggets.com/2018/05/50-useful-machine-learning-prediction-apis-2018-edition.html](https://www.kdnuggets.com/2018/05/50-useful-machine-learning-prediction-apis-2018-edition.html)
+> 原文：[`www.kdnuggets.com/2018/05/50-useful-machine-learning-prediction-apis-2018-edition.html`](https://www.kdnuggets.com/2018/05/50-useful-machine-learning-prediction-apis-2018-edition.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 API 是一组用于构建软件应用的例程、协议和工具。对于 KDnuggets 的第三版文章，我们移除了过时的 API，并用新元素进行了更新。所有 API 都被分类到新兴应用组中：
 
@@ -14,7 +14,7 @@ API 是一组用于构建软件应用的例程、协议和工具。对于 KDnugg
 
 +   *机器学习与预测。*
 
-![](../Images/2df4e585f85f61447815e4702c62a285.png)
+![](img/2df4e585f85f61447815e4702c62a285.png)
 
 在每个应用组中，列表按字母顺序排列。API 概述基于截至 2018 年 4 月 16 日其 URL 上的信息。查看这些 API 的应用情况！如果我们遗漏了一些受欢迎的活跃 API，请在下面的评论中提出建议。
 
@@ -36,39 +36,39 @@ API 是一组用于构建软件应用的例程、协议和工具。对于 KDnugg
 
 1.  [IBM Watson Visual Recognition](https://www.ibm.com/watson/developercloud/visual-recognition.html): 理解图像的内容 - 视觉概念标记图像，找到人脸，估计年龄和性别，并在集合中找到相似图像。你还可以通过创建自己的自定义概念来训练服务。
 
-1.  [Imagga](https://imagga.com/solutions/auto-tagging.html): 提供自动为图像分配标签的API，使你的图像可被查找。它基于图像识别平台即服务。
+1.  [Imagga](https://imagga.com/solutions/auto-tagging.html): 提供自动为图像分配标签的 API，使你的图像可被查找。它基于图像识别平台即服务。
 
 1.  [Kairos](https://www.kairos.com/docs/api/): 提供最先进的、符合伦理的[面部识别](https://www.kairos.com/features)服务给全球的开发者和企业。
 
-1.  [Microsoft Cognitive Service - Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api): 基于云的API可以根据输入和用户选择以不同方式分析视觉内容。例如，根据内容标记图像；对图像进行分类；检测人脸并返回其坐标；识别特定领域的内容；生成内容描述；识别图像中的文本；标记成人内容。
+1.  [Microsoft Cognitive Service - Computer Vision](https://www.microsoft.com/cognitive-services/en-us/computer-vision-api): 基于云的 API 可以根据输入和用户选择以不同方式分析视觉内容。例如，根据内容标记图像；对图像进行分类；检测人脸并返回其坐标；识别特定领域的内容；生成内容描述；识别图像中的文本；标记成人内容。
 
 1.  [ParallelDots Visual Analytics APIs](https://www.paralleldots.com/visual-analytics) 提供独特的服务，帮助你自动标记图像、过滤不适当内容、找出照片的传播评分或识别肖像图像中的情感。
 
-1.  [Skybiometry Face Detection and Recognition](https://skybiometry.com/Documentation/): 提供面部检测和识别服务。新版API包括区分深色眼镜和透明眼镜的功能。
+1.  [Skybiometry Face Detection and Recognition](https://skybiometry.com/Documentation/): 提供面部检测和识别服务。新版 API 包括区分深色眼镜和透明眼镜的功能。
 
 ### **文本分析、自然语言处理、情感分析**
 
-1.  [Bitext:](https://www.bitext.com/) 提供市场上最准确的语义服务，包括[实体提取](https://www.bitext.com/entity-extraction/) & [短语提取](https://www.bitext.com/concept-extraction/)、[情感分析](https://www.bitext.com/sentiment-analysis/)、[文本分类](https://www.bitext.com/text-categorization/)、[词形还原](https://www.bitext.com/lemmatization-software/)、[词性标注](https://www.bitext.com/pos-tagging/)、[语言识别](https://www.bitext.com/language-identification/)以及[其他聊天机器人增强服务](https://www.bitext.com/chatbot-service/) ，支持50多种语言。
+1.  [Bitext:](https://www.bitext.com/) 提供市场上最准确的语义服务，包括[实体提取](https://www.bitext.com/entity-extraction/) & [短语提取](https://www.bitext.com/concept-extraction/)、[情感分析](https://www.bitext.com/sentiment-analysis/)、[文本分类](https://www.bitext.com/text-categorization/)、[词形还原](https://www.bitext.com/lemmatization-software/)、[词性标注](https://www.bitext.com/pos-tagging/)、[语言识别](https://www.bitext.com/language-identification/)以及[其他聊天机器人增强服务](https://www.bitext.com/chatbot-service/) ，支持 50 多种语言。
 
 1.  [Diffbot Analyze](https://www.diffbot.com/dev/docs/analyze/): 为开发者提供工具，可以识别、分析和提取任何网页的主要内容和部分。
 
-1.  [免费自然语言处理服务](https://market.mashape.com/loudelement/free-natural-language-processing-service): 是一项免费的服务，包括情感分析、内容提取和语言检测。这是在mashape.com上一个受欢迎的数据API，大型云API市场。
+1.  [免费自然语言处理服务](https://market.mashape.com/loudelement/free-natural-language-processing-service): 是一项免费的服务，包括情感分析、内容提取和语言检测。这是在 mashape.com 上一个受欢迎的数据 API，大型云 API 市场。
 
-1.  [谷歌云自然语言API](https://cloud.google.com/natural-language/reference/rest/): 分析文本的结构和含义，包括情感分析、实体识别和文本注释。
+1.  [谷歌云自然语言 API](https://cloud.google.com/natural-language/reference/rest/): 分析文本的结构和含义，包括情感分析、实体识别和文本注释。
 
-1.  [Watson自然语言理解](https://www.ibm.com/watson/services/natural-language-understanding/): 分析文本以提取内容中的元数据，如概念、实体、关键词、类别、关系和语义角色。
+1.  [Watson 自然语言理解](https://www.ibm.com/watson/services/natural-language-understanding/): 分析文本以提取内容中的元数据，如概念、实体、关键词、类别、关系和语义角色。
 
-1.  [MeaningCloud文本分类](https://www.meaningcloud.com/developer/text-classification): 该API执行预分类任务，如：提取文本、分词、去除停用词和词形还原。
+1.  [MeaningCloud 文本分类](https://www.meaningcloud.com/developer/text-classification): 该 API 执行预分类任务，如：提取文本、分词、去除停用词和词形还原。
 
-1.  [微软认知服务 - 文本分析](https://www.microsoft.com/cognitive-services/en-us/text-analytics-api): 从文本中检测情感、关键短语、主题和语言。与此API同属一组的其他API（语言认知服务）包括 [必应拼写检查](https://www.microsoft.com/cognitive-services/en-us/bing-spell-check-api)； [语言理解](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis)； [语言分析](https://www.microsoft.com/cognitive-services/en-us/linguistic-analysis-api)； [网络语言模型](https://www.microsoft.com/cognitive-services/en-us/web-language-model-api)。
+1.  [微软认知服务 - 文本分析](https://www.microsoft.com/cognitive-services/en-us/text-analytics-api): 从文本中检测情感、关键短语、主题和语言。与此 API 同属一组的其他 API（语言认知服务）包括 [必应拼写检查](https://www.microsoft.com/cognitive-services/en-us/bing-spell-check-api)； [语言理解](https://www.microsoft.com/cognitive-services/en-us/language-understanding-intelligent-service-luis)； [语言分析](https://www.microsoft.com/cognitive-services/en-us/linguistic-analysis-api)； [网络语言模型](https://www.microsoft.com/cognitive-services/en-us/web-language-model-api)。
 
-1.  [nlpTools](http://nlptools.atrilla.net/web/api.php): 一种简单的JSON通过HTTP RESTful网络服务用于自然语言处理。它解码在线新闻媒体以进行情感分析和文本分类。
+1.  [nlpTools](http://nlptools.atrilla.net/web/api.php): 一种简单的 JSON 通过 HTTP RESTful 网络服务用于自然语言处理。它解码在线新闻媒体以进行情感分析和文本分类。
 
-1.  [Geneea](https://api.geneea.com/): 可以对提供的原始文本、从给定URL提取的文本或直接提供的文档进行分析（自然语言处理）。
+1.  [Geneea](https://api.geneea.com/): 可以对提供的原始文本、从给定 URL 提取的文本或直接提供的文档进行分析（自然语言处理）。
 
-1.  [ParallelDots文本分析API](https://www.paralleldots.com/text-analysis-apis) 提供方便且多样的自然语言理解（NLU）算法，支持十四种不同语言，以发现任何文档的情感或情绪，找出其中的主要实体或从中移除脏话。ParallelDots自定义分类器还允许你在自己的类别上构建文本分类器，而无需任何训练数据。
+1.  [ParallelDots 文本分析 API](https://www.paralleldots.com/text-analysis-apis) 提供方便且多样的自然语言理解（NLU）算法，支持十四种不同语言，以发现任何文档的情感或情绪，找出其中的主要实体或从中移除脏话。ParallelDots 自定义分类器还允许你在自己的类别上构建文本分类器，而无需任何训练数据。
 
-1.  [汤森路透Open Calais™](http://www.opencalais.com/opencalais-api/): 使用自然语言处理、机器学习和其他方法，Calais对你的文档进行分类和链接到实体（如人、地点、组织等）、事实（如“x”人工作于“y”公司）和事件（如“z”人于“x”日期被任命为“y”公司主席）。
+1.  [汤森路透 Open Calais™](http://www.opencalais.com/opencalais-api/): 使用自然语言处理、机器学习和其他方法，Calais 对你的文档进行分类和链接到实体（如人、地点、组织等）、事实（如“x”人工作于“y”公司）和事件（如“z”人于“x”日期被任命为“y”公司主席）。
 
 1.  [Yactraq Speech2Topics](http://yactraq.com/)，一个将音频视觉内容通过语音识别和自然语言处理转换为主题元数据的云服务。
 
@@ -128,25 +128,25 @@ API 是一组用于构建软件应用的例程、协议和工具。对于 KDnugg
 
 其他 API 集合: [Mashape 博客](http://blog.mashape.com/list-of-20-sentiment-analysis-apis/) & [RapidAPI 机器学习集合](https://rapidapi.com/?q=machine%20learning)
 
-我们是否遗漏了你最喜欢的API？我们会不断更新列表！
+我们是否遗漏了你最喜欢的 API？我们会不断更新列表！
 
 **相关**：
 
-+   [高级API是否让机器学习变得简单？](/2018/04/high-level-apis-dumbing-down-machine-learning.html)
++   高级 API 是否让机器学习变得简单？
 
-+   [50+有用的机器学习与预测API，更新版](/2017/02/machine-learning-data-science-apis-updated.html)
++   50+有用的机器学习与预测 API，更新版
 
-+   [区块链与API](/2018/03/blockchains-apis.html)
++   区块链与 API
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
@@ -156,10 +156,10 @@ API 是一组用于构建软件应用的例程、协议和工具。对于 KDnugg
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [成功数据科学家的五大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

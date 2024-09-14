@@ -1,42 +1,42 @@
-# 十大GitHub库掌握SQL
+# 十大 GitHub 库掌握 SQL
 
-> 原文：[https://www.kdnuggets.com/10-github-repositories-to-master-sql](https://www.kdnuggets.com/10-github-repositories-to-master-sql)
+> 原文：[`www.kdnuggets.com/10-github-repositories-to-master-sql`](https://www.kdnuggets.com/10-github-repositories-to-master-sql)
 
-![10 GitHub Repositories to Master SQL cover](../Images/39ed048c2ff774b8625fa3fc97c8df9f.png)
+![10 GitHub Repositories to Master SQL cover](img/39ed048c2ff774b8625fa3fc97c8df9f.png)
 
 图片由作者提供 | ChatGPT & Canva
 
-掌握SQL是任何追求IT职业的人的基本技能，无论你是希望成为开发者、数据科学家、IT经理还是机器学习工程师。在当今数据驱动的世界中，能够有效使用SQL访问和管理数据库是一个基本要求。
+掌握 SQL 是任何追求 IT 职业的人的基本技能，无论你是希望成为开发者、数据科学家、IT 经理还是机器学习工程师。在当今数据驱动的世界中，能够有效使用 SQL 访问和管理数据库是一个基本要求。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-在这篇博客文章中，我们将深入探讨十大GitHub库，这些库可以帮助你入门SQL和数据库管理，并将你的技能提升到更高水平。这个列表适合寻求提升数据处理技能的初学者和专业人士。
+在这篇博客文章中，我们将深入探讨十大 GitHub 库，这些库可以帮助你入门 SQL 和数据库管理，并将你的技能提升到更高水平。这个列表适合寻求提升数据处理技能的初学者和专业人士。
 
-## 1\. SQL 101由s-shemmee提供
+## 1\. SQL 101 由 s-shemmee 提供
 
-[SQL 101](https://github.com/s-shemmee/SQL-101)库提供了逐步教程、实际示例和练习。这个指南是你掌握基础知识并释放SQL数据力量的入口。
+[SQL 101](https://github.com/s-shemmee/SQL-101)库提供了逐步教程、实际示例和练习。这个指南是你掌握基础知识并释放 SQL 数据力量的入口。
 
 你将学习关于查询数据、修改数据、数据类型和约束、连接和关系、聚合和分组、子查询和视图、索引和性能优化、事务和并发控制以及高级主题。
 
-## 2\. 由WebDevSimplified提供的Learn SQL
+## 2\. 由 WebDevSimplified 提供的 Learn SQL
 
-[学习SQL](https://github.com/WebDevSimplified/Learn-SQL)库提供了一系列针对初学者的练习题和解决方案。12个练习将帮助巩固学习并增强有效处理SQL查询的信心。
+[学习 SQL](https://github.com/WebDevSimplified/Learn-SQL)库提供了一系列针对初学者的练习题和解决方案。12 个练习将帮助巩固学习并增强有效处理 SQL 查询的信心。
 
-## 3\. SQL大师课程由datawithdanny提供
+## 3\. SQL 大师课程由 datawithdanny 提供
 
-[SQL大师课程](https://github.com/datawithdanny/sql-masterclass)是一个全面的在线课程，旨在将学习者从SQL技能的初学者提升到高级水平。这个库提供了结构化的学习路径，包括实践练习、真实世界的例子和测验，帮助学生掌握SQL查询和数据分析的艺术。
+[SQL 大师课程](https://github.com/datawithdanny/sql-masterclass)是一个全面的在线课程，旨在将学习者从 SQL 技能的初学者提升到高级水平。这个库提供了结构化的学习路径，包括实践练习、真实世界的例子和测验，帮助学生掌握 SQL 查询和数据分析的艺术。
 
-## 4\. SQL Map由sqlmapproject提供
+## 4\. SQL Map 由 sqlmapproject 提供
 
 [sqlmap](https://github.com/sqlmapproject/sqlmap) 是一个自动化 SQL 注入和数据库接管工具，提供了关于数据库系统漏洞的见解。通过学习这个工具，你可以简化测试数据库服务器的过程，获得关于数据库系统漏洞的宝贵见解，并保护你的服务器免受未知的恶意攻击。
 

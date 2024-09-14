@@ -1,8 +1,8 @@
 # 数据科学备忘单 2.0
 
-> 原文：[https://www.kdnuggets.com/2021/09/data-science-cheat-sheet.html](https://www.kdnuggets.com/2021/09/data-science-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2021/09/data-science-cheat-sheet.html`](https://www.kdnuggets.com/2021/09/data-science-cheat-sheet.html)
 
-[评论](#comments)
+评论
 
 **由 [Aaron Wang](https://www.linkedin.com/in/axw/)，麻省理工学院商业分析硕士 | 数据科学**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -60,7 +60,7 @@
 
 +   生成对抗网络
 
-[![](../Images/806226a593f0a3832dbcdd48bcc1d0ed.png)](https://github.com/aaronwangy/Data-Science-Cheatsheet/blob/main/Data_Science_Cheatsheet.pdf)
+![](https://github.com/aaronwangy/Data-Science-Cheatsheet/blob/main/Data_Science_Cheatsheet.pdf)
 
 **[下载数据科学备忘单 2.0](https://github.com/aaronwangy/Data-Science-Cheatsheet/blob/main/Data_Science_Cheatsheet.pdf)**
 
@@ -74,21 +74,21 @@
 
 本作品采用 [知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议](http://creativecommons.org/licenses/by-nc-sa/4.0/) 进行许可
 
-![知识共享许可证](../Images/2586517d47fe5c3661007e14405643ef.png)
+![知识共享许可证](img/2586517d47fe5c3661007e14405643ef.png)
 
 图像用于教育目的，由我创建，或借自我的同事 [这里](https://stanford.edu/~shervine/teaching/cs-229/)。
 
 [原始](https://github.com/aaronwangy/Data-Science-Cheatsheet)。经许可转载。
 
-**简介：** [亚伦·王](https://www.linkedin.com/in/axw/) 目前在MIT攻读商业分析硕士学位，专注于商业与数据科学的交叉点。亚伦对AI/ML在技术领域的未来充满热情，愿意聊聊相关机会。
+**简介：** [亚伦·王](https://www.linkedin.com/in/axw/) 目前在 MIT 攻读商业分析硕士学位，专注于商业与数据科学的交叉点。亚伦对 AI/ML 在技术领域的未来充满热情，愿意聊聊相关机会。
 
 **相关：**
 
-+   [SQL中的数据准备，附带备忘单！](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 中的数据准备，附带备忘单！](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
 +   [更多数据科学备忘单](https://www.kdnuggets.com/2021/03/more-data-science-cheatsheets.html)
 
-+   [终极Scikit-Learn机器学习备忘单](https://www.kdnuggets.com/2021/01/ultimate-scikit-learn-machine-learning-cheatsheet.html)
++   [终极 Scikit-Learn 机器学习备忘单](https://www.kdnuggets.com/2021/01/ultimate-scikit-learn-machine-learning-cheatsheet.html)
 
 ### 更多相关主题
 
@@ -96,10 +96,10 @@
 
 +   [数据科学学习统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

@@ -1,8 +1,8 @@
 # 事物并不总是正态的：一些“其他”分布
 
-> 原文：[https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)
+> 原文：[`www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html`](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)
 
-![事物并不总是正态的：一些“其他”分布](../Images/e8e915fc0bc88a4b78d301f99865041b.png)
+![事物并不总是正态的：一些“其他”分布](img/e8e915fc0bc88a4b78d301f99865041b.png)
 
 图片来源：Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -28,7 +28,7 @@
 
 +   伯努利分布用于建模二元结果
 
-概率分布是描述随机变量行为的数学函数。在数据科学和机器学习中，概率分布通常用于描述数据集的潜在分布，预测未来事件，并评估机器学习模型的性能。例如，高斯分布是一种参数分布，它依赖于两个变量，即***均值***和***标准差***。因此，一旦均值和标准差参数已知，就可以创建一个正态分布的数据集。举例来说，下面的代码创建了一个包含1000个值的数据集，这些值服从均值为0、标准差为0.1的正态分布。
+概率分布是描述随机变量行为的数学函数。在数据科学和机器学习中，概率分布通常用于描述数据集的潜在分布，预测未来事件，并评估机器学习模型的性能。例如，高斯分布是一种参数分布，它依赖于两个变量，即***均值***和***标准差***。因此，一旦均值和标准差参数已知，就可以创建一个正态分布的数据集。举例来说，下面的代码创建了一个包含 1000 个值的数据集，这些值服从均值为 0、标准差为 0.1 的正态分布。
 
 ```py
 import numpy as np
@@ -46,9 +46,9 @@ plt.plot(bins, 1/(sigma * np.sqrt(2 * np.pi)) *
 plt.show() 
 ```
 
-![事物并不总是正态的：一些“其他”分布](../Images/951af5be836a4f7367bd65d00596e3f3.png)
+![事物并不总是正态的：一些“其他”分布](img/951af5be836a4f7367bd65d00596e3f3.png)
 
-图1\. 高斯分布的可视化。
+图 1\. 高斯分布的可视化。
 
 我们还可以绘制不同均值和标准差组合的正态分布，如下所示：
 
@@ -75,9 +75,9 @@ plt.legend()
 plt.show() 
 ```
 
-![事物并不总是正态的：一些“其他”分布](../Images/2c38083001f78690f1a0605d2749e6ca.png)
+![事物并不总是正态的：一些“其他”分布](img/2c38083001f78690f1a0605d2749e6ca.png)
 
-图2\. 高斯分布在不同均值和标准差下的可视化。
+图 2\. 高斯分布在不同均值和标准差下的可视化。
 
 概率分布在数据科学和机器学习中非常重要，因为它们提供了一种量化和分析不确定性的方法，而不确定性是许多现实世界过程的固有部分。它们在统计推断中也发挥着关键作用，统计推断是使用数据对总体或过程进行推测的过程。
 
@@ -87,11 +87,11 @@ plt.show()
 
 伽马分布是一种连续概率分布，常用于建模在以恒定速率发生的过程中事件之间的时间。它由形状参数（k）和率参数（ϴ）来定义，其概率密度函数（PDF）定义为
 
-![事情并不总是正常的：一些](../Images/2bb077d8e916af5c625091ca78a4bbb6.png)
+![事情并不总是正常的：一些](img/2bb077d8e916af5c625091ca78a4bbb6.png)
 
 其中 Γ(k) 是伽马函数，ϴ 是尺度参数，k 是形状参数。
 
-![事情并不总是正常的：一些](../Images/bd31bfb1d28bc1739d5b6d4ed8095217.png)
+![事情并不总是正常的：一些](img/bd31bfb1d28bc1739d5b6d4ed8095217.png)
 
 图 3\. 伽马分布的可视化。
 
@@ -122,7 +122,7 @@ plt.legend()
 plt.show() 
 ```
 
-![事情并不总是正常的：一些](../Images/99e7c7af450e303ced6d5c93bd8e76a2.png)
+![事情并不总是正常的：一些](img/99e7c7af450e303ced6d5c93bd8e76a2.png)
 
 图 4\. 不同形状和尺度参数的伽马分布的可视化。
 
@@ -132,19 +132,19 @@ plt.show()
 
 贝塔分布是一种定义在区间 [0, 1] 上的连续概率分布。它常用于建模比例或概率，并由两个形状参数定义，通常记作 α 和 β。贝塔分布的概率密度函数（PDF）定义为
 
-![事情并不总是正常的：一些](../Images/56ea52569dfbed850de934c761b95c30.png)
+![事情并不总是正常的：一些](img/56ea52569dfbed850de934c761b95c30.png)
 
 PDF 也可以表示为
 
-![事情并不总是正常的：一些](../Images/9b8dd6a46a75d5f83bd67b7a63a75e74.png)
+![事情并不总是正常的：一些](img/9b8dd6a46a75d5f83bd67b7a63a75e74.png)
 
 其中
 
-![事情并不总是正常的：一些](../Images/b7e0946c49628ab87328c9ae041fa49e.png)
+![事情并不总是正常的：一些](img/b7e0946c49628ab87328c9ae041fa49e.png)
 
 是贝塔函数。
 
-![事情并不总是正常的：一些](../Images/ab4b468ef3b34c897e27da46002d8e7b.png)
+![事情并不总是正常的：一些](img/ab4b468ef3b34c897e27da46002d8e7b.png)
 
 图 5\. 贝塔分布的可视化。
 
@@ -181,11 +181,11 @@ plt.show()
 
 伯努利分布是一种离散概率分布，描述了单个二元事件的结果，例如抛硬币。它由一个参数 *p* 特征，该参数是事件发生的概率。伯努利分布的概率质量函数定义为
 
-![事物并不总是正常：一些](../Images/655ba2132da305c1f2a8b20aab8ea6d9.png)
+![事物并不总是正常：一些](img/655ba2132da305c1f2a8b20aab8ea6d9.png)
 
 其中 n 是 0 或 1，代表事件的结果。
 
-![事物并不总是正常：一些](../Images/d3b4d48b0ff4e8f1825a14b045864f49.png)
+![事物并不总是正常：一些](img/d3b4d48b0ff4e8f1825a14b045864f49.png)
 
 图 6\. 伯努利分布的可视化。
 
@@ -223,6 +223,6 @@ ax.set(xlabel='Bernouli', ylabel='Frequency')
 
 +   [StarCoder：你一直想要的编码助手](https://www.kdnuggets.com/2023/05/starcoder-coding-assistant-always-wanted.html)
 
-+   [区分数据科学家与其他职业的5个特点](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   [区分数据科学家与其他职业的 5 个特点](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
 
 +   [正态分布综合指南](https://www.kdnuggets.com/2022/06/comprehensive-guide-normal-distribution.html)

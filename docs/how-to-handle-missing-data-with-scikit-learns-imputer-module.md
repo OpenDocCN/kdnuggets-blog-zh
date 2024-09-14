@@ -1,8 +1,8 @@
 # 如何使用 Scikit-learn 的 Imputer 模块处理缺失数据
 
-> 原文：[https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
+> 原文：[`www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module`](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
 
-![如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](../Images/36bac16a51c16aff0d45fc5eca7b4b72.png)
+![如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](img/36bac16a51c16aff0d45fc5eca7b4b72.png)
 
 图片来源于编辑 | Midjourney & Canva
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

@@ -1,12 +1,12 @@
 # 机器学习程序的入职培训  
 
-> 原文：[https://www.kdnuggets.com/2018/04/onboarding-machine-learning.html](https://www.kdnuggets.com/2018/04/onboarding-machine-learning.html)  
+> 原文：[`www.kdnuggets.com/2018/04/onboarding-machine-learning.html`](https://www.kdnuggets.com/2018/04/onboarding-machine-learning.html)  
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)  
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论  
 
 **[Adam Hunt](https://www.linkedin.com/in/adamphunt/)，首席数据科学家，RiskIQ**  
 
-![机器学习机器人](../Images/65cdcf419067bd98e8d68da1c84c8f30.png)  
+![机器学习机器人](img/65cdcf419067bd98e8d68da1c84c8f30.png)  
 
 现如今，“机器学习”是你在阅读几乎任何行业时无法避免的流行词汇。  
 
@@ -30,7 +30,7 @@
 
 模型在首次发布时出现偏离预期的情况非常常见，因为虽然你提供了一个全新的、精心挑选的数据集供模型学习，但现实世界非常复杂，复杂程度远超你的预期。就像一个刚毕业的大学生，你的模型将遇到课本中没有的情况，从而使其依赖于通过训练数据形成的偏见。
 
-![猫 狗 鱼](../Images/9616a88b6e23f6f448c218a0600b9f2b.png)
+![猫 狗 鱼](img/9616a88b6e23f6f448c218a0600b9f2b.png)
 
 例如，如果你的训练数据仅包含猫和狗，当你提供给它一条鱼时，它会尝试将其分类为猫或狗。与具备常识的人不同，你的模型需要被纠正，从错误中学习并重新尝试。用于训练你模型的算法也存在固有的偏见。就像人一样，每个模型都会对问题形成自己的观点。起初，它会做出过于简单的假设（我们稍后会详细讲解）。
 
@@ -58,11 +58,11 @@
 
 我们生活在一个数据驱动的社会中，人类真的无法独自应对。通过一些工作，机器学习可以用来利用员工的知识和能力来填补人才库中的必要空缺。然而，机器学习模型不是你可以设置后就不管的东西。它们需要频繁的反馈和监控，以提供最佳性能。为自己着想，让反馈变得简单。你投入的时间将带来回报。
 
-个人简介：[亚当·亨特](https://www.linkedin.com/in/adamphunt/) 是 RiskIQ 的首席数据科学家。他拥有普林斯顿大学的物理学博士学位（2013年）。
+个人简介：[亚当·亨特](https://www.linkedin.com/in/adamphunt/) 是 RiskIQ 的首席数据科学家。他拥有普林斯顿大学的物理学博士学位（2013 年）。
 
 **相关：**
 
-+   [深度学习的前8本免费必读书籍](https://www.kdnuggets.com/2018/04/top-free-books-deep-learning.html)
++   [深度学习的前 8 本免费必读书籍](https://www.kdnuggets.com/2018/04/top-free-books-deep-learning.html)
 
 +   [数据科学家为何必须专注于开发产品意识](https://www.kdnuggets.com/2018/04/data-scientists-product-sense.html)
 
@@ -72,11 +72,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 

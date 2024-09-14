@@ -1,8 +1,8 @@
 # 介绍 OpenLLM：LLM 的开源库
 
-> 原文：[https://www.kdnuggets.com/2023/07/introducing-openllm-open-source-library-llms.html](https://www.kdnuggets.com/2023/07/introducing-openllm-open-source-library-llms.html)
+> 原文：[`www.kdnuggets.com/2023/07/introducing-openllm-open-source-library-llms.html`](https://www.kdnuggets.com/2023/07/introducing-openllm-open-source-library-llms.html)
 
-![介绍 OpenLLM：LLM 的开源库](../Images/1efb563e445901db6e7d4ada83d0ed00.png)
+![介绍 OpenLLM：LLM 的开源库](img/1efb563e445901db6e7d4ada83d0ed00.png)
 
 图片来源于作者
 

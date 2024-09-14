@@ -1,12 +1,12 @@
 # HDF5 之后是什么？寻找适合深度学习的数据存储格式
 
-> 原文：[https://www.kdnuggets.com/2021/11/after-hdf5-data-storage-format-deep-learning.html](https://www.kdnuggets.com/2021/11/after-hdf5-data-storage-format-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2021/11/after-hdf5-data-storage-format-deep-learning.html`](https://www.kdnuggets.com/2021/11/after-hdf5-data-storage-format-deep-learning.html)
 
-[评论](#comments)
+评论
 
 **作者 [Davit Buniatyan](https://www.linkedin.com/in/davidbuniatyan/)， [Activeloop](https://www.activeloop.ai/) CEO**
 
-![图](../Images/f6d6b0c47c1b4214e1b277a09812ab39.png)
+![图](img/f6d6b0c47c1b4214e1b277a09812ab39.png)
 
 ## HDF5 用于非结构化数据
 
@@ -70,21 +70,21 @@
 
 **相关：**
 
-+   [CSV 文件用于存储？不，谢谢。还有更好的选择](/2021/08/csv-files-storage-better-option.html)
++   CSV 文件用于存储？不，谢谢。还有更好的选择
 
-+   [如何查询你的 Pandas 数据框](/2021/08/query-pandas-dataframe.html)
++   如何查询你的 Pandas 数据框
 
-+   [Pandas 不够？这里有一些处理更大、更快数据的 Python 替代方案](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
++   Pandas 不够？这里有一些处理更大、更快数据的 Python 替代方案
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

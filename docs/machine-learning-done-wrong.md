@@ -1,6 +1,6 @@
 # 进行机器学习时的 7 个常见错误
 
-> [https://www.kdnuggets.com/2015/03/machine-learning-data-science-common-mistakes.html/2](https://www.kdnuggets.com/2015/03/machine-learning-data-science-common-mistakes.html/2)
+> [`www.kdnuggets.com/2015/03/machine-learning-data-science-common-mistakes.html/2`](https://www.kdnuggets.com/2015/03/machine-learning-data-science-common-mistakes.html/2)
 
 **4\. 当 n<<p 时使用高方差模型**
 
@@ -18,44 +18,44 @@
 
 **7\. 从线性或逻辑回归中解读系数的绝对值作为特征重要性**
 
-由于许多现成的线性回归模型返回每个系数的p值，许多从业者认为，对于线性模型来说，系数的绝对值越大，对应的特征就越重要。这种情况很少发生，因为（a）改变变量的尺度会改变系数的绝对值，（b）如果特征之间存在多重共线性，系数可能会从一个特征转移到其他特征。此外，数据集中的特征越多，特征之间存在多重共线性的可能性就越大，通过系数解释特征重要性也就越不可靠。
+由于许多现成的线性回归模型返回每个系数的 p 值，许多从业者认为，对于线性模型来说，系数的绝对值越大，对应的特征就越重要。这种情况很少发生，因为（a）改变变量的尺度会改变系数的绝对值，（b）如果特征之间存在多重共线性，系数可能会从一个特征转移到其他特征。此外，数据集中的特征越多，特征之间存在多重共线性的可能性就越大，通过系数解释特征重要性也就越不可靠。
 
-那么，这里是：实际应用机器学习时的7个常见错误。这个列表并不是详尽无遗的，而只是为了促使读者考虑可能不适用于当前数据的建模假设。为了获得最佳的模型性能，选择最适合假设的建模算法非常重要——而不仅仅是你最熟悉的算法。
+那么，这里是：实际应用机器学习时的 7 个常见错误。这个列表并不是详尽无遗的，而只是为了促使读者考虑可能不适用于当前数据的建模假设。为了获得最佳的模型性能，选择最适合假设的建模算法非常重要——而不仅仅是你最熟悉的算法。
 
 原文：[机器学习中的常见错误](http://ml.posthaven.com/machine-learning-done-wrong)
 
-[![Cheng-Tao Chu](../Images/67e7fc5d72f45623fe838afafbe01821.png) Cheng-Tao Chu](https://www.linkedin.com/pub/cheng-tao-chu/4/80/783) 是 Codecademy 的分析总监。专长：数据工程和机器学习。曾任职于：Google、LinkedIn 和 Square。
+![Cheng-Tao Chu Cheng-Tao Chu](https://www.linkedin.com/pub/cheng-tao-chu/4/80/783) 是 Codecademy 的分析总监。专长：数据工程和机器学习。曾任职于：Google、LinkedIn 和 Square。
 
 **相关：**
 
-+   [11种聪明的过拟合方法及如何避免它们](/2015/01/clever-methods-overfitting-avoid.html)
++   11 种聪明的过拟合方法及如何避免它们
 
-+   [大数据是否加速了医学研究？还是没有？](/2014/10/big-data-accelerates-medical-research-or-not.html)
++   大数据是否加速了医学研究？还是没有？
 
-+   [统计学教会我们关于大数据分析的10件事](/2015/02/10-things-statistics-big-data-analysis.html)
++   统计学教会我们关于大数据分析的 10 件事
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
 ### 更多相关话题
 
-+   [避免这些每个AI新手都会犯的5个常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这些每个 AI 新手都会犯的 5 个常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
 
-+   [5个常见的数据科学错误及如何避免](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
++   [5 个常见的数据科学错误及如何避免](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
 
-+   [如何应对3个常见的机器学习挑战](https://www.kdnuggets.com/2022/09/comet-tackle-3-common-machine-learning-challenges.html)
++   [如何应对 3 个常见的机器学习挑战](https://www.kdnuggets.com/2022/09/comet-tackle-3-common-machine-learning-challenges.html)
 
 +   [新手数据科学家应避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-+   [可能影响你数据分析准确性的3个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
++   [可能影响你数据分析准确性的 3 个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
 
-+   [软件错误与权衡：Tomasz Lelek等人的新书](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
++   [软件错误与权衡：Tomasz Lelek 等人的新书](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)

@@ -1,22 +1,22 @@
 # 农业中的机器学习：应用与技术
 
-> 原文：[https://www.kdnuggets.com/2019/05/machine-learning-agriculture-applications-techniques.html](https://www.kdnuggets.com/2019/05/machine-learning-agriculture-applications-techniques.html)
+> 原文：[`www.kdnuggets.com/2019/05/machine-learning-agriculture-applications-techniques.html`](https://www.kdnuggets.com/2019/05/machine-learning-agriculture-applications-techniques.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Sciforce](https://medium.com/@sciforce) 提供**
 
-![figure-name](../Images/7b9ffea3c1b53b6cf3a8b888208dc1e2.png)
+![figure-name](img/7b9ffea3c1b53b6cf3a8b888208dc1e2.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的 IT 组织
 
 * * *
 
@@ -38,7 +38,7 @@
 
 虽然传统的人为植物分类方法是比较叶子的颜色和形状，但机器学习可以通过分析叶脉形态提供更准确、更快速的结果，因为叶脉携带了更多有关叶片属性的信息。
 
-![figure-name](../Images/c8eca0a650af394faae682c1d9dffdae.png)
+![figure-name](img/c8eca0a650af394faae682c1d9dffdae.png)
 
 ### 田间条件管理
 
@@ -60,7 +60,7 @@
 
 准确检测和分类作物质量特征可以提高产品价格并减少浪费。与人类专家相比，机器可以利用看似无意义的数据和相互关系，揭示对作物整体质量起作用的新特性并加以检测。
 
-![figure-name](../Images/891951b10aeeebe7721ab295a153567f.png)
+![figure-name](img/891951b10aeeebe7721ab295a153567f.png)
 
 ****疾病检测****
 
@@ -74,17 +74,17 @@
 
 ****牲畜生产****
 
-与作物管理类似，机器学习提供了准确的预测和估计农业参数，以优化牲畜生产系统的经济效益，如牛肉和鸡蛋生产。例如，体重预测系统可以在屠宰日的150天前估计未来的体重，从而允许农民相应地调整饮食和环境条件。
+与作物管理类似，机器学习提供了准确的预测和估计农业参数，以优化牲畜生产系统的经济效益，如牛肉和鸡蛋生产。例如，体重预测系统可以在屠宰日的 150 天前估计未来的体重，从而允许农民相应地调整饮食和环境条件。
 
 ****动物福利****
 
 在现代环境下，牲畜越来越被视为不仅仅是食物容器，而是可以在农场中感到不快乐和疲惫的动物。动物行为分类器可以将它们的咀嚼信号与饮食变化的需求联系起来，并通过它们的运动模式，包括站立、移动、进食和饮水，来判断动物所承受的压力程度，并预测其对疾病的易感性、体重增加和生产能力。
 
-![figure-name](../Images/09e2017b26faf19fcbad17a0b80243f5.png)
+![figure-name](img/09e2017b26faf19fcbad17a0b80243f5.png)
 
 **农民的小助手**
 
-这是一种可以称为额外福利的应用：想象一个农民在深夜坐着，试图弄清楚下一步的作物管理措施。他是否现在可以卖更多的作物给当地生产者，还是去参加区域博览会？他需要有人来讨论各种选择，以便做出最终决定。为了帮助他，公司们正在开发专业的聊天机器人，这些聊天机器人能够与农民进行对话，并提供有价值的事实和分析。农民用的聊天机器人预计将比面向消费者的Alexa和类似助手更智能，因为它们不仅能够提供数据，还能够分析这些数据并就棘手的问题咨询农民。
+这是一种可以称为额外福利的应用：想象一个农民在深夜坐着，试图弄清楚下一步的作物管理措施。他是否现在可以卖更多的作物给当地生产者，还是去参加区域博览会？他需要有人来讨论各种选择，以便做出最终决定。为了帮助他，公司们正在开发专业的聊天机器人，这些聊天机器人能够与农民进行对话，并提供有价值的事实和分析。农民用的聊天机器人预计将比面向消费者的 Alexa 和类似助手更智能，因为它们不仅能够提供数据，还能够分析这些数据并就棘手的问题咨询农民。
 
 ### 模型背后
 
@@ -94,27 +94,27 @@
 
 [文献综述](https://www.mdpi.com/1424-8220/18/8/2674/pdf)显示，农业中最受欢迎的模型是人工神经网络（ANNs 和 DL）和支持向量机（SVMs）。
 
-ANNs（人工神经网络）受到人脑功能的启发，代表了生物神经网络结构的简化模型，模拟复杂的功能，如模式生成、认知、学习和决策。这些模型通常用于回归和分类任务，在作物管理和杂草、疾病或特定特征的检测中证明了它们的有效性。ANNs最近发展为深度学习，扩展了ANN在所有领域的应用，包括农业。
+ANNs（人工神经网络）受到人脑功能的启发，代表了生物神经网络结构的简化模型，模拟复杂的功能，如模式生成、认知、学习和决策。这些模型通常用于回归和分类任务，在作物管理和杂草、疾病或特定特征的检测中证明了它们的有效性。ANNs 最近发展为深度学习，扩展了 ANN 在所有领域的应用，包括农业。
 
-SVM（支持向量机）是构建线性分隔超平面的二分类器，用于对数据实例进行分类。SVM可以用于分类、回归和聚类。在农业中，它们被用于预测作物的产量和质量以及畜牧业的生产。
+SVM（支持向量机）是构建线性分隔超平面的二分类器，用于对数据实例进行分类。SVM 可以用于分类、回归和聚类。在农业中，它们被用于预测作物的产量和质量以及畜牧业的生产。
 
 更复杂的任务，如动物福利测量，需要不同的方法，例如在集成学习中的多分类器系统或贝叶斯模型——在贝叶斯推断的背景下进行分析的概率图模型。
 
 尽管仍处于起步阶段，基于机器学习的农场已经在向人工智能系统演变。目前，机器学习解决方案解决个别问题，但随着自动数据记录、数据分析、机器学习和决策制定进一步整合成一个互联的系统，农业实践将变成所谓的知识驱动农业，这将有能力提高生产水平和产品质量。
 
-![figure-name](../Images/4f04e35659773020f03322bacb6612f0.png)
+![figure-name](img/4f04e35659773020f03322bacb6612f0.png)
 
-**简介：[Sciforce](https://medium.com/@sciforce)** 是一家总部位于乌克兰的IT公司，专注于基于科学驱动的信息技术开发软件解决方案。
+**简介：[Sciforce](https://medium.com/@sciforce)** 是一家总部位于乌克兰的 IT 公司，专注于基于科学驱动的信息技术开发软件解决方案。
 
 [原文](https://medium.com/sciforce/machine-learning-in-agriculture-applications-and-techniques-6ab501f4d1b5)。经许可转载。
 
 **相关：**
 
-+   [2018年最重要的机器学习/人工智能进展是什么？](/2019/01/machine-learning-ai-advances-2018.html)
++   2018 年最重要的机器学习/人工智能进展是什么？
 
-+   [值得密切关注的6个AI和机器学习领域](/2017/01/6-areas-ai-machine-learning.html)
++   值得密切关注的 6 个 AI 和机器学习领域
 
-+   [2018年最有用的6个机器学习项目](/2019/01/6-most-useful-machine-learning-projects-2018.html)
++   2018 年最有用的 6 个机器学习项目
 
 ### 更多相关话题
 
@@ -122,10 +122,10 @@ SVM（支持向量机）是构建线性分隔超平面的二分类器，用于�
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，经过审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，经过审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

@@ -1,8 +1,8 @@
-# 如何使用 Hugging Face AutoTrain 对LLM进行微调
+# 如何使用 Hugging Face AutoTrain 对 LLM 进行微调
 
-> 原文：[https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)
+> 原文：[`www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms`](https://www.kdnuggets.com/how-to-use-hugging-face-autotrain-to-finetune-llms)
 
-![如何使用 Hugging Face AutoTrain 对LLM进行微调](../Images/9535954ddf526bd0261f1d923485c8ba.png)
+![如何使用 Hugging Face AutoTrain 对 LLM 进行微调](img/9535954ddf526bd0261f1d923485c8ba.png)
 
 编辑器提供的图片
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
-近年来，大型语言模型（LLM）改变了人们的工作方式，并已在教育、营销、研究等多个领域得到应用。鉴于其潜力，LLM 可以被增强以更好地解决我们的业务问题。这就是我们可以进行LLM微调的原因。
+近年来，大型语言模型（LLM）改变了人们的工作方式，并已在教育、营销、研究等多个领域得到应用。鉴于其潜力，LLM 可以被增强以更好地解决我们的业务问题。这就是我们可以进行 LLM 微调的原因。
 
-我们希望对LLM进行微调的原因包括采用特定领域的用例、提高准确性、数据隐私和安全、控制模型偏见等。鉴于所有这些好处，学习如何对LLM进行微调是非常重要的，以便将其投入生产。
+我们希望对 LLM 进行微调的原因包括采用特定领域的用例、提高准确性、数据隐私和安全、控制模型偏见等。鉴于所有这些好处，学习如何对 LLM 进行微调是非常重要的，以便将其投入生产。
 
-自动进行LLM微调的一种方法是使用[Hugging Face 的 AutoTrain](https://huggingface.co/docs/autotrain/v0.6.10/index)。HF AutoTrain 是一个无代码平台，提供 Python API，用于训练各种任务（如计算机视觉、表格数据和自然语言处理任务）的先进模型。即使我们对LLM微调过程了解不多，我们仍然可以利用 AutoTrain 的能力。
+自动进行 LLM 微调的一种方法是使用[Hugging Face 的 AutoTrain](https://huggingface.co/docs/autotrain/v0.6.10/index)。HF AutoTrain 是一个无代码平台，提供 Python API，用于训练各种任务（如计算机视觉、表格数据和自然语言处理任务）的先进模型。即使我们对 LLM 微调过程了解不多，我们仍然可以利用 AutoTrain 的能力。
 
 那么，它是如何工作的呢？让我们进一步探索。
 
@@ -32,17 +32,17 @@
 
 即使 HF AutoTrain 是一个无代码解决方案，我们仍然可以在 AutoTrain 的基础上使用 Python API 进行开发。我们将探索代码路径，因为无代码平台在训练时并不稳定。然而，如果你想使用无代码平台，我们可以通过以下[页面](https://huggingface.co/new-space?template=autotrain-projects/autotrain-advanced)创建 AutoTrain 空间。整体平台将在下图中显示。
 
-![如何使用 Hugging Face AutoTrain 对LLM进行微调](../Images/9a19c37473b3ada3812e03be6c43a855.png)
+![如何使用 Hugging Face AutoTrain 对 LLM 进行微调](img/9a19c37473b3ada3812e03be6c43a855.png)
 
 作者提供的图片
 
-要使用 Python API 对LLM进行微调，我们需要安装 Python 包，可以使用以下代码运行。
+要使用 Python API 对 LLM 进行微调，我们需要安装 Python 包，可以使用以下代码运行。
 
 ```py
 pip install -U autotrain-advanced
 ```
 
-我们还会使用来自[HuggingFace](https://huggingface.co/datasets/tatsu-lab/alpaca)的Alpaca样本数据集，该数据集需要通过数据集包进行获取。
+我们还会使用来自[HuggingFace](https://huggingface.co/datasets/tatsu-lab/alpaca)的 Alpaca 样本数据集，该数据集需要通过数据集包进行获取。
 
 ```py
 pip install datasets
@@ -58,7 +58,7 @@ dataset = load_dataset("tatsu-lab/alpaca")
 train = dataset['train']
 ```
 
-此外，我们会将数据保存为CSV格式，因为我们在微调过程中需要它们。
+此外，我们会将数据保存为 CSV 格式，因为我们在微调过程中需要它们。
 
 ```py
 train.to_csv('train.csv', index = False)
@@ -70,7 +70,7 @@ train.to_csv('train.csv', index = False)
 
 我将从 AutoTrain 示例中调整微调过程，我们可以在 [这里](https://colab.research.google.com/github/huggingface/autotrain-advanced/blob/main/colabs/AutoTrain_LLM.ipynb) 找到。为了开始这个过程，我们将要微调的数据放入名为 data 的文件夹中。
 
-![如何使用 Hugging Face AutoTrain 微调 LLM](../Images/d43661e233bf6f5c8ac7bc62b0def2fc.png)
+![如何使用 Hugging Face AutoTrain 微调 LLM](img/d43661e233bf6f5c8ac7bc62b0def2fc.png)
 
 作者提供的图片
 
@@ -167,7 +167,7 @@ $( [[ "$PUSH_TO_HUB" == "True" ]] && echo "--push-to-hub --token ${HF_TOKEN} --r
 
 如果你成功运行 AutoTrain，你应该在目录中找到以下文件夹，其中包含 AutoTrain 生成的所有模型和标记器。
 
-![如何使用 Hugging Face AutoTrain 微调 LLM](../Images/48f5dfbec3ac40fe83b88dfa81ee3637.png)
+![如何使用 Hugging Face AutoTrain 微调 LLM](img/48f5dfbec3ac40fe83b88dfa81ee3637.png)
 
 作者提供的图片
 
@@ -191,7 +191,7 @@ predicted_text = tokenizer.decode(output[0], skip_special_tokens=False)
 print(predicted_text)
 ```
 
-![如何使用 Hugging Face AutoTrain 微调 LLM](../Images/4ba169bff91d6f375bd16de96a9d151f.png)
+![如何使用 Hugging Face AutoTrain 微调 LLM](img/4ba169bff91d6f375bd16de96a9d151f.png)
 
 结果肯定还有提升空间，但至少比我们提供的样本数据更接近。我们可以尝试调整预训练模型和参数来改善微调效果。
 

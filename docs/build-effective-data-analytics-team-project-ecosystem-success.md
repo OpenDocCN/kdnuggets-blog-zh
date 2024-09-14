@@ -1,8 +1,8 @@
 # 建立有效的数据分析团队和项目生态系统以实现成功
 
-> 原文：[https://www.kdnuggets.com/2021/04/build-effective-data-analytics-team-project-ecosystem-success.html](https://www.kdnuggets.com/2021/04/build-effective-data-analytics-team-project-ecosystem-success.html)
+> 原文：[`www.kdnuggets.com/2021/04/build-effective-data-analytics-team-project-ecosystem-success.html`](https://www.kdnuggets.com/2021/04/build-effective-data-analytics-team-project-ecosystem-success.html)
 
-[评论](#comments)
+评论
 
 **作者：[兰迪·伦奇](https://www.linkedin.com/in/randy-runtsch-73a197/)，数据分析师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 ### 良好的管理和领导力
 
-在我34年的软件开发和数据分析工作中，我观察到了许多管理和领导风格，无论好坏。最近，我在与一位创建框架并指导我们团队在大型企业中建立成功的部门数据分析程序的经理合作时取得了成功。根据经验和观察，以下是他和其他杰出领导者帮助个人、团队和程序成功的一些属性和行动：
+在我 34 年的软件开发和数据分析工作中，我观察到了许多管理和领导风格，无论好坏。最近，我在与一位创建框架并指导我们团队在大型企业中建立成功的部门数据分析程序的经理合作时取得了成功。根据经验和观察，以下是他和其他杰出领导者帮助个人、团队和程序成功的一些属性和行动：
 
 +   为程序设定目标，并管理程序及团队以实现这些目标。
 
@@ -48,7 +48,7 @@
 
 ### 招聘并发展技能和知识
 
-几年前，我参加了一次数据分析会议，讲者描述了她作为数据科学家所需的一些技能。她说，履行她的工作需要超过200种技能。确实，创建成功的数据分析解决方案需要分析师具备多种才能。为了招聘和发展具备所需技能和知识的分析师，您和您的管理层可以考虑这些步骤：
+几年前，我参加了一次数据分析会议，讲者描述了她作为数据科学家所需的一些技能。她说，履行她的工作需要超过 200 种技能。确实，创建成功的数据分析解决方案需要分析师具备多种才能。为了招聘和发展具备所需技能和知识的分析师，您和您的管理层可以考虑这些步骤：
 
 1.  **编写引人注目的职位描述和招聘广告**— 制定职位描述和招聘广告，描述成功候选人必须具备的技能和知识。同时列出员工在职期间必须发展的技能和知识。
 
@@ -66,9 +66,9 @@
 
 ### 采用敏捷实践
 
-项目团队，尤其是在软件开发中，通常会应用[敏捷开发方法](https://en.wikipedia.org/wiki/Agile_software_development)，例如Scrum或Kanban，以组织任务并迅速推进。我的团队有效地使用了在Microsoft OneNote中开发的Kanban Board，以跟踪和沟通团队和经理之间的任务，定期在站立会议中更新。它由一个页面上的三个列组成。每个任务从“准备工作”开始，到“进行中”时移动，并在完成时从“进行中”移到“完成”。
+项目团队，尤其是在软件开发中，通常会应用[敏捷开发方法](https://en.wikipedia.org/wiki/Agile_software_development)，例如 Scrum 或 Kanban，以组织任务并迅速推进。我的团队有效地使用了在 Microsoft OneNote 中开发的 Kanban Board，以跟踪和沟通团队和经理之间的任务，定期在站立会议中更新。它由一个页面上的三个列组成。每个任务从“准备工作”开始，到“进行中”时移动，并在完成时从“进行中”移到“完成”。
 
-![示例看板](../Images/733e7d4d00b278a745be900827a2ce25.png)
+![示例看板](img/733e7d4d00b278a745be900827a2ce25.png)
 
 简单的看板可以用来管理项目任务。图像由作者提供。
 
@@ -106,19 +106,19 @@
 
 **Python** — Python 是一种用户友好且功能强大的编程语言，在数据分析师和数据科学家中很受欢迎。与同样受数据科学家欢迎的以统计为中心的 R 语言不同，Python 是一种通用语言。它是免费的，且易于学习。分析师可以通过自由获取的库扩展 Python 的功能，例如 [NumPy](https://numpy.org/) 和 [TensorFlow](https://www.tensorflow.org/)。
 
-![Python 编程语言](../Images/97d73110a0c3533bf26244052660e4a0.png)
+![Python 编程语言](img/97d73110a0c3533bf26244052660e4a0.png)
 
 Python 编程语言代码示例。图片由作者提供。
 
 **SQL** — 结构化查询语言（SQL）是用于实现、操作和查询存储在关系数据库管理系统（RDBMS）中的结构化数据的标准语言。它包括多个子语言。通过其数据查询语言（DQL），分析师可以查询和检索数据库表中的数据。RDBMS 数据库在全球企业中存储着大量数据集。
 
-![SQL — 结构化查询语言](../Images/58b54b30f73ec759558018dc2e1280e4.png)
+![SQL — 结构化查询语言](img/58b54b30f73ec759558018dc2e1280e4.png)
 
 SQL（结构化查询语言）代码示例。图片由作者提供。
 
 **Microsoft SQL Server Management Studio (SSMS)** — SSMS 是 Microsoft 的集成开发环境（IDE），用于管理和查询在其 SQL Server RDBMS 中实现的数据库。它免费且易于学习，我使用 SSMS 创建和运行 SQL 代码，以查询包含所需数据的数据库。
 
-![Microsoft SQL Server Management Studio (SSMS)](../Images/0934460dee0427e02aa123e29732e678.png)
+![Microsoft SQL Server Management Studio (SSMS)](img/0934460dee0427e02aa123e29732e678.png)
 
 SQL Server Management Studio (SSMS) 用于管理 Microsoft SQL Server 数据库和 SQL 代码。图片由作者提供。
 
@@ -126,13 +126,13 @@ SQL Server Management Studio (SSMS) 用于管理 Microsoft SQL Server 数据库�
 
 **Microsoft Visual Studio** — Visual Studio 是微软的旗舰集成开发环境（IDE）。我使用 Visual Studio Professional 来创建用 Python 和其他编程语言编写的应用程序。它的编辑器功能强大，具有颜色编码的语法。[Visual Studio Community 2019](https://visualstudio.microsoft.com/vs/community/) 是一个免费的 IDE 版本，可能满足你的需求。微软的 Visual Studio Code (VS Code) 是另一个免费的 IDE，在程序员和数据分析师中也非常受欢迎。
 
-![Microsoft Visual Studio](../Images/72e8cabf73f23b02a4c7c3e7f006604c.png)
+![Microsoft Visual Studio](img/72e8cabf73f23b02a4c7c3e7f006604c.png)
 
 Microsoft Visual Studio Professional 是一个集成开发环境（IDE），用于编写程序和开发应用程序。图片由作者提供。
 
 **Microsoft Excel** — Excel 当然是一个无处不在、有用、强大且有时不可或缺的工具。我使用 Excel 工作簿作为项目数据源和输出，用于创建小数据集、执行基本的数据清洗和计算等。像 Excel 这样的电子表格应用程序是任何数据分析或数据科学工作中的关键工具。
 
-![Microsoft Excel](../Images/f52e18b877bde25ad9b66b0d8602f981.png)
+![Microsoft Excel](img/f52e18b877bde25ad9b66b0d8602f981.png)
 
 电子表格应用程序，如 Microsoft Excel，是多功能的数据分析工具。图片由作者提供。
 
@@ -170,7 +170,7 @@ Microsoft Visual Studio Professional 是一个集成开发环境（IDE），用�
 
 +   **空白行**— 为了使代码更易读，我在每个函数、每组变量定义以及每个执行特定任务的代码块之间插入空白行。
 
-+   **简洁的函数范围和可见大小**— 和空白行一样，我限制每个函数的内容，使其更易于编写、理解、维护和增强。我努力保持每个函数简单，并尽量让其内容在编辑器中可见（如宽度不超过80字符，高度不超过40行）。
++   **简洁的函数范围和可见大小**— 和空白行一样，我限制每个函数的内容，使其更易于编写、理解、维护和增强。我努力保持每个函数简单，并尽量让其内容在编辑器中可见（如宽度不超过 80 字符，高度不超过 40 行）。
 
 **可视化风格指南**— 虽然编码标准可以帮助程序员理解、编写和维护代码，但可视化风格指南可以帮助数据分析师开发一致、有用和有意义的视觉效果。它们也能通过提供一致、设计良好、易于理解和用户友好的视觉效果来惠及数据分析项目中的最终用户。以下是我的团队采纳的一些视觉风格指南。
 
@@ -194,11 +194,11 @@ Microsoft Visual Studio Professional 是一个集成开发环境（IDE），用�
 
 **相关：**
 
-+   [数据科学团队的模型：国际象棋与跳棋](/2021/04/models-data-science-teams-chess-checkers.html)
++   数据科学团队的模型：国际象棋与跳棋
 
-+   [在小公司构建数据科学团队的六个建议](/2021/01/six-tips-building-data-science-team-small-company.html)
++   在小公司构建数据科学团队的六个建议
 
-+   [数据科学家的缺失团队](/2020/11/missing-teams-data-scientists.html)
++   数据科学家的缺失团队
 
 ### 更多相关内容
 
@@ -210,6 +210,6 @@ Microsoft Visual Studio Professional 是一个集成开发环境（IDE），用�
 
 +   [背景、连贯性和协作对于数据科学成功至关重要](https://www.kdnuggets.com/2022/01/context-consistency-collaboration-essential-data-science-success.html)
 
-+   [数据编排：生成AI成功与失败的分水岭](https://www.kdnuggets.com/2024/07/astronomer/data-orchestration-the-dividing-line-between-generative-ai-success-and-failure)
++   [数据编排：生成 AI 成功与失败的分水岭](https://www.kdnuggets.com/2024/07/astronomer/data-orchestration-the-dividing-line-between-generative-ai-success-and-failure)
 
 +   [数据科学方法推动业务成功](https://www.kdnuggets.com/2023/10/nwu-data-science-methods-drive-business-success)

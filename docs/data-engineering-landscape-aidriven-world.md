@@ -1,26 +1,26 @@
-# AI驱动世界中的数据工程格局
+# AI 驱动世界中的数据工程格局
 
-> 原文：[https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html](https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html)
+> 原文：[`www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html`](https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html)
 
-![AI驱动世界中的数据工程格局](../Images/06314b15cabcda76c7e65b0a69d8f62d.png)
+![AI 驱动世界中的数据工程格局](img/06314b15cabcda76c7e65b0a69d8f62d.png)
 
 图片来自 Bing 图像创作者
 
-其中一个最大的影响是“提示工程”的广泛采用，这本质上是引导AI协助编码相关任务的技能。我看到安德烈·卡帕斯基在Twitter上开玩笑说：“最炙手可热的新编程语言是英语。”
+其中一个最大的影响是“提示工程”的广泛采用，这本质上是引导 AI 协助编码相关任务的技能。我看到安德烈·卡帕斯基在 Twitter 上开玩笑说：“最炙手可热的新编程语言是英语。”
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-生成式AI还引发了一场淘金热，数十家非常早期的初创公司竞相开发一种AI，可以查询数据仓库并用自然语言回答数据消费者提出的临时问题。蒙特卡罗首席技术官[Shane Murray](https://www.linkedin.com/in/shanemurray5/)评论道：“这将极大简化自助分析过程，并进一步普及数据，但考虑到数据管道的复杂性，对于更高级的分析，超越基本的‘指标提取’会非常困难。”
+生成式 AI 还引发了一场淘金热，数十家非常早期的初创公司竞相开发一种 AI，可以查询数据仓库并用自然语言回答数据消费者提出的临时问题。蒙特卡罗首席技术官[Shane Murray](https://www.linkedin.com/in/shanemurray5/)评论道：“这将极大简化自助分析过程，并进一步普及数据，但考虑到数据管道的复杂性，对于更高级的分析，超越基本的‘指标提取’会非常困难。”
 
 穆雷提到：“当我评估数据工程候选人时，我关注的是他们的影响力和迅速上手的能力。”这可以体现在他们的主要工作中，也可以通过贡献开源项目体现。在这两种情况下，关键在于你做了什么影响，而不是你是否在那里。
 

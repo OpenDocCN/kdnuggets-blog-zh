@@ -1,8 +1,8 @@
 # 提示工程师：技能、学习路线图和薪资
 
-> 原文：[https://www.kdnuggets.com/prompt-engineer-skills-learning-roadmap-and-salary](https://www.kdnuggets.com/prompt-engineer-skills-learning-roadmap-and-salary)
+> 原文：[`www.kdnuggets.com/prompt-engineer-skills-learning-roadmap-and-salary`](https://www.kdnuggets.com/prompt-engineer-skills-learning-roadmap-and-salary)
 
-![提示工程师分解](../Images/3be699fab84450787e5a5bcece1f9215.png)
+![提示工程师分解](img/3be699fab84450787e5a5bcece1f9215.png)
 
 作者提供的图片
 
@@ -46,7 +46,7 @@
 
 链接: [机器学习专业化](https://imp.i384100.net/y2M73D)
 
-首先，你需要对机器学习有一个良好的理解。斯坦福大学提供了这门课程，而 DeepLearning.AI 专门针对那些希望通过掌握机器学习的基本概念进入人工智能领域，同时通过一个3课程的项目来发展实际的机器学习技能的人。
+首先，你需要对机器学习有一个良好的理解。斯坦福大学提供了这门课程，而 DeepLearning.AI 专门针对那些希望通过掌握机器学习的基本概念进入人工智能领域，同时通过一个 3 课程的项目来发展实际的机器学习技能的人。
 
 ### 自然语言处理
 
@@ -76,9 +76,9 @@
 
 根据公司、地点和经验年限的不同，你的薪资会有所变化。
 
-如果我们看看英国伦敦的提示工程师，入门级提示工程师的起薪在30,000英镑到40,000英镑之间。随着经验的积累，你可以期望赚取40,000英镑到50,000英镑。在高级职位，提示工程师的薪资范围从50,000英镑到70,000英镑。
+如果我们看看英国伦敦的提示工程师，入门级提示工程师的起薪在 30,000 英镑到 40,000 英镑之间。随着经验的积累，你可以期望赚取 40,000 英镑到 50,000 英镑。在高级职位，提示工程师的薪资范围从 50,000 英镑到 70,000 英镑。
 
-话虽如此，在美国，一些提示工程师在一些领先公司每年的收入高达350,000美元。
+话虽如此，在美国，一些提示工程师在一些领先公司每年的收入高达 350,000 美元。
 
 如果你想赚大钱，并且渴望追求提示工程的职业生涯，可以看看提示工程中的更多专业技能，例如多模态提示工程、提示安全和提示测试自动化。
 
@@ -86,18 +86,18 @@
 
 如果你正在考虑提示工程，现在是进行职业转型的时候了。生成式 AI 市场只会继续增长，需要人们来满足这些高需求。
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**** 是一名数据科学家、自由技术作家、以及KDnuggets的编辑和社区经理。她特别关注提供数据科学职业建议或教程以及与数据科学相关的理论知识。Nisha 涵盖了广泛的话题，并希望探索人工智能如何有助于人类寿命的延续。作为一个热衷的学习者，Nisha 旨在拓宽自己的技术知识和写作技能，同时帮助指导他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**** 是一名数据科学家、自由技术作家、以及 KDnuggets 的编辑和社区经理。她特别关注提供数据科学职业建议或教程以及与数据科学相关的理论知识。Nisha 涵盖了广泛的话题，并希望探索人工智能如何有助于人类寿命的延续。作为一个热衷的学习者，Nisha 旨在拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
 +   [数据科学家解析：技能、认证和薪资](https://www.kdnuggets.com/data-scientist-breakdown-skills-certifications-and-salary)
 
-+   [每个机器学习工程师都应该具备的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该具备的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets新闻，12月14日：3门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [初级与高级数据科学家薪资：有什么区别？](https://www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html)
 
-+   [我如何在14年的数据分析/科学职业生涯中将薪资提升14倍](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
++   [我如何在 14 年的数据分析/科学职业生涯中将薪资提升 14 倍](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
 
-+   [2022年技术专家薪资简单指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
++   [2022 年技术专家薪资简单指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)

@@ -1,32 +1,32 @@
 # 机器学习的三种类型入门指南
 
-> 原文：[https://www.kdnuggets.com/2019/11/beginners-guide-three-types-machine-learning.html](https://www.kdnuggets.com/2019/11/beginners-guide-three-types-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/11/beginners-guide-three-types-machine-learning.html`](https://www.kdnuggets.com/2019/11/beginners-guide-three-types-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **作者：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)，数据科学家**
 
-![图](../Images/97361e3877e513bd6978ee0085f57086.png)
+![图](img/97361e3877e513bd6978ee0085f57086.png)
 
-使用[Yellowbrick](https://www.scikit-yb.org/en/latest/)可视化KMeans性能
+使用[Yellowbrick](https://www.scikit-yb.org/en/latest/)可视化 KMeans 性能
 
 机器学习问题通常可以分为三种类型。分类和回归被称为监督学习，无监督学习在机器学习应用的上下文中通常指的是聚类。
 
-在接下来的文章中，我将简要介绍这三种问题，并将包括在流行的Python库[scikit-learn](https://scikit-learn.org/stable/index.html)中的演示。
+在接下来的文章中，我将简要介绍这三种问题，并将包括在流行的 Python 库[scikit-learn](https://scikit-learn.org/stable/index.html)中的演示。
 
 在开始之前，我将简要解释监督学习和无监督学习的含义。
 
-**监督学习：** *在监督学习中，你有一组已知的输入（特征）和一组已知的输出（标签）。传统上这些被称为X和y。算法的目标是学习将输入映射到输出的映射函数。这样，当给出新的X示例时，机器可以正确预测相应的y标签。*
+**监督学习：** *在监督学习中，你有一组已知的输入（特征）和一组已知的输出（标签）。传统上这些被称为 X 和 y。算法的目标是学习将输入映射到输出的映射函数。这样，当给出新的 X 示例时，机器可以正确预测相应的 y 标签。*
 
-**无监督学习：** *在无监督学习中，你只有一组输入（X），没有对应的标签（y）。算法的目标是发现数据中之前未知的模式。这些算法通常用于发现相似样本X的有意义的簇，从而在数据中找到固有的类别。*
+**无监督学习：** *在无监督学习中，你只有一组输入（X），没有对应的标签（y）。算法的目标是发现数据中之前未知的模式。这些算法通常用于发现相似样本 X 的有意义的簇，从而在数据中找到固有的类别。*
 
 ### 分类
 
 在分类中，输出（y）是类别。这些类别可以是二元的，例如，如果我们将垃圾邮件与非垃圾邮件进行分类。它们也可以是多个类别，比如对[花卉](https://archive.ics.uci.edu/ml/datasets/iris)的分类，这被称为多类分类。
 
-让我们通过一个使用scikit-learn的简单分类示例来演示。如果你还没有安装，可以通过pip或conda进行安装，安装方法详见[这里](https://scikit-learn.org/stable/install.html)。
+让我们通过一个使用 scikit-learn 的简单分类示例来演示。如果你还没有安装，可以通过 pip 或 conda 进行安装，安装方法详见[这里](https://scikit-learn.org/stable/install.html)。
 
-Scikit-learn有多个可以通过库直接访问的数据集。为了方便起见，在本文中我将使用这些示例数据集。为了说明分类，我将使用葡萄酒数据集，这是一个多类分类问题。在数据集中，输入（X）包括与每种葡萄酒类型相关的13个特征。已知的输出（y）是葡萄酒类型，在数据集中被赋予了数字0、1或2。
+Scikit-learn 有多个可以通过库直接访问的数据集。为了方便起见，在本文中我将使用这些示例数据集。为了说明分类，我将使用葡萄酒数据集，这是一个多类分类问题。在数据集中，输入（X）包括与每种葡萄酒类型相关的 13 个特征。已知的输出（y）是葡萄酒类型，在数据集中被赋予了数字 0、1 或 2。
 
 我在本文中使用的所有代码的导入如下所示。
 
@@ -49,7 +49,7 @@ from yellowbrick.cluster import KElbowVisualizer
 from yellowbrick.cluster import SilhouetteVisualizer
 ```
 
-在下面的代码中，我正在下载数据并转换为pandas数据框。
+在下面的代码中，我正在下载数据并转换为 pandas 数据框。
 
 ```py
 wine = load_wine()
@@ -87,7 +87,7 @@ for classifier in classifiers:
     print("model score: %.3f" % f1_score(y_test_w, y_pred_w, average='weighted'))
 ```
 
-![](../Images/b228fa9a0ee7af8de72a061aabe63c88.png)
+![](img/b228fa9a0ee7af8de72a061aabe63c88.png)
 
 完美的 F1 分数是 1.0，因此，数值越接近 1.0，模型性能越好。以上结果表明，随机森林分类器是这个数据集的最佳模型。
 
@@ -131,17 +131,17 @@ regressors = [
     print("mean squared error: %.3f" % sqrt(mean_squared_error(y_test_b, y_pred_b)))
 ```
 
-![](../Images/112c20479514357f35a9a727672f387f.png)
+![](img/112c20479514357f35a9a727672f387f.png)
 
-RMSE分数表明线性回归和岭回归算法在这个数据集中表现最好。
+RMSE 分数表明线性回归和岭回归算法在这个数据集中表现最好。
 
 ### 无监督学习
 
 无监督学习有许多不同类型，但为了简化，这里我将重点关注[聚类方法](https://en.wikipedia.org/wiki/Cluster_analysis)。有许多不同的聚类算法，它们使用略微不同的技术来寻找输入的簇。
 
-可能最广泛使用的方法之一是K均值（Kmeans）。该算法执行一个迭代过程，其中启动了指定数量的随机生成的均值。计算每个数据点到质心的距离度量，[欧几里得](https://en.wikipedia.org/wiki/Euclidean_distance)距离，从而创建相似值的簇。每个簇的质心随后成为新的均值，这个过程会重复进行，直到达到最佳结果。
+可能最广泛使用的方法之一是 K 均值（Kmeans）。该算法执行一个迭代过程，其中启动了指定数量的随机生成的均值。计算每个数据点到质心的距离度量，[欧几里得](https://en.wikipedia.org/wiki/Euclidean_distance)距离，从而创建相似值的簇。每个簇的质心随后成为新的均值，这个过程会重复进行，直到达到最佳结果。
 
-让我们使用我们在分类任务中使用的葡萄酒数据集，去掉y标签，看看K均值算法能多好地从输入中识别出葡萄酒类型。
+让我们使用我们在分类任务中使用的葡萄酒数据集，去掉 y 标签，看看 K 均值算法能多好地从输入中识别出葡萄酒类型。
 
 由于我们仅使用输入来建立此模型，我将使用稍微不同的方法将数据拆分为测试集和训练集。
 
@@ -152,7 +152,7 @@ train_w = X_w[msk]
 test_w = X_w[~msk]
 ```
 
-由于K均值依赖于距离度量来确定簇，因此通常在训练模型之前需要进行特征缩放（确保所有特征具有相同的尺度）。在下面的代码中，我使用MinMaxScaler对特征进行缩放，使所有值落在0和1之间。
+由于 K 均值依赖于距离度量来确定簇，因此通常在训练模型之前需要进行特征缩放（确保所有特征具有相同的尺度）。在下面的代码中，我使用 MinMaxScaler 对特征进行缩放，使所有值落在 0 和 1 之间。
 
 ```py
 x = train_w.values
@@ -161,7 +161,7 @@ x_scaled = min_max_scaler.fit_transform(x)
 X_scaled = pd.DataFrame(x_scaled,columns=train_w.columns)
 ```
 
-使用K均值时，你必须指定算法应使用的簇数量。因此，第一步之一是确定最佳簇数量。这是通过迭代不同的k值并将结果绘制在图表上来实现的。这被称为肘部法则，因为它通常生成一个看起来有点像肘部曲线的图。黄砖（yellowbrick）[库](https://www.scikit-yb.org/en/latest/quickstart.html)（这是一个非常适合可视化scikit-learn模型的库，可以通过pip安装）对此有一个非常好的图。下面的代码生成了这个可视化。
+使用 K 均值时，你必须指定算法应使用的簇数量。因此，第一步之一是确定最佳簇数量。这是通过迭代不同的 k 值并将结果绘制在图表上来实现的。这被称为肘部法则，因为它通常生成一个看起来有点像肘部曲线的图。黄砖（yellowbrick）[库](https://www.scikit-yb.org/en/latest/quickstart.html)（这是一个非常适合可视化 scikit-learn 模型的库，可以通过 pip 安装）对此有一个非常好的图。下面的代码生成了这个可视化。
 
 ```py
 model = KMeans()
@@ -170,11 +170,11 @@ visualizer.fit(X_scaled)
 visualizer.show()
 ```
 
-![](../Images/a4ff56635ba4125cf527a067392ceba7.png)
+![](img/a4ff56635ba4125cf527a067392ceba7.png)
 
 通常，我们不会知道数据集中使用聚类技术时有多少类别。然而，在这种情况下，我们知道数据中有三种葡萄酒类型——曲线正确地选择了三作为模型中使用的最佳簇数量。
 
-下一步是初始化K均值算法，并将模型拟合到训练数据中，并评估算法对数据的聚类效果。
+下一步是初始化 K 均值算法，并将模型拟合到训练数据中，并评估算法对数据的聚类效果。
 
 一种用于此的办法称为 [轮廓系数](https://en.wikipedia.org/wiki/Silhouette_(clustering))。它衡量集群内部值的一致性。换句话说，它测量每个集群内的值彼此有多相似，以及集群之间的分离程度。轮廓系数是对每个值进行计算的，范围从 -1 到 +1。这些值然后被绘制成轮廓图。再次，yellowbrick 提供了一种简单的方式来构建这种图。下面的代码为酒类数据集创建了这个可视化。
 
@@ -184,7 +184,7 @@ visualizer = SilhouetteVisualizer(model, colors='yellowbrick')visualizer.fit(X_s
 visualizer.show()
 ```
 
-![](../Images/97361e3877e513bd6978ee0085f57086.png)
+![](img/97361e3877e513bd6978ee0085f57086.png)
 
 轮廓图可以按以下方式解读：
 
@@ -196,7 +196,7 @@ visualizer.show()
 
 +   如果每个集群的宽度不均匀，那么可能使用了错误的 k 值。
 
-上面的酒类数据集的图表显示，集群0可能不如其他集群一致，因为大多数数据点低于平均分，而且有少数数据点的分数低于0。
+上面的酒类数据集的图表显示，集群 0 可能不如其他集群一致，因为大多数数据点低于平均分，而且有少数数据点的分数低于 0。
 
 轮廓系数在比较一个算法与另一个算法或不同的 k 值时特别有用。
 
@@ -204,27 +204,27 @@ visualizer.show()
 
 感谢阅读！
 
-**简介：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)** 通过自学数据科学。数据科学家 @ Holiday Extras。alGo的联合创始人。
+**简介：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)** 通过自学数据科学。数据科学家 @ Holiday Extras。alGo 的联合创始人。
 
 [原文](https://towardsdatascience.com/beginners-guide-to-the-three-types-of-machine-learning-3141730ef45d)。经授权转载。
 
 **相关：**
 
-+   [机器学习分类：基于数据集的图解](/2018/11/machine-learning-classification-dataset-based-pictorial.html)
++   机器学习分类：基于数据集的图解
 
-+   [可解释的机器学习的 Python 库](/2019/09/python-libraries-interpretable-machine-learning.html)
++   可解释的机器学习的 Python 库
 
-+   [数据科学的五个命令行工具](/2019/07/five-command-line-tools-data-science.html)
++   数据科学的五个命令行工具
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -238,6 +238,6 @@ visualizer.show()
 
 +   [可视化框架类型](https://www.kdnuggets.com/types-of-visualization-frameworks)
 
-+   [KDnuggets 新闻，12月14日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
 +   [OpenAI API 初学者指南：你的易于跟随的入门指南](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)

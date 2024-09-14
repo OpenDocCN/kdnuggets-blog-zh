@@ -1,8 +1,8 @@
 # 使用网格搜索和随机搜索进行超参数调优
 
-> 原文：[https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
+> 原文：[`www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html`](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 
-![使用网格搜索和随机搜索进行超参数调优](../Images/0209199f770a3f9c2a8349dc5ca5f3c8.png)
+![使用网格搜索和随机搜索进行超参数调优](img/0209199f770a3f9c2a8349dc5ca5f3c8.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
 
 * * *
 
@@ -48,13 +48,13 @@
 
 我们可以指定随机搜索应该尝试的总运行次数，然后再返回最佳模型。
 
-现在你对随机搜索和网格搜索的基本原理有了了解，我将向你展示如何使用Scikit-Learn库实现这些技术。
+现在你对随机搜索和网格搜索的基本原理有了了解，我将向你展示如何使用 Scikit-Learn 库实现这些技术。
 
 # 使用网格搜索和随机搜索优化随机森林分类器
 
-## 第1步：加载数据集
+## 第 1 步：加载数据集
 
-在Kaggle上下载[酒质数据集](https://www.kaggle.com/datasets/rajyellow46/wine-quality)，然后输入以下代码行，使用[Pandas](https://pandas.pydata.org/)库读取数据：
+在 Kaggle 上下载[酒质数据集](https://www.kaggle.com/datasets/rajyellow46/wine-quality)，然后输入以下代码行，使用[Pandas](https://pandas.pydata.org/)库读取数据：
 
 ```py
 import pandas as pd
@@ -65,13 +65,13 @@ df.head()
 
 数据框的头部如下所示：
 
-![使用网格搜索和随机搜索进行超参数调优](../Images/cb924c16c04680333424a19f249a9ab4.png)
+![使用网格搜索和随机搜索进行超参数调优](img/cb924c16c04680333424a19f249a9ab4.png)
 
-## 第2步：数据预处理
+## 第 2 步：数据预处理
 
-目标变量“quality”包含范围在1到10之间的值。
+目标变量“quality”包含范围在 1 到 10 之间的值。
 
-我们将通过将所有质量值小于或等于5的数据点分配为0，将其余观察值分配为1，将其转化为二分类任务：
+我们将通过将所有质量值小于或等于 5 的数据点分配为 0，将其余观察值分配为 1，将其转化为二分类任务：
 
 ```py
 import numpy as np
@@ -89,7 +89,7 @@ y = df2[['target']]
 
 ```
 
-## 第3步：构建模型
+## 第 3 步：构建模型
 
 现在，让我们实例化一个随机森林分类器。我们将调整该模型的超参数，以创建适合我们数据集的最佳算法：
 
@@ -100,21 +100,21 @@ rf = RandomForestClassifier()
 
 ```
 
-## 第4步：使用Scikit-Learn实现网格搜索
+## 第 4 步：使用 Scikit-Learn 实现网格搜索
 
 ### 定义超参数空间
 
 我们现在将尝试调整该模型的以下超参数集合：
 
-1.  **“Max_depth”**：该超参数表示随机森林模型中每棵树的最大层级。较深的树可以很好地捕捉训练数据中的大量信息，但对测试数据的泛化能力较差。默认情况下，Scikit-Learn库中的该值设置为“None”，这意味着树会完全扩展。
+1.  **“Max_depth”**：该超参数表示随机森林模型中每棵树的最大层级。较深的树可以很好地捕捉训练数据中的大量信息，但对测试数据的泛化能力较差。默认情况下，Scikit-Learn 库中的该值设置为“None”，这意味着树会完全扩展。
 
-1.  **“Max_features”**：随机森林模型在每次分裂时允许尝试的最大特征数量。Scikit-Learn中的默认值设置为数据集中变量总数的平方根。
+1.  **“Max_features”**：随机森林模型在每次分裂时允许尝试的最大特征数量。Scikit-Learn 中的默认值设置为数据集中变量总数的平方根。
 
-1.  **“N_estimators”**：森林中决策树的数量。Scikit-Learn中的默认估计器数量为10。
+1.  **“N_estimators”**：森林中决策树的数量。Scikit-Learn 中的默认估计器数量为 10。
 
-1.  “Min_samples_leaf”：每棵树的叶节点所需的最小样本数。Scikit-Learn中的默认值为1。
+1.  “Min_samples_leaf”：每棵树的叶节点所需的最小样本数。Scikit-Learn 中的默认值为 1。
 
-1.  **“Min_samples_split”**：每棵树内部节点分裂所需的最小样本数。Scikit-Learn中的默认值为2。
+1.  **“Min_samples_split”**：每棵树内部节点分裂所需的最小样本数。Scikit-Learn 中的默认值为 2。
 
 我们现在将创建一个包含所有上述超参数的多个可能值的字典。这也叫做**超参数空间**，将会通过它来寻找最佳的参数组合：
 
@@ -152,7 +152,7 @@ print('Best score is: '+str(model_grid.best_score_))
 
 最佳模型的准确率约为 0.74，其超参数如下：
 
-![使用网格搜索和随机搜索进行超参数调优](../Images/6d3aac2ac36e11b8123c41c55a83a71c.png)
+![使用网格搜索和随机搜索进行超参数调优](img/6d3aac2ac36e11b8123c41c55a83a71c.png)
 
 现在，让我们在相同的数据集上使用随机搜索，看看是否能得到类似的结果。
 
@@ -202,7 +202,7 @@ print('Best score is: '+str(model_random.best_score_))
 
 随机搜索找到的最佳超参数如下：
 
-![使用网格搜索和随机搜索进行超参数调优](../Images/734136ba652922a356c39a64f55a9c84.png)
+![使用网格搜索和随机搜索进行超参数调优](img/734136ba652922a356c39a64f55a9c84.png)
 
 所有构建的模型的最高准确率也大约为 0.74。
 
@@ -298,4 +298,4 @@ print('Best random search score is: '+str(model_random.best_score_))
 
 +   [通过 Uplimit 的“机器学习搜索”课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)

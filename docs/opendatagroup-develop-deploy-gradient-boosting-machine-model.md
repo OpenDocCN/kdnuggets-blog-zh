@@ -1,6 +1,6 @@
 # 学习如何开发和部署梯度提升机器模型
 
-> 原文：[https://www.kdnuggets.com/2017/01/opendatagroup-develop-deploy-gradient-boosting-machine-model.html](https://www.kdnuggets.com/2017/01/opendatagroup-develop-deploy-gradient-boosting-machine-model.html)
+> 原文：[`www.kdnuggets.com/2017/01/opendatagroup-develop-deploy-gradient-boosting-machine-model.html`](https://www.kdnuggets.com/2017/01/opendatagroup-develop-deploy-gradient-boosting-machine-model.html)
 
 |
 
@@ -8,7 +8,7 @@
 
 &#124;
 
-&#124; [![Open Data Group](../Images/80fc2e94ce32ba46d150323eed4d0779.png)](https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&referrer=&eventid=1346491&sessionid=1&key=CBC818C1F430846F636B559872FC2CD5&regTag=&sourcepage=register) &#124;
+&#124; ![Open Data Group](https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&referrer=&eventid=1346491&sessionid=1&key=CBC818C1F430846F636B559872FC2CD5&regTag=&sourcepage=register) &#124;
 
 &#124;
 
@@ -30,15 +30,15 @@
 
 ## 我们的 3 个顶级课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路！ ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能！ ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 服务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路！ ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能！ ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 服务
 
 * * *
 
-**2017年1月25日 - 上午10点 PST（下午1点 EST）**
+**2017 年 1 月 25 日 - 上午 10 点 PST（下午 1 点 EST）**
 
 ### [立即注册！](https://event.on24.com/eventRegistration/EventLobbyServlet?target=reg20.jsp&referrer=&eventid=1346491&sessionid=1&key=CBC818C1F430846F636B559872FC2CD5&regTag=&sourcepage=register)
 
-&#124; ![](../Images/bd41bda4287077d7667b750590c362c4.png) &#124; Matthew 是 Open Data Group 的数据科学家和软件工程师。他拥有西北大学数学博士学位，研究过弦理论和拓扑场论的几何。在 ODG，Matthew 专注于使用 FastScore 开发和部署机器学习模型。 &#124;
+&#124; ![](img/bd41bda4287077d7667b750590c362c4.png) &#124; Matthew 是 Open Data Group 的数据科学家和软件工程师。他拥有西北大学数学博士学位，研究过弦理论和拓扑场论的几何。在 ODG，Matthew 专注于使用 FastScore 开发和部署机器学习模型。 &#124;
 
 &#124;   &#124;
 
@@ -46,7 +46,7 @@
 
 &#124;
 
-&#124; [![Open Data Group](../Images/57171b6f6738f7ddfb9870c80fa95908.png)](http://www.opendatagroup.com/) &#124;
+&#124; ![Open Data Group](http://www.opendatagroup.com/) &#124;
 
 &#124;
 
@@ -54,7 +54,7 @@
 
 ### 更多相关主题
 
-+   [开发有效编码常规的5个关键步骤](https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html)
++   [开发有效编码常规的 5 个关键步骤](https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html)
 
 +   [提升机器学习算法：概述](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)
 

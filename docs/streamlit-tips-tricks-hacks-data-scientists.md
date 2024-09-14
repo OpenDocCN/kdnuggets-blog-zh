@@ -1,8 +1,8 @@
 # Streamlit 提示、技巧和黑客技巧，适合数据科学家
 
-> 原文：[https://www.kdnuggets.com/2021/07/streamlit-tips-tricks-hacks-data-scientists.html](https://www.kdnuggets.com/2021/07/streamlit-tips-tricks-hacks-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2021/07/streamlit-tips-tricks-hacks-data-scientists.html`](https://www.kdnuggets.com/2021/07/streamlit-tips-tricks-hacks-data-scientists.html)
 
-[评论](#comments)
+评论
 
 **由 [Kaveh Bakhtiyari](https://kaveh.bakhtiyari.com/)，人工智能博士候选人，SSENSE 数据科学家**
 
@@ -12,11 +12,11 @@ SSENSE 的数据科学团队通常构建非常复杂的工具和仪表板。另�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -68,11 +68,11 @@ Streamlit 应用程序以类似脚本的格式开发。这意味着对应用程�
 
 假设你有一个按钮（`st.button`）用于启动一个过程，在结果屏幕中，你希望给用户一些交互选项，比如另一个复选框、单选按钮或简单的另一个按钮。在这种情况下，当你点击第一个按钮（我们称之为`button_run`）时，它在重新运行整个代码时会变为`True`。这没有问题，应用运行流畅。
 
-![图片](../Images/4cab57e3eeb273633bf00868eb547656.png)
+![图片](img/4cab57e3eeb273633bf00868eb547656.png)
 
 现在，在生成的页面上，有另一个按钮（我们称之为 `button_filter`）用于过滤结果。如果你现在点击第二个按钮（`button_filter`），它的值变为 `True`，Streamlit 会再次运行整个代码。但问题是现在第一个按钮（`button_run`）变成了 `False`，因为我们没有点击它。在这种情况下，当 Streamlit 重新运行整个代码时，它假设 `button_run` 没有被点击，而 `button_filter` 被点击了。它不会记住 `button_run` 之前被点击过。因此，`button_filter` 点击的代码将永远不会被执行，因为 `button_filter` 本身是第一个按钮 `button_run` 点击的结果。
 
-![Image](../Images/2437e39f0d955460a0d5bdb922d2c9f7.png)
+![Image](img/2437e39f0d955460a0d5bdb922d2c9f7.png)
 
 在这种情况下，我们应该注册事件，以便 Streamlit 可以记住当用户点击第一个按钮时，并且一旦下一个按钮被点击时，它可以理解这些是连续的操作，两者都应该被视为点击。
 
@@ -142,7 +142,7 @@ Streamlit 有非常全面且有用的缓存文档，老实说，这是它最有�
 
 ### UI 黑客
 
-![](../Images/174d8e25e70c2ceb5398dcdedf7f7efc.png)
+![](img/174d8e25e70c2ceb5398dcdedf7f7efc.png)
 
 Streamlit 的简洁性在于你不需要处理 UI，它自带预构建的响应式 UI 元素，这些元素会优雅地放置在你的页面上。即使在最近的版本中，他们提供了新的 beta 更新，允许你创建列并在其中排列元素，但对 UI 的自定义仍然有限。
 
@@ -152,96 +152,96 @@ Streamlit 的简洁性在于你不需要处理 UI，它自带预构建的响应�
 
 在 [Streamlit Github 上提出的想法](https://github.com/streamlit/streamlit/issues/395) 是限制应用程序部署后汉堡菜单选项的数量，但截至今天，这个问题仍然开放，我们无法直接管理它们。因此，我提出了我的 CSS 解决方案来解决这个问题。
 
-![](../Images/3f26d4ff8debd215650e27fb445c425d.png)
+![](img/3f26d4ff8debd215650e27fb445c425d.png)
 
 在我提出的解决方案中，你可以移除（隐藏）Streamlit 页脚，并控制汉堡菜单中的项目。你只需使用 `st.markdown` 将以下 CSS 注入到你的应用程序中，并允许“危险的” HTML 代码。
 
 上述数字在 `li:nth-of-type(n)` 中指的是汉堡菜单中的项目元素，它们的顺序可能在未来的 Streamlit 更新中发生变化。
 
-![](../Images/c35a47b119a8f4d241d9c3743b069d88.png)
+![](img/c35a47b119a8f4d241d9c3743b069d88.png)
 
-此外，目前在汉堡菜单中（第3项）有一个名为“**部署此应用**”的选项。只有当应用程序通过回环本地 IP 地址（`localhost` 或 `127.0.0.1`）访问时，此项目才会显示。如果你通过 LAN/WAN IP 地址访问你的应用程序，则不会显示此项目。
+此外，目前在汉堡菜单中（第 3 项）有一个名为“**部署此应用**”的选项。只有当应用程序通过回环本地 IP 地址（`localhost` 或 `127.0.0.1`）访问时，此项目才会显示。如果你通过 LAN/WAN IP 地址访问你的应用程序，则不会显示此项目。
 
 ### 录制屏幕视频
 
 这个功能在 `version 0.55.0` 中引入，我个人对这个功能感到兴奋，因为它允许我们录制我们的应用程序用于培训和演示目的。很快，我们意识到这个功能在其他访问我们 Streamlit 应用程序的用户中不起作用，他们点击该选项时会收到以下消息。
 
-![](../Images/27829e1ad85ecfa596f5ebb6bb347d4b.png)
+![](img/27829e1ad85ecfa596f5ebb6bb347d4b.png)
 
 由于浏览器实施和强加的隐私限制，这个功能仅在以下条件下有效：
 
-+   仅在最新版本的Chrome、Firefox和Edge上
++   仅在最新版本的 Chrome、Firefox 和 Edge 上
 
 +   访问`localhost`或`127.0.0.1`
 
-+   如果不是本地访问，必须使用SSL证书（https）
++   如果不是本地访问，必须使用 SSL 证书（https）
 
-如果你的应用在代理后运行，例如`Nginx`，并且你打算使用此功能，请确保它通过SSL证书进行安全保护。目前，Streamlit本身不支持SSL，但可以在带有SSL证书的代理后部署。
+如果你的应用在代理后运行，例如`Nginx`，并且你打算使用此功能，请确保它通过 SSL 证书进行安全保护。目前，Streamlit 本身不支持 SSL，但可以在带有 SSL 证书的代理后部署。
 
 ### 组件
 
-自从Streamlit组件的引入以来，开发者们开始构建出令人惊叹的组件，可以在Streamlit应用中使用。如果你愿意，你可以使用Streamlit组件API构建自己的组件。Streamlit还有一个组件库，展示了一些有用且有趣的公开组件。在这些组件中，我挑选了几个我在SSENSE中构建出色应用所使用的组件。
+自从 Streamlit 组件的引入以来，开发者们开始构建出令人惊叹的组件，可以在 Streamlit 应用中使用。如果你愿意，你可以使用 Streamlit 组件 API 构建自己的组件。Streamlit 还有一个组件库，展示了一些有用且有趣的公开组件。在这些组件中，我挑选了几个我在 SSENSE 中构建出色应用所使用的组件。
 
-### ACE编辑器
+### ACE 编辑器
 
-这个编辑器提供了针对不同编程语言的颜色编码编辑器。我个人在我的应用中使用了很多JSON数据，我使用这个编辑器查看和编辑我的JSON内容。它非常出色，因为它还可以捕捉我的格式结构和错误。
+这个编辑器提供了针对不同编程语言的颜色编码编辑器。我个人在我的应用中使用了很多 JSON 数据，我使用这个编辑器查看和编辑我的 JSON 内容。它非常出色，因为它还可以捕捉我的格式结构和错误。
 
-![](../Images/deb2a35760340ac9539096b2e17e341d.png)
+![](img/deb2a35760340ac9539096b2e17e341d.png)
 
-[https://github.com/okld/streamlit-ace](https://github.com/okld/streamlit-ace)
+[`github.com/okld/streamlit-ace`](https://github.com/okld/streamlit-ace)
 
-如果你对Streamlit标准的多行文本框感到厌倦，这个组件可能是一个很好的替代方案。
+如果你对 Streamlit 标准的多行文本框感到厌倦，这个组件可能是一个很好的替代方案。
 
 ### Ag-Grid
 
-Streamlit可以处理数据框，并可以使用`st.write`或`st.dataframe`以表格格式显示它们。然而，默认情况下，Streamlit不提供数据框呈现的自定义控制，除非点击列名进行排序。
+Streamlit 可以处理数据框，并可以使用`st.write`或`st.dataframe`以表格格式显示它们。然而，默认情况下，Streamlit 不提供数据框呈现的自定义控制，除非点击列名进行排序。
 
-Ag-Grid是一个可以导入到Streamlit中的网格组件。使用这个组件，你不仅可以呈现你的数据框，还可以在网格单元格中包含链接、图片、复选框等，并进行数据过滤、搜索、汇总和分组。
+Ag-Grid 是一个可以导入到 Streamlit 中的网格组件。使用这个组件，你不仅可以呈现你的数据框，还可以在网格单元格中包含链接、图片、复选框等，并进行数据过滤、搜索、汇总和分组。
 
-![](../Images/edde0c61084ba5c10a4ee097cde34e79.png)
+![](img/edde0c61084ba5c10a4ee097cde34e79.png)
 
-[https://github.com/PablocFonseca/streamlit-aggrid](https://github.com/PablocFonseca/streamlit-aggrid)
+[`github.com/PablocFonseca/streamlit-aggrid`](https://github.com/PablocFonseca/streamlit-aggrid)
 
-如果你经常需要展示数据框，也许是时候尝试Ag-Grid，看看它在你的应用中的巨大潜力。
+如果你经常需要展示数据框，也许是时候尝试 Ag-Grid，看看它在你的应用中的巨大潜力。
 
-### Lottie动画
+### Lottie 动画
 
-最后但同样重要的是，我列表中的组件是Lottie动画。如果你查看[lottiefiles.com](https://lottiefiles.com/)，你会看到成千上万的基于矢量的动画，格式多样，如JSON，可以放置在你的应用中。这个组件可以让你通过简单地提供JSON文件来展示这些Lottie动画。
+最后但同样重要的是，我列表中的组件是 Lottie 动画。如果你查看[lottiefiles.com](https://lottiefiles.com/)，你会看到成千上万的基于矢量的动画，格式多样，如 JSON，可以放置在你的应用中。这个组件可以让你通过简单地提供 JSON 文件来展示这些 Lottie 动画。
 
-![](../Images/589689f3e508e76664bcff4d79271868.png)
+![](img/589689f3e508e76664bcff4d79271868.png)
 
-[https://lottiefiles.com/968-loading](https://lottiefiles.com/968-loading)
+[`lottiefiles.com/968-loading`](https://lottiefiles.com/968-loading)
 
 我个人使用这些动画来展示在加载或计算时设计精美的旋转器。这些动画将为你下一个数据科学项目带来更生动和动态的效果。
 
 ### 最后的话
 
-在这里，我展示了一些开发Streamlit应用的提示和技巧。这些技巧中的一些可能会在未来版本的Streamlit中原生提供，从而不再需要我们进行这些破解，另一方面，它们可能会带来一些更新以防止这些破解。谁知道呢，但我们现在可以享受这些技巧，并期待Streamlit的新功能。
+在这里，我展示了一些开发 Streamlit 应用的提示和技巧。这些技巧中的一些可能会在未来版本的 Streamlit 中原生提供，从而不再需要我们进行这些破解，另一方面，它们可能会带来一些更新以防止这些破解。谁知道呢，但我们现在可以享受这些技巧，并期待 Streamlit 的新功能。
 
-我还要感谢Streamlit社区开发了如此出色的工具。
+我还要感谢 Streamlit 社区开发了如此出色的工具。
 
-**个人简介：[Kaveh Bakhtiyari](https://kaveh.bakhtiyari.com/)** 是人工智能博士生，并且是SSENSE的数据科学家。
+**个人简介：[Kaveh Bakhtiyari](https://kaveh.bakhtiyari.com/)** 是人工智能博士生，并且是 SSENSE 的数据科学家。
 
 [原文](https://medium.com/ssense-tech/streamlit-tips-tricks-and-hacks-for-data-scientists-d928414e0c16)。已获许可转载。
 
 **相关内容：**
 
-+   [使用Streamlit Sharing部署Streamlit应用](/2020/10/deploying-streamlit-apps-streamlit-sharing.html)
++   使用 Streamlit Sharing 部署 Streamlit 应用
 
-+   [使用Streamlit进行主题建模](/2021/05/topic-modeling-streamlit.html)
++   使用 Streamlit 进行主题建模
 
-+   [在AWS上使用Docker Swarm、Traefik和Keycloak部署安全且可扩展的Streamlit应用](/2020/10/deploying-secure-scalable-streamlit-apps-aws-docker-swarm-traefik-keycloak.html)
++   在 AWS 上使用 Docker Swarm、Traefik 和 Keycloak 部署安全且可扩展的 Streamlit 应用
 
 ### 更多相关内容
 
-+   [数据科学家的10个Jupyter Notebook提示与技巧](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
++   [数据科学家的 10 个 Jupyter Notebook 提示与技巧](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
 
-+   [快速数据科学提示与技巧学习SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)
++   [快速数据科学提示与技巧学习 SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)
 
-+   [12个Python开发的VSCode提示与技巧](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
++   [12 个 Python 开发的 VSCode 提示与技巧](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
 
-+   [在Heroku云上部署深度学习Web应用的提示与技巧](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)
++   [在 Heroku 云上部署深度学习 Web 应用的提示与技巧](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)
 
-+   [使用HuggingFace管道和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   [使用 HuggingFace 管道和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 
-+   [Streamlit机器学习备忘单](https://www.kdnuggets.com/2023/01/streamlit-machine-learning-cheat-sheet.html)
++   [Streamlit 机器学习备忘单](https://www.kdnuggets.com/2023/01/streamlit-machine-learning-cheat-sheet.html)

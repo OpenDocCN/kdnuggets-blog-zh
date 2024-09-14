@@ -1,32 +1,32 @@
-# 使用Heroku部署机器学习Web应用程序
+# 使用 Heroku 部署机器学习 Web 应用程序
 
-> 原文：[https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)
+> 原文：[`www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html`](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)
 
-在之前的 [博客文章](/2022/03/build-machine-learning-web-app-5-minutes.html) 中，我展示了如何使用Streamlit库在Python中构建机器学习Web应用程序。最终产品看起来是这样的：
+在之前的 博客文章 中，我展示了如何使用 Streamlit 库在 Python 中构建机器学习 Web 应用程序。最终产品看起来是这样的：
 
-![使用Heroku部署机器学习Web应用程序](../Images/9980a38ef36f656c74bf0006897804b9.png)
+![使用 Heroku 部署机器学习 Web 应用程序](img/9980a38ef36f656c74bf0006897804b9.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-这是一个允许用户输入有关健康和生活方式信息的应用程序，并返回一个输出，预测一个人在10年内患心脏病的可能性。
+这是一个允许用户输入有关健康和生活方式信息的应用程序，并返回一个输出，预测一个人在 10 年内患心脏病的可能性。
 
-如果你想了解更多关于模型以及应用程序如何构建的信息，可以通过这个 [教程](/2022/03/build-machine-learning-web-app-5-minutes.html) 来学习。
+如果你想了解更多关于模型以及应用程序如何构建的信息，可以通过这个 教程 来学习。
 
-否则，你可以简单地访问这个 [Github仓库](https://github.com/Natassha/fhs_model) 并克隆它。它包含了构建和部署Web应用程序所需的所有代码文件。
+否则，你可以简单地访问这个 [Github 仓库](https://github.com/Natassha/fhs_model) 并克隆它。它包含了构建和部署 Web 应用程序所需的所有代码文件。
 
-# 步骤0：前置条件
+# 步骤 0：前置条件
 
-要运行Streamlit web应用程序并将其部署到Heroku，你需要安装一个非GUI的Python代码编辑器（Jupyter Notebook不够用）。我目前使用的是 [Visual Studio Code](https://code.visualstudio.com/download)，但 [PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html) 和 [Atom](https://atom.io/) 也是不错的替代选择。
+要运行 Streamlit web 应用程序并将其部署到 Heroku，你需要安装一个非 GUI 的 Python 代码编辑器（Jupyter Notebook 不够用）。我目前使用的是 [Visual Studio Code](https://code.visualstudio.com/download)，但 [PyCharm](https://www.jetbrains.com/help/pycharm/installation-guide.html) 和 [Atom](https://atom.io/) 也是不错的替代选择。
 
 完成后，确保使用‘pip’命令安装这三个库—— [Streamlit](https://docs.streamlit.io/library/get-started/installation)、[Joblib](https://joblib.readthedocs.io/en/latest/installing.html) 和 [Pandas](https://pypi.org/project/pandas/)。
 
@@ -40,15 +40,15 @@
 streamlit run streamlit_fhs.py
 ```
 
-然后，打开浏览器并访问 [http://localhost:8501](http://localhost:8501/)。你应该会看到一个类似这样的Web应用程序：
+然后，打开浏览器并访问 [`localhost:8501`](http://localhost:8501/)。你应该会看到一个类似这样的 Web 应用程序：
 
-![使用Heroku部署机器学习Web应用程序](../Images/9980a38ef36f656c74bf0006897804b9.png)
+![使用 Heroku 部署机器学习 Web 应用程序](img/9980a38ef36f656c74bf0006897804b9.png)
 
 # 第两步：创建必要的文件
 
 我们的文件夹目前有三个文件：
 
-![使用Heroku部署机器学习Web应用程序](../Images/cf1d05881deb0e5ee4fa682535af5c1f.png)
+![使用 Heroku 部署机器学习 Web 应用程序](img/cf1d05881deb0e5ee4fa682535af5c1f.png)
 
 为了成功将应用部署到 Heroku，我们需要创建另外三个文件：
 
@@ -132,9 +132,9 @@ heroku git:remote -a my_app
 
 完成后，你会在终端上看到类似这样的输出：
 
-![使用 Heroku 部署机器学习 Web 应用](../Images/a0c2ab86e69b58f304fb2a8f6579f256.png)
+![使用 Heroku 部署机器学习 Web 应用](img/a0c2ab86e69b58f304fb2a8f6579f256.png)
 
-上面显示的链接是你的应用所在的位置，你现在可以在线访问它。以下是我的 Web 应用的 URL：[https://fhs-pred-app.herokuapp.com/](https://fhs-pred-app.herokuapp.com/)。
+上面显示的链接是你的应用所在的位置，你现在可以在线访问它。以下是我的 Web 应用的 URL：[`fhs-pred-app.herokuapp.com/`](https://fhs-pred-app.herokuapp.com/)。
 
 就这样！如果你正确执行了所有步骤，你现在已经部署了一个功能齐全的 Web 应用，你可以通过一个链接与其他人分享。
 

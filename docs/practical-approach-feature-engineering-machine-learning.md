@@ -1,22 +1,22 @@
 # 实用的机器学习特征工程方法
 
-> 原文：[https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html`](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)
 
-![XXXXX](../Images/dd58a3648a01e9d1efc4aac065e5646d.png)
+![XXXXX](img/dd58a3648a01e9d1efc4aac065e5646d.png)
 
 照片由[Pixabay](https://www.pexels.com/photo/abstract-art-circle-clockwork-414579/)提供
 
-特征学习是[机器学习](/tag/machine-learning)的重要组成部分，但常常被忽视，许多指南和博客文章集中在机器学习生命周期的后期阶段。这个辅助步骤可以使机器学习模型更加准确和高效，将原始数据转化为更具体且可以使用的东西。如果没有这个步骤，构建一个完全优化的模型是不可能的。
+特征学习是机器学习的重要组成部分，但常常被忽视，许多指南和博客文章集中在机器学习生命周期的后期阶段。这个辅助步骤可以使机器学习模型更加准确和高效，将原始数据转化为更具体且可以使用的东西。如果没有这个步骤，构建一个完全优化的模型是不可能的。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 特征工程是一种重要的机器学习（ML）技术，它处理数据集并将其转化为适用于特定任务的可用数据。
 
-![XXXXX](../Images/5608b44813dc14a94b21c7d841062dda.png)
+![XXXXX](img/5608b44813dc14a94b21c7d841062dda.png)
 
 [来源](https://www.heavy.ai/technical-glossary/feature-engineering)
 
@@ -68,7 +68,7 @@
 
 ## 机器学习中的实际特征工程方法：六个步骤
 
-现在我们对特征学习的作用及其缺点有了更好的理解，让我们考虑一种实际的过程方法，分为6个关键步骤。
+现在我们对特征学习的作用及其缺点有了更好的理解，让我们考虑一种实际的过程方法，分为 6 个关键步骤。
 
 ### #1 数据准备
 
@@ -84,7 +84,7 @@
 
 ### #4 构建
 
-特征可以通过手动和自动 [使用算法](/2022/07/machine-learning-algorithms-explained-less-1-minute.html)（例如 [tSNE](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding#:~:text=t%2Ddistributed%20stochastic%20neighbor%20embedding%20(t%2DSNE)%20is,two%20or%20three%2Ddimensional%20map.) 或 主成分分析（[PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)））来构建。特征构建的选项几乎是无穷无尽的，但解决方案总是依赖于问题。
+特征可以通过手动和自动 使用算法（例如 [tSNE](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding#:~:text=t%2Ddistributed%20stochastic%20neighbor%20embedding%20(t%2DSNE)%20is,two%20or%20three%2Ddimensional%20map.) 或 主成分分析（[PCA](https://en.wikipedia.org/wiki/Principal_component_analysis)））来构建。特征构建的选项几乎是无穷无尽的，但解决方案总是依赖于问题。
 
 ### #5 选择
 
@@ -120,7 +120,7 @@
 
 手动恶意软件检测非常困难，大多数神经网络在这方面也存在问题。然而，特征工程可以结合手动技术和神经网络，以突出异常行为。
 
-![XXXXX](../Images/4888dded93f4361e8f1cfd852428d66a.png)
+![XXXXX](img/4888dded93f4361e8f1cfd852428d66a.png)
 
 [来源](https://hcis-journal.springeropen.com/articles/10.1186/s13673-018-0125-x)
 

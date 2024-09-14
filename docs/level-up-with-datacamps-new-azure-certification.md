@@ -1,8 +1,8 @@
 # 通过 DataCamp 的新 Azure 认证提升自我
 
-> 原文：[https://www.kdnuggets.com/level-up-with-datacamps-new-azure-certification](https://www.kdnuggets.com/level-up-with-datacamps-new-azure-certification)
+> 原文：[`www.kdnuggets.com/level-up-with-datacamps-new-azure-certification`](https://www.kdnuggets.com/level-up-with-datacamps-new-azure-certification)
 
-![与 DataCamp 一起的 Azure](../Images/3df61ab178b5a5856442f53988af8808.png)
+![与 DataCamp 一起的 Azure](img/3df61ab178b5a5856442f53988af8808.png)
 
 作者提供的图片
 

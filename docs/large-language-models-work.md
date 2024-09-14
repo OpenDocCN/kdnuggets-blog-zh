@@ -1,8 +1,8 @@
 # 大型语言模型是什么，它们是如何工作的？
 
-> 原文：[https://www.kdnuggets.com/2023/05/large-language-models-work.html](https://www.kdnuggets.com/2023/05/large-language-models-work.html)
+> 原文：[`www.kdnuggets.com/2023/05/large-language-models-work.html`](https://www.kdnuggets.com/2023/05/large-language-models-work.html)
 
-![大型语言模型是什么，它们是如何工作的？](../Images/dc765d725c1cf93ea1d7055551f5f815.png)
+![大型语言模型是什么，它们是如何工作的？](img/dc765d725c1cf93ea1d7055551f5f815.png)
 
 编辑提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@
 
 基于单词的分词：这种方法将文本拆分成单独的单词，将每个单词视为一个独立的标记。虽然简单直观，但基于单词的分词在处理词汇表外的词时可能会遇到困难，并且可能无法有效处理具有复杂形态的语言。
 
-基于子词的分词：子词方法，如字节对编码（BPE）和WordPiece，将文本拆分为可以组合成完整单词的较小单元。这种方法使LLMs能够处理词汇表外的单词，并更好地捕捉不同语言的结构。例如，BPE通过合并最常出现的字符对来创建子词单元，而WordPiece则采用数据驱动的方法将单词分割成子词标记。
+基于子词的分词：子词方法，如字节对编码（BPE）和 WordPiece，将文本拆分为可以组合成完整单词的较小单元。这种方法使 LLMs 能够处理词汇表外的单词，并更好地捕捉不同语言的结构。例如，BPE 通过合并最常出现的字符对来创建子词单元，而 WordPiece 则采用数据驱动的方法将单词分割成子词标记。
 
 基于字符的分词：这种方法将单个字符视为标记。虽然它可以处理任何输入文本，但基于字符的分词通常需要更大的模型和更多的计算资源，因为它需要处理更长的标记序列。
 
@@ -58,33 +58,33 @@
 
 ## A. 文本生成与完成
 
-LLMs可以生成连贯流畅的文本，紧密模拟人类语言，使其成为创意写作、聊天机器人和虚拟助手等应用的理想选择。它们还可以根据给定的提示完成句子或段落，展示了出色的语言理解和上下文意识。
+LLMs 可以生成连贯流畅的文本，紧密模拟人类语言，使其成为创意写作、聊天机器人和虚拟助手等应用的理想选择。它们还可以根据给定的提示完成句子或段落，展示了出色的语言理解和上下文意识。
 
 ## B. 情感分析
 
-LLMs在[sentiment analysis](https://saturncloud.io/glossary/sentiment-analysis/)任务中表现出色，在这些任务中，它们根据情感将文本分类为正面、负面或中性。这种能力广泛应用于客户反馈分析、社交媒体监测和市场研究等领域。
+LLMs 在[sentiment analysis](https://saturncloud.io/glossary/sentiment-analysis/)任务中表现出色，在这些任务中，它们根据情感将文本分类为正面、负面或中性。这种能力广泛应用于客户反馈分析、社交媒体监测和市场研究等领域。
 
 ## C. 机器翻译
 
-LLMs还可以用于机器翻译，允许用户在不同语言之间翻译文本。像Google Translate和DeepL这样的LLMs已经展示了令人印象深刻的准确性和流畅性，使其成为跨语言障碍沟通的宝贵工具。
+LLMs 还可以用于机器翻译，允许用户在不同语言之间翻译文本。像 Google Translate 和 DeepL 这样的 LLMs 已经展示了令人印象深刻的准确性和流畅性，使其成为跨语言障碍沟通的宝贵工具。
 
 ## D. 问答系统
 
-LLMs可以通过处理自然语言输入并根据其知识库提供相关答案来回答问题。这一能力已被应用于各种场景，从客户支持到教育和研究辅助。
+LLMs 可以通过处理自然语言输入并根据其知识库提供相关答案来回答问题。这一能力已被应用于各种场景，从客户支持到教育和研究辅助。
 
 ## E. 文本摘要
 
-LLMs可以生成长文档或文章的简明摘要，使用户能够更快地掌握主要观点。文本摘要在新闻聚合、内容策划和研究辅助等方面具有广泛的应用。
+LLMs 可以生成长文档或文章的简明摘要，使用户能够更快地掌握主要观点。文本摘要在新闻聚合、内容策划和研究辅助等方面具有广泛的应用。
 
 # 结论
 
-大型语言模型代表了自然语言处理领域的重大进展，改变了我们与语言技术互动的方式。它们在大量数据上进行预训练，并在特定任务数据集上进行微调，从而提高了在各种语言任务上的准确性和性能。从文本生成与完成到情感分析、机器翻译、问答系统和文本摘要，LLMs展示了非凡的能力，并已在众多领域得到应用。
+大型语言模型代表了自然语言处理领域的重大进展，改变了我们与语言技术互动的方式。它们在大量数据上进行预训练，并在特定任务数据集上进行微调，从而提高了在各种语言任务上的准确性和性能。从文本生成与完成到情感分析、机器翻译、问答系统和文本摘要，LLMs 展示了非凡的能力，并已在众多领域得到应用。
 
-然而，这些模型也面临挑战和限制。计算资源、偏见与公平性、模型可解释性以及控制生成内容是需要进一步研究和关注的领域。尽管如此，大语言模型对NLP研究和应用的潜在影响巨大，它们的持续发展可能会塑造AI和基于语言的技术的未来。
+然而，这些模型也面临挑战和限制。计算资源、偏见与公平性、模型可解释性以及控制生成内容是需要进一步研究和关注的领域。尽管如此，大语言模型对 NLP 研究和应用的潜在影响巨大，它们的持续发展可能会塑造 AI 和基于语言的技术的未来。
 
 如果你想构建自己的大语言模型，可以在 [Saturn Cloud](http://www.saturncloud.io/) 注册，开始使用免费的云计算和资源。
 
-**[Saturn Cloud](https://www.linkedin.com/company/saturn-cloud/)** 是一个数据科学和机器学习平台，灵活支持Python、R等多种语言。可以扩展、协作并利用内置管理功能来帮助你运行代码。可以创建一个具有4TB RAM的笔记本，添加GPU，连接到分布式工作节点等。Saturn还自动化了DevOps和ML基础设施工程，使你的团队可以专注于分析。
+**[Saturn Cloud](https://www.linkedin.com/company/saturn-cloud/)** 是一个数据科学和机器学习平台，灵活支持 Python、R 等多种语言。可以扩展、协作并利用内置管理功能来帮助你运行代码。可以创建一个具有 4TB RAM 的笔记本，添加 GPU，连接到分布式工作节点等。Saturn 还自动化了 DevOps 和 ML 基础设施工程，使你的团队可以专注于分析。
 
 [原始文章](https://saturncloud.io/blog/what-are-large-language-models-and-how-do-they-work/)。经许可转载。
 
@@ -98,6 +98,6 @@ LLMs可以生成长文档或文章的简明摘要，使用户能够更快地掌�
 
 +   [了解大语言模型](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)
 
-+   [介绍John Snow Labs的医疗保健专用大语言模型](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)
++   [介绍 John Snow Labs 的医疗保健专用大语言模型](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)
 
 +   [AI: 大语言模型与视觉模型](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)

@@ -1,8 +1,8 @@
 # 数据科学家的 Python 高效编码指南
 
-> 原文：[https://www.kdnuggets.com/2021/08/data-scientist-guide-efficient-coding-python.html](https://www.kdnuggets.com/2021/08/data-scientist-guide-efficient-coding-python.html)
+> 原文：[`www.kdnuggets.com/2021/08/data-scientist-guide-efficient-coding-python.html`](https://www.kdnuggets.com/2021/08/data-scientist-guide-efficient-coding-python.html)
 
-[评论](#comments)
+评论
 
 **由[Dr. Varshita Sher](https://varshitasher.medium.com/)，数据科学家**
 
@@ -16,7 +16,7 @@
 
 想象一下遍历一个*大型*的可迭代对象（列表、字典、元组、集合），却不知道代码是否已经运行完成！*真糟糕*，*对吧*！在这种情况下，请确保使用`tqdm`构造来显示进度条。
 
-例如，在我读取存在于44个不同目录中的所有文件时（这些路径已经存储在名为`fpaths`的列表中），以显示进度：
+例如，在我读取存在于 44 个不同目录中的所有文件时（这些路径已经存储在名为`fpaths`的列表中），以显示进度：
 
 ```py
 from tqdm import tqdmfiles = list()
@@ -26,7 +26,7 @@ for fpath in tqdm(fpaths, desc="Looping over fpaths")):
          files.extend(os.listdir(fpath))
 ```
 
-![](../Images/9bcd861ff49e3bd8b0e25a728332679a.png)
+![](img/9bcd861ff49e3bd8b0e25a728332679a.png)
 
 使用 tqdm 与 “for” 循环
 
@@ -56,7 +56,7 @@ def update_df(**df: pd.DataFrame**,
     return df
 ```
 
-![](../Images/930d1b32e90748482182847e086597d5.png)
+![](img/930d1b32e90748482182847e086597d5.png)
 
 几点需要注意：
 
@@ -103,7 +103,7 @@ def dummy_args(*args: list[int], option = True) -> None | int:
 
 尽管如此，包含它仍然是一个好的实践！我觉得它在编写函数时能带来更多的清晰度。此外，当有人调用这样的函数时，他们会看到输入参数的清晰提示。
 
-![](../Images/9f1d83d3b0fc37b952d7bfb93d64ea76.png)
+![](img/9f1d83d3b0fc37b952d7bfb93d64ea76.png)
 
 带类型提示的函数调用提示
 
@@ -128,7 +128,7 @@ def count_files_in_dir(project_root_dir, *fpaths: str):
             print(path, ":", len(os.listdir(rel_path)))
 ```
 
-![](../Images/8e8c20d0e9910db055928a7971a3ff0a.png)
+![](img/8e8c20d0e9910db055928a7971a3ff0a.png)
 
 计算 Google Colab 目录中的文件数量
 
@@ -147,7 +147,7 @@ def print_results(**results):
         print(key, val)
 ```
 
-![](../Images/25cd205f9fd4647a869c6dfc99d2f52b.png)
+![](img/25cd205f9fd4647a869c6dfc99d2f52b.png)
 
 使用方式与`*args`非常相似，但现在我们能够将任意数量的*关键字*参数传递给函数。这些参数作为键值对存储在`**results`字典中。从这里开始，可以使用`.items()`轻松访问字典中的项。
 
@@ -176,7 +176,7 @@ def myfunc(a, b, flag, **kwargs):
        actual_function(a,b, **kwargs)
 ```
 
-*注意：查看*[*matplotlib的绘图函数使用*](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib-pyplot-plot)`[*kwargs*](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib-pyplot-plot)`* 来指定图表的可选修饰，如线宽和标签。*
+*注意：查看*[*matplotlib 的绘图函数使用*](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib-pyplot-plot)`[*kwargs*](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.plot.html#matplotlib-pyplot-plot)`* 来指定图表的可选修饰，如线宽和标签。*
 
 这里有一个实际使用`**kwargs`扩展方法的案例，来自我最近的一个项目：
 
@@ -208,9 +208,9 @@ def custom_train_test_split(clf, y, *X, stratify, **split_args):    *print("Clas
 
 *注意：在调用此函数时，为了便于理解，我使用了虚拟数据替换了实际的图像向量和标签（见下图）。不过，代码同样适用于真实图像！*
 
-![](../Images/5c62be74580ff4d94753b0667954be87.png)
+![](img/5c62be74580ff4d94753b0667954be87.png)
 
-图 A 使用函数定义中的kwargs调用函数
+图 A 使用函数定义中的 kwargs 调用函数
 
 注意事项：
 
@@ -238,29 +238,29 @@ train_test_split(ims, synthetic_ims, y, stratify = stratify, train_size = 0.6, r
 
 +   当存储`train_test_split()`方法的结果时，我们再次*打包*`synthetic_train`和`synthetic_test`集合到一个单独的`*synthetic`变量中。
 
-![](../Images/eff64186647cd1a947a83aabcbda8884.png)
+![](img/eff64186647cd1a947a83aabcbda8884.png)
 
 要检查里面有什么，我们可以使用`*`运算符再次解包它（见粉色输出）。
 
 *注意：如果你想深入了解使用*`***`*运算符进行打包和解包，请查看这篇*[*文章*](https://realpython.com/python-kwargs-and-args/)*。*
 
-## 4\. 使用预提交hooks`。`
+## 4\. 使用预提交 hooks`。`
 
 我们编写的代码通常很凌乱，缺乏适当的格式，比如尾随空格、尾随逗号、未排序的导入语句、缩进中的空格等。
 
-虽然可以手动修复所有这些问题，但使用[pre-commit hooks](https://pre-commit.com/)可以节省你大量的时间。简单来说，这些hooks可以通过一行命令进行自动格式化——`pre-commit run`。
+虽然可以手动修复所有这些问题，但使用[pre-commit hooks](https://pre-commit.com/)可以节省你大量的时间。简单来说，这些 hooks 可以通过一行命令进行自动格式化——`pre-commit run`。
 
 这里有一些来自官方文档的[简单步骤](https://pre-commit.com/#install)来开始并[创建一个](https://pre-commit.com/index.html#2-add-a-pre-commit-configuration)`[.pre-commit-config.yaml](https://pre-commit.com/index.html#2-add-a-pre-commit-configuration)`[文件](https://pre-commit.com/index.html#2-add-a-pre-commit-configuration)。它将包含你关心的所有格式化问题的[hooks](https://pre-commit.com/hooks.html)！
 
-作为纯个人偏好，我倾向于保持我的`.pre-commit-config.yaml`配置文件简单，并使用[Black的](https://black.readthedocs.io/en/stable/integrations/source_version_control.html)预提交配置。
+作为纯个人偏好，我倾向于保持我的`.pre-commit-config.yaml`配置文件简单，并使用[Black 的](https://black.readthedocs.io/en/stable/integrations/source_version_control.html)预提交配置。
 
 *注意：需要记住的一点是，文件必须被暂存，即在执行*`*pre-commit run*`*之前使用*`*git add .*`*，否则你会看到所有文件都会被跳过：*
 
-![](../Images/74bb1092d28f8ab78b952edfb55eebad.png)
+![](img/74bb1092d28f8ab78b952edfb55eebad.png)
 
-## 5\. 使用.yml配置文件来存储常量`。`
+## 5\. 使用.yml 配置文件来存储常量`。`
 
-如果你的项目包含大量配置变量，例如数据库主机名、密码、AWS凭证等，请使用`.yml`文件来跟踪所有这些变量。你可以在任何Jupyter Notebook或你希望的脚本中使用这个文件。
+如果你的项目包含大量配置变量，例如数据库主机名、密码、AWS 凭证等，请使用`.yml`文件来跟踪所有这些变量。你可以在任何 Jupyter Notebook 或你希望的脚本中使用这个文件。
 
 由于我大部分工作是为客户提供模型框架，以便他们可以在自己的数据集上重新训练它，我通常使用配置文件来存储文件夹和文件的路径。这也是确保客户在运行你的脚本时只需更改一个文件的好方法。
 
@@ -309,15 +309,15 @@ for key, value in dictionary.items():
 
 +   [括号配对着色器](https://marketplace.visualstudio.com/items?itemName=CoenraadS.bracket-pair-colorizer)——允许用颜色识别匹配的括号。
 
-![](../Images/22f7c332c972b0d391e893eca83873db.png)
+![](img/22f7c332c972b0d391e893eca83873db.png)
 
 +   [路径智能感知](https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense)——允许自动补全文件名。
 
-![](../Images/bc298c53b24cd3daaed9de47e1e6b762.png)
+![](img/bc298c53b24cd3daaed9de47e1e6b762.png)
 
 +   [Python Docstring 生成器](https://marketplace.visualstudio.com/items?itemName=njpwerner.autodocstring)——允许为 Python 函数生成 docstring。
 
-![](../Images/85c8b32707fe9632374d81b585627221.png)
+![](img/85c8b32707fe9632374d81b585627221.png)
 
 使用 VSCode 扩展生成 docstring
 
@@ -325,17 +325,17 @@ for key, value in dictionary.items():
 
 +   [Python Indent](https://marketplace.visualstudio.com/items?itemName=KevinRose.vsc-python-indent)——(*我最喜欢的；由* [Kevin Rose](https://marketplace.visualstudio.com/publishers/KevinRose) *发布*) 允许对多行代码/括号进行正确的缩进。
 
-![](../Images/eee5fbeebed8adbf8634e945e0bf7d3d.png)
+![](img/eee5fbeebed8adbf8634e945e0bf7d3d.png)
 
 来源：[VSCode 扩展市场](https://marketplace.visualstudio.com/items?itemName=KevinRose.vsc-python-indent)
 
 +   [Python 类型提示](https://marketplace.visualstudio.com/items?itemName=njqdev.vscode-python-typehint)——允许在编写函数时自动补全类型提示。
 
-![](../Images/92497f3d02c0316705bc33017a00d027.png)
+![](img/92497f3d02c0316705bc33017a00d027.png)
 
 +   [TODO tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree)：(*第二喜欢*) 追踪在编写脚本时插入的所有`TODO`。
 
-![](../Images/495629a719138e57c940c0da96e57c0b.png)
+![](img/495629a719138e57c940c0da96e57c0b.png)
 
 追踪项目中插入的所有 TODO 注释
 
@@ -361,21 +361,21 @@ for key, value in dictionary.items():
 
 **相关：**
 
-+   [编写干净 R 代码的 5 个技巧](/2021/08/5-tips-writing-clean-r-code.html)
++   编写干净 R 代码的 5 个技巧
 
-+   [Python 数据结构比较](/2021/07/python-data-structures-compared.html)
++   Python 数据结构比较
 
-+   [GitHub Copilot 开源替代品](/2021/07/github-copilot-open-source-alternatives-code-generation.html)
++   GitHub Copilot 开源替代品
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

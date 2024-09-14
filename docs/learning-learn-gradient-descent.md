@@ -1,10 +1,10 @@
 # 通过梯度下降学习学习
 
-> 原文：[https://www.kdnuggets.com/2017/02/learning-learn-gradient-descent.html](https://www.kdnuggets.com/2017/02/learning-learn-gradient-descent.html)
+> 原文：[`www.kdnuggets.com/2017/02/learning-learn-gradient-descent.html`](https://www.kdnuggets.com/2017/02/learning-learn-gradient-descent.html)
 
-[通过梯度下降学习学习](https://arxiv.org/pdf/1606.04474v2.pdf)，Andrychowicz等，*NIPS 2016*
+[通过梯度下降学习学习](https://arxiv.org/pdf/1606.04474v2.pdf)，Andrychowicz 等，*NIPS 2016*
 
-阅读这些NIPS论文时，让我印象深刻的一点是有些论文的长度是如此之短——在介绍和评估部分之间你可能只会找到一两页！一种通用形式是从问题领域的基本数学模型开始，用函数表示。然后，选择的函数被*学习*，通过进入机器学习工具箱并以潜在的新方式组合现有的构建块。从这个角度看，我们可以真正称机器学习为‘*函数学习*’。
+阅读这些 NIPS 论文时，让我印象深刻的一点是有些论文的长度是如此之短——在介绍和评估部分之间你可能只会找到一两页！一种通用形式是从问题领域的基本数学模型开始，用函数表示。然后，选择的函数被*学习*，通过进入机器学习工具箱并以潜在的新方式组合现有的构建块。从这个角度看，我们可以真正称机器学习为‘*函数学习*’。
 
 用这种函数的方式思考对我来说是一种回到熟悉领域的桥梁。我们有函数组合。例如，给定一个将图像映射到特征表示的函数*f*，以及一个作为分类器的函数*g*，将图像特征表示映射到对象，我们可以构建一个用*g ○ f*分类图像中的对象的系统。
 
@@ -34,11 +34,11 @@
 
 > 我们的实验已确认，学习型神经网络优化器与深度学习中使用的最先进优化方法相比表现优越。
 
-![图](../Images/7c69ca09a51e00c66204243f71f2bb53.png)
+![图](img/7c69ca09a51e00c66204243f71f2bb53.png)
 
 实际上，这些学习型优化器不仅表现非常好，还提供了一种有趣的跨问题集迁移学习方式。传统上，*迁移学习*是一个作为独立问题研究的困难领域。但在这种情况下，由于我们正在学习如何学习，直接的*泛化*（机器学习的关键特性，使我们能够在训练集上学习，然后在以前未见过的例子上表现良好）提供了迁移学习！
 
-> 我们见证了显著的迁移能力，例如，在12,288参数神经艺术任务上训练的LSTM优化器能够在具有49,512参数、不同风格和不同内容图像的任务上进行泛化。我们在将其迁移到MNIST任务的不同架构时也观察到了类似的令人印象深刻的结果。
+> 我们见证了显著的迁移能力，例如，在 12,288 参数神经艺术任务上训练的 LSTM 优化器能够在具有 49,512 参数、不同风格和不同内容图像的任务上进行泛化。我们在将其迁移到 MNIST 任务的不同架构时也观察到了类似的令人印象深刻的结果。
 
 ### 学习如何学习
 
@@ -71,27 +71,27 @@
 
 > 我们可以通过对*ϕ*进行梯度下降来最小化*L(ϕ)*的值。
 
-![图](../Images/dc6f1a42cb394731cee484c638eb1562.png)
+![图](img/dc6f1a42cb394731cee484c638eb1562.png)
 
-为了扩展到数万或更多的参数，优化器网络*m*在目标函数的参数上逐坐标操作，类似于RMSProp和ADAM等更新规则。每个坐标的更新规则是使用一个具有遗忘门架构的2层LSTM网络实现的。
+为了扩展到数万或更多的参数，优化器网络*m*在目标函数的参数上逐坐标操作，类似于 RMSProp 和 ADAM 等更新规则。每个坐标的更新规则是使用一个具有遗忘门架构的 2 层 LSTM 网络实现的。
 
-> 网络输入单个坐标的优化梯度以及之前的隐藏状态，并输出对应优化参数的更新。我们称这种架构为LSTM优化器。
+> 网络输入单个坐标的优化梯度以及之前的隐藏状态，并输出对应优化参数的更新。我们称这种架构为 LSTM 优化器。
 
-![图](../Images/60dbbf12f986b7226c7a994f530dfa64.png)
+![图](img/60dbbf12f986b7226c7a994f530dfa64.png)
 
 ### 运行中的学习型学习者
 
-> 我们将训练好的优化器与深度学习中使用的标准优化器进行比较：SGD、RMSprop、ADAM以及Nesterov加速梯度（NAG）。对于每个优化器和每个问题，我们调整了学习率，并报告了在每个问题上给出最佳最终误差的学习率结果。
+> 我们将训练好的优化器与深度学习中使用的标准优化器进行比较：SGD、RMSprop、ADAM 以及 Nesterov 加速梯度（NAG）。对于每个优化器和每个问题，我们调整了学习率，并报告了在每个问题上给出最佳最终误差的学习率结果。
 
-优化器被训练用于10维二次函数、优化MNIST上的小型神经网络、CIFAR-10数据集，以及学习用于神经艺术的优化器（例如，参见[纹理网络](https://blog.acolyer.org/2016/09/23/texture-networks-feed-forward-synthesis-of-textures-and-stylized-images/)）。
+优化器被训练用于 10 维二次函数、优化 MNIST 上的小型神经网络、CIFAR-10 数据集，以及学习用于神经艺术的优化器（例如，参见[纹理网络](https://blog.acolyer.org/2016/09/23/texture-networks-feed-forward-synthesis-of-textures-and-stylized-images/)）。
 
-这里是训练的LSTM优化器在Neural Art任务上的性能与标准优化器的对比：
+这里是训练的 LSTM 优化器在 Neural Art 任务上的性能与标准优化器的对比：
 
-![图](../Images/113b9f3e96768859a22125e4ac49fdb3.png)
+![图](img/113b9f3e96768859a22125e4ac49fdb3.png)
 
-而且因为它们非常漂亮……这里有一些由LSTM优化器风格化的图像！
+而且因为它们非常漂亮……这里有一些由 LSTM 优化器风格化的图像！
 
-![图](../Images/795d9f37ab45ae6f1c60d68fb066c386.png)
+![图](img/795d9f37ab45ae6f1c60d68fb066c386.png)
 
 ### 系统模型及学习到的组件
 
@@ -99,47 +99,47 @@
 
 在这篇论文中，作者探讨了如何构建一个函数*g*来优化函数*f*，使得我们可以写出：
 
-![f' = g(d,f)](../Images/011c40a0178f1353ec2e4c14e0f378e1.png)
+![f' = g(d,f)](img/011c40a0178f1353ec2e4c14e0f378e1.png)
 
 其中*d*是一些训练数据。
 
 以这种方式表达时，显然会引发一个问题，如果我写：
 
-![g' = g(d, g)](../Images/885d6bc0d2779eff6ccd89c8a2d9097d.png)
+![g' = g(d, g)](img/885d6bc0d2779eff6ccd89c8a2d9097d.png)
 
-或者更进一步使用Y组合子找到一个固定点：
+或者更进一步使用 Y 组合子找到一个固定点：
 
-![g' = Y g](../Images/7f5509479a0e372c7c4f225a5c3e35b7.png)
+![g' = Y g](img/7f5509479a0e372c7c4f225a5c3e35b7.png)
 
 发人深省...
 
-**简介： [Adrian Colyer](https://twitter.com/adriancolyer)** 曾任SpringSource的CTO，随后是VMware和Pivotal的应用CTO。他现在是伦敦Accel Partners的风险合伙人，与欧洲的早期阶段和初创公司合作。*如果你正在从事有趣的技术相关业务，他很乐意听到你的消息：你可以通过acolyer at accel dot com联系他*。
+**简介： [Adrian Colyer](https://twitter.com/adriancolyer)** 曾任 SpringSource 的 CTO，随后是 VMware 和 Pivotal 的应用 CTO。他现在是伦敦 Accel Partners 的风险合伙人，与欧洲的早期阶段和初创公司合作。*如果你正在从事有趣的技术相关业务，他很乐意听到你的消息：你可以通过 acolyer at accel dot com 联系他*。
 
 [原文](https://blog.acolyer.org/2017/01/04/learning-to-learn-by-gradient-descent-by-gradient-descent/)。转载许可。
 
 **相关：**
 
-+   [标准模型拟合方法的简明概述](/2016/05/concise-overview-model-fitting-methods.html)
++   标准模型拟合方法的简明概述
 
-+   [神经网络中的深度学习：概述](/2016/04/deep-learning-neural-networks-overview.html)
++   神经网络中的深度学习：概述
 
-+   [人工智能与2030年的生活](/2016/12/artificial-intelligence-life-2030.html)
++   人工智能与 2030 年的生活
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [你应该知道的5个梯度下降和成本函数的概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
++   [你应该知道的 5 个梯度下降和成本函数的概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
 
 +   [回归基础，第二部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
 
@@ -149,4 +149,4 @@
 
 +   [停止学习数据科学以寻找目标，并寻找目标来...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [通过构建15个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
++   [通过构建 15 个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)

@@ -1,8 +1,8 @@
 # 免费亚马逊课程以学习生成式 AI：适合所有级别
 
-> 原文：[https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels](https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels)
+> 原文：[`www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels`](https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels)
 
-![免费亚马逊课程以学习生成式 AI：适合所有级别](../Images/983f695d63c81ea3120fc20f663ce104.png)
+![免费亚马逊课程以学习生成式 AI：适合所有级别](img/983f695d63c81ea3120fc20f663ce104.png)
 
 图片由作者提供
 
@@ -36,7 +36,7 @@
 
 了解如何在 Amazon SageMaker 上构建大型语言模型，这个平台帮助数据科学家构建、训练、部署和监控机器学习模型。数据科学家将负责在平台上构建大型语言模型，学习不同的存储、数据摄取和训练选项，以处理模型所需的大型文本数据。你还将学习在生成式人工智能任务中部署大型语言模型时遇到的挑战。
 
-本课程面向高级技术专业人员，完成需要5.5小时。
+本课程面向高级技术专业人员，完成需要 5.5 小时。
 
 # 决策者的生成式人工智能学习计划
 
@@ -44,7 +44,7 @@
 
 在成为技术专业人员或处理数据驱动的结果时，做决策可能是最具挑战性的事情之一。在亚马逊提供的这门免费课程中，你将学习生成式人工智能如何在商业方面被使用，以及它如何用于做出技术决策。成为这些决策者之一，学习如何处理生成式人工智能项目，使组织做好生成式人工智能准备。
 
-这条学习路径包括3门课程，每门课程需要1小时完成。
+这条学习路径包括 3 门课程，每门课程需要 1 小时完成。
 
 # 高管的生成式人工智能
 

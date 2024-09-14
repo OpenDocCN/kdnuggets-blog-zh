@@ -1,12 +1,12 @@
 # Django 的 9 种最常见的应用
 
-> 原文：[https://www.kdnuggets.com/2021/08/django-9-common-applications.html](https://www.kdnuggets.com/2021/08/django-9-common-applications.html)
+> 原文：[`www.kdnuggets.com/2021/08/django-9-common-applications.html`](https://www.kdnuggets.com/2021/08/django-9-common-applications.html)
 
-[评论](#comments)
+评论
 
 **由 [Aakash Bijwe](https://www.linkedin.com/in/akash-bijwe-79ba89195/?originalSubdomain=in)，Scalex 技术解决方案的 AVP, IT 解决方案提供**
 
-![Python + Django](../Images/8d9d0d7979340d35ca842f66dfb82875.png)
+![Python + Django](img/8d9d0d7979340d35ca842f66dfb82875.png)
 
 在为项目选择新语言或框架时，大多数开发者关注的是安全性、快速开发、可扩展性、多功能性和支持。对于许多公司和独立开发者来说，Django 框架是一个简单的选择，因为它是市场上最受欢迎的 web 开发框架之一。鉴于 Django 框架提供的功能，许多开发者已开始选择 Django 作为他们所有开发任务的首选框架。
 
@@ -24,33 +24,33 @@ Django 是一个免费的、开源的、高级 Python web 框架，促进了快�
 
 **Django 的内置功能**
 
-Django以“开箱即用”而闻名，这意味着开发者几乎可以找到开发一个完整应用程序所需的一切。这些功能包括ORM、认证、会话管理支持、HTML模板、URL路由、中间件、HTTP库、多站点支持、模板引擎、表单、视图层、模型层、Python兼容性等。这一特性加快了开发进程，因为开发者无需实现这些基本功能。
+Django 以“开箱即用”而闻名，这意味着开发者几乎可以找到开发一个完整应用程序所需的一切。这些功能包括 ORM、认证、会话管理支持、HTML 模板、URL 路由、中间件、HTTP 库、多站点支持、模板引擎、表单、视图层、模型层、Python 兼容性等。这一特性加快了开发进程，因为开发者无需实现这些基本功能。
 
 **高度安全**
 
-Django在安全性方面没有妥协，并且默认提供保护应用程序和用户的功能。它通过提供一个经过工程设计的框架来帮助开发者避免许多常见的安全错误，从而自动保护网站。Django通常是第一个响应漏洞并提醒其他框架的。
+Django 在安全性方面没有妥协，并且默认提供保护应用程序和用户的功能。它通过提供一个经过工程设计的框架来帮助开发者避免许多常见的安全错误，从而自动保护网站。Django 通常是第一个响应漏洞并提醒其他框架的。
 
 **高度可扩展和可靠**
 
-显然，你需要一个能够处理大量数据和流量的框架。Django使任何应用程序都能够高效地处理任何观众体量的增长。它包括一系列的默认组件，可以被拆卸和替换为更具体的解决方案。由于Django是各行业广泛使用的热门Web应用框架，许多云服务提供商正在采取一切措施，以便在他们的平台上快速、轻松地部署应用程序。这使得开发者能够开发出更具功能性、可靠性和效率的应用程序。
+显然，你需要一个能够处理大量数据和流量的框架。Django 使任何应用程序都能够高效地处理任何观众体量的增长。它包括一系列的默认组件，可以被拆卸和替换为更具体的解决方案。由于 Django 是各行业广泛使用的热门 Web 应用框架，许多云服务提供商正在采取一切措施，以便在他们的平台上快速、轻松地部署应用程序。这使得开发者能够开发出更具功能性、可靠性和效率的应用程序。
 
-**DRY原则**
+**DRY 原则**
 
-DRY（不要重复自己）原则鼓励开发者不仅使用现有代码，还要避免不必要的代码行、错误或应用程序中的缺陷。这使得Django在时间上高效，非常适合高负载系统，同时也简化了维护。
+DRY（不要重复自己）原则鼓励开发者不仅使用现有代码，还要避免不必要的代码行、错误或应用程序中的缺陷。这使得 Django 在时间上高效，非常适合高负载系统，同时也简化了维护。
 
 **丰富的库集**
 
-另一个从Python及其优秀社区继承的巨大优势是Django拥有许多有用的库。一些最受欢迎的库包括用于构建API（应用程序编程接口）的Django REST框架和专注于网站内容管理的CMS框架。
+另一个从 Python 及其优秀社区继承的巨大优势是 Django 拥有许多有用的库。一些最受欢迎的库包括用于构建 API（应用程序编程接口）的 Django REST 框架和专注于网站内容管理的 CMS 框架。
 
 **优秀的社区和文档**
 
-Django由一个大型且活跃的开发者社区支持，这些开发者帮助解决开发过程中遇到的问题。还提供了大量的材料和资源，从文档、教程、博客到见面会和研讨会应有尽有。
+Django 由一个大型且活跃的开发者社区支持，这些开发者帮助解决开发过程中遇到的问题。还提供了大量的材料和资源，从文档、教程、博客到见面会和研讨会应有尽有。
 
-## **Django框架的9种最常见应用**
+## **Django 框架的 9 种最常见应用**
 
-以下是使用Django框架开发的一些应用或项目类型
+以下是使用 Django 框架开发的一些应用或项目类型
 
-1.  **构建跨平台应用程序** - 该框架的跨平台特性使开发者能够支持各种操作系统和用户设备的整个开发和生产环境，从而接触更广泛的受众。Django允许在跨平台设备上运行应用程序的灵活性。
+1.  **构建跨平台应用程序** - 该框架的跨平台特性使开发者能够支持各种操作系统和用户设备的整个开发和生产环境，从而接触更广泛的受众。Django 允许在跨平台设备上运行应用程序的灵活性。
 
 1.  **可扩展的网络应用** - Django 最适合构建可扩展的网络应用，因为该框架提供了程序员希望在网络应用中包含的功能。此外，使用 Django 提供的组件来构建应用程序比构建自定义组件更为容易。
 
@@ -78,21 +78,21 @@ Django 为全球数以千计的网站提供支持，是初创公司和大型企�
 
 **相关：**
 
-+   [Python 数据结构对比](/2021/07/python-data-structures-compared.html)
++   Python 数据结构对比
 
-+   [数据科学家的高效 Python 编程指南](/2021/08/data-scientist-guide-efficient-coding-python.html)
++   数据科学家的高效 Python 编程指南
 
-+   [Prefect: 如何用 Python 编写和调度你的第一个 ETL 管道](/2021/08/prefect-write-schedule-etl-pipeline-python.html)
++   Prefect: 如何用 Python 编写和调度你的第一个 ETL 管道
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

@@ -1,20 +1,20 @@
 # 如何使用 ChatGPT 学习 Python 基础
 
-> 原文：[https://www.kdnuggets.com/how-to-learn-python-basics-with-chatgpt](https://www.kdnuggets.com/how-to-learn-python-basics-with-chatgpt)
+> 原文：[`www.kdnuggets.com/how-to-learn-python-basics-with-chatgpt`](https://www.kdnuggets.com/how-to-learn-python-basics-with-chatgpt)
 
-![如何使用 ChatGPT 学习 Python 基础](../Images/34b84d0d04967aa282a22a6f499a0c83.png)
+![如何使用 ChatGPT 学习 Python 基础](img/34b84d0d04967aa282a22a6f499a0c83.png)
 
-现在是2024年了，所以我不应该再告诉你为什么你应该学习 Python 如果你考虑从事任何类型的编程工作。它是最流行的编程语言之一，几乎每个数据科学工作都希望在你的简历上看到它，并且它是最容易学习的语言之一。
+现在是 2024 年了，所以我不应该再告诉你为什么你应该学习 Python 如果你考虑从事任何类型的编程工作。它是最流行的编程语言之一，几乎每个数据科学工作都希望在你的简历上看到它，并且它是最容易学习的语言之一。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@ ChatGPT 是学习 Python 基础的一个好方法，作为我上面提到的那�
 
 这里有一个简单的方法，让 ChatGPT 成为你的个人 Python 导师。
 
-![如何使用 ChatGPT 学习 Python 基础](../Images/81aabc5b4a2c3b84bfc606f9c855e20a.png)
+![如何使用 ChatGPT 学习 Python 基础](img/81aabc5b4a2c3b84bfc606f9c855e20a.png)
 
 ## 入门测验
 
@@ -46,7 +46,7 @@ ChatGPT 是学习 Python 基础的一个好方法，作为我上面提到的那�
 
 这非常好，因为与 Coursera 视频、训练营或 YouTube 讲座不同，这个课程计划可以根据你特定的 Python 水平进行设计。如果你在高中或大学时已经学过基础知识，可以跳过这些内容；如果 Python 对你来说是全新的，可以要求它真正深入讲解核心概念。
 
-![如何使用 ChatGPT 学习 Python 基础](../Images/22b7f5d78fb4041d47593db118ee375c.png)
+![如何使用 ChatGPT 学习 Python 基础](img/22b7f5d78fb4041d47593db118ee375c.png)
 
 ## 课程计划
 
@@ -108,7 +108,7 @@ ChatGPT 也不总是能理解你代码背后的全部上下文或意图，尤其
 
 我最重要的警告是你应该仔细观察自己。过于依赖 ChatGPT 来获取答案有可能会减缓你独立解决问题的能力。虽然雇主们喜欢你的 Python 知识，但解决问题的能力更为重要。
 
-查看[这篇文章](/5-coding-tasks-chatgpt-cant-do)，了解 ChatGPT 无法完成的编码任务。
+查看这篇文章，了解 ChatGPT 无法完成的编码任务。
 
 # ChatGPT - 你的下一个导师？
 

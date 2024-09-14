@@ -1,10 +1,10 @@
 # 数据科学中的高级统计概念
 
-> 原文：[https://www.kdnuggets.com/2021/09/advanced-statistical-concepts-data-science.html](https://www.kdnuggets.com/2021/09/advanced-statistical-concepts-data-science.html)
+> 原文：[`www.kdnuggets.com/2021/09/advanced-statistical-concepts-data-science.html`](https://www.kdnuggets.com/2021/09/advanced-statistical-concepts-data-science.html)
 
-[评论](#comments)[![图](../Images/cdc4d1496f7060844b5a251b2b60575d.png)](https://static.wixstatic.com/media/3eee0b_bc230abd081f486f9f767abc7c674157~mv2.gif)
+评论![图](https://static.wixstatic.com/media/3eee0b_bc230abd081f486f9f767abc7c674157~mv2.gif)
 
-版权： [https://www.congruentsoft.com/business-intelligence.aspx](https://www.congruentsoft.com/business-intelligence.aspx)
+版权： [`www.congruentsoft.com/business-intelligence.aspx`](https://www.congruentsoft.com/business-intelligence.aspx)
 
 在我之前的文章 [**数据科学中的统计学初学者指南**](https://www.theaidream.com/post/beginners-guide-to-statistics-in-data-science) 和 [**数据科学家应了解的推断统计学**](https://www.theaidream.com/post/the-inferential-statistics-data-scientists-should-know) 中，我们讨论了几乎所有基础的（**描述性和推断性**）统计学知识，这些知识在理解和处理任何数据科学案例研究中都很常用。在这篇文章中，我们将稍微深入，探讨一些不在热点中的高级概念。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,45 +28,45 @@
 
 **一个例子：**
 
-如果我们将一个分布分成四个相等的部分，我们将称之为四分位数。第一个四分位数包括所有小于四分之一的所有值。在图形表示中，它对应于分布总面积的25%。两个较低的四分位数涵盖了分布值的50%。第一和第三四分位数之间的四分位距等于分布在均值周围的50%值的范围。
+如果我们将一个分布分成四个相等的部分，我们将称之为四分位数。第一个四分位数包括所有小于四分之一的所有值。在图形表示中，它对应于分布总面积的 25%。两个较低的四分位数涵盖了分布值的 50%。第一和第三四分位数之间的四分位距等于分布在均值周围的 50%值的范围。
 
 在统计学中，**Q-Q（分位数-分位数）**图是通过将两组分位数相互绘制的散点图。如果这两组分位数来自同一分布，我们应当能看到点形成一条大致为直线的线（y=x）。
 
-![](../Images/1f7e3aa7232e9ceae92499b9dbc2d249.png)
+![](img/1f7e3aa7232e9ceae92499b9dbc2d249.png)
 
 [Q-Q 图](https://statisticsglobe.com/r-qqplot-qqnorm-qqline-function)
 
-例如，中位数是一个分位数，其中50%的数据低于该点，50%的数据高于该点。Q-Q图的目的是找出两组数据是否来自相同的分布。Q-Q图上绘制了**45度**角；如果两组数据来自相同的分布，则这些点会落在该参考线附近。
+例如，中位数是一个分位数，其中 50%的数据低于该点，50%的数据高于该点。Q-Q 图的目的是找出两组数据是否来自相同的分布。Q-Q 图上绘制了**45 度**角；如果两组数据来自相同的分布，则这些点会落在该参考线附近。
 
-知道分布是否正态非常重要，这样才能对数据应用各种统计度量并以更易于人类理解的可视化方式进行解释，而Q-Q图正是关键。Q-Q图回答的最基本问题是曲线是否符合正态分布。
+知道分布是否正态非常重要，这样才能对数据应用各种统计度量并以更易于人类理解的可视化方式进行解释，而 Q-Q 图正是关键。Q-Q 图回答的最基本问题是曲线是否符合正态分布。
 
 正态分布，但为什么？
 
-Q-Q图用于找出随机变量的分布类型，无论是高斯分布、均匀分布、指数分布，还是帕累托分布等。
+Q-Q 图用于找出随机变量的分布类型，无论是高斯分布、均匀分布、指数分布，还是帕累托分布等。
 
-通过仅查看Q-Q图，你可以判断分布的类型。一般来说，我们仅讨论正态分布，因为我们有一个非常漂亮的68-95-99.7规则，这完全适用于正态分布，因此我们知道数据在均值的第一个、第二个和第三个标准差范围内的分布情况。因此，知道分布是否正态为我们实验打开了新的大门。
+通过仅查看 Q-Q 图，你可以判断分布的类型。一般来说，我们仅讨论正态分布，因为我们有一个非常漂亮的 68-95-99.7 规则，这完全适用于正态分布，因此我们知道数据在均值的第一个、第二个和第三个标准差范围内的分布情况。因此，知道分布是否正态为我们实验打开了新的大门。
 
-![](../Images/7ec33e7d1b45640b3861e799700c3f8f.png)
+![](img/7ec33e7d1b45640b3861e799700c3f8f.png)
 
-Q-Q图的类型。[来源](http://sherrytowers.com/2013/08/29/aml-610-fall-2013-module-ii-review-of-probability-distributions/qqplot_examples/)
+Q-Q 图的类型。[来源](http://sherrytowers.com/2013/08/29/aml-610-fall-2013-module-ii-review-of-probability-distributions/qqplot_examples/)
 
-### 偏态Q-Q图
+### 偏态 Q-Q 图
 
-Q-Q图可以找出分布的偏度（不对称的度量）。
+Q-Q 图可以找出分布的偏度（不对称的度量）。
 
-如果Q-Q图的下端偏离直线但上端没有，则分布是**左偏（负偏态）**。
+如果 Q-Q 图的下端偏离直线但上端没有，则分布是**左偏（负偏态）**。
 
-现在，如果Q-Q图的上端偏离直线而下端没有，则分布是**右偏（正偏态）**。
+现在，如果 Q-Q 图的上端偏离直线而下端没有，则分布是**右偏（正偏态）**。
 
-### 尾部Q-Q图
+### 尾部 Q-Q 图
 
-Q-Q图可以找出分布的峰度（尾部厚度的度量）。
+Q-Q 图可以找出分布的峰度（尾部厚度的度量）。
 
-拥有胖尾的分布会使Q-Q图的两端偏离直线，而其中心部分跟随直线，而瘦尾分布的Q-Q图在两端的偏离非常少或可以忽略，从而使其完美符合正态分布。
+拥有胖尾的分布会使 Q-Q 图的两端偏离直线，而其中心部分跟随直线，而瘦尾分布的 Q-Q 图在两端的偏离非常少或可以忽略，从而使其完美符合正态分布。
 
-### Python中的Q-Q图([来源](https://www.statology.org/q-q-plot-python/))
+### Python 中的 Q-Q 图([来源](https://www.statology.org/q-q-plot-python/))
 
-假设我们有以下包含100个值的数据集：
+假设我们有以下包含 100 个值的数据集：
 
 ```py
 **import** **numpy** **as** **np
@@ -81,7 +81,7 @@ array([ 1.76405235,  0.40015721,  0.97873798,  2.2408932 ,  1.86755799,
        -0.97727788,  0.95008842, -0.15135721, -0.10321885,  0.4105985 ])
 ```
 
-要为这个数据集创建Q-Q图，我们可以使用[qqplot()函数](https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html)来自statsmodels库：
+要为这个数据集创建 Q-Q 图，我们可以使用[qqplot()函数](https://www.statsmodels.org/stable/generated/statsmodels.graphics.gofplots.qqplot.html)来自 statsmodels 库：
 
 ```py
 **import** **statsmodels****.****api** **as** **sm** **import** **matplotlib****.****pyplot** **as** **plt
@@ -90,15 +90,15 @@ array([ 1.76405235,  0.40015721,  0.97873798,  2.2408932 ,  1.86755799,
 fig** **=** **sm****.****qqplot****(****data****,** **line****=****'45'****)** **plt****.****show****(****)**
 ```
 
-![](../Images/53306c314b790866cfd2d75c065cb930.png)
+![](img/53306c314b790866cfd2d75c065cb930.png)
 
-在Q-Q图中，x轴显示**理论分位数**。这意味着它不显示你的实际数据，而是表示如果你的数据是正态分布的，它应该位于什么位置。
+在 Q-Q 图中，x 轴显示**理论分位数**。这意味着它不显示你的实际数据，而是表示如果你的数据是正态分布的，它应该位于什么位置。
 
-y轴显示的是你的**实际数据**。这意味着如果数据值沿着一个大致的45度角直线分布，那么数据是正态分布的。
+y 轴显示的是你的**实际数据**。这意味着如果数据值沿着一个大致的 45 度角直线分布，那么数据是正态分布的。
 
-我们可以在上面的Q-Q图中看到，数据值趋向于紧密地沿45度线分布，这意味着数据很可能是正态分布的。这并不奇怪，因为我们生成了100个数据值，使用了[**numpy.random.normal() 函数**](https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html)。
+我们可以在上面的 Q-Q 图中看到，数据值趋向于紧密地沿 45 度线分布，这意味着数据很可能是正态分布的。这并不奇怪，因为我们生成了 100 个数据值，使用了[**numpy.random.normal() 函数**](https://numpy.org/doc/stable/reference/random/generated/numpy.random.normal.html)。
 
-相反，假设我们生成了一个包含100个均匀分布值的数据集，并为该数据集创建了一个Q-Q图：
+相反，假设我们生成了一个包含 100 个均匀分布值的数据集，并为该数据集创建了一个 Q-Q 图：
 
 ```py
 **#create dataset** **of** **100** **uniformally distributed values** **data** **=** **np****.****random****.****uniform****(****0****,****1****,** **1000****)**
@@ -106,41 +106,41 @@ y轴显示的是你的**实际数据**。这意味着如果数据值沿着一个
 **#generate** **Q****-****Q** **plot** **for** **the dataset** **fig** **=** **sm****.****qqplot****(****data****,** **line****=****'45'****)** **plt****.****show****(****)**
 ```
 
-![](../Images/fac88e1945a12cf2ca7328bf10ee4089.png)
+![](img/fac88e1945a12cf2ca7328bf10ee4089.png)
 
-数据值明显不沿着红色45度线分布，这表明它们不符合正态分布。
+数据值明显不沿着红色 45 度线分布，这表明它们不符合正态分布。
 
 ## 切比雪夫不等式
 
 在概率论中，**切比雪夫不等式**，也称为“**比纳耶夫-切比雪夫**”不等式，保证对于广泛的概率分布类，只有一定比例的值会落在距离分布均值的特定范围内。
 
-![](../Images/71d5aafc543be391ca348727d5d2b336.png)
+![](img/71d5aafc543be391ca348727d5d2b336.png)
 
-来源: [https://www.thoughtco.com/chebyshevs-inequality-3126547](https://www.thoughtco.com/chebyshevs-inequality-3126547)
+来源: [`www.thoughtco.com/chebyshevs-inequality-3126547`](https://www.thoughtco.com/chebyshevs-inequality-3126547)
 
 切比雪夫不等式类似于**经验法则（68-95-99.7）**；然而，后者规则仅适用于正态分布。切比雪夫不等式更广泛；它适用于任何分布，只要该分布包含定义的方差和均值。
 
-所以切比雪夫不等式表明，至少有**（1-1/k^2）**的数据必须落在均值的**K**个标准差范围内（或者等价地，不超过**1/k^2**的分布值可以偏离均值超过k个标准差）。
+所以切比雪夫不等式表明，至少有**（1-1/k²）**的数据必须落在均值的**K**个标准差范围内（或者等价地，不超过**1/k²**的分布值可以偏离均值超过 k 个标准差）。
 
 其中**K** --> 正实数
 
 如果数据不是正态分布，则不同数量的数据可能会落在一个标准差内。切比雪夫不等式提供了一种方法，了解在任何数据分布中，有多少数据位于均值的**K**个标准差范围内。
 
-![](../Images/3c1e614f219dcc80947f160b392695bb.png)
+![](img/3c1e614f219dcc80947f160b392695bb.png)
 
-资料来源: [https://calcworkshop.com/joint-probability-distribution/chebyshev-inequality/](https://calcworkshop.com/joint-probability-distribution/chebyshev-inequality/)
+资料来源: [`calcworkshop.com/joint-probability-distribution/chebyshev-inequality/`](https://calcworkshop.com/joint-probability-distribution/chebyshev-inequality/)
 
 切比雪夫不等式非常有价值，因为它可以应用于任何给定均值和方差的概率分布。
 
-让我们考虑一个例子，假设有1000名应聘者来参加面试，但只有70个职位。为了在所有应聘者中挑选出最优秀的70人，招聘者会进行测试来评估他们的潜力。测试的平均分是60，标准差是6。如果某个应聘者的分数是84，他们能否假设自己获得了工作？
+让我们考虑一个例子，假设有 1000 名应聘者来参加面试，但只有 70 个职位。为了在所有应聘者中挑选出最优秀的 70 人，招聘者会进行测试来评估他们的潜力。测试的平均分是 60，标准差是 6。如果某个应聘者的分数是 84，他们能否假设自己获得了工作？
 
-![](../Images/9247c8134b8e1f1fc7e9f490ca4d4127.png)
+![](img/9247c8134b8e1f1fc7e9f490ca4d4127.png)
 
-结果显示，大约有63人得分超过60，因此在70个职位空缺的情况下，得分84的参赛者可以确保获得该职位。
+结果显示，大约有 63 人得分超过 60，因此在 70 个职位空缺的情况下，得分 84 的参赛者可以确保获得该职位。
 
-### Python中的切比雪夫不等式（[源](https://gist.github.com/chaipi-chaya/9eb72978dbbfd7fa4057b493cf6a32e7)）
+### Python 中的切比雪夫不等式（[源](https://gist.github.com/chaipi-chaya/9eb72978dbbfd7fa4057b493cf6a32e7)）
 
-创建一个1,000,000值的总体，我使用了形状=2、尺度=2的伽玛分布（也适用于其他分布）。
+创建一个 1,000,000 值的总体，我使用了形状=2、尺度=2 的伽玛分布（也适用于其他分布）。
 
 ```py
 **import** numpy as np
@@ -155,14 +155,14 @@ sigma = scale*np.sqrt(shape)
 s = np.random.gamma(shape, scale, 1000000)
 ```
 
-现在从总体中抽样10,000个值。
+现在从总体中抽样 10,000 个值。
 
 ```py
 **#sample** **10000** **values**
 rs = random.choices(s, k=10000)
 ```
 
-计算与期望值距离超过k个标准差的样本数量，并用该数量计算概率。我想描绘一个当k增加时概率的趋势，因此我使用了从0.1到3的k范围。
+计算与期望值距离超过 k 个标准差的样本数量，并用该数量计算概率。我想描绘一个当 k 增加时概率的趋势，因此我使用了从 0.1 到 3 的 k 范围。
 
 ```py
 **#****set** **k**
@@ -199,11 +199,11 @@ for i, prob in enumerate(probs):
           + str(1/ks[i]**2)[0:5])
 ```
 
-![](../Images/eadd20bfb61c35d8cf0b9aa5edf30371.png)
+![](img/eadd20bfb61c35d8cf0b9aa5edf30371.png)
 
-![](../Images/d3b887df06f1bae86a2b6ba6d5dc203b.png)
+![](img/d3b887df06f1bae86a2b6ba6d5dc203b.png)
 
-从上述图表和结果中，我们可以看到，随着k的增加，概率在减少，每个k的概率遵循不等式。此外，只有k大于1的情况是有用的。如果k小于1，则不等式的右侧大于1，这没有用，因为概率不能大于1。
+从上述图表和结果中，我们可以看到，随着 k 的增加，概率在减少，每个 k 的概率遵循不等式。此外，只有 k 大于 1 的情况是有用的。如果 k 小于 1，则不等式的右侧大于 1，这没有用，因为概率不能大于 1。
 
 ## 对数正态分布
 
@@ -215,11 +215,11 @@ for i, prob in enumerate(probs):
 
 对数正态分布的概率密度函数的一般公式为：
 
-![](../Images/dc0d9513b05ec0201d1388de814b061b.png)
+![](img/dc0d9513b05ec0201d1388de814b061b.png)
 
 位置参数和尺度参数相当于随机变量对数的均值和标准差。
 
-对数正态分布的形状由3个参数定义：
+对数正态分布的形状由 3 个参数定义：
 
 1.  ***σ*** 是形状参数（也是分布对数的标准差）
 
@@ -229,13 +229,13 @@ for i, prob in enumerate(probs):
 
 位置参数和尺度参数相当于随机变量对数的均值和标准差，如上所述。
 
-如果**x = θ**，则**f(x) = 0**。其中**θ = 0**和**m = 1**的情况称为**标准对数正态分布**。**θ**等于零的情况称为**2参数对数正态分布**。
+如果**x = θ**，则**f(x) = 0**。其中**θ = 0**和**m = 1**的情况称为**标准对数正态分布**。**θ**等于零的情况称为**2 参数对数正态分布**。
 
 以下图表说明了**位置（μ）**和**形状（*σ*）**参数对对数正态分布的概率密度函数的影响：
 
-![](../Images/39708303c14c438edca98198e827c2f4.png)
+![](img/39708303c14c438edca98198e827c2f4.png)
 
-来源：[https://www.sciencedirect.com/topics/mathematics/lognormal-distribution](https://www.sciencedirect.com/topics/mathematics/lognormal-distribution)
+来源：[`www.sciencedirect.com/topics/mathematics/lognormal-distribution`](https://www.sciencedirect.com/topics/mathematics/lognormal-distribution)
 
 ### Python 中的对数正态分布 ([来源](https://stackoverflow.com/a/41968334/7175247))
 
@@ -265,7 +265,7 @@ ax.plot(x, pdf, 'y')
 plt.show()
 ```
 
-![](../Images/2bfd006df7d40b8745ae3748e842e47c.png)
+![](img/2bfd006df7d40b8745ae3748e842e47c.png)
 
 ## 幂律分布
 
@@ -283,9 +283,9 @@ plt.show()
 
 +   **k** 是一个常数。
 
-![](../Images/4863108e7a7e1fc40103e9e7cb9aa075.png)
+![](img/4863108e7a7e1fc40103e9e7cb9aa075.png)
 
-来源：[https://en.wikipedia.org/wiki/Power_law](https://en.wikipedia.org/wiki/Power_law)
+来源：[`en.wikipedia.org/wiki/Power_law`](https://en.wikipedia.org/wiki/Power_law)
 
 幂律分布只是众多概率分布中的一种，但被认为是评估正态分布无法处理的不确定性问题的宝贵工具，当这些问题发生在一定概率时。
 
@@ -315,7 +315,7 @@ plt.legend(loc='**best**')
 plt.show()
 ```
 
-![](../Images/ddc18c867157d654bde2e0d730fde602.png)
+![](img/ddc18c867157d654bde2e0d730fde602.png)
 
 ## Box-Cox 变换
 
@@ -325,31 +325,31 @@ plt.show()
 
 此外，变换我们的变量可以提高模型的预测能力，因为变换可以去除白噪声。
 
-![](../Images/4d11c5df11f76d5ee50688d1682d706c.png)
+![](img/4d11c5df11f76d5ee50688d1682d706c.png)
 
-原始分布（左）和应用Box-Cox变换后的接近正态分布。[来源](https://medium.com/@patricklcavins/using-scipys-powertransformer-3e2b792fd712)
+原始分布（左）和应用 Box-Cox 变换后的接近正态分布。[来源](https://medium.com/@patricklcavins/using-scipys-powertransformer-3e2b792fd712)
 
-Box-Cox变换的核心是一个指数**lambda (λ)**，其范围从-5到5。所有**λ**的值都被考虑，并为你的数据选择最佳值；“最佳值”是使数据最佳逼近正态分布曲线的值。
+Box-Cox 变换的核心是一个指数**lambda (λ)**，其范围从-5 到 5。所有**λ**的值都被考虑，并为你的数据选择最佳值；“最佳值”是使数据最佳逼近正态分布曲线的值。
 
-一参数Box-Cox变换定义为：
+一参数 Box-Cox 变换定义为：
 
-![](../Images/d90c1b940c1f707658ed3bdae922254e.png)
+![](img/d90c1b940c1f707658ed3bdae922254e.png)
 
-以及两个参数的Box-Cox变换为：
+以及两个参数的 Box-Cox 变换为：
 
-![](../Images/77aac2b334fb73d4566b266da9b425ec.png)
+![](img/77aac2b334fb73d4566b266da9b425ec.png)
 
-此外，一参数Box-Cox变换适用于**y > 0**，即仅适用于正值；而两个参数Box-Cox变换适用于**y > -λ**，即负值。
+此外，一参数 Box-Cox 变换适用于**y > 0**，即仅适用于正值；而两个参数 Box-Cox 变换适用于**y > -λ**，即负值。
 
 参数**λ**是使用[剖面似然](https://en.wikipedia.org/wiki/Profile_likelihood)函数和拟合优度测试来估计的。
 
-如果我们谈论Box-Cox变换的一些缺点，那么如果你想进行解释的话，Box-Cox是不推荐的。因为如果**λ**是某个非零数字，那么变换后的目标变量可能比简单地应用对数变换更难以解释。
+如果我们谈论 Box-Cox 变换的一些缺点，那么如果你想进行解释的话，Box-Cox 是不推荐的。因为如果**λ**是某个非零数字，那么变换后的目标变量可能比简单地应用对数变换更难以解释。
 
-第二个障碍是，Box-Cox变换通常在我们将变换后的数据恢复到原始尺度时给出预测分布的中位数。有时，我们需要的是均值而不是中位数。
+第二个障碍是，Box-Cox 变换通常在我们将变换后的数据恢复到原始尺度时给出预测分布的中位数。有时，我们需要的是均值而不是中位数。
 
-### Python中的Box-Cox变换（[来源](https://www.geeksforgeeks.org/box-cox-transformation-using-python/)）
+### Python 中的 Box-Cox 变换（[来源](https://www.geeksforgeeks.org/box-cox-transformation-using-python/)）
 
-SciPy的stats包提供了一个名为boxcox的函数，用于执行Box-Cox幂变换，该函数接受原始非正态数据作为输入，并返回拟合的数据以及用于将非正态分布拟合到正态分布的lambda值。
+SciPy 的 stats 包提供了一个名为 boxcox 的函数，用于执行 Box-Cox 幂变换，该函数接受原始非正态数据作为输入，并返回拟合的数据以及用于将非正态分布拟合到正态分布的 lambda 值。
 
 ```py
 #load necessary packages
@@ -386,7 +386,7 @@ fig.set_figwidth(10)
 print(f"**Lambda value used for Transformation: {best_lambda}**")
 ```
 
-![](../Images/1b76557a111d3e02419bfb4014957173.png)
+![](img/1b76557a111d3e02419bfb4014957173.png)
 
 ## 泊松分布
 
@@ -398,7 +398,7 @@ print(f"**Lambda value used for Transformation: {best_lambda}**")
 
 泊松分布的公式是：
 
-![](../Images/5e5e7098270414202d0d65f9eeb4989e.png)
+![](img/5e5e7098270414202d0d65f9eeb4989e.png)
 
 其中：
 
@@ -412,11 +412,11 @@ print(f"**Lambda value used for Transformation: {best_lambda}**")
 
 Lambda(**λ**) 可以被认为是区间内事件的期望数量。随着我们改变速率参数 λ，我们也改变了在一个区间内观察到不同数量事件的概率。下面的图是泊松分布的概率质量函数，展示了在不同速率参数下事件发生的概率。
 
-![](../Images/bd840c8733df74e00b3c02fd801fc7ab.png)
+![](img/bd840c8733df74e00b3c02fd801fc7ab.png)
 
 泊松分布的概率质量函数，速率参数变化的情况。[来源](https://www.analyzemath.com/probabilities/poisson-distribution-examples.html)
 
-泊松分布也常用于建模财务计数数据，其中计数很小，且经常为零。例如，在金融领域，它可以用来建模一个典型投资者在某一天的交易次数，这个次数可以是0（经常发生），也可以是1、2等。
+泊松分布也常用于建模财务计数数据，其中计数很小，且经常为零。例如，在金融领域，它可以用来建模一个典型投资者在某一天的交易次数，这个次数可以是 0（经常发生），也可以是 1、2 等。
 
 作为另一个例子，这个模型可以用来预测在给定时间段内，比如十年中，市场将发生多少次“冲击”。
 
@@ -441,7 +441,7 @@ plt.legend(loc='**best**')
 plt.show()
 ```
 
-![](../Images/ca327cc896e76beeffb14c10c829b212.png)
+![](img/ca327cc896e76beeffb14c10c829b212.png)
 
 随着 **λ** 变大，图形看起来越来越像正态分布。
 
@@ -453,27 +453,27 @@ plt.show()
 
 **参考文献**
 
-+   [https://calcworkshop.com/joint-probability-distribution/chebyshev-inequality/](https://calcworkshop.com/joint-probability-distribution/chebyshev-inequality/)
++   [`calcworkshop.com/joint-probability-distribution/chebyshev-inequality/`](https://calcworkshop.com/joint-probability-distribution/chebyshev-inequality/)
 
-+   [https://corporatefinanceinstitute.com/resources/knowledge/data-analysis/chebyshevs-inequality/](https://corporatefinanceinstitute.com/resources/knowledge/data-analysis/chebyshevs-inequality/)
++   [`corporatefinanceinstitute.com/resources/knowledge/data-analysis/chebyshevs-inequality/`](https://corporatefinanceinstitute.com/resources/knowledge/data-analysis/chebyshevs-inequality/)
 
-+   [https://www.itl.nist.gov/div898/handbook/eda/section3/eda3669.htm](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3669.htm)
++   [`www.itl.nist.gov/div898/handbook/eda/section3/eda3669.htm`](https://www.itl.nist.gov/div898/handbook/eda/section3/eda3669.htm)
 
-+   [https://www.statology.org/q-q-plot-python/](https://www.statology.org/q-q-plot-python/)
++   [`www.statology.org/q-q-plot-python/`](https://www.statology.org/q-q-plot-python/)
 
-+   [https://gist.github.com/chaipi-chaya/9eb72978dbbfd7fa4057b493cf6a32e7](https://gist.github.com/chaipi-chaya/9eb72978dbbfd7fa4057b493cf6a32e7)
++   [`gist.github.com/chaipi-chaya/9eb72978dbbfd7fa4057b493cf6a32e7`](https://gist.github.com/chaipi-chaya/9eb72978dbbfd7fa4057b493cf6a32e7)
 
-+   [https://stackoverflow.com/a/41968334/7175247](https://stackoverflow.com/a/41968334/7175247)
++   [`stackoverflow.com/a/41968334/7175247`](https://stackoverflow.com/a/41968334/7175247)
 
 [原文](https://www.theaidream.com/post/advanced-statistical-concepts-in-data-science). 经许可转载。
 
 **相关：**
 
-+   [数据科学家应该了解的推断统计学](/2021/03/statistics-data-scientists-should-know.html)
++   数据科学家应该了解的推断统计学
 
-+   [数据科学家需要知道的重要统计学](/2021/09/important-statistics-data-scientists.html)
++   数据科学家需要知道的重要统计学
 
-+   [零样本学习：你能在没有见过物体的情况下对其进行分类吗？](/2021/04/zero-shot-learning.html)
++   零样本学习：你能在没有见过物体的情况下对其进行分类吗？
 
 ### 更多相关主题
 

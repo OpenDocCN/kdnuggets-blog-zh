@@ -1,8 +1,8 @@
 # 数据科学团队协作的五个最佳实践
 
-> 原文：[https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
+> 原文：[`www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html`](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
 
-![数据科学团队协作的五个最佳实践](../Images/ef3c3e9c98c37cff47fd76ceff95b201.png)
+![数据科学团队协作的五个最佳实践](img/ef3c3e9c98c37cff47fd76ceff95b201.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -42,7 +42,7 @@
 
 # 文档项目
 
-一个数据科学项目由不同角色的人组成，从数据科学家到数据工程师、产品经理、IT管理员等。进行项目时，记录你所做的每一步可以使团队中的每个人更清楚地了解项目的过程，以及接下来需要做什么。
+一个数据科学项目由不同角色的人组成，从数据科学家到数据工程师、产品经理、IT 管理员等。进行项目时，记录你所做的每一步可以使团队中的每个人更清楚地了解项目的过程，以及接下来需要做什么。
 
 数据科学项目不会总是成功，但记录下你的每一步可以让你从项目中吸取教训，并在下次确保成功时知道该做什么。
 
@@ -74,7 +74,7 @@
 
 1.  使用自动化工具将中间数据文件推送回适当的位置。
 
-1.  利用像Slack和GitHub这样的集成工具，以便接收变更通知。
+1.  利用像 Slack 和 GitHub 这样的集成工具，以便接收变更通知。
 
 # 数据管道
 
@@ -84,22 +84,22 @@
 
 # 总结
 
-尽管还有其他实践方法可以用来确保更好的数据科学团队协作方法。然而，这5个实践方法如果正确有效地实施，将使你的团队在更有效和高效的方式下取得进展。
+尽管还有其他实践方法可以用来确保更好的数据科学团队协作方法。然而，这 5 个实践方法如果正确有效地实施，将使你的团队在更有效和高效的方式下取得进展。
 
-想了解如何自动化你的数据科学工作流，请阅读：[数据科学工作流的自动化](/2023/03/automation-data-science-workflows.html)
+想了解如何自动化你的数据科学工作流，请阅读：数据科学工作流的自动化
 
-**[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一位数据科学家、自由技术撰稿人以及KDnuggets的社区经理。她特别感兴趣于提供数据科学职业建议、教程以及理论知识。她还希望探索人工智能如何有助于人类生命的延续。她是一个热衷学习者，寻求拓宽技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一位数据科学家、自由技术撰稿人以及 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议、教程以及理论知识。她还希望探索人工智能如何有助于人类生命的延续。她是一个热衷学习者，寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
 +   [上下文、一致性与协作是数据科学成功的关键](https://www.kdnuggets.com/2022/01/context-consistency-collaboration-essential-data-science-success.html)
 
-+   [数据协作中的失败（以及修复的4个技巧）](https://www.kdnuggets.com/2023/01/collaboration-fails-around-data-4-tips-fixing.html)
++   [数据协作中的失败（以及修复的 4 个技巧）](https://www.kdnuggets.com/2023/01/collaboration-fails-around-data-4-tips-fixing.html)
 
-+   [协作的力量：开源项目如何推动AI发展](https://www.kdnuggets.com/2023/08/power-collaboration-opensource-projects-advancing-ai.html)
++   [协作的力量：开源项目如何推动 AI 发展](https://www.kdnuggets.com/2023/08/power-collaboration-opensource-projects-advancing-ai.html)
 
-+   [将ChatGPT融入数据科学工作流：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
++   [将 ChatGPT 融入数据科学工作流：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [5个数据科学的Python最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)
++   [5 个数据科学的 Python 最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)
 
-+   [数据仓库和ETL最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
++   [数据仓库和 ETL 最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)

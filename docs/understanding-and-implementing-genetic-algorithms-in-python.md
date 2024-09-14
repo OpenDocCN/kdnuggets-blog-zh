@@ -1,8 +1,8 @@
-# 理解和实现Python中的遗传算法
+# 理解和实现 Python 中的遗传算法
 
-> 原文：[https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)
+> 原文：[`www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python`](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)
 
-![理解和实现Python中的遗传算法](../Images/c6d9ecd841fb100f95d4673de0425ed3.png)
+![理解和实现 Python 中的遗传算法](img/c6d9ecd841fb100f95d4673de0425ed3.png)
 
 图片来源：作者 遗传算法是基于自然选择的技术，用于解决复杂问题。由于问题复杂，遗传算法相比其他方法能提供合理的解决方案。本文将介绍遗传算法的基本概念及如何在 Python 中实现它们。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -56,13 +56,13 @@
 
 ## 实现遗传算法的步骤
 
-让我们尝试在Python中实现遗传算法。
+让我们尝试在 Python 中实现遗传算法。
 
 ### 问题定义
 
-问题：计算特定函数；f(x) = x^2；仅整数值的x。
+问题：计算特定函数；f(x) = x²；仅整数值的 x。
 
-适应度函数：对于一个二进制染色体x，适应度函数的一个例子可以是 f(x)= x^2。
+适应度函数：对于一个二进制染色体 x，适应度函数的一个例子可以是 f(x)= x²。
 
 ```py
 def fitness(chromosome):

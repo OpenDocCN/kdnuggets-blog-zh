@@ -1,34 +1,34 @@
 # 优步正在悄悄组建市场上最令人印象深刻的开源深度学习堆栈之一
 
-> 原文：[https://www.kdnuggets.com/2020/01/uber-quietly-assembling-impressive-open-source-deep-learning.html](https://www.kdnuggets.com/2020/01/uber-quietly-assembling-impressive-open-source-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2020/01/uber-quietly-assembling-impressive-open-source-deep-learning.html`](https://www.kdnuggets.com/2020/01/uber-quietly-assembling-impressive-open-source-deep-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/9eb8f68d354e9d5615601a86bf9f0026.png)
+![](img/9eb8f68d354e9d5615601a86bf9f0026.png)
 
-人工智能（AI）一直是一个非典型的技术趋势。在传统的技术周期中，创新通常从试图颠覆行业现有者的初创公司开始。就AI而言，大部分创新来自于像谷歌、Facebook、优步或微软这样的企业实验室。这些公司不仅在研究方面处于领先地位，而且定期开源新的框架和工具，简化了AI技术的采用。在这种背景下，优步已成为当前生态系统中最活跃的开源AI技术贡献者之一。在短短几年内，优步在AI生命周期的不同领域定期开源项目。今天，我想回顾一些我最喜欢的项目。
+人工智能（AI）一直是一个非典型的技术趋势。在传统的技术周期中，创新通常从试图颠覆行业现有者的初创公司开始。就 AI 而言，大部分创新来自于像谷歌、Facebook、优步或微软这样的企业实验室。这些公司不仅在研究方面处于领先地位，而且定期开源新的框架和工具，简化了 AI 技术的采用。在这种背景下，优步已成为当前生态系统中最活跃的开源 AI 技术贡献者之一。在短短几年内，优步在 AI 生命周期的不同领域定期开源项目。今天，我想回顾一些我最喜欢的项目。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-优步是一个近乎完美的AI技术试验场。公司将大型技术公司传统的AI需求与前沿AI交通场景结合起来。因此，优步在从客户分类到自动驾驶车辆等各种多样化场景中建立了机器/深度学习应用程序。优步团队使用的许多技术已经开源，并获得了机器学习社区的好评。让我们看看我最喜欢的一些项目：
+优步是一个近乎完美的 AI 技术试验场。公司将大型技术公司传统的 AI 需求与前沿 AI 交通场景结合起来。因此，优步在从客户分类到自动驾驶车辆等各种多样化场景中建立了机器/深度学习应用程序。优步团队使用的许多技术已经开源，并获得了机器学习社区的好评。让我们看看我最喜欢的一些项目：
 
-*注意：我不会涵盖像Michelangelo或PyML这样的技术，因为它们已经有很好的文档，且已开源。*
+*注意：我不会涵盖像 Michelangelo 或 PyML 这样的技术，因为它们已经有很好的文档，且已开源。*
 
 ### Ludwig：一个无代码机器学习模型的工具箱
 
-![](../Images/e974233d4429a4d56d1c20aeaa705914.png)
+![](img/e974233d4429a4d56d1c20aeaa705914.png)
 
-[Ludwig](https://uber.github.io/ludwig/)是一个基于TensorFlow的工具箱，允许在不编写代码的情况下训练和测试深度学习模型。概念上，Ludwig是基于五个基本原则创建的：
+[Ludwig](https://uber.github.io/ludwig/)是一个基于 TensorFlow 的工具箱，允许在不编写代码的情况下训练和测试深度学习模型。概念上，Ludwig 是基于五个基本原则创建的：
 
 +   **无需编码**：不需要编码技能即可训练模型并使用它来获得预测。
 
@@ -44,7 +44,7 @@
 
 ### Pyro: 一个本地的概率编程语言
 
-![](../Images/ea6089cd3eb8ca1d2df8db34dd345aa7.png)
+![](img/ea6089cd3eb8ca1d2df8db34dd345aa7.png)
 
 [Pyro](http://pyro.ai/)是由 Uber AI Labs 发布的深度概率编程语言（PPL）。Pyro 构建于 PyTorch 之上，基于四个基本原则：
 
@@ -60,7 +60,7 @@
 
 ### Manifold: 一个用于机器学习模型的调试和解释工具集
 
-![](../Images/714ca5378bb4bb9e1a5ce2470983a8e0.png)
+![](img/714ca5378bb4bb9e1a5ce2470983a8e0.png)
 
 [Manifold](https://github.com/uber/manifold) 是 Uber 技术用于大规模调试和解释机器学习模型。使用 Manifold，Uber 工程团队希望实现一些非常具体的目标：
 
@@ -82,7 +82,7 @@
 
 ### 柏拉图：大规模构建对话代理的框架
 
-![](../Images/b0ddd56bc6cc2bc810712d9c10b90cd9.png)
+![](img/b0ddd56bc6cc2bc810712d9c10b90cd9.png)
 
 Uber 构建了 [Plato Research Dialogue System (PRDS)](https://github.com/uber-research/plato-research-dialogue-system) 以应对构建大规模对话应用的挑战。从概念上讲，PRDS 是一个框架，用于在多种环境中创建、训练和评估对话 AI 代理。从功能角度看，PRDS 包括以下构建模块：
 
@@ -104,7 +104,7 @@ PRDS 设计时考虑了模块化，以便纳入最先进的对话系统研究，
 
 ### Horovod: 用于大规模训练深度学习的框架
 
-![](../Images/01a5c1c4d4c94262c48bc727ddd14629.png)
+![](img/01a5c1c4d4c94262c48bc727ddd14629.png)
 
 [Horovod](https://github.com/uber/horovod) 是 Uber 机器学习堆栈之一，在社区中变得极其受欢迎，并被像 DeepMind 或 OpenAI 这样的 AI 巨头的研究团队采纳。从概念上讲，Horovod 是一个用于大规模运行分布式深度学习训练作业的框架。
 
@@ -128,11 +128,11 @@ Horovod 利用消息传递接口堆栈，如 [OpenMPI](https://www.open-mpi.org/
 
 **相关：**
 
-+   [Uber 创建生成式教学网络以更好地训练深度神经网络](/2020/01/uber-generative-teaching-networks-train-neural-networks.html)
++   Uber 创建生成式教学网络以更好地训练深度神经网络
 
-+   [微软推出 Project Petridish 以找到最适合您问题的神经网络](/2020/01/microsoft-introduces-project-petridish-best-neural-network.html)
++   微软推出 Project Petridish 以找到最适合您问题的神经网络
 
-+   [Facebook 已悄悄开源一些令人惊叹的 PyTorch 深度学习能力](/2019/11/facebook-quietly-open-sourcing-amazing-deep-learning-capabilities-pytorch.html)
++   Facebook 已悄悄开源一些令人惊叹的 PyTorch 深度学习能力
 
 ### 更多相关话题
 
@@ -142,8 +142,8 @@ Horovod 利用消息传递接口堆栈，如 [OpenMPI](https://www.open-mpi.org/
 
 +   [闭源与开源图像注释](https://www.kdnuggets.com/closed-source-vs-open-source-image-annotation)
 
-+   [LLaMA 3：Meta推出的最强大的开源模型](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)
++   [LLaMA 3：Meta 推出的最强大的开源模型](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)
 
-+   [HuggingFace推出了一个免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)
++   [HuggingFace 推出了一个免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)
 
 +   [每位数据科学家至少犯过一次的错误](https://www.kdnuggets.com/2022/09/mistake-every-data-scientist-made-least.html)

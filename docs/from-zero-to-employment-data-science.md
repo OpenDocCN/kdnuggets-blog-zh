@@ -1,38 +1,38 @@
 # 如何从零到数据科学就业
 
-> 原文：[https://www.kdnuggets.com/2019/01/from-zero-to-employment-data-science.html](https://www.kdnuggets.com/2019/01/from-zero-to-employment-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/01/from-zero-to-employment-data-science.html`](https://www.kdnuggets.com/2019/01/from-zero-to-employment-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Alexander Engelhardt](http://www.alpha-epsilon.de/)**
 
-![](../Images/3521bf194bc70c2a70c9903a10761ab2.png)
+![](img/3521bf194bc70c2a70c9903a10761ab2.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
-当你想进入一个新的工作领域时，会遇到一个鸡与蛋的问题：没有经验就无法找到工作，但没有工作就无法获得经验。我最近在从R转到Python并寻求Python工作的过程中遇到了这个问题，我想分享我如何克服这个问题。
+当你想进入一个新的工作领域时，会遇到一个鸡与蛋的问题：没有经验就无法找到工作，但没有工作就无法获得经验。我最近在从 R 转到 Python 并寻求 Python 工作的过程中遇到了这个问题，我想分享我如何克服这个问题。
 
 我走过了五步的旅程，我推荐正是这种方法：
 
 **1\. 学习基础知识**
 
-首先，你必须掌握基础知识，这需要你自己去做。找到一个好的课程，或询问有关好的课程的推荐，跟随它，每次遇到问题时，去[https://stackoverflow.com](https://stackoverflow.com)提问。你可能会在开始时收到不礼貌的回应，但不要灰心——你需要学会如何在这里提问。这教会你如何清晰地将你的想法和问题表达给“不是在你脑海里”的人——提出好的问题是一项对你未来职业生涯至关重要的技能。
+首先，你必须掌握基础知识，这需要你自己去做。找到一个好的课程，或询问有关好的课程的推荐，跟随它，每次遇到问题时，去[`stackoverflow.com`](https://stackoverflow.com)提问。你可能会在开始时收到不礼貌的回应，但不要灰心——你需要学会如何在这里提问。这教会你如何清晰地将你的想法和问题表达给“不是在你脑海里”的人——提出好的问题是一项对你未来职业生涯至关重要的技能。
 
-你可以将认证作为这一阶段的固定目标。例如，当我开始学习大数据技术时，我报名参加了Cloudera的Spark和Hadoop开发者考试。一些专业人士不喜欢证书，强调实际工作经验，但我认为证书特别是在开始阶段非常有帮助，它可以作为一个目标，指导你学习的内容，并标志着第一阶段的“完成”。
+你可以将认证作为这一阶段的固定目标。例如，当我开始学习大数据技术时，我报名参加了 Cloudera 的 Spark 和 Hadoop 开发者考试。一些专业人士不喜欢证书，强调实际工作经验，但我认为证书特别是在开始阶段非常有帮助，它可以作为一个目标，指导你学习的内容，并标志着第一阶段的“完成”。
 
 **2\. 寻找充满激情的项目**
 
-许多人停留在第1步——这是一种危险的陷阱。相反，尽量尽快脱离课程，创建一些你充满激情的项目。课程可以教你基础知识，但通常不擅长真正激励你。然而，如果你被困在对你重要的事情上，你会更快地解决问题，从而更快地学习。
+许多人停留在第 1 步——这是一种危险的陷阱。相反，尽量尽快脱离课程，创建一些你充满激情的项目。课程可以教你基础知识，但通常不擅长真正激励你。然而，如果你被困在对你重要的事情上，你会更快地解决问题，从而更快地学习。
 
 如果你还想不到一个好的项目，可以看看现有的项目，阅读博客，扩展你对“现有”技术的了解。这可能需要一些时间，但这是非常值得的努力。当然，你还应将使用的技术与目标职位的要求对接。
 
@@ -72,15 +72,15 @@
 
 +   [你应该成为数据科学家吗？](https://www.kdnuggets.com/2018/12/should-i-become-a-data-scientist.html)
 
-+   [启动数据科学职业的6步计划](https://www.kdnuggets.com/2018/12/6-step-plan-starting-data-science-career.html)
++   [启动数据科学职业的 6 步计划](https://www.kdnuggets.com/2018/12/6-step-plan-starting-data-science-career.html)
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

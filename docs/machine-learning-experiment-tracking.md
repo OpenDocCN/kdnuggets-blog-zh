@@ -1,8 +1,8 @@
 # 机器学习实验跟踪
 
-> 原文：[https://www.kdnuggets.com/2020/06/machine-learning-experiment-tracking.html](https://www.kdnuggets.com/2020/06/machine-learning-experiment-tracking.html)
+> 原文：[`www.kdnuggets.com/2020/06/machine-learning-experiment-tracking.html`](https://www.kdnuggets.com/2020/06/machine-learning-experiment-tracking.html)
 
-[评论](#comments)
+评论
 
 **由 [Lukas Biewald](https://twitter.com/l2k)，Weights and Biases 的创始人/首席执行官**。
 
@@ -20,7 +20,7 @@
 
 ### **开始使用 wandb 进行实验跟踪**
 
-![Figure](../Images/eaa71f2ce46baac32744caae08e94431.png)
+![Figure](img/eaa71f2ce46baac32744caae08e94431.png)
 
 查看 [实时仪表板](https://app.wandb.ai/stacey/estuary/reports/Distributed-Training--Vmlldzo1MjEw)
 
@@ -30,13 +30,13 @@
 
 这是我几年前用于一个项目的 Google 文档：
 
-![](../Images/056b121d80c5e9ecf4778211054ee4bc.png)
+![](img/056b121d80c5e9ecf4778211054ee4bc.png)
 
 我确定这些笔记在当时很重要，但现在我不知道这些笔记的含义。
 
 Weights and Biases 使得自动记录所有超参数（输入）和指标（输出）变得非常简单。
 
-![Figure](../Images/0623197a8b1bf670a6cc60715acb35e1.png)
+![Figure](img/0623197a8b1bf670a6cc60715acb35e1.png)
 
 在 [wandb](http://app.wandb.ai/l2k2/l2k) 中的一个典型项目。
 
@@ -54,7 +54,7 @@ for batch_idx, (data, target) in enumerate(train_loader):
 
 一旦设置完成，Weights and Biases 默认会监控很多内容。任何命令行参数都会变成保存的超参数。任何由 pytorch 提供的值都会成为一个指标。实验可以自动链接到最新的 git 提交或训练代码的确切状态。被动收集信息真的很重要，因为几乎不可能始终如一地记录你可能关心的所有事项。
 
-![Figure](../Images/1b71bc00b21cde5f4234493f6b19fede.png)
+![Figure](img/1b71bc00b21cde5f4234493f6b19fede.png)
 
 [实验概述](https://app.wandb.ai/l2k2/l2k/runs/nv641wyz/overview) 在 Weights & Biases 中
 
@@ -62,7 +62,7 @@ for batch_idx, (data, target) in enumerate(train_loader):
 
 **在后台收集系统指标**是一个很好的例子。Wandb 在后台收集系统使用指标——例如 GPU 内存分配、网络流量和磁盘使用情况。大多数时候你不需要查看所有这些信息，但当你不再使用大部分 GPU 内存并且很难追踪到这个变化时，情况会变得复杂。如果你 [用 wandb 监控你的训练代码](https://docs.wandb.com/quickstart) 一次，你将能够回顾所有实验并查看使用情况的变化。
 
-![Figure](../Images/0f3af270a18bc6514409e7446e5c512a.png)
+![Figure](img/0f3af270a18bc6514409e7446e5c512a.png)
 
 在 [实时仪表盘](https://app.wandb.ai/l2k2/examples-prod_monitor)查看
 
@@ -74,13 +74,13 @@ for batch_idx, (data, target) in enumerate(train_loader):
 
 不同的实验风格会导致不同的工作流程，但我们发现，记录你可能关注的每一个指标，并用几个对你有意义的标签标记实验，可以使后续工作更加有序。
 
-![Figure](../Images/6ef74a7116e61a4ea7364155234355c1.png)
+![Figure](img/6ef74a7116e61a4ea7364155234355c1.png)
 
 在 [实时仪表盘](https://app.wandb.ai/stacey/estuary/table)查看。
 
 一旦你记录了大量模型，你就有了更多的维度可以检查，而这些维度无法一眼看完。我们发现的一个强大的可视化工具是平行坐标图。
 
-![Figure](../Images/a77581064731a7d3e385aa4b6e040357.png)
+![Figure](img/a77581064731a7d3e385aa4b6e040357.png)
 
 在 [实时仪表盘](https://app.wandb.ai/sweep/simpsons)查看
 
@@ -92,7 +92,7 @@ for batch_idx, (data, target) in enumerate(train_loader):
 
 聚合指标很重要，但查看具体的示例也至关重要。函数 [wandb.log()](https://docs.wandb.com/library/log) 可以处理各种数据类型并自动可视化它们。
 
-![Figure](../Images/73bfb956a1449f9867e78d998d50b6b7.png)
+![Figure](img/73bfb956a1449f9867e78d998d50b6b7.png)
 
 查看 [实时报告](https://app.wandb.ai/stacey/deep-drive/reports/The-View-from-the-Driver's-Seat--Vmlldzo1MTg5NQ)
 
@@ -100,13 +100,13 @@ for batch_idx, (data, target) in enumerate(train_loader):
 
 [记录图像](https://docs.wandb.com/library/log#logging-images) 对于许多应用非常重要，并且可以跨多个运行查看图像。这些是构建 GAN 的不同方法及其在各种尺度和时间步长下的结果。
 
-![](../Images/38d75003eee0cad47b5f3319703b0015.png)
+![](img/38d75003eee0cad47b5f3319703b0015.png)
 
 ### **记录 Matplotlib 图表**
 
 通常代码已经在 matplotlib 中跟踪了内容——如果你 [记录图表](https://docs.wandb.com/library/log#logging-plots)，它将被永久保存，并且容易检索。实际上，你可以为训练代码的每个步骤记录一个独特的图表。
 
-![](../Images/f05fe87ccf765a6c757c7a0a3b2177ae.png)
+![](img/f05fe87ccf765a6c757c7a0a3b2177ae.png)
 
 ### **使用实验跟踪来管理分布式训练**
 
@@ -118,7 +118,7 @@ for batch_idx, (data, target) in enumerate(train_loader):
 wandb.init(group=”first-run”, job_type=”train”)
 ```
 
-![图形](../Images/455dc0dc84431d7610804050008bcbb3.png)
+![图形](img/455dc0dc84431d7610804050008bcbb3.png)
 
 查看 [实时仪表盘](https://app.wandb.ai/stacey/estuary/reports/Distributed-Training--Vmlldzo1MjEw)
 
@@ -132,41 +132,41 @@ Wandb 会显示组内所有运行的指标汇总，但也可以进入并查看�
 
 在 Latent Space，每个团队项目会议都以审查最新的 wandb 实验报告开始，并讨论当前方法的有效性以及下一步应尝试的实验。
 
-![图形](../Images/471d00148c147e00c3f4c36cd17b9f58.png)
+![图形](img/471d00148c147e00c3f4c36cd17b9f58.png)
 
 查看 [实时报告](https://app.wandb.ai/stacey/curr_learn/reports/Layout%3A-Classify-Species--Vmlldzo0MDQ2NA)
 
 ### **使用实验跟踪作为模型的记录系统**
 
-随着团队的扩展和模型的投入生产，记录发生的一切变得越来越重要。在丰田研究所，wandb实验链接被用作每个构建的机器学习模型的官方记录。如果模型构建后发生了问题，他们可以追溯到wandb训练运行。通过一组实验生成报告意味着有一个永久记录工作的文档，团队可以轻松地回顾发生了什么。
+随着团队的扩展和模型的投入生产，记录发生的一切变得越来越重要。在丰田研究所，wandb 实验链接被用作每个构建的机器学习模型的官方记录。如果模型构建后发生了问题，他们可以追溯到 wandb 训练运行。通过一组实验生成报告意味着有一个永久记录工作的文档，团队可以轻松地回顾发生了什么。
 
-**简介：[Lukas Biewald](https://twitter.com/l2k)** 是Weights & Biases的创始人，之前是Figure Eight（前身为CrowdFlower）的创始人。
+**简介：[Lukas Biewald](https://twitter.com/l2k)** 是 Weights & Biases 的创始人，之前是 Figure Eight（前身为 CrowdFlower）的创始人。
 
 [原文](https://towardsdatascience.com/machine-learning-experiment-tracking-93b796e501b0)。经许可转载。
 
 **相关内容：**
 
-+   [为什么机器学习项目如此难以管理？](/2020/02/machine-learning-projects-manage.html)
++   为什么机器学习项目如此难以管理？
 
-+   [互动式机器学习实验](/2020/05/interactive-machine-learning-experiments.html)
++   互动式机器学习实验
 
-+   [机器学习中的模型评估指标](/2020/05/model-evaluation-metrics-machine-learning.html)
++   机器学习中的模型评估指标
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织中的IT事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织中的 IT 事务
 
 * * *
 
 ### 更多相关话题
 
-+   [机器学习实验跟踪的7个最佳工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
++   [机器学习实验跟踪的 7 个最佳工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
 
 +   [版本控制机器学习实验与跟踪它们](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)
 
@@ -174,6 +174,6 @@ Wandb 会显示组内所有运行的指标汇总，但也可以进入并查看�
 
 +   [数据科学中实验设计的重要性](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)
 
-+   [每个机器学习工程师都应该具备的5项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该具备的 5 项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets新闻，12月14日：3个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)

@@ -1,14 +1,14 @@
-# 数据分析师与数据科学家之间的7个区别
+# 数据分析师与数据科学家之间的 7 个区别
 
-> 原文：[https://www.kdnuggets.com/2021/09/7-differences-between-data-analyst-data-scientist.html](https://www.kdnuggets.com/2021/09/7-differences-between-data-analyst-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/09/7-differences-between-data-analyst-data-scientist.html`](https://www.kdnuggets.com/2021/09/7-differences-between-data-analyst-data-scientist.html)
 
-[评论](#comments)
+评论
 
 **作者：[Zulie Rane](http://www.stratascratch.com/)，自由撰稿人和编码爱好者**
 
 *剧透：差距是$30k。*
 
-![数据分析师与数据科学家](../Images/5f7da35b87f0a52f962415545a96f081.png)
+![数据分析师与数据科学家](img/5f7da35b87f0a52f962415545a96f081.png)
 
 成为数据分析师与数据科学家有什么好处？数据分析师与数据科学家的主要区别是什么？它们是同一工作吗？哪个职位，数据分析师还是数据科学家，薪资更高？你到底是怎么进行数据科学的呢？
 
@@ -26,11 +26,11 @@
 
 让我们深入了解一下吧。
 
-![数据分析师与数据科学家的比较信息图](../Images/6620e046e1190661c32294dc53d053b4.png)
+![数据分析师与数据科学家的比较信息图](img/6620e046e1190661c32294dc53d053b4.png)
 
 ## 1\. 数据分析师与数据科学家：职位描述
 
-![数据分析师与数据科学家的职位描述](../Images/4f19265503685a149ea7c882a1493673.png)
+![数据分析师与数据科学家的职位描述](img/4f19265503685a149ea7c882a1493673.png)
 
 首先，我们来高层次地描述一下数据科学家职位与数据分析师职位之间的区别。我通过谷歌搜索数据科学家职位描述和数据分析师职位描述，发现这些区别大致符合你对这些标题的预期。
 
@@ -44,7 +44,7 @@
 
 让我们来比较一下数据分析师和数据科学家的任务、工具和工作流程。
 
-数据科学家的典型一天通常包括会议、项目报告、检查电子邮件和创建模型。Gartner的全球机器学习团队负责人Andriy Burkov，[表示](https://2017/11/day-life-data-scientist.html)他还帮助团队成员改进当前模型和训练示例，以解决模型中的问题。这还涉及大量的数据清理工作。
+数据科学家的典型一天通常包括会议、项目报告、检查电子邮件和创建模型。Gartner 的全球机器学习团队负责人 Andriy Burkov，[表示](https://2017/11/day-life-data-scientist.html)他还帮助团队成员改进当前模型和训练示例，以解决模型中的问题。这还涉及大量的数据清理工作。
 
 值得记住的是，数据科学专业宣言本身指出，“数据科学是解决问题，而不是模型或算法”，所以在讨论数据分析师的日常工作时，请记住这一点。
 
@@ -56,11 +56,11 @@
 
 这是一个有趣的部分！数据分析师与数据科学家的预期薪资和职业前景如何？
 
-![数据分析师与数据科学家薪资和职业前景](../Images/ad08cb65372f2378e870e7300ca2b491.png)
+![数据分析师与数据科学家薪资和职业前景](img/ad08cb65372f2378e870e7300ca2b491.png)
 
-对于这两个领域都有好消息。确实，[报告](https://www.indeed.com/career-advice/pay-salary/how-much-do-data-analysts-make#:~:text=Create%20an%20Account-,Job%20outlook%20for%20data%20analysts,a%20range%20of%20different%20industries.)显示，数据分析师职位预计从2018年到2028年增长20%，这显然快于平均水平。这归因于不同领域对更好市场研究的需求。数据分析师可以在IT、医疗保健、金融和保险行业找到工作。数据分析师在美国的平均薪资为$70,000。数据分析师的最高薪资潜力在北卡罗来纳州，实际上是每年$85,000。
+对于这两个领域都有好消息。确实，[报告](https://www.indeed.com/career-advice/pay-salary/how-much-do-data-analysts-make#:~:text=Create%20an%20Account-,Job%20outlook%20for%20data%20analysts,a%20range%20of%20different%20industries.)显示，数据分析师职位预计从 2018 年到 2028 年增长 20%，这显然快于平均水平。这归因于不同领域对更好市场研究的需求。数据分析师可以在 IT、医疗保健、金融和保险行业找到工作。数据分析师在美国的平均薪资为$70,000。数据分析师的最高薪资潜力在北卡罗来纳州，实际上是每年$85,000。
 
-我找不到关于数据科学的相同报告，因此我们不能做到直接比较。然而，正如[非常明确](https://lambdaschool.com/the-commons/data-science-job-growth-in-2021-and-beyond)的那样，数据科学工作的增长前景与数据分析师的工作增长同样有前途。IBM预测2020年对数据科学家的需求将激增28%；劳动统计局认为数据科学是增长最快的前20个职业之一，并预计未来10年增长31%。
+我找不到关于数据科学的相同报告，因此我们不能做到直接比较。然而，正如[非常明确](https://lambdaschool.com/the-commons/data-science-job-growth-in-2021-and-beyond)的那样，数据科学工作的增长前景与数据分析师的工作增长同样有前途。IBM 预测 2020 年对数据科学家的需求将激增 28%；劳动统计局认为数据科学是增长最快的前 20 个职业之一，并预计未来 10 年增长 31%。
 
 根据[美国劳动统计局](https://www.bls.gov/oes/current/oes152098.htm)的数据，能够创建模型的工作薪资提升约为$30,000。数据科学家的平均薪资超过$100,000。查看我们关于[*数据科学家薪资多少*](https://www.stratascratch.com/blog/how-much-do-data-scientists-make/)的文章，了解数据科学的薪资以及这些薪资如何受到各种因素的影响。
 
@@ -78,7 +78,7 @@
 
 ## 5\. 数据分析师与数据科学家：技能
 
-![数据分析师与数据科学家技能](../Images/8b7e17e539d0a6f8268dc033ddf0eac1.png)
+![数据分析师与数据科学家技能](img/8b7e17e539d0a6f8268dc033ddf0eac1.png)
 
 要成为数据分析师而不是数据科学家，你需要稍微不同的技能。然而，正如你可能从这篇文章的要点中了解到的那样，二者之间有相当大的重叠。
 
@@ -100,7 +100,7 @@
 
 对于数据科学家来说，相比数据分析师，需要更长的时间。你至少需要两个学位，可能还需要三个。到你成为数据科学家时，大多数人对自己的选择相当确定。然而，还有成长的空间。你可以走管理路径或个人贡献者路径。在个人贡献者路径中，你将深化和强化在数据科学某个特定领域的技能，成为一个小领域的专家。作为数据科学家走管理路径时，你则会退后一步进行扩展。你将管理团队，扩展数据战略，并更全面地与数据组织合作。
 
-这些路径不一定是线性的。它们会重叠、分叉，然后再汇聚。也没有任何年份的要求。你可以做三年数据分析师，然后在第二年[成为数据科学家](https://www.stratascratch.com/blog/how-to-become-a-data-scientist-from-scratch/)；你可以在数据科学家的职位上待20年而没有任何进展。很大程度上取决于你在过程中获得的技能。
+这些路径不一定是线性的。它们会重叠、分叉，然后再汇聚。也没有任何年份的要求。你可以做三年数据分析师，然后在第二年[成为数据科学家](https://www.stratascratch.com/blog/how-to-become-a-data-scientist-from-scratch/)；你可以在数据科学家的职位上待 20 年而没有任何进展。很大程度上取决于你在过程中获得的技能。
 
 ## 7. 数据分析师与数据科学家：哪一个更好？
 
@@ -116,22 +116,22 @@
 
 **相关内容：**
 
-+   [数据科学家与机器学习工程师的区别](/2021/08/difference-between-data-scientists-ml-engineers.html)
++   数据科学家与机器学习工程师的区别
 
-+   [2021年招聘数据科学家的顶尖行业](/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html)
++   2021 年招聘数据科学家的顶尖行业
 
-+   [避免的5个数据科学职业错误](/2021/08/5-data-science-career-mistakes-avoid.html)
++   避免的 5 个数据科学职业错误
 
 ### 更多相关主题
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，然后寻找目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [9亿美元AI失败的深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元 AI 失败的深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

@@ -1,12 +1,12 @@
-# 10个机器学习模型训练中的错误
+# 10 个机器学习模型训练中的错误
 
-> 原文：[https://www.kdnuggets.com/2021/07/10-machine-learning-model-training-mistakes.html](https://www.kdnuggets.com/2021/07/10-machine-learning-model-training-mistakes.html)
+> 原文：[`www.kdnuggets.com/2021/07/10-machine-learning-model-training-mistakes.html`](https://www.kdnuggets.com/2021/07/10-machine-learning-model-training-mistakes.html)
 
-[评论](#comments)
+评论
 
-**作者：[Sandeep Uttamchandani, Ph.D.](https://www.linkedin.com/in/sandeepuc/)，既是产品/软件开发者（工程副总裁），也是企业范围内数据/AI项目的领导者（首席数据官）**
+**作者：[Sandeep Uttamchandani, Ph.D.](https://www.linkedin.com/in/sandeepuc/)，既是产品/软件开发者（工程副总裁），也是企业范围内数据/AI 项目的领导者（首席数据官）**
 
-![Mistakes header](../Images/70a570ad807374cd4dd6269c8abf20d0.png)
+![Mistakes header](img/70a570ad807374cd4dd6269c8abf20d0.png)
 
 图片来自[Tumisu](https://pixabay.com/users/tumisu-148124/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1966448)的[Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1966448)
 
@@ -62,21 +62,21 @@
 
 **相关：**
 
-+   [如何判断你的机器学习模型是否过拟合](/2021/05/how-determine-machine-learning-model-overtrained.html)
++   如何判断你的机器学习模型是否过拟合
 
-+   [使用PyCaret编写和训练你自己的自定义机器学习模型](/2021/05/pycaret-write-train-custom-machine-learning-models.html)
++   使用 PyCaret 编写和训练你自己的自定义机器学习模型
 
-+   [如何在20天内破坏一个模型——关于生产模型分析的教程](/2021/03/break-model-20-days-tutorial-production-model-analytics.html)
++   如何在 20 天内破坏一个模型——关于生产模型分析的教程
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -84,12 +84,12 @@
 
 +   [如何使用合成数据克服机器学习中的数据短缺问题](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)
 
-+   [如何加快XGBoost模型训练速度](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
++   [如何加快 XGBoost 模型训练速度](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
 
-+   [软件错误与权衡：Tomasz Lelek的新书及…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
++   [软件错误与权衡：Tomasz Lelek 的新书及…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
 
 +   [新手数据科学家应避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-+   [可能影响数据分析准确性的3个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
++   [可能影响数据分析准确性的 3 个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
 
-+   [避免这5个每位AI新手都会犯的常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个每位 AI 新手都会犯的常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)

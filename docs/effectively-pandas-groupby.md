@@ -1,10 +1,10 @@
 # 如何有效使用 Pandas GroupBy
 
-> 原文：[https://www.kdnuggets.com/2023/01/effectively-pandas-groupby.html](https://www.kdnuggets.com/2023/01/effectively-pandas-groupby.html)
+> 原文：[`www.kdnuggets.com/2023/01/effectively-pandas-groupby.html`](https://www.kdnuggets.com/2023/01/effectively-pandas-groupby.html)
 
 Pandas 是一个功能强大且广泛使用的开源库，用于使用 Python 进行数据操作和分析。它的一个关键特性是能够使用 groupby 函数通过基于一个或多个列将数据框分成组，然后对每个组应用各种聚合函数。
 
-![如何有效使用 Pandas GroupBy](../Images/879f79de072a25cc8d7dcf4ed4c20a83.png)
+![如何有效使用 Pandas GroupBy](img/879f79de072a25cc8d7dcf4ed4c20a83.png)
 
 图片来自 [Unsplash](https://unsplash.com/photos/_9a-3NO5KJE)
 
@@ -12,11 +12,11 @@ Pandas 是一个功能强大且广泛使用的开源库，用于使用 Python �
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
 
 * * *
 
@@ -130,7 +130,7 @@ df.head()
 
 数据框的外观如下所示。在运行此代码时，由于我们使用的是随机样本，某些值可能不会匹配。
 
-![如何有效使用 Pandas GroupBy](../Images/60567c4eba6d039fbeee0ec6f5df1ca1.png)
+![如何有效使用 Pandas GroupBy](img/60567c4eba6d039fbeee0ec6f5df1ca1.png)
 
 ## 创建分组
 
@@ -143,9 +143,9 @@ groups.get_group('Electrical Engineering')
 
 所以，四名学生属于电气工程专业。
 
-![如何有效使用Pandas GroupBy](../Images/1a5918b5b870497bb38c450cbeac5a5d.png)
+![如何有效使用 Pandas GroupBy](img/1a5918b5b870497bb38c450cbeac5a5d.png)
 
-你也可以按多个列分组（在此情况下为Major和num_add_sbj）。
+你也可以按多个列分组（在此情况下为 Major 和 num_add_sbj）。
 
 ```py
 groups = df.groupby(['Major', 'num_add_sbj'])
@@ -161,9 +161,9 @@ groups = df.groupby('Major')
 
 ## 应用直接函数
 
-假设你想找到每个Major的平均分数。你会怎么做？
+假设你想找到每个 Major 的平均分数。你会怎么做？
 
-+   选择Marks列
++   选择 Marks 列
 
 +   应用均值函数
 
@@ -197,7 +197,7 @@ groups['Marks'].aggregate('mean').round(2)
 groups['Marks'].aggregate(['mean', 'median', 'std']).round(2)
 ```
 
-![如何有效使用Pandas GroupBy](../Images/ab37326bb82a68c07d628410297a4895.png)
+![如何有效使用 Pandas GroupBy](img/ab37326bb82a68c07d628410297a4895.png)
 
 但如果你需要对不同的列应用不同的函数怎么办？不用担心。你也可以通过传递{column: function}对来做到这一点。
 
@@ -205,11 +205,11 @@ groups['Marks'].aggregate(['mean', 'median', 'std']).round(2)
 groups.aggregate({'Year_adm': 'median', 'Marks': 'mean'})
 ```
 
-![如何有效使用Pandas GroupBy](../Images/2ed28413582b51776378cf5af557fc17.png)
+![如何有效使用 Pandas GroupBy](img/2ed28413582b51776378cf5af557fc17.png)
 
 ## 变换
 
-你可能需要对特定列执行自定义变换，这可以通过使用`groupby()`轻松实现。让我们定义一个类似于sklearn的预处理模块中的标准缩放器。你可以通过调用`transform`方法并传递自定义函数来变换所有列。
+你可能需要对特定列执行自定义变换，这可以通过使用`groupby()`轻松实现。让我们定义一个类似于 sklearn 的预处理模块中的标准缩放器。你可以通过调用`transform`方法并传递自定义函数来变换所有列。
 
 ```py
 def standard_scalar(x):
@@ -217,19 +217,19 @@ def standard_scalar(x):
 groups.transform(standard_scalar)
 ```
 
-![如何有效使用Pandas GroupBy](../Images/5b0d46f642b0c1b03290ae8809752001.png)
+![如何有效使用 Pandas GroupBy](img/5b0d46f642b0c1b03290ae8809752001.png)
 
 注意，“NaN”表示标准差为零的组。
 
 ## 过滤
 
-你可能想检查哪个“Major”表现不佳，即平均“Marks”低于60的那个。这需要你对组应用一个带有函数的过滤方法。下面的代码使用一个[lambda函数](/2023/01/python-lambda-functions-explained.html)来实现过滤结果。
+你可能想检查哪个“Major”表现不佳，即平均“Marks”低于 60 的那个。这需要你对组应用一个带有函数的过滤方法。下面的代码使用一个 lambda 函数来实现过滤结果。
 
 ```py
 groups.filter(lambda x: x['Marks'].mean() < 60)
 ```
 
-![如何有效使用Pandas GroupBy](../Images/fa2ab6e7d1ff79db689a9143e56d3f92.png)
+![如何有效使用 Pandas GroupBy](img/fa2ab6e7d1ff79db689a9143e56d3f92.png)
 
 ## 首先
 
@@ -239,7 +239,7 @@ groups.filter(lambda x: x['Marks'].mean() < 60)
 groups.first()
 ```
 
-![如何有效使用Pandas GroupBy](../Images/6b33f5b854a68e6d80ac7805244e1a35.png)
+![如何有效使用 Pandas GroupBy](img/6b33f5b854a68e6d80ac7805244e1a35.png)
 
 ## 描述
 
@@ -249,7 +249,7 @@ groups.first()
 groups['Marks'].describe()
 ```
 
-![如何有效使用Pandas GroupBy](../Images/ced1ca2d73e200609134a1ee14a3779b.png)
+![如何有效使用 Pandas GroupBy](img/ced1ca2d73e200609134a1ee14a3779b.png)
 
 ## 大小
 
@@ -277,13 +277,13 @@ dtype: int64
 groups.count()
 ```
 
-![如何有效使用Pandas GroupBy](../Images/603e4e537e29626e3efea386b1d5afef.png)
+![如何有效使用 Pandas GroupBy](img/603e4e537e29626e3efea386b1d5afef.png)
 
 ```py
 groups.nunique()
 ```
 
-![如何有效使用Pandas GroupBy](../Images/ea473d0a224cf4a05b25cd20778995f9.png)
+![如何有效使用 Pandas GroupBy](img/ea473d0a224cf4a05b25cd20778995f9.png)
 
 ## 重命名
 
@@ -298,23 +298,23 @@ groups.aggregate("median").rename(
 ) 
 ```
 
-![如何有效使用Pandas GroupBy](../Images/bdfd7daf7a367cc9b644c1556a8454db.png)
+![如何有效使用 Pandas GroupBy](img/bdfd7daf7a367cc9b644c1556a8454db.png)
 
-# 充分利用groupby函数。
+# 充分利用 groupby 函数。
 
-+   **明确groupby的目的：** 你是想通过一列对数据进行分组，以获取另一列的均值？还是通过多列对数据进行分组，以获取每组中的行数？
++   **明确 groupby 的目的：** 你是想通过一列对数据进行分组，以获取另一列的均值？还是通过多列对数据进行分组，以获取每组中的行数？
 
-+   **了解数据框的索引：** groupby函数使用索引来分组数据。如果你想通过某列对数据进行分组，确保该列被设置为索引，或者可以使用.set_index()
++   **了解数据框的索引：** groupby 函数使用索引来分组数据。如果你想通过某列对数据进行分组，确保该列被设置为索引，或者可以使用.set_index()
 
-+   **使用适当的聚合函数**：可以与各种聚合函数一起使用，如mean()、sum()、count()、min()、max()。
++   **使用适当的聚合函数**：可以与各种聚合函数一起使用，如 mean()、sum()、count()、min()、max()。
 
-+   **使用as_index参数：** 当设置为False时，此参数告诉pandas将分组列用作常规列而不是索引。
++   **使用 as_index 参数：** 当设置为 False 时，此参数告诉 pandas 将分组列用作常规列而不是索引。
 
-你还可以将groupby()与其他pandas函数（如pivot_table()、crosstab()和cut()）结合使用，以从数据中提取更多洞察。
+你还可以将 groupby()与其他 pandas 函数（如 pivot_table()、crosstab()和 cut()）结合使用，以从数据中提取更多洞察。
 
 # 摘要
 
-groupby函数是数据分析和处理的强大工具，因为它允许你根据一个或多个列对数据行进行分组，然后对这些组执行聚合计算。教程展示了如何通过代码示例使用groupby函数的各种方法。希望它能帮助你理解这些选项及其在数据分析中的作用。
+groupby 函数是数据分析和处理的强大工具，因为它允许你根据一个或多个列对数据行进行分组，然后对这些组执行聚合计算。教程展示了如何通过代码示例使用 groupby 函数的各种方法。希望它能帮助你理解这些选项及其在数据分析中的作用。
 
 **[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位人工智能策略师和数字化转型领导者，她在产品、科学和工程交汇处工作，致力于构建可扩展的机器学习系统。她是一位获奖的创新领导者、作者和国际演讲者。她的使命是使机器学习民主化，并打破行话，让每个人都能参与这场变革。
 
@@ -322,12 +322,12 @@ groupby函数是数据分析和处理的强大工具，因为它允许你根据�
 
 +   [数据分析：分析数据的四种方法及其有效应用](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)
 
-+   [如何有效管理Docker镜像版本的标签](https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively)
++   [如何有效管理 Docker 镜像版本的标签](https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively)
 
 +   [数据可视化：有效呈现复杂信息](https://www.kdnuggets.com/data-visualization-presenting-complex-information-effectively)
 
-+   [如何使用条件格式化增强Pandas中的数据可视化](https://www.kdnuggets.com/how-to-use-conditional-formatting-in-pandas-to-enhance-data-visualization)
++   [如何使用条件格式化增强 Pandas 中的数据可视化](https://www.kdnuggets.com/how-to-use-conditional-formatting-in-pandas-to-enhance-data-visualization)
 
-+   [如何使用pivot_table函数进行高级数据汇总](https://www.kdnuggets.com/how-to-use-the-pivot_table-function-for-advanced-data-summarization-in-pandas)
++   [如何使用 pivot_table 函数进行高级数据汇总](https://www.kdnuggets.com/how-to-use-the-pivot_table-function-for-advanced-data-summarization-in-pandas)
 
 +   [如何在 Pandas 中使用 MultiIndex 进行层次化数据组织](https://www.kdnuggets.com/how-to-use-multiindex-for-hierarchical-data-organization-in-pandas)

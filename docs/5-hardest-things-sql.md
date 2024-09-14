@@ -1,16 +1,16 @@
-# 解决5个复杂SQL问题：棘手的查询解析
+# 解决 5 个复杂 SQL 问题：棘手的查询解析
 
-> 原文：[https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
+> 原文：[`www.kdnuggets.com/2022/07/5-hardest-things-sql.html`](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
 
-![在SQL中最难做的5件事](../Images/fa67cdf461a14281ea03e090313dda28.png)
+![在 SQL 中最难做的 5 件事](img/fa67cdf461a14281ea03e090313dda28.png)
 
 编辑器提供的图片
 
 我们许多人都体验过将计算集中在云数据仓库中带来的速度和效率的核心优势。虽然这确实如此，但我们也意识到，就像任何事情一样，这种价值也伴随着自己的缺点。
 
-这种方法的主要缺点之一是你必须学习和执行不同语言的查询，特别是SQL。虽然编写SQL比建立一个运行python的辅助基础设施（在你的笔记本电脑或办公室服务器上）更快、更便宜，但它带来了许多复杂性，具体取决于数据分析师希望从云数据仓库中提取什么信息。转向云数据仓库增加了复杂SQL相较于python的实用性。经历了这一过程后，我决定记录那些在SQL中最难学和执行的具体转换，并提供缓解这些痛苦所需的实际SQL。
+这种方法的主要缺点之一是你必须学习和执行不同语言的查询，特别是 SQL。虽然编写 SQL 比建立一个运行 python 的辅助基础设施（在你的笔记本电脑或办公室服务器上）更快、更便宜，但它带来了许多复杂性，具体取决于数据分析师希望从云数据仓库中提取什么信息。转向云数据仓库增加了复杂 SQL 相较于 python 的实用性。经历了这一过程后，我决定记录那些在 SQL 中最难学和执行的具体转换，并提供缓解这些痛苦所需的实际 SQL。
 
-为了帮助你的工作流程，你会注意到我在转换执行前后提供了数据结构示例，这样你可以跟随并验证你的工作。我还提供了进行这5个最难转换所需的实际SQL。你需要新的SQL来执行多个项目的转换，因为你的数据会变化。我们提供了每个转换的动态SQL链接，以便你可以根据需要继续捕获分析所需的SQL！
+为了帮助你的工作流程，你会注意到我在转换执行前后提供了数据结构示例，这样你可以跟随并验证你的工作。我还提供了进行这 5 个最难转换所需的实际 SQL。你需要新的 SQL 来执行多个项目的转换，因为你的数据会变化。我们提供了每个转换的动态 SQL 链接，以便你可以根据需要继续捕获分析所需的 SQL！
 
 # 日期脊
 
@@ -28,7 +28,7 @@
 | 2022-04-19 | A | 45 |
 | 2022-04-19 | B | 411 |
 
-16号和17号没有销售，因此这些行完全缺失。如果我们尝试计算*平均每日销售额*或构建时间序列预测模型，这种格式将是一个主要问题。我们需要做的是插入缺失日期的行。
+16 号和 17 号没有销售，因此这些行完全缺失。如果我们尝试计算*平均每日销售额*或构建时间序列预测模型，这种格式将是一个主要问题。我们需要做的是插入缺失日期的行。
 
 这是基本概念：
 
@@ -36,11 +36,11 @@
 
 1.  生成或选择唯一产品
 
-1.  交叉连接（笛卡尔积）1和2的所有组合
+1.  交叉连接（笛卡尔积）1 和 2 的所有组合
 
 1.  外连接 #3 到你的原始数据
 
-[可定制的日期脊柱SQL](https://app.rasgoml.com/sql?transformName=%22datespine_groups%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22sales_date%22%2C%22dataType%22%3A%22date%22%7D%2C%7B%22name%22%3A%22product%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22sales%22%2C%22dataType%22%3A%22number%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22group_by%22%3A%7B%22argType%22%3A%22column_list%22%2C%22cols%22%3A%5B%7B%22id%22%3A1%2C%22columnName%22%3A%22product%22%2C%22displayName%22%3A%22product%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A1%7D%5D%7D%2C%22date_col%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A0%2C%22columnName%22%3A%22sales_date%22%2C%22displayName%22%3A%22sales_date%22%2C%22dataType%22%3A%22date%22%2C%22dwColumnId%22%3A0%7D%7D%2C%22start_timestamp%22%3A%7B%22argType%22%3A%22timestamp%22%2C%22value%22%3A%222020-01-01T00%3A00%22%7D%2C%22end_timestamp%22%3A%7B%22argType%22%3A%22timestamp%22%2C%22value%22%3A%222023-01-01T00%3A00%22%7D%2C%22interval_type%22%3A%7B%22argType%22%3A%22date_part%22%2C%22value%22%3A%22day%22%7D%2C%22group_bounds%22%3A%7B%22argType%22%3A%22value%22%2C%22value%22%3A%22mixed%22%7D%7D%2C%22transformName%22%3A%22datespine_groups%22%7D)
+[可定制的日期脊柱 SQL](https://app.rasgoml.com/sql?transformName=%22datespine_groups%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22sales_date%22%2C%22dataType%22%3A%22date%22%7D%2C%7B%22name%22%3A%22product%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22sales%22%2C%22dataType%22%3A%22number%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22group_by%22%3A%7B%22argType%22%3A%22column_list%22%2C%22cols%22%3A%5B%7B%22id%22%3A1%2C%22columnName%22%3A%22product%22%2C%22displayName%22%3A%22product%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A1%7D%5D%7D%2C%22date_col%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A0%2C%22columnName%22%3A%22sales_date%22%2C%22displayName%22%3A%22sales_date%22%2C%22dataType%22%3A%22date%22%2C%22dwColumnId%22%3A0%7D%7D%2C%22start_timestamp%22%3A%7B%22argType%22%3A%22timestamp%22%2C%22value%22%3A%222020-01-01T00%3A00%22%7D%2C%22end_timestamp%22%3A%7B%22argType%22%3A%22timestamp%22%2C%22value%22%3A%222023-01-01T00%3A00%22%7D%2C%22interval_type%22%3A%7B%22argType%22%3A%22date_part%22%2C%22value%22%3A%22day%22%7D%2C%22group_bounds%22%3A%7B%22argType%22%3A%22value%22%2C%22value%22%3A%22mixed%22%7D%7D%2C%22transformName%22%3A%22datespine_groups%22%7D)
 
 最终结果将如下所示：
 
@@ -61,7 +61,7 @@
 
 # Pivot / Unpivot
 
-有时候，在进行分析时，你可能需要重新构建表格。例如，我们可能有一个学生、科目和成绩的列表，但我们想将科目拆分到每一列。我们都知道并喜欢Excel的**数据透视表**。但你是否尝试过在SQL中实现它？不仅每个数据库在如何支持PIVOT方面有令人烦恼的差异，而且语法也不直观，容易忘记。
+有时候，在进行分析时，你可能需要重新构建表格。例如，我们可能有一个学生、科目和成绩的列表，但我们想将科目拆分到每一列。我们都知道并喜欢 Excel 的**数据透视表**。但你是否尝试过在 SQL 中实现它？不仅每个数据库在如何支持 PIVOT 方面有令人烦恼的差异，而且语法也不直观，容易忘记。
 
 之前：
 
@@ -131,30 +131,30 @@
 | SO51246 | 25625 | Road 水瓶架 | 8.99 |  | 12/31/2012 |
 | SO51246 | 25625 | Touring-1000 蓝色 | 2384.07 | 25.42 | 12/31/2012 |
 
-[市场篮子自定义SQL](https://app.rasgoml.com/sql?transformName=%22market_basket%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22SALESORDERNUMBER%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22CUSTOMERKEY%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22ENGLISHPRODUCTNAME%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22LISTPRICE%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22WEIGHT%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22ORDERDATE%22%2C%22dataType%22%3A%22date%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22transaction_id%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A0%2C%22columnName%22%3A%22SALESORDERNUMBER%22%2C%22displayName%22%3A%22SALESORDERNUMBER%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A0%7D%7D%2C%22sep%22%3A%7B%22argType%22%3A%22value%22%2C%22value%22%3A%22%2C%20%22%7D%2C%22agg_column%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A2%2C%22columnName%22%3A%22ENGLISHPRODUCTNAME%22%2C%22displayName%22%3A%22ENGLISHPRODUCTNAME%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A2%7D%7D%7D%2C%22transformName%22%3A%22market_basket%22%7D)
+[市场篮子自定义 SQL](https://app.rasgoml.com/sql?transformName=%22market_basket%22&tableState=%7B%22tables%22%3A%5B%7B%22name%22%3A%22My_First_Table%22%2C%22columns%22%3A%5B%7B%22name%22%3A%22SALESORDERNUMBER%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22CUSTOMERKEY%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22ENGLISHPRODUCTNAME%22%2C%22dataType%22%3A%22string%22%7D%2C%7B%22name%22%3A%22LISTPRICE%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22WEIGHT%22%2C%22dataType%22%3A%22float%22%7D%2C%7B%22name%22%3A%22ORDERDATE%22%2C%22dataType%22%3A%22date%22%7D%5D%7D%5D%2C%22baseTableName%22%3A%22My_First_Table%22%2C%22ddl%22%3A%22%22%7D&formState=%7B%22arguments%22%3A%7B%22transaction_id%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A0%2C%22columnName%22%3A%22SALESORDERNUMBER%22%2C%22displayName%22%3A%22SALESORDERNUMBER%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A0%7D%7D%2C%22sep%22%3A%7B%22argType%22%3A%22value%22%2C%22value%22%3A%22%2C%20%22%7D%2C%22agg_column%22%3A%7B%22argType%22%3A%22column%22%2C%22col%22%3A%7B%22id%22%3A2%2C%22columnName%22%3A%22ENGLISHPRODUCTNAME%22%2C%22displayName%22%3A%22ENGLISHPRODUCTNAME%22%2C%22dataType%22%3A%22string%22%2C%22dwColumnId%22%3A2%7D%7D%7D%2C%22transformName%22%3A%22market_basket%22%7D)
 
 结果：
 
 | NUMTRANSACTIONS | ENGLISHPRODUCTNAME_LISTAGG |
 | --- | --- |
 | 207 | 山地瓶架，水瓶 - 30 盎司 |
-| 200 | 山地轮胎内胎，修补工具包/8片补丁 |
-| 142 | LL 公路轮胎，修补工具包/8片补丁 |
-| 137 | 修补工具包/8片补丁，公路轮胎内胎 |
-| 135 | 修补工具包/8片补丁，旅行轮胎内胎 |
-| 132 | HL 山地轮胎，山地轮胎内胎，修补工具包/8片补丁 |
+| 200 | 山地轮胎内胎，修补工具包/8 片补丁 |
+| 142 | LL 公路轮胎，修补工具包/8 片补丁 |
+| 137 | 修补工具包/8 片补丁，公路轮胎内胎 |
+| 135 | 修补工具包/8 片补丁，旅行轮胎内胎 |
+| 132 | HL 山地轮胎，山地轮胎内胎，修补工具包/8 片补丁 |
 
 # 时间序列聚合
 
 时间序列聚合不仅被数据科学家使用，也被用于分析。它们难以处理的原因在于窗口函数要求数据格式正确。
 
-例如，如果你想计算过去14天的平均销售金额，窗口函数要求你将所有销售数据分解为每天一行。不幸的是，任何处理过销售数据的人都知道，销售数据通常是以交易级别存储的。这就是时间序列聚合派上用场的地方。你可以在不重新格式化整个数据集的情况下创建聚合的历史指标。如果我们想一次添加多个指标，这也很有用：
+例如，如果你想计算过去 14 天的平均销售金额，窗口函数要求你将所有销售数据分解为每天一行。不幸的是，任何处理过销售数据的人都知道，销售数据通常是以交易级别存储的。这就是时间序列聚合派上用场的地方。你可以在不重新格式化整个数据集的情况下创建聚合的历史指标。如果我们想一次添加多个指标，这也很有用：
 
-+   过去14天的平均销售
++   过去 14 天的平均销售
 
-+   过去6个月的最大购买
++   过去 6 个月的最大购买
 
-+   过去90天的不同产品类型数量
++   过去 90 天的不同产品类型数量
 
 如果你想使用窗口函数，每个指标都需要独立构建，并经过多个步骤。
 
@@ -162,7 +162,7 @@
 
 例如：
 
-| 交易ID | 客户ID | 产品类型 | 购买金额 | 交易日期 |
+| 交易 ID | 客户 ID | 产品类型 | 购买金额 | 交易日期 |
 | --- | --- | --- | --- | --- |
 | 65432 | 101 | 杂货 | 101.14 | 2022-03-01 |
 | 65493 | 101 | 杂货 | 98.45 | 2022-04-30 |
@@ -194,11 +194,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

@@ -1,8 +1,8 @@
 # 完整的机器学习学习路线图
 
-> 原文：[https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html](https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html)
+> 原文：[`www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html`](https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html)
 
-![完整的机器学习学习路线图](../Images/74c55c47615f93fe809143bdc7fc9a57.png)
+![完整的机器学习学习路线图](img/74c55c47615f93fe809143bdc7fc9a57.png)
 
 图片来源于作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -36,9 +36,9 @@
 
 1.  [机器学习数学](https://mml-book.github.io/book/mml-book.pdf) - 书籍
 
-1.  [Khan Academy的线性代数](https://www.khanacademy.org/math/linear-algebra) - YouTube
+1.  [Khan Academy 的线性代数](https://www.khanacademy.org/math/linear-algebra) - YouTube
 
-1.  [Khan Academy的统计学与概率](https://www.khanacademy.org/math/statistics-probability) - YouTube
+1.  [Khan Academy 的统计学与概率](https://www.khanacademy.org/math/statistics-probability) - YouTube
 
 1.  [机器学习的数学基础](https://www.udemy.com/course/machine-learning-data-science-foundations-masterclass/) - Udemy
 
@@ -80,9 +80,9 @@
 
 +   [机器学习的 7 个步骤](https://www.youtube.com/watch?v=nKW8Ndu7Mjw&list=RDLVnKW8Ndu7Mjw&start_radio=1&rv=nKW8Ndu7Mjw&t=21) - YouTube
 
-+   [接近机器学习过程的框架](/2018/05/general-approaches-machine-learning-process.html) - 博客
++   接近机器学习过程的框架 - 博客
 
-+   [部署机器学习模型的意义是什么？](/2020/02/deploy-machine-learning-model.html) - 博客
++   部署机器学习模型的意义是什么？ - 博客
 
 # 3\. 机器学习算法
 
@@ -122,13 +122,13 @@
 
 +   循环神经网络（RNNs）
 
-阅读这篇文章：[每种机器学习算法的解释不到 1 分钟](/2022/07/machine-learning-algorithms-explained-less-1-minute.html)。
+阅读这篇文章：每种机器学习算法的解释不到 1 分钟。
 
-如果你想要更深入的解释，可以阅读这个：[流行的机器学习算法](/2022/05/popular-machine-learning-algorithms.html)
+如果你想要更深入的解释，可以阅读这个：流行的机器学习算法
 
 这里还有一些其他资源供你查看：
 
-1.  [Simplilearn的机器学习算法](https://www.youtube.com/watch?v=7kyNYMwfYdw) - YouTube
+1.  [Simplilearn 的机器学习算法](https://www.youtube.com/watch?v=7kyNYMwfYdw) - YouTube
 
 1.  [《理解机器学习：从理论到算法》](https://books.google.co.uk/books?id=ttJkAwAAQBAJ&printsec=frontcover&dq=machine+learning+algorithms&hl=en&newbks=1&newbks_redir=1&sa=X&ved=2ahUKEwjhz9aZxK77AhXeSkEAHRDuBQsQ6AF6BAgGEAI) 作者 Shai Shalev-Shwartz，?Shai Ben-David - 书籍
 
@@ -246,9 +246,9 @@
 
 如果你在寻找一些额外的资源来帮助你在机器学习领域变得更加熟练。
 
-+   [15 本免费机器学习和深度学习书籍](/2022/10/15-free-machine-learning-deep-learning-books.html)
++   15 本免费机器学习和深度学习书籍
 
-+   [15 本更多免费机器学习和深度学习书籍](/2022/11/15-free-machine-learning-deep-learning-books.html)
++   15 本更多免费机器学习和深度学习书籍
 
 **[尼莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由技术写作者。她特别关注提供数据科学职业建议或教程以及围绕数据科学的理论知识。她还希望探索人工智能在延长人类寿命方面的不同方式。作为一名热衷学习者，她希望扩展自己的技术知识和写作技能，同时帮助指导他人。
 

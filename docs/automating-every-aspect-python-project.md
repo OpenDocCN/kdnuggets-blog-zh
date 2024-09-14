@@ -1,12 +1,12 @@
 # 自动化您的 Python 项目的每个方面
 
-> 原文：[https://www.kdnuggets.com/2020/09/automating-every-aspect-python-project.html](https://www.kdnuggets.com/2020/09/automating-every-aspect-python-project.html)
+> 原文：[`www.kdnuggets.com/2020/09/automating-every-aspect-python-project.html`](https://www.kdnuggets.com/2020/09/automating-every-aspect-python-project.html)
 
-[评论](#comments)
+评论
 
 **作者为[马丁·海因兹](https://www.linkedin.com/in/heinz-martin/)，IBM 的 DevOps 工程师**
 
-![图片](../Images/af58abcae89d0c2899a8c38dbc1b2607.png)
+![图片](img/af58abcae89d0c2899a8c38dbc1b2607.png)
 
 每个项目 - 无论您是在开发 Web 应用程序、某些数据科学或人工智能 - 都可以从良好配置的 CI/CD、在开发过程中既可调试又针对生产环境优化的 Docker 镜像或一些额外的代码质量工具（如*CodeClimate*或*SonarCloud*）中受益。本文中将介绍所有这些内容，并将看到如何将这些内容添加到您的*Python*项目中！
 
@@ -44,9 +44,9 @@
 
 好的，现在来实际描述一下*Distroless*是什么。它是由*Google* 制作的一组镜像，包含了应用程序所需的最基本内容，意味着没有 shell、包管理器或任何其他会使镜像膨胀并给安全扫描器（如[CVE](https://cve.mitre.org/)）带来信号噪声的工具，从而使建立合规性变得更困难。
 
-现在我们知道我们要处理什么了，让我们看看*production* `Dockerfile`... 实际上，我们不会在这里做太多更改，仅仅是2行：
+现在我们知道我们要处理什么了，让我们看看*production* `Dockerfile`... 实际上，我们不会在这里做太多更改，仅仅是 2 行：
 
-我们只需更改用于构建和运行应用程序的基础镜像！但差异很大——我们的开发镜像是1.03GB，而这个镜像只有103MB，这个差别*相当*大！我知道，我已经听到你了——*“但是Alpine可以更小！”*——是的，没错，但大小并不是*那么重要*。你只会在下载/上传镜像时注意到镜像大小，这并不常见。当镜像运行时，大小根本不重要。比大小更重要的是安全性，在这方面*Distroless*无疑更优，因为*Alpine*（一个很好的替代品）有很多额外的包，增加了攻击面。
+我们只需更改用于构建和运行应用程序的基础镜像！但差异很大——我们的开发镜像是 1.03GB，而这个镜像只有 103MB，这个差别*相当*大！我知道，我已经听到你了——*“但是 Alpine 可以更小！”*——是的，没错，但大小并不是*那么重要*。你只会在下载/上传镜像时注意到镜像大小，这并不常见。当镜像运行时，大小根本不重要。比大小更重要的是安全性，在这方面*Distroless*无疑更优，因为*Alpine*（一个很好的替代品）有很多额外的包，增加了攻击面。
 
 讨论*Distroless*时最后值得一提的是*debug*镜像。考虑到*Distroless*不包含*任何* shell（甚至没有`sh`），当你需要调试和探查时会变得非常棘手。为此，所有*Distroless*镜像都有`debug`版本。因此，当出现问题时，你可以使用`debug`标签构建生产镜像，并将其与正常镜像一起部署，进入它并执行，例如线程转储。你可以这样使用`python3`镜像的调试版本：
 
@@ -70,23 +70,23 @@
 
 最后的目标是清理*Docker*工件。它使用被替换到`Dockerfiles`中的`name`标签来筛选和查找需要删除的工件：
 
-你可以在我的仓库中找到这个`Makefile`的完整代码列表：[https://github.com/MartinHeinz/python-project-blueprint/blob/master/Makefile](https://github.com/MartinHeinz/python-project-blueprint/blob/master/Makefile)
+你可以在我的仓库中找到这个`Makefile`的完整代码列表：[`github.com/MartinHeinz/python-project-blueprint/blob/master/Makefile`](https://github.com/MartinHeinz/python-project-blueprint/blob/master/Makefile)
 
-### 使用GitHub Actions进行CI/CD
+### 使用 GitHub Actions 进行 CI/CD
 
-现在，让我们利用所有这些方便的`make`目标来设置我们的CI/CD。我们将使用*GitHub Actions*和*GitHub Package Registry*来构建我们的管道（作业）和存储我们的镜像。那么，这些究竟是什么呢？
+现在，让我们利用所有这些方便的`make`目标来设置我们的 CI/CD。我们将使用*GitHub Actions*和*GitHub Package Registry*来构建我们的管道（作业）和存储我们的镜像。那么，这些究竟是什么呢？
 
 +   *GitHub Actions*是*jobs/pipelines*，它们帮助你自动化开发工作流程。你可以用它们来创建单独的任务，然后将这些任务组合成自定义工作流程，然后在每次推送到仓库或创建发布时执行这些工作流程。
 
-+   *GitHub Package Registry*是一个与GitHub完全集成的包托管服务。它允许你存储各种类型的包，例如Ruby的*gems*或*npm*包。我们将用它来存储我们的*Docker*镜像。如果你对*GitHub Package Registry*不太熟悉并想要了解更多信息，你可以查看我的博客文章[这里](https://martinheinz.dev/blog/6)。
++   *GitHub Package Registry*是一个与 GitHub 完全集成的包托管服务。它允许你存储各种类型的包，例如 Ruby 的*gems*或*npm*包。我们将用它来存储我们的*Docker*镜像。如果你对*GitHub Package Registry*不太熟悉并想要了解更多信息，你可以查看我的博客文章[这里](https://martinheinz.dev/blog/6)。
 
 现在，为了使用*GitHub Actions*，我们需要创建*workflows*，这些*workflows*将根据我们选择的触发器（例如推送到仓库）执行。这些*workflows*是位于我们仓库中的`.github/workflows`目录中的*YAML*文件：
 
-在这里，我们将创建2个文件`build-test.yml`和`push.yml`。第一个文件`build-test.yml`将包含2个作业，这些作业将在每次推送到仓库时触发，让我们来看看这些作业：
+在这里，我们将创建 2 个文件`build-test.yml`和`push.yml`。第一个文件`build-test.yml`将包含 2 个作业，这些作业将在每次推送到仓库时触发，让我们来看看这些作业：
 
 第一个作业叫做`build`，它通过运行我们的`make build-dev`目标来验证我们的应用程序是否可以构建。然而，在运行之前，它会首先通过执行名为`checkout`的操作来检出我们的仓库，这个操作在*GitHub*上发布。
 
-第二个任务稍微复杂一些。它会对我们的应用程序以及3个代码质量检查工具（linters）运行测试。与之前的任务一样，我们使用`checkout@v1`操作来获取我们的源代码。之后，我们运行另一个名为`setup-python@v1`的已发布操作，它为我们设置Python环境（你可以在[这里](https://github.com/actions/setup-python)找到详细信息）。现在我们已经有了Python环境，我们还需要从`requirements.txt`中安装应用程序的依赖项，这些依赖项通过`pip`进行安装。此时，我们可以继续运行`make test`目标，这将触发我们的*Pytest*测试套件。如果我们的测试套件通过，我们会继续安装前面提到的代码检查工具——*pylint*、*flake8*和*bandit*。最后，我们运行`make lint`目标，这将触发每一个代码检查工具。
+第二个任务稍微复杂一些。它会对我们的应用程序以及 3 个代码质量检查工具（linters）运行测试。与之前的任务一样，我们使用`checkout@v1`操作来获取我们的源代码。之后，我们运行另一个名为`setup-python@v1`的已发布操作，它为我们设置 Python 环境（你可以在[这里](https://github.com/actions/setup-python)找到详细信息）。现在我们已经有了 Python 环境，我们还需要从`requirements.txt`中安装应用程序的依赖项，这些依赖项通过`pip`进行安装。此时，我们可以继续运行`make test`目标，这将触发我们的*Pytest*测试套件。如果我们的测试套件通过，我们会继续安装前面提到的代码检查工具——*pylint*、*flake8*和*bandit*。最后，我们运行`make lint`目标，这将触发每一个代码检查工具。
 
 这就是构建/测试作业的全部内容，但推送作业呢？让我们也来看看：
 
@@ -110,51 +110,51 @@
 
 ### 结论
 
-就这些！通过上述工具、配置和代码，你已准备好构建和自动化你下一个*Python*项目的所有方面！如果你需要更多关于本文中展示/讨论的主题的信息，可以查看我这里的文档和代码：[https://github.com/MartinHeinz/python-project-blueprint](https://github.com/MartinHeinz/python-project-blueprint)，如果你有任何建议或问题，请在仓库中提交问题，或者如果你喜欢这个小项目，请给它加星。 ????
+就这些！通过上述工具、配置和代码，你已准备好构建和自动化你下一个*Python*项目的所有方面！如果你需要更多关于本文中展示/讨论的主题的信息，可以查看我这里的文档和代码：[`github.com/MartinHeinz/python-project-blueprint`](https://github.com/MartinHeinz/python-project-blueprint)，如果你有任何建议或问题，请在仓库中提交问题，或者如果你喜欢这个小项目，请给它加星。 ????
 
 **资源**
 
-+   [适合Python应用的最佳Docker基础镜像](https://pythonspeed.com/articles/base-image-python-docker-images/)
++   [适合 Python 应用的最佳 Docker 基础镜像](https://pythonspeed.com/articles/base-image-python-docker-images/)
 
 +   [Google Distroless](https://github.com/GoogleContainerTools/distroless)
 
-+   [扫描你的Docker镜像中的漏洞](https://medium.com/better-programming/scan-your-docker-images-for-vulnerabilities-81d37ae32cb3)
++   [扫描你的 Docker 镜像中的漏洞](https://medium.com/better-programming/scan-your-docker-images-for-vulnerabilities-81d37ae32cb3)
 
-+   [5个开源容器安全工具](https://opensource.com/article/18/8/tools-container-security)
++   [5 个开源容器安全工具](https://opensource.com/article/18/8/tools-container-security)
 
 +   [SonarCloud GitHub Action](https://github.com/SonarSource/sonarcloud-github-action)
 
-**个人简介: [马丁·海因茨](https://www.linkedin.com/in/heinz-martin/)** 是IBM的一名DevOps工程师。作为软件开发者，马丁对计算机安全、隐私和加密学充满热情，专注于云计算和无服务器计算，并且总是准备迎接新的挑战。
+**个人简介: [马丁·海因茨](https://www.linkedin.com/in/heinz-martin/)** 是 IBM 的一名 DevOps 工程师。作为软件开发者，马丁对计算机安全、隐私和加密学充满热情，专注于云计算和无服务器计算，并且总是准备迎接新的挑战。
 
 [原文](https://martinheinz.dev/blog/17)。已获许可转载。
 
 **相关：**
 
-+   [MIT免费课程: 计算机科学与Python编程入门](/2020/09/free-mit-intro-computer-science-programming-python.html)
++   MIT 免费课程: 计算机科学与 Python 编程入门
 
-+   [数据科学遇见Devops: 使用Jupyter、Git和Kubernetes的MLOps](/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
++   数据科学遇见 Devops: 使用 Jupyter、Git 和 Kubernetes 的 MLOps
 
-+   [在AWS Fargate上部署机器学习管道](/2020/07/deploy-machine-learning-pipeline-aws-fargate.html)
++   在 AWS Fargate 上部署机器学习管道
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
 ### 更多相关话题
 
-+   [每位初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 

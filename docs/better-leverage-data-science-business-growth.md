@@ -1,8 +1,8 @@
 # 如何更好地利用数据科学促进业务增长
 
-> 原文：[https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)
+> 原文：[`www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html`](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)
 
-![如何更好地利用数据科学促进业务增长](../Images/ee6aab19b3dd2046590f404c5e258d2d.png)
+![如何更好地利用数据科学促进业务增长](img/ee6aab19b3dd2046590f404c5e258d2d.png)
 
 关于世界如何变化以及如何与之开展业务的讨论很多，我们生活在一个前所未有的时代，一切都不再如从前。主要的“罪魁祸首”是技术进步，随之而来的是全球流通的数据量，以及这些数据以某种方式等待被使用。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -58,13 +58,13 @@
 
 ## 客户细分
 
-![如何更好地利用数据科学推动业务增长](../Images/a62cf80d08feb2cb7fa4e04bb95eb523.png)
+![如何更好地利用数据科学推动业务增长](img/a62cf80d08feb2cb7fa4e04bb95eb523.png)
 
 *来源:* [*https://www.garyfox.co/customer-segmentation/*](https://www.garyfox.co/customer-segmentation/)
 
 技术使你能够以一种直到最近才可能实现的方式对客户进行细分。要做到这一点，你需要收集大量的数据。
 
-这可以从简单的地理区域划分开始，你可以收集如客户所在国家、城市和IP地址等数据。
+这可以从简单的地理区域划分开始，你可以收集如客户所在国家、城市和 IP 地址等数据。
 
 然后你可以包括人口统计数据，如客户的年龄、收入、婚姻状况、性别、教育背景和种族。
 
@@ -116,7 +116,7 @@
 
 在产品开发中使用数据科学可以更快地对市场和客户需求的变化做出反应，这反过来使你的业务有可能实现那些你本来会错过的销售。
 
-![如何更好地利用数据科学促进业务增长](../Images/5ed5299399441a03afedb83d1a490e99.png)
+![如何更好地利用数据科学促进业务增长](img/5ed5299399441a03afedb83d1a490e99.png)
 
 *来源:* [*https://www.netsolutions.com/insights/everything-about-new-product-development/*](https://www.netsolutions.com/insights/everything-about-new-product_development/)
 
@@ -200,7 +200,7 @@
 
 小公司可能甚至不需要复杂的报告。将大部分数据保存在脑海中是很容易的，你大致知道自己的位置，可以自信地依靠直觉。然而，随着公司成长，你会意识到没有任何报告来导航你的业务会越来越像是在夜间、雾中、下雪时戴着眼罩驾驶。
 
-拥有一个从数据源、经过分析到报告的数据管道，从而使你能够做出业务决策，变得至关重要。数据工程师、数据库设计师和管理员、数据分析师、统计学家以及BI开发人员，在拥有合适的工具的情况下，能够为你创造奇迹。
+拥有一个从数据源、经过分析到报告的数据管道，从而使你能够做出业务决策，变得至关重要。数据工程师、数据库设计师和管理员、数据分析师、统计学家以及 BI 开发人员，在拥有合适的工具的情况下，能够为你创造奇迹。
 
 你可能会从基础知识开始，只将数据用于描述性目的。换句话说，你可以找出发生了什么。
 
@@ -224,10 +224,10 @@
 
 +   [如何利用分析加速业务增长？](https://www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html)
 
-+   [基于LLM的自主代理背后的增长](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
++   [基于 LLM 的自主代理背后的增长](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
 
-+   [使用RAPIDS cuDF利用GPU进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
++   [使用 RAPIDS cuDF 利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
 
-+   [如何利用Docker缓存优化构建速度](https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds)
++   [如何利用 Docker 缓存优化构建速度](https://www.kdnuggets.com/how-to-leverage-docker-cache-for-optimizing-build-speeds)
 
 +   [推动更好的商业决策](https://www.kdnuggets.com/2022/04/informs-driving-better-business-decisions.html)

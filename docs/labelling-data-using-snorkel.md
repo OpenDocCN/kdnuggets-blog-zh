@@ -1,22 +1,22 @@
 # 使用 Snorkel 标记数据
 
-> 原文：[https://www.kdnuggets.com/2020/07/labelling-data-using-snorkel.html](https://www.kdnuggets.com/2020/07/labelling-data-using-snorkel.html)
+> 原文：[`www.kdnuggets.com/2020/07/labelling-data-using-snorkel.html`](https://www.kdnuggets.com/2020/07/labelling-data-using-snorkel.html)
 
-[评论](#comments)
+评论
 
 **由 [Alister D’Costa](https://www.linkedin.com/in/alisterdcosta/)、[Stefan Denkovski](https://www.linkedin.com/in/stefandenkovski/)、[Michal Malyska](https://www.linkedin.com/in/malyskamichal/)、[Sally Moon](https://www.linkedin.com/in/sallysaeyoungmoon/)、[Brandon Rufino](https://www.linkedin.com/in/brandon-rufino/)、[NLP4H](https://nlp4h.com/authors/)** 撰写
 
-![Image for post](../Images/e16079ec47d75638df56b6c91eb5db14.png)
+![Image for post](img/e16079ec47d75638df56b6c91eb5db14.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -66,7 +66,7 @@ Snorkel 管道的第二个组件是一个生成模型，它根据所有标注函
 
 ### 标注函数示例 #1：关键字搜索
 
-下文展示了一个关键字搜索的示例（使用正则表达式），用于提取以十进制形式记录的MS严重性评分。正则表达式函数用于尝试搜索以十进制形式记录的MS严重性评分。如果找到，函数将以适当的输出格式返回评分。否则，函数将 abstain（即返回-1），以指示未找到评分。
+下文展示了一个关键字搜索的示例（使用正则表达式），用于提取以十进制形式记录的 MS 严重性评分。正则表达式函数用于尝试搜索以十进制形式记录的 MS 严重性评分。如果找到，函数将以适当的输出格式返回评分。否则，函数将 abstain（即返回-1），以指示未找到评分。
 
 ### 标注函数示例 #2：训练分类器
 
@@ -106,27 +106,27 @@ LFAnalysis 将提供关于你的标注函数在相互之间的表现分析。
 
 ### `get_label_buckets`
 
-Snorkel提供了一些额外的评估工具，帮助你理解标签函数的质量。特别是，`get_label_buckets`是一个方便的方式来合并标签并进行比较。有关更多信息，请阅读[Snorkel文档](https://snorkel.readthedocs.io/en/v0.9.1/packages/_autosummary/analysis/snorkel.analysis.get_label_buckets.html)。
+Snorkel 提供了一些额外的评估工具，帮助你理解标签函数的质量。特别是，`get_label_buckets`是一个方便的方式来合并标签并进行比较。有关更多信息，请阅读[Snorkel 文档](https://snorkel.readthedocs.io/en/v0.9.1/packages/_autosummary/analysis/snorkel.analysis.get_label_buckets.html)。
 
-以下代码允许你比较真实标签（y_gold）和预测标签（y_preds），以查看Snorkel正确或错误标记的数据点。这将帮助你找出哪些数据点难以正确标记，从而调整你的标签函数以涵盖这些边缘案例。
+以下代码允许你比较真实标签（y_gold）和预测标签（y_preds），以查看 Snorkel 正确或错误标记的数据点。这将帮助你找出哪些数据点难以正确标记，从而调整你的标签函数以涵盖这些边缘案例。
 
-注意，对于这项分析，我们回到创建了一个包含‘黄金’标签数据集的标签函数预测的L_train矩阵。
+注意，对于这项分析，我们回到创建了一个包含‘黄金’标签数据集的标签函数预测的 L_train 矩阵。
 
 另外，你可以使用`get_label_buckets`来比较标签函数。
 
-以下代码允许你比较L_unlabelled中的标签预测，观察不同标签函数如何以不同方式标记数据点。
+以下代码允许你比较 L_unlabelled 中的标签预测，观察不同标签函数如何以不同方式标记数据点。
 
-### 第5步：部署
+### 第 5 步：部署
 
 ### 选择最佳标签模型以标记未标记的数据
 
-按照上述程序，我们基于关键字搜索、基线模型和MS-BERT分类器开发了各种标签函数。我们尝试了不同的标签函数组合，并使用Snorkel的Label Model获得了对保留标签数据集的预测。这使我们能够确定哪个标签函数组合最适合标记我们的未标记数据集。
+按照上述程序，我们基于关键字搜索、基线模型和 MS-BERT 分类器开发了各种标签函数。我们尝试了不同的标签函数组合，并使用 Snorkel 的 Label Model 获得了对保留标签数据集的预测。这使我们能够确定哪个标签函数组合最适合标记我们的未标记数据集。
 
-如下表所示，我们观察到仅MS-BERT分类器（MSBC）在Macro-F1上比所有包含它的组合表现更好至少0.02。添加较弱的启发式方法和分类器会持续降低组合的性能。此外，我们还观察到随着较弱分类器和启发式方法的添加，MS-BERT分类器的冲突量增加。
+如下表所示，我们观察到仅 MS-BERT 分类器（MSBC）在 Macro-F1 上比所有包含它的组合表现更好至少 0.02。添加较弱的启发式方法和分类器会持续降低组合的性能。此外，我们还观察到随着较弱分类器和启发式方法的添加，MS-BERT 分类器的冲突量增加。
 
-![图](../Images/bcd40b9154f9ad113f7b3c41b440b185.png)
+![图](img/bcd40b9154f9ad113f7b3c41b440b185.png)
 
-注意，基于规则（RB）指的是我们的关键字搜索。LDA指线性判别分析。TFIDFs指所有基于tf-idf特征构建的模型（即逻辑回归、线性判别分析和支持向量机）。
+注意，基于规则（RB）指的是我们的关键字搜索。LDA 指线性判别分析。TFIDFs 指所有基于 tf-idf 特征构建的模型（即逻辑回归、线性判别分析和支持向量机）。
 
 要理解我们的发现，我们必须提醒自己，Snorkel 的标签模型学习根据彼此之间的一致性和分歧来预测标记函数的准确性和相关性。因此，在存在强标记函数（如我们的 MS-BERT 分类器）的情况下，添加较弱的标记函数会引入更多与强标记函数的分歧，从而降低性能。从这些发现中，我们了解到 Snorkel 可能更适合只有*弱*启发式和规则的情况。然而，如果你已经有了一个强标记函数，开发一个带有较弱启发式的 Snorkel 集成可能会影响性能。
 
@@ -152,11 +152,11 @@ MS-BERT 分类器被用于为我们的未标记数据集获得“银牌”标签
 
 **相关：**
 
-+   [手工标注已成过去。未来是 #NoLabel AI](/2020/02/hand-labeling-past-future-nolabel-ai.html)
++   手工标注已成过去。未来是 #NoLabel AI
 
-+   [从语言到信息：斯坦福大学的另一个出色 NLP 课程](/2020/06/languages-information-another-great-nlp-course-stanford.html)
++   从语言到信息：斯坦福大学的另一个出色 NLP 课程
 
-+   [深度神经网络在自然语言处理（NLP）中的不合理进展](/2020/06/unreasonable-progress-deep-neural-networks-nlp.html)
++   深度神经网络在自然语言处理（NLP）中的不合理进展
 
 ### 更多相关内容
 

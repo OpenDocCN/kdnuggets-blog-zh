@@ -1,10 +1,10 @@
 # 掌握数据讲故事的艺术：数据科学家的指南
 
-> 原文：[https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html`](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)
 
-![掌握数据讲故事的艺术：数据科学家的指南](../Images/2d301faa603a8429dc357db49f2a0929.png)
+![掌握数据讲故事的艺术：数据科学家的指南](img/2d301faa603a8429dc357db49f2a0929.png)
 
-图片由[Isaac Smith](https://unsplash.com/@isaacmsmith?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，[来源于Unsplash](https://unsplash.com/photos/6EnTPvPPL6I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+图片由[Isaac Smith](https://unsplash.com/@isaacmsmith?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，[来源于 Unsplash](https://unsplash.com/photos/6EnTPvPPL6I?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 如果你想成为一名数据科学家，或者已经是数据科学家——你会读到或知道所需的技能。你需要掌握一种编程语言，了解数学统计，能够创建数据可视化等。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-如果你想成为数据科学专业人士并需要一些指导，可以查看这篇文章：[五步成为数据科学专业人士](/2022/03/become-data-science-professional-five-steps.html)。
+如果你想成为数据科学专业人士并需要一些指导，可以查看这篇文章：五步成为数据科学专业人士。
 
 尽管你大部分时间会花在数据准备阶段，试图找到和清理数据，但数据科学还有其他重要元素。
 
@@ -34,13 +34,13 @@
 
 # 非技术语言
 
-作为一名数据科学家，我知道许多利益相关者或管理者并没有技术背景。因此，你日常团队中使用的一些术语对他们来说可能是陌生的。例如，F1分数或交叉验证。
+作为一名数据科学家，我知道许多利益相关者或管理者并没有技术背景。因此，你日常团队中使用的一些术语对他们来说可能是陌生的。例如，F1 分数或交叉验证。
 
 想想老师是如何向学生解释一个话题的，并在解释给观众时保持这个思路。将你的数据科学术语翻译成所有人都能理解的语言。如果没有办法替换特定的数据科学术语，解释它的含义也没有坏处。你会因为失去观众对技术术语的关注而带来更多的伤害。
 
 # 数据可视化
 
-不同的人有不同的学习方式。有些人只需读一遍教科书就能理解，有些人需要色彩编码，有些人需要可视化。当你展示你的发现时，不要限制自己，也不要陷入只能回答1000个问题的困境。可视化可以为你解答问题。
+不同的人有不同的学习方式。有些人只需读一遍教科书就能理解，有些人需要色彩编码，有些人需要可视化。当你展示你的发现时，不要限制自己，也不要陷入只能回答 1000 个问题的困境。可视化可以为你解答问题。
 
 数据可视化将使你的观众对你采取的步骤和发现有直观的理解。当你在背景中谈论这些可视化时，他们的眼睛在学习并理解你所说的内容。
 
@@ -60,7 +60,7 @@
 
 > **目标：** 以最清晰的语言陈述你试图解决的问题。
 
-这包括对你的项目进行介绍，说明项目的目的，你要解决的问题等等。在设置阶段，从数据科学的角度，你将更深入地探讨问题或议题，为项目的目标提供背景。你项目的目标将等同于你的第1点。
+这包括对你的项目进行介绍，说明项目的目的，你要解决的问题等等。在设置阶段，从数据科学的角度，你将更深入地探讨问题或议题，为项目的目标提供背景。你项目的目标将等同于你的第 1 点。
 
 ## 对抗
 
@@ -68,7 +68,7 @@
 
 在对抗部分，你可以继续谈论当前任务，以及公司为何会面临这个问题。你要保持观众的兴趣和好奇心，因此谈论公司面临的问题总是能吸引利益相关者。
 
-一步一步向你的读者解释你所经过的不同路径以及每个路径的结果，以完成当前任务。你在数据科学项目中采取的不同步骤将反映不同的点，例如第2点、第3点，……
+一步一步向你的读者解释你所经过的不同路径以及每个路径的结果，以完成当前任务。你在数据科学项目中采取的不同步骤将反映不同的点，例如第 2 点、第 3 点，……
 
 向听众提供你遇到的失败和障碍的背景以及原因，将有助于在你提供解决方案后建立你与听众之间的信任和理解。
 
@@ -112,7 +112,7 @@
 
 +   [数据讲述 - 通过数据讲故事的艺术](https://www.kdnuggets.com/2023/07/manning-data-storytelling-the-art-telling-stories-data.html)
 
-+   [掌握数据讲述艺术的7个步骤](https://www.kdnuggets.com/7-steps-to-master-the-art-of-data-storytelling)
++   [掌握数据讲述艺术的 7 个步骤](https://www.kdnuggets.com/7-steps-to-master-the-art-of-data-storytelling)
 
 +   [掌握 Python 中数据清洗的艺术](https://www.kdnuggets.com/mastering-the-art-of-data-cleaning-in-python)
 

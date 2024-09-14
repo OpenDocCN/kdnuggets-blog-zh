@@ -1,8 +1,8 @@
 # 用 TensorFlow 和 Keras 构建和训练你的第一个神经网络
 
-> 原文：[https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
+> 原文：[`www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html`](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
-![用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](../Images/9cb7eead0e69b3990b8f32fcef9da07c.png)
+![用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](img/9cb7eead0e69b3990b8f32fcef9da07c.png)
 
 图像来源 作者
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-在这篇博客文章中，我们将涵盖从零开始构建和训练一个图像分类模型的完整步骤，使用卷积神经网络。我们将使用公开的[Cifar-10](https://www.cs.toronto.edu/~kriz/cifar.html) 数据集来训练模型。这个数据集的独特之处在于它包含了日常见到的物体的图像，如汽车、飞机、狗、猫等。通过对这些物体进行训练，我们将开发智能系统来对现实世界中的这些事物进行分类。它包含超过60000张32x32大小的图像，涵盖10种不同类型的物体。在本教程结束时，你将拥有一个能够根据视觉特征判断物体的模型。
+在这篇博客文章中，我们将涵盖从零开始构建和训练一个图像分类模型的完整步骤，使用卷积神经网络。我们将使用公开的[Cifar-10](https://www.cs.toronto.edu/~kriz/cifar.html) 数据集来训练模型。这个数据集的独特之处在于它包含了日常见到的物体的图像，如汽车、飞机、狗、猫等。通过对这些物体进行训练，我们将开发智能系统来对现实世界中的这些事物进行分类。它包含超过 60000 张 32x32 大小的图像，涵盖 10 种不同类型的物体。在本教程结束时，你将拥有一个能够根据视觉特征判断物体的模型。
 
-![用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](../Images/318b7682220fb53e7a4b4b88bc58d4ef.png)
+![用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](img/318b7682220fb53e7a4b4b88bc58d4ef.png)
 
 图 1 数据集样本图像 | 图像来源：[datasets.activeloop](https://datasets.activeloop.ai/docs/ml/datasets/cifar-10-dataset/)
 
@@ -40,13 +40,13 @@
 
 1.  评估模型性能
 
-![用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](../Images/3504fcd934dd9aaa393cfa1477512c69.png)
+![用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](img/3504fcd934dd9aaa393cfa1477512c69.png)
 
 图 2 完整模型流程 | 图像来源 作者
 
 # 导入必要的库
 
-你需要安装一些模块来开始项目。我将使用Google Colab，因为它提供免费的GPU训练，最后我会提供一个包含完整代码的协作文件。
+你需要安装一些模块来开始项目。我将使用 Google Colab，因为它提供免费的 GPU 训练，最后我会提供一个包含完整代码的协作文件。
 
 这是安装所需库的命令：
 
@@ -54,7 +54,7 @@
 $ pip install tensorflow, numpy, keras, sklearn, matplotlib
 ```
 
-将库导入Python文件中。
+将库导入 Python 文件中。
 
 ```py
 from numpy import *
@@ -82,11 +82,11 @@ from keras.layers import Conv2D, MaxPooling2D, GlobalMaxPooling2D, Flatten
 
 1.  **Numpy：** 它用于高效地计算包含图像的大型数据集。
 
-1.  **Tensorflow：** 这是一个由Google开发的开源机器学习库。它提供了许多构建大型和可扩展模型的函数。
+1.  **Tensorflow：** 这是一个由 Google 开发的开源机器学习库。它提供了许多构建大型和可扩展模型的函数。
 
-1.  **Keras：** 另一个高级神经网络API，运行在TensorFlow之上。
+1.  **Keras：** 另一个高级神经网络 API，运行在 TensorFlow 之上。
 
-1.  **Matplotlib：** 这个Python库创建图表和图形，提供更好的数据可视化。
+1.  **Matplotlib：** 这个 Python 库创建图表和图形，提供更好的数据可视化。
 
 1.  **Sklearn：** 它提供了进行数据预处理和特征提取的函数。它包含内置函数来查找模型的评估指标，如准确率、精确度、假阳性、假阴性等。
 
@@ -114,11 +114,11 @@ testing_data = testing_data.astype("float32")
 validation_data = validation_data.astype("float32")
 ```
 
-cifar10数据集直接从Keras数据集库加载。这些数据也被拆分为训练数据和测试数据。训练数据用于训练模型，以便它能够识别其中的模式。测试数据对模型保持未知，用于检查其性能，即模型正确预测的数据点数与总数据点数的比率。
+cifar10 数据集直接从 Keras 数据集库加载。这些数据也被拆分为训练数据和测试数据。训练数据用于训练模型，以便它能够识别其中的模式。测试数据对模型保持未知，用于检查其性能，即模型正确预测的数据点数与总数据点数的比率。
 
 `training_label` 包含与 `training_data` 中图像对应的标签。
 
-然后，训练数据再次通过内置的sklearn `train_test_split`函数拆分为验证数据。验证数据用于选择和调整最终模型。最后，所有的训练、测试和验证数据都被转换为32位浮点数。
+然后，训练数据再次通过内置的 sklearn `train_test_split`函数拆分为验证数据。验证数据用于选择和调整最终模型。最后，所有的训练、测试和验证数据都被转换为 32 位浮点数。
 
 现在，我们的数据集加载完成。在下一节中，我们将对数据进行一些预处理步骤。
 
@@ -151,11 +151,11 @@ Validation:  (10000, 32, 32, 3) 10000
 Testing:  (10000, 32, 32, 3) 10000
 ```
 
-数据集包含10类图像，每张图像的大小为32x32像素。每个像素的值范围从0到255，我们需要将其标准化到0到1之间，以便于计算。之后，我们将类别标签转换为独热编码标签。这是为了将类别数据转换为数值数据，以便我们可以顺利应用机器学习算法。
+数据集包含 10 类图像，每张图像的大小为 32x32 像素。每个像素的值范围从 0 到 255，我们需要将其标准化到 0 到 1 之间，以便于计算。之后，我们将类别标签转换为独热编码标签。这是为了将类别数据转换为数值数据，以便我们可以顺利应用机器学习算法。
 
-现在，进入CNN模型的构建阶段。
+现在，进入 CNN 模型的构建阶段。
 
-# 构建CNN模型
+# 构建 CNN 模型
 
 CNN 模型分为 3 个阶段。第一阶段由卷积层组成，用于从图像中提取相关特征。第二阶段由池化层组成，用于减少图像的维度，同时有助于降低模型的过拟合。第三阶段由全连接层组成，将二维图像转换为一维数组。最终，这个数组被输入到全连接层中，执行最终的预测。
 
@@ -197,7 +197,7 @@ model.add(Dense(nc, activation="softmax"))
 
 以下是 CNN 模型架构的示例图像。
 
-![用 TensorFlow 和 Keras 构建和训练您的第一个神经网络](../Images/2e7ac8569ec83f230107a500193881ad.png)
+![用 TensorFlow 和 Keras 构建和训练您的第一个神经网络](img/2e7ac8569ec83f230107a500193881ad.png)
 
 图 3 示例 CNN 架构 | 图片来源于 [researchgate](https://www.researchgate.net/figure/A-vanilla-Convolutional-Neural-Network-CNN-representation_fig2_339447623)
 
@@ -216,7 +216,7 @@ model.summary()
 
 **输出：**
 
-![用 TensorFlow 和 Keras 构建和训练您的第一个神经网络](../Images/84fe154dca81ad2d192933c95c419c42.png)
+![用 TensorFlow 和 Keras 构建和训练您的第一个神经网络](img/84fe154dca81ad2d192933c95c419c42.png)
 
 图 4 模型总结 | 图片来源于作者
 
@@ -249,9 +249,9 @@ history = model.fit(
 
 **输出：**
 
-![用 TensorFlow 和 Keras 构建和训练第一个神经网络](../Images/cfe89739896f1c3a0c892de6403495c3.png)
+![用 TensorFlow 和 Keras 构建和训练第一个神经网络](img/cfe89739896f1c3a0c892de6403495c3.png)
 
-图5 每个 Epoch 的准确率与损失率 | 图片来源：作者
+图 5 每个 Epoch 的准确率与损失率 | 图片来源：作者
 
 `ImageDataGenerator()` 函数用于创建增强图像。`fit()` 用于拟合模型。它接受训练和验证数据、批次大小（Batch Size）和迭代次数（Epochs）作为输入。
 
@@ -315,9 +315,9 @@ acc_loss_curves(history, 100)
 
 输出：
 
-![用 TensorFlow 和 Keras 构建和训练第一个神经网络](../Images/9c6f3061bc69ad9bb4da9b0043d8b60a.png)
+![用 TensorFlow 和 Keras 构建和训练第一个神经网络](img/9c6f3061bc69ad9bb4da9b0043d8b60a.png)
 
-图6 准确率和损失率对比 Epoch | 图片来源：作者
+图 6 准确率和损失率对比 Epoch | 图片来源：作者
 
 在我们的模型中，我们可以看到模型过拟合了测试数据集。蓝色线表示训练准确率，橙色线表示验证准确率。训练准确率持续提升，但验证错误在 20 次迭代后变得更糟。
 

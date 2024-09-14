@@ -1,8 +1,8 @@
 # 数据科学中的云计算简介
 
-> 原文：[https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science](https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science)
+> 原文：[`www.kdnuggets.com/introduction-to-cloud-computing-for-data-science`](https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science)
 
-![数据科学中的云计算简介](../Images/09b088e5c909b0bee524f24260f455e1.png)
+![数据科学中的云计算简介](img/09b088e5c909b0bee524f24260f455e1.png)
 
 图片由 [starline](https://www.freepik.com/author/starline) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -66,13 +66,13 @@
 
 ## #1\. 协作的迫切需求
 
-在数据科学旅程的开始，初级数据专业人员通常会在个人计算机上安装Python和R。随后，他们使用本地集成开发环境（IDE），如Jupyter Notebook应用程序或RStudio编写和运行代码。
+在数据科学旅程的开始，初级数据专业人员通常会在个人计算机上安装 Python 和 R。随后，他们使用本地集成开发环境（IDE），如 Jupyter Notebook 应用程序或 RStudio 编写和运行代码。
 
 然而，随着数据科学团队的扩展和高级分析的普及，对协作工具的需求也在上升，以提供洞察、预测分析和推荐系统。
 
 这就是为什么协作工具的必要性变得至关重要。这些工具对获取洞察、预测分析和推荐系统至关重要，并且通过可重复研究、笔记本工具和代码源控制得到了增强。云平台的集成进一步放大了这种协作潜力。
 
-![数据科学的云计算简介](../Images/3fe83c40ec6cc8cb691402eea9ab4644.png)
+![数据科学的云计算简介](img/3fe83c40ec6cc8cb691402eea9ab4644.png)
 
 图片由 [macrovector](https://www.freepik.com/author/macrovector) 提供
 
@@ -86,7 +86,7 @@
 
 这些数据集在捕捉、存储、管理和处理数据的合理时间框架方面超出了典型软件工具和存储系统的限制。
 
-在考虑大数据时，请始终记住3V：
+在考虑大数据时，请始终记住 3V：
 
 +   **体量：** 指数据的巨大数量。
 
@@ -102,27 +102,27 @@
 
 公司和专业人员可以租用从应用程序到存储的所有服务，而不是拥有自己的计算基础设施或数据中心。
 
-**这使得公司和专业人员可以按需支付他们使用的服务，** 而不必处理维护本地IT基础设施的成本和复杂性。
+**这使得公司和专业人员可以按需支付他们使用的服务，** 而不必处理维护本地 IT 基础设施的成本和复杂性。
 
 简单来说，**云计算**是按需提供计算服务—从应用程序到存储和处理能力—通常通过互联网和按需支付的方式进行。
 
-关于最常见的提供商，我相信你们都对其中至少一个有所了解。Google（Google Cloud）、Amazon（Amazon Web Services）和Microsoft（Microsoft Azure）是三种最常见的云技术，占据了几乎所有市场。
+关于最常见的提供商，我相信你们都对其中至少一个有所了解。Google（Google Cloud）、Amazon（Amazon Web Services）和 Microsoft（Microsoft Azure）是三种最常见的云技术，占据了几乎所有市场。
 
 # 所以……什么是云？
 
 **云** 这个术语可能听起来很抽象，但它有一个具体的含义。
 
-从本质上讲，云就是网络计算机共享资源。可以把互联网看作是最广泛的计算机网络，而较小的例子包括家庭网络，如LAN或WiFi SSID。这些网络共享从网页到数据存储的资源。
+从本质上讲，云就是网络计算机共享资源。可以把互联网看作是最广泛的计算机网络，而较小的例子包括家庭网络，如 LAN 或 WiFi SSID。这些网络共享从网页到数据存储的资源。
 
-在这些网络中，单独的计算机被称为*节点*。它们使用诸如HTTP等协议进行通信，以进行状态更新和数据请求等各种目的。通常，这些计算机不在现场，而是在配备了必要基础设施的数据中心内。
+在这些网络中，单独的计算机被称为*节点*。它们使用诸如 HTTP 等协议进行通信，以进行状态更新和数据请求等各种目的。通常，这些计算机不在现场，而是在配备了必要基础设施的数据中心内。
 
 由于计算机和存储成本的降低，现在使用多个互联计算机而非一台昂贵的计算机已成为常态。这种互联的方式确保了即使一台计算机故障，系统也能持续运行，并能够处理增加的负载。
 
-像Twitter、Facebook和Netflix这样的流行平台 exemplify 云基础应用程序，能够管理数百万的日常用户而不崩溃。当同一网络中的计算机为一个共同目标协作时，这被称为*集群*。
+像 Twitter、Facebook 和 Netflix 这样的流行平台 exemplify 云基础应用程序，能够管理数百万的日常用户而不崩溃。当同一网络中的计算机为一个共同目标协作时，这被称为*集群*。
 
 集群作为一个整体，提供了增强的性能、可用性和可扩展性。
 
-*分布式计算* 指的是设计用来利用*集群*进行特定任务的软件，比如Hadoop和Spark。
+*分布式计算* 指的是设计用来利用*集群*进行特定任务的软件，比如 Hadoop 和 Spark。
 
 **那么……再一次……什么是云？**
 
@@ -160,4 +160,4 @@
 
 +   [量子计算解析：对数据科学和人工智能的影响](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)
 
-+   [AWS 云的11个最佳实践：云和数据迁移](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [AWS 云的 11 个最佳实践：云和数据迁移](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)

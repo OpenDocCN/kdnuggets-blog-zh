@@ -1,12 +1,12 @@
 # 线性回归模型指南
 
-> 原文：[https://www.kdnuggets.com/2020/10/guide-linear-regression-models.html](https://www.kdnuggets.com/2020/10/guide-linear-regression-models.html)
+> 原文：[`www.kdnuggets.com/2020/10/guide-linear-regression-models.html`](https://www.kdnuggets.com/2020/10/guide-linear-regression-models.html)
 
-[评论](#comments)
+评论
 
 **由 [Diego Lopez Yse](https://www.linkedin.com/in/lopezyse/), 数据科学家**
 
-![图示](../Images/fcbc5e05af9fcf5b53dc7a06990b9997.png)
+![图示](img/fcbc5e05af9fcf5b53dc7a06990b9997.png)
 
 图片由 [Drew Beamer](https://unsplash.com/@drew_beamer?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -38,39 +38,39 @@
 
 +   **输出** 或 **目标变量** 是我们想要预测的变量。它通常被称为 ***y***。
 
-![文章图片](../Images/8cda7a5444b3f7af8be443524877724f.png)
+![文章图片](img/8cda7a5444b3f7af8be443524877724f.png)
 
 **β0，亦称截距**的值显示了估计回归线与***y***轴交点的位置，而**β1**的值**确定了估计回归线的斜率**。**随机误差**描述了因变量与自变量之间线性关系的随机成分（模型的干扰，即***X***无法解释的***y***部分）。真实的回归模型通常是未知的（因为我们无法捕捉所有影响因变量的因素），因此，实际数据点对应的随机误差项的值仍然未知。然而，通过计算观察数据集的模型参数，可以估计回归模型。
 
 回归的思想是从样本中估计参数**β0**和**β1**。如果我们能够确定这两个参数的最优值，那么我们将得到**最佳拟合线**，可以用来预测***y***的值，给定***X***的值。换句话说，我们尝试拟合一条线，以观察输入和输出变量之间的关系，然后进一步用它来预测未见输入的输出。
 
-![用于帖子](../Images/79e28b3a31c2a1ca51aa7b22db888416.png)
+![用于帖子](img/79e28b3a31c2a1ca51aa7b22db888416.png)
 
 我们如何估计**β0**和**β1**？我们可以使用一种叫做**普通最小二乘法（OLS）**的方法。其目标是尽可能将黑点到红线的距离减小到接近零，这通过最小化实际结果和预测结果之间的平方差来实现。
 
 实际值和预测值之间的差异称为**残差（e）**，它可以是负的或正的，具体取决于模型是否过度预测或低估了结果。因此，为了计算净误差，直接将所有残差相加可能会导致项的相互抵消和净效果的减少。为避免这种情况，我们取这些误差项的平方和，这被称为***残差平方和（RSS）***。
 
-![用于帖子](../Images/bda915173cacc02353a9dc556511929c.png)
+![用于帖子](img/bda915173cacc02353a9dc556511929c.png)
 
 **普通最小二乘法（OLS）最小化残差平方和**，其目标是拟合一条回归线，以最小化观察值与预测值（回归线）之间的距离（以平方值计）。
 
 ### 多元线性回归（MLR）
 
-当有两个或更多预测变量或输入变量时使用的线性回归形式。类似于之前描述的SLR模型，它包括额外的预测变量：
+当有两个或更多预测变量或输入变量时使用的线性回归形式。类似于之前描述的 SLR 模型，它包括额外的预测变量：
 
-![用于帖子](../Images/b6650093faec8342f178de664db892e4.png)
+![用于帖子](img/b6650093faec8342f178de664db892e4.png)
 
-注意这个方程只是简单线性回归方程的扩展，其中每个输入/预测变量都有其相应的斜率系数**(β*)**。第一个**β**项**(β0)**是截距常数，是在没有所有预测变量的情况下***y***的值（即当所有***X***项为0时）。
+注意这个方程只是简单线性回归方程的扩展，其中每个输入/预测变量都有其相应的斜率系数**(β*)**。第一个**β**项**(β0)**是截距常数，是在没有所有预测变量的情况下***y***的值（即当所有***X***项为 0 时）。
 
-随着特征数量的增加，我们模型的复杂性也增加，数据的可视化和理解变得更加困难。由于这些模型中参数更多，相较于SLR模型，需要更多的注意。增加更多的项本质上会改善对数据的拟合，但这些新项可能没有实际意义。这是危险的，因为它可能导致一个适应数据但实际上没有任何有用意义的模型。
+随着特征数量的增加，我们模型的复杂性也增加，数据的可视化和理解变得更加困难。由于这些模型中参数更多，相较于 SLR 模型，需要更多的注意。增加更多的项本质上会改善对数据的拟合，但这些新项可能没有实际意义。这是危险的，因为它可能导致一个适应数据但实际上没有任何有用意义的模型。
 
 ### 一个示例
 
-广告数据集包含了在200个不同市场中某产品的销售情况，以及对三种不同媒体（电视、广播和报纸）的广告预算。我们将使用这个数据集来预测销售量（因变量），基于电视、广播和报纸广告预算（自变量）。
+广告数据集包含了在 200 个不同市场中某产品的销售情况，以及对三种不同媒体（电视、广播和报纸）的广告预算。我们将使用这个数据集来预测销售量（因变量），基于电视、广播和报纸广告预算（自变量）。
 
 从数学角度看，我们尝试解决的公式是：
 
-![帖子图片](../Images/20b1ee1581d96839e194aa57d99bb15d.png)
+![帖子图片](img/20b1ee1581d96839e194aa57d99bb15d.png)
 
 找到这些常数**(β)**的值是回归模型通过最小化误差函数和拟合最佳线或超平面（取决于输入变量的数量）来完成的。让我们开始编码。
 
@@ -102,7 +102,7 @@ df = pd.read_csv(“Advertising.csv”)
 df.head()
 ```
 
-![帖子图片](../Images/ed9096f717b3417a46d185b66c037cf5.png)
+![帖子图片](img/ed9096f717b3417a46d185b66c037cf5.png)
 
 我们将删除第一列（“Unnamed”），因为我们不需要它：
 
@@ -111,15 +111,15 @@ df = df.drop([‘Unnamed: 0’], axis=1)
 df.info()
 ```
 
-![帖子图片](../Images/f26b29dfb125222633b20c292e7af496.png)
+![帖子图片](img/f26b29dfb125222633b20c292e7af496.png)
 
-我们的数据集现在包含4列（包括目标变量“销售”）、200个记录和没有缺失值。让我们可视化自变量和目标变量之间的关系。
+我们的数据集现在包含 4 列（包括目标变量“销售”）、200 个记录和没有缺失值。让我们可视化自变量和目标变量之间的关系。
 
 ```py
 sns.pairplot(df)
 ```
 
-![帖子图片](../Images/72d9a6f285aea4fce58f76dee299ada4.png)
+![帖子图片](img/72d9a6f285aea4fce58f76dee299ada4.png)
 
 电视与销售之间的关系似乎相当强，而广播与销售之间似乎有一些趋势，但报纸与销售之间的关系似乎不存在。我们还可以通过相关性图来数值验证这一点：
 
@@ -128,9 +128,9 @@ mask = np.tril(df.corr())
 sns.heatmap(df.corr(), fmt=’.1g’, annot=True, cmap= ‘cool’, mask=mask)
 ```
 
-![帖子图片](../Images/d75991c12d1f5bd10e21e436f11113fa.png)
+![帖子图片](img/d75991c12d1f5bd10e21e436f11113fa.png)
 
-正如我们预期的那样，销售与电视之间的正相关最强，而销售与报纸之间的关系接近于0。
+正如我们预期的那样，销售与电视之间的正相关最强，而销售与报纸之间的关系接近于 0。
 
 ### 选择特征和目标变量
 
@@ -149,13 +149,13 @@ y = df[‘sales’]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 ```
 
-我们将数据集拆分为70%的训练集和30%的测试集。random_state 参数用于初始化内部随机数生成器，它将决定数据拆分为训练和测试索引。我将 random_state 设置为0，以便你可以使用相同的参数比较多次运行的输出。
+我们将数据集拆分为 70%的训练集和 30%的测试集。random_state 参数用于初始化内部随机数生成器，它将决定数据拆分为训练和测试索引。我将 random_state 设置为 0，以便你可以使用相同的参数比较多次运行的输出。
 
 ```py
 print(X_train.shape,y_train.shape,X_test.shape,y_test.shape)
 ```
 
-![Image for post](../Images/23b9729cd234ee782860ede5c523f967.png)
+![Image for post](img/23b9729cd234ee782860ede5c523f967.png)
 
 通过打印拆分集的形状，我们可以看到我们创建了：
 
@@ -185,7 +185,7 @@ mlr.fit(X_train, y_train)
 mlr.intercept_
 ```
 
-![Image for post](../Images/adb451920cd51229c2da62c7786301ef.png)
+![Image for post](img/adb451920cd51229c2da62c7786301ef.png)
 
 我们还可以打印系数的值 **(β)**：
 
@@ -194,11 +194,11 @@ coeff_df = pd.DataFrame(mlr.coef_, X.columns, columns =[‘Coefficient’])
 coeff_df
 ```
 
-![Image for post](../Images/c162f63a4b2dff8db2fe9b5c61e2b0a4.png)
+![Image for post](img/c162f63a4b2dff8db2fe9b5c61e2b0a4.png)
 
 这样我们现在可以根据不同的电视、广播和报纸预算值来估计“销售” 的值：
 
-![Image for post](../Images/4ed913943f9bde535868ae7c0e7fbbb4.png)
+![Image for post](img/4ed913943f9bde535868ae7c0e7fbbb4.png)
 
 例如，如果我们为电视确定了 50 的预算，为广播 30，为报纸 10，则“销售” 的估计值将是：
 
@@ -208,7 +208,7 @@ output = mlr.intercept_ + sum(example*mlr.coef_)
 output
 ```
 
-![Image for post](../Images/ad0baa7d2144b796f5e062b704dd24b0.png)
+![Image for post](img/ad0baa7d2144b796f5e062b704dd24b0.png)
 
 ### 测试模型
 
@@ -229,7 +229,7 @@ print(‘Root Mean Squared Error:’, np.sqrt(metrics.mean_squared_error(y_test,
 print(‘R Squared Score is:’, r2_score(y_test, y_pred))
 ```
 
-![Image for post](../Images/a6a0f1654a011201c1be4a9d5a6be571.png)
+![Image for post](img/a6a0f1654a011201c1be4a9d5a6be571.png)
 
 在用测试集验证我们的模型后，我们得到的 R² 值为 0.86，这似乎是一个相当不错的性能得分。但虽然更高的 R² 表示模型拟合得更好，但高的测量值不总是正面的。我们将在下文中看到一些解读和改进回归模型的方法。
 
@@ -243,7 +243,7 @@ model_stats = sm.OLS(y_train.values.reshape(-1,1), X2).fit()
 model_stats.summary()
 ```
 
-![Image for post](../Images/5f929c9267d99aabcc912d796e037fce.png)
+![Image for post](img/5f929c9267d99aabcc912d796e037fce.png)
 
 让我们看看这些数字的含义。
 
@@ -253,21 +253,21 @@ model_stats.summary()
 
 我们需要进行假设检验来回答这个问题并检查我们的假设。首先形成**原假设 (H0)**，即所有系数等于零，预测变量与目标之间没有关系（意味着一个没有自变量的模型与您的模型一样好）：
 
-![图示](../Images/bcf3f2bd870635a2ff7a97cd7643ce0b.png)
+![图示](img/bcf3f2bd870635a2ff7a97cd7643ce0b.png)
 
 多元线性回归。来源: [Towards Data Science](https://towardsdatascience.com/multiple-linear-regression-8cf3bee21d8b)
 
 另一方面，我们需要定义**备择假设 (Ha)**，即至少一个系数不为零，且预测变量与目标之间存在关系（意味着您的模型比仅有截距的模型更好地拟合数据）：
 
-![图示](../Images/bb164e3b5e96385c541b00e831671324.png)
+![图示](img/bb164e3b5e96385c541b00e831671324.png)
 
 多元线性回归。来源: [Towards Data Science](https://towardsdatascience.com/multiple-linear-regression-8cf3bee21d8b)
 
-如果我们想要拒绝原假设并对我们的回归模型有信心，我们需要找到强有力的统计证据。为此，我们进行假设检验，其中使用**F统计量**。
+如果我们想要拒绝原假设并对我们的回归模型有信心，我们需要找到强有力的统计证据。为此，我们进行假设检验，其中使用**F 统计量**。
 
-> *如果F统计量的值等于或非常接近1，则结果支持原假设，我们无法拒绝它。*
+> *如果 F 统计量的值等于或非常接近 1，则结果支持原假设，我们无法拒绝它。*
 
-如上表所示（标记为黄色），F统计量为439.9，因此提供了强有力的证据来反驳原假设（即所有系数为零）。接下来，我们还需要检查在原假设为真的情况下**F统计量出现的概率**（也标记为黄色），其值为8.76e-70，这是一个远小于1%的极小数字。这意味着在假设原假设有效的情况下，F统计量439.9出现的概率远低于1%。
+如上表所示（标记为黄色），F 统计量为 439.9，因此提供了强有力的证据来反驳原假设（即所有系数为零）。接下来，我们还需要检查在原假设为真的情况下**F 统计量出现的概率**（也标记为黄色），其值为 8.76e-70，这是一个远小于 1%的极小数字。这意味着在假设原假设有效的情况下，F 统计量 439.9 出现的概率远低于 1%。
 
 话虽如此，我们可以拒绝原假设，并确信至少一个预测变量对预测输出是有用的。
 
@@ -311,7 +311,7 @@ model_stats.summary()
 
 +   **同方差性**：残差的方差在任何 x 值下都必须相同。多元线性回归假设残差中的误差量在每个线性模型点处是类似的。这种情况称为同方差性。散点图是一种检查数据是否同方差性的方法，还有几种测试可以在数值上验证这一假设（例如 Goldfeld-Quandt 测试、Breusch-Pagan 测试、White 测试）。
 
-![图示](../Images/42ff07e76b715b1bc499932a4ba38514.png)
+![图示](img/42ff07e76b715b1bc499932a4ba38514.png)
 
 线性回归算法的假设。来源：[Towards Data Science](https://towardsdatascience.com/assumptions-of-linear-regression-algorithm-ed9ea32224e1)
 
@@ -321,7 +321,7 @@ model_stats.summary()
 
 +   **残差的正态性**：残差必须呈正态分布。可以通过拟合优度检验（例如 Kolmogorov-Smirnov 检验或 Shapiro-Wilk 检验）来检查正态性，如果数据不呈正态分布，可以通过非线性变换（例如对数变换）来解决此问题。
 
-![Figure](../Images/6d4419689d91613d692892fbd0305884.png)
+![Figure](img/6d4419689d91613d692892fbd0305884.png)
 
 线性回归算法的假设。来源：[数据科学探索](https://towardsdatascience.com/assumptions-of-linear-regression-algorithm-ed9ea32224e1)
 
@@ -331,21 +331,21 @@ model_stats.summary()
 
 ### 最后的想法
 
-尽管MLR模型扩展了SLR模型的范围，但它们仍然是线性模型，这意味着模型中包含的项无法显示彼此之间的任何非线性关系或表示任何非线性趋势。你在预测观察范围之外的点时也应该小心，因为随着你移动到观察范围之外，变量之间的关系可能会发生变化（这是你无法知道的，因为你没有数据）。
+尽管 MLR 模型扩展了 SLR 模型的范围，但它们仍然是线性模型，这意味着模型中包含的项无法显示彼此之间的任何非线性关系或表示任何非线性趋势。你在预测观察范围之外的点时也应该小心，因为随着你移动到观察范围之外，变量之间的关系可能会发生变化（这是你无法知道的，因为你没有数据）。
 
 > 观察到的关系可能在局部是线性的，但在数据的外部范围可能存在未观察到的非线性关系。
 
 **线性模型也可以通过包括非线性变量如多项式和变换指数函数来建模曲率**。线性回归方程在[*参数*](https://statisticsbyjim.com/glossary/parameter/)上是*线性的*，这意味着你可以通过指数提高自变量来拟合曲线，仍然保持在“线性世界”中。线性回归模型可以包含对数项和倒数项来跟随不同类型的曲线，并且仍然在参数上保持线性。
 
-![Figure](../Images/c7ae3a17f20dd0573fff1bb9a0f62e80.png)
+![Figure](img/c7ae3a17f20dd0573fff1bb9a0f62e80.png)
 
 当自变量被平方时，模型仍然在参数上是线性的。
 
 像[**多项式回归**](https://towardsdatascience.com/machine-learning-with-python-easy-and-robust-method-to-fit-nonlinear-data-19e8a1ddbd49)这样的回归可以建模*非线性关系*，而线性方程有一个基本形式，非线性方程可以采取许多不同的形式。你可能会考虑使用[**非线性回归模型**](https://towardsdatascience.com/how-to-choose-between-a-linear-or-nonlinear-regression-for-your-dataset-e58a568e2a15)，因为虽然线性回归可以建模曲线，但它可能无法建模数据中存在的特定曲线。
 
-你还应该知道，最小二乘法（OLS）并不是拟合线性回归模型的唯一方法，其他优化方法如[**梯度下降**](https://towardsdatascience.com/linear-regression-simplified-ordinary-least-square-vs-gradient-descent-48145de2cf76)更适合拟合大数据集。将OLS应用于复杂和非线性算法可能不具备可扩展性，而梯度下降在找到解时可能计算成本更低（更快）。*梯度下降是一种最小化函数的算法*，在给定一组参数定义的函数时，算法从一组初始参数值开始，迭代地朝向最小化函数的参数值移动。这种**迭代最小化**是通过使用导数来实现的，沿函数梯度的负方向采取步骤。
+你还应该知道，最小二乘法（OLS）并不是拟合线性回归模型的唯一方法，其他优化方法如[**梯度下降**](https://towardsdatascience.com/linear-regression-simplified-ordinary-least-square-vs-gradient-descent-48145de2cf76)更适合拟合大数据集。将 OLS 应用于复杂和非线性算法可能不具备可扩展性，而梯度下降在找到解时可能计算成本更低（更快）。*梯度下降是一种最小化函数的算法*，在给定一组参数定义的函数时，算法从一组初始参数值开始，迭代地朝向最小化函数的参数值移动。这种**迭代最小化**是通过使用导数来实现的，沿函数梯度的负方向采取步骤。
 
-![图](../Images/cc0df61e5024e01589a2df3a8f32b933.png)
+![图](img/cc0df61e5024e01589a2df3a8f32b933.png)
 
 使用梯度下降的线性回归。来源：[数据科学之路](https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931)
 
@@ -357,7 +357,7 @@ model_stats.summary()
 
 +   **反向因果关系**。许多理论模型预测双向因果关系——即一个因变量可以引起一个或多个解释变量的变化。例如，较高的收入可能使人们能够在自己的教育上投资更多，这反过来又提高了他们的收入。这使得回归的估计方式变得复杂，需采用特殊技术。
 
-+   **测量误差**。因素可能被错误测量。例如，能力很难测量，而IQ测试存在已知的问题。因此，使用IQ的回归可能无法正确控制能力，从而导致教育和收入等变量之间的相关性不准确或有偏。
++   **测量误差**。因素可能被错误测量。例如，能力很难测量，而 IQ 测试存在已知的问题。因此，使用 IQ 的回归可能无法正确控制能力，从而导致教育和收入等变量之间的相关性不准确或有偏。
 
 +   **关注点过于有限**。回归系数仅提供有关一个变量的微小变化如何与另一个变量的变化相关的信息——而非大变化。它会显示教育的小变化如何可能影响收入，但不会使研究者对大变化的影响做出概括。如果每个人同时接受大学教育，新毕业的大学生不太可能赚到更多，因为大学毕业生的总供应量将大幅增加。
 
@@ -369,22 +369,22 @@ model_stats.summary()
 
 **相关：**
 
-+   [解决线性回归应使用哪些方法？](/2020/09/solving-linear-regression.html)
++   解决线性回归应使用哪些方法？
 
-+   [概率分布之前](/2020/07/before-probability-distributions.html)
++   概率分布之前
 
-+   [时间复杂度：如何衡量算法的效率](/2020/06/time-complexity-measure-efficiency-algorithms.html)
++   时间复杂度：如何衡量算法的效率
 
 ### 相关主题更多内容
 
-+   [使用线性回归模型而非…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [使用线性回归模型而非…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [预测：Python中线性回归的初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)
++   [预测：Python 中线性回归的初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)
 
 +   [线性回归与逻辑回归的比较](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
 
 +   [数据科学中的线性回归](https://www.kdnuggets.com/2022/07/linear-regression-data-science.html)

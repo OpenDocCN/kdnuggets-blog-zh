@@ -1,8 +1,8 @@
 # 数据科学简历必备项
 
-> 原文：[https://www.kdnuggets.com/2022/06/musthaves-data-science-resume.html](https://www.kdnuggets.com/2022/06/musthaves-data-science-resume.html)
+> 原文：[`www.kdnuggets.com/2022/06/musthaves-data-science-resume.html`](https://www.kdnuggets.com/2022/06/musthaves-data-science-resume.html)
 
-![数据科学简历必备项](../Images/6ca44609ebba667393d6f3e3b4f2301e.png)
+![数据科学简历必备项](img/6ca44609ebba667393d6f3e3b4f2301e.png)
 
 [João Ferrão](https://unsplash.com/@joaoscferrao) via Unsplash
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
-根据 [Ladders: 眼动追踪研究](https://www.theladders.com/static/images/basicSite/pdfs/TheLadders-EyeTracking-StudyC2.pdf)；招聘人员在决定候选人之前会查看简历7.4秒。这意味着你基本上只有不到10秒的时间来留下良好的印象。10秒钟的时间不多，尤其是当你非常想要这份工作时。
+根据 [Ladders: 眼动追踪研究](https://www.theladders.com/static/images/basicSite/pdfs/TheLadders-EyeTracking-StudyC2.pdf)；招聘人员在决定候选人之前会查看简历 7.4 秒。这意味着你基本上只有不到 10 秒的时间来留下良好的印象。10 秒钟的时间不多，尤其是当你非常想要这份工作时。
 
 那么，你可以做些什么来用简历打动技术招聘人员呢？以下是一些你应考虑的要点。
 
@@ -30,7 +30,7 @@
 
 你简历的最佳格式是倒序排列。这意味着你最新的工作、经历等会被列在最前面。这有助于招聘人员看到你当前的技能以及你能为他们带来的价值。
 
-简历的结构非常重要。你不希望简历显得杂乱无章，让招聘人员感到沮丧并立即关闭它。市面上有许多简历模板，你可以简单地在Google上搜索并筛选出你喜欢的结构。我个人使用过 [Zety](https://zety.com/blog/data-scientist-resume-example)，相信它对应届生来说是一个很好的工具。
+简历的结构非常重要。你不希望简历显得杂乱无章，让招聘人员感到沮丧并立即关闭它。市面上有许多简历模板，你可以简单地在 Google 上搜索并筛选出你喜欢的结构。我个人使用过 [Zety](https://zety.com/blog/data-scientist-resume-example)，相信它对应届生来说是一个很好的工具。
 
 # 数据科学家简历中应包含的内容
 
@@ -76,7 +76,7 @@
 
 如上所述，招聘人员不会花太多时间浏览每份简历。一些招聘人员寻找与他们要求相符的流行词，例如‘Python’，‘Pipeline’，‘机器学习’等。
 
-简历总结概述了你的职业经历和成就，通常在2-4句话中完成。简历目标则概述了你希望在职业生涯中实现的潜在兴趣/目标，通常也在2-4句话中完成。
+简历总结概述了你的职业经历和成就，通常在 2-4 句话中完成。简历目标则概述了你希望在职业生涯中实现的潜在兴趣/目标，通常也在 2-4 句话中完成。
 
 在一小段文字中，你能够告诉招聘人员很多关于你自己的信息，你带来了什么，以及你如何计划提升你的职业生涯。
 
@@ -92,15 +92,15 @@
 
 +   你的职责和成就
 
-在提及你的职责和成就时，总是要进一步解释。例如，与其说“提高数据准确性”，不如说“将预测数据的准确性提高了22%”。这不仅向招聘人员展示了你在提高准确性方面的技能，还展示了提升的程度。
+在提及你的职责和成就时，总是要进一步解释。例如，与其说“提高数据准确性”，不如说“将预测数据的准确性提高了 22%”。这不仅向招聘人员展示了你在提高准确性方面的技能，还展示了提升的程度。
 
 一个格式化你的工作经历的例子可能如下所示：
 
 | **数据科学家** **公司 X** 01/2019 - 01/2022
 
-+   开发了端到端的机器学习原型，并提高了20%的效率
++   开发了端到端的机器学习原型，并提高了 20%的效率
 
-+   提出了并实施了一个新的目标模型，产生了75万美元的销售额
++   提出了并实施了一个新的目标模型，产生了 75 万美元的销售额
 
 +   制定行动计划，通过使用数据科学来改善决策过程
 
@@ -114,7 +114,7 @@
 
 +   从事一些开源项目
 
-+   在个人项目上工作，使用平台如Kaggle。
++   在个人项目上工作，使用平台如 Kaggle。
 
 ## 技能
 
@@ -212,7 +212,7 @@
 
 如果你正在积极寻找数据科学岗位，考虑调整和优化你当前的简历，以确保它能引起技术招聘人员的注意。
 
-记住，招聘人员每份简历的查看时间是7.4秒，所以要确保它有价值。
+记住，招聘人员每份简历的查看时间是 7.4 秒，所以要确保它有价值。
 
 **[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术作家。她特别关注提供数据科学职业建议或教程以及围绕数据科学的理论知识。她还希望探索人工智能如何有助于延长人类寿命。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
@@ -222,9 +222,9 @@
 
 +   [7 个机器学习作品集项目来提升简历](https://www.kdnuggets.com/2022/09/7-machine-learning-portfolio-projects-boost-resume.html)
 
-+   [7个人工智能项目，提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
++   [7 个人工智能项目，提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
 
-+   [KDnuggets新闻，9月21日：7个机器学习项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习项目…](https://www.kdnuggets.com/2022/n37.html)
 
 +   [你的文本分类任务最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)
 

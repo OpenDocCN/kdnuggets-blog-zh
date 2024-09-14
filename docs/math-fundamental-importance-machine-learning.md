@@ -1,12 +1,12 @@
 # 数学 2.0：机器学习的基本重要性
 
-> 原文：[https://www.kdnuggets.com/2021/09/math-fundamental-importance-machine-learning.html](https://www.kdnuggets.com/2021/09/math-fundamental-importance-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/09/math-fundamental-importance-machine-learning.html`](https://www.kdnuggets.com/2021/09/math-fundamental-importance-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [Dr. Claus Horn](https://www.linkedin.com/in/aiscientist/)，人工智能研究员和讲师**
 
-![图片](../Images/a7e53d444aaef2ee5f95db965fe91c1b.png)
+![图片](img/a7e53d444aaef2ee5f95db965fe91c1b.png)
 
 一些人，特别是在当前数据科学的热潮中，将机器学习视为仅仅是另一种算法。它是数字化的一部分，帮助我们自动化事务，仅此而已。不幸的是，这种解释完全忽略了主要的观点。*机器学习不仅仅是编程计算机的另一种方式；它代表了我们理解世界方式的根本转变。它是数学 2.0。*
 
@@ -20,9 +20,9 @@
 
 很快，这种新方法显然意味着我们需要调整我们的科学工作流程。与其利用所有物理学知识来增加信号与背景的比率，不如仅做最小限度的清理切割，让算法来完成工作。后来，随着深度学习的出现，CERN 的研究人员意识到，即使是物理量的重建也是适得其反的。仅凭原始测量数据，深度学习能够超越任何人工选择的物理学家（见下图）。*因此，数学 2.0 让我们能看到基于数学 1.0 的模型无法看到的粒子。*
 
-![图 1](../Images/61581513f384fe24890192efb4d13359.png)
+![图 1](img/61581513f384fe24890192efb4d13359.png)
 
-**图 1**: 基于低级特征（黑色）和物理学家通常使用的高级特征（红色）的深度学习算法性能比较。 （图取自参考文献1的2014年《自然》论文。）
+**图 1**: 基于低级特征（黑色）和物理学家通常使用的高级特征（红色）的深度学习算法性能比较。 （图取自参考文献 1 的 2014 年《自然》论文。）
 
 人们一直在疑惑为何大多数物理模型非常简单，大多数情况下仅涉及三次或更低次的多项式。也许原因在于我们只能看到我们能够用语言表达的内容。
 
@@ -42,27 +42,27 @@
 
 1.  Baldi, P., Sadowski, P. & Whiteson, D. 利用深度学习在高能物理中寻找奇异粒子。*Nat Commun* **5**, **4308 (2014)。 https://doi.org/10.1038/ncomms5308
 
-**个人简介: [Dr. Claus Horn](https://www.linkedin.com/in/aiscientist/)** 是一位人工智能领域的研究员和讲师，他相信21世纪人类条件进步的最高潜力存在于人工智能与生命科学的交汇点。
+**个人简介: [Dr. Claus Horn](https://www.linkedin.com/in/aiscientist/)** 是一位人工智能领域的研究员和讲师，他相信 21 世纪人类条件进步的最高潜力存在于人工智能与生命科学的交汇点。
 
 [原文](https://www.linkedin.com/pulse/math-20-fundamental-importance-machine-learning-dr-claus-horn/)。经许可转载。
 
 **相关：**
 
-+   [机器学习如何利用线性代数解决数据问题](/2021/09/machine-learning-leverages-linear-algebra-solve-data-problems.html)
++   机器学习如何利用线性代数解决数据问题
 
-+   [反脆弱性与机器学习](/2021/09/antifragility-machine-learning.html)
++   反脆弱性与机器学习
 
-+   [自然语言处理中的线性代数](/2021/08/linear-algebra-natural-language-processing.html)
++   自然语言处理中的线性代数
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -72,9 +72,9 @@
 
 +   [使用基础和现代算法解决计算机科学问题](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)
 
-+   [机器学习不像你的大脑 第3部分：基础架构](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)
++   [机器学习不像你的大脑 第三部分：基础架构](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)
 
-+   [机器学习不像你的大脑 第6部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
 +   [机器学习中的预处理重要性](https://www.kdnuggets.com/2023/02/importance-preprocessing-machine-learning.html)
 

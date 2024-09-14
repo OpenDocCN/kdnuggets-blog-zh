@@ -1,8 +1,8 @@
 # OpenAI 的 AI 安全方法
 
-> 原文：[https://www.kdnuggets.com/2023/06/openai-approach-ai-safety.html](https://www.kdnuggets.com/2023/06/openai-approach-ai-safety.html)
+> 原文：[`www.kdnuggets.com/2023/06/openai-approach-ai-safety.html`](https://www.kdnuggets.com/2023/06/openai-approach-ai-safety.html)
 
-![OpenAI 的 AI 安全方法](../Images/0a60883db4483f5b1a1210221178de8f.png)
+![OpenAI 的 AI 安全方法](img/0a60883db4483f5b1a1210221178de8f.png)
 
 作者图片
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
-自从 ChatGPT 发布以来，市场上涌现了大量的大语言模型以及其他 AI 模型。在过去几个月里，政府之间关于 AI 及其对社会安全的监管有了各种讨论。欧盟正在推动他们的 [AI 法案](/2022/06/european-ai-act-simplified-breakdown.html)，其他大陆也在效仿。
+自从 ChatGPT 发布以来，市场上涌现了大量的大语言模型以及其他 AI 模型。在过去几个月里，政府之间关于 AI 及其对社会安全的监管有了各种讨论。欧盟正在推动他们的 AI 法案，其他大陆也在效仿。
 
 山姆·奥特曼一直关注人工智能使用中的伦理问题和担忧，并推动更多的监管。他发表声明说：
 
@@ -74,20 +74,20 @@ OpenAI 在 AI 安全方面的一个主要关注点是保护儿童。他们目前
 
 你认为接下来会发生什么？
 
-如果你想观看OpenAI的萨姆·阿尔特曼在16日星期二的听证会，你可以在这里查看：[ChatGPT首席萨姆·阿尔特曼在国会就AI作证](https://www.youtube.com/watch?v=xS6rGBpytVY)。
+如果你想观看 OpenAI 的萨姆·阿尔特曼在 16 日星期二的听证会，你可以在这里查看：[ChatGPT 首席萨姆·阿尔特曼在国会就 AI 作证](https://www.youtube.com/watch?v=xS6rGBpytVY)。
 
-**[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作人以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程及理论知识。她还希望探索人工智能如何有助于延长人类寿命的不同方式。作为一个热衷学习的人，她寻求扩展她的技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作人以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程及理论知识。她还希望探索人工智能如何有助于延长人类寿命的不同方式。作为一个热衷学习的人，她寻求扩展她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
-+   [OpenAI推出的新ChatGPT和Whisper API](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)
++   [OpenAI 推出的新 ChatGPT 和 Whisper API](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)
 
-+   [用噪声标签数据微调OpenAI语言模型](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
++   [用噪声标签数据微调 OpenAI 语言模型](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
 
-+   [OpenAI的Whisper API用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)
++   [OpenAI 的 Whisper API 用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)
 
-+   [免费ChatGPT课程：使用OpenAI API编写5个项目](https://www.kdnuggets.com/2023/05/free-chatgpt-course-openai-api-code-5-projects.html)
++   [免费 ChatGPT 课程：使用 OpenAI API 编写 5 个项目](https://www.kdnuggets.com/2023/05/free-chatgpt-course-openai-api-code-5-projects.html)
 
-+   [使用OpenAI GPT模型的最佳实践](https://www.kdnuggets.com/2023/08/best-practices-openai-gpt-model.html)
++   [使用 OpenAI GPT 模型的最佳实践](https://www.kdnuggets.com/2023/08/best-practices-openai-gpt-model.html)
 
-+   [OpenAI API初学者指南：你的简单入门指南](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)
++   [OpenAI API 初学者指南：你的简单入门指南](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)

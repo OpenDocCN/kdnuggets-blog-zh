@@ -1,22 +1,22 @@
 # 将业务清晰度带入 CRISP-DM
 
-> 原文：[https://www.kdnuggets.com/2017/01/business-clarity-crisp-dm.html](https://www.kdnuggets.com/2017/01/business-clarity-crisp-dm.html)
+> 原文：[`www.kdnuggets.com/2017/01/business-clarity-crisp-dm.html`](https://www.kdnuggets.com/2017/01/business-clarity-crisp-dm.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
-这是三篇文章中的第二篇。第一篇概述了[**使用 CRISP-DM 的四个问题及解决方法**](/2017/01/four-problems-crisp-dm-fix.html)。这四个问题中的两个与对业务问题缺乏清晰度有关，这削弱了任何开发的分析的业务价值。分析团队需要模拟业务决策，以将他们的分析与业务目标联系起来，因为这将带来业务问题的清晰度，并使分析结果能够以业务术语进行评估。在 CRISP-DM 中，解决这些问题涉及对业务理解和评估阶段的更改，如图 1 所示。
+这是三篇文章中的第二篇。第一篇概述了**使用 CRISP-DM 的四个问题及解决方法**。这四个问题中的两个与对业务问题缺乏清晰度有关，这削弱了任何开发的分析的业务价值。分析团队需要模拟业务决策，以将他们的分析与业务目标联系起来，因为这将带来业务问题的清晰度，并使分析结果能够以业务术语进行评估。在 CRISP-DM 中，解决这些问题涉及对业务理解和评估阶段的更改，如图 1 所示。
 
-![](../Images/d1c18d3057c08961be7860910218a3c6.png)
+![](img/d1c18d3057c08961be7860910218a3c6.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -34,7 +34,7 @@ CRISP-DM 的第一阶段，业务理解，完全是关于明确业务问题，�
 
 图 2 显示了一个决策模型的示例。它展示了需要改进的总体业务决策（顶部的矩形），以便项目的业务重点明确。它将这一决策过程分解为其组成的子决策（更多的矩形），既使决策的过程变得清晰，又识别出应以分析方式做出的具体决策的角色。它显示了做出决策所涉及的规章、政策和相关经验（作为知识来源，文档形状），建议的分析模型和当前使用的数据（作为输入数据，扁平的椭圆）。这样的模型满足了 CRISP-DM 对业务理解的所有要求。
 
-![](../Images/36438f42402d4e68a8fe80d82f561aa8.png)
+![](img/36438f42402d4e68a8fe80d82f561aa8.png)
 
 图 2：表达业务理解的决策模型
 
@@ -62,7 +62,7 @@ CRISP-DM 的第一阶段，业务理解，完全是关于明确业务问题，�
 
 *成功的分析团队将分析成功与业务成功之间的空白最小化，评估他们的模型时同时考虑业务驱动因素和分析驱动因素。*
 
-使用决策建模为分析项目带来清晰度，确保团队具备构建成功分析所需的业务理解，并为他们提供了一个业务基准，以评估其分析结果。拥有决策模型，分析项目可以避免CRISP-DM中的前两个问题，并建立一个能够解决真实业务问题并产生实际业务差异的分析。
+使用决策建模为分析项目带来清晰度，确保团队具备构建成功分析所需的业务理解，并为他们提供了一个业务基准，以评估其分析结果。拥有决策模型，分析项目可以避免 CRISP-DM 中的前两个问题，并建立一个能够解决真实业务问题并产生实际业务差异的分析。
 
 要了解全球信息技术领导者如何使用决策建模，请查看[国际分析研究所的最佳实践简报](http://www.decisionmanagementsolutions.com/bringing-clarity-to-data-science-projects-with-decision-modeling-a-case-study/)。
 
@@ -70,11 +70,11 @@ CRISP-DM 的第一阶段，业务理解，完全是关于明确业务问题，�
 
 **相关：**
 
-+   [基于标准的预测分析部署](/2016/06/zementis-standards-based-deployment-predictive-analytics.html)
++   基于标准的预测分析部署
 
-+   [数据科学过程](/2016/03/data-science-process.html)
++   数据科学过程
 
-+   [数据科学自动化：揭穿误解](/2016/08/data-science-automation-debunking-misconceptions.html)
++   数据科学自动化：揭穿误解
 
 ### 更多相关话题
 

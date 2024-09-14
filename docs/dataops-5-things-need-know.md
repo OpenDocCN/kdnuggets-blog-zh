@@ -1,8 +1,8 @@
 # DataOps：5 个你需要了解的关键点
 
-> 原文：[https://www.kdnuggets.com/2021/05/dataops-5-things-need-know.html](https://www.kdnuggets.com/2021/05/dataops-5-things-need-know.html)
+> 原文：[`www.kdnuggets.com/2021/05/dataops-5-things-need-know.html`](https://www.kdnuggets.com/2021/05/dataops-5-things-need-know.html)
 
-[comments](#comments)
+comments
 
 **由 [Sigmoid](https://www.sigmoid.com/) 提供**
 
@@ -12,11 +12,11 @@
 
 ## 我们的 Top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -28,11 +28,11 @@ DataOps 通常被视为应用于数据分析的 DevOps。然而，DataOps 不仅
 
 ### **3\. 为什么 DataOps 对数据工程至关重要？**
 
-数据工程师在确保数据在整个分析流程中得到妥善管理方面发挥着重要作用。此外，他们还负责数据的最佳使用和安全。DataOps通过提供工具、数据、代码和组织数据环境的端到端编排，帮助数据工程师促进关键功能领域。它可以促进团队之间的协作和沟通，以适应不断变化的客户需求。简单来说，DataOps通过提供各数据利益相关者之间更大的协作，帮助数据工程师实现可靠性、可扩展性和灵活性，从而增强他们的能力。
+数据工程师在确保数据在整个分析流程中得到妥善管理方面发挥着重要作用。此外，他们还负责数据的最佳使用和安全。DataOps 通过提供工具、数据、代码和组织数据环境的端到端编排，帮助数据工程师促进关键功能领域。它可以促进团队之间的协作和沟通，以适应不断变化的客户需求。简单来说，DataOps 通过提供各数据利益相关者之间更大的协作，帮助数据工程师实现可靠性、可扩展性和灵活性，从而增强他们的能力。
 
-### **4\. DataOps工程师在实现先进企业分析中扮演什么角色？**
+### **4\. DataOps 工程师在实现先进企业分析中扮演什么角色？**
 
-现在，DataOps工程师的角色与数据工程师略有不同。DataOps工程师仔细定义和管理数据开发的环境。这个角色还包括为数据工程师提供关于工作流的指导和设计支持。至于**[先进企业分析](https://www.sigmoid.com/ebooks-whitepapers/data-engineering-overcome-challenges-in-enterprise-analytics/)**，DataOps工程师在自动化数据开发和集成方面发挥着重要作用。凭借对软件开发和敏捷方法论的深入了解，DataOps工程师通过元数据目录跟踪文档来源，并建立指标平台以标准化计算，从而为企业分析做出贡献。DataOps工程师的一些关键角色包括：
+现在，DataOps 工程师的角色与数据工程师略有不同。DataOps 工程师仔细定义和管理数据开发的环境。这个角色还包括为数据工程师提供关于工作流的指导和设计支持。至于**[先进企业分析](https://www.sigmoid.com/ebooks-whitepapers/data-engineering-overcome-challenges-in-enterprise-analytics/)**，DataOps 工程师在自动化数据开发和集成方面发挥着重要作用。凭借对软件开发和敏捷方法论的深入了解，DataOps 工程师通过元数据目录跟踪文档来源，并建立指标平台以标准化计算，从而为企业分析做出贡献。DataOps 工程师的一些关键角色包括：
 
 +   测试自动化
 
@@ -46,15 +46,15 @@ DataOps 通常被视为应用于数据分析的 DevOps。然而，DataOps 不仅
 
 +   数据准备和集成
 
-![](../Images/84a5ff739c3ad280fd67cce4b72dcda9.png)
+![](img/84a5ff739c3ad280fd67cce4b72dcda9.png)
 
-### **5\. DataOps团队常用的流行技术平台有哪些？**
+### **5\. DataOps 团队常用的流行技术平台有哪些？**
 
-可以公平地说，DataOps仍然是一个不断发展的学科，数据驱动的组织每天都在不断学习。然而，随着技术创新，许多平台已经在行业中留下了印记，并在不断扩大其影响力。以下是一些DataOps团队常用的流行平台。
+可以公平地说，DataOps 仍然是一个不断发展的学科，数据驱动的组织每天都在不断学习。然而，随着技术创新，许多平台已经在行业中留下了印记，并在不断扩大其影响力。以下是一些 DataOps 团队常用的流行平台。
 
 +   **Kubernetes**
 
-    Kubernetes是一个开源编排平台，允许公司将多个docker容器组合成一个单一的单位。这使得开发过程变得更加快捷和简单。**[Kubernetes](https://www.sigmoid.com/blogs/containerization-of-pyspark-using-kubernetes/)**可以帮助团队在单个集群中的节点上管理数据调度，简化工作负载，并将容器分类为逻辑单元，以便于发现和管理。
+    Kubernetes 是一个开源编排平台，允许公司将多个 docker 容器组合成一个单一的单位。这使得开发过程变得更加快捷和简单。**[Kubernetes](https://www.sigmoid.com/blogs/containerization-of-pyspark-using-kubernetes/)**可以帮助团队在单个集群中的节点上管理数据调度，简化工作负载，并将容器分类为逻辑单元，以便于发现和管理。
 
 +   **ELK（Elasticsearch、Logstash、Kibana）**
 
@@ -86,22 +86,22 @@ DataOps 通常被视为应用于数据分析的 DevOps。然而，DataOps 不仅
 
 **相关：**
 
-+   [在 Databricks 上使用 MLflow 进行模型实验、跟踪和注册](/2021/01/model-experiments-tracking-registration-mlflow-databricks.html)
++   在 Databricks 上使用 MLflow 进行模型实验、跟踪和注册
 
-+   [数据科学家、数据工程师及其他数据职业解读](/2021/05/data-scientist-data-engineer-data-careers-explained.html)
++   数据科学家、数据工程师及其他数据职业解读
 
-+   [为什么你应该考虑成为数据工程师而不是数据科学家](/2021/04/consider-being-data-engineer-instead-data-scientist.html)
++   为什么你应该考虑成为数据工程师而不是数据科学家
 
 ### 了解更多相关话题
 
-+   [通过DataOps.live解锁DataOps成功 - 在Gartner…中的亮相](https://www.kdnuggets.com/2023/07/dataopslive-unlock-dataops-success-featured-gartner-market-guide.html)
++   [通过 DataOps.live 解锁 DataOps 成功 - 在 Gartner…中的亮相](https://www.kdnuggets.com/2023/07/dataopslive-unlock-dataops-success-featured-gartner-market-guide.html)
 
-+   [通过DataOps.live解锁DataOps成功：在Gartner市场指南中亮相！](https://www.kdnuggets.com/2023/07/dataopslive-unlock-dataops-success-featured-gartner-market-guide-2.html)
++   [通过 DataOps.live 解锁 DataOps 成功：在 Gartner 市场指南中亮相！](https://www.kdnuggets.com/2023/07/dataopslive-unlock-dataops-success-featured-gartner-market-guide-2.html)
 
-+   [你是否应该考虑数据Ops职业？](https://www.kdnuggets.com/2023/05/consider-dataops-career.html)
++   [你是否应该考虑数据 Ops 职业？](https://www.kdnuggets.com/2023/05/consider-dataops-career.html)
 
-+   [关于数据管理和其重要性的6件事](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理和其重要性的 6 件事](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [构建LLM应用程序时需要知道的5件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
++   [构建 LLM 应用程序时需要知道的 5 件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
 
-+   [你不知道的低代码工具可以做的7件事](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [你不知道的低代码工具可以做的 7 件事](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)

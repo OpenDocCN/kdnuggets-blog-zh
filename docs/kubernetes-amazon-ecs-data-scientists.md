@@ -1,8 +1,8 @@
 # Kubernetes 与 Amazon ECS 对数据科学家的比较
 
-> 原文：[https://www.kdnuggets.com/2020/11/kubernetes-amazon-ecs-data-scientists.html](https://www.kdnuggets.com/2020/11/kubernetes-amazon-ecs-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/11/kubernetes-amazon-ecs-data-scientists.html`](https://www.kdnuggets.com/2020/11/kubernetes-amazon-ecs-data-scientists.html)
 
-[comments](#comments)![图](../Images/322617cd8270ad8116c6b1275b97844f.png)
+comments![图](img/322617cd8270ad8116c6b1275b97844f.png)
 
 图片来源：[容器技术公司](http://containertech.com/about-containers/)
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -76,11 +76,11 @@ AWS 产品也有免费的层级。起初，这听起来似乎是件好事。然�
 
 **相关：**
 
-+   [你不必再使用 Docker 了](/2020/10/use-docker-anymore.html)
++   你不必再使用 Docker 了
 
-+   [5 个容器将统治数据科学的理由](/2020/11/gigantum-containers-will-rule-data-science.html)
++   5 个容器将统治数据科学的理由
 
-+   [使用 Kubernetes 对 PySpark 进行容器化](/2020/08/containerization-pyspark-kubernetes.html)
++   使用 Kubernetes 对 PySpark 进行容器化
 
 ### 更多相关内容
 

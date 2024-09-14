@@ -1,12 +1,12 @@
 # 《Python 和 R 中机器学习算法的比较》
 
-> 原文：[https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)
+> 原文：[`www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html`](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)
 
-![Python 和 R 中机器学习算法的比较](../Images/429e860c2b0f3530e614ebeeda14783a.png)
+![Python 和 R 中机器学习算法的比较](img/429e860c2b0f3530e614ebeeda14783a.png)
 
 编辑器提供的图像
 
-Python 和 R 是机器学习中最常用的两种编程语言。它们都是开源且高度可访问的，但 Python 是通用编程语言，而 R 是统计编程语言。这使得 R 非常适合各种[数据角色](/2023/06/programming-languages-specific-data-roles.html)和应用，如数据挖掘。
+Python 和 R 是机器学习中最常用的两种编程语言。它们都是开源且高度可访问的，但 Python 是通用编程语言，而 R 是统计编程语言。这使得 R 非常适合各种数据角色和应用，如数据挖掘。
 
 这两种编程语言也鼓励代码的重用，这意味着新手机器学习工程师和爱好者不必从头编写代码。使用它们构建项目的关键在于集成合适的模块和算法——你只需要知道在哪里寻找。为了帮助你，我们整理了一些 Python 和 R 中最常用的机器学习算法列表。确保收藏此指南，并在遇到困难时参考它。
 
@@ -28,11 +28,11 @@ K-means 聚类算法是最广泛使用的无监督机器学习算法之一，你
 
 决策树主要有两种类型：
 
-+   连续变量决策树：指的是具有无限目标变量的 [决策树](/2020/01/decision-tree-algorithm-explained.html)。
++   连续变量决策树：指的是具有无限目标变量的 决策树。
 
 +   分类变量决策树：指的是具有分组有限目标变量的决策树。
 
-在R编程中，最关注决策树的包和类包括：
+在 R 编程中，最关注决策树的包和类包括：
 
 +   数据集
 
@@ -44,19 +44,19 @@ K-means 聚类算法是最广泛使用的无监督机器学习算法之一，你
 
 +   magrittr
 
-再次，你将不得不寻找Python模块来实现这个算法。与k-means聚类算法一样，sci-kit-learn包含了许多决策树的模块，其中sklearn.tree最为相关。你还可以使用 [Graphviz模块](https://pypi.org/project/graphviz/) 以编程方式呈现决策树的图形表示。
+再次，你将不得不寻找 Python 模块来实现这个算法。与 k-means 聚类算法一样，sci-kit-learn 包含了许多决策树的模块，其中 sklearn.tree 最为相关。你还可以使用 [Graphviz 模块](https://pypi.org/project/graphviz/) 以编程方式呈现决策树的图形表示。
 
 # 3\. 线性回归分析
 
 线性回归是另一种广泛使用的监督机器学习算法。线性回归分析的目标是基于一个或一组变量推断结果或值。
 
-与大多数算法一样，最佳的可视化方式是使用具有两个坐标轴的图形。Y轴表示因变量，而X轴表示自变量。线性回归分析的目标是 [形成或找到一个关系](/2022/07/linear-regression-data-science.html)。
+与大多数算法一样，最佳的可视化方式是使用具有两个坐标轴的图形。Y 轴表示因变量，而 X 轴表示自变量。线性回归分析的目标是 形成或找到一个关系。
 
 如果自变量的增加导致因变量的增加（类似于指数增长），这被称为正关系。另一方面，如果因变量的值在自变量的值增加时减少（类似于指数衰减），这被称为负关系。
 
 我们使用 [最佳拟合线](https://www.investopedia.com/terms/l/line-of-best-fit.asp) 来确定关系，这可以通过斜率-截距线性方程 *y=mx+b* 表示。
 
-那么我们如何在R和Python中实现线性回归呢？R编程语言中最关注线性回归分析的包包括：
+那么我们如何在 R 和 Python 中实现线性回归呢？R 编程语言中最关注线性回归分析的包包括：
 
 +   ggplot2
 
@@ -66,19 +66,19 @@ K-means 聚类算法是最广泛使用的无监督机器学习算法之一，你
 
 +   ggpubr
 
-*gg* 包用于创建和绘制图形，而 *dplyr* 和 *broom* 用于操控和展示数据。*sklearn.linear_model* 可用于 [在Python中构建线性回归模型](/2020/10/guide-linear-regression-models.html)。你还可以添加NumPY来处理大矩阵和数组。
+*gg* 包用于创建和绘制图形，而 *dplyr* 和 *broom* 用于操控和展示数据。*sklearn.linear_model* 可用于 在 Python 中构建线性回归模型。你还可以添加 NumPY 来处理大矩阵和数组。
 
-![Python和R中机器学习算法的比较](../Images/1552351011e35887144ae4bbbcf23629.png)
+![Python 和 R 中机器学习算法的比较](img/1552351011e35887144ae4bbbcf23629.png)
 
 图片由 [Pexels](https://www.pexels.com/photo/math-equation-printed-on-paper-8482062/) 提供
 
 # 4\. 逻辑回归
 
-与线性回归类似，逻辑回归允许我们基于其他（集合的）变量来预测一个变量的值。然而，线性回归使用度量值，而逻辑回归使用离散变量。这些是只能具有两个值之一（是或否，0或1，真或假等）的二分变量。
+与线性回归类似，逻辑回归允许我们基于其他（集合的）变量来预测一个变量的值。然而，线性回归使用度量值，而逻辑回归使用离散变量。这些是只能具有两个值之一（是或否，0 或 1，真或假等）的二分变量。
 
 在现实世界中，这可以[用于确定一个人购买产品（零售）或携带疾病（医疗保健）的可能性](https://www.techtarget.com/searchbusinessanalytics/definition/logistic-regression)。例如，我们可以使用年龄、身高和体重作为自变量（x）。二元结果将是因变量（y）。因此，x 是实数域，而 y 包含离散值。
 
-逻辑回归的目标是估计（预测）一个结果或事件的概率。由于 y 值是二元的，我们不能使用线性方程，而必须使用[激活函数](/2022/06/activation-functions-work-deep-learning.html)。
+逻辑回归的目标是估计（预测）一个结果或事件的概率。由于 y 值是二元的，我们不能使用线性方程，而必须使用激活函数。
 
 Sigmoid 函数用于表示逻辑回归：
 
@@ -100,13 +100,13 @@ Sigmoid 函数用于表示逻辑回归：
 
 # 5\. 支持向量机
 
-支持向量机 [(SVM) 算法](/2022/08/support-vector-machines-intuitive-approach.html) 主要用于分类，但也可以用于基于回归的任务。SVM 是分类问题中最简单的方法之一。
+支持向量机 (SVM) 算法 主要用于分类，但也可以用于基于回归的任务。SVM 是分类问题中最简单的方法之一。
 
 在 SVM 中，必须分类的对象被表示为 n 维空间中的一个点。该点的每个坐标称为其特征。SVM 通过首先绘制一个超平面，使得每个类别的所有点都位于超平面的两侧，来尝试对对象进行分类。
 
 虽然可能存在多个超平面，但 SVM 尝试找到一个最能分离两个类别的超平面。它主要通过找到两个类别之间的最大距离，即边距，来实现。触及或直接落在边距上的点称为支持向量。
 
-由于 SVM 是一种[监督机器学习方法](/2022/03/machine-learning-algorithms-classification.html)，它需要训练数据。你可以使用 sklearn 的专用 SVM 模块在 Python 中实现这个机器学习算法。在 R 中，SVM 通常通过轮廓和绘图函数来处理。
+由于 SVM 是一种监督机器学习方法，它需要训练数据。你可以使用 sklearn 的专用 SVM 模块在 Python 中实现这个机器学习算法。在 R 中，SVM 通常通过轮廓和绘图函数来处理。
 
 # 结论
 
@@ -120,11 +120,11 @@ Python 是一种多范式通用编程语言，因此它具有更广泛的应用�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -138,6 +138,6 @@ Python 是一种多范式通用编程语言，因此它具有更广泛的应用�
 
 +   [开源向量数据库的诚实比较](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法解释](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释](https://www.kdnuggets.com/2022/n29.html)
 
 +   [机器学习算法 - 什么、为什么和如何？](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)

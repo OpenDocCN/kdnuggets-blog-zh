@@ -1,8 +1,8 @@
 # 数据科学家需要专业化以在科技寒冬中生存
 
-> 原文：[https://www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html](https://www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html)
+> 原文：[`www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html`](https://www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html)
 
-![数据科学家需要专业化以在科技寒冬中生存](../Images/fcf487ce58f4858be341f501b2e25ad2.png)
+![数据科学家需要专业化以在科技寒冬中生存](img/fcf487ce58f4858be341f501b2e25ad2.png)
 
 照片由[Ingo Joseph](https://www.pexels.com/photo/person-wearing-black-hoodie-and-blue-denim-jeans-standing-over-frozen-arrow-signage-over-snow-ground-751812/)提供
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的信息技术
 
 * * *
 
 数据科学家们感到困惑：我的工作安全吗？这也不奇怪。曾经被誉为最性感职业的工作现在看起来已经不那么吸引人了。
 
-从整体来看，数据科学的工作前景仍然乐观——劳动统计局仍然[预测](https://www.bls.gov/ooh/math/data-scientists.htm)未来十年将增长36%，远高于美国平均行业增长率5%。但正如成千上万的被裁数据科学家所告知的，统计数据并不能作为失业的盾牌。答案是什么？一些专家建议，专业化是脱颖而出并使自己不容易被解雇的最佳方式之一。“随着数据的影响力增长和技术的发展，数据团队中将需要特定的角色来最大化效率，”*财富*杂志的作者梅根·马拉斯[写道](https://fortune.com/education/articles/data-science-predictions-for-2023-according-to-the-ceo-of-simon-data/)。
+从整体来看，数据科学的工作前景仍然乐观——劳动统计局仍然[预测](https://www.bls.gov/ooh/math/data-scientists.htm)未来十年将增长 36%，远高于美国平均行业增长率 5%。但正如成千上万的被裁数据科学家所告知的，统计数据并不能作为失业的盾牌。答案是什么？一些专家建议，专业化是脱颖而出并使自己不容易被解雇的最佳方式之一。“随着数据的影响力增长和技术的发展，数据团队中将需要特定的角色来最大化效率，”*财富*杂志的作者梅根·马拉斯[写道](https://fortune.com/education/articles/data-science-predictions-for-2023-according-to-the-ceo-of-simon-data/)。
 
 我同意。任何数据科学家都会告诉你，这份工作会根据你老板当天需要什么而有所不同——电子表格、演示文稿、开发 ETL 管道或设计实验。
 
-![数据科学家需要专业化以在科技寒冬中生存](../Images/8b1006a992a3e0ef4c02d32e354ebab0.png)
+![数据科学家需要专业化以在科技寒冬中生存](img/8b1006a992a3e0ef4c02d32e354ebab0.png)
 
 图片来自[Twitter](https://twitter.com/NicoloGiso/status/1571985211516133378/photo/1)
 
@@ -42,7 +42,7 @@
 
 不过，这只是我的故事。专业化可以以几种不同的方式提供帮助，具体取决于你当前的情况和总体目标。
 
-![数据科学家需要专业化以应对科技寒冬](../Images/65e3768a2f999520aaa9e20086e565c3.png)
+![数据科学家需要专业化以应对科技寒冬](img/65e3768a2f999520aaa9e20086e565c3.png)
 
 图片来源：作者
 
@@ -56,23 +56,23 @@
 
 对数据科学家的需求很大，但对数据科学学位的[需求也在增长](https://www.computerweekly.com/news/252513659/Computer-Science-degree-applications-up-by-13#:~:text=The%20past%20decade%20has%20seen,2011%20to%2030%2C090%20in%202020.)。再加上公司现在开始考虑非传统背景的人，你就有了竞争的配方。
 
-![数据科学家需要专注以度过技术寒冬](../Images/29382df5463f6aa11556bd283adf2991.png)
+![数据科学家需要专注以度过技术寒冬](img/29382df5463f6aa11556bd283adf2991.png)
 
 图片来自[Geekwire](https://www.geekwire.com/2014/analysis-examining-computer-science-education-explosion/)
 
-通过专注，你可以减少工作市场上的竞争。例如，如果你专注于自然语言处理（NLP），你确实会限制可以竞争的工作数量。但你将会更受欢迎，因为NLP专家远少于数据科学家。
+通过专注，你可以减少工作市场上的竞争。例如，如果你专注于自然语言处理（NLP），你确实会限制可以竞争的工作数量。但你将会更受欢迎，因为 NLP 专家远少于数据科学家。
 
 ## 追逐金钱
 
 老实说，追求数据科学职业不能仅仅是为了金钱。专注也是如此。但如果你发现自己对工作中的某个特定部分感兴趣，值得知道的是，专家的薪资高于普通人，不论普通人掌握多少技能。
 
-看看Indeed的数据，作为一个参考：数据科学家的[平均基本工资](https://www.indeed.com/career/data-scientist/salaries)是每年127k美元。相比之下，机器学习工程师的薪资为$[155k](https://www.indeed.com/career/machine-learning-engineer/salaries?from=career)，或者[后端开发者](https://blog.boot.dev/backend/how-much-do-backend-devs-make/#:~:text=Backend%20developers%20enjoy%20an%20average,not%20to%20mention%20comprehensive%20benefits.)的薪资为$[158k](https://www.indeed.com/career/back-end-developer/salaries?salaryType=YEARLY&from=careers_serp)。
+看看 Indeed 的数据，作为一个参考：数据科学家的[平均基本工资](https://www.indeed.com/career/data-scientist/salaries)是每年 127k 美元。相比之下，机器学习工程师的薪资为$[155k](https://www.indeed.com/career/machine-learning-engineer/salaries?from=career)，或者[后端开发者](https://blog.boot.dev/backend/how-much-do-backend-devs-make/#:~:text=Backend%20developers%20enjoy%20an%20average,not%20to%20mention%20comprehensive%20benefits.)的薪资为$[158k](https://www.indeed.com/career/back-end-developer/salaries?salaryType=YEARLY&from=careers_serp)。
 
 # 如何成为专注的数据科学家
 
 好的，你已经认识到专注的价值。那么，你该如何专注呢？让我们来分解步骤。
 
-![数据科学家需要专注以度过技术寒冬](../Images/ee3d0eab011a33562b2ddc08d1302888.png)
+![数据科学家需要专注以度过技术寒冬](img/ee3d0eab011a33562b2ddc08d1302888.png)
 
 图片由作者提供
 
@@ -84,11 +84,11 @@
 
 ## 观察技术景观
 
-技术景观不断变化，保持对最新趋势的了解非常重要。例如，看看Meta。在花费了数年和巨额资金投入到元宇宙后，他们现在正在[转向人工智能](https://gizmodo.com/instagram-facebook-mark-zuckerberg-whatsapp-ai-1850232199)，以及其他所有主要科技公司。
+技术景观不断变化，保持对最新趋势的了解非常重要。例如，看看 Meta。在花费了数年和巨额资金投入到元宇宙后，他们现在正在[转向人工智能](https://gizmodo.com/instagram-facebook-mark-zuckerberg-whatsapp-ai-1850232199)，以及其他所有主要科技公司。
 
 一旦你列出了感兴趣的主题清单，寻找那些活动频繁和需求旺盛的领域。这将帮助你确定可以专攻的领域以及可能有机会让你脱颖而出的地方。
 
-一个很好的地方是Indeed。 [这篇文章](https://medium.com/analytics-vidhya/web-scrape-indeed-for-popular-programming-languages-of-data-scientist-jobs-93b95083becf)虽然有点旧，但我喜欢这个想法。作者从Indeed抓取了提到特定语言和城市的招聘信息。他们发现R、SQL和Python位居前列。你还可以查看[StackOverflow的开发者调查](https://survey.stackoverflow.co/2022/)。他们对热门技术有相当准确的把握，因此值得一看。
+一个很好的地方是 Indeed。 [这篇文章](https://medium.com/analytics-vidhya/web-scrape-indeed-for-popular-programming-languages-of-data-scientist-jobs-93b95083becf)虽然有点旧，但我喜欢这个想法。作者从 Indeed 抓取了提到特定语言和城市的招聘信息。他们发现 R、SQL 和 Python 位居前列。你还可以查看[StackOverflow 的开发者调查](https://survey.stackoverflow.co/2022/)。他们对热门技术有相当准确的把握，因此值得一看。
 
 ## 寻找免费的课程和证书
 
@@ -102,7 +102,7 @@
 
 例如，如果你对自然语言处理感兴趣，你可以申请参与一个涉及分析客户反馈数据或开发客户服务聊天机器人的项目。如果你更倾向于计算机视觉，看看是否有与图像识别或视频分析相关的项目，你可以参与其中。
 
-有时候，业务需求决定了你下一个项目的方向。例如，作为数据科学家，我的第一个项目之一是创建一个自然语言处理算法，用于通过Twitter推文跟踪食源性疾病爆发。我没有建立自然语言处理算法的培训，因此我不得不从头开始，并在项目期间尽可能多地学习。这是一个极好的学习经历，有助于提升我作为数据科学家的技能。
+有时候，业务需求决定了你下一个项目的方向。例如，作为数据科学家，我的第一个项目之一是创建一个自然语言处理算法，用于通过 Twitter 推文跟踪食源性疾病爆发。我没有建立自然语言处理算法的培训，因此我不得不从头开始，并在项目期间尽可能多地学习。这是一个极好的学习经历，有助于提升我作为数据科学家的技能。
 
 ## 更换工作
 
@@ -124,10 +124,10 @@
 
 +   [关于 MLOps 的一切你需要知道的：KDnuggets 技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
 
 +   [全栈一切？数据科学、开发和技术之间的组织交叉](https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html)
 
-+   [2022年技术专家简单薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
++   [2022 年技术专家简单薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
 
 +   [AI for Ukraine 是 AI HOUSE 推出的一个新的教育项目，以支持乌克兰科技社区……](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)

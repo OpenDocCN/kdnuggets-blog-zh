@@ -1,22 +1,22 @@
 # 强大的 CSV 处理与 kdb+
 
-> 原文：[https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html](https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html)
+> 原文：[`www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html`](https://www.kdnuggets.com/2020/07/powerful-csv-processing-kdb.html)
 
-[评论](#comments)
+评论
 
 **由 [Ferenc Bodon 博士](https://www.linkedin.com/in/ferencbodon/)，数据工程师，Kx 的云解决方案架构师**
 
-![Image](../Images/5312dad5957ac7d5fc264099ee0f10d3.png)
+![Image](img/5312dad5957ac7d5fc264099ee0f10d3.png)
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -70,27 +70,27 @@ Rust 库还支持选择列、过滤、排序和连接 CSV 文件。可以为经�
 
 ### 类型推断
 
-CSV是一种文本格式，不包含列的类型信息。一个字符串可以根据其值转换为数据类型。如果列的所有值都匹配模式`YYYY.MM.DD`，我们可以得出列包含日期的结论。但我们如何处理字面量100000？它是整数，还是时间10:00:00？也许源过程只支持数字并省略了时间分隔符？在现实生活中，关于来源的信息并不总是可用，你需要逆向工程数据。如果列的所有值都匹配字符串`HHMMSS`，那么我们**可以**高置信度地得出列包含时间值的结论。以下是我们可以采取的两种方法来做出决定。
+CSV 是一种文本格式，不包含列的类型信息。一个字符串可以根据其值转换为数据类型。如果列的所有值都匹配模式`YYYY.MM.DD`，我们可以得出列包含日期的结论。但我们如何处理字面量 100000？它是整数，还是时间 10:00:00？也许源过程只支持数字并省略了时间分隔符？在现实生活中，关于来源的信息并不总是可用，你需要逆向工程数据。如果列的所有值都匹配字符串`HHMMSS`，那么我们**可以**高置信度地得出列包含时间值的结论。以下是我们可以采取的两种方法来做出决定。
 
-首先，我们可以严格一些：我们预定义任何类型需要匹配的模式。模式不重叠。如果时间被定义为`HH:MM:SS`而整数定义为`[1-9][0-9]*`，那么100000是一个整数。
+首先，我们可以严格一些：我们预定义任何类型需要匹配的模式。模式不重叠。如果时间被定义为`HH:MM:SS`而整数定义为`[1-9][0-9]*`，那么 100000 是一个整数。
 
 其次，我们可以让模式重叠，如果发生冲突，我们选择域较小的类型或基于某些规则。这种方法偏好时间而非整数，如果时间模式还包含`HHMMSS`。
 
-CSVKit库实现了第一种方法。
+CSVKit 库实现了第一种方法。
 
 ### q/kdb+
 
-Kdb+是[全球最快的时间序列数据库](https://kx.com/media/2018/10/Kx-FAQ.pdf)，经过优化，用于摄取、分析和存储大量结构化数据。其查询语言叫做[Q](https://code.kx.com/q4m3/)，是一种通用编程语言。表格在q中是第一类对象。Q表语义上类似于Pandas/R数据框。你可以将表格持久化到磁盘，因此这个解决方案可以被认为是一个数据库，称为[kdb+](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/)。
+Kdb+是[全球最快的时间序列数据库](https://kx.com/media/2018/10/Kx-FAQ.pdf)，经过优化，用于摄取、分析和存储大量结构化数据。其查询语言叫做[Q](https://code.kx.com/q4m3/)，是一种通用编程语言。表格在 q 中是第一类对象。Q 表语义上类似于 Pandas/R 数据框。你可以将表格持久化到磁盘，因此这个解决方案可以被认为是一个数据库，称为[kdb+](https://code.kx.com/q4m3/14_Introduction_to_Kdb+/)。
 
-导出和导入CSV文件是核心语言的一部分。表`t`可以通过命令保存在目录`dir`中。
+导出和导入 CSV 文件是核心语言的一部分。表`t`可以通过命令保存在目录`dir`中。
 
 ```py
 q) save `:dir/t.csv
 ```
 
-这里`q)`表示启动q解释器后的默认提示符。
+这里`q)`表示启动 q 解释器后的默认提示符。
 
-要选择不同的名称，例如`output.csv`，然后使用文件文本操作符`0:`来保存文本，并使用实用工具[`.h.cd`](https://code.kx.com/q/ref/doth/#hcd-csv-from-data)将kdb+表转换为字符串列表。
+要选择不同的名称，例如`output.csv`，然后使用文件文本操作符`0:`来保存文本，并使用实用工具[`.h.cd`](https://code.kx.com/q/ref/doth/#hcd-csv-from-data)将 kdb+表转换为字符串列表。
 
 ```py
 q) `output.csv 0: .h.cd t
@@ -98,7 +98,7 @@ q) `output.csv 0: .h.cd t
 
 你也可以使用[其他分隔符](https://code.kx.com/q/ref/file-text/#prepare-text)而不是逗号。
 
-要导入CSV`data.csv`，请指定列类型和分隔符。以下命令假设列名在第一行。
+要导入 CSV`data.csv`，请指定列类型和分隔符。以下命令假设列名在第一行。
 
 ```py
 q) ("SSE**F"; enlist csv) 0: `data.csv
@@ -106,7 +106,7 @@ q) ("SSE**F"; enlist csv) 0: `data.csv
 
 类型编码可以在[kdb+参考卡](https://code.kx.com/q/ref/#datatypes)上找到，`E`代表实数，`I`代表整数，`S`代表枚举（kdb+术语中的符号），`D`代表日期，等等……使用空格来忽略列。字符`*`代表字符串。
 
-手动指定类型的维护成本高，对于宽CSV文件来说繁琐且容易出错。插入一个新列可能会破坏代码。
+手动指定类型的维护成本高，对于宽 CSV 文件来说繁琐且容易出错。插入一个新列可能会破坏代码。
 
 幸运的是，Kx 开源库[csvutil](https://github.com/KxSystems/kdb/blob/master/utils/csvutil.q)和[csvguess](https://github.com/KxSystems/kdb/blob/master/utils/csvguess.q)提供了一个方便且可靠的解决方案。
 
@@ -117,7 +117,7 @@ q) \l utils/csvutil.q
 q) .csv.read `data.csv
 ```
 
-[![通过 .csv.read 显示 CSV 内容](../Images/fdebb8a6b54bd78bf986c1e29bd54f73.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvread.png)
+![通过 .csv.read 显示 CSV 内容](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvread.png)
 
 脚本`csvguess.q`让你能够将关于列的元数据保存到文本文件中。开发人员可以查看和调整类型列，并在生产环境中使用这些元数据以正确的类型加载 CSV。这两个脚本有不同的用户。数据科学家更倾向于使用`csvutil.q`进行临时分析。当 IT 人员配置 kdb+ CSV 数据源时，他们会使用`csvguess.q`的辅助元数据导出和导入功能。类型提示提供了一个比手动输入所有列的类型更少出错的解决方案。
 
@@ -134,7 +134,7 @@ q) .csv.read
 
 列元数据表有点类似于`csvstat`的输出。
 
-[![通过 csvinfo 显示 CSV 元信息](../Images/97a66dfa6a6970a44e94db09b7821fd1.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvinfo.png)
+![通过 csvinfo 显示 CSV 元信息](https://github.com/BodonFerenc/blog/blob/master/csv/pic/csvinfo.png)
 
 每一行属于一列，每个字段存储一些关于列的有用信息，如名称（`c`）、推断的类型（`t`）、最大宽度（`mw`）等。字段`gr`，即*粒度*，特别有趣，因为它表示列值的压缩效果如何，以及它们是否应作为枚举存储而不是字符串。有关列的更多详细信息，请参见[文档](https://github.com/KxSystems/kdb/blob/master/utils/csv.md)。
 
@@ -152,7 +152,7 @@ q) .csv.READLINES: count read0 `data.csv
 $ function qcsv { q -c 25 320 -s $(nproc --all) <<< 'system "l utils/csvutil.q";'"$1"; }
 ```
 
-`-c 25 320`命令行参数修改了默认的25×80控制台大小，以便更好地显示宽表。`-s`开关为并行处理分配多个线程。我们将此值设置为计算机上的核心数量。如果你在 Mac 上工作，可以使用`$(sysctl -n hw.ncpu)`。你可以通过执行以下命令来验证设置：
+`-c 25 320`命令行参数修改了默认的 25×80 控制台大小，以便更好地显示宽表。`-s`开关为并行处理分配多个线程。我们将此值设置为计算机上的核心数量。如果你在 Mac 上工作，可以使用`$(sysctl -n hw.ncpu)`。你可以通过执行以下命令来验证设置：
 
 ```py
 $ qcsv 'system "s"'
@@ -166,9 +166,9 @@ $ qcsv 'system "s"'
 $ qcsv '.csv.read10 `data.csv'
 ```
 
-模拟`csvlook`并整齐对齐`data.csv`的前10行。你可以将输出管道传输到`less -S`来处理宽表。
+模拟`csvlook`并整齐对齐`data.csv`的前 10 行。你可以将输出管道传输到`less -S`来处理宽表。
 
-[![qcsv 模拟 csvlook](../Images/c6c9d702eb1d053d896faaedc4e2f83e.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/qmockscsvlook.png)
+![qcsv 模拟 csvlook](https://github.com/BodonFerenc/blog/blob/master/csv/pic/qmockscsvlook.png)
 
 每当你想查看表的前几行或后几行时，使用[sublist](https://code.kx.com/q/ref/sublist/)函数。
 
@@ -192,7 +192,7 @@ $ qcsv 'select nsn,item_name from .csv.read `data.csv'
 $ qcsv '.csv.data[`data.csv; .csv.infoonly[`data.csv; `nsn`item_name]]'
 ```
 
-再次使用qSQL，我们可以进一步过滤结果以选择匹配的行。
+再次使用 qSQL，我们可以进一步过滤结果以选择匹配的行。
 
 ```py
 $ qcsv 'select from .csv.read `data.csv where item_name like "RIFLE*", fips > 31100'
@@ -326,21 +326,21 @@ qcsv '`:72.7.9.248:5001 (`fn; .csv.read `data.csv)'
 
 我在最 [广泛使用的数据透视实现](https://code.kx.com/q/kb/pivoting-tables/#a-very-general-pivot-function-and-an-example) 周围添加了一个 [封装函数](https://github.com/BodonFerenc/kdbutils/blob/master/doc/md/pvt.md)，放在 `utils/pivot.q` 中。我们只需加载库 `pivot.q` 并添加 `.pvt.pivot` 前缀。它需要一个 [键控表](https://code.kx.com/q4m3/8_Tables/#84-primary-keys-and-keyed-tables)，通常是通过多个分组聚合的结果。数据透视列是最后一个键列。看看数据透视如何将一个狭窄、难以消化的表格转换为一个适合控制台的方形格式。
 
-[![pivot](../Images/b3bfab149c1349f3c1f069a115abfa54.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivot.png)
+![pivot](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivot.png)
 
 q 语言允许你通过总计列和总计行轻松扩展数据透视表，前提是你愿意离开方便的选择语句世界并使用函数式形式。探索任何选择语句的函数等效形式超出了本文的范围。这里，我仅展示解决方案以演示其可行性。
 
-[![pivot](../Images/08965b0cc529a99ef6e41f5316a84fff.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivotWithTotal.png)
+![pivot](https://github.com/BodonFerenc/blog/blob/master/csv/pic/pivotWithTotal.png)
 
 注意，总计的中位数不能直接从原始数据透视表中得出。后台执行了三个额外的选择语句。
 
 ### 数组列
 
-没有什么阻止你将值列表放入CSV的一个单元格中。你只需要使用除逗号之外的分隔符，例如空白或分号。与ANSI SQL不同，kdb+可以处理数组列。
+没有什么阻止你将值列表放入 CSV 的一个单元格中。你只需要使用除逗号之外的分隔符，例如空白或分号。与 ANSI SQL 不同，kdb+可以处理数组列。
 
-我们之前已经使用函数[.h.cd](https://code.kx.com/q/ref/doth/#hcd-csv-from-data)将kdb+表转换为字符串列表，然后保存到CSV中。.h.cd按预期处理数组列。你可以通过[.h.d](https://code.kx.com/q/ref/doth/#hd-delimiter)设置次级分隔符。尽管q中的字符串是字符列表，`.h.cd`不会在字符之间插入次级分隔符。这是大多数用户期望的行为。
+我们之前已经使用函数[.h.cd](https://code.kx.com/q/ref/doth/#hcd-csv-from-data)将 kdb+表转换为字符串列表，然后保存到 CSV 中。.h.cd 按预期处理数组列。你可以通过[.h.d](https://code.kx.com/q/ref/doth/#hd-delimiter)设置次级分隔符。尽管 q 中的字符串是字符列表，`.h.cd`不会在字符之间插入次级分隔符。这是大多数用户期望的行为。
 
-在读取CSV的数组列时，它将被存储为字符串列。kdb+函数[vs](https://code.kx.com/q/ref/vs/)（缩写为**v**ector来自**s**tring）通过分隔符字符串分割一个字符串。
+在读取 CSV 的数组列时，它将被存储为字符串列。kdb+函数[vs](https://code.kx.com/q/ref/vs/)（缩写为**v**ector 来自**s**tring）通过分隔符字符串分割一个字符串。
 
 ```py
 q)" " vs "10 31 -42"
@@ -351,13 +351,13 @@ q)" " vs "10 31 -42"
 
 你可以通过整数转换，将字符串列表转换为整数列表，用`"I"$`表示。
 
-与kdb+中的许多函数一样，`vs`可以与中缀或括号符号一起使用。
+与 kdb+中的许多函数一样，`vs`可以与中缀或括号符号一起使用。
 
 ```py
 q) vs[" "; "10 31 -42"]
 ```
 
-Kdb+支持函数式编程。你可以使用`each`轻松地将单目函数应用于列表。这类似于Python的`map`函数。此外，你可以通过绑定参数从二元函数推导出单目函数。这称为[投影](https://code.kx.com/q4m3/6_Functions/#64-projection)。将这些结合起来，我们可以按如下方式按空格分割字符串列表
+Kdb+支持函数式编程。你可以使用`each`轻松地将单目函数应用于列表。这类似于 Python 的`map`函数。此外，你可以通过绑定参数从二元函数推导出单目函数。这称为[投影](https://code.kx.com/q4m3/6_Functions/#64-projection)。将这些结合起来，我们可以按如下方式按空格分割字符串列表
 
 ```py
 q) vs[" "] each ("10 31 -42"; "104 105 107")
@@ -365,7 +365,7 @@ q) vs[" "] each ("10 31 -42"; "104 105 107")
 "104" "105" "107"
 ```
 
-或者更优雅地使用Each迭代器（用`'`表示），如果分隔符是单个字符的话。
+或者更优雅地使用 Each 迭代器（用`'`表示），如果分隔符是单个字符的话。
 
 ```py
 q) " " vs' ("10 31 -42"; "104 105 107")
@@ -377,9 +377,9 @@ q) " " vs' ("10 31 -42"; "104 105 107")
 q) update "I"$" " vs' A from .csv.read `data.csv
 ```
 
-为了展示q语言的强大功能，假设`data.csv`中有另一列数组称为`IDX`，其中包含索引。对于每一行，我们需要计算数组列`A`在`IDX`指定的索引处的和。让我稍微探讨一下索引操作。
+为了展示 q 语言的强大功能，假设`data.csv`中有另一列数组称为`IDX`，其中包含索引。对于每一行，我们需要计算数组列`A`在`IDX`指定的索引处的和。让我稍微探讨一下索引操作。
 
-在q中，你可以像在其他编程语言中一样索引一个列表。
+在 q 中，你可以像在其他编程语言中一样索引一个列表。
 
 ```py
 q) list: 4 1 6 3    // this is an integer list
@@ -387,7 +387,7 @@ q) list[2]
 6
 ```
 
-Q是一个向量语言。许多运算符不仅接受标量，还接受列表。索引就是这样的一个操作。
+Q 是一个向量语言。许多运算符不仅接受标量，还接受列表。索引就是这样的一个操作。
 
 ```py
 q) list[2 1]
@@ -401,7 +401,7 @@ q) list @ 2 1
 6 1
 ```
 
-当将列表的列表作为`@`运算符的两个参数传递时，我们需要再次使用Each迭代器。将所有内容汇总起来，我们通过
+当将列表的列表作为`@`运算符的两个参数传递时，我们需要再次使用 Each 迭代器。将所有内容汇总起来，我们通过
 
 ```py
 $ qcsv $'
@@ -409,19 +409,19 @@ t:update "I"$" " vs\' A, "I"$" " vs\' IDX from .csv.read `data.csv;
 update sum_A_of: sum each A@\'IDX from t'
 ```
 
-[![数组列上的操作](../Images/2a9e1b662e317eb6a1c5f55261e9c172.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/array.png)
+![数组列上的操作](https://github.com/BodonFerenc/blog/blob/master/csv/pic/array.png)
 
-我将表达式拆分成多行以提高可读性，但从shell的角度来看，这仍然是一个单一的命令。
+我将表达式拆分成多行以提高可读性，但从 shell 的角度来看，这仍然是一个单一的命令。
 
-Each迭代器（`'`）需要转义，我们需要使用ANSI-C引用，因此在开头的引号前面有`$`。
+Each 迭代器（`'`）需要转义，我们需要使用 ANSI-C 引用，因此在开头的引号前面有`$`。
 
 ### 连接
 
-连接两个CSV文件已经被Linux命令`join`支持。命令`csvjoin`进一步支持所有类型的SQL连接：内连接、左连接、右连接和外连接。Q也支持这些经典的连接操作。
+连接两个 CSV 文件已经被 Linux 命令`join`支持。命令`csvjoin`进一步支持所有类型的 SQL 连接：内连接、左连接、右连接和外连接。Q 也支持这些经典的连接操作。
 
-对于时间序列，另一个常用的连接类型是[asof](https://code.kx.com/q/ref/asof/)及其泛化形式[window join](https://code.kx.com/q/ref/wj/)。如果你有两个数据流且时间不同，则asof连接可以合并这两个数据流。
+对于时间序列，另一个常用的连接类型是[asof](https://code.kx.com/q/ref/asof/)及其泛化形式[window join](https://code.kx.com/q/ref/wj/)。如果你有两个数据流且时间不同，则 asof 连接可以合并这两个数据流。
 
-让我展示一下在实际场景中如何使用window join来分析分布式进程。我们的主进程向worker进程发送请求。每个请求会产生多个任务。我们存储请求的`start`和`end`时间以及任务的`start`时间和`duration`。我们希望看到worker在每个请求上花费的时间比例。由于网络延迟，任务的开始时间在请求的开始时间之后。以下是主进程数据的一个示例。
+让我展示一下在实际场景中如何使用 window join 来分析分布式进程。我们的主进程向 worker 进程发送请求。每个请求会产生多个任务。我们存储请求的`start`和`end`时间以及任务的`start`时间和`duration`。我们希望看到 worker 在每个请求上花费的时间比例。由于网络延迟，任务的开始时间在请求的开始时间之后。以下是主进程数据的一个示例。
 
 | requestID | workerID | start | end |
 | --- | --- | --- | --- |
@@ -431,7 +431,7 @@ Each迭代器（`'`）需要转义，我们需要使用ANSI-C引用，因此在�
 | RQ4 | SL3 | 12:51 | 13:00 |
 | RQ5 | SL1 | 13:10 | 13:13 |
 
-合并后的worker数据是
+合并后的 worker 数据是
 
 | workerID | taskID | start | duration |
 | --- | --- | --- | --- |
@@ -445,7 +445,7 @@ Each迭代器（`'`）需要转义，我们需要使用ANSI-C引用，因此在�
 | SL3 | 2 | 12:58 | 1 |
 | SL1 | 6 | 13:10 | 2 |
 
-函数`wj1`帮助找到具有给定workerID值且落在主表的`start`和`end`列指定的时间窗口内的任务。
+函数`wj1`帮助找到具有给定 workerID 值且落在主表的`start`和`end`列指定的时间窗口内的任务。
 
 ```py
 q) m: .csv.read `main.csv
@@ -470,19 +470,19 @@ q) select requestID, rate: duration % end-start from
        (`workerID`start xasc s; (sum; `duration))] 
 ```
 
-[![高级连接操作](../Images/ff61bd59b9bb359068bee0590460c79a.png)](https://github.com/BodonFerenc/blog/blob/master/csv/pic/windowjoin.png)
+![高级连接操作](https://github.com/BodonFerenc/blog/blob/master/csv/pic/windowjoin.png)
 
 ### 性能
 
-让我们比较在公开的CSV上执行简单聚合的性能，该CSV用于基准测试`xsv`包。该145 MByte的文件包含近3200万行。
+让我们比较在公开的 CSV 上执行简单聚合的性能，该 CSV 用于基准测试`xsv`包。该 145 MByte 的文件包含近 3200 万行。
 
 ```py
 $ curl -LO https://burntsushi.net/stuff/worldcitiespop.csv
 ```
 
-我们希望查看按人口排序的前10个区域。我们需要汇总每个区域城市的人口。包xsv不支持聚合，因此不适用。
+我们希望查看按人口排序的前 10 个区域。我们需要汇总每个区域城市的人口。包 xsv 不支持聚合，因此不适用。
 
-q查询非常简单。
+q 查询非常简单。
 
 ```py
 $ qcsv '10 sublist `Population xdesc select sum Population by Region from .csv.basicread `worldcitiespop.csv'
@@ -502,7 +502,7 @@ $ csvsql --query "select Region, SUM(Population) AS Population FROM worldcitiesp
 
 我们还可以通过命令行选项`--no-inference --snifflimit 0`禁用类型推断和方言嗅探。这将使命令执行速度提高一倍。
 
-还有其他几个开源工具可以在CSV文件上运行SQL语句。我还评估了两个用Go编写的包。
+还有其他几个开源工具可以在 CSV 文件上运行 SQL 语句。我还评估了两个用 Go 编写的包。
 
 ```py
 $ textql -header -sql "select Region, SUM(Population) AS Population FROM worldcitiespop GROUP BY Region ORDER BY Population DESC LIMIT 10" worldcitiespop.csv
@@ -521,9 +521,9 @@ $ textql -header -sql "select Region, SUM(Population) AS Population FROM worldci
 | --- | --- | --- | --- |
 | 5224 | 216 | 4343 | 172 |
 
-kdb+ 以其惊人的速度而著称。基准测试通常关注数据是否驻留在内存中或使用其专有格式存储在磁盘上。CSV 支持是该语言的一个有用功能。然而，极致的优化、对向量操作的支持以及固有的并行化都得到了回报：kdb+ 在 CSV 分析工具中表现显著优越。执行速度直接转化为生产力。如果查询返回时间从2秒变成近两分钟，这会让你付出多少代价？如果开发人员在等待几分钟的过程中频繁中断，他们会怎么做？
+kdb+ 以其惊人的速度而著称。基准测试通常关注数据是否驻留在内存中或使用其专有格式存储在磁盘上。CSV 支持是该语言的一个有用功能。然而，极致的优化、对向量操作的支持以及固有的并行化都得到了回报：kdb+ 在 CSV 分析工具中表现显著优越。执行速度直接转化为生产力。如果查询返回时间从 2 秒变成近两分钟，这会让你付出多少代价？如果开发人员在等待几分钟的过程中频繁中断，他们会怎么做？
 
-选择工具时，支持也是一个关键因素。维护成本不断增加的个人项目和其他非营利解决方案很容易被抛弃。q/kdb+ 的供应商，[Kx Systems](https://kx.com/)，成立于1993年，提供了稳定的背景、专业的支持渠道和[高质量文档](https://code.kx.com/q/)供 kdb+ 开发人员使用。
+选择工具时，支持也是一个关键因素。维护成本不断增加的个人项目和其他非营利解决方案很容易被抛弃。q/kdb+ 的供应商，[Kx Systems](https://kx.com/)，成立于 1993 年，提供了稳定的背景、专业的支持渠道和[高质量文档](https://code.kx.com/q/)供 kdb+ 开发人员使用。
 
 测试在 `n1-standard-4` GCP 虚拟机上运行。kdb+ 解决方案的运行时间在更多核心的机器上会进一步下降，因为 kdb+ 4.0 利用 [多线程原语](https://code.kx.com/q/kb/mt-primitives/)。
 
@@ -541,19 +541,19 @@ kdb+ 以其惊人的速度而著称。基准测试通常关注数据是否驻留
 
 **相关内容：**
 
-+   [Python用于数据分析……真的这么简单吗？！?](/2020/04/python-data-analysis-really-that-simple.html)
++   Python 用于数据分析……真的这么简单吗？！?
 
-+   [10个Python字符串处理技巧与窍门](/2020/01/python-string-processing-primer.html)
++   10 个 Python 字符串处理技巧与窍门
 
-+   [R中的文本处理](/2018/03/text-processing-r.html)
++   R 中的文本处理
 
 ### 更多相关主题
 
-+   [3种处理CSV文件的Python方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
++   [3 种处理 CSV 文件的 Python 方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
 
-+   [从CSV到完整的分析报告，使用ChatGPT的5个简单步骤](https://www.kdnuggets.com/from-csv-to-complete-analytical-report-with-chatgpt-in-5-simple-steps)
++   [从 CSV 到完整的分析报告，使用 ChatGPT 的 5 个简单步骤](https://www.kdnuggets.com/from-csv-to-complete-analytical-report-with-chatgpt-in-5-simple-steps)
 
-+   [LLaMA 3：Meta最强大的开源模型](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)
++   [LLaMA 3：Meta 最强大的开源模型](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)
 
 +   [自然语言处理关键术语解释](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)
 

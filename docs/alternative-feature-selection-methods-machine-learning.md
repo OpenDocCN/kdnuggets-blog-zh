@@ -1,14 +1,14 @@
 # 机器学习中的替代特征选择方法
 
-> 原文：[https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html`](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
 
-![机器学习中的替代特征选择方法](../Images/46a2cd0981a5ec1c8ee11314fd34e20c.png)
+![机器学习中的替代特征选择方法](img/46a2cd0981a5ec1c8ee11314fd34e20c.png)
 
 图片来源于 [Gerd Altmann](https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1594742) [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1594742)
 
 你可能已经在网上搜索过“特征选择”，也可能找到大量描述三种选择方法的文章，即“过滤方法”、“包裹方法”和“嵌入方法”。
 
-在“过滤方法”下，我们找到基于特征分布的统计测试。这些方法计算速度非常快，但在实践中，它们未必能为我们的模型提供好的特征。此外，当我们处理大数据集时，统计测试的p值通常非常小，突出显示了分布中的微小差异，这些差异可能并不真正重要。
+在“过滤方法”下，我们找到基于特征分布的统计测试。这些方法计算速度非常快，但在实践中，它们未必能为我们的模型提供好的特征。此外，当我们处理大数据集时，统计测试的 p 值通常非常小，突出显示了分布中的微小差异，这些差异可能并不真正重要。
 
 “包裹方法”类别包括贪婪算法，这些算法将基于向前、向后或穷举搜索的每种可能特征组合进行尝试。对于每种特征组合，这些方法会训练一个机器学习模型，通常使用交叉验证，并确定其性能。因此，包裹方法计算开销非常大，通常无法实现。
 
@@ -20,11 +20,11 @@
 
 ### **替代特征选择方法**
 
-在本文中，我将描述三种基于特征对模型性能影响的算法。它们通常被称为“混合方法”，因为它们具有Wrapper和Embedded方法的特征。一些方法依赖于训练多个机器学习模型，有点像Wrapper方法。某些选择程序则依赖于特征重要性，如Embedded方法。
+在本文中，我将描述三种基于特征对模型性能影响的算法。它们通常被称为“混合方法”，因为它们具有 Wrapper 和 Embedded 方法的特征。一些方法依赖于训练多个机器学习模型，有点像 Wrapper 方法。某些选择程序则依赖于特征重要性，如 Embedded 方法。
 
 抛开术语不谈，这些方法在工业界或数据科学竞赛中已被成功应用，并提供了额外的方式来发现某个机器学习模型的最具预测性的特征。
 
-在整个文章中，我将展示一些特征选择方法的逻辑和过程，并展示如何使用开源库Feature-engine在Python中实现它们。让我们开始吧。
+在整个文章中，我将展示一些特征选择方法的逻辑和过程，并展示如何使用开源库 Feature-engine 在 Python 中实现它们。让我们开始吧。
 
 我们将通过以下方式进行讨论：
 
@@ -38,7 +38,7 @@
 
 特征洗牌，或称为排列特征重要性，指的是通过随机洗牌单一特征的值来评估该特征的重要性，这种方法通过观察模型性能得分的下降来进行。洗牌特征值的顺序（跨数据集的行）会改变特征与目标之间的原始关系，因此模型性能得分的下降表明模型对该特征的依赖程度。
 
-![机器学习中的替代特征选择方法](../Images/7231c0d175f848878d579e52e63b790c.png)
+![机器学习中的替代特征选择方法](img/7231c0d175f848878d579e52e63b790c.png)
 
 该过程如下：
 
@@ -46,11 +46,11 @@
 
 1.  它洗牌一个特征的值的顺序。
 
-1.  它用第1步中训练的模型进行预测，并确定其性能。
+1.  它用第 1 步中训练的模型进行预测，并确定其性能。
 
 1.  如果性能下降低于阈值，则保留该特征，否则将其移除。
 
-1.  它从第2步开始重复，直到所有特征都被检查过。
+1.  它从第 2 步开始重复，直到所有特征都被检查过。
 
 通过洗牌特征进行选择有几个优点。首先，我们只需训练一个机器学习模型。重要性随后通过洗牌特征值并用该模型进行预测来分配。其次，我们可以为我们选择的任何监督机器学习模型选择特征。第三，我们可以利用开源实施这一选择程序，接下来的段落中我们将看到如何做到这一点。
 
@@ -60,7 +60,7 @@
 
 +   它适用于任何监督机器学习模型。
 
-+   它可以在Feature-engine中找到，这是一个Python开源库。
++   它可以在 Feature-engine 中找到，这是一个 Python 开源库。
 
 不利的一面是，如果两个特征相关，当其中一个特征被洗牌时，模型仍然可以通过其相关变量访问信息。这可能导致两个特征的重要性值较低，即使它们可能*实际上*是重要的。此外，为了选择特征，我们需要定义一个任意的重要性阈值，低于该阈值的特征将被移除。阈值越高，选择的特征就越少。最后，特征洗牌引入了随机性因素，因此对于重要性边界的特征，即接近阈值的特征，算法的不同运行可能会返回不同的特征子集。
 
@@ -277,7 +277,7 @@ Xt = sel.transform(X)
 
 1.  它确定每个区间的平均目标值（使用训练集）。
 
-1.  它将测试集中的变量按照2中识别出的区间进行排序。
+1.  它将测试集中的变量按照 2 中识别出的区间进行排序。
 
 1.  它用相应的目标均值替换区间（使用测试集）。
 
@@ -285,7 +285,7 @@ Xt = sel.transform(X)
 
 1.  它选择性能高于阈值的特征。
 
-对于连续变量，作者首先将观测值分到箱子中，这一过程称为离散化。他们使用了1%的分位数。然后，他们使用训练集确定每个箱子中的目标均值，并在测试集中用目标均值替换箱子值后评估性能。
+对于连续变量，作者首先将观测值分到箱子中，这一过程称为离散化。他们使用了 1%的分位数。然后，他们使用训练集确定每个箱子中的目标均值，并在测试集中用目标均值替换箱子值后评估性能。
 
 该特征选择技术非常简单；它涉及对每个水平（类别或区间）的响应进行平均，然后将这些值与目标值进行比较，以获得一个性能指标。尽管其简单，但它有许多优点。
 
@@ -311,7 +311,7 @@ Xt = sel.transform(X)
 
 +   稀有类别将提供不可靠的性能代理，或使该方法无法计算。
 
-牢记这些注意事项，我们可以使用Feature-engine基于目标均值性能来选择变量。
+牢记这些注意事项，我们可以使用 Feature-engine 基于目标均值性能来选择变量。
 
 **Python 实现**
 
@@ -348,11 +348,11 @@ X_train, X_test, y_train, y_test = train_test_split(
     random_state=0)
 ```
 
-我们将基于roc-auc使用2折交叉验证来选择特征。首先需要注意的是，Feature-engine允许我们使用交叉验证，这是对作者原始方法的改进。
+我们将基于 roc-auc 使用 2 折交叉验证来选择特征。首先需要注意的是，Feature-engine 允许我们使用交叉验证，这是对作者原始方法的改进。
 
-Feature-engine还允许我们决定如何确定数值变量的区间。我们可以选择等频或等宽区间。作者使用了1%分位数，这适用于值分布较广的连续变量，但不适用于偏态变量。在这个演示中，我们将数值变量分成等频区间。
+Feature-engine 还允许我们决定如何确定数值变量的区间。我们可以选择等频或等宽区间。作者使用了 1%分位数，这适用于值分布较广的连续变量，但不适用于偏态变量。在这个演示中，我们将数值变量分成等频区间。
 
-最终，我们希望选择roc-auc大于0.6的特征。
+最终，我们希望选择 roc-auc 大于 0.6 的特征。
 
 ```py
 # Feature-engine automates the selection of 
@@ -369,7 +369,7 @@ sel = SelectByTargetMeanPerformance(
 )
 ```
 
-使用fit()方法，转换器：
+使用 fit()方法，转换器：
 
 +   用目标均值替换类别
 
@@ -377,16 +377,16 @@ sel = SelectByTargetMeanPerformance(
 
 +   用目标均值替换箱子
 
-+   使用目标均值编码变量返回roc-auc
++   使用目标均值编码变量返回 roc-auc
 
-+   选择roc-auc > 0.6的特征
++   选择 roc-auc > 0.6 的特征
 
 ```py
 # find important features
 sel.fit(X_train, y_train)
 ```
 
-我们可以探索每个特征的ROC-AUC：
+我们可以探索每个特征的 ROC-AUC：
 
 ```py
 sel.feature_performance_
@@ -409,7 +409,7 @@ sel.features_to_drop_
 ['age', 'sibsp', 'parch', 'embarked']
 ```
 
-使用transform()方法，我们从数据集中删除特征：
+使用 transform()方法，我们从数据集中删除特征：
 
 ```py
 # remove features
@@ -425,19 +425,19 @@ X_test = sel.transform(X_test)
 
 有关机器学习的更多课程，包括特征工程、超参数优化和模型部署，请访问我们的[网站](https://www.trainindata.com/)。
 
-要在Python中实现过滤器、包装器、嵌入式和混合选择方法，可以查看[Scikit-learn](https://scikit-learn.org/stable/modules/feature_selection.html)、[MLXtend](http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)和[Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html)中的选择模块。这些库附带了详尽的文档，将帮助你深入理解其背后的方法论。
+要在 Python 中实现过滤器、包装器、嵌入式和混合选择方法，可以查看[Scikit-learn](https://scikit-learn.org/stable/modules/feature_selection.html)、[MLXtend](http://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)和[Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html)中的选择模块。这些库附带了详尽的文档，将帮助你深入理解其背后的方法论。
 
-**简历: [Soledad Galli, PhD](https://linkedin.com/in/soledad-galli)** 是[Train in Data](https://www.trainindata.com/)的首席数据科学家和机器学习讲师。Sole教授中级和高级数据科学及机器学习课程。她曾在金融和保险行业工作，2018年获得了[数据科学领袖奖](https://www.information-age.com/data-leaders-awards-2018-revealed-123472520/)，并于2019年被选为"[LinkedIn的声音](https://www.linkedin.com/pulse/linkedin-top-voices-2019-data-science-analytics-lorenzetti-soper/)"。她还是Python开源库[Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html)的创作者和维护者。Sole对分享知识和帮助他人在数据科学领域取得成功充满热情。
+**简历: [Soledad Galli, PhD](https://linkedin.com/in/soledad-galli)** 是[Train in Data](https://www.trainindata.com/)的首席数据科学家和机器学习讲师。Sole 教授中级和高级数据科学及机器学习课程。她曾在金融和保险行业工作，2018 年获得了[数据科学领袖奖](https://www.information-age.com/data-leaders-awards-2018-revealed-123472520/)，并于 2019 年被选为"[LinkedIn 的声音](https://www.linkedin.com/pulse/linkedin-top-voices-2019-data-science-analytics-lorenzetti-soper/)"。她还是 Python 开源库[Feature-engine](https://feature-engine.readthedocs.io/en/latest/index.html)的创作者和维护者。Sole 对分享知识和帮助他人在数据科学领域取得成功充满热情。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -447,10 +447,10 @@ X_test = sel.transform(X_test)
 
 +   [特征选择: 科学与艺术的结合](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
 
-+   [特征存储峰会2022: 免费的特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [特征存储峰会 2022: 免费的特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
-+   [OpenChatKit: 开源ChatGPT替代品](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
++   [OpenChatKit: 开源 ChatGPT 替代品](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
 
-+   [8个开源ChatGPT和Bard的替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
++   [8 个开源 ChatGPT 和 Bard 的替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
 
-+   [ChatGLM-6B: 轻量级开源ChatGPT替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
++   [ChatGLM-6B: 轻量级开源 ChatGPT 替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)

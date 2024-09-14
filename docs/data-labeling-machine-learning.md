@@ -1,22 +1,22 @@
 # 如何组织机器学习的数据标签化：方法和工具
 
-> 原文：[https://www.kdnuggets.com/2018/05/data-labeling-machine-learning.html](https://www.kdnuggets.com/2018/05/data-labeling-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/05/data-labeling-machine-learning.html`](https://www.kdnuggets.com/2018/05/data-labeling-machine-learning.html)
 
-[评论](/2018/05/data-labeling-machine-learning.html/2#comments)
+评论
 
 **由 [AltexSoft](https://www.altexsoft.com/)**.
 
-如果有数据科学名人堂，它一定会有一个专门的标签化部分。标签员的纪念碑可能是持着象征其艰巨和细致责任的大石头的阿特拉斯。ImageNet — 一个图像数据库 — 可能会有自己的纪念碑。九年来，它的贡献者手动注释了超过1400万张图像。仅仅想到这些就让人感到疲惫。
+如果有数据科学名人堂，它一定会有一个专门的标签化部分。标签员的纪念碑可能是持着象征其艰巨和细致责任的大石头的阿特拉斯。ImageNet — 一个图像数据库 — 可能会有自己的纪念碑。九年来，它的贡献者手动注释了超过 1400 万张图像。仅仅想到这些就让人感到疲惫。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 方法的选择取决于问题和训练数据的复杂性、数据科学团队的规模，以及公司可以分配用于实施项目的财务和时间资源。
 
-![](../Images/4bc8546cb1f66096598bca89a3380604.png)
+![](img/4bc8546cb1f66096598bca89a3380604.png)
 
 #### 内部标签
 
@@ -40,13 +40,13 @@
 
 假设你的团队需要进行情感分析。对公司在社交媒体和技术网站讨论区的评论进行情感分析，可以让企业评估其声誉和专业水平，并与竞争对手进行比较。这也提供了研究行业趋势的机会，以定义发展战略。
 
-你需要收集和标注至少90,000条评论，以建立一个表现良好的模型。假设标注单条评论可能需要工人30秒，他或她需要花费750小时或几乎94个8小时的工作班次来完成任务。换句话说，大约需要三个月。考虑到[美国数据科学家的中位小时工资](https://www.payscale.com/research/US/Job=Data_Scientist%2C_IT/Salary)为36.27美元，标注费用将为27,202.5美元。
+你需要收集和标注至少 90,000 条评论，以建立一个表现良好的模型。假设标注单条评论可能需要工人 30 秒，他或她需要花费 750 小时或几乎 94 个 8 小时的工作班次来完成任务。换句话说，大约需要三个月。考虑到[美国数据科学家的中位小时工资](https://www.payscale.com/research/US/Job=Data_Scientist%2C_IT/Salary)为 36.27 美元，标注费用将为 27,202.5 美元。
 
-你可以通过**自动化**数据标注来简化这个过程。这种训练方式涉及使用标注数据和未标注数据。数据集的一部分（例如2,000条评论）可以被标注以训练分类模型。然后，这个多类模型在剩余的未标注数据上进行训练，以找到目标值——正面、负面和中性情感。
+你可以通过**自动化**数据标注来简化这个过程。这种训练方式涉及使用标注数据和未标注数据。数据集的一部分（例如 2,000 条评论）可以被标注以训练分类模型。然后，这个多类模型在剩余的未标注数据上进行训练，以找到目标值——正面、负面和中性情感。
 
 针对金融、航天、医疗保健或能源等各个行业的项目实施通常需要专家对数据进行评估。团队会咨询领域专家关于标注原则。在某些情况下，专家会自己标注数据集。
 
-[Altexsoft开发了DoIGrind应用程序](https://www.altexsoft.com/case-studies/healthcare/altexsoft-bruxlab-employing-state-of-the-art-machine-learning-and-data-science-to-diagnose-and-fight-bruxism/)旨在为荷兰初创公司[Sleep.ai](https://sleep.ai/?v=3943d8795e03)诊断和监测磨牙症。磨牙症是在清醒或睡眠状态下的过度磨牙或咬紧下颚。该应用程序基于噪声分类算法，该算法通过包含超过6,000个音频样本的数据集进行训练。为了定义与磨牙声音相关的录音，客户听取了样本并将其映射到属性上。这些特定声音的识别对于属性提取是必要的。
+[Altexsoft 开发了 DoIGrind 应用程序](https://www.altexsoft.com/case-studies/healthcare/altexsoft-bruxlab-employing-state-of-the-art-machine-learning-and-data-science-to-diagnose-and-fight-bruxism/)旨在为荷兰初创公司[Sleep.ai](https://sleep.ai/?v=3943d8795e03)诊断和监测磨牙症。磨牙症是在清醒或睡眠状态下的过度磨牙或咬紧下颚。该应用程序基于噪声分类算法，该算法通过包含超过 6,000 个音频样本的数据集进行训练。为了定义与磨牙声音相关的录音，客户听取了样本并将其映射到属性上。这些特定声音的识别对于属性提取是必要的。
 
 **优势**
 
@@ -60,15 +60,15 @@
 
 如果你可以通过众包平台直接开始工作，为什么还要花额外的时间来招募人员呢？
 
-[亚马逊机械土耳其](https://www.mturk.com/) (MTurk) 是提供按需劳动力的领先平台之一。客户在此注册为请求者，创建和管理包含一个或多个HIT（人工智能任务）的项目，在 [机械土耳其请求者网站](https://requester.mturk.com/) 上。该网站为用户提供了一个易于使用的界面来创建标注任务。MTurk代表[声称](https://blog.mturk.com/tutorial-how-to-label-thousands-of-images-using-the-crowd-bea164ccbefc)，借助其广泛的工人社区，标注数千张图像可能只需几小时而不是几天或几周。
+[亚马逊机械土耳其](https://www.mturk.com/) (MTurk) 是提供按需劳动力的领先平台之一。客户在此注册为请求者，创建和管理包含一个或多个 HIT（人工智能任务）的项目，在 [机械土耳其请求者网站](https://requester.mturk.com/) 上。该网站为用户提供了一个易于使用的界面来创建标注任务。MTurk 代表[声称](https://blog.mturk.com/tutorial-how-to-label-thousands-of-images-using-the-crowd-bea164ccbefc)，借助其广泛的工人社区，标注数千张图像可能只需几小时而不是几天或几周。
 
-另一个全球在线市场，[Clickworker](https://www.clickworker.com/about-us/) 拥有超过100万名承包商，准备承担图像或视频标注和情感分析任务。工作流程的初始阶段与MTurk类似。任务处理和分配阶段有所不同。注册雇主根据预定义的规格和要求下订单，平台团队制定解决方案并将所需的工作集发布在订单平台上，工作即开始。
+另一个全球在线市场，[Clickworker](https://www.clickworker.com/about-us/) 拥有超过 100 万名承包商，准备承担图像或视频标注和情感分析任务。工作流程的初始阶段与 MTurk 类似。任务处理和分配阶段有所不同。注册雇主根据预定义的规格和要求下订单，平台团队制定解决方案并将所需的工作集发布在订单平台上，工作即开始。
 
 **优点**
 
-**快速结果。** 众包是一种合理的选择，适用于时间紧迫且数据集庞大、基本的项目，这些项目需要使用强大的标注工具。例如，计算机视觉项目中的汽车图像分类等任务不会耗费太多时间，可以由具备普通知识的员工完成。通过将项目分解为微任务来实现速度，这样自由职业者可以同时进行这些任务。这就是Clickworker组织工作流程的方式。MTurk客户应该自己将项目分解为步骤。
+**快速结果。** 众包是一种合理的选择，适用于时间紧迫且数据集庞大、基本的项目，这些项目需要使用强大的标注工具。例如，计算机视觉项目中的汽车图像分类等任务不会耗费太多时间，可以由具备普通知识的员工完成。通过将项目分解为微任务来实现速度，这样自由职业者可以同时进行这些任务。这就是 Clickworker 组织工作流程的方式。MTurk 客户应该自己将项目分解为步骤。
 
-**经济实惠。** 在这些平台上分配标注任务不会花费你很多钱。例如，亚马逊机械土耳其允许为每个任务设置奖励，这为雇主提供了选择的自由。例如，设置每个HIT的奖励为$0.05，每个项目一个提交，你可以用$100标注2,000张图像。考虑到HITs的20%费用（包括最多九个任务），最终费用为$120，适用于一个小数据集。
+**经济实惠。** 在这些平台上分配标注任务不会花费你很多钱。例如，亚马逊机械土耳其允许为每个任务设置奖励，这为雇主提供了选择的自由。例如，设置每个 HIT 的奖励为$0.05，每个项目一个提交，你可以用$100 标注 2,000 张图像。考虑到 HITs 的 20%费用（包括最多九个任务），最终费用为$120，适用于一个小数据集。
 
 **缺点**
 
@@ -80,7 +80,7 @@
 
 作为雇主，你必须确保你的方面一切正常。平台代表建议提供明确和简单的任务说明，使用简短的问题和要点，并给出标注任务的优秀和差劲的示例。如果你的标注任务涉及绘制边界框，你可以阐明你设定的每一条规则。
 
-![众包标注示例差异](../Images/5c48a23148a2cf4da545945e70a2f0ec.png)
+![众包标注示例差异](img/5c48a23148a2cf4da545945e70a2f0ec.png)
 
 *清晰展示图像标注的注意事项和禁忌*
 
@@ -92,9 +92,9 @@
 
 在[UpWork](https://www.upwork.com/)平台上注册了不同学术背景的自由职业者。你可以通过技能、位置、小时费率、工作成功率、总收入、英语水平等筛选条件发布职位或寻找专业人才。
 
-当涉及在社交媒体上发布招聘广告时，LinkedIn拥有5亿用户，是首选网站。招聘广告可以在公司页面上发布或在相关小组中宣传。分享、点赞或评论将确保更多感兴趣的用户看到你的招聘信息。
+当涉及在社交媒体上发布招聘广告时，LinkedIn 拥有 5 亿用户，是首选网站。招聘广告可以在公司页面上发布或在相关小组中宣传。分享、点赞或评论将确保更多感兴趣的用户看到你的招聘信息。
 
-在Facebook、Instagram和Twitter上发布帖子也有助于更快找到专业人才。
+在 Facebook、Instagram 和 Twitter 上发布帖子也有助于更快找到专业人才。
 
 **优点**
 
@@ -116,7 +116,7 @@
 
 公司提供各种服务包或计划，但大多数不提供定价信息，直到收到请求。计划的价格通常取决于[服务数量](https://www.crowdflower.com/plans/#starter-modal)或工作小时数、任务复杂性或数据集的大小。
 
-[![Cloudfactory 定价](../Images/0c40ea8f06a17c0df8844a885f05695c.png)](https://www.cloudfactory.com/how-it-works)
+![Cloudfactory 定价](https://www.cloudfactory.com/how-it-works)
 
 *CloudFactory 允许根据[服务价格计算](https://www.cloudfactory.com/how-it-works)工作小时数*
 

@@ -1,10 +1,10 @@
 # 在 Python 中整理数据
 
-> 原文：[https://www.kdnuggets.com/2017/01/tidying-data-python.html](https://www.kdnuggets.com/2017/01/tidying-data-python.html)
+> 原文：[`www.kdnuggets.com/2017/01/tidying-data-python.html`](https://www.kdnuggets.com/2017/01/tidying-data-python.html)
 
 **由 Jean-Nicholas Hould, JeanNicholasHould.com 提供。**
 
-我最近遇到了一篇名为[Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf)的论文，作者是 Hadley Wickham。该论文发表于2014年，重点讲述了数据清理的一个方面——整理数据：结构化数据集以便于分析。通过这篇论文，Wickham 展示了如何在分析之前将任何数据集结构化为标准化的方式。他详细介绍了不同类型的数据集以及如何将它们整理成标准格式。
+我最近遇到了一篇名为[Tidy Data](http://vita.had.co.nz/papers/tidy-data.pdf)的论文，作者是 Hadley Wickham。该论文发表于 2014 年，重点讲述了数据清理的一个方面——整理数据：结构化数据集以便于分析。通过这篇论文，Wickham 展示了如何在分析之前将任何数据集结构化为标准化的方式。他详细介绍了不同类型的数据集以及如何将它们整理成标准格式。
 
 作为数据科学家，我认为你应该非常熟悉这种数据集的标准化结构。数据清理是数据科学中最常见的任务之一。无论你处理何种数据或进行何种分析，你最终都必须清理数据。将数据整理成标准格式可以简化后续工作。你可以在不同的分析中重用一套标准工具。
 
@@ -122,15 +122,15 @@ formatted_df.head(10)
 | 无神论者 | $10-20k | 27 |
 | 无神论者 | $30-40k | 52 |
 
-**公告牌前100名数据集**
+**公告牌前 100 名数据集**
 
-这个数据集表示从歌曲进入《公告牌》前100名时开始到接下来的75周的每周排名。
+这个数据集表示从歌曲进入《公告牌》前 100 名时开始到接下来的 75 周的每周排名。
 
 问题：
 
 +   列标题由值组成：周数（`x1st.week`，…）
 
-+   如果一首歌在前100名中停留少于75周，剩余的列将填充缺失值。
++   如果一首歌在前 100 名中停留少于 75 周，剩余的列将填充缺失值。
 
 ```py
 df = pd.read_csv("./data/billboard.csv", encoding="mac_latin2")
@@ -190,7 +190,7 @@ billboard = df
 df.head(10)
 ```
 
-数据集的更整洁版本如下所示。仍然有很多歌曲详细信息的重复：曲目名称、时间和类型。由于这个原因，这个数据集仍然不完全符合Wickham的定义。我们将在下一个示例中解决这个问题。
+数据集的更整洁版本如下所示。仍然有很多歌曲详细信息的重复：曲目名称、时间和类型。由于这个原因，这个数据集仍然不完全符合 Wickham 的定义。我们将在下一个示例中解决这个问题。
 
 | year | artist.inverted | track | time | genre | week | rank | date |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -207,7 +207,7 @@ df.head(10)
 
 ### 一个表中包含多种类型
 
-继Billboard数据集之后，我们现在将解决前一个表的重复问题。
+继 Billboard 数据集之后，我们现在将解决前一个表的重复问题。
 
 问题：
 
@@ -330,7 +330,7 @@ df.head(10)
 
 **全球历史气候网络数据集**
 
-这个数据集记录了2010年墨西哥一个气象站（MX17004）五个月的每日天气记录。
+这个数据集记录了 2010 年墨西哥一个气象站（MX17004）五个月的每日天气记录。
 
 问题：
 
@@ -435,21 +435,21 @@ df.head(5)
 
 **相关:**
 
-+   [数据科学统计学 101](/2016/07/data-science-statistics-101.html)
++   数据科学统计学 101
 
-+   [数据科学中的中心极限定理](/2016/08/central-limit-theorem-data-science.html)
++   数据科学中的中心极限定理
 
-+   [用 SQL 做统计](/2016/08/doing-statistics-sql.html)
++   用 SQL 做统计
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -465,4 +465,4 @@ df.head(5)
 
 +   [数据科学、数据可视化及其他的 38 个顶级 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-+   [KDnuggets 新闻 22:n16, 4月 20日：学习的顶级 YouTube 频道](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20 日：学习的顶级 YouTube 频道](https://www.kdnuggets.com/2022/n16.html)

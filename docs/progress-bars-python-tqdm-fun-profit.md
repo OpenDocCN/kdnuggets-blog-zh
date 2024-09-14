@@ -1,8 +1,8 @@
 # 使用 tqdm 的 Python 进度条，带来乐趣与收益
 
-> 原文：[https://www.kdnuggets.com/2022/09/progress-bars-python-tqdm-fun-profit.html](https://www.kdnuggets.com/2022/09/progress-bars-python-tqdm-fun-profit.html)
+> 原文：[`www.kdnuggets.com/2022/09/progress-bars-python-tqdm-fun-profit.html`](https://www.kdnuggets.com/2022/09/progress-bars-python-tqdm-fun-profit.html)
 
-![使用 tqdm 的 Python 进度条，带来乐趣与收益](../Images/8df067359ecf009c70ea1a908e8f7269.png)
+![使用 tqdm 的 Python 进度条，带来乐趣与收益](img/8df067359ecf009c70ea1a908e8f7269.png)
 
 Gif 作者
 
@@ -12,11 +12,11 @@ Gif 作者
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -69,7 +69,7 @@ for i in tqdm(range(10000)):
 
 太棒了！
 
-![使用 tqdm 的 Python 进度条，带来乐趣与收益](../Images/572b98f5950a8f70cc3e7f1fff9adc22.png)
+![使用 tqdm 的 Python 进度条，带来乐趣与收益](img/572b98f5950a8f70cc3e7f1fff9adc22.png)
 
 ## 多个进度条
 
@@ -85,7 +85,7 @@ for i in tqdm(range(10000)):
 
 正如我们所观察到的，多重进度条的动画效果非常惊艳。为了更好地理解，我希望你复制代码、修改它，并在你的机器上运行，亲身体验这份魔法。
 
-![Python 中的进度条与 tqdm 的乐趣与利润](../Images/14f63d5b34b4c438a4a950110a57598e.png)
+![Python 中的进度条与 tqdm 的乐趣与利润](img/14f63d5b34b4c438a4a950110a57598e.png)
 
 # tqdm 适用于数据科学。
 

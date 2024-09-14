@@ -1,8 +1,8 @@
 # 如何作为学生获得数据科学职位
 
-> 原文：[https://www.kdnuggets.com/how-to-get-a-job-in-data-science-as-a-student](https://www.kdnuggets.com/how-to-get-a-job-in-data-science-as-a-student)
+> 原文：[`www.kdnuggets.com/how-to-get-a-job-in-data-science-as-a-student`](https://www.kdnuggets.com/how-to-get-a-job-in-data-science-as-a-student)
 
-![如何作为学生获得数据科学职位](../Images/d7979d46aafde1b17ea83ad61e59c56c.png)
+![如何作为学生获得数据科学职位](img/d7979d46aafde1b17ea83ad61e59c56c.png)
 
 插图作者。来源：[Flaticon](https://www.flaticon.com/free-icon/working_3195123?term=excited&related_id=3195123)
 
@@ -16,17 +16,17 @@
 
 当我开始申请我的第一份数据科学工作时，显然我在这一领域没有任何经验。我在硕士学位期间做的项目帮助我向公司展示了我的技能。
 
-展示你的编码能力的最佳方式是将你的项目分享到GitHub。你当然不应该只关注python脚本/jupyter notebooks，还应包括一个READ.me文件，详细解释项目的组织方式和获得的结果。
+展示你的编码能力的最佳方式是将你的项目分享到 GitHub。你当然不应该只关注 python 脚本/jupyter notebooks，还应包括一个 READ.me 文件，详细解释项目的组织方式和获得的结果。
 
-例如，我的一个个人项目引起了经理们的兴趣，[BERTopic主题建模](https://github.com/eugeniaring/topic-modeling-reviews)，在该项目中，我训练了一个BERTopic模型来识别来自电子商务服装评论的主题，并通过互动数据可视化解释结果。这有助于展示我能够解决一个自然语言处理问题。
+例如，我的一个个人项目引起了经理们的兴趣，[BERTopic 主题建模](https://github.com/eugeniaring/topic-modeling-reviews)，在该项目中，我训练了一个 BERTopic 模型来识别来自电子商务服装评论的主题，并通过互动数据可视化解释结果。这有助于展示我能够解决一个自然语言处理问题。
 
 # 撰写数据科学文章
 
-当我还是学生时，我开始在不同的出版物中撰写数据科学文章，如Towards AI和Towards Data Science，这让我能够接触到来自不同国家的大量读者，将我在大学课程中学到的知识付诸实践，深入探讨我感兴趣的未知领域，收到工作提议，甚至赚取收入。
+当我还是学生时，我开始在不同的出版物中撰写数据科学文章，如 Towards AI 和 Towards Data Science，这让我能够接触到来自不同国家的大量读者，将我在大学课程中学到的知识付诸实践，深入探讨我感兴趣的未知领域，收到工作提议，甚至赚取收入。
 
 最好的老师是来自社区的反馈，刚开始时，尤其是负面评论可能会让人感到害怕，但它确实有助于提升你的批判性思维，并让你对解决问题的其他可能方案保持开放的心态。
 
-你还可以从零开始创建自己的博客，而不是在出版物上发布，但你应该考虑到建立网站所需的时间。无论如何，多亏了Chat-GPT和其他基于大型语言模型的AI工具，这一切变得更加容易。
+你还可以从零开始创建自己的博客，而不是在出版物上发布，但你应该考虑到建立网站所需的时间。无论如何，多亏了 Chat-GPT 和其他基于大型语言模型的 AI 工具，这一切变得更加容易。
 
 # 创建 YouTube 视频
 
@@ -62,8 +62,8 @@
 
 +   [数据分析中的职位趋势：用于职位趋势分析的自然语言处理](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
-+   [10个网站获取惊人的数据用于数据科学项目](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)
++   [10 个网站获取惊人的数据用于数据科学项目](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)
 
-+   [5种稀有的数据科学技能可以帮助你获得就业机会](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
++   [5 种稀有的数据科学技能可以帮助你获得就业机会](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
 
-+   [10门必修的免费数据科学课程以便入门](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
++   [10 门必修的免费数据科学课程以便入门](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)

@@ -1,8 +1,8 @@
-# 10种最常见的数据质量问题及其解决方法
+# 10 种最常见的数据质量问题及其解决方法
 
-> 原文：[https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
+> 原文：[`www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html`](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
-![10种最常见的数据质量问题及其解决方法](../Images/526076380be505349c1a76723d549a51.png)
+![10 种最常见的数据质量问题及其解决方法](img/526076380be505349c1a76723d549a51.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -88,7 +88,7 @@
 
 本文涵盖了您可以从根本上解决的最常见的数据质量问题，以防止未来的损失。请记住，数据本身不会有价值，除非你让它变得有价值。希望您喜欢阅读这篇文章。请随时在评论区分享您的想法或反馈。
 
-**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发者，对数据科学和人工智能在医学中的应用充满兴趣。Kanwal被选为2022年亚太地区的Google Generation Scholar。Kanwal喜欢通过撰写关于热门话题的文章来分享技术知识，并热衷于提升女性在科技行业中的代表性。
+**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发者，对数据科学和人工智能在医学中的应用充满兴趣。Kanwal 被选为 2022 年亚太地区的 Google Generation Scholar。Kanwal 喜欢通过撰写关于热门话题的文章来分享技术知识，并热衷于提升女性在科技行业中的代表性。
 
 ### 更多相关内容
 
@@ -98,8 +98,8 @@
 
 +   [分类准确性相关的关键问题](https://www.kdnuggets.com/2023/03/key-issues-associated-classification-accuracy.html)
 
-+   [5个常见的数据科学错误及如何避免它们](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
++   [5 个常见的数据科学错误及如何避免它们](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
 
-+   [5个常见的Python陷阱（及如何避免它们）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
++   [5 个常见的 Python 陷阱（及如何避免它们）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
 
 +   [数据质量：好、坏、丑](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)

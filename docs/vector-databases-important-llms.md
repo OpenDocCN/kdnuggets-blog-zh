@@ -1,8 +1,8 @@
 # 什么是向量数据库，它们为什么对大语言模型重要？
 
-> 原文：[https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
+> 原文：[`www.kdnuggets.com/2023/06/vector-databases-important-llms.html`](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
 
-![什么是向量数据库，它们为什么对大语言模型重要？](../Images/e141c8cc74c06803aac8fb1e08b7b42c.png)
+![什么是向量数据库，它们为什么对大语言模型重要？](img/e141c8cc74c06803aac8fb1e08b7b42c.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -40,11 +40,11 @@
 
 现在我们对向量嵌入和数据库有了一些了解，让我们深入了解它是如何工作的。
 
-![什么是向量数据库，它们为何对LLMs至关重要？](../Images/9710685ea045b8939a251d25f37ec6f3.png)
+![什么是向量数据库，它们为何对 LLMs 至关重要？](img/9710685ea045b8939a251d25f37ec6f3.png)
 
 作者提供的图片
 
-让我们从一个简单的例子开始，涉及像ChatGPT这样的LLM。该模型具有大量的数据和内容，并为我们提供了ChatGPT应用程序。
+让我们从一个简单的例子开始，涉及像 ChatGPT 这样的 LLM。该模型具有大量的数据和内容，并为我们提供了 ChatGPT 应用程序。
 
 那么，让我们逐步了解一下。
 
@@ -60,7 +60,7 @@
 
 想了解更多关于它在向量数据库中如何工作的内容吗？让我们进一步学习。
 
-![什么是向量数据库，它们为何对LLMs至关重要？](../Images/c1c10388cc1f48fcfabccc4cd3a4c9ed.png)
+![什么是向量数据库，它们为何对 LLMs 至关重要？](img/c1c10388cc1f48fcfabccc4cd3a4c9ed.png)
 
 作者提供的图片
 

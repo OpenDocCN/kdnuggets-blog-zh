@@ -1,10 +1,10 @@
 # 最佳数据科学项目在你的投资组合中
 
-> 原文：[https://www.kdnuggets.com/2021/02/best-data-science-project-portfolio.html](https://www.kdnuggets.com/2021/02/best-data-science-project-portfolio.html)
+> 原文：[`www.kdnuggets.com/2021/02/best-data-science-project-portfolio.html`](https://www.kdnuggets.com/2021/02/best-data-science-project-portfolio.html)
 
-[评论](#comments)
+评论
 
-![](../Images/628c464d0523b1eeded3f088833355a4.png)
+![](img/628c464d0523b1eeded3f088833355a4.png)
 
 *图片由 [Jon Tyson](https://unsplash.com/@jontyson?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/best?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -38,7 +38,7 @@
 
 这些都非常适合练习硬技能，如编码、数据处理、数据科学库和框架、机器学习算法等。然而，它们缺乏一项重要的技能。
 
-![](../Images/c60b20e616277997a3fa8ef98dd809d0.png)
+![](img/c60b20e616277997a3fa8ef98dd809d0.png)
 
 *图片由 [Azazello BQ](https://unsplash.com/@azazellobq?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/problem?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -56,13 +56,13 @@
 
 你可能会争辩说，提出一个新的项目创意是一项极具挑战性的任务。我完全同意你这一点。这也是我称之为在你作品集中拥有的**最佳**项目的原因。
 
-我知道，提出一个独特的项目创意需要大量的时间、精力和思考。此外，你将花费长时间来尝试实现你的想法。重要的是要指出，你可能会遇到一个失败的项目。然而，你在这个过程中学到的技能，可能是你无法通过MOOC课程或任何教程学习到的。
+我知道，提出一个独特的项目创意需要大量的时间、精力和思考。此外，你将花费长时间来尝试实现你的想法。重要的是要指出，你可能会遇到一个失败的项目。然而，你在这个过程中学到的技能，可能是你无法通过 MOOC 课程或任何教程学习到的。
 
 你还将提高处理问题的技能。你将学会从不同角度评估任务。在某些情况下，你想到的解决方案可能不适合你习惯使用的库或框架。因此，这也会激励你学习新工具。
 
 ### 结论
 
-作品集中的10个项目听起来很吸引人。我也做过其中的一些项目。然而，记住，你与之竞争的数据科学家职位的许多人也在做这些10个项目。你不会落后，但做同样的事情也不会让你更进一步。
+作品集中的 10 个项目听起来很吸引人。我也做过其中的一些项目。然而，记住，你与之竞争的数据科学家职位的许多人也在做这些 10 个项目。你不会落后，但做同样的事情也不会让你更进一步。
 
 招聘经理或招聘人员会知道你在项目中投入了多少。一些流行的普通项目可以在一两天内完成。因此，你很难通过这些项目来展示你的技能。
 
@@ -82,11 +82,11 @@
 
 ### 更多相关话题
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

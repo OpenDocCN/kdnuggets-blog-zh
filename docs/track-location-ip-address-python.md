@@ -1,8 +1,8 @@
 # 如何使用 Python 跟踪 IP 地址的位置
 
-> 原文：[https://www.kdnuggets.com/2023/01/track-location-ip-address-python.html](https://www.kdnuggets.com/2023/01/track-location-ip-address-python.html)
+> 原文：[`www.kdnuggets.com/2023/01/track-location-ip-address-python.html`](https://www.kdnuggets.com/2023/01/track-location-ip-address-python.html)
 
-![如何使用 Python 跟踪 IP 地址的位置](../Images/e1b6f97dc31fb748dda31b52c1f5766e.png)
+![如何使用 Python 跟踪 IP 地址的位置](img/e1b6f97dc31fb748dda31b52c1f5766e.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -172,24 +172,24 @@ Distance between the server and your location is 12183.275099919923km
 
 跟踪 IP 地址的位置有几个好处，比如企业可以根据用户的位置提供定向广告。这可以带来更有效的营销活动、更高的转化率，并且能个性化用户体验。
 
-此外，这在欺诈检测中也很有帮助，例如阻止来自特定国家的IP地址，以及验证IP地址以确保其格式正确。
+此外，这在欺诈检测中也很有帮助，例如阻止来自特定国家的 IP 地址，以及验证 IP 地址以确保其格式正确。
 
-总之，我希望您喜欢这篇文章并觉得它有帮助。您可以找到完整代码的[协作文件](https://colab.research.google.com/drive/1CgukDZkUkwBmce7vqnXARGQ8q9stMACk?usp=sharing)。如果您有任何建议或反馈，请通过LinkedIn与我联系。
+总之，我希望您喜欢这篇文章并觉得它有帮助。您可以找到完整代码的[协作文件](https://colab.research.google.com/drive/1CgukDZkUkwBmce7vqnXARGQ8q9stMACk?usp=sharing)。如果您有任何建议或反馈，请通过 LinkedIn 与我联系。
 
 祝您有美好的一天????。
 
-**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名B.Tech电气工程学生，目前正处于本科最后一年。他对Web开发和机器学习领域充满兴趣。他已经追求了这一兴趣，并渴望在这些方向上继续工作。
+**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名 B.Tech 电气工程学生，目前正处于本科最后一年。他对 Web 开发和机器学习领域充满兴趣。他已经追求了这一兴趣，并渴望在这些方向上继续工作。
 
 ### 更多相关主题
 
-+   [数据治理能否应对AI疲劳？](https://www.kdnuggets.com/can-data-governance-address-ai-fatigue)
++   [数据治理能否应对 AI 疲劳？](https://www.kdnuggets.com/can-data-governance-address-ai-fatigue)
 
-+   [为什么单独使用LLM无法满足贵公司的预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
++   [为什么单独使用 LLM 无法满足贵公司的预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
 
-+   [追踪和可视化您Python代码执行的3种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
++   [追踪和可视化您 Python 代码执行的 3 种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
 
-+   [KDnuggets™ 新闻 22:n01，1月5日：追踪和可视化的3种工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01，1 月 5 日：追踪和可视化的 3 种工具…](https://www.kdnuggets.com/2022/n01.html)
 
 +   [通过热门数据技能快速推进您的下一步](https://www.kdnuggets.com/2023/01/datacamp-fast-track-next-move-indemand-data-skills.html)
 
-+   [如何使用Python确定最佳数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)
++   [如何使用 Python 确定最佳数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)

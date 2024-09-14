@@ -1,26 +1,26 @@
 # 如何在破产时学习数据科学
 
-> 原文：[https://www.kdnuggets.com/2018/10/learn-data-science-broke.html](https://www.kdnuggets.com/2018/10/learn-data-science-broke.html)
+> 原文：[`www.kdnuggets.com/2018/10/learn-data-science-broke.html`](https://www.kdnuggets.com/2018/10/learn-data-science-broke.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Harrison Jansma](https://www.harrisonjansma.com/)**。
 
-![](../Images/a3a58b31f8b2209f51c50cfad21f62ef.png)
+![](img/a3a58b31f8b2209f51c50cfad21f62ef.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-在过去的一年里，我自学了数据科学。我从数百个在线资源中学习，每天学习6到8小时。同时，我还在一家日托中心以最低工资工作。
+在过去的一年里，我自学了数据科学。我从数百个在线资源中学习，每天学习 6 到 8 小时。同时，我还在一家日托中心以最低工资工作。
 
 **我的目标是开始一份我热爱的职业，尽管资金不足。**
 
@@ -36,7 +36,7 @@
 
 互联网是一个混乱的局面。从中学习往往感觉像是从消防水龙头的喷射端喝水。
 
-![](../Images/c5377d7e0bfcb2478bc393dc2882d4ee.png)
+![](img/c5377d7e0bfcb2478bc393dc2882d4ee.png)
 
 [来源](https://unsplash.com/@darwiiiin?utm_source=medium&utm_medium=referral)
 
@@ -48,7 +48,7 @@
 
 有一些免费的替代方案，比如[edX](https://www.edx.org/)和[coursera](https://www.coursera.org/)，它们提供深入特定主题的一次性课程。如果你从视频或课堂环境中学得比较好，这些都是学习数据科学的极佳途径。
 
-![](../Images/44631b73139344c8af658853c8a70cba.png)
+![](img/44631b73139344c8af658853c8a70cba.png)
 
 免费在线教育平台，查看这个[网站](https://www.class-central.com/subject/data-science)以获取可用的数据科学课程列表。你还可以使用一些免费的课程大纲。看看[David Venturi](https://medium.com/@davidventuri/i-dropped-out-of-school-to-create-my-own-data-science-master-s-here-s-my-curriculum-1b400dcee412)的文章，或者[开放源代码数据科学硕士](http://datasciencemasters.org/)（一个更传统的教育计划）。
 
@@ -60,15 +60,15 @@
 
 ### 课程指南
 
-![](../Images/8ad4aa1b6df8d7f4be2858f6cd88130f.png)
+![](img/8ad4aa1b6df8d7f4be2858f6cd88130f.png)
 
 数据科学课程指南
 
-#### **Python编程**
+#### **Python 编程**
 
-编程是数据科学家的基本技能。熟练掌握Python的语法。了解如何以多种不同方式运行Python程序。（Jupyter notebook vs. 命令行 vs IDE）
+编程是数据科学家的基本技能。熟练掌握 Python 的语法。了解如何以多种不同方式运行 Python 程序。（Jupyter notebook vs. 命令行 vs IDE）
 
-我花了大约一个月的时间复习[Python文档](https://docs.python.org/3/tutorial/)、[Python指南](https://docs.python-guide.org/intro/learning/)以及在[CodeSignal](https://codesignal.com/)上的编码挑战。
+我花了大约一个月的时间复习[Python 文档](https://docs.python.org/3/tutorial/)、[Python 指南](https://docs.python-guide.org/intro/learning/)以及在[CodeSignal](https://codesignal.com/)上的编码挑战。
 
 提示：留意程序员使用的常见问题解决技巧。（发音为“算法”）
 
@@ -82,9 +82,9 @@
 
 学习如何加载、操作和可视化数据。掌握这些库对你的个人项目至关重要。
 
-![](../Images/f48aefe55668c141a2d032f7f09b0535.png)
+![](img/f48aefe55668c141a2d032f7f09b0535.png)
 
-小提示：不要觉得你必须记住每个方法或函数名，这需要实践。如果忘记了，可以用Google搜索。
+小提示：不要觉得你必须记住每个方法或函数名，这需要实践。如果忘记了，可以用 Google 搜索。
 
 查看[Pandas 文档](http://pandas.pydata.org/pandas-docs/stable/)、[Numpy 文档](https://docs.scipy.org/doc/numpy/user/index.html)和[Matplotlib 教程](https://matplotlib.org/tutorials/index.html)。虽然还有更好的资源，但这些是我使用过的。
 
@@ -104,7 +104,7 @@
 
 为了做到这一点，你需要学习如何使用商业计算资源来获取、转换和处理数据。
 
-![](../Images/b7241f0e8bd84b24417a15ecfc54fe9f.png)
+![](img/b7241f0e8bd84b24417a15ecfc54fe9f.png)
 
 亚马逊 Web 服务、谷歌云、微软 Azure 这是数据科学课程中最少教授的部分。主要是因为你使用的具体工具取决于你进入的行业。
 
@@ -116,7 +116,7 @@
 
 ### 执行课程的建议。
 
-![](../Images/be66c8027da68ede0ceccef2eecd805e.png)
+![](img/be66c8027da68ede0ceccef2eecd805e.png)
 
 由[Ugur Akdemir](https://unsplash.com/@ugur?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)提供
 
@@ -128,7 +128,7 @@
 
 解决方案是**获取一个好的存储系统来保存有趣的网络资源**。这样你可以将资料保存以备后用，专注于当前对你有用的主题。
 
-![](../Images/f6a2d8e7a2ed33be6048cd6e4e99829d.png)
+![](img/f6a2d8e7a2ed33be6048cd6e4e99829d.png)
 
 我当前的 Chrome 书签栏 如果你做对了，你可以创建一个有序的学习路径，展示你应该专注的内容。你还会学得更快，避免被分心。
 
@@ -138,7 +138,7 @@
 
 自我驱动的教育常常感觉像是在阅读一个永无止境的知识库。
 
-![](../Images/ebc5a6f2b581c873dd8b37a5b2d249d8.png)
+![](img/ebc5a6f2b581c873dd8b37a5b2d249d8.png)
 
 如果你想在数据科学领域获得成功，你需要把你的教育视为一个终身的过程。
 
@@ -150,7 +150,7 @@
 
 不要满足于仅仅学习一个概念然后转到下一个东西。学习的过程不会停止，直到你能够将一个概念应用到现实世界中。
 
-![](../Images/f5036284a4dddbf6d0d43f119db8973b.png)
+![](img/f5036284a4dddbf6d0d43f119db8973b.png)
 
 by [Allef Vinicius](https://unsplash.com/@seteales?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 不是每个概念都需要在你的作品集中有一个专门的项目。但重要的是要保持脚踏实地，**记住你在学习是为了在世界上产生影响。**
 
@@ -172,9 +172,9 @@ by [Allef Vinicius](https://unsplash.com/@seteales?utm_source=medium&utm_medium=
 
 **只需确保撰写的内容易于阅读，代码有良好的文档，并且作品集本身看起来不错。**
 
-![](../Images/9ee4d3eca08e1f5203265b8ee78f0cb7.png)
+![](img/9ee4d3eca08e1f5203265b8ee78f0cb7.png)
 
-[https://harrisonjansma.com/archive](https://harrisonjansma.com/archive) 这是我的作品集。一个更简单的发布作品集的方法是创建一个包含出色的 ReadMe（摘要页面）以及相关项目文件的 GitHub 仓库。
+[`harrisonjansma.com/archive`](https://harrisonjansma.com/archive) 这是我的作品集。一个更简单的发布作品集的方法是创建一个包含出色的 ReadMe（摘要页面）以及相关项目文件的 GitHub 仓库。
 
 这是一个美观却简单的[GitHub 作品集](https://github.com/alexhuang1117/Data-Science-Portfolio)。对于更高级的作品集，可以考虑使用 GitHub-IO 来托管你自己的免费网站。（[示例](https://alexisbcook.github.io/#blog)）
 
@@ -190,7 +190,7 @@ by [Allef Vinicius](https://unsplash.com/@seteales?utm_source=medium&utm_medium=
 
 **在学习时，要时刻留意那些让你兴奋的项目或创意。**
 
-![](../Images/278bc2689a5c25f00ad1734ccc8d6f25.png)
+![](img/278bc2689a5c25f00ad1734ccc8d6f25.png)
 
 [Stefan Steinbauer](https://unsplash.com/@usinglight?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上。花时间学习后，尝试连接点滴。找到让你着迷的项目之间的相似性。然后花一些时间研究那些类型项目的行业。
 
@@ -224,14 +224,14 @@ by [Allef Vinicius](https://unsplash.com/@seteales?utm_source=medium&utm_medium=
 
 ### 更多相关主题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)

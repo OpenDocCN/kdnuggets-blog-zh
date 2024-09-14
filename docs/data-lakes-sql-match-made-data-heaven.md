@@ -1,8 +1,8 @@
 # 数据湖与 SQL：数据天堂中的绝配
 
-> 原文：[https://www.kdnuggets.com/2023/01/data-lakes-sql-match-made-data-heaven.html](https://www.kdnuggets.com/2023/01/data-lakes-sql-match-made-data-heaven.html)
+> 原文：[`www.kdnuggets.com/2023/01/data-lakes-sql-match-made-data-heaven.html`](https://www.kdnuggets.com/2023/01/data-lakes-sql-match-made-data-heaven.html)
 
-![数据湖与 SQL：数据天堂中的绝配](../Images/62cbaee80c13c3846f299b1e6ca107a2.png)
+![数据湖与 SQL：数据天堂中的绝配](img/62cbaee80c13c3846f299b1e6ca107a2.png)
 
 图片来自作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -133,17 +133,17 @@ HAVING total_column2 > 100;
 
 # 结论
 
-总之，数据湖与SQL是管理和分析大数据量的最佳组合。使用SQL将数据导入数据湖，在湖中转换数据，并查询以获取所需结果。
+总之，数据湖与 SQL 是管理和分析大数据量的最佳组合。使用 SQL 将数据导入数据湖，在湖中转换数据，并查询以获取所需结果。
 
-熟悉你使用的文件系统和数据格式，练习编写SQL查询，并探索基于SQL的ETL工具，以充分利用这一组合。掌握数据湖和SQL将帮助你有效地处理和理解你的数据。
+熟悉你使用的文件系统和数据格式，练习编写 SQL 查询，并探索基于 SQL 的 ETL 工具，以充分利用这一组合。掌握数据湖和 SQL 将帮助你有效地处理和理解你的数据。
 
 感谢你抽出时间阅读我的文章。希望你觉得这篇文章信息丰富且引人入胜。
 
-**[Sonia Jamil](www.linkedin.com/in/sonia-jamil)** 目前在巴基斯坦最大的电信公司之一担任数据库分析师。除了全职工作外，她还从事自由职业。她的背景包括数据库管理方面的专业知识，以及在本地和基于云的SQL Server环境中的经验。她精通最新的SQL Server技术，对数据管理和数据分析有着强烈的兴趣。
+**Sonia Jamil** 目前在巴基斯坦最大的电信公司之一担任数据库分析师。除了全职工作外，她还从事自由职业。她的背景包括数据库管理方面的专业知识，以及在本地和基于云的 SQL Server 环境中的经验。她精通最新的 SQL Server 技术，对数据管理和数据分析有着强烈的兴趣。
 
 ### 更多相关内容
 
-+   [如何使用Python和机器学习预测足球比赛结果](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)
++   [如何使用 Python 和机器学习预测足球比赛结果](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)
 
 +   [数据仓库与数据湖与数据集市：需要帮助决定吗？](https://www.kdnuggets.com/data-warehouses-vs-data-lakes-vs-data-marts-need-help-deciding)
 
@@ -151,6 +151,6 @@ HAVING total_column2 > 100;
 
 +   [为数据分析师简化的机器学习：BigQuery ML](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)
 
-+   [我在转行数据科学职业时犯的5个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
++   [我在转行数据科学职业时犯的 5 个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
 
-+   [Pydantic教程：Python中的数据验证变得简单](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)
++   [Pydantic 教程：Python 中的数据验证变得简单](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)

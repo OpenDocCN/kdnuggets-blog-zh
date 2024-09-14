@@ -1,8 +1,8 @@
 # 使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵
 
-> 原文：[https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html](https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html)
+> 原文：[`www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html`](https://www.kdnuggets.com/2022/09/convert-text-documents-tfidf-matrix-tfidfvectorizer.html)
 
-![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](../Images/ea146363649f10588191481680069128.png)
+![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](img/ea146363649f10588191481680069128.png)
 
 图片来源于作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,21 +30,21 @@ TF-IDF 在自然语言处理任务、主题建模和机器学习任务中特别�
 
 例如，如果句子有 6 个单词，其中包含两个“the”，这个单词的 TF 比率就是 (2/6)。
 
-![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](../Images/5c8c14fee12eaf0d8ba615d71cb138b5.png)
+![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](img/5c8c14fee12eaf0d8ba615d71cb138b5.png)
 
 ## 逆文档频率 (IDF)
 
 IDF 计算单词在语料库 D 中的重要性。像“of, we, are”这样的高频词几乎没有意义。它通过将语料库中文档的总数除以包含该单词的文档数来计算。
 
-![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](../Images/16abe43f41aedbfc910c6a903f3bddfb.png)
+![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](img/16abe43f41aedbfc910c6a903f3bddfb.png)
 
-![公式](../Images/8ba048fac8868603a0b21c6a49b320b1.png)
+![公式](img/8ba048fac8868603a0b21c6a49b320b1.png)
 
 ## 词频-逆文档频率 (TFIDF)
 
 TF-IDF 是词频和逆文档频率的乘积。它对语料库中稀有而文档中常见的单词给予更多重要性。
 
-![公式](../Images/7a052e35193f0b3503b881a4c94a92a0.png)
+![公式](img/7a052e35193f0b3503b881a4c94a92a0.png)
 
 来自 [Vaibhav Jayaswal](https://towardsdatascience.com/text-vectorization-term-frequency-inverse-document-frequency-tfidf-5a3f9604da6d) 博客的 TF-IDF 矩阵示例：
 
@@ -54,7 +54,7 @@ TF-IDF 是词频和逆文档频率的乘积。它对语料库中稀有而文档�
 
 +   **文本 B**: 火星是离太阳第四近的行星
 
-下表显示了A和B的TF值、IDF值以及A和B的TFIDF值。
+下表显示了 A 和 B 的 TF 值、IDF 值以及 A 和 B 的 TFIDF 值。
 
 | **Words** | **TF ( A )** | **TF ( B )** | **IDF** | **TFIDF ( A )** | **TFIDF ( B )** |
 | --- | --- | --- | --- | --- | --- |
@@ -68,11 +68,11 @@ TF-IDF 是词频和逆文档频率的乘积。它对语料库中稀有而文档�
 | from  | 0 | 1/8 | In (2/1)=0.69 | 0 | 0.086 |
 | sun  | 0 | 1/8 | In (2/1)=0.69 | 0 | 0.086 |
 
-# TF-IDF教程
+# TF-IDF 教程
 
-在本教程中，我们将使用[scikit-learn中的TfidfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)将文本转换并查看TF-IDF矩阵。
+在本教程中，我们将使用[scikit-learn 中的 TfidfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)将文本转换并查看 TF-IDF 矩阵。
 
-在下面的代码中，我们有一个包含4个文档的小语料库。首先，我们将使用`TfidfVectorizer()`创建一个向量化对象，并将文本数据拟合和转换为向量。之后，我们将使用向量化器提取单词名称。
+在下面的代码中，我们有一个包含 4 个文档的小语料库。首先，我们将使用`TfidfVectorizer()`创建一个向量化对象，并将文本数据拟合和转换为向量。之后，我们将使用向量化器提取单词名称。
 
 ```py
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -93,13 +93,13 @@ X = vectorizer.fit_transform(corpus)
 tfidf_tokens = vectorizer.get_feature_names_out()
 ```
 
-我们现在将使用TF-IDF令牌和向量创建一个pandas数据框。
+我们现在将使用 TF-IDF 令牌和向量创建一个 pandas 数据框。
 
 1.  将向量转换为数组，并将其添加到数据参数中。
 
 1.  四个索引是手动创建的。
 
-1.  tfidf_tokens名称已添加到列中。
+1.  tfidf_tokens 名称已添加到列中。
 
 ```py
 import pandas as pd
@@ -113,17 +113,17 @@ result = pd.DataFrame(
 result
 ```
 
-pandas数据框将列显示为单词，行显示为文档。
+pandas 数据框将列显示为单词，行显示为文档。
 
-在下面的数据框中，每个单词都有一个基于TF-IDF公式的重要值。
+在下面的数据框中，每个单词都有一个基于 TF-IDF 公式的重要值。
 
-![使用tfidfvectorizer将文本文档转换为TF-IDF矩阵](../Images/00058e9f63c30b797e53e48c157e8975.png)
+![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](img/00058e9f63c30b797e53e48c157e8975.png)
 
-# TF-IDF用于文本分类
+# TF-IDF 用于文本分类
 
-让我们更进一步，使用TF-IDF将文本转换为向量，然后用它来训练文本分类模型。为了训练模型，我们将使用[Kaggle上的Spotify App Reviews](https://www.kaggle.com/datasets/mfaaris/spotify-app-reviews-2022)数据。
+让我们更进一步，使用 TF-IDF 将文本转换为向量，然后用它来训练文本分类模型。为了训练模型，我们将使用[Kaggle 上的 Spotify App Reviews](https://www.kaggle.com/datasets/mfaaris/spotify-app-reviews-2022)数据。
 
-我们将使用read_csv加载数据并查看前五行。
+我们将使用 read_csv 加载数据并查看前五行。
 
 ```py
 import pandas as pd
@@ -134,7 +134,7 @@ spotify.head()
 
 我们只会使用**Review**和**Rating**列来训练模型。
 
-![使用tfidfvectorizer将文本文档转换为TF-IDF矩阵](../Images/0035918d7a48bd8a3d485ccd3106943a.png)
+![使用 tfidfvectorizer 将文本文档转换为 TF-IDF 矩阵](img/0035918d7a48bd8a3d485ccd3106943a.png)
 
 我们将把**Review**列转换为向量，并将**Rating**作为目标。之后，我们将拆分数据集用于训练和测试。
 
@@ -155,9 +155,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 ```
 
-我们不会深入探讨特征工程、文本处理或超参数优化。我们将选择一个简单的模型（SGDClassifier）并在X_train和y_train上训练它。
+我们不会深入探讨特征工程、文本处理或超参数优化。我们将选择一个简单的模型（SGDClassifier）并在 X_train 和 y_train 上训练它。
 
-对于模型验证，我们将使用X_test预测值，并打印分类报告。
+对于模型验证，我们将使用 X_test 预测值，并打印分类报告。
 
 ```py
 from sklearn.linear_model import SGDClassifier
@@ -173,7 +173,7 @@ y_pred = clf.predict(X_test)
 print(classification_report(y_test, y_pred))
 ```
 
-正如我们所观察到的，通过在默认配置上训练，我们得到了0.69的F1分数。我们可以通过交叉验证、超参数优化、文本清理和处理以及特征工程来提高模型性能。
+正如我们所观察到的，通过在默认配置上训练，我们得到了 0.69 的 F1 分数。我们可以通过交叉验证、超参数优化、文本清理和处理以及特征工程来提高模型性能。
 
 ```py
                precision    recall  f1-score   support
@@ -188,7 +188,7 @@ macro avg          0.45      0.42      0.38     20327
 weighted avg       0.54      0.62      0.54     20327
 ```
 
-> “感谢您阅读本教程。希望我能帮助您理解TF-IDF的基础知识。如果您有任何进一步的问题，请在下面输入或通过LinkedIn联系我。”
+> “感谢您阅读本教程。希望我能帮助您理解 TF-IDF 的基础知识。如果您有任何进一步的问题，请在下面输入或通过 LinkedIn 联系我。”
 
 **[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是通过图神经网络为那些面临心理健康问题的学生构建一个 AI 产品。
 

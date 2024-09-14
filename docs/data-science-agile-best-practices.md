@@ -1,10 +1,10 @@
 # 数据科学可以是敏捷的吗？将最佳敏捷实践应用于你的数据科学过程
 
-> 原文：[https://www.kdnuggets.com/2021/01/data-science-agile-best-practices.html](https://www.kdnuggets.com/2021/01/data-science-agile-best-practices.html)
+> 原文：[`www.kdnuggets.com/2021/01/data-science-agile-best-practices.html`](https://www.kdnuggets.com/2021/01/data-science-agile-best-practices.html)
 
-[评论](#comments)
+评论
 
-**由[Jerzy Kowalski](https://www.linkedin.com/in/jerzy-kowalski-dev/)，STX Next的Python开发者**。
+**由[Jerzy Kowalski](https://www.linkedin.com/in/jerzy-kowalski-dev/)，STX Next 的 Python 开发者**。
 
 我经常看到的观点是敏捷开发和数据科学不太适配。如果这是真的，那就意味着敏捷在数据科学家中并不受欢迎。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -36,19 +36,19 @@
 
 ### 使用敏捷的数据显示科学家占比是多少？
 
-回答这个问题的一种可能方式是使用[Stack Overflow调查](https://insights.stackoverflow.com/survey/2020)的结果。如果你想查看我分析的技术细节，我已经为你提供了一个[jupyter notebook](https://github.com/stxnext/agile-in-data-science/blob/master/so_survey_analysis.ipynb)。
+回答这个问题的一种可能方式是使用[Stack Overflow 调查](https://insights.stackoverflow.com/survey/2020)的结果。如果你想查看我分析的技术细节，我已经为你提供了一个[jupyter notebook](https://github.com/stxnext/agile-in-data-science/blob/master/so_survey_analysis.ipynb)。
 
 不幸的是，那里没有类似“你是否使用敏捷开发？”的问题，所以我选择了有关使用的协作工具的问题。我假设如果我发现了“Jira”作为答案，那么受访者很可能是在敏捷环境中工作。
 
-别误解我的意思。我*并不*认为你必须使用Jira来进行敏捷开发——还有很多其他工具可供选择。如果你使用Jira，这也不意味着你100%是在进行敏捷开发。我只是做了一个我认为是“你是否使用敏捷开发”的最佳近似的假设。
+别误解我的意思。我*并不*认为你必须使用 Jira 来进行敏捷开发——还有很多其他工具可供选择。如果你使用 Jira，这也不意味着你 100%是在进行敏捷开发。我只是做了一个我认为是“你是否使用敏捷开发”的最佳近似的假设。
 
 回答“谁在使用敏捷？”这个问题要简单得多。“以下哪些描述了你？”正是我一直在寻找的答案之一，因为其中一个可能的答案是“数据科学家或机器学习专家。”
 
 好了，理论讲解够了。现在让我们看看一些可视化数据吧！
 
-![](../Images/43a31ad93e664e161d8356dcb9be6089.png)
+![](img/43a31ad93e664e161d8356dcb9be6089.png)
 
-显然，数据科学家在这方面并不是行业领先者，因为只有54.9%的人使用敏捷方法。类似角色的结果更差，数据工程师除外，他们在这方面接近最佳水平。此外，数据科学家与该群体中敏捷用户的比例之间在“工程性”方面存在正相关。
+显然，数据科学家在这方面并不是行业领先者，因为只有 54.9%的人使用敏捷方法。类似角色的结果更差，数据工程师除外，他们在这方面接近最佳水平。此外，数据科学家与该群体中敏捷用户的比例之间在“工程性”方面存在正相关。
 
 根据我的发现，我们不能说数据科学家对敏捷一无所知。但肯定还有改进的空间，所以让我们看看一些将敏捷方法融入数据科学项目的可能方式。
 
@@ -60,7 +60,7 @@
 
 TL;DR：解决和管理较小的问题比试图一次性完成所有任务要容易。
 
-我假设你至少有一些基本的任务定义系统。也许你使用像Jira或Trello这样的工具，或者在某个专用文档中使用待办事项列表。工具的选择其实不重要。
+我假设你至少有一些基本的任务定义系统。也许你使用像 Jira 或 Trello 这样的工具，或者在某个专用文档中使用待办事项列表。工具的选择其实不重要。
 
 现在退一步思考一下你或团队中的其他人未能按时交付的任务。我相当肯定这些任务中有些是因为太大而无法在指定时间内完成。
 
@@ -84,7 +84,7 @@ TL;DR：解决和管理较小的问题比试图一次性完成所有任务要容
 
 Scrum 是一个敏捷框架，帮助你组织交付产品的过程。Scrum 的一个组成部分是一系列旨在解决开发过程中可能出现的大多数问题的事件。
 
-很难挑选出最有价值的形式，因为它们都是相辅相成的。但如果我必须说服一个Scrum怀疑者开始使用Scrum事件，我会从回顾开始。
+很难挑选出最有价值的形式，因为它们都是相辅相成的。但如果我必须说服一个 Scrum 怀疑者开始使用 Scrum 事件，我会从回顾开始。
 
 **回顾意味着专门留出时间来停下来反思哪些事情做得好，哪些事情做得不好。**
 
@@ -104,7 +104,7 @@ Scrum 是一个敏捷框架，帮助你组织交付产品的过程。Scrum 的�
 
 给自己一些时间来检视最近发生的事件和活动绝对是个好主意。我强烈建议你和你的团队一起尝试一下。
 
-注意，Scrum 远不止是一两个花哨的会议！[Scrum指南](https://www.scrumguides.org/)无疑是获得关于Scrum的更广泛视角的最佳资源之一。希望阅读它能说服你尝试更多，甚至所有的组成部分。
+注意，Scrum 远不止是一两个花哨的会议！[Scrum 指南](https://www.scrumguides.org/)无疑是获得关于 Scrum 的更广泛视角的最佳资源之一。希望阅读它能说服你尝试更多，甚至所有的组成部分。
 
 ### 最佳敏捷工程实践的好处：单元测试和测试驱动开发
 
@@ -128,11 +128,11 @@ Scrum 是一个敏捷框架，帮助你组织交付产品的过程。Scrum 的�
 
 考虑以下问题：你得到了一个 Pandas *DataFrame*，其中包含用分号分隔的多个值的字符串条目列：
 
-![](../Images/7c82055e8c419ccb93dcdd68228ba13b.png)
+![](img/7c82055e8c419ccb93dcdd68228ba13b.png)
 
 你的任务是转换 *DataFrame*，使每一行都具有单个 b 列条目。这类似于 Pandas 的*[explode](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.explode.html)*，但输入是分号分隔的字符串。
 
-![](../Images/71d0d1172e796b1ffd763811872faf28.png)
+![](img/71d0d1172e796b1ffd763811872faf28.png)
 
 我们有了样本输入，并且知道期望的输出。这就是编写测试所需知道的所有信息！让我们创建一个 test_utils.py 文件，并将我们的需求转化为代码：
 
@@ -162,7 +162,7 @@ def test_explode_str_column():
 
 如果你用*pytest test_utils.py*运行测试文件——自然，你需要安装[pytest](https://pytest.org/)——它将失败，因为没有带有*explode_str_column*函数的*utils*模块。这没关系。当使用 TDD 时，你首先将需求定义为失败的测试，然后提供实现以使测试通过。
 
-![](../Images/4f982b024c45eedb3b8cd86e8cd69aac.png)
+![](img/4f982b024c45eedb3b8cd86e8cd69aac.png)
 
 现在，让我们在新的 *utils* 模块中创建 *explode_str_column* 函数：
 
@@ -175,15 +175,15 @@ def explode_str_column(df, column):
 
 重新运行*pytest test_utils.py*，你会看到一个漂亮的绿色日志，说明你做得很好！
 
-![](../Images/99203a4be17f5e09a2fc931aa0259d8b.png)
+![](img/99203a4be17f5e09a2fc931aa0259d8b.png)
 
 就这些！并不难或可怕，对吧？现在，作为某种家庭作业，你可以增强这个功能，以满足额外要求，比如处理不同的分隔符或避免修改输入的*DataFrame*。
 
 记住从一个检查新需求的失败测试开始，然后编写解决方案。确保之前的测试没有失败！你还可以重构代码，使解决方案更清晰和/或性能更好。如果你完成了当前需求，应该为新的需求重复这个过程。
 
-![](../Images/7038f7f43344c95f47ab62cbcb11da12.png)
+![](img/7038f7f43344c95f47ab62cbcb11da12.png)
 
-现在你知道如何通过单元测试和TDD使开发过程更敏捷了。**使用这些技术可以解决数据操作问题，并为你提供更可靠、易读和设计更好的解决方案。**
+现在你知道如何通过单元测试和 TDD 使开发过程更敏捷了。**使用这些技术可以解决数据操作问题，并为你提供更可靠、易读和设计更好的解决方案。**
 
 我确信在将这些方法融入你的日常工作后，你会看到越来越多的用例！
 
@@ -209,7 +209,7 @@ def explode_str_column(df, column):
 
 +   **“X”将如何使用？**
 
-避免编写仅仅填补空白的脚本。创建一些对最终用户实际有价值的东西。也许这是一种CLI工具、一个包含有用分析的jupyter notebook，或者一个小型库。为你的项目准备一个[完成定义](https://www.agilealliance.org/glossary/definition-of-done/)文档，将有助于明确什么可以被视为交付成果。
+避免编写仅仅填补空白的脚本。创建一些对最终用户实际有价值的东西。也许这是一种 CLI 工具、一个包含有用分析的 jupyter notebook，或者一个小型库。为你的项目准备一个[完成定义](https://www.agilealliance.org/glossary/definition-of-done/)文档，将有助于明确什么可以被视为交付成果。
 
 现在，将你的答案写在[用户故事描述](https://blog.easyagile.com/how-to-write-good-user-stories-in-agile-software-development-d4b25356b604)中。
 
@@ -229,7 +229,7 @@ def explode_str_column(df, column):
 
 如果你的原型成功了会怎样？我敢打赌，一旦你向更广泛的公众展示了有前景的结果，就会有人想要立刻使用它。*不过，如果你创造了一个弗兰肯斯坦的怪物，你就得自己处理它。* 尊重良好的实践在这种时候是值得的。
 
-总结一下：在实现原型时，专注于相对较快地交付可工作的软件。但*不要*把它当作实现巨大功能或其他糟糕工作的绿灯。也许你可以减少重构代码的频率，不必追求100%的测试覆盖率。允许自己不那么严格，但要尽量找到平衡。
+总结一下：在实现原型时，专注于相对较快地交付可工作的软件。但*不要*把它当作实现巨大功能或其他糟糕工作的绿灯。也许你可以减少重构代码的频率，不必追求 100%的测试覆盖率。允许自己不那么严格，但要尽量找到平衡。
 
 ### 最后的想法
 
@@ -241,7 +241,7 @@ def explode_str_column(df, column):
 
 总的来说，我坚信无论你的项目性质如何，你都会从将敏捷方法融入你的过程中受益。我希望这些指导方针能帮助你迈出第一步。
 
-**个人简介：** [耶日·科瓦尔斯基](https://www.linkedin.com/in/jerzy-kowalski-dev/)是一位Python爱好者，他利用自己最喜欢的编程语言解决[机器学习](https://www.stxnext.com/services/machine-learning/)和[网络开发](https://www.stxnext.com/services/web-development/)问题。耶日在可能的情况下传播函数式编程和TDD实践，并应用敏捷方法来改进软件开发过程。
+**个人简介：** [耶日·科瓦尔斯基](https://www.linkedin.com/in/jerzy-kowalski-dev/)是一位 Python 爱好者，他利用自己最喜欢的编程语言解决[机器学习](https://www.stxnext.com/services/machine-learning/)和[网络开发](https://www.stxnext.com/services/web-development/)问题。耶日在可能的情况下传播函数式编程和 TDD 实践，并应用敏捷方法来改进软件开发过程。
 
 **相关：**
 
@@ -253,14 +253,14 @@ def explode_str_column(df, column):
 
 ### 更多相关主题
 
-+   [掌握数据科学项目管理的7个步骤（使用敏捷方法）](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握数据科学项目管理的 7 个步骤（使用敏捷方法）](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
-+   [将ChatGPT整合进数据科学工作流程：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
++   [将 ChatGPT 整合进数据科学工作流程：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [数据科学团队协作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队协作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
 
-+   [数据科学的5个Python最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)
++   [数据科学的 5 个 Python 最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)
 
-+   [迁移到AWS云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
-+   [数据仓库和ETL最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
++   [数据仓库和 ETL 最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)

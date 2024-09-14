@@ -1,8 +1,8 @@
 # OpenStreetMap 数据到 ML 训练标签用于目标检测
 
-> 原文：[https://www.kdnuggets.com/2019/09/openstreetmap-data-ml-training-labels-object-detection.html](https://www.kdnuggets.com/2019/09/openstreetmap-data-ml-training-labels-object-detection.html)
+> 原文：[`www.kdnuggets.com/2019/09/openstreetmap-data-ml-training-labels-object-detection.html`](https://www.kdnuggets.com/2019/09/openstreetmap-data-ml-training-labels-object-detection.html)
 
-[comments](#comments)
+comments
 
 **作者 [Shay Strong](https://www.linkedin.com/in/shay-strong/)，EagleView 数据科学与机器学习总监**
 
@@ -10,15 +10,15 @@
 
 构建基础深度学习目标检测器的配方包括两个组成部分：（1）训练数据（栅格图像 + 矢量标签对）和（2）模型框架。深度学习模型本身将是一个单次检测器 (SSD) 目标检测器。我们将使用 OSM 多边形作为标签数据的基础，并使用 Digital Globe 影像作为栅格数据。我们不会在这里详细讲解 SSD，因为有很多现成的资源可供参考。我们将在 [AWS Sagemaker](https://aws.amazon.com/sagemaker/) 中运行目标检测器。当前文章仅关注训练数据生成。我会在后续文章中讨论模型训练。
 
-我应该指出，这个教程可以在这个 [Github repo](https://github.com/shaystrong/sagely) 中找到，所以如果你想深入了解，可以跳过这篇文章。尽管这是即将到来的 [UW Geohackweek](https://geohackweek.github.io/) 的一部分正在进行中的工作。我预计将把这个教程与 [HOT-OSM](https://www.hotosm.org/) 相关任务结合使用——这些任务可能会有作为特定项目的一部分的众包矢量数据。为了建立一个演示，我们将使用一个最近的 HOT OSM 任务区域，该区域在2019年被气旋肯尼思影响，即科摩罗的 Nzwani。
+我应该指出，这个教程可以在这个 [Github repo](https://github.com/shaystrong/sagely) 中找到，所以如果你想深入了解，可以跳过这篇文章。尽管这是即将到来的 [UW Geohackweek](https://geohackweek.github.io/) 的一部分正在进行中的工作。我预计将把这个教程与 [HOT-OSM](https://www.hotosm.org/) 相关任务结合使用——这些任务可能会有作为特定项目的一部分的众包矢量数据。为了建立一个演示，我们将使用一个最近的 HOT OSM 任务区域，该区域在 2019 年被气旋肯尼思影响，即科摩罗的 Nzwani。
 
-![figure-name](../Images/0fff813d4fc63f67a48919ba2489c09e.png)2019年4月底的气旋肯尼思路径。![figure-name](../Images/d3896569ea9e025396e63a3818695d41.png)来自 [https://wiki.openstreetmap.org/wiki/2019_Cyclone_Kenneth](https://wiki.openstreetmap.org/wiki/2019_Cyclone_Kenneth) 的 HOT-OSM 任务数据。
+![figure-name](img/0fff813d4fc63f67a48919ba2489c09e.png)2019 年 4 月底的气旋肯尼思路径。![figure-name](img/d3896569ea9e025396e63a3818695d41.png)来自 [`wiki.openstreetmap.org/wiki/2019_Cyclone_Kenneth`](https://wiki.openstreetmap.org/wiki/2019_Cyclone_Kenneth) 的 HOT-OSM 任务数据。
 
 OSM 矢量数据是免费的。我们所需的影像通常不是。欢迎来到 GIS 的世界。不过，[Digital Globe has Open Data](https://www.digitalglobe.com/ecosystem/open-data) 提供了许多这些自然灾害区域的影像。因此，我们可以获取这些数据用于这个应用（稍后再讲）。
 
 我决定使用 [OSMNX](https://automating-gis-processes.github.io/2017/lessons/L7/retrieve-osm-data.html) Python 库来与 OSM 进行接口（否则可能会有些令人望而却步）。根据 HOT-OSM 任务，科摩罗的恩茨瓦尼被标记为“紧急”地点（见上表）。所以我将从那里开始，因为似乎有大量的训练数据可用。
 
-![figure-name](../Images/4e8c6c678c3ffab9fedbfa3990865d6b.png)(左) OSM 的节点与边的‘DiGraph’。(右) 恩茨瓦尼的陆地与叠加的道路和建筑物。
+![figure-name](img/4e8c6c678c3ffab9fedbfa3990865d6b.png)(左) OSM 的节点与边的‘DiGraph’。(右) 恩茨瓦尼的陆地与叠加的道路和建筑物。
 
 如果你检查建筑物的长度（返回的一个 geopandas 数据框），你会看到大量的特征。我们将这些用作我们对象检测器的训练数据。
 
@@ -58,21 +58,21 @@ VOC1900/
 
 **相关内容：**
 
-+   [2019 年目标检测指南](/2019/08/2019-guide-object-detection.html)
++   2019 年目标检测指南
 
-+   [使用 Tensorflow 目标检测和 OpenCV 分析足球比赛](/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html)
++   使用 Tensorflow 目标检测和 OpenCV 分析足球比赛
 
-+   [在航空图像中使用 RetinaNet 进行行人检测](/2019/03/pedestrian-detection-aerial-images-retinanet.html)
++   在航空图像中使用 RetinaNet 进行行人检测
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -80,12 +80,12 @@ VOC1900/
 
 +   [处理文本数据中的噪声标签](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)
 
-+   [KDnuggets™ 新闻 22:n09，3月2日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09，3 月 2 日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
-+   [SQL与对象关系映射（ORM）的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
++   [SQL 与对象关系映射（ORM）的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
 
 +   [数据科学中异常检测技术的初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)
 
-+   [KDnuggets 新闻，8月17日：如何执行运动检测…](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何执行运动检测…](https://www.kdnuggets.com/2022/n33.html)
 
 +   [功能数据中的密度核深度用于异常值检测](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)

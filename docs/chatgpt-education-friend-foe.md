@@ -1,8 +1,8 @@
 # 教育中的 ChatGPT：朋友还是敌人？
 
-> 原文：[https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html](https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html)
+> 原文：[`www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html`](https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html)
 
-![教育中的 ChatGPT：朋友还是敌人？](../Images/96a0457cdc6a9e325ae1eed289cace2d.png)
+![教育中的 ChatGPT：朋友还是敌人？](img/96a0457cdc6a9e325ae1eed289cace2d.png)
 
 来自 Bing Image Creator 的图像
 
@@ -10,15 +10,15 @@
 
 # ChatGPT 如何成为朋友？
 
-部分原因在于大多数人[可以通过简单的实验或 YouTube 教程学习如何使用 ChatGPT](/2023/02/chatgpt-beginners.html)，除非有人寻求更深入的利用其资源的方法。这是它的第一个优点，但还有其他几个优点可能使其成为有价值的教育工具。
+部分原因在于大多数人可以通过简单的实验或 YouTube 教程学习如何使用 ChatGPT，除非有人寻求更深入的利用其资源的方法。这是它的第一个优点，但还有其他几个优点可能使其成为有价值的教育工具。
 
 ## **更具包容性**
 
-非传统学习者可能[比主流方法获得更多的帮助](/2023/04/5-ways-ai-impacting-stem-education-2023.html)，例如 ChatGPT。它可以成为一个视听助手，学生可以自由地提出尽可能多的澄清问题而不受评判。应对无数个性化教育计划的教师也可以通过询问如何为有残疾或其他学习需求的学生制定课程计划，来利用 ChatGPT。
+非传统学习者可能比主流方法获得更多的帮助，例如 ChatGPT。它可以成为一个视听助手，学生可以自由地提出尽可能多的澄清问题而不受评判。应对无数个性化教育计划的教师也可以通过询问如何为有残疾或其他学习需求的学生制定课程计划，来利用 ChatGPT。
 
 ## **学生为未来工作做准备**
 
-几乎每个行业都接受某种形式的人工智能，许多学生将来会与AI同事或资产一起工作。由于这一过渡不可避免，[学校必须接受人工智能](https://www.prnewswire.com/news-releases/5-reasons-why-you-should-embrace-artificial-intelligence-301035463.html)以充分为孩子们准备现实世界的挑战。如果学生知道如何负责任地使用聊天机器人，这将增强他们进入职场的能力。此外，进入技术依赖行业的学习者需要这些技能，以便有资格获得工作。
+几乎每个行业都接受某种形式的人工智能，许多学生将来会与 AI 同事或资产一起工作。由于这一过渡不可避免，[学校必须接受人工智能](https://www.prnewswire.com/news-releases/5-reasons-why-you-should-embrace-artificial-intelligence-301035463.html)以充分为孩子们准备现实世界的挑战。如果学生知道如何负责任地使用聊天机器人，这将增强他们进入职场的能力。此外，进入技术依赖行业的学习者需要这些技能，以便有资格获得工作。
 
 ## **学习者获得了免费的辅导员**
 
@@ -52,22 +52,22 @@ ChatGPT 在教育中对教师的影响与对学生的影响截然不同，但他
 
 # ChatGPT 站在哪一边？
 
-确定ChatGPT在教育中是朋友还是敌人，将取决于教师如何使用它以及如何设定AI礼仪的先例。无论如何，AI最终将不可避免地融入教育中。
+确定 ChatGPT 在教育中是朋友还是敌人，将取决于教师如何使用它以及如何设定 AI 礼仪的先例。无论如何，AI 最终将不可避免地融入教育中。
 
-推迟这个转变还是现在开始管理学生与AI的关系，取决于学生的优先事项和性格，这两种情况都有可能带来破坏性或有利的一面。世界将不得不观察ChatGPT在时间的推移中倾向于哪一边。
+推迟这个转变还是现在开始管理学生与 AI 的关系，取决于学生的优先事项和性格，这两种情况都有可能带来破坏性或有利的一面。世界将不得不观察 ChatGPT 在时间的推移中倾向于哪一边。
 
-**[香农·弗林](https://www.linkedin.com/in/shannon-flynn-8972a61b2/)** (**[@rehackmagazine](https://twitter.com/rehackmagazine)**) 是一位技术博主，撰写有关IT趋势、网络安全和商业科技新闻的文章。她还是MakeUseOf的工作人员，并且是[**ReHack.com**](https://rehack.com/)的执行编辑。关注KDnuggets可以阅读更多来自香农和其他数据科学更新的内容。有关更多信息，请参见香农的[个人网站](https://shannonlflynn.com/)。
+**[香农·弗林](https://www.linkedin.com/in/shannon-flynn-8972a61b2/)** (**[@rehackmagazine](https://twitter.com/rehackmagazine)**) 是一位技术博主，撰写有关 IT 趋势、网络安全和商业科技新闻的文章。她还是 MakeUseOf 的工作人员，并且是[**ReHack.com**](https://rehack.com/)的执行编辑。关注 KDnuggets 可以阅读更多来自香农和其他数据科学更新的内容。有关更多信息，请参见香农的[个人网站](https://shannonlflynn.com/)。
 
 ### 了解更多相关话题
 
-+   [为什么SQL将继续是数据科学家的最佳朋友](https://www.kdnuggets.com/2022/07/sql-remain-data-scientist-best-friend.html)
++   [为什么 SQL 将继续是数据科学家的最佳朋友](https://www.kdnuggets.com/2022/07/sql-remain-data-scientist-best-friend.html)
 
-+   [2023年AI对STEM教育的影响的5种方式](https://www.kdnuggets.com/2023/04/5-ways-ai-impacting-stem-education-2023.html)
++   [2023 年 AI 对 STEM 教育的影响的 5 种方式](https://www.kdnuggets.com/2023/04/5-ways-ai-impacting-stem-education-2023.html)
 
-+   [AI教育差距及如何弥合它](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
++   [AI 教育差距及如何弥合它](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
 
-+   [视觉ChatGPT：微软将ChatGPT与VFM结合](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
++   [视觉 ChatGPT：微软将 ChatGPT 与 VFM 结合](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
 
-+   [ChatGPT CLI：将您的命令行界面转换为ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)
++   [ChatGPT CLI：将您的命令行界面转换为 ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)
 
-+   [ChatGPT、GPT-4及更多生成式AI新闻](https://www.kdnuggets.com/2023/02/chatgpt-gpt4-generative-ai-news.html)
++   [ChatGPT、GPT-4 及更多生成式 AI 新闻](https://www.kdnuggets.com/2023/02/chatgpt-gpt4-generative-ai-news.html)

@@ -1,10 +1,10 @@
 # Python 机器学习的游击指南
 
-> 原文：[https://www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-python.html](https://www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-python.html)
+> 原文：[`www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-python.html`](https://www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-python.html)
 
 当然，有很多教程和概述可以帮助你掌握机器学习，但其中许多（大多数？）采取了长远的视角：先打好基础，然后学习基础知识，接着学习一些补充理论，然后在实际操作中逐步深入，回顾一下，尝试一些例子，进行自己的项目……这些都是很好的建议，也是学习几乎任何事物的好方法。
 
-![猩猩](../Images/1925d5d126f2c94c9d2ec2dc18f27917.png)
+![猩猩](img/1925d5d126f2c94c9d2ec2dc18f27917.png)
 
 我知道，我知道……太俗了，笑不出来。
 
@@ -40,31 +40,31 @@
 
 下一步可以更深入地研究单个算法，这里有一些额外的资源：
 
-+   [掌握 Python 机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
-+   [掌握 Python 机器学习的 7 个附加步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个附加步骤
 
-+   [理解深度学习的 7 个步骤](/2016/01/seven-steps-deep-learning.html)
++   理解深度学习的 7 个步骤
 
 希望这些足以让有动力的黑客在几天内开始练习机器学习。然而，这不是一门完整的课程；理解机器学习的基础统计构建块需要多年时间，熟练掌握实际应用则需要数百小时的实践。然而，没有人说你不能在完美掌握新技能的过程中动手实践并享受一些入门的乐趣。
 
 **相关内容**：
 
-+   [面向开发者的机器学习简介](/2016/11/intro-machine-learning-developers.html)
++   面向开发者的机器学习简介
 
-+   [机器学习关键术语解释](/2016/05/machine-learning-key-terms-explained.html)
++   机器学习关键术语解释
 
-+   [深度学习关键术语解释](/2016/10/deep-learning-key-terms-explained.html)
++   深度学习关键术语解释
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -74,10 +74,10 @@
 
 +   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

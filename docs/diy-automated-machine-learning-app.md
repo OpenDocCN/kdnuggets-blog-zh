@@ -1,32 +1,32 @@
-# 使用Streamlit的DIY自动化机器学习
+# 使用 Streamlit 的 DIY 自动化机器学习
 
-> 原文：[https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
+> 原文：[`www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html`](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
 
-![图](../Images/09edc90152540fcb82614f36d080450d.png)
+![图](img/09edc90152540fcb82614f36d080450d.png)
 
-图片由Soroush Zargar拍摄，来源于Unsplash
+图片由 Soroush Zargar 拍摄，来源于 Unsplash
 
-你可能知道自动化机器学习（AutoML）。你很有可能听说过开源AutoML工具[TPOT](https://github.com/EpistasisLab/tpot)，也就是你的*数据科学助手*。你甚至可能看过[我最近的文章](/2021/05/machine-learning-pipeline-optimization-tpot.html)，介绍了如何使用TPOT优化机器学习管道（你可能没看过，所以这是你的机会[去看看](/2021/05/machine-learning-pipeline-optimization-tpot.html)... 我等着你）。 
+你可能知道自动化机器学习（AutoML）。你很有可能听说过开源 AutoML 工具[TPOT](https://github.com/EpistasisLab/tpot)，也就是你的*数据科学助手*。你甚至可能看过我最近的文章，介绍了如何使用 TPOT 优化机器学习管道（你可能没看过，所以这是你的机会去看看... 我等着你）。 
 
-无论如何，当这些优化按钮可见且易于调整时，探索AutoML和机器学习优化的调整旋钮会更有意义。在这篇文章中，我们将实现一个TPOT示例版本，如在[我之前的文章](/2021/05/machine-learning-pipeline-optimization-tpot.html)中所述，作为一个Streamlit应用。
+无论如何，当这些优化按钮可见且易于调整时，探索 AutoML 和机器学习优化的调整旋钮会更有意义。在这篇文章中，我们将实现一个 TPOT 示例版本，如在我之前的文章中所述，作为一个 Streamlit 应用。
 
-如果你不了解[Streamlit](https://streamlit.io/)，这是一个30,000英尺的概览：
+如果你不了解[Streamlit](https://streamlit.io/)，这是一个 30,000 英尺的概览：
 
-> Streamlit将数据脚本在几分钟内转化为可分享的网页应用。
+> Streamlit 将数据脚本在几分钟内转化为可分享的网页应用。
 > 
-> 全部用Python编写。完全免费。不需要前端经验。
+> 全部用 Python 编写。完全免费。不需要前端经验。
 
 # 概述
 
-我不会进一步详细说明Streamlit的使用，除了本文中的内容，你可以在[这里](/2021/09/create-stunning-web-apps-data-science-projects.html)找到一个很好的介绍，以及Streamlit速查表，基本涵盖了在了解其工作原理后所需知道的所有内容，[在此](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)。
+我不会进一步详细说明 Streamlit 的使用，除了本文中的内容，你可以在这里找到一个很好的介绍，以及 Streamlit 速查表，基本涵盖了在了解其工作原理后所需知道的所有内容，[在此](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)。
 
-除了快速了解如何实现Streamlit项目外，你还将获得一个沙盒网页应用，允许使用TPOT进行管道优化实验，并使用一对知名数据集。通过一些修改，你还应该能够使用其他数据集运行沙盒，并扩展功能以包括更多的调整旋钮。
+除了快速了解如何实现 Streamlit 项目外，你还将获得一个沙盒网页应用，允许使用 TPOT 进行管道优化实验，并使用一对知名数据集。通过一些修改，你还应该能够使用其他数据集运行沙盒，并扩展功能以包括更多的调整旋钮。
 
-![使用Streamlit的DIY自动化机器学习](../Images/91bea11f3b494355221c0b5481a75a0f.png)
+![使用 Streamlit 的 DIY 自动化机器学习](img/91bea11f3b494355221c0b5481a75a0f.png)
 
-我们用Streamlit和TPOT构建的“AutoML Pipeline Optimization Sandbox”网页应用
+我们用 Streamlit 和 TPOT 构建的“AutoML Pipeline Optimization Sandbox”网页应用
 
-我不会重述原始博客文章（再次，随时[阅读它](/2021/05/machine-learning-pipeline-optimization-tpot.html)），但简而言之，我们正在创建一个脚本，以自动化分类任务的预处理和建模优化——包括有限数量的预处理转换以及算法选择——在鸢尾花和数字数据集上。确实，数据集很枯燥，但使用知名数据来设置应用程序并不是一个坏主意，就像我上面说的，通过几行代码的修改，你可以尝试其他任何数据集。
+我不会重述原始博客文章（再次，随时阅读它），但简而言之，我们正在创建一个脚本，以自动化分类任务的预处理和建模优化——包括有限数量的预处理转换以及算法选择——在鸢尾花和数字数据集上。确实，数据集很枯燥，但使用知名数据来设置应用程序并不是一个坏主意，就像我上面说的，通过几行代码的修改，你可以尝试其他任何数据集。
 
 关于这个优化过程的几点注意事项，超出了上述内容，还包括：
 
@@ -156,7 +156,7 @@ with st.spinner(text='Pipeline optimization in progress'):
 
 一旦运行，上述优化循环将输出类似于以下内容的结果：
 
-![Image](../Images/6b12e943406dbebe341bf6d696422e7e.png)
+![Image](img/6b12e943406dbebe341bf6d696422e7e.png)
 
 最后，我们需要评估我们的结果：
 
@@ -180,7 +180,7 @@ st.write(f'```{output_folder}/tpot_{dataset}_pipeline_{i}.py```py')
 st.success("Pipeline optimization complete!")
 ```
 
-![Image](../Images/c850b744efd826a8f55cdcceba7a11c5.png)
+![Image](img/c850b744efd826a8f55cdcceba7a11c5.png)
 
 ...并输出最佳管道的代码（也保存到文件中）：
 
@@ -191,36 +191,36 @@ with open (f'{output_folder}/tpot_{dataset}_pipeline_{i}.py', 'r') as best_file:
 st.write(f'```{code}```py')
 ```
 
-![Image](../Images/6e96f0deabe41eb7559d40df9ac25e56.png)
+![Image](img/6e96f0deabe41eb7559d40df9ac25e56.png)
 
-这是Streamlit应用程序的完整代码（注意，只需这个简短的Python脚本即可完成所有任务）：
+这是 Streamlit 应用程序的完整代码（注意，只需这个简短的 Python 脚本即可完成所有任务）：
 
-这就是如何利用Streamlit和TPOT快速构建一个AutoML管道优化沙箱，只需使用Python代码。请注意，我们成功完成这一过程并不需要任何网页编程技能。
+这就是如何利用 Streamlit 和 TPOT 快速构建一个 AutoML 管道优化沙箱，只需使用 Python 代码。请注意，我们成功完成这一过程并不需要任何网页编程技能。
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家和KDnuggets的主编，KDnuggets是开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1 at kdnuggets[dot]com联系。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家和 KDnuggets 的主编，KDnuggets 是开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 联系。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [Streamlit机器学习备忘单](https://www.kdnuggets.com/2023/01/streamlit-machine-learning-cheat-sheet.html)
++   [Streamlit 机器学习备忘单](https://www.kdnuggets.com/2023/01/streamlit-machine-learning-cheat-sheet.html)
 
-+   [LangChain + Streamlit + Llama：将对话式AI带到你的本地机器](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
++   [LangChain + Streamlit + Llama：将对话式 AI 带到你的本地机器](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
 
-+   [用HuggingFace Pipelines和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   [用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 
-+   [将Streamlit WebApp部署到Heroku，使用DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
++   [将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
 
-+   [Streamlit的12个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
++   [Streamlit 的 12 个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
 
-+   [使用Python的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
++   [使用 Python 的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)

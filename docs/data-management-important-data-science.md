@@ -1,6 +1,6 @@
 # 为什么数据管理对数据科学如此重要？
 
-> 原文：[https://www.kdnuggets.com/2022/08/data-management-important-data-science.html](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/08/data-management-important-data-science.html`](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)
 
 # 介绍
 
@@ -8,11 +8,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -20,7 +20,7 @@
 
 然而，数据的可用性单独并不能解决组织在数字化转型过程中面临的众多问题之一。他们需要数据管理系统，这些系统是 IT 和业务团队的结合体。
 
-![为什么数据管理对数据科学如此重要？](../Images/f54a561839c8d4ed807feb3b3059561f.png)
+![为什么数据管理对数据科学如此重要？](img/f54a561839c8d4ed807feb3b3059561f.png)
 
 [来源](https://www.freepik.com/free-vector/illustration-data-analysis-graph_2807754.htm#query=data&position=31&from_view=search)：性能图标矢量图由 rawpixel.com 创建
 
@@ -80,18 +80,18 @@
 
 这篇文章专注于数据相关的所有内容。文章首先介绍了数据管理团队的一般角色和职责。在后半部分，文章重点讨论了数据管理在数据科学团队中的重要性，以及跨团队对齐如何在组织中建立有效的数据流程。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究交汇处工作，致力于提供业务价值和洞察。她倡导以数据为中心的科学，是数据治理的领先专家，致力于构建可信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究交汇处工作，致力于提供业务价值和洞察。她倡导以数据为中心的科学，是数据治理的领先专家，致力于构建可信赖的 AI 解决方案。
 
 ### 更多相关话题
 
-+   [什么是向量数据库，它们为何对LLM（大语言模型）如此重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
++   [什么是向量数据库，它们为何对 LLM（大语言模型）如此重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
 
 +   [什么是超对齐（Superalignment）及其重要性？](https://www.kdnuggets.com/2023/07/superalignment-important.html)
 
-+   [关于数据管理你需要知道的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理你需要知道的 6 件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
 +   [领域知识对机器学习重要吗？](https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html)
 
-+   [KDnuggets新闻，8月3日：10个最常用的Tableau函数 • 是否…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是否…](https://www.kdnuggets.com/2022/n31.html)
 
 +   [你的特征重要吗？这并不意味着它们一定是好的](https://www.kdnuggets.com/your-features-are-important-it-doesnt-mean-they-are-good)

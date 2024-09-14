@@ -1,10 +1,10 @@
 # 如何将物理学教给机器学习模型？
 
-> 原文：[https://www.kdnuggets.com/2019/05/physics-machine-learning-models.html](https://www.kdnuggets.com/2019/05/physics-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2019/05/physics-machine-learning-models.html`](https://www.kdnuggets.com/2019/05/physics-machine-learning-models.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-**由[Vegard Flovik](https://www.linkedin.com/in/vegard-flovik/)，Axbit AS首席数据科学家**
+**由[Vegard Flovik](https://www.linkedin.com/in/vegard-flovik/)，Axbit AS 首席数据科学家**
 
 在我的其他文章中，我讨论了诸如：[异常检测和状态监测的机器学习](https://www.linkedin.com/pulse/how-use-machine-learning-anomaly-detection-condition-flovik-phd/)、[机器学习如何用于生产优化](https://towardsdatascience.com/machine-learning-for-production-optimization-e460a0b82237)以及[如何避免机器学习在时间序列预测中的常见陷阱](https://towardsdatascience.com/how-not-to-use-machine-learning-for-time-series-forecasting-avoiding-the-pitfalls-19f9d7adf424)等主题。
 
@@ -14,13 +14,13 @@
 
 作为一名物理学家，我喜欢创建数学模型来描述我们周围的世界。通过足够的信息，一个制作良好的基于物理的模型使我们能够理解复杂的过程并预测未来的事件。这些模型已经在我们现代社会中广泛应用于各种不同的过程，比如预测大型火箭的轨道或纳米级物体的行为，这些物体是现代电子学的核心。
 
-预测能力也是机器学习（ML）的重要应用之一。一个常见的关键问题是如何在基于物理的模型和数据驱动的ML模型之间做出选择。答案取决于你想解决的问题。在这种情况下，主要有两类问题：
+预测能力也是机器学习（ML）的重要应用之一。一个常见的关键问题是如何在基于物理的模型和数据驱动的 ML 模型之间做出选择。答案取决于你想解决的问题。在这种情况下，主要有两类问题：
 
 *1) 我们对系统没有直接的理论知识，但我们有大量关于其行为的实验数据。*
 
 比如说，如果你对一个系统的行为没有直接的了解，你就无法制定任何数学模型来描述它并做出准确的预测。
 
-幸运的是，一切并非丧失。如果你有大量的例子结果，你可以使用基于ML的模型。只要有足够的例子结果（训练数据），一个ML模型应该能够学习你所拥有的关于系统的信息（输入变量）与你希望预测的结果（输出变量）之间的任何潜在模式。
+幸运的是，一切并非丧失。如果你有大量的例子结果，你可以使用基于 ML 的模型。只要有足够的例子结果（训练数据），一个 ML 模型应该能够学习你所拥有的关于系统的信息（输入变量）与你希望预测的结果（输出变量）之间的任何潜在模式。
 
 一个例子可能是预测一个城市的房价。如果你有足够多的类似房子的售价样本，你应该能够对一套待售房子的价格做出合理的预测。
 
@@ -38,7 +38,7 @@
 
 然而，当一名足球运动员踢球时，这并不是因为他在短短一秒钟内进行了复杂的物理计算。相反，他从经验中学到了正确的动作，并对完美的射门有了直觉。
 
-![足球的物理学](../Images/1b9f2db955f23626d7afe4c07ccb72b6.png)
+![足球的物理学](img/1b9f2db955f23626d7afe4c07ccb72b6.png)
 
 (*[插图来源：Deviant Art](https://chaoskomori.deviantart.com/art/The-Physics-of-Football-1870988))*
 
@@ -58,9 +58,9 @@
 
 例如，我们考虑了这种方法用于油井中的虚拟流量计量任务，如下图所示。多个传感器可以提供井下的温度和压力测量值 *P_dh, T_dh*，以及井口上游的 *P_uc, T_uc* 和下游的 *P_dc, T_dc*。我们要解决的问题是油、气和水的流量如何依赖于这些测量值：即描述多相流速的函数。
 
-![描述多相流速的函数](../Images/6b5ef39e447ebea8f25165c8b1f16e49.png)
+![描述多相流速的函数](img/6b5ef39e447ebea8f25165c8b1f16e49.png)
 
-![使用机器学习进行虚拟流量计量](../Images/8a3f085efc51cdf3ece739e73301dbf6.png)
+![使用机器学习进行虚拟流量计量](img/8a3f085efc51cdf3ece739e73301dbf6.png)
 
 这是一个复杂的建模任务，但使用最先进的模拟工具，我们可以以高精度完成这项任务。
 
@@ -92,11 +92,11 @@
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 

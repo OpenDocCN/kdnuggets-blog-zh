@@ -1,8 +1,8 @@
-# 2016年版《人工智能与机器学习十大亚马逊书籍》
+# 2016 年版《人工智能与机器学习十大亚马逊书籍》
 
-> 原文：[https://www.kdnuggets.com/2016/11/top-10-amazon-books-ai-machine-learning.html](https://www.kdnuggets.com/2016/11/top-10-amazon-books-ai-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2016/11/top-10-amazon-books-ai-machine-learning.html`](https://www.kdnuggets.com/2016/11/top-10-amazon-books-ai-machine-learning.html)
 
-最近对数据科学、数据挖掘及相关学科的兴趣激增，也带来了大量关于这些话题的书籍。决定哪些书籍可能对你的职业有用的最佳方法之一就是查看其他人正在阅读哪些书籍。本文详细介绍了截至2016年11月24日亚马逊[人工智能与机器学习书籍](https://www.amazon.com/Best-Sellers-Books-AI-Machine-Learning/zgbs/books/3887/)类别中最受欢迎的10本书，跳过了重复的书名以及明显分类错误且对我们的读者无用的书名。
+最近对数据科学、数据挖掘及相关学科的兴趣激增，也带来了大量关于这些话题的书籍。决定哪些书籍可能对你的职业有用的最佳方法之一就是查看其他人正在阅读哪些书籍。本文详细介绍了截至 2016 年 11 月 24 日亚马逊[人工智能与机器学习书籍](https://www.amazon.com/Best-Sellers-Books-AI-Machine-Learning/zgbs/books/3887/)类别中最受欢迎的 10 本书，跳过了重复的书名以及明显分类错误且对我们的读者无用的书名。
 
 *注意：KDnuggets 从亚马逊没有获得任何版税——此列表仅用于帮助我们的读者评估有趣的书籍。*
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-![2016年顶级亚马逊AI与ML书籍](../Images/48e85a2abbd4b193a421bdbd9b272deb.png)
+![2016 年顶级亚马逊 AI 与 ML 书籍](img/48e85a2abbd4b193a421bdbd9b272deb.png)
 
 **1\. [深度学习（自适应计算与机器学习系列）](https://www.amazon.com/Deep-Learning-Adaptive-Computation-Machine/dp/0262035618/ref=zg_bs_3887_1?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G)**
 
@@ -32,23 +32,23 @@
 
 > “由三位领域专家撰写，《深度学习》是唯一一本全面讲述该主题的书籍。”
 > 
-> - **埃隆·马斯克**，OpenAI 联席主席；特斯拉和SpaceX的联合创始人兼首席执行官
+> - **埃隆·马斯克**，OpenAI 联席主席；特斯拉和 SpaceX 的联合创始人兼首席执行官
 
-**2\. [亚马逊Echo：学习亚马逊Echo的终极指南](https://www.amazon.com/Amazon-Echo-Ultimate-services-internet/dp/1536822043/ref=zg_bs_3887_2?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G)**
+**2\. [亚马逊 Echo：学习亚马逊 Echo 的终极指南](https://www.amazon.com/Amazon-Echo-Ultimate-services-internet/dp/1536822043/ref=zg_bs_3887_2?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G)**
 
 **安德鲁·巴特勒**
 
 4.2 星（[74 条评论](https://www.amazon.com/Amazon-Echo-Ultimate-services-internet/dp/1536822043/ref=zg_bs_3887_2?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
 
-平装本，$9.95（Kindle版，$2.88）
+平装本，$9.95（Kindle 版，$2.88）
 
-> 了解如何构建自定义和智能家居技能，让你的Echo更具个人化！Alexa技能包流畅、安全、快速且可靠，帮助你让Echo不断学习。该指南还适合中级技术用户，提供快速、有效的方式了解Echo设备及其功能和可定制性。
+> 了解如何构建自定义和智能家居技能，让你的 Echo 更具个人化！Alexa 技能包流畅、安全、快速且可靠，帮助你让 Echo 不断学习。该指南还适合中级技术用户，提供快速、有效的方式了解 Echo 设备及其功能和可定制性。
 
 **3\. [哥德尔、艾舍尔、巴赫：一条永恒的金色链条](https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567/ref=zg_bs_3887_5?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G)**
 
 **道格拉斯·R·霍夫施塔特**
 
-4.5颗星（[472条评论](https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567/ref=zg_bs_3887_5?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
+4.5 颗星（[472 条评论](https://www.amazon.com/G%C3%B6del-Escher-Bach-Eternal-Golden/dp/0465026567/ref=zg_bs_3887_5?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
 
 平装书，$13.98
 
@@ -58,23 +58,23 @@
 
 **塔里克·拉希德**
 
-4.2颗星（[65条评论](https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G/ref=zg_bs_3887_6?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
+4.2 颗星（[65 条评论](https://www.amazon.com/Make-Your-Own-Neural-Network-ebook/dp/B01EER4Z4G/ref=zg_bs_3887_6?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
 
-Kindle版，$3.86
+Kindle 版，$3.86
 
 > 神经网络是深度学习和人工智能的关键元素，它今天能够完成一些真正令人印象深刻的任务。然而，真正理解神经网络如何工作的却少之又少。
 > 
 > 本指南将带你进行有趣而从容的学习旅程，从非常简单的想法开始，逐步建立对神经网络工作原理的理解。你不需要任何中学以外的数学知识，还包含了对微积分的易懂介绍。
 
-**5\. [Python机器学习](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130/ref=zg_bs_3887_7?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G)**
+**5\. [Python 机器学习](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130/ref=zg_bs_3887_7?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G)**
 
 **塞巴斯蒂安·拉施卡**
 
-4.3颗星（[80条评论](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130/ref=zg_bs_3887_7?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
+4.3 颗星（[80 条评论](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130/ref=zg_bs_3887_7?_encoding=UTF8&psc=1&refRID=9HK33PPS16VDZN3B1N8G#customerReviews)）
 
 平装书，$40.49
 
-> +   利用Python最强大的开源库进行深度学习、数据处理和数据可视化
+> +   利用 Python 最强大的开源库进行深度学习、数据处理和数据可视化
 > +   
 > +   学习有效的策略和最佳实践，以改进和优化机器学习系统和算法
 > +   
@@ -136,11 +136,11 @@ Kindle 版，$4.91
 
 **相关**：
 
-+   [进入机器学习职业前必读的 5 本电子书](/2016/10/5-free-ebooks-machine-learning-career.html)
++   进入机器学习职业前必读的 5 本电子书
 
-+   [2016 年数据挖掘领域亚马逊畅销书前 10 名](/2016/11/top-10-amazon-books-data-mining.html)
++   2016 年数据挖掘领域亚马逊畅销书前 10 名
 
-+   [亚马逊人工智能与机器学习领域前 20 本书](/2015/11/amazon-top-20-books-ai-machine-learning.html)
++   亚马逊人工智能与机器学习领域前 20 本书
 
 ### 更多相关内容
 

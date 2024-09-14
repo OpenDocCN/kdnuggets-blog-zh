@@ -1,8 +1,8 @@
 # 在本地使用 FLUX.1
 
-> 原文：[https://www.kdnuggets.com/using-flux-1-locally](https://www.kdnuggets.com/using-flux-1-locally)
+> 原文：[`www.kdnuggets.com/using-flux-1-locally`](https://www.kdnuggets.com/using-flux-1-locally)
 
-![在本地使用 FLUX.1](../Images/c23d537d4c0131d7fad4b1a7d8bbe5df.png)
+![在本地使用 FLUX.1](img/c23d537d4c0131d7fad4b1a7d8bbe5df.png)
 
 图片来源：作者 | Canva Pro
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png)1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png)2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png)2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png)3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,19 +30,19 @@ FLUX.1 有三种变体：FLUX.1 [pro]、FLUX.1 [dev] 和 FLUX.1 [schnell]。它�
 
 开发者可以通过 GitHub 仓库 ([lllyasviel/stable-diffusion-webui-forge](https://github.com/lllyasviel/stable-diffusion-webui-forge)) 轻松安装 Stable Diffusion WebUI Forge。
 
-![在本地使用 FLUX.1](../Images/d88304e1444b4fa5e12e5dfe0c5f39c2.png)
+![在本地使用 FLUX.1](img/d88304e1444b4fa5e12e5dfe0c5f39c2.png)
 
 对于非技术用户而言，使用技术指南安装 Stable Diffusion WebUI Forge 可能会很棘手。这就是为什么 [Stability Matrix](https://lykos.ai/downloads) 提供了一个用户友好的替代方案，允许任何人轻松在笔记本电脑上体验最先进的模型，而无需复杂的安装过程。
 
 **1.** 访问 [Lykos AI](https://lykos.ai/downloads) 网站，下载稳定版桌面应用程序。
 
-![在本地使用 FLUX.1](../Images/7536bffe8c2873937953a61ed57c7716.png)
+![在本地使用 FLUX.1](img/7536bffe8c2873937953a61ed57c7716.png)
 
 **2.** 解压下载的文件，并双击 `StabilityMatrix.exe` 文件以启动安装程序。
 
 **3.** 安装完成后，我们将被重定向到 Stability Matrix 应用程序，在那里我们将被要求选择我们喜欢的界面。请选择“Stable Diffusion WebUI Forge”。
 
-![在本地使用 FLUX.1](../Images/cf95a6238b83fa15373430305944c7d5.png)
+![在本地使用 FLUX.1](img/cf95a6238b83fa15373430305944c7d5.png)
 
 **4.** 它会要求你下载基础模式；请跳过安装推荐模型。完成所有操作需要 15 分钟。
 
@@ -50,25 +50,25 @@ FLUX.1 有三种变体：FLUX.1 [pro]、FLUX.1 [dev] 和 FLUX.1 [schnell]。它�
 
 **5.** 在安装完成 Stable Diffusion WebUI Forge 后，前往 [flux1-dev-bnb-nf4-v2.safetensors](https://huggingface.co/lllyasviel/flux1-dev-bnb-nf4/blob/main/flux1-dev-bnb-nf4-v2.safetensors) Hugging Face 模型库，下载 FLUX.1-dev 模型的量化版本。为什么选择量化版本？因为它可以在 VRAM 较小的 GPU 上运行？即便如此，你仍需要一个 8GB VRAM 的 GPU。
 
-![在本地使用 FLUX.1](../Images/74c28f013437e466df98aa407ae81a2e.png)
+![在本地使用 FLUX.1](img/74c28f013437e466df98aa407ae81a2e.png)
 
 **6.** 导航到 StabilityMatrix 文件夹，并按照以下路径：C:\Users\<USER_NAME>\StabilityMatrix\Packages\stable-diffusion-webui-forge\models\Stable-diffusion
 
 **7.** 创建一个名为“flux”的新文件夹，并将下载的 FLUX.1 [dev] 模型文件移动到其中，如下所示。
 
-![在本地使用 FLUX.1](../Images/dac0c31699a2ea5a35a0a5ee031add65.png)
+![在本地使用 FLUX.1](img/dac0c31699a2ea5a35a0a5ee031add65.png)
 
 **8.** 前往 Stability Matrix 应用程序，导航到 Packages 菜单以启动 Stable Diffusion WebUI Forge。
 
-![在本地使用 FLUX.1](../Images/3117e482e310e3ec85f94ac78a6eacd8.png)
+![在本地使用 FLUX.1](img/3117e482e310e3ec85f94ac78a6eacd8.png)
 
 **9.** 几秒钟后，你将被引导到新的窗口，显示 Gradio 网络应用程序，或者你也可以直接点击本地 URL。
 
-![在本地使用 FLUX.1](../Images/4c9c9499469dba403e6135e8a26a2e45.png)
+![在本地使用 FLUX.1](img/4c9c9499469dba403e6135e8a26a2e45.png)
 
 **10.** 在网络应用程序中，选择 Flux UI 并将检查点更改为模型文件。
 
-![在本地使用 FLUX.1](../Images/2014f1b346d8427fdc83ce7d28f3683e.png)
+![在本地使用 FLUX.1](img/2014f1b346d8427fdc83ce7d28f3683e.png)
 
 就这样。你只需要输入详细的提示并按下生成按钮。
 
@@ -80,15 +80,15 @@ FLUX.1 有三种变体：FLUX.1 [pro]、FLUX.1 [dev] 和 FLUX.1 [schnell]。它�
 
 由于这是一个需要大量 VRAM 的大型模型，生成过程可能需要几分钟。如果你的系统变得缓慢或短暂冻结，我强烈建议减少 GPU 权重。
 
-![在本地使用 FLUX.1](../Images/c23d537d4c0131d7fad4b1a7d8bbe5df.png)
+![在本地使用 FLUX.1](img/c23d537d4c0131d7fad4b1a7d8bbe5df.png)
 
 我们甚至可以在 StableMatrix 应用程序中查看详细日志。
 
-![在本地使用 FLUX.1](../Images/5569fdff8809be4a227e15236b184b41.png)
+![在本地使用 FLUX.1](img/5569fdff8809be4a227e15236b184b41.png)
 
 最终，我们得到了符合提示的高质量图像。即便是文字也没有任何故障。
 
-![在本地使用 FLUX.1](../Images/8436a5fd6bf514e5d603d122e385f72c.png)
+![在本地使用 FLUX.1](img/8436a5fd6bf514e5d603d122e385f72c.png)
 
 **12.** 让我们尝试另一种不同设置的提示。
 
@@ -96,7 +96,7 @@ FLUX.1 有三种变体：FLUX.1 [pro]、FLUX.1 [dev] 和 FLUX.1 [schnell]。它�
 
 再次运行的结果超现实，与 Stable Diffusion XL 模型相比，没有视觉故障，照明效果更好。
 
-![在本地使用 FLUX.1](../Images/78a74f2bbf6f82600b016ee89aea8efc.png)
+![在本地使用 FLUX.1](img/78a74f2bbf6f82600b016ee89aea8efc.png)
 
 ## 结论
 

@@ -1,6 +1,6 @@
 # LangChain 备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/08/langchain-cheat-sheet.html](https://www.kdnuggets.com/2023/08/langchain-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/08/langchain-cheat-sheet.html`](https://www.kdnuggets.com/2023/08/langchain-cheat-sheet.html)
 
 # 不要成为弱链
 
@@ -8,11 +8,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@ LangChain 提供了一个直观的接口，用于连接最先进的模型，如 
 
 [](https://www.kdnuggets.com/wp-content/uploads/LangChain_Cheat_Sheet_KDnuggets.pdf)
 
-[![LangChain 备忘单](../Images/b6924836910862bc30f6583294f9f644.png)](https://www.kdnuggets.com/wp-content/uploads/LangChain_Cheat_Sheet_KDnuggets.pdf)
+![LangChain 备忘单](https://www.kdnuggets.com/wp-content/uploads/LangChain_Cheat_Sheet_KDnuggets.pdf)
 
 > LangChain 通过可重用组件和预构建的链条简化了与语言模型的应用构建。它使模型具备数据感知和智能代理功能，从而实现更动态的互动。其模块化架构支持快速开发和定制。
 

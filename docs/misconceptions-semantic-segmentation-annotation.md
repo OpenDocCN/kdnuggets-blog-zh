@@ -1,8 +1,8 @@
 # 关于语义分割注释的误解
 
-> 原文：[https://www.kdnuggets.com/2022/01/misconceptions-semantic-segmentation-annotation.html](https://www.kdnuggets.com/2022/01/misconceptions-semantic-segmentation-annotation.html)
+> 原文：[`www.kdnuggets.com/2022/01/misconceptions-semantic-segmentation-annotation.html`](https://www.kdnuggets.com/2022/01/misconceptions-semantic-segmentation-annotation.html)
 
-![关于语义分割注释的误解](../Images/191ab1b054b52ae28662451ffdbdb3cf.png)
+![关于语义分割注释的误解](img/191ab1b054b52ae28662451ffdbdb3cf.png)
 
 **语义分割**是一个计算机视觉问题，涉及将图像中相关的元素归入同一类别。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -30,9 +30,9 @@
 
 ## ****维度****
 
-数据源中的维度数量称为此。普通相机照片是2D对象的一个例子，因为它只有两个维度：高度和宽度。3D数据是2D数据的一种变体，增加了一个“深度”组件。Lidar和雷达扫描是两种传感器数据。当多个连续的3D对象沿时间轴层叠时，会创建一个4D表示，通常称为电影。
+数据源中的维度数量称为此。普通相机照片是 2D 对象的一个例子，因为它只有两个维度：高度和宽度。3D 数据是 2D 数据的一种变体，增加了一个“深度”组件。Lidar 和雷达扫描是两种传感器数据。当多个连续的 3D 对象沿时间轴层叠时，会创建一个 4D 表示，通常称为电影。
 
-我们根据数据的维度使用不同形式的语义分割来创建分割掩码。在2D分割的情况下，使用两种方法之一：基于像素或基于多边形的着色。由于像素是此模型中最小的基本组成部分，每个像素都被分配到一个注释类别中。这导致在3D中进行基于点的分割，每个3D点都会被标记。如果提供了足够的点，可以从单个物体中提取分割网格。
+我们根据数据的维度使用不同形式的语义分割来创建分割掩码。在 2D 分割的情况下，使用两种方法之一：基于像素或基于多边形的着色。由于像素是此模型中最小的基本组成部分，每个像素都被分配到一个注释类别中。这导致在 3D 中进行基于点的分割，每个 3D 点都会被标记。如果提供了足够的点，可以从单个物体中提取分割网格。
 
 ## **粒度**
 
@@ -60,7 +60,7 @@
 
 **1\. 手动标注既困难又耗时**
 
-手动制作语义掩模是一项耗时且困难的任务。当面对不规则形状或物体边界不易察觉的区域时，标注者必须准确跟随每个物体的轮廓（见下图）。没有专业工具的情况下标注单帧容易出错、不一致，且可能需要超过30分钟。
+手动制作语义掩模是一项耗时且困难的任务。当面对不规则形状或物体边界不易察觉的区域时，标注者必须准确跟随每个物体的轮廓（见下图）。没有专业工具的情况下标注单帧容易出错、不一致，且可能需要超过 30 分钟。
 
 **2\. 完全自动化的方法无法提供高质量的结果**
 
@@ -88,6 +88,6 @@
 
 +   [语义层的力量：数据工程师指南](https://www.kdnuggets.com/2023/10/cube-power-of-a-semantic-layer-a-data-engineers-guide)
 
-+   [语义层：AI驱动数据体验的支柱](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)
++   [语义层：AI 驱动数据体验的支柱](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)
 
 +   [语义向量搜索如何改变客户支持互动](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)

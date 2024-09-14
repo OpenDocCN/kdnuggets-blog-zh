@@ -1,20 +1,20 @@
 # 机器学习中的偏差类型
 
-> 原文：[https://www.kdnuggets.com/2019/08/types-bias-machine-learning.html](https://www.kdnuggets.com/2019/08/types-bias-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/08/types-bias-machine-learning.html`](https://www.kdnuggets.com/2019/08/types-bias-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![figure-name](../Images/932d35c45727fe84810f1f53cdde168b.png)https://www.infoq.com/presentations/unconscious-bias-machine-learning/
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![figure-name](img/932d35c45727fe84810f1f53cdde168b.png)https://www.infoq.com/presentations/unconscious-bias-machine-learning/
 
-在我之前的[文章](/2019/07/bias-machine-learning-bad.html)中，我讨论了在机器学习中可能遇到的偏差，并且这些偏差实际上可以帮助构建更好的模型。这里是后续文章，展示一些应避免的偏差。
+在我之前的文章中，我讨论了在机器学习中可能遇到的偏差，并且这些偏差实际上可以帮助构建更好的模型。这里是后续文章，展示一些应避免的偏差。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 ### 3\. 确认偏差
 
-> 确认偏差，是指通过寻找或解释与自己现有信念一致的信息来处理信息的倾向。 *来源 [https://www.britannica.com/science/confirmation-bias](https://www.britannica.com/science/confirmation-bias)*
+> 确认偏差，是指通过寻找或解释与自己现有信念一致的信息来处理信息的倾向。 *来源 [`www.britannica.com/science/confirmation-bias`](https://www.britannica.com/science/confirmation-bias)*
 
 这是一个广为人知的偏见，已在心理学领域进行了研究，并直接适用于其如何影响机器学习过程。如果预期使用者有一个预先存在的假设，并希望通过机器学习来验证这个假设*（根据上下文可能有简单的方法可以做到这一点）*，那么参与建模过程的人可能会倾向于故意操控过程以找到那个答案。我个人认为这比我们想象的更常见，因为从启发式的角度看，我们行业中的许多人可能会在开始过程之前就受到压力，要求得到某个特定的答案，而不是单纯地查看数据实际说了什么。
 
@@ -42,11 +42,11 @@
 
 **相关**:
 
-+   [Data Literacy: Using the Socratic Method](/2019/06/data-literacy-socratic-method.html)
++   Data Literacy: Using the Socratic Method
 
-+   [All Models Are Wrong – What Does It Mean?](/2019/06/all-models-are-wrong.html)
++   All Models Are Wrong – What Does It Mean?
 
-+   [What 70% of Data Science Learners Do Wrong](/2019/08/what-data-science-learners-do-wrong.html)
++   What 70% of Data Science Learners Do Wrong
 
 ### 更多相关内容
 

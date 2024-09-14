@@ -1,22 +1,22 @@
 # 每个数据科学家需要的软技能
 
-> 原文：[https://www.kdnuggets.com/soft-skills-every-data-scientist-needs](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
+> 原文：[`www.kdnuggets.com/soft-skills-every-data-scientist-needs`](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
 
-![每个数据科学家需要的软技能](../Images/64ba03caa4a71d455e970ac804eeecac.png)
+![每个数据科学家需要的软技能](img/64ba03caa4a71d455e970ac804eeecac.png)
 
 作者图片
 
-我认识一个非常了不起的编码员。他为了职业转型学习了Python，然后迅速掌握了JavaScript、Go、SQL以及其他几种语言，仅仅是为了好玩。而且他确实很优秀，不仅仅是那些在简历上列出语言却没有任何[数据科学技能](https://www.stratascratch.com/blog/what-skills-do-you-need-as-a-data-scientist/)的那种人。
+我认识一个非常了不起的编码员。他为了职业转型学习了 Python，然后迅速掌握了 JavaScript、Go、SQL 以及其他几种语言，仅仅是为了好玩。而且他确实很优秀，不仅仅是那些在简历上列出语言却没有任何[数据科学技能](https://www.stratascratch.com/blog/what-skills-do-you-need-as-a-data-scientist/)的那种人。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 这是我为每个数据科学家推荐的四项关键软技能，无论你是想进入这个领域、在职业上进步，还是只是为了做得更好。
 
-![每个数据科学家需要的软技能](../Images/c466a4b8515d8096c34d038734adcf55.png)
+![每个数据科学家需要的软技能](img/c466a4b8515d8096c34d038734adcf55.png)
 
 作者图片
 
@@ -42,25 +42,25 @@
 
 # 2\. 适应能力
 
-StackOverflow 2023开发者调查实际上是适应能力的一个很好的例子。作者首次引入了 [AI部分](https://survey.stackoverflow.co/2023/#ai)，显示了对不断变化的开发环境的显著适应能力。
+StackOverflow 2023 开发者调查实际上是适应能力的一个很好的例子。作者首次引入了 [AI 部分](https://survey.stackoverflow.co/2023/#ai)，显示了对不断变化的开发环境的显著适应能力。
 
-AI只是一个例子。数据科学很好地展示了那个老生常谈的说法：唯一不变的就是变化。要成为成功的数据科学家，你需要准备好迎接挑战。
+AI 只是一个例子。数据科学很好地展示了那个老生常谈的说法：唯一不变的就是变化。要成为成功的数据科学家，你需要准备好迎接挑战。
 
-这可以意味着许多不同的事情。最明显的应用是能够轻松学习新技术。云技术是新的。AI是新的。FastAPI是新的。你需要跟上所有这些。
+这可以意味着许多不同的事情。最明显的应用是能够轻松学习新技术。云技术是新的。AI 是新的。FastAPI 是新的。你需要跟上所有这些。
 
 另一个应用是跟上就业趋势。最近的趋势不仅仅是传统意义上的数据科学家；许多雇主期望你身兼多职。你还必须成为数据工程师、机器学习工程师，有时甚至是领域专家。这些角色之间的界限越来越模糊，现代数据科学家常常发现自己在处理曾经分开角色的任务。
 
 你也可以将其理解为理解和整合反馈。作为数据科学家，我们经常基于某些假设或数据集构建模型或解决方案。但它们并不总是按预期工作。适应能力意味着在接受这些反馈的同时，迭代你的模型，并根据实际结果改进它们。
 
-可能最糟糕但最重要的应用是适应被解雇或裁员。2021年和2022年是劳动市场异常的年份，许多大公司在几乎没有警告的情况下裁员。预见到这种可能性并做好准备是一个好主意。
+可能最糟糕但最重要的应用是适应被解雇或裁员。2021 年和 2022 年是劳动市场异常的年份，许多大公司在几乎没有警告的情况下裁员。预见到这种可能性并做好准备是一个好主意。
 
 # 3\. 团队合作与协作
 
-![每个数据科学家都需要的软技能](../Images/a6df012edaf6680c648ea78367c6bc70.png)
+![每个数据科学家都需要的软技能](img/a6df012edaf6680c648ea78367c6bc70.png)
 
 作者提供的图片
 
-还记得我提到的沟通吗？团队合作与协作也属于同一范畴。作为数据科学家，你不仅仅与其他数据科学家合作。每个人都喜欢基于数据的任何东西，因此你将接收到各种请求，要求你制作PowerPoint演示文稿、报告和图表。
+还记得我提到的沟通吗？团队合作与协作也属于同一范畴。作为数据科学家，你不仅仅与其他数据科学家合作。每个人都喜欢基于数据的任何东西，因此你将接收到各种请求，要求你制作 PowerPoint 演示文稿、报告和图表。
 
 要成功做到这一点，你必须与他人友好合作。数据科学项目通常涉及与跨职能团队的合作，包括业务分析师、工程师和产品经理。有效的合作确保数据科学解决方案与业务目标一致。
 
@@ -88,7 +88,7 @@ Kevin，从我的介绍来看，总体上是一个好奇心强的人。但不知
 
 他给了我一个他最近在面试中被问到的例子：“客户支持团队一直收到关于网站结账过程的投诉。你会如何解决这个问题？”
 
-Kevin详细讲述了他将如何修复技术故障。但面试官真正想要的答案是像“为什么用户觉得结账过程很麻烦？”这样的问题。
+Kevin 详细讲述了他将如何修复技术故障。但面试官真正想要的答案是像“为什么用户觉得结账过程很麻烦？”这样的问题。
 
 在现实世界中，数据科学家需要提出问题以解决问题。可能某个地区的用户由于本地支付网关的集成而面临问题。或者可能是移动版本的网站不够用户友好，导致购物车放弃。
 
@@ -98,20 +98,20 @@ Kevin详细讲述了他将如何修复技术故障。但面试官真正想要的
 
 这里没有提到很多软技能，如同理心、韧性、时间管理和批判性思维等等。但如果你仔细想想，它们都属于这些范畴。
 
-与人沟通。知道如何改变。能够与他人合作。并以好奇心解决问题。凭借这四项软技能，你将能够应对任何问题、面试或出现的bug。
+与人沟通。知道如何改变。能够与他人合作。并以好奇心解决问题。凭借这四项软技能，你将能够应对任何问题、面试或出现的 bug。
 
-[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一名数据科学家，专注于产品策略。他也是一名兼职教授，教授分析课程，并且是StrataScratch的创始人，StrataScratch是一个帮助数据科学家准备面试的平台，提供来自顶级公司的真实面试问题。Nate撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有SQL内容。
+[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一名数据科学家，专注于产品策略。他也是一名兼职教授，教授分析课程，并且是 StrataScratch 的创始人，StrataScratch 是一个帮助数据科学家准备面试的平台，提供来自顶级公司的真实面试问题。Nate 撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有 SQL 内容。
 
 ### 更多相关话题
 
-+   [想成为数据科学家？第2部分：你需要的10种软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
++   [想成为数据科学家？第二部分：你需要的 10 种软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
 
-+   [未来数据游戏的保障：2023年每个数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来数据游戏的保障：2023 年每个数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [2024年每个数据科学家需要掌握的5项核心技能](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
++   [2024 年每个数据科学家需要掌握的 5 项核心技能](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
 
-+   [远程工作数据科学家的6种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
++   [远程工作数据科学家的 6 种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
 
-+   [2024年每个数据科学家工具箱中需要的5种工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
++   [2024 年每个数据科学家工具箱中需要的 5 种工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
 
-+   [Python f-Strings 魔法：每个编码员需要知道的5个改变游戏规则的技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
++   [Python f-Strings 魔法：每个编码员需要知道的 5 个改变游戏规则的技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)

@@ -1,8 +1,8 @@
 # 使用正则表达式进行数据清洗的 5 个技巧
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-using-regular-expressions-in-data-cleaning](https://www.kdnuggets.com/5-tips-for-using-regular-expressions-in-data-cleaning)
+> 原文：[`www.kdnuggets.com/5-tips-for-using-regular-expressions-in-data-cleaning`](https://www.kdnuggets.com/5-tips-for-using-regular-expressions-in-data-cleaning)
 
-![5 Tips for Using Regular Expressions in Data Cleaning](../Images/dd0cd3b5a960921fd88cc33160d7c5a8.png)
+![5 Tips for Using Regular Expressions in Data Cleaning](img/dd0cd3b5a960921fd88cc33160d7c5a8.png)
 
 作者提供的图片 | 使用 Canva 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -120,9 +120,9 @@ print(sentences)
 Output >>> ['This is sentence one', ' And this is sentence two', ' Is this sentence three', '']
 ```
 
-## 使用正则表达式清理Pandas数据框
+## 使用正则表达式清理 Pandas 数据框
 
-将正则表达式与pandas结合使用，可以高效地清理数据框。
+将正则表达式与 pandas 结合使用，可以高效地清理数据框。
 
 要从名称中去除非字母字符并在数据框中验证电子邮件地址：
 
@@ -148,7 +148,7 @@ print(df)
 
 +   `df['names'].str.replace(pattern, replacement, regex=True)` 替换序列中模式的出现。
 
-+   `lambda x: bool(re.match(pattern, x))`：这个lambda函数应用正则表达式匹配并将结果转换为布尔值。
++   `lambda x: bool(re.match(pattern, x))`：这个 lambda 函数应用正则表达式匹配并将结果转换为布尔值。
 
 输出结果如下：
 
@@ -173,20 +173,20 @@ print(df)
 
 +   要根据模式分割字符串，应用`re.split`。
 
-实际操作中，你将结合正则表达式和pandas来高效清理数据框中的文本字段。注释你的正则表达式以解释其目的也是一种良好的实践，能够提高可读性和可维护性。要了解更多关于使用pandas进行数据清理的内容，请阅读 [掌握Python和Pandas数据清理的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)。
+实际操作中，你将结合正则表达式和 pandas 来高效清理数据框中的文本字段。注释你的正则表达式以解释其目的也是一种良好的实践，能够提高可读性和可维护性。要了解更多关于使用 pandas 进行数据清理的内容，请阅读 [掌握 Python 和 Pandas 数据清理的 7 个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等方式向开发者社区学习和分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等方式向开发者社区学习和分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [使用Python掌握正则表达式](https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html)
++   [使用 Python 掌握正则表达式](https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html)
 
-+   [关于掌握SQL、Python、数据清理、数据处理和探索性数据分析的指南集合](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
++   [关于掌握 SQL、Python、数据清理、数据处理和探索性数据分析的指南集合](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
 
 +   [数据科学中数据清理的重要性](https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html)
 
 +   [通过这本免费的电子书学习数据清理和预处理以进行数据科学](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)
 
-+   [SQL中的数据清理：如何准备混乱的数据以进行分析](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
++   [SQL 中的数据清理：如何准备混乱的数据以进行分析](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
 
 +   [开始清理数据](https://www.kdnuggets.com/2022/01/getting-started-cleaning-data.html)

@@ -1,10 +1,10 @@
 # 一个能让你找到工作的数据科学作品集
 
-> 原文：[https://www.kdnuggets.com/2021/09/data-science-portfolio-job.html](https://www.kdnuggets.com/2021/09/data-science-portfolio-job.html)
+> 原文：[`www.kdnuggets.com/2021/09/data-science-portfolio-job.html`](https://www.kdnuggets.com/2021/09/data-science-portfolio-job.html)
 
-[评论](#comments)
+评论
 
-![](../Images/3df71aeab01bed7bbca5fddbb1e33106.png)
+![](img/3df71aeab01bed7bbca5fddbb1e33106.png)
 
 *照片由 [Bram Naus](https://unsplash.com/@bramnaus?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/portfolio?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -54,7 +54,7 @@
 
 我的作品集网站是我在学习数据科学的头几个月内获得实习机会的唯一原因。
 
-![](../Images/3cb62351979a0655a8b1746bbadff885.png)
+![](img/3cb62351979a0655a8b1746bbadff885.png)
 
 *照片来自 [Firmbee.com](https://unsplash.com/@firmbee?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/learning?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -88,14 +88,14 @@
 
 ### 了解更多相关话题
 
-+   [一个能在2022年帮你找到工作的数据科学投资组合](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [一个能在 2022 年帮你找到工作的数据科学投资组合](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [2022年能帮你找到工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年能帮你找到工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [3个保证能帮你获得工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个保证能帮你获得工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [7个原因为什么你难以找到数据科学职位](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [7 个原因为什么你难以找到数据科学职位](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
-+   [KDnuggets新闻，6月1日：数据科学的完整合集…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日：数据科学的完整合集…](https://www.kdnuggets.com/2022/n22.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

@@ -1,8 +1,8 @@
 # 你应该考虑的 3 个课程，如果你想成为数据分析师
 
-> 原文：[https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
+> 原文：[`www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst`](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-![数据分析师课程](../Images/5f2c02e9c50d11e3b2803e9c69c7b970.png)
+![数据分析师课程](img/5f2c02e9c50d11e3b2803e9c69c7b970.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@ Power BI 是最受欢迎的工具之一，数据分析师都喜欢它。如果�
 
 这个课程针对的是希望从数据分析师角度进入科技行业的初学者。你可以根据自己的时间和进度进行学习。如果你每周投入 10 小时，整个课程将需要 5 个月完成，但如果你可以投入更多时间，完成得更快也是可能的！
 
-该认证由5个课程组成：
+该认证由 5 个课程组成：
 
 +   数据分析入门
 
@@ -52,7 +52,7 @@ Power BI 是最受欢迎的工具之一，数据分析师都喜欢它。如果�
 
 +   数据管理入门
 
-在这5个课程中，你将学习如何收集、清理、排序、评估和可视化数据，应用用于指导数据分析过程的 OSEMN 框架，使用统计分析，如假设检验和回归分析，以做出基于数据的决策，并理解组织内有效数据管理的基础原则。
+在这 5 个课程中，你将学习如何收集、清理、排序、评估和可视化数据，应用用于指导数据分析过程的 OSEMN 框架，使用统计分析，如假设检验和回归分析，以做出基于数据的决策，并理解组织内有效数据管理的基础原则。
 
 ## Google 的数据分析认证
 
@@ -76,12 +76,12 @@ Power BI 是最受欢迎的工具之一，数据分析师都喜欢它。如果�
 
 +   [你是否应该考虑数据操作职业？](https://www.kdnuggets.com/2023/05/consider-dataops-career.html)
 
-+   [2023年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
-+   [想成为数据科学家？第1部分：你需要的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要的 10 项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
 
-+   [想成为数据科学家？第2部分：你需要的10项软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
++   [想成为数据科学家？第二部分：你需要的 10 项软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
 
 +   [如果你想进入科技领域：成为一名软件开发者](https://www.kdnuggets.com/if-you-want-to-get-in-the-tech-space-become-a-software-developer)
 
-+   [9个可以让你获得学位的专业证书... 如果你真的想要](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个可以让你获得学位的专业证书... 如果你真的想要](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)

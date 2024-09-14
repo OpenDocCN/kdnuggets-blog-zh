@@ -1,8 +1,8 @@
 # 数据科学需要多少数学知识？
 
-> 原文：[https://www.kdnuggets.com/2020/06/math-data-science.html](https://www.kdnuggets.com/2020/06/math-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/06/math-data-science.html`](https://www.kdnuggets.com/2020/06/math-data-science.html)
 
-![数据科学需要多少数学知识？](../Images/8ca7244454686622c609147f1883af4a.png)
+![数据科学需要多少数学知识？](img/8ca7244454686622c609147f1883af4a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -92,7 +92,7 @@
 
 下面是你需要熟悉的主题：
 
-**均值、中位数、众数、标准差/方差、相关系数和协方差矩阵、概率分布（二项分布、泊松分布、正态分布）、p值、贝叶斯定理（精确度、召回率、正预测值、负预测值、混淆矩阵、ROC曲线）、中心极限定理、R_2评分、均方误差（MSE）、A/B测试、蒙特卡洛模拟**
+**均值、中位数、众数、标准差/方差、相关系数和协方差矩阵、概率分布（二项分布、泊松分布、正态分布）、p 值、贝叶斯定理（精确度、召回率、正预测值、负预测值、混淆矩阵、ROC 曲线）、中心极限定理、R_2 评分、均方误差（MSE）、A/B 测试、蒙特卡洛模拟**
 
 ## 多变量微积分
 
@@ -100,7 +100,7 @@
 
 下面是你需要熟悉的主题：
 
-**多个变量的函数；导数和梯度；阶跃函数、Sigmoid函数、Logit函数、ReLU（修正线性单元）函数；成本函数；函数的绘制；函数的最小值和最大值**
+**多个变量的函数；导数和梯度；阶跃函数、Sigmoid 函数、Logit 函数、ReLU（修正线性单元）函数；成本函数；函数的绘制；函数的最小值和最大值**
 
 ## 线性代数
 

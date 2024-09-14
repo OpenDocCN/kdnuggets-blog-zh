@@ -1,6 +1,6 @@
 # 应用数据科学：解决预测性维护业务问题
 
-> 原文：[https://www.kdnuggets.com/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html](https://www.kdnuggets.com/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html)
+> 原文：[`www.kdnuggets.com/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html`](https://www.kdnuggets.com/2017/10/applied-data-science-solving-predictive-maintenance-business-problem.html)
 
 **作者：Thomas Joseph，Aspire Systems。**
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速跟上网络安全的步伐。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速跟上网络安全的步伐。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
 **整体情况**
 
-在我们从数据科学的角度深入探究业务问题及其解决方法之前，让我们先来看一下数据科学项目的生命周期的全貌![BigPicture](../Images/ca6ddc2f1a35aceb5bb96600247a69f4.png)。
+在我们从数据科学的角度深入探究业务问题及其解决方法之前，让我们先来看一下数据科学项目的生命周期的全貌![BigPicture](img/ca6ddc2f1a35aceb5bb96600247a69f4.png)。
 
 以上图表描述了从数据科学的角度解决业务问题所涉及的全貌。让我们从头到尾地处理每一个组成部分。
 
@@ -64,7 +64,7 @@
 
 在电池预测问题的情况下，有三个不同的数据集。这些数据集涉及不同的变量集。数据收集的频率和捕获的数据量也有所不同。其中一些关键数据集包括以下内容
 
-+   导纳数据集：与电池导纳相关的数据。这是每2-3天收集一次。一些与导纳数据一起收集的关键数据点包括
++   导纳数据集：与电池导纳相关的数据。这是每 2-3 天收集一次。一些与导纳数据一起收集的关键数据点包括
 
     +   捕捉导纳数据的时间戳
 
@@ -80,7 +80,7 @@
 
     +   其他相关信息，如电池标识符、制造商、安装位置、型号、字符串数据等
 
-+   放电数据：放电数据每3个月收集一次。关键变量包括
++   放电数据：放电数据每 3 个月收集一次。关键变量包括
 
     +   放电电压
 
@@ -88,7 +88,7 @@
 
     +   其他相关信息，如电池标识符、制造商、安装位置、型号、字符串数据等
 
-![DataSets](../Images/725839e22bf2ef10df3880f234f21de7.png)
+![DataSets](img/725839e22bf2ef10df3880f234f21de7.png)
 
 如上所述，我们必须处理三个非常不同的数据集，每个数据集都有不同的变量集，数据点到达时间的频率也不同，每个变量涉及的数据量也不同。我们会遇到一个关键的挑战就是将所有这些变量连接到一个连贯的数据集中，这将有助于预测任务。如果我们可以通过将可用的数据集与我们试图解决的业务问题连接起来来制定预测问题，那么这将更容易完成。让我们首先尝试制定预测问题。
 
@@ -96,12 +96,12 @@
 
 +   [思维图：大型语言模型中复杂问题解决的新范式](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)
 
-+   [解决5个复杂的SQL问题：解释棘手的查询](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
++   [解决 5 个复杂的 SQL 问题：解释棘手的查询](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
 
-+   [解决MySQL中的幻象读取的终极指南](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)
++   [解决 MySQL 中的幻象读取的终极指南](https://www.kdnuggets.com/2022/06/definitive-guide-solving-phantom-read-mysql.html)
 
-+   [下一个数据科学问题的5步蓝图](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)
++   [下一个数据科学问题的 5 步蓝图](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)
 
 +   [现实世界中自然语言处理应用的范围：一种不同的解决方案...](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
 
-+   [Python中的遗传规划：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
++   [Python 中的遗传规划：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)

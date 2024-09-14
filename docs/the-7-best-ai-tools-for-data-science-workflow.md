@@ -1,8 +1,8 @@
 # 数据科学工作流的 7 款最佳 AI 工具
 
-> 原文：[https://www.kdnuggets.com/the-7-best-ai-tools-for-data-science-workflow](https://www.kdnuggets.com/the-7-best-ai-tools-for-data-science-workflow)
+> 原文：[`www.kdnuggets.com/the-7-best-ai-tools-for-data-science-workflow`](https://www.kdnuggets.com/the-7-best-ai-tools-for-data-science-workflow)
 
-![数据科学工作流的 7 款最佳 AI 工具](../Images/38cffefaa797f9313898b5bc1aebc81d.png)
+![数据科学工作流的 7 款最佳 AI 工具](img/38cffefaa797f9313898b5bc1aebc81d.png)
 
 图片来源于 DALLE-3
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -73,59 +73,59 @@ Explanation: I looked at the data we have and found a way to sort it based on sa
 
 [GitHub Copilot](https://github.com/features/copilot) 现在对于全职开发人员或每天处理代码的人来说是必不可少的。为什么？它提高了你快速编写干净且高效代码的能力。你甚至可以与文件聊天，更快地调试或生成上下文相关的代码。
 
-![数据科学工作流的7款最佳AI工具](../Images/fc524e8c2b6ba0da7f61c240fe1f6787.png)
+![数据科学工作流的 7 款最佳 AI 工具](img/fc524e8c2b6ba0da7f61c240fe1f6787.png)
 
-GitHub Copilot 包括AI聊天机器人、内联聊天框、代码生成、自动补全、CLI自动补全以及其他GitHub相关功能，这些都可以帮助代码搜索和理解。
+GitHub Copilot 包括 AI 聊天机器人、内联聊天框、代码生成、自动补全、CLI 自动补全以及其他 GitHub 相关功能，这些都可以帮助代码搜索和理解。
 
-GitHub Copilot 是一款付费工具，因此如果你不想支付$10/月，那么你可以查看[你必须尝试的5款AI编码助手](/top-5-ai-coding-assistants-you-must-try)。
+GitHub Copilot 是一款付费工具，因此如果你不想支付$10/月，那么你可以查看你必须尝试的 5 款 AI 编码助手。
 
-# 3\. ChatGPT：由GPT-4驱动的聊天应用
+# 3\. ChatGPT：由 GPT-4 驱动的聊天应用
 
-[ChatGPT](https://chat.openai.com/)在AI领域已经主导了两年。人们用它来写邮件、生成内容、生成代码以及处理各种名义上的工作任务。
+[ChatGPT](https://chat.openai.com/)在 AI 领域已经主导了两年。人们用它来写邮件、生成内容、生成代码以及处理各种名义上的工作任务。
 
-![数据科学工作流的7款最佳AI工具](../Images/ef0a1517e14909551c64e6dd9a76ccab.png)
+![数据科学工作流的 7 款最佳 AI 工具](img/ef0a1517e14909551c64e6dd9a76ccab.png)
 
-如果你订阅了服务，你将获得最先进的GPT-4模型，这在解决复杂问题方面表现出色。
+如果你订阅了服务，你将获得最先进的 GPT-4 模型，这在解决复杂问题方面表现出色。
 
-我每天都使用它来生成代码、解释代码、提出一般问题和生成内容。AI生成的工作并不总是完美的。你可能需要进行一些编辑，以便向更广泛的观众展示。
+我每天都使用它来生成代码、解释代码、提出一般问题和生成内容。AI 生成的工作并不总是完美的。你可能需要进行一些编辑，以便向更广泛的观众展示。
 
-ChatGPT是数据科学家的重要工具。使用它并不等于作弊。相反，与其他人相比，它能节省你在研究和寻找解决方案上的时间。
+ChatGPT 是数据科学家的重要工具。使用它并不等于作弊。相反，与其他人相比，它能节省你在研究和寻找解决方案上的时间。
 
-如果你重视隐私，可以考虑在你的笔记本电脑上运行开源AI模型。查看[如何在笔记本电脑上使用LLM的5种方法](/5-ways-to-use-llms-on-your-laptop)。
+如果你重视隐私，可以考虑在你的笔记本电脑上运行开源 AI 模型。查看如何在笔记本电脑上使用 LLM 的 5 种方法。
 
-# 4\. Colab AI：AI驱动的云笔记本
+# 4\. Colab AI：AI 驱动的云笔记本
 
-如果你为复杂的机器学习任务训练了深度神经网络，那么你一定是在[Google Colab](https://colab.research.google.com/)上进行的，因为该平台提供了免费的GPU和TPU。随着生成式AI的兴起，Google Colab 最近推出了一些功能，帮助你生成代码、加快调试速度以及自动补全。
+如果你为复杂的机器学习任务训练了深度神经网络，那么你一定是在[Google Colab](https://colab.research.google.com/)上进行的，因为该平台提供了免费的 GPU 和 TPU。随着生成式 AI 的兴起，Google Colab 最近推出了一些功能，帮助你生成代码、加快调试速度以及自动补全。
 
-![数据科学工作流的7款最佳AI工具](../Images/b28d8eb930767f37a8ee4808a34f08f0.png)
+![数据科学工作流的 7 款最佳 AI 工具](img/b28d8eb930767f37a8ee4808a34f08f0.png)
 
-Colab AI 就像是你工作区中的一名集成AI编码助手。你可以通过简单的提示和后续问题生成代码。它还提供了内联代码提示功能，尽管免费版的使用有限。
+Colab AI 就像是你工作区中的一名集成 AI 编码助手。你可以通过简单的提示和后续问题生成代码。它还提供了内联代码提示功能，尽管免费版的使用有限。
 
-我强烈建议你购买付费版，因为它提供了更好的GPU和整体更佳的编码体验。
+我强烈建议你购买付费版，因为它提供了更好的 GPU 和整体更佳的编码体验。
 
-探索[2024年11款最佳AI编码助手](https://www.datacamp.com/blog/best-ai-coding-assistants)，并尝试所有替代Colab AI的工具，找到最适合你的选项。
+探索[2024 年 11 款最佳 AI 编码助手](https://www.datacamp.com/blog/best-ai-coding-assistants)，并尝试所有替代 Colab AI 的工具，找到最适合你的选项。
 
 # 5\. Perplexity AI：智能搜索引擎
 
 我一直在使用[Perplexity AI](https://www.perplexity.ai/)作为我的新搜索引擎和研究助手。它通过提供简洁且最新的摘要，并附有相关博客和视频的链接，帮助我学习新技术和概念。我甚至可以提出后续问题并获得修改后的答案。
 
-![数据科学工作流的7款最佳AI工具](../Images/3e8650d8b10fe81b3ab533d29f6e6d62.png)
+![数据科学工作流的 7 款最佳 AI 工具](img/3e8650d8b10fe81b3ab533d29f6e6d62.png)
 
 Perplexity AI 提供各种功能来协助用户。它可以回答从基本事实到复杂查询的广泛问题，使用最新的来源。它的 Copilot 功能允许用户深入探索他们的主题，使他们能够扩展知识并发现新的兴趣领域。此外，用户可以将搜索结果组织成基于项目或主题的“集合”，使得将来更容易找到所需的信息。
 
-查看一下 [8 个 AI 驱动的搜索引擎](/top-8-ai-search-engine-that-you-should-replace-with-google)，它们可以增强你的互联网搜索和研究能力，作为 Google 的替代方案。
+查看一下 8 个 AI 驱动的搜索引擎，它们可以增强你的互联网搜索和研究能力，作为 Google 的替代方案。
 
 # 6\. Grammarly：AI 写作助手
 
 我想告诉你，[Grammarly](https://www.grammarly.com/) 是一个出色的工具，特别适合有阅读障碍的人。它帮助我快速而准确地写作。我已经使用 Grammarly 快将近 9 年了，我喜欢它的拼写、语法和整体结构的纠正功能。最近，他们推出了 Grammarly AI，允许我通过生成 AI 模型来改进我的写作。这个工具让我的生活变得更轻松，我现在可以写出更好的电子邮件、直接消息、内容、教程和报告。对我来说，它是一个重要的工具，就像 Canva 一样。
 
-![数据科学工作流的 7 个最佳 AI 工具](../Images/80f7c8f58155382e4b8ba6557fa17d54.png)
+![数据科学工作流的 7 个最佳 AI 工具](img/80f7c8f58155382e4b8ba6557fa17d54.png)
 
 # 7\. Hugging Face：构建 AI 的未来
 
 [Hugging Face](https://huggingface.co/) 不仅仅是一个工具，而是一个完整的生态系统，已经成为我日常工作生活中不可或缺的一部分。我用它来访问数据集、模型、机器学习演示和 AI 模型的 API。此外，我还依赖各种 Hugging Face Python 包来训练、微调、评估和部署机器学习模型。
 
-![数据科学工作流的 7 个最佳 AI 工具](../Images/77eb3ab381f514e73a8590f47ff1fce8.png)
+![数据科学工作流的 7 个最佳 AI 工具](img/77eb3ab381f514e73a8590f47ff1fce8.png)
 
 Hugging Face 是一个开源平台，为社区免费提供服务，允许用户托管数据集、模型和 AI 演示。它甚至允许你部署模型推理并在 GPU 上运行它们。在接下来的几年里，它很可能会成为数据讨论、研究与开发以及运营的主要平台。
 

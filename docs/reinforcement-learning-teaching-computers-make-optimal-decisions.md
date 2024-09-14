@@ -1,14 +1,14 @@
 # 强化学习：教计算机做出最佳决策
 
-> 原文：[https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)
+> 原文：[`www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html`](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)
 
 # 什么是强化学习？
 
 强化学习是机器学习的一个分支，它涉及智能体通过经验学习如何与复杂环境互动。
 
-从在复杂棋盘游戏（如象棋和围棋）中超越人类表现的AI智能体，到自主导航，强化学习具有一系列有趣且多样的应用。
+从在复杂棋盘游戏（如象棋和围棋）中超越人类表现的 AI 智能体，到自主导航，强化学习具有一系列有趣且多样的应用。
 
-在强化学习领域的显著突破包括DeepMind的智能体[AlphaGo Zero](https://www.deepmind.com/blog/alphago-zero-starting-from-scratch)，它可以击败甚至人类围棋冠军，以及[AlphaFold](https://www.deepmind.com/research/highlighted-research/alphafold)，它可以预测复杂的3D蛋白质结构。
+在强化学习领域的显著突破包括 DeepMind 的智能体[AlphaGo Zero](https://www.deepmind.com/blog/alphago-zero-starting-from-scratch)，它可以击败甚至人类围棋冠军，以及[AlphaFold](https://www.deepmind.com/research/highlighted-research/alphafold)，它可以预测复杂的 3D 蛋白质结构。
 
 本指南将介绍强化学习范式。我们将通过一个简单但有启发性的现实世界例子来理解强化学习框架。
 
@@ -16,7 +16,7 @@
 
 我们首先来定义强化学习框架的组成部分。
 
-![强化学习：教计算机做出最佳决策](../Images/d1344fd46c3456a8c995f0c2d76e076a.png)
+![强化学习：教计算机做出最佳决策](img/d1344fd46c3456a8c995f0c2d76e076a.png)
 
 强化学习框架 | 图片由作者提供
 
@@ -30,21 +30,21 @@
 
 作为一个超级简化的例子，考虑一个在迷宫中的鼠标。这里，智能体*不是*与对手对战，而是试图找出通向出口的路径。如果有多个路径通向出口，我们可能会选择最短的路径。
 
-![强化学习：教计算机做出最佳决策](../Images/343faadea35883d9687ff5a3a9df4e82.png)
+![强化学习：教计算机做出最佳决策](img/343faadea35883d9687ff5a3a9df4e82.png)
 
 迷宫中的鼠标 | 图片由作者提供
 
 在这个例子中，*鼠标*是试图在*迷宫*中导航的*智能体*。这里的*行动*是鼠标在迷宫中的移动。当它成功找到出口时，它会获得一块*奶酪*作为*奖励*。
 
-![强化学习：教计算机做出最佳决策](../Images/5ed063fccd92b8c4942e9a76efda7ece.png)
+![强化学习：教计算机做出最佳决策](img/5ed063fccd92b8c4942e9a76efda7ece.png)
 
 示例 | 图片由作者提供
 
 行动序列发生在离散的时间步骤中（比如，t = 1, 2, 3,...）。在任何时间步骤**t**，鼠标只能测量其在迷宫中的当前状态。它还不知道整个迷宫的情况。
 
-所以代理（小鼠）在时间步**t**测量其环境状态 ![方程式](../Images/50d4c306c3da2ab64f5bca9a582b48ce.png)，采取一个有效的行动 ![方程式](../Images/8df11873ed817574f0269f21bf1c8037.png)并移动到状态 ![方程式](../Images/1978948a8f905005c08aff7cb743dab0.png)。
+所以代理（小鼠）在时间步**t**测量其环境状态 ![方程式](img/50d4c306c3da2ab64f5bca9a582b48ce.png)，采取一个有效的行动 ![方程式](img/8df11873ed817574f0269f21bf1c8037.png)并移动到状态 ![方程式](img/1978948a8f905005c08aff7cb743dab0.png)。
 
-![强化学习：教计算机做出最佳决策](../Images/9e636b521640ce1e36e2998cedaa0bab.png)
+![强化学习：教计算机做出最佳决策](img/9e636b521640ce1e36e2998cedaa0bab.png)
 
 状态 | 作者提供的图像
 
@@ -74,7 +74,7 @@
 
 # 策略、价值函数和优化问题
 
-环境通常不是确定性的，而是概率性的，策略也是如此。给定一个状态 ![方程式](../Images/50d4c306c3da2ab64f5bca9a582b48ce.png)，代理会采取一个行动并以一定的概率转移到另一个状态 ![方程式](../Images/991b31a62368366eaf20405d8514c526.png)。
+环境通常不是确定性的，而是概率性的，策略也是如此。给定一个状态 ![方程式](img/50d4c306c3da2ab64f5bca9a582b48ce.png)，代理会采取一个行动并以一定的概率转移到另一个状态 ![方程式](img/991b31a62368366eaf20405d8514c526.png)。
 
 策略有助于定义从可能状态集合到行动的映射。它有助于回答诸如以下问题：
 
@@ -84,11 +84,11 @@
 
 因此，你可以把代理看作是*执行策略* π：
 
-![强化学习：教计算机做出最优决策](../Images/c29258389a41a8438d777e35214799e3.png)
+![强化学习：教计算机做出最优决策](img/c29258389a41a8438d777e35214799e3.png)
 
 另一个相关且有帮助的概念是价值函数。**价值函数**定义为：
 
-![强化学习：教计算机做出最优决策](../Images/0eb789ff1281ec7c694c4f52ee9f8b5b.png)
+![强化学习：教计算机做出最优决策](img/0eb789ff1281ec7c694c4f52ee9f8b5b.png)
 
 这表示在给定策略π的情况下处于某状态的价值。这个量表示如果代理从某状态开始并随后执行策略π，那么未来的期望奖励。
 
@@ -96,21 +96,21 @@
 
 ## 折扣因子
 
-注意到我们有了一个新的量ɣ。它代表什么？ɣ被称为**折扣因子**，一个介于0和1之间的量。意味着未来的奖励会被折扣（即：现在的价值大于未来）。
+注意到我们有了一个新的量ɣ。它代表什么？ɣ被称为**折扣因子**，一个介于 0 和 1 之间的量。意味着未来的奖励会被折扣（即：现在的价值大于未来）。
 
 # 探索与利用的权衡
 
-回到老鼠在迷宫中的食物循环示例：如果老鼠能够找到通向出口A的路线，并获得一小块奶酪，它可以不断重复这一过程并收集奶酪。但如果迷宫还有另一个出口B，那里有一块更大的奶酪（更大的奖励）呢？
+回到老鼠在迷宫中的食物循环示例：如果老鼠能够找到通向出口 A 的路线，并获得一小块奶酪，它可以不断重复这一过程并收集奶酪。但如果迷宫还有另一个出口 B，那里有一块更大的奶酪（更大的奖励）呢？
 
-只要老鼠继续*利用*当前策略而不*探索*新策略，它就无法获得出口B处更大奶酪的更大奖励。
+只要老鼠继续*利用*当前策略而不*探索*新策略，它就无法获得出口 B 处更大奶酪的更大奖励。
 
-![强化学习：教计算机做出最优决策](../Images/4fd7b3a8aa6aa8366c8d3ed3166d7cf5.png)
+![强化学习：教计算机做出最优决策](img/4fd7b3a8aa6aa8366c8d3ed3166d7cf5.png)
 
 探索与利用 | 图片作者
 
 但探索新策略和未来奖励的*不确定性*更大。那么我们如何在利用和探索之间取得平衡呢？这种在利用当前策略和探索具有潜在更好奖励的新策略之间的权衡被称为**探索与利用的权衡**。
 
-一种可能的方法是*ε-贪婪搜索*。给定所有可能的行动，*ε-贪婪搜索*以概率*ε*探索可能的行动之一，同时以概率1 - *ε*利用当前策略。
+一种可能的方法是*ε-贪婪搜索*。给定所有可能的行动，*ε-贪婪搜索*以概率*ε*探索可能的行动之一，同时以概率 1 - *ε*利用当前策略。
 
 # 总结和下一步
 
@@ -134,11 +134,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -154,4 +154,4 @@
 
 +   [实践强化学习课程第三部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
 
-+   [动手实践强化学习课程，第 1 部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
++   [动手实践强化学习课程，第一部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)

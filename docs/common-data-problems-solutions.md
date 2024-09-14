@@ -1,8 +1,8 @@
 # 常见的数据问题（及解决方案）
 
-> 原文：[https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html](https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html)
+> 原文：[`www.kdnuggets.com/2022/02/common-data-problems-solutions.html`](https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html)
 
-![常见的数据问题（及解决方案）](../Images/c4c97c8840c97e44b817630a59d39372.png)
+![常见的数据问题（及解决方案）](img/c4c97c8840c97e44b817630a59d39372.png)
 
 [Shubham Dhage](https://unsplash.com/@theshubhamdhage) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -58,15 +58,15 @@
 
 计算能力、所需时间和整体输出等因素。你可能会发现使用较少的数据可以让你的模型更高效、更快速地运行。在处理大量数据时，有些事情你可以考虑。
 
-### 1\. p值
+### 1\. p 值
 
-根据[维基百科](https://en.wikipedia.org/wiki/P-value)，p值是：
+根据[维基百科](https://en.wikipedia.org/wiki/P-value)，p 值是：
 
 > “是在零假设正确的前提下，获得至少与实际观察结果一样极端的测试结果的概率。”
 
-通俗来说，p值是你样本数据结果发生偶然的概率，因此低p值是好的。任何小于0.5%的p值在统计上是显著的，允许我们拒绝零假设。p值依赖于被测试数据的大小：样本越大，p值越小。如果样本量很大，就更有可能找到显著的关系（如果存在的话）。随着样本量的增加，随机误差的影响被减少。
+通俗来说，p 值是你样本数据结果发生偶然的概率，因此低 p 值是好的。任何小于 0.5%的 p 值在统计上是显著的，允许我们拒绝零假设。p 值依赖于被测试数据的大小：样本越大，p 值越小。如果样本量很大，就更有可能找到显著的关系（如果存在的话）。随着样本量的增加，随机误差的影响被减少。
 
-如果你的p值因数据过多而过高，你可以从数据中抽取多个样本来训练你的模型，并生成更好的p值。
+如果你的 p 值因数据过多而过高，你可以从数据中抽取多个样本来训练你的模型，并生成更好的 p 值。
 
 ### 2\. 计算能力
 
@@ -86,9 +86,9 @@
 
 1.  **图像分类问题** - 这需要数万张图像，以创建一个具有准确输出的分类器。
 
-1.  **情感分析问题** - 由于单词和短语的数量，这也需要数千个示例文本。N-gram模型通过计算语料库文本中出现的单词序列的频率来建立，然后估计概率。
+1.  **情感分析问题** - 由于单词和短语的数量，这也需要数千个示例文本。N-gram 模型通过计算语料库文本中出现的单词序列的频率来建立，然后估计概率。
 
-1.  **回归问题** - 许多研究人员建议你应该有10倍于特征数量的观察值。例如，如果我们有三个独立变量，那么最好有至少30个样本。
+1.  **回归问题** - 许多研究人员建议你应该有 10 倍于特征数量的观察值。例如，如果我们有三个独立变量，那么最好有至少 30 个样本。
 
 ## 目前仍无固定规则
 
@@ -98,11 +98,11 @@
 
 1.  **我期望的时间框架是什么？**
 
-如果你试图预测未来5年的情况，仅有1年的数据是不够高效的。你需要至少5年的数据，并确保数据中没有大量缺失，以产生准确的结果。
+如果你试图预测未来 5 年的情况，仅有 1 年的数据是不够高效的。你需要至少 5 年的数据，并确保数据中没有大量缺失，以产生准确的结果。
 
 1.  **我的数据粒度是什么？**
 
-如果我需要一年的数据，那我的数据是否符合这个要求？我的数据是以天、周还是月为单位？一年的数据可以是365个数据点（天）、52个数据点（周）或12个数据点（个月）。所有这些都是有效的，关键在于你的实际问题和需求。
+如果我需要一年的数据，那我的数据是否符合这个要求？我的数据是以天、周还是月为单位？一年的数据可以是 365 个数据点（天）、52 个数据点（周）或 12 个数据点（个月）。所有这些都是有效的，关键在于你的实际问题和需求。
 
 **[尼莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术作家。她特别感兴趣于提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何有助于人类寿命的不同方式。作为一个积极的学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
@@ -116,6 +116,6 @@
 
 +   [分类问题的更多性能评估指标](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)
 
-+   [识别机器学习可解决问题的4个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
++   [识别机器学习可解决问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
 
-+   [解决5个复杂的SQL问题：难题查询解析](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
++   [解决 5 个复杂的 SQL 问题：难题查询解析](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)

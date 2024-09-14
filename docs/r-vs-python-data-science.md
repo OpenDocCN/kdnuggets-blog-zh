@@ -1,8 +1,8 @@
 # R 与 Python 在数据科学中的对决：胜者是…
 
-> 原文：[https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html](https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html)
+> 原文：[`www.kdnuggets.com/2015/05/r-vs-python-data-science.html`](https://www.kdnuggets.com/2015/05/r-vs-python-data-science.html)
 
-由**[Martijn Theuwissen](https://www.kdnuggets.com/author/martijn-theuwissen "Posts by Martijn Theuwissen")**于2015年5月26日在[数据科学工具](https://www.kdnuggets.com/tag/data-science-tools)、[DataCamp](https://www.kdnuggets.com/tag/datacamp)、[Python](https://www.kdnuggets.com/tag/python)、[Python 与 R](https://www.kdnuggets.com/tag/python-vs-r)、[R](https://www.kdnuggets.com/tag/r)上发表。
+由**[Martijn Theuwissen](https://www.kdnuggets.com/author/martijn-theuwissen "Posts by Martijn Theuwissen")**于 2015 年 5 月 26 日在[数据科学工具](https://www.kdnuggets.com/tag/data-science-tools)、[DataCamp](https://www.kdnuggets.com/tag/datacamp)、[Python](https://www.kdnuggets.com/tag/python)、[Python 与 R](https://www.kdnuggets.com/tag/python-vs-r)、[R](https://www.kdnuggets.com/tag/r)上发表。
 
 在[DataCamp](https://www.datacamp.com/)上，我们的学生经常询问他们是否应该使用 R 和/或 Python 来处理日常的数据分析任务。虽然我们主要提供[交互式 R 教程](https://www.datacamp.com/courses)，但我们总是回答，这一选择取决于他们面临的数据分析挑战的类型。
 
@@ -12,11 +12,11 @@ Python 和 R 都是流行的统计编程语言。虽然 R 的功能是为统计�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -24,27 +24,27 @@ Python 和 R 都是流行的统计编程语言。虽然 R 的功能是为统计�
 
 **介绍 R**
 
-[Ross Ihaka 和 Robert Gentleman](https://en.wikipedia.org/wiki/R_%28programming_language%29)在1995年创建了开源语言 R，作为 S 编程语言的实现。其目的是开发一种语言，专注于提供更好、更用户友好的数据分析、统计和图形模型的方法。最初，R 主要用于学术和研究，但最近企业界也开始发现 R。这使得 R 成为企业界增长最快的统计语言之一。
+[Ross Ihaka 和 Robert Gentleman](https://en.wikipedia.org/wiki/R_%28programming_language%29)在 1995 年创建了开源语言 R，作为 S 编程语言的实现。其目的是开发一种语言，专注于提供更好、更用户友好的数据分析、统计和图形模型的方法。最初，R 主要用于学术和研究，但最近企业界也开始发现 R。这使得 R 成为企业界增长最快的统计语言之一。
 
-R的主要优势之一是其庞大的社区，通过邮件列表、用户贡献的文档和非常活跃的Stack Overflow小组提供支持。还有[CRAN](http://cran.r-project.org/)，这是一个巨大的R包库，用户可以轻松贡献。 这些包是R函数和数据的集合，使得可以立即获得最新的技术和功能，而无需从头开始开发所有内容。
+R 的主要优势之一是其庞大的社区，通过邮件列表、用户贡献的文档和非常活跃的 Stack Overflow 小组提供支持。还有[CRAN](http://cran.r-project.org/)，这是一个巨大的 R 包库，用户可以轻松贡献。 这些包是 R 函数和数据的集合，使得可以立即获得最新的技术和功能，而无需从头开始开发所有内容。
 
-最后，如果你是一个有经验的程序员，你可能不会难以适应R。然而，作为初学者，你可能会发现自己在陡峭的学习曲线中挣扎。幸运的是，现在有许多很好的学习资源可以咨询。
+最后，如果你是一个有经验的程序员，你可能不会难以适应 R。然而，作为初学者，你可能会发现自己在陡峭的学习曲线中挣扎。幸运的是，现在有许多很好的学习资源可以咨询。
 
-**介绍Python**
+**介绍 Python**
 
-[Python](https://en.wikipedia.org/wiki/Python_%28programming_language%29) 是由Guido Van Rossem于1991年创建的，强调生产力和代码可读性。那些希望深入数据分析或应用统计技术的程序员是Python在统计领域的主要用户之一。
+[Python](https://en.wikipedia.org/wiki/Python_%28programming_language%29) 是由 Guido Van Rossem 于 1991 年创建的，强调生产力和代码可读性。那些希望深入数据分析或应用统计技术的程序员是 Python 在统计领域的主要用户之一。
 
-当你在工程环境中工作时，你可能会更喜欢Python。它是一种灵活的语言，非常适合做一些新颖的事情，而且由于其关注可读性和简洁性，学习曲线相对较低。
+当你在工程环境中工作时，你可能会更喜欢 Python。它是一种灵活的语言，非常适合做一些新颖的事情，而且由于其关注可读性和简洁性，学习曲线相对较低。
 
-与R类似，Python也有包。[PyPi](https://pypi.python.org/pypi)是Python包索引，包含用户可以贡献的库。就像R一样，Python有一个很棒的社区，但由于它是通用语言，所以稍微分散。然而，Python在数据科学中的应用正迅速在Python世界中占据主导地位：期望正在增长，更多创新的数据科学应用将在这里诞生。
+与 R 类似，Python 也有包。[PyPi](https://pypi.python.org/pypi)是 Python 包索引，包含用户可以贡献的库。就像 R 一样，Python 有一个很棒的社区，但由于它是通用语言，所以稍微分散。然而，Python 在数据科学中的应用正迅速在 Python 世界中占据主导地位：期望正在增长，更多创新的数据科学应用将在这里诞生。
 
-**R与Python：常用数字**
+**R 与 Python：常用数字**
 
-在网上，你可以找到许多比较R和Python采用情况和受欢迎程度的数字。虽然这些数据通常很好地指示了这两种语言在计算机科学整体生态系统中的演变情况，但将它们并排比较是困难的。 主要原因是你会发现R只存在于数据科学环境中； 另一方面，作为一种通用语言，Python广泛应用于许多领域，如Web开发。这通常会使排名结果倾向于Python，而薪资受到一些负面影响。
+在网上，你可以找到许多比较 R 和 Python 采用情况和受欢迎程度的数字。虽然这些数据通常很好地指示了这两种语言在计算机科学整体生态系统中的演变情况，但将它们并排比较是困难的。 主要原因是你会发现 R 只存在于数据科学环境中； 另一方面，作为一种通用语言，Python 广泛应用于许多领域，如 Web 开发。这通常会使排名结果倾向于 Python，而薪资受到一些负面影响。
 
-![R与Python数字](../Images/0eb09d69ebb8a6b50ef17b89287ac9a4.png) ****何时以及如何使用R？**
+![R 与 Python 数字](img/0eb09d69ebb8a6b50ef17b89287ac9a4.png) ****何时以及如何使用 R？**
 
-R主要用于数据分析任务需要独立计算或在单独服务器上进行分析时。它非常适合探索性工作，并且由于大量的包和现成的测试，几乎适用于任何类型的数据分析，这些工具通常为你提供必要的工具，让你快速上手。R甚至可以成为大数据解决方案的一部分。
+R 主要用于数据分析任务需要独立计算或在单独服务器上进行分析时。它非常适合探索性工作，并且由于大量的包和现成的测试，几乎适用于任何类型的数据分析，这些工具通常为你提供必要的工具，让你快速上手。R 甚至可以成为大数据解决方案的一部分。
 
 在开始使用 R 时，一个好的第一步是安装令人惊叹的 [RStudio IDE](http://www.rstudio.com/products/rstudio/)。完成后，我们建议你查看以下一些流行的包：
 
@@ -70,7 +70,7 @@ R主要用于数据分析任务需要独立计算或在单独服务器上进行�
 
 **如果你查看最近针对数据分析编程语言的调查，R 通常是明显的赢家。如果专注于 Python 和 R 的数据分析社区，类似的模式也会出现。**
 
-**![R vs Python Activity](../Images/ada7e91400069e11f1feb5c6c723bcc0.png)**
+**![R vs Python Activity](img/ada7e91400069e11f1feb5c6c723bcc0.png)**
 
 尽管上述数据如此，但有迹象表明更多人正在从 R 转向 Python。此外，还有一部分人群在适当的时候同时使用这两种语言。这正符合我们对学生的建议。
 
@@ -142,11 +142,11 @@ Python 是 R 的挑战者。它没有提供数百个必要的 R 包的替代品�
 
 **相关：**
 
-+   [R 领先 RapidMiner，Python 迎头赶上，大数据工具增长，Spark 点燃](/2015/05/poll-r-rapidminer-python-big-data-spark.html)
++   R 领先 RapidMiner，Python 迎头赶上，大数据工具增长，Spark 点燃
 
-+   [数据科学的语法：Python 与 R](/2015/03/the-grammar-data-science-python-vs-r.html/3)
++   数据科学的语法：Python 与 R
 
-+   [顶级 KDnuggets 推文，4月2-5日：数据科学生态系统：数据整理的实用工具和技巧](/2015/04/top-tweets-apr02-05.html)
++   顶级 KDnuggets 推文，4 月 2-5 日：数据科学生态系统：数据整理的实用工具和技巧
 
 ### 更多相关话题
 
@@ -154,7 +154,7 @@ Python 是 R 的挑战者。它没有提供数百个必要的 R 包的替代品�
 
 +   [通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
 
-+   [KDnuggets 新闻，5月4日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [优化 Python 代码性能：深入探讨 Python 性能分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
 

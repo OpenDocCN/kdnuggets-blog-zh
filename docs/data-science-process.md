@@ -1,8 +1,8 @@
 # 数据科学过程
 
-> 原文：[https://www.kdnuggets.com/2016/03/data-science-process.html](https://www.kdnuggets.com/2016/03/data-science-process.html)
+> 原文：[`www.kdnuggets.com/2016/03/data-science-process.html`](https://www.kdnuggets.com/2016/03/data-science-process.html)
 
-[评论](#comments)
+评论
 
 **由 Springboard 提供。**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 这些问题很棘手。答案可能因角色和公司而异。
 
-![](../Images/d06c63b2fb245a0c79f7636f4b333f69.png)
+![](img/d06c63b2fb245a0c79f7636f4b333f69.png)
 
 **图 1:** 数据科学过程，来源: 维基百科
 
@@ -90,9 +90,9 @@ Raj 将其称为“数据科学过程”，他在[短短的 5 天电子邮件课
 
 这里的难点不在于提出测试的想法，而在于提出可能转化为洞察的想法。你的数据科学项目有一个固定的截止日期（你的销售副总裁可能在急切等待你的分析结果！），因此你需要优先考虑你的问题。
 
-你需要查看一些有趣的模式，这些模式可以帮助解释为什么该群体的销售减少。你可能会注意到他们在社交媒体上活动不多，很少有人拥有Twitter或Facebook账户。你还可能会发现他们大多数年龄比你的普通受众要大。由此你可以开始追踪可以更深入分析的模式。
+你需要查看一些有趣的模式，这些模式可以帮助解释为什么该群体的销售减少。你可能会注意到他们在社交媒体上活动不多，很少有人拥有 Twitter 或 Facebook 账户。你还可能会发现他们大多数年龄比你的普通受众要大。由此你可以开始追踪可以更深入分析的模式。
 
-**第5步：进行深入分析**
+**第 5 步：进行深入分析**
 
 这个步骤是你需要运用你的统计、数学和技术知识，并利用所有数据科学工具来分析数据并找出每一个见解的地方。
 
@@ -102,7 +102,7 @@ Raj 将其称为“数据科学过程”，他在[短短的 5 天电子邮件课
 
 你现在可以将所有这些定性见解与定量分析的数据结合起来，编织一个能促使人们行动的故事。
 
-**第6步：沟通分析结果**
+**第 6 步：沟通分析结果**
 
 重要的是销售副总裁要理解**你发现的见解为什么重要**。最终，你被召唤来在整个数据科学过程中创造解决方案。**有效沟通**将是你提案能否转化为**行动**或**无行动**的关键。
 
@@ -114,17 +114,17 @@ Raj 将其称为“数据科学过程”，他在[短短的 5 天电子邮件课
 
 如果你希望系统地思考数据科学，了解这些步骤是很重要的，更何况如果你打算开始从事数据科学职业。
 
-如果是这样的话，你可能会想查看我们[免费的40页《数据科学入门指南》](http://springboard.com/resources/data-career-guide)！
+如果是这样的话，你可能会想查看我们[免费的 40 页《数据科学入门指南》](http://springboard.com/resources/data-career-guide)！
 
 即使你并不打算进入这个领域，通过回到基础并彻底理解它们，你在数据科学领域的职业生涯也将得到改善。我们很欢迎你对数据科学过程的任何反馈。
 
 **相关内容：**
 
-+   [数据科学与残疾](/2016/03/data-science-disability.html)
++   数据科学与残疾
 
-+   [数据科学如何预测和减少不良出生结果](/2016/01/data-science-predicts-adverse-birth-outcomes.html)
++   数据科学如何预测和减少不良出生结果
 
-+   [预测分析——一碗汤的故事](/2015/09/predictive-analytics-soup-story.html)
++   预测分析——一碗汤的故事
 
 ### 更多相关话题
 
@@ -132,10 +132,10 @@ Raj 将其称为“数据科学过程”，他在[短短的 5 天电子邮件课
 
 +   [处理机器学习过程的框架](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)
 
-+   [在Python中处理CSV文件的3种方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
++   [在 Python 中处理 CSV 文件的 3 种方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：一系列古怪的名言…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目以学习5项关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目以学习 5 项关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)

@@ -1,22 +1,22 @@
 # 数据科学与决策科学
 
-> 原文：[https://www.kdnuggets.com/2019/05/data-science-vs-decision-science.html](https://www.kdnuggets.com/2019/05/data-science-vs-decision-science.html)
+> 原文：[`www.kdnuggets.com/2019/05/data-science-vs-decision-science.html`](https://www.kdnuggets.com/2019/05/data-science-vs-decision-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![versus](../Images/42e13ae93e34e3a9ab435abbd6187c8a.png)
+![versus](img/42e13ae93e34e3a9ab435abbd6187c8a.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -24,7 +24,7 @@
 
 一般来说，数据科学家是专门从事在数据被收集、处理和结构化之后从中寻找见解的专家。决策科学家则将数据视为做出决策和解决商业问题的工具。为了展示其他差异，我们决定准备一个信息图表，将数据科学与决策科学按照几个标准进行对比。让我们深入了解一下。
 
-![datascience-vs-decisionscience](../Images/cfd0366994d6d0a4c4dce38db127f3bd.png)
+![datascience-vs-decisionscience](img/cfd0366994d6d0a4c4dce38db127f3bd.png)
 
 从定义上讲，数据科学似乎是一个跨学科领域，它使用科学算法、方法、技术和各种方法来提取有价值的见解。因此，它的主要目的是揭示数据中的见解，以便进一步应用于各个行业的利益。相比之下，决策科学是将复杂的定量技术应用于决策过程。它的目的是将数据驱动的见解与认知科学的元素结合，应用于政策规划和开发。因此，对于这两者而言，数据同样重要，但机制却大相径庭。
 
@@ -46,17 +46,17 @@
 
 **相关：**
 
-+   [如何进入数据科学领域：针对有志于成为数据科学家的终极问答与详细指南](/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html)
++   如何进入数据科学领域：针对有志于成为数据科学家的终极问答与详细指南
 
-+   [对新数据科学家的建议](/2019/04/advice-new-data-scientists.html)
++   对新数据科学家的建议
 
-+   [如何在数据科学、人工智能、大数据领域工作](/2019/03/work-data-science-ai-big-data.html)
++   如何在数据科学、人工智能、大数据领域工作
 
 ### 该主题的更多内容
 
 +   [讲述一个精彩的数据故事：一个可视化的决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月 2日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [通过 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
 

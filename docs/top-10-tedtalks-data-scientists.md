@@ -1,12 +1,12 @@
-# 数据科学家必看的前10个TED演讲
+# 数据科学家必看的前 10 个 TED 演讲
 
-> 原文：[https://www.kdnuggets.com/2016/02/top-10-tedtalks-data-scientists.html](https://www.kdnuggets.com/2016/02/top-10-tedtalks-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2016/02/top-10-tedtalks-data-scientists.html`](https://www.kdnuggets.com/2016/02/top-10-tedtalks-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-TED是一个致力于传播值得传播的思想的非盈利组织——通过TED.com，他们还安排年度会议和本地TEDx活动。TEDTalks将TED会议上的最佳思想无偿分享给世界：值得信赖的声音和打破常规的创新者、偶像和天才们，在18分钟内讲述他们的故事。数据科学已经成为许多这些演讲的中心。这里，我们根据**观看次数**收集了前10个TED演讲。
+TED 是一个致力于传播值得传播的思想的非盈利组织——通过 TED.com，他们还安排年度会议和本地 TEDx 活动。TEDTalks 将 TED 会议上的最佳思想无偿分享给世界：值得信赖的声音和打破常规的创新者、偶像和天才们，在 18 分钟内讲述他们的故事。数据科学已经成为许多这些演讲的中心。这里，我们根据**观看次数**收集了前 10 个 TED 演讲。
 
-![top-10-ted-talks-data-scientist](../Images/34330b6ea79097baf610f8ea5dd7a4af.png)
+![top-10-ted-talks-data-scientist](img/34330b6ea79097baf610f8ea5dd7a4af.png)
 
 1.  [你见过的最佳统计数据](https://www.ted.com/talks/hans_rosling_shows_the_best_stats_you_ve_ever_seen?language=en) (观看次数: 10,406,507)
 
@@ -18,15 +18,15 @@ TED是一个致力于传播值得传播的思想的非盈利组织——通过TE
 
 1.  [什么造就了美好的生活？来自最长幸福研究的教训](https://www.ted.com/talks/robert_waldinger_what_makes_a_good_life_lessons_from_the_longest_study_on_happiness?language=en) (观看次数: 3,791,115)
 
-    在我们生活的过程中，什么让我们保持幸福和健康？如果你认为是名誉和财富，你并不孤单——但根据精神科医生罗伯特·沃尔丁格的说法，你错了。作为一项75年成人发展研究的主任，沃尔丁格对真正的幸福和满足感的数据有着前所未有的获取权限。在这次演讲中，他分享了从研究中得到的三条重要教训以及一些古老的、实用的智慧，关于如何建立一个充实而长久的生活。
+    在我们生活的过程中，什么让我们保持幸福和健康？如果你认为是名誉和财富，你并不孤单——但根据精神科医生罗伯特·沃尔丁格的说法，你错了。作为一项 75 年成人发展研究的主任，沃尔丁格对真正的幸福和满足感的数据有着前所未有的获取权限。在这次演讲中，他分享了从研究中得到的三条重要教训以及一些古老的、实用的智慧，关于如何建立一个充实而长久的生活。
 
 1.  [如何不对世界无知](https://www.ted.com/talks/hans_and_ola_rosling_how_not_to_be_ignorant_about_the_world?language=en) (观看次数: 2,711,429)
 
-    你对这个世界了解多少？汉斯·罗斯林通过他著名的全球人口、健康和收入数据图表（还有一个特别长的指示器），展示了你对自己认为了解的事物可能大错特错的统计概率。参与他的观众问答，然后从汉斯的儿子奥拉那里学习4种快速减少无知的方法。
+    你对这个世界了解多少？汉斯·罗斯林通过他著名的全球人口、健康和收入数据图表（还有一个特别长的指示器），展示了你对自己认为了解的事物可能大错特错的统计概率。参与他的观众问答，然后从汉斯的儿子奥拉那里学习 4 种快速减少无知的方法。
 
 1.  [全球人口增长，一箱一箱地展示](https://www.ted.com/talks/hans_rosling_on_global_population_growth?language=en) (观看次数: 2,450,700)
 
-    未来50年，全球人口将增长到90亿——只有通过提高最贫困者的生活标准，我们才能控制人口增长。这是汉斯·罗斯林在TED@Cannes上使用色彩丰富的新数据展示技术揭示的矛盾答案（你将会看到）。
+    未来 50 年，全球人口将增长到 90 亿——只有通过提高最贫困者的生活标准，我们才能控制人口增长。这是汉斯·罗斯林在 TED@Cannes 上使用色彩丰富的新数据展示技术揭示的矛盾答案（你将会看到）。
 
 1.  [谁掌控了世界？](https://www.ted.com/talks/james_b_glattfelder_who_controls_the_world?language=en)（观看次数：2,297,109）
 
@@ -34,7 +34,7 @@ TED是一个致力于传播值得传播的思想的非盈利组织——通过TE
 
 1.  [数据可视化的美](http://www.ted.com/talks/david_mccandless_the_beauty_of_data_visualization?language=en)（观看次数：2,277,195）
 
-    大卫·麦坎德莱斯将复杂的数据集（如全球军事开支、媒体热度、Facebook状态更新）转化为美观、简洁的图表，揭示出隐藏的模式和联系。他建议，良好的设计是应对信息过载的最佳方式——这可能会改变我们看待世界的方式。
+    大卫·麦坎德莱斯将复杂的数据集（如全球军事开支、媒体热度、Facebook 状态更新）转化为美观、简洁的图表，揭示出隐藏的模式和联系。他建议，良好的设计是应对信息过载的最佳方式——这可能会改变我们看待世界的方式。
 
 1.  [揭示城市交汇点与分隔点的社会地图](https://www.ted.com/talks/dave_troy_social_maps_that_reveal_a_city_s_intersections_and_separations?language=en)（观看次数：2,277,144）
 
@@ -46,17 +46,17 @@ TED是一个致力于传播值得传播的思想的非盈利组织——通过TE
 
 1.  [卷曲薯条困境：为什么社交媒体“点赞”比你想象的更有意义](https://www.ted.com/talks/jennifer_golbeck_the_curly_fry_conundrum_why_social_media_likes_say_more_than_you_might_think?language=en)（观看次数：1,742,215）
 
-    你在Facebook上点赞了吗？观看这个演讲，了解Facebook（以及其他平台）如何通过你的随机点赞和分享猜测出一些令人惊讶的事情。计算机科学家詹妮弗·戈尔贝克解释了这一现象的形成过程，以及这种技术的一些应用并不那么可爱——并说明了她为何认为我们应该将信息的控制权交还给其正当所有者。
+    你在 Facebook 上点赞了吗？观看这个演讲，了解 Facebook（以及其他平台）如何通过你的随机点赞和分享猜测出一些令人惊讶的事情。计算机科学家詹妮弗·戈尔贝克解释了这一现象的形成过程，以及这种技术的一些应用并不那么可爱——并说明了她为何认为我们应该将信息的控制权交还给其正当所有者。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -66,11 +66,11 @@ TED是一个致力于传播值得传播的思想的非盈利组织——通过TE
 
 **相关：**
 
-+   [前 5 名大数据 / 机器学习播客](/2015/12/top-5-big-data-machine-learning-podcasts.html)
++   前 5 名大数据 / 机器学习播客
 
-+   [YouTube 上观看次数最多的大数据视频](/2015/05/most-viewed-big-data-videos-youtube.html)
++   YouTube 上观看次数最多的大数据视频
 
-+   [最佳大数据、数据科学、数据挖掘和机器学习播客](/2015/06/best-big-data-data-science-data-mining-machine-learning-podcasts.html)
++   最佳大数据、数据科学、数据挖掘和机器学习播客
 
 ### 更多相关话题
 

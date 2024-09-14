@@ -1,8 +1,8 @@
-# 了解贝叶斯定理的3种方式将提升你的数据科学水平
+# 了解贝叶斯定理的 3 种方式将提升你的数据科学水平
 
-> 原文：[https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html`](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
 
-![了解贝叶斯定理的3种方式将提升你的数据科学水平](../Images/6b9ec94fd5357422a2bb9a267eaf6ae1.png)
+![了解贝叶斯定理的 3 种方式将提升你的数据科学水平](img/6b9ec94fd5357422a2bb9a267eaf6ae1.png)
 
 图片由 [Ella Olsson](https://www.pexels.com/@ella-olsson-572949?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，来自 [Pexels](https://www.pexels.com/photo/vegetable-salad-3026808/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -34,7 +34,7 @@
 
 贝叶斯定理提供了一种测试假设的结构，考虑到先前假设的强度和新证据。这个过程被称为贝叶斯更新。
 
-![了解贝叶斯定理的3种方式将提升你的数据科学水平](../Images/58bb9d82a46b40386db41ed8055e0290.png)
+![了解贝叶斯定理的 3 种方式将提升你的数据科学水平](img/58bb9d82a46b40386db41ed8055e0290.png)
 
 贝叶斯定理，其中 A 代表假设，B 代表与假设相关的新证据。
 
@@ -54,9 +54,9 @@
 
 比如说，你的朋友打电话告诉你，她非常抱歉，但今晚不能来参加晚餐。她最近领养了一只宠物考拉，这只考拉得了感冒。她真的需要待在家里监控情况。
 
-你的**假设**是你的朋友不会无缘无故地抛弃你。（毕竟，你做的ph很棒，你的朋友会疯狂地错过。）考虑到她新宠物的最近证据，你的假设为真的可能性有多大？
+你的**假设**是你的朋友不会无缘无故地抛弃你。（毕竟，你做的 ph 很棒，你的朋友会疯狂地错过。）考虑到她新宠物的最近证据，你的假设为真的可能性有多大？
 
-![了解贝叶斯定理的3种方法将提升你的数据科学水平](../Images/362798558873eb49a61dd9a6085e9d0a.png)
+![了解贝叶斯定理的 3 种方法将提升你的数据科学水平](img/362798558873eb49a61dd9a6085e9d0a.png)
 
 照片由[Valeriia Miller](https://www.pexels.com/@valeriiamiller?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)提供，来自[Pexels](https://www.pexels.com/photo/wood-people-hand-animal-5403361/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -86,9 +86,9 @@
 
 当工厂经理在第一天带我们参观车间时，他自豪地描述了一个关于更轻、更便宜的原材料的新供应商合同。
 
-但有一个问题。随着我的团队将来自不同数据源的表格连接起来，我们发现了新供应商的材料与废品增加2.5%之间的关系。
+但有一个问题。随着我的团队将来自不同数据源的表格连接起来，我们发现了新供应商的材料与废品增加 2.5%之间的关系。
 
-![了解贝叶斯定理如何改善你的数据科学](../Images/6da6fac0d4a0aad9df68494399b383f3.png)
+![了解贝叶斯定理如何改善你的数据科学](img/6da6fac0d4a0aad9df68494399b383f3.png)
 
 由[Darren Lee](https://unsplash.com/@darrenleejw?utm_source=medium&utm_medium=referral)拍摄，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -108,7 +108,7 @@
 
 假设你发现了一堆你祖父母写的信件。它们中包含了足够的戏剧性，以证明动荡的恋情并不仅限于年轻人在现实电视中。
 
-![了解贝叶斯定理如何改善你的数据科学](../Images/3f12457110996146616fca474e3c440d.png)
+![了解贝叶斯定理如何改善你的数据科学](img/3f12457110996146616fca474e3c440d.png)
 
 由[RODNAE Productions](https://www.pexels.com/@rodnae-prod?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)拍摄，来自[Pexels](https://www.pexels.com/photo/elderly-couple-standing-beside-a-glass-window-5637562/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -120,7 +120,7 @@
 
 你可以使用我们在第 #1 部分学习的贝叶斯推断公式的略微修改版本来计算每个观测值的最可能类别。这种略微的修改就是**朴素**贝叶斯中的*朴素*部分：假设在给定类别的条件下，每个词的概率是独立的，因此你可以将它们相乘以生成句子属于该类别的概率。
 
-![理解贝叶斯定理的三种方式将提升你的数据科学能力](../Images/03e21f63ca36a82a5cc5fc611e0af4f2.png)
+![理解贝叶斯定理的三种方式将提升你的数据科学能力](img/03e21f63ca36a82a5cc5fc611e0af4f2.png)
 
 通过 [*语音与语言处理*](https://web.stanford.edu/~jurafsky/slp3/4.pdf) 由 *丹尼尔·朱拉夫斯基 和 詹姆斯·H·马丁*
 
@@ -156,14 +156,14 @@
 
 ### 更多相关话题
 
-+   [本周提升搜索应用的8种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
++   [本周提升搜索应用的 8 种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
 
-+   [提升你的机器学习模型的7种方法](https://www.kdnuggets.com/7-ways-to-improve-your-machine-learning-models)
++   [提升你的机器学习模型的 7 种方法](https://www.kdnuggets.com/7-ways-to-improve-your-machine-learning-models)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [什么是切比雪夫定理及其如何应用于数据科学？](https://www.kdnuggets.com/2022/11/chebychev-theorem-apply-data-science.html)
 
 +   [为什么谦逊会提升你的数据科学技能](https://www.kdnuggets.com/2022/01/humbling-improve-data-science-skills.html)
 
-+   [如何利用ChatGPT提升你的数据科学技能](https://www.kdnuggets.com/2023/03/chatgpt-improve-data-science-skills.html)
++   [如何利用 ChatGPT 提升你的数据科学技能](https://www.kdnuggets.com/2023/03/chatgpt-improve-data-science-skills.html)

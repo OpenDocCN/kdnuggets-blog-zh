@@ -1,8 +1,8 @@
 # 在数据科学旅程中实现量子飞跃
 
-> 原文：[https://www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html](https://www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html)
+> 原文：[`www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html`](https://www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html)
 
-![在数据科学旅程中实现量子飞跃](../Images/28e2069670a647addd2f522cd97d7dd9.png)
+![在数据科学旅程中实现量子飞跃](img/28e2069670a647addd2f522cd97d7dd9.png)
 
 来自 Unsplash 的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -88,13 +88,13 @@
 
 上述三个数据科学级别可以在下图中总结。
 
-![在数据科学旅程中迈出量子步伐](../Images/c174cbcb95990dc2abb3928e661a9b12.png)
+![在数据科学旅程中迈出量子步伐](img/c174cbcb95990dc2abb3928e661a9b12.png)
 
 数据科学的三个级别 | 作者提供的图像。
 
 虽然一级和二级的能力可以通过在线课程获得，但学习三级（高级）概念需要大量的自学。一项重要的资源是以下教科书：**《使用 PyTorch 和 Scikit-Learn 进行机器学习》**。
 
-![在数据科学旅程中迈出量子步伐](../Images/860ac41edd2554e9391839d742cc877b.png)
+![在数据科学旅程中迈出量子步伐](img/860ac41edd2554e9391839d742cc877b.png)
 
 [书籍](https://github.com/rasbt/machine-learning-book)封面
 
@@ -102,18 +102,18 @@
 
 总结来说，我们讨论了数据科学的三个层次。由于数据科学是一个不断发展的领域，每个数据科学爱好者都应该继续努力，以实现向下一个层次的飞跃。
 
-**[本杰明·O·泰约](https://www.linkedin.com/in/benjamin-o-tayo-ph-d-a2717511/)** 是一位物理学家、数据科学教育者和作家，同时也是DataScienceHub的创始人。之前，本杰明在中央俄克拉荷马大学、大峡谷大学和匹兹堡州立大学教授工程学和物理学。
+**[本杰明·O·泰约](https://www.linkedin.com/in/benjamin-o-tayo-ph-d-a2717511/)** 是一位物理学家、数据科学教育者和作家，同时也是 DataScienceHub 的创始人。之前，本杰明在中央俄克拉荷马大学、大峡谷大学和匹兹堡州立大学教授工程学和物理学。
 
 ### 更多相关主题
 
-+   [解析量子计算：对数据科学和AI的影响](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)
++   [解析量子计算：对数据科学和 AI 的影响](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)
 
-+   [规划你的SAS认证之旅](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
++   [规划你的 SAS 认证之旅](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
 
-+   [通过Uplimit的Metaflow加速你的机器学习之旅…](https://www.kdnuggets.com/2023/10/uplimit-accelerate-your-machine-learning-journey-metaflow-mastery-course)
++   [通过 Uplimit 的 Metaflow 加速你的机器学习之旅…](https://www.kdnuggets.com/2023/10/uplimit-accelerate-your-machine-learning-journey-metaflow-mastery-course)
 
-+   [加速你的AI之旅！加入Uplimit的免费构建AI课程…](https://www.kdnuggets.com/2024/01/uplimit-supercharge-your-ai-journey-openai-course)
++   [加速你的 AI 之旅！加入 Uplimit 的免费构建 AI 课程…](https://www.kdnuggets.com/2024/01/uplimit-supercharge-your-ai-journey-openai-course)
 
-+   [用这5个免费课程启动你的NLP之旅](https://www.kdnuggets.com/kickstart-your-nlp-journey-with-these-5-free-courses)
++   [用这 5 个免费课程启动你的 NLP 之旅](https://www.kdnuggets.com/kickstart-your-nlp-journey-with-these-5-free-courses)
 
-+   [探索AI/DL最新趋势：从元宇宙到量子计算](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)
++   [探索 AI/DL 最新趋势：从元宇宙到量子计算](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)

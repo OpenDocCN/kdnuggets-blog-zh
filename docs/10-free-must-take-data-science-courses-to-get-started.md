@@ -1,10 +1,10 @@
-# 10个免费必修的数据科学课程
+# 10 个免费必修的数据科学课程
 
-> 原文：[https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
+> 原文：[`www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started`](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
 
-![10个免费必修的数据科学课程](../Images/96dbcdd9ba94612885f34259f755e1d1.png)
+![10 个免费必修的数据科学课程](img/96dbcdd9ba94612885f34259f755e1d1.png)
 
-图片由Ideogram.ai生成
+图片由 Ideogram.ai 生成
 
 你是数据科学初学者并想开始你的数据科学家职业生涯吗？或者你之前学过这些内容，需要复习一下？那么，你刚刚读到了完美的文章！
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -120,7 +120,7 @@ Python 并不是数据科学家应该掌握的唯一编程语言。随着公司�
 
 享受这个过程，并相信你可以成为一名数据科学家。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一位数据科学助理经理和数据撰稿人。他在全职工作于Allianz Indonesia的同时，喜欢通过社交媒体和写作分享Python和数据技巧。Cornellius撰写了各种AI和机器学习主题的文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一位数据科学助理经理和数据撰稿人。他在全职工作于 Allianz Indonesia 的同时，喜欢通过社交媒体和写作分享 Python 和数据技巧。Cornellius 撰写了各种 AI 和机器学习主题的文章。
 
 ### 更多相关内容
 
@@ -128,10 +128,10 @@ Python 并不是数据科学家应该掌握的唯一编程语言。随着公司�
 
 +   [联邦学习：协作机器学习教程…](https://www.kdnuggets.com/2021/12/federated-learning-collaborative-machine-learning-tutorial-get-started.html)
 
-+   [A/B测试的3个好处（+如何开始）](https://www.kdnuggets.com/2022/08/sphere-3-benefits-ab-testing-get-started.html)
++   [A/B 测试的 3 个好处（+如何开始）](https://www.kdnuggets.com/2022/08/sphere-3-benefits-ab-testing-get-started.html)
 
-+   [7个适合初学者的项目，让你快速入门ChatGPT](https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html)
++   [7 个适合初学者的项目，让你快速入门 ChatGPT](https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html)
 
-+   [短小有趣的课程，让你快速了解生成AI](https://www.kdnuggets.com/short-and-fun-courses-to-get-you-up-to-speed-about-generative-ai)
++   [短小有趣的课程，让你快速了解生成 AI](https://www.kdnuggets.com/short-and-fun-courses-to-get-you-up-to-speed-about-generative-ai)
 
-+   [如何快速入门SQL - 免费学习资源列表](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)
++   [如何快速入门 SQL - 免费学习资源列表](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)

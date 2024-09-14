@@ -1,8 +1,8 @@
 # 调整随机森林超参数
 
-> 原文：[https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)
+> 原文：[`www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html`](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)
 
-![调整随机森林超参数](../Images/3414b807dafcc166035b47ce74dfcfd6.png)
+![调整随机森林超参数](img/3414b807dafcc166035b47ce74dfcfd6.png)
 
 丛林矢量由 [freepik](https://www.freepik.com/vectors/jungle) 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@ sklearn.ensemble.RandomForestClassifier
 
 **随机森林**由许多决策树组成。树木的多样性构建了森林，我想这就是它被称为随机森林的原因。
 
-Bagging是创建随机森林“森林”的方法。其目的是减少过拟合训练数据的模型的复杂性。Boosting是Bagging的对立面，旨在增加高偏差模型的复杂性，解决欠拟合问题。
+Bagging 是创建随机森林“森林”的方法。其目的是减少过拟合训练数据的模型的复杂性。Boosting 是 Bagging 的对立面，旨在增加高偏差模型的复杂性，解决欠拟合问题。
 
 随机森林的结果基于由决策树生成的预测，这些预测通过取各种决策树输出的平均值或均值来完成。如果树木数量增加，结果的精度就会提高——因此准确性更高，过拟合得到减少。
 
@@ -100,9 +100,9 @@ Bagging是创建随机森林“森林”的方法。其目的是减少过拟合�
 
 +   [随机森林算法是否需要归一化？](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)
 
-+   [使用网格搜索和随机搜索进行超参数调整（Python版）](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
++   [使用网格搜索和随机搜索进行超参数调整（Python 版）](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 
-+   [调整XGBoost超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
++   [调整 XGBoost 超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
 
 +   [神经网络中的超参数调整](https://www.kdnuggets.com/tuning-hyperparameters-in-neural-networks)
 

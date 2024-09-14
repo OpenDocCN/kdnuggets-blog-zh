@@ -1,12 +1,12 @@
 # 超越编码：为何人文关怀至关重要
 
-> 原文：[https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)
+> 原文：[`www.kdnuggets.com/beyond-coding-why-the-human-touch-matters`](https://www.kdnuggets.com/beyond-coding-why-the-human-touch-matters)
 
-![软技能 2024](../Images/cf5e53ffbd3919fb771666e66726a2aa.png)
+![软技能 2024](img/cf5e53ffbd3919fb771666e66726a2aa.png)
 
 作者提供的图片
 
-软技能在2024年的兴起。
+软技能在 2024 年的兴起。
 
 如果我们展望技术的未来和软件开发的不同元素，就会发现这不仅仅是技术能力的问题。过去几年，自动化和人工智能主导了软技能的发展。
 
@@ -62,7 +62,7 @@
 
 在科技行业工作意味着你通常需要在紧迫的截止日期下工作，几乎没有灵活性。结合良好的自我组织，时间管理将帮助你达成这些截止日期。
 
-了解处理特定任务所需的时间还将帮助你在一周内更好地组织自己。例如，清理数据占用了我35%的时间，因此我会在一周的开始时先进行这项工作，以便在周末之前完成分析并向利益相关者展示。
+了解处理特定任务所需的时间还将帮助你在一周内更好地组织自己。例如，清理数据占用了我 35%的时间，因此我会在一周的开始时先进行这项工作，以便在周末之前完成分析并向利益相关者展示。
 
 ## 总结
 
@@ -80,11 +80,11 @@
 
 +   [为什么提升数据可视化技能很重要（以及如何开始）](https://www.kdnuggets.com/2022/07/sphere-upskilling-data-vis-matters.html)
 
-+   [关于数据管理你需要知道的6件事以及它为何重要…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理你需要知道的 6 件事以及它为何重要…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
 +   [超越人类边界：超级智能的崛起](https://www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence)
 
-+   [数据科学与机器学习编码的3个区别](https://www.kdnuggets.com/2021/11/3-differences-coding-data-science-machine-learning.html)
++   [数据科学与机器学习编码的 3 个区别](https://www.kdnuggets.com/2021/11/3-differences-coding-data-science-machine-learning.html)
 
 +   [停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 

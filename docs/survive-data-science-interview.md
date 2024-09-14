@@ -1,8 +1,8 @@
 # 如何顺利通过数据科学面试
 
-> 原文：[https://www.kdnuggets.com/2018/03/survive-data-science-interview.html](https://www.kdnuggets.com/2018/03/survive-data-science-interview.html)
+> 原文：[`www.kdnuggets.com/2018/03/survive-data-science-interview.html`](https://www.kdnuggets.com/2018/03/survive-data-science-interview.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 面试令人非常紧张。你坐在桌子对面，面前是一个拥有决定你收入和安全感权力的人。他们掌握着你的未来。你必须让他们喜欢你，信任你，认为你聪明。生活中很少有比这更能引起焦虑的情境。幸运的是，有一些方法可以让这个过程对你稍微轻松一点。
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-[![编程语言教材](../Images/b7e153da9a1c680fe7fa767e28539507.png)](https://commons.wikimedia.org/wiki/File%3AProgramming_language_textbooks.jpg)
+![编程语言教材](https://commons.wikimedia.org/wiki/File%3AProgramming_language_textbooks.jpg)
 
-数据科学有许多美好的方面。但其极端的广度并不是其中之一。数据科学家的头衔在每家公司都有不同的含义。对一些人来说，这意味着博士学位的统计学家；对一些人来说，这意味着精通Excel；对一些人来说，这意味着机器学习通才；对一些人来说，这意味着熟悉Spark和Hadoop。仔细阅读职位描述中的具体技能、工具和语言。写得好的职位描述会给你很多有关他们需求的见解。
+数据科学有许多美好的方面。但其极端的广度并不是其中之一。数据科学家的头衔在每家公司都有不同的含义。对一些人来说，这意味着博士学位的统计学家；对一些人来说，这意味着精通 Excel；对一些人来说，这意味着机器学习通才；对一些人来说，这意味着熟悉 Spark 和 Hadoop。仔细阅读职位描述中的具体技能、工具和语言。写得好的职位描述会给你很多有关他们需求的见解。
 
 你有有限的时间来准备。这是你的预算，你希望以最大的效益支出。你有几个选择：
 
@@ -32,7 +32,7 @@
 
 +   最后手段：如果你不知道从哪里开始，我建议你考虑以下几种方法。
 
-### Pocket Plan（10小时）
+### Pocket Plan（10 小时）
 
 这段时间只够让你复习你已经知道的内容。将你当前的舒适程度与职位描述进行比较。是否有一些技能你已经五年没有使用了？一些术语你不认识？你最大的知识空白在哪里？把更多时间花在这些方面。
 
@@ -40,15 +40,15 @@
 
 1.  **编码**
 
-    +   翻阅一本食谱（[例如](http://chimera.labs.oreilly.com/books/1230000000393)）。阅读6个基础领域的条目，如数据结构和字符串操作。
+    +   翻阅一本食谱（[例如](http://chimera.labs.oreilly.com/books/1230000000393)）。阅读 6 个基础领域的条目，如数据结构和字符串操作。
 
     +   写出并解释解决两个练习问题的程序。
 
 1.  **数据工程**
 
-    +   浏览一本SQL食谱书（[例如](http://shop.oreilly.com/product/9780596009762.do)）。阅读6个关于基础领域的条目，比如条件WHERE和表的组合方法。
+    +   浏览一本 SQL 食谱书（[例如](http://shop.oreilly.com/product/9780596009762.do)）。阅读 6 个关于基础领域的条目，比如条件 WHERE 和表的组合方法。
 
-    +   写出并解释三个练习问题的SQL查询。
+    +   写出并解释三个练习问题的 SQL 查询。
 
 1.  **概率和统计**
 
@@ -58,7 +58,7 @@
 
 1.  **机器学习和算法**
 
-    +   浏览一下[Steven Skiena的《算法设计手册》](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.471.4772&rep=rep1&type=pdf)的前三章。阅读两个你感觉不熟悉的部分。
+    +   浏览一下[Steven Skiena 的《算法设计手册》](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.471.4772&rep=rep1&type=pdf)的前三章。阅读两个你感觉不熟悉的部分。
 
     +   用图示解释你熟悉的机器学习算法。
 
@@ -68,19 +68,19 @@
 
 如果遇到你从未听说过的主题和工具，不要惊慌。许多职位发布都是愿望清单。它们听起来就像一个十五岁的孩子描述他们的完美伴侣——一个亿万富翁、明星相似的诺贝尔物理奖*和*和平奖得主。这些都是伴侣的优良品质，但我们中的大多数人会对找到其中一两个感到非常兴奋。没有人能拥有全部。在我的经验中，被录用的候选人在职位描述中的一些要点上很强，但不一定是全部。
 
-另外，不要忘记留出时间来研究第五个领域：**了解公司**。访问他们的网页。了解他们如何赚钱以及他们的客户是谁。阅读他们的工程博客，了解他们使用什么工具以及他们的基础设施是如何构建的。了解CEO的名字。如果你有幸得到面试官的名字，可以在网上查找他们的职业活动。了解他们的研究兴趣。了解他们关注的重点。
+另外，不要忘记留出时间来研究第五个领域：**了解公司**。访问他们的网页。了解他们如何赚钱以及他们的客户是谁。阅读他们的工程博客，了解他们使用什么工具以及他们的基础设施是如何构建的。了解 CEO 的名字。如果你有幸得到面试官的名字，可以在网上查找他们的职业活动。了解他们的研究兴趣。了解他们关注的重点。
 
-### Standard Plan（40小时）
+### Standard Plan（40 小时）
 
-如果Pocket Plan准备是一个单饼，Standard Plan就是高高的堆叠——相同的过程，每次都比上一次深入一些。你会做更多相同的示例题目，阅读更多相同的参考资料。Pocket Plan只让你有时间稍微复习一下技能，而Standard Plan让你能够进一步磨练这些技能。你可以了解一些你听说过但从未真正吸收的东西。
+如果 Pocket Plan 准备是一个单饼，Standard Plan 就是高高的堆叠——相同的过程，每次都比上一次深入一些。你会做更多相同的示例题目，阅读更多相同的参考资料。Pocket Plan 只让你有时间稍微复习一下技能，而 Standard Plan 让你能够进一步磨练这些技能。你可以了解一些你听说过但从未真正吸收的东西。
 
-在完成Pocket计划的第一次之后，退一步看看你觉得最不准备的地方。例如，如果职位发布上写着“需要SQL”，而招聘人员告诉你会问几个SQL问题，但你不知道SQL，那就是一个差距。制定一个你想要深入研究的事项清单，从最大的差距开始。然后回到Pocket计划，根据需要将时间分配给练习问题和参考阅读。
+在完成 Pocket 计划的第一次之后，退一步看看你觉得最不准备的地方。例如，如果职位发布上写着“需要 SQL”，而招聘人员告诉你会问几个 SQL 问题，但你不知道 SQL，那就是一个差距。制定一个你想要深入研究的事项清单，从最大的差距开始。然后回到 Pocket 计划，根据需要将时间分配给练习问题和参考阅读。
 
 ### 豪华计划（100+小时）
 
 如果你有幸选择了豪华选项，恭喜你！你有足够的时间从零开始掌握新技能。方法是从标准计划风格的差距分析开始，但不是做练习题，而是用大招：微项目和实践面试。
 
-**微项目**。微项目是一个小规模项目，从头到尾不超过10小时。它们将引导你走上[掌握全新技能和概念的道路](https://brohrer.github.io/one_step_program_become_data_scientist.html)。它们是这样工作的。
+**微项目**。微项目是一个小规模项目，从头到尾不超过 10 小时。它们将引导你走上[掌握全新技能和概念的道路](https://brohrer.github.io/one_step_program_become_data_scientist.html)。它们是这样工作的。
 
 1.  选择。选择一个需要你使用一两个差距技能的项目。这可能更难，而且看起来可能很复杂，但尽量不要过度思考。用例可以是荒谬的，结果可以是微不足道的。唯一的要求是它需要你正在学习的技能。
 
@@ -96,7 +96,7 @@
 
 ### 面试日
 
-[![一名特种部队评估和选拔候选人在北卡罗来纳州霍夫曼的坎普·马克尔（Camp Mackall）的Nasty Nick障碍课程中进行训练，2009年9月](../Images/4f5362f92837e884ba58ed6e45881054.png)](https://commons.wikimedia.org/wiki/File%3AA_Special_Forces_Assessment_and_Selection_candidate_conducts_training_at_the_Nasty_Nick_obstacle_course_Camp_Mackall_in_Hoffman%2C_N.C.%2C_September_2009_091009-A-GV060-075.jpg)
+![一名特种部队评估和选拔候选人在北卡罗来纳州霍夫曼的坎普·马克尔（Camp Mackall）的 Nasty Nick 障碍课程中进行训练，2009 年 9 月](https://commons.wikimedia.org/wiki/File%3AA_Special_Forces_Assessment_and_Selection_candidate_conducts_training_at_the_Nasty_Nick_obstacle_course_Camp_Mackall_in_Hoffman%2C_N.C.%2C_September_2009_091009-A-GV060-075.jpg)
 
 我希望我能保证如果你准备得足够充分，你就能通过面试并获得录用。不幸的是，事实比这更严酷。但不要让它打击你！保持清醒将帮助你以风度和优雅度过你的数据科学面试。
 
@@ -120,7 +120,7 @@
 
 **做你自己**
 
-[![MCCC 15 - 密歇根大学的风暴兵 (17473982183)](../Images/4c0ae50648b2fb8e4ae54bc2e872c5ba.png)](https://commons.wikimedia.org/wiki/File%3AMCCC_15_-_University_of_Michigan_Stormtrooper_(17473982183).jpg)
+![MCCC 15 - 密歇根大学的风暴兵 (17473982183)](https://commons.wikimedia.org/wiki/File%3AMCCC_15_-_University_of_Michigan_Stormtrooper_(17473982183).jpg)
 
 从好的一面看，当你到达面试时，你的大部分工作已经完成了。你只需洗个澡，按时到达即可。好好睡一觉（如果能的话），吃一顿好的早餐（如果能吞下去），然后你就准备好了。
 
@@ -138,17 +138,17 @@
 
 **相关：**
 
-+   [数据科学家招聘指南](/2018/02/guide-hiring-data-scientists.html)
++   数据科学家招聘指南
 
-+   [5 个关键的数据科学职位市场趋势](/2018/01/5-data-science-job-market-trends.html)
++   5 个关键的数据科学职位市场趋势
 
-+   [无学位学数据科学](/2018/01/learn-data-science-without-degree.html)
++   无学位学数据科学
 
 ### 更多相关话题
 
 +   [数据科学家需要专注于技术冬天才能生存](https://www.kdnuggets.com/2023/08/data-scientists-need-specialize-survive-tech-winter.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
 +   [Interview Kickstart 数据科学面试课程 — 它的独特之处…](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
 

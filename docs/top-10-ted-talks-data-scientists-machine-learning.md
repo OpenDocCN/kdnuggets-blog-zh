@@ -1,10 +1,10 @@
 # 数据科学家和机器学习工程师的十大 TED 演讲
 
-> 原文：[https://www.kdnuggets.com/2018/01/top-10-ted-talks-data-scientists-machine-learning.html](https://www.kdnuggets.com/2018/01/top-10-ted-talks-data-scientists-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/01/top-10-ted-talks-data-scientists-machine-learning.html`](https://www.kdnuggets.com/2018/01/top-10-ted-talks-data-scientists-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/e2d0c528edc184dae378c708158e3ed4.png)
+![](img/e2d0c528edc184dae378c708158e3ed4.png)
 
 有时候，当我们过于专注于学习机器学习的技术实现时，我们往往忽视了这项技术的重要问题，如其未来应用和政治后果。在这篇文章中，我们没有讨论使用什么语言或什么算法最适合解决问题，而是汇集了一些来自高度受欢迎的非营利组织 TED 的视频。
 
@@ -40,17 +40,17 @@
 
 1.  [人工智能如何带来第二次工业革命](https://www.ted.com/talks/kevin_kelly_how_ai_can_bring_on_a_second_industrial_revolution)，凯文·凯利，1.46M 次观看，[@kevin2kelly](https://twitter.com/kevin2kelly)。
 
-    他表示，在接下来的20年里，我们不断让事物变得越来越智能的倾向将对我们所做的几乎所有事情产生深远的影响。凯利探讨了我们需要理解的三大人工智能趋势，以便接受它并引导其发展。
+    他表示，在接下来的 20 年里，我们不断让事物变得越来越智能的倾向将对我们所做的几乎所有事情产生深远的影响。凯利探讨了我们需要理解的三大人工智能趋势，以便接受它并引导其发展。
 
 1.  [不要害怕超级智能的人工智能](https://www.ted.com/talks/grady_booch_don_t_fear_superintelligence)，格雷迪·布奇，1.44M 次观看，[@Grady_Booch](https://twitter.com/Grady_Booch)。
 
-    科学家和哲学家Grady Booch表示，新技术带来了新的焦虑，但我们不需要害怕全能的、无情的人工智能。Booch通过解释我们如何教导，而不是编程，让超智能计算机分享我们的价值观，来消除我们对超级智能计算机的最糟糕的（科幻作品引发的）恐惧。他建议我们不要担心不太可能发生的生存威胁，而是考虑人工智能将如何提升人类生活。
+    科学家和哲学家 Grady Booch 表示，新技术带来了新的焦虑，但我们不需要害怕全能的、无情的人工智能。Booch 通过解释我们如何教导，而不是编程，让超智能计算机分享我们的价值观，来消除我们对超级智能计算机的最糟糕的（科幻作品引发的）恐惧。他建议我们不要担心不太可能发生的生存威胁，而是考虑人工智能将如何提升人类生活。
 
-1.  [创建更安全AI的3个原则](https://www.ted.com/talks/stuart_russell_how_ai_might_make_us_better_people)，Stuart Russell，1.23M观看次数。我们如何利用超级智能AI的力量，同时防止机器人接管的灾难？随着我们朝着创造全知机器的方向前进，AI先锋Stuart Russell正在研究一些略有不同的东西：具备不确定性的机器人。听听他对能够使用常识、利他主义和其他人类价值观解决问题的兼容人工智能的愿景。
+1.  [创建更安全 AI 的 3 个原则](https://www.ted.com/talks/stuart_russell_how_ai_might_make_us_better_people)，Stuart Russell，1.23M 观看次数。我们如何利用超级智能 AI 的力量，同时防止机器人接管的灾难？随着我们朝着创造全知机器的方向前进，AI 先锋 Stuart Russell 正在研究一些略有不同的东西：具备不确定性的机器人。听听他对能够使用常识、利他主义和其他人类价值观解决问题的兼容人工智能的愿景。
 
 **相关**
 
-+   [**YouTube上的近期大数据视频**](https://www.kdnuggets.com/2017/05/top-recent-big-data-videos-youtube.html)
++   [**YouTube 上的近期大数据视频**](https://www.kdnuggets.com/2017/05/top-recent-big-data-videos-youtube.html)
 
 +   [**非营利组织如何从数据科学的力量中受益**](https://www.kdnuggets.com/2018/01/nonprofits-data-science.html)
 
@@ -60,21 +60,21 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

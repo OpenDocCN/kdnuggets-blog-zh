@@ -1,8 +1,8 @@
 # 使用 TensorFlow 进行简单的图像数据集增强
 
-> 原文：[https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html](https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html)
+> 原文：[`www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html`](https://www.kdnuggets.com/2020/02/easy-image-dataset-augmentation-tensorflow.html)
 
-[评论](#comments)![图](../Images/75da29ec9b82fa9d10c4cef5605e5a59.png)
+评论![图](img/75da29ec9b82fa9d10c4cef5605e5a59.png)
 
 图片来源：[Nanonets](https://nanonets.com/blog/data-augmentation-how-to-use-deep-learning-when-you-have-limited-data-part-2/)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -34,11 +34,11 @@
 
 数据增强不是万能药；我们不应该期望它解决所有的小数据问题，但在许多情况下它可能是有效的，并且通过将其作为全面模型训练方法的一部分进行扩展，比如与转移学习等其他数据集扩展技术一起使用。
 
-### TensorFlow中的图像增强
+### TensorFlow 中的图像增强
 
-在TensorFlow中，数据增强是通过[ImageDataGenerator](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator)类完成的。这非常简单易懂。每个周期都会循环整个数据集，并根据所选选项和数值对数据集中的图像进行变换。这些变换是在内存中执行的，因此不需要额外的存储（尽管可以使用`save_to_dir`参数将增强图像保存到磁盘，如果需要的话）。
+在 TensorFlow 中，数据增强是通过[ImageDataGenerator](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator)类完成的。这非常简单易懂。每个周期都会循环整个数据集，并根据所选选项和数值对数据集中的图像进行变换。这些变换是在内存中执行的，因此不需要额外的存储（尽管可以使用`save_to_dir`参数将增强图像保存到磁盘，如果需要的话）。
 
-如果你在使用TensorFlow，你可能已经在使用`ImageDataGenerator`仅用于缩放现有图像，而没有进行额外的数据增强。这可能如下所示：
+如果你在使用 TensorFlow，你可能已经在使用`ImageDataGenerator`仅用于缩放现有图像，而没有进行额外的数据增强。这可能如下所示：
 
 ```py` ``` train_datagen = ImageDataGenerator(rescale=1./255) ```py ````
 
@@ -48,43 +48,43 @@
 
 这都意味着什么？
 
-+   `**rotation_range**` - 随机旋转的度数范围；在上述示例中为20度
++   `**rotation_range**` - 随机旋转的度数范围；在上述示例中为 20 度
 
-+   `**width_shift_range**` - 总宽度的比例（如果值<1，如此处所示），用于随机水平平移图像；在上述示例中为0.2
++   `**width_shift_range**` - 总宽度的比例（如果值<1，如此处所示），用于随机水平平移图像；在上述示例中为 0.2
 
-+   `**height_shift_range**` - 总高度的比例（如果值<1，如此处所示），用于随机垂直平移图像；在上述示例中为0.2
++   `**height_shift_range**` - 总高度的比例（如果值<1，如此处所示），用于随机垂直平移图像；在上述示例中为 0.2
 
-+   `**shear_range**` - 用于剪切变换的逆时针剪切角度，单位为度；在上述示例中为0.2
++   `**shear_range**` - 用于剪切变换的逆时针剪切角度，单位为度；在上述示例中为 0.2
 
-+   `**zoom_range**` - 随机缩放的范围；在上述示例中为0.2
++   `**zoom_range**` - 随机缩放的范围；在上述示例中为 0.2
 
-+   `**horizontal_flip**` - 随机水平翻转图像的布尔值；在上述示例中为True
++   `**horizontal_flip**` - 随机水平翻转图像的布尔值；在上述示例中为 True
 
-+   `**vertical_flip**` - 随机垂直翻转图像的布尔值；在上述示例中为True
++   `**vertical_flip**` - 随机垂直翻转图像的布尔值；在上述示例中为 True
 
-+   `**fill_mode**` - 输入边界外的点根据“constant”，“nearest”，“reflect”或“wrap”填充；在上述示例中为nearest
++   `**fill_mode**` - 输入边界外的点根据“constant”，“nearest”，“reflect”或“wrap”填充；在上述示例中为 nearest
 
 然后，你可以指定训练（以及可选的验证，如果你创建了一个验证生成器）数据的位置，例如，使用`ImageDataGenerator`的`flow_from_directory`选项，然后在训练过程中使用`fit_generator`训练模型，将这些增强的图像流入你的网络。以下是一个这样的代码示例：
 
 ```py` ``` train_generator = train_datagen.flow_from_directory(          'data/train',          target_size=(150, 150),          batch_size=32,          class_mode='binary')    # 假设模型已定义...    history = model.fit_generator(        train_generator,        steps_per_epoch=100,        epochs=100,        verbose=2) ```py ````
 
-这就是全部内容。TensorFlow中轻松图像数据集增强的简介。
+这就是全部内容。TensorFlow 中轻松图像数据集增强的简介。
 
 **相关**:
 
-+   [高级特征工程和预处理的4个技巧](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)
++   高级特征工程和预处理的 4 个技巧
 
-+   [最新Scikit-learn版本中的5个伟大新功能](/2019/12/5-features-scikit-learn-release-highlights.html)
++   最新 Scikit-learn 版本中的 5 个伟大新功能
 
-+   [使用非最大抑制算法的行人检测](/2019/12/pedestrian-detection-non-maximum-suppression-algorithm.html)
++   使用非最大抑制算法的行人检测
 
 ### 更多相关内容
 
-+   [IT人员扩展：AI如何改变软件开发行业](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)
++   [IT 人员扩展：AI 如何改变软件开发行业](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)
 
-+   [TensorFlow用于计算机视觉 - 转移学习简化版](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 用于计算机视觉 - 转移学习简化版](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
-+   [使用Tensorflow训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
++   [使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
 
 +   [如何从巨大的数据集中正确选择样本进行机器学习](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)
 

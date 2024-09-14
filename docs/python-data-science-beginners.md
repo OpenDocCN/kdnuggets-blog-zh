@@ -1,8 +1,8 @@
 # Python 数据科学入门
 
-> 原文：[https://www.kdnuggets.com/2019/02/python-data-science-beginners.html](https://www.kdnuggets.com/2019/02/python-data-science-beginners.html)
+> 原文：[`www.kdnuggets.com/2019/02/python-data-science-beginners.html`](https://www.kdnuggets.com/2019/02/python-data-science-beginners.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Saurabh Hooda](https://www.linkedin.com/in/hoodasaurabh/)，Hackr.io**
 
@@ -14,11 +14,11 @@ Python 是一种流行的高级面向对象编程语言，被大量软件开发�
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -42,17 +42,17 @@ print(sum)
 
 ### 什么是数据科学？
 
-![Image](../Images/22d0342dcca0d430046104de14c04693.png)
+![Image](img/22d0342dcca0d430046104de14c04693.png)
 
 你一定听说过数据科学，但你对这个术语了解多少？谁能成为数据科学家？
 
 数据科学是一个包含各种工具、数据接口和应用机器学习原理的集合，用于从原始数据中发现隐藏的模式。原始数据存储在企业数据仓库中，并以创意方式使用，以从中生成商业价值。
 
-![Image](../Images/a11a8589bdff4f0ba154e6f546960d03.png)
+![Image](img/a11a8589bdff4f0ba154e6f546960d03.png)
 
 通过这个信息图可以理解数据科学的应用。
 
-![Image](../Images/a8f35408a3c7b211c99111d959ef615a.png)
+![Image](img/a8f35408a3c7b211c99111d959ef615a.png)
 
 数据分析师和数据科学家是不同的；数据分析师负责处理数据历史并解释发生了什么，而数据科学家需要各种高级机器学习算法，通过分析概念来识别特定事件的发生。
 
@@ -165,7 +165,7 @@ Python 拥有许多用于数据分析、数据处理和数据可视化的框架�
 
 ### 初学者最佳 Python 数据科学框架
 
-![Image](../Images/69e025e93034a4ffc321c7d33a38affe.png)
+![Image](img/69e025e93034a4ffc321c7d33a38affe.png)
 
 **NumPy：** 如我们之前总结的，NumPy 是 Numerical Python 的简称。它是 Python 编程中最受欢迎的库，并且是数据科学高级工具的基础。深入理解 NumPy 数组有助于有效使用 Pandas，特别是对数据科学家来说。NumPy 多才多艺，你可以处理多维数组和矩阵。NumPy 具有许多与统计、数值计算、线性代数、傅里叶变换等相关的内置函数。NumPy 是科学计算的标准库，提供强大的工具以与 C 和 C++ 集成。如果你想精通数据科学，那么 NumPy 是必须学习的库。
 
@@ -177,7 +177,7 @@ Python 拥有许多用于数据分析、数据处理和数据可视化的框架�
 
 **Matplotlib：** Matplotlib 代表 Python 中的数学绘图库。这是一个主要用于数据可视化的库，包括 3D 图、直方图、图像图、散点图、条形图和带有缩放和平移功能的功率谱，以适应不同硬拷贝格式的发布。它支持几乎所有平台，如 Windows、Mac 和 Linux。该库还作为 NumPy 库的扩展。Matplotlib 具有一个 `pyplot` 模块，用于可视化，通常与 MATLAB 相比较。
 
-这些库是初学者开始使用[Python 编程语言](http://techgeekbuzz.com/best-way-to-learn-python/)进行数据科学的最佳选择。还有许多其他 Python 库，例如用于自然语言处理的NLTK、用于网络挖掘的Pattern、用于深度学习的Theano、IPython、用于网页抓取的Scrapy、Mlpy、Statsmodels等。但是，对于刚开始学习数据科学的初学者来说，熟悉上述顶级库是必不可少的。
+这些库是初学者开始使用[Python 编程语言](http://techgeekbuzz.com/best-way-to-learn-python/)进行数据科学的最佳选择。还有许多其他 Python 库，例如用于自然语言处理的 NLTK、用于网络挖掘的 Pattern、用于深度学习的 Theano、IPython、用于网页抓取的 Scrapy、Mlpy、Statsmodels 等。但是，对于刚开始学习数据科学的初学者来说，熟悉上述顶级库是必不可少的。
 
 我们希望这篇文章能帮助你选择最佳的数据科学框架或库。如果你还有任何问题或需要指导或支持，可以联系我们。
 
@@ -187,11 +187,11 @@ Python 拥有许多用于数据分析、数据处理和数据可视化的框架�
 
 **相关：**
 
-+   [冷启动问题：如何构建你的机器学习组合](/2019/01/cold-start-problem-machine-learning.html)
++   冷启动问题：如何构建你的机器学习组合
 
-+   [探索 Python 基础知识](/2019/01/exploring-python-basics.html)
++   探索 Python 基础知识
 
-+   [2018 年人工智能和数据科学的进展及 2019 年趋势](/2019/02/ai-data-science-advances-trends.html)
++   2018 年人工智能和数据科学的进展及 2019 年趋势
 
 ### 更多相关内容
 
@@ -205,4 +205,4 @@ Python 拥有许多用于数据分析、数据处理和数据可视化的框架�
 
 +   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [一个90亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

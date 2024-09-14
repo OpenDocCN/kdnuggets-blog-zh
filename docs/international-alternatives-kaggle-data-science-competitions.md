@@ -1,22 +1,22 @@
 # Kaggle 的数据科学/机器学习竞赛的国际替代方案
 
-> 原文：[https://www.kdnuggets.com/2020/09/international-alternatives-kaggle-data-science-competitions.html](https://www.kdnuggets.com/2020/09/international-alternatives-kaggle-data-science-competitions.html)
+> 原文：[`www.kdnuggets.com/2020/09/international-alternatives-kaggle-data-science-competitions.html`](https://www.kdnuggets.com/2020/09/international-alternatives-kaggle-data-science-competitions.html)
 
-[comments](#comments)
+comments
 
 **由 [Frederik Bussler](https://www.linkedin.com/in/frederikbussler/)，Apteo 增长部门**。
 
-![](../Images/56ad4f39632afc9637e3ce8db3d3e0d8.png)
+![](img/56ad4f39632afc9637e3ce8db3d3e0d8.png)
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -36,9 +36,9 @@
 
 ### 1. [DrivenData](https://www.drivendata.org/competitions/)
 
-DrivenData 对全球所有人开放（除OFAC制裁国家如古巴、伊朗、伊拉克、朝鲜、苏丹和叙利亚外）。
+DrivenData 对全球所有人开放（除 OFAC 制裁国家如古巴、伊朗、伊拉克、朝鲜、苏丹和叙利亚外）。
 
-![](../Images/e9a53e99fda8160fcd21371b4e7e4433.png)
+![](img/e9a53e99fda8160fcd21371b4e7e4433.png)
 
 *DrivenData 资格规则。作者拍摄。*
 
@@ -52,7 +52,7 @@ CROWDANALYTIX 提供像水泥质量预测这样的竞赛，参与者来自世界
 
 ### 3. [Signate](https://signate.jp/competitions/?order=newest&per=50)
 
-![](../Images/9b2592ba56d51d030d2297b672319cfe.png)
+![](img/9b2592ba56d51d030d2297b672319cfe.png)
 
 *照片由 [Louie Martinez](https://unsplash.com/@thetalkinglens?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 

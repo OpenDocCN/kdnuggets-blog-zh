@@ -1,22 +1,22 @@
 # 你知道吗，早在石器时代，人们就已经在处理“数据过载”问题了？
 
-> 原文：[https://www.kdnuggets.com/2017/05/cavemen-big-data-issues.html](https://www.kdnuggets.com/2017/05/cavemen-big-data-issues.html)
+> 原文：[`www.kdnuggets.com/2017/05/cavemen-big-data-issues.html`](https://www.kdnuggets.com/2017/05/cavemen-big-data-issues.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：[Jonas Vandenbruaene](http://www.linkedin.com/in/jonasvandenbruaene)。**
 
-![](../Images/6dbb51cf9df3252d326379ec3228a122.png)
+![](img/6dbb51cf9df3252d326379ec3228a122.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 我们需要的是一次飞跃。因此，我们的祖先大约在 5000 年前发明了一个天才系统，将他们的思想编码成抽象符号，这些符号可以被熟悉该系统规则的其他人解读。这使得信息存储和处理第一次可能在早期人类的大脑之外进行。写作诞生了。
 
-![](../Images/ad9a792973b2ce4a7c04205cab12404a.png)
+![](img/ad9a792973b2ce4a7c04205cab12404a.png)
 
 **图 1：** [**公元前 3000 年美索不达米亚的早期泥板书写。**](http://history2701.wikia.com/wiki/Beer_Allocation_Clay_Cuneiform_Tablet_from_Southern_Iraq)
 
@@ -44,7 +44,7 @@
 
 今天，数据总量以每年 40% 的惊人速度增长，如图 2 所示。
 
-![](../Images/d501dec1f2ef17409a764a453b0f2c54.png)
+![](img/d501dec1f2ef17409a764a453b0f2c54.png)
 
 **图 2：** [**数据总量**](https://www.atkearney.com/documents/10192/698536/Big+Data+and+the+Creative+Destruction+of+Todays+Business+Models.pdf/f05aed38-6c26-431d-8500-d75a2c384919) **以 ZB 为单位。**
 
@@ -54,37 +54,37 @@
 
 在 2016 年，[432,000 小时](https://www.forbes.com/sites/bernardmarr/2015/09/30/big-data-20-mind-boggling-facts-everyone-must-read/#8f0522817b1e) 的视频被上传到 YouTube，每天都是这样！
 
-到2020年，每小时将为地球上的每个人创造超过[6GB](https://www.forbes.com/sites/bernardmarr/2015/09/30/big-data-20-mind-boggling-facts-everyone-must-read/#16c81c6e17b1)的数据！
+到 2020 年，每小时将为地球上的每个人创造超过[6GB](https://www.forbes.com/sites/bernardmarr/2015/09/30/big-data-20-mind-boggling-facts-everyone-must-read/#16c81c6e17b1)的数据！
 
-这些巨量的数据对公司来说可能极具价值，前提是公司知道如何从中提取信息。然而，[研究人员](https://www.technologyreview.com/s/514346/the-data-made-me-do-it/)估计，只有0.5%的数据被分析过。显然，还有大量未被发现的数据等待分析并转化为价值。
+这些巨量的数据对公司来说可能极具价值，前提是公司知道如何从中提取信息。然而，[研究人员](https://www.technologyreview.com/s/514346/the-data-made-me-do-it/)估计，只有 0.5%的数据被分析过。显然，还有大量未被发现的数据等待分析并转化为价值。
 
-就像5000年前，当简单的记忆无法高效存储和分析数据一样，如今公司也发现传统的分析系统已经无法驯服大数据的浪潮。
+就像 5000 年前，当简单的记忆无法高效存储和分析数据一样，如今公司也发现传统的分析系统已经无法驯服大数据的浪潮。
 
 就像记忆被书写所取代一样，传统数据库也被[分布式系统](http://article.sciencepublishinggroup.com/html/10.11648.j.iotcc.20160403.13.html)所取代。进行大规模数据分析所需的飞跃。
 
 **结论**
 
-大数据竟然是一个5000年的问题！大数据架构师可能真的是仅次于最古老职业的第二古老职业…
+大数据竟然是一个 5000 年的问题！大数据架构师可能真的是仅次于最古老职业的第二古老职业…
 
-**个人简介：[Jonas Vandenbruaene](http://www.linkedin.com/in/jonasvandenbruaene)** 是安特卫普大学的商业工程学学生。对数据分析、艺术和环游世界充满热情。目前正在撰写关于组织数据成熟度和CDO角色的硕士论文。通过博客激发有趣的讨论！
+**个人简介：[Jonas Vandenbruaene](http://www.linkedin.com/in/jonasvandenbruaene)** 是安特卫普大学的商业工程学学生。对数据分析、艺术和环游世界充满热情。目前正在撰写关于组织数据成熟度和 CDO 角色的硕士论文。通过博客激发有趣的讨论！
 
 **相关：**
 
-+   [Hadoop并未失败，它是数据的未来](/2017/04/hadoop-not-failing-future-data.html)
++   Hadoop 并未失败，它是数据的未来
 
-+   [大数据的起源](/2017/02/origins-big-data.html)
++   大数据的起源
 
-+   [数据挖掘历史：支持向量机的发明](/2016/07/guyon-data-mining-history-svm-support-vector-machines.html)
++   数据挖掘历史：支持向量机的发明
 
 ### 更多相关话题
 
-+   [我参加了Google数据分析认证课程，已有2,148,697人…](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
++   [我参加了 Google 数据分析认证课程，已有 2,148,697 人…](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
 
 +   [处理推荐和搜索中的位置偏差](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)
 
 +   [处理文本数据中的噪声标签](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)
 
-+   [10个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
 +   [用伟大的期望克服数据质量问题](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
 

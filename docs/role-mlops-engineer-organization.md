@@ -1,8 +1,8 @@
 # MLOps 工程师在组织中的角色
 
-> 原文：[https://www.kdnuggets.com/2023/04/role-mlops-engineer-organization.html](https://www.kdnuggets.com/2023/04/role-mlops-engineer-organization.html)
+> 原文：[`www.kdnuggets.com/2023/04/role-mlops-engineer-organization.html`](https://www.kdnuggets.com/2023/04/role-mlops-engineer-organization.html)
 
-![MLOps 工程师在组织中的角色](../Images/3872949d0e19755bcfde6f3499c78d7e.png)
+![MLOps 工程师在组织中的角色](img/3872949d0e19755bcfde6f3499c78d7e.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -38,57 +38,57 @@
 
 # MLOps 工程师的工作是什么？
 
-我们说过，将DevOps实践应用于机器学习系统是可能的。如果这就是MLOps，那么MLOps工程师的职责就是做到这一点！
+我们说过，将 DevOps 实践应用于机器学习系统是可能的。如果这就是 MLOps，那么 MLOps 工程师的职责就是做到这一点！
 
-我们说的是什么意思？一旦数据科学团队构建了模型，MLOps工程师通过以下方式确保模型的成功运行：
+我们说的是什么意思？一旦数据科学团队构建了模型，MLOps 工程师通过以下方式确保模型的成功运行：
 
 +   自动化机器学习模型部署
 
-+   为ML管道设置监控
++   为 ML 管道设置监控
 
-+   自动化CI/CD管道以考虑数据、代码和模型的变化
++   自动化 CI/CD 管道以考虑数据、代码和模型的变化
 
 +   设置自动化模型重新训练
 
 +   确定所需的自动化水平
 
-## 与MLOps相关的一些挑战
+## 与 MLOps 相关的一些挑战
 
-设置*监控*只能帮助识别问题出现的时机。为了获得不同版本模型性能的更详细信息，MLOps工程师通常使用*模型版本控制*和*实验跟踪*。
+设置*监控*只能帮助识别问题出现的时机。为了获得不同版本模型性能的更详细信息，MLOps 工程师通常使用*模型版本控制*和*实验跟踪*。
 
-我们提到过，MLOps工程师设定了*模型重新训练*的所需自动化水平。让我们尝试理解与之相关的挑战。
+我们提到过，MLOps 工程师设定了*模型重新训练*的所需自动化水平。让我们尝试理解与之相关的挑战。
 
 一旦应用程序部署到生产环境，模型所使用的数据（在生产环境中）可能与其训练时的数据有很大不同。因此，这样的模型表现可能较差，我们通常需要重新训练。
 
-MLOps工程师还需要处理模型重新训练的过程和自动化，包括考虑性能下降、数据变化的频率以及模型重新训练的成本。
+MLOps 工程师还需要处理模型重新训练的过程和自动化，包括考虑性能下降、数据变化的频率以及模型重新训练的成本。
 
-**等等，我做MLOps。但我不是MLOps工程师。**
+**等等，我做 MLOps。但我不是 MLOps 工程师。**
 
-在一些初创公司中，你可能会有既担任机器学习工程师又担任MLOps工程师的角色。而在其他公司中，你可能会有同时担任DevOps和后端工程师的角色。
+在一些初创公司中，你可能会有既担任机器学习工程师又担任 MLOps 工程师的角色。而在其他公司中，你可能会有同时担任 DevOps 和后端工程师的角色。
 
-在大科技公司中，MLOps的工作可能与早期阶段的创业公司中的MLOps大相径庭。MLOps的自动化程度也可能因组织而异。
+在大科技公司中，MLOps 的工作可能与早期阶段的创业公司中的 MLOps 大相径庭。MLOps 的自动化程度也可能因组织而异。
 
-如果你在一个初创公司工作，负责从模型训练到监控和维护机器学习系统的端到端机器学习管道，你也已经是MLOps工程师。
+如果你在一个初创公司工作，负责从模型训练到监控和维护机器学习系统的端到端机器学习管道，你也已经是 MLOps 工程师。
 
-你是否对探索这个具有挑战性的MLOps工程师角色感到兴奋？让我们总结一下你需要的技能。
+你是否对探索这个具有挑战性的 MLOps 工程师角色感到兴奋？让我们总结一下你需要的技能。
 
-# MLOps技能和工具概述
+# MLOps 技能和工具概述
 
-MLOps工程师通常具有强大的机器学习、DevOps和数据工程技能。
+MLOps 工程师通常具有强大的机器学习、DevOps 和数据工程技能。
 
-![MLOps工程师在组织中的角色](../Images/1b1bd8cd7a214f85ddab6c7f545d3f9b.png)
+![MLOps 工程师在组织中的角色](img/1b1bd8cd7a214f85ddab6c7f545d3f9b.png)
 
 图片由作者提供
 
 +   **机器学习技能**：编程、对机器学习算法和框架的工作知识，以及领域知识
 
-+   **软件工程技能**：查询和操作数据库、测试ML模型、Git和版本控制、如FastAPI等框架
++   **软件工程技能**：查询和操作数据库、测试 ML 模型、Git 和版本控制、如 FastAPI 等框架
 
-+   **DevOps基础**：精通Docker和Kubernetes等工具
++   **DevOps 基础**：精通 Docker 和 Kubernetes 等工具
 
-+   **实验跟踪**：熟悉如MLflow等实验跟踪框架
++   **实验跟踪**：熟悉如 MLflow 等实验跟踪框架
 
-+   **编排数据管道**：使用Prefect和Airflow等工具设置和自动化数据管道
++   **编排数据管道**：使用 Prefect 和 Airflow 等工具设置和自动化数据管道
 
 +   **云基础设施**：熟悉云基础设施提供商，如 AWS、GCP，以及像 Terraform 这样的基础设施即代码（IaC）工具
 
@@ -100,7 +100,7 @@ MLOps工程师通常具有强大的机器学习、DevOps和数据工程技能。
 
 +   [Coursera 上的 MLOps 专项课程](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops)：DeepLearning.AI 提供的生产环境机器学习（MLOps）专项课程。该专项课程（包括四门课程）将教你如何构建生产级机器学习系统。
 
-+   [MLOps GitHub 仓库](/2023/02/learn-mlops-github-repositories.html)：一个经过筛选的仓库列表，用于提升 MLOps 技能。
++   MLOps GitHub 仓库：一个经过筛选的仓库列表，用于提升 MLOps 技能。
 
 # 总结
 

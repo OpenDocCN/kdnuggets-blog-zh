@@ -1,6 +1,6 @@
 # 关于开发安全、可靠和值得信赖的 AI 框架的专家见解
 
-> 原文：[https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
+> 原文：[`www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks`](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
 
 **作者：查尔斯·瓦德曼博士、克里斯托弗·斯威特博士和保罗·布伦纳博士**
 
@@ -8,7 +8,7 @@
 
 # TAI 维度应用于 ML 流水线和 AI 开发周期
 
-![关于开发安全、可靠和值得信赖的 AI 框架的专家见解](../Images/798e6d38adb8280bedba2f6f87d12238.png)
+![关于开发安全、可靠和值得信赖的 AI 框架的专家见解](img/798e6d38adb8280bedba2f6f87d12238.png)
 
 # 从软件工程过渡到 AI 工程
 
@@ -16,7 +16,7 @@
 
 # 示例 AI 框架组件及其利用
 
-![关于开发安全、可靠和值得信赖的 AI 框架的专家见解](../Images/3b159f05e29a903c16cebaced789601d.png)
+![关于开发安全、可靠和值得信赖的 AI 框架的专家见解](img/3b159f05e29a903c16cebaced789601d.png)
 
 # GitOps 和 CI/CD
 

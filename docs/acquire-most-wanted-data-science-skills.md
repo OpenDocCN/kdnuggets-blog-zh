@@ -1,12 +1,12 @@
 # 如何获得最受欢迎的数据科学技能
 
-> 原文：[https://www.kdnuggets.com/2020/11/acquire-most-wanted-data-science-skills.html](https://www.kdnuggets.com/2020/11/acquire-most-wanted-data-science-skills.html)
+> 原文：[`www.kdnuggets.com/2020/11/acquire-most-wanted-data-science-skills.html`](https://www.kdnuggets.com/2020/11/acquire-most-wanted-data-science-skills.html)
 
-[评论](#comments)
+评论
 
-KDnuggets [最近进行了一项调查](/2020/09/modern-data-science-skills.html) ，以了解我们的读者目前掌握了哪些数据科学技能，以及他们希望添加或改进哪些技能。
+KDnuggets 最近进行了一项调查 ，以了解我们的读者目前掌握了哪些数据科学技能，以及他们希望添加或改进哪些技能。
 
-结果分析显示，在我们50项技能中，排名前10的最受欢迎技能（按希望拥有的受访者百分比递减排序）是：
+结果分析显示，在我们 50 项技能中，排名前 10 的最受欢迎技能（按希望拥有的受访者百分比递减排序）是：
 
 1.  强化学习
 
@@ -32,11 +32,11 @@ KDnuggets [最近进行了一项调查](/2020/09/modern-data-science-skills.html
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -44,7 +44,7 @@ KDnuggets [最近进行了一项调查](/2020/09/modern-data-science-skills.html
 
 请记住，这些是学习特定主题基础知识的方法，在许多情况下，获得足够的专业知识以便日常使用这些特定技能或对其进行深入理解可能需要许多小时甚至多年的实践和学习。但不要因此气馁，赶快开始学习吧。
 
-![图](../Images/32448441178962a451e950eed98c3fbb.png)**图 1: 前10名最受欢迎的数据科学/机器学习技能**
+![图](img/32448441178962a451e950eed98c3fbb.png)**图 1: 前 10 名最受欢迎的数据科学/机器学习技能**
 
 按希望拥有的受访者百分比与现有的受访者百分比绘制
 
@@ -58,35 +58,35 @@ KDnuggets [最近进行了一项调查](/2020/09/modern-data-science-skills.html
 
 **2\. TensorFlow**
 
-51.2%的受访者表示他们希望提升TensorFlow技能或将其加入自己的技能库。这是有充分理由的，因为TensorFlow仍然是[最具影响力和广泛使用的](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html) Python机器学习库之一。学习实用TensorFlow的一个很好的资源是：
+51.2%的受访者表示他们希望提升 TensorFlow 技能或将其加入自己的技能库。这是有充分理由的，因为 TensorFlow 仍然是最具影响力和广泛使用的 Python 机器学习库之一。学习实用 TensorFlow 的一个很好的资源是：
 
-+   [DeepLearning.AI TensorFlow开发者专业证书](https://www.coursera.org/professional-certificates/tensorflow-in-practice) 通过Coursera
++   [DeepLearning.AI TensorFlow 开发者专业证书](https://www.coursera.org/professional-certificates/tensorflow-in-practice) 通过 Coursera
 
 **3. 深度学习算法**
 
-50.8%的受访者认为深度学习算法是一个值得掌握的技能。随着时间的推移，深度学习不再被视为一时的潮流；最近，[Geoffrey Hinton被引用](https://www.technologyreview.com/2020/11/03/1011616/ai-godfather-geoffrey-hinton-deep-learning-will-do-everything/)说“深度学习将能够做一切。”这似乎是至少了解这些算法能做什么的充分理由。理解深度学习基础知识的好地方仍然包括：
+50.8%的受访者认为深度学习算法是一个值得掌握的技能。随着时间的推移，深度学习不再被视为一时的潮流；最近，[Geoffrey Hinton 被引用](https://www.technologyreview.com/2020/11/03/1011616/ai-godfather-geoffrey-hinton-deep-learning-will-do-everything/)说“深度学习将能够做一切。”这似乎是至少了解这些算法能做什么的充分理由。理解深度学习基础知识的好地方仍然包括：
 
-+   [深度学习](https://www.deeplearningbook.org/) 由Goodfellow、Bengio和Courville编著
++   [深度学习](https://www.deeplearningbook.org/) 由 Goodfellow、Bengio 和 Courville 编著
 
-+   [DeepLearning.AI深度学习专业课程](https://www.coursera.org/specializations/deep-learning) 通过Coursera
++   [DeepLearning.AI 深度学习专业课程](https://www.coursera.org/specializations/deep-learning) 通过 Coursera
 
 **4. PyTorch**
 
-排名第四的是PyTorch，50.1%的受访者表示他们有兴趣增加或提升对这一深度学习库的了解。学习PyTorch基础知识的最佳地方仍然是PyTorch官方教程，网址如下：
+排名第四的是 PyTorch，50.1%的受访者表示他们有兴趣增加或提升对这一深度学习库的了解。学习 PyTorch 基础知识的最佳地方仍然是 PyTorch 官方教程，网址如下：
 
-+   [PyTorch官方教程](https://pytorch.org/tutorials/)
++   [PyTorch 官方教程](https://pytorch.org/tutorials/)
 
 **5. AWS（亚马逊网络服务）**
 
-48.8%的受访者表示他们对学习AWS感兴趣，AWS是亚马逊提供的一系列相关服务。鉴于此，学习这些众多相关服务的基础知识的地方仍然是官方的亚马逊AWS培训网站，网址如下：
+48.8%的受访者表示他们对学习 AWS 感兴趣，AWS 是亚马逊提供的一系列相关服务。鉴于此，学习这些众多相关服务的基础知识的地方仍然是官方的亚马逊 AWS 培训网站，网址如下：
 
-+   [AWS培训与认证](https://aws.amazon.com/training/)
++   [AWS 培训与认证](https://aws.amazon.com/training/)
 
 **6. 自然语言处理**
 
-自然语言处理仍然是一个受欢迎的技能（或技能组合），48.7%的受访者对此有需求。学习NLP的时间投入远不止上几门课程，单纯从数据科学、计算机科学或AI背景出发是无法完全掌握的。然而，通过如亚马逊机器学习大学的课程，可以了解一些基本知识：
+自然语言处理仍然是一个受欢迎的技能（或技能组合），48.7%的受访者对此有需求。学习 NLP 的时间投入远不止上几门课程，单纯从数据科学、计算机科学或 AI 背景出发是无法完全掌握的。然而，通过如亚马逊机器学习大学的课程，可以了解一些基本知识：
 
-+   [加速自然语言处理](/2020/08/accelerated-nlp-free-amazon-machine-learning-university.html) 由亚马逊机器学习大学提供
++   加速自然语言处理 由亚马逊机器学习大学提供
 
 **7. Apache Spark**
 
@@ -114,19 +114,19 @@ NoSQL 是一个广泛的术语，涵盖了各种不符合传统 SQL/关系数据
 
 **相关**：
 
-+   [如何获取最受欢迎的数据科学技能](/2020/09/modern-data-science-skills.html)
++   如何获取最受欢迎的数据科学技能
 
-+   [我如何在 8 个月内提升我的数据科学技能](/2020/10/level-up-data-science-skills-8-months.html)
++   我如何在 8 个月内提升我的数据科学技能
 
-+   [数据科学最低要求：开始数据科学所需了解的 10 项基本技能](/2020/10/data-science-minimum-10-essential-skills.html)
++   数据科学最低要求：开始数据科学所需了解的 10 项基本技能
 
 ### 更多相关主题
 
 +   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

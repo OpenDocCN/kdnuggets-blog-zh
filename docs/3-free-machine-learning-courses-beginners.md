@@ -1,8 +1,8 @@
 # 3 个免费初学者机器学习课程
 
-> 原文：[https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html](https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html)
+> 原文：[`www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html`](https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html)
 
-![3 个免费初学者机器学习课程](../Images/764cb6100e7b507e5781611cc2af2eed.png)
+![3 个免费初学者机器学习课程](img/764cb6100e7b507e5781611cc2af2eed.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 你将了解机器学习应用、示例，并在 Jupyter Notebook 上构建你的第一个线性和逻辑回归模型。此外，你将学习特征工程、梯度下降、成本函数、决策边界和正则化。
 
-![3 个免费初学者机器学习课程](../Images/6cf363f218bd5ab6239d12d7bd9e5f6d.png)
+![3 个免费初学者机器学习课程](img/6cf363f218bd5ab6239d12d7bd9e5f6d.png)
 
 图片来源于 Coursera
 
@@ -46,7 +46,7 @@
 
 [机器学习](https://www.udacity.com/course/machine-learning--ud262?irclickid=QlxSPkwh5xyIWdTRvMzWh2bTUkA0-a2LX1mS2Q0&irgwc=1&utm_source=affiliate&utm_medium=&aff=259799&utm_term=&utm_campaign=_gtc_www_classcentral_com_&utm_content=&adid=788805) 课程来自乔治亚理工学院，介绍了监督学习、无监督学习和强化学习。你将通过视频课程和互动测验及练习进行学习。
 
-![3 个适合初学者的免费机器学习课程](../Images/27e85891ec75f8fb2d560ffa624dfdeb.png)
+![3 个适合初学者的免费机器学习课程](img/27e85891ec75f8fb2d560ffa624dfdeb.png)
 
 图片来自 Udacity
 
@@ -68,7 +68,7 @@
 
 课程的一个好处是由 Jeremy Howard 教授，他是一位深度学习从业者，致力于让机器学习对所有人免费开放。
 
-![3 个适合初学者的免费机器学习课程](../Images/59efdd0f7f94700a8acc47371805309f.png)
+![3 个适合初学者的免费机器学习课程](img/59efdd0f7f94700a8acc47371805309f.png)
 
 图片来自 fast.ai
 
@@ -88,18 +88,18 @@
 
 如果你在进行无指导的项目时会学得更多。希望你喜欢我提供的小课程列表。如果你对机器学习职业有疑问，请在下方评论。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证数据科学专业人士，热衷于构建机器学习模型。当前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为患有心理疾病的学生构建一款AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证数据科学专业人士，热衷于构建机器学习模型。当前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为患有心理疾病的学生构建一款 AI 产品。
 
 ### 相关主题
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
-+   [7门适合数据科学初学者的免费Kaggle微课程](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)
++   [7 门适合数据科学初学者的免费 Kaggle 微课程](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)
 
-+   [5门适合数据科学初学者的免费SQL课程](https://www.kdnuggets.com/5-free-sql-courses-for-data-science-beginners)
++   [5 门适合数据科学初学者的免费 SQL 课程](https://www.kdnuggets.com/5-free-sql-courses-for-data-science-beginners)
 
-+   [5门适合数据科学初学者的免费Python课程](https://www.kdnuggets.com/5-free-python-courses-for-data-science-beginners)
++   [5 门适合数据科学初学者的免费 Python 课程](https://www.kdnuggets.com/5-free-python-courses-for-data-science-beginners)
 
-+   [KDnuggets 新闻，10月5日：初学者的顶级免费Git GUI客户端 •…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
 
-+   [适合初学者的免费MLOps速成课程](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)
++   [适合初学者的免费 MLOps 速成课程](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)

@@ -1,8 +1,8 @@
 # 将 Python 字典转换为 JSON：初学者教程
 
-> 原文：[https://www.kdnuggets.com/convert-python-dict-to-json-a-tutorial-for-beginners](https://www.kdnuggets.com/convert-python-dict-to-json-a-tutorial-for-beginners)
+> 原文：[`www.kdnuggets.com/convert-python-dict-to-json-a-tutorial-for-beginners`](https://www.kdnuggets.com/convert-python-dict-to-json-a-tutorial-for-beginners)
 
-![将 Python 字典转换为 JSON：初学者教程](../Images/7de3ba9f91c9442043b2613b19bcdda1.png)
+![将 Python 字典转换为 JSON：初学者教程](img/7de3ba9f91c9442043b2613b19bcdda1.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 

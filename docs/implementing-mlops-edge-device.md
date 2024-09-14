@@ -1,8 +1,8 @@
 # 在边缘设备上实施 MLOps
 
-> 原文：[https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html](https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html)
+> 原文：[`www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html`](https://www.kdnuggets.com/2020/08/implementing-mlops-edge-device.html)
 
-[评论](#comments)
+评论
 
 **作者：[Felix Baum](https://developer.qualcomm.com/blogs/fbaum)，高通技术公司**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 实施了 MLOps 级别 2 或 MLOps 级别 3 的组织可能还会使用所谓的“影子模型”，这些模型与生产模型并行训练，每个模型使用不同的训练数据集。当需要新的生产模型时，可以快速选择和部署一个影子模型。
 
-[![图示](../Images/22938573f024a01b728b506138623974.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-01_0.png)
+![图示](https://developer.qualcomm.com/sites/default/files/attachments/mlops-01_0.png)
 
 *图 1 - 不同数据集上影子模型的并行训练的视觉描述。每个模型都是成为新生产模型的潜在候选者。*
 
@@ -78,7 +78,7 @@
 
 1.  一旦加载完成且应用程序运行，模型已被部署到边缘进行真实数据的推理。
 
-[![图示](../Images/4fc6183c11b6ba52714bfa3a5b8bba45.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-02.png)
+![图示](https://developer.qualcomm.com/sites/default/files/attachments/mlops-02.png)
 
 *图 2 - 在边缘设备上集成和执行 ML 模型的基本工作流。*
 
@@ -88,7 +88,7 @@
 
 进一步来看，有许多工具和阶段需要集成到 MLOps 管道模型部署脚本中。以下展示了一个基于 Qualcomm 神经处理 SDK 的示例管道：
 
-[![图示](../Images/52ae9f34f0b50b1a7484756abbd57a08.png)](https://developer.qualcomm.com/sites/default/files/attachments/mlops-03.jpg)
+![图示](https://developer.qualcomm.com/sites/default/files/attachments/mlops-03.jpg)
 
 *图 3 – 边缘设备 SDK 在 ML 工作流中的作用的更详细视图。*
 
@@ -100,36 +100,36 @@
 
 **结论**
 
-ML系统本质上不同于传统软件，因为它们是非确定性的，并且在不断变化的数据世界中运行。但多亏了像MLOps这样的正式方法论，开发人员拥有了策划和实施稳健ML解决方案所需的工具。
+ML 系统本质上不同于传统软件，因为它们是非确定性的，并且在不断变化的数据世界中运行。但多亏了像 MLOps 这样的正式方法论，开发人员拥有了策划和实施稳健 ML 解决方案所需的工具。
 
-随着机器学习在今天许多设备上的边缘计算中越来越重要，看到这些硬件与其SDK和工具结合能够支持有效的MLOps管道令人兴奋。
+随着机器学习在今天许多设备上的边缘计算中越来越重要，看到这些硬件与其 SDK 和工具结合能够支持有效的 MLOps 管道令人兴奋。
 
 1.  *生产模型* 指的是已经部署用于真实数据推断的机器学习模型。
 
-1.  [https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/](https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/)
+1.  [`www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/`](https://www.statista.com/statistics/233415/global-market-share-of-applications-processor-suppliers/)
 
-**简介：[费利克斯·鲍姆](https://developer.qualcomm.com/blogs/fbaum)** 负责管理高通技术公司的数字信号处理器（DSP）软件产品，并在支持Hexagon DSP在连接、音频、语音、传感器融合、计算机视觉和机器学习应用中的作用中发挥了重要作用。
+**简介：[费利克斯·鲍姆](https://developer.qualcomm.com/blogs/fbaum)** 负责管理高通技术公司的数字信号处理器（DSP）软件产品，并在支持 Hexagon DSP 在连接、音频、语音、传感器融合、计算机视觉和机器学习应用中的作用中发挥了重要作用。
 
 [原文](https://developer.qualcomm.com/blog/implementing-machine-learning-and-operations-mlops) 已获授权转载。
 
 **相关：**
 
-+   [驾驭MLOps中的复杂性](/2020/05/taming-complexity-mlops.html)
++   驾驭 MLOps 中的复杂性
 
-+   [揭开AI基础设施堆栈的面纱](/2020/05/demystifying-ai-infrastructure-stack.html)
++   揭开 AI 基础设施堆栈的面纱
 
-+   [端到端机器学习平台巡礼](/2020/07/tour-end-to-end-machine-learning-platforms.html)
++   端到端机器学习平台巡礼
 
 ### 相关主题
 
-+   [具备开发者准备好的软件栈的设备端AI](https://www.kdnuggets.com/2022/03/qualcomm-ondevice-ai-developer-ready-software-stacks.html)
++   [具备开发者准备好的软件栈的设备端 AI](https://www.kdnuggets.com/2022/03/qualcomm-ondevice-ai-developer-ready-software-stacks.html)
 
-+   [学习如何在设备上仅需几步运行Alpaca-LoRA](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)
++   [学习如何在设备上仅需几步运行 Alpaca-LoRA](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)
 
 +   [边缘上的机器学习](https://www.kdnuggets.com/2022/10/machine-learning-edge.html)
 
-+   [最大化边缘AI应用的性能](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)
++   [最大化边缘 AI 应用的性能](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)
 
-+   [Windows on Snapdragon 将混合AI带到边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)
++   [Windows on Snapdragon 将混合 AI 带到边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)
 
-+   [介绍TPU v4：谷歌的大型语言模型尖端超级计算机](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)
++   [介绍 TPU v4：谷歌的大型语言模型尖端超级计算机](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)

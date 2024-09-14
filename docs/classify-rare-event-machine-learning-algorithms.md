@@ -1,8 +1,8 @@
 # 使用 5 种机器学习算法分类稀有事件
 
-> 原文：[https://www.kdnuggets.com/2020/01/classify-rare-event-machine-learning-algorithms.html](https://www.kdnuggets.com/2020/01/classify-rare-event-machine-learning-algorithms.html)
+> 原文：[`www.kdnuggets.com/2020/01/classify-rare-event-machine-learning-algorithms.html`](https://www.kdnuggets.com/2020/01/classify-rare-event-machine-learning-algorithms.html)
 
-[评论](#comments)
+评论
 
 **由 [Leihua Ye](http://www.linkedin.com/in/leihuaye)，UC Santa Barbara**
 
@@ -12,11 +12,11 @@
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 事务
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 事务
 > 
 > * * *
 > 
@@ -28,7 +28,7 @@
 
 对于某些行业，数据科学家重新塑造了企业结构，并将大量决策权重新分配给了“前线”员工。从数据中生成有用的商业洞察力从未如此简单。
 
-根据 Andrew Ng 的说法（[机器学习的渴望](https://www.deeplearning.ai/machine-learning-yearning/)，第9页），
+根据 Andrew Ng 的说法（[机器学习的渴望](https://www.deeplearning.ai/machine-learning-yearning/)，第 9 页），
 
 > 监督学习算法为行业贡献了大部分价值。
 
@@ -40,7 +40,7 @@
 
 1.  **数据不平衡分布**：一个主要组与一个次要组。
 
-正如Andrew Ng最近指出的， [小数据](https://info.deeplearning.ai/the-batch-self-driving-cars-that-cant-see-pedestrians-evolutionary-algorithms-fish-recognition-fighting-fraud-?utm_campaign=The%20Batch&utm_source=hs_email&utm_medium=email&utm_content=79686634&_hsenc=p2ANqtz-8JYm57kQehRZzewKP7GRcg1KzCEiTzMaPaYmA1fKuzs_IU9AoooG7ABIqqRLuOubgAU8r8pBVED-l1D6mOoCjVrF6lYw&_hsmi=79686634), [鲁棒性](https://info.deeplearning.ai/the-batch-deepmind-masters-starcraft-2-ai-attacks-on-amazon-a-career-in-robot-management-banks-embrace-bots-1?utm_campaign=The%20Batch&utm_source=hs_email&utm_medium=email&utm_content=79686634&_hsenc=p2ANqtz-8JYm57kQehRZzewKP7GRcg1KzCEiTzMaPaYmA1fKuzs_IU9AoooG7ABIqqRLuOubgAU8r8pBVED-l1D6mOoCjVrF6lYw&_hsmi=79686634), 和 [人为因素](https://blog.deeplearning.ai/blog/the-batch-google-achieves-quantum-supremacy-amazon-aims-to-sway-lawmakers-ai-predicts-basketball-plays-face-detector-preserves-privacy-problems-beyond-bounding-box?utm_campaign=The%20Batch&utm_source=hs_email&utm_medium=email&utm_content=80323254&_hsenc=p2ANqtz-_88W5PvaNASb06SH_AW1uzL2ETjfCivTbmXc7m87jMcF4rrMG42U9qp7EATDPRM-rxHm0biLE3yMyHebUyR-pMaLZm2A&_hsmi=80323254) 是成功AI项目的三个障碍。在某种程度上，我们的稀有事件问题与一个少数群体也是一个小数据问题：**ML算法从多数群体中学习更多，可能容易误分类小数据群体。**
+正如 Andrew Ng 最近指出的， [小数据](https://info.deeplearning.ai/the-batch-self-driving-cars-that-cant-see-pedestrians-evolutionary-algorithms-fish-recognition-fighting-fraud-?utm_campaign=The%20Batch&utm_source=hs_email&utm_medium=email&utm_content=79686634&_hsenc=p2ANqtz-8JYm57kQehRZzewKP7GRcg1KzCEiTzMaPaYmA1fKuzs_IU9AoooG7ABIqqRLuOubgAU8r8pBVED-l1D6mOoCjVrF6lYw&_hsmi=79686634), [鲁棒性](https://info.deeplearning.ai/the-batch-deepmind-masters-starcraft-2-ai-attacks-on-amazon-a-career-in-robot-management-banks-embrace-bots-1?utm_campaign=The%20Batch&utm_source=hs_email&utm_medium=email&utm_content=79686634&_hsenc=p2ANqtz-8JYm57kQehRZzewKP7GRcg1KzCEiTzMaPaYmA1fKuzs_IU9AoooG7ABIqqRLuOubgAU8r8pBVED-l1D6mOoCjVrF6lYw&_hsmi=79686634), 和 [人为因素](https://blog.deeplearning.ai/blog/the-batch-google-achieves-quantum-supremacy-amazon-aims-to-sway-lawmakers-ai-predicts-basketball-plays-face-detector-preserves-privacy-problems-beyond-bounding-box?utm_campaign=The%20Batch&utm_source=hs_email&utm_medium=email&utm_content=80323254&_hsenc=p2ANqtz-_88W5PvaNASb06SH_AW1uzL2ETjfCivTbmXc7m87jMcF4rrMG42U9qp7EATDPRM-rxHm0biLE3yMyHebUyR-pMaLZm2A&_hsmi=80323254) 是成功 AI 项目的三个障碍。在某种程度上，我们的稀有事件问题与一个少数群体也是一个小数据问题：**ML 算法从多数群体中学习更多，可能容易误分类小数据群体。**
 
 这里是百万美元的问题：
 
@@ -50,17 +50,17 @@
 > 
 > 权衡？
 
-在这篇文章中，我们尝试通过将5种机器学习方法应用于一个真实数据集来回答这些问题，并提供全面的R实现。
+在这篇文章中，我们尝试通过将 5 种机器学习方法应用于一个真实数据集来回答这些问题，并提供全面的 R 实现。
 
-*有关完整描述和原始数据集，请查看原始 *[*数据集*](https://archive.ics.uci.edu/ml/datasets/bank+marketing)*；有关完整的R代码，请查看我的 *[*Github*](https://github.com/LeihuaYe/Machine-Learning-Classification-for-Imbalanced-Data)*。*
+*有关完整描述和原始数据集，请查看原始 *[*数据集*](https://archive.ics.uci.edu/ml/datasets/bank+marketing)*；有关完整的 R 代码，请查看我的 *[*Github*](https://github.com/LeihuaYe/Machine-Learning-Classification-for-Imbalanced-Data)*。*
 
 ### 商业问题
 
 一家葡萄牙的银行实施了一项新的银行服务（定期存款）的营销策略，并想知道哪些类型的客户订阅了该服务。这样，银行可以调整其营销策略，并在未来针对特定的客户群体。数据科学家与销售和营销团队合作，提出统计解决方案以识别未来的订阅者。
 
-### R实现
+### R 实现
 
-下面是模型选择和R实现的流程。
+下面是模型选择和 R 实现的流程。
 
 ### **1\. 导入、数据清理和探索性数据分析**
 
@@ -77,7 +77,7 @@ banking$pdays=NULL #remove variable “pdays”, b/c itis collinear with the DV
 banking$duration=NULL
 ```
 
-清理原始数据似乎很乏味，因为我们必须重新编码缺失的变量并将定性变量转换为定量变量。在现实世界中，清理数据的时间更长。**有一种说法是“数据科学家花80%的时间清理数据，20%的时间构建模型。”**
+清理原始数据似乎很乏味，因为我们必须重新编码缺失的变量并将定性变量转换为定量变量。在现实世界中，清理数据的时间更长。**有一种说法是“数据科学家花 80%的时间清理数据，20%的时间构建模型。”**
 
 接下来，让我们探讨一下结果变量的分布。
 
@@ -86,13 +86,13 @@ banking$duration=NULL
 plot(banking$y,main="Plot 1: Distribution of Dependent Variable")
 ```
 
-![](../Images/36ee7036a855eb626f1eab29fa7272c3.png)
+![](img/36ee7036a855eb626f1eab29fa7272c3.png)
 
 如图所示，因变量（服务订阅）分布不均，"No"的数量多于"Yes"。**这种不平衡的分布应引起一些警示，因为数据分布会影响最终的统计模型**。使用基于多数情况开发的模型容易错误分类少数情况。
 
 ### **2\. 数据划分**
 
-接下来，让我们将数据集分为两部分：训练集和测试集。按照经验法则，我们遵循80-20的划分：80%作为训练集，20%作为测试集。对于时间序列数据，我们基于90%的数据训练模型，其余10%作为测试数据集。
+接下来，让我们将数据集分为两部分：训练集和测试集。按照经验法则，我们遵循 80-20 的划分：80%作为训练集，20%作为测试集。对于时间序列数据，我们基于 90%的数据训练模型，其余 10%作为测试数据集。
 
 ```py
 #split the dataset into training and test sets randomly 
@@ -128,7 +128,7 @@ calc_error_rate <- function(predicted.value, true.value)
 
 ### **#1 逻辑回归模型**
 
-有关逻辑模型的简要介绍，请查看我的其他帖子：[**机器学习101**](https://towardsdatascience.com/machine-learning-101-predicting-drug-use-using-logistic-regression-in-r-769be90eb03d)和[**机器学习102**](https://towardsdatascience.com/machine-learning-102-logistic-regression-with-polynomial-features-98a208688c17)。
+有关逻辑模型的简要介绍，请查看我的其他帖子：[**机器学习 101**](https://towardsdatascience.com/machine-learning-101-predicting-drug-use-using-logistic-regression-in-r-769be90eb03d)和[**机器学习 102**](https://towardsdatascience.com/machine-learning-102-logistic-regression-with-polynomial-features-98a208688c17)。
 
 让我们拟合一个包括除结果变量以外所有其他变量的逻辑模型。由于结果是二元的，我们将模型设置为二项分布（“family=binomial”）。
 
@@ -136,7 +136,7 @@ calc_error_rate <- function(predicted.value, true.value)
 glm.fit = glm(y ~ age+factor(job)+factor(marital)+factor(education)+factor(default)+factor(housing)+factor(loan)+factor(contact)+factor(month)+factor(day_of_week)+campaign+previous+factor(poutcome)+emp.var.rate+cons.price.idx+cons.conf.idx+euribor3m+nr.employed, data=banking.train, family=binomial)
 ```
 
-下一步是获取训练误差。我们将类型设置为响应，因为我们预测的是结果的类型，并采用多数规则：如果先验概率大于或等于0.5，我们预测结果为“是”；否则，为“否”。
+下一步是获取训练误差。我们将类型设置为响应，因为我们预测的是结果的类型，并采用多数规则：如果先验概率大于或等于 0.5，我们预测结果为“是”；否则，为“否”。
 
 ```py
 prob.training = predict(glm.fit,type=”response”)banking.train_glm = banking.train %>% #select all rows of the train
@@ -166,7 +166,7 @@ best.size.cv#best = 3bank_tree.pruned<-prune.misclass(bank_tree, best=3)
 summary(bank_tree.pruned)
 ```
 
-交叉验证的最佳大小是3。
+交叉验证的最佳大小是 3。
 
 ```py
 # Training and test errors of bank_tree.pruned
@@ -179,11 +179,11 @@ records[2,] <- c(DT_training_error,DT_test_error)
 
 ### **#3 K-最近邻**
 
-作为一种非参数方法，KNN不需要任何关于分布的先验知识。简单来说，KNN将k个最近邻分配给感兴趣的单位。
+作为一种非参数方法，KNN 不需要任何关于分布的先验知识。简单来说，KNN 将 k 个最近邻分配给感兴趣的单位。
 
-要快速入门，请查看我关于KNN的文章：[**初学者的K-最近邻指南：从零到英雄。**](https://towardsdatascience.com/beginners-guide-to-k-nearest-neighbors-in-r-from-zero-to-hero-d92cd4074bdb)有关交叉验证和do.chunk函数的详细解释，请转到我的[文章](https://towardsdatascience.com/beginners-guide-to-k-nearest-neighbors-in-r-from-zero-to-hero-d92cd4074bdb)。
+要快速入门，请查看我关于 KNN 的文章：[**初学者的 K-最近邻指南：从零到英雄。**](https://towardsdatascience.com/beginners-guide-to-k-nearest-neighbors-in-r-from-zero-to-hero-d92cd4074bdb)有关交叉验证和 do.chunk 函数的详细解释，请转到我的[文章](https://towardsdatascience.com/beginners-guide-to-k-nearest-neighbors-in-r-from-zero-to-hero-d92cd4074bdb)。
 
-使用交叉验证，我们发现当k=20时，交叉验证误差最小。
+使用交叉验证，我们发现当 k=20 时，交叉验证误差最小。
 
 ```py
 nfold = 10
@@ -204,7 +204,7 @@ kvec = c(1, seq(10, 50, length.out=5))set.seed(1)for (j in kvec){
  }#melt() in the package reshape2 melts wide-format data into long-format data errors = melt(error.folds, id.vars=c(“fold”,”neighbors”), value.name= “error”)
 ```
 
-然后，让我们找到最小化验证误差的最佳k值。
+然后，让我们找到最小化验证误差的最佳 k 值。
 
 ```py
 val.error.means = errors %>%
@@ -230,7 +230,7 @@ knn_test_error <- calc_error_rate(predicted.value=pred.YTest, true.value=YTest)r
 
 ### **#4 随机森林**
 
-我们按照构建随机森林模型的标准步骤进行。有关RF的简要介绍，请参见由 [Tony Yiu](https://medium.com/u/840a3210fbe7?source=post_page-----fab464573233----------------------) 撰写的帖子 ([link](https://towardsdatascience.com/understanding-random-forest-58381e0602d2))。
+我们按照构建随机森林模型的标准步骤进行。有关 RF 的简要介绍，请参见由 [Tony Yiu](https://medium.com/u/840a3210fbe7?source=post_page-----fab464573233----------------------) 撰写的帖子 ([link](https://towardsdatascience.com/understanding-random-forest-58381e0602d2))。
 
 ```py
 # build a RF model with default settings 
@@ -244,7 +244,7 @@ RF_test_error <- calc_error_rate(predicted.value=pred_test_RF, true.value=YTest)
 
 ### **#5 支持向量机**
 
-同样，我们按照构建SVM的标准步骤进行。有关此方法的良好介绍，请参见由 [Rohith Gandhi](https://medium.com/u/8f4e7f7a57e3?source=post_page-----fab464573233----------------------) 撰写的帖子 ([Link](https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47))。
+同样，我们按照构建 SVM 的标准步骤进行。有关此方法的良好介绍，请参见由 [Rohith Gandhi](https://medium.com/u/8f4e7f7a57e3?source=post_page-----fab464573233----------------------) 撰写的帖子 ([Link](https://towardsdatascience.com/support-vector-machine-introduction-to-machine-learning-algorithms-934a444fca47))。
 
 ```py
 set.seed(1)
@@ -272,27 +272,27 @@ svm_test_error <- calc_error_rate(predicted.value=svm_best_test, true.value=YTes
 records
 ```
 
-![](../Images/5f085edc85c216791260eacc15e4bbb8.png)
+![](img/5f085edc85c216791260eacc15e4bbb8.png)
 
 在这里，随机森林具有最小的训练误差，尽管与其他方法的测试误差相似。如你所见，训练误差和测试误差非常接近，很难判断哪个模型明显更好。
 
-此外，分类准确率，无论是训练误差还是测试误差，都不应作为高度不平衡数据集的指标。这是因为数据集被多数情况主导，即使是随机猜测也能给你50-50的正确概率（50%的准确率）。更糟的是，一个高准确率的模型可能会严重惩罚少数情况。因此，让我们检查另一个指标ROC曲线。
+此外，分类准确率，无论是训练误差还是测试误差，都不应作为高度不平衡数据集的指标。这是因为数据集被多数情况主导，即使是随机猜测也能给你 50-50 的正确概率（50%的准确率）。更糟的是，一个高准确率的模型可能会严重惩罚少数情况。因此，让我们检查另一个指标 ROC 曲线。
 
 ### **4.2** 接收者操作特征（ROC）曲线
 
-ROC 是一个图形化表示，显示分类模型在所有分类阈值下的表现。我们更倾向于选择一个比其他模型更快接近1的分类器。
+ROC 是一个图形化表示，显示分类模型在所有分类阈值下的表现。我们更倾向于选择一个比其他模型更快接近 1 的分类器。
 
-ROC曲线在同一图表中绘制了两个参数——真正率和假正率——在不同阈值下的情况：
+ROC 曲线在同一图表中绘制了两个参数——真正率和假正率——在不同阈值下的情况：
 
 > TPR（召回率）= TP/(TP+FN)
 > 
 > FPR = FP/(TN+FP)
 
-![图](../Images/ab921d7eee025a796dda874ef4124409.png)
+![图](img/ab921d7eee025a796dda874ef4124409.png)
 
 [Indon](https://commons.wikimedia.org/wiki/File:ROC_space-2.png)
 
-在很大程度上，ROC曲线不仅衡量分类准确率的水平，还在TPR和FPR之间达到很好的平衡。这对于稀有事件是非常可取的，因为我们还希望在多数和少数情况之间达到平衡。
+在很大程度上，ROC 曲线不仅衡量分类准确率的水平，还在 TPR 和 FPR 之间达到很好的平衡。这对于稀有事件是非常可取的，因为我们还希望在多数和少数情况之间达到平衡。
 
 ```py
 # load the library
@@ -323,9 +323,9 @@ svm_fit_prob_ROCR = prediction(attr(svm_fit_prob,”probabilities”)[,2],bankin
 performance_svm <- performance(svm_fit_prob_ROCR, “tpr”,”fpr”)
 ```
 
-让我们绘制ROC曲线。
+让我们绘制 ROC 曲线。
 
-我们添加了一条abline以显示随机分配的机会。我们的分类器应该比随机猜测表现更好，对吧？
+我们添加了一条 abline 以显示随机分配的机会。我们的分类器应该比随机猜测表现更好，对吧？
 
 ```py
 #logit
@@ -336,17 +336,17 @@ plot(performance_RF,col=5,lwd=2,add=TRUE)# SVM
 plot(performance_svm,col=6,lwd=2,add=TRUE)abline(0,1)
 ```
 
-![图](../Images/45113fac4a08f7a5f11cd1a7bab9aa2c.png)
+![图](img/45113fac4a08f7a5f11cd1a7bab9aa2c.png)
 
 ROC
 
 我们在这里找到了一个赢家。
 
-根据ROC曲线，KNN（蓝色的）高于所有其他方法。
+根据 ROC 曲线，KNN（蓝色的）高于所有其他方法。
 
 ### 4.3 曲线下面积（AUC）
 
-正如名称所示，AUC是ROC曲线下的面积。它是可视化AUC曲线的算术表示。AUC提供了分类器在可能的分类阈值下表现的聚合结果。
+正如名称所示，AUC 是 ROC 曲线下的面积。它是可视化 AUC 曲线的算术表示。AUC 提供了分类器在可能的分类阈值下表现的聚合结果。
 
 ```py
 ########### Logit ########### 
@@ -362,19 +362,19 @@ auc_svm<-performance(svm_fit_prob_ROCR,”auc”)@y.values[[1]]
 Area_Under_the_Curve[5,] <- c(as.numeric(auc_svm))
 ```
 
-让我们检查AUC值。
+让我们检查 AUC 值。
 
 ```py
 Area_Under_the_Curve
 ```
 
-![](../Images/878c579193c181bffffce4348328b2ba.png)
+![](img/878c579193c181bffffce4348328b2ba.png)
 
-此外，KNN具有最大的AUC值（0.847）。
+此外，KNN 具有最大的 AUC 值（0.847）。
 
 ### 结论
 
-在这篇文章中，我们发现KNN，一个非参数分类器，比其参数化的同行表现更好。在指标方面，对于稀有事件，选择ROC曲线比分类准确率更合理。
+在这篇文章中，我们发现 KNN，一个非参数分类器，比其参数化的同行表现更好。在指标方面，对于稀有事件，选择 ROC 曲线比分类准确率更合理。
 
 ### 享受阅读这篇文章吗？
 
@@ -382,39 +382,39 @@ Area_Under_the_Curve
 
 查看我在人工智能和机器学习方面的其他文章。
 
-[**R语言中的K-最近邻初学者指南：从零到英雄**](https://towardsdatascience.com/beginners-guide-to-k-nearest-neighbors-in-r-from-zero-to-hero-d92cd4074bdb)
+[**R 语言中的 K-最近邻初学者指南：从零到英雄**](https://towardsdatascience.com/beginners-guide-to-k-nearest-neighbors-in-r-from-zero-to-hero-d92cd4074bdb)
 
-使用各种测量指标在R中构建KNN模型的流程
+使用各种测量指标在 R 中构建 KNN 模型的流程
 
-[**机器学习101：使用逻辑回归预测药物使用**](https://towardsdatascience.com/machine-learning-101-predicting-drug-use-using-logistic-regression-in-r-769be90eb03d)
+[**机器学习 101：使用逻辑回归预测药物使用**](https://towardsdatascience.com/machine-learning-101-predicting-drug-use-using-logistic-regression-in-r-769be90eb03d)
 
 基础知识、链接函数和图表
 
-[**机器学习102：带有多项式特征的逻辑回归**](https://towardsdatascience.com/machine-learning-102-logistic-regression-with-polynomial-features-98a208688c17)
+[**机器学习 102：带有多项式特征的逻辑回归**](https://towardsdatascience.com/machine-learning-102-logistic-regression-with-polynomial-features-98a208688c17)
 
 当存在非线性组件时如何分类
 
-**简介：[叶磊华](http://www.linkedin.com/in/leihuaye)**（[@leihua_ye](https://twitter.com/leihua_ye)）是加州大学圣塔芭芭拉分校的博士候选人。他在定量用户体验研究、实验与因果推断、机器学习和数据科学方面有5年以上的研究和专业经验。
+**简介：[叶磊华](http://www.linkedin.com/in/leihuaye)**（[@leihua_ye](https://twitter.com/leihua_ye)）是加州大学圣塔芭芭拉分校的博士候选人。他在定量用户体验研究、实验与因果推断、机器学习和数据科学方面有 5 年以上的研究和专业经验。
 
 [原文](https://towardsdatascience.com/classifying-rare-events-using-five-machine-learning-techniques-fab464573233)。转载已获许可。
 
 **相关：**
 
-+   [R语言中的K-最近邻初学者指南：从零到英雄](/2020/01/beginners-guide-nearest-neighbors-r.html)
++   R 语言中的 K-最近邻初学者指南：从零到英雄
 
-+   [使用K-最近邻分类心脏病](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)
++   使用 K-最近邻分类心脏病
 
-+   [如何在Python（和R）中可视化数据](/2019/11/visualize-data-python-and-r.html)
++   如何在 Python（和 R）中可视化数据
 
 ### 更多相关主题
 
-+   [5种稀有的数据科学技能可以帮助你获得工作](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
++   [5 种稀有的数据科学技能可以帮助你获得工作](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
 
 +   [使用基本和现代算法解决计算机科学问题](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)
 
 +   [机器学习中使用的主要监督学习算法](https://www.kdnuggets.com/2022/06/primary-supervised-learning-algorithms-used-machine-learning.html)
 
-+   [KDnuggets新闻，6月22日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)
 
 +   [分类的机器学习算法](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)
 

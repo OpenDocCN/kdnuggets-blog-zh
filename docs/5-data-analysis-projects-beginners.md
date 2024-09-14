@@ -1,8 +1,8 @@
-# 适合初学者的5个数据分析项目
+# 适合初学者的 5 个数据分析项目
 
-> 原文：[https://www.kdnuggets.com/2023/02/5-data-analysis-projects-beginners.html](https://www.kdnuggets.com/2023/02/5-data-analysis-projects-beginners.html)
+> 原文：[`www.kdnuggets.com/2023/02/5-data-analysis-projects-beginners.html`](https://www.kdnuggets.com/2023/02/5-data-analysis-projects-beginners.html)
 
-![适合初学者的5个数据分析项目](../Images/9ded63e7881d3046c96b665fceb432a1.png)
+![适合初学者的 5 个数据分析项目](img/9ded63e7881d3046c96b665fceb432a1.png)
 
 作者提供的图片
 
@@ -12,35 +12,35 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 你是否期待开始你的数据分析师职业生涯，但职位列表要求经验？完全不用担心！你来对地方了。通过构建你的项目将展示你的技能，帮助你找到第一份工作。我将指导你选择适合初学者的数据分析项目，这些项目将说服招聘经理你是这个职位的合适人选。虽然随机选择项目可能会提高你的技能，但请记住这是一个竞争激烈的市场，你必须脱颖而出。你的作品集项目必须展示你收集、清理、分析和以视觉上吸引人的方式呈现数据的能力。
 
-不再拖延，我们来深入探讨这5个项目，帮助你开启职业生涯：
+不再拖延，我们来深入探讨这 5 个项目，帮助你开启职业生涯：
 
-# 1\. 在GitHub上抓取热门话题的顶级仓库
+# 1\. 在 GitHub 上抓取热门话题的顶级仓库
 
-![在GitHub上抓取热门话题的顶级仓库](../Images/c4c21c8ffed0f36c03595531cd47a9c5.png)
+![在 GitHub 上抓取热门话题的顶级仓库](img/c4c21c8ffed0f36c03595531cd47a9c5.png)
 
 项目图片
 
 尽管有很多公共数据集可以自由使用，但作为数据分析师，你必须知道如何从网站上抓取更相关的数据以满足特定的使用场景。网络抓取就是以自动化的方式提取数据。
 
-在这个项目中，你将为每个GitHub话题创建一个单独的CSV文件。每个CSV文件包含该话题下的前25个仓库，并附有一些额外的信息，如用户名、星标数量以及仓库的URL。这是一个非常适合初学者的项目，可以添加到你的简历中，由Jovian（数据科学和机器学习社区平台）首席执行官Aakash N S教授。该项目还附带了一个视频教程，链接已提供以供参考。
+在这个项目中，你将为每个 GitHub 话题创建一个单独的 CSV 文件。每个 CSV 文件包含该话题下的前 25 个仓库，并附有一些额外的信息，如用户名、星标数量以及仓库的 URL。这是一个非常适合初学者的项目，可以添加到你的简历中，由 Jovian（数据科学和机器学习社区平台）首席执行官 Aakash N S 教授。该项目还附带了一个视频教程，链接已提供以供参考。
 
-项目链接：[在GitHub上抓取热门话题的顶级仓库](https://jovian.com/aakashns-6l3/scraping-github-topics-repositories)
+项目链接：[在 GitHub 上抓取热门话题的顶级仓库](https://jovian.com/aakashns-6l3/scraping-github-topics-repositories)
 
-视频教程：[从头开始构建一个Python网络抓取项目](https://www.youtube.com/live/RKsLLG-bzEY?feature=share)
+视频教程：[从头开始构建一个 Python 网络抓取项目](https://www.youtube.com/live/RKsLLG-bzEY?feature=share)
 
 # 2\. 社会进步指数分析
 
-![社会进步指数分析](../Images/281d47df08dc865324b063892cd45c45.png)
+![社会进步指数分析](img/281d47df08dc865324b063892cd45c45.png)
 
 项目中的图片
 
@@ -50,7 +50,7 @@
 
 # 3\. Covid-19 数据分析项目
 
-![Covid-19 数据分析项目](../Images/c8292c1ab31314d13fd8a0989e78e670.png)
+![Covid-19 数据分析项目](img/c8292c1ab31314d13fd8a0989e78e670.png)
 
 项目中的图片
 
@@ -60,7 +60,7 @@
 
 # 4\. YouTube 情感、词云和表情符号分析
 
-![YouTube 情感、词云和表情符号分析](../Images/fbfb451807b6210cec1017b5ec02a3da.png)
+![YouTube 情感、词云和表情符号分析](img/fbfb451807b6210cec1017b5ec02a3da.png)
 
 项目中的图片
 
@@ -70,7 +70,7 @@
 
 # 5\. HR 分析初学者项目
 
-![HR 分析初学者项目](../Images/ce054185fd14c53b3b0f1d3d22cd7bdf.png)
+![HR 分析初学者项目](img/ce054185fd14c53b3b0f1d3d22cd7bdf.png)
 
 项目中的图片
 

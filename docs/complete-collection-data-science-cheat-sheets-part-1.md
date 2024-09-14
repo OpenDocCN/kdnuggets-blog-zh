@@ -1,8 +1,8 @@
 # 数据科学备忘单的完整集合 - 第一部分
 
-> 原文：[https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
+> 原文：[`www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html`](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-![数据科学备忘单的完整集合 - 第一部分](../Images/14c10bcd2257e7d9431d279967d16e42.png)
+![数据科学备忘单的完整集合 - 第一部分](img/14c10bcd2257e7d9431d279967d16e42.png)
 
 图片来源：作者
 
@@ -12,19 +12,19 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-备忘单可以帮助我们复习统计学概念、编程语言语法、数据分析工具和机器学习框架。它也可以帮助你在技术面试和评估测试中表现出色。[Jupyter Notebook](https://www.edureka.co/blog/wp-content/uploads/2018/10/Jupyter_Notebook_CheatSheet_Edureka.pdf)是每个人都应该学习的必备备忘单。它包含了运行Python笔记本的快捷方式、技巧和函数。
+备忘单可以帮助我们复习统计学概念、编程语言语法、数据分析工具和机器学习框架。它也可以帮助你在技术面试和评估测试中表现出色。[Jupyter Notebook](https://www.edureka.co/blog/wp-content/uploads/2018/10/Jupyter_Notebook_CheatSheet_Edureka.pdf)是每个人都应该学习的必备备忘单。它包含了运行 Python 笔记本的快捷方式、技巧和函数。
 
 我使用备忘单来准备技术面试，因为技术招聘人员希望评估主题领域的专业知识。寻找适合你的备忘单可能需要几个小时，因为大多数备忘单都不容易理解。这些博客分为两部分，包括易于跟随和总结的备忘单，以复习所有的数据科学概念。
 
-两部分系列进一步分为子类别；SQL、网页抓取、统计学、数据分析、商业智能、大数据、数据结构与算法、机器学习、深度学习、自然语言处理、数据工程、网络框架和VIP备忘单。
+两部分系列进一步分为子类别；SQL、网页抓取、统计学、数据分析、商业智能、大数据、数据结构与算法、机器学习、深度学习、自然语言处理、数据工程、网络框架和 VIP 备忘单。
 
 **第一篇博客包含六个子类别：**
 
@@ -42,9 +42,9 @@
 
 ### SQL
 
-大多数技术面试和评估测试都包括某种类型的SQL问题，因此，最好使用SQL备忘单集合来准备面试。这些备忘单还将帮助你在创建和管理数据库方面做得更好。它还将帮助你理解复杂的SQL查询。
+大多数技术面试和评估测试都包括某种类型的 SQL 问题，因此，最好使用 SQL 备忘单集合来准备面试。这些备忘单还将帮助你在创建和管理数据库方面做得更好。它还将帮助你理解复杂的 SQL 查询。
 
-![数据科学备忘单的完整集合 - 第一部分](../Images/6e4cc8927b398a687378cc9152dbcdaa.png)
+![数据科学备忘单的完整集合 - 第一部分](img/6e4cc8927b398a687378cc9152dbcdaa.png)
 
 图片来源：[freepik](http://freepik)
 
@@ -78,7 +78,7 @@
 
 人工智能、数据分析和现代研究依赖于统计学。统计学是现代社会的支柱，因此如果你想复习旧的概念或学习新的复杂思想，请查看一系列统计学作弊手册。
 
-![数据科学作弊手册全集 - 第1部分](../Images/752a6ccfc5f31d1cfe3208a3205e79b8.png)
+![数据科学作弊手册全集 - 第一部分](img/752a6ccfc5f31d1cfe3208a3205e79b8.png)
 
 图片由 [stories](https://www.freepik.com/free-vector/undefined) 提供
 
@@ -150,35 +150,35 @@ R 在统计学家和数据分析专业人士中非常受欢迎。建议学习著
 
 +   [**使用 rmarkdown 创建动态文档**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
 
-+   [**高级R**](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf)
++   [**高级 R**](https://www.rstudio.com/wp-content/uploads/2016/02/advancedR.pdf)
 
-+   [**data.table R包**](http://datacamp-community-prod.s3.amazonaws.com/008e41e8-7526-4bbc-806b-8c828dfb81d4)
++   [**data.table R 包**](http://datacamp-community-prod.s3.amazonaws.com/008e41e8-7526-4bbc-806b-8c828dfb81d4)
 
-+   [**xts备忘单：R中的时间序列**](http://datacamp-community-prod.s3.amazonaws.com/72771032-0653-4d87-a798-4a83879e99c8)
++   [**xts 备忘单：R 中的时间序列**](http://datacamp-community-prod.s3.amazonaws.com/72771032-0653-4d87-a798-4a83879e99c8)
 
 +   [**制图学**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/cartography.pdf)
 
 ### Julia
 
-Julia是一种新兴的语言，我认为这是数据科学的未来。此列表包含Julia语法、数据整理和数据可视化的快速介绍。
+Julia 是一种新兴的语言，我认为这是数据科学的未来。此列表包含 Julia 语法、数据整理和数据可视化的快速介绍。
 
-+   [**Julia快速入门**](https://juliadocs.github.io/Julia-Cheat-Sheet/)
++   [**Julia 快速入门**](https://juliadocs.github.io/Julia-Cheat-Sheet/)
 
-+   [**使用DataFrames.jl的数据整理**](https://ahsmart.com/assets/pages/data-wrangling-with-data-frames-jl-cheat-sheet/DataFramesCheatSheet_v1.x_rev1.pdf)
++   [**使用 DataFrames.jl 的数据整理**](https://ahsmart.com/assets/pages/data-wrangling-with-data-frames-jl-cheat-sheet/DataFramesCheatSheet_v1.x_rev1.pdf)
 
 +   [**Plots.jl**](https://github.com/sswatson/cheatsheets/blob/master/plotsjl-cheatsheet.pdf)
 
-+   [**MATLAB与Python与Julia**](https://cheatsheets.quantecon.org/)
++   [**MATLAB 与 Python 与 Julia**](https://cheatsheets.quantecon.org/)
 
 +   [**Pluto.jl**](https://github.com/fonsp/Pluto.jl/wiki/%F0%9F%94%8E-Basic-Commands-in-Pluto)
 
-+   [**Make.jl示例**](http://juliaplots.org/MakieReferenceImages/gallery/index.html)
++   [**Make.jl 示例**](http://juliaplots.org/MakieReferenceImages/gallery/index.html)
 
 ### 商业智能
 
-无代码应用程序在商业智能中正成为行业标准。这些应用程序可以帮助你创建数据分析报告、仪表板和沉浸式可视化。这些工具正在帮助企业做出数据驱动的决策。最受欢迎的工具包括MS Excel、Power BI和Tableau。
+无代码应用程序在商业智能中正成为行业标准。这些应用程序可以帮助你创建数据分析报告、仪表板和沉浸式可视化。这些工具正在帮助企业做出数据驱动的决策。最受欢迎的工具包括 MS Excel、Power BI 和 Tableau。
 
-![数据科学备忘单大全 - 第1部分](../Images/ad4d60670d7067b55a9af01075aa8da9.png)
+![数据科学备忘单大全 - 第一部分](img/ad4d60670d7067b55a9af01075aa8da9.png)
 
 图片来源 [rawpixel.com](https://www.freepik.com/free-vector/undefined)
 
@@ -196,7 +196,7 @@ Julia是一种新兴的语言，我认为这是数据科学的未来。此列表
 
 ### 大数据
 
-到2025年，预计全球每天将创造463亿GB的数据 - [(weforum.org)](https://www.weforum.org/agenda/2019/04/how-much-data-is-generated-each-day-cf4bddf29f/)。因此，主要的数据公司正在寻找数据工程师和数据科学家来处理大数据解决方案。这些备忘单可以为你介绍基本的大数据工具。
+到 2025 年，预计全球每天将创造 463 亿 GB 的数据 - [(weforum.org)](https://www.weforum.org/agenda/2019/04/how-much-data-is-generated-each-day-cf4bddf29f/)。因此，主要的数据公司正在寻找数据工程师和数据科学家来处理大数据解决方案。这些备忘单可以为你介绍基本的大数据工具。
 
 +   [**Hadoop**](https://intellipaat.com/blog/tutorial/big-data-and-hadoop-tutorial/big-data-Hadoop-cheat-sheet/)
 
@@ -218,14 +218,14 @@ Julia是一种新兴的语言，我认为这是数据科学的未来。此列表
 
 ### 更多相关主题
 
-+   [数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets 新闻，4月6日：8 门免费的 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费的 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学书籍完整合集 - 第1部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
++   [数据科学书籍完整合集 - 第一部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
 
-+   [数据科学书籍完整合集 - 第2部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
++   [数据科学书籍完整合集 - 第二部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
 
-+   [数据科学面试完整合集 – 第1部分](https://www.kdnuggets.com/2022/06/complete-collection-data-science-interviews-part-1.html)
++   [数据科学面试完整合集 – 第一部分](https://www.kdnuggets.com/2022/06/complete-collection-data-science-interviews-part-1.html)

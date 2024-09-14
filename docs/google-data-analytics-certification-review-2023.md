@@ -1,30 +1,30 @@
-# 2023年谷歌数据分析认证评估
+# 2023 年谷歌数据分析认证评估
 
-> 原文：[https://www.kdnuggets.com/2023/01/google-data-analytics-certification-review-2023.html](https://www.kdnuggets.com/2023/01/google-data-analytics-certification-review-2023.html)
+> 原文：[`www.kdnuggets.com/2023/01/google-data-analytics-certification-review-2023.html`](https://www.kdnuggets.com/2023/01/google-data-analytics-certification-review-2023.html)
 
-![2023年谷歌数据分析认证评估](../Images/21664214f2d6d9241487559d630bf3cc.png)
+![2023 年谷歌数据分析认证评估](img/21664214f2d6d9241487559d630bf3cc.png)
 
-什么是谷歌数据分析认证？更重要的是，它在2023年仍然值得获得吗？随着职业领域的变化、技术裁员的冲击以及技术的发展，谷歌数据分析认证是否能够成为获得工作的万能解决方案？
+什么是谷歌数据分析认证？更重要的是，它在 2023 年仍然值得获得吗？随着职业领域的变化、技术裁员的冲击以及技术的发展，谷歌数据分析认证是否能够成为获得工作的万能解决方案？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
 
 * * *
 
 这里有一句话总结：谷歌数据分析认证是一个课程，它教你数据分析，包括数字和业务方面。
 
-更深入地讲，它旨在教授完全的新手如何进行基本的数据分析。它是一个完全远程的课程，每周需要大约10小时的学习，总计181小时。谷歌通过Coursera提供此课程。平均而言，学生需要八个月才能获得认证，这使得课程费用约为$312（八个月 x $39/月的Coursera Plus订阅）。
+更深入地讲，它旨在教授完全的新手如何进行基本的数据分析。它是一个完全远程的课程，每周需要大约 10 小时的学习，总计 181 小时。谷歌通过 Coursera 提供此课程。平均而言，学生需要八个月才能获得认证，这使得课程费用约为$312（八个月 x $39/月的 Coursera Plus 订阅）。
 
-那么，这个课程值得吗？它真的值$312吗？这都取决于你想用谷歌数据分析认证来做什么。
+那么，这个课程值得吗？它真的值$312 吗？这都取决于你想用谷歌数据分析认证来做什么。
 
-![2023年谷歌数据分析认证评估](../Images/05474ed6be19c889263b03924bd193e5.png)
+![2023 年谷歌数据分析认证评估](img/05474ed6be19c889263b03924bd193e5.png)
 
 课程结束时，谷歌承诺你将会：
 
@@ -40,7 +40,7 @@
 
 +   能够在仪表板、演示文稿和其他常用的可视化平台上可视化和展示数据发现。
 
-他们还提供认证后的职业帮助，例如将你与他们的招聘合作伙伴联系起来。谷歌为他们的数据分析课程自豪地提供了150个招聘合作伙伴。
+他们还提供认证后的职业帮助，例如将你与他们的招聘合作伙伴联系起来。谷歌为他们的数据分析课程自豪地提供了 150 个招聘合作伙伴。
 
 适合谁？
 
@@ -62,25 +62,25 @@
 
 +   清洗数据，进行分析，进行可视化和展示
 
-+   使用R、SQL和Tableau等工具处理数据
++   使用 R、SQL 和 Tableau 等工具处理数据
 
 +   使用电子表格进行复杂计算
 
 让我们看看这八门课程如何分解。
 
-![谷歌数据分析认证2023年回顾](../Images/d170d1eb151f05c604d47110030340d8.png)
+![谷歌数据分析认证 2023 年回顾](img/d170d1eb151f05c604d47110030340d8.png)
 
-## 复习课程1：基础：数据，数据无处不在
+## 复习课程 1：基础：数据，数据无处不在
 
-[这门课程](https://www.coursera.org/learn/foundations-data?specialization=google-data-analytics)是你接触数据分析世界的第一步。它需要21小时的学习，谷歌将其进一步分为五个部分。
+[这门课程](https://www.coursera.org/learn/foundations-data?specialization=google-data-analytics)是你接触数据分析世界的第一步。它需要 21 小时的学习，谷歌将其进一步分为五个部分。
 
 到本课程结束时，你将理解数据分析是什么。你还将熟悉数据分析的日常任务和工具。
 
 你可以期待在这一部分进行六个评分多选题考试，以证明你的掌握程度。
 
-## 复习课程2：提出问题以做出数据驱动的决策
+## 复习课程 2：提出问题以做出数据驱动的决策
 
-第一门课程主要向外行介绍数据分析。[这门课程](https://www.coursera.org/learn/ask-questions-make-decisions?specialization=google-data-analytics)是你开始学习实际技能的地方。预计这门课程需要大约19小时。
+第一门课程主要向外行介绍数据分析。[这门课程](https://www.coursera.org/learn/ask-questions-make-decisions?specialization=google-data-analytics)是你开始学习实际技能的地方。预计这门课程需要大约 19 小时。
 
 很多初学者未意识到数据分析中有多少是知道正确的思维方式。能够编码是不够的——你需要真正的分析思维才能成功。这就是这门课程教你的内容。
 
@@ -88,11 +88,11 @@
 
 你将通过五个评分测验进行测试。
 
-## 复习课程3：数据准备探索
+## 复习课程 3：数据准备探索
 
-准备好开始编码了吗？[这门课程](https://www.coursera.org/learn/data-preparation?specialization=google-data-analytics)适合你。在两门主要理论课程之后，你将开始学习SQL和电子表格。
+准备好开始编码了吗？[这门课程](https://www.coursera.org/learn/data-preparation?specialization=google-data-analytics)适合你。在两门主要理论课程之后，你将开始学习 SQL 和电子表格。
 
-在21小时内，你将学习数据类型和结构、如何使用SQL提取数据、如何使用电子表格进行分析和展示发现，并熟悉数据库等工具。
+在 21 小时内，你将学习数据类型和结构、如何使用 SQL 提取数据、如何使用电子表格进行分析和展示发现，并熟悉数据库等工具。
 
 你还会进行一些理论学习：你将学习关于偏见、伦理、可信度和访问的知识。你还会了解信息安全——本课程涵盖了如何组织和保护数据。
 
@@ -182,7 +182,7 @@ Google 数据分析认证声称，数据分析师的平均薪资约为 74,000 �
 
 [Boot.dev](https://boot.dev/)是一个很好的资源，可以学习所有软件开发、数据科学和数据分析的基本概念。
 
-这个平台可以帮助你学习Python，这对于数据分析至关重要，以及数据结构算法和函数式编程等概念。它主要为后端开发人员而非数据分析师而设，但许多必要的技能是重叠的。价格也非常合理，仅需$24/月。
+这个平台可以帮助你学习 Python，这对于数据分析至关重要，以及数据结构算法和函数式编程等概念。它主要为后端开发人员而非数据分析师而设，但许多必要的技能是重叠的。价格也非常合理，仅需$24/月。
 
 [HackerRank](https://www.hackerrank.com/dashboard)是另一个绝佳的选择，可以学习更高级的数据分析/科学技能。他们提供各种技能和学科的面试工具包、课程和认证，帮助你超越自我。
 
@@ -198,28 +198,28 @@ Google 数据分析认证声称，数据分析师的平均薪资约为 74,000 �
 
 然后，你被问到了一个意外的面试问题，你感到困惑。避免这种情况的最佳方法是练习真实的数据科学面试问题。我们自己的平台[StrataScratch](https://www.stratascratch.com/)提供了编程和非编程问题，帮助你应对每一个可能遇到的面试。
 
-# Google数据分析证书在2023年值得吗？
+# Google 数据分析证书在 2023 年值得吗？
 
 如果你是完全的初学者，这是一个很好的起点——绝对值得你花时间和金钱去获得认证。但如果你已经对数据分析有一定了解，那么它就不那么值得了。
 
-（如果你已经是数据分析高手：注册一个月的Coursera，快速完成课程，并且在所有测验中都取得优异成绩——这样你可以仅用$39获得“认证”。）
+（如果你已经是数据分析高手：注册一个月的 Coursera，快速完成课程，并且在所有测验中都取得优异成绩——这样你可以仅用$39 获得“认证”。）
 
 此外，仅仅找到一份工作是不够的。如今的就业市场竞争激烈——你需要展示对更高级概念的理解，拥有完整的个人项目作品集，并且在技术面试中表现出色，才有可能脱颖而出。
 
-最后，如果你想获得超越入门级的数据分析职位，Google数据分析证书是值得的，但仍然不够充分。通过使用像Boot.dev、HackerRank、StrataScratch和Kaggle这样的工具来增强你的简历和知识，你将大大增加获得数据分析或其他领域梦想工作的机会。
+最后，如果你想获得超越入门级的数据分析职位，Google 数据分析证书是值得的，但仍然不够充分。通过使用像 Boot.dev、HackerRank、StrataScratch 和 Kaggle 这样的工具来增强你的简历和知识，你将大大增加获得数据分析或其他领域梦想工作的机会。
 
 **[内特·罗西迪](https://www.stratascratch.com)**是一名数据科学家和产品策略专家。他还是一名兼职教授，教授分析学，并且是[StrataScratch](https://www.stratascratch.com/)的创始人，该平台帮助数据科学家通过来自顶级公司的真实面试问题准备面试。可以在[Twitter: StrataScratch](https://twitter.com/StrataScratch)或[LinkedIn](https://www.linkedin.com/in/nathanrosidi/)与他联系。
 
 ### 了解更多相关话题
 
-+   [我参加了谷歌数据分析认证课程，已有2,148,697人注册…](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
++   [我参加了谷歌数据分析认证课程，已有 2,148,697 人注册…](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
 
 +   [技术行业各领域流行的谷歌认证](https://www.kdnuggets.com/popular-google-certification-for-all-areas-in-the-tech-industry)
 
-+   [2022年顶级数据分析师认证课程](https://www.kdnuggets.com/2022/11/top-data-analyst-certification-courses-2022.html)
++   [2022 年顶级数据分析师认证课程](https://www.kdnuggets.com/2022/11/top-data-analyst-certification-courses-2022.html)
 
-+   [Meta的新数据分析师专业认证已上线！](https://www.kdnuggets.com/metas-new-data-analyst-professional-certification-has-dropped)
++   [Meta 的新数据分析师专业认证已上线！](https://www.kdnuggets.com/metas-new-data-analyst-professional-certification-has-dropped)
 
-+   [你在2022年计划增加什么认证到你的工具包中？](https://www.kdnuggets.com/2022/03/sas-certification-adding-toolkit-2022.html)
++   [你在 2022 年计划增加什么认证到你的工具包中？](https://www.kdnuggets.com/2022/03/sas-certification-adding-toolkit-2022.html)
 
-+   [规划你的SAS认证之旅](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
++   [规划你的 SAS 认证之旅](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)

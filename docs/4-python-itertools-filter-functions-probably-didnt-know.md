@@ -1,26 +1,26 @@
 # 4 个你可能不知道的 Python Itertools 过滤函数
 
-> 原文：[https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
+> 原文：[`www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html`](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
 
-![4 个你可能不知道的 Python Itertools 过滤函数](../Images/9ce8e2d289bae33f8ee329b84d5e8275.png)
+![4 个你可能不知道的 Python Itertools 过滤函数](img/9ce8e2d289bae33f8ee329b84d5e8275.png)
 
 图片由作者提供
 
-在Python中，迭代器帮助你编写更具Python风格的代码，并在处理长序列时更高效。内置的[itertools](https://docs.python.org/3/library/itertools.html)模块提供了几个有用的函数来创建迭代器。
+在 Python 中，迭代器帮助你编写更具 Python 风格的代码，并在处理长序列时更高效。内置的[itertools](https://docs.python.org/3/library/itertools.html)模块提供了几个有用的函数来创建迭代器。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-当你只想遍历迭代器、检索序列中的元素并处理它们时，这些功能特别有用——而无需将它们存储在内存中。今天我们将学习如何使用以下四个itertools过滤函数：
+当你只想遍历迭代器、检索序列中的元素并处理它们时，这些功能特别有用——而无需将它们存储在内存中。今天我们将学习如何使用以下四个 itertools 过滤函数：
 
 +   filterfalse
 
@@ -42,7 +42,7 @@
 
 # 1\. filterfalse
 
-如果你已经编程Python有一段时间，你可能已经使用过内置的`filter`函数，语法如下：
+如果你已经编程 Python 有一段时间，你可能已经使用过内置的`filter`函数，语法如下：
 
 ```py
 filter(pred,seq)
@@ -253,7 +253,7 @@ Output >>> [2, 4, 6]
 
 # 总结
 
-我希望这个教程帮助你理解 itertools 过滤函数的基础知识。你已经看到了一些简单的示例，以便更好地理解这些函数的工作原理。接下来，你可以学习生成器 [生成器函数和生成器表达式](/2023/02/getting-started-python-generators.html)如何作为高效的 Python 迭代器工作。
+我希望这个教程帮助你理解 itertools 过滤函数的基础知识。你已经看到了一些简单的示例，以便更好地理解这些函数的工作原理。接下来，你可以学习生成器 生成器函数和生成器表达式如何作为高效的 Python 迭代器工作。
 
 **[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发人员和技术写作者。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、评论文章等方式，与开发者社区分享她的知识。
 

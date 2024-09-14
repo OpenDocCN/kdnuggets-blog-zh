@@ -1,8 +1,8 @@
 # 市场篮子分析：教程
 
-> 原文：[https://www.kdnuggets.com/2019/12/market-basket-analysis.html](https://www.kdnuggets.com/2019/12/market-basket-analysis.html)
+> 原文：[`www.kdnuggets.com/2019/12/market-basket-analysis.html`](https://www.kdnuggets.com/2019/12/market-basket-analysis.html)
 
-[评论](#comments)![图](../Images/d8cffe73aa22d352dfae295b5fd4ae89.png)
+评论![图](img/d8cffe73aa22d352dfae295b5fd4ae89.png)
 
 来源：[oracle.com](https://blogs.oracle.com/datascience/overview-of-traditional-machine-learning-techniques)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -54,7 +54,7 @@
 
 **“购买了此商品的顾客还购买了” → 推荐**
 
-![](../Images/fcabe1df97ca31906d326ecaa0e18354.png)
+![](img/fcabe1df97ca31906d326ecaa0e18354.png)
 
 现在说实话，市场篮子分析是*非常*简单的。确实如此：你实际上只是在查看不同元素一起出现的可能性。虽然不仅仅是这样，但这就是这个技术的基础。我们真正感兴趣的是了解事物发生在一起的频率以及如何预测*何时*它们会一起发生。
 
@@ -66,7 +66,7 @@ Apriori 算法假设任何频繁项集的子集也必须是频繁的。它是市
 
 这里是一个包含六个交易的数据集。每个交易是由 0 和 1 组合而成，其中 0 表示项的缺失，1 表示项的存在。
 
-![图](../Images/771ebaf19183ec20aea0645451eb5484.png)
+![图](img/771ebaf19183ec20aea0645451eb5484.png)
 
 数据集
 
@@ -116,7 +116,7 @@ Apriori 算法假设任何频繁项集的子集也必须是频繁的。它是市
 
 ### **优化 Apriori 算法**
 
-![](../Images/285907865fc0ec4bc11f1749fc198a05.png)
+![](img/285907865fc0ec4bc11f1749fc198a05.png)
 
 **交易减少**
 
@@ -151,7 +151,7 @@ import pandas as pd
 from apyori import aprioridataset = pd.read_csv('/Users/.../.../Market_Basket_Optimisation.csv', header = None)
 ```
 
-![图](../Images/7f54db435bc6c6402be40db98c3ce322.png)
+![图](img/7f54db435bc6c6402be40db98c3ce322.png)
 
 数据集
 
@@ -213,11 +213,11 @@ RelationRecord(items=frozenset({'avocado', 'spaghetti', 'milk'}), support=0.0033
 
 **相关：**
 
-+   [频繁模式挖掘与 Apriori 算法：简明技术概述](/2016/10/association-rule-learning-concise-technical-overview.html)
++   频繁模式挖掘与 Apriori 算法：简明技术概述
 
-+   [初学者的十大机器学习算法](/2017/10/top-10-machine-learning-algorithms-beginners.html)
++   初学者的十大机器学习算法
 
-+   [友好的支持向量机介绍](/2019/09/friendly-introduction-support-vector-machines.html)
++   友好的支持向量机介绍
 
 ### 相关话题
 

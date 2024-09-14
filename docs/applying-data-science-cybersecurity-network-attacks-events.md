@@ -1,8 +1,8 @@
 # 将数据科学应用于网络安全网络攻击与事件
 
-> 原文：[https://www.kdnuggets.com/2019/09/applying-data-science-cybersecurity-network-attacks-events.html](https://www.kdnuggets.com/2019/09/applying-data-science-cybersecurity-network-attacks-events.html)
+> 原文：[`www.kdnuggets.com/2019/09/applying-data-science-cybersecurity-network-attacks-events.html`](https://www.kdnuggets.com/2019/09/applying-data-science-cybersecurity-network-attacks-events.html)
 
-[评论](#comments)
+评论
 
 **由 [Aakash Sharma](https://www.linkedin.com/in/aakashsharma21/) 撰写，数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -24,11 +24,11 @@
 
 数据科学沉浸式课程教会了我如何通过 Sequel、JSON、HTML 或网页抓取应用程序收集数据，然后对数据进行清洗，并应用与 Python 相关的代码进行统计分析。然后，我能够对数据进行建模，以发现趋势、做出预测或提供建议/推荐。我想将这些应用到我在 Cisco NetaCad、网络安全原则和软件开发方面的背景中。
 
-![图示](../Images/b1cbeb14e9d610cf85aa10111f51dd87.png)
+![图示](img/b1cbeb14e9d610cf85aa10111f51dd87.png)
 
 FCC 标志
 
-我随后想将此与我的网络安全背景联系起来。我决定从 Data.org 收集有关联邦通信委员会（FCC）的大量网络攻击数据。在这篇博客文章中，我决定写下我如何将数据科学知识与网络安全背景结合到现实世界的行业中。我将提供项目的一些背景信息，代码示例，并提供一些关于FCC如何更好地理解数据的见解。这可能对未来的情况或其他政府相关的网络安全项目有所帮助。
+我随后想将此与我的网络安全背景联系起来。我决定从 Data.org 收集有关联邦通信委员会（FCC）的大量网络攻击数据。在这篇博客文章中，我决定写下我如何将数据科学知识与网络安全背景结合到现实世界的行业中。我将提供项目的一些背景信息，代码示例，并提供一些关于 FCC 如何更好地理解数据的见解。这可能对未来的情况或其他政府相关的网络安全项目有所帮助。
 
 据我了解，FCC 遵循 CSRIC 最佳实践搜索工具，该工具允许您使用多种标准搜索 CSRIC 的最佳实践集合，包括网络类型、行业角色、关键词、优先级水平和 BP 编号。
 
@@ -131,11 +131,11 @@ def convert_str_nan(data):
     return data.astype(object).replace(np.nan, 'None', inplace = True)convert_str_nan(fcc_csv)
 ```
 
-![图像](../Images/00875b80a3ceb8555178033818446813.png)
+![图像](img/00875b80a3ceb8555178033818446813.png)
 
 检查“优先级”列中的值数量
 
-查看优先级列，我们有一个对象相关的列，该列对事件的严重性进行排名，分为重要、非常重要和关键。另一个与该优先级列对应的列将它们排名为1至3，其中1为重要，2为非常重要，3为关键。根据优先级的多样性，我们可以看到数据是不平衡的。我们通过重新命名列以便更好地理解，然后平衡数据，专注于非常重要和关键事件来解决这个问题。
+查看优先级列，我们有一个对象相关的列，该列对事件的严重性进行排名，分为重要、非常重要和关键。另一个与该优先级列对应的列将它们排名为 1 至 3，其中 1 为重要，2 为非常重要，3 为关键。根据优先级的多样性，我们可以看到数据是不平衡的。我们通过重新命名列以便更好地理解，然后平衡数据，专注于非常重要和关键事件来解决这个问题。
 
 ```py
 # Let's rename the 'Priority_(1,2,3)' column so we can utilize it.
@@ -152,7 +152,7 @@ fcc_csv['Priorities'] = [0 if i == 1 else 1 for i in fcc_csv['Priorities']]
 fcc_csv['Priorities'].value_counts()
 ```
 
-![图像](../Images/bbc7ce6635439f561897a56d1e140338.png)
+![图像](img/bbc7ce6635439f561897a56d1e140338.png)
 
 在我们平衡了类别之后，上述代码的结果
 
@@ -172,9 +172,9 @@ largest_pos_corr_list = fcc_csv.corr()[['Priorities']].sort_values('Priorities')
 largest_pos_corr_list
 ```
 
-![图像](../Images/63555a72fc10d4e0f147599a5698eda0.png)
+![图像](img/63555a72fc10d4e0f147599a5698eda0.png)
 
-负相关最大![图像](../Images/87dc709d7e3fba09a31ae8e2e6793512.png)
+负相关最大![图像](img/87dc709d7e3fba09a31ae8e2e6793512.png)
 
 正相关最大
 
@@ -217,7 +217,7 @@ gs_rf.score(X_train, y_train)# Our random forest test score.
 gs_rf.score(X_test, y_test)
 ```
 
-![图像](../Images/091f19d0b69e88e11a54841c6c23f8b7.png)
+![图像](img/091f19d0b69e88e11a54841c6c23f8b7.png)
 
 我们的 Adaboost 模型的图表，它已经过拟合了！
 
@@ -238,7 +238,7 @@ ada.score(X_test, y_test)
 
 **神经网络**是一组算法， loosely 模仿人脑设计，用于识别模式。它们通过一种机器感知的方式解释感官数据，对原始输入进行标记或聚类。我们甚至可以应用正则化来应对**过拟合**问题！
 
-![图像](../Images/1d09ab2060c853b6e6407693f94189ed.png)
+![图像](img/1d09ab2060c853b6e6407693f94189ed.png)
 
 我们的正则化神经网络，它已经过拟合了！
 
@@ -249,7 +249,7 @@ model_dropout.add(Dropout(0.5)) # refers to nodes in the first hidden layer
 model_dropout.add(Dense(1, activation = 'sigmoid'))model_dropout.compile(loss = 'binary_crossentropy', optimizer = 'adam', metrics = ['acc'])history_dropout = model_dropout.fit(X_train, y_train, validation_data = (X_test, y_test), epochs = 100, batch_size = None)
 ```
 
-![图像](../Images/113883da063f2e405f4c0c7d3b679bb6.png)
+![图像](img/113883da063f2e405f4c0c7d3b679bb6.png)
 
 我们模型的准确性
 
@@ -259,7 +259,7 @@ model_dropout.add(Dense(1, activation = 'sigmoid'))model_dropout.compile(loss = 
 
 我的第二种方法是专注于描述列。在第一种方法之后，我想看看攻击的优先级与描述中给出的内容的相关性。描述列给了我们一个简短的解释，说明发生了什么，并建议一个符合 FCC 标准的解决方案，用于停止类似事件。
 
-为了更好地理解描述列，我需要应用自然语言处理（NLP），因为计算机和统计模型不喜欢处理文本和词汇。但我们可以解决这个问题！我的方法与清理数据和调整优先级列时类似，但我应用了一些NLP概念来更好地理解描述、分析它、提出建议，甚至根据事件特有的词汇预测下一个事件是什么。
+为了更好地理解描述列，我需要应用自然语言处理（NLP），因为计算机和统计模型不喜欢处理文本和词汇。但我们可以解决这个问题！我的方法与清理数据和调整优先级列时类似，但我应用了一些 NLP 概念来更好地理解描述、分析它、提出建议，甚至根据事件特有的词汇预测下一个事件是什么。
 
 一些概念包括：
 
@@ -273,7 +273,7 @@ model_dropout.add(Dense(1, activation = 'sigmoid'))model_dropout.compile(loss = 
 
 +   **词频向量化** 计算词汇的频率。
 
-+   **TFIDF向量化** 是词汇的值随着词频的增加而成比例增加，但会受到语料库中词汇频率的影响。
++   **TFIDF 向量化** 是词汇的值随着词频的增加而成比例增加，但会受到语料库中词汇频率的影响。
 
 让我们首先将正则表达式概念应用到我们已经清理过的数据上。我们还希望去除或清理一些在每个描述中都出现但并不频繁的常见词汇。
 
@@ -328,13 +328,13 @@ cv_df_token = pd.SparseDataFrame(cv.fit_transform(processed['tokenized']), colum
 cv_df_token.fillna(0, inplace = True)cv_df_token.head()
 ```
 
-![图像](../Images/f5c1a6526d8e53db4a11ca3ad0dc150a.png)
+![图像](img/f5c1a6526d8e53db4a11ca3ad0dc150a.png)
 
 整个数据集中的顶级词汇计数
 
 我们可以看到，大多数出现的词汇与网络或安全相关。我们可以利用这些信息更好地了解这些事件的范围！这些是网络攻击吗？还是与网络仓库相关？等等。
 
-但如果我们想要更多信息呢？我们可以根据事件的重要性或紧急程度对描述进行分组。也许这并不严重，所以它被标记为0（不重要），或者非常严重，被标记为1（非常重要）。我们可以使用下面的代码根据我们预处理的列来完成这项工作。然后我们可以可视化出最常见的非常重要的词汇。
+但如果我们想要更多信息呢？我们可以根据事件的重要性或紧急程度对描述进行分组。也许这并不严重，所以它被标记为 0（不重要），或者非常严重，被标记为 1（非常重要）。我们可以使用下面的代码根据我们预处理的列来完成这项工作。然后我们可以可视化出最常见的非常重要的词汇。
 
 ```py
 # Split our data frame into really "important" & "not important" 
@@ -346,11 +346,11 @@ fcc_not_important = processed[processed['Priorities'] == 0]print(fcc_really_impo
 print(fcc_not_important.shape)
 ```
 
-![图像](../Images/a5b0249a84ab149056d3d6a93b280bc3.png)
+![图像](img/a5b0249a84ab149056d3d6a93b280bc3.png)
 
 真正重要词汇的顶级词汇计数
 
-最后，我们可以开始在分词后的数据上建模回归和分类指标。让我们通过管道应用逻辑回归模型，在这里我们可以应用网格搜索工具来调整我们的最佳特征或最佳参数。让我们建立我们的X变量，也就是我们的特征！我们将使用处理数据框中分词列的词语或特征。处理数据框是一个全新的数据框，包含了我们的分词、词干化和词形还原列。
+最后，我们可以开始在分词后的数据上建模回归和分类指标。让我们通过管道应用逻辑回归模型，在这里我们可以应用网格搜索工具来调整我们的最佳特征或最佳参数。让我们建立我们的 X 变量，也就是我们的特征！我们将使用处理数据框中分词列的词语或特征。处理数据框是一个全新的数据框，包含了我们的分词、词干化和词形还原列。
 
 我决定关注分词列，因为这个特定列在参数调整和准确率方面表现最好。为了缩短这篇博客文章的时间长度，我决定也关注分词列的表现。让我们也进行训练-测试分割。
 
@@ -363,19 +363,19 @@ X_1_train, X_1_test, y_train, y_test = train_test_split(X_1, y, test_size = 0.3,
 
 现在让我们创建一个使用网格搜索概念的**管道**来寻找最佳超参数。一旦网格搜索完成（这可能需要一段时间！），我们可以从网格搜索对象中提取各种信息和有用的对象。通常，我们会希望将几个转换器应用到数据集上，然后最终构建模型。如果你单独完成所有这些步骤，当你在测试数据上进行预测时，代码可能会很混乱。它也容易出错。幸运的是，我们有**管道**！
 
-在这里我们将应用一个可以考虑LASSO和Ridge惩罚的逻辑回归模型。
+在这里我们将应用一个可以考虑 LASSO 和 Ridge 惩罚的逻辑回归模型。
 
 **你应该：**
 
 1.  拟合并验证数据上默认逻辑回归的准确率。
 
-1.  在不同的正则化强度、Lasso和Ridge惩罚上进行网格搜索。
+1.  在不同的正则化强度、Lasso 和 Ridge 惩罚上进行网格搜索。
 
 1.  比较你优化后的逻辑回归模型在测试集上的准确率与基准准确率和默认模型。
 
 1.  查看找到的最佳参数。选择了什么？这对我们的数据有什么启示？
 
-1.  查看优化模型的（非零，如果选择了Lasso作为最佳）系数和相关预测变量。最重要的预测变量是什么？
+1.  查看优化模型的（非零，如果选择了 Lasso 作为最佳）系数和相关预测变量。最重要的预测变量是什么？
 
 ```py
 pipe_cv = Pipeline([
@@ -399,21 +399,21 @@ gs_lr_tokenized_cv.fit(X_1_train, y_train)
 gs_lr_tokenized_cv.score(X_1_train, y_train)gs_lr_tokenized_cv.score(X_1_test, y_test)
 ```
 
-![图](../Images/decbbb88ade18117d56b64ad0fc88c23.png)
+![图](img/decbbb88ade18117d56b64ad0fc88c23.png)
 
 我们逻辑模型的改进准确率
 
-那么我们可以从中推断什么呢？看起来我们在训练数据上模型的准确率有了大幅提高，并且测试数据上的准确率提高了10%。然而，模型仍然是**过拟合**的！但仍然做得很棒！我们的最佳参数是什么？如果我们想调整未来的逻辑回归模型，我们可以利用这些信息！下面的代码将展示给我们！
+那么我们可以从中推断什么呢？看起来我们在训练数据上模型的准确率有了大幅提高，并且测试数据上的准确率提高了 10%。然而，模型仍然是**过拟合**的！但仍然做得很棒！我们的最佳参数是什么？如果我们想调整未来的逻辑回归模型，我们可以利用这些信息！下面的代码将展示给我们！
 
 ```py
 gs_lr_tokenized_cv.best_params_
 ```
 
-![图](../Images/d40ca1a01a557a1969435a75fbb8c5a8.png)
+![图](img/d40ca1a01a557a1969435a75fbb8c5a8.png)
 
 我们在管道中通过逻辑网格搜索获得的最佳超参数
 
-一个使用**L1**正则化技术的**回归**模型被称为Lasso**回归**，而使用**L2**的模型被称为Ridge**回归**。根据我们最佳的超参数，我们的模型偏好Ridge回归技术。现在我们想基于我们的逻辑回归做出预测，并能够提出建议。我们该如何进行？让我们看看与预测最佳y变量结果相关的特征系数。
+一个使用**L1**正则化技术的**回归**模型被称为 Lasso**回归**，而使用**L2**的模型被称为 Ridge**回归**。根据我们最佳的超参数，我们的模型偏好 Ridge 回归技术。现在我们想基于我们的逻辑回归做出预测，并能够提出建议。我们该如何进行？让我们看看与预测最佳 y 变量结果相关的特征系数。
 
 ```py
 coefs = gs_lr_tokenized_cv.best_estimator_.steps[1][1].coef_
@@ -421,19 +421,19 @@ words = pd.DataFrame(zip(cv.get_feature_names(), np.exp(coefs[0])))
 words = words.sort_values(1)
 ```
 
-![图示](../Images/dc670ed8a1c26c818a2d5dc00edfceec.png)
+![图示](img/dc670ed8a1c26c818a2d5dc00edfceec.png)
 
 基于词汇出现频率和重要性的建议预测
 
 ### 建议与结论
 
-现在我已经完成了建模和数据分析，我可以向FCC以及任何其他计划进行类似项目的数据科学家或数据分析师提出建议。
+现在我已经完成了建模和数据分析，我可以向 FCC 以及任何其他计划进行类似项目的数据科学家或数据分析师提出建议。
 
 对于未来从事类似项目的数据科学家，获取更多数据、更好的数据样本，增加/减少模型复杂度，并进行**正则化**。这可以帮助应对**过拟合**数据的问题，就像我在这个项目中经历的那样。理解不平衡分类问题。这可以引导你解决问题的主要方向。
 
-对于FCC CSRIC的最佳实践，我最好的建议是先解决简单问题，以避免频繁发生并消耗资源。这可以让他们专注于更重要和复杂的事件或攻击。基于我能预测的情况和分析的数据。
+对于 FCC CSRIC 的最佳实践，我最好的建议是先解决简单问题，以避免频繁发生并消耗资源。这可以让他们专注于更重要和复杂的事件或攻击。基于我能预测的情况和分析的数据。
 
-![](../Images/01f7dec0f4c03bc987d72b6290a162a2.png)
+![](img/01f7dec0f4c03bc987d72b6290a162a2.png)
 
 简单问题：
 
@@ -449,7 +449,7 @@ words = words.sort_values(1)
 
 +   天线间距
 
-![](../Images/b66fa8ec368b2c891e0a298da5eb282c.png)
+![](img/b66fa8ec368b2c891e0a298da5eb282c.png)
 
 中等问题：
 
@@ -461,7 +461,7 @@ words = words.sort_values(1)
 
 +   病毒保护
 
-![](../Images/ce63df369ea4719967572ba1ca60e2d1.png)
+![](img/ce63df369ea4719967572ba1ca60e2d1.png)
 
 复杂：
 
@@ -477,22 +477,22 @@ words = words.sort_values(1)
 
 **相关：**
 
-+   [机器学习安全](/2019/01/machine-learning-security.html)
++   机器学习安全
 
-+   [PySyft和私人深度学习的出现](/2019/06/pysyft-emergence-deep-learning.html)
++   PySyft 和私人深度学习的出现
 
-+   [大数据分析帮助转型的前五大领域](/2018/11/top-5-domains-big-data-analytics.html)
++   大数据分析帮助转型的前五大领域
 
 ### 更多相关内容
 
-+   [GPT-4容易受到提示注入攻击，导致错误信息](https://www.kdnuggets.com/2023/05/gpt4-vulnerable-prompt-injection-attacks-causing-misinformation.html)
++   [GPT-4 容易受到提示注入攻击，导致错误信息](https://www.kdnuggets.com/2023/05/gpt4-vulnerable-prompt-injection-attacks-causing-misinformation.html)
 
 +   [准备好通过获得网络安全硕士学位来应对威胁…](https://www.kdnuggets.com/2022/07/baypath-prepared-manage-threat-ms-cybersecurity.html)
 
 +   [准备好通过获得网络安全硕士学位来应对威胁…](https://www.kdnuggets.com/2022/12/baypath-prepared-manage-threat-ms-cybersecurity.html)
 
-+   [在Python中应用描述性和推断性统计](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)
++   [在 Python 中应用描述性和推断性统计](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)
 
-+   [AI自动化网络安全：自动化什么？](https://www.kdnuggets.com/ai-automated-cybersecurity-what-to-automate)
++   [AI 自动化网络安全：自动化什么？](https://www.kdnuggets.com/ai-automated-cybersecurity-what-to-automate)
 
-+   [通过构建15个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
++   [通过构建 15 个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)

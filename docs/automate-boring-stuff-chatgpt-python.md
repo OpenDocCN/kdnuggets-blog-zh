@@ -1,8 +1,8 @@
 # 使用 GPT-4 和 Python 自动化枯燥的任务
 
-> 原文：[https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)
+> 原文：[`www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html`](https://www.kdnuggets.com/2023/03/automate-boring-stuff-chatgpt-python.html)
 
-![使用 ChatGPT 和 Python 自动化枯燥的任务](../Images/57d7ea4d2b98fe3430783a0790af3b7c.png)
+![使用 ChatGPT 和 Python 自动化枯燥的任务](img/57d7ea4d2b98fe3430783a0790af3b7c.png)
 
 编辑提供的图片
 
@@ -16,7 +16,7 @@ ChatGPT 是建立在 GPT-3.5 之上的聊天机器人，并对公众开放，因
 
 一位用户在 Twitter 上发帖，因为模型坚持认为大象的蛋是所有陆地动物中最大的：
 
-![使用 ChatGPT 和 Python 自动化枯燥的任务](../Images/212f3649321ab8ad16b0340c2991e0ff.png)
+![使用 ChatGPT 和 Python 自动化枯燥的任务](img/212f3649321ab8ad16b0340c2991e0ff.png)
 
 图片来自 [FioraAeterna](https://twitter.com/FioraAeterna/status/1599760552686862336?lang=en)
 
@@ -40,47 +40,47 @@ GPT-4 则较少出现“幻觉”。OpenAI 最新的模型更难以被欺骗，�
 
 # 如何访问 ChatGPT？
 
-如果你想跟随我在本文中所做的每一步，你需要访问GPT-4和GPT-3.5。
+如果你想跟随我在本文中所做的每一步，你需要访问 GPT-4 和 GPT-3.5。
 
 ## GPT-3.5
 
-GPT-3.5可以在OpenAI的网站上公开获取。只需访问[https://chat.openai.com/auth/login](https://chat.openai.com/auth/login)，填写所需信息，你将可以访问该语言模型：
+GPT-3.5 可以在 OpenAI 的网站上公开获取。只需访问[`chat.openai.com/auth/login`](https://chat.openai.com/auth/login)，填写所需信息，你将可以访问该语言模型：
 
-![用ChatGPT和Python自动化枯燥的工作](../Images/484f218d53e40fb1cd0f261a4112a76a.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/484f218d53e40fb1cd0f261a4112a76a.png)
 
 图片来自[ChatGPT](https://chat.openai.com/auth/login)
 
 ## GPT-4
 
-另一方面，GPT-4目前隐藏在付费墙之后。要访问该模型，你需要通过点击“升级到Plus”来升级到ChatGPTPlus。
+另一方面，GPT-4 目前隐藏在付费墙之后。要访问该模型，你需要通过点击“升级到 Plus”来升级到 ChatGPTPlus。
 
-每月订阅费用为20美元/月，可以随时取消：
+每月订阅费用为 20 美元/月，可以随时取消：
 
-![用ChatGPT和Python自动化枯燥的工作](../Images/0c10a41b8ad3a7d522a8de819843d437.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/0c10a41b8ad3a7d522a8de819843d437.png)
 
 图片来自[ChatGPT](https://chat.openai.com/auth/login)
 
-如果你不想支付每月的订阅费用，你也可以加入GPT-4的[API候补名单](https://openai.com/waitlist/gpt-4-api)。一旦你获得了API访问权限，你可以按照[这个](https://holypython.com/python-api-tutorial/openai-gpt-4-api-quick-guide/)指南在Python中使用它。
+如果你不想支付每月的订阅费用，你也可以加入 GPT-4 的[API 候补名单](https://openai.com/waitlist/gpt-4-api)。一旦你获得了 API 访问权限，你可以按照[这个](https://holypython.com/python-api-tutorial/openai-gpt-4-api-quick-guide/)指南在 Python 中使用它。
 
-如果你当前没有访问GPT-4，也没关系。
+如果你当前没有访问 GPT-4，也没关系。
 
-你仍然可以使用后台使用GPT-3.5的免费版本ChatGPT来跟随这个教程。
+你仍然可以使用后台使用 GPT-3.5 的免费版本 ChatGPT 来跟随这个教程。
 
-# 使用GPT-4和Python自动化数据科学工作流程的3种方法
+# 使用 GPT-4 和 Python 自动化数据科学工作流程的 3 种方法
 
 ## 1\. 数据可视化
 
-在进行探索性数据分析时，生成一个Python中的快速可视化通常有助于我更好地理解数据集。
+在进行探索性数据分析时，生成一个 Python 中的快速可视化通常有助于我更好地理解数据集。
 
 不幸的是，这项任务可能会变得非常耗时——尤其是当你不知道使用正确的语法来获得期望的结果时。
 
-我经常发现自己在查找Seaborn的广泛文档，并使用StackOverflow来生成一个Python图表。
+我经常发现自己在查找 Seaborn 的广泛文档，并使用 StackOverflow 来生成一个 Python 图表。
 
-让我们看看ChatGPT是否可以帮助解决这个问题。
+让我们看看 ChatGPT 是否可以帮助解决这个问题。
 
-在这一部分中，我们将使用[Pima印第安糖尿病](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database?resource=download)数据集。如果你想跟随ChatGPT生成的结果，你可以下载数据集。
+在这一部分中，我们将使用[Pima 印第安糖尿病](https://www.kaggle.com/datasets/uciml/pima-indians-diabetes-database?resource=download)数据集。如果你想跟随 ChatGPT 生成的结果，你可以下载数据集。
 
-下载数据集后，让我们使用Pandas库将其加载到Python中，并打印数据框的头部：
+下载数据集后，让我们使用 Pandas 库将其加载到 Python 中，并打印数据框的头部：
 
 ```py
 import pandas as pd
@@ -89,7 +89,7 @@ df = pd.read_csv('diabetes.csv')
 df.head()
 ```
 
-![用ChatGPT和Python自动化枯燥的工作](../Images/cbe91eb111f5c1b1572f8afbfb6ee9ae.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/cbe91eb111f5c1b1572f8afbfb6ee9ae.png)
 
 这个数据集中有九个变量。其中一个名为“Outcome”，是目标变量，用于告诉我们一个人是否会发展糖尿病。其余的变量是用于预测结果的自变量。
 
@@ -105,7 +105,7 @@ df.head()
 
 我要选择 GPT-3.5：
 
-![用 ChatGPT 和 Python 自动化枯燥的工作](../Images/638e60461223081fef0e0005c11f67cc.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/638e60461223081fef0e0005c11f67cc.png)
 
 来自 ChatGPT Plus 的图像
 
@@ -121,7 +121,7 @@ df.head()
 
 这是模型对上述提示的回应：
 
-![用 ChatGPT 和 Python 自动化枯燥的工作](../Images/33b0e1b4b4a1a925b4aec5ad3d3ba87a.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/33b0e1b4b4a1a925b4aec5ad3d3ba87a.png)
 
 一件立即显现的事情是模型假设我们想从 Seaborn 导入数据集。它可能做出这个假设是因为我们要求它使用 Seaborn 库。
 
@@ -158,13 +158,13 @@ plt.show()
 
 这是运行上述代码后生成的结果：
 
-![用 ChatGPT 和 Python 自动化枯燥的工作](../Images/3a2a61dc32704834f535ea9dbfbf7d44.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/3a2a61dc32704834f535ea9dbfbf7d44.png)
 
 这个图表看起来很完美！它完全符合我在 ChatGPT 中输入提示时的预期。
 
 不过，有一个突出的问提是图表上的文字出现了重叠。我打算问模型是否可以帮助我们解决这个问题，输入以下提示：
 
-![用 ChatGPT 和 Python 自动化枯燥的工作](../Images/547fb162bf4aed36665ce7bffa7a0cad.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/547fb162bf4aed36665ce7bffa7a0cad.png)
 
 算法解释说，我们可以通过旋转图表标签或调整图形大小来防止这种重叠。它还生成了新的代码来帮助我们实现这一点。
 
@@ -200,7 +200,7 @@ plt.show()
 
 上面的代码行应该生成以下输出：
 
-![用 ChatGPT 和 Python 自动化枯燥的工作](../Images/2d12d26b1d528ae34880c39d38ca1122.png)
+![用 ChatGPT 和 Python 自动化枯燥的工作](img/2d12d26b1d528ae34880c39d38ca1122.png)
 
 这看起来很棒！
 
@@ -212,7 +212,7 @@ plt.show()
 
 现在，让我们将相同的提示输入到 GPT-4 中，看看是否会得到不同的响应。我将选择 ChatGPT 中的 GPT-4 模型，并输入与之前相同的提示：
 
-![用 ChatGPT 和 Python 自动化无聊事务](../Images/b37d58367311a2b4bb77cbafadb51388.png)
+![用 ChatGPT 和 Python 自动化无聊事务](img/b37d58367311a2b4bb77cbafadb51388.png)
 
 注意 GPT-4 不假设我们会使用 Seaborn 内置的 dataframe。
 
@@ -257,7 +257,7 @@ plt.show()
 
 上述代码应生成以下图表：
 
-![用 ChatGPT 和 Python 自动化无聊事务](../Images/dde599d5336f2d250c41121558b78e08.png)
+![用 ChatGPT 和 Python 自动化无聊事务](img/dde599d5336f2d250c41121558b78e08.png)
 
 这太完美了！
 
@@ -289,7 +289,7 @@ plt.show()
 
 首先，让我们让算法生成提取数据并将其保存到文本文件中的 Python 代码：
 
-![使用 ChatGPT 和 Python 自动化乏味的任务](../Images/7f1c57d6933a264b3c67c3124b1eee7f.png)
+![使用 ChatGPT 和 Python 自动化乏味的任务](img/7f1c57d6933a264b3c67c3124b1eee7f.png)
 
 这是算法提供的完整代码：
 
@@ -319,11 +319,11 @@ with open("Intro_to_ML.pdf", "rb") as pdf_file:
 
 不幸的是，在运行 GPT-3.5 生成的代码后，我遇到了以下 Unicode 错误：
 
-![使用 ChatGPT 和 Python 自动化乏味的任务](../Images/960c4fb9c120dda0e6a306d0069058e7.png)
+![使用 ChatGPT 和 Python 自动化乏味的任务](img/960c4fb9c120dda0e6a306d0069058e7.png)
 
 让我们回到 GPT-3.5，看看模型是否能解决这个问题：
 
-![使用 ChatGPT 和 Python 自动化乏味的任务](../Images/4ee121e9d552d05d6669026c185256cc.png)
+![使用 ChatGPT 和 Python 自动化乏味的任务](img/4ee121e9d552d05d6669026c185256cc.png)
 
 我将错误粘贴到 ChatGPT 中，模型回应说可以通过将编码更改为 “utf-8” 来修复。它还给我一些反映此更改的修改过的代码：
 
@@ -351,13 +351,13 @@ with open("Intro_to_ML.pdf", "rb") as pdf_file:
 
 这段代码成功执行，并创建了一个名为 “output_file.txt” 的文本文件。所有 PDF 文档中的内容已被写入该文件：
 
-![使用 ChatGPT 和 Python 自动化乏味的任务](../Images/9a95350b1671b87ecbd6c3cdc6b33936.png)
+![使用 ChatGPT 和 Python 自动化乏味的任务](img/9a95350b1671b87ecbd6c3cdc6b33936.png)
 
 ### 使用 GPT-4 阅读 PDF 文件
 
 现在，我将相同的提示粘贴到 GPT-4 中，看看模型会提出什么：
 
-![使用 ChatGPT 和 Python 自动化乏味的任务](../Images/6fb2c680f6e340b3bc5b5f1adff8d120.png)
+![使用 ChatGPT 和 Python 自动化乏味的任务](img/6fb2c680f6e340b3bc5b5f1adff8d120.png)
 
 这是 GPT-4 生成的完整代码：
 
@@ -401,17 +401,17 @@ GPT-4 提供的代码应该能成功执行，您应该能在创建的文本文�
 
 我每周花费数小时阅读和回复电子邮件。这不仅耗时，而且在追赶紧迫的截止日期时，保持对邮件的掌控也可能非常有压力。
 
-尽管你不能让ChatGPT为你写所有的电子邮件（我希望可以），你仍然可以使用它来编写在特定时间发送的计划电子邮件程序，或修改一个可以发送给多人单个电子邮件模板。
+尽管你不能让 ChatGPT 为你写所有的电子邮件（我希望可以），你仍然可以使用它来编写在特定时间发送的计划电子邮件程序，或修改一个可以发送给多人单个电子邮件模板。
 
-在这一部分，我们将让GPT-3.5和GPT-4帮助我们编写一个Python脚本来发送自动化电子邮件。
+在这一部分，我们将让 GPT-3.5 和 GPT-4 帮助我们编写一个 Python 脚本来发送自动化电子邮件。
 
-### 使用GPT-3.5发送自动化电子邮件
+### 使用 GPT-3.5 发送自动化电子邮件
 
 首先，让我们输入以下提示来生成发送自动化电子邮件的代码：
 
-![用ChatGPT和Python自动化无聊的工作](../Images/1b4e7d2c0648387703a8e73ca72c88fa.png)
+![用 ChatGPT 和 Python 自动化无聊的工作](img/1b4e7d2c0648387703a8e73ca72c88fa.png)
 
-这是GPT-3.5生成的完整代码（在运行此代码之前，请确保更改电子邮件地址和密码）：
+这是 GPT-3.5 生成的完整代码（在运行此代码之前，请确保更改电子邮件地址和密码）：
 
 ```py
 import smtplib
@@ -441,45 +441,45 @@ with smtplib.SMTP(smtp_server, smtp_port) as smtp:
 
 不幸的是，这段代码没有成功执行。它生成了以下错误：
 
-![用ChatGPT和Python自动化无聊的工作](../Images/1906fc9fb7db28b426636fa389a23511.png)
+![用 ChatGPT 和 Python 自动化无聊的工作](img/1906fc9fb7db28b426636fa389a23511.png)
 
-让我们把这个错误粘贴到ChatGPT中，看看模型是否能帮助我们解决它：
+让我们把这个错误粘贴到 ChatGPT 中，看看模型是否能帮助我们解决它：
 
-![用ChatGPT和Python自动化无聊的工作](../Images/51d430eac30f2daaee5a92c9eacd99e6.png)
+![用 ChatGPT 和 Python 自动化无聊的工作](img/51d430eac30f2daaee5a92c9eacd99e6.png)
 
 好的，算法指出了几个可能导致我们遇到此错误的原因。
 
 我确切知道我的登录凭据和电子邮件地址是有效的，而且代码中没有任何拼写错误。因此，这些原因可以排除。
 
-GPT-3.5还建议允许不太安全的应用程序可能会解决这个问题。
+GPT-3.5 还建议允许不太安全的应用程序可能会解决这个问题。
 
-然而，如果你尝试这样做，你将不会在Google帐户中找到允许访问不太安全应用程序的选项。
+然而，如果你尝试这样做，你将不会在 Google 帐户中找到允许访问不太安全应用程序的选项。
 
-这是因为Google [不再](https://support.google.com/accounts/answer/6010255?hl=en) 允许用户由于安全原因允许不太安全的应用程序。
+这是因为 Google [不再](https://support.google.com/accounts/answer/6010255?hl=en) 允许用户由于安全原因允许不太安全的应用程序。
 
-最后，GPT-3.5还提到如果启用了两步验证，则应生成应用程序密码。
+最后，GPT-3.5 还提到如果启用了两步验证，则应生成应用程序密码。
 
-我没有启用两步验证，所以我打算（暂时）放弃这个模型，看看GPT-4是否有解决方案。
+我没有启用两步验证，所以我打算（暂时）放弃这个模型，看看 GPT-4 是否有解决方案。
 
-### 使用GPT-4发送自动化电子邮件
+### 使用 GPT-4 发送自动化电子邮件
 
-好的，如果你在GPT-4中输入相同的提示，你会发现算法生成的代码与GPT-3.5给出的非常相似。这将导致我们之前遇到的相同错误。
+好的，如果你在 GPT-4 中输入相同的提示，你会发现算法生成的代码与 GPT-3.5 给出的非常相似。这将导致我们之前遇到的相同错误。
 
-让我们看看GPT-4是否能帮助我们修复这个错误：
+让我们看看 GPT-4 是否能帮助我们修复这个错误：
 
-![用ChatGPT和Python自动化无聊的工作](../Images/3cb4f84f98924e52e8b8b5d59ce014b8.png)
+![用 ChatGPT 和 Python 自动化无聊的工作](img/3cb4f84f98924e52e8b8b5d59ce014b8.png)
 
-GPT-4的建议与我们之前看到的非常相似。
+GPT-4 的建议与我们之前看到的非常相似。
 
 然而，这次，它给出了逐步完成每个步骤的详细说明。
 
-GPT-4也建议创建应用程序密码，所以我们来试试看。
+GPT-4 也建议创建应用程序密码，所以我们来试试看。
 
-首先，访问你的Google帐户，导航到“安全性”，并启用两步验证。然后，在同一部分，你应该会看到一个名为“应用程序密码”的选项。
+首先，访问你的 Google 帐户，导航到“安全性”，并启用两步验证。然后，在同一部分，你应该会看到一个名为“应用程序密码”的选项。
 
 点击它，以下屏幕将出现：
 
-![用ChatGPT和Python自动化无聊的工作](../Images/553eb1ef0b1a12fa993054184554dea9.png)
+![用 ChatGPT 和 Python 自动化无聊的工作](img/553eb1ef0b1a12fa993054184554dea9.png)
 
 你可以输入任何你喜欢的名称，然后点击“生成”。
 
@@ -515,7 +515,7 @@ with smtplib.SMTP(smtp_server, smtp_port) as smtp:
 
 这次应该会成功运行，您的收件人将收到如下邮件：
 
-![使用 ChatGPT 和 Python 自动化无聊的任务](../Images/e31b7a8a9ea3eddc66abc56c7a857293.png)
+![使用 ChatGPT 和 Python 自动化无聊的任务](img/e31b7a8a9ea3eddc66abc56c7a857293.png)
 
 完美！
 
@@ -535,11 +535,11 @@ with smtplib.SMTP(smtp_server, smtp_port) as smtp:
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 

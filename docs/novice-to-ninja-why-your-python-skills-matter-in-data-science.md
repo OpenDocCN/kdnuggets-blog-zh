@@ -1,8 +1,8 @@
 # 从初学者到高手：为什么你的 Python 技能在数据科学中至关重要
 
-> 原文：[https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)
+> 原文：[`www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science`](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)
 
-![从初学者到高手：为什么你的 Python 技能在数据科学中至关重要](../Images/a4cffc335f288d4f1586a1f59a275653.png)
+![从初学者到高手：为什么你的 Python 技能在数据科学中至关重要](img/a4cffc335f288d4f1586a1f59a275653.png)
 
 由作者使用 DALL•E 3 创建的图像
 
@@ -108,7 +108,7 @@ else:
 
 ## 中级程序员的方法
 
-中级程序员可能会使用列表推导式和`zip`函数实现更具Python风格的处理。
+中级程序员可能会使用列表推导式和`zip`函数实现更具 Python 风格的处理。
 
 ```py
 n = int(input("How many Fibonacci numbers to generate? "))
@@ -123,7 +123,7 @@ else:
 
 ## 专家的方法
 
-专家可能会使用生成器实现更高效的内存管理，并利用Python的解包特性在一行中交换变量。
+专家可能会使用生成器实现更高效的内存管理，并利用 Python 的解包特性在一行中交换变量。
 
 ```py
 def generate_fibonacci(n: int):
@@ -145,7 +145,7 @@ else:
 
 +   初学者：使用基本控制结构和列表，简单但略显冗长
 
-+   中级：利用列表推导式和`zip`实现更具Python风格和简洁的解决方案
++   中级：利用列表推导式和`zip`实现更具 Python 风格和简洁的解决方案
 
 +   专家：使用生成器实现内存高效的解决方案，并使用解包进行优雅的变量交换
 
@@ -159,7 +159,7 @@ else:
 
 +   时间：编写更高效的代码意味着任务完成得更快，这对程序员和使用软件的任何人都是有益的
 
-+   资源利用：高效的代码使用更少的CPU和内存，这对在有限资源或大规模运行的应用程序至关重要
++   资源利用：高效的代码使用更少的 CPU 和内存，这对在有限资源或大规模运行的应用程序至关重要
 
 ## 2\. 可读性和可维护性
 
@@ -205,11 +205,11 @@ else:
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

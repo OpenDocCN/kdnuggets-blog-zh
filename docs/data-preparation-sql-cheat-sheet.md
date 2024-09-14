@@ -1,6 +1,6 @@
 # SQL 数据准备备忘单
 
-> 原文：[https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html`](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
 # 数据准备的重要性
 
@@ -10,19 +10,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
-> **马修·梅约：** "为什么数据准备常被描述为数据相关任务中80%的工作，你认为这是一种准确的概括吗？"
+> **马修·梅约：** "为什么数据准备常被描述为数据相关任务中 80%的工作，你认为这是一种准确的概括吗？"
 > 
 > **塞巴斯蒂安·拉什卡：** "80%？我经常听到>90%！"
 > 
-> 从 [**数据准备技巧、窍门和工具：与内部人士的访谈**](/2016/10/data-preparation-tips-tricks-tools.html) 中，KDnuggets
+> 从 **数据准备技巧、窍门和工具：与内部人士的访谈** 中，KDnuggets
 
 一个基本的问题是如何以及在哪里进行数据准备。选择不同工具和方法有其合理的理由：
 
@@ -46,7 +46,7 @@
 
 以下 [快速参考备忘单指南](https://www.kdnuggets.com/publications/sheets/Data-Prep-with-SQL-Pugsley-KDnuggets.pdf) 将展示 SQL 在数据准备各个步骤中的应用。这并不是 SQL 函数或选项的详尽列表，而是一个起点。
 
-[![SQL 数据准备备忘单](../Images/fd91e8743508ed57a2a01ecae5a32835.png)](https://www.kdnuggets.com/publications/sheets/Data-Prep-with-SQL-Pugsley-KDnuggets.pdf)
+![SQL 数据准备备忘单](https://www.kdnuggets.com/publications/sheets/Data-Prep-with-SQL-Pugsley-KDnuggets.pdf)
 
 点击查看完整备忘单
 
@@ -56,7 +56,7 @@
 
 如果您已经投资了高性能的数据库许可证，为什么不利用它们在 SQL 中进行数据准备以支持数据科学呢？
 
-**[斯坦·帕格斯利](https://www.linkedin.com/in/spugsley/)** 是一位数据仓库和分析顾问，隶属于[艾德·贝利技术咨询公司](https://technologyconsulting.eidebailly.com/services/data-analytics/)，公司总部位于犹他州盐湖城。他还是犹他大学厄克尔斯商学院的兼职教师。您可以通过[电子邮件](mailto:SPugsley@EideBailly.com)联系作者。
+**[斯坦·帕格斯利](https://www.linkedin.com/in/spugsley/)** 是一位数据仓库和分析顾问，隶属于[艾德·贝利技术咨询公司](https://technologyconsulting.eidebailly.com/services/data-analytics/)，公司总部位于犹他州盐湖城。他还是犹他大学厄克尔斯商学院的兼职教师。您可以通过电子邮件联系作者。
 
 ### 更多相关主题
 
@@ -66,7 +66,7 @@
 
 +   [机器学习中的数据准备和原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何应用…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何应用…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [数据科学中的 Git 备忘单](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
 

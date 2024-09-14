@@ -1,8 +1,8 @@
 # Python Lambda 函数详解
 
-> 原文：[https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
+> 原文：[`www.kdnuggets.com/2023/01/python-lambda-functions-explained.html`](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
 
-![Python Lambda 函数详解](../Images/0ad70492b45ee5b7fe82629b3ae46a5a.png)
+![Python Lambda 函数详解](img/0ad70492b45ee5b7fe82629b3ae46a5a.png)
 
 编辑者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -252,6 +252,6 @@ lambda 函数非常方便，可以节省大量编码工作。本文解释了 lam
 
 +   [10 个 Python 统计函数](https://www.kdnuggets.com/10-python-statistical-functions)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法详解…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法详解…](https://www.kdnuggets.com/2022/n29.html)
 
 +   [什么是矩量生成函数？](https://www.kdnuggets.com/2022/12/momentgenerating-functions.html)

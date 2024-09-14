@@ -1,28 +1,28 @@
-# 5 个真正有用的Bash脚本用于数据科学
+# 5 个真正有用的 Bash 脚本用于数据科学
 
-> 原文：[https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/02/bash-scripts-data-science.html`](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
 
-![5 个真正有用的Bash脚本用于数据科学](../Images/37ea1aed7df9f5a13dcd302d09d3b713.png)
+![5 个真正有用的 Bash 脚本用于数据科学](img/37ea1aed7df9f5a13dcd302d09d3b713.png)
 
 作者提供的图片
 
-Python、R和SQL通常被认为是处理、建模和探索数据的最常用语言。虽然这可能是真的，但并没有理由其他语言不能或没有被用来做这些工作。
+Python、R 和 SQL 通常被认为是处理、建模和探索数据的最常用语言。虽然这可能是真的，但并没有理由其他语言不能或没有被用来做这些工作。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-Bash shell 是一种Unix及类Unix操作系统的shell，以及与之配套的命令和编程语言。Bash脚本是使用Bash shell脚本语言编写的程序。这些脚本由Bash解释器按顺序执行，可以包括其他编程语言中常见的所有构造，包括条件语句、循环和变量。
+Bash shell 是一种 Unix 及类 Unix 操作系统的 shell，以及与之配套的命令和编程语言。Bash 脚本是使用 Bash shell 脚本语言编写的程序。这些脚本由 Bash 解释器按顺序执行，可以包括其他编程语言中常见的所有构造，包括条件语句、循环和变量。
 
-常见的Bash脚本用途包括：
+常见的 Bash 脚本用途包括：
 
 +   自动化系统管理任务
 
@@ -32,15 +32,15 @@ Bash shell 是一种Unix及类Unix操作系统的shell，以及与之配套的�
 
 +   创建命令行工具和实用程序
 
-Bash脚本还用于协调复杂分布式系统的部署和管理，使其成为数据工程、云计算环境和DevOps领域极为有用的技能。
+Bash 脚本还用于协调复杂分布式系统的部署和管理，使其成为数据工程、云计算环境和 DevOps 领域极为有用的技能。
 
-在这篇文章中，我们将深入探讨五种与数据科学相关的脚本任务，看看Bash可以有多么灵活和有用。
+在这篇文章中，我们将深入探讨五种与数据科学相关的脚本任务，看看 Bash 可以有多么灵活和有用。
 
-# Bash脚本
+# Bash 脚本
 
 ## 清理和格式化原始数据
 
-这是一个用于清理和格式化原始数据文件的bash脚本示例：
+这是一个用于清理和格式化原始数据文件的 bash 脚本示例：
 
 ```py
 #!/bin/bash
@@ -69,7 +69,7 @@ echo "Data cleaning and formatting complete. Output file: $output_file"
 
 这个脚本：
 
-+   假设你的原始数据文件是一个名为`raw_data.csv`的CSV文件
++   假设你的原始数据文件是一个名为`raw_data.csv`的 CSV 文件
 
 +   将清理后的数据保存为`clean_data.csv`
 
@@ -87,7 +87,7 @@ echo "Data cleaning and formatting complete. Output file: $output_file"
 
 ## 自动化数据可视化
 
-这是一个用于自动化数据可视化任务的bash脚本示例：
+这是一个用于自动化数据可视化任务的 bash 脚本示例：
 
 ```py
 #!/bin/bash
@@ -109,15 +109,15 @@ echo "Data visualization complete. Output files: line_chart.png, bar_chart.png, 
 
 上述脚本：
 
-+   假设你的数据在一个名为`data.csv`的CSV文件中
++   假设你的数据在一个名为`data.csv`的 CSV 文件中
 
 +   使用`gnuplot`命令创建三种不同类型的图表：
 
-    +   绘制第1列与第2列的折线图。
+    +   绘制第 1 列与第 2 列的折线图。
 
-    +   绘制第3列的条形图。
+    +   绘制第 3 列的条形图。
 
-    +   绘制第4列与第5列的散点图。
+    +   绘制第 4 列与第 5 列的散点图。
 
 +   以 PNG 格式输出图表，并分别保存为`line_chart.png`、`bar_chart.png`和`scatter_plot.png`。
 
@@ -165,7 +165,7 @@ echo "Statistical analysis complete. Output file: $output_file"
 
 +   假设您的数据在名为`data.csv`的 CSV 文件中。
 
-+   使用`awk`命令计算2列的均值和标准差。
++   使用`awk`命令计算 2 列的均值和标准差。
 
 +   使用逗号分隔数据。
 
@@ -263,7 +263,7 @@ echo "Jupyter Notebook execution complete."
 
 +   [3 个有用的 Python 自动化脚本](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
 
-+   [KDnuggets 新闻，12月7日：揭示前10大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭示前 10 大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
 
 +   [4 个有用的中级 SQL 查询用于数据科学](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 

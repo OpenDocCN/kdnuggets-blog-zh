@@ -1,8 +1,8 @@
 # 机器学习评估指标：理论与概述
 
-> 原文：[https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)
+> 原文：[`www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview`](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)
 
-![机器学习评估指标：理论与概述](../Images/6b32ae2ad62dc68177dc6ed7abf1bdb8.png)
+![机器学习评估指标：理论与概述](img/6b32ae2ad62dc68177dc6ed7abf1bdb8.png)
 
 作者插图
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -42,13 +42,13 @@
 
 +   **假负例**：预测为良性癌症的终末期病人数量
 
-![机器学习评估指标：理论与概述](../Images/e982401a7464adcca3b006f32d08f3ee.png)
+![机器学习评估指标：理论与概述](img/e982401a7464adcca3b006f32d08f3ee.png)
 
 混淆矩阵示例。作者插图。
 
 ## 准确度
 
-![机器学习评估指标：理论与概述](../Images/0c6542986e34a4d884a85747645bccd4.png)
+![机器学习评估指标：理论与概述](img/0c6542986e34a4d884a85747645bccd4.png)
 
 准确度是评估分类模型最著名和最受欢迎的指标之一。它是正确预测的分数除以样本数量。
 
@@ -58,7 +58,7 @@
 
 ## 精确度
 
-![机器学习评估指标：理论与概述](../Images/0d60f4f6d383b0177b3a163445c1779f.png)
+![机器学习评估指标：理论与概述](img/0d60f4f6d383b0177b3a163445c1779f.png)
 
 与准确度不同，精确度是用于类别不平衡时的分类评估指标。
 
@@ -70,7 +70,7 @@
 
 ## 召回率
 
-![机器学习评估指标：理论与概述](../Images/b572a5b0cb721a853cf7df971becd869.png)
+![机器学习评估指标：理论与概述](img/b572a5b0cb721a853cf7df971becd869.png)
 
 召回率与精确度一起，是应用于输出变量类别观察数量不同的另一种指标。召回率回答以下问题：“我能识别出多少比例的恶性癌症患者？”。
 
@@ -78,15 +78,15 @@
 
 ## F1-分数
 
-![机器学习评估指标：理论与概述](../Images/cd586e43655c8d4568bfc136de1fd12b.png)
+![机器学习评估指标：理论与概述](img/cd586e43655c8d4568bfc136de1fd12b.png)
 
-同时监控精确度和召回率可能会很麻烦，因此最好有一个可以总结这两个指标的度量。这可以通过F1-分数来实现，F1-分数定义为精确度和召回率的调和平均数。
+同时监控精确度和召回率可能会很麻烦，因此最好有一个可以总结这两个指标的度量。这可以通过 F1-分数来实现，F1-分数定义为精确度和召回率的调和平均数。
 
-高F1-分数是因为精确度和召回率都具有高值。如果召回率或精确度值较低，F1-分数将受到惩罚，结果也会较低。
+高 F1-分数是因为精确度和召回率都具有高值。如果召回率或精确度值较低，F1-分数将受到惩罚，结果也会较低。
 
 # 回归
 
-![机器学习评估指标：理论与概述](../Images/017f3c95d6a235b4570cdc4796c89607.png)
+![机器学习评估指标：理论与概述](img/017f3c95d6a235b4570cdc4796c89607.png)
 
 作者插图
 
@@ -98,7 +98,7 @@
 
 ## MAE
 
-![机器学习评估指标：理论与概述](../Images/f69f5cce003d2c7a2f455e1d4a6901c5.png)
+![机器学习评估指标：理论与概述](img/f69f5cce003d2c7a2f455e1d4a6901c5.png)
 
 *均绝对误差计算的是平均绝对残差。*
 
@@ -106,7 +106,7 @@
 
 ## MSE
 
-![机器学习评估指标：理论与概述](../Images/5d94f5a69a01dae253fa99d79641dbdc.png)
+![机器学习评估指标：理论与概述](img/5d94f5a69a01dae253fa99d79641dbdc.png)
 
 *均方误差计算的是平均平方残差。*
 
@@ -116,23 +116,23 @@
 
 ## RMSE
 
-![机器学习评估指标：理论与概述](../Images/61fec1d4635556155c0557d49d167afa.png)
+![机器学习评估指标：理论与概述](img/61fec1d4635556155c0557d49d167afa.png)
 
 *均方根误差计算的是* ***平方根*** *的平均平方残差。*
 
-当你理解了MSE后，稍作停留即可掌握均方根误差，它只是MSE的平方根。
+当你理解了 MSE 后，稍作停留即可掌握均方根误差，它只是 MSE 的平方根。
 
-RMSE的优点在于它更容易解释，因为该指标的尺度与目标变量的尺度一致。除了形状外，它与MSE非常相似：它总是对较大的差异赋予更多的权重。
+RMSE 的优点在于它更容易解释，因为该指标的尺度与目标变量的尺度一致。除了形状外，它与 MSE 非常相似：它总是对较大的差异赋予更多的权重。
 
 ## MAPE
 
-![机器学习评估指标：理论与概述](../Images/e0ed29472adda7f3fd1b05fb6c2c1349.png)
+![机器学习评估指标：理论与概述](img/e0ed29472adda7f3fd1b05fb6c2c1349.png)
 
 *均绝对百分比误差计算的是预测值与实际值之间的平均绝对百分比差异。*
 
-像MAE一样，它忽略了误差的方向，理想的最佳值是0。
+像 MAE 一样，它忽略了误差的方向，理想的最佳值是 0。
 
-例如，如果我们在预测房价时得到一个MAPE值为0.3，这意味着平均而言，预测值低于实际值30%。
+例如，如果我们在预测房价时得到一个 MAPE 值为 0.3，这意味着平均而言，预测值低于实际值 30%。
 
 # 结束语
 
@@ -150,6 +150,6 @@ RMSE的优点在于它更容易解释，因为该指标的尺度与目标变量�
 
 +   [数据可视化：理论与技术](https://www.kdnuggets.com/data-visualization-theory-and-techniques)
 
-+   [从理论到实践：构建一个k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
++   [从理论到实践：构建一个 k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 
 +   [如何利用图论进行足球侦察](https://www.kdnuggets.com/2022/11/graph-theory-scout-soccer.html)

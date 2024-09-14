@@ -1,22 +1,22 @@
 # 使用 Streamlit 的新布局选项构建更好的数据应用
 
-> 原文：[https://www.kdnuggets.com/2020/11/streamlit-better-data-apps-new-layout-options.html](https://www.kdnuggets.com/2020/11/streamlit-better-data-apps-new-layout-options.html)
+> 原文：[`www.kdnuggets.com/2020/11/streamlit-better-data-apps-new-layout-options.html`](https://www.kdnuggets.com/2020/11/streamlit-better-data-apps-new-layout-options.html)
 
-[评论](#comments)
+评论
 
 **由 [Streamlit](https://www.streamlit.io/) 高级软件工程师 Austin Chen 撰写**
 
-![Image](../Images/9b2babdb6d159e02462402110fdb758d.png)
+![Image](img/9b2babdb6d159e02462402110fdb758d.png)
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@ col2.header("Grayscale")
 col2.image(grayscale, use_column_width=True)
 ```
 
-![](../Images/b9e61f8c570f35d3f712ff4729be44a0.png)
+![](img/b9e61f8c570f35d3f712ff4729be44a0.png)
 
 实际上，通过在循环中调用 `st.beta_columns` ，你可以获得网格布局！
 
@@ -64,7 +64,7 @@ for i in range(1, 10):
     cols[3].write('x' * i)
 ```
 
-![](../Images/9bb9144a3e597e1fafacab80ebf3e603.png)
+![](img/9bb9144a3e597e1fafacab80ebf3e603.png)
 
 你甚至可以做到相当复杂（这对宽屏显示器来说可能很棒！）这是一个例子，展示了如何将*可变宽度*列与宽模式布局结合使用：
 
@@ -76,11 +76,11 @@ st.beta_set_page_config(layout="wide")
 c1, c2, c3, c4 = st.beta_columns((2, 1, 1, 1))
 ```
 
-![](../Images/22a15c82c5e6e7c3541b282e6b52cdbf.png)
+![](img/22a15c82c5e6e7c3541b282e6b52cdbf.png)
 
 以防你在想：是的，列在各种设备上都很美观，并且会根据移动设备和不同浏览器宽度自动调整大小。
 
-![](../Images/394f3e92a243711cdc265db3a42a756d.png)
+![](img/394f3e92a243711cdc265db3a42a756d.png)
 
 ### 使用展开器清理内容
 
@@ -88,7 +88,7 @@ c1, c2, c3, c4 = st.beta_columns((2, 1, 1, 1))
 
 这是隐藏次要控件的好方法，或者提供用户可以切换的更长解释！
 
-![](../Images/4681f72c8fe1fac1f6a17f64988d99fc.png)
+![](img/4681f72c8fe1fac1f6a17f64988d99fc.png)
 
 ### 添加了一个新概念：容器！
 
@@ -135,11 +135,11 @@ with st.sidebar:
     clicked = my_widget("third")
 ```
 
-![](../Images/4cfde842be0a439f3e017f0b7aa190fd.png)
+![](img/4cfde842be0a439f3e017f0b7aa190fd.png)
 
 最后一点：`with` 语法允许你将自定义组件放在任何你喜欢的容器中。[查看社区成员 Sam Dobson 的这个应用](https://share.streamlit.io/samdobson/streamlit-sandbox/main/app.py)，它在应用本身旁边的列中嵌入了 [Streamlit Ace](https://pypi.org/project/streamlit-ace/) 编辑器——用户可以编辑代码并实时查看更改！
 
-![](../Images/619a52b470a3c9f92801f98334e46293.png)
+![](img/619a52b470a3c9f92801f98334e46293.png)
 
 ### 就这些，朋友们！
 
@@ -169,11 +169,11 @@ $ pip install streamlit --upgrade
 
 **相关：**
 
-+   [构建一个使用 TensorFlow 和 Streamlit 生成逼真面孔的应用](/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
++   构建一个使用 TensorFlow 和 Streamlit 生成逼真面孔的应用
 
-+   [使用 Streamlit Sharing 部署 Streamlit 应用](/2020/10/deploying-streamlit-apps-streamlit-sharing.html)
++   使用 Streamlit Sharing 部署 Streamlit 应用
 
-+   [使用 Docker Swarm、Traefik 和 Keycloak 在 AWS 上部署安全且可扩展的 Streamlit 应用](/2020/10/deploying-secure-scalable-streamlit-apps-aws-docker-swarm-traefik-keycloak.html)
++   使用 Docker Swarm、Traefik 和 Keycloak 在 AWS 上部署安全且可扩展的 Streamlit 应用
 
 ### 更多相关话题
 

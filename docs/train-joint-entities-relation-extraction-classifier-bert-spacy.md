@@ -1,12 +1,12 @@
 # 如何使用 BERT Transformer 和 spaCy 3 训练联合实体和关系提取分类器
 
-> 原文：[https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html](https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html)
+> 原文：[`www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html`](https://www.kdnuggets.com/2021/06/train-joint-entities-relation-extraction-classifier-bert-spacy.html)
 
-[评论](#comments)
+评论
 
 **作者 [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI 创始人**
 
-![](../Images/5514c4925ce52d6bb871c2a536d60f5b.png)
+![](img/5514c4925ce52d6bb871c2a536d60f5b.png)
 
 图片由[JJ Ying](https://unsplash.com/@jjying?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来自[Unsplash](https://unsplash.com/s/photos/science?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -24,59 +24,59 @@
 
 在本教程中，我们将提取两个实体{Experience, Skills}之间的关系作为**Experience_in**，以及{Diploma, Diploma_major}之间的关系作为**Degree_in**。目标是提取特定技能所需的经验年限和与所需文凭相关的文凭专业。你当然可以训练自己的关系分类器以适应自己的用例，例如在健康记录中查找症状的因果关系或在财务文档中查找公司收购。可能性是无限的……
 
-在本教程中，我们将仅涵盖实体关系抽取部分。有关使用spaCy 3对BERT NER进行微调的详细信息，请参考我的[上一篇文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)。
+在本教程中，我们将仅涵盖实体关系抽取部分。有关使用 spaCy 3 对 BERT NER 进行微调的详细信息，请参考我的[上一篇文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)。
 
 ### **数据标注：**
 
 如在我的[上一篇文章](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)中所述，我们使用[UBIAI](https://ubiai.tools/)文本标注工具进行联合实体和关系标注，因为它的多功能接口允许我们轻松切换实体和关系标注（见下图）：
 
-![](../Images/58a68157e72e3adf0c422d9d92851a0a.png)
+![](img/58a68157e72e3adf0c422d9d92851a0a.png)
 
-UBIAI的联合实体和关系标注接口
+UBIAI 的联合实体和关系标注接口
 
-对于本教程，我仅标注了大约100个包含实体和关系的文档。对于生产环境，我们肯定需要更多的标注数据。
+对于本教程，我仅标注了大约 100 个包含实体和关系的文档。对于生产环境，我们肯定需要更多的标注数据。
 
 ### **数据准备：**
 
-在训练模型之前，我们需要将标注数据转换为二进制spacy文件。我们首先将UBIAI生成的标注拆分为训练/开发/测试，并分别保存。我们修改了[代码](https://github.com/explosion/projects/blob/v3/tutorials/rel_component/scripts/parse_data.py/)来创建适用于我们标注的二进制文件（[转换代码](https://github.com/walidamamou/relation_extraction_transformer)）。
+在训练模型之前，我们需要将标注数据转换为二进制 spacy 文件。我们首先将 UBIAI 生成的标注拆分为训练/开发/测试，并分别保存。我们修改了[代码](https://github.com/explosion/projects/blob/v3/tutorials/rel_component/scripts/parse_data.py/)来创建适用于我们标注的二进制文件（[转换代码](https://github.com/walidamamou/relation_extraction_transformer)）。
 
-我们对训练、开发和测试数据集重复此步骤，以生成三个二进制的spacy文件（[文件可在GitHub上获取](https://github.com/walidamamou/relation_extraction_transformer)）。
+我们对训练、开发和测试数据集重复此步骤，以生成三个二进制的 spacy 文件（[文件可在 GitHub 上获取](https://github.com/walidamamou/relation_extraction_transformer)）。
 
 ### **关系抽取模型训练：**
 
 对于训练，我们将提供来自黄金语料库的实体，并在这些实体上训练分类器。
 
-+   打开一个新的Google Colab项目，并确保在笔记本设置中选择GPU作为硬件加速器。通过运行：!nvidia-smi来确保启用GPU。
++   打开一个新的 Google Colab 项目，并确保在笔记本设置中选择 GPU 作为硬件加速器。通过运行：!nvidia-smi 来确保启用 GPU。
 
-+   安装spacy-nightly：
++   安装 spacy-nightly：
 
 ```py
 !pip install -U spacy-nightly --pre
 ```
 
-+   安装wheel包并克隆spacy的关系抽取仓库：
++   安装 wheel 包并克隆 spacy 的关系抽取仓库：
 
 ```py
 !pip install -U pip setuptools wheel
 !python -m spacy project clone tutorials/rel_component
 ```
 
-+   安装transformer管道和spacy transformers库：
++   安装 transformer 管道和 spacy transformers 库：
 
 ```py
 !python -m spacy download en_core_web_trf
 !pip install -U spacy transformers
 ```
 
-+   切换到rel_component文件夹：cd rel_component
++   切换到 rel_component 文件夹：cd rel_component
 
-+   在rel_component中创建一个名为“data”的文件夹，并将训练、开发和测试的二进制文件上传到其中：
++   在 rel_component 中创建一个名为“data”的文件夹，并将训练、开发和测试的二进制文件上传到其中：
 
-![](../Images/45fe4a3e6a399e71eb538d052347a94a.png)
+![](img/45fe4a3e6a399e71eb538d052347a94a.png)
 
 训练文件夹
 
-+   打开project.yml文件并更新训练、开发和测试路径：
++   打开 project.yml 文件并更新训练、开发和测试路径：
 
 ```py
 train_file: "data/relations_training.spacy"dev_file: "data/relations_dev.spacy"test_file: "data/relations_test.spacy"
@@ -103,7 +103,7 @@ train_file: "data/relations_training.spacy"dev_file: "data/relations_dev.spacy"t
 
 你应该开始看到 P、R 和 F 分数开始更新：
 
-![](../Images/7e8e1d34450b135201caee1bbbb64bae.png)
+![](img/7e8e1d34450b135201caee1bbbb64bae.png)
 
 模型训练进行中
 
@@ -150,7 +150,7 @@ spans: [(0, '2+ years', 'EXPERIENCE'), (7, 'professional software development', 
 
 注意：确保从脚本文件夹中复制 `rel_pipe` 和 `rel_model` 到你的主文件夹：
 
-![](../Images/9bc4d88f2070b0ed394af5dae32b8732.png)
+![](img/9bc4d88f2070b0ed394af5dae32b8732.png)
 
 脚本文件夹
 
@@ -212,45 +212,45 @@ predicted relation:
 
 ### **结论：**
 
-Transformer确实改变了NLP领域，我特别期待它们在信息提取中的应用。我要感谢explosion AI（spaCy开发者）和huggingface提供的开源解决方案，促进了Transformer的采用。
+Transformer 确实改变了 NLP 领域，我特别期待它们在信息提取中的应用。我要感谢 explosion AI（spaCy 开发者）和 huggingface 提供的开源解决方案，促进了 Transformer 的采用。
 
-如果你需要为项目进行数据注释，不要犹豫尝试 [UBIAI](https://ubiai.tools/) 注释工具。我们提供多种可编程标签解决方案（如ML自动注释、正则表达式、字典等），以减少人工注释。
+如果你需要为项目进行数据注释，不要犹豫尝试 [UBIAI](https://ubiai.tools/) 注释工具。我们提供多种可编程标签解决方案（如 ML 自动注释、正则表达式、字典等），以减少人工注释。
 
-最后，查看 [这篇文章](https://walidamamou.medium.com/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7) 以学习如何利用NER和关系提取模型构建知识图谱并提取新见解。
+最后，查看 [这篇文章](https://walidamamou.medium.com/building-a-knowledge-graph-for-job-search-using-bert-transformer-8677c8b3a2e7) 以学习如何利用 NER 和关系提取模型构建知识图谱并提取新见解。
 
 如果你有任何评论，请在下方留言或发送邮件至 admin@ubiai.tools！
 
-**简历： [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是UBIAI的创始人，该工具用于NLP应用注释，并拥有物理学博士学位。
+**简历： [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是 UBIAI 的创始人，该工具用于 NLP 应用注释，并拥有物理学博士学位。
 
 [原始文章](https://towardsdatascience.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)。转载许可。
 
 **相关：**
 
-+   [如何使用spaCy 3微调BERT Transformer](/2021/06/fine-tune-bert-transformer-spacy.html)
++   如何使用 spaCy 3 微调 BERT Transformer
 
-+   [使用BERT构建求职知识图谱](/2021/06/knowledge-graph-job-search-bert.html)
++   使用 BERT 构建求职知识图谱
 
-+   [微调Transformer模型以识别发票](/2021/06/fine-tuning-transformer-model-invoice-recognition.html)
++   微调 Transformer 模型以识别发票
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 ### 更多相关话题
 
-+   [如何从头开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
++   [如何从头开始构建和训练 Transformer 模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
 
-+   [使用spaCy进行NLP入门](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
++   [使用 spaCy 进行 NLP 入门](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
 
-+   [使用spaCy进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
++   [使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
 
 +   [从理论到实践：构建 k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 

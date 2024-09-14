@@ -1,20 +1,20 @@
-# 数据集整理的网页抓取，第1部分：收集手工啤酒数据
+# 数据集整理的网页抓取，第一部分：收集手工啤酒数据
 
-> 原文：[https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html](https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html)
+> 原文：[`www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html`](https://www.kdnuggets.com/2017/02/web-scraping-dataset-curation-part-1.html)
 
 **作者：Jean-Nicholas Hould，[JeanNicholasHould.com](http://JeanNicholasHould.com/?utm_source=kdnugget)。**
 
-如果你读过我过去的一些文章，你现在知道我喜欢好的手工啤酒。我决定将工作与乐趣结合起来，编写一个关于如何用Python从网站抓取手工啤酒数据集的教程。
+如果你读过我过去的一些文章，你现在知道我喜欢好的手工啤酒。我决定将工作与乐趣结合起来，编写一个关于如何用 Python 从网站抓取手工啤酒数据集的教程。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -24,13 +24,13 @@
 
 网页抓取器是一段代码，它会自动加载网页并提取特定数据。网页抓取器会执行一个重复的任务，这个任务如果由你手动完成会非常耗时。
 
-例如，我们可以编写一个网络抓取器，从一个电子商务网站提取产品名称及其评分，并将其写入CSV文件中。
+例如，我们可以编写一个网络抓取器，从一个电子商务网站提取产品名称及其评分，并将其写入 CSV 文件中。
 
 抓取网站是获取原本无法获得的新数据集的好方法。
 
 ### 几条关于抓取的规则
 
-正如Greg Reda几年前在他的[出色的网页抓取教程](http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/)中指出的那样，关于抓取你需要知道一些规则：
+正如 Greg Reda 几年前在他的[出色的网页抓取教程](http://www.gregreda.com/2013/03/03/web-scraping-101-with-python/)中指出的那样，关于抓取你需要知道一些规则：
 
 1.  尊重网站的条款和条件。
 
@@ -42,9 +42,9 @@
 
 构建抓取器的第一步是规划阶段。显然，你需要决定你想要提取什么数据以及从哪个网站提取。
 
-在我们的案例中，我们想要从一个名为[CraftCans](http://craftcans.com/db.php?search=all&sort=beerid&ord=desc&view=text)的网站提取数据。这个网站列出了2692种手工罐装啤酒。对于这个特定的数据集，我们不需要构建一个抓取器来提取数据。按照它的布局，我们可以很容易地将数据复制粘贴到Excel表格中。
+在我们的案例中，我们想要从一个名为[CraftCans](http://craftcans.com/db.php?search=all&sort=beerid&ord=desc&view=text)的网站提取数据。这个网站列出了 2692 种手工罐装啤酒。对于这个特定的数据集，我们不需要构建一个抓取器来提取数据。按照它的布局，我们可以很容易地将数据复制粘贴到 Excel 表格中。
 
-![](../Images/df6135b546e71463baa458485cec59da.png)
+![](img/df6135b546e71463baa458485cec59da.png)
 
 对于每种啤酒，网站提供了一些详细信息：
 
@@ -68,13 +68,13 @@
 
 在 Google Chrome 上，你可以右键单击网页上的元素，然后点击“检查”以查看 HTML 代码。
 
-![](../Images/eba7c3a77238c4f275dcdb502c0793b0.png)
+![](img/eba7c3a77238c4f275dcdb502c0793b0.png)
 
 **识别模式**
 
 从主页面上的 HTML 代码来看，你可以看到这个大列表实际上是一个 HTML 表格。每种啤酒代表表格中的一行。通常，像 HTML 表格这样的重复模式非常适合网页抓取，因为逻辑简单明了。
 
-![](../Images/0a729e08a7fa6263370d4df52fd81299.png)
+![](img/0a729e08a7fa6263370d4df52fd81299.png)
 
 ### 使用的库
 
@@ -132,11 +132,11 @@ CraftCans 的 HTML 结构有些老派。整个页面布局都在表格中。这�
 
 **相关：**
 
-+   [在 Python 中整理数据](/2017/01/tidying-data-python.html)
++   在 Python 中整理数据
 
-+   [使用 SQL 进行统计分析](/2016/08/doing-statistics-sql.html)
++   使用 SQL 进行统计分析
 
-+   [数据科学统计 101](/2016/07/data-science-statistics-101.html)
++   数据科学统计 101
 
 ### 更多相关主题
 

@@ -1,8 +1,8 @@
-# 数据科学面试指南 - 第 1 部分：结构
+# 数据科学面试指南 - 第一部分：结构
 
-> 原文：[https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)
+> 原文：[`www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html`](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)
 
-![数据科学面试指南 - 第 1 部分：结构](../Images/6d1e45e3b0a9de7c00e079d3771ab464.png)
+![数据科学面试指南 - 第一部分：结构](img/6d1e45e3b0a9de7c00e079d3771ab464.png)
 
 来源：[WikiBooks](https://en.wikibooks.org/wiki/Data_Science:_An_Introduction)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 # 编程
 
-数据科学面试的编程部分占最高比例，达38%。面试的三分之一以上将基于编程，这是正常的，因为你正在面试数据科学职位。
+数据科学面试的编程部分占最高比例，达 38%。面试的三分之一以上将基于编程，这是正常的，因为你正在面试数据科学职位。
 
 编程问题旨在分析和评估候选人在计算机科学及其基础知识方面的能力。它可以涵盖以下主题：
 
@@ -142,13 +142,13 @@
 
 +   你如何处理多任务？
 
-我们已经讨论了数据科学面试的5个类别，下一步是为面试做准备。
+我们已经讨论了数据科学面试的 5 个类别，下一步是为面试做准备。
 
-![数据科学面试指南 - 第1部分：结构](../Images/6c42b0bfd6d698bda66e470ef78408ee.png)
+![数据科学面试指南 - 第一部分：结构](img/6c42b0bfd6d698bda66e470ef78408ee.png)
 
-[掌握数据科学面试](https://amzn.to/37JpVZz)是我推荐的第一本数据科学面试书籍。它由前Facebook员工[Kevin Huo](https://medium.com/@decomposing_data)和[Nick Singh](https://www.nicksingh.com/)编写。
+[掌握数据科学面试](https://amzn.to/37JpVZz)是我推荐的第一本数据科学面试书籍。它由前 Facebook 员工[Kevin Huo](https://medium.com/@decomposing_data)和[Nick Singh](https://www.nicksingh.com/)编写。
 
-本书包括201个真实的数据科学面试问题，这些问题曾被Facebook、Google、Amazon、Netflix等公司提问。书中包含详细的逐步解决方案，以帮助你更好地理解。
+本书包括 201 个真实的数据科学面试问题，这些问题曾被 Facebook、Google、Amazon、Netflix 等公司提问。书中包含详细的逐步解决方案，以帮助你更好地理解。
 
 主题包括概率、统计学、机器学习、SQL 与数据库设计、编码（Python）、产品分析和 A/B 测试。
 
@@ -158,12 +158,12 @@
 
 +   [如何构建数据科学项目：逐步指南](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)
 
-+   [KDnuggets 新闻，5月11日：面向专业人士的 SQL 笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
++   [KDnuggets 新闻，5 月 11 日：面向专业人士的 SQL 笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
 +   [Interview Kickstart 数据科学面试课程——有什么不同…](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
 
-+   [KDnuggets 新闻，4月6日：8个免费的MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 个免费的 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学备忘单完整收藏 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整收藏 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)

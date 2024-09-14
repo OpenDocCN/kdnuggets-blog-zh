@@ -1,10 +1,10 @@
-# 如何有效管理Pandas中的分类数据
+# 如何有效管理 Pandas 中的分类数据
 
-> 原文：[https://www.kdnuggets.com/how-to-manage-categorical-data-effectively-with-pandas](https://www.kdnuggets.com/how-to-manage-categorical-data-effectively-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-manage-categorical-data-effectively-with-pandas`](https://www.kdnuggets.com/how-to-manage-categorical-data-effectively-with-pandas)
 
-![如何有效管理Pandas中的分类数据](../Images/c976bf39e6b39f213898d3580dea27e6.png)
+![如何有效管理 Pandas 中的分类数据](img/c976bf39e6b39f213898d3580dea27e6.png)
 
-让我们尝试了解Pandas中的分类数据。
+让我们尝试了解 Pandas 中的分类数据。
 
 ## 准备
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT
 
 * * *
 
-在开始之前，我们需要安装Pandas和Numpy包。你可以用以下代码安装它们：
+在开始之前，我们需要安装 Pandas 和 Numpy 包。你可以用以下代码安装它们：
 
 ```py
 pip install pandas numpy
@@ -28,13 +28,13 @@ pip install pandas numpy
 
 安装好包后，让我们进入文章的主要部分。
 
-## 在Pandas中管理分类数据
+## 在 Pandas 中管理分类数据
 
-分类数据是Pandas中的一种数据类型，表示特定（固定）数量的类别或不同值。与Pandas中的字符串或对象数据类型不同，分类数据在Pandas中的存储方式也有所不同。
+分类数据是 Pandas 中的一种数据类型，表示特定（固定）数量的类别或不同值。与 Pandas 中的字符串或对象数据类型不同，分类数据在 Pandas 中的存储方式也有所不同。
 
 分类数据更节省内存，因为分类数据中的值只存储一次。相比之下，对象数据类型会将每个值存储为单独的字符串，这需要更多的内存。
 
-让我们通过一个例子来试用分类数据。下面是如何用Pandas初始化分类数据。
+让我们通过一个例子来试用分类数据。下面是如何用 Pandas 初始化分类数据。
 
 ```py
 import pandas as pd
@@ -144,7 +144,7 @@ Name: size, dtype: bool
 
 +   [如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
 
-+   [如何用Scikit-learn编码分类变量](https://www.statology.org/how-encode-categorical-variables-scikit-learn/)
++   [如何用 Scikit-learn 编码分类变量](https://www.statology.org/how-encode-categorical-variables-scikit-learn/)
 
 +   [如何用分类数据进行特征选择](https://machinelearningmastery.com/feature-selection-with-categorical-data/)
 

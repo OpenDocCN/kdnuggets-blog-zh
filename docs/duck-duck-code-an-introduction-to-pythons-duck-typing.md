@@ -1,8 +1,8 @@
 # 《鸭子，鸭子，代码：Python 中的鸭子类型简介》
 
-> 原文：[https://www.kdnuggets.com/duck-duck-code-an-introduction-to-pythons-duck-typing](https://www.kdnuggets.com/duck-duck-code-an-introduction-to-pythons-duck-typing)
+> 原文：[`www.kdnuggets.com/duck-duck-code-an-introduction-to-pythons-duck-typing`](https://www.kdnuggets.com/duck-duck-code-an-introduction-to-pythons-duck-typing)
 
-![Python 的鸭子类型](../Images/b04a81a6c5518af2e2a602d8f549cd17.png)
+![Python 的鸭子类型](img/b04a81a6c5518af2e2a602d8f549cd17.png)
 
 图片作者 | DALLE-3 和 Canva
 
@@ -171,11 +171,11 @@ Duck typing 是 Python 的一个强大特性，使你的代码更加动态和多
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

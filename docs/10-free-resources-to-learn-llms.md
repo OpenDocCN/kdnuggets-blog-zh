@@ -1,8 +1,8 @@
 # 10 个学习 LLM 的免费资源
 
-> 原文：[https://www.kdnuggets.com/10-free-resources-to-learn-llms](https://www.kdnuggets.com/10-free-resources-to-learn-llms)
+> 原文：[`www.kdnuggets.com/10-free-resources-to-learn-llms`](https://www.kdnuggets.com/10-free-resources-to-learn-llms)
 
-![10 个学习 LLM 的免费资源。](../Images/95b5bc098d5be3f548fcc507b3d2db76.png)
+![10 个学习 LLM 的免费资源。](img/95b5bc098d5be3f548fcc507b3d2db76.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -50,27 +50,27 @@
 
 这个学习资源涵盖了 LLM 的基础知识、变换器架构和提示工程。
 
-你还将学习如何在AWS上微调、优化和部署语言模型。
+你还将学习如何在 AWS 上微调、优化和部署语言模型。
 
-## 4\. Hugging Face NLP课程
+## 4\. Hugging Face NLP 课程
 
-Hugging Face 是一家领先的NLP公司，提供库和模型，允许你构建机器学习应用程序。他们让普通用户也能轻松构建AI应用程序。
+Hugging Face 是一家领先的 NLP 公司，提供库和模型，允许你构建机器学习应用程序。他们让普通用户也能轻松构建 AI 应用程序。
 
-[Hugging Face的NLP学习轨迹](https://huggingface.co/learn/nlp-course/chapter1/1)涵盖了变换器架构、LLM的工作原理以及他们生态系统中可用的数据集和分词器库。
+[Hugging Face 的 NLP 学习轨迹](https://huggingface.co/learn/nlp-course/chapter1/1)涵盖了变换器架构、LLM 的工作原理以及他们生态系统中可用的数据集和分词器库。
 
-你将学习如何微调数据集，并使用Transformers库和Hugging Face的管道执行文本总结、问答和翻译等任务。
+你将学习如何微调数据集，并使用 Transformers 库和 Hugging Face 的管道执行文本总结、问答和翻译等任务。
 
-## 5\. Cohere 的LLM大学
+## 5\. Cohere 的 LLM 大学
 
-[LLM大学](https://cohere.com/llmu)是一个涵盖NLP和LLM相关概念的学习平台。
+[LLM 大学](https://cohere.com/llmu)是一个涵盖 NLP 和 LLM 相关概念的学习平台。
 
-与之前的课程类似，你将从学习LLM的基础和架构开始，逐渐深入到更高级的概念，如提示工程、微调和RAGs。
+与之前的课程类似，你将从学习 LLM 的基础和架构开始，逐渐深入到更高级的概念，如提示工程、微调和 RAGs。
 
-如果你已经有一些NLP的知识，你可以直接跳过基础模块，跟随更高级的教程。
+如果你已经有一些 NLP 的知识，你可以直接跳过基础模块，跟随更高级的教程。
 
-## 6\. iNeuron 的基础生成性AI
+## 6\. iNeuron 的基础生成性 AI
 
-[基础生成性AI](https://ineuron.ai/course/generative-ai-community-edition)是一个免费的两周课程，涵盖生成性AI、Langchain、向量数据库、开源语言模型和LLM部署的基础知识。
+[基础生成性 AI](https://ineuron.ai/course/generative-ai-community-edition)是一个免费的两周课程，涵盖生成性 AI、Langchain、向量数据库、开源语言模型和 LLM 部署的基础知识。
 
 每个模块大约需要两小时完成，建议每个模块在一天内完成。
 
@@ -78,17 +78,17 @@ Hugging Face 是一家领先的NLP公司，提供库和模型，允许你构建�
 
 ## 7\. **Krish Naik** 的自然语言处理
 
-[这个YouTube上的NLP播放列表](https://youtube.com/playlist?list=PLZoTAELRMXVNNrHSKv36Lr3_156yCo6Nn&si=bj9Mbj03Lv813ASu)涵盖了诸如分词、文本预处理、RNN和LSTM等概念。
+[这个 YouTube 上的 NLP 播放列表](https://youtube.com/playlist?list=PLZoTAELRMXVNNrHSKv36Lr3_156yCo6Nn&si=bj9Mbj03Lv813ASu)涵盖了诸如分词、文本预处理、RNN 和 LSTM 等概念。
 
 这些主题是理解现代大型语言模型如何工作的先决条件。
 
-完成这门课程后，你将了解构成NLP基础的不同文本处理技术。
+完成这门课程后，你将了解构成 NLP 基础的不同文本处理技术。
 
-你还将理解顺序NLP模型的工作原理和实施过程中遇到的挑战，这最终导致了更高级的LLM的发展，如GPT系列。
+你还将理解顺序 NLP 模型的工作原理和实施过程中遇到的挑战，这最终导致了更高级的 LLM 的发展，如 GPT 系列。
 
-## 额外的LLM学习资源
+## 额外的 LLM 学习资源
 
-一些额外的学习LLM资源包括：
+一些额外的学习 LLM 资源包括：
 
 #### 1\. 带代码的论文
 
@@ -96,7 +96,7 @@ Hugging Face 是一家领先的NLP公司，提供库和模型，允许你构建�
 
 #### 2\. 注意力机制即一切
 
-为了更好地理解变换器架构（如BERT和GPT等最先进语言模型的基础），我推荐阅读研究论文[《注意力机制即一切》](https://arxiv.org/abs/1706.03762)。
+为了更好地理解变换器架构（如 BERT 和 GPT 等最先进语言模型的基础），我推荐阅读研究论文[《注意力机制即一切》](https://arxiv.org/abs/1706.03762)。
 
 这将帮助你更好地理解 LLM 的工作原理以及为什么基于变换器的模型比之前的最先进模型表现更好。
 

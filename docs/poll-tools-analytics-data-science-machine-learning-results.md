@@ -1,6 +1,6 @@
 # Python 取代 R：2018 年分析、数据科学、机器学习的顶级软件：趋势与分析
 
-> 原文：[https://www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html/2](https://www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html/2)
+> 原文：[`www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html/2`](https://www.kdnuggets.com/2018/05/poll-tools-analytics-data-science-machine-learning-results.html/2)
 
 ### 区域参与情况
 
@@ -18,7 +18,7 @@
 
 +   澳大利亚/新西兰，3.1%
 
-与2017年相比，主要变化是来自欧洲的参与度更高（从35.5%上升），而来自美国/加拿大的参与度较低（从41.5%下降）。
+与 2017 年相比，主要变化是来自欧洲的参与度更高（从 35.5%上升），而来自美国/加拿大的参与度较低（从 41.5%下降）。
 
 ### 完整结果和三年趋势
 
@@ -27,122 +27,122 @@
 | **KDnuggets 2018 民意调查：你在过去 12 个月中用于真实项目的分析、大数据、数据科学、机器学习软件** |
 | --- |
 
-| **工具（2018 年投票人数）** | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png) % 2018 年的投票者 ![](../Images/7a86fe3a24f5509a9d9147603055f301.png) % 2017 年的投票者
+| **工具（2018 年投票人数）** | ![](img/eaa45d3433e8ae26630fad0291860ff2.png) % 2018 年的投票者 ![](img/7a86fe3a24f5509a9d9147603055f301.png) % 2017 年的投票者
 
-![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) 2016 年的投票者百分比 |
+![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) 2016 年的投票者百分比 |
 
-| **Python** (1347) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Python** (1347) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
 | --- | --- |
-| **RapidMiner** (1081) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **R** (996) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **SQL** (813) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Excel** (803) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Anaconda** (686) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Tensorflow** (614) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Tableau** (542) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **scikit-learn** (500) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Keras** (456) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **Apache Spark** (442) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Java** (309) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Microsoft SQL Server** (283) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **PyCharm** (276) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **Microsoft Power BI** (257) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **KNIME** (252) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Spark SQL** (240) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)na na |
-| **Weka** (233) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Hadoop: Open Source Tools** (225) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **SQL on Hadoop 工具** (209) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **MATLAB** (191) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Unix shell/awk/gawk** (188) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **其他免费分析/数据挖掘工具** (170) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **IBM SPSS Statistics** (164) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **其他编程和数据语言** (142) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **C/C++** (140) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **PyTorch** (132) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **Dataiku** (130) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **H2O.ai** (126) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Scala** (121) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Hadoop: 商业工具** (116) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **Microsoft Azure Machine Learning** (113) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **SAS Base** (112) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **IBM SPSS Modeler** (100) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Theano** (100) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **其他深度学习工具** (100) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **SAS Enterprise Miner** (89) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **QlikView** (89) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Orange** (85) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Alteryx** (83) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **MLlib** (77) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **DeepLearning4J** (69) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Amazon Machine Learning** (67) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **IBM Watson / Watson Analytics** (64) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **TIBCO Spotfire** (63) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Microsoft Cognitive Toolkit（之前称 CNTK）** (62) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **其他付费分析/数据挖掘/数据科学软件** (50) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Gnu Octave** (44) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Teradata** (44) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **Microsoft Machine Learning Server（前身为 R Server）** (43) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **Rattle** (41) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Minitab/Salford Systems** (36) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **JMP** (35) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **MicroStrategy** (35) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Pentaho** (33) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Mathematica** (32) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Apache MXnet** (31) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Stata** (31) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Caffe** (30) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **IBM Cognos** (30) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **IBM Data Science Experience** (29) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **SAP Analytics/预测分析** (28) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Microsoft 其他 ML/数据科学工具** (27) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **SAP HANA** (27) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Solver (前身为XLMiner)** (27) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **DataRobot** (26) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **TIBCO Statistica** (26) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Databricks Unified Analytics Platform** (25) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)na na |
-| **Caffe2** (24) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)na na |
-| **TFLearn** (23) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)na na |
-| **Perl** (21) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Oracle Advanced Analytics** (21) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **C4.5/C5.0/See5** (20) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Torch** (20) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **BigML** (18) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Julia** (14) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **DataScience.com** (12) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **BayesiaLab** (12) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Vowpal Wabbit** (9) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Lasagne** (7) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **RapidInsight/Veera** (7) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Angoss/Datawatch** (6) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Lisp** (6) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Clojure** (4) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Domino Data Labs** (3) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)na |
-| **F#** (3) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
-| **Ontotext GraphDB** (3) | ![](../Images/eaa45d3433e8ae26630fad0291860ff2.png)![](../Images/7a86fe3a24f5509a9d9147603055f301.png)![](../Images/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **RapidMiner** (1081) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **R** (996) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **SQL** (813) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Excel** (803) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Anaconda** (686) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Tensorflow** (614) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Tableau** (542) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **scikit-learn** (500) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Keras** (456) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **Apache Spark** (442) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Java** (309) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Microsoft SQL Server** (283) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **PyCharm** (276) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **Microsoft Power BI** (257) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **KNIME** (252) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Spark SQL** (240) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)na na |
+| **Weka** (233) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Hadoop: Open Source Tools** (225) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **SQL on Hadoop 工具** (209) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **MATLAB** (191) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Unix shell/awk/gawk** (188) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **其他免费分析/数据挖掘工具** (170) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **IBM SPSS Statistics** (164) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **其他编程和数据语言** (142) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **C/C++** (140) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **PyTorch** (132) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **Dataiku** (130) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **H2O.ai** (126) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Scala** (121) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Hadoop: 商业工具** (116) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **Microsoft Azure Machine Learning** (113) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **SAS Base** (112) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **IBM SPSS Modeler** (100) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Theano** (100) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **其他深度学习工具** (100) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **SAS Enterprise Miner** (89) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **QlikView** (89) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Orange** (85) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Alteryx** (83) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **MLlib** (77) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **DeepLearning4J** (69) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Amazon Machine Learning** (67) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **IBM Watson / Watson Analytics** (64) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **TIBCO Spotfire** (63) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Microsoft Cognitive Toolkit（之前称 CNTK）** (62) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **其他付费分析/数据挖掘/数据科学软件** (50) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Gnu Octave** (44) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Teradata** (44) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **Microsoft Machine Learning Server（前身为 R Server）** (43) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **Rattle** (41) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Minitab/Salford Systems** (36) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **JMP** (35) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **MicroStrategy** (35) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Pentaho** (33) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Mathematica** (32) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Apache MXnet** (31) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Stata** (31) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Caffe** (30) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **IBM Cognos** (30) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **IBM Data Science Experience** (29) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **SAP Analytics/预测分析** (28) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Microsoft 其他 ML/数据科学工具** (27) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **SAP HANA** (27) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Solver (前身为 XLMiner)** (27) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **DataRobot** (26) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **TIBCO Statistica** (26) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Databricks Unified Analytics Platform** (25) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)na na |
+| **Caffe2** (24) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)na na |
+| **TFLearn** (23) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)na na |
+| **Perl** (21) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Oracle Advanced Analytics** (21) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **C4.5/C5.0/See5** (20) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Torch** (20) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **BigML** (18) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Julia** (14) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **DataScience.com** (12) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **BayesiaLab** (12) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Vowpal Wabbit** (9) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Lasagne** (7) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **RapidInsight/Veera** (7) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Angoss/Datawatch** (6) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Lisp** (6) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Clojure** (4) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Domino Data Labs** (3) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)na |
+| **F#** (3) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
+| **Ontotext GraphDB** (3) | ![](img/eaa45d3433e8ae26630fad0291860ff2.png)![](img/7a86fe3a24f5509a9d9147603055f301.png)![](img/ac2482355ff2f105d334e2cf54b1ab5b.png) |
 
-这是之前KDnuggets调查中关于分析、数据挖掘、数据科学软件的结果：
+这是之前 KDnuggets 调查中关于分析、数据挖掘、数据科学软件的结果：
 
-+   [分析、数据科学、机器学习软件的最新领导者、趋势和惊喜](/2017/05/poll-analytics-data-science-machine-learning-software-leaders.html)，2017年
++   分析、数据科学、机器学习软件的最新领导者、趋势和惊喜，2017 年
 
-+   [R和Python竞争顶级分析、数据科学软件](/2016/06/r-python-top-analytics-data-mining-data-science-software.html)，2016年
++   R 和 Python 竞争顶级分析、数据科学软件，2016 年
 
-+   [R领先RapidMiner，Python追赶，大数据工具增长，Spark引发关注](/2015/05/poll-r-rapidminer-python-big-data-spark.html)，2015年
++   R 领先 RapidMiner，Python 追赶，大数据工具增长，Spark 引发关注，2015 年
 
-+   [RapidMiner持续领先](/2014/06/kdnuggets-annual-software-poll-rapidminer-continues-lead.html)，2014年
++   RapidMiner 持续领先，2014 年
 
-+   [RapidMiner和R争夺第一](/2013/06/kdnuggets-annual-software-poll-rapidminer-r-vie-for-first-place.html)，2013年
++   RapidMiner 和 R 争夺第一，2013 年
 
-+   [KDnuggets 2012年调查：使用的分析、数据挖掘、大数据软件](/polls/2012/analytics-data-mining-big-data-software.html)
++   KDnuggets 2012 年调查：使用的分析、数据挖掘、大数据软件
 
-+   [KDnuggets 2011年调查：使用的数据挖掘/分析工具](/polls/2011/tools-analytics-data-mining.html)
++   KDnuggets 2011 年调查：使用的数据挖掘/分析工具
 
-+   [KDnuggets 2010年调查：使用的数据挖掘/分析工具](/polls/2010/data-mining-analytics-tools.html)
++   KDnuggets 2010 年调查：使用的数据挖掘/分析工具
 
-+   [KDnuggets 2009年调查：使用的数据挖掘工具](/polls/2009/data-mining-tools-used.htm)
++   KDnuggets 2009 年调查：使用的数据挖掘工具
 
-+   [KDnuggets 2008 年投票：数据挖掘软件使用情况](/polls/2008/data-mining-software-tools-used.htm)
++   KDnuggets 2008 年投票：数据挖掘软件使用情况
 
-+   [KDnuggets 2007 年投票：数据挖掘/分析软件工具](/polls/2007/data_mining_software_tools.htm)
++   KDnuggets 2007 年投票：数据挖掘/分析软件工具
 
 **评论**
 
@@ -160,11 +160,11 @@ RStudio 也不在我每天使用的列表中
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

@@ -1,24 +1,24 @@
 # 理解机器学习：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2020/06/understanding-machine-learning-free-ebook.html](https://www.kdnuggets.com/2020/06/understanding-machine-learning-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2020/06/understanding-machine-learning-free-ebook.html`](https://www.kdnuggets.com/2020/06/understanding-machine-learning-free-ebook.html)
 
-[评论](#comments)
+评论
 
 欢迎来到每周 KDnuggets 免费电子书概述的另一期。
 
 尽管我们在过去几周探讨了包括一些更高级的专题在内的专业话题，但我们认为现在是回到基础的时候了，本周我们介绍了**[理解机器学习：从理论到算法](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/index.html)**，由 Shai Shalev-Shwartz 和 Shai Ben-David 编著。
 
-[![书籍封面](../Images/a585885b5fb2abcd4803b4efc57be2b6.png)](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/index.html)
+![书籍封面](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/index.html)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -112,17 +112,17 @@
 
 一旦数学理论的震撼感消退，你将发现从偏差-方差权衡到线性回归，再到模型验证策略、模型提升、核方法、预测问题等主题都有详尽的处理。这样详尽的处理的好处在于，你的理解将比单纯掌握抽象直觉更深入。
 
-你可以直接 [在这里下载本书的PDF](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/understanding-machine-learning-theory-algorithms.pdf)。
+你可以直接 [在这里下载本书的 PDF](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/understanding-machine-learning-theory-algorithms.pdf)。
 
 如果你正在寻找深入探讨学习概念和深度学习理论的严谨书籍，一定要将《理解机器学习：从理论到算法》加入你的短名单。
 
 **相关**：
 
-+   [统计学习的要素：免费下载电子书](/2020/05/elements-statistical-learning-free-ebook.html)
++   统计学习的要素：免费下载电子书
 
-+   [机器学习数学：免费下载电子书](/2020/04/mathematics-machine-learning-book.html)
++   机器学习数学：免费下载电子书
 
-+   [统计推断的简明课程：免费下载电子书](/2020/04/statistics-concise-course-statistical-inference-free-ebook.html)
++   统计推断的简明课程：免费下载电子书
 
 ### 更多相关主题
 
@@ -130,9 +130,9 @@
 
 +   [学习数据科学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 

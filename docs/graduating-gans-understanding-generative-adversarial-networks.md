@@ -1,8 +1,8 @@
 # 毕业于 GAN：从理解生成对抗网络到运行自己的网络
 
-> 原文：[https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html/2](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html/2)
+> 原文：[`www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html/2`](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/04/graduating-gans-understanding-generative-adversarial-networks.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### Inception Score
 
@@ -24,31 +24,31 @@
 
 Aji Borji 的论文 ‘[GAN 评估度量的优缺点](http://Pros%20and%20Cons%20of%20GAN%20Evaluation%20Measures)’ 包含了一张包含更全面 GAN 评估度量的优秀表格：
 
-![gan-evaluation-metrics](../Images/9bed7abab406224cd9e80f00edf9ca18.png)
+![gan-evaluation-metrics](img/9bed7abab406224cd9e80f00edf9ca18.png)
 
-**有趣的是，其他研究者正在通过使用特定领域的评估指标来采取不同的方法。** 对于文本GAN，Guy Tevet及其团队在他们的论文‘[Evaluating Text GANs as Language Models](https://arxiv.org/abs/1810.12686)’中提出使用传统的基于概率的语言模型指标来评估GAN生成的文本的分布。
+**有趣的是，其他研究者正在通过使用特定领域的评估指标来采取不同的方法。** 对于文本 GAN，Guy Tevet 及其团队在他们的论文‘[Evaluating Text GANs as Language Models](https://arxiv.org/abs/1810.12686)’中提出使用传统的基于概率的语言模型指标来评估 GAN 生成的文本的分布。
 
-在‘[How good is my GAN?](https://arxiv.org/abs/1807.09499)’中，Konstantin Shmelkov及其团队使用了基于图像分类的两个度量，GAN-train和GAN-test，分别近似GAN的召回率（多样性）和精确度（图像质量）。你可以在Google Brain的研究论文‘[Are GANs created equal](https://arxiv.org/abs/1711.10337)’中看到这些评估指标的实际应用，他们使用了一个三角形数据集来测量不同GAN模型的精确度和召回率。
+在‘[How good is my GAN?](https://arxiv.org/abs/1807.09499)’中，Konstantin Shmelkov 及其团队使用了基于图像分类的两个度量，GAN-train 和 GAN-test，分别近似 GAN 的召回率（多样性）和精确度（图像质量）。你可以在 Google Brain 的研究论文‘[Are GANs created equal](https://arxiv.org/abs/1711.10337)’中看到这些评估指标的实际应用，他们使用了一个三角形数据集来测量不同 GAN 模型的精确度和召回率。
 
-![figure-name](../Images/40d228fcf571b101b154fe25f0a2a047.png)
+![figure-name](img/40d228fcf571b101b154fe25f0a2a047.png)
 
-### 运行你自己的GAN
+### 运行你自己的 GAN
 
-为了说明GAN，我们将采用[这个优秀的教程](https://www.wouterbulten.nl/blog/tech/getting-started-with-generative-adversarial-networks/)，该教程使用Keras和MNIST数据集生成手写数字。
+为了说明 GAN，我们将采用[这个优秀的教程](https://www.wouterbulten.nl/blog/tech/getting-started-with-generative-adversarial-networks/)，该教程使用 Keras 和 MNIST 数据集生成手写数字。
 
 查看完整的教程笔记本 [这里](https://gist.github.com/ceceshao1/935ea6000c8509a28130d4c55b32fcd6)。
 
-![figure-name](../Images/8e6ad138242a7689b6244e6831462044.png)我们将通过可视化我们的损失和准确率曲线来跟踪GAN的进展，同时通过[Comet.ml](http://bit.ly/2WGduCM)检查测试输出。
+![figure-name](img/8e6ad138242a7689b6244e6831462044.png)我们将通过可视化我们的损失和准确率曲线来跟踪 GAN 的进展，同时通过[Comet.ml](http://bit.ly/2WGduCM)检查测试输出。
 
-这个GAN模型将MNIST训练数据和随机噪声作为输入（具体来说，是随机噪声向量）来生成：
+这个 GAN 模型将 MNIST 训练数据和随机噪声作为输入（具体来说，是随机噪声向量）来生成：
 
-+   图像（在这种情况下，是手写数字的图像）。*最终，这些生成的图像将类似于MNIST数据集的数据分布。*
++   图像（在这种情况下，是手写数字的图像）。*最终，这些生成的图像将类似于 MNIST 数据集的数据分布。*
 
 +   判别器对生成图像的预测
 
 **生成器**和**判别器**模型共同构成了对抗模型——在这个例子中，如果对抗模型将生成的图像分类为真实，那么生成器将表现良好。
 
-查看完整代码 [这里](https://gist.github.com/ceceshao1/935ea6000c8509a28130d4c55b32fcd6) 和完整的Comet实验结果 [这里](https://www.comet.ml/ceceshao1/mnist-gan)
+查看完整代码 [这里](https://gist.github.com/ceceshao1/935ea6000c8509a28130d4c55b32fcd6) 和完整的 Comet 实验结果 [这里](https://www.comet.ml/ceceshao1/mnist-gan)
 
 ### 跟踪模型的进展
 
@@ -62,11 +62,11 @@ Aji Borji 的论文 ‘[GAN 评估度量的优缺点](http://Pros%20and%20Cons%2
 
 **查看此实验的训练进展** [**这里**](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/chart)**。**
 
-![comet.ml](../Images/5bec2780460c28d933adb6f423a0cdca.png)
+![comet.ml](img/5bec2780460c28d933adb6f423a0cdca.png)
 
-你还需要确认你的训练过程实际上在使用GPU，你可以在[Comet系统指标选项卡](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/systemMetrics)中检查这一点。
+你还需要确认你的训练过程实际上在使用 GPU，你可以在[Comet 系统指标选项卡](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/systemMetrics)中检查这一点。
 
-![comet-ml-metrics](../Images/ae2c79999a6b58beabcd2ba493254f4e.png)
+![comet-ml-metrics](img/ae2c79999a6b58beabcd2ba493254f4e.png)
 
 你会注意到我们的训练循环包括报告测试向量图像的代码：
 
@@ -102,37 +102,37 @@ if i % 500 == 0:
 
 ### 让我们来看看这些生成的输出！
 
-> 在[这个Comet实验](https://www.comet.ml/ceceshao1/mnist-gan)中查看生成的输出
+> 在[这个 Comet 实验](https://www.comet.ml/ceceshao1/mnist-gan)中查看生成的输出
 
-你可以看到生成器模型开始时输出的是模糊的灰色图像（见下图0.png），看起来并不像我们预期的手写数字。
+你可以看到生成器模型开始时输出的是模糊的灰色图像（见下图 0.png），看起来并不像我们预期的手写数字。
 
-![figure-name](../Images/bfd48dfdbc0df6119f3796a3aa78d990.png)
+![figure-name](img/bfd48dfdbc0df6119f3796a3aa78d990.png)
 
 随着训练的进展和模型损失的下降，生成的数字变得越来越清晰。查看生成的输出：
 
-**第500步：**
+**第 500 步：**
 
-![/gan-generated-model-step500](../Images/a20a84c9f5cc70f38fa59c038f0416a4.png)
+![/gan-generated-model-step500](img/a20a84c9f5cc70f38fa59c038f0416a4.png)
 
-**第1000步：**
+**第 1000 步：**
 
-![gan-generated-model-step1000](../Images/c587d867da942c19e25c4bb42760a442.png)
+![gan-generated-model-step1000](img/c587d867da942c19e25c4bb42760a442.png)
 
-**第1500步：**
+**第 1500 步：**
 
-![gan-generated-model-step1500](../Images/c8926b4f60d178941d027fa1fb909afc.png)
+![gan-generated-model-step1500](img/c8926b4f60d178941d027fa1fb909afc.png)
 
-最终在**第10,000步**——你可以看到下面红色轮廓框中的一些GAN生成的数字样本
+最终在**第 10,000 步**——你可以看到下面红色轮廓框中的一些 GAN 生成的数字样本
 
-![figure-name](../Images/8140571c3f508b590341ba0587a5fe66.png)
+![figure-name](img/8140571c3f508b590341ba0587a5fe66.png)
 
-一旦我们的GAN模型训练完成，我们甚至可以在[Comet的图形选项卡](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/images)中查看我们报告的输出作为一部电影（只需按播放按钮！）。
+一旦我们的 GAN 模型训练完成，我们甚至可以在[Comet 的图形选项卡](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/images)中查看我们报告的输出作为一部电影（只需按播放按钮！）。
 
-![figure-name](../Images/7e655afefb6f4bc95d4903258e70baf2.png)
+![figure-name](img/7e655afefb6f4bc95d4903258e70baf2.png)
 
-为了完成实验，请确保运行`experiment.end()`以查看有关模型和GPU使用的一些总结统计数据。
+为了完成实验，请确保运行`experiment.end()`以查看有关模型和 GPU 使用的一些总结统计数据。
 
-![figure-name](../Images/76b77f6a519c53762080bd8fff0cdf72.png)
+![figure-name](img/76b77f6a519c53762080bd8fff0cdf72.png)
 
 ### 用你的模型进行迭代
 
@@ -144,23 +144,23 @@ if i % 500 == 0:
 
 +   学习率
 
-+   dropout概率
++   dropout 概率
 
 +   批量大小
 
-从Wouter的[原始博客文章](https://www.wouterbulten.nl/blog/tech/getting-started-with-generative-adversarial-networks/)中，他提到他在测试参数时的努力：
+从 Wouter 的[原始博客文章](https://www.wouterbulten.nl/blog/tech/getting-started-with-generative-adversarial-networks/)中，他提到他在测试参数时的努力：
 
-> 我测试了`SGD`、`RMSprop`和`Adam`作为判别器的优化器，但`RMSprop`表现最佳。`RMSprop`使用了较低的学习率，并且我将值剪裁在-1和1之间。学习率的小幅衰减可以帮助稳定训练过程。
+> 我测试了`SGD`、`RMSprop`和`Adam`作为判别器的优化器，但`RMSprop`表现最佳。`RMSprop`使用了较低的学习率，并且我将值剪裁在-1 和 1 之间。学习率的小幅衰减可以帮助稳定训练过程。
 
 我们将尝试将判别器的丢弃概率从 0.4 提高到 0.5，同时将判别器的学习率（从 0.008 提高到 0.0009）和生成器的学习率（从 0.0004 提高到 0.0006）也提高。很容易看出这些变化可能失控且难以跟踪…????
 
 要创建不同的实验，只需再次运行实验定义单元，[Comet](http://www.comet.ml) 将为你的新实验发出一个新的网址！跟踪你的实验很有用，这样你可以比较不同之处：
 
-![figure-name](../Images/4be1d8f6090453b6919dd766cacf90fb.png)[查看两个实验超参数之间的差异](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/e7cdcbf789674be6af8d9c7cfade1922/compare?experiment-tab=params)。你能找到我们在学习率和丢弃概率方面做出的差异吗？
+![figure-name](img/4be1d8f6090453b6919dd766cacf90fb.png)[查看两个实验超参数之间的差异](https://www.comet.ml/ceceshao1/mnist-gan/cf310adacd724bf280323e2eef92d1cd/e7cdcbf789674be6af8d9c7cfade1922/compare?experiment-tab=params)。你能找到我们在学习率和丢弃概率方面做出的差异吗？
 
 不幸的是，我们的调整并没有改善模型的表现！实际上，它生成了一些奇怪的输出：
 
-![figure-name](../Images/d609c27ab35a28346a6de8f5e5a34525.png)
+![figure-name](img/d609c27ab35a28346a6de8f5e5a34525.png)
 
 本教程到此为止！如果你喜欢这篇文章，请随时分享给可能觉得有用的朋友????
 
@@ -170,21 +170,21 @@ if i % 500 == 0:
 
 **相关内容：**
 
-+   [Keras 中的 MNIST 生成对抗模型](/2016/07/mnist-generative-adversarial-model-keras.html)
++   Keras 中的 MNIST 生成对抗模型
 
-+   [在命令行中使用 TensorFlow 创建你的第一个 GitHub 项目](/2018/05/zimbres-first-github-project-gans.html)
++   在命令行中使用 TensorFlow 创建你的第一个 GitHub 项目
 
-+   [构建一个基本的 Keras 神经网络顺序模型](/2018/06/basic-keras-neural-network-sequential-model.html)
++   构建一个基本的 Keras 神经网络顺序模型
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

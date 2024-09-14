@@ -1,28 +1,28 @@
-# 解读量子计算：对数据科学和AI的影响
+# 解读量子计算：对数据科学和 AI 的影响
 
-> 原文：[https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)
+> 原文：[`www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai`](https://www.kdnuggets.com/breaking-down-quantum-computing-implications-for-data-science-and-ai)
 
-![解读量子计算：对数据科学和AI的影响](../Images/1a9e9b11f9102a6882f1000ff8e2706b.png)
+![解读量子计算：对数据科学和 AI 的影响](img/1a9e9b11f9102a6882f1000ff8e2706b.png)
 
 编辑提供的图片
 
-量子计算对数据科学和AI产生了深远的影响，在这篇文章中，我们将深入探讨超越基础知识的内容。
+量子计算对数据科学和 AI 产生了深远的影响，在这篇文章中，我们将深入探讨超越基础知识的内容。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 我们将探索量子算法的前沿进展及其解决复杂问题的潜力，这些问题目前用现有技术是无法想象的。此外，我们还将讨论量子计算面临的挑战以及如何克服这些挑战。
 
-这是对一个未来的迷人一瞥，[在这个未来，技术的边界被推向新的前沿](/will-ai-replace-humanity)，大大加速了AI和数据科学的能力。
+这是对一个未来的迷人一瞥，在这个未来，技术的边界被推向新的前沿，大大加速了 AI 和数据科学的能力。
 
 # 什么是量子计算？
 
@@ -38,7 +38,7 @@
 
 **量子比特**
 
-量子位（Qubits）是量子计算中的标准信息单元，类似于传统计算中使用的二进制位。量子位利用一种称为叠加（superposition）的原理，使其可以同时处于多种状态。二进制位只能是0或1，而量子位可以是0或1、0或1的部分，或者是0和1的同时存在。
+量子位（Qubits）是量子计算中的标准信息单元，类似于传统计算中使用的二进制位。量子位利用一种称为叠加（superposition）的原理，使其可以同时处于多种状态。二进制位只能是 0 或 1，而量子位可以是 0 或 1、0 或 1 的部分，或者是 0 和 1 的同时存在。
 
 虽然二进制位通常是基于硅的微芯片，但量子位可以由光子、受困离子以及真实或人工的原子或准粒子组成。因此，大多数量子计算机需要极其复杂的冷却设备以在非常低的温度下工作。
 
@@ -62,21 +62,21 @@
 
 量子计算机可以像神经网络一样有效地进行训练，调整物理控制参数来解决问题，例如电磁场的强度或激光脉冲的频率。
 
-一个容易理解的用例是可以训练的机器学习模型，用于对文档内容进行分类，通过将文档编码为设备的物理状态进行测量。借助量子计算和AI，[数据科学工作流将在毫秒级别内进行测量](/mastering-data-science-workflows-with-chatgpt)，因为量子AI模型能够处理PB级数据，并[在语义上比较文档](https://apryse.com/blog/document-comparison/compare-pdf-word-documents-with-semantic-comparison)，为用户提供超出其想象的可操作见解。
+一个容易理解的用例是可以训练的机器学习模型，用于对文档内容进行分类，通过将文档编码为设备的物理状态进行测量。借助量子计算和 AI，数据科学工作流将在毫秒级别内进行测量，因为量子 AI 模型能够处理 PB 级数据，并[在语义上比较文档](https://apryse.com/blog/document-comparison/compare-pdf-word-documents-with-semantic-comparison)，为用户提供超出其想象的可操作见解。
 
 ## 量子机器学习研究
 
-像谷歌、IBM和英特尔这样的主要参与者在量子计算上投入了大量资金，但目前该技术在商业层面仍未被认为是可行的解决方案。然而，该领域的研究正在加速，涉及量子计算的技术挑战肯定会被[通过机器学习解决](/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)，不会太久。
+像谷歌、IBM 和英特尔这样的主要参与者在量子计算上投入了大量资金，但目前该技术在商业层面仍未被认为是可行的解决方案。然而，该领域的研究正在加速，涉及量子计算的技术挑战肯定会被通过机器学习解决，不会太久。
 
-IBM和麻省理工学院（MIT）可以被归功于揭示了2019年结合机器学习和量子计算的实验研究。在一项研究中，使用了一个两比特量子计算机来演示量子计算如何利用实验室生成的数据集提升分类监督学习。这为进一步研究铺平了道路，以勾勒出这种技术合作的全部潜力。
+IBM 和麻省理工学院（MIT）可以被归功于揭示了 2019 年结合机器学习和量子计算的实验研究。在一项研究中，使用了一个两比特量子计算机来演示量子计算如何利用实验室生成的数据集提升分类监督学习。这为进一步研究铺平了道路，以勾勒出这种技术合作的全部潜力。
 
 ## 量子机器学习实践
 
-在本节中，我们将详细介绍谷歌和IBM启动的量子计算项目，并洞察这项技术的巨大潜力。
+在本节中，我们将详细介绍谷歌和 IBM 启动的量子计算项目，并洞察这项技术的巨大潜力。
 
-+   **谷歌的TensorFlow Quantum** **(TFQ)** - 在这个项目中，谷歌旨在克服[将现有机器模型转移到量子架构](https://arxiv.org/abs/2003.02989)的挑战。为了加速这一进程，TensorFlow Quantum现在是开源的，允许开发人员使用Python和谷歌的量子计算框架来构建量子机器学习模型。这意味着量子算法和机器学习应用的研究拥有一个更活跃、更具备条件的社区，从而促进进一步的创新。
++   **谷歌的 TensorFlow Quantum** **(TFQ)** - 在这个项目中，谷歌旨在克服[将现有机器模型转移到量子架构](https://arxiv.org/abs/2003.02989)的挑战。为了加速这一进程，TensorFlow Quantum 现在是开源的，允许开发人员使用 Python 和谷歌的量子计算框架来构建量子机器学习模型。这意味着量子算法和机器学习应用的研究拥有一个更活跃、更具备条件的社区，从而促进进一步的创新。
 
-+   **IBM的量子挑战** - 连接传统软件开发与量子计算应用开发之间的差距，[IBM的量子挑战](https://challenges.quantum.ibm.com/)是一个年度多日活动，专注于量子编程。活动吸引了近2000名参与者，旨在[教育开发者](/5-free-courses-to-master-machine-learning)和研究人员，以确保他们为量子计算革命做好准备。
++   **IBM 的量子挑战** - 连接传统软件开发与量子计算应用开发之间的差距，[IBM 的量子挑战](https://challenges.quantum.ibm.com/)是一个年度多日活动，专注于量子编程。活动吸引了近 2000 名参与者，旨在教育开发者和研究人员，以确保他们为量子计算革命做好准备。
 
 +   **剑桥量子计算（CQC）和 IBM** - [CQC](http://www.quantum.cam.ac.uk/) 和 IBM 于 2021 年 9 月推出了一款基于云的量子随机数生成器（QRNG）。这一开创性的应用能够生成可测量的熵（完全随机性）。这不仅是数据加密领域的一个宝贵突破，也可能在开发能够应对意外情况的高级人工智能系统中发挥作用。
 
@@ -84,7 +84,7 @@ IBM和麻省理工学院（MIT）可以被归功于揭示了2019年结合机器�
 
 # 结论 - 量子机器学习的未来
 
-在量子机器学习能够进入主流之前，还有许多重要步骤需要完成。幸运的是，像 Google 和 IBM 这样的科技巨头正在提供开源软件和 [数据科学教育资源](/2023/12/springboard-best-data-science-resources-bootcamp-courses-learn-data-science-new-year)，以便访问它们的量子计算架构，为该领域培养新的专家铺平道路。
+在量子机器学习能够进入主流之前，还有许多重要步骤需要完成。幸运的是，像 Google 和 IBM 这样的科技巨头正在提供开源软件和 数据科学教育资源，以便访问它们的量子计算架构，为该领域培养新的专家铺平道路。
 
 通过加速量子计算的采用，人工智能和机器学习预计将取得巨大的进展，解决传统计算无法解决的问题。甚至可能是全球性问题，如气候变化。
 

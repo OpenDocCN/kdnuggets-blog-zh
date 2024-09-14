@@ -1,8 +1,8 @@
 # 顶级 Python 数据科学面试问题
 
-> 原文：[https://www.kdnuggets.com/2021/07/top-python-data-science-interview-questions.html](https://www.kdnuggets.com/2021/07/top-python-data-science-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2021/07/top-python-data-science-interview-questions.html`](https://www.kdnuggets.com/2021/07/top-python-data-science-interview-questions.html)
 
-[评论](#comments)![图](../Images/5a242399c92d2c76c993d13eb80a96d8.png)
+评论![图](img/5a242399c92d2c76c993d13eb80a96d8.png)
 
 图片来源：[JESHOOTS.COM](https://unsplash.com/@jeshoots?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -56,7 +56,7 @@
 
 ### 4\. 内置函数
 
-Python有超过60个内置函数。你不需要知道所有这些函数，当然，知道尽可能多的函数总是更好。你不能避免的内置函数包括abs()、isinstance()、len()、list()、min()、max()、pow()、range()、round()、split()、sorted()、type()。
+Python 有超过 60 个内置函数。你不需要知道所有这些函数，当然，知道尽可能多的函数总是更好。你不能避免的内置函数包括 abs()、isinstance()、len()、list()、min()、max()、pow()、range()、round()、split()、sorted()、type()。
 
 ### 5\. 循环和条件语句
 
@@ -64,9 +64,9 @@ Python有超过60个内置函数。你不需要知道所有这些函数，当然
 
 ### 6\. 外部库（Pandas）
 
-虽然使用了多种外部库，但Pandas可能是最受欢迎的。它专为金融、社会科学、统计和工程中的实际数据分析而设计。
+虽然使用了多种外部库，但 Pandas 可能是最受欢迎的。它专为金融、社会科学、统计和工程中的实际数据分析而设计。
 
-### Python面试问题类型
+### Python 面试问题类型
 
 这六个技术概念主要通过两种类型的面试问题进行测试。这些问题是：
 
@@ -78,13 +78,13 @@ Python有超过60个内置函数。你不需要知道所有这些函数，当然
 
 ### 1\. 数据处理和分析
 
-这些问题旨在通过解决ETL（提取、转换和加载数据）问题并进行一些数据分析来测试上述技术概念。
+这些问题旨在通过解决 ETL（提取、转换和加载数据）问题并进行一些数据分析来测试上述技术概念。
 
-这是一个[来自Facebook的示例](https://platform.stratascratch.com/coding-question?id=10291&python=1)：
+这是一个[来自 Facebook 的示例](https://platform.stratascratch.com/coding-question?id=10291&python=1)：
 
-**问题：** *Facebook在用户尝试进行2FA（双因素认证）登录平台时会发送短信。为了成功进行2FA，他们必须确认收到短信。确认短信仅在发送日期有效。不幸的是，数据库存在ETL问题，导致好友请求和无效确认记录被插入到日志中，这些日志存储在‘fb_sms_sends’表中。这些消息类型不应存在于表中。幸运的是，‘fb_confirmers’表包含有效的确认记录，你可以使用该表来识别用户确认的短信。*
+**问题：** *Facebook 在用户尝试进行 2FA（双因素认证）登录平台时会发送短信。为了成功进行 2FA，他们必须确认收到短信。确认短信仅在发送日期有效。不幸的是，数据库存在 ETL 问题，导致好友请求和无效确认记录被插入到日志中，这些日志存储在‘fb_sms_sends’表中。这些消息类型不应存在于表中。幸运的是，‘fb_confirmers’表包含有效的确认记录，你可以使用该表来识别用户确认的短信。*
 
-*计算2020年8月4日确认的短信文本的百分比。*
+*计算 2020 年 8 月 4 日确认的短信文本的百分比。*
 
 **回答：**
 
@@ -112,7 +112,7 @@ df3_grouped_0804 = df3_grouped[df3_grouped['date']=='08-04-2020']
 result = (float(df3_grouped_0804['confirmed_count'])/df1_grouped_0804['count'])*100
 ```
 
-测试你数据分析技能的问题之一是[这个来自Dropbox的问题](https://platform.stratascratch.com/coding-question?id=10308&python=1)：
+测试你数据分析技能的问题之一是[这个来自 Dropbox 的问题](https://platform.stratascratch.com/coding-question?id=10308&python=1)：
 
 **问题：** *编写一个查询，计算市场部和工程部中最高工资之间的差异。只输出工资差异。*
 
@@ -146,9 +146,9 @@ result
 
 例如，您可以遇到[这个问题](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)：
 
-***问题：*** *给定一个包含2-9的数字的字符串，返回该数字可能代表的所有字母组合。以任何顺序返回答案。*
+***问题：*** *给定一个包含 2-9 的数字的字符串，返回该数字可能代表的所有字母组合。以任何顺序返回答案。*
 
-*下面是数字到字母的映射（就像在电话按钮上）。注意，1不映射到任何字母。*
+*下面是数字到字母的映射（就像在电话按钮上）。注意，1 不映射到任何字母。*
 
 **答案：**
 
@@ -210,11 +210,11 @@ class Solution:
 
 ***问题：*** *“编写一个程序，通过填充空单元格来解决数独谜题。数独解必须满足以下所有规则：*
 
-1.  *每个数字1-9必须在每一行中各出现一次。*
+1.  *每个数字 1-9 必须在每一行中各出现一次。*
 
-1.  *每个数字1-9必须在每一列中各出现一次。*
+1.  *每个数字 1-9 必须在每一列中各出现一次。*
 
-1.  *每个数字1-9必须在网格的9个3x3子框中各出现一次。*
+1.  *每个数字 1-9 必须在网格的 9 个 3x3 子框中各出现一次。*
 
 *‘.’ 字符表示空单元格。*
 
@@ -406,22 +406,22 @@ class Solution:
 
 **相关内容：**
 
-+   [如何应对A/B测试数据科学面试](/2021/04/ab-testing-data-science-interviews.html)
++   如何应对 A/B 测试数据科学面试
 
-+   [如何在数百名数据科学候选人中脱颖而出？](/2021/07/distinguish-yourself-hundreds-other-data-science-candidates.html)
++   如何在数百名数据科学候选人中脱颖而出？
 
-+   [为数据科学面试准备行为问题](/2021/07/prepare-behavioral-questions-data-science-interviews.html)
++   为数据科学面试准备行为问题
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，5月4日：9门免费哈佛课程学习数据...] (https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据...] (https://www.kdnuggets.com/2022/n18.html)
 
-+   [你必须知道的15个数据科学Python编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [你必须知道的 15 个数据科学 Python 编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [3个数据科学难度较大的Python编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
++   [3 个数据科学难度较大的 Python 编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
 
-+   [你必须知道的前10个高级数据科学SQL面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的前 10 个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
-+   [数据分析师的SQL和Python面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)
++   [数据分析师的 SQL 和 Python 面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)
 
-+   [5个Python面试问题及答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
++   [5 个 Python 面试问题及答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)

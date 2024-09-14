@@ -1,6 +1,6 @@
 # 微调 OpenAI 语言模型使用噪声标签数据
 
-> 原文：[https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
+> 原文：[`www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html`](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
 
 **作者：Chris Mauck, Jonas Mueller**
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -22,45 +22,45 @@
 
 ## 背景
 
-![微调 OpenAI 语言模型使用噪声标签数据](../Images/c548289b39597699f59845ded1a7d55f.png)
+![微调 OpenAI 语言模型使用噪声标签数据](img/c548289b39597699f59845ded1a7d55f.png)
 
-标记数据推动了企业中的AI/ML，但现实世界的数据集[已被发现](https://go.cloudfactory.com/hubfs/02-Contents/3-Reports/Crowd-vs-Managed-Team-Hivemind-Study.pdf)含有7-50%的标注错误。标注不完美的文本数据阻碍了机器学习模型在意图识别、实体识别和序列生成等任务中的训练（和评估）。虽然预训练的LLM拥有大量的世界知识，但其性能受到噪声训练数据的负面影响（[正如OpenAI所指出的](https://arxiv.org/abs/2005.14165)）。在这里，我们展示了数据中心技术，以减轻标签噪声的影响，而无需更改与模型架构、超参数或训练相关的任何代码。因此，这些数据质量改进技术即使对于未来的高级LLM如GPT-10也应适用。
+标记数据推动了企业中的 AI/ML，但现实世界的数据集[已被发现](https://go.cloudfactory.com/hubfs/02-Contents/3-Reports/Crowd-vs-Managed-Team-Hivemind-Study.pdf)含有 7-50%的标注错误。标注不完美的文本数据阻碍了机器学习模型在意图识别、实体识别和序列生成等任务中的训练（和评估）。虽然预训练的 LLM 拥有大量的世界知识，但其性能受到噪声训练数据的负面影响（[正如 OpenAI 所指出的](https://arxiv.org/abs/2005.14165)）。在这里，我们展示了数据中心技术，以减轻标签噪声的影响，而无需更改与模型架构、超参数或训练相关的任何代码。因此，这些数据质量改进技术即使对于未来的高级 LLM 如 GPT-10 也应适用。
 
 # 为什么微调？
 
-LLM在对互联网上的大部分文本进行预训练后，获得了强大的生成和区分能力。然而，确保LLM在特定业务用例中产生可靠输出通常需要在标记了所需输出的实际领域数据上进行额外训练。这种领域特定的训练被称为*微调* LLM，可以通过[OpenAI提供的API](https://platform.openai.com/docs/guides/fine-tuning)进行。数据标注过程中的不完美不可避免地在这种领域特定的训练数据中引入标签错误，这对LLM的适当微调和评估构成了挑战。
+LLM 在对互联网上的大部分文本进行预训练后，获得了强大的生成和区分能力。然而，确保 LLM 在特定业务用例中产生可靠输出通常需要在标记了所需输出的实际领域数据上进行额外训练。这种领域特定的训练被称为*微调* LLM，可以通过[OpenAI 提供的 API](https://platform.openai.com/docs/guides/fine-tuning)进行。数据标注过程中的不完美不可避免地在这种领域特定的训练数据中引入标签错误，这对 LLM 的适当微调和评估构成了挑战。
 
 # 为什么数据中心的人工智能？
 
-以下是[OpenAI的引用](https://openai.com/research/dall-e-2-pre-training-mitigations)关于他们训练最先进AI系统策略的内容：
+以下是[OpenAI 的引用](https://openai.com/research/dall-e-2-pre-training-mitigations)关于他们训练最先进 AI 系统策略的内容：
 
 > "*由于训练数据塑造了任何学习模型的能力，数据过滤是限制不良模型能力的强大工具。*"
 > 
 > "*我们优先过滤掉所有不良数据，而不是保留所有良好数据。这是因为我们可以在以后用更多的数据来微调我们的模型以教授它新知识，但让模型忘记它已经学到的东西要困难得多。*"
 
-显然，数据集质量是一个至关重要的考虑因素。一些组织如OpenAI手动处理数据中的问题，以生成最好的模型，但这需要大量的工作！数据中心人工智能是一门新兴的算法科学，旨在检测数据问题，因此你可以通过自动化更轻松地系统性改进你的数据集。
+显然，数据集质量是一个至关重要的考虑因素。一些组织如 OpenAI 手动处理数据中的问题，以生成最好的模型，但这需要大量的工作！数据中心人工智能是一门新兴的算法科学，旨在检测数据问题，因此你可以通过自动化更轻松地系统性改进你的数据集。
 
-在这些实验中，我们的LLM是OpenAI的Davinci模型，这是他们最强大的GPT-3模型，ChatGPT基于此模型。
+在这些实验中，我们的 LLM 是 OpenAI 的 Davinci 模型，这是他们最强大的 GPT-3 模型，ChatGPT 基于此模型。
 
 # 概述
 
 在这里，我们考虑了[斯坦福礼貌数据集](https://convokit.cornell.edu/documentation/wiki_politeness.html)的一个三类变体，其中的文本短语被标记为：*不礼貌*、*中性*或*礼貌*。这些标签由人工评分员标注，其中一些标签的质量自然较低。
 
-![使用噪声标签数据微调OpenAI语言模型](../Images/446f86a34353c833ed99a82e33629344.png)
+![使用噪声标签数据微调 OpenAI 语言模型](img/446f86a34353c833ed99a82e33629344.png)
 
 本文介绍以下步骤：
 
-+   使用原始数据通过OpenAI API微调不同的最先进LLM：Davinci、Ada和Curie。
++   使用原始数据通过 OpenAI API 微调不同的最先进 LLM：Davinci、Ada 和 Curie。
 
 +   在具有高质量标签的测试集上建立每个微调模型的基线准确率（通过共识和多位人工标注者对每个测试样本的高一致性确定）。
 
-+   使用Confident Learning算法自动识别数百个标签错误的样本。
++   使用 Confident Learning 算法自动识别数百个标签错误的样本。
 
-+   从数据集中删除自动标记的标签问题数据，然后在自动筛选的数据集上微调完全相同的LLM。**这个简单的步骤将Davinci模型预测的错误减少8%!**
++   从数据集中删除自动标记的标签问题数据，然后在自动筛选的数据集上微调完全相同的 LLM。**这个简单的步骤将 Davinci 模型预测的错误减少 8%!**
 
-+   引入一种**无代码**解决方案，以高效修正数据集中标签错误，然后在修正后的数据集上微调完全相同的LLM。**这将Davinci模型预测的错误减少37%!**
++   引入一种**无代码**解决方案，以高效修正数据集中标签错误，然后在修正后的数据集上微调完全相同的 LLM。**这将 Davinci 模型预测的错误减少 37%!**
 
-通过这些相同的过程，Ada和Curie模型也取得了类似的改进——在所有情况下，模型和微调代码都没有改变！
+通过这些相同的过程，Ada 和 Curie 模型也取得了类似的改进——在所有情况下，模型和微调代码都没有改变！
 
 这里有一个[notebook](https://colab.research.google.com/github/cmauck10/notebooks/blob/master/LLM_with_noisy_labels.ipynb)，你可以运行它以重现本文中演示的结果，并理解实现每一步的代码。
 
@@ -68,11 +68,11 @@ LLM在对互联网上的大部分文本进行预训练后，获得了强大的�
 
 你可以在这里下载训练集和测试集：[train](https://s.cleanlab.ai/stanford-politeness/fine-tuning/train.csv) [test](https://s.cleanlab.ai/stanford-politeness/fine-tuning/test.csv)
 
-我们的训练数据集有1916个样本，每个样本由一个人工标注者标记，因此其中一些可能不可靠。测试数据集有480个样本，每个样本由五位标注者标记，我们使用他们的共识标签作为对真实礼貌的高质量近似（将测试准确率与这些共识标签进行比较）。为了确保公平比较，该测试数据集在实验过程中保持不变（所有标签清理/数据集修改仅在训练集中进行）。我们将这些CSV文件重新格式化为OpenAI微调API所需的jsonl文件类型。
+我们的训练数据集有 1916 个样本，每个样本由一个人工标注者标记，因此其中一些可能不可靠。测试数据集有 480 个样本，每个样本由五位标注者标记，我们使用他们的共识标签作为对真实礼貌的高质量近似（将测试准确率与这些共识标签进行比较）。为了确保公平比较，该测试数据集在实验过程中保持不变（所有标签清理/数据集修改仅在训练集中进行）。我们将这些 CSV 文件重新格式化为 OpenAI 微调 API 所需的 jsonl 文件类型。
 
-# 微调并评估LLM
+# 微调并评估 LLM
 
-这是我们如何微调Davinci LLM以进行3类分类并评估其测试准确率的代码示例：
+这是我们如何微调 Davinci LLM 以进行 3 类分类并评估其测试准确率的代码示例：
 
 ```py
 !openai api fine_tunes.create -t "train_prepared.jsonl" -v "test_prepared.jsonl" --compute_classification_metrics --classification_n_classes 3 -m davinci 
@@ -81,7 +81,7 @@ LLM在对互联网上的大部分文本进行预训练后，获得了强大的�
 >>> Created fine-tune: ft-9800F2gcVNzyMdTLKcMqAtJ5
 ```
 
-一旦任务完成，我们查询fine_tunes.results端点，以查看在原始训练数据集上微调该LLM时所达到的测试准确率。
+一旦任务完成，我们查询 fine_tunes.results 端点，以查看在原始训练数据集上微调该 LLM 时所达到的测试准确率。
 
 ```py
 !openai api fine_tunes.results -i ft-9800F2gcVNzyMdTLKcMqAtJ5 > baseline.csv
@@ -92,7 +92,7 @@ baseline_acc = df.iloc[-1]['classification/accuracy']
 >>> Fine-tuning Accuracy: 0.6312500238418579
 ```
 
-我们的基线Davinci LLM在使用可能有噪声标签的原始训练数据进行微调时，测试准确率为63%。即使是最先进的LLM，如Davinci模型，对于这个分类任务的表现也平平，是因为数据标签存在噪声吗？
+我们的基线 Davinci LLM 在使用可能有噪声标签的原始训练数据进行微调时，测试准确率为 63%。即使是最先进的 LLM，如 Davinci 模型，对于这个分类任务的表现也平平，是因为数据标签存在噪声吗？
 
 # 自动查找标签问题
 
@@ -138,7 +138,7 @@ issue_idx = find_label_issues(labels, pred_probs,
 
 像这样的标签错误可能是我们看到模型结果不佳的原因。
 
-![微调 OpenAI 语言模型与噪声标注数据](../Images/44471b8c60e405c79bafb621162cff2a.png)
+![微调 OpenAI 语言模型与噪声标注数据](img/44471b8c60e405c79bafb621162cff2a.png)
 
 说明：自动识别的一些主要错误。
 
@@ -192,7 +192,7 @@ corrected_acc = df.iloc[-1]['classification/accuracy']
 
 我们对 OpenAI 提供的另外两个最近的 LLM 模型 Ada 和 Curie 进行了相同的实验。得到的改进结果看起来与 Davinci 模型取得的类似。
 
-![使用噪声标签数据进行 OpenAI 语言模型微调](../Images/ee4addf0df247b4768b324a15ee16925.png)
+![使用噪声标签数据进行 OpenAI 语言模型微调](img/ee4addf0df247b4768b324a15ee16925.png)
 
 # 结论
 

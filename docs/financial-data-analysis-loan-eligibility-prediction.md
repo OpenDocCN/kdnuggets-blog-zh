@@ -1,28 +1,28 @@
 # 财务数据分析 – 数据处理 1：贷款资格预测
 
-> 原文：[https://www.kdnuggets.com/2018/09/financial-data-analysis-loan-eligibility-prediction.html](https://www.kdnuggets.com/2018/09/financial-data-analysis-loan-eligibility-prediction.html)
+> 原文：[`www.kdnuggets.com/2018/09/financial-data-analysis-loan-eligibility-prediction.html`](https://www.kdnuggets.com/2018/09/financial-data-analysis-loan-eligibility-prediction.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Sabber Ahamed](https://www.linkedin.com/in/sabber-ahamed/)，计算地球物理学家和机器学习爱好者**
 
-![](../Images/293b4a75c53681e17ad1aebb8977b940.png)
+![](img/293b4a75c53681e17ad1aebb8977b940.png)
 
 ### 介绍
 
 金融机构/公司已经使用预测分析有一段时间了。最近，由于计算资源的可用性以及在机器学习领域的巨大研究，使得更好的数据分析以及更好的预测成为可能。在这系列文章中，我将解释如何创建一个预测贷款模型，识别那些更有可能被拒绝的申请人。通过一步步的过程，我展示了如何处理原始数据、清理不必要的部分、选择相关特征、进行探索性数据分析，并最终建立模型。
 
-作为一个例子，我使用了Lending Club贷款数据集。Lending Club是全球最大的在线市场，连接借款人和投资者。借贷的一个不可避免的结果是借款人违约。这个教程的目的是创建一个预测模型，以识别那些相对来说风险较大的贷款申请人。为此，我将整个系列分为以下四部分：
+作为一个例子，我使用了 Lending Club 贷款数据集。Lending Club 是全球最大的在线市场，连接借款人和投资者。借贷的一个不可避免的结果是借款人违约。这个教程的目的是创建一个预测模型，以识别那些相对来说风险较大的贷款申请人。为此，我将整个系列分为以下四部分：
 
 +   [**数据处理-1**](https://medium.com/@sabber/financial-data-analysis-80ba39149126)：在这第一部分，我展示了如何清理和移除不必要的特征。数据处理是非常耗时的，但更好的数据将产生更好的模型。因此，需要进行仔细且非常详细的检查，以准备更好的数据。我展示了如何识别常量特征、重复特征、重复行以及具有大量缺失值的特征。
 
-+   [**数据处理-2**](https://medium.com/@sabber/financial-data-analysis-bf4b5e78c45c)：在这一部分，我手动检查了从第1部分中选择的每一个特征。这是最耗时的部分，但为了得到更好的模型是值得的。
++   [**数据处理-2**](https://medium.com/@sabber/financial-data-analysis-bf4b5e78c45c)：在这一部分，我手动检查了从第一部分中选择的每一个特征。这是最耗时的部分，但为了得到更好的模型是值得的。
 
-+   [**探索性数据分析**](https://medium.com/@sabber/financial-data-analysis-2f86b1341e6e)：在这一部分，我对第1部分和第2部分中选择的特征进行了探索性数据分析（EDA）。良好的EDA对于更好地了解领域是必需的。我们需要花费一些时间来找出特征之间的关系。
++   [**探索性数据分析**](https://medium.com/@sabber/financial-data-analysis-2f86b1341e6e)：在这一部分，我对第一部分和第二部分中选择的特征进行了探索性数据分析（EDA）。良好的 EDA 对于更好地了解领域是必需的。我们需要花费一些时间来找出特征之间的关系。
 
 +   [**创建模型**](https://medium.com/@sabber/financial-data-analysis-51e7275d0ae)：最后，在这最后但并非最末部分中，我创建了模型。创建模型也不是一件容易的事。这也是一个迭代的过程。我展示了如何从一个简单的模型开始，然后逐步增加复杂性以获得更好的性能。
 
-好的，让我们开始第1部分：数据处理、清洗和特征选择。
+好的，让我们开始第一部分：数据处理、清洗和特征选择。
 
 ### **数据处理-1**
 
@@ -35,7 +35,7 @@ import warnings
 warnings.filterwarnings("ignore")
 ```
 
-在这个项目中，我使用了三年的数据集（2014年、2015年和2017年（第一至第三季度）），并存储在五个不同的 CSV 文件中。首先让我们读取这些文件：
+在这个项目中，我使用了三年的数据集（2014 年、2015 年和 2017 年（第一至第三季度）），并存储在五个不同的 CSV 文件中。首先让我们读取这些文件：
 
 ```py
 df1 = pd.read_csv(‘./data/2017Q1.csv’, skiprows=[0])
@@ -111,7 +111,7 @@ df.shape
 
 +   移除重复的行
 
-+   移除高度共线的特征（在第3部分EDA中）
++   移除高度共线的特征（在第三部分 EDA 中）
 
 好的，让我们开始典型的数据处理：
 
@@ -123,7 +123,7 @@ df.shape
 
 在上面的代码中，我创建了一个“find_constant_features”函数来识别常量特征。该函数逐个检查每个特征，看看是否具有少于两个唯一值。如果是，这些特征会被添加到常量特征列表中。我们还可以通过查看方差或标准差来找出常量特征。如果特征的方差或标准差为零，我们可以确定该特征具有单一唯一值。打印语句显示五个特征具有单一唯一值，因此我们使用“inplace”选项为 true 移除了它们。
 
-**3\. 移除重复特征：**重复特征是指在多个特征中具有相同值的特征，不论名称是否相同。为了找出这些重复特征，我借用了以下代码，这些代码来自于这个[stackoverflow链接](https://stackoverflow.com/questions/14984119/python-pandas-remove-duplicate-columns)：
+**3\. 移除重复特征：**重复特征是指在多个特征中具有相同值的特征，不论名称是否相同。为了找出这些重复特征，我借用了以下代码，这些代码来自于这个[stackoverflow 链接](https://stackoverflow.com/questions/14984119/python-pandas-remove-duplicate-columns)：
 
 我们只看到一个似乎重复的特征。我不会立即移除该特征，而是等到我们在下一部分进行 EDA 时再处理。
 
@@ -158,21 +158,21 @@ Medium: https://medium.com/@sabber/
 
 **相关：**
 
-+   [命令行上的文本挖掘](/2018/07/text-mining-command-line.html)
++   命令行上的文本挖掘
 
-+   [三种技术提升不平衡数据集上的机器学习模型性能](/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html)
++   三种技术提升不平衡数据集上的机器学习模型性能
 
-+   [文本分类与嵌入可视化，使用 LSTM、CNN 和预训练词向量](/2018/07/text-classification-lstm-cnn-pre-trained-word-vectors.html)
++   文本分类与嵌入可视化，使用 LSTM、CNN 和预训练词向量
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -184,8 +184,8 @@ Medium: https://medium.com/@sabber/
 
 +   [烂番茄电影评分预测的数据科学项目：…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
 
-+   [使用BQML进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
++   [使用 BQML 进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
 
-+   [OLAP与OLTP：数据处理系统的比较分析](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)
++   [OLAP 与 OLTP：数据处理系统的比较分析](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)
 
 +   [自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)

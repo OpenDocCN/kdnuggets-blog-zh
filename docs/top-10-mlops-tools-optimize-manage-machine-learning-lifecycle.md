@@ -1,8 +1,8 @@
 # 优化与管理机器学习生命周期的十大 MLOps 工具
 
-> 原文：[https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
+> 原文：[`www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html`](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
 
-![优化与管理机器学习生命周期的十大 MLOps 工具](../Images/1dc269e5b7897d689c8012f03e9699ce.png)
+![优化与管理机器学习生命周期的十大 MLOps 工具](img/1dc269e5b7897d689c8012f03e9699ce.png)
 
 图片来源：[Digital Buggu](https://www.pexels.com/photo/colorful-toothed-wheels-171198/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 机器学习生命周期包括为特定应用开发、部署和维护机器学习模型。典型的生命周期包括：
 
-![优化与管理机器学习生命周期的十大 MLOps 工具](../Images/36943ede33bfadbf00c533a2d7b90de9.png)
+![优化与管理机器学习生命周期的十大 MLOps 工具](img/36943ede33bfadbf00c533a2d7b90de9.png)
 
 ## 确定商业目标
 
@@ -72,7 +72,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 这就是 MLOps 工具发挥作用的地方。合适的工具可以帮助您从数据准备到市场准备产品的整个过程管理一切。为了节省您的时间，我整理了一份最佳企业和开源云平台及 [管理机器学习生命周期的框架](https://www.anblicks.com/services/ai-ml/) 的列表。
 
-# 机器学习生命周期管理的前10大 MLOps 工具/平台
+# 机器学习生命周期管理的前 10 大 MLOps 工具/平台
 
 ## 1\. Amazon SageMaker
 
@@ -88,7 +88,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   它具有用于策略管理和执行、基础设施安全、数据保护、授权、认证和监控的安全功能。
 
-![优化和管理机器学习生命周期的前10大MLOps工具](../Images/b65c60df69e022b67bbb8c02d5877c88.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/b65c60df69e022b67bbb8c02d5877c88.png)
 
 来源：亚马逊
 
@@ -104,7 +104,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   企业可以利用 Microsoft Power BI 及 Azure Synapse Analytics、Azure Cognitive Search、Azure Data Factory、Azure Data Lake、Azure Arc、Azure Security Centre 和 Azure Databricks 等服务来提升生产力。
 
-![优化和管理机器学习生命周期的前10大MLOps工具](../Images/d1ae3caf2156fc23bb9a3ccbbf2a15fc.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/d1ae3caf2156fc23bb9a3ccbbf2a15fc.png)
 
 来源：微软
 
@@ -114,63 +114,63 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   它帮助用户以企业级的可靠性、安全性和规模管理完整的机器学习生命周期。
 
-+   MLFLOW跟踪使用Python、REST、R API和Java API自动记录每次运行的参数、代码版本、指标和工件。
++   MLFLOW 跟踪使用 Python、REST、R API 和 Java API 自动记录每次运行的参数、代码版本、指标和工件。
 
-+   用户可以记录阶段转换，并在CI/CD管道中请求、审查和批准更改，以改善控制和治理。
++   用户可以记录阶段转换，并在 CI/CD 管道中请求、审查和批准更改，以改善控制和治理。
 
 +   通过访问控制和搜索查询，用户可以在工作区内创建、保护、组织、搜索和可视化实验。
 
-+   通过Apache Spark UDF快速在Databricks上部署到本地机器或其他生产环境，例如Microsoft Azure ML和Amazon SageMaker，并构建Docker镜像进行部署。
++   通过 Apache Spark UDF 快速在 Databricks 上部署到本地机器或其他生产环境，例如 Microsoft Azure ML 和 Amazon SageMaker，并构建 Docker 镜像进行部署。
 
-![优化和管理机器学习生命周期的前10大MLOps工具](../Images/d5048f4acef697f1683cef34e7dbb02a.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/d5048f4acef697f1683cef34e7dbb02a.png)
 
 来源：Databricks
 
 ## 4\. TensorFlow Extended (TFX)
 
-+   TensorFlow Extended是Google开发的生产规模机器学习平台。它提供了用于将机器学习集成到工作流中的共享库和框架。
++   TensorFlow Extended 是 Google 开发的生产规模机器学习平台。它提供了用于将机器学习集成到工作流中的共享库和框架。
 
-+   TensorFlow Extended允许用户在各种平台上编排机器学习工作流程，包括Apache、Beam和KubeFlow。
++   TensorFlow Extended 允许用户在各种平台上编排机器学习工作流程，包括 Apache、Beam 和 KubeFlow。
 
-+   TensorFlow是提升TFX工作流程的高端设计，TensorFlow帮助用户分析和验证机器学习数据。
++   TensorFlow 是提升 TFX 工作流程的高端设计，TensorFlow 帮助用户分析和验证机器学习数据。
 
-+   TensorFlow模型分析提供了处理大量分布式数据的指标，并帮助用户评估TensorFlow模型。
++   TensorFlow 模型分析提供了处理大量分布式数据的指标，并帮助用户评估 TensorFlow 模型。
 
-+   TensorFlow Metadata提供了可以在数据分析过程中手动或自动生成的元数据，这在使用TF训练机器学习模型时非常有用。
++   TensorFlow Metadata 提供了可以在数据分析过程中手动或自动生成的元数据，这在使用 TF 训练机器学习模型时非常有用。
 
-![优化和管理机器学习生命周期的前10大MLOps工具](../Images/506bf2b0bc861194ef0f9748b57e9374.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/506bf2b0bc861194ef0f9748b57e9374.png)
 
 来源：TensorFlow
 
 ## 5\. MLFlow
 
-+   MLFlow是一个开源项目，旨在为机器学习提供一种通用语言。
++   MLFlow 是一个开源项目，旨在为机器学习提供一种通用语言。
 
 +   这是一个用于管理完整机器学习生命周期的框架
 
 +   它为数据科学团队提供了端到端的解决方案
 
-+   用户可以使用在Amazon Web Services (AWS) 上运行的Hadoop、Spark或Spark SQL集群轻松管理生产环境或本地的模型。
++   用户可以使用在 Amazon Web Services (AWS) 上运行的 Hadoop、Spark 或 Spark SQL 集群轻松管理生产环境或本地的模型。
 
-+   MLflow提供了一组轻量级API，可以与任何现有的机器学习应用程序或库（TensorFlow、PyTorch、XGBoost等）结合使用。
++   MLflow 提供了一组轻量级 API，可以与任何现有的机器学习应用程序或库（TensorFlow、PyTorch、XGBoost 等）结合使用。
 
-![优化和管理机器学习生命周期的前10大MLOps工具](../Images/17f0555e90c4542ef7803d803fa87745.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/17f0555e90c4542ef7803d803fa87745.png)
 
 来源：MLFlow
 
 ## 6\. Google Cloud ML Engine
 
-+   Google Cloud ML Engine是一个托管服务，使构建、训练和部署机器学习模型变得容易。
++   Google Cloud ML Engine 是一个托管服务，使构建、训练和部署机器学习模型变得容易。
 
-+   它提供了一个统一的接口用于训练、服务和监控ML模型。
++   它提供了一个统一的接口用于训练、服务和监控 ML 模型。
 
-+   Bigquery和云存储帮助用户准备和存储数据集。然后，他们可以使用内置功能为数据打标签。
++   Bigquery 和云存储帮助用户准备和存储数据集。然后，他们可以使用内置功能为数据打标签。
 
-+   Cloud ML Engine可以执行超参数调整，这会影响预测的准确性。
++   Cloud ML Engine 可以执行超参数调整，这会影响预测的准确性。
 
 +   使用带有易用界面的 Auto ML 功能，用户可以无需编写任何代码即可完成任务。此外，用户可以使用 Google Colab 免费运行笔记本。
 
-![优化和管理机器学习生命周期的前 10 大 MLOps 工具](../Images/d1288b1c480f970cb17b769be26b073e.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/d1288b1c480f970cb17b769be26b073e.png)
 
 来源：Google
 
@@ -186,7 +186,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   DVC 可以将 ML 步骤连接成 DAG（有向无环图），并运行整个管道端到端。
 
-![优化和管理机器学习生命周期的前 10 大 MLOps 工具](../Images/6d11e3b16b1449aae008855a497596d4.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/6d11e3b16b1449aae008855a497596d4.png)
 
 来源：DVC
 
@@ -202,7 +202,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   Driverless AI 可以用于从数字照片中提取信息。它允许使用单独的照片和与其他数据类型结合的图像作为预测特征。
 
-![优化和管理机器学习生命周期的前 10 大 MLOps 工具](../Images/f22ca38e345c325ae0fd250cf5ecfb53.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/f22ca38e345c325ae0fd250cf5ecfb53.png)
 
 来源：H2O Driverless AI
 
@@ -218,7 +218,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   它还扩展了对 PyTorch、Apache MXNet、MPI、XGBoost、Chainer 等的支持。它还与 Istio、Ambassador（用于入口）和 Nuclio（用于管理数据科学管道）集成。
 
-![优化和管理机器学习生命周期的前 10 大 MLOps 工具](../Images/0e03d9956e3223dc5915380e692cb610.png)
+![优化和管理机器学习生命周期的前 10 大 MLOps 工具](img/0e03d9956e3223dc5915380e692cb610.png)
 
 来源：Kubeflow
 
@@ -234,7 +234,7 @@ MLOps 是机器学习 + 操作的缩写。它是一门新兴学科，要求结�
 
 +   它可以自动版本化和跟踪所有实验和数据。
 
-![十大 MLOps 工具优化与管理机器学习生命周期](../Images/e738b46c45dff3848a124e627b2f20c8.png)
+![十大 MLOps 工具优化与管理机器学习生命周期](img/e738b46c45dff3848a124e627b2f20c8.png)
 
 来源：Metaflow
 

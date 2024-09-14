@@ -1,8 +1,8 @@
 # 如何简化代码文档
 
-> 原文：[https://www.kdnuggets.com/2022/12/make-documenting-code-easier.html](https://www.kdnuggets.com/2022/12/make-documenting-code-easier.html)
+> 原文：[`www.kdnuggets.com/2022/12/make-documenting-code-easier.html`](https://www.kdnuggets.com/2022/12/make-documenting-code-easier.html)
 
-![如何简化代码文档](../Images/30bb3bcc2afb15759ced4a29cca6cab3.png)
+![如何简化代码文档](img/30bb3bcc2afb15759ced4a29cca6cab3.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -68,18 +68,18 @@
 
 不幸的是，我们中的大多数人宁愿花更多的时间编写实际代码，而不是处理文档。在这篇文章中，我们探讨了一些可以使编写代码文档过程更容易的步骤，并帮助你生产出更高质量的文档。
 
-**[Sara Metwalli](https://www.linkedin.com/in/sara-a-metwalli/)** 是庆应义塾大学的博士候选人，研究测试和调试量子电路的方法。我是IBM的研究实习生和Qiskit倡导者，致力于建设一个更加量子化的未来。我还是Medium、Built-in、She Can Code和KDN的作者，撰写关于编程、数据科学和技术主题的文章。我还是“Woman Who Code Python”国际章节的负责人，火车爱好者，旅行者和摄影爱好者。
+**[Sara Metwalli](https://www.linkedin.com/in/sara-a-metwalli/)** 是庆应义塾大学的博士候选人，研究测试和调试量子电路的方法。我是 IBM 的研究实习生和 Qiskit 倡导者，致力于建设一个更加量子化的未来。我还是 Medium、Built-in、She Can Code 和 KDN 的作者，撰写关于编程、数据科学和技术主题的文章。我还是“Woman Who Code Python”国际章节的负责人，火车爱好者，旅行者和摄影爱好者。
 
 ### 相关话题
 
-+   [Ploomber与Kubeflow：让MLOps更简单](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
++   [Ploomber 与 Kubeflow：让 MLOps 更简单](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
 
-+   [如何让Python代码运行得不可思议的快](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)
++   [如何让 Python 代码运行得不可思议的快](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)
 
-+   [这些是我用来赚取$10,000的AI工具及技能…](https://www.kdnuggets.com/2023/07/ai-tools-along-skills-make-10000-monthly-bs.html)
++   [这些是我用来赚取$10,000 的 AI 工具及技能…](https://www.kdnuggets.com/2023/07/ai-tools-along-skills-make-10000-monthly-bs.html)
 
-+   [用Pandas制作美观的互动可视化的最简单方法](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)
++   [用 Pandas 制作美观的互动可视化的最简单方法](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)
 
 +   [假装直到成功：生成逼真的合成客户数据集](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)
 
-+   [那些并不性感的SQL概念，让你脱颖而出](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)
++   [那些并不性感的 SQL 概念，让你脱颖而出](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)

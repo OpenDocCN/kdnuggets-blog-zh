@@ -1,50 +1,50 @@
 # SQL LIKE 运算符示例
 
-> 原文：[https://www.kdnuggets.com/2022/09/sql-like-operator-examples.html](https://www.kdnuggets.com/2022/09/sql-like-operator-examples.html)
+> 原文：[`www.kdnuggets.com/2022/09/sql-like-operator-examples.html`](https://www.kdnuggets.com/2022/09/sql-like-operator-examples.html)
 
-![SQL LIKE 运算符示例](../Images/3b7b662b2dc0a025696544a14f94ea61.png)
+![SQL LIKE 运算符示例](img/3b7b662b2dc0a025696544a14f94ea61.png)
 
 SQL LIKE 运算符示例
 
-# 什么是SQL LIKE运算符
+# 什么是 SQL LIKE 运算符
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 SQL **LIKE** 运算符用于在列中搜索特定模式。它总是与**WHERE**子句一起使用，我们可以使用**AND**或**OR**运算符组合任意数量的条件。
 
-通常与LIKE运算符一起使用的有两个通配符：
+通常与 LIKE 运算符一起使用的有两个通配符：
 
 1.  “%”符号表示零个、一个或多个字符。例如：“a%”，它将查找以“a”开头的名称。没有大小限制。
 
-1.  “_”下划线表示一个字符。你可以添加多个下划线来定义固定长度。例如：“a___”，它将找到以“a”开头且长度固定为4的名称。
+1.  “_”下划线表示一个字符。你可以添加多个下划线来定义固定长度。例如：“a___”，它将找到以“a”开头且长度固定为 4 的名称。
 
-在我们深入了解LIKE的实际例子之前，先看看各种通配符和描述的示例。
+在我们深入了解 LIKE 的实际例子之前，先看看各种通配符和描述的示例。
 
-| **LIKE运算符** | **描述** |
+| **LIKE 运算符** | **描述** |
 | --- | --- |
 | WHERE EmployeeName LIKE 'g%' | 显示所有以“g”开头的员工姓名 |
 | WHERE EmployeeName LIKE '%g' | 显示所有以“g”结尾的员工姓名 |
 | WHERE EmployeeName LIKE '%en%' | 显示任何位置包含“en”的员工姓名 |
 | WHERE EmployeeName LIKE '_g%' | 显示第二个位置有“g”的员工姓名 |
-| WHERE EmployeeName LIKE 'g__%' | 显示以“g”开头且长度至少为3个字符的员工姓名 |
+| WHERE EmployeeName LIKE 'g__%' | 显示以“g”开头且长度至少为 3 个字符的员工姓名 |
 | WHERE EmployeeName NOT LIKE 'g%' | 显示所有不以“a”开头的员工姓名。 |
 | WHERE EmployeeName LIKE 'g%l' | 显示以“g”开头且以“l”结尾的员工姓名 |
 
 # SQL LIKE 示例
 
-在本节中，我们将学习在示例数据集中使用LIKE运算符的9种不同方法。[SF Salaries](https://www.kaggle.com/datasets/kaggle/sf-salaries)数据集包含了旧金山市政府员工及其薪酬信息。数据集包括2011年至2014年的年薪数据。
+在本节中，我们将学习在示例数据集中使用 LIKE 运算符的 9 种不同方法。[SF Salaries](https://www.kaggle.com/datasets/kaggle/sf-salaries)数据集包含了旧金山市政府员工及其薪酬信息。数据集包括 2011 年至 2014 年的年薪数据。
 
-在我们的例子中，我们将重点关注EmployeeName、JobTitle、BasePay、OvertimePay、OtherPay和TotalPay，如下所示。
+在我们的例子中，我们将重点关注 EmployeeName、JobTitle、BasePay、OvertimePay、OtherPay 和 TotalPay，如下所示。
 
 | **Id** | **EmployeeName** | **JobTitle** | **BasePay** | **OvertimePay** | **OtherPay** | **TotalPay** |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ FROM Salaries
 WHERE EmployeeName LIKE 'Nathaniel Ford';
 ```
 
-![SQL LIKE 运算符示例](../Images/75053a9ec967311aa84c32bae5d57a32.png)
+![SQL LIKE 运算符示例](img/75053a9ec967311aa84c32bae5d57a32.png)
 
 ## 示例 #2
 
@@ -86,7 +86,7 @@ WHERE EmployeeName LIKE 'Nathaniel%'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/6b2e7b0515cc7a93e1fabc83806ff140.png)
+![SQL LIKE 运算符示例](img/6b2e7b0515cc7a93e1fabc83806ff140.png)
 
 ## 示例 # 3
 
@@ -102,7 +102,7 @@ WHERE EmployeeName LIKE '% Ford'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/8b66b05ab94d8ec04a510e720db58462.png)
+![SQL LIKE 运算符示例](img/8b66b05ab94d8ec04a510e720db58462.png)
 
 ## 示例 #4
 
@@ -120,7 +120,7 @@ WHERE EmployeeName LIKE '%Ford%'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/1b3bc28d2a0b3705da1c046186a0e2a2.png)
+![SQL LIKE 运算符示例](img/1b3bc28d2a0b3705da1c046186a0e2a2.png)
 
 ## 示例 #5
 
@@ -136,7 +136,7 @@ WHERE EmployeeName LIKE 'k%o'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/c20034a943c0602365cc6d3fa55932ee.png)
+![SQL LIKE 运算符示例](img/c20034a943c0602365cc6d3fa55932ee.png)
 
 ## 示例 #6
 
@@ -154,7 +154,7 @@ WHERE EmployeeName LIKE '_th%'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/644808e909bb1173b370752589f6740d.png)
+![SQL LIKE 运算符示例](img/644808e909bb1173b370752589f6740d.png)
 
 ## 示例 #7
 
@@ -170,7 +170,7 @@ WHERE EmployeeName LIKE 'Kenn__h%'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/625c8c6a628991a8f824af77a731ea65.png)
+![SQL LIKE 运算符示例](img/625c8c6a628991a8f824af77a731ea65.png)
 
 ## 示例 #8
 
@@ -188,13 +188,13 @@ WHERE EmployeeName LIKE '________ob'
 LIMIT 5;
 ```
 
-![SQL LIKE 运算符示例](../Images/e7cfa46460d4865e231841e594d70b41.png)
+![SQL LIKE 运算符示例](img/e7cfa46460d4865e231841e594d70b41.png)
 
 ## 示例 #9
 
 我们可以使用 AND、OR 和 NOT 与 LIKE 运算符。这可以帮助你执行更具体的搜索。
 
-在这个示例中，我们将使用NOT来显示除了以“ken”开头的名字以外的所有名字。
+在这个示例中，我们将使用 NOT 来显示除了以“ken”开头的名字以外的所有名字。
 
 ```py
 SELECT *
@@ -206,21 +206,21 @@ WHERE EmployeeName NOT LIKE 'ken%'
 LIMIT 5;
 ```
 
-![SQL LIKE 操作符示例](../Images/05a5b4d465661857dd0a65b2e9df01f9.png)
+![SQL LIKE 操作符示例](img/05a5b4d465661857dd0a65b2e9df01f9.png)
 
 # 结论
 
-带通配符的LIKE操作符可以帮助你编写有效的查询并搜索特定的记录。你甚至可以将其与逻辑函数结合使用，以缩小搜索范围。
+带通配符的 LIKE 操作符可以帮助你编写有效的查询并搜索特定的记录。你甚至可以将其与逻辑函数结合使用，以缩小搜索范围。
 
-在这篇文章中，我们学习了使用LIKE操作符的多种方法。我强烈建议你自己练习。你甚至可以解决[w3schools.com](https://www.w3schools.com/SQL/sql_like.asp)的互动练习，以更好地理解这一概念。
+在这篇文章中，我们学习了使用 LIKE 操作符的多种方法。我强烈建议你自己练习。你甚至可以解决[w3schools.com](https://www.w3schools.com/SQL/sql_like.asp)的互动练习，以更好地理解这一概念。
 
 > “如果你希望更频繁地看到这种内容，请在下方评论告诉我。”
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些正在与心理健康问题作斗争的学生打造一款AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些正在与心理健康问题作斗争的学生打造一款 AI 产品。
 
 ### 更多相关内容
 
-+   [如何（不）使用Python的海象操作符](https://www.kdnuggets.com/how-not-to-use-pythons-walrus-operator)
++   [如何（不）使用 Python 的海象操作符](https://www.kdnuggets.com/how-not-to-use-pythons-walrus-operator)
 
 +   [示例中的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)
 
@@ -228,6 +228,6 @@ LIMIT 5;
 
 +   [机器学习不像你的大脑 第一部分：神经元很慢，……](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)
 
-+   [用这些课程构建类似ChatGPT的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
++   [用这些课程构建类似 ChatGPT 的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
 
-+   [像老板一样进行MLOps：一份无泪机器学习指南](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)
++   [像老板一样进行 MLOps：一份无泪机器学习指南](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)

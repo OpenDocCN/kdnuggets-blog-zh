@@ -1,6 +1,6 @@
 # 解锁选择完美机器学习算法的秘密！
 
-> 原文：[https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)
+> 原文：[`www.kdnuggets.com/2023/07/ml-algorithm-choose.html`](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)
 
 在解决数据科学问题时，您需要做出的关键决策之一是选择使用哪种[machine learning](https://medium.com/p/313730eb5aa2)算法。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
 [“无免费午餐” (NFL) 定理](https://en.wikipedia.org/wiki/No_free_lunch_theorem) 认为，没有一种算法对每个问题都最好，换句话说，所有算法的表现都在所有可能问题的平均表现中相同。
 
-![选择哪个 ML 算法？](../Images/db7baeaa9d1b6dda200b7c6976d98f00.png)
+![选择哪个 ML 算法？](img/db7baeaa9d1b6dda200b7c6976d98f00.png)
 
 不同的机器学习模型
 
@@ -28,7 +28,7 @@
 
 # 关键算法方面
 
-以下列表包含了您在考虑特定机器学习算法时可以问自己的10个问题：
+以下列表包含了您在考虑特定机器学习算法时可以问自己的 10 个问题：
 
 1.  该算法可以解决哪类型的问题？它能仅解决回归或分类问题，还是两者皆能？它能处理多类/多标签问题还是仅二分类问题？
 
@@ -60,7 +60,7 @@
 
 1.  决策树算法对数据集没有任何特定的假设。
 
-1.  决策树是使用贪婪算法构建的，这种算法并不能保证找到最优树（即最小化分类所有训练样本所需测试次数的树）。然而，如果我们不断扩展其节点直到所有叶节点中的样本都属于同一类，决策树可以在训练集上达到100%的准确率。这种树通常不是好的预测器，因为它们会过拟合训练集中的噪声。
+1.  决策树是使用贪婪算法构建的，这种算法并不能保证找到最优树（即最小化分类所有训练样本所需测试次数的树）。然而，如果我们不断扩展其节点直到所有叶节点中的样本都属于同一类，决策树可以在训练集上达到 100%的准确率。这种树通常不是好的预测器，因为它们会过拟合训练集中的噪声。
 
 1.  决策树即使在小型或中型数据集上也能表现良好。
 
@@ -102,13 +102,13 @@
 
 下表比较了一些流行算法的训练和预测时间（*n* 是训练样本的数量，*p* 是特征的数量）。
 
-![选择哪个机器学习算法？](../Images/c71fb69ae4ca01cad051997816b89691.png)
+![选择哪个机器学习算法？](img/c71fb69ae4ca01cad051997816b89691.png)
 
-# Kaggle竞赛中最成功的算法
+# Kaggle 竞赛中最成功的算法
 
-根据2016年进行的一项调查，Kaggle竞赛获胜者最常用的算法是梯度提升算法（XGBoost）和神经网络（参见 [这篇文章](https://www.kaggle.com/code/msjgriffiths/r-what-algorithms-are-most-successful-on-kaggle/report?scriptVersionId=0)）。
+根据 2016 年进行的一项调查，Kaggle 竞赛获胜者最常用的算法是梯度提升算法（XGBoost）和神经网络（参见 [这篇文章](https://www.kaggle.com/code/msjgriffiths/r-what-algorithms-are-most-successful-on-kaggle/report?scriptVersionId=0)）。
 
-在2015年的29名Kaggle竞赛获胜者中，有8人使用了XGBoost，9人使用了深度神经网络，11人则使用了两者的集成。
+在 2015 年的 29 名 Kaggle 竞赛获胜者中，有 8 人使用了 XGBoost，9 人使用了深度神经网络，11 人则使用了两者的集成。
 
 XGBoost 主要用于处理结构化数据（例如关系表格）的问题，而神经网络在处理非结构化问题（例如涉及图像、声音或文本的问题）方面更为成功。
 

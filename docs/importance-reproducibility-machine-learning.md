@@ -1,8 +1,8 @@
 # 机器学习中可重复性的**重要性**
 
-> 原文：[https://www.kdnuggets.com/2023/06/importance-reproducibility-machine-learning.html](https://www.kdnuggets.com/2023/06/importance-reproducibility-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2023/06/importance-reproducibility-machine-learning.html`](https://www.kdnuggets.com/2023/06/importance-reproducibility-machine-learning.html)
 
-![机器学习中可重复性的重要性](../Images/c6834b9759b506e1c0f08fa5a1b2a573.png)
+![机器学习中可重复性的重要性](img/c6834b9759b506e1c0f08fa5a1b2a573.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -38,7 +38,7 @@
 
 当我们谈论机器学习应用时，我们通常指的是通常包括以下步骤的端到端机器学习管道：
 
-![机器学习中可重复性的重要性](../Images/fd1880365dfc2c3e25ff1b63a14da54b.png)
+![机器学习中可重复性的重要性](img/fd1880365dfc2c3e25ff1b63a14da54b.png)
 
 作者提供的图像
 
@@ -66,7 +66,7 @@ Python 和基于 Python 的机器学习框架使得开发 ML 应用变得轻而�
 
 ## 数据更改
 
-![机器学习中可重复性的重要性](../Images/9a172f058c96829534f3603f5cbf5cae.png)
+![机器学习中可重复性的重要性](img/9a172f058c96829534f3603f5cbf5cae.png)
 
 作者提供的图像
 
@@ -78,7 +78,7 @@ Python 和基于 Python 的机器学习框架使得开发 ML 应用变得轻而�
 
 现在我们将看看如何解决这些挑战。
 
-![机器学习中可重复性的重要性](../Images/ea339b9fe0399868eacf05df49aea4f0.png)
+![机器学习中可重复性的重要性](img/ea339b9fe0399868eacf05df49aea4f0.png)
 
 作者提供的图像
 
@@ -90,7 +90,7 @@ Python 和基于 Python 的机器学习框架使得开发 ML 应用变得轻而�
 
 代码的任何更改都应使用版本控制系统（如 Git）进行跟踪。
 
-在现代软件开发中，你可能遇到过CI/CD管道，这使得跟踪更改、测试新更改和推送到生产变得更简单高效。
+在现代软件开发中，你可能遇到过 CI/CD 管道，这使得跟踪更改、测试新更改和推送到生产变得更简单高效。
 
 在其他软件应用中，跟踪代码的变化是简单的。然而，在机器学习中，代码的变化也可能涉及到所使用算法和超参数值的变化。即使是简单的模型，我们可以尝试的可能性也是组合性巨大的。这就是实验跟踪变得相关的地方。
 
@@ -124,13 +124,13 @@ Python 和基于 Python 的机器学习框架使得开发 ML 应用变得轻而�
 
 总结一下，我们回顾了机器学习中可复现性的意义和挑战。我们讨论了数据和模型版本控制以及实验跟踪等方法。此外，我们还列出了一些你可以用来进行实验跟踪和更好地管理数据的工具。
 
-DataTalks.Club的 [MLOps Zoomcamp](https://github.com/DataTalksClub/mlops-zoomcamp) 是一个出色的资源，可以让你获得这些工具的一些经验。如果你喜欢构建和维护端到端的机器学习管道，你可能会对了解 [MLOps工程师的角色](/2023/04/role-mlops-engineer-organization.html)感兴趣。
+DataTalks.Club 的 [MLOps Zoomcamp](https://github.com/DataTalksClub/mlops-zoomcamp) 是一个出色的资源，可以让你获得这些工具的一些经验。如果你喜欢构建和维护端到端的机器学习管道，你可能会对了解 MLOps 工程师的角色感兴趣。
 
-**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集上工作。她的兴趣和专长包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、使用指南、观点文章等与开发者社区分享她的知识。
+**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集上工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、使用指南、观点文章等与开发者社区分享她的知识。
 
 ### 更多相关内容
 
-+   [机器学习不像你的大脑第6部分：重要性……](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑第六部分：重要性……](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
 +   [机器学习中预处理的重要性](https://www.kdnuggets.com/2023/02/importance-preprocessing-machine-learning.html)
 

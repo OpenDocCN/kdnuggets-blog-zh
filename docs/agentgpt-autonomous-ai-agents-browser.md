@@ -1,8 +1,8 @@
 # AgentGPT：浏览器中的自主 AI 代理
 
-> 原文：[https://www.kdnuggets.com/2023/06/agentgpt-autonomous-ai-agents-browser.html](https://www.kdnuggets.com/2023/06/agentgpt-autonomous-ai-agents-browser.html)
+> 原文：[`www.kdnuggets.com/2023/06/agentgpt-autonomous-ai-agents-browser.html`](https://www.kdnuggets.com/2023/06/agentgpt-autonomous-ai-agents-browser.html)
 
-![AgentGPT：浏览器中的自主 AI 代理](../Images/78114a222c3f48689145faa460ff3b1f.png)
+![AgentGPT：浏览器中的自主 AI 代理](img/78114a222c3f48689145faa460ff3b1f.png)
 
 作者提供的 Gif | AgentGPT
 
@@ -32,7 +32,7 @@ AgentGPT 和 AutoGPT 都是以自主 AI 代理为中心的令人印象深刻的�
 
 在我们的案例中，我们要求 AgentGPT 开发一个鸟类图像分类 web 应用程序。
 
-![AgentGPT：浏览器中的自主 AI 代理](../Images/bd0a72796160f4419aa190cc286bd61e.png)
+![AgentGPT：浏览器中的自主 AI 代理](img/bd0a72796160f4419aa190cc286bd61e.png)
 
 作者提供的图像 | AgentGPT
 
@@ -40,41 +40,41 @@ AgentGPT 和 AutoGPT 都是以自主 AI 代理为中心的令人印象深刻的�
 
 +   初始数据集研究与选择
 
-+   使用TensorFlow训练深度学习模型
++   使用 TensorFlow 训练深度学习模型
 
-+   使用合适的框架构建Web应用程序并部署训练好的模型
++   使用合适的框架构建 Web 应用程序并部署训练好的模型
 
 +   测试与优化
 
 +   用户界面增强与功能添加
 
-![AgentGPT: Autonomous AI Agents in your Browser](../Images/dcf542a556dfe8f27ba31b1fa9bf7a47.png)
+![AgentGPT: Autonomous AI Agents in your Browser](img/dcf542a556dfe8f27ba31b1fa9bf7a47.png)
 
 作者提供的图像 | AgentGPT
 
-初步结果可能不符合预期；然而，通过进一步的迭代，有可能得到改进。可能在大约5次运行后，应用程序中的编码问题将得到解决。
+初步结果可能不符合预期；然而，通过进一步的迭代，有可能得到改进。可能在大约 5 次运行后，应用程序中的编码问题将得到解决。
 
 # 如何改善结果？
 
-提示在动态调整语言模型的行为以符合我们代理的当前目标和任务中扮演着关键角色。目前，AgetGPT的免费版本使用gpt-3.5-turbo，显示出即使是提示中的最小细节也会显著影响生成的结果。
+提示在动态调整语言模型的行为以符合我们代理的当前目标和任务中扮演着关键角色。目前，AgetGPT 的免费版本使用 gpt-3.5-turbo，显示出即使是提示中的最小细节也会显著影响生成的结果。
 
 提高结果的措施：
 
-1.  **通过示例增强模型准确性：** 为进一步提高模型的准确性，您可以在提示中提供1、2或多个示例。
+1.  **通过示例增强模型准确性：** 为进一步提高模型的准确性，您可以在提示中提供 1、2 或多个示例。
 
 1.  **计划与解决（PS）：** 一种建立在思维链提示上的技术。通过请求模型逐步指令，它实现了更准确的推理和问题解决能力，从而改善结果。通过查看示例了解更多信息：[AGI-Edgerunners/Plan-and-Solve-Prompting](https://github.com/AGI-Edgerunners/Plan-and-Solve-Prompting)。
 
-1.  **ReAct：** 是“推理加行动”的缩写。ReAct是一种强大的提示技术，它将推理和行动生成结合在一个输出中。这种方法允许模型有效地将思想与行动同步，从而产生更连贯和实用的响应。
+1.  **ReAct：** 是“推理加行动”的缩写。ReAct 是一种强大的提示技术，它将推理和行动生成结合在一个输出中。这种方法允许模型有效地将思想与行动同步，从而产生更连贯和实用的响应。
 
-1.  **升级到专业版或本地部署：** 对于高级功能，您可以选择升级到专业版，以访问GPT-4。或者，您可以在本地运行应用程序，并加入GPT-4 API密钥，以利用GPT-4模型的增强功能和性能。
+1.  **升级到专业版或本地部署：** 对于高级功能，您可以选择升级到专业版，以访问 GPT-4。或者，您可以在本地运行应用程序，并加入 GPT-4 API 密钥，以利用 GPT-4 模型的增强功能和性能。
 
 # 入门
 
-![AgentGPT: Autonomous AI Agents in your Browser](../Images/4ef84ef18b31cc4629ef2d2e46a083fd.png)
+![AgentGPT: Autonomous AI Agents in your Browser](img/4ef84ef18b31cc4629ef2d2e46a083fd.png)
 
 来自[reworkd/AgentGPT](https://github.com/reworkd/AgentGPT)的图像
 
-在本节中，我们将学习如何在本地设置和运行AgentGPT。要开始，请按照以下命令操作。
+在本节中，我们将学习如何在本地设置和运行 AgentGPT。要开始，请按照以下命令操作。
 
 ```py
 git clone https://github.com/reworkd/AgentGPT.git && cd AgentGPT
@@ -87,7 +87,7 @@ git clone https://github.com/reworkd/AgentGPT.git && cd AgentGPT
 
 +   将复制的文件重命名为.env。
 
-+   请根据您的要求花时间更新.env文件中的值。
++   请根据您的要求花时间更新.env 文件中的值。
 
 > **注意：** 您还可以修改[数据库](https://github.com/reworkd/AgentGPT/tree/main/db)（Mysql）、[后端](https://github.com/reworkd/AgentGPT/tree/main/platform)（FastAPI）和[前端](https://github.com/reworkd/AgentGPT/tree/main/next)（Nextjs）设置。
 
@@ -135,26 +135,26 @@ AgentGPT 目前处于测试阶段，开发者们正积极开发许多令人兴�
 
 如果你有兴趣了解更多，可以尝试阅读：
 
-+   [Baby AGI: 完全自主 AI 的诞生](/2023/04/baby-agi-birth-fully-autonomous-ai.html)
++   Baby AGI: 完全自主 AI 的诞生
 
-+   [AutoGPT: 你需要知道的一切](/2023/04/autogpt-everything-need-know.html)
++   AutoGPT: 你需要知道的一切
 
-+   [Mojo Lang: 新编程语言](/2023/05/mojo-lang-new-programming-language.html)
++   Mojo Lang: 新编程语言
 
-+   [LangChain 101: 构建你自己的 GPT 驱动应用](/2023/04/langchain-101-build-gptpowered-applications.html)
++   LangChain 101: 构建你自己的 GPT 驱动应用
 
 **[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作，撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络开发一款帮助精神疾病学生的 AI 产品。
 
 ### 更多相关话题
 
-+   [为什么你需要了解自主AI代理](https://www.kdnuggets.com/2023/06/need-know-autonomous-ai-agents.html)
++   [为什么你需要了解自主 AI 代理](https://www.kdnuggets.com/2023/06/need-know-autonomous-ai-agents.html)
 
-+   [基于LLM的自主代理背后的发展](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
++   [基于 LLM 的自主代理背后的发展](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
 
-+   [Web LLM：将LLM聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
++   [Web LLM：将 LLM 聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
 
-+   [Baby AGI：完全自主AI的诞生](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
++   [Baby AGI：完全自主 AI 的诞生](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
 
-+   [将人类与AI代理结合以提升客户体验](https://www.kdnuggets.com/2024/06/softweb/bringing-human-and-ai-agents-together-for-enhanced-customer-experience)
++   [将人类与 AI 代理结合以提升客户体验](https://www.kdnuggets.com/2024/06/softweb/bringing-human-and-ai-agents-together-for-enhanced-customer-experience)
 
 +   [文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)

@@ -1,8 +1,8 @@
 # 数据科学作品集项目创意（可能让你找到工作，也可能不会）
 
-> 原文：[https://www.kdnuggets.com/2021/10/data-science-portfolio-project-ideas.html](https://www.kdnuggets.com/2021/10/data-science-portfolio-project-ideas.html)
+> 原文：[`www.kdnuggets.com/2021/10/data-science-portfolio-project-ideas.html`](https://www.kdnuggets.com/2021/10/data-science-portfolio-project-ideas.html)
 
-[评论](#comments)
+评论
 
 *有哪些数据科学作品集项目创意可以帮助你找到工作？*
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-![](../Images/ed1475f4c6298e2b1b3cf2be14531bdd.png)
+![](img/ed1475f4c6298e2b1b3cf2be14531bdd.png)
 
 ### 数据科学作品集的重要性
 
@@ -32,7 +32,7 @@
 
 +   它也会增加你获得数据科学工作的机会。
 
-![](../Images/fbed5a9167f067ea24693942342a7907.png)
+![](img/fbed5a9167f067ea24693942342a7907.png)
 
 构建数据科学作品集最重要的部分是弄清楚要在作品集中添加什么。在你的数据科学作品集中，你需要在 GitHub、你的网站或博客上拥有一些项目。每个项目都应该结构清晰，以便招聘经理可以快速评估你的技能。在这篇博客中，我们将介绍一些应该出现在你作品集中的数据科学项目创意。
 

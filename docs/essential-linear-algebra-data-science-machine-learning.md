@@ -1,10 +1,10 @@
 # 数据科学和机器学习的基本线性代数
 
-> 原文：[https://www.kdnuggets.com/2021/05/essential-linear-algebra-data-science-machine-learning.html](https://www.kdnuggets.com/2021/05/essential-linear-algebra-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/05/essential-linear-algebra-data-science-machine-learning.html`](https://www.kdnuggets.com/2021/05/essential-linear-algebra-data-science-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/b8c614d6b4ed0ff4641960dcd8149bfd.png)
+![](img/b8c614d6b4ed0ff4641960dcd8149bfd.png)
 
 *图片来源：Benjamin O. Tayo.*
 
@@ -53,7 +53,7 @@ data.head()
 
 ```
 
-![](../Images/3f8596b4af9ce4d5551b74bde933e2a0.png)
+![](img/3f8596b4af9ce4d5551b74bde933e2a0.png)
 
 * **表 1**. 2021 年 4 月前 16 天的选定股票价格表.*
 
@@ -79,7 +79,7 @@ plt.show()
 
 ```
 
-![](../Images/90e285abeb88fd588a8cf16e1d47e81b.png)
+![](img/90e285abeb88fd588a8cf16e1d47e81b.png)
 
 ***图** **1**. 2021 年 4 月前 16 天的特斯拉股票价格.*
 
@@ -87,7 +87,7 @@ plt.show()
 
 ***协方差矩阵*** 是数据科学和机器学习中最重要的矩阵之一。它提供了特征之间共同运动（相关性）的信息。假设我们有一个特征矩阵，其中包含 *4* 个特征和 *n* 个观测值，如 **表 2** 所示：
 
-![](../Images/a4aa34b2531b17268d1cb8c0401300f7.png)
+![](img/a4aa34b2531b17268d1cb8c0401300f7.png)
 
 ***表 2**. 具有 4 个变量和 n 个观测值的特征矩阵.*
 
@@ -101,25 +101,25 @@ sns.pairplot(data[cols], height=3.0)
 
 ```
 
-![](../Images/464fc9beacbdf3dbcaba2e5f4d869f6e.png)
+![](img/464fc9beacbdf3dbcaba2e5f4d869f6e.png)
 
 ***图 2**. 选定科技股票的散点对比图.*
 
 为了量化特征之间的相关程度（多重共线性），我们可以使用以下公式计算协方差矩阵：
 
-![](../Images/578f937c46c21a5f644a76465f132eed.png)
+![](img/578f937c46c21a5f644a76465f132eed.png)
 
 其中和分别是特征的均值和标准差。这个方程表明，当特征标准化时，协方差矩阵仅仅是特征之间的***点积***。
 
-在线性形式下，协方差矩阵可以表示为一个4 x 4的实对称矩阵：
+在线性形式下，协方差矩阵可以表示为一个 4 x 4 的实对称矩阵：
 
-![](../Images/d6ceeaef5f815f6bc570010b312b9afd.png)
+![](img/d6ceeaef5f815f6bc570010b312b9afd.png)
 
-这个矩阵可以通过执行***单位ary变换***，也称为主成分分析（PCA）变换，来对角化，得到以下结果：
+这个矩阵可以通过执行***单位 ary 变换***，也称为主成分分析（PCA）变换，来对角化，得到以下结果：
 
-![](../Images/23459b77a76392254d9bc68316d712e7.png)
+![](img/23459b77a76392254d9bc68316d712e7.png)
 
-由于***矩阵的迹值***在单位ary变换下保持不变，我们观察到对角矩阵的特征值之和等于特征X[1]、X[2]、X[3]和X[4]中包含的总方差。
+由于***矩阵的迹值***在单位 ary 变换下保持不变，我们观察到对角矩阵的特征值之和等于特征 X[1]、X[2]、X[3]和 X[4]中包含的总方差。
 
 **2.1 计算技术股票的协方差矩阵**
 
@@ -152,11 +152,11 @@ plt.show()
 
 ```
 
-![](../Images/9edc8225e01955301f05cdb7716b6073.png)
+![](img/9edc8225e01955301f05cdb7716b6073.png)
 
-***图3**。选定技术股票的协方差矩阵图。*
+***图 3**。选定技术股票的协方差矩阵图。*
 
-从图3中我们观察到，AAPL与GOOGL和AMZN有较强的相关性，而与TSLA的相关性较弱。TSLA一般与AAPL、GOOGL和AMZN的相关性较弱，而AAPL、GOOGL和AMZN之间的相关性较强。
+从图 3 中我们观察到，AAPL 与 GOOGL 和 AMZN 有较强的相关性，而与 TSLA 的相关性较弱。TSLA 一般与 AAPL、GOOGL 和 AMZN 的相关性较弱，而 AAPL、GOOGL 和 AMZN 之间的相关性较强。
 
 **2.3 计算协方差矩阵的特征值**
 
@@ -174,11 +174,11 @@ output = 4.000000000000001
 
 **2.4 计算累积方差**
 
-由于矩阵的迹值在单位ary变换下保持不变，我们观察到对角矩阵的特征值之和等于特征X[1]、X[2]、X[3]和X[4]中包含的总方差。因此，我们可以定义以下量：
+由于矩阵的迹值在单位 ary 变换下保持不变，我们观察到对角矩阵的特征值之和等于特征 X[1]、X[2]、X[3]和 X[4]中包含的总方差。因此，我们可以定义以下量：
 
-**![](../Images/570a08d35b51f049cb7756615db848e7.png)**
+**![](img/570a08d35b51f049cb7756615db848e7.png)**
 
-注意，当*p*=4时，累积方差如预期变为1。
+注意，当*p*=4 时，累积方差如预期变为 1。
 
 ```py
 eigen = np.linalg.eigvals(cov_mat)
@@ -191,47 +191,47 @@ output = 1.0
 
 ```
 
-我们从累积方差（***cum_var***）中观察到，85%的方差包含在第一个特征值中，11%包含在第二个特征值中。这意味着当PCA实施时，只能使用前两个主成分，因为这两个主成分贡献了97%的总方差。这实际上可以将特征空间的维度从4减少到2。
+我们从累积方差（***cum_var***）中观察到，85%的方差包含在第一个特征值中，11%包含在第二个特征值中。这意味着当 PCA 实施时，只能使用前两个主成分，因为这两个主成分贡献了 97%的总方差。这实际上可以将特征空间的维度从 4 减少到 2。
 
 ### 3. 线性回归矩阵
 
-假设我们有一个数据集，包含4个预测特征和*n*个观测值，如下所示。
+假设我们有一个数据集，包含 4 个预测特征和*n*个观测值，如下所示。
 
-![](../Images/d4c31adfc233ea53bc3f14a4d758bd4c.png)
+![](img/d4c31adfc233ea53bc3f14a4d758bd4c.png)
 
-***表3**。包含4个变量和n个观测值的特征矩阵。第5列是目标变量（y）。*
+***表 3**。包含 4 个变量和 n 个观测值的特征矩阵。第 5 列是目标变量（y）。*
 
-我们希望建立一个多重回归模型来预测*y*值（第5列）。因此，我们的模型可以表示为以下形式
+我们希望建立一个多重回归模型来预测*y*值（第 5 列）。因此，我们的模型可以表示为以下形式
 
-![](../Images/980b0eef242c79df297da7769f205d77.png)
+![](img/980b0eef242c79df297da7769f205d77.png)
 
 在线性形式下，这个方程可以写作
 
-![](../Images/418c2a47995456c4c75ca9f523838474.png)
+![](img/418c2a47995456c4c75ca9f523838474.png)
 
-其中**X**是(n x 4)特征矩阵，**w**是(4 x 1)矩阵，表示待确定的回归系数，而**y**是(n x 1)矩阵，包含目标变量y的n个观测值。
+其中**X**是(n x 4)特征矩阵，**w**是(4 x 1)矩阵，表示待确定的回归系数，而**y**是(n x 1)矩阵，包含目标变量 y 的 n 个观测值。
 
 注意**X**是一个矩形矩阵，因此我们不能通过取**X**的逆来解上述方程。
 
 为了将**X**转换为方阵，我们将方程的左侧和右侧都乘以**X**的***转置***，即
 
-![](../Images/771cf589405282fb9fb9555ce2c32559.png)
+![](img/771cf589405282fb9fb9555ce2c32559.png)
 
 这个方程也可以表达为
 
-![](../Images/688e45bebf95be9023c1f7498567013c.png)
+![](img/688e45bebf95be9023c1f7498567013c.png)
 
 其中
 
-![](../Images/7f084abfc4ac0ac2d3bf3d7b5f993eba.png)
+![](img/7f084abfc4ac0ac2d3bf3d7b5f993eba.png)
 
 是(4×4)回归矩阵。显然，我们观察到**R**是一个实对称矩阵。注意，在线性代数中，两个矩阵的乘积的转置遵循以下关系
 
-![](../Images/66b2af9229c447994a4bcf012c0d2ea5.png)
+![](img/66b2af9229c447994a4bcf012c0d2ea5.png)
 
 现在我们已经将回归问题简化，并将其表示为(4×4)实对称且可逆的回归矩阵**R**，很容易展示回归方程的精确解为
 
-![](../Images/aaf18c0cbb6dd290099f5bb849faecc5.png)
+![](img/aaf18c0cbb6dd290099f5bb849faecc5.png)
 
 预测连续和离散变量的回归分析示例如下：
 
@@ -243,17 +243,17 @@ output = 1.0
 
 数据科学中的另一个实对称矩阵示例是线性判别分析（LDA）矩阵。这个矩阵可以表示为：
 
-![](../Images/a8c40240eba3d7f0904f655ced9cd506.png)
+![](img/a8c40240eba3d7f0904f655ced9cd506.png)
 
-其中**S[W]**是特征内部散布矩阵，**S[B]**是特征间散布矩阵。由于矩阵**S[W]**和**S[B]**都是实对称的，因此**L**也是实对称的。对**L**的对角化产生了一个优化类别可分离性并减少维度的特征子空间。因此，LDA是一个监督算法，而PCA不是。
+其中**S[W]**是特征内部散布矩阵，**S[B]**是特征间散布矩阵。由于矩阵**S[W]**和**S[B]**都是实对称的，因此**L**也是实对称的。对**L**的对角化产生了一个优化类别可分离性并减少维度的特征子空间。因此，LDA 是一个监督算法，而 PCA 不是。
 
-关于LDA的实施的更多细节，请参见以下参考文献：
+关于 LDA 的实施的更多细节，请参见以下参考文献：
 
 [机器学习：通过线性判别分析进行降维](https://medium.com/towards-artificial-intelligence/machine-learning-dimensionality-reduction-via-linear-discriminant-analysis-cc96b49d2757)
 
-[使用鸢尾花数据集实现LDA的GitHub存储库](https://github.com/bot13956/linear-discriminant-analysis-iris-dataset)
+[使用鸢尾花数据集实现 LDA 的 GitHub 存储库](https://github.com/bot13956/linear-discriminant-analysis-iris-dataset)
 
-[Sebastian Raschka的《Python机器学习》第三版（第5章）](https://github.com/rasbt/python-machine-learning-book-3rd-edition)
+[Sebastian Raschka 的《Python 机器学习》第三版（第五章）](https://github.com/rasbt/python-machine-learning-book-3rd-edition)
 
 ### 摘要
 
@@ -271,11 +271,11 @@ output = 1.0
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -283,12 +283,12 @@ output = 1.0
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [学习机器学习线性代数的3个免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
++   [学习机器学习线性代数的 3 个免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)

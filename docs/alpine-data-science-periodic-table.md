@@ -1,8 +1,8 @@
 # Alpine 数据科学周期表
 
-> 原文：[https://www.kdnuggets.com/2014/02/alpine-data-science-periodic-table.html](https://www.kdnuggets.com/2014/02/alpine-data-science-periodic-table.html)
+> 原文：[`www.kdnuggets.com/2014/02/alpine-data-science-periodic-table.html`](https://www.kdnuggets.com/2014/02/alpine-data-science-periodic-table.html)
 
-在最近的 Strata 会议上（2014年2月11日至13日在圣克拉拉），有许多创意赠品公司用来吸引潜在客户到他们的展位。
+在最近的 Strata 会议上（2014 年 2 月 11 日至 13 日在圣克拉拉），有许多创意赠品公司用来吸引潜在客户到他们的展位。
 
 最巧妙的之一是 [Alpine 的数据科学周期表](http://alpinenow.com/blog/the-most-useful-strataconf-giveaway/)
 
@@ -22,7 +22,7 @@
 
 **工具**：Cm - 混淆矩阵，Gf - 拟合优度 ...
 
-![Alpine 数据科学周期表](../Images/b8a9fafe103224ec5739ffc8e70a10bf.png) 一个互动版本可以在 [http://start.alpinenow.com/#/periodic-table](http://start.alpinenow.com/#/periodic-table) 找到，它旨在与 Alpine Chorus 一起使用，你可以在 [这里](http://start.alpinenow.com/#/sign-up) 免费获取。
+![Alpine 数据科学周期表](img/b8a9fafe103224ec5739ffc8e70a10bf.png) 一个互动版本可以在 [`start.alpinenow.com/#/periodic-table`](http://start.alpinenow.com/#/periodic-table) 找到，它旨在与 Alpine Chorus 一起使用，你可以在 [这里](http://start.alpinenow.com/#/sign-up) 免费获取。
 
 ### 更多相关话题
 
@@ -32,7 +32,7 @@
 
 +   [数据科学基础：你需要了解的 10 个关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日：数据科学编程](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：奇特的名言合集](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 

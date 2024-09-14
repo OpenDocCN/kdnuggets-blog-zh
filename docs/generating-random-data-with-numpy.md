@@ -1,8 +1,8 @@
 # 生成随机数据与 NumPy
 
-> 原文：[https://www.kdnuggets.com/generating-random-data-with-numpy](https://www.kdnuggets.com/generating-random-data-with-numpy)
+> 原文：[`www.kdnuggets.com/generating-random-data-with-numpy`](https://www.kdnuggets.com/generating-random-data-with-numpy)
 
-![使用 NumPy 生成随机数据](../Images/b2812e23ca1b57b27f25f46ef1875f2d.png)
+![使用 NumPy 生成随机数据](img/b2812e23ca1b57b27f25f46ef1875f2d.png)
 
 图片由编辑提供 | Ideogram
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -183,7 +183,7 @@ NumPy 是一个强大的 Python 包，用于数学和统计计算。它生成的
 
 +   [什么是矩生成函数？](https://www.kdnuggets.com/2022/12/momentgenerating-functions.html)
 
-+   [如何使用GPT通过Hugging Face生成创意内容…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)
++   [如何使用 GPT 通过 Hugging Face 生成创意内容…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)
 
 +   [随机森林与决策树：主要区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
 

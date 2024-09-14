@@ -1,8 +1,8 @@
 # 学习线性代数的前三个免费资源用于机器学习
 
-> 原文：[https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html`](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
 
-![学习线性代数的前三个免费资源用于机器学习](../Images/20dbbdd08512a0b1dfbffd180750b400.png)
+![学习线性代数的前三个免费资源用于机器学习](img/20dbbdd08512a0b1dfbffd180750b400.png)
 
 [教授教师照片由 freepik 创建 - www.freepik.com](https://www.freepik.com/photos/professor-teachers)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,11 +26,11 @@
 
 本文将专注于线性代数，因为它是机器学习模型实现的基础。
 
-线性代数概念，如向量化，能够加快计算速度，并在Pandas、Scipy和Scikit-Learn等库中实现。
+线性代数概念，如向量化，能够加快计算速度，并在 Pandas、Scipy 和 Scikit-Learn 等库中实现。
 
-PCA等算法使用矩阵分解技术来减少特征空间的维度。
+PCA 等算法使用矩阵分解技术来减少特征空间的维度。
 
-使用像Tensorflow这样的库实现深度学习算法需要对线性代数有基本的了解，因为你需要进行矩阵操作并理解张量的工作原理。
+使用像 Tensorflow 这样的库实现深度学习算法需要对线性代数有基本的了解，因为你需要进行矩阵操作并理解张量的工作原理。
 
 # 线性代数 — 学习资源
 
@@ -60,7 +60,7 @@ PCA等算法使用矩阵分解技术来减少特征空间的维度。
 
 这是线性代数的简单介绍，概念通过互动可视化向读者解释。为了让这个主题更易于理解，本书将话题做了更广泛和抽象的处理，每一章都有示例。
 
-## 2\. [面向编码者的计算线性代数 — FastAI课程](https://github.com/fastai/numerical-linear-algebra/blob/master/README.md)
+## 2\. [面向编码者的计算线性代数 — FastAI 课程](https://github.com/fastai/numerical-linear-algebra/blob/master/README.md)
 
 与传统的线性代数课程手动求解线性方程不同，FastAI 的学习轨迹将演示如何使用计算机实现这些技术。
 
@@ -92,7 +92,7 @@ PCA等算法使用矩阵分解技术来减少特征空间的维度。
 
 +   [数据科学的线性代数](https://www.kdnuggets.com/2022/07/linear-algebra-data-science.html)
 
-+   [KDnuggets 新闻，7月13日：数据科学的线性代数；10个现代…](https://www.kdnuggets.com/2022/n28.html)
++   [KDnuggets 新闻，7 月 13 日：数据科学的线性代数；10 个现代…](https://www.kdnuggets.com/2022/n28.html)
 
 +   [学习 ChatGPT 的顶级免费资源](https://www.kdnuggets.com/2023/02/top-free-resources-learn-chatgpt.html)
 

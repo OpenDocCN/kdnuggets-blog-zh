@@ -1,48 +1,48 @@
-# 使用Dask和PyTorch进行大规模计算机视觉
+# 使用 Dask 和 PyTorch 进行大规模计算机视觉
 
-> 原文：[https://www.kdnuggets.com/2020/11/computer-vision-scale-dask-pytorch.html](https://www.kdnuggets.com/2020/11/computer-vision-scale-dask-pytorch.html)
+> 原文：[`www.kdnuggets.com/2020/11/computer-vision-scale-dask-pytorch.html`](https://www.kdnuggets.com/2020/11/computer-vision-scale-dask-pytorch.html)
 
-[评论](#comments)
+评论
 
-**由 [Stephanie Kirmer](https://www.linkedin.com/in/skirmer/)，Saturn Cloud的高级数据科学家提供**
+**由 [Stephanie Kirmer](https://www.linkedin.com/in/skirmer/)，Saturn Cloud 的高级数据科学家提供**
 
-将深度学习策略应用于计算机视觉问题为数据科学家打开了无限可能。然而，要在大规模上使用这些技术创造商业价值，需要大量的计算资源——而这正是Saturn Cloud旨在解决的挑战！
+将深度学习策略应用于计算机视觉问题为数据科学家打开了无限可能。然而，要在大规模上使用这些技术创造商业价值，需要大量的计算资源——而这正是 Saturn Cloud 旨在解决的挑战！
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
-在本教程中，你将看到使用流行的Resnet50深度学习模型在Saturn Cloud上的NVIDIA GPU集群进行图像分类推断的步骤。利用Saturn Cloud提供的资源，我们可以将任务运行速度提高40倍，相比非并行化方法更快！
+在本教程中，你将看到使用流行的 Resnet50 深度学习模型在 Saturn Cloud 上的 NVIDIA GPU 集群进行图像分类推断的步骤。利用 Saturn Cloud 提供的资源，我们可以将任务运行速度提高 40 倍，相比非并行化方法更快！
 
-![图示](../Images/bbb23403f8c85487a730973cc0647e36.png)
+![图示](img/bbb23403f8c85487a730973cc0647e36.png)
 
 今天我们将对狗的图像进行分类！
 
 ### 你将在这里学到的内容：
 
-+   如何在Saturn Cloud上设置和管理GPU集群以进行深度学习推断任务
++   如何在 Saturn Cloud 上设置和管理 GPU 集群以进行深度学习推断任务
 
-+   如何在GPU集群上使用Pytorch运行推断任务
++   如何在 GPU 集群上使用 Pytorch 运行推断任务
 
-+   如何使用批处理加速在GPU集群上进行Pytorch推断任务
++   如何使用批处理加速在 GPU 集群上进行 Pytorch 推断任务
 
 ### 设置
 
-首先，我们需要确保我们的图像数据集可用，并且我们的GPU集群正在运行。
+首先，我们需要确保我们的图像数据集可用，并且我们的 GPU 集群正在运行。
 
-在我们的案例中，我们将数据存储在S3上，并使用[`s3fs`](https://s3fs.readthedocs.io/en/latest/)库进行处理，如下所示。
+在我们的案例中，我们将数据存储在 S3 上，并使用[`s3fs`](https://s3fs.readthedocs.io/en/latest/)库进行处理，如下所示。
 
-如果你想使用相同的数据集，它是斯坦福狗数据集，可以在这里获取：[http://vision.stanford.edu/aditya86/ImageNetDogs/](http://vision.stanford.edu/aditya86/ImageNetDogs/)
+如果你想使用相同的数据集，它是斯坦福狗数据集，可以在这里获取：[`vision.stanford.edu/aditya86/ImageNetDogs/`](http://vision.stanford.edu/aditya86/ImageNetDogs/)
 
-要设置我们的Saturn GPU集群，过程非常简单。
+要设置我们的 Saturn GPU 集群，过程非常简单。
 
 ```py
 import dask_saturn
@@ -57,7 +57,7 @@ client
 [2020-10-15 18:52:56] INFO – dask-saturn | Cluster is ready
 ```
 
-我们没有明确说明，但我们在集群节点上使用32个线程，总共128个线程。
+我们没有明确说明，但我们在集群节点上使用 32 个线程，总共 128 个线程。
 
 **提示：个别用户可能需要调整线程数量，如果文件非常大，可以减少线程数量——同时运行大量任务的线程可能会需要比你的工作节点一次性可用的内存更多。**
 
@@ -386,7 +386,7 @@ with s3.open('s3://dask-datasets/dogs/preds/n02086240_1082.pkl', 'rb') as data:
 
 因此，我们已经在大约 5 分钟内对超过 20,000 张图像进行了分类。这听起来不错，但还有什么替代方案呢？
 
-![计算机视觉的规模化：使用 Dask 和 PyTorch](../Images/120e727c28f37e3e011ffef3a5fc3b8d.png)
+![计算机视觉的规模化：使用 Dask 和 PyTorch](img/120e727c28f37e3e011ffef3a5fc3b8d.png)
 
 | 技术 | 运行时间 |
 | --- | --- |
@@ -401,11 +401,11 @@ with s3.open('s3://dask-datasets/dogs/preds/n02086240_1082.pkl', 'rb') as data:
 
 **相关链接：**
 
-+   [云计算中的数据科学与 Dask](/2020/10/data-science-cloud-dask.html)
++   云计算中的数据科学与 Dask
 
-+   [深度学习、自然语言处理和计算机视觉的顶级 Python 库](/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)
++   深度学习、自然语言处理和计算机视觉的顶级 Python 库
 
-+   [如何获得最受欢迎的数据科学技能](/2020/11/acquire-most-wanted-data-science-skills.html)
++   如何获得最受欢迎的数据科学技能
 
 ### 更多相关内容
 

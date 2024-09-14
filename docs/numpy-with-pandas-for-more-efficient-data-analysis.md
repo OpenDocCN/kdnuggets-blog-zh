@@ -1,8 +1,8 @@
 # NumPy 与 Pandas 结合以更高效的数据分析
 
-> 原文：[https://www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis](https://www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis)
+> 原文：[`www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis`](https://www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis)
 
-![NumPy 与 Pandas 结合以更高效的数据分析](../Images/966f0eb71db7a03f3a0f947532966a6a.png)[图像由 jcomp 提供，来源 Freepik](https://www.freepik.com/free-vector/big-isolated-employee-working-office-workplace-flat-illustration_13744784.htm#fromView=search&page=1&position=26&uuid=c476a51c-f7d1-4d92-91d6-9107c4785ea2)
+![NumPy 与 Pandas 结合以更高效的数据分析](img/966f0eb71db7a03f3a0f947532966a6a.png)[图像由 jcomp 提供，来源 Freepik](https://www.freepik.com/free-vector/big-isolated-employee-working-office-workplace-flat-illustration_13744784.htm#fromView=search&page=1&position=26&uuid=c476a51c-f7d1-4d92-91d6-9107c4785ea2)
 
 作为一个数据从业者，Pandas 是任何数据操作活动的首选包，因为它直观且易于使用。这就是为什么许多数据科学教育课程在学习课程中包括 Pandas 的原因。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -129,9 +129,9 @@ Output>>
 25    0.239933 -100.000000
 ```
 
-在上面的代码中，我们使用NumPy生成随机数，然后创建一个使用Z-score和sigma规则检测离群值的函数。结果是包含离群值的DataFrame。
+在上面的代码中，我们使用 NumPy 生成随机数，然后创建一个使用 Z-score 和 sigma 规则检测离群值的函数。结果是包含离群值的 DataFrame。
 
-我们可以使用Pandas进行统计分析。NumPy可以帮助在聚合过程中实现更高效的分析。例如，这是使用Pandas和NumPy进行的统计聚合。
+我们可以使用 Pandas 进行统计分析。NumPy 可以帮助在聚合过程中实现更高效的分析。例如，这是使用 Pandas 和 NumPy 进行的统计聚合。
 
 ```py
 df = pd.DataFrame({
@@ -150,11 +150,11 @@ A         0.524568  0.288471  0.025635  0.999284
 B         0.525937  0.300526  0.019443  0.999090
 ```
 
-使用NumPy，我们可以将统计分析函数应用于Pandas DataFrame，并获得类似上述输出的汇总统计信息。
+使用 NumPy，我们可以将统计分析函数应用于 Pandas DataFrame，并获得类似上述输出的汇总统计信息。
 
-最后，我们将讨论使用Pandas和NumPy的矢量化操作。矢量化操作是一种同时对数据执行操作的方法，而不是逐个循环执行。结果将更快且内存优化。
+最后，我们将讨论使用 Pandas 和 NumPy 的矢量化操作。矢量化操作是一种同时对数据执行操作的方法，而不是逐个循环执行。结果将更快且内存优化。
 
-例如，我们可以使用NumPy在DataFrame列之间执行逐元素加法操作。
+例如，我们可以使用 NumPy 在 DataFrame 列之间执行逐元素加法操作。
 
 ```py
 data = {'A': [15,20,25,30,35], 'B': [10, 20, 30, 40, 50]}
@@ -175,7 +175,7 @@ Output>>
 4  35  50  85
 ```
 
-我们还可以通过NumPy数学函数转换DataFrame列。
+我们还可以通过 NumPy 数学函数转换 DataFrame 列。
 
 ```py
 df['B_exp'] = np.exp(df['B'])
@@ -192,7 +192,7 @@ Output>>
 4  35  50  85  5.184706e+21
 ```
 
-还可以使用NumPy对Pandas DataFrame进行条件替换。
+还可以使用 NumPy 对 Pandas DataFrame 进行条件替换。
 
 ```py
 df['A_replaced'] = np.where(df['A'] > 20, df['B'] * 2, df['B'] / 2)
@@ -209,26 +209,26 @@ Output>>
 4  35  50  85  5.184706e+21       100.0
 ```
 
-这些是我们探索的所有示例。这些NumPy函数无疑会帮助改善你的数据分析过程。
+这些是我们探索的所有示例。这些 NumPy 函数无疑会帮助改善你的数据分析过程。
 
 ## 结论
 
-本文讨论了NumPy如何通过Pandas帮助提高高效的数据分析。我们尝试了数据预处理、数据清理、统计分析和使用Pandas和NumPy的矢量化操作。
+本文讨论了 NumPy 如何通过 Pandas 帮助提高高效的数据分析。我们尝试了数据预处理、数据清理、统计分析和使用 Pandas 和 NumPy 的矢量化操作。
 
 希望这对你有所帮助！
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一位数据科学助理经理和数据撰写者。在全职工作于印尼安联时，他喜欢通过社交媒体和写作分享Python和数据技巧。Cornellius撰写了各种AI和机器学习主题。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一位数据科学助理经理和数据撰写者。在全职工作于印尼安联时，他喜欢通过社交媒体和写作分享 Python 和数据技巧。Cornellius 撰写了各种 AI 和机器学习主题。
 
 ### 更多相关内容
 
 +   [如何在大型数据集上执行内存高效操作](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)
 
-+   [使用Tableau创建高效的综合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
++   [使用 Tableau 创建高效的综合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
 
-+   [如何使用Hugging Face的Datasets库进行高效数据加载](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)
++   [如何使用 Hugging Face 的 Datasets 库进行高效数据加载](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)
 
-+   [PEFT概述：最先进的参数高效微调](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)
++   [PEFT 概述：最先进的参数高效微调](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)
 
-+   [如何编写高效的Python代码：初学者教程](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)
++   [如何编写高效的 Python 代码：初学者教程](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)
 
-+   [免费MIT课程：TinyML和高效深度学习计算](https://www.kdnuggets.com/free-mit-course-tinyml-and-efficient-deep-learning-computing)
++   [免费 MIT 课程：TinyML 和高效深度学习计算](https://www.kdnuggets.com/free-mit-course-tinyml-and-efficient-deep-learning-computing)

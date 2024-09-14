@@ -1,8 +1,8 @@
 # 如何回答数据科学编码面试问题
 
-> 原文：[https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html`](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-![如何回答数据科学编码面试问题](../Images/b36e2798a8cc9f7c19c0e7e45050a647.png)
+![如何回答数据科学编码面试问题](img/b36e2798a8cc9f7c19c0e7e45050a647.png)
 
 对于如何回答数据科学编码面试问题，没有固定的公式。没有一种方法可以总是有效。然而，有一些指导原则在大多数情况下会帮助你更好地回答编码问题。
 
@@ -40,7 +40,7 @@
 
 **i. 理解问题**
 
-为了确保你理解了问题，你需要非常仔细地阅读问题。慢慢阅读。阅读2-3遍，确保没有遗漏任何内容。这适用于所有[data science interview questions](https://www.stratascratch.com/blog/data-science-interview-guide-questions-from-80-different-companies/)，无论问题有多简单或多难。重点是，你不会知道你得到的问题是难还是易。有些问题看似简单，但它们实际上有一些陷阱，正是为了排除那些不够彻底、倾向于肤浅的候选人。
+为了确保你理解了问题，你需要非常仔细地阅读问题。慢慢阅读。阅读 2-3 遍，确保没有遗漏任何内容。这适用于所有[data science interview questions](https://www.stratascratch.com/blog/data-science-interview-guide-questions-from-80-different-companies/)，无论问题有多简单或多难。重点是，你不会知道你得到的问题是难还是易。有些问题看似简单，但它们实际上有一些陷阱，正是为了排除那些不够彻底、倾向于肤浅的候选人。
 
 如果问题没有写清楚，也可以请面试官重复一遍，如果你没有听清楚的话。在这种情况下，一旦你理解了问题，也建议你将问题复述一遍给面试官。这样，你可以确保你理解正确，并允许面试官纠正自己，以防他们没有给你提供所有必要的信息。
 
@@ -62,11 +62,11 @@
 
 为了向你展示如何应用清单的第一部分，我们将使用 Dropbox 编程问题。问题如下：
 
-![如何回答数据科学编程面试问题](../Images/de8cba848dd5b032e6e1b12d826e5136.png)
+![如何回答数据科学编程面试问题](img/de8cba848dd5b032e6e1b12d826e5136.png)
 
 *“编写一个查询，计算市场营销和工程部门中最高工资之间的差异。仅输出工资差异。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10308-salaries-differences](https://platform.stratascratch.com/coding/10308-salaries-differences?python=)
+问题链接：[`platform.stratascratch.com/coding/10308-salaries-differences`](https://platform.stratascratch.com/coding/10308-salaries-differences?python=)
 
 如果你仔细阅读问题，你会发现你需要找到最高的工资。好的，但不是每个部门的最高工资，而只是两个部门的：市场营销和工程。找到这两个部门的最高工资后，你需要计算它们之间的差异。
 
@@ -79,7 +79,7 @@
 | salary | int |
 | department_id | int |
 
-你看，名字列是varchar数据类型，而薪水是整数。了解薪水值中没有小数可能很重要。如果你使用这里提供的预览选项，你会发现这些数据是唯一的：每个员工只有一个分配的薪水值。还有一个重要的点是：这可能也是历史数据，其中包含每个员工多年来的所有以前薪水。还有一个名为department_id的列，它是一个外键，将此表与db_dept表连接起来：
+你看，名字列是 varchar 数据类型，而薪水是整数。了解薪水值中没有小数可能很重要。如果你使用这里提供的预览选项，你会发现这些数据是唯一的：每个员工只有一个分配的薪水值。还有一个重要的点是：这可能也是历史数据，其中包含每个员工多年来的所有以前薪水。还有一个名为 department_id 的列，它是一个外键，将此表与 db_dept 表连接起来：
 
 | id | int |
 | --- | --- |
@@ -89,7 +89,7 @@
 
 很好，你已经分析了数据。现在，回到问题上来，阅读第二句话。是的，这是关于你的解决方案需要是什么的指示。你不需要在一列中显示一个部门的最高薪水，在另一列中显示另一个部门的最高薪水，然后在第三列中显示它们之间的差异。不，输出将只是差异：
 
-![如何回答数据科学编程面试问题](../Images/930f96cd839fa64ee74f66d0becfe8e8.png)
+![如何回答数据科学编程面试问题](img/930f96cd839fa64ee74f66d0becfe8e8.png)
 
 没有关于这个输出列应该命名为什么的指示。因此，不管你如何命名它或是否根本不命名它，都不会是错误的。重要的是你得到这个结果，仅此而已。
 
@@ -101,7 +101,7 @@
 
 当你考虑如何解决问题（或编写代码）时，请考虑以下几点：
 
-![如何回答数据科学编程面试问题](../Images/34092b6dcbefcc6c0b5ea1d8318712c1.png)
+![如何回答数据科学编程面试问题](img/34092b6dcbefcc6c0b5ea1d8318712c1.png)
 
 1.  是否有几种方式来编写代码？
 
@@ -115,7 +115,7 @@
 
 在考虑解决方案时，首先想到的有时是最佳方案，但有时不是。你怎么知道呢？一旦得到第一个想法，诀窍是考虑是否还有其他方法来解决问题。在[编程语言](https://www.stratascratch.com/blog/top-5-data-science-programming-languages/)中，往往有几种可能的解决方案。
 
-请记住这一点。有几个原因说明这点很重要。首先，可能存在一些简单的技巧或函数，可以轻松解决你认为需要用冗长代码解决的内容——例如，使用[窗口函数](https://www.stratascratch.com/blog/the-ultimate-guide-to-sql-window-functions/)或CTE，而不是编写包含无尽子查询的代码。
+请记住这一点。有几个原因说明这点很重要。首先，可能存在一些简单的技巧或函数，可以轻松解决你认为需要用冗长代码解决的内容——例如，使用[窗口函数](https://www.stratascratch.com/blog/the-ultimate-guide-to-sql-window-functions/)或 CTE，而不是编写包含无尽子查询的代码。
 
 总是选择更容易编写的解决方案，尽可能少的代码行。当你在面试时，你还需要管理你可用的时间。这是其中的一种方法。
 
@@ -139,7 +139,7 @@
 
 这也是一个有用的点，它将使你更容易形成清晰的解决方案思路，并且在之后编写干净的代码。
 
-在这种情况下，分解意味着写下来。是的，写下你解决方案中的所有关键步骤和功能。考虑一下你是否需要连接表，多少个表，以及你将使用哪种连接。你需要编写子查询还是CTE？写下你的选择。考虑一下你需要使用哪些聚合函数，是否需要转换数据类型，数据是否需要按特定方式排序，是否需要过滤和分组，等等。
+在这种情况下，分解意味着写下来。是的，写下你解决方案中的所有关键步骤和功能。考虑一下你是否需要连接表，多少个表，以及你将使用哪种连接。你需要编写子查询还是 CTE？写下你的选择。考虑一下你需要使用哪些聚合函数，是否需要转换数据类型，数据是否需要按特定方式排序，是否需要过滤和分组，等等。
 
 所有这些都是不同的步骤，所以把它们写下来，以及你将在每一步中使用的主要关键词。
 
@@ -155,11 +155,11 @@
 
 既然你知道了如何思考解决方案的方法，让我们用一个面试问题来演示它在实践中的应用。我们将使用亚马逊编程面试问题：
 
-![如何回答数据科学编程面试问题](../Images/8cebe258304256e02eec6acffd57c21e.png)
+![如何回答数据科学编程面试问题](img/8cebe258304256e02eec6acffd57c21e.png)
 
 *“找到每位客户订单的总成本。输出客户的 ID、名字和总订单成本。按客户名字的字母顺序排列订单记录。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10183-total-cost-of-orders](https://platform.stratascratch.com/coding/10183-total-cost-of-orders?python=)
+问题链接：[`platform.stratascratch.com/coding/10183-total-cost-of-orders`](https://platform.stratascratch.com/coding/10183-total-cost-of-orders?python=)
 
 我们需要使用来自两个表的数据，即表 customers 和表 orders。我们可以通过子查询编写代码来解决这个问题。然而，你可能知道，如果查询和子查询使用来自多个表的数据，那么也可以使用 JOIN 来编写解决方案。考虑到尽可能少写代码的建议，使用 JOIN 更为合适。
 
@@ -185,7 +185,7 @@
 
 在评估问题并制定代码策略后，是时候开始编写代码了。
 
-![如何回答数据科学编码面试问题](../Images/12dfd09887b60da859c773cd0161e131.png)
+![如何回答数据科学编码面试问题](img/12dfd09887b60da859c773cd0161e131.png)
 
 1.  坚持选择的方言
 
@@ -245,13 +245,13 @@
 
 这是 Facebook 提出的编码问题：
 
-![如何回答数据科学编码面试问题](../Images/0193d4b8b1d3a1c4c406ef9dadaf93f0.png)
+![如何回答数据科学编码面试问题](img/0193d4b8b1d3a1c4c406ef9dadaf93f0.png)
 
 “Facebook 在用户尝试通过 2FA（双因素认证）登录平台时，会发送 SMS 短信。为了成功完成 2FA，他们必须确认收到 SMS 短信消息。确认短信仅在发送日期有效。不幸的是，数据库中存在 ETL 问题，导致好友请求和无效的确认记录被插入到日志中，这些日志存储在 'fb_sms_sends' 表中。这些消息类型不应该出现在表中。幸运的是，'fb_confirmers' 表包含有效的确认记录，因此你可以使用这个表来识别用户确认的 SMS 短信消息。
 
 计算 2020 年 8 月 4 日确认的 SMS 短信的百分比。”
 
-问题链接: [https://platform.stratascratch.com/coding/10291-sms-confirmations-from-users](https://platform.stratascratch.com/coding/10291-sms-confirmations-from_users?python=)
+问题链接: [`platform.stratascratch.com/coding/10291-sms-confirmations-from-users`](https://platform.stratascratch.com/coding/10291-sms-confirmations-from_users?python=)
 
 如果你写出这样的代码，它将覆盖我们在此检查清单部分提到的所有内容：
 
@@ -274,9 +274,9 @@ ORDER BY revenue DESC
 
 类似地，PostgreSQL 中的双冒号 (::) 用于数据类型转换。在 T-SQL 中它不起作用；你需要使用 CAST() 或 CONVERT()。
 
-对这段代码进行解决方案分解会使你逐行编写代码变得容易。实际上这很简单。首先，你需要从表格中选择一些数据，筛选它，分组，最后排序。不要先写WHERE子句，然后去编写SELECT语句，再去进行数据类型转换或其他任何奇怪的编程方式。
+对这段代码进行解决方案分解会使你逐行编写代码变得容易。实际上这很简单。首先，你需要从表格中选择一些数据，筛选它，分组，最后排序。不要先写 WHERE 子句，然后去编写 SELECT 语句，再去进行数据类型转换或其他任何奇怪的编程方式。
 
-在编码时，你可以这样跟面试官沟通：我正在使用SUM()函数从表格orders中计算列cust_id的收入。然后，我使用WHERE子句根据列order_date中的月份和年份筛选数据。之后，我在客户级别上对数据进行分组，并按降序排列结果。
+在编码时，你可以这样跟面试官沟通：我正在使用 SUM()函数从表格 orders 中计算列 cust_id 的收入。然后，我使用 WHERE 子句根据列 order_date 中的月份和年份筛选数据。之后，我在客户级别上对数据进行分组，并按降序排列结果。
 
 你会看到这段代码有缩进，每个关键部分都有新行，并且命名约定一致。如果我们没有遵循这些，你想看看代码会是什么样的吗？请看这里：
 
@@ -351,7 +351,7 @@ GROUP BY cust_id order BY Revenue DESC
 
 你应该考虑问题、手头的数据、可能的解决方案、你的假设以及你需要的函数。只有在这些都考虑清楚后，你才应该开始编写代码。一旦开始编码，你应该能够让面试官了解你的操作，并告知他们你每一步的进展。像在现实生活中一样，你需要检查和优化你的代码，然后再开始在生产环境中使用它。这次面试就是你的生产环境；合理管理你的时间，以便能够复查你的解决方案。
 
-这些是你应该做的事情。我们帖子中还有更多准备技巧：[5个准备数据科学面试的技巧](https://www.stratascratch.com/blog/5-tips-to-prepare-for-a-data-science-interview/)。
+这些是你应该做的事情。我们帖子中还有更多准备技巧：[5 个准备数据科学面试的技巧](https://www.stratascratch.com/blog/5-tips-to-prepare-for-a-data-science-interview/)。
 
 这些都不容易。这需要经验和实践；没有人能假装这一点。但按照这个检查清单，必定会为你的思维和面试表现增添坚实的结构，无论你的经验如何。它只能让你表现得更好。
 
@@ -361,14 +361,14 @@ GROUP BY cust_id order BY Revenue DESC
 
 ### 更多相关话题
 
-+   [你必须知道的前10大高级数据科学SQL面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的前 10 大高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
-+   [KDnuggets新闻，5月4日：9门免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
-+   [数据科学必知的15个Python编程面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [数据科学必知的 15 个 Python 编程面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [3个数据科学领域的困难Python编程面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
++   [3 个数据科学领域的困难 Python 编程面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
 
-+   [谷歌通过将生成式AI加入Docs和Gmail来回应ChatGPT](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
++   [谷歌通过将生成式 AI 加入 Docs 和 Gmail 来回应 ChatGPT](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
 
-+   [12个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
++   [12 个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)

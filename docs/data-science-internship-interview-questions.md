@@ -1,22 +1,22 @@
 # 数据科学实习面试问题
 
-> 原文：[https://www.kdnuggets.com/2020/08/data-science-internship-interview-questions.html](https://www.kdnuggets.com/2020/08/data-science-internship-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2020/08/data-science-internship-interview-questions.html`](https://www.kdnuggets.com/2020/08/data-science-internship-interview-questions.html)
 
-[评论](#comments)
+评论
 
 **由[Jay Feng](https://www.linkedin.com/in/jay-feng-ab66b049/)，数据科学负责人兼[Interview Query](https://www.interviewquery.com/)联合创始人**。
 
-![](../Images/bbd7964705e88991ca11fa4d55d4ed2f.png)
+![](img/bbd7964705e88991ca11fa4d55d4ed2f.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,41 +28,41 @@
 
 数据科学实习面试和全职数据科学家的最大区别在于，你通常不需要了解关于机器学习或深度学习概念的极其具体细节。
 
-然而，你需要具备能够在其基础上进行构建的基本构件——这包括Python、R或SQL、统计学和概率基础以及基本的机器学习概念。
+然而，你需要具备能够在其基础上进行构建的基本构件——这包括 Python、R 或 SQL、统计学和概率基础以及基本的机器学习概念。
 
 以下是使你成为有吸引力候选人的基本知识和技能列表：
 
-**Python或R**
+**Python 或 R**
 
-![](../Images/580f5c1a1f304bcf78ded61a9209e0e2.png)
+![](img/580f5c1a1f304bcf78ded61a9209e0e2.png)
 
-*Python数据科学库来自[TechVidan](https://techvidvan.com/tutorials/python-for-data-science/).*
+*Python 数据科学库来自[TechVidan](https://techvidvan.com/tutorials/python-for-data-science/).*
 
-你应该有脚本语言的编程经验，理想情况下是Python或R。如果你是Python程序员，你还应该对流行的库如**Scikit-learn**和**Pandas**有基本了解。
+你应该有脚本语言的编程经验，理想情况下是 Python 或 R。如果你是 Python 程序员，你还应该对流行的库如**Scikit-learn**和**Pandas**有基本了解。
 
-**你应该知道的：** 你应该知道如何编写基本函数，并对各种数据结构及其用途有基本理解。你还应该了解Scikit-learn的一些基本（但重要）功能，如test_train_split和StandardScaler。对于Pandas，你应该能够像使用SQL编写查询一样，熟练操作DataFrames。
+**你应该知道的：** 你应该知道如何编写基本函数，并对各种数据结构及其用途有基本理解。你还应该了解 Scikit-learn 的一些基本（但重要）功能，如 test_train_split 和 StandardScaler。对于 Pandas，你应该能够像使用 SQL 编写查询一样，熟练操作 DataFrames。
 
-例如，你可能需要构建一个简单的机器学习模型来预测产品的销售数量。在这种情况下，如果你是Python用户，了解Scikit-Learn库将非常有用，因为它提供了许多现成的函数，比如上面提到的那些。
+例如，你可能需要构建一个简单的机器学习模型来预测产品的销售数量。在这种情况下，如果你是 Python 用户，了解 Scikit-Learn 库将非常有用，因为它提供了许多现成的函数，比如上面提到的那些。
 
-**如何准备：** 尝试在Kaggle上做数据科学项目或在Interview Query上完成家庭作业，以了解你可能需要完成的项目。
+**如何准备：** 尝试在 Kaggle 上做数据科学项目或在 Interview Query 上完成家庭作业，以了解你可能需要完成的项目。
 
-为了更好地了解Scikit-Learn，构建一个简单的机器学习模型或浏览其他人完成的一些数据科学项目会是一个好主意。
+为了更好地了解 Scikit-Learn，构建一个简单的机器学习模型或浏览其他人完成的一些数据科学项目会是一个好主意。
 
-最后，尝试在Interview Query上练习Python问题，以了解他们可能会问你什么。
+最后，尝试在 Interview Query 上练习 Python 问题，以了解他们可能会问你什么。
 
 **SQL**
 
-![](../Images/6f6800cf42c60ed68b9444abb9ef6136.png)
+![](img/6f6800cf42c60ed68b9444abb9ef6136.png)
 
-*SQL数据库来自[HackersAndSlackers](https://hackersandslackers.com/welcome-to-sql-modifying-databases-and-tables/)。*
+*SQL 数据库来自[HackersAndSlackers](https://hackersandslackers.com/welcome-to-sql-modifying-databases-and-tables/)。*
 
-**你不需要在关系数据库方面有太多经验，但至少应该了解SQL的工作原理。** 如果你争取一个数据科学实习，那么你很可能会在一个拥有大量数据的公司工作。你将被期望自己浏览这些数据以解决问题。
+**你不需要在关系数据库方面有太多经验，但至少应该了解 SQL 的工作原理。** 如果你争取一个数据科学实习，那么你很可能会在一个拥有大量数据的公司工作。你将被期望自己浏览这些数据以解决问题。
 
-**你应该知道的：** 你应该能够编写基本查询，并知道如何使用SQL查询操作数据。公司在其家庭作业案例研究中常常会涉及SQL，因此你需要对SQL非常熟悉。
+**你应该知道的：** 你应该能够编写基本查询，并知道如何使用 SQL 查询操作数据。公司在其家庭作业案例研究中常常会涉及 SQL，因此你需要对 SQL 非常熟悉。
 
 示例问题：
 
-*编写一个SQL查询以获取**Employee**表中的第二高薪水。例如，给定以下Employee表，查询应返回**200**作为第二高薪水。如果没有第二高薪水，则查询应返回**null**。*
+*编写一个 SQL 查询以获取**Employee**表中的第二高薪水。例如，给定以下 Employee 表，查询应返回**200**作为第二高薪水。如果没有第二高薪水，则查询应返回**null**。*
 
 +----+----------+
 
@@ -79,23 +79,23 @@
 
 +----+----------+
 
-**如何准备：** Mode提供了一个很好的学习基础SQL的资源，你可以在[这里](https://mode.com/sql-tutorial/introduction-to-sql/)找到。此外，还有大量的SQL练习题和案例研究可以在网上找到。
+**如何准备：** Mode 提供了一个很好的学习基础 SQL 的资源，你可以在[这里](https://mode.com/sql-tutorial/introduction-to-sql/)找到。此外，还有大量的 SQL 练习题和案例研究可以在网上找到。
 
 **统计学与概率论**
 
-![](../Images/7bedb7be1dd94a1d4c1693b11dd31336.png)
+![](img/7bedb7be1dd94a1d4c1693b11dd31336.png)
 
 *图片来源于[Unsplash](https://unsplash.com/photos/jrh5lAq-mIs)。*
 
 你应该对基础**统计学和概率论**有一定了解。这些概念是大多数机器学习和数据科学概念的基础。同时，许多数据科学职位的面试问题与统计学相关。
 
-**你应该知道的：** 你应该对基本概念有扎实的理解，包括但不限于概率基础、概率分布、估计和假设检验。统计学的一个非常常见的应用是条件概率——例如，给定一个客户购买了产品C，那么他购买产品B的概率是多少？
+**你应该知道的：** 你应该对基本概念有扎实的理解，包括但不限于概率基础、概率分布、估计和假设检验。统计学的一个非常常见的应用是条件概率——例如，给定一个客户购买了产品 C，那么他购买产品 B 的概率是多少？
 
 **如何准备：**如果这些概念对你来说很陌生，你可以利用一些免费的资源，比如可汗学院或乔治亚理工学院。
 
 **机器学习概念**
 
-![](../Images/3b96be31057ee05077197eddfa730afc.png)
+![](img/3b96be31057ee05077197eddfa730afc.png)
 
 *机器学习来自 [Forbes](https://www.forbes.com/sites/kalevleetaru/2019/01/15/why-machine-learning-needs-semantics-not-just-statistics/#3322ac3b77b5)。*
 
@@ -109,11 +109,11 @@
 
 你应该对你申请的领域有**领域知识**（如果没有，你应该学习）。
 
-例如，如果你申请的是市场部门的数据科学职位，了解不同的营销渠道（如社交媒体、联盟、电视）以及核心指标（如LTV、CAC）会是一个好主意。
+例如，如果你申请的是市场部门的数据科学职位，了解不同的营销渠道（如社交媒体、联盟、电视）以及核心指标（如 LTV、CAC）会是一个好主意。
 
 ### 数据科学实习面试过程
 
-![](../Images/25b881d30fc4b4a36b82027df976d746.png)
+![](img/25b881d30fc4b4a36b82027df976d746.png)
 
 *图片来自 [Unsplash](https://unsplash.com/photos/7aakZdIl4vg)。*
 
@@ -143,15 +143,15 @@
 
 ### 面试问题
 
-以下是10个你应该了解的面试问题示例：
+以下是 10 个你应该了解的面试问题示例：
 
-+   什么是p值？
++   什么是 p 值？
 
 +   什么是正则化，它试图解决什么问题？
 
 +   你如何将年龄和收入之间的关系转化为线性模型？
 
-+   如果你有两个相同重量的骰子，得到和为4的概率是多少？
++   如果你有两个相同重量的骰子，得到和为 4 的概率是多少？
 
 +   在整理和清理数据集时，你会采取哪些步骤？
 
@@ -159,7 +159,7 @@
 
 +   举一个例子说明当准确率不是衡量机器学习模型效果的最佳指标时的情况。
 
-+   INNER JOIN和OUTER JOIN有什么区别？
++   INNER JOIN 和 OUTER JOIN 有什么区别？
 
 [原文](https://www.interviewquery.com/blog-data-science-internship-interview/)。经许可转载。
 
@@ -173,11 +173,11 @@
 
 ### 更多相关内容
 
-+   [KDnuggets新闻，5月4日：9门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [如何回答数据科学编程面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [15个数据科学必知的Python编程面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个数据科学必知的 Python 编程面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
 +   [12 个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
 

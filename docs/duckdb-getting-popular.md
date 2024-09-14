@@ -1,8 +1,8 @@
 # 为什么 DuckDB 越来越受欢迎？
 
-> 原文：[https://www.kdnuggets.com/2023/07/duckdb-getting-popular.html](https://www.kdnuggets.com/2023/07/duckdb-getting-popular.html)
+> 原文：[`www.kdnuggets.com/2023/07/duckdb-getting-popular.html`](https://www.kdnuggets.com/2023/07/duckdb-getting-popular.html)
 
-![为什么 DuckDB 越来越受欢迎？](../Images/6c3c21235accfb85260a9e0ecb9628d8.png)
+![为什么 DuckDB 越来越受欢迎？](img/6c3c21235accfb85260a9e0ecb9628d8.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -64,7 +64,7 @@ pip install duckdb
 
 对于其他编程语言，请查看 DuckDB 的 [安装指南](https://duckdb.org/#Installation:~:text=of%20the%20hassle.-,Installation,-Choose%20your%20environment)。
 
-![Why is DuckDB Getting Popular?](../Images/162dbfabeb4ffe467f880e32df5769a8.png)
+![Why is DuckDB Getting Popular?](img/162dbfabeb4ffe467f880e32df5769a8.png)
 
 在这个示例中，我们将使用 [2023 年数据科学薪资](https://www.kaggle.com/datasets/arnabchaki/data-science-salaries-2023) Kaggle 上的 CSV 数据集，并尝试测试 DuckDB 的各种功能。
 

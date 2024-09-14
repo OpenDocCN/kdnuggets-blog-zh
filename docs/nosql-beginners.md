@@ -1,8 +1,8 @@
 # NoSQL 初学者
 
-> 原文：[https://www.kdnuggets.com/2020/12/nosql-beginners.html](https://www.kdnuggets.com/2020/12/nosql-beginners.html)
+> 原文：[`www.kdnuggets.com/2020/12/nosql-beginners.html`](https://www.kdnuggets.com/2020/12/nosql-beginners.html)
 
-[评论](#comments)
+评论
 
 ### 什么是 NoSQL？
 
@@ -10,17 +10,17 @@ NoSQL 实际上是对 SQL 刚性结构的回应。最初创建于 1970 年代初
 
 那么 NoSQL 到底是什么？本质上，它是一种创建数据库的理念，*不* 需要模式，也*不* 以关系模型存储数据。实际上，NoSQL 有多种 [NoSQL 数据库](https://hostingdata.co.uk/nosql-database/) 可供选择，每种都有自己的专业化和使用案例。因此，NoSQL 在填补细分市场方面极其多样，你几乎可以肯定找到适合你需求的 NoSQL 数据模型。
 
-![Image](../Images/ee0f7140c30964cb915938b38b3ba0ab.png)
+![Image](img/ee0f7140c30964cb915938b38b3ba0ab.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -52,9 +52,9 @@ SQL 从根本上构建，以*避免* 数据重复。这*最终* 意味着任何 
 
 ### NoSQL 数据库的类型
 
-虽然有超过半打的 NoSQL 数据模型可供选择，但我们将在这里介绍四种主要模型，这些模型对 [理解 NoSQL 数据库](./2016/07/seven-steps-understanding-nosql-databases.html) 至关重要。
+虽然有超过半打的 NoSQL 数据模型可供选择，但我们将在这里介绍四种主要模型，这些模型对 理解 NoSQL 数据库 至关重要。
 
-![图片](../Images/2c0abac08b02b9ee25a102f78bde8506.png)
+![图片](img/2c0abac08b02b9ee25a102f78bde8506.png)
 
 **文档存储**
 
@@ -82,17 +82,17 @@ SQL 从根本上构建，以*避免* 数据重复。这*最终* 意味着任何 
 
 ### 结论
 
-需要记住的一点是，NoSQL 不是为了替代 SQL，而是为了补充 SQL。[NoSQL 本身主要使用专门的数据库](/2016/06/top-nosql-database-engines.html) 来填补 SQL 的不足，虽然你完全可以选择不使用 SQL，但 NoSQL 并不*排除*使用 SQL。有时你可能会同时使用 SQL 和 NoSQL。
+需要记住的一点是，NoSQL 不是为了替代 SQL，而是为了补充 SQL。NoSQL 本身主要使用专门的数据库 来填补 SQL 的不足，虽然你完全可以选择不使用 SQL，但 NoSQL 并不*排除*使用 SQL。有时你可能会同时使用 SQL 和 NoSQL。
 
 **简历： [亚历克斯·威廉姆斯](https://hostingdata.co.uk/author/alex-williams/)** 是一位经验丰富的全栈开发者，也是 [Hosting Data UK](https://hostingdata.co.uk/) 的所有者。亚历克斯在伦敦大学毕业，主修信息技术，之后作为开发者领导了来自世界各地客户的各种项目，工作近 10 年。最近，亚历克斯转为独立 IT 顾问并开设了自己的博客。在博客中，他探讨了网页开发、数据管理、数字营销以及为刚起步的在线企业主提供解决方案。
 
 **相关：**
 
-+   [如何获得最受欢迎的数据科学技能](/2020/11/acquire-most-wanted-data-science-skills.html)
++   如何获得最受欢迎的数据科学技能
 
-+   [在 Azure Databricks 上使用 Spark、Python 或 SQL](/2020/08/spark-python-sql-azure-databricks.html)
++   在 Azure Databricks 上使用 Spark、Python 或 SQL
 
-+   [5 个棘手的 SQL 查询解决方案](/2020/11/5-tricky-sql-queries-solved.html)
++   5 个棘手的 SQL 查询解决方案
 
 ### 更多相关主题
 

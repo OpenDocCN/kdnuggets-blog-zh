@@ -1,10 +1,10 @@
 # AutoML：使用 Auto-Sklearn 和 Auto-PyTorch 的介绍
 
-> 原文：[https://www.kdnuggets.com/2021/10/automl-introduction-auto-sklearn-auto-pytorch.html](https://www.kdnuggets.com/2021/10/automl-introduction-auto-sklearn-auto-pytorch.html)
+> 原文：[`www.kdnuggets.com/2021/10/automl-introduction-auto-sklearn-auto-pytorch.html`](https://www.kdnuggets.com/2021/10/automl-introduction-auto-sklearn-auto-pytorch.html)
 
-[评论](#comments)
+评论
 
-![autoML.png](../Images/62f872662eee3e99a9dd99ba62bc7d95.png)
+![autoML.png](img/62f872662eee3e99a9dd99ba62bc7d95.png)
 
 ### 让计算机自动完成你想要的任务
 
@@ -22,19 +22,19 @@
 
 相反，一个好的机器学习从业者应该充分利用所有可用的工具，现在这些工具包括开源现成工具和应用机器学习的最佳实践。换句话说，**AutoML**。
 
-![automl.png](../Images/928bab5e5c050b1c0d88ea047058bf05.png)
+![automl.png](img/928bab5e5c050b1c0d88ea047058bf05.png)
 
-### 什么是AutoML？
+### 什么是 AutoML？
 
-AutoML是一个广泛的技术和工具类别，用于将自动化搜索应用于您的自动化搜索，并将学习应用于您的学习。这些技术从对统计学习算法的超参数应用贝叶斯优化，到对深度学习模型进行神经网络结构搜索。
+AutoML 是一个广泛的技术和工具类别，用于将自动化搜索应用于您的自动化搜索，并将学习应用于您的学习。这些技术从对统计学习算法的超参数应用贝叶斯优化，到对深度学习模型进行神经网络结构搜索。
 
-这个领域非常活跃且多样化，拥有健康的竞赛生态系统，其中许多竞赛都在[automl.ai](https://automl.ai/competitions/)上进行了记录。事实上，最著名的AutoML包之一，[Auto-SciKit-Learn](https://github.com/automl/auto-sklearn)（Auto-Sklearn），起初是2014年至2016年ChaLearn AutoML挑战赛的[获胜者](/2016/08/winning-automl-challenge-auto-sklearn.html)。
+这个领域非常活跃且多样化，拥有健康的竞赛生态系统，其中许多竞赛都在[automl.ai](https://automl.ai/competitions/)上进行了记录。事实上，最著名的 AutoML 包之一，[Auto-SciKit-Learn](https://github.com/automl/auto-sklearn)（Auto-Sklearn），起初是 2014 年至 2016 年 ChaLearn AutoML 挑战赛的获胜者。
 
-Auto-Sklearn由德国著名的[AutoML超级组织](https://www.automl.org/automl/)中追求自动化机器学习的最著名研究小组之一开发。这个[合作组织](https://www.automl.org/)由弗赖堡大学和汉诺威大学的实验室组成。其他在这一领域有显著贡献的研究者包括[Auto-WEKA](https://www.automl.org/automl/autoweka/)背后的科学家，Auto-WEKA是最早的流行AutoML工具包之一，以及其继任者Auto-WEKA 2.0。这些研究人员主要分布在北美，但以加拿大的不列颠哥伦比亚大学为中心。而Auto-WEKA与开源WEKA软件和Java一起工作，Auto-Sklearn是一个Python包，并且旨在紧密遵循SciKit-Learn的使用模式（因此得名“Auto-SciKit-Learn”）。
+Auto-Sklearn 由德国著名的[AutoML 超级组织](https://www.automl.org/automl/)中追求自动化机器学习的最著名研究小组之一开发。这个[合作组织](https://www.automl.org/)由弗赖堡大学和汉诺威大学的实验室组成。其他在这一领域有显著贡献的研究者包括[Auto-WEKA](https://www.automl.org/automl/autoweka/)背后的科学家，Auto-WEKA 是最早的流行 AutoML 工具包之一，以及其继任者 Auto-WEKA 2.0。这些研究人员主要分布在北美，但以加拿大的不列颠哥伦比亚大学为中心。而 Auto-WEKA 与开源 WEKA 软件和 Java 一起工作，Auto-Sklearn 是一个 Python 包，并且旨在紧密遵循 SciKit-Learn 的使用模式（因此得名“Auto-SciKit-Learn”）。
 
-除了Auto-Sklearn，弗赖堡-汉诺威AutoML小组还开发了一个[Auto-PyTorch](https://github.com/automl/Auto-PyTorch)库。我们将在接下来的简单教程中使用这两个库作为我们进入AutoML的起点。
+除了 Auto-Sklearn，弗赖堡-汉诺威 AutoML 小组还开发了一个[Auto-PyTorch](https://github.com/automl/Auto-PyTorch)库。我们将在接下来的简单教程中使用这两个库作为我们进入 AutoML 的起点。
 
-### AutoML教程演示
+### AutoML 教程演示
 
 首先，我们将设置所需的包和依赖项。我们使用 Python3 的 virtualenv 来管理项目的虚拟环境，但如果你更喜欢 Anaconda（特别是如果你在 Anaconda 中使用 pip），你会发现类似的说明应该也能奏效。
 
@@ -130,7 +130,7 @@ t1 = time.time()
 
 同样，评估你的模型也很简单。SciKit-Learn 分类模型有一个 predict 方法，该方法接收输入数据并预测标签，然后可以将结果传递给 **sklearn.metrics.accuracy_score** 以计算准确率。
 
-以下代码可以用来计算预测和在保留的测试集上的预测准确率，使用的是在上一段代码中训练的k最近邻、支持向量机和多层感知器分类器。
+以下代码可以用来计算预测和在保留的测试集上的预测准确率，使用的是在上一段代码中训练的 k 最近邻、支持向量机和多层感知器分类器。
 
 ```py
 knn_predict = knn.predict(test_x)
@@ -158,7 +158,7 @@ print(f"svm, knn, mlp train accuracy: {train_svm_accuracy:.4f}," \
 print(f"time to fit: {t1-t0}")
 ```
 
-![图示](../Images/49b5f26a303ba61bd253033cfca7c7d9.png)
+![图示](img/49b5f26a303ba61bd253033cfca7c7d9.png)
 
 Sklearn 分类器在鸢尾花数据集上的图像
 
@@ -206,11 +206,11 @@ print(f"train accuracy {train_autosk_2_accuracy:.4f}")
 print(f"time to fit: {t1-t0}")
 ```
 
-![图示](../Images/f43d91f167d3b49fd419adad11f63c6f.png)
+![图示](img/f43d91f167d3b49fd419adad11f63c6f.png)
 
 Auto-Sklearn 分类器集成在鸢尾花数据集上的图示
 
-如果你不重置`time_left_for_this_task`，使用**AutoSklearnClassifier**运行`fit`方法将会花费大量时间，因为默认值是3600秒（一小时）。对于我们简单的鸢尾花数据集来说，这是过度的。从包文档来看，时间限制应该可以作为初始化分类器对象时的输入参数设置，但在我们的经验（版本 0.13.0）中并非如此。
+如果你不重置`time_left_for_this_task`，使用**AutoSklearnClassifier**运行`fit`方法将会花费大量时间，因为默认值是 3600 秒（一小时）。对于我们简单的鸢尾花数据集来说，这是过度的。从包文档来看，时间限制应该可以作为初始化分类器对象时的输入参数设置，但在我们的经验（版本 0.13.0）中并非如此。
 
 你还可以尝试启用交叉验证来运行 `fit` 方法，如果选择这样做，你需要再次使用该方法进行训练。
 
@@ -218,7 +218,7 @@ Auto-Sklearn 分类器集成在鸢尾花数据集上的图示
 refit
 ```
 
-用最佳模型和超参数训练整个训练数据集。我们发现，当使用交叉验证和重训练相比于默认设置时，测试集准确率从80%提高到了86.67%。
+用最佳模型和超参数训练整个训练数据集。我们发现，当使用交叉验证和重训练相比于默认设置时，测试集准确率从 80%提高到了 86.67%。
 
 请记住，当你在使用`predict`方法对**AutoSklearnClassifier**对象进行推断时，你实际上是在利用在 AutoML 超参数搜索过程中找到的最佳模型的集成。
 
@@ -255,43 +255,43 @@ print(f"auto-pytorch test accuracy {auto_accuracy:.4}")
 print(f"auto-pytorch train accuracy {train_auto_accuracy:.4}")
 ```
 
-![图示](../Images/bb6f6cfaecf6d13a62ae45c38c3558ac.png)
+![图示](img/bb6f6cfaecf6d13a62ae45c38c3558ac.png)
 
 Auto-PyTorch 分类器在鸢尾花数据集上的图示
 
-正如你在结果表中看到的，Auto-PyTorch在拟合鸢尾花数据集时非常高效和有效，训练和测试准确率达到了90多%。这比我们之前训练的自动SciKit-Learn分类器稍微好一点，比使用默认参数的标准sklearn分类器要好得多。
+正如你在结果表中看到的，Auto-PyTorch 在拟合鸢尾花数据集时非常高效和有效，训练和测试准确率达到了 90 多%。这比我们之前训练的自动 SciKit-Learn 分类器稍微好一点，比使用默认参数的标准 sklearn 分类器要好得多。
 
-### AutoML会取代数据科学家吗？
+### AutoML 会取代数据科学家吗？
 
-不，未必。AutoML承诺改善典型数据科学和机器学习工作流的实用性、性能和效率。额外的抽象层和自动化的最佳实践超参数搜索，如果使用得当，确实可以带来显著的不同。对于我们在今天教程中实验的这些软件包，我们将其准备程度描述为正在进行的研究原型。
+不，未必。AutoML 承诺改善典型数据科学和机器学习工作流的实用性、性能和效率。额外的抽象层和自动化的最佳实践超参数搜索，如果使用得当，确实可以带来显著的不同。对于我们在今天教程中实验的这些软件包，我们将其准备程度描述为正在进行的研究原型。
 
-我们需要进行许多小修小补才能使一切正常工作，例如将NumPy升级到1.20.0以修复模糊的错误消息，无法将运行时间限制设置为输入参数（如Auto-Sklearn文档所建议），以及由于一些模糊的冲突而无法使用单个虚拟环境同时支持两个软件包。此外，AutoML的价值在于自动化超参数搜索，但自动分类器本身有许多参数，这些参数对最终结果有很大影响，这也让人忍俊不禁。
+我们需要进行许多小修小补才能使一切正常工作，例如将 NumPy 升级到 1.20.0 以修复模糊的错误消息，无法将运行时间限制设置为输入参数（如 Auto-Sklearn 文档所建议），以及由于一些模糊的冲突而无法使用单个虚拟环境同时支持两个软件包。此外，AutoML 的价值在于自动化超参数搜索，但自动分类器本身有许多参数，这些参数对最终结果有很大影响，这也让人忍俊不禁。
 
-尽管如此，我们认为AutoML是任何机器学习或数据科学从业者工具箱中有价值的补充，无论他们使用Auto-Sklearn/Auto-PyTorch、Auto-WEKA、其他软件包，还是自行开发解决方案。当AutoML工具适合时，它不仅能提升项目的性能，还能减少经济和能源（包括环境）成本，从而避免长时间的超参数和架构搜索。
+尽管如此，我们认为 AutoML 是任何机器学习或数据科学从业者工具箱中有价值的补充，无论他们使用 Auto-Sklearn/Auto-PyTorch、Auto-WEKA、其他软件包，还是自行开发解决方案。当 AutoML 工具适合时，它不仅能提升项目的性能，还能减少经济和能源（包括环境）成本，从而避免长时间的超参数和架构搜索。
 
-即使一些工具仍有许多粗糙的地方，这也只是一个很好的理由和动力，让你自己参与到这些项目中。Auto-PyTorch在Apache 2.0许可证下提供，而Auto-Sklearn使用BSD 3-Clause许可证。
+即使一些工具仍有许多粗糙的地方，这也只是一个很好的理由和动力，让你自己参与到这些项目中。Auto-PyTorch 在 Apache 2.0 许可证下提供，而 Auto-Sklearn 使用 BSD 3-Clause 许可证。
 
-**简介：[Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责管理Exxact Corp博客，并与许多才华横溢的作者合作，他们撰写有关深度学习不同方面的文章。
+**简介：[Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责管理 Exxact Corp 博客，并与许多才华横溢的作者合作，他们撰写有关深度学习不同方面的文章。
 
 [原文](https://www.exxactcorp.com/blog/Deep-Learning/automl-an-introduction-using-auto-sklearn-and-auto-pytorch)。经授权转载。
 
 **相关内容：**
 
-+   [自动化机器学习简介](/2021/09/introduction-automated-machine-learning.html)
++   自动化机器学习简介
 
-+   [如何创建AutoML管道优化沙盒](/2021/09/automl-pipeline-optimization-sandbox.html)
++   如何创建 AutoML 管道优化沙盒
 
-+   [使用TPOT进行机器学习管道优化](/2021/05/machine-learning-pipeline-optimization-tpot.html)
++   使用 TPOT 进行机器学习管道优化
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

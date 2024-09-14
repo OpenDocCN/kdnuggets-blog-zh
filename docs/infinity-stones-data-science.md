@@ -1,8 +1,8 @@
 # 数据科学的无限宝石
 
-> 原文：[https://www.kdnuggets.com/2019/06/infinity-stones-data-science.html](https://www.kdnuggets.com/2019/06/infinity-stones-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/06/infinity-stones-data-science.html`](https://www.kdnuggets.com/2019/06/infinity-stones-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 目前正有一个全球范围内的流行文化现象席卷整个世界，你当然知道我在说什么：数据科学！
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
-虽然《终局之战》的故事或多或少围绕无限宝石展开——整个MCU也有一段时间围绕它们展开——以及它们在拯救整个宇宙（或者说一半宇宙）中的作用，但数据科学的实践实际上也可以从它们的力量中学习一些东西。我知道你可能不相信我，但让我们来看一看。
+虽然《终局之战》的故事或多或少围绕无限宝石展开——整个 MCU 也有一段时间围绕它们展开——以及它们在拯救整个宇宙（或者说一半宇宙）中的作用，但数据科学的实践实际上也可以从它们的力量中学习一些东西。我知道你可能不相信我，但让我们来看一看。
 
-![无限手套](../Images/338292482834bbd39171fc55f676e40d.png)
+![无限手套](img/338292482834bbd39171fc55f676e40d.png)
 
 别忘了，灭霸自己其实也有一点数据科学家的性质。他识别了一个问题及其解决方案，尽管你可能会对他的结论有异议，更不用提他的思维方式完全缺乏科学过程。但那不是重点。
 
@@ -72,7 +72,7 @@
 
 计算能力（或“计算”）是我们投入到特定问题上的集体计算资源。曾经认为无限计算是计算的终极目标，这有其充分的理由。考虑一下与今天相比，一两三十年前的计算能力有多么有限。想象一下科学家们坐在一起，思考如果拥有更多的计算能力，能解决哪些问题。那时的天花板似乎无限高！
 
-当然，事情并不完全如预期发展。确实，我们现在拥有比以往任何时候更多的计算资源，如超级计算机、云计算、由大量计算支持的公开API，甚至是我们的笔记本电脑和智能手机。我们曾经无法想象的各种问题，现在都能得到解决，这是一项巨大的进步。然而，我们需要记住，“聪明”是对计算能力的极佳补充，数据科学及其支持技术的许多进展都得益于智慧而非单纯的计算能力。
+当然，事情并不完全如预期发展。确实，我们现在拥有比以往任何时候更多的计算资源，如超级计算机、云计算、由大量计算支持的公开 API，甚至是我们的笔记本电脑和智能手机。我们曾经无法想象的各种问题，现在都能得到解决，这是一项巨大的进步。然而，我们需要记住，“聪明”是对计算能力的极佳补充，数据科学及其支持技术的许多进展都得益于智慧而非单纯的计算能力。
 
 理想情况下，可以用智慧和力量的完美平衡来解决每一个问题，用聪明的方法来设定完美的算法，并且有足够的计算能力来支持它。也许这是数据科学将来会证明自身的一个领域。
 
@@ -112,11 +112,11 @@
 
 **相关**：
 
-+   [数据复仇者… 集合！](/2016/11/data-avengers-assemble.html)
++   数据复仇者… 集合！
 
-+   [数据科学过程，再发现](/2016/03/data-science-process-rediscovered.html)
++   数据科学过程，再发现
 
-+   [数据科学过程](/2016/03/data-science-process.html)
++   数据科学过程
 
 ### 更多相关内容
 
@@ -126,8 +126,8 @@
 
 +   [成功数据科学家的五大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [为什么Python是初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [为什么 Python 是初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

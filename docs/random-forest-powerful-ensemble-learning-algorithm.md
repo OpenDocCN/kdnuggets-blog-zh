@@ -1,8 +1,8 @@
 # 随机森林® — 一种强大的集成学习算法
 
-> 原文：[https://www.kdnuggets.com/2020/01/random-forest-powerful-ensemble-learning-algorithm.html](https://www.kdnuggets.com/2020/01/random-forest-powerful-ensemble-learning-algorithm.html)
+> 原文：[`www.kdnuggets.com/2020/01/random-forest-powerful-ensemble-learning-algorithm.html`](https://www.kdnuggets.com/2020/01/random-forest-powerful-ensemble-learning-algorithm.html)
 
-[评论](#comments)
+评论
 
 ### 引言
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-但是，决策树的一个常见问题是，特别是当表格中有很多列时，它们会过拟合。 有时看起来像是树记住了训练数据集。如果没有对决策树设置限制，它将为训练数据集提供100%准确性，因为在最坏的情况下，它将为每个观察值创建一个叶子。因此，这会影响对不属于训练集的样本进行预测时的准确性。
+但是，决策树的一个常见问题是，特别是当表格中有很多列时，它们会过拟合。 有时看起来像是树记住了训练数据集。如果没有对决策树设置限制，它将为训练数据集提供 100%准确性，因为在最坏的情况下，它将为每个观察值创建一个叶子。因此，这会影响对不属于训练集的样本进行预测时的准确性。
 
 随机森林是解决过拟合问题的几种方法之一，现在让我们*深入探讨*这一强大的机器学习算法的工作原理和实现方式。在此之前，我建议你熟悉一下 [**决策树算法**](https://towardsdatascience.com/decision-tree-algorithm-explained-83beb6e78ef4)**。**
 
@@ -32,7 +32,7 @@
 
 算法可以是任何 [机器学习](https://www.toptal.com/machine-learning/machine-learning-theory-an-introductory-primer) 算法，如逻辑回归、决策树等。这些模型在作为集成方法的输入时，被称为”**基础模型**”。
 
-![图示](../Images/c8cd4a109b77a8574900f3219f03440a.png)
+![图示](img/c8cd4a109b77a8574900f3219f03440a.png)
 
 [集成学习](https://www.commonlounge.com/discussion/1697ade39ac142988861daff4da7f27d)
 
@@ -56,7 +56,7 @@
 
 随机森林是一种监督集成学习算法，既用于分类问题也用于回归问题。但实际上，它主要用于分类问题。正如我们知道的，森林由树木组成，树木越多，森林越强健。类似地，随机森林算法在数据样本上创建决策树，然后从每棵树中获得预测，并通过投票选出最佳解决方案。它是一种比单一决策树更好的集成方法，因为它通过平均结果来减少过拟合。
 
-![图](../Images/ba9e4638bff4eb8673f4aa3fe4504931.png)
+![图](img/ba9e4638bff4eb8673f4aa3fe4504931.png)
 
 根据多数投票，最终结果是‘蓝色’。
 
@@ -80,19 +80,19 @@
 
 随机森林通过以下两种方法确保每棵树的行为与模型中任何其他树的行为不太相关：
 
-+   Bagging或Bootstrap聚合
++   Bagging 或 Bootstrap 聚合
 
 +   随机特征选择
 
-**Bagging或Bootstrap聚合**
+**Bagging 或 Bootstrap 聚合**
 
-决策树对所训练的数据非常敏感，训练数据集的微小变化可能导致树结构的显著不同。随机森林利用这一点，通过允许每棵树**从数据集中随机抽样（带有替换）**，从而生成不同的树。这一过程称为Bagging。
+决策树对所训练的数据非常敏感，训练数据集的微小变化可能导致树结构的显著不同。随机森林利用这一点，通过允许每棵树**从数据集中随机抽样（带有替换）**，从而生成不同的树。这一过程称为 Bagging。
 
-注意，在Bagging中，我们并不是将训练数据子集分成较小的块，并在不同的块上训练每棵树。相反，如果我们有一个大小为**N**的样本，我们仍然给每棵树一个大小为**N**的训练集。但不是原始训练数据，而是带有替换的随机样本。
+注意，在 Bagging 中，我们并不是将训练数据子集分成较小的块，并在不同的块上训练每棵树。相反，如果我们有一个大小为**N**的样本，我们仍然给每棵树一个大小为**N**的训练集。但不是原始训练数据，而是带有替换的随机样本。
 
 例如——如果我们的训练数据是[1,2,3,4,5,6]，那么我们可能会给一棵树提供列表[1,2,2,3,6,6]，而给另一棵树提供列表[2,3,4,4,5,6]。注意列表的长度是**6**，一些元素在我们提供给树的随机选择的训练数据中被重复（因为我们带有替换地抽样）。
 
-![图](../Images/6bf318832e23fd46e08e0f9a91735ea0.png)
+![图](img/6bf318832e23fd46e08e0f9a91735ea0.png)
 
 [Bagging](https://medium.com/machine-learning-through-visuals/machine-learning-through-visuals-part-1-what-is-bagging-ensemble-learning-432059568cc8)
 
@@ -104,7 +104,7 @@
 
 因此，在随机森林中，我们得到的树是基于不同的数据集训练的，并且使用不同的特征来做决策。
 
-![图](../Images/e67b08d6c0c6c220df6974f3b1aacc30.png)
+![图](img/e67b08d6c0c6c220df6974f3b1aacc30.png)
 
 [随机森林中不同树的随机特征选择。](https://towardsdatascience.com/understanding-random-forest-58381e0602d2)
 
@@ -118,7 +118,7 @@
 
 1.  使用**最佳划分**将节点拆分为**子节点**
 
-1.  重复1**到3**步，直到达到“l”个节点。
+1.  重复 1**到 3**步，直到达到“l”个节点。
 
 1.  通过重复步骤 1 **至 4** “n” 次来构建森林，从而创建**“n” 棵树**。
 
@@ -185,7 +185,7 @@ train=pd.read_csv("../RandomForest/voice.csv")df=train.copy()
 df.head(10)
 ```
 
-![图示](../Images/ca05f41757ed2a156f3fa9e4d28daf21.png)
+![图示](img/ca05f41757ed2a156f3fa9e4d28daf21.png)
 
 数据集
 
@@ -248,7 +248,7 @@ df.shape
 df.isnull().any()
 ```
 
-![图示](../Images/3d4ab01e6f8f8f1ab79de5a677cfb979.png)
+![图示](img/3d4ab01e6f8f8f1ab79de5a677cfb979.png)
 
 我们的数据集中没有缺失值。
 
@@ -256,7 +256,7 @@ df.isnull().any()
 
 此外，单变量分析对于离群值检测也很有用。因此，除了为每个列或特征绘制箱线图和直方图外，我还编写了一个小工具函数，可以告诉我们如果去除离群值后每个特征剩余的观测数。
 
-为了检测离群值，我使用了标准的1.5四分位数范围（IQR）规则，该规则指出，任何低于“第一个四分位数 — 1.5 IQR”或高于“第三个四分位数 + 1.5 IQR”的观测值都是离群值。
+为了检测离群值，我使用了标准的 1.5 四分位数范围（IQR）规则，该规则指出，任何低于“第一个四分位数 — 1.5 IQR”或高于“第三个四分位数 + 1.5 IQR”的观测值都是离群值。
 
 ```py
 def calc_limits(feature):
@@ -276,33 +276,33 @@ def plot(feature):
     print("Number of data points remaining if outliers removed : ",len(l))
 ```
 
-让我们绘制第一个特征，即meanfreq。
+让我们绘制第一个特征，即 meanfreq。
 
 ```py
 plot('meanfreq')
 ```
 
-![](../Images/624323449e7fffa3e321bd53d7e8ccfc.png)
+![](img/624323449e7fffa3e321bd53d7e8ccfc.png)
 
 ### 从上述图表中得出的结论—
 
 1) 首先，请注意，值与描述方法数据框中观察到的情况一致。
 
-2) 请注意，根据1.5四分位数规则，我们有几个离群值（在箱线图中用“点”表示）。去除这些数据点或离群值后，我们剩下大约3104个值。
+2) 请注意，根据 1.5 四分位数规则，我们有几个离群值（在箱线图中用“点”表示）。去除这些数据点或离群值后，我们剩下大约 3104 个值。
 
 3) 此外，从分布图来看，分布似乎有些负偏，因此我们可以进行归一化，使分布更对称。
 
-4) 最后，请注意，左尾分布在Q1以下的侧面有更多的离群值，而右尾在Q3以上的侧面则有更多的离群值。
+4) 最后，请注意，左尾分布在 Q1 以下的侧面有更多的离群值，而右尾在 Q3 以上的侧面则有更多的离群值。
 
 通过绘制其他特征也可以得出类似的结论，我已经绘制了一些，你们可以检查所有的。
 
-![](../Images/528e6dcf2f3d93b61ac0767cb58b5a48.png)
+![](img/528e6dcf2f3d93b61ac0767cb58b5a48.png)
 
-![](../Images/503c1f320cfa9db2122f5771a1353ebe.png)
+![](img/503c1f320cfa9db2122f5771a1353ebe.png)
 
-![](../Images/8a4b6927f6c352fec079f57ed0d90983.png)
+![](img/8a4b6927f6c352fec079f57ed0d90983.png)
 
-![](../Images/ed1818a5915e5afd2cd131fb5f3694a6.png)
+![](img/ed1818a5915e5afd2cd131fb5f3694a6.png)
 
 现在绘制和统计目标变量，以检查目标类别是否平衡。
 
@@ -311,7 +311,7 @@ sns.countplot(data=df,x='label')
 df['label'].value_counts()
 ```
 
-![图示](../Images/2556a11af165d6b8342f6329f7fc412e.png)
+![图示](img/2556a11af165d6b8342f6329f7fc412e.png)
 
 目标变量的绘图
 
@@ -336,7 +336,7 @@ fig.set_size_inches(23,9)
 sns.heatmap(data=cor_mat,mask=mask,square=True,annot=True,cbar=True)
 ```
 
-![图示](../Images/ef81ec187ed9d1a6bdee14801ecae880.png)
+![图示](img/ef81ec187ed9d1a6bdee14801ecae880.png)
 
 热图
 
@@ -346,7 +346,7 @@ sns.heatmap(data=cor_mat,mask=mask,square=True,annot=True,cbar=True)
 
 2) IQR 和标签之间通常有很强的正相关关系。
 
-3) 频谱熵与标签的相关性也相当高，而sfm与标签的相关性适中。
+3) 频谱熵与标签的相关性也相当高，而 sfm 与标签的相关性适中。
 
 4) 偏度和峰度与标签的相关性不大。
 
@@ -354,7 +354,7 @@ sns.heatmap(data=cor_mat,mask=mask,square=True,annot=True,cbar=True)
 
 6) Centroid 和 median 具有根据公式预期的高正相关性。
 
-7) 此外，meanfreq 和 centroid 是根据公式完全相同的特征，它们的值也是一致的。因此，它们的相关性是完美的1。在这种情况下，我们可以删除其中任何一列。
+7) 此外，meanfreq 和 centroid 是根据公式完全相同的特征，它们的值也是一致的。因此，它们的相关性是完美的 1。在这种情况下，我们可以删除其中任何一列。
 
 注意，质心通常与大多数其他特征有很高的相关性，因此我将删除质心列。
 
@@ -366,7 +366,7 @@ sns.heatmap(data=cor_mat,mask=mask,square=True,annot=True,cbar=True)
 
 11) IQR 与 sd 高度相关。
 
-12) 最后，自相关，即特征对自身的关系，等于1，符合预期。
+12) 最后，自相关，即特征对自身的关系，等于 1，符合预期。
 
 注意，我们可以丢弃一些高度相关的特征，因为它们会给模型带来冗余，但现在我们暂时保留所有特征。对于高度相关的特征，我们可以使用主成分分析（PCA）等降维技术来减少特征空间。
 
@@ -387,7 +387,7 @@ for col in df.columns:
     df = df[(df[col] >lower) & (df[col]<upper)]df.shape
 ```
 
-注意，新形状为（1636，20），我们剩下20个特征。
+注意，新形状为（1636，20），我们剩下 20 个特征。
 
 **步骤-4: 特征工程**
 
@@ -398,7 +398,7 @@ temp_df=df.copy()temp_df.drop(['skew','kurt','mindom','maxdom'],axis=1,inplace=T
 temp_df.head(10)
 ```
 
-![图](../Images/9e3a8003ba3bb2eaa7260f514c0dad23.png)
+![图](img/9e3a8003ba3bb2eaa7260f514c0dad23.png)
 
 过滤后的数据集
 
@@ -410,7 +410,7 @@ temp_df['median']=temp_df['meanfreq']+temp_df['mode']
 temp_df['median']=temp_df['median'].apply(lambda x:x/3)sns.boxplot(data=temp_df,y='median',x='label') # seeing the new 'median' against the 'label'
 ```
 
-![](../Images/db847c3a8ec43122f924de7ca815459e.png)
+![](img/db847c3a8ec43122f924de7ca815459e.png)
 
 我添加的第二个新特征是一个新的特征，用于测量“偏度”。
 
@@ -424,7 +424,7 @@ temp_df['pear_skew']=temp_df['pear_skew']/temp_df['sd']
 temp_df.head(10)sns.boxplot(data=temp_df,y='pear_skew',x='label')
 ```
 
-![](../Images/9a3f6b669fd8d37f900fe827d25d2d9c.png)
+![](img/9a3f6b669fd8d37f900fe827d25d2d9c.png)
 
 **步骤-5: 数据准备**
 
@@ -465,17 +465,17 @@ acc_frame=pd.DataFrame(d)
 acc_frame
 ```
 
-![图](../Images/c48ef2acaab7d53398af2864b80b12f8.png)
+![图](img/c48ef2acaab7d53398af2864b80b12f8.png)
 
 绘制准确率：
 
-![](../Images/fe7c93dfae09b6abfa44b730c4bd5406.png)
+![](img/fe7c93dfae09b6abfa44b730c4bd5406.png)
 
 正如我们所见，仅仅使用我们模型的默认参数，随机森林分类器的表现优于决策树分类器（如预期）。
 
-**第7步：使用GridSearchCV进行参数调优**
+**第 7 步：使用 GridSearchCV 进行参数调优**
 
-最后，让我们还使用GridSearchCV调整我们的随机森林分类器。
+最后，让我们还使用 GridSearchCV 调整我们的随机森林分类器。
 
 ```py
 param_grid = { 
@@ -488,7 +488,7 @@ CV_rfc = GridSearchCV(estimator=RandomForestClassifier(), param_grid=param_grid,
 CV_rfc.fit(x_train, y_train)
 ```
 
-![](../Images/ffa2c3d7da8a4fdfe128e44e35d6697f.png)
+![](img/ffa2c3d7da8a4fdfe128e44e35d6697f.png)
 
 ```py
 print("Best score : ",CV_rfc.best_score_)
@@ -496,7 +496,7 @@ print("Best Parameters : ",CV_rfc.best_params_)
 print("Precision Score : ", precision_score(CV_rfc.predict(x_test),y_test))
 ```
 
-![](../Images/492709261b434d559975c2c3f5cc524f.png)
+![](img/492709261b434d559975c2c3f5cc524f.png)
 
 经过超参数优化后，我们可以看到结果相当不错 :)
 
@@ -513,7 +513,7 @@ s.set_xticklabels(s.get_xticklabels(),rotation=90)
 plt.show()
 ```
 
-![](../Images/9da677f171e6c3452da909f93b05617c.png)
+![](img/9da677f171e6c3452da909f93b05617c.png)
 
 ### 结论
 
@@ -523,25 +523,25 @@ plt.show()
 
 好了，这篇文章就是这些，希望你们喜欢阅读，如果这篇文章对你有帮助，我会很高兴。欢迎在评论区分享你的评论/想法/反馈。
 
-![图](../Images/76b044b507540a50ce22f2596d637aba.png)
+![图](img/76b044b507540a50ce22f2596d637aba.png)
 
 [来源](http://bestanimations.com/Nature/Flora/Trees/Trees.html)
 
 谢谢阅读！！！
 
-**简介： [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是CirrusLabs的大数据开发人员。他在电信、分析、销售、数据科学等各个领域拥有超过4年的工作经验，专注于各种大数据组件。
+**简介： [Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是 CirrusLabs 的大数据开发人员。他在电信、分析、销售、数据科学等各个领域拥有超过 4 年的工作经验，专注于各种大数据组件。
 
 [原文](https://towardsdatascience.com/random-forest-a-powerful-ensemble-learning-algorithm-2bf132ba639d)。经许可转载。
 
-随机森林® 是Minitab的注册商标。
+随机森林® 是 Minitab 的注册商标。
 
 **相关内容：**
 
-+   [支持向量机的友好介绍](/2019/09/friendly-introduction-support-vector-machines.html)
++   支持向量机的友好介绍
 
-+   [比较决策树算法：随机森林与XGBoost](/2019/08/activestate-decision-tree-random-forest-xgboost.html)
++   比较决策树算法：随机森林与 XGBoost
 
-+   [从零开始构建人工神经网络：第1部分](/2019/11/build-artificial-neural-network-scratch-part-1.html)
++   从零开始构建人工神经网络：第一部分
 
 ### 更多相关主题
 
@@ -551,8 +551,8 @@ plt.show()
 
 +   [调整随机森林超参数](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)
 
-+   [集成学习技术：Python中随机森林的操作指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
++   [集成学习技术：Python 中随机森林的操作指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 
-+   [为什么我们总是需要人类来训练AI——有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)
++   [为什么我们总是需要人类来训练 AI——有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)
 
 +   [带例子的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)

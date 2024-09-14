@@ -1,8 +1,8 @@
 # 机器学习项目的端到端指南
 
-> 原文：[https://www.kdnuggets.com/2019/01/end-to-end-guide-machine-learning-project.html](https://www.kdnuggets.com/2019/01/end-to-end-guide-machine-learning-project.html)
+> 原文：[`www.kdnuggets.com/2019/01/end-to-end-guide-machine-learning-project.html`](https://www.kdnuggets.com/2019/01/end-to-end-guide-machine-learning-project.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 很难找到一篇简洁的文章提供关于如何实施一个[机器学习项目](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)的端到端指南。我们在线上找到很多信息丰富的文章，深入覆盖了如何实施机器学习/数据科学项目的各个部分，但有时我们只需要高层次的步骤提供清晰的指导。
 
@@ -12,11 +12,11 @@
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 > 
 > * * *
 > 
@@ -24,9 +24,9 @@
 
 ### 记住这一点，让我们开始吧
 
-> *简而言之，一个机器学习项目主要包括三个部分：数据理解、数据收集与清理，以及最后的模型实施与调优。通常，数据理解、收集和清理占据60–70%的时间。为此，我们需要领域专家。*
+> *简而言之，一个机器学习项目主要包括三个部分：数据理解、数据收集与清理，以及最后的模型实施与调优。通常，数据理解、收集和清理占据 60–70%的时间。为此，我们需要领域专家。*
 
-![](../Images/516cc9e1d0620232344914b4adb891bc.png)
+![](img/516cc9e1d0620232344914b4adb891bc.png)
 
 ### 场景
 
@@ -34,7 +34,7 @@
 
 一开始，我们的大脑中会产生很多问题
 
-![](../Images/42e58b3d7ff89a919c347691695a58b3.png)
+![](img/42e58b3d7ff89a919c347691695a58b3.png)
 
 > 数据科学是试验与错误，它是研究与递归，它是实践与理论的结合，它需要领域知识，它提升你的战略技能，你会学习统计学并掌握编程技能。但最重要的是，它教会你保持耐心，因为你总是接近找到更好的答案。
 
@@ -44,7 +44,7 @@
 
 **1\. 确保你理解机器学习及其三个关键领域。点击阅读：**
 
-[**机器学习8分钟**
+[**机器学习 8 分钟**
 
 *机器学习是现在和未来。所有的技术专家、数据科学家和金融专家都可以受益…*medium.com](https://medium.com/fintechexplained/introduction-to-machine-learning-4b2d7c57613b)
 
@@ -66,7 +66,7 @@
 
 总是有可能找到另一个正确答案。在预测问题中，通常会有多个正确答案。
 
-![](../Images/8e39a8603040a418dd9d4a316499267a.png)
+![](img/8e39a8603040a418dd9d4a316499267a.png)
 
 **2\. 如果这是一个监督式机器学习问题，请确保你了解它是回归问题还是分类问题。点击阅读：**
 
@@ -100,7 +100,7 @@
 
 **7\. 如果这是一个无监督机器学习问题，那么了解聚类是如何工作的及其实现。点击阅读：**
 
-[**无监督机器学习：聚类和K均值**](https://medium.com/fintechexplained/what-is-dimension-reduction-in-data-science-2aa5547f4d29)
+[**无监督机器学习：聚类和 K 均值**](https://medium.com/fintechexplained/what-is-dimension-reduction-in-data-science-2aa5547f4d29)
 
 *在本文中，我想解释无监督机器学习中的聚类是如何工作的。特别是，我想要……* [medium.com](https://medium.com/fintechexplained/unsupervised-machine-learning-clustering-and-k-means-5f6fee22009a)
 
@@ -140,7 +140,7 @@
 
 1.  *精细调整模型参数*
 
-![](../Images/9c14b2038435bfd8a7f81b66b3609de2.png)
+![](img/9c14b2038435bfd8a7f81b66b3609de2.png)
 
 总是分析你的数据集，查看是否缺少任何重要信息，当发现问题时要解决，但始终记得备份并保存你的工作，因为你可能需要回到之前的步骤。
 
@@ -150,29 +150,29 @@
 
 我希望有一个简单的页面列出实现机器学习模型所需遵循的步骤。本文旨在提供一个从头到尾的成功机器学习项目实施指南。
 
-![](../Images/6a657ad0fcaff345607a56708460093c.png)
+![](img/6a657ad0fcaff345607a56708460093c.png)
 
 希望这能帮到你。
 
-**简介：[Farhad Malik](https://medium.com/@farhadmalik84)** 用简单的术语解释复杂的数学、金融和技术概念。[FinTechExplained](https://medium.com/fintechexplained)的编辑。联系方式：[FarhadMalik84@googlemail.com](mailto:FarhadMalik84@googlemail.com)
+**简介：[Farhad Malik](https://medium.com/@farhadmalik84)** 用简单的术语解释复杂的数学、金融和技术概念。[FinTechExplained](https://medium.com/fintechexplained)的编辑。联系方式：FarhadMalik84@googlemail.com
 
 [原文](https://medium.com/fintechexplained/end-to-end-guide-for-machine-learning-project-146c288186dc)。已获转载许可。
 
 **相关内容：**
 
-+   [Keras四步工作流程](/2018/06/keras-4-step-workflow.html)
++   Keras 四步工作流程
 
-+   [机器学习过程的框架](/2018/05/general-approaches-machine-learning-process.html)
++   机器学习过程的框架
 
-+   [机器学习项目检查清单](/2018/12/machine-learning-project-checklist.html)
++   机器学习项目检查清单
 
 ### 更多相关话题
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [初学者的端到端机器学习指南](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)
 

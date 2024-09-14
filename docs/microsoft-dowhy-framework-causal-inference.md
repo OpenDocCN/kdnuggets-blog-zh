@@ -1,20 +1,20 @@
 # 微软的 DoWhy 是一个酷炫的因果推断框架
 
-> 原文：[https://www.kdnuggets.com/2020/08/microsoft-dowhy-framework-causal-inference.html](https://www.kdnuggets.com/2020/08/microsoft-dowhy-framework-causal-inference.html)
+> 原文：[`www.kdnuggets.com/2020/08/microsoft-dowhy-framework-causal-inference.html`](https://www.kdnuggets.com/2020/08/microsoft-dowhy-framework-causal-inference.html)
 
-[评论](#comments)![图示](../Images/27984cc5951ff202de0bcd5f9a01e9b0.png)
+评论![图示](img/27984cc5951ff202de0bcd5f9a01e9b0.png)
 
-来源: [https://www.microsoft.com/en-us/research/blog/dowhy-a-library-for-causal-inference/](https://www.microsoft.com/en-us/research/blog/dowhy-a-library-for-causal-inference/)
+来源: [`www.microsoft.com/en-us/research/blog/dowhy-a-library-for-causal-inference/`](https://www.microsoft.com/en-us/research/blog/dowhy-a-library-for-causal-inference/)
 
 > 我最近开始了一份新的关注人工智能教育的通讯。TheSequence 是一份无废话（即无炒作、无新闻等）的 AI 专注通讯，阅读时间为 5 分钟。目标是让你了解机器学习项目、研究论文和概念。请通过下面的订阅尝试一下：
 
-[![图片](../Images/f2aed90f956dea213be7c9bbf9cd7072.png)](https://thesequence.substack.com/)
+![图片](https://thesequence.substack.com/)
 
 人类大脑具有将原因与特定事件关联的卓越能力。从选举结果到物体掉落在地板上，我们不断地将事件链联系起来，以产生特定的效果。神经心理学将这种认知能力称为因果推理。计算机科学和经济学研究一种特定形式的因果推理，称为因果推断，它专注于探索两个观察变量之间的关系。多年来，机器学习已经产生了许多因果推断的方法，但它们在主流应用中仍然大多难以使用。最近，微软研究院[开源了 DoWhy](https://github.com/Microsoft/dowhy)，这是一个用于因果思维和分析的框架。
 
 因果推断面临的挑战不是它是一门新学科，恰恰相反，而是当前的方法仅代表因果推理的一个非常小且简单的版本。大多数试图连接原因的模型，如线性回归，依赖于对数据进行某些假设的经验分析。纯粹的因果推断依赖于反事实分析，这更接近于人类做决定的方式。想象一个场景，你和家人一起去一个未知的目的地度假。在度假前后，你正与一些反事实问题进行挣扎：
 
-![文章配图](../Images/ffba3fde7fced1bc9c40aed9bda8c03f.png)
+![文章配图](img/ffba3fde7fced1bc9c40aed9bda8c03f.png)
 
 回答这些问题是因果推断的重点。与监督学习不同，因果推断依赖于对未观察量的估计。这通常被称为因果推断的“根本问题”，意味着模型永远不能通过留出的测试集进行纯粹客观的评估。在我们的假期例子中，你可以观察到度假与不度假的效果，但永远不能同时观察到。这一挑战迫使因果推断对数据生成过程做出关键假设。传统的因果推断机器学习框架试图绕过“根本问题”，这导致数据科学家和开发人员感到非常沮丧。
 
@@ -32,7 +32,7 @@
 
 为了实现其目标，DoWhy 将任何因果推断问题建模为一个包含四个基本步骤的工作流程：建模、识别、估计和反驳。
 
-![图片](../Images/b55878179e0fa1b2292042e7d5ac64b0.png)
+![图片](img/b55878179e0fa1b2292042e7d5ac64b0.png)
 
 1.  **建模：** DoWhy 使用因果关系图来建模每个问题。当前版本的 DoWhy 支持两种图输入格式：[gml](http://www.fim.uni-passau.de/index.php?id=17297&L=1)（推荐）和 [dot](http://www.graphviz.org/documentation/)。图中可能包含变量之间因果关系的先验知识，但 DoWhy 不做任何直接假设。
 
@@ -84,9 +84,9 @@ model**.**view_model(layout**=**"dot")
 display(Image(filename**=**"causal_model.png"))
 ```
 
-![图](../Images/81e4efbfb3e0988df9ae8b3da5f9812f.png)
+![图](img/81e4efbfb3e0988df9ae8b3da5f9812f.png)
 
-来源：[https://microsoft.github.io/dowhy/](https://microsoft.github.io/dowhy/)
+来源：[`microsoft.github.io/dowhy/`](https://microsoft.github.io/dowhy/)
 
 下一步是识别图中的因果关系：
 
@@ -103,9 +103,9 @@ estimate **=** model**.**estimate_effect(identified_estimand,
 dowhy**.**plotter**.**plot_causal_effect(estimate, df[data_dict["treatment_name"]], df[data_dict["outcome_name"]])
 ```
 
-![图](../Images/7c60ca71247bc9e15574a17f6f6fe6ea.png)
+![图](img/7c60ca71247bc9e15574a17f6f6fe6ea.png)
 
-来源：[https://microsoft.github.io/dowhy/](https://microsoft.github.io/dowhy/)
+来源：[`microsoft.github.io/dowhy/`](https://microsoft.github.io/dowhy/)
 
 最后，我们可以使用不同的技术来反驳因果估计器：
 
@@ -119,21 +119,21 @@ DoWhy 是一个非常简单且有用的框架，用于实现因果推断模型�
 
 **相关：**
 
-+   [Facebook 使用贝叶斯优化在机器学习模型中进行更好的实验](/2020/08/facebook-bayesian-optimization-better-experiments-machine-learning.html)
++   Facebook 使用贝叶斯优化在机器学习模型中进行更好的实验
 
-+   [通过遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元](/2020/06/learning-forgetting-deep-neural-networks-jennifer-aniston.html)
++   通过遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元
 
-+   [Netflix 的 Polynote 是一个新的开源框架，用于构建更好的数据科学笔记本](/2020/08/netflix-polynote-open-source-framework-better-data-science-notebooks.html)
++   Netflix 的 Polynote 是一个新的开源框架，用于构建更好的数据科学笔记本
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 

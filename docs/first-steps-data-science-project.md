@@ -1,22 +1,22 @@
 # 数据科学项目的第一步
 
-> 原文：[https://www.kdnuggets.com/2020/07/first-steps-data-science-project.html](https://www.kdnuggets.com/2020/07/first-steps-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2020/07/first-steps-data-science-project.html`](https://www.kdnuggets.com/2020/07/first-steps-data-science-project.html)
 
-[评论](#comments)
+评论
 
-**由 [Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)，Closter首席执行官**。
+**由 [Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)，Closter 首席执行官**。
 
-![](../Images/4c39e62388c79244f2b50eba00582d8f.png)
+![](img/4c39e62388c79244f2b50eba00582d8f.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,19 +28,19 @@
 
 1.  你手中有大量的数据，这些数据是你几个月或几年来积累的，有人说：“我们有很多数据，我们得对它做点什么。”
 
-    ![](../Images/62ed073a41976239104dc15aca786773.png)
+    ![](img/62ed073a41976239104dc15aca786773.png)
 
 1.  公司决定创建新的领域，以开始思考如何利用数据做出决策。新的员工被聘请来从事这些新创建的领域。
 
-    ![](../Images/2da5da92199535b4797c8e0307f621c8.png)
+    ![](img/2da5da92199535b4797c8e0307f621c8.png)
 
 1.  商业问题正在转变为数据科学问题，你希望利用数据来解决这些问题。公司聘请了“数据科学家”和数据收集与分析人员。必须有人来优先排序这些问题，然后将其传递给团队。
 
-    ![](../Images/09393f8a8718bb17758facb7ca826b02.png)
+    ![](img/09393f8a8718bb17758facb7ca826b02.png)
 
 1.  随着数据科学实践的开展，你开始使用数据来解决问题，运用机器学习、统计分析等技术。数据科学部门有很多使用案例，每个人都想参与这一革命。
 
-    ![](../Images/8cb3839feede6725a824736207f0f240.png)
+    ![](img/8cb3839feede6725a824736207f0f240.png)
 
 正如你所见，这个过程源于需求，但情况并非总是如此。有些公司从数据科学的思维方式开始，因此这个过程可能会有所不同。
 

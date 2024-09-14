@@ -1,8 +1,8 @@
 # 与大数据相关的工具和技术
 
-> 原文：[https://www.kdnuggets.com/working-with-big-data-tools-and-techniques](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)
+> 原文：[`www.kdnuggets.com/working-with-big-data-tools-and-techniques`](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)
 
-![与大数据相关的工具和技术](../Images/c3bc7dc0b61709f85f56dbca57fc96c1.png)
+![与大数据相关的工具和技术](img/c3bc7dc0b61709f85f56dbca57fc96c1.png)
 
 图片来源：[尼诺·苏扎](https://www.pexels.com/photo/macbook-pro-near-keyboard-2800552/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -66,7 +66,7 @@
 
 **工具概述：**
 
-![处理大数据：工具与技术](../Images/a9daae7fb8ba6db982b64303c0f2f504.png)
+![处理大数据：工具与技术](img/a9daae7fb8ba6db982b64303c0f2f504.png)
 
 ## 2\. 大数据 ETL
 
@@ -135,7 +135,7 @@ NoSQL 数据库设计用于处理大量结构化和非结构化数据而不需�
 
 **工具概述：**
 
-![与大数据合作：工具和技术](../Images/2c4be34118bb9247d7f11dacb171e99f.png)
+![与大数据合作：工具和技术](img/2c4be34118bb9247d7f11dacb171e99f.png)
 
 ## 4\. 大数据挖掘
 
@@ -147,7 +147,7 @@ NoSQL 数据库设计用于处理大量结构化和非结构化数据而不需�
 
 一些算法可能不适合大数据挖掘，因为这需要可扩展的并行处理算法，例如，[SVM](https://www.stratascratch.com/blog/machine-learning-algorithms-explained-support-vector-machine/?utm_source=blog&utm_medium=click&utm_campaign=kdn+big+data+tools)，[SGD](https://scikit-learn.org/stable/modules/sgd.html)，或[梯度提升](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)。
 
-大数据挖掘还采用了探索性数据分析（EDA）技术。EDA分析数据集以总结其主要特征，通常使用统计图形、图表和信息表。因此，我们将一起讨论大数据挖掘和EDA工具。
+大数据挖掘还采用了探索性数据分析（EDA）技术。EDA 分析数据集以总结其主要特征，通常使用统计图形、图表和信息表。因此，我们将一起讨论大数据挖掘和 EDA 工具。
 
 **关键特征：**
 
@@ -165,7 +165,7 @@ NoSQL 数据库设计用于处理大量结构化和非结构化数据而不需�
 
 **工具概述：**
 
-![处理大数据：工具与技术](../Images/2b02331f53eedb82929f94f2049aa767.png)
+![处理大数据：工具与技术](img/2b02331f53eedb82929f94f2049aa767.png)
 
 ## 5\. 大数据可视化
 
@@ -189,7 +189,7 @@ NoSQL 数据库设计用于处理大量结构化和非结构化数据而不需�
 
 **工具概述：**
 
-![处理大数据：工具与技术](../Images/79c083903ff61e907e33e27057b2411c.png)
+![处理大数据：工具与技术](img/79c083903ff61e907e33e27057b2411c.png)
 
 # 结论
 
@@ -201,14 +201,14 @@ NoSQL 数据库设计用于处理大量结构化和非结构化数据而不需�
 
 ### 更多相关内容
 
-+   [2022年及以后顶级AI和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶级 AI 和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
 +   [在实际应用中实现深度学习：一个数据中心化课程](https://www.kdnuggets.com/2022/04/corise-deep-learning-wild-data-centric-course.html)
 
-+   [数据科学家远程工作的6项软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
++   [数据科学家远程工作的 6 项软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
 
 +   [让深度学习在实际环境中运作：数据驱动的课程](https://www.kdnuggets.com/2022/11/corise-deep-learning-wild-data-centric-course.html)
 
-+   [在Python中使用SQLite数据库的指南](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)
++   [在 Python 中使用 SQLite 数据库的指南](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)
 
 +   [在机器学习模型中使用稀疏特征](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)

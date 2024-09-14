@@ -1,8 +1,8 @@
 # 经验丰富的 SQL 面试问题
 
-> 原文：[https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
+> 原文：[`www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html`](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
 
-![SQL 经验丰富的专业人士面试问题](../Images/f143ab433b355c0aa77f2582cbd24965.png)
+![SQL 经验丰富的专业人士面试问题](img/f143ab433b355c0aa77f2582cbd24965.png)
 
 ## 介绍
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -42,7 +42,7 @@ CASE 语句的价值不仅限于在查询中提供简单的条件逻辑。经验
 
 一般来说，经验丰富的数据科学家必须能够使用 CASE 编写更高效的查询。毕竟，CASE 语句的整个目的是避免编写过多的单独查询来整合数据。
 
-这里有一个可以使用 CASE / WHEN 语句解决的问题的示例：[https://platform.stratascratch.com/coding/9634-host-response-rates-with-cleaning-fees?python=](https://platform.stratascratch.com/coding/9634-host-response-rates-with-cleaning-fees?python=)
+这里有一个可以使用 CASE / WHEN 语句解决的问题的示例：[`platform.stratascratch.com/coding/9634-host-response-rates-with-cleaning-fees?python=`](https://platform.stratascratch.com/coding/9634-host-response-rates-with-cleaning-fees?python=)
 
 这是在 Airbnb 面试中提出的一个难题，候选人需要找出平均房东响应率、邮政编码及其对应的清洁费用。
 
@@ -62,7 +62,7 @@ CASE 语句的价值不仅限于在查询中提供简单的条件逻辑。经验
 
 ## 高级概念 N1：日期时间处理
 
-![针对有经验专业人士的 SQL 面试问题](../Images/ee6b088b74a74d5acb0f42a990897272.png)
+![针对有经验专业人士的 SQL 面试问题](img/ee6b088b74a74d5acb0f42a990897272.png)
 
 数据库中包含日期和时间是很常见的，因此任何有经验的数据科学家都应该对如何处理这些数据有深入的了解。这种数据使我们能够跟踪事件发生的顺序、频率变化、计算时间间隔，并获得其他重要见解。很多时候，执行这些操作需要完全掌握 SQL 中的日期时间处理。因此，拥有这些技能的专业人士将在竞争中占据优势。如果你对自己的技能没有 100% 的信心，可以查看下面描述的概念，看看有多少个听起来很熟悉。
 
@@ -129,7 +129,7 @@ ORDER BY year asc
 
 在这里，我们添加了第三列，标记为“prev_year_host”，其值将来自“current_year_host”，但延迟一行。这可能是这样的：
 
-![SQL 面试问题针对有经验的专业人士](../Images/650e8090ee481469b8c536cc39809fdd.png)
+![SQL 面试问题针对有经验的专业人士](img/650e8090ee481469b8c536cc39809fdd.png)
 
 以这种方式排列表格可以非常方便地计算最终的增长率。我们为方程中的每个值都有一个单独的列。最终，我们的代码应该类似于以下内容：
 
@@ -159,7 +159,7 @@ FROM
 
 ## 高级概念 N2：窗口函数和分区
 
-![SQL 面试问题针对有经验的专业人士](../Images/e112a727a805ff5dc22f561f0f0a1d28.png)
+![SQL 面试问题针对有经验的专业人士](img/e112a727a805ff5dc22f561f0f0a1d28.png)
 
 [SQL 窗口函数](https://www.stratascratch.com/blog/the-ultimate-guide-to-sql-window-functions/?utm_source=kdn&utm_medium=click&utm_campaign=kdn)是编写复杂而高效的 SQL 查询的最重要概念之一。经验丰富的专业人士应对窗口函数有深入的实践和理论知识。这包括了解 OVER 子句是什么并掌握其使用。面试官可能会问 OVER 子句如何将聚合函数转换为窗口函数。你还可能被问到可以作为窗口函数使用的三种聚合函数。经验丰富的数据科学家还应了解其他非聚合的窗口函数。
 
@@ -181,7 +181,7 @@ LAG(current_year_host, 1) OVER (ORDER BY year) as prev_year_host
 
 ## 高级概念 N3：月度增长
 
-![SQL 面试问题（经验丰富的专业人士）](../Images/881f00abd3dff325f9da9cbac80bddd1.png)
+![SQL 面试问题（经验丰富的专业人士）](img/881f00abd3dff325f9da9cbac80bddd1.png)
 
 许多组织使用数据分析来衡量自己的绩效。这可能涉及衡量营销活动的效果或特定投资的 ROI。执行这种分析需要深入了解 SQL，例如日期、时间和窗口函数。
 
@@ -231,7 +231,7 @@ GROUP BY created_at
 
 根据我们目前编写的代码，我们的表格将如下所示：
 
-![有经验的专业人士 SQL 面试问题](../Images/43282c12f6fe23a929718ebc47994b99.png)
+![有经验的专业人士 SQL 面试问题](img/43282c12f6fe23a929718ebc47994b99.png)
 
 在这里，我们有日期和总值的对应关系在 sum 列中，以及最后一个日期的值在 lag 列中。现在我们可以将这些值代入公式，并在单独的列中显示增长率。
 
@@ -248,7 +248,7 @@ GROUP BY year_month
 
 一旦我们运行代码，我们的表格应该只包含对计算至关重要的列。
 
-![有经验的专业人士 SQL 面试问题](../Images/43282c12f6fe23a929718ebc47994b99.png)
+![有经验的专业人士 SQL 面试问题](img/43282c12f6fe23a929718ebc47994b99.png)
 
 现在我们终于可以得到解决方案了。这是最终代码的样子：
 

@@ -1,10 +1,10 @@
 # 学习贝叶斯统计的关键资源
 
-> 原文：[https://www.kdnuggets.com/2020/07/essential-resources-learn-bayesian-statistics.html](https://www.kdnuggets.com/2020/07/essential-resources-learn-bayesian-statistics.html)
+> 原文：[`www.kdnuggets.com/2020/07/essential-resources-learn-bayesian-statistics.html`](https://www.kdnuggets.com/2020/07/essential-resources-learn-bayesian-statistics.html)
 
-[评论](#comments)
+评论
 
-![贝叶斯定理](../Images/25215d1a648796212c6ff667f732dcfd.png)
+![贝叶斯定理](img/25215d1a648796212c6ff667f732dcfd.png)
 
 在这篇文章中，我总结了一系列入门贝叶斯统计的资源。我根据自己的经验和对什么是良好介绍及下一步的看法编制了这些参考资料。这不是学术课程或特别严谨的内容，但这是一个全面的列表，必定会帮助你开始重温/开始你的统计学之旅。以下许多参考资料是在我参加的几个研讨会上推荐给我的，我希望与那些想提高统计学和机器学习（ML）技能的人分享。
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
-我能想到的初学者入门贝叶斯统计和建模的第一个资源是理查德·麦克艾瑞斯的 [《统计学的重新思考》](https://xcelab.net/rm/statistical-rethinking/)。在这里，你将学习从在简单问题中应用贝叶斯规则到复杂的多层/层级模型的所有内容。由于这不仅是一本书，还有一个完整的课程，你绝对应该在阅读过程中跟随 [YouTube上的视频讲座](https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI)。我建议你完成每章末尾的代码和练习，因为这是获得实际操作经验的最佳方式。另一个好处是，书中的R包 [rethinking](https://github.com/rmcelreath/rethinking) 和所有示例代码已经被翻译成多种编程语言，因此你可以自由选择你喜欢的语言进行阅读。
+我能想到的初学者入门贝叶斯统计和建模的第一个资源是理查德·麦克艾瑞斯的 [《统计学的重新思考》](https://xcelab.net/rm/statistical-rethinking/)。在这里，你将学习从在简单问题中应用贝叶斯规则到复杂的多层/层级模型的所有内容。由于这不仅是一本书，还有一个完整的课程，你绝对应该在阅读过程中跟随 [YouTube 上的视频讲座](https://www.youtube.com/playlist?list=PLDcUM9US4XdNM4Edgs7weiyIguLSToZRI)。我建议你完成每章末尾的代码和练习，因为这是获得实际操作经验的最佳方式。另一个好处是，书中的 R 包 [rethinking](https://github.com/rmcelreath/rethinking) 和所有示例代码已经被翻译成多种编程语言，因此你可以自由选择你喜欢的语言进行阅读。
 
 对于那些想通过真实世界的例子来复习统计知识的人来说，Andrew Gelman 和 Jennifer Hill 的 [数据分析：回归与多层次/分层模型](http://www.stat.columbia.edu/~gelman/arm/) 是一本很棒的书，适合那些对社会科学应用统计有更多兴趣的人。该书的更新版名为 [回归与其他故事](https://avehtari.github.io/ROS-Examples/)（Andrew Gelman, Jennifer Hill, Aki Vehtari），预计今年晚些时候发布。如果你想深入学习贝叶斯统计的更高级课程，我建议你访问 [Aki Vehtari 的教学页面](https://github.com/avehtari/BDA_course_Aalto)。虽然这比 McElreath 的课程更具挑战性，但值得一看。课程材料在 R 和 Python 中均有提供。
 
 现在，你已经复习了基础统计，并阅读了大部分 McElreath 的书，但你也想了解机器学习。你可能会问，接下来应该去哪里？做些什么？挑战自己阅读 Christopher Bishop 的 [模式识别与机器学习](https://www.amazon.com/Pattern-Recognition-Learning-Information-Statistics/dp/0387310738)。Bishop 的书通过隐含的贝叶斯视角介绍了从回归和分类到神经网络的所有知名机器学习概念。可以说，我仅通过阅读前几章就深刻加强了我在机器学习和贝叶斯统计方面的知识。尽管我强烈推荐这本书，但请记住，这本书较为高级，需要时间来理解其概念。
 
-![贝叶斯拼贴](../Images/e35f49fe5868a83f373dc4c2050bfdaa.png)
+![贝叶斯拼贴](img/e35f49fe5868a83f373dc4c2050bfdaa.png)
 
 与 Bishop 的书籍处于同一水平，你还可以在 [David MacKay 的信息理论、推理与学习算法](http://www.inference.org.uk/mackay/itila/book.html) 中找到严谨且详细的贝叶斯统计和建模解释。我很幸运在大学时使用了这本书，它仍然在我重新审视一些概率概念、贝叶斯统计和机器学习时至关重要。该书网页还提供了软件资源和示例，供你在阅读文本时进行实验和探索。
 

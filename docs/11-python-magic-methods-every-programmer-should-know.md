@@ -1,8 +1,8 @@
 # 每个程序员都应该知道的 11 个 Python 魔法方法
 
-> 原文：[https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
+> 原文：[`www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know`](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
 
-![每个程序员都应该知道的 11 个 Python 魔法方法](../Images/c6e4055e8f998e4027bd282946ee7fbd.png)
+![每个程序员都应该知道的 11 个 Python 魔法方法](img/c6e4055e8f998e4027bd282946ee7fbd.png)
 
 作者提供的图片
 
@@ -388,7 +388,7 @@ Output >>> Vector2D(x=9, y=15)
 
 `__getattr__` 方法用于获取对象的特定属性值。
 
-在这个示例中，我们可以添加一个 `__getattr__` 方法，该方法在计算 [向量的大小（L2 范数）](/2023/05/vector-matrix-norms-numpy-linalg-norm.html) 时被调用：
+在这个示例中，我们可以添加一个 `__getattr__` 方法，该方法在计算 向量的大小（L2 范数） 时被调用：
 
 ```py
 class Vector2D:
@@ -429,11 +429,11 @@ Output >>> 5.0
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

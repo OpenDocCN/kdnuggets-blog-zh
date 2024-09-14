@@ -1,8 +1,8 @@
 # Baby AGI: 完全自主 AI 的诞生
 
-> 原文：[https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
+> 原文：[`www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html`](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
 
-![Baby AGI: 完全自主 AI 的诞生](../Images/d94f24230a58ad9a8e3bf8c74b7e7999.png)
+![Baby AGI: 完全自主 AI 的诞生](img/d94f24230a58ad9a8e3bf8c74b7e7999.png)
 
 图片由作者提供
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
 随着人工智能的持续繁荣，我们看到越来越多的应用程序被发布，以帮助特定的过程，例如任务管理。
 
-# 什么是Baby AGI？
+# 什么是 Baby AGI？
 
 [Baby AGI](https://github.com/yoheinakajima/babyagi) 是一个使用 [OpenAI](https://openai.com/) 和 [Pinecone](https://www.pinecone.io/) API，以及 [LangChain](https://python.langchain.com/en/latest/index.html) 框架的 Python 脚本，用于创建、组织、优先排序以及执行任务。Baby AGI 的过程是，它将使用基于前一个任务结果的预定义目标创建任务。
 
@@ -36,7 +36,7 @@
 
 1.  任务被发送到执行代理，并根据上下文使用 OpenAI API 完成任务
 
-1.  结果被存储到Pinecone中
+1.  结果被存储到 Pinecone 中
 
 1.  新任务根据目标和前一个任务的结果进行创建和优先排序。
 
@@ -66,7 +66,7 @@ prioritization_agent()
 
 最后一步是任务列表的排序和优先级排序。这是优先级代理功能参与的地方，它使用 OpenAI 的 API 对任务列表进行重新排序。该功能接受一个参数，即当前任务的 ID。然后，它会向 OpenAI 的 API 发送一个提示，并返回一个重新排序的新的任务列表，以编号列表的形式呈现。
 
-![Baby AGI: 完全自主 AI 的诞生](../Images/48ed67b35ce8e79f9b79e882cfcedf0d.png)
+![Baby AGI: 完全自主 AI 的诞生](img/48ed67b35ce8e79f9b79e882cfcedf0d.png)
 
 图片来源 [Yohei](https://twitter.com/yoheinakajima/status/1640934493489070080/photo/1)（Baby AGI 的创作者）
 
@@ -106,7 +106,7 @@ Yohei（BabyAGI 的创造者）表示，他们计划在系统中进行未来的�
 
 下面的图片定义了这些未来计划：
 
-![Baby AGI: 完全自主 AI 的诞生](../Images/2122b344feb388ff4e0e093c649f90a5.png)
+![Baby AGI: 完全自主 AI 的诞生](img/2122b344feb388ff4e0e093c649f90a5.png)
 
 图片来自 [Yohei](https://twitter.com/yoheinakajima/status/1640934493489070080/photo/1)（Baby AGI 的创造者）
 

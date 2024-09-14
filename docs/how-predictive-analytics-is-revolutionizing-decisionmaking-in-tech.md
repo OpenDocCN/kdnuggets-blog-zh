@@ -1,22 +1,22 @@
 # 预测分析如何革新科技决策
 
-> 原文：[https://www.kdnuggets.com/how-predictive-analytics-is-revolutionizing-decisionmaking-in-tech](https://www.kdnuggets.com/how-predictive-analytics-is-revolutionizing-decisionmaking-in-tech)
+> 原文：[`www.kdnuggets.com/how-predictive-analytics-is-revolutionizing-decisionmaking-in-tech`](https://www.kdnuggets.com/how-predictive-analytics-is-revolutionizing-decisionmaking-in-tech)
 
-![预测分析如何革新科技决策](../Images/98464133fb6c691a79da57a9af01c5d1.png)
+![预测分析如何革新科技决策](img/98464133fb6c691a79da57a9af01c5d1.png)
 
 图片由编辑提供
 
-预测分析将在2023年的商业决策中发挥关键作用，AI、机器学习以及[数据科学](/tag/data-science)将被大大小小的企业利用，以推动收入增长并实现最大化发展。预测分析能够处理大量数据，发现隐藏的有价值的见解，是挖掘潜力的关键。
+预测分析将在 2023 年的商业决策中发挥关键作用，AI、机器学习以及数据科学将被大大小小的企业利用，以推动收入增长并实现最大化发展。预测分析能够处理大量数据，发现隐藏的有价值的见解，是挖掘潜力的关键。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 预测分析处理大量数据，分析以找出有用且相关的信息，然后开发预测模型，提供与不同情境（包括过去和现在）相关的宝贵见解。通过这些基于情境的见解，可以对未来事件进行预测，使企业能够在识别新趋势、改变产品供应等方面做出更好的决策。
 
-![预测分析如何革新科技决策](../Images/34f1b53528a9cc26f250d79ce7cf7394.png)
+![预测分析如何革新科技决策](img/34f1b53528a9cc26f250d79ce7cf7394.png)
 
 图片来自[Qualtrics](https://www.qualtrics.com/experience-management/research/predictive-analytics/)
 
@@ -40,13 +40,13 @@
 
 除了查看销售趋势外，预测分析还可以评估销售漏斗，检查每个阶段的有效性，从最初的意识到完成购买。例如，算法可以确定潜在客户通常会与多少内容/广告互动，以及何时互动，之后才会完成购买或关键行动。这有助于改进未来的定向广告活动，为了解客户在生命周期中更可能互动的时机提供洞察。
 
-此方法还可以识别哪些类型的内容被定期互动，无论是社交媒体帖子还是应用程序中的PDF下载。通过[PDF SDKs](https://apryse.com/blog/pdf-sdk-guide)，客户可以快速将PDF内容如优惠券或产品信息下载到手机上，这是购买意图的明确迹象。
+此方法还可以识别哪些类型的内容被定期互动，无论是社交媒体帖子还是应用程序中的 PDF 下载。通过[PDF SDKs](https://apryse.com/blog/pdf-sdk-guide)，客户可以快速将 PDF 内容如优惠券或产品信息下载到手机上，这是购买意图的明确迹象。
 
 ## 结合预测分析和决策制定
 
 在商业中，将预测分析与决策结合起来已成为一种常见做法，依赖于先进的算法、过去的行为数据和统计数据来准确预测未来的行为。这不仅有助于企业做出更准确的决策，还允许它们快速做出决策，从而提供竞争优势。
 
-![预测分析如何在技术决策中引发革命](../Images/4d5228badb3f1f33f936e1a99941c9e8.png)
+![预测分析如何在技术决策中引发革命](img/4d5228badb3f1f33f936e1a99941c9e8.png)
 
 图片来源于[Analytica](https://analytica.com/applying-predictive-analytics-in-enterprise-decision-making/)
 
@@ -58,7 +58,7 @@
 
 预测分析与决策制定相结合的好处包括：
 
-+   机器学习和[人工智能](/tag/artificial-intelligence)的使用使得预测未来结果和趋势成为可能，从而使决策过程能够确定最佳行动方案。
++   机器学习和人工智能的使用使得预测未来结果和趋势成为可能，从而使决策过程能够确定最佳行动方案。
 
 +   通过准确的预测，企业可以保持领先地位，迅速采取行动以启动营销活动或新产品。
 
@@ -76,7 +76,7 @@
 
 以下是创建预测模型时应遵循的五项最佳实践。
 
-1.  确保在将[数据集](/datasets/index.html)应用于预测模型之前完全理解它们。这包括了解数据的来源、收集方式及其结构。确保所用数据完全可靠对于保证模型做出准确且相关的预测至关重要。
+1.  确保在将数据集应用于预测模型之前完全理解它们。这包括了解数据的来源、收集方式及其结构。确保所用数据完全可靠对于保证模型做出准确且相关的预测至关重要。
 
 1.  你还必须采用适合你业务的模型，以便与正在处理的数据相匹配。选择一个可以在整个业务中使用的单一模型，以便于优化，而不是使用多个可能变得复杂且低效的模型。
 
@@ -92,18 +92,18 @@
 
 预测分析通过使用先进的机器学习算法来提供对未来客户行为和市场事件的洞察，从而协助营销活动、销售漏斗和产品管理。没有这些洞察，企业面临被竞争对手抛在后头的风险，可能会错失有利机会，无法理解其客户基础。
 
-[**Nahla Davies**](http://nahlawrites.com/) 是一名软件开发人员和技术作家。在全职从事技术写作之前，她曾担任过诸如领导编程等有趣的工作，并曾在一家Inc. 5,000体验品牌公司担任首席程序员，该公司客户包括三星、时代华纳、Netflix和索尼。
+[**Nahla Davies**](http://nahlawrites.com/) 是一名软件开发人员和技术作家。在全职从事技术写作之前，她曾担任过诸如领导编程等有趣的工作，并曾在一家 Inc. 5,000 体验品牌公司担任首席程序员，该公司客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 相关内容
 
-+   [用PandasGUI革新数据分析](https://www.kdnuggets.com/2023/06/revolutionizing-data-analysis-pandasgui.html)
++   [用 PandasGUI 革新数据分析](https://www.kdnuggets.com/2023/06/revolutionizing-data-analysis-pandasgui.html)
 
 +   [人工智能如何革新传统行业？](https://www.kdnuggets.com/how-ai-is-revolutionizing-the-legacy-industries)
 
-+   [百度研究发布2022年十大技术趋势预测](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)
++   [百度研究发布 2022 年十大技术趋势预测](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)
 
-+   [2022年技术专家薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
++   [2022 年技术专家薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
 
-+   [AI for Ukraine是AI HOUSE推出的一个新教育项目…](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)
++   [AI for Ukraine 是 AI HOUSE 推出的一个新教育项目…](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)
 
 +   [科技行业的大规模裁员是什么情况？](https://www.kdnuggets.com/2023/02/layoffs-tech.html)

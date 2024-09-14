@@ -1,8 +1,8 @@
 # Python、Selenium 和 Google 的地理编码自动化：免费和付费
 
-> 原文：[https://www.kdnuggets.com/2019/11/automate-geocoding-free-paid-python-selenium-google.html](https://www.kdnuggets.com/2019/11/automate-geocoding-free-paid-python-selenium-google.html)
+> 原文：[`www.kdnuggets.com/2019/11/automate-geocoding-free-paid-python-selenium-google.html`](https://www.kdnuggets.com/2019/11/automate-geocoding-free-paid-python-selenium-google.html)
 
-[评论](#comments)![figure-name](../Images/8be87195e3a1875ebf0bceffb8d5110f.png)
+评论![figure-name](img/8be87195e3a1875ebf0bceffb8d5110f.png)
 
 地理编码是空间分析的起点。无论是地理编码一个地方还是居住地，准确的地理编码器是确保你的分析在正确轨道上的第一步。本教程将带你了解两种选项，它们利用 Python、Selenium 和 Google 地理编码 API 自动化地理编码过程。自动化是每个数据科学家都需要学习的技能。但自动化工作流因人而异，不是每个人的工作流都是一样的。当我们认为重复相同的过程过于耗时，而你的时间更值得用在其他事情上时，自动化就是我们要追求的目标。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
-![figure-name](../Images/c5123fd86ebbfaa97d04b6656dd579cb.png)[来源](https://www.mapdevelopers.com/geocode_tool.php)
+![figure-name](img/c5123fd86ebbfaa97d04b6656dd579cb.png)[来源](https://www.mapdevelopers.com/geocode_tool.php)
 
 第一个教程是为了在没有付费服务的情况下自动化我的地理编码过程。根据我的个人观察，只要满足以下标准，我的脚本给了我至少 70% 的准确性：
 
@@ -121,7 +121,7 @@ driver.close()
 
 ### Google Geocoding 与 Python
 
-![figure-name](../Images/678390d9e459a3a20f13d5b85121b46f.png)[来源](https://cloud.google.com/blog/products/maps-platform/address-geocoding-in-google-maps-apis)
+![figure-name](img/678390d9e459a3a20f13d5b85121b46f.png)[来源](https://cloud.google.com/blog/products/maps-platform/address-geocoding-in-google-maps-apis)
 
 Google 以前允许每天进行一定数量（约 2,500 次 API 调用）的地理编码免费使用。这虽然是一个令人恼火的限制，但它允许即使地址有一些拼写错误也能进行高精度地理编码，更何况如果你有地点名称的话会更好。**但最近 Google 现在对每次 API 调用收费**。
 
@@ -168,26 +168,26 @@ df.to_excel("xxx.xlsx") #name of output file
 
 上述脚本将返回一个包含三个新列的 Excel 文件：'纬度'、'经度'、'Google 地址'。它将比任何自定义脚本更快。Google 无疑是最受欢迎的地理编码 API，因为它在客户端项目中非常可靠。在商业环境中，如果客户希望将其客户的住所坐标进行映射、可视化和分析，那么解释使用 Google 进行地理编码将是简单易懂的。
 
-这种方法使用的代码行数更少，维护起来更容易。由于没有限制且每次API调用的价格相对便宜，因此在一定程度上是可行的。
+这种方法使用的代码行数更少，维护起来更容易。由于没有限制且每次 API 调用的价格相对便宜，因此在一定程度上是可行的。
 
 **相关：**
 
-+   [使用Folium在Python中可视化地理空间数据](/2018/09/visualising-geospatial-data-python-folium.html)
++   使用 Folium 在 Python 中可视化地理空间数据
 
-+   [如何从零开始构建数据科学项目](/2018/12/build-data-science-project-from-scratch.html)
++   如何从零开始构建数据科学项目
 
-+   [将OpenStreetMap数据转化为ML训练标签以进行目标检测](/2019/09/openstreetmap-data-ml-training-labels-object-detection.html)
++   将 OpenStreetMap 数据转化为 ML 训练标签以进行目标检测
 
 ### 更多相关内容
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [Python中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
++   [Python 中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

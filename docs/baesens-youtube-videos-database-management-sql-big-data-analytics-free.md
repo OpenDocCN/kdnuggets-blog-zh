@@ -1,6 +1,6 @@
 # YouTube 上关于数据库管理、SQL、数据仓库、商业智能、OLAP、大数据、NoSQL 数据库、数据质量、数据治理和分析的视频 – 免费
 
-> 原文：[https://www.kdnuggets.com/2018/05/baesens-youtube-videos-database-management-sql-big-data-analytics-free.html](https://www.kdnuggets.com/2018/05/baesens-youtube-videos-database-management-sql-big-data-analytics-free.html)
+> 原文：[`www.kdnuggets.com/2018/05/baesens-youtube-videos-database-management-sql-big-data-analytics-free.html`](https://www.kdnuggets.com/2018/05/baesens-youtube-videos-database-management-sql-big-data-analytics-free.html)
 
 **由 [Prof. Dr. Bart Baesens](https://feb.kuleuven.be/bart.baesens) 提供，KU Leuven。** 赞助帖子。
 
@@ -18,11 +18,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 +   [NoSQL 数据库及其使用案例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
-+   [回到基础 第2周：数据库、SQL、数据管理及其他](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [回到基础 第 2 周：数据库、SQL、数据管理及其他](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
 
 +   [数据质量维度：用极高的期望保证你的数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 

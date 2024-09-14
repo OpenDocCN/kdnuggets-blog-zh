@@ -1,42 +1,42 @@
 # 使用大语言模型在云中优化性能和成本的策略
 
-> 原文：[https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)
+> 原文：[`www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud`](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)
 
-![使用大语言模型在云中优化性能和成本的策略](../Images/99ce9c90cb6e9401eac8cdaa858d85add.png)
+![使用大语言模型在云中优化性能和成本的策略](img/99ce9c90cb6e9401eac8cdaa858d85add.png)
 
 图片来源：[pch.vector](https://www.freepik.com/free-vector/money-income-attraction_9176032.htm#query=cost&position=29&from_view=search&track=sph&uuid=61aa0541-882f-4e86-b49d-e7cc8e315f4b) 在 [Freepik](https://www.freepik.com/)
 
-大语言模型（LLM）最近开始在业务中站稳脚跟，并将进一步扩展。随着公司开始理解实施LLM的好处，数据团队将调整模型以满足业务需求。
+大语言模型（LLM）最近开始在业务中站稳脚跟，并将进一步扩展。随着公司开始理解实施 LLM 的好处，数据团队将调整模型以满足业务需求。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
-对于业务来说，最佳路径是利用云平台来扩展业务所需的任何LLM要求。然而，许多障碍可能会阻碍LLM在云中的性能并增加使用成本。这正是我们希望在业务中避免的。
+对于业务来说，最佳路径是利用云平台来扩展业务所需的任何 LLM 要求。然而，许多障碍可能会阻碍 LLM 在云中的性能并增加使用成本。这正是我们希望在业务中避免的。
 
-这就是为什么本文将尝试概述一种可以用来优化云中LLM性能的策略，同时考虑到成本。策略是什么？让我们深入探讨一下。
+这就是为什么本文将尝试概述一种可以用来优化云中 LLM 性能的策略，同时考虑到成本。策略是什么？让我们深入探讨一下。
 
 # 1\. 制定清晰的预算计划
 
-我们必须在实施任何优化性能和成本的策略之前了解我们的财务状况。我们愿意在LLM上投入的预算将成为我们的限制。更高的预算可能带来更显著的性能结果，但如果不支持业务，可能并不理想。
+我们必须在实施任何优化性能和成本的策略之前了解我们的财务状况。我们愿意在 LLM 上投入的预算将成为我们的限制。更高的预算可能带来更显著的性能结果，但如果不支持业务，可能并不理想。
 
-预算计划需要与各种利益相关者进行广泛讨论，以避免浪费。确定您的业务希望解决的关键问题，并评估LLM是否值得投资。
+预算计划需要与各种利益相关者进行广泛讨论，以避免浪费。确定您的业务希望解决的关键问题，并评估 LLM 是否值得投资。
 
-这一策略同样适用于任何个人或独立业务。为LLM设定一个您愿意支出的预算，将有助于您长期解决财务问题。
+这一策略同样适用于任何个人或独立业务。为 LLM 设定一个您愿意支出的预算，将有助于您长期解决财务问题。
 
 # 2\. 确定合适的模型规模和硬件
 
-随着研究的进展，我们可以选择多种LLM来解决问题。使用较小参数的模型，优化速度更快，但可能没有最佳的业务问题解决能力。而更大的模型具有更丰富的知识库和创造力，但计算成本更高。
+随着研究的进展，我们可以选择多种 LLM 来解决问题。使用较小参数的模型，优化速度更快，但可能没有最佳的业务问题解决能力。而更大的模型具有更丰富的知识库和创造力，但计算成本更高。
 
-在决定模型时，我们需要考虑LLM大小的性能和成本之间的权衡。我们是需要更大参数的模型，这样性能更好但成本更高，还是相反？这是我们需要考虑的问题。因此，尽量评估你的需求。
+在决定模型时，我们需要考虑 LLM 大小的性能和成本之间的权衡。我们是需要更大参数的模型，这样性能更好但成本更高，还是相反？这是我们需要考虑的问题。因此，尽量评估你的需求。
 
 此外，云硬件也可能影响性能。更好的 GPU 内存可能会有更快的响应时间，支持更复杂的模型，并减少延迟。然而，更高的内存意味着更高的成本。
 
@@ -46,7 +46,7 @@
 
 如果我们以[Amazon SageMaker 推理选项](https://docs.aws.amazon.com/sagemaker/latest/dg/deploy-model.html)为例，你的推理选项包括：
 
-1.  **实时推理**。这种推理在输入到达时即时处理响应。它通常用于实时应用，如聊天机器人、翻译器等。由于实时推理总是需要低延迟，因此即使在需求低谷期，应用程序也需要高计算资源。这意味着如果需求不足，实时推理的LLM可能导致更高的成本而没有任何好处。
+1.  **实时推理**。这种推理在输入到达时即时处理响应。它通常用于实时应用，如聊天机器人、翻译器等。由于实时推理总是需要低延迟，因此即使在需求低谷期，应用程序也需要高计算资源。这意味着如果需求不足，实时推理的 LLM 可能导致更高的成本而没有任何好处。
 
 1.  **无服务器推理**。这种推理是指云平台根据需要动态扩展和分配资源。性能可能会受到影响，因为每次请求时资源启动都会有轻微的延迟。但这是最具成本效益的，因为我们只为所使用的资源付费。
 

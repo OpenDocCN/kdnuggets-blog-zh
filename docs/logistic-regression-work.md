@@ -1,8 +1,8 @@
 # 逻辑回归是如何工作的？
 
-> 原文：[https://www.kdnuggets.com/2022/07/logistic-regression-work.html](https://www.kdnuggets.com/2022/07/logistic-regression-work.html)
+> 原文：[`www.kdnuggets.com/2022/07/logistic-regression-work.html`](https://www.kdnuggets.com/2022/07/logistic-regression-work.html)
 
-![逻辑回归是如何工作的？](../Images/35c287fe299baa779f6a63a515e66b47.png)
+![逻辑回归是如何工作的？](img/35c287fe299baa779f6a63a515e66b47.png)
 
 编辑提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -32,15 +32,15 @@
 
 逻辑回归的输出始终介于 (0 和 1) 之间，这适用于二分类任务。值越高，当前样本被分类为 class=1 的概率越高，反之亦然。
 
-![公式](../Images/935e68dcc690fde9de31da341326e585.png)
+![公式](img/935e68dcc690fde9de31da341326e585.png)
 
-如上公式所示，![公式](../Images/8e667acc74548c20685e6712ece84537.png) 是我们要学习、训练或优化的参数，![公式](../Images/a6eb9fc879ef578de1425ea87d54ce83.png) 是输入数据。输出是当值接近1时的预测值，这意味着该实例更有可能是正样本（y=1）。如果值接近0，则意味着该实例更有可能是负样本（y=0）。
+如上公式所示，![公式](img/8e667acc74548c20685e6712ece84537.png) 是我们要学习、训练或优化的参数，![公式](img/a6eb9fc879ef578de1425ea87d54ce83.png) 是输入数据。输出是当值接近 1 时的预测值，这意味着该实例更有可能是正样本（y=1）。如果值接近 0，则意味着该实例更有可能是负样本（y=0）。
 
 为了优化我们的任务，我们需要为此任务定义一个损失函数（成本函数或目标函数）。在逻辑回归中，我们使用对数似然损失函数。
 
-![公式](../Images/88b0b921f2b92ed2b96d48d56f3fa2a5.png)
+![公式](img/88b0b921f2b92ed2b96d48d56f3fa2a5.png)
 
-m 是训练数据中的样本数量。![公式](../Images/f7b68e109bf4e972865a51007844c2d4.png) 是第 i 个样本的标签，![公式](../Images/d187a6e3c2fb53333edff7a4b3d6dc81.png) i 是第 i 个样本的预测值。当当前样本的标签为1时，公式的第二项为0。我们希望第一项越大越好，反之亦然。最后，我们将所有样本的损失相加，取平均，然后添加负号。我们希望最小化二次成本函数![公式](../Images/930cb17979943bee3e1b67950f690dc9.png)。当![公式](../Images/930cb17979943bee3e1b67950f690dc9.png)越小时，意味着模型对数据集的拟合越好。没有闭式解法来找出![公式](../Images/8e667acc74548c20685e6712ece84537.png)。为实现这一目标，我们需要使用一些优化算法，如梯度下降。由于![公式](../Images/930cb17979943bee3e1b67950f690dc9.png)是一个凸函数，梯度下降可以保证找到全局最小值。[更多详情](https://builtin.com/data-science/what-is-logistic-regression)。
+m 是训练数据中的样本数量。![公式](img/f7b68e109bf4e972865a51007844c2d4.png) 是第 i 个样本的标签，![公式](img/d187a6e3c2fb53333edff7a4b3d6dc81.png) i 是第 i 个样本的预测值。当当前样本的标签为 1 时，公式的第二项为 0。我们希望第一项越大越好，反之亦然。最后，我们将所有样本的损失相加，取平均，然后添加负号。我们希望最小化二次成本函数![公式](img/930cb17979943bee3e1b67950f690dc9.png)。当![公式](img/930cb17979943bee3e1b67950f690dc9.png)越小时，意味着模型对数据集的拟合越好。没有闭式解法来找出![公式](img/8e667acc74548c20685e6712ece84537.png)。为实现这一目标，我们需要使用一些优化算法，如梯度下降。由于![公式](img/930cb17979943bee3e1b67950f690dc9.png)是一个凸函数，梯度下降可以保证找到全局最小值。[更多详情](https://builtin.com/data-science/what-is-logistic-regression)。
 
 # 逻辑回归是如何工作的？
 
@@ -48,13 +48,13 @@ m 是训练数据中的样本数量。![公式](../Images/f7b68e109bf4e972865a51
 
 并非所有算法都能简洁地归入这种简单的二分法，逻辑回归就是一个显著的例子。逻辑回归属于回归家族，因为它涉及根据变量之间的定量关系预测结果。然而，与线性回归不同的是，它接受连续和离散变量作为输入，其输出是定性的。此外，它预测的是离散类别，如“是/否”或“客户/非客户”。
 
-在实践中，[**逻辑回归算法**](https://www.interviewbit.com/data-science-interview-questions/)分析变量之间的关系。它通过使用Sigmoid函数将离散结果的概率分配到0和1.0之间，从而将数值结果转换为概率表达式。概率要么是0，要么是1，取决于事件是否发生。对于二元预测，你可以将总体分为两个组，阈值为0.5。高于0.5的被视为属于A组，低于0.5的被视为属于B组。
+在实践中，[**逻辑回归算法**](https://www.interviewbit.com/data-science-interview-questions/)分析变量之间的关系。它通过使用 Sigmoid 函数将离散结果的概率分配到 0 和 1.0 之间，从而将数值结果转换为概率表达式。概率要么是 0，要么是 1，取决于事件是否发生。对于二元预测，你可以将总体分为两个组，阈值为 0.5。高于 0.5 的被视为属于 A 组，低于 0.5 的被视为属于 B 组。
 
-![逻辑回归](../Images/7a885e336c659eecb89b8a0f6519f0e0.png)
+![逻辑回归](img/7a885e336c659eecb89b8a0f6519f0e0.png)
 
-超平面用作决策线，以在数据点使用Sigmoid函数被分配到一个类别后，尽可能地将两个类别分开。未来数据点的类别可以通过决策边界进行预测。
+超平面用作决策线，以在数据点使用 Sigmoid 函数被分配到一个类别后，尽可能地将两个类别分开。未来数据点的类别可以通过决策边界进行预测。
 
-![逻辑回归是如何工作的？](../Images/c1a0890ec41b19fb403a3d52625231cd.png)
+![逻辑回归是如何工作的？](img/c1a0890ec41b19fb403a3d52625231cd.png)
 
 # 结论
 
@@ -70,7 +70,7 @@ m 是训练数据中的样本数量。![公式](../Images/f7b68e109bf4e972865a51
 
 +   [线性回归与逻辑回归: 简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12, 3月23日: 最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12, 3 月 23 日: 最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
 
 +   [逻辑回归在分类中的应用](https://www.kdnuggets.com/2022/04/logistic-regression-classification.html)
 

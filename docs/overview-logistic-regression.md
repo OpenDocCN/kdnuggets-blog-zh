@@ -1,6 +1,6 @@
 # 逻辑回归概述
 
-> 原文：[https://www.kdnuggets.com/2022/02/overview-logistic-regression.html](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)
+> 原文：[`www.kdnuggets.com/2022/02/overview-logistic-regression.html`](https://www.kdnuggets.com/2022/02/overview-logistic-regression.html)
 
 **由 [Arvind Thorat](https://www.linkedin.com/in/arvind-thorat-6963661a7/)，Kavikulguru 工程技术学院**
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -34,7 +34,7 @@
 
 逻辑回归是线性回归的扩展，用于解决分类问题。我们将看到如何使用基于梯度下降的优化方法来解决一个简单的逻辑回归问题，这也是最流行的优化方法之一。
 
-![逻辑回归概述](../Images/afe7dc9a9f805d1f1bceadf0698fb980.png)
+![逻辑回归概述](img/afe7dc9a9f805d1f1bceadf0698fb980.png)
 
 ### 假设
 
@@ -48,7 +48,7 @@
 
     ### **Sigmoid 函数（见图 1）**
 
-    逻辑回归以方法核心使用的函数命名，即逻辑函数。它也被称为 sigmoid 函数。它用于描述生态学中种群增长的特性，快速上升并在环境承载能力达到最大值时趋于稳定。它是一个三段曲线，可以将任何数值映射到0和1之间，但从不完全到达这些极限。
+    逻辑回归以方法核心使用的函数命名，即逻辑函数。它也被称为 sigmoid 函数。它用于描述生态学中种群增长的特性，快速上升并在环境承载能力达到最大值时趋于稳定。它是一个三段曲线，可以将任何数值映射到 0 和 1 之间，但从不完全到达这些极限。
 
     我们可以推导出
 
@@ -148,7 +148,7 @@
 
     +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-    +   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
+    +   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
 
     +   [用于分类的逻辑回归](https://www.kdnuggets.com/2022/04/logistic-regression-classification.html)
 

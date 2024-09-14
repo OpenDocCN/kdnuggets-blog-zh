@@ -1,8 +1,8 @@
 # 获得数据工程师职位：免费课程和认证
 
-> 原文：[https://www.kdnuggets.com/landing-a-data-engineer-role-free-courses-and-certifications](https://www.kdnuggets.com/landing-a-data-engineer-role-free-courses-and-certifications)
+> 原文：[`www.kdnuggets.com/landing-a-data-engineer-role-free-courses-and-certifications`](https://www.kdnuggets.com/landing-a-data-engineer-role-free-courses-and-certifications)
 
-![获得数据工程师职位](../Images/5a412ce556ff2d2b2b3698db242ab521.png)
+![获得数据工程师职位](img/5a412ce556ff2d2b2b3698db242ab521.png)
 
 *作者图片*
 
@@ -10,21 +10,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 人们说你在购买东西时应该考虑物有所值。然而，最好的物有所值就是免费获得好的东西。但这样的东西真的存在吗？如果我们按照那句“天下没有免费的午餐”来讲，似乎不存在。
 
-我声称有免费的午餐，我现在要证明这一点！我挖掘出了10个教育‘免费午餐’——提供优质知识的免费数据工程课程。确实如此；如果你愿意或能够支付数十、数百，甚至有时数千美元，你会发现更多的选择和种类。
+我声称有免费的午餐，我现在要证明这一点！我挖掘出了 10 个教育‘免费午餐’——提供优质知识的免费数据工程课程。确实如此；如果你愿意或能够支付数十、数百，甚至有时数千美元，你会发现更多的选择和种类。
 
-许多这样的课程在其他一些免费课程列表中被认为是免费的。支付一次性$90或每月$45对某些人来说是免费的。但尽管有很多人非常愿意学习数据工程，却没有这笔钱去购买一个‘免费’课程。（还有，现实点！免费字面上的意思就是，嗯，免费！不是‘便宜’，不是‘很少的钱’，也不是‘负担得起’。免费！）
+许多这样的课程在其他一些免费课程列表中被认为是免费的。支付一次性$90 或每月$45 对某些人来说是免费的。但尽管有很多人非常愿意学习数据工程，却没有这笔钱去购买一个‘免费’课程。（还有，现实点！免费字面上的意思就是，嗯，免费！不是‘便宜’，不是‘很少的钱’，也不是‘负担得起’。免费！）
 
-根据我研究的情况，这些课程确实是免费的。很多课程来自edX。如果选择免费访问课程，你必须在一定时间内完成，通常大约是六个月。但这应该足够让你舒适地完成每门课程。此外，免费访问意味着你无法终身访问所有材料（完成后会被删除），也得不到证书。尽管如此，你应该能够利用这些课程学习数据工程。
+根据我研究的情况，这些课程确实是免费的。很多课程来自 edX。如果选择免费访问课程，你必须在一定时间内完成，通常大约是六个月。但这应该足够让你舒适地完成每门课程。此外，免费访问意味着你无法终身访问所有材料（完成后会被删除），也得不到证书。尽管如此，你应该能够利用这些课程学习数据工程。
 
 在谈论课程之前，我们先简要了解一下[数据工程师的角色](https://www.stratascratch.com/blog/what-does-a-data-engineer-do-and-what-they-dont-do/?utm_source=blog&utm_medium=click&utm_campaign=kdn+landing+data+engineeer+role)。这样，了解课程时会更容易知道该找什么。
 
@@ -32,7 +32,7 @@
 
 简而言之，数据工程师负责让数据对数据团队成员和其他利益相关者可用。在此过程中，他们处理数据并构建和维护数据基础设施，例如 ETL 过程、数据管道、数据存储。
 
-![理解数据工程师的角色](../Images/5dd66e4d9423866f38487ea6456be401.png)
+![理解数据工程师的角色](img/5dd66e4d9423866f38487ea6456be401.png)
 
 自然，这些课程应该涵盖所有或部分技能。让我们更详细地研究一下将构成你教育免费午餐的课程——别具一格的双关语。
 

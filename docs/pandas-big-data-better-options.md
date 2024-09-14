@@ -1,22 +1,22 @@
 # 你还在用 Pandas 处理大数据吗？这里有两个更好的选择
 
-> 原文：[https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html](https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html)
+> 原文：[`www.kdnuggets.com/2021/03/pandas-big-data-better-options.html`](https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html)
 
-[评论](#comments)
+评论
 
 **作者 [Roman Orac](https://www.linkedin.com/in/romanorac/)，数据科学家**。
 
-![](../Images/a59832f76b253613a4a80482402949fc.png)
+![](img/a59832f76b253613a4a80482402949fc.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 ### 我所说的大数据是什么意思？
 
-![](../Images/b05d980e9599377d490e9e4c223bf940.png)
+![](img/b05d980e9599377d490e9e4c223bf940.png)
 
 *照片由 [ev](https://unsplash.com/@ev?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -42,27 +42,27 @@
 
 ### Dask 和 Vaex 是什么？
 
-![](../Images/e319d9a66acd1c1cb7cdc578de9de774.png)
+![](img/e319d9a66acd1c1cb7cdc578de9de774.png)
 
 *照片由 [JESHOOTS.COM](https://unsplash.com/@jeshoots?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
-**Dask** 提供了先进的并行处理分析能力，使你喜爱的工具在规模上表现优异。这包括numpy、pandas和sklearn。它是开源的，并且免费提供。它使用现有的Python API和数据结构，方便你在Dask驱动的等效工具之间切换。
+**Dask** 提供了先进的并行处理分析能力，使你喜爱的工具在规模上表现优异。这包括 numpy、pandas 和 sklearn。它是开源的，并且免费提供。它使用现有的 Python API 和数据结构，方便你在 Dask 驱动的等效工具之间切换。
 
-**Vaex** 是一个高性能的Python库，用于懒加载的Out-of-Core DataFrames（类似于Pandas），用于可视化和探索大型表格数据集。它可以每秒计算超过十亿行的基本统计数据。它支持多种可视化，允许对大数据进行交互式探索。
+**Vaex** 是一个高性能的 Python 库，用于懒加载的 Out-of-Core DataFrames（类似于 Pandas），用于可视化和探索大型表格数据集。它可以每秒计算超过十亿行的基本统计数据。它支持多种可视化，允许对大数据进行交互式探索。
 
-Dask和Vaex Dataframes与Pandas Dataframes并不完全兼容，但一些最常见的“数据整理”操作都被这两种工具所支持。Dask更专注于将代码扩展到计算集群，而Vaex则使在单台机器上处理大型数据集变得更加容易。
+Dask 和 Vaex Dataframes 与 Pandas Dataframes 并不完全兼容，但一些最常见的“数据整理”操作都被这两种工具所支持。Dask 更专注于将代码扩展到计算集群，而 Vaex 则使在单台机器上处理大型数据集变得更加容易。
 
 ### 实验
 
-![](../Images/4da59230f2fce0a9b76164579c4ad52f.png)
+![](img/4da59230f2fce0a9b76164579c4ad52f.png)
 
 *由[Louis Reed](https://unsplash.com/@_louisreed?utm_source=medium&utm_medium=referral)拍摄，发布在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上的照片。*
 
-我生成了两个包含100万行和1000列的CSV文件。每个文件的大小为18.18 GB，两个文件合计36.36 GB。文件中包含从0到100的均匀分布的随机数。
+我生成了两个包含 100 万行和 1000 列的 CSV 文件。每个文件的大小为 18.18 GB，两个文件合计 36.36 GB。文件中包含从 0 到 100 的均匀分布的随机数。
 
-![](../Images/8b82f45e3ed2c9ba9fd4563b24b34750.png)
+![](img/8b82f45e3ed2c9ba9fd4563b24b34750.png)
 
-*两个包含随机数据的CSV文件。作者拍摄的照片。*
+*两个包含随机数据的 CSV 文件。作者拍摄的照片。*
 
 ```py
 import pandas as pd
@@ -80,25 +80,25 @@ df.head()
 
 ```
 
-![](../Images/f3bb04e9acfcf77f4b3132f4998b3bf3.png)
+![](img/f3bb04e9acfcf77f4b3132f4998b3bf3.png)
 
 *文件头。作者拍摄的照片。*
 
-实验在一台具有32 GB主内存的MacBook Pro上运行——真是一个强大的机器。在测试pandas Dataframe的极限时，我惊讶地发现，在这样的机器上遇到内存错误是相当有挑战性的！
+实验在一台具有 32 GB 主内存的 MacBook Pro 上运行——真是一个强大的机器。在测试 pandas Dataframe 的极限时，我惊讶地发现，在这样的机器上遇到内存错误是相当有挑战性的！
 
-当内存接近其容量时，macOS会开始将数据从主内存转储到SSD上。pandas Dataframe的上限是机器上100 GB的自由磁盘空间。
+当内存接近其容量时，macOS 会开始将数据从主内存转储到 SSD 上。pandas Dataframe 的上限是机器上 100 GB 的自由磁盘空间。
 
-> 当你的Mac需要内存时，它会将当前未使用的内容推送到交换文件中进行临时存储。当再次需要访问时，它会从交换文件中读取数据并恢复到内存中。
+> 当你的 Mac 需要内存时，它会将当前未使用的内容推送到交换文件中进行临时存储。当再次需要访问时，它会从交换文件中读取数据并恢复到内存中。
 
-我花了一些时间思考如何解决这个问题，以确保实验的公平性。我想到的第一个想法是禁用交换空间，这样每个库只有主内存可用——在macOS上实现这一点真是困难重重。经过几个小时的努力，我无法禁用交换空间。
+我花了一些时间思考如何解决这个问题，以确保实验的公平性。我想到的第一个想法是禁用交换空间，这样每个库只有主内存可用——在 macOS 上实现这一点真是困难重重。经过几个小时的努力，我无法禁用交换空间。
 
-第二个想法是使用暴力破解的方法。我将SSD填满了它的全部容量，以至于操作系统无法使用交换空间，因为设备上没有剩余空间。
+第二个想法是使用暴力破解的方法。我将 SSD 填满了它的全部容量，以至于操作系统无法使用交换空间，因为设备上没有剩余空间。
 
-![](../Images/5594b5fa18db9949a1b52d09e74538b8.png)
+![](img/5594b5fa18db9949a1b52d09e74538b8.png)
 
 *实验期间的“磁盘几乎已满”通知。作者拍摄的照片。*
 
-这有效！pandas无法读取两个18 GB的文件，Jupyter内核崩溃了。
+这有效！pandas 无法读取两个 18 GB 的文件，Jupyter 内核崩溃了。
 
 如果我再次进行这个实验，我会创建一个内存较少的虚拟机。这样，更容易展示这些工具的限制。
 
@@ -106,7 +106,7 @@ Dask 或 Vaex 能否帮助我们处理这些大文件？哪个更快？让我们
 
 ### Vaex 与 Dask
 
-![](../Images/722af4abc5eb2948aa97ad5840048134.png)
+![](img/722af4abc5eb2948aa97ad5840048134.png)
 
 *照片由 [Frida Bredesen](https://unsplash.com/@fridooh?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)提供。*
 
@@ -138,7 +138,7 @@ df[df.col2 > 10]
 
 ### Vaex
 
-![](../Images/bf4fceb8c4267f23beeb74631c57105a.png)
+![](img/bf4fceb8c4267f23beeb74631c57105a.png)
 
 *照片由 [Photos by Lanty](https://unsplash.com/@photos_by_lanty?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)提供。*
 
@@ -219,7 +219,7 @@ group_res = dv.groupby(by=dv.col1_binary, agg={'col3_mean': vaex.agg.mean('col3'
 
 ```
 
-![](../Images/581272a415640561ab96338e7ae15211.png)
+![](img/581272a415640561ab96338e7ae15211.png)
 
 *使用 Vaex 计算均值。照片由作者拍摄。*
 
@@ -234,7 +234,7 @@ plot = dv.plot1d(dv.col3, what='count(*)', limits=[0, 100])
 
 ```
 
-![](../Images/5bf52454450d54aebabc992f73988d29.png)
+![](img/5bf52454450d54aebabc992f73988d29.png)
 
 *使用 Vaex 可视化数据。照片由作者拍摄。*
 
@@ -253,7 +253,7 @@ Vaex 需要 40 秒计算所有列的总和。
 
 ### Dask
 
-![](../Images/d913642addcb5e4a15d313d4664e79b5.png)
+![](img/d913642addcb5e4a15d313d4664e79b5.png)
 
 *照片由 [Kelly Sikkema](https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral) 贡献，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -296,50 +296,50 @@ Dask 需要 9 秒钟输出文件的前 5 行。
 
 **使用 Dask 计算第 10 个分位数：**
 
-Dask有一个分位数函数，它计算实际分位数，而不是近似值。
+Dask 有一个分位数函数，它计算实际分位数，而不是近似值。
 
 ```py
 quantile = ds.col1.quantile(0.1).compute()
 
 ```
 
-Dask无法计算分位数，因为Jupyter Kernel崩溃了。
+Dask 无法计算分位数，因为 Jupyter Kernel 崩溃了。
 
-**使用Dask定义新列：**
+**使用 Dask 定义新列：**
 
-下面的函数使用分位数函数定义一个新的二进制列。Dask无法计算，因为它使用了分位数。
+下面的函数使用分位数函数定义一个新的二进制列。Dask 无法计算，因为它使用了分位数。
 
 ```py
 ds['col1_binary'] = ds.col1 > ds.col1.quantile(0.1)
 
 ```
 
-**使用Dask过滤数据：**
+**使用 Dask 过滤数据：**
 
 ```py
 ds = ds[(ds.col2 > 10)]
 
 ```
 
-上面的命令执行了0秒，因为Dask使用延迟执行范式。
+上面的命令执行了 0 秒，因为 Dask 使用延迟执行范式。
 
-**使用Dask对数据进行分组和聚合：**
+**使用 Dask 对数据进行分组和聚合：**
 
 ```py
 group_res = ds.groupby('col1_binary').col3.mean().compute()
 
 ```
 
-Dask无法对数据进行分组和聚合。
+Dask 无法对数据进行分组和聚合。
 
-**可视化col3的直方图：**
+**可视化 col3 的直方图：**
 
 ```py
 plot = ds.col3.compute().plot.hist(bins=64, ylim=(13900, 14400))
 
 ```
 
-Dask无法可视化数据。
+Dask 无法可视化数据。
 
 **计算所有列的总和：**
 
@@ -348,50 +348,50 @@ suma = ds.sum().sum().compute()
 
 ```
 
-Dask无法对所有数据进行求和。
+Dask 无法对所有数据进行求和。
 
 ### 结果
 
-下表显示了Vaex与Dask实验的执行时间。NA表示该工具无法处理数据，Jupyter Kernel崩溃。
+下表显示了 Vaex 与 Dask 实验的执行时间。NA 表示该工具无法处理数据，Jupyter Kernel 崩溃。
 
-![](../Images/aa55cde9fad098a6a6a7f56d384a39f0.png)
+![](img/aa55cde9fad098a6a6a7f56d384a39f0.png)
 
 *实验中的执行时间总结。照片由作者提供。*
 
 ### 结论
 
-![](../Images/cfd642a6a0627b6902b4f66e752a8bb1.png)
+![](img/cfd642a6a0627b6902b4f66e752a8bb1.png)
 
 *照片由 [Joshua Golde](https://unsplash.com/@joshgmit?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
-Vaex需要将CSV转换为HDF5格式，这对我来说没问题，因为你可以去吃午餐，回来时数据就会被转换。我也理解，在恶劣条件下（如实验中）主内存不足或没有主内存的情况下，读取数据将需要更长时间。
+Vaex 需要将 CSV 转换为 HDF5 格式，这对我来说没问题，因为你可以去吃午餐，回来时数据就会被转换。我也理解，在恶劣条件下（如实验中）主内存不足或没有主内存的情况下，读取数据将需要更长时间。
 
-我不明白的是Vaex显示文件头部所需的时间（前5行需要1189秒！）。Vaex中的其他操作经过了大量优化，使我们能够对大于主内存的数据集进行交互式数据分析。
+我不明白的是 Vaex 显示文件头部所需的时间（前 5 行需要 1189 秒！）。Vaex 中的其他操作经过了大量优化，使我们能够对大于主内存的数据集进行交互式数据分析。
 
-我有点预期Dask会出现问题，因为它更优化用于计算集群而非单台机器。Dask建立在pandas之上，这意味着在pandas中缓慢的操作在Dask中仍然缓慢。
+我有点预期 Dask 会出现问题，因为它更优化用于计算集群而非单台机器。Dask 建立在 pandas 之上，这意味着在 pandas 中缓慢的操作在 Dask 中仍然缓慢。
 
-实验的赢家已经明确。Vaex能够处理大于主内存的文件，而Dask不能。这个实验是具体的，因为我是在单台机器上测试性能，而不是计算集群。
+实验的赢家已经明确。Vaex 能够处理大于主内存的文件，而 Dask 不能。这个实验是具体的，因为我是在单台机器上测试性能，而不是计算集群。
 
 [原文](https://towardsdatascience.com/are-you-still-using-pandas-to-process-big-data-in-2021-850ab26ad919)。经许可转载。
 
 **相关：**
 
-+   [用Dask进行全流程数据科学的Pandas升级版](https://www.kdnuggets.com/2020/11/pandas-steroids-dask-python-data-science.html)
++   [用 Dask 进行全流程数据科学的 Pandas 升级版](https://www.kdnuggets.com/2020/11/pandas-steroids-dask-python-data-science.html)
 
-+   [为何及如何在大数据中使用Dask](https://www.kdnuggets.com/2020/04/dask-big-data.html)
++   [为何及如何在大数据中使用 Dask](https://www.kdnuggets.com/2020/04/dask-big-data.html)
 
 +   [告别大数据。你好，大规模数据！](https://www.kdnuggets.com/2020/10/sqream-massive-data.html)
 
 ### 更多相关内容
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

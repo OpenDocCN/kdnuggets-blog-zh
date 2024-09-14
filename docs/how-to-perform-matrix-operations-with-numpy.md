@@ -1,8 +1,8 @@
 # 如何使用 NumPy 执行矩阵操作
 
-> 原文：[https://www.kdnuggets.com/how-to-perform-matrix-operations-with-numpy](https://www.kdnuggets.com/how-to-perform-matrix-operations-with-numpy)
+> 原文：[`www.kdnuggets.com/how-to-perform-matrix-operations-with-numpy`](https://www.kdnuggets.com/how-to-perform-matrix-operations-with-numpy)
 
-![如何使用 NumPy 执行矩阵操作](../Images/9bd1f47928182ebd9c497268f612cfd6.png)
+![如何使用 NumPy 执行矩阵操作](img/9bd1f47928182ebd9c497268f612cfd6.png)
 
 图片由 [Vlado Paunovic](https://unsplash.com/photos/black-and-white-checkered-illustration-iBG594vhR1k) 提供
 
@@ -12,11 +12,11 @@ NumPy 是一个强大的 Python 库，包含大量数学函数，并支持创建
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -128,11 +128,11 @@ Function: 0.2588757239282131
 Operator: 0.24321464297827333 
 ```
 
-在这里可以看到，NumPy的`np.add`函数的性能略低于`+`运算符。这主要是因为add函数引入了类型检查，将任何*类似数组*的输入（如列表）转换为数组，然后再进行加法操作。这也就带来了额外的计算开销，相较于`+`运算符。
+在这里可以看到，NumPy 的`np.add`函数的性能略低于`+`运算符。这主要是因为 add 函数引入了类型检查，将任何*类似数组*的输入（如列表）转换为数组，然后再进行加法操作。这也就带来了额外的计算开销，相较于`+`运算符。
 
 然而，这种措施也使得`np.add`函数更不容易出错。例如，将`np.add`应用于`list`类型的输入仍然有效（例如`np.add([1, 1], [2, 2])`），而使用`+`运算符则会导致列表连接。
 
-同样，对于逐元素减法（使用`np.subtract`或`-`），除法（使用`np.divide`或`/`）和乘法（使用`np.multiply`或`*`），NumPy函数会进行类型检查，引入少量计算开销。
+同样，对于逐元素减法（使用`np.subtract`或`-`），除法（使用`np.divide`或`/`）和乘法（使用`np.multiply`或`*`），NumPy 函数会进行类型检查，引入少量计算开销。
 
 其他几个可能有用的操作包括转置和乘法数组。
 
@@ -146,7 +146,7 @@ func_a1_T = np.transpose(a1)
 att_a1_T = a1.T 
 ```
 
-矩阵乘法可以使用`np.dot`函数或`@`运算符（后者从Python 3.5开始实现了`np.matmul`函数）：
+矩阵乘法可以使用`np.dot`函数或`@`运算符（后者从 Python 3.5 开始实现了`np.matmul`函数）：
 
 ```py
 # Using np.dot
@@ -160,9 +160,9 @@ op_dot = func_a1_T @ a2
 
 ## 额外资源
 
-+   [NumPy数组对象](https://numpy.org/doc/stable/reference/arrays.html)
++   [NumPy 数组对象](https://numpy.org/doc/stable/reference/arrays.html)
 
-+   [Python中NumPy数组的温和介绍](https://machinelearningmastery.com/gentle-introduction-n-dimensional-arrays-python-numpy/)
++   [Python 中 NumPy 数组的温和介绍](https://machinelearningmastery.com/gentle-introduction-n-dimensional-arrays-python-numpy/)
 
 **[Stefania Cristina](https://www.linkedin.com/in/stefania-cristina-b3b7aa57)**，博士，是马耳他大学系统与控制工程系的高级讲师。她的研究兴趣集中在计算机视觉和机器学习领域。
 
@@ -170,12 +170,12 @@ op_dot = func_a1_T @ a2
 
 +   [如何在大数据集上进行内存高效的操作](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)
 
-+   [NumPy Linalg Norm中的向量和矩阵范数](https://www.kdnuggets.com/2023/05/vector-matrix-norms-numpy-linalg-norm.html)
++   [NumPy Linalg Norm 中的向量和矩阵范数](https://www.kdnuggets.com/2023/05/vector-matrix-norms-numpy-linalg-norm.html)
 
-+   [提升数学效率：驾驭NumPy数组操作](https://www.kdnuggets.com/elevate-math-efficiency-navigating-numpy-array-operations)
++   [提升数学效率：驾驭 NumPy 数组操作](https://www.kdnuggets.com/elevate-math-efficiency-navigating-numpy-array-operations)
 
-+   [使用NumPy进行日期和时间计算](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)
++   [使用 NumPy 进行日期和时间计算](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)
 
-+   [Python中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
++   [Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
 
 +   [傻瓜指南：精准率、召回率和混淆矩阵](https://www.kdnuggets.com/2020/01/guide-precision-recall-confusion-matrix.html)

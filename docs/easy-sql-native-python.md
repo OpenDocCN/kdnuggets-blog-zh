@@ -1,8 +1,8 @@
 # 如何用原生 Python 编写 SQL
 
-> 原文：[https://www.kdnuggets.com/2022/02/easy-sql-native-python.html](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)
+> 原文：[`www.kdnuggets.com/2022/02/easy-sql-native-python.html`](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)
 
-![如何用原生 Python 编写 SQL](../Images/fc98e8330f52fbe4e098c359fec1932e.png)
+![如何用原生 Python 编写 SQL](img/fc98e8330f52fbe4e098c359fec1932e.png)
 
 [技术矢量图由 freepik 创建 - www.freepik.com](https://www.freepik.com/vectors/technology)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

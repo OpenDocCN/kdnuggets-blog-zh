@@ -1,12 +1,12 @@
-# 8个让你的作品集脱颖而出的 AI/机器学习项目
+# 8 个让你的作品集脱颖而出的 AI/机器学习项目
 
-> 原文：[https://www.kdnuggets.com/2020/09/8-ml-ai-projects-stand-out.html](https://www.kdnuggets.com/2020/09/8-ml-ai-projects-stand-out.html)
+> 原文：[`www.kdnuggets.com/2020/09/8-ml-ai-projects-stand-out.html`](https://www.kdnuggets.com/2020/09/8-ml-ai-projects-stand-out.html)
 
-[评论](#comments)
+评论
 
 **作者 [Kajal Yadav](https://www.linkedin.com/in/techykajal/)，数据科学、创业公司和企业家的自由撰稿人**。
 
-![](../Images/29faf258bc2b1d1b10a5136edee3f9a0.png)
+![](img/29faf258bc2b1d1b10a5136edee3f9a0.png)
 
 *来源 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，由作者编辑。*
 
@@ -20,31 +20,31 @@
 
 数据科学爱好者常常问我，他们应该在作品集中包含什么类型的项目，以打造一个极具价值和独特性的作品集。
 
-以下是我为你的数据科学作品集提供的8个独特创意，并附上了参考文章，你可以从中获取如何开始特定创意的见解。你还可以在 [这里找到更多机器学习项目](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)。
+以下是我为你的数据科学作品集提供的 8 个独特创意，并附上了参考文章，你可以从中获取如何开始特定创意的见解。你还可以在 [这里找到更多机器学习项目](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)。
 
 ### 1. 基于社交媒体帖子进行抑郁情绪分析
 
-![](../Images/e49e2f3d448b4f2335871d9128fec2f7.png)
+![](img/e49e2f3d448b4f2335871d9128fec2f7.png)
 
 *照片由 [dole777](https://unsplash.com/@dole777?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上拍摄。*
 
-这个话题在当今非常敏感，并急需采取行动。全球有超过2.64亿人正在遭受抑郁症困扰。**抑郁症** 是全球残疾的主要原因，也是全球疾病负担的重要因素，每年几乎有80万人因自杀而死亡。自杀是15至29岁人群中的第二大死亡原因。抑郁症的治疗往往被延迟、不准确或完全遗漏。
+这个话题在当今非常敏感，并急需采取行动。全球有超过 2.64 亿人正在遭受抑郁症困扰。**抑郁症** 是全球残疾的主要原因，也是全球疾病负担的重要因素，每年几乎有 80 万人因自杀而死亡。自杀是 15 至 29 岁人群中的第二大死亡原因。抑郁症的治疗往往被延迟、不准确或完全遗漏。
 
-互联网时代为早期抑郁症干预服务提供了主要的机会，尤其是对年轻成年人。每分钟大约有6,000条推文发布在Twitter上，这相当于每分钟超过350,000条推文，每天5亿条推文，每年大约2000亿条推文。
+互联网时代为早期抑郁症干预服务提供了主要的机会，尤其是对年轻成年人。每分钟大约有 6,000 条推文发布在 Twitter 上，这相当于每分钟超过 350,000 条推文，每天 5 亿条推文，每年大约 2000 亿条推文。
 
 根据皮尤研究中心的数据，72%的公众使用某种形式的网络生活。从社交网络发布的数据对许多领域，如人类学和心理学，都很重要。但从专业角度来看，这些支持远远不够，具体方法也急需改进。
 
 ***通过分析社交媒体帖子的语言标记，可以创建一个深度学习模型，该模型能够比传统方法更早地为个人提供有关其心理健康的洞察。***
 
-> +   [你就是你发的推文](https://towardsdatascience.com/you-are-what-you-tweet-7e23fb84f4ed) - 通过Twitter使用检测社交媒体中的抑郁症
+> +   [你就是你发的推文](https://towardsdatascience.com/you-are-what-you-tweet-7e23fb84f4ed) - 通过 Twitter 使用检测社交媒体中的抑郁症
 > +   
-> +   [抑郁症的早期检测：社交网络分析与随机森林技术](https://www.jmir.org/2019/6/e12554/) - 原始论文，A Coruna大学。
+> +   [抑郁症的早期检测：社交网络分析与随机森林技术](https://www.jmir.org/2019/6/e12554/) - 原始论文，A Coruna 大学。
 > +   
 > +   [使用机器学习技术从社交网络数据中检测抑郁症](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6111060/)
 
 ### 2. 使用神经网络进行体育比赛视频到文本的摘要
 
-![](../Images/366c19b9c6b9c6902152981b0c968704.png)
+![](img/366c19b9c6b9c6902152981b0c968704.png)
 
 *照片由 [Aksh yadav](https://unsplash.com/@aksh1802?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -52,15 +52,15 @@
 
 自动创建游戏视频的概要带来了区分游戏中精彩时刻或亮点的挑战。
 
-因此，可以使用一些深度学习技术，如3D-CNN（三维卷积网络）、RNN（递归神经网络）、[LSTM（长短期记忆网络）](https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21)，以及通过将视频划分为不同部分并应用SVM（支持向量机）、NN（神经网络）和k-means算法来实现。
+因此，可以使用一些深度学习技术，如 3D-CNN（三维卷积网络）、RNN（递归神经网络）、[LSTM（长短期记忆网络）](https://towardsdatascience.com/illustrated-guide-to-lstms-and-gru-s-a-step-by-step-explanation-44e9eb85bf21)，以及通过将视频划分为不同部分并应用 SVM（支持向量机）、NN（神经网络）和 k-means 算法来实现。
 
 为了更好地理解，请详细参考附带的文章。
 
 > +   [使用迁移学习进行体育视频场景分类](https://www.mdpi.com/1424-8220/20/6/1702/htm) - 本文提出了一种新颖的体育视频场景分类方法。
 
-### 3. 使用CNN解决手写方程
+### 3. 使用 CNN 解决手写方程
 
-![](../Images/2edf1f62ed43396ea30f9824862cf743.png)
+![](img/2edf1f62ed43396ea30f9824862cf743.png)
 
 *照片由[Antoine Dautry](https://unsplash.com/@antoine1003?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)在[Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄。*
 
@@ -70,15 +70,15 @@
 
 > +   [使用卷积神经网络的手写方程求解器](https://medium.com/@vipul.gupta73921/handwritten-equation-solver-using-convolutional-neural-network-a44acc0bd9f8)
 > +   
-> +   [vipul79321/手写方程求解器](https://github.com/vipul79321/Handwritten-Equation-Solver) - 使用CNN的手写方程求解器。方程可以包含0-9的任何数字和符号。
+> +   [vipul79321/手写方程求解器](https://github.com/vipul79321/Handwritten-Equation-Solver) - 使用 CNN 的手写方程求解器。方程可以包含 0-9 的任何数字和符号。
 > +   
 > +   [计算机视觉—自动评分手写数学答卷](https://towardsdatascience.com/computer-vision-auto-grading-handwritten-mathematical-answersheets-8974744f72dd) - 将手写在纸上的数学方程求解步骤数字化。
 > +   
-> +   [手写方程到LaTeX](https://opensourc.es/blog/he2latex/)
+> +   [手写方程到 LaTeX](https://opensourc.es/blog/he2latex/)
 
-### 4. 使用NLP生成商务会议摘要
+### 4. 使用 NLP 生成商务会议摘要
 
-![](../Images/080cfe90a1f4bdc55a91871e7b4db9c1.png)
+![](img/080cfe90a1f4bdc55a91871e7b4db9c1.png)
 
 *照片由[Sebastian Herrmann](https://unsplash.com/@officestock?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)在[Unsplash](https://unsplash.com/s/photos/business-meeting?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄。*
 
@@ -98,7 +98,7 @@
 
 ### 5\. 面部识别以检测情绪并相应地推荐歌曲
 
-![](../Images/209627328e5920c503402c7cf4976765.png)
+![](img/209627328e5920c503402c7cf4976765.png)
 
 *照片来源：[Alireza Attari](https://unsplash.com/@alireza_attari?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/@alireza_attari?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上。*
 
@@ -108,13 +108,13 @@
 
 计算机视觉是一个跨学科领域，帮助将数字图像或视频的高层次理解传达给计算机。计算机视觉组件可以用来通过面部表情判断用户的情感。
 
-我发现了一些有趣且有用的API。然而，我没有使用这些API，但附在此处，希望它们对你有所帮助。
+我发现了一些有趣且有用的 API。然而，我没有使用这些 API，但附在此处，希望它们对你有所帮助。
 
 > +   [20+ 欣赏和担忧的情感识别 API | Nordic APIs](https://nordicapis.com/20-emotion-recognition-apis-that-will-leave-you-impressed-and-concerned/) - 如果企业能够随时使用技术感知情感，他们可以利用这一点进行销售。
 
 ### 6\. 从太空探测器如开普勒拍摄的图像中寻找适宜居住的外行星
 
-![](../Images/b809b3490bf473f612a31cdf38e553ce.png)
+![](img/b809b3490bf473f612a31cdf38e553ce.png)
 
 *照片来源：[Nick Owuor (astro.nic.visuals)](https://unsplash.com/@astro_nic25?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/@astro_nic25?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上。*
 
@@ -122,11 +122,11 @@
 
 > +   [使用机器学习寻找系外行星](https://towardsdatascience.com/exoplanet-hunting-using-machine-learning-d615958e1787) - 寻找我们太阳系之外的世界。
 > +   
-> +   [人工智能和NASA数据用于发现系外行星](https://www.nasa.gov/press-release/artificial-intelligence-nasa-data-used-to-discover-eighth-planet-circling-distant-star) - 我们的太阳系现在与其他星体环绕的行星数量并列最多。
+> +   [人工智能和 NASA 数据用于发现系外行星](https://www.nasa.gov/press-release/artificial-intelligence-nasa-data-used-to-discover-eighth-planet-circling-distant-star) - 我们的太阳系现在与其他星体环绕的行星数量并列最多。
 
 ### 7\. 老旧损坏胶卷照片的图像重生
 
-![](../Images/e9e93570aa5869a692fcac6c942a4dd8.png)
+![](img/e9e93570aa5869a692fcac6c942a4dd8.png)
 
 *来源 [Pikist](https://www.pikist.com/free-photo-xttnz)。*
 
@@ -140,7 +140,7 @@
 
 ### 8\. 使用深度学习生成音乐
 
-![](../Images/74d6c11d0f3e1610e2b622627387035a.png)
+![](img/74d6c11d0f3e1610e2b622627387035a.png)
 
 *照片由 [Abigail Keenan](https://unsplash.com/@akeenster?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，刊登于 [Unsplash](https://unsplash.com/@akeenster?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -148,7 +148,7 @@
 
 > +   [使用深度学习生成音乐](https://medium.com/analytics-vidhya/music-generation-using-deep-learning-a2b2848ab177)
 > +   
-> +   [如何使用Keras中的LSTM神经网络生成音乐](https://towardsdatascience.com/how-to-generate-music-using-a-lstm-neural-network-in-keras-68786834d4c5) - 创建音乐的LSTM神经网络介绍
+> +   [如何使用 Keras 中的 LSTM 神经网络生成音乐](https://towardsdatascience.com/how-to-generate-music-using-a-lstm-neural-network-in-keras-68786834d4c5) - 创建音乐的 LSTM 神经网络介绍
 
 ### 终极词
 
@@ -176,24 +176,24 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关信息
 
-+   [让你脱颖而出的那些“不那么性感”的SQL概念](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)
++   [让你脱颖而出的那些“不那么性感”的 SQL 概念](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)
 
 +   [停止学习数据科学以寻找目标，并通过目标找到...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

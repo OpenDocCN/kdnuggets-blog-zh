@@ -1,8 +1,8 @@
 # 特定数据角色的编程语言
 
-> 原文：[https://www.kdnuggets.com/2023/06/programming-languages-specific-data-roles.html](https://www.kdnuggets.com/2023/06/programming-languages-specific-data-roles.html)
+> 原文：[`www.kdnuggets.com/2023/06/programming-languages-specific-data-roles.html`](https://www.kdnuggets.com/2023/06/programming-languages-specific-data-roles.html)
 
-![特定数据角色的编程语言](../Images/e48ff2a60b6987001d25ca3277b6ca8d.png)
+![特定数据角色的编程语言](img/e48ff2a60b6987001d25ca3277b6ca8d.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -124,35 +124,35 @@ R、C++ 和 Java 仍然流行，然而，Python 和 SQL 因其更简单的编码
 
 根据上述图像，它显示了你在特定数据角色中需要什么类型的编程语言以及其重要性。圆圈越大，对特定数据角色越重要。
 
-根据 [Stack Overflow 2022年开发者调查](https://survey.stackoverflow.co/2022/#overview)，JavaScript 是使用最广泛的编程语言，而且已经使用了十年。然而，如果谈到用于学习编程的语言，HTML/CSS、JavaScript 和 Python 排在前列，并且相互接近。
+根据 [Stack Overflow 2022 年开发者调查](https://survey.stackoverflow.co/2022/#overview)，JavaScript 是使用最广泛的编程语言，而且已经使用了十年。然而，如果谈到用于学习编程的语言，HTML/CSS、JavaScript 和 Python 排在前列，并且相互接近。
 
 # 结论
 
-随着数据角色的不断发展，跟上所有变化可能会令人不堪重负。在你转向下一个或学习新技能之前，先掌握一门编程语言的熟练程度更为明智。一步一步来，总比同时试图学习10项技能要好。
+随着数据角色的不断发展，跟上所有变化可能会令人不堪重负。在你转向下一个或学习新技能之前，先掌握一门编程语言的熟练程度更为明智。一步一步来，总比同时试图学习 10 项技能要好。
 
 一旦你根据兴趣领域决定了编程语言，下一步就是使自己在该语言上达到熟练程度。
 
 有许多现成的资源可以帮助你的学习，你只需要知道正确的资源。下面是一些你可以受益的链接
 
-+   [2022年顶级数据分析师认证课程](/2022/11/top-data-analyst-certification-courses-2022.html)
++   2022 年顶级数据分析师认证课程
 
-+   [完整的数据科学学习路线图](/2022/08/complete-data-science-study-roadmap.html)
++   完整的数据科学学习路线图
 
-+   [完整的机器学习学习路线图](/2022/12/complete-machine-learning-study-roadmap.html)
++   完整的机器学习学习路线图
 
-+   [完整的数据工程学习路线图](/2022/11/complete-data-engineering-study-roadmap.html)
++   完整的数据工程学习路线图
 
 **[尼莎·阿利亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作者和 KDnuggets 的社区经理。她特别关注于提供数据科学职业建议或教程，以及数据科学的理论知识。她还希望探索人工智能如何/能够提升人类生命的持久性。她是一个热衷学习者，寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学编程语言及其使用时机](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)
 
-+   [2023年数据科学的8种编程语言]([https://www.kdnuggets.com/2023/07/8-programming-languages-data-science-learn-2023.html](https://www.kdnuggets.com/2023/07/8-programming-languages-data-science-learn-2023.html))
++   2023 年数据科学的 8 种编程语言)
 
-+   [KDnuggets™ 新闻 22:n04, 1月 26: 高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26: 高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
 +   [顶级编程语言及其用途](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 

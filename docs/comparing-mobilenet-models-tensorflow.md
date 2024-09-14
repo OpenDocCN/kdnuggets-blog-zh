@@ -1,22 +1,22 @@
 # 在 TensorFlow 中比较 MobileNet 模型
 
-> 原文：[https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html](https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html)
+> 原文：[`www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html`](https://www.kdnuggets.com/2019/03/comparing-mobilenet-models-tensorflow.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Harshit Dwivedi](https://harshit.app/) 提供，Android 讲师**
 
-![标题图像](../Images/b19415c11ab86d4e586a957be6c5ae05.png)
+![标题图像](img/b19415c11ab86d4e586a957be6c5ae05.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -34,9 +34,9 @@ TensorFlow 提供了各种预训练模型，例如拖放模型，以识别约 1,
 
 让我们看一个如何使用 MobileNet 的示例。我们将编写一个简单的分类器来识别图片中的 Pikachu。以下是显示 Pikachu 图片和不含 Pikachu 图片的示例：
 
-![图](../Images/bf3576eec85638c94663edb9e2286300.png)
+![图](img/bf3576eec85638c94663edb9e2286300.png)
 
-Pikachu![图](../Images/8ed1ecdd534c72ece76faecdf43ef50b.png)
+Pikachu![图](img/8ed1ecdd534c72ece76faecdf43ef50b.png)
 
 不是 Pikachu，假设在 Pokémon Go 中没有 Pikachu 可收集……
 
@@ -163,49 +163,49 @@ toco \
 
 该模型使用[IMDB WIKI 数据集](https://data.vision.ee.ethz.ch/cvl/rrothe/imdb-wiki/)，包含超过 50 万张名人面孔。它使用 MobileNet_V1_224_0.5 版本的 MobileNet。
 
-公开数据集中有数千张图像的情况非常罕见。该数据集基于大量名人面部图像集合构建。两个常见的来源是IMDb和维基百科。通过脚本从这两个来源的资料中检索了超过10万名名人的详细信息。
+公开数据集中有数千张图像的情况非常罕见。该数据集基于大量名人面部图像集合构建。两个常见的来源是 IMDb 和维基百科。通过脚本从这两个来源的资料中检索了超过 10 万名名人的详细信息。
 
-然后通过去除噪声（无关内容）来组织数据。所有没有时间戳的图像被删除，假设只有单张照片的图像更可能显示正确的出生日期细节。最终，共有来自IMDb的20,284名名人的460,723张面孔和来自维基百科的62,328张面孔，总计523,051张。
+然后通过去除噪声（无关内容）来组织数据。所有没有时间戳的图像被删除，假设只有单张照片的图像更可能显示正确的出生日期细节。最终，共有来自 IMDb 的 20,284 名名人的 460,723 张面孔和来自维基百科的 62,328 张面孔，总计 523,051 张。
 
 ### 情感模型
 
-该模型基于超过100万张图像的AffectNet模型。它使用了MobileNet_V2_224_1.4版本的MobileNet。
+该模型基于超过 100 万张图像的 AffectNet 模型。它使用了 MobileNet_V2_224_1.4 版本的 MobileNet。
 
 数据模型项目的链接可以在这里找到：
 
 [**AffectNet - Mohammad H. Mahoor, PhD**](http://mohammadmahoor.com/affectnet/)
 
-*当前测试集尚未发布。我们计划在不久的将来组织一个AffectNet挑战赛，敬请期待…*
+*当前测试集尚未发布。我们计划在不久的将来组织一个 AffectNet 挑战赛，敬请期待…*
 
 [mohammadmahoor.com](http://mohammadmahoor.com/affectnet/)
 
-AffectNet模型通过从互联网收集和标注超过100万张面部图像而建立。这些图像来自三个搜索引擎，使用了约1250个相关关键词，涵盖六种不同的语言。
+AffectNet 模型通过从互联网收集和标注超过 100 万张面部图像而建立。这些图像来自三个搜索引擎，使用了约 1250 个相关关键词，涵盖六种不同的语言。
 
 在收集的图像中，一半的图像被手动标注了七种不同的面部表情（分类模型）以及情感的强度和唤醒度（维度模型）。
 
-### MobileNet版本对比
+### MobileNet 版本对比
 
-在上述两种模型中，使用了不同版本的MobileNet模型。MobileNet V2主要是V1的更新版本，使其在性能方面更加高效和强大。
+在上述两种模型中，使用了不同版本的 MobileNet 模型。MobileNet V2 主要是 V1 的更新版本，使其在性能方面更加高效和强大。
 
-![图](../Images/555491ca9161425d40ad4aa667cf92bc.png)
+![图](img/555491ca9161425d40ad4aa667cf92bc.png)
 
 注意：值越低越好
 
-MACs是[multiply-accumulate operations](https://www.semanticscholar.org/topic/Multiply%E2%80%93accumulate-operation/408575)，用于测量对单张224×224 RGB图像进行推断所需的计算次数。
+MACs 是[multiply-accumulate operations](https://www.semanticscholar.org/topic/Multiply%E2%80%93accumulate-operation/408575)，用于测量对单张 224×224 RGB 图像进行推断所需的计算次数。
 
-从MACs的数量来看，V2的速度应当几乎是V1的两倍。然而，这不仅仅关乎计算次数。在移动设备上，[内存访问](https://heartbeat.fritz.ai/profiling-your-app-with-android-studio-7accc268cb98)比计算要慢得多。V2的参数数量只有V1的80%，因此它比V1更优。
+从 MACs 的数量来看，V2 的速度应当几乎是 V1 的两倍。然而，这不仅仅关乎计算次数。在移动设备上，[内存访问](https://heartbeat.fritz.ai/profiling-your-app-with-android-studio-7accc268cb98)比计算要慢得多。V2 的参数数量只有 V1 的 80%，因此它比 V1 更优。
 
-从结果来看，我们可以假设V2的速度几乎是V1模型的两倍。在内存访问受限的移动设备上，V2的计算能力表现得非常好。
+从结果来看，我们可以假设 V2 的速度几乎是 V1 模型的两倍。在内存访问受限的移动设备上，V2 的计算能力表现得非常好。
 
 在准确性方面：
 
-![图](../Images/7986e778d85c5164a94878ca5b376c05.png)
+![图](img/7986e778d85c5164a94878ca5b376c05.png)
 
-在这里，MobileNet V2在性能上比V1稍好，虽然不一定显著。
+在这里，MobileNet V2 在性能上比 V1 稍好，虽然不一定显著。
 
 ### 结论
 
-MobileNet是一系列*以移动为优先*的计算机视觉模型，适用于[TensorFlow](https://www.tensorflow.org/)，旨在有效地最大化准确性，同时考虑到设备或嵌入式应用的有限资源。
+MobileNet 是一系列*以移动为优先*的计算机视觉模型，适用于[TensorFlow](https://www.tensorflow.org/)，旨在有效地最大化准确性，同时考虑到设备或嵌入式应用的有限资源。
 
 MobileNets 是小型、低延迟、低功耗的模型，参数化以满足各种使用情况的资源限制。它们可以用于分类、检测、嵌入和分割，类似于其他流行的大规模模型，如 [Inception](https://arxiv.org/pdf/1602.07261.pdf)。
 
@@ -227,7 +227,7 @@ MobileNets 是小型、低延迟、低功耗的模型，参数化以满足各种
 
 *如果你觉得这篇文章有趣，可以探索*[*移动应用的机器学习项目*](https://www.amazon.com/Machine-Learning-Projects-Mobile-Applications/dp/1788994590)*。由 ML 专家 Karthikeyan MG 撰写，*[*移动应用的机器学习项目*](https://www.packtpub.com/big-data-and-business-intelligence/machine-learning-projects-mobile-applications)* 介绍了 7 个实际的、真实世界的项目实施，这些项目将教你如何利用 TensorFlow Lite 和 Core ML 在跨平台移动操作系统上执行高效的机器学习。*
 
-***想要开始构建令人惊叹的 Android 应用程序吗？查看我在 Coding Blocks 上的课程：***[https://online.codingblocks.com/courses/android-app-training-online](https://online.codingblocks.com/courses/android-app-training-online)
+***想要开始构建令人惊叹的 Android 应用程序吗？查看我在 Coding Blocks 上的课程：***[`online.codingblocks.com/courses/android-app-training-online`](https://online.codingblocks.com/courses/android-app-training-online)
 
 准备好进入代码世界了吗？查看 [Fritz 在 GitHub 上](https://github.com/fritzlabs)。你会找到流行的机器学习和深度学习模型的开源、适用于移动设备的实现，以及训练脚本、项目模板和用于构建自己的 ML 驱动的 iOS 和 Android 应用程序的工具。
 
@@ -241,11 +241,11 @@ MobileNets 是小型、低延迟、低功耗的模型，参数化以满足各种
 
 **相关：**
 
-+   [如何在计算机视觉中做一切](/2019/02/everything-computer-vision.html)
++   如何在计算机视觉中做一切
 
-+   [数据科学家/数据分析师的 10 款最佳移动应用](/2018/10/10-best-mobile-apps-data-scientist.html)
++   数据科学家/数据分析师的 10 款最佳移动应用
 
-+   [人工智能和机器学习的最新进展 - 带代码的论文亮点](/2019/02/paperswithcode-ai-machine-learning-highlights.html)
++   人工智能和机器学习的最新进展 - 带代码的论文亮点
 
 ### 更多相关主题
 

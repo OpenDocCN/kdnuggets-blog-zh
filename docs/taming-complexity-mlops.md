@@ -1,36 +1,36 @@
-# MLOps中的复杂性管理
+# MLOps 中的复杂性管理
 
-> 原文：[https://www.kdnuggets.com/2020/05/taming-complexity-mlops.html](https://www.kdnuggets.com/2020/05/taming-complexity-mlops.html)
+> 原文：[`www.kdnuggets.com/2020/05/taming-complexity-mlops.html`](https://www.kdnuggets.com/2020/05/taming-complexity-mlops.html)
 
-[评论](#comments)
+评论
 
-**由[苏拉夫·戴](https://www.linkedin.com/in/souravdeymit/)，Manifold.ai的CTO**。
+**由[苏拉夫·戴](https://www.linkedin.com/in/souravdeymit/)，Manifold.ai 的 CTO**。
 
-将近两年前，我的同事亚历山大·吴[分享了我们的想法](https://www.kdnuggets.com/2018/05/torus-docker-first-data-science.html)，即为什么机器学习工程师（MLEs）的兴起意味着我们需要一种DevOps方法来处理机器学习（ML），以及为什么我们的团队创建了一个开源工具，以使其他从事AI和数据科学的团队的工作更加轻松。Orbyter 1.0（当时称为Torus）的发布重点是通过简化创建一个完全配置的开箱即用的Docker化本地开发环境来简化ML管道，以支持数据科学项目。
+将近两年前，我的同事亚历山大·吴[分享了我们的想法](https://www.kdnuggets.com/2018/05/torus-docker-first-data-science.html)，即为什么机器学习工程师（MLEs）的兴起意味着我们需要一种 DevOps 方法来处理机器学习（ML），以及为什么我们的团队创建了一个开源工具，以使其他从事 AI 和数据科学的团队的工作更加轻松。Orbyter 1.0（当时称为 Torus）的发布重点是通过简化创建一个完全配置的开箱即用的 Docker 化本地开发环境来简化 ML 管道，以支持数据科学项目。
 
-对于刚刚发布的2.0版本，我们专注于减少偶然复杂性，同时继续添加使你的工作更轻松的功能。
+对于刚刚发布的 2.0 版本，我们专注于减少偶然复杂性，同时继续添加使你的工作更轻松的功能。
 
 ### 实现最佳实践的即开即用
 
-Orbyter 2.0内置了偶然复杂性的减少。如果你还不熟悉软件中的固有复杂性与偶然复杂性的对立面，你可以阅读[David Hayes的精彩解释](https://pressupinc.com/blog/2014/05/root-causes-software-complexity/)：
+Orbyter 2.0 内置了偶然复杂性的减少。如果你还不熟悉软件中的固有复杂性与偶然复杂性的对立面，你可以阅读[David Hayes 的精彩解释](https://pressupinc.com/blog/2014/05/root-causes-software-complexity/)：
 
 > 所有软件的复杂性可以准确地被视为属于固有复杂性和偶然复杂性这两种对立面之一。将你软件中的所有糟糕问题都拿出来，去掉那些因为难题而糟糕的部分，你剩下的就是那（小山还是大山，由你选择）的偶然复杂性……
 
-数据科学和AI充满了难题，因此编写ML软件往往伴随着显著的固有复杂性。我们实际上无法在工具中解决这个问题；难题就是难。然而，我们可以通过对软件工程最佳实践进行规范，以减少偶然复杂性，例如：
+数据科学和 AI 充满了难题，因此编写 ML 软件往往伴随着显著的固有复杂性。我们实际上无法在工具中解决这个问题；难题就是难。然而，我们可以通过对软件工程最佳实践进行规范，以减少偶然复杂性，例如：
 
-+   使用[Black](https://black.readthedocs.io/en/stable/)符合PEP8标准的代码格式检查
++   使用[Black](https://black.readthedocs.io/en/stable/)符合 PEP8 标准的代码格式检查
 
 +   使用[pytest](https://docs.pytest.org/en/latest/)进行轻松的单元测试
 
 +   集中式日志设置
 
-+   为GitHub中的持续集成添加钩子
++   为 GitHub 中的持续集成添加钩子
 
 +   符合数据管道抽象
 
-例如，Orbyter 2.0现在允许你使用内置的本地脚本自动将代码格式化为[Python PEP 8](https://www.python.org/dev/peps/pep-0008/)标准。它还与[GitHub Actions](https://github.com/features/actions)进行了即开即用的持续集成，因此当你将代码推送到GitHub时，它会自动进行lint检查并运行单元测试。一个YAML文件提供了一个单一的位置来配置强大的日志记录。此外，代码被构建成符合隔离输入/输出架构，以允许在数据管道中快速迭代。我们还定义了一些明确的端点——train、predict、evaluate——作为Click命令行脚本，可以作为Docker入口点调用。
+例如，Orbyter 2.0 现在允许你使用内置的本地脚本自动将代码格式化为[Python PEP 8](https://www.python.org/dev/peps/pep-0008/)标准。它还与[GitHub Actions](https://github.com/features/actions)进行了即开即用的持续集成，因此当你将代码推送到 GitHub 时，它会自动进行 lint 检查并运行单元测试。一个 YAML 文件提供了一个单一的位置来配置强大的日志记录。此外，代码被构建成符合隔离输入/输出架构，以允许在数据管道中快速迭代。我们还定义了一些明确的端点——train、predict、evaluate——作为 Click 命令行脚本，可以作为 Docker 入口点调用。
 
-![](../Images/2bc22ef5c66306e53a412ecd17f81cf8.png)
+![](img/2bc22ef5c66306e53a412ecd17f81cf8.png)
 
 *示例项目架构。*
 
@@ -40,15 +40,15 @@ Orbyter 2.0内置了偶然复杂性的减少。如果你还不熟悉软件中的
 
 尽管许多组织现在拥有强大的数据科学团队进行重要的实验和建模研发，但这些公司往往仍然难以将这些工作的结果[from the lab to the factory](https://hbr.org/2013/04/two-departments-for-data-succe)。没有人希望看到他们的辛勤工作在孤岛中消沉；兴奋在于看到你的模型在现实世界中产生影响。但要实现这种过渡需要大量的工程工作，许多组织仍然没有准备好进行生产部署。
 
-为了解决这种脱节，我们添加了一个带有MLflow的新容器。Orbyter 1.0提供了一个单一的容器，是流行的[Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/)的一个分支，适合轻松设置Docker化的工作流程。Orbyter 2.0仍然是基本的Docker化数据科学，但现在当你启动它时，你会得到三个不同的容器：第一个提供Jupyter，和以前一样；第二个提供Bash，用于运行脚本；第三个提供[MLflow](https://mlflow.org/)，用于实验跟踪。
+为了解决这种脱节，我们添加了一个带有 MLflow 的新容器。Orbyter 1.0 提供了一个单一的容器，是流行的[Cookiecutter Data Science](https://drivendata.github.io/cookiecutter-data-science/)的一个分支，适合轻松设置 Docker 化的工作流程。Orbyter 2.0 仍然是基本的 Docker 化数据科学，但现在当你启动它时，你会得到三个不同的容器：第一个提供 Jupyter，和以前一样；第二个提供 Bash，用于运行脚本；第三个提供[MLflow](https://mlflow.org/)，用于实验跟踪。
 
-我们认为实验跟踪是应用机器学习中的一个重要部分，并且非常喜欢使用MLflow来完成这一步骤。它还可以帮助打包以实现可重复运行，并将模型发送到部署。
+我们认为实验跟踪是应用机器学习中的一个重要部分，并且非常喜欢使用 MLflow 来完成这一步骤。它还可以帮助打包以实现可重复运行，并将模型发送到部署。
 
 ### 持续降低准入门槛
 
-我们最初开始构建Orbyter，是因为我们相信Docker和容器化是未来的发展方向。Alex在他的初始帖子中解释得很好：
+我们最初开始构建 Orbyter，是因为我们相信 Docker 和容器化是未来的发展方向。Alex 在他的初始帖子中解释得很好：
 
-> 尽管通过小心使用虚拟环境和严格的系统级配置管理可以实现相同的一致性，但容器在新环境的启动/关闭时间和开发者生产力方面仍然提供了显著的优势。然而，我们从数据科学社区那里听到的反馈是：我知道Docker会让这变得更容易，但我没有时间或资源来设置和搞清楚这一切。
+> 尽管通过小心使用虚拟环境和严格的系统级配置管理可以实现相同的一致性，但容器在新环境的启动/关闭时间和开发者生产力方面仍然提供了显著的优势。然而，我们从数据科学社区那里听到的反馈是：我知道 Docker 会让这变得更容易，但我没有时间或资源来设置和搞清楚这一切。
 
 Orbyter 诞生的目的是降低进入 Docker 优先工作流的门槛。通过 Orbyter 2.0 的额外改进，转向 Docker 优先工作流变得比以往更简单。转向这种 Docker 化的工作流可以使用各种云工具—包括 SageMaker、Kubernetes、ECS 等。例如：
 
@@ -72,11 +72,11 @@ Orbyter 诞生的目的是降低进入 Docker 优先工作流的门槛。通过 
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

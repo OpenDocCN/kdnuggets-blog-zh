@@ -1,38 +1,38 @@
-# 在Google Colab上免费运行Mixtral 8x7b
+# 在 Google Colab 上免费运行 Mixtral 8x7b
 
-> 原文：[https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)
+> 原文：[`www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free`](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)
 
-![在Google Colab上免费运行Mixtral 8x7b](../Images/6b600750560720253d21d9da4c0e64ad.png)
+![在 Google Colab 上免费运行 Mixtral 8x7b](img/6b600750560720253d21d9da4c0e64ad.png)
 
 作者提供的图片
 
-在这篇文章中，我们将深入探讨一种名为Mixtral 8x7b的最新开源模型。我们还将学习如何使用LLaMA C++库来访问它，以及如何在减少计算和内存的条件下运行大型语言模型。
+在这篇文章中，我们将深入探讨一种名为 Mixtral 8x7b 的最新开源模型。我们还将学习如何使用 LLaMA C++库来访问它，以及如何在减少计算和内存的条件下运行大型语言模型。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-# Mixtral 8x7b是什么？
+# Mixtral 8x7b 是什么？
 
-[Mixtral 8x7b](https://mistral.ai/news/mixtral-of-experts/)是一个高质量的稀疏专家混合（SMoE）模型，由Mistral AI创建，具有开放权重。它在大多数基准测试中超越Llama 2 70B，推理速度快6倍。Mixtral在大多数标准基准测试中与GPT3.5相当或超越，是成本/性能比最佳的开放权重模型。
+[Mixtral 8x7b](https://mistral.ai/news/mixtral-of-experts/)是一个高质量的稀疏专家混合（SMoE）模型，由 Mistral AI 创建，具有开放权重。它在大多数基准测试中超越 Llama 2 70B，推理速度快 6 倍。Mixtral 在大多数标准基准测试中与 GPT3.5 相当或超越，是成本/性能比最佳的开放权重模型。
 
-![在Google Colab上免费运行Mixtral 8x7b](../Images/a3cdcbacf215cf2d37c88bf6a9e58dad.png)
+![在 Google Colab 上免费运行 Mixtral 8x7b](img/a3cdcbacf215cf2d37c88bf6a9e58dad.png)
 
-图片来自 [Mixtral专家](https://mistral.ai/news/mixtral-of-experts/)
+图片来自 [Mixtral 专家](https://mistral.ai/news/mixtral-of-experts/)
 
-Mixtral 8x7B使用仅解码器的稀疏专家混合网络。这涉及到一个前馈块从8组参数中选择，路由网络为每个token选择其中两个组，将它们的输出进行加和。这种方法在管理成本和延迟的同时增强了模型的参数数量，使其在效率上等同于一个12.9B模型，尽管总参数量为46.7B。
+Mixtral 8x7B 使用仅解码器的稀疏专家混合网络。这涉及到一个前馈块从 8 组参数中选择，路由网络为每个 token 选择其中两个组，将它们的输出进行加和。这种方法在管理成本和延迟的同时增强了模型的参数数量，使其在效率上等同于一个 12.9B 模型，尽管总参数量为 46.7B。
 
-Mixtral 8x7B模型在处理32k tokens的广泛上下文方面表现出色，并支持包括英语、法语、意大利语、德语和西班牙语在内的多种语言。它在代码生成方面表现强劲，并可以被微调为一个指令跟随模型，在MT-Bench等基准测试中取得高分。
+Mixtral 8x7B 模型在处理 32k tokens 的广泛上下文方面表现出色，并支持包括英语、法语、意大利语、德语和西班牙语在内的多种语言。它在代码生成方面表现强劲，并可以被微调为一个指令跟随模型，在 MT-Bench 等基准测试中取得高分。
 
-# 使用LLaMA C++运行Mixtral 8x7b
+# 使用 LLaMA C++运行 Mixtral 8x7b
 
 [LLaMA.cpp](https://github.com/ggerganov/llama.cpp) 是一个 C/C++ 库，提供了一个高性能接口，用于大型语言模型（LLMs），基于 Facebook 的 LLM 架构。它是一个轻量且高效的库，可用于多种任务，包括文本生成、翻译和问答。LLaMA.cpp 支持广泛的 LLM，包括 LLaMA、LLaMA 2、Falcon、Alpaca、Mistral 7B、Mixtral 8x7B 和 GPT4ALL。它与所有操作系统兼容，可以在 CPU 和 GPU 上运行。
 
@@ -58,7 +58,7 @@ Mixtral 8x7B模型在处理32k tokens的广泛上下文方面表现出色，并�
 
 我们可以从 Hugging Face Hub 下载模型，通过选择适当版本的 `.gguf` 模型文件。有关不同版本的更多信息，请参阅 [TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF](https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF#provided-files)。
 
-![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/f0245bfd4ff28d35bbad7830b74de525.png)
+![在 Google Colab 上免费运行 Mixtral 8x7b](img/f0245bfd4ff28d35bbad7830b74de525.png)
 
 图片来源于 [TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF](https://huggingface.co/TheBloke/Mixtral-8x7B-Instruct-v0.1-GGUF/tree/main)
 
@@ -93,7 +93,7 @@ https://8fx1nbkv1c8-496ff2e9c6d22116-6589-colab.googleusercontent.com/
 !./server -m mixtral-8x7b-instruct-v0.1.Q2_K.gguf -ngl 27 -c 2048 --port 6589
 ```
 
-![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/c08977e32df06174dee0deab33f7fec8.png)
+![在 Google Colab 上免费运行 Mixtral 8x7b](img/c08977e32df06174dee0deab33f7fec8.png)
 
 由于服务器没有在本地运行，可以通过点击前一步中的代理端口超链接访问聊天 webapp。
 
@@ -101,11 +101,11 @@ https://8fx1nbkv1c8-496ff2e9c6d22116-6589-colab.googleusercontent.com/
 
 在开始使用聊天机器人之前，我们需要对其进行自定义。在提示部分将 "LLaMA" 替换为你的模型名称。此外，修改用户名和机器人名称以区分生成的回复。
 
-![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/041c82e7530fabeadb9e877db16fc582.png)
+![在 Google Colab 上免费运行 Mixtral 8x7b](img/041c82e7530fabeadb9e877db16fc582.png)
 
 通过向下滚动并在聊天区域输入来开始聊天。随意提出其他开源模型无法正确回答的技术问题。
 
-![在 Google Colab 上免费运行 Mixtral 8x7b](../Images/12c1e90834baaa365a694671d711c2b7.png)
+![在 Google Colab 上免费运行 Mixtral 8x7b](img/12c1e90834baaa365a694671d711c2b7.png)
 
 如果你遇到应用程序的问题，可以尝试使用我的 Google Colab 运行它：https://colab.research.google.com/drive/1gQ1lpSH-BhbKN-DdBmq5r8-8Rw8q1p9r?usp=sharing
 

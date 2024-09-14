@@ -1,22 +1,22 @@
 # 数据科学家必备的顶级 SQL 功能
 
-> 原文：[https://www.kdnuggets.com/2019/08/top-handy-sql-feature-data-scientist.html](https://www.kdnuggets.com/2019/08/top-handy-sql-feature-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2019/08/top-handy-sql-feature-data-scientist.html`](https://www.kdnuggets.com/2019/08/top-handy-sql-feature-data-scientist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Saurabh Hooda](https://www.linkedin.com/in/hoodasaurabh/)，Hackr.io**
 
-![图示](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)
+![图示](img/7b90faf67d8c5a9b93c5838add6004a0.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -129,13 +129,13 @@ select CONCAT(first_name, ‘ ‘, last_name) as fullName from student;
 
 *4\. substring*
 
-就像在编程语言中一样，SQL的子字符串功能从字符串中提取特定的字符。例如，如果考试表有一个hall_ticket_no（例如00019812345），而我们只想要最后几个字符，我们可以将查询写成 –
+就像在编程语言中一样，SQL 的子字符串功能从字符串中提取特定的字符。例如，如果考试表有一个 hall_ticket_no（例如 00019812345），而我们只想要最后几个字符，我们可以将查询写成 –
 
 ```py
 select substring(hall_ticket_no,7,11) as sequence_num from exam;
 ```
 
-子字符串还有两个变体，左侧和右侧，分别获取左侧或右侧的几个字符。在我们上面的例子中，我们也可以使用RIGHT函数。
+子字符串还有两个变体，左侧和右侧，分别获取左侧或右侧的几个字符。在我们上面的例子中，我们也可以使用 RIGHT 函数。
 
 *5\. len*
 
@@ -149,7 +149,7 @@ select student_profile from student where len(student_profile) < 25;
 
 *6\. ltrim, rtrim*
 
-ltrim和rtrim分别去除字符串的前导和尾随空格。有时数据库条目在开头或结尾有很多空格——可能是用户输入的，或者是程序填充的空格；我们不知道。如果你希望修剪这些空格并展示数据，可以使用这些函数。示例 –
+ltrim 和 rtrim 分别去除字符串的前导和尾随空格。有时数据库条目在开头或结尾有很多空格——可能是用户输入的，或者是程序填充的空格；我们不知道。如果你希望修剪这些空格并展示数据，可以使用这些函数。示例 –
 
 ```py
 select ltrim(first_name) from student;
@@ -163,7 +163,7 @@ select trim(first_name) from student;
 
 ### **4\. 日期函数**
 
-处理日期稍显复杂，但SQL可以轻松处理。
+处理日期稍显复杂，但 SQL 可以轻松处理。
 
 有许多函数，如
 
@@ -179,17 +179,17 @@ select trim(first_name) from student;
 
 +   **CURRENT_TIMESTAMP** – 获取日期和时间（时间戳）
 
-上述所有内容对于分析各种类型的数据都非常有用。例如，你可以使用DATEDIFF来获取特定时间范围内的数据，或者使用DAY函数来找出大多数学生请假的日期，等等。
+上述所有内容对于分析各种类型的数据都非常有用。例如，你可以使用 DATEDIFF 来获取特定时间范围内的数据，或者使用 DAY 函数来找出大多数学生请假的日期，等等。
 
 ### **5\. 聚合（统计函数）**
 
-聚合函数允许我们从一组数据中找到总和（SUM）、平均值（AVG）、最小值（MIN）、最大值（MAX）和计数（COUNT）。我们使用这些函数与group by和having子句。例如，如果我们想知道每个部门的学生集体的平均分数百分比，我们可以使用AVG函数。
+聚合函数允许我们从一组数据中找到总和（SUM）、平均值（AVG）、最小值（MIN）、最大值（MAX）和计数（COUNT）。我们使用这些函数与 group by 和 having 子句。例如，如果我们想知道每个部门的学生集体的平均分数百分比，我们可以使用 AVG 函数。
 
 ```py
 select AVG(total_marks) from students group by deptt;
 ```
 
-同样地，要获取特定部门的学生数量，我们可以使用count。
+同样地，要获取特定部门的学生数量，我们可以使用 count。
 
 ```py
 select count(*) from students group by deptt;
@@ -197,7 +197,7 @@ select count(*) from students group by deptt;
 
 ### 6\. 连接
 
-通常，你会想从多个表中整理数据，并仅获取符合某些条件或模式的列。为了从两个或更多表中获取数据，我们使用SQL连接。
+通常，你会想从多个表中整理数据，并仅获取符合某些条件或模式的列。为了从两个或更多表中获取数据，我们使用 SQL 连接。
 
 ### 7\. 正则表达式
 
@@ -209,7 +209,7 @@ select count(*) from students group by deptt;
 select * from contact where phone like '[0-9]%';
 ```
 
-你可以使用任何编程语言，如JavaScript，来完成相同的操作，但它比执行代码更简单、更节省时间。正则表达式也可以用来查找表中某列的特定模式。例如，如果你想获取包含“ya”的学生姓名，你可以使用LIKE子句。
+你可以使用任何编程语言，如 JavaScript，来完成相同的操作，但它比执行代码更简单、更节省时间。正则表达式也可以用来查找表中某列的特定模式。例如，如果你想获取包含“ya”的学生姓名，你可以使用 LIKE 子句。
 
 ```py
 select first_name, deptt from student where first_name like ‘%ya%’;
@@ -245,19 +245,19 @@ select truncate (average, 0) from students; -- if the actual value was 78.333, t
 
 **相关:**
 
-+   [数据科学家需要 SQL 吗？](/2019/07/sql-needed-data-scientist.html)
++   数据科学家需要 SQL 吗？
 
-+   [掌握数据科学 SQL 的 7 个步骤 — 2019 年版](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)
++   掌握数据科学 SQL 的 7 个步骤 — 2019 年版
 
-+   [Python 数据科学入门](/2019/02/python-data-science-beginners.html)
++   Python 数据科学入门
 
 ### 更多相关内容
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学的顶级统计资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

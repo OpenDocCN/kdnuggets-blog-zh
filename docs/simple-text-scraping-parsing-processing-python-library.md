@@ -1,8 +1,8 @@
 # 使用这个 Python 库进行简单的文本抓取、解析和处理
 
-> 原文：[https://www.kdnuggets.com/2021/10/simple-text-scraping-parsing-processing-python-library.html](https://www.kdnuggets.com/2021/10/simple-text-scraping-parsing-processing-python-library.html)
+> 原文：[`www.kdnuggets.com/2021/10/simple-text-scraping-parsing-processing-python-library.html`](https://www.kdnuggets.com/2021/10/simple-text-scraping-parsing-processing-python-library.html)
 
-[评论](#comments)![图像](../Images/b28dd1fbd4a8a10b7a5abf6e3115fd20.png)
+评论![图像](img/b28dd1fbd4a8a10b7a5abf6e3115fd20.png)
 
 由 [Peter Lawrence](https://unsplash.com/@chesterfordhouse?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/newspapers?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上拍摄的照片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通往网络安全职业生涯的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通往网络安全职业生涯的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -191,11 +191,11 @@ Newspaper 并不完美，存在一些限制，但你可以看到它调用和利�
 
 **相关**：
 
-+   [使用 HuggingFace Pipelines 的简单问答 Web 应用](/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   使用 HuggingFace Pipelines 的简单问答 Web 应用
 
-+   [应用语言技术：实用方法](/2021/06/applied-language-technology.html)
++   应用语言技术：实用方法
 
-+   [Python 中的日期处理和特征工程](/2021/07/date-pre-processing-feature-engineering-python.html)
++   Python 中的日期处理和特征工程
 
 ### 相关主题
 

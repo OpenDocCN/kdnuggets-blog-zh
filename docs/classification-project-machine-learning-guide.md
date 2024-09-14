@@ -1,32 +1,32 @@
 # 机器学习中的分类项目：一个温和的逐步指南
 
-> 原文：[https://www.kdnuggets.com/2020/06/classification-project-machine-learning-guide.html](https://www.kdnuggets.com/2020/06/classification-project-machine-learning-guide.html)
+> 原文：[`www.kdnuggets.com/2020/06/classification-project-machine-learning-guide.html`](https://www.kdnuggets.com/2020/06/classification-project-machine-learning-guide.html)
 
-[评论](#comments)
+评论
 
-![](../Images/da0440bea369d85c1810c4ab99f84b89.png)
+![](img/da0440bea369d85c1810c4ab99f84b89.png)
 
 分类是数据科学和机器学习领域中你可能遇到的主要项目之一。以下是维基百科的定义：
 
 > *分类是识别新观察数据属于一组类别（子群体）中的哪个类别的问题，基于包含已知类别成员的数据训练集。举例来说，就是将给定的电子邮件分配到“垃圾邮件”或“非垃圾邮件”中。*
 
-在这篇文章中，我将讲解一个来自[General Assembly的数据科学沉浸课程](https://generalassemb.ly/education/data-science-immersive/)的项目。在这个项目中，我探索了不同的机器学习分类模型，以预测来自Indeed.co.uk的Data Science职位的四个薪资类别：
+在这篇文章中，我将讲解一个来自[General Assembly 的数据科学沉浸课程](https://generalassemb.ly/education/data-science-immersive/)的项目。在这个项目中，我探索了不同的机器学习分类模型，以预测来自 Indeed.co.uk 的 Data Science 职位的四个薪资类别：
 
-+   第25百分位以下的薪资
++   第 25 百分位以下的薪资
 
-+   第25至50百分位之间的薪资
++   第 25 至 50 百分位之间的薪资
 
-+   第50至75百分位之间的薪资
++   第 50 至 75 百分位之间的薪资
 
-+   第75百分位以上的薪资
++   第 75 百分位以上的薪资
 
-我们无法逐一讨论项目的每一个方面，但请注意，整个代码库可以在我的[GitHub个人资料](https://github.com/gonzaferreiro)上找到。
+我们无法逐一讨论项目的每一个方面，但请注意，整个代码库可以在我的[GitHub 个人资料](https://github.com/gonzaferreiro)上找到。
 
 ### 第一阶段：数据抓取和清洗
 
 首先，没有数据，任何项目都无从谈起。因此，我首先通过抓取[Indeed.co.uk](https://www.indeed.co.uk/jobs?q=data+scientist)以获取在英国多个城市寻找“数据科学家”的职位列表。我不会在这里详细讲解如何进行抓取，但我使用了我另一篇文章中提到的相同技术和工具：[五分钟网络抓取](https://towardsdatascience.com/web-scraping-in-5-minutes-1caceca13b6c?source=friends_link&sk=3d2c281449fc6584e4efb272245f8865)。
 
-值得一提的是，尽管网络抓取对数据科学工作者非常有用，但完成抓取后一定要检查数据的完整性。例如，在这个案例中，职位薪资当然是关键。然而，并不是所有的职位信息都包含薪资，因此需要抓取成千上万的页面和职位信息，以确保至少有1000个职位包含薪资信息。
+值得一提的是，尽管网络抓取对数据科学工作者非常有用，但完成抓取后一定要检查数据的完整性。例如，在这个案例中，职位薪资当然是关键。然而，并不是所有的职位信息都包含薪资，因此需要抓取成千上万的页面和职位信息，以确保至少有 1000 个职位包含薪资信息。
 
 处理抓取的数据通常还涉及大量的特征工程，以从我们已有的数据中添加一些价值。例如，对于这个项目，我开发了一个“资历”特征，该特征由每篇出版物的标题和摘要生成，使用了两个不同的单词列表，分别属于高级或初级职位。如果职位标题或摘要中出现了任何一个层级的单词，则分配相应的资历层级。如果这些特征中没有任何单词，则该职位被分配为中级层级。
 
@@ -136,7 +136,7 @@ feature_importance_df = pd.DataFrame({‘feature’: logistic_regression_model.c
 
 我们可以最终将所有内容放入图表中，查看每个类别的表现：
 
-![](../Images/afac478005552c36df2b63bb8f2ae51a.png)
+![](img/afac478005552c36df2b63bb8f2ae51a.png)
 
 尽管标签的大小可能没有帮助，但我们可以从这些图表中得出结论，我们数据集中的以下特征在预测薪资类别时是相关的：
 
@@ -165,7 +165,7 @@ plt.show()
 
 使用这个库，我们可以在以下图中看到，对于这个项目，训练组和测试组在四个薪水类别中都预测得相当准确：
 
-![](../Images/7b651a046f3d4d7ce4ecc1a77d89c30f.png)
+![](img/7b651a046f3d4d7ce4ecc1a77d89c30f.png)
 
 一个重要的最终澄清是，尽管我们的最终模型似乎很准确，但它在预测类别时效果良好，当类别的重要性相等时，我们不需要对任何类别进行加权。
 
@@ -173,7 +173,7 @@ plt.show()
 
 [原文](https://medium.com/better-programming/facing-a-classification-project-in-machine-learning-462b319873de)。经许可转载。
 
-**简介：** 在多个行业拥有5年以上的电子商务和营销经验之后，[Gonzalo Ferreiro Volpi](https://www.linkedin.com/in/gferreirovolpi/) 转向了数据科学和机器学习领域，目前在 Ravelin Technology 工作，利用机器学习和人类洞察来解决电子商务中的欺诈问题。
+**简介：** 在多个行业拥有 5 年以上的电子商务和营销经验之后，[Gonzalo Ferreiro Volpi](https://www.linkedin.com/in/gferreirovolpi/) 转向了数据科学和机器学习领域，目前在 Ravelin Technology 工作，利用机器学习和人类洞察来解决电子商务中的欺诈问题。
 
 **相关：**
 
@@ -187,11 +187,11 @@ plt.show()
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 

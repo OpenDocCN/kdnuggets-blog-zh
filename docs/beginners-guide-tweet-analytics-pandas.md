@@ -1,6 +1,6 @@
 # 使用 Pandas 的推文分析初学者指南
 
-> 原文：[https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html](https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html)
+> 原文：[`www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html`](https://www.kdnuggets.com/2017/03/beginners-guide-tweet-analytics-pandas.html)
 
 Twitter 为所有用户提供了分析访问权限，但我假设相对较少的普通用户会关注其存在。还有各种其他服务可以帮助进行推文和受众分析，以及与地理和自然语言处理相关的进一步分析，但与一些简单的 Python 配合使用时，Twitter 提供的数据可以非常有用。
 
@@ -12,7 +12,7 @@ Twitter 为所有用户提供了分析访问权限，但我假设相对较少的
 
 首先我们需要数据。这部分非常简单；前往 Twitter，点击右上角的菜单（你的头像），选择**分析**，在顶部选择**推文**选项卡，使用日期范围选择器选择时间段，然后选择**导出数据**。你使用的数据量无所谓；我们的简单示例适用于任何数量的数据。我选择了默认的**过去 28 天**。
 
-![](../Images/91d318b27d4114f353b60ee7749061af.png)
+![](img/91d318b27d4114f353b60ee7749061af.png)
 
 获取 Twitter 分析数据。
 
@@ -22,7 +22,7 @@ Twitter 为所有用户提供了分析访问权限，但我假设相对较少的
 
 正如我们在任何数据分析项目中一样，接下来我们查看数据。
 
-![](../Images/8a31b05d700e5357f276a72da7cf708e.png)
+![](img/8a31b05d700e5357f276a72da7cf708e.png)
 
 运行：
 
@@ -78,7 +78,7 @@ Pandas & Seaborn - A guide to handle & visualize #data elegantly @tryolabs https
 
 ### 前 #标签 和 @提及
 
-毫无疑问，标签在Twitter中扮演着重要角色，提及也有助于扩展你的网络和影响力。它们共同帮助将“社交”融入社交网络，将像Twitter这样的平台从被动体验转变为非常活跃的体验。了解这个社交网络最社交的方面将是一个有帮助的努力。
+毫无疑问，标签在 Twitter 中扮演着重要角色，提及也有助于扩展你的网络和影响力。它们共同帮助将“社交”融入社交网络，将像 Twitter 这样的平台从被动体验转变为非常活跃的体验。了解这个社交网络最社交的方面将是一个有帮助的努力。
 
 ```py
 Top 10 hashtags:
@@ -108,7 +108,7 @@ monkeylearn - 1
 nicholashould - 1
 ```
 
-把一些明显的问题，比如推文文本中的标点在检查Twitter句柄之前被移除（如果你有名为Francesco_AI和FrancescoAI的用户，这可能是个问题），这方法有效，至少相对Pythonic（虽然我相信可以做得更好）。
+把一些明显的问题，比如推文文本中的标点在检查 Twitter 句柄之前被移除（如果你有名为 Francesco_AI 和 FrancescoAI 的用户，这可能是个问题），这方法有效，至少相对 Pythonic（虽然我相信可以做得更好）。
 
 ### 时间序列分析
 
@@ -116,7 +116,7 @@ nicholashould - 1
 
 虽然这基于印象，但同样可以（并且容易地）基于互动、转发或其他你喜欢的内容。做广告和推广推文？也许你对我们最初从数据集中剥离的一些**推广**指标更感兴趣。
 
-我们必须将Twitter提供的日期字段转换为合法的Python datetime对象，根据其所属的小时段对数据进行分组，识别星期几，然后在DataFrame中捕捉这些数据的几个附加列，我们将在之后用来提取统计信息。
+我们必须将 Twitter 提供的日期字段转换为合法的 Python datetime 对象，根据其所属的小时段对数据进行分组，识别星期几，然后在 DataFrame 中捕捉这些数据的几个附加列，我们将在之后用来提取统计信息。
 
 ```py
 Average impressions per tweet by hour tweeted:
@@ -144,27 +144,27 @@ Thu : 545 => 17  tweets
 Fri : 432 => 22  tweets
 ```
 
-看起来我在一天中的时间比较一致地发推。我还发现我的星期三推文、上午11点推文和下午6点推文是我的主要推文。当然，这基于95条推文，因此意义不大且结论不确切。然而，在对一些相当大数据集执行这些相同步骤后，观察到了一些有趣的趋势，这可能有助于商业决策。都是从一些简单的Python开始的。
+看起来我在一天中的时间比较一致地发推。我还发现我的星期三推文、上午 11 点推文和下午 6 点推文是我的主要推文。当然，这基于 95 条推文，因此意义不大且结论不确切。然而，在对一些相当大数据集执行这些相同步骤后，观察到了一些有趣的趋势，这可能有助于商业决策。都是从一些简单的 Python 开始的。
 
-虽然不是惊天动地，我们基于Pandas的简单Twitter分析代码足以让我们思考如何更好地利用社交媒体。应用于正确的数据，基础脚本可以相当强大。
+虽然不是惊天动地，我们基于 Pandas 的简单 Twitter 分析代码足以让我们思考如何更好地利用社交媒体。应用于正确的数据，基础脚本可以相当强大。
 
 **相关内容：**
 
-+   [使用Python挖掘Twitter数据第一部分：收集数据](/2016/06/mining-twitter-data-python-part-1.html)
++   使用 Python 挖掘 Twitter 数据第一部分：收集数据
 
-+   [Pandas备忘单：Python中的数据科学和数据清理](/2017/01/pandas-cheat-sheet.html)
++   Pandas 备忘单：Python 中的数据科学和数据清理
 
-+   [在Python中清理数据](/2017/01/tidying-data-python.html)
++   在 Python 中清理数据
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 

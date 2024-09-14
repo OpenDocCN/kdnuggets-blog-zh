@@ -1,10 +1,10 @@
 # 如何获得实际的数据科学经验以准备职业生涯
 
-> 原文：[https://www.kdnuggets.com/2021/07/practical-data-science-experience-career-ready.html](https://www.kdnuggets.com/2021/07/practical-data-science-experience-career-ready.html)
+> 原文：[`www.kdnuggets.com/2021/07/practical-data-science-experience-career-ready.html`](https://www.kdnuggets.com/2021/07/practical-data-science-experience-career-ready.html)
 
-[评论](#comments)
+评论
 
-![](../Images/ed9e04fa03b5fdefc7feaa25782f4422.png)
+![](img/ed9e04fa03b5fdefc7feaa25782f4422.png)
 
 在这篇文章中，我将给你三个方法，通过这些方法你可以自行获得实际的数据科学经验。完成这些项目后，你将对**SQL**、**Pandas** 和**机器学习建模**有一个深入的理解。
 
@@ -18,11 +18,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -88,7 +88,7 @@
 
 +   数据集[点击这里](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009)。
 
-![](../Images/f8976e51f9662e789c5415b07dfd0b8e.png)
+![](img/f8976e51f9662e789c5415b07dfd0b8e.png)
 
 *图片来源于 [Terry Vlisidis](https://unsplash.com/@vlisidis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/red-wine?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -100,7 +100,7 @@
 
 +   数据集 [在这里](https://www.kaggle.com/austinreese/craigslist-carstrucks-data)。
 
-![](../Images/f01deef4af4d96a8fbee0eeb208d77d3.png)
+![](img/f01deef4af4d96a8fbee0eeb208d77d3.png)
 
 *图片来源于 [Parker Gibbs](https://unsplash.com/@parkergibbsmccullough?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/used-car?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 

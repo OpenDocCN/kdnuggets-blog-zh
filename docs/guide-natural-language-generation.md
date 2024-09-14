@@ -1,40 +1,40 @@
 # 《自然语言生成综合指南》
 
-> 原文：[https://www.kdnuggets.com/2020/01/guide-natural-language-generation.html](https://www.kdnuggets.com/2020/01/guide-natural-language-generation.html)
+> 原文：[`www.kdnuggets.com/2020/01/guide-natural-language-generation.html`](https://www.kdnuggets.com/2020/01/guide-natural-language-generation.html)
 
-[评论](#comments)
+评论
 
 **由 [Sciforce](https://sciforce.solutions) 提供。**
 
-只要人工智能帮助我们从自然语言中获得更多信息，我们就会看到更多在AI和语言学交集处出现的任务和领域。在我们之前的一篇文章中，我们讨论了[Natural Language Processing和Natural Language Understanding的区别](https://medium.com/sciforce/nlp-vs-nlu-from-understanding-a-language-to-its-processing-1bf1f62453c1)。然而，这两个领域都有自然语言作为输入。同时，与计算机建立双向通信的需求导致了处理生成（准）自然语言的任务的一个独立子类别的出现。这个子类别被称为自然语言生成，将成为本博客文章的重点。
+只要人工智能帮助我们从自然语言中获得更多信息，我们就会看到更多在 AI 和语言学交集处出现的任务和领域。在我们之前的一篇文章中，我们讨论了[Natural Language Processing 和 Natural Language Understanding 的区别](https://medium.com/sciforce/nlp-vs-nlu-from-understanding-a-language-to-its-processing-1bf1f62453c1)。然而，这两个领域都有自然语言作为输入。同时，与计算机建立双向通信的需求导致了处理生成（准）自然语言的任务的一个独立子类别的出现。这个子类别被称为自然语言生成，将成为本博客文章的重点。
 
-### 什么是NLG？
+### 什么是 NLG？
 
 自然语言生成，如[《人工智能：自然语言处理基础》](http://www.techprenuer.com/entrepreneur/artificial-intelligence-natural-language-processing-fundamentals/)所定义，是“以自然语言形式生成有意义的短语和句子的过程。”本质上，它以每秒数千页的速度自动生成描述、总结或解释输入结构化数据的叙述。
 
-然而，虽然NLG软件可以写作，但它不能阅读。阅读自然语言并将其非结构化数据转化为计算机可理解的结构化数据的NLP部分被称为自然语言理解。
+然而，虽然 NLG 软件可以写作，但它不能阅读。阅读自然语言并将其非结构化数据转化为计算机可理解的结构化数据的 NLP 部分被称为自然语言理解。
 
-一般而言，NLG（自然语言生成）和NLU（自然语言理解）是更广泛的NLP领域的子部分，该领域包括所有解释或生成自然语言的软件，无论是口头还是书面形式：
+一般而言，NLG（自然语言生成）和 NLU（自然语言理解）是更广泛的 NLP 领域的子部分，该领域包括所有解释或生成自然语言的软件，无论是口头还是书面形式：
 
-+   NLU负责基于语法、上下文以及意图和实体的理解数据。
++   NLU 负责基于语法、上下文以及意图和实体的理解数据。
 
-+   NLP将文本转换为结构化数据。
++   NLP 将文本转换为结构化数据。
 
-+   NLG基于结构化数据生成文本。
++   NLG 基于结构化数据生成文本。
 
-![](../Images/cae08313cb8a064678399bac726404a0.png)
+![](img/cae08313cb8a064678399bac726404a0.png)
 
-### NLG的主要应用
+### NLG 的主要应用
 
-NLG使数据具有普遍可理解性，使得编写数据驱动的财务报告、产品描述、会议备忘录等变得更加容易和快速。理想情况下，它可以将总结数据的负担从分析师那里转移到自动编写针对受众的报告上。因此，NLG当前的主要实际应用与写作分析或向客户传达必要信息相关：
+NLG 使数据具有普遍可理解性，使得编写数据驱动的财务报告、产品描述、会议备忘录等变得更加容易和快速。理想情况下，它可以将总结数据的负担从分析师那里转移到自动编写针对受众的报告上。因此，NLG 当前的主要实际应用与写作分析或向客户传达必要信息相关：
 
-![](../Images/291b353fb1c7648ca621b3b2799fa33e.png)
+![](img/291b353fb1c7648ca621b3b2799fa33e.png)
 
-*NLG的实际应用。*
+*NLG 的实际应用。*
 
 与此同时，NLG 还有更多的理论应用，使其不仅在计算机科学与工程领域，而且在认知科学和心理语言学中成为有价值的工具。这些包括：
 
-![](../Images/ced5165a8f06bc74ef0b726507f83c2a.png)
+![](img/ced5165a8f06bc74ef0b726507f83c2a.png)
 
 *NLG 在理论研究中的应用。*
 
@@ -48,7 +48,7 @@ NLG使数据具有普遍可理解性，使得编写数据驱动的财务报告�
 
 1.  **实现**：将抽象文档规格转换为真实文本，使用有关语法、形态学等的领域知识。
 
-![](../Images/ab758a9d93b12a85a0ec360ca6a68637.png)
+![](img/ab758a9d93b12a85a0ec360ca6a68637.png)
 
 *NLG 过程的三个阶段。*
 
@@ -76,9 +76,9 @@ NLG使数据具有普遍可理解性，使得编写数据驱动的财务报告�
 
 虽然动态句子生成在某种“微观层面”上工作，但“宏观写作”任务生成与读者相关且有用的文档，并且在叙事上结构良好。如何完成这项任务取决于文本的目标。例如，一篇说服性写作可能基于论证和行为变化的模型，以模仿人类修辞；而一篇总结数据以供商业智能使用的文本可能基于对影响决策的关键因素的分析。
 
-### NLG模型
+### NLG 模型
 
-即使在NLG从模板转向动态句子生成后，这项技术仍然经历了多年的实验才取得令人满意的结果。作为自然语言处理（NLP）的一部分，更多地说作为人工智能（AI）的一部分，自然语言生成依赖于一系列算法，这些算法解决了生成类人文本的某些问题：
+即使在 NLG 从模板转向动态句子生成后，这项技术仍然经历了多年的实验才取得令人满意的结果。作为自然语言处理（NLP）的一部分，更多地说作为人工智能（AI）的一部分，自然语言生成依赖于一系列算法，这些算法解决了生成类人文本的某些问题：
 
 **马尔可夫链**
 
@@ -100,7 +100,7 @@ NLG使数据具有普遍可理解性，使得编写数据驱动的财务报告�
 
 语言生成的一个著名例子是 OpenAI 的 GPT-2 语言模型。该模型通过关注模型中之前见过的与预测下一个词相关的词来学习预测句子中的下一个词。谷歌的最新升级版 Transformers 双向编码器表示（BERT）为各种 NLP 任务提供了最先进的结果。
 
-![](../Images/16274db06070527c65142aea9394a04d.png)
+![](img/16274db06070527c65142aea9394a04d.png)
 
 ### NLG 工具
 
@@ -138,7 +138,7 @@ NLG 功能已成为分析平台试图实现数据分析民主化的事实选择�
 
 +   [训练神经网络模仿洛夫克拉夫特的写作风格](https://www.kdnuggets.com/2019/07/training-neural-network-write-like-lovecraft.html)
 
-+   [自然语言生成概述——NLG是否值千言万语？](https://www.kdnuggets.com/2017/05/nlg-natural-language-generation-overview.html)
++   [自然语言生成概述——NLG 是否值千言万语？](https://www.kdnuggets.com/2017/05/nlg-natural-language-generation-overview.html)
 
 +   [自然语言处理（NLP）指南](https://www.kdnuggets.com/2019/05/guide-natural-language-processing-nlp.html)
 

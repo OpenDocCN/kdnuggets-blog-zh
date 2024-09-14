@@ -1,8 +1,8 @@
 # 如何从机器学习中的巨大数据集中正确选择样本
 
-> 原文：[https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html`](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)
 
-![如何从机器学习中的巨大数据集中正确选择样本](../Images/09979ee53c1210a7e83d719a441a6d55.png)
+![如何从机器学习中的巨大数据集中正确选择样本](img/09979ee53c1210a7e83d719a441a6d55.png)
 
 照片由 [Lukas](https://www.pexels.com/@goumbik?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，来自 [Pexels](https://www.pexels.com/photo/analytics-blur-close-up-commerce-590020/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -32,7 +32,7 @@
 
 机器学习也是如此。我们有一个**学习东西**的模型，和我们一样，它也需要一些时间。我们想要的是学习现象所需的**最小信息量**，以免浪费时间。信息冗余对我们没有任何商业价值。
 
-但是我们如何确保我们的版本没有损坏或不完整呢？我们必须与其他版本的集合进行某种形式的**高水平比较**。例如，我们可以检查 *canti* 和 *cantiche* 的数量。如果我们的书有三本 *cantiche*，每本都有33个 *canti*，也许它是完整的，我们可以安全地从中学习。
+但是我们如何确保我们的版本没有损坏或不完整呢？我们必须与其他版本的集合进行某种形式的**高水平比较**。例如，我们可以检查 *canti* 和 *cantiche* 的数量。如果我们的书有三本 *cantiche*，每本都有 33 个 *canti*，也许它是完整的，我们可以安全地从中学习。
 
 我们正在做的是从一个样本（单一的 *神曲* 版本）中学习，并检查其**统计意义**（与其他书籍的宏观比较）。
 
@@ -135,7 +135,7 @@ pvalues
 
 p 值如下：
 
-![如何从机器学习中的巨大数据集中正确选择样本](../Images/436dc733ebd7412f7383722e384d8945.png)
+![如何从机器学习中的巨大数据集中正确选择样本](img/436dc733ebd7412f7383722e384d8945.png)
 
 它们中的每一个都**大于 5%**，所以我们可以说样本在统计上是显著的。
 
@@ -143,7 +143,7 @@ p 值如下：
 
 如果我们重复测试，这些是 p 值：
 
-![如何从机器学习中的巨大数据集中正确选择样本](../Images/3de7151fc14e6a869ec2ec3b2d63cd60.png)
+![如何从机器学习中的巨大数据集中正确选择样本](img/3de7151fc14e6a869ec2ec3b2d63cd60.png)
 
 如预期的那样，由于总体的偏倚，X1 的 p 值过低。在这种情况下，我们必须**不断生成**随机样本，直到所有 p 值都大于允许的最小置信水平。
 
@@ -151,7 +151,7 @@ p 值如下：
 
 在这篇文章中，我展示了一个合适的样本在统计上可以显著地代表整个群体。这可能对机器学习有所帮助，因为一个小数据集可以让我们**更快地**训练模型，而信息量与较大的数据集相同。
 
-然而，一切都与我们选择的**显著性水平**密切相关。对于某些问题，提高置信水平或丢弃那些不显示合适p值的变量可能会很有用。像往常一样，训练前的适当数据发现可以帮助我们决定如何正确地进行样本。
+然而，一切都与我们选择的**显著性水平**密切相关。对于某些问题，提高置信水平或丢弃那些不显示合适 p 值的变量可能会很有用。像往常一样，训练前的适当数据发现可以帮助我们决定如何正确地进行样本。
 
 [原文](https://medium.com/data-science-journal/how-to-correctly-select-a-sample-from-a-huge-dataset-in-machine-learning-24327650372c)。经授权转载。
 
@@ -165,7 +165,7 @@ p 值如下：
 
 ### 更多相关主题
 
-+   [如何在Pandas中选择行和列使用[ ], .loc, iloc, .at…](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)
++   [如何在 Pandas 中选择行和列使用[ ], .loc, iloc, .at…](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)
 
 +   [如何为机器学习创建数据集](https://www.kdnuggets.com/2022/02/create-dataset-machine-learning.html)
 
@@ -175,4 +175,4 @@ p 值如下：
 
 +   [如何生成合成表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
 
-+   [ChatGPT驱动的数据探索：揭示数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
++   [ChatGPT 驱动的数据探索：揭示数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)

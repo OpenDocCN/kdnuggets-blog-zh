@@ -1,8 +1,8 @@
 # 什么是代码上的机器学习？
 
-> 原文：[https://www.kdnuggets.com/2019/11/machine-learning-code-mloncode.html](https://www.kdnuggets.com/2019/11/machine-learning-code-mloncode.html)
+> 原文：[`www.kdnuggets.com/2019/11/machine-learning-code-mloncode.html`](https://www.kdnuggets.com/2019/11/machine-learning-code-mloncode.html)
 
-[评论](#comments)
+评论
 
 **作者 [Vadim Markovtsev](https://www.linkedin.com/in/vmarkovtsev/)，[source{d}](https://sourced.tech/) 的首席机器学习工程师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 代码上的机器学习（MLonCode）是一个新的跨学科研究领域，涉及自然语言处理、编程语言结构以及社会和历史分析，如贡献图和提交时间序列。MLonCode 旨在从大规模源代码数据集中学习，以自动执行软件工程任务，如辅助代码审查、代码去重、软件专业评估等。
 
-![图](../Images/50847a8c9480de4781435a9618f8121f.png)
+![图](img/50847a8c9480de4781435a9618f8121f.png)
 
 什么是源代码上的机器学习？
 
@@ -40,7 +40,7 @@
 
 MLonCode 问题包括各种数据挖掘任务，这些任务从理论上看可能是简单的，但由于规模或对细节的关注仍具有技术挑战性。例子包括代码克隆检测和相似开发者聚类。这些问题的解决方案会在年度学术会议[软件仓库挖掘](http://www.msrconf.org/)上展示。
 
-![图](../Images/ceff6ab1470844a142806db0139039b6.png)
+![图](img/ceff6ab1470844a142806db0139039b6.png)
 
 软件仓库挖掘会议的标志。
 
@@ -48,15 +48,15 @@ MLonCode 问题包括各种数据挖掘任务，这些任务从理论上看可�
 
 频率词典（加权的词袋模型，BOW）。例如：函数内的标识符；文件中的图形片段；一个仓库的依赖项。频率可以通过 TF-IDF 加权。这种表示方式是最简单且最可扩展的。
 
-![图](../Images/433065b836a4e9db00c8c92273ed618b.png)
+![图](img/433065b836a4e9db00c8c92273ed618b.png)
 
 一个序列化的标记流（TS），对应于源代码解析序列。该流通常会与相应的抽象语法树节点链接一起增强。这种表示对传统的自然语言处理算法友好，包括序列到序列的深度学习模型。
 
-![图](../Images/80d96a8278350c038a87686813e3231c.png)
+![图](img/80d96a8278350c038a87686813e3231c.png)
 
 一棵树，源自抽象语法树。我们在之后进行各种变换，例如不可逆简化或标识符海报化。这是最强大的表示方式，同时也是最难处理的。相关的 ML 模型包括各种图嵌入和门控图神经网络。
 
-![图](../Images/42857597c1d4c649978d72244aaa7415.png)
+![图](img/42857597c1d4c649978d72244aaa7415.png)
 
 许多处理 MLonCode 问题的方法基于所谓的自然性假设（[Hindle 等人](https://people.inf.ethz.ch/suz/publications/natural.pdf)）：
 
@@ -74,11 +74,11 @@ MLonCode 问题包括各种数据挖掘任务，这些任务从理论上看可�
 
 **相关内容：**
 
-+   [面向数据科学家的面向对象编程：构建你的 ML 估计器](/2019/08/object-oriented-programming-data-scientists-estimator.html)
++   面向数据科学家的面向对象编程：构建你的 ML 估计器
 
-+   [10 个优秀的 Python 资源，助力有志的数据科学家](/2019/09/10-great-python-resources-aspiring-data-scientists.html)
++   10 个优秀的 Python 资源，助力有志的数据科学家
 
-+   [为什么机器学习部署如此困难？](/2019/10/machine-learning-deployment-hard.html)
++   为什么机器学习部署如此困难？
 
 ### 更多相关内容
 

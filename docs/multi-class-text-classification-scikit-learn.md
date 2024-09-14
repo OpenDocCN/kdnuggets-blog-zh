@@ -1,28 +1,28 @@
 # 使用 Scikit-Learn 的多类别文本分类
 
-> 原文：[https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html](https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html`](https://www.kdnuggets.com/2018/08/multi-class-text-classification-scikit-learn.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Susan Li](https://www.linkedin.com/in/susanli/), 高级数据科学家**
 
-![Header iamge](../Images/be0b63e6281d95bf41066b2df2b31734.png)
+![Header iamge](img/be0b63e6281d95bf41066b2df2b31734.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
 文本分类在商业世界中有许多应用。例如，新闻报道通常按主题组织；内容或产品通常按类别标记；用户可以根据他们在线谈论产品或品牌的方式被分类到不同的群体中...
 
-然而，互联网上绝大多数的文本分类文章和教程都是二分类文本分类，例如电子邮件垃圾过滤（垃圾邮件与正常邮件）、情感分析（积极与消极）。在大多数情况下，我们现实中的问题要复杂得多。因此，这就是我们今天要做的事情：将消费者金融投诉分类为12个预定义类别。数据可以从[data.gov](https://catalog.data.gov/dataset/consumer-complaint-database)下载。
+然而，互联网上绝大多数的文本分类文章和教程都是二分类文本分类，例如电子邮件垃圾过滤（垃圾邮件与正常邮件）、情感分析（积极与消极）。在大多数情况下，我们现实中的问题要复杂得多。因此，这就是我们今天要做的事情：将消费者金融投诉分类为 12 个预定义类别。数据可以从[data.gov](https://catalog.data.gov/dataset/consumer-complaint-database)下载。
 
 我们使用 [Python](https://www.python.org/) 和 [Jupyter Notebook](http://jupyter.org/) 来开发我们的系统，依靠 [Scikit-Learn](http://scikit-learn.org/stable/) 进行机器学习组件。如果你想查看 [PySpark](https://spark.apache.org/docs/0.9.0/mllib-guide.html)的实现，可以阅读 [下一篇文章](https://medium.com/@actsusanli/multi-class-text-classification-with-pyspark-7d78d022ed35)。
 
@@ -30,7 +30,7 @@
 
 这个问题是监督文本分类问题，我们的目标是研究哪些监督机器学习方法最适合解决这个问题。
 
-假设有一个新的投诉进来，我们希望将其分配到12个类别中的一个。分类器假设每个新的投诉被分配到一个且只有一个类别。这是一个多类别文本分类问题。我迫不及待想看看我们能取得什么成果！
+假设有一个新的投诉进来，我们希望将其分配到 12 个类别中的一个。分类器假设每个新的投诉被分配到一个且只有一个类别。这是一个多类别文本分类问题。我迫不及待想看看我们能取得什么成果！
 
 ### 数据探索
 
@@ -42,9 +42,9 @@ df = pd.read_csv('Consumer_Complaints.csv')
 df.head()
 ```
 
-![](../Images/97c9210f6dafaff433f843ba7c445543.png)
+![](img/97c9210f6dafaff433f843ba7c445543.png)
 
-图1
+图 1
 
 对于这个项目，我们只需要两列——“产品”和“消费者投诉叙述”。
 
@@ -78,9 +78,9 @@ id_to_category = dict(category_id_df[['category_id', 'Product']].values)
 df.head()
 ```
 
-![](../Images/807df708fc7b3049cd05f88e958d8c0c.png)
+![](img/807df708fc7b3049cd05f88e958d8c0c.png)
 
-图2
+图 2
 
 ### 不平衡类
 
@@ -93,9 +93,9 @@ df.groupby('Product').Consumer_complaint_narrative.count().plot.bar(ylim=0)
 plt.show()
 ```
 
-![](../Images/aaf1ebe71d3affac992417b2fda835de.png)
+![](img/aaf1ebe71d3affac992417b2fda835de.png)
 
-图3
+图 3
 
 当我们遇到这种问题时，使用标准算法往往会有困难。传统算法往往偏向于主要类别，而不考虑数据分布。在最坏的情况下，少数类别会被视为异常值并被忽略。对于一些情况，如欺诈检测或癌症预测，我们需要仔细配置模型或人工平衡数据集，例如通过[欠采样或过采样](https://en.wikipedia.org/wiki/Oversampling_and_undersampling_in_data_analysis)每个类别。
 
@@ -107,13 +107,13 @@ plt.show()
 
 从文本中提取特征的一种常见方法是使用词袋模型：在该模型中，对于每个文档（在我们这里是投诉叙述），考虑的是词的出现（通常还有频率），但忽略它们出现的顺序。
 
-具体来说，对于数据集中每个术语，我们将计算一个叫做词频-逆文档频率的度量，简称tf-idf。我们将使用`sklearn.feature_extraction.text.TfidfVectorizer`为每个消费者投诉叙述计算`tf-idf`向量：
+具体来说，对于数据集中每个术语，我们将计算一个叫做词频-逆文档频率的度量，简称 tf-idf。我们将使用`sklearn.feature_extraction.text.TfidfVectorizer`为每个消费者投诉叙述计算`tf-idf`向量：
 
 +   `sublinear_df`设置为`True`以使用频率的对数形式。
 
 +   `min_df`是词必须出现在的最小文档数量，以便保留。
 
-+   `norm` 设置为 `l2`，以确保我们所有的特征向量都有一个欧几里得范数为1。
++   `norm` 设置为 `l2`，以确保我们所有的特征向量都有一个欧几里得范数为 1。
 
 +   `ngram_range` 设置为 `(1, 2)` 以表示我们希望同时考虑单词和双词组合。
 
@@ -131,7 +131,7 @@ features.shape
 
 `(4569, 12633)`
 
-现在，每个4569个消费者投诉叙述由12633个特征表示，表示不同单词和双词组合的tf-idf分数。
+现在，每个 4569 个消费者投诉叙述由 12633 个特征表示，表示不同单词和双词组合的 tf-idf 分数。
 
 我们可以使用 `sklearn.feature_selection.chi2` 来找到与每个产品最相关的术语：
 
@@ -315,7 +315,7 @@ for Product, category_id in sorted(category_to_id.items()):
 
 最相关的双词组合：
 
-+   xxxx服务提供商
++   xxxx 服务提供商
 
 +   资金需求
 
@@ -323,7 +323,7 @@ for Product, category_id in sorted(category_to_id.items()):
 
 **多类别分类器：特征与设计**
 
-+   为了训练监督分类器，我们首先将“消费者投诉叙述”转换为数字向量。我们探索了诸如TF-IDF加权向量等向量表示。
++   为了训练监督分类器，我们首先将“消费者投诉叙述”转换为数字向量。我们探索了诸如 TF-IDF 加权向量等向量表示。
 
 +   在获得文本的向量表示后，我们可以训练监督分类器，以训练未见的“消费者投诉叙述”并预测它们属于哪个“产品”。
 
@@ -358,9 +358,9 @@ print(clf.predict(count_vect.transform(["This company refuses to provide me veri
 df[df['Consumer_complaint_narrative'] == "This company refuses to provide me verification and validation of debt per my right under the FDCPA. I do not believe this debt is mine."]
 ```
 
-![](../Images/c56b05736e00cea1f083ecc4bf8f7726.png)
+![](img/c56b05736e00cea1f083ecc4bf8f7726.png)
 
-图4
+图 4
 
 ```py
 print(clf.predict(count_vect.transform(["I am disputing the inaccurate information the Chex-Systems has on my credit report. I initially submitted a police report on XXXX/XXXX/16 and Chex Systems only deleted the items that I mentioned in the letter and not all the items that were actually listed on the police report. In other words they wanted me to say word for word to them what items were fraudulent. The total disregard of the police report and what accounts that it states that are fraudulent. If they just had paid a little closer attention to the police report I would not been in this position now and they would n't have to research once again. I would like the reported information to be removed : XXXX XXXX XXXX"])))
@@ -372,9 +372,9 @@ print(clf.predict(count_vect.transform(["I am disputing the inaccurate informati
 df[df['Consumer_complaint_narrative'] == "I am disputing the inaccurate information the Chex-Systems has on my credit report. I initially submitted a police report on XXXX/XXXX/16 and Chex Systems only deleted the items that I mentioned in the letter and not all the items that were actually listed on the police report. In other words they wanted me to say word for word to them what items were fraudulent. The total disregard of the police report and what accounts that it states that are fraudulent. If they just had paid a little closer attention to the police report I would not been in this position now and they would n't have to research once again. I would like the reported information to be removed : XXXX XXXX XXXX"]
 ```
 
-![](../Images/2086ae633dd9e4e36b9ba17aeafd6736.png)
+![](img/2086ae633dd9e4e36b9ba17aeafd6736.png)
 
-图5
+图 5
 
 不错哦！
 
@@ -422,7 +422,7 @@ sns.stripplot(x='model_name', y='accuracy', data=cv_df,
 plt.show()
 ```
 
-![](../Images/e6c6e2e6283254136c4b1d3729aa82e3.png)
+![](img/e6c6e2e6283254136c4b1d3729aa82e3.png)
 
 图 6
 
@@ -466,7 +466,7 @@ plt.xlabel('Predicted')
 plt.show()
 ```
 
-![](../Images/f8fbabd453d6a7a8637fd755bdc4903e.png)
+![](img/f8fbabd453d6a7a8637fd755bdc4903e.png)
 
 图 7
 
@@ -485,9 +485,9 @@ for predicted in category_id_df.category_id:
       print('')
 ```
 
-![](../Images/66a1a34905edd60666acad6ce28f03a3.png)
+![](img/66a1a34905edd60666acad6ce28f03a3.png)
 
-图 8 ![](../Images/03e695d7ef265ff1f060cc879fe5bed4.png)
+图 8 ![](img/03e695d7ef265ff1f060cc879fe5bed4.png)
 
 图 9
 
@@ -686,7 +686,7 @@ from sklearn import metrics
 print(metrics.classification_report(y_test, y_pred, target_names=df['Product'].unique()))
 ```
 
-![](../Images/441988d26ccea0a588f2939d9cdc863f.png)
+![](img/441988d26ccea0a588f2939d9cdc863f.png)
 
 图 9
 
@@ -698,11 +698,11 @@ print(metrics.classification_report(y_test, y_pred, target_names=df['Product'].u
 
 **相关：**
 
-+   [使用 LSTMs、CNNs 和预训练词向量进行文本分类与嵌入可视化](/2018/07/text-classification-lstm-cnn-pre-trained-word-vectors.html)
++   使用 LSTMs、CNNs 和预训练词向量进行文本分类与嵌入可视化
 
-+   [TF-IDF 是什么？](/2018/08/wtf-tf-idf.html)
++   TF-IDF 是什么？
 
-+   [自然语言处理要点：入门 NLP](/2018/06/getting-started-natural-language-processing.html)
++   自然语言处理要点：入门 NLP
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # 揭开神经魔法：深入激活函数
 
-> 原文：[https://www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions](https://www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions)
+> 原文：[`www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions`](https://www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions)
 
-![揭开神经魔法：深入激活函数](../Images/23c0c292d492c32ac44d2f06244752bb.png)
+![揭开神经魔法：深入激活函数](img/23c0c292d492c32ac44d2f06244752bb.png)
 
 作者提供的图片
 
@@ -26,47 +26,47 @@
 
 # Sigmoid
 
-在二分类任务中常用的Sigmoid函数将实数值映射到0和1之间。
+在二分类任务中常用的 Sigmoid 函数将实数值映射到 0 和 1 之间。
 
-![揭开神经魔法：深入激活函数](../Images/80d0e061ecdc2efbcc950004c2c7b5e2.png)
+![揭开神经魔法：深入激活函数](img/80d0e061ecdc2efbcc950004c2c7b5e2.png)
 
 上述方程如下所示：
 
-![揭开神经魔法：深入激活函数](../Images/f27c6ca6f7630bd3a5537f65e246b73e.png)
+![揭开神经魔法：深入激活函数](img/f27c6ca6f7630bd3a5537f65e246b73e.png)
 
 图片由[Hvidberrrg](https://hvidberrrg.github.io/deep_learning/activation_functions/sigmoid_function_and_derivative.html)提供
 
-**Sigmoid函数主要用于二分类任务的输出层，其中目标标签是0或1。** 这使得Sigmoid函数在这种任务中更受青睐，因为其输出限制在这个范围内。对于接近无穷大的高值，sigmoid函数将其映射到接近1。相反，它将接近负无穷大的值映射到0。在这些值之间的所有实数值都映射到0到1的范围内，呈S形趋势。
+**Sigmoid 函数主要用于二分类任务的输出层，其中目标标签是 0 或 1。** 这使得 Sigmoid 函数在这种任务中更受青睐，因为其输出限制在这个范围内。对于接近无穷大的高值，sigmoid 函数将其映射到接近 1。相反，它将接近负无穷大的值映射到 0。在这些值之间的所有实数值都映射到 0 到 1 的范围内，呈 S 形趋势。
 
 ## 缺点
 
 ### 饱和点
 
-Sigmoid函数在反向传播过程中对梯度下降算法会带来问题。除了接近S形曲线中心的值，梯度非常接近零，这会导致训练问题。在渐近线附近，它可能会导致梯度消失问题，因为小梯度可能显著减慢收敛速度。
+Sigmoid 函数在反向传播过程中对梯度下降算法会带来问题。除了接近 S 形曲线中心的值，梯度非常接近零，这会导致训练问题。在渐近线附近，它可能会导致梯度消失问题，因为小梯度可能显著减慢收敛速度。
 
 ### 非零中心
 
-*经实验证明，具有零中心的非线性函数可以确保均值激活值接近0*。具有这种归一化值可以确保梯度下降更快地收敛到最小值。虽然不是必要的，但具有零中心的激活可以加速训练。当输入为0时，Sigmoid函数的中心在0.5。这是使用Sigmoid在隐藏层中的一个缺点。
+*经实验证明，具有零中心的非线性函数可以确保均值激活值接近 0*。具有这种归一化值可以确保梯度下降更快地收敛到最小值。虽然不是必要的，但具有零中心的激活可以加速训练。当输入为 0 时，Sigmoid 函数的中心在 0.5。这是使用 Sigmoid 在隐藏层中的一个缺点。
 
 # Tanh
 
-双曲正切函数是对Sigmoid函数的改进。与[0,1]范围不同，TanH函数将实数值映射到-1和1之间。
+双曲正切函数是对 Sigmoid 函数的改进。与[0,1]范围不同，TanH 函数将实数值映射到-1 和 1 之间。
 
-![揭示神经魔法：深入激活函数](../Images/0de1d4ed4910a0cb10282f1672de595c.png)
+![揭示神经魔法：深入激活函数](img/0de1d4ed4910a0cb10282f1672de595c.png)
 
-TanH函数如下所示：
+TanH 函数如下所示：
 
-![揭示神经魔法：深入激活函数](../Images/26fa67c0aba4c8db7b99e4515bb868ef.png)
+![揭示神经魔法：深入激活函数](img/26fa67c0aba4c8db7b99e4515bb868ef.png)
 
 图片由[Wolfram](https://mathworld.wolfram.com/HyperbolicTangent.html)提供
 
-TanH函数遵循与Sigmoid相同的S形曲线，但现在是零中心的。这允许在训练过程中更快的收敛，因为它改进了Sigmoid函数的一个缺点。**这使得它在神经网络架构中的隐藏层中更为适用。**
+TanH 函数遵循与 Sigmoid 相同的 S 形曲线，但现在是零中心的。这允许在训练过程中更快的收敛，因为它改进了 Sigmoid 函数的一个缺点。**这使得它在神经网络架构中的隐藏层中更为适用。**
 
 ## 缺点
 
 ### 饱和点
 
-TanH函数遵循与Sigmoid相同的S形曲线，但现在是零中心的。这允许在训练过程中更快的收敛，改进了Sigmoid函数的表现。这使得它在神经网络架构中的隐藏层中更为适用。
+TanH 函数遵循与 Sigmoid 相同的 S 形曲线，但现在是零中心的。这允许在训练过程中更快的收敛，改进了 Sigmoid 函数的表现。这使得它在神经网络架构中的隐藏层中更为适用。
 
 ### 计算开销
 
@@ -76,17 +76,17 @@ TanH函数遵循与Sigmoid相同的S形曲线，但现在是零中心的。这�
 
 实践中最常用的激活函数，修正线性单元激活（ReLU），是最简单但最有效的非线性函数。
 
-![揭示神经魔法：深入激活函数](../Images/eb93e3d80f0aa40eb31cd9cbf24a7386.png)
+![揭示神经魔法：深入激活函数](img/eb93e3d80f0aa40eb31cd9cbf24a7386.png)
 
-它保留所有非负值并将所有负值钳制为0。可视化时，ReLU函数如下所示：
+它保留所有非负值并将所有负值钳制为 0。可视化时，ReLU 函数如下所示：
 
-![揭示神经魔法：深入激活函数](../Images/04eed6624e7ff79531aa963d323f5b54.png)
+![揭示神经魔法：深入激活函数](img/04eed6624e7ff79531aa963d323f5b54.png)
 
 图片由[**Michiel Straat**](https://michielstraat.com/)提供
 
 ## 缺点
 
-### 死亡ReLU
+### 死亡 ReLU
 
 梯度在图的一端趋于平坦。所有负值的梯度为零，因此一半的神经元可能对训练贡献很小。
 
@@ -118,11 +118,11 @@ TanH函数遵循与Sigmoid相同的S形曲线，但现在是零中心的。这�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -136,6 +136,6 @@ TanH函数遵循与Sigmoid相同的S形曲线，但现在是零中心的。这�
 
 +   [深入探讨 GPT 模型：演变与性能比较](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)
 
-+   [深入了解Kaggle的AI报告2023 – 了解最新趋势](https://www.kdnuggets.com/dive-into-the-future-with-kaggle-ai-report-2023-see-what-hot)
++   [深入了解 Kaggle 的 AI 报告 2023 – 了解最新趋势](https://www.kdnuggets.com/dive-into-the-future-with-kaggle-ai-report-2023-see-what-hot)
 
-+   [揭示CTGAN的潜力：利用生成式AI生成合成数据](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
++   [揭示 CTGAN 的潜力：利用生成式 AI 生成合成数据](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)

@@ -1,8 +1,8 @@
-# SMOTE简介
+# SMOTE 简介
 
-> 原文：[https://www.kdnuggets.com/2022/11/introduction-smote.html](https://www.kdnuggets.com/2022/11/introduction-smote.html)
+> 原文：[`www.kdnuggets.com/2022/11/introduction-smote.html`](https://www.kdnuggets.com/2022/11/introduction-smote.html)
 
-![SMOTE简介](../Images/8b829ac989ef7e8c411cf74f02fca11b.png)
+![SMOTE 简介](img/8b829ac989ef7e8c411cf74f02fca11b.png)
 
 图片由作者提供
 
@@ -12,37 +12,37 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 你可以通过过采样少数类来解决这个问题，你可以通过复制训练数据集中少数类的样本来实现。这将平衡类别分布，但不会提高模型性能，因为它没有为模型提供额外的信息。
 
-那么，你如何同时平衡类别分布并提高模型性能呢？通过使用SMOTE（合成少数类过采样技术）从少数类中合成新的样本。
+那么，你如何同时平衡类别分布并提高模型性能呢？通过使用 SMOTE（合成少数类过采样技术）从少数类中合成新的样本。
 
-# 什么是SMOTE？
+# 什么是 SMOTE？
 
 SMOTE（合成少数类过采样技术）是一种平衡数据集中类别分布的过采样方法。它选择接近特征空间的少数样本。然后，它在特征空间中的样本之间绘制一条线，并在这条线上生成一个新的样本。
 
-简单来说，算法从少数类中选择一个随机样本，并使用K最近邻选择一个随机邻居。在特征空间中，这个合成样本在两个样本之间创建。
+简单来说，算法从少数类中选择一个随机样本，并使用 K 最近邻选择一个随机邻居。在特征空间中，这个合成样本在两个样本之间创建。
 
-使用SMOTE有一个缺点，因为在创建合成样本时，它没有考虑多数类。这可能会导致类别之间有很强的重叠。
+使用 SMOTE 有一个缺点，因为在创建合成样本时，它没有考虑多数类。这可能会导致类别之间有很强的重叠。
 
-让我们通过使用Imbalanced-Learn库来观察SMOTE的实际效果。
+让我们通过使用 Imbalanced-Learn 库来观察 SMOTE 的实际效果。
 
 ```py
 %pip install imbalanced-learn
 ```
 
-> **注意：**我们使用Deepnote笔记本来运行实验。
+> **注意：**我们使用 Deepnote 笔记本来运行实验。
 
 # 不平衡数据集
 
-我们将使用sci-kit learn的数据集模块中的make_classification来创建一个不平衡的分类数据集。
+我们将使用 sci-kit learn 的数据集模块中的 make_classification 来创建一个不平衡的分类数据集。
 
 ```py
 from collections import Counter
@@ -65,14 +65,14 @@ print("y labels after oversampling")
 print(labels)
 ```
 
-正如我们观察到的，样本总数为1K。970个属于**0**标签，只有30个属于**1**。
+正如我们观察到的，样本总数为 1K。970 个属于**0**标签，只有 30 个属于**1**。
 
 ```py
 y labels after oversampling
 Counter({0: 970, 1: 30})
 ```
 
-然后我们将使用matplotlib的pyplot来可视化数据集。
+然后我们将使用 matplotlib 的 pyplot 来可视化数据集。
 
 正如我们所见，图表上只有少量的黄色点（1），而紫色点则更多。这是一个明显的不平衡数据集的例子。
 
@@ -80,15 +80,15 @@ Counter({0: 970, 1: 30})
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=y, s=50, edgecolor="k");
 ```
 
-![SMOTE简介](../Images/b0df5995c9c02ac685d26f27b7cfdc01.png)
+![SMOTE 简介](img/b0df5995c9c02ac685d26f27b7cfdc01.png)
 
 ## 模型训练与评估
 
 在我们使用过采样平衡数据集之前，我们需要为模型性能设定基准。
 
-我们将使用决策树分类模型在数据集上进行10折3次交叉验证来进行训练和评估。简而言之，我们将在数据集上训练和评估30个模型。
+我们将使用决策树分类模型在数据集上进行 10 折 3 次交叉验证来进行训练和评估。简而言之，我们将在数据集上训练和评估 30 个模型。
 
-RepeatedStratifiedKFold中的分层意味着每次交叉验证的划分都具有与原始数据集相同的类别分布。
+RepeatedStratifiedKFold 中的分层意味着每次交叉验证的划分都具有与原始数据集相同的类别分布。
 
 ```py
 import numpy as np
@@ -109,9 +109,9 @@ print("Mean AUC: %.3f" % np.mean(result))
 Mean AUC: 0.626
 ```
 
-# 使用SMOTE()进行过采样
+# 使用 SMOTE()进行过采样
 
-我们现在将应用过采样方法SMOTE来平衡数据集。我们将使用[imbalanced-learn](https://pypi.org/project/imbalanced-learn/)的SMOTE函数，并提供特征(X)和标签(y)。
+我们现在将应用过采样方法 SMOTE 来平衡数据集。我们将使用[imbalanced-learn](https://pypi.org/project/imbalanced-learn/)的 SMOTE 函数，并提供特征(X)和标签(y)。
 
 ```py
 over = SMOTE()
@@ -123,7 +123,7 @@ print("y labels after oversampling")
 print(labels)
 ```
 
-现在0和1标签的样本数量已经平衡，每个标签都有970个样本。
+现在 0 和 1 标签的样本数量已经平衡，每个标签都有 970 个样本。
 
 ```py
 y labels after oversampling
@@ -136,7 +136,7 @@ Counter({0: 970, 1: 970})
 plt.scatter(X[:, 0], X[:, 1], marker="o", c=y, s=50, edgecolor="k");
 ```
 
-![SMOTE简介](../Images/14e3502b11ed60dc043e62ace29e3f20.png)
+![SMOTE 简介](img/14e3502b11ed60dc043e62ace29e3f20.png)
 
 ## 模型训练和评估
 
@@ -159,21 +159,21 @@ Mean AUC: 0.834
 
 # 结论
 
-原始的SMOTE [论文](https://arxiv.org/abs/1106.1813)建议将过采样(SMOTE)与多数类的欠采样相结合，因为SMOTE在创建新样本时不考虑多数类。少数类的过采样(SMOTE)和多数类的欠采样的组合可以给我们更好的结果。
+原始的 SMOTE [论文](https://arxiv.org/abs/1106.1813)建议将过采样(SMOTE)与多数类的欠采样相结合，因为 SMOTE 在创建新样本时不考虑多数类。少数类的过采样(SMOTE)和多数类的欠采样的组合可以给我们更好的结果。
 
-在本教程中，我们了解了为什么使用SMOTE及其工作原理。我们还学习了imbalanced-learn库及其如何用于提高模型性能和平衡类分布。
+在本教程中，我们了解了为什么使用 SMOTE 及其工作原理。我们还学习了 imbalanced-learn 库及其如何用于提高模型性能和平衡类分布。
 
-希望你喜欢我的工作，别忘了关注我在社交媒体上，以了解有关数据科学、机器学习、自然语言处理、MLOps、Python、Julia、R和Tableau的内容。
+希望你喜欢我的工作，别忘了关注我在社交媒体上，以了解有关数据科学、机器学习、自然语言处理、MLOps、Python、Julia、R 和 Tableau 的内容。
 
 ## 参考
 
-1.  [使用Python进行不平衡分类的SMOTE - MachineLearningMastery.com](https://machinelearningmastery.com/smote-oversampling-for-imbalanced-classification/)
+1.  [使用 Python 进行不平衡分类的 SMOTE - MachineLearningMastery.com](https://machinelearningmastery.com/smote-oversampling-for-imbalanced-classification/)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些在精神疾病方面挣扎的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些在精神疾病方面挣扎的学生。
 
 ### 更多相关主题
 
-+   [7种SMOTE变体用于过采样](https://www.kdnuggets.com/2023/01/7-smote-variations-oversampling.html)
++   [7 种 SMOTE 变体用于过采样](https://www.kdnuggets.com/2023/01/7-smote-variations-oversampling.html)
 
 +   [使用 PyCaret 的二分类介绍](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
 

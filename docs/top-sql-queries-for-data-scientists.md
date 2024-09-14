@@ -1,8 +1,8 @@
 # 数据科学家使用的顶级 SQL 查询
 
-> 原文：[https://www.kdnuggets.com/top-sql-queries-for-data-scientists](https://www.kdnuggets.com/top-sql-queries-for-data-scientists)
+> 原文：[`www.kdnuggets.com/top-sql-queries-for-data-scientists`](https://www.kdnuggets.com/top-sql-queries-for-data-scientists)
 
-![数据科学家使用的顶级 SQL 查询](../Images/47f18f5138c392ba61fe76c096cce8fa.png)
+![数据科学家使用的顶级 SQL 查询](img/47f18f5138c392ba61fe76c096cce8fa.png)
 
 *作者提供的图片*
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@ SQL 用于数据查询和操作，但也具有相当可观的数据分析和报�
 
 这是我将讨论的概念概述。
 
-![数据科学家使用的顶级 SQL 查询](../Images/eb46de3aead5f565ec06a3dd488ed709.png)
+![数据科学家使用的顶级 SQL 查询](img/eb46de3aead5f565ec06a3dd488ed709.png)
 
 ### **1\. 查询和过滤数据**
 

@@ -1,8 +1,8 @@
-# 面向 NLP 从业者的5门语言学课程
+# 面向 NLP 从业者的 5 门语言学课程
 
-> 原文：[https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html](https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html)
+> 原文：[`www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html`](https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html)
 
-![5门面向NLP从业者的语言学课程](../Images/3d7c7f289f4a8a0305d074a0c4689a2f.png)
+![5 门面向 NLP 从业者的语言学课程](img/3d7c7f289f4a8a0305d074a0c4689a2f.png)
 
 照片由 [Charl Folscher](https://unsplash.com/@charlfolscher?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -10,19 +10,19 @@
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 根据你选择的路径，你一开始所具备的专业知识将会有所不同。虽然语言学背景的人需要努力学习所需的计算技能，但来自计算背景的人则需要弥补他们的语言学知识。
 
-这5门课程旨在帮助自然语言处理（NLP）从业者或有志之士弥补他们缺乏的语言学知识。
+这 5 门课程旨在帮助自然语言处理（NLP）从业者或有志之士弥补他们缺乏的语言学知识。
 
 ## 1\. [人类语言的奇迹：语言学导论](https://www.coursera.org/learn/human-language)
 
@@ -76,18 +76,18 @@
 
 这是另一门高度专业化的课程，带有社会语言学的倾向。课程内容涵盖了口音、对口音的态度以及这些如何帮助形成身份，这是对语言学世界的一种新视角。
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家及KDnuggets的主编，KDnuggets是重要的数据科学和机器学习在线资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1 at kdnuggets[dot]com联系到。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家及 KDnuggets 的主编，KDnuggets 是重要的数据科学和机器学习在线资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 联系到。
 
 ### 相关主题
 
-+   [SAS如何帮助提升从业者的职业生涯](https://www.kdnuggets.com/2023/07/sas-help-catapult-practitioners-careers.html)
++   [SAS 如何帮助提升从业者的职业生涯](https://www.kdnuggets.com/2023/07/sas-help-catapult-practitioners-careers.html)
 
-+   [LLM手册：从业者的策略和技巧](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
++   [LLM 手册：从业者的策略和技巧](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
 
-+   [用这5门免费课程启动你的NLP之旅](https://www.kdnuggets.com/kickstart-your-nlp-journey-with-these-5-free-courses)
++   [用这 5 门免费课程启动你的 NLP 之旅](https://www.kdnuggets.com/kickstart-your-nlp-journey-with-these-5-free-courses)
 
-+   [用LIME解释NLP模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
++   [用 LIME 解释 NLP 模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
 
-+   [过去12个月必须阅读的NLP论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
++   [过去 12 个月必须阅读的 NLP 论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
 
-+   [NLP中不同词嵌入技术的终极指南](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
++   [NLP 中不同词嵌入技术的终极指南](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)

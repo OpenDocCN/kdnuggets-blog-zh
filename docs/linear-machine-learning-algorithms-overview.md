@@ -1,8 +1,8 @@
 # 线性机器学习算法概述
 
-> 原文：[https://www.kdnuggets.com/2022/07/linear-machine-learning-algorithms-overview.html](https://www.kdnuggets.com/2022/07/linear-machine-learning-algorithms-overview.html)
+> 原文：[`www.kdnuggets.com/2022/07/linear-machine-learning-algorithms-overview.html`](https://www.kdnuggets.com/2022/07/linear-machine-learning-algorithms-overview.html)
 
-![线性机器学习算法概述](../Images/cb7968557a2d010de52004b42d71d535.png)
+![线性机器学习算法概述](img/cb7968557a2d010de52004b42d71d535.png)
 
 图片来源：作者
 
@@ -22,11 +22,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -48,7 +48,7 @@ learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html）
 
 由于线性回归拟合的是一条直线，它可以对未来的数据进行外推，这不同于如随机森林等其他算法。基于树的算法无法预测给定数据之外的值，因为它们的预测基于不同决策树预测值的均值。
 
-![线性回归](../Images/e7715eb95f29003470d7588229bcecb1.png)
+![线性回归](img/e7715eb95f29003470d7588229bcecb1.png)
 
 [线性回归拟合的残差](https://commons.wikimedia.org/wiki/File:Residuals_for_Linear_Regression_Fit.png)
 
@@ -66,9 +66,9 @@ learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html）
 
 其他线性回归算法包括：
 
-+   [**套索回归**](https://scikit-learn.org/stable/modules/linear_model.html#lasso) 是一种引入了***L1正则化***的线性模型，其目标是最小化系数的绝对和。在此算法中，不重要特征的权重被驱动到零。因此，不重要的特征会从线性方程中去除，使最终方程更简单。
++   [**套索回归**](https://scikit-learn.org/stable/modules/linear_model.html#lasso) 是一种引入了***L1 正则化***的线性模型，其目标是最小化系数的绝对和。在此算法中，不重要特征的权重被驱动到零。因此，不重要的特征会从线性方程中去除，使最终方程更简单。
 
-+   [**岭回归**](https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression) 的系数最小化了一个带惩罚的残差平方和。此正则化被称为***L2正则化***。在此算法中，不重要特征的权重被减少到接近零的小数值，但不会完全为零。这对于修剪系数同时保留所有特征并相应调整权重非常有用。
++   [**岭回归**](https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression) 的系数最小化了一个带惩罚的残差平方和。此正则化被称为***L2 正则化***。在此算法中，不重要特征的权重被减少到接近零的小数值，但不会完全为零。这对于修剪系数同时保留所有特征并相应调整权重非常有用。
 
 ## 线性回归的假设
 
@@ -86,7 +86,7 @@ learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html）
 
 逻辑回归是一种用于分类问题的线性模型。它生成一个介于 0 和 1 之间的概率。这是通过拟合一个 [逻辑函数，也称为 sigmoid 函数](https://en.wikipedia.org/wiki/Logistic_function) 实现的。该函数负责将预测值映射到介于 0 和 1 之间的数字。
 
-![逻辑回归](../Images/b2a09333fc8a8e506d0da6a66f57387f.png)
+![逻辑回归](img/b2a09333fc8a8e506d0da6a66f57387f.png)
 
 Logistic 函数 | [图像来源](https://christophm.github.io/interpretable-ml-book/images/logistic-function-1.png)
 
@@ -102,43 +102,43 @@ Logistic 函数 | [图像来源](https://christophm.github.io/interpretable-ml-b
 
 支持向量机（SVM）是一种监督式机器学习算法，可用于回归和分类问题。它主要用于分类。
 
-当数据线性可分时使用线性SVM。在这种情况下，数据可以通过一条直线轻松分隔。
+当数据线性可分时使用线性 SVM。在这种情况下，数据可以通过一条直线轻松分隔。
 
-分类是通过找到最佳分隔两个类别的超平面来完成的。SVM使用极端数据点来创建决策边界。这些极端数据点被称为***支持向量***，因此得名支持向量机。
+分类是通过找到最佳分隔两个类别的超平面来完成的。SVM 使用极端数据点来创建决策边界。这些极端数据点被称为***支持向量***，因此得名支持向量机。
 
-![支持向量机](../Images/a568d50869df8b516cb48fa4688edb92.png)
+![支持向量机](img/a568d50869df8b516cb48fa4688edb92.png)
 
 [支持向量机模型。支持向量被创建以最大化两个组之间的分隔](https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Svm_separating_hyperplanes_%28SVG%29.svg/800px-Svm_separating_hyperplanes_%28SVG%29.svg.png)。
 
 向量之间的距离称为***间隔***。该算法通过最大化两个类别之间的间隙——即间隔来工作。***最优超平面***是具有最大间隔的超平面。
 
-![SVM在两个类别上训练得到的最大间隔超平面和间隔。](../Images/4dc921330b99b4983a2477f5d7cc3058.png)
+![SVM 在两个类别上训练得到的最大间隔超平面和间隔。](img/4dc921330b99b4983a2477f5d7cc3058.png)
 
-[SVM在两个类别上训练得到的最大间隔超平面和间隔。](https://commons.wikimedia.org/wiki/File:SVM_margin.png)
+[SVM 在两个类别上训练得到的最大间隔超平面和间隔。](https://commons.wikimedia.org/wiki/File:SVM_margin.png)
 
-SVM还可以通过一种称为***核技巧***的技术计算非线性分类的边界。它通过添加第三维度并在3D空间中分隔数据点来工作。
+SVM 还可以通过一种称为***核技巧***的技术计算非线性分类的边界。它通过添加第三维度并在 3D 空间中分隔数据点来工作。
 
-![SVM中的核技巧示意图](../Images/5a6183e7b8cbdeed889cd6c6e15b3bd3.png)
+![SVM 中的核技巧示意图](img/5a6183e7b8cbdeed889cd6c6e15b3bd3.png)
 
-[SVM中的核技巧示意图](https://commons.wikimedia.org/wiki/File:Kernel_trick_idea.svg)
+[SVM 中的核技巧示意图](https://commons.wikimedia.org/wiki/File:Kernel_trick_idea.svg)
 
 # SVM、线性回归和逻辑回归之间的区别
 
-线性回归算法与逻辑回归的不同在于逻辑回归输出概率。因此，逻辑回归算法可用于分类，而线性回归算法则不能。逻辑回归算法输出0到1之间的值，而线性回归算法则会外推并输出零以上或以下的值。
+线性回归算法与逻辑回归的不同在于逻辑回归输出概率。因此，逻辑回归算法可用于分类，而线性回归算法则不能。逻辑回归算法输出 0 到 1 之间的值，而线性回归算法则会外推并输出零以上或以下的值。
 
-SVM更具内存效率，因为它在决策函数中使用了训练数据的一个子集。与逻辑回归算法不同，SVM不提供概率估计。SVM也不像逻辑回归那样容易受到异常值的影响，因为它主要关注的是最接近超平面的数据点。
+SVM 更具内存效率，因为它在决策函数中使用了训练数据的一个子集。与逻辑回归算法不同，SVM 不提供概率估计。SVM 也不像逻辑回归那样容易受到异常值的影响，因为它主要关注的是最接近超平面的数据点。
 
 # 线性算法结果解释：汇总统计
 
-线性回归输出每个自变量的系数。以一个用来预测商品价格的自变量X1为例。如果X1的系数是6.2，可以这样解释：在所有因素保持不变的情况下，X1每增加一个单位，商品价格将增加6.2。
+线性回归输出每个自变量的系数。以一个用来预测商品价格的自变量 X1 为例。如果 X1 的系数是 6.2，可以这样解释：在所有因素保持不变的情况下，X1 每增加一个单位，商品价格将增加 6.2。
 
-逻辑回归算法输出一个项目属于某个类别的概率。因此，通过设置0.5的阈值来解释结果，从而分隔这两个类别。
+逻辑回归算法输出一个项目属于某个类别的概率。因此，通过设置 0.5 的阈值来解释结果，从而分隔这两个类别。
 
-给定一个包含两个类别的数据集，SVM算法将通过计算最佳超平面来预测项目属于哪个类别。它不计算任何概率，而是使用数据点与最优超平面的距离来分隔类别。
+给定一个包含两个类别的数据集，SVM 算法将通过计算最佳超平面来预测项目属于哪个类别。它不计算任何概率，而是使用数据点与最优超平面的距离来分隔类别。
 
 # 何时使用逻辑回归与支持向量机
 
-逻辑回归和支持向量机是分类中两种流行的算法。然而，在某些情况下，你可能会偏好其中一个。例如，当存在异常值时，使用SVM更好，因为它们不会影响算法如何分离两个类别。SVM在数据维度较高时也是更好的选择。
+逻辑回归和支持向量机是分类中两种流行的算法。然而，在某些情况下，你可能会偏好其中一个。例如，当存在异常值时，使用 SVM 更好，因为它们不会影响算法如何分离两个类别。SVM 在数据维度较高时也是更好的选择。
 
 当类别没有很好地分离时，逻辑回归是更好的选择。否则，使用支持向量机（SVM）。不过，通常会先使用逻辑回归模型来创建基线模型。
 

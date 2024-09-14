@@ -1,10 +1,10 @@
 # 如何将机器学习/深度学习模型部署到网络
 
-> 原文：[https://www.kdnuggets.com/2021/04/deploy-machine-learning-models-to-web.html](https://www.kdnuggets.com/2021/04/deploy-machine-learning-models-to-web.html)
+> 原文：[`www.kdnuggets.com/2021/04/deploy-machine-learning-models-to-web.html`](https://www.kdnuggets.com/2021/04/deploy-machine-learning-models-to-web.html)
 
-[评论](#comments)
+评论
 
-![](../Images/21d362b53192e6a8cdf55bee781e6668.png)
+![](img/21d362b53192e6a8cdf55bee781e6668.png)
 
 如果你已经在机器学习领域工作了一段时间，你一定创建过一些机器学习或深度学习模型。你一定会想，人们会如何使用你的 Jupyter notebook？答案是*他们不会*。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -229,7 +229,7 @@ uvicorn app:app --reload
 
 这将使你的应用程序在 localhost 上运行。在 *http://127.0.0.1:8000/predict* 路由下，你可以看到输入表单。
 
-![](../Images/ca483a807ab03e9028fa828b5c149db3.png)
+![](img/ca483a807ab03e9028fa828b5c149db3.png)
 
 现在让我们定义一些辅助函数，这些函数将用于预处理数据。
 
@@ -289,11 +289,11 @@ $ uvicorn app:app --reload
 
 在 "/predict" 路由上，你可以给模型提供输入。
 
-![](../Images/130049d8adfb200d84b4b44fef322d5e.png)
+![](img/130049d8adfb200d84b4b44fef322d5e.png)
 
 模型将预测情感并返回结果。
 
-![](../Images/83418447b21170dc3e7bedd583a9aed9.png)
+![](img/83418447b21170dc3e7bedd583a9aed9.png)
 
 我们还可以在主页上创建一个虚拟路由，即“/”，以确保它也能正常工作。
 
@@ -306,27 +306,27 @@ def basic_view():
 
 你可以在这里查看完整的代码：
 
-**FastAPI上的文档路由**
+**FastAPI 上的文档路由**
 
 FastAPI 为每个应用程序提供了一个出色的“/docs”路由，你可以在这里测试你的 API 以及它的请求和路由。
 
 在我们的 API 中，总共有 3 个路由：
 
-![](../Images/8f4bfbb77669529c73ef39baa7eadee0.png)
+![](img/8f4bfbb77669529c73ef39baa7eadee0.png)
 
-我们可以通过点击它们来测试所有3个请求。我们将测试最重要的一个，即对预测路由的 POST 请求，它执行所有的计算。
+我们可以通过点击它们来测试所有 3 个请求。我们将测试最重要的一个，即对预测路由的 POST 请求，它执行所有的计算。
 
-![](../Images/7bb8707e108be543154a804039714738.png)
+![](img/7bb8707e108be543154a804039714738.png)
 
 点击“尝试一下”以传入所需的文本并获取其情感：
 
-![](../Images/0e2f80e43fd58c731d136e78d96c8a7c.png)
+![](img/0e2f80e43fd58c731d136e78d96c8a7c.png)
 
 现在你可以在响应中检查结果：
 
-![](../Images/c0db77efa57b3cd92cf426ad98861945.png)
+![](img/c0db77efa57b3cd92cf426ad98861945.png)
 
-响应状态码200表示请求成功，你将得到一个有效的期望输出。
+响应状态码 200 表示请求成功，你将得到一个有效的期望输出。
 
 ### 第 4 步：添加有助于部署的适当文件
 
@@ -418,39 +418,39 @@ $ git push -u origin main
 
 你需要在 Heroku 仪表板上创建一个新的应用程序。
 
-![](../Images/ae54f7c7872f46ae23adf7e7666ad0bf.png)
+![](img/ae54f7c7872f46ae23adf7e7666ad0bf.png)
 
 为你的应用程序选择一个合适的名称。
 
 在部署部分，在部署方法中选择 GitHub。
 
-![](../Images/7ffd3800a31de1615cb5b610508263f1.png)
+![](img/7ffd3800a31de1615cb5b610508263f1.png)
 
 在这里搜索你的仓库，并连接到它。
 
-![](../Images/c6e6a30fc28c124cf0f3f090cd0878e0.png)
+![](img/c6e6a30fc28c124cf0f3f090cd0878e0.png)
 
 你可以选择自动部署，这样每次在 GitHub 上的部署分支有变更时，应用程序将自动部署。第一次需要手动部署应用程序。然后每次你在 GitHub 上更新部署分支时，它将会自动部署。
 
-![](../Images/4ee145d19449ea0144c2f1dc0e855f6a.png)
+![](img/4ee145d19449ea0144c2f1dc0e855f6a.png)
 
 点击“部署分支”将启动部署过程，你可以通过点击“更多”来查看日志，这可以帮助你查看应用程序的日志，如果遇到错误，你可以看到。
 
-![](../Images/2ee3e95bc44948700c828857b7fdbf66.png)
+![](img/2ee3e95bc44948700c828857b7fdbf66.png)
 
 一旦构建成功，你可以点击“打开应用程序”来检查你的应用程序。你可以访问你在应用程序中之前定义的所有路由，并进行测试。
 
-![](../Images/922f6247d9b0abdf5cbe13e0f7c4e093.png)
+![](img/922f6247d9b0abdf5cbe13e0f7c4e093.png)
 
 **查看部署历史**
 
 你可以通过检查 GitHub 上底部左侧的环境标签来查看应用程序的部署历史记录。
 
-![](../Images/d2a5eea06168d3cacdae3c4abe57dbad.png)
+![](img/d2a5eea06168d3cacdae3c4abe57dbad.png)
 
 这也会显示所有的部署历史记录。
 
-![](../Images/9eb2568dd680657124294dfa1adeb00f.png)
+![](img/9eb2568dd680657124294dfa1adeb00f.png)
 
 **使用 Python Requests 访问你的 API**
 
@@ -467,7 +467,7 @@ print(resp.content)
 
 ```
 
-![](../Images/4e301cf35d5f910a673e9b67698696c8.png)
+![](img/4e301cf35d5f910a673e9b67698696c8.png)
 
 你将收到的输出就像在端点中看到的一样。
 
@@ -486,7 +486,7 @@ $ curl -X 'POST' \
 
 在 -X 参数之后我们提到了请求的类型，即 POST 请求。然后 -H 显示我们的 API 使用的头部信息，分别是 application/JSON 和内容类型。接着我们需要使用 -d 参数提供数据并传递文本。要添加空格，请使用 *%20*。
 
-![](../Images/a492c7457118263f52f325cd312e63b4.png)
+![](img/a492c7457118263f52f325cd312e63b4.png)
 
 你可以在我的 GitHub 仓库[这里](https://github.com/ahmadmustafaanis/SentimentAnalysisDeployment)查看完整的代码。
 

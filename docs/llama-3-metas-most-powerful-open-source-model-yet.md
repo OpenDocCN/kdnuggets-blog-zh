@@ -1,24 +1,24 @@
 # LLaMA 3: Meta 迄今最强大的开源模型
 
-> 原文：[https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)
+> 原文：[`www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet`](https://www.kdnuggets.com/llama-3-metas-most-powerful-open-source-model-yet)
 
-![LLaMA 3: Meta 迄今最强大的开源模型](../Images/5259133cb6840f3279cede2ee9836b59.png)
+![LLaMA 3: Meta 迄今最强大的开源模型](img/5259133cb6840f3279cede2ee9836b59.png)
 
 图片由作者提供
 
 ## 介绍 Llama 3
 
-Meta 最近发布了 Llama 3，这是迄今为止最强大的“开源”AI模型之一。
+Meta 最近发布了 Llama 3，这是迄今为止最强大的“开源”AI 模型之一。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -34,7 +34,7 @@ Llama 3 提供 2 种规格：Llama 3 8B，具有 80 亿个参数，以及 Llama 
 
 这里是一张展示 Llama 3 在各种基准测试中与其他语言模型表现对比的表格：
 
-![Meta Llama 3 在基准测试中的表现](../Images/1c9425a6bf5b3ef6552b942ba8b2a93b.png)
+![Meta Llama 3 在基准测试中的表现](img/1c9425a6bf5b3ef6552b942ba8b2a93b.png)
 
 来源：[Meta](https://llama.meta.com/llama3/)
 
@@ -42,7 +42,7 @@ Llama 3 提供 2 种规格：Llama 3 8B，具有 80 亿个参数，以及 Llama 
 
 +   **MMLU（大规模多任务语言理解）**：一个基准测试，旨在理解语言模型的多任务处理能力。该模型在数学、计算机科学和法律等多个学科中的表现被评估。
 
-+   **GPQA（研究生水平谷歌验证问答）**：评估模型回答搜索引擎难以直接解决的问题的能力。该基准测试评估AI是否能处理通常需要人类级别研究技能的问题。
++   **GPQA（研究生水平谷歌验证问答）**：评估模型回答搜索引擎难以直接解决的问题的能力。该基准测试评估 AI 是否能处理通常需要人类级别研究技能的问题。
 
 +   **HumanEval**：评估模型通过执行编程任务来编写代码的能力。
 
@@ -90,13 +90,13 @@ Meta AI 已整合到 Meta 的应用套件中，如 Facebook、Instagram、WhatsA
 
 你应该会看到如下的界面：
 
-![HuggingChat 界面的截图](../Images/5bac1f96d6adf92de630e26e401e4df3.png)
+![HuggingChat 界面的截图](img/5bac1f96d6adf92de630e26e401e4df3.png)
 
 来源：[HuggingChat](https://huggingface.co/chat/)
 
 只需选择齿轮图标并将当前模型更改为 Meta Llama 3，如下所示：
 
-![通过 HuggingChat 访问 Meta Llama 3](../Images/2236aac8480eaa3c90c8e0e509fb0ebc.png)
+![通过 HuggingChat 访问 Meta Llama 3](img/2236aac8480eaa3c90c8e0e509fb0ebc.png)
 
 来源：[HuggingChat](https://huggingface.co/chat/)
 
@@ -112,7 +112,7 @@ Ollama 是一个允许你在本地计算机上运行语言模型的工具。使�
 
 模型下载应该需要几分钟时间。完成后，你可以在终端中输入你的提示，与 Llama 3 进行互动，如下图所示：
 
-![使用 Ollama 访问 Meta Llama 3](../Images/00e45c119571feb153e91a7ea62288eb.png)
+![使用 Ollama 访问 Meta Llama 3](img/00e45c119571feb153e91a7ea62288eb.png)
 
 作者提供的图片
 

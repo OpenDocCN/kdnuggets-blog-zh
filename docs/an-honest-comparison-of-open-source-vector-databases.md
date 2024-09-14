@@ -1,8 +1,8 @@
 # 开源向量数据库的诚实比较
 
-> 原文：[https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)
+> 原文：[`www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases`](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)
 
-![开源向量数据库的诚实比较](../Images/acbd5b0114632cb43344e5c059872e6a.png)
+![开源向量数据库的诚实比较](img/acbd5b0114632cb43344e5c059872e6a.png)
 
 图像来源于 DALL-E 3
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 从最简单的定义来看，向量数据库将信息存储为向量（向量嵌入），这是数据对象的数值版本。
 
-因此，向量嵌入是一种强大的方法，用于在非常大且非结构化或半结构化的[数据集](/datasets/index.html)中进行索引和搜索。这些数据集可以包括文本、图像或传感器数据，向量数据库将这些信息整理成可管理的格式。
+因此，向量嵌入是一种强大的方法，用于在非常大且非结构化或半结构化的数据集中进行索引和搜索。这些数据集可以包括文本、图像或传感器数据，向量数据库将这些信息整理成可管理的格式。
 
 向量数据库通过高维向量进行工作，这些向量可以包含数百个不同的维度，每个维度与数据对象的特定属性相关联。因此，创建了无与伦比的复杂性。
 
@@ -70,7 +70,7 @@ Chroma 还支持多种数据类型和格式，使其适用于几乎任何应用�
 
 ## 2\. Milvus
 
-Milvus 在机器学习和[数据科学](/tag/data-science)领域获得了很高的声誉，在向量索引和查询方面表现出色。利用强大的算法，Milvus 提供了闪电般的处理和数据检索速度[以及 GPU 支持](https://milvus.io/blog/unveiling-milvus-2-3-milestone-release-offering-support-for-gpu-arm64-cdc-and-other-features.md)，即使在处理非常大的数据集时也如此。Milvus 还可以与其他流行的框架如 PyTorch 和 TensorFlow 集成，使其能够加入到现有的机器学习工作流程中。
+Milvus 在机器学习和数据科学领域获得了很高的声誉，在向量索引和查询方面表现出色。利用强大的算法，Milvus 提供了闪电般的处理和数据检索速度[以及 GPU 支持](https://milvus.io/blog/unveiling-milvus-2-3-milestone-release-offering-support-for-gpu-arm64-cdc-and-other-features.md)，即使在处理非常大的数据集时也如此。Milvus 还可以与其他流行的框架如 PyTorch 和 TensorFlow 集成，使其能够加入到现有的机器学习工作流程中。
 
 ### 用例
 
@@ -78,7 +78,7 @@ Milvus 以其在相似度搜索和分析方面的能力而闻名，并且对多�
 
 这个开源向量数据库可以在广泛的行业和大量应用中使用。另一个显著的例子涉及电子商务，在这里，Milvus 可以驱动精确的推荐系统，以根据客户的偏好和购买习惯推荐产品。
 
-它也适用于图像/视频分析项目，协助图像相似度搜索、物体识别和基于内容的图像检索。另一个关键用例是[自然语言处理](/tag/natural-language-processing)（NLP），提供文档聚类和语义搜索功能，同时为问答系统提供基础。
+它也适用于图像/视频分析项目，协助图像相似度搜索、物体识别和基于内容的图像检索。另一个关键用例是自然语言处理（NLP），提供文档聚类和语义搜索功能，同时为问答系统提供基础。
 
 ## 3\. Weaviate
 

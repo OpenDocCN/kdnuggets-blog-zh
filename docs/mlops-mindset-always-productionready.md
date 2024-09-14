@@ -1,6 +1,6 @@
 # MLOps 思维方式：始终保持生产就绪
 
-> 原文：[https://www.kdnuggets.com/2023/07/mlops-mindset-always-productionready.html](https://www.kdnuggets.com/2023/07/mlops-mindset-always-productionready.html)
+> 原文：[`www.kdnuggets.com/2023/07/mlops-mindset-always-productionready.html`](https://www.kdnuggets.com/2023/07/mlops-mindset-always-productionready.html)
 
 机器学习（ML）在许多领域的成功带来了新的挑战——特别是需要持续训练和评估模型，并不断检查训练数据的漂移。持续集成和部署（CI/CD）是任何成功软件工程项目的核心，通常被称为 DevOps。DevOps 帮助简化代码演变，支持各种测试框架，并提供灵活性以实现对不同部署服务器（开发、预发布、生产等）的选择性部署。
 
@@ -50,7 +50,7 @@ MLOps 还使得在任何给定时刻都能准备好生产变得可能。这对�
 
 根据对这些开源 MLOps 框架当前状态的经验，我推荐如下：
 
-![MLOps 思维：始终准备好生产](../Images/0d0ac09f1b7ca735b447aaf21b162b37.png)
+![MLOps 思维：始终准备好生产](img/0d0ac09f1b7ca735b447aaf21b162b37.png)
 
 # 早期采用 MLOps
 
@@ -62,11 +62,11 @@ MLOps 是 DevOps 的下一次演变，汇集了来自不同领域的人：数据
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 

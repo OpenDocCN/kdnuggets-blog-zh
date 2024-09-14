@@ -1,8 +1,8 @@
 # 从这些 GitHub 仓库学习数据科学
 
-> 原文：[https://www.kdnuggets.com/2022/12/learn-data-science-github-repositories.html](https://www.kdnuggets.com/2022/12/learn-data-science-github-repositories.html)
+> 原文：[`www.kdnuggets.com/2022/12/learn-data-science-github-repositories.html`](https://www.kdnuggets.com/2022/12/learn-data-science-github-repositories.html)
 
-![从这些 GitHub 仓库学习数据科学](../Images/2419282069291aec8edbc7c2e0949653.png)
+![从这些 GitHub 仓库学习数据科学](img/2419282069291aec8edbc7c2e0949653.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -42,23 +42,23 @@
 
 1.  [数据可视化认证](https://www.freecodecamp.org/learn/data-visualization/)
 
-1.  [API和微服务认证](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
+1.  [API 和微服务认证](https://www.freecodecamp.org/learn/back-end-development-and-apis/)
 
 1.  [质量保证认证](https://www.freecodecamp.org/learn/quality-assurance/)
 
-1.  [Python科学计算认证](https://www.freecodecamp.org/learn/scientific-computing-with-python/)
+1.  [Python 科学计算认证](https://www.freecodecamp.org/learn/scientific-computing-with-python/)
 
-1.  [Python数据分析认证](https://www.freecodecamp.org/learn/data-analysis-with-python/)
+1.  [Python 数据分析认证](https://www.freecodecamp.org/learn/data-analysis-with-python/)
 
 1.  [信息安全认证](https://www.freecodecamp.org/learn/information-security/)
 
-1.  [Python机器学习认证](https://www.freecodecamp.org/learn/machine-learning-with-python/)
+1.  [Python 机器学习认证](https://www.freecodecamp.org/learn/machine-learning-with-python/)
 
 # 数据科学入门
 
 **资源库链接：** [数据科学入门](https://github.com/microsoft/Data-Science-For-Beginners)
 
-这是我遇到的最好的GitHub仓库之一！这个由微软Azure云倡导者提供的仓库提供了一个为期10周、20节课的课程，帮助你进入数据科学领域。课程包括一个前导课程，之后是一个课后测验，写有完成课程的说明、解决方案和作业。
+这是我遇到的最好的 GitHub 仓库之一！这个由微软 Azure 云倡导者提供的仓库提供了一个为期 10 周、20 节课的课程，帮助你进入数据科学领域。课程包括一个前导课程，之后是一个课后测验，写有完成课程的说明、解决方案和作业。
 
 这个课程涵盖了数据科学的基础，旨在帮助初学者。你将学习数据科学伦理、统计与概率介绍、关系可视化等方面的内容。
 
@@ -66,7 +66,7 @@
 
 **资源库链接：** [开源数据科学硕士课程](https://github.com/datasciencemasters/go%5C)
 
-这个GitHub仓库为你提供了一个课程大纲以及相关资源。大多数资源来自大学和在职数据科学家，专注于数据科学的理论以及实际应用技能。
+这个 GitHub 仓库为你提供了一个课程大纲以及相关资源。大多数资源来自大学和在职数据科学家，专注于数据科学的理论以及实际应用技能。
 
 许多资源是免费的，唯一的费用是如果你选择购买推荐的书籍。当你完成课程后，你将被鼓励选择一个项目或数据集来展示你所学到的知识。他们还提供了一份课外学习材料清单，可以提高你的知识基础和技能。
 
@@ -74,9 +74,9 @@
 
 **资源库链接：** [免费数据科学书籍](https://github.com/chaconnewu/free-data-science-books)
 
-如果你是一个书迷，学习的最佳方式是翻阅书页——这个GitHub仓库将拯救你。它不仅提供了一个按照课程安排的书单，而且是免费的！
+如果你是一个书迷，学习的最佳方式是翻阅书页——这个 GitHub 仓库将拯救你。它不仅提供了一个按照课程安排的书单，而且是免费的！
 
-这些书籍将标注其难度级别，包括初学者、中级或高级。涵盖的主题包括数据科学介绍、数据处理、数据分析、数据科学应用、数据可视化、未分类和关于数据科学的MOOCs。
+这些书籍将标注其难度级别，包括初学者、中级或高级。涵盖的主题包括数据科学介绍、数据处理、数据分析、数据科学应用、数据可视化、未分类和关于数据科学的 MOOCs。
 
 # 数据科学课程
 
@@ -90,7 +90,7 @@
 
 **资源链接：** [超棒的数据科学](https://github.com/academic/awesome-datascience)
 
-类似于课程，这个超棒的数据科学GitHub涵盖了数据科学的各个方面。如果你需要了解成为数据科学家所需的主题，但又希望自己进行研究，那么这个GitHub仓库就是为你准备的。它是数据科学的工具箱。
+类似于课程，这个超棒的数据科学 GitHub 涵盖了数据科学的各个方面。如果你需要了解成为数据科学家所需的主题，但又希望自己进行研究，那么这个 GitHub 仓库就是为你准备的。它是数据科学的工具箱。
 
 它为你提供了有关数据科学的所有必要书籍、博客文章、网页等信息。它们还提供了关于免费课程、密集课程和可以启动你数据科学职业生涯的学院的更多信息。
 
@@ -102,13 +102,13 @@
 
 你可以找到广泛的领域提供备忘单，如统计学、Matlab、机器学习、数据仓库、深度学习等。
 
-# 最佳的ML与Python
+# 最佳的 ML 与 Python
 
-**资源链接：** [最佳的ML与Python](https://github.com/ml-tooling/best-of-ml-python)
+**资源链接：** [最佳的 ML 与 Python](https://github.com/ml-tooling/best-of-ml-python)
 
 成为成功的数据科学家的关键方面是确保你能应用你的技能，而唯一的方式就是通过做项目。招聘者希望看到你的代码、你的思路过程以及你如何得出最终结果。
 
-这个最佳的ML与Python GitHub仓库提供了910个开源项目，分为34个类别。这些项目根据项目质量评分进行排名，因此你可以看到哪些项目受欢迎，并了解项目的描述。你可以找到数据加载与提取、模型解释性、医学数据等类别。
+这个最佳的 ML 与 Python GitHub 仓库提供了 910 个开源项目，分为 34 个类别。这些项目根据项目质量评分进行排名，因此你可以看到哪些项目受欢迎，并了解项目的描述。你可以找到数据加载与提取、模型解释性、医学数据等类别。
 
 # 数据科学面试资源 - 面试问题
 
@@ -116,24 +116,24 @@
 
 一旦你掌握了作为数据科学家所需的所有知识并将其应用于项目中，下一步就是申请工作并为面试做好准备。这是最棘手的部分——但这就是你一直等待的时刻。
 
-在数据科学面试中你将被问到的硬技能问题通常会分为两个类别：理论和技术。这些GitHub仓库涵盖了这两方面内容，并帮助你测试自己的知识，以便为面试做好准备。它们还提供了有关如何构建简历/CV的技巧，这是赢得招聘官青睐的重要方面。
+在数据科学面试中你将被问到的硬技能问题通常会分为两个类别：理论和技术。这些 GitHub 仓库涵盖了这两方面内容，并帮助你测试自己的知识，以便为面试做好准备。它们还提供了有关如何构建简历/CV 的技巧，这是赢得招聘官青睐的重要方面。
 
 # 总结
 
-学习数据科学不会容易，但在当今这个资源丰富的时代，它绝对是可以实现的。如果你知道其他能帮助他人的优秀GitHub仓库，请在下方评论中分享。
+学习数据科学不会容易，但在当今这个资源丰富的时代，它绝对是可以实现的。如果你知道其他能帮助他人的优秀 GitHub 仓库，请在下方评论中分享。
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由撰稿人。她特别关注提供数据科学职业建议或教程以及数据科学的理论知识。她还希望探索人工智能如何能够/将如何促进人类生命的长久。作为一个热衷的学习者，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
-+   [从这些GitHub仓库学习数据工程](https://www.kdnuggets.com/2023/02/learn-data-engineering-github-repositories.html)
++   [从这些 GitHub 仓库学习数据工程](https://www.kdnuggets.com/2023/02/learn-data-engineering-github-repositories.html)
 
-+   [从这些GitHub仓库学习机器学习](https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html)
++   [从这些 GitHub 仓库学习机器学习](https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html)
 
-+   [从这些GitHub仓库学习MLOps](https://www.kdnuggets.com/2023/02/learn-mlops-github-repositories.html)
++   [从这些 GitHub 仓库学习 MLOps](https://www.kdnuggets.com/2023/02/learn-mlops-github-repositories.html)
 
-+   [掌握数据科学的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-science)
++   [掌握数据科学的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-science)
 
-+   [掌握计算机科学的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
++   [掌握计算机科学的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
 
-+   [掌握数据工程的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)
++   [掌握数据工程的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)

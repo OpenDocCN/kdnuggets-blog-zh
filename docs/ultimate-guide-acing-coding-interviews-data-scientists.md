@@ -1,12 +1,12 @@
 # 数据科学家编程面试的终极指南
 
-> 原文：[https://www.kdnuggets.com/2021/03/ultimate-guide-acing-coding-interviews-data-scientists.html](https://www.kdnuggets.com/2021/03/ultimate-guide-acing-coding-interviews-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2021/03/ultimate-guide-acing-coding-interviews-data-scientists.html`](https://www.kdnuggets.com/2021/03/ultimate-guide-acing-coding-interviews-data-scientists.html)
 
-[评论](#comments)
+评论
 
-**由[Emma Ding](https://www.youtube.com/c/DataInterviewPro)，Airbnb的数据科学家和软件工程师，以及[Rob Wang](https://www.linkedin.com/in/robjwang/)，Robinhood的高级数据科学家撰写**
+**由[Emma Ding](https://www.youtube.com/c/DataInterviewPro)，Airbnb 的数据科学家和软件工程师，以及[Rob Wang](https://www.linkedin.com/in/robjwang/)，Robinhood 的高级数据科学家撰写**
 
-![帖子图片](../Images/7d7075bf4d1ac2fca38c26beedcd0227.png)
+![帖子图片](img/7d7075bf4d1ac2fca38c26beedcd0227.png)
 
 图片由[Christopher Gower](https://unsplash.com/@cgower?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -16,21 +16,21 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-数据科学（DS）相较于软件工程和产品管理等技术行业的其他职位是一个相对较新的职业。最初，DS面试中的编码环节很有限，仅包括SQL或使用Python或R进行的数据处理会话。然而近年来，DS面试越来越强调计算机科学（CS）基础知识（数据结构、算法和编程最佳实践）。
+数据科学（DS）相较于软件工程和产品管理等技术行业的其他职位是一个相对较新的职业。最初，DS 面试中的编码环节很有限，仅包括 SQL 或使用 Python 或 R 进行的数据处理会话。然而近年来，DS 面试越来越强调计算机科学（CS）基础知识（数据结构、算法和编程最佳实践）。
 
 对于希望进入数据科学领域的人来说，这种面试中越来越多的计算机科学内容可能会让人感到望而生畏。在这篇文章中，我们希望提高你对编程面试的理解，并教你如何准备。我们将对不同的编程问题进行分类，并提供破解这些问题的技巧，帮助你在面试中表现出色。如果你觉得我们可以在任何方面帮助你，让你的旅程更轻松，请[联系我们](https://data-interview-questions.web.app/)！
 
 ### 为什么在数据科学面试中会有编程题？
 
-编程面试究竟是什么？我们使用“编程面试”这一短语来指代任何涉及使用编程语言（而非SQL等查询语言）的技术会话。在当今市场上，几乎所有的数据科学职位都可能涉及编程面试。
+编程面试究竟是什么？我们使用“编程面试”这一短语来指代任何涉及使用编程语言（而非 SQL 等查询语言）的技术会话。在当今市场上，几乎所有的数据科学职位都可能涉及编程面试。
 
 为什么？编程是你数据科学职业中的重要部分。以下是三个原因：
 
@@ -56,15 +56,15 @@
 
 ### 何时期待编码面试？
 
-编码面试可以出现在技术电话筛选（TPS）、现场面试或两者都有。现场部分可能会有多轮编码面试，具体取决于预期的编码熟练程度。通常，你应该在整体DS面试环节的至少一个阶段中期待编码面试。
+编码面试可以出现在技术电话筛选（TPS）、现场面试或两者都有。现场部分可能会有多轮编码面试，具体取决于预期的编码熟练程度。通常，你应该在整体 DS 面试环节的至少一个阶段中期待编码面试。
 
-在TPS期间，编码面试通常通过在线集成开发环境（IDE），如CoderPad、HackerRank和CodeSignal进行。在现场面试中，可以使用在线IDE或白板。在当前的远程面试环境中，默认使用前者。
+在 TPS 期间，编码面试通常通过在线集成开发环境（IDE），如 CoderPad、HackerRank 和 CodeSignal 进行。在现场面试中，可以使用在线 IDE 或白板。在当前的远程面试环境中，默认使用前者。
 
-编码会话的时长从45分钟到1小时不等，通常涉及一个或多个问题。语言选择通常是灵活的，但大多数候选人会选择Python，因为其简洁。
+编码会话的时长从 45 分钟到 1 小时不等，通常涉及一个或多个问题。语言选择通常是灵活的，但大多数候选人会选择 Python，因为其简洁。
 
 ### 编码面试的不同类别
 
-根据我们与多个大型和中型公司（如Airbnb、亚马逊、Facebook、Intuit、Lyft、Robinhood、Slack、Snapchat、Square、Stitch Fix、Twitter、Upstart等）的面试经验，我们将编码问题分类为以下四种类型。
+根据我们与多个大型和中型公司（如 Airbnb、亚马逊、Facebook、Intuit、Lyft、Robinhood、Slack、Snapchat、Square、Stitch Fix、Twitter、Upstart 等）的面试经验，我们将编码问题分类为以下四种类型。
 
 ### 基本数据结构
 
@@ -78,11 +78,11 @@
 
 通常，会对一个场景提出多个问题，从简单到困难。每个问题可能涉及一个独特的数据结构或算法。以下是一个经典问题的示例，围绕找到一组数字的中位数展开：
 
-+   第1部分：使用任何方法找出中位数。候选人可以使用内置排序函数，排序后直接返回中位数。
++   第一部分：使用任何方法找出中位数。候选人可以使用内置排序函数，排序后直接返回中位数。
 
-+   第2部分：面试官现在要求提供更优化的中位数查找版本。在这种情况下，了解常见算法，如[quickselect](https://www.geeksforgeeks.org/quickselect-algorithm/)，将会很有帮助。
++   第二部分：面试官现在要求提供更优化的中位数查找版本。在这种情况下，了解常见算法，如[quickselect](https://www.geeksforgeeks.org/quickselect-algorithm/)，将会很有帮助。
 
-+   第3部分：最后，问题变为“流式”中位数计算版本，这意味着数据以在线方式而不是固定的数字列表形式出现。在这种情况下，候选人可能会使用堆（稍微更具挑战性）。
++   第三部分：最后，问题变为“流式”中位数计算版本，这意味着数据以在线方式而不是固定的数字列表形式出现。在这种情况下，候选人可能会使用堆（稍微更具挑战性）。
 
 这类问题也可能以**应用商业问题**的形式出现。对于这类问题，候选人需要编写解决方案来应对一个假设的应用问题，这通常与公司的商业模式相关。这些问题的难度级别通常为简单到中等（基于 Leetcode 的分类）。关键在于理解业务场景和具体要求，然后再编写代码。
 
@@ -104,7 +104,7 @@
 
 ### 机器学习算法
 
-![帖子图片](../Images/05446caeaad023ff55e21a6dc3824a2b.png)
+![帖子图片](img/05446caeaad023ff55e21a6dc3824a2b.png)
 
 照片由[Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary?utm_source=medium&utm_medium=referral)拍摄，发布在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上。
 
@@ -114,7 +114,7 @@
 
 +   监督学习：决策树、线性回归和逻辑回归（使用随机梯度下降），以及 K 最近邻。
 
-+   无监督学习：K均值聚类。
++   无监督学习：K 均值聚类。
 
 其他模型家族，如支持向量机、梯度提升树和朴素贝叶斯，出现的可能性较小。你也不太可能被要求从头编写深度学习算法。
 
@@ -144,15 +144,15 @@
 
 对于上述四大主要问题主题中的每一个，首先要复习基础知识。这些描述可以在各种在线资源和书籍中找到。具体而言：
 
-+   数据结构（通常面向软件工程师）： [编程面试破解](https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=sr_1_1?dchild=1&gclid=Cj0KCQiA5vb-BRCRARIsAJBKc6IV-fE5scAobpLOmzo9tgvqYx6UH93Hg7W9HNHv95pvQWGCEiOO-igaArgfEALw_wcB&hvadid=177138104581&hvdev=c&hvlocphy=9031933&hvnetw=g&hvqmt=e&hvrand=4065587860709028632&hvtargid=kwd-20040243067&hydadcr=16409_9734494&keywords=cracking+the+coding+interview&qid=1608405460&sr=8-1&tag=googhydr-20) 由Gayle Laakmann McDowell编著和 [最佳Python书籍](https://realpython.com/best-python-books/)
++   数据结构（通常面向软件工程师）： [编程面试破解](https://www.amazon.com/Cracking-Coding-Interview-Programming-Questions/dp/0984782850/ref=sr_1_1?dchild=1&gclid=Cj0KCQiA5vb-BRCRARIsAJBKc6IV-fE5scAobpLOmzo9tgvqYx6UH93Hg7W9HNHv95pvQWGCEiOO-igaArgfEALw_wcB&hvadid=177138104581&hvdev=c&hvlocphy=9031933&hvnetw=g&hvqmt=e&hvrand=4065587860709028632&hvtargid=kwd-20040243067&hydadcr=16409_9734494&keywords=cracking+the+coding+interview&qid=1608405460&sr=8-1&tag=googhydr-20) 由 Gayle Laakmann McDowell 编著和 [最佳 Python 书籍](https://realpython.com/best-python-books/)
 
-+   机器学习： [介绍 Facebook 机器学习视频系列](https://research.fb.com/blog/2018/05/the-facebook-field-guide-to-machine-learning-video-series/) 和 [统计学习的元素](https://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576) 由Jerome H. Friedman, Robert Tibshirani和Trevor Hastie编著。
++   机器学习： [介绍 Facebook 机器学习视频系列](https://research.fb.com/blog/2018/05/the-facebook-field-guide-to-machine-learning-video-series/) 和 [统计学习的元素](https://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576) 由 Jerome H. Friedman, Robert Tibshirani 和 Trevor Hastie 编著。
 
-+   数学和统计： [brilliant.org](https://brilliant.org/) — 是Facebook现场面试准备指南中推荐的材料之一。
++   数学和统计： [brilliant.org](https://brilliant.org/) — 是 Facebook 现场面试准备指南中推荐的材料之一。
 
 ### 分类问题：
 
-一旦你对基础知识相对熟悉，就可以扩展你的复习范围，涵盖更多常见的问题集。你可以在[Leetcode](https://leetcode.com/)、[GeeksForGeeks](https://www.geeksforgeeks.org/)和[GlassDoor](https://www.glassdoor.com/index.htm)上找到这些问题。你可以将问题陈述以有序的方式保存，理想情况下使用Notion或Jupyter notebooks等工具按主题分组。对于每一个主题，练习大量简单问题和少量中等难度问题。花时间创建一个分类的编码问题集合不仅对你当前的求职有帮助，而且对未来的求职也会有用。
+一旦你对基础知识相对熟悉，就可以扩展你的复习范围，涵盖更多常见的问题集。你可以在[Leetcode](https://leetcode.com/)、[GeeksForGeeks](https://www.geeksforgeeks.org/)和[GlassDoor](https://www.glassdoor.com/index.htm)上找到这些问题。你可以将问题陈述以有序的方式保存，理想情况下使用 Notion 或 Jupyter notebooks 等工具按主题分组。对于每一个主题，练习大量简单问题和少量中等难度问题。花时间创建一个分类的编码问题集合不仅对你当前的求职有帮助，而且对未来的求职也会有用。
 
 ### 比较多种解决方案：
 
@@ -170,7 +170,7 @@
 
 ### 如何进行评估？
 
-你在面试中想要展示的主要有4种素质。
+你在面试中想要展示的主要有 4 种素质。
 
 ### 逻辑推理：
 
@@ -228,11 +228,11 @@
 
 **相关：**
 
-+   [我如何在被解雇两个月后获得 4 个数据科学职位，并将收入翻倍](/2021/01/data-science-offers-doubled-income-2-months.html)
++   我如何在被解雇两个月后获得 4 个数据科学职位，并将收入翻倍
 
-+   [如何获得数据科学面试机会：寻找工作、联系门卫和获取推荐](/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html)
++   如何获得数据科学面试机会：寻找工作、联系门卫和获取推荐
 
-+   [你应该了解的10个统计学概念，以备数据科学面试之需](/2021/02/10-statistical-concepts-data-science-interviews.html)
++   你应该了解的 10 个统计学概念，以备数据科学面试之需
 
 ### 更多相关主题
 
@@ -240,10 +240,10 @@
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么使Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

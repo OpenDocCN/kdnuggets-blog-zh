@@ -1,6 +1,6 @@
 # 使用 Iris 数据集的简单 XGBoost 教程
 
-> 原文：[https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html](https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html)
+> 原文：[`www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html`](https://www.kdnuggets.com/2017/03/simple-xgboost-tutorial-iris-dataset.html)
 
 **作者：Ieva Zarina，软件开发员，Nordigen。**
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-![XGBoost](../Images/6ecd41b989b70db02e5ee3380e71a510.png)
+![XGBoost](img/6ecd41b989b70db02e5ee3380e71a510.png)
 
 XGBoost 算法 ([source](https://www.slideshare.net/JaroslawSzymczak1/xgboost-the-algorithm-that-wins-every-competition))。
 
@@ -97,7 +97,7 @@ y = iris.target
 
 ```
 
-然后你将数据**拆分**成80-20%的训练集和测试集，[拆分](http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html)：
+然后你将数据**拆分**成 80-20%的训练集和测试集，[拆分](http://scikit-learn.org/stable/modules/generated/sklearn.cross_validation.train_test_split.html)：
 
 ```py
 from sklearn.cross_validation import train_test_split
@@ -106,7 +106,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 ```
 
-接下来，你需要从numpy数组创建Xgboost特定的**[DMatrix](http://xgboost.readthedocs.io/en/latest/python/python_intro.html)**数据格式。Xgboost可以直接处理numpy数组，加载svmlignt文件及其他格式。以下是如何处理**numpy数组**：
+接下来，你需要从 numpy 数组创建 Xgboost 特定的**[DMatrix](http://xgboost.readthedocs.io/en/latest/python/python_intro.html)**数据格式。Xgboost 可以直接处理 numpy 数组，加载 svmlignt 文件及其他格式。以下是如何处理**numpy 数组**：
 
 ```py
 import xgboost as xgb
@@ -116,7 +116,7 @@ dtest = xgb.DMatrix(X_test, label=y_test)
 
 ```
 
-如果你想使用svmlight以减少内存消耗，首先**[导出](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.dump_svmlight_file.html)**numpy数组到**svmlight格式**，然后只需将文件名传递给DMatrix：
+如果你想使用 svmlight 以减少内存消耗，首先**[导出](http://scikit-learn.org/stable/modules/generated/sklearn.datasets.dump_svmlight_file.html)**numpy 数组到**svmlight 格式**，然后只需将文件名传递给 DMatrix：
 
 ```py
 import xgboost as xgb
@@ -129,7 +129,7 @@ dtest_svm = xgb.DMatrix('dtest.svm')
 
 ```
 
-现在为了让Xgboost工作，你需要设置**[参数](https://github.com/dmlc/xgboost/blob/master/doc/parameter.md)**：
+现在为了让 Xgboost 工作，你需要设置**[参数](https://github.com/dmlc/xgboost/blob/master/doc/parameter.md)**：
 
 ```py
 param = {
@@ -142,7 +142,7 @@ num_round = 20  # the number of training iterations
 
 ```
 
-不同的数据集在不同的参数下表现不同。一个参数组合的结果可能很低，而另一个可能非常好。你可以查看[这个Kaggle脚本](https://www.kaggle.com/tanitter/introducing-kaggle-scripts/grid-search-xgboost-with-scikit-learn)了解如何寻找最佳参数。通常尝试eta 0.1、0.2、0.3，max_depth在2到10的范围内，num_round在几百左右。
+不同的数据集在不同的参数下表现不同。一个参数组合的结果可能很低，而另一个可能非常好。你可以查看[这个 Kaggle 脚本](https://www.kaggle.com/tanitter/introducing-kaggle-scripts/grid-search-xgboost-with-scikit-learn)了解如何寻找最佳参数。通常尝试 eta 0.1、0.2、0.3，max_depth 在 2 到 10 的范围内，num_round 在几百左右。
 
 ### 训练
 
@@ -160,7 +160,7 @@ bst.dump_model('dump.raw.txt')
 
 ```
 
-它看起来像这样（f0、f1、f2是特征）：
+它看起来像这样（f0、f1、f2 是特征）：
 
 ```py
 booster[0]:
@@ -181,7 +181,7 @@ booster[1]:
 
 ```
 
-你可以看到每棵树的深度不超过设置的3层。
+你可以看到每棵树的深度不超过设置的 3 层。
 
 使用模型来[**预测类别**](http://xgboost.readthedocs.io/en/latest/python/python_intro.html#prediction)测试集的类别：
 
@@ -202,7 +202,7 @@ preds = bst.predict(dtest)
 
 ```
 
-在这里，每一列代表类别0、1或2。对于每一行，你需要选择**概率最高**的那一列：
+在这里，每一列代表类别 0、1 或 2。对于每一行，你需要选择**概率最高**的那一列：
 
 ```py
 import numpy as np
@@ -241,17 +241,17 @@ joblib.dump(bst, 'bst_model.pkl', compress=True)
 
 查看完整代码在[github](https://gist.github.com/IevaZarina/ef63197e089169a9ea9f3109058a9679)或下方：
 
-**简介: [Ieva Zarina](https://www.linkedin.com/in/ieva-zarina-60515a72/)** 是Nordigen的软件开发人员。
+**简介: [Ieva Zarina](https://www.linkedin.com/in/ieva-zarina-60515a72/)** 是 Nordigen 的软件开发人员。
 
 [原始链接](http://ieva.rocks/2016/08/25/iris_dataset_and_xgboost_simple_tutorial/)。经许可转载。
 
 **相关：**
 
-+   [掌握Python机器学习的7个额外步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个额外步骤
 
-+   [我在Python中从头实现分类器的学习经历](/2017/02/learned-implementing-classifier-scratch-python.html)
++   我在 Python 中从头实现分类器的学习经历
 
-+   [XGBoost：在 Spark 和 Flink 中实现获胜的 Kaggle 算法](/2016/03/xgboost-implementing-winningest-kaggle-algorithm-spark-flink.html)
++   XGBoost：在 Spark 和 Flink 中实现获胜的 Kaggle 算法
 
 ### 更多相关主题
 

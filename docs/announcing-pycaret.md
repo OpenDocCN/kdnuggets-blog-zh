@@ -1,12 +1,12 @@
 # 宣布 PyCaret 1.0.0
 
-> 原文：[https://www.kdnuggets.com/2020/04/announcing-pycaret.html](https://www.kdnuggets.com/2020/04/announcing-pycaret.html)
+> 原文：[`www.kdnuggets.com/2020/04/announcing-pycaret.html`](https://www.kdnuggets.com/2020/04/announcing-pycaret.html)
 
-[评论](#comments)
+评论
 
 **由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 创始人及作者**
 
-![图](../Images/d5695b72c8bf6d9e92ebd41fd32e6ad5.png)
+![图](img/d5695b72c8bf6d9e92ebd41fd32e6ad5.png)
 
 我们很高兴地宣布 [PyCaret](https://www.pycaret.org/)，一个开源的 Python 机器学习库，用于在**低代码**环境中训练和部署监督学习和无监督学习模型。PyCaret 让你可以在选择的笔记本环境中，从准备数据到部署模型，只需几秒钟。
 
@@ -34,7 +34,7 @@ pip install pycaret
 
 ### 再简单不过了 ????
 
-![](../Images/281184be59fe516ab9d2ea25a2038cfe.png)
+![](img/281184be59fe516ab9d2ea25a2038cfe.png)
 
 ### ???? 分步教程
 
@@ -47,7 +47,7 @@ from **pycaret.datasets** import **get_data**
 diabetes = **get_data**('diabetes')
 ```
 
-![图](../Images/69d8554216ad27728edbab2f59124a38.png)
+![图](img/69d8554216ad27728edbab2f59124a38.png)
 
 从 get_data 输出
 
@@ -63,11 +63,11 @@ PyCaret 中任何机器学习实验的第一步是通过导入所需的模块并
 from **pycaret.classification** import ***** exp1 = **setup**(diabetes, target = 'Class variable')
 ```
 
-![](../Images/03de3665af1b0d82edba5d5ec7094136.png)
+![](img/03de3665af1b0d82edba5d5ec7094136.png)
 
 所有预处理步骤都在**setup()**中应用。PyCaret 提供了超过 20 个功能来准备机器学习数据，基于在*setup*函数中定义的参数创建转换管道。它自动协调所有依赖关系于**管道**中，因此您无需手动管理测试或未见数据集上的转换的顺序执行。PyCaret 的管道可以轻松地在不同环境之间转移，以进行大规模运行或轻松部署到生产环境。以下是 PyCaret 在首次发布时提供的预处理功能。
 
-![图](../Images/ce40ef0533556a53623bfb40d4e35371.png)
+![图](img/ce40ef0533556a53623bfb40d4e35371.png)
 
 PyCaret 的预处理能力
 
@@ -85,7 +85,7 @@ PyCaret 的预处理能力
 **compare_models**()
 ```
 
-![图](../Images/b84f31630820494c6f819a4c5fa9bb1a.png)
+![图](img/b84f31630820494c6f819a4c5fa9bb1a.png)
 
 compare_models() 函数的输出
 
@@ -101,31 +101,31 @@ compare_models() 函数的输出
 adaboost = **create_model**('ada')
 ```
 
-![](../Images/cc451b6f610de9677a4f128d99248f9a.png)
+![](img/cc451b6f610de9677a4f128d99248f9a.png)
 
 变量 ‘adaboost’ 存储了由**create_model**函数返回的训练模型对象，这是一个 scikit-learn 估计器。可以通过在变量后使用*句点（ . ）*来访问训练对象的原始属性。见下例。
 
-![图](../Images/652cb76eb88499acb604ad3ffbb9356a.png)
+![图](img/652cb76eb88499acb604ad3ffbb9356a.png)
 
 训练模型对象的属性
 
-???? PyCaret 提供了超过60种开源现成的算法。 [点击这里](https://www.pycaret.org/create-model) 查看 PyCaret 中可用的所有估计器/模型的完整列表。
+???? PyCaret 提供了超过 60 种开源现成的算法。 [点击这里](https://www.pycaret.org/create-model) 查看 PyCaret 中可用的所有估计器/模型的完整列表。
 
 ### 5\. 调整模型
 
-**tune_model** 函数用于自动调整机器学习模型的超参数。PyCaret 使用**随机网格搜索**在预定义的搜索空间中进行。这一函数返回一个包含k折交叉验证分数和一个训练模型对象的表格。
+**tune_model** 函数用于自动调整机器学习模型的超参数。PyCaret 使用**随机网格搜索**在预定义的搜索空间中进行。这一函数返回一个包含 k 折交叉验证分数和一个训练模型对象的表格。
 
 ```py
 tuned_adaboost = tune_model('ada')
 ```
 
-![](../Images/4401f8346cd3a468652477d3cded558d.png)
+![](img/4401f8346cd3a468652477d3cded558d.png)
 
 ???? **tune_model** 函数在无监督模块如 [pycaret.nlp](https://www.pycaret.org/nlp)、[pycaret.clustering](https://www.pycaret.org/clustering)和 [pycaret.anomaly](https://www.pycaret.org/anomaly)中可以与监督模块一起使用。例如，PyCaret 的 NLP 模块可以通过评估来自监督机器学习模型的目标/成本函数（如‘准确率’或‘R2’）来调整*主题数量*参数。
 
 ### 6\. 集成模型
 
-**ensemble_model** 函数用于集成训练后的模型。它只接受一个参数，即训练模型对象。此函数返回一个包含k折交叉验证分数和一个训练模型对象的表格。
+**ensemble_model** 函数用于集成训练后的模型。它只接受一个参数，即训练模型对象。此函数返回一个包含 k 折交叉验证分数和一个训练模型对象的表格。
 
 ```py
 # creating a decision tree model
@@ -133,7 +133,7 @@ dt = **create_model**('dt')# ensembling a trained dt model
 dt_bagged = **ensemble_model**(dt)
 ```
 
-![](../Images/e78e6fd84e7440fda219c5f02e040210.png)
+![](img/e78e6fd84e7440fda219c5f02e040210.png)
 
 ???? 默认使用‘Bagging’方法进行集成，通过在 ***method*** 参数中使用‘Boosting’可以进行更改。
 
@@ -152,7 +152,7 @@ adaboost = **create_model**('ada')# AUC plot
 **plot_model**(adaboost, plot = 'vc')
 ```
 
-![](../Images/b4de96982fd287baed656707dc6bc723.png)
+![](img/b4de96982fd287baed656707dc6bc723.png)
 
 [点击这里](https://www.pycaret.org/plot-model) 了解更多关于 PyCaret 中不同可视化的信息。
 
@@ -162,7 +162,7 @@ adaboost = **create_model**('ada')# AUC plot
 **evaluate_model**(adaboost)
 ```
 
-![](../Images/4827a9f02455d3ac48897f23a5d416c6.png)
+![](img/4827a9f02455d3ac48897f23a5d416c6.png)
 
 ???? **plot_model** 函数在**pycaret.nlp** 模块中可用于可视化*文本语料库*和*语义主题模型*。 [点击这里](https://pycaret.org/plot-model/#nlp) 了解更多信息。
 
@@ -177,7 +177,7 @@ xgboost = **create_model**('xgboost')# summary plot
 **interpret_model**(xgboost, plot = 'correlation')
 ```
 
-![](../Images/b3c024ce6b78f85dc2fab05caf6404e5.png)
+![](img/b3c024ce6b78f85dc2fab05caf6404e5.png)
 
 测试数据集中某个数据点的解释（也称为 reason 参数）可以使用 'reason' 图进行评估。在下面的示例中，我们检查的是测试数据集中的第一个实例。
 
@@ -185,7 +185,7 @@ xgboost = **create_model**('xgboost')# summary plot
 **interpret_model**(xgboost, plot = 'reason', observation = 0) 
 ```
 
-![](../Images/6624e6fbbdd6d27433c8b3330ac6c4af.png)
+![](img/6624e6fbbdd6d27433c8b3330ac6c4af.png)
 
 ### 9\. 预测模型
 
@@ -197,7 +197,7 @@ rf = **create_model**('rf')# predict test / hold-out dataset
 rf_holdout_pred **= predict_model**(rf)
 ```
 
-![](../Images/6c071fc1878a395c3f089ddae6df59ce.png)
+![](img/6c071fc1878a395c3f089ddae6df59ce.png)
 
 **predict_model** 函数也用于预测未见过的数据集。现在，我们将使用与训练相同的数据集作为 *代理* 来进行新未见数据集的预测。在实际应用中，**predict_model** 函数会迭代使用，每次都使用一个新的未见数据集。
 
@@ -205,7 +205,7 @@ rf_holdout_pred **= predict_model**(rf)
 predictions = **predict_model**(rf, data = diabetes)
 ```
 
-![](../Images/efaf146dd2eee5f303fc98fdc7a3740c.png)
+![](img/efaf146dd2eee5f303fc98fdc7a3740c.png)
 
 **predict_model** 函数还可以预测使用 [stack_models](https://www.pycaret.org/stack-models) 和 [create_stacknet](https://www.pycaret.org/classification/#create-stacknet) 函数创建的一系列模型。
 
@@ -213,7 +213,7 @@ predictions = **predict_model**(rf, data = diabetes)
 
 ### 10\. 部署模型
 
-利用训练好的模型对未见过的数据集生成预测的一种方法是使用与模型训练相同的笔记本/IDE中的 **predict_model** 函数。然而，对未见数据集进行预测是一个迭代过程；根据使用情况，预测的频率可以从实时预测到批量预测。PyCaret 的 **deploy_model** 函数允许将包括训练模型在内的整个流程从笔记本环境部署到云端。
+利用训练好的模型对未见过的数据集生成预测的一种方法是使用与模型训练相同的笔记本/IDE 中的 **predict_model** 函数。然而，对未见数据集进行预测是一个迭代过程；根据使用情况，预测的频率可以从实时预测到批量预测。PyCaret 的 **deploy_model** 函数允许将包括训练模型在内的整个流程从笔记本环境部署到云端。
 
 ```py
 **deploy_model**(model = rf, model_name = 'rf_aws', platform = 'aws', 
@@ -229,7 +229,7 @@ predictions = **predict_model**(rf, data = diabetes)
 adaboost = **create_model**('ada')# saving model **save_model**(adaboost, model_name = 'ada_for_deployment')
 ```
 
-![](../Images/16134a3c93dac77298509564139b3838.png)
+![](img/16134a3c93dac77298509564139b3838.png)
 
 你还可以将包括所有中间输出在内的整个实验保存为一个二进制文件。
 
@@ -237,7 +237,7 @@ adaboost = **create_model**('ada')# saving model **save_model**(adaboost, model_
 **save_experiment**(experiment_name = 'my_first_experiment')
 ```
 
-![](../Images/663506d04aa6b21b430d55879f76c7e3.png)
+![](img/663506d04aa6b21b430d55879f76c7e3.png)
 
 **load_model** 和 **load_experiment** 函数可以用于加载保存的模型和保存的实验，这些函数在 PyCaret 的所有模块中都可用。
 
@@ -295,21 +295,21 @@ adaboost = **create_model**('ada')# saving model **save_model**(adaboost, model_
 
 **相关：**
 
-+   [机器学习堆栈中的一个关键缺失部分](/2020/04/missing-part-machine-learning-stack.html)
++   机器学习堆栈中的一个关键缺失部分
 
-+   [通过公共 API 共享你的机器学习模型](/2020/02/sharing-machine-learning-models-common-api.html)
++   通过公共 API 共享你的机器学习模型
 
-+   [轻松使用 torchlayers 构建 PyTorch 模型](/2020/04/pytorch-models-torchlayers.html)
++   轻松使用 torchlayers 构建 PyTorch 模型
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 

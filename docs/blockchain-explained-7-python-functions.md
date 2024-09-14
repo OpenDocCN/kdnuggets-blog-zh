@@ -1,18 +1,18 @@
-# 区块链在7个Python函数中的解释
+# 区块链在 7 个 Python 函数中的解释
 
-> 原文：[https://www.kdnuggets.com/2018/04/blockchain-explained-7-python-functions.html](https://www.kdnuggets.com/2018/04/blockchain-explained-7-python-functions.html)
+> 原文：[`www.kdnuggets.com/2018/04/blockchain-explained-7-python-functions.html`](https://www.kdnuggets.com/2018/04/blockchain-explained-7-python-functions.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Tom Cusack](https://www.linkedin.com/in/tomcusack1/)，银行业数据科学家**
 
-![Header image](../Images/2758aa7121cf5ad3e4d14237df683ab6.png)
+![Header image](img/2758aa7121cf5ad3e4d14237df683ab6.png)
 
 我认为对于很多人来说，区块链是一种很难理解的现象。我开始观看视频和阅读文章，但对我来说，直到我编写了自己简单的区块链，我才真正理解它是什么及其潜在的应用。
 
-我对区块链的理解是，它是一个公开的加密数据库。如果你是亚马逊，想用这项技术来跟踪你的库存水平，那么使用区块链有意义吗？可能没有，因为你的客户不会想花费资源来验证你的区块链，因为他们在网站上已经标明“仅剩1件”。
+我对区块链的理解是，它是一个公开的加密数据库。如果你是亚马逊，想用这项技术来跟踪你的库存水平，那么使用区块链有意义吗？可能没有，因为你的客户不会想花费资源来验证你的区块链，因为他们在网站上已经标明“仅剩 1 件”。
 
-我将留给你们思考未来的应用。那么，事不宜迟，让我们设置我们的7个函数吧！
+我将留给你们思考未来的应用。那么，事不宜迟，让我们设置我们的 7 个函数吧！
 
 ```py
 def hash_function(k):
@@ -37,13 +37,13 @@ def update_state(transaction, state):
     return state
 ```
 
-‘状态’是记录谁拥有什么的。例如，我有10个硬币，我给Medium 1个，那么状态将是下面字典的值。
+‘状态’是记录谁拥有什么的。例如，我有 10 个硬币，我给 Medium 1 个，那么状态将是下面字典的值。
 
 ```py
 {‘transaction’: {‘Tom’: 9, ‘Medium’: 1}}
 ```
 
-重要的是要注意，透支是不允许的。如果存在的硬币只有10个，那么我不能给某人11个硬币。下面的函数验证了我们尝试进行的交易是否确实有效。此外，交易必须平衡。我不能给出5个硬币而让接收者收到4个硬币，因为这会导致硬币的销毁和创建。
+重要的是要注意，透支是不允许的。如果存在的硬币只有 10 个，那么我不能给某人 11 个硬币。下面的函数验证了我们尝试进行的交易是否确实有效。此外，交易必须平衡。我不能给出 5 个硬币而让接收者收到 4 个硬币，因为这会导致硬币的销毁和创建。
 
 ```py
 def valid_transaction(transaction, state):
@@ -163,7 +163,7 @@ def add_transaction_to_chain(transaction, state, chain):
     return state, chain
 ```
 
-所以，现在我们有了我们的7个函数。我们怎么与之互动呢？首先，我们需要用一个*创世区块*来启动我们的链。这是我们新硬币（或库存等）的起点。为了本文的目的，我将说我，Tom，将以10个硬币开始。
+所以，现在我们有了我们的 7 个函数。我们怎么与之互动呢？首先，我们需要用一个*创世区块*来启动我们的链。这是我们新硬币（或库存等）的起点。为了本文的目的，我将说我，Tom，将以 10 个硬币开始。
 
 ```py
 genesis_block = {
@@ -185,7 +185,7 @@ block_chain = [genesis_block]
 chain_state = {'Tom': 10}
 ```
 
-现在，看看当我给Medium一些硬币时会发生什么：
+现在，看看当我给 Medium 一些硬币时会发生什么：
 
 ```py
 chain_state, block_chain = add_transaction_to_chain(transaction={'Tom': -1, 'Medium': 1}, state=chain_state, chain=block_chain)
@@ -224,21 +224,21 @@ chain_state, block_chain = add_transaction_to_chain(transaction={'Tom': -1, 'Med
 
 **相关：**
 
-+   [区块链和 API](/2018/03/blockchains-apis.html)
++   区块链和 API
 
-+   [人工智能与区块链的融合：这是怎么回事？](/2018/01/convergence-ai-blockchain-deal.html)
++   人工智能与区块链的融合：这是怎么回事？
 
-+   [Swiftapply  – 自动高效的 pandas 应用操作](/2018/04/swiftapply-automatically-efficient-pandas-apply-operations.html)
++   Swiftapply  – 自动高效的 pandas 应用操作
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
 
 * * *
 

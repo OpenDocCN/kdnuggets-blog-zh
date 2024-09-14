@@ -1,8 +1,8 @@
 # 你可能会在下次面试中遇到的 24 道 SQL 问题
 
-> 原文：[https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)
+> 原文：[`www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html`](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)
 
-![你可能会在下次面试中遇到的 24 道 SQL 问题](../Images/d697b944ff0af5e67e057054a1e211c1.png)
+![你可能会在下次面试中遇到的 24 道 SQL 问题](img/d697b944ff0af5e67e057054a1e211c1.png)
 
 当谈到最常出现在工作面试中的 [SQL 面试题](https://www.stratascratch.com/blog/sql-interview-questions-you-must-prepare-the-ultimate-guide/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)时，我并不是说给你具体的问题。这将是一个不可能完成的任务，因为问题的数量成千上万。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -46,7 +46,7 @@
 
 # 1\. 汇总、分组和排序
 
-![汇总、分组和排序](../Images/2f1c6477f63ecdb76e5cf30618c0a600.png)
+![汇总、分组和排序](img/2f1c6477f63ecdb76e5cf30618c0a600.png)
 
 ## 理论
 
@@ -76,7 +76,7 @@ ORDER BY 用于对查询的输出进行排序。数据可以按升序或降序�
 
 > *“我们有一个包含员工及其工资的表格，但其中一些记录是旧的，包含过时的工资信息。找出每位员工的当前工资，假设工资每年都在增长。输出他们的 ID、名字、姓氏、部门 ID 和当前工资。按员工 ID 升序排序你的列表。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10299-finding-updated-records?code_type=1](https://platform.stratascratch.com/coding/10299-finding-updated-records?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10299-finding-updated-records?code_type=1`](https://platform.stratascratch.com/coding/10299-finding-updated-records?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -91,7 +91,7 @@ ORDER BY 用于对查询的输出进行排序。数据可以按升序或降序�
 
 下方给出了表格的数据样本。
 
-![来自表的数据](../Images/58dd583b7dcfe9b7fc0c404eac1e2c27.png)
+![来自表的数据](img/58dd583b7dcfe9b7fc0c404eac1e2c27.png)
 
 **解决方案方法**
 
@@ -123,7 +123,7 @@ ORDER BY id ASC;
 
 **输出**
 
-![查找更新的记录](../Images/c94879daa40b49a7477e560d63822d16.png)
+![查找更新的记录](img/c94879daa40b49a7477e560d63822d16.png)
 
 ### SQL 面试题 #2：按国家首次参加奥运会的年份排序
 
@@ -133,13 +133,13 @@ ORDER BY id ASC;
 > 
 > *按小时升序排列记录。*
 
-问题链接：[https://platform.stratascratch.com/coding/10006-find-the-average-distance-traveled-in-each-hour?code_type=1](https://platform.stratascratch.com/coding/10006-find-the-average-distance-traveled-in-each-hour?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10006-find-the-average-distance-traveled-in-each-hour?code_type=1`](https://platform.stratascratch.com/coding/10006-find-the-average-distance-traveled-in-each-hour?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 要查找平均距离，请使用 AVG() 函数，然后按小时列对输出进行分组和排序。
 
 如果你写出正确的解决方案，你将会得到这个结果。
 
-![按各国首次参加奥运会的年份排序的正确解决方案](../Images/955a3288b7becc8e344aeac00c348f5f.png)
+![按各国首次参加奥运会的年份排序的正确解决方案](img/955a3288b7becc8e344aeac00c348f5f.png)
 
 ### SQL 面试问题 #3：按各国首次参加奥运会的年份排序
 
@@ -149,17 +149,17 @@ ORDER BY id ASC;
 > 
 > *按年份和 NOC 升序排序记录。*
 
-问题链接：[https://platform.stratascratch.com/coding/10184-order-all-countries-by-the-year-they-first-participated-in-the-olympics?code_type=1](https://platform.stratascratch.com/coding/10184-order-all-countries-by-the-year-they-first-participated-in-the-olympics?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10184-order-all-countries-by-the-year-they-first-participated-in-the-olympics?code_type=1`](https://platform.stratascratch.com/coding/10184-order-all-countries-by-the-year-they-first-participated-in-the-olympics?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 代码需要按列 noc 对数据进行分组，并使用 MIN() 聚合函数找到首次参与的年份。为了适当地排序输出，使用 ORDER BY。
 
 如果你得到这个结果，那么你做对了一切。
 
-![按各国首次参加奥运会的年份排序](../Images/a7050f00aedfe975d8806178beea63c3.png)
+![按各国首次参加奥运会的年份排序](img/a7050f00aedfe975d8806178beea63c3.png)
 
 # 2\. 筛选
 
-![筛选](../Images/3285180204dc5403a0f96bdf56f452fe.png)
+![筛选](img/3285180204dc5403a0f96bdf56f452fe.png)
 
 ## 理论
 
@@ -207,7 +207,7 @@ WHERE 子句中的所有运算符在 HAVING 子句中也允许使用。
 
 > *“找出 Uber 通过名人广告获得超过 2000 名客户的年份。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10000-find-the-year-that-uber-acquired-more-than-2000-customers-through-celebrities?code_type=1](https://platform.stratascratch.com/coding/10000-find-the-year-that-uber-acquired-more-than-2000-customers-through-celebrities?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10000-find-the-year-that-uber-acquired-more-than-2000-customers-through-celebrities?code_type=1`](https://platform.stratascratch.com/coding/10000-find-the-year-that-uber-acquired-more-than-2000-customers-through-celebrities?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -221,7 +221,7 @@ WHERE 子句中的所有运算符在 HAVING 子句中也允许使用。
 
 这是表格预览。
 
-![数据预览](../Images/48515f96c36832410d25c9e853351712.png)
+![数据预览](img/48515f96c36832410d25c9e853351712.png)
 
 **解决方案方法**
 
@@ -239,7 +239,7 @@ customers_acquired > 2000;
 
 **输出**
 
-![找出 Uber 通过名人获得超过 2000 名客户的年份](../Images/ad13f186bafd3351f13553f33199bebc.png)
+![找出 Uber 通过名人获得超过 2000 名客户的年份](img/ad13f186bafd3351f13553f33199bebc.png)
 
 运行代码，它将只输出一个满足条件的年份：2018。
 
@@ -251,15 +251,15 @@ customers_acquired > 2000;
 > 
 > *按企业名称升序排列结果。”*
 
-问题链接：[https://platform.stratascratch.com/coding/9731-find-all-businesses-whose-lowest-and-highest-inspection-scores-are-different?code_type=1](https://platform.stratascratch.com/coding/9731-find-all-businesses-whose-lowest-and-highest-inspection-scores-are-different?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/9731-find-all-businesses-whose-lowest-and-highest-inspection-scores-are-different?code_type=1`](https://platform.stratascratch.com/coding/9731-find-all-businesses-whose-lowest-and-highest-inspection-scores-are-different?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-要回答这个问题，使用MIN()和MAX()函数来找出最高和最低的检查分数，并按企业分组数据。然后使用HAVING子句仅显示最高分数和最低分数不相等的企业。最后，按企业名称字母顺序对结果进行排序。
+要回答这个问题，使用 MIN()和 MAX()函数来找出最高和最低的检查分数，并按企业分组数据。然后使用 HAVING 子句仅显示最高分数和最低分数不相等的企业。最后，按企业名称字母顺序对结果进行排序。
 
 你的输出应该是这样的。
 
-![查找所有最低和最高检查分数不同的企业](../Images/ca62f2fdc9c7ada86155cc20731538cc.png)
+![查找所有最低和最高检查分数不同的企业](img/ca62f2fdc9c7ada86155cc20731538cc.png)
 
-### SQL面试问题#6：找到最高加班工资率的前三份工作
+### SQL 面试问题#6：找到最高加班工资率的前三份工作
 
 > “找到加班工资率最高的前三份工作。
 > 
@@ -267,27 +267,27 @@ customers_acquired > 2000;
 > 
 > 按加班工资降序排列记录。”
 
-问题链接：[https://platform.stratascratch.com/coding/9988-find-the-top-3-jobs-with-the-highest-overtime-pay-rate?code_type=1](https://platform.stratascratch.com/coding/9988-find-the-top-3-jobs-with-the-highest-overtime-pay-rate?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/9988-find-the-top-3-jobs-with-the-highest-overtime-pay-rate?code_type=1`](https://platform.stratascratch.com/coding/9988-find-the-top-3-jobs-with-the-highest-overtime-pay-rate?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-这个问题要求你同时使用WHERE和LIMIT子句。使用WHERE来查找加班工资不是NULL且不为0的职位。按加班工资从高到低排序数据。然后，只需将输出限制为前三行，这样就得到了：加班工资率最高的前三份工作。
+这个问题要求你同时使用 WHERE 和 LIMIT 子句。使用 WHERE 来查找加班工资不是 NULL 且不为 0 的职位。按加班工资从高到低排序数据。然后，只需将输出限制为前三行，这样就得到了：加班工资率最高的前三份工作。
 
 从结果中可以看出，只有三份这样的工作。
 
-![找到加班工资率最高的前三份工作](../Images/109c14f76bb3f0c0b725e1c884eaa8c3.png)
+![找到加班工资率最高的前三份工作](img/109c14f76bb3f0c0b725e1c884eaa8c3.png)
 
 # 3\. JOINs & 集合运算符
 
-![JOINs & 集合运算符](../Images/aa499db5adf469793d17ff1762652136.png)
+![JOINs & 集合运算符](img/aa499db5adf469793d17ff1762652136.png)
 
 ## 理论
 
 到目前为止，你被限制只使用一个表。不幸的是，没有一个值得尊敬的数据库只由一个表组成。为了充分利用可用数据，你需要知道如何结合两个或更多表的数据。
 
-JOIN是你寻找的SQL功能：它使得在公共列上连接表成为可能。
+JOIN 是你寻找的 SQL 功能：它使得在公共列上连接表成为可能。
 
-SQL中有五种不同的JOIN类型。
+SQL 中有五种不同的 JOIN 类型。
 
-| **JOIN类型** | **描述** |
+| **JOIN 类型** | **描述** |
 | --- | --- |
 | (INNER) JOIN | 仅返回两个表中的匹配行。 |
 | LEFT (OUTER) JOIN | 返回左表中的所有数据和右表中的匹配行。 |
@@ -299,7 +299,7 @@ SQL中有五种不同的JOIN类型。
 
 [前四种连接](https://learnsql.com/blog/sql-joins-types-explained/) 最常使用，但 [CROSS JOIN](https://www.sqlshack.com/sql-cross-join-with-examples/) 有时也可以使用。
 
-另一种连接表格的方法是自连接。这不是一种独特的连接类型：任何JOIN类型都可以用于自连接，这意味着你将表格与自身连接。
+另一种连接表格的方法是自连接。这不是一种独特的连接类型：任何 JOIN 类型都可以用于自连接，这意味着你将表格与自身连接。
 
 [集合运算符](https://towardsdatascience.com/how-to-use-set-operations-in-sql-53d57c4f7b77) 用于合并两个或多个查询的输出。
 
@@ -316,7 +316,7 @@ SQL中有五种不同的JOIN类型。
 
 > *“给定一个列出项目及每个项目关联的员工的列表，根据每位员工分配的项目预算进行计算。输出应包括项目标题和每位员工的项目预算（四舍五入到最接近的整数）。按每位员工预算最高的项目排序。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10301-expensive-projects?code_type=1](https://platform.stratascratch.com/coding/10301-expensive-projects?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10301-expensive-projects?code_type=1`](https://platform.stratascratch.com/coding/10301-expensive-projects?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -331,7 +331,7 @@ SQL中有五种不同的JOIN类型。
 
 这是表格预览。
 
-![表格预览](../Images/57c59a16f75089de3f6e2607accf2aec.png)
+![表格预览](img/57c59a16f75089de3f6e2607accf2aec.png)
 
 表格：ms_emp_projects
 
@@ -341,13 +341,13 @@ SQL中有五种不同的JOIN类型。
 
 数据示例如下。
 
-![昂贵的项目](../Images/a7db7674b91845e896d69dcb3e4112d9.png)
+![昂贵的项目](img/a7db7674b91845e896d69dcb3e4112d9.png)
 
 **解决方案方法**
 
-首先需要按员工计算项目预算。这看起来比实际更复杂：只需将列预算除以员工数量，员工数量使用COUNT()函数获取。然后，将结果转换为浮点数据类型以获得小数位数。这个计算是在ROUND()函数内完成的，用于四舍五入数字。在这种情况下，除法结果被转换为数值数据类型，并四舍五入为没有小数位数。
+首先需要按员工计算项目预算。这看起来比实际更复杂：只需将列预算除以员工数量，员工数量使用 COUNT()函数获取。然后，将结果转换为浮点数据类型以获得小数位数。这个计算是在 ROUND()函数内完成的，用于四舍五入数字。在这种情况下，除法结果被转换为数值数据类型，并四舍五入为没有小数位数。
 
-SELECT语句使用了两个表中的列。这是可能的，因为表在FROM子句中使用INNER JOIN连接。它们在列id等于列project_id的地方连接。
+SELECT 语句使用了两个表中的列。这是可能的，因为表在 FROM 子句中使用 INNER JOIN 连接。它们在列 id 等于列 project_id 的地方连接。
 
 最终结果按项目和其预算分组，同时输出按比例降序排序。
 
@@ -369,7 +369,7 @@ ORDER BY budget_emp_ratio DESC;
 
 **输出**
 
-![项目预算](../Images/7b77de8a426bb8f34b42acead7efd058.png)
+![项目预算](img/7b77de8a426bb8f34b42acead7efd058.png)
 
 代码输出应如下所示，部分显示如下。
 
@@ -381,33 +381,33 @@ ORDER BY budget_emp_ratio DESC;
 > 
 > *按登录次数降序排列记录。*
 
-问题链接: [https://platform.stratascratch.com/coding/9889-find-how-many-logins-spanish-speakers-made-by-country?code_type=1](https://platform.stratascratch.com/coding/9889-find-how-many-logins-spanish-speakers-made-by-country?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接: [`platform.stratascratch.com/coding/9889-find-how-many-logins-spanish-speakers-made-by-country?code_type=1`](https://platform.stratascratch.com/coding/9889-find-how-many-logins-spanish-speakers-made-by-country?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-在解决方案中，使用COUNT()函数计算登录次数。由于所需数据在两个表中，因此需要将它们联接。为此使用INNER JOIN。根据列user_id和事件为‘login’，而用户语言为‘spanish’来联接表格。按位置对数据进行分组，并按登录次数从高到低排序。
+在解决方案中，使用 COUNT()函数计算登录次数。由于所需数据在两个表中，因此需要将它们联接。为此使用 INNER JOIN。根据列 user_id 和事件为‘login’，而用户语言为‘spanish’来联接表格。按位置对数据进行分组，并按登录次数从高到低排序。
 
 正确的代码将返回三个国家的登录次数如下。
 
-![登录次数](../Images/23d5763ce25ffe05af70cdf45ffb9224.png)
+![登录次数](img/23d5763ce25ffe05af70cdf45ffb9224.png)
 
-### SQL面试问题 #9: 数字之和
+### SQL 面试问题 #9: 数字之和
 
-> *“找出索引小于5的数字之和，以及索引大于5的数字之和。将每个结果单独输出一行。”*
+> *“找出索引小于 5 的数字之和，以及索引大于 5 的数字之和。将每个结果单独输出一行。”*
 
-问题链接: [https://platform.stratascratch.com/coding/10008-sum-of-numbers?code_type=1](https://platform.stratascratch.com/coding/10008-sum-of-numbers?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接: [`platform.stratascratch.com/coding/10008-sum-of-numbers?code_type=1`](https://platform.stratascratch.com/coding/10008-sum-of-numbers?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-你需要编写的代码包括两个SELECT语句。一个将找出索引小于5的数字之和，另一个将对索引大于5的数字做同样的处理。
+你需要编写的代码包括两个 SELECT 语句。一个将找出索引小于 5 的数字之和，另一个将对索引大于 5 的数字做同样的处理。
 
-你所要做的就是在这两个语句之间放置UNION ALL来获得输出。
+你所要做的就是在这两个语句之间放置 UNION ALL 来获得输出。
 
-![这两个语句之间的UNION ALL以获得输出](../Images/cbd4fdfda330043dfea6c2e862baecde.png)
+![这两个语句之间的 UNION ALL 以获得输出](img/cbd4fdfda330043dfea6c2e862baecde.png)
 
-# 4\. 子查询与CTE
+# 4\. 子查询与 CTE
 
-![子查询与CTE](../Images/6245626ccd798ded44f79da553133be1.png)
+![子查询与 CTE](img/6245626ccd798ded44f79da553133be1.png)
 
 ## 理论
 
-子查询和CTE为您的代码提供了灵活性。它们都用于更复杂的多步骤计算，其结果用于主要计算。
+子查询和 CTE 为您的代码提供了灵活性。它们都用于更复杂的多步骤计算，其结果用于主要计算。
 
 有特定的关键字可以使用[子查询](https://www.w3resource.com/sql/subqueries/understanding-sql-subqueries.php)。
 
@@ -425,13 +425,13 @@ ORDER BY budget_emp_ratio DESC;
 
 +   DELETE
 
-它们通常用于WHERE或HAVING子句中的数据过滤，但也可作为FROM子句中的表格，当查询结果作为表格时。一般而言，它们允许在一个查询中执行复杂计算。
+它们通常用于 WHERE 或 HAVING 子句中的数据过滤，但也可作为 FROM 子句中的表格，当查询结果作为表格时。一般而言，它们允许在一个查询中执行复杂计算。
 
-对于CTE（公共表表达式），它们的目的相同。不同之处在于，它们更接近人类逻辑的计算步骤，因此使代码更加整洁。通常，CTE所需的代码更少，且比相同计算的子查询更具可读性。
+对于 CTE（公共表表达式），它们的目的相同。不同之处在于，它们更接近人类逻辑的计算步骤，因此使代码更加整洁。通常，CTE 所需的代码更少，且比相同计算的子查询更具可读性。
 
-CTE的主要部分有两个：一个CTE和一个引用CTE的查询。
+CTE 的主要部分有两个：一个 CTE 和一个引用 CTE 的查询。
 
-一般的CTE语法是：
+一般的 CTE 语法是：
 
 ```py
 WITH cte_name AS (
@@ -458,7 +458,7 @@ CTE 是通过 WITH 关键字调用的。在给出 CTE 名称后，接着是 AS�
 > 
 > *“输出员工职称、性别（即，sex），以及平均总薪酬。”*
 
-链接到问题：[https://platform.stratascratch.com/coding/10077-income-by-title-and-gender?code_type=1](https://platform.stratascratch.com/coding/10077-income-by-title-and-gender?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+链接到问题：[`platform.stratascratch.com/coding/10077-income-by-title-and-gender?code_type=1`](https://platform.stratascratch.com/coding/10077-income-by-title-and-gender?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -483,7 +483,7 @@ CTE 是通过 WITH 关键字调用的。在给出 CTE 名称后，接着是 AS�
 
 表中的数据如下所示。
 
-![data in the table](../Images/4bc11f82a38c125bbef2745baed6bcba.png)
+![data in the table](img/4bc11f82a38c125bbef2745baed6bcba.png)
 
 表：sf_bonus
 
@@ -494,7 +494,7 @@ CTE 是通过 WITH 关键字调用的。在给出 CTE 名称后，接着是 AS�
 
 这是数据。
 
-![worker bonus data](../Images/57290c659fab786ef724e6f342ede800.png)
+![worker bonus data](img/57290c659fab786ef724e6f342ede800.png)
 
 **解决方案方法**
 
@@ -532,13 +532,13 @@ GROUP BY employee_title,
 
 解决方案将返回四行结果。
 
-![average compensation](../Images/17ec6bd9173d4b0f065df7c2d8e042b8.png)
+![average compensation](img/17ec6bd9173d4b0f065df7c2d8e042b8.png)
 
 ### SQL 面试问题 #11：提供真实床和互联网的最便宜的邻里
 
 > *“寻找在别墅中能睡在真正的床上且提供互联网的最低价格的邻里。”*
 
-问题链接: [https://platform.stratascratch.com/coding/9636-cheapest-neighborhoods-with-real-beds-and-internet?code_type=1](https://platform.stratascratch.com/coding/9636-cheapest-neighborhoods-with-real-beds-and-internet?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接: [`platform.stratascratch.com/coding/9636-cheapest-neighborhoods-with-real-beds-and-internet?code_type=1`](https://platform.stratascratch.com/coding/9636-cheapest-neighborhoods-with-real-beds-and-internet?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 为了解决这个问题，使用 WHERE 子句中的子查询来获取满足特定标准的价格。使用 MIN() 函数找出具有互联网的别墅中真实床的最低价格。对两个条件使用等号，对条件两侧使用 ILIKE 和通配符字符（%）。
 
@@ -546,7 +546,7 @@ GROUP BY employee_title,
 
 有一个邻里符合这些标准。
 
-![邻里](../Images/55babde4ff6c7fb89b4b17f35c5037fc.png)
+![邻里](img/55babde4ff6c7fb89b4b17f35c5037fc.png)
 
 ### SQL 面试题 #12: 广告渠道效果
 
@@ -554,7 +554,7 @@ GROUP BY employee_title,
 > 
 > *“输出广告渠道及其对应的平均效果。按平均效果升序排序记录。”*
 
-问题链接: [https://platform.stratascratch.com/coding/10012-advertising-channel-effectiveness?code_type=1](https://platform.stratascratch.com/coding/10012-advertising-channel-effectiveness?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接: [`platform.stratascratch.com/coding/10012-advertising-channel-effectiveness?code_type=1`](https://platform.stratascratch.com/coding/10012-advertising-channel-effectiveness?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 每个 CTE 都以关键字 WITH 开始，之后是 CTE 的名称。接着是 AS，在括号中定义 CTE 的主体，即 SELECT 语句，你将在外部查询中调用它。
 
@@ -564,11 +564,11 @@ GROUP BY employee_title,
 
 按效果升序排序输出结果。
 
-![广告输出](../Images/468f635202c80dc37c8ce120de174b37.png)
+![广告输出](img/468f635202c80dc37c8ce120de174b37.png)
 
 # 5. CASE 语句
 
-![CASE 语句](../Images/91dd159a682c52f33c22786f84de8f7f.png)
+![CASE 语句](img/91dd159a682c52f33c22786f84de8f7f.png)
 
 ## 理论
 
@@ -598,7 +598,7 @@ END AS case_stetement_alias;
 
 > *“显示用户进行搜索的平均次数，其中导致成功预订和未导致预订的平均次数。输出应具有名为 action 的列，值为 'does not book' 和 'books'，以及名为 average_searches 的第二列，表示每个动作的平均搜索次数。考虑到如果预订日期为空则认为没有发生预订。请注意，搜索仅在入住日期匹配时与预订相关。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10124-bookings-vs-non-bookings?code_type=1](https://platform.stratascratch.com/coding/10124-bookings-vs-non-bookings?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10124-bookings-vs-non-bookings?code_type=1`](https://platform.stratascratch.com/coding/10124-bookings-vs-non-bookings?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -621,7 +621,7 @@ END AS case_stetement_alias;
 
 这是数据预览。
 
-![airbnb_contacts](../Images/5d545f421fa528aae8f364e53f3f2a42.png)
+![airbnb_contacts](img/5d545f421fa528aae8f364e53f3f2a42.png)
 
 表：airbnb_searches
 
@@ -642,7 +642,7 @@ END AS case_stetement_alias;
 
 表中的前几行如下所示。
 
-![airbnb_searches](../Images/bc7dbc314a3d88d8cbc7550d325c7d5e.png)
+![airbnb_searches](img/bc7dbc314a3d88d8cbc7550d325c7d5e.png)
 
 **解决方案方法**
 
@@ -676,43 +676,43 @@ GROUP BY 1;
 
 上述查询返回所需的输出。
 
-![output](../Images/f9ee300607e00b134ab471984b057a34.png)
+![output](img/f9ee300607e00b134ab471984b057a34.png)
 
 ### SQL 面试问题 #14：Lyft 驾驶员的流失率
 
 > *“找出所有年份 Lyft 驾驶员的全球流失率。将比率作为结果输出。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10016-churn-rate-of-lyft-drivers?code_type=1](https://platform.stratascratch.com/coding/10016-churn-rate-of-lyft-drivers?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10016-churn-rate-of-lyft-drivers?code_type=1`](https://platform.stratascratch.com/coding/10016-churn-rate-of-lyft-drivers?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-这个问题要求你在聚合函数中使用CASE语句，具体来说是COUNT()。用它来计算离开的司机，那些结束日期不为NULL的。将结果除以总司机数量，并将其转换为小数。
+这个问题要求你在聚合函数中使用 CASE 语句，具体来说是 COUNT()。用它来计算离开的司机，那些结束日期不为 NULL 的。将结果除以总司机数量，并将其转换为小数。
 
 如果一切正确，你应该得到流失率。
 
-![全球流失率](../Images/db6e606670b2a402b7b6fba8aa175769.png)
+![全球流失率](img/db6e606670b2a402b7b6fba8aa175769.png)
 
-### SQL面试问题 #15：找出获得奖金和未获得奖金的员工数量
+### SQL 面试问题 #15：找出获得奖金和未获得奖金的员工数量
 
 > *“找出获得奖金和未获得奖金的员工数量。”*
 > 
 > *输出是否获得奖金的指示及相应的员工数量。*
 > 
-> *    例如：获得奖金为1，未获得为0。”*
+> *    例如：获得奖金为 1，未获得为 0。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10081-find-the-number-of-employees-who-received-the-bonus-and-who-didnt?code_type=1](https://platform.stratascratch.com/coding/10081-find-the-number-of-employees-who-received-the-bonus-and-who-didnt?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10081-find-the-number-of-employees-who-received-the-bonus-and-who-didnt?code_type=1`](https://platform.stratascratch.com/coding/10081-find-the-number-of-employees-who-received-the-bonus-and-who-didnt?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-这个解决方案中有一个子查询。子查询使用CASE语句来确定获得奖金和未获得奖金的员工。依据奖金日期和是否值为NULL来完成。为此，你需要使用LEFT JOIN连接两个表。
+这个解决方案中有一个子查询。子查询使用 CASE 语句来确定获得奖金和未获得奖金的员工。依据奖金日期和是否值为 NULL 来完成。为此，你需要使用 LEFT JOIN 连接两个表。
 
 主要查询将使用此结果来统计获得和未获得奖金的员工数量。
 
-![有奖金](../Images/37fc510f5fb718ce8b9ce2f8ef42a2f9.png)
+![有奖金](img/37fc510f5fb718ce8b9ce2f8ef42a2f9.png)
 
 # 6\. 窗口函数
 
-![窗口函数](../Images/25a0a565eed279c056d4ffa562363be4.png)
+![窗口函数](img/25a0a565eed279c056d4ffa562363be4.png)
 
 ## 理论
 
-[SQL窗口函数](https://www.stratascratch.com/blog/the-ultimate-guide-to-sql-window-functions/) 类似于聚合函数。区别在于窗口函数以一种方式聚合数据，使得可以同时显示单独的行和聚合值。
+[SQL 窗口函数](https://www.stratascratch.com/blog/the-ultimate-guide-to-sql-window-functions/) 类似于聚合函数。区别在于窗口函数以一种方式聚合数据，使得可以同时显示单独的行和聚合值。
 
 通常，有三种不同类型的窗口函数：
 
@@ -778,7 +778,7 @@ RANGE 做的是相同的事情，只不过不是基于行数，而是根据其�
 > 
 > *输出部门、名字和员工的工资，并附上该部门的平均工资。*
 
-链接到问题：[https://platform.stratascratch.com/coding/9917-average-salaries?code_type=1](https://platform.stratascratch.com/coding/9917-average-salaries?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+链接到问题：[`platform.stratascratch.com/coding/9917-average-salaries?code_type=1`](https://platform.stratascratch.com/coding/9917-average-salaries?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -802,11 +802,11 @@ RANGE 做的是相同的事情，只不过不是基于行数，而是根据其�
 
 这是员工数据。
 
-![员工数据](../Images/4bc11f82a38c125bbef2745baed6bcba.png)
+![员工数据](img/4bc11f82a38c125bbef2745baed6bcba.png)
 
 **解决方案方法**
 
-查询选择了部门、员工的名字和他们的薪资。第四列将计算AVG()薪资。由于这是一个窗口函数，它必须使用OVER()子句来调用。通过使用部门作为数据分区，查询将返回按部门划分的平均薪资，而不是整体薪资。
+查询选择了部门、员工的名字和他们的薪资。第四列将计算 AVG()薪资。由于这是一个窗口函数，它必须使用 OVER()子句来调用。通过使用部门作为数据分区，查询将返回按部门划分的平均薪资，而不是整体薪资。
 
 ```py
 SELECT department,
@@ -824,45 +824,45 @@ FROM employee;
 
 这些只是完整输出的前五行。
 
-![输出](../Images/fb5ea3a0cf80e687393049b3faf70103.png)
+![输出](img/fb5ea3a0cf80e687393049b3faf70103.png)
 
 ### SQL 面试题 #17：排名最活跃的宾客
 
 > *“根据宾客与主持人交换消息的数量对宾客进行排名。与其他宾客消息数量相同的宾客应具有相同的排名。如果前面的排名相同，请不要跳过排名。*
 > 
-> *输出排名、宾客ID和他们发送的总消息数。按总消息数从高到低排序。”*
+> *输出排名、宾客 ID 和他们发送的总消息数。按总消息数从高到低排序。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10159-ranking-most-active-guests?code_type=1](https://platform.stratascratch.com/coding/10159-ranking-most-active-guests?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10159-ranking-most-active-guests?code_type=1`](https://platform.stratascratch.com/coding/10159-ranking-most-active-guests?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-在这里，你需要使用排名窗口函数，即DENSE_RANK()函数。数据不会进行分区，但使用ORDER BY对消息总和进行排名，从高到低。此外，选择宾客ID，并在窗口函数之外计算消息总和。
+在这里，你需要使用排名窗口函数，即 DENSE_RANK()函数。数据不会进行分区，但使用 ORDER BY 对消息总和进行排名，从高到低。此外，选择宾客 ID，并在窗口函数之外计算消息总和。
 
-按宾客ID分组数据，并按消息数量从高到低排序。
+按宾客 ID 分组数据，并按消息数量从高到低排序。
 
 你的输出应类似于此。
 
-![宾客排名](../Images/b9f01df96cbf23522eec59396c594c94.png)
+![宾客排名](img/b9f01df96cbf23522eec59396c594c94.png)
 
 ### SQL 面试题 #18：累计能耗
 
-> *“计算Meta/Facebook数据中心在所有三个大洲的累计能耗（即累计总和）按日期。输出日期、累计能耗以及四舍五入到最接近的整数的累计百分比。”*
+> *“计算 Meta/Facebook 数据中心在所有三个大洲的累计能耗（即累计总和）按日期。输出日期、累计能耗以及四舍五入到最接近的整数的累计百分比。”*
 
-问题链接：[https://platform.stratascratch.com/coding/10084-cum-sum-energy-consumption?code_type=1](https://platform.stratascratch.com/coding/10084-cum-sum-energy-consumption?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/10084-cum-sum-energy-consumption?code_type=1`](https://platform.stratascratch.com/coding/10084-cum-sum-energy-consumption?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-这是一个难题，涵盖了我讨论的大部分主题。首先，你需要编写一个CTE。使用它来编写三个SELECT语句，从每个表中选择所有数据，并使用UNION ALL将结果合并。
+这是一个难题，涵盖了我讨论的大部分主题。首先，你需要编写一个 CTE。使用它来编写三个 SELECT 语句，从每个表中选择所有数据，并使用 UNION ALL 将结果合并。
 
-第二个CTE将使用第一个CTE中的数据，通过SUM()聚合函数按日期获取总能耗。
+第二个 CTE 将使用第一个 CTE 中的数据，通过 SUM()聚合函数按日期获取总能耗。
 
-外部查询使用第二个CTE中的数据如下所示。SUM()窗口函数通过将数据按日期从最旧到最新排序来计算累计总和。
+外部查询使用第二个 CTE 中的数据如下所示。SUM()窗口函数通过将数据按日期从最旧到最新排序来计算累计总和。
 
 然后将这个相同的窗口函数除以总能量消耗——你可以通过按日期汇总能量消耗来获得——并乘以 100 得到百分比。使用 ROUND() 函数将结果四舍五入到最接近的整数，即没有小数位。
 
 就是它，能够让你从面试官那里获得分数的输出。
 
-![累计能量](../Images/c5535bbe224fa0173b32bfcb6d3d0564.png)
+![累计能量](img/c5535bbe224fa0173b32bfcb6d3d0564.png)
 
 # 7\. 文本和日期处理
 
-![文本和日期处理](../Images/cd714162e4e2c3e4ee09440ebc11f747.png)
+![文本和日期处理](img/cd714162e4e2c3e4ee09440ebc11f747.png)
 
 ## 理论
 
@@ -898,7 +898,7 @@ FROM employee;
 
 > *“统计 2021 年 12 月提交的索赔中仍在待处理的数量。待处理的索赔是指没有接受或拒绝日期的索赔。”*
 
-问题链接：[https://platform.stratascratch.com/coding/2083-pending-claims?code_type=1](https://platform.stratascratch.com/coding/2083-pending-claims?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/2083-pending-claims?code_type=1`](https://platform.stratascratch.com/coding/2083-pending-claims?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 **数据**
 
@@ -913,7 +913,7 @@ FROM employee;
 
 让自己熟悉数据。
 
-![数据](../Images/48b991d627a626c57d97ae1dc38c8ee0.png)
+![数据](img/48b991d627a626c57d97ae1dc38c8ee0.png)
 
 **解决方案方法**
 
@@ -941,15 +941,15 @@ WHERE EXTRACT(MONTH
 
 **输出**
 
-![2021年12月提交的待处理索赔](../Images/f3487fbb71e85f3d608ba5051c6bf559.png)
+![2021 年 12 月提交的待处理索赔](img/f3487fbb71e85f3d608ba5051c6bf559.png)
 
-这个解决方案显示了2021年12月提交的五个待处理索赔。
+这个解决方案显示了 2021 年 12 月提交的五个待处理索赔。
 
 ### SQL 面试题 #20：高峰时段电话
 
 > *“Redfin 帮助客户找到代理。每个客户将有一个唯一的 request_id，每个 request_id 有多个电话。对于每个 request_id，第一次电话是“初始电话”，所有后续电话都是“更新电话”。有多少客户在下午 3 点到 6 点之间（初始和更新电话合并）拨打了 3 次或更多次？”*
 
-问题链接：[https://platform.stratascratch.com/coding/2023-rush-hour-calls?code_type=1](https://platform.stratascratch.com/coding/2023-rush-hour-calls?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/2023-rush-hour-calls?code_type=1`](https://platform.stratascratch.com/coding/2023-rush-hour-calls?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 这个解决方案使用了 DATE_PART() 函数，而不是 EXTRACT()。它在 FROM 子句中的子查询中进行。子查询显示客户，但不是所有客户。首先，数据通过 WHERE 子句和 DATE_PART() 进行过滤并转换为时间戳，以便子查询仅返回在 15 点到 17 点之间拨打电话的客户。
 
@@ -959,13 +959,13 @@ WHERE EXTRACT(MONTH
 
 仅有一名客户在 15:00 到 17:00 之间拨打了三次或更多次。
 
-![一个客户在 15:00 到 17:00 之间拨打了三次或更多次](../Images/405366a85904004e2a0111d6e31aaf9e.png)
+![一个客户在 15:00 到 17:00 之间拨打了三次或更多次](img/405366a85904004e2a0111d6e31aaf9e.png)
 
 ### SQL 面试题 #21：确定等级的规则
 
 > *“找出用于确定每个等级的规则。以“Score > X AND Score <= Y => Grade = A”的格式在单独的列中显示规则，其中 X 和 Y 是等级的下限和上限。输出相应的等级及其最高和最低分数以及规则。根据等级按升序排列结果。”*
 
-问题链接：[https://platform.stratascratch.com/coding/9700-rules-to-determine-grades?code_type=1](https://platform.stratascratch.com/coding/9700-rules-to-determine-grades?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/coding/9700-rules-to-determine-grades?code_type=1`](https://platform.stratascratch.com/coding/9700-rules-to-determine-grades?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 SELECT 语句返回每个等级的最低和最高分数。最后一列用于通过连接函数标记规则。使用 MIN() 和 MAX() 函数来获取以下规则：
 
@@ -973,7 +973,7 @@ SELECT 语句返回每个等级的最低和最高分数。最后一列用于通�
 
 +   B 级：分数 > 79 且 <= 88
 
-+   C等级：得分 > 69 且 <= 79
++   C 等级：得分 > 69 且 <= 79
 
 当然，标签必须按要求格式化。
 
@@ -981,56 +981,56 @@ SELECT 语句返回每个等级的最低和最高分数。最后一列用于通�
 
 这里是规则。
 
-![按等级分组和排序](../Images/a3c5e11f1c149741d71770f7bd6fd084.png)
+![按等级分组和排序](img/a3c5e11f1c149741d71770f7bd6fd084.png)
 
-# SQL理论面试问题
+# SQL 理论面试问题
 
-这些问题也测试SQL知识，与编码问题类似。不同之处在于它们不需要编写代码，但你必须解释SQL概念或它们之间的区别。
+这些问题也测试 SQL 知识，与编码问题类似。不同之处在于它们不需要编写代码，但你必须解释 SQL 概念或它们之间的区别。
 
 这里是一些这样的例子，所有问题都测试了我在编码问题部分提到的主题。
 
-## SQL面试问题#22：WHERE和HAVING
+## SQL 面试问题#22：WHERE 和 HAVING
 
-> *“WHERE子句和HAVING子句在SQL中的主要区别是什么？”*
+> *“WHERE 子句和 HAVING 子句在 SQL 中的主要区别是什么？”*
 
-问题链接：[https://platform.stratascratch.com/technical/2374-where-and-having](https://platform.stratascratch.com/technical/2374-where-and-having?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/technical/2374-where-and-having`](https://platform.stratascratch.com/technical/2374-where-and-having?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-WHERE和HAVING都用于过滤数据。主要区别在于，WHERE子句用于在聚合和GROUP BY之前过滤数据，而HAVING子句则在GROUP BY子句之后用于过滤已经聚合的数据。
+WHERE 和 HAVING 都用于过滤数据。主要区别在于，WHERE 子句用于在聚合和 GROUP BY 之前过滤数据，而 HAVING 子句则在 GROUP BY 子句之后用于过滤已经聚合的数据。
 
-## SQL面试问题#23：左连接和右连接
+## SQL 面试问题#23：左连接和右连接
 
-> *“在SQL中，左连接和右连接有什么区别？”*
+> *“在 SQL 中，左连接和右连接有什么区别？”*
 
-问题链接：[https://platform.stratascratch.com/technical/2242-left-join-and-right-join](https://platform.stratascratch.com/technical/2242-left-join-and-right-join?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/technical/2242-left-join-and-right-join`](https://platform.stratascratch.com/technical/2242-left-join-and-right-join?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
 你可以先解释这两种外连接的相似之处。然后你可以谈论它们的区别。提示：线索在于‘left’和‘right’。
 
-## SQL面试问题#24：公共表表达式
+## SQL 面试问题#24：公共表表达式
 
-> *“在SQL中，什么是公共表表达式？举例说明你会在什么情况下使用它。”*
+> *“在 SQL 中，什么是公共表表达式？举例说明你会在什么情况下使用它。”*
 
-问题链接：[https://platform.stratascratch.com/technical/2354-common-table-expression](https://platform.stratascratch.com/technical/2354-common-table-expression?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
+问题链接：[`platform.stratascratch.com/technical/2354-common-table-expression`](https://platform.stratascratch.com/technical/2354-common-table-expression?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)
 
-你已经看到CTE的工作原理。你可以谈谈它们与子查询的比较，然后给出一个CTE的使用示例。编码问题中已经涵盖了这些内容。
+你已经看到 CTE 的工作原理。你可以谈谈它们与子查询的比较，然后给出一个 CTE 的使用示例。编码问题中已经涵盖了这些内容。
 
 # 总结
 
-SQL面试问题通常有两种形式：编码和非编码。两种问题类型最常测试“不可避免的七个”。你不能在面试时忽视这七个关键的SQL概念。
+SQL 面试问题通常有两种形式：编码和非编码。两种问题类型最常测试“不可避免的七个”。你不能在面试时忽视这七个关键的 SQL 概念。
 
-专注于这些问题，以涵盖面试中可能出现的大多数SQL问题。问题的难度也是一个变量，因此解决简单和困难问题所需的知识可能有很大差异。
+专注于这些问题，以涵盖面试中可能出现的大多数 SQL 问题。问题的难度也是一个变量，因此解决简单和困难问题所需的知识可能有很大差异。
 
 **[Nate Rosidi](https://www.stratascratch.com)** 是一位数据科学家和产品策略专家。他还是一位兼职教授，教授分析学，并且是 [StrataScratch](https://www.stratascratch.com/) 的创始人，该平台帮助数据科学家准备面试，提供来自顶级公司的真实面试问题。可以在 [Twitter: StrataScratch](https://twitter.com/StrataScratch) 或 [LinkedIn](https://www.linkedin.com/in/nathanrosidi/) 上与他联系。
 
 ### 了解更多相关主题
 
-+   [你可能不知道的5个Pandas绘图函数](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)
++   [你可能不知道的 5 个 Pandas 绘图函数](https://www.kdnuggets.com/2023/02/5-pandas-plotting-functions-might-know.html)
 
-+   [你必须知道的前10大高级数据科学SQL面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的前 10 大高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
-+   [针对有经验专业人士的SQL面试问题](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
++   [针对有经验专业人士的 SQL 面试问题](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
 
-+   [数据科学家的25个高级SQL面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
++   [数据科学家的 25 个高级 SQL 面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
 
-+   [数据科学的3个SQL聚合函数面试问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)
++   [数据科学的 3 个 SQL 聚合函数面试问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)
 
-+   [数据分析师的SQL和Python面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)
++   [数据分析师的 SQL 和 Python 面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)

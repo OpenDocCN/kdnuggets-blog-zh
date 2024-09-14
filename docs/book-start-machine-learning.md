@@ -1,12 +1,12 @@
 # 启动机器学习的书籍
 
-> 原文：[https://www.kdnuggets.com/2020/01/book-start-machine-learning.html](https://www.kdnuggets.com/2020/01/book-start-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/01/book-start-machine-learning.html`](https://www.kdnuggets.com/2020/01/book-start-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)，马德里理工大学**
 
-![图示](../Images/fd5748a94f06ee5aa283128405f0c1d2.png)
+![图示](img/fd5748a94f06ee5aa283128405f0c1d2.png)
 
 书籍封面。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -36,11 +36,11 @@
 
 我之前读过这本书，但随着新版的出版，我觉得分享一下我的想法是个好主意。
 
-![图示](../Images/8a78332948095b955551dad888fbc2ea.png)
+![图示](img/8a78332948095b955551dad888fbc2ea.png)
 
 旧版书籍。
 
-本书是“[***《动手学深度学习》***](https://www.amazon.com/gp/product/1492032646/ref=as_li_tl?ie=UTF8&tag=jaimezorno0e-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1492032646&linkId=d6dc8b9b840a16359f928f02d6d69785)***”***。这是一本最初于2017年出版的书籍，在我看来，每次修订后都变成了更好的版本，是学习机器学习的最佳深入资源之一。
+本书是“[***《动手学深度学习》***](https://www.amazon.com/gp/product/1492032646/ref=as_li_tl?ie=UTF8&tag=jaimezorno0e-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1492032646&linkId=d6dc8b9b840a16359f928f02d6d69785)***”***。这是一本最初于 2017 年出版的书籍，在我看来，每次修订后都变成了更好的版本，是学习机器学习的最佳深入资源之一。
 
 ### 这本书适合谁？
 
@@ -58,7 +58,7 @@
 
 正如我之前提到的，这本书非常实用，早在第二章就让你开始动手编码一个项目。在此之前，它描述了什么是机器学习，什么不是，它的基本原理，以及它的主要应用和优势。
 
-书中展示了如何实现不同的机器学习算法，并涵盖了你需要了解的理论，而不是深入复杂的方程式。最新的版本由19章组成，这些章节分为两个部分：
+书中展示了如何实现不同的机器学习算法，并涵盖了你需要了解的理论，而不是深入复杂的方程式。最新的版本由 19 章组成，这些章节分为两个部分：
 
 +   **第一部分**，解释了分类、回归、降维和无监督学习技术的主要概念，以及传统的机器学习算法，如线性回归、逻辑回归、支持向量机、决策树或集成模型。
 
@@ -90,7 +90,7 @@
 
 在你读完这本书后，我鼓励你考虑几个你希望用机器学习完成的项目，拿着这本书尝试执行它们。这将让你在现实世界问题上进行测试，面对一些机器学习项目的难题，并且你将建立一个解决问题的作品集，这在你的学习和未来作为机器学习工程师或数据科学家时将具有很高的价值。
 
-![图像](../Images/a5ed3e0c0859973124759d2aa4e8dcb5.png)
+![图像](img/a5ed3e0c0859973124759d2aa4e8dcb5.png)
 
 我书库中的其他机器学习书籍
 
@@ -128,19 +128,19 @@
 
 **相关：**
 
-+   [10本免费必读的人工智能书籍](/2019/11/10-free-must-read-books-ai.html)
++   10 本免费必读的人工智能书籍
 
-+   [贝叶斯背后的数学](/2019/11/math-behind-bayes.html)
++   贝叶斯背后的数学
 
-+   [NLP 深度学习：ANNs、RNNs 和 LSTMs 解析！](/2019/08/deep-learning-nlp-explained.html)
++   NLP 深度学习：ANNs、RNNs 和 LSTMs 解析！
 
 ### 相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 

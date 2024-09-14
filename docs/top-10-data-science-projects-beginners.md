@@ -1,10 +1,10 @@
 # 初学者的前十个数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2021/06/top-10-data-science-projects-beginners.html](https://www.kdnuggets.com/2021/06/top-10-data-science-projects-beginners.html)
+> 原文：[`www.kdnuggets.com/2021/06/top-10-data-science-projects-beginners.html`](https://www.kdnuggets.com/2021/06/top-10-data-science-projects-beginners.html)
 
-[comments](#comments)
+comments
 
-![](../Images/a4247935ef99ba2c3be36b195796b9bd.png)
+![](img/a4247935ef99ba2c3be36b195796b9bd.png)
 
 照片由 [Jo Szczepanska](https://unsplash.com/@joszczepanska?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/project?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
 
 * * *
 
@@ -32,7 +32,7 @@
 
 ### 技能 1：数据收集
 
-![](../Images/5fd82f41a16cd4d68c6e9f2eccf3996b.png)
+![](img/5fd82f41a16cd4d68c6e9f2eccf3996b.png)
 
 照片由 [James Harrison](https://unsplash.com/@jstrippa?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/code?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -62,11 +62,11 @@
 
 ### 网络爬虫 — 在线课程网站
 
-教程：[用Python在8分钟内构建一个网络爬虫](https://towardsdatascience.com/scrape-websites-using-python-in-5-minutes-931cd9f44443)
+教程：[用 Python 在 8 分钟内构建一个网络爬虫](https://towardsdatascience.com/scrape-websites-using-python-in-5-minutes-931cd9f44443)
 
 语言：Python
 
-想要在2021年找到最佳的在线课程吗？在数百个数据科学课程中挑选一个既实惠又高评价的课程确实很困难。
+想要在 2021 年找到最佳的在线课程吗？在数百个数据科学课程中挑选一个既实惠又高评价的课程确实很困难。
 
 你可以通过抓取一个在线课程网站，并将所有结果存储到数据框中来实现这一点。
 
@@ -76,15 +76,15 @@
 
 ### 奖励
 
-创建一些项目，使用API或其他外部工具收集数据。这些技能通常在你开始工作时非常有用。
+创建一些项目，使用 API 或其他外部工具收集数据。这些技能通常在你开始工作时非常有用。
 
-大多数依赖第三方数据的公司通常会购买API访问权限，你需要借助这些外部工具进行数据收集。
+大多数依赖第三方数据的公司通常会购买 API 访问权限，你需要借助这些外部工具进行数据收集。
 
-一个你可以做的示例项目：使用Twitter API收集与特定标签相关的数据，并将数据存储在数据框中。
+一个你可以做的示例项目：使用 Twitter API 收集与特定标签相关的数据，并将数据存储在数据框中。
 
-### 技能2：探索性数据分析
+### 技能 2：探索性数据分析
 
-![](../Images/9c3ea48423ac8b35fd43afd5a524c4ab.png)
+![](img/9c3ea48423ac8b35fd43afd5a524c4ab.png)
 
 图片来源：[Luke Chesser](https://unsplash.com/@lukechesser?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，来自[Unsplash](https://unsplash.com/s/photos/data?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -94,7 +94,7 @@
 
 作为数据科学家，你会经常做这些工作，甚至比预测建模还要多。
 
-以下是一些EDA项目想法：
+以下是一些 EDA 项目想法：
 
 ### 识别心脏病的风险因素
 
@@ -106,7 +106,7 @@
 
 这个数据集包含了如胆固醇、年龄、糖尿病和家族病史等预测因子，用于预测患者心脏病的发生。
 
-你可以使用Python或R来分析数据集中存在的关系，并回答以下问题：
+你可以使用 Python 或 R 来分析数据集中存在的关系，并回答以下问题：
 
 +   糖尿病患者是否更容易在年轻时发展心脏病？
 
@@ -148,7 +148,7 @@
 
 ### 技能 3：数据可视化
 
-![](../Images/2c4df3b32c8e4e7d60b0a4203d6ec335.png)
+![](img/2c4df3b32c8e4e7d60b0a4203d6ec335.png)
 
 由 [Lukas Blazek](https://unsplash.com/@goumbik?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/data?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供的照片
 
@@ -164,7 +164,7 @@
 
 这里有一些你可以在作品集中展示的数据可视化项目，以展示你的数据可视化技能：
 
-### 构建一个Covid-19仪表板
+### 构建一个 Covid-19 仪表板
 
 数据集：[约翰斯·霍普金斯大学 Covid-19 数据库](https://github.com/CSSEGISandData/COVID-19)
 
@@ -196,7 +196,7 @@ Tableau 的另一个好处是，您可以将您的可视化结果上传到 Table
 
 ### 技能 4：机器学习
 
-![](../Images/0fb436dbeeb8c07982bf36fff51076d2.png)
+![](img/0fb436dbeeb8c07982bf36fff51076d2.png)
 
 图片由 [Kevin Ku](https://unsplash.com/@ikukevk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/machine-learning?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -274,22 +274,22 @@ K-means 聚类是一种无监督学习技术。
 
 **相关内容：**
 
-+   [重建我的7个Python项目](/2021/05/rebuilding-7-python-projects.html)
++   重建我的 7 个 Python 项目
 
-+   [你的投资组合中最好的数据科学项目](/2021/02/best-data-science-project-portfolio.html)
++   你的投资组合中最好的数据科学项目
 
-+   [数据科学初学者的投资组合指南](/2021/03/portfolio-guide-data-science-beginners.html)
++   数据科学初学者的投资组合指南
 
 ### 更多相关话题
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)

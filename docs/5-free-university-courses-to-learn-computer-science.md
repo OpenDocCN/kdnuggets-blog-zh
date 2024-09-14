@@ -1,8 +1,8 @@
-# 5门免费大学计算机科学课程
+# 5 门免费大学计算机科学课程
 
-> 原文：[https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
+> 原文：[`www.kdnuggets.com/5-free-university-courses-to-learn-computer-science`](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
 
-![5门免费大学计算机科学课程](../Images/169ae2154b682739b0c09b14844347bb.png)
+![5 门免费大学计算机科学课程](img/169ae2154b682739b0c09b14844347bb.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-photo/programming-background-with-person-working-with-codes-computer_38669466.htm#query=computer%20science&position=2&from_view=search&track=ais&uuid=aab78f02-75e6-475f-aa0e-6afab8a9ee1f)
 
@@ -18,23 +18,23 @@
 
 * * *
 
-## 我们的前3推荐课程
+## 我们的前 3 推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
 我们来看看这些课程列表。
 
-# 1\. 计算机科学101 – 斯坦福大学
+# 1\. 计算机科学 101 – 斯坦福大学
 
-链接: [计算机科学101](https://www.edx.org/learn/computer-science/stanford-university-computer-science-101)
+链接: [计算机科学 101](https://www.edx.org/learn/computer-science/stanford-university-computer-science-101)
 
-如果你在寻找一个适合初学者的计算机科学导论，[计算机科学101](https://www.edx.org/learn/computer-science/stanford-university-computer-science-101) 课程来自斯坦福大学。
+如果你在寻找一个适合初学者的计算机科学导论，[计算机科学 101](https://www.edx.org/learn/computer-science/stanford-university-computer-science-101) 课程来自斯坦福大学。
 
 在这个课程中，你将学习到以下内容及更多：
 
@@ -66,9 +66,9 @@
 
 # 3\. CS50：计算机科学导论 – 哈佛大学
 
-链接：[CS50的计算机科学导论](https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science)
+链接：[CS50 的计算机科学导论](https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science)
 
-[CS50的计算机科学导论](https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science) 由哈佛大学的 David J Malan 教授及其团队教授。这门课程在全球有志于成为开发者的人中非常受欢迎。
+[CS50 的计算机科学导论](https://www.edx.org/learn/computer-science/harvard-university-cs50-s-introduction-to-computer-science) 由哈佛大学的 David J Malan 教授及其团队教授。这门课程在全球有志于成为开发者的人中非常受欢迎。
 
 在此过程中，你将学习以下内容，并通过积极参与项目来巩固学习：
 
@@ -132,7 +132,7 @@
 
 祝学习愉快，编程顺利！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点工作。她的兴趣和专业领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正致力于通过编写教程、使用指南、评论文章等与开发者社区分享她的知识。Bala还制作了引人入胜的资源概述和编程教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点工作。她的兴趣和专业领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正致力于通过编写教程、使用指南、评论文章等与开发者社区分享她的知识。Bala 还制作了引人入胜的资源概述和编程教程。
 
 ### 更多相关内容
 
@@ -140,10 +140,10 @@
 
 +   [免费学习普林斯顿大学的计算机科学课程](https://www.kdnuggets.com/learn-computer-science-with-princeton-university-for-free)
 
-+   [5门免费大学课程学习数据科学编程](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
++   [5 门免费大学课程学习数据科学编程](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
 
-+   [5门免费大学课程学习数据科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
++   [5 门免费大学课程学习数据科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
 
-+   [5门免费斯坦福大学课程学习数据科学](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)
++   [5 门免费斯坦福大学课程学习数据科学](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)
 
-+   [5门免费大学课程学习数据库和SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
++   [5 门免费大学课程学习数据库和 SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)

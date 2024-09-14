@@ -1,12 +1,12 @@
 # 初学者的端到端机器学习指南
 
-> 原文：[https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html`](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **作者 [Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery/)，数据科学家**
 
-![](../Images/5c25025612f6dd042b4f295ebfef540f.png)
+![](img/5c25025612f6dd042b4f295ebfef540f.png)
 
 照片由 [Modestas Urbonas](https://unsplash.com/@modestasu?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 贡献，来源于 [Unsplash](https://unsplash.com/s/photos/bridge?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -38,7 +38,7 @@
 
 数据的前几行如下所示：
 
-![](../Images/49cfd8b17983d3860b8d5ce5eaf01393.png)
+![](img/49cfd8b17983d3860b8d5ce5eaf01393.png)
 
 “employee”数据集的前几行。 图片由作者提供。
 
@@ -48,7 +48,7 @@ Pycaret 拥有一套模块，包含针对特定机器学习任务的一系列函
 
 第一步是导入 setup 函数。此函数在执行其他步骤之前运行。它初始化了 Pycaret 环境，并创建了一个用于预处理数据以准备建模的转换管道。运行时，Pycaret 会推断所有特征和目标列的数据类型。
 
-![](../Images/c630fd0613c57ffd1d147bf07945cd7d.png)
+![](img/c630fd0613c57ffd1d147bf07945cd7d.png)
 
 Pycaret 已经推断了特征和目标变量的数据类型。 图片由作者提供
 
@@ -56,7 +56,7 @@ Pycaret 已经推断了特征和目标变量的数据类型。 图片由作者�
 
 以下是该 59 行报告的前 15 行。setup 函数具有大量可选参数，可用于创建自定义预处理。例如，参数 `categorical_features` 可用于手动指定未正确推断的数据类型的分类列。可用参数的完整列表可以在[**这里**](https://pycaret.org/classification1/)找到。
 
-![](../Images/0bfe60a344fcce2e2edc55080270eecb.png)
+![](img/0bfe60a344fcce2e2edc55080270eecb.png)
 
 预处理报告的前 15 行。 图片由作者提供。
 
@@ -66,9 +66,9 @@ Pycaret 已经推断了特征和目标变量的数据类型。 图片由作者�
 
 通常在机器学习工作流中，首先训练一个简单模型以建立性能基准，然后再转向更复杂的算法是明智的选择。
 
-在撰写时，Pycaret支持18种不同的分类算法。完整的列表可以在[**这里**](https://pycaret.org/classification1/)找到。对于基线模型，我们将使用逻辑回归，并使用`create_model`函数进行训练。要选择算法，我们传入在[**文档**](https://pycaret.org/classification1/)中找到的缩写字符串。训练后，Pycaret将打印一份详细说明模型性能的报告。
+在撰写时，Pycaret 支持 18 种不同的分类算法。完整的列表可以在[**这里**](https://pycaret.org/classification1/)找到。对于基线模型，我们将使用逻辑回归，并使用`create_model`函数进行训练。要选择算法，我们传入在[**文档**](https://pycaret.org/classification1/)中找到的缩写字符串。训练后，Pycaret 将打印一份详细说明模型性能的报告。
 
-![](../Images/4e8bc2576bdd246ea8893218e81e4f0d.png)
+![](img/4e8bc2576bdd246ea8893218e81e4f0d.png)
 
 `create_model`报告。图片由作者提供。
 
@@ -76,11 +76,11 @@ Pycaret 已经推断了特征和目标变量的数据类型。 图片由作者�
 
 通过建立基线模型，我们已经确定了预处理和设置足以构建分类模型。
 
-下一步是比较不同的分类算法，以确定哪一个最适合我们的数据集和问题。Pycaret有一个叫做`compare_models()`的函数，可以让我们用一行代码比较所有可用算法的性能。
+下一步是比较不同的分类算法，以确定哪一个最适合我们的数据集和问题。Pycaret 有一个叫做`compare_models()`的函数，可以让我们用一行代码比较所有可用算法的性能。
 
 这个函数将尝试所有算法，并输出按准确度排名的列表。你可以通过`sort`参数更改目标指标。
 
-![](../Images/4a27c8523babf3438492294772729d77.png)
+![](img/4a27c8523babf3438492294772729d77.png)
 
 比较模型。图片由作者提供。
 
@@ -94,33 +94,33 @@ Pycaret 已经推断了特征和目标变量的数据类型。 图片由作者�
 
 默认情况下，函数将使用预定义的参数网格，但可以通过将自定义网格传递给`custom_grid`参数来进行自定义。默认情况下，函数还会优化准确度评分，但也可以使用`optimize`参数进行自定义。
 
-在下面的代码中，我们使用默认参数网格来调整模型，并优化MCC评分。
+在下面的代码中，我们使用默认参数网格来调整模型，并优化 MCC 评分。
 
-该函数返回一个包含k折验证分数的表格，默认情况下折数为10。
+该函数返回一个包含 k 折验证分数的表格，默认情况下折数为 10。
 
-![](../Images/2bcd1ed3f1e6ec46b0f4ca7a320e4fb3.png)
+![](img/2bcd1ed3f1e6ec46b0f4ca7a320e4fb3.png)
 
 模型调整。图片由作者提供。
 
 ## 解释结果
 
-Pycaret提供了一系列内置图表来解释模型结果，可以使用`plot_model()`函数访问这些图表。
+Pycaret 提供了一系列内置图表来解释模型结果，可以使用`plot_model()`函数访问这些图表。
 
 下面我们使用这个函数检查特征重要性。
 
-![](../Images/1560351111f77ff35f6513760d61638d.png)
+![](img/1560351111f77ff35f6513760d61638d.png)
 
 特征重要性。图片由作者提供。
 
 让我们也可视化混淆矩阵。
 
-![](../Images/ae9263af2e92e6e47d39ff78c3e1c6a0.png)
+![](img/ae9263af2e92e6e47d39ff78c3e1c6a0.png)
 
 混淆矩阵。图片由作者提供。
 
 ## 部署模型
 
-Pycaret还具有将模型部署到AWS云的附加功能。
+Pycaret 还具有将模型部署到 AWS 云的附加功能。
 
 要在 AWS 上部署模型，你必须首先在 [aws.amazon.com](https://aws.amazon.com/?aws-products-analytics.sort-by=item.additionalFields.productNameLowercase&aws-products-analytics.sort-order=asc&aws-products-business-apps.sort-by=item.additionalFields.productNameLowercase&aws-products-business-apps.sort-order=asc&aws-products-containers.sort-by=item.additionalFields.productNameLowercase&aws-products-containers.sort-order=asc&aws-products-compute.sort-by=item.additionalFields.productNameLowercase&aws-products-compute.sort-order=asc&aws-products-iot.sort-by=item.additionalFields.productNameLowercase&aws-products-iot.sort-order=asc&aws-products-ml.sort-by=item.additionalFields.productNameLowercase&aws-products-ml.sort-order=asc&aws-products-mgmt-govern.sort-by=item.additionalFields.productNameLowercase&aws-products-mgmt-govern.sort-order=asc&aws-products-migration.sort-by=item.additionalFields.productNameLowercase&aws-products-migration.sort-order=asc&aws-products-network.sort-by=item.additionalFields.productNameLowercase&aws-products-network.sort-order=asc&aws-products-security.sort-by=item.additionalFields.productNameLowercase&aws-products-security.sort-order=asc&aws-products-storage.sort-by=item.additionalFields.productNameLowercase&aws-products-storage.sort-order=asc) 上创建一个账户。创建后，你需要生成一个访问密钥，以便允许 Pycaret 函数写入你的账户。按以下步骤操作。
 
@@ -130,18 +130,18 @@ Pycaret还具有将模型部署到AWS云的附加功能。
 
 1.  从出现的列表中选择安全凭证。
 
-![](../Images/52584398b80295476026df73f3e831d4.png)
+![](img/52584398b80295476026df73f3e831d4.png)
 
 4\. 在这里展开访问密钥部分，并点击“创建新的访问密钥”。
 
-![](../Images/416c07d6225c52cc4fda26f6470cefcf.png)
+![](img/416c07d6225c52cc4fda26f6470cefcf.png)
 
 5\. 在此阶段，当提示时，你需要下载凭证文件。稍后你需要使用此文件中的凭证。
 
 6\. 为了允许 Pycaret 与你的 AWS 账户交互，你还需要安装并配置 AWS CLI。首先运行以下命令。
 
 ```py
-curl "[https://awscli.amazonaws.com/AWSCLIV2.pkg](https://awscli.amazonaws.com/AWSCLIV2.pkg)" -o "AWSCLIV2.pkg"
+curl "[`awscli.amazonaws.com/AWSCLIV2.pkg`](https://awscli.amazonaws.com/AWSCLIV2.pkg)" -o "AWSCLIV2.pkg"
 ```
 
 然后运行：
@@ -152,7 +152,7 @@ sudo installer -pkg ./AWSCLIV2.pkg -target /
 
 现在输入 `aws --version` 以确认一切已正确安装。你应该看到类似这样的内容。
 
-![](../Images/5dc1e7f7df4d3961bdcb766a084d1f33.png)
+![](img/5dc1e7f7df4d3961bdcb766a084d1f33.png)
 
 现在已安装，我们可以使用你的账户详情配置 AWS CLI。运行下面显示的命令，它会要求你输入以下信息。
 
@@ -166,13 +166,13 @@ sudo installer -pkg ./AWSCLIV2.pkg -target /
 
 接下来，我们创建一个 S3 存储桶以存储部署的模型。从 AWS 控制台选择 S3，然后创建一个你选择名称的存储桶。
 
-![](../Images/1b7ec21bd4227ca8a36a3f572e2e27ca.png)
+![](img/1b7ec21bd4227ca8a36a3f572e2e27ca.png)
 
 现在我们准备使用 Pycaret 部署我们选择的模型。
 
 如果模型已经部署，你将看到以下消息。
 
-![](../Images/501c85c4c20ae528ec98ea30363a7d42.png)
+![](img/501c85c4c20ae528ec98ea30363a7d42.png)
 
 ## 生成预测
 
@@ -182,7 +182,7 @@ sudo installer -pkg ./AWSCLIV2.pkg -target /
 
 通过运行 `predictions[:5]` 来查看前 5 个预测结果。
 
-![](../Images/26fb52f2644e9659db825ed6023f07b2.png)
+![](img/26fb52f2644e9659db825ed6023f07b2.png)
 
 前 5 个预测。图片来自作者
 
@@ -194,13 +194,13 @@ sudo installer -pkg ./AWSCLIV2.pkg -target /
 
 现在，如果我们将跟踪 URI 复制到浏览器中，你应该能看到 mlflow UI 和它跟踪的实验。
 
-![](../Images/054eeebb587f788c4a96221b887e64ab.png)
+![](img/054eeebb587f788c4a96221b887e64ab.png)
 
 mlflow UI。图片来自作者
 
 我们可以点击查看每个实验的度量指标、工件和参数。
 
-![](../Images/2e68e1947cc88ad8c8520b24016fee1d.png)
+![](img/2e68e1947cc88ad8c8520b24016fee1d.png)
 
 实验跟踪。图片来自作者
 
@@ -220,11 +220,11 @@ Pycaret 是一个低代码机器学习库的例子。目前有很多工具正在
 
 **相关:**
 
-+   [你不知道的关于 Scikit-Learn 的 10 件事](/2020/09/10-things-know-scikit-learn.html)
++   你不知道的关于 Scikit-Learn 的 10 件事
 
-+   [数据科学中的五个命令行工具](/2019/07/five-command-line-tools-data-science.html)
++   数据科学中的五个命令行工具
 
-+   [可解释的机器学习 Python 库](/2019/09/python-libraries-interpretable-machine-learning.html)
++   可解释的机器学习 Python 库
 
 ### 更多相关主题
 

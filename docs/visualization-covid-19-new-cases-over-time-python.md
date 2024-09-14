@@ -1,14 +1,14 @@
 # 用 Python 可视化 COVID-19 新病例的时间变化
 
-> 原文：[https://www.kdnuggets.com/2020/09/visualization-covid-19-new-cases-over-time-python.html](https://www.kdnuggets.com/2020/09/visualization-covid-19-new-cases-over-time-python.html)
+> 原文：[`www.kdnuggets.com/2020/09/visualization-covid-19-new-cases-over-time-python.html`](https://www.kdnuggets.com/2020/09/visualization-covid-19-new-cases-over-time-python.html)
 
-[评论](#comments)
+评论
 
 **作者：[Jason Bowling](https://www.linkedin.com/in/jasonbowlingoh/)，阿克伦大学网络通讯经理**
 
-[![图像](../Images/2c390ca9e2cba91400e2fee14aa70b9d.png)](https://i.ibb.co/p3B8VZR/bowling-covid-full.png)
+![图像](https://i.ibb.co/p3B8VZR/bowling-covid-full.png)
 
-按天计算的每10万人中的新 COVID-19 病例热图（点击放大）
+按天计算的每 10 万人中的新 COVID-19 病例热图（点击放大）
 
 这个热图展示了 COVID-19 大流行在美国的时间进展。地图从左到右阅读，颜色编码显示了各州新增病例的相对数量，已按人口调整。
 
@@ -35,9 +35,9 @@ python3 heatmap-newcases.py
 echo "Done."
 ```
 
-脚本首先将包含州人口的CSV文件加载到一个字典中，该字典用于缩放每日新增病例结果。新增病例是根据《纽约时报》的数据中的累计总数计算得出的，然后[缩放到每10万人中的新增病例数](https://www.robertniles.com/stats/percap.shtml)。
+脚本首先将包含州人口的 CSV 文件加载到一个字典中，该字典用于缩放每日新增病例结果。新增病例是根据《纽约时报》的数据中的累计总数计算得出的，然后[缩放到每 10 万人中的新增病例数](https://www.robertniles.com/stats/percap.shtml)。
 
-我们可以在这一点上展示热图，但如果这样做，每10万人中病例非常多的州会掩盖病例较少的州的细节。应用[log(x+1)](https://onbiostatistics.blogspot.com/2012/05/logx1-data-transformation.html#:~:text=A%3A%20log(x%2B1,in%20which%20x%20was%20measured.)变换显著改善了对比度和可读性。
+我们可以在这一点上展示热图，但如果这样做，每 10 万人中病例非常多的州会掩盖病例较少的州的细节。应用[log(x+1)](https://onbiostatistics.blogspot.com/2012/05/logx1-data-transformation.html#:~:text=A%3A%20log(x%2B1,in%20which%20x%20was%20measured.)变换显著改善了对比度和可读性。
 
 最后，使用 Seaborn 和 Matplotlib 生成热图并将其保存为图像文件。
 
@@ -141,21 +141,21 @@ plt.savefig("covidNewCasesper100K.png")
 
 **相关：**
 
-+   [COVID-19 可视化：有效可视化在大流行故事讲述中的力量](/2020/03/covid-19-visualized.html)
++   COVID-19 可视化：有效可视化在大流行故事讲述中的力量
 
-+   [可视化 COVID-19 影响下的欧洲国家流动趋势](/2020/08/visualizing-mobility-trends-european-countries-affected-covid-19.html)
++   可视化 COVID-19 影响下的欧洲国家流动趋势
 
-+   [通过互动可视化了解 COVID-19 大流行](/2020/04/interactive-covid-19-visualizations.html)
++   通过互动可视化了解 COVID-19 大流行
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

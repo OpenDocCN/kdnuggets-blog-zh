@@ -1,8 +1,8 @@
 # 每个数据工程师都应该知道的 7 个 Python 库
 
-> 原文：[https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
+> 原文：[`www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know`](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
 
-![每个数据工程师都应该知道的 7 个 Python 库](../Images/57686075a802394bd08409e9293398cc.png)
+![每个数据工程师都应该知道的 7 个 Python 库](img/57686075a802394bd08409e9293398cc.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -72,7 +72,7 @@
 
 +   如前所述，pandas 还提供了用于过滤、分组、合并和重塑数据的函数。
 
-Derek Banas 在 YouTube 上的 [Pandas Tutorial: Pandas Full Course](https://www.youtube.com/watch?v=PcvsOaixUh8) 是一个全面的教程，可以帮助你熟悉 pandas。你还可以查看 [7 Steps to Mastering Data Wrangling with Python and Pandas](/7-steps-to-mastering-data-wrangling-with-pandas-and-python) ，了解如何掌握 pandas 的数据操作技巧。
+Derek Banas 在 YouTube 上的 [Pandas Tutorial: Pandas Full Course](https://www.youtube.com/watch?v=PcvsOaixUh8) 是一个全面的教程，可以帮助你熟悉 pandas。你还可以查看 7 Steps to Mastering Data Wrangling with Python and Pandas ，了解如何掌握 pandas 的数据操作技巧。
 
 一旦你对 pandas 熟悉后，根据需要扩展数据处理任务，你可以探索 [Dask](https://www.dask.org/)。Dask 是一个灵活的并行计算库，在 Python 中，支持在集群上进行并行计算。
 
@@ -104,7 +104,7 @@ SQLAlchemy 的一些关键功能包括：
 
 +   它非常可扩展，因此你可以根据需要定义自定义操作符和钩子。
 
-[Marc Lamberti 的教程](https://marclamberti.com/blog-list/)和课程是开始学习 Airflow 的极好资源。虽然 Airflow 被广泛使用，但也有一些替代品，如 Prefect 和 Mage，你也可以进行探索。要了解更多关于 Airflow 的编排替代品的信息，请阅读 [5 Airflow Alternatives for Data Orchestration](/5-airflow-alternatives-for-data-orchestration)。
+[Marc Lamberti 的教程](https://marclamberti.com/blog-list/)和课程是开始学习 Airflow 的极好资源。虽然 Airflow 被广泛使用，但也有一些替代品，如 Prefect 和 Mage，你也可以进行探索。要了解更多关于 Airflow 的编排替代品的信息，请阅读 5 Airflow Alternatives for Data Orchestration。
 
 ## 6\. PySpark
 
@@ -136,9 +136,9 @@ Kafka-Python 的一些功能如下：
 
 这里有几个资源可以帮助你入门：
 
-+   [数据工程初学者指南](/2023/07/beginner-guide-data-engineering.html)
++   数据工程初学者指南
 
-+   [初学者免费数据工程课程](/free-data-engineering-course-for-beginners)
++   初学者免费数据工程课程
 
 祝学习愉快！
 
@@ -150,7 +150,7 @@ Kafka-Python 的一些功能如下：
 
 +   [每个数据科学家都应该知道的 10 个 Python 库](https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [每个机器学习工程师都应该掌握的 5 个机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 

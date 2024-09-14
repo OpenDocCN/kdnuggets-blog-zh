@@ -1,8 +1,8 @@
-# 使用Docker在5个简单步骤中容器化Python应用程序
+# 使用 Docker 在 5 个简单步骤中容器化 Python 应用程序
 
-> 原文：[https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
+> 原文：[`www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps`](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
 
-![docker-python](../Images/fa23a3561fe5db961cfd2c366069920d.png)
+![docker-python](img/fa23a3561fe5db961cfd2c366069920d.png)
 
 作者提供的图片
 
@@ -10,25 +10,25 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-在使用Python构建应用程序时，你常常会遇到依赖冲突、版本不匹配等问题。使用Docker，你可以将应用程序——连同所需的依赖、运行时和配置——打包成一个称为镜像的单一可移植工件。然后，你可以使用这个镜像启动一个运行应用程序的Docker容器。
+在使用 Python 构建应用程序时，你常常会遇到依赖冲突、版本不匹配等问题。使用 Docker，你可以将应用程序——连同所需的依赖、运行时和配置——打包成一个称为镜像的单一可移植工件。然后，你可以使用这个镜像启动一个运行应用程序的 Docker 容器。
 
-无论是简单的Python应用程序还是数据科学应用程序，Docker都使得管理依赖变得更加简单。这在数据科学项目中特别有用，因为你需要不同的库和这些库的特定版本以确保应用程序没有错误地运行。使用Docker，你可以为所有应用程序创建隔离、一致和可重现的环境。
+无论是简单的 Python 应用程序还是数据科学应用程序，Docker 都使得管理依赖变得更加简单。这在数据科学项目中特别有用，因为你需要不同的库和这些库的特定版本以确保应用程序没有错误地运行。使用 Docker，你可以为所有应用程序创建隔离、一致和可重现的环境。
 
-作为迈出这一步的第一步，让我们学习如何将Python应用程序容器化。
+作为迈出这一步的第一步，让我们学习如何将 Python 应用程序容器化。
 
-## 第1步：开始使用
+## 第 1 步：开始使用
 
-首先，[在你使用的平台上安装Docker](https://docs.docker.com/get-docker/)。你可以在Windows、Linux和MacOs上运行Docker。以下是安装Docker后你可能需要做的几件事。
+首先，[在你使用的平台上安装 Docker](https://docs.docker.com/get-docker/)。你可以在 Windows、Linux 和 MacOs 上运行 Docker。以下是安装 Docker 后你可能需要做的几件事。
 
-Docker守护进程绑定到一个默认由`root`用户拥有的Unix套接字。因此，你只能使用`sudo`访问它。为了避免在所有Docker命令前加上`sudo`，可以创建一个`docker`组，并像这样将用户添加到该组：
+Docker 守护进程绑定到一个默认由`root`用户拥有的 Unix 套接字。因此，你只能使用`sudo`访问它。为了避免在所有 Docker 命令前加上`sudo`，可以创建一个`docker`组，并像这样将用户添加到该组：
 
 ```py
 $ sudo groupadd docker
@@ -36,11 +36,11 @@ $ sudo groupadd docker
 $ sudo usermod -aG docker $USER
 ```
 
-对于较新的Docker版本，BuildKit是默认的构建工具。然而，如果你使用的是较旧版本的Docker，当你运行`docker build`命令时，可能会收到弃用警告。这是因为旧版构建客户端将在未来的版本中被弃用。作为解决方法，你可以[安装buildx](https://github.com/docker/buildx)，这是一个CLI工具，用于使用BuildKit的功能。然后使用`docker buildx build`命令来使用BuildKit进行构建。
+对于较新的 Docker 版本，BuildKit 是默认的构建工具。然而，如果你使用的是较旧版本的 Docker，当你运行`docker build`命令时，可能会收到弃用警告。这是因为旧版构建客户端将在未来的版本中被弃用。作为解决方法，你可以[安装 buildx](https://github.com/docker/buildx)，这是一个 CLI 工具，用于使用 BuildKit 的功能。然后使用`docker buildx build`命令来使用 BuildKit 进行构建。
 
-## 第2步：编写你的Python应用程序
+## 第 2 步：编写你的 Python 应用程序
 
-接下来，编写一个Python应用程序，我们可以使用Docker对其进行容器化。在这里，我们将容器化一个简单的[命令行待办事项列表应用程序](https://github.com/balapriyac/python-projects/blob/main/command-line-app/dockerize/todo.py)。该应用程序的代码[在GitHub上：todo.py文件](http://todo.py)。
+接下来，编写一个 Python 应用程序，我们可以使用 Docker 对其进行容器化。在这里，我们将容器化一个简单的[命令行待办事项列表应用程序](https://github.com/balapriyac/python-projects/blob/main/command-line-app/dockerize/todo.py)。该应用程序的代码[在 GitHub 上：todo.py 文件](http://todo.py)。
 
 你可以将任何你选择的 Python 应用程序容器化，或者按照我们在这里使用的示例进行操作。如果你对逐步教程构建命令行 TO-DO 应用程序感兴趣，请阅读 [用 Python 在 7 个简单步骤中构建命令行应用程序](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)。
 

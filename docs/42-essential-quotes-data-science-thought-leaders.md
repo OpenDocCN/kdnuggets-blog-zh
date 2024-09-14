@@ -1,22 +1,22 @@
-# 数据科学思想领袖的42条关键名言
+# 数据科学思想领袖的 42 条关键名言
 
-> 原文：[https://www.kdnuggets.com/2017/05/42-essential-quotes-data-science-thought-leaders.html](https://www.kdnuggets.com/2017/05/42-essential-quotes-data-science-thought-leaders.html)
+> 原文：[`www.kdnuggets.com/2017/05/42-essential-quotes-data-science-thought-leaders.html`](https://www.kdnuggets.com/2017/05/42-essential-quotes-data-science-thought-leaders.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：劳伦·德拉佩纳，[DiscoverDataScience.com](https://discoverdatascience.com/) 编辑**
 
-![](../Images/c1eed7777f5804e450fafb9574038bf7.png)
+![](img/c1eed7777f5804e450fafb9574038bf7.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -54,7 +54,7 @@
 
 *―*[*John Foreman*](https://www.linkedin.com/in/johnwforeman/)*，MailChimp 产品管理副总裁*
 
-阅读完整文章 [这里](/2015/04/data-scientists-thoughts-that-inspire.html%20).
+阅读完整文章 这里.
 
 1.  “**数据科学家（n.）：比任何软件工程师都擅长统计学，比任何统计学家都擅长软件工程。**”
 
@@ -134,13 +134,13 @@
 
 *―*[*Gregory Piatetsky-Shapiro*](https://www.linkedin.com/in/gpiatetsky/)*, KDnuggets 总裁*
 
-阅读完整文章 [这里](%20http:/www.kdnuggets.com/faq/learning-data-mining-data-science.html%20)。
+阅读完整文章 这里。
 
 1.  “学习如何做数据科学就像学习滑雪。**你必须去做。**”
 
 *―*[*Claudia Perlich*](https://www.linkedin.com/in/cperlich/)*, 首席科学家，Dstillery*
 
-阅读完整文章 [这里](/2015/04/data-scientists-thoughts-that-inspire.html/2)。
+阅读完整文章 这里。
 
 1.  “**数据科学的学习曲线是巨大的。** 在很大程度上，你需要一个学位或类似的东西，以证明你对这一职业的承诺……
 
@@ -164,7 +164,7 @@
 
 听完整采访 [这里](https://www.youtube.com/watch?v=Mo9yQYytUhg%20)。
 
-1.  “一旦你拥有一定量的数学/统计学和黑客技能，**掌握一个或多个学科的基础远比在你的黑客技能中增加另一种编程语言，或者在你的数学/统计学组合中增加另一种机器学习算法要好**……客户宁愿与理解其特定领域的数据科学家A合作，也不愿意与需要先学习基础的另一数据科学家B合作——即便B在数学/统计学/黑客技能上更强。”
+1.  “一旦你拥有一定量的数学/统计学和黑客技能，**掌握一个或多个学科的基础远比在你的黑客技能中增加另一种编程语言，或者在你的数学/统计学组合中增加另一种机器学习算法要好**……客户宁愿与理解其特定领域的数据科学家 A 合作，也不愿意与需要先学习基础的另一数据科学家 B 合作——即便 B 在数学/统计学/黑客技能上更强。”
 
 *―*[*Stephan Kolassa*](https://www.linkedin.com/in/stephankolassa/)*，SAP 瑞士数据科学专家*
 

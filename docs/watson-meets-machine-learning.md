@@ -1,14 +1,14 @@
 # 当 Watson 遇见机器学习
 
-> 原文：[https://www.kdnuggets.com/2014/07/watson-meets-machine-learning.html](https://www.kdnuggets.com/2014/07/watson-meets-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2014/07/watson-meets-machine-learning.html`](https://www.kdnuggets.com/2014/07/watson-meets-machine-learning.html)
 
-**作者：Ran Bi，2014年7月。**
+**作者：Ran Bi，2014 年 7 月。**
 
-[![watson-game-top-1](../Images/5ca26ad9d74706b0b2fa48551d77d58d.png)](/wp-content/uploads/watson-game-top-1.jpg)你还记得**Watson**在2011年击败两位《危险边缘》的最伟大冠军吗？它是第一个使用自然语言处理和机器学习来改变人们与计算系统互动方式的认知系统。现在，它已经被更广泛地应用。
+![watson-game-top-1](img/watson-game-top-1.jpg)你还记得**Watson**在 2011 年击败两位《危险边缘》的最伟大冠军吗？它是第一个使用自然语言处理和机器学习来改变人们与计算系统互动方式的认知系统。现在，它已经被更广泛地应用。
 
 ***医疗保健*** 是 Watson 首个带来显著改善的行业。Watson 被训练帮助医生识别癌症患者的治疗方案，为护理人员提供批准建议，并从病人的医疗记录中挖掘关键信息。
 
-![Modernizing Medicine](../Images/7a07c4de1cc4a354c36b75925e79bfcb.png)
+![Modernizing Medicine](img/7a07c4de1cc4a354c36b75925e79bfcb.png)
 
 例如，[Modernizing Medicine](https://www.modmed.com) 设计了由 IBM Watson 提供支持的电子医疗助理，以提高医生的工作效率。医生不仅可以查看过去的诊断和病人档案，还可以提出像“甲氨蝶呤与环孢素相比如何”的问题，如左侧截图所示。最棒的是，EMA 会学习每位医生独特的实践风格。虽然我不知道它的效果如何，但这一步更接近未来医疗。
 
@@ -18,7 +18,7 @@
 
 这里有几个方面可能会引起你的兴趣。
 
-![Watson Fang 玩具](../Images/90e535e4dd8fa37cb546997556177b1f.png)
+![Watson Fang 玩具](img/90e535e4dd8fa37cb546997556177b1f.png)
 
 ***教育。*** 未来的教室会是什么样的？我相信个性化教科书、量身定制的课程和机器人导师可能会成为学生们生活的一部分。Majestyk Apps 的首席执行官，获得 [IBM Watson 移动开发者挑战赛](http://www.ibm.com/smarterplanet/us/en/ibmwatson/challenge.html) 的获胜者，展示了他们的认知玩具 Fang。
 
@@ -28,7 +28,7 @@
 
 IBM 所做的是投资了一家数字购物公司，[Fluid](http://www.fluid.com)，并将 Watson 的认知能力应用于电子商务。这样，人们就可以提出具体的问题，而不是搜索关键词。听起来你每天都有一个销售代表。
 
-[![ibm-smarter-planet1](../Images/451325885d59e642a7be10847415fb4b.png)](/wp-content/uploads/ibm-smarter-planet1.png)
+![ibm-smarter-planet1](img/ibm-smarter-planet1.png)
 
 ***在线安全。*** 通过了解我们是谁，数字监护人可以对我们的活动做出推断，并在出现异常情况时发出警报。例如，如果监护人检测到购买了汽油，它会“认为”这笔购买非常可疑，因为你的车刚刚加油或你在办公室时发生了这种情况。
 
@@ -40,29 +40,29 @@ IBM 所做的是投资了一家数字购物公司，[Fluid](http://www.fluid.com
 
 也许这是一个开始的选择。如果你有任何让我们手机更智能的想法，尝试永远不会太晚。
 
-![Ran Bi](../Images/9ed3515a9880a5fad72f74278778cc7f.png)
+![Ran Bi](img/9ed3515a9880a5fad72f74278778cc7f.png)
 
 **Ran Bi** 是纽约大学数据科学项目的硕士生。在她在 NYU 学习期间，她完成了多个机器学习、深度学习和大数据分析的项目。由于本科时的金融工程背景，她也对商业分析感兴趣。
 
 **相关：**
 
-+   [漫画：Watson 和人工智能与自然智能的对比](/2014/01/cartoon-watson-artificial-vs-natural-intelligence.html)
++   漫画：Watson 和人工智能与自然智能的对比
 
-+   [KDnuggets 独家采访：IBM 大数据产品副总裁 Anjul Bhambhri](/2014/03/exclusive-interview-anjul-bhambhri-big-data-products-ibm.html)
++   KDnuggets 独家采访：IBM 大数据产品副总裁 Anjul Bhambhri
 
-+   [深度学习是否存在深层缺陷？](/2014/06/deep-learning-deep-flaws.html)
++   深度学习是否存在深层缺陷？
 
-+   [《Fast Company》十大大数据最具创新公司](/2014/02/fastcompany-10-most-innovative-companies-big-data.html)
++   《Fast Company》十大大数据最具创新公司
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -72,9 +72,9 @@ IBM 所做的是投资了一家数字购物公司，[Fluid](http://www.fluid.com
 
 +   [检索增强生成：信息检索与文本生成的交汇点](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)
 
-+   [每个机器学习工程师应具备的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应具备的 5 项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的全面计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 

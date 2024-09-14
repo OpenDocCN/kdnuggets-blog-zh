@@ -1,8 +1,8 @@
 # 5 本免费书籍掌握机器学习
 
-> 原文：[https://www.kdnuggets.com/5-free-books-to-master-machine-learning](https://www.kdnuggets.com/5-free-books-to-master-machine-learning)
+> 原文：[`www.kdnuggets.com/5-free-books-to-master-machine-learning`](https://www.kdnuggets.com/5-free-books-to-master-machine-learning)
 
-![5 本免费书籍掌握机器学习](../Images/e097e1e1ab82a554fcd29d80fa5bdf2a.png)
+![5 本免费书籍掌握机器学习](img/e097e1e1ab82a554fcd29d80fa5bdf2a.png)
 
 图片生成于 DALL-E 3
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@
 
 链接: [绝对初学者的机器学习](https://bmansoori.ir/book/Machine%20Learning%20For%20Absolute%20Beginners.pdf)
 
-![5 本免费书籍掌握机器学习](../Images/64109679192a53132637045a1f688b25.png)
+![5 本免费书籍掌握机器学习](img/64109679192a53132637045a1f688b25.png)
 
 书籍封面
 
@@ -72,7 +72,7 @@
 
 链接: [机器学习数学](https://mml-book.github.io/book/mml-book.pdf)
 
-![5 本免费书籍掌握机器学习](../Images/842fe590dc117312902000db17f90907.png)
+![5 本免费书籍掌握机器学习](img/842fe590dc117312902000db17f90907.png)
 
 书籍封面
 
@@ -112,7 +112,7 @@
 
 链接: [黑客的机器学习](https://doc.lagout.org/science/Artificial%20Intelligence/Machine%20learning/Machine%20Learning%20for%20Hackers_%20Case%20Studies%20and%20Algorithms%20to%20Get%20You%20Started%20%5BConway%20%26%20White%202012-02-25%5D.pdf)
 
-![掌握机器学习的5本免费书籍](../Images/5adeeeb97c30eb8b12b5979de35c09dd.png)
+![掌握机器学习的 5 本免费书籍](img/5adeeeb97c30eb8b12b5979de35c09dd.png)
 
 书籍封面
 
@@ -150,7 +150,7 @@
 
 链接: [使用 Scikit-Learn、Keras 和 TensorFlow 的动手机器学习](http://14.139.161.31/OddSem-0822-1122/Hands-On_Machine_Learning_with_Scikit-Learn-Keras-and-TensorFlow-2nd-Edition-Aurelien-Geron.pdf)
 
-![掌握机器学习的5本免费书籍](../Images/e08f68c33b99b6fc4aa99014f7b3686d.png)
+![掌握机器学习的 5 本免费书籍](img/e08f68c33b99b6fc4aa99014f7b3686d.png)
 
 书籍封面
 
@@ -194,7 +194,7 @@
 
 链接：[接近（几乎）任何机器学习问题](https://docdrop.org/download_annotation_doc/AAAMLP-569to.pdf)
 
-![掌握机器学习的 5 本免费书籍](../Images/e590c21e818a34fd6244a2f64f7982d2.png)
+![掌握机器学习的 5 本免费书籍](img/e590c21e818a34fd6244a2f64f7982d2.png)
 
 书籍封面
 
@@ -228,18 +228,18 @@
 
 我们很想知道哪些书在你的机器学习旅程中发挥了关键作用。欢迎在评论区分享你的推荐。
 
-**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal是一名机器学习工程师和技术作家，对数据科学和人工智能与医学的交叉领域充满了深厚的热情。她共同撰写了电子书《利用ChatGPT最大化生产力》。作为2022年APAC的Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为Teradata技术多样性学者、Mitacs Globalink研究学者和哈佛WeCode学者。Kanwal是变革的坚定倡导者，她创立了FEMCodes以支持STEM领域的女性。
+**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal 是一名机器学习工程师和技术作家，对数据科学和人工智能与医学的交叉领域充满了深厚的热情。她共同撰写了电子书《利用 ChatGPT 最大化生产力》。作为 2022 年 APAC 的 Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为 Teradata 技术多样性学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 是变革的坚定倡导者，她创立了 FEMCodes 以支持 STEM 领域的女性。
 
 ### 更多相关主题
 
-+   [25本免费书籍掌握SQL、Python、数据科学、机器学习等](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍掌握 SQL、Python、数据科学、机器学习等](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [KDnuggets新闻，6月22日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)
 
-+   [5本免费书籍掌握SQL](https://www.kdnuggets.com/5-free-books-to-master-sql)
++   [5 本免费书籍掌握 SQL](https://www.kdnuggets.com/5-free-books-to-master-sql)
 
-+   [5本免费书籍帮助你掌握Python](https://www.kdnuggets.com/5-free-books-to-help-you-master-python)
++   [5 本免费书籍帮助你掌握 Python](https://www.kdnuggets.com/5-free-books-to-help-you-master-python)
 
-+   [5本免费书籍掌握数据科学](https://www.kdnuggets.com/5-free-books-to-master-data-science)
++   [5 本免费书籍掌握数据科学](https://www.kdnuggets.com/5-free-books-to-master-data-science)
 
-+   [5本免费书籍掌握数据科学的统计学](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
++   [5 本免费书籍掌握数据科学的统计学](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)

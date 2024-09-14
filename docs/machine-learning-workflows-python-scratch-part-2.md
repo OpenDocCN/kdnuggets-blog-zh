@@ -1,12 +1,12 @@
-# 从零开始的 Python 机器学习工作流 第 2 部分：k-均值聚类
+# 从零开始的 Python 机器学习工作流 第二部分：k-均值聚类
 
-> 原文：[https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html](https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html)
+> 原文：[`www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html`](https://www.kdnuggets.com/2017/06/machine-learning-workflows-python-scratch-part-2.html)
 
-在这一系列的第一部分，我们起步较慢但稳健。[上一篇文章](/2017/05/machine-learning-workflows-python-scratch-part-1.html)列出了我们的目标，并从一些机器学习工作流和管道的基本构建块开始。如果你还没有阅读这一系列的第一部分，建议你在继续之前先阅读它。
+在这一系列的第一部分，我们起步较慢但稳健。上一篇文章列出了我们的目标，并从一些机器学习工作流和管道的基本构建块开始。如果你还没有阅读这一系列的第一部分，建议你在继续之前先阅读它。
 
-这一次我们加速前进，将通过实现 k-均值聚类算法来完成。我们将在编码过程中讨论 k-均值的具体方面，但如果你对该算法的概述以及它与其他聚类方法的关系感兴趣，你可以 [查看这个](/2016/09/comparing-clustering-techniques-concise-technical-overview.html)。
+这一次我们加速前进，将通过实现 k-均值聚类算法来完成。我们将在编码过程中讨论 k-均值的具体方面，但如果你对该算法的概述以及它与其他聚类方法的关系感兴趣，你可以 查看这个。
 
-![ML workflows header](../Images/decb4017351d3ef6e708866e8c04fed4.png)
+![ML workflows header](img/decb4017351d3ef6e708866e8c04fed4.png)
 
 Python 中的 k-均值聚类算法。从零开始。
 
@@ -52,7 +52,7 @@ k-均值是一种简单但常常有效的聚类方法。k 个点被随机选择�
 
 你可能已经想象到随机初始化可能会出错。举个简单的例子，考虑在二维空间中有 5 个不同的、紧密聚集的类别，配有初始化不良的质心，如下所示。
 
-![糟糕的初始化](../Images/a358cc3edb5802c92183f5a3e01fc170.png)
+![糟糕的初始化](img/a358cc3edb5802c92183f5a3e01fc170.png)
 
 显然是不理想的质心初始化。
 
@@ -74,7 +74,7 @@ k-均值是一种简单但常常有效的聚类方法。k 个点被随机选择�
 
 在查看代码之前，以下是我们的算法将遵循的过程的简单概述，考虑到上述和以下的几个函数。
 
-![k-means 图示](../Images/5d017022938992c978fc2e1c85279b66.png)
+![k-means 图示](img/5d017022938992c978fc2e1c85279b66.png)
 
 我们的 k-means 聚类算法过程。
 
@@ -142,25 +142,25 @@ Original centroids:
 
 尽管我们尚未评估我们的聚类结果，但现在就到这里……不过，话说回来，我敢打赌你可以猜到下一篇文章的内容。下次我们将专注于更多的聚类相关活动。我们有一个算法可以用来构建模型，但还需要一些机制来评估和可视化它们的结果。这就是我们接下来要做的。
 
-深入思考之后，我计划将我们的注意力转向使用k最近邻算法进行分类，以及一些与分类相关的任务。希望你发现这些内容足够有用，以便查看下一篇文章。
+深入思考之后，我计划将我们的注意力转向使用 k 最近邻算法进行分类，以及一些与分类相关的任务。希望你发现这些内容足够有用，以便查看下一篇文章。
 
 **相关**：
 
-+   [从头开始的 Python 机器学习工作流 第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从头开始的 Python 机器学习工作流 第一部分：数据准备
 
-+   [提高 k-means 聚类效率的朴素分片质心初始化方法](/2017/03/naive-sharding-centroid-initialization-method.html)
++   提高 k-means 聚类效率的朴素分片质心初始化方法
 
-+   [K-Means 和其他聚类算法：Python 快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)
++   K-Means 和其他聚类算法：Python 快速入门
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 

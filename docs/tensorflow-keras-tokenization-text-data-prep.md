@@ -1,8 +1,8 @@
-# 使用TensorFlow和Keras进行分词和文本数据准备
+# 使用 TensorFlow 和 Keras 进行分词和文本数据准备
 
-> 原文：[https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html](https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html)
+> 原文：[`www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html`](https://www.kdnuggets.com/2020/03/tensorflow-keras-tokenization-text-data-prep.html)
 
-[评论](#comments)![图](../Images/012ff6cfe934b8ef10fb2581555d178f.png)
+评论![图](img/012ff6cfe934b8ef10fb2581555d178f.png)
 
 图片来自[Willi Heidelbach](https://pixabay.com/users/wilhei-883152/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667) [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=705667)
 
@@ -10,21 +10,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-之前我们查看了一个[通用文本数据预处理方法](/2017/12/general-approach-preprocessing-text-data.html)，重点关注了分词、标准化和噪声去除。然后我们概述了[使用Python进行文本数据预处理](/2018/03/text-data-preprocessing-walkthrough-python.html)的内容，这本质上是前一篇文章中框架的实际应用，涵盖了主要的手动文本数据预处理方法。我们还探讨了如何[使用Python构建基础文本数据词汇](/2019/11/create-vocabulary-nlp-tasks-python.html)。
+之前我们查看了一个通用文本数据预处理方法，重点关注了分词、标准化和噪声去除。然后我们概述了使用 Python 进行文本数据预处理的内容，这本质上是前一篇文章中框架的实际应用，涵盖了主要的手动文本数据预处理方法。我们还探讨了如何使用 Python 构建基础文本数据词汇。
 
-不过，自动化许多这种预处理和文本数据准备的工具是存在的。这些工具在这些文章发表之前就已存在，但其普及程度自那时以来激增。由于许多NLP工作现在通过神经网络完成，使用神经网络实现库如TensorFlow——以及同时使用Keras——来实现这些准备任务是很自然的。
+不过，自动化许多这种预处理和文本数据准备的工具是存在的。这些工具在这些文章发表之前就已存在，但其普及程度自那时以来激增。由于许多 NLP 工作现在通过神经网络完成，使用神经网络实现库如 TensorFlow——以及同时使用 Keras——来实现这些准备任务是很自然的。
 
-本文将探讨如何使用TensorFlow和Keras预处理工具对文本数据进行分词和进一步准备，以便输入神经网络。虽然前几篇文章没有涉及为神经网络创建和填充编码数据序列的附加概念，但本文将予以补充。相反，虽然噪声去除在之前的文章中有所涵盖，但本文不再涉及。文本数据中的噪声是什么可能是任务特定的，前文对这一主题的处理依然具有参考价值。
+本文将探讨如何使用 TensorFlow 和 Keras 预处理工具对文本数据进行分词和进一步准备，以便输入神经网络。虽然前几篇文章没有涉及为神经网络创建和填充编码数据序列的附加概念，但本文将予以补充。相反，虽然噪声去除在之前的文章中有所涵盖，但本文不再涉及。文本数据中的噪声是什么可能是任务特定的，前文对这一主题的处理依然具有参考价值。
 
-为了实现今天的目标，我们将使用两个Keras预处理工具: [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer) 类和 [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences) 模块。
+为了实现今天的目标，我们将使用两个 Keras 预处理工具: [`Tokenizer`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer) 类和 [`pad_sequences`](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/sequence/pad_sequences) 模块。
 
 我们使用一些示例句子代替真实数据集或来自现实世界的数据，来完成编码工作。下次我们可以扩展代码，使用真实数据集并执行一些有趣的任务，例如分类或类似任务。一旦理解了这个过程，扩展到更大的数据集将很简单。
 
@@ -59,7 +59,7 @@ trunc_type = 'post'
 
 +   `num_words = 1000`
 
-    这将是从结果分词数据词汇表中使用的最多词数，在我们的例子中是截断到前1000个最常见的词。虽然在我们的小数据集中这不会成为问题，但为了演示目的，这里展示了。
+    这将是从结果分词数据词汇表中使用的最多词数，在我们的例子中是截断到前 1000 个最常见的词。虽然在我们的小数据集中这不会成为问题，但为了演示目的，这里展示了。
 
 +   `oov_token = <UNK>`
 
@@ -73,7 +73,7 @@ trunc_type = 'post'
 
     与上面一样，当我们对文本数据进行数字序列编码时，我们的句子（或任意文本块）的长度将不一致，因此我们需要选择一个最大长度，并用填充字符填补较短句子的未使用位置。我们选择在句子的末尾进行填充（'post'），意味着我们的句子序列数字表示中的词索引条目将出现在结果句子向量的最左侧位置，而填充字符（'0'）将出现在实际数据之后，位于结果句子向量的最右侧位置。
 
-![Figure](../Images/14bc65aceee6b704b80532b634ab2b2b.png)
+![Figure](img/14bc65aceee6b704b80532b634ab2b2b.png)
 
 来源: [Manning](https://freecontent.manning.com/deep-learning-for-text/)
 
@@ -129,7 +129,7 @@ print("Padded Training sequences data type:", type(train_padded))
 
 +   `# 输出我们工作的结果`
 
-    现在让我们看看我们所做的工作。我们期望注意到最长的序列以及填充较短序列的情况。还要注意，当进行填充时，我们的序列会从Python列表转换为Numpy数组，这很有帮助，因为这就是我们最终会送入神经网络的内容。我们的训练序列矩阵的形状是训练集中句子（序列）的数量（4）与最长序列的长度（`maxlen`，或12）。
+    现在让我们看看我们所做的工作。我们期望注意到最长的序列以及填充较短序列的情况。还要注意，当进行填充时，我们的序列会从 Python 列表转换为 Numpy 数组，这很有帮助，因为这就是我们最终会送入神经网络的内容。我们的训练序列矩阵的形状是训练集中句子（序列）的数量（4）与最长序列的长度（`maxlen`，或 12）。
 
 ```py
 Word index:
@@ -193,26 +193,26 @@ Word index (for reference): {'<UNK>': 1, 'i': 2, 'enjoy': 3, 'coffee': 4, 'tea':
 
 请注意，由于我们在测试数据中编码了一些在训练数据中未见过的单词，我们现在有一些词汇外的标记，这些标记被编码为<UNK>（例如，‘want’）。
 
-现在我们有了填充序列，更重要的是知道如何使用不同的数据再次获取它们，我们可以开始做一些事情了。下一次，我们将用实际数据替代这次使用的玩具数据，并且只需对代码做很小的更改（除非我们需要为训练和测试数据添加分类标签），我们将继续进行某种NLP任务，最有可能是分类。
+现在我们有了填充序列，更重要的是知道如何使用不同的数据再次获取它们，我们可以开始做一些事情了。下一次，我们将用实际数据替代这次使用的玩具数据，并且只需对代码做很小的更改（除非我们需要为训练和测试数据添加分类标签），我们将继续进行某种 NLP 任务，最有可能是分类。
 
 **相关**：
 
-+   [10个Python字符串处理技巧与窍门](/2020/01/python-string-processing-primer.html)
++   10 个 Python 字符串处理技巧与窍门
 
-+   [自动文本摘要入门](/2019/11/getting-started-automated-text-summarization.html)
++   自动文本摘要入门
 
-+   [如何在Python中为NLP任务创建词汇表](/2019/11/create-vocabulary-nlp-tasks-python.html)
++   如何在 Python 中为 NLP 任务创建词汇表
 
 ### 更多相关主题
 
-+   [使用TensorFlow和Keras构建并训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
++   [使用 TensorFlow 和 Keras 构建并训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
 +   [机器学习中的数据准备和原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)
 
-+   [SQL中的数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 中的数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
-+   [R中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
++   [R 中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
 
 +   [Keras 3.0：你需要知道的一切](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)
 
-+   [TensorFlow用于计算机视觉 - 简化的迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 用于计算机视觉 - 简化的迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)

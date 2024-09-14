@@ -1,22 +1,22 @@
 # 5 个资源来激发你下一个数据科学项目的灵感
 
-> 原文：[https://www.kdnuggets.com/2018/09/5-resources-inspire-data-science-project.html](https://www.kdnuggets.com/2018/09/5-resources-inspire-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2018/09/5-resources-inspire-data-science-project.html`](https://www.kdnuggets.com/2018/09/5-resources-inspire-data-science-project.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Conor Dewey](https://www.linkedin.com/in/conordewey3/)，弗吉尼亚理工大学**
 
-![Image](../Images/14cd0fbe9ae87549a16bc2150e8daa29.png)
+![Image](img/14cd0fbe9ae87549a16bc2150e8daa29.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 我们接触到的关于数据科学职业的建议似乎无穷无尽，但有一个话题没有得到足够的关注：副项目。副项目因**[许多原因](https://medium.com/the-year-of-the-looking-glass/the-importance-of-side-projects-cf9f63954031)**而非常棒，但我喜欢**[Julie Zhuo](https://medium.com/u/b8a4e5ae7490)**在下面简单的维恩图中对它的描述。
 
-[![](../Images/41c48a42447a1944702ae756eb3fdf0d.png)](https://medium.com/the-year-of-the-looking-glass/the-importance-of-side-projects-cf9f63954031)
+![](https://medium.com/the-year-of-the-looking-glass/the-importance-of-side-projects-cf9f63954031)
 
 副项目作为一种在比工作或学校环境更少目标驱动的环境中应用数据科学的方式。它们提供了一个**[玩转数据的机会](https://www.ted.com/playlists/383/the_importance_of_play)**，同时学习实际技能。
 
@@ -68,7 +68,7 @@
 
 可能性真的无限。让你的兴趣、好奇心和目标驱动你的下一个项目。一旦你确认了这些目标，我们就可以获得灵感了。
 
-[![](../Images/75e4af53d2e623c68b5db0c65c0a34c1.png)](https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c)
+![](https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c)
 
 ### 灵感
 
@@ -84,7 +84,7 @@
 
 **[Kaggle](https://www.kaggle.com/datasets)**
 
-如果不提及在线数据科学的标志性代表，那将是我的失职。有效利用Kaggle获得灵感有几种方法。首先，你可以查看 [热门数据集](https://www.kaggle.com/datasets) 并思考如何利用这些信息。如果你对机器学习和具体示例更感兴趣，[kernels功能](https://www.kaggle.com/kernels) 随着时间的推移变得越来越好。
+如果不提及在线数据科学的标志性代表，那将是我的失职。有效利用 Kaggle 获得灵感有几种方法。首先，你可以查看 [热门数据集](https://www.kaggle.com/datasets) 并思考如何利用这些信息。如果你对机器学习和具体示例更感兴趣，[kernels 功能](https://www.kaggle.com/kernels) 随着时间的推移变得越来越好。
 
 **[布丁](https://pudding.cool/)**
 
@@ -96,7 +96,7 @@
 
 **[Towards Data Science](https://towardsdatascience.com/)**
 
-最后，我必须向 [TDS团队](https://medium.com/@TDSteam) 致敬，他们将这一群聪明且热衷于实现目标并帮助他人在数据科学中成长的人们汇聚在一起。浏览近期的故事，你会在任何一天发现一些有趣的项目创意。
+最后，我必须向 [TDS 团队](https://medium.com/@TDSteam) 致敬，他们将这一群聪明且热衷于实现目标并帮助他人在数据科学中成长的人们汇聚在一起。浏览近期的故事，你会在任何一天发现一些有趣的项目创意。
 
 ### 总结
 
@@ -116,11 +116,11 @@
 
 **相关：**
 
-+   [2018年将助你找到工作的5个数据科学项目](/2018/06/5-data-science-projects-hired.html)
++   2018 年将助你找到工作的 5 个数据科学项目
 
-+   [GitHub Python 数据科学聚焦：AutoML、NLP、可视化、ML 工作流](/2018/08/github-python-data-science-spotlight.html)
++   GitHub Python 数据科学聚焦：AutoML、NLP、可视化、ML 工作流
 
-+   [数据科学预测未来](/2018/06/data-science-predicting-future.html)
++   数据科学预测未来
 
 ### 了解更多此主题的信息
 
@@ -128,7 +128,7 @@
 
 +   [停止学习数据科学以寻找目标，去寻找目标……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 

@@ -1,8 +1,8 @@
 # 使用 Great Expectations 解决您的数据质量问题
 
-> 原文：[https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
+> 原文：[`www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html`](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
 
-Gartner, Inc. 估计，[不良数据的成本](https://www.forbes.com/sites/forbestechcouncil/2022/08/08/no-more-garbage-in-garbage-out-taking-control-of-your-data-quality/?sh=7d64e8561e95) 每年给组织带来的平均损失为1290万美元。
+Gartner, Inc. 估计，[不良数据的成本](https://www.forbes.com/sites/forbestechcouncil/2022/08/08/no-more-garbage-in-garbage-out-taking-control-of-your-data-quality/?sh=7d64e8561e95) 每年给组织带来的平均损失为 1290 万美元。
 
 我们每天处理 PB 级的数据，大规模的数据量中常常会出现数据质量问题。不良数据会给组织带来金钱、声誉和时间上的损失。因此，持续监控和验证数据质量非常重要。
 
@@ -10,11 +10,11 @@ Gartner, Inc. 估计，[不良数据的成本](https://www.forbes.com/sites/forb
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速您的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速您的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -22,11 +22,11 @@ Gartner, Inc. 估计，[不良数据的成本](https://www.forbes.com/sites/forb
 
 不良数据包括不准确的信息、缺失的数据、错误的信息、不符合规范的数据和重复的数据。不良数据会导致错误的数据分析，从而导致不良决策和无效的策略。
 
-**Experian 数据质量发现，平均公司因数据不足而损失了12%的收入。除了金钱，公司还会遭受浪费时间的损失。**
+**Experian 数据质量发现，平均公司因数据不足而损失了 12%的收入。除了金钱，公司还会遭受浪费时间的损失。**
 
 在处理数据之前识别异常将帮助组织更好地洞察客户行为并减少成本。
 
-Great Expectations 库帮助组织通过200多种现成规则来验证和确认数据中的异常。
+Great Expectations 库帮助组织通过 200 多种现成规则来验证和确认数据中的异常。
 
 # 什么是 Great Expectations（GE）？
 
@@ -126,7 +126,7 @@ context.save_expectation_suite(suite, "sales_suite")
 
 ## 第四步：加载并验证数据
 
-在这一步骤中，我们将CSV文件加载到pandas.DataFrame中，并创建一个检查点以运行我们之前创建的期望。
+在这一步骤中，我们将 CSV 文件加载到 pandas.DataFrame 中，并创建一个检查点以运行我们之前创建的期望。
 
 ```py
 # load and validate data
@@ -155,35 +155,35 @@ results = context.run_checkpoint(
 ) 
 ```
 
-我们为数据创建了一个批量请求，提供数据源名称，这将告诉GE使用特定的执行引擎，在我们的例子中是Pandas。我们创建一个检查点配置，然后将批量请求与检查点进行验证。如果期望适用于单个检查点中的批量数据，您可以添加多个批量请求。`run_checkpoint`方法以JSON格式返回结果，可以用于进一步处理或分析。
+我们为数据创建了一个批量请求，提供数据源名称，这将告诉 GE 使用特定的执行引擎，在我们的例子中是 Pandas。我们创建一个检查点配置，然后将批量请求与检查点进行验证。如果期望适用于单个检查点中的批量数据，您可以添加多个批量请求。`run_checkpoint`方法以 JSON 格式返回结果，可以用于进一步处理或分析。
 
 ## 结果
 
-一旦我们在数据集上运行了期望，GE会创建一个静态HTML仪表板，显示检查点的结果。结果包括评估期望的数量、成功的期望、不成功的期望和成功百分比。任何与给定期望不匹配的记录将在页面上突出显示。以下是成功执行的示例：
+一旦我们在数据集上运行了期望，GE 会创建一个静态 HTML 仪表板，显示检查点的结果。结果包括评估期望的数量、成功的期望、不成功的期望和成功百分比。任何与给定期望不匹配的记录将在页面上突出显示。以下是成功执行的示例：
 
-![用伟大期望克服数据质量问题](../Images/136ca963d99848386ae42f35bda3ad76.png)
+![用伟大期望克服数据质量问题](img/136ca963d99848386ae42f35bda3ad76.png)
 
 来源：伟大期望
 
 以下是一个失败期望的示例：
 
-![用伟大期望克服数据质量问题](../Images/49a6cbce10d75f5607a527c640139f56.png)
+![用伟大期望克服数据质量问题](img/49a6cbce10d75f5607a527c640139f56.png)
 
 来源：伟大期望
 
 # 结论
 
-我们已通过四个步骤设置了GE，并成功在给定数据集上运行了期望。GE具有更高级的功能，如编写自定义期望，我们将在未来的文章中介绍。许多组织广泛使用GE来定制客户需求并编写自定义期望。
+我们已通过四个步骤设置了 GE，并成功在给定数据集上运行了期望。GE 具有更高级的功能，如编写自定义期望，我们将在未来的文章中介绍。许多组织广泛使用 GE 来定制客户需求并编写自定义期望。
 
-**[Saisyam Dampuri](https://www.linkedin.com/in/saisyam/)** 拥有超过18年的软件开发经验，热衷于探索新技术和工具。他目前在美国德克萨斯州Anblicks担任高级云架构师。在不编程的时候，他会忙于摄影、烹饪和旅行。
+**[Saisyam Dampuri](https://www.linkedin.com/in/saisyam/)** 拥有超过 18 年的软件开发经验，热衷于探索新技术和工具。他目前在美国德克萨斯州 Anblicks 担任高级云架构师。在不编程的时候，他会忙于摄影、烹饪和旅行。
 
 ### 更多相关内容
 
 +   [数据质量维度：用伟大期望确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [10个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
-+   [数据科学职业：7个期望与现实](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
++   [数据科学职业：7 个期望与现实](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
 
 +   [数据科学：现实与期望](https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html)
 

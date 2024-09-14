@@ -1,8 +1,8 @@
 # Rust Burn 深度学习库
 
-> 原文：[https://www.kdnuggets.com/rust-burn-library-for-deep-learning](https://www.kdnuggets.com/rust-burn-library-for-deep-learning)
+> 原文：[`www.kdnuggets.com/rust-burn-library-for-deep-learning`](https://www.kdnuggets.com/rust-burn-library-for-deep-learning)
 
-![Rust Burn 深度学习库](../Images/c1baa8606090cc97a9227c30f8a99898.png)
+![Rust Burn 深度学习库](img/c1baa8606090cc97a9227c30f8a99898.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -54,7 +54,7 @@ Burn 是一个强大的深度学习框架，基于 Rust 编程语言。它需要
 
 使用官方 [指南](https://www.rust-lang.org/tools/install) 安装它。你也可以查看 [GeeksforGeeks](https://www.geeksforgeeks.org/how-to-install-rust-on-windows-and-linux-operating-system/) 提供的安装 Rust 的指南，其中包括 Windows 和 Linux 的截图。
 
-![Rust Burn 深度学习库](../Images/30a4b3cdacc98040e517fa063e7aec99.png)
+![Rust Burn 深度学习库](img/30a4b3cdacc98040e517fa063e7aec99.png)
 
 图片来源于 [安装 Rust](https://www.rust-lang.org/tools/install)
 
@@ -164,7 +164,7 @@ impl <b: backend="">PositionWiseFeedForward<B> {
 
 ## 示例项目
 
-要了解更多示例并运行它们，请克隆 [https://github.com/burn-rs/burn](https://github.com/burn-rs/burn) 仓库，并运行以下项目：
+要了解更多示例并运行它们，请克隆 [`github.com/burn-rs/burn`](https://github.com/burn-rs/burn) 仓库，并运行以下项目：
 
 +   [MNIST](https://github.com/burn-rs/burn/tree/main/examples/mnist)：在 CPU 或 GPU 上使用各种后端训练模型。
 
@@ -194,13 +194,13 @@ Rust Burn 代表了深度学习框架领域的一个激动人心的新选择。�
 
 ## 资源
 
-+   **文档：** [https://burn-rs.github.io/book/overview.html](https://burn-rs.github.io/book/overview.html)
++   **文档：** [`burn-rs.github.io/book/overview.html`](https://burn-rs.github.io/book/overview.html)
 
-+   **网站：** [https://burn-rs.github.io/](https://burn-rs.github.io/)
++   **网站：** [`burn-rs.github.io/`](https://burn-rs.github.io/)
 
-+   **GitHub：** [https://github.com/burn-rs/burn](https://github.com/burn-rs/burn)
++   **GitHub：** [`github.com/burn-rs/burn`](https://github.com/burn-rs/burn)
 
-+   **演示：** [https://burn-rs.github.io/demo](https://burn-rs.github.io/demo)
++   **演示：** [`burn-rs.github.io/demo`](https://burn-rs.github.io/demo)
 
 [](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专家，热爱构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，以帮助那些面临心理健康问题的学生。
 

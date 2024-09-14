@@ -1,8 +1,8 @@
 # ChatGPT 代码解释器：在几分钟内进行数据科学
 
-> 原文：[https://www.kdnuggets.com/2023/07/chatgpt-code-interpreter-data-science-minutes.html](https://www.kdnuggets.com/2023/07/chatgpt-code-interpreter-data-science-minutes.html)
+> 原文：[`www.kdnuggets.com/2023/07/chatgpt-code-interpreter-data-science-minutes.html`](https://www.kdnuggets.com/2023/07/chatgpt-code-interpreter-data-science-minutes.html)
 
-![ChatGPT 代码解释器：在几分钟内进行数据科学](../Images/2cefeb6ea7223a4a1b878193a4598000.png)
+![ChatGPT 代码解释器：在几分钟内进行数据科学](img/2cefeb6ea7223a4a1b878193a4598000.png)
 
 图片来自 Midjourney
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -46,13 +46,13 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 然后，选择设置：
 
-![ChatGPT 代码解释器：在几分钟内进行数据科学](../Images/981c000c06414b3b5303fe3d8d091100.png)
+![ChatGPT 代码解释器：在几分钟内进行数据科学](img/981c000c06414b3b5303fe3d8d091100.png)
 
 图片由作者提供
 
 点击“Beta 功能”，并启用标记为 Code Interpreter 的滑块：
 
-![ChatGPT 代码解释器：在几分钟内进行数据科学](../Images/b230614abd01dd10f800d3dce8af7439.png)
+![ChatGPT 代码解释器：在几分钟内进行数据科学](img/b230614abd01dd10f800d3dce8af7439.png)
 
 图片由作者提供
 
@@ -60,7 +60,7 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 你会看到一个看起来像这样的屏幕，文本框附近有一个“+”符号：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/4f07dace7dbf055ed1bc6ee6842d42e4.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/4f07dace7dbf055ed1bc6ee6842d42e4.png)
 
 图片来源于作者
 
@@ -80,7 +80,7 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 下载数据集并导航到代码解释器：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/189479dd0dddc6c12ee4fba9474c4265.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/189479dd0dddc6c12ee4fba9474c4265.png)
 
 图片来源于作者
 
@@ -88,7 +88,7 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 然后，要求 ChatGPT 用简单的术语解释这个文件中的所有变量：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/bc1d05a25e5fca54acd9cbf9bd38f572.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/bc1d05a25e5fca54acd9cbf9bd38f572.png)
 
 图片来源于作者
 
@@ -100,7 +100,7 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 现在我们对数据集中的不同变量有了理解，让我们要求代码解释器更进一步，进行一些 EDA。
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/513f77c01ff4807126eb33784a501fed.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/513f77c01ff4807126eb33784a501fed.png)
 
 图片来源于作者
 
@@ -108,7 +108,7 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 如果你点击“显示工作”下拉菜单，你会注意到代码解释器已经编写并运行了 Python 代码，以帮助我们实现最终结果：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/2409886d5747acd555067d83b6b6d102.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/2409886d5747acd555067d83b6b6d102.png)
 
 图片来源于作者
 
@@ -116,7 +116,7 @@ Code Interpreter 通过允许你将自己的数据集上传到 ChatGPT 界面来
 
 ChatGPT 还根据生成的可视化图提供了对数据集的一些见解：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/9ddce43c4af3617cc072eeeb6f08b06d.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/9ddce43c4af3617cc072eeeb6f08b06d.png)
 
 图片来源于作者
 
@@ -132,7 +132,7 @@ ChatGPT 还根据生成的可视化图提供了对数据集的一些见解：
 
 让我们请求代码解释器帮助我们预处理这个数据集：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/03ba50b01145025ad5700fa6fe345aad.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/03ba50b01145025ad5700fa6fe345aad.png)
 
 作者提供的图片
 
@@ -144,13 +144,13 @@ ChatGPT 还根据生成的可视化图提供了对数据集的一些见解：
 
 如果你想了解模型进行数据清理的步骤，可以点击“显示工作”：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/32e0ff275aa4ca8f99e12e211a47d3eb.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/32e0ff275aa4ca8f99e12e211a47d3eb.png)
 
 作者提供的图片
 
 然后，我问 ChatGPT 如何保存输出文件，它给了我一个可下载的 CSV 文件：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/06c0695d4268828f741f606d524139e9.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/06c0695d4268828f741f606d524139e9.png)
 
 作者提供的图片
 
@@ -162,15 +162,15 @@ ChatGPT 还根据生成的可视化图提供了对数据集的一些见解：
 
 最后，我请代码解释器使用预处理后的文件来构建一个机器学习模型，以预测一个人是否会在泰坦尼克号沉船事件中幸存：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/bee40ab73781a461ca8c2e7cf884745e.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/bee40ab73781a461ca8c2e7cf884745e.png)
 
 作者提供的图片
 
-它在不到一分钟的时间内建立了模型，并达到了83.2%的准确率。
+它在不到一分钟的时间内建立了模型，并达到了 83.2%的准确率。
 
 它还给我提供了一个混淆矩阵和分类报告，总结了模型的性能，并解释了所有指标的含义：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/8b661b02a6fbee79510cc8ceb4c4d496.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/8b661b02a6fbee79510cc8ceb4c4d496.png)
 
 作者提供的图片
 
@@ -178,7 +178,7 @@ ChatGPT 还根据生成的可视化图提供了对数据集的一些见解：
 
 我还想要一个它创建的机器学习模型的可下载文件，因为我们可以随时进行进一步的微调，并在其基础上进行训练：
 
-![ChatGPT 代码解释器：几分钟内完成数据科学](../Images/f1922e557735f5e2564fa25a527c8326.png)
+![ChatGPT 代码解释器：几分钟内完成数据科学](img/f1922e557735f5e2564fa25a527c8326.png)
 
 作者提供的图片
 
@@ -196,13 +196,13 @@ ChatGPT 还根据生成的可视化图提供了对数据集的一些见解：
 
 这里有一个例子：我上传了一个包含我几年前编写的代码的文件，用于构建一个 Python 仪表盘：
 
-![ChatGPT Code Interpreter: 在几分钟内进行数据科学](../Images/41d0326b7143a1d8f259acc7ae99d200.png)
+![ChatGPT Code Interpreter: 在几分钟内进行数据科学](img/41d0326b7143a1d8f259acc7ae99d200.png)
 
 图片来源：作者
 
 Code Interpreter 分解了我的代码，并清楚地概述了每个部分所做的工作。
 
-![ChatGPT Code Interpreter: 在几分钟内进行数据科学](../Images/4497a7f445f1d28ca80922f3660c513d.png)
+![ChatGPT Code Interpreter: 在几分钟内进行数据科学](img/4497a7f445f1d28ca80922f3660c513d.png)
 
 图片来源：作者
 
@@ -210,7 +210,7 @@ Code Interpreter 分解了我的代码，并清楚地概述了每个部分所做
 
 我没有自己做这些，而是简单地要求 Code Interpreter 重构代码并提供改进版：
 
-![ChatGPT Code Interpreter: 在几分钟内进行数据科学](../Images/1c01772c5113b9a886f78990d7ec4098.png)
+![ChatGPT Code Interpreter: 在几分钟内进行数据科学](img/1c01772c5113b9a886f78990d7ec4098.png)
 
 图片来源：作者
 

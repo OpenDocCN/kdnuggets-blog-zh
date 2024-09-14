@@ -1,12 +1,12 @@
 # 使用 Saturn Cloud 在 GPU 上超级充电 Python 和 Pandas
 
-> 原文：[https://www.kdnuggets.com/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html](https://www.kdnuggets.com/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html)
+> 原文：[`www.kdnuggets.com/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html`](https://www.kdnuggets.com/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html)
 
-[评论](#comments)
+评论
 
 **由 [Tyler Folkman](https://www.linkedin.com/in/tylerfolkman/)，BEN Group 人工智能负责人**
 
-![](../Images/a44c71944414a7fbdd262612be3e04cd.png)
+![](img/a44c71944414a7fbdd262612be3e04cd.png)
 
 由 [Guillaume Jaillet](https://unsplash.com/@i_am_g?utm_source=medium&utm_medium=referral) 提供的照片，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -18,9 +18,9 @@
 
 Pandas 库被数据科学家广泛使用，但事实是，它往往**相当慢**。如果数据处理速度慢，可能会导致项目的延迟。如果每次生成模型的新特征都需要 10 分钟，你会发现自己只是坐在那儿等待（或者做其他事情 :) ）。
 
-![](../Images/fcde395d5ecbc78a921a791600066ba8.png)
+![](img/fcde395d5ecbc78a921a791600066ba8.png)
 
-来源：[https://xkcd.com/303/](https://xkcd.com/303/)
+来源：[`xkcd.com/303/`](https://xkcd.com/303/)
 
 数据处理和模型训练的时间类似于程序员的编译时间。虽然你可能会因为处理时间长而享受一些数据处理的休息时间，但我想给你展示一种更好的方法。
 
@@ -32,7 +32,7 @@ Pandas 库被数据科学家广泛使用，但事实是，它往往**相当慢**
 
 为了让你跟随起来非常简单，我们将使用 [Saturn Cloud](https://www.google.com/url?q=https://www.saturncloud.io/s/freehosted/?utm_source%3DSuper%2520Charge%2520Python%2520with%2520Pandas%2520on%2520GPUs%2520using%2520Saturn%2520Cloud%26utm_medium%3Dsaturn%2520hosted%2520free&sa=D&source=editors&ust=1619151968592000&usg=AOvVaw2RRkUYh5nLiKYEOmrk-GvU)。
 
-![](../Images/a3cd3a8fd0a7862e0bde8a217014a150.png)
+![](img/a3cd3a8fd0a7862e0bde8a217014a150.png)
 
 来源：Saturn Cloud
 
@@ -48,7 +48,7 @@ Saturn Cloud 是一个非常流畅的平台，提供以下功能：
 
 当你在 Saturn 上启动一个项目时，你将获得两个非常重要的硬件：Jupyter 服务器和 Dask 集群。
 
-![](../Images/287800c914b3167103281790882ad50f.png)
+![](img/287800c914b3167103281790882ad50f.png)
 
 来源：Saturn Cloud
 
@@ -90,7 +90,7 @@ Data columns (total 18 columns):
  15  improvement_surcharge  float64       
  16  total_amount           float64       
  17  congestion_surcharge   float64       
-dtypes: datetime64[ns](2), float64(9), int64(6), object(1)
+dtypes: datetime64ns, float64(9), int64(6), object(1)
 memory usage: 1.0+ GB
 ```
 
@@ -226,42 +226,42 @@ import dask_cudftaxi_dc = dask_cudf.read_csv(
 
 如果你有更大的数据，这些等待时间只会更长。
 
-所以，自己去尝试一下吧。我认为当你在GPU上运行时，12毫秒甚至43毫秒相比于超过159,000秒的感觉会让你惊讶。
+所以，自己去尝试一下吧。我认为当你在 GPU 上运行时，12 毫秒甚至 43 毫秒相比于超过 159,000 秒的感觉会让你惊讶。
 
 此外，感谢[Saturn Cloud](https://www.google.com/url?q=https://www.saturncloud.io/s/freehosted/?utm_source%3DSuper%2520Charge%2520Python%2520with%2520Pandas%2520on%2520GPUs%2520using%2520Saturn%2520Cloud%26utm_medium%3Dsaturn%2520hosted%2520free&sa=D&source=editors&ust=1619151968594000&usg=AOvVaw2JCPkeMfcMZKVLdtIsbtjm)与我合作撰写这篇文章！这是我第一次深入了解这个平台，真的让我印象深刻。
 
-**简介: [Tyler Folkman](https://www.linkedin.com/in/tylerfolkman/)** 是BEN Group的人工智能主管。他的工作探索了机器学习在颠覆和转变娱乐与营销行业中的应用。Tyler在实体解析和从非结构化数据中提取知识方面获得了多项专利。
+**简介: [Tyler Folkman](https://www.linkedin.com/in/tylerfolkman/)** 是 BEN Group 的人工智能主管。他的工作探索了机器学习在颠覆和转变娱乐与营销行业中的应用。Tyler 在实体解析和从非结构化数据中提取知识方面获得了多项专利。
 
 **相关内容:**
 
-+   [将Python的Explode函数应用于Pandas DataFrames](/2021/05/applying-pythons-explode-function-pandas-dataframes.html)
++   将 Python 的 Explode 函数应用于 Pandas DataFrames
 
-+   [如何通过Modin加速Pandas](/2021/03/speed-up-pandas-modin.html)
++   如何通过 Modin 加速 Pandas
 
-+   [云中的ETL：利用数据仓库自动化转型大数据分析](/2021/04/etl-cloud-transforming-big-data-analytics-data-warehouse-automation.html)
++   云中的 ETL：利用数据仓库自动化转型大数据分析
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [掌握GPU：Python中GPU加速DataFrames的初学者指南](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)
++   [掌握 GPU：Python 中 GPU 加速 DataFrames 的初学者指南](https://www.kdnuggets.com/2023/07/mastering-gpus-beginners-guide-gpu-accelerated-dataframes-python.html)
 
-+   [在Python中利用CuPy发挥GPU的力量](https://www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python)
++   [在 Python 中利用 CuPy 发挥 GPU 的力量](https://www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python)
 
-+   [从Google Colab到Ploomber管道：使用GPU的规模化ML](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)
++   [从 Google Colab 到 Ploomber 管道：使用 GPU 的规模化 ML](https://www.kdnuggets.com/2022/03/google-colab-ploomber-pipeline-ml-scale-gpus.html)
 
 +   [云原生超级计算](https://www.kdnuggets.com/2022/03/nvidia-cloud-native-super-computing.html)
 
-+   [迁移到AWS云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
-+   [7个超级备忘单，助你在机器学习面试中取得成功](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
++   [7 个超级备忘单，助你在机器学习面试中取得成功](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)

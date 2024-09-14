@@ -1,8 +1,8 @@
 # 在进行机器学习和数据科学时常见的错误
 
-> 原文：[https://www.kdnuggets.com/2018/12/common-mistakes-data-science.html](https://www.kdnuggets.com/2018/12/common-mistakes-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/12/common-mistakes-data-science.html`](https://www.kdnuggets.com/2018/12/common-mistakes-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Jekaterina Kokatjuhha](https://www.linkedin.com/in/jekaterina-kokatjuhha/)，Zalando 公司的研究工程师撰写。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -44,13 +44,13 @@
 
 在租金的背景下，我绘制了每个连续特征的直方图，并预计租金（不含账单）和总面积的分布会有较长的右尾。
 
-![](../Images/c89bc5e86afd341fed4b789799b00190.png)
+![](img/c89bc5e86afd341fed4b789799b00190.png)
 
 **连续特征的直方图**
 
-箱线图帮助我查看了每个特征的异常值数量。实际上，大多数基于租金（不含账单）的异常公寓要么是面积超过200m²的小商铺要么是租金非常低的学生宿舍。
+箱线图帮助我查看了每个特征的异常值数量。实际上，大多数基于租金（不含账单）的异常公寓要么是面积超过 200m²的小商铺要么是租金非常低的学生宿舍。
 
-![](../Images/404bdbb751bfd3f901a5b02fdb627afd.png)
+![](img/404bdbb751bfd3f901a5b02fdb627afd.png)
 
 **连续特征的箱线图**
 
@@ -92,11 +92,11 @@
 
 #### 4\. 我需要对变量进行标准化吗？
 
-标准化将所有连续变量缩放到相同的范围，这意味着如果一个变量的值从1K到1M，而另一个变量的值从0.1到1，标准化后它们将具有相同的范围。
+标准化将所有连续变量缩放到相同的范围，这意味着如果一个变量的值从 1K 到 1M，而另一个变量的值从 0.1 到 1，标准化后它们将具有相同的范围。
 
-[L1或L2正则化](https://towardsdatascience.com/l1-and-l2-regularization-methods-ce25e7fc831c)是减少[过拟合](https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/)的常见方法，可以在许多回归算法中使用。然而，在应用L1或L2之前进行特征标准化是很重要的。
+[L1 或 L2 正则化](https://towardsdatascience.com/l1-and-l2-regularization-methods-ce25e7fc831c)是减少[过拟合](https://machinelearningmastery.com/overfitting-and-underfitting-with-machine-learning-algorithms/)的常见方法，可以在许多回归算法中使用。然而，在应用 L1 或 L2 之前进行特征标准化是很重要的。
 
-租金以欧元为单位，因此拟合的系数会比价格以分为单位时的拟合系数大约大100倍。L1和L2会对较大的系数施加更多惩罚，这意味着它会对较小尺度的特征施加更多惩罚。为了避免这种情况，特征应该在应用L1或L2之前进行标准化。
+租金以欧元为单位，因此拟合的系数会比价格以分为单位时的拟合系数大约大 100 倍。L1 和 L2 会对较大的系数施加更多惩罚，这意味着它会对较小尺度的特征施加更多惩罚。为了避免这种情况，特征应该在应用 L1 或 L2 之前进行标准化。
 
 标准化的另一个原因是，如果你或你的算法使用梯度下降，梯度下降在特征缩放的情况下会收敛得更快。
 
@@ -114,11 +114,11 @@
 
 在回归中，首先[关注残差图](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/)和指标。有时，对目标变量进行对数变换会得到更好的模型，模型的结果仍然容易理解。然而，还有其他的变换可能也值得关注，比如取平方根。
 
-关于这个问题在Stack Overflow上有很多答案，我认为[残差图和原始与对数目标变量的RMSE](https://stats.stackexchange.com/questions/319880/non-linear-regression-residual-plots-and-rmse-on-raw-and-log-target-variable)解释得非常好。
+关于这个问题在 Stack Overflow 上有很多答案，我认为[残差图和原始与对数目标变量的 RMSE](https://stats.stackexchange.com/questions/319880/non-linear-regression-residual-plots-and-rmse-on-raw-and-log-target-variable)解释得非常好。
 
 对于租赁数据，我对价格进行了对数变换，因为残差图看起来好一点。
 
-![](../Images/fe1f5cc65c6786934dee94174e02a61f.png)
+![](img/fe1f5cc65c6786934dee94174e02a61f.png)
 
 **对数的残差图（左）和未变换数据（右）不包括账单变量的租金。右侧的图展示了“异方差性”——残差随着预测从小到大而变大。**
 
@@ -132,11 +132,11 @@
 
 在你熟悉数据并清理了异常值之后，是时候掌握机器学习了。你可以使用许多算法进行这种监督式机器学习。
 
-我想探索三种不同的算法，比较它们的特性，如性能差异和速度。这三种算法分别是不同实现的梯度提升树（XGBoost和LightGBM）、随机森林（FR，scikit-learn）和3层神经网络（NN，Tensorflow）。我选择了RMSLE（均方根对数误差）作为过程优化的指标。我使用RMSLE是因为我对目标变量进行了对数转换。
+我想探索三种不同的算法，比较它们的特性，如性能差异和速度。这三种算法分别是不同实现的梯度提升树（XGBoost 和 LightGBM）、随机森林（FR，scikit-learn）和 3 层神经网络（NN，Tensorflow）。我选择了 RMSLE（均方根对数误差）作为过程优化的指标。我使用 RMSLE 是因为我对目标变量进行了对数转换。
 
-XGBoost和LightGBM表现相当，RF稍差，而NN表现最差。
+XGBoost 和 LightGBM 表现相当，RF 稍差，而 NN 表现最差。
 
-![](../Images/baa8f77c7d797cc5f8898e8441cd8cf0.png)
+![](img/baa8f77c7d797cc5f8898e8441cd8cf0.png)
 
 **算法在测试集上的表现（RMSLE）。**
 
@@ -150,27 +150,27 @@ XGBoost和LightGBM表现相当，RF稍差，而NN表现最差。
 
 特征重要性可以揭示关于主要价格驱动因素的其他见解。
 
-对于租金价格预测来说，总面积是价格最重要的驱动因素也不足为奇。有趣的是，一些通过外部API工程化的特征也在最重要的特征之列。
+对于租金价格预测来说，总面积是价格最重要的驱动因素也不足为奇。有趣的是，一些通过外部 API 工程化的特征也在最重要的特征之列。
 
-![](../Images/818ee95c8e2f3873c5cbbad1f9d44e12.png)
+![](img/818ee95c8e2f3873c5cbbad1f9d44e12.png)
 
 **通过分割（上图）和增益（下图）计算的特征重要性**
 
-然而，如在[《可解释的机器学习与XGBoost》](https://towardsdatascience.com/interpretable-machine-learning-with-xgboost-9ec80d148d27)中提到的，根据归因选项，特征重要性可能会存在不一致。链接博客的作者和SHAP NIPS论文提出了一种新的特征重要性计算方法，该方法既准确又一致。它使用了[shap Python库](https://github.com/slundberg/shap)。SHAP值表示特征对模型输出变化的责任。
+然而，如在[《可解释的机器学习与 XGBoost》](https://towardsdatascience.com/interpretable-machine-learning-with-xgboost-9ec80d148d27)中提到的，根据归因选项，特征重要性可能会存在不一致。链接博客的作者和 SHAP NIPS 论文提出了一种新的特征重要性计算方法，该方法既准确又一致。它使用了[shap Python 库](https://github.com/slundberg/shap)。SHAP 值表示特征对模型输出变化的责任。
 
 租赁价格数据分析的结果见下图。
 
-![](../Images/ba1d5ac0a74b69d880a8d7afc3cd0aae.png)
+![](img/ba1d5ac0a74b69d880a8d7afc3cd0aae.png)
 
-**每个公寓在每一行上都有一个点。点的x位置表示该特征对模型预测的影响，点的颜色表示该特征对公寓的值**
+**每个公寓在每一行上都有一个点。点的 x 位置表示该特征对模型预测的影响，点的颜色表示该特征对公寓的值**
 
-该图包含了大量有价值的信息（特征按均值排序（|Tree SHAP|））。小说明：数据来自2018年初；地区可能会有所变化，因此价格相关因素也可能会变化。
+该图包含了大量有价值的信息（特征按均值排序（|Tree SHAP|））。小说明：数据来自 2018 年初；地区可能会有所变化，因此价格相关因素也可能会变化。
 
-+   离市中心的距离（开车到U-Bahn Stadtmitte的公里数以及乘火车到S-Bahn Friedrichstrasse的时间）会提高预测的租赁公寓价格。
++   离市中心的距离（开车到 U-Bahn Stadtmitte 的公里数以及乘火车到 S-Bahn Friedrichstrasse 的时间）会提高预测的租赁公寓价格。
 
 +   总面积是租赁价格最重要的驱动因素。
 
-+   如果公寓所有者要求你提供低收入证明（德语中的WBS），则预测价格较低。
++   如果公寓所有者要求你提供低收入证明（德语中的 WBS），则预测价格较低。
 
 +   在这些区域租赁公寓也会提高租金价格：Mitte, Prenzlauer Berg, Wilmersdorf, Charlottenburg, Zehlendorf 和 Friedrichshain。
 
@@ -182,7 +182,7 @@ XGBoost和LightGBM表现相当，RF稍差，而NN表现最差。
 
 +   到最近地铁站的时间
 
-+   1公里范围内的车站数量。
++   1 公里范围内的车站数量。
 
 **到最近地铁站的时间：**
 
@@ -190,7 +190,7 @@ XGBoost和LightGBM表现相当，RF稍差，而NN表现最差。
 
 还可以看到，靠近地铁站有两种效果：对某些公寓，它会降低**和**提高价格。原因可能是距离地铁站非常近的公寓也会受到地下噪音或列车震动的影响，但另一方面，这些公寓与公共交通连接良好。然而，仍需深入研究这一特征，因为它仅显示了距离最近的地铁站的距离，而不是电车/公交车站。
 
-**1公里范围内的车站数量：**
+**1 公里范围内的车站数量：**
 
 对于距离公寓一公里以内的车站数量也是如此。一般来说，附近的地铁站越多，租金价格会越高。然而，它也有负面影响——更多的噪声。
 
@@ -198,19 +198,19 @@ XGBoost和LightGBM表现相当，RF稍差，而NN表现最差。
 
 在尝试不同模型并比较性能之后，你可以将每个模型的结果进行组合并构建一个集成模型！
 
-Bagging是一种机器学习集成模型，它利用多个算法的预测来计算最终的聚合预测。它旨在防止过拟合并减少算法的方差。
+Bagging 是一种机器学习集成模型，它利用多个算法的预测来计算最终的聚合预测。它旨在防止过拟合并减少算法的方差。
 
-![](../Images/b0acefa672b5eefe0d69f4a84bc74bd4.png)
+![](img/b0acefa672b5eefe0d69f4a84bc74bd4.png)
 
 **使用集成模型的优点：红色模型在左下角的表现更好，而蓝色模型在右上角的表现更好。通过结合这两个模型的预测，可以提升整体性能。图取自 [这里。](https://burakhimmetoglu.com/2016/12/01/stacking-models-for-improved-predictions/)** 
 
-由于我已经有了上述算法的预测，我将所有四个模型以所有可能的方式进行组合，并根据验证集的RMSLE选择了七个最佳的单模型和集成模型。
+由于我已经有了上述算法的预测，我将所有四个模型以所有可能的方式进行组合，并根据验证集的 RMSLE 选择了七个最佳的单模型和集成模型。
 
-然后计算了这七个模型在测试集上的RMSLE。
+然后计算了这七个模型在测试集上的 RMSLE。
 
-![](../Images/54e522617bfcb8d870e87a119d1cebbc.png)
+![](img/54e522617bfcb8d870e87a119d1cebbc.png)
 
-**算法的测试RMSLE。**
+**算法的测试 RMSLE。**
 
 三种基于决策树的算法的集成效果最好，相较于每个单一模型。
 
@@ -224,9 +224,9 @@ Bagging是一种机器学习集成模型，它利用多个算法的预测来计�
 
 堆叠模型的理念是创建多个基础模型，并在基础模型的结果之上构建一个元模型，以产生最终预测。然而，训练元模型并不那么明显，因为它可能会偏向于最好的基础模型。关于如何正确进行堆叠的一个很好的解释可以在帖子 [“堆叠模型以改进预测”](https://burakhimmetoglu.com/2016/12/01/stacking-models-for-improved-predictions/) 中找到。
 
-对于租金价格的情况，堆叠模型并没有改善RMSLE——它们甚至增加了指标。这可能有几个原因——要么是我编码有误 ;) 要么就是堆叠引入了过多噪声。
+对于租金价格的情况，堆叠模型并没有改善 RMSLE——它们甚至增加了指标。这可能有几个原因——要么是我编码有误 ;) 要么就是堆叠引入了过多噪声。
 
-如果你想探索更多关于集成和堆叠模型的文章，[Kaggle 集成指南](https://mlwave.com/kaggle-ensembling-guide/) 解释了多种不同类型的集成，包括性能比较和如何让这些堆叠模型在Kaggle竞赛中名列前茅的参考资料。
+如果你想探索更多关于集成和堆叠模型的文章，[Kaggle 集成指南](https://mlwave.com/kaggle-ensembling-guide/) 解释了多种不同类型的集成，包括性能比较和如何让这些堆叠模型在 Kaggle 竞赛中名列前茅的参考资料。
 
 ### **最终思考**
 
@@ -242,11 +242,11 @@ Bagging是一种机器学习集成模型，它利用多个算法的预测来计�
 
 图表来源：
 
-[https://www.pinterest.de/minimalcouture/paris-apartments/](https://www.pinterest.de/minimalcouture/paris-apartments/)
+[`www.pinterest.de/minimalcouture/paris-apartments/`](https://www.pinterest.de/minimalcouture/paris-apartments/)
 
-[https://www.theodysseyonline.com/the-struggles-of-moving-into-your-first-apartment](https://www.theodysseyonline.com/the-struggles-of-moving-into-your-first-apartment)
+[`www.theodysseyonline.com/the-struggles-of-moving-into-your-first-apartment`](https://www.theodysseyonline.com/the-struggles-of-moving-into-your-first-apartment)
 
-[https://www.fashionbeans.com/content/the-worlds-10-smallest-apartments-are-downright-shocking/](https://www.fashionbeans.com/content/the-worlds-10-smallest-apartments-are-downright-shocking/)
+[`www.fashionbeans.com/content/the-worlds-10-smallest-apartments-are-downright-shocking/`](https://www.fashionbeans.com/content/the-worlds-10-smallest-apartments-are-downright-shocking/)
 
 **个人简介**：[耶卡特琳娜·科卡修哈](https://www.linkedin.com/in/jekaterina-kokatjuhha/) 是 Zalando 的研究工程师，专注于可扩展的机器学习用于欺诈预测。
 
@@ -262,17 +262,17 @@ Bagging是一种机器学习集成模型，它利用多个算法的预测来计�
 
 +   [雇主希望看到的数据科学项目：如何展示业务影响](https://www.kdnuggets.com/2018/12/data-science-projects-business-impact.html)
 
-+   [导致糟糕数据可视化的5个常见错误](https://www.kdnuggets.com/2017/10/5-common-mistakes-bad-data-visualization.html)
++   [导致糟糕数据可视化的 5 个常见错误](https://www.kdnuggets.com/2017/10/5-common-mistakes-bad-data-visualization.html)
 
-+   [采纳高级分析时要避免的10个错误](https://www.kdnuggets.com/2018/07/tdwi-10-mistakes-avoid-advanced-analytics.html)
++   [采纳高级分析时要避免的 10 个错误](https://www.kdnuggets.com/2018/07/tdwi-10-mistakes-avoid-advanced-analytics.html)
 
 ### 更多相关主题
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

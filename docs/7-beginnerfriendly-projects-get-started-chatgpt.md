@@ -1,56 +1,56 @@
-# 7个初学者友好的项目，帮助你开始使用ChatGPT
+# 7 个初学者友好的项目，帮助你开始使用 ChatGPT
 
-> 原文：[https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html](https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html)
+> 原文：[`www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html`](https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html)
 
-![7个初学者友好的项目，帮助你开始使用ChatGPT](../Images/7368bde7008965c5e33018cf6ba23ebe.png)
+![7 个初学者友好的项目，帮助你开始使用 ChatGPT](img/7368bde7008965c5e33018cf6ba23ebe.png)
 
 作者提供的图像
 
-在技术以空前速度发展的时代，**人工智能？——还是朋友们称之为AI 🤓，作为最具变革性的力量之一脱颖而出。**
+在技术以空前速度发展的时代，**人工智能？——还是朋友们称之为 AI 🤓，作为最具变革性的力量之一脱颖而出。**
 
-从自动化日常任务到预测复杂模式，AI正在重塑行业并重新定义可能性。
+从自动化日常任务到预测复杂模式，AI 正在重塑行业并重新定义可能性。
 
-随着我们站在这场AI革命的前沿，**理解其潜力并将其融入我们的日常工作流中是至关重要的。**
+随着我们站在这场 AI 革命的前沿，**理解其潜力并将其融入我们的日常工作流中是至关重要的。**
 
 *然而……我知道开始使用这些新技术可能会令人感到不知所措。*
 
-所以，如果你在考虑如何开始使用AI，特别是像ChatGPT这样的模型……
+所以，如果你在考虑如何开始使用 AI，特别是像 ChatGPT 这样的模型……
 
-**今天我带来了一套7个项目，以从零开始学习如何处理这些项目。**
+**今天我带来了一套 7 个项目，以从零开始学习如何处理这些项目。**
 
 让我们一起探索这些项目吧！ 👇🏻
 
-# 1\. 使用OpenAI API生成语言翻译器
+# 1\. 使用 OpenAI API 生成语言翻译器
 
-LLMs展示了广泛的应用场景。而最有用的——也是最容易应用的——正是它将任何语言翻译成另一种语言的能力。
+LLMs 展示了广泛的应用场景。而最有用的——也是最容易应用的——正是它将任何语言翻译成另一种语言的能力。
 
-在教程[*使用OpenAI ChatGPT构建多语言翻译工具*](https://medium.com/@kaushaltrivedi/building-a-multilingual-translation-tool-with-openai-chatgpt-api-84922c971e95) *API* 中，由[Kaushal Trivedi](https://medium.com/@kaushaltrivedi)指导读者使用OpenAI的gpt-3.5-turbo模型通过API创建AI驱动的翻译应用程序。
+在教程[*使用 OpenAI ChatGPT 构建多语言翻译工具*](https://medium.com/@kaushaltrivedi/building-a-multilingual-translation-tool-with-openai-chatgpt-api-84922c971e95) *API* 中，由[Kaushal Trivedi](https://medium.com/@kaushaltrivedi)指导读者使用 OpenAI 的 gpt-3.5-turbo 模型通过 API 创建 AI 驱动的翻译应用程序。
 
-![7个初学者友好的项目，帮助你开始使用ChatGPT](../Images/ebfb347a8705347050d13b09d5f3f23f.png)
+![7 个初学者友好的项目，帮助你开始使用 ChatGPT](img/ebfb347a8705347050d13b09d5f3f23f.png)
 
 教程的截图。
 
 过程包括以下步骤：
 
-1.  设置OpenAI API凭证。
+1.  设置 OpenAI API 凭证。
 
-1.  使用Python和OpenAI API定义翻译功能。
+1.  使用 Python 和 OpenAI API 定义翻译功能。
 
 1.  测试功能。
 
-1.  使用Python的Tkinter库创建用户界面。
+1.  使用 Python 的 Tkinter 库创建用户界面。
 
 1.  测试用户界面。
 
-> 关键的课程是GPT-3.5 Chat API在构建强大的AI工具中的潜力。在这个案例中，用于创建一个翻译工具。
+> 关键的课程是 GPT-3.5 Chat API 在构建强大的 AI 工具中的潜力。在这个案例中，用于创建一个翻译工具。
 
-# 2\. 使用ChatGPT构建一个用于你业务的情感分析AI系统
+# 2\. 使用 ChatGPT 构建一个用于你业务的情感分析 AI 系统
 
-LLM的另一个常见应用是处理大量文本。想象一下你经营一家电商，每天收到成千上万的评论？——你可以利用AI驱动的工具来处理这些评论。
+LLM 的另一个常见应用是处理大量文本。想象一下你经营一家电商，每天收到成千上万的评论？——你可以利用 AI 驱动的工具来处理这些评论。
 
 这正是 [Courtlin Holt-Nguyen](https://medium.com/@courtlinholt?source=user_profile-------------------------------------) 在他的教程 [*Sentiment Analysis with ChatGPT, OpenAI, and Python?—?Use ChatGPT to build a sentiment analysis AI system for your business*](https://medium.com/data-and-beyond/sentiment-analysis-with-chatgpt-openai-and-python-use-chatgpt-to-build-a-sentiment-analysis-ai-2b89158a37f6)*.* 中展示的内容。他在 Google Colab 上完成了整个教程，并试图强调 ChatGPT 在处理各种 NLP 任务中的多功能性、结构化数据在有效分析中的重要性，以及 ChatGPT 理解和解释其回应的能力。
 
-![7 个适合初学者的 ChatGPT 入门项目](../Images/b1a252d545f591c085e677d561d6ebe5.png)
+![7 个适合初学者的 ChatGPT 入门项目](img/b1a252d545f591c085e677d561d6ebe5.png)
 
 教程截图。
 
@@ -68,9 +68,9 @@ ChatGPT 强大的 AI 能力可以用于全面的情感分析、摘要生成以�
 
 # 3\. LangChain 和 OpenAI 的基本使用
 
-上个月我写了一篇易于理解的 LangChain 基础介绍文章，标题为 [*Transforming AI with LangChain: A Text Data Game Changer*](/2023/08/transforming-ai-langchain-text-data-game-changer.html)，这是一个旨在最大限度发挥大型语言模型在文本数据处理潜力的 Python 库。
+上个月我写了一篇易于理解的 LangChain 基础介绍文章，标题为 *Transforming AI with LangChain: A Text Data Game Changer*，这是一个旨在最大限度发挥大型语言模型在文本数据处理潜力的 Python 库。
 
-![7 个适合初学者的 ChatGPT 入门项目](../Images/100373f2e4a7445f1ba3cdcb5951bf10.png)
+![7 个适合初学者的 ChatGPT 入门项目](img/100373f2e4a7445f1ba3cdcb5951bf10.png)
 
 教程截图
 
@@ -96,7 +96,7 @@ LangChain 处理大文本数据的多功能性及其提供结构化输出的能�
 
 在前一篇教程的基础上，还有一篇更高级的文章，讲解如何导入 PDF 并使用 OpenAI 的 GPT 模型与其交互。
 
-![7 个适合初学者的 ChatGPT 入门项目](../Images/77f374ed6157e051690b96dc1b84d50c.png)
+![7 个适合初学者的 ChatGPT 入门项目](img/77f374ed6157e051690b96dc1b84d50c.png)
 
 教程截图。
 
@@ -116,7 +116,7 @@ LangChain 处理大文本数据的多功能性及其提供结构化输出的能�
 
 [Reo Ogusu](https://hashnode.com/@Oggreo) 带来了一个易于跟随的项目，通过使用 OpenAI API 和 LangChain 来完成一个简历解析器。在教程 [*使用 GPT 将非结构化文档转换为标准化格式：构建简历解析器*](https://seeai.hashnode.dev/transforming-unstructured-documents-to-standardized-formats-with-gpt-building-a-resume-parser) 中，他演示了如何使用 GPT 将非结构化文档，特别是简历，转换为标准化的 YAML 格式。
 
-![7 个适合初学者的项目，让你快速上手 ChatGPT](../Images/15b8758279b35747ff4938eb70654413.png)
+![7 个适合初学者的项目，让你快速上手 ChatGPT](img/15b8758279b35747ff4938eb70654413.png)
 
 教程截图
 
@@ -138,7 +138,7 @@ GPT 证明了它在将非结构化数据转换为结构化格式方面的强大�
 
 它集成了 LangChain AI 的 ConversationChain 记忆模块，并具备 Streamlit 前端。
 
-![7 个适合初学者的项目，让你快速上手 ChatGPT](../Images/ed32db2293a8cb42d6c13db3b12d606b.png)
+![7 个适合初学者的项目，让你快速上手 ChatGPT](img/ed32db2293a8cb42d6c13db3b12d606b.png)
 
 教程截图。
 
@@ -160,7 +160,7 @@ GPT 证明了它在将非结构化数据转换为结构化格式方面的强大�
 
 一个完全功能的贷款审批分类网页应用！
 
-![7 个适合初学者的 ChatGPT 项目](../Images/a9cf867b21d2b6e21c5a6f776c9fe0c4.png)
+![7 个适合初学者的 ChatGPT 项目](img/a9cf867b21d2b6e21c5a6f776c9fe0c4.png)
 
 教程截图。
 

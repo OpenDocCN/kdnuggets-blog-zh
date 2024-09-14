@@ -1,8 +1,8 @@
 # 6 个 YouTube 频道学习 AI
 
-> 原文：[https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai](https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai)
+> 原文：[`www.kdnuggets.com/6-youtube-channels-to-learn-about-ai`](https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai)
 
-![6 个 YouTube 频道学习 AI](../Images/dd2b6d7c503af68ca90574dd0af7e95f.png)
+![6 个 YouTube 频道学习 AI](img/dd2b6d7c503af68ca90574dd0af7e95f.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 链接: [Matt Wolfe YouTube 频道](https://www.youtube.com/@mreflow/featured)
 
-目前有214个视频，Matt Wolfe 是一位科技狂热者，他所做的就是谈论科技。如果你想了解 AI，了解该领域的最新动态，注意哪些问题以及 AI 的未来——请查看 Matt Wolfe 的 YouTube 频道。他的视频将讨论 AI 领域的新闻，同时也会评测工具和产品——为你节省了大量的工作。了解 ChatGPT、AI 音乐、生成艺术以及更多无代码和未来主义概念的教程。
+目前有 214 个视频，Matt Wolfe 是一位科技狂热者，他所做的就是谈论科技。如果你想了解 AI，了解该领域的最新动态，注意哪些问题以及 AI 的未来——请查看 Matt Wolfe 的 YouTube 频道。他的视频将讨论 AI 领域的新闻，同时也会评测工具和产品——为你节省了大量的工作。了解 ChatGPT、AI 音乐、生成艺术以及更多无代码和未来主义概念的教程。
 
 # AI 解释
 
@@ -78,12 +78,12 @@ DeepLearning.AI 平台由 Andrew Ng 于 2017 年创立，已经成为最快增�
 
 +   [学习数据科学的顶级 YouTube 频道](https://www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html)
 
-+   [KDnuggets 新闻 22:n16, 4月 20: 顶级学习 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20: 顶级学习 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
 
-+   [提升机器学习技能的15个YouTube频道](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
++   [提升机器学习技能的 15 个 YouTube 频道](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
 
-+   [数据分析的7个YouTube课程](https://www.kdnuggets.com/2022/02/top-7-youtube-courses-data-analytics.html)
++   [数据分析的 7 个 YouTube 课程](https://www.kdnuggets.com/2022/02/top-7-youtube-courses-data-analytics.html)
 
-+   [来自大学的AI最佳课程及其YouTube播放列表](https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html)
++   [来自大学的 AI 最佳课程及其 YouTube 播放列表](https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html)
 
-+   [数据科学初学者的6大YouTube系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)
++   [数据科学初学者的 6 大 YouTube 系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)

@@ -1,6 +1,6 @@
 # Pinecone 向量数据库全面指南
 
-> 原文：[https://www.kdnuggets.com/a-comprehensive-guide-to-pinecone-vector-databases](https://www.kdnuggets.com/a-comprehensive-guide-to-pinecone-vector-databases)
+> 原文：[`www.kdnuggets.com/a-comprehensive-guide-to-pinecone-vector-databases`](https://www.kdnuggets.com/a-comprehensive-guide-to-pinecone-vector-databases)
 
 向量数据库是一种将数据存储为数学向量的数据库类型，这些向量表示特征或属性。这些向量具有多个维度，捕捉复杂的数据关系。这使得相似性和距离计算变得高效，非常适用于机器学习、数据分析和推荐系统等任务。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -88,7 +88,7 @@ Pinecone 向量数据库是一种专为高性能和可扩展性设计的向量�
 
 # Pinecone 向量数据库如何工作？
 
-![Pinecone 向量数据库如何工作？](../Images/7f721d8a58032ffbf85e79293cd80944.png)
+![Pinecone 向量数据库如何工作？](img/7f721d8a58032ffbf85e79293cd80944.png)
 
 来源：[Pinecone.io](https://www.pinecone.io/)
 
@@ -122,20 +122,20 @@ Pinecone 向量数据库可以以多种方式使用。一些最常见的使用�
 
 # 结论
 
-向量数据库和大型语言模型（LLMs）之间的共生关系正在推动数据管理的演变，提供更快速和更精确的相似性搜索，这对语言理解和生成至关重要。随着向量数据库和LLMs的重要性持续上升，它们正在重塑以AI驱动的应用的格局，确保高效处理和利用大量数据。
+向量数据库和大型语言模型（LLMs）之间的共生关系正在推动数据管理的演变，提供更快速和更精确的相似性搜索，这对语言理解和生成至关重要。随着向量数据库和 LLMs 的重要性持续上升，它们正在重塑以 AI 驱动的应用的格局，确保高效处理和利用大量数据。
 
-**[Ayesha Saleem](https://www.linkedin.com/in/ayesha-saleem-6347ba120/)** 对品牌的改造充满热情，擅长有意义的内容写作、文案撰写、电子邮件营销、SEO写作、社交媒体营销和创意写作。
+**[Ayesha Saleem](https://www.linkedin.com/in/ayesha-saleem-6347ba120/)** 对品牌的改造充满热情，擅长有意义的内容写作、文案撰写、电子邮件营销、SEO 写作、社交媒体营销和创意写作。
 
 ### 更多相关话题
 
-+   [Python 向量数据库和向量索引：LLM应用架构](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
++   [Python 向量数据库和向量索引：LLM 应用架构](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
 
-+   [AI和LLM使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
++   [AI 和 LLM 使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 
 +   [使用向量数据库的语义搜索](https://www.kdnuggets.com/semantic-search-with-vector-databases)
 
-+   [什么是向量数据库，它们为何对LLMs重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
++   [什么是向量数据库，它们为何对 LLMs 重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
 
 +   [开源向量数据库的诚实比较](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)
 
-+   [2024年你必须尝试的5款最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
++   [2024 年你必须尝试的 5 款最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)

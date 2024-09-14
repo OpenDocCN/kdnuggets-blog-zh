@@ -1,8 +1,8 @@
 # 克服实际场景中的数据不平衡挑战
 
-> 原文：[https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
+> 原文：[`www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html`](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
 
-[对流行NLP架构的性能进行基准测试](https://medium.com/toloka/choosing-the-best-architecture-for-your-text-classification-task-aee30ecc7870)是建立对可用选项的理解的重要步骤，尤其是在处理文本分类任务时。在这里，我们将深入探讨与分类相关的最常见挑战之一——数据不平衡。如果你曾经将机器学习应用于实际的分类数据集，你可能对此已经很熟悉了。
+[对流行 NLP 架构的性能进行基准测试](https://medium.com/toloka/choosing-the-best-architecture-for-your-text-classification-task-aee30ecc7870)是建立对可用选项的理解的重要步骤，尤其是在处理文本分类任务时。在这里，我们将深入探讨与分类相关的最常见挑战之一——数据不平衡。如果你曾经将机器学习应用于实际的分类数据集，你可能对此已经很熟悉了。
 
 # 理解数据分类中的不平衡
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,35 +24,35 @@
 
 不平衡是需要纠正的问题吗？不平衡是数据的一种特征，一个好的问题是我们是否真的想对其采取措施。有一些技巧可以让模型的训练过程更容易。我们可能会选择操控训练过程或数据本身，以便让模型知道哪些类别对我们特别重要，但这应该由业务需求或领域知识来证明。此外，我们将更详细地讨论这些技巧和操控。
 
-为了说明不同技术处理数据不平衡的效果，我们将使用 [sms-spam数据集](https://huggingface.co/datasets/sms_spam)，该数据集包含747条垃圾短信和4827条正常短信。尽管只有两个类别，为了更好地进行泛化，我们将把任务视为多类别分类问题。我们将使用一个roberta-base模型。
+为了说明不同技术处理数据不平衡的效果，我们将使用 [sms-spam 数据集](https://huggingface.co/datasets/sms_spam)，该数据集包含 747 条垃圾短信和 4827 条正常短信。尽管只有两个类别，为了更好地进行泛化，我们将把任务视为多类别分类问题。我们将使用一个 roberta-base 模型。
 
 请记住，这些技术在其他数据上可能会产生不同的结果。必须在特定的数据集上测试它们。
 
 在没有任何调整的情况下训练分类模型，我们得到以下分类报告：
 
-![克服现实世界场景中的数据不平衡挑战](../Images/79020d6580675475b1916c21e334e3ee.png)
+![克服现实世界场景中的数据不平衡挑战](img/79020d6580675475b1916c21e334e3ee.png)
 
 # “安全”技巧
 
 ## 偏差初始化
 
-我们的第一个技巧是让模型从一开始就了解数据分布。我们可以通过相应地初始化最终分类层的偏差来传播这一知识。这个技巧由Andrej Karpathy在他的[神经网络训练配方](http://karpathy.github.io/2019/04/25/recipe/#2-set-up-the-end-to-end-trainingevaluation-skeleton--get-dumb-baselines:~:text=Huber%20losses%2C%20etc.-,init%20well.,-Initialize%20the%20final)中分享，有助于模型以知情的视角开始。在我们的多类分类情况下，我们使用softmax作为最终激活函数，我们希望模型在初始化时的输出能反映数据分布。为此，我们解决以下问题：
+我们的第一个技巧是让模型从一开始就了解数据分布。我们可以通过相应地初始化最终分类层的偏差来传播这一知识。这个技巧由 Andrej Karpathy 在他的[神经网络训练配方](http://karpathy.github.io/2019/04/25/recipe/#2-set-up-the-end-to-end-trainingevaluation-skeleton--get-dumb-baselines:~:text=Huber%20losses%2C%20etc.-,init%20well.,-Initialize%20the%20final)中分享，有助于模型以知情的视角开始。在我们的多类分类情况下，我们使用 softmax 作为最终激活函数，我们希望模型在初始化时的输出能反映数据分布。为此，我们解决以下问题：
 
-![克服现实世界场景中的数据不平衡挑战](../Images/047441b41d2b1e96d5543b45cadaddd1.png)
+![克服现实世界场景中的数据不平衡挑战](img/047441b41d2b1e96d5543b45cadaddd1.png)
 
 提醒一下，
 
-![克服现实世界场景中的数据不平衡挑战](../Images/0394c3ffea500602567116e3d9a4de22.png)
+![克服现实世界场景中的数据不平衡挑战](img/0394c3ffea500602567116e3d9a4de22.png)
 
 然后，
 
-![克服现实世界场景中的数据不平衡挑战](../Images/4f386998077203fee0b782e6c6e87439.png)
+![克服现实世界场景中的数据不平衡挑战](img/4f386998077203fee0b782e6c6e87439.png)
 
-这里b0和b1分别是负类和正类的偏差，neg和pos分别是负类和正类的元素数量。
+这里 b0 和 b1 分别是负类和正类的偏差，neg 和 pos 分别是负类和正类的元素数量。
 
 通过这种初始化，所有指标都显著改善！
 
-![克服现实世界场景中的数据不平衡挑战](../Images/3f32a9519358882e24e8e8e1f58228d2.png)
+![克服现实世界场景中的数据不平衡挑战](img/3f32a9519358882e24e8e8e1f58228d2.png)
 
 在贝叶斯术语中，这意味着手动设置先验，并允许模型在训练过程中学习后验。
 
@@ -62,11 +62,11 @@
 
 下采样和上权重结果：
 
-![克服现实世界场景中的数据不平衡挑战](../Images/f89a3ccfad21b66f32e349bdd7e26b2a.png)
+![克服现实世界场景中的数据不平衡挑战](img/f89a3ccfad21b66f32e349bdd7e26b2a.png)
 
 上采样和下权重结果：
 
-![克服现实世界场景中的数据不平衡挑战](../Images/b9ddea52726eab417d23743750d7b76f.png)
+![克服现实世界场景中的数据不平衡挑战](img/b9ddea52726eab417d23743750d7b76f.png)
 
 在这两种情况下，“spam”的召回率下降，可能是因为“ham”的权重是“spam”权重的两倍。
 
@@ -74,7 +74,7 @@
 
 [焦点损失](https://arxiv.org/abs/1708.02002)，作者称之为“动态缩放交叉熵损失”，旨在解决数据不平衡的训练问题。它仅适用于二分类情况，幸运的是，我们的问题涉及的仅是两个类别。请查看下面的公式：
 
-![克服实际场景中的数据不平衡挑战](../Images/f541faebe8f65f1d0245d0de3b4d179c.png)
+![克服实际场景中的数据不平衡挑战](img/f541faebe8f65f1d0245d0de3b4d179c.png)
 
 在公式中，p 是真实类别的概率，ɑ 是加权因子，???? 控制我们根据置信度（概率）惩罚损失的程度。
 
@@ -84,7 +84,7 @@
 
 这是我们使用焦点损失获得的最佳结果：
 
-![克服实际场景中的数据不平衡挑战](../Images/4f827a4571b5948bc548fafb379766eb.png)
+![克服实际场景中的数据不平衡挑战](img/4f827a4571b5948bc548fafb379766eb.png)
 
 所有指标都优于基线，但这需要一些参数调整。请记住，它可能并不总是这样顺利地运行。
 
@@ -96,7 +96,7 @@
 
 权重调整涉及为不同类别的样本分配独特的损失权重。这是一种有效且灵活的方法，因为它允许你向模型指示每个类别的重要性。以下是单个训练示例的多类别加权交叉熵损失公式：
 
-![克服实际场景中的数据不平衡挑战](../Images/26904682178d588a75974c820dd6ea0f.png)
+![克服实际场景中的数据不平衡挑战](img/26904682178d588a75974c820dd6ea0f.png)
 
 ,
 
@@ -104,7 +104,7 @@
 
 确定权重的一个好的默认方法是逆类别频率：
 
-![克服实际场景中的数据不平衡挑战](../Images/d68b23447b3c0049ce9d936597099229.png)
+![克服实际场景中的数据不平衡挑战](img/d68b23447b3c0049ce9d936597099229.png)
 
 其中 N 是数据集的总项数，c 是类别数，ni 是第 i 类的元素数量。
 
@@ -112,7 +112,7 @@
 
 以下是使用这些权重获得的指标：
 
-![克服实际场景中的数据不平衡挑战](../Images/1624abdd000c9df45a5630adf55edfe3.png)
+![克服实际场景中的数据不平衡挑战](img/1624abdd000c9df45a5630adf55edfe3.png)
 
 指标超越了基线场景。虽然这种情况可能发生，但并不总是如此。
 
@@ -120,7 +120,7 @@
 
 结果如下：
 
-![克服现实场景中的数据不平衡挑战](../Images/f709fec76da64b7700183f80cee337f2.png)
+![克服现实场景中的数据不平衡挑战](img/f709fec76da64b7700183f80cee337f2.png)
 
 正如预期的那样，“垃圾邮件”的召回率增加了，但精确率下降了。与使用逆类频率权重相比，F1 分数变差了。这表明基本损失加权的潜力。即使对于平衡的数据，加权也可能有利于召回关键类别。
 
@@ -132,7 +132,7 @@
 
 我们将使用一个明显看起来像垃圾邮件的例子来评估各种模型版本的信心：“*请致电索取您的奖品！*”请查看下表以获取结果。
 
-![克服现实场景中的数据不平衡挑战](../Images/51f6239982928f5fbaa4023bad1d6c66.png)
+![克服现实场景中的数据不平衡挑战](img/51f6239982928f5fbaa4023bad1d6c66.png)
 
 正如预期的那样，加权模型显示出过度自信，而“下采样 + 上加权”模型则表现出不足自信（由于上加权的“正常邮件”），与基线相比。值得注意的是，偏差初始化增加和焦点损失减少了模型在“垃圾邮件”类别中的信心。
 
@@ -156,8 +156,8 @@
 
 +   [探索小数据场景中迁移学习的潜力](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
-+   [处理不平衡数据的7种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
++   [处理不平衡数据的 7 种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
 
 +   [在类不平衡数据集中进行无监督的解缠表示学习…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)

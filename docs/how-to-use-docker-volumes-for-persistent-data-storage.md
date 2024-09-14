@@ -1,8 +1,8 @@
 # 如何使用 Docker 卷进行持久数据存储
 
-> 原文：[https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)
+> 原文：[`www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage`](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)
 
-![如何使用 Docker 卷进行持久数据存储](../Images/77e40aefad5bc5fdb7a05f51fb881cf8.png)
+![如何使用 Docker 卷进行持久数据存储](img/77e40aefad5bc5fdb7a05f51fb881cf8.png)
 
 使用 Docker 时，你可以使用卷来持久保存数据，即使你停止或重启容器。我们将为 PostgreSQL 创建和使用 Docker 卷。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -55,7 +55,7 @@ $ docker run -d \
 	postgres
 ```
 
-这个命令在分离模式下运行`my_postgres`。使用 -**v pg_data:/var/lib/postgresql/data** 将`pg_data`卷挂载到容器中的**/var/lib/postgresql/data**。并且使用**-p 5432:5432**将`my_postgres`的5432端口映射到主机上的5432端口。
+这个命令在分离模式下运行`my_postgres`。使用 -**v pg_data:/var/lib/postgresql/data** 将`pg_data`卷挂载到容器中的**/var/lib/postgresql/data**。并且使用**-p 5432:5432**将`my_postgres`的 5432 端口映射到主机上的 5432 端口。
 
 ## 步骤 4：验证卷使用情况
 

@@ -1,8 +1,8 @@
 # 使用 NumPy Linalg 范数的向量和矩阵范数
 
-> 原文：[https://www.kdnuggets.com/2023/05/vector-matrix-norms-numpy-linalg-norm.html](https://www.kdnuggets.com/2023/05/vector-matrix-norms-numpy-linalg-norm.html)
+> 原文：[`www.kdnuggets.com/2023/05/vector-matrix-norms-numpy-linalg-norm.html`](https://www.kdnuggets.com/2023/05/vector-matrix-norms-numpy-linalg-norm.html)
 
-![使用 NumPy Linalg 范数的向量和矩阵范数](../Images/7358f625af3da5057e3573b28316189d.png)
+![使用 NumPy Linalg 范数的向量和矩阵范数](img/7358f625af3da5057e3573b28316189d.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 在本讨论中，我们将首先查看向量范数。稍后我们会讨论矩阵范数。从数学上讲，范数是一个从 n 维向量空间到实数集合的函数（或映射）：
 
-![使用 NumPy Linalg 范数的向量和矩阵范数](../Images/5711822e157bdce711d26c52e5b9c19f.png)
+![使用 NumPy Linalg 范数的向量和矩阵范数](img/5711822e157bdce711d26c52e5b9c19f.png)
 
 > **注意**：范数也可以定义在复数向量空间上，**C^n → R** 也是一种有效的范数定义。但在本讨论中，我们将限制在实数向量空间。
 
@@ -46,9 +46,9 @@
 
 # 常见的向量范数：L1、L2 和 L∞ 范数
 
-一般来说，n维向量**x** = (x1,x2,x3,...,xn)的Lp范数（或p-范数）对于p >= 0定义为：
+一般来说，n 维向量**x** = (x1,x2,x3,...,xn)的 Lp 范数（或 p-范数）对于 p >= 0 定义为：
 
-![使用 NumPy Linalg Norm 的向量和矩阵范数](../Images/949698ab0104ea8f6bd3bbf5d3c5be9c.png)
+![使用 NumPy Linalg Norm 的向量和矩阵范数](img/949698ab0104ea8f6bd3bbf5d3c5be9c.png)
 
 让我们来看看常见的向量范数，即 L1、L2 和 L∞ 范数。
 
@@ -56,19 +56,19 @@
 
 L1 范数等于向量中所有元素绝对值的总和：
 
-![使用 NumPy Linalg Norm 的向量和矩阵范数](../Images/334e1ceeaed5cb565d25ead443da73aa.png)
+![使用 NumPy Linalg Norm 的向量和矩阵范数](img/334e1ceeaed5cb565d25ead443da73aa.png)
 
 ## L2 范数
 
 将 p =2 代入一般的 Lp 范数方程，我们得到向量的 L2 范数的以下表达式：
 
-![使用 NumPy Linalg Norm 的向量和矩阵范数](../Images/d072dbf3fd7da9f6804c893cc25d497c.png)
+![使用 NumPy Linalg Norm 的向量和矩阵范数](img/d072dbf3fd7da9f6804c893cc25d497c.png)
 
 ## L∞ 范数
 
 对于给定的向量 **x**，L∞ 范数是 **x** 元素 *绝对* 值中的 **最大值**：
 
-![使用 NumPy Linalg Norm 的向量和矩阵范数](../Images/db19cf650980003b693f8bcb9f0018ae.png)
+![使用 NumPy Linalg Norm 的向量和矩阵范数](img/db19cf650980003b693f8bcb9f0018ae.png)
 
 验证这些范数是否满足前面列出的范数属性是相当简单的。
 
@@ -193,7 +193,7 @@ Output >> l0_norm = 3.0
 
 到目前为止，我们已经看到如何计算向量范数。就像你可以将向量范数视为从 n 维向量空间到实数集合的映射一样，矩阵范数是从 m x n 矩阵空间到实数集合的映射。数学上，你可以表示为：
 
-![NumPy Linalg Norm 的向量和矩阵范数](../Images/b90c3f12b0aaa8fe9441d83fe3429480.png)
+![NumPy Linalg Norm 的向量和矩阵范数](img/b90c3f12b0aaa8fe9441d83fe3429480.png)
 
 常见的矩阵范数包括 Frobenius 范数和核范数。
 
@@ -201,7 +201,7 @@ Output >> l0_norm = 3.0
 
 对于一个 m x n 的矩阵 A，其中 m 行 n 列，Frobenius 范数由下式给出：
 
-![NumPy Linalg Norm 的向量和矩阵范数](../Images/4f935b1f8583c4049e446e54a978b487.png)
+![NumPy Linalg Norm 的向量和矩阵范数](img/4f935b1f8583c4049e446e54a978b487.png)
 
 ## 核范数
 
@@ -209,7 +209,7 @@ Output >> l0_norm = 3.0
 
 SVD 将输入矩阵分解为一个左奇异向量矩阵（U）、一个奇异值矩阵（S）和一个右奇异向量矩阵（V_T）。而核范数是矩阵的最大奇异值。
 
-![NumPy Linalg Norm 的向量和矩阵范数](../Images/65222385d97e70b2b4f9310c4fb704c1.png)
+![NumPy Linalg Norm 的向量和矩阵范数](img/65222385d97e70b2b4f9310c4fb704c1.png)
 
 # 如何在 NumPy 中计算矩阵范数
 
@@ -277,7 +277,7 @@ Output >> nuc_norm = 10.28
 
 `axis = 0` 表示矩阵的行。如果设置 `axis = 0`，则计算矩阵的 L1 范数是 **跨行**（或沿列）进行的，如下所示：
 
-![NumPy Linalg Norm 的向量和矩阵范数](../Images/6c64acb724eb702509298b4bb66ac0fc.png)
+![NumPy Linalg Norm 的向量和矩阵范数](img/6c64acb724eb702509298b4bb66ac0fc.png)
 
 图片由作者提供
 
@@ -296,7 +296,7 @@ Output >> matrix_1_norm = array([5., 7., 9.])
 
 `axis = 1` 表示矩阵的列。因此，通过设置 `axis = 1` 计算矩阵的 L1 范数是 **跨列**（沿行）进行的。
 
-![NumPy Linalg Norm 的向量和矩阵范数](../Images/ba423c79ba54c08deb408fe0fc13979f.png)
+![NumPy Linalg Norm 的向量和矩阵范数](img/ba423c79ba54c08deb408fe0fc13979f.png)
 
 图片由作者提供
 
@@ -327,6 +327,6 @@ Output >> matrix_1_norm = array([ 6., 15.])
 
 +   [混淆矩阵、精度和召回率解析](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)
 
-+   [KDnuggets 新闻，11月16日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
 +   [AI 和 LLM 使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)

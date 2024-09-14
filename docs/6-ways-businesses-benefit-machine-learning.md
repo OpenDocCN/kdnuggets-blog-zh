@@ -1,8 +1,8 @@
 # 企业如何从机器学习中受益的 6 种方式
 
-> 原文：[https://www.kdnuggets.com/2022/08/6-ways-businesses-benefit-machine-learning.html](https://www.kdnuggets.com/2022/08/6-ways-businesses-benefit-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/08/6-ways-businesses-benefit-machine-learning.html`](https://www.kdnuggets.com/2022/08/6-ways-businesses-benefit-machine-learning.html)
 
-![企业如何从机器学习中受益的 6 种方式](../Images/4b7a7d8a1745c73338b77a1c3a277550.png)
+![企业如何从机器学习中受益的 6 种方式](img/4b7a7d8a1745c73338b77a1c3a277550.png)
 
 图片由 [Clay Banks](https://unsplash.com/@claybanks?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/businesses?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -18,11 +18,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -88,19 +88,19 @@
 
 计算机学习模型通过将其置于类似游戏的环境中进行训练，以作出决策。计算机通过试错来解决问题。为了使计算机执行程序员指定的操作，它会收到正面和负面的反馈。为了最大化奖励，计算机必须进行一系列随机尝试，然后再做决定。最有效的方法是使用强化学习。
 
-# 机器学习的前6大商业利益
+# 机器学习的前 6 大商业利益
 
 ## 1\. 实时聊天代理
 
 对话界面，例如聊天机器人，是自动化的早期例子之一，因为它们通过允许用户提问并接收回答来实现人机互动。在聊天机器人早期，机器人根据预定义的规则进行特定行为的编程。
 
-聊天机器人在预测和响应用户需求方面变得越来越出色，并且表现得更像人类。随着人工智能的机器学习和自然语言处理（NLP）的加入，聊天机器人有潜力变得更加互动和高效。机器学习算法支持像Siri、Google Assistant和Amazon Alexa这样的数字助手，这项技术可能会被用于替代传统的聊天机器人，在新的客户服务和互动平台中发挥作用。
+聊天机器人在预测和响应用户需求方面变得越来越出色，并且表现得更像人类。随着人工智能的机器学习和自然语言处理（NLP）的加入，聊天机器人有潜力变得更加互动和高效。机器学习算法支持像 Siri、Google Assistant 和 Amazon Alexa 这样的数字助手，这项技术可能会被用于替代传统的聊天机器人，在新的客户服务和互动平台中发挥作用。
 
 聊天机器人是工作场所中最受欢迎的机器学习应用之一。以下是一些获得好评的聊天机器人示例：
 
 +   IBM 宣称其 Watson Assistant 是一种“快速、简单的解决方案”机器，该机器旨在确定何时需要进一步的信息以及何时应将请求升级到人工处理。
 
-+   使用音乐流媒体服务的Facebook Messenger机器人来听音乐、搜索音乐和分享音乐。
++   使用音乐流媒体服务的 Facebook Messenger 机器人来听音乐、搜索音乐和分享音乐。
 
 +   通过聊天平台或电话提供骑手的车牌号和车型，以便他们能够找到自己的交通工具。
 
@@ -120,7 +120,7 @@
 
 ## 5\. 市场研究和客户细分
 
-公司可以利用机器学习软件提供的预测库存规划和消费者细分能力，帮助制定价格，并在适当的时间将合适的产品和服务送到正确的地方。UST Global的首席架构师Adnan Masood，以及人工智能和机器学习专家，解释了零售商如何利用机器学习根据季节性因素、该地区的人口统计数据和其他数据点预测哪些商品在其位置上最畅销。
+公司可以利用机器学习软件提供的预测库存规划和消费者细分能力，帮助制定价格，并在适当的时间将合适的产品和服务送到正确的地方。UST Global 的首席架构师 Adnan Masood，以及人工智能和机器学习专家，解释了零售商如何利用机器学习根据季节性因素、该地区的人口统计数据和其他数据点预测哪些商品在其位置上最畅销。
 
 机器学习应用可以分析客户的购买习惯，使零售商能够更好地服务客户，通过在商店中储备更有可能被这些客户购买的产品（例如相似年龄、收入或教育水平的客户所购买的产品）。
 
@@ -150,17 +150,17 @@
 
 尽管安装机器学习（ML）可能耗时且昂贵，[人工智能开发公司](https://www.neoito.com/ai-development-company/)愿意接受这一挑战，因为它相对于任何其他分析工具提供了自然且显著的优势。
 
-**[Rajalekshmy KR](https://www.linkedin.com/in/rajalekshmy-kr)** 是一名SEO内容专家，供职于[NeoITO](https://www.neoito.com/)，这是一家位于美国的可靠网站开发公司。她总是寻求来自技术创始人、产品负责人和商业策略师的反馈，以撰写对她的读者有价值的内容。
+**[Rajalekshmy KR](https://www.linkedin.com/in/rajalekshmy-kr)** 是一名 SEO 内容专家，供职于[NeoITO](https://www.neoito.com/)，这是一家位于美国的可靠网站开发公司。她总是寻求来自技术创始人、产品负责人和商业策略师的反馈，以撰写对她的读者有价值的内容。
 
 ### 了解更多相关话题
 
 +   [机器学习如何有利于在线学习](https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html)
 
-+   [AI驱动的RPA和IA对企业的意义](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)
++   [AI 驱动的 RPA 和 IA 对企业的意义](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)
 
-+   [5种你可以利用ChatGPT的代码解释器进行数据科学的方法](https://www.kdnuggets.com/2023/08/5-ways-chatgpt-code-interpreter-data-science.html)
++   [5 种你可以利用 ChatGPT 的代码解释器进行数据科学的方法](https://www.kdnuggets.com/2023/08/5-ways-chatgpt-code-interpreter-data-science.html)
 
-+   [5种你可以利用ChatGPT视觉进行数据分析的方法](https://www.kdnuggets.com/5-ways-you-can-use-chatgpt-vision-for-data-analysis)
++   [5 种你可以利用 ChatGPT 视觉进行数据分析的方法](https://www.kdnuggets.com/5-ways-you-can-use-chatgpt-vision-for-data-analysis)
 
 +   [数据：企业最有价值的商品](https://www.kdnuggets.com/2022/03/data-valuable-commodity-businesses.html)
 

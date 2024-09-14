@@ -1,8 +1,8 @@
 # 机器学习中的预处理重要性
 
-> 原文：[https://www.kdnuggets.com/2023/02/importance-preprocessing-machine-learning.html](https://www.kdnuggets.com/2023/02/importance-preprocessing-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2023/02/importance-preprocessing-machine-learning.html`](https://www.kdnuggets.com/2023/02/importance-preprocessing-machine-learning.html)
 
-![机器学习中预处理的重要性](../Images/51bbbce6173821c391abc769ce351c28.png)
+![机器学习中预处理的重要性](img/51bbbce6173821c391abc769ce351c28.png)
 
 由 [DeepMind](https://unsplash.com/@deepmind?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供的照片，来自 [Unsplash](https://unsplash.com/photos/rXy5Zlmw3qY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在组织的 IT。
 
 * * *
 
@@ -131,9 +131,9 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 我们然后使用四分位距 (IQR) 方法检查异常值，该方法计算第一四分位数和第三四分位数之间的差异。任何超出 1.5 倍 IQR 的数据点都被认为是异常值，并从数据集中移除。
 
-在处理了缺失值、重复行和异常值之后，我们使用来自sklearn.preprocessing库的StandardScaler函数对数据进行缩放。缩放数据很重要，因为它有助于确保所有变量都在相同的尺度上，这对于大多数机器学习算法正常运行是必要的。
+在处理了缺失值、重复行和异常值之后，我们使用来自 sklearn.preprocessing 库的 StandardScaler 函数对数据进行缩放。缩放数据很重要，因为它有助于确保所有变量都在相同的尺度上，这对于大多数机器学习算法正常运行是必要的。
 
-最后，我们使用来自sklearn.model_selection库的train_test_split函数将数据分成训练集和测试集。这个步骤对于评估模型在未见数据上的表现是必要的。
+最后，我们使用来自 sklearn.model_selection 库的 train_test_split 函数将数据分成训练集和测试集。这个步骤对于评估模型在未见数据上的表现是必要的。
 
 # 如果我忽略了这一步会怎样？
 
@@ -155,13 +155,13 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 总之，在将数据应用于机器学习算法之前进行预处理是机器学习工作流中的一个关键步骤。它有助于提高准确性，减少训练模型所需的时间和资源，防止过拟合，并提高模型的可解释性。
 
-上述代码示例演示了如何使用流行的Python库Pandas进行数据预处理，但还有许多其他库可用于数据预处理，例如NumPy和Scikit-learn，可以根据项目的具体需求进行使用。
+上述代码示例演示了如何使用流行的 Python 库 Pandas 进行数据预处理，但还有许多其他库可用于数据预处理，例如 NumPy 和 Scikit-learn，可以根据项目的具体需求进行使用。
 
-**[Sumit Singh](https://www.linkedin.com/in/sumit-singh-68b07a25/)** 是一位致力于数据中心人工智能的连续创业者。他共同创立了下一代训练数据平台[Labellerr](https://www.labellerr.com)。Labellerr的平台使AI-ML团队能够轻松自动化他们的数据准备流程。
+**[Sumit Singh](https://www.linkedin.com/in/sumit-singh-68b07a25/)** 是一位致力于数据中心人工智能的连续创业者。他共同创立了下一代训练数据平台[Labellerr](https://www.labellerr.com)。Labellerr 的平台使 AI-ML 团队能够轻松自动化他们的数据准备流程。
 
 ### 更多相关主题
 
-+   [机器学习不像你的大脑 第6部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
 +   [机器学习中可重复性的重要性](https://www.kdnuggets.com/2023/06/importance-reproducibility-machine-learning.html)
 

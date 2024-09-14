@@ -1,8 +1,8 @@
 # 数据科学中你应该了解的 7 个 SQL 概念
 
-> 原文：[https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html](https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html`](https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html)
 
-![你应该了解的 7 个 SQL 概念](../Images/184746f937e157a2a5362420e31a7325.png)
+![你应该了解的 7 个 SQL 概念](img/184746f937e157a2a5362420e31a7325.png)
 
 编辑提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -144,9 +144,9 @@ WHERE AGE IN
 
 ## 4) 连接
 
-SQL连接用于根据表之间的逻辑关系组合多个表中的行。以下列出了4种SQL连接类型：
+SQL 连接用于根据表之间的逻辑关系组合多个表中的行。以下列出了 4 种 SQL 连接类型：
 
-+   **内连接**：内连接仅显示两个表中满足给定条件的行。在集合术语中，它可以被视为交集。![7 SQL Concepts You Should Know For Data Science](../Images/353f4ae304e4f1ffbdad35966db409a8.png)
++   **内连接**：内连接仅显示两个表中满足给定条件的行。在集合术语中，它可以被视为交集。![7 SQL Concepts You Should Know For Data Science](img/353f4ae304e4f1ffbdad35966db409a8.png)
 
 ```py
 SELECT Student.Name
@@ -154,9 +154,9 @@ FROM Student
 INNER JOIN Sports ON Student.ID = Sports.ID;
 ```
 
-它返回那些已注册参加体育活动的学生。注意：体育ID与学生的注册ID相同。
+它返回那些已注册参加体育活动的学生。注意：体育 ID 与学生的注册 ID 相同。
 
-+   **左连接**：它返回LEFT表中的所有记录，而右表中仅显示匹配的记录。![7 SQL Concepts You Should Know For Data Science](../Images/87f10f0ca92cdd6ffb46cd6f3d5ba1f6.png)
++   **左连接**：它返回 LEFT 表中的所有记录，而右表中仅显示匹配的记录。![7 SQL Concepts You Should Know For Data Science](img/87f10f0ca92cdd6ffb46cd6f3d5ba1f6.png)
 
 ```py
 SELECT Student.Name
@@ -164,7 +164,7 @@ FROM Student
 LEFT JOIN Sports ON Student.ID = Sports.ID;
 ```
 
-+   **右连接**：它与左连接的作用正好相反。![7 SQL Concepts You Should Know For Data Science](../Images/4944ef7dac0a63a8eadbd350896d0cb7.png)
++   **右连接**：它与左连接的作用正好相反。![7 SQL Concepts You Should Know For Data Science](img/4944ef7dac0a63a8eadbd350896d0cb7.png)
 
 ```py
 SELECT Student.Name
@@ -172,7 +172,7 @@ FROM Student
 RIGHT JOIN Sports ON Student.ID = Sports.ID;
 ```
 
-+   **全外连接**：它包含了两个表中的所有行，如果没有对应的匹配项，则显示为NULL值。![7 SQL Concepts You Should Know For Data Science](../Images/9678706ff9db213a3437d3beba754ec5.png)
++   **全外连接**：它包含了两个表中的所有行，如果没有对应的匹配项，则显示为 NULL 值。![7 SQL Concepts You Should Know For Data Science](img/9678706ff9db213a3437d3beba754ec5.png)
 
 ```py
 SELECT Student.Name
@@ -182,7 +182,7 @@ FULL JOIN Sports ON Student.ID = Sports.ID;
 
 ## 5) 存储过程
 
-存储过程允许我们在数据库中存储多个SQL语句以便后续使用。它支持重用，并且在调用时还可以接受参数值。它提高了性能，并且修改起来更加容易。
+存储过程允许我们在数据库中存储多个 SQL 语句以便后续使用。它支持重用，并且在调用时还可以接受参数值。它提高了性能，并且修改起来更加容易。
 
 ```py
 CREATE PROCEDURE SelectStudents @Major nvarchar(30),
@@ -196,11 +196,11 @@ EXEC SelectStudents @Major = 'Data Science',
                     @Grade = 'A';
 ```
 
-这个过程允许我们根据学生的成绩提取不同专业的学生。例如，我们试图提取所有在数据科学专业中获得A等级的学生。请注意，CREATE PROCEDURE类似于函数声明，需要通过EXEC调用以进行执行。
+这个过程允许我们根据学生的成绩提取不同专业的学生。例如，我们试图提取所有在数据科学专业中获得 A 等级的学生。请注意，CREATE PROCEDURE 类似于函数声明，需要通过 EXEC 调用以进行执行。
 
 ## 6) 字符串格式化
 
-我们都知道，原始数据需要清洗，以提高整体生产力，从而做出更高质量的决策。在这个背景下，字符串格式化发挥了重要作用，它涉及到操作字符串以去除无关的内容。SQL提供了广泛的字符串函数来转换和处理字符串。其中最常用的5个如下：
+我们都知道，原始数据需要清洗，以提高整体生产力，从而做出更高质量的决策。在这个背景下，字符串格式化发挥了重要作用，它涉及到操作字符串以去除无关的内容。SQL 提供了广泛的字符串函数来转换和处理字符串。其中最常用的 5 个如下：
 
 +   **CONCAT:** 用于将两个或更多字符串连接在一起。
 
@@ -218,9 +218,9 @@ SELECT student_name,admission_date,
 FROM Students 
 ```
 
-日期列将会从admission_date中单独提取出来。
+日期列将会从 admission_date 中单独提取出来。
 
-+   **TRIM:** trim的主要功能是去除字符串开头、结尾或两者的字符（如果指定的话）。你必须指定开头、结尾或两者，然后是要移除的字符，再跟上要移除的字符串。
++   **TRIM:** trim 的主要功能是去除字符串开头、结尾或两者的字符（如果指定的话）。你必须指定开头、结尾或两者，然后是要移除的字符，再跟上要移除的字符串。
 
 ```py
 SELECT age,
@@ -307,8 +307,8 @@ FROM Products;
 
 +   [那些不那么性感的 SQL 概念让你脱颖而出](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [数据科学面试中你应该了解的五大 SQL 窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)

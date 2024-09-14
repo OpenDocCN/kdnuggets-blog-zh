@@ -1,36 +1,36 @@
 # 欺诈检测系统简介
 
-> 原文：[https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html](https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html)
+> 原文：[`www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html`](https://www.kdnuggets.com/2018/08/introduction-fraud-detection-systems.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[米格尔·冈萨雷斯-费罗](https://www.linkedin.com/in/miguelgfierro/)，微软**。
 
-欺诈检测是银行和金融机构的首要任务之一，可以通过机器学习来解决。根据[a report published by Nilson](https://nilsonreport.com/upload/content_promo/The_Nilson_Report_Issue_1118.pdf)，2017年全球因卡片欺诈案件造成的损失达到228亿美元。预计这一问题在未来几年将进一步恶化，到2021年，卡片欺诈的损失预计将达到329.6亿美元。
+欺诈检测是银行和金融机构的首要任务之一，可以通过机器学习来解决。根据[a report published by Nilson](https://nilsonreport.com/upload/content_promo/The_Nilson_Report_Issue_1118.pdf)，2017 年全球因卡片欺诈案件造成的损失达到 228 亿美元。预计这一问题在未来几年将进一步恶化，到 2021 年，卡片欺诈的损失预计将达到 329.6 亿美元。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
-在本教程中，我们将使用[Kaggle上的信用卡欺诈检测数据集](https://www.kaggle.com/mlg-ulb/creditcardfraud)来识别欺诈案例。我们将使用[梯度提升树](https://blogs.technet.microsoft.com/machinelearning/2017/07/25/lessons-learned-benchmarking-fast-machine-learning-algorithms/)作为机器学习算法。最后，我们将创建一个简单的API来使模型投入实际使用。
+在本教程中，我们将使用[Kaggle 上的信用卡欺诈检测数据集](https://www.kaggle.com/mlg-ulb/creditcardfraud)来识别欺诈案例。我们将使用[梯度提升树](https://blogs.technet.microsoft.com/machinelearning/2017/07/25/lessons-learned-benchmarking-fast-machine-learning-algorithms/)作为机器学习算法。最后，我们将创建一个简单的 API 来使模型投入实际使用。
 
-我们将使用梯度提升库[LightGBM](https://github.com/Microsoft/LightGBM)，它最近已成为[Kaggle竞赛](https://github.com/Microsoft/LightGBM/tree/a39c848e6456d473d2043dff3f5159945a36b567/examples)顶级参与者中最受欢迎的库之一。
+我们将使用梯度提升库[LightGBM](https://github.com/Microsoft/LightGBM)，它最近已成为[Kaggle 竞赛](https://github.com/Microsoft/LightGBM/tree/a39c848e6456d473d2043dff3f5159945a36b567/examples)顶级参与者中最受欢迎的库之一。
 
 欺诈检测问题以极其不平衡而著称。[Boosting](https://en.wikipedia.org/wiki/Boosting_(machine_learning)) 是一种通常适用于这类数据集的技术。它通过迭代创建弱分类器（决策树），加权实例以提高性能。在第一个子集中，训练和测试一个弱分类器，在所有训练数据上测试表现差的实例权重被提高，以便在下一个数据子集中出现更多。最终，所有分类器都通过加权平均其预测结果进行集成。
 
-在LightGBM中，有一个[参数](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst#objective-parameters)叫做`is_unbalanced`，可以自动帮助你控制这个问题。
+在 LightGBM 中，有一个[参数](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst#objective-parameters)叫做`is_unbalanced`，可以自动帮助你控制这个问题。
 
-LightGBM 可以在有或没有 [GPU](https://lightgbm.readthedocs.io/en/latest/GPU-Performance.html)的情况下使用。对于像我们这里使用的小数据集，使用CPU更快，因为IO开销较大。然而，我想展示GPU的替代方案，虽然安装更复杂，以便有兴趣的人可以尝试更大的数据集。
+LightGBM 可以在有或没有 [GPU](https://lightgbm.readthedocs.io/en/latest/GPU-Performance.html)的情况下使用。对于像我们这里使用的小数据集，使用 CPU 更快，因为 IO 开销较大。然而，我想展示 GPU 的替代方案，虽然安装更复杂，以便有兴趣的人可以尝试更大的数据集。
 
-在Linux中安装依赖项：
+在 Linux 中安装依赖项：
 
 ```py
 $ sudo apt-get update
@@ -87,7 +87,7 @@ Sklearn version: 0.19.1
 
 第一步是加载数据集并分析它。
 
-在继续之前，**你必须运行笔记本 [data_prep.ipynb](https://render.githubusercontent.com/view/data_prep.ipynb)**，这将生成SQLite数据库。
+在继续之前，**你必须运行笔记本 [data_prep.ipynb](https://render.githubusercontent.com/view/data_prep.ipynb)**，这将生成 SQLite 数据库。
 
 ```py
 
@@ -117,9 +117,9 @@ Shape: (284807, 31)
 | 3 | 1.0 | -0.966272 | -0.185226 | 1.792993 | -0.863291 | -0.010309 | 1.247203 | 0.237609 | 0.377436 | -1.387024 | ... | -0.108300 | 0.005274 | -0.190321 | -1.175575 | 0.647376 | -0.221929 | 0.062723 | 0.061458 | 123.50 | 0 |
 | 4 | 2.0 | -1.158233 | 0.877737 | 1.548718 | 0.403034 | -0.407193 | 0.095921 | 0.592941 | -0.270533 | 0.817739 | ... | -0.009431 | 0.798278 | -0.137458 | 0.141267 | -0.206010 | 0.502292 | 0.219422 | 0.215153 | 69.99 | 0 |
 
-5行 × 31列
+5 行 × 31 列
 
-如我们所见，数据集极为不平衡。少数类别约占0.002%的样本。
+如我们所见，数据集极为不平衡。少数类别约占 0.002%的样本。
 
 ```py
 
@@ -193,11 +193,11 @@ Name: Class, dtype: float64
 
 ```
 
-### 使用LightGBM进行训练 - 基准
+### 使用 LightGBM 进行训练 - 基准
 
 对于这个任务，我们使用了一组简单的参数来训练模型。我们只想创建一个基准模型，因此这里没有进行交叉验证或参数调优。
 
-LightGBM的不同参数细节可以在 [文档](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst) 中找到。此外，作者提供了 [一些建议](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters-Tuning.rst) 来调整参数并防止过拟合。
+LightGBM 的不同参数细节可以在 [文档](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters.rst) 中找到。此外，作者提供了 [一些建议](https://github.com/Microsoft/LightGBM/blob/master/docs/Parameters-Tuning.rst) 来调整参数并防止过拟合。
 
 ```py
 
@@ -281,13 +281,13 @@ plot_confusion_matrix(cm, ['no fraud (negative class)', 'fraud (positive class)'
 
 ```
 
-![混淆矩阵](../Images/9d43e51cb4429246863d109770aa14ee.png)
+![混淆矩阵](img/9d43e51cb4429246863d109770aa14ee.png)
 
-从商业角度来看，如果系统将一个正常的交易误分类为欺诈（假阳性），银行将会进行调查，可能需要人工干预。根据[2015年Javelin策略报告](https://www.javelinstrategy.com/press-release/false-positive-card-declines-push-consumers-abandon-issuers-and-merchants#)，15%的持卡人在前一年中至少有一笔交易被错误地拒绝，总金额近1180亿美元。近4成被拒绝的持卡人表示，他们在被错误拒绝后放弃了他们的卡。
+从商业角度来看，如果系统将一个正常的交易误分类为欺诈（假阳性），银行将会进行调查，可能需要人工干预。根据[2015 年 Javelin 策略报告](https://www.javelinstrategy.com/press-release/false-positive-card-declines-push-consumers-abandon-issuers-and-merchants#)，15%的持卡人在前一年中至少有一笔交易被错误地拒绝，总金额近 1180 亿美元。近 4 成被拒绝的持卡人表示，他们在被错误拒绝后放弃了他们的卡。
 
 然而，如果欺诈交易未被检测到，实际上意味着分类器预测交易是正常的，而实际是欺诈性的（假阴性），那么银行就会亏损，而犯罪分子则逃脱了。
 
-在这些预测中使用商业规则的一个常见方法是控制预测的阈值或操作点。这可以通过在`binarize_prediction(y_prob, threshold=0.5)`中更改阈值来控制。通常会从0.1到0.9进行循环，评估不同的商业结果。
+在这些预测中使用商业规则的一个常见方法是控制预测的阈值或操作点。这可以通过在`binarize_prediction(y_prob, threshold=0.5)`中更改阈值来控制。通常会从 0.1 到 0.9 进行循环，评估不同的商业结果。
 
 ```py
 
@@ -295,15 +295,15 @@ clf.save_model(BASELINE_MODEL)
 
 ```
 
-### 使用Flask和Websockets进行操作化
+### 使用 Flask 和 Websockets 进行操作化
 
-下一步是将机器学习模型投入使用。为此，我们将使用[Flask](http://flask.pocoo.org/)来创建一个RESTful API。API的输入将是一个交易（由其特征定义），输出将是模型的预测。
+下一步是将机器学习模型投入使用。为此，我们将使用[Flask](http://flask.pocoo.org/)来创建一个 RESTful API。API 的输入将是一个交易（由其特征定义），输出将是模型的预测。
 
-此外，我们设计了一个[websocket服务](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/)来在地图上可视化欺诈交易。系统使用库[flask-socketio](https://github.com/miguelgrinberg/Flask-SocketIO)实时工作。
+此外，我们设计了一个[websocket 服务](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/)来在地图上可视化欺诈交易。系统使用库[flask-socketio](https://github.com/miguelgrinberg/Flask-SocketIO)实时工作。
 
-当新交易被发送到API时，LightGBM模型会预测交易是正常还是欺诈。如果交易是欺诈性的，服务器会向一个web客户端发送信号，客户端渲染出一个世界地图，显示欺诈交易的位置。地图使用[javascript](http://amcharts.com/)和之前创建的SQLite数据库中的位置数据制作。
+当新交易被发送到 API 时，LightGBM 模型会预测交易是正常还是欺诈。如果交易是欺诈性的，服务器会向一个 web 客户端发送信号，客户端渲染出一个世界地图，显示欺诈交易的位置。地图使用[javascript](http://amcharts.com/)和之前创建的 SQLite 数据库中的位置数据制作。
 
-要启动API，请在conda环境中执行`(fraud)$ python api.py`。
+要启动 API，请在 conda 环境中执行`(fraud)$ python api.py`。
 
 ```py
 
@@ -314,7 +314,7 @@ clf.save_model(BASELINE_MODEL)
 
 ```
 
-首先，我们确保API正在运行
+首先，我们确保 API 正在运行
 
 ```py
 
@@ -328,7 +328,7 @@ display(HTML(res.text))
 
 ### 欺诈警察在监视你
 
-![](../Images/f39cf9728096f014c1e8b578120251fb.png)
+![](img/f39cf9728096f014c1e8b578120251fb.png)
 
 现在，我们将选择一个值并预测输出。
 
@@ -366,11 +366,11 @@ True
 
 ### 欺诈交易可视化
 
-现在我们知道API的主要端点工作正常，我们将尝试/predict_map端点。它使用websockets创建一个实时可视化系统来展示欺诈交易。
+现在我们知道 API 的主要端点工作正常，我们将尝试/predict_map 端点。它使用 websockets 创建一个实时可视化系统来展示欺诈交易。
 
 WebSocket 是一种旨在进行实时通信的协议，为 HTML5 规范开发。它创建了一个持久的、低延迟的连接，可以支持由客户端或服务器发起的事务。[在这篇文章中](https://miguelgfierro.com/blog/2018/demystifying-websockets-for-real-time-web-communication/)，你可以找到关于 WebSocket 和其他相关技术的详细解释。
 
-![](../Images/aa05baa6de9f9f3c3b73020d78f30e87.png)对于我们的案例，每当用户向端点`/predict_map`发出请求时，机器学习模型会评估交易详情并进行预测。如果预测被分类为欺诈，服务器会使用`socketio.emit('map_update', location)`发送信号。该信号仅包含一个名为`location`的字典，包含一个模拟的名称和欺诈交易发生的位置。信号在`index.html`中显示，该文件仅渲染一些通过`id="chartdiv"`引用的 JavaScript 代码。
+![](img/aa05baa6de9f9f3c3b73020d78f30e87.png)对于我们的案例，每当用户向端点`/predict_map`发出请求时，机器学习模型会评估交易详情并进行预测。如果预测被分类为欺诈，服务器会使用`socketio.emit('map_update', location)`发送信号。该信号仅包含一个名为`location`的字典，包含一个模拟的名称和欺诈交易发生的位置。信号在`index.html`中显示，该文件仅渲染一些通过`id="chartdiv"`引用的 JavaScript 代码。
 
 JavaScript 代码定义在文件`frauddetection.js`中。WebSocket 部分如下：
 
@@ -422,7 +422,7 @@ True
 
 现在你可以访问地图 URL（在本地是 http://localhost:5000/map），查看每次执行前一个单元格时地图如何更新为新的欺诈位置。你应该会看到类似下面的地图：
 
-![](../Images/e4766c0703951537c3484955db166ee2.png)
+![](img/e4766c0703951537c3484955db166ee2.png)
 
 ### 负载测试
 
@@ -509,7 +509,7 @@ Wall time: 296 ms
 
 6) 报告层以展示结果。
 
-![](../Images/e9a4672215422ba64b766a7a91cb2cd4.png)
+![](img/e9a4672215422ba64b766a7a91cb2cd4.png)
 
 [原文](https://github.com/miguelgfierro/sciblog_support/blob/master/Intro_to_Fraud_Detection/fraud_detection.ipynb)。转载经许可。
 

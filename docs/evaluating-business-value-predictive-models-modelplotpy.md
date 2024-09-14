@@ -1,8 +1,8 @@
 # 在 Python 和 R 中评估预测模型的业务价值
 
-> 原文：[https://www.kdnuggets.com/2018/10/evaluating-business-value-predictive-models-modelplotpy.html](https://www.kdnuggets.com/2018/10/evaluating-business-value-predictive-models-modelplotpy.html)
+> 原文：[`www.kdnuggets.com/2018/10/evaluating-business-value-predictive-models-modelplotpy.html`](https://www.kdnuggets.com/2018/10/evaluating-business-value-predictive-models-modelplotpy.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Jurriaan Nagelkerke](https://www.linkedin.com/in/jnagelkerke/)、数据科学顾问，和 [Pieter Marcus](https://www.linkedin.com/in/pieter-marcus/)、数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 ### 介绍
 
-![ ](../Images/83c84da9830ba3d49ae3aba258c106a6.png)
+![ ](img/83c84da9830ba3d49ae3aba258c106a6.png)
 
 > ‘…正如我们在这张 ROC 图上清楚看到的，模型在 0.2 的值下的灵敏度相对于 1 减去特异性是相当高的！对吗？…’。
 
@@ -151,7 +151,7 @@ C:\Users\nagelk000\PycharmProjects\testen_matplotpy\venv\lib\site-packages\sklea
 
 ```
 
-在另一篇文章中，我们将详细介绍我们在R和Python中的modelplot包及其所有功能。现在，我们重点解释如何向我们的营销同事展示我们的预测模型如何帮助他们选择客户进行定期存款活动。
+在另一篇文章中，我们将详细介绍我们在 R 和 Python 中的 modelplot 包及其所有功能。现在，我们重点解释如何向我们的营销同事展示我们的预测模型如何帮助他们选择客户进行定期存款活动。
 
 ```py
 obj = mp.modelplotpy(feature_data = [X_train, X_test]
@@ -173,7 +173,7 @@ Target value term deposit plotted for dataset test data and model random forest.
 
 ```
 
-刚刚发生了什么？在**modelplotpy**中实例化了一个类，**plotting_scope**函数指定了你想展示的图表范围。一般来说，**modelplotpy**类中可以应用3种方法（函数），但你不必指定它们，因为它们是链式调用的。这些函数是：
+刚刚发生了什么？在**modelplotpy**中实例化了一个类，**plotting_scope**函数指定了你想展示的图表范围。一般来说，**modelplotpy**类中可以应用 3 种方法（函数），但你不必指定它们，因为它们是链式调用的。这些函数是：
 
 +   **prepare_scores_and_deciles**：根据客户获得定期存款的概率对训练数据集和测试数据集中的客户进行评分
 
@@ -203,27 +203,27 @@ Target value term deposit plotted for dataset test data and model random forest.
 
 +   这些组中实际观察到的目标类观察值的数量
 
-将数据划分为10个等大小的组并称这些组为十分位数是一种常见做法。在一个数据集中，属于前10%具有最高模型概率的观察值在该数据集的十分位数1中；下一个10%高模型概率的组是十分位数2，最后10%具有最低目标类模型概率的观察值属于十分位数10。
+将数据划分为 10 个等大小的组并称这些组为十分位数是一种常见做法。在一个数据集中，属于前 10%具有最高模型概率的观察值在该数据集的十分位数 1 中；下一个 10%高模型概率的组是十分位数 2，最后 10%具有最低目标类模型概率的观察值属于十分位数 10。
 
-我们的四个图表中的每一个都将十分位数放在x轴上，另一个指标放在y轴上。十分位数从左到右绘制，因此具有最高模型概率的观察值在图表的左侧。这会产生如下图表：
+我们的四个图表中的每一个都将十分位数放在 x 轴上，另一个指标放在 y 轴上。十分位数从左到右绘制，因此具有最高模型概率的观察值在图表的左侧。这会产生如下图表：
 
-![ ](../Images/f0d5193245d460e1640096864514008c.png)
+![ ](img/f0d5193245d460e1640096864514008c.png)
 
-现在既然每个图的横轴已经明确，我们可以更详细地探讨每个图的纵轴上的指标。对于每个图，我们将从业务角度简要说明该图提供的洞察。之后，我们将其应用于我们的银行数据，并展示modelplotpy的一些有趣功能，帮助你向他人解释你出色的预测模型的价值。
+现在既然每个图的横轴已经明确，我们可以更详细地探讨每个图的纵轴上的指标。对于每个图，我们将从业务角度简要说明该图提供的洞察。之后，我们将其应用于我们的银行数据，并展示 modelplotpy 的一些有趣功能，帮助你向他人解释你出色的预测模型的价值。
 
 **1\. 累计收益图**
 
 累计收益图——通常称为“收益图”——帮助你回答以下问题：
 
-***当我们应用模型并选择最佳的X分位时，我们可以期望目标类观察值的百分比是多少？***
+***当我们应用模型并选择最佳的 X 分位时，我们可以期望目标类观察值的百分比是多少？***
 
-因此，累计收益图可视化了如果你决定选择直到第X分位的目标类成员的百分比。这是一个非常重要的业务问题，因为在大多数情况下，你想使用预测模型来针对一个**子集**的观察值——客户、潜在客户、案例等——而不是针对所有案例。由于我们不会总是构建完美的模型，我们会遗漏一些潜力。这是完全可以接受的，因为如果我们不愿意接受这一点，我们不应该使用模型。或者构建一个完美的模型，对所有实际目标类成员的概率为100%，对所有不属于目标类的案件的概率为0%。然而，如果你是这样一个精英，你根本不需要这些图，或者你应该仔细检查你的模型——也许你在作弊？
+因此，累计收益图可视化了如果你决定选择直到第 X 分位的目标类成员的百分比。这是一个非常重要的业务问题，因为在大多数情况下，你想使用预测模型来针对一个**子集**的观察值——客户、潜在客户、案例等——而不是针对所有案例。由于我们不会总是构建完美的模型，我们会遗漏一些潜力。这是完全可以接受的，因为如果我们不愿意接受这一点，我们不应该使用模型。或者构建一个完美的模型，对所有实际目标类成员的概率为 100%，对所有不属于目标类的案件的概率为 0%。然而，如果你是这样一个精英，你根本不需要这些图，或者你应该仔细检查你的模型——也许你在作弊？
 
-因此，我们必须接受会有一些损失。*你在给定分位时选择的目标类成员的百分比*，这就是累计收益图告诉你的。图中有两条参考线来告诉你模型的好坏：*随机模型线*和*精英模型线*。随机模型线告诉你在完全没有模型的情况下，你期望选择的实际目标类的比例。这条垂直线从原点（0%案件时，你只能拥有0%目标类成员）到右上角（100%案件时，你拥有100%目标类成员）。这是你模型表现的最低水平；如果你接近这个水平，那么你的模型不比抛硬币好多少。精英模型是你模型能做到的上限。它从原点开始，并尽可能陡峭地上升到100%。如果不到10%的案件属于目标类别，这意味着它从原点急剧上升到第1分位值和100%的累计收益，并在所有其他分位中保持不变，因为这是一个累计指标。你的模型总是会在这两条参考线之间移动——越接近精英模型越好——看起来是这样的：
+因此，我们必须接受会有一些损失。*你在给定分位时选择的目标类成员的百分比*，这就是累计收益图告诉你的。图中有两条参考线来告诉你模型的好坏：*随机模型线*和*精英模型线*。随机模型线告诉你在完全没有模型的情况下，你期望选择的实际目标类的比例。这条垂直线从原点（0%案件时，你只能拥有 0%目标类成员）到右上角（100%案件时，你拥有 100%目标类成员）。这是你模型表现的最低水平；如果你接近这个水平，那么你的模型不比抛硬币好多少。精英模型是你模型能做到的上限。它从原点开始，并尽可能陡峭地上升到 100%。如果不到 10%的案件属于目标类别，这意味着它从原点急剧上升到第 1 分位值和 100%的累计收益，并在所有其他分位中保持不变，因为这是一个累计指标。你的模型总是会在这两条参考线之间移动——越接近精英模型越好——看起来是这样的：
 
-![ ](../Images/773c69670ffd4dd5c2dcc0fa00a8cb38.png)
+![ ](img/773c69670ffd4dd5c2dcc0fa00a8cb38.png)
 
-回到我们的业务示例。我们能从预测模型的前20%中选择多少定期存款买家？让我们找出答案！为了生成累积收益图，我们可以简单地调用函数**plot_cumgains()**：
+回到我们的业务示例。我们能从预测模型的前 20%中选择多少定期存款买家？让我们找出答案！为了生成累积收益图，我们可以简单地调用函数**plot_cumgains()**：
 
 ```py
 # plot the cumulative gains plot
@@ -236,7 +236,7 @@ The cumulative gains plot is saved in C:\Users\nagelk000\AppData\Local\Temp\intr
 
 ```
 
-![](../Images/1d22b8efa88d457540009a4782eb926f.png)
+![](img/1d22b8efa88d457540009a4782eb926f.png)
 
 ```py
 <Figure size 432x288 with 0 Axes>
@@ -246,7 +246,7 @@ The cumulative gains plot is saved in C:\Users\nagelk000\AppData\Local\Temp\intr
 <matplotlib.axes._subplots.AxesSubplot at 0x1ca44358>
 ```
 
-我们只需指定带有plotting_scope输出的输入。不过，还有几个参数可以自定义图表。如果我们想强调模型在某一点的表现，可以在图表中添加高亮，并在图表下方添加一些解释文本。不过这两项都是可选的：
+我们只需指定带有 plotting_scope 输出的输入。不过，还有几个参数可以自定义图表。如果我们想强调模型在某一点的表现，可以在图表中添加高亮，并在图表下方添加一些解释文本。不过这两项都是可选的：
 
 ```py
 # plot the cumulative gains plot and annotate the plot at decile = 2
@@ -260,7 +260,7 @@ The cumulative gains plot is saved in C:\Users\nagelk000\AppData\Local\Temp\intr
 
 ```
 
-![](../Images/6aa9908c17e07b026f90b89554194d05.png)
+![](img/6aa9908c17e07b026f90b89554194d05.png)
 
 ```py
 <Figure size 432x288 with 0 Axes>
@@ -270,18 +270,18 @@ The cumulative gains plot is saved in C:\Users\nagelk000\AppData\Local\Temp\intr
 <matplotlib.axes._subplots.AxesSubplot at 0x20596198>
 ```
 
-我们的`highlight_decile`参数在第2百分位数的图表上添加了一些指导元素，并在图表下方添加了一个文本框，文字解释了第2百分位数的图表。这个解释也会打印到控制台。我们的简单模型——仅使用了6个预测变量——似乎很好的挑选出了有意购买定期存款的客户。*当我们根据随机森林选择前20%的客户时，这些选择占测试数据中所有定期存款案例的79%。* 如果模型完美，我们会选择100%，因为测试集中购买定期存款的客户不到20%。随机选择只会包含20%的定期存款客户。这比随机选择好多少，就要看第2号图表了！
+我们的`highlight_decile`参数在第 2 百分位数的图表上添加了一些指导元素，并在图表下方添加了一个文本框，文字解释了第 2 百分位数的图表。这个解释也会打印到控制台。我们的简单模型——仅使用了 6 个预测变量——似乎很好的挑选出了有意购买定期存款的客户。*当我们根据随机森林选择前 20%的客户时，这些选择占测试数据中所有定期存款案例的 79%。* 如果模型完美，我们会选择 100%，因为测试集中购买定期存款的客户不到 20%。随机选择只会包含 20%的定期存款客户。这比随机选择好多少，就要看第 2 号图表了！
 
 ### 更多相关主题
 
-+   [超越准确性：使用NLP测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
++   [超越准确性：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
 
 +   [评估文档相似性计算方法](https://www.kdnuggets.com/evaluating-methods-for-calculating-document-similarity)
 
 +   [机器学习未能为我的业务创造价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日：跟踪和可视化的3种工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日：跟踪和可视化的 3 种工具…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [构建预测模型：Python中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
++   [构建预测模型：Python 中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
 
 +   [将数据管理与数据讲故事结合起来以产生价值](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)

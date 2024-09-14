@@ -1,8 +1,8 @@
 # 使用 MultiLabelBinarizer 编码分类特征
 
-> 原文：[https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)
+> 原文：[`www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html`](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)
 
-![使用 MultiLabelBinarizer 编码分类特征](../Images/ff76ecffd6003a5f628ad0bb8468f58f.png)
+![使用 MultiLabelBinarizer 编码分类特征](img/ff76ecffd6003a5f628ad0bb8468f58f.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -26,7 +26,7 @@
 
 在机器学习中，多分类数据包含两个以上的类别，每个样本只分配一个标签。而在多标签分类中，每个样本会分配多个标签。
 
-![使用 MultiLabelBinarizer 编码分类特征](../Images/79c39300fa5daef44935a79c037a8443.png)
+![使用 MultiLabelBinarizer 编码分类特征](img/79c39300fa5daef44935a79c037a8443.png)
 
 图片来源于 [Thamme Gowda](https://stats.stackexchange.com/a/133205)
 
@@ -36,7 +36,7 @@
 
 在多分类中，每个学生的记录只有一个标签（主修），并且有超过两个类别。学生只能选择数学、科学或英语作为主修。
 
-![使用 MultiLabelBinarizer 编码分类特征](../Images/3cfa480e1d6d113b7a465ebbb969a16a.png)
+![使用 MultiLabelBinarizer 编码分类特征](img/3cfa480e1d6d113b7a465ebbb969a16a.png)
 
 作者提供的图片
 
@@ -48,7 +48,7 @@
 
 学生有 0 到 N 个主修课程。
 
-![使用 MultiLabelBinarizer 编码分类特征](../Images/61921238830dcccbb633c10da96d45cc.png)
+![使用 MultiLabelBinarizer 编码分类特征](img/61921238830dcccbb633c10da96d45cc.png)
 
 作者提供的图片
 
@@ -110,7 +110,7 @@ res
 
 就像独热编码一样，它将标签表示为 1 和 0。
 
-![使用 MultiLabelBinarizer 编码分类特征](../Images/971e8777eb9250b91cd7616e4da7e201.png)
+![使用 MultiLabelBinarizer 编码分类特征](img/971e8777eb9250b91cd7616e4da7e201.png)
 
 MultiLabelBinarizer 通常用于图像和新闻分类。转换后，你可以迅速训练简单的随机森林或神经网络。
 

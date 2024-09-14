@@ -1,8 +1,8 @@
 # Safetensors 介绍
 
-> 原文：[https://www.kdnuggets.com/2023/07/introduction-safetensors.html](https://www.kdnuggets.com/2023/07/introduction-safetensors.html)
+> 原文：[`www.kdnuggets.com/2023/07/introduction-safetensors.html`](https://www.kdnuggets.com/2023/07/introduction-safetensors.html)
 
-![Safetensors 介绍](../Images/9cf91bd787856ceb22649f830d86e344.png)
+![Safetensors 介绍](img/9cf91bd787856ceb22649f830d86e344.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -137,7 +137,7 @@ load_file("new_model.safetensors")
 
 safetensors API 适用于 Pytorch、Tensorflow、PaddlePaddle、Flax 和 Numpy。您可以通过阅读 [Safetensors](https://huggingface.co/docs/safetensors/main/en/index) 文档来了解它。
 
-![Safetensors 介绍](../Images/529ed7e796025ef8b83d187331adee90.png)
+![Safetensors 介绍](img/529ed7e796025ef8b83d187331adee90.png)
 
 图像来自 [Torch API](https://huggingface.co/docs/safetensors/main/en/api/torch)
 
@@ -155,18 +155,18 @@ safetensors API 适用于 Pytorch、Tensorflow、PaddlePaddle、Flax 和 Numpy�
 
 +   **GitHub：** [huggingface/safetensors: 简单、安全的张量存储和分发方式 (github.com)](https://github.com/huggingface/safetensors)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络开发一个AI产品，帮助那些面临心理健康问题的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络开发一个 AI 产品，帮助那些面临心理健康问题的学生。
 
 ### 更多相关主题
 
-+   [PyCaret中的二分类简介](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
++   [PyCaret 中的二分类简介](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
 
-+   [PyCaret中的Python聚类简介](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
++   [PyCaret 中的 Python 聚类简介](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
 
 +   [数据科学的基本数学：奇异值分解的可视化介绍](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)
 
-+   [数据科学中Pandas简介](https://www.kdnuggets.com/2020/06/introduction-pandas-data-science.html)
++   [数据科学中 Pandas 简介](https://www.kdnuggets.com/2020/06/introduction-pandas-data-science.html)
 
 +   [论文与代码简要介绍](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)
 
-+   [KDnuggets新闻，4月27日：论文与代码简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：论文与代码简要介绍；…](https://www.kdnuggets.com/2022/n17.html)

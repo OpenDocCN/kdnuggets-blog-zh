@@ -1,6 +1,6 @@
 # 使用 ChatGPT 生成被动收入的 4 种方法
 
-> 原文：[https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
+> 原文：[`www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html`](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
 
 在当今快节奏的世界中，每个人都希望在不付出太多努力的情况下获得额外的收入。被动收入是一种很好的方式，它允许你在无需积极工作情况下赚取钱。
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
-![使用 ChatGPT 生成被动收入的 4 种方法](../Images/31acee2d338430644cab26658d37a98c.png)
+![使用 ChatGPT 生成被动收入的 4 种方法](img/31acee2d338430644cab26658d37a98c.png)
 
 ChatGPT | 图片由 [Rolf van Root](https://unsplash.com/@freshvanroot?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)
 
@@ -130,7 +130,7 @@ walk(document.body);
 
 有很多简单的 HTML 网络工具可以创建，并且能够吸引大量受众。例如这个 BMI 计算器。你可以利用该网站的流量，通过 Google 广告创造收入。我们可以使用 similarweb 工具来衡量和分析网站流量。我们可以看到该网站每月访问量超过 4000 万：
 
-![使用 ChatGPT 生成被动收入的 4 种方法](../Images/45ebb4e35c8c6d1a51ad1b750751d73c.png)
+![使用 ChatGPT 生成被动收入的 4 种方法](img/45ebb4e35c8c6d1a51ad1b750751d73c.png)
 
 BMI 计算器流量和参与度
 
@@ -234,11 +234,11 @@ BMI 计算器流量和参与度
 
 通常，指标的订阅费用每年或每 6 个月可能高达数百美元，因此这里是我们将用作 ChatGPT 输入的提示：
 
-> **你能创建一个预设指标，当25分钟时间框架内的交易量增加5%时触发买入信号吗**
+> **你能创建一个预设指标，当 25 分钟时间框架内的交易量增加 5%时触发买入信号吗**
 
-你能创建一个预设指标，当25分钟时间框架内的交易量增加5%时触发买入信号吗
+你能创建一个预设指标，当 25 分钟时间框架内的交易量增加 5%时触发买入信号吗
 
-这里是ChatGPT的输出：
+这里是 ChatGPT 的输出：
 
 ```py
 //@version=5
@@ -259,17 +259,17 @@ if volumeIncrease25m
     alert("Volume increase on 25 minute time frame!")
 ```
 
-你可以将其集成到你的机器人中使用，或者创建你自己的交易机器人，并内置多个指标，或者将其出售给交易机器人。你越具创造性和实用性，就越能产生收入。记住，现在使用AI可以创建类似的工具，关键在于创造力，以便脱颖而出。
+你可以将其集成到你的机器人中使用，或者创建你自己的交易机器人，并内置多个指标，或者将其出售给交易机器人。你越具创造性和实用性，就越能产生收入。记住，现在使用 AI 可以创建类似的工具，关键在于创造力，以便脱颖而出。
 
 # 4\. 编写并出版儿童书籍
 
 我们将重点关注儿童书籍，因为它们的字数较少，易于编写、出版和在亚马逊上销售。另一个建议是关注教育性主题，以提供一个故事，同时帮助孩子们变得更好，并具有教育意义，这样父母就会愿意购买。
 
-所以让我们使用ChatGPT来写一个关于一个叫詹姆斯的男孩被老师欺负以及他如何克服这一困境的故事。以下是ChatGPT的输入提示：
+所以让我们使用 ChatGPT 来写一个关于一个叫詹姆斯的男孩被老师欺负以及他如何克服这一困境的故事。以下是 ChatGPT 的输入提示：
 
 > **写一个关于一个叫詹姆斯的男孩被老师欺负以及他如何克服这一困境的儿童故事**
 
-这里是ChatGPT的输出：
+这里是 ChatGPT 的输出：
 
 从前，有一个名叫詹姆斯的小男孩，他喜欢上学。他喜欢学习新事物，交新朋友，探索周围的世界。然而，有一件事让詹姆斯上学变得很有挑战，那就是他的老师。
 
@@ -291,7 +291,7 @@ if volumeIncrease25m
 
 以下是 ChatGPT 的输出：
 
-詹姆斯是一个10岁的男孩，短而略微凌乱的深棕色头发。他有一双明亮的蓝色眼睛，当他开心时会闪闪发光。他的皮肤较白，鼻子和脸颊上有几颗雀斑。他右眉毛上方有一个小伤疤，是去年夏天骑自行车摔伤的。
+詹姆斯是一个 10 岁的男孩，短而略微凌乱的深棕色头发。他有一双明亮的蓝色眼睛，当他开心时会闪闪发光。他的皮肤较白，鼻子和脸颊上有几颗雀斑。他右眉毛上方有一个小伤疤，是去年夏天骑自行车摔伤的。
 
 詹姆斯的身高在同龄人中算是中等，身材苗条。他喜欢穿舒适的衣服，比如 T 恤和牛仔裤，他最喜欢的颜色是蓝色。他经常穿一双红色运动鞋，因为经常跑来跑去和在外面玩耍，所以鞋子有点磨损。
 
@@ -299,7 +299,7 @@ if volumeIncrease25m
 
 现在我们可以使用任何图像生成工具来开始生成图片。在这个例子中，我将使用 [稳定扩散 Hugging Face](https://huggingface.co/spaces/stabilityai/stable-diffusion) 空间。以下是使用稳定扩散生成的图像，基于我们从 ChatGPT 得到的提示：
 
-![使用稳定扩散生成的图像](../Images/b09036c35006c13b5a688453631841aa.png)
+![使用稳定扩散生成的图像](img/b09036c35006c13b5a688453631841aa.png)
 
 使用稳定扩散生成的图像
 
@@ -311,15 +311,15 @@ if volumeIncrease25m
 
 总结来说，ChatGPT 将为建立产品和生成收入提供很多机会，一切都取决于你的创造力和市场理解。在本文中，我们集中介绍了四种赚钱的方法：构建 Chrome 扩展程序、创建网络工具、构建交易机器人指标和编写儿童故事。
 
-**[尤瑟夫·拉法特](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一名计算机视觉研究员和数据科学家。他的研究专注于开发用于医疗保健应用的实时计算机视觉算法。他还在营销、金融和医疗保健领域担任数据科学家超过3年。
+**[尤瑟夫·拉法特](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一名计算机视觉研究员和数据科学家。他的研究专注于开发用于医疗保健应用的实时计算机视觉算法。他还在营销、金融和医疗保健领域担任数据科学家超过 3 年。
 
 ### 更多相关主题
 
-+   [使用稳定扩散生成超逼真的面孔的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
++   [使用稳定扩散生成超逼真的面孔的 3 种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
 
-+   [利用数据科学将收入翻倍的5种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
++   [利用数据科学将收入翻倍的 5 种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
 
-+   [使用Google MusicLM从文本生成音乐](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)
++   [使用 Google MusicLM 从文本生成音乐](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)
 
 +   [如何生成合成的表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
 

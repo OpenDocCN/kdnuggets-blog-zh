@@ -1,14 +1,14 @@
 # 数据科学家可以从定性研究中学到什么
 
-> 原文：[https://www.kdnuggets.com/2016/07/data-scientists-learn-from-qualitative-research.html](https://www.kdnuggets.com/2016/07/data-scientists-learn-from-qualitative-research.html)
+> 原文：[`www.kdnuggets.com/2016/07/data-scientists-learn-from-qualitative-research.html`](https://www.kdnuggets.com/2016/07/data-scientists-learn-from-qualitative-research.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 Alyona Medelyan, Thematic**。
 
 开放性调查问题通常提供最有用的见解，但如果你处理的是数百或数千人的回答，总结这些回答会让你头疼不已。如果你是数据科学家，你可以尝试使用 NLP 库或 API，但调试它们很困难，结果往往难以解释。如果你没有**定性研究**的背景，这篇文章将帮助你学习来自长期从事文本工作的人的最佳实践，这些文本也被称为**定性数据**。
 
-[![coding_process](../Images/061ba182189b21b84ca4ca623ec7427a.png)](http://www.getthematic.com/wp-content/uploads/2016/07/coding_process.png)
+![coding_process](http://www.getthematic.com/wp-content/uploads/2016/07/coding_process.png)
 
 *从文本到代码再到分析*
 
@@ -16,7 +16,7 @@
 
 当提到“巨量数据”这样的术语时，它们几乎总是指**定量数据**：那些可以很容易用数字或类别表示的数据。统计和机器学习技术“喜欢”数字。另一方面，文本虽然难以处理，但却很重要！定性研究人员认为，单靠数字无法解决问题。他们认为，通过采访人们并让他们回答开放性问题，你可以学到比仅仅查看硬数据更多的东西。
 
-例如 NPS 调查。NPS 得分是根据“你有多大可能性向朋友或家人推荐我们，0到9分”的数字答案计算得出的，这将给你一个公司绩效的单一指标。但要提高这个指标，你需要关注“你为什么给我们这个分数？”的开放性问题的回答。
+例如 NPS 调查。NPS 得分是根据“你有多大可能性向朋友或家人推荐我们，0 到 9 分”的数字答案计算得出的，这将给你一个公司绩效的单一指标。但要提高这个指标，你需要关注“你为什么给我们这个分数？”的开放性问题的回答。
 
 在定性研究过程中产生了大量的文本，为了得出结论，使用了一种叫做***编码***的技术。问卷调查中让受访者自由作答的问题也被称为开放性问题。每个回应被称为逐字稿。对每个回应进行“编码”或“标记”有助于捕捉回应的内容，从而有效地总结整个调查结果。
 
@@ -32,13 +32,13 @@
 
 层次化框架的一个有趣应用是支持情感差异。如果顶层代码描述回应的内容，中层代码可以描述其正面或负面，而第三层描述属性或具体主题。下面展示了这种类型的编码框架的示例。
 
-[![编码树结构](../Images/198cebd42623b7f2feaa1bda53decb37.png)](http://www.getthematic.com/wp-content/uploads/2016/07/coding_tree_structure.png)
+![编码树结构](http://www.getthematic.com/wp-content/uploads/2016/07/coding_tree_structure.png)
 
 *在层次化编码框架中使用情感*
 
 ### 代码框架的优缺点
 
-![代码框架的优缺点](../Images/fc5f4df657625caaa9067851a3054b64.png)
+![代码框架的优缺点](img/fc5f4df657625caaa9067851a3054b64.png)
 
 ### 编码框架的覆盖面和灵活性
 
@@ -72,7 +72,7 @@
 
 1.  返回并重新编码所有已编码的回应
 
-1.  从第4步重复。
+1.  从第 4 步重复。
 
 如果你添加了一个新的代码，将现有的代码拆分成两个，或改变其描述，请确保审查所有可能受到影响的回应的代码。否则，调查开始和结束时相近的回应可能会被分配不同的代码！
 
@@ -80,7 +80,7 @@
 
 在决定创建哪些代码时，需要考虑几件事。
 
-1.  **确保覆盖**。代码应覆盖尽可能多的相关调查回应。这意味着代码应比评论本身更通用，以便能够覆盖其他回应。当然，这需要与分析的有用性相平衡。例如，“产品”是一个非常广泛的代码，会有很高的覆盖率，但有用性有限。另一方面，“产品在使用3小时后停止工作”是非常具体的，不太可能覆盖许多回应。
+1.  **确保覆盖**。代码应覆盖尽可能多的相关调查回应。这意味着代码应比评论本身更通用，以便能够覆盖其他回应。当然，这需要与分析的有用性相平衡。例如，“产品”是一个非常广泛的代码，会有很高的覆盖率，但有用性有限。另一方面，“产品在使用 3 小时后停止工作”是非常具体的，不太可能覆盖许多回应。
 
 1.  **避免共性**。虽然有相似的代码是可以的，但它们之间应该有明显的区别。在数学中，这被称为正交性，表示两个事物的独立性。“客户服务”和“产品”是正交的，而“客户服务”和“客户支持”可能有细微的差别，但不是正交的，可能作为相同的代码更好。
 
@@ -118,27 +118,27 @@
 
 **相关：**
 
-+   [自然语言处理的内部更新](/2016/06/inside-update-natural-language-processing.html)
++   自然语言处理的内部更新
 
-+   [HPE Haven OnDemand 文本提取 API 开发者备忘单](/2016/06/hpe-haven-ondemand-text-extraction-cheat-sheet.html)
++   HPE Haven OnDemand 文本提取 API 开发者备忘单
 
-+   [文本分析：是什么让你的手机比调查分析更智能](/2016/02/text-analytics-phone-smarter-than-survey-analysis.html)
++   文本分析：是什么让你的手机比调查分析更智能
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关内容
 
-+   [数据科学家如何获得CFO的青睐（以及为什么你想要这样）](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
++   [数据科学家如何获得 CFO 的青睐（以及为什么你想要这样）](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
 
 +   [每个工程师都应该并且可以学习机器学习](https://www.kdnuggets.com/2022/06/corise-every-engineer-learn-machine-learning.html)
 

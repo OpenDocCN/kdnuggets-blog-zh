@@ -1,6 +1,6 @@
-# IBM Watson如何征服世界
+# IBM Watson 如何征服世界
 
-> 原文：[https://www.kdnuggets.com/2016/02/dezyre-ibm-watson-taking-world.html](https://www.kdnuggets.com/2016/02/dezyre-ibm-watson-taking-world.html)
+> 原文：[`www.kdnuggets.com/2016/02/dezyre-ibm-watson-taking-world.html`](https://www.kdnuggets.com/2016/02/dezyre-ibm-watson-taking-world.html)
 
 作者：Khushbu Shah，[DeZyre](https://www.dezyre.com/data-science-in-R-programming-online-training/37)
 
@@ -10,47 +10,47 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 [人工智能](https://www.dezyre.com/article/how-artificial-intelligence-will-fare-in-2016/212) 是一个复杂的领域，需要在分析、机器学习、神经网络、语音识别和大数据等多个方面进行前所未有的协调。现代智能手机操作系统配备了基于语音的虚拟助手，通过支持语音搜索并以机械化的英语回应结果来展示人工智能的初级阶段。虽然目前看来这已经足够，但仍然有许多工作要做。
 
-IBM 一直处于创新的前沿。通过推出其超级计算机IBM Watson（以IBM创始人Thomas J. Watson命名），它在人工智能领域迈出了坚实的一步。
+IBM 一直处于创新的前沿。通过推出其超级计算机 IBM Watson（以 IBM 创始人 Thomas J. Watson 命名），它在人工智能领域迈出了坚实的一步。
 
-### 什么是IBM Watson？
+### 什么是 IBM Watson？
 
-它是一个“问答（QA）”机器（占据的空间足以容纳10台冰箱）。IBM Watson 具有扫描大量数据以“学习”主题的能力，然后像人类一样解释和回答问题。它的目标是复制（甚至超越）一个智能人类理解问题并提供答案的能力。
+它是一个“问答（QA）”机器（占据的空间足以容纳 10 台冰箱）。IBM Watson 具有扫描大量数据以“学习”主题的能力，然后像人类一样解释和回答问题。它的目标是复制（甚至超越）一个智能人类理解问题并提供答案的能力。
 
-对于那些对数字感兴趣的人，IBM Watson 的处理能力为80 teraflops，即每秒一万亿次浮点运算。为了能够像高效运作的人脑一样理解、分析和回答问题，Watson 从90台服务器上挖掘超过2亿页的信息。这些数据随后通过六百万条逻辑规则来得出相关的答案。
+对于那些对数字感兴趣的人，IBM Watson 的处理能力为 80 teraflops，即每秒一万亿次浮点运算。为了能够像高效运作的人脑一样理解、分析和回答问题，Watson 从 90 台服务器上挖掘超过 2 亿页的信息。这些数据随后通过六百万条逻辑规则来得出相关的答案。
 
-想成为数据科学超级英雄？学习 [Python中的数据科学](https://www.dezyre.com/data-science-in-python-online-training/36)
+想成为数据科学超级英雄？学习 [Python 中的数据科学](https://www.dezyre.com/data-science-in-python-online-training/36)
 
-![ibm-watson-applications](../Images/567cd53c64b755a2f37051678486a239.png)
+![ibm-watson-applications](img/567cd53c64b755a2f37051678486a239.png)
 
-### IBM Watson与搜索引擎有何不同？
+### IBM Watson 与搜索引擎有何不同？
 
-搜索引擎通常会对问题给出机械的回应。它们无法解释单词在句子中的顺序。它们只会查找搜索的短语并提供答案，而不考虑该短语出现的“上下文”。这意味着一旦Watson得到适当的训练，向它提出问题就像与一个实际的有意识的人的对话，而不是机械地显示结果。
+搜索引擎通常会对问题给出机械的回应。它们无法解释单词在句子中的顺序。它们只会查找搜索的短语并提供答案，而不考虑该短语出现的“上下文”。这意味着一旦 Watson 得到适当的训练，向它提出问题就像与一个实际的有意识的人的对话，而不是机械地显示结果。
 
-### IBM Watson应用
+### IBM Watson 应用
 
-2011年，Watson通过在*危险边缘*节目中与前冠军Brad Rutter和Ken Jennings竞争，证明了其认知计算的能力。最终赢得了100万美元的头奖。通过这次竞赛，主要研究员David Ferrucci领导的研究团队能够确立人工智能的变化面貌。大约四年后，Watson的计算能力已被各个行业有效地利用来解决实际问题。在这一部分，我们列出了一些成功使用IBM Watson认知处理能力的行业。
+2011 年，Watson 通过在*危险边缘*节目中与前冠军 Brad Rutter 和 Ken Jennings 竞争，证明了其认知计算的能力。最终赢得了 100 万美元的头奖。通过这次竞赛，主要研究员 David Ferrucci 领导的研究团队能够确立人工智能的变化面貌。大约四年后，Watson 的计算能力已被各个行业有效地利用来解决实际问题。在这一部分，我们列出了一些成功使用 IBM Watson 认知处理能力的行业。
 
 ### USAA：帮助军人过渡到平民生活
 
-美国劳工统计局指出，每年约有155,000名军人过渡到平民生活。在这一过程中，他们有许多与退伍军人补偿福利、9/11后GI法案等相关的问题。相关信息散布在数十万页文档中。IBM Watson已经吸收了记录在3000多份与军事过渡相关的文档中的知识，使其能够令人满意地回答军人们的问题。由于3000+文档的知识库需要数百人阅读并整理观察结果，才能形成答案，因此IBM Watson所节省的成本可想而知。
+美国劳工统计局指出，每年约有 155,000 名军人过渡到平民生活。在这一过程中，他们有许多与退伍军人补偿福利、9/11 后 GI 法案等相关的问题。相关信息散布在数十万页文档中。IBM Watson 已经吸收了记录在 3000 多份与军事过渡相关的文档中的知识，使其能够令人满意地回答军人们的问题。由于 3000+文档的知识库需要数百人阅读并整理观察结果，才能形成答案，因此 IBM Watson 所节省的成本可想而知。
 
 ### 澳新银行全球财富
 
-金融行业拥有大量特定的数字，正确处理这些数字以生成最佳的金融规划建议对业务成功至关重要。澳新银行全球财富（澳大利亚和新西兰全球银行集团的私人银行部门）的400多名金融规划师使用IBM Watson Engagement Advisor来帮助他们改善金融建议流程。其目标是将客户收到建议声明的时间从几天减少到仅一次会话。
+金融行业拥有大量特定的数字，正确处理这些数字以生成最佳的金融规划建议对业务成功至关重要。澳新银行全球财富（澳大利亚和新西兰全球银行集团的私人银行部门）的 400 多名金融规划师使用 IBM Watson Engagement Advisor 来帮助他们改善金融建议流程。其目标是将客户收到建议声明的时间从几天减少到仅一次会话。
 
-### MD安德森癌症中心
+### MD 安德森癌症中心
 
-德克萨斯大学MD安德森癌症中心已经将 IBM Watson 引入其抗癌使命。在处方方面，肿瘤学专家顾问能够利用 Watson 的认知计算能力，整合 MD 安德森研究人员的庞大知识库。另一方面，它在收集和分析大量有关患者医疗历史的非结构化数据方面发挥了关键作用。一旦这两者连接，临床医生将获得宝贵的信息，这些信息要么需要很长时间才能收集，要么可能会被遗漏。
+德克萨斯大学 MD 安德森癌症中心已经将 IBM Watson 引入其抗癌使命。在处方方面，肿瘤学专家顾问能够利用 Watson 的认知计算能力，整合 MD 安德森研究人员的庞大知识库。另一方面，它在收集和分析大量有关患者医疗历史的非结构化数据方面发挥了关键作用。一旦这两者连接，临床医生将获得宝贵的信息，这些信息要么需要很长时间才能收集，要么可能会被遗漏。
 
 ### IBM Watson 的未来将会怎样？
 
@@ -74,11 +74,11 @@ IBM 一直处于创新的前沿。通过推出其超级计算机IBM Watson（以
 
 **相关:**
 
-+   [Spark SQL 实时分析](/2015/09/spark-sql-real-time-analytics.html)
++   Spark SQL 实时分析
 
-+   [通过 IBM Watson 和 Twitter 解锁 Spark 的力量](/2015/10/ibm-watson-spark-twitter.html)
++   通过 IBM Watson 和 Twitter 解锁 Spark 的力量
 
-+   [独家采访：Apache Spark 创始人 Matei Zaharia 讨论 Spark、Hadoop、Flink 及 2020 年的大数据](/2015/05/interview-matei-zaharia-creator-apache-spark.html)
++   独家采访：Apache Spark 创始人 Matei Zaharia 讨论 Spark、Hadoop、Flink 及 2020 年的大数据
 
 ### 更多相关内容
 

@@ -1,8 +1,8 @@
 # 决策树软件的完整指南
 
-> 原文：[https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)
+> 原文：[`www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html`](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)
 
-![决策树软件的完整指南](../Images/c202f658225ce9a0eeb7f324323c0498.png)
+![决策树软件的完整指南](img/c202f658225ce9a0eeb7f324323c0498.png)
 
 编辑器图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
@@ -52,7 +52,7 @@
 
 ## #4 人工智能
 
-人工智能驱动的动态决策树用于根据过去提供的数据预测未来的值。它帮助AI模式确定最佳的下一步行动，并避免不相关的结论。
+人工智能驱动的动态决策树用于根据过去提供的数据预测未来的值。它帮助 AI 模式确定最佳的下一步行动，并避免不相关的结论。
 
 ## #5 认知科学
 
@@ -114,7 +114,7 @@
 
 **决策树软件**正在帮助数据科学家和分析师整合和学习各种数据。此外，机器学习驱动的决策帮助他们做出智能的数据驱动决策。有趣的是，决策树不仅限于分析。
 
-除了复杂的基于研究的预测或分析，决策树在多个现代决策导向的实践中也有应用。许多基于机器学习的决策树DIY版本存在，帮助个人做出正确的决策。
+除了复杂的基于研究的预测或分析，决策树在多个现代决策导向的实践中也有应用。许多基于机器学习的决策树 DIY 版本存在，帮助个人做出正确的决策。
 
 从寻找 BFSI 领域的相关贷款计划到解决电信领域的互联网路由器相关问题，决策树正在强化可靠、相关且快速的决策方法。
 
@@ -134,4 +134,4 @@
 
 +   [随机森林与决策树：主要区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
 
-+   [KDnuggets™ 新闻 22:n09，3月2日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09，3 月 2 日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)

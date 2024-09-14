@@ -1,8 +1,8 @@
 # 使用 Tensorflow Object Detection 和 OpenCV 分析足球（足球）比赛
 
-> 原文：[https://www.kdnuggets.com/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html](https://www.kdnuggets.com/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html)
+> 原文：[`www.kdnuggets.com/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html`](https://www.kdnuggets.com/2018/07/analyze-soccer-game-using-tensorflow-object-detection-opencv.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Priyanka Kochhar](https://github.com/priya-dwivedi) 提供，深度学习顾问**
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 对于你内心的数据科学家来说，让我们利用这个机会对足球片段进行一些分析。通过深度学习和 OpenCV，我们可以从视频片段中提取有趣的见解。见下图澳大利亚与秘鲁比赛的示例 GIF，我们可以识别所有的球员 + 裁判，足球，并预测球员的球队基于他们球衣的颜色。所有这些都可以实时完成。
 
-![](../Images/07b25fd30b67c19bdd28661a485b9554.png)
+![](img/07b25fd30b67c19bdd28661a485b9554.png)
 
 球员检测和团队预测
 
@@ -40,7 +40,7 @@ Tensorflow Object Detection API 是一个非常强大的工具，用于快速构
 
 该 API 提供了在 COCO 数据集上训练的预训练物体检测模型。COCO 数据集是一个包含 90 种常见对象的数据集。见下图 COCO 数据集的一部分对象。
 
-![](../Images/fd31605da1c1f2ce10a9e0b9985f8da3.png)
+![](img/fd31605da1c1f2ce10a9e0b9985f8da3.png)
 
 coco 对象类别
 
@@ -48,7 +48,7 @@ coco 对象类别
 
 该 API 还支持大量的模型。见下表作为参考。
 
-![](../Images/35568105aa26885446c3b973afee2ec8.png)
+![](img/35568105aa26885446c3b973afee2ec8.png)
 
 API 支持的模型的小子集
 
@@ -60,7 +60,7 @@ API 支持的模型的小子集
 
 OpenCV 允许我们识别特定颜色的掩膜，我们可以利用这一点来识别红色球员和黄色球员。请参见下面的示例，了解 OpenCV 掩膜如何在图像中检测红色。
 
-![](../Images/9da890317f9dbabcd95094c08c7161be.png)
+![](img/9da890317f9dbabcd95094c08c7161be.png)
 
 图像中红色区域的预测
 
@@ -100,9 +100,9 @@ OpenCV 允许我们识别特定颜色的掩膜，我们可以利用这一点来�
 
 如果你喜欢这篇文章，请给我一个 ❤️ :) 希望你能下载代码并自己试试。
 
-**其他著作**: [http://deeplearninganalytics.org/blog](http://deeplearninganalytics.org/blog)
+**其他著作**: [`deeplearninganalytics.org/blog`](http://deeplearninganalytics.org/blog)
 
-附言：我拥有自己的深度学习咨询公司，并且喜欢处理有趣的问题。我曾帮助多家初创公司部署创新的人工智能解决方案。查看我们的网站——[http://deeplearninganalytics.org/](http://deeplearninganalytics.org/)。
+附言：我拥有自己的深度学习咨询公司，并且喜欢处理有趣的问题。我曾帮助多家初创公司部署创新的人工智能解决方案。查看我们的网站——[`deeplearninganalytics.org/`](http://deeplearninganalytics.org/)。
 
 如果你有一个我们可以合作的项目，请通过我的网站或 email priya.toronto3@gmail.com 联系我
 
@@ -112,17 +112,17 @@ OpenCV 允许我们识别特定颜色的掩膜，我们可以利用这一点来�
 
 +   一个关于使用 OpenCV 检测颜色的好 [教程](https://www.pyimagesearch.com/2014/08/04/opencv-python-color-detection/)
 
-**个人简介：[Priyanka Kochhar](https://github.com/priya-dwivedi)** 拥有超过 10 年的数据科学经验。她现在拥有自己的深度学习咨询公司，喜欢处理有趣的问题。她曾帮助多家初创公司部署创新的人工智能解决方案。如果你有一个她可以合作的项目，请通过 [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com) 联系她。
+**个人简介：[Priyanka Kochhar](https://github.com/priya-dwivedi)** 拥有超过 10 年的数据科学经验。她现在拥有自己的深度学习咨询公司，喜欢处理有趣的问题。她曾帮助多家初创公司部署创新的人工智能解决方案。如果你有一个她可以合作的项目，请通过 priya.toronto3@gmail.com 联系她。
 
 [原文](https://towardsdatascience.com/analyse-a-soccer-game-using-tensorflow-object-detection-and-opencv-e321c230e8f2)。已获许可转载。
 
 **相关内容：**
 
-+   [Google Tensorflow 对象检测 API 是否是实现图像识别的最简单方法？](/2018/03/google-tensorflow-object-detection-api-the-easiest-way-implement-image-recognition.html)
++   Google Tensorflow 对象检测 API 是否是实现图像识别的最简单方法？
 
-+   [使用 Tensorflow 对象检测 API 构建玩具探测器](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)
++   使用 Tensorflow 对象检测 API 构建玩具探测器
 
-+   [训练和可视化词向量](/2018/01/training-visualising-word-vectors.html)
++   训练和可视化词向量
 
 ### 更多相关内容
 

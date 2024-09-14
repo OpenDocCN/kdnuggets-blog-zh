@@ -1,14 +1,14 @@
 # 使用 Keras 编写不到 30 行代码的第一个神经网络
 
-> 原文：[https://www.kdnuggets.com/2019/10/writing-first-neural-net-less-30-lines-code-keras.html](https://www.kdnuggets.com/2019/10/writing-first-neural-net-less-30-lines-code-keras.html)
+> 原文：[`www.kdnuggets.com/2019/10/writing-first-neural-net-less-30-lines-code-keras.html`](https://www.kdnuggets.com/2019/10/writing-first-neural-net-less-30-lines-code-keras.html)
 
-[评论](#comments)
+评论
 
 **作者 [David Gündisch](https://www.linkedin.com/in/david-gundisch/)，云架构师**
 
-![图](../Images/4c65340c70db0e311f666addd510dbfb.png)
+![图](img/4c65340c70db0e311f666addd510dbfb.png)
 
-[https://unsplash.com/@tvick](https://unsplash.com/@tvick)
+[`unsplash.com/@tvick`](https://unsplash.com/@tvick)
 
 回忆起我刚开始探索人工智能的旅程时，我记得有些概念看起来是多么令人畏惧。阅读关于神经网络是什么的简单解释，很快就会引导你进入一篇每第二句都是你从未见过的符号的科学论文。虽然这些论文包含了不可思议的见解和深度，帮助你建立专业知识，但编写第一个神经网络比听起来要简单得多！
 
@@ -16,11 +16,11 @@
 
 好问题！在我们开始编写自己的简单神经网络（简称 NN）的 Python 实现之前，我们应该先了解它们是什么，以及它们为什么如此令人兴奋！
 
-![](../Images/d103aaba7b4d5462965e523aef9e2e3b.png)
+![](img/d103aaba7b4d5462965e523aef9e2e3b.png)
 
 HNC Software 联合创始人 Robert Hecht-Nielsen 博士简单地阐述了这一点。
 
-> *“…一个由若干简单的、高度互联的处理元素组成的计算系统，通过对外部输入的动态状态响应来处理信息。 — *《神经网络入门：第一部分》，Maureen Caudill，人工智能专家，1989年2月
+> *“…一个由若干简单的、高度互联的处理元素组成的计算系统，通过对外部输入的动态状态响应来处理信息。 — *《神经网络入门：第一部分》，Maureen Caudill，人工智能专家，1989 年 2 月
 
 实质上，神经网络是一组数学表达式，它们非常擅长识别信息或数据中的模式。神经网络通过一种模拟人类感知的方式实现这一点，但与人类通过视觉识别图像不同，神经网络将这些信息以数值形式包含在向量或标量中（一个仅包含一个数字的向量）。
 
@@ -32,7 +32,7 @@ HNC Software 联合创始人 Robert Hecht-Nielsen 博士简单地阐述了这一
 
 在我们的示例神经网络实现中，我们将使用 MNIST 数据集。
 
-![图](../Images/e205dfefcfece63acf61fd6eb80ddc4a.png)
+![图](img/e205dfefcfece63acf61fd6eb80ddc4a.png)
 
 MNIST 示例数据集
 
@@ -102,9 +102,9 @@ network.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['acc
 
 恭喜！！！你刚刚构建了第一个神经网络！！
 
-现在你可能还有一些问题，例如；什么是relu和softmax？还有，谁是adam？这些都是有效的问题……这些问题的深入解释稍微超出了我们最初进入神经网络的范围，但我们会在后续的文章中进行讲解。
+现在你可能还有一些问题，例如；什么是 relu 和 softmax？还有，谁是 adam？这些都是有效的问题……这些问题的深入解释稍微超出了我们最初进入神经网络的范围，但我们会在后续的文章中进行讲解。
 
-在将数据输入到新创建的模型之前，我们需要将输入数据重新调整为模型可以读取的格式。我们输入数据的原始形状是[60000, 28, 28]，这本质上表示60000张像素高度和宽度为28 x 28的图像。我们可以重新调整数据形状，并将其分为训练用的[60000]张图像和测试用的[10000]张图像。
+在将数据输入到新创建的模型之前，我们需要将输入数据重新调整为模型可以读取的格式。我们输入数据的原始形状是[60000, 28, 28]，这本质上表示 60000 张像素高度和宽度为 28 x 28 的图像。我们可以重新调整数据形状，并将其分为训练用的[60000]张图像和测试用的[10000]张图像。
 
 ```py
 train_images = train_images.reshape((60000, 28 * 28))
@@ -126,7 +126,7 @@ test_labels = to_categorical(test_labels)
 network.fit(train_images, train_labels, epochs=5, batch_size=128)
 ```
 
-我们传入训练图像及其标签，以及epoch，这决定了前向传播和反向传播的次数，还有batch_size，这表示每次前向/反向传播的训练样本数量。
+我们传入训练图像及其标签，以及 epoch，这决定了前向传播和反向传播的次数，还有 batch_size，这表示每次前向/反向传播的训练样本数量。
 
 我们还需要设置性能测量参数，以便识别模型的表现如何。
 
@@ -135,15 +135,15 @@ test_loss, test_acc = network.evaluate(test_images, test_labels)
 print('test_acc:', test_acc, 'test_loss', test_loss)
 ```
 
-然后，瞧！！！你刚刚编写了自己的神经网络，重新调整和编码了数据集，并使模型进行训练！当你第一次运行Python脚本时，Keras将下载MNIST数据集并开始训练5个周期！
+然后，瞧！！！你刚刚编写了自己的神经网络，重新调整和编码了数据集，并使模型进行训练！当你第一次运行 Python 脚本时，Keras 将下载 MNIST 数据集并开始训练 5 个周期！
 
-![图示](../Images/887944752d7aef7096225a9f70ea6bb1.png)
+![图示](img/887944752d7aef7096225a9f70ea6bb1.png)
 
 训练周期与测试输出
 
-对于你的测试准确率，你应该得到大约98%的准确度，这意味着模型在测试时98%的情况下预测了正确的数字，对于你的第一个神经网络来说，这并不差！实际上，你还需要查看测试和训练结果，以便更好地判断你的模型是否过拟合/欠拟合。
+对于你的测试准确率，你应该得到大约 98%的准确度，这意味着模型在测试时 98%的情况下预测了正确的数字，对于你的第一个神经网络来说，这并不差！实际上，你还需要查看测试和训练结果，以便更好地判断你的模型是否过拟合/欠拟合。
 
-我鼓励你尝试调整层数、优化器和损失函数，以及epoch和batch_size，以查看每个因素对模型整体性能的影响！
+我鼓励你尝试调整层数、优化器和损失函数，以及 epoch 和 batch_size，以查看每个因素对模型整体性能的影响！
 
 你刚刚迈出了在漫长而激动人心的学习旅程中的困难第一步！如果需要任何额外的澄清或反馈，请随时联系！
 
@@ -155,34 +155,34 @@ print('test_acc:', test_acc, 'test_loss', test_loss)
 
 **相关内容：**
 
-+   [人工神经网络简介](/2019/10/introduction-artificial-neural-networks.html)
++   人工神经网络简介
 
-+   [温和介绍PyTorch 1.2](/2019/09/gentle-introduction-pytorch-12.html)
++   温和介绍 PyTorch 1.2
 
-+   [TensorFlow与PyTorch与Keras在自然语言处理中的对比](/2019/09/tensorflow-pytorch-keras-nlp.html)
++   TensorFlow 与 PyTorch 与 Keras 在自然语言处理中的对比
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关话题
 
-+   [少于15行代码的多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
++   [少于 15 行代码的多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 
-+   [使用TensorFlow和Keras构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
++   [使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
 +   [一分钟内解释的机器学习算法](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 
-+   [KDnuggets新闻，7月20日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
 
-+   [在不到6个月的时间内成为商业智能分析师](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)
++   [在不到 6 个月的时间内成为商业智能分析师](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)
 
-+   [掌握Python：编写清晰、组织良好的代码的7个策略](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
++   [掌握 Python：编写清晰、组织良好的代码的 7 个策略](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)

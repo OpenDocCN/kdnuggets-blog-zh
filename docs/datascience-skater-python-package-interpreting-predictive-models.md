@@ -1,12 +1,12 @@
 # DataScience.com 发布了用于解释预测模型决策过程的 Python 包。
 
-> 原文：[https://www.kdnuggets.com/2017/05/datascience-skater-python-package-interpreting-predictive-models.html](https://www.kdnuggets.com/2017/05/datascience-skater-python-package-interpreting-predictive-models.html)
+> 原文：[`www.kdnuggets.com/2017/05/datascience-skater-python-package-interpreting-predictive-models.html`](https://www.kdnuggets.com/2017/05/datascience-skater-python-package-interpreting-predictive-models.html)
 
 赞助文章。
 
 DataScience.com 发布了其新 Python 库 **[Skater](https://www.datascience.com/resources/tools/skater)** 的测试版，该库用于解释预测模型。Skater 通过结合多种算法来解释数据与模型预测之间的关系，使用户能够评估模型的表现并识别关键特征。
 
-随着机器学习在商业应用中变得越来越受欢迎——例如评估贷款申请者的信用worthiness、向观众推荐相关内容以及预测在线购物者的消费金额——解释也正成为模型构建过程中的不可或缺的一部分。Skater 提供了一个通用框架，用于描述预测模型，无论构建它们所用的算法是什么，使数据科学从业者可以自由选择所用技术，而不必担心其复杂性。
+随着机器学习在商业应用中变得越来越受欢迎——例如评估贷款申请者的信用 worthiness、向观众推荐相关内容以及预测在线购物者的消费金额——解释也正成为模型构建过程中的不可或缺的一部分。Skater 提供了一个通用框架，用于描述预测模型，无论构建它们所用的算法是什么，使数据科学从业者可以自由选择所用技术，而不必担心其复杂性。
 
 > “在许多情况下，数据科学家会使用简单的建模技术，如线性回归或决策树，因为这些模型容易解释，”DataScience.com 首席战略官威廉·梅尔坎（William Merchan）说。“实际上，他或她是在牺牲性能以换取可解释性；例如，神经网络或集成模型更难以解释，但能产生高度准确的预测。Skater 旨在消除这种妥协。”
 
@@ -30,11 +30,11 @@ Skater 包可通过 [GitHub](https://www.datascience.com/resources/tools/skater)
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -44,7 +44,7 @@ Skater 包可通过 [GitHub](https://www.datascience.com/resources/tools/skater)
 
 +   [Nota AI 发布 NetPresso 模型搜索的 beta 版本，他们…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日：追踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日：追踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
 
 +   [构建预测模型：Python 中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
 

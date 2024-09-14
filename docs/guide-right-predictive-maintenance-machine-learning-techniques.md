@@ -1,8 +1,8 @@
 # 预测性维护机器学习技术指南
 
-> 原文：[https://www.kdnuggets.com/2021/10/guide-right-predictive-maintenance-machine-learning-techniques.html](https://www.kdnuggets.com/2021/10/guide-right-predictive-maintenance-machine-learning-techniques.html)
+> 原文：[`www.kdnuggets.com/2021/10/guide-right-predictive-maintenance-machine-learning-techniques.html`](https://www.kdnuggets.com/2021/10/guide-right-predictive-maintenance-machine-learning-techniques.html)
 
-[评论](#comments)
+评论
 
 **由 [Maruti Techlabs](https://marutitech.com/) 提供**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 你可以选择保守一点，安排定期维护。在这种情况下，你不太可能完全了解机器的生命周期和实际导致故障的因素。由于这个过程不专注于在安排维护之前从机器中提取最大价值，因此成本可能会更高。例如，你可能会在轮胎完全使用之前更换它们，并在发动机油尚未充分使用之前更换它。结果，你将会在维护上花费更多。
 
-![机器学习预测性维护](../Images/c301db96b7bbf13b94f9887de6ec32c2.png)
+![机器学习预测性维护](img/c301db96b7bbf13b94f9887de6ec32c2.png)
 
 第二种思考方式是进行计算并基于预测数据分析做出决策。预测性维护使用机器学习从历史数据中学习，并利用实时数据分析故障模式。由于保守的方法会导致资源浪费，使用机器学习的预测性维护寻求资源的最佳利用，并在故障发生之前进行预测。因此，预测性维护避免了两种极端情况，力求找到完美的中间点。
 
@@ -66,7 +66,7 @@
 
 现在我们有了所需的信息，我们将决定哪种建模技术最适合数据集。在决定建模技术时，还会考虑期望的输出和可用条件。可以考虑三种主要的机器学习技术。然后，根据适配情况，可以做出最终决定。
 
-![机器学习](../Images/cc4f7a508f392c12a6d33d3c6da37aa3.png)
+![机器学习](img/cc4f7a508f392c12a6d33d3c6da37aa3.png)
 
 **技术 1 – 回归模型预测剩余使用寿命 (RUL)**
 
@@ -84,11 +84,11 @@
 
 ### **技术 2 – 分类模型预测预定时间框架内的故障**
 
-创建一个可以准确预测机器寿命的模型可能极具挑战性。然而，实际上，这样的模型并不必要。维护团队只需知道机器是否会在短期内故障。为此，我们可以使用[classification model](https://en.wikipedia.org/wiki/Statistical_classification)预测在接下来的'N'天或周期内的故障（其中N = 任何数字）。
+创建一个可以准确预测机器寿命的模型可能极具挑战性。然而，实际上，这样的模型并不必要。维护团队只需知道机器是否会在短期内故障。为此，我们可以使用[classification model](https://en.wikipedia.org/wiki/Statistical_classification)预测在接下来的'N'天或周期内的故障（其中 N = 任何数字）。
 
-需要的数据类型 - 该模型还需要历史数据和静态数据。它还将依赖于标记和标签事件。因此，数据特征与技术1相同。
+需要的数据类型 - 该模型还需要历史数据和静态数据。它还将依赖于标记和标签事件。因此，数据特征与技术 1 相同。
 
-先决条件 - 先决条件与技术1非常相似。然而，存在以下列出的具体差异：
+先决条件 - 先决条件与技术 1 非常相似。然而，存在以下列出的具体差异：
 
 +   由于我们不是预测确切时间，而是寻找一个时间范围，因此模型不需要假设逐渐退化。
 
@@ -106,11 +106,11 @@
 
 ### **结论**
 
-![Machine-Learning-Predictive-Maintenance](../Images/a5bccdafbedfe86c4cf2baf0a0662333.png)
+![Machine-Learning-Predictive-Maintenance](img/a5bccdafbedfe86c4cf2baf0a0662333.png)
 
 本质上，这里没有一种通用策略。每个项目都需要根据实际情况进行处理。第一步应是了解系统、问题、机器/系统周围的条件，然后根据所需结果制定模型。
 
-在[Maruti Techlabs](https://marutitech.com/)，我们在高级预测建模和部署大规模大数据管道方面拥有丰富的经验。凭借一支经验丰富的数据科学和机器学习专业团队，我们为客户设计、实施和工业化机器学习及AI解决方案，覆盖众多行业。我们将技术技能与商业建议相结合，帮助企业建立数据驱动的能力。对我们的服务感兴趣？请随时联系或发送邮件至hello@marutitech.com
+在[Maruti Techlabs](https://marutitech.com/)，我们在高级预测建模和部署大规模大数据管道方面拥有丰富的经验。凭借一支经验丰富的数据科学和机器学习专业团队，我们为客户设计、实施和工业化机器学习及 AI 解决方案，覆盖众多行业。我们将技术技能与商业建议相结合，帮助企业建立数据驱动的能力。对我们的服务感兴趣？请随时联系或发送邮件至 hello@marutitech.com
 
 **简介: [Maruti Techlabs](https://marutitech.com/)** 旨在通过数字化转型重新定义企业，并成为全球尊敬的企业，推动传统商业解决方案的边界。
 
@@ -118,17 +118,17 @@
 
 **相关:**
 
-+   [在生产环境中服务ML模型：常见模式](/2021/10/serving-ml-models-production-common-patterns.html)
++   在生产环境中服务 ML 模型：常见模式
 
-+   [20个机器学习项目，让你找到工作](/2021/09/20-machine-learning-projects-hired.html)
++   20 个机器学习项目，让你找到工作
 
-+   [构建和运作机器学习模型：成功的三条建议](/2021/10/building-operationalizing-machine-learning-models.html)
++   构建和运作机器学习模型：成功的三条建议
 
 ### 相关主题更多内容
 
-+   [寻找最佳IDE软件](https://www.kdnuggets.com/2022/05/finding-best-ide-software.html)
++   [寻找最佳 IDE 软件](https://www.kdnuggets.com/2022/05/finding-best-ide-software.html)
 
-+   [NLP中不同词嵌入技术的终极指南](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
++   [NLP 中不同词嵌入技术的终极指南](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
 
 +   [数据科学中异常检测技术的初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)
 
@@ -136,4 +136,4 @@
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

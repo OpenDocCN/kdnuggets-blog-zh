@@ -1,10 +1,10 @@
-# 另10门免费的必看机器学习和数据科学课程
+# 另 10 门免费的必看机器学习和数据科学课程
 
-> 原文：[https://www.kdnuggets.com/2019/04/another-10-free-must-see-courses-machine-learning-data-science.html](https://www.kdnuggets.com/2019/04/another-10-free-must-see-courses-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/04/another-10-free-must-see-courses-machine-learning-data-science.html`](https://www.kdnuggets.com/2019/04/another-10-free-must-see-courses-machine-learning-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-我们之前的免费机器学习和数据科学课程系列受到了好评……所以显然是时候再来一波了。这里有另外10门课程，帮助你度过春季学习季节。课程涵盖从入门机器学习到深度学习、自然语言处理等内容。
+我们之前的免费机器学习和数据科学课程系列受到了好评……所以显然是时候再来一波了。这里有另外 10 门课程，帮助你度过春季学习季节。课程涵盖从入门机器学习到深度学习、自然语言处理等内容。
 
 这一系列课程由 Delta Analytics 提供，作者和培训师为 Aurélien Geron，威斯康星大学麦迪逊分校，AI 研究员 Goku Mohandas，滑铁卢大学，新加坡国立大学以及不列颠哥伦比亚大学。
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 如果在阅读完这个列表后，你还想要更多免费的优质学习材料，请查看底部的相关帖子。祝学习愉快！
 
-![图](../Images/3184657f229869589aec9d357238e1df.png)
+![图](img/3184657f229869589aec9d357238e1df.png)
 
 来源: [深度无监督学习春季课程（UC 伯克利）](https://sites.google.com/view/berkeley-cs294-158-sp19/home)
 
@@ -82,29 +82,29 @@ Aurélien Geron
 
 新加坡国立大学
 
-> 本课程几乎逐字照搬了斯坦福大学Richard Socher的CS 224N自然语言处理深度学习课程。我们在Socher的许可下遵循他们课程的框架和论文选择。
+> 本课程几乎逐字照搬了斯坦福大学 Richard Socher 的 CS 224N 自然语言处理深度学习课程。我们在 Socher 的许可下遵循他们课程的框架和论文选择。
 
 **9\. [应用自然语言处理](http://people.ischool.berkeley.edu/~dbamman/info256.html)**
 
 加州大学伯克利分校
 
-> 本课程考察了自然语言处理作为探索和推理文本数据的方法集的使用，特别关注NLP的应用方面——以新的和创造性的方式使用现有的NLP方法和Python库（而不是探索其核心算法）。
+> 本课程考察了自然语言处理作为探索和推理文本数据的方法集的使用，特别关注 NLP 的应用方面——以新的和创造性的方式使用现有的 NLP 方法和 Python 库（而不是探索其核心算法）。
 > 
-> 这是一个应用课程；每节课的时间将分为短讲座和使用Jupyter notebooks的课堂实验（大约各占50%）。学生将在课堂上进行大量编程，并与其他学生和教师分组合作。学生必须为每节课做准备，并在课前提交准备材料；出席课堂是必需的。
+> 这是一个应用课程；每节课的时间将分为短讲座和使用 Jupyter notebooks 的课堂实验（大约各占 50%）。学生将在课堂上进行大量编程，并与其他学生和教师分组合作。学生必须为每节课做准备，并在课前提交准备材料；出席课堂是必需的。
 
 **10\. [机器学习讲座](https://www.cs.ubc.ca/~schmidtm/Courses/LecturesOnML/)**
 
 英属哥伦比亚大学
 
-> 这是我在UBC教授机器学习的各种课程的资料汇总，包括来自80多次讲座的内容，涵盖了大量与机器学习相关的主题。符号表示在各个主题中相当一致，这使得查看关系变得更容易，而这些主题旨在按顺序学习（难度逐渐增加，概念在首次出现时进行定义）。我将这些资料放在一个地方，以备人们在教育用途上发现它们有用。
+> 这是我在 UBC 教授机器学习的各种课程的资料汇总，包括来自 80 多次讲座的内容，涵盖了大量与机器学习相关的主题。符号表示在各个主题中相当一致，这使得查看关系变得更容易，而这些主题旨在按顺序学习（难度逐渐增加，概念在首次出现时进行定义）。我将这些资料放在一个地方，以备人们在教育用途上发现它们有用。
 
 **相关：**
 
-+   [10个更多必看的免费机器学习和数据科学课程](/2018/12/10-more-free-must-see-courses-machine-learning-data-science.html)
++   10 个更多必看的免费机器学习和数据科学课程
 
-+   [10个必看的免费机器学习和数据科学课程](/2018/11/10-free-must-see-courses-machine-learning-data-science.html)
++   10 个必看的免费机器学习和数据科学课程
 
-+   [另外 10 本免费必读的机器学习和数据科学书籍](/2019/03/another-10-free-must-read-books-for-machine-learning-and-data-science.html)
++   另外 10 本免费必读的机器学习和数据科学书籍
 
 ### 更多相关话题
 

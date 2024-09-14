@@ -1,8 +1,8 @@
 # Prof. Andrew Ng 关于构建机器学习职业和阅读研究论文的建议
 
-> 原文：[https://www.kdnuggets.com/2019/09/advice-building-machine-learning-career-research-papers-andrew-ng.html](https://www.kdnuggets.com/2019/09/advice-building-machine-learning-career-research-papers-andrew-ng.html)
+> 原文：[`www.kdnuggets.com/2019/09/advice-building-machine-learning-career-research-papers-andrew-ng.html`](https://www.kdnuggets.com/2019/09/advice-building-machine-learning-career-research-papers-andrew-ng.html)
 
-[评论](#comments)
+评论
 
 **作者：[穆罕默德·阿里·哈比布](https://www.linkedin.com/in/mohamed-ali-habib/)，计算机科学毕业生**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -42,7 +42,7 @@
 
 1.  **编制文献清单：** 尝试创建一份研究论文、[medium](https://medium.com/)文章及其他任何文本或学习资源的清单。
 
-1.  **跳跃式阅读列表**：基本上，你应该以并行的方式阅读研究论文；也就是说，尽量同时处理多篇论文。具体来说，尝试快速浏览和理解这些论文中的每一篇，不必全部阅读，也许你可以阅读每篇论文的10–20%，这可能足以让你对论文有一个高层次的理解。之后，你可以决定淘汰一些论文，或者只挑选一两篇论文进行深入阅读。
+1.  **跳跃式阅读列表**：基本上，你应该以并行的方式阅读研究论文；也就是说，尽量同时处理多篇论文。具体来说，尝试快速浏览和理解这些论文中的每一篇，不必全部阅读，也许你可以阅读每篇论文的 10–20%，这可能足以让你对论文有一个高层次的理解。之后，你可以决定淘汰一些论文，或者只挑选一两篇论文进行深入阅读。
 
 他还提到，如果你阅读：
 
@@ -82,13 +82,13 @@
 
 例如，这是作者用来描述网络架构的常见格式，特别是在计算机视觉领域：
 
-![图示](../Images/27aba93a9b2644f195ecc50990b2d20e.png)
+![图示](img/27aba93a9b2644f195ecc50990b2d20e.png)
 
 ***参考资料：***[* 密集连接卷积网络。*](https://arxiv.org/abs/1608.06993)
 
 ### **理解一篇论文需要多长时间？**
 
-对于相对较新的机器学习人员来说，理解一篇相对简单的论文可能需要一个小时。然而，有时你可能会遇到需要3小时甚至更长时间才能真正理解的论文。
+对于相对较新的机器学习人员来说，理解一篇相对简单的论文可能需要一个小时。然而，有时你可能会遇到需要 3 小时甚至更长时间才能真正理解的论文。
 
 ### **论文来源：**
 
@@ -130,9 +130,9 @@
 
 1.  **有意义的工作：** 展示你能胜任工作的项目。
 
-一个成功的机器学习工程师的非常常见模式是，***优秀的求职者***，是发展***T型知识基础***。即对AI中的许多不同主题有广泛理解，并在至少一个领域有非常深刻的理解。
+一个成功的机器学习工程师的非常常见模式是，***优秀的求职者***，是发展***T 型知识基础***。即对 AI 中的许多不同主题有广泛理解，并在至少一个领域有非常深刻的理解。
 
-![图示](../Images/c3149725b8de981fc318cfb08d774cd2.png)
+![图示](img/c3149725b8de981fc318cfb08d774cd2.png)
 
 ***参考资料：***[*deeplearning.ai*](https://twitter.com/deeplearningai_/status/1153740295651020800)*.*
 
@@ -150,7 +150,7 @@
 
 1.  **你是否与优秀的人/项目合作：**被勤奋的人包围会对你产生影响。
 
-1.  **除了经理之外，还要关注并评估你将合作的团队（你将与他们互动最多的10-30人）。**
+1.  **除了经理之外，还要关注并评估你将合作的团队（你将与他们互动最多的 10-30 人）。**
 
 1.  **不要专注于“品牌”：**公司的品牌与你的个人经验关系不大。
 
@@ -168,9 +168,9 @@
 
 ### **关键要点：**
 
-我试图将Andrew建议的关键要点总结在以下列表中：
+我试图将 Andrew 建议的关键要点总结在以下列表中：
 
-1.  **培养阅读研究论文的习惯：**可以从每周阅读2篇论文开始。
+1.  **培养阅读研究论文的习惯：**可以从每周阅读 2 篇论文开始。
 
 1.  **高效阅读：**编制论文清单，同时阅读多篇论文，并对每篇论文进行多次阅读。
 
@@ -180,7 +180,7 @@
 
 1.  **尽量保持领先：**通过检查机器学习会议论文和其他在线资源来保持领先。
 
-1.  **建立一个T型的人工智能知识基础。**
+1.  **建立一个 T 型的人工智能知识基础。**
 
 1.  **尽量加入一个好的团队**（无论是在大公司还是初创公司），这样可以帮助你高效成长。
 
@@ -204,19 +204,19 @@
 
 **相关内容：**
 
-+   [安德鲁·吴《机器学习的渴望》中的7个有用建议](/2018/05/7-useful-suggestions-machine-learning-yearning.html)
++   安德鲁·吴《机器学习的渴望》中的 7 个有用建议
 
-+   [安德鲁·吴《机器学习的渴望》中的6个关键概念](/2019/08/key-concepts-andrew-ng-machine-learning-yearning.html)
++   安德鲁·吴《机器学习的渴望》中的 6 个关键概念
 
-+   [如果你是转行数据科学的开发者，这里是你的最佳资源](/2019/06/developer-transitioning-data-science-best-resources.html)
++   如果你是转行数据科学的开发者，这里是你的最佳资源
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 

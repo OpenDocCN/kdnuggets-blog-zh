@@ -1,8 +1,8 @@
 # 如何使用数据可视化为你的工作报告和演示文稿增添影响力
 
-> 原文：[https://www.kdnuggets.com/2022/08/data-visualization-add-impact-work-reports-presentations.html](https://www.kdnuggets.com/2022/08/data-visualization-add-impact-work-reports-presentations.html)
+> 原文：[`www.kdnuggets.com/2022/08/data-visualization-add-impact-work-reports-presentations.html`](https://www.kdnuggets.com/2022/08/data-visualization-add-impact-work-reports-presentations.html)
 
-![如何使用数据可视化为你的工作报告和演示文稿增添影响力](../Images/2e888fa61feb895ea9c5272d84d4b5aa.png)
+![如何使用数据可视化为你的工作报告和演示文稿增添影响力](img/2e888fa61feb895ea9c5272d84d4b5aa.png)
 
 图片由 [RODNAE Productions](https://www.pexels.com/photo/overhead-shot-of-a-paper-with-graphs-and-charts-7947663/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@
 
 数据可视化仅仅是从数据中提取的洞察的图形表示。有效的数据可视化以对其相应受众易于接受的方式传达这些数据驱动的洞察。它被广泛认为是数据科学和数据分析中最重要的技能之一。
 
-大局观: [数据可视化](/2019/08/simpliv-data-visualization-data-analyst.html) “通过将大量无形数据转化为易于理解的图像和图形，帮助为利益相关者和其他团队成员提供高质量的信息。”
+大局观: 数据可视化 “通过将大量无形数据转化为易于理解的图像和图形，帮助为利益相关者和其他团队成员提供高质量的信息。”
 
 凭借生成有价值的商业洞察和解决实际问题的能力，数据科学现在正在推动几乎所有行业和领域的创新和变革——包括医疗保健、电子商务、执法、市场营销/广告、交通、体育、娱乐、非营利事业等。
 
@@ -110,7 +110,7 @@ Tableau，这家开发了广泛使用的数据可视化工具的软件公司，�
 
 +   词云
 
-除了分享一些出色的 [数据可视化实例](https://www.tableau.com/learn/articles/data-visualization#:~:text=Examples%20of%20data%20visualization%20in%20action) 外，Tableau 还提供了 [“历史与今日的10个最佳数据可视化示例”](https://www.tableau.com/learn/articles/best-beautiful-data-visualization-examples) 的展示——从拿破仑1812年的行军到伦敦1854年的霍乱爆发，再到1950-2060年的美国按年龄组划分的人口趋势。
+除了分享一些出色的 [数据可视化实例](https://www.tableau.com/learn/articles/data-visualization#:~:text=Examples%20of%20data%20visualization%20in%20action) 外，Tableau 还提供了 [“历史与今日的 10 个最佳数据可视化示例”](https://www.tableau.com/learn/articles/best-beautiful-data-visualization-examples) 的展示——从拿破仑 1812 年的行军到伦敦 1854 年的霍乱爆发，再到 1950-2060 年的美国按年龄组划分的人口趋势。
 
 # 如何将数据可视化融入你的工作和生活
 
@@ -136,7 +136,7 @@ Tableau，这家开发了广泛使用的数据可视化工具的软件公司，�
 
 +   动态图形和视频
 
-就选择合适的格式用于数据可视化应用而言，商业智能软件公司 Sisense 深入探讨了 [13种不同的数据可视化选项](https://www.sisense.com/blog/10-useful-ways-visualize-data-examples/)，从基本的到更高级的，解释了每种选项的独特功能以及何时使用它们以获得最大效果。他们的列表还包括以下格式的视觉示例：
+就选择合适的格式用于数据可视化应用而言，商业智能软件公司 Sisense 深入探讨了 [13 种不同的数据可视化选项](https://www.sisense.com/blog/10-useful-ways-visualize-data-examples/)，从基本的到更高级的，解释了每种选项的独特功能以及何时使用它们以获得最大效果。他们的列表还包括以下格式的视觉示例：
 
 1.  指标清晰地展示一个关键绩效指标（KPI）
 
@@ -170,14 +170,14 @@ Tableau，这家开发了广泛使用的数据可视化工具的软件公司，�
 
 ### 更多相关内容
 
-+   [IMPACT: 数据可观察性峰会将于11月8日回归，详细信息请查看…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT: 数据可观察性峰会将于 11 月 8 日回归，详细信息请查看…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
 +   [基准率谬误及其对数据科学的影响](https://www.kdnuggets.com/2023/04/base-rate-fallacy-impact-data-science.html)
 
 +   [从数据分析师到数据战略师：创造影响的职业道路](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
 
-+   [IMPACT 2022：数据可观察性峰会，10月25-26日](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)
++   [IMPACT 2022：数据可观察性峰会，10 月 25-26 日](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)
 
-+   [Monte Carlo 正在启动IMPACT 2023，来自数据与AI开创者的主题演讲](https://www.kdnuggets.com/2023/11/monte-carlo-is-kicking-off-impact-2023-keynotes-from-data-ai-pioneers)
++   [Monte Carlo 正在启动 IMPACT 2023，来自数据与 AI 开创者的主题演讲](https://www.kdnuggets.com/2023/11/monte-carlo-is-kicking-off-impact-2023-keynotes-from-data-ai-pioneers)
 
 +   [人工智能对科技行业的影响](https://www.kdnuggets.com/the-impact-of-ai-on-the-tech-industry)

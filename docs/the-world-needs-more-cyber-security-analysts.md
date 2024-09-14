@@ -1,8 +1,8 @@
 # 世界需要更多的网络安全分析师！
 
-> 原文：[https://www.kdnuggets.com/the-world-needs-more-cyber-security-analysts](https://www.kdnuggets.com/the-world-needs-more-cyber-security-analysts)
+> 原文：[`www.kdnuggets.com/the-world-needs-more-cyber-security-analysts`](https://www.kdnuggets.com/the-world-needs-more-cyber-security-analysts)
 
-![网络安全分析师](../Images/ca2dac9c75468b4c32299a207e0d26a2.png)
+![网络安全分析师](img/ca2dac9c75468b4c32299a207e0d26a2.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -26,9 +26,9 @@
 
 ## 网络安全分析师的职责是什么？
 
-网络安全分析师的主要职责是保护组织的网络和系统免受攻击。这包括了解即将出现的IT趋势，制定应急计划，审查任何可疑活动，并能够以正确的方式报告安全漏洞并尽快解决问题。
+网络安全分析师的主要职责是保护组织的网络和系统免受攻击。这包括了解即将出现的 IT 趋势，制定应急计划，审查任何可疑活动，并能够以正确的方式报告安全漏洞并尽快解决问题。
 
-安全情报公司表示，网络安全劳动力需要每年增长[12.6%](https://securityintelligence.com/articles/cybersecurity-workforce-trends-2024/)。然而，在2023年，它只增长了8.7%。
+安全情报公司表示，网络安全劳动力需要每年增长[12.6%](https://securityintelligence.com/articles/cybersecurity-workforce-trends-2024/)。然而，在 2023 年，它只增长了 8.7%。
 
 ### 你需要什么资格？
 
@@ -42,7 +42,7 @@
 
 链接：[谷歌网络安全认证](https://imp.i384100.net/Or7b5N)
 
-这个由谷歌在 Coursera 平台提供的认证课程适合希望进入网络安全领域的初学者。你无需任何先前的经验，可以按自己的节奏学习。如果每周投入7小时，你可以在6个月内完成该课程。
+这个由谷歌在 Coursera 平台提供的认证课程适合希望进入网络安全领域的初学者。你无需任何先前的经验，可以按自己的节奏学习。如果每周投入 7 小时，你可以在 6 个月内完成该课程。
 
 在这个认证课程中，你将理解网络安全实践的重要性及其对组织的影响。你还将能够识别常见的风险、威胁和漏洞，并学习缓解这些问题的技术。
 
@@ -52,7 +52,7 @@
 
 链接: [微软网络安全分析师职业证书](https://imp.i384100.net/k0YWNN)
 
-这个认证由微软提供，由9门课程组成，适合初学者。你可以按照自己的节奏学习，安排灵活。如果每周投入10小时，你可以在6个月内完成这个认证。
+这个认证由微软提供，由 9 门课程组成，适合初学者。你可以按照自己的节奏学习，安排灵活。如果每周投入 10 小时，你可以在 6 个月内完成这个认证。
 
 在这个认证课程中，你将了解网络安全环境，并学习安全、合规和身份解决方案的核心概念。还会了解组织网络的漏洞，并减轻对网络基础设施的攻击，以保护数据。
 
@@ -62,7 +62,7 @@
 
 链接: [IBM 网络安全分析师职业证书](https://imp.i384100.net/eKYNbz)
 
-这个认证由 IBM 提供，由8门课程组成。它也针对初学者，不需要任何先前的经验。它是一个自定进度的学习认证，因此没有截止日期。如果每周投入10小时，你可以在4个月内完成该认证，并且获得学位学分。
+这个认证由 IBM 提供，由 8 门课程组成。它也针对初学者，不需要任何先前的经验。它是一个自定进度的学习认证，因此没有截止日期。如果每周投入 10 小时，你可以在 4 个月内完成该认证，并且获得学位学分。
 
 在这个认证课程中，你将发展对网络安全分析师工具的知识，包括数据保护、终端保护、SIEM 以及系统和网络基础。你还将学习在今天的网络安全环境中重要的合规性和威胁情报主题。
 

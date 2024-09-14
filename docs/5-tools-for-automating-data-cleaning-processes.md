@@ -1,8 +1,8 @@
 # 自动化数据清理过程的五种工具
 
-> 原文：[https://www.kdnuggets.com/5-tools-for-automating-data-cleaning-processes](https://www.kdnuggets.com/5-tools-for-automating-data-cleaning-processes)
+> 原文：[`www.kdnuggets.com/5-tools-for-automating-data-cleaning-processes`](https://www.kdnuggets.com/5-tools-for-automating-data-cleaning-processes)
 
-![自动化数据清理过程的五种工具](../Images/4409144005f7ad1c5496414e8b06529f.png)
+![自动化数据清理过程的五种工具](img/4409144005f7ad1c5496414e8b06529f.png)
 
 图片来源于 [freepik](https://www.freepik.com/free-photo/top-view-circular-frame-with-cleaning-products_6072569.htm#fromView=search&page=1&position=31&uuid=125ca315-6a5a-4be4-b8f9-320754c5def2)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -74,12 +74,12 @@
 
 +   [机器学习教材：随机过程与模拟](https://www.kdnuggets.com/2022/03/datashaping-machine-learning-textbook-stochastic-processes-simulations.html)
 
-+   [Orca LLM：模拟ChatGPT的推理过程](https://www.kdnuggets.com/2023/06/orca-llm-reasoning-processes-chatgpt.html)
++   [Orca LLM：模拟 ChatGPT 的推理过程](https://www.kdnuggets.com/2023/06/orca-llm-reasoning-processes-chatgpt.html)
 
-+   [自动化思维链：AI如何自我提示进行推理](https://www.kdnuggets.com/2023/07/automating-chain-of-thought-ai-prompt-itself-reason.html)
++   [自动化思维链：AI 如何自我提示进行推理](https://www.kdnuggets.com/2023/07/automating-chain-of-thought-ai-prompt-itself-reason.html)
 
 +   [SQL、Python、数据清理、数据整理与探索性数据分析精通指南集合](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
 
 +   [通过这本免费的电子书学习数据清理和预处理，提升数据科学技能](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)
 
-+   [SQL中的数据清理：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
++   [SQL 中的数据清理：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)

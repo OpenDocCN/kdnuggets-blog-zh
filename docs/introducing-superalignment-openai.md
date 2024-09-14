@@ -1,36 +1,36 @@
-# OpenAI介绍Superalignment
+# OpenAI 介绍 Superalignment
 
-> 原文：[https://www.kdnuggets.com/2023/08/introducing-superalignment-openai.html](https://www.kdnuggets.com/2023/08/introducing-superalignment-openai.html)
+> 原文：[`www.kdnuggets.com/2023/08/introducing-superalignment-openai.html`](https://www.kdnuggets.com/2023/08/introducing-superalignment-openai.html)
 
-![OpenAI介绍Superalignment](../Images/c5c684b09dea6908719caf1e9f2f26aa.png)
+![OpenAI 介绍 Superalignment](img/c5c684b09dea6908719caf1e9f2f26aa.png)
 
 图片由作者提供
 
-OpenAI频繁出现在媒体上，不仅因为发布了ChatGPT、GPT-3和GPT-4，还因为围绕ChatGPT等AI系统的伦理问题以及当今世界的社会经济问题。
+OpenAI 频繁出现在媒体上，不仅因为发布了 ChatGPT、GPT-3 和 GPT-4，还因为围绕 ChatGPT 等 AI 系统的伦理问题以及当今世界的社会经济问题。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-首席执行官Sam Altman在[AI安全性](/2023/06/openai-approach-ai-safety.html)方面已多次发表讲话，例如在美国参议院委员会上，他表示：
+首席执行官 Sam Altman 在 AI 安全性方面已多次发表讲话，例如在美国参议院委员会上，他表示：
 
 “我认为如果这项技术出现问题，它可能会变得非常严重……我们希望对此保持警觉。我们希望与政府合作，防止这种情况发生。”
 
-话虽如此，OpenAI团队已经开始采取行动。许多人担心超智能，即一个智能超越人类思维的AI系统。有些人相信技术能够解决世界上许多当前的问题，然而，由于对其知之甚少或理解有限，很难权衡其利弊。
+话虽如此，OpenAI 团队已经开始采取行动。许多人担心超智能，即一个智能超越人类思维的 AI 系统。有些人相信技术能够解决世界上许多当前的问题，然而，由于对其知之甚少或理解有限，很难权衡其利弊。
 
 也许谈论[超智能](https://openai.com/blog/governance-of-superintelligence)还为时尚早，但这无疑是一个需要进行的对话。最佳的做法是尽早管理这些潜在的风险，以免它们变成无法处理的大问题。
 
-# OpenAI的做法
+# OpenAI 的做法
 
-OpenAI表示他们目前没有针对超智能AI的解决方案，不过他们正在与新团队Superalignment合作进行研究。他们目前使用的技术包括[来自人类反馈的强化学习](https://openai.com/research/instruction-following)，这在很大程度上依赖于人类对AI进行监督。然而，关于未来人类无法可靠监督AI的问题以及处理这一问题所需的新科学突破存在担忧。
+OpenAI 表示他们目前没有针对超智能 AI 的解决方案，不过他们正在与新团队 Superalignment 合作进行研究。他们目前使用的技术包括[来自人类反馈的强化学习](https://openai.com/research/instruction-following)，这在很大程度上依赖于人类对 AI 进行监督。然而，关于未来人类无法可靠监督 AI 的问题以及处理这一问题所需的新科学突破存在担忧。
 
 话虽如此，OpenAI 正在考虑建立一个能够从人类反馈中学习并协助人类评估 AI 的人类级别自动对齐研究人员，同时能够解决其他对齐问题。OpenAI 已将其迄今为止获得的 20% 的计算资源用于这一努力，以迭代对齐超级智能。
 

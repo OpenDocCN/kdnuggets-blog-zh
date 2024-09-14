@@ -1,6 +1,6 @@
-# Python中的稀疏矩阵表示
+# Python 中的稀疏矩阵表示
 
-> 原文：[https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
+> 原文：[`www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html`](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
 
 大多数机器学习从业者习惯于在将数据输入机器学习算法之前采用矩阵表示法。矩阵是理想的形式，通常行表示数据集实例，列表示特征。
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-![图示](../Images/1a29300a49b9bb3c0a35a3f3f0f7a31d.png)
+![图示](img/1a29300a49b9bb3c0a35a3f3f0f7a31d.png)
 
 图片来源：[TU 柏林](http://wordpress.discretization.de/geometryprocessingandapplicationsws19/2019/11/28/tutorial-05-textures-and-exterior-calculus/)
 

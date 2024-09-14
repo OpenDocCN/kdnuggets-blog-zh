@@ -1,6 +1,6 @@
 # 在 PyTorch 中调整 Adam 优化器参数
 
-> 原文：[https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
+> 原文：[`www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html`](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
 
 随着数据宇宙的快速扩展和人工神经网络提供高性能的能力，世界正朝着解决以前从未解决过的复杂问题迈进。但是，等一下，有一个难点 - 构建一个稳健的神经网络架构不是一件简单的事。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,19 +28,19 @@
 
 该算法通过考虑过去 n 步梯度的指数加权平均来加速收敛。从数学上讲，
 
-![在 PyTorch 中调整 Adam 优化器参数](../Images/c4012901373cbbec0fef27cb7953c706.png)
+![在 PyTorch 中调整 Adam 优化器参数](img/c4012901373cbbec0fef27cb7953c706.png)
 
 作者提供的图片
 
 注意，较小的? 表示向最小值迈出小步，较大的? 表示迈出大步。类似于权重更新，偏差也按照下面的方程进行更新：
 
-![在 PyTorch 中调整 Adam 优化器参数](../Images/24eb07ea57acc20aab01b78318b7d0a2.png)
+![在 PyTorch 中调整 Adam 优化器参数](img/24eb07ea57acc20aab01b78318b7d0a2.png)
 
 动量不仅加快了收敛速度，还有能力跳过局部最小值。
 
 下图说明了蓝色路径（具有动量的梯度下降）相比于红色路径（仅梯度下降）具有较少的振荡，因此更快地收敛到最小值。
 
-![](../Images/471040238fb6a2b40596c4598d9b64ea.png)
+![](img/471040238fb6a2b40596c4598d9b64ea.png)
 
 来源：[梯度下降解释](https://towardsdatascience.com/gradient-descent-explained-9b953fc0d2c)
 
@@ -50,13 +50,13 @@
 
 添加一个小的 epsilon 值以避免除零错误。
 
-![在 PyTorch 中调整 Adam 优化器参数](../Images/12009e7722f2a1e04a55fa01b7bdd878.png)
+![在 PyTorch 中调整 Adam 优化器参数](img/12009e7722f2a1e04a55fa01b7bdd878.png)
 
 图片来源于作者
 
 Adam 优化器结合了“具有动量的梯度下降”和“RMSprop”算法。它从“动量”（具有动量的梯度下降）中获得速度，从 RMSProp 中获得在不同方向上调整梯度的能力。这两者的结合使其功能强大。如下图所示，ADAM 优化器（黄色）比动量（绿色）和 RMSProp（紫色）收敛更快，但结合了两者的优势。
 
-![在 PyTorch 中调整 Adam 优化器参数](../Images/624e3086bbbe4afb71672c2e8f0a68ab.png)
+![在 PyTorch 中调整 Adam 优化器参数](img/624e3086bbbe4afb71672c2e8f0a68ab.png)
 
 来源：[Paperspace 博客](https://blog.paperspace.com/intro-to-optimization-momentum-rmsprop-adam/)
 
@@ -70,7 +70,7 @@ ADAM 优化器有三个参数需要调整以获得优化值，即 ? 或学习率
 
 学习率，也称为步长，是参数更新与梯度/动量/速度的比率，具体取决于使用的优化算法。
 
-![在 PyTorch 中调整 Adam 优化器参数](../Images/42f469d3e2a6807217d1116aa507182f.png)
+![在 PyTorch 中调整 Adam 优化器参数](img/42f469d3e2a6807217d1116aa507182f.png)
 
 来源：[CS231n 视觉识别中的卷积神经网络](https://cs231n.github.io/neural-networks-3/)
 
@@ -78,7 +78,7 @@ ADAM 优化器有三个参数需要调整以获得优化值，即 ? 或学习率
 
 一个最佳的学习率值（默认值 0.001）意味着优化器会刚好更新参数以达到局部最小值。在大多数情况下，学习率在 0.0001 到 0.01 之间是最佳的。
 
-![在 PyTorch 中调整 Adam 优化器参数](../Images/f547d02cdeaf58fdbe70acfd749a422b.png)
+![在 PyTorch 中调整 Adam 优化器参数](img/f547d02cdeaf58fdbe70acfd749a422b.png)
 
 来源：[设置神经网络的学习率](https://www.jeremyjordan.me/nn-learning-rate/)
 
@@ -86,7 +86,7 @@ ADAM 优化器有三个参数需要调整以获得优化值，即 ? 或学习率
 
 β1 是动量项的指数衰减率，也称为一阶矩估计。它在 PyTorch 中的默认值为 0.9。不同 beta 值对动量值的影响在下图中显示。
 
-![调整 PyTorch 中的 Adam 优化器参数](../Images/3faa14a14add03cf90096d26e2caaa05.png)
+![调整 PyTorch 中的 Adam 优化器参数](img/3faa14a14add03cf90096d26e2caaa05.png)
 
 来源: [带动量的随机梯度下降](https://towardsdatascience.com/stochastic-gradient-descent-with-momentum-a84097641a5d)
 

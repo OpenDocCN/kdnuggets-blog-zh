@@ -1,12 +1,12 @@
 # 医生们是否担心计算机机器学习会抢走他们的工作？
 
-> 原文：[https://www.kdnuggets.com/2017/08/are-physicians-worried-about-computers-machine-learning-their-jobs.html](https://www.kdnuggets.com/2017/08/are-physicians-worried-about-computers-machine-learning-their-jobs.html)
+> 原文：[`www.kdnuggets.com/2017/08/are-physicians-worried-about-computers-machine-learning-their-jobs.html`](https://www.kdnuggets.com/2017/08/are-physicians-worried-about-computers-machine-learning-their-jobs.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **[Pradeep Raamana](https://crossinvalidation.com/author/raamana/)，Cross Invalidated**.
 
-![](../Images/dab42df1e98154036db2a507cdb423bd.png)
+![](img/dab42df1e98154036db2a507cdb423bd.png)
 
 《美国医学会杂志》(JAMA) 发布了一篇题为“*机器学习在医学中的意外后果*”的观点文章 [Cabitza2017JAMA]。标题引人注目，内容也很有趣，涉及了许多在机器学习（ML）与决策支持系统（DSS）交叉领域工作的人的重要关注点。这个观点时机恰当，正值其他人也在对机器学习的夸大期望及其[根本局限性](https://crossinvalidation.com/2017/07/13/a-must-read-perspective-on-machine-learning-and-prediction-in-medicine-beyond-the-peak-of-inflated-expectations/) [Chen2017NEJM]表达担忧之时。然而，文章中提出的几个令人担忧的观点在我看来并没有得到支持。在这次快速评述中，我希望能说服你们，关于机器学习导致的意外后果的报道被极大地夸大了。
 
@@ -28,11 +28,11 @@
 
 这个观点及时地提出了几个关注点，包括医疗数据的不确定性、整合上下文信息的困难和可能的负面后果。尽管我同意这些都是需要解决的重要问题，但我不认同他们暗示（无论是否有意）机器学习在医学中的应用导致这些问题的说法。像*过度依赖*、*技能退化*和*黑箱模型*这些关键词过于泛化了机器学习模型的局限性，无论他们是否有意这么做。根据我对观点的理解，提出的担忧大多源于临床工作流管理及其失败，而不是机器学习本身。需要强调的是，机器学习只是临床决策支持系统的一部分 [Pusic2004BCMJ，见下文]。
 
-![](../Images/6e7d3f46a401d4413133827100027585.png)
+![](img/6e7d3f46a401d4413133827100027585.png)
 
-图片来源：Martin Pusic，医学博士，J. Mark Ansermino，FFA，医学硕士，硕士，FRCPC。临床决策支持系统。BCMJ，第46卷，第5期，2004年6月，第236-239页。
+图片来源：Martin Pusic，医学博士，J. Mark Ansermino，FFA，医学硕士，硕士，FRCPC。临床决策支持系统。BCMJ，第 46 卷，第 5 期，2004 年 6 月，第 236-239 页。
 
-此外，该观点完全跳过了讨论机器学习决策支持系统的有效性和优势，以便将其局限性置于适当的背景下。你知道医疗保健中人为和医疗错误的年成本是*[超过170亿美元](http://content.healthaffairs.org/content/30/4/596.abstract)*，以及超过*[250,000名美国死亡](https://www.hfma.org/Content.aspx?id=48695)*[Donaldson2000NAP,Andel2012JHCF]吗？
+此外，该观点完全跳过了讨论机器学习决策支持系统的有效性和优势，以便将其局限性置于适当的背景下。你知道医疗保健中人为和医疗错误的年成本是*[超过 170 亿美元](http://content.healthaffairs.org/content/30/4/596.abstract)*，以及超过*[250,000 名美国死亡](https://www.hfma.org/Content.aspx?id=48695)*[Donaldson2000NAP,Andel2012JHCF]吗？
 
 我建议你阅读原始观点[Cabitza2017JAMA]，并阅读我下面的回应，以获得更好的视角。我不同意观点中的一些观点，主要是因为它们要么被夸大了，要么没有充分的支持，或者不必要地将责任归咎于机器学习。我在下面引用了一些*观点*中的陈述（按其文章的章节组织；强调是我的）并提供了逐点的*反驳*：
 
@@ -42,7 +42,7 @@
 
     +   提出的技能下降点类似于我们在头脑中或手工乘法能力的一般下降，因为计算器和电脑已经变得司空见惯。暗示我们会因为“过度依赖”计算器和电脑而失去乘法能力是不必要的令人担忧的。相比于计算器出现之前的时代，我们现在可能乘法速度较慢，或者忘记了一些加速技巧，但我怀疑我们会完全忘记如何乘法。以汽车或机动车为例，尽管自动化交通已经变得普遍，但我们从未失去行走或奔跑的能力。
 
-    +   支持这一观点的研究引用了[Hoff2011HCMR]，该研究基于对78名美国初级保健医生的访谈。*一项调查！* 基于*初级保健医生的观点和经验*，而非大规模正式研究中的效果客观测量。最近的*[调查和民意调查](https://www.pewresearch.org/fact-tank/2016/11/09/why-2016-election-polls-missed-their-mark/)*让我们现在面临*[核战争的边缘](https://www.theguardian.com/world/2017/aug/09/north-korea-v-the-us-how-likely-is-war)*！
+    +   支持这一观点的研究引用了[Hoff2011HCMR]，该研究基于对 78 名美国初级保健医生的访谈。*一项调查！* 基于*初级保健医生的观点和经验*，而非大规模正式研究中的效果客观测量。最近的*[调查和民意调查](https://www.pewresearch.org/fact-tank/2016/11/09/why-2016-election-polls-missed-their-mark/)*让我们现在面临*[核战争的边缘](https://www.theguardian.com/world/2017/aug/09/north-korea-v-the-us-how-likely-is-war)*！
 
     +   他们在[Hoff2011HCMR]中研究的两个方面是电子病历和电子临床指南。它们甚至不是基于机器学习的。
 
@@ -50,23 +50,23 @@
 
     +   有夸大的风险，这种去技能化的论点在我看来就像是一些医生担心“*机器人*”会抢走他们的工作！
 
-+   支持去技能化观点的另一个例子是：*“例如，在对50名乳腺X光读片员的研究中，当更具区分性的读片员面对计算机辅助检测标记的挑战性图像时，诊断敏感性下降了14%”*
++   支持去技能化观点的另一个例子是：*“例如，在对 50 名乳腺 X 光读片员的研究中，当更具区分性的读片员面对计算机辅助检测标记的挑战性图像时，诊断敏感性下降了 14%”*
 
     +   这是对引用的研究[Hoff2011HCMR]结果的选择性展示。该研究还指出“*我们发现计算机提示与较低区分度读者在比较容易的病例中（主要是筛查检测到的癌症）的敏感性改善之间存在正相关。这是正确的计算机提示的预期效果。*”。这必须被注意，无论增加幅度多小。有关更多细节，请查看帖子底部。
 
 ### 医疗数据中的不确定性
 
-+   在试图展示ML-DSS受到观察者变异性以及医疗数据中固有不确定性的负面影响时，*观点*说：
++   在试图展示 ML-DSS 受到观察者变异性以及医疗数据中固有不确定性的负面影响时，*观点*说：
 
-    > *“观察到在鉴定和计数荧光染色的循环肿瘤细胞时的观察者间变异性会削弱支持此分类任务的ML-DSS的性能”*
+    > *“观察到在鉴定和计数荧光染色的循环肿瘤细胞时的观察者间变异性会削弱支持此分类任务的 ML-DSS 的性能”*
 
-    +   引用的研究[Svensson2015JIR]明确指出“*随机森林分类器对训练数据的不确定性表现出较强的韧性，而支持向量机的性能则高度依赖于训练数据中的不确定性*”。这并不支持上述陈述，也并不意味着*所有机器学习模型（因此包括ML-DSS）*都受到输入数据中不确定性的严重影响。
+    +   引用的研究[Svensson2015JIR]明确指出“*随机森林分类器对训练数据的不确定性表现出较强的韧性，而支持向量机的性能则高度依赖于训练数据中的不确定性*”。这并不支持上述陈述，也并不意味着*所有机器学习模型（因此包括 ML-DSS）*都受到输入数据中不确定性的严重影响。
 
     +   我同意作者关于医疗数据中存在偏差、不确定性和变异性的观点，这些都是需要考虑的重要因素。随着可穿戴技术和患者监测的出现，导致了大量高质量患者数据的无干扰收集，我认为医疗保健的未来看起来很光明[Hiremath2014Mobihealth]。
 
 ### 上下文的重要性
 
-在试图展示ML-DSS因未使用一些明确规则而出现的一些错误时，*观点*作出如下陈述：
+在试图展示 ML-DSS 因未使用一些明确规则而出现的一些错误时，*观点*作出如下陈述：
 
 +   *“然而，机器学习模型并不对其提供的数据应用明确规则，而是识别数据中的微妙模式。”*
 
@@ -84,7 +84,7 @@
 
 +   这真是太搞笑了，完全是懒惰的论点。这听起来像“汽车的使用可能在现代交通中造成问题并导致误用”。人们确实滥用汽车做坏事了吗？当然。那是否阻止了机动车辆彻底改变人类的流动性？没有。多亏了 ML 和 AI，我们几乎已经站在了自动驾驶汽车的门槛上，努力减少人类的压力和事故！
 
-![](../Images/2a57a03cb53e424d5bb3b2010cac0223.png)![](../Images/cc4d68fd5ae73ffeba8c28970945ded6.png)
+![](img/2a57a03cb53e424d5bb3b2010cac0223.png)![](img/cc4d68fd5ae73ffeba8c28970945ded6.png)
 
 ### 那么 ML-DSS 中的弱点在哪里？
 
@@ -100,11 +100,11 @@
 
 +   或者如果作者确实希望突出*意想不到的*部分，他们可以选择*“由于决策支持系统验证不足导致的意外后果”*
 
-鉴于讨论的问题广泛以及JAMA出版物的广泛影响（几天内超过5万次浏览，Altmetric评分超过570），我们需要注意不要夸大当前证据无法支持的担忧。影响力大，责任更大。
+鉴于讨论的问题广泛以及 JAMA 出版物的广泛影响（几天内超过 5 万次浏览，Altmetric 评分超过 570），我们需要注意不要夸大当前证据无法支持的担忧。影响力大，责任更大。
 
-再次强调，观点提出的问题很重要，我们必须讨论、评估和解决这些问题。我们确实需要更多对ML-DSS的验证，但夸大的担忧以及将过去的失败特别归咎于ML是不充分的。我理解作者在撰写JAMA观点文章时的限制（篇幅很短：1200字，参考文献较少等）。因此，我建议他们发表更长的文章（互联网上有多种选择），并建立更有力的案例。我期待阅读这篇文章并学习更多。
+再次强调，观点提出的问题很重要，我们必须讨论、评估和解决这些问题。我们确实需要更多对 ML-DSS 的验证，但夸大的担忧以及将过去的失败特别归咎于 ML 是不充分的。我理解作者在撰写 JAMA 观点文章时的限制（篇幅很短：1200 字，参考文献较少等）。因此，我建议他们发表更长的文章（互联网上有多种选择），并建立更有力的案例。我期待阅读这篇文章并学习更多。
 
-关于机器人是否会在不久的将来取代医生？[似乎不太可能](https://willrobotstakemyjob.com/29-1060-physicians-and-surgeons)，几率小于0.5%。![](../Images/265fa6a1af463558a6d0dbd57dc6311a.png)
+关于机器人是否会在不久的将来取代医生？[似乎不太可能](https://willrobotstakemyjob.com/29-1060-physicians-and-surgeons)，几率小于 0.5%。![](img/265fa6a1af463558a6d0dbd57dc6311a.png)
 
 **利益冲突**：无。
 
@@ -120,9 +120,9 @@
 
 ### 更多细节
 
-+   乳腺X光检查研究[*Svensson2015JIR*]在其摘要中指出：“*对于44名最不具备鉴别力的放射科医生，在45例相对简单且大多数为CAD检测出的癌症中，使用计算机辅助检测（CAD）与灵敏度提高了0.016（95%置信区间[CI]，0.003–0.028）相关。然而，对于6名最具鉴别力的放射科医生，使用CAD时，15例相对困难的癌症的灵敏度降低了0.145（95% CI，0.034–0.257）。*”
++   乳腺 X 光检查研究[*Svensson2015JIR*]在其摘要中指出：“*对于 44 名最不具备鉴别力的放射科医生，在 45 例相对简单且大多数为 CAD 检测出的癌症中，使用计算机辅助检测（CAD）与灵敏度提高了 0.016（95%置信区间[CI]，0.003–0.028）相关。然而，对于 6 名最具鉴别力的放射科医生，使用 CAD 时，15 例相对困难的癌症的灵敏度降低了 0.145（95% CI，0.034–0.257）。*”
 
-    +   尽管确实重要的是要了解在CAD的帮助下，最具辨别力的读者灵敏度下降的原因（因为它比最不具辨别力的读者的增加要大），但要记住，读者灵敏度只是评估ML-DSS有效性时需要考虑的众多因素之一。作者自己在结尾时推荐：“*任何ML-DSS的质量及其采用的后续监管决策不应仅基于性能指标，而应基于与常规护理相比在相关结果中的临床重要改进的证明，以及患者和医生的满意度。*” 因此，关于ML-DSS导致技能下降的警报至多是微弱的，除非我们看到许多大规模研究在各种DSS工作流中证明这一点。
+    +   尽管确实重要的是要了解在 CAD 的帮助下，最具辨别力的读者灵敏度下降的原因（因为它比最不具辨别力的读者的增加要大），但要记住，读者灵敏度只是评估 ML-DSS 有效性时需要考虑的众多因素之一。作者自己在结尾时推荐：“*任何 ML-DSS 的质量及其采用的后续监管决策不应仅基于性能指标，而应基于与常规护理相比在相关结果中的临床重要改进的证明，以及患者和医生的满意度。*” 因此，关于 ML-DSS 导致技能下降的警报至多是微弱的，除非我们看到许多大规模研究在各种 DSS 工作流中证明这一点。
 
 ### 参考文献
 
@@ -136,9 +136,9 @@
 
 +   *Chen2017NEJM*: Chen, J. H., & Asch, S. M. (2017). 医学中的机器学习与预测——超越膨胀期望的高峰。*新英格兰医学杂志*, *376*(26), 2507。
 
-+   *Donaldson2000NAP*: Donaldson, M. S., Corrigan, J. M., & Kohn, L. T. (Eds.). (2000). *犯错是人类的：构建一个更安全的健康系统* (第6卷)。国家科学院出版社。
++   *Donaldson2000NAP*: Donaldson, M. S., Corrigan, J. M., & Kohn, L. T. (Eds.). (2000). *犯错是人类的：构建一个更安全的健康系统* (第 6 卷)。国家科学院出版社。
 
-+   *Hiremath2014Mobihealth*: Hiremath, S., Yang, G., & Mankodiya, K. (2014年11月). 可穿戴物联网：概念、架构组件及其对以人为本医疗的承诺。*无线移动通信与医疗（Mobihealth），2014年EAI第四届国际会议* (pp. 304-307)。IEEE。
++   *Hiremath2014Mobihealth*: Hiremath, S., Yang, G., & Mankodiya, K. (2014 年 11 月). 可穿戴物联网：概念、架构组件及其对以人为本医疗的承诺。*无线移动通信与医疗（Mobihealth），2014 年 EAI 第四届国际会议* (pp. 304-307)。IEEE。
 
 +   *Hoff2011HCMR:* Hoff T. 初级保健医生使用两种工作创新的技能降低和适应。*健康护理管理评论*。2011;36(4):338-348。
 
@@ -146,7 +146,7 @@
 
 +   *Povyakalo2013MDM*: Povyakalo AA, Alberdi E, Strigini L, Ayton P. 如何区分计算机辅助决策和计算机阻碍决策。*医学决策制定*。2013;33(1):98-107。
 
-+   *Pusic20014BCMJ*: 马丁·普西克（Martin Pusic），医学博士，J. 马克·安瑟米诺（Dr J. Mark Ansermino），FFA，医学硕士，硕士学位，FRCPC。临床决策支持系统。BCMJ，第46卷，第5期，2004年6月，第236-239页。
++   *Pusic20014BCMJ*: 马丁·普西克（Martin Pusic），医学博士，J. 马克·安瑟米诺（Dr J. Mark Ansermino），FFA，医学硕士，硕士学位，FRCPC。临床决策支持系统。BCMJ，第 46 卷，第 5 期，2004 年 6 月，第 236-239 页。
 
 +   *Sittig2008JBI:*  Sittig, D. F., Wright, A., Osheroff, J. A., Middleton, B., Teich, J. M., Ash, J. S., … & Bates, D. W. (2008). 临床决策支持中的重大挑战。*生物医学信息学杂志*，*41*(2), 387-392。
 
@@ -160,21 +160,21 @@
 
 **相关文献：**
 
-+   [4个被机器学习和机器人技术改变的行业](https://example.org/2017/08/4-industries-transformed-machine-learning-robotics.html)
++   [4 个被机器学习和机器人技术改变的行业](https://example.org/2017/08/4-industries-transformed-machine-learning-robotics.html)
 
-+   [简化分析部署：FICO决策管理套件2.0的内部](https://example.org/2016/07/fico-analytic-deployment-decision-management-suite-20.html)
++   [简化分析部署：FICO 决策管理套件 2.0 的内部](https://example.org/2016/07/fico-analytic-deployment-decision-management-suite-20.html)
 
-+   [对AI改善社会的乐观情绪很高，但随着开发AI系统的经验增加而减少](https://example.org/2017/07/optimism-ai-impact-experience.html)
++   [对 AI 改善社会的乐观情绪很高，但随着开发 AI 系统的经验增加而减少](https://example.org/2017/07/optimism-ai-impact-experience.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -186,8 +186,8 @@
 
 +   [谷歌建议你在参加他们的机器学习课程之前做什么…](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
 
-+   [为什么越来越多的开发者在他们的机器学习项目中使用Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
++   [为什么越来越多的开发者在他们的机器学习项目中使用 Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
 +   [顶级编程语言及其应用](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 
-+   [深入了解13种数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
++   [深入了解 13 种数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)

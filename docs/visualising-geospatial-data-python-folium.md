@@ -1,30 +1,30 @@
-# 使用Folium在Python中可视化地理空间数据
+# 使用 Folium 在 Python 中可视化地理空间数据
 
-> 原文：[https://www.kdnuggets.com/2018/09/visualising-geospatial-data-python-folium.html](https://www.kdnuggets.com/2018/09/visualising-geospatial-data-python-folium.html)
+> 原文：[`www.kdnuggets.com/2018/09/visualising-geospatial-data-python-folium.html`](https://www.kdnuggets.com/2018/09/visualising-geospatial-data-python-folium.html)
 
-[评论](#comments)
+评论
 
 **由[Parul Pandey](https://www.linkedin.com/in/parul-pandey-a5498975/)提供**
 
-![Folium地图](../Images/d6553c75e17345e93a10225e3cec47bf.png)
+![Folium 地图](img/d6553c75e17345e93a10225e3cec47bf.png)
 
 数据可视化是一个更广泛的术语，描述了通过将数据放置在视觉上下文中来帮助人们理解数据重要性的任何努力。模式、趋势和关联可以通过视觉方式轻松展示，否则可能在文本数据中被忽视。它是数据科学家工具包的基本组成部分。创建可视化很简单，但创建好的可视化则困难得多。它需要细致的眼光和大量的专业知识来创建既简单又有效的可视化。今天有强大的可视化工具和库，它们重新定义了可视化的意义。
 
-使用Python的优点在于它提供了满足各种数据可视化需求的库。其中一个库是**Folium**，它对于可视化地理数据（**Geo data**）非常有用。地理数据（**Geo data**）科学是数据科学的一个子集，涉及基于位置的数据，即对象及其在空间中的关系的描述。
+使用 Python 的优点在于它提供了满足各种数据可视化需求的库。其中一个库是**Folium**，它对于可视化地理数据（**Geo data**）非常有用。地理数据（**Geo data**）科学是数据科学的一个子集，涉及基于位置的数据，即对象及其在空间中的关系的描述。
 
 ### **前提条件**
 
-本教程假设你具备基本的Python和Jupyter notebook知识，并熟悉Pandas库。
+本教程假设你具备基本的 Python 和 Jupyter notebook 知识，并熟悉 Pandas 库。
 
-### **Folium简介**
+### **Folium 简介**
 
-Folium是一个强大的Python数据可视化库，主要用于帮助人们可视化地理空间数据。使用Folium，可以创建世界上任何位置的地图，只要知道其经纬度值。此外，Folium创建的地图本质上是交互式的，所以在地图渲染后可以进行缩放，这是一项非常有用的功能。
+Folium 是一个强大的 Python 数据可视化库，主要用于帮助人们可视化地理空间数据。使用 Folium，可以创建世界上任何位置的地图，只要知道其经纬度值。此外，Folium 创建的地图本质上是交互式的，所以在地图渲染后可以进行缩放，这是一项非常有用的功能。
 
-Folium利用了Python生态系统在数据处理方面的优势以及Leaflet.js库在制图方面的优势。数据在Python中处理，然后通过folium在Leaflet地图中可视化。
+Folium 利用了 Python 生态系统在数据处理方面的优势以及 Leaflet.js 库在制图方面的优势。数据在 Python 中处理，然后通过 folium 在 Leaflet 地图中可视化。
 
 ### **安装**
 
-在使用Folium之前，可能需要通过以下两种方法之一在系统上安装它：
+在使用 Folium 之前，可能需要通过以下两种方法之一在系统上安装它：
 
 ```py
 
@@ -44,15 +44,15 @@ $ conda install -c conda-forge folium
 
 **下载数据集**
 
-我们将使用[世界发展指标](https://www.kaggle.com/worldbank/world-development-indicators)数据集，该数据集是Kaggle上的一个开放数据集。我们将使用数据集中的‘indicators.csv’文件。
+我们将使用[世界发展指标](https://www.kaggle.com/worldbank/world-development-indicators)数据集，该数据集是 Kaggle 上的一个开放数据集。我们将使用数据集中的‘indicators.csv’文件。
 
 由于我们处理的是地理空间地图，因此还需要国家坐标来进行绘制。从[这里](https://github.com/python-visualization/folium/blob/master/examples/data/world-countries.json)下载文件。
 
-文件也可以从我的[github仓库](https://github.com/parulnith/Visualising-Geospatial-data-with-Python/blob/master/world-countries.json)下载。
+文件也可以从我的[github 仓库](https://github.com/parulnith/Visualising-Geospatial-data-with-Python/blob/master/world-countries.json)下载。
 
 ### **探索数据集**
 
-世界发展指标数据集只是从世界银行实际提供的数据集中稍作修改的版本。它包含了从1960年到2015年，来自约247个国家的超过一千个年度经济发展指标。一些指标包括：
+世界发展指标数据集只是从世界银行实际提供的数据集中稍作修改的版本。它包含了从 1960 年到 2015 年，来自约 247 个国家的超过一千个年度经济发展指标。一些指标包括：
 
 ```py
 1\. Adolescent fertility rate (births per 1,000 women)
@@ -90,9 +90,9 @@ data.head()
 
 我们得到如下结果。看来这些指标数据集中，不同国家有不同的指标，包含了指标的年份和数值。
 
-![Folium 国家指标](../Images/36b25563ec5b72ec14eef16624591e03.png)
+![Folium 国家指标](img/36b25563ec5b72ec14eef16624591e03.png)
 
-**出生时女性预期寿命（年）**似乎是一个很好的调查指标。因此，我们提取2013年所有国家的预期寿命数据。我们只是随机选择了这一年。
+**出生时女性预期寿命（年）**似乎是一个很好的调查指标。因此，我们提取 2013 年所有国家的预期寿命数据。我们只是随机选择了这一年。
 
 同时，我们来设置绘图的数据，仅保留国家代码和我们绘制的数值。我们还需要提取指标名称，以便在图例中使用。
 
@@ -120,9 +120,9 @@ hist_indicator = stage.iloc[0]['IndicatorName']
 
 ```
 
-![Folium 预期寿命](../Images/38b0e98192ab09df483e62ef05c40c53.png)
+![Folium 预期寿命](img/38b0e98192ab09df483e62ef05c40c53.png)
 
-![Folium 国家代码](../Images/4528dff0089a9542db5e1bdcac9f6173.png)
+![Folium 国家代码](img/4528dff0089a9542db5e1bdcac9f6173.png)
 
 ### **创建 Folium 交互地图**
 
@@ -163,7 +163,7 @@ HTML('<iframe src=plot_data.html width=700 height=450></iframe>')
 
 我们将获得如下图所示的地图：
 
-![Folium 地图2](../Images/fa449546d59ceddc76332d849cc9b67d.png)
+![Folium 地图 2](img/fa449546d59ceddc76332d849cc9b67d.png)
 
 现在我们有了我们的地图。首先注意，深色表示女性的预期寿命较高。显然，美国和大多数欧洲国家的女性预期寿命较高。
 
@@ -179,30 +179,30 @@ HTML('<iframe src=plot_data.html width=700 height=450></iframe>')
 
 +   [欧洲的大数据、机器学习和数据可视化的未来](https://www.kdnuggets.com/2018/08/ieg-future-big-data-machine-learning-data-visualization-europe.html)
 
-+   [可视化地理空间数据的7种技巧](https://www.kdnuggets.com/2017/10/7-techniques-visualize-geospatial-data.html)
++   [可视化地理空间数据的 7 种技巧](https://www.kdnuggets.com/2017/10/7-techniques-visualize-geospatial-data.html)
 
 * * *
 
-## 我们的3个最佳课程推荐
+## 我们的 3 个最佳课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
 ### 更多相关主题
 
-+   [5个用于地理空间数据分析的Python包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
++   [5 个用于地理空间数据分析的 Python 包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
 
-+   [在Python中利用GeoPandas进行地理空间数据分析](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)
++   [在 Python 中利用 GeoPandas 进行地理空间数据分析](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)
 
-+   [使用Google Earth Engine在Python中构建地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
++   [使用 Google Earth Engine 在 Python 中构建地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
 
-+   [使用Geemap进行地理空间数据分析](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)
++   [使用 Geemap 进行地理空间数据分析](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)
 
-+   [如何使用Python确定最佳拟合数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)
++   [如何使用 Python 确定最佳拟合数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)
 
-+   [KDnuggets新闻，8月17日：如何进行运动检测…](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何进行运动检测…](https://www.kdnuggets.com/2022/n33.html)

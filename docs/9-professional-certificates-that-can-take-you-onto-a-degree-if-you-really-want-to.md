@@ -1,8 +1,8 @@
 # 9 个专业证书可以让你进入学位课程…如果你真的想要的话
 
-> 原文：[https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
+> 原文：[`www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to`](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
-![专业技术证书](../Images/d123e00aab7174d431cf4405aecf6b08.png)
+![专业技术证书](img/d123e00aab7174d431cf4405aecf6b08.png)
 
 作者 | Canva 图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -96,11 +96,11 @@
 
 链接：[IBM AI Developer](https://imp.i384100.net/Or2VvA)
 
-时长：6个月，每周4小时
+时长：6 个月，每周 4 小时
 
 级别：初学者
 
-正如我们所知，AI 和生成性 AI 正在彻底改变我们的世界，这意味着对具备前沿技能的 AI 软件开发者的需求正在飙升。这个 IBM AI Developer Professional Certificate 将为你提供构建 AI 驱动的聊天机器人和应用程序所需的热门专业知识，并使你在短短6个月内启动你的 AI 职业生涯。
+正如我们所知，AI 和生成性 AI 正在彻底改变我们的世界，这意味着对具备前沿技能的 AI 软件开发者的需求正在飙升。这个 IBM AI Developer Professional Certificate 将为你提供构建 AI 驱动的聊天机器人和应用程序所需的热门专业知识，并使你在短短 6 个月内启动你的 AI 职业生涯。
 
 AI 开发者是被高度重视的软件工程师，他们设计、开发和实施 AI 和生成 AI 驱动的应用程序和虚拟助手。在这个课程中，你将掌握软件工程、AI、生成 AI、提示工程、HTML、JavaScript 和 Python 编程的基础知识。通过动手实验和项目，你将获得在面试中可以谈论的实际经验。
 
@@ -110,7 +110,7 @@ AI 开发者是被高度重视的软件工程师，他们设计、开发和实�
 
 链接：[Google Data Analytics](https://imp.i384100.net/21xbLD)
 
-时长：6个月，每周10小时
+时长：6 个月，每周 10 小时
 
 级别：初学者
 
@@ -124,39 +124,39 @@ AI 开发者是被高度重视的软件工程师，他们设计、开发和实�
 
 链接：[Google IT Support](https://imp.i384100.net/R5vgN7)
 
-时长：6个月，每周10小时
+时长：6 个月，每周 10 小时
 
 级别：初学者
 
-技术行业内容丰富。它就像从头开始建造一座房子，每个承包商都负责确保不同的层面始终达到基于其专业知识的金标准。这就是IT支持发挥作用的地方。
+技术行业内容丰富。它就像从头开始建造一座房子，每个承包商都负责确保不同的层面始终达到基于其专业知识的金标准。这就是 IT 支持发挥作用的地方。
 
-在这个Google IT支持专业认证中，你将学习IT支持处理的日常任务，包括计算机组装、无线网络、安装和客户服务。你还将学习如何识别问题，以使用如Linux、域名系统、命令行接口和二进制代码等工具进行故障排除和调试。
+在这个 Google IT 支持专业认证中，你将学习 IT 支持处理的日常任务，包括计算机组装、无线网络、安装和客户服务。你还将学习如何识别问题，以使用如 Linux、域名系统、命令行接口和二进制代码等工具进行故障排除和调试。
 
-这个专业证书获得了ACE®的推荐。它在参与的美国大学和学院中可以获得大学学分。
+这个专业证书获得了 ACE®的推荐。它在参与的美国大学和学院中可以获得大学学分。
 
-## Google项目管理
+## Google 项目管理
 
-链接：[Google项目管理](https://imp.i384100.net/NkO1vO)
+链接：[Google 项目管理](https://imp.i384100.net/NkO1vO)
 
-时长：6个月，每周10小时
+时长：6 个月，每周 10 小时
 
 级别：初学者
 
 技术行业发展迅速，每天都有新项目发布。在这里，我介绍了项目管理及其在任何行业中的重要性。如果没有项目管理，许多新工具将无法部署，使我们无法使用它们。
 
-项目管理是将过程、方法、技能、知识和经验应用于实现特定目标的过程，以确保项目的成功。在这个Google项目管理专业认证中，你将学习如何有效地记录项目，学习敏捷项目管理、Scrum的基础知识，并且练习战略沟通，提升你的问题解决能力。
+项目管理是将过程、方法、技能、知识和经验应用于实现特定目标的过程，以确保项目的成功。在这个 Google 项目管理专业认证中，你将学习如何有效地记录项目，学习敏捷项目管理、Scrum 的基础知识，并且练习战略沟通，提升你的问题解决能力。
 
-这个专业证书获得了ACE®的推荐。它在参与的美国大学和学院中可以获得大学学分。
+这个专业证书获得了 ACE®的推荐。它在参与的美国大学和学院中可以获得大学学分。
 
 ## 总结
 
-你可以选择9个不同的专业课程来入门，并在5到6个月内准备好就业。这些专业课程高度可信，许多人完成课程后直接进入行业。如果你想继续深造，将学习提升到下一个层次，可以通过这9个课程来实现。
+你可以选择 9 个不同的专业课程来入门，并在 5 到 6 个月内准备好就业。这些专业课程高度可信，许多人完成课程后直接进入行业。如果你想继续深造，将学习提升到下一个层次，可以通过这 9 个课程来实现。
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术作家、KDnuggets的编辑和社区经理。她特别关注提供数据科学职业建议或教程以及数据科学的理论知识。Nisha涵盖了广泛的主题，希望探索人工智能如何有利于人类寿命的不同方式。作为一个热衷于学习的人，Nisha希望拓宽她的技术知识和写作技能，同时帮助指导他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术作家、KDnuggets 的编辑和社区经理。她特别关注提供数据科学职业建议或教程以及数据科学的理论知识。Nisha 涵盖了广泛的主题，希望探索人工智能如何有利于人类寿命的不同方式。作为一个热衷于学习的人，Nisha 希望拓宽她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
-+   [2024年你可以参加的5大机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
++   [2024 年你可以参加的 5 大机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
 
 +   [数据科学家如何获得 CFO 的关注（以及为什么你需要）](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
 
@@ -166,4 +166,4 @@ AI 开发者是被高度重视的软件工程师，他们设计、开发和实�
 
 +   [成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)
 
-+   [300万个工作岗位真的会被 AI 取代或暴露吗？](https://www.kdnuggets.com/2023/07/300-million-jobs-really-exposed-lost-ai-replacement.html)
++   [300 万个工作岗位真的会被 AI 取代或暴露吗？](https://www.kdnuggets.com/2023/07/300-million-jobs-really-exposed-lost-ai-replacement.html)

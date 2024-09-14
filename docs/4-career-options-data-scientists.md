@@ -1,26 +1,26 @@
 # 数据科学家的 4 种现实职业选择
 
-> 原文：[https://www.kdnuggets.com/2020/04/4-career-options-data-scientists.html](https://www.kdnuggets.com/2020/04/4-career-options-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/04/4-career-options-data-scientists.html`](https://www.kdnuggets.com/2020/04/4-career-options-data-scientists.html)
 
-[评论](#comments)
+评论
 
 **由 [Ian Xiao](https://twitter.com/ian_xxiao)，德勤的市场营销与人工智能实践**。
 
-![](../Images/46897e4c3722bad2014cfb5bee7116d9.png)
+![](img/46897e4c3722bad2014cfb5bee7116d9.png)
 
 *照片来源于 [Caleb Jones](https://unsplash.com/@gcalebjones?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/path?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-### 2020年2月27日
+### 2020 年 2 月 27 日
 
 大约在城市因 COVID-19 封锁前的三周，我和一个朋友坐在我们最喜欢的多伦多市中心的泰国餐厅里。
 
 **“我应该留在数据科学领域吗？如果不应该，我接下来该做什么？”** 我的朋友问道。
 
-像聚会的声音和新鲜餐厅食物的香味一样，如何进入数据科学现在似乎有些遥远。事实上，你可以在谷歌上找到约30亿个结果，其中有*极其具体的逐步指南*（而“如何赚钱”仅有约20亿个结果）。
+像聚会的声音和新鲜餐厅食物的香味一样，如何进入数据科学现在似乎有些遥远。事实上，你可以在谷歌上找到约 30 亿个结果，其中有*极其具体的逐步指南*（而“如何赚钱”仅有约 20 亿个结果）。
 
-![](../Images/82e7eebb5ef9ceb61ee534aa1c3cb3a7.png)
+![](img/82e7eebb5ef9ceb61ee534aa1c3cb3a7.png)
 
-*截至2020年3月25日的谷歌搜索结果。*
+*截至 2020 年 3 月 25 日的谷歌搜索结果。*
 
 然而，我朋友的问题依然萦绕在心。深层次的紧张感源于两个因素：1) 数据科学的期望与现实——[它可能比我们预期的更无聊](https://towardsdatascience.com/data-science-is-boring-1d43473e353e)，2) 角色与我们的抱负。
 
@@ -30,13 +30,13 @@
 
 1.  离开当前角色，但在其他地方继续从事与数据科学相关的工作（这篇文章是为你准备的）
 
-1.  我完全厌倦了（你确定吗？在做出决定之前考虑一下选项2）
+1.  我完全厌倦了（你确定吗？在做出决定之前考虑一下选项 2）
 
 ### 但是，去哪里呢？
 
 要知道我们想去哪里，你必须了解我们现在的位置。要获取更大的选择视角，我们中的许多人可能会转向“什么是数据科学？”的问题。如果你谷歌这个短语，你很可能会遇到类似这样的内容：
 
-![](../Images/a7ef4177e72d1e669b7501214002e572.png)
+![](img/a7ef4177e72d1e669b7501214002e572.png)
 
 *什么是数据科学，[图片来源](https://medium.com/@iphs_tech/believing-these-8-myths-about-what-is-data-science-keeps-you-from-growing-528f1bd240dc)。*
 
@@ -48,7 +48,7 @@
 
 在我们开始之前，了解我的 [背景和经历](https://www.linkedin.com/in/ianxiao/) 是很重要的，这样你可以根据自己的现实和限制来解读我的见解。
 
-简而言之**，** 我通过为大型企业提供咨询、结识各种数据科学家，以及在一家最终被收购的AI初创公司构建机器学习产品，见证了数据科学的演变。
+简而言之**，** 我通过为大型企业提供咨询、结识各种数据科学家，以及在一家最终被收购的 AI 初创公司构建机器学习产品，见证了数据科学的演变。
 
 我的观点只是一个数据点（希望它是有用和独特的），所以要注意其他人的看法。
 
@@ -58,7 +58,7 @@
 
 当你面试数据科学角色时，尽管有职位名称和工作描述，*但很可能*会落入以下四个过于简化且主观标记的组别中。
 
-![](../Images/539799b0f4d27986a6549586028a86ef.png)
+![](img/539799b0f4d27986a6549586028a86ef.png)
 
 *数据科学家的四种原型。作者分析。*
 
@@ -78,7 +78,7 @@
 
 ### 1 — 昂贵的顾问
 
-全球咨询公司或大型科技公司（例如，德勤、麦肯锡、埃森哲、谷歌、IBM等）的数据科学服务
+全球咨询公司或大型科技公司（例如，德勤、麦肯锡、埃森哲、谷歌、IBM 等）的数据科学服务
 
 [通过 GIPHY](https://giphy.com/gifs/showtime-kristen-bell-don-cheadle-house-of-lies-l3V0B6ICVWbg8Xi5q)
 
@@ -116,25 +116,25 @@
 
 好吧，家庭可能很复杂，因此这个组需要分成两个部分：**无名英雄**和**超级极客**。
 
-![](../Images/fe6002d58c8fcae6d328497baf4bb795.png)
+![](img/fe6002d58c8fcae6d328497baf4bb795.png)
 
 *家庭结构。作者的分析。*
 
 **4.1 — 默默无闻的英雄**
 
-来自企业传统BI、分析和建模团队的人。他们大多与业务线或职能（例如市场营销、风险、财务等）合作。他们在“数据科学家”这一术语出现之前就是数据科学家。
+来自企业传统 BI、分析和建模团队的人。他们大多与业务线或职能（例如市场营销、风险、财务等）合作。他们在“数据科学家”这一术语出现之前就是数据科学家。
 
 [通过 GIPHY](https://giphy.com/gifs/starwars-star-wars-episode-2-3ohuAxV0DfcLTxVh6w)
 
 ***优点***：工作非常专注。接近真实的业务操作。接触独特的数据集。拥有运营化和大规模的基础设施。极佳的工作与生活平衡。具有影响力或权力来做出投资决策。
 
-***缺点***：在（大多数）时候可能进展缓慢且无聊。通常得不到被称为[21世纪最性感工作](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)的认可。内部政治。较慢的职业发展轨迹。可能会被锁定在特定的角色或项目中。
+***缺点***：在（大多数）时候可能进展缓慢且无聊。通常得不到被称为[21 世纪最性感工作](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)的认可。内部政治。较慢的职业发展轨迹。可能会被锁定在特定的角色或项目中。
 
 ***最佳匹配***：那些在生活中找到了激情或喜欢在特定领域投入时间的人。不在乎炒作的人。有大量耐心和韧性的人。
 
 **4.2 — 超级极客**
 
-数据科学中的“金童”刻板印象。那些在主要公司（如Google Brain / DeepMind、Facebook的FAIR、Uber和Walmart Research等）从事研发的人。
+数据科学中的“金童”刻板印象。那些在主要公司（如 Google Brain / DeepMind、Facebook 的 FAIR、Uber 和 Walmart Research 等）从事研发的人。
 
 [通过 GIPHY](https://giphy.com/gifs/ontheoutside-nerdy-oto-on-the-outside-KZkleQKfRrwiQJrLYp)
 
@@ -160,7 +160,7 @@
 
 [原文](https://towardsdatascience.com/the-most-realistic-data-science-career-guide-d12c4af87cc8)。经许可转载。
 
-**个人简介：** [Ian Xiao](https://www.linkedin.com/in/ianxiao/) 帮助客户通过数字技术和实践（例如AI、大数据、敏捷、设计思维）转型核心业务或推出新能力，并为B2B数据和AI初创企业提供建议。Ian是Medium上商业与科技领域的顶尖作家，还被MIT Review、Fast Company和Google认可。
+**个人简介：** [Ian Xiao](https://www.linkedin.com/in/ianxiao/) 帮助客户通过数字技术和实践（例如 AI、大数据、敏捷、设计思维）转型核心业务或推出新能力，并为 B2B 数据和 AI 初创企业提供建议。Ian 是 Medium 上商业与科技领域的顶尖作家，还被 MIT Review、Fast Company 和 Google 认可。
 
 **相关：**
 
@@ -176,7 +176,7 @@
 
 +   [做假直到成功：生成逼真的合成客户数据集](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)
 
-+   [利用稳定扩散生成超现实面孔的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
++   [利用稳定扩散生成超现实面孔的 3 种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
 
 +   [从数据分析师到数据策略师：创造影响力的职业路径](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
 

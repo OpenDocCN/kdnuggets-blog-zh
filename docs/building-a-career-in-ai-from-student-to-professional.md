@@ -1,8 +1,8 @@
 # 在人工智能领域建立职业生涯：从学生到专业人士
 
-> 原文：[https://www.kdnuggets.com/building-a-career-in-ai-from-student-to-professional](https://www.kdnuggets.com/building-a-career-in-ai-from-student-to-professional)
+> 原文：[`www.kdnuggets.com/building-a-career-in-ai-from-student-to-professional`](https://www.kdnuggets.com/building-a-career-in-ai-from-student-to-professional)
 
-![在人工智能领域建立职业生涯：从学生到专业人士](../Images/76863052bc2d93070c948c12dce492d3.png)
+![在人工智能领域建立职业生涯：从学生到专业人士](img/76863052bc2d93070c948c12dce492d3.png)
 
 图片来源：编辑 | Midjourney
 
@@ -48,7 +48,7 @@
 
 商业行为面试问题通常比较笼统，并不涉及具体职业。你可以使用结构、任务、行动、结果技巧来回答这些问题。麻省理工学院职业咨询与发展部以讲故事的方式解释了 STAR 方法。
 
-![MIT 星方法](../Images/a3ef2c1748e5ccd14ae8aa65bc569476.png)
+![MIT 星方法](img/a3ef2c1748e5ccd14ae8aa65bc569476.png)
 
 来源： https://capd.mit.edu/resources/the-star-method-for-behavioral-interviews/
 
@@ -64,11 +64,11 @@
 
 +   [作为学生如何获得数据科学工作](https://www.kdnuggets.com/how-to-get-a-job-in-data-science-as-a-student)
 
-+   [我如何在14年内将工资提高14倍，作为数据分析/科学专业人士](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
++   [我如何在 14 年内将工资提高 14 倍，作为数据分析/科学专业人士](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
 
 +   [五步成为数据科学专业人士](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-+   [初学者到专业人士的前五大NLP备忘单](https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html)
++   [初学者到专业人士的前五大 NLP 备忘单](https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html)
 
 +   [如何通过数据科学专业证书考试](https://www.kdnuggets.com/2023/08/ace-data-scientist-professional-certificate.html)
 

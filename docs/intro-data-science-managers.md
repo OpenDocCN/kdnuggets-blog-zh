@@ -1,22 +1,22 @@
 # 数据科学管理者入门
 
-> 原文：[https://www.kdnuggets.com/2018/11/intro-data-science-managers.html](https://www.kdnuggets.com/2018/11/intro-data-science-managers.html)
+> 原文：[`www.kdnuggets.com/2018/11/intro-data-science-managers.html`](https://www.kdnuggets.com/2018/11/intro-data-science-managers.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![Image](../Images/5865746dc39bfd08639106f6826c07a5.png)
+![Image](img/5865746dc39bfd08639106f6826c07a5.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 以下思维导图包含了对关键数据科学概念和技术的简明介绍，这些概念和技术已经彻底改变了商业格局，并且成为了做出有益数据驱动决策的必要条件。我们相信，这将对数据科学管理者以及面临这一快速发展领域的客户或用户都非常有用且信息丰富。
 
-[![data-science-for-managers](../Images/d7b0f37f3e8c7b944429776f09a87096.png)](https://activewizards.com/content/blog/Data%20science%20for%20managers%20-%20Mindmap/data-science-for-managers.png)
+![data-science-for-managers](https://activewizards.com/content/blog/Data%20science%20for%20managers%20-%20Mindmap/data-science-for-managers.png)
 
 原始思维导图可以在 [这里](https://coggle.it/diagram/WypjBWlbpEHkyhcg/t/data-science-for-managers/c0083ef2d003b849535618df0b84e6dad73e301910c45e7eab5b72ff12f016e0) 找到。
 
@@ -40,7 +40,7 @@
 
 思维导图的左侧涵盖了数据科学的支持领域：**数据存储**、**数据工程**、**大数据**、**数据分析**、**可视化**和**商业智能（BI）**。它们有助于清理、处理、转换和表示数据，并从不同角度分析数据，从而补充不同的机器学习任务。
 
-数据科学依赖于创建和使用数据，这些数据必须在需要时随时可用。这正是**数据存储**的目的。数据存储是一种以方便的形式归档数据的技术。你应该了解SQL和NoSQL数据库之间的基本区别，为什么需要云服务，哪些服务提供了更方便和易于理解的界面，你为特定任务需要什么以及其他细节。
+数据科学依赖于创建和使用数据，这些数据必须在需要时随时可用。这正是**数据存储**的目的。数据存储是一种以方便的形式归档数据的技术。你应该了解 SQL 和 NoSQL 数据库之间的基本区别，为什么需要云服务，哪些服务提供了更方便和易于理解的界面，你为特定任务需要什么以及其他细节。
 
 **数据工程**的主要目的是将数据转换为易于分析的格式。任何数据操作都需要对数据进行一些预处理，而数据的质量转换和处理在项目的成功中往往扮演着关键角色。大致来说，数据工程的主要操作包括数据抓取、数据摄取和数据清洗。
 
@@ -60,25 +60,25 @@
 
 另外，如果您有一些特定领域希望更详细地覆盖，请告知我们。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专业领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）以及数据密集型Web应用开发（RESTful APIs、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专业领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）以及数据密集型 Web 应用开发（RESTful APIs、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/intro-to-data-science-for-managers-mindmap/)。经许可转载。
 
 **相关内容：**
 
-+   [2018年数据科学的前20个Python库](/2018/06/top-20-python-libraries-data-science-2018.html)
++   2018 年数据科学的前 20 个 Python 库
 
-+   [2018年数据科学的前20个R库](/2018/05/top-20-r-libraries-data-science-2018.html)
++   2018 年数据科学的前 20 个 R 库
 
-+   [顶级6种Python NLP库的比较](/2018/07/comparison-top-6-python-nlp-libraries.html)
++   顶级 6 种 Python NLP 库的比较
 
 ### 相关话题
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

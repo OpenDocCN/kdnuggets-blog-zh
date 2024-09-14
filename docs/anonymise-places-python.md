@@ -1,8 +1,8 @@
 # 如何在 Python 中匿名化地点
 
-> 原文：[https://www.kdnuggets.com/2022/12/anonymise-places-python.html](https://www.kdnuggets.com/2022/12/anonymise-places-python.html)
+> 原文：[`www.kdnuggets.com/2022/12/anonymise-places-python.html`](https://www.kdnuggets.com/2022/12/anonymise-places-python.html)
 
-![如何在 Python 中匿名化地点](../Images/a7359356a8dc0b6bb623713f503486cf.png)
+![如何在 Python 中匿名化地点](img/a7359356a8dc0b6bb623713f503486cf.png)
 
 图片由 [Max Chen](https://unsplash.com/@maxchen2k?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -34,7 +34,7 @@
 
 从 [Geonames 链接](https://download.geonames.org/export/dump/)下载 IT.zip 文件，解压后放入工作目录：
 
-![如何在 Python 中匿名化地点](../Images/d385c71a7b50481fc793614b03dd93f5.png)
+![如何在 Python 中匿名化地点](img/d385c71a7b50481fc793614b03dd93f5.png)
 
 图片作者提供
 
@@ -45,11 +45,11 @@ import pandas as pd
 df = pd.read_csv('source/IT.txt', sep=' ', header=None)
 ```
 
-![如何在 Python 中匿名化地点](../Images/5bc2b21827b501363c019affc257fb98.png)
+![如何在 Python 中匿名化地点](img/5bc2b21827b501363c019affc257fb98.png)
 
 图片作者提供
 
-数据框的第1列包含用于构建地名表的地点列表：
+数据框的第 1 列包含用于构建地名表的地点列表：
 
 ```py
 gaz = df[1]
@@ -176,11 +176,11 @@ df_all[1].to_csv('source/places.csv')
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

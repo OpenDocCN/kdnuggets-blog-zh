@@ -1,10 +1,10 @@
 # 功能数据中的密度核深度异常检测
 
-> 原文：[https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)
+> 原文：[`www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data`](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)
 
-![功能数据中的密度核深度异常检测](../Images/9c9994239b7c0b25a38fdc5cdfa93210.png)
+![功能数据中的密度核深度异常检测](img/9c9994239b7c0b25a38fdc5cdfa93210.png)
 
-图像由DALLE-3生成
+图像由 DALLE-3 生成
 
 # 介绍
 
@@ -12,27 +12,27 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 在当今大数据集和复杂数据模式的时代，检测异常值或离群点的艺术与科学变得更加细致。尽管传统的异常检测技术能够有效处理标量或多变量数据，但功能数据——即由曲线、表面或任何连续体组成的数据——带来了独特的挑战。为了解决这一问题，已经开发出一种开创性的技术，即“密度核深度”（DKD）方法。
 
-在这篇文章中，我们将深入探讨DKD的概念及其在功能数据异常检测中的影响，站在数据科学家的角度来看。
+在这篇文章中，我们将深入探讨 DKD 的概念及其在功能数据异常检测中的影响，站在数据科学家的角度来看。
 
 # 1\. 理解功能数据
 
-在深入探讨DKD的复杂性之前，了解功能数据的定义是至关重要的。与传统的标量数据点不同，功能数据由曲线或函数组成。可以把它想象成将整个曲线作为一个数据观察值。这类数据通常出现在时间上连续测量的情况，比如一天中的温度曲线或股市轨迹。
+在深入探讨 DKD 的复杂性之前，了解功能数据的定义是至关重要的。与传统的标量数据点不同，功能数据由曲线或函数组成。可以把它想象成将整个曲线作为一个数据观察值。这类数据通常出现在时间上连续测量的情况，比如一天中的温度曲线或股市轨迹。
 
 给定一个在域*D*上观察到的*n*条曲线的数据集，每条曲线可以表示为：
 
-![”方程”](../Images/d038d6b3640be62dbaf5821cffa75c65.png)
+![”方程”](img/d038d6b3640be62dbaf5821cffa75c65.png)
 
-![”方程”](../Images/3e0ddb1365ddac1a452fd107793bfd64.png)
+![”方程”](img/3e0ddb1365ddac1a452fd107793bfd64.png)
 
 # 2\. 功能数据中异常检测的挑战
 
@@ -42,7 +42,7 @@
 
 一种测量曲线中心性的办法是计算其相对于其他曲线的“深度”。例如，使用一种简单的深度度量：
 
-![方程](../Images/d3c5e731cad04c5f60329845f69078f8.png)
+![方程](img/d3c5e731cad04c5f60329845f69078f8.png)
 
 其中 n 是曲线的总数。
 
@@ -58,7 +58,7 @@ DKD 通过将每条曲线在每个点的密度与该点上整个数据集的总�
 
 给定曲线 *Xi*?(*t*) 在点 *t* 的核密度估计定义为：
 
-![Equation](../Images/92b58dd87ad7069d97fdcb5607517e27.png)
+![Equation](img/92b58dd87ad7069d97fdcb5607517e27.png)
 
 其中：
 
@@ -76,17 +76,17 @@ DKD 通过将每条曲线在每个点的密度与该点上整个数据集的总�
 
 曲线 *Xi*?(*t*) 在点 t 相对于整个数据集的深度计算为：
 
-![Equation](../Images/282eb5702676427a55bff08e60f2cccd.png)
+![Equation](img/282eb5702676427a55bff08e60f2cccd.png)
 
 其中：
 
-![Equation](../Images/45b7e05517dc43baeebfacbbf7d8e1b6.png)
+![Equation](img/45b7e05517dc43baeebfacbbf7d8e1b6.png)
 
-![Equation](../Images/e9312fb8c25a7d19c4e2ecb760b1094d.png)
+![Equation](img/e9312fb8c25a7d19c4e2ecb760b1094d.png)
 
-![Equation](../Images/86aee73014450de539044f24c0ba3c69.png)
+![Equation](img/86aee73014450de539044f24c0ba3c69.png)
 
-![Equation](../Images/666a1bd01698dcba5ad79062c87baa25.png)
+![Equation](img/666a1bd01698dcba5ad79062c87baa25.png)
 
 每条曲线得到的 DKD 值提供了其中心性的度量：
 
@@ -104,24 +104,24 @@ DKD 通过将每条曲线在每个点的密度与该点上整个数据集的总�
 
 # 5\. 实际应用
 
-想象一个场景，其中数据科学家正在分析患者24小时内的心率曲线。传统的异常值检测可能会将偶尔的高心率读数标记为异常。然而，使用功能数据分析和DKD，整个异常的心率曲线——可能指示心律失常——可以被检测到，提供对患者健康的更全面视角。
+想象一个场景，其中数据科学家正在分析患者 24 小时内的心率曲线。传统的异常值检测可能会将偶尔的高心率读数标记为异常。然而，使用功能数据分析和 DKD，整个异常的心率曲线——可能指示心律失常——可以被检测到，提供对患者健康的更全面视角。
 
 # 结论
 
-随着数据复杂性的不断增长，用于分析这些数据的工具和技术必须同步演变。密度核深度提供了一种有前景的方法来应对功能数据的复杂格局，确保数据科学家能够自信地检测异常值并从中得出有意义的见解。虽然DKD只是数据科学家工具箱中的众多工具之一，但它在功能数据分析中的潜力是不可否认的，并且有望为未来更复杂的分析技术铺平道路。
+随着数据复杂性的不断增长，用于分析这些数据的工具和技术必须同步演变。密度核深度提供了一种有前景的方法来应对功能数据的复杂格局，确保数据科学家能够自信地检测异常值并从中得出有意义的见解。虽然 DKD 只是数据科学家工具箱中的众多工具之一，但它在功能数据分析中的潜力是不可否认的，并且有望为未来更复杂的分析技术铺平道路。
 
-**[](https://www.linkedin.com/in/kulbirsingh8)**[Kulbir Singh](https://www.linkedin.com/in/kulbirsingh8)**** 是分析和数据科学领域的杰出领袖，拥有超过二十年的信息技术经验。他的专业知识广泛，包括领导力、数据分析、机器学习、人工智能（AI）、创新解决方案设计和问题解决。目前，Kulbir担任Elevance Health的健康信息经理。Kulbir对人工智能（AI）的进步充满热情，创办了AIboard.io，这是一个致力于创建以AI和医疗保健为中心的教育内容和课程的创新平台。
+**[](https://www.linkedin.com/in/kulbirsingh8)**[Kulbir Singh](https://www.linkedin.com/in/kulbirsingh8)**** 是分析和数据科学领域的杰出领袖，拥有超过二十年的信息技术经验。他的专业知识广泛，包括领导力、数据分析、机器学习、人工智能（AI）、创新解决方案设计和问题解决。目前，Kulbir 担任 Elevance Health 的健康信息经理。Kulbir 对人工智能（AI）的进步充满热情，创办了 AIboard.io，这是一个致力于创建以 AI 和医疗保健为中心的教育内容和课程的创新平台。
 
 ### 更多相关内容
 
-+   [Pythia：16个LLM的研究套件](https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html)
++   [Pythia：16 个 LLM 的研究套件](https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html)
 
 +   [理解机器学习算法：深入概述](https://www.kdnuggets.com/understanding-machine-learning-algorithms-an-indepth-overview)
 
-+   [利用密度链提示解锁GPT-4总结](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)
++   [利用密度链提示解锁 GPT-4 总结](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)
 
 +   [数据科学中异常检测技术的初学者指南](https://www.kdnuggets.com/2023/05/beginner-guide-anomaly-detection-techniques-data-science.html)
 
-+   [KDnuggets新闻，8月17日：如何使用…进行运动检测](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何使用…进行运动检测](https://www.kdnuggets.com/2022/n33.html)
 
-+   [如何使用Python进行运动检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)
++   [如何使用 Python 进行运动检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)

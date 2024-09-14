@@ -1,8 +1,8 @@
-# 何时重新训练机器学习模型？运行这5项检查来决定时间表。
+# 何时重新训练机器学习模型？运行这 5 项检查来决定时间表。
 
-> 原文：[https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html](https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
+> 原文：[`www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html`](https://www.kdnuggets.com/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
 
-[评论](#comments)
+评论
 
 **作者** [**Emeli Dral**](https://twitter.com/EmeliDral)**，Evidently AI 的首席技术官兼联合创始人 &** [**Elena Samuylova**](https://twitter.com/elenasamuylova/)**，Evidently AI 的首席执行官兼联合创始人**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 但是我们应该多久做一次呢？是每天、每周还是每月？还是每次获取一批新数据时？
 
-![Image](../Images/6633c2014ec57d3088ba2179d982447e.png)
+![Image](img/6633c2014ec57d3088ba2179d982447e.png)
 
 太多时候，答案基于直觉或便利性。有人选择一个合理的时间间隔并安排定期的重新训练工作。
 
@@ -38,13 +38,13 @@
 
 实现这一点的简单方法是查看经典的学习曲线。
 
-![Image](../Images/f0988021c2e694e56e03bef78e14da42.png)
+![Image](img/f0988021c2e694e56e03bef78e14da42.png)
 
 如何进行？我们可以固定测试集，用于评估模型性能。然后，通过在不同部分的训练数据上训练模型，运行一系列实验。
 
 我们可以使用随机分割方法并通过更改训练大小来进行迭代。这样，我们可以专注于数据量如何影响性能。
 
-![Image](../Images/1353e1f20c4313d1a9f55092a6d2800a.png)
+![Image](img/1353e1f20c4313d1a9f55092a6d2800a.png)
 
 我们可以从中学到两件事：1）我们需要多少数据才能达到最佳性能 2）模型是否能用现有的训练数据达到这个平稳状态。
 
@@ -54,11 +54,11 @@
 
 **在其他情况下，我们可能会看到模型质量持续提升**。模型渴望更多的数据！还有更多步骤需要完成，以将模型调整到最佳状态。
 
-![Image](../Images/7d75b4bc993a559419e6f57d29fb3c70.png)
+![Image](img/7d75b4bc993a559419e6f57d29fb3c70.png)
 
 与其考虑模型重新训练以保持其质量，我们应该计划持续改进。只要我们获得足够的新数据，就可以利用它来获得更好的性能。
 
-第一个测试还提供了数据中信号的规模和“密度”的感觉。我们需要10、100还是1000个观察值来看到对模型性能的有意义的影响？我们需要一天还是一个月来收集这数量的新数据？
+第一个测试还提供了数据中信号的规模和“密度”的感觉。我们需要 10、100 还是 1000 个观察值来看到对模型性能的有意义的影响？我们需要一天还是一个月来收集这数量的新数据？
 
 这是一个有用的信息！
 
@@ -72,17 +72,17 @@
 
 让我们拿到我们的模型，看看如果我们模拟它在过去的应用，它能“持续”多久。
 
-![Image](../Images/f57dc5e2baea3ed6c05cdd2eefc14927.png)
+![Image](img/f57dc5e2baea3ed6c05cdd2eefc14927.png)
 
 我们可以使用一些较旧的数据来训练模型，然后将其“应用”到后来的时期。就像我们对待保留集一样，但这里我们只是简单地取几个连续的数据。
 
 我们可以从一个单点估计开始，看看性能下降得有多快。
 
-![Image](../Images/886251abc0b3af2682dc5aedba2e68cd.png)
+![Image](img/886251abc0b3af2682dc5aedba2e68cd.png)
 
 如果我们有足够的历史数据，我们可以多次重复这个检查，然后对结果进行平均。只需留意潜在的异常值和稀有事件！
 
-![Image](../Images/4187c122c80bd37ca886503946959293.png)
+![Image](img/4187c122c80bd37ca886503946959293.png)
 
 **有时候我们会发现一个“旧”模型的表现和新模型一样好。** 一些人喜欢经常重新训练模型以保持其“新鲜”，但这并不总是有理的。
 
@@ -90,7 +90,7 @@
 
 如果不需要频繁的重新训练，你可以选择一个更轻量的服务架构。你也可以减少与任何变化相关的技术错误风险。组织开销也是如此，尤其是当新模型需要审批过程时。
 
-![Image](../Images/7cf2c1d846f0a3770216da28a8ebe87a.png)
+![Image](img/7cf2c1d846f0a3770216da28a8ebe87a.png)
 
 **在其他情况下，你可能会发现模型衰老得非常快！** 提前了解这一点是好的，以便设置适当的监控并准备基础设施。
 
@@ -102,7 +102,7 @@
 
 ### 检查 #3。我们何时获取新数据？
 
-![Image](../Images/ad4cb68a76433b6c053208581142e7d7.png)
+![Image](img/ad4cb68a76433b6c053208581142e7d7.png)
 
 在这里，我们关注的是业务流程而非数据。
 
@@ -112,7 +112,7 @@
 
 如果你有较长的预测时间范围，你必须等待以了解你的预测是否正确。对于其他任务，你需要一个单独的标记过程。有时，限制来自数据的移动或生成方式。例如，手动数据输入每月进行一次。
 
-![Image](../Images/4d963f1ef664d1112a0b9573247d2a02.png)
+![Image](img/4d963f1ef664d1112a0b9573247d2a02.png)
 
 我们可能会发现自己处于两种情况之一。
 
@@ -128,9 +128,9 @@
 
 ### 检查 #4。我们需要多少数据才能看到改进？
 
-假设新数据每天到达，但模型仅在30天后退化。那么最佳的行动是什么？我们应该每天、每周还是每月重新训练一次？
+假设新数据每天到达，但模型仅在 30 天后退化。那么最佳的行动是什么？我们应该每天、每周还是每月重新训练一次？
 
-![Image](../Images/93da0c9a4e5c92b0642fc2c37d89f2a3.png)
+![Image](img/93da0c9a4e5c92b0642fc2c37d89f2a3.png)
 
 我们可以通过检查新的数据桶是否带来了我们想要的改进来做出更精确的判断。
 
@@ -140,7 +140,7 @@
 
 为此，我们选择一个已知退化期间的测试集。我们知道何时性能下降：然后可以检查在新数据上重新训练是否能改善性能。
 
-![Image](../Images/36e21e33e0b86cf04f120b86ea13917b.png)
+![Image](img/36e21e33e0b86cf04f120b86ea13917b.png)
 
 我们可以在数据到达时逐步添加数据。然后，观察它对测试性能的影响。
 
@@ -148,7 +148,7 @@
 
 结果是，我们实际选择的重新训练窗口可能比看起来要狭窄！一方面，它受到数据提供速度的限制；另一方面，则受到收集足够数据以使重新训练产生效果的需求限制。
 
-![图片](../Images/0c8d71d262bc407a56865915a599e208.png)
+![图片](img/0c8d71d262bc407a56865915a599e208.png)
 
 在这个时间框架内，你可以根据实际情况和使用案例选择适合的周期。
 
@@ -160,7 +160,7 @@
 
 我们可以在选择的间隔进行模型重新训练，然后检查如果开始丢弃旧数据会发生什么变化。
 
-![图片](../Images/2433693530f83ace89e16563af95b574.png)
+![图片](img/2433693530f83ace89e16563af95b574.png)
 
 我们常常会看到，省略旧数据没有任何影响。那么，保持训练过程更轻量化可能是合理的。
 
@@ -176,7 +176,7 @@
 
 为了获得可见性，我们可以建立一个 [监控仪表板](https://github.com/evidentlyai/evidently) 或安排定期检查以计算实际模型性能（如果我们有实际数据），或者监控输入数据的统计分布漂移和异常值。
 
-![图片](../Images/19db7390f4ca668c6a5a3a66023ce064.png)
+![图片](img/19db7390f4ca668c6a5a3a66023ce064.png)
 
 即使是稳定的模型也可能面临 [数据和概念漂移](https://evidentlyai.com/blog/machine-learning-monitoring-data-and-concept-drift) 或某些罕见事件。在这种情况下，我们可能需要比计划更早进行干预。
 
@@ -188,23 +188,23 @@
 
 你可以在 [这里](https://evidentlyai.com/blog/retrain-or-not-retrain) 找到这篇文章的扩展版本。
 
-[机器学习监控检查清单](/2021/03/machine-learning-model-monitoring-checklist.html)
+机器学习监控检查清单
 
 **Emeli Dral** 是 Evidently AI 的联合创始人兼首席技术官，她在公司开发用于分析和监控机器学习模型的工具。她曾共同创办过一家工业 AI 初创公司，并担任 Yandex Data Factory 的首席数据科学家。她还是 Coursera 机器学习和数据分析课程的共同作者，该课程拥有超过 100,000 名学生。
 
-[https://twitter.com/EmeliDral](https://twitter.com/EmeliDral)
+[`twitter.com/EmeliDral`](https://twitter.com/EmeliDral)
 
 **Elena Samuylova** 是 Evidently AI 的联合创始人兼首席执行官。她曾共同创办过一家工业 AI 初创公司，并在 Yandex Data Factory 负责业务发展。自 2014 年以来，她与从制造业到零售业的公司合作，提供基于 ML 的解决方案。2018 年，Elena 被 Product Management Festival 评选为欧洲 50 位产品女性之一。
 
-[https://twitter.com/elenasamuylova/](https://twitter.com/elenasamuylova/)
+[`twitter.com/elenasamuylova/`](https://twitter.com/elenasamuylova/)
 
 **相关：**
 
-+   [从机器学习错误中学习](/2021/03/learning-from-machine-learning-mistakes.html)
++   从机器学习错误中学习
 
-+   [机器学习模型监控检查清单：7 个跟踪项](/2021/03/machine-learning-model-monitoring-checklist.html)
++   机器学习模型监控检查清单：7 个跟踪项
 
-+   [MLOps：模型监控 101](/2021/01/mlops-model-monitoring-101.html)
++   MLOps：模型监控 101
 
 ### 更多相关话题
 

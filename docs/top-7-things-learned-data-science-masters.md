@@ -1,14 +1,14 @@
 # 我在数据科学硕士课程中学到的 7 件事
 
-> 原文：[https://www.kdnuggets.com/2019/10/top-7-things-learned-data-science-masters.html](https://www.kdnuggets.com/2019/10/top-7-things-learned-data-science-masters.html)
+> 原文：[`www.kdnuggets.com/2019/10/top-7-things-learned-data-science-masters.html`](https://www.kdnuggets.com/2019/10/top-7-things-learned-data-science-masters.html)
 
-[评论](#comments)
+评论
 
 **由 [Dario Radečić](https://www.linkedin.com/in/darioradecic/), 数据科学学生**
 
 其中一些你可能已经熟悉，但我不建议跳过它们——另一个观点总是很有用的。
 
-![图](../Images/77f5ff4df4cdc500f70858e86967d74f.png)
+![图](img/77f5ff4df4cdc500f70858e86967d74f.png)
 
 图片由 [Charles DeLoye](https://unsplash.com/@charlesdeloye?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -16,11 +16,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -52,9 +52,9 @@
 
 我决定从事数据科学硕士课程的主要原因之一是**机器学习**——我不太关心数据的内容以及它是如何收集和准备的。由于这种态度，当学期开始时，我感到有些震惊和失望。
 
-当然，如果你在一家有数据工程师和机器学习工程师的大公司工作，这可能不会适用于你，因为你大部分时间都在做机器学习。但如果情况不是这样，你将只有大约15%的时间用于机器学习。
+当然，如果你在一家有数据工程师和机器学习工程师的大公司工作，这可能不会适用于你，因为你大部分时间都在做机器学习。但如果情况不是这样，你将只有大约 15%的时间用于机器学习。
 
-这其实是很好的。**机器学习并不是特别有趣**。在你带着大批F字词跳到评论区之前，请听我说完。
+这其实是很好的。**机器学习并不是特别有趣**。在你带着大批 F 字词跳到评论区之前，请听我说完。
 
 [via GIPHY](https://giphy.com/gifs/breaking-bad-huh-say-what-l41YkFIiBxQdRlMnC)
 
@@ -70,7 +70,7 @@
 
 [**没有数据集？没问题。自己抓取一个。**](https://towardsdatascience.com/no-dataset-no-problem-scrape-one-yourself-57806dea3cac?source=post_page-----bd89fdbab769----------------------)
 
-使用Python和BeautifulSoup的强大功能来抓取对你重要的数据。
+使用 Python 和 BeautifulSoup 的强大功能来抓取对你重要的数据。
 
 ### 3. 不要重新发明轮子
 
@@ -92,9 +92,9 @@
 
 +   如果是奇数，中位数就是中间的数字
 
-幸运的是，存在像[Numpy](https://numpy.org/)这样的库，它们为你完成了所有繁重的工作。只需看一下下面的代码，前17行是自己计算中位数，而最后两行则使用Numpy的强大功能来实现相同的结果：
+幸运的是，存在像[Numpy](https://numpy.org/)这样的库，它们为你完成了所有繁重的工作。只需看一下下面的代码，前 17 行是自己计算中位数，而最后两行则使用 Numpy 的强大功能来实现相同的结果：
 
-中位数计算 — [https://gist.github.com/dradecic/7f295913c01172ffebe84052c8158703](https://gist.github.com/dradecic/7f295913c01172ffebe84052c8158703)
+中位数计算 — [`gist.github.com/dradecic/7f295913c01172ffebe84052c8158703`](https://gist.github.com/dradecic/7f295913c01172ffebe84052c8158703)
 
 正如我所说，这只是一个你可能没有亲身经历过的微不足道的例子。但是想象一下，你可能因为没有意识到已经有相关的库而徒劳地写了多少行代码。
 
@@ -102,13 +102,13 @@
 
 虽然这并不是数据科学特有的，但我会说我一直在使用***列表推导式***来进行特征工程，而使用***lambda*** 函数来进行数据清理和准备。
 
-下面是一个简单的特征工程示例。给定一个字符串列表，你需要创建一个变量，如果给定的字符串包含问号（?），则该变量等于1，否则为0。你可以看到如何使用和不使用列表推导式来实现这一点（***提示***：它们节省了大量时间*）：
+下面是一个简单的特征工程示例。给定一个字符串列表，你需要创建一个变量，如果给定的字符串包含问号（?），则该变量等于 1，否则为 0。你可以看到如何使用和不使用列表推导式来实现这一点（***提示***：它们节省了大量时间*）：
 
-列表推导式示例 — [https://gist.github.com/dradecic/9f23eb0c8073ecc8957f8fd533388cef](https://gist.github.com/dradecic/9f23eb0c8073ecc8957f8fd533388cef)
+列表推导式示例 — [`gist.github.com/dradecic/9f23eb0c8073ecc8957f8fd533388cef`](https://gist.github.com/dradecic/9f23eb0c8073ecc8957f8fd533388cef)
 
 现在来说说***lambdas***，假设你有一个电话号码列表，格式你不喜欢。基本上，你想用‘**-**’替换‘**/**’。这是一个几乎微不足道的过程，前提是你的数据集是*Pandas***DataFrame**格式：
 
-Lambdas — [https://gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052](https://gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052)
+Lambdas — [`gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052`](https://gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052)
 
 花一点时间考虑一下你如何将这些应用到你的数据集上。很酷，对吧？
 
@@ -128,7 +128,7 @@ Lambdas — [https://gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052](
 
 ### 6\. 学习算法和数据结构
 
-如果你不能提供解决方案，那么提出正确的问题（见第5点）也没有意义——对吧？
+如果你不能提供解决方案，那么提出正确的问题（见第 5 点）也没有意义——对吧？
 
 我曾经忽视了算法和数据结构，因为我认为只有软件工程师才需要关注这些内容。说实话，我的想法完全错误。
 
@@ -136,9 +136,9 @@ Lambdas — [https://gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052](
 
 对于没有计算机科学背景的人，我强烈推荐这门课程：
 
-[**学习Python以进行数据结构、算法与面试**](https://www.udemy.com/course/python-for-data-structures-algorithms-and-interviews/?source=post_page-----bd89fdbab769----------------------)
+[**学习 Python 以进行数据结构、算法与面试**](https://www.udemy.com/course/python-for-data-structures-algorithms-and-interviews/?source=post_page-----bd89fdbab769----------------------)
 
-请注意：如果你是完全的Python初学者，请查看我的另一门课程：**完整Python培训营**以学习……
+请注意：如果你是完全的 Python 初学者，请查看我的另一门课程：**完整 Python 培训营**以学习……
 
 另外，一定要查看面试问题——它们帮助很大！
 
@@ -156,30 +156,30 @@ Lambdas — [https://gist.github.com/dradecic/68e81f6610b26fe8da68e25d217c5052](
 
 **参考资料**
 
-1.  [https://www.edureka.co/blog/math-and-statistics-for-data-science/](https://www.edureka.co/blog/math-and-statistics-for-data-science/)
+1.  [`www.edureka.co/blog/math-and-statistics-for-data-science/`](https://www.edureka.co/blog/math-and-statistics-for-data-science/)
 
-**简介： [Dario Radečić](https://www.linkedin.com/in/darioradecic/)** 是一位22岁的数据科学学生，同时也在该领域工作了一段时间。Medium和Towards Data Science的作者。
+**简介： [Dario Radečić](https://www.linkedin.com/in/darioradecic/)** 是一位 22 岁的数据科学学生，同时也在该领域工作了一段时间。Medium 和 Towards Data Science 的作者。
 
 [原文](https://towardsdatascience.com/top-7-things-i-learned-on-my-data-science-masters-bd89fdbab769)。经许可转载。
 
 **相关：**
 
-+   [从数据分析师成长为数据科学家的秘密武器](/2019/08/secret-sauce-growing-from-data-analyst-data-scientist.html)
++   从数据分析师成长为数据科学家的秘密武器
 
-+   [2019年5个著名的深度学习课程/学校](/2019/09/famous-deep-learning-courses-schools-2019.html)
++   2019 年 5 个著名的深度学习课程/学校
 
-+   [高级特征工程和预处理的4个技巧](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)
++   高级特征工程和预处理的 4 个技巧
 
 ### 更多此主题的内容
 
-+   [我从使用ChatGPT进行数据科学中学到的东西](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
++   [我从使用 ChatGPT 进行数据科学中学到的东西](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
 
-+   [你不知道的SAS数据科学学院的3件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [你不知道的 SAS 数据科学学院的 3 件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
 
-+   [选择下一个数据科学工作前要记住的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [选择下一个数据科学工作前要记住的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [我开始学习数据科学时希望知道的3件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
++   [我开始学习数据科学时希望知道的 3 件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
 
-+   [学生在数据科学简历中遗漏的7件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
++   [学生在数据科学简历中遗漏的 7 件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
 
-+   [让数据科学家与其他职业区别开的5件事](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   [让数据科学家与其他职业区别开的 5 件事](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)

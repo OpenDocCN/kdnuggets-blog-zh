@@ -1,8 +1,8 @@
 # Python 数据清理库简介
 
-> 原文：[https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html](https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html)
+> 原文：[`www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html`](https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html)
 
-![Python 数据清理库简介](../Images/b08bbf2a4ef0aff10901872523a2f997.png)
+![Python 数据清理库简介](img/b08bbf2a4ef0aff10901872523a2f997.png)
 
 图片由 [pch.vecto](https://www.freepik.com/free-vector/male-female-cleaning-staff-with-mops-vacuum-cleaner_18733883.htm#query=cleaning&position=6&from_view=search&track=sph) 提供，来源于 [Freepik](https://www.freepik.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 
@@ -50,7 +50,7 @@ df = pd.read_csv('train.csv')
 df.head() 
 ```
 
-![Python 数据清理库简介](../Images/4b10ee097c6fc0674e46ea43568f037a.png)
+![Python 数据清理库简介](img/4b10ee097c6fc0674e46ea43568f037a.png)
 
 我们将使用上述数据集作为示例。让我们尝试使用 PyJanitor 包来清理数据，使用一些示例函数。
 
@@ -64,25 +64,25 @@ df.factorize_columns(column_names=["Sex"]).also(
 ).clean_names()
 ```
 
-![Python 数据清理库简介](../Images/666c96e2c22edfb43c2b1e342f918b0e.png)
+![Python 数据清理库简介](img/666c96e2c22edfb43c2b1e342f918b0e.png)
 
 我们通过链式方法转换初始数据框。那么，以上代码会发生什么？让我来分解一下。
 
-+   首先，我们使用factorize函数将‘Sex’列转换为数值，
++   首先，我们使用 factorize 函数将‘Sex’列转换为数值，
 
-+   使用also函数，我们打印因子分解后的形状，
++   使用 also 函数，我们打印因子分解后的形状，
 
-+   接下来，我们使用bin_numeric函数将年龄分组，
++   接下来，我们使用 bin_numeric 函数将年龄分组，
 
-+   与also函数相同，
++   与 also 函数相同，
 
-+   最后，我们通过将列名转换为小写，然后用clean_names替换所有空格为下划线来清理列名。
++   最后，我们通过将列名转换为小写，然后用 clean_names 替换所有空格为下划线来清理列名。
 
-上述所有操作可以通过直接在我们的Pandas数据框中进行单链方法完成。你仍然可以用PyJanitor包做更多的事情，所以我建议你查看他们的[文档](https://pyjanitor-devs.github.io/pyjanitor/api/functions/)。
+上述所有操作可以通过直接在我们的 Pandas 数据框中进行单链方法完成。你仍然可以用 PyJanitor 包做更多的事情，所以我建议你查看他们的[文档](https://pyjanitor-devs.github.io/pyjanitor/api/functions/)。
 
 # Feature-engine
 
-[Feature-Engine](https://feature-engine.trainindata.com/en/latest/index.html#)是一个用于特征工程和选择的Python包，它保留了scikit-learn的API方法，如fit和transform。该包旨在提供一个嵌入机器学习管道的数据转换器。
+[Feature-Engine](https://feature-engine.trainindata.com/en/latest/index.html#)是一个用于特征工程和选择的 Python 包，它保留了 scikit-learn 的 API 方法，如 fit 和 transform。该包旨在提供一个嵌入机器学习管道的数据转换器。
 
 该包提供了各种数据清洗转换器，包括但不限于：
 
@@ -100,7 +100,7 @@ df.factorize_columns(column_names=["Sex"]).also(
 pip install feature-engine
 ```
 
-Feature-Engine的使用很简单；你只需要导入它们并训练转换器，类似于scikit-learn API。例如，我使用Imputer用中位数填充年龄列的缺失数据。
+Feature-Engine 的使用很简单；你只需要导入它们并训练转换器，类似于 scikit-learn API。例如，我使用 Imputer 用中位数填充年龄列的缺失数据。
 
 ```py
 from feature_engine.imputation import MeanMedianImputer
@@ -117,15 +117,15 @@ median_imputer.transform(df)
 
 # Cleanlab
 
-[Cleanlab](https://docs.cleanlab.ai/stable/index.html)是一个开源的Python包，用于清理机器学习数据集标签中的任何问题。它旨在使带有噪声标签的机器学习训练更加稳健，并提供可靠的输出。任何具有概率输出的模型都可以与Cleanlab包一起训练。
+[Cleanlab](https://docs.cleanlab.ai/stable/index.html)是一个开源的 Python 包，用于清理机器学习数据集标签中的任何问题。它旨在使带有噪声标签的机器学习训练更加稳健，并提供可靠的输出。任何具有概率输出的模型都可以与 Cleanlab 包一起训练。
 
-让我们用代码示例来尝试这个包。首先，我们需要安装Cleanlab。
+让我们用代码示例来尝试这个包。首先，我们需要安装 Cleanlab。
 
 ```py
 pip install cleanlab
 ```
 
-由于Cleanlab用于清洗标签问题，我们来尝试准备数据集以进行机器学习训练。
+由于 Cleanlab 用于清洗标签问题，我们来尝试准备数据集以进行机器学习训练。
 
 ```py
 # Selecting the features
@@ -155,7 +155,7 @@ from sklearn.metrics import classification_report
 print(classification_report(y_test, preds))
 ```
 
-![Python数据清洗库简介](../Images/7bf04581efebbf927892b0e0bf95648e.png)
+![Python 数据清洗库简介](img/7bf04581efebbf927892b0e0bf95648e.png)
 
 这是一个不错的结果，但让我们看看在清洗标签后能否进一步提高结果。我们来尝试用以下代码实现这一点。
 
@@ -172,7 +172,7 @@ cl.fit(X_train, y_train)
 cl.get_label_issues()
 ```
 
-![Python数据清洗库简介](../Images/ee0b64fa1f1008e4126bb628ca252e7d.png)
+![Python 数据清洗库简介](img/ee0b64fa1f1008e4126bb628ca252e7d.png)
 
 从上面的结果可以看出，由于预测错误，一些标签存在问题。通过清洗标签，我们来看看模型指标的结果。
 
@@ -181,7 +181,7 @@ clean_preds = cl.predict(X_test)
 print(classification_report(y_test, clean_preds))
 ```
 
-![Python数据清洗库简介](../Images/35acbf003114568e4f676c996f4c0538.png)
+![Python 数据清洗库简介](img/35acbf003114568e4f676c996f4c0538.png)
 
 我们可以看到，相比于之前没有标签清洗的模型，结果有所改善。你仍然可以使用 Cleanlab 做很多事情；我建议你访问[文档](https://docs.cleanlab.ai/stable/index.html)以进一步了解。
 

@@ -1,22 +1,22 @@
-# 从优秀到卓越的数据科学，第1部分：相关性和置信度
+# 从优秀到卓越的数据科学，第一部分：相关性和置信度
 
-> 原文：[https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html](https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html)
+> 原文：[`www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html`](https://www.kdnuggets.com/2019/02/good-great-data-science-correlations-confidence.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Brian Joseph](https://www.linkedin.com/in/brian-joseph-429028118/) 数据科学家**
 
-![Header image](../Images/499c86aa8800fc0cddc175a2f6b79053.png)
+![Header image](img/499c86aa8800fc0cddc175a2f6b79053.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -72,7 +72,7 @@ Number of Hospitals: 100
 
 ```
 
-![表格](../Images/1cbc408406e449ea462fded949ca076b.png)
+![表格](img/1cbc408406e449ea462fded949ca076b.png)
 
 如你所见，每一行代表一个医院。每个医院都有一个死亡率和一个质量评分。前提是*比较*`mortality_rate`和`quality_rating`，所以一个关键的统计工具应该跃然于你的脑海中。**相关性**。
 
@@ -133,7 +133,7 @@ ratings_df.head()
 
 ```
 
-![表格](../Images/900abd06c00dd8bccd36b05eddbe24cf.png)
+![表格](img/900abd06c00dd8bccd36b05eddbe24cf.png)
 
 这个问题的最后一步是（看似）最简单的。现在我们只需要相关性分析我们的两列数据，对吧？
 
@@ -142,7 +142,7 @@ ratings_df.corr()
 
 ```
 
-![表格](../Images/f9de80477ad35170ee45b8272d11a545.png)
+![表格](img/f9de80477ad35170ee45b8272d11a545.png)
 
 不完全正确。我们对数据做出了一个巨大的假设。我们假设我们的数据是*更*高于顺序的。 
 
@@ -159,7 +159,7 @@ ratings_df.corr(method='spearman')
 
 ```
 
-![表格](../Images/7ebe3e458e6464dd573547d47cc01e8e.png)
+![表格](img/7ebe3e458e6464dd573547d47cc01e8e.png)
 
 我们刚刚将相关性降低了约**10%**。这是一个巨大的差异！
 
@@ -167,11 +167,11 @@ ratings_df.corr(method='spearman')
 
 这表明**强大的统计背景对数据科学角色至关重要**。这样一个看似简单的问题实际上有一个关键的数学步骤，这个步骤常常被忽视。
 
-### 问题陈述2
+### 问题陈述 2
 
-你拥有过去5年在马萨诸塞州的数百万条药品记录，该州以阿片类药物滥用问题而闻名。因此，如果你能识别出那些开处方过多阿片类药物的药剂师，那将非常有用。
+你拥有过去 5 年在马萨诸塞州的数百万条药品记录，该州以阿片类药物滥用问题而闻名。因此，如果你能识别出那些开处方过多阿片类药物的药剂师，那将非常有用。
 
-![MA与阿片类药物相关的过量死亡率](../Images/e138fba1d4644e7da839c6d7f77e0cf4.png)
+![MA 与阿片类药物相关的过量死亡率](img/e138fba1d4644e7da839c6d7f77e0cf4.png)
 
 来源：[国家毒品滥用研究所](https://www.drugabuse.gov/drugs-abuse/opioids/opioid-summaries-by-state/massachusetts-opioid-summary)
 
@@ -187,7 +187,7 @@ prescribers_df.head(10)
 
 ```
 
-![Table](../Images/ea70c7ff48d81a3f86985e98882c09ca.png)
+![Table](img/ea70c7ff48d81a3f86985e98882c09ca.png)
 
 每一行代表一天的处方
 
@@ -201,7 +201,7 @@ prescribers_df.head(10)
 
 ### **开处方医生分组**
 
-我们应该首先注意到的是，`prescriber_id`不包含唯一值，因为药剂师可能在多个日子里开过药。由于这个指标是按药剂师级别计算的——而不是按日计算的——我们应该使用pandas的`groupby`来修正这个问题。
+我们应该首先注意到的是，`prescriber_id`不包含唯一值，因为药剂师可能在多个日子里开过药。由于这个指标是按药剂师级别计算的——而不是按日计算的——我们应该使用 pandas 的`groupby`来修正这个问题。
 
 ```py
 prescribers_df = prescribers_df.groupby('prescriber_id').agg('sum')
@@ -209,7 +209,7 @@ prescribers_df.head(10)
 
 ```
 
-![Table](../Images/6585b77ff3707d13c96d545983c5f681.png)
+![Table](img/6585b77ff3707d13c96d545983c5f681.png)
 
 好得多。现在的任务是根据药剂师开出的阿片类药物数量对他们进行排名。但药剂师开处方的数量不同。这表明我们现在应该考虑每个药剂师的阿片类药物处方比例。让我们就这样做。
 
@@ -228,17 +228,17 @@ prescribers_df.sort_values('opioid_prescription_ratio', ascending=False).head(10
 
 ```
 
-![Table](../Images/1044e8e1654f3acc9e2e749bed888c13.png)
+![Table](img/1044e8e1654f3acc9e2e749bed888c13.png)
 
 不完全正确。这些数据应该引起你的警觉。
 
-将一位药剂师因为在他们所有处方中开出1份阿片类药物就被排名为滥用者，这真的有意义吗？尝试用文字准确描述一下这个情况的问题所在。为什么我们不想将这些药剂师报告为最严重的违规者？希望你得出的答案类似于：
+将一位药剂师因为在他们所有处方中开出 1 份阿片类药物就被排名为滥用者，这真的有意义吗？尝试用文字准确描述一下这个情况的问题所在。为什么我们不想将这些药剂师报告为最严重的违规者？希望你得出的答案类似于：
 
 ***因为我们没有足够的信息来评判他们。***
 
 想象一下你坐在药店里看着一位药剂师（我们称他为“比尔”）进行工作。假设你想要报告比尔，因为他开处方的阿片类药物过多。
 
-一位顾客走进来，Bill给他们开了*氢可酮*（一种常见的鸦片药物）。立即报告Bill是没有意义的。你会希望等更多地观察Bill的行为后再做判断，因为你还不确定你的发现。
+一位顾客走进来，Bill 给他们开了*氢可酮*（一种常见的鸦片药物）。立即报告 Bill 是没有意义的。你会希望等更多地观察 Bill 的行为后再做判断，因为你还不确定你的发现。
 
 **置信度**是这里的关键词，我们很快就会发现。
 
@@ -246,25 +246,25 @@ prescribers_df.sort_values('opioid_prescription_ratio', ascending=False).head(10
 
 那么我们如何解决这个问题呢？
 
-从统计学角度来看，开处方鸦片药物或不开处方可以视作一个[Bernouli参数](https://en.wikipedia.org/wiki/Bernoulli_distribution)（这是一个值为二元的术语——要么为真，要么为假）。考虑到Bernouli参数的观察次数，我们想要预测这个参数的真实值。
+从统计学角度来看，开处方鸦片药物或不开处方可以视作一个[Bernouli 参数](https://en.wikipedia.org/wiki/Bernoulli_distribution)（这是一个值为二元的术语——要么为真，要么为假）。考虑到 Bernouli 参数的观察次数，我们想要预测这个参数的真实值。
 
-所谓的“真实值”是指如果我们有足够的观察数据，开药医生的`opioid_prescription_ratio`将会收敛到的实际值。以Bill为例，“真实值”将等同于Bill的`opioid_prescription_ratio`，如果我们能观察和记录他的行为很长时间——比如一年。
+所谓的“真实值”是指如果我们有足够的观察数据，开药医生的`opioid_prescription_ratio`将会收敛到的实际值。以 Bill 为例，“真实值”将等同于 Bill 的`opioid_prescription_ratio`，如果我们能观察和记录他的行为很长时间——比如一年。
 
 如果你上过统计学或[优秀的数据科学课程](https://www.learndatasci.com/best-data-science-online-courses-2018/)，你可能对置信区间的概念有所了解。如果没有，简单来说，置信区间只是对你相信未知值存在于其中的范围的数学置信度度量。
 
-![95 percent confidence interval.jpeg](../Images/57f67c957f13e1c0839c038799f4f755.png)
+![95 percent confidence interval.jpeg](img/57f67c957f13e1c0839c038799f4f755.png)
 
 来源： [当你可以拥有置信区间时，谁需要伴舞者？](https://medium.com/design-ibm/who-needs-backup-dancers-when-you-can-have-confidence-intervals-485f9464c06f)
 
-例如，我可以有95%的把握明天的温度将在40华氏度和70华氏度之间。
+例如，我可以有 95%的把握明天的温度将在 40 华氏度和 70 华氏度之间。
 
-在1927年，数学家Edwin Wilson将置信区间的概念应用于Bernoulli参数。这意味着，基于我们对药剂师的数据，我们可以猜测其`opioid_prescription_ratio`的*真实*值！
+在 1927 年，数学家 Edwin Wilson 将置信区间的概念应用于 Bernoulli 参数。这意味着，基于我们对药剂师的数据，我们可以猜测其`opioid_prescription_ratio`的*真实*值！
 
 这是公式：
 
-Wilson置信区间下界：
+Wilson 置信区间下界：
 
-![Formula](../Images/00d83421f12adf17726a45493055cf80.png)
+![Formula](img/00d83421f12adf17726a45493055cf80.png)
 
 公式看起来很吓人，但如果花时间去理解它，其实很直观。解释这个公式为什么有效的数学原理本身值得一个完整的讨论，因此不在此范围之内。我们将专注于应用它。
 
@@ -285,7 +285,7 @@ def wilson_ci_lower_bound(num_pos, n, confidence=.95):
 
 ```
 
-让我们以95%的置信度将此公式应用于我们的数据框，创建一个新列。
+让我们以 95%的置信度将此公式应用于我们的数据框，创建一个新列。
 
 ```py
 prescribers_df['wilson_opioid_prescription_ratio'] = prescribers_df \
@@ -295,11 +295,11 @@ prescribers_df.sort_values('wilson_opioid_prescription_ratio', ascending=False).
 
 ```
 
-![Table](../Images/8df13327a847e5edcb5d8baf2eeaa6ed.png)
+![Table](img/8df13327a847e5edcb5d8baf2eeaa6ed.png)
 
 太棒了！现在这些是我们想要报告的结果。
 
-虽然有许多开具1/1或2/2鸦片药物处方的医生，但他们现在出现在我们的排名底部——这很直观。虽然我们排名最高的开药医生的`opioid_prescription_ratio`低于一些其他开药医生，但排名现在考虑了数学置信度的概念。
+虽然有许多开具 1/1 或 2/2 鸦片药物处方的医生，但他们现在出现在我们的排名底部——这很直观。虽然我们排名最高的开药医生的`opioid_prescription_ratio`低于一些其他开药医生，但排名现在考虑了数学置信度的概念。
 
 这两种方法——使用置信区间或不使用置信区间——在*技术上*都是可以接受的。然而，很容易看出，具有数学背景的方法产生了更有价值的结果。
 
@@ -317,11 +317,11 @@ prescribers_df.sort_values('wilson_opioid_prescription_ratio', ascending=False).
 
 **相关内容：**
 
-+   [数据科学统计学入门](/2018/12/introduction-statistics-data-science.html)
++   数据科学统计学入门
 
-+   [掌握基础机器学习的7个步骤 — 2019版](/2019/01/7-steps-mastering-basic-machine-learning-python.html)
++   掌握基础机器学习的 7 个步骤 — 2019 版
 
-+   [探索Python基础](/2019/01/exploring-python-basics.html)
++   探索 Python 基础
 
 ### 更多相关主题
 
@@ -335,4 +335,4 @@ prescribers_df.sort_values('wilson_opioid_prescription_ratio', ascending=False).
 
 +   [数据质量：好、坏与丑](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)
 
-+   [良好的数据科学项目文档的5条规则](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)
++   [良好的数据科学项目文档的 5 条规则](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)

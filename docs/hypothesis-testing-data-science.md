@@ -1,8 +1,8 @@
 # 数据科学中的假设检验
 
-> 原文：[https://www.kdnuggets.com/2023/02/hypothesis-testing-data-science.html](https://www.kdnuggets.com/2023/02/hypothesis-testing-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/02/hypothesis-testing-data-science.html`](https://www.kdnuggets.com/2023/02/hypothesis-testing-data-science.html)
 
-![数据科学中的假设检验](../Images/e3d8064523e7ddb225cb9e475814db74.png)
+![数据科学中的假设检验](img/e3d8064523e7ddb225cb9e475814db74.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 
@@ -54,7 +54,7 @@
 
 ## 零假设
 
-统计变量之间没有关系，这种测试称为零假设检验。零假设表示为H0。零假设的类型有：
+统计变量之间没有关系，这种测试称为零假设检验。零假设表示为 H0。零假设的类型有：
 
 +   简单假设
 
@@ -66,7 +66,7 @@
 
 ## 替代假设
 
-存在两个变量之间的关系，证明它们具有统计关联。替代假设表示为H1或HA。替代假设可以分为：
+存在两个变量之间的关系，证明它们具有统计关联。替代假设表示为 H1 或 HA。替代假设可以分为：
 
 1.  **单尾。** 这是指你在一个方向上进行测试，忽略与另一个方向上其他变量的关系。样本均值会高于或低于总体均值，但不会同时如此。
 
@@ -110,7 +110,7 @@
 
 ## 抽样分布
 
-抽样分布是通过从特定总体中选择大量样本得到的概率分布。例如，如果你从200家咖啡店的总体中随机抽取10家咖啡店作为样本，那么这个随机样本可能是咖啡店编号4、7、13、76、94、145、11、189、52、165，或其他任何组合。
+抽样分布是通过从特定总体中选择大量样本得到的概率分布。例如，如果你从 200 家咖啡店的总体中随机抽取 10 家咖啡店作为样本，那么这个随机样本可能是咖啡店编号 4、7、13、76、94、145、11、189、52、165，或其他任何组合。
 
 ## 标准误差
 
@@ -128,9 +128,9 @@ Type-II 错误，也称为假阴性，发生在团队未能拒绝一个实际上
 
 显著性水平是你愿意接受的做出假阳性结论（Type I 错误）的概率和最大风险。数据科学家、研究人员等会提前设定这个值，并将其作为统计显著性的阈值。
 
-## P值
+## P 值
 
-P值是指概率值，是与显著性水平比较的一个数值，用于决定是否拒绝原假设。它决定样本数据是否支持反对原假设的观点，并判断原假设是否为真。如果你的p值高于显著性水平，那么原假设并没有错或不成立，结果也不具有统计显著性。然而，如果你的p值低于显著性水平，结果将被解释为反对原假设并被视为具有统计显著性。
+P 值是指概率值，是与显著性水平比较的一个数值，用于决定是否拒绝原假设。它决定样本数据是否支持反对原假设的观点，并判断原假设是否为真。如果你的 p 值高于显著性水平，那么原假设并没有错或不成立，结果也不具有统计显著性。然而，如果你的 p 值低于显著性水平，结果将被解释为反对原假设并被视为具有统计显著性。
 
 # 结论
 
@@ -142,13 +142,13 @@ P值是指概率值，是与显著性水平比较的一个数值，用于决定�
 
 ### 了解更多相关话题
 
-+   [假设检验与A/B测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
++   [假设检验与 A/B 测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
 
 +   [假设检验解释](https://www.kdnuggets.com/2021/09/hypothesis-testing-explained.html)
 
-+   [数据科学的必备A/B测试课程](https://www.kdnuggets.com/2023/02/essential-ab-testing-course-data-science.html)
++   [数据科学的必备 A/B 测试课程](https://www.kdnuggets.com/2023/02/essential-ab-testing-course-data-science.html)
 
-+   [数据科学面试中的24个A/B测试面试问题](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)
++   [数据科学面试中的 24 个 A/B 测试面试问题](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)
 
 +   [机器学习中训练数据与测试数据的区别](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)
 

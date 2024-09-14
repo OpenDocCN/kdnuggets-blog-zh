@@ -1,22 +1,22 @@
 # Cookiecutter 数据科学：如何组织您的数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2018/07/cookiecutter-data-science-organize-data-project.html](https://www.kdnuggets.com/2018/07/cookiecutter-data-science-organize-data-project.html)
+> 原文：[`www.kdnuggets.com/2018/07/cookiecutter-data-science-organize-data-project.html`](https://www.kdnuggets.com/2018/07/cookiecutter-data-science-organize-data-project.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [DrivenData](https://www.drivendata.org/) 提供**
 
-![Image](../Images/cd61bf44f3394ed05156d00b1e97ee5e.png)
+![Image](img/cd61bf44f3394ed05156d00b1e97ee5e.png)
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -32,9 +32,9 @@
 
 ### 其他人会感谢你
 
-> 没有人在创建新的Rails项目之前坐下来考虑他们想把视图放在哪里；他们只是运行`rails new`来获得像其他人一样的标准项目骨架。
+> 没有人在创建新的 Rails 项目之前坐下来考虑他们想把视图放在哪里；他们只是运行`rails new`来获得像其他人一样的标准项目骨架。
 
-一个明确定义的标准项目结构意味着新来者可以在不深入阅读大量文档的情况下开始理解分析。这也意味着他们不必在了解非常具体的内容之前阅读100%的代码。
+一个明确定义的标准项目结构意味着新来者可以在不深入阅读大量文档的情况下开始理解分析。这也意味着他们不必在了解非常具体的内容之前阅读 100%的代码。
 
 组织良好的代码往往是自我文档化的，因为组织本身为你的代码提供了上下文而无需过多开销。人们会感谢你，因为他们可以：
 
@@ -151,7 +151,7 @@ cookiecutter https://github.com/drivendata/cookiecutter-data-science
 
 ### 数据是不可变的
 
-切勿编辑你的原始数据，特别是不要手动编辑，尤其是在 Excel 中。不要覆盖你的原始数据。不要保存原始数据的多个版本。将数据（及其格式）视为不可变的。你编写的代码应该将原始数据通过管道传递到最终分析中。你不需要每次都运行所有步骤来生成新的图表（见[分析是一个DAG](https://drivendata.github.io/cookiecutter-data-science/#analysis-is-a-dag)），但任何人都应该能够仅使用`src`中的代码和`data/raw`中的数据重现最终产品。
+切勿编辑你的原始数据，特别是不要手动编辑，尤其是在 Excel 中。不要覆盖你的原始数据。不要保存原始数据的多个版本。将数据（及其格式）视为不可变的。你编写的代码应该将原始数据通过管道传递到最终分析中。你不需要每次都运行所有步骤来生成新的图表（见[分析是一个 DAG](https://drivendata.github.io/cookiecutter-data-science/#analysis-is-a-dag)），但任何人都应该能够仅使用`src`中的代码和`data/raw`中的数据重现最终产品。
 
 此外，如果数据是不可变的，它不需要像代码那样进行源代码管理。因此，***默认情况下，数据文件夹包含在 `.gitignore` 文件中。*** 如果你有少量数据，且很少更改，你可能希望将数据包含在仓库中。Github 目前会警告文件超过 50MB，并拒绝超过 100MB 的文件。其他存储/同步大数据的选项包括 [AWS S3](https://aws.amazon.com/s3/) 及其同步工具（例如，[`s3cmd`](http://s3tools.org/s3cmd)）、[Git Large File Storage](https://git-lfs.github.com/)、[Git Annex](https://git-annex.branchable.com/) 和 [dat](http://dat-data.com/)。目前，我们默认要求使用 S3 存储桶，并使用 [AWS CLI](http://docs.aws.amazon.com/cli/latest/reference/s3/index.html) 将 `data` 文件夹中的数据与服务器同步。
 
@@ -180,9 +180,9 @@ from src.data import make_dataset
 
 ### 分析是一个有向无环图（DAG）
 
-在分析中，通常会有长时间运行的步骤来预处理数据或训练模型。如果这些步骤已经运行过（并且你将输出存储在类似于`data/interim`的目录中），你不希望每次都重新运行它们。我们更喜欢[`make`](https://www.gnu.org/software/make/)来管理相互依赖的步骤，特别是那些长时间运行的步骤。Make是Unix平台上常见的工具（并且[在Windows上也可用](https://drivendata.github.io/cookiecutter-data-science/)）。遵循[`make`文档](https://www.gnu.org/software/make/)、[Makefile约定](https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions)和[便携性指南](http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make)将帮助确保你的Makefile在不同系统上有效运行。这里有[一些](http://zmjones.com/make/) [示例](https://blog.kaggle.com/2012/10/15/make-for-data-scientists/)供你[入门](https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/)。许多数据人员，包括[Mike Bostock](https://bost.ocks.org/mike/make/)，将`make`作为他们的首选工具。
+在分析中，通常会有长时间运行的步骤来预处理数据或训练模型。如果这些步骤已经运行过（并且你将输出存储在类似于`data/interim`的目录中），你不希望每次都重新运行它们。我们更喜欢[`make`](https://www.gnu.org/software/make/)来管理相互依赖的步骤，特别是那些长时间运行的步骤。Make 是 Unix 平台上常见的工具（并且[在 Windows 上也可用](https://drivendata.github.io/cookiecutter-data-science/)）。遵循[`make`文档](https://www.gnu.org/software/make/)、[Makefile 约定](https://www.gnu.org/prep/standards/html_node/Makefile-Conventions.html#Makefile-Conventions)和[便携性指南](http://www.gnu.org/savannah-checkouts/gnu/autoconf/manual/autoconf-2.69/html_node/Portable-Make.html#Portable-Make)将帮助确保你的 Makefile 在不同系统上有效运行。这里有[一些](http://zmjones.com/make/) [示例](https://blog.kaggle.com/2012/10/15/make-for-data-scientists/)供你[入门](https://web.archive.org/web/20150206054212/http://www.bioinformaticszen.com/post/decomplected-workflows-makefiles/)。许多数据人员，包括[Mike Bostock](https://bost.ocks.org/mike/make/)，将`make`作为他们的首选工具。
 
-还有其他一些管理DAG的工具是用Python编写的，而不是使用DSL（例如，[Paver](http://paver.github.io/paver/#)、[Luigi](http://luigi.readthedocs.org/en/stable/index.html)、[Airflow](https://pythonhosted.org/airflow/cli.html)、[Snakemake](https://bitbucket.org/snakemake/snakemake/wiki/Home)、[Ruffus](http://www.ruffus.org.uk/)或[Joblib](https://pythonhosted.org/joblib/memory.html)）。如果这些工具更适合你的分析，请随意使用它们。
+还有其他一些管理 DAG 的工具是用 Python 编写的，而不是使用 DSL（例如，[Paver](http://paver.github.io/paver/#)、[Luigi](http://luigi.readthedocs.org/en/stable/index.html)、[Airflow](https://pythonhosted.org/airflow/cli.html)、[Snakemake](https://bitbucket.org/snakemake/snakemake/wiki/Home)、[Ruffus](http://www.ruffus.org.uk/)或[Joblib](https://pythonhosted.org/joblib/memory.html)）。如果这些工具更适合你的分析，请随意使用它们。
 
 ### 从环境开始构建。
 
@@ -198,11 +198,11 @@ from src.data import make_dataset
 
 1.  如果你发现需要安装另一个包，重新运行`pip freeze > requirements.txt`并将更改提交到版本控制系统中。
 
-如果你对重建环境有更复杂的需求，可以考虑基于虚拟机的方法，如[Docker](https://www.docker.com/)或[Vagrant](https://www.vagrantup.com/)。这两种工具使用基于文本的格式（Dockerfile和Vagrantfile），你可以轻松地将其添加到版本控制中，以描述如何创建一个具有所需要求的虚拟机。
+如果你对重建环境有更复杂的需求，可以考虑基于虚拟机的方法，如[Docker](https://www.docker.com/)或[Vagrant](https://www.vagrantup.com/)。这两种工具使用基于文本的格式（Dockerfile 和 Vagrantfile），你可以轻松地将其添加到版本控制中，以描述如何创建一个具有所需要求的虚拟机。
 
 ### 保持秘密和配置不在版本控制中
 
-你*真的*不希望在Github上泄露你的AWS秘密密钥或Postgres用户名和密码。言尽于此——请参见[Twelve Factor App](http://12factor.net/config)原则。这里有一种方法：
+你*真的*不希望在 Github 上泄露你的 AWS 秘密密钥或 Postgres 用户名和密码。言尽于此——请参见[Twelve Factor App](http://12factor.net/config)原则。这里有一种方法：
 
 **将你的秘密和配置变量存储在一个特殊的文件中**
 
@@ -239,7 +239,7 @@ other_variable = os.environ.get("OTHER_VARIABLE")
 
 **AWS CLI 配置**
 
-使用Amazon S3存储数据时，管理AWS访问的简单方法是将访问密钥设置为环境变量。然而，在一台机器上管理多个密钥集（例如在多个项目中工作时），最好使用[凭证文件](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)，通常位于`~/.aws/credentials`。一个典型的文件可能如下所示：
+使用 Amazon S3 存储数据时，管理 AWS 访问的简单方法是将访问密钥设置为环境变量。然而，在一台机器上管理多个密钥集（例如在多个项目中工作时），最好使用[凭证文件](https://docs.aws.amazon.com/cli/latest/userguide/cli-config-files.html)，通常位于`~/.aws/credentials`。一个典型的文件可能如下所示：
 
 ```py
 [default]
@@ -262,21 +262,21 @@ aws_secret_access_key=myprojectsecretkey
 
 ### 贡献
 
-Cookiecutter Data Science项目有其明确的观点，但不怕犯错。最佳实践在变化，工具在进化，经验在积累。**这个项目的目标是让开始、结构化和共享分析变得更容易。** 鼓励[拉取请求](https://github.com/drivendata/cookiecutter-data-science/pulls)和[提交问题](https://github.com/drivendata/cookiecutter-data-science/issues)。我们很想知道什么对你有效，什么无效。
+Cookiecutter Data Science 项目有其明确的观点，但不怕犯错。最佳实践在变化，工具在进化，经验在积累。**这个项目的目标是让开始、结构化和共享分析变得更容易。** 鼓励[拉取请求](https://github.com/drivendata/cookiecutter-data-science/pulls)和[提交问题](https://github.com/drivendata/cookiecutter-data-science/issues)。我们很想知道什么对你有效，什么无效。
 
-如果你使用了Cookiecutter数据科学项目，请链接回此页面或 [给我们留言](https://twitter.com/drivendataorg) 并 [告诉我们](mailto:info@drivendata.org)!
+如果你使用了 Cookiecutter 数据科学项目，请链接回此页面或 [给我们留言](https://twitter.com/drivendataorg) 并 告诉我们!
 
 ### 相关项目和参考文献链接
 
-项目结构和可重复性在R研究社区中有更多讨论。如果你在使用R，这里有一些项目和博客文章可能对你有所帮助。
+项目结构和可重复性在 R 研究社区中有更多讨论。如果你在使用 R，这里有一些项目和博客文章可能对你有所帮助。
 
-+   [项目模板](http://projecttemplate.net/index.html) - 一个R数据分析模板
++   [项目模板](http://projecttemplate.net/index.html) - 一个 R 数据分析模板
 
-+   "[设计项目](http://nicercode.github.io/blog/2013-04-05-projects/)" 在Nice R Code上
++   "[设计项目](http://nicercode.github.io/blog/2013-04-05-projects/)" 在 Nice R Code 上
 
-+   "[我的研究工作流程](http://www.carlboettiger.info/2012/05/06/research-workflow.html)" 在Carlboettifer.info上
++   "[我的研究工作流程](http://www.carlboettiger.info/2012/05/06/research-workflow.html)" 在 Carlboettifer.info 上
 
-+   "[计算生物学项目的快速指南](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)" 在PLOS计算生物学上
++   "[计算生物学项目的快速指南](http://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1000424)" 在 PLOS 计算生物学上
 
 最后，感谢[Cookiecutter](https://cookiecutter.readthedocs.org/en/latest/)项目 ([github](https://github.com/audreyr/cookiecutter))，它帮助我们减少了在编写模板代码上的时间，使我们能够将更多时间用于完成实际工作。
 
@@ -286,19 +286,19 @@ Cookiecutter Data Science项目有其明确的观点，但不怕犯错。最佳�
 
 **相关:**
 
-+   [与机器学习算法相关的数据结构](/2018/01/data-structures-related-machine-learning-algorithms.html)
++   与机器学习算法相关的数据结构
 
-+   [Python正则表达式备忘单](/2018/04/python-regular-expressions-cheat-sheet.html)
++   Python 正则表达式备忘单
 
-+   [Python中的函数式编程介绍](/2018/02/introduction-functional-programming-python.html)
++   Python 中的函数式编程介绍
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

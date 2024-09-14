@@ -1,8 +1,8 @@
 # 我最喜欢的令人震惊的机器学习/人工智能突破
 
-> 原文：[https://www.kdnuggets.com/2019/03/favorite-ml-ai-breakthroughs.html](https://www.kdnuggets.com/2019/03/favorite-ml-ai-breakthroughs.html)
+> 原文：[`www.kdnuggets.com/2019/03/favorite-ml-ai-breakthroughs.html`](https://www.kdnuggets.com/2019/03/favorite-ml-ai-breakthroughs.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Jerry Chi](https://www.linkedin.com/in/jerrychi/)，SmartNews 数据科学经理**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -28,9 +28,9 @@
 
 [麻省理工学院研究人员的网站/视频，2018](http://rfpose.csail.mit.edu/)
 
-![](../Images/fd784cc2060151479f7bba89b708f3ce.png)
+![](img/fd784cc2060151479f7bba89b708f3ce.png)
 
-我们可以仅通过Wifi信号的扰动准确估计墙另一边的人是站着、坐着还是走动。
+我们可以仅通过 Wifi 信号的扰动准确估计墙另一边的人是站着、坐着还是走动。
 
 #### 从视频中测量材料的物理属性
 
@@ -42,35 +42,35 @@
 
 [论文，2015](https://www.sigmobile.org/mobicom/2015/papers/p142-liuA.pdf)
 
-![](../Images/d8cd2c0a193be9d239ff8be4a92ecc22.png)
+![](img/d8cd2c0a193be9d239ff8be4a92ecc22.png)
 
-研究人员展示了使用一个放置在键盘旁边的普通智能手机录音，能够以**94%准确率**估计每个按键。与之前使用多个麦克风环绕键盘的监督深度学习方法不同，这篇论文实际上使用了一种相对简单的机器学习技术（K-means聚类）和**无监督**学习。
+研究人员展示了使用一个放置在键盘旁边的普通智能手机录音，能够以**94%准确率**估计每个按键。与之前使用多个麦克风环绕键盘的监督深度学习方法不同，这篇论文实际上使用了一种相对简单的机器学习技术（K-means 聚类）和**无监督**学习。
 
 ### 生成模型
 
 #### 逼真的面孔生成、风格混合和插值
 
-[论文](https://arxiv.org/abs/1812.04948)/[视频](https://www.youtube.com/watch?v=kSLJriaOumA) 由NVIDIA研究人员提供，2018年
+[论文](https://arxiv.org/abs/1812.04948)/[视频](https://www.youtube.com/watch?v=kSLJriaOumA) 由 NVIDIA 研究人员提供，2018 年
 
-![](../Images/d452d9c67d17a2d647fc49b9bd51e60d.png)
+![](img/d452d9c67d17a2d647fc49b9bd51e60d.png)
 
-研究人员将一种新架构与大量GPU结合，创造出了极其逼真的人工面孔，这些面孔是其他面孔之间的插值或一种面孔“风格”应用到另一面孔上的结果。这项工作建立在生成对抗网络（GANs）之前的研究基础上。GANs于2014年发明，自那时以来研究爆炸性增长。GANs的基本概念是两个神经网络相互对抗（例如，一个将图像分类为“真实”或“虚假”，另一个神经网络生成图像以试图“欺骗”第一个神经网络，将虚假图像错误地分类为真实……因此第二个神经网络是第一个的“对手”）。
+研究人员将一种新架构与大量 GPU 结合，创造出了极其逼真的人工面孔，这些面孔是其他面孔之间的插值或一种面孔“风格”应用到另一面孔上的结果。这项工作建立在生成对抗网络（GANs）之前的研究基础上。GANs 于 2014 年发明，自那时以来研究爆炸性增长。GANs 的基本概念是两个神经网络相互对抗（例如，一个将图像分类为“真实”或“虚假”，另一个神经网络生成图像以试图“欺骗”第一个神经网络，将虚假图像错误地分类为真实……因此第二个神经网络是第一个的“对手”）。
 
 一般来说，有很多关于对抗性机器学习的[惊人研究](https://github.com/yenchenlin/awesome-adversarial-machine-learning)，这种研究已经有十多年历史了。它对网络安全等领域有许多令人不安的影响。但我离题了。
 
 #### 教授机器绘画
 
-[Google Brain的博客文章，2017年](https://ai.googleblog.com/2017/04/teaching-machines-to-draw.html)
+[Google Brain 的博客文章，2017 年](https://ai.googleblog.com/2017/04/teaching-machines-to-draw.html)
 
-![](../Images/41d17838b9f6c454295e62d20784d32f.png)
+![](img/41d17838b9f6c454295e62d20784d32f.png)
 
 两幅图像之间的插值
 
-我的熟人[David Ha at Google Brain](https://twitter.com/hardmaru)使用生成对抗递归神经网络（RNN）制作了基于矢量的图形（我把这看作是自动化的Adobe Illustrator）。
+我的熟人[David Ha at Google Brain](https://twitter.com/hardmaru)使用生成对抗递归神经网络（RNN）制作了基于矢量的图形（我把这看作是自动化的 Adobe Illustrator）。
 
 #### 将优秀的舞蹈动作转移到舞蹈水平差的人身上
 
-[网站](https://carolineec.github.io/everybody_dance_now/)/[视频](https://www.youtube.com/watch?v=PCBTZh41Ris) 由UC Berkeley研究人员提供，2018年
+[网站](https://carolineec.github.io/everybody_dance_now/)/[视频](https://www.youtube.com/watch?v=PCBTZh41Ris) 由 UC Berkeley 研究人员提供，2018 年
 
 想象一下“自动调音器”用于舞蹈。通过姿态估计和生成对抗训练，研究人员能够制作任何真实人物（“目标”人物）舞蹈的虚假视频，并且舞技非常高超。所需的输入仅有：
 
@@ -78,29 +78,29 @@
 
 +   目标人物跳舞的几分钟视频（通常舞技很差，因为大多数人舞蹈不好）
 
-我还看到NVIDIA的CEO Jensen Huang展示了一段（使用此技术制作的）他像迈克尔·杰克逊一样跳舞的视频。我很高兴我参加了GPU技术大会，哈哈。
+我还看到 NVIDIA 的 CEO Jensen Huang 展示了一段（使用此技术制作的）他像迈克尔·杰克逊一样跳舞的视频。我很高兴我参加了 GPU 技术大会，哈哈。
 
 ### 强化学习
 
-#### 世界模型 — AI在自己的梦境中学习
+#### 世界模型 — AI 在自己的梦境中学习
 
 [谷歌大脑网站，2018](https://worldmodels.github.io/)
 
-![](../Images/acf4711d39b9c3aadfc60f86717347c5.png)
+![](img/acf4711d39b9c3aadfc60f86717347c5.png)
 
 人类实际上并不真正知道或考虑我们生活的世界的所有细节。我们的行为是基于我们脑中的世界抽象。例如，如果我骑自行车，我不会考虑自行车的齿轮/螺母/螺栓；我只是对车轮、座位和把手的大致位置以及如何与它们互动有一个粗略的感知。为什么不对人工智能采用类似的方法呢？
 
-这种“世界模型”方法（再次由David Ha等人创建）允许“代理”（例如控制赛车游戏中汽车的人工智能）创建一个世界/环境的生成模型，这是实际环境的简化/抽象。因此，你可以把世界模型看作是存在于人工智能脑中的一个梦境。然后，人工智能可以在这个“梦境”中通过强化学习进行训练，以实现更好的表现。因此，这种方法实际上是将生成式机器学习与强化学习结合在一起。通过这样做，研究人员在某些视频游戏任务中达到了最先进的性能。
+这种“世界模型”方法（再次由 David Ha 等人创建）允许“代理”（例如控制赛车游戏中汽车的人工智能）创建一个世界/环境的生成模型，这是实际环境的简化/抽象。因此，你可以把世界模型看作是存在于人工智能脑中的一个梦境。然后，人工智能可以在这个“梦境”中通过强化学习进行训练，以实现更好的表现。因此，这种方法实际上是将生成式机器学习与强化学习结合在一起。通过这样做，研究人员在某些视频游戏任务中达到了最先进的性能。
 
-[更新 2019/2/15] 基于上述“世界模型”方法，谷歌刚刚公布了[PlaNet：深度规划网络用于强化学习](http://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)，其数据效率比以往方法提高了5000%。
+[更新 2019/2/15] 基于上述“世界模型”方法，谷歌刚刚公布了[PlaNet：深度规划网络用于强化学习](http://ai.googleblog.com/2019/02/introducing-planet-deep-planning.html)，其数据效率比以往方法提高了 5000%。
 
-#### AlphaStar——击败顶级职业选手的Starcraft II人工智能
+#### AlphaStar——击败顶级职业选手的 Starcraft II 人工智能
 
-[博客文章](https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/)，[DeepMind（谷歌）制作的电子竞技视频](https://www.youtube.com/watch?v=cUTMhmVh1qs)，2019年
+[博客文章](https://deepmind.com/blog/alphastar-mastering-real-time-strategy-game-starcraft-ii/)，[DeepMind（谷歌）制作的电子竞技视频](https://www.youtube.com/watch?v=cUTMhmVh1qs)，2019 年
 
-我们距离[李世石与DeepMind的AlphaGo之间的历史围棋比赛](https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol)已经过去很远，那只是三年前的2016年（看看[Netflix纪录片](https://www.netflix.com/jp-en/title/80190844)，让一些人感动落泪）。那时，AlphaZero在2017年在围棋方面超越了AlphaGo（并在国际象棋、将棋等方面超越了任何其他算法），尽管没有使用任何来自人类比赛的训练数据。但2019年的AlphaStar则更加**惊人**。
+我们距离[李世石与 DeepMind 的 AlphaGo 之间的历史围棋比赛](https://en.wikipedia.org/wiki/AlphaGo_versus_Lee_Sedol)已经过去很远，那只是三年前的 2016 年（看看[Netflix 纪录片](https://www.netflix.com/jp-en/title/80190844)，让一些人感动落泪）。那时，AlphaZero 在 2017 年在围棋方面超越了 AlphaGo（并在国际象棋、将棋等方面超越了任何其他算法），尽管没有使用任何来自人类比赛的训练数据。但 2019 年的 AlphaStar 则更加**惊人**。
 
-自1998年以来作为一个StarCraft粉丝，我能体会到“……需要平衡短期和长期目标，并适应意外情况……带来了巨大的挑战。”这是一个真正困难且复杂的游戏，需要在多个层面上理解才能玩得好。对Starcraft算法的研究自2009年以来一直在进行。
+自 1998 年以来作为一个 StarCraft 粉丝，我能体会到“……需要平衡短期和长期目标，并适应意外情况……带来了巨大的挑战。”这是一个真正困难且复杂的游戏，需要在多个层面上理解才能玩得好。对 Starcraft 算法的研究自 2009 年以来一直在进行。
 
 AlphaStar 实质上使用了监督学习（来自人类比赛）和强化学习（对抗自我）相结合的方法来实现其结果。
 
@@ -108,7 +108,7 @@ AlphaStar 实质上使用了监督学习（来自人类比赛）和强化学习�
 
 #### 用单个人类演示来教导机器任务
 
-[NVIDIA 研究人员的文章](https://news.developer.nvidia.com/new-ai-technique-helps-robots-work-alongside-humans/) / [视频](https://www.youtube.com/watch?time_continue=1&v=B7ZT5oSnRys)，2018年
+[NVIDIA 研究人员的文章](https://news.developer.nvidia.com/new-ai-technique-helps-robots-work-alongside-humans/) / [视频](https://www.youtube.com/watch?time_continue=1&v=B7ZT5oSnRys)，2018 年
 
 我能想到三种典型的方法来教机器人做某件事，但这些方法都需要大量时间/劳动：
 
@@ -124,7 +124,7 @@ AlphaStar 实质上使用了监督学习（来自人类比赛）和强化学习�
 
 ### 无监督机器翻译
 
-[Facebook AI Research 的博客文章，2018年](https://code.fb.com/ai-research/unsupervised-machine-translation-a-novel-approach-to-provide-fast-accurate-translations-for-more-languages/)
+[Facebook AI Research 的博客文章，2018 年](https://code.fb.com/ai-research/unsupervised-machine-translation-a-novel-approach-to-provide-fast-accurate-translations-for-more-languages/)
 
 通常，你需要大量翻译文档的训练数据集（例如，联合国会议的专业翻译）才能很好地进行机器翻译（即**监督**学习）。当然，许多主题和语言对没有高质量、充足的训练数据。在这篇论文中，研究人员展示了使用**无监督**学习（即不使用翻译数据，仅使用每种语言中无关的文本语料库）是可能达到最先进的**监督**学习方法的翻译质量。哇。
 
@@ -160,7 +160,7 @@ AlphaStar 实质上使用了监督学习（来自人类比赛）和强化学习�
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一项90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一项 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [成功的数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 

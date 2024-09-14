@@ -1,8 +1,8 @@
 # 使用 scikit-learn 进行聚类：无监督学习教程
 
-> 原文：[https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)
+> 原文：[`www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html`](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/b86ba87744e6c80502bec063c6ee062f.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/b86ba87744e6c80502bec063c6ee062f.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 以下是聚类算法的概述及简短定义。
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/940ae1dc6a569e725132ac247cef1cd2.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/940ae1dc6a569e725132ac247cef1cd2.png)
 
 图片由作者提供
 
@@ -48,7 +48,7 @@
 
 在深入探讨之前，我们来看一下下面的图表。它展示了这五种算法在六个不同结构的数据集上的表现。
 
-![使用 scikit-learn 的聚类：无监督学习教程](../Images/0bcfe93fee62fd50217fc1cd654635e0.png)
+![使用 scikit-learn 的聚类：无监督学习教程](img/0bcfe93fee62fd50217fc1cd654635e0.png)
 
 聚类算法 - 作者提供的图片
 
@@ -74,11 +74,11 @@
 
 ## K-Means
 
-![使用 scikit-learn 的聚类：无监督学习教程](../Images/ffefd7b582ec70aa7df0aebbb28c4887.png)
+![使用 scikit-learn 的聚类：无监督学习教程](img/ffefd7b582ec70aa7df0aebbb28c4887.png)
 
 K-Means 2D | 作者提供的图片
 
-![使用 scikit-learn 的聚类：无监督学习教程](../Images/bf81918b942555beb2292df55e50fd6f.png)
+![使用 scikit-learn 的聚类：无监督学习教程](img/bf81918b942555beb2292df55e50fd6f.png)
 
 K Means 3D | 作者提供的图片
 
@@ -94,7 +94,7 @@ K-Means 是一种流行的聚类算法，它将数据集划分为 K 个不同的
 
 ## DBScan
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/8de3494c09f041a20ae000b8efad224d.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/8de3494c09f041a20ae000b8efad224d.png)
 
 DBScan | 图片由作者提供
 
@@ -106,7 +106,7 @@ DBScan 常用于异常检测、空间聚类和图像分割，目标是识别数�
 
 ## 层次聚类
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/682c33f0e069426fb4d86fd57143bc4c.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/682c33f0e069426fb4d86fd57143bc4c.png)
 
 层次聚类 | 图片由作者提供
 
@@ -118,7 +118,7 @@ DBScan 常用于异常检测、空间聚类和图像分割，目标是识别数�
 
 ## Mean-Shift 聚类
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/ef77715493326f95d741b11f5255109b.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/ef77715493326f95d741b11f5255109b.png)
 
 Mean-Shift 聚类 | 图片由作者提供
 
@@ -132,9 +132,9 @@ Mean-shift 聚类已在实际应用中使用，例如图像分割、视频监控
 
 ## 高斯混合聚类
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/65fb3a8e31358038c73e9495d08d855d.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/65fb3a8e31358038c73e9495d08d855d.png)
 
-高斯混合模型在月牙形数据集中的应用 | 图片由作者提供 ![使用 scikit-learn 进行聚类：无监督学习教程](../Images/d66db08ceabfe04abbe8b9f81fb9462d.png)
+高斯混合模型在月牙形数据集中的应用 | 图片由作者提供 ![使用 scikit-learn 进行聚类：无监督学习教程](img/d66db08ceabfe04abbe8b9f81fb9462d.png)
 
 K Means 聚类模型在月牙形数据集中的应用 | 图片由作者提供
 
@@ -154,7 +154,7 @@ K Means 聚类模型在月牙形数据集中的应用 | 图片由作者提供
 
 这里是最流行的一些概述。
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/de76f99ec499d990675696d2f5dff256.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/de76f99ec499d990675696d2f5dff256.png)
 
 图片来源：作者
 
@@ -212,7 +212,7 @@ Calinski-Harabasz 指数通常用于市场细分、客户画像和产品推荐�
 
 ## 比较评价指标
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/853188381b0cb4016331ac5d79a6a165.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/853188381b0cb4016331ac5d79a6a165.png)
 
 图片作者
 
@@ -244,7 +244,7 @@ Calinski-Harabasz 指数通常用于市场细分、客户画像和产品推荐�
 
 鸢尾花数据集是一个著名的多类分类数据集，包含 150 个鸢尾花样本，每个样本具有四个特征（萼片和花瓣的长度和宽度）。
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/612e90b34d5c306110f2a628231861e9.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/612e90b34d5c306110f2a628231861e9.png)
 
 图片来源 [R 语言机器学习入门](https://www.datacamp.com/community/tutorials/machine-learning-in-r)
 
@@ -327,7 +327,7 @@ pred_df.head(10)
 
 这是输出结果。
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/1d90f8f90ddb9442c4fdffbaa5ca69be.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/1d90f8f90ddb9442c4fdffbaa5ca69be.png)
 
 预测数据框 | 图片由作者提供
 
@@ -377,7 +377,7 @@ plt.show()
 
 这是输出结果。
 
-![使用 scikit-learn 进行聚类：无监督学习教程](../Images/2f18af9a20aa92829646aad6cb366d7c.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/2f18af9a20aa92829646aad6cb366d7c.png)
 
 图片由作者提供
 
@@ -395,47 +395,47 @@ K-Means 算法在 Calinski Harabasz 分数上表现最佳，而 GMM 算法在 Ra
 
 这里是我们将详细讨论的例子的概述。
 
-![使用scikit-learn进行聚类：无监督学习教程](../Images/972c3d2614ebd9a056c3dcbcf4f2fac6.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/972c3d2614ebd9a056c3dcbcf4f2fac6.png)
 
 作者提供的图像
 
 ## 超市连锁个性化
 
-![使用scikit-learn进行聚类：无监督学习教程](../Images/f4b3799950da5654b6fde265d9a6bf28.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/f4b3799950da5654b6fde265d9a6bf28.png)
 
 作者提供的图像
 
-**实际例子**：一家超市连锁希望为其客户创建个性化的营销活动。他们使用K-Means聚类根据客户的购买习惯、人口统计数据和店铺访问频率来细分客户。这些细分帮助公司量身定制营销信息，以更好地吸引和服务客户。
+**实际例子**：一家超市连锁希望为其客户创建个性化的营销活动。他们使用 K-Means 聚类根据客户的购买习惯、人口统计数据和店铺访问频率来细分客户。这些细分帮助公司量身定制营销信息，以更好地吸引和服务客户。
 
-**算法：** K-Means聚类
+**算法：** K-Means 聚类
 
-K-Means被选择是因为它是一个简单、高效且广泛使用的聚类算法，适用于大数据集。它可以快速识别模式并根据输入特征创建明确的客户细分。
+K-Means 被选择是因为它是一个简单、高效且广泛使用的聚类算法，适用于大数据集。它可以快速识别模式并根据输入特征创建明确的客户细分。
 
 **评估指标：** Silhouette Score
 
-Silhouette Score用于评估客户细分的质量，通过测量每个数据点在其分配的聚类内的适配度，与其他聚类进行比较。这有助于确保聚类是紧凑且分离良好的，这对于创建有效的个性化营销活动至关重要。
+Silhouette Score 用于评估客户细分的质量，通过测量每个数据点在其分配的聚类内的适配度，与其他聚类进行比较。这有助于确保聚类是紧凑且分离良好的，这对于创建有效的个性化营销活动至关重要。
 
 ## 欺诈交易
 
-![使用scikit-learn进行聚类：无监督学习教程](../Images/adfd49556ef14f99235136dfb81e5d4c.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/adfd49556ef14f99235136dfb81e5d4c.png)
 
 作者提供的图像
 
-**实际例子**：一家信用卡公司希望检测欺诈交易。他们使用DBSCAN根据交易金额、时间和地点等因素对交易进行聚类。那些不符合任何聚类的异常交易会被标记为潜在欺诈，进行进一步调查。
+**实际例子**：一家信用卡公司希望检测欺诈交易。他们使用 DBSCAN 根据交易金额、时间和地点等因素对交易进行聚类。那些不符合任何聚类的异常交易会被标记为潜在欺诈，进行进一步调查。
 
 **算法：** DBSCAN
 
-DBSCAN被选择是因为它是一个基于密度的聚类算法，能够识别形状和大小各异的聚类，并检测不属于任何聚类的噪声点。这使它适合检测异常模式或离群点，如潜在的欺诈交易。
+DBSCAN 被选择是因为它是一个基于密度的聚类算法，能够识别形状和大小各异的聚类，并检测不属于任何聚类的噪声点。这使它适合检测异常模式或离群点，如潜在的欺诈交易。
 
 **评估指标：** Silhouette Score
 
-选择Silhouette Score作为评估指标是因为它有助于评估DBSCAN的有效性，通过将正常交易与表示欺诈的潜在离群点分开。
+选择 Silhouette Score 作为评估指标是因为它有助于评估 DBSCAN 的有效性，通过将正常交易与表示欺诈的潜在离群点分开。
 
-更高的Silhouette Score表示常规交易的聚类之间分隔良好，噪声点（离群点）也被有效分离。这种分离使得识别和标记显著偏离正常模式的可疑交易变得更容易。
+更高的 Silhouette Score 表示常规交易的聚类之间分隔良好，噪声点（离群点）也被有效分离。这种分离使得识别和标记显著偏离正常模式的可疑交易变得更容易。
 
 ## 癌症基因组学关系
 
-![使用scikit-learn进行聚类：无监督学习教程](../Images/5e4d4ab765bfbe4f23aabb53260eb6eb.png)
+![使用 scikit-learn 进行聚类：无监督学习教程](img/5e4d4ab765bfbe4f23aabb53260eb6eb.png)
 
 作者提供的图像
 
@@ -445,13 +445,13 @@ DBSCAN被选择是因为它是一个基于密度的聚类算法，能够识别�
 
 选择凝聚层次聚类是因为它创建了一个树状结构（树状图），这使研究人员能够以多层次的粒度可视化和解释癌细胞之间的关系。这种方法可以揭示嵌套的子群体，并帮助研究人员理解基于基因表达模式的癌症类型的层次组织。
 
-**评估指标**：Calinski-Harabasz指数
+**评估指标**：Calinski-Harabasz 指数
 
-选择Calinski-Harabasz指数是因为它测量了簇间离散度与簇内离散度的比率。对于癌症基因组学，它帮助研究人员评估基于基因表达模式的癌细胞分组的质量，判断组间是否明显且分隔良好。
+选择 Calinski-Harabasz 指数是因为它测量了簇间离散度与簇内离散度的比率。对于癌症基因组学，它帮助研究人员评估基于基因表达模式的癌细胞分组的质量，判断组间是否明显且分隔良好。
 
 ## 自主驾驶汽车
 
-![使用scikit-learn的聚类：无监督学习教程](../Images/d065fcf84da57950cd29cdcf02083f70.png)
+![使用 scikit-learn 的聚类：无监督学习教程](img/d065fcf84da57950cd29cdcf02083f70.png)
 
 作者提供的图像
 
@@ -463,29 +463,29 @@ DBSCAN被选择是因为它是一个基于密度的聚类算法，能够识别�
 
 这使得它特别适合于图像分割任务，其中簇或区域的数量可能事先未知，并且区域的形状可能复杂且不规则。
 
-**评估指标**：Fowlkes-Mallows评分（FMS）
+**评估指标**：Fowlkes-Mallows 评分（FMS）
 
-选择Fowlkes-Mallows评分是因为它测量了两个聚类之间的相似性，通常将算法的输出与真实的聚类进行比较。
+选择 Fowlkes-Mallows 评分是因为它测量了两个聚类之间的相似性，通常将算法的输出与真实的聚类进行比较。
 
-在自动驾驶汽车的背景下，FMS可以用于评估均值漂移聚类算法在分割图像方面的效果，相较于人工标注的分割结果。
+在自动驾驶汽车的背景下，FMS 可以用于评估均值漂移聚类算法在分割图像方面的效果，相较于人工标注的分割结果。
 
 ## 新闻推荐
 
-![使用scikit-learn的聚类：无监督学习教程](../Images/0b50b4b60373daaae7dd97f598d463d8.png)
+![使用 scikit-learn 的聚类：无监督学习教程](img/0b50b4b60373daaae7dd97f598d463d8.png)
 
 作者提供的图像
 
-**实际案例**：一个在线新闻平台希望将文章分组，以改善对用户的内容推荐。他们使用Gaussian Mixture Models根据从文本中提取的特征（如词频和术语共现）对文章进行聚类。通过识别不同的主题，该平台可以推荐与用户兴趣更相关的文章。
+**实际案例**：一个在线新闻平台希望将文章分组，以改善对用户的内容推荐。他们使用 Gaussian Mixture Models 根据从文本中提取的特征（如词频和术语共现）对文章进行聚类。通过识别不同的主题，该平台可以推荐与用户兴趣更相关的文章。
 
 **算法**：Gaussian Mixture Model (GMM) 聚类
 
-选择Gaussian Mixture Models是因为它们是一种概率生成方法，可以建模复杂的重叠簇。这对文本数据特别有用，因为文章可能属于多个主题或具有共享特征。GMM可以捕捉这些细微差别，并提供软聚类，为每篇文章分配属于每个主题的概率。
+选择 Gaussian Mixture Models 是因为它们是一种概率生成方法，可以建模复杂的重叠簇。这对文本数据特别有用，因为文章可能属于多个主题或具有共享特征。GMM 可以捕捉这些细微差别，并提供软聚类，为每篇文章分配属于每个主题的概率。
 
 **评估指标**：Silhouette Coefficient
 
-选择Silhouette Coefficient是因为它衡量了簇的紧密性和分离度，有助于评估主题分配的质量。
+选择 Silhouette Coefficient 是因为它衡量了簇的紧密性和分离度，有助于评估主题分配的质量。
 
-更高的Silhouette Coefficient表明一个主题内的文章彼此更相似，并且与其他主题明显不同，这对准确的内容推荐至关重要。
+更高的 Silhouette Coefficient 表明一个主题内的文章彼此更相似，并且与其他主题明显不同，这对准确的内容推荐至关重要。
 
 如果你想了解更多关于无监督算法的信息，你可以在这里获取更多资料：“[Unsupervised Learning Algorithms](https://www.stratascratch.com/blog/overview-of-machine-learning-algorithms-unsupervised-learning/?utm_source=blog&utm_medium=click&utm_campaign=kdn+clustering+unsupervised+learning)”。还可以查看“[Supervised vs Unsupervised Learning](https://www.stratascratch.com/blog/supervised-vs-unsupervised-learning/?utm_source=blog&utm_medium=click&utm_campaign=kdn+clustering+unsupervised+learning)”，这两种方法是机器学习领域我们应该了解的。
 
@@ -493,11 +493,11 @@ DBSCAN被选择是因为它是一个基于密度的聚类算法，能够识别�
 
 总之，聚类是一种重要的无监督学习技术，用于在没有预先了解类标签的情况下发现数据中的相似性或模式。
 
-我们讨论了不同的聚类算法，包括K-Means、Mean Shift、DBScan、Gaussian Mixture和Hierarchical Clustering，以及它们的应用场景和实际应用。
+我们讨论了不同的聚类算法，包括 K-Means、Mean Shift、DBScan、Gaussian Mixture 和 Hierarchical Clustering，以及它们的应用场景和实际应用。
 
-此外，我们还探索了各种评估指标，包括Silhouette Coefficient、Calinski-Harabasz Index和Davies-Bouldin Index，这些指标帮助我们评估聚类结果的质量。
+此外，我们还探索了各种评估指标，包括 Silhouette Coefficient、Calinski-Harabasz Index 和 Davies-Bouldin Index，这些指标帮助我们评估聚类结果的质量。
 
-我们还学习了如何使用scikit-learn同时开发多个聚类算法，并使用我们已发现的指标对其进行评估。
+我们还学习了如何使用 scikit-learn 同时开发多个聚类算法，并使用我们已发现的指标对其进行评估。
 
 最后，我们讨论了一些利用聚类算法解决实际问题的热门应用。
 
@@ -509,9 +509,9 @@ DBSCAN被选择是因为它是一个基于密度的聚类算法，能够识别�
 
 ### 更多相关主题
 
-+   [无监督学习实操：K均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
++   [无监督学习实操：K 均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
 
-+   [聚类大解放：理解K均值聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
++   [聚类大解放：理解 K 均值聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
 
 +   [无监督的解缠表示学习在类别不平衡数据集中的应用](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
 
@@ -519,4 +519,4 @@ DBSCAN被选择是因为它是一个基于密度的聚类算法，能够识别�
 
 +   [揭示无监督学习](https://www.kdnuggets.com/unveiling-unsupervised-learning)
 
-+   [机器学习中的DBSCAN聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)
++   [机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)

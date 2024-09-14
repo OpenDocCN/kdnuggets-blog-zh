@@ -1,6 +1,6 @@
 # 通过实际操作来学习数据科学的绝佳方式
 
-> 原文：[https://www.kdnuggets.com/2015/09/learn-data-science-by-doing.html](https://www.kdnuggets.com/2015/09/learn-data-science-by-doing.html)
+> 原文：[`www.kdnuggets.com/2015/09/learn-data-science-by-doing.html`](https://www.kdnuggets.com/2015/09/learn-data-science-by-doing.html)
 
 **由 Sumendar Karupakala 提供。**
 
@@ -10,15 +10,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![学习数据科学](../Images/26e192d8741abb7e80c2929e7d2247f2.png)
+![学习数据科学](img/26e192d8741abb7e80c2929e7d2247f2.png)
 
 由于数据科学的综合性质，它融合了数学、统计学、经济学、计算机科学以及领域经验、黑客思维和业务影响技能，我们找不到一个地方可以一次性学习所有内容，但有很多出色的在线资源可以单独选择并学习，以成为数据科学领域的专家。如果我们想在这一领域精通，就从各种在线资源中获得这些课程吧。
 
@@ -52,9 +52,9 @@
 
 +   计算思维和数据科学简介
 
-链接: [https://www.edx.org/course/subject/data-analysis-statistics](https://www.edx.org/course/subject/data-analysis-statistics)
+链接: [`www.edx.org/course/subject/data-analysis-statistics`](https://www.edx.org/course/subject/data-analysis-statistics)
 
-[https://www.edx.org/course/subject/computer-science](https://www.edx.org/course/subject/computer-science)
+[`www.edx.org/course/subject/computer-science`](https://www.edx.org/course/subject/computer-science)
 
 **Coursera:**
 
@@ -78,7 +78,7 @@
 
 +   数据可视化和 D3.js
 
-链接: [https://www.udacity.com/courses/data-science](https://www.udacity.com/courses/data-science)
+链接: [`www.udacity.com/courses/data-science`](https://www.udacity.com/courses/data-science)
 
 **DataCamp: **
 
@@ -98,15 +98,15 @@
 
 +   SQL 对 Hadoop 的访问
 
-链接: [http://bigdatauniversity.com/wpcourses/?cat=334](http://bigdatauniversity.com/wpcourses/?cat=334)
+链接: [`bigdatauniversity.com/wpcourses/?cat=334`](http://bigdatauniversity.com/wpcourses/?cat=334)
 
-[http://bigdatauniversity.com/wpcourses/?cat=19](http://bigdatauniversity.com/wpcourses/?cat=19)
+[`bigdatauniversity.com/wpcourses/?cat=19`](http://bigdatauniversity.com/wpcourses/?cat=19)
 
-[http://bigdatauniversity.com/wpcourses/?cat=132](http://bigdatauniversity.com/wpcourses/?cat=132)
+[`bigdatauniversity.com/wpcourses/?cat=132`](http://bigdatauniversity.com/wpcourses/?cat=132)
 
-[http://bigdatauniversity.com/wpcourses/?cat=108\](http://bigdatauniversity.com/wpcourses/?cat=108/)
+[`bigdatauniversity.com/wpcourses/?cat=108\`](http://bigdatauniversity.com/wpcourses/?cat=108/)
 
-[http://bigdatauniversity.com/wpcourses/?cat=133](http://bigdatauniversity.com/wpcourses/?cat=133)
+[`bigdatauniversity.com/wpcourses/?cat=133`](http://bigdatauniversity.com/wpcourses/?cat=133)
 
 **CodeSchool:**
 
@@ -114,13 +114,13 @@
 
 +   尝试 R
 
-+   SQL的续集
++   SQL 的续集
 
-链接: [https://www.codeschool.com/courses/try-sql](https://www.codeschool.com/courses/try-sql)
+链接: [`www.codeschool.com/courses/try-sql`](https://www.codeschool.com/courses/try-sql)
 
-[https://www.codeschool.com/courses/try-r](https://www.codeschool.com/courses/try-r)
+[`www.codeschool.com/courses/try-r`](https://www.codeschool.com/courses/try-r)
 
-[https://www.codeschool.com/courses/the-sequel-to-sql](https://www.codeschool.com/courses/the-sequel-to-sql)
+[`www.codeschool.com/courses/the-sequel-to-sql`](https://www.codeschool.com/courses/the-sequel-to-sql)
 
 **KhanAcademy:**
 
@@ -128,9 +128,9 @@
 
 +   线性代数、概率与统计
 
-链接: [https://www.khanacademy.org/computing/computer-programming/sql](https://www.khanacademy.org/computing/computer-programming/sql)
+链接: [`www.khanacademy.org/computing/computer-programming/sql`](https://www.khanacademy.org/computing/computer-programming/sql)
 
-[https://www.khanacademy.org/math/probability](https://www.khanacademy.org/math/probability)
+[`www.khanacademy.org/math/probability`](https://www.khanacademy.org/math/probability)
 
 **Stanford online lagunita: **
 
@@ -138,11 +138,11 @@
 
 +   CS101 计算机科学 101
 
-链接: [https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/](https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about)
+链接: [`lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/`](https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about)
 
 [Winter2015/about](https://lagunita.stanford.edu/courses/HumanitiesandScience/StatLearning/Winter2015/about)
 
-[https://lagunita.stanford.edu/courses/Engineering/CS101/Summer2014/about](https://lagunita.stanford.edu/courses/Engineering/CS101/Summer2014/about)
+[`lagunita.stanford.edu/courses/Engineering/CS101/Summer2014/about`](https://lagunita.stanford.edu/courses/Engineering/CS101/Summer2014/about)
 
 **Futurelearn: **
 
@@ -152,17 +152,17 @@
 
 +   学习数据分析编程
 
-链接: [https://www.futurelearn.com/courses/big-data](https://www.futurelearn.com/courses/big-data)
+链接: [`www.futurelearn.com/courses/big-data`](https://www.futurelearn.com/courses/big-data)
 
-[https://www.futurelearn.com/courses/data-to-insight](https://www.futurelearn.com/courses/data-to-insight)
+[`www.futurelearn.com/courses/data-to-insight`](https://www.futurelearn.com/courses/data-to-insight)
 
-[https://www.futurelearn.com/courses/learn-to-code](https://www.futurelearn.com/courses/learn-to-code)
+[`www.futurelearn.com/courses/learn-to-code`](https://www.futurelearn.com/courses/learn-to-code)
 
 **Educast.Emc :**
 
 +   大数据湖
 
-链接: [https://educast.emc.com/learn/data-lakes-for-big-data-may-june](https://educast.emc.com/learn/data-lakes-for-big-data-may-june)
+链接: [`educast.emc.com/learn/data-lakes-for-big-data-may-june`](https://educast.emc.com/learn/data-lakes-for-big-data-may-june)
 
 **Udemy:**
 
@@ -178,11 +178,11 @@
 
 +   使用 Hadoop 生态系统进行数据分析
 
-链接: [https://www.udemy.com/courses/Business/Data-and-Analytics/](https://www.udemy.com/courses/Business/Data-and-Analytics/)
+链接: [`www.udemy.com/courses/Business/Data-and-Analytics/`](https://www.udemy.com/courses/Business/Data-and-Analytics/)
 
-[https://www.udemy.com/courses/Development/Databases/](https://www.udemy.com/courses/Development/Databases/)
+[`www.udemy.com/courses/Development/Databases/`](https://www.udemy.com/courses/Development/Databases/)
 
-[https://www.udemy.com/courses/Development/Programming-Languages/](https://www.udemy.com/courses/Development/Programming-Languages/)
+[`www.udemy.com/courses/Development/Programming-Languages/`](https://www.udemy.com/courses/Development/Programming-Languages/)
 
 **Alison:**
 
@@ -198,19 +198,19 @@
 
 +   [首先黑客攻击自己: 如何进行网络攻防](http://www.pluralsight.com/courses/hack-yourself-first)
 
-![Sumendar](../Images/5bc980a1dc3aa654b03388c2021e7d63.png)
+![Sumendar](img/5bc980a1dc3aa654b03388c2021e7d63.png)
 
 **简介:** [Sumendar Karupakala](http://www.sumendar.com) 是一位认证的大数据分析师，拥有多个分析领域的经验。他热爱使用分析工具、大数据和数据科学中的算法与技术，以便做出更聪明的决策。
 
 **相关:**
 
-+   [前20大数据科学 MOOC 课程](/2015/09/top-20-data-science-moocs.html)
++   前 20 大数据科学 MOOC 课程
 
-+   [在线教育：分析、大数据、数据挖掘和数据科学](/education/online.html)
++   在线教育：分析、大数据、数据挖掘和数据科学
 
-+   [商业分析与商业智能在线证书及学位](/2015/08/business-analytics-bi-online-certificates-degrees.html)
++   商业分析与商业智能在线证书及学位
 
-+   [如何免费成为数据科学家](/2015/08/how-become-data-scientist-free.html)
++   如何免费成为数据科学家
 
 ### 更多相关话题
 
@@ -220,7 +220,7 @@
 
 +   [讲述一个伟大的数据故事: 可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日: 讲述一个伟大的数据故事: A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日: 讲述一个伟大的数据故事: A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [用 Great Expectations 克服数据质量问题](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
 

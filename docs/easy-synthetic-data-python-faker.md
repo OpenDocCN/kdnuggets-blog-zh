@@ -1,8 +1,8 @@
-# 使用Faker在Python中生成简单的合成数据
+# 使用 Faker 在 Python 中生成简单的合成数据
 
-> 原文：[https://www.kdnuggets.com/2021/11/easy-synthetic-data-python-faker.html](https://www.kdnuggets.com/2021/11/easy-synthetic-data-python-faker.html)
+> 原文：[`www.kdnuggets.com/2021/11/easy-synthetic-data-python-faker.html`](https://www.kdnuggets.com/2021/11/easy-synthetic-data-python-faker.html)
 
-[评论](#comments)![图示](../Images/9948a4e44a27c8a43b26295628cd8b5e.png)
+评论![图示](img/9948a4e44a27c8a43b26295628cd8b5e.png)
 
 图片来自[geralt on Pixabay](https://pixabay.com/users/geralt-9301/)
 
@@ -12,36 +12,36 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-然而，现实世界的数据通常不足以满足项目需求。在这种情况下，可以使用合成数据代替真实数据或用来增强不足够大的数据集。人工制造数据的方法有很多，其中一些远比其他方法复杂。然而，也有一些相对简单的选项，例如，**[Faker](https://github.com/joke2k/faker)** 就是Python中的一个解决方案。
+然而，现实世界的数据通常不足以满足项目需求。在这种情况下，可以使用合成数据代替真实数据或用来增强不足够大的数据集。人工制造数据的方法有很多，其中一些远比其他方法复杂。然而，也有一些相对简单的选项，例如，**[Faker](https://github.com/joke2k/faker)** 就是 Python 中的一个解决方案。
 
-来自Faker的[文档](https://faker.readthedocs.io/en/master/)：
+来自 Faker 的[文档](https://faker.readthedocs.io/en/master/)：
 
-> *Faker* 是一个生成假数据的Python包。无论你是需要为数据库进行引导，创建美观的XML文档，填充你的持久化存储以进行压力测试，还是匿名化从生产服务中获得的数据，Faker都能满足你的需求。
+> *Faker* 是一个生成假数据的 Python 包。无论你是需要为数据库进行引导，创建美观的 XML 文档，填充你的持久化存储以进行压力测试，还是匿名化从生产服务中获得的数据，Faker 都能满足你的需求。
 
-可以使用pip安装Faker：
+可以使用 pip 安装 Faker：
 
 ```py
 pip install faker
 ```
 
-导入并实例化一个Faker实例的方式如下：
+导入并实例化一个 Faker 实例的方式如下：
 
 ```py
 from faker import Faker
 fake = Faker()
 ```
 
-### Faker的基本使用
+### Faker 的基本使用
 
-Faker的使用非常简单。让我们先看几个示例。
+Faker 的使用非常简单。让我们先看几个示例。
 
 对于我们的第一个技巧，让我们生成一个假名字。
 
@@ -85,7 +85,7 @@ Stevenborough, RI 36008
 Weight where while method. Rock final environmental gas provide. Remember continue sure. Create resource determine fine. Else red across participant. People must interesting spend some us.
 ```
 
-### Faker优化
+### Faker 优化
 
 如果你对特定地区的数据感兴趣呢？例如，如果我想生成一种在墨西哥会出现的西班牙名字怎么办？
 
@@ -109,9 +109,9 @@ Ramiro Raquel Vélez Urbina
 Porfirio Esther Irizarry Varela
 ```
 
-生成的输出可以通过使用Faker的权重设置进一步优化：
+生成的输出可以通过使用 Faker 的权重设置进一步优化：
 
-> Faker构造函数接受一个与性能相关的参数叫做`use_weighting`。它指定是否尝试使值的频率匹配真实世界的频率（例如，英文名字Gary的出现频率会远高于名字Lorimer）。如果`use_weighting`为`False`，则所有项目被选择的机会相等，选择过程也更快。默认值是`True`。
+> Faker 构造函数接受一个与性能相关的参数叫做`use_weighting`。它指定是否尝试使值的频率匹配真实世界的频率（例如，英文名字 Gary 的出现频率会远高于名字 Lorimer）。如果`use_weighting`为`False`，则所有项目被选择的机会相等，选择过程也更快。默认值是`True`。
 
 让我们看看一些美国英语的示例是如何工作的：
 
@@ -179,9 +179,9 @@ Ross Thompson
 
 ### 更全面的示例
 
-假设我们要为一家国际公司生成一些虚假的客户数据记录，我们希望模拟现实世界中名字的分布，并将这些数据保存到CSV文件中，以便后续在某种数据科学任务中使用。为了清理数据，我们还将把生成的地址中的换行符替换为逗号，并完全移除生成文本中的换行符。
+假设我们要为一家国际公司生成一些虚假的客户数据记录，我们希望模拟现实世界中名字的分布，并将这些数据保存到 CSV 文件中，以便后续在某种数据科学任务中使用。为了清理数据，我们还将把生成的地址中的换行符替换为逗号，并完全移除生成文本中的换行符。
 
-这是一个代码片段，可以实现这一点，展示了Faker在几行代码中的强大功能。
+这是一个代码片段，可以实现这一点，展示了 Faker 在几行代码中的强大功能。
 
 ```py
 from faker import Faker
@@ -223,23 +223,23 @@ df.to_csv('customer_data.csv', index=False)
 [10000 rows x 6 columns]
 ```
 
-我们还有一个包含所有数据的customer_data.csv文件，供进一步处理和使用。
+我们还有一个包含所有数据的 customer_data.csv 文件，供进一步处理和使用。
 
-[![图示](../Images/bf77863ef12ba951cafe420f34ff7fb4.png)](https://i.ibb.co/Fhf8dZ1/customer-data-csv.jpg)
+![图示](https://i.ibb.co/Fhf8dZ1/customer-data-csv.jpg)
 
-生成的客户数据CSV文件的截图
+生成的客户数据 CSV 文件的截图
 
-上面提到的特定类型数据生成器——如姓名、地址、电话等——称为提供者。通过启用Faker生成专门类型的数据，学习如何扩展其功能，使用[标准提供者](https://faker.readthedocs.io/en/stable/providers.html)和[社区提供者](https://faker.readthedocs.io/en/stable/communityproviders.html)。
+上面提到的特定类型数据生成器——如姓名、地址、电话等——称为提供者。通过启用 Faker 生成专门类型的数据，学习如何扩展其功能，使用[标准提供者](https://faker.readthedocs.io/en/stable/providers.html)和[社区提供者](https://faker.readthedocs.io/en/stable/communityproviders.html)。
 
-查看Faker的[GitHub仓库](https://github.com/joke2k/faker)和[文档](https://faker.readthedocs.io/en/stable/)，了解更多功能并立即创建你自己的数据集。
+查看 Faker 的[GitHub 仓库](https://github.com/joke2k/faker)和[文档](https://faker.readthedocs.io/en/stable/)，了解更多功能并立即创建你自己的数据集。
 
 **相关内容**：
 
-+   [在Python中创建带有异常签名的合成时间序列](/2021/10/synthetic-time-series-anomaly-signatures-python.html)
++   在 Python 中创建带有异常签名的合成时间序列
 
-+   [教AI用合成数据分类时间序列模式](/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)
++   教 AI 用合成数据分类时间序列模式
 
-+   [3个数据获取、注释和增强工具](/2021/08/3-data-labeling-synthesizing-augmentation-tools.html)
++   3 个数据获取、注释和增强工具
 
 ### 更多相关内容
 
@@ -247,9 +247,9 @@ df.to_csv('customer_data.csv', index=False)
 
 +   [如何利用合成数据克服机器学习模型训练中的数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)
 
-+   [如何用AI生成的合成数据使AI/ML和数据科学民主化](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)
++   [如何用 AI 生成的合成数据使 AI/ML 和数据科学民主化](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)
 
-+   [合成数据平台：释放生成式AI的力量…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
++   [合成数据平台：释放生成式 AI 的力量…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
 
 +   [数据访问在大多数公司中严重不足，71%的人认为…](https://www.kdnuggets.com/2023/07/mostly-data-access-severely-lacking-synthetic-data-help.html)
 

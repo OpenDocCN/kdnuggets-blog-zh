@@ -1,10 +1,10 @@
 # PyTorch 深度学习简介
 
-> 原文：[https://www.kdnuggets.com/2018/11/introduction-pytorch-deep-learning.html](https://www.kdnuggets.com/2018/11/introduction-pytorch-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2018/11/introduction-pytorch-deep-learning.html`](https://www.kdnuggets.com/2018/11/introduction-pytorch-deep-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Image](../Images/601b7698df3c9c20b0c40518801cdfa0.png)
+![Image](img/601b7698df3c9c20b0c40518801cdfa0.png)
 
 在本教程中，你将了解**使用 PyTorch 框架的深度学习**，并在完成后，你将能够舒适地将其应用于你的深度学习模型。Facebook 今年早些时候推出了 PyTorch 1.0，并与[Google Cloud](https://cloud.google.com/)、[AWS](http://aws.amazon.com/)和[Azure 机器学习](https://azure.microsoft.com/en-us/services/machine-learning-studio/)集成。在本教程中，我假设你已经熟悉[Scikit-learn](http://scikit-learn.org/)、[Pandas](https://pandas.pydata.org/)、[NumPy](http://www.numpy.org/)和[SciPy](https://www.scipy.org/)。这些包是本教程的重要前提条件。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -62,7 +62,7 @@ PyTorch 是一个基于[Torch](https://en.wikipedia.org/wiki/Torch_%28machine_le
 
 ### PyTorch 张量
 
-**PyTorch 张量**与 NumPy 数组非常相似，区别在于它们可以在 GPU 上运行。这一点很重要，因为它有助于加速数值计算，这可以将神经网络的速度提高 50 倍或更多。要使用 PyTorch，你需要访问[https://PyTorch.org/](https://pytorch.org/)并安装 PyTorch。如果你使用 Conda，可以通过运行以下简单命令安装 PyTorch：
+**PyTorch 张量**与 NumPy 数组非常相似，区别在于它们可以在 GPU 上运行。这一点很重要，因为它有助于加速数值计算，这可以将神经网络的速度提高 50 倍或更多。要使用 PyTorch，你需要访问[`PyTorch.org/`](https://pytorch.org/)并安装 PyTorch。如果你使用 Conda，可以通过运行以下简单命令安装 PyTorch：
 
 要定义一个 PyTorch 张量，首先需要导入 `torch` 包。PyTorch 允许你定义两种类型的[张量](https://pytorch.org/docs/0.3.1/tensors.html)——CPU 张量和 GPU 张量。在本教程中，我会假设你正在使用 CPU 机器，但我也会展示如何在 GPU 上定义张量：
 
@@ -148,11 +148,11 @@ PyTorch 允许你实现不同类型的层，如 [卷积层，](https://heartbeat
 
 **相关内容：**
 
-+   [Keras 深度学习入门](/2018/10/introduction-deep-learning-keras.html)
++   Keras 深度学习入门
 
-+   [使用 PyTorch 的简单导数](/2018/05/simple-derivatives-pytorch.html)
++   使用 PyTorch 的简单导数
 
-+   [PyTorch 张量基础](/2018/05/pytorch-tensor-basics.html)
++   PyTorch 张量基础
 
 ### 更多相关话题
 

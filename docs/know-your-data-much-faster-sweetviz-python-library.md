@@ -1,18 +1,18 @@
-# 使用新的Sweetviz Python库更快地了解您的数据
+# 使用新的 Sweetviz Python 库更快地了解您的数据
 
-> 原文：[https://www.kdnuggets.com/2021/03/know-your-data-much-faster-sweetviz-python-library.html](https://www.kdnuggets.com/2021/03/know-your-data-much-faster-sweetviz-python-library.html)
+> 原文：[`www.kdnuggets.com/2021/03/know-your-data-much-faster-sweetviz-python-library.html`](https://www.kdnuggets.com/2021/03/know-your-data-much-faster-sweetviz-python-library.html)
 
-[评论](#comments)
+评论
 
 **作者：[Francois Bertrand](https://medium.com/@fbertrand27)，数据可视化和游戏设计师**
 
-> *这是关于Sweetviz的第二篇文章，详细介绍了比较分析、新功能、一般用例，并且使用了不同的数据集。[你可以在这里找到原文](/2021/02/powerful-exploratory-data-analysis-sweetviz.html)。*
+> *这是关于 Sweetviz 的第二篇文章，详细介绍了比较分析、新功能、一般用例，并且使用了不同的数据集。你可以在这里找到原文。*
 
-![图片](../Images/471020a2660126ea2309453b30c314bf.png)
+![图片](img/471020a2660126ea2309453b30c314bf.png)
 
 探索性数据分析（EDA）是大多数数据科学项目中的一个重要早期步骤，它通常包括采取相同的步骤来描述数据集（例如，了解数据类型、缺失信息、值的分布、相关性等）。鉴于这些任务的重复性和相似性，一些库可以自动化这些过程并帮助启动。
 
-最新的一项是一个名为Sweetviz的开源Python库（[GitHub](https://github.com/fbdesignpro/sweetviz)），由一些贡献者和我自己为这个目的创建。它处理pandas数据框，生成一个自包含的HTML报告，可以在浏览器中单独查看或集成到笔记本中。
+最新的一项是一个名为 Sweetviz 的开源 Python 库（[GitHub](https://github.com/fbdesignpro/sweetviz)），由一些贡献者和我自己为这个目的创建。它处理 pandas 数据框，生成一个自包含的 HTML 报告，可以在浏览器中单独查看或集成到笔记本中。
 
 它功能强大；除了用仅两行代码创建有洞察力和美观的可视化外，它还提供了需要更多时间手动生成的分析，包括一些其他库无法如此快速提供的内容，例如：
 
@@ -24,11 +24,11 @@
 
 其他参考/示例：
 
-+   [Google Colab笔记本，包含文档和集成示例](https://colab.research.google.com/drive/1-md6YEwcVGWVnQWTBirQSYQYgdNoeSWg?usp%3Dsharing&sa=D&ust=1611941330247000&usg=AOvVaw1dyrc3C9Dzi-M7IGPhnULe)
++   [Google Colab 笔记本，包含文档和集成示例](https://colab.research.google.com/drive/1-md6YEwcVGWVnQWTBirQSYQYgdNoeSWg?usp%3Dsharing&sa=D&ust=1611941330247000&usg=AOvVaw1dyrc3C9Dzi-M7IGPhnULe)
 
 +   [知名样本泰坦尼克号幸存者数据集的示例报告](http://cooltiming.com/SWEETVIZ_REPORT.html)
 
-+   [GitHub页面（完整文档及用法）](https://github.com/fbdesignpro/sweetviz)
++   [GitHub 页面（完整文档及用法）](https://github.com/fbdesignpro/sweetviz)
 
 ### 探索性数据分析（EDA）变得……有趣？！
 
@@ -88,7 +88,7 @@ report.show_html()
 
 ### 概述
 
-![图片](../Images/205a9f4ab0f003c62faa6f54586a5de3.png)
+![图片](img/205a9f4ab0f003c62faa6f54586a5de3.png)
 
 在报告顶部，提供数据集的简单概述（如果有比较的话也包括比较）。对于每个特征，Sweetviz 将尽力确定每列的数据类型，包括：
 
@@ -106,9 +106,9 @@ report.show_html()
 
 基本上，除了显示传统的数值相关性外，它还将数值相关性、不确定系数（对于分类-分类）和相关比（对于分类-数值）统一在一个图表中。请注意，出于清晰的考虑，平凡的对角线被留空。
 
-![图片](../Images/73ea57e1793712826d078081bebdadf1.png)
+![图片](img/73ea57e1793712826d078081bebdadf1.png)
 
-![图片](../Images/ef95eb0d5cf5d68c1c808d99099e6e71.png)
+![图片](img/ef95eb0d5cf5d68c1c808d99099e6e71.png)
 
 相同的数据也可以在每个变量的“详细信息”窗格中找到（稍后会详细说明）：
 
@@ -120,13 +120,13 @@ report.show_html()
 
 如果我们指定一个目标变量（目前仅支持布尔型和数值型），它会显著地显示为第一个变量，并使用黑色标记。
 
-![图片](../Images/959cffb32350292c3fff612581961c63.png)
+![图片](img/959cffb32350292c3fff612581961c63.png)
 
 最重要的是，它的值会覆盖在每一个其他图表上，迅速提供目标与每个其他变量分布的洞察。
 
 一眼就能立刻看出目标值如何受到其他变量的影响。正如预期的那样，这通常与“关联”图中发现的内容一致，但提供了每个变量的具体信息。这里是一个示例：
 
-![图片](../Images/8d546c74af1eeb58e9015a1997a388ac.png)
+![图片](img/8d546c74af1eeb58e9015a1997a388ac.png)
 
 重要提示：记住你可以使用目标分析来分析任意特征与所有其他特征的关系。这对于理解特征之间的关系非常有帮助，即使在你分析的数据中没有“实际”目标变量。
 
@@ -134,19 +134,19 @@ report.show_html()
 
 报告的主要部分是每个特征的总结和详细信息：
 
-![图片](../Images/fcc6d4eab311024c64ce7c7ada00f95b.png)
+![图片](img/fcc6d4eab311024c64ce7c7ada00f95b.png)
 
-![图片](../Images/79aa98f71cebe6346ff8b0065ac5481f.png)
+![图片](img/79aa98f71cebe6346ff8b0065ac5481f.png)
 
-请注意，对于数值数据，你可以更改图表中的“箱数”以更好地评估分布，以及目标特征的相关性。例如，在上面的截图中，如果我们将箱数更改为30，我们可以更清晰地了解目标如何随该特征变化：
+请注意，对于数值数据，你可以更改图表中的“箱数”以更好地评估分布，以及目标特征的相关性。例如，在上面的截图中，如果我们将箱数更改为 30，我们可以更清晰地了解目标如何随该特征变化：
 
-![图片](../Images/d2c1bf759a11ec7a85bd772193dba431.png)
+![图片](img/d2c1bf759a11ec7a85bd772193dba431.png)
 
 ### 比较数据集和子人群（例如，男性与女性）
 
-Sweetviz可以比较两个不同的数据集，这在很多情况下非常有用（例如，训练数据与测试数据）。但即使你只查看单个数据集，你也可以研究该数据集内不同子人群的特征。
+Sweetviz 可以比较两个不同的数据集，这在很多情况下非常有用（例如，训练数据与测试数据）。但即使你只查看单个数据集，你也可以研究该数据集内不同子人群的特征。
 
-让我们用上述看起来有趣的特征做一个示例。似乎当“Total_Ct_Chng_Q4_Q1”的值低于约0.6时，Attrition_Flag显著更高。
+让我们用上述看起来有趣的特征做一个示例。似乎当“Total_Ct_Chng_Q4_Q1”的值低于约 0.6 时，Attrition_Flag 显著更高。
 
 我们可以使用`compare_intra()`函数来隔离该人群，并给出条件以拆分人群（以及给低/高人群一个更具描述性的名称）：
 
@@ -154,19 +154,19 @@ Sweetviz可以比较两个不同的数据集，这在很多情况下非常有用
 report = sweetviz.compare_intra(df, df["Total_Ct_Chng_Q4_Q1"] < 0.6, ["Low_Ct_Chng_Q1Q4", "High_Ct_Chng_Q1Q4"], "Attrition_Flag")
 ```
 
-这将输出以下报告，迅速为我们提供大量关于数据的新见解。仅查看前两个变量，我们就可以立即看到，当使用“Total_Ct_Chng_Q4_Q1”特征拆分人群时，Customer_Age和Gender的行为与其一般分布相比非常不同：
+这将输出以下报告，迅速为我们提供大量关于数据的新见解。仅查看前两个变量，我们就可以立即看到，当使用“Total_Ct_Chng_Q4_Q1”特征拆分人群时，Customer_Age 和 Gender 的行为与其一般分布相比非常不同：
 
-![图片](../Images/70189083ace47b33f755e71f7b0170e4.png)
+![图片](img/70189083ace47b33f755e71f7b0170e4.png)
 
 你可以在[这里](http://cooltiming.com/SV/SWEETVIZ_REPORT_COMPARED.html)访问完整报告。
 
 ### 使用场景与结论
 
-使用目标分析、数据集/内部集比较、全面特征分析和统一关联/相关数据，Sweetviz仅用2行代码即可提供无与伦比的见解。
+使用目标分析、数据集/内部集比较、全面特征分析和统一关联/相关数据，Sweetviz 仅用 2 行代码即可提供无与伦比的见解。
 
-当然，分析数据集是一个更长且富有艺术性的过程，但Sweetviz可以带来早期见解并节省大量工作时间，特别是在初始阶段，往往很繁琐。
+当然，分析数据集是一个更长且富有艺术性的过程，但 Sweetviz 可以带来早期见解并节省大量工作时间，特别是在初始阶段，往往很繁琐。
 
-在EDA之后，Sweetviz继续通过以下方式提供价值：
+在 EDA 之后，Sweetviz 继续通过以下方式提供价值：
 
 +   特征工程：可视化工程化特征如何相对于其他特征和目标变量进行表现/相关性分析
 
@@ -176,25 +176,25 @@ report = sweetviz.compare_intra(df, df["Total_Ct_Chng_Q4_Q1"] < 0.6, ["Low_Ct_
 
 我喜欢使用这个库以及它在整个工作流程中的帮助，希望你也会像我一样觉得它有用！
 
-**简历：弗朗索瓦·贝特朗**是数据可视化和游戏领域拥有20年经验的资深编码员和设计师。
+**简历：弗朗索瓦·贝特朗**是数据可视化和游戏领域拥有 20 年经验的资深编码员和设计师。
 
 **相关：**
 
-+   [仅用两行代码进行强大的探索性数据分析](/2021/02/powerful-exploratory-data-analysis-sweetviz.html)
++   仅用两行代码进行强大的探索性数据分析
 
-+   [如何从零开始使用Python创建惊人的可视化](/2021/02/stunning-visualizations-using-python.html)
++   如何从零开始使用 Python 创建惊人的可视化
 
-+   [使用dtreeviz创建美丽的决策树可视化](/2021/03/beautiful-decision-tree-visualizations-dtreeviz.html)
++   使用 dtreeviz 创建美丽的决策树可视化
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 

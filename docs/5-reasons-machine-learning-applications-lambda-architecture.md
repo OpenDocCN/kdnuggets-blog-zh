@@ -1,18 +1,18 @@
-# 5个理由说明机器学习应用需要更好的Lambda架构
+# 5 个理由说明机器学习应用需要更好的 Lambda 架构
 
-> 原文：[https://www.kdnuggets.com/2016/05/5-reasons-machine-learning-applications-lambda-architecture.html](https://www.kdnuggets.com/2016/05/5-reasons-machine-learning-applications-lambda-architecture.html)
+> 原文：[`www.kdnuggets.com/2016/05/5-reasons-machine-learning-applications-lambda-architecture.html`](https://www.kdnuggets.com/2016/05/5-reasons-machine-learning-applications-lambda-architecture.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Monte Zweben](https://www.linkedin.com/in/mzweben)，[Splice Machine](http://www.splicemachine.com)首席执行官。**
 
-Lambda架构在机器学习和数据科学应用中随处可见。Lambda架构能够实现对实时数据的持续处理，而不会受到传统ETL延迟的困扰，这种延迟困扰着传统的操作型（OLTP）和分析型（OLAP）实现。在传统架构中，OLTP数据库经过性能优化的规范化处理，然后大量ETL管道将这些数据反规范化，通常转换为OLAP引擎上的星型模式。这一过程通常需要至少一天时间。Lambda架构绕过了这种延迟。在其最纯粹的形式中，Lambda架构将数据分为两条路径：批处理层和速度层。批处理层聚合原始数据并训练模型。批处理层的结果随后转移到服务层，以供应用展示。速度层允许应用访问“错过”上一个批处理窗口的最新数据。
+Lambda 架构在机器学习和数据科学应用中随处可见。Lambda 架构能够实现对实时数据的持续处理，而不会受到传统 ETL 延迟的困扰，这种延迟困扰着传统的操作型（OLTP）和分析型（OLAP）实现。在传统架构中，OLTP 数据库经过性能优化的规范化处理，然后大量 ETL 管道将这些数据反规范化，通常转换为 OLAP 引擎上的星型模式。这一过程通常需要至少一天时间。Lambda 架构绕过了这种延迟。在其最纯粹的形式中，Lambda 架构将数据分为两条路径：批处理层和速度层。批处理层聚合原始数据并训练模型。批处理层的结果随后转移到服务层，以供应用展示。速度层允许应用访问“错过”上一个批处理窗口的最新数据。
 
-那么公司如何实施这一架构呢？对于批处理层，他们通常使用Hadoop上的批分析处理引擎，如MapReduce、Hive或Spark。对于服务层，他们使用表现良好的NoSQL/键值引擎，如ElephantDB和Voldemort。对于速度层，他们需要支持快速读取和写入的数据存储，如Cassandra或HBase。在这一架构的前端，通常会有一个排队系统，如Kafka，以及一个流处理系统，如Storm、Spark或Flink，用于将连续数据分割成块进行处理。
+那么公司如何实施这一架构呢？对于批处理层，他们通常使用 Hadoop 上的批分析处理引擎，如 MapReduce、Hive 或 Spark。对于服务层，他们使用表现良好的 NoSQL/键值引擎，如 ElephantDB 和 Voldemort。对于速度层，他们需要支持快速读取和写入的数据存储，如 Cassandra 或 HBase。在这一架构的前端，通常会有一个排队系统，如 Kafka，以及一个流处理系统，如 Storm、Spark 或 Flink，用于将连续数据分割成块进行处理。
 
-![enterprise-lambda-architecture](../Images/51bb8dcf553f16aa169359104b316f66.png)
+![enterprise-lambda-architecture](img/51bb8dcf553f16aa169359104b316f66.png)
 
-企业使用我称之为企业级“胶带”的方法来维持这一架构。这是一个痛苦的过程，虽然能够完成工作，但代价巨大。以下是我们需要更好Lambda架构的五个理由：
+企业使用我称之为企业级“胶带”的方法来维持这一架构。这是一个痛苦的过程，虽然能够完成工作，但代价巨大。以下是我们需要更好 Lambda 架构的五个理由：
 
 1.  简化操作复杂性——基于版本保持这些系统同步并调优性能是非常昂贵的。这需要对过多的技术有专门的知识。
 
@@ -26,7 +26,7 @@ Lambda架构在机器学习和数据科学应用中随处可见。Lambda架构�
 
 那么，什么是更好的解决方案呢？我们称之为 Lambda-R (ƛ-R) 关系型 Lambda。使用新的可扩展 RDBMS 系统，你现在可以以更简单的架构获得 Lambda 的所有好处。
 
-![简化的 Lambda 架构](../Images/081697c7ce40abe4816a5b69122d6ab9.png)
+![简化的 Lambda 架构](img/081697c7ce40abe4816a5b69122d6ab9.png)
 
 这就是机器学习应用如何使用 ƛ-R：
 
@@ -68,21 +68,21 @@ Splice Machine RDBMS 提供：
 
 **相关：**
 
-+   [访谈：Antonio Magnaghi，TicketMaster 论通过 Lambda 架构统一异构分析](/2015/05/interview-antonio-magnaghi-ticketmaster-analytics-lambda.html)
++   访谈：Antonio Magnaghi，TicketMaster 论通过 Lambda 架构统一异构分析
 
-+   [Bill Moreau，美国奥委会关于通过分析赋能世界顶级运动员](/2015/03/interview-bill-moreau-usoc-athletes-analytics.html)
++   Bill Moreau，美国奥委会关于通过分析赋能世界顶级运动员
 
-+   [Hobson Lane，SHARP 实验室关于如何通过分析展示“你看不到的所有光”](/2015/05/interview-hobson-lane-sharp-labs-data-science.html)
++   Hobson Lane，SHARP 实验室关于如何通过分析展示“你看不到的所有光”
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -90,11 +90,11 @@ Splice Machine RDBMS 提供：
 
 +   [Python Lambda 函数解析](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
 
-+   [KDnuggets 新闻，5月18日：5 个免费的机器学习托管平台……](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费的机器学习托管平台……](https://www.kdnuggets.com/2022/n20.html)
 
 +   [你需要合成数据的 5 个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何为机器学习学习数学……](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何为机器学习学习数学……](https://www.kdnuggets.com/2022/n07.html)
 
 +   [机器学习并不像你的大脑 第三部分：基本架构](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)
 

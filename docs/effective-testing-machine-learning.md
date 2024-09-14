@@ -1,6 +1,6 @@
 # 机器学习的有效测试
 
-> 原文：[https://www.kdnuggets.com/2022/01/effective-testing-machine-learning.html](https://www.kdnuggets.com/2022/01/effective-testing-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/01/effective-testing-machine-learning.html`](https://www.kdnuggets.com/2022/01/effective-testing-machine-learning.html)
 > 
 > 我们在[PyData Global 2021](https://www.youtube.com/watch?v=Oc5x0qrB0FA)上展示了这个博客系列的简短版本。
 > 
@@ -8,17 +8,17 @@
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 > 
 > * * *
 > 
 > [点击这里查看第二部分](https://ploomber.io/blog/ml-testing-ii)，[点击这里查看第三部分](https://ploomber.io/blog/ml-testing-iii)。
 
-![机器学习的有效测试](../Images/dc6875e133c8813b839b431613eab46a.png)
+![机器学习的有效测试](img/dc6875e133c8813b839b431613eab46a.png)
 
 本博客系列描述了一种我在过去几年中开发的策略，用于有效测试机器学习项目。鉴于机器学习项目的不确定性，这是一种逐步的策略，你可以随着项目的成熟而采纳；它包括测试示例，以提供这些测试在实践中的清晰概念，并且完整的项目实现[可在 GitHub 上获取](https://github.com/edublancas/ml-testing)。到文章末尾，你将能够开发出更强健的机器学习管道。
 
@@ -44,7 +44,7 @@
 
 1.  **服务管道。**（也称为推理管道）封装了服务逻辑：获取新观察值，生成特征，通过模型传递特征，并返回预测结果。
 
-![有效的机器学习测试](../Images/e20b64e84f020e07a8eaf02fdb14ec45.png)
+![有效的机器学习测试](img/e20b64e84f020e07a8eaf02fdb14ec45.png)
 
 ### 可能会出什么问题？
 
@@ -148,11 +148,11 @@ tests/
 
 示例代码可在 [这里](https://github.com/edublancas/ml-testing)找到。该仓库有五个分支，每个分支实现了我将在接下来的部分中描述的测试级别。由于这是一种渐进策略，你可以通过从 [第一个分支](https://github.com/edublancas/ml-testing/tree/1-smoke-testing)开始，逐步查看项目的演变。
 
-该项目使用了 [Ploomber，我们的开源框架](https://github.com/ploomber/ploomber)来实现管道。因此，你可以在`pipeline.yaml`文件中查看管道规格。要查看我们用于测试管道的命令，请打开 [`.github/workflows/ci.yml`](https://github.com/edublancas/ml-testing/blob/1-smoke-testing/.github/workflows/ci.yml)，这是一个GitHub Actions配置文件，用于告诉GitHub在每次`git push`时运行特定的命令。
+该项目使用了 [Ploomber，我们的开源框架](https://github.com/ploomber/ploomber)来实现管道。因此，你可以在`pipeline.yaml`文件中查看管道规格。要查看我们用于测试管道的命令，请打开 [`.github/workflows/ci.yml`](https://github.com/edublancas/ml-testing/blob/1-smoke-testing/.github/workflows/ci.yml)，这是一个 GitHub Actions 配置文件，用于告诉 GitHub 在每次`git push`时运行特定的命令。
 
-虽然不是严格必要的，但你可能会想查看我们的 [Ploomber入门教程](https://docs.ploomber.io/en/latest/get-started/spec-api-python.html)以了解基本概念。
+虽然不是严格必要的，但你可能会想查看我们的 [Ploomber 入门教程](https://docs.ploomber.io/en/latest/get-started/spec-api-python.html)以了解基本概念。
 
-请注意，本博客文章中显示的代码片段是通用的（它们不使用任何特定的管道框架），因为我们想要用一般术语解释概念；然而，仓库中的示例代码使用了Ploomber。
+请注意，本博客文章中显示的代码片段是通用的（它们不使用任何特定的管道框架），因为我们想要用一般术语解释概念；然而，仓库中的示例代码使用了 Ploomber。
 
 ### 一级：冒烟测试
 
@@ -187,7 +187,7 @@ pandas==1.2.4
 
 你项目的第一个里程碑必须是获得一个端到端的特征生成管道。编写一些代码来获取原始数据，进行一些基本清洗，并生成一些特征。一旦你有了一个完整的端到端流程，你必须确保它是可重复的：删除原始数据，并检查你是否可以重新运行该流程并获得相同的训练数据。
 
-一旦你有了这个，就可以实施第一个测试；用原始数据的一个样本（比如1%）运行管道。目标是使这个测试运行快速（不超过几分钟）。你的测试应如下所示：
+一旦你有了这个，就可以实施第一个测试；用原始数据的一个样本（比如 1%）运行管道。目标是使这个测试运行快速（不超过几分钟）。你的测试应如下所示：
 
 ```py
 from my_project import generate_features_and_label
@@ -196,7 +196,7 @@ def test_generate_training_set():
     my_project.generate_features_and_label(sample=True) 
 ```
 
-请注意，这只是一个基本测试；我们没有检查管道的输出！然而，这个简单的测试允许我们检查代码是否运行。每当我们执行`git push`时，运行此测试是至关重要的。如果你使用GitHub，可以通过[GitHub Actions](https://github.com/features/actions)完成，其他git平台也有类似功能。
+请注意，这只是一个基本测试；我们没有检查管道的输出！然而，这个简单的测试允许我们检查代码是否运行。每当我们执行`git push`时，运行此测试是至关重要的。如果你使用 GitHub，可以通过[GitHub Actions](https://github.com/features/actions)完成，其他 git 平台也有类似功能。
 
 ### 测试训练任务
 
@@ -212,7 +212,7 @@ def test_train_model():
     model = train_model(X, y) 
 ```
 
-**在示例代码库中，我们使用Ploomber，因此我们通过调用[`ploomber build`](https://github.com/edublancas/ml-testing/blob/1-smoke-testing/.github/workflows/ci.yml#L20)来测试功能管道和训练任务，这会执行管道中的所有任务。**
+**在示例代码库中，我们使用 Ploomber，因此我们通过调用[`ploomber build`](https://github.com/edublancas/ml-testing/blob/1-smoke-testing/.github/workflows/ci.yml#L20)来测试功能管道和训练任务，这会执行管道中的所有任务。**
 
 ### 第二级：集成测试和单元测试
 
@@ -232,7 +232,7 @@ def test_train_model():
 
 集成测试的理念适用于管道中的所有阶段：从下载数据到生成特征：你需要定义每个阶段的期望。我们可以在下图中看到集成测试的图形表示：
 
-![机器学习的有效测试](../Images/a310c41357c27f8145b89ad4e2c73dbe.png)
+![机器学习的有效测试](img/a310c41357c27f8145b89ad4e2c73dbe.png)
 
 例如，要为数据清理函数（我们称之为`clean`）添加集成测试，我们在函数体的末尾运行一些检查来验证其输出质量。常见的检查包括没有空值、数值列在预期范围内或分类值在预定义的值集合中：
 

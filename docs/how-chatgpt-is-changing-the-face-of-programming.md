@@ -1,8 +1,8 @@
 # ChatGPT 如何改变编程的面貌
 
-> 原文：[https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming](https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming)
+> 原文：[`www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming`](https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming)
 
-![主要封面。ChatGPT 如何提高我们的生产力。](../Images/f9da3e5e858461a528827be5882316f1.png)
+![主要封面。ChatGPT 如何提高我们的生产力。](img/f9da3e5e858461a528827be5882316f1.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png)1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png)2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png)2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png)3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -36,7 +36,7 @@ ChatGPT 的一个最显著的影响是它能够普及编程知识。无论你是
 
 例如，[根据去年的 StackOverflow 调查](https://survey.stackoverflow.co/2023/#most-popular-technologies-ai-search)，所有受访者都在使用至少一种 AI 工具作为知识搜索工具，并且明显偏向于 ChatGPT。超过 83% 的受访者每天都在使用 ChatGPT（专业开发者为 83%，学习者为 85%）。
 
-![](../Images/caf50183f02ca444a9cf06dd5403386f.png)
+![](img/caf50183f02ca444a9cf06dd5403386f.png)
 
 Stack Overflow 2023 调查的截图。受访者使用了哪些 AI 搜索工具？
 
@@ -58,7 +58,7 @@ Stack Overflow 2023 调查的截图。受访者使用了哪些 AI 搜索工具�
 
 像 GitHub Copilot 这样的新工具正在变得越来越受欢迎，以加速开发过程。[根据 Stack Overflow 调查](https://survey.stackoverflow.co/2023/#most-popular-technologies-ai-search-learn)，近 80% 的开发者在日常工作中使用基于 AI 的编码辅助工具。
 
-![](../Images/f477e08b7177d28448abc862eee34da2.png)
+![](img/f477e08b7177d28448abc862eee34da2.png)
 
 2023 年 Stack Overflow 调查的截图。使用 AI 驱动的编码辅助工具
 

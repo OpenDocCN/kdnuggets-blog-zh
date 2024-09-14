@@ -1,28 +1,28 @@
 # 9 个数据科学与分析职位趋势
 
-> 原文：[https://www.kdnuggets.com/2020/09/data-science-analytics-job-trends.html](https://www.kdnuggets.com/2020/09/data-science-analytics-job-trends.html)
+> 原文：[`www.kdnuggets.com/2020/09/data-science-analytics-job-trends.html`](https://www.kdnuggets.com/2020/09/data-science-analytics-job-trends.html)
 
-[评论](#comments)
+评论
 
 **由 [Burtch Works](https://www.burtchworks.com/) 提供，分析与数据科学招聘**
 
-本文摘自我们新发布的2020年Burtch Works研究，分享了数据科学和分析领域的薪资、人口统计数据和其他招聘市场洞察。
+本文摘自我们新发布的 2020 年 Burtch Works 研究，分享了数据科学和分析领域的薪资、人口统计数据和其他招聘市场洞察。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-![](../Images/30bd49655a389d5e3e51c83efdc9c6b9.png)
+![](img/30bd49655a389d5e3e51c83efdc9c6b9.png)
 
-### 1\. 2021年整体薪资数据的潜在影响
+### 1\. 2021 年整体薪资数据的潜在影响
 
 **广泛的薪资削减可能会降低中位薪资**
 
@@ -30,7 +30,7 @@
 
 **裁员和休假可能影响职位提供和候选人谈判能力**
 
-目前，我们尚未看到由于当前危机而导致的职位提供低于预期的证据。从我们所见，大型公司至少目前仍在其规定的薪资范围内。然而，随着危机的持续，这种情况可能会发生变化，这可能会影响到2021年的薪资。由于裁员和休假打乱了许多候选人的职业计划，这也可能会影响他们协商更高薪资的能力，可能会暂时抑制薪资增长。
+目前，我们尚未看到由于当前危机而导致的职位提供低于预期的证据。从我们所见，大型公司至少目前仍在其规定的薪资范围内。然而，随着危机的持续，这种情况可能会发生变化，这可能会影响到 2021 年的薪资。由于裁员和休假打乱了许多候选人的职业计划，这也可能会影响他们协商更高薪资的能力，可能会暂时抑制薪资增长。
 
 **行业冲击的全面影响可能尚未显现**
 
@@ -46,9 +46,9 @@
 
 ### 3\. 由于远程工作，开始时间加快
 
-由于远程工作当前的普及，这加快了候选人的启动时间，这些候选人通常需要5周时间来搬迁。雇主们已经开始运送计算机，以便更快地让人才上岗，立即处理数据项目，在许多情况下，搬迁由于安全问题被推迟了。
+由于远程工作当前的普及，这加快了候选人的启动时间，这些候选人通常需要 5 周时间来搬迁。雇主们已经开始运送计算机，以便更快地让人才上岗，立即处理数据项目，在许多情况下，搬迁由于安全问题被推迟了。
 
-![](../Images/66442dc956036e34a3b1e2b846fe14fc.png)
+![](img/66442dc956036e34a3b1e2b846fe14fc.png)
 
 ### 4\. 技术评估优先考虑以便更早评估技术技能
 
@@ -56,7 +56,7 @@
 
 ### 5\. 对行业人口结构的影响
 
-尽管一些行业和公司在产品或服务因COVID-19危机需求增加的情况下处于有利地位，但有些公司发现自己在应对旅行限制、封锁和需求迅速变化时挣扎。像零售、旅行或酒店业这样的行业可能会失去工作岗位，而技术领域可能会有所增加，因此我们将密切关注行业人口数据，以查看是否能在2021年的报告中发现任何变化。
+尽管一些行业和公司在产品或服务因 COVID-19 危机需求增加的情况下处于有利地位，但有些公司发现自己在应对旅行限制、封锁和需求迅速变化时挣扎。像零售、旅行或酒店业这样的行业可能会失去工作岗位，而技术领域可能会有所增加，因此我们将密切关注行业人口数据，以查看是否能在 2021 年的报告中发现任何变化。
 
 ### 6\. 地点变化：候选人离开西海岸，对郊区办公室有利？
 
@@ -80,22 +80,22 @@
 
 **相关：**
 
-+   [数据分析中的5大趋势](https://www.kdnuggets.com/2020/07/5-big-trends-data-analytics.html)
++   [数据分析中的 5 大趋势](https://www.kdnuggets.com/2020/07/5-big-trends-data-analytics.html)
 
-+   [机器学习工程师在10年后还会存在吗？](https://www.kdnuggets.com/2020/05/machine-learning-engineers-not-exist-10-years.html)
++   [机器学习工程师在 10 年后还会存在吗？](https://www.kdnuggets.com/2020/05/machine-learning-engineers-not-exist-10-years.html)
 
-+   [数据科学家的死亡——AutoML会取代他们吗？](https://www.kdnuggets.com/2020/02/data-scientists-automl-replace.html)
++   [数据科学家的死亡——AutoML 会取代他们吗？](https://www.kdnuggets.com/2020/02/data-scientists-automl-replace.html)
 
 ### 更多相关话题
 
-+   [数据分析中的就业趋势：NLP在就业趋势分析中的应用](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
++   [数据分析中的就业趋势：NLP 在就业趋势分析中的应用](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
 +   [开发用于分析跟踪的开放标准](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)
 
-+   [一个正在开发类似Hugging Face的客户数据建模社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)
++   [一个正在开发类似 Hugging Face 的客户数据建模社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)
 
-+   [专家见解：开发安全、可靠、值得信赖的AI框架](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
++   [专家见解：开发安全、可靠、值得信赖的 AI 框架](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
 
-+   [5大关键数据科学趋势及分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
++   [5 大关键数据科学趋势及分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
 
 +   [数据分析中的就业趋势：第二部分](https://www.kdnuggets.com/job-trends-in-data-analytics-part-2)

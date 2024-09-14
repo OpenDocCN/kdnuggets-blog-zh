@@ -1,10 +1,10 @@
 # Scikit Flow: 使用 TensorFlow 和 Scikit-learn 轻松进行深度学习
 
-> 原文：[https://www.kdnuggets.com/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html](https://www.kdnuggets.com/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html`](https://www.kdnuggets.com/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-Google 的 [TensorFlow](https://github.com/tensorflow/tensorflow) 自2015年11月起公开发布，毫无疑问，在短短几个月内，它对机器学习以及深度学习产生了影响。通过博客文章、学术论文和各种网络教程，有广泛的接受证据。
+Google 的 [TensorFlow](https://github.com/tensorflow/tensorflow) 自 2015 年 11 月起公开发布，毫无疑问，在短短几个月内，它对机器学习以及深度学习产生了影响。通过博客文章、学术论文和各种网络教程，有广泛的接受证据。
 
 当然，估计真正的采纳率是困难的，但 TensorFlow 的 Github 仓库有 [几乎是两倍的星标数量](https://github.com/showcases/machine-learning) 比下一个最多星标的机器学习项目 [Scikit-learn](https://github.com/scikit-learn/scikit-learn) 和最接近的深度学习项目 Berkeley Vision and Learning Center 的 [Caffe](https://github.com/BVLC/caffe)。虽然这不能具体指示 TensorFlow 已经成为该领域的领导者，但可以相当容易地推测，鉴于其相对较新的发布，Google 的深度学习库引起了相当大的兴趣和使用。
 
@@ -12,15 +12,15 @@ Google 的 [TensorFlow](https://github.com/tensorflow/tensorflow) 自2015年11�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
-![TensorFlow](../Images/e09c1745abd025c932b954fd964eedfb.png)
+![TensorFlow](img/e09c1745abd025c932b954fd964eedfb.png)
 
 大多数情况下，TensorFlow 相对简单易用，没有使用该库经验的神经网络爱好者可以查看给定网络的代码并直观地理解其内容。语法**可能**会更加直接和简洁，而不使用任何包装器，但显然有原因不这样做。从技术上讲，TensorFlow 是“一个用于数据流图的数值计算的开源软件库”，虽然它（主要）用于机器学习和深度学习研究（及生产），但该系统足够通用，可以应用于广泛的其他领域。如果 TensorFlow 更加深度学习友好，这种特性可能会削弱其在其他潜在领域的适用性。
 
@@ -44,7 +44,7 @@ sess.run(hello)
 
 Scikit-learn 作为 *事实* 上的官方 Python 通用机器学习框架，拥有丰富的历史。虽然我相信这句话会（并且可以）引起争议，也许它有点强烈，但不可否认的是，Scikit-learn 在 Python 机器学习生态系统中占据了重要地位，并且在机器学习领域也如此。
 
-![Scikit-learn 分类器](../Images/9fa0428e6051ec171b4c183269e92b8d.png)
+![Scikit-learn 分类器](img/9fa0428e6051ec171b4c183269e92b8d.png)
 
 其易用性和标准化接口与此有关。例如，Scikit-learn 利用简单的 **fit/predict** 工作流模型 [来实现其分类算法](https://github.com/mmmayo13/scikit-learn-classifiers/blob/master/sklearn-classifiers-tutorial.ipynb)。这使得构建、训练和测试模型变得非常简单。一个典型逻辑回归模型的测试/训练相关代码可能看起来像这样：
 
@@ -86,7 +86,7 @@ print("Accuracy: %f" % score)
 
 > 为了使从 Scikit Learn 的单行机器学习世界过渡到更开放的构建不同形状的 ML 模型的世界变得更加顺畅，你可以从使用 fit/predict 开始，随着你逐渐适应，再逐步过渡到 TensorFlow APIs。
 
-![Scikit-learn + TensorFlow = Scikit Flow](../Images/d11b9270cef82e147c0b7ef846ba4618.png)
+![Scikit-learn + TensorFlow = Scikit Flow](img/d11b9270cef82e147c0b7ef846ba4618.png)
 
 重要的是，Scikit Flow 是 Google 推出的官方 TensorFlow 项目；这不是一个被破解的第三方解决方案……并不是说这样做有什么问题。完全没有。但 Google 开发、发布并支持这个项目的事实，应该能给你足够的信心，**它**确实会使这两个库按承诺协同工作。它也很受欢迎；在写这篇文章时，Scikit Flow 的仓库拥有近 1700 个星标。
 
@@ -155,11 +155,11 @@ Scikit Flow 可能会在其他情况下找到市场，比如模型共享或管�
 
 **相关：**
 
-+   [TensorFlow 令人失望 – 谷歌深度学习表现平平](/2015/11/google-tensorflow-deep-learning-disappoints.html)
++   TensorFlow 令人失望 – 谷歌深度学习表现平平
 
-+   [微软深度学习带来创新功能 – CNTK 显示出潜力](/2016/02/microsoft-deep-learning-brings-innovative-features.html)
++   微软深度学习带来创新功能 – CNTK 显示出潜力
 
-+   [7步理解深度学习](/2016/01/seven-steps-deep-learning.html)
++   7 步理解深度学习
 
 ### 更多相关话题
 
@@ -171,6 +171,6 @@ Scikit Flow 可能会在其他情况下找到市场，比如模型共享或管�
 
 +   [学习数据科学的顶级统计资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一项90亿美元的人工智能失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一项 90 亿美元的人工智能失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

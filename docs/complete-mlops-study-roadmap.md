@@ -1,8 +1,8 @@
 # 完整的 MLOps 学习路线图
 
-> 原文：[https://www.kdnuggets.com/2022/12/complete-mlops-study-roadmap.html](https://www.kdnuggets.com/2022/12/complete-mlops-study-roadmap.html)
+> 原文：[`www.kdnuggets.com/2022/12/complete-mlops-study-roadmap.html`](https://www.kdnuggets.com/2022/12/complete-mlops-study-roadmap.html)
 
-![完整的 MLOps 学习路线图](../Images/d2741ba50c160d17998979f884fb12b3.png)
+![完整的 MLOps 学习路线图](img/d2741ba50c160d17998979f884fb12b3.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -60,11 +60,11 @@
 
 +   [理解机器学习：从理论到算法](https://books.google.co.uk/books?id=ttJkAwAAQBAJ&printsec=frontcover&dq=machine+learning+algorithms&hl=en&newbks=1&newbks_redir=1&sa=X&ved=2ahUKEwjhz9aZxK77AhXeSkEAHRDuBQsQ6AF6BAgGEAI) 由 Shai Shalev-Shwartz, Shai Ben-David - 书籍
 
-+   [1分钟内解释机器学习算法](/2022/07/machine-learning-algorithms-explained-less-1-minute.html) - 博客
++   1 分钟内解释机器学习算法 - 博客
 
-+   [流行的机器学习算法](/2022/05/popular-machine-learning-algorithms.html) - 博客
++   流行的机器学习算法 - 博客
 
-+   [Simplilearn的机器学习算法](https://www.youtube.com/watch?v=7kyNYMwfYdw) - YouTube
++   [Simplilearn 的机器学习算法](https://www.youtube.com/watch?v=7kyNYMwfYdw) - YouTube
 
 ## 机器学习库资源：
 
@@ -90,27 +90,27 @@
 
 # 3\. 数据库
 
-从数据工程师的角度来看，数据库及其管理系统是MLOps工程师角色和职责中的重要元素。为了以可靠和高效的方式维护机器学习系统，你需要数据库来帮助你完成这一任务。
+从数据工程师的角度来看，数据库及其管理系统是 MLOps 工程师角色和职责中的重要元素。为了以可靠和高效的方式维护机器学习系统，你需要数据库来帮助你完成这一任务。
 
 以下是一些资源：
 
 +   [数据库管理原则](https://www.youtube.com/watch?v=o36Z_OqC2ac&list=PLdQddgMBv5zHcEN9RrhADq3CBColhY2hl) - YouTube
 
-+   [免费SQL和数据库课程](/2022/09/free-sql-database-course.html) - 博客
++   免费 SQL 和数据库课程 - 博客
 
-+   [终极MySQL速成班：从SQL初学者到专家](https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/) - Udemy
++   [终极 MySQL 速成班：从 SQL 初学者到专家](https://www.udemy.com/course/the-ultimate-mysql-bootcamp-go-from-sql-beginner-to-expert/) - Udemy
 
-+   [完整SQL和数据库速成班：从零到精通](https://www.udemy.com/course/complete-sql-databases-bootcamp-zero-to-mastery/) - Udemy
++   [完整 SQL 和数据库速成班：从零到精通](https://www.udemy.com/course/complete-sql-databases-bootcamp-zero-to-mastery/) - Udemy
 
 # 4\. 模型部署
 
-作为MLOps工程师，你需要学习如何部署你的模型。大型公司通常使用云平台来托管他们的应用程序，如AWS、GCP和Microsoft Azure。因此，你很可能也会这样做，因此我强烈建议你对这些平台有良好的理解，因为作为MLOps工程师，你肯定会使用它们。
+作为 MLOps 工程师，你需要学习如何部署你的模型。大型公司通常使用云平台来托管他们的应用程序，如 AWS、GCP 和 Microsoft Azure。因此，你很可能也会这样做，因此我强烈建议你对这些平台有良好的理解，因为作为 MLOps 工程师，你肯定会使用它们。
 
 以下是一些资源来帮助你：
 
 +   [云计算教程和资源](https://www.w3schools.in/category/cloud-computing/)
 
-+   [终极AWS认证云从业者2022](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/) - Udemy
++   [终极 AWS 认证云从业者 2022](https://www.udemy.com/course/aws-certified-cloud-practitioner-new/) - Udemy
 
 +   [GCP Associate Cloud Engineer Google Cloud Certification](https://www.udemy.com/course/google-cloud-certification-associate-cloud-engineer/) - Udemy
 
@@ -170,25 +170,25 @@
 
 +   [测试和监控机器学习模型部署](https://www.udemy.com/course/testing-and-monitoring-machine-learning-model-deployments/) - Udemy
 
-+   [机器学习模型监控检查清单：7个跟踪项](/2021/03/machine-learning-model-monitoring-checklist.html) - 博客
++   机器学习模型监控检查清单：7 个跟踪项 - 博客
 
 +   [IBM Watson OpenScale](https://www.ibm.com/docs/en/cloud-paks/cp-data/3.5.0?topic=services-watson-openscale) - 工具
 
 # 9\. 项目
 
-你应该对成为MLOps专业人员所需的技能有良好的理解和深入的知识。一旦掌握了这些技能，下一步就是通过项目进行测试——这些项目随后可以作为你的作品集的一部分。
+你应该对成为 MLOps 专业人员所需的技能有良好的理解和深入的知识。一旦掌握了这些技能，下一步就是通过项目进行测试——这些项目随后可以作为你的作品集的一部分。
 
 这里有一些项目想法：
 
-+   [Made With ML](https://madewithml.com/) - MLOps的所有方面
++   [Made With ML](https://madewithml.com/) - MLOps 的所有方面
 
 +   [自动化典型的机器学习工作流程和模型部署](https://github.com/AlexIoannides/ml-workflow-automation)
 
-+   [社会力量NBA](https://www.kaggle.com/datasets/noahgift/social-power-nba)
++   [社会力量 NBA](https://www.kaggle.com/datasets/noahgift/social-power-nba)
 
-+   [MLOPS端到端实施](https://www.youtube.com/watch?v=Ly3Dor8HZUA&t=9s)
++   [MLOPS 端到端实施](https://www.youtube.com/watch?v=Ly3Dor8HZUA&t=9s)
 
-+   [使用MLflow进行实验跟踪](https://www.youtube.com/watch?v=r0do1KVEGqM)
++   [使用 MLflow 进行实验跟踪](https://www.youtube.com/watch?v=r0do1KVEGqM)
 
 实践你的技能并完善它们是这里的主要目标！
 
@@ -198,13 +198,13 @@
 
 这里有一些资源可以帮助你：
 
-+   [前30名MLOps面试问题](https://www.mlstack.cafe/interview-questions/mlops) - 博客
++   [前 30 名 MLOps 面试问题](https://www.mlstack.cafe/interview-questions/mlops) - 博客
 
 +   [打好你下一个机器学习面试](https://www.interviewkickstart.com/courses/machine-learning-interview-masterclass) - 网络研讨会（免费）
 
-+   [MLOps社区会议播放列表](https://www.youtube.com/watch?v=JjUt1h66IrY&list=PLZoTAELRMXVOk1pRcOCaG5xtXxgMalpIe&index=2) - YouTube
++   [MLOps 社区会议播放列表](https://www.youtube.com/watch?v=JjUt1h66IrY&list=PLZoTAELRMXVOk1pRcOCaG5xtXxgMalpIe&index=2) - YouTube
 
-+   [20个MLOps面试问题及答案](https://climbtheladder.com/mlops-interview-questions/)
++   [20 个 MLOps 面试问题及答案](https://climbtheladder.com/mlops-interview-questions/)
 
 +   [机器学习面试准备](https://www.udacity.com/course/machine-learning-interview-prep--ud1001) - Udacity（免费）
 
@@ -212,13 +212,13 @@
 
 # 总结
 
-由于MLOps涉及机器学习、DevOps和IT——有许多资源可以帮助你成为最成功的MLOps工程师。查看这篇文章的其他版本，来帮助你：
+由于 MLOps 涉及机器学习、DevOps 和 IT——有许多资源可以帮助你成为最成功的 MLOps 工程师。查看这篇文章的其他版本，来帮助你：
 
-1.  [完整的数据科学学习路线图](/2022/08/complete-data-science-study-roadmap.html)
+1.  完整的数据科学学习路线图
 
-1.  [完整的机器学习学习路线图](/2022/12/complete-machine-learning-study-roadmap.html)
+1.  完整的机器学习学习路线图
 
-1.  [完整的数据工程学习路线图](/2022/11/complete-data-engineering-study-roadmap.html)
+1.  完整的数据工程学习路线图
 
 **[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术写作人员。她特别关注提供数据科学职业建议或教程以及与数据科学相关的理论知识。她还希望探索人工智能如何/可以促进人类生命的持久性。她是一个热衷学习者，寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
 
@@ -230,8 +230,8 @@
 
 +   [完整的机器学习学习路线图](https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图](https://www.kdnuggets.com/2022/n35.html)
 
-+   [KDnuggets 新闻，12月14日：3 个免费机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费机器学习课程](https://www.kdnuggets.com/2022/n48.html)
 
 +   [超级学习指南：一本免费的算法与数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)

@@ -1,22 +1,22 @@
 # 从头开始使用 NumPy 构建卷积神经网络
 
-> 原文：[https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)
+> 原文：[`www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html`](https://www.kdnuggets.com/2018/04/building-convolutional-neural-network-numpy-scratch.html)
 
-[评论](#comments)
+评论
 
 使用 ML/DL 库中已有的模型在某些情况下可能很有帮助。但为了更好的控制和理解，你应该尝试自己实现这些模型。本文展示了如何仅使用 NumPy 实现 CNN。
 
-卷积神经网络（CNN）是分析多维信号（如图像）的最先进技术。已经有许多库实现了CNN，如 TensorFlow 和 Keras。这些库将开发者与一些细节隔离开，只提供了一个抽象的 API，以简化开发过程并避免实现中的复杂性。但实际上，这些细节可能会有所不同。有时候，数据科学家需要深入这些细节以提升性能。在这种情况下，解决方案是自己构建每个模型的部分。这可以对网络进行尽可能高的控制。此外，推荐实现这些模型以更好地理解它们。
+卷积神经网络（CNN）是分析多维信号（如图像）的最先进技术。已经有许多库实现了 CNN，如 TensorFlow 和 Keras。这些库将开发者与一些细节隔离开，只提供了一个抽象的 API，以简化开发过程并避免实现中的复杂性。但实际上，这些细节可能会有所不同。有时候，数据科学家需要深入这些细节以提升性能。在这种情况下，解决方案是自己构建每个模型的部分。这可以对网络进行尽可能高的控制。此外，推荐实现这些模型以更好地理解它们。
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求。
 
 * * *
 
@@ -50,7 +50,7 @@
 
 读取图像是第一步，因为接下来的步骤依赖于输入的大小。图像转换为灰度后如下所示。
 
-![](../Images/9918355e27eee617861e7da70ab64717.png)
+![](img/9918355e27eee617861e7da70ab64717.png)
 
 ### 2. 准备滤波器
 
@@ -62,7 +62,7 @@
 
 ```
 
-根据滤波器的数量和每个滤波器的大小创建一个零数组。创建了**2**个**3x3**大小的滤波器，因此零数组的大小为（**2**=num_filters，**3**=num_rows_filter，**3**=num_columns_filter）。滤波器的大小被选择为二维数组而无深度，因为输入图像是灰度图像且没有深度（即二维）。如果图像是RGB的，有3个通道，则滤波器大小必须为（3，3，**3**=深度）。
+根据滤波器的数量和每个滤波器的大小创建一个零数组。创建了**2**个**3x3**大小的滤波器，因此零数组的大小为（**2**=num_filters，**3**=num_rows_filter，**3**=num_columns_filter）。滤波器的大小被选择为二维数组而无深度，因为输入图像是灰度图像且没有深度（即二维）。如果图像是 RGB 的，有 3 个通道，则滤波器大小必须为（3，3，**3**=深度）。
 
 滤波器组的大小由上面的零数组指定，而不是滤波器的实际值。可以通过以下方式覆盖这些值以检测垂直和水平边缘。
 
@@ -253,13 +253,13 @@
 
 在对每个滤波器进行卷积后，特征图由**conv**函数返回。下图显示了此卷积层返回的特征图。
 
-![](../Images/e4c0c0a326887a12ba8bba90e0b89ef6.png)
+![](img/e4c0c0a326887a12ba8bba90e0b89ef6.png)
 
-这种层的输出将应用于ReLU层。
+这种层的输出将应用于 ReLU 层。
 
-### 4\. ReLU层
+### 4\. ReLU 层
 
-ReLU层在每个由卷积层返回的特征图上应用ReLU激活函数。它通过以下代码行调用**relu**函数：
+ReLU 层在每个由卷积层返回的特征图上应用 ReLU 激活函数。它通过以下代码行调用**relu**函数：
 
 ```py
 
@@ -279,15 +279,15 @@ l1_feature_map_relu = relu(l1_feature_map)
 7\.                  relu_out[r, c, map_num] = numpy.max(feature_map[r, c, map_num], 0)  
 ```
 
-这非常简单。只需循环遍历特征图中的每个元素，如果元素大于0，则返回特征图中的原始值。否则，返回0。ReLU层的输出在下图中显示。
+这非常简单。只需循环遍历特征图中的每个元素，如果元素大于 0，则返回特征图中的原始值。否则，返回 0。ReLU 层的输出在下图中显示。
 
-![](../Images/6a34742304b4eb20efa413b0db333e45.png)
+![](img/6a34742304b4eb20efa413b0db333e45.png)
 
-ReLU层的输出会应用到最大池化层中。
+ReLU 层的输出会应用到最大池化层中。
 
 ### 5\. 最大池化层
 
-最大池化层接受ReLU层的输出，并根据以下行应用最大池化操作：
+最大池化层接受 ReLU 层的输出，并根据以下行应用最大池化操作：
 
 ```py
 
@@ -313,7 +313,7 @@ ReLU层的输出会应用到最大池化层中。
 13\.             r2 = r2 +1  
 ```
 
-该函数接受三个输入，即ReLU层的输出、池化掩模尺寸和步幅。它简单地创建一个空数组，正如之前所述，用于保存该层的输出。该数组的大小根据尺寸和步幅参数来指定，如下行所示：
+该函数接受三个输入，即 ReLU 层的输出、池化掩模尺寸和步幅。它简单地创建一个空数组，正如之前所述，用于保存该层的输出。该数组的大小根据尺寸和步幅参数来指定，如下行所示：
 
 ```py
 
@@ -331,11 +331,11 @@ pool_out[r2, c2, map_num] = numpy.max(feature_map[r:r+size,  c:c+size])
 
 这种池化层的输出在下图中显示。请注意，即使池化层的输出在图中看起来与输入相同，它的尺寸仍然小于输入。
 
-![](../Images/88b52b4406486be95476b61cb4d73864.png)
+![](img/88b52b4406486be95476b61cb4d73864.png)
 
 ### 6\. 堆叠层
 
-到目前为止，包含卷积、ReLU和最大池化层的CNN架构已经完成。可能还会有一些其他层需要堆叠在之前的层之上，如下所示。
+到目前为止，包含卷积、ReLU 和最大池化层的 CNN 架构已经完成。可能还会有一些其他层需要堆叠在之前的层之上，如下所示。
 
 ```py
 
@@ -353,7 +353,7 @@ pool_out[r2, c2, map_num] = numpy.max(feature_map[r:r+size,  c:c+size])
 
 前一卷积层使用了**3**个随机生成的过滤器。这就是为什么从该卷积层会产生**3**个特征图。后续的 ReLU 和池化层也是如此。这些层的输出如下所示。
 
-![](../Images/7cd7d3910289c53ae3909123d2aed941.png)
+![](img/7cd7d3910289c53ae3909123d2aed941.png)
 
 ```py
 
@@ -371,7 +371,7 @@ pool_out[r2, c2, map_num] = numpy.max(feature_map[r:r+size,  c:c+size])
 
 下图展示了前面层的输出。前一卷积层只使用了一个过滤器。这就是为什么只有一个特征图作为输出。
 
-![](../Images/5f5d177e21f6fa407f83af913641b829.png)
+![](img/5f5d177e21f6fa407f83af913641b829.png)
 
 但请记住，每一层的输出都是下一层的输入。例如，这些线条接受之前的输出作为它们的输入。
 
@@ -383,19 +383,19 @@ pool_out[r2, c2, map_num] = numpy.max(feature_map[r:r+size,  c:c+size])
 
 ### 7\. 完整代码
 
-完整代码可以在 [**github**](https://github.com/ahmedfgad/NumPyCNN) ([https://github.com/ahmedfgad/NumPyCNN](https://github.com/ahmedfgad/NumPyCNN)) 上找到。代码中包含了使用**Matplotlib**库可视化每一层输出的功能。
+完整代码可以在 [**github**](https://github.com/ahmedfgad/NumPyCNN) ([`github.com/ahmedfgad/NumPyCNN`](https://github.com/ahmedfgad/NumPyCNN)) 上找到。代码中包含了使用**Matplotlib**库可视化每一层输出的功能。
 
-**简介: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及Menoufia大学计算机与信息学院（FCI）信息技术专业的优秀荣誉学士学位。由于在学院中排名第一，他于2015年被推荐到埃及某研究所担任助教，随后于2016年回到学院担任助教和研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
+**简介: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于 2015 年 7 月获得埃及 Menoufia 大学计算机与信息学院（FCI）信息技术专业的优秀荣誉学士学位。由于在学院中排名第一，他于 2015 年被推荐到埃及某研究所担任助教，随后于 2016 年回到学院担任助教和研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
 
 [原文](https://www.linkedin.com/pulse/building-convolutional-neural-network-using-numpy-from-ahmed-gad/). 经许可转载。
 
 **相关:**
 
-+   [逐步推导卷积神经网络从全连接网络](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)
++   逐步推导卷积神经网络从全连接网络
 
-+   [学习率在人工神经网络中有用吗？](/2018/01/learning-rate-useful-neural-network.html)
++   学习率在人工神经网络中有用吗？
 
-+   [通过正则化避免过拟合](/2018/02/avoid-overfitting-regularization.html)
++   通过正则化避免过拟合
 
 ### 更多相关主题
 
@@ -407,6 +407,6 @@ pool_out[r2, c2, map_num] = numpy.max(feature_map[r:r+size,  c:c+size])
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [为什么 Python 是初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

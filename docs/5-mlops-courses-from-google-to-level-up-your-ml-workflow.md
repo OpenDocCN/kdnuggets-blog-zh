@@ -1,8 +1,8 @@
-# 5门谷歌MLOps课程，提升你的机器学习工作流程
+# 5 门谷歌 MLOps 课程，提升你的机器学习工作流程
 
-> 原文：[https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)
+> 原文：[`www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow`](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)
 
-![mlops-courses](../Images/aa1157592e8144f6c22eb41d65e12cf6.png)
+![mlops-courses](img/aa1157592e8144f6c22eb41d65e12cf6.png)
 
 图片来源：作者
 
@@ -10,25 +10,25 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-MLOps对于任何生产中的机器学习系统的成功都是必不可少的。因此，组织对熟练的MLOps工程师的需求并不令人惊讶。但MLOps工程师到底做什么呢？
+MLOps 对于任何生产中的机器学习系统的成功都是必不可少的。因此，组织对熟练的 MLOps 工程师的需求并不令人惊讶。但 MLOps 工程师到底做什么呢？
 
-[MLOps工程师的角色](https://www.kdnuggets.com/2023/04/role-mlops-engineer-organization.html)是灵活的，并且因组织而异。然而，考虑到MLOps工程师比数据科学家更具端到端的特性，这种想法既有说服力又简单明了。也就是说，他们的工作超越了机器学习模型的构建，还包括模型构建、部署和监控等角色。
+[MLOps 工程师的角色](https://www.kdnuggets.com/2023/04/role-mlops-engineer-organization.html)是灵活的，并且因组织而异。然而，考虑到 MLOps 工程师比数据科学家更具端到端的特性，这种想法既有说服力又简单明了。也就是说，他们的工作超越了机器学习模型的构建，还包括模型构建、部署和监控等角色。
 
-本文汇编了谷歌的MLOps课程。这将帮助你学习生产环境中机器学习系统的基础知识，重点关注谷歌的Vertex AI平台。
+本文汇编了谷歌的 MLOps 课程。这将帮助你学习生产环境中机器学习系统的基础知识，重点关注谷歌的 Vertex AI 平台。
 
 让我们开始吧！
 
 ## 1\. 生产机器学习系统
 
-要理解和欣赏MLOps，首先需要了解机器学习系统在生产中的运作方式。[生产机器学习系统](https://www.cloudskillsboost.google/paths/17/course_templates/17)课程将帮助你了解生产环境中机器学习系统的实施，重点关注：
+要理解和欣赏 MLOps，首先需要了解机器学习系统在生产中的运作方式。[生产机器学习系统](https://www.cloudskillsboost.google/paths/17/course_templates/17)课程将帮助你了解生产环境中机器学习系统的实施，重点关注：
 
 +   静态、动态和持续训练
 
@@ -52,7 +52,7 @@ MLOps对于任何生产中的机器学习系统的成功都是必不可少的。
 
 [机器学习运维 (MLOps)：入门](https://www.cloudskillsboost.google/paths/17/course_templates/158)课程是对机器学习运维的介绍。在这里你将学习如何在生产环境中部署、测试、监控和评估机器学习系统。
 
-你将了解MLOps的工具和最佳实践，并学习谷歌的Vertex AI平台。本课程的模块如下：
+你将了解 MLOps 的工具和最佳实践，并学习谷歌的 Vertex AI 平台。本课程的模块如下：
 
 +   采用机器学习操作
 
@@ -106,18 +106,18 @@ MLOps对于任何生产中的机器学习系统的成功都是必不可少的。
 
 如果你正在寻找一个全面的训练营来学习 MLOps，你可以查看 DataTalks.Club 的 MLOps Zoomcamp。你可以在 [成为专业 MLOps 工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer) 中了解更多关于这个训练营的信息。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程以及喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程以及喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 了解更多相关主题
 
-+   [提升技能的5个免费机器学习课程](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
++   [提升技能的 5 个免费机器学习课程](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
 
-+   [通过Scikit-learn管道简化您的机器学习工作流程](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
++   [通过 Scikit-learn 管道简化您的机器学习工作流程](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
 
-+   [7个GPT助力提升数据科学工作流程](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)
++   [7 个 GPT 助力提升数据科学工作流程](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)
 
-+   [轻松将LLM集成到您的Scikit-learn工作流程中，使用Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)
++   [轻松将 LLM 集成到您的 Scikit-learn 工作流程中，使用 Scikit-LLM](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)
 
-+   [RAPIDS cuDF加速您的下一个数据科学工作流程](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)
++   [RAPIDS cuDF 加速您的下一个数据科学工作流程](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)
 
-+   [5个免费课程掌握MLOps](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
++   [5 个免费课程掌握 MLOps](https://www.kdnuggets.com/5-free-courses-to-master-mlops)

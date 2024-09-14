@@ -1,24 +1,24 @@
 # 如何创建自定义上下文管理器
 
-> 原文：[https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)
+> 原文：[`www.kdnuggets.com/how-to-create-custom-context-managers-in-python`](https://www.kdnuggets.com/how-to-create-custom-context-managers-in-python)
 
-![custom-context-manager](../Images/e2b0dab861aafbb308d4bcbea8052ae4.png)
+![custom-context-manager](img/e2b0dab861aafbb308d4bcbea8052ae4.png)
 
 作者提供的图片
 
-Python中的上下文管理器让你更高效地使用资源——即使在处理资源时出现错误，也能方便地进行资源的设置和拆卸。在关于[编写高效的Python代码](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)的教程中，我介绍了上下文管理器是什么以及它们的帮助作用。而在[Python上下文管理器的三个有趣用途](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)中，我讨论了上下文管理器在管理子进程、数据库连接等方面的应用。
+Python 中的上下文管理器让你更高效地使用资源——即使在处理资源时出现错误，也能方便地进行资源的设置和拆卸。在关于[编写高效的 Python 代码](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)的教程中，我介绍了上下文管理器是什么以及它们的帮助作用。而在[Python 上下文管理器的三个有趣用途](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)中，我讨论了上下文管理器在管理子进程、数据库连接等方面的应用。
 
 在本教程中，你将学习如何创建自定义上下文管理器。我们将回顾上下文管理器是如何工作的，然后看看你可以用什么方法编写自己的上下文管理器。让我们开始吧。
 
-## Python中的上下文管理器是什么？
+## Python 中的上下文管理器是什么？
 
-Python中的上下文管理器是对象，它们使得在受控的代码块中管理资源（如文件操作、数据库连接或网络套接字）成为可能。它们确保资源在代码块执行前得到正确初始化，并在执行后自动清理，无论代码块是正常完成还是抛出异常。
+Python 中的上下文管理器是对象，它们使得在受控的代码块中管理资源（如文件操作、数据库连接或网络套接字）成为可能。它们确保资源在代码块执行前得到正确初始化，并在执行后自动清理，无论代码块是正常完成还是抛出异常。
 
-一般来说，Python中的上下文管理器具有以下两个特殊方法：`__enter__()`和`__exit__()`。这些方法定义了在进入和退出上下文时上下文管理器的行为。
+一般来说，Python 中的上下文管理器具有以下两个特殊方法：`__enter__()`和`__exit__()`。这些方法定义了在进入和退出上下文时上下文管理器的行为。
 
 ### 上下文管理器是如何工作的？
 
-在Python中处理资源时，你必须考虑设置资源、预见错误、实现异常处理，并最终释放资源。为此，你可能会使用类似这样的`try-except-finally`块：
+在 Python 中处理资源时，你必须考虑设置资源、预见错误、实现异常处理，并最终释放资源。为此，你可能会使用类似这样的`try-except-finally`块：
 
 ```py
 try: 
@@ -243,11 +243,11 @@ Book ID: 8, Title: Slaughterhouse-Five, Author: Kurt Vonnegut, Year: 1969
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

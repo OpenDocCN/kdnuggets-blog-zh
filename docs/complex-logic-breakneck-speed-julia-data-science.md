@@ -1,10 +1,10 @@
 # 复杂逻辑以飞快速度：尝试使用 Julia 进行数据科学
 
-> 原文：[https://www.kdnuggets.com/2020/05/complex-logic-breakneck-speed-julia-data-science.html](https://www.kdnuggets.com/2020/05/complex-logic-breakneck-speed-julia-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/05/complex-logic-breakneck-speed-julia-data-science.html`](https://www.kdnuggets.com/2020/05/complex-logic-breakneck-speed-julia-data-science.html)
 
-[评论](#comments)
+评论
 
-![](../Images/5d6555e62b617548bbed3402d2839b51.png)
+![](img/5d6555e62b617548bbed3402d2839b51.png)
 
 注意：我正在建立一个包含 Julia 基础和数据科学示例的 Github 仓库。 [**点击这里查看**](https://github.com/tirthajyoti/Julia-data-science)。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -32,7 +32,7 @@ Julia 试图提供一个足够高效的环境，既适合原型设计，又适�
 
 ### 为什么它对数据科学如此出色？
 
-![](../Images/10599c0ed770099e3221c65b266532a5.png)
+![](img/10599c0ed770099e3221c65b266532a5.png)
 
 Julia 是数据科学和机器学习工作的优秀选择，因为它在快速数值计算方面也表现出色。其优势包括，
 
@@ -78,11 +78,11 @@ Numpy 的速度确实非常快。它是一个超优化函数的库（许多函�
 
 Julia 代码如下。该函数耗时稍微超过 **1 毫秒**。
 
-![](../Images/f00f6dcec5f39578a8e4d64e816ea9c5.png)
+![](img/f00f6dcec5f39578a8e4d64e816ea9c5.png)
 
 Python 代码如下。我们保持了代码的相同功能性质（Julia 是函数式语言），以保持比较公平且易于验证。for 循环耗时 **超过 200 毫秒**！
 
-![](../Images/892c5d3f6b017da7b0182bd6a7a05834.png)
+![](img/892c5d3f6b017da7b0182bd6a7a05834.png)
 
 ### 那么 Julia 数组与 Numpy 数组相比如何？
 
@@ -94,11 +94,11 @@ Python 代码如下。我们保持了代码的相同功能性质（Julia 是函�
 
 Julia 代码使用 `sum()` 函数对数组进行求和。它需要约 **451 毫秒**（比 for 循环方法快，但仅为一半时间）。
 
-![](../Images/5cf9fb542ccb1d3cb22357d95d349654.png)
+![](img/5cf9fb542ccb1d3cb22357d95d349654.png)
 
 这是 Numpy 执行的结果，
 
-![](../Images/d0d136a018840ab08c222a0606783be8.png)
+![](img/d0d136a018840ab08c222a0606783be8.png)
 
 哇！ **353 毫秒**，这比 Julia 的速度还要快，几乎比天真的 Python for 循环代码快 628 倍。
 
@@ -112,7 +112,7 @@ Julia 代码使用 `sum()` 函数对数组进行求和。它需要约 **451 毫�
 
 对于 Julia，代码的更改将非常直接。我们只需使用 for 循环，检查数组的一个元素是否能被 2 整除，如果不能（即奇数），则将其添加到累加和中。尽可能的细致！
 
-![](../Images/120bec7547204a263b62e8657dd52363.png)
+![](img/120bec7547204a263b62e8657dd52363.png)
 
 所以，这运行了 **接近 4 毫秒**。确实比单纯的盲目求和（使用 for 循环）慢，但差别不大（for 循环的普通求和也大约 1.1 毫秒）。
 
@@ -122,7 +122,7 @@ Julia 代码使用 `sum()` 函数对数组进行求和。它需要约 **451 毫�
 
 这是 Python 代码。并不那么直接（除非你知道如何正确使用 `np.where`，对吧？
 
-![](../Images/0b980fcdff9cddf459accbf33b0a8d7e.png)
+![](img/0b980fcdff9cddf459accbf33b0a8d7e.png)
 
 但看看速度吧。即使是使用 Numpy 方法的一行矢量化代码，平均也花费了**16.7 毫秒**。
 
@@ -136,15 +136,15 @@ Julia 的代码更简单，运行得更快！
 
 所以，这里是 Julia 的代码。再次，简单且高效。花费了 ~**1.8 毫秒**。注意，它使用了一个名为 `muladd()` 的特殊函数，该函数将两个数字相乘并加到第三个数字上。
 
-![](../Images/87526a916a991ca9c76654020058bb2e.png)
+![](img/87526a916a991ca9c76654020058bb2e.png)
 
 我们使用类似的代码（使用 for 循环）尝试了 Python，结果如预期般糟糕！平均花费了**超过一秒**。
 
-![](../Images/db66467a4bdbd3e65d459946fc811de6.png)
+![](img/db66467a4bdbd3e65d459946fc811de6.png)
 
 我们再次尝试发挥创意，使用 Numpy 矢量化代码，结果比 for 循环要好，但比 Julia 的情况差，约为 **14.9 毫秒**。
 
-![](../Images/b615c50f8439981ee85950423df97973.png)
+![](img/b615c50f8439981ee85950423df97973.png)
 
 ### 那么，它看起来如何？
 
@@ -170,13 +170,13 @@ Numpy 在处理数组自带的简单方法（如 `sum()`、`mean()` 或 `std()`�
 
 **附加阅读**
 
-1.  [https://docs.julialang.org/en/v1/manual/performance-tips/#man-performance-tips-1](https://docs.julialang.org/en/v1/manual/performance-tips/#man-performance-tips-1)
+1.  [`docs.julialang.org/en/v1/manual/performance-tips/#man-performance-tips-1`](https://docs.julialang.org/en/v1/manual/performance-tips/#man-performance-tips-1)
 
-1.  [https://agilescientific.com/blog/2014/9/4/julia-in-a-nutshell.html](https://agilescientific.com/blog/2014/9/4/julia-in-a-nutshell.html)
+1.  [`agilescientific.com/blog/2014/9/4/julia-in-a-nutshell.html`](https://agilescientific.com/blog/2014/9/4/julia-in-a-nutshell.html)
 
-1.  [https://en.wikibooks.org/wiki/Introducing_Julia/Types](https://en.wikibooks.org/wiki/Introducing_Julia/Types)
+1.  [`en.wikibooks.org/wiki/Introducing_Julia/Types`](https://en.wikibooks.org/wiki/Introducing_Julia/Types)
 
-1.  [https://dev.to/epogrebnyak/julialang-and-surprises---what-im-learning-with-a-new-programming-language--21df](https://dev.to/epogrebnyak/julialang-and-surprises---what-im-learning-with-a-new-programming-language--21df)
+1.  [`dev.to/epogrebnyak/julialang-and-surprises---what-im-learning-with-a-new-programming-language--21df`](https://dev.to/epogrebnyak/julialang-and-surprises---what-im-learning-with-a-new-programming-language--21df)
 
 如果你有任何问题或想法，请通过 [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com) 联系作者。同时，你也可以查看作者的 [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库 **，了解机器学习和数据科学的代码、想法和资源。如果你像我一样，对 AI/机器学习/数据科学充满热情，请随时 [在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 
@@ -186,11 +186,11 @@ Numpy 在处理数组自带的简单方法（如 `sum()`、`mean()` 或 `std()`�
 
 **相关信息：**
 
-+   [《使用 Julia 的游击学习指南》](/2017/07/guerrilla-guide-machine-learning-julia.html)
++   《使用 Julia 的游击学习指南》
 
-+   [《掌握数据科学的全世界》](/2019/06/whole-data-science-world.html)
++   《掌握数据科学的全世界》
 
-+   [《介绍 Gen：MIT 的新语言，想成为可编程推理的 TensorFlow》](/2019/07/introducing-gen-language-progammable-inference.html)
++   《介绍 Gen：MIT 的新语言，想成为可编程推理的 TensorFlow》
 
 ### 更多相关话题
 

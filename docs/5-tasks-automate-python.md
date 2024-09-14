@@ -1,8 +1,8 @@
 # 使用 Python 自动化的 5 个任务
 
-> 原文：[https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)
+> 原文：[`www.kdnuggets.com/2021/06/5-tasks-automate-python.html`](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)
 
-![](../Images/271ec7f71d6461a8afd003f2eb9511ba.png)
+![](img/271ec7f71d6461a8afd003f2eb9511ba.png)
 
 作者照片
 
@@ -65,7 +65,7 @@ print(resp.text)
 python weather.py "Your City"
 ```
 
-![](../Images/bcc66567545eefeb679c6f37f1fa3bac.png)
+![](img/bcc66567545eefeb679c6f37f1fa3bac.png)
 
 # #3\. 货币转换
 
@@ -171,11 +171,11 @@ Python 是一个强大的工具，但你学习和实践得越多，你会变得�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

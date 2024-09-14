@@ -1,22 +1,22 @@
 # H2O 机器学习框架
 
-> 原文：[https://www.kdnuggets.com/2020/01/h2o-framework-machine-learning.html](https://www.kdnuggets.com/2020/01/h2o-framework-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/01/h2o-framework-machine-learning.html`](https://www.kdnuggets.com/2020/01/h2o-framework-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![图](../Images/afeb834ecb031a7a68e910ad9f98000b.png)
+![图](img/afeb834ecb031a7a68e910ad9f98000b.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -43,7 +43,7 @@ pd.set_option('display.width', 5000)
 h2o.init()
 ```
 
-![](../Images/cd4be79d1f7fee58cdb0ed356521f72f.png)
+![](img/cd4be79d1f7fee58cdb0ed356521f72f.png)
 
 你可以看到，这种方法的输出包含有关 H2O 集群的一些元信息。
 
@@ -55,11 +55,11 @@ bank_df = h2o.upload_file("bank-additional-full.csv")
 
 要查看数据集，你可以简单地输入其名称并运行单元格。默认显示前 10 行。
 
-![](../Images/b7a8b49bc6ab217d3f769359b501727b.png)
+![](img/b7a8b49bc6ab217d3f769359b501727b.png)
 
 从这个变量的类型来看，我们可以看到类型是 h2o.frame.H2OFrame。因此，这不是 pandas 对象，而是 H2O 的对象。
 
-![](../Images/6d60ecff9f4cf56d1f81d00b4f6d083a.png)
+![](img/6d60ecff9f4cf56d1f81d00b4f6d083a.png)
 
 然而，你可以以熟悉的方式对这个 H2OFrame 进行索引和切片：
 
@@ -74,13 +74,13 @@ print(bank_df[5:7,0:4])
 print(bank_df[5:7, ['job', 'education', 'y']])
 ```
 
-![](../Images/821c67ca1f753d5460f0ea9be20728f5.png)
+![](img/821c67ca1f753d5460f0ea9be20728f5.png)
 
 你可以通过访问 .shape 属性来检查 H2OFrame 的形状。此外，一些有用的信息（列类型、最小值、平均值、最大值、标准差、零值数量、缺失值）可以通过 .describe() 方法生成。
 
-![](../Images/75137e03c97f4807f652857a10b472d3.png)
+![](img/75137e03c97f4807f652857a10b472d3.png)
 
-![](../Images/8378bbc9dbe6e90fd837bdb8ff38ed0d.png)
+![](img/8378bbc9dbe6e90fd837bdb8ff38ed0d.png)
 
 正如我们所见，我们的数据集中没有缺失数据。我们有 20 列不同的分类、整数和实数特征以及 1 列目标变量 (y)。目标变量是二元的，如果客户希望订阅定期存款，则值为 "yes"，否则为 "no"。
 
@@ -93,7 +93,7 @@ print(x)
 Y = "y"
 ```
 
-![](../Images/6bbaee011874624cda56298e1a009cab.png)
+![](img/6bbaee011874624cda56298e1a009cab.png)
 
 ### 第一个模型
 
@@ -120,15 +120,15 @@ rf.train(x=x,
          validation_frame=test)
 ```
 
-![](../Images/d4221b67818e69b4c0253b60c85d4df8.png)
+![](img/d4221b67818e69b4c0253b60c85d4df8.png)
 
 可以通过查看估计器的实例来访问模型详细信息：
 
-![](../Images/da9f73dd80542cc1d47566a4f55dd7bd.png)
+![](img/da9f73dd80542cc1d47566a4f55dd7bd.png)
 
-这里有很多有趣和有用的信息。你可以注意到两个信息块。第一个是关于训练集的，第二个是关于测试集的。有不同的模型性能指标（MSE、RMSE、LogLoss、AUC、Gini等）。混淆矩阵是一个非常有趣的错误分析指标。H2O允许查看训练集和测试集的混淆矩阵。混淆矩阵中也显示了每个标签的错误总比例。
+这里有很多有趣和有用的信息。你可以注意到两个信息块。第一个是关于训练集的，第二个是关于测试集的。有不同的模型性能指标（MSE、RMSE、LogLoss、AUC、Gini 等）。混淆矩阵是一个非常有趣的错误分析指标。H2O 允许查看训练集和测试集的混淆矩阵。混淆矩阵中也显示了每个标签的错误总比例。
 
-有趣的表格是关于在各自错误下的最大指标。在二分类中，模型返回实例属于正类的概率。然后这个概率应与某个阈值进行比较，以决定这是正类还是负类。H2O在这个表格中显示了不同指标的最大值，并指定了在达到这些最大值时使用的阈值。例如，在我们的案例中，通过选择阈值0.985可以在测试集上实现完美的精确度。测试集上的最大准确率是0.911，当你选择0.5294作为阈值时可以达到。最高的F1分数对应于阈值0.331。
+有趣的表格是关于在各自错误下的最大指标。在二分类中，模型返回实例属于正类的概率。然后这个概率应与某个阈值进行比较，以决定这是正类还是负类。H2O 在这个表格中显示了不同指标的最大值，并指定了在达到这些最大值时使用的阈值。例如，在我们的案例中，通过选择阈值 0.985 可以在测试集上实现完美的精确度。测试集上的最大准确率是 0.911，当你选择 0.5294 作为阈值时可以达到。最高的 F1 分数对应于阈值 0.331。
 
 在实现解决方案中的模型时，你可以选择最适合你需求的阈值。同时，你可以尝试一些更高级的操作，例如通过结合训练集和测试集的不同指标的最大值报告的阈值来选择阈值。
 
@@ -146,19 +146,19 @@ rf.train(x=x,
          validation_frame=test
 ```
 
-![](../Images/4357413d752756b8eb73390605a7c009.png)
+![](img/4357413d752756b8eb73390605a7c009.png)
 
-在下一个单元格中，我们统计预测结果与实际答案相等的案例数量，然后计算均值，这将成为预测的准确性。我们可以看到准确率是0.9041，或者大约90.4%。如果你回到混淆矩阵，可以注意到，如果你从1中减去测试集的总错误（0.0958），你将得到约0.9041，这就是我们手动计算得到的准确率。
+在下一个单元格中，我们统计预测结果与实际答案相等的案例数量，然后计算均值，这将成为预测的准确性。我们可以看到准确率是 0.9041，或者大约 90.4%。如果你回到混淆矩阵，可以注意到，如果你从 1 中减去测试集的总错误（0.0958），你将得到约 0.9041，这就是我们手动计算得到的准确率。
 
 ```py
 (predictions["predict"] == test["y"]).mean()
 ```
 
-![图示](../Images/ba37d12562111f8985e4af419c517db6.png)
+![图示](img/ba37d12562111f8985e4af419c517db6.png)
 
 ### 其他算法
 
-H2O提供了几种不同的训练模型。让我们尝试其中的一些。
+H2O 提供了几种不同的训练模型。让我们尝试其中的一些。
 
 我们想要使用神经网络训练的第一个算法。要使用这个模型，我们需要从 h2o.estimators.deeplearning 模块中导入 H2ODeepLearningEstimator。然后，我们需要创建这个估计器的实例。与之前的随机森林示例类似，你可以传递许多不同的参数来控制模型和训练过程。重要的是要设置神经网络的架构。在参数 hidden 中，我们传递一个包含隐藏层神经元数量的列表。因此，这个参数同时控制隐藏层的数量和这些层中的神经元数量。我们设置了 3 个隐藏层，分别有 100、10 和 4 个神经元。同时，我们将激活函数设置为 Tanh。
 
@@ -170,7 +170,7 @@ predictions_dl = dl.predict(test)
 print((predictions_dl["predict"] == test["y"]).mean())
 ```
 
-![](../Images/d902243700bdc8c9e46dec56ab6ff936.png)
+![](img/d902243700bdc8c9e46dec56ab6ff936.png)
 
 我们可以看到，准确率略低于随机森林。也许我们可以调整模型的参数以获得更好的性能。
 
@@ -186,14 +186,14 @@ lm.train(x=x,
          validation_frame=test)
 ```
 
-![](../Images/d4221b67818e69b4c0253b60c85d4df8.png)
+![](img/d4221b67818e69b4c0253b60c85d4df8.png)
 
 ```py
 predictions_lm = lm.predict(test)
 print((predictions_lm["predict"] == test["y"]).mean())
 ```
 
-![](../Images/da593c6b719ece668800c0f6dfbf5833.png)
+![](img/da593c6b719ece668800c0f6dfbf5833.png)
 
 我们在这里想要使用的最后一个模型是梯度提升算法。使用默认参数，它在所有其他算法中可能表现最佳。
 
@@ -206,14 +206,14 @@ gb.train(x=x,
          validation_frame=test)
 ```
 
-![](../Images/bc15d9f11812e35ff1f6cd98da7d692e.png)
+![](img/bc15d9f11812e35ff1f6cd98da7d692e.png)
 
 ```py
 predictions_gb = gb.predict(test)
 print((predictions_gb["predict"] == test["y"]).mean())
 ```
 
-![](../Images/45f3299ab86d4d6bd15ae6a24ad4e130.png)
+![](img/45f3299ab86d4d6bd15ae6a24ad4e130.png)
 
 值得一提的是 H2O 平台中 XGBoost 的集成。XGBoost 是实现梯度提升思想的最强大算法之一。你可以单独安装它，但在 H2O 中使用 XGBoost 也非常方便。在下面的单元格中，你可以看到如何创建 `H2OXGBoostEstimator` 的实例以及如何训练它。你应该理解，XGBoost 使用许多参数，且这些参数的变化常常会非常敏感。
 
@@ -232,7 +232,7 @@ predictions_xgb = xgb.predict(test)
 print((predictions_xgb["predict"] == test["y"]).mean())
 ```
 
-![](../Images/ecabdaaf851178c1fe03cbf3bc6f77ae.png)
+![](img/ecabdaaf851178c1fe03cbf3bc6f77ae.png)
 
 H2O 中还提供了其他几种模型。如果你想了解更多，请查看文档。
 
@@ -255,7 +255,7 @@ rf_cv = H2ORandomForestEstimator(ntrees=200, nfolds=3)
 rf_cv.train(x=x, y=y, training_frame=bank_df)
 ```
 
-![](../Images/1cdb8bb77d6c41acf495080b9a0e5133.png)
+![](img/1cdb8bb77d6c41acf495080b9a0e5133.png)
 
 如果你查看上面的单元格输出，你会注意到一些差异。
 
@@ -301,7 +301,7 @@ xgb_grid_search.train(x=x,
                       seed=42)
 ```
 
-我们可以通过使用GridSearch实例的get_grid()方法来获取网格搜索的结果。我们希望按准确率指标的降序对结果进行排序。
+我们可以通过使用 GridSearch 实例的 get_grid()方法来获取网格搜索的结果。我们希望按准确率指标的降序对结果进行排序。
 
 ```py
 grid_results = xgb_grid_search.get_grid(sort_by='accuracy',
@@ -309,13 +309,13 @@ grid_results = xgb_grid_search.get_grid(sort_by='accuracy',
 print(grid_results)
 ```
 
-![](../Images/ad09d86283a57be704316b58f8195782.png)
+![](img/ad09d86283a57be704316b58f8195782.png)
 
-你可以看到，使用1.0列样本率、0.4样本率、200棵树和每棵树的最大深度为3的组合可以获得最高的准确率。
+你可以看到，使用 1.0 列样本率、0.4 样本率、200 棵树和每棵树的最大深度为 3 的组合可以获得最高的准确率。
 
 ### AutoML
 
-H2O提供了自动化机器学习的能力。这个过程非常简单，面向那些在机器学习方面知识和经验较少的用户。AutoML将遍历不同的模型和参数，尝试找到最佳方案。需要指定几个参数，但大多数情况下，你只需要设置最大运行时间（以秒为单位）或最大模型数。你可以将AutoML视为类似于GridSearch，但它是在模型层级而不是参数层级上进行的。
+H2O 提供了自动化机器学习的能力。这个过程非常简单，面向那些在机器学习方面知识和经验较少的用户。AutoML 将遍历不同的模型和参数，尝试找到最佳方案。需要指定几个参数，但大多数情况下，你只需要设置最大运行时间（以秒为单位）或最大模型数。你可以将 AutoML 视为类似于 GridSearch，但它是在模型层级而不是参数层级上进行的。
 
 ```py
 from h2o.automl import H2OAutoML
@@ -325,20 +325,20 @@ autoML.train(x=x,
              training_frame=bank_df)
 ```
 
-我们可以通过检查autoML实例的.leaderboard属性来查看所有尝试过的模型及其对应的性能。具有0.94 AUC指标的GBM模型似乎是这里表现最好的模型。
+我们可以通过检查 autoML 实例的.leaderboard 属性来查看所有尝试过的模型及其对应的性能。具有 0.94 AUC 指标的 GBM 模型似乎是这里表现最好的模型。
 
 ```py
 leaderboard = autoML.leaderboard
 print(leaderboard)
 ```
 
-![](../Images/607ae3b06bfee8055a1eb1882cbc3ff6.png)
+![](img/607ae3b06bfee8055a1eb1882cbc3ff6.png)
 
 查看最佳模型：
 
-![](../Images/a246e130d9b584af3068ce8c2429b2fa.png)
+![](img/a246e130d9b584af3068ce8c2429b2fa.png)
 
-你可以直接从autoML实例上对测试集进行预测。
+你可以直接从 autoML 实例上对测试集进行预测。
 
 ```py
 predictionAML = autoML.predict(test)
@@ -346,23 +346,23 @@ predictionAML = autoML.predict(test)
 
 ### 结论
 
-这篇文章只是H2O功能的简要介绍。这是一个出色的机器学习平台，可以使一些机器学习领域的工程师工作变得更简单。它是一个不断发展的框架。在我们看来，它不能单独使用。相反，与H2O一起使用的其他工具可以使机器学习过程更快、更便捷。
+这篇文章只是 H2O 功能的简要介绍。这是一个出色的机器学习平台，可以使一些机器学习领域的工程师工作变得更简单。它是一个不断发展的框架。在我们看来，它不能单独使用。相反，与 H2O 一起使用的其他工具可以使机器学习过程更快、更便捷。
 
-在本文中，我们介绍了H2O中的一些基本数据操作，查看了H2O提供的几种机器学习模型，学习了如何进行交叉验证和网格搜索，并熟悉了H2O中的自动化机器学习。
+在本文中，我们介绍了 H2O 中的一些基本数据操作，查看了 H2O 提供的几种机器学习模型，学习了如何进行交叉验证和网格搜索，并熟悉了 H2O 中的自动化机器学习。
 
-你应该了解H2O的一些功能超出了本文的范围。因此，如果你有兴趣了解更多，请阅读官方文档。
+你应该了解 H2O 的一些功能超出了本文的范围。因此，如果你有兴趣了解更多，请阅读官方文档。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个由数据科学家和工程师组成的团队，专注于数据项目（大数据、数据科学、机器学习、数据可视化）。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）以及数据密集型网页应用开发（RESTful APIs、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个由数据科学家和工程师组成的团队，专注于数据项目（大数据、数据科学、机器学习、数据可视化）。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）以及数据密集型网页应用开发（RESTful APIs、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/h2o-framework-for-machine-learning/)。经许可转载。
 
 **相关：**
 
-+   [自动化机器学习：团队如何在 AutoML 项目中协作？](/2020/01/teams-work-together-automl-project.html)
++   自动化机器学习：团队如何在 AutoML 项目中协作？
 
-+   [自动化机器学习项目实施的复杂性](/2019/11/automl-implementation-complexities.html)
++   自动化机器学习项目实施的复杂性
 
-+   [顶级 6 个 Python NLP 库的比较](/2018/07/comparison-top-6-python-nlp-libraries.html)
++   顶级 6 个 Python NLP 库的比较
 
 ### 更多相关话题
 
@@ -374,6 +374,6 @@ predictionAML = autoML.predict(test)
 
 +   [每位机器学习工程师应具备的 5 个机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)

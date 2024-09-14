@@ -1,22 +1,22 @@
 # 如何排查 Python 中的内存问题
 
-> 原文：[https://www.kdnuggets.com/2021/06/troubleshoot-memory-problems-python.html](https://www.kdnuggets.com/2021/06/troubleshoot-memory-problems-python.html)
+> 原文：[`www.kdnuggets.com/2021/06/troubleshoot-memory-problems-python.html`](https://www.kdnuggets.com/2021/06/troubleshoot-memory-problems-python.html)
 
-[评论](#comments)
+评论
 
 **由 [Freddy Boulton](https://innovation.alteryx.com/author/freddy/)，Alteryx 的软件工程师**
 
-![如何排查 Python 中的内存问题](../Images/30b767756e098c963065f0aa81571cb8.png)
+![如何排查 Python 中的内存问题](img/30b767756e098c963065f0aa81571cb8.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
 
 * * *
 
@@ -58,9 +58,7 @@ EvalML 性能测试以一种异常安静的方式崩溃了。突然间，服务�
 
 我重新运行了性能测试，这次启用了 Python 的[memory-profiler](https://pypi.org/project/memory-profiler/)以获取内存使用情况的时间图。测试再次崩溃，当我查看内存图时，我看到了这个：
 
-![图表，折线图
-
-![性能测试的内存分析](../Images/b89d4018ae7029f0d96e81d268ee0d20.png)
+![图表，折线图![性能测试的内存分析](img/b89d4018ae7029f0d96e81d268ee0d20.png)
 
 我们的内存使用保持稳定，但随后达到 8 吉字节！我知道我们的应用程序服务器有 8 吉字节的 RAM，所以这个分析确认了我们内存不足。此外，当内存稳定时，我们使用了大约 4 GB 的内存，而我们之前的 EvalML 版本使用了大约 2 GB 的内存。因此，出于某种原因，这个当前版本的内存使用量大约是正常情况的两倍。
 
@@ -70,27 +68,27 @@ EvalML 性能测试以一种异常安静的方式崩溃了。突然间，服务�
 
 精确找出内存问题的原因涉及大量实验和迭代，因为答案通常不明显。如果明显，你可能不会把它写到代码中！因此，我认为重要的是用尽可能少的代码行来重现问题。这个最小示例使你能够在修改代码时快速运行它以查看是否取得进展。
 
-在我的案例中，我从经验中知道，我们的应用程序处理一个包含150万行数据的出租车数据集，这大约是在我看到大幅波动的时候。我将我们的应用程序简化到仅运行这个数据集的[部分](https://gist.github.com/freddyaboulton/66159137063d01f3ee9cfb84b0ac2aaa)。我看到一个类似于我上面描述的波动，但这次内存使用达到了10GB！
+在我的案例中，我从经验中知道，我们的应用程序处理一个包含 150 万行数据的出租车数据集，这大约是在我看到大幅波动的时候。我将我们的应用程序简化到仅运行这个数据集的[部分](https://gist.github.com/freddyaboulton/66159137063d01f3ee9cfb84b0ac2aaa)。我看到一个类似于我上面描述的波动，但这次内存使用达到了 10GB！
 
 看到这个之后，我知道我有一个足够好的最小示例来深入探讨。
 
-![自动生成的图表，散点图描述](../Images/57a022a7cf02687d0161d62b3f449ece.png)在出租车数据集上本地重现的内存占用
+![自动生成的图表，散点图描述](img/57a022a7cf02687d0161d62b3f449ece.png)在出租车数据集上本地重现的内存占用
 
-### **步骤3：找出分配最多内存的代码行**
+### **步骤 3：找出分配最多内存的代码行**
 
 一旦我们将问题隔离到尽可能小的代码块中，就可以查看程序在哪里分配了最多的内存。这可以是你需要的关键证据，以便能够重构代码并解决问题。
 
 我认为[filprofiler](https://pypi.org/project/filprofiler/)是一个很棒的 Python 工具来做到这一点。它显示了应用程序中每行代码在内存使用高峰时的内存分配。这是我本地示例的输出：
 
-![自动生成的文本描述](../Images/8ce1abe4d64ab0a96176d21157d4da47.png)fil-profile的输出
+![自动生成的文本描述](img/8ce1abe4d64ab0a96176d21157d4da47.png)fil-profile 的输出
 
 filprofiler 根据内存分配对你应用程序中的代码行（以及依赖代码）进行排名。行越长，颜色越红，分配的内存越多。
 
-分配最多内存的代码行正在创建 pandas 数据框（pandas/core/algorithms.py 和 pandas/core/internal/managers.py），总计达4GB的数据！我在这里截断了 filprofiler 的输出，但它能够跟踪创建 pandas 数据框的 EvalML 中的代码。
+分配最多内存的代码行正在创建 pandas 数据框（pandas/core/algorithms.py 和 pandas/core/internal/managers.py），总计达 4GB 的数据！我在这里截断了 filprofiler 的输出，但它能够跟踪创建 pandas 数据框的 EvalML 中的代码。
 
 看到这个情况有点令人困惑。是的，EvalML 创建 pandas 数据框，但这些数据框在 AutoML 算法中是短暂存在的，并应在不再使用时立即被释放。由于情况并非如此，这些数据框在 EvalML 完成它们时仍然在内存中停留了足够长的时间，我认为最新版本可能引入了一个[内存泄漏](https://en.wikipedia.org/wiki/Memory_leak)。
 
-### **步骤4：识别泄漏对象**
+### **步骤 4：识别泄漏对象**
 
 在 Python 的上下文中，泄漏对象是指在使用完毕后没有被 Python 垃圾回收器回收的对象。由于 Python 使用 [引用计数](https://en.wikipedia.org/wiki/Reference_counting) 作为其主要垃圾回收算法之一，这些泄漏对象通常是由于对象持有对它们的引用时间过长造成的。
 
@@ -100,7 +98,7 @@ filprofiler 根据内存分配对你应用程序中的代码行（以及依赖�
 
 这是我在可视化这些数据框之一时看到的对象图的一个子集：
 
-![图示自动生成的描述](../Images/20a8329f59226382469b80a7194f1839.png)
+![图示自动生成的描述](img/20a8329f59226382469b80a7194f1839.png)
 
 显示 pandas 数据框使用的内存图，展示了一个导致内存泄漏的循环引用。
 
@@ -110,13 +108,13 @@ filprofiler 根据内存分配对你应用程序中的代码行（以及依赖�
 
 在 Woodwork 更新发布后，我可视化了相同数据框的对象图，循环消失了！
 
-![图示自动生成的描述](../Images/5e263655619062aa7c19fc4758280201.png)Woodwork 升级后的 pandas 数据框对象图。不再有循环！
+![图示自动生成的描述](img/5e263655619062aa7c19fc4758280201.png)Woodwork 升级后的 pandas 数据框对象图。不再有循环！
 
 ### **步骤 5：验证修复是否有效**
 
 一旦我在 EvalML 中升级了 Woodwork 版本，我测量了我们应用程序的内存占用。我很高兴地报告，现在内存使用量已经减少到原来的一半以下！
 
-![图表描述自动生成](../Images/91321f74711571f99421d7a0e9e70fb7.png)修复后的性能测试内存
+![图表描述自动生成](img/91321f74711571f99421d7a0e9e70fb7.png)修复后的性能测试内存
 
 ### **结束语**
 
@@ -132,11 +130,11 @@ filprofiler 根据内存分配对你应用程序中的代码行（以及依赖�
 
 **相关内容:**
 
-+   [顶级编程语言及其用途](/2021/05/top-programming-languages.html)
++   顶级编程语言及其用途
 
-+   [数据科学家，你需要学会编码](/2021/06/data-scientists-need-know-code.html)
++   数据科学家，你需要学会编码
 
-+   [使用 Python 自动化的5个任务](/2021/06/5-tasks-automate-python.html)
++   使用 Python 自动化的 5 个任务
 
 ### 主题更多内容
 
@@ -150,4 +148,4 @@ filprofiler 根据内存分配对你应用程序中的代码行（以及依赖�
 
 +   [常见数据问题（及解决方案）](https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html)
 
-+   [识别机器学习可解决问题的4个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
++   [识别机器学习可解决问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)

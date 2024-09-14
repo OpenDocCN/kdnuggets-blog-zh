@@ -1,8 +1,8 @@
 # 人工智能 vs. 机器学习 vs. 深度学习：有什么区别？
 
-> 原文：[https://www.kdnuggets.com/2019/08/artificial-intelligence-vs-machine-learning-vs-deep-learning-difference.html](https://www.kdnuggets.com/2019/08/artificial-intelligence-vs-machine-learning-vs-deep-learning-difference.html)
+> 原文：[`www.kdnuggets.com/2019/08/artificial-intelligence-vs-machine-learning-vs-deep-learning-difference.html`](https://www.kdnuggets.com/2019/08/artificial-intelligence-vs-machine-learning-vs-deep-learning-difference.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
@@ -14,7 +14,7 @@
 
 如果你从事业务流程改进或寻找新的商业创意，那么你很可能会接触到 AI。为了有效地与其合作，你需要了解其组成部分。
 
-![图示](../Images/47b1ca51e464177a3dd91e6960b74671.png)
+![图示](img/47b1ca51e464177a3dd91e6960b74671.png)
 
 ### 人工智能
 
@@ -24,7 +24,7 @@
 
 人工智能在现代意义上的历史始于 1950 年代，当时艾伦·图灵的工作和达特茅斯研讨会汇集了这一领域的首批爱好者，并制定了 AI 科学的基本原则。此后，该领域经历了几次兴趣激增和随后的萧条（所谓的“AI 冬天”），以至于今天成为世界科学的关键领域之一。
 
-值得提及的是强人工智能和弱人工智能的假设。强人工智能能够思考并将自己意识到作为一个独立的个体。弱人工智能则没有这些能力，只能执行某些范围的任务（例如下棋、识别图像中的猫或[以$432,500绘制一幅画](https://www.forbes.com/sites/williamfalcon/2018/10/25/what-happens-now-that-an-ai-generated-painting-sold-for-432500/#5df73f2ea41c)）。所有现有的人工智能都是弱的，不必担心。
+值得提及的是强人工智能和弱人工智能的假设。强人工智能能够思考并将自己意识到作为一个独立的个体。弱人工智能则没有这些能力，只能执行某些范围的任务（例如下棋、识别图像中的猫或[以$432,500 绘制一幅画](https://www.forbes.com/sites/williamfalcon/2018/10/25/what-happens-now-that-an-ai-generated-painting-sold-for-432500/#5df73f2ea41c)）。所有现有的人工智能都是弱的，不必担心。
 
 如今，很难想象任何一种活动没有人工智能的使用。无论是开车、自拍、在网上商店挑选运动鞋，还是规划假期，你几乎在每个地方都得到一个小巧、弱小但已经非常有用的人工智能的帮助。
 
@@ -40,9 +40,9 @@
 
 +   ****强化学习**** 是一种方法，在这种方法中，系统因正确的行动而获得奖励，对错误的行动则给予惩罚。因此，系统学习制定一个算法，以获得最高奖励和最低惩罚。
 
-一个理想的机器学习模型可以分析任何数据，发现所有模式，并创建一个实现任何期望结果的算法。但这个理想模型尚未创建。你可以在Pedro Domingos的[《大师算法》](https://www.basicbooks.com/titles/pedro-domingos/the-master-algorithm/9780465061921/)中了解创建它的过程。
+一个理想的机器学习模型可以分析任何数据，发现所有模式，并创建一个实现任何期望结果的算法。但这个理想模型尚未创建。你可以在 Pedro Domingos 的[《大师算法》](https://www.basicbooks.com/titles/pedro-domingos/the-master-algorithm/9780465061921/)中了解创建它的过程。
 
-![图像](../Images/10771446fa150382dfb833702a3e811f.png)
+![图像](img/10771446fa150382dfb833702a3e811f.png)
 
 目前的机器学习模型专注于特定任务，它们都有各自的优点和缺点。这些模型包括以下几种：
 
@@ -64,11 +64,11 @@
 
 神经元结构图：
 
-![图](../Images/9b98a994d5b1ea8ffd4b5119df02d236.png)
+![图](img/9b98a994d5b1ea8ffd4b5119df02d236.png)
 
 具有两个隐藏层的人工神经网络：
 
-![图](../Images/27b0ab0b6985e30c083ecb55699113b6.png)
+![图](img/27b0ab0b6985e30c083ecb55699113b6.png)
 
 通过学习给定示例，神经网络调整神经元之间的权重，以便给予对获得期望结果影响最大的神经元最大的权重。例如，如果一个动物是有条纹的、蓬松的并且在喵喵叫，那么它可能是只猫。与此同时，我们将最大权重分配给喵喵叫这个参数。所以即使动物没有条纹也不蓬松，但如果它喵喵叫 - 它仍然很可能是只猫。
 
@@ -84,7 +84,7 @@
 
 ### 结论
 
-那么人工智能、机器学习和深度学习之间有什么区别呢？我们希望，阅读本文后，你已经知道这个问题的答案。人工智能是自动化智力任务（如阅读、[下围棋](https://techcrunch.com/2017/05/24/alphago-beats-planets-best-human-go-player-ke-jie/)、图像识别和创造自动驾驶汽车）的一个广泛领域。机器学习是一组负责AI学习能力的人工智能方法。深度学习是机器学习方法的一个子类，研究多层神经网络。
+那么人工智能、机器学习和深度学习之间有什么区别呢？我们希望，阅读本文后，你已经知道这个问题的答案。人工智能是自动化智力任务（如阅读、[下围棋](https://techcrunch.com/2017/05/24/alphago-beats-planets-best-human-go-player-ke-jie/)、图像识别和创造自动驾驶汽车）的一个广泛领域。机器学习是一组负责 AI 学习能力的人工智能方法。深度学习是机器学习方法的一个子类，研究多层神经网络。
 
 **[ActiveWizards](https://activewizards.com/)** 是一个数据科学家和工程师团队，专注于数据项目（大数据、数据科学、机器学习、数据可视化）。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）以及数据密集型 Web 应用开发（RESTful API、Flask、Django、Meteor）。
 
@@ -92,21 +92,21 @@
 
 **相关：**
 
-+   [2018年数据科学领域前20大Python库](/2018/06/top-20-python-libraries-data-science-2018.html)
++   2018 年数据科学领域前 20 大 Python 库
 
-+   [金融领域数据科学的7大应用案例](/2018/05/top-7-data-science-use-cases-finance.html)
++   金融领域数据科学的 7 大应用案例
 
-+   [前6大Python自然语言处理库比较](/2018/07/comparison-top-6-python-nlp-libraries.html)
++   前 6 大 Python 自然语言处理库比较
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -122,4 +122,4 @@
 
 +   [人工智能如何变革数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [2022年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)

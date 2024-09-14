@@ -1,8 +1,8 @@
 # 数据领域的女性
 
-> 原文：[https://www.kdnuggets.com/2022/03/women-world-data.html](https://www.kdnuggets.com/2022/03/women-world-data.html)
+> 原文：[`www.kdnuggets.com/2022/03/women-world-data.html`](https://www.kdnuggets.com/2022/03/women-world-data.html)
 
-![数据领域的女性](../Images/71ff2ff80b92ad430ee9ab75c75b1ed0.png)
+![数据领域的女性](img/71ff2ff80b92ad430ee9ab75c75b1ed0.png)
 
 [Christina @ wocintechchat.com](https://unsplash.com/@wocintechchat) via Unsplash
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-在谈到数据科学时，许多人认为这个职业路径是“书呆子”的行业。一个适合聪明男性的行业，进一步把女性推向了更远的地方。众所周知，数据收集、分析、产出和决策的工作大多是由男性完成的。根据[TechRepublic](https://www.techrepublic.com/article/why-only-18-of-data-scientists-are-women/)的数据，2019年美国数据科学职位中的女性占比为18%。在低收入国家，女性获得更好教育和STEM（科学、技术、工程、数学）学位的机会更少，数据科学职位中的女性比例更低。
+在谈到数据科学时，许多人认为这个职业路径是“书呆子”的行业。一个适合聪明男性的行业，进一步把女性推向了更远的地方。众所周知，数据收集、分析、产出和决策的工作大多是由男性完成的。根据[TechRepublic](https://www.techrepublic.com/article/why-only-18-of-data-scientists-are-women/)的数据，2019 年美国数据科学职位中的女性占比为 18%。在低收入国家，女性获得更好教育和 STEM（科学、技术、工程、数学）学位的机会更少，数据科学职位中的女性比例更低。
 
-根据[世界银行](https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?end=2019&start=2016&view=chart)的数据，2019年女性的识字率为83.02%，而男性为89.93%。因此，女性常常难以有效使用数字技术。我们已经知道STEM职业中存在性别不平衡，这使女性不愿进入该行业。女性在数据科学等职业中接受的培训水平也较低，使得女性在职业发展和获得高薪职位方面更为困难，进一步加剧了性别薪酬差距。
+根据[世界银行](https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?end=2019&start=2016&view=chart)的数据，2019 年女性的识字率为 83.02%，而男性为 89.93%。因此，女性常常难以有效使用数字技术。我们已经知道 STEM 职业中存在性别不平衡，这使女性不愿进入该行业。女性在数据科学等职业中接受的培训水平也较低，使得女性在职业发展和获得高薪职位方面更为困难，进一步加剧了性别薪酬差距。
 
-根据[BCG](http://bcg.com/en-gb/publications/2018/winning-race-women-digital)的数据，女性占STEM学科大学毕业生的36%，但仅占STEM劳动力的25%，且仅有9%在STEM高层领导中。
+根据[BCG](http://bcg.com/en-gb/publications/2018/winning-race-women-digital)的数据，女性占 STEM 学科大学毕业生的 36%，但仅占 STEM 劳动力的 25%，且仅有 9%在 STEM 高层领导中。
 
 # 数据驱动的政策如何让情况变得更糟？
 
@@ -36,13 +36,13 @@
 
 # 为什么数据科学中需要女性？
 
-![数据世界中的女性](../Images/51d98595cf9c713caa572ddbb0d5041a.png)
+![数据世界中的女性](img/51d98595cf9c713caa572ddbb0d5041a.png)
 
 [Christina @ wocintechchat.com](https://unsplash.com/@wocintechchat) via Unsplash
 
-第四次工业革命正在到来。对于那些不太了解的人来说，它是一种描述物理、数字和生物世界之间界限的方式。它包含了人工智能（AI）、机器人技术、物联网（IoT）、3D打印、基因工程、量子计算以及其他技术元素。
+第四次工业革命正在到来。对于那些不太了解的人来说，它是一种描述物理、数字和生物世界之间界限的方式。它包含了人工智能（AI）、机器人技术、物联网（IoT）、3D 打印、基因工程、量子计算以及其他技术元素。
 
-随着我们越来越依赖数据来建立新模型和帮助我们做出重要决策，数据在我们的生活中成为了一个重要元素。然而，如果我们拥有的数据对女性没有益处？或者无法清晰地理解女性？AI技术会在大多数行业中帮助还是阻碍女性填补现有的性别差距？
+随着我们越来越依赖数据来建立新模型和帮助我们做出重要决策，数据在我们的生活中成为了一个重要元素。然而，如果我们拥有的数据对女性没有益处？或者无法清晰地理解女性？AI 技术会在大多数行业中帮助还是阻碍女性填补现有的性别差距？
 
 人工智能将被用作公司招聘和解雇员工的工具。这也将成为许多人在众多行业中失业的原因，因为它可以替代他们的角色。这进一步将女性置于最不利的位置，因为在这场变革中，支持她们的数据很少。波士顿咨询公司（BCG）表示：“人工智能应用可能会延续和加剧性别偏见，从而进一步扩大领导力培养中的差距。如果人工智能应用是基于偏见的数据进行训练的，那么它所开发的算法也可能会有偏见。”
 

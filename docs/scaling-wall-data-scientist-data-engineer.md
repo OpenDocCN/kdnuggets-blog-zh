@@ -1,22 +1,22 @@
 # 数据科学家与数据工程师之间的墙
 
-> 原文：[https://www.kdnuggets.com/2020/02/scaling-wall-data-scientist-data-engineer.html](https://www.kdnuggets.com/2020/02/scaling-wall-data-scientist-data-engineer.html)
+> 原文：[`www.kdnuggets.com/2020/02/scaling-wall-data-scientist-data-engineer.html`](https://www.kdnuggets.com/2020/02/scaling-wall-data-scientist-data-engineer.html)
 
-[评论](#comments)
+评论
 
 **由 [Byron Allen](https://www.linkedin.com/in/byronaallen/)，Servian 的 ML 工程师**
 
-![](../Images/fe3deab6f4aadb1470e63b4c296c89e7.png)
+![](img/fe3deab6f4aadb1470e63b4c296c89e7.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,15 +28,15 @@
 
 许多今天应用机器学习的主要挑战——无论是技术、商业还是社会方面——的起因在于数据随时间的失衡以及机器学习工件的管理和利用。一个模型可能表现得非常好，但如果底层数据发生漂移且工件未被用来评估性能，那么你的模型将无法很好地泛化或适当地更新。这个问题处于一个模糊地带，既涉及数据科学家，也涉及工程师。
 
-![](../Images/323bb53c341e9f39b2751b6fbec0606a.png)
+![](img/323bb53c341e9f39b2751b6fbec0606a.png)
 
 *来源： [burak kostak](https://www.pexels.com/@burakkostak)。*
 
-换句话说，问题的关键在于机器学习中缺少CI/CD的原则。如果你的环境发生变化，比如输入数据，而模型没有在其构建目标的背景下进行定期评估，导致其随时间失去相关性和价值，那么即使你可以创建一个非常好的“黑箱”模型也没有意义。这是一个难以解决的问题，因为提供数据的工程师和设计模型的科学家之间的关系并不和谐。
+换句话说，问题的关键在于机器学习中缺少 CI/CD 的原则。如果你的环境发生变化，比如输入数据，而模型没有在其构建目标的背景下进行定期评估，导致其随时间失去相关性和价值，那么即使你可以创建一个非常好的“黑箱”模型也没有意义。这是一个难以解决的问题，因为提供数据的工程师和设计模型的科学家之间的关系并不和谐。
 
 这个挑战有实际的例子。想想那些预测希拉里·克林顿会赢的预测，以及其他几种机器学习的失误。从自动驾驶汽车撞死无辜行人到[有偏见的人工智能](https://www.forbes.com/sites/intelai/2019/03/27/the-risks-of-dirty-data-and-ai/#7bee43d72dc7)，已经出现了一些大的[失误](https://medium.com/syncedreview/2018-in-review-10-ai-failures-c18faadf5983)，我认为这些问题通常起源于数据科学和工程之间的灰色地带。
 
-![](../Images/b5466609a48e96f9030b424c19698c4d.png)
+![](img/b5466609a48e96f9030b424c19698c4d.png)
 
 *来源: [Kayla Velasquez](https://unsplash.com/@kaylawithav)。*
 
@@ -54,47 +54,47 @@
 
 交流的第一步是建立共同的词汇——对语义进行某种程度的标准化，从而讨论挑战或相关挑战。自然，这充满了挑战——只要问几个不同的人数据湖是什么，你很可能会得到至少两个不同的答案，甚至更多。
 
-我开发了被称为ProductionML价值链和ProductionML框架的通用参考点。
+我开发了被称为 ProductionML 价值链和 ProductionML 框架的通用参考点。
 
-![](../Images/388008a4cbb718c4f3a24a86d5a1c860.png)
+![](img/388008a4cbb718c4f3a24a86d5a1c860.png)
 
-我们将生产化ML的过程分解为五个重叠的概念，这些概念通常被分开考虑。虽然引入这样一个整体框架可能会增加复杂性和相互依赖性——但实际上，这些复杂性和相互依赖性已经存在——忽视它们只是将问题推迟到未来。
+我们将生产化 ML 的过程分解为五个重叠的概念，这些概念通常被分开考虑。虽然引入这样一个整体框架可能会增加复杂性和相互依赖性——但实际上，这些复杂性和相互依赖性已经存在——忽视它们只是将问题推迟到未来。
 
-通过在设计你的生产ML管道时考虑邻近概念——你开始引入那种难以捉摸的可靠性、可持续性和适应性。
+通过在设计你的生产 ML 管道时考虑邻近概念——你开始引入那种难以捉摸的可靠性、可持续性和适应性。
 
-### ProductionML框架
+### ProductionML 框架
 
-ProductionML价值链是对运营数据科学和工程团队以便将模型部署到最终用户所需内容的高层描述。自然还有更技术和详细的理解——我称之为ProductionML框架（有些人可能称之为持续智能）。
+ProductionML 价值链是对运营数据科学和工程团队以便将模型部署到最终用户所需内容的高层描述。自然还有更技术和详细的理解——我称之为 ProductionML 框架（有些人可能称之为持续智能）。
 
-![](../Images/58773a01976646a78393ad9aae0684b8.png)
+![](img/58773a01976646a78393ad9aae0684b8.png)
 
-*ProductionML框架。*
+*ProductionML 框架。*
 
-这个框架是在经过几轮对商业MLOps工具、开源选项和内部PoC的实验之后开发的。它旨在指导ProductionML项目的未来发展，特别是那些需要数据科学家和工程师共同参与的生产ML方面。
+这个框架是在经过几轮对商业 MLOps 工具、开源选项和内部 PoC 的实验之后开发的。它旨在指导 ProductionML 项目的未来发展，特别是那些需要数据科学家和工程师共同参与的生产 ML 方面。
 
-![](../Images/a972556f5c2d168674738cbeb0f176e3.png)
+![](img/a972556f5c2d168674738cbeb0f176e3.png)
 
 *橙色的数据科学和蓝色的数据工程/DevOps。*
 
 如果你对这些方面不太熟悉，请参见橙色的“数据科学”和蓝色的“数据工程/DevOps”。
 
-如你所见，“训练性能跟踪”机制（例如，MLFlow）和Govern机制在这个架构中处于核心位置。这是因为每个工件，包括指标、参数和图形，都必须在训练和测试阶段进行归档。此外，被称为模型管理的东西与模型如何被管理是根本相关的，这利用了那些模型工件。
+如你所见，“训练性能跟踪”机制（例如，MLFlow）和 Govern 机制在这个架构中处于核心位置。这是因为每个工件，包括指标、参数和图形，都必须在训练和测试阶段进行归档。此外，被称为模型管理的东西与模型如何被管理是根本相关的，这利用了那些模型工件。
 
-Govern机制将工件和业务规则结合起来，以推动适当的模型，或更具体地说，是估算器的生产，同时根据特定于用例的规则对其他模型进行标记。这也被称为模型版本控制，但使用“govern”一词是为了避免与*版本控制*混淆，并强调该机制在监督模型管理中的核心作用。
+Govern 机制将工件和业务规则结合起来，以推动适当的模型，或更具体地说，是估算器的生产，同时根据特定于用例的规则对其他模型进行标记。这也被称为模型版本控制，但使用“govern”一词是为了避免与*版本控制*混淆，并强调该机制在监督模型管理中的核心作用。
 
 ### 黄金枪？
 
 我们都在这段旅程中。我们都在尝试攀登这面墙。市场上有许多优秀的工具，但迄今为止，没有人拥有一把金色的枪……
 
-![](../Images/feafa0ec16bdd40defe7d6dc953812d7.png)
+![](img/feafa0ec16bdd40defe7d6dc953812d7.png)
 
 *来源：mrgarethm — 黄金枪 — 国际间谍博物馆。*
 
-从我的角度来看，MLFlow取得了巨大进展，它解答了关于模型管理和工件归档的某些问题。其他产品也类似地解决了相对具体的问题——尽管它们的优势可能体现在生产ML价值链的其他部分。这在Google Cloud ML Engine和AWS Sagemaker中可以看到。最近，GCP发布了AutoML Tables的测试版，但即便如此，也无法完全满足所有需求，尽管接近了。
+从我的角度来看，MLFlow 取得了巨大进展，它解答了关于模型管理和工件归档的某些问题。其他产品也类似地解决了相对具体的问题——尽管它们的优势可能体现在生产 ML 价值链的其他部分。这在 Google Cloud ML Engine 和 AWS Sagemaker 中可以看到。最近，GCP 发布了 AutoML Tables 的测试版，但即便如此，也无法完全满足所有需求，尽管接近了。
 
 牢记这一持续存在的差异，科学家和工程师之间拥有共同的词汇和框架作为基础至关重要。
 
-墙太高了吗？根据我的经验，答案是否定的，但这并不意味着生产ML不复杂。
+墙太高了吗？根据我的经验，答案是否定的，但这并不意味着生产 ML 不复杂。
 
 ### 必须的詹姆斯·邦德名言
 
@@ -116,9 +116,9 @@ M：所以如果我听得没错的话，斯卡拉曼加逃脱了——坐在一�
 
 ### 更多相关话题
 
-+   [通过Apache Gobblin扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)
++   [通过 Apache Gobblin 扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)
 
-+   [使用Python进行数据扩展](https://www.kdnuggets.com/2023/07/data-scaling-python.html)
++   [使用 Python 进行数据扩展](https://www.kdnuggets.com/2023/07/data-scaling-python.html)
 
 +   [扩展你的网络数据驱动产品时需要知道的事项](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
 

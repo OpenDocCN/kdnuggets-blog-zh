@@ -1,54 +1,54 @@
 # 免费数据分析师训练营
 
-> 原文：[https://www.kdnuggets.com/free-data-analyst-bootcamp-for-beginners](https://www.kdnuggets.com/free-data-analyst-bootcamp-for-beginners)
+> 原文：[`www.kdnuggets.com/free-data-analyst-bootcamp-for-beginners`](https://www.kdnuggets.com/free-data-analyst-bootcamp-for-beginners)
 
-![免费数据分析师训练营](../Images/a6a258163c0b08a062c7ae9d5b21e079.png)
+![免费数据分析师训练营](img/a6a258163c0b08a062c7ae9d5b21e079.png)
 
 作者提供的图片
 
-如果你打算进入数据分析领域，可能已经看过几个数据分析师的职位列表。你也许还见过列出的所需工具和编程语言：SQL、Excel、Power BI、Tableau、Python等。
+如果你打算进入数据分析领域，可能已经看过几个数据分析师的职位列表。你也许还见过列出的所需工具和编程语言：SQL、Excel、Power BI、Tableau、Python 等。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 你可以注册多个课程来学习这些技能。但如果能通过一个全面的训练营来学习所有这些技能，并建立项目组合，不是更好吗？
 
-完全免费的[初学者数据分析师训练营](https://www.youtube.com/watch?v=PSNXoAs2FtQ)由Alex the Analyst提供，是启动数据分析师职业的理想选择。除了学习SQL、Excel、Power BI、Tableau和Python，你还将构建项目、学习编写简历等。现在让我们深入了解这个训练营的内容。
+完全免费的[初学者数据分析师训练营](https://www.youtube.com/watch?v=PSNXoAs2FtQ)由 Alex the Analyst 提供，是启动数据分析师职业的理想选择。除了学习 SQL、Excel、Power BI、Tableau 和 Python，你还将构建项目、学习编写简历等。现在让我们深入了解这个训练营的内容。
 
 链接: [初学者数据分析师训练营（SQL、Tableau、Power BI、Python、Excel、Pandas、项目等）](https://www.youtube.com/watch?v=PSNXoAs2FtQ)
 
 # 1\. SQL
 
-课程首先提供了关于如何成为数据分析师的一般路线图，然后详细介绍了每个所需工具，第一个是SQL。
+课程首先提供了关于如何成为数据分析师的一般路线图，然后详细介绍了每个所需工具，第一个是 SQL。
 
-本教程的SQL部分分为三个部分：基础、初级SQL和高级SQL。
+本教程的 SQL 部分分为三个部分：基础、初级 SQL 和高级 SQL。
 
-基础SQL部分涵盖：
+基础 SQL 部分涵盖：
 
-+   Select + From语句
++   Select + From 语句
 
-+   Where语句
++   Where 语句
 
-+   Group by和Order by
++   Group by 和 Order by
 
-中级SQL教程部分涵盖以下内容：
+中级 SQL 教程部分涵盖以下内容：
 
 +   内连接和外连接
 
 +   联合
 
-+   Case语句
++   Case 语句
 
-+   Having子句
++   Having 子句
 
 +   更新和删除数据
 
@@ -56,7 +56,7 @@
 
 +   Partition by
 
-高级SQL部分将教你：
+高级 SQL 部分将教你：
 
 +   公共表表达式（CTEs）
 
@@ -68,7 +68,7 @@
 
 +   子查询
 
-该模块通过几个关于数据探索和数据清洗的项目来结束，使用SQL。
+该模块通过几个关于数据探索和数据清洗的项目来结束，使用 SQL。
 
 # 2\. Excel
 
@@ -152,7 +152,7 @@ pandas 教程涵盖以下主题：
 
 +   探索性数据分析 (EDA)
 
-然后你可以在两个投资组合项目中进行API和网页抓取的工作。
+然后你可以在两个投资组合项目中进行 API 和网页抓取的工作。
 
 # 6\. 职业建议
 
@@ -184,7 +184,7 @@ pandas 教程涵盖以下主题：
 
 +   [哪种最佳：数据科学训练营 vs 学位 vs 在线课程](https://www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html)
 
-+   [KDnuggets 新闻，10月5日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
 
 +   [免费的数据工程入门课程](https://www.kdnuggets.com/free-data-engineering-course-for-beginners)
 

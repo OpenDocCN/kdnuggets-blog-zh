@@ -1,34 +1,34 @@
-# 使用DAGsHub将Streamlit Web应用程序部署到Heroku
+# 使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku
 
-> 原文：[https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
+> 原文：[`www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html`](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
 
-![将Streamlit Web应用程序部署到Heroku使用DAGsHub](../Images/8777cf1d33a7bf623889d0403ebf12e4.png)
+![将 Streamlit Web 应用程序部署到 Heroku 使用 DAGsHub](img/8777cf1d33a7bf623889d0403ebf12e4.png)
 
 作者封面
 
-作为初学者，很难意识到项目的最终产品应该是什么样的。你从一个基础的机器学习流程开始，随着项目的演进，你调整和增强组件以满足你的最终标准。但旅程并未止步于此。为了与世界分享你的工作，你希望有一种方式让人们与模型互动并评估其性能。在这篇博客中，我们将学习如何仅使用Python构建一个Streamlit应用程序，并将其部署到远程Heroku服务器上。
+作为初学者，很难意识到项目的最终产品应该是什么样的。你从一个基础的机器学习流程开始，随着项目的演进，你调整和增强组件以满足你的最终标准。但旅程并未止步于此。为了与世界分享你的工作，你希望有一种方式让人们与模型互动并评估其性能。在这篇博客中，我们将学习如何仅使用 Python 构建一个 Streamlit 应用程序，并将其部署到远程 Heroku 服务器上。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 示例项目 - 肺炎分类
 
-我们将使用[Pneumonia-Classification](https://dagshub.com/nirbarazida/pneumonia-Classification/)项目，并展示如何将其Streamlit应用程序部署到云端。该项目分为五个任务：数据标注、数据处理、建模、评估和Streamlit。我们将使用在[Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)上可获得的胸部X光数据集。数据集包含5,863张正面胸部X光图像。它被分为三个文件夹：**train**、**test**、**val**，每个文件夹包含子文件夹**Pneumonia**和**Normal**。我们的数据集使用[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)许可，可以用于商业用途。我们将重点关注创建Web应用程序并将其部署到云端，但如果你想了解更多数据预处理和模型构建的内容，可以查看[项目](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC)。
+我们将使用[Pneumonia-Classification](https://dagshub.com/nirbarazida/pneumonia-Classification/)项目，并展示如何将其 Streamlit 应用程序部署到云端。该项目分为五个任务：数据标注、数据处理、建模、评估和 Streamlit。我们将使用在[Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia)上可获得的胸部 X 光数据集。数据集包含 5,863 张正面胸部 X 光图像。它被分为三个文件夹：**train**、**test**、**val**，每个文件夹包含子文件夹**Pneumonia**和**Normal**。我们的数据集使用[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)许可，可以用于商业用途。我们将重点关注创建 Web 应用程序并将其部署到云端，但如果你想了解更多数据预处理和模型构建的内容，可以查看[项目](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC)。
 
-![使用DAGsHub将Streamlit Web应用程序部署到Heroku](../Images/10b0cacfc6ad9f5a367debb028608f50.png)
+![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](img/10b0cacfc6ad9f5a367debb028608f50.png)
 
 图片由[Cell](http://www.cell.com/cell/fulltext/S0092-8674(18)30154-5)提供
 
-### 什么是Streamlit？
+### 什么是 Streamlit？
 
 [Streamlit](https://streamlit.io/) 是一个开源库，允许你仅使用 Python 构建网页应用程序。它提供了自定义选项，可以根据你的需求设计应用程序，而无需任何网页开发的先验知识。使用 Streamlit，数据科学从业者可以通过构建一个 *用于他们模型* 的网页应用程序，轻松地与技术同事或非技术利益相关者沟通他们的工作。
 
@@ -65,7 +65,7 @@ selectbox = st.sidebar.selectbox(SELECT_BOX_TEXT,
 file_buffer = st.sidebar.file_uploader("", type=SUPPORTED_IMG_TYPE)
 ```
 
-![将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](../Images/3dd09c9a0df517ab0e9e012f06e50ac4.png)
+![将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](img/3dd09c9a0df517ab0e9e012f06e50ac4.png)
 
 侧边栏的选择框和文件上传器图像
 
@@ -124,9 +124,9 @@ def predict_for_selectbox(selectbox, my_bar, latest_iteration):
     my_bar.progress(100)
 ```
 
-![将Streamlit WebApp部署到Heroku，使用DAGsHub](../Images/853cf7d766daaa119d9971688668c150.png)
+![将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](img/853cf7d766daaa119d9971688668c150.png)
 
-正在运行带有进度条的预测，进度为50%
+正在运行带有进度条的预测，进度为 50%
 
 以下函数读取上传的文件并对图像进行预测。
 
@@ -143,29 +143,29 @@ def predict_for_file_buffer(file_buffer, my_bar, latest_iteration):
     my_bar.progress(100)
 ```
 
-![将Streamlit WebApp部署到Heroku，使用DAGsHub](../Images/3660d550769a8fa8de75e709f3897a22.png)
+![将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](img/3660d550769a8fa8de75e709f3897a22.png)
 
 成功的肺炎预测图像
 
 ### 下一步..
 
-在为你的项目创建并本地运行Streamlit应用程序之后，是时候将其部署并与世界分享了。对于不熟悉这个过程的人来说，将应用程序部署到云端可能非常具有挑战性。在下一部分中，我们将讨论你可能遇到的主要问题，探讨解决这些问题的选项，并选择适合该任务的最佳方案。
+在为你的项目创建并本地运行 Streamlit 应用程序之后，是时候将其部署并与世界分享了。对于不熟悉这个过程的人来说，将应用程序部署到云端可能非常具有挑战性。在下一部分中，我们将讨论你可能遇到的主要问题，探讨解决这些问题的选项，并选择适合该任务的最佳方案。
 
-### 为Streamlit应用程序选择部署服务器
+### 为 Streamlit 应用程序选择部署服务器
 
-选择云提供商来托管应用程序可能会让人感到[沮丧和不知所措](https://en.wikipedia.org/wiki/Overchoice#:~:text=Overchoice%20or%20choice%20overload%20is,his%201970%20book%2C%20Future%20Shock.)，因为平台的膨胀和其优势的不明确。为了帮助你，我比较了三种云服务：AWS、Heroku和Huggingface，它们在使用Streamlit设计的机器学习应用程序方面表现良好。
+选择云提供商来托管应用程序可能会让人感到[沮丧和不知所措](https://en.wikipedia.org/wiki/Overchoice#:~:text=Overchoice%20or%20choice%20overload%20is,his%201970%20book%2C%20Future%20Shock.)，因为平台的膨胀和其优势的不明确。为了帮助你，我比较了三种云服务：AWS、Heroku 和 Huggingface，它们在使用 Streamlit 设计的机器学习应用程序方面表现良好。
 
-![将Streamlit WebApp部署到Heroku，使用DAGsHub](../Images/c985a73c219122fd700e02726bacf9e0.png)
+![将 Streamlit WebApp 部署到 Heroku，使用 DAGsHub](img/c985a73c219122fd700e02726bacf9e0.png)
 
 云服务器比较
 
 ### AWS EC2
 
-[亚马逊云服务](https://aws.amazon.com/ec2/)提供安全且可调整大小的计算能力。EC2允许你部署整个机器学习工作流，也可以为更好的机器进行配置。它不够用户友好，学习曲线相当陡峭。然而，EC2通过使用GPU支持提供了更快的推理速度。如果你有兴趣学习和部署你的Streamlit应用程序使用AWS，我建议你阅读由[Nishtha Goswami](https://medium.com/@goswaminishtha?source=post_page-----db603c69aa28-----------------------------------)撰写的精彩[博客](https://medium.com/swlh/showcase-you-streamlit-web-app-to-the-world-with-aws-ec2-db603c69aa28)。
+[亚马逊云服务](https://aws.amazon.com/ec2/)提供安全且可调整大小的计算能力。EC2 允许你部署整个机器学习工作流，也可以为更好的机器进行配置。它不够用户友好，学习曲线相当陡峭。然而，EC2 通过使用 GPU 支持提供了更快的推理速度。如果你有兴趣学习和部署你的 Streamlit 应用程序使用 AWS，我建议你阅读由[Nishtha Goswami](https://medium.com/@goswaminishtha?source=post_page-----db603c69aa28-----------------------------------)撰写的精彩[博客](https://medium.com/swlh/showcase-you-streamlit-web-app-to-the-world-with-aws-ec2-db603c69aa28)。
 
 ### Hugging Face
 
-[HuggingFace Spaces](https://huggingface.co/spaces)提供了简单的部署和快速推理解决方案，但它有一个缺点，就是你只能使用Streamlit或[Gradiao](https://www.gradio.app/)框架。Spaces服务器在DVC集成和开发MLOps解决方案方面不提供灵活性，但它们提供了一种名为[Infinity](https://huggingface.co/infinity)的付费企业解决方案，具有很大的灵活性和更快的推理速度。
+[HuggingFace Spaces](https://huggingface.co/spaces)提供了简单的部署和快速推理解决方案，但它有一个缺点，就是你只能使用 Streamlit 或[Gradiao](https://www.gradio.app/)框架。Spaces 服务器在 DVC 集成和开发 MLOps 解决方案方面不提供灵活性，但它们提供了一种名为[Infinity](https://huggingface.co/infinity)的付费企业解决方案，具有很大的灵活性和更快的推理速度。
 
 ### Heroku
 
@@ -175,7 +175,7 @@ def predict_for_file_buffer(file_buffer, my_bar, latest_iteration):
 
 将 streamlit 应用部署分为五个步骤：项目初始化、创建 web 应用（streamlit）、设置 DVC、设置 web 应用，以及最后将其部署到服务器。在本节中，我们将学习如何使用 [Heroku GUI](https://id.heroku.com/) 和 [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) 来初始化应用程序、设置项目以进行部署以及将代码推送到云服务器。
 
-![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/a4e9aba94166b26e83924c62d70e595b.png)
+![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](img/a4e9aba94166b26e83924c62d70e595b.png)
 
 部署 web 应用到 Heroku 服务器的步骤。
 
@@ -197,7 +197,7 @@ def predict_for_file_buffer(file_buffer, my_bar, latest_iteration):
 
 1.  从命令终端输入 git clone https://git.heroku.com/<your-app-name>.git
 
-![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/414ae0be532d135ea06c314ec19765da.png)
+![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](img/414ae0be532d135ea06c314ec19765da.png)
 
 使用 GUI 初始化 Heroku 应用。
 
@@ -219,13 +219,13 @@ def predict_for_file_buffer(file_buffer, my_bar, latest_iteration):
 
 1\. 使用 shell 安装 buildpack：heroku buildpacks:add --index 1 heroku-community/apt，或者前往应用程序设置并添加 buildpack，如下所示。
 
-![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/ec3a5cb7f4222119fa53c982261ae304.png)
+![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](img/ec3a5cb7f4222119fa53c982261ae304.png)
 
 添加 build pack
 
-2\. 创建一个 Aptfile，并添加一个指向 DVC 最新版本的链接：[https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb](https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb)。确保这是一个 `.deb` 文件。
+2\. 创建一个 Aptfile，并添加一个指向 DVC 最新版本的链接：[`github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb`](https://github.com/iterative/dvc/releases/download/2.8.3/dvc_2.8.3_amd64.deb)。确保这是一个 `.deb` 文件。
 
-![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/7e471d4dffb62f18efd3ce2d00544099.png)
+![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](img/7e471d4dffb62f18efd3ce2d00544099.png)
 
 3\. 在 **streamlit_app.py** 中添加这些代码行，以拉取 4 张图片和一个模型。此方法用于优化存储并促进更快的构建。我使用了 **dvc config** 使其与 Heroku 服务器环境兼容。你可以在 [这里](https://dvc.org/doc/command-reference/config) 阅读更多关于配置的内容。
 
@@ -250,7 +250,7 @@ if "DYNO" in os.environ and os.path.isdir(".dvc"):
 
 我们可以使用 Heroku CLI 设置 PORT：heroku config:set PORT=8080，或者我们可以前往仪表板设置并手动添加，如下所示。这部分是可选的，但建议设置端口号以避免 [H10](https://devcenter.heroku.com/articles/error-codes#h10-app-crashed) 错误。
 
-![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](../Images/c30750e20c3e93b85dfa1b19ff31c8c3.png)
+![将 Streamlit WebApp 部署到 Heroku 使用 DAGsHub](img/c30750e20c3e93b85dfa1b19ff31c8c3.png)
 
 配置变量
 
@@ -268,7 +268,7 @@ Procfile 包含一个 web 初始化命令：web: streamlit run --server.port $PO
 
 1.  除了 **Numpy**、**Pillow** 和 **Streamlit** 外，移除其他软件包。
 
-![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](../Images/c675716b4cc6caf39b55d7084963299c.png)
+![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](img/c675716b4cc6caf39b55d7084963299c.png)
 
 Heroku 部署包
 
@@ -288,7 +288,7 @@ git push heroku master
 
 Streamlit 图像分类 web 应用程序已部署在 ([dagshub-pc-app.herokuapp.com](https://dagshub-pc-app.herokuapp.com/))。
 
-![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](../Images/9b1ab414ea59a8ffa87e0856d972e005.png)
+![使用 DAGsHub 将 Streamlit Web 应用程序部署到 Heroku](img/9b1ab414ea59a8ffa87e0856d972e005.png)
 
 部署应用程序到 Heroku 服务器只需不到五分钟。如果你在部署过程中仍然遇到问题，可以查看我的 [DAGsHub 仓库](https://dagshub.com/kingabzpro/Pneumonia-Classification/src/DVC) 作为参考。
 

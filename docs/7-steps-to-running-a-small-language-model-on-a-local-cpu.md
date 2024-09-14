@@ -1,8 +1,8 @@
 # 在本地 CPU 上运行小型语言模型的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-running-a-small-language-model-on-a-local-cpu](https://www.kdnuggets.com/7-steps-to-running-a-small-language-model-on-a-local-cpu)
+> 原文：[`www.kdnuggets.com/7-steps-to-running-a-small-language-model-on-a-local-cpu`](https://www.kdnuggets.com/7-steps-to-running-a-small-language-model-on-a-local-cpu)
 
-![在本地 CPU 上运行小型语言模型的 7 个步骤](../Images/7ae0f82f255702a62401f793c6c1eed3.png)
+![在本地 CPU 上运行小型语言模型的 7 个步骤](img/7ae0f82f255702a62401f793c6c1eed3.png)
 
 图像由 [Freepik](https://www.freepik.com/free-vector/isometric-npl-illustration_22379496.htm#query=Small%20language%20models%20in%20Deep%20learning&position=1&from_view=search&track=ais) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -32,7 +32,7 @@
 
 1.  **隐私：** 小型模型可以在没有外部服务器的情况下使用，从而确保数据隐私和完整性。
 
-![在本地 CPU 上运行小型语言模型的 7 个步骤](../Images/bcc70933cc67ee67b3088c7e79050eb5.png)
+![在本地 CPU 上运行小型语言模型的 7 个步骤](img/bcc70933cc67ee67b3088c7e79050eb5.png)
 
 作者提供的图像
 
@@ -53,7 +53,7 @@ pip install ctransformers -q
 
 **输出：**
 
-![7 Steps to Running a Small Language Model on a Local CPU](../Images/01fe915b4721b7e1233794435f8ddae1.png)![7 Steps to Running a Small Language Model on a Local CPU](../Images/375abba9015582bee318c04e89d01609.png)
+![7 Steps to Running a Small Language Model on a Local CPU](img/01fe915b4721b7e1233794435f8ddae1.png)![7 Steps to Running a Small Language Model on a Local CPU](img/375abba9015582bee318c04e89d01609.png)
 
 # 第三步：获取预训练的小型语言模型
 
@@ -61,9 +61,9 @@ pip install ctransformers -q
 
 ### 下载预训练模型
 
-你可以在像 Hugging Face ([https://huggingface.co/models](https://huggingface.co/models)) 这样的平台上找到预训练的小型语言模型。这里是一个快速浏览网站的指南，你可以轻松观察到提供的模型序列，并通过登录应用程序下载这些开源模型。
+你可以在像 Hugging Face ([`huggingface.co/models`](https://huggingface.co/models)) 这样的平台上找到预训练的小型语言模型。这里是一个快速浏览网站的指南，你可以轻松观察到提供的模型序列，并通过登录应用程序下载这些开源模型。
 
-![7 Steps to Running a Small Language Model on a Local CPU](../Images/95f996d9660da8c90a148e026e863475.png)
+![7 Steps to Running a Small Language Model on a Local CPU](img/95f996d9660da8c90a148e026e863475.png)
 
 你可以通过这个链接轻松下载所需的模型，并将其保存到本地目录以备后续使用。
 
@@ -75,7 +75,7 @@ from ctransformers import AutoModelForCausalLM
 
 在上一步中，我们已经确定了来自 Hugging Face 的预训练模型。现在，我们可以通过将其加载到我们的环境中来使用这个模型。我们在下面的代码中从 ctransformers 库中导入了 AutoModelForCausalLM 类。这个类可以用于加载和使用因果语言建模的模型。
 
-![7 Steps to Running a Small Language Model on a Local CPU](../Images/997afa55a93d0ef4844e0ad9369c9376.png)
+![7 Steps to Running a Small Language Model on a Local CPU](img/997afa55a93d0ef4844e0ad9369c9376.png)
 
 图片来自 [Medium](https://medium.com/@cltkzl12)
 
@@ -86,7 +86,7 @@ llm = AutoModelForCausalLM.from_pretrained('TheBloke/Llama-2-7B-Chat-GGML', mode
 
 **输出：**
 
-![7 Steps to Running a Small Language Model on a Local CPU](../Images/a48491310e495ff5994b42e6367084fe.png)
+![7 Steps to Running a Small Language Model on a Local CPU](img/a48491310e495ff5994b42e6367084fe.png)
 
 # 第五步：模型配置
 
@@ -108,7 +108,7 @@ model.set_context_size(128)
 model.set_batch_size(16)
 ```
 
-# 第6步：生成文本
+# 第 6 步：生成文本
 
 到目前为止，我们已经完成了模型的创建、调优和保存。现在，我们可以根据我们的使用情况快速测试模型，并检查它是否提供了我们期望的输出。因此，让我们输入一些查询并基于我们加载和配置的模型生成文本。
 
@@ -119,9 +119,9 @@ for word in llm('Explain something about Kdnuggets', stream = True):
 
 **输出：**
 
-![在本地CPU上运行小型语言模型的7个步骤](../Images/d00ad1eeed215b4112fa4bb0afb81c3b.png)
+![在本地 CPU 上运行小型语言模型的 7 个步骤](img/d00ad1eeed215b4112fa4bb0afb81c3b.png)
 
-# 第7步：优化和故障排除
+# 第 7 步：优化和故障排除
 
 为了获得适当的结果以满足大多数输入查询，您可以考虑以下事项。
 
@@ -133,28 +133,28 @@ for word in llm('Explain something about Kdnuggets', stream = True):
 
 # 总结
 
-在本文中，我们讨论了如何通过遵循文章中概述的七个简单步骤，在本地CPU上创建和部署小型语言模型。这种经济高效的方法为各种语言处理或计算机视觉应用打开了大门，并为更高级的项目提供了一个踏脚石。但在进行项目时，您需要记住以下事项以克服任何问题：
+在本文中，我们讨论了如何通过遵循文章中概述的七个简单步骤，在本地 CPU 上创建和部署小型语言模型。这种经济高效的方法为各种语言处理或计算机视觉应用打开了大门，并为更高级的项目提供了一个踏脚石。但在进行项目时，您需要记住以下事项以克服任何问题：
 
 1.  在训练过程中定期保存检查点，以确保您可以在中断时继续训练或恢复您的模型。
 
-1.  优化您的代码和数据管道，以提高内存使用效率，特别是在使用本地CPU时。
+1.  优化您的代码和数据管道，以提高内存使用效率，特别是在使用本地 CPU 时。
 
-1.  如果您将来需要扩展模型，考虑使用GPU加速或基于云的资源。
+1.  如果您将来需要扩展模型，考虑使用 GPU 加速或基于云的资源。
 
 总之，小型语言模型为各种语言处理任务提供了多功能且高效的解决方案。通过正确的设置和优化，您可以有效地利用它们的强大功能。
 
-**[](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)**** 是一名电气工程学的B.Tech.学生，目前正在本科的最后一年。他的兴趣领域包括网页开发和机器学习。他已经追求了这一兴趣，并渴望在这些方向上做更多的工作。
+**[](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)**** 是一名电气工程学的 B.Tech.学生，目前正在本科的最后一年。他的兴趣领域包括网页开发和机器学习。他已经追求了这一兴趣，并渴望在这些方向上做更多的工作。
 
 ### 了解更多相关话题
 
-+   [Llama, Llama, Llama: 3个简单步骤将本地RAG与你的内容结合](https://www.kdnuggets.com/3-simple-steps-to-local-rag-with-your-content)
++   [Llama, Llama, Llama: 3 个简单步骤将本地 RAG 与你的内容结合](https://www.kdnuggets.com/3-simple-steps-to-local-rag-with-your-content)
 
-+   [掌握大型语言模型微调的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)
++   [掌握大型语言模型微调的 7 个步骤](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)
 
-+   [有效的小型语言模型：微软的13亿参数phi-1.5](https://www.kdnuggets.com/effective-small-language-models-microsoft-phi-15)
++   [有效的小型语言模型：微软的 13 亿参数 phi-1.5](https://www.kdnuggets.com/effective-small-language-models-microsoft-phi-15)
 
-+   [GPT4All是本地ChatGPT，适用于你的文档，并且是免费的！](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)
++   [GPT4All 是本地 ChatGPT，适用于你的文档，并且是免费的！](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)
 
-+   [LangChain + Streamlit + Llama: 将对话AI带入你的…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
++   [LangChain + Streamlit + Llama: 将对话 AI 带入你的…](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
 
 +   [Octoparse 8.5: 增强本地抓取及更多功能](https://www.kdnuggets.com/2022/02/octoparse-85-empowering-local-scraping.html)

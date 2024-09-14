@@ -1,8 +1,8 @@
 # 如何生成合成表格数据集
 
-> 原文：[https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
+> 原文：[`www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html`](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
 
-![如何生成合成表格数据集](../Images/a1d5f83ff8498849deb3ba47907a9ccc.png)
+![如何生成合成表格数据集](img/a1d5f83ff8498849deb3ba47907a9ccc.png)
 
 作者提供的图片
 
@@ -12,23 +12,23 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-合成数据被应用于医疗保健、自驾车、金融行业、维持高水平隐私以及研究目的 - [数据科学探索](https://towardsdatascience.com/synthetic-data-key-benefits-types-generation-methods-and-challenges-11b0ad304b55)。去年，整个Kaggle的 [表格玩法系列](https://www.kaggle.com/c/tabular-playground-series-apr-2021) 数据集是使用CTGANs开发的。Kaggle团队利用来自各种比赛的旧数据集生成了人工数据集。这是Kaggle的一个聪明举动，因为它使作弊变得困难。在这篇博客中，我们将学习使用 [SDV](https://sdv.dev/SDV/#) 的Python库生成表格数据的各种方法。
+合成数据被应用于医疗保健、自驾车、金融行业、维持高水平隐私以及研究目的 - [数据科学探索](https://towardsdatascience.com/synthetic-data-key-benefits-types-generation-methods-and-challenges-11b0ad304b55)。去年，整个 Kaggle 的 [表格玩法系列](https://www.kaggle.com/c/tabular-playground-series-apr-2021) 数据集是使用 CTGANs 开发的。Kaggle 团队利用来自各种比赛的旧数据集生成了人工数据集。这是 Kaggle 的一个聪明举动，因为它使作弊变得困难。在这篇博客中，我们将学习使用 [SDV](https://sdv.dev/SDV/#) 的 Python 库生成表格数据的各种方法。
 
 # CTGANs
 
-[CTGAN](https://arxiv.org/abs/1907.00503) 使用几种 [基于GAN](https://machinelearningmastery.com/tour-of-generative-adversarial-network-models/) 的方法从原始数据中学习，并生成高度真实的表格数据。为了生成合成表格数据，我们将使用开源Python库中的条件生成对抗网络，如 [CTGAN](https://pypi.org/project/ctgan/) 和合成数据库 ([SDV](https://sdv.dev/))。SDV允许数据科学家从单表、关系数据和时间序列中学习和生成数据集。它是各种表格数据的一站式解决方案。
+[CTGAN](https://arxiv.org/abs/1907.00503) 使用几种 [基于 GAN](https://machinelearningmastery.com/tour-of-generative-adversarial-network-models/) 的方法从原始数据中学习，并生成高度真实的表格数据。为了生成合成表格数据，我们将使用开源 Python 库中的条件生成对抗网络，如 [CTGAN](https://pypi.org/project/ctgan/) 和合成数据库 ([SDV](https://sdv.dev/))。SDV 允许数据科学家从单表、关系数据和时间序列中学习和生成数据集。它是各种表格数据的一站式解决方案。
 
 通过几行代码，我们的深度学习模型可以学习并生成样本表格数据。在下面的示例中，我们初始化了模型，在真实数据上训练了它，保存了模型，然后生成了 200 个样本。这只是开始，我们还将学习生成人工数据的各种方法，然后评估结果。
 
-![如何生成合成表格数据集](../Images/7d9b8b958865d9e407e605cacfe3e8ff.png)
+![如何生成合成表格数据集](img/7d9b8b958865d9e407e605cacfe3e8ff.png)
 
 图片来源于作者
 
@@ -54,7 +54,7 @@ data = pd.read_csv("/work/food-demand-forecasting/train.csv")\
 data.head()
 ```
 
-![如何生成合成表格数据集](../Images/3c690c93a910e65edacf933f3f52d126.png)
+![如何生成合成表格数据集](img/3c690c93a910e65edacf933f3f52d126.png)
 
 为了训练我们的 CTGAN 模型，我们需要提供离散列的列表、批量大小和训练轮数。API 类似于 [Scikit-learn](https://scikit-learn.org/)，我们用超参数初始化模型，然后使用 `.fit()` 训练模型。在成功训练模型后，我们将保存模型以重现类似的结果。通过 `ctgan.sample(2000)` 我们将生成 2k 个样本。
 
@@ -73,7 +73,7 @@ samples.head()
 
 正如我们所观察到的，输出与原始数据非常相似。结果是可以接受的。
 
-![如何生成合成表格数据集](../Images/1a26cf80589b30adf5411e35c8776e27.png)
+![如何生成合成表格数据集](img/1a26cf80589b30adf5411e35c8776e27.png)
 
 ## SDV
 
@@ -93,7 +93,7 @@ new_data.head()
 
 正如我们所看到的，id 列以 0 开始，整体数据看起来很干净。为了完全理解我们的合成数据，我们需要使用相似度度量来评估数据集，并比较数据分布。
 
-![如何生成合成表格数据集](../Images/3c192f11c664fe8dc1686b606d09ee60.png)
+![如何生成合成表格数据集](img/3c192f11c664fe8dc1686b606d09ee60.png)
 
 ## 评估
 
@@ -115,11 +115,11 @@ table_evaluator.visual_evaluation()
 
 通过观察所有可视化结果，我们可以得出结论：数据特征的分布在某种程度上是相似的，但主成分分析的分布与真实数据完全不同。
 
-![如何生成合成表格数据集](../Images/e37e1772e4003f50070cb3afa1fb5c5f.png)
+![如何生成合成表格数据集](img/e37e1772e4003f50070cb3afa1fb5c5f.png)
 
-![如何生成合成表格数据集](../Images/264bb0bb3ad5633d3e2be96acd065cb4.png)
+![如何生成合成表格数据集](img/264bb0bb3ad5633d3e2be96acd065cb4.png)
 
-![如何生成合成表格数据集](../Images/540039a27ab33660f9a3b8781baf32f3.png)
+![如何生成合成表格数据集](img/540039a27ab33660f9a3b8781baf32f3.png)
 
 ## 自定义模型
 
@@ -143,7 +143,7 @@ conditions = {"center_id": 161}
 model.sample(5, conditions=conditions)
 ```
 
-![如何生成合成表格数据集](../Images/889ae70d040607bc4d50ba13fcff4852.png)
+![如何生成合成表格数据集](img/889ae70d040607bc4d50ba13fcff4852.png)
 
 通过轻量级超参数优化，我们已实现了更好的相似度评分**（0.53）**，如下所示。如果您的生成数据集的评分在 0.6 到 0.7 之间，那么您的数据集已准备好用于生产。
 

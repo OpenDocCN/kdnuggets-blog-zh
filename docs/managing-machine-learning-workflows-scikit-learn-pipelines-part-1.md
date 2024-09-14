@@ -1,10 +1,10 @@
-# 使用 Scikit-learn Pipelines 管理机器学习工作流 第 1 部分：温和的介绍
+# 使用 Scikit-learn Pipelines 管理机器学习工作流 第一部分：温和的介绍
 
-> 原文：[https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html](https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
+> 原文：[`www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html`](https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Pipelines](../Images/b8b9b0bbf09b0e456ffbdb9febbe3581.png)
+![Pipelines](img/b8b9b0bbf09b0e456ffbdb9febbe3581.png)
 
 你熟悉 Scikit-learn Pipelines 吗？
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -96,11 +96,11 @@ Saved Logistic Regression pipeline to file
 
 **相关：**
 
-+   [掌握 Python 数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握 Python 数据准备的 7 个步骤
 
-+   [从零开始的 Python 机器学习工作流第 1 部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从零开始的 Python 机器学习工作流第一部分：数据准备
 
-+   [从零开始的 Python 机器学习工作流第 2 部分：k-means 聚类](/2017/06/machine-learning-workflows-python-scratch-part-2.html)
++   从零开始的 Python 机器学习工作流第二部分：k-means 聚类
 
 ### 主题更多
 
@@ -110,8 +110,8 @@ Saved Logistic Regression pipeline to file
 
 +   [管理深度学习数据集的新方法](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)
 
-+   [作为数据科学家管理可重用的Python代码](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
++   [作为数据科学家管理可重用的 Python 代码](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
 
-+   [管理数据科学项目的4个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
++   [管理数据科学项目的 4 个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
 
-+   [使用MLOps管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
++   [使用 MLOps 管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)

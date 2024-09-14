@@ -1,8 +1,8 @@
 # 适用于所有用途的唯一提示框架
 
-> 原文：[https://www.kdnuggets.com/the-only-prompting-framework-for-every-use](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)
+> 原文：[`www.kdnuggets.com/the-only-prompting-framework-for-every-use`](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)
 
-![适用于所有用途的唯一提示框架](../Images/f65db9d9657930d43785a16b944fb177.png)
+![适用于所有用途的唯一提示框架](img/f65db9d9657930d43785a16b944fb177.png)
 
 图像由 [freestockcenter 在 Freepik](https://www.freepik.com/search?ai=excluded&format=search&last_filter=page&last_value=2&page=2&query=scaffolding&selection=1&type=photo#uuid=f8637cdd-5cbb-4e8a-a9bb-381719fa20d1) 提供
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ## 框架
 
-本文中分享的提示工程框架显著提升了你与AI系统的互动。让我们通过遵循包括角色、上下文和任务在内的六步框架来学习创建强大的提示，并展示期望的输出和语气。
+本文中分享的提示工程框架显著提升了你与 AI 系统的互动。让我们通过遵循包括角色、上下文和任务在内的六步框架来学习创建强大的提示，并展示期望的输出和语气。
 
-![提示框架](../Images/fc5698b7cd7d6430157441d056a207f8.png) 作者提供的图像
+![提示框架](img/fc5698b7cd7d6430157441d056a207f8.png) 作者提供的图像
 
 ## 1\. 角色
 
@@ -44,7 +44,7 @@
 
 ## 3\. 任务
 
-任务是模型必须采取的具体行动。这是你的提示需要完成的全部目标。我称之为2C——清晰且简洁，意味着模型应该能够理解期望。
+任务是模型必须采取的具体行动。这是你的提示需要完成的全部目标。我称之为 2C——清晰且简洁，意味着模型应该能够理解期望。
 
 示例：“……分析数据并学会从未来的对话中计算情感。”
 
@@ -60,7 +60,7 @@
 
 通常，我们需要以一种结构化且易于跟随的指定格式输出。根据用户如何获取信息，输出可以组织成列表、表格或段落的形式。
 
-示例：“以2点格式分享给定的呼叫总结，包括反映情感类别的客户情感和关键词……”
+示例：“以 2 点格式分享给定的呼叫总结，包括反映情感类别的客户情感和关键词……”
 
 ## 6\. 语气
 
@@ -72,7 +72,7 @@
 
 很好，我们已经讨论了提示框架的所有六个元素。现在，让我们将它们合并成一个单一的提示：
 
-> “作为一名通过客户关怀对话进行情感分析的专家，你正在分析呼叫记录，以了解客户痛点和从客户与代理之间的呼叫细节中的情感。分析数据并学会从未来的对话中计算情感。提供简要解释，突出计算出的情感背后的词语和理由。以2点格式分享给定的呼叫总结，包括反映情感类别的客户情感和关键词。使用专业但易于理解的语气，尽量避免过于专业的术语。”
+> “作为一名通过客户关怀对话进行情感分析的专家，你正在分析呼叫记录，以了解客户痛点和从客户与代理之间的呼叫细节中的情感。分析数据并学会从未来的对话中计算情感。提供简要解释，突出计算出的情感背后的词语和理由。以 2 点格式分享给定的呼叫总结，包括反映情感类别的客户情感和关键词。使用专业但易于理解的语气，尽量避免过于专业的术语。”
 
 ## 有效提示的好处
 
@@ -90,10 +90,10 @@
 
 +   [探索思维树提示：人工智能如何通过搜索学习推理…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
 
-+   [利用链式密度提示解锁GPT-4总结功能](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)
++   [利用链式密度提示解锁 GPT-4 总结功能](https://www.kdnuggets.com/unlocking-gpt-4-summarization-with-chain-of-density-prompting)
 
-+   [提升LLM推理能力：揭示链式代码提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
++   [提升 LLM 推理能力：揭示链式代码提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
 
-+   [3种基于研究的高级提示技术提高LLM效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
++   [3 种基于研究的高级提示技术提高 LLM 效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
 
 +   [成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)

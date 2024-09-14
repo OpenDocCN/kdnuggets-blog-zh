@@ -1,22 +1,22 @@
 # 梯度提升决策树——概念解释
 
-> 原文：[https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html](https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html)
+> 原文：[`www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html`](https://www.kdnuggets.com/2021/04/gradient-boosted-trees-conceptual-explanation.html)
 
-[评论](#comments)
+评论
 
 梯度提升决策树已被证明优于其他模型。这是因为提升涉及实现多个模型并聚合它们的结果。
 
-梯度提升模型最近因其在Kaggle机器学习比赛中的表现而变得流行。
+梯度提升模型最近因其在 Kaggle 机器学习比赛中的表现而变得流行。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
@@ -118,15 +118,15 @@ gbc.fit(X_train,y_train)
 gbc.feature_importances_
 ```
 
-![梯度提升决策树特征重要性](../Images/9ad0e30669cda02fa3b7eb4daa2ad64b.png)
+![梯度提升决策树特征重要性](img/9ad0e30669cda02fa3b7eb4daa2ad64b.png)
 
-值越高，特征越重要。获得的数组中的值将加总为1。
+值越高，特征越重要。获得的数组中的值将加总为 1。
 
 注意：基于不纯度的重要性并不总是准确，特别是当特征过多时。在这种情况下，你应该考虑使用[基于排列的重要性](https://scikit-learn.org/stable/modules/generated/sklearn.inspection.permutation_importance.html#sklearn.inspection.permutation_importance)。
 
-**使用Scikit-learn梯度提升估计器进行回归**
+**使用 Scikit-learn 梯度提升估计器进行回归**
 
-Scikit-learn梯度提升估计器可以使用`GradientBoostingRegressor`进行回归。它接受的参数与分类问题类似：
+Scikit-learn 梯度提升估计器可以使用`GradientBoostingRegressor`进行回归。它接受的参数与分类问题类似：
 
 +   损失，
 
@@ -157,7 +157,7 @@ gbc.feature_importances_
 
 ### XGBoost
 
-[XGBoost](https://neptune.ai/blog/how-to-organize-your-xgboost-machine-learning-ml-model-development-process)是一个支持Java、Python、Java、C++、R和Julia的梯度提升库。它还使用了一个弱决策树的集成。
+[XGBoost](https://neptune.ai/blog/how-to-organize-your-xgboost-machine-learning-ml-model-development-process)是一个支持 Java、Python、Java、C++、R 和 Julia 的梯度提升库。它还使用了一个弱决策树的集成。
 
 这是一个线性模型，通过并行计算进行树学习。该算法还配备了执行交叉验证和显示特征重要性的功能。该模型的主要特点有：
 
@@ -167,21 +167,21 @@ gbc.feature_importances_
 
 +   `Dmatrix`，其优化的数据结构提高了性能。
 
-让我们来看看如何在Python中应用XGBoost。该算法接受的参数包括：
+让我们来看看如何在 Python 中应用 XGBoost。该算法接受的参数包括：
 
 +   `objective`用于定义任务类型，例如回归或分类；
 
-+   `colsample_bytree`构建每棵树时的列子样本比例。子样本发生在每次迭代中。这通常是0到1之间的值；
++   `colsample_bytree`构建每棵树时的列子样本比例。子样本发生在每次迭代中。这通常是 0 到 1 之间的值；
 
 +   `learning_rate`决定了模型学习的快慢；
 
 +   `max_depth`表示每棵树的最大深度。树木越多，模型复杂度越高，过拟合的机会也越大；
 
-+   `alpha`是权重的[L1正则化](https://en.wikipedia.org/wiki/Regularization_(mathematics))；
++   `alpha`是权重的[L1 正则化](https://en.wikipedia.org/wiki/Regularization_(mathematics))；
 
 +   `n_estimators`是拟合的决策树数量。
 
-**使用XGBoost进行分类**
+**使用 XGBoost 进行分类**
 
 在导入算法后，定义你希望使用的参数。由于这是一个分类问题，使用`binary: logistic`目标函数。下一步是使用`XGBClassifier`并解包定义的参数。你可以调整这些参数，直到获得适合你问题的最佳参数。
 
@@ -193,7 +193,7 @@ classification = xgb.XGBClassifier(**params)
 classification.fit(X_train, y_train)
 ```
 
-**使用XGBoost进行回归**
+**使用 XGBoost 进行回归**
 
 在回归中，使用`XGBRegressor`代替。在这种情况下，目标函数将是`reg:squarederror`。
 
@@ -205,13 +205,13 @@ regressor = xgb.XGBRegressor(**params)
 regressor.fit(X_train, y_train)
 ```
 
-XGBoost模型还允许你通过`feature_importances_`属性获取特征重要性。
+XGBoost 模型还允许你通过`feature_importances_`属性获取特征重要性。
 
 ```py
 regressor.feature_importances_
 ```
 
-![回归器特征重要性](../Images/5fcc6666d29f1ad8c2ae319bd0f2c8e8.png)
+![回归器特征重要性](img/5fcc6666d29f1ad8c2ae319bd0f2c8e8.png)
 
 你可以使用 Matplotlib 轻松可视化它们。这是通过 XGBoost 的 `plot_importance` 函数完成的。
 
@@ -222,7 +222,7 @@ plt.rcParams['figure.figsize'] = [5, 5]
 plt.show()
 ```
 
-![梯度提升特征重要性](../Images/516c097cd9cb492a799b06e9c75c25d4.png)
+![梯度提升特征重要性](img/516c097cd9cb492a799b06e9c75c25d4.png)
 
 `save_model` 函数可以用于保存你的模型。然后你可以将这个模型发送到你的模型注册表。
 
@@ -236,7 +236,7 @@ regressor.save_model("model.pkl")
 
 [LightGBM](https://neptune.ai/blog/how-to-organize-your-lightgbm-ml-model-development-process-examples-of-best-practices) 与其他梯度提升框架不同，因为它使用了基于叶子生长的树算法。基于叶子生长的树算法比基于深度生长的算法收敛更快。然而，它们更容易过拟合。
 
-![叶子生长的树](../Images/3cb421772a8f89c5b77b76605f11036d.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
+![叶子生长的树](img/3cb421772a8f89c5b77b76605f11036d.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
 
 该算法是 [基于直方图的](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)，因此它将连续值分配到离散的区间。这导致训练更快且内存利用更高效。
 
@@ -317,7 +317,7 @@ gbm = lgb.train(params,
 lgb.plot_importance(gbm)
 ```
 
-![lgb.plot_importance](../Images/98b83d78b753c41c28f904a42ece95f7.png)
+![lgb.plot_importance](img/98b83d78b753c41c28f904a42ece95f7.png)
 
 LightGBM 也有一个内置的模型保存功能。该功能是 `save_model`。
 
@@ -333,7 +333,7 @@ gbm.save_model('mode.pkl')
 
 例如在下图中，你可以看到 `297,value>0.5` 被用于该层级。
 
-![梯度提升 CatBoost](../Images/c464403bbb3b7dff15de9e6324cf0ac7.png)
+![梯度提升 CatBoost](img/c464403bbb3b7dff15de9e6324cf0ac7.png)
 
 其他显著特点包括 [CatBoost](https://catboost.ai/news/catboost-enables-fast-gradient-boosting-on-decision-trees-using-gpus)：
 
@@ -379,7 +379,7 @@ model = CatBoostClassifier()
 model.fit(X_train,y_train,verbose=False, plot=True)
 ```
 
-![CatBoostClassifier](../Images/cb4a66e7e6430508805ac7c92fea9abd.png)
+![CatBoostClassifier](img/cb4a66e7e6430508805ac7c92fea9abd.png)
 
 **使用 CatBoost 进行回归**
 
@@ -397,7 +397,7 @@ model.fit(X_train,y_train,verbose=False, plot=True)
 model.feature_importances_
 ```
 
-![model.feature_importances_](../Images/1f751bb52e8a8b3b02715d3037fa158f.png)
+![model.feature_importances_](img/1f751bb52e8a8b3b02715d3037fa158f.png)
 
 算法还支持执行交叉验证。这是通过 `cv` 函数完成的，并传递所需的参数。
 
@@ -435,7 +435,7 @@ CatBoost 还使你能够可视化模型中的单棵树。这是通过 `plot_tree
 model.plot_tree(tree_idx=0)
 ```
 
-![使用 CatBoost 进行回归](../Images/6cd1b451f8b3d417236c758f41979021.png)
+![使用 CatBoost 进行回归](img/6cd1b451f8b3d417236c758f41979021.png)
 
 ### 梯度提升树的优点
 
@@ -497,11 +497,11 @@ model.plot_tree(tree_idx=0)
 
 **相关内容：**
 
-+   [LightGBM：一种高效的梯度提升决策树](/2020/06/lightgbm-gradient-boosting-decision-tree.html)
++   LightGBM：一种高效的梯度提升决策树
 
-+   [Scikit-learn 的最佳机器学习框架和扩展](/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html)
++   Scikit-learn 的最佳机器学习框架和扩展
 
-+   [使用 CatBoost 的快速梯度提升](/2020/10/fast-gradient-boosting-catboost.html)
++   使用 CatBoost 的快速梯度提升
 
 ### 更多相关内容
 
@@ -515,4 +515,4 @@ model.plot_tree(tree_idx=0)
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)

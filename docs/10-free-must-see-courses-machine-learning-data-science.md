@@ -1,8 +1,8 @@
 # 10 个免费的机器学习和数据科学必看课程
 
-> 原文：[https://www.kdnuggets.com/2018/11/10-free-must-see-courses-machine-learning-data-science.html](https://www.kdnuggets.com/2018/11/10-free-must-see-courses-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/11/10-free-must-see-courses-machine-learning-data-science.html`](https://www.kdnuggets.com/2018/11/10-free-must-see-courses-machine-learning-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 这是一个免费的机器学习和数据科学课程集合，适合开启你的冬季学习季节。课程涵盖从入门机器学习到深度学习、自然语言处理及更多领域。
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT
 
 * * *
 
-![Post header image](../Images/1cb320c1836423482d47065338288c63.png)
+![Post header image](img/1cb320c1836423482d47065338288c63.png)
 
 **1\. [计算思维与数据科学导论](https://ocw.mit.edu/courses/electrical-engineering-and-computer-science/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/)**
 
@@ -64,7 +64,7 @@ fast.ai
 
 Yandex 数据学校
 
-> ![](../Images/c359d9fe852c8a85ae94056cbab5ecb2.png)
+> ![](img/c359d9fe852c8a85ae94056cbab5ecb2.png)
 
 **8\. [从语言到信息](https://web.stanford.edu/class/cs124/)**
 
@@ -88,23 +88,23 @@ fast.ai
 
 > 这门课程聚焦于一个问题：**我们如何以可接受的速度和准确性进行矩阵计算？**
 > 
-> 这门课程在旧金山大学的分析学硕士项目中教授，时间是2017年夏季（针对正在学习成为数据科学家的研究生）。课程使用Python和Jupyter Notebooks进行教学，大多数课程使用Scikit-Learn和Numpy库，少部分课程使用Numba（一个将Python编译为C以提高性能的库）和PyTorch（GPU上的Numpy替代品）。
+> 这门课程在旧金山大学的分析学硕士项目中教授，时间是 2017 年夏季（针对正在学习成为数据科学家的研究生）。课程使用 Python 和 Jupyter Notebooks 进行教学，大多数课程使用 Scikit-Learn 和 Numpy 库，少部分课程使用 Numba（一个将 Python 编译为 C 以提高性能的库）和 PyTorch（GPU 上的 Numpy 替代品）。
 
 **相关**：
 
-+   [10本机器学习和数据科学必读免费书籍](/2017/04/10-free-must-read-books-machine-learning-data-science.html)
++   10 本机器学习和数据科学必读免费书籍
 
-+   [10本机器学习和数据科学的更多必读免费书籍](/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html)
++   10 本机器学习和数据科学的更多必读免费书籍
 
-+   [5门关于人工智能入门的免费课程](/2017/02/5-free-courses-getting-started-artificial-intelligence.html)
++   5 门关于人工智能入门的免费课程
 
 ### 更多相关主题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目的，并以目的去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

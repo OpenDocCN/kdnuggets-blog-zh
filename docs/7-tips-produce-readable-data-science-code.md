@@ -1,10 +1,10 @@
-# 7个提高数据科学代码可读性的技巧
+# 7 个提高数据科学代码可读性的技巧
 
-> 原文：[https://www.kdnuggets.com/2022/11/7-tips-produce-readable-data-science-code.html](https://www.kdnuggets.com/2022/11/7-tips-produce-readable-data-science-code.html)
+> 原文：[`www.kdnuggets.com/2022/11/7-tips-produce-readable-data-science-code.html`](https://www.kdnuggets.com/2022/11/7-tips-produce-readable-data-science-code.html)
 
-![7个提高数据科学代码可读性的技巧](../Images/2d92303704dd6bf8eee0b9ed4b0f0f8c.png)
+![7 个提高数据科学代码可读性的技巧](img/2d92303704dd6bf8eee0b9ed4b0f0f8c.png)
 
-[由svstudioart提供的图片](https://www.freepik.com/free-vector/programmer-working-web-development-code-engineer-programming-python-php-java-script-computer_14723893.htm#query=python%20code&position=4&from_view=search&track=sph) 在Freepik上
+[由 svstudioart 提供的图片](https://www.freepik.com/free-vector/programmer-working-web-development-code-engineer-programming-python-php-java-script-computer_14723893.htm#query=python%20code&position=4&from_view=search&track=sph) 在 Freepik 上
 
 编写可读代码的能力被开发者称为一种艺术形式。虽然我部分同意这种说法，但编写代码，尤其是可读代码，是一种可以培养的技能。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 支持
 
 * * *
 
@@ -32,11 +32,11 @@
 
 在打开编辑器并开始编写代码之前，尝试规划一下代码结构。尽可能详细地制定变量、函数、类和模块的结构，并确定它们如何相互连接以解决问题。
 
-这样做会在你实现、扩展和部署代码时节省大量时间。我建议你将这些结构添加到代码文档中，或者如果你计划将代码开源，将其放在GitHub上。
+这样做会在你实现、扩展和部署代码时节省大量时间。我建议你将这些结构添加到代码文档中，或者如果你计划将代码开源，将其放在 GitHub 上。
 
 # 给变量起描述性的名称
 
-我知道我们有时会被诱惑给变量命名为X、Y和Z。但当我们在几个月后阅读代码时，却因为无法确定变量X中到底存储了什么而感到困惑！给变量起具有描述性的名称不仅会帮助其他人阅读代码，还会帮助未来的你。
+我知道我们有时会被诱惑给变量命名为 X、Y 和 Z。但当我们在几个月后阅读代码时，却因为无法确定变量 X 中到底存储了什么而感到困惑！给变量起具有描述性的名称不仅会帮助其他人阅读代码，还会帮助未来的你。
 
 命名变量时，目标是使用准确的名称，而不是简短的名称。例如，如果你计算一个值列表的平均值，不要将变量命名为 ave 或 av；有时使用 average_height 或 average_time。现在，许多代码编辑器提供自动补全功能，因此使用更长的名称不会使你的代码编写过程变慢。
 
@@ -84,18 +84,18 @@
 
 因此，如果你想开始编写更好、更易读的代码，这篇文章将是一个很好的起点。记住，编写更好的代码是一项技能，就像其他技能一样，随着实践会不断提高。
 
-**[Sara Metwalli](https://www.linkedin.com/in/sara-a-metwalli/)** 是庆应大学的博士候选人，研究测试和调试量子电路的方法。我是IBM的研究实习生和Qiskit倡导者，帮助构建一个更加量子的未来。我还是Medium、Built-in、She Can Code和KDN的作家，撰写关于编程、数据科学和技术主题的文章。我也是国际女性编程Python分会的负责人，一个火车爱好者、旅行者和摄影爱好者。
+**[Sara Metwalli](https://www.linkedin.com/in/sara-a-metwalli/)** 是庆应大学的博士候选人，研究测试和调试量子电路的方法。我是 IBM 的研究实习生和 Qiskit 倡导者，帮助构建一个更加量子的未来。我还是 Medium、Built-in、She Can Code 和 KDN 的作家，撰写关于编程、数据科学和技术主题的文章。我也是国际女性编程 Python 分会的负责人，一个火车爱好者、旅行者和摄影爱好者。
 
 ### 更多相关话题
 
 +   [机器学习未能为我的业务创造价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)
 
-+   [ChatGPT代码解释器：几分钟内完成数据科学](https://www.kdnuggets.com/2023/07/chatgpt-code-interpreter-data-science-minutes.html)
++   [ChatGPT 代码解释器：几分钟内完成数据科学](https://www.kdnuggets.com/2023/07/chatgpt-code-interpreter-data-science-minutes.html)
 
-+   [你可以用ChatGPT的代码解释器做数据科学的5种方法](https://www.kdnuggets.com/2023/08/5-ways-chatgpt-code-interpreter-data-science.html)
++   [你可以用 ChatGPT 的代码解释器做数据科学的 5 种方法](https://www.kdnuggets.com/2023/08/5-ways-chatgpt-code-interpreter-data-science.html)
 
 +   [拖拽、放置、分析：无代码数据科学的兴起](https://www.kdnuggets.com/drag-drop-analyze-the-rise-of-nocode-data-science)
 
-+   [作为数据科学家的可重用Python代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
++   [作为数据科学家的可重用 Python 代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
 
 +   [如何作为数据科学家对你的 Python 代码进行注释](https://www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist)

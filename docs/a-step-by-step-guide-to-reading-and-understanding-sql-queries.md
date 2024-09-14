@@ -1,8 +1,8 @@
 # 逐步指南：阅读和理解 SQL 查询
 
-> 原文：[https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)
+> 原文：[`www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries`](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)
 
-![逐步指南：阅读和理解 SQL 查询](../Images/544a9ec01d27f3a9db6a4caadd97b5fa.png)
+![逐步指南：阅读和理解 SQL 查询](img/544a9ec01d27f3a9db6a4caadd97b5fa.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-vector/abstract-technology-sql-illustration_21743439.htm#query=sql%20query&position=0&from_view=search&track=ais&uuid=a7fa0c7e-00e4-42b2-9e13-3ea486e88a3e)
 
@@ -12,11 +12,11 @@ SQL，即结构化查询语言，是一种用于管理和操控关系型数据�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -46,7 +46,7 @@ SQL，即结构化查询语言，是一种用于管理和操控关系型数据�
 
 1.  ***HAVING***：用于聚合函数的过滤条件，不能用***WHERE***指定
 
-这些是标准子句，你在理解一般SQL查询结构时应首先找到它们。让我们使用示例代码进一步学习。
+这些是标准子句，你在理解一般 SQL 查询结构时应首先找到它们。让我们使用示例代码进一步学习。
 
 ```py
 SELECT 
@@ -79,13 +79,13 @@ ORDER BY
 
 1.  按`name`和`product`列进行分组，这些列来自于各自的表（信息来自于**GROUP BY**子句）。
 
-1.  还需根据聚合函数结果的总和过滤，其中`total_price`大于10000（信息来自于***HAVING***子句），
+1.  还需根据聚合函数结果的总和过滤，其中`total_price`大于 10000（信息来自于***HAVING***子句），
 
 1.  根据`total_price`降序排列数据（信息来自于**ORDER BY**子句）。
 
-这是你需要了解和识别的一般SQL查询结构。从这里，我们可以深入探讨更高级的查询。让我们继续下一步。
+这是你需要了解和识别的一般 SQL 查询结构。从这里，我们可以深入探讨更高级的查询。让我们继续下一步。
 
-# 2\. 理解最终的SELECT
+# 2\. 理解最终的 SELECT
 
 有时你会遇到一个复杂的查询，其中包含许多***SELECT***子句。在这种情况下，我们应理解查询的最终结果或你在查询中看到的第一个（最终）***SELECT***。关键是要了解查询输出的期望结果。
 
@@ -135,7 +135,7 @@ ORDER BY
 
 我们对结果有了初步了解，接下来的部分是查看最终***SELECT***的条件。条件子句，包括***WHERE***、***GROUP BY***、***ORDER BY***和***HAVING***，控制了整体数据结果。
 
-尝试阅读和理解我们查询的条件，我们将更好地理解查询的最终结果。例如，在我们之前的SQL查询中，最终条件仅为***ORDER BY***。这意味着最终结果将按总产品价格的降序排列。
+尝试阅读和理解我们查询的条件，我们将更好地理解查询的最终结果。例如，在我们之前的 SQL 查询中，最终条件仅为***ORDER BY***。这意味着最终结果将按总产品价格的降序排列。
 
 了解最终条件将帮助你理解查询的主要部分及整体意图。
 
@@ -188,9 +188,9 @@ WITH customerspending AS (
 
 # 结论
 
-阅读和理解SQL查询是现代社会每个人都应该具备的技能，因为每家公司都在处理SQL查询。通过以下逐步指南，你将更好地理解复杂的SQL查询。这些步骤包括：
+阅读和理解 SQL 查询是现代社会每个人都应该具备的技能，因为每家公司都在处理 SQL 查询。通过以下逐步指南，你将更好地理解复杂的 SQL 查询。这些步骤包括：
 
-1.  理解一般的SQL查询结构
+1.  理解一般的 SQL 查询结构
 
 1.  理解最终选择
 
@@ -200,7 +200,7 @@ WITH customerspending AS (
 
 1.  逆序阅读和重复
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia的同时，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius撰写了各种AI和机器学习主题的文章。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 撰写了各种 AI 和机器学习主题的文章。
 
 ### 更多相关内容
 

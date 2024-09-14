@@ -1,8 +1,8 @@
-# Python中的基础统计学：描述性统计
+# Python 中的基础统计学：描述性统计
 
-> 原文：[https://www.kdnuggets.com/2018/08/basic-statistics-python-descriptive-statistics.html](https://www.kdnuggets.com/2018/08/basic-statistics-python-descriptive-statistics.html)
+> 原文：[`www.kdnuggets.com/2018/08/basic-statistics-python-descriptive-statistics.html`](https://www.kdnuggets.com/2018/08/basic-statistics-python-descriptive-statistics.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Christian Pascual，[Dataquest](https://www.dataquest.io/blog/)**
 
@@ -20,11 +20,11 @@
 
 ### 前提条件：
 
-本文假设没有统计学的先验知识，但需要至少具备一般的Python知识。如果你对[`for`循环](https://www.python-tutorial.net/python-loops/)和[列表](https://www.python-tutorial.net/python-lists/)感到不舒服，我建议在继续之前简要了解这些内容。
+本文假设没有统计学的先验知识，但需要至少具备一般的 Python 知识。如果你对[`for`循环](https://www.python-tutorial.net/python-loops/)和[列表](https://www.python-tutorial.net/python-lists/)感到不舒服，我建议在继续之前简要了解这些内容。
 
 ### 加载我们的数据
 
-我们将把统计学讨论的根基建立在现实世界的数据上，这些数据来自Kaggle的[Wine Reviews](https://www.kaggle.com/zynicide/wine-reviews/data)数据集。数据本身来源于一个抓取程序，该程序扫描了[Wine Enthusiast网站](https://www.winemag.com/)。
+我们将把统计学讨论的根基建立在现实世界的数据上，这些数据来自 Kaggle 的[Wine Reviews](https://www.kaggle.com/zynicide/wine-reviews/data)数据集。数据本身来源于一个抓取程序，该程序扫描了[Wine Enthusiast 网站](https://www.winemag.com/)。
 
 为了这篇文章的目的，假设你是一名正在培训中的侍酒师，还是一名新的品酒师。你发现了一个有趣的葡萄酒数据集，你希望比较和对比不同的葡萄酒。你将使用统计学来描述数据集中的葡萄酒，并为自己得出一些见解。也许我们可以从一组便宜的葡萄酒开始培训，或者从评分最高的葡萄酒开始？
 
@@ -39,12 +39,12 @@ with open("wine-data.csv", "r", encoding="latin-1") as f:
 
 我们简要查看数据表的前五行，以便了解我们正在处理的值类型。
 
-| index | 国家 | 描述 | 指定 | 分数 | 价格 | 省份 | 区域_1 | 区域_2 | 品种 | 酒庄 |
+| index | 国家 | 描述 | 指定 | 分数 | 价格 | 省份 | 区域 _1 | 区域 _2 | 品种 | 酒庄 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0 | 美国 | "这款100%..." | Martha's Vineyard | 96 | 235 | 加利福尼亚 | 纳帕谷 | 纳帕 | 赤霞珠 | Heitz |
+| 0 | 美国 | "这款 100%..." | Martha's Vineyard | 96 | 235 | 加利福尼亚 | 纳帕谷 | 纳帕 | 赤霞珠 | Heitz |
 | 1 | 西班牙 | "成熟的无花果香气..." | Carodorum Selecci Especial Reserva | 96 | 110 | 西北西班牙 | 托罗 |  | Tinta de Toro | Bodega Carmen Rodriguez |
 | 2 | 美国 | "Mac Watson honors... | 特选晚收 | 96 | 90 | 加利福尼亚 | 骑士谷 | 索诺玛 | 长相思 | Macauley |
-| 3 | 美国 | "这款酒陈放了20个月..." | Reserve | 96 | 65 | 俄勒冈 | 威拉米特谷 | 威拉米特谷 | 黑比诺 | Ponzi |
+| 3 | 美国 | "这款酒陈放了 20 个月..." | Reserve | 96 | 65 | 俄勒冈 | 威拉米特谷 | 威拉米特谷 | 黑比诺 | Ponzi |
 | 4 | 法国 | "这是顶级的葡萄酒..." | La Brelade | 95 | 66 | 普罗旺斯 | 邦多尔 |  | 普罗旺斯红葡萄酒混合 | Domaine de la Begude |
 
 ### 统计学究竟是什么？
@@ -81,7 +81,7 @@ with open("wine-data.csv", "r", encoding="latin-1") as f:
 
 这个均值是如何计算的？下面的图片展示了实际的方程式，并将计算组件分解为更简单的术语。
 
-![均值分解](../Images/2fa0611fe33159754bfe584c2390f96e.png)
+![均值分解](img/2fa0611fe33159754bfe584c2390f96e.png)
 
 对于均值来说，数据集的“中间”指的是这个典型值。均值代表*一个典型*的观察值。如果我们随机选择一个观察值，那么很可能得到一个接近均值的值。
 
@@ -114,7 +114,7 @@ avg_score
 
 要找到中位数，我们首先需要将数据集按升序重新排序。然后，中位数是与数据集中的中间部分相一致的值。如果有偶数个项，我们则取“包围”中间的两个值的平均值。
 
-![中位数解释](../Images/e1d2b2fb2197900460cdb176bc1d196c.png)
+![中位数解释](img/e1d2b2fb2197900460cdb176bc1d196c.png)
 
 虽然 Python 的标准库不支持中位数函数，但我们仍然可以使用我们描述的过程来找到中位数。我们来尝试找出葡萄酒价格的中位数值。
 
@@ -211,7 +211,7 @@ print(price_range)
 
 ```
 
-我们发现了一个范围为2296，但这具体是什么意思？当我们查看各种度量时，重要的是要将所有这些信息*放在数据的背景下*。我们的中位数价格为24美元，而范围是2296美元。范围是中位数的两个数量级，因此这表明我们的数据非常分散。也许如果我们有另一个酒的数据集，我们可以比较这两个数据集的范围，从而了解它们的差异。否则，仅凭范围并不太有帮助。
+我们发现了一个范围为 2296，但这具体是什么意思？当我们查看各种度量时，重要的是要将所有这些信息*放在数据的背景下*。我们的中位数价格为 24 美元，而范围是 2296 美元。范围是中位数的两个数量级，因此这表明我们的数据非常分散。也许如果我们有另一个酒的数据集，我们可以比较这两个数据集的范围，从而了解它们的差异。否则，仅凭范围并不太有帮助。
 
 更常见的是，我们希望查看数据与典型值的偏差程度。这个总结属于**标准差**和**方差**的范畴。
 
@@ -219,13 +219,13 @@ print(price_range)
 
 标准差也是观察值分布的一种度量，但它表明了*数据偏离*典型数据点的程度。也就是说，标准差总结了数据与均值的差异。这种与均值的关系在标准差的计算中很明显。
 
-![标准差分解](../Images/504f7ec527b5bac78813e4be2806c75f.png)
+![标准差分解](img/504f7ec527b5bac78813e4be2806c75f.png)
 
 方程的结构值得讨论。回忆一下，均值是通过将所有观察值相加并除以观察值的数量来计算的。标准差方程类似，但试图计算平均*偏差*，还包括一个额外的平方根操作。
 
 你可能会在其他地方看到`n`作为分母而不是`n-1`。这些细节的具体情况超出了本文的范围，但要知道使用`n-1`通常被认为更为准确。有关解释的链接在本文末尾。
 
-我们希望计算标准差以更好地描述我们的酒价格和分数，因此我们将创建一个专门的函数来实现这一点。手动计算数字的累积和很麻烦，但Python的`for`循环使这变得简单。我们正在制作自己的函数，以展示Python使这些统计计算变得容易，但也值得知道`numpy`库在`std`下实现了标准差。
+我们希望计算标准差以更好地描述我们的酒价格和分数，因此我们将创建一个专门的函数来实现这一点。手动计算数字的累积和很麻烦，但 Python 的`for`循环使这变得简单。我们正在制作自己的函数，以展示 Python 使这些统计计算变得容易，但也值得知道`numpy`库在`std`下实现了标准差。
 
 ```py
 def stdev(nums):
@@ -242,7 +242,7 @@ print(stdev(prices))
 
 ```
 
-这些结果是预期的。分数仅在80到100之间，因此我们知道标准差会很小。相比之下，价格数据及其异常值产生了更高的标准差。标准差越大，数据围绕均值的*分布*越广，反之亦然。
+这些结果是预期的。分数仅在 80 到 100 之间，因此我们知道标准差会很小。相比之下，价格数据及其异常值产生了更高的标准差。标准差越大，数据围绕均值的*分布*越广，反之亦然。
 
 我们将看到方差与标准差密切相关。
 
@@ -250,7 +250,7 @@ print(stdev(prices))
 
 通常，标准差和方差被一起提及是有充分理由的。以下是方差的方程式，你觉得它看起来熟悉吗？
 
-![方差方程](../Images/3a28cc06e4aee6c7b5c6cbec03580713.png)
+![方差方程](img/3a28cc06e4aee6c7b5c6cbec03580713.png)
 
 方差和标准差几乎是完全一样的！方差只是标准差的平方。同样，方差和标准差代表了相同的东西——一个分散程度的测量——但值得注意的是它们的单位不同。无论你的数据单位是什么，标准差都会保持不变，而方差的单位则是单位的平方。
 
@@ -288,21 +288,21 @@ print(stdev(prices))
 
 **相关内容：**
 
-+   [描述性统计关键术语解析](/2017/05/descriptive-statistics-key-terms-explained.html)
++   描述性统计关键术语解析
 
-+   [解释正态分布的 68-95-99.7 规则](/2018/07/explaining-68-95-99-7-rule-normal-distribution.html)
++   解释正态分布的 68-95-99.7 规则
 
-+   [为什么数据科学家喜欢高斯分布](/2018/06/why-data-scientists-love-gaussian.html)
++   为什么数据科学家喜欢高斯分布
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 

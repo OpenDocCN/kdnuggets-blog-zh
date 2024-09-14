@@ -1,6 +1,6 @@
 # 拓扑分析与机器学习：朋友还是敌人？
 
-> 原文：[https://www.kdnuggets.com/2015/09/ayasdi-topological-analysis-machine-learning.html](https://www.kdnuggets.com/2015/09/ayasdi-topological-analysis-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2015/09/ayasdi-topological-analysis-machine-learning.html`](https://www.kdnuggets.com/2015/09/ayasdi-topological-analysis-machine-learning.html)
 
 **作者：哈兰·塞克斯顿（Ayasdi）**。
 
@@ -40,25 +40,25 @@ TDA 方法的广泛性比 ML 技术具有额外的优势，即使当 ML 方法�
 
 尽管构建的细节非常有趣和巧妙，但目前并不相关。你只需要记住随机森林的操作方式是：对每个数据点应用一组决策树，并返回一系列“叶节点”（输入“落入”的决策树中的叶子）。
 
-在正常操作中，每棵树中的每个叶子都有一个与之相关联的类别C，这被解释为“当一个数据点到达树中的这个节点时，我知道它极有可能属于类别C。”随机森林通过计算每棵树的“叶节点类别投票”并选择赢家来进行分类。虽然这种方法在广泛的数据类型上非常有效，但也丢失了大量的信息。
+在正常操作中，每棵树中的每个叶子都有一个与之相关联的类别 C，这被解释为“当一个数据点到达树中的这个节点时，我知道它极有可能属于类别 C。”随机森林通过计算每棵树的“叶节点类别投票”并选择赢家来进行分类。虽然这种方法在广泛的数据类型上非常有效，但也丢失了大量的信息。
 
 如果你关心的是数据点类别的最佳猜测，那么你不需要看到那些额外的信息，但有时你需要更多。这些“额外”的信息可以通过定义两个数据点之间的距离为其各自“叶节点”不同的次数来转化为距离函数。
 
-两个数据点之间的距离函数是一个完全有效的度量（实际上，它是数据集变换上的汉明度量），因此我们可以将TDA应用于它。
+两个数据点之间的距离函数是一个完全有效的度量（实际上，它是数据集变换上的汉明度量），因此我们可以将 TDA 应用于它。
 
-例如，我们来看一个随机抽取的5000点样本：
+例如，我们来看一个随机抽取的 5000 点样本：
 
-[https://archive.ics.uci.edu/ml/datasets/Dataset+for+Sensorless+Drive+Diagnosis](https://archive.ics.uci.edu/ml/datasets/Dataset+for+Sensorless+Drive+Diagnosis)
+[`archive.ics.uci.edu/ml/datasets/Dataset+for+Sensorless+Drive+Diagnosis`](https://archive.ics.uci.edu/ml/datasets/Dataset+for+Sensorless+Drive+Diagnosis)
 
-数据集相对复杂，包含48个连续特征，这些特征似乎是硬盘电流信号的未解释测量值。数据还包括一个分类列，有11个可能的值，描述了磁盘驱动组件的不同状态（可能是故障模式？）。一个显而易见的尝试是对特征列应用欧几里得度量，然后通过类别对图表进行着色。由于我们对特征列一无所知，首先要尝试的是邻域透镜。结果是一个没有特征的斑点：
+数据集相对复杂，包含 48 个连续特征，这些特征似乎是硬盘电流信号的未解释测量值。数据还包括一个分类列，有 11 个可能的值，描述了磁盘驱动组件的不同状态（可能是故障模式？）。一个显而易见的尝试是对特征列应用欧几里得度量，然后通过类别对图表进行着色。由于我们对特征列一无所知，首先要尝试的是邻域透镜。结果是一个没有特征的斑点：
 
-![无特征的斑点](../Images/0011e0d722ed99cad66ab7783451ee92.png)
+![无特征的斑点](img/0011e0d722ed99cad66ab7783451ee92.png)
 
 这令人失望。
 
 利用一些内部调试能力，我查看了邻域透镜的散点图，明白了为什么效果如此糟糕——它看起来像一棵圣诞树：
 
-![圣诞树](../Images/f661256f6b0e80f3d605511d7499ab16.png)
+![圣诞树](img/f661256f6b0e80f3d605511d7499ab16.png)
 
 显然，在欧几里得度量下，类别没有局部化。
 
@@ -66,11 +66,11 @@ TDA 方法的广泛性比 ML 技术具有额外的优势，即使当 ML 方法�
 
 所以我尝试使用随机森林赫明度量和该度量的邻域镜头来绘制一个图表：
 
-![带邻域镜头的赫明度量](../Images/1583ae2543637f20acc5c9c6988feb3e.png)
+![带邻域镜头的赫明度量](img/1583ae2543637f20acc5c9c6988feb3e.png)
 
 这看起来非常好。为了确认，我们还查看了邻域镜头的散点图，结果与上图所示一致：
 
-![邻域镜头散点图](../Images/ecef40df087632cf35281e83f9219ba6.png)
+![邻域镜头散点图](img/ecef40df087632cf35281e83f9219ba6.png)
 
 从图表和散点图中明显可以看出，随机森林在分类水平以下“看到”的强结构被 TDA 揭示出来了。原因是随机森林未能有效使用“额外”数据，而 TDA 使用了这些数据并从中受益颇丰。
 
@@ -90,27 +90,27 @@ TDA 方法的广泛性比 ML 技术具有额外的优势，即使当 ML 方法�
 
 **相关：**
 
-+   [世界经济论坛技术先锋与分析获奖者](/2015/08/wef-tech-pioneers-analytics-winners.html)
++   世界经济论坛技术先锋与分析获奖者
 
-+   [机器学习课程。学习构建解决方案，荷兰代尔夫特，11月16-20日](/2015/09/perclass-machine-learning-course-delft-november.html)
++   机器学习课程。学习构建解决方案，荷兰代尔夫特，11 月 16-20 日
 
-+   [大师算法 – 顶级机器学习研究员 Pedro Domingos 的新书](/2015/09/book-master-algorithm-pedro-domingos.html)
++   大师算法 – 顶级机器学习研究员 Pedro Domingos 的新书
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [机器学习的甜蜜点：NLP和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)
++   [机器学习的甜蜜点：NLP 和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)
 
 +   [学习数据科学、机器学习和深度学习的坚实计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 
@@ -118,6 +118,6 @@ TDA 方法的广泛性比 ML 技术具有额外的优势，即使当 ML 方法�
 
 +   [学习数据分析和数据科学的最佳免费资源](https://www.kdnuggets.com/2024/03/365datascience-best-free-resources-learn-data-analysis-data-science)
 
-+   [LangChain与LlamaIndex的比较分析](https://www.kdnuggets.com/comparative-analysis-of-langchain-and-llamaindex)
++   [LangChain 与 LlamaIndex 的比较分析](https://www.kdnuggets.com/comparative-analysis-of-langchain-and-llamaindex)
 
-+   [KDnuggets 新闻，6月29日：20个数据科学基础Linux命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：20 个数据科学基础 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)

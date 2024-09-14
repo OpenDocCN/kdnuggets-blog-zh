@@ -1,6 +1,6 @@
 # 决策树与随机森林的解释
 
-> 原文：[https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)
+> 原文：[`www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html`](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)
 
 # 介绍
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -38,13 +38,13 @@
 
 看一下下面的表格：
 
-![决策树与随机森林的解释](../Images/30839068c44d7adef3ee93bb66180fcf.png)
+![决策树与随机森林的解释](img/30839068c44d7adef3ee93bb66180fcf.png)
 
 这个数据集仅包含四个变量——“Day”、“Temperature”、“Wind”和“Play？”。根据任意一天的温度和风速，结果是二元的——要么出去玩，要么待在家里。
 
 让我们使用这些数据来构建一个决策树：
 
-![决策树与随机森林的解释](../Images/3d32f94954dd9e6333a894782b060c9a.png)
+![决策树与随机森林的解释](img/3d32f94954dd9e6333a894782b060c9a.png)
 
 上面的示例虽然简单，但准确地概括了决策树如何在不同的数据点上拆分，直到获得结果。
 
@@ -62,19 +62,19 @@
 
 ### 熵
 
-熵是一个衡量决策树中分裂不纯度的指标。它决定了决策树如何选择划分数据。熵值范围从0到1。0的值表示纯净的分裂，1的值表示不纯的分裂。
+熵是一个衡量决策树中分裂不纯度的指标。它决定了决策树如何选择划分数据。熵值范围从 0 到 1。0 的值表示纯净的分裂，1 的值表示不纯的分裂。
 
 在上面的决策树中，回顾一下树在温度极端时已经停止分裂：
 
-![决策树与随机森林的解释](../Images/b47e25071ea03307a5e5fcacbf4525fd.png)
+![决策树与随机森林的解释](img/b47e25071ea03307a5e5fcacbf4525fd.png)
 
-这是因为当温度极端时，“是否玩？”的结果总是“否”。这意味着我们有一个纯净的分裂，100%的数据点属于一个单一类别。这个分裂的熵值为0，决策树将在这个节点停止分裂。
+这是因为当温度极端时，“是否玩？”的结果总是“否”。这意味着我们有一个纯净的分裂，100%的数据点属于一个单一类别。这个分裂的熵值为 0，决策树将在这个节点停止分裂。
 
 决策树总是选择**最低熵**的特征作为第一个节点。
 
 在这种情况下，由于“温度”变量的熵值低于“风速”，因此这是树的第一个分裂。
 
-观看[这个](https://www.youtube.com/watch?v=1IQOtJ4NI_0)YouTube视频，了解更多关于如何计算熵及其在决策树中使用的内容。
+观看[这个](https://www.youtube.com/watch?v=1IQOtJ4NI_0)YouTube 视频，了解更多关于如何计算熵及其在决策树中使用的内容。
 
 ### 信息增益
 
@@ -84,11 +84,11 @@
 
 最佳的树是信息增益最高的树。
 
-如果你想了解更多关于如何计算信息增益并利用它来构建最佳决策树的内容，你可以观看[这个](https://www.youtube.com/watch?v=FuTRucXB9rA)YouTube视频。
+如果你想了解更多关于如何计算信息增益并利用它来构建最佳决策树的内容，你可以观看[这个](https://www.youtube.com/watch?v=FuTRucXB9rA)YouTube 视频。
 
 ## 决策树的组成部分：
 
-![决策树与随机森林的解释](../Images/97538c4659bdec844d102b9fc636cc74.png)
+![决策树与随机森林的解释](img/97538c4659bdec844d102b9fc636cc74.png)
 
 1.  根节点：根节点位于决策树的顶部，是数据集开始划分的变量。根节点是为我们提供最佳数据分裂的特征。
 
@@ -136,7 +136,7 @@ Bagging 是一种用于减少机器学习模型方差的过程。它通过对一
 
 然后，创建多棵决策树，每棵树在不同的数据样本上进行训练：
 
-![决策树与随机森林，解释](../Images/586e5360990898829b981920a41c3645.png)
+![决策树与随机森林，解释](img/586e5360990898829b981920a41c3645.png)
 
 请注意，以上的训练数据集创建了三个 bootstrap 样本。随机森林算法在 bagging 的基础上进一步随机抽取特征，因此每棵树只使用部分变量进行构建。
 
@@ -148,7 +148,7 @@ Bagging 是一种用于减少机器学习模型方差的过程。它通过对一
 
 在分类问题中，会做出一个多数类预测：
 
-![决策树与随机森林，解释](../Images/6a2800f970f006e6206a7a4e57de325f.png)
+![决策树与随机森林，解释](img/6a2800f970f006e6206a7a4e57de325f.png)
 
 在回归问题中，所有决策树的预测结果会被平均，得出一个单一值。
 
@@ -174,7 +174,7 @@ Bagging 是一种用于减少机器学习模型方差的过程。它通过对一
 
 ### 了解更多此主题
 
-+   [集成学习技术：Python中随机森林的操作指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
++   [集成学习技术：Python 中随机森林的操作指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 
 +   [从零开始的机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)
 

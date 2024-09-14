@@ -1,6 +1,6 @@
 # 人类向量：融合说话者嵌入，使您的机器人更强大
 
-> 原文：[https://www.kdnuggets.com/2016/09/human-vector-incorporate-speaker-embedding-powerful-bot.html](https://www.kdnuggets.com/2016/09/human-vector-incorporate-speaker-embedding-powerful-bot.html)
+> 原文：[`www.kdnuggets.com/2016/09/human-vector-incorporate-speaker-embedding-powerful-bot.html`](https://www.kdnuggets.com/2016/09/human-vector-incorporate-speaker-embedding-powerful-bot.html)
 
 **由 Megan Barnes, Init.ai 提供**。
 
@@ -12,45 +12,45 @@
 
 考虑一下来自“A Persona-Based Neural Conversation Model”的这些示例对话：
 
-![对话](../Images/94dae495e56dfa4cee3d60c042d4aab4.png)
+![对话](img/94dae495e56dfa4cee3d60c042d4aab4.png)
 
 *(Li et al. 1)*
 
 这里的问题在于我们对世界的知识使得这明显违反了质量准则（意指：*说实话*）。一个人不能同时生活在两个不同的地方或拥有两个不同的年龄。这意味着我们至少能理解到某些回答是不真实的。可以想象，一个熟练的英语使用者可能会故意做出这些完全相同的陈述，并在过程中产生一种含义。例如，在上面的最后一次交流中，回答者可能在开玩笑关于心理学专业所需的阅读量。是否真的有趣则是一个品味问题。与机器人不同的是，我们不期望看到幽默。我们很清楚不一致的回答是无意的，这使得沟通变得困难。
 
-不一致回应的具体问题是语言建模的内在问题，因为数据驱动的系统旨在生成最有可能的回应，而不考虑回应的来源。在输出空间中进行搜索时，模型根据最可能的单词序列来推断另一个序列。在上述研究中，基线模型是一个[LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory) [递归神经网络](https://en.wikipedia.org/wiki/Recurrent_neural_network)，这是一种在对话AI中常见的架构。它使用softmax函数在可能的输出上创建概率分布，并选择序列中最可能的下一个单词，无论训练数据中是谁生成的。人类发言者期望与他们交谈的机器人保持一致的*角色*，而当前技术忽视了这一点。
+不一致回应的具体问题是语言建模的内在问题，因为数据驱动的系统旨在生成最有可能的回应，而不考虑回应的来源。在输出空间中进行搜索时，模型根据最可能的单词序列来推断另一个序列。在上述研究中，基线模型是一个[LSTM](https://en.wikipedia.org/wiki/Long_short-term_memory) [递归神经网络](https://en.wikipedia.org/wiki/Recurrent_neural_network)，这是一种在对话 AI 中常见的架构。它使用 softmax 函数在可能的输出上创建概率分布，并选择序列中最可能的下一个单词，无论训练数据中是谁生成的。人类发言者期望与他们交谈的机器人保持一致的*角色*，而当前技术忽视了这一点。
 
 李等人将人物角色描述为“由身份元素（背景事实或用户档案）、语言行为和互动风格的组合”（1）。一个人物角色基于生成部分训练数据的真实个体，并由一个向量，即发言者嵌入，表示。他们随机初始化发言者嵌入，并在训练过程中学习这些嵌入。
 
-一个基本的LSTM可以用如下图形表示：
+一个基本的 LSTM 可以用如下图形表示：
 
-![LSTM](../Images/b44585ca405a53250dbcf2f1ed82428c.png)
+![LSTM](img/b44585ca405a53250dbcf2f1ed82428c.png)
 
 *(Kevin Gimpel 2016)*
 
 其中*x*表示序列中的词嵌入，*c*表示隐藏层，*h*表示模型的输出，所有这些在时间*t*。彩色矩形表示门，用于转换输入向量。该模型也可以用下面的函数表示（其中*e*代替*x*表示词嵌入），*i, f, o*和*l*代表上面的多色门。
 
-![函数](../Images/8c9e44a5c7ed41cbe9deef854076a128.png)
+![函数](img/8c9e44a5c7ed41cbe9deef854076a128.png)
 
 *(李等人 2)*
 
 在李等人称之为发言者模型的研究中，他们将模型注入了发言者嵌入向量**v**，如下面的表示所示。
 
-![发言者模型](../Images/9ded39e322a6918352d451b1f9d46a5f.png)
+![发言者模型](img/9ded39e322a6918352d451b1f9d46a5f.png)
 
 *(李等人 3)*
 
-这将发言者*i*的信息添加到序列的每一个时间步中。这相当于在LSTM图形模型的隐藏层中添加一个*v*输入节点，标记为蓝色门。将发言者嵌入融入LSTM模型中提高了其性能，降低了困惑度，并在大多数研究人员检查的数据集中提高了BLEU分数。
+这将发言者*i*的信息添加到序列的每一个时间步中。这相当于在 LSTM 图形模型的隐藏层中添加一个*v*输入节点，标记为蓝色门。将发言者嵌入融入 LSTM 模型中提高了其性能，降低了困惑度，并在大多数研究人员检查的数据集中提高了 BLEU 分数。
 
 研究人员还指出，一个单一的角色应该是可适应的。一个人不会用相同的方式称呼他们的老板和他们的小弟弟。因此，他们还决定尝试他们称之为发言者-受话者模型的方案。该模型用发言者对嵌入**V**替代了发言者嵌入，其形式如下。发言者对嵌入旨在建模特定个体之间的互动。
 
-![说话者对嵌入](../Images/66669ef94794363104aecd1254650a47.png)
+![说话者对嵌入](img/66669ef94794363104aecd1254650a47.png)
 
 *(李等，4)*
 
 说话者-听众模型取得了类似的成功。这是一个特别有趣的结果，说明说话者-听众模型在使用电影对话数据进行训练时生成的（参考了《老友记》和《生活大爆炸》中的角色关系）：
 
-![训练结果](../Images/1c90b6e88115928a13bdb98055e7ef42.png)
+![训练结果](img/1c90b6e88115928a13bdb98055e7ef42.png)
 
 *(李等，8)*
 
@@ -64,21 +64,21 @@
 
 **相关:**
 
-+   [聊天机器人深度学习，第2部分——在 TensorFlow 中实现检索型模型](/2016/07/deep-learning-chatbots-part-2.html)
++   聊天机器人深度学习，第二部分——在 TensorFlow 中实现检索型模型
 
-+   [构建数据驱动对话系统的可用语料库调查](/2016/07/survey-available-corpora-building-data-driven-dialog-systems.html)
++   构建数据驱动对话系统的可用语料库调查
 
-+   [人工智能‘聊天机器人’——何时或是否？](/2016/05/ai-chatbots-when-if.html)
++   人工智能‘聊天机器人’——何时或是否？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

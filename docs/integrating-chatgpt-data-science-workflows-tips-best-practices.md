@@ -1,44 +1,44 @@
-# 将ChatGPT集成到数据科学工作流程中：技巧和最佳实践
+# 将 ChatGPT 集成到数据科学工作流程中：技巧和最佳实践
 
-> 原文：[https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
+> 原文：[`www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html`](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-![将ChatGPT集成到数据科学工作流程中：技巧和最佳实践](../Images/9d58c8db0a764cd3249d8b8781f59879.png)
+![将 ChatGPT 集成到数据科学工作流程中：技巧和最佳实践](img/9d58c8db0a764cd3249d8b8781f59879.png)
 
 作者提供的图片
 
-ChatGPT、其继任者GPT-4以及它们的开源替代品都取得了极大的成功。开发者和数据科学家都希望提高生产力，并利用ChatGPT简化日常任务。
+ChatGPT、其继任者 GPT-4 以及它们的开源替代品都取得了极大的成功。开发者和数据科学家都希望提高生产力，并利用 ChatGPT 简化日常任务。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-在这里，我们将通过与ChatGPT的配对编程会话来探讨如何使用ChatGPT进行数据科学。我们将建立一个文本分类模型，视觉化数据集，确定模型的最佳超参数，尝试不同的机器学习算法等——一切都使用ChatGPT。
+在这里，我们将通过与 ChatGPT 的配对编程会话来探讨如何使用 ChatGPT 进行数据科学。我们将建立一个文本分类模型，视觉化数据集，确定模型的最佳超参数，尝试不同的机器学习算法等——一切都使用 ChatGPT。
 
-在过程中，我们还将查看一些结构化提示以获得有用结果的技巧。要跟随这个过程，你需要一个[免费的OpenAI账户](https://platform.openai.com/signup)。如果你是GPT-4用户，你也可以使用相同的提示进行跟随。
+在过程中，我们还将查看一些结构化提示以获得有用结果的技巧。要跟随这个过程，你需要一个[免费的 OpenAI 账户](https://platform.openai.com/signup)。如果你是 GPT-4 用户，你也可以使用相同的提示进行跟随。
 
 # 更快地建立一个可用模型
 
-让我们尝试使用ChatGPT为[scikit-learn中的20个新闻组数据集](https://scikit-learn.org/0.19/datasets/twenty_newsgroups.html)建立一个新闻分类模型。
+让我们尝试使用 ChatGPT 为[scikit-learn 中的 20 个新闻组数据集](https://scikit-learn.org/0.19/datasets/twenty_newsgroups.html)建立一个新闻分类模型。
 
-这是我使用的提示：“我想用sklearn的20个新闻组数据集建立一个新闻分类模型。你知道这个吗？”
+这是我使用的提示：“我想用 sklearn 的 20 个新闻组数据集建立一个新闻分类模型。你知道这个吗？”
 
 尽管我的提示目前还不够具体，但我已经说明了目标和数据集：
 
 +   目标：建立一个新的分类模型
 
-+   使用的数据集：来自scikit-learn的20个新闻组数据集
++   使用的数据集：来自 scikit-learn 的 20 个新闻组数据集
 
-ChatGPT的回应告诉我们要从加载数据集开始。
+ChatGPT 的回应告诉我们要从加载数据集开始。
 
-![将ChatGPT集成到数据科学工作流程中：技巧和最佳实践](../Images/fe589027959bf38fd8e2b786904466df.png)
+![将 ChatGPT 集成到数据科学工作流程中：技巧和最佳实践](img/fe589027959bf38fd8e2b786904466df.png)
 
 ```py
 # Load the dataset
@@ -46,15 +46,15 @@ newsgroups_train = fetch_20newsgroups(subset='train', shuffle=True)
 newsgroups_test = fetch_20newsgroups(subset='test', shuffle=True)
 ```
 
-既然我们已经明确了目标（建立一个文本分类模型），ChatGPT告诉我们如何去做。
+既然我们已经明确了目标（建立一个文本分类模型），ChatGPT 告诉我们如何去做。
 
 我们看到它给出了以下步骤：
 
-+   使用`TfidfVectorizer`进行文本预处理并生成数值表示。这种使用TF-IDF分数的方法优于使用`CountVectorizer`的计数方式。
++   使用`TfidfVectorizer`进行文本预处理并生成数值表示。这种使用 TF-IDF 分数的方法优于使用`CountVectorizer`的计数方式。
 
 +   在数据集的数字表示上创建分类模型，使用朴素贝叶斯或支持向量机（SVM）分类器。
 
-![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](../Images/6381240f3c3b1ef6ad8c9df7d3ca05ec.png)
+![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](img/6381240f3c3b1ef6ad8c9df7d3ca05ec.png)
 
 它还提供了一个多项式朴素贝叶斯分类器的代码，所以让我们使用它，看看是否能得到一个有效的模型。
 
@@ -121,11 +121,11 @@ weighted avg       0.83      0.82      0.81      7532
 
 好的，我们已经建立了一个文本分类模型。但这个过程发生得非常快，所以让我们慢下来，尝试简单地可视化数据集。
 
-尤其是，让我们尝试理解训练样本在20个新闻类别中的分布，并确定是否存在类别不平衡的情况。
+尤其是，让我们尝试理解训练样本在 20 个新闻类别中的分布，并确定是否存在类别不平衡的情况。
 
 这是我使用的提示：“我想可视化数据集，以理解类别分布并识别类别不平衡。你能帮我做可视化吗？”
 
-![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](../Images/0f69ed03327d1d0935b9f4c776a938ed.png)
+![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](img/0f69ed03327d1d0935b9f4c776a938ed.png)
 
 ChatGPT 建议用每个类别的样本数量的条形图或直方图作为良好的可视化方式。这听起来很合理。
 
@@ -155,11 +155,11 @@ plt.title('Class Distribution')
 plt.show()
 ```
 
-这是绘图结果。很整洁，标签可读。我们还可以看到20个类别中的每一个样本数量。
+这是绘图结果。很整洁，标签可读。我们还可以看到 20 个类别中的每一个样本数量。
 
-![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](../Images/64aac09d69178b9420d6ae2c272c0eb3.png)
+![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](img/64aac09d69178b9420d6ae2c272c0eb3.png)
 
-训练样本在20个类别中的分布大致均匀，没有明显的类别不平衡。因此，我们在前一步获得的模型是有用的。我们不需要使用任何新颖的[重新采样技术来解决类别不平衡问题](/2017/06/7-techniques-handle-imbalanced-data.html)。
+训练样本在 20 个类别中的分布大致均匀，没有明显的类别不平衡。因此，我们在前一步获得的模型是有用的。我们不需要使用任何新颖的重新采样技术来解决类别不平衡问题。
 
 # 超参数调优
 
@@ -167,7 +167,7 @@ plt.show()
 
 这是提示：“有没有我可以调整的超参数来使分类器模型更好？”
 
-![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](../Images/24f903dd343dc379d6b56bec873e8025.png)
+![将 ChatGPT 集成到数据科学工作流程中：提示和最佳实践](img/24f903dd343dc379d6b56bec873e8025.png)
 
 在我们得到的代码中，`TfidfVectorizer` 的 `max_df` 也是可调的。我们知道 TF-IDF 评分通过为频繁出现的术语分配更高的权重，同时为在所有文档中频繁出现的术语分配大大更低的权重来工作。`max_df` 使用出现的百分比来忽略某个特定术语。
 
@@ -219,7 +219,7 @@ Cross-validation score:  0.9088736147919108
 
 我使用的提示是：“你能告诉我是否可以使用 SVM 解决相同的问题吗？你能生成解决此问题的代码吗？”
 
-![将 ChatGPT 集成到数据科学工作流中：技巧和最佳实践](../Images/fee2b969c5c5ace7108f1600dad9c26e.png)
+![将 ChatGPT 集成到数据科学工作流中：技巧和最佳实践](img/fee2b969c5c5ace7108f1600dad9c26e.png)
 
 下面开始：
 
@@ -273,7 +273,7 @@ Output >> Accuracy: 0.9019001325673884
 
 我使用的提示是：“你能告诉我可以为这个数据集使用哪些降维技术吗？”
 
-![将 ChatGPT 集成到数据科学工作流中：技巧和最佳实践](../Images/a799070b573b4cd8a9f0fe38de1982b4.png)
+![将 ChatGPT 集成到数据科学工作流中：技巧和最佳实践](img/a799070b573b4cd8a9f0fe38de1982b4.png)
 
 ChatGPT 提出了以下技术建议：
 

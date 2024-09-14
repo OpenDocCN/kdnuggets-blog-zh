@@ -1,8 +1,8 @@
 # 免费数据管理与数据科学学习 CS639
 
-> 原文：[https://www.kdnuggets.com/2023/01/free-data-management-data-science-learning-cs639.html](https://www.kdnuggets.com/2023/01/free-data-management-data-science-learning-cs639.html)
+> 原文：[`www.kdnuggets.com/2023/01/free-data-management-data-science-learning-cs639.html`](https://www.kdnuggets.com/2023/01/free-data-management-data-science-learning-cs639.html)
 
-![免费数据管理与数据科学学习 CS639](../Images/834ded1680c17fa68d62508cd9d56511.png)
+![免费数据管理与数据科学学习 CS639](img/834ded1680c17fa68d62508cd9d56511.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -124,7 +124,7 @@
 
 结构化的课程总是对你的学习有帮助。借助威斯康星大学的这些资源，你将能够获得结构化的课程以及大学级别的资源——完全免费！
 
-如果你想了解更多关于成为数据科学家的信息，我建议阅读：[完整的数据科学学习路线图](/2022/08/complete-data-science-study-roadmap.html)
+如果你想了解更多关于成为数据科学家的信息，我建议阅读：完整的数据科学学习路线图
 
 **[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术作家。她特别感兴趣于提供数据科学职业建议或教程，并围绕数据科学进行理论知识的讲解。她还希望探索人工智能在延续人类生命方面的不同益处。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 

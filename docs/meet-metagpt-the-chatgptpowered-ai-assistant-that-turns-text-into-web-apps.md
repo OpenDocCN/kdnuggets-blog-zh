@@ -1,8 +1,8 @@
 # 认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用
 
-> 原文：[https://www.kdnuggets.com/meet-metagpt-the-chatgptpowered-ai-assistant-that-turns-text-into-web-apps](https://www.kdnuggets.com/meet-metagpt-the-chatgptpowered-ai-assistant-that-turns-text-into-web-apps)
+> 原文：[`www.kdnuggets.com/meet-metagpt-the-chatgptpowered-ai-assistant-that-turns-text-into-web-apps`](https://www.kdnuggets.com/meet-metagpt-the-chatgptpowered-ai-assistant-that-turns-text-into-web-apps)
 
-![认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用](../Images/bf261f70f1994aa99ae10733bb450b11.png)
+![认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用](img/bf261f70f1994aa99ae10733bb450b11.png)
 
 图片由作者提供
 
@@ -10,7 +10,7 @@
 
 当 ChatGPT 去年首次发布时，它对我的日常生活来说简直是天赐之物。我用它来更快地学习数据科学概念，编写编程教程，创建数据可视化，甚至起草电子邮件。
 
-[GPT-4](/2023/03/automate-boring-stuff-chatgpt-python.html) 和 [代码解释器](https://www.youtube.com/watch?v=pVPp4ldOzJU) 的发布让我大开眼界，并为我的工作流程带来了无与伦比的效率提升。
+GPT-4 和 [代码解释器](https://www.youtube.com/watch?v=pVPp4ldOzJU) 的发布让我大开眼界，并为我的工作流程带来了无与伦比的效率提升。
 
 就在我以为情况再也不会更好时，我发现了一个更具突破性的东西：MetaGPT。
 
@@ -34,7 +34,7 @@
 
 要访问 MetaGPT，请导航到 [Pico](https://picoapps.xyz/gpt-builder) 网站并创建一个免费账户。然后你将看到一个类似这样的界面：
 
-![认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用](../Images/846c1ef16fb4b4a22a9ce6e23fd46ae0.png)
+![认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用](img/846c1ef16fb4b4a22a9ce6e23fd46ae0.png)
 
 你可以在文本框中输入任何应用程序想法，然后选择“创建”。
 
@@ -50,7 +50,7 @@ Build me a ChatGPT-powered app that…
 
 在将这个提示输入到 MetaGPT 并点击“创建”后，将会出现以下界面：
 
-![认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用](../Images/b83711066d78d0e16ddb9a9d5c8c5371.png)
+![认识 MetaGPT：由 ChatGPT 提供支持的 AI 助手，将文本转换为 Web 应用](img/b83711066d78d0e16ddb9a9d5c8c5371.png)
 
 ## 步骤 3：向 MetaGPT 输入用户详细信息
 
@@ -58,7 +58,7 @@ Build me a ChatGPT-powered app that…
 
 它还根据我们输入的提示提出了一些 AI 生成的建议：
 
-![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](../Images/7b47da0de244375972e390dc25d43582.png)
+![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](img/7b47da0de244375972e390dc25d43582.png)
 
 我决定使用第三个提示 - 让我们构建一个基于用户解决问题的方法预测其个性类型的应用程序。
 
@@ -68,13 +68,13 @@ MetaGPT 还允许你创建一个定制的 ChatGPT 提示，让你指定你希望
 
 你还可以选择一种美学（你希望应用程序的外观），甚至可以输入你的网站链接，这将被包含在应用程序的底部。
 
-![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](../Images/82b98fb9e53f9f964f137f53edc0faed.png)
+![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](img/82b98fb9e53f9f964f137f53edc0faed.png)
 
 现在，让我们点击“构建我的应用程序”来看看 MetaGPT 会生成什么。
 
 仅需几秒钟，MetaGPT 就会生成一个符合我们要求的应用程序：
 
-![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](../Images/75529f2411031b747fc4a02442004ec7.png)
+![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](img/75529f2411031b747fc4a02442004ec7.png)
 
 在屏幕的右侧是工具生成的应用程序的视觉表示。你可以在左侧调整应用程序的界面，通过输入提示来指定你希望反映的任何设计更改。
 
@@ -86,7 +86,7 @@ MetaGPT 还允许你创建一个定制的 ChatGPT 提示，让你指定你希望
 
 你可以点击“编辑代码”按钮，这让你查看并修改界面中的代码：
 
-![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](../Images/0fc140fd0a35ede26acf8b7aaf545638.png)
+![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](img/0fc140fd0a35ede26acf8b7aaf545638.png)
 
 ## 第六步：分享你的 MetaGPT Web 应用程序
 
@@ -98,7 +98,7 @@ MetaGPT 还允许你创建一个定制的 ChatGPT 提示，让你指定你希望
 
 这是我的结果：
 
-![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](../Images/fa23961693dd04482af040e03237a3f9.png)
+![认识 MetaGPT：将文本转换为 Web 应用程序的 ChatGPT 驱动的 AI 助手](img/fa23961693dd04482af040e03237a3f9.png)
 
 这个应用程序几乎准确地猜测了我的个性类型！我是一名 INFP，它将我的类型辨识为 INFJ，这相当接近。
 

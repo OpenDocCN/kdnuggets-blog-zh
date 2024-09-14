@@ -1,12 +1,12 @@
-# 游戏中的前8大数据科学应用案例
+# 游戏中的前 8 大数据科学应用案例
 
-> 原文：[https://www.kdnuggets.com/2019/04/top-8-data-science-use-cases-gaming.html](https://www.kdnuggets.com/2019/04/top-8-data-science-use-cases-gaming.html)
+> 原文：[`www.kdnuggets.com/2019/04/top-8-data-science-use-cases-gaming.html`](https://www.kdnuggets.com/2019/04/top-8-data-science-use-cases-gaming.html)
 
-[评论](#comments)
+评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-现在，游戏行业正处于上升期。全球有超过 [20亿玩家](https://newzoo.com/insights/articles/newzoos-2018-report-insights-into-the-137-9-billion-global-games-market/)，游戏行业成为了巨额收入的资源，这些收入预计将继续增长。随着用户数量的增加，待处理的数据量也在扩大。用户的游戏时间、互动时间、退出点、活动高峰、结果、得分等都为分析提供了丰富的素材。
+现在，游戏行业正处于上升期。全球有超过 [20 亿玩家](https://newzoo.com/insights/articles/newzoos-2018-report-insights-into-the-137-9-billion-global-games-market/)，游戏行业成为了巨额收入的资源，这些收入预计将继续增长。随着用户数量的增加，待处理的数据量也在扩大。用户的游戏时间、互动时间、退出点、活动高峰、结果、得分等都为分析提供了丰富的素材。
 
 对于游戏优化和改进的数据价值的理解使专家们寻找将数据科学及其收益应用于游戏业务的新方法。因此，出现了各种具体的数据科学应用案例。以下是我们列出的在游戏中最有效和广泛应用的数据科学用例。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 ### 游戏货币化
 
-![游戏货币化 ](../Images/aa662e85e22169b82e1145b17d2a342a.png)
+![游戏货币化 ](img/aa662e85e22169b82e1145b17d2a342a.png)
 
 游戏货币化是收入总体增长的一个重要因素。开发一款设计良好、吸引人且受欢迎的游戏需要大量的时间、金钱和资源。因此，公司的主要目标是使这款游戏对他们有利可图。在这方面，存在三种主要的视频游戏订阅模型：付费游戏、免费游戏和增值游戏。无论如何，大数据分析工具将帮助你确保你的游戏对你是有利可图的。
 
@@ -52,7 +52,7 @@
 
 在视频游戏开发过程中，发明了大量的计算机图形技术。现代技术的兴起也促使了用于创建游戏视觉效果的机制的巨大进步。其中包括游戏中的动作捕捉、实时渲染、摄影测量技术等。
 
-![视觉效果和图形](../Images/c90fd8928b81bfa61215dade418ce5a9.png)
+![视觉效果和图形](img/c90fd8928b81bfa61215dade418ce5a9.png)
 
 例如，动作捕捉技术可以创建具有更多人性特征和特点的角色。它有助于更自然地渲染情感、面部表情和动作。
 
@@ -70,7 +70,7 @@
 
 各种玩家验证解决方案在游戏中得到了广泛应用。实际上，游戏开发者有法律义务使用玩家验证。此外，各种验证技术可以在早期阶段检测到可疑账户和活动。此外，这些技术还用于防止在虚拟游戏世界中相当普遍的身份盗用。
 
-![欺诈检测](../Images/ad758ec6cffefcb8f64beca6dca5f80a.png)
+![欺诈检测](img/ad758ec6cffefcb8f64beca6dca5f80a.png)
 
 支付欺诈在游戏中也相当常见。欺诈者往往会创建特殊的机器人来获取支付所需的信息。因此，游戏公司需要确保玩家个人信息和交易的高水平安全。
 
@@ -88,28 +88,28 @@
 
 数据科学已经进入各个行业，并永远改善了它们的运作原则。它将各种业务带到了一个 qualitatively 新的发展水平。游戏行业也不例外。此外，数据科学技术和方法已成为游戏开发、设计、运营及其许多其他功能阶段的不可或缺的一部分。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专业领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）以及数据密集型 Web 应用开发（RESTful API、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专业领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）以及数据密集型 Web 应用开发（RESTful API、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/top-8-data-science-use-cases-in-gaming/)。转载授权。
 
 **相关：**
 
-+   [旅游行业数据科学的前7个应用案例](/2019/02/top-7-data-science-use-cases-travel.html)
++   旅游行业数据科学的前 7 个应用案例
 
-+   [制造业数据科学的前8个应用案例](/2019/03/top-8-data-science-use-cases-manufacturing.html)
++   制造业数据科学的前 8 个应用案例
 
-+   [电信行业数据科学的前10个应用案例](/2019/02/top-10-data-science-use-cases-telecom.html)
++   电信行业数据科学的前 10 个应用案例
 
 ### 更多相关主题
 
 +   [企业中的机器学习：应用案例与挑战](https://www.kdnuggets.com/2022/08/dss-machine-learning-enterprise-cases-challenges.html)
 
-+   [NoSQL数据库及其使用案例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
++   [NoSQL 数据库及其使用案例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
-+   [DALLE-3的5个应用案例](https://www.kdnuggets.com/5-use-cases-of-dalle-3)
++   [DALLE-3 的 5 个应用案例](https://www.kdnuggets.com/5-use-cases-of-dalle-3)
 
-+   [AI和LLM使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
++   [AI 和 LLM 使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 
-+   [为什么TinyML案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
++   [为什么 TinyML 案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

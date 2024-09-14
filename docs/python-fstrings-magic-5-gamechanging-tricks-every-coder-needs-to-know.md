@@ -1,8 +1,8 @@
 # Python f-Strings 魔法：每个编码人员都需要知道的 5 个改变游戏规则的技巧
 
-> 原文：[https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
+> 原文：[`www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know`](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
 
-![Python f-Strings 魔法：每个编码人员都需要知道的 5 个改变游戏规则的技巧](../Images/ceb44b82bcbd901b125f1a00424a8c94.png)
+![Python f-Strings 魔法：每个编码人员都需要知道的 5 个改变游戏规则的技巧](img/ceb44b82bcbd901b125f1a00424a8c94.png)
 
 编辑器提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -165,7 +165,7 @@ Repr of 3D Point: Point3D(x=0.5, y=2.5, z=1.5)
 
 不需要硬编码提示字符串，你可以使用 f-strings 创建 *可重用且可组合的提示模板*。然后你可以根据需要插入变量、问题或上下文。
 
-如果你使用像 [LangChain](/2023/04/langchain-101-build-gptpowered-applications.html) 这样的框架，你可以使用该框架的 [PromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates) 功能。但即使没有，你仍然可以使用基于 f-string 的提示模板。
+如果你使用像 LangChain 这样的框架，你可以使用该框架的 [PromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates) 功能。但即使没有，你仍然可以使用基于 f-string 的提示模板。
 
 提示可以简单到：
 
@@ -244,20 +244,20 @@ Query: Can you recommend some good restaurants in Paris?
 
 # 总结
 
-就这样。我希望你能发现一些可以添加到你的程序员工具箱中的 Python f-string 特性。如果你有兴趣学习 Python，可以查看我们编纂的 [5 本免费书籍助你掌握 Python](/5-free-books-to-help-you-master-python)。祝学习愉快！
+就这样。我希望你能发现一些可以添加到你的程序员工具箱中的 Python f-string 特性。如果你有兴趣学习 Python，可以查看我们编纂的 5 本免费书籍助你掌握 Python。祝学习愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她致力于通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala还创建了有趣的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她致力于通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala 还创建了有趣的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [每位程序员都应该知道的11个Python魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
++   [每位程序员都应该知道的 11 个 Python 魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
 
 +   [每位数据科学家需要的软技能](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
 
-+   [2024年每位数据科学家需要的5项核心技能](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
++   [2024 年每位数据科学家需要的 5 项核心技能](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
 
-+   [未来证明你的数据游戏：2023年每位数据科学家需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来证明你的数据游戏：2023 年每位数据科学家需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [2024年每位数据科学家工具箱中需要的5个工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
++   [2024 年每位数据科学家工具箱中需要的 5 个工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
 
-+   [免费电子书：10个实用的Python编程技巧](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)
++   [免费电子书：10 个实用的 Python 编程技巧](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)

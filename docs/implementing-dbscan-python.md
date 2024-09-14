@@ -1,8 +1,8 @@
-# 在Python中实现DBSCAN
+# 在 Python 中实现 DBSCAN
 
-> 原文：[https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)
+> 原文：[`www.kdnuggets.com/2022/08/implementing-dbscan-python.html`](https://www.kdnuggets.com/2022/08/implementing-dbscan-python.html)
 
-![在Python中实现DBSCAN](../Images/94e0605a1cccd911b0460aa70cfec065.png)
+![在 Python 中实现 DBSCAN](img/94e0605a1cccd911b0460aa70cfec065.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -36,25 +36,25 @@
 
 +   基于密度的聚类
 
-在这篇博客中，我们将重点关注基于密度的聚类方法，特别是使用scikit-learn的DBSCAN算法。基于密度的算法擅长发现高密度区域和离群点。它通常用于异常检测和聚类非线性数据集。
+在这篇博客中，我们将重点关注基于密度的聚类方法，特别是使用 scikit-learn 的 DBSCAN 算法。基于密度的算法擅长发现高密度区域和离群点。它通常用于异常检测和聚类非线性数据集。
 
-# 什么是DBSCAN？
+# 什么是 DBSCAN？
 
-DBSCAN（基于密度的空间聚类算法，带噪声）是一种基于密度的无监督学习算法。它计算最近邻图以找到任意形状的簇和离群点。而K-means聚类生成的是球形簇。
+DBSCAN（基于密度的空间聚类算法，带噪声）是一种基于密度的无监督学习算法。它计算最近邻图以找到任意形状的簇和离群点。而 K-means 聚类生成的是球形簇。
 
-DBSCAN最初不需要**K**个簇。相反，它需要两个参数：eps和minPts。
+DBSCAN 最初不需要**K**个簇。相反，它需要两个参数：eps 和 minPts。
 
-+   **eps**：这是特定邻域的半径。如果两个点之间的距离小于或等于eps，它们将被视为邻居。
++   **eps**：这是特定邻域的半径。如果两个点之间的距离小于或等于 eps，它们将被视为邻居。
 
 +   **minPts**：在给定邻域中形成簇所需的最小数据点数量。
 
-DBSCAN使用这两个参数来定义核心点、边界点或离群点。
+DBSCAN 使用这两个参数来定义核心点、边界点或离群点。
 
-![在Python中实现DBSCAN](../Images/c1396de7ad158c30211a70ba97a24097.png)
+![在 Python 中实现 DBSCAN](img/c1396de7ad158c30211a70ba97a24097.png)
 
 图片来自 [维基百科](https://en.wikipedia.org/wiki/DBSCAN)
 
-## DBSCAN聚类算法是如何工作的？
+## DBSCAN 聚类算法是如何工作的？
 
 1.  随机选择任何点**p**。如果在邻域中有比**minPts**更多的数据点，它也被称为**核心点**。
 
@@ -103,7 +103,7 @@ DBSCAN_dataset.loc[:,'Cluster'] = clustering.labels_ 
 DBSCAN_dataset.Cluster.value_counts().to_frame()
 ```
 
-![在 Python 中实现 DBSCAN](../Images/58594769218df7713ab39c8bf07c978a.png)
+![在 Python 中实现 DBSCAN](img/58594769218df7713ab39c8bf07c978a.png)
 
 在本节中，我们将使用上述信息并可视化散点图。
 
@@ -140,7 +140,7 @@ plt.setp(axes[1].get_legend().get_texts(), fontsize='12')
 plt.show()
 ```
 
-![在 Python 中实现 DBSCAN](../Images/36c5e6e22fd005e1a3979bcc807d0eca.png)
+![在 Python 中实现 DBSCAN](img/36c5e6e22fd005e1a3979bcc807d0eca.png)
 
 # 结论
 
@@ -162,7 +162,7 @@ DBSCAN 是用于客户细分的众多算法之一。你可以使用 K-means 或�
 
 ### 了解更多主题
 
-+   [KDnuggets 新闻，8月24日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)
++   [KDnuggets 新闻，8 月 24 日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)
 
 +   [机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)
 

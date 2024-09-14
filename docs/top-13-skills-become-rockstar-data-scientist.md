@@ -1,32 +1,32 @@
-# 成为顶级数据科学家的13项技能
+# 成为顶级数据科学家的 13 项技能
 
-> 原文：[https://www.kdnuggets.com/2019/07/top-13-skills-become-rockstar-data-scientist.html](https://www.kdnuggets.com/2019/07/top-13-skills-become-rockstar-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2019/07/top-13-skills-become-rockstar-data-scientist.html`](https://www.kdnuggets.com/2019/07/top-13-skills-become-rockstar-data-scientist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Admond Lee](https://www.linkedin.com/in/admond1994/)，Micron Technology / AI Time Journal / Tech in Asia**
 
-![](../Images/4350ebac66cdd140573bd854a54e101f.png)
+![](img/4350ebac66cdd140573bd854a54e101f.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
-一周前，我在[LinkedIn上提出了这个问题](https://www.linkedin.com/feed/update/urn:li:activity:6531492123240431616?source=post_page---------------------------)：
+一周前，我在[LinkedIn 上提出了这个问题](https://www.linkedin.com/feed/update/urn:li:activity:6531492123240431616?source=post_page---------------------------)：
 
 > 什么使得一个优秀的数据科学家与顶级数据科学家不同？
 
-![Figure](../Images/115124c3b68a129b473cc98940549c12.png)
+![Figure](img/115124c3b68a129b473cc98940549c12.png)
 
-[LinkedIn上的问题](http://what/%20separates%20a%20good%20data%20scientist%20from%20a%20rockstar%20data%20scientist?source=post_page---------------------------)
+[LinkedIn 上的问题](http://what/%20separates%20a%20good%20data%20scientist%20from%20a%20rockstar%20data%20scientist?source=post_page---------------------------)
 
 出乎意料的是，我收到了来自不同领域的许多顶级数据科学家的大量反馈，他们分享了他们的想法和建议——我发现这些内容非常有趣且实用。
 
@@ -124,7 +124,7 @@ Apache Spark 使数据科学家能够防止数据丢失。Apache Spark 的优势
 
 最近你一定在各处见到过这个短语，尤其是与数据科学家相关。Frank Lo 在他几个月前发布的客座博客中描述了它的含义，并讨论了其他必要的“软技能”。
 
-好奇心可以被定义为获取更多知识的愿望。作为数据科学家，你需要能够提出关于数据的问题，因为数据科学家花费约80%的时间来发现和准备数据。这是因为数据科学领域发展迅速，你必须学习更多以跟上步伐。
+好奇心可以被定义为获取更多知识的愿望。作为数据科学家，你需要能够提出关于数据的问题，因为数据科学家花费约 80%的时间来发现和准备数据。这是因为数据科学领域发展迅速，你必须学习更多以跟上步伐。
 
 你需要通过在线阅读内容和阅读有关数据科学趋势的相关书籍来定期更新你的知识。不要被互联网飞速流动的大量数据压倒，你必须知道如何理解这些数据。好奇心是你作为数据科学家成功所需的技能之一。例如，最初你可能看不到你所收集的数据中的许多见解。好奇心将使你能够筛选数据以找到答案和更多见解。
 
@@ -150,7 +150,7 @@ Apache Spark 使数据科学家能够防止数据丢失。Apache Spark 的优势
 
 ### 最终想法
 
-![图示](../Images/04e186a3bc3b74fd87659593f0253edf.png)
+![图示](img/04e186a3bc3b74fd87659593f0253edf.png)
 
 [(来源)](https://unsplash.com/photos/bH7kZ0yazB0?source=post_page---------------------------)
 
@@ -170,11 +170,11 @@ Apache Spark 使数据科学家能够防止数据丢失。Apache Spark 的优势
 
 **相关内容：**
 
-+   [你应该关注的10位数据科学领袖](/2019/07/top-10-data-science-leaders.html)
++   你应该关注的 10 位数据科学领袖
 
-+   [如何进入数据科学领域：为有志数据科学家提供的终极问答指南](/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html)
++   如何进入数据科学领域：为有志数据科学家提供的终极问答指南
 
-+   [简单却实用的数据清理代码](/2019/02/simple-yet-practical-data-cleaning-codes.html)
++   简单却实用的数据清理代码
 
 ### 相关主题
 
@@ -182,10 +182,10 @@ Apache Spark 使数据科学家能够防止数据丢失。Apache Spark 的优势
 
 +   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

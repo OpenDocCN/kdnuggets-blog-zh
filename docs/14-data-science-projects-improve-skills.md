@@ -1,10 +1,10 @@
 # 14 个数据科学项目以提升你的技能
 
-> 原文：[https://www.kdnuggets.com/2020/12/14-data-science-projects-improve-skills.html](https://www.kdnuggets.com/2020/12/14-data-science-projects-improve-skills.html)
+> 原文：[`www.kdnuggets.com/2020/12/14-data-science-projects-improve-skills.html`](https://www.kdnuggets.com/2020/12/14-data-science-projects-improve-skills.html)
 
-[评论](#comments)
+评论
 
-![](../Images/c0446a6b11324e1ea21f3bf5f9e26764.png)
+![](img/c0446a6b11324e1ea21f3bf5f9e26764.png)
 
 *照片由 [Austin Distel](https://unsplash.com/@austindistel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，拍摄于 [Unsplash](https://unsplash.com/s/photos/projects?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -54,15 +54,15 @@
 
 数据集链接 [在这里](https://www.kaggle.com/carlosparadis/fires-from-space-australia-and-new-zeland)。
 
-![](../Images/966be4545b1c478a1f74203c3e218071.png)
+![](img/966be4545b1c478a1f74203c3e218071.png)
 
 *摘自 Vox。*
 
-2019–2020年丛林火灾季节，也称为“黑色夏天”，包括从2019年6月开始的几次极端火灾。火灾烧毁了约1860万公顷的土地和超过5900栋建筑，[根据维基百科](https://en.wikipedia.org/wiki/2019%E2%80%9320_Australian_bushfire_season)。
+2019–2020 年丛林火灾季节，也称为“黑色夏天”，包括从 2019 年 6 月开始的几次极端火灾。火灾烧毁了约 1860 万公顷的土地和超过 5900 栋建筑，[根据维基百科](https://en.wikipedia.org/wiki/2019%E2%80%9320_Australian_bushfire_season)。
 
-这将是一个有趣的项目！利用你的数据可视化技能，使用Plotly或Matplotlib展示火灾的规模和地理影响。
+这将是一个有趣的项目！利用你的数据可视化技能，使用 Plotly 或 Matplotlib 展示火灾的规模和地理影响。
 
-*看看我的朋友Jack如何预测巴西的火灾模式*[*在这里*](https://www.obviously.ai/post/predicting-brazils-wildfire-patterns-in-2020)*！*
+*看看我的朋友 Jack 如何预测巴西的火灾模式*[*在这里*](https://www.obviously.ai/post/predicting-brazils-wildfire-patterns-in-2020)*！*
 
 +   **地球表面温度可视化**
 
@@ -70,7 +70,7 @@
 
 数据集链接 [在这里](https://www.kaggle.com/berkeleyearth/climate-change-earth-surface-temperature-data/kernels)。
 
-![](../Images/a04975fedd0a795fa64add890c91bb9c.png)
+![](img/a04975fedd0a795fa64add890c91bb9c.png)
 
 *照片来源于 [William Bossen](https://unsplash.com/@william_bossen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) ，来自 [Unsplash](https://unsplash.com/s/photos/climate-change?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -82,19 +82,19 @@
 
 探索性数据分析（EDA），也称为数据探索，是数据分析过程中的一个步骤，其中使用多种技术来更好地理解所使用的数据集。
 
-*如果你想了解更多关于EDA的内容，可以查看我的指南*[*在这里*](https://towardsdatascience.com/an-extensive-guide-to-exploratory-data-analysis-ddd99a03199e)*！*
+*如果你想了解更多关于 EDA 的内容，可以查看我的指南*[*在这里*](https://towardsdatascience.com/an-extensive-guide-to-exploratory-data-analysis-ddd99a03199e)*！*
 
-+   **纽约Airbnb数据探索**
++   **纽约 Airbnb 数据探索**
 
 难度：中等
 
 数据集链接 [在这里](https://www.kaggle.com/dgomonov/new-york-city-airbnb-open-data)。
 
-![](../Images/17c3fbb64348ff80b9c12213afb0afdd.png)
+![](img/17c3fbb64348ff80b9c12213afb0afdd.png)
 
 *照片来源于 [Oliver Niblett](https://unsplash.com/@ojnibl?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) ，来自 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-自2008年以来，客人和主持人利用Airbnb扩展旅行可能性，并提供更多个性化的世界体验方式。该数据集包含有关2019年纽约列表及其地理信息、价格、评论数量等信息。
+自 2008 年以来，客人和主持人利用 Airbnb 扩展旅行可能性，并提供更多个性化的世界体验方式。该数据集包含有关 2019 年纽约列表及其地理信息、价格、评论数量等信息。
 
 你可以尝试回答的一些问题如下：
 
@@ -110,7 +110,7 @@
 
 数据集链接 [在这里](https://www.kaggle.com/pavansubhasht/ibm-hr-analytics-attrition-dataset)。
 
-![](../Images/e7da4d61880c012bc6784768229cc284.png)
+![](img/e7da4d61880c012bc6784768229cc284.png)
 
 *照片由 [Campaign Creators](https://unsplash.com/@campaign_creators?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，发布于 [Unsplash](https://unsplash.com/s/photos/employees?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -124,7 +124,7 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 数据集链接 [这里](https://www.kaggle.com/mylesoneill/world-university-rankings)。
 
-![](../Images/6c46b6bc2ee36ac7797897f3a3214dde.png)
+![](img/6c46b6bc2ee36ac7797897f3a3214dde.png)
 
 *照片由 [Vasily Koloda](https://unsplash.com/@napr0tiv?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，发布于 [Unsplash](https://unsplash.com/s/photos/university?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -140,7 +140,7 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 数据集链接 [这里](https://www.kaggle.com/uciml/student-alcohol-consumption)。
 
-![](../Images/f4c17b77a1c26a176bb2b53a3ba585c2.png)
+![](img/f4c17b77a1c26a176bb2b53a3ba585c2.png)
 
 *照片由 [Kevin Kelly](https://unsplash.com/@shootervision?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，发布于 [Unsplash](https://unsplash.com/s/photos/alcohol?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -154,11 +154,11 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 数据集链接 [这里](https://www.kaggle.com/rounakbanik/pokemon)。
 
-![](../Images/1f5684071213547be51feb86ede67877.png)
+![](img/1f5684071213547be51feb86ede67877.png)
 
 *摘自 Pokemon.com。*
 
-对于所有的玩家，这里有一个数据集，包含了所有七代宝可梦的802种信息。你可以尝试回答以下几个问题！
+对于所有的玩家，这里有一个数据集，包含了所有七代宝可梦的 802 种信息。你可以尝试回答以下几个问题！
 
 +   哪一代的宝可梦最强？哪一代的最弱？
 
@@ -180,7 +180,7 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 1.  最初选择的各种预测因素是否确实影响了寿命期望？实际影响寿命期望的预测变量是什么？
 
-1.  一个寿命期望值较低的国家（<65岁）是否应该增加医疗支出以提高其平均寿命？
+1.  一个寿命期望值较低的国家（<65 岁）是否应该增加医疗支出以提高其平均寿命？
 
 1.  婴儿和成人死亡率如何影响寿命期望？
 
@@ -204,11 +204,11 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 数据集链接 [这里](https://www.kaggle.com/robikscube/hourly-energy-consumption)。
 
-![](../Images/9271679674e7033c6b96c90cc7578ee8.png)
+![](img/9271679674e7033c6b96c90cc7578ee8.png)
 
 *照片由 [Matthew Henry](https://unsplash.com/@matthewhenry?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/energy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-该数据集由PJM网站的电力消耗数据组成。PJM是美国的一个区域传输组织。利用这个数据集，看看你是否能构建一个时间序列模型来预测能源消耗。此外，还可以看看是否能发现有关一天中小时、节假日能源使用和长期趋势的规律！
+该数据集由 PJM 网站的电力消耗数据组成。PJM 是美国的一个区域传输组织。利用这个数据集，看看你是否能构建一个时间序列模型来预测能源消耗。此外，还可以看看是否能发现有关一天中小时、节假日能源使用和长期趋势的规律！
 
 +   **贷款预测预测**
 
@@ -216,11 +216,11 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 数据集链接 [这里](https://datahack.analyticsvidhya.com/contest/practice-problem-loan-prediction-iii/)。
 
-![](../Images/905b8826937be058c936dc45a7b060df.png)
+![](img/905b8826937be058c936dc45a7b060df.png)
 
 *照片由 [Dmitry Demidko](https://unsplash.com/@wildbook?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/bank?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-取自Analytics Vidhya，该数据集包含615行和13列关于过去贷款是否被批准的数据。看看你是否能创建一个预测贷款是否会获得批准的模型。
+取自 Analytics Vidhya，该数据集包含 615 行和 13 列关于过去贷款是否被批准的数据。看看你是否能创建一个预测贷款是否会获得批准的模型。
 
 +   **二手车价格估算器**
 
@@ -228,7 +228,7 @@ IBM 创建了一个合成数据集，你可以用来了解各种因素如何影�
 
 数据集链接 [这里](https://www.kaggle.com/austinreese/craigslist-carstrucks-data)。
 
-![](../Images/cf8e230cbdee8b0c7e996aca82d9586b.png)
+![](img/cf8e230cbdee8b0c7e996aca82d9586b.png)
 
 *图片来源于 [Parker Gibbs](https://unsplash.com/@parkergibbsmccullough?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) ，发布于 [Unsplash](https://unsplash.com/s/photos/used-car?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -242,7 +242,7 @@ Craigslist 是全球最大的二手车销售平台。该数据集由从 Craigsli
 
 数据集链接 [这里](https://www.kaggle.com/janiobachmann/credit-fraud-dealing-with-imbalanced-datasets)。
 
-![](../Images/1af787809257df113cbf5d5db4dfcb29.png)
+![](img/1af787809257df113cbf5d5db4dfcb29.png)
 
 *图片来源于 [rupixen.com](https://unsplash.com/@rupixen?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) ，发布于 [Unsplash](https://unsplash.com/s/photos/credit-card?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -254,7 +254,7 @@ Craigslist 是全球最大的二手车销售平台。该数据集由从 Craigsli
 
 数据集链接 [这里](https://www.kaggle.com/kmader/skin-cancer-mnist-ham10000)。
 
-![](../Images/327bd63cfd869fa40df4b5be5c76d9b2.png)
+![](img/327bd63cfd869fa40df4b5be5c76d9b2.png)
 
 *图片来源于 [Allie Smith](https://unsplash.com/@creativegangsters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) ，发布于 [Unsplash](https://unsplash.com/s/photos/cancer?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 

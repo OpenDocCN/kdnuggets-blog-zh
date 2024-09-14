@@ -1,8 +1,8 @@
 # 25 个 Pandas 技巧
 
-> 原文：[https://www.kdnuggets.com/2019/08/25-tricks-pandas.html](https://www.kdnuggets.com/2019/08/25-tricks-pandas.html)
+> 原文：[`www.kdnuggets.com/2019/08/25-tricks-pandas.html`](https://www.kdnuggets.com/2019/08/25-tricks-pandas.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 上周，[Kevin Markham](https://www.linkedin.com/in/justmarkham/) ([@justmarkham](https://twitter.com/justmarkham)) 在 [DataSchool.io](https://www.dataschool.io/) 发布了一个实用的视频和一个配套的 [Jupyter 笔记本](https://nbviewer.jupyter.org/github/justmarkham/pandas-videos/blob/master/top_25_pandas_tricks.ipynb)，标题为“我最喜欢的 25 个 Pandas 技巧”。我认为这些技巧足够实用，值得与我们的读者分享。
 
@@ -72,19 +72,19 @@
 
 +   [如何使用 [ ]、.loc、iloc、.at 和 .iat 选择 Pandas 中的行和列](/2019/06/select-rows-columns-pandas.html)
 
-+   [掌握 Python 机器学习数据准备的 7 个步骤 — 2019 版](/2019/06/7-steps-mastering-data-preparation-python.html)
++   掌握 Python 机器学习数据准备的 7 个步骤 — 2019 版
 
-+   [10 个简单的技巧加速 Python 数据分析](/2019/07/10-simple-hacks-speed-data-analysis-python.html)
++   10 个简单的技巧加速 Python 数据分析
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

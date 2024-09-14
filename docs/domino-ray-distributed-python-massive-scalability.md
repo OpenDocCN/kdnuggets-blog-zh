@@ -1,12 +1,12 @@
 # 评估 Ray：用于大规模可扩展性的分布式 Python
 
-> 原文：[https://www.kdnuggets.com/2020/03/domino-ray-distributed-python-massive-scalability.html](https://www.kdnuggets.com/2020/03/domino-ray-distributed-python-massive-scalability.html)
+> 原文：[`www.kdnuggets.com/2020/03/domino-ray-distributed-python-massive-scalability.html`](https://www.kdnuggets.com/2020/03/domino-ray-distributed-python-massive-scalability.html)
 
 **作者 [Dean Wampler](https://twitter.com/deanwampler)，Domino Data Lab**
 
-![图](../Images/c0247476e8e4562f2562f6155f97b3c2.png)
+![图](img/c0247476e8e4562f2562f6155f97b3c2.png)
 
-*[Dean](mailto:dean@anyscale.io) [Wampler](https://twitter.com/deanwampler) 提供了 Ray 的精华概述，这是一个将 Python 系统从单台机器扩展到大型集群的开源系统。如果你对更多见解感兴趣，请注册参加即将举行的 [Ray 峰会](https://events.linuxfoundation.org/ray-summit/)。*
+*Dean [Wampler](https://twitter.com/deanwampler) 提供了 Ray 的精华概述，这是一个将 Python 系统从单台机器扩展到大型集群的开源系统。如果你对更多见解感兴趣，请注册参加即将举行的 [Ray 峰会](https://events.linuxfoundation.org/ray-summit/)。*
 
 ### 介绍
 
@@ -142,7 +142,7 @@ from ray.experimental.multiprocessing.pool import Pool
 
 我们已经看到 Ray 的抽象和功能使它成为一个易于使用的工具，同时提供强大的分布式计算和状态管理能力。尽管 Ray 的设计受到高性能、高要求 ML/AI 应用程序的特定需求的驱动，但它具有广泛的适用性，甚至提供了一种新的方法来处理基于微服务的架构。
 
-我希望你发现这简短的 Ray 介绍很有趣。请 **试一试** 并告诉我你的想法！发送至： [dean@anyscale.io](mailto:dean@anyscale.io)
+我希望你发现这简短的 Ray 介绍很有趣。请 **试一试** 并告诉我你的想法！发送至： dean@anyscale.io
 
 ### 了解更多
 
@@ -178,36 +178,36 @@ from ray.experimental.multiprocessing.pool import Pool
 
 +   若需更多技术细节：
 
-    +   一篇[详细描述Ray系统的研究论文](https://arxiv.org/abs/1712.05889)
+    +   一篇[详细描述 Ray 系统的研究论文](https://arxiv.org/abs/1712.05889)
 
-    +   一篇[描述Ray内部灵活原语用于深度学习的研究论文](https://pdfs.semanticscholar.org/0e8f/5cd8d8dbbe4a55427e90ed35977e238b1eed.pdf?_ga=2.179761508.1978760042.1576357334-1293756462.1576357334)
+    +   一篇[描述 Ray 内部灵活原语用于深度学习的研究论文](https://pdfs.semanticscholar.org/0e8f/5cd8d8dbbe4a55427e90ed35977e238b1eed.pdf?_ga=2.179761508.1978760042.1576357334-1293756462.1576357334)
 
-    +   [使用Ray的快速序列化](https://ray-project.github.io/2017/10/15/fast-python-serialization-with-ray-and-arrow.html) 和 [Apache Arrow](https://arrow.apache.org/)
+    +   [使用 Ray 的快速序列化](https://ray-project.github.io/2017/10/15/fast-python-serialization-with-ray-and-arrow.html) 和 [Apache Arrow](https://arrow.apache.org/)
 
-[最初发布在Domino数据科学博客上](https://blog.dominodatalab.com/evaluating-ray-distributed-python-for-massive-scalability/)
+[最初发布在 Domino 数据科学博客上](https://blog.dominodatalab.com/evaluating-ray-distributed-python-for-massive-scalability/)
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关话题
 
-+   [超越准确性：使用NLP测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
++   [超越准确性：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
 
 +   [评估文档相似性计算方法](https://www.kdnuggets.com/evaluating-methods-for-calculating-document-similarity)
 
 +   [数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 
-+   [KDnuggets™ 新闻 22:n07, 2月16日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07, 2 月 16 日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)
 
-+   [优化LLM的性能和可扩展性](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)
++   [优化 LLM 的性能和可扩展性](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)
 
-+   [优化Python代码性能：深入探讨Python分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
++   [优化 Python 代码性能：深入探讨 Python 分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)

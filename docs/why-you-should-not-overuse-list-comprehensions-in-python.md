@@ -1,8 +1,8 @@
 # 为什么你不应该过度使用 Python 列表推导式
 
-> 原文：[https://www.kdnuggets.com/why-you-should-not-overuse-list-comprehensions-in-python](https://www.kdnuggets.com/why-you-should-not-overuse-list-comprehensions-in-python)
+> 原文：[`www.kdnuggets.com/why-you-should-not-overuse-list-comprehensions-in-python`](https://www.kdnuggets.com/why-you-should-not-overuse-list-comprehensions-in-python)
 
-![你的 KDnuggets 文章 - 为什么你不应该过度使用 Python 列表推导式](../Images/5a6da7b859053098d6de4393508555c8.png)
+![你的 KDnuggets 文章 - 为什么你不应该过度使用 Python 列表推导式](img/5a6da7b859053098d6de4393508555c8.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -160,7 +160,7 @@ Output >>>
 
 +   按降序排列的质数
 
-![您的 KDnuggets 文章 - 为什么你不应该过度使用 Python 中的列表推导](../Images/66942d59b73e757393b55ffbce7f7163.png)
+![您的 KDnuggets 文章 - 为什么你不应该过度使用 Python 中的列表推导](img/66942d59b73e757393b55ffbce7f7163.png)
 
 图片来源：作者
 
@@ -288,7 +288,7 @@ Output >>>
  'sorted_primes': [7, 5, 3, 2]}
 ```
 
-**更好的版本是否足够好？** 虽然这对像本示例中的小矩阵有效，但返回静态列表通常不推荐。对于更大的维度，可以使用 [生成器](/2023/02/getting-started-python-generators.html)。
+**更好的版本是否足够好？** 虽然这对像本示例中的小矩阵有效，但返回静态列表通常不推荐。对于更大的维度，可以使用 生成器。
 
 # 示例 3：解析嵌套 JSON 字符串
 

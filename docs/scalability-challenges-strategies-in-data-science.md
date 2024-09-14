@@ -1,8 +1,8 @@
 # 数据科学中的可扩展性挑战与策略
 
-> 原文：[https://www.kdnuggets.com/scalability-challenges-strategies-in-data-science](https://www.kdnuggets.com/scalability-challenges-strategies-in-data-science)
+> 原文：[`www.kdnuggets.com/scalability-challenges-strategies-in-data-science`](https://www.kdnuggets.com/scalability-challenges-strategies-in-data-science)
 
-![数据科学中的可扩展性挑战与策略](../Images/b2b148c0118a2a34fe2d9554b0c3316d.png)
+![数据科学中的可扩展性挑战与策略](img/b2b148c0118a2a34fe2d9554b0c3316d.png)
 
 图片由编辑 | Midjourney
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -32,7 +32,7 @@
 
 #### 模型训练
 
-使用大数据训练机器学习模型需要大量的资源和时间。复杂的算法需要强大的计算机来处理大规模的数据集。高性能硬件如GPU和TPU可以加速训练。高效的数据处理管道对于快速训练至关重要。分布式计算框架有助于分担工作负载。适当的资源分配可以减少训练时间并提高准确性。
+使用大数据训练机器学习模型需要大量的资源和时间。复杂的算法需要强大的计算机来处理大规模的数据集。高性能硬件如 GPU 和 TPU 可以加速训练。高效的数据处理管道对于快速训练至关重要。分布式计算框架有助于分担工作负载。适当的资源分配可以减少训练时间并提高准确性。
 
 #### 资源管理
 
@@ -153,7 +153,7 @@ Kubernetes 是一个用于管理容器应用的开源工具。它自动化了容
 
 #### 云计算
 
-云计算平台，如AWS、Google Cloud Platform（GCP）和Microsoft Azure，提供可扩展的数据存储、处理和分析基础设施。这些平台提供灵活性。它们允许组织根据需要扩展或缩减资源。云服务比本地解决方案便宜，提供了高效管理数据的工具。
+云计算平台，如 AWS、Google Cloud Platform（GCP）和 Microsoft Azure，提供可扩展的数据存储、处理和分析基础设施。这些平台提供灵活性。它们允许组织根据需要扩展或缩减资源。云服务比本地解决方案便宜，提供了高效管理数据的工具。
 
 #### 数据安全
 
@@ -167,9 +167,9 @@ Kubernetes 是一个用于管理容器应用的开源工具。它自动化了容
 
 ### 更多相关话题
 
-+   [优化你的LLM以提高性能和可扩展性](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)
++   [优化你的 LLM 以提高性能和可扩展性](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)
 
-+   [5个数据管理挑战及解决方案](https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html)
++   [5 个数据管理挑战及解决方案](https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html)
 
 +   [克服现实世界中数据不平衡挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
 

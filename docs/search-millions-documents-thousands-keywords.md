@@ -1,22 +1,22 @@
 # 迅速搜索数百万文档中的数千个关键词
 
-> 原文：[https://www.kdnuggets.com/2017/09/search-millions-documents-thousands-keywords.html](https://www.kdnuggets.com/2017/09/search-millions-documents-thousands-keywords.html)
+> 原文：[`www.kdnuggets.com/2017/09/search-millions-documents-thousands-keywords.html`](https://www.kdnuggets.com/2017/09/search-millions-documents-thousands-keywords.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **由 [Vikash Singh](https://medium.com/@vi3k6i5), Belong.co**。
 
-![](../Images/5241db5938fde65ba36e10d1a424d7e7.png)
+![](img/5241db5938fde65ba36e10d1a424d7e7.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -93,7 +93,7 @@ for document in documents:
 
 事实证明，Aho Corasick 算法可以在对文档的一次扫描中同时搜索所有关键词。这真是太棒了。
 
-[https://youtu.be/NQ8GeVCEgBs](https://youtu.be/NQ8GeVCEgBs)
+[`youtu.be/NQ8GeVCEgBs`](https://youtu.be/NQ8GeVCEgBs)
 
 在示例输入上的 flashtext 演示。
 
@@ -122,7 +122,7 @@ Input: I live in New Delhi.
 Output: I live in NCR region.
 ```
 
-我们能够在多个项目中利用这个库。这也是我们决定将其**开源**的原因。这里是代码的链接 :) [https://github.com/vi3k6i5/flashtext](https://github.com/vi3k6i5/flashtext)
+我们能够在多个项目中利用这个库。这也是我们决定将其**开源**的原因。这里是代码的链接 :) [`github.com/vi3k6i5/flashtext`](https://github.com/vi3k6i5/flashtext)
 
 使用起来非常简单：*[Python 代码即将发布]*
 
@@ -161,7 +161,7 @@ $ pip install flashtext
 
 * * *
 
-如果你认识从事实体识别或NER或NLP或Word2vec的人，请将这篇博客分享给他们。这一库对我们在这些领域非常有用。我相信它对其他人也会有帮助。
+如果你认识从事实体识别或 NER 或 NLP 或 Word2vec 的人，请将这篇博客分享给他们。这一库对我们在这些领域非常有用。我相信它对其他人也会有帮助。
 
 干杯 :)
 
@@ -171,11 +171,11 @@ $ pip install flashtext
 
 **相关：**
 
-+   [Python 超越 R，成为数据科学和机器学习平台的领导者](/2017/08/python-overtakes-r-leader-analytics-data-science.html)
++   Python 超越 R，成为数据科学和机器学习平台的领导者
 
-+   [5 个免费的自然语言处理深度学习入门资源](/2017/07/5-free-resources-getting-started-deep-learning-nlp.html)
++   5 个免费的自然语言处理深度学习入门资源
 
-+   [文本挖掘101：从简历中挖掘信息](/2017/05/text-mining-information-resume.html)
++   文本挖掘 101：从简历中挖掘信息
 
 ### 更多相关主题
 

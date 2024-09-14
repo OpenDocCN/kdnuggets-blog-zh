@@ -1,8 +1,8 @@
 # 探索数据网格：数据架构的范式转变
 
-> 原文：[https://www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture](https://www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture)
+> 原文：[`www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture`](https://www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture)
 
-![探索数据网格：数据架构的范式转变](../Images/f064a23b0dd95840d93f01c2ebf5402b.png)
+![探索数据网格：数据架构的范式转变](img/f064a23b0dd95840d93f01c2ebf5402b.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@
 
 数据网格架构建立在一系列旨在解决数据在组织内及跨组织扩展和管理挑战的原则上。这些原则为去中心化和更具可扩展性的数据管理方法提供了基础。
 
-![探索数据网格：数据架构的范式转变](../Images/73cd75e5c791c64df93758b0c2cf3567.png)
+![探索数据网格：数据架构的范式转变](img/73cd75e5c791c64df93758b0c2cf3567.png)
 
 图片来源：作者
 
@@ -162,11 +162,11 @@
 
 +   [数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
 
 +   [数据网格架构：重新构想数据管理](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)
 
-+   [KDnuggets 新闻，5月18日：5 个免费机器学习平台…](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费机器学习平台…](https://www.kdnuggets.com/2022/n20.html)
 
 +   [思想图谱：大型语言模型中的一种新范式用于复杂问题解决](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)
 

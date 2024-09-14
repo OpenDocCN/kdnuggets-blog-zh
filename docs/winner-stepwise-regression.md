@@ -1,10 +1,10 @@
 # 胜者是…逐步回归
 
-> 原文：[https://www.kdnuggets.com/2016/08/winner-stepwise-regression.html](https://www.kdnuggets.com/2016/08/winner-stepwise-regression.html)
+> 原文：[`www.kdnuggets.com/2016/08/winner-stepwise-regression.html`](https://www.kdnuggets.com/2016/08/winner-stepwise-regression.html)
 
 **作者：Jacob Zahavi 和 Ronen Meiri，DMWay Analytics。**
 
-> **编者注**：这篇博客文章曾参与最近的 KDnuggets 自动化数据科学和机器学习 [博客比赛](/2016/06/kdnuggets-blog-contest-automated-data-science.html)，并获得了荣誉提名。
+> **编者注**：这篇博客文章曾参与最近的 KDnuggets 自动化数据科学和机器学习 博客比赛，并获得了荣誉提名。
 
 预测分析（PA），数据科学的核心领域之一，致力于基于已知响应值的过去观察来预测未来响应。在这个大数据时代，PA 模型面临的主要问题是维度问题，这使得模型构建过程变得非常繁琐和耗时。
 
@@ -22,47 +22,47 @@
 
 为了便于评估，我们将所有四个模型（SWR、SA、PCA 和 RBF）的增益图叠加在一起，对应于上述数据文件（图 1-3）。每个增益图对应于模型类别中各自模型的最佳参数配置。表 1 展示了相关的总结统计数据。所有增益图，以及相关的 Gini 和 M-L 指标，都展示在验证数据集中。
 
-[![图 1](../Images/19a7ebefa3ad4de1a08e55782282edbe.png)](https://i.imgur.com/oL50BQY.jpg)
+![图 1](https://i.imgur.com/oL50BQY.jpg)
 
 *图 1：非营利文件（点击放大）*
 
-[![图 2](../Images/7951b75f834b098bcd50a4ca56890d05.png)](https://i.imgur.com/EVhdpln.jpg)
+![图 2](https://i.imgur.com/EVhdpln.jpg)
 
 *图 2：专业文件（点击放大）*
 
-[![图 3](../Images/5436582b7ef9e8a8342ef68123abf1db.png)](https://i.imgur.com/AWALALm.jpg)
+![图 3](https://i.imgur.com/AWALALm.jpg)
 
 *图 3：礼品文件（点击放大）*
 
-[![表 1](../Images/d3628fb225578190887d4a95306c53e8.png)](https://i.imgur.com/zTgzgrY.jpg)
+![表 1](https://i.imgur.com/zTgzgrY.jpg)
 
 *表 1：模型比较（点击放大）*
 
 令人惊讶的是，著名的 SWR 模型与被认为更强大的 SA 模型产生了相似的结果。我们将这些结果归因于市场上人们的理性行为，这在数据库中反映出来，产生了“行为良好”的数据集，数据元素之间没有复杂的关系。因此，即使是短视的 SWR 模型也能识别出最有影响力的预测变量。至于降维方法，在所有数据文件中表现都远不如 SWR。对此现象的一个可能解释是，在降维过程中没有考虑响应变量，从而产生了“较弱”的响应预测变量。
 
-这些结论具有重要的实际意义，因为它们表明，在市场营销应用中，可能同样可以使用传统的SWR算法来构建大规模的LR模型。不仅SWR是一个广为人知并且有广泛软件可用的算法，而且进一步的研究表明，SWR有足够的灵活性来允许使用任何合理范围的p值来移除/引入变量到模型中，仍然能得到一个有效的模型。虽然还需要进一步研究以将此研究结果推广到其他领域，但在市场营销应用中，最终获胜者是……逐步回归！
+这些结论具有重要的实际意义，因为它们表明，在市场营销应用中，可能同样可以使用传统的 SWR 算法来构建大规模的 LR 模型。不仅 SWR 是一个广为人知并且有广泛软件可用的算法，而且进一步的研究表明，SWR 有足够的灵活性来允许使用任何合理范围的 p 值来移除/引入变量到模型中，仍然能得到一个有效的模型。虽然还需要进一步研究以将此研究结果推广到其他领域，但在市场营销应用中，最终获胜者是……逐步回归！
 
-**雅各布·扎哈维博士**是 [DMWay Analytics](http://www.dmway.com)的联合创始人兼首席行政官，并且是特拉维夫大学管理学院的名誉教授。他主要研究数据挖掘，拥有超过25年的经验，涵盖了研究、教学、软件开发和应用等多个方面。他还曾两次获得KDD CUP比赛的金奖。
+**雅各布·扎哈维博士**是 [DMWay Analytics](http://www.dmway.com)的联合创始人兼首席行政官，并且是特拉维夫大学管理学院的名誉教授。他主要研究数据挖掘，拥有超过 25 年的经验，涵盖了研究、教学、软件开发和应用等多个方面。他还曾两次获得 KDD CUP 比赛的金奖。
 
-**罗嫩·梅里博士**， [DMWay Analytics](http://www.dmway.com)的联合创始人兼首席技术官，在包括精算、行为定向、信用风险、预测、客户保留、欺诈检测等多个行业中拥有15年的高级分析实践经验。
+**罗嫩·梅里博士**， [DMWay Analytics](http://www.dmway.com)的联合创始人兼首席技术官，在包括精算、行为定向、信用风险、预测、客户保留、欺诈检测等多个行业中拥有 15 年的高级分析实践经验。
 
 **相关：**
 
-+   [数据科学机器，或‘如何进行特征工程’](/2015/10/data-science-machine.html)
++   数据科学机器，或‘如何进行特征工程’
 
-+   [TPOT：自动化数据科学的 Python 工具](/2016/05/tpot-python-automating-data-science.html)
++   TPOT：自动化数据科学的 Python 工具
 
-+   [自动数据科学：DataRobot、Quill 和 Loom Systems](/2016/04/automatic-data-science-datarobot-quill-loomsystems.html)
++   自动数据科学：DataRobot、Quill 和 Loom Systems
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -78,4 +78,4 @@
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)

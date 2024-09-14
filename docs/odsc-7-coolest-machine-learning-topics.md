@@ -1,6 +1,6 @@
-# 2021年ODSC West的7个最酷的机器学习话题
+# 2021 年 ODSC West 的 7 个最酷的机器学习话题
 
-> 原文：[https://www.kdnuggets.com/2021/11/odsc-7-coolest-machine-learning-topics.html](https://www.kdnuggets.com/2021/11/odsc-7-coolest-machine-learning-topics.html)
+> 原文：[`www.kdnuggets.com/2021/11/odsc-7-coolest-machine-learning-topics.html`](https://www.kdnuggets.com/2021/11/odsc-7-coolest-machine-learning-topics.html)
 
 赞助文章。
 
@@ -8,13 +8,13 @@
 
 ### **机器学习安全性**
 
-停下来思考一下有多少机器学习模型是基于来自社交媒体和网络的众包数据进行训练的，并且意识到如何容易污染训练数据。事实上，这篇[微软去年的论文](https://arxiv.org/pdf/2002.05646.pdf)将其列为主要关切（第2页）。由基础模型、大规模模型和自主系统驱动，机器学习安全正迅速成为涵盖AI和ML许多领域的广泛话题。对抗性攻击、后门模型脆弱性、实际部署尾部风险、风险监控和提升防御是ML安全领域的一些话题。预计将听到更多关于这一快速发展的主题。
+停下来思考一下有多少机器学习模型是基于来自社交媒体和网络的众包数据进行训练的，并且意识到如何容易污染训练数据。事实上，这篇[微软去年的论文](https://arxiv.org/pdf/2002.05646.pdf)将其列为主要关切（第 2 页）。由基础模型、大规模模型和自主系统驱动，机器学习安全正迅速成为涵盖 AI 和 ML 许多领域的广泛话题。对抗性攻击、后门模型脆弱性、实际部署尾部风险、风险监控和提升防御是 ML 安全领域的一些话题。预计将听到更多关于这一快速发展的主题。
 
 ### **基础模型**
 
-大规模训练模型如GPT-3和[**BERT**](https://opendatascience.com/tag/bert/)在过去几年中备受关注，因其突破性的成就而获得赞誉。斯坦福HAI中心称这些模型为基础模型，这些模型也受到了新的审视。单一模型可以用于许多应用，这增加了机器学习系统设计的挑战和风险。理解这些模型的能力、机会和风险对于构建负责任的AI至关重要。ODSC West将展示许多这些模型，剖析它们的能力和脆弱性。
+大规模训练模型如 GPT-3 和[**BERT**](https://opendatascience.com/tag/bert/)在过去几年中备受关注，因其突破性的成就而获得赞誉。斯坦福 HAI 中心称这些模型为基础模型，这些模型也受到了新的审视。单一模型可以用于许多应用，这增加了机器学习系统设计的挑战和风险。理解这些模型的能力、机会和风险对于构建负责任的 AI 至关重要。ODSC West 将展示许多这些模型，剖析它们的能力和脆弱性。
 
-[![ODSC West](../Images/3ee28b2ce970d3a012c2d5ccbf6bedba.png)](https://odsc.com/california/?__hstc=39712252.8eec8d7f5738faf6416f0c6bad9fe9a5.1634042255273.1635870813851.1635885555078.68&__hssc=39712252.3.1635885555078&__hsfp=2238041096)
+![ODSC West](https://odsc.com/california/?__hstc=39712252.8eec8d7f5738faf6416f0c6bad9fe9a5.1634042255273.1635870813851.1635885555078.68&__hssc=39712252.3.1635885555078&__hsfp=2238041096)
 
 ### **机器学习可观测性**
 
@@ -22,11 +22,11 @@ MLOPs、AIOPs、DataOps。由于重大的行业投资和大量的风险投资资
 
 ### **深度生成学习**
 
-深度生成模型（DGMs）已经存在了一段时间，并因生成深度伪造技术而受到广泛关注，但它们也成功应用于隐马尔可夫模型、GANs、贝叶斯网络、自回归模型等。DGMs 是具有多个隐藏层的神经网络，利用大量样本训练高维概率分布。尽管早期取得了一些成功，但DGMs的更广泛应用仍处于初期阶段。这是许多顶尖大学中最热门的研究课题之一，研究人员寻求更好的方法来设计和训练这些模型。随着一些行业顶尖人才的持续关注，我们可以期待更多突破和更广泛的实际应用。
+深度生成模型（DGMs）已经存在了一段时间，并因生成深度伪造技术而受到广泛关注，但它们也成功应用于隐马尔可夫模型、GANs、贝叶斯网络、自回归模型等。DGMs 是具有多个隐藏层的神经网络，利用大量样本训练高维概率分布。尽管早期取得了一些成功，但 DGMs 的更广泛应用仍处于初期阶段。这是许多顶尖大学中最热门的研究课题之一，研究人员寻求更好的方法来设计和训练这些模型。随着一些行业顶尖人才的持续关注，我们可以期待更多突破和更广泛的实际应用。
 
 ### **隐私保护的机器学习和差分隐私**
 
-允许多个组织协作构建、训练和部署机器学习模型而不危害数据隐私的重要性持续上升。**负责任的人工智能**是一个广泛的术语，行业内的人更愿意关注确保真正端到端、隐私保护的机器学习模型的众多挑战性问题。现在的重点是机器学习生命周期的所有阶段，包括理解与训练数据、模型输入、模型权重、模型输出和模型监控相关的隐私。此外，该领域正在超越基本的**差分** **隐私**技术，如故意在模型输入和输出中引入统计噪声或其他类型的噪声。机器学习从业者将在ODSC West找到有关这一主题的最新信息。
+允许多个组织协作构建、训练和部署机器学习模型而不危害数据隐私的重要性持续上升。**负责任的人工智能**是一个广泛的术语，行业内的人更愿意关注确保真正端到端、隐私保护的机器学习模型的众多挑战性问题。现在的重点是机器学习生命周期的所有阶段，包括理解与训练数据、模型输入、模型权重、模型输出和模型监控相关的隐私。此外，该领域正在超越基本的**差分** **隐私**技术，如故意在模型输入和输出中引入统计噪声或其他类型的噪声。机器学习从业者将在 ODSC West 找到有关这一主题的最新信息。
 
 ### **基于深度学习的自然语言处理**
 
@@ -34,7 +34,7 @@ MLOPs、AIOPs、DataOps。由于重大的行业投资和大量的风险投资资
 
 ### **网络安全中的机器学习**
 
-鉴于机器学习安全性日益重要，工程师和人工智能专家必须扩大他们在网络安全方面的知识。此外，网络安全是一个快速增长的领域，这得益于机器学习工具和方法的应用。专家们正在运用机器学习来帮助预测和制定更好的威胁事件响应，监控和应对不断演变的威胁，并大大加速数字取证技术。再加上对机器学习、深度学习和自主系统的对抗攻击风险的增加，你会发现这是一个在未来十年内有望大幅增长的领域。这是一个[**ODSC的新关注领域**](https://odsc.com/california/ai-for-cybersecurity/?__hstc=39712252.8eec8d7f5738faf6416f0c6bad9fe9a5.1634042255273.1635870813851.1635885555078.68&__hssc=39712252.3.1635885555078&__hsfp=2238041096)。西部会议将有一些[**网络ML领域的领先专家**](https://opendatascience.com/protect-your-company-with-the-ml-for-cybersecurity-track-at-odsc-west/)。
+鉴于机器学习安全性日益重要，工程师和人工智能专家必须扩大他们在网络安全方面的知识。此外，网络安全是一个快速增长的领域，这得益于机器学习工具和方法的应用。专家们正在运用机器学习来帮助预测和制定更好的威胁事件响应，监控和应对不断演变的威胁，并大大加速数字取证技术。再加上对机器学习、深度学习和自主系统的对抗攻击风险的增加，你会发现这是一个在未来十年内有望大幅增长的领域。这是一个[**ODSC 的新关注领域**](https://odsc.com/california/ai-for-cybersecurity/?__hstc=39712252.8eec8d7f5738faf6416f0c6bad9fe9a5.1634042255273.1635870813851.1635885555078.68&__hssc=39712252.3.1635885555078&__hsfp=2238041096)。西部会议将有一些[**网络 ML 领域的领先专家**](https://opendatascience.com/protect-your-company-with-the-ml-for-cybersecurity-track-at-odsc-west/)。
 
 ### **立即注册 ODSC West 2021**
 
@@ -74,34 +74,34 @@ MLOps 会议：
 
 +   **AI 展会与演示剧场**：无论你是希望将 AI 雄心提升到新水平的 CxO，还是寻求最新生产力工具的机器学习从业者，我们的 AI 展会和演示剧场都是你的理想之地。线下通行证可在 [这里](https://www.eventbrite.com/e/185738126737) 免费获取，虚拟通行证可在 [这里](https://www.eventbrite.com/e/163847956649) 获取。
 
-+   **Ai X 峰会**：向商业和机器学习专家学习，了解第一手的实际案例，并看看你也能如何将人工智能融入你的业务。你可以使用代码 FREEAIX [这里](http://www.eventbrite.com/e/127505685939/?discount=FREEAIX) 获得一天线下和虚拟通行证的100%折扣。
++   **Ai X 峰会**：向商业和机器学习专家学习，了解第一手的实际案例，并看看你也能如何将人工智能融入你的业务。你可以使用代码 FREEAIX [这里](http://www.eventbrite.com/e/127505685939/?discount=FREEAIX) 获得一天线下和虚拟通行证的 100%折扣。
 
-+   **全程通行证奖学金**：我们正在扩展我们的奖学金通行证项目，为参会者提供对ODSC的无限制访问，包括实操培训课程和深度研讨会。只需在本周五之前填写 [此表单](https://share.hsforms.com/1du3oFg7BRNqWgaWbgAaG0A13zdw?__hstc=39712252.8eec8d7f5738faf6416f0c6bad9fe9a5.1634042255273.1635870813851.1635885555078.68&__hssc=39712252.6.1635885555078&__hsfp=2238041096) 即可。
++   **全程通行证奖学金**：我们正在扩展我们的奖学金通行证项目，为参会者提供对 ODSC 的无限制访问，包括实操培训课程和深度研讨会。只需在本周五之前填写 [此表单](https://share.hsforms.com/1du3oFg7BRNqWgaWbgAaG0A13zdw?__hstc=39712252.8eec8d7f5738faf6416f0c6bad9fe9a5.1634042255273.1635870813851.1635885555078.68&__hssc=39712252.6.1635885555078&__hsfp=2238041096) 即可。
 
 +   关心
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关内容
 
-+   [用Python创建从音频中提取主题的Web应用](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
++   [用 Python 创建从音频中提取主题的 Web 应用](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
 
-+   [回到基础 第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础 第 4 周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
 +   [AI、分析、机器学习、数据科学、深度学习等…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [2021年主要发展与2022年AI、数据科学等关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年主要发展与 2022 年 AI、数据科学等关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
-+   [在ODSC East 2022上你可以免费访问的15个流行MLOps讲座](https://www.kdnuggets.com/2022/04/odsc-15-trending-mlops-talks-access-free-odsc-east-2022.html)
++   [在 ODSC East 2022 上你可以免费访问的 15 个流行 MLOps 讲座](https://www.kdnuggets.com/2022/04/odsc-15-trending-mlops-talks-access-free-odsc-east-2022.html)
 
-+   [数据科学与分析行业在2021年的主要发展和关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [数据科学与分析行业在 2021 年的主要发展和关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)

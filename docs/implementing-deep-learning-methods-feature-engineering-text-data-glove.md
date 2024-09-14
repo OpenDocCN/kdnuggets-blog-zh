@@ -1,8 +1,8 @@
-# 实现深度学习方法和文本数据特征工程：GloVe模型
+# 实现深度学习方法和文本数据特征工程：GloVe 模型
 
-> 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html)
+> 原文：[`www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html`](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-glove.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 > **编辑注：** 本文仅为更为全面深入原文的一部分，原文[在此](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)提供，涵盖了远超本文的内容。
 
@@ -12,21 +12,21 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-GloVe模型代表全球向量，是一种无监督学习模型，可以用来获取类似于Word2Vec的稠密词向量。然而，技术上有所不同，训练是在聚合的全球词词共现矩阵上进行的，为我们提供了具有有意义子结构的向量空间。这种方法由Pennington等人在斯坦福大学发明，我推荐你阅读原始论文[*《GloVe: Global Vectors for Word Representation》*由Pennington等人撰写](https://nlp.stanford.edu/pubs/glove.pdf)，这是一篇出色的文章，可以帮助你了解这个模型的工作原理。
+GloVe 模型代表全球向量，是一种无监督学习模型，可以用来获取类似于 Word2Vec 的稠密词向量。然而，技术上有所不同，训练是在聚合的全球词词共现矩阵上进行的，为我们提供了具有有意义子结构的向量空间。这种方法由 Pennington 等人在斯坦福大学发明，我推荐你阅读原始论文[*《GloVe: Global Vectors for Word Representation》*由 Pennington 等人撰写](https://nlp.stanford.edu/pubs/glove.pdf)，这是一篇出色的文章，可以帮助你了解这个模型的工作原理。
 
-我们不会在这里过多详细讲解模型的从零实现，但如果你对实际代码感兴趣，可以查看[*官方GloVe页面*](https://nlp.stanford.edu/projects/glove/)。我们在这里保持简单，尝试理解GloVe模型背后的基本概念。我们已经讨论过基于计数的矩阵分解方法，如LSA，以及预测方法，如Word2Vec。论文声称，目前这两类方法都存在显著缺陷。像LSA这样的算法有效地利用了统计信息，但在诸如词语类比任务（比如发现语义相似的词汇）上表现较差。像skip-gram这样的方法在类比任务上可能表现更好，但在全局层面上对语料库的统计信息利用不充分。
+我们不会在这里过多详细讲解模型的从零实现，但如果你对实际代码感兴趣，可以查看[*官方 GloVe 页面*](https://nlp.stanford.edu/projects/glove/)。我们在这里保持简单，尝试理解 GloVe 模型背后的基本概念。我们已经讨论过基于计数的矩阵分解方法，如 LSA，以及预测方法，如 Word2Vec。论文声称，目前这两类方法都存在显著缺陷。像 LSA 这样的算法有效地利用了统计信息，但在诸如词语类比任务（比如发现语义相似的词汇）上表现较差。像 skip-gram 这样的方法在类比任务上可能表现更好，但在全局层面上对语料库的统计信息利用不充分。
 
 GloVe 模型的基本方法是首先创建一个巨大的词语-上下文共现矩阵，该矩阵包含（词语，上下文）对，每个元素表示一个词语与上下文（可以是一系列词语）共现的频率。然后，应用矩阵因式分解来近似这个矩阵，如下图所示。
 
-![](../Images/80cf078c73ceb2a6e7c36fc8d7cc3d69.png)
+![](img/80cf078c73ceb2a6e7c36fc8d7cc3d69.png)
 
 GloVe 模型实现的概念模型
 
@@ -63,29 +63,29 @@ Total word vectors: 1070971
 
 这验证了所有内容正常工作。现在让我们获取玩具语料库中每个词的 GloVe 嵌入。
 
-![](../Images/7d4096fb874254581b44b3fe25a6a800.png)
+![](img/7d4096fb874254581b44b3fe25a6a800.png)
 
 我们玩具语料库中词语的 GloVe 嵌入
 
 现在我们可以使用 t-SNE 来可视化这些嵌入，类似于我们使用 Word2Vec 嵌入时所做的那样。
 
-![](../Images/29df7fbe8977356b425429931fd7e3f3.png)
+![](img/29df7fbe8977356b425429931fd7e3f3.png)
 
-在我们的玩具语料库上可视化GloVe词嵌入
+在我们的玩具语料库上可视化 GloVe 词嵌入
 
-`spacy` 的美妙之处在于，它会自动为每个文档中的词提供平均嵌入，而无需像我们在Word2Vec中实现的那样编写函数。我们将利用这一点来获取我们语料库的文档特征，并使用[***k-means***](https://en.wikipedia.org/wiki/K-means_clustering) 聚类来对文档进行分类。
+`spacy` 的美妙之处在于，它会自动为每个文档中的词提供平均嵌入，而无需像我们在 Word2Vec 中实现的那样编写函数。我们将利用这一点来获取我们语料库的文档特征，并使用[***k-means***](https://en.wikipedia.org/wiki/K-means_clustering) 聚类来对文档进行分类。
 
-![](../Images/81a9b2a64f3a39b1e19db9ea6bcaa6b7.png)
+![](img/81a9b2a64f3a39b1e19db9ea6bcaa6b7.png)
 
-基于我们文档特征的GloVe分配的簇
+基于我们文档特征的 GloVe 分配的簇
 
-我们观察到一致的簇，类似于我们从Word2Vec模型中获得的结果，这很好！GloVe模型声称在许多场景下性能优于Word2Vec模型，如下图所示，来自[Pennington等人的原始论文](https://nlp.stanford.edu/pubs/glove.pdf)。
+我们观察到一致的簇，类似于我们从 Word2Vec 模型中获得的结果，这很好！GloVe 模型声称在许多场景下性能优于 Word2Vec 模型，如下图所示，来自[Pennington 等人的原始论文](https://nlp.stanford.edu/pubs/glove.pdf)。
 
-![](../Images/f091c4c53dea7145f115373f5c3fe01f.png)
+![](img/f091c4c53dea7145f115373f5c3fe01f.png)
 
-GloVe与Word2Vec性能比较（来源：[https://nlp.stanford.edu/pubs/glove.pdf](https://nlp.stanford.edu/pubs/glove.pdf)由Pennington等人提供）
+GloVe 与 Word2Vec 性能比较（来源：[`nlp.stanford.edu/pubs/glove.pdf`](https://nlp.stanford.edu/pubs/glove.pdf)由 Pennington 等人提供）
 
-上述实验是在相同的6B令牌语料库（维基百科2014 + Gigaword 5）上训练300维向量，使用相同的400,000词汇表和对称的10大小上下文窗口完成的，如果有人对细节感兴趣的话。
+上述实验是在相同的 6B 令牌语料库（维基百科 2014 + Gigaword 5）上训练 300 维向量，使用相同的 400,000 词汇表和对称的 10 大小上下文窗口完成的，如果有人对细节感兴趣的话。
 
 **个人简介：[Dipanjan Sarkar](https://www.linkedin.com/in/dipanzan)** 是一位 @Intel 的数据科学家、作者、@Springboard 的导师、作家以及体育和情景喜剧迷。
 
@@ -93,15 +93,15 @@ GloVe与Word2Vec性能比较（来源：[https://nlp.stanford.edu/pubs/glove.pdf
 
 **相关：**
 
-+   [文本数据预处理：Python中的逐步指南](/2018/03/text-data-preprocessing-walkthrough-python.html)
++   文本数据预处理：Python 中的逐步指南
 
-+   [文本数据预处理的通用方法](/2017/12/general-approach-preprocessing-text-data.html)
++   文本数据预处理的通用方法
 
-+   [接近文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   接近文本数据科学任务的框架
 
 ### 更多相关主题
 
-+   [特征商店峰会2022：免费特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [特征商店峰会 2022：免费特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
 +   [机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
 
@@ -109,6 +109,6 @@ GloVe与Word2Vec性能比较（来源：[https://nlp.stanford.edu/pubs/glove.pdf
 
 +   [构建可处理的多变量特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
 
-+   [使用RAPIDS cuDF利用GPU进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
++   [使用 RAPIDS cuDF 利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
 
 +   [初学者的特征工程](https://www.kdnuggets.com/feature-engineering-for-beginners)

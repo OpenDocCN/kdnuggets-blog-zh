@@ -1,8 +1,8 @@
 # 探索思维树提示：人工智能如何通过搜索学习推理
 
-> 原文：[https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
+> 原文：[`www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html`](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
 
-![探索思维树提示：人工智能如何通过搜索学习推理](../Images/c0ca0a67a120b9aa78228cb36a35e334.png)
+![探索思维树提示：人工智能如何通过搜索学习推理](img/c0ca0a67a120b9aa78228cb36a35e334.png)
 
 图片由作者使用 Midjourney 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -44,19 +44,19 @@ ToT 将问题解决过程表示为对树的搜索，其中每个节点是一个�
 
 1.  让大语言模型（LLM）通过价值评估提示来评估不同状态（部分解决方案）的前景，这些提示评估到目前为止的进展。
 
-1.  使用经典的搜索算法，如广度优先搜索或深度优先搜索，通过树结构，利用LLM的价值估计来指导探索和剪枝。
+1.  使用经典的搜索算法，如广度优先搜索或深度优先搜索，通过树结构，利用 LLM 的价值估计来指导探索和剪枝。
 
-这种有意的搜索方法允许LLM进行前瞻性思考、回溯，并在需要时做出更具全球性的选择。这个模块化框架与模型无关，可以根据问题结构灵活调整其组件，如思维规模、生成、评估和搜索。
+这种有意的搜索方法允许 LLM 进行前瞻性思考、回溯，并在需要时做出更具全球性的选择。这个模块化框架与模型无关，可以根据问题结构灵活调整其组件，如思维规模、生成、评估和搜索。
 
-作者在三个新任务上演示了ToT——24点游戏、创意写作和迷你填字游戏。在所有情况下，ToT显著提升了GPT-4在问题解决中的表现，相比于标准提示基线。例如，在24点游戏中，成功率从使用链式思维提示的4%提高到使用ToT的74%。
+作者在三个新任务上演示了 ToT——24 点游戏、创意写作和迷你填字游戏。在所有情况下，ToT 显著提升了 GPT-4 在问题解决中的表现，相比于标准提示基线。例如，在 24 点游戏中，成功率从使用链式思维提示的 4%提高到使用 ToT 的 74%。
 
-总体而言，ToT提供了一种将经典AI中的符号规划和搜索方法与现代LLM结合的方式。其基于语言的思维和审议的可解释性也为更好的人类对齐提供了机会。作者将其提出作为开发更通用问题解决能力的一个令人兴奋的新方向。
+总体而言，ToT 提供了一种将经典 AI 中的符号规划和搜索方法与现代 LLM 结合的方式。其基于语言的思维和审议的可解释性也为更好的人类对齐提供了机会。作者将其提出作为开发更通用问题解决能力的一个令人兴奋的新方向。
 
 # 研究问答
 
-*“思维树”方法与其他结合符号规划或搜索与神经模型的方法（如NeuroLogic解码或LLM+P框架）相比如何？*
+*“思维树”方法与其他结合符号规划或搜索与神经模型的方法（如 NeuroLogic 解码或 LLM+P 框架）相比如何？*
 
-ToT框架的不同之处在于，它使用LLM自身在搜索过程中提供启发式指导，而不是依赖于单独的经典规划器（LLM+P）或硬编码的启发式方法（NeuroLogic）。基于语言的思维表示也比符号规划语言更灵活。然而，ToT尚未达到LLM+P所展示的LLM与规划器组件之间的紧密集成和双向通信水平。
+ToT 框架的不同之处在于，它使用 LLM 自身在搜索过程中提供启发式指导，而不是依赖于单独的经典规划器（LLM+P）或硬编码的启发式方法（NeuroLogic）。基于语言的思维表示也比符号规划语言更灵活。然而，ToT 尚未达到 LLM+P 所展示的 LLM 与规划器组件之间的紧密集成和双向通信水平。
 
 *“思维树”方法是否可以应用于自然语言任务，如对话或故事生成，而不仅仅是受限的推理任务？*
 
@@ -68,7 +68,7 @@ ToT框架的不同之处在于，它使用LLM自身在搜索过程中提供启�
 
 *这项研究的更广泛影响是什么？*
 
-这项研究可能显著提升LLM的解决问题和推理能力，使其能够应用于更复杂的现实世界任务，如编码、数据分析、机器人技术等。同时，它还使模型决策更加可解释。将经典搜索方法与神经模型的结合是一个令人兴奋的方向。
+这项研究可能显著提升 LLM 的解决问题和推理能力，使其能够应用于更复杂的现实世界任务，如编码、数据分析、机器人技术等。同时，它还使模型决策更加可解释。将经典搜索方法与神经模型的结合是一个令人兴奋的方向。
 
 *这项研究在呈现过程中是否存在潜在的问题或遗漏？*
 
@@ -76,32 +76,32 @@ ToT框架的不同之处在于，它使用LLM自身在搜索过程中提供启�
 
 *从这项研究中，接下来的逻辑研究步骤是什么？*
 
-重要的下一步是探索ToT在更复杂的规划和决策任务中的应用，将其与外部知识检索集成，并研究变体是否可以通过元学习或强化学习以更高效的样本方式进行学习，而不是仅依赖于预训练的LLM。分析思维规模、搜索预算和性能之间的相互作用也是一个未解的问题。
+重要的下一步是探索 ToT 在更复杂的规划和决策任务中的应用，将其与外部知识检索集成，并研究变体是否可以通过元学习或强化学习以更高效的样本方式进行学习，而不是仅依赖于预训练的 LLM。分析思维规模、搜索预算和性能之间的相互作用也是一个未解的问题。
 
 # 重点总结
 
-+   Tree of Thoughts范式展示了如何将经典搜索技术与现代神经网络模型相结合。
++   Tree of Thoughts 范式展示了如何将经典搜索技术与现代神经网络模型相结合。
 
-+   允许LLM探索不同的推理路径使得它们的决策过程更具可解释性。
++   允许 LLM 探索不同的推理路径使得它们的决策过程更具可解释性。
 
-+   这一研究方向可能增强LLM在复杂现实世界规划和分析任务中的适用性。
++   这一研究方向可能增强 LLM 在复杂现实世界规划和分析任务中的适用性。
 
 +   关键的下一步是将这一方法扩展到更少约束的问题，提高搜索效率，并研究如何学习这些技能。
 
-+   总体来说，Tree of Thoughts的深思熟虑和语义推理为人工智能代理提供了一种令人兴奋的新能力。
++   总体来说，Tree of Thoughts 的深思熟虑和语义推理为人工智能代理提供了一种令人兴奋的新能力。
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家，也是KDnuggets的总编辑，KDnuggets是一个开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计和优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。可以通过editor1 at kdnuggets[dot]com与他联系。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家，也是 KDnuggets 的总编辑，KDnuggets 是一个开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计和优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。可以通过 editor1 at kdnuggets[dot]com 与他联系。
 
 ### 更多相关内容
 
-+   [自动化思维链：AI如何自我提示进行推理](https://www.kdnuggets.com/2023/07/automating-chain-of-thought-ai-prompt-itself-reason.html)
++   [自动化思维链：AI 如何自我提示进行推理](https://www.kdnuggets.com/2023/07/automating-chain-of-thought-ai-prompt-itself-reason.html)
 
 +   [揭示大语言模型中的思维链提示的力量](https://www.kdnuggets.com/2023/07/power-chain-thought-prompting-large-language-models.html)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
-+   [使用Python进行网格搜索和随机搜索的超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
++   [使用 Python 进行网格搜索和随机搜索的超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 
-+   [通过Uplimit的机器学习搜索课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
++   [通过 Uplimit 的机器学习搜索课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
 
-+   [用Python和Scikit-learn简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
++   [用 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)

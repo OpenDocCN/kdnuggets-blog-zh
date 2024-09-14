@@ -1,8 +1,8 @@
-# **MLOps最佳实践**
+# **MLOps 最佳实践**
 
-> 原文：[https://www.kdnuggets.com/2021/07/mlops-best-practices.html](https://www.kdnuggets.com/2021/07/mlops-best-practices.html)
+> 原文：[`www.kdnuggets.com/2021/07/mlops-best-practices.html`](https://www.kdnuggets.com/2021/07/mlops-best-practices.html)
 
-[评论](#comments)
+评论
 
 **[Siddharth (Sid) Kashiramka](https://www.linkedin.com/in/siddharthkashiramka/)，（高级经理，平台，Capital One），
 
@@ -10,15 +10,15 @@
 
 [DeCarlos Taylor](https://www.linkedin.com/in/decarlos-taylor-igm4844b4b/)，（主任，Card DS，Capital One）**。
 
-现在在多个行业中，人们普遍认识到预测建模和机器学习可能为那些将这些技术作为其商业模式核心部分的组织提供巨大的价值。许多跨越公共和私营部门的组织已经采用了数据驱动的商业战略，利用从全面的数据分析或高度复杂的机器学习算法中得出的洞察来影响关键的业务或运营决策。虽然有许多组织在大规模应用机器学习，并且各种使用案例层出不穷，但整体机器学习生命周期在所有组织中具有相似的结构，无论具体的使用案例或应用是什么。具体来说，对于任何大规模利用数据科学的组织，机器学习生命周期由四个关键组成部分定义：模型开发、模型部署、模型监控和模型治理（见图1）。
+现在在多个行业中，人们普遍认识到预测建模和机器学习可能为那些将这些技术作为其商业模式核心部分的组织提供巨大的价值。许多跨越公共和私营部门的组织已经采用了数据驱动的商业战略，利用从全面的数据分析或高度复杂的机器学习算法中得出的洞察来影响关键的业务或运营决策。虽然有许多组织在大规模应用机器学习，并且各种使用案例层出不穷，但整体机器学习生命周期在所有组织中具有相似的结构，无论具体的使用案例或应用是什么。具体来说，对于任何大规模利用数据科学的组织，机器学习生命周期由四个关键组成部分定义：模型开发、模型部署、模型监控和模型治理（见图 1）。
 
-![](../Images/241b581701323b0a841a67db8eee24f3.png)
+![](img/241b581701323b0a841a67db8eee24f3.png)
 
-***图1*** *- 机器学习生命周期的四个关键步骤。*
+***图 1*** *- 机器学习生命周期的四个关键步骤。*
 
-大多数数据科学家对机器学习生命周期中的*模型开发*部分非常熟悉，并且对复杂的数据查询（例如SQL）、数据处理、特征工程和算法训练有很高的熟练度。此外，生命周期中的*模型监控*部分在某种程度上与数据科学家的职能相关。模型在时间推移中对数据分布变化或新应用领域的性能可以使用相关的统计指标（例如均方误差、精确度-召回率等）来监控，这些都是许多数据科学家熟悉的。此外，根据行业不同，*模型治理*的要求通常定义明确（尽管执行情况未必理想！），并且在组织政策文件和由监管机构发布的一般性法规中常有详细阐述。
+大多数数据科学家对机器学习生命周期中的*模型开发*部分非常熟悉，并且对复杂的数据查询（例如 SQL）、数据处理、特征工程和算法训练有很高的熟练度。此外，生命周期中的*模型监控*部分在某种程度上与数据科学家的职能相关。模型在时间推移中对数据分布变化或新应用领域的性能可以使用相关的统计指标（例如均方误差、精确度-召回率等）来监控，这些都是许多数据科学家熟悉的。此外，根据行业不同，*模型治理*的要求通常定义明确（尽管执行情况未必理想！），并且在组织政策文件和由监管机构发布的一般性法规中常有详细阐述。
 
-尽管机器学习生命周期的模型开发、监控和治理组件复杂且充满挑战，但***模型部署*** *(或称“生产化”)* 组件是许多组织似乎最难应对的部分。[一份最新报告](https://venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/) [1] 表示87%的数据科学项目最终未能进入生产，原因包括：
+尽管机器学习生命周期的模型开发、监控和治理组件复杂且充满挑战，但***模型部署*** *(或称“生产化”)* 组件是许多组织似乎最难应对的部分。[一份最新报告](https://venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/) [1] 表示 87%的数据科学项目最终未能进入生产，原因包括：
 
 +   组织内缺乏必要的部署专业知识[2]。
 
@@ -70,21 +70,21 @@
 
 ### 使用 cProfiler 改善延迟
 
-根据应用程序或组织施加的基准阈值，模型容器可能需要在200-300毫秒（或更短时间）内返回输出。根据我们的经验，通常需要进行显著的代码优化以满足这一要求。传统上，代码优化过程包括对单独的代码块进行计时，识别限制速率的函数，然后对这些代码块进行性能调整。一个流行的开源工具是[cProfiler](https://docs.python.org/3/library/profile.html) [7]，它跟踪各种方法和过程被调用的频率，并监控整体执行时间。举个例子，考虑下面图2中表示的调用图。这个调用图表明函数‘plustwo’被调用了10次，并消耗了88%+的评分时间。因此，任何减少对这个限制步骤的函数调用次数的修改，或优化‘plustwo’函数以减少其运行时间的措施，都将减少模型的整体评分时间。
+根据应用程序或组织施加的基准阈值，模型容器可能需要在 200-300 毫秒（或更短时间）内返回输出。根据我们的经验，通常需要进行显著的代码优化以满足这一要求。传统上，代码优化过程包括对单独的代码块进行计时，识别限制速率的函数，然后对这些代码块进行性能调整。一个流行的开源工具是[cProfiler](https://docs.python.org/3/library/profile.html) [7]，它跟踪各种方法和过程被调用的频率，并监控整体执行时间。举个例子，考虑下面图 2 中表示的调用图。这个调用图表明函数‘plustwo’被调用了 10 次，并消耗了 88%+的评分时间。因此，任何减少对这个限制步骤的函数调用次数的修改，或优化‘plustwo’函数以减少其运行时间的措施，都将减少模型的整体评分时间。
 
-![](../Images/8fcc6ef7b9c6e5b0cd34b7a4f861d327.png)
+![](img/8fcc6ef7b9c6e5b0cd34b7a4f861d327.png)
 
-***图2 -*** *使用Cprofiler的代码性能分析。*
+***图 2 -*** *使用 Cprofiler 的代码性能分析。*
 
 ### 负载测试
 
-对于许多组织而言，机器学习模型最终可能会部署到面向客户的平台上，例如，由推荐系统支持的零售网站或用于实时决定申请者的金融服务网站。平台必须处理的请求数量可能高度变化，组织可能会经历低活动期（对模型容器的调用较少），随后是极高负载期，在这些期间，平台和模型可能需要处理大量请求，这些请求源于高客户需求。因此，在高负载下测试模型容器的鲁棒性（和准确性！）也是一个关键考虑因素。一个有价值的工具是[Locust](https://locust.io/) [8]，这是一个开源负载测试工具，具有分布式和可扩展性，拥有基于Web的用户界面，并可以处理用Python编写的测试场景。
+对于许多组织而言，机器学习模型最终可能会部署到面向客户的平台上，例如，由推荐系统支持的零售网站或用于实时决定申请者的金融服务网站。平台必须处理的请求数量可能高度变化，组织可能会经历低活动期（对模型容器的调用较少），随后是极高负载期，在这些期间，平台和模型可能需要处理大量请求，这些请求源于高客户需求。因此，在高负载下测试模型容器的鲁棒性（和准确性！）也是一个关键考虑因素。一个有价值的工具是[Locust](https://locust.io/) [8]，这是一个开源负载测试工具，具有分布式和可扩展性，拥有基于 Web 的用户界面，并可以处理用 Python 编写的测试场景。
 
-![](../Images/2cd0a367dbb3eb54be828f3ccafc6856.png)
+![](img/2cd0a367dbb3eb54be828f3ccafc6856.png)
 
-***图3 -*** *使用Locust的完整延迟测试。*
+***图 3 -*** *使用 Locust 的完整延迟测试。*
 
-图3展示了Locust的一个样本输出，这个输出来自于一个测试场景，其中每秒向模型发送十个请求，持续了10分钟。输出显示了请求的总数，并报告了几个百分位的响应时间。在这个例子中，95百分位和99百分位的延迟分别为170毫秒和270毫秒，根据平台的阈值，这些延迟可能被接受，也可能表明需要进行额外的性能优化。
+图 3 展示了 Locust 的一个样本输出，这个输出来自于一个测试场景，其中每秒向模型发送十个请求，持续了 10 分钟。输出显示了请求的总数，并报告了几个百分位的响应时间。在这个例子中，95 百分位和 99 百分位的延迟分别为 170 毫秒和 270 毫秒，根据平台的阈值，这些延迟可能被接受，也可能表明需要进行额外的性能优化。
 
 ## 结论
 
@@ -104,27 +104,27 @@
 
 ### 参考文献
 
-[1] VB Staff. “为何87%的数据科学项目从未进入生产？” venturebeat.com [https://venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/](https://venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/)（访问日期：2021年7月5日）
+[1] VB Staff. “为何 87%的数据科学项目从未进入生产？” venturebeat.com [`venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/`](https://venturebeat.com/2019/07/19/why-do-87-of-data-science-projects-never-make-it-into-production/)（访问日期：2021 年 7 月 5 日）
 
-[2] Chris. “机器学习变得越来越简单，软件工程仍然困难” towardsdatascience.com [https://towardsdatascience.com/machine-learning-is-getting-easier-software-engineering-is-still-hard-d4e8320bc046](https://towardsdatascience.com/machine-learning-is-getting-easier-software-engineering-is-still-hard-d4e8320bc046)（访问日期：2021年7月5日）
+[2] Chris. “机器学习变得越来越简单，软件工程仍然困难” towardsdatascience.com [`towardsdatascience.com/machine-learning-is-getting-easier-software-engineering-is-still-hard-d4e8320bc046`](https://towardsdatascience.com/machine-learning-is-getting-easier-software-engineering-is-still-hard-d4e8320bc046)（访问日期：2021 年 7 月 5 日）
 
-[3] Mckinsey Podcast. “公司在整个组织中采用人工智能的投资与对人员和流程的投资一样多。” mckinsey.com [https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/getting-to-scale-with-artificial-intelligence](https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/getting-to-scale-with-artificial-intelligence)（访问日期：2021年7月5日）
+[3] Mckinsey Podcast. “公司在整个组织中采用人工智能的投资与对人员和流程的投资一样多。” mckinsey.com [`www.mckinsey.com/business-functions/mckinsey-digital/our-insights/getting-to-scale-with-artificial-intelligence`](https://www.mckinsey.com/business-functions/mckinsey-digital/our-insights/getting-to-scale-with-artificial-intelligence)（访问日期：2021 年 7 月 5 日）
 
 [4] Assaf Pinhasi. “将机器学习模型部署到生产环境 — 推理服务架构模式” medium.com
 
-[https://medium.com/data-for-ai/deploying-machine-learning-models-to-production-inference-service-architecture-patterns-bc8051f70080](https://medium.com/data-for-ai/deploying-machine-learning-models-to-production-inference-service-architecture-patterns-bc8051f70080)（访问日期：2021年7月5日）
+[`medium.com/data-for-ai/deploying-machine-learning-models-to-production-inference-service-architecture-patterns-bc8051f70080`](https://medium.com/data-for-ai/deploying-machine-learning-models-to-production-inference-service-architecture-patterns-bc8051f70080)（访问日期：2021 年 7 月 5 日）
 
 [5] Citrix. “什么是容器化以及它是如何工作的？” citrix.com
 
-[https://www.citrix.com/solutions/application-delivery-controller/what-is-containerization.html](https://www.citrix.com/solutions/application-delivery-controller/what-is-containerization.html)（访问日期：2021年7月5日）
+[`www.citrix.com/solutions/application-delivery-controller/what-is-containerization.html`](https://www.citrix.com/solutions/application-delivery-controller/what-is-containerization.html)（访问日期：2021 年 7 月 5 日）
 
 [6] Christopher. G.S.“如何部署机器学习模型” christopherergs.com
 
-[https://christophergs.com/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/](https://christophergs.com/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/)（访问日期：2021年7月5日）
+[`christophergs.com/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/`](https://christophergs.com/machine%20learning/2019/03/17/how-to-deploy-machine-learning-models/)（访问日期：2021 年 7 月 5 日）
 
-[7] [https://docs.python.org/3/library/profile.html](https://docs.python.org/3/library/profile.html)
+[7] [`docs.python.org/3/library/profile.html`](https://docs.python.org/3/library/profile.html)
 
-[8] [https://locust.io](https://locust.io)
+[8] [`locust.io`](https://locust.io)
 
 **相关：**
 
@@ -138,11 +138,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

@@ -1,24 +1,24 @@
 # 学习数据科学统计学的顶级资源
 
-> 原文：[https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
+> 原文：[`www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html`](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
 赞助帖子。
 
-[![图像](../Images/0635fc8aee688f705c2f6b3ba92a1b63.png)](https://www.springboard.com/courses/data-science-career-track/?utm_source=kdnuggets&utm_medium=cpm&utm_campaign=dsc&utm_term=december_sponsored_content)
+![图像](https://www.springboard.com/courses/data-science-career-track/?utm_source=kdnuggets&utm_medium=cpm&utm_campaign=dsc&utm_term=december_sponsored_content)
 
 图片来源：[Lukas from Pexels](https://www.pexels.com/@goumbik)
 
-统计学是数据科学的核心，两个领域之间的联系越来越紧密。如果你希望在数据科学领域取得长足的进展，深入理解统计学概念是非常重要的，而这一基础的建立可能需要一段时间。Springboard的[数据科学职业课程](https://www.springboard.com/courses/data-science-career-track/?utm_source=kdnuggets&utm_medium=cpm&utm_campaign=dsc&utm_term=december_sponsored_content)是一个很好的起点，如果你认真对待提升自己在这一领域的技能，它应该是你首先要迈出的步骤之一。让我们来看看统计学在数据科学中的当前状态，以及你可以做些什么来加速学习。
+统计学是数据科学的核心，两个领域之间的联系越来越紧密。如果你希望在数据科学领域取得长足的进展，深入理解统计学概念是非常重要的，而这一基础的建立可能需要一段时间。Springboard 的[数据科学职业课程](https://www.springboard.com/courses/data-science-career-track/?utm_source=kdnuggets&utm_medium=cpm&utm_campaign=dsc&utm_term=december_sponsored_content)是一个很好的起点，如果你认真对待提升自己在这一领域的技能，它应该是你首先要迈出的步骤之一。让我们来看看统计学在数据科学中的当前状态，以及你可以做些什么来加速学习。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -50,18 +50,18 @@
 
 统计学和数据科学之间的联系很紧密，而在数据科学领域取得进展而不投入一些统计学方面的努力是困难的。与此同时，你在数据科学中取得较高进展所需的理解水平并不像你想象的那样高。对许多人来说，复习我们上面概述的基本概念，并完成一些培训课程，应该足以让他们入门并全面介绍这一领域。
 
-正如我们之前提到的，如果你对数据科学职业感兴趣，可以查看Springboard的[数据科学职业课程](https://www.springboard.com/courses/data-science-career-track/?utm_source=kdnuggets&utm_medium=cpm&utm_campaign=dsc&utm_term=december_sponsored_content)。它将为你提供目前能找到的最深入的领域概述，并帮助你理解提升技能所需的概念。同时，也要尽可能多与人交流——数据科学正在经历许多积极的发展，现在是与其他专家讨论最新发现的绝佳时机。
+正如我们之前提到的，如果你对数据科学职业感兴趣，可以查看 Springboard 的[数据科学职业课程](https://www.springboard.com/courses/data-science-career-track/?utm_source=kdnuggets&utm_medium=cpm&utm_campaign=dsc&utm_term=december_sponsored_content)。它将为你提供目前能找到的最深入的领域概述，并帮助你理解提升技能所需的概念。同时，也要尽可能多与人交流——数据科学正在经历许多积极的发展，现在是与其他专家讨论最新发现的绝佳时机。
 
 ### 更多相关内容
 
 +   [停止学习数据科学以找到目的并通过找到目的来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么使得Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使得 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

@@ -1,22 +1,22 @@
-# 10种高级 Git 技巧
+# 10 种高级 Git 技巧
 
-> 原文：[https://www.kdnuggets.com/10-advanced-git-techniques](https://www.kdnuggets.com/10-advanced-git-techniques)
+> 原文：[`www.kdnuggets.com/10-advanced-git-techniques`](https://www.kdnuggets.com/10-advanced-git-techniques)
 
-![10种高级 Git 技巧](../Images/25cf21f99ae6ce54a3340ab056432ef1.png)
+![10 种高级 Git 技巧](img/25cf21f99ae6ce54a3340ab056432ef1.png)
 
 图片来自作者
 
-是否曾想过如何在使用 Git 时在经理面前显得像个专家？在这篇文章中，我们将学习10种高级 Git 技巧和快捷方式，使你在版本控制、维护和共享代码时更加高效。
+是否曾想过如何在使用 Git 时在经理面前显得像个专家？在这篇文章中，我们将学习 10 种高级 Git 技巧和快捷方式，使你在版本控制、维护和共享代码时更加高效。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -116,13 +116,13 @@ $ git revert 8f184d5
 
 要访问此功能，只需导航到你喜欢的仓库，按下键盘上的句点键（“.”），系统将重定向到 VSCode UI。
 
-![10 种高级 Git 技巧](../Images/eda67b5669fef0b6619e8501be3e8d39.png)
+![10 种高级 Git 技巧](img/eda67b5669fef0b6619e8501be3e8d39.png)
 
 图片来自作者
 
 你可以对代码进行更改并推送到远程仓库。然而，如果你想在终端中运行代码，你需要在云中运行 Codespace。免费版本提供了一个很好的选项，可以在浏览器中运行你的 Python 代码。这不是很棒吗？我今天才发现这个。
 
-![10 种高级 Git 技巧](../Images/0cab25164ac9919bc0dcfd7d22fd2190.png)
+![10 种高级 Git 技巧](img/0cab25164ac9919bc0dcfd7d22fd2190.png)
 
 图片来自作者
 
@@ -169,7 +169,7 @@ Your branch is up to date with 'origin/master'.
 $ git branch -M main
 ```
 
-![10 种高级 Git 技巧](../Images/78efe97dc4d0a4a1ab5bafdd5854a44d.png)
+![10 种高级 Git 技巧](img/78efe97dc4d0a4a1ab5bafdd5854a44d.png)
 
 你可以使用以下命令验证更改：
 
@@ -190,7 +190,7 @@ Your branch is up to date with 'origin/master'.
 $ git log --graph --decorate --oneline
 ```
 
-![10 种高级 Git 技巧](../Images/9de6dc561076347a289db767e7758a57.png)
+![10 种高级 Git 技巧](img/9de6dc561076347a289db767e7758a57.png)
 
 # 9\. 切换回分支
 
@@ -250,24 +250,24 @@ $ git clean -df
 
 # 结论
 
-我受到Fireship的[YouTube视频](https://www.youtube.com/watch?v=ecK3EnyGD8o&list=WL&index=1)的启发而写了这篇文章。我钦佩创作者能够以简单的方式解释复杂的主题。通过跟随他的方法，我学到了很多关于Git的功能。
+我受到 Fireship 的[YouTube 视频](https://www.youtube.com/watch?v=ecK3EnyGD8o&list=WL&index=1)的启发而写了这篇文章。我钦佩创作者能够以简单的方式解释复杂的主题。通过跟随他的方法，我学到了很多关于 Git 的功能。
 
-在本文中，我们介绍了对于从事协作数据项目的数据科学家和软件工程师至关重要的高级Git技术。掌握这些技巧可以帮助你避免事故并更快地解决问题。
+在本文中，我们介绍了对于从事协作数据项目的数据科学家和软件工程师至关重要的高级 Git 技术。掌握这些技巧可以帮助你避免事故并更快地解决问题。
 
 希望你觉得这个博客有用。如果你希望阅读更多关于数据科学世界中常用工具的简明信息，请告诉我。
 
-[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一种AI产品，以帮助面临心理健康问题的学生。
+[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一种 AI 产品，以帮助面临心理健康问题的学生。
 
 ### 相关主题
 
-+   [数据科学家必备的14条Git命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
++   [数据科学家必备的 14 条 Git 命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
 
-+   [KDnuggets新闻，10月5日：初学者的顶级免费Git GUI客户端 •…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
 
-+   [数据科学的Git备忘单](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
++   [数据科学的 Git 备忘单](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
 
-+   [初学者的顶级免费Git GUI客户端](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
++   [初学者的顶级免费 Git GUI 客户端](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)
 
-+   [3种基于研究的高级提示技术以提高LLM效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
++   [3 种基于研究的高级提示技术以提高 LLM 效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)

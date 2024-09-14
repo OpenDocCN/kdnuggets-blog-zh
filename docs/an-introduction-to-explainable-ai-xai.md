@@ -1,8 +1,8 @@
 # 可解释 AI (XAI) 简介
 
-> 原文：[https://www.kdnuggets.com/an-introduction-to-explainable-ai-xai](https://www.kdnuggets.com/an-introduction-to-explainable-ai-xai)
+> 原文：[`www.kdnuggets.com/an-introduction-to-explainable-ai-xai`](https://www.kdnuggets.com/an-introduction-to-explainable-ai-xai)
 
-![可解释 AI (XAI) 简介](../Images/ccfe0fb9da9817f92ee612e339850018.png)
+![可解释 AI (XAI) 简介](img/ccfe0fb9da9817f92ee612e339850018.png)
 
 图片由编辑 | Midjourney
 
@@ -12,11 +12,11 @@ AI 系统在我们日常生活中越来越普遍，做出的决策可能难以�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -64,7 +64,7 @@ AI 系统的可解释性有许多重要原因。以下列出了一些最重要�
 
 +   **激活图**：激活图展示了在决策过程中神经网络的哪些部分是活跃的。
 
-## 使用LIME进行**可解释人工智能**
+## 使用 LIME 进行**可解释人工智能**
 
 我们将探讨如何使用`LIME`来解释模型的决策。
 
@@ -103,7 +103,7 @@ exp.show_in_notebook(show_table=True, show_all=False)
 
 输出：
 
-![output](../Images/f98315bb4ce44985a556c5f97a2bbc41.png)
+![output](img/f98315bb4ce44985a556c5f97a2bbc41.png)
 
 输出分为三个部分：
 
@@ -113,15 +113,15 @@ exp.show_in_notebook(show_table=True, show_all=False)
 
 1.  **局部预测解释**：输出的这一部分展示了模型如何为特定实例做出预测。它分解了哪些特征是重要的以及它们如何影响结果。
 
-## XAI的应用领域
+## XAI 的应用领域
 
 #### 医疗保健
 
-人工智能系统通过分析医学影像和患者数据显著提高了诊断准确性。它们可以识别图像中的模式和异常。然而，它们的真正价值在于**可解释人工智能**（XAI）。XAI澄清了人工智能系统如何做出诊断决策。这种透明性帮助医生理解人工智能为何做出某些结论。XAI还解释了每个治疗建议背后的原因。这有助于医生设计治疗计划。
+人工智能系统通过分析医学影像和患者数据显著提高了诊断准确性。它们可以识别图像中的模式和异常。然而，它们的真正价值在于**可解释人工智能**（XAI）。XAI 澄清了人工智能系统如何做出诊断决策。这种透明性帮助医生理解人工智能为何做出某些结论。XAI 还解释了每个治疗建议背后的原因。这有助于医生设计治疗计划。
 
 #### 金融
 
-在金融领域，**可解释人工智能**用于信用评分和欺诈检测。在信用评分方面，XAI解释了信用评分的计算方式。它显示了哪些因素影响一个人的信用worthiness。这有助于消费者了解他们的评分，并确保金融机构的公平性。在欺诈检测中，XAI解释了为什么交易被标记。它显示了检测到的异常，帮助调查人员发现并确认潜在的欺诈行为。
+在金融领域，**可解释人工智能**用于信用评分和欺诈检测。在信用评分方面，XAI 解释了信用评分的计算方式。它显示了哪些因素影响一个人的信用 worthiness。这有助于消费者了解他们的评分，并确保金融机构的公平性。在欺诈检测中，XAI 解释了为什么交易被标记。它显示了检测到的异常，帮助调查人员发现并确认潜在的欺诈行为。
 
 #### 法律
 
@@ -129,21 +129,21 @@ exp.show_in_notebook(show_table=True, show_all=False)
 
 #### 自主车辆
 
-在自动驾驶中，解释性人工智能（XAI）对安全性和法规非常重要。XAI提供实时解释，说明车辆如何做出决策。这有助于用户理解和信任系统的行动。开发者可以利用XAI来提高系统的性能。XAI还通过详细说明驾驶决策的制定过程来支持监管批准，确保技术符合公共道路的安全标准。
+在自动驾驶中，解释性人工智能（XAI）对安全性和法规非常重要。XAI 提供实时解释，说明车辆如何做出决策。这有助于用户理解和信任系统的行动。开发者可以利用 XAI 来提高系统的性能。XAI 还通过详细说明驾驶决策的制定过程来支持监管批准，确保技术符合公共道路的安全标准。
 
-## XAI中的挑战
+## XAI 中的挑战
 
-1.  **复杂模型**：一些AI模型非常复杂。这使得它们很难解释。
+1.  **复杂模型**：一些 AI 模型非常复杂。这使得它们很难解释。
 
 1.  **准确性与解释性**：更准确的模型使用复杂的算法。模型的性能和解释的易用性之间往往存在权衡。
 
-1.  **缺乏标准**：没有一种单一的方法来解释AI。不同的行业应用需要不同的方法。
+1.  **缺乏标准**：没有一种单一的方法来解释 AI。不同的行业应用需要不同的方法。
 
 1.  **计算成本**：详细的解释需要额外的资源。这可能使过程变得缓慢和昂贵。
 
 ## 结论
 
-解释性人工智能是一个关键领域，解决了AI决策过程中的透明性需求。它提供了各种技术和方法，使复杂的AI模型更具可解释性和理解性。随着AI的不断发展，XAI的开发和实施将在建立信任、确保公平性以及推动不同领域AI的负责任使用中发挥重要作用。
+解释性人工智能是一个关键领域，解决了 AI 决策过程中的透明性需求。它提供了各种技术和方法，使复杂的 AI 模型更具可解释性和理解性。随着 AI 的不断发展，XAI 的开发和实施将在建立信任、确保公平性以及推动不同领域 AI 的负责任使用中发挥重要作用。
 
 **[Jayita Gulati](https://www.linkedin.com/in/jayitagulati1998/)** 是一位机器学习爱好者和技术作家，致力于构建机器学习模型。她拥有利物浦大学计算机科学硕士学位。
 
@@ -153,10 +153,10 @@ exp.show_in_notebook(show_table=True, show_all=False)
 
 +   [为对话解释解释性人工智能](https://www.kdnuggets.com/2022/10/explaining-explainable-ai-conversations.html)
 
-+   [解释性人工智能：揭示模型决策的10个Python库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
++   [解释性人工智能：揭示模型决策的 10 个 Python 库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
 
 +   [弥合人类理解与机器学习之间的差距：…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)
 
-+   [使用PyCaret在Python中进行聚类的介绍](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
++   [使用 PyCaret 在 Python 中进行聚类的介绍](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
 
 +   [数据科学的基础数学：奇异值分解的可视化介绍…](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)

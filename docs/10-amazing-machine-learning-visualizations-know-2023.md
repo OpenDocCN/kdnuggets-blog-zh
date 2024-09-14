@@ -1,8 +1,8 @@
 # 2023 年你应该了解的 10 个令人惊叹的机器学习可视化
 
-> 原文：[https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
+> 原文：[`www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html`](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
 
-![2023 年你应该了解的 10 个令人惊叹的机器学习可视化](../Images/94707c4df6887d0528c7e4b23ee48ee8.png)
+![2023 年你应该了解的 10 个令人惊叹的机器学习可视化](img/94707c4df6887d0528c7e4b23ee48ee8.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -88,7 +88,7 @@ visualizer.show(outpath="name_of_the_plot.png")
 
 作者提供的代码
 
-![2023 年你应该知道的 10 个惊人的机器学习可视化](../Images/045f880cb835bfa38de67690ac085953.png)
+![2023 年你应该知道的 10 个惊人的机器学习可视化](img/045f880cb835bfa38de67690ac085953.png)
 
 主成分图 — 2D|作者提供的图像
 
@@ -96,7 +96,7 @@ visualizer.show(outpath="name_of_the_plot.png")
 
 作者提供的代码
 
-![2023 年你应该知道的 10 个惊人的机器学习可视化](../Images/f7228111c3dc766f74a9566110390476.png)
+![2023 年你应该知道的 10 个惊人的机器学习可视化](img/f7228111c3dc766f74a9566110390476.png)
 
 主成分图 — 3D|作者提供的图像
 
@@ -120,19 +120,19 @@ PCA 可视化器的最重要参数包括：
 
 在 Yellowbrick 中绘制验证曲线时，我们将使用相同的*breast_cancer*数据集（请参见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#6fde)）。我们将绘制**max_depth**超参数在随机森林模型中的影响。
 
-以下代码解释了如何利用Yellowbrick的ValidationCurve可视化工具使用*breast_cancer*数据集创建验证曲线。
+以下代码解释了如何利用 Yellowbrick 的 ValidationCurve 可视化工具使用*breast_cancer*数据集创建验证曲线。
 
 代码由作者提供
 
-![2023年你应该知道的10个惊人的机器学习可视化](../Images/150429e016c8884c12190c126762d4e9.png)
+![2023 年你应该知道的 10 个惊人的机器学习可视化](img/150429e016c8884c12190c126762d4e9.png)
 
 验证曲线|图片由作者提供
 
-模型在**max_depth**值为6之后开始过拟合。当`max_depth=6`时，模型很好地拟合了训练数据，并且在新的未见数据上也具有良好的泛化能力。
+模型在**max_depth**值为 6 之后开始过拟合。当`max_depth=6`时，模型很好地拟合了训练数据，并且在新的未见数据上也具有良好的泛化能力。
 
-ValidationCurve可视化工具的最重要参数包括：
+ValidationCurve 可视化工具的最重要参数包括：
 
-+   **estimator:** 这可以是任何Scikit-learn机器学习模型，如决策树、随机森林、支持向量机等。
++   **estimator:** 这可以是任何 Scikit-learn 机器学习模型，如决策树、随机森林、支持向量机等。
 
 +   **param_name:** 这是我们希望监控的超参数的名称。
 
@@ -146,7 +146,7 @@ ValidationCurve可视化工具的最重要参数包括：
 
 ## 用法
 
-学习曲线绘制了训练和验证错误或准确率与迭代次数或训练实例数的关系。你可能认为学习曲线和验证曲线看起来一样，但学习曲线的x轴绘制了迭代次数，而验证曲线的x轴绘制了超参数的值。
+学习曲线绘制了训练和验证错误或准确率与迭代次数或训练实例数的关系。你可能认为学习曲线和验证曲线看起来一样，但学习曲线的 x 轴绘制了迭代次数，而验证曲线的 x 轴绘制了超参数的值。
 
 学习曲线的用途包括：
 
@@ -154,25 +154,25 @@ ValidationCurve可视化工具的最重要参数包括：
 
 +   学习曲线用于识别在寻找神经网络或机器学习模型的最佳学习率时的*慢收敛*、*振荡*、*振荡且发散*以及*适当收敛*场景。
 
-+   学习曲线用于查看我们的模型从增加更多训练数据中获益多少。以这种方式使用时，x轴显示训练实例的数量。
++   学习曲线用于查看我们的模型从增加更多训练数据中获益多少。以这种方式使用时，x 轴显示训练实例的数量。
 
-## Yellowbrick实现
+## Yellowbrick 实现
 
-使用传统方法创建学习曲线复杂且耗时。相反，我们可以使用Yellowbrick的LearningCurve可视化工具。
+使用传统方法创建学习曲线复杂且耗时。相反，我们可以使用 Yellowbrick 的 LearningCurve 可视化工具。
 
-为了在Yellowbrick中绘制学习曲线，我们将使用相同的*breast_cancer*数据集构建一个支持向量分类器（见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#6fde)）。
+为了在 Yellowbrick 中绘制学习曲线，我们将使用相同的*breast_cancer*数据集构建一个支持向量分类器（见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#6fde)）。
 
-以下代码解释了如何利用Yellowbrick的LearningCurve可视化工具使用*breast_cancer*数据集创建验证曲线。
+以下代码解释了如何利用 Yellowbrick 的 LearningCurve 可视化工具使用*breast_cancer*数据集创建验证曲线。
 
 代码由作者提供
 
-![2023年你应该知道的10个惊人的机器学习可视化](../Images/3d6f70a3ea545013b87705ed288eedf1.png)
+![2023 年你应该知道的 10 个惊人的机器学习可视化](img/3d6f70a3ea545013b87705ed288eedf1.png)
 
 学习曲线|图片由作者提供
 
-模型从增加更多训练实例中不会获得收益。模型已经用569个训练实例进行了训练。175个训练实例之后，验证准确率没有改善。
+模型从增加更多训练实例中不会获得收益。模型已经用 569 个训练实例进行了训练。175 个训练实例之后，验证准确率没有改善。
 
-LearningCurve可视化工具的最重要参数包括：
+LearningCurve 可视化工具的最重要参数包括：
 
 +   **estimator:** 这可以是任何 Scikit-learn 机器学习模型，例如决策树、随机森林、支持向量机等。
 
@@ -196,7 +196,7 @@ LearningCurve可视化工具的最重要参数包括：
 
 作者提供的代码
 
-![2023年你应该知道的10个令人惊叹的机器学习可视化](../Images/3cde2829e689c0b5be926da3a47f32b6.png)
+![2023 年你应该知道的 10 个令人惊叹的机器学习可视化](img/3cde2829e689c0b5be926da3a47f32b6.png)
 
 肘部图|作者提供的图片
 
@@ -226,43 +226,43 @@ KElbowVisualizer 的最重要参数包括：
 
 作者提供的代码
 
-![2023年你应该知道的10个令人惊叹的机器学习可视化](../Images/f703ccc9d7dcd76127416d55263c8354.png)
+![2023 年你应该知道的 10 个令人惊叹的机器学习可视化](img/f703ccc9d7dcd76127416d55263c8354.png)
 
-具有2个簇的轮廓图（k=2）|作者提供的图片
+具有 2 个簇的轮廓图（k=2）|作者提供的图片
 
 通过改变 KMeans() 类中的簇数，我们可以在不同的时间执行上述代码，以创建当 k=3、k=4 和 k=5 时的轮廓图。
 
 **k=3**
 
-![2023年你应该知道的10种惊人的机器学习可视化](../Images/8903414955555e93c6cee0a303ae8a93.png)
+![2023 年你应该知道的 10 种惊人的机器学习可视化](img/8903414955555e93c6cee0a303ae8a93.png)
 
-|具有3个聚类（k=3）的轮廓图|作者提供的图像
+|具有 3 个聚类（k=3）的轮廓图|作者提供的图像
 
 **k=4**
 
-![2023年你应该知道的10种惊人的机器学习可视化](../Images/dda9337e16726fee4d16d7da155015ce.png)
+![2023 年你应该知道的 10 种惊人的机器学习可视化](img/dda9337e16726fee4d16d7da155015ce.png)
 
-具有4个聚类（k=4）的轮廓图|作者提供的图像
+具有 4 个聚类（k=4）的轮廓图|作者提供的图像
 
 **k=5**
 
-![2023年你应该知道的10种惊人的机器学习可视化](../Images/31a7712a95ab447641da039dfce5e61d.png)
+![2023 年你应该知道的 10 种惊人的机器学习可视化](img/31a7712a95ab447641da039dfce5e61d.png)
 
-具有4个聚类（k=5）的轮廓图|作者提供的图像
+具有 4 个聚类（k=5）的轮廓图|作者提供的图像
 
-轮廓图包含每个聚类一个刀形。每个刀形由表示聚类中所有数据点的条形创建。因此，刀形的宽度表示聚类中所有实例的数量。条形的长度表示每个实例的轮廓系数。虚线表示轮廓评分 — 来源：[*实践K-Means聚类*](https://medium.com/mlearning-ai/k-means-clustering-with-scikit-learn-e2af706450e4)（由我撰写）。
+轮廓图包含每个聚类一个刀形。每个刀形由表示聚类中所有数据点的条形创建。因此，刀形的宽度表示聚类中所有实例的数量。条形的长度表示每个实例的轮廓系数。虚线表示轮廓评分 — 来源：[*实践 K-Means 聚类*](https://medium.com/mlearning-ai/k-means-clustering-with-scikit-learn-e2af706450e4)（由我撰写）。
 
-刀形宽度大致相等的图告诉我们聚类是平衡的，并且每个聚类中的实例数量大致相同 — 这是K-Means聚类中最重要的假设之一。
+刀形宽度大致相等的图告诉我们聚类是平衡的，并且每个聚类中的实例数量大致相同 — 这是 K-Means 聚类中最重要的假设之一。
 
-当刀形图中的条形延伸到虚线时，聚类被良好分隔 — 这是K-Means聚类中的另一个重要假设。
+当刀形图中的条形延伸到虚线时，聚类被良好分隔 — 这是 K-Means 聚类中的另一个重要假设。
 
-当k=3时，聚类平衡且良好分隔。因此，在我们的示例中，最佳的聚类数量是3。
+当 k=3 时，聚类平衡且良好分隔。因此，在我们的示例中，最佳的聚类数量是 3。
 
-SilhouetteVisualizer的最重要参数包括：
+SilhouetteVisualizer 的最重要参数包括：
 
-+   **估计器：**K-Means模型实例
++   **估计器：**K-Means 模型实例
 
-+   **颜色：** 字符串，用于每个刀形的颜色集合。‘yellowbrick’或Matplotlib的颜色映射字符串之一，如‘Accent’，‘Set1’，等。
++   **颜色：** 字符串，用于每个刀形的颜色集合。‘yellowbrick’或 Matplotlib 的颜色映射字符串之一，如‘Accent’，‘Set1’，等。
 
 # 6\. 类别不平衡图
 
@@ -270,25 +270,25 @@ SilhouetteVisualizer的最重要参数包括：
 
 类别不平衡图检测分类数据集中目标列中的类别不平衡。
 
-类别不平衡发生在一个类别的实例数量显著多于另一个类别时。例如，涉及垃圾邮件检测的数据集中，“非垃圾邮件”类别有9900个实例，而“垃圾邮件”类别只有100个实例。模型将无法捕捉到少数类别（*垃圾邮件*类别）。因此，当发生类别不平衡时，模型在预测少数类别时将不准确 — 来源：[*揭示机器学习和深度学习中的20个常见错误*](https://rukshanpramoditha.medium.com/top-20-machine-learning-and-deep-learning-mistakes-that-secretly-happen-behind-the-scenes-e211e056c867)（由我撰写）。
+类别不平衡发生在一个类别的实例数量显著多于另一个类别时。例如，涉及垃圾邮件检测的数据集中，“非垃圾邮件”类别有 9900 个实例，而“垃圾邮件”类别只有 100 个实例。模型将无法捕捉到少数类别（*垃圾邮件*类别）。因此，当发生类别不平衡时，模型在预测少数类别时将不准确 — 来源：[*揭示机器学习和深度学习中的 20 个常见错误*](https://rukshanpramoditha.medium.com/top-20-machine-learning-and-deep-learning-mistakes-that-secretly-happen-behind-the-scenes-e211e056c867)（由我撰写）。
 
-## Yellowbrick实现
+## Yellowbrick 实现
 
-使用传统方法创建类别不平衡图复杂且耗时。相反，我们可以使用Yellowbrick的ClassBalance可视化工具。
+使用传统方法创建类别不平衡图复杂且耗时。相反，我们可以使用 Yellowbrick 的 ClassBalance 可视化工具。
 
-要在Yellowbrick中绘制类别不平衡图，我们将使用*breast_cancer*数据集（分类数据集，详见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#6fde)）。
+要在 Yellowbrick 中绘制类别不平衡图，我们将使用*breast_cancer*数据集（分类数据集，详见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#6fde)）。
 
-以下代码解释了我们如何利用Yellowbrick的ClassBalance可视化工具使用*breast_cancer*数据集创建类别不平衡图。
+以下代码解释了我们如何利用 Yellowbrick 的 ClassBalance 可视化工具使用*breast_cancer*数据集创建类别不平衡图。
 
 代码由作者提供
 
-![2023年你应该了解的10个惊人机器学习可视化](../Images/bef8df00aabfd074c350c6f16747c0a6.png)
+![2023 年你应该了解的 10 个惊人机器学习可视化](img/bef8df00aabfd074c350c6f16747c0a6.png)
 
 类别不平衡图|作者提供的图像
 
-在*恶性*类别中有超过200个实例，在*良性*类别中有超过350个实例。因此，尽管这些实例在两个类别之间分布不均，但我们在这里看不到明显的类别不平衡。
+在*恶性*类别中有超过 200 个实例，在*良性*类别中有超过 350 个实例。因此，尽管这些实例在两个类别之间分布不均，但我们在这里看不到明显的类别不平衡。
 
-ClassBalance可视化工具的最重要参数包括：
+ClassBalance 可视化工具的最重要参数包括：
 
 +   **labels:** 列表，目标列中唯一类别的名称。
 
@@ -298,29 +298,29 @@ ClassBalance可视化工具的最重要参数包括：
 
 线性回归中的残差图用于通过分析回归模型中误差的方差来确定残差（观察值-预测值）是否不相关（独立）。
 
-残差图是通过绘制残差与预测值的关系来创建的。如果预测值与残差之间存在任何模式，表明拟合的回归模型不完美。如果点在x轴周围随机分布，说明回归模型与数据拟合良好。
+残差图是通过绘制残差与预测值的关系来创建的。如果预测值与残差之间存在任何模式，表明拟合的回归模型不完美。如果点在 x 轴周围随机分布，说明回归模型与数据拟合良好。
 
 ## Yellowbrick 实现
 
-使用传统方法创建残差图复杂且耗时。相反，我们可以使用Yellowbrick的ResidualsPlot可视化工具。
+使用传统方法创建残差图复杂且耗时。相反，我们可以使用 Yellowbrick 的 ResidualsPlot 可视化工具。
 
-要在Yellowbrick中绘制残差图，我们将使用*Advertising*([Advertising.csv](https://drive.google.com/file/d/1-1MgAOHbTI5DreeXObN6KLcSka6LS9G-/view?usp=share_link)，详见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#8bd8)）数据集。
+要在 Yellowbrick 中绘制残差图，我们将使用*Advertising*([Advertising.csv](https://drive.google.com/file/d/1-1MgAOHbTI5DreeXObN6KLcSka6LS9G-/view?usp=share_link)，详见[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#8bd8)）数据集。
 
-以下代码解释了我们如何利用Yellowbrick的ResidualsPlot可视化工具使用*Advertising*数据集创建残差图。
+以下代码解释了我们如何利用 Yellowbrick 的 ResidualsPlot 可视化工具使用*Advertising*数据集创建残差图。
 
 代码由作者提供
 
-![2023年你应该了解的10个惊人机器学习可视化](../Images/43a4c0ed19f3dfa9bb5268674da76344.png)
+![2023 年你应该了解的 10 个惊人机器学习可视化](img/43a4c0ed19f3dfa9bb5268674da76344.png)
 
 残差图|作者提供的图像
 
 我们可以清楚地看到残差图中预测值与残差之间存在某种非线性模式。拟合的回归模型不完美，但足够好。
 
-ResidualsPlot可视化工具的最重要参数包括：
+ResidualsPlot 可视化工具的最重要参数包括：
 
-+   **estimator:** 这可以是任何Scikit-learn回归器。
++   **estimator:** 这可以是任何 Scikit-learn 回归器。
 
-+   **hist:** 布尔值，默认为`True`。是否绘制残差的直方图，用于检查另一个假设——残差大致呈正态分布，均值为0，标准差固定。
++   **hist:** 布尔值，默认为`True`。是否绘制残差的直方图，用于检查另一个假设——残差大致呈正态分布，均值为 0，标准差固定。
 
 # 8\. 预测误差图
 
@@ -330,29 +330,29 @@ ResidualsPlot可视化工具的最重要参数包括：
 
 预测误差图是通过将预测值与实际目标值进行比较来创建的。
 
-如果模型的预测非常准确，点应该落在45度线上的。如果不准确，点则会分散在这条线周围。
+如果模型的预测非常准确，点应该落在 45 度线上的。如果不准确，点则会分散在这条线周围。
 
 ## Yellowbrick 实现
 
-使用传统方法创建预测误差图既复杂又耗时。相反，我们可以使用Yellowbrick的PredictionError可视化工具。
+使用传统方法创建预测误差图既复杂又耗时。相反，我们可以使用 Yellowbrick 的 PredictionError 可视化工具。
 
-要在Yellowbrick中绘制预测误差图，我们将使用*Advertising*（[Advertising.csv](https://drive.google.com/file/d/1-1MgAOHbTI5DreeXObN6KLcSka6LS9G-/view?usp=share_link)，详见末尾的[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#8bd8)）数据集。
+要在 Yellowbrick 中绘制预测误差图，我们将使用*Advertising*（[Advertising.csv](https://drive.google.com/file/d/1-1MgAOHbTI5DreeXObN6KLcSka6LS9G-/view?usp=share_link)，详见末尾的[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#8bd8)）数据集。
 
-以下代码解释了如何利用Yellowbrick的PredictionError可视化工具来创建一个使用*Advertising*数据集的残差图。
+以下代码解释了如何利用 Yellowbrick 的 PredictionError 可视化工具来创建一个使用*Advertising*数据集的残差图。
 
 作者代码
 
-![2023年你应该知道的10个令人惊叹的机器学习可视化](../Images/975ad64ede24ec65172ffdc5e307d90c.png)
+![2023 年你应该知道的 10 个令人惊叹的机器学习可视化](img/975ad64ede24ec65172ffdc5e307d90c.png)
 
 预测误差图|作者图像
 
-点并没有完全落在45度线上的，但模型足够好。
+点并没有完全落在 45 度线上的，但模型足够好。
 
-PredictionError可视化工具的最重要参数包括：
+PredictionError 可视化工具的最重要参数包括：
 
-+   **estimator: ** 这可以是任何Scikit-learn回归器。
++   **estimator: ** 这可以是任何 Scikit-learn 回归器。
 
-+   **identity: ** 布尔值，默认`True`。是否绘制45度线。
++   **identity: ** 布尔值，默认`True`。是否绘制 45 度线。
 
 # 9\. 库克距离图
 
@@ -362,21 +362,21 @@ PredictionError可视化工具的最重要参数包括：
 
 ## Yellowbrick 实现
 
-使用传统方法创建库克距离图既复杂又耗时。相反，我们可以使用Yellowbrick的CooksDistance可视化工具。
+使用传统方法创建库克距离图既复杂又耗时。相反，我们可以使用 Yellowbrick 的 CooksDistance 可视化工具。
 
-要在Yellowbrick中绘制库克距离图，我们将使用*Advertising*（[Advertising.csv](https://drive.google.com/file/d/1-1MgAOHbTI5DreeXObN6KLcSka6LS9G-/view?usp=share_link)，详见末尾的[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#8bd8)）数据集。
+要在 Yellowbrick 中绘制库克距离图，我们将使用*Advertising*（[Advertising.csv](https://drive.google.com/file/d/1-1MgAOHbTI5DreeXObN6KLcSka6LS9G-/view?usp=share_link)，详见末尾的[Citation](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582#8bd8)）数据集。
 
-以下代码解释了如何利用Yellowbrick的CooksDistance可视化工具来创建一个使用*Advertising*数据集的库克距离图。
+以下代码解释了如何利用 Yellowbrick 的 CooksDistance 可视化工具来创建一个使用*Advertising*数据集的库克距离图。
 
 作者代码
 
-![2023年你应该知道的10个令人惊叹的机器学习可视化](../Images/61959f47735e7883841325fbb5347350.png)
+![2023 年你应该知道的 10 个令人惊叹的机器学习可视化](img/61959f47735e7883841325fbb5347350.png)
 
 库克距离图|作者图像
 
 有一些观察点延伸出了阈值（水平红色）线。这些是异常值。因此，我们应该在构建回归模型之前对数据进行准备。
 
-CooksDistance可视化工具的最重要参数包括：
+CooksDistance 可视化工具的最重要参数包括：
 
 +   **draw_threshold: ** 布尔值，默认`True`。是否绘制阈值线。
 
@@ -398,7 +398,7 @@ CooksDistance可视化工具的最重要参数包括：
 
 作者提供的代码
 
-![2023年你应该知道的10种惊人的机器学习可视化](../Images/c9298cfb81fbeec3ff251f21569db3b8.png)
+![2023 年你应该知道的 10 种惊人的机器学习可视化](img/c9298cfb81fbeec3ff251f21569db3b8.png)
 
 特征重要性图 | 作者提供的图片
 
@@ -430,7 +430,7 @@ CooksDistance可视化工具的最重要参数包括：
 
 1.  **Prediction Error Plot:** *PredictionError()*, 用法 — 用于评估回归模型的图形方法。
 
-1.  **Cook's Distance Plot:** *CooksDistance()*, 用法 — 基于实例的Cook距离检测数据集中的异常值。
+1.  **Cook's Distance Plot:** *CooksDistance()*, 用法 — 基于实例的 Cook 距离检测数据集中的异常值。
 
 1.  **Feature Importances Plot:** *FeatureImportances()*, 用法 — 根据每个特征的相对重要性选择所需的最少重要特征，以生成一个机器学习模型。
 
@@ -442,7 +442,7 @@ CooksDistance可视化工具的最重要参数包括：
 
 +   **Citation: **Dua, D. 和 Graff, C.（2019）。UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]。加州欧文：加州大学信息与计算机科学学院。
 
-+   **Source: **[https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic)](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic))
++   **Source: **[`archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic)`](https://archive.ics.uci.edu/ml/datasets/breast+cancer+wisconsin+(diagnostic))
 
 +   **License: ***威廉·H·沃尔伯格博士*（普通外科系）。
 
@@ -454,38 +454,38 @@ CooksDistance可视化工具的最重要参数包括：
 
 +   **Citation: **Dua, D. 和 Graff, C.（2019）。UCI Machine Learning Repository [http://archive.ics.uci.edu/ml]。加州欧文：加州大学信息与计算机科学学院。
 
-+   **Source: **[https://archive.ics.uci.edu/ml/datasets/iris](https://archive.ics.uci.edu/ml/datasets/iris)
++   **Source: **[`archive.ics.uci.edu/ml/datasets/iris`](https://archive.ics.uci.edu/ml/datasets/iris)
 
 +   **License: ***R.A.费舍尔*拥有此数据集的版权。Michael Marshall 在*Creative Commons Public Domain Dedication License*（[**CC0**](https://creativecommons.org/share-your-work/public-domain/cc0)）下将此数据集捐赠给公众。你可以在[这里](https://rukshanpramoditha.medium.com/dataset-and-software-license-types-you-need-to-consider-d20965ca43dc#6ade)了解更多关于不同数据集许可证类型的信息。
 
 ## 广告数据集信息
 
-+   **Source:** [https://www.kaggle.com/datasets/sazid28/advertising.csv](https://www.kaggle.com/datasets/sazid28/advertising.csv)
++   **Source:** [`www.kaggle.com/datasets/sazid28/advertising.csv`](https://www.kaggle.com/datasets/sazid28/advertising.csv)
 
 +   **License: **此数据集在*Creative Commons Public Domain Dedication License*（[**CC0**](https://creativecommons.org/share-your-work/public-domain/cc0)）下公开提供。你可以在[这里](https://rukshanpramoditha.medium.com/dataset-and-software-license-types-you-need-to-consider-d20965ca43dc#6ade)了解更多关于不同数据集许可证类型的信息。
 
 ## 参考资料
 
-+   [https://www.scikit-yb.org/en/latest/](https://www.scikit-yb.org/en/latest/)
++   [`www.scikit-yb.org/en/latest/`](https://www.scikit-yb.org/en/latest/)
 
-+   [https://www.scikit-yb.org/en/latest/quickstart.html](https://www.scikit-yb.org/en/latest/quickstart.html)
++   [`www.scikit-yb.org/en/latest/quickstart.html`](https://www.scikit-yb.org/en/latest/quickstart.html)
 
-+   [https://www.scikit-yb.org/en/latest/api/index.html](https://www.scikit-yb.org/en/latest/api/index.html)
++   [`www.scikit-yb.org/en/latest/api/index.html`](https://www.scikit-yb.org/en/latest/api/index.html)
 
-**[Rukshan Pramoditha](https://www.linkedin.com/in/rukshan-manorathna-700a3916b/)** ([@rukshanpramoditha](https://rukshanpramoditha.medium.com/)) 拥有工业统计学的学士学位。自2020年以来支持数据科学教育。Medium上排名前50的数据科学/人工智能/机器学习作家。他撰写过关于数据科学、机器学习、深度学习、神经网络、Python和数据分析的文章。他有将复杂话题转化为有价值且易于理解内容的卓越记录。
+**[Rukshan Pramoditha](https://www.linkedin.com/in/rukshan-manorathna-700a3916b/)** ([@rukshanpramoditha](https://rukshanpramoditha.medium.com/)) 拥有工业统计学的学士学位。自 2020 年以来支持数据科学教育。Medium 上排名前 50 的数据科学/人工智能/机器学习作家。他撰写过关于数据科学、机器学习、深度学习、神经网络、Python 和数据分析的文章。他有将复杂话题转化为有价值且易于理解内容的卓越记录。
 
 [原文](https://towardsdatascience.com/10-amazing-machine-learning-visualizations-you-should-know-in-2023-528282940582)。经许可转载。
 
 ### 更多相关主题
 
-+   [使用Python图形库制作惊人的可视化](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)
++   [使用 Python 图形库制作惊人的可视化](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)
 
-+   [2023年你需要尝试的5个惊人且免费的LLMs游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
++   [2023 年你需要尝试的 5 个惊人且免费的 LLMs 游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
 
-+   [每个机器学习工程师应掌握的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets新闻，4月13日：数据科学家应了解的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [2023年你应考虑的顶级AutoML框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
-+   [2023年成为数据科学家所需掌握的19项技能](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
++   [2023 年成为数据科学家所需掌握的 19 项技能](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)

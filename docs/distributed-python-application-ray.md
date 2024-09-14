@@ -1,12 +1,12 @@
 # 使用 Ray 编写你的第一个分布式 Python 应用程序
 
-> 原文：[https://www.kdnuggets.com/2021/08/distributed-python-application-ray.html](https://www.kdnuggets.com/2021/08/distributed-python-application-ray.html)
+> 原文：[`www.kdnuggets.com/2021/08/distributed-python-application-ray.html`](https://www.kdnuggets.com/2021/08/distributed-python-application-ray.html)
 
-[评论](#comments)
+评论
 
 **由 [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学专家**
 
-![Ray 使并行和分布式计算的工作更像你所期望的那样](../Images/538062b0a78f2d34aef3c6188ad7cecb.png)
+![Ray 使并行和分布式计算的工作更像你所期望的那样](img/538062b0a78f2d34aef3c6188ad7cecb.png)
 
 Ray 使并行和分布式计算的工作更像你所期望的那样 ([图片来源](https://www.reddit.com/r/aww/comments/2oagj8/multithreaded_programming_theory_and_practice/))
 
@@ -34,7 +34,7 @@ Ray 使并行和分布式计算的工作更像你所期望的那样 ([图片来�
 
 Ray 库满足这些需求，并允许你在不重写应用程序的情况下进行扩展。为了简化并行和分布式计算，Ray 将函数和类转化为分布式环境中的任务和角色。这个教程的其余部分将深入探讨这些概念以及在构建并行和分布式应用程序时需要考虑的一些重要事项。
 
-![Ray 生态系统](../Images/a219e5df972dc5e1ae9dd250a6ee0a3c.png)
+![Ray 生态系统](img/a219e5df972dc5e1ae9dd250a6ee0a3c.png)
 
 虽然本教程探讨了 Ray 如何使并行化普通 Python 代码变得容易，但需要注意的是，Ray 及其生态系统也使得并行化现有库变得容易，例如 [scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1)、 [XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray)、 [LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray)、 [PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead)等。
 
@@ -91,7 +91,7 @@ def fibonacci_distributed(sequence_size):
 os.cpu_count()
 ```
 
-![os cpucount](../Images/e670d8f5a15c37da40e802f8614feb32.png)
+![os cpucount](img/e670d8f5a15c37da40e802f8614feb32.png)
 
 本教程中使用的机器有八个 CPU，这意味着下面的每个函数将生成 8 个斐波那契数列。
 
@@ -120,7 +120,7 @@ run_local(100000)
 run_remote(100000)
 ```
 
-![first distributed run_local run_remote](../Images/9005332b15106e8cb059a1e24ef9f1db.png)
+![first distributed run_local run_remote](img/9005332b15106e8cb059a1e24ef9f1db.png)
 
 run_remote 函数将计算并行化到多个 CPU 上，从而减少了处理时间（1.76 秒对比 4.20 秒）。
 
@@ -128,21 +128,21 @@ run_remote 函数将计算并行化到多个 CPU 上，从而减少了处理时�
 
 为了更好地理解为何 run_remote 更快，我们简要回顾一下代码，并解释 Ray API 的工作原理。
 
-![run_remote yellow](../Images/88beaa9a9ad3a237ea935e57ceabfea0.png)
+![run_remote yellow](img/88beaa9a9ad3a237ea935e57ceabfea0.png)
 
 `ray.init()` 命令启动所有相关的 Ray 进程。默认情况下，Ray 每个 CPU 核心创建一个工作进程。如果你想在集群上运行 Ray，你需要传入一个集群地址，例如 `ray.init(address= 'InsertAddressHere')`。
 
-![run_remote remote fibonacci_distributed.remote](../Images/bda15b087909e40f3071fa0c9c29480d.png)
+![run_remote remote fibonacci_distributed.remote](img/bda15b087909e40f3071fa0c9c29480d.png)
 
 `fibonacci_distributed.remote(100000)`
 
-![fibonacci_distributed.remote(100000)](../Images/79635aab3b742035a45bb27dcd41d70a.png)
+![fibonacci_distributed.remote(100000)](img/79635aab3b742035a45bb27dcd41d70a.png)
 
 调用 `fibonacci_distributed.remote(sequence_size)` 会立即返回一个未来对象，而不是函数的返回值。实际的函数执行将会在后台进行。由于它立即返回，每个函数调用可以并行执行。这使得生成那些多个 100000 长的 Fibonacci 序列所需的时间更少。
 
-![ray.get](../Images/946c3b656a4b0cea11163461bf11387c.png)
+![ray.get](img/946c3b656a4b0cea11163461bf11387c.png)
 
-![ray get results](../Images/98aa587fb84451107d8d06cc0266bef5.png)
+![ray get results](img/98aa587fb84451107d8d06cc0266bef5.png)
 
 `ray.get` 在任务完成时检索结果值。
 
@@ -175,25 +175,25 @@ Ray 附带一个仪表盘，你可以在调用 `ray.init` 函数后通过 http:/
 
 下面的仪表盘显示了在运行 `run_remote(200000)` 后每个节点和每个工作者的资源利用情况。注意仪表盘显示了每个工作者正在运行的 `fibonacci_distributed` 函数。观察你的分布式函数运行的情况是个好主意。这样，如果你发现一个工作者在做所有的工作，你可能是不正确使用了 `ray.get` 函数。另外，如果你发现你的总 CPU 利用率接近 100%，你可能做得有些过头了。
 
-[![ray dashboard 8 core](../Images/ceb59b8475e95e39799f0d5ec6b35100.png)](https://images.ctfassets.net/xjan103pcp94/7slD3bTCoh7Wsd0LIScROV/29127717361206b65fab68981b56e59d/8CoreMichael.png)
+![ray dashboard 8 core](https://images.ctfassets.net/xjan103pcp94/7slD3bTCoh7Wsd0LIScROV/29127717361206b65fab68981b56e59d/8CoreMichael.png)
 
 ## 分布式计算中的权衡
 
-本教程使用了斐波那契序列，因为它们提供了调整计算和IO的多种选项。你可以通过增加或减少序列大小来改变每个函数调用所需的计算量。序列大小越大，生成序列所需的计算量就越多，而序列大小越小，则所需的计算量越少。如果你分布的计算量过小，Ray的开销将主导总处理时间，你将无法从分布函数中获得任何价值。
+本教程使用了斐波那契序列，因为它们提供了调整计算和 IO 的多种选项。你可以通过增加或减少序列大小来改变每个函数调用所需的计算量。序列大小越大，生成序列所需的计算量就越多，而序列大小越小，则所需的计算量越少。如果你分布的计算量过小，Ray 的开销将主导总处理时间，你将无法从分布函数中获得任何价值。
 
-在分布函数时，IO也至关重要。如果你修改这些函数以返回它们计算的序列，随着序列大小的增加，IO也会增加。在某些时候，传输数据所需的时间将主导完成多个分布函数调用所需的总时间。如果你在集群中分布函数，这一点尤其重要。这将需要使用网络，而网络调用比本教程中使用的进程间通信更昂贵。
+在分布函数时，IO 也至关重要。如果你修改这些函数以返回它们计算的序列，随着序列大小的增加，IO 也会增加。在某些时候，传输数据所需的时间将主导完成多个分布函数调用所需的总时间。如果你在集群中分布函数，这一点尤其重要。这将需要使用网络，而网络调用比本教程中使用的进程间通信更昂贵。
 
-因此，建议你尝试实验分布式斐波那契函数和本地斐波那契函数。尝试确定从远程函数中获益所需的最小序列大小。一旦你搞清楚了计算量，就可以调整IO以观察整体性能的变化。无论你使用什么工具，分布式架构在不需要移动大量数据时效果最佳。
+因此，建议你尝试实验分布式斐波那契函数和本地斐波那契函数。尝试确定从远程函数中获益所需的最小序列大小。一旦你搞清楚了计算量，就可以调整 IO 以观察整体性能的变化。无论你使用什么工具，分布式架构在不需要移动大量数据时效果最佳。
 
-幸运的是，Ray的一个主要优点是能够远程维护整个对象。这有助于缓解IO问题。接下来我们来看看这个问题。
+幸运的是，Ray 的一个主要优点是能够远程维护整个对象。这有助于缓解 IO 问题。接下来我们来看看这个问题。
 
-## 远程对象作为Actors
+## 远程对象作为 Actors
 
-正如Ray将Python函数转化为分布式任务一样，Ray将Python类转化为分布式的actor。Ray提供了actor，以便你可以并行化一个类的实例。从代码角度看，你只需在Python类中添加`@ray.remote`装饰器，即可将其转化为一个actor。当你创建该类的一个实例时，Ray会创建一个新的actor，这是一个在集群中运行的进程，并持有对象的副本。
+正如 Ray 将 Python 函数转化为分布式任务一样，Ray 将 Python 类转化为分布式的 actor。Ray 提供了 actor，以便你可以并行化一个类的实例。从代码角度看，你只需在 Python 类中添加`@ray.remote`装饰器，即可将其转化为一个 actor。当你创建该类的一个实例时，Ray 会创建一个新的 actor，这是一个在集群中运行的进程，并持有对象的副本。
 
-由于它们是远程对象，它们可以持有数据，并且它们的方法可以操作这些数据。这有助于减少进程间通信。如果你发现自己编写了太多返回数据的任务，而这些数据又被发送到其他任务中，请考虑使用actor。
+由于它们是远程对象，它们可以持有数据，并且它们的方法可以操作这些数据。这有助于减少进程间通信。如果你发现自己编写了太多返回数据的任务，而这些数据又被发送到其他任务中，请考虑使用 actor。
 
-现在，让我们看一下下面的actor。
+现在，让我们看一下下面的 actor。
 
 ```py
 from collections import namedtuple
@@ -256,31 +256,31 @@ class GSODActor():
         self.stations = {l.STATION for l in self.rows}
 ```
 
-上述代码可用于加载和操作一个名为全球表面日总结（GSOD）的公共数据集。该数据集由国家海洋和大气管理局（NOAA）管理，并且可以在其 [网站](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/) 上免费获取。NOAA目前维护来自全球超过9000个站点的数据，GSOD数据集包含这些站点的每日总结信息。从1929年到2020年，每年都有一个gzip文件。对于本教程，你只需下载 [1980](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/1980.tar.gz) 和 [2020](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/2020.tar.gz) 的文件。
+上述代码可用于加载和操作一个名为全球表面日总结（GSOD）的公共数据集。该数据集由国家海洋和大气管理局（NOAA）管理，并且可以在其 [网站](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/) 上免费获取。NOAA 目前维护来自全球超过 9000 个站点的数据，GSOD 数据集包含这些站点的每日总结信息。从 1929 年到 2020 年，每年都有一个 gzip 文件。对于本教程，你只需下载 [1980](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/1980.tar.gz) 和 [2020](https://www.ncei.noaa.gov/data/global-summary-of-the-day/archive/2020.tar.gz) 的文件。
 
-这次actor实验的目标是计算1980年和2020年中有多少次读数达到100度或更高，并确定2020年是否有比1980年更多的极端温度。为了实现公平比较，只应考虑1980年和2020年都存在的站点。因此，这次实验的逻辑如下：
+这次 actor 实验的目标是计算 1980 年和 2020 年中有多少次读数达到 100 度或更高，并确定 2020 年是否有比 1980 年更多的极端温度。为了实现公平比较，只应考虑 1980 年和 2020 年都存在的站点。因此，这次实验的逻辑如下：
 
-+   加载1980年的数据。
++   加载 1980 年的数据。
 
-+   加载2020年的数据。
++   加载 2020 年的数据。
 
-+   获取1980年存在的站点列表。
++   获取 1980 年存在的站点列表。
 
-+   获取2020年存在的站点列表。
++   获取 2020 年存在的站点列表。
 
 +   确定站点的交集。
 
-+   获取1980年期间交集站点中100度或以上的读数数量。
++   获取 1980 年期间交集站点中 100 度或以上的读数数量。
 
-+   获取2020年期间交集站点中100度或以上的读数数量。
++   获取 2020 年期间交集站点中 100 度或以上的读数数量。
 
 +   打印结果。
 
-问题在于，这种逻辑完全是顺序的；一个事情只能在另一个事情之后发生。使用Ray后，这种逻辑可以在并行中完成。
+问题在于，这种逻辑完全是顺序的；一个事情只能在另一个事情之后发生。使用 Ray 后，这种逻辑可以在并行中完成。
 
 下表展示了更具并行性的逻辑。
 
-![Ray Actor Logic](../Images/2cd485e5f4ded37e80278cefebff12fe.png)
+![Ray Actor Logic](img/2cd485e5f4ded37e80278cefebff12fe.png)
 
 以这种方式编写逻辑是确保你以可并行的方式执行所有操作的绝佳方法。以下代码实现了这一逻辑。
 
@@ -314,9 +314,9 @@ def compare_years(year1, year2, high_temp):
 compare_years('1980', '2020', 100)
 ```
 
-![compare years](../Images/5776d72c988f49612a47db2d6ea76343.png)
+![compare years](img/5776d72c988f49612a47db2d6ea76343.png)
 
-关于上面的代码有几点重要事项需要提及。首先，将`@ray.remote`装饰器放置在类级别，使所有类方法都可以被远程调用。其次，上面的代码使用了两个actor进程（gsod_y1和gsod_y2），这些进程可以并行执行方法（尽管每个actor每次只能执行一个方法）。这使得1980年和2020年的数据能够同时加载和处理。
+关于上面的代码有几点重要事项需要提及。首先，将`@ray.remote`装饰器放置在类级别，使所有类方法都可以被远程调用。其次，上面的代码使用了两个 actor 进程（gsod_y1 和 gsod_y2），这些进程可以并行执行方法（尽管每个 actor 每次只能执行一个方法）。这使得 1980 年和 2020 年的数据能够同时加载和处理。
 
 ## 结论
 
@@ -328,27 +328,27 @@ compare_years('1980', '2020', 100)
 
 **相关：**
 
-+   [成功的数据科学职业建议](./2020/03/advice-successful-data-science-career.html)
++   成功的数据科学职业建议
 
-+   [Dask 和 Pandas：没有过多的数据](./2021/03/dask-pandas-data.html)
++   Dask 和 Pandas：没有过多的数据
 
-+   [加速 Scikit-Learn 模型训练](./2021/03/speed-up-scikit-learn-model-training.html)
++   加速 Scikit-Learn 模型训练
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
 ### 更多相关内容
 
-+   [本周提升搜索应用的8种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
++   [本周提升搜索应用的 8 种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
 
 +   [RAG vs 微调：哪种工具最能提升您的 LLM 应用？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
 
@@ -356,6 +356,6 @@ compare_years('1980', '2020', 100)
 
 +   [使用 Google Earth 在 Python 中构建地理空间应用](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
 
-+   [用 Python 轻松构建 AI 应用的10个步骤](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)
++   [用 Python 轻松构建 AI 应用的 10 个步骤](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)
 
 +   [数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)

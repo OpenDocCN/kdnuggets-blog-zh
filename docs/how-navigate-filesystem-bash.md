@@ -1,28 +1,28 @@
-# 如何使用Bash导航文件系统
+# 如何使用 Bash 导航文件系统
 
-> 原文：[https://www.kdnuggets.com/how-navigate-filesystem-bash](https://www.kdnuggets.com/how-navigate-filesystem-bash)
+> 原文：[`www.kdnuggets.com/how-navigate-filesystem-bash`](https://www.kdnuggets.com/how-navigate-filesystem-bash)
 
-![如何在Bash中导航文件系统](../Images/75e2240333ef9f79459e9be4b0744581.png)
+![如何在 Bash 中导航文件系统](img/75e2240333ef9f79459e9be4b0744581.png)
 
 作者提供的图片 | Midjourney & Canva
 
-对于阅读此内容的人来说，Unix/Linux文件系统以层次结构组织并不奇怪。最顶层的目录是根目录，由`/`表示。所有其他目录和文件都组织在根目录下。除此之外，每个用户都有一个主目录，通常由`~`表示，个人文件和目录存储在这里。
+对于阅读此内容的人来说，Unix/Linux 文件系统以层次结构组织并不奇怪。最顶层的目录是根目录，由`/`表示。所有其他目录和文件都组织在根目录下。除此之外，每个用户都有一个主目录，通常由`~`表示，个人文件和目录存储在这里。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-虽然在Linux和其他类Unix系统上，许多文件管理可以通过图形用户界面文件管理器来处理，但使用Bourne-Again Shell（bash）命令行提供了一种简单、灵活、快速的方式，并且能够与各种命令行工具和应用程序交互。
+虽然在 Linux 和其他类 Unix 系统上，许多文件管理可以通过图形用户界面文件管理器来处理，但使用 Bourne-Again Shell（bash）命令行提供了一种简单、灵活、快速的方式，并且能够与各种命令行工具和应用程序交互。
 
-让我们深入了解如何使用bash导航Unix/Linux文件系统。
+让我们深入了解如何使用 bash 导航 Unix/Linux 文件系统。
 
 ## `pwd` 命令
 
@@ -126,20 +126,20 @@ cd ~/projects && ls -la && tree -L 2
 
 ## 最终想法
 
-练习本文介绍的命令将帮助你在浏览Unix/Linux文件系统时更加熟练。一旦你熟悉了这些基础知识，你可以深入探索更高级的导航和文件操作命令。
+练习本文介绍的命令将帮助你在浏览 Unix/Linux 文件系统时更加熟练。一旦你熟悉了这些基础知识，你可以深入探索更高级的导航和文件操作命令。
 
-[](https://www.linkedin.com/in/mattmayo13/)****[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的贡献编辑，Matthew致力于使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法，以及探索新兴AI。他的使命是使数据科学社区的知识变得普及。Matthew从6岁起便开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)****[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的贡献编辑，Matthew 致力于使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法，以及探索新兴 AI。他的使命是使数据科学社区的知识变得普及。Matthew 从 6 岁起便开始编程。
 
 ### 更多相关主题
 
-+   [如何使用Python的Pathlib导航文件系统](https://www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib)
++   [如何使用 Python 的 Pathlib 导航文件系统](https://www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib)
 
-+   [5个真正有用的Bash脚本用于数据科学](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
++   [5 个真正有用的 Bash 脚本用于数据科学](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
 
-+   [如何在Bash中管理文件和目录](https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash)
++   [如何在 Bash 中管理文件和目录](https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash)
 
-+   [用Bash构建你的第一个ETL管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
++   [用 Bash 构建你的第一个 ETL 管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
 
-+   [AI Con USA: AI的未来](https://www.kdnuggets.com/2024/02/techwell-ai-con-usa-navigate-the-future-of-ai)
++   [AI Con USA: AI 的未来](https://www.kdnuggets.com/2024/02/techwell-ai-con-usa-navigate-the-future-of-ai)
 
-+   [AI Con USA: 2024年AI的未来](https://www.kdnuggets.com/2024/04/ai-con-usa-navigate-the-future-of-ai)
++   [AI Con USA: 2024 年 AI 的未来](https://www.kdnuggets.com/2024/04/ai-con-usa-navigate-the-future-of-ai)

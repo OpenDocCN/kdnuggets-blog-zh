@@ -1,8 +1,8 @@
 # SQL 数据科学：理解和利用连接
 
-> 原文：[https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)
+> 原文：[`www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html`](https://www.kdnuggets.com/2023/08/sql-data-science-understanding-leveraging-joins.html)
 
-![SQL 数据科学：理解和利用连接](../Images/86deadfbec258a1269997f42cd07dad7.png)
+![SQL 数据科学：理解和利用连接](img/86deadfbec258a1269997f42cd07dad7.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -48,7 +48,7 @@ SQL 连接允许你基于公共列合并多个数据库表中的数据。这样�
 
 我们以以下方式可视化它。
 
-![SQL 数据科学：理解和利用连接](../Images/44d24b263f1f47b1285c60cc487cdfe3.png)
+![SQL 数据科学：理解和利用连接](img/44d24b263f1f47b1285c60cc487cdfe3.png)
 
 作者提供的图片
 
@@ -60,7 +60,7 @@ SQL 连接允许你基于公共列合并多个数据库表中的数据。这样�
 
 我们可以像这样可视化它。
 
-![SQL 数据科学：理解和利用连接](../Images/24697b8483d2b05b9ad49a9b2438a346.png)
+![SQL 数据科学：理解和利用连接](img/24697b8483d2b05b9ad49a9b2438a346.png)
 
 作者提供的图片
 
@@ -70,7 +70,7 @@ SQL 连接允许你基于公共列合并多个数据库表中的数据。这样�
 
 右连接是左连接的反向操作。它返回右表中的所有行和左表中匹配的行。如果没有匹配，它会返回左表中列的 NULL 值。
 
-![SQL 数据科学：理解和利用连接](../Images/b14a0d784cea5dc2682df16e97553195.png)
+![SQL 数据科学：理解和利用连接](img/b14a0d784cea5dc2682df16e97553195.png)
 
 图片由作者提供
 
@@ -80,7 +80,7 @@ SQL 连接允许你基于公共列合并多个数据库表中的数据。这样�
 
 全外连接返回两个表中的所有行，尽可能匹配行，并为不匹配的行填充 NULL 值。
 
-![SQL 数据科学：理解和利用连接](../Images/8ece26dd3f0c639286ddc64df5ae448e.png)
+![SQL 数据科学：理解和利用连接](img/8ece26dd3f0c639286ddc64df5ae448e.png)
 
 图片由作者提供
 
@@ -92,7 +92,7 @@ SQL 连接允许你基于公共列合并多个数据库表中的数据。这样�
 
 这是一个将帮助你更容易理解的可视化图。
 
-![SQL 数据科学：理解和利用连接](../Images/8b9fe0b7a1fb44e74c1f71edd99cdb6c.png)
+![SQL 数据科学：理解和利用连接](img/8b9fe0b7a1fb44e74c1f71edd99cdb6c.png)
 
 图片由作者提供
 
@@ -206,15 +206,15 @@ ORDER BY budget_emp_ratio DESC;
 
 我将这两列设置为相等，因为我想获取所有项目 ID 相同的数据。我还在每列前面使用了表的别名。
 
-现在我可以访问两个表的数据，因此可以在SELECT中列出列。第一列是项目名称，第二列是计算得出的结果。
+现在我可以访问两个表的数据，因此可以在 SELECT 中列出列。第一列是项目名称，第二列是计算得出的结果。
 
-这个计算使用COUNT()函数按每个项目计算员工数量。然后我将每个项目的预算除以员工数量。我还将结果转换为十进制值并四舍五入到零位小数。
+这个计算使用 COUNT()函数按每个项目计算员工数量。然后我将每个项目的预算除以员工数量。我还将结果转换为十进制值并四舍五入到零位小数。
 
 ### 输出
 
 这是查询返回的结果。
 
-![SQL For Data Science: Understanding and Leveraging Joins](../Images/6bd7c952f4590be4964d1b451fde8193.png)
+![SQL For Data Science: Understanding and Leveraging Joins](img/6bd7c952f4590be4964d1b451fde8193.png)
 
 ## 2\. LEFT JOIN 示例
 
@@ -222,7 +222,7 @@ ORDER BY budget_emp_ratio DESC;
 
 ***顾客订单和详情***
 
-**“找出每个城市的订单数量、顾客数量和订单总成本。仅包括至少有5个订单的城市，并计算每个城市中的所有顾客，即使他们没有下订单。”**
+**“找出每个城市的订单数量、顾客数量和订单总成本。仅包括至少有 5 个订单的城市，并计算每个城市中的所有顾客，即使他们没有下订单。”**
 
 **“输出每个计算结果及其对应的城市名称。”**
 
@@ -249,11 +249,11 @@ ORDER BY budget_emp_ratio DESC;
 | order_details: | varchar |
 | total_order_cost: | int |
 
-共享的列是**customers**表中的id和**orders**表中的cust_id。我将使用这些列来连接表。
+共享的列是**customers**表中的 id 和**orders**表中的 cust_id。我将使用这些列来连接表。
 
 ### 代码
 
-下面是如何使用LEFT JOIN解决这个问题的方法。
+下面是如何使用 LEFT JOIN 解决这个问题的方法。
 
 ```py
 SELECT c.city,
@@ -266,17 +266,17 @@ GROUP BY c.city
 HAVING COUNT(o.id) >=5;
 ```
 
-我在FROM中引用表**customers**（这是我们的左表），并通过客户ID列将其与**orders**表进行LEFT JOIN。
+我在 FROM 中引用表**customers**（这是我们的左表），并通过客户 ID 列将其与**orders**表进行 LEFT JOIN。
 
-现在我可以选择城市，使用COUNT()按城市获取订单和顾客数量，并使用SUM()按城市计算订单总成本。
+现在我可以选择城市，使用 COUNT()按城市获取订单和顾客数量，并使用 SUM()按城市计算订单总成本。
 
 为了按城市获取所有这些计算结果，我按城市对输出进行分组。
 
-问题中还有一个额外的要求：“仅包括至少有5个订单的城市…” 我使用HAVING来仅显示订单数量为五个或更多的城市。
+问题中还有一个额外的要求：“仅包括至少有 5 个订单的城市…” 我使用 HAVING 来仅显示订单数量为五个或更多的城市。
 
-**问题是，我为什么使用了** **LEFT JOIN** **而不是** **JOIN** **呢？** 提示在问题中：“…并计算每个城市中的所有顾客，即使他们没有下订单。” 这意味着可能不是所有顾客都有下订单。因此，我想展示来自**customers**表中的所有顾客，这正好符合LEFT JOIN的定义。
+**问题是，我为什么使用了** **LEFT JOIN** **而不是** **JOIN** **呢？** 提示在问题中：“…并计算每个城市中的所有顾客，即使他们没有下订单。” 这意味着可能不是所有顾客都有下订单。因此，我想展示来自**customers**表中的所有顾客，这正好符合 LEFT JOIN 的定义。
 
-如果我使用JOIN，结果会出错，因为我会遗漏那些没有下订单的顾客。
+如果我使用 JOIN，结果会出错，因为我会遗漏那些没有下订单的顾客。
 
 **注意：SQL 中连接的复杂性并不体现在它们的语法上，而是在于它们的语义！** 如你所见，每个连接的写法都是一样的，只有关键字不同。然而，每个连接的工作方式不同，因此可能会根据数据输出不同的结果。因此，你必须完全理解每个连接的作用，并选择能返回你所需结果的连接！
 
@@ -284,11 +284,11 @@ HAVING COUNT(o.id) >=5;
 
 现在，让我们看看输出结果。
 
-![SQL 数据科学：理解和利用连接](../Images/f25478b07ca19c239ea6224e1259a9a3.png)
+![SQL 数据科学：理解和利用连接](img/f25478b07ca19c239ea6224e1259a9a3.png)
 
 ## 3\. RIGHT JOIN 示例
 
-RIGHT JOIN是LEFT JOIN的镜像。这就是为什么我可以很容易地用RIGHT JOIN解决之前的问题。让我给你演示一下怎么做。
+RIGHT JOIN 是 LEFT JOIN 的镜像。这就是为什么我可以很容易地用 RIGHT JOIN 解决之前的问题。让我给你演示一下怎么做。
 
 ### 数据
 
@@ -317,15 +317,15 @@ HAVING COUNT(o.id) >=5;
 
 ### 输出
 
-![SQL 数据科学：理解和利用连接](../Images/f25478b07ca19c239ea6224e1259a9a3.png)
+![SQL 数据科学：理解和利用连接](img/f25478b07ca19c239ea6224e1259a9a3.png)
 
 ## 4\. FULL JOIN 示例
 
-[Salesforce 和 Tesla 的问题](https://platform.stratascratch.com/coding/10318-new-products?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+joins)要求你计算2020年公司发布的产品数量与前一年公司发布的产品数量之间的净差异。
+[Salesforce 和 Tesla 的问题](https://platform.stratascratch.com/coding/10318-new-products?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+joins)要求你计算 2020 年公司发布的产品数量与前一年公司发布的产品数量之间的净差异。
 
 ***新产品***
 
-*“你将获得一个按公司和年份划分的产品发布表。编写一个查询，计算2020年公司发布的产品数量与前一年公司发布的产品数量之间的净差异。输出公司的名称以及2020年与前一年发布的产品净差异。”*
+*“你将获得一个按公司和年份划分的产品发布表。编写一个查询，计算 2020 年公司发布的产品数量与前一年公司发布的产品数量之间的净差异。输出公司的名称以及 2020 年与前一年发布的产品净差异。”*
 
 ### 数据
 
@@ -351,9 +351,9 @@ FROM car_launches
 WHERE YEAR = 2020;
 ```
 
-第一个 SELECT 语句找出2020年的公司和产品名称。这个查询稍后将转化为子查询。
+第一个 SELECT 语句找出 2020 年的公司和产品名称。这个查询稍后将转化为子查询。
 
-问题要求你找出2020年和2019年之间的差异。所以我们来写一个相同的查询，但针对2019年。
+问题要求你找出 2020 年和 2019 年之间的差异。所以我们来写一个相同的查询，但针对 2019 年。
 
 ```py
 SELECT company_name,
@@ -362,7 +362,7 @@ FROM car_launches
 WHERE YEAR = 2019;
 ```
 
-我将现在将这些查询变成子查询，并使用FULL OUTER JOIN连接它们。
+我将现在将这些查询变成子查询，并使用 FULL OUTER JOIN 连接它们。
 
 ```py
 SELECT *
@@ -379,13 +379,13 @@ FULL OUTER JOIN
 ON a.company_name = b.company_name;
 ```
 
-子查询可以视作表，因此可以连接。我给第一个子查询一个别名，并将其放在FROM子句中。然后，我使用FULL OUTER JOIN将其与第二个子查询通过公司名称列连接。
+子查询可以视作表，因此可以连接。我给第一个子查询一个别名，并将其放在 FROM 子句中。然后，我使用 FULL OUTER JOIN 将其与第二个子查询通过公司名称列连接。
 
-通过使用这种类型的SQL连接，我将获得2020年所有公司和产品与2019年所有公司和产品的合并。
+通过使用这种类型的 SQL 连接，我将获得 2020 年所有公司和产品与 2019 年所有公司和产品的合并。
 
-![SQL For Data Science: Understanding and Leveraging Joins](../Images/e93b4f2c0f0fd8ad0a49de95cf97bcd5.png)
+![SQL For Data Science: Understanding and Leveraging Joins](img/e93b4f2c0f0fd8ad0a49de95cf97bcd5.png)
 
-现在我可以完成我的查询了。我们选择公司名称。同时，我将使用COUNT()函数来查找每年发布的产品数量，然后计算差异。最后，我将按公司对输出进行分组，并按公司字母顺序排序。
+现在我可以完成我的查询了。我们选择公司名称。同时，我将使用 COUNT()函数来查找每年发布的产品数量，然后计算差异。最后，我将按公司对输出进行分组，并按公司字母顺序排序。
 
 这是完整的查询。
 
@@ -409,13 +409,13 @@ ORDER BY company_name;
 
 ### 输出
 
-这是2020年和2019年之间公司及发布产品差异的列表。
+这是 2020 年和 2019 年之间公司及发布产品差异的列表。
 
-![SQL For Data Science: Understanding and Leveraging Joins](../Images/437525d5348f8d14247ef258e2bf80cd.png)
+![SQL For Data Science: Understanding and Leveraging Joins](img/437525d5348f8d14247ef258e2bf80cd.png)
 
 ## 5\. CROSS JOIN 示例
 
-[这道Deloitte的问题](https://platform.stratascratch.com/coding/2101-maximum-of-two-numbers?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+joins)非常适合展示CROSS JOIN的工作原理。
+[这道 Deloitte 的问题](https://platform.stratascratch.com/coding/2101-maximum-of-two-numbers?code_type=1&utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+joins)非常适合展示 CROSS JOIN 的工作原理。
 
 ***两个数字的最大值***
 
@@ -436,7 +436,7 @@ ORDER BY company_name;
 
 ### 代码
 
-这段代码是CROSS JOIN的一个示例，同时也是自连接的示例。
+这段代码是 CROSS JOIN 的一个示例，同时也是自连接的示例。
 
 ```py
 SELECT dn1.number AS number1,
@@ -449,21 +449,21 @@ FROM deloitte_numbers AS dn1
 CROSS JOIN deloitte_numbers AS dn2;
 ```
 
-我在FROM中引用了表，并给它一个别名。然后，我通过在CROSS JOIN后引用它并给表另一个别名，将其与自身进行CROSS JOIN。
+我在 FROM 中引用了表，并给它一个别名。然后，我通过在 CROSS JOIN 后引用它并给表另一个别名，将其与自身进行 CROSS JOIN。
 
-现在可以将一个表视作两个表来使用。我从每个表中选择列number。然后，我使用CASE语句设置一个条件来显示两个数字中的最大值。
+现在可以将一个表视作两个表来使用。我从每个表中选择列 number。然后，我使用 CASE 语句设置一个条件来显示两个数字中的最大值。
 
-为什么这里使用CROSS JOIN？请记住，这是一种SQL连接类型，将显示所有表中所有行的所有组合。这正是问题所要求的！
+为什么这里使用 CROSS JOIN？请记住，这是一种 SQL 连接类型，将显示所有表中所有行的所有组合。这正是问题所要求的！
 
 ### 输出
 
 这是所有组合及两个数字中较大者的快照。
 
-![SQL For Data Science: Understanding and Leveraging Joins](../Images/0dbd17281afe1d66e06d7000a7662d7f.png)
+![SQL For Data Science: Understanding and Leveraging Joins](img/0dbd17281afe1d66e06d7000a7662d7f.png)
 
-# 利用SQL连接进行数据科学
+# 利用 SQL 连接进行数据科学
 
-现在你知道如何使用SQL连接，问题是如何在数据科学中利用这些知识。
+现在你知道如何使用 SQL 连接，问题是如何在数据科学中利用这些知识。
 
 SQL 连接在数据科学任务中扮演着至关重要的角色，如数据探索、数据清理和特征工程。
 

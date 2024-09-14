@@ -1,30 +1,30 @@
-# 机器学习的5个部落 – 问题与答案
+# 机器学习的 5 个部落 – 问题与答案
 
-> 原文：[https://www.kdnuggets.com/2015/11/domingos-5-tribes-machine-learning-questions-answers.html](https://www.kdnuggets.com/2015/11/domingos-5-tribes-machine-learning-questions-answers.html)
+> 原文：[`www.kdnuggets.com/2015/11/domingos-5-tribes-machine-learning-questions-answers.html`](https://www.kdnuggets.com/2015/11/domingos-5-tribes-machine-learning-questions-answers.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-11月24日，我主持了[![Pedro Domingos 200](../Images/c41e30824c383ee55110db8ec743c09c.png) **ACM网络研讨会与Pedro Domingos**](/2015/11/domingos-5-tribes-machine-learning-acm-webinar.html)。
+11 月 24 日，我主持了![Pedro Domingos 200 **ACM 网络研讨会与 Pedro Domingos**](img/domingos-5-tribes-machine-learning-acm-webinar.html)。
 
-[Pedro](http://homes.cs.washington.edu/~pedrod/)，机器学习和数据科学的领先研究者之一，详细讲解了他的优秀书籍，[**《主算法》**](/2015/09/book-master-algorithm-pedro-domingos.html)，其中解释了机器学习的5个部落的方法：符号主义者、连接主义者、进化主义者、贝叶斯主义者和类比主义者，以及如何结合这些方法以寻找能够彻底改变我们世界的主算法。
+[Pedro](http://homes.cs.washington.edu/~pedrod/)，机器学习和数据科学的领先研究者之一，详细讲解了他的优秀书籍，**《主算法》**，其中解释了机器学习的 5 个部落的方法：符号主义者、连接主义者、进化主义者、贝叶斯主义者和类比主义者，以及如何结合这些方法以寻找能够彻底改变我们世界的主算法。
 
-![5部落机器学习](../Images/3a989ea3d4a02fc25ea1ca60e828ebb1.png)
+![5 部落机器学习](img/3a989ea3d4a02fc25ea1ca60e828ebb1.png)
 
-超过1500人参加了此次网络研讨会。
+超过 1500 人参加了此次网络研讨会。
 
-介绍Pedro后，我准备放松并享受演讲，但我的主持人角色却意外地变得非常紧张，因为仅仅几分钟后，许多问题开始涌入，我必须迅速阅读和优先处理这些问题。
+介绍 Pedro 后，我准备放松并享受演讲，但我的主持人角色却意外地变得非常紧张，因为仅仅几分钟后，许多问题开始涌入，我必须迅速阅读和优先处理这些问题。
 
-Pedro只有时间回答了100多个提交中的5个问题，但许多问题都非常好，因此我要求他回答一些其他有趣的问题。
+Pedro 只有时间回答了 100 多个提交中的 5 个问题，但许多问题都非常好，因此我要求他回答一些其他有趣的问题。
 
-另见Pedro对我早期问题的回答：
+另见 Pedro 对我早期问题的回答：
 
-[![主算法](../Images/26df3a3796057f3761d707ebaa659b2e.png)**深度学习是主算法吗？**](/2015/11/domingos-5-tribes-machine-learning-acm-webinar.html)
+![主算法**深度学习是主算法吗？**](img/domingos-5-tribes-machine-learning-acm-webinar.html)
 
 （帖子底部）
 
-这里是Pedro Domingos对网络研讨会中他没有时间现场回答的额外问题的回答。
+这里是 Pedro Domingos 对网络研讨会中他没有时间现场回答的额外问题的回答。
 
-Juan Alvarado提问：为了获得主算法，您是否考虑过由于哥德尔不完备定理而使其不可能？
+Juan Alvarado 提问：为了获得主算法，您是否考虑过由于哥德尔不完备定理而使其不可能？
 
 **Pedro Domingos:** 主算法仅学习可学习的内容；它无法证明哥德尔定理无法证明的命题。
 
@@ -34,21 +34,21 @@ Pramod Anantharam：你认为可解释的模型是否会在未来战胜基于黑
 
 Mohamed Helmy：我们能简要了解一下规则引擎和符号逻辑（决策树）吗？
 
-**PD:** 当然，可以查看《主算法》第三章或我的[MOOC（Coursera上的机器学习）](https://www.coursera.org/course/machlearning)的第二和第三周。
+**PD:** 当然，可以查看《主算法》第三章或我的[MOOC（Coursera 上的机器学习）](https://www.coursera.org/course/machlearning)的第二和第三周。
 
 Jesus Morales：对于想要追随这条路径的大学生，他们在开始之前需要了解哪些建议？
 
-**PD:** 上MOOC课程，阅读教科书，尝试一些算法。请参见《大师算法》中的进一步阅读部分。
+**PD:** 上 MOOC 课程，阅读教科书，尝试一些算法。请参见《大师算法》中的进一步阅读部分。
 
-Cristal Jones-Harris, 你有360度推荐系统的文本样本吗？
+Cristal Jones-Harris, 你有 360 度推荐系统的文本样本吗？
 
 **PD:** 参见我在《华尔街日报》上发表的文章《["为你的数字模型做好准备"](http://www.wsj.com/articles/get-ready-for-your-digital-model-1447351480)》。
 
-Subhra Mazumdar: 360度推荐系统会影响人的决策能力吗？它会成为人和机器的共生关系，还是更倾向于主奴关系？
+Subhra Mazumdar: 360 度推荐系统会影响人的决策能力吗？它会成为人和机器的共生关系，还是更倾向于主奴关系？
 
-**PD:** 360度推荐系统是你大脑的扩展，因此你掌控一切。它所做的只是尽力做出你在有时间时会做出的选择，并且当它出错时，它应该学会在下次做得更好。
+**PD:** 360 度推荐系统是你大脑的扩展，因此你掌控一切。它所做的只是尽力做出你在有时间时会做出的选择，并且当它出错时，它应该学会在下次做得更好。
 
-Abdelaziz Mahoui, 在新的360度推荐系统中，偶然性将如何表现？
+Abdelaziz Mahoui, 在新的 360 度推荐系统中，偶然性将如何表现？
 
 **PD:** 推荐系统应该具有随机组件，就像现实生活一样。
 
@@ -58,7 +58,7 @@ Delane Pickel: “主算法”这个问题意味着只有一个。终极学习�
 
 Aude Dufresne: 如果评估和优化改变现实怎么办？
 
-**PD:** 不确定你指的是什么，但学习结果的部署往往会导致被建模的人改变他们的行为。这是一个重要且尚未充分探索的问题，但可以参考我在KDD-04会议上发表的论文《["对抗分类"](http://homes.cs.washington.edu/~pedrod/papers/kdd04.pdf)》。
+**PD:** 不确定你指的是什么，但学习结果的部署往往会导致被建模的人改变他们的行为。这是一个重要且尚未充分探索的问题，但可以参考我在 KDD-04 会议上发表的论文《["对抗分类"](http://homes.cs.washington.edu/~pedrod/papers/kdd04.pdf)》。
 
 Michael Valenzuela: Wolpert 的《无免费午餐定理》证明了不存在“通用”机器学习算法。你如何调和这个证明和你的目标？
 
@@ -74,13 +74,13 @@ Joanna Biega: 那么关于存储大量数据的传统数据结构呢？我们是
 
 Bhaskar Veeraraghavan, 主动强化学习有什么应用吗？
 
-**PD:** 强化学习在某种意义上是主动学习。我听说Deep Mind正在将其应用于网页搜索，这将是一个主要应用，如果部署在Google的引擎中。
+**PD:** 强化学习在某种意义上是主动学习。我听说 Deep Mind 正在将其应用于网页搜索，这将是一个主要应用，如果部署在 Google 的引擎中。
 
-Habibollah Daneshpajouh, 正如你提到的，每个领域的这些“部落”在某些问题上表现更好，我们如何检测出在特定问题上最适合的ML“部落”？
+Habibollah Daneshpajouh, 正如你提到的，每个领域的这些“部落”在某些问题上表现更好，我们如何检测出在特定问题上最适合的 ML“部落”？
 
 **PD:** 尽管进行了大量研究，但没有人能给出一个好的理论答案，不过有很多实用的启发式方法，你也可以尝试所有的方法。
 
-Latha Krishnaswamy, ML算法通常是无监督的。在你看来，这种情况允许或受限于缺乏人工监督的影响是什么？
+Latha Krishnaswamy, ML 算法通常是无监督的。在你看来，这种情况允许或受限于缺乏人工监督的影响是什么？
 
 **PD:** 实际上，监督学习的使用频率高于无监督学习。如果有监督（或获取成本不高），肯定要使用监督。
 
@@ -106,14 +106,14 @@ Victor: 你认为下一个接近突破的机器学习进展是什么？
 
 ### 更多相关话题
 
-+   [7个数据分析面试问题与答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
++   [7 个数据分析面试问题与答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
 
-+   [5 Python面试问题与答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
++   [5 Python 面试问题与答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
 
-+   [20个问题（含答案）识别伪数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
++   [20 个问题（含答案）识别伪数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-+   [识别伪数据科学家的20个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
++   [识别伪数据科学家的 20 个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
-+   [使用HuggingFace Pipelines和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   [使用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 
-+   [数据科学面试中的24个A/B测试问题](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)
++   [数据科学面试中的 24 个 A/B 测试问题](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)

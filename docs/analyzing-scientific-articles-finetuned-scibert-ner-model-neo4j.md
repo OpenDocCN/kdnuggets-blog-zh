@@ -1,12 +1,12 @@
 # 使用微调的 SciBERT NER 模型和 Neo4j 分析科学文章
 
-> 原文：[https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
+> 原文：[`www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html`](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
 
-[评论](#comments)
+评论
 
 **由 [Khaled Adrani](https://www.linkedin.com/in/khaled-adrani/)，UBIAI**
 
-![](../Images/5ce6147a3d8777d31d2d2c689b15cd97.png)
+![](img/5ce6147a3d8777d31d2d2c689b15cd97.png)
 
 作者提供的图片：科学文章的知识图谱
 
@@ -28,7 +28,7 @@
 
 对于注释部分，我们使用了[UBIAI 文本注释工具](https://ubiai.tools/)，并将注释导出为 IOB 格式，如下所示：
 
-![](../Images/ab8bf89a7ef3e679a06618139574e80b.png)
+![](img/ab8bf89a7ef3e679a06618139574e80b.png)
 
 作者提供的图片：UBIAI 文本注释工具
 
@@ -79,7 +79,7 @@ df = pd.read_csv(path)[["Title","Authors","Journal","DOI","Abstract"]]
 df.head()
 ```
 
-![](../Images/b9b5aad77938bbae47a626eb10af0c9d.png)
+![](img/b9b5aad77938bbae47a626eb10af0c9d.png)
 
 我们数据集的一个样本
 
@@ -181,7 +181,7 @@ for e in docs[0]['annotations']:
   print(e['text'],' --> ',e['label'])
 ```
 
-![](../Images/bc438beb6a5c381f0c8818fea62cd3d0.png)
+![](img/bc438beb6a5c381f0c8818fea62cd3d0.png)
 
 文章中存在的实体示例
 
@@ -253,7 +253,7 @@ MERGE (j)-[:PUBLISHED]->(a)
 """)
 ```
 
-![](../Images/b370e26c881150bb6ddc51337320f2e5.png)
+![](img/b370e26c881150bb6ddc51337320f2e5.png)
 
 作者提供的图像：三本期刊及其发表的文章
 
@@ -287,7 +287,7 @@ RETURN node
 """, {'data': articles})
 ```
 
-![](../Images/50ce069828e7c231cbd29ba3538ee88f.png)
+![](img/50ce069828e7c231cbd29ba3538ee88f.png)
 
 作者提供的图片：一篇文章及其连接的节点
 
@@ -317,7 +317,7 @@ RETURN e.name as entity, labels(e) as label, count(*) as freq ORDER by freq DESC
 """)
 ```
 
-![](../Images/5ed5bf8a1dc102cf0210e2af125445b5.png)
+![](img/5ed5bf8a1dc102cf0210e2af125445b5.png)
 
 我们语料库中的十大热门材料和过程
 
@@ -344,7 +344,7 @@ DESC LIMIT 5
 """)
 ```
 
-![](../Images/a4ffb378250657c272e91d5537609a17.png)
+![](img/a4ffb378250657c272e91d5537609a17.png)
 
 共现分析输出
 
@@ -360,7 +360,7 @@ where a1.id = '6a2552ac2861474da7da6ace1240b92509f56a6ec894d3e166b3475af81e65ae'
 RETURN p
 ```
 
-![](../Images/dbafefa8ad1eb1ef7c48f6eaecf7acf6.png)
+![](img/dbafefa8ad1eb1ef7c48f6eaecf7acf6.png)
 
 作者提供的图片：两个给定作者之间的最短路径
 
@@ -380,21 +380,21 @@ RETURN p
 
 **相关：**
 
-+   [使用 AWS 云上的 ML 构建无服务器新闻数据管道](/2021/11/build-serverless-news-data-pipeline-ml-aws-cloud.html)
++   使用 AWS 云上的 ML 构建无服务器新闻数据管道
 
-+   [关键短语提取的元学习](/2021/12/metalearning-keyphrase-extraction.html)
++   关键短语提取的元学习
 
-+   [NLP 中不同词嵌入技术的终极指南](/2021/11/guide-word-embedding-techniques-nlp.html)
++   NLP 中不同词嵌入技术的终极指南
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
 
 * * *
 

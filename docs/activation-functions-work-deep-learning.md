@@ -1,18 +1,18 @@
 # 深度学习中的激活函数如何工作
 
-> 原文：[https://www.kdnuggets.com/2022/06/activation-functions-work-deep-learning.html](https://www.kdnuggets.com/2022/06/activation-functions-work-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2022/06/activation-functions-work-deep-learning.html`](https://www.kdnuggets.com/2022/06/activation-functions-work-deep-learning.html)
 
 让我们从**激活函数**的定义开始：
 
 > * * *
 > 
-> ## 我们的前3个课程推荐
+> ## 我们的前 3 个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 > 
 > * * *
 > 
@@ -22,7 +22,7 @@
 
 听起来有点复杂？别担心！阅读本文后，你将对激活函数有更好的理解。
 
-![深度学习中的激活函数如何工作](../Images/8d4304aeeb1d39b7ac754f055981f1e6.png)
+![深度学习中的激活函数如何工作](img/8d4304aeeb1d39b7ac754f055981f1e6.png)
 
 对于人类而言，我们的大脑接收来自外部世界的信息，对接收输入的神经元进行处理，并激活神经元尾部以生成所需的决策。同样，在神经网络中，我们提供图像、声音、数字等作为输入，对人工神经元进行处理，通过算法激活正确的最终神经元层以生成结果。
 
@@ -46,13 +46,13 @@
 
 线性激活函数，通常称为**恒等激活函数**，与输入成正比。线性激活函数的范围为（-∞到∞）。线性激活函数只是将输入的加权总和相加并返回结果。
 
-![深度学习中的激活函数如何工作](../Images/15a61eb4276c282836fc2e706c9442b6.png)
+![深度学习中的激活函数如何工作](img/15a61eb4276c282836fc2e706c9442b6.png)
 
 线性激活函数——图示
 
 从数学角度来看，它可以表示为：
 
-![深度学习中的激活函数如何工作](../Images/151bf2885a57ef72a7ac4c54ba18e9c8.png)
+![深度学习中的激活函数如何工作](img/151bf2885a57ef72a7ac4c54ba18e9c8.png)
 
 线性激活函数 — 方程
 
@@ -60,7 +60,7 @@
 
 +   这不是一个二元激活函数，因为线性激活函数仅提供一系列激活值。我们可以将几个神经元连接在一起，如果有多个激活值，我们可以基于此计算最大值（或软最大值）。
 
-+   该激活函数的导数是一个常数。也就是说，梯度与x（输入）无关。
++   该激活函数的导数是一个常数。也就是说，梯度与 x（输入）无关。
 
 ### 二元阶跃激活函数
 
@@ -68,13 +68,13 @@
 
 激活函数将输入值与阈值进行比较。如果输入值大于阈值，则激活神经元。如果输入值小于阈值，则禁用神经元，这意味着其输出不会传递到下一层或隐藏层。
 
-![激活函数在深度学习中的工作原理](../Images/10e4ae23fa8708e44ca18e6a0e10b212.png)
+![激活函数在深度学习中的工作原理](img/10e4ae23fa8708e44ca18e6a0e10b212.png)
 
 二元阶跃函数 — 图
 
 从数学上讲，二元激活函数可以表示为：
 
-![激活函数在深度学习中的工作原理](../Images/47bd118991d87fcd6c5dfe70168733df.png)
+![激活函数在深度学习中的工作原理](img/47bd118991d87fcd6c5dfe70168733df.png)
 
 二元阶跃激活函数 — 方程
 
@@ -96,15 +96,15 @@
 
 Sigmoid 接受一个数字作为输入，并返回一个介于 0 和 1 之间的数字。它简单易用，具备激活函数的所有理想特性：非线性、连续可微性、单调性和固定输出范围。
 
-这主要用于**二元分类问题**。这个Sigmoid函数给出了特定类别存在的概率。
+这主要用于**二元分类问题**。这个 Sigmoid 函数给出了特定类别存在的概率。
 
-![激活函数在深度学习中的工作原理](../Images/1dd0239de89470cbb6c12ddd05c294c2.png)
+![激活函数在深度学习中的工作原理](img/1dd0239de89470cbb6c12ddd05c294c2.png)
 
 Sigmoid 激活函数 — 图
 
 从数学上讲，它可以表示为：
 
-![激活函数在深度学习中的工作原理](../Images/a354aae8799bdd4770a600624273cb60.png)
+![激活函数在深度学习中的工作原理](img/a354aae8799bdd4770a600624273cb60.png)
 
 Sigmoid 激活函数 — 方程
 
@@ -124,13 +124,13 @@ Sigmoid 激活函数 — 方程
 
 TanH 将一个实值数压缩到范围**[-1, 1]**。它是非线性的，但与 Sigmoid 不同，其输出是**零中心的**。其主要优点在于，负输入将被强烈映射到负值，而零输入在 TanH 图中将被映射到接近零的位置。
 
-![深度学习中的激活函数如何工作](../Images/95bba17f69f7a53fd4b21393d23585e5.png)
+![深度学习中的激活函数如何工作](img/95bba17f69f7a53fd4b21393d23585e5.png)
 
 TanH 激活函数 — 图
 
 从数学上讲，TanH 函数可以表示为：
 
-![深度学习中的激活函数如何工作](../Images/fb603f8d328bf76b6ef20935478456c5.png)
+![深度学习中的激活函数如何工作](img/fb603f8d328bf76b6ef20935478456c5.png)
 
 TanH 激活函数 — 方程
 
@@ -142,15 +142,15 @@ TanH 激活函数 — 方程
 
 # 3. ReLU（修正线性单元）
 
-ReLU 代表修正线性单元，是应用中最常用的激活函数之一。它解决了梯度消失的问题，因为 ReLU 函数的梯度最大值为一。它也解决了神经元饱和的问题，因为 ReLU 函数的斜率从未为零。ReLU 的范围在**0和无限之间**。
+ReLU 代表修正线性单元，是应用中最常用的激活函数之一。它解决了梯度消失的问题，因为 ReLU 函数的梯度最大值为一。它也解决了神经元饱和的问题，因为 ReLU 函数的斜率从未为零。ReLU 的范围在**0 和无限之间**。
 
-![深度学习中的激活函数如何工作](../Images/0369c70833265a0315e80122dfe52e5f.png)
+![深度学习中的激活函数如何工作](img/0369c70833265a0315e80122dfe52e5f.png)
 
 ReLU 激活函数 — 图
 
 从数学上讲，它可以表示为：
 
-![深度学习中的激活函数如何工作](../Images/0e329f7594f219053f638c84a2d05baa.png)
+![深度学习中的激活函数如何工作](img/0e329f7594f219053f638c84a2d05baa.png)
 
 ReLU 激活函数 — 方程
 
@@ -170,13 +170,13 @@ ReLU 激活函数 — 方程
 
 Leaky ReLU 是 ReLU 激活函数的升级版，用于解决 ReLU 死亡问题，因为它在负区域有一个小的正斜率。但是，目前不同任务上的好处一致性尚不明确。
 
-![深度学习中激活函数的工作原理](../Images/d9ad66067d83564315ce55cf1946de49.png)
+![深度学习中激活函数的工作原理](img/d9ad66067d83564315ce55cf1946de49.png)
 
 Leaky ReLU 激活函数 — 图
 
 从数学上表示为，
 
-![深度学习中激活函数的工作原理](../Images/ad8ffedd0c6939c1bc789804bbfa5910.png)
+![深度学习中激活函数的工作原理](img/ad8ffedd0c6939c1bc789804bbfa5910.png)
 
 Leaky ReLU 激活函数 — 方程
 
@@ -194,13 +194,13 @@ ELU 也是 ReLU 的一种变体，它也解决了死 ReLU 问题。ELU 就像 Le
 
 ELU 在计算上比 Leaky ReLU 略贵，而且它与 ReLU 非常相似，只是在负输入值方面有所不同。对于正输入值，它们的形状都是单位函数。
 
-![深度学习中激活函数的工作原理](../Images/b2f9279c8d4987ceab71751a00d71528.png)
+![深度学习中激活函数的工作原理](img/b2f9279c8d4987ceab71751a00d71528.png)
 
 ELU 激活函数-图
 
 从数学上表示为：
 
-![深度学习中激活函数的工作原理](../Images/a71669c3b75ad8457e02a84b81f41dfc.png)
+![深度学习中激活函数的工作原理](img/a71669c3b75ad8457e02a84b81f41dfc.png)
 
 ELU 激活函数 — 方程
 
@@ -218,13 +218,13 @@ ELU 激活函数 — 方程
 
 Softmax 函数给出了当前类别相对于其他类别的概率。这意味着它还考虑了其他类别的可能性。
 
-![深度学习中激活函数的工作原理](../Images/ca087644f0ff080de42f7998ff705f24.png)
+![深度学习中激活函数的工作原理](img/ca087644f0ff080de42f7998ff705f24.png)
 
 Softmax 激活函数 — 图
 
 从数学角度看，它可以表示为：
 
-![深度学习中激活函数的工作原理](../Images/778fe4f04a08fdf86f75f65b951e180e.png)
+![深度学习中激活函数的工作原理](img/778fe4f04a08fdf86f75f65b951e180e.png)
 
 Softmax 激活函数 — 方程
 
@@ -242,13 +242,13 @@ Swish 允许少量负权重的传播，而 ReLU 将所有非正权重设置为�
 
 它是由谷歌研究人员创建的自门控激活函数。
 
-![深度学习中激活函数的工作原理](../Images/10c2ae768b3b654d151f1fdc1293d310.png)
+![深度学习中激活函数的工作原理](img/10c2ae768b3b654d151f1fdc1293d310.png)
 
 Swish 激活函数 — 图
 
 从数学角度看，它可以表示为：
 
-![深度学习中激活函数的工作原理](../Images/4cf850d754d377b9c455429f5aef4209.png)
+![深度学习中激活函数的工作原理](img/4cf850d754d377b9c455429f5aef4209.png)
 
 Swish 激活函数 — 方程
 
@@ -300,9 +300,9 @@ Swish 激活函数 — 方程
 
 +   [揭开神经魔法的面纱：深入了解激活函数](https://www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions)
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
-+   [KDnuggets 新闻，8月3日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
 
 +   [逻辑回归是如何工作的？](https://www.kdnuggets.com/2022/07/logistic-regression-work.html)
 

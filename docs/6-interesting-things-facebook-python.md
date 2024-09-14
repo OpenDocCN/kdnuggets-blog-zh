@@ -1,12 +1,12 @@
 # 用 Python 在 Facebook 数据上可以做的 6 件有趣的事
 
-> 原文：[https://www.kdnuggets.com/2017/06/6-interesting-things-facebook-python.html](https://www.kdnuggets.com/2017/06/6-interesting-things-facebook-python.html)
+> 原文：[`www.kdnuggets.com/2017/06/6-interesting-things-facebook-python.html`](https://www.kdnuggets.com/2017/06/6-interesting-things-facebook-python.html)
 
 **作者：Nour Galaby，数据爱好者。**
 
 在这篇文章中，我将分享如何使用 Facebook Graph API 结合 Python 和 pandas 进行分析的经验。
 
-![Facebook 数据分析](../Images/4fd395118870eff9654debebdf1a0b08.png)
+![Facebook 数据分析](img/4fd395118870eff9654debebdf1a0b08.png)
 
 Facebook 拥有大量可供探索的数据，你可以利用这些数据做很多事情，比如：分析 Facebook 页面或群组，利用这些数据进行社交网络分析 (SNA)，进行数字营销的数据分析，甚至为自己的个人项目收集和保存数据。你可以用这些数据做很多事情；一切取决于你。
 
@@ -62,21 +62,21 @@ Facebook 拥有大量可供探索的数据，你可以利用这些数据做很�
 
 **相关：**
 
-+   [初学者 Pandas 推文分析指南](/2017/03/beginners-guide-tweet-analytics-pandas.html)
++   初学者 Pandas 推文分析指南
 
-+   [数据科学的红利——财务数据分析的温和介绍](/2017/04/data-science-dividends-intro-financial-data-analysis.html)
++   数据科学的红利——财务数据分析的温和介绍
 
-+   [你可以用 Python 在 Facebook 数据上做的 6 件有趣的事情](/2016/11/top-facebook-groups-big-data-science-machine-learning.html)
++   你可以用 Python 在 Facebook 数据上做的 6 件有趣的事情
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

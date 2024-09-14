@@ -1,12 +1,12 @@
 # 如何创建一个 AutoML 管道优化沙箱
 
-> 原文：[https://www.kdnuggets.com/2021/09/automl-pipeline-optimization-sandbox.html](https://www.kdnuggets.com/2021/09/automl-pipeline-optimization-sandbox.html)
+> 原文：[`www.kdnuggets.com/2021/09/automl-pipeline-optimization-sandbox.html`](https://www.kdnuggets.com/2021/09/automl-pipeline-optimization-sandbox.html)
 
-[评论](#comments)
+评论
 
-你可能了解自动化机器学习（AutoML）。你很可能听说过开源的 AutoML 工具 [TPOT](https://github.com/EpistasisLab/tpot)，也就是你的 *数据科学助手*。你甚至可能看过[我最近的文章](/2021/05/machine-learning-pipeline-optimization-tpot.html)，介绍了如何使用 TPOT 优化机器学习管道（你可能还没看过，所以这是你[去看看它的机会](/2021/05/machine-learning-pipeline-optimization-tpot.html)... 我会等你）。
+你可能了解自动化机器学习（AutoML）。你很可能听说过开源的 AutoML 工具 [TPOT](https://github.com/EpistasisLab/tpot)，也就是你的 *数据科学助手*。你甚至可能看过我最近的文章，介绍了如何使用 TPOT 优化机器学习管道（你可能还没看过，所以这是你去看看它的机会... 我会等你）。
 
-无论如何，当这些调节按钮可见且易于调整时，探索 AutoML 和机器学习优化的各种调节按钮将更具意义。在本文中，我们将实现一个版本的 TPOT 示例，我们在[上一篇文章](/2021/05/machine-learning-pipeline-optimization-tpot.html)中查看过，将其作为一个 Streamlit 应用程序。
+无论如何，当这些调节按钮可见且易于调整时，探索 AutoML 和机器学习优化的各种调节按钮将更具意义。在本文中，我们将实现一个版本的 TPOT 示例，我们在上一篇文章中查看过，将其作为一个 Streamlit 应用程序。
 
 如果你不熟悉 [Streamlit](https://streamlit.io/)，这是 30,000 英尺的概述：
 
@@ -16,15 +16,15 @@
 
 ### 概述
 
-除了本文中使用的内容，我不会进一步详细介绍 Streamlit，但你可以在[这里](/2021/09/create-stunning-web-apps-data-science-projects.html)找到这个很棒的介绍，以及 Streamlit 备忘单，基本覆盖了在了解其工作原理后你需要知道的一切，[点击这里](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)。
+除了本文中使用的内容，我不会进一步详细介绍 Streamlit，但你可以在这里找到这个很棒的介绍，以及 Streamlit 备忘单，基本覆盖了在了解其工作原理后你需要知道的一切，[点击这里](https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py)。
 
 除了快速了解实现 Streamlit 项目外，你还将获得一个沙箱网页应用程序，允许使用一对著名数据集进行管道优化实验。通过一些修改，你还应该能够让沙箱与其他数据集一起运行，并扩展功能以包括更多调节按钮。
 
-![图示](../Images/91bea11f3b494355221c0b5481a75a0f.png)
+![图示](img/91bea11f3b494355221c0b5481a75a0f.png)
 
 我们使用 Streamlit 和 TPOT 构建的“AutoML 管道优化沙箱”网页应用程序
 
-我不会重新讲述原始博客文章（请随意[现在阅读](/2021/05/machine-learning-pipeline-optimization-tpot.html)），但简而言之，我们正在创建一个脚本来自动化预处理和建模的优化——包括有限数量的预处理转换以及算法选择——用于对鸢尾花和数字数据集的分类任务。确实，数据集比较无聊，但使用知名数据来设置应用程序并不是一个坏主意，正如我上面所说，修改几行代码后，你可以尝试任何其他数据集。
+我不会重新讲述原始博客文章（请随意现在阅读），但简而言之，我们正在创建一个脚本来自动化预处理和建模的优化——包括有限数量的预处理转换以及算法选择——用于对鸢尾花和数字数据集的分类任务。确实，数据集比较无聊，但使用知名数据来设置应用程序并不是一个坏主意，正如我上面所说，修改几行代码后，你可以尝试任何其他数据集。
 
 关于这个优化过程的一些注意事项，除了上述内容，还有：
 
@@ -154,7 +154,7 @@ with st.spinner(text='Pipeline optimization in progress'):
 
 一旦运行，上述优化循环将输出类似以下内容的结果：
 
-![Image](../Images/6b12e943406dbebe341bf6d696422e7e.png)
+![Image](img/6b12e943406dbebe341bf6d696422e7e.png)
 
 最后，我们需要评估我们的结果：
 
@@ -178,7 +178,7 @@ st.write(f'```{output_folder}/tpot_{dataset}_pipeline_{i}.py```py')
 st.success("Pipeline optimization complete!")
 ```
 
-![Image](../Images/c850b744efd826a8f55cdcceba7a11c5.png)
+![Image](img/c850b744efd826a8f55cdcceba7a11c5.png)
 
 ...并输出最佳管道的代码（也保存到文件中）：
 
@@ -189,7 +189,7 @@ with open (f'{output_folder}/tpot_{dataset}_pipeline_{i}.py', 'r') as best_file:
 st.write(f'```{code}```py')
 ```
 
-![Image](../Images/6e96f0deabe41eb7559d40df9ac25e56.png)
+![Image](img/6e96f0deabe41eb7559d40df9ac25e56.png)
 
 这是完整的 Streamlit 应用程序代码（请注意，除了这个简短的 Python 脚本之外不需要其他任何东西来完成所有工作）：
 
@@ -197,25 +197,25 @@ st.write(f'```{code}```py')
 
 非常好。成功！
 
-![Image](../Images/6b7cdd2003a98a81aadd2e4d9be3401f.png)
+![Image](img/6b7cdd2003a98a81aadd2e4d9be3401f.png)
 
 **相关**：
 
-+   [使用 TPOT 的机器学习管道优化](/2021/05/machine-learning-pipeline-optimization-tpot.html)
++   使用 TPOT 的机器学习管道优化
 
-+   [Python 中的简单 AutoML](/2021/04/easy-automl-python.html)
++   Python 中的简单 AutoML
 
-+   [使用 FLAML + Ray Tune 的快速 AutoML](/2021/09/fast-automl-flaml-ray-tune.html)
++   使用 FLAML + Ray Tune 的快速 AutoML
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

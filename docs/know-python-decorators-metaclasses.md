@@ -1,8 +1,8 @@
 # 关于 Python 装饰器和元类你应该知道的事
 
-> 原文：[https://www.kdnuggets.com/2023/03/know-python-decorators-metaclasses.html](https://www.kdnuggets.com/2023/03/know-python-decorators-metaclasses.html)
+> 原文：[`www.kdnuggets.com/2023/03/know-python-decorators-metaclasses.html`](https://www.kdnuggets.com/2023/03/know-python-decorators-metaclasses.html)
 
-![关于 Python 装饰器和元类你应该知道的事](../Images/4e82b4b27debd7736c591470becfef6f.png)
+![关于 Python 装饰器和元类你应该知道的事](img/4e82b4b27debd7736c591470becfef6f.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -103,15 +103,15 @@ print(pineapple_cake())
 
 它是类的类，定义了类如何表现。一个类本身是一个元类的实例。
 
-在理解元类的定义之前，首先了解Python类和对象的基本定义。类就像一个构造函数，用于创建对象。我们创建类来创建对象。对象也被称为类的实例，用于访问类的属性。属性可以是任何数据类型，如整数、字符串、元组、列表、函数，甚至是类。因此，为了使用这些属性，我们必须在类中创建实例（对象），创建这些实例的方法称为实例化。
+在理解元类的定义之前，首先了解 Python 类和对象的基本定义。类就像一个构造函数，用于创建对象。我们创建类来创建对象。对象也被称为类的实例，用于访问类的属性。属性可以是任何数据类型，如整数、字符串、元组、列表、函数，甚至是类。因此，为了使用这些属性，我们必须在类中创建实例（对象），创建这些实例的方法称为实例化。
 
-Python中的一切都被视为对象。即使是类也被视为对象。这意味着一个类是从另一个类实例化的。所有其他类实例化的类被称为**元类**。类定义了它所属对象的行为。同样，类的行为由其元类定义，默认情况下是**Type**类。简单来说，所有类在Python中都是元类的实例。
+Python 中的一切都被视为对象。即使是类也被视为对象。这意味着一个类是从另一个类实例化的。所有其他类实例化的类被称为**元类**。类定义了它所属对象的行为。同样，类的行为由其元类定义，默认情况下是**Type**类。简单来说，所有类在 Python 中都是元类的实例。
 
 ## 什么是类型类？
 
-在Python中，**Type**类是所有类的元类。每次你定义一个新类时，默认情况下，它是从Type类实例化的，除非你定义了另一个元类。
+在 Python 中，**Type**类是所有类的元类。每次你定义一个新类时，默认情况下，它是从 Type 类实例化的，除非你定义了另一个元类。
 
-类型类还负责动态创建Python类。当我们定义一个新类时，Python将类定义发送给类型类，然后这个类根据类定义创建一个新的类对象。
+类型类还负责动态创建 Python 类。当我们定义一个新类时，Python 将类定义发送给类型类，然后这个类根据类定义创建一个新的类对象。
 
 让我们考虑一个例子。
 
@@ -131,7 +131,7 @@ print(type(College))
 <class 'type'>
 ```
 
-创建了一个名为`College`的新类，并实例化了一个该类的对象`obj`。但是，当我们打印对象类型时，它输出为`<class '__main__.College'>`，这意味着一个特定的对象是从`College`类创建的。但另一方面，当我们打印`College`类的类型时，它输出为`<class 'type'>`，这意味着该类默认是从**type类**（元类）创建的。
+创建了一个名为`College`的新类，并实例化了一个该类的对象`obj`。但是，当我们打印对象类型时，它输出为`<class '__main__.College'>`，这意味着一个特定的对象是从`College`类创建的。但另一方面，当我们打印`College`类的类型时，它输出为`<class 'type'>`，这意味着该类默认是从**type 类**（元类）创建的。
 
 我们还可以更改这些用户定义类的默认元类。考虑下面的例子。
 
@@ -155,7 +155,7 @@ print(type(College))
 
 当我们打印`Student`类的类型时，它会引用`College`作为元类，但当我们打印`College`类的类型时，它会引用**type**类作为元类。所以这形成了一个层级，如下所示。
 
-![你需要了解的关于Python装饰器和元类的知识](../Images/a05d7d9d0ca9438db815303744bcb027.png)
+![你需要了解的关于 Python 装饰器和元类的知识](img/a05d7d9d0ca9438db815303744bcb027.png)
 
 作者提供的图片
 
@@ -170,7 +170,7 @@ class MyClass:
 myclass = type("MyClass", (), {})
 ```
 
-定义类的两种方法是等效的。在这个例子中使用了type()函数来创建一个新类。它接受三个参数。第一个参数是类名，第二个是父类的元组（在这种情况下为空），第三个参数是一个字典，包含该类的属性（在这种情况下也为空）。
+定义类的两种方法是等效的。在这个例子中使用了 type()函数来创建一个新类。它接受三个参数。第一个参数是类名，第二个是父类的元组（在这种情况下为空），第三个参数是一个字典，包含该类的属性（在这种情况下也为空）。
 
 考虑另一个使用继承概念的例子。
 
@@ -197,7 +197,7 @@ Kevin Peterson - MIT University
 
 元类在较低级别操作，允许你改变类的结构或行为，如类方法、属性和继承。而装饰器则用于修改函数的行为。它们允许你在不改变代码的情况下为现有函数添加功能。与元类相比，装饰器操作的级别较高，因此它们比元类更容易理解，也更不复杂。
 
-![你应该了解的 Python 装饰器和元类](../Images/de57c9f0d8c2873fa04a621088c37494.png)
+![你应该了解的 Python 装饰器和元类](img/de57c9f0d8c2873fa04a621088c37494.png)
 
 元类与装饰器的区别 | 图片由作者提供
 

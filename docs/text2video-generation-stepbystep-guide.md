@@ -1,8 +1,8 @@
 # Text-2-Video 生成：逐步指南
 
-> 原文：[https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)
+> 原文：[`www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html`](https://www.kdnuggets.com/2023/08/text2video-generation-stepbystep-guide.html)
 
-![Text-2-Video 生成：逐步指南](../Images/d49e4f6113c87792b1bbf9caa97904ab.png)
+![Text-2-Video 生成：逐步指南](img/d49e4f6113c87792b1bbf9caa97904ab.png)
 
 作者提供的 GIF
 
@@ -12,15 +12,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
 
 * * *
 
-基于扩散的图像生成模型在计算机视觉领域代表了一项革命性的突破。由包括 Imagen、DallE 和 MidJourney 在内的模型开创，这些进展展示了文本条件图像生成的卓越能力。要了解这些模型的内部工作原理，你可以阅读这篇[文章](/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)。
+基于扩散的图像生成模型在计算机视觉领域代表了一项革命性的突破。由包括 Imagen、DallE 和 MidJourney 在内的模型开创，这些进展展示了文本条件图像生成的卓越能力。要了解这些模型的内部工作原理，你可以阅读这篇文章。
 
 然而，Text-2-Video 模型的开发带来了更大的挑战。目标是确保生成的每一帧之间的一致性和连贯性，并在视频的开头到结尾之间保持生成的上下文。
 
@@ -50,7 +50,7 @@ from diffusers.utils import export_to_video
 
 ## 创建管道
 
-我们在 [HuggingFace](https://huggingface.co/damo-vilab/text-to-video-ms-1.7b) 上加载了由 [ModelScope](https://modelscope.cn/) 提供的 Text-2-Video 模型，在扩散管道中进行处理。该模型具有17亿参数，基于UNet3D架构，通过迭代去噪过程从纯噪声中生成视频。其工作过程分为三部分。模型首先从简单的英语提示中提取文本特征。然后将文本特征编码到视频潜在空间并去噪。最后，将视频潜在空间解码回视觉空间，并生成一个短视频。
+我们在 [HuggingFace](https://huggingface.co/damo-vilab/text-to-video-ms-1.7b) 上加载了由 [ModelScope](https://modelscope.cn/) 提供的 Text-2-Video 模型，在扩散管道中进行处理。该模型具有 17 亿参数，基于 UNet3D 架构，通过迭代去噪过程从纯噪声中生成视频。其工作过程分为三部分。模型首先从简单的英语提示中提取文本特征。然后将文本特征编码到视频潜在空间并去噪。最后，将视频潜在空间解码回视觉空间，并生成一个短视频。
 
 ```py
 pipe = DiffusionPipeline.from_pretrained(
@@ -62,7 +62,7 @@ pipe.scheduler.config)
 pipe.enable_model_cpu_offload()
 ```
 
-此外，我们使用16位浮点精度来减少GPU的利用率。此外，还启用了CPU卸载功能，这可以在运行时从GPU中移除不必要的部分。
+此外，我们使用 16 位浮点精度来减少 GPU 的利用率。此外，还启用了 CPU 卸载功能，这可以在运行时从 GPU 中移除不必要的部分。
 
 ## 生成视频
 
@@ -72,7 +72,7 @@ video_frames = pipe(prompt, num_inference_steps=25).frames
 video_path = export_to_video(video_frames)
 ```
 
-然后我们将一个提示传递给视频生成管道，该管道提供生成的帧序列。我们使用25次推理步骤，以便模型执行25次去噪迭代。较高的推理步骤数可以提高视频质量，但需要更高的计算资源和时间。
+然后我们将一个提示传递给视频生成管道，该管道提供生成的帧序列。我们使用 25 次推理步骤，以便模型执行 25 次去噪迭代。较高的推理步骤数可以提高视频质量，但需要更高的计算资源和时间。
 
 单独的图像帧随后通过扩散器的工具函数进行合成，视频被保存在磁盘上。
 
@@ -84,7 +84,7 @@ video_path = export_to_video(video_frames)
 
 非常简单！我们得到了一个关于蜘蛛侠冲浪的视频。虽然这是一个短的、质量不是很高的视频，但它仍然象征着这一过程的良好前景，该过程很快就能达到与图像-文本模型类似的结果。不过，测试你的创造力并与模型互动仍然非常有趣。你可以使用这个 [Colab Notebook](https://colab.research.google.com/drive/1IYe2MQZX86n3o22PR7HmSFgw54h31poZ?usp=sharing) 试一试。
 
-**[穆罕默德·阿赫曼](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)** 是一名深度学习工程师，专注于计算机视觉和自然语言处理。他曾在Vyro.AI工作，负责多个生成式AI应用的部署和优化，这些应用达到了全球排行榜的顶端。他对构建和优化智能系统中的机器学习模型感兴趣，并相信持续改进。
+**[穆罕默德·阿赫曼](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)** 是一名深度学习工程师，专注于计算机视觉和自然语言处理。他曾在 Vyro.AI 工作，负责多个生成式 AI 应用的部署和优化，这些应用达到了全球排行榜的顶端。他对构建和优化智能系统中的机器学习模型感兴趣，并相信持续改进。
 
 ### 相关话题
 

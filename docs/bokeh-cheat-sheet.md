@@ -1,6 +1,6 @@
 # Bokeh 速查表：Python 中的数据可视化
 
-> 原文：[https://www.kdnuggets.com/2017/03/bokeh-cheat-sheet.html](https://www.kdnuggets.com/2017/03/bokeh-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2017/03/bokeh-cheat-sheet.html`](https://www.kdnuggets.com/2017/03/bokeh-cheat-sheet.html)
 
 **作者：Karlijn Willems，数据科学记者 & [DataCamp](https://www.datacamp.com/) 贡献者。**
 
@@ -14,7 +14,7 @@
 
 ### Bokeh 速查表
 
-![使用 Bokeh 绘图](../Images/71a3167a1682d24c0a8396842d02cd91.png)
+![使用 Bokeh 绘图](img/71a3167a1682d24c0a8396842d02cd91.png)
 
 Bokeh 包为用户提供了很多可视化的灵活性：那些通常用于快速制作图表和统计图的工具是 Bokeh 的中级通用[bokeh.plotting](http://bokeh.pydata.org/en/latest/docs/reference/plotting.html)接口和高级[bokeh.charts](http://bokeh.pydata.org/en/latest/docs/reference/charts.html)接口。
 
@@ -28,7 +28,7 @@ Bokeh 包为用户提供了很多可视化的灵活性：那些通常用于快�
 
 ### 数据
 
-![数据](../Images/b3f50bd3dbb9918e330d47fabe580f5b.png)
+![数据](img/b3f50bd3dbb9918e330d47fabe580f5b.png)
 
 你可以传递各种类型的数据，如 Python 列表或元组、NumPy 数组或 Pandas DataFrame 来生成你的图表。
 
@@ -36,7 +36,7 @@ Bokeh 包为用户提供了很多可视化的灵活性：那些通常用于快�
 
 ### 绘图
 
-![绘图](../Images/182c734107593c647d87d471df425934.png)
+![绘图](img/182c734107593c647d87d471df425934.png)
 
 就像在使用 Matplotlib 时一样，你可以通过初始化图形来开始使用 Bokeh 绘图。为此，你需要先从 bokeh.plotting 导入 figure。你可以使用这个函数创建一个新的绘图图形；当你创建新图形时，有一些额外的参数可以指定，以确保你根据自己的喜好修改图形：使用 plot_width 和 plot_height 你可以调整图形的宽度和高度，使用 tools 参数，你可以向图形中添加某些工具，例如平移或框选缩放。
 
@@ -48,11 +48,11 @@ Bokeh 包为用户提供了很多可视化的灵活性：那些通常用于快�
 
 当你创建了一个要绘制的图形后，真正的工作开始了：为你的数据添加渲染器和视觉自定义（如果需要）。你不可能跟得上 Bokeh 为你准备的所有字形，因此备忘单仅列出最重要的字形：散点标记和线形字形。你可以使用第二步创建的图形，通过应用 circle() 或 square() 方法，确保在图表上将数据点散布为圆形和方形。line() 和 multi_line() 方法也一样，你可以使用它们来绘制折线图。然后你的数据点通过线连接起来。
 
-当然，这些并不是Bokeh库提供的所有字形。前往[此页面](http://bokeh.pydata.org/en/latest/docs/user_guide/plotting.html)以查看更多字形！
+当然，这些并不是 Bokeh 库提供的所有字形。前往[此页面](http://bokeh.pydata.org/en/latest/docs/user_guide/plotting.html)以查看更多字形！
 
 **自定义字形**
 
-你在上一部分看到的字形并不是非常自定义，对吗？Bokeh确实允许你添加高度自定义的字形，这将使用户在使用你的图表时体验完全不同。
+你在上一部分看到的字形并不是非常自定义，对吗？Bokeh 确实允许你添加高度自定义的字形，这将使用户在使用你的图表时体验完全不同。
 
 你对选择和非选择字形有什么看法？它们允许你突出显示数据中的某些数据点或区域；或者悬停字形，当你将鼠标悬停在图表上时突出显示你的数据？
 
@@ -62,15 +62,15 @@ Bokeh 包为用户提供了很多可视化的灵活性：那些通常用于快�
 
 **行和列布局**
 
-另一个在制作自定义可视化时非常有用的功能是Bokeh中的布局模块。它包含row()和column()函数，分别允许你创建行和列的图表。这意味着你的图表将水平或垂直显示。然而，这并不意味着你不能带来一些变化：你可以通过嵌套它们来结合两者。
+另一个在制作自定义可视化时非常有用的功能是 Bokeh 中的布局模块。它包含 row()和 column()函数，分别允许你创建行和列的图表。这意味着你的图表将水平或垂直显示。然而，这并不意味着你不能带来一些变化：你可以通过嵌套它们来结合两者。
 
 这已经是自定义图表呈现的第一步了。
 
-![](../Images/9160c1dfc0cb362c1a4ad4e7a886ab5e.png)
+![](img/9160c1dfc0cb362c1a4ad4e7a886ab5e.png)
 
 **网格布局**
 
-当然，在某些情况下，仅创建行和列可能不足以满足你的布局需求。这就是为什么Bokeh还提供了网格布局：通过gridplot()函数，你可以创建一个网格图，该网格图渲染在独立的画布上。在这种情况下，值得知道的是，该函数为网格中包含的所有图表构建了一个单一的工具栏，而这在使用row()和column()函数时是做不到的。
+当然，在某些情况下，仅创建行和列可能不足以满足你的布局需求。这就是为什么 Bokeh 还提供了网格布局：通过 gridplot()函数，你可以创建一个网格图，该网格图渲染在独立的画布上。在这种情况下，值得知道的是，该函数为网格中包含的所有图表构建了一个单一的工具栏，而这在使用 row()和 column()函数时是做不到的。
 
 **标签布局**
 
@@ -94,68 +94,68 @@ Bokeh 包为用户提供了很多可视化的灵活性：那些通常用于快�
 
 ### 输出
 
-输出你的 Bokeh 可视化的最显著方式是将其输出到 HTML 文件中或在 Jupyter notebook 中显示。你可以使用 output_file() 和 output_notebook() 函数来完成这些操作。前者函数允许你添加额外的参数来指定模式或如何包含 BokehJS；你可以在[这里](about:blank)找到有关所有模式及其含义的更多信息。
+输出你的 Bokeh 可视化的最显著方式是将其输出到 HTML 文件中或在 Jupyter notebook 中显示。你可以使用 output_file() 和 output_notebook() 函数来完成这些操作。前者函数允许你添加额外的参数来指定模式或如何包含 BokehJS；你可以在这里找到有关所有模式及其含义的更多信息。
 
-![输出](../Images/d19cb1b022720b7383d76e3785545b3a.png)
+![输出](img/d19cb1b022720b7383d76e3785545b3a.png)
 
-当然，当你开始使用Bokeh并且觉得缺少输出选项时，请务必查看[此页面](http://bokeh.pydata.org/en/latest/docs/reference/io.html)获取更多信息。
+当然，当你开始使用 Bokeh 并且觉得缺少输出选项时，请务必查看[此页面](http://bokeh.pydata.org/en/latest/docs/reference/io.html)获取更多信息。
 
 **展示或保存图表**
 
-就像在使用Matplotlib时一样，当你完成所有这些步骤后，终于到了展示或保存图表的时候！使用show()和save()函数来实现这一点！
+就像在使用 Matplotlib 时一样，当你完成所有这些步骤后，终于到了展示或保存图表的时候！使用 show()和 save()函数来实现这一点！
 
-![](../Images/5033b4783f658e7ba4233b74c1f42896.png)
+![](img/5033b4783f658e7ba4233b74c1f42896.png)
 
-**Bokeh的统计图表**
+**Bokeh 的统计图表**
 
-中级通用的bokeh.plotting接口非常适合当你有时间逐行逐步设置图表自定义时。这非常适合制作演示文稿或最终报告中的图像。然而，对于数据探索的目的，你可能考虑使用高级的bokeh.charts接口，这是一种快速便捷的方式，以最少的代码生成图表。
+中级通用的 bokeh.plotting 接口非常适合当你有时间逐行逐步设置图表自定义时。这非常适合制作演示文稿或最终报告中的图像。然而，对于数据探索的目的，你可能考虑使用高级的 bokeh.charts 接口，这是一种快速便捷的方式，以最少的代码生成图表。
 
-![](../Images/04ba7bddcf9adc34583fb13b206e2f8b.png)
+![](img/04ba7bddcf9adc34583fb13b206e2f8b.png)
 
-备忘单包括了你在快速探索数据时最常用的图表，或者当你不想输入多余代码时使用的图表：条形图、箱线图、直方图和散点图。正如你可能已经猜到的那样，使用Bar()、Boxplot()、Histogram()和Scatter()函数来构建这些图表是非常简单的。
+备忘单包括了你在快速探索数据时最常用的图表，或者当你不想输入多余代码时使用的图表：条形图、箱线图、直方图和散点图。正如你可能已经猜到的那样，使用 Bar()、Boxplot()、Histogram()和 Scatter()函数来构建这些图表是非常简单的。
 
 当然，使用最少的代码快速生成图表并不意味着你不能进行任何特定的自定义：你仍然可以添加各种参数以确保你的图表独一无二☺ 你可以在[这里](http://bokeh.pydata.org/en/latest/docs/user_guide/charts.html)找到更多相关信息。
 
 ### 开始吧！
 
-现在你已经准备好开始使用Bokeh库进行实验了！如果你觉得需要一些灵感，或者你有某种可视化想法但代码无法实现你的需求，考虑查看一下[Bokeh画廊](http://bokeh.pydata.org/en/latest/docs/gallery.html#gallery)。里面有很多美丽的例子，会让你陶醉！
+现在你已经准备好开始使用 Bokeh 库进行实验了！如果你觉得需要一些灵感，或者你有某种可视化想法但代码无法实现你的需求，考虑查看一下[Bokeh 画廊](http://bokeh.pydata.org/en/latest/docs/gallery.html#gallery)。里面有很多美丽的例子，会让你陶醉！
 
 PS. 当然，不要忘记随身携带你的[**备忘单**](https://www.datacamp.com/community/blog/bokeh-cheat-sheet-python)。
 
 [**DataCamp**](https://www.datacamp.com/)是一个在线互动教育平台，专注于为数据科学构建最佳学习体验。我们的课程包括[R](https://www.datacamp.com/courses?learn=r_programming)、[Python](https://www.datacamp.com/courses?learn=python_programming)和[数据科学](https://www.datacamp.com/courses)，围绕特定主题构建，结合视频讲解和浏览器内编码挑战，让你通过实践学习。[你可以随时免费开始每门课程](https://www.datacamp.com/courses)，无论何时何地。
 
-**[Karlijn Willems](https://www.linkedin.com/in/karlijnwillems)** 是一位数据科学记者，为[DataCamp社区](https://www.datacamp.com/community/authors/karlijn-willems)撰稿，专注于数据科学教育、最新新闻和最热门的趋势。她拥有文学、语言学和信息管理学位。
+**[Karlijn Willems](https://www.linkedin.com/in/karlijnwillems)** 是一位数据科学记者，为[DataCamp 社区](https://www.datacamp.com/community/authors/karlijn-willems)撰稿，专注于数据科学教育、最新新闻和最热门的趋势。她拥有文学、语言学和信息管理学位。
 
 **相关**：
 
-+   [Pandas备忘单：Python中的数据科学和数据清理](/2017/01/pandas-cheat-sheet.html)
++   Pandas 备忘单：Python 中的数据科学和数据清理
 
-+   [全面学习Python数据分析和数据科学指南](/2016/04/datacamp-learning-python-data-analysis-data-science.html)
++   全面学习 Python 数据分析和数据科学指南
 
-+   [最佳数据科学在线课程](/2015/10/best-data-science-online-courses.html)
++   最佳数据科学在线课程
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关内容
 
-+   [Plotly Express数据可视化备忘单](https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html)
++   [Plotly Express 数据可视化备忘单](https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html)
 
-+   [Python数据清理备忘单](https://www.kdnuggets.com/2023/02/data-cleaning-python-cheat-sheet.html)
++   [Python 数据清理备忘单](https://www.kdnuggets.com/2023/02/data-cleaning-python-cheat-sheet.html)
 
-+   [最佳生成式AI应用程序Python工具备忘单](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)
++   [最佳生成式 AI 应用程序 Python 工具备忘单](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)
 
-+   [Python控制流备忘单](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)
++   [Python 控制流备忘单](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)
 
-+   [KDnuggets新闻，7月5日：一个烂掉的数据科学项目 • 10个人工智能…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个烂掉的数据科学项目 • 10 个人工智能…](https://www.kdnuggets.com/2023/n24.html)
 
-+   [Docker用于数据科学备忘单](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)
++   [Docker 用于数据科学备忘单](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)

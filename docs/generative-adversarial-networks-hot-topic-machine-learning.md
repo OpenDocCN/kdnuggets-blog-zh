@@ -1,6 +1,6 @@
 # 生成对抗网络 – 机器学习的热门话题
 
-> 原文：[https://www.kdnuggets.com/2017/01/generative-adversarial-networks-hot-topic-machine-learning.html](https://www.kdnuggets.com/2017/01/generative-adversarial-networks-hot-topic-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2017/01/generative-adversarial-networks-hot-topic-machine-learning.html`](https://www.kdnuggets.com/2017/01/generative-adversarial-networks-hot-topic-machine-learning.html)
 
 **作者：Al Gharakhanian。**
 
@@ -16,17 +16,17 @@ GAN 是一种相对较新的神经网络机器学习架构，由 Ian Goodfellow 
 
 第二个值得记住的有用概念是“生成模型”。这些模型通过生成给定一系列输入样本的最可能结果来进行预测。例如，生成模型可以基于之前的帧生成下一个最可能的视频帧。另一个例子是搜索引擎在用户输入之前尝试预测下一个最可能的词。
 
-牢记这两个概念，我们现在可以探讨GAN。你可以将GAN视为一种新的无监督神经网络架构，相比传统网络能够实现更好的性能。更准确地说，GAN是一种训练神经网络的新方式。GAN包含两个独立的网络，它们各自工作并充当对手（见下图）。第一个神经网络称为**判别器**（D），它是需要接受训练的网络。D是分类器，在训练完成后在正常操作过程中将承担繁重的任务。第二个网络称为**生成器**（G），其任务是生成随机样本，这些样本与真实样本相似，但带有一些变动，使其成为假样本。
+牢记这两个概念，我们现在可以探讨 GAN。你可以将 GAN 视为一种新的无监督神经网络架构，相比传统网络能够实现更好的性能。更准确地说，GAN 是一种训练神经网络的新方式。GAN 包含两个独立的网络，它们各自工作并充当对手（见下图）。第一个神经网络称为**判别器**（D），它是需要接受训练的网络。D 是分类器，在训练完成后在正常操作过程中将承担繁重的任务。第二个网络称为**生成器**（G），其任务是生成随机样本，这些样本与真实样本相似，但带有一些变动，使其成为假样本。
 
-![generative-adversarial-network](../Images/288714ba25f18f97439b63ab4e75bf53.png)
+![generative-adversarial-network](img/288714ba25f18f97439b63ab4e75bf53.png)
 
-例如，考虑一个设计用于识别各种动物图像的图像分类器D。现在考虑一个对手（G），其任务是通过精心制作的图像来欺骗D，这些图像看起来几乎正确但又不完全对。这是通过从训练集（潜在空间）中随机挑选一个合法样本，并通过随机改变其特征（添加随机噪声）来合成新图像。例如，G可以获取一只猫的图像，并在图像上添加一个额外的眼睛，将其转换为假样本。结果是一个非常类似正常猫的图像，唯一的区别是眼睛的数量。
+例如，考虑一个设计用于识别各种动物图像的图像分类器 D。现在考虑一个对手（G），其任务是通过精心制作的图像来欺骗 D，这些图像看起来几乎正确但又不完全对。这是通过从训练集（潜在空间）中随机挑选一个合法样本，并通过随机改变其特征（添加随机噪声）来合成新图像。例如，G 可以获取一只猫的图像，并在图像上添加一个额外的眼睛，将其转换为假样本。结果是一个非常类似正常猫的图像，唯一的区别是眼睛的数量。
 
-在训练过程中，D会收到来自训练数据的真实图像与G生成的假图像的随机混合。其任务是识别正确和假输入。根据结果，两个网络都尝试微调它们的参数，变得更出色。如果D做出正确的预测，G会更新其参数，以生成更好的假样本来欺骗D。如果D的预测不正确，它会试图从错误中学习，以避免未来类似的错误。网络D的奖励是正确预测的数量，G的奖励是D的错误数量。这个过程持续进行，直到达到平衡，D的训练得到优化。
+在训练过程中，D 会收到来自训练数据的真实图像与 G 生成的假图像的随机混合。其任务是识别正确和假输入。根据结果，两个网络都尝试微调它们的参数，变得更出色。如果 D 做出正确的预测，G 会更新其参数，以生成更好的假样本来欺骗 D。如果 D 的预测不正确，它会试图从错误中学习，以避免未来类似的错误。网络 D 的奖励是正确预测的数量，G 的奖励是 D 的错误数量。这个过程持续进行，直到达到平衡，D 的训练得到优化。
 
-早期GAN的一个弱点是稳定性，但我们已经看到了一些非常有前景的工作可以缓解这个问题（详细信息超出了本文的范围）。从某种程度上来说，GAN就像是一个拥有两个对立政党的国家的政治环境。每个党派不断尝试改善自己的弱点，同时试图发现和利用对方的漏洞，以推动自己的议程。随着时间的推移，两党都成为了更好的操作员。
+早期 GAN 的一个弱点是稳定性，但我们已经看到了一些非常有前景的工作可以缓解这个问题（详细信息超出了本文的范围）。从某种程度上来说，GAN 就像是一个拥有两个对立政党的国家的政治环境。每个党派不断尝试改善自己的弱点，同时试图发现和利用对方的漏洞，以推动自己的议程。随着时间的推移，两党都成为了更好的操作员。
 
-至于RL和GAN对半导体的影响，这两种新架构需要显著更多的门、更高的CPU周期和更多的内存。这没什么好抱怨的。
+至于 RL 和 GAN 对半导体的影响，这两种新架构需要显著更多的门、更高的 CPU 周期和更多的内存。这没什么好抱怨的。
 
 [原文](https://www.linkedin.com/pulse/gans-one-hottest-topics-machine-learning-al-gharakhanian?trk=pulse_spock-articles)。经许可转载。
 
@@ -34,21 +34,21 @@ GAN 是一种相对较新的神经网络机器学习架构，由 Ian Goodfellow 
 
 **相关：**
 
-+   [深度学习研究综述：生成对抗网络](/2016/10/deep-learning-research-review-generative-adversarial-networks.html)
++   深度学习研究综述：生成对抗网络
 
-+   [深度神经网络是否具备创造力？](/2016/05/deep-neural-networks-creative-deep-learning-art.html)
++   深度神经网络是否具备创造力？
 
-+   [深度学习最新动态：8 月更新，第二部分](/2016/09/deep-learning-august-update-part-2.html)
++   深度学习最新动态：8 月更新，第二部分
 
 * * *
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

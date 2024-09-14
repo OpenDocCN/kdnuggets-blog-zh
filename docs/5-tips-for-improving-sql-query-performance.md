@@ -1,8 +1,8 @@
 # 提升 SQL 查询性能的 5 个技巧
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
+> 原文：[`www.kdnuggets.com/5-tips-for-improving-sql-query-performance`](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
 
-![sql-tips](../Images/240e20747f5fcbe8b0d0836f5b4b7b8f.png)
+![sql-tips](img/240e20747f5fcbe8b0d0836f5b4b7b8f.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -116,17 +116,17 @@ CREATE INDEX idx_employee_department ON employees(department);
 
 祝你查询愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正致力于通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编程教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正致力于通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编程教程。
 
 ### 相关主题
 
-+   [使用SQL查询你的Pandas数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
++   [使用 SQL 查询你的 Pandas 数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
 
-+   [SQL查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
++   [SQL 查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
 
-+   [我们可以用T5查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)
++   [我们可以用 T5 查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)
 
-+   [超越准确度：使用NLP测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
++   [超越准确度：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
 
 +   [更多分类问题的性能评估指标](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)
 

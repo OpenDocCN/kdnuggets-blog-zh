@@ -1,8 +1,8 @@
 # 利用 CuPy 在 Python 中发挥 GPU 的威力
 
-> 原文：[https://www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python](https://www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python)
+> 原文：[`www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python`](https://www.kdnuggets.com/leveraging-the-power-of-gpus-with-cupy-in-python)
 
-![利用 CuPy 在 Python 中发挥 GPU 的威力](../Images/48d4f1f7b5a660a04de8cf337c89a734.png)
+![利用 CuPy 在 Python 中发挥 GPU 的威力](img/48d4f1f7b5a660a04de8cf337c89a734.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -46,7 +46,7 @@ Build cuda_11.8.r11.8/compiler.31833905_0
 
 如果你使用的是较旧的 CUDA 版本，我提供了一个表格来帮助你确定要安装的适当 CuPy 包。
 
-![利用 CuPy 在 Python 中发挥 GPU 的威力](../Images/4aa2dd692a6ddc4b946a5d37a0d62008.png)
+![利用 CuPy 在 Python 中发挥 GPU 的威力](img/4aa2dd692a6ddc4b946a5d37a0d62008.png)
 
 图片来自 [CuPy 12.2.0](https://docs.cupy.dev/en/stable/install.html)
 

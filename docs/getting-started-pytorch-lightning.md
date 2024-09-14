@@ -1,10 +1,10 @@
 # PyTorch Lightning 入门
 
-> 原文：[https://www.kdnuggets.com/2021/10/getting-started-pytorch-lightning.html](https://www.kdnuggets.com/2021/10/getting-started-pytorch-lightning.html)
+> 原文：[`www.kdnuggets.com/2021/10/getting-started-pytorch-lightning.html`](https://www.kdnuggets.com/2021/10/getting-started-pytorch-lightning.html)
 
-[评论](#comments)
+评论
 
-![PyTorch Lightning 入门](../Images/d90c82e8ba6cac010727d13ce27b16a8.png)
+![PyTorch Lightning 入门](img/d90c82e8ba6cac010727d13ce27b16a8.png)
 
 ### **PyTorch Lightning 入门：高性能研究的高级库**
 
@@ -55,11 +55,11 @@ pip install torchvision
 pip install scikit-learn
 ```
 
-### 使用PyTorch Lightning
+### 使用 PyTorch Lightning
 
-PyTorch Lightning采用的设计策略围绕着LightningModule类。这个类继承自`pytorch.nn.Module`类，提供了一个方便的入口点，并尝试尽可能将训练和验证过程的许多内容组织在一个地方。
+PyTorch Lightning 采用的设计策略围绕着 LightningModule 类。这个类继承自`pytorch.nn.Module`类，提供了一个方便的入口点，并尝试尽可能将训练和验证过程的许多内容组织在一个地方。
 
-这种策略的一个关键特性是，典型的训练和验证循环的内容被定义在模型本身中，可以通过一个类似于keras、fastai甚至SciKit-Learn的`fit` API访问。与其他示例中`fit`是通过模型本身访问不同，在PyTorch Lightning中，`fit`是通过Trainer对象访问的。但我们还是提前了，首先让我们通过导入我们需要的一切来为我们的实验做准备。
+这种策略的一个关键特性是，典型的训练和验证循环的内容被定义在模型本身中，可以通过一个类似于 keras、fastai 甚至 SciKit-Learn 的`fit` API 访问。与其他示例中`fit`是通过模型本身访问不同，在 PyTorch Lightning 中，`fit`是通过 Trainer 对象访问的。但我们还是提前了，首先让我们通过导入我们需要的一切来为我们的实验做准备。
 
 ```py
 import os
@@ -177,11 +177,11 @@ class MyClassifier(pl.LightningModule):
         return torch.optim.Adam(self.parameters(), lr=3e-4)
 ```
 
-值得注意的是，训练功能被委托给`training_step`函数中的模块本身。大多数有一定PyTorch实践经验的机器学习从业者会对重载`forward`函数的做法非常熟悉，而LightningModule对象还有许多更多的方法可以重载，以实现对内置的相对无痛的日志记录和评估功能的精细控制。
+值得注意的是，训练功能被委托给`training_step`函数中的模块本身。大多数有一定 PyTorch 实践经验的机器学习从业者会对重载`forward`函数的做法非常熟悉，而 LightningModule 对象还有许多更多的方法可以重载，以实现对内置的相对无痛的日志记录和评估功能的精细控制。
 
-定义我们的`MyClassifier`模型类的代码可能看起来相当冗长，但这种策略在实际开始训练时大大简化了流程，我们稍后将看到。`LightningModule`类中包含了许多其他的回调和函数，所有这些都可以被重载以实现更精细的控制。这些回调的完整列表可以在[PyTorch Lightning文档](https://pytorch-lightning.readthedocs.io/en/latest/extensions/callbacks.html#hooks)中找到。
+定义我们的`MyClassifier`模型类的代码可能看起来相当冗长，但这种策略在实际开始训练时大大简化了流程，我们稍后将看到。`LightningModule`类中包含了许多其他的回调和函数，所有这些都可以被重载以实现更精细的控制。这些回调的完整列表可以在[PyTorch Lightning 文档](https://pytorch-lightning.readthedocs.io/en/latest/extensions/callbacks.html#hooks)中找到。
 
-在本教程中，我们还将定义一个`torch.utils.data.Dataset`对象来包装来自SciKit-Learn的数字数据集。这应该使得在切换到像MNIST或CIFAR10这样更大、更具信息量的数据集之前，能够快速地让一切正常运行。
+在本教程中，我们还将定义一个`torch.utils.data.Dataset`对象来包装来自 SciKit-Learn 的数字数据集。这应该使得在切换到像 MNIST 或 CIFAR10 这样更大、更具信息量的数据集之前，能够快速地让一切正常运行。
 
 ```py
 class SKDigitsDataset(torch.utils.data.Dataset):
@@ -225,7 +225,7 @@ class SKDigitsDataset(torch.utils.data.Dataset):
         return sample
 ```
 
-既然所有的准备工作都完成了，实际启动训练运行变得非常简单。我们只需要创建一个数据集，并将其输入到`DataLoader`中，实例化我们的模型，创建一个PyTorch Lightning `Trainer`对象，然后调用trainer的fit方法。以下是一个简化版本：
+既然所有的准备工作都完成了，实际启动训练运行变得非常简单。我们只需要创建一个数据集，并将其输入到`DataLoader`中，实例化我们的模型，创建一个 PyTorch Lightning `Trainer`对象，然后调用 trainer 的 fit 方法。以下是一个简化版本：
 
 ```py
 dataset = SKDigitsDataset()
@@ -235,7 +235,7 @@ trainer = pl.Trainer()
 trainer.fit(model, dataloader)
 ```
 
-但当然，我们会希望在整个训练过程中持续记录验证指标，利用我们在模型中重载的`validation_step`和`validation_epoch_end`方法。以下是我用来启动训练运行的实际代码，使用`if __name__ == "__main__":`模式，这为将Python文件作为模块运行提供了一个简单的入口点。
+但当然，我们会希望在整个训练过程中持续记录验证指标，利用我们在模型中重载的`validation_step`和`validation_epoch_end`方法。以下是我用来启动训练运行的实际代码，使用`if __name__ == "__main__":`模式，这为将 Python 文件作为模块运行提供了一个简单的入口点。
 
 ```py
 if __name__ == "__main__":
@@ -261,7 +261,7 @@ if __name__ == "__main__":
 
 当你运行上面的代码时，你应该会在终端中看到一个进度条，看起来像下面的那个。
 
-![pl-terminal-1.png](../Images/28210cdaae631256933e335d905b6fb6.png)
+![pl-terminal-1.png](img/28210cdaae631256933e335d905b6fb6.png)
 
 在允许训练运行一段时间后，查看你的工作目录，你会发现一个名为**lightning_logs**的新文件夹。这是 PyTorch Lightning 记录你的训练会话的地方，你可以快速启动 Tensorboard 会话以查看情况。在用下面的命令启动 tensorboard 后，使用浏览器导航到 localhost:6006（默认）以打开仪表板。
 
@@ -319,7 +319,7 @@ for replicate in range(3):
 
 在运行我们的小实验后，我们会发现结果在 Tensorboard 中被很好地记录，供我们查看。
 
-![pl-tensorboard-1.png](../Images/60cae6ec1ddb4e9612d2f76104311e20.png)
+![pl-tensorboard-1.png](img/60cae6ec1ddb4e9612d2f76104311e20.png)
 
 你可能会注意到我们有选项在更大的 MNIST 数据集上运行训练。MNIST 数据集有 60,000 个 28x28 像素的训练样本，比提供不到 2,000 个 8x8 图像的缩小版 sklearn digits 数据集更接近一个实际的真实世界数据集。然而，你可能不希望在使用性能不足的笔记本 CPU 上运行 6 次重复训练，因此我们需要首先将所有内容转移到 GPU 上。
 
@@ -337,7 +337,7 @@ trainer = pl.Trainer(max_epochs = 100, \
 
 没错，通过修改定义 trainer 对象的单行代码，我们可以在 GPU 上运行训练。无需担心被遗忘的张量，且保留了我们在原始模型中构建的所有日志记录和验证的便利性。
 
-![pl-tensorboard-2.png](../Images/040ed16ce6762f52159139f7c5ae3211.png)
+![pl-tensorboard-2.png](img/040ed16ce6762f52159139f7c5ae3211.png)
 
 ### ****下一步****
 
@@ -359,21 +359,21 @@ PyTorch Lightning 也让硬件管理变得轻松，我们在切换到 GPU 训练
 
 **相关：**
 
-+   [PyTorch Lightning 介绍](/2021/10/introduction-pytorch-lightning.html)
++   PyTorch Lightning 介绍
 
-+   [如何将 PyTorch Lightning 模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)
++   如何将 PyTorch Lightning 模型部署到生产环境
 
-+   [PyTorch 多 GPU 评估库及其他新 PyTorch Lightning 发布内容](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)
++   PyTorch 多 GPU 评估库及其他新 PyTorch Lightning 发布内容
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

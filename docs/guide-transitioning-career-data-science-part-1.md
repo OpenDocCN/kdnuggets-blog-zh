@@ -1,22 +1,22 @@
 # 转型为数据科学职业的逐步指南 – 第一部分
 
-> 原文：[https://www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html](https://www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html)
+> 原文：[`www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html`](https://www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html)
 
-[评论](#comments)
+评论
 
-![逐步指南 - 如何获得数据科学工作](../Images/0e3d593146abc33fd0fd583781fc36a3.png)
+![逐步指南 - 如何获得数据科学工作](img/0e3d593146abc33fd0fd583781fc36a3.png)
 
-如果你想将职业转型为数据科学，最常听到的建议可能是学习Python或R，或通过参加Coursera上的Andrew Ng的机器学习课程来学习机器学习，或开始学习大数据技术，如Spark和Hadoop。
+如果你想将职业转型为数据科学，最常听到的建议可能是学习 Python 或 R，或通过参加 Coursera 上的 Andrew Ng 的机器学习课程来学习机器学习，或开始学习大数据技术，如 Spark 和 Hadoop。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -24,9 +24,9 @@
 
 如果你是程序员或有博士学位，这种方法完全合理。如果你来自非技术背景，最简单的入门数据科学的方法是采取以领域知识为重点的方法。
 
-如果你查看Drew Conway的维恩图，你会发现数据科学家不仅仅具备技术技能。他们还具备领域专长。
+如果你查看 Drew Conway 的维恩图，你会发现数据科学家不仅仅具备技术技能。他们还具备领域专长。
 
-![数据科学维恩图](../Images/b3dc5bd1350a726cfb2ce7ea8b409331.png)
+![数据科学维恩图](img/b3dc5bd1350a726cfb2ce7ea8b409331.png)
 
 那么，为什么不利用它呢？我一直相信发挥自己的优势。
 
@@ -40,7 +40,7 @@
 
 让我通过一个例子来说明这一点。
 
-我将假设自己是一个数字营销人员，想要转型到数据科学。如果我在Google上搜索“营销数据科学职位”，我会得到一系列职位发布，标题如下：
+我将假设自己是一个数字营销人员，想要转型到数据科学。如果我在 Google 上搜索“营销数据科学职位”，我会得到一系列职位发布，标题如下：
 
 +   “高级市场营销数据分析师”
 
@@ -54,13 +54,13 @@
 
 这是一个营销数据分析师职位的描述：
 
-![营销数据分析师 - 职位描述](../Images/a1e2773cfe4ef473b1beb76aa233974f.png)
+![营销数据分析师 - 职位描述](img/a1e2773cfe4ef473b1beb76aa233974f.png)
 
-该职位的强有力候选人应具备一定的Google Analytics技能，了解在线指标（如访问量、转化率等），并知道如何进行活动分析。如果我是一名具备这些技能的数字营销员，那么我就是这个职位的强有力候选人。
+该职位的强有力候选人应具备一定的 Google Analytics 技能，了解在线指标（如访问量、转化率等），并知道如何进行活动分析。如果我是一名具备这些技能的数字营销员，那么我就是这个职位的强有力候选人。
 
 以下是职位描述中列出的技术技能：
 
-![营销数据分析师技术技能](../Images/e64b183eb8aecfbb5b47e5c53abda361.png)
+![营销数据分析师技术技能](img/e64b183eb8aecfbb5b47e5c53abda361.png)
 
 在这个阶段，我不打算担心职位描述中列出的技术和分析技能，因为我的重点只在于领域知识。
 
@@ -68,9 +68,9 @@
 
 一旦你确定了目标职位，是时候筛选你的目标公司了。
 
-**第2步：发现你的梦想公司**
+**第 2 步：发现你的梦想公司**
 
-你必须根据以下两个标准之一，筛选出5家公司作为目标：
+你必须根据以下两个标准之一，筛选出 5 家公司作为目标：
 
 +   他们经常发布你目标职位头衔的招聘广告。
 
@@ -88,11 +88,11 @@
 
 +   大型零售公司
 
-在主要科技公司（如Facebook、Google或Amazon）获得入门级数据科学职位是相当困难的，因此不要以它们为目标。
+在主要科技公司（如 Facebook、Google 或 Amazon）获得入门级数据科学职位是相当困难的，因此不要以它们为目标。
 
-对于我的“营销数据分析师”职位，我已经筛选出了加拿大前5名银行：
+对于我的“营销数据分析师”职位，我已经筛选出了加拿大前 5 名银行：
 
-+   TD银行
++   TD 银行
 
 +   RBC
 
@@ -102,7 +102,7 @@
 
 +   道明银行
 
-**第3步：与合适的人建立网络**
+**第 3 步：与合适的人建立网络**
 
 你已经选定了目标职位和几家公司，做了功课。但从你的房间里，你能做的也有限。
 
@@ -128,17 +128,17 @@
 
 1.  跟进并建立真实的关系。
 
-第一步是使用LinkedIn找到每个目标公司中至少2个已经拥有你目标职位头衔的人。
+第一步是使用 LinkedIn 找到每个目标公司中至少 2 个已经拥有你目标职位头衔的人。
 
-在我的情况下，我会在LinkedIn搜索栏中输入“Marketing Data Analysts TD Bank”以获取TD银行的目标人员列表。
+在我的情况下，我会在 LinkedIn 搜索栏中输入“Marketing Data Analysts TD Bank”以获取 TD 银行的目标人员列表。
 
-如果他们在LinkedIn上有500+个连接，我会通过LinkedIn联系他们，否则我会通过电子邮件联系他们。
+如果他们在 LinkedIn 上有 500+个连接，我会通过 LinkedIn 联系他们，否则我会通过电子邮件联系他们。
 
 你可以使用一个名为“[Voila Norbert](https://www.voilanorbert.com/)”的工具来获取他们的官方电子邮件地址。你只需在这个工具中输入他们的姓名和他们所在组织的域名即可获取他们的电子邮件地址。
 
 你可以使用一些模板与联系人取得联系：
 
-初始LinkedIn请求消息：
+初始 LinkedIn 请求消息：
 
 > *我在 LinkedIn 上研究市场数据分析师职位时，注意到你是[公司名称]的市场数据分析师。你的职业道路对我很有启发。我正在寻找理想工作，想向你请教 3-5 个关于你职业道路的问题。*
 
@@ -178,7 +178,7 @@
 
 你也可以使用一个简单的 Excel 表格来跟踪整个过程。这是一个示例：
 
-![跟踪电子邮件进度的示例 Excel 表格](../Images/f5e0091850d413a913e97ae58269caac.png)
+![跟踪电子邮件进度的示例 Excel 表格](img/f5e0091850d413a913e97ae58269caac.png)
 
 假设你的一个目标联系人同意了，让我们讨论一下实际会议中该做什么。
 
@@ -212,7 +212,7 @@
 > 
 > 请告诉我是否有什么我可以做的来回报这份恩情！
 
-你应该在目标公司见到至少2个人。
+你应该在目标公司见到至少 2 个人。
 
 到目前为止，你已经进行过十次咖啡会议，并对所有问题都有了答案。你打算如何处理这些答案？如何说服你见过的人你是一个强有力的候选人？
 
@@ -220,11 +220,11 @@
 
 **相关：**
 
-+   [转型为数据科学家的逐步指南 – 第二部分](/2019/06/guide-transitioning-career-data-science-part-2.html)
++   转型为数据科学家的逐步指南 – 第二部分
 
-+   [成为数据科学家](/2018/01/feizpour-becoming-data-scientist.html)
++   成为数据科学家
 
-+   [转型为数据科学：如何成为数据科学家，以及如何创建数据科学团队](/2017/12/transitioning-data-science-become-data-scientist-data-science-team.html)
++   转型为数据科学：如何成为数据科学家，以及如何创建数据科学团队
 
 ### 更多相关话题
 
@@ -232,10 +232,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成为优秀数据科学家的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

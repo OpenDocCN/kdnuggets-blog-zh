@@ -1,10 +1,10 @@
 # 遗传算法在 Python 中的实现
 
-> 原文：[https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)
+> 原文：[`www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html`](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![图片](../Images/ab1f8e899e0f7dc04c652ffc0278bfbc.png)
+![图片](img/ab1f8e899e0f7dc04c652ffc0278bfbc.png)
 
 本教程将基于一个简单的例子实现遗传算法优化技术，我们的目标是最大化一个方程的输出。教程使用十进制表示基因，单点交叉和均匀变异。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
 
 * * *
 
@@ -24,25 +24,25 @@
 
 **图 1**
 
-![](../Images/f7a61e594c8da119374bac0446628488.png)
+![](img/f7a61e594c8da119374bac0446628488.png)
 
 例如，基因有不同类型的表示方式，如二进制、十进制、整数等。每种类型的处理方式不同。变异也有不同类型，如位翻转、交换、逆转、均匀、非均匀、高斯、缩小等。交叉操作也有不同的类型，如混合、单点、双点、均匀等。本教程不会实现所有这些变异和交叉类型，而是仅实现每一步中一种类型。教程使用了十进制表示基因，单点交叉和均匀变异。读者应对 GA 的工作原理有所了解。如果不了解，请阅读标题为“遗传算法优化简介”的文章，链接如下：
 
-+   LinkedIn: [https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
++   LinkedIn: [`www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/`](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
 
-+   KDnuggets: [https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)
++   KDnuggets: `www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html`
 
-+   TowardsDataScience: [https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
++   TowardsDataScience: [`towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b`](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
 
-+   SlideShare: [https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga](https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga)
++   SlideShare: [`www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga`](https://www.slideshare.net/AhmedGadFCIT/introduction-to-optimization-with-genetic-algorithm-ga)
 
 教程开始时展示了我们将要实现的方程。方程如下所示：
 
 **Y = w1x1 + w2x2 + w3x3 + w4x4 + w5x5 + w6x6**
 
-方程有6个输入（x1到x6）和6个权重（w1到w6），输入值为（x1,x2,x3,x4,x5,x6）=(4,-2,7,5,11,1)。我们希望找到最大化该方程的参数（权重）。最大化该方程的想法似乎很简单。正输入应乘以尽可能大的正数，负数应乘以尽可能小的负数。但我们要实现的想法是如何让GA自己做到这一点，以便知道正权重与正输入配合使用，负权重与负输入配合使用。让我们开始实现GA。
+方程有 6 个输入（x1 到 x6）和 6 个权重（w1 到 w6），输入值为（x1,x2,x3,x4,x5,x6）=(4,-2,7,5,11,1)。我们希望找到最大化该方程的参数（权重）。最大化该方程的想法似乎很简单。正输入应乘以尽可能大的正数，负数应乘以尽可能小的负数。但我们要实现的想法是如何让 GA 自己做到这一点，以便知道正权重与正输入配合使用，负权重与负输入配合使用。让我们开始实现 GA。
 
-首先，让我们创建一个包含6个输入的列表和一个保存权重数量的变量，如下所示：
+首先，让我们创建一个包含 6 个输入的列表和一个保存权重数量的变量，如下所示：
 
 ```py
 
@@ -53,7 +53,7 @@ num_weights = 6
 
 ```
 
-下一步是定义初始种群。根据权重的数量，种群中的每个染色体（解决方案或个体）将必定具有6个基因，每个基因对应一个权重。但问题是每个种群中有多少个解决方案？这个值没有固定的，我们可以选择适合我们问题的值。为了通用，我们可以在代码中保持它是可变的。接下来，我们创建一个变量来保存每个种群的解决方案数量，另一个变量保存种群的大小，最后一个变量保存实际的初始种群：
+下一步是定义初始种群。根据权重的数量，种群中的每个染色体（解决方案或个体）将必定具有 6 个基因，每个基因对应一个权重。但问题是每个种群中有多少个解决方案？这个值没有固定的，我们可以选择适合我们问题的值。为了通用，我们可以在代码中保持它是可变的。接下来，我们创建一个变量来保存每个种群的解决方案数量，另一个变量保存种群的大小，最后一个变量保存实际的初始种群：
 
 ```py
 
@@ -66,7 +66,7 @@ pop_size = (sol_per_pop,num_weights) # The population will have sol_per_pop chro
 new_population = numpy.ram.uniform(low=-4.0, high=4.0, size=pop_size)
 ```
 
-在导入numpy库后，我们可以使用numpy.random.uniform函数随机创建初始种群。根据选择的参数，它将具有形状（8, 6）。即8个染色体，每个染色体有6个基因，每个基因对应一个权重。运行此代码后，种群如下：
+在导入 numpy 库后，我们可以使用 numpy.random.uniform 函数随机创建初始种群。根据选择的参数，它将具有形状（8, 6）。即 8 个染色体，每个染色体有 6 个基因，每个基因对应一个权重。运行此代码后，种群如下：
 
 ```py
 
@@ -90,7 +90,7 @@ new_population = numpy.ram.uniform(low=-4.0, high=4.0, size=pop_size)
 
 请注意，它是随机生成的，因此每次运行时都会有所变化。
 
-在准备好种群后，接下来是遵循图1中的流程图。根据适应度函数，我们将选择当前种群中最优秀的个体作为配对的父母。接下来，应用GA变体（交叉和变异）来产生下一代的后代，通过附加父母和后代来创建新种群，并重复这些步骤若干次迭代/代。下一段代码应用了这些步骤：
+在准备好种群后，接下来是遵循图 1 中的流程图。根据适应度函数，我们将选择当前种群中最优秀的个体作为配对的父母。接下来，应用 GA 变体（交叉和变异）来产生下一代的后代，通过附加父母和后代来创建新种群，并重复这些步骤若干次迭代/代。下一段代码应用了这些步骤：
 
 ```py
 
@@ -118,9 +118,9 @@ for generation in range(num_generations):
     new_population[parents.shape[0]:, :] = offspring_mutation
 ```
 
-当前的代数是5。为了在教程中展示所有代的结果，选择了较小的代数。有一个名为GA的模块，其中包含算法的实现。
+当前的代数是 5。为了在教程中展示所有代的结果，选择了较小的代数。有一个名为 GA 的模块，其中包含算法的实现。
 
-第一步是使用GA.cal_pop_fitness函数找到种群中每个解决方案的适应度值。GA模块中该函数的实现如下：
+第一步是使用 GA.cal_pop_fitness 函数找到种群中每个解决方案的适应度值。GA 模块中该函数的实现如下：
 
 ```py
 
@@ -131,7 +131,7 @@ def cal_pop_fitness(equation_inputs, pop):
     return fitness
 ```
 
-适应度函数接受方程输入值（x1到x6）以及种群。适应度值计算为每个输入与其对应基因（权重）之间的乘积和（SOP）。根据每个种群中的解数量，将会有若干SOP。由于我们之前在名为sol_per_pop的变量中将解的数量设置为8，将会有8个SOP，如下所示：
+适应度函数接受方程输入值（x1 到 x6）以及种群。适应度值计算为每个输入与其对应基因（权重）之间的乘积和（SOP）。根据每个种群中的解数量，将会有若干 SOP。由于我们之前在名为 sol_per_pop 的变量中将解的数量设置为 8，将会有 8 个 SOP，如下所示：
 
 ```py
 
@@ -140,7 +140,7 @@ def cal_pop_fitness(equation_inputs, pop):
 
 请注意，适应度值越高，解越好。
 
-在计算所有解的适应度值后，接下来是根据下一个函数`GA.select_mating_pool`选择最佳的解作为交配池中的父母。该函数接受种群、适应度值和所需父母的数量。它返回选择的父母。其在GA模块中的实现如下：
+在计算所有解的适应度值后，接下来是根据下一个函数`GA.select_mating_pool`选择最佳的解作为交配池中的父母。该函数接受种群、适应度值和所需父母的数量。它返回选择的父母。其在 GA 模块中的实现如下：
 
 ```py
 
@@ -155,7 +155,7 @@ def select_mating_pool(pop, fitness, num_parents):
     return parents
 ```
 
-根据变量num_parents_mating中定义的所需父母数量，该函数创建一个空数组来保存它们，如下行所示：
+根据变量 num_parents_mating 中定义的所需父母数量，该函数创建一个空数组来保存它们，如下行所示：
 
 ```py
 
@@ -189,9 +189,9 @@ parents[parent_num, :] = pop[max_fitness_idx, :]
  [ 2.12480298  2.97122243  3.60375452  3.78571392  0.28776565  3.5170347 ]]
 ```
 
-请注意，这三个父母是在当前种群中适应度值最高的个体，分别为18.24112489、17.0688537、15.99527402和14.40299221。
+请注意，这三个父母是在当前种群中适应度值最高的个体，分别为 18.24112489、17.0688537、15.99527402 和 14.40299221。
 
-下一步是使用这些选定的父母进行交配，以生成后代。交配从交叉操作开始，根据`GA.crossover`函数进行。该函数接受父母和后代大小。它使用后代大小来确定从这些父母那里产生的后代数量。该函数在GA模块中的实现如下：
+下一步是使用这些选定的父母进行交配，以生成后代。交配从交叉操作开始，根据`GA.crossover`函数进行。该函数接受父母和后代大小。它使用后代大小来确定从这些父母那里产生的后代数量。该函数在 GA 模块中的实现如下：
 
 ```py
 
@@ -603,11 +603,11 @@ def mutation(offspring_crossover):
 
 **相关：**
 
-+   [从完全连接网络逐步推导卷积神经网络](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)
++   从完全连接网络逐步推导卷积神经网络
 
-+   [学习率在人工神经网络中是否有用？](/2018/01/learning-rate-useful-neural-network.html)
++   学习率在人工神经网络中是否有用？
 
-+   [通过正则化避免过拟合](/2018/02/avoid-overfitting-regularization.html)
++   通过正则化避免过拟合
 
 ### 更多相关话题
 

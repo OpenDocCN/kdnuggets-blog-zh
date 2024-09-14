@@ -1,12 +1,12 @@
 # 微调变换器模型以进行发票识别
 
-> 原文：[https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html](https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html)
+> 原文：[`www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html`](https://www.kdnuggets.com/2021/06/fine-tuning-transformer-model-invoice-recognition.html)
 
-[评论](#comments)
+评论
 
 **作者 [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI 创始人**
 
-![图](../Images/bef1163c62c44789046be68101904276.png)
+![图](img/bef1163c62c44789046be68101904276.png)
 
 发票识别
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 部门
 
 * * *
 
@@ -36,7 +36,7 @@ LayoutLM 模型基于 BERT 架构，但增加了两种额外的输入嵌入。�
 
 ### 发票标注
 
-使用[UBIAI文本注释工具](https://ubiai.tools/)，我已经注释了大约50份个人发票。我感兴趣的是提取实体的键和值；例如在以下文本“Date: 06/12/2021”中，我们会将“Date”标注为DATE_ID，将“06/12/2021”标注为DATE。提取键和值将帮助我们将数值与其属性关联起来。以下是所有已标注的实体：
+使用[UBIAI 文本注释工具](https://ubiai.tools/)，我已经注释了大约 50 份个人发票。我感兴趣的是提取实体的键和值；例如在以下文本“Date: 06/12/2021”中，我们会将“Date”标注为 DATE_ID，将“06/12/2021”标注为 DATE。提取键和值将帮助我们将数值与其属性关联起来。以下是所有已标注的实体：
 
 `DATE_ID, DATE, INVOICE_ID, INVOICE_NUMBER, SELLER_ID, SELLER, MONTANT_HT_ID, MONTANT_HT, TVA_ID, TVA, TTC_ID, TTC`
 
@@ -50,11 +50,11 @@ LayoutLM 模型基于 BERT 架构，但增加了两种额外的输入嵌入。�
 
 以下是使用[UBIAI](https://ubiai.tools/)的标注发票示例：
 
-![图示](../Images/3e4f6a78e483720e4c57e014d09a4e86.png)
+![图示](img/3e4f6a78e483720e4c57e014d09a4e86.png)
 
-在UBIAI中的发票注释
+在 UBIAI 中的发票注释
 
-注释完成后，我们直接从UBIAI以正确格式导出训练和测试文件，无需任何[预处理步骤](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb)。导出将包括每个训练和测试数据集的三个文件以及一个名为labels.txt的文本文件，包含所有标签：
+注释完成后，我们直接从 UBIAI 以正确格式导出训练和测试文件，无需任何[预处理步骤](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb)。导出将包括每个训练和测试数据集的三个文件以及一个名为 labels.txt 的文本文件，包含所有标签：
 
 ```py
 Train/Test.txt
@@ -81,7 +81,7 @@ d'autoliquidation O
 - O
 ```
 
-Train/Test_box.txt（包含每个token的边界框）：
+Train/Test_box.txt（包含每个 token 的边界框）：
 
 ```py
 € 912 457 920 466
@@ -160,11 +160,11 @@ S-TVA
 S-TVA_ID
 ```
 
-### 微调LayoutLM模型：
+### 微调 LayoutLM 模型：
 
-在这里，我们使用带GPU的google colab来微调模型。下面的代码基于[原始LayoutLM论文](https://github.com/microsoft/unilm/tree/master/layoutlm)和[本教程](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb)。
+在这里，我们使用带 GPU 的 google colab 来微调模型。下面的代码基于[原始 LayoutLM 论文](https://github.com/microsoft/unilm/tree/master/layoutlm)和[本教程](https://colab.research.google.com/github/NielsRogge/Transformers-Tutorials/blob/master/LayoutLM/Fine_tuning_LayoutLMForTokenClassification_on_FUNSD.ipynb)。
 
-首先，安装layoutLM包……
+首先，安装 layoutLM 包……
 
 ```py
 ! rm -r unilm
@@ -173,7 +173,7 @@ S-TVA_ID
 ! pip install unilm/layoutlm
 ```
 
-…以及从中下载模型的transformer包：
+…以及从中下载模型的 transformer 包：
 
 ```py
 ! rm -r transformers
@@ -182,7 +182,7 @@ S-TVA_ID
 ! pip install ./transformers
 ```
 
-接下来，创建一个包含labels.txt中唯一标签的列表：
+接下来，创建一个包含 labels.txt 中唯一标签的列表：
 
 ```py
 from torch.nn import CrossEntropyLoss
@@ -198,7 +198,7 @@ label_map = {i: label for i, label in enumerate(labels)}
 pad_token_label_id = CrossEntropyLoss().ignore_index
 ```
 
-然后，创建一个pytorch数据集和数据加载器：
+然后，创建一个 pytorch 数据集和数据加载器：
 
 ```py
 from transformers import LayoutLMTokenizer
@@ -233,7 +233,7 @@ input_ids = batch[0][0]
 tokenizer.decode(input_ids)
 ```
 
-从huggingface加载模型。这将根据数据集进行微调。
+从 huggingface 加载模型。这将根据数据集进行微调。
 
 ```py
 from transformers import LayoutLMForTokenClassification
@@ -280,7 +280,7 @@ for epoch in range(num_train_epochs):
 
 你应该能看到训练进度和损失的实时更新。
 
-![图示](../Images/5f7edf6f1f21ad58ecd42d5ca57bb657.png)
+![图示](img/5f7edf6f1f21ad58ecd42d5ca57bb657.png)
 
 Layout LM 训练中
 
@@ -342,9 +342,9 @@ results = {
 }
 ```
 
-仅使用50份文档，我们获得了以下分数：
+仅使用 50 份文档，我们获得了以下分数：
 
-![图示](../Images/502e7dc4d3cf4980404707d92117a61c.png)
+![图示](img/502e7dc4d3cf4980404707d92117a61c.png)
 
 训练后的评估得分
 
@@ -359,14 +359,14 @@ torch.save(model.state_dict(), PATH)
 
 ### 推断：
 
-现在进入有趣的部分，我们来上传发票，进行OCR处理，并提取相关实体。此次测试使用的发票不在训练集或测试集中。为了从发票中解析文本，我们使用开源的Tesseract包。让我们来安装这个包：
+现在进入有趣的部分，我们来上传发票，进行 OCR 处理，并提取相关实体。此次测试使用的发票不在训练集或测试集中。为了从发票中解析文本，我们使用开源的 Tesseract 包。让我们来安装这个包：
 
 ```py
 !sudo apt install tesseract-ocr
 !pip install pytesseract
 ```
 
-在运行预测之前，我们需要从图像中解析文本，并将标记和边界框预处理成特征。为此，我创建了一个预处理的python文件 [layoutLM_preprocess.py](https://github.com/UBIAI/layout_lm_tutorial.git)，这将使图像的预处理更容易：
+在运行预测之前，我们需要从图像中解析文本，并将标记和边界框预处理成特征。为此，我创建了一个预处理的 python 文件 [layoutLM_preprocess.py](https://github.com/UBIAI/layout_lm_tutorial.git)，这将使图像的预处理更容易：
 
 ```py
 mport sys
@@ -405,40 +405,40 @@ image
 
 如此：
 
-![图示](../Images/0626ffc346644832631cd9c7b7534b66.png)
+![图示](img/0626ffc346644832631cd9c7b7534b66.png)
 
-使用LayoutLM进行发票实体提取
+使用 LayoutLM 进行发票实体提取
 
-该模型能够正确提取卖家、发票号、日期和TTC，但在将TTC标签分配给购买的物品时出现了错误。考虑到标注文档数量（仅50份）较少，结果令人印象深刻，非常有前景！随着标注发票数量的增加，我们将能够达到更高的F分数和更准确的预测。
+该模型能够正确提取卖家、发票号、日期和 TTC，但在将 TTC 标签分配给购买的物品时出现了错误。考虑到标注文档数量（仅 50 份）较少，结果令人印象深刻，非常有前景！随着标注发票数量的增加，我们将能够达到更高的 F 分数和更准确的预测。
 
 ### 结论：
 
-总体而言，LayoutLM模型的结果非常有前景，展示了transformers在分析半结构化文本中的实用性。该模型可以在任何其他半结构化文档上进行微调，例如驾驶执照、合同、政府文件、财务文件等。
+总体而言，LayoutLM 模型的结果非常有前景，展示了 transformers 在分析半结构化文本中的实用性。该模型可以在任何其他半结构化文档上进行微调，例如驾驶执照、合同、政府文件、财务文件等。
 
 如果你有任何问题，请在下方提问或通过邮件发送至 admin@ubiai.tools。
 
 如果你喜欢这篇文章，请点赞、喜欢并分享！
 
-**简介： [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是UBIAI的创始人，UBIAI是一个用于NLP应用的标注工具，并拥有物理学博士学位。
+**简介： [Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是 UBIAI 的创始人，UBIAI 是一个用于 NLP 应用的标注工具，并拥有物理学博士学位。
 
 **相关：**
 
-+   [使用BERT构建用于职位搜索的知识图谱](/2021/06/knowledge-graph-job-search-bert.html)
++   使用 BERT 构建用于职位搜索的知识图谱
 
-+   [如何用spaCy 3微调BERT Transformer](/2021/06/fine-tune-bert-transformer-spacy.html)
++   如何用 spaCy 3 微调 BERT Transformer
 
-+   [学习实用NLP的最佳方法？](/2021/06/best-way-learn-practical-nlp.html)
++   学习实用 NLP 的最佳方法？
 
 ### 更多相关内容
 
-+   [RAG与微调：哪个是提升LLM应用的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
++   [RAG 与微调：哪个是提升 LLM 应用的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
 
-+   [如何从零开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
++   [如何从零开始构建和训练 Transformer 模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
 
 +   [图像识别与自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 
 +   [语音识别指标的演变](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)
 
-+   [5个需求高但未获得足够认可的IT职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
++   [5 个需求高但未获得足够认可的 IT 职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
 
-+   [LSTM的复兴：扩展LSTM模型挑战Transformer的优势…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)
++   [LSTM 的复兴：扩展 LSTM 模型挑战 Transformer 的优势…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)

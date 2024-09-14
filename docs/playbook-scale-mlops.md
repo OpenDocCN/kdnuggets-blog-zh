@@ -1,6 +1,6 @@
 # 扩展 MLOps 的手册
 
-> 原文：[https://www.kdnuggets.com/2023/06/playbook-scale-mlops.html](https://www.kdnuggets.com/2023/06/playbook-scale-mlops.html)
+> 原文：[`www.kdnuggets.com/2023/06/playbook-scale-mlops.html`](https://www.kdnuggets.com/2023/06/playbook-scale-mlops.html)
 
 作者：Mike Caravetta 和 Brendan Kelly
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -42,7 +42,7 @@ MLOps 团队寻求在满足业务迫切需求的同时扩展他们的能力。�
 
 +   **推广 MLOps**：教育业务和其他技术团队了解为什么以及如何利用 MLOps 方法。
 
-![扩展 MLOps 的手册](../Images/f944bd2e67cfae365720e1ec160f76e4.png)
+![扩展 MLOps 的手册](img/f944bd2e67cfae365720e1ec160f76e4.png)
 
 # 测量与影响
 
@@ -52,7 +52,7 @@ MLOps 团队寻求在满足业务迫切需求的同时扩展他们的能力。�
 
 关键在于使我们的团队对我们如何为客户和业务利益相关者提供价值达成一致。团队专注于量化他们提供的业务影响和支持这一影响的操作指标。衡量影响能捕捉我们如何产生效果的全貌。
 
-![一个用于扩展 MLOps 的操作手册](../Images/de2208bcaf22c556ff36d74f8c7665ea.png)
+![一个用于扩展 MLOps 的操作手册](img/de2208bcaf22c556ff36d74f8c7665ea.png)
 
 **启动的想法：**
 
@@ -84,7 +84,7 @@ MLOps 团队寻求在满足业务迫切需求的同时扩展他们的能力。�
 
 机器学习的一个独特而具有挑战性的方面是[模型在生产中漂移和变化](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)的能力。监控对建立与利益相关者的信任至关重要，以便使用这些模型。[谷歌的机器学习规则](https://developers.google.com/machine-learning/guides/rules-of-ml)建议“实践良好的警报管理，如使警报可操作”。这要求团队定义监控领域以及如何生成这些警报。一个具有挑战性的部分是使这些警报具有可操作性。需要建立一个调查和缓解生产问题的过程。
 
-![扩展 MLOps 的操作手册](../Images/9fa8a44610690a4dc5908fb6d59a3330.png)
+![扩展 MLOps 的操作手册](img/9fa8a44610690a4dc5908fb6d59a3330.png)
 
 在福特，模型操作中心是一个集中展示信息和数据的地方，用于了解模型是否在近实时中达到了我们的预期。
 
@@ -120,9 +120,9 @@ MLOps 团队寻求在满足业务迫切需求的同时扩展他们的能力。�
 
 发展主动的治理方法有助于避免对业务需求的被动响应。策略的两个关键部分是控制对敏感数据的访问以及捕获血统和元数据以便于可视化和审计。
 
-治理在团队扩展时提供了很好的自动化机会。等待数据是数据科学项目中的持续动力杀手。在福特，一种模型能够以97%的准确率自动确定数据集中是否存在个人身份信息。机器学习模型还帮助处理访问请求，将处理时间从几周减少到90%的案例中的几分钟。
+治理在团队扩展时提供了很好的自动化机会。等待数据是数据科学项目中的持续动力杀手。在福特，一种模型能够以 97%的准确率自动确定数据集中是否存在个人身份信息。机器学习模型还帮助处理访问请求，将处理时间从几周减少到 90%的案例中的几分钟。
 
-另一个方面是跟踪模型生命周期中的元数据。扩展机器学习需要扩展对模型本身的信任。大规模的MLOps需要内置的质量、安全性和控制，以避免生产中的问题和偏差。
+另一个方面是跟踪模型生命周期中的元数据。扩展机器学习需要扩展对模型本身的信任。大规模的 MLOps 需要内置的质量、安全性和控制，以避免生产中的问题和偏差。
 
 团队可能会陷入有关治理的理论和意见中。最佳的做法是从清晰的用户访问权限和控制开始。
 
@@ -136,11 +136,11 @@ MLOps 团队寻求在满足业务迫切需求的同时扩展他们的能力。�
 
 +   训练数据 - 用于创建训练模型工件的数据。
 
-+   训练代码 - 推断的Git哈希或源代码链接。
++   训练代码 - 推断的 Git 哈希或源代码链接。
 
 +   依赖项 - 训练中使用的库。
 
-+   预测代码 - 推断的Git哈希或源代码链接。
++   预测代码 - 推断的 Git 哈希或源代码链接。
 
 +   历史预测 - 为审计目的存储推断结果。
 
@@ -162,17 +162,17 @@ MLOps 团队寻求在满足业务迫切需求的同时扩展他们的能力。�
 
 1.  它是如何存储和提供的？
 
-# 推广MLOps
+# 推广 MLOps
 
-许多技术团队陷入了“如果我们建造它，他们就会来”的误区。解决问题不仅仅是构建解决方案，还涉及到分享和宣传解决方案以增加组织影响力。MLOps团队需要分享最佳实践以及如何解决组织工具、数据、模型和利益相关者的独特问题。
+许多技术团队陷入了“如果我们建造它，他们就会来”的误区。解决问题不仅仅是构建解决方案，还涉及到分享和宣传解决方案以增加组织影响力。MLOps 团队需要分享最佳实践以及如何解决组织工具、数据、模型和利益相关者的独特问题。
 
-MLOps团队中的任何人都可以通过与业务利益相关者合作，展示他们的成功案例来成为布道者。展示来自你组织的示例可以清楚地说明好处和机会。
+MLOps 团队中的任何人都可以通过与业务利益相关者合作，展示他们的成功案例来成为布道者。展示来自你组织的示例可以清楚地说明好处和机会。
 
-组织中希望工业化AI的人需要教育、文档和其他支持。午餐学习会、入职培训和导师计划都是很好的起点。随着组织的扩展，更多正式化的学习和入职培训程序以及支持文档可以加速组织的转型。
+组织中希望工业化 AI 的人需要教育、文档和其他支持。午餐学习会、入职培训和导师计划都是很好的起点。随着组织的扩展，更多正式化的学习和入职培训程序以及支持文档可以加速组织的转型。
 
 **团队的想法：**
 
-1.  你如何为MLOps创建一个社区或持续的学习和最佳实践？
+1.  你如何为 MLOps 创建一个社区或持续的学习和最佳实践？
 
 1.  我们需要建立和分享哪些新的角色和能力？
 
@@ -180,19 +180,19 @@ MLOps团队中的任何人都可以通过与业务利益相关者合作，展示
 
 1.  你如何提供培训或文档以与其他团队分享最佳实践和成功故事？
 
-1.  我们如何为数据科学家、数据工程师和业务相关者创建学习项目或检查清单，以学习如何与AI模型合作？
+1.  我们如何为数据科学家、数据工程师和业务相关者创建学习项目或检查清单，以学习如何与 AI 模型合作？
 
 # 开始使用
 
-MLOps团队和领导者面临着大量机会，同时平衡工业化模型的紧迫需求。每个组织面临的挑战各不相同，取决于其数据、模型和技术。如果MLOps很容易，我们可能就不会喜欢解决这个问题了。
+MLOps 团队和领导者面临着大量机会，同时平衡工业化模型的紧迫需求。每个组织面临的挑战各不相同，取决于其数据、模型和技术。如果 MLOps 很容易，我们可能就不会喜欢解决这个问题了。
 
 **挑战总是优先排序。**
 
-我们希望这本行动指南能激发你的团队产生新的想法和探索领域。第一步是为你的团队在2023年生成一个大机会列表。然后根据对客户的最大影响来无情地进行优先排序。团队还可以根据新兴基准定义和衡量他们的成熟进展。[谷歌的这份指南](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)可以为你的团队提供一个框架和成熟度里程碑。
+我们希望这本行动指南能激发你的团队产生新的想法和探索领域。第一步是为你的团队在 2023 年生成一个大机会列表。然后根据对客户的最大影响来无情地进行优先排序。团队还可以根据新兴基准定义和衡量他们的成熟进展。[谷歌的这份指南](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)可以为你的团队提供一个框架和成熟度里程碑。
 
 **给你的团队的想法：**
 
-1.  我们在MLOps方面推进成熟度或复杂性的最大机会是什么？
+1.  我们在 MLOps 方面推进成熟度或复杂性的最大机会是什么？
 
 1.  我们如何捕捉和跟踪在推进成熟度方面的项目进展？
 
@@ -200,17 +200,17 @@ MLOps团队和领导者面临着大量机会，同时平衡工业化模型的紧
 
 ## 参考文献
 
-+   [https://www2.deloitte.com/content/dam/insights/articles/7022_TT-MLOps-industrialized-AI/DI_2021-TT-MLOps-industrialized-AI.pdf](https://www2.deloitte.com/content/dam/insights/articles/7022_TT-MLOps-industrialized-AI/DI_2021-TT-MLOps-industrialized-AI.pdf)
++   [`www2.deloitte.com/content/dam/insights/articles/7022_TT-MLOps-industrialized-AI/DI_2021-TT-MLOps-industrialized-AI.pdf`](https://www2.deloitte.com/content/dam/insights/articles/7022_TT-MLOps-industrialized-AI/DI_2021-TT-MLOps-industrialized-AI.pdf)
 
-+   [https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
++   [`proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf`](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
 
-+   [https://developers.google.com/machine-learning/guides/rules-of-ml](https://developers.google.com/machine-learning/guides/rules-of-ml)
++   [`developers.google.com/machine-learning/guides/rules-of-ml`](https://developers.google.com/machine-learning/guides/rules-of-ml)
 
-+   [https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
++   [`cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning`](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)
 
-**[迈克·卡拉维塔](https://www.linkedin.com/in/michael-cavaretta-795a965/)** 利用分析技术创造了数亿美元的商业价值。他目前负责推进福特在制造业的MLOps扩展和复杂性降低。
+**[迈克·卡拉维塔](https://www.linkedin.com/in/michael-cavaretta-795a965/)** 利用分析技术创造了数亿美元的商业价值。他目前负责推进福特在制造业的 MLOps 扩展和复杂性降低。
 
-**[布伦丹·凯利](https://www.linkedin.com/in/brendan-kelly-5b79135a/)**，AlignAI的联合创始人，帮助了几十个组织加速了银行、金融服务、制造业和保险行业的MLOps。
+**[布伦丹·凯利](https://www.linkedin.com/in/brendan-kelly-5b79135a/)**，AlignAI 的联合创始人，帮助了几十个组织加速了银行、金融服务、制造业和保险行业的 MLOps。
 
 ### 相关主题
 

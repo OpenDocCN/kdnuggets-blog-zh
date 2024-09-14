@@ -1,8 +1,8 @@
 # 为什么数据科学家必须了解变革管理
 
-> 原文：[https://www.kdnuggets.com/2018/02/data-scientist-change-management.html](https://www.kdnuggets.com/2018/02/data-scientist-change-management.html)
+> 原文：[`www.kdnuggets.com/2018/02/data-scientist-change-management.html`](https://www.kdnuggets.com/2018/02/data-scientist-change-management.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **[Jurjen Helmus](https://www.hva.nl/profiel/h/e/j.r.helmus/j.r.helmus.html)，阿姆斯特丹应用科学大学（HvA）。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 我们在讲座中讨论的一个变革管理模型指出，“*变革是由于对新现实的反应而导致的行为变化的结果*。”变革是结果而不是起点。目标是你要朝着的方向，变革是实现这些目标所必需的。但要实现目标，必须从后向前思考，回到需要实施干预的点，以创造新的现实。
 
-![变革管理](../Images/85730cba2d4bb9888e904b309bdf0a84.png)
+![变革管理](img/85730cba2d4bb9888e904b309bdf0a84.png)
 
 这就是我意识到的：创造新的现实通常是我们数据科学家在做的事情——基于我们对系统行为的洞察——基于数据集。
 
@@ -34,9 +34,9 @@
 
 **案例 - 预测性维护**
 
-让我通过具体案例来阐明我的想法。设想一个生产相对简单产品的工厂。维护和检修由技术部门进行。生产线上的同事和维护部门的员工每天都与机械设备打交道，因此他们*了解并感知*设备的状态。以詹姆斯为例，他是一位45岁的维护工程师，在公司工作超过25年。他通过旋动螺栓和手臂就能感知是否需要维护。当然，机械设备有时会故障，但这也在所难免。
+让我通过具体案例来阐明我的想法。设想一个生产相对简单产品的工厂。维护和检修由技术部门进行。生产线上的同事和维护部门的员工每天都与机械设备打交道，因此他们*了解并感知*设备的状态。以詹姆斯为例，他是一位 45 岁的维护工程师，在公司工作超过 25 年。他通过旋动螺栓和手臂就能感知是否需要维护。当然，机械设备有时会故障，但这也在所难免。
 
-现在预测性维护出现了。数据科学家们开始着手预测即将进行的维护，以便在设备故障被感知之前发现问题。请注意，组织内开始进行数据科学工作本身就是一种干预。项目结束时，确实为许多设备创建了一个预测模型，能够在故障发生前3周以97%的准确率预测组件的故障。预测表明，生产故障减少85%是可以实现的。
+现在预测性维护出现了。数据科学家们开始着手预测即将进行的维护，以便在设备故障被感知之前发现问题。请注意，组织内开始进行数据科学工作本身就是一种干预。项目结束时，确实为许多设备创建了一个预测模型，能够在故障发生前 3 周以 97%的准确率预测组件的故障。预测表明，生产故障减少 85%是可以实现的。
 
 **挑战 - 实施**
 
@@ -56,7 +56,7 @@
 
 此外，关注更宏观的视角。在任何公司中实施数据科学并不是要挤掉员工，而是使我们所做的事情更有效、更高效。我期望在实施之后，仍然会对熟练的员工有需求。
 
-**简历：** [Jurjen Helmus](https://www.hva.nl/profiel/h/e/j.r.helmus/j.r.helmus.html)（1980年）在阿姆斯特丹应用科技大学（HvA）工作。他协调“城市技术中的大数据”这一辅修课程。此外，他正在阿姆斯特丹大学进行博士研究，建立用于电动车充电基础设施的基于代理的仿真模型。
+**简历：** [Jurjen Helmus](https://www.hva.nl/profiel/h/e/j.r.helmus/j.r.helmus.html)（1980 年）在阿姆斯特丹应用科技大学（HvA）工作。他协调“城市技术中的大数据”这一辅修课程。此外，他正在阿姆斯特丹大学进行博士研究，建立用于电动车充电基础设施的基于代理的仿真模型。
 
 **相关内容**
 
@@ -64,18 +64,18 @@
 
 +   [**加速算法：设计、算法选择和实现中的考虑因素**](https://www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html)
 
-+   [**从创意到成功的数据科学项目的7个超简单步骤**](https://www.kdnuggets.com/2017/11/7-super-simple-steps-idea-successful-data-science-project.html)
++   [**从创意到成功的数据科学项目的 7 个超简单步骤**](https://www.kdnuggets.com/2017/11/7-super-simple-steps-idea-successful-data-science-project.html)
 
 ### 进一步阅读
 
-+   [你需要了解的数据管理的6件事及其重要性……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [你需要了解的数据管理的 6 件事及其重要性……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets新闻，4月13日：数据科学家应该了解的Python库……](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
 
 +   [为什么数据管理对数据科学如此重要？](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)
 
-+   [KDnuggets新闻，5月4日：9门免费哈佛课程学习数据……](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据……](https://www.kdnuggets.com/2022/n18.html)
 
-+   [你必须知道的15个 Python 编程面试问题（数据科学专用）](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [你必须知道的 15 个 Python 编程面试问题（数据科学专用）](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [你必须知道的前10个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的前 10 个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)

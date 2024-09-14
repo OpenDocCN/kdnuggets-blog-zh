@@ -1,12 +1,12 @@
 # 2020 年最佳机器学习课程
 
-> 原文：[https://www.kdnuggets.com/2020/10/10-best-machine-learning-courses-2020.html](https://www.kdnuggets.com/2020/10/10-best-machine-learning-courses-2020.html)
+> 原文：[`www.kdnuggets.com/2020/10/10-best-machine-learning-courses-2020.html`](https://www.kdnuggets.com/2020/10/10-best-machine-learning-courses-2020.html)
 
-[评论](#comments)
+评论
 
 **由 [Ahmad Bin Shafiq](https://medium.com/@ahmadbinshafiq)，机器学习学生**。
 
-![](../Images/b7eb044cac8a7afa4e1ae358ab893c0f.png)
+![](img/b7eb044cac8a7afa4e1ae358ab893c0f.png)
 
 *照片由 [Photos Hobby](https://unsplash.com/@photoshobby?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -14,7 +14,7 @@
 
 **1) [面向编码者的实用深度学习 FAST.AI](https://course.fast.ai/)**
 
-![](../Images/b3c358295b017037b78fa0afc15eed17.png)
+![](img/b3c358295b017037b78fa0afc15eed17.png)
 
 **价格：** 免费
 
@@ -24,7 +24,7 @@
 
 **2) [Fast.ai 的自然语言处理代码优先入门](https://www.fast.ai/2019/07/08/fastai-nlp/)**
 
-![](../Images/10925c74e8baa9ed55511b4b9200595a.png)
+![](img/10925c74e8baa9ed55511b4b9200595a.png)
 
 **价格：** 免费
 
@@ -36,33 +36,33 @@
 
 **3) [数据科学与机器学习 Python 训练营](https://www.udemy.com/course/python-for-data-science-and-machine-learning-bootcamp/)**
 
-![](../Images/2966fb3651a6fcfc3f8528bb4d69374c.png)
+![](img/2966fb3651a6fcfc3f8528bb4d69374c.png)
 
 **价格：** $129（促销价 $10-$20）
 
-**讲师：**Jose Marcial Portilla拥有圣克拉拉大学的机械工程学士和硕士学位，并在数据科学和编程领域有多年的专业讲师和培训师经验。他在微流体学、材料科学和数据科学技术等领域有出版物和专利。
+**讲师：**Jose Marcial Portilla 拥有圣克拉拉大学的机械工程学士和硕士学位，并在数据科学和编程领域有多年的专业讲师和培训师经验。他在微流体学、材料科学和数据科学技术等领域有出版物和专利。
 
 **评分：**4.6*
 
-**课程成果：**本课程是对机器学习和数据科学的非常实用的介绍。它不假设任何先前的知识，从教授基础的Python到Numpy Pandas开始，然后教授使用Python的机器学习，通过scikit-learn进行学习，接着涉及自然语言处理和Tensorflow，以及通过Spark进行大数据处理。
+**课程成果：**本课程是对机器学习和数据科学的非常实用的介绍。它不假设任何先前的知识，从教授基础的 Python 到 Numpy Pandas 开始，然后教授使用 Python 的机器学习，通过 scikit-learn 进行学习，接着涉及自然语言处理和 Tensorflow，以及通过 Spark 进行大数据处理。
 
-这绝对是最好的课程之一，因为Jose是一位非常优秀的讲师。
+这绝对是最好的课程之一，因为 Jose 是一位非常优秀的讲师。
 
-**4) [DeepLearning.AI TensorFlow开发者专业证书](https://www.coursera.org/professional-certificates/tensorflow-in-practice)**
+**4) [DeepLearning.AI TensorFlow 开发者专业证书](https://www.coursera.org/professional-certificates/tensorflow-in-practice)**
 
-![](../Images/1602d39fb6951ac97f4d72fc97422c50.png)
+![](img/1602d39fb6951ac97f4d72fc97422c50.png)
 
 **价格：**$49/月
 
-**讲师：**[Laurence Moroney](https://www.coursera.org/professional-certificates/tensorflow-in-practice#instructors) 是Google的开发者倡导者，专注于使用TensorFlow进行人工智能工作。他也是许多书籍的作者。
+**讲师：**[Laurence Moroney](https://www.coursera.org/professional-certificates/tensorflow-in-practice#instructors) 是 Google 的开发者倡导者，专注于使用 TensorFlow 进行人工智能工作。他也是许多书籍的作者。
 
 **评分：**4.7*
 
-**课程成果：**在这个动手实践的四课程专业证书项目中，你将学习使用TensorFlow构建可扩展的AI驱动应用程序所需的工具。Lawrence将从TensorFlow的基础知识开始教学，逐步进展到使用TensorFlow的前沿应用。
+**课程成果：**在这个动手实践的四课程专业证书项目中，你将学习使用 TensorFlow 构建可扩展的 AI 驱动应用程序所需的工具。Lawrence 将从 TensorFlow 的基础知识开始教学，逐步进展到使用 TensorFlow 的前沿应用。
 
 **5) [数据营数据科学路径](https://www.datacamp.com/tracks/data-scientist-with-python)**
 
-![](../Images/e62b53a331ecc41cc4bd3413f68ccc93.png)
+![](img/e62b53a331ecc41cc4bd3413f68ccc93.png)
 
 **价格：**$25/月或$300/年
 
@@ -74,19 +74,19 @@
 
 **1) [斯坦福大学的机器学习课程](https://coursera.org/learn/machine-learning/)**
 
-![](../Images/a6c5e16fd27ce025ccbddb8694138930.png)
+![](img/a6c5e16fd27ce025ccbddb8694138930.png)
 
 **价格：**$80
 
-**讲师：**Andrew Ng 是Landing AI的CEO/创始人；Coursera的联合创始人；斯坦福大学的兼职教授；曾任百度首席科学家，并且是Google Brain的创始首席。
+**讲师：**Andrew Ng 是 Landing AI 的 CEO/创始人；Coursera 的联合创始人；斯坦福大学的兼职教授；曾任百度首席科学家，并且是 Google Brain 的创始首席。
 
 **评分：**4.9
 
-**课程成果：**你将学习所有著名机器学习算法的基础理论，从监督学习到无监督学习。你还将有机会在MATLAB/Octave中从零开始编写这些算法。
+**课程成果：**你将学习所有著名机器学习算法的基础理论，从监督学习到无监督学习。你还将有机会在 MATLAB/Octave 中从零开始编写这些算法。
 
 **2) [深度学习专业化课程](https://www.coursera.org/specializations/deep-learning)**
 
-![](../Images/860cfd24e1b70ccfb9a861dfb88d04c6.png)
+![](img/860cfd24e1b70ccfb9a861dfb88d04c6.png)
 
 **价格：**$49/月
 
@@ -100,7 +100,7 @@
 
 **3) [CS231n by Andrej Karpathy](https://www.youtube.com/watch?v=NfnWJUyUJYU&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&ab_channel=AndrejKarpathy)**
 
-![](../Images/115c8f3355f7608f2c672d3ce7adb847.png)
+![](img/115c8f3355f7608f2c672d3ce7adb847.png)
 
 **价格：** 免费
 
@@ -110,7 +110,7 @@
 
 **4) [Stat 451: Introduction to Machine Learning](https://www.youtube.com/watch?v=OgK8JFjkSto&list=PLTKMiZHVd_2KyGirGEvKlniaWeLOHhUF3&ab_channel=SebastianRaschka)**
 
-![](../Images/ac6c72fdf7511855f44999a6402d1161.png)
+![](img/ac6c72fdf7511855f44999a6402d1161.png)
 
 **价格：** 免费
 
@@ -122,7 +122,7 @@
 
 **5) [MIT Introduction to Deep Learning | 6.S191](http://introtodeeplearning.com/)**
 
-![](../Images/d2e8d36c669a590bb578e55b1f4f8141.png)
+![](img/d2e8d36c669a590bb578e55b1f4f8141.png)
 
 **价格：** 免费
 
@@ -146,11 +146,11 @@ Alexander Amini 是麻省理工学院的博士生，隶属于 [计算机科学�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 

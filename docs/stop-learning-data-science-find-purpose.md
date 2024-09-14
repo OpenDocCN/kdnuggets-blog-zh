@@ -1,8 +1,8 @@
 # 停止学习数据科学以找到目标，并以找到目标来学习数据科学
 
-> 原文：[https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
+> 原文：[`www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html`](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-[评论](#comments)
+评论
 
 **由 [Brandon Cosley](http://www.fastdatascience.ai/), FastDataScience.AI**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -28,11 +28,11 @@
 
 4\. 由于所需知识的广度非常广泛，很容易对自己有效传达教育价值的能力失去信心。
 
-我记得自己从数据精通的学术研究者转变为行业数据科学专业人士的经历。我接触了所有能找到的教程、博客和MOOC。我沉浸于行业新闻和趋势中。我把自己装满了知识，但发现学得越多，我意识到自己不知道的东西也越多。我感到压力重重，对自己拥有的技能缺乏信心，面临数据科学面试时总担心遇到“陷阱”，因为我没有花足够的时间在损失函数上。
+我记得自己从数据精通的学术研究者转变为行业数据科学专业人士的经历。我接触了所有能找到的教程、博客和 MOOC。我沉浸于行业新闻和趋势中。我把自己装满了知识，但发现学得越多，我意识到自己不知道的东西也越多。我感到压力重重，对自己拥有的技能缺乏信心，面临数据科学面试时总担心遇到“陷阱”，因为我没有花足够的时间在损失函数上。
 
 我曾经用数据科学教育压倒了自己，希望我的广泛接触会引导我找到我的目标，并获得更好的薪水。我当时没有意识到的是，我把车马放在了前面。我太急于学习了，以至于花了所有时间学习各种“东西”，却从未停下来问自己：这些“东西”如何结合起来解决实际问题？
 
-让我告诉你一个显而易见的秘密，大多数企业不关心数据科学的“东西”。大多数企业只关心这些东西是否能解决业务问题。所以这里的难点在于，试图学习所有的数据科学工具，以便你的简历上填满不断扩展的“东西”（Python、R、回归、随机森林、朴素贝叶斯、马尔可夫链、支持向量机、k-means聚类、XGBoost、卷积神经网络、自然语言处理等等）是徒劳的。
+让我告诉你一个显而易见的秘密，大多数企业不关心数据科学的“东西”。大多数企业只关心这些东西是否能解决业务问题。所以这里的难点在于，试图学习所有的数据科学工具，以便你的简历上填满不断扩展的“东西”（Python、R、回归、随机森林、朴素贝叶斯、马尔可夫链、支持向量机、k-means 聚类、XGBoost、卷积神经网络、自然语言处理等等）是徒劳的。
 
 这些“东西”不会引导你找到你的目标，因为你的目标只是由你感受到的价值定义的。你感受到价值的地方就是你允许自己不断发展的数据科学知识被应用于解决问题的地方。能够沟通你如何利用*一些*数据科学工具来解决问题，会比仅仅列出你在某一课程中接触过的所有算法更有助于你的职业发展。
 
@@ -40,7 +40,7 @@
 
 简而言之，首先找到一个目标。你关心什么？你的热情在哪里？你想解决什么问题？一旦你列出这些问题，选择一个，并考虑你的数据科学知识如何应用于解决与这些兴趣相关的问题。
 
-![](../Images/1e53eb43593c40f4a61b7251ca33c90b.png)
+![](img/1e53eb43593c40f4a61b7251ca33c90b.png)
 
 Pixabay
 
@@ -60,7 +60,7 @@ Pixabay
 
 我的目标是社会正义。我希望利用数据科学的工具和技能生成揭露不公正、提供积极社会变革解决方案的见解，并帮助我们认识到人类偏见的影响。
 
-![](../Images/6185935dbd5c44bcab5b77ef6a0312f5.png)
+![](img/6185935dbd5c44bcab5b77ef6a0312f5.png)
 
 Pixabay
 
@@ -72,28 +72,28 @@ Pixabay
 
 现在，当面临新的目标并询问是否有数据科学解决方案来克服与该目标相关的问题时，我不再对自己不知道的东西感到缺乏信心。我利用那个目标来应用我所知道的，解释我的方法，并确定一些新的学习内容，同时自信地知道我能够做到。
 
-**简介： [布兰登·科斯利](http://www.fastdatascience.ai/)** 在数据科学领域拥有超过15年的经验。他获得了以定量方法为重点的研究心理学博士学位，并曾担任主要医疗公司数据科学和AI总监，联合创办了多家数据科学初创公司，并且在这一领域积极发挥思想领袖作用。2021年，布兰登启动了FastDataScience.AI，这是一个支持数据科学教育的不断发展的资源。加入Facebook社区Think Data Science，参与讨论。
+**简介： [布兰登·科斯利](http://www.fastdatascience.ai/)** 在数据科学领域拥有超过 15 年的经验。他获得了以定量方法为重点的研究心理学博士学位，并曾担任主要医疗公司数据科学和 AI 总监，联合创办了多家数据科学初创公司，并且在这一领域积极发挥思想领袖作用。2021 年，布兰登启动了 FastDataScience.AI，这是一个支持数据科学教育的不断发展的资源。加入 Facebook 社区 Think Data Science，参与讨论。
 
 [原文](https://towardsdatascience.com/stop-learning-data-science-to-find-purpose-and-find-purpose-to-learn-data-science-23f6f5e568ac)。转载许可。
 
 **相关：**
 
-+   [为什么机器学习工程师正在取代数据科学家](/2021/11/why-machine-learning-engineers-are-replacing-data-scientists.html)
++   为什么机器学习工程师正在取代数据科学家
 
-+   [数据科学家和数据分析师有什么区别？](/2021/11/difference-data-scientist-data-analyst.html)
++   数据科学家和数据分析师有什么区别？
 
-+   [如何获得数据科学认证](/2021/12/get-certified-data-science.html)
++   如何获得数据科学认证
 
 ### 更多相关话题
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [90亿美元的AI失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [成为出色数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

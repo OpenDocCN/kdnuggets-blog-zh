@@ -1,8 +1,8 @@
 # 5 分钟内设置你的 AI 开发环境
 
-> 原文：[https://www.kdnuggets.com/2018/08/ai-dev-environment.html](https://www.kdnuggets.com/2018/08/ai-dev-environment.html)
+> 原文：[`www.kdnuggets.com/2018/08/ai-dev-environment.html`](https://www.kdnuggets.com/2018/08/ai-dev-environment.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Nick Walsh](https://twitter.com/thenickwalsh) 撰写**
 
@@ -12,7 +12,7 @@
 
 在这篇博客文章中，我将展示如何使用一个简单的 Python 包通过几个简单步骤来设置你环境，以适配任何流行的数据科学和 AI 框架。Datmo 在底层利用 Docker，简化了过程，帮助你快速、轻松地启动，无需陡峭的学习曲线。
 
-![使用 datmo 在不到一分钟内设置新的 TensorFlow 项目](../Images/1a5b0e86d041f38addcc91e675399828.png)
+![使用 datmo 在不到一分钟内设置新的 TensorFlow 项目](img/1a5b0e86d041f38addcc91e675399828.png)
 
 ### 0\. 前提条件
 
@@ -70,7 +70,7 @@ RStudio -- `$ datmo rstudio`（在 R-base 环境中可用）
 
 终端 -- `$ datmo terminal`
 
-![打开 Jupyter Notebook 并导入 TensorFlow](../Images/de175f8fa8f103e7e1908ef4da36d23c.png)*打开 Jupyter Notebook 并导入 TensorFlow*
+![打开 Jupyter Notebook 并导入 TensorFlow](img/de175f8fa8f103e7e1908ef4da36d23c.png)*打开 Jupyter Notebook 并导入 TensorFlow*
 
 * * *
 
@@ -96,11 +96,11 @@ RStudio -- `$ datmo rstudio`（在 R-base 环境中可用）
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -110,10 +110,10 @@ RStudio -- `$ datmo rstudio`（在 R-base 环境中可用）
 
 +   [机器学习算法的完整端到端部署](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [理解AI中的代理环境](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
++   [理解 AI 中的代理环境](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
 
-+   [5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
++   [5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [5分钟用Python构建网页爬虫](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
++   [5 分钟用 Python 构建网页爬虫](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
 
-+   [介绍OpenChat：免费的简单平台，用于构建…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)
++   [介绍 OpenChat：免费的简单平台，用于构建…](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)

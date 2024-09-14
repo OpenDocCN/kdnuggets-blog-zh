@@ -1,8 +1,8 @@
 # 从头开始构建你的第一个机器学习模型的逐步教程
 
-> 原文：[https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)
+> 原文：[`www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model`](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)
 
-![构建你的第一个机器学习模型](../Images/a39ced9aebcf787ca24dbe305242b487.png)
+![构建你的第一个机器学习模型](img/a39ced9aebcf787ca24dbe305242b487.png)
 
 图片由 pch.vector 提供，来源于 [Freepik](https://www.freepik.com/free-vector/scientists-studying-neural-connections-programmers-writing-codes-machine-brain_12291267.htm#fromView=search&page=1&position=0&uuid=cedf5a0c-dfa5-4c5a-b7cd-6aed3e67bde3)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -110,7 +110,7 @@
 
 根据上述业务需求，我们需要特定的指标来衡量模型的表现。虽然有许多测量指标，但我建议使用召回率指标。
 
-在货币价值方面，使用召回率可能更有益，因为它试图最小化假阴性或减少预测中未流失的部分，而实际上却在流失。当然，我们也可以通过使用F1指标来尝试平衡。
+在货币价值方面，使用召回率可能更有益，因为它试图最小化假阴性或减少预测中未流失的部分，而实际上却在流失。当然，我们也可以通过使用 F1 指标来尝试平衡。
 
 有鉴于此，让我们进入教程的第一部分。
 
@@ -122,13 +122,13 @@
 
 在现实世界中，清洁数据并不容易获得。通常，我们需要通过应用程序、调查和其他许多来源来收集数据，然后将其存储在数据存储中。然而，本教程仅涵盖收集数据集，因为我们使用的是现有的清洁数据。
 
-在我们的案例中，我们将使用来自[Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)的Telco客户流失数据。这是一个开放源代码的分类数据，涉及电信行业客户历史及流失标签。
+在我们的案例中，我们将使用来自[Kaggle](https://www.kaggle.com/datasets/blastchar/telco-customer-churn)的 Telco 客户流失数据。这是一个开放源代码的分类数据，涉及电信行业客户历史及流失标签。
 
 ### 探索性数据分析（EDA）和数据清理
 
-让我们开始审查我们的数据集。我假设读者已经具备基本的Python知识，并可以在他们的笔记本中使用Python包。我还基于[Anaconda](https://www.anaconda.com/download)环境分发了本教程，以便简化操作。
+让我们开始审查我们的数据集。我假设读者已经具备基本的 Python 知识，并可以在他们的笔记本中使用 Python 包。我还基于[Anaconda](https://www.anaconda.com/download)环境分发了本教程，以便简化操作。
 
-要理解我们拥有的数据，我们需要将其加载到一个用于数据操作的Python包中。最著名的是Pandas Python包，我们将使用它。我们可以使用以下代码来加载和查看CSV数据。
+要理解我们拥有的数据，我们需要将其加载到一个用于数据操作的 Python 包中。最著名的是 Pandas Python 包，我们将使用它。我们可以使用以下代码来加载和查看 CSV 数据。
 
 ```py
 import pandas as pd
@@ -137,9 +137,9 @@ df = pd.read_csv('WA_Fn-UseC_-Telco-Customer-Churn.csv')
 df.head() 
 ```
 
-![逐步教程：构建您的第一个机器学习模型](../Images/d000a3dd8c62d87a83586bbb7e52670b.png)
+![逐步教程：构建您的第一个机器学习模型](img/d000a3dd8c62d87a83586bbb7e52670b.png)
 
-接下来，我们将探索数据以了解我们的数据集。以下是我们在EDA过程中将执行的一些操作。
+接下来，我们将探索数据以了解我们的数据集。以下是我们在 EDA 过程中将执行的一些操作。
 
 1\. 检查特征和总结统计信息。
 
@@ -153,7 +153,7 @@ df.head()
 
 6\. 使用箱型图来识别分布和潜在的异常值。
 
-首先，我们会检查特征和摘要统计信息。使用Pandas，我们可以通过以下代码查看数据集特征。
+首先，我们会检查特征和摘要统计信息。使用 Pandas，我们可以通过以下代码查看数据集特征。
 
 ```py
 # Get the basic information about the dataset
@@ -202,9 +202,9 @@ df.describe()
 df.describe(exclude = 'number') 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/8146f78756732a8535f8f817e1ecf7e0.png)
+![逐步教程：构建你的第一个机器学习模型](img/8146f78756732a8535f8f817e1ecf7e0.png)
 
-从上述信息中，我们了解到我们有19个特征和一个目标特征（Churn）。数据集包含7043行，大多数数据集是分类的。
+从上述信息中，我们了解到我们有 19 个特征和一个目标特征（Churn）。数据集包含 7043 行，大多数数据集是分类的。
 
 让我们检查一下缺失数据。
 
@@ -254,9 +254,9 @@ No     5174
 Yes    1869 
 ```
 
-有轻微的不平衡，因为只有接近25%的流失发生，而非流失案例则更多。
+有轻微的不平衡，因为只有接近 25%的流失发生，而非流失案例则更多。
 
-我们还会查看其他特征的分布，首先从数值特征开始。然而，我们还会将TotalCharges特征转换为数值列，因为该特征应该是数值型而非类别型。此外，SeniorCitizen特征应为分类特征，因此我将其转换为字符串。由于Churn特征是分类特征，我们还会开发新特征，将其显示为数值列。
+我们还会查看其他特征的分布，首先从数值特征开始。然而，我们还会将 TotalCharges 特征转换为数值列，因为该特征应该是数值型而非类别型。此外，SeniorCitizen 特征应为分类特征，因此我将其转换为字符串。由于 Churn 特征是分类特征，我们还会开发新特征，将其显示为数值列。
 
 ```py
 import numpy as np
@@ -273,9 +273,9 @@ num_features = df.select_dtypes('number').columns
 df[num_features].hist(bins=15, figsize=(15, 6), layout=(2, 5)) 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/0f784480cd073fbe036e8004f31cc975.png)
+![逐步教程：构建你的第一个机器学习模型](img/0f784480cd073fbe036e8004f31cc975.png)
 
-除了customerID（因为它们是具有唯一值的标识符）之外，我们还会提供分类特征的绘图。
+除了 customerID（因为它们是具有唯一值的标识符）之外，我们还会提供分类特征的绘图。
 
 ```py
 import matplotlib.pyplot as plt
@@ -289,7 +289,7 @@ for i, col in enumerate(cat_features, 1):
     plt.title(col) 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/29025557bd7c4be0ea896eab342ff3b0.png)
+![逐步教程：构建你的第一个机器学习模型](img/29025557bd7c4be0ea896eab342ff3b0.png)
 
 然后，我们将使用以下代码查看数值特征之间的相关性。
 
@@ -302,9 +302,9 @@ sns.heatmap(df[num_features].corr())
 plt.title('Correlation Heatmap') 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/3718d0d8ef185d320f9e79a3bfc5c2c5.png)
+![逐步教程：构建你的第一个机器学习模型](img/3718d0d8ef185d320f9e79a3bfc5c2c5.png)
 
-上述相关性基于[皮尔逊相关系数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)，即一个特征与另一个特征之间的线性相关性。我们还可以通过[Cramer’s V](https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V)对分类数据进行相关性分析。为了简化分析，我们将安装Dython Python包来帮助我们的分析。
+上述相关性基于[皮尔逊相关系数](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient)，即一个特征与另一个特征之间的线性相关性。我们还可以通过[Cramer’s V](https://en.wikipedia.org/wiki/Cram%C3%A9r%27s_V)对分类数据进行相关性分析。为了简化分析，我们将安装 Dython Python 包来帮助我们的分析。
 
 ```py
 pip install dython 
@@ -324,7 +324,7 @@ plt.figure(figsize=(14, 12))
 sns.heatmap(corr_matrix) 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/da68faa02ff0bccdeb6ffaff89c081af.png)
+![逐步教程：构建你的第一个机器学习模型](img/da68faa02ff0bccdeb6ffaff89c081af.png)
 
 最后，我们将基于[四分位距（IQR）](https://en.wikipedia.org/wiki/Interquartile_range)使用箱线图检查数值异常值。
 
@@ -337,7 +337,7 @@ for i, col in enumerate(num_features, 1):
     plt.title(col) 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/29025557bd7c4be0ea896eab342ff3b0.png)
+![逐步教程：构建你的第一个机器学习模型](img/29025557bd7c4be0ea896eab342ff3b0.png)
 
 从上述分析中，我们可以看出，我们不需要处理缺失数据或异常值。下一步是为我们的机器学习模型执行特征选择，因为我们只希望保留对预测有影响且在业务中可行的特征。
 
@@ -434,7 +434,7 @@ X_train_val, X_test, y_train_val, y_test = train_test_split(X, y, test_size=0.2,
 X_train, X_val, y_train, y_val = train_test_split(X_train_val, y_train_val, test_size=0.25, random_state=42, stratify=y_train_val) 
 ```
 
-在上述代码中，我们将数据切分为60%的训练数据集和20%的测试及验证集。一旦我们拥有数据集，就可以开始训练模型。
+在上述代码中，我们将数据切分为 60%的训练数据集和 20%的测试及验证集。一旦我们拥有数据集，就可以开始训练模型。
 
 ### 训练模型
 
@@ -465,7 +465,7 @@ pipeline.fit(X_train, y_train)
 
 模型管道的示意图如下所示。
 
-![构建第一个机器学习模型的分步教程](../Images/f2d0503020b1e6d51cc657e7fe5ba4ea.png)
+![构建第一个机器学习模型的分步教程](img/f2d0503020b1e6d51cc657e7fe5ba4ea.png)
 
 Scikit-Learn 管道会接受未见过的数据，并在进入模型之前经过所有的预处理步骤。在模型训练完成后，让我们评估模型结果。
 
@@ -485,7 +485,7 @@ y_test_pred = pipeline.predict(X_test)
 print("Test Classification Report:\n", classification_report(y_test, y_test_pred)) 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/07bc91caaf1ae99286c2d59fa6f9d511.png)
+![逐步教程：构建你的第一个机器学习模型](img/07bc91caaf1ae99286c2d59fa6f9d511.png)
 
 从验证数据和测试数据中我们可以看到，流失（churn）（1）的召回率并不是最好。这就是为什么我们可以优化模型以获得最佳结果。
 
@@ -525,7 +525,7 @@ y_test_pred = grid_search.predict(X_test)
 print("Test Classification Report:\n", classification_report(y_test, y_test_pred)) 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/c83df29e42b78c4a31a6d8a78d3349ca.png)
+![逐步教程：构建你的第一个机器学习模型](img/c83df29e42b78c4a31a6d8a78d3349ca.png)
 
 结果仍然没有显示最佳的召回率，但这是预期的，因为它们只是基线模型。让我们尝试几个模型，看看召回率表现是否有所改善。你可以随时调整下面的超参数。
 
@@ -635,7 +635,7 @@ plt.title('Comparison of Test Recall for Different Models')
 plt.show() 
 ```
 
-![逐步教程：构建你的第一个机器学习模型](../Images/b01f8a8b62fcc4995e786ea84f9153ef.png)
+![逐步教程：构建你的第一个机器学习模型](img/b01f8a8b62fcc4995e786ea84f9153ef.png)
 
 召回率结果变化不大；即使是基线逻辑回归模型似乎也是最佳的。如果我们想要更好的结果，我们应该回到更好的特征选择。
 

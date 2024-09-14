@@ -1,8 +1,8 @@
 # 边界框深度学习：视频注释的未来
 
-> 原文：[https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)
+> 原文：[`www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html`](https://www.kdnuggets.com/2022/07/bounding-box-deep-learning-future-video-annotation.html)
 
-![边界框深度学习：视频注释的未来](../Images/68c2b0978a954d75280d8c32326c3ada.png)
+![边界框深度学习：视频注释的未来](img/68c2b0978a954d75280d8c32326c3ada.png)
 
 边界框是一种计算机视觉中的注释类型，指的是在图像或视频中的对象周围绘制的框。边界框的坐标可以用来表示对象的位置、大小和方向。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT
 
 * * *
 
@@ -50,11 +50,11 @@
 
 # 边界框深度学习的好处
 
-实时物体检测：边界框深度学习的一个重要好处是它可以用于实时检测物体。这是因为物体检测器可以作为CNN实现，CNN可以在GPU上运行以实现高效推理。但是，这种推理过程不足以实现实时物体检测。
+实时物体检测：边界框深度学习的一个重要好处是它可以用于实时检测物体。这是因为物体检测器可以作为 CNN 实现，CNN 可以在 GPU 上运行以实现高效推理。但是，这种推理过程不足以实现实时物体检测。
 
 **提高准确性：** 边界框深度学习模型可以比传统物体检测方法实现更高的准确性。这是因为回归器可以从许多边界框中学习，并产生更准确的预测。
 
-**更快的训练：** 边界框深度学习模型的训练速度比传统的物体检测模型更快。这是因为CNN可以在许多图像上并行训练，从而加快训练过程。
+**更快的训练：** 边界框深度学习模型的训练速度比传统的物体检测模型更快。这是因为 CNN 可以在许多图像上并行训练，从而加快训练过程。
 
 这可以用比传统物体检测模型少得多的计算能力来完成。
 
@@ -78,7 +78,7 @@
 
 然而，在使用这种方法之前应考虑一些缺点。
 
-**[Gaurav Sharma](XXX)** 在人工智能和机器学习领域工作了六年以上。Gaurav 是一名自由技术作家，为 [Cogito Tech LLC](https://www.cogitotech.com/)、[Anolytics.ai](https://www.anolytics.ai/) 和其他提供训练数据的知名数据标注公司工作。
+**Gaurav Sharma** 在人工智能和机器学习领域工作了六年以上。Gaurav 是一名自由技术作家，为 [Cogito Tech LLC](https://www.cogitotech.com/)、[Anolytics.ai](https://www.anolytics.ai/) 和其他提供训练数据的知名数据标注公司工作。
 
 ### 进一步了解此主题
 

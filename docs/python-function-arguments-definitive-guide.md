@@ -1,8 +1,8 @@
 # Python 函数参数：终极指南
 
-> 原文：[https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)
+> 原文：[`www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html`](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)
 
-![Python 函数参数：终极指南](../Images/d9c4eae2eb65b627d7d7af25bef3cf00.png)
+![Python 函数参数：终极指南](img/d9c4eae2eb65b627d7d7af25bef3cf00.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@
 
 例如，考虑`add()`函数的定义：`num1`和`num2`是参数，函数调用中用于这些参数的值是参数。
 
-![Python 函数参数：终极指南](../Images/9439ddfa1c8901bec106c19a2adcc0e9.png)
+![Python 函数参数：终极指南](img/9439ddfa1c8901bec106c19a2adcc0e9.png)
 
 参数与参数 | 图片由作者提供
 
@@ -90,7 +90,7 @@ Output >> Meet Ashley, a Developer from Madison.
 
 到目前为止，我们知道参数的数量，并相应地定义了函数。然而，这种情况并非总是如此。如果你希望你的函数每次被调用时都能接受可变数量的参数，该怎么办呢？
 
-![Python 函数参数：终极指南](../Images/55eacdf8e0e782dbac43496538b6dbd1.png)
+![Python 函数参数：终极指南](img/55eacdf8e0e782dbac43496538b6dbd1.png)
 
 图片来自作者
 
@@ -221,7 +221,7 @@ Output >> Hello there!
 
 使用默认参数时，你应该小心不要将默认值设置为可变对象。那为什么呢？让我们通过一个例子来理解。
 
-![Python 函数参数：终极指南](../Images/7f0a4e840c1868954a962604a59fd92d.png)
+![Python 函数参数：终极指南](img/7f0a4e840c1868954a962604a59fd92d.png)
 
 图片来源 | 创建于 [imgflip](https://imgflip.com/)
 
@@ -276,7 +276,7 @@ def append_to_list(elt,py_list=[]):
 
 # 结论
 
-这是你在本教程中学到的总结。你学会了如何使用位置参数和关键字参数调用Python函数，以及如何使用`*args`和`**kwargs`分别传递可变数量的位置参数和关键字参数。接着，你学习了如何为某些参数设置默认值，以及可变默认参数的奇特情况。希望你觉得这个教程对你有帮助。继续编码！
+这是你在本教程中学到的总结。你学会了如何使用位置参数和关键字参数调用 Python 函数，以及如何使用`*args`和`**kwargs`分别传递可变数量的位置参数和关键字参数。接着，你学习了如何为某些参数设置默认值，以及可变默认参数的奇特情况。希望你觉得这个教程对你有帮助。继续编码！
 
 **[Bala Priya C](https://twitter.com/balawc27)**是一位技术写作人员，喜欢创作长篇内容。她的兴趣领域包括数学、编程和数据科学。她通过撰写教程、操作指南等与开发者社区分享她的学习经验。
 

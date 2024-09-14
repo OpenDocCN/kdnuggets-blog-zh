@@ -1,8 +1,8 @@
 # 如何准确处理 Pandas 中的时区和时间戳
 
-> 原文：[https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas](https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas`](https://www.kdnuggets.com/how-to-handle-time-zones-and-timestamps-accurately-with-pandas)
 
-![如何准确处理 Pandas 中的时区和时间戳](../Images/6081ef454ebe2c669b65b374aa987d9b.png)
+![如何准确处理 Pandas 中的时区和时间戳](img/6081ef454ebe2c669b65b374aa987d9b.png)
 
 作者提供的图片 | Midjourney
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

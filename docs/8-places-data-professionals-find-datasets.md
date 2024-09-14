@@ -1,8 +1,8 @@
 # 数据专业人士寻找数据集的 8 个地方
 
-> 原文：[https://www.kdnuggets.com/2020/12/8-places-data-professionals-find-datasets.html](https://www.kdnuggets.com/2020/12/8-places-data-professionals-find-datasets.html)
+> 原文：[`www.kdnuggets.com/2020/12/8-places-data-professionals-find-datasets.html`](https://www.kdnuggets.com/2020/12/8-places-data-professionals-find-datasets.html)
 
-[评论](#comments)![图示](../Images/0a6709e589433da9246f3c22e922fa05.png)
+评论![图示](img/0a6709e589433da9246f3c22e922fa05.png)
 
 由 Manuel Geissinger 拍摄，来自 Pexels
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -82,17 +82,17 @@ GitHub 从公共资源如博客、用户和任何形式的公共数据中收集�
 
 **相关内容：**
 
-+   [数据科学中的前10名列表](/2020/08/top-10-lists-data-science.html)
++   数据科学中的前 10 名列表
 
-+   [Python 中数据集拆分的最佳实践](/2020/05/dataset-splitting-best-practices-python.html)
++   Python 中数据集拆分的最佳实践
 
-+   [数据专业人士如何为简历增加更多变化](/2020/11/data-professionals-add-variation-resumes.html)
++   数据专业人士如何为简历增加更多变化
 
 ### 更多相关话题
 
 +   [停止学习数据科学以寻找目标，然后找寻目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [托管数据科学作品集的5个最佳地点](https://www.kdnuggets.com/2022/07/5-best-places-host-data-science-portfolio.html)
++   [托管数据科学作品集的 5 个最佳地点](https://www.kdnuggets.com/2022/07/5-best-places-host-data-science-portfolio.html)
 
 +   [如何在 Python 中匿名化地点](https://www.kdnuggets.com/2022/12/anonymise-places-python.html)
 

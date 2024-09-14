@@ -1,14 +1,14 @@
 # 使用 spaCy 开始自然语言处理
 
-> 原文：[https://www.kdnuggets.com/2018/05/getting-started-spacy-natural-language-processing.html](https://www.kdnuggets.com/2018/05/getting-started-spacy-natural-language-processing.html)
+> 原文：[`www.kdnuggets.com/2018/05/getting-started-spacy-natural-language-processing.html`](https://www.kdnuggets.com/2018/05/getting-started-spacy-natural-language-processing.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-在之前的一系列文章中，我们探讨了一些与文本数据科学任务相关的一般性观点，无论是自然语言处理、文本挖掘，还是其他相关的主题。在[这些文章中最新的一篇](/2018/03/text-data-preprocessing-walkthrough-python.html)中，我们介绍了使用 Python 进行文本数据预处理的流程。更具体地说，我们查看了使用 Python *和 NLTK* 进行的文本预处理流程。虽然我们没有进一步探讨使用 NLTK 进行的数据预处理以外的内容，但理论上，该工具包可以用于进一步的分析任务。
+在之前的一系列文章中，我们探讨了一些与文本数据科学任务相关的一般性观点，无论是自然语言处理、文本挖掘，还是其他相关的主题。在这些文章中最新的一篇中，我们介绍了使用 Python 进行文本数据预处理的流程。更具体地说，我们查看了使用 Python *和 NLTK* 进行的文本预处理流程。虽然我们没有进一步探讨使用 NLTK 进行的数据预处理以外的内容，但理论上，该工具包可以用于进一步的分析任务。
 
 尽管 NLTK 是一个很棒的自然语言... 好吧，工具包（所以名字叫做 NLTK），但它并不优化于构建生产系统。如果只是用 NLTK 来预处理数据，这可能无关紧要，但如果你计划构建一个端到端的 NLP 解决方案，并且在选择适当的工具来构建该系统，那么使用同样的工具来预处理数据可能是有意义的。
 
-![](../Images/f259bf6da4be96051a36006ff848f1cc.png)
+![](img/f259bf6da4be96051a36006ff848f1cc.png)
 
 虽然 NLTK 是在 *学习* NLP 时构建的，[spaCy](https://spacy.io/) 则专门设计用于成为一个实现生产就绪系统的有用库。
 
@@ -18,7 +18,7 @@ spaCy 是有立场的，因为它不允许过多地混合和匹配可能被视�
 
 你可以通过[这个视频](https://www.youtube.com/watch?v=jB1-NukGZm0)快速了解 spaCy 及其设计哲学和选择，这是由 spaCy 开发者[Matthew Honnibal](https://twitter.com/honnibal)和[Ines Montani](https://twitter.com/_inesmontani)在美国旧金山的数据研究所联合主办的机器学习聚会上进行的讲座。
 
-spaCy 宣称自己是“为深度学习准备文本的最佳方式。”由于 [之前的演练](/2018/03/text-data-preprocessing-walkthrough-python.html) 没有使用 NLTK（任务相关的噪声移除以及规范化过程中的一些步骤），我们不会在这里重复整个帖子，只是将 spaCy 替代 NLTK 的特定部分，因为那样会浪费大家的时间。相反，我们将探讨 **一些** 用于 NLTK 的相同功能如何通过 spaCy 实现，然后进行一些额外的任务，这些任务 **可能** 被认为是预处理，取决于你的最终目标，但也可能会渗透到后续的 [文本数据科学任务](/2017/11/framework-approaching-textual-data-tasks.html) 中。
+spaCy 宣称自己是“为深度学习准备文本的最佳方式。”由于 之前的演练 没有使用 NLTK（任务相关的噪声移除以及规范化过程中的一些步骤），我们不会在这里重复整个帖子，只是将 spaCy 替代 NLTK 的特定部分，因为那样会浪费大家的时间。相反，我们将探讨 **一些** 用于 NLTK 的相同功能如何通过 spaCy 实现，然后进行一些额外的任务，这些任务 **可能** 被认为是预处理，取决于你的最终目标，但也可能会渗透到后续的 文本数据科学任务 中。
 
 ### 开始使用
 
@@ -166,7 +166,7 @@ N.Y.C. n.y.c. PROPN NNP pobj X.X.X. False False
 displacy.render(doc, style='dep', jupyter=True, options={'distance': 70})
 ```
 
-[![POS 可视化](../Images/121e0dc7f6e5229b9afaab8f83a11158.png)](https://image.ibb.co/haQoeS/spacy_pos_visualized.jpg)
+![POS 可视化](https://image.ibb.co/haQoeS/spacy_pos_visualized.jpg)
 
 ### 命名实体识别
 
@@ -195,7 +195,7 @@ displaCy 的可视化再次显得非常实用：
 displacy.render(doc, style='ent', jupyter=True)
 ```
 
-![NER 可视化](../Images/e67a700939e14859796d357891c1e984.png)
+![NER 可视化](img/e67a700939e14859796d357891c1e984.png)
 
 我再强调一遍：回过头来看看这篇帖子，看看我们完成这些任务所需的代码是多么少。
 
@@ -213,21 +213,21 @@ displacy.render(doc, style='ent', jupyter=True)
 
 **相关内容**：
 
-+   [文本数据预处理：Python 中的操作流程](/2018/03/text-data-preprocessing-walkthrough-python.html)
++   文本数据预处理：Python 中的操作流程
 
-+   [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   处理文本数据科学任务的框架
 
-+   [文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)
++   文本数据预处理的一般方法
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 

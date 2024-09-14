@@ -1,8 +1,8 @@
 # 文本摘要开发：带有 GPT-3.5 的 Python 教程
 
-> 原文：[https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)
+> 原文：[`www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html`](https://www.kdnuggets.com/2023/04/text-summarization-development-python-tutorial-gpt35.html)
 
-![文本摘要开发：带有 GPT-3.5 的 Python 教程](../Images/e90954496b2af8e6bb05cee51d68e352.png)
+![文本摘要开发：带有 GPT-3.5 的 Python 教程](img/e90954496b2af8e6bb05cee51d68e352.png)
 
 图片由 [frimufilms](https://www.freepik.com/free-photo/opened-ai-chat-laptop_38259334.htm#query=chatgpt&position=0&from_view=search&track=sph) 提供，来源于 [Freepik](https://www.freepik.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -36,7 +36,7 @@ OpenAI 提供了一个用于 GPT-3.5 模型的 API，我们可以用来开发一
 
 要获取 OpenAI APIs 访问权限，我们必须在 [OpenAI 开发者平台](https://platform.openai.com/overview) 注册，并访问您个人资料中的查看 API 密钥。在网页上，点击“创建新秘密密钥”按钮以获取 API 访问权限（见下图）。请记得保存密钥，因为之后将不会再显示。
 
-![文本摘要开发：带有 GPT-3.5 的 Python 教程](../Images/7978f98c4ae019e66b98f06f9b76c9f2.png)
+![文本摘要开发：带有 GPT-3.5 的 Python 教程](img/7978f98c4ae019e66b98f06f9b76c9f2.png)
 
 作者提供的图片
 
@@ -58,7 +58,7 @@ pip install openai
 
 在你最喜欢的 IDE（对我来说是 VS Code）中，创建两个文件，分别命名为 `.env` 和 `summarizer_app.py`，类似于下图。
 
-![文本总结开发：使用 GPT-3.5 的 Python 教程](../Images/74073bce3a80f216eb7daf5aabb43fad.png)
+![文本总结开发：使用 GPT-3.5 的 Python 教程](img/74073bce3a80f216eb7daf5aabb43fad.png)
 
 作者提供的图片
 
@@ -228,7 +228,7 @@ streamlit run summarizer_app.py
 
 如果一切正常，你会在默认浏览器中看到以下应用程序。
 
-![文本摘要开发：使用 GPT-3.5 的 Python 教程](../Images/c7cc819309edb8f6b8a59183bcb7dafd.png)
+![文本摘要开发：使用 GPT-3.5 的 Python 教程](img/c7cc819309edb8f6b8a59183bcb7dafd.png)
 
 图片来源：作者
 
@@ -268,7 +268,7 @@ The theory of relativity is a set of physics theories proposed by Albert Einstei
 
 我们的文本摘要应用程序的整体外观可以从下图中看到。
 
-![文本摘要开发：使用 GPT-3.5 的 Python 教程](../Images/175fe28b77724fddeb13f214e08bf433.png)
+![文本摘要开发：使用 GPT-3.5 的 Python 教程](img/175fe28b77724fddeb13f214e08bf433.png)
 
 图片由作者提供
 

@@ -1,12 +1,12 @@
 # 基于内容的推荐系统使用自然语言处理（NLP）
 
-> 原文：[https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html](https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html)
+> 原文：[`www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html`](https://www.kdnuggets.com/2019/11/content-based-recommender-using-natural-language-processing-nlp.html)
 
-[评论](#comments)
+评论
 
 **作者 [James Ng](https://www.linkedin.com/in/jnyh/)，数据科学，项目管理**
 
-![图](../Images/7f8e754ee66d96b7400675d994e0621d.png)
+![图](img/7f8e754ee66d96b7400675d994e0621d.png)
 
 Netflix 屏幕截图
 
@@ -14,11 +14,11 @@ Netflix 屏幕截图
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@ Netflix 屏幕截图
 
 +   **基于内容** 过滤器 — 根据产品/服务的属性进行推荐
 
-![](../Images/2dcdb2ad2ab5c8169026821cdf25dc26.png)
+![](img/2dcdb2ad2ab5c8169026821cdf25dc26.png)
 
 在这篇文章中，我结合了电影的属性如类型、情节、导演和主要演员，以计算其与另一部电影的余弦相似度。数据集是从 [data.world](https://data.world/studentoflife/imdb-top-250-lists-and-5000-or-so-data-records) 下载的 IMDB 前 250 部英语电影。
 
@@ -53,7 +53,7 @@ df.head()
 df['Director'].value_counts()[0:10].plot('barh', figsize=[8,5], fontsize=15, color='navy').invert_yaxis()
 ```
 
-![图](../Images/143eada4ced3d015d1a321b93796f356.png)
+![图](img/143eada4ced3d015d1a321b93796f356.png)
 
 250 部电影中最受欢迎的 10 位导演
 
@@ -61,7 +61,7 @@ df['Director'].value_counts()[0:10].plot('barh', figsize=[8,5], fontsize=15, col
 
 首先，需要使用自然语言处理（NLP）对数据进行预处理，以获得仅包含每部电影所有属性（以文字形式）的单列。之后，通过向量化将这些信息转换为数字，为每个词分配分数。随后可以计算余弦相似度。
 
-我使用Rake函数从‘Plot’列中的整个句子中提取最相关的词。为此，我将该函数应用于‘Plot’列下的每一行，并将关键字列表分配给新列‘Key_words’。
+我使用 Rake 函数从‘Plot’列中的整个句子中提取最相关的词。为此，我将该函数应用于‘Plot’列下的每一行，并将关键字列表分配给新列‘Key_words’。
 
 ```py
 df['Key_words'] = ''
@@ -71,11 +71,11 @@ r = Rake()for index, row in df.iterrows():
     row['Key_words'] = list(key_words_dict_scores.keys())
 ```
 
-![图示](../Images/bcdf4a2340589736a2acc2c23f0548f2.png)
+![图示](img/bcdf4a2340589736a2acc2c23f0548f2.png)
 
-Rake函数用于提取关键字
+Rake 函数用于提取关键字
 
-演员和导演的名字被转换为唯一的身份值。这是通过将所有名字和姓氏合并为一个词来完成的，这样Chris Evans和Chris Hemsworth将显示为不同的（否则，它们将有50%的相似度，因为它们都有‘Chris’）。每个词都需要转换为小写以避免重复。
+演员和导演的名字被转换为唯一的身份值。这是通过将所有名字和姓氏合并为一个词来完成的，这样 Chris Evans 和 Chris Hemsworth 将显示为不同的（否则，它们将有 50%的相似度，因为它们都有‘Chris’）。每个词都需要转换为小写以避免重复。
 
 ```py
 df['Genre'] = df['Genre'].map(lambda x: x.split(','))
@@ -86,13 +86,13 @@ df['Director'] = df['Director'].map(lambda x: x.split(','))for index, row in df.
     row['Director'] = [x.lower().replace(' ','') for x in row['Director']]
 ```
 
-![图示](../Images/b8795a8fae02d7d719a9cbe33210019e.png)
+![图示](img/b8795a8fae02d7d719a9cbe33210019e.png)
 
 所有名字都被转换为唯一的身份值
 
-### **步骤3：通过结合列属性创建‘Bag_of_words’的词表示**
+### **步骤 3：通过结合列属性创建‘Bag_of_words’的词表示**
 
-数据预处理后，这4列‘Genre’，‘Director’，‘Actors’和‘Key_words’被合并成一列‘Bag_of_words’。最终的数据框只有2列。
+数据预处理后，这 4 列‘Genre’，‘Director’，‘Actors’和‘Key_words’被合并成一列‘Bag_of_words’。最终的数据框只有 2 列。
 
 ```py
 df['Bag_of_words'] = ''
@@ -105,15 +105,15 @@ columns = ['Genre', 'Director', 'Actors', 'Key_words']for index, row in df.iterr
 df = df[['Title','Bag_of_words']]
 ```
 
-![图示](../Images/91daeda133caf11fa48dc92452cf647b.png)
+![图示](img/91daeda133caf11fa48dc92452cf647b.png)
 
 最终的词表示是新列‘Bag_of_words’
 
-### **步骤4：为‘Bag_of_words’创建向量表示，并创建相似度矩阵**
+### **步骤 4：为‘Bag_of_words’创建向量表示，并创建相似度矩阵**
 
-推荐模型只能读取和比较一个向量（矩阵）与另一个向量，因此我们需要使用**CountVectorizer**将‘Bag_of_words’转换为向量表示，这是一种对‘Bag_of_words’列中每个词的频率进行计数的简单计数器。一旦得到包含所有词计数的矩阵，就可以应用cosine_similarity函数来比较电影之间的相似度。
+推荐模型只能读取和比较一个向量（矩阵）与另一个向量，因此我们需要使用**CountVectorizer**将‘Bag_of_words’转换为向量表示，这是一种对‘Bag_of_words’列中每个词的频率进行计数的简单计数器。一旦得到包含所有词计数的矩阵，就可以应用 cosine_similarity 函数来比较电影之间的相似度。
 
-![图示](../Images/b0f86d764647679bc9d67f18e2fa7d1d.png)
+![图示](img/b0f86d764647679bc9d67f18e2fa7d1d.png)
 
 计算相似度矩阵中值的余弦相似度公式
 
@@ -123,9 +123,9 @@ count_matrix = count.fit_transform(df['Bag_of_words'])cosine_sim = cosine_simila
 print(cosine_sim)
 ```
 
-![图示](../Images/1d1df8bd478bfd856cc8ae17e8f9f435.png)
+![图示](img/1d1df8bd478bfd856cc8ae17e8f9f435.png)
 
-相似度矩阵（250行 x 250列）
+相似度矩阵（250 行 x 250 列）
 
 接下来是创建一个电影标题系列，以便系列索引可以匹配相似度矩阵的行和列索引。
 
@@ -133,9 +133,9 @@ print(cosine_sim)
 indices = pd.Series(df['Title'])
 ```
 
-### **步骤5：运行并测试推荐模型**
+### **步骤 5：运行并测试推荐模型**
 
-最后的步骤是创建一个函数，该函数以电影标题作为输入，并返回前10部相似电影。该函数将输入的电影标题与相似度矩阵的对应索引匹配，并按降序提取相似度值的行。通过提取前11个值并随后丢弃第一个索引（即输入电影本身），可以找到前10部相似电影。
+最后的步骤是创建一个函数，该函数以电影标题作为输入，并返回前 10 部相似电影。该函数将输入的电影标题与相似度矩阵的对应索引匹配，并按降序提取相似度值的行。通过提取前 11 个值并随后丢弃第一个索引（即输入电影本身），可以找到前 10 部相似电影。
 
 ```py
 def recommend(title, cosine_sim = cosine_sim):
@@ -156,9 +156,9 @@ def recommend(title, cosine_sim = cosine_sim):
 recommend('The Avengers')
 ```
 
-![图示](../Images/2a87a4521728f581560f69a88a9a7a1f.png)
+![图示](img/2a87a4521728f581560f69a88a9a7a1f.png)
 
-与“复仇者联盟”相似的前10部电影
+与“复仇者联盟”相似的前 10 部电影
 
 ### 结论
 
@@ -178,11 +178,11 @@ recommend('The Avengers')
 
 **相关：**
 
-+   [YouTube 如何推荐你的下一个视频](/2019/10/youtube-recommending-next-video.html)
++   YouTube 如何推荐你的下一个视频
 
-+   [在线聊天的主题提取与分类](/2019/11/topics-extraction-classification-online-chats.html)
++   在线聊天的主题提取与分类
 
-+   [文本编码：回顾](/2019/11/text-encoding-review.html)
++   文本编码：回顾
 
 ### 更多相关主题
 

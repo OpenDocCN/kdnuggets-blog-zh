@@ -1,8 +1,8 @@
 # 管理 Python 依赖项与 Poetry 对比 Conda 和 Pip
 
-> 原文：[https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip)
+> 原文：[`www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip`](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip)
 
-![Managing Python Dependencies with Poetry vs Conda & Pip](../Images/515a1e0530e130942288a0c92f095f58.png)
+![Managing Python Dependencies with Poetry vs Conda & Pip](img/515a1e0530e130942288a0c92f095f58.png)
 
 有效地管理依赖项，包括对项目功能至关重要的库、函数和包，可以通过使用包管理器来实现。Pip 是一种被广泛采用的经典工具，为许多开发者提供了从 Python 包索引 (PyPI) 无缝安装 Python 包的能力。Conda 不仅作为包管理器被认可，还作为环境管理器，扩展了处理 Python 和非 Python 依赖项的能力，使其成为一个多功能的工具。就我们的目的而言，我们将主要关注用于纯 Python 环境。
 
@@ -18,13 +18,13 @@ Poetry 使用 pyproject.toml 文件来指定项目的配置，并附带一个自
 
 ```py
 [tool.poetry.dependencies]
-python = "^3.8"
-pandas = "^1.5"
-numpy = "^1.24.3"
+python = "³.8"
+pandas = "¹.5"
+numpy = "¹.24.3"
 
 [tool.poetry.dev.dependencies]
-pytest = "^7.3.2"
-precomit = "^3.3.3"
+pytest = "⁷.3.2"
+precomit = "³.3.3"
 ```
 
 和其他依赖管理工具一样，Poetry 通过锁定文件认真跟踪当前环境中的包版本。这个锁定文件包含项目元数据、包版本参数等，确保在不同环境中的一致性。开发者可以在 toml 文件中智能地将依赖项分为 dev 和 prod 类别，从而简化部署环境并减少冲突的风险，尤其是在不同的操作系统上。
@@ -83,7 +83,7 @@ Resolving dependencies... (53.1s)
 
   Because pandas (1.4.2) depends on numpy (>=1.18.5)
    and no versions of pandas match >1.4.2,<2.0.0, pandas (>=1.4.2,<2.0.0) requires numpy (>=1.18.5).
-  So, because dependency-manager-test depends on both pandas (^1.4.2) and numpy (<1.18.5), version solving failed.
+  So, because dependency-manager-test depends on both pandas (¹.4.2) and numpy (<1.18.5), version solving failed.
   ...
 user:~$ poetry show
 numpy           1.22.3 NumPy is the fundamental package for array computing with Python.
@@ -143,22 +143,22 @@ Poetry 管理你的项目的虚拟环境和依赖项解析，使其兼容现有�
 
 对于处理更多复杂和多样化项目、依赖项较多的情况，Poetry 是一个很好的工具来管理这些依赖项。虽然 Pip 和 Conda 仍然是可行的选项，但它们更适合较小的、不那么复杂的环境。不是每个人都可能使用 Poetry，但由于 Pip 存在已久，使用 Pip 的便利性可能值得考虑。
 
-但如果你的项目和工作负载重视组织的重要性，并愿意探索新工具以改善你的流程，Poetry是你应该考虑的工具。从Pip到Poetry的扩展功能确实带来了变化。我们鼓励你亲自试用Poetry。
+但如果你的项目和工作负载重视组织的重要性，并愿意探索新工具以改善你的流程，Poetry 是你应该考虑的工具。从 Pip 到 Poetry 的扩展功能确实带来了变化。我们鼓励你亲自试用 Poetry。
 
 [原文](https://www.exxactcorp.com/blog/Deep-Learning/managing-python-dependencies-with-poetry-vs-conda-pip)。经许可转载。
 
-**[Kevin Vu](https://blog.exxactcorp.com/)** 管理着 [Exxact Corp博客](https://blog.exxactcorp.com/)，并与许多才华横溢的作者合作，他们撰写关于深度学习不同方面的内容。
+**[Kevin Vu](https://blog.exxactcorp.com/)** 管理着 [Exxact Corp 博客](https://blog.exxactcorp.com/)，并与许多才华横溢的作者合作，他们撰写关于深度学习不同方面的内容。
 
 ### 更多相关内容
 
-+   [忘掉PIP、Conda和requirements.txt！改用Poetry，感谢以后…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
++   [忘掉 PIP、Conda 和 requirements.txt！改用 Poetry，感谢以后…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
 
-+   [作为数据科学家的可重用Python代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
++   [作为数据科学家的可重用 Python 代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
 
 +   [管理深度学习数据集的新方法](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)
 
-+   [数据科学项目管理的4个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
++   [数据科学项目管理的 4 个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
 
-+   [在生产中管理模型漂移与MLOps](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
++   [在生产中管理模型漂移与 MLOps](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 
 +   [金融科技中的人工智能：管理未来的金融](https://www.kdnuggets.com/2022/10/ai-fintech-managing-finance-future.html)

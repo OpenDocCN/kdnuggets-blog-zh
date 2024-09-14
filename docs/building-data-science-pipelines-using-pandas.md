@@ -1,8 +1,8 @@
 # 使用 Pandas 构建数据科学管道
 
-> 原文：[https://www.kdnuggets.com/building-data-science-pipelines-using-pandas](https://www.kdnuggets.com/building-data-science-pipelines-using-pandas)
+> 原文：[`www.kdnuggets.com/building-data-science-pipelines-using-pandas`](https://www.kdnuggets.com/building-data-science-pipelines-using-pandas)
 
-![使用 Pandas 构建数据科学管道](../Images/05c0bb2b8602f22678bebd3cab880760.png)
+![使用 Pandas 构建数据科学管道](img/05c0bb2b8602f22678bebd3cab880760.png)
 
 使用 ChatGPT 生成的图像
 
@@ -12,11 +12,11 @@ Pandas 是最受欢迎的数据处理和分析工具之一，以其易用性和�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -61,7 +61,7 @@ df = pd.read_csv('/work/Online Sales Data.csv')
 df.head(3)
 ```
 
-![使用 Pandas 构建数据科学管道](../Images/86b5024a87c7367ea47cec510f86b87f.png)
+![使用 Pandas 构建数据科学管道](img/86b5024a87c7367ea47cec510f86b87f.png)
 
 1.  通过删除重复项和缺失值来清理数据集，并重置索引。
 
@@ -90,25 +90,25 @@ new_df = df.groupby('month')['Units Sold'].mean()
 new_df.plot(kind='bar', figsize=(10, 5), title='Average Units Sold by Month');
 ```
 
-![使用Pandas构建数据科学管道](../Images/ee4399b659b959816f206b0fb511ee1e.png)
+![使用 Pandas 构建数据科学管道](img/ee4399b659b959816f206b0fb511ee1e.png)
 
 这非常简单，如果你是数据科学家或数据科学学生，你将知道如何执行大多数这些任务。
 
-## 使用Pandas Pipe构建数据科学管道
+## 使用 Pandas Pipe 构建数据科学管道
 
-要创建一个端到端的数据科学管道，我们首先需要使用Python函数将上述代码转换为适当的格式。
+要创建一个端到端的数据科学管道，我们首先需要使用 Python 函数将上述代码转换为适当的格式。
 
-我们将为以下内容创建Python函数：
+我们将为以下内容创建 Python 函数：
 
-1.  **加载数据：** 这需要一个CSV文件的目录。
+1.  **加载数据：** 这需要一个 CSV 文件的目录。
 
-1.  **数据清理：** 这需要原始DataFrame并返回清理后的DataFrame。
+1.  **数据清理：** 这需要原始 DataFrame 并返回清理后的 DataFrame。
 
-1.  **转换列类型：** 这需要一个干净的DataFrame和数据类型，并返回一个具有正确数据类型的DataFrame。
+1.  **转换列类型：** 这需要一个干净的 DataFrame 和数据类型，并返回一个具有正确数据类型的 DataFrame。
 
-1.  **数据分析：** 这需要来自前一步的DataFrame，并返回包含两列的修改后的DataFrame。
+1.  **数据分析：** 这需要来自前一步的 DataFrame，并返回包含两列的修改后的 DataFrame。
 
-1.  **数据可视化：** 这需要一个经过修改的DataFrame和可视化类型来生成可视化图表。
+1.  **数据可视化：** 这需要一个经过修改的 DataFrame 和可视化类型来生成可视化图表。
 
 ```py
 def load_data(path):
@@ -136,7 +136,7 @@ def data_visualization(new_df,vis_type='bar'):
     return new_df
 ```
 
-我们现在将使用 `pipe` 方法将所有上述Python函数串联在一起。如我们所见，我们已将文件路径提供给 `load_data` 函数，将数据类型提供给 `convert_dtypes` 函数，并将可视化类型提供给 `data_visualization` 函数。我们将使用可视化折线图，而不是柱状图。
+我们现在将使用 `pipe` 方法将所有上述 Python 函数串联在一起。如我们所见，我们已将文件路径提供给 `load_data` 函数，将数据类型提供给 `convert_dtypes` 函数，并将可视化类型提供给 `data_visualization` 函数。我们将使用可视化折线图，而不是柱状图。
 
 构建数据管道使我们能够在不改变整体代码的情况下尝试不同的场景。你在标准化代码并使其更具可读性。
 
@@ -153,13 +153,13 @@ df = (pd.DataFrame()
 
 最终结果看起来非常棒。
 
-![使用Pandas构建数据科学管道](../Images/56adff4a5b7c2aa4cf43f8d3e64934db.png)
+![使用 Pandas 构建数据科学管道](img/56adff4a5b7c2aa4cf43f8d3e64934db.png)
 
 ## 结论
 
-在这个简短的教程中，我们了解了Pandas `pipe` 方法以及如何使用它来构建和执行端到端的数据科学管道。这个管道使你的代码更加可读、可重复和更有组织。通过将pipe方法集成到你的工作流程中，你可以简化数据处理任务，提升项目的整体效率。此外，一些用户发现使用 `pipe` 而不是 `.apply()` 方法可以显著提高执行速度。
+在这个简短的教程中，我们了解了 Pandas `pipe` 方法以及如何使用它来构建和执行端到端的数据科学管道。这个管道使你的代码更加可读、可重复和更有组织。通过将 pipe 方法集成到你的工作流程中，你可以简化数据处理任务，提升项目的整体效率。此外，一些用户发现使用 `pipe` 而不是 `.apply()` 方法可以显著提高执行速度。
 
-[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些在精神健康方面挣扎的学生。
+[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些在精神健康方面挣扎的学生。
 
 ### 更多相关话题
 

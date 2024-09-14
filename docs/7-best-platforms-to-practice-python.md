@@ -1,8 +1,8 @@
 # 7 个最佳平台来实践 Python
 
-> 原文：[https://www.kdnuggets.com/7-best-platforms-to-practice-python](https://www.kdnuggets.com/7-best-platforms-to-practice-python)
+> 原文：[`www.kdnuggets.com/7-best-platforms-to-practice-python`](https://www.kdnuggets.com/7-best-platforms-to-practice-python)
 
-![practice-python](../Images/d1889ad698d8a02e1280cbe51caaba30.png)
+![practice-python](img/d1889ad698d8a02e1280cbe51caaba30.png)
 
 作者提供的图片
 
@@ -134,11 +134,11 @@ HackerRank 上的 Python 挑战涵盖了各种主题：从数据类型和操作�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 

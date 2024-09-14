@@ -1,22 +1,22 @@
 # 从人工智能到机器学习再到数据科学的演变
 
-> 原文：[https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html`](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)
 
-![从人工智能到机器学习再到数据科学的演变](../Images/2cea1630332b043fd1aeaf9d0e7a918e.png)
+![从人工智能到机器学习再到数据科学的演变](img/2cea1630332b043fd1aeaf9d0e7a918e.png)
 
 图片由 [DeepMind](https://unsplash.com/@deepmind?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，[来源于 Unsplash](https://unsplash.com/s/photos/ai?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-近年来，在[人工智能](/2021/01/top-5-artificial-intelligence-trends-2021.html)（AI）、机器学习（ML）和数据科学领域取得了许多突破和发现。这些领域交叉如此之多，以至于它们变得同义。不幸的是，这导致了一些模糊性。
+近年来，在人工智能（AI）、机器学习（ML）和数据科学领域取得了许多突破和发现。这些领域交叉如此之多，以至于它们变得同义。不幸的是，这导致了一些模糊性。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -32,7 +32,7 @@
 
 人工智能的主要分支包括：
 
-+   [机器学习](/2022/05/popular-machine-learning-algorithms.html)（ML）
++   机器学习（ML）
 
 +   深度学习（DL）
 
@@ -52,9 +52,9 @@
 
 +   人工狭义智能（ANI）是当前人工智能的发展阶段。它也被称为弱人工智能，描述了能够执行有限一组定义任务的人工智能系统。
 
-+   人工通用智能（AGI）：我们正在慢慢接近这一阶段，也称为强人工智能。它描述了能够像人类一样进行推理的人工智能。一些学者认为AGI标签应仅限于有感知的人工智能。
++   人工通用智能（AGI）：我们正在慢慢接近这一阶段，也称为强人工智能。它描述了能够像人类一样进行推理的人工智能。一些学者认为 AGI 标签应仅限于有感知的人工智能。
 
-+   人工超级智能（ASI）：这是一个[假设的人工智能阶段](https://www.spiceworks.com/tech/artificial-intelligence/articles/super-artificial-intelligence/)，其中计算机的智能和能力超越了人类。目前，ASI仍然存在于科幻领域之外。
++   人工超级智能（ASI）：这是一个[假设的人工智能阶段](https://www.spiceworks.com/tech/artificial-intelligence/articles/super-artificial-intelligence/)，其中计算机的智能和能力超越了人类。目前，ASI 仍然存在于科幻领域之外。
 
 上述信息对于商业用户来说可能显得有些术语化和深奥。这些在现实世界中如何转换，又是如何应用人工智能的？
 
@@ -122,7 +122,7 @@
 
 +   强化学习
 
-深度学习是机器学习的[最知名和最常用的子集之一](/2021/02/deep-learning-based-real-time-video-processing.html)。它本质上由一个多层神经网络组成。神经网络试图通过密切模仿人脑的结构来模拟认知。它们被认为是实现通用人工智能（AGI）的最可行路径。
+深度学习是机器学习的最知名和最常用的子集之一。它本质上由一个多层神经网络组成。神经网络试图通过密切模仿人脑的结构来模拟认知。它们被认为是实现通用人工智能（AGI）的最可行路径。
 
 ## 机器学习在商业中的应用
 
@@ -134,7 +134,7 @@
 
 ### 欺诈检测
 
-在[金融和银行](https://www.creditdonkey.com/best-bank-small-business.html)领域应用机器学习后，金融机构能够发现隐藏的模式、检测可疑活动，并在为时已晚之前预见到文书错误。科技咨询公司Capgemini声称，经过良好训练的机器学习解决方案可以将所有欺诈事件减少[70%](https://www.capgemini.com/in-en/wp-content/uploads/sites/6/2017/07/next-generation_fraud_management_solutions_for_banks_and_capital_market_firms.pdf)，同时将交易准确率提高90%。
+在[金融和银行](https://www.creditdonkey.com/best-bank-small-business.html)领域应用机器学习后，金融机构能够发现隐藏的模式、检测可疑活动，并在为时已晚之前预见到文书错误。科技咨询公司 Capgemini 声称，经过良好训练的机器学习解决方案可以将所有欺诈事件减少[70%](https://www.capgemini.com/in-en/wp-content/uploads/sites/6/2017/07/next-generation_fraud_management_solutions_for_banks_and_capital_market_firms.pdf)，同时将交易准确率提高 90%。
 
 ### 医疗保健
 
@@ -158,7 +158,7 @@
 
 +   信息科学等
 
-每天（全球范围内）生成的估计[2.5万亿字节](https://earthweb.com/how-much-data-is-created-every-day/)的数据中，很多数据是非结构化且噪声很大。数据科学家的大量精力用于结构化、排序并从这些数据中获得洞见。
+每天（全球范围内）生成的估计[2.5 万亿字节](https://earthweb.com/how-much-data-is-created-every-day/)的数据中，很多数据是非结构化且噪声很大。数据科学家的大量精力用于结构化、排序并从这些数据中获得洞见。
 
 因为数据科学是一门多学科的科学而非一个概念，所以它不能像人工智能和机器学习那样进行分类。然而，在我们探讨它在商业环境中的应用之前，让我们扩展一下数据科学中涉及的不同职业。
 
@@ -200,9 +200,9 @@
 
 # 摘要
 
-上述指南作为一个简单的入门书，主要突出人工智能、机器学习和数据科学之间的区别，以及它们如何在商业环境中应用。要了解更多关于这些主题的信息，你可以访问KDnuggets网站上许多相关的指南和文章。
+上述指南作为一个简单的入门书，主要突出人工智能、机器学习和数据科学之间的区别，以及它们如何在商业环境中应用。要了解更多关于这些主题的信息，你可以访问 KDnuggets 网站上许多相关的指南和文章。
 
-**[Nahla Davies](http://nahlawrites.com/)** 是一位软件开发人员和技术作家。在全职从事技术写作之前，她曾管理——在许多有趣的工作中——担任过一家Inc. 5,000体验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix和索尼。
+**[Nahla Davies](http://nahlawrites.com/)** 是一位软件开发人员和技术作家。在全职从事技术写作之前，她曾管理——在许多有趣的工作中——担任过一家 Inc. 5,000 体验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 更多相关话题
 
@@ -214,6 +214,6 @@
 
 +   [人工智能系统中的不确定性量化](https://www.kdnuggets.com/2022/04/uncertainty-quantification-artificial-intelligencebased-systems.html)
 
-+   [2022年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
 
-+   [AI指数报告概述：衡量人工智能趋势](https://www.kdnuggets.com/2023/04/overview-ai-index-report-measuring-trends-artificial-intelligence.html)
++   [AI 指数报告概述：衡量人工智能趋势](https://www.kdnuggets.com/2023/04/overview-ai-index-report-measuring-trends-artificial-intelligence.html)

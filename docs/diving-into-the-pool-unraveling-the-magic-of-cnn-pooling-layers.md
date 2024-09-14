@@ -1,6 +1,6 @@
-# 深入池化：揭示CNN池化层的魔力
+# 深入池化：揭示 CNN 池化层的魔力
 
-> 原文：[https://www.kdnuggets.com/diving-into-the-pool-unraveling-the-magic-of-cnn-pooling-layers](https://www.kdnuggets.com/diving-into-the-pool-unraveling-the-magic-of-cnn-pooling-layers)
+> 原文：[`www.kdnuggets.com/diving-into-the-pool-unraveling-the-magic-of-cnn-pooling-layers`](https://www.kdnuggets.com/diving-into-the-pool-unraveling-the-magic-of-cnn-pooling-layers)
 
 # 动机
 
@@ -8,21 +8,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
-池化层在所有最先进的深度学习模型中使用的CNN架构中非常常见。它们在计算机视觉任务中广泛存在，包括分类、分割、目标检测、自编码器等；只要有卷积层的地方就会用到它们。
+池化层在所有最先进的深度学习模型中使用的 CNN 架构中非常常见。它们在计算机视觉任务中广泛存在，包括分类、分割、目标检测、自编码器等；只要有卷积层的地方就会用到它们。
 
 在这篇文章中，我们将深入探讨使池化层有效的数学原理，并学习何时使用不同类型的池化层。我们还将弄清楚每种类型的特点以及它们之间的不同之处。
 
 # 为什么使用池化层
 
-池化层提供了各种好处，使其成为CNN架构的常见选择。它们在管理空间维度方面发挥了关键作用，并使模型能够从数据集中学习不同的特征。
+池化层提供了各种好处，使其成为 CNN 架构的常见选择。它们在管理空间维度方面发挥了关键作用，并使模型能够从数据集中学习不同的特征。
 
 这里是使用池化层在模型中的一些好处：
 
@@ -44,7 +44,7 @@
 
 所以，我们在这里定义一个四行四列的二维矩阵。为了使用池化，我们将使用大小为二的内核和步幅为二的设置，没有填充。我们的矩阵如下所示。
 
-![深入池化：揭示CNN池化层的魔力](../Images/74067005bf99a0a2f144582c88ad1680.png)
+![深入池化：揭示 CNN 池化层的魔力](img/74067005bf99a0a2f144582c88ad1680.png)
 
 作者图片
 
@@ -52,11 +52,11 @@
 
 # 最大池化
 
-我们在矩阵上遍历内核，并从每个窗口中选择最大值。在上述示例中，我们使用一个2x2的内核，步长为二，并在矩阵上遍历，形成四个不同的窗口，由不同颜色表示。
+我们在矩阵上遍历内核，并从每个窗口中选择最大值。在上述示例中，我们使用一个 2x2 的内核，步长为二，并在矩阵上遍历，形成四个不同的窗口，由不同颜色表示。
 
-**在最大池化中，我们只保留每个窗口中的最大值。** 这会对矩阵进行降采样，我们得到一个较小的2x2网格作为最大池化输出。
+**在最大池化中，我们只保留每个窗口中的最大值。** 这会对矩阵进行降采样，我们得到一个较小的 2x2 网格作为最大池化输出。
 
-![深入池化层：揭示CNN池化层的魔力](../Images/16229fcc4d9f0ceab1c5fc380c07017c.png)
+![深入池化层：揭示 CNN 池化层的魔力](img/16229fcc4d9f0ceab1c5fc380c07017c.png)
 
 作者提供的图片
 
@@ -92,7 +92,7 @@
 
 在平均池化中，我们以类似的方式遍历窗口。然而，**我们考虑窗口中的所有值，取平均值，然后将其作为结果输出。**
 
-![深入池化层：揭示CNN池化层的魔力](../Images/b25e1d85a50e5357b1038e0d6d154e88.png)
+![深入池化层：揭示 CNN 池化层的魔力](img/b25e1d85a50e5357b1038e0d6d154e88.png)
 
 作者提供的图片
 
@@ -122,40 +122,40 @@
 
 # 全局平均池化
 
-**全局池化不同于普通池化层。它没有窗口、卷积核大小或步幅的概念。** 我们将整个矩阵视为一个整体，并考虑网格中的所有值。在上述示例中，我们对4x4矩阵中的所有值取平均，得到一个单一的值作为结果。
+**全局池化不同于普通池化层。它没有窗口、卷积核大小或步幅的概念。** 我们将整个矩阵视为一个整体，并考虑网格中的所有值。在上述示例中，我们对 4x4 矩阵中的所有值取平均，得到一个单一的值作为结果。
 
-![深入池化：揭示CNN池化层的魔力](../Images/5729d06229649aa910f506d5b328c6cd.png)
+![深入池化：揭示 CNN 池化层的魔力](img/5729d06229649aa910f506d5b328c6cd.png)
 
 作者提供的图像
 
 ## 使用时机
 
-全局平均池化允许构建简单而稳健的CNN架构。**通过使用全局池化，我们可以实现通用模型，适用于任何大小的输入图像。** 全局池化层直接在密集层之前使用。
+全局平均池化允许构建简单而稳健的 CNN 架构。**通过使用全局池化，我们可以实现通用模型，适用于任何大小的输入图像。** 全局池化层直接在密集层之前使用。
 
 卷积层对每张图像进行降采样，具体取决于卷积核迭代次数和步幅。然而，对不同大小的图像应用相同的卷积会导致不同形状的输出。所有图像都按相同的比例降采样，因此较大的图像会有较大的输出形状。当将其传递给密集层进行分类时，尺寸不匹配可能会导致运行时异常。
 
 在没有修改超参数或模型架构的情况下，实现适用于所有图像形状的模型可能会很困难。这个问题通过使用全局平均池化得以缓解。
 
-当全局池化应用在密集层之前时，所有输入大小都会被缩减到1x1的大小。因此，(5,5)或(50,50)的输入都会被降采样到1x1的大小。它们可以被展平并发送到密集层，而无需担心大小不匹配。
+当全局池化应用在密集层之前时，所有输入大小都会被缩减到 1x1 的大小。因此，(5,5)或(50,50)的输入都会被降采样到 1x1 的大小。它们可以被展平并发送到密集层，而无需担心大小不匹配。
 
 # 关键要点
 
 我们讨论了一些基本的池化方法及其适用场景。选择适合我们特定任务的方法至关重要。
 
-**澄清一点，池化层中没有可学习的参数**。它们只是执行基本数学操作的滑动窗口。池化层不可训练，但它们能够加速CNN架构的计算，并在学习输入特征时增强鲁棒性。
+**澄清一点，池化层中没有可学习的参数**。它们只是执行基本数学操作的滑动窗口。池化层不可训练，但它们能够加速 CNN 架构的计算，并在学习输入特征时增强鲁棒性。
 
-**[穆罕默德·阿赫曼](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)** 是一位从事计算机视觉和自然语言处理的深度学习工程师。他曾参与多个生成式AI应用的部署和优化，这些应用在Vyro.AI上进入了全球排行榜。他对构建和优化智能系统的机器学习模型感兴趣，并相信持续改进。
+**[穆罕默德·阿赫曼](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)** 是一位从事计算机视觉和自然语言处理的深度学习工程师。他曾参与多个生成式 AI 应用的部署和优化，这些应用在 Vyro.AI 上进入了全球排行榜。他对构建和优化智能系统的机器学习模型感兴趣，并相信持续改进。
 
 ### 更多相关主题
 
 +   [揭示大型语言模型中的链式思维提示的力量](https://www.kdnuggets.com/2023/07/power-chain-thought-prompting-large-language-models.html)
 
-+   [语义层是AI驱动分析的缺失环节](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)
++   [语义层是 AI 驱动分析的缺失环节](https://www.kdnuggets.com/2024/02/cube-semantic-layers-missing-piece-ai-enabled-analytics)
 
 +   [揭示神经魔法：深入探讨激活函数](https://www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions)
 
-+   [理解Python的迭代和成员关系：__contains__和__iter__魔法方法指南](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
++   [理解 Python 的迭代和成员关系：__contains__ 和 __iter__ 魔法方法指南](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
 
-+   [__getitem__介绍：Python中的魔法方法](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)
++   [__getitem__ 介绍：Python 中的魔法方法](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)
 
-+   [Python f-Strings魔法：每个编码者都需要知道的5个颠覆性技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
++   [Python f-Strings 魔法：每个编码者都需要知道的 5 个颠覆性技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)

@@ -1,8 +1,8 @@
 # 计算机视觉路线图
 
-> 原文：[https://www.kdnuggets.com/2020/10/roadmap-computer-vision.html](https://www.kdnuggets.com/2020/10/roadmap-computer-vision.html)
+> 原文：[`www.kdnuggets.com/2020/10/roadmap-computer-vision.html`](https://www.kdnuggets.com/2020/10/roadmap-computer-vision.html)
 
-[评论](#comments)![图](../Images/d5b378a317859ba27b3ef9d8ae612920.png)
+评论![图](img/d5b378a317859ba27b3ef9d8ae612920.png)
 
 图片由 [Ennio Dybeli](https://unsplash.com/@ennio5?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 上拍摄
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -38,7 +38,7 @@
 
 一旦图像从硬件设备中获取，就有许多可能的方式在软件系统中数值表示颜色（颜色空间）。最著名的颜色空间之一是 RGB（红、绿、蓝）和 HSV（色调、饱和度、明度）。使用 HSV 颜色空间的一个主要优点是，通过仅使用 HS 组件，我们可以使系统对光照变化具有不变性（图 1）。
 
-![图](../Images/396d650ef2563ff57ffadeefb4b5f126.png)
+![图](img/396d650ef2563ff57ffadeefb4b5f126.png)
 
 图 1：RGB 与 HSV 颜色空间 [1]
 
@@ -52,7 +52,7 @@
 
 +   **组操作符**：在这种情况下，我们从原始图像中提取一组点，以在图像的转换版本中创建一个单一的点。这种类型的操作通常通过使用卷积来完成。可以使用不同类型的卷积核与图像进行卷积，以获得我们的转换结果（图 2）。一些示例包括：直接平均、Gaussian 平均和中值滤波。对图像应用卷积操作可以减少图像中的噪声并改善平滑度（尽管这也可能稍微模糊图像）。由于我们使用一组点来创建新图像中的单一新点，新图像的维度必然会低于原始图像。解决此问题的一种方法是应用零填充（将像素值设置为零）或在图像的边界使用更小的模板。使用卷积的主要限制之一是当处理大型模板时的执行速度，解决此问题的一种可能方法是使用傅里叶变换。
 
-![图示](../Images/b07b0d336704ac7a164992c3c85c1f26.png)
+![图示](img/b07b0d336704ac7a164992c3c85c1f26.png)
 
 图 2: [卷积核](https://stats.stackexchange.com/questions/296679/what-does-kernel-size-mean/296701)
 
@@ -60,17 +60,17 @@
 
 ### 特征提取
 
-一旦对图像进行了预处理，可以使用特征提取器从图像中提取4种主要的特征形态：
+一旦对图像进行了预处理，可以使用特征提取器从图像中提取 4 种主要的特征形态：
 
 +   **全局特征**：整个图像作为一个整体进行分析，并从特征提取器中得到一个单一的特征向量。一个简单的全局特征示例是像素值的直方图。
 
 +   **网格或块基特征**：图像被划分为不同的块，并从每个不同的块中提取特征。提取图像块中特征的主要技术之一是密集 SIFT（尺度不变特征变换）。这种类型的特征主要用于训练机器学习模型。
 
-+   **基于区域的特征**：图像被分割成不同的区域（例如，使用阈值分割或K-Means聚类等技术，然后通过连接组件将其连接成段），并从这些区域中的每一个提取特征。可以使用区域和边界描述技术（如矩和链码）来提取特征。
++   **基于区域的特征**：图像被分割成不同的区域（例如，使用阈值分割或 K-Means 聚类等技术，然后通过连接组件将其连接成段），并从这些区域中的每一个提取特征。可以使用区域和边界描述技术（如矩和链码）来提取特征。
 
-+   **局部特征**：在图像中检测到多个单一兴趣点，并通过分析兴趣点邻近的像素来提取特征。可以从图像中提取的两个主要兴趣点类型是角点和斑点，这些可以通过如Harris & Stephens检测器和高斯拉普拉斯方法等方法提取。最后，可以通过如SIFT（尺度不变特征变换）等技术从检测到的兴趣点提取特征。局部特征通常用于匹配图像以构建全景/3D重建或从数据库中检索图像。
++   **局部特征**：在图像中检测到多个单一兴趣点，并通过分析兴趣点邻近的像素来提取特征。可以从图像中提取的两个主要兴趣点类型是角点和斑点，这些可以通过如 Harris & Stephens 检测器和高斯拉普拉斯方法等方法提取。最后，可以通过如 SIFT（尺度不变特征变换）等技术从检测到的兴趣点提取特征。局部特征通常用于匹配图像以构建全景/3D 重建或从数据库中检索图像。
 
-一旦提取了一组判别特征，我们可以利用这些特征来训练机器学习模型进行推断。特征描述符可以通过如[OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_sift_intro/py_sift_intro.html)这样的库在Python中轻松应用。
+一旦提取了一组判别特征，我们可以利用这些特征来训练机器学习模型进行推断。特征描述符可以通过如[OpenCV](https://opencv-python-tutroals.readthedocs.io/en/latest/py_tutorials/py_feature2d/py_sift_intro/py_sift_intro.html)这样的库在 Python 中轻松应用。
 
 ### 机器学习
 
@@ -78,21 +78,21 @@
 
 这个过程可以总结为以下几个步骤：
 
-1.  我们首先通过使用特征提取算法（如SIFT和Dense SIFT）从图像数据集中提取不同的特征来构建词汇表。
+1.  我们首先通过使用特征提取算法（如 SIFT 和 Dense SIFT）从图像数据集中提取不同的特征来构建词汇表。
 
-1.  其次，我们使用如K-Means或DBSCAN等算法对我们词汇表中的所有特征进行聚类，并利用聚类中心来总结我们的数据分布。
+1.  其次，我们使用如 K-Means 或 DBSCAN 等算法对我们词汇表中的所有特征进行聚类，并利用聚类中心来总结我们的数据分布。
 
 1.  最后，我们可以通过计算词汇表中不同特征在图像中出现的次数来构建每个图像的频率直方图。
 
 新图像可以通过对每个要分类的图像重复相同的过程，然后使用任何分类算法来找出我们词汇表中哪个图像最像我们的测试图像，从而进行分类。
 
-![图](../Images/678873a6185b020045f6be05fb058d7d.png)
+![图](img/678873a6185b020045f6be05fb058d7d.png)
 
 图 3: 视觉词袋 [2]
 
 如今，得益于卷积神经网络（CNNs）和递归人工神经网络（RCNNs）等人工神经网络架构的创建，已经能够构思出一种计算机视觉的替代工作流（见图 4）。
 
-![图像](../Images/133882f0c85d62f5e5f8e210f3c705ea.png)
+![图像](img/133882f0c85d62f5e5f8e210f3c705ea.png)
 
 图 4：计算机视觉工作流 [3]
 
@@ -118,11 +118,11 @@
 
 ### 参考文献
 
-[1] 用作海滩清扫器的模块化机器人，Felippe Roza。Researchgate。访问链接：[https://www.researchgate.net/figure/RGB-left-and-HSV-right-color-spaces_fig1_310474598](https://www.researchgate.net/figure/RGB-left-and-HSV-right-color-spaces_fig1_310474598)
+[1] 用作海滩清扫器的模块化机器人，Felippe Roza。Researchgate。访问链接：[`www.researchgate.net/figure/RGB-left-and-HSV-right-color-spaces_fig1_310474598`](https://www.researchgate.net/figure/RGB-left-and-HSV-right-color-spaces_fig1_310474598)
 
-[2] OpenCV 中的视觉词袋，Vision & Graphics Group*。*Jan Kundrac。访问链接：[https://vgg.fiit.stuba.sk/2015-02/bag-of-visual-words-in-opencv/](https://vgg.fiit.stuba.sk/2015-02/bag-of-visual-words-in-opencv/)
+[2] OpenCV 中的视觉词袋，Vision & Graphics Group*。*Jan Kundrac。访问链接：[`vgg.fiit.stuba.sk/2015-02/bag-of-visual-words-in-opencv/`](https://vgg.fiit.stuba.sk/2015-02/bag-of-visual-words-in-opencv/)
 
-[3] 深度学习与传统计算机视觉的比较。Haritha Thilakarathne，NaadiSpeaks。访问链接：[https://naadispeaks.wordpress.com/2018/08/12/deep-learning-vs-traditional-computer-vision/](https://naadispeaks.wordpress.com/2018/08/12/deep-learning-vs-traditional-computer-vision/)
+[3] 深度学习与传统计算机视觉的比较。Haritha Thilakarathne，NaadiSpeaks。访问链接：[`naadispeaks.wordpress.com/2018/08/12/deep-learning-vs-traditional-computer-vision/`](https://naadispeaks.wordpress.com/2018/08/12/deep-learning-vs-traditional-computer-vision/)
 
 **个人简介： [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是一位数据科学家，拥有南安普顿大学人工智能硕士学位。他对人工智能进展和机器学习应用（如金融和医学）有浓厚兴趣。可以通过 [Linkedin](https://www.linkedin.com/in/pierpaolo28/) 联系他。
 
@@ -130,22 +130,22 @@
 
 **相关：**
 
-+   [自然语言处理（NLP）路线图](/2020/10/roadmap-natural-language-processing-nlp.html)
++   自然语言处理（NLP）路线图
 
-+   [加速计算机视觉：亚马逊提供的免费课程](/2020/08/accelerated-computer-vision-free-course-amazon.html)
++   加速计算机视觉：亚马逊提供的免费课程
 
-+   [计算机视觉食谱：最佳实践和示例](/2020/09/computer-vision-recipes-best-practices-examples.html)
++   计算机视觉食谱：最佳实践和示例
 
 ### 更多相关内容
 
-+   [TensorFlow用于计算机视觉 - 转移学习变得简单](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 用于计算机视觉 - 转移学习变得简单](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
-+   [发现计算机视觉的世界：介绍MLM最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
++   [发现计算机视觉的世界：介绍 MLM 最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
 
-+   [计算机视觉的5个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
++   [计算机视觉的 5 个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
 
-+   [你需要了解的数据管理的6个要点及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [你需要了解的数据管理的 6 个要点及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
 
-+   [DINOv2：Meta AI的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
++   [DINOv2：Meta AI 的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)

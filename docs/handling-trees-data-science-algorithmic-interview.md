@@ -1,8 +1,8 @@
 # 处理数据科学中的树结构算法面试
 
-> 原文：[https://www.kdnuggets.com/2020/01/handling-trees-data-science-algorithmic-interview.html](https://www.kdnuggets.com/2020/01/handling-trees-data-science-algorithmic-interview.html)
+> 原文：[`www.kdnuggets.com/2020/01/handling-trees-data-science-algorithmic-interview.html`](https://www.kdnuggets.com/2020/01/handling-trees-data-science-algorithmic-interview.html)
 
-[评论](#comments)
+评论
 
 算法和数据结构是数据科学的重要组成部分。虽然我们大多数数据科学家在学习过程中没有修过专门的算法课程，但它们依然至关重要。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -38,7 +38,7 @@
 
 它们实际上是同一个东西。不要感到惊讶。以下是数据科学家和软件工程师如何看待树结构的。
 
-![图示](../Images/0d6ea80e7c5eea532c15d9487cfa0855.png)
+![图示](img/0d6ea80e7c5eea532c15d9487cfa0855.png)
 
 它们本质上是相同的。
 
@@ -54,9 +54,9 @@
 
 二叉树仅仅是每个节点最多有两个子节点的树。决策树是我们日常生活中看到的一个例子。
 
-![图示](../Images/c6f04dde60176a1efe6b381cc205829f.png)
+![图示](img/c6f04dde60176a1efe6b381cc205829f.png)
 
-二叉树：每个节点最多有2个子节点
+二叉树：每个节点最多有 2 个子节点
 
 ### 2\. 二叉搜索树（BST）：
 
@@ -68,11 +68,11 @@
 
 关于等式，这一定义有一些变体。有时等式出现在右侧或任一侧。有时树中只允许不同的值。
 
-![图示](../Images/27b84aad70fd2e4011f509de90c91a5a.png)
+![图示](img/27b84aad70fd2e4011f509de90c91a5a.png)
 
 [来源](https://www.freecodecamp.org/news/data-structures-101-binary-search-tree-398267b6bff0/)
 
-8大于左子树中的所有元素，并小于右子树中的所有元素。树中的任何节点也可以这样说。
+8 大于左子树中的所有元素，并小于右子树中的所有元素。树中的任何节点也可以这样说。
 
 ### 创建一个简单的树：
 
@@ -157,15 +157,15 @@ inorder(root)
 
 看起来对！
 
-### 让我们检查一下我们的树是否是有效的BST
+### 让我们检查一下我们的树是否是有效的 BST
 
-![图](../Images/380b0d1a2fed9cfe40b8371b528cdea1.png)
+![图](img/380b0d1a2fed9cfe40b8371b528cdea1.png)
 
 思考递归!!!
 
-不过，如果我们需要打印所有元素并手动检查是否满足BST属性，那我们算什么样的编码者呢？
+不过，如果我们需要打印所有元素并手动检查是否满足 BST 属性，那我们算什么样的编码者呢？
 
-这里是一个简单的代码，用于检查我们的BST是否有效。我们假设我们的二叉搜索树中严格不等。
+这里是一个简单的代码，用于检查我们的 BST 是否有效。我们假设我们的二叉搜索树中严格不等。
 
 ```py
 
@@ -202,29 +202,29 @@ True
 
 ### 继续学习
 
-如果你想了解更多关于算法和数据结构的内容，这里有一个[**UCSanDiego的Coursera算法专项**](https://click.linksynergy.com/deeplink?id=lVarvwc5BD0&mid=40328&murl=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fdata-structures-algorithms)**，**我强烈推荐。
+如果你想了解更多关于算法和数据结构的内容，这里有一个[**UCSanDiego 的 Coursera 算法专项**](https://click.linksynergy.com/deeplink?id=lVarvwc5BD0&mid=40328&murl=https%3A%2F%2Fwww.coursera.org%2Fspecializations%2Fdata-structures-algorithms)**，**我强烈推荐。
 
-感谢阅读。我将来还会写更多适合初学者的帖子。关注我在 [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) 或订阅我的 [**博客**](http://eepurl.com/dbQnuX?source=post_page---------------------------)，以便了解最新内容。欢迎反馈和建设性批评，可以在Twitter上找到我 [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------)。
+感谢阅读。我将来还会写更多适合初学者的帖子。关注我在 [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) 或订阅我的 [**博客**](http://eepurl.com/dbQnuX?source=post_page---------------------------)，以便了解最新内容。欢迎反馈和建设性批评，可以在 Twitter 上找到我 [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------)。
 
 此外，小声明：本文中可能包含一些相关资源的附属链接，分享知识永远是好事。
 
-**简介：[Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是WalmartLabs的高级统计分析师。关注他的Twitter [@mlwhiz](https://twitter.com/MLWhiz)。
+**简介：[Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是 WalmartLabs 的高级统计分析师。关注他的 Twitter [@mlwhiz](https://twitter.com/MLWhiz)。
 
 [原文](https://towardsdatascience.com/handling-trees-in-data-science-algorithmic-interview-ea14dd1b6236)。经授权转载。
 
 **相关：**
 
-+   [数据科学家6条建议](/2019/09/advice-data-scientists.html)
++   数据科学家 6 条建议
 
-+   [Kaggle的优质特征构建技巧和窍门](/2018/12/feature-building-techniques-tricks-kaggle.html)
++   Kaggle 的优质特征构建技巧和窍门
 
-+   [特征提取的搭车指南](/2019/06/hitchhikers-guide-feature-extraction.html)
++   特征提取的搭车指南
 
 ### 更多相关内容
 
 +   [人工智能在算法交易中的应用如何影响…](https://www.kdnuggets.com/2022/04/adoption-ai-algorithmic-trading-affected-finance-industry.html)
 
-+   [使用SQL处理时间序列中的缺失值](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
++   [使用 SQL 处理时间序列中的缺失值](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
 
 +   [从零开始学习机器学习：决策树](https://www.kdnuggets.com/2022/11/machine-learning-scratch-decision-trees.html)
 

@@ -1,24 +1,24 @@
-# 从fast.ai课程V3中学到的10个新知识
+# 从 fast.ai 课程 V3 中学到的 10 个新知识
 
-> 原文：[https://www.kdnuggets.com/2019/06/things-learnt-fastai-course.html](https://www.kdnuggets.com/2019/06/things-learnt-fastai-course.html)
+> 原文：[`www.kdnuggets.com/2019/06/things-learnt-fastai-course.html`](https://www.kdnuggets.com/2019/06/things-learnt-fastai-course.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Raimi Bin Karim](https://www.linkedin.com/in/raimibkarim/)，AI Singapore**
 
-![fast ai version three](../Images/1af1367ed8151657b506321ff250b94b.png)
+![fast ai version three](img/1af1367ed8151657b506321ff250b94b.png)
 
-大家都在谈论**fast.ai**的大规模开放在线课程（MOOC），所以我决定尝试一下他们2019年的深度学习课程[实用深度学习（程序员版）v3](https://course.fast.ai/)。
+大家都在谈论**fast.ai**的大规模开放在线课程（MOOC），所以我决定尝试一下他们 2019 年的深度学习课程[实用深度学习（程序员版）v3](https://course.fast.ai/)。
 
-我一直了解一些深度学习概念/想法（我已经在这个领域待了一年，主要处理计算机视觉），但从未真正理解过一些直觉或解释。我也了解到[Jeremy Howard](https://medium.com/@jeremyphoward)、[Rachel Thomas](https://medium.com/@racheltho)和Sylvain Gugger（关注他们的Twitter！）是深度学习领域的影响力人物（Jeremy有丰富的Kaggle竞赛经验），所以我希望从他们那里获得新的见解和直觉，并得到一些模型训练的技巧和窍门。我有很多东西要向这些人学习。
+我一直了解一些深度学习概念/想法（我已经在这个领域待了一年，主要处理计算机视觉），但从未真正理解过一些直觉或解释。我也了解到[Jeremy Howard](https://medium.com/@jeremyphoward)、[Rachel Thomas](https://medium.com/@racheltho)和 Sylvain Gugger（关注他们的 Twitter！）是深度学习领域的影响力人物（Jeremy 有丰富的 Kaggle 竞赛经验），所以我希望从他们那里获得新的见解和直觉，并得到一些模型训练的技巧和窍门。我有很多东西要向这些人学习。
 
-所以，我在观看视频3周后（我没有做任何练习 ????????????????)，写下这篇文章来将**我学到的** **新知识**进行整理与分享。当然，也有一些我一头雾水的内容，所以我做了一些额外的研究，并在这篇文章中呈现。最后，我也写了一下对这门课程的感受（剧透：我喜欢它❣️）。
+所以，我在观看视频 3 周后（我没有做任何练习 ????????????????)，写下这篇文章来将**我学到的** **新知识**进行整理与分享。当然，也有一些我一头雾水的内容，所以我做了一些额外的研究，并在这篇文章中呈现。最后，我也写了一下对这门课程的感受（剧透：我喜欢它❣️）。
 
 **免责声明** 不同的人会有不同的学习要点，这取决于你有何种深度学习背景。此文不适合深度学习初学者，也**不是课程内容的总结**。这篇文章假设你已具备神经网络、梯度下降、损失函数、正则化技术和生成嵌入的基础知识。以下经验也很有帮助：图像分类、文本分类、语义分割和生成对抗网络。
 
-我将我的10个学习要点内容组织如下：从神经网络理论，到架构，再到与损失函数（学习率、优化器）相关的内容，到模型训练（及正则化），再到深度学习任务，最终到模型可解释性。
+我将我的 10 个学习要点内容组织如下：从神经网络理论，到架构，再到与损失函数（学习率、优化器）相关的内容，到模型训练（及正则化），再到深度学习任务，最终到模型可解释性。
 
-**目录：10个*新*知识点**
+**目录：10 个*新*知识点**
 
 1.  通用逼近定理
 
@@ -38,7 +38,7 @@
 
 1.  模型可解释性
 
-1.  附录：Jeremy Howard谈模型复杂性与正则化
+1.  附录：Jeremy Howard 谈模型复杂性与正则化
 
 ### **0. Fast.ai & 转移学习**
 
@@ -48,7 +48,7 @@ Fast.ai 等同于迁移学习，并在短时间内取得出色成果。这个课
 
 ### **1\. 通用逼近定理**
 
-![olympics](../Images/c41c363e94ced5fd799553db19e35f09.png)
+![olympics](img/c41c363e94ced5fd799553db19e35f09.png)
 
 图片来源：[Vincentiu Solomon](https://unsplash.com/photos/ln5drpv_ImI?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/search/photos/astronomy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -58,7 +58,7 @@ Fast.ai 等同于迁移学习，并在短时间内取得出色成果。这个课
 
 ### **2\. 神经网络：设计与架构**
 
-![](../Images/ac809cf72f7c6582afb9a74143f24e5b.png)在这一部分，我将重点介绍在课程中受到关注的架构，以及像丢弃法这样的最先进（SOTA）模型中纳入的一些设计。
+![](img/ac809cf72f7c6582afb9a74143f24e5b.png)在这一部分，我将重点介绍在课程中受到关注的架构，以及像丢弃法这样的最先进（SOTA）模型中纳入的一些设计。
 
 +   **ResNet-50** 几乎是最先进的，因此你通常会希望在许多图像相关任务中使用它，比如图像分类和目标检测。这个架构在课程的 Jupyter 笔记本中使用得很频繁。
 
@@ -78,13 +78,13 @@ Fast.ai 等同于迁移学习，并在短时间内取得出色成果。这个课
 
 ### 3\. 理解损失景观
 
-![olympics](../Images/cb49c9865f179d0113ede9cecd3f92dd.png)
+![olympics](img/cb49c9865f179d0113ede9cecd3f92dd.png)
 
-图 3.1：损失景观；左侧景观有很多凸起，右侧则是平滑的景观。来源：[https://arxiv.org/abs/1712.09913](https://arxiv.org/abs/1712.09913)
+图 3.1：损失景观；左侧景观有很多凸起，右侧则是平滑的景观。来源：[`arxiv.org/abs/1712.09913`](https://arxiv.org/abs/1712.09913)
 
 损失函数通常有崎岖和平坦区域（如果你将其可视化为二维或三维图）。看看图 3.2。如果你进入一个 *崎岖* 区域，该解决方案通常不会很好地泛化。这是因为你找到的解决方案在一个地方很好，但在其他地方不太好。但如果你在 *平坦* 区域找到了解决方案，你可能会有很好的泛化能力。这是因为你找到的解决方案不仅在一个点很好，而且在 *周围* 也很好。
 
-![olympics](../Images/4f58cd8f2bd167281b0e80116e34d9b6.png)
+![olympics](img/4f58cd8f2bd167281b0e80116e34d9b6.png)
 
 图 3.2：在二维图中可视化的损失景观。截取自 course.fast.ai。以上大部分内容引自 Jeremy Howard。这是一个简单而美丽的解释。
 
@@ -104,7 +104,7 @@ Fast.ai 等同于迁移学习，并在短时间内取得出色成果。这个课
 
 ### ****6\. 训练****
 
-![olympics](../Images/05e65137b181548ba34871b05129bb5d.png)
+![olympics](img/05e65137b181548ba34871b05129bb5d.png)
 
 图片由 [Victor Freitas](https://www.pexels.com/@victorfreitas?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，自 [Pexels](https://www.pexels.com/photo/man-about-to-lift-barbell-2261477/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -134,7 +134,7 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 1\. 执行 **LR 范围测试**：用从小到大的（线性）学习率训练模型，从一个小值（10e-8）增加到一个大值（1 或 10）。绘制损失与学习率的图表，如下所示。
 
-![奥林匹克](../Images/f77e6ed2fb5541b1e84aef537b8992f6.png)
+![奥林匹克](img/f77e6ed2fb5541b1e84aef537b8992f6.png)
 
 图 6.1：损失与学习率的关系。[来源： https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html](https://sgugger.github.io/how-do-you-find-a-good-learning-rate.html)
 
@@ -142,13 +142,13 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 3\. 根据 **周期性学习率** 的周期数来拟合模型。一个周期是指你的训练过程通过从选择的最小学习率到选择的最大学习率，然后再返回到最小值的学习率。
 
-![奥林匹克](../Images/1de06e6c524f21514cf9bb05381bbf43.png)
+![奥林匹克](img/1de06e6c524f21514cf9bb05381bbf43.png)
 
 来源： https://sgugger.github.io/the-1cycle-policy.html
 
 那么我们为什么这样做呢？整个想法是这样的。在损失地形中，我们希望跳过凸起（因为我们不想陷入某个沟壑）。因此，在开始时增加学习率有助于模型跳出沟壑，探索函数表面，并尝试找到损失较低且区域不崎岖的地方（因为如果地形崎岖，模型会再次被推出）。这使得我们可以更快地训练模型。我们还往往会得到更具泛化能力的解决方案。
 
-![olympics](../Images/e3ad8465a2b40a016bd70b67d5ebf269.png)
+![olympics](img/e3ad8465a2b40a016bd70b67d5ebf269.png)
 
 图 6.2：来自 course.fast.ai 的截图
 
@@ -182,7 +182,7 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 ### ****7\. 正则化****
 
-![olympics](../Images/641fbc388d9cba403d9d62999f61f2ac.png)
+![olympics](img/641fbc388d9cba403d9d62999f61f2ac.png)
 
 照片由 [Rosemary Ketchum](https://www.pexels.com/@ketchumcommunity?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，来源于 [Pexels](https://www.pexels.com/photo/man-wearing-black-officer-uniform-1464230/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -190,7 +190,7 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 ### **8\. 任务**
 
-![](../Images/9f2ec74d3ae4ab722b3ab6c7a695cbca.png)请注意，并非所有课程中涉及的任务都在此处提及。
+![](img/9f2ec74d3ae4ab722b3ab6c7a695cbca.png)请注意，并非所有课程中涉及的任务都在此处提及。
 
 +   多标签分类
 
@@ -206,7 +206,7 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 我一直在想如何进行[图像]分类任务，其标签数量可能会变化，即[多标签分类](https://en.wikipedia.org/wiki/Multi-label_classification)（不要与[多类分类/多项式分类](https://en.wikipedia.org/wiki/Multiclass_classification)混淆，其相关概念是[二分类](https://en.wikipedia.org/wiki/Binary_classification)）。
 
-没有详细说明多标签分类的损失函数如何工作。但经过搜索，我发现标签应该是多热编码的向量。这意味着每个元素必须在最终模型输出中应用sigmoid函数。损失函数，即输出和真实值的函数，是使用二元交叉熵来计算的，以独立地惩罚每个元素。
+没有详细说明多标签分类的损失函数如何工作。但经过搜索，我发现标签应该是多热编码的向量。这意味着每个元素必须在最终模型输出中应用 sigmoid 函数。损失函数，即输出和真实值的函数，是使用二元交叉熵来计算的，以独立地惩罚每个元素。
 
 **b) 语言建模**
 
@@ -218,15 +218,15 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 **c) 表格数据**
 
-这是我第一次遇到使用深度学习处理具有分类变量的表格数据！我之前不知道可以这样做？无论如何，我们可以做的是我们可以从**分类变量中创建嵌入**。如果我没有上过这门课程，我可能不会想到这一点。稍微搜索了一下，我找到了Rachel Thomas写的关于[表格数据深度学习入门](https://www.fast.ai/2018/04/29/categorical-embeddings/)的帖子，介绍了这种嵌入的使用。
+这是我第一次遇到使用深度学习处理具有分类变量的表格数据！我之前不知道可以这样做？无论如何，我们可以做的是我们可以从**分类变量中创建嵌入**。如果我没有上过这门课程，我可能不会想到这一点。稍微搜索了一下，我找到了 Rachel Thomas 写的关于[表格数据深度学习入门](https://www.fast.ai/2018/04/29/categorical-embeddings/)的帖子，介绍了这种嵌入的使用。
 
-那么，问题是如何将(a)连续变量的向量和(b)来自分类变量的嵌入结合起来？课程中没有提到这一点，但这个StackOverflow的[帖子](https://datascience.stackexchange.com/questions/29634/how-to-combine-categorical-and-continuous-input-features-for-neural-network-trai)强调了三种可能的方法：
+那么，问题是如何将(a)连续变量的向量和(b)来自分类变量的嵌入结合起来？课程中没有提到这一点，但这个 StackOverflow 的[帖子](https://datascience.stackexchange.com/questions/29634/how-to-combine-categorical-and-continuous-input-features-for-neural-network-trai)强调了三种可能的方法：
 
-1.  2个模型——一个用于(a)，一个用于(b)。将它们进行集成。
+1.  2 个模型——一个用于(a)，一个用于(b)。将它们进行集成。
 
-1.  1个模型，1个输入。这个输入是(a)和(b)的连接。
+1.  1 个模型，1 个输入。这个输入是(a)和(b)的连接。
 
-1.  1个模型，2个输入。这两个输入分别是(a)和(b)。你将这两个输入在模型内部连接起来。
+1.  1 个模型，2 个输入。这两个输入分别是(a)和(b)。你将这两个输入在模型内部连接起来。
 
 **d) 协同过滤**
 
@@ -240,33 +240,33 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 +   ‘**劣化**’用于生成数据，按我们希望的方式。这个术语我特别喜欢。
 
-+   生成对抗网络（GANs）**讨厌** **动量**，所以将其设置为0。
++   生成对抗网络（GANs）**讨厌** **动量**，所以将其设置为 0。
 
 +   仅仅通过观察损失很难了解模型的表现。必须**亲自查看生成的图像**（尽管在训练结束时，判别器和生成器的损失大致应保持不变）。
 
-+   提高生成图像质量的一种方法是在我们的损失函数中包含*感知损失*（也称为fast.ai中的**特征损失**）。特征损失通过取网络中间某处张量的值来计算。
++   提高生成图像质量的一种方法是在我们的损失函数中包含*感知损失*（也称为 fast.ai 中的**特征损失**）。特征损失通过取网络中间某处张量的值来计算。
 
 ### ****9. 模型可解释性****
 
-![奥林匹克](../Images/c3f4183af3e96ee1b642f3a1fbef6edb.png)
+![奥林匹克](img/c3f4183af3e96ee1b642f3a1fbef6edb.png)
 
 照片由[Maria Teneva](https://unsplash.com/photos/2Wa88Py0h0A?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，来自[Unsplash](https://unsplash.com/search/photos/understand?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-在其中一节课中，Jeremy Howard展示了一个**激活** **热图**，用于图像分类任务。这个热图显示了被“激活”的像素。这种可视化将帮助我们理解哪些特征或图像的部分导致了模型的输出???????。
+在其中一节课中，Jeremy Howard 展示了一个**激活** **热图**，用于图像分类任务。这个热图显示了被“激活”的像素。这种可视化将帮助我们理解哪些特征或图像的部分导致了模型的输出???????。
 
-### **10. 附录：Jeremy Howard谈模型复杂度与正则化**
+### **10. 附录：Jeremy Howard 谈模型复杂度与正则化**
 
-![奥林匹克](../Images/a55d90113349f5f117b3a1ddbe9b6113.png)
+![奥林匹克](img/a55d90113349f5f117b3a1ddbe9b6113.png)
 
 照片由[NEW DATA SERVICES](https://unsplash.com/photos/UO-QYR28hS0?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，来自[Unsplash](https://unsplash.com/search/photos/dialogue?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-我转录了这部分课程（第5课），因为直觉实在太引人入胜了❤️。这里Jeremy首先总结了那些认为增加模型复杂度不是解决办法的人的观点，然后改变了他们的看法，接着带他们了解[**L2正则化**](https://en.wikipedia.org/wiki/Regularization_%28mathematics%29)。
+我转录了这部分课程（第 5 课），因为直觉实在太引人入胜了❤️。这里 Jeremy 首先总结了那些认为增加模型复杂度不是解决办法的人的观点，然后改变了他们的看法，接着带他们了解[**L2 正则化**](https://en.wikipedia.org/wiki/Regularization_%28mathematics%29)。
 
 哦，我以前学的是统计学，所以他在这方面让我措手不及????。
 
 > 所以，如果你们中的任何人不幸地被统计学、心理学、计量经济学或类似课程的背景洗脑了，你们需要重新认识你们需要更少参数的想法，因为你们实际上需要意识到的是，你们会适应这种谎言，即你们需要更少的参数，因为这是一个方便的虚构，真实的情况是你们不希望你的函数过于复杂。而拥有更少的参数是使其不那么复杂的一种方式。
 > 
-> 但是如果你有一千个参数，其中999个参数是`1e-9`呢？或者如果有0呢？如果是0，那它们实际上并不存在。或者如果它们是`1e-9`，那它们几乎也不存在。
+> 但是如果你有一千个参数，其中 999 个参数是`1e-9`呢？或者如果有 0 呢？如果是 0，那它们实际上并不存在。或者如果它们是`1e-9`，那它们几乎也不存在。
 > 
 > 那么如果很多参数都非常小，我为什么不能有很多参数呢？答案是你可以。实际上，用[参数数量]来限制复杂性的做法是极其有限的。这是一个有很多问题的虚构方法，对吧？因此，如果在你脑海中复杂性是通过参数数量来衡量的，那你是完全错误的。要正确地衡量它。
 > 
@@ -280,9 +280,9 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 > 
 > 这实际上是一个非常好的主意。
 > 
-> 让我们实际创建一个模型，并在损失函数中添加参数平方的总和。不过这里有一个问题。也许那个数字太大，以至于最佳的损失是将所有参数设置为0。那样就不好了。因此，我们实际上希望避免这种情况发生。因此，不仅仅是将参数平方的总和添加到模型中，而是将其乘以我们选择的某个数字。在fastai中，我们选择的那个数字叫做`wd`。
+> 让我们实际创建一个模型，并在损失函数中添加参数平方的总和。不过这里有一个问题。也许那个数字太大，以至于最佳的损失是将所有参数设置为 0。那样就不好了。因此，我们实际上希望避免这种情况发生。因此，不仅仅是将参数平方的总和添加到模型中，而是将其乘以我们选择的某个数字。在 fastai 中，我们选择的那个数字叫做`wd`。
 
-你可能也想看看我的文章《L1和L2正则化的直观解释》，我在[这里](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261)解释了这两种正则化技术。
+你可能也想看看我的文章《L1 和 L2 正则化的直观解释》，我在[这里](https://towardsdatascience.com/intuitions-on-l1-and-l2-regularisation-235f2db4c261)解释了这两种正则化技术。
 
 ### **结论**
 
@@ -294,37 +294,37 @@ Jeremy Howard 在他的代码中持续使用 `lr_finder()` 和 `fit_one_cycle()`
 
 +   他们鼓励你将深度学习应用到你各自的领域中去构建事物。
 
-+   他们似乎总是跟上有趣且新颖的出版物，并在适当的地方将它们融入fastai库中。
++   他们似乎总是跟上有趣且新颖的出版物，并在适当的地方将它们融入 fastai 库中。
 
 +   他们还进行大量关于深度学习的研究（请参阅：ULMFiT）。
 
-+   他们围绕fastai库建立了一个社区，因此你将容易获得支持。
++   他们围绕 fastai 库建立了一个社区，因此你将容易获得支持。
 
-+   他们的技巧和窍门对Kagglers和以准确性为驱动的建模非常有用。
++   他们的技巧和窍门对 Kagglers 和以准确性为驱动的建模非常有用。
 
 期待课程的下一部分！
 
-**简历：[Raimi Bin Karim](https://www.linkedin.com/in/raimibkarim/)** 是AI Singapore的AI工程师
+**简历：[Raimi Bin Karim](https://www.linkedin.com/in/raimibkarim/)** 是 AI Singapore 的 AI 工程师
 
 [原文](https://towardsdatascience.com/10-new-things-i-learnt-from-fast-ai-v3-4d79c1f07e33)。经许可转载。
 
 **相关：**
 
-+   [fast.ai 深度学习第 1 部分完整课程笔记](/2018/07/fast-ai-deep-learning-part-1-notes.html)
++   fast.ai 深度学习第一部分完整课程笔记
 
-+   [使用 fast.ai 进行快速特征工程](/2018/03/feature-engineering-dates-fastai.html)
++   使用 fast.ai 进行快速特征工程
 
-+   [深度学习 3 门热门课程概述](/2017/10/3-popular-courses-deep-learning.html)
++   深度学习 3 门热门课程概述
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

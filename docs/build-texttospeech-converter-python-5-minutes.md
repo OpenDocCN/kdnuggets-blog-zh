@@ -1,8 +1,8 @@
 # 用 Python 在 5 分钟内构建文本转语音转换器
 
-> 原文：[https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)
+> 原文：[`www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html`](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)
 
-![用 Python 在 5 分钟内构建文本转语音转换器](../Images/8d2b2f12265d4ab25a88fb1752e01b5f.png)
+![用 Python 在 5 分钟内构建文本转语音转换器](img/8d2b2f12265d4ab25a88fb1752e01b5f.png)
 
 [Kelly Sikkema](https://unsplash.com/@kellysikkema)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -138,24 +138,24 @@ os.system("mpg321 mytext2speech.mp3")
 
 哒哒！你选择的媒体播放器应该已经说了：
 
-> “学习如何在5分钟内用Python构建东西”
+> “学习如何在 5 分钟内用 Python 构建东西”
 
 # 总结一下
 
-这篇文章完全是为了让你探索你的Python技能，然后构建更好更酷的项目。& 为了一点乐趣！
+这篇文章完全是为了让你探索你的 Python 技能，然后构建更好更酷的项目。& 为了一点乐趣！
 
 **[妮莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由技术写作人。她特别关注提供数据科学职业建议或教程以及围绕数据科学的理论知识。她还希望探索人工智能如何有益于人类寿命的不同方式。她是一位热衷于学习、寻求拓展技术知识和写作技能的热心者，同时帮助引导他人。
 
 ### 更多相关话题
 
-+   [用Python在5分钟内构建网页抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
++   [用 Python 在 5 分钟内构建网页抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
 
-+   [FastAPI教程：用Python几分钟内构建API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
++   [FastAPI 教程：用 Python 几分钟内构建 API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
 
-+   [5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
++   [5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets新闻2022年3月9日：5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
 
-+   [用Hugging Face和Gradio在5分钟内构建AI聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
++   [用 Hugging Face 和 Gradio 在 5 分钟内构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
 
 +   [语音识别指标的演变](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)

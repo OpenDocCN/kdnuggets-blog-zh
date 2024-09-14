@@ -1,8 +1,8 @@
 # 针对 Docker 优先的数据科学的 Torus
 
-> 原文：[https://www.kdnuggets.com/2018/05/torus-docker-first-data-science.html](https://www.kdnuggets.com/2018/05/torus-docker-first-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/05/torus-docker-first-data-science.html`](https://www.kdnuggets.com/2018/05/torus-docker-first-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Alexander Ng](https://www.linkedin.com/in/alexander-b-ng/), Manifold.ai 提供**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -44,7 +44,7 @@
 
 通过用 DevOps 思维方式来看待 ML 开发，我们可以识别出交付路径上需要改进的几个新领域。这是一个机会，可以构建新的工具和最佳实践，专门赋能 MLE 社区，以便在更短的时间内交付更强健的解决方案。
 
-![ML 工具包](../Images/7dced8f623e820e8425cb14411475b0b.png)
+![ML 工具包](img/7dced8f623e820e8425cb14411475b0b.png)
 
 无论 MLE 工具包最终包含什么，我们非常确定的一点是：Docker 将在 ML 开发生命周期标准中发挥重要作用。
 
@@ -62,7 +62,7 @@ Torus 1.0 包含一个 Docker 化的 Cookiecutter for Data Science（这是流�
 
 在用 cookiecutter 模板实例化一个新项目并运行单个启动命令后，你的本地开发环境将如下所示：
 
-![Torus](../Images/5876ad976fb478389ce01afa29ad5d09.png)
+![Torus](img/5876ad976fb478389ce01afa29ad5d09.png)
 
 完全配置好的开箱即用 Docker 本地开发设置，适用于数据科学项目。
 
@@ -96,12 +96,12 @@ Torus 1.0 包含一个 Docker 化的 Cookiecutter for Data Science（这是流�
 
 +   [停止学习数据科学以寻找目的，并通过寻找目的…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学基础：开始所需了解的10项关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：开始所需了解的 10 项关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：奇趣名言汇编…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目，学习5项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目，学习 5 项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其应用…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其应用…](https://www.kdnuggets.com/2022/n46.html)

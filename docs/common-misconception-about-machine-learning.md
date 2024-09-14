@@ -1,10 +1,10 @@
 # 关于机器学习的常见误解
 
-> 原文：[https://www.kdnuggets.com/2021/11/common-misconception-about-machine-learning.html](https://www.kdnuggets.com/2021/11/common-misconception-about-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/11/common-misconception-about-machine-learning.html`](https://www.kdnuggets.com/2021/11/common-misconception-about-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/516c9209febd80a91627eafaf695d14b.png)
+![](img/516c9209febd80a91627eafaf695d14b.png)
 
 *作者图像 | 元素来自 [freepik](https://www.freepik.com/free-vector/infodemic-news-illustration_10877579.htm#page=1&query=Misconception&position=0&from_view=search)。*
 
@@ -30,7 +30,7 @@
 
 是的，但在少数情况下。现代深度学习模型现在能够用有限的样本产生高精度。即使是数据集的获取也变得更容易了，像 Kaggle 这样的平台提供了数以千计的开源数据集，可以下载并用于商业目的。我们还可以在 [GitHub](https://github.com/jbrownlee/Datasets)、[DAGsHub](https://dagshub.com/explore/datasets)、[HuggingFace](https://huggingface.co/datasets)、[Knoema](https://knoema.com/atlas/sources) 和 [Google Dataset Search](https://datasetsearch.research.google.com/) 上找到数据集，以训练我们的模型，并最终将其用于生产。
 
-![](../Images/a6448cb77f831f70d084514c67c6f749.png)
+![](img/a6448cb77f831f70d084514c67c6f749.png)
 
 *[来自 Kaggle 的图片](https://www.kaggle.com/datasets)。*
 
@@ -38,25 +38,25 @@
 
 一些职位确实要求机器学习学位或 TensorFlow 证书，但如果你在 GitHub 和 Kaggle 上有强大的作品集，这些就变得次要了。很多开发者正在转向机器学习，他们没有专门的学位或证书，但有深度学习模型的经验并将其投入生产。如果你能向雇主证明你可以完成机器学习生命周期中的每个任务，那么你就是完美的候选人。总的来说，如果你有强大的机器学习作品集，就不必考虑获得证书或学位。要获得强大的 ML 作品集，请阅读：[如何作为初学者构建强大的数据科学作品集 — KDnuggets](https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html)。
 
-![](../Images/062514dd57403ef3ae7f7510b82406dd.png)
+![](img/062514dd57403ef3ae7f7510b82406dd.png)
 
 *[使用 Google Cloud 上的 TensorFlow 进行机器学习 | Coursera](https://www.coursera.org/specializations/machine-learning-tensorflow-gcp?ranMID=40328&ranEAID=jU79Zysihs4&ranSiteID=jU79Zysihs4-1DFWDxcnbqCtsY4mCUi.jw&siteID=jU79Zysihs4-1DFWDxcnbqCtsY4mCUi.jw&utm_content=10&utm_medium=partners&utm_source=linkshare&utm_campaign=jU79Zysihs4)*
 
 ### 你需要昂贵的计算设备或 IDE 吗？
 
-不，我有一台旧笔记本电脑，我可以借助Kaggle平台在云端GPU和TPU上训练这些大型模型。世界正从个人电脑转向云计算机。你可以从Kaggle和*[Google Colab](https://colab.research.google.com/)*获得免费的CPU、GPU和TPU。还有其他平台也可以帮助你进行数据分析和创建完整的项目，如*[Deepnote](https://deepnote.com/)*、*[JetBrains Datalore](https://datalore.jetbrains.com/notebooks)*和*[Paperspace](https://console.paperspace.com/)*。这些平台为你提供免费的工作空间来构建你的机器学习产品，并且附带协作工具。在我的日常工作中，我使用Deepnote来处理新的研究或项目，如果需要更好的GPU或TPU，我会切换到Kaggle或Colab。
+不，我有一台旧笔记本电脑，我可以借助 Kaggle 平台在云端 GPU 和 TPU 上训练这些大型模型。世界正从个人电脑转向云计算机。你可以从 Kaggle 和*[Google Colab](https://colab.research.google.com/)*获得免费的 CPU、GPU 和 TPU。还有其他平台也可以帮助你进行数据分析和创建完整的项目，如*[Deepnote](https://deepnote.com/)*、*[JetBrains Datalore](https://datalore.jetbrains.com/notebooks)*和*[Paperspace](https://console.paperspace.com/)*。这些平台为你提供免费的工作空间来构建你的机器学习产品，并且附带协作工具。在我的日常工作中，我使用 Deepnote 来处理新的研究或项目，如果需要更好的 GPU 或 TPU，我会切换到 Kaggle 或 Colab。
 
-*你不需要购买昂贵的IDE或计算设备来构建你的产品。现在你可以使用这些免费的云工具。*
+*你不需要购买昂贵的 IDE 或计算设备来构建你的产品。现在你可以使用这些免费的云工具。*
 
-![](../Images/e95da6ad2f9db5e63c245b1644444b93.png)
+![](img/e95da6ad2f9db5e63c245b1644444b93.png)
 
-*[2021年数据科学前5大免费云IDE | by Abid Ali Awan | Towards AI](https://pub.towardsai.net/top-5-free-cloud-ide-for-data-science-2021-9c129745590b)*
+*[2021 年数据科学前 5 大免费云 IDE | by Abid Ali Awan | Towards AI](https://pub.towardsai.net/top-5-free-cloud-ide-for-data-science-2021-9c129745590b)*
 
 ### 职场的真实情况
 
-在获得所需技能后，你开始在市场上寻找工作，但很快你会意识到公司要求更多。他们希望你了解数据工程、数据分析和MLOps。在面试阶段，他们会询问你最近的项目和你在模型部署方面的工作经验。
+在获得所需技能后，你开始在市场上寻找工作，但很快你会意识到公司要求更多。他们希望你了解数据工程、数据分析和 MLOps。在面试阶段，他们会询问你最近的项目和你在模型部署方面的工作经验。
 
-![](../Images/df810f4465537bec163e54f09f089310.png)
+![](img/df810f4465537bec163e54f09f089310.png)
 
 *[机器学习工作 | Glassdoor](https://www.glassdoor.com/Job/machine-learning-jobs-SRCH_KO0,16.htm)*
 

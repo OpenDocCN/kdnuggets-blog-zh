@@ -1,8 +1,8 @@
 # (不那么) 新的数据科学家韦恩图
 
-> 原文：[https://www.kdnuggets.com/2016/09/new-data-science-venn-diagram.html](https://www.kdnuggets.com/2016/09/new-data-science-venn-diagram.html)
+> 原文：[`www.kdnuggets.com/2016/09/new-data-science-venn-diagram.html`](https://www.kdnuggets.com/2016/09/new-data-science-venn-diagram.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 我认为 [Drew Conway](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) 早期尝试通过韦恩图定义数据科学是很有威望的，尽管最终由于时间的推移以及对数据科学实际意义的变化，存在一些缺陷。它曾是一个很好的方式，通过视觉手段尝试向人们解释你所做或想做的事情，尤其是在你经过深思熟虑和精心构建的口头解释后，对方却只是茫然地盯着你。或者回应类似“哦，你做大数据？”或者更加基础（且令人沮丧）的“你在用电脑工作吗？你知道吗，我的屏幕坏了。能帮我看看吗？”
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 好吧，虽然它[不完全是**新**的](https://whatsthebigdata.com/2016/07/08/the-new-data-scientist-venn-diagram/)，但对我来说（通过 Gil Press）是新的。
 
-![数据科学家韦恩图](../Images/c7fa6ec519ca49c35a20bfe6ca867255.png)
+![数据科学家韦恩图](img/c7fa6ec519ca49c35a20bfe6ca867255.png)
 
 这是 Kolassa 在去年秋天 Data Science Stack Exchange 论坛上揭示该图表时的相关引用：
 
@@ -32,7 +32,7 @@
 
 比“原始版本”更复杂吗？绝对是。细节丰富吗？当然是。容易引发争议吗？绝对是。
 
-实际上，Kolassa自己也明白这一点：
+实际上，Kolassa 自己也明白这一点：
 
 > 我已经以保证最大程度争议的方式标记了这些领域，同时便于记忆。
 
@@ -42,21 +42,21 @@
 
 +   销售人员???
 
-+   完美的数据科学家似乎距离我喜欢的IT主管有几步之遥 :)
++   完美的数据科学家似乎距离我喜欢的 IT 主管有几步之遥 :)
 
 +   [优秀顾问](https://cdn.meme.am/instances/500x/52847982.jpg)
 
-但与其自己*喋喋不休*，不如看看别人遇到我称之为**（不那么）新的数据科学家Venn图**时的一些观点。
+但与其自己*喋喋不休*，不如看看别人遇到我称之为**（不那么）新的数据科学家 Venn 图**时的一些观点。
 
-用户Robert de Graaf在[原始Stack Exchange讨论帖](http://datascience.stackexchange.com/questions/2403/data-science-without-knowledge-of-a-specific-topic-is-it-worth-pursuing-as-a-ca)上的评论提供了以下相对温和的观察：
+用户 Robert de Graaf 在[原始 Stack Exchange 讨论帖](http://datascience.stackexchange.com/questions/2403/data-science-without-knowledge-of-a-specific-topic-is-it-worth-pursuing-as-a-ca)上的评论提供了以下相对温和的观察：
 
-> 我认为这比原始的Conway版本有了很大的改进，尽管我仍然无法完全摆脱这种观念——从重叠的大小暗示——即统计学教授是一个在统计和沟通方面都有相等技能的人。
+> 我认为这比原始的 Conway 版本有了很大的改进，尽管我仍然无法完全摆脱这种观念——从重叠的大小暗示——即统计学教授是一个在统计和沟通方面都有相等技能的人。
 
-El Brown在博客[Unicorn Whispering](https://medium.com/unicorn-whispering)（“试图让神话般的数据科学世界变得对像我这样普通的人可及”）上对这个特定的Venn图有这样的间接评价：
+El Brown 在博客[Unicorn Whispering](https://medium.com/unicorn-whispering)（“试图让神话般的数据科学世界变得对像我这样普通的人可及”）上对这个特定的 Venn 图有这样的间接评价：
 
 > 如果你认为你确实需要数据科学家的专业技能，不要过于纠结于寻找一个拥有你认为需要或被告知拥有的每一项技能的数据科学家。创建一个具备所需技能、知识和经验的多样化团队——一种众包数据科学家——有很多好处。
 
-Chris Moffit在网站Practical Business Python上，[提供了一个支持性的贡献](http://pbpython.com/analyze-this.html)：
+Chris Moffit 在网站 Practical Business Python 上，[提供了一个支持性的贡献](http://pbpython.com/analyze-this.html)：
 
 > 我的经历进一步强化了我的信念，“完美的数据科学家”确实存在于这些多个职能的交汇处。
 
@@ -74,11 +74,11 @@ Chris Moffit在网站Practical Business Python上，[提供了一个支持性的
 
 **相关**：
 
-+   [数据科学难题，解析](/2016/03/data-science-puzzle-explained.html)
++   数据科学难题，解析
 
-+   [数据科学过程，再发现](/2016/03/data-science-process-rediscovered.html)
++   数据科学过程，再发现
 
-+   [数据科学家是否如你所想？](/2016/08/data-scientist-mean-think-means.html)
++   数据科学家是否如你所想？
 
 ### 了解更多主题
 

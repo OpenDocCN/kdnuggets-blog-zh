@@ -1,58 +1,58 @@
-# 开始使用Claude 3 Opus，这款新模型刚刚超越了GPT-4和Gemini
+# 开始使用 Claude 3 Opus，这款新模型刚刚超越了 GPT-4 和 Gemini
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini](https://www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini)
+> 原文：[`www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini`](https://www.kdnuggets.com/getting-started-with-claude-3-opus-that-just-destroyed-gpt-4-and-gemini)
 
-![开始使用Claude 3 Opus，这款新模型刚刚超越了GPT-4和Gemini](../Images/040d47cea687ae6f0cbaa2cb7dbd2af0.png)
+![开始使用 Claude 3 Opus，这款新模型刚刚超越了 GPT-4 和 Gemini](img/040d47cea687ae6f0cbaa2cb7dbd2af0.png)
 
 图片由作者提供
 
-Anthropic最近推出了一系列新的AI模型，这些模型在基准测试中超越了GPT-4和Gemini。随着AI行业的快速增长和发展，Claude 3模型正在作为大型语言模型（LLMs）中的下一大突破取得显著进展。
+Anthropic 最近推出了一系列新的 AI 模型，这些模型在基准测试中超越了 GPT-4 和 Gemini。随着 AI 行业的快速增长和发展，Claude 3 模型正在作为大型语言模型（LLMs）中的下一大突破取得显著进展。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
-在这篇博客文章中，我们将深入探讨Claude 3模型的性能基准。我们还将了解支持简单、异步和流响应生成的新Python API以及其增强的视觉能力。
+在这篇博客文章中，我们将深入探讨 Claude 3 模型的性能基准。我们还将了解支持简单、异步和流响应生成的新 Python API 以及其增强的视觉能力。
 
-# 介绍Claude 3
+# 介绍 Claude 3
 
-Claude 3在AI技术领域迈出了重要的一步。它在各种评估基准上超越了最先进的语言模型，包括MMLU、GPQA和GSM8K，展示了在复杂任务中接近人类的理解和流利度。
+Claude 3 在 AI 技术领域迈出了重要的一步。它在各种评估基准上超越了最先进的语言模型，包括 MMLU、GPQA 和 GSM8K，展示了在复杂任务中接近人类的理解和流利度。
 
-Claude 3模型有三种变体：**Haiku, Sonnet, 和 Opus**，每种都有其独特的能力和优势。
+Claude 3 模型有三种变体：**Haiku, Sonnet, 和 Opus**，每种都有其独特的能力和优势。
 
 1.  **Haiku**是速度最快、性价比最高的模型，能够在不到三秒的时间内阅读和处理信息密集型的研究论文。
 
-1.  **Sonnet**比Claude 2和2.1快2倍，擅长于需要快速响应的任务，如知识检索或销售自动化。
+1.  **Sonnet**比 Claude 2 和 2.1 快 2 倍，擅长于需要快速响应的任务，如知识检索或销售自动化。
 
-1.  **Opus**提供与Claude 2和2.1相似的速度，但智能水平更高。
+1.  **Opus**提供与 Claude 2 和 2.1 相似的速度，但智能水平更高。
 
-根据下表，Claude 3 Opus在所有LLMs基准测试中都优于GPT-4和Gemini Ultra，使其成为AI领域的新领军者。
+根据下表，Claude 3 Opus 在所有 LLMs 基准测试中都优于 GPT-4 和 Gemini Ultra，使其成为 AI 领域的新领军者。
 
-![开始使用Claude 3 Opus，这款新模型刚刚超越了GPT-4和Gemini](../Images/cc90746e0753f33f6edb6ca2afc6f324.png)
+![开始使用 Claude 3 Opus，这款新模型刚刚超越了 GPT-4 和 Gemini](img/cc90746e0753f33f6edb6ca2afc6f324.png)
 
 表格来自[Claude 3](https://www.anthropic.com/news/claude-3-family)
 
-Claude 3模型的一项重要改进是其强大的视觉能力。它们可以处理各种视觉格式，包括照片、图表、图形和技术图解。
+Claude 3 模型的一项重要改进是其强大的视觉能力。它们可以处理各种视觉格式，包括照片、图表、图形和技术图解。
 
-![开始使用Claude 3 Opus，这款新模型刚刚超越了GPT-4和Gemini](../Images/ce9b9ad29ec991686afafb763bee7dcf.png)
+![开始使用 Claude 3 Opus，这款新模型刚刚超越了 GPT-4 和 Gemini](img/ce9b9ad29ec991686afafb763bee7dcf.png)
 
 来自 [Claude 3](https://www.anthropic.com/news/claude-3-family) 的表格
 
-你可以通过访问 [https://www.anthropic.com/claude](https://www.anthropic.com/claude) 并创建一个新账户来开始使用最新的模型。与 OpenAI playground 相比，这很简单。
+你可以通过访问 [`www.anthropic.com/claude`](https://www.anthropic.com/claude) 并创建一个新账户来开始使用最新的模型。与 OpenAI playground 相比，这很简单。
 
-![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](../Images/350900bfa398543c48fd9bd29cf2ed66.png)
+![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](img/350900bfa398543c48fd9bd29cf2ed66.png)
 
 # 设置
 
-1.  在我们安装 Python 包之前，我们需要访问 [https://console.anthropic.com/dashboard](https://console.anthropic.com/dashboard) 并获取 API 密钥。 ![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](../Images/e35274e094c1ad2dad9b83f1c26cb53e.png)
+1.  在我们安装 Python 包之前，我们需要访问 [`console.anthropic.com/dashboard`](https://console.anthropic.com/dashboard) 并获取 API 密钥。 ![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](img/e35274e094c1ad2dad9b83f1c26cb53e.png)
 
 1.  不直接提供 API 密钥来创建客户端对象，你可以设置 `ANTHROPIC_API_KEY` 环境变量并将其作为密钥提供。
 
@@ -91,7 +91,7 @@ Markdown(completion.completion)
 
 错误显示我们不能对 `claude-3-opus-20240229` 模型使用旧的 API。我们需要改用 Messages API。
 
-![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](../Images/36137926508f3b470647677e9cb279a0.png)
+![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](img/36137926508f3b470647677e9cb279a0.png)
 
 # Claude 3 Opus Python API
 
@@ -111,7 +111,7 @@ Markdown(message.content[0].text)
 
 使用 IPython Markdown 会以 Markdown 格式显示响应。这意味着它会以干净的方式展示项目符号、代码块、标题和链接。
 
-![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](../Images/3b23614ebc9c2208dcc23338ec126d94.png)
+![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](img/3b23614ebc9c2208dcc23338ec126d94.png)
 
 # 添加系统提示
 
@@ -138,7 +138,7 @@ Markdown(message.content[0].text)
 
 Opus 模型相当不错。我是说我可以非常清晰地理解它。
 
-![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](../Images/15bd04b3d93bc77056790592b011976d.png)
+![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](img/15bd04b3d93bc77056790592b011976d.png)
 
 # Claude 3 异步
 
@@ -179,7 +179,7 @@ async def main() -> None:
 await main()
 ```
 
-![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](../Images/42d5f10d98aba7b5bee21925429f59bf.png)
+![开始使用刚刚击败 GPT-4 和 Gemini 的 Claude 3 Opus](img/42d5f10d98aba7b5bee21925429f59bf.png)
 
 > **注意：** 如果你在 Jupyter Notebook 中使用 async，尝试使用 await main()，而不是 asyncio.run(main())
 
@@ -216,7 +216,7 @@ with completion as stream:
 
 如我们所见，我们生成响应的速度相当快。
 
-![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](../Images/7e119f1f7917447fe8d0844b12ee8fbb.png)
+![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](img/7e119f1f7917447fe8d0844b12ee8fbb.png)
 
 # Claude 3 流媒体与异步
 
@@ -247,7 +247,7 @@ async def main() -> None:
 await main()
 ```
 
-![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](../Images/8b8c68b465c4942b83c54ace5d9c9b92.png)
+![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](img/8b8c68b465c4942b83c54ace5d9c9b92.png)
 
 # Claude 3 视觉
 
@@ -255,7 +255,7 @@ Claude 3 视觉已经随着时间的推移有所改进，要获得响应，你�
 
 在这个示例中，我们将使用 [郁金香](https://www.pexels.com/photo/tulips-in-a-vase-against-a-green-background-20230232/)（图像 1）和 [火烈鸟](https://www.pexels.com/photo/flamingos-in-the-water-20255306/)（图像 2）来自 Pexel.com，通过提问关于图像的问题来生成响应。
 
-![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](../Images/d7a19b3cb2258a045c67974c6500d93d.png)
+![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](img/d7a19b3cb2258a045c67974c6500d93d.png)
 
 我们将使用 `httpx` 库从 pexel.com 获取两张图片并将其转换为 base64 编码。
 
@@ -308,7 +308,7 @@ Markdown(message.content[0].text)
 
 我们得到了关于郁金香的一首美丽诗歌。
 
-![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](../Images/d04ec008d2fdc28475af8ded03291d3b.png)
+![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](img/d04ec008d2fdc28475af8ded03291d3b.png)
 
 # Claude 3 视觉与多图像
 
@@ -359,7 +359,7 @@ Markdown(message.content[0].text)
 
 我们有一个关于郁金香和火烈鸟的短篇故事。
 
-![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](../Images/75159192948b3a25b4dad56e2f4b3598.png)
+![开始使用 Claude 3 Opus，这款刚刚击败了 GPT-4 和 Gemini 的模型](img/75159192948b3a25b4dad56e2f4b3598.png)
 
 如果你在运行代码时遇到问题，这里有一个 [Deepnote 工作区](https://deepnote.com/workspace/abid-5efa63e7-7029-4c3e-996f-40e8f1acba6f/project/Getting-Started-With-Claude-3-Opus-bbf9554c-e970-4aad-8235-b186020cae90/notebook/Notebook%201-4471da3c2e1548258df3124e607a0494)，你可以在这里查看并自行运行代码。
 

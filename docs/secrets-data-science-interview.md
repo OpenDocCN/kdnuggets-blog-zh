@@ -1,22 +1,22 @@
 # 成功数据科学面试的秘诀
 
-> 原文：[https://www.kdnuggets.com/2019/07/secrets-data-science-interview.html](https://www.kdnuggets.com/2019/07/secrets-data-science-interview.html)
+> 原文：[`www.kdnuggets.com/2019/07/secrets-data-science-interview.html`](https://www.kdnuggets.com/2019/07/secrets-data-science-interview.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Himanshu Jain](https://www.linkedin.com/in/himanshujain1992/)，数据科学家 / 机器学习工程师 & [Suresh Venkatasubramanian](https://www.linkedin.com/in/vsuresh74/)，首席数据科学家**
 
-![Header image](../Images/a47ea83dbc6da9c2d7c3ee626c92d1e6.png)
+![Header image](img/a47ea83dbc6da9c2d7c3ee626c92d1e6.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -66,7 +66,7 @@
 
 1.  Geoff Hinton 的神经网络课程来自 Coursera，可以更深入地理解概念。
 
-1.  一个全面的深度学习课程，涵盖编码器 [http://www.cse.iitm.ac.in/~miteshk/CS7015.html](http://www.cse.iitm.ac.in/~miteshk/CS7015.html)
+1.  一个全面的深度学习课程，涵盖编码器 [`www.cse.iitm.ac.in/~miteshk/CS7015.html`](http://www.cse.iitm.ac.in/~miteshk/CS7015.html)
 
 1.  从长远来看，你可以阅读由 Yoshua Bengio 和 Ian Goodfellow 编著的深度学习书籍。
 
@@ -74,7 +74,7 @@
 
 ### 工具经验
 
-公司优先考虑那些不仅能提出良好数据科学解决方案，还能有效使用正确工具实施解决方案的候选人。如果你能使自己熟悉行业中可用的工具，将会非常有利。你应该至少了解Python或R语言，了解用于机器学习算法的scikit-learn库，了解用于深度学习的Keras / TensorFlow / PyTorch / Caffe。不要忽视查询语言，例如HQL、SQL，以及分布式框架如Hadoop和Spark。好的组织都有这些技能的培训项目。被选中的候选人通常会参加这些培训课程。对上述工具的熟悉程度能为你的候选资格提供必要的优势。尽一切可能在被选中后接受培训。这将使你接触到组织解决的问题，并有机会与组织中的其他科学家互动。这些都是新加入者必须获得的重要经验。
+公司优先考虑那些不仅能提出良好数据科学解决方案，还能有效使用正确工具实施解决方案的候选人。如果你能使自己熟悉行业中可用的工具，将会非常有利。你应该至少了解 Python 或 R 语言，了解用于机器学习算法的 scikit-learn 库，了解用于深度学习的 Keras / TensorFlow / PyTorch / Caffe。不要忽视查询语言，例如 HQL、SQL，以及分布式框架如 Hadoop 和 Spark。好的组织都有这些技能的培训项目。被选中的候选人通常会参加这些培训课程。对上述工具的熟悉程度能为你的候选资格提供必要的优势。尽一切可能在被选中后接受培训。这将使你接触到组织解决的问题，并有机会与组织中的其他科学家互动。这些都是新加入者必须获得的重要经验。
 
 ### 模型的生产化和部署
 
@@ -90,7 +90,7 @@
 
 ### 为什么逆序链表仍然是个好主意？
 
-虽然数据结构和算法被外包到各种包中，但你从数据中做出推断的能力仍然受到你对算法和数据结构理解的帮助。虽然面试官不会要求你实现跳表或平衡k-d树，但他们仍然希望你理解算法的时间复杂度，熟悉基本的数据结构，如链表、栈、树、哈希表和堆，并对排序、最短路径、字符串处理等算法感到熟悉。换句话说，就是数据结构和算法的基本问题。你可能认为通过这种方式来评判你是不合适的，但记住，你正在让竞争变得更简单。我们相信你完全能够胜任。
+虽然数据结构和算法被外包到各种包中，但你从数据中做出推断的能力仍然受到你对算法和数据结构理解的帮助。虽然面试官不会要求你实现跳表或平衡 k-d 树，但他们仍然希望你理解算法的时间复杂度，熟悉基本的数据结构，如链表、栈、树、哈希表和堆，并对排序、最短路径、字符串处理等算法感到熟悉。换句话说，就是数据结构和算法的基本问题。你可能认为通过这种方式来评判你是不合适的，但记住，你正在让竞争变得更简单。我们相信你完全能够胜任。
 
 ### 了解公司
 
@@ -184,22 +184,22 @@
 
 **相关：**
 
-+   [破解数据科学家面试](./2019/01/cracking-data-scientist-interview.html)
++   破解数据科学家面试
 
-+   [职业转型到数据科学的逐步指南 – 第1部分](./2019/05/guide-transitioning-career-data-science-part-1.html)
++   职业转型到数据科学的逐步指南 – 第一部分
 
-+   [机器学习工程职位是什么样的](./2019/07/machine-learning-engineering-job.html)
++   机器学习工程职位是什么样的
 
 ### 更多相关话题
 
 +   [解锁选择完美机器学习算法的秘密！](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)
 
-+   [与Andrej Karpathy一起在60分钟内解锁LLMs的秘密](https://www.kdnuggets.com/unlock-the-secrets-of-llms-in-a-60-minute-with-andrej-karpathy)
++   [与 Andrej Karpathy 一起在 60 分钟内解锁 LLMs 的秘密](https://www.kdnuggets.com/unlock-the-secrets-of-llms-in-a-60-minute-with-andrej-karpathy)
 
-+   [如何在2022年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
++   [如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [数据质量在成功的机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)

@@ -1,10 +1,10 @@
 # 数据科学中的六个常见错误及如何避免
 
-> 原文：[https://www.kdnuggets.com/2020/09/6-common-data-science-mistakes.html](https://www.kdnuggets.com/2020/09/6-common-data-science-mistakes.html)
+> 原文：[`www.kdnuggets.com/2020/09/6-common-data-science-mistakes.html`](https://www.kdnuggets.com/2020/09/6-common-data-science-mistakes.html)
 
-[评论](#comments)
+评论
 
-![](../Images/97882db692355f38fadc7052f944aab0.png)
+![](img/97882db692355f38fadc7052f944aab0.png)
 
 *照片由 [chuttersnap](https://unsplash.com/@chuttersnap?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral) 提供。*
 
@@ -38,7 +38,7 @@
 
 欲了解更多信息，请参阅以下文章：[数据总是不完美的。](https://medium.com/towards-artificial-intelligence/data-is-always-imperfect-8611d667dd10)
 
-根据我个人在工业数据科学项目中的经验，我的团队花了3个月的时间与系统工程师、电气工程师、机械工程师、现场工程师和技术员合作，才理解现有的数据集以及如何利用这些数据提出正确的问题。确保数据无误且质量高将有助于提高模型的准确性和可靠性。
+根据我个人在工业数据科学项目中的经验，我的团队花了 3 个月的时间与系统工程师、电气工程师、机械工程师、现场工程师和技术员合作，才理解现有的数据集以及如何利用这些数据提出正确的问题。确保数据无误且质量高将有助于提高模型的准确性和可靠性。
 
 1.  **不要专注于使用整个数据集**
 
@@ -62,7 +62,7 @@
 
 1.  **在使用数据进行模型构建之前对数据进行缩放**
 
-缩放你的特征将有助于提高模型的质量和预测能力。例如，假设你希望建立一个模型来预测目标变量*信用度*，基于预测变量如*收入*和*信用评分*。由于信用评分的范围从0到850，而年收入的范围可能从25,000美元到500,000美元，如果不对特征进行缩放，模型将会偏向于*收入*特征。这意味着与*收入*参数相关的权重因子将非常小，这将导致预测模型仅仅基于*收入*参数来预测*信用度*。
+缩放你的特征将有助于提高模型的质量和预测能力。例如，假设你希望建立一个模型来预测目标变量*信用度*，基于预测变量如*收入*和*信用评分*。由于信用评分的范围从 0 到 850，而年收入的范围可能从 25,000 美元到 500,000 美元，如果不对特征进行缩放，模型将会偏向于*收入*特征。这意味着与*收入*参数相关的权重因子将非常小，这将导致预测模型仅仅基于*收入*参数来预测*信用度*。
 
 为了将特征缩放到相同的尺度，我们可以选择对特征进行标准化或归一化。通常情况下，我们假设数据呈正态分布，并默认使用标准化，但这并非总是如此。在决定使用标准化还是归一化之前，重要的是先查看特征的统计分布。如果特征趋向于均匀分布，则可以使用归一化（*MinMaxScaler*）。如果特征大致呈高斯分布，则可以使用标准化（*StandardScaler*）。再次注意，无论你使用归一化还是标准化，这些方法都是近似的，并且会对模型的总体误差产生影响。
 
@@ -70,9 +70,9 @@
 
 在模型中使用错误的超参数值可能导致模型非最优且质量较低。重要的是你需要对所有超参数进行训练，以确定性能最佳的模型。模型的预测能力如何依赖于超参数的一个很好的示例可以在下面的图中找到（来源：[差劲与优秀的回归分析](https://medium.com/towards-artificial-intelligence/bad-and-good-regression-analysis-700ca9b506ff)）。
 
-![](../Images/87bb2bae300c321cf46483dfefaa6cd2.png)
+![](img/87bb2bae300c321cf46483dfefaa6cd2.png)
 
-**图 1**。使用不同学习率参数进行回归分析。来源：[差劲与优秀的回归分析](https://medium.com/towards-artificial-intelligence/bad-and-good-regression-analysis-700ca9b506ff)，发布于 Towards AI，2019年2月，由 Benjamin O. Tayo 编写。
+**图 1**。使用不同学习率参数进行回归分析。来源：[差劲与优秀的回归分析](https://medium.com/towards-artificial-intelligence/bad-and-good-regression-analysis-700ca9b506ff)，发布于 Towards AI，2019 年 2 月，由 Benjamin O. Tayo 编写。
 
 请记住，使用默认超参数并不总能得到最佳模型。有关超参数的更多信息，请参见本文：[机器学习中的模型参数和超参数 — 有什么区别](https://towardsdatascience.com/model-parameters-and-hyperparameters-in-machine-learning-what-is-the-difference-702d30970f6)。
 
@@ -100,7 +100,7 @@
 
 有关比较不同算法的更多信息，请参阅以下文章：
 
-+   [线性回归与KNN回归的比较研究](https://medium.com/towards-artificial-intelligence/a-comparative-study-of-linear-and-knn-regression-a31955e6263d)
++   [线性回归与 KNN 回归的比较研究](https://medium.com/towards-artificial-intelligence/a-comparative-study-of-linear-and-knn-regression-a31955e6263d)
 
 +   [机器学习过程教程](https://medium.com/swlh/machine-learning-process-tutorial-222327f53efb)
 

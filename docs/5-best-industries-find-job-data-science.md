@@ -1,26 +1,26 @@
-# 数据科学领域的5个最佳行业
+# 数据科学领域的 5 个最佳行业
 
-> 原文：[https://www.kdnuggets.com/2017/10/5-best-industries-find-job-data-science.html](https://www.kdnuggets.com/2017/10/5-best-industries-find-job-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/10/5-best-industries-find-job-data-science.html`](https://www.kdnuggets.com/2017/10/5-best-industries-find-job-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![数据科学家](../Images/933689ede06e029232123c77f868de8b.png)
+![数据科学家](img/933689ede06e029232123c77f868de8b.png)
 
-数据驱动着我们现在做的一切。这也意味着我们如何积累、传播、研究、存储和利用数据是最重要的工作之一。这也许就是为什么数据科学如此繁荣的原因——这个行业[预计到2025年将达到160亿美元的市场价值](http://economictimes.indiatimes.com/tech/ites/big-data-analytics-to-become-16-billion-industry-by-2025/articleshow/59410695.cms)。
+数据驱动着我们现在做的一切。这也意味着我们如何积累、传播、研究、存储和利用数据是最重要的工作之一。这也许就是为什么数据科学如此繁荣的原因——这个行业[预计到 2025 年将达到 160 亿美元的市场价值](http://economictimes.indiatimes.com/tech/ites/big-data-analytics-to-become-16-billion-industry-by-2025/articleshow/59410695.cms)。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-现在追求这一领域的职业生涯从未如此有利。作为数据科学家，你将获得的技能非常宝贵，你可能会在像IBM、可口可乐、福特汽车和优步这样多样化的公司工作，也有可能参与无数旨在建设更好世界的公益和非营利事业。
+现在追求这一领域的职业生涯从未如此有利。作为数据科学家，你将获得的技能非常宝贵，你可能会在像 IBM、可口可乐、福特汽车和优步这样多样化的公司工作，也有可能参与无数旨在建设更好世界的公益和非营利事业。
 
 关键在于，世界是复杂的，而数据帮助我们理解它。考虑到这一点，这里有五个极具实践性和激动人心的领域，你可以通过数据科学教育在其中留下你的印记。
 
@@ -36,7 +36,7 @@
 
 一些能源来源比其他能源更加现代化。但是，与为世界供电的所有行业相关的行业都依赖于数据 - 大量数据。无论我们正在探索从地球中提取能源和矿产财富的新方法，构思更新、更安全的原油储存和运输方式，还是在做负责任的事情并建造更好、更便宜的太阳能电池板，能源部门对数据科学家有着很高的需求。
 
-正是最后一项行业 - 太阳能行业 - 吸引了很多人追求与能源相关的数据丰富职业。由太阳能和风能场提供的清洁能源生产，显然是未来的发展方向，这一点可以从大多数北欧国家的成功看出，这些国家普遍[制定了100%可持续能源目标](https://phys.org/news/2017-01-nordic-countries-energy-transition-worth.html)。
+正是最后一项行业 - 太阳能行业 - 吸引了很多人追求与能源相关的数据丰富职业。由太阳能和风能场提供的清洁能源生产，显然是未来的发展方向，这一点可以从大多数北欧国家的成功看出，这些国家普遍[制定了 100%可持续能源目标](https://phys.org/news/2017-01-nordic-countries-energy-transition-worth.html)。
 
 就像开发油田需要研究大量的数据一样，安装和改进清洁能源生产设施也需要关于自然环境和现代建设需求的数据。数据科学家也经常被要求提高安全性和[帮助企业遵守新的安全和环境法规](http://www.mastersindatascience.org/industry/energy/)。
 
@@ -62,15 +62,15 @@
 
 数据科学是当今一个令人兴奋且重要的领域，随着技术和全球化的发展，它只会变得更加重要。如果你对模式、数字和分析有头脑，这个领域可能非常适合你。
 
-**个人简介：[Kayla Matthews](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《数据中心杂志》和《VentureBeat》等刊物上讨论技术和大数据，并已经写作超过五年。阅读更多Kayla的文章，[**订阅她的博客 Productivity Bytes**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
+**个人简介：[Kayla Matthews](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《数据中心杂志》和《VentureBeat》等刊物上讨论技术和大数据，并已经写作超过五年。阅读更多 Kayla 的文章，[**订阅她的博客 Productivity Bytes**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
 
 **相关：**
 
-+   [如何成为数据科学家：权威指南](/2017/08/become-data-scientist-definitive-guide.html)
++   如何成为数据科学家：权威指南
 
-+   [Python突然变得非常流行的6个原因](/2017/07/6-reasons-python-suddenly-super-popular.html)
++   Python 突然变得非常流行的 6 个原因
 
-+   [机器学习和机器人技术正在改变的4个行业](/2017/08/4-industries-transformed-machine-learning-robotics.html)
++   机器学习和机器人技术正在改变的 4 个行业
 
 ### 此主题还有更多相关文章
 
@@ -78,7 +78,7 @@
 
 +   [如何找到最佳的数据科学远程工作](https://www.kdnuggets.com/2022/12/find-best-data-science-remote-jobs.html)
 
-+   [2022年招聘数据科学家的顶级行业和雇主](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
++   [2022 年招聘数据科学家的顶级行业和雇主](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
 
 +   [人工智能如何改革传统行业？](https://www.kdnuggets.com/how-ai-is-revolutionizing-the-legacy-industries)
 

@@ -1,6 +1,6 @@
 # Bard 数据科学备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html](https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html`](https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html)
 
 # 全部都是 A-Bard！
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,13 +24,13 @@ Bard 具有与 ChatGPT 和过去 6 个月出现的其他知名 LLM 相似的能�
 
 [](https://www.kdnuggets.com/publications/sheets/Bard_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
-[![Bard 数据科学备忘单](../Images/94d0eaf25936c400fc3c6e17439b0d12.png)](https://www.kdnuggets.com/publications/sheets/Bard_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
+![Bard 数据科学备忘单](https://www.kdnuggets.com/publications/sheets/Bard_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
 KDnuggets 的 Bard 数据科学备忘单（点击图片下载 PDF）
 
 说实话：Bard 在 LLM 革命的使用领域中，确实是在赶超 ChatGPT……但又怎么样呢？OpenAI 是最早出现的，并享受了早期进入的优势。这种优势会持续吗？而且，相对的背书分布并不等同于质量（Beta 与 VHS，大家还记得吗？）。
 
-![Bard 与 ChatGPT 的全球 Google 趋势搜索对比（数据截取于 2023 年 5 月 29 日）](../Images/01c0e0f99934bc712ea96167763efbde.png)
+![Bard 与 ChatGPT 的全球 Google 趋势搜索对比（数据截取于 2023 年 5 月 29 日）](img/01c0e0f99934bc712ea96167763efbde.png)
 
 Bard 与 ChatGPT 的全球 Google 趋势搜索对比，数据截取于 2023 年 5 月 29 日
 

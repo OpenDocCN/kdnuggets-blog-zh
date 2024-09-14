@@ -1,10 +1,10 @@
 # 深度学习用于从 X 光图像中检测肺炎
 
-> 原文：[https://www.kdnuggets.com/2020/06/deep-learning-detecting-pneumonia-x-ray-images.html](https://www.kdnuggets.com/2020/06/deep-learning-detecting-pneumonia-x-ray-images.html)
+> 原文：[`www.kdnuggets.com/2020/06/deep-learning-detecting-pneumonia-x-ray-images.html`](https://www.kdnuggets.com/2020/06/deep-learning-detecting-pneumonia-x-ray-images.html)
 
-[评论](#comments)
+评论
 
-![](../Images/d49fa976c57ed7289c4b1189f37487d1.png)
+![](img/d49fa976c57ed7289c4b1189f37487d1.png)
 
 肺炎的风险对许多人来说非常巨大，尤其是在发展中国家，数十亿人面临能源贫困，依赖污染的能源形式。世卫组织估计，每年因家庭空气污染相关疾病（包括肺炎）导致超过 400 万人过早死亡。每年有超过 1.5 亿人感染肺炎，尤其是 5 岁以下的儿童。在这些地区，由于医疗资源和人员的匮乏，问题可能会进一步加剧。例如，在非洲的 57 个国家中，医生和护士的缺口达到 230 万。对这些人群而言，准确和快速的诊断至关重要。它可以保证及时获得治疗，并为那些已经陷入贫困的人节省宝贵的时间和金钱。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 建立一个算法，通过查看胸部 X 光图像自动识别患者是否患有肺炎。这个算法必须非常准确，因为人的生命攸关。
 
-![](../Images/4b67cf92ea0fd4391f7604b225aa87a9.png)
+![](img/4b67cf92ea0fd4391f7604b225aa87a9.png)
 
 ### 环境和工具
 
@@ -52,7 +52,7 @@
 
 接下来，我展示了一些正常和肺炎的图像，以观察它们在肉眼下的差异。其实差别不大！
 
-![图示](../Images/8b91a2bc39b67e7f27bac236ed565b8a.png)
+![图示](img/8b91a2bc39b67e7f27bac236ed565b8a.png)
 
 示例图像
 
@@ -64,21 +64,21 @@
 
 然后我定义了一对数据生成器：一个用于训练数据，另一个用于验证数据。数据生成器能够从源文件夹直接加载所需数量的数据（一个小批量的图像），将它们转换为*训练数据*（提供给模型）和*训练目标*（一个属性向量——监督信号）。
 
-> *在我的实验中，我通常设置*`*batch_size = 64*`*。一般来说，32到128之间的值应该效果不错。通常你应该根据计算资源和模型性能来增加/减少批量大小。*
+> *在我的实验中，我通常设置*`*batch_size = 64*`*。一般来说，32 到 128 之间的值应该效果不错。通常你应该根据计算资源和模型性能来增加/减少批量大小。*
 
 之后我定义了一些常量以备后续使用。
 
-下一步是构建模型。可以通过以下5个步骤来描述。
+下一步是构建模型。可以通过以下 5 个步骤来描述。
 
 1.  我使用了五个卷积块，包括卷积层、最大池化层和批量归一化层。
 
 1.  在此基础上，我使用了一个扁平化层，并紧接着用了四个全连接层。
 
-1.  同时，我还使用了dropout来减少过拟合。
+1.  同时，我还使用了 dropout 来减少过拟合。
 
-1.  除了最后一层使用Sigmoid之外，整个过程中激活函数都是Relu，因为这是一个二分类问题。
+1.  除了最后一层使用 Sigmoid 之外，整个过程中激活函数都是 Relu，因为这是一个二分类问题。
 
-1.  我使用了Adam作为优化器，并用交叉熵作为损失函数。
+1.  我使用了 Adam 作为优化器，并用交叉熵作为损失函数。
 
 在训练模型之前，定义一个或多个回调函数是很有用的。其中比较实用的有：`ModelCheckpoint`和`EarlyStopping`。
 
@@ -86,11 +86,11 @@
 
 +   **EarlyStopping**：有时，在训练过程中我们会注意到泛化误差（即训练误差和验证误差之间的差异）开始增加，而不是减少。这是过拟合的一个症状，可以通过多种方式解决（*减少模型容量*、*增加训练数据*、*数据增强*、*正则化*、*dropout*等）。通常，一个实用且有效的解决方案是当泛化误差变得更糟时停止训练。
 
-![图像](../Images/a2178b2ca7950ac3ba5d484af1f8b9e7.png)
+![图像](img/a2178b2ca7950ac3ba5d484af1f8b9e7.png)
 
 提前停止
 
-接下来，我用32的批量大小训练了模型10个轮次。请注意，通常更高的批量大小会带来更好的结果，但代价是更高的计算负担。有研究还表明，最佳结果的批量大小是一个最佳值，可以通过投入一些时间进行超参数调优来找到。
+接下来，我用 32 的批量大小训练了模型 10 个轮次。请注意，通常更高的批量大小会带来更好的结果，但代价是更高的计算负担。有研究还表明，最佳结果的批量大小是一个最佳值，可以通过投入一些时间进行超参数调优来找到。
 
 ```py
 Epoch 1/10
@@ -125,13 +125,13 @@ Epoch 10/10
 
 让我们可视化损失和准确率的图表。
 
-![图像](../Images/f3250e6fe03f526a861d5e9524353ed2.png)
+![图像](img/f3250e6fe03f526a861d5e9524353ed2.png)
 
 **准确率与轮次 | 损失与轮次**
 
 到目前为止一切顺利。模型正在收敛，从损失和验证损失随着训练周期的减少可以观察到。此外，它能够在仅 10 个训练周期内达到 90% 的验证准确率。
 
-让我们绘制混淆矩阵，并获取一些其他结果，如精准度、召回率、F1分数和准确率。
+让我们绘制混淆矩阵，并获取一些其他结果，如精准度、召回率、F1 分数和准确率。
 
 ```py
 CONFUSION MATRIX ------------------
@@ -198,11 +198,11 @@ Kaggle 竞赛的示例笔记本。显微镜图像的自动分割在医学领域�
 
 **相关：**
 
-+   [用于乳腺癌分类的卷积神经网络](/2019/10/convolutional-neural-network-breast-cancer-classification.html)
++   用于乳腺癌分类的卷积神经网络
 
-+   [医疗保健中的AI和机器学习](/2020/05/ai-machine-learning-healthcare.html)
++   医疗保健中的 AI 和机器学习
 
-+   [AI如何帮助管理传染病](/2020/04/ai-manage-infectious-diseases.html)
++   AI 如何帮助管理传染病
 
 ### 更多相关主题
 
@@ -210,10 +210,10 @@ Kaggle 竞赛的示例笔记本。显微镜图像的自动分割在医学领域�
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [分析一个90亿美元的AI失败](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [分析一个 90 亿美元的 AI 失败](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三种R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三种 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

@@ -1,12 +1,12 @@
 # 深度学习与 NLP：使用 Keras 创建聊天机器人！
 
-> 原文：[https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html](https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
+> 原文：[`www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html`](https://www.kdnuggets.com/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)，马德里理工大学**
 
-![Figure](../Images/466171708fa0abb0c85f38ffa04addb0.png)
+![Figure](img/466171708fa0abb0c85f38ffa04addb0.png)
 
 在上一篇文章中，我们了解了**人工神经网络和深度学习**是什么。还介绍了一些用于处理序列数据（如文本或音频）的神经网络结构。如果你还没有阅读那篇文章，你应该放松一下，拿杯咖啡，慢慢享受它。**它可以在**[**这里**](https://towardsdatascience.com/deep-learning-for-nlp-anns-rnns-and-lstms-explained-95866c1db2e4?source=friends_link&sk=3f07244ea80a8ceaf23ee8a4e8a4beea)**找到**。
 
@@ -24,7 +24,7 @@ Keras 是一个**开源的高级库**，用于开发神经网络模型。它由 
 
 基本上，Keras 实际上只是一个可以运行在不同深度学习框架之上的接口，比如**CNTK、Tensorflow 或 Theano**。无论使用哪个后端，它的工作方式都是一样的。
 
-![](../Images/216ff5898cd42996150f992a83cd0b75.png)
+![](img/216ff5898cd42996150f992a83cd0b75.png)
 
 Keras API 的分层结构。如图所示，它可以无缝运行在不同的框架之上。
 
@@ -78,31 +78,31 @@ model.compile(optimizer='rmsprop',loss='mse')
 
 ### 模型：灵感
 
-如前所述，本篇文章中使用的RNN来源于论文[“*End to End Memory Networks*”](https://arxiv.org/pdf/1503.08895.pdf)，因此建议你在继续之前先查看一下，尽管我会在接下来的内容中解释最相关的部分。
+如前所述，本篇文章中使用的 RNN 来源于论文[“*End to End Memory Networks*”](https://arxiv.org/pdf/1503.08895.pdf)，因此建议你在继续之前先查看一下，尽管我会在接下来的内容中解释最相关的部分。
 
-本文实现了一个类似RNN的结构，使用**注意力模型**来弥补我们在前一篇文章中讨论的RNN的长期记忆问题。
+本文实现了一个类似 RNN 的结构，使用**注意力模型**来弥补我们在前一篇文章中讨论的 RNN 的长期记忆问题。
 
-不知道什么是注意力模型？**不用担心**，我会用简单的术语来解释。注意力模型引起了很多关注，因为它们在**机器翻译**等任务中取得了很好的结果。它们解决了之前提到的**长序列**和RNN的短期记忆问题。
+不知道什么是注意力模型？**不用担心**，我会用简单的术语来解释。注意力模型引起了很多关注，因为它们在**机器翻译**等任务中取得了很好的结果。它们解决了之前提到的**长序列**和 RNN 的短期记忆问题。
 
 为了获取**注意力的直观理解**，想象一下一个**人类如何翻译**一个长句子从一种语言到另一种语言。**而不是**一次性翻译**整句话**，你会将句子拆分成更小的部分，然后逐一翻译这些小块。我们逐部分处理句子，因为**一次性记住整个句子真的很困难**。
 
-![图](../Images/488803d9ccddb53671a3a9824af3406a.png)
+![图](img/488803d9ccddb53671a3a9824af3406a.png)
 
 人类如何将上面的文本从英语翻译成西班牙语
 
 注意力机制正是实现了这一点。在每个时间步，t**模型会在输出中对输入句子中与任务相关性更高的部分赋予更大的权重**。这就是名字的由来：**它*关注*重要的部分**。上面的例子很好的说明了这一点；为了翻译句子的第一部分，查看整个句子或最后一部分几乎没有意义。
 
-下图展示了**RNN与Attention模型在输入句子长度增加时的表现**。当面对一个非常长的句子并要求执行特定任务时，RNN在处理完所有句子后可能已经忘记了最初的输入。
+下图展示了**RNN 与 Attention 模型在输入句子长度增加时的表现**。当面对一个非常长的句子并要求执行特定任务时，RNN 在处理完所有句子后可能已经忘记了最初的输入。
 
-![图](../Images/c75d59aeca6037776c61928c03b776f4.png)
+![图](img/c75d59aeca6037776c61928c03b776f4.png)
 
-RNN和注意力模型的性能与句子长度的关系。
+RNN 和注意力模型的性能与句子长度的关系。
 
 好了，现在我们知道什么是注意力模型了，我们来详细看看我们将使用的模型结构。这个模型接收**输入 *xi***（一个句子），一个**查询 *q***关于这个句子的，并输出一个是/否的**答案** *a*。
 
-![图](../Images/23e823c3de7f5094234cd219bf9a515e.png)
+![图](img/23e823c3de7f5094234cd219bf9a515e.png)
 
-左侧（a）是模型单层的表示。右侧（b）是堆叠在一起的3层。
+左侧（a）是模型单层的表示。右侧（b）是堆叠在一起的 3 层。
 
 在之前图像的左侧部分，我们可以看到**该模型的单层表示**。每个句子计算两个不同的嵌入，***A*** 和 ***C***。同时，查询或问题 q 也被嵌入，使用 ***B*** 嵌入。
 
@@ -199,7 +199,7 @@ input_encoder_m.add(Dropout(0.3))#Outputs: (Samples, story_maxlen,embedding_dim)
 
 上面的代码是论文中完成的一个嵌入（A 嵌入）的示例。像往常一样，在**Keras**中，我们首先定义模型（Sequential），然后添加嵌入层和一个丢弃层，通过触发网络节点的关闭来减少模型过拟合的机会。
 
-一旦我们创建了输入句子的两个嵌入和问题的嵌入，我们可以开始定义模型中发生的操作。如前所述，我们通过计算问题的嵌入和故事嵌入之间的**点积**来计算注意力，然后进行softmax。下面的代码块展示了如何实现这一点：
+一旦我们创建了输入句子的两个嵌入和问题的嵌入，我们可以开始定义模型中发生的操作。如前所述，我们通过计算问题的嵌入和故事嵌入之间的**点积**来计算注意力，然后进行 softmax。下面的代码块展示了如何实现这一点：
 
 ```py
 match = dot([input_encoded_m,question_encoded], axes = (2,2))
@@ -214,7 +214,7 @@ response = Permute((2,1))(response)
 answer = concatenate([response, question_encoded])
 ```
 
-最后，完成这一过程后，我们将添加模型的其余层，包括一个**LSTM**层（而不是像论文中提到的RNN）、一个丢弃层和一个最终的softmax来计算输出。
+最后，完成这一过程后，我们将添加模型的其余层，包括一个**LSTM**层（而不是像论文中提到的 RNN）、一个丢弃层和一个最终的 softmax 来计算输出。
 
 ```py
 answer = LSTM(32)(answer)
@@ -238,9 +238,9 @@ model.compile(optimizer='rmsprop', loss = 'categorical_crossentropy', metrics = 
 
 使用这两行代码我们**构建最终模型**并编译它，也就是通过指定一个**优化器**、一个**损失函数**和一个**度量标准**来定义后台的所有数学运算。
 
-现在是**训练模型的时候**，在这里我们需要定义**训练的输入**（即输入故事、问题和答案）、**批量大小**（即一次输入的数量）和**训练轮数**（即模型将通过训练数据的次数以更新权重）。我使用了1000轮训练，并获得了98%的准确率，但即使使用100到200轮，你也应该能获得相当不错的结果。
+现在是**训练模型的时候**，在这里我们需要定义**训练的输入**（即输入故事、问题和答案）、**批量大小**（即一次输入的数量）和**训练轮数**（即模型将通过训练数据的次数以更新权重）。我使用了 1000 轮训练，并获得了 98%的准确率，但即使使用 100 到 200 轮，你也应该能获得相当不错的结果。
 
-请注意，根据你的硬件，这个训练可能需要一段时间。放轻松，坐下来，**继续阅读Medium**，等到训练完成。
+请注意，根据你的硬件，这个训练可能需要一段时间。放轻松，坐下来，**继续阅读 Medium**，等到训练完成。
 
 训练完成后，你可能会想*“每次使用模型时我都需要等待这么久吗？”* 明显的答案是，***不***。Keras 允许开发者**保存特定的模型**，包括权重和所有配置。下面的代码块展示了如何实现这一点。
 
@@ -265,7 +265,7 @@ model.load_weights('medium_chatbot_1000_epochs.h5')
 pred_results = model.predict(([inputs_test,questions_test]))
 ```
 
-这些结果是**一个数组**，如前所述，包含每个词汇位置的概率，表示每个词是问题答案的概率。如果我们查看这个数组的第一个元素，我们会看到一个词汇表大小的向量，其中所有的值接近0，除了对应于**yes或no**的值。
+这些结果是**一个数组**，如前所述，包含每个词汇位置的概率，表示每个词是问题答案的概率。如果我们查看这个数组的第一个元素，我们会看到一个词汇表大小的向量，其中所有的值接近 0，除了对应于**yes 或 no**的值。
 
 从这些中，如果我们选择**数组中最大值的索引**，然后查看它对应的单词，我们应该**找出答案**是肯定的还是否定的。
 
@@ -303,13 +303,13 @@ my_question.split()
 
 [初学者的注意力机制和记忆网络指南](https://skymind.ai/wiki/attention-mechanism-memory-network)
 
-[Andrew的Ng关于注意力模型的直观视频。](https://www.youtube.com/watch?v=SysgYptB198&t=486s)
+[Andrew 的 Ng 关于注意力模型的直观视频。](https://www.youtube.com/watch?v=SysgYptB198&t=486s)
 
-[初学者的Tf-Idf和词袋指南](https://skymind.ai/wiki/bagofwords-tf-idf)。
+[初学者的 Tf-Idf 和词袋指南](https://skymind.ai/wiki/bagofwords-tf-idf)。
 
-[Keras构建同一模型的指南。](https://keras.io/examples/babi_memnn/)
+[Keras 构建同一模型的指南。](https://keras.io/examples/babi_memnn/)
 
-随时可以在[LinkedIn](https://www.linkedin.com/in/jaime-zornoza/)上与我联系，或在Twitter上关注我@jaimezorno。同时，你也可以查看我在数据科学和机器学习方面的其他文章[这里](https://medium.com/@jaimezornoza)。**阅读愉快！**
+随时可以在[LinkedIn](https://www.linkedin.com/in/jaime-zornoza/)上与我联系，或在 Twitter 上关注我@jaimezorno。同时，你也可以查看我在数据科学和机器学习方面的其他文章[这里](https://medium.com/@jaimezornoza)。**阅读愉快！**
 
 **简介：[Jaime Zornoza](https://www.linkedin.com/in/jaime-zornoza/)** 是一位工业工程师，拥有电子学学士学位和计算机科学硕士学位。
 
@@ -317,21 +317,21 @@ my_question.split()
 
 **相关：**
 
-+   [深度学习 NLP：ANNs、RNNs 和 LSTMs 解释！](/2019/08/deep-learning-nlp-explained.html)
++   深度学习 NLP：ANNs、RNNs 和 LSTMs 解释！
 
-+   [训练神经网络以模仿洛夫克拉夫特风格写作](/2019/07/training-neural-network-write-like-lovecraft.html)
++   训练神经网络以模仿洛夫克拉夫特风格写作
 
-+   [适配器：一种紧凑且可扩展的 NLP 转移学习方法](/2019/07/adapters-compact-extensible-transfer-learning-method-nlp.html)
++   适配器：一种紧凑且可扩展的 NLP 转移学习方法
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -341,9 +341,9 @@ my_question.split()
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的 AI 失败，深入探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，深入探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 

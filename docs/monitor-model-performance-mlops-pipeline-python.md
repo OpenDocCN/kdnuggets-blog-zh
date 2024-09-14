@@ -1,30 +1,30 @@
-# 在MLOps管道中使用Python监控模型性能
+# 在 MLOps 管道中使用 Python 监控模型性能
 
-> 原文：[https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)
+> 原文：[`www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html`](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)
 
-![在MLOps管道中使用Python监控模型性能](../Images/c45e64265ef9f59c378eddc4e66498df.png)
+![在 MLOps 管道中使用 Python 监控模型性能](img/c45e64265ef9f59c378eddc4e66498df.png)
 
 图片来源于 [rawpixel.com](https://www.freepik.com/free-photo/girl-coding-interactive-screen_13307587.htm#query=machine%20learning&from_query=mlops&position=2&from_view=search&track=sph) 在 [Freepik](https://www.freepik.com/)
 
-机器学习模型只有在生产中用于解决业务问题时才有用。然而，业务问题和机器学习模型在不断发展。这就是为什么我们需要维护机器学习，以便性能能够跟上业务KPI。这就是MLOps概念的来源。
+机器学习模型只有在生产中用于解决业务问题时才有用。然而，业务问题和机器学习模型在不断发展。这就是为什么我们需要维护机器学习，以便性能能够跟上业务 KPI。这就是 MLOps 概念的来源。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-MLOps，或机器学习运维，是用于生产环境中机器学习的一系列技术和工具。从机器学习的自动化、版本控制、交付到监控都是MLOps处理的内容。本文将重点介绍监控以及如何使用Python包来设置生产环境中的模型性能监控。让我们深入了解一下。
+MLOps，或机器学习运维，是用于生产环境中机器学习的一系列技术和工具。从机器学习的自动化、版本控制、交付到监控都是 MLOps 处理的内容。本文将重点介绍监控以及如何使用 Python 包来设置生产环境中的模型性能监控。让我们深入了解一下。
 
 # 监控模型性能
 
-当我们谈论MLOps中的监控时，它可能指很多方面，因为MLOps的原则之一就是监控。例如：
+当我们谈论 MLOps 中的监控时，它可能指很多方面，因为 MLOps 的原则之一就是监控。例如：
 
 - 监控数据分布随时间的变化
 
@@ -36,9 +36,9 @@ MLOps，或机器学习运维，是用于生产环境中机器学习的一系列
 
 - 监控系统的陈旧性
 
-在MLOps中仍有许多元素需要监控，但在本文中，我们将重点关注监控模型性能。模型性能，在我们的案例中，指的是模型从未见过的数据中进行可靠预测的能力，通过特定的指标如准确率、精确率、召回率等来衡量。
+在 MLOps 中仍有许多元素需要监控，但在本文中，我们将重点关注监控模型性能。模型性能，在我们的案例中，指的是模型从未见过的数据中进行可靠预测的能力，通过特定的指标如准确率、精确率、召回率等来衡量。
 
-为什么我们需要监控模型性能？是为了保持模型预测的可靠性，以解决业务问题。在生产之前，我们通常会计算模型的性能及其对KPI的影响；例如，基准是70%的准确率，如果我们希望模型仍然符合业务需求，低于这个值就是不可接受的。这就是为什么监控性能可以使模型始终满足业务需求。
+为什么我们需要监控模型性能？是为了保持模型预测的可靠性，以解决业务问题。在生产之前，我们通常会计算模型的性能及其对 KPI 的影响；例如，基准是 70%的准确率，如果我们希望模型仍然符合业务需求，低于这个值就是不可接受的。这就是为什么监控性能可以使模型始终满足业务需求。
 
 使用 Python，我们将学习如何进行模型监控。让我们从安装包开始。虽然有许多模型监控的选择，但在这个示例中，我们将使用名为 [evidently](https://docs.evidentlyai.com/) 的开源监控包。
 
@@ -126,11 +126,11 @@ data_drift_report.run(current_data=val, reference_data=data, column_mapping=None
 data_drift_report.show(mode='inline')
 ```
 
-![使用 Python 监控 MLOps 流水线中的模型性能](../Images/c3d7dcebabead70913ce16ac29d29e40.png)
+![使用 Python 监控 MLOps 流水线中的模型性能](img/c3d7dcebabead70913ce16ac29d29e40.png)
 
 **evidently** 包会自动显示数据集发生了什么情况的报告。报告信息包括数据集漂移和列漂移。在上述示例中，我们没有数据集漂移的发生，但有两个列发生了漂移。
 
-![使用 Python 监控 MLOps 流水线中的模型性能](../Images/d76b0e29afa4bd8595f1aeba97aca230.png)
+![使用 Python 监控 MLOps 流水线中的模型性能](img/d76b0e29afa4bd8595f1aeba97aca230.png)
 
 报告显示‘property_claim’和‘timestamp’列确实检测到了漂移。这些信息可以在 MLOps 流水线中用于重新训练模型，或者我们仍需进一步的数据探索。
 
@@ -170,15 +170,15 @@ classification_performance_report.run(reference_data=data, current_data=val)
 classification_performance_report.show(mode='inline')
 ```
 
-![使用 Python 监控 MLOps 流水线中的模型性能](../Images/ee6313a5cadb8d52e7ffa771987a9c3d.png)
+![使用 Python 监控 MLOps 流水线中的模型性能](img/ee6313a5cadb8d52e7ffa771987a9c3d.png)
 
-结果显示，我们当前模型的质量指标低于参考值（由于我们使用了训练数据作为参考，因此这是预期的）。根据业务需求，上述指标可以成为我们需要采取的下一步的指示。让我们查看从evidently报告中获得的其他信息。![使用Python监控MLOps管道中的模型性能](../Images/5966c68fa602c9eacf831cdb98eb0873.png)
+结果显示，我们当前模型的质量指标低于参考值（由于我们使用了训练数据作为参考，因此这是预期的）。根据业务需求，上述指标可以成为我们需要采取的下一步的指示。让我们查看从 evidently 报告中获得的其他信息。![使用 Python 监控 MLOps 管道中的模型性能](img/5966c68fa602c9eacf831cdb98eb0873.png)
 
-类别表示报告显示了实际的类别分布。![使用Python监控MLOps管道中的模型性能](../Images/8a236668802bf968ba1f256b57a2a4ff.png)
+类别表示报告显示了实际的类别分布。![使用 Python 监控 MLOps 管道中的模型性能](img/8a236668802bf968ba1f256b57a2a4ff.png)
 
 混淆矩阵展示了预测值与实际数据在参考数据集和当前数据集中的对比。
 
-![使用Python监控MLOps管道中的模型性能](../Images/30e0bbb1075e3353ae937c087e25baff.png)
+![使用 Python 监控 MLOps 管道中的模型性能](img/30e0bbb1075e3353ae937c087e25baff.png)
 
 按类别的质量指标展示了每个类别的性能。
 
@@ -188,33 +188,33 @@ classification_performance_report.show(mode='inline')
 classification_performance_report.as_dict()
 ```
 
-目前就是这些。你可以在你现有的任何MLOps管道中使用evidently设置模型性能监控，它仍然会表现出色。
+目前就是这些。你可以在你现有的任何 MLOps 管道中使用 evidently 设置模型性能监控，它仍然会表现出色。
 
 # 结论
 
-模型性能监控是MLOps管道中的一个重要任务，因为它帮助维护模型如何满足业务需求。通过一个名为evidently的Python包，我们可以轻松设置模型性能监控，这可以集成到任何现有的MLOps管道中。
+模型性能监控是 MLOps 管道中的一个重要任务，因为它帮助维护模型如何满足业务需求。通过一个名为 evidently 的 Python 包，我们可以轻松设置模型性能监控，这可以集成到任何现有的 MLOps 管道中。
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia期间，他喜欢通过社交媒体和写作分享Python和数据技巧。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 期间，他喜欢通过社交媒体和写作分享 Python 和数据技巧。
 
 ### 更多相关话题
 
-+   [使用Python的Watchdog监控你的文件系统](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)
++   [使用 Python 的 Watchdog 监控你的文件系统](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)
 
-+   [使用MLOps管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
++   [使用 MLOps 管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 
 +   [提升你的机器学习模型性能！](https://www.kdnuggets.com/2023/04/manning-boost-machine-learning-model-performance.html)
 
 +   [使用迁移学习提升模型性能](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)
 
-+   [TPOT进行机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)
++   [TPOT 进行机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)
 
-+   [你需要构建供应链管道的6种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
++   [你需要构建供应链管道的 6 种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
 
-![](../Images/eb105b2b614c4a6165d83fbc2b9711a1.png)
+![](img/eb105b2b614c4a6165d83fbc2b9711a1.png)
 
 [](/news/subscribe.html)
 
-[获取免费的电子书《伟大的自然语言处理指南》和《数据科学备忘单完整合集》，以及关于数据科学、机器学习、AI和分析的领先新闻通讯，直送到你的收件箱。](/news/subscribe.html)
+获取免费的电子书《伟大的自然语言处理指南》和《数据科学备忘单完整合集》，以及关于数据科学、机器学习、AI 和分析的领先新闻通讯，直送到你的收件箱。
 
 订阅即表示您接受 KDnuggets 的 [隐私政策](https://www.kdnuggets.com/news/privacy-policy.html)
 
@@ -222,7 +222,7 @@ classification_performance_report.as_dict()
 
 [<= 上一篇文章](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)[下一篇文章 =>](https://www.kdnuggets.com/2023/05/stop-chatgpt-get-ahead-99-users.html)
 
-### [最新文章](/news/index.html)
+### 最新文章
 
 +   [如何跟踪 Python 中的内存分配](https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python)
 
@@ -264,6 +264,6 @@ classification_performance_report.as_dict()
 
 * * *
 
-© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   [关于](/about/index.html)   |   [联系](/contact.html)   |   [广告]（https://mailchi.mp/kdnuggets/media-kit） |   [隐私](/news/privacy-policy.html)   |   [服务条款](/terms-of-service.html)
+© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   关于   |   联系   |   [广告]（https://mailchi.mp/kdnuggets/media-kit） |   隐私   |   服务条款
 
 发表时间：2023 年 5 月 9 日 作者：Cornellius Yudha Wijaya

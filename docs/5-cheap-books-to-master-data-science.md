@@ -1,8 +1,8 @@
 # 5 本便宜的书籍来精通数据科学
 
-> 原文：[https://www.kdnuggets.com/5-cheap-books-to-master-data-science](https://www.kdnuggets.com/5-cheap-books-to-master-data-science)
+> 原文：[`www.kdnuggets.com/5-cheap-books-to-master-data-science`](https://www.kdnuggets.com/5-cheap-books-to-master-data-science)
 
-![5 本便宜的书籍来精通数据科学](../Images/4443dfbcfaf3dafde19feb7eeecba651.png)
+![5 本便宜的书籍来精通数据科学](img/4443dfbcfaf3dafde19feb7eeecba651.png)
 
 使用 DALLE-3 生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -72,7 +72,7 @@
 
 1.  Netflix 和 Target 在产品推荐中的统计推断应用。
 
-这本书中你仍会学到许多统计概念。以$8的价格，你很容易理解统计学在数据科学中的重要性。
+这本书中你仍会学到许多统计概念。以$8 的价格，你很容易理解统计学在数据科学中的重要性。
 
 # 《机器学习算法的搭车指南》
 
@@ -92,7 +92,7 @@
 
 1.  强化学习
 
-每章都是独立的部分，因此我们可以跳到任何感兴趣的章节。以$12的价格，你可以从理论到实际的机器学习应用中获取大量知识。
+每章都是独立的部分，因此我们可以跳到任何感兴趣的章节。以$12 的价格，你可以从理论到实际的机器学习应用中获取大量知识。
 
 # 数据洞察的交付
 
@@ -100,7 +100,7 @@
 
 在[《数据洞察的交付》](https://www.amazon.com/dp/B0C9S86T7J)这本书中，Mo Villagran 解释了数据专业人士因为与利益相关者沟通不畅、被营销炒作刺激的非现实期望以及大多数数据产品的未充分利用而难以交付价值。凭借她的经验，她制定了七个步骤，以便我们能够更好地沟通并评估利益相关者的需求。
 
-只需15美元，你可以快速学习这些步骤，并通过始终需要的软技能提升自己。
+只需 15 美元，你可以快速学习这些步骤，并通过始终需要的软技能提升自己。
 
 # 结论
 
@@ -108,7 +108,7 @@
 
 1.  《数据科学》（麻省理工学院出版社核心知识系列）
 
-1.  Python数据分析
+1.  Python 数据分析
 
 1.  《裸统计：揭示数据中的恐惧》
 
@@ -116,18 +116,18 @@
 
 1.  数据洞察力传递
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰写者。在全职工作于安联印尼期间，他喜欢通过社交媒体和写作分享Python和数据技巧。Cornellius撰写了多种AI和机器学习相关的主题。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰写者。在全职工作于安联印尼期间，他喜欢通过社交媒体和写作分享 Python 和数据技巧。Cornellius 撰写了多种 AI 和机器学习相关的主题。
 
 ### 更多相关主题
 
-+   [掌握机器学习的5本便宜书籍](https://www.kdnuggets.com/5-cheap-books-to-master-machine-learning)
++   [掌握机器学习的 5 本便宜书籍](https://www.kdnuggets.com/5-cheap-books-to-master-machine-learning)
 
-+   [它活了！用Python和一些便宜的基本组件构建你的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
++   [它活了！用 Python 和一些便宜的基本组件构建你的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
 
-+   [掌握SQL、Python、数据科学、机器学习和自然语言处理的25本免费书籍](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [掌握 SQL、Python、数据科学、机器学习和自然语言处理的 25 本免费书籍](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [掌握数据科学的5本免费书籍](https://www.kdnuggets.com/5-free-books-to-master-data-science)
++   [掌握数据科学的 5 本免费书籍](https://www.kdnuggets.com/5-free-books-to-master-data-science)
 
-+   [掌握数据科学的5本免费书籍](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
++   [掌握数据科学的 5 本免费书籍](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
 
-+   [掌握数据策略的15本书](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据策略的 15 本书](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)

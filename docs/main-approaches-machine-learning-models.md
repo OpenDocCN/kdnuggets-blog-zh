@@ -1,20 +1,20 @@
 # 机器学习模型的三种主要方法
 
-> 原文：[https://www.kdnuggets.com/2019/06/main-approaches-machine-learning-models.html](https://www.kdnuggets.com/2019/06/main-approaches-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2019/06/main-approaches-machine-learning-models.html`](https://www.kdnuggets.com/2019/06/main-approaches-machine-learning-models.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-在2018年9月，我发布了一篇关于我的[即将出版的《数据科学的数学基础》一书](https://www.kdnuggets.com/2018/09/learning-mathematics-machine-learning.html)的博客。我们讨论的核心问题是：***我们如何弥合人工智能（深度学习和机器学习）所需的数学与高中所教授的数学（至17/18岁）之间的差距？***
+在 2018 年 9 月，我发布了一篇关于我的[即将出版的《数据科学的数学基础》一书](https://www.kdnuggets.com/2018/09/learning-mathematics-machine-learning.html)的博客。我们讨论的核心问题是：***我们如何弥合人工智能（深度学习和机器学习）所需的数学与高中所教授的数学（至 17/18 岁）之间的差距？***
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -40,17 +40,17 @@
 
 #### 2.1 逻辑模型 - 树模型和规则模型
 
-**逻辑模型**使用逻辑表达式将实例空间划分为多个段，从而构建分组模型。**逻辑表达式**是返回布尔值的表达式，即True或False结果。一旦使用逻辑表达式对数据进行分组，数据将被划分为解决问题的同质分组。例如，对于分类问题，组中的所有实例都属于同一类。
+**逻辑模型**使用逻辑表达式将实例空间划分为多个段，从而构建分组模型。**逻辑表达式**是返回布尔值的表达式，即 True 或 False 结果。一旦使用逻辑表达式对数据进行分组，数据将被划分为解决问题的同质分组。例如，对于分类问题，组中的所有实例都属于同一类。
 
 逻辑模型主要有两种类型：**树模型**和**规则模型**。
 
-规则模型由一组蕴涵或IF-THEN规则组成。对于树模型，“if部分”定义了一个段，“then部分”定义了该段的模型行为。规则模型遵循相同的推理。
+规则模型由一组蕴涵或 IF-THEN 规则组成。对于树模型，“if 部分”定义了一个段，“then 部分”定义了该段的模型行为。规则模型遵循相同的推理。
 
-树模型可以看作是规则模型的一种特殊类型，其中规则的if部分以树结构组织。树模型和规则模型都采用相同的监督学习方法。该方法可以总结为两种策略：我们可以首先找到覆盖足够同质实例的规则主体（概念），然后找到代表该主体的标签。或者，我们可以从另一个方向入手，即首先选择一个我们想要学习的类别，然后找到覆盖该类别实例的规则。
+树模型可以看作是规则模型的一种特殊类型，其中规则的 if 部分以树结构组织。树模型和规则模型都采用相同的监督学习方法。该方法可以总结为两种策略：我们可以首先找到覆盖足够同质实例的规则主体（概念），然后找到代表该主体的标签。或者，我们可以从另一个方向入手，即首先选择一个我们想要学习的类别，然后找到覆盖该类别实例的规则。
 
-下图展示了一个简单的树模型。树模型显示了泰坦尼克号乘客的生存数量（“sibsp”是船上配偶或兄弟姐妹的数量）。叶子下的值显示了生存的概率以及叶子的观察百分比。该模型可以总结为：如果你是（i）女性，或（ii）年龄小于9.5岁且兄弟姐妹少于2.5个的男性，那么你的生存机会很好。
+下图展示了一个简单的树模型。树模型显示了泰坦尼克号乘客的生存数量（“sibsp”是船上配偶或兄弟姐妹的数量）。叶子下的值显示了生存的概率以及叶子的观察百分比。该模型可以总结为：如果你是（i）女性，或（ii）年龄小于 9.5 岁且兄弟姐妹少于 2.5 个的男性，那么你的生存机会很好。
 
-![](../Images/85e50c23e3bb1eb1dcaef01fa2dbb9aa.png)
+![](img/85e50c23e3bb1eb1dcaef01fa2dbb9aa.png)
 
 ([图片来源](https://en.wikipedia.org/wiki/Decision_tree_learning#/media/File:CART_tree_titanic_survivors.png).)
 
@@ -60,7 +60,7 @@
 
 以下示例详细解释了这一思想。
 
-![](../Images/d828ab1972e27be4bb02766ea6cb01ca.png)
+![](img/d828ab1972e27be4bb02766ea6cb01ca.png)
 
 一个 [概念学习](https://web.cs.hacettepe.edu.tr/~ilyas/Courses/BIL712/lec01-conceptLearning.pdf) 任务，称为“享受运动”，如上所示，由一些示例日期的数据集定义。每个数据由六个属性描述。任务是学习基于属性值预测“享受运动”的值。问题可以用 **一系列假设** 来表示。每个假设由对属性的约束的结合描述。训练数据代表目标函数的正例和负例。在上面的例子中，每个假设是一个包含六个约束的向量，指定了六个属性的值——天空、空气温度、湿度、风、水和预报。训练阶段涉及学习一组日期（作为属性的结合），其中“享受运动”= 是。
 
@@ -100,7 +100,7 @@
 
 线性模型相对简单。在这种情况下，函数被表示为其输入的线性组合。因此，如果 *x*[1] 和 *x*[2] 是两个相同维度的标量或向量，*a* 和 *b* 是任意标量，那么 *ax*[1] + *bx*[2] 表示 *x*[1] 和 *x*[2] 的线性组合。在最简单的情况下，当 *f*(*x*) 表示一条直线时，我们有一个形式为 *f*(*x*) = *mx* + *c* 的方程，其中 *c* 代表截距，*m* 代表斜率。
 
-![](../Images/5d556dcaa6505f6f20801865dff203e4.png)
+![](img/5d556dcaa6505f6f20801865dff203e4.png)
 
 ([图片来源](https://en.wikipedia.org/wiki/Linear_regression).)
 
@@ -108,13 +108,13 @@
 
 线性模型是**稳定**的，即训练数据的微小变化对学习到的模型的影响有限。相比之下，**树模型通常会随着训练数据的变化而变化更多**，因为树的根部选择不同的分割通常意味着树的其余部分也会不同。 由于参数相对较少，线性模型具有**低方差和高偏差**。这意味着**线性模型比其他一些模型更不容易过拟合训练数据**。然而，它们更容易欠拟合。例如，如果我们想根据标记数据学习国家之间的边界，那么线性模型可能不会给出一个好的近似。
 
-在这一部分，我们还可以使用包括**核方法**的算法，例如支持向量机（SVM）。核方法使用核函数将数据转换到另一个维度，在该维度上可以更容易地进行数据分离，例如使用超平面进行SVM。
+在这一部分，我们还可以使用包括**核方法**的算法，例如支持向量机（SVM）。核方法使用核函数将数据转换到另一个维度，在该维度上可以更容易地进行数据分离，例如使用超平面进行 SVM。
 
 #### 3.2 基于距离的模型
 
 **基于距离的模型**是几何模型的第二类。与线性模型一样，基于距离的模型基于数据的几何。顾名思义，基于距离的模型依赖于距离的概念。在机器学习的背景下，距离的概念不仅仅是两点之间的物理距离。我们可以考虑两点之间的**运输方式**。通过飞机旅行的城市之间的距离在物理上比火车旅行的距离要少，因为飞机没有限制。类似地，在国际象棋中，距离的概念依赖于使用的棋子——例如，象可以对角移动。因此，根据实体和旅行方式，距离的概念可以有不同的体验。常用的距离度量包括**欧几里得**、**闵可夫斯基**、**曼哈顿**和**马氏**。
 
-![](../Images/26c20eb8d04972bcdaf9fd0b32166a34.png)
+![](img/26c20eb8d04972bcdaf9fd0b32166a34.png)
 
 ([图片来源](http://www.ieee.ma/uaesb/pdf/distances-in-classification.pdf).)
 
@@ -126,7 +126,7 @@
 
 +   **代表元**在概念上类似于均值或中心点。代表元通常用于无法定义均值或中心点的数据场景。它们在中心点无法代表数据集的情况下使用，例如在图像数据中。
 
-基于距离的模型的例子包括**最近邻**模型，它们使用训练数据作为样本，例如在分类中。**K均值聚类**算法也使用样本来创建相似数据点的簇。
+基于距离的模型的例子包括**最近邻**模型，它们使用训练数据作为样本，例如在分类中。**K 均值聚类**算法也使用样本来创建相似数据点的簇。
 
 ### 4\. 概率模型
 
@@ -140,7 +140,7 @@
 
 我们可以使用**贝叶斯规则**来实现这一点
 
-![](../Images/b93638ae72ebb1dfd9def2e9dfb5165f.png)
+![](img/b93638ae72ebb1dfd9def2e9dfb5165f.png)
 
 朴素贝叶斯算法基于**条件概率**的理念。条件概率是基于找到**某事发生的**概率，*前提是其他事情* 已经发生。算法的任务是查看证据并确定特定类别的可能性，并相应地为每个实体分配标签。
 
@@ -164,8 +164,8 @@
 
 +   [机器学习的甜蜜点：自然语言处理与文档分析中的纯方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)
 
-+   [使用Python的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
++   [使用 Python 的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
 
-+   [2021年的主要发展及2022年的关键趋势：人工智能、数据科学…](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年的主要发展及 2022 年的关键趋势：人工智能、数据科学…](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
 +   [文本总结的方法：概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)

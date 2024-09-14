@@ -1,32 +1,32 @@
 # 实现深度学习方法和文本数据的特征工程：跳词模型
 
-> 原文：[https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html)
+> 原文：[`www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html`](https://www.kdnuggets.com/2018/04/implementing-deep-learning-methods-feature-engineering-text-data-skip-gram.html)
 
-[评论](#comments)
+评论
 
 > **编辑注释：** 本文只是一个更全面和深入的原始内容的一部分，[可以在这里找到](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)，涵盖了比这里包含的内容更多的内容。
 
 ### 跳词模型
 
-跳词模型的架构通常试图实现与CBOW模型相反的目标。它试图根据目标词（中心词）预测源上下文词（周围词）。考虑到我们之前的简单句子，***“the quick brown fox jumps over the lazy dog”。*** 如果我们使用CBOW模型，我们会得到***(context_window, target_word)***的配对，例如考虑上下文窗口大小为2时，我们会得到类似于***([quick, fox], brown), ([the, brown], quick), ([the, dog], lazy)***的例子。现在考虑到跳词模型的目标是根据目标词预测上下文，模型通常会反转上下文和目标，并试图从目标词预测每个上下文词。因此，任务变成了预测上下文***[quick, fox]***给定目标词***‘brown’***，或***[the, brown]***给定目标词***‘quick’***，等等。因此，该模型试图根据目标词预测上下文窗口中的词汇。
+跳词模型的架构通常试图实现与 CBOW 模型相反的目标。它试图根据目标词（中心词）预测源上下文词（周围词）。考虑到我们之前的简单句子，***“the quick brown fox jumps over the lazy dog”。*** 如果我们使用 CBOW 模型，我们会得到***(context_window, target_word)***的配对，例如考虑上下文窗口大小为 2 时，我们会得到类似于***([quick, fox], brown), ([the, brown], quick), ([the, dog], lazy)***的例子。现在考虑到跳词模型的目标是根据目标词预测上下文，模型通常会反转上下文和目标，并试图从目标词预测每个上下文词。因此，任务变成了预测上下文***[quick, fox]***给定目标词***‘brown’***，或***[the, brown]***给定目标词***‘quick’***，等等。因此，该模型试图根据目标词预测上下文窗口中的词汇。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
-![](../Images/07676425bba068c4ffcce509c873b346.png)
+![](img/07676425bba068c4ffcce509c873b346.png)
 
-跳词模型架构（来源：[https://arxiv.org/pdf/1301.3781.pdf](https://arxiv.org/pdf/1301.3781.pdf) Mikolov等）
+跳词模型架构（来源：[`arxiv.org/pdf/1301.3781.pdf`](https://arxiv.org/pdf/1301.3781.pdf) Mikolov 等）
 
-就像我们在 CBOW 模型中讨论的那样，我们现在需要将这个 Skip-gram 架构建模为一个深度学习分类模型，以便我们以 *目标词作为输入* 并尝试 *预测上下文词*。这变得稍微复杂，因为我们的上下文中有多个词。我们通过将每个 ***(目标, 上下文_词) 对*** 拆分为 ***(目标, 上下文) 对*** 来进一步简化这一点，其中每个上下文仅包含一个词。因此，我们之前的数据集被转换为像 ***(brown, quick), (brown, fox), (quick, the), (quick, brown)*** 等对。但如何监督或训练模型以了解哪些是上下文相关的，哪些是不相关的呢？
+就像我们在 CBOW 模型中讨论的那样，我们现在需要将这个 Skip-gram 架构建模为一个深度学习分类模型，以便我们以 *目标词作为输入* 并尝试 *预测上下文词*。这变得稍微复杂，因为我们的上下文中有多个词。我们通过将每个 ***(目标, 上下文 _ 词) 对*** 拆分为 ***(目标, 上下文) 对*** 来进一步简化这一点，其中每个上下文仅包含一个词。因此，我们之前的数据集被转换为像 ***(brown, quick), (brown, fox), (quick, the), (quick, brown)*** 等对。但如何监督或训练模型以了解哪些是上下文相关的，哪些是不相关的呢？
 
 为此，我们将 ***(X, Y)*** 对馈入 skip-gram 模型，其中 ***X*** 是我们的 ***输入***，***Y*** 是我们的 ***标签***。我们通过使用 ***[(目标, 上下文), 1]*** 对作为 ***正输入样本***，其中 ***目标*** 是我们感兴趣的词，***上下文*** 是出现在目标词附近的上下文词，而 ***正标签 1*** 表示这是一个在上下文中相关的对。我们还将 ***[(目标, 随机), 0]*** 对作为 ***负输入样本***，其中 ***目标*** 仍然是我们感兴趣的词，但 ***随机*** 只是从词汇表中随机选择的一个词，与目标词没有上下文或关联。因此，***负标签 0*** 表示这是一个在上下文中不相关的对。我们这样做是为了让模型学习哪些词对在上下文中是相关的，哪些是不相关的，并为语义相似的词生成相似的嵌入。
 
@@ -59,15 +59,15 @@ Vocabulary Sample: [('perceived', 1460), ('flagon', 7287), ('gardener', 11641), 
 
 **构建一个 skip-gram [(目标, 上下文), 相关性] 生成器**
 
-现在是时候构建我们的skip-gram生成器，它将像我们之前讨论的那样给出词对及其相关性。幸运的是，`keras`提供了一个方便的`skipgrams`工具，我们不需要像在CBOW中那样手动实现这个生成器。
+现在是时候构建我们的 skip-gram 生成器，它将像我们之前讨论的那样给出词对及其相关性。幸运的是，`keras`提供了一个方便的`skipgrams`工具，我们不需要像在 CBOW 中那样手动实现这个生成器。
 
 > **注意：** 函数`[**skipgrams(…)**](https://keras.io/preprocessing/sequence/#skipgrams)`存在于`[**keras.preprocessing.sequence**](https://keras.io/preprocessing/sequence)`
 > 
 > 这个函数将词索引的序列（整数列表）转换为如下形式的词对：
 > 
-> - （词，同一窗口中的词），标签为1（正样本）。
+> - （词，同一窗口中的词），标签为 1（正样本）。
 > 
-> - （词，词汇中的随机词），标签为0（负样本）。
+> - （词，词汇中的随机词），标签为 0（负样本）。
 
 ```py
 (james (1154), king (13)) -> 1
@@ -82,19 +82,19 @@ Vocabulary Sample: [('perceived', 1460), ('flagon', 7287), ('gardener', 11641), 
 (james (1154), foreskins (4844)) -> 0
 ```
 
-因此，你可以看到我们已经成功生成了所需的skip-grams，并且基于前面输出的样本skip-grams，你可以清楚地看到基于标签（0或1）哪些是相关的，哪些是无关的。
+因此，你可以看到我们已经成功生成了所需的 skip-grams，并且基于前面输出的样本 skip-grams，你可以清楚地看到基于标签（0 或 1）哪些是相关的，哪些是无关的。
 
-**构建skip-gram模型架构**
+**构建 skip-gram 模型架构**
 
-我们现在在`tensorflow`之上利用`keras`构建skip-gram模型的深度学习架构。为此，我们的输入将是目标词和上下文或随机词对。每个输入都会传递到一个自己的嵌入层（初始化时权重随机）。一旦我们获得目标词和上下文词的词嵌入，我们将其传递到一个合并层，在那里计算这两个向量的点积。然后，我们将这个点积值传递到一个密集的sigmoid层，该层根据词对的上下文相关性预测1或0（***Y’***）。我们将其与实际相关性标签（***Y***）进行匹配，通过利用`mean_squared_error`损失计算损失，并在每个周期中执行反向传播，以更新嵌入层。以下代码展示了我们的模型架构。
+我们现在在`tensorflow`之上利用`keras`构建 skip-gram 模型的深度学习架构。为此，我们的输入将是目标词和上下文或随机词对。每个输入都会传递到一个自己的嵌入层（初始化时权重随机）。一旦我们获得目标词和上下文词的词嵌入，我们将其传递到一个合并层，在那里计算这两个向量的点积。然后，我们将这个点积值传递到一个密集的 sigmoid 层，该层根据词对的上下文相关性预测 1 或 0（***Y’***）。我们将其与实际相关性标签（***Y***）进行匹配，通过利用`mean_squared_error`损失计算损失，并在每个周期中执行反向传播，以更新嵌入层。以下代码展示了我们的模型架构。
 
-![](../Images/237c9b10ed40a7418f23231b8adcd717.png)
+![](img/237c9b10ed40a7418f23231b8adcd717.png)
 
-Skip-gram模型总结和架构
+Skip-gram 模型总结和架构
 
 理解上述深度学习模型相当简单。然而，我将尝试用简单的术语总结该模型的核心概念，以便于理解。对于每个训练示例，我们有一对输入词，其中包含***一个输入目标词***，具有唯一的数字标识符，以及***一个上下文词***，也具有唯一的数字标识符。如果它是***正样本***，则该词具有上下文意义，是***上下文词***，我们的***标签 Y=1***；如果是***负样本***，则该词没有上下文意义，仅是***随机词***，我们的***标签 Y=0***。我们将每个词传递到各自的***嵌入层***，其大小为`**(vocab_size x embed_size)**`，这将为这两个词提供***密集词嵌入***，`**(每个词 1 x embed_size)**`。接下来，我们使用***合并层***来计算这两个嵌入的***点积***并获得点积值。然后将其发送到***密集 sigmoid 层***，输出 1 或 0。我们将其与实际标签 Y（1 或 0）进行比较，计算损失，反向传播误差以调整权重（在嵌入层中），并对所有***(目标词, 上下文词)***对重复此过程多次。下图尝试解释相同内容。
 
-![](../Images/f9906c94dce46e3afb30e51283843aab.png)
+![](img/f9906c94dce46e3afb30e51283843aab.png)
 
 Skip-gram 深度学习模型的视觉表示
 
@@ -118,7 +118,7 @@ Epoch: 5 Loss: 3716.07605051
 
 要获取我们整个词汇表的词嵌入，我们可以通过以下代码从嵌入层中提取相同的内容。请注意，我们仅对目标词嵌入层感兴趣，因此我们将从`**word_model**`嵌入层中提取嵌入。我们不取位置 0 的嵌入，因为我们词汇中的词没有数字标识符 0，我们将其忽略。
 
-![](../Images/2995edd6df7b95adfff70a43eb9d79d3.png)
+![](img/2995edd6df7b95adfff70a43eb9d79d3.png)
 
 基于 Skip-gram 模型的词汇表词嵌入
 
@@ -139,7 +139,7 @@ Epoch: 5 Loss: 3716.07605051
 
 从结果中可以清楚地看到，每个感兴趣的单词的许多相似单词是有意义的，并且我们相比于 CBOW 模型获得了更好的结果。现在让我们使用[**t-SNE**](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)来可视化这些单词嵌入，它代表了[***t-distributed stochastic neighbor embedding***](https://en.wikipedia.org/wiki/T-distributed_stochastic_neighbor_embedding)，这是一个流行的[降维](https://en.wikipedia.org/wiki/Dimensionality_reduction)技术，用于将高维空间可视化到低维空间（例如 2-D）。
 
-![](../Images/9916982cd1c109657827c078892b3b62.png)
+![](img/9916982cd1c109657827c078892b3b62.png)
 
 使用 t-SNE 可视化 skip-gram word2vec 单词嵌入
 
@@ -151,11 +151,11 @@ Epoch: 5 Loss: 3716.07605051
 
 **相关：**
 
-+   [文本数据预处理：Python 实践指南](/2018/03/text-data-preprocessing-walkthrough-python.html)
++   文本数据预处理：Python 实践指南
 
-+   [文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)
++   文本数据预处理的一般方法
 
-+   [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   处理文本数据科学任务的框架
 
 ### 更多相关话题
 

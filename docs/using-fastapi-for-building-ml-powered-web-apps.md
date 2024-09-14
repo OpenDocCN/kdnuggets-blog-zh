@@ -1,8 +1,8 @@
 # 使用 FastAPI 构建机器学习驱动的 Web 应用程序
 
-> 原文：[https://www.kdnuggets.com/using-fastapi-for-building-ml-powered-web-apps](https://www.kdnuggets.com/using-fastapi-for-building-ml-powered-web-apps)
+> 原文：[`www.kdnuggets.com/using-fastapi-for-building-ml-powered-web-apps`](https://www.kdnuggets.com/using-fastapi-for-building-ml-powered-web-apps)
 
-![使用 FastAPI 构建机器学习驱动的 Web 应用程序](../Images/5b448008c0130c7f814d58853423007f.png)
+![使用 FastAPI 构建机器学习驱动的 Web 应用程序](img/5b448008c0130c7f814d58853423007f.png)
 
 图片由作者提供 | Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -163,15 +163,15 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
 它将带我们到包含首页的浏览器。首页上没有任何内容，只有 `/predict` POST 请求。因此没有显示任何内容。
 
-![使用 FastAPI 构建 ML 驱动的 Web 应用](../Images/63ba9e5daeb413a42543816bf9c46e5c.png)
+![使用 FastAPI 构建 ML 驱动的 Web 应用](img/63ba9e5daeb413a42543816bf9c46e5c.png)
 
 我们可以通过 SwaggerUI 界面测试我们的 API。我们可以通过在链接后添加 “/docs” 来访问它。
 
-![使用 FastAPI 构建 ML 驱动的 Web 应用](../Images/15c7f9263685e74877f042bb2f24a4a1.png)
+![使用 FastAPI 构建 ML 驱动的 Web 应用](img/15c7f9263685e74877f042bb2f24a4a1.png)
 
 我们可以点击“/predict”选项，编辑值并运行预测。最后，我们将在响应体部分获得响应。如我们所见，结果是“Virginica”。我们可以通过 SwaggerUI 直接测试模型，并确保它在部署到生产环境之前正常工作。
 
-![使用 FastAPI 构建 ML 驱动的 Web 应用](../Images/7328411b610ea66be27e54d1ed066fad.png)
+![使用 FastAPI 构建 ML 驱动的 Web 应用](img/7328411b610ea66be27e54d1ed066fad.png)
 
 ## 为 Web 应用构建用户界面
 
@@ -354,11 +354,11 @@ INFO:     127.0.0.1:63153 - "GET / HTTP/1.1" 200 OK
 
 当你点击链接时，你不会看到空白屏幕；相反，你将看到用户界面，你可以在其中输入 "Sepal" 和 "Petal" 的长度和宽度。
 
-![使用 FastAPI 构建 ML 驱动的 Web 应用](../Images/d5a557758d45dd147d7fed0798c59073.png)
+![使用 FastAPI 构建 ML 驱动的 Web 应用](img/d5a557758d45dd147d7fed0798c59073.png)
 
 点击“预测”按钮后，你将被带到下一页，在那里结果将会显示。你可以点击“再次预测”按钮来用不同的值测试你的模型。
 
-![使用 FastAPI 构建 ML 驱动的 Web 应用](../Images/3ea7ae08af0ae0c1b872a15a209ae326.png)
+![使用 FastAPI 构建 ML 驱动的 Web 应用](img/3ea7ae08af0ae0c1b872a15a209ae326.png)
 
 所有源代码、数据、模型和信息都可以在 [kingabzpro/FastAPI-for-ML](https://github.com/kingabzpro/FastAPI-for-ML) GitHub 仓库中找到。请不要忘记给它加星 ⭐。
 

@@ -1,44 +1,44 @@
 # 从头开始构建人工神经网络：第一部分
 
-> 原文：[https://www.kdnuggets.com/2019/11/build-artificial-neural-network-scratch-part-1.html](https://www.kdnuggets.com/2019/11/build-artificial-neural-network-scratch-part-1.html)
+> 原文：[`www.kdnuggets.com/2019/11/build-artificial-neural-network-scratch-part-1.html`](https://www.kdnuggets.com/2019/11/build-artificial-neural-network-scratch-part-1.html)
 
-[评论](#comments)
+评论
 
-在我之前的文章[**人工神经网络（ANN）简介**](https://towardsdatascience.com/introduction-to-artificial-neural-networks-ann-1aea15775ef9)**中，**我们学习了与ANN相关的各种概念，因此我建议在继续之前先阅读它，因为在这里我将只关注实现部分。在这个系列文章中，我们将仅使用[numpy](https://www.guru99.com/numpy-tutorial.html) Python库从头开始构建ANN。
+在我之前的文章[**人工神经网络（ANN）简介**](https://towardsdatascience.com/introduction-to-artificial-neural-networks-ann-1aea15775ef9)**中，**我们学习了与 ANN 相关的各种概念，因此我建议在继续之前先阅读它，因为在这里我将只关注实现部分。在这个系列文章中，我们将仅使用[numpy](https://www.guru99.com/numpy-tutorial.html) Python 库从头开始构建 ANN。
 
-在第一部分中，我们将构建一个相当简单的ANN，只包含1个输入层和1个输出层，没有隐藏层。
+在第一部分中，我们将构建一个相当简单的 ANN，只包含 1 个输入层和 1 个输出层，没有隐藏层。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-在第二部分中，我们将构建一个具有1个输入层、1个隐藏层和1个输出层的ANN。
+在第二部分中，我们将构建一个具有 1 个输入层、1 个隐藏层和 1 个输出层的 ANN。
 
 **为什么从头开始？**
 
-好吧，市面上有许多深度学习库（[Keras](https://keras.io/)、[TensorFlow](https://www.tensorflow.org/)、[PyTorch](https://pytorch.org/)等），可以用几行代码创建一个神经网络。然而，如果你真的想深入理解神经网络的工作原理，我建议你学习如何使用Python或其他编程语言从头开始编写代码。让我们开始吧。
+好吧，市面上有许多深度学习库（[Keras](https://keras.io/)、[TensorFlow](https://www.tensorflow.org/)、[PyTorch](https://pytorch.org/)等），可以用几行代码创建一个神经网络。然而，如果你真的想深入理解神经网络的工作原理，我建议你学习如何使用 Python 或其他编程语言从头开始编写代码。让我们开始吧。
 
 我们来创建一些随机数据集：
 
-![图示](../Images/c81bdcaab407a183e947b7ab63b0c89f.png)
+![图示](img/c81bdcaab407a183e947b7ab63b0c89f.png)
 
 为了简化起见，使用二进制值的随机数据集
 
-在上面的表格中，我们有五列：`Person, X1, X2, X3和Y`。其中1表示真，0表示假。我们的任务是创建一个能够根据`X1, X2和X3`的值预测`Y`值的人工神经网络。
+在上面的表格中，我们有五列：`Person, X1, X2, X3 和 Y`。其中 1 表示真，0 表示假。我们的任务是创建一个能够根据`X1, X2 和 X3`的值预测`Y`值的人工神经网络。
 
 我们将创建一个只有一个输入层和一个输出层，没有隐藏层的人工神经网络。在开始编码之前，让我们首先看看我们的神经网络在理论上是如何运行的：
 
 **人工神经网络理论**
 
-人工神经网络是一种监督学习算法，这意味着我们提供给它包含自变量的输入数据和包含因变量的输出数据。例如，在我们的例子中，自变量是`X1, X2和X3`。因变量是`Y`。
+人工神经网络是一种监督学习算法，这意味着我们提供给它包含自变量的输入数据和包含因变量的输出数据。例如，在我们的例子中，自变量是`X1, X2 和 X3`。因变量是`Y`。
 
 一开始，人工神经网络（ANN）会做一些随机预测，这些预测与正确输出进行比较，计算误差（预测值与实际值之间的差异）。找到实际值与传播值之间差异的函数称为成本函数。这里的成本指的是误差。我们的目标是最小化成本函数。训练神经网络基本上就是指最小化成本函数。我们将看到如何执行这一任务。
 
@@ -46,7 +46,7 @@
 
 ### **前向传播**
 
-![Figure](../Images/fb1e559a1856525bc66cecb2914cf480.png)
+![Figure](img/fb1e559a1856525bc66cecb2914cf480.png)
 
 来源：[单层神经网络，也称为感知器](https://towardsdatascience.com/single-neuron-training-3fc7f84d67d)
 
@@ -72,7 +72,7 @@
 
 点积 XW 可以产生任何一组值。然而，在我们的输出中，我们有 1 和 0 的形式。我们希望输出也以相同格式呈现。为此，我们需要一个[A[ctivation Function](https://en.wikipedia.org/wiki/Activation_function)]，它将输入值限制在 0 和 1 之间。所以我们当然会选择 Sigmoid 激活函数。
 
-![Figure](../Images/494bbc0bc64ef03adaad348fecdd42c7.png)
+![Figure](img/494bbc0bc64ef03adaad348fecdd42c7.png)
 
 [Sigmoid 激活函数](https://towardsdatascience.com/activation-functions-neural-networks-1cbd9f8d91d6)
 
@@ -84,7 +84,7 @@
 
 从数学上讲，sigmoid 激活函数是：
 
-![图示](../Images/8251273f7914ec76939f7616fc54756e.png)
+![图示](img/8251273f7914ec76939f7616fc54756e.png)
 
 [Sigmoid 激活函数](https://analyticsindiamag.com/most-common-activation-functions-in-neural-networks-and-rationale-behind-it/)
 
@@ -102,7 +102,7 @@
 
 我们将使用[均方误差](https://en.wikipedia.org/wiki/Mean_squared_error)或 MSE 成本函数。成本函数是一个计算给定输出预测成本的函数。
 
-![图示](../Images/923b7bdfd93b37400fee96b508ddc1c0.png)
+![图示](img/923b7bdfd93b37400fee96b508ddc1c0.png)
 
 [均方误差](https://stackoverflow.com/questions/44038581/mse-cost-function-for-training-neural-network)
 
@@ -116,7 +116,7 @@
 
 要找到一个函数的极小值，我们可以使用 [梯度下降](https://en.wikipedia.org/wiki/Optimization_problem) 算法。梯度下降可以用数学公式表示为：
 
-![图](../Images/5a71058e6f68584257f32317adaaf57f.png)
+![图](img/5a71058e6f68584257f32317adaaf57f.png)
 
 [使用梯度下降更新权重](http://hmkcode.com/ai/backpropagation-step-by-step/)
 
@@ -134,7 +134,7 @@
 
 ### 使用 numpy 实现人工神经网络
 
-![图](../Images/19407a669cab463068bc45cc68f1e3fc.png)
+![图](img/19407a669cab463068bc45cc68f1e3fc.png)
 
 图片来源：[hackernoon.com](https://hackernoon.com/building-a-neural-network-only-using-numpy-7ba75da60ec0)
 
@@ -252,7 +252,7 @@ print(error.sum())
 
 我们知道我们的成本函数是：
 
-![](../Images/923b7bdfd93b37400fee96b508ddc1c0.png)
+![](img/923b7bdfd93b37400fee96b508ddc1c0.png)
 
 我们需要对这个函数进行关于每个权重的导数，这可以通过使用 [链式法则](https://en.wikipedia.org/wiki/Chain_rule) 来轻松完成。我会跳过推导部分，但如果有人感兴趣，请告诉我，我会在评论区发布。
 
@@ -397,34 +397,34 @@ print(result)
 
 如有任何问题，可以通过[LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/?source=post_page---------------------------)联系我。
 
-![图示](../Images/73b355546c187367af36f2a1ff722ef5.png)
+![图示](img/73b355546c187367af36f2a1ff722ef5.png)
 
 [图片来源](https://gifer.com/en/7DFc)
 
 感谢阅读!!!
 
-**简介：[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是CirrusLabs的大数据开发者。他在电信、分析、销售和数据科学等多个领域拥有超过4年的工作经验，专注于各种大数据组件。
+**简介：[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是 CirrusLabs 的大数据开发者。他在电信、分析、销售和数据科学等多个领域拥有超过 4 年的工作经验，专注于各种大数据组件。
 
 [原文](https://towardsdatascience.com/build-an-artificial-neural-network-ann-from-scratch-part-1-a21988497962)。经许可转载。
 
 **相关内容：**
 
-+   [人工神经网络简介](/2019/10/introduction-artificial-neural-networks.html)
++   人工神经网络简介
 
-+   [支持向量机友好介绍](/2019/09/friendly-introduction-support-vector-machines.html)
++   支持向量机友好介绍
 
-+   [使用K-Nearest Neighbors分类心脏病](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)
++   使用 K-Nearest Neighbors 分类心脏病
 
 ### 了解更多相关主题
 
 +   [如何从零开始构建和训练一个变换器模型](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
 
-+   [通过构建15个神经网络项目来学习深度学习（2022）](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
++   [通过构建 15 个神经网络项目来学习深度学习（2022）](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
 
-+   [使用AIMET进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)
++   [使用 AIMET 进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)
 
-+   [使用TensorFlow和Keras构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
++   [使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
-+   [使用PyTorch构建卷积神经网络](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)
++   [使用 PyTorch 构建卷积神经网络](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)
 
 +   [神经网络预测中排列的重要性](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)

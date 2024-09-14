@@ -1,8 +1,8 @@
 # 使用 Scikit-learn 管道简化你的机器学习工作流程
 
-> 原文：[https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
+> 原文：[`www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines`](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
 
-![使用 Scikit-learn 管道简化你的机器学习工作流程](../Images/2c07f2e6c45bd747dbb667658e74d496.png)
+![使用 Scikit-learn 管道简化你的机器学习工作流程](img/2c07f2e6c45bd747dbb667658e74d496.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -39,7 +39,7 @@ bank_df.head()
 
 我们有分类、整数和浮点列。数据集看起来相当干净。
 
-![使用 Scikit-learn 管道简化你的机器学习工作流程](../Images/39cabe76a0d32a591c3e21afc3efa379.png)
+![使用 Scikit-learn 管道简化你的机器学习工作流程](img/39cabe76a0d32a591c3e21afc3efa379.png)
 
 ## 简单的 Scikit-learn 代码
 
@@ -75,7 +75,7 @@ bank_df.head()
 
 结果是，我们得到了一个干净且转化后的数据集，只有整数或浮点值。
 
-![使用 Scikit-learn 管道简化你的机器学习工作流程](../Images/a27edfcfb4081adc41a03bed8942bea0.png)
+![使用 Scikit-learn 管道简化你的机器学习工作流程](img/a27edfcfb4081adc41a03bed8942bea0.png)
 
 ## Scikit-learn 管道代码
 
@@ -139,7 +139,7 @@ array([0.712     , 0.24324324, 0.6       , 0\.        , 0.33333333,
 preproc_pipe
 ```
 
-![通过 Scikit-learn 管道简化您的机器学习工作流程](../Images/2a060e3204d137789f79a96ba7a7d13f.png)
+![通过 Scikit-learn 管道简化您的机器学习工作流程](img/2a060e3204d137789f79a96ba7a7d13f.png)
 
 # 数据训练管道
 
@@ -217,7 +217,7 @@ train_pipe.score(X_test, y_test)
 train_pipe
 ```
 
-![通过 Scikit-learn 管道简化您的机器学习工作流程](../Images/3c5776c9a41fc5ee436f9e5d646dc350.png)
+![通过 Scikit-learn 管道简化您的机器学习工作流程](img/3c5776c9a41fc5ee436f9e5d646dc350.png)
 
 # 结合处理与训练管道
 
@@ -315,7 +315,7 @@ complete_pipe.score(X_test, y_test)
 complete_pipe
 ```
 
-![通过 Scikit-learn 管道简化您的机器学习工作流程](../Images/2d33c985665b1ba91e86992f793ef83e.png)
+![通过 Scikit-learn 管道简化您的机器学习工作流程](img/2d33c985665b1ba91e86992f793ef83e.png)
 
 # 保存和加载模型
 
@@ -338,7 +338,7 @@ new_pipe
 
 如我们所见，我们已成功加载管道。
 
-![用 Scikit-learn 管道简化您的机器学习工作流程](../Images/27b169009d71748fb062ca3d68a62271.png)
+![用 Scikit-learn 管道简化您的机器学习工作流程](img/27b169009d71748fb062ca3d68a62271.png)
 
 为了评估我们加载的管道，我们将对测试集进行预测，然后计算准确率和 F1 分数。
 

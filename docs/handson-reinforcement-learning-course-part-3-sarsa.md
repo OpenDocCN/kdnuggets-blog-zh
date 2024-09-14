@@ -1,8 +1,8 @@
-# 实践强化学习课程第3部分：SARSA
+# 实践强化学习课程第三部分：SARSA
 
-> 原文：[https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
+> 原文：[`www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html`](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
 
-![实践强化学习课程第3部分：SARSA](../Images/30748c058f5a536beb5706b08cffa316.png)
+![实践强化学习课程第三部分：SARSA](img/30748c058f5a536beb5706b08cffa316.png)
 
 **欢迎来到我的强化学习课程❤️**
 
@@ -10,31 +10,31 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-这是我实践强化学习课程的第3部分，该课程将你从零带到HERO ????‍♂️。今天我们将学习SARSA，这是一种强大的RL算法。
+这是我实践强化学习课程的第三部分，该课程将你从零带到 HERO ????‍♂️。今天我们将学习 SARSA，这是一种强大的 RL 算法。
 
 我们仍然处于旅程的起点，解决相对简单的问题。
 
-在 [**第2部分**](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/) 中，我们实现了离散Q学习来训练`Taxi-v3`环境中的一个代理。
+在 [**第二部分**](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/) 中，我们实现了离散 Q 学习来训练`Taxi-v3`环境中的一个代理。
 
-今天，我们将更进一步，使用SARSA算法解决`MountainCar`环境????。
+今天，我们将更进一步，使用 SARSA 算法解决`MountainCar`环境????。
 
 让我们帮助这辆可怜的车赢得与重力的战斗！
 
-本课的所有代码都在 [**这个Github仓库**](https://github.com/Paulescu/hands-on-rl)**。** 克隆它以跟随今天的问题。
+本课的所有代码都在 [**这个 Github 仓库**](https://github.com/Paulescu/hands-on-rl)**。** 克隆它以跟随今天的问题。
 
-[![实践强化学习课程第3部分：SARSA](../Images/5a7273317f4e2bc8225fd4e3f167146b.png)](https://github.com/Paulescu/hands-on-rl)
+![实践强化学习课程第三部分：SARSA](https://github.com/Paulescu/hands-on-rl)
 
-### 1\. Mountain Car问题????
+### 1\. Mountain Car 问题????
 
-Mountain Car问题是一个存在重力的环境（多么惊人），目标是帮助一辆可怜的车赢得这场与重力的战斗。
+Mountain Car 问题是一个存在重力的环境（多么惊人），目标是帮助一辆可怜的车赢得这场与重力的战斗。
 
 这辆车需要逃离被困的山谷。车的引擎没有足够的动力一次性爬上山，因此唯一的方法就是来回驾驶，积累足够的动量。
 
@@ -54,11 +54,11 @@ Sarsa Agent 实际效果！
 
 这个课程的哲学是逐步增加复杂性。一步一步来。
 
-今天的环境相比第2部分的`Taxi-v3`环境代表了一个小但相关的复杂性增加。
+今天的环境相比第二部分的`Taxi-v3`环境代表了一个小但相关的复杂性增加。
 
 但是，*这里到底难在哪里呢？*
 
-正如我们在**[第2部分](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)**中看到的，强化学习问题的难度与
+正如我们在**[第二部分](http://datamachines.xyz/2021/12/06/hands-on-reinforcement-learning-course-part-2/)**中看到的，强化学习问题的难度与
 
 +   动作空间：*智能体在每一步可以选择多少种动作？*
 
@@ -78,11 +78,11 @@ Q 函数本质上是一个矩阵，行数等于状态数，列数等于动作数
 
 让我们加载环境：
 
-![动手强化学习课程 第3部分：SARSA](../Images/b83d04fba09a39066cf90d2b622b248b.png)
+![动手强化学习课程 第三部分：SARSA](img/b83d04fba09a39066cf90d2b622b248b.png)
 
 并绘制一个帧：
 
-![动手强化学习课程 第3部分：SARSA](../Images/e13755e2f902e1032dea4b03b8415391.png)![动手强化学习课程 第3部分：SARSA](../Images/07c85dba5cf0d6bd13e8798117845c00.png)
+![动手强化学习课程 第三部分：SARSA](img/e13755e2f902e1032dea4b03b8415391.png)![动手强化学习课程 第三部分：SARSA](img/07c85dba5cf0d6bd13e8798117845c00.png)
 
 两个数字决定了汽车的**状态**：
 
@@ -90,9 +90,9 @@ Q 函数本质上是一个矩阵，行数等于状态数，列数等于动作数
 
 +   它的速度范围是**-0.07** 到 **0.07**。
 
-![动手强化学习课程 第3部分：SARSA](../Images/22fe4c7604415a9d20c8db6f4196a93a.png)
+![动手强化学习课程 第三部分：SARSA](img/22fe4c7604415a9d20c8db6f4196a93a.png)
 
-状态由 2 个连续数字给出。这与 [第2部分](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b) 的 `Taxi-v3` 环境有显著不同。我们稍后将看到如何处理这个问题。
+状态由 2 个连续数字给出。这与 [第二部分](https://towardsdatascience.com/hands-on-reinforcement-learning-course-part-2-1b0828a1046b) 的 `Taxi-v3` 环境有显著不同。我们稍后将看到如何处理这个问题。
 
 什么是**动作**？
 
@@ -104,7 +104,7 @@ Q 函数本质上是一个矩阵，行数等于状态数，列数等于动作数
 
 +   `2` 向右加速
 
-![动手强化学习课程 第3部分：SARSA](../Images/c2f912ce54c18b93315418e9a0f8594b.png)
+![动手强化学习课程 第三部分：SARSA](img/c2f912ce54c18b93315418e9a0f8594b.png)
 
 那**奖励**呢？
 
@@ -130,7 +130,7 @@ Q 函数本质上是一个矩阵，行数等于状态数，列数等于动作数
 
 今天我们将提升我们的 Python 技能，并为所有代理使用 `BaseAgent` 类。从这个 `BaseAgent` 类，我们将派生出 `RandomAgent` 和 `SarsaAgent` 类。
 
-![实践强化学习课程 第3部分: SARSA](../Images/97f7073609a002ece390eef9d20f5aff.png)
+![实践强化学习课程 第三部分: SARSA](img/97f7073609a002ece390eef9d20f5aff.png)
 
 `BaseAgent` 是我们在 `[src/base_agent.py](https://github.com/Paulescu/hands-on-rl/blob/main/02_mountain_car/src/base_agent.py)` 中定义的**抽象类**。
 
@@ -152,25 +152,25 @@ Q 函数本质上是一个矩阵，行数等于状态数，列数等于动作数
 
 这是我们 `BaseAgent` 类的完整代码：
 
-![实践强化学习课程 第3部分: SARSA](../Images/121260f614782f3b0541ffec3920a03b.png)
+![实践强化学习课程 第三部分: SARSA](img/121260f614782f3b0541ffec3920a03b.png)
 
 从这个 `BaseAgent` 类，我们可以定义 `RandomAgent` 如下：
 
-![实践强化学习课程 第3部分: SARSA](../Images/724e1d2baf07028b161c42a4c63ce38e.png)
+![实践强化学习课程 第三部分: SARSA](img/724e1d2baf07028b161c42a4c63ce38e.png)
 
 让我们对这个 `RandomAgent` 进行 `n_episodes = 100` 次评估，看看它的表现如何：
 
-![实践强化学习课程 第3部分: SARSA](../Images/46caf646c57a884bd3d0aa4a8c3a3939.png)![实践强化学习课程 第3部分: SARSA](../Images/f5e247010acc481fa782c1b72fdc6bc5.png)
+![实践强化学习课程 第三部分: SARSA](img/46caf646c57a884bd3d0aa4a8c3a3939.png)![实践强化学习课程 第三部分: SARSA](img/f5e247010acc481fa782c1b72fdc6bc5.png)
 
 而我们 `RandomAgent` 的成功率是…
 
-![实践强化学习课程 第3部分: SARSA](../Images/c5c2451995329a41fb26bb883b16244d.png)
+![实践强化学习课程 第三部分: SARSA](img/c5c2451995329a41fb26bb883b16244d.png)
 
 0% ????…
 
 我们可以通过以下直方图查看代理在每个回合中的表现：
 
-![实践强化学习课程 第3部分: SARSA](../Images/ff47391459ccea26e6f14f03e335fb59.png)![实践强化学习课程 第3部分: SARSA](../Images/35f6ba7e5565b8feaf6567872decc31b.png)
+![实践强化学习课程 第三部分: SARSA](img/ff47391459ccea26e6f14f03e335fb59.png)![实践强化学习课程 第三部分: SARSA](img/35f6ba7e5565b8feaf6567872decc31b.png)
 
 在这 `100` 次运行中，我们的 `RandomAgent` 没有突破**0.5**的标记。一时间都没有。
 
@@ -194,15 +194,15 @@ SARSA 代表 **S**tate **A**ction **R**eward **S**tate **A**ction。
 
 SARSA 和 Q-learning 都利用贝尔曼方程来迭代地寻找更好的最优 q 值函数 **Q*(s, a)**
 
-![动手强化学习课程第3部分：SARSA](../Images/2eab3dbcb1f4e5f188efee35f0a488a2.png)
+![动手强化学习课程第三部分：SARSA](img/2eab3dbcb1f4e5f188efee35f0a488a2.png)
 
-如果你记得第2部分，Q-learning 的更新公式是
+如果你记得第二部分，Q-learning 的更新公式是
 
-![动手强化学习课程第3部分：SARSA](../Images/8ea0dd53fcb0b32c31128e0c1319bbf8.png)
+![动手强化学习课程第三部分：SARSA](img/8ea0dd53fcb0b32c31128e0c1319bbf8.png)
 
 这个公式是一种计算新的 q 值估计的方法，它更接近于
 
-![动手强化学习课程第3部分：SARSA](../Images/10c9f1d1a6ca78e20fc96351401cf53c.png)
+![动手强化学习课程第三部分：SARSA](img/10c9f1d1a6ca78e20fc96351401cf53c.png)
 
 这个量是一个 *目标* ???? 我们想要将旧估计值校正到这个目标。这是我们应该瞄准的最优 q 值的 *估计*，它会随着我们训练代理和 q 值矩阵的更新而变化。
 
@@ -210,11 +210,11 @@ SARSA 和 Q-learning 都利用贝尔曼方程来迭代地寻找更好的最优 q
 
 SARSA 有一个类似的更新公式，但目标不同
 
-![动手强化学习课程第3部分：SARSA](../Images/4b749da798bc061e5706df3750558c37.png)
+![动手强化学习课程第三部分：SARSA](img/4b749da798bc061e5706df3750558c37.png)
 
 SARSA 的目标
 
-![动手强化学习课程第3部分：SARSA](../Images/3610db26defe49e792b600720dcf46de.png)
+![动手强化学习课程第三部分：SARSA](img/3610db26defe49e792b600720dcf46de.png)
 
 还取决于代理在下一个状态 **s’** 中将采取的动作 **a’**。这就是 SARS**A’** 名称中的最终 **A**。
 
@@ -256,23 +256,23 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 这个函数正是这样做的，将连续状态转换为离散状态：
 
-![动手强化学习课程第3部分：SARSA](../Images/0fda14d9637f91b534e2d1ad2493d6b6.png)
+![动手强化学习课程第三部分：SARSA](img/0fda14d9637f91b534e2d1ad2493d6b6.png)
 
 一旦代理使用离散化的状态，我们可以使用上述的 SARSA 更新公式，随着迭代的进行，我们会越来越接近最优 q 值。
 
 这是 `SarsaAgent` 的完整实现。
 
-![动手强化学习课程第3部分：SARSA](../Images/5115d60823b807644f2be72a5a485eaf.png)
+![动手强化学习课程第三部分：SARSA](img/5115d60823b807644f2be72a5a485eaf.png)
 
 注意 ???? q 值函数是一个三维矩阵：2 个用于状态（位置、速度），1 个用于动作。
 
 让我们选择合理的超参数，并将这个 `SarsaAgent` 训练 `n_episodes = 10,000` 次。
 
-![动手强化学习课程第3部分：SARSA](../Images/30d4886cfc816b5449c7ce86ce34f678.png)![动手强化学习课程第3部分：SARSA](../Images/1be80c6b85e074e60a1f949506d3ada1.png)
+![动手强化学习课程第三部分：SARSA](img/30d4886cfc816b5449c7ce86ce34f678.png)![动手强化学习课程第三部分：SARSA](img/1be80c6b85e074e60a1f949506d3ada1.png)
 
 让我们绘制 `rewards` 和 `max_positions`（蓝色线条）以及它们的 50 次迭代移动平均线（橙色线条）。
 
-![动手强化学习课程第3部分：SARSA](../Images/d2701bf7bf100ca95a5276ef8d013642.png)![动手强化学习课程第3部分：SARSA](../Images/05874c4c72e14310237e160a9eceb2a9.png)
+![动手强化学习课程第三部分：SARSA](img/d2701bf7bf100ca95a5276ef8d013642.png)![动手强化学习课程第三部分：SARSA](img/05874c4c72e14310237e160a9eceb2a9.png)
 
 太棒了！看起来我们的 `SarsaAgent` 正在学习。
 
@@ -282,15 +282,15 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 这发生的频率是多少？让我们在`1,000`个随机回合中评估一下智能体：
 
-![实践强化学习课程 第三部分：SARSA](../Images/5c690f4e9a6f9e4d1f5d7287c1313493.png)
+![实践强化学习课程 第三部分：SARSA](img/5c690f4e9a6f9e4d1f5d7287c1313493.png)
 
 并计算成功率：
 
-![实践强化学习课程 第三部分：SARSA](../Images/51dbbd94b417b19993f904d9a00795c6.png)
+![实践强化学习课程 第三部分：SARSA](img/51dbbd94b417b19993f904d9a00795c6.png)
 
 **95.2%**的表现相当不错，但仍然不完美。记住这一点，我们将在课程后面再回来讨论。
 
-**注意：** 当你在本地运行此代码时，你将得到略微不同的结果，但我敢打赌你不会得到100%的表现。
+**注意：** 当你在本地运行此代码时，你将得到略微不同的结果，但我敢打赌你不会得到 100%的表现。
 
 做得好！我们实现了一个`SarsaAgent`，它能够学习????
 
@@ -302,7 +302,7 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 如果我告诉你`MountainCar`环境有一个更简单的解决方案呢……
 
-这辆车100%的时间都能正常工作？ ????
+这辆车 100%的时间都能正常工作？ ????
 
 最好的策略是简单的。
 
@@ -314,23 +314,23 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 从视觉上看，这种策略如下：
 
-![实践强化学习课程 第三部分：SARSA](../Images/26889061f1c4db0ed1802e70bcfd8797.png)
+![实践强化学习课程 第三部分：SARSA](img/26889061f1c4db0ed1802e70bcfd8797.png)
 
-这是如何在Python中编写`MomentumAgent`：
+这是如何在 Python 中编写`MomentumAgent`：
 
-![实践强化学习课程 第三部分：SARSA](../Images/593d3214eeec9f93aa99bb76f46d4c7f.png)
+![实践强化学习课程 第三部分：SARSA](img/593d3214eeec9f93aa99bb76f46d4c7f.png)
 
 你可以再次检查它是否完成了每一集。100%的成功率。
 
-![实践强化学习课程 第三部分：SARSA](../Images/f31f46328e106eceb1c181f8e963f3a0.png)![实践强化学习课程 第三部分：SARSA](../Images/6ecc1050677bbc69346f4dd8e3b48152.png)
+![实践强化学习课程 第三部分：SARSA](img/f31f46328e106eceb1c181f8e963f3a0.png)![实践强化学习课程 第三部分：SARSA](img/6ecc1050677bbc69346f4dd8e3b48152.png)
 
 如果你绘制训练后的`SarsaAgent`的策略，你会看到如下图：
 
-![实践强化学习课程 第三部分：SARSA](../Images/f99251db39d0582f83b48560483d751f.png)
+![实践强化学习课程 第三部分：SARSA](img/f99251db39d0582f83b48560483d751f.png)
 
-这与完美的`MomentumAgent`策略有50%的重叠
+这与完美的`MomentumAgent`策略有 50%的重叠
 
-![实践强化学习课程 第三部分：SARSA](../Images/673958d367ba2427a0d8c059a3acf000.png)
+![实践强化学习课程 第三部分：SARSA](img/673958d367ba2427a0d8c059a3acf000.png)
 
 这意味着我们的`SarsaAgent`的正确率*仅为*50%。
 
@@ -338,11 +338,11 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 **为什么`SarsaAgent`错误这么频繁但仍能取得良好表现？**
 
-这是因为`MountainCar`仍然是一个较小的环境，因此在50%的时间里做出错误决定并不那么关键。对于更大的问题，频繁的错误不足以建立智能体。
+这是因为`MountainCar`仍然是一个较小的环境，因此在 50%的时间里做出错误决定并不那么关键。对于更大的问题，频繁的错误不足以建立智能体。
 
-> *你会买一辆95%时间正确的自动驾驶汽车吗？ ????*
+> *你会买一辆 95%时间正确的自动驾驶汽车吗？ ????*
 
-另外，你还记得我们用来应用SARSA的*离散化技巧*吗？那是一个对我们帮助很大的技巧，但也给我们的解决方案带来了误差/偏差。
+另外，你还记得我们用来应用 SARSA 的*离散化技巧*吗？那是一个对我们帮助很大的技巧，但也给我们的解决方案带来了误差/偏差。
 
 **为什么我们不提高状态和速度的离散化分辨率，以获得更好的解决方案？**
 
@@ -358,7 +358,7 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 享受你今天所取得的成就。
 
-![动手强化学习课程第 3 部分：SARSA](../Images/210f53a985969df08d72258294b59fb3.png)谁在玩得开心？
+![动手强化学习课程第三部分：SARSA](img/210f53a985969df08d72258294b59fb3.png)谁在玩得开心？
 
 ### 6\. 回顾 ✨
 
@@ -414,20 +414,20 @@ SARSA 和 Q-learning 之间有一个关键的区别：
 
 很快见！
 
-**个人简介：[Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)** ([**@paulabartabajo_**](https://twitter.com/paulabartabajo_)) 是一名数学家和AI/ML自由职业者及演讲者，拥有超过10年的经验，处理各种问题的数字和模型，包括金融交易、移动游戏、在线购物和医疗保健。
+**个人简介：[Pau Labarta Bajo](https://www.linkedin.com/in/pau-labarta-bajo-4432074b/)** ([**@paulabartabajo_**](https://twitter.com/paulabartabajo_)) 是一名数学家和 AI/ML 自由职业者及演讲者，拥有超过 10 年的经验，处理各种问题的数字和模型，包括金融交易、移动游戏、在线购物和医疗保健。
 
 [原文](http://datamachines.xyz/2021/12/17/hands-on-reinforcement-learning-course-part-3-sarsa/)。经授权转载。
 
 ### 更多相关话题
 
-+   [动手强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
++   [动手强化学习课程，第一部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
 
-+   [动手强化学习课程，第2部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
++   [动手强化学习课程，第二部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
 
-+   [HuggingFace推出了免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)
++   [HuggingFace 推出了免费的深度强化学习课程](https://www.kdnuggets.com/2022/05/huggingface-launched-free-deep-reinforcement-learning-course.html)
 
 +   [动手学习监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)
 
-+   [动手学习无监督学习：K均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
++   [动手学习无监督学习：K 均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
 
-+   [使用大型语言模型的生成性AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
++   [使用大型语言模型的生成性 AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)

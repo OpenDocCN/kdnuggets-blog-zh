@@ -1,8 +1,8 @@
 # 需要管理的 Python 版本太多？Pyenv 来拯救
 
-> 原文：[https://www.kdnuggets.com/too-many-python-versions-to-manage-pyenv-to-the-rescue](https://www.kdnuggets.com/too-many-python-versions-to-manage-pyenv-to-the-rescue)
+> 原文：[`www.kdnuggets.com/too-many-python-versions-to-manage-pyenv-to-the-rescue`](https://www.kdnuggets.com/too-many-python-versions-to-manage-pyenv-to-the-rescue)
 
-![需要管理的 Python 版本太多？Pyenv 来拯救](../Images/2139531f43a05fc40e1648d1dbb6ffed.png)
+![需要管理的 Python 版本太多？Pyenv 来拯救](img/2139531f43a05fc40e1648d1dbb6ffed.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -174,7 +174,7 @@ Not Found! Status code: 404
 
 比如，你想在处理项目 A 时使用 Python 3.8，在处理项目 B 时使用 Python 3.10 或更高版本。
 
-![Python 版本太多，难以管理？Pyenv 来救援](../Images/784d50c72897ae279e6b24fb94dce3bd.png)
+![Python 版本太多，难以管理？Pyenv 来救援](img/784d50c72897ae279e6b24fb94dce3bd.png)
 
 图片由作者提供
 
@@ -222,7 +222,7 @@ pyenv: 3.8.18 uninstalled
 | `pyenv local 3.x` | 将本地 Python 版本设置为 3.x |
 | `pyenv uninstall 3.x.y` | 卸载 Python 3.x 的 y 版本 |
 
-如果你在想。是的，你可以 [使用 Docker](/2023/07/docker-tutorial-data-scientists.html)，这是一个使本地开发变得轻松的绝佳选择——无需担心依赖冲突。但你可能会觉得每次需要进行新项目时使用 Docker 或其他容器化解决方案有些过度。
+如果你在想。是的，你可以 使用 Docker，这是一个使本地开发变得轻松的绝佳选择——无需担心依赖冲突。但你可能会觉得每次需要进行新项目时使用 Docker 或其他容器化解决方案有些过度。
 
 所以我认为能够在命令行安装、管理和切换 Python 版本仍然很有用。你也可以探索 [pyenv-virtualenv](https://github.com/pyenv/pyenv-virtualenv) 插件来创建和管理虚拟环境。编码愉快！
 

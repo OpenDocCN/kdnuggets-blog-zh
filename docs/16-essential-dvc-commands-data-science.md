@@ -1,8 +1,8 @@
 # 数据科学的 16 个关键 DVC 命令
 
-> 原文：[https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html`](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
 
-![16 个关键 DVC 命令用于数据科学](../Images/949e8339ec519a1a987be9dc15ee7e4a.png)
+![16 个关键 DVC 命令用于数据科学](img/949e8339ec519a1a987be9dc15ee7e4a.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的 3 个最佳课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -69,7 +69,7 @@ dvc init
 
 **init** 命令已创建一个 **.dvc** 目录。它包含与 DVC 配置和文件相关的所有元数据。
 
-![dvc init](../Images/e1207527b1e7be384d9d4d513afc446e.png)
+![dvc init](img/e1207527b1e7be384d9d4d513afc446e.png)
 
 # 2\. remote
 
@@ -129,7 +129,7 @@ dvc remove model.dvc
 dvc status
 ```
 
-![dvc status](../Images/a16daacd442154c02a188250a6e0ba23.png)
+![dvc status](img/a16daacd442154c02a188250a6e0ba23.png)
 
 # 6\. commit
 
@@ -181,7 +181,7 @@ dvc pull
 dvc pull -r <remote-name>
 ```
 
-![从特定远程提取文件](../Images/86c347f06afa67297bc8389d924257ac.png)
+![从特定远程提取文件](img/86c347f06afa67297bc8389d924257ac.png)
 
 # 10\. run
 
@@ -205,7 +205,7 @@ dvc run -n printer -d write.sh -o pages ./write.sh
 dvc exp {show,apply,diff,run,gc,branch,list,push,pull,remove,init}
 ```
 
-![dvc exp](../Images/77c7ab67ae8bf528aed886152e8eaffd.png)
+![dvc exp](img/77c7ab67ae8bf528aed886152e8eaffd.png)
 
 图片来自 DVC [experiments](https://dvc.org/doc/user-guide/experiment-management/experiments-overview)
 
@@ -245,7 +245,7 @@ dvc metrics diff
 dvc plots show logs.csv
 ```
 
-![dvc plots](../Images/890f174def917282792256410d4f204b.png)
+![dvc plots](img/890f174def917282792256410d4f204b.png)
 
 图片来自 DVC [Doc](https://dvc.org/doc/command-reference/plots)
 
@@ -255,11 +255,11 @@ dvc plots show logs.csv
 dvc plots diff HEAD^ --targets logs.csv
 ```
 
-![dvc plots diff ](../Images/15f6ba9b004fc38d6b7eadb4f2079758.png)
+![dvc plots diff ](img/15f6ba9b004fc38d6b7eadb4f2079758.png)
 
 图片来自 DVC [Doc](https://dvc.org/doc/command-reference/plots)
 
-> **注意：** 在[DVC VSCode新扩展](https://marketplace.visualstudio.com/items?itemName=Iterative.dvc)中运行实验和可视化结果非常互动。
+> **注意：** 在[DVC VSCode 新扩展](https://marketplace.visualstudio.com/items?itemName=Iterative.dvc)中运行实验和可视化结果非常互动。
 
 # 15\. dag
 
@@ -269,11 +269,11 @@ dvc plots diff HEAD^ --targets logs.csv
 dvc dag
 ```
 
-![dvc dag](../Images/6636c319c8098cd228ea286b0a946538.png)
+![dvc dag](img/6636c319c8098cd228ea286b0a946538.png)
 
 # 16\. gc
 
-它用于从缓存或远程存储中删除未使用的文件或目录。类似于Git，它用于优化仓库。
+它用于从缓存或远程存储中删除未使用的文件或目录。类似于 Git，它用于优化仓库。
 
 ```py
 dvc gc -w
@@ -281,30 +281,30 @@ dvc gc -w
 
 # 结论
 
-DVC已经成为数据科学和机器学习操作的一个重要工具。你可以对数据和模型进行版本控制，跟踪实验，开发管道，分享和协作，并将模型部署到生产环境。在这篇文章中，我们学习了DVC的基本命令。阅读[文档](https://dvc.org/doc)以了解更多命令和功能。
+DVC 已经成为数据科学和机器学习操作的一个重要工具。你可以对数据和模型进行版本控制，跟踪实验，开发管道，分享和协作，并将模型部署到生产环境。在这篇文章中，我们学习了 DVC 的基本命令。阅读[文档](https://dvc.org/doc)以了解更多命令和功能。
 
-如果你是新手并想互动体验DVC，可以尝试[DagsHub](https://dagshub.com)。该平台专为数据科学家和机器学习工程师而设计。你可以查看我的个人资料[这里](https://dagshub.com/kingabzpro)以获得灵感。
+如果你是新手并想互动体验 DVC，可以尝试[DagsHub](https://dagshub.com)。该平台专为数据科学家和机器学习工程师而设计。你可以查看我的个人资料[这里](https://dagshub.com/kingabzpro)以获得灵感。
 
-> **注意：** 如果你想从Git仓库中删除dvc文件、管道、实验和指标，请使用`dvc destroy`。
+> **注意：** 如果你想从 Git 仓库中删除 dvc 文件、管道、实验和指标，请使用`dvc destroy`。
 
 ## 更多关于数据科学命令的主题
 
-+   [数据科学家的14个必备Git命令](/2022/06/14-essential-git-commands-data-scientists.html)
++   数据科学家的 14 个必备 Git 命令
 
-+   [数据科学初学者的20个基础Linux命令](/2022/06/20-basic-linux-commands-data-science-beginners.html)
++   数据科学初学者的 20 个基础 Linux 命令
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个AI产品，帮助那些在心理健康方面挣扎的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个 AI 产品，帮助那些在心理健康方面挣扎的学生。
 
 ### 更多相关主题
 
-+   [数据科学的10个必备SQL命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
++   [数据科学的 10 个必备 SQL 命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
 
-+   [数据科学家的14个必备Git命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
++   [数据科学家的 14 个必备 Git 命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
 
-+   [Streamlit的12个必备命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
++   [Streamlit 的 12 个必备命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
 
-+   [KDnuggets新闻，6月29日：数据科学的20个基础Linux命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基础 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)
 
-+   [数据科学初学者的20个基础Linux命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
++   [数据科学初学者的 20 个基础 Linux 命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
 
-+   [每个数据科学家都应该知道的12个Docker命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)
++   [每个数据科学家都应该知道的 12 个 Docker 命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)

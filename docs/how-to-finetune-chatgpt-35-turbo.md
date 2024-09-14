@@ -1,8 +1,8 @@
 # 如何微调 ChatGPT 3.5 Turbo
 
-> 原文：[https://www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo](https://www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo)
+> 原文：[`www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo`](https://www.kdnuggets.com/how-to-finetune-chatgpt-35-turbo)
 
-![如何微调 ChatGPT 3.5 Turbo](../Images/f30f728e058db0ef82104d4072631856.png)
+![如何微调 ChatGPT 3.5 Turbo](img/f30f728e058db0ef82104d4072631856.png)
 
 编辑器提供的图片
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-但为什么这项公告如此重要呢？简而言之，是因为微调 GPT-3.5 Turbo 模型提供了几个重要的好处。虽然我们将在本文后面探讨这些好处，但本质上，微调使开发人员能够更有效地 [管理他们的项目](/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html) 并缩短提示（有时缩短高达 90%），通过将指令嵌入模型本身。
+但为什么这项公告如此重要呢？简而言之，是因为微调 GPT-3.5 Turbo 模型提供了几个重要的好处。虽然我们将在本文后面探讨这些好处，但本质上，微调使开发人员能够更有效地 管理他们的项目 并缩短提示（有时缩短高达 90%），通过将指令嵌入模型本身。
 
 通过微调后的 GPT-3.5 Turbo 版本，有可能超越基本的 Chat GPT-3.5 能力，完成某些任务。让我们深入探讨如何更好地微调你的 GPT-3.5 Turbo 模型。
 
@@ -75,13 +75,13 @@ curl https://api.openai.com/v1/fine_tuning/jobs \
 }'
 ```
 
-如上例所示，你需要使用openai.file.create来发送请求上传文件。记得保存文件ID，因为你将在未来步骤中用到它。
+如上例所示，你需要使用 openai.file.create 来发送请求上传文件。记得保存文件 ID，因为你将在未来步骤中用到它。
 
 # 利用微调模型
 
-现在是部署和与微调模型互动的时候了。你可以在OpenAI游乐场中完成这一操作。
+现在是部署和与微调模型互动的时候了。你可以在 OpenAI 游乐场中完成这一操作。
 
-请注意下面的OpenAI示例：
+请注意下面的 OpenAI 示例：
 
 ```py
 curl https://api.openai.com/v1/chat/completions \
@@ -102,11 +102,11 @@ curl https://api.openai.com/v1/chat/completions \
 }'
 ```
 
-这也是一个比较新微调模型与原始GPT-3.5 Turbo模型的好机会。
+这也是一个比较新微调模型与原始 GPT-3.5 Turbo 模型的好机会。
 
 # 微调的优势
 
-微调你的GPT-3.5 Turbo提示提供了三个主要的优势，[提升模型质量](https://www.infoq.com/news/2023/08/got-3-5-fine-tuning/)和性能。
+微调你的 GPT-3.5 Turbo 提示提供了三个主要的优势，[提升模型质量](https://www.infoq.com/news/2023/08/got-3-5-fine-tuning/)和性能。
 
 ## 改进的引导性
 
@@ -120,13 +120,13 @@ curl https://api.openai.com/v1/chat/completions \
 
 ## 定制语调
 
-如果任何企业需要确保其AI模型生成的输出具有特定的语调，微调是最有效的方式。许多企业需要确保其内容和营销材料与品牌声音一致或具有特定的语调，以更好地与客户建立联系。
+如果任何企业需要确保其 AI 模型生成的输出具有特定的语调，微调是最有效的方式。许多企业需要确保其内容和营销材料与品牌声音一致或具有特定的语调，以更好地与客户建立联系。
 
-如果任何企业有一个可识别的品牌声音，他们可以在准备数据进行微调时微调他们的GPT-3.5 Turbo模型。具体来说，这将在上面讨论的“用户消息”和“系统消息”类型中进行。正确操作时，这将确保所有消息都以公司的品牌声音为基础，同时显著减少从社交媒体文案到白皮书编辑所需的时间。
+如果任何企业有一个可识别的品牌声音，他们可以在准备数据进行微调时微调他们的 GPT-3.5 Turbo 模型。具体来说，这将在上面讨论的“用户消息”和“系统消息”类型中进行。正确操作时，这将确保所有消息都以公司的品牌声音为基础，同时显著减少从社交媒体文案到白皮书编辑所需的时间。
 
 # 未来的增强功能
 
-如上所述，OpenAI预计很快会推出GPT-4.0的微调功能。除此之外，公司还预计推出即将支持[函数调用](https://gpt-index.readthedocs.io/en/latest/examples/finetuning/openai_fine_tuning_functions.html)和通过UI进行微调的功能。后者将使微调对新手用户更加可及。
+如上所述，OpenAI 预计很快会推出 GPT-4.0 的微调功能。除此之外，公司还预计推出即将支持[函数调用](https://gpt-index.readthedocs.io/en/latest/examples/finetuning/openai_fine_tuning_functions.html)和通过 UI 进行微调的功能。后者将使微调对新手用户更加可及。
 
 这些微调的发展不仅对开发人员重要，对企业也至关重要。例如，许多在科技和开发领域的[最具前景的初创公司](https://www.atlantic.net/dedicated-server-hosting/most-promising-start-ups-to-watch-in-2023/)，如 Sweep 或 SeekOut，依赖于 AI 完成他们的服务。这些企业将会充分利用微调 GPT 数据模型的能力。
 

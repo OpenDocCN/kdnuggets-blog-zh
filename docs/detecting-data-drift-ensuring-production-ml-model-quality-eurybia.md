@@ -1,6 +1,6 @@
 # 使用 Eurybia 检测数据漂移以确保生产机器学习模型质量
 
-> 原文：[https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
+> 原文：[`www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html`](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
 在本文的其余部分，我们将重点介绍使用 Eurybia 这一开源 Python 库进行的逐步数据漂移研究。检测数据漂移是确保生产环境中机器学习模型质量的重要步骤。这种检测大大有利于人工智能的长期可靠性。
 
@@ -8,15 +8,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
-![使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](../Images/15f602b6c3985943485046c1ad53411e.png)
+![使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](img/15f602b6c3985943485046c1ad53411e.png)
 
 Eurybia 演示，图像来源：作者
 
@@ -34,7 +34,7 @@ Eurybia 演示，图像来源：作者
 
 Python 库 Eurybia 使用了一种方法，该方法包括训练一个**二分类模型**（称为“*数据漂移分类器*”）。该模型试图预测样本是否属于训练/基线数据集或生产/当前数据集。
 
-![使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](../Images/2f5aee8dd8e202cad0e4a20476d24a70.png)
+![使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](img/2f5aee8dd8e202cad0e4a20476d24a70.png)
 
 数据漂移分类器的工作原理，图像来源：作者
 
@@ -74,9 +74,9 @@ $pip install eurybia
 
 在本文的其余部分，我们将专注于使用 Eurybia 进行逐步的数据漂移研究。
 
-我们将使用来自 [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques) 的著名“房价”数据集。数据将被拆分为两个不同的数据集。2006年的数据将用于训练一个回归模型，以预测房屋的销售价格。然后，将使用之前创建的模型预测2007年售出的房屋价格。
+我们将使用来自 [Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques) 的著名“房价”数据集。数据将被拆分为两个不同的数据集。2006 年的数据将用于训练一个回归模型，以预测房屋的销售价格。然后，将使用之前创建的模型预测 2007 年售出的房屋价格。
 
-我们将尝试检测这个回归器的漂移，基于2006年与2007年数据集的数据漂移。
+我们将尝试检测这个回归器的漂移，基于 2006 年与 2007 年数据集的数据漂移。
 
 **让我们开始加载数据集：**
 
@@ -116,7 +116,7 @@ $pip install eurybia
 
 Eurybia 旨在生成用于分析的 HTML 报告。HTML 报告中提供的所有图表也可以在 Jupyter notebooks 中查看。
 
-![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/427852ab9371adcd67d6dd98d14b9072.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/427852ab9371adcd67d6dd98d14b9072.png)
 
 Eurybia 报告索引，图片来源：作者
 
@@ -134,7 +134,7 @@ Eurybia 报告索引，图片来源：作者
 
 数据漂移检测方法基于模型分类器识别样本属于一个数据集还是另一个数据集的能力。为此，将目标 (0) 分配给基线数据集，将第二个目标 (1) 分配给当前数据集。训练一个分类模型 (catboost) 来预测这个目标。因此，数据漂移分类器的性能与两个数据集之间的差异相关。显著的差异将导致容易分类 (最终 AUC 接近 1)。类似的数据集将导致数据漂移分类器性能差 (最终 AUC 接近 0.5)。
 
-![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/c703373236fb724a2e4ef16220c26fb4.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/c703373236fb724a2e4ef16220c26fb4.png)
 
 Datadrift 分类器模型性能，图片来源：作者
 
@@ -144,7 +144,7 @@ AUC 越接近 0.5，数据漂移越少。AUC 越接近 1，数据漂移越多
 
 条形图表示每个包含在“*datadrift 分类器*”中的变量的特征重要性。
 
-![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/97cfbcc3bf0fba8ea857fdda97bfe75b.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/97cfbcc3bf0fba8ea857fdda97bfe75b.png)
 
 数据漂移中特征的重要性，图片来源：作者
 
@@ -154,7 +154,7 @@ AUC 越接近 0.5，数据漂移越少。AUC 越接近 1，数据漂移越多
 
 Eurybia HTML 报告还包含一个散点图，描绘了每个特征的特征重要性，作为“*datadrift 分类器*”特征重要性的函数。这突出了数据漂移对已部署模型分类的实际重要性。
 
-![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](../Images/95b89e12f85e4d74c8f7432f4367e844.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/95b89e12f85e4d74c8f7432f4367e844.png)
 
 特征重要性概述，图片来源：作者
 
@@ -172,58 +172,58 @@ Eurybia HTML 报告还包含一个散点图，描绘了每个特征的特征重�
 
 单变量分析通过两个数据集的分布图形分析得到支持，便于研究对漂移检测最重要的特征。
 
-![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/11439a554a0b7045156dd767c876d943.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/11439a554a0b7045156dd767c876d943.png)
 
 单变量分析，图片来源：作者
 
-在Eurybia报告中，通过下拉菜单，特征按照数据漂移分类中的重要性排序。对于分类特征，可能的值按两个数据集之间的降序差异进行排序。
+在 Eurybia 报告中，通过下拉菜单，特征按照数据漂移分类中的重要性排序。对于分类特征，可能的值按两个数据集之间的降序差异进行排序。
 
 **预测值的分布**
 
 预测值的分布有助于可视化部署模型在基线数据集和当前数据集上的输出预测。分布差异可能反映数据漂移。
 
-![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/cab662b411781e0011fe265abef16add.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/cab662b411781e0011fe265abef16add.png)
 
 预测值的分布，图片来源：作者
 
-Jensen Shannon Divergence (JSD)。JSD衡量数据漂移对部署模型性能的影响。接近0的值表示数据分布相似，而接近1的值则通常显示数据分布不同，对部署模型性能有负面影响。
+Jensen Shannon Divergence (JSD)。JSD 衡量数据漂移对部署模型性能的影响。接近 0 的值表示数据分布相似，而接近 1 的值则通常显示数据分布不同，对部署模型性能有负面影响。
 
-![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/14c671aba52f214fbb7443e9721f675a.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/14c671aba52f214fbb7443e9721f675a.png)
 
 Jensen Shannon Divergence，图片来源：作者
 
 **历史数据漂移**
 
-Eurybia可以编译数据漂移情况，涵盖销售数据直到2010年。
+Eurybia 可以编译数据漂移情况，涵盖销售数据直到 2010 年。
 
-![使用Eurybia检测数据漂移以确保生产ML模型质量](../Images/b557d064c4dcf148a9310d9946f089fe.png)
+![使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](img/b557d064c4dcf148a9310d9946f089fe.png)
 
 历史数据漂移，图片来源：作者
 
-“Datadrift分类器AUC”和“Jensen Shannon Datadrift”提供了两个有用的数据漂移指标。
+“Datadrift 分类器 AUC”和“Jensen Shannon Datadrift”提供了两个有用的数据漂移指标。
 
-虽然AUC严格关注数据演变，JSD则评估数据演变对部署模型预测的影响。
+虽然 AUC 严格关注数据演变，JSD 则评估数据演变对部署模型预测的影响。
 
-换句话说，单一变量的明显漂移，如果该变量对部署模型的重要性较低，应导致高AUC但可能低JSD。
+换句话说，单一变量的明显漂移，如果该变量对部署模型的重要性较低，应导致高 AUC 但可能低 JSD。
 
 # 如果你想深入了解…
 
-关于Eurybia不同用途的教程可以在 [**这里**](https://github.com/MAIF/eurybia/tree/master/tutorial)**找到**。
+关于 Eurybia 不同用途的教程可以在 [**这里**](https://github.com/MAIF/eurybia/tree/master/tutorial)**找到**。
 
-希望Eurybia在监控生产中的ML模型时能发挥作用。欢迎任何反馈和想法！[**Eurybia**](https://github.com/MAIF/eurybia)是开源的！请随时通过评论此帖或在[GitHub讨论区](https://github.com/MAIF/eurybia/discussions)来贡献。
+希望 Eurybia 在监控生产中的 ML 模型时能发挥作用。欢迎任何反馈和想法！[**Eurybia**](https://github.com/MAIF/eurybia)是开源的！请随时通过评论此帖或在[GitHub 讨论区](https://github.com/MAIF/eurybia/discussions)来贡献。
 
-[**托马斯·布歇**](https://medium.com/@thomas.bouche_2245)是MAIF的首席数据科学家。
+[**托马斯·布歇**](https://medium.com/@thomas.bouche_2245)是 MAIF 的首席数据科学家。
 
 ### 更多相关话题
 
-+   [使用MLOps管理生产环境中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
++   [使用 MLOps 管理生产环境中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 
 +   [数据质量维度：用伟大的期望确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [数据掩码：确保GDPR及其他法规合规性的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
++   [数据掩码：确保 GDPR 及其他法规合规性的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
 
-+   [确保LLMs的可靠少量提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
++   [确保 LLMs 的可靠少量提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
 
 +   [将机器学习模型部署到云端生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)
 
-+   [检测ChatGPT、GPT3和GPT2的5款免费工具](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)
++   [检测 ChatGPT、GPT3 和 GPT2 的 5 款免费工具](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)

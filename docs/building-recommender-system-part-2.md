@@ -1,14 +1,14 @@
-# 构建推荐系统，第 2 部分
+# 构建推荐系统，第二部分
 
-> 原文：[https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html](https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html)
+> 原文：[`www.kdnuggets.com/2019/07/building-recommender-system-part-2.html`](https://www.kdnuggets.com/2019/07/building-recommender-system-part-2.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Matthew Mahowald，[开放数据集团](https://www.opendatagroup.com/)**
 
 在上一篇文章中，我们探讨了基于邻域的方法来构建推荐系统。本文探讨了一种使用潜在因子模型的协同过滤替代技术。我们将使用的技术自然可以推广到深度学习方法（如自编码器），因此我们还将使用 Tensorflow 和 Keras 实现我们的方法。
 
-![影院门](../Images/62ea85463bb6b53abb44cb4d031ff0c4.png)
+![影院门](img/62ea85463bb6b53abb44cb4d031ff0c4.png)
 
 ### 数据集
 
@@ -74,19 +74,15 @@ pop_ratings = ratings[ratings["movieid"].isin((rating_counts).index[0:500])]
 pop_ratings = pop_ratings.set_index(["movieid", "userid"])
 ```
 
-接下来，[如前一篇文章中提到的](/2019/04/building-recommender-system.html)，我们应该规范化我们的评分数据。我们通过减去总体均值评分、每个项目的均值评分，然后减去每个用户的均值评分来创建一个调整后的评分。
+接下来，如前一篇文章中提到的，我们应该规范化我们的评分数据。我们通过减去总体均值评分、每个项目的均值评分，然后减去每个用户的均值评分来创建一个调整后的评分。
 
-这产生了一个“偏好评分” ![\tilde{r}_{u,i}](../Images/52a9c49297042d77a17cce1bba397ac4.png)，定义如下
+这产生了一个“偏好评分” ![\tilde{r}_{u,i}](img/52a9c49297042d77a17cce1bba397ac4.png)，定义如下
 
-![
+![\tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u}](img/7e596563eff0b2daefe4be7079d610a7.png)
 
-\tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u}
+对于 ![\tilde{r}](img/15faa8d8c7bbf110f5cdc90f3df75b49.png) 的直觉是， ![\tilde{r} = 0](img/b0fdf67af6503f0804a125e9413b19a8.png) 表示用户 ![u](img/c1155b10039d460302206caf78e70b84.png) 对项目 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png) 的评分正是我们如果只知道平均总体评分、项目评分和用户评分时的预测。任何高于或低于 0 的值表示相对于这个基准的偏好偏差。为了区分 ![\tilde{r}](img/15faa8d8c7bbf110f5cdc90f3df75b49.png) 和原始评分 ![r](img/dc16d9309e95f2dd60bba8a2d99d78b4.png)，我将前者称为用户对项目 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png) 的*偏好*，后者称为用户对项目 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png) 的*评分*。
 
-](../Images/7e596563eff0b2daefe4be7079d610a7.png)
-
-对于 ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png) 的直觉是， ![\tilde{r} = 0](../Images/b0fdf67af6503f0804a125e9413b19a8.png) 表示用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png) 对项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) 的评分正是我们如果只知道平均总体评分、项目评分和用户评分时的预测。任何高于或低于0的值表示相对于这个基准的偏好偏差。为了区分 ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png) 和原始评分 ![r](../Images/dc16d9309e95f2dd60bba8a2d99d78b4.png)，我将前者称为用户对项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) 的*偏好*，后者称为用户对项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) 的*评分*。
-
-让我们使用对500部最受欢迎电影的评分来构建偏好数据：
+让我们使用对 500 部最受欢迎电影的评分来构建偏好数据：
 
 ```py
 prefs = pop_ratings["rating"]
@@ -103,59 +99,43 @@ prefs = prefs - mean_u
 pref_matrix = prefs.reset_index()[["userid", "movieid", "rating"]].pivot(index="userid", columns="movieid", values="rating")
 ```
 
-这段代码的输出是两个对象：`prefs`，它是一个按`movieid`和`userid`索引的偏好数据框；以及`pref_matrix`，它是一个矩阵，其中的 ![(i,j)](../Images/eb0b8c3c59dc87afe6d3a1ddaa4dd520.png) 项对应于用户 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png) 对电影 ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png) 的评分（即列是电影，每行是用户）。如果用户没有对某个项目进行评分，这个矩阵将包含 `NaN`。
+这段代码的输出是两个对象：`prefs`，它是一个按`movieid`和`userid`索引的偏好数据框；以及`pref_matrix`，它是一个矩阵，其中的 ![(i,j)](img/eb0b8c3c59dc87afe6d3a1ddaa4dd520.png) 项对应于用户 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png) 对电影 ![j](img/4b5e5503442fdfa2029fcc9208d6ca1a.png) 的评分（即列是电影，每行是用户）。如果用户没有对某个项目进行评分，这个矩阵将包含 `NaN`。
 
-数据中的最大和最小偏好分别是3.923和-4.643。接下来，我们将构建一个实际的模型。
+数据中的最大和最小偏好分别是 3.923 和-4.643。接下来，我们将构建一个实际的模型。
 
 ### 潜在因子协同过滤
 
-在这一阶段，我们已经构建了一个矩阵 ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png)（在上面的Python代码中称为`pref_matrix`）。潜在因子协同过滤模型的思想是，每个用户的偏好可以通过少量的潜在因子来预测（通常远小于可用项目的总数）：
+在这一阶段，我们已经构建了一个矩阵 ![P](img/7a36f354985d6a6caf213c0934bdc243.png)（在上面的 Python 代码中称为`pref_matrix`）。潜在因子协同过滤模型的思想是，每个用户的偏好可以通过少量的潜在因子来预测（通常远小于可用项目的总数）：
 
-![
-
-\tilde{r}_{u,i} \approx f_{i}(\lambda_{1}(u), \lambda_{2}(u), \ldots, \lambda_{n}(u))
-
-](../Images/95ea1e92b71a45cf8e1b2d3317fd764b.png)
+![\tilde{r}_{u,i} \approx f_{i}(\lambda_{1}(u), \lambda_{2}(u), \ldots, \lambda_{n}(u))](img/95ea1e92b71a45cf8e1b2d3317fd764b.png)
 
 潜在因子模型因此需要回答两个相关的问题：
 
-1.  对于给定的用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png)，相应的潜在因子是什么 ![\lambda_{k}(u)](../Images/7182e3b55bb891245c408f09bac9c180.png)？
+1.  对于给定的用户 ![u](img/c1155b10039d460302206caf78e70b84.png)，相应的潜在因子是什么 ![\lambda_{k}(u)](img/7182e3b55bb891245c408f09bac9c180.png)？
 
-1.  对于给定的潜在因子集合，函数 ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png) 是什么？即，潜在因子与用户对每个项目的偏好之间的关系是什么？
+1.  对于给定的潜在因子集合，函数 ![f_{i}](img/f105567a69855b0e0e3fc7a24547c4e4.png) 是什么？即，潜在因子与用户对每个项目的偏好之间的关系是什么？
 
-解决这个问题的一种方法是尝试求解 ![f_{i}](../Images/f105567a69855b0e0e3fc7a24547c4e4.png) 和 ![\lambda_{k}](../Images/f5faabc2a6741e3731804ea32acf6217.png)，通过简化假设每个函数都是线性的：
+解决这个问题的一种方法是尝试求解 ![f_{i}](img/f105567a69855b0e0e3fc7a24547c4e4.png) 和 ![\lambda_{k}](img/f5faabc2a6741e3731804ea32acf6217.png)，通过简化假设每个函数都是线性的：
 
-![
+![\lambda_{k}(u) = \sum_{i} a_{i} \tilde{r}_{u,i}](img/c1594024dae526ec375179d67d522f5d.png)
 
-\lambda_{k}(u) = \sum_{i} a_{i} \tilde{r}_{u,i}
+![f_{i} = \sum_{k} b_{k} \lambda_{k}](img/f8b09f43d5e1f4139f75aaacc54cd15b.png)
 
-](../Images/c1594024dae526ec375179d67d522f5d.png)
+在所有项目和用户中，这可以被重新写为线性代数问题：找出矩阵 ![F](img/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](img/41bc440d6829aeae8408d80f760a18d3.png) 使得
 
-![
+![ P \approx F  \Lambda  P, ](img/03898dea92e52495175d8b468b0cf8a4.png)
 
-f_{i} = \sum_{k} b_{k} \lambda_{k}
+其中 ![P](img/7a36f354985d6a6caf213c0934bdc243.png) 是偏好矩阵，![\Lambda](img/41bc440d6829aeae8408d80f760a18d3.png) 是将用户的偏好投影到潜在变量空间的线性变换，而 ![F](img/39efd788e124a66b0f98d992a7cb4f9e.png) 是从用户在潜在变量空间中的表示中重建用户评分的线性变换。
 
-](../Images/f8b09f43d5e1f4139f75aaacc54cd15b.png)
-
-在所有项目和用户中，这可以被重新写为线性代数问题：找出矩阵 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 使得
-
-![ P \approx F  \Lambda  P, ](../Images/03898dea92e52495175d8b468b0cf8a4.png)
-
-其中 ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png) 是偏好矩阵，![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 是将用户的偏好投影到潜在变量空间的线性变换，而 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 是从用户在潜在变量空间中的表示中重建用户评分的线性变换。
-
-这个产品 ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) 将是一个方阵。然而，通过选择的潜在变量数量严格少于项目数量，这个产品必然不是满秩的。从本质上讲，我们是在求解 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png)，使得产品 ![F \Lambda](../Images/57fc7a9b4718945cec840bfd8965af63.png) 最好地逼近身份变换 *在偏好矩阵上* ![P](../Images/7a36f354985d6a6caf213c0934bdc243.png)。我们的直觉（和希望）是，这将重建每个用户的准确偏好。（我们将调整我们的损失函数以确保确实如此。）
+这个产品 ![F \Lambda](img/57fc7a9b4718945cec840bfd8965af63.png) 将是一个方阵。然而，通过选择的潜在变量数量严格少于项目数量，这个产品必然不是满秩的。从本质上讲，我们是在求解 ![F](img/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](img/41bc440d6829aeae8408d80f760a18d3.png)，使得产品 ![F \Lambda](img/57fc7a9b4718945cec840bfd8965af63.png) 最好地逼近身份变换 *在偏好矩阵上* ![P](img/7a36f354985d6a6caf213c0934bdc243.png)。我们的直觉（和希望）是，这将重建每个用户的准确偏好。（我们将调整我们的损失函数以确保确实如此。）
 
 ### 模型实现
 
 如广告所示，我们将使用 Keras + Tensorflow 构建我们的模型，以便我们为任何未来的深度学习方法的推广做好准备。这也是解决我们所处理问题的自然方法：表达式
 
-![
+![P \approx F \Lambda P](img/a7661198c171c6721f2751bc69e02d3c.png)
 
-P \approx F \Lambda P
-
-](../Images/a7661198c171c6721f2751bc69e02d3c.png)
-
-可以被认为是描述一个两层密集神经网络的，其中层由 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 定义，并且其激活函数就是身份映射（即函数 ![\sigma(x) = x](../Images/80b0e6e0e12ab684d6e97147cadeac6b.png)）。
+可以被认为是描述一个两层密集神经网络的，其中层由 ![F](img/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](img/41bc440d6829aeae8408d80f760a18d3.png) 定义，并且其激活函数就是身份映射（即函数 ![\sigma(x) = x](img/80b0e6e0e12ab684d6e97147cadeac6b.png)）。
 
 首先，让我们导入我们需要的包，并设置我们为这个模型所需的编码维度（潜在变量的数量）。
 
@@ -190,12 +170,12 @@ encoder = Model(input_layer, encoded)
 
 # 3\. the decoder
 encoded_input = Input(shape=(ENCODING_DIM, ))
-decoder = Model(encoded_input, recommender.layers[-1](encoded_input))
+decoder = Model(encoded_input, recommender.layers-1)
 ```
 
 ### 自定义损失函数
 
-此时，我们可以直接训练我们的模型以仅重现其输入（这本质上是一个非常简单的自编码器）。然而，我们实际上感兴趣的是选择 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 来正确填充 *缺失* 的值。我们可以通过仔细应用掩盖和自定义损失函数来做到这一点。
+此时，我们可以直接训练我们的模型以仅重现其输入（这本质上是一个非常简单的自编码器）。然而，我们实际上感兴趣的是选择 ![F](img/39efd788e124a66b0f98d992a7cb4f9e.png) 和 ![\Lambda](img/41bc440d6829aeae8408d80f760a18d3.png) 来正确填充 *缺失* 的值。我们可以通过仔细应用掩盖和自定义损失函数来做到这一点。
 
 记住，`prefs_matrix` 目前主要由 NaNs 组成——实际上，整个数据集中只有一个零值：
 
@@ -333,7 +313,7 @@ def fit(wrapper_model, pref_matrix, batch_size=64, mask_fraction=0.2, epochs=1, 
  return history
 ```
 
-记住 ![\Lambda](../Images/41bc440d6829aeae8408d80f760a18d3.png) 和 ![F](../Images/39efd788e124a66b0f98d992a7cb4f9e.png) 是 ![500 \times 25](../Images/d6a778a96473fa10c2db7ceb09d870b7.png) 和 ![25 \times 500](../Images/580ce03d74e594872245387cc94bd042.png) 维矩阵，因此这个模型有 ![2 \times 25 \times 500 = 25000](../Images/6eef3c56cc0d237518afec6f983426c7.png) 个参数。对于线性模型，一个好的经验法则是每个参数至少要有10个观测值，这意味着我们希望在训练期间看到250,000个用户评分向量。然而，我们的用户数量远远不够，因此在本教程中，我们将大大减少数量——最多使用12,500个观测值（如果损失没有改善则提前停止模型）。
+记住 ![\Lambda](img/41bc440d6829aeae8408d80f760a18d3.png) 和 ![F](img/39efd788e124a66b0f98d992a7cb4f9e.png) 是 ![500 \times 25](img/d6a778a96473fa10c2db7ceb09d870b7.png) 和 ![25 \times 500](img/580ce03d74e594872245387cc94bd042.png) 维矩阵，因此这个模型有 ![2 \times 25 \times 500 = 25000](img/6eef3c56cc0d237518afec6f983426c7.png) 个参数。对于线性模型，一个好的经验法则是每个参数至少要有 10 个观测值，这意味着我们希望在训练期间看到 250,000 个用户评分向量。然而，我们的用户数量远远不够，因此在本教程中，我们将大大减少数量——最多使用 12,500 个观测值（如果损失没有改善则提前停止模型）。
 
 ```py
 # stop after 3 epochs with no improvement
@@ -341,7 +321,7 @@ fit(wrapper_model, pref_matrix.fillna(0).values, batch_size=125, epochs=100, pat
 # Loss of 0.6321
 ```
 
-这个训练过程的输出（至少在我的机器上）给出了0.6321的损失，这意味着我们在没有见过的用户真正偏好上平均相差约0.7901单位（请记住，这个损失中80%来自未知偏好，20%来自已知偏好）。我们的数据中的偏好范围从-4.64到3.92，所以这也不算太差！
+这个训练过程的输出（至少在我的机器上）给出了 0.6321 的损失，这意味着我们在没有见过的用户真正偏好上平均相差约 0.7901 单位（请记住，这个损失中 80%来自未知偏好，20%来自已知偏好）。我们的数据中的偏好范围从-4.64 到 3.92，所以这也不算太差！
 
 ### 预测评分
 
@@ -414,7 +394,7 @@ preds
 | 745 | 3.619762 | 接近剃刀 (1995) |
 | 908 | 3.608473 | 西北偏北 (1959) |
 
-有趣的是，即使用户给*星球大战*的评分为5，模型预测的*星球大战*的评分也只有4.08。不过它确实推荐了*帝国反击战*和*夺宝奇兵*，这些推荐似乎符合这些偏好。
+有趣的是，即使用户给*星球大战*的评分为 5，模型预测的*星球大战*的评分也只有 4.08。不过它确实推荐了*帝国反击战*和*夺宝奇兵*，这些推荐似乎符合这些偏好。
 
 现在让我们逆转这个用户对《星球大战》和《侏罗纪公园》的评分，看看评分如何变化：
 
@@ -450,7 +430,7 @@ preds
 | 1252 | 3.338330 | 《唐人街探案》(1974) |
 | 1207 | 3.335204 | 《杀死一只知更鸟》(1962) |
 
-注意到*七武士*在两个列表中都显著出现。事实上，*七武士*在这个数据集中具有最高的平均评分（为4.56），查看用户推荐的前20或前50部电影时，还会发现更多非常高评分的共同电影。
+注意到*七武士*在两个列表中都显著出现。事实上，*七武士*在这个数据集中具有最高的平均评分（为 4.56），查看用户推荐的前 20 或前 50 部电影时，还会发现更多非常高评分的共同电影。
 
 ### 结论与进一步阅读
 
@@ -462,7 +442,7 @@ esb = decoder.get_weights()[0][:,144]
 americanbeauty = decoder.get_weights()[0][:,401]
 ```
 
-注意到 33 是对应于*星球大战*的列索引（不同于其`movieid`为260），144 是对应于*帝国反击战*的列索引，401 是对应于*美国美人*的列索引。
+注意到 33 是对应于*星球大战*的列索引（不同于其`movieid`为 260），144 是对应于*帝国反击战*的列索引，401 是对应于*美国美人*的列索引。
 
 ```py
 np.sqrt(((starwars - esb)**2).sum())
@@ -472,7 +452,7 @@ np.sqrt(((starwars - americanbeauty)**2).sum())
 # 0.613659
 ```
 
-比较这些距离，我们看到*星球大战*和*帝国反击战*在潜在因子空间中的距离为0.209578，比*星球大战*和*美国美人*的距离要近得多。
+比较这些距离，我们看到*星球大战*和*帝国反击战*在潜在因子空间中的距离为 0.209578，比*星球大战*和*美国美人*的距离要近得多。
 
 通过进一步的工作，还可以在潜在因子空间中回答其他问题，例如“哪部电影与*星球大战*最不相似？”
 
@@ -480,21 +460,21 @@ np.sqrt(((starwars - americanbeauty)**2).sum())
 
 **相关：**
 
-+   [构建推荐系统](/2019/04/building-recommender-system.html)
++   构建推荐系统
 
-+   [K-Means 聚类：用于推荐系统的无监督学习](/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)
++   K-Means 聚类：用于推荐系统的无监督学习
 
-+   [使用 Azure 机器学习服务构建推荐系统](/2019/05/recommender-systems-azure-machine-learning.html)
++   使用 Azure 机器学习服务构建推荐系统
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -504,9 +484,9 @@ np.sqrt(((starwars - americanbeauty)**2).sum())
 
 +   [使用 Hugging Face Transformers 构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)
 
-+   [构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
-+   [构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [等级系统如何帮助预测 AI 成本](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)
 

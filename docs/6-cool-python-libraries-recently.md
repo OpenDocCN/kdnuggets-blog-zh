@@ -1,30 +1,30 @@
-# 我最近发现的6个酷炫的Python库
+# 我最近发现的 6 个酷炫的 Python 库
 
-> 原文：[https://www.kdnuggets.com/2021/09/6-cool-python-libraries-recently.html](https://www.kdnuggets.com/2021/09/6-cool-python-libraries-recently.html)
+> 原文：[`www.kdnuggets.com/2021/09/6-cool-python-libraries-recently.html`](https://www.kdnuggets.com/2021/09/6-cool-python-libraries-recently.html)
 
-[评论](#comments)
+评论
 
-**作者 [Dhilip Subramanian](https://medium.com/@sdhilip)，数据科学家和AI爱好者**
+**作者 [Dhilip Subramanian](https://medium.com/@sdhilip)，数据科学家和 AI 爱好者**
 
-![图片](../Images/6ad8a106a0ec5f6b286bdefd412cffd6.png)
+![图片](img/6ad8a106a0ec5f6b286bdefd412cffd6.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
-Python是机器学习的核心组成部分，库使我们的生活更简单。最近，我在进行ML项目时发现了6个很棒的库。它们帮助我节省了大量时间，我将在这篇博客中讨论它们。
+Python 是机器学习的核心组成部分，库使我们的生活更简单。最近，我在进行 ML 项目时发现了 6 个很棒的库。它们帮助我节省了大量时间，我将在这篇博客中讨论它们。
 
 ## 1. clean-text
 
-一个真正不可思议的库，clean-text应该是你处理抓取或社交媒体数据时的首选。最酷的地方在于，它不需要任何长的复杂代码或正则表达式来清理我们的数据。让我们看看一些示例：
+一个真正不可思议的库，clean-text 应该是你处理抓取或社交媒体数据时的首选。最酷的地方在于，它不需要任何长的复杂代码或正则表达式来清理我们的数据。让我们看看一些示例：
 
 **安装**
 
@@ -36,7 +36,7 @@ Python是机器学习的核心组成部分，库使我们的生活更简单。�
 
 ```py
 #Importing the clean text library
-from cleantext import clean# Sample texttext = """ Zürich, largest city of Switzerland and capital of the canton of 633Zürich. Located in an Al\u017eupine. ([https://google.com](https://google.com/)). Currency is not ₹"""# Cleaning the "text" with clean textclean(text, 
+from cleantext import clean# Sample texttext = """ Zürich, largest city of Switzerland and capital of the canton of 633Zürich. Located in an Al\u017eupine. ([`google.com`](https://google.com/)). Currency is not ₹"""# Cleaning the "text" with clean textclean(text, 
       fix_unicode=True, 
       to_ascii=True, 
       lower=True, 
@@ -54,23 +54,23 @@ from cleantext import clean# Sample texttext = """ Zürich, largest city of Swit
 
 **输出**
 
-![](../Images/ebefdb8e66b61b222d258ee32dc8e389.png)
+![](img/ebefdb8e66b61b222d258ee32dc8e389.png)
 
-从上面可以看到，它包含了“Zurich”中的Unicode（字母‘u’已编码）、ASCII字符（在Al\u017eupine.）、货币符号（卢比）、HTML链接和标点符号。
+从上面可以看到，它包含了“Zurich”中的 Unicode（字母‘u’已编码）、ASCII 字符（在 Al\u017eupine.）、货币符号（卢比）、HTML 链接和标点符号。
 
-你只需要在clean函数中提及所需的ASCII、Unicode、URLs、数字、货币和标点符号。或者，它们可以在上述函数中用replace参数替换。例如，我将卢比符号更改为Rupees。
+你只需要在 clean 函数中提及所需的 ASCII、Unicode、URLs、数字、货币和标点符号。或者，它们可以在上述函数中用 replace 参数替换。例如，我将卢比符号更改为 Rupees。
 
 完全没有必要使用正则表达式或长代码。这个库非常方便，尤其是当你需要清理抓取或社交媒体数据的文本时。根据你的需求，你也可以单独传递参数，而不是将它们全部组合在一起。
 
-欲了解更多详细信息，请查看这个[GitHub仓库](https://github.com/jfilter/clean-text)。
+欲了解更多详细信息，请查看这个[GitHub 仓库](https://github.com/jfilter/clean-text)。
 
 ## 2\. drawdata
 
-Drawdata是我发现的另一个酷炫的Python库。你有多少次遇到需要向团队解释ML概念的情况？这肯定很常见，因为数据科学完全是团队合作的事。这个库可以帮助你在Jupyter Notebook中绘制数据集。
+Drawdata 是我发现的另一个酷炫的 Python 库。你有多少次遇到需要向团队解释 ML 概念的情况？这肯定很常见，因为数据科学完全是团队合作的事。这个库可以帮助你在 Jupyter Notebook 中绘制数据集。
 
-个人来说，当我向我的团队解释ML概念时，我非常喜欢使用这个库。对创建这个库的开发者致以敬意！
+个人来说，当我向我的团队解释 ML 概念时，我非常喜欢使用这个库。对创建这个库的开发者致以敬意！
 
-Drawdata仅适用于具有四个类别的分类问题。
+Drawdata 仅适用于具有四个类别的分类问题。
 
 **安装**
 
@@ -87,7 +87,7 @@ from drawdata import draw_scatterdraw_scatter()
 
 **输出**
 
-![](../Images/1df5aa80c014f829a732e10e6f7d10ad.png)
+![](img/1df5aa80c014f829a732e10e6f7d10ad.png)
 
 图片来源：作者
 
@@ -137,7 +137,7 @@ sep = ","graph = df.AutoViz(
 
 **输出**
 
-![](../Images/e3a0101664fea9105c03c5c8e7071896.png)
+![](img/e3a0101664fea9105c03c5c8e7071896.png)
 
 图片来源：作者
 
@@ -171,7 +171,7 @@ mitosheet.sheet()
 
 **输出**
 
-![](../Images/fe424946548073a9edb746ca6654cd98.png)
+![](img/fe424946548073a9edb746ca6654cd98.png)
 
 图片来源：作者
 
@@ -205,7 +205,7 @@ Iris_csv.rename(columns={"G": "Avg_Sepal"}, inplace=True)
 gf = Gramformer(models = 1, use_gpu = False) # 1=corrector, 2=detector (presently model 1 is working, 2 has not implemented)
 ```
 
-![](../Images/56008268f4c4ff6e2edb99e1b3c99f06.png)
+![](img/56008268f4c4ff6e2edb99e1b3c99f06.png)
 
 **示例**
 
@@ -215,7 +215,7 @@ gf = Gramformer(models = 1, use_gpu = False) # 1=corrector, 2=detector (presentl
 
 **输出**
 
-![](../Images/3060be6c6cbf4aeeaa85e4ec15b2c1ad.png)
+![](img/3060be6c6cbf4aeeaa85e4ec15b2c1ad.png)
 
 作者提供的图片
 
@@ -247,7 +247,7 @@ sf = Styleformer(style = 0)# style = [0=Casual to Formal, 1=Formal to Casual, 2=
 # Converting casual to formal sf.transfer("I gotta go")
 ```
 
-![](../Images/6c88c8eba994152d82f6ce53ad74667e.png)
+![](img/6c88c8eba994152d82f6ce53ad74667e.png)
 
 ```py
 # Formal to casual 
@@ -255,7 +255,7 @@ sf = Styleformer(style = 1)     # 1 -> Formal to casual# Converting formal to ca
 sf.transfer("Please leave this place")
 ```
 
-![](../Images/1c5303fc21075a83c42987c39f5d0163.png)
+![](img/1c5303fc21075a83c42987c39f5d0163.png)
 
 ```py
 # Active to Passive 
@@ -263,7 +263,7 @@ sf = Styleformer(style = 2)     # 2-> Active to Passive# Converting active to pa
 sf.transfer("We are going to watch a movie tonight.")
 ```
 
-![](../Images/a32241558085e6baf66af2f03a047c01.png)
+![](img/a32241558085e6baf66af2f03a047c01.png)
 
 ```py
 # passive to active
@@ -271,7 +271,7 @@ sf = Styleformer(style = 2)     # 2-> Active to Passive# Converting passive to a
 sf.transfer("Tenants are protected by leases")
 ```
 
-![](../Images/c896b10bea33758ba328bd4f7de456f1.png)
+![](img/c896b10bea33758ba328bd4f7de456f1.png)
 
 查看上述输出，它的转换非常准确。我在一次分析中使用了这个库，将休闲语言转换为正式语言，特别是用于社交媒体帖子。有关更多详细信息，请查看 [GitHub](https://github.com/PrithivirajDamodaran/Styleformer)。
 
@@ -281,28 +281,28 @@ sf.transfer("Tenants are protected by leases")
 
 你可能还喜欢我之前的文章 [*五个酷炫的 Python 数据科学库*](https://pub.towardsai.net/five-cool-python-libraries-for-data-science-7f1fce402b90)
 
-**个人简介： [Dhilip Subramanian](https://medium.com/@sdhilip)** 是一名机械工程师，已获得分析硕士学位。他拥有9年的经验，专注于与数据相关的多个领域，包括IT、营销、银行、电力和制造业。他对自然语言处理和机器学习充满热情。他是[SAS社区](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)的贡献者，并喜欢在Medium平台上撰写有关数据科学的各种技术文章。
+**个人简介： [Dhilip Subramanian](https://medium.com/@sdhilip)** 是一名机械工程师，已获得分析硕士学位。他拥有 9 年的经验，专注于与数据相关的多个领域，包括 IT、营销、银行、电力和制造业。他对自然语言处理和机器学习充满热情。他是[SAS 社区](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)的贡献者，并喜欢在 Medium 平台上撰写有关数据科学的各种技术文章。
 
 [原文](https://towardsdatascience.com/6-cool-python-libraries-that-i-came-across-recently-72e05dadd295)。经许可转载。
 
 **相关内容：**
 
-+   [五个有趣的Python库用于数据科学](/2020/04/five-cool-python-libraries-data-science.html)
++   五个有趣的 Python 库用于数据科学
 
-+   [Python中的简单语音转文本](/2020/06/easy-speech-text-python.html)
++   Python 中的简单语音转文本
 
-+   [学习数据科学和机器学习：第一步](/2021/08/learn-data-science-machine-learning.html)
++   学习数据科学和机器学习：第一步
 
 ### 相关阅读
 
-+   [数据科学、数据可视化与…的38个顶级Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [数据科学、数据可视化与…的 38 个顶级 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-+   [2022年数据科学家应该知道的Python库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
++   [2022 年数据科学家应该知道的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
 
-+   [可解释AI：揭示模型决策的10个Python库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
++   [可解释 AI：揭示模型决策的 10 个 Python 库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
 
-+   [数据清洗的Python库介绍](https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html)
++   [数据清洗的 Python 库介绍](https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html)
 
-+   [超越Numpy和Pandas：挖掘鲜为人知的…](https://www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html)
++   [超越 Numpy 和 Pandas：挖掘鲜为人知的…](https://www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html)
 
-+   [50级数据科学家：需要了解的Python库](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)
++   [50 级数据科学家：需要了解的 Python 库](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)

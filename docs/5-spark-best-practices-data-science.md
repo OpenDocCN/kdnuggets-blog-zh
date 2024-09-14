@@ -1,12 +1,12 @@
 # 5 个 Apache Spark 数据科学最佳实践
 
-> 原文：[https://www.kdnuggets.com/2020/08/5-spark-best-practices-data-science.html](https://www.kdnuggets.com/2020/08/5-spark-best-practices-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/08/5-spark-best-practices-data-science.html`](https://www.kdnuggets.com/2020/08/5-spark-best-practices-data-science.html)
 
-[评论](#comments)
+评论
 
-**由[Zion Badash](https://www.linkedin.com/in/zion-badash-a73826a1/?originalSubdomain=il)提供，Wix.com的数据科学家**
+**由[Zion Badash](https://www.linkedin.com/in/zion-badash-a73826a1/?originalSubdomain=il)提供，Wix.com 的数据科学家**
 
-![图](../Images/8ed183f322d32458e9f9effc15e95c27.png)
+![图](img/8ed183f322d32458e9f9effc15e95c27.png)
 
 图片由[chuttersnap](https://unsplash.com/@chuttersnap?utm_source=medium&utm_medium=referral)提供，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -38,7 +38,7 @@
 
 > 让 Spark 正常工作是很困难的，但当它工作时——它表现非常好！
 
-### Spark概述
+### Spark 概述
 
 我这里只会讲到一部分，但我建议访问以下文章，阅读 MapReduce 解释，以获得更全面的解释——[The Hitchhikers guide to handle Big Data using Spark](https://towardsdatascience.com/the-hitchhikers-guide-to-handle-big-data-using-spark-90b9be0fe89a)。
 
@@ -84,9 +84,9 @@ Spark 使用延迟计算，这意味着它在执行计算指令图之前会等�
 
 查找倾斜可以通过查看 Spark UI 中的阶段详细信息，并寻找最大值和中位数之间的显著差异来完成：
 
-![图像](../Images/4733ff757dca1d055ee94dac6d0ec4d2.png)
+![图像](img/4733ff757dca1d055ee94dac6d0ec4d2.png)
 
-大的方差（中位数=3秒，最大值=7.5分钟）可能暗示数据中的倾斜
+大的方差（中位数=3 秒，最大值=7.5 分钟）可能暗示数据中的倾斜
 
 这意味着我们有一些任务显著比其他任务慢。
 
@@ -120,7 +120,7 @@ Salting 是使用随机键重新分区数据，以使新的分区平衡。以下
 
 +   [使用 Spark 处理大数据的指南](https://towardsdatascience.com/the-hitchhikers-guide-to-handle-big-data-using-spark-90b9be0fe89a)
 
-+   [Spark: 权威指南](https://www.oreilly.com/library/view/spark-the-definitive/9781491912201/) — 第18章关于监控和调试的内容非常精彩。
++   [Spark: 权威指南](https://www.oreilly.com/library/view/spark-the-definitive/9781491912201/) — 第十八章关于监控和调试的内容非常精彩。
 
 **简介: [Zion Badash](https://www.linkedin.com/in/zion-badash-a73826a1/?originalSubdomain=il)** 是 Wix.com 的预测团队数据科学家。他的兴趣包括机器学习、时间序列、Spark 以及相关领域的一切。
 
@@ -128,11 +128,11 @@ Salting 是使用随机键重新分区数据，以使新的分区平衡。以下
 
 **相关:**
 
-+   [使用 Apache Spark 和 PySpark 的好处及示例](/2020/04/benefits-apache-spark-pyspark.html)
++   使用 Apache Spark 和 PySpark 的好处及示例
 
-+   [Apache Spark 集群在 Docker 上](/2020/07/apache-spark-cluster-docker.html)
++   Apache Spark 集群在 Docker 上
 
-+   [Dataproc 上的 Apache Spark 与 Google BigQuery](/2020/07/apache-spark-dataproc-vs-google-bigquery.html)
++   Dataproc 上的 Apache Spark 与 Google BigQuery
 
 ### 了解更多相关话题
 

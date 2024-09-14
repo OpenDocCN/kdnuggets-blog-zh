@@ -1,8 +1,8 @@
 # 构建基于 TensorFlow 和 Flask RESTful Python API 的 ConvNet HTTP 应用程序完全指南
 
-> 原文：[https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html/2](https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html/2)
+> 原文：[`www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html/2`](https://www.kdnuggets.com/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 4. 训练 CNN
 
@@ -204,7 +204,7 @@ print("Correct predictions/10,000 : ", correct)
 
 **图 5**
 
-![](../Images/69637cf312b68f61aa68f1caf8ee2ceb.png)
+![](img/69637cf312b68f61aa68f1caf8ee2ceb.png)
 
 ```py
 import flask
@@ -257,7 +257,7 @@ app.add_url_rule(rule="/", endpoint="homepage", view_func=redirect_upload)
 
 **图 6**
 
-![](../Images/1358473e1ef19ccaf55b499b530f1ccb.png)
+![](img/1358473e1ef19ccaf55b499b530f1ccb.png)
 
 这是该页面的 HTML 代码。它是一个简单的表单，允许用户上传图像文件。提交该表单时，将返回一个 POST HTTP 消息到 URL [**http://localhost:7777/upload/**](http://localhost:7777/upload/)。
 
@@ -440,7 +440,7 @@ def main(img):
 
 **图 7**
 
-![](../Images/4b061d8a8c557877817ec87da3033881.png)
+![](img/4b061d8a8c557877817ec87da3033881.png)
 
 请注意，Flask 应用程序使用 Jinja2 模板引擎，允许 HTML 页面接受输入参数。此情况下传递的输入参数是 predicted_class=predicted_class。
 
@@ -477,43 +477,43 @@ return flask.render_template(template_name_or_list="prediction_result.html", pre
 
 ```
 
-有关 Flask RESTful API 的更多信息，请访问此教程 [https://www.tutorialspoint.com/flask/index.htm](https://www.tutorialspoint.com/flask/index.htm)。
+有关 Flask RESTful API 的更多信息，请访问此教程 [`www.tutorialspoint.com/flask/index.htm`](https://www.tutorialspoint.com/flask/index.htm)。
 
-完整的项目可以在 Github 上通过此链接获取: [https://github.com/ahmedfgad/CIFAR10CNNFlask](https://github.com/ahmedfgad/CIFAR10CNNFlask)
+完整的项目可以在 Github 上通过此链接获取: [`github.com/ahmedfgad/CIFAR10CNNFlask`](https://github.com/ahmedfgad/CIFAR10CNNFlask)
 
-**简历: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及门努非亚大学计算机与信息学院（FCI）信息技术专业优秀荣誉学士学位。因在学院排名第一，他于2015年被推荐在埃及的一所学院担任助教，随后于2016年担任助教和研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
+**简历: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于 2015 年 7 月获得埃及门努非亚大学计算机与信息学院（FCI）信息技术专业优秀荣誉学士学位。因在学院排名第一，他于 2015 年被推荐在埃及的一所学院担任助教，随后于 2016 年担任助教和研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
 
 [原文](https://www.linkedin.com/pulse/complete-guide-build-convnet-http-based-application-using-ahmed-gad/)。经许可转载。
 
 **相关：**
 
-+   [使用NumPy从头构建卷积神经网络](/2018/04/building-convolutional-neural-network-numpy-scratch.html)
++   使用 NumPy 从头构建卷积神经网络
 
-+   [从全连接网络逐步推导卷积神经网络](/2018/04/derivation-convolutional-neural-network-fully-connected-step-by-step.html)
++   从全连接网络逐步推导卷积神经网络
 
-+   [遗传算法优化入门](/2018/03/introduction-optimization-with-genetic-algorithm.html)
++   遗传算法优化入门
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [为什么Python是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [为什么 Python 是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标，寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元AI失败案例的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元 AI 失败案例的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

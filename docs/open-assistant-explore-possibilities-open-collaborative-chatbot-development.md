@@ -1,40 +1,40 @@
 # Open Assistant: 探索开放和协作聊天机器人开发的可能性
 
-> 原文：[https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)
+> 原文：[`www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html`](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)
 
-![Open Assistant: 探索开放和协作聊天机器人开发的可能性](../Images/d2d58915aa49a07488d600f7a2290a56.png)
+![Open Assistant: 探索开放和协作聊天机器人开发的可能性](img/d2d58915aa49a07488d600f7a2290a56.png)
 
 作者提供的图片 | Bing 图像创作者
 
-我们正在看到ChatGPT [开源替代品](/2023/04/8-opensource-alternative-chatgpt-bard.html)的快速发展，其中一些如 [Vicuna](https://vicuna.lmsys.org/)产生了令人惊叹的结果。但有一个问题。这些新模型有使用限制，我们不能将它们用于商业用途。
+我们正在看到 ChatGPT 开源替代品的快速发展，其中一些如 [Vicuna](https://vicuna.lmsys.org/)产生了令人惊叹的结果。但有一个问题。这些新模型有使用限制，我们不能将它们用于商业用途。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-另一方面，Open Assistant正在努力改变这一点。他们的使命是让每个人都能访问像ChatGPT和GPT-4这样的优秀聊天型大型语言模型。
+另一方面，Open Assistant 正在努力改变这一点。他们的使命是让每个人都能访问像 ChatGPT 和 GPT-4 这样的优秀聊天型大型语言模型。
 
-在这篇文章中，我们将了解Open Assistant项目及其特性、限制和计划。此外，我们还将为你提供所有资源，帮助你开始创建自己的聊天机器人。
+在这篇文章中，我们将了解 Open Assistant 项目及其特性、限制和计划。此外，我们还将为你提供所有资源，帮助你开始创建自己的聊天机器人。
 
-# 什么是Open Assistant？
+# 什么是 Open Assistant？
 
-[Open-Assistant](https://github.com/LAION-AI/Open-Assistant)项目正在革新语言技术。与其将高质量的大型语言模型私有化，他们让所有人都可以使用数据集、模型、代码源和Open Assistant平台。
+[Open-Assistant](https://github.com/LAION-AI/Open-Assistant)项目正在革新语言技术。与其将高质量的大型语言模型私有化，他们让所有人都可以使用数据集、模型、代码源和 Open Assistant 平台。
 
-Open-Assistant模型是在来自13,000多名志愿者的数据集上进行训练的。收集的数据集包含超过60万次互动、15万条消息和1万棵完全标注的对话树，涵盖多种语言的各种话题。
+Open-Assistant 模型是在来自 13,000 多名志愿者的数据集上进行训练的。收集的数据集包含超过 60 万次互动、15 万条消息和 1 万棵完全标注的对话树，涵盖多种语言的各种话题。
 
 观看启动视频以了解这个项目有多酷。
 
-如果你访问他们的Hugging Face [页面](https://huggingface.co/OpenAssistant)，你会看到多个基于Open Assistant数据集训练的模型架构，例如Stable LM、LLaMA、Pythia、Galactica等。他们正在基于最新数据开发一款最先进的模型，并很快将推出具备安全功能的该模型。
+如果你访问他们的 Hugging Face [页面](https://huggingface.co/OpenAssistant)，你会看到多个基于 Open Assistant 数据集训练的模型架构，例如 Stable LM、LLaMA、Pythia、Galactica 等。他们正在基于最新数据开发一款最先进的模型，并很快将推出具备安全功能的该模型。
 
-**注意：**一些模型如LLaMA有使用限制（仅限研究），但你也会看到像Pythia这样的模型可用于任何用途。
+**注意：**一些模型如 LLaMA 有使用限制（仅限研究），但你也会看到像 Pythia 这样的模型可用于任何用途。
 
 # 如何尝试
 
@@ -46,7 +46,7 @@ Open-Assistant模型是在来自13,000多名志愿者的数据集上进行训练
 
 Open Assistant 允许你与聊天机器人对话，并对其回应提供反馈。要开始，请注册并点击聊天按钮。然后，使用竖起或倒立的拇指图标对聊天机器人的消息做出反应，帮助它学习。
 
-![Open Assistant: 探索开放和协作聊天机器人开发的可能性](../Images/8d9070e02041ad9ccad1d51801c2a808.png)
+![Open Assistant: 探索开放和协作聊天机器人开发的可能性](img/8d9070e02041ad9ccad1d51801c2a808.png)
 
 图片来自 [Chat](https://open-assistant.io/chat)
 
@@ -54,13 +54,13 @@ Open Assistant 允许你与聊天机器人对话，并对其回应提供反馈�
 
 数据收集的用户界面非常简单。只需点击仪表板按钮，选择任务，然后开始贡献。你可以通过提交、排名和标记模型提示和回应来提高 Open Assistant 的能力。
 
-![Open Assistant: 探索开放和协作聊天机器人开发的可能性](../Images/0bb1d5e59f7e3dc0fad3b8230bc48631.png)
+![Open Assistant: 探索开放和协作聊天机器人开发的可能性](img/0bb1d5e59f7e3dc0fad3b8230bc48631.png)
 
 图片来自 [Open Assistant](https://projects.laion.ai/Open-Assistant/)
 
 当你对数据集做出有效贡献时，你的得分会在公共排行榜上显示。这是一种游戏化贡献过程的方式。
 
-![Open Assistant: 探索开放和协作聊天机器人开发的可能性](../Images/35969a902ddddd47c94f49e7d1502cc3.png)
+![Open Assistant: 探索开放和协作聊天机器人开发的可能性](img/35969a902ddddd47c94f49e7d1502cc3.png)
 
 图片来自 [Open Assistant](https://projects.laion.ai/Open-Assistant/)
 

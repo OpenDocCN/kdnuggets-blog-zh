@@ -1,24 +1,24 @@
-# 进入FAANG公司有多难
+# 进入 FAANG 公司有多难
 
-> 原文：[https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
+> 原文：[`www.kdnuggets.com/2023/05/hard-get-faang-companies.html`](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
 
-![进入FAANG公司有多难](../Images/b04a26f6d2c4b57c50c87c4a28c7fec1.png)
-
-作者提供的图片
-
-提醒音乐进入戏剧性的末日氛围。在过去两年里，仅FAANG公司就[负责](http://layoffs.fyi)了超过50,000次裁员（Meta裁员[10,000](https://about.fb.com/news/2023/03/mark-zuckerberg-meta-year-of-efficiency/)加[11,000](https://www.cnbc.com/2022/11/09/meta-to-lay-off-more-than-11000-thousand-employees.html)；苹果公司没有裁员；亚马逊裁员超过27,000人，分[四](https://www.geekwire.com/2022/amazon-makes-staff-cuts-at-amp-the-app-it-launched-this-year-to-reimagine-radio/) [次](https://www.wsj.com/articles/amazon-to-lay-off-over-17-000-workers-more-than-first-planned-11672874304) [批次](https://www.nytimes.com/2022/11/14/technology/amazon-layoffs.html) [进行](https://www.cnbc.com/2023/03/20/amazon-layoffs-company-to-cut-off-9000-more-workers.html)；Netflix裁员500人，分[四](https://www.cnbc.com/2022/06/23/netflix-lays-off-300-more-employees-as-revenue-growth-continues-to-slow.html) [批次](https://deadline.com/2022/09/netflix-animation-layoff-30-staffers-overhaul-continues-1235118700/) [进行](https://www.cnbc.com/2022/05/17/netflix-lays-off-150-employees-as-the-streaming-service-contends-with-big-subscriber-losses.html)；以及[12,000](https://www.nytimes.com/2023/01/20/business/google-alphabet-layoffs.html)人来自Google）。这对这些公司的低录取率意味着什么？从FAANG公司获得录取通知书有多困难？
-
-![进入FAANG公司有多难](../Images/4d5107e14c654def97885cec2cd486d9.png)
+![进入 FAANG 公司有多难](img/b04a26f6d2c4b57c50c87c4a28c7fec1.png)
 
 作者提供的图片
 
-在这篇文章中，我将探讨为什么在历史和当前背景下，获得FAANG工作的难度如此之高。我还将描述增加你在FAANG公司以及其他公司的成功几率的方法。最终，这并不像你想象的那么困难。我还鼓励你拓宽视角，考虑接受科技公司录取的可能性。
+提醒音乐进入戏剧性的末日氛围。在过去两年里，仅 FAANG 公司就[负责](http://layoffs.fyi)了超过 50,000 次裁员（Meta 裁员[10,000](https://about.fb.com/news/2023/03/mark-zuckerberg-meta-year-of-efficiency/)加[11,000](https://www.cnbc.com/2022/11/09/meta-to-lay-off-more-than-11000-thousand-employees.html)；苹果公司没有裁员；亚马逊裁员超过 27,000 人，分[四](https://www.geekwire.com/2022/amazon-makes-staff-cuts-at-amp-the-app-it-launched-this-year-to-reimagine-radio/) [次](https://www.wsj.com/articles/amazon-to-lay-off-over-17-000-workers-more-than-first-planned-11672874304) [批次](https://www.nytimes.com/2022/11/14/technology/amazon-layoffs.html) [进行](https://www.cnbc.com/2023/03/20/amazon-layoffs-company-to-cut-off-9000-more-workers.html)；Netflix 裁员 500 人，分[四](https://www.cnbc.com/2022/06/23/netflix-lays-off-300-more-employees-as-revenue-growth-continues-to-slow.html) [批次](https://deadline.com/2022/09/netflix-animation-layoff-30-staffers-overhaul-continues-1235118700/) [进行](https://www.cnbc.com/2022/05/17/netflix-lays-off-150-employees-as-the-streaming-service-contends-with-big-subscriber-losses.html)；以及[12,000](https://www.nytimes.com/2023/01/20/business/google-alphabet-layoffs.html)人来自 Google）。这对这些公司的低录取率意味着什么？从 FAANG 公司获得录取通知书有多困难？
 
-# 什么是FAANG？
+![进入 FAANG 公司有多难](img/4d5107e14c654def97885cec2cd486d9.png)
 
-我在这里用FAANG有两个含义。首先是指负责这个首字母缩写的公司：Facebook（现在的Meta）、Apple、Amazon、Netflix和Google（实际上是Alphabet）。这个首字母缩写是CNBC的Jim Cramer在2013年创造的。这些公司当时表现优于大盘，因此FAANG逐渐流行开来。
+作者提供的图片
 
-但将FAANG视为科技公司总体的代表也是有用的——比如Microsoft、AirBnb和Spotify。当我说FAANG的录取率很低时，我真正的意思是这些大而响亮的科技公司很难进入，包括Facebook、Amazon、Netflix、Apple和Google，也包括许多其他炫目的科技公司。
+在这篇文章中，我将探讨为什么在历史和当前背景下，获得 FAANG 工作的难度如此之高。我还将描述增加你在 FAANG 公司以及其他公司的成功几率的方法。最终，这并不像你想象的那么困难。我还鼓励你拓宽视角，考虑接受科技公司录取的可能性。
+
+# 什么是 FAANG？
+
+我在这里用 FAANG 有两个含义。首先是指负责这个首字母缩写的公司：Facebook（现在的 Meta）、Apple、Amazon、Netflix 和 Google（实际上是 Alphabet）。这个首字母缩写是 CNBC 的 Jim Cramer 在 2013 年创造的。这些公司当时表现优于大盘，因此 FAANG 逐渐流行开来。
+
+但将 FAANG 视为科技公司总体的代表也是有用的——比如 Microsoft、AirBnb 和 Spotify。当我说 FAANG 的录取率很低时，我真正的意思是这些大而响亮的科技公司很难进入，包括 Facebook、Amazon、Netflix、Apple 和 Google，也包括许多其他炫目的科技公司。
 
 总体而言，FAANG 公司在各方面都以快速增长、不惜一切代价、市场主导地位和创新产品而闻名。它们在整个 2010 年代吸引了大量技术人才——申请者们真的认为他们可以帮助打造出更好的世界。
 
@@ -38,7 +38,7 @@
 
 +   谷歌接受了一个微不足道的 [0.67%](https://www.pathmatch.com/blog/the-pathmatch-guide-to-getting-hired-at-google) 的申请者。
 
-![进入 FAANG 公司有多难](../Images/b41fd1aa0b458411fb3ededad8a1ba30.png)
+![进入 FAANG 公司有多难](img/b41fd1aa0b458411fb3ededad8a1ba30.png)
 
 作者图像
 
@@ -60,29 +60,29 @@ FAANG 有很高的标准。由于申请量的激增，这些科技公司能够�
 
 FAANG 公司及类似的科技公司设立了严格的技术面试。即使是经验丰富的工程师，在三名招聘经理冷峻的目光下进行白板编码面试时，也可能会出现失误。这真的很难。
 
-这篇文章 "[FAANG公司的招聘和知道何时准备好](https://www.stratascratch.com/blog/hiring-in-faang-companies-and-knowing-when-you-re-ready/?utm_source=blog&utm_medium=click&utm_campaign=kdn+get+into+faang)" 讨论了FAANG公司的招聘流程。
+这篇文章 "[FAANG 公司的招聘和知道何时准备好](https://www.stratascratch.com/blog/hiring-in-faang-companies-and-knowing-when-you-re-ready/?utm_source=blog&utm_medium=click&utm_campaign=kdn+get+into+faang)" 讨论了 FAANG 公司的招聘流程。
 
 ## 文化契合
 
-FAANG在招聘时挑剔的不仅仅是编码技能。文化契合度非常重要。Netflix [不想要](https://www.businessinsider.com/netflix-culture-deck-top-most-impactful-slides-2019-10)“聪明的混蛋”。Apple [只招聘](https://blog.grovehr.com/apple-company-culture)核心合作者。Facebook [希望](https://www.metacareers.com/facebook-life/)招募前瞻性思维的人。因此，这不仅仅是关于你的简历，而是你如何证明你是该公司良好的“文化契合者”。
+FAANG 在招聘时挑剔的不仅仅是编码技能。文化契合度非常重要。Netflix [不想要](https://www.businessinsider.com/netflix-culture-deck-top-most-impactful-slides-2019-10)“聪明的混蛋”。Apple [只招聘](https://blog.grovehr.com/apple-company-culture)核心合作者。Facebook [希望](https://www.metacareers.com/facebook-life/)招募前瞻性思维的人。因此，这不仅仅是关于你的简历，而是你如何证明你是该公司良好的“文化契合者”。
 
 # 那些数字令人沮丧，但具有误导性
 
 回到那些微小的接受率百分比。它们微不足道，但具有误导性。
 
-首先，如今的环境已不同以往。大型科技公司的全盛时期，无论好坏，都经历了波折。FAANG公司不再被普遍认为是最好的工作场所。随着风险投资资金的枯竭以及它们在努力实现盈利转型时，薪资和福利在较小的公司也可能一样好。而且，显然FAANG并没有提供任何工作保障，因为他们在某些情况下裁员了5-10%的员工。
+首先，如今的环境已不同以往。大型科技公司的全盛时期，无论好坏，都经历了波折。FAANG 公司不再被普遍认为是最好的工作场所。随着风险投资资金的枯竭以及它们在努力实现盈利转型时，薪资和福利在较小的公司也可能一样好。而且，显然 FAANG 并没有提供任何工作保障，因为他们在某些情况下裁员了 5-10%的员工。
 
-此外，即使FAANG的招聘有所放缓，科技行业仍在招聘。ZipRecruiter [发现](https://www.ziprecruiter.com/blog/laid-off-tech-workers/)79%的被裁员的科技工作者在三个月内找到新工作。仍然有人在寻找顶尖的科技人才。
+此外，即使 FAANG 的招聘有所放缓，科技行业仍在招聘。ZipRecruiter [发现](https://www.ziprecruiter.com/blog/laid-off-tech-workers/)79%的被裁员的科技工作者在三个月内找到新工作。仍然有人在寻找顶尖的科技人才。
 
-最后，请记住，大量申请FAANG的申请基本上都是垃圾。正如我所说，每个人都申请FAANG，因为在那里工作会非常棒。但招聘经理能够丢弃大量这些申请，因为它们实在不够好。做一点额外的工作。建立网络可以极大地提高你的机会。参加会议结识人脉。针对每个申请量身定制你的简历和求职信。仅此一点就能帮助你在大多数FAANG申请者中脱颖而出。
+最后，请记住，大量申请 FAANG 的申请基本上都是垃圾。正如我所说，每个人都申请 FAANG，因为在那里工作会非常棒。但招聘经理能够丢弃大量这些申请，因为它们实在不够好。做一点额外的工作。建立网络可以极大地提高你的机会。参加会议结识人脉。针对每个申请量身定制你的简历和求职信。仅此一点就能帮助你在大多数 FAANG 申请者中脱颖而出。
 
-# 如何增加获得FAANG或其他地方好技术工作的机会
+# 如何增加获得 FAANG 或其他地方好技术工作的机会
 
-![进入FAANG公司的难度有多大](../Images/42bc6d50e047ea8e94cbda16ea526018.png)
+![进入 FAANG 公司的难度有多大](img/42bc6d50e047ea8e94cbda16ea526018.png)
 
 图片来源：作者
 
-是的，获得这些公司的录取很难。但并没有你想象的那么困难。以下是四种方法，帮助你增加获得梦想中的技术工作的机会，无论是在FAANG还是其他优秀的科技公司。
+是的，获得这些公司的录取很难。但并没有你想象的那么困难。以下是四种方法，帮助你增加获得梦想中的技术工作的机会，无论是在 FAANG 还是其他优秀的科技公司。
 
 ## 打磨你的简历
 
@@ -112,7 +112,7 @@ FAANG在招聘时挑剔的不仅仅是编码技能。文化契合度非常重要
 
 我想通过请你考虑把 FAANG 之外的公司也视为潜在的工作机会来结束这篇文章。如今的较小初创公司可以提供与 FAANG 相媲美的薪资、福利、工作稳定性和公司文化。
 
-即使如此，大规模裁员也证明这些大型科技公司并不像2010年代那样稳定或优秀。许多在疫情期间没有过度招聘的优秀科技公司正在寻找优秀的候选人，所以如果你在获得 FAANG 工作方面遇到困难，可以先去较小的公司展示自己，然后再带着工作经验重新申请 FAANG。
+即使如此，大规模裁员也证明这些大型科技公司并不像 2010 年代那样稳定或优秀。许多在疫情期间没有过度招聘的优秀科技公司正在寻找优秀的候选人，所以如果你在获得 FAANG 工作方面遇到困难，可以先去较小的公司展示自己，然后再带着工作经验重新申请 FAANG。
 
 # FAANG 公司很难进入，但也并非完全不可能。
 
@@ -120,7 +120,7 @@ FAANG在招聘时挑剔的不仅仅是编码技能。文化契合度非常重要
 
 为了提高成功的几率，确保你的简历与职位描述尽可能接近。多练习面试问题直到你感到疲惫不堪。多做项目、部署、再做项目。并考虑通过在你的作品集中加入一些包或库来多走一步。
 
-如果你仍然觉得困难，可以扩大求职范围。确保每份申请都量身定制，不要害怕点击申请按钮。无论是FAANG公司还是其他优秀组织，科技公司都会非常欢迎你。
+如果你仍然觉得困难，可以扩大求职范围。确保每份申请都量身定制，不要害怕点击申请按钮。无论是 FAANG 公司还是其他优秀组织，科技公司都会非常欢迎你。
 
 **[内特·罗斯迪](https://www.stratascratch.com)** 是一名数据科学家，专注于产品策略。他还是一名兼职教授，教授分析学，并且是 [StrataScratch](https://www.stratascratch.com/) 的创始人，该平台帮助数据科学家通过顶级公司的真实面试问题准备面试。你可以在 [Twitter: StrataScratch](https://twitter.com/StrataScratch) 或 [LinkedIn](https://www.linkedin.com/in/nathanrosidi/) 上与他联系。
 
@@ -128,12 +128,12 @@ FAANG在招聘时挑剔的不仅仅是编码技能。文化契合度非常重要
 
 +   [停止在数据科学项目中硬编码 - 使用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 
-+   [数据科学的3个难题Python编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
++   [数据科学的 3 个难题 Python 编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
 
-+   [想成为数据科学家？第一部分：你需要的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要的 10 项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
 
 +   [如果你没有合适的学位，如何进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
 
-+   [进入数据科学的3种可能途径](https://www.kdnuggets.com/2022/03/3-possible-ways-get-data-science.html)
++   [进入数据科学的 3 种可能途径](https://www.kdnuggets.com/2022/03/3-possible-ways-get-data-science.html)
 
-+   [数据科学家最佳工作公司前11名](https://www.kdnuggets.com/2021/12/11-best-companies-work-data-scientist.html)
++   [数据科学家最佳工作公司前 11 名](https://www.kdnuggets.com/2021/12/11-best-companies-work-data-scientist.html)

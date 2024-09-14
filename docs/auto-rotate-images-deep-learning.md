@@ -1,12 +1,12 @@
 # 使用深度学习自动旋转图像
 
-> 原文：[https://www.kdnuggets.com/2020/07/auto-rotate-images-deep-learning.html](https://www.kdnuggets.com/2020/07/auto-rotate-images-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2020/07/auto-rotate-images-deep-learning.html`](https://www.kdnuggets.com/2020/07/auto-rotate-images-deep-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [Bala Venkatesh](https://www.linkedin.com/in/bala-venkatesh-67964247/) 提供，数据科学家**
 
-![演示](../Images/cce0b2a5cbcfaa71f48f6baf7f91087a.png)
+![演示](img/cce0b2a5cbcfaa71f48f6baf7f91087a.png)
 
 演示
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
@@ -65,7 +65,7 @@ import numpy as np
 
 **旋转角度 -> 90 -> 180 -> 270**
 
-![图示](../Images/f4851c72f3a82b058c6823165207a88b.png)
+![图示](img/f4851c72f3a82b058c6823165207a88b.png)
 
 旋转角度
 
@@ -116,7 +116,7 @@ def rotate_image(frame,center,scale,angle):
 
 就这样。你做到了！！终于，你可以看到正确角度的图像了。
 
-![图像](../Images/2ef42bd943dae06e07b34f5bb93b1202.png)
+![图像](img/2ef42bd943dae06e07b34f5bb93b1202.png)
 
 > 祝大家学习愉快！！如果你需要任何帮助或支持，请通过 [LinkedIn](https://www.linkedin.com/in/bala-venkatesh-67964247/) 和 [Twitter](https://twitter.com/balavenkatesh22) 联系我。
 
@@ -126,11 +126,11 @@ def rotate_image(frame,center,scale,angle):
 
 **相关：**
 
-+   [使用 Tensorflow.js 实现计算机视觉应用的 6 个简单步骤](/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)
++   使用 Tensorflow.js 实现计算机视觉应用的 6 个简单步骤
 
-+   [构建一个使用 TensorFlow 和 Streamlit 生成逼真面孔的应用](/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
++   构建一个使用 TensorFlow 和 Streamlit 生成逼真面孔的应用
 
-+   [构建完美商店的图像识别](/2020/03/image-recognition-building-perfect-store.html)
++   构建完美商店的图像识别
 
 ### 更多相关主题
 

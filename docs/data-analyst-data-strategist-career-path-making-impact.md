@@ -1,8 +1,8 @@
 # 从数据分析师到数据策略师：为产生影响而制定的职业路径
 
-> 原文：[https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
+> 原文：[`www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html`](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
 
-![从数据分析师到数据策略师：为产生影响而制定的职业路径](../Images/032578a01e8b968b86d8ed0a526b475c.png)
+![从数据分析师到数据策略师：为产生影响而制定的职业路径](img/032578a01e8b968b86d8ed0a526b475c.png)
 
 图片来自 Dreamstudio.ai
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -92,7 +92,7 @@
 
 **利用你现有的网络**：联系可能在数据战略领域有联系的同事、朋友和导师。他们可能会把你介绍给相关专业人士，推荐职位机会，或提供有价值的见解。
 
-**参与在线社区**：参与数据战略相关的论坛、讨论组和社交媒体平台，如LinkedIn。分享你的专业知识、提出问题，并参与讨论，以与其他数据专业人士建立关系。
+**参与在线社区**：参与数据战略相关的论坛、讨论组和社交媒体平台，如 LinkedIn。分享你的专业知识、提出问题，并参与讨论，以与其他数据专业人士建立关系。
 
 **参加行业活动和会议**：寻找专注于数据战略的活动、研讨会和会议，以便与其他专业人士见面，了解最新趋势和最佳实践。务必向演讲者、讨论小组成员和其他与会者自我介绍，并在活动后跟进新的联系。
 
@@ -126,4 +126,4 @@
 
 +   [Ploomber 与 Kubeflow：简化 MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
 
-+   [让智能文档处理更智能：第1部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
++   [让智能文档处理更智能：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)

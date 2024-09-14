@@ -1,8 +1,8 @@
-# 数据科学家如何引起CFO的关注（以及为什么你需要这样做）
+# 数据科学家如何引起 CFO 的关注（以及为什么你需要这样做）
 
-> 原文：[https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
+> 原文：[`www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html`](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
 
-[评论](#comments)![图像](../Images/3e69da1f88783483cad3ec833639381b.png)
+评论![图像](img/3e69da1f88783483cad3ec833639381b.png)
 
 图片由 [StartupStockPhotos 提供于 Pixabay](https://pixabay.com/users/startupstockphotos-690514/)
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
-数据专家可以通过了解首席财务官（CFO）关心的信息和报告来引起他们的注意。数据科学可以提供有价值的商业智能和预测。以下是如何引起CFO的关注，给公司提供高质量的分析，并在过程中提升你的价值和职业生涯。
+数据专家可以通过了解首席财务官（CFO）关心的信息和报告来引起他们的注意。数据科学可以提供有价值的商业智能和预测。以下是如何引起 CFO 的关注，给公司提供高质量的分析，并在过程中提升你的价值和职业生涯。
 
 ## **了解不同类型的商业分析的价值**
 
@@ -44,7 +44,7 @@
 
 预测性商业分析实现了最初收集组织数据的承诺。历史信息帮助数据科学家和决策者理解事件或趋势重现的可能性。在商业环境中，这包括预测劳动力的增长或减少，考虑未来需求和购买行为的变化，以及检测金融欺诈或网络安全事件。
 
-财务规划和分析行业的专家表示，公司使用的方法[进展并不像许多人期望的那样快](https://www.information-age.com/how-smarter-data-analysis-can-transform-financial-planning-123496204/)。在数据分析专业人员需求未得到满足的就业市场中，强大的专业知识使该领域的工作更加抢手。根据一些统计数据，2021年美国的空缺职位[大约有140,000个](https://www.datasciencecentral.com/profiles/blogs/why-is-there-a-shortage-of-data-scientists-1#:~:text=The%20major%20reason%20why%20there,well%20as%20non%2Dtechnical%20skills.)。
+财务规划和分析行业的专家表示，公司使用的方法[进展并不像许多人期望的那样快](https://www.information-age.com/how-smarter-data-analysis-can-transform-financial-planning-123496204/)。在数据分析专业人员需求未得到满足的就业市场中，强大的专业知识使该领域的工作更加抢手。根据一些统计数据，2021 年美国的空缺职位[大约有 140,000 个](https://www.datasciencecentral.com/profiles/blogs/why-is-there-a-shortage-of-data-scientists-1#:~:text=The%20major%20reason%20why%20there,well%20as%20non%2Dtechnical%20skills.)。
 
 ### **4\. 规范性分析**
 
@@ -64,7 +64,7 @@
 
 +   资产负债表仪表板
 
-+   KPI仪表板
++   KPI 仪表板
 
 +   基准仪表板
 
@@ -94,22 +94,22 @@
 
 **相关：**
 
-+   [2021年数据科学家招聘的顶级行业](/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html)
++   2021 年数据科学家招聘的顶级行业
 
-+   [数据科学家如何在全球就业市场竞争](/2021/09/data-scientists-compete-global-job-market.html)
++   数据科学家如何在全球就业市场竞争
 
-+   [如何成功成为自由职业数据科学家](/2021/03/succeed-becoming-freelance-data-scientist.html)
++   如何成功成为自由职业数据科学家
 
 ### 更多相关话题
 
-+   [9个专业证书，可能带你获得学位... 如果...](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个专业证书，可能带你获得学位... 如果...](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
 +   [如果你想进入科技领域：成为一名软件开发人员](https://www.kdnuggets.com/if-you-want-to-get-in-the-tech-space-become-a-software-developer)
 
-+   [如果你想成为数据分析师，应该考虑的3门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，应该考虑的 3 门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-+   [5种稀有的数据科学技能，帮助你找到工作](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
++   [5 种稀有的数据科学技能，帮助你找到工作](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
 
-+   [为什么你应该获得认证的5个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
++   [为什么你应该获得认证的 5 个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
 
-+   [想成为数据科学家？第1部分：你需要的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要的 10 项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)

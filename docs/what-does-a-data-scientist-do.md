@@ -1,24 +1,24 @@
 # 数据科学家做什么？
 
-> 原文：[https://www.kdnuggets.com/2021/12/what-does-a-data-scientist-do.html](https://www.kdnuggets.com/2021/12/what-does-a-data-scientist-do.html)
+> 原文：[`www.kdnuggets.com/2021/12/what-does-a-data-scientist-do.html`](https://www.kdnuggets.com/2021/12/what-does-a-data-scientist-do.html)
 
-[评论](#comments)
+评论
 
-![](../Images/6c8a313ea8fc1d018ba41464eac241dc.png)
+![](img/6c8a313ea8fc1d018ba41464eac241dc.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-你真的无法避免它，对吗？无论你看向哪里，它都会出现。你的LinkedIn动态、招聘市场、新闻推送、教育项目都在试图吸引你的注意（以及你的学费）。但数据科学到底是什么？它通常被描述得非常模糊，令人不甚满意。这个指南将尽量避免这些模糊之处，为你提供最直接、最清晰的答案，“数据科学是什么？”和“数据科学家做什么？”。
+你真的无法避免它，对吗？无论你看向哪里，它都会出现。你的 LinkedIn 动态、招聘市场、新闻推送、教育项目都在试图吸引你的注意（以及你的学费）。但数据科学到底是什么？它通常被描述得非常模糊，令人不甚满意。这个指南将尽量避免这些模糊之处，为你提供最直接、最清晰的答案，“数据科学是什么？”和“数据科学家做什么？”。
 
 所以，数据科学家做什么？为回答这个问题，我们将带你了解在数据科学工作中的各个方面。
 
@@ -52,7 +52,7 @@
 
 通常，数据科学中的职位可以分为两类：
 
-![](../Images/c2b4caf46d525c8b43d3a7aa9402afd5.png)
+![](img/c2b4caf46d525c8b43d3a7aa9402afd5.png)
 
 +   数据提供者
 
@@ -122,7 +122,7 @@ BI 开发人员负责开发（设计、构建和维护）BI 工具中的仪表�
 
 **机器学习科学家**
 
-机器学习科学家是数据科学家的某种延伸。虽然数据科学家更关注模型的理论部分，数据工程师则将这些模型付诸实践。他们将原型模型部署到生产中。这涉及工程化的AI软件和算法，使机器学习模型在实践中发挥作用。
+机器学习科学家是数据科学家的某种延伸。虽然数据科学家更关注模型的理论部分，数据工程师则将这些模型付诸实践。他们将原型模型部署到生产中。这涉及工程化的 AI 软件和算法，使机器学习模型在实践中发挥作用。
 
 **研究科学家**
 
@@ -130,11 +130,11 @@ BI 开发人员负责开发（设计、构建和维护）BI 工具中的仪表�
 
 ## 数据科学职业路径
 
-![](../Images/6fd653647b2a2106d22cb524ce0677a8.png)
+![](img/6fd653647b2a2106d22cb524ce0677a8.png)
 
 在下图中，有一个关于你可能的[data scientist career path](https://www.stratascratch.com/blog/data-scientist-career-path-from-novice-to-first-job/)的示例。这并不意味着这是一个单向的过程（它完全可以不是一个过程！）或者这些职位名称不能以不同的方式互换和移动。这只是一个概述，先看看它，然后我们将附上详细的解释。
 
-![](../Images/f2fa0be455dd6bb44b51ec31b2ac353f.png)
+![](img/f2fa0be455dd6bb44b51ec31b2ac353f.png)
 
 ### 教育作为起点
 
@@ -192,7 +192,7 @@ BI 开发人员负责开发（设计、构建和维护）BI 工具中的仪表�
 
 ## 数据科学所需的技术技能
 
-![](../Images/7f1a49ef416e282f2b43a8e07f4ec47a.png)
+![](img/7f1a49ef416e282f2b43a8e07f4ec47a.png)
 
 在数据科学领域，以下技能是必不可少的：
 
@@ -246,7 +246,7 @@ BI 开发人员负责开发（设计、构建和维护）BI 工具中的仪表�
 
 ## 数据科学的工作时间
 
-通常，需求量高并获得相当可观的薪资是有代价的。数据科学并不是一帆风顺的。虽然数据科学家通常每周工作40小时，但有时也需要加班。再说了，这取决于公司、组织、行业以及其他众多因素。但大多数情况下，这与工作描述及其周期性特征有关，这意味着你会在完全放松和轻松的时期与需要每周工作50-60小时的高峰期之间进行平衡。
+通常，需求量高并获得相当可观的薪资是有代价的。数据科学并不是一帆风顺的。虽然数据科学家通常每周工作 40 小时，但有时也需要加班。再说了，这取决于公司、组织、行业以及其他众多因素。但大多数情况下，这与工作描述及其周期性特征有关，这意味着你会在完全放松和轻松的时期与需要每周工作 50-60 小时的高峰期之间进行平衡。
 
 这是因为数据科学任务通常涉及项目，这意味着在严格的截止日期内解决问题。随着截止日期的临近，工作量通常会增加，这时数据科学家不得不加班。
 
@@ -324,7 +324,7 @@ BI 开发人员负责开发（设计、构建和维护）BI 工具中的仪表�
 
 ### 主题扩展
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理以及如何应用……](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理以及如何应用……](https://www.kdnuggets.com/2022/n46.html)
 
 +   [数据来源于哪里？](https://www.kdnuggets.com/2022/08/data-come.html)
 

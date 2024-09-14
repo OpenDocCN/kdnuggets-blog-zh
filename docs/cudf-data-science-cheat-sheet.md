@@ -1,6 +1,6 @@
 # RAPIDS cuDF 备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html`](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)
 
 # RAPIDS cuDF
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 [](https://www.kdnuggets.com/publications/sheets/RAPIDS_cuDF_Cheat_Sheet_KDnuggets.pdf)
 
-[![RAPIDS cuDF 备忘单](../Images/f1be73093466ade24fe8246cb270a63a.png)](https://www.kdnuggets.com/publications/sheets/RAPIDS_cuDF_Cheat_Sheet_KDnuggets.pdf)
+![RAPIDS cuDF 备忘单](https://www.kdnuggets.com/publications/sheets/RAPIDS_cuDF_Cheat_Sheet_KDnuggets.pdf)
 
 这份备忘单涵盖了 RAPIDS cuDF 的以下方面：
 

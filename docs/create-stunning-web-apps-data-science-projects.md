@@ -1,12 +1,12 @@
 # 如何为你的数据科学项目创建令人惊叹的网页应用
 
-> 原文：[https://www.kdnuggets.com/2021/09/create-stunning-web-apps-data-science-projects.html](https://www.kdnuggets.com/2021/09/create-stunning-web-apps-data-science-projects.html)
+> 原文：[`www.kdnuggets.com/2021/09/create-stunning-web-apps-data-science-projects.html`](https://www.kdnuggets.com/2021/09/create-stunning-web-apps-data-science-projects.html)
 
-[评论](#comments)
+评论
 
 **由 [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/)，Stax, Inc. 的数据科学家提供**
 
-![变革性可视化](../Images/47d6bf74cb792c893708957323dfd757.png)
+![变革性可视化](img/47d6bf74cb792c893708957323dfd757.png)
 
 图片由 [Meagan Carsience](https://unsplash.com/@mcarsience_photography?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
@@ -125,7 +125,7 @@ streamlit run quickstart.py
 
 和 hello 应用一样，这个命令将启动一个新的开发服务器。在你的浏览器中，你会看到下面的内容。
 
-![](../Images/328b94d06b6f4625150fbf78128dbd3b.png)
+![](img/328b94d06b6f4625150fbf78128dbd3b.png)
 
 截图来自 [作者](https://thuwarakesh.medium.com/)。
 
@@ -151,7 +151,7 @@ if df_display:
 
 如果你刷新浏览器，现在可以看到一个复选框来切换数据框的显示。
 
-![](../Images/1b8ab87b774a80ae9143e24e5fc4662d.png)
+![](img/1b8ab87b774a80ae9143e24e5fc4662d.png)
 
 截图来自 [作者](https://thuwarakesh.medium.com/)。
 
@@ -181,7 +181,7 @@ n_clusters = sidebar.slider(
 
 在上面的代码中，我们还向侧边栏添加了一个滑块。这个小部件将捕获用户选择的聚类数量。下面是输出效果的样子。
 
-![](../Images/28b966d0df8678b47bcc97ba4aa7f5cc.png)
+![](img/28b966d0df8678b47bcc97ba4aa7f5cc.png)
 
 截图来自 [作者](https://thuwarakesh.medium.com/)。
 
@@ -242,7 +242,7 @@ K-Means 聚类的说明超出了本项目的范围。这是一个机器学习算
 
 如果你刷新页面，你会看到一个仪表盘，它接收用户输入，运行机器学习算法，并立即更新 UI。
 
-![](../Images/adf8c6feef5981d908947bf8a0d8001e.png)
+![](img/adf8c6feef5981d908947bf8a0d8001e.png)
 
 截图来自 [作者](https://thuwarakesh.medium.com/)。
 
@@ -298,7 +298,7 @@ df = load_data()
 
 **步骤 III：在 Streamlit 控制台上创建一个新应用。** 从下拉菜单中选择你的 GitHub 仓库或粘贴 URL。选择你想要用于部署的分支。最后，选择主文件名并点击部署。
 
-![](../Images/aabebfb84c2e7aae9249582ad23b4888.png)
+![](img/aabebfb84c2e7aae9249582ad23b4888.png)
 
 作者截图。
 
@@ -328,11 +328,11 @@ Web 应用程序是一个绝妙的解决方案。但在某些情况下，你可�
 
 **相关：**
 
-+   [数据科学家的 Streamlit 小贴士、技巧和窍门](/2021/07/streamlit-tips-tricks-hacks-data-scientists.html)
++   数据科学家的 Streamlit 小贴士、技巧和窍门
 
-+   [使用 Streamlit 进行主题建模](/2021/05/topic-modeling-streamlit.html)
++   使用 Streamlit 进行主题建模
 
-+   [构建一个应用程序来生成使用 TensorFlow 和 Streamlit 的逼真面孔](/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
++   构建一个应用程序来生成使用 TensorFlow 和 Streamlit 的逼真面孔
 
 ### 更多相关话题
 
@@ -344,6 +344,6 @@ Web 应用程序是一个绝妙的解决方案。但在某些情况下，你可�
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

@@ -1,8 +1,8 @@
 # 数据科学与机器学习与数据分析与商业分析
 
-> 原文：[https://www.kdnuggets.com/2018/05/data-science-machine-learning-business-analytics.html](https://www.kdnuggets.com/2018/05/data-science-machine-learning-business-analytics.html)
+> 原文：[`www.kdnuggets.com/2018/05/data-science-machine-learning-business-analytics.html`](https://www.kdnuggets.com/2018/05/data-science-machine-learning-business-analytics.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 数据科学。这个流行词汇被许多人试图定义，取得了不同的成功。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 这是一个欧拉图，描绘了上述所有领域。每种颜色代表一个不同的领域（混合颜色表示交集），图中有时间线和示例用法。
 
-![数据科学图 1](../Images/bb89c2f8ef59d86b1ed24f79ba6f14de.png)
+![数据科学图 1](img/bb89c2f8ef59d86b1ed24f79ba6f14de.png)
 
 **图 1：矩形的位置、大小和颜色显示了概念上的相似性和差异性，而非复杂性**
 
@@ -48,7 +48,7 @@
 
 +   销售预测
 
-![商业分析](../Images/2b13354860d32646fa98fc761b99feb6.png)
+![商业分析](img/2b13354860d32646fa98fc761b99feb6.png)
 
 它们舒适地坐在蓝色矩形中。
 
@@ -60,7 +60,7 @@
 
 它们可以与‘商业案例研究’和‘定性分析’相对立，因为这些是基于*商业*但基于过去的知识、经验和行为。所有这些都是重要的，但正如你很快会看到的——实际上并不是数据科学。
 
-![商业分析数据](../Images/a5dc16248f96d2d6c493c73b074d640f.png)
+![商业分析数据](img/a5dc16248f96d2d6c493c73b074d640f.png)
 
 ### 分析与分析
 
@@ -80,7 +80,7 @@
 
 我们分析的最后两个部分已经展示了这个点的全貌。
 
-![分析与分析](../Images/a565e6eab79341f309d199f0c73c1361.png)
+![分析与分析](img/a565e6eab79341f309d199f0c73c1361.png)
 
 ‘销售预测’被移到右侧，因为它的名字意味着一个面向未来的分析过程。广义上讲，‘定性分析’是利用你的直觉和经验来**规划你的下一步行动**——因此另一个面向未来的术语。
 
@@ -92,7 +92,7 @@
 
 好吧，事实证明，所有既是*数据分析*又是*商业分析*的东西确实是***数据科学***。
 
-![数据科学过去与未来](../Images/4f121094c7cdd145dcebd7b2e9ff7182.png)
+![数据科学过去与未来](img/4f121094c7cdd145dcebd7b2e9ff7182.png)
 
 但有一点需要说明。存在一些数据科学过程并不是直接和立刻的商业分析，但却是数据分析。例如，‘钻探作业优化’需要数据科学工具和技术。数据科学家可能会每天都做这些事情。然而，在‘石油**业务**’领域中，我们不能真的说它直接与*商业分析*相关。
 
@@ -106,15 +106,15 @@
 
 商业智能（BI）是分析和报告历史数据的过程。
 
-![商业智能图 1](../Images/390b9e648691a301b370fa985f2942ad.png)
+![商业智能图 1](img/390b9e648691a301b370fa985f2942ad.png)
 
 这是以过去为导向的吗？不一定，但没有涉及预测分析。回归、分类和所有其他通常的预测方法是*数据科学*的一部分，但**不是*商业智能*。这就是分界线所在。
 
-此外，*商业智能*完全是*数据科学*的一个子集。因此，当一个人处理描述性统计、报告或过去事件的可视化时，她同时在做BI和数据科学。
+此外，*商业智能*完全是*数据科学*的一个子集。因此，当一个人处理描述性统计、报告或过去事件的可视化时，她同时在做 BI 和数据科学。
 
 ### 机器学习和人工智能
 
-在这里，定义会变得有些模糊，因为仅仅解释机器学习和人工智能会导致失去文章的重点。此外，关于机器学习是什么，有很多资源，尤其是在KDnuggets上。
+在这里，定义会变得有些模糊，因为仅仅解释机器学习和人工智能会导致失去文章的重点。此外，关于机器学习是什么，有很多资源，尤其是在 KDnuggets 上。
 
 **人工智能（AI）**是机器表现出的任何类似于自然（人类）智能的形式，如计划、学习、解决问题等。
 
@@ -124,7 +124,7 @@
 
 在我们的图表中，这两个术语的适配方式如下。
 
-![机器学习和人工智能](../Images/b74c5e1876c66c67435f9571fc13e57b.png)
+![机器学习和人工智能](img/b74c5e1876c66c67435f9571fc13e57b.png)
 
 *机器学习*完全属于*数据分析*，因为它不能在没有数据的情况下进行。它也与*数据科学*重叠，因为它是数据科学家工具箱中最好的工具之一。最后，只要没有涉及预测分析，它也参与*商业智能*。
 
@@ -138,19 +138,19 @@
 
 移除 AI 并添加*高级分析*，这就是我们得到的结果。
 
-![高级分析图 1](../Images/698cdb6c0971e0a7d1733d297ee84ad1.png)
+![高级分析图 1](img/698cdb6c0971e0a7d1733d297ee84ad1.png)
 
 在本文的术语中，我们的**高级分析分析**已完成。
 
 这是一个动画 gif，比较了这些定义。
 
-![](../Images/bc73b0ae741c9528ae8d8f02d647ce15.png)
+![](img/bc73b0ae741c9528ae8d8f02d647ce15.png)
 
 **简介: [Iliya Valchanov](https://www.linkedin.com/in/iliya-valchanov-607293a6/)** 是 365 Data Science 的联合创始人。
 
 **相关:**
 
-+   [在急于开始数据科学之前需要知道的5件事](https://www.kdnuggets.com/2018/03/5-things-before-rushing-data-science.html)
++   [在急于开始数据科学之前需要知道的 5 件事](https://www.kdnuggets.com/2018/03/5-things-before-rushing-data-science.html)
 
 +   [商业智能和数据分析如何驱动商业价值？](https://www.kdnuggets.com/2018/03/ntu-bi-data-analytics-online-mba.html)
 
@@ -160,12 +160,12 @@
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

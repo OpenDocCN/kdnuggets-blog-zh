@@ -1,28 +1,28 @@
 # 数据工程师面试的终极指南
 
-> 原文：[https://www.kdnuggets.com/2020/12/ultimate-guide-data-engineer-interviews.html](https://www.kdnuggets.com/2020/12/ultimate-guide-data-engineer-interviews.html)
+> 原文：[`www.kdnuggets.com/2020/12/ultimate-guide-data-engineer-interviews.html`](https://www.kdnuggets.com/2020/12/ultimate-guide-data-engineer-interviews.html)
 
-[评论](#comments)
+评论
 
 **作者 [Xinran Waibel](https://medium.com/@xinran.waibel)，Netflix 数据工程师**。
 
-![](../Images/70e1fbd02a1dc59e70469209bf98cfe0.png)
+![](img/70e1fbd02a1dc59e70469209bf98cfe0.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 *照片由 [Christin Hume](https://unsplash.com/@christinhumephoto?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/interview?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-尽管数据工程师（DE）是 [2019年增长最快的科技职位](https://techhub.dice.com/Dice-2020-Tech-Job-Report.html)，但关于数据工程师面试的期望和准备的在线资源并不多。
+尽管数据工程师（DE）是 [2019 年增长最快的科技职位](https://techhub.dice.com/Dice-2020-Tech-Job-Report.html)，但关于数据工程师面试的期望和准备的在线资源并不多。
 
 在过去一年中，我为几家湾区的科技公司进行了数据工程师角色的面试，并帮助许多联系的成功通过了面试。在这篇博客文章中，我将解释数据工程师面试中最重要的技术话题：你的简历、编程、SQL 和系统设计。我还将教你如何准备面试的非技术部分，我认为这对成功的面试至关重要，但往往被候选人忽视。
 
@@ -32,7 +32,7 @@
 
 你的简历不仅是引起招聘人员和招聘经理注意的垫脚石，也是你应准备好与面试官深入讨论的项目列表，以展示你的技能，包括技术能力、问题解决、团队合作、沟通和项目管理。
 
-我在简历深度探讨环节中看到的最常见错误是，仅关注技术实现细节，而没有解释或理解系统设计中的权衡（例如，“我使用了Kafka，因为我的经理告诉我这么做”）以及项目的整体情况。请记住，面试官不了解你以前公司的业务问题和数据基础设施，因此你需要提供足够的背景信息，帮助他们理解你的项目的技术复杂性和影响。因此，一个优秀的项目深度探讨的关键是从头到尾全面描绘你的项目，就像讲故事一样！
+我在简历深度探讨环节中看到的最常见错误是，仅关注技术实现细节，而没有解释或理解系统设计中的权衡（例如，“我使用了 Kafka，因为我的经理告诉我这么做”）以及项目的整体情况。请记住，面试官不了解你以前公司的业务问题和数据基础设施，因此你需要提供足够的背景信息，帮助他们理解你的项目的技术复杂性和影响。因此，一个优秀的项目深度探讨的关键是从头到尾全面描绘你的项目，就像讲故事一样！
 
 我强烈建议你练习讲述你最重要的数据项目（如果可能的话，找一个有工程背景的人），并确保在你的故事中回答这些问题：
 
@@ -42,7 +42,7 @@
 
 +   如果你是项目负责人，你是如何规划和推动它的？
 
-+   系统设计中的技术权衡是什么？（即，为什么你选择了框架X而不是其他替代方案？）
++   系统设计中的技术权衡是什么？（即，为什么你选择了框架 X 而不是其他替代方案？）
 
 +   你的项目的一些技术统计数据是什么？（例如，你的数据管道的吞吐量和延迟是多少？）
 
@@ -52,13 +52,13 @@
 
 数字在讲述一个伟大的项目故事中是非常重要的。与其只是说“它处理了大量数据……”，不如查找你项目的一些统计数据，并将它们包括在你的简历中。数字将展示项目的规模、影响以及你对项目的深入理解。它们还会让你的项目更具可信度。（实际上，面试官可能会觉得如果你连你的应用程序能处理多少数据都不知道，那是可疑的。）
 
-![](../Images/d88cf4b8c207ffcb58051b8532c7f1d8.png)
+![](img/d88cf4b8c207ffcb58051b8532c7f1d8.png)
 
 *照片由 [Clément H](https://unsplash.com/@clemhlrdt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
 ### 编程
 
-好的。这是所有软件工程面试中最不愉快的部分：编码面试，在这里你需要用最有效的数据结构，在最少的代码行数中实现复杂的算法（这些算法你可能在工作中永远不会用到），并解释你的代码的时间和空间复杂度，所有这些都在30分钟内完成。
+好的。这是所有软件工程面试中最不愉快的部分：编码面试，在这里你需要用最有效的数据结构，在最少的代码行数中实现复杂的算法（这些算法你可能在工作中永远不会用到），并解释你的代码的时间和空间复杂度，所有这些都在 30 分钟内完成。
 
 数据工程师岗位的编码面试通常在算法方面较轻，但在数据方面较重，面试问题通常更具实用性。例如，编写一个函数来转换输入数据并生成所需的输出数据。你仍然需要使用最优的数据结构和算法，并优雅地处理所有潜在的数据问题。由于数据工程师在实际工作中不仅使用内置库处理数据，编码面试也可能要求你使用流行的开源库，如 [Spark](https://spark.apache.org/) 和 [pandas](https://pandas.pydata.org/)。面试期间一般允许查阅文档（如有需要）。如果工作要求精通特定框架，请准备在编码面试中使用这些框架。
 
@@ -92,7 +92,7 @@ SQL 是数据工程师非常关键的技能，因此我需要为它单独设置�
 
 如果你对深入学习数据建模感兴趣，查看 [*数据仓库工具包*](https://www.kimballgroup.com/data-warehouse-business-intelligence-resources/books/data-warehouse-dw-toolkit/)，这是 Ralph Kimball 编写的关于数据仓库的经典之作。
 
-![](../Images/9dfc2cd82c86e4e8131bee970959ae64.png)
+![](img/9dfc2cd82c86e4e8131bee970959ae64.png)
 
 *照片由 [Christina @ wocintechchat.com](https://unsplash.com/@wocintechchat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/conversation?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)上提供。*
 
@@ -118,7 +118,7 @@ SQL 是数据工程师非常关键的技能，因此我需要为它单独设置�
 
 [原文](https://towardsdatascience.com/the-ultimate-guide-to-data-engineer-interviews-f2443cc42ad7)。经许可转载。
 
-**简介：** [Xinran Waibel](https://medium.com/@xinran.waibel)是旧金山湾区的一名经验丰富的数据工程师，目前在Netflix工作。她还是《Towards Data Science》、《Google Cloud》和《The Startup on Medium》的技术撰稿人。
+**简介：** [Xinran Waibel](https://medium.com/@xinran.waibel)是旧金山湾区的一名经验丰富的数据工程师，目前在 Netflix 工作。她还是《Towards Data Science》、《Google Cloud》和《The Startup on Medium》的技术撰稿人。
 
 **相关信息：**
 

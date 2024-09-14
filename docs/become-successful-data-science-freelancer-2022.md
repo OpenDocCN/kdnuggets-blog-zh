@@ -1,8 +1,8 @@
-# 如何在2022年成为成功的数据科学自由职业者
+# 如何在 2022 年成为成功的数据科学自由职业者
 
-> 原文：[https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
+> 原文：[`www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html`](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
-![如何在2022年成为成功的数据科学自由职业者](../Images/8503928906b4cdf0fd76ff4c4d37aba2.png)
+![如何在 2022 年成为成功的数据科学自由职业者](img/8503928906b4cdf0fd76ff4c4d37aba2.png)
 
 [Andrew Neel](https://unsplash.com/@andrewtneel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)的照片，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -120,7 +120,7 @@
 
 另外，记住许多雇主选择招聘基于信任。如果你得到了他们熟悉的人推荐，他们更可能雇佣你，而不是冒险招聘一个在招聘门户网站上传简历的申请者。
 
-一旦你获得了前几份自由职业工作，获取更多工作将变得更容易。你成功完成的工作越多，你在如Upwork等平台上的个人资料排名就会越高。
+一旦你获得了前几份自由职业工作，获取更多工作将变得更容易。你成功完成的工作越多，你在如 Upwork 等平台上的个人资料排名就会越高。
 
 完成雇主的任务后，向他们请求推荐。这将给未来的雇主提供信心，表明你能够完成工作，并增加被聘用的机会。
 
@@ -128,7 +128,7 @@
 
 然而，确保进行适当的研究以了解市场费用。我在刚开始自由职业时并不知道这一点，做了很多工作的报酬却远低于市场价格。
 
-我曾经向一家公司收取约$35来撰写一篇2500字的文章。在与他们合作一个月后，我询问是否可以将费用增加到$70\. 他们进行了讨价还价，最后定在了$60。
+我曾经向一家公司收取约$35 来撰写一篇 2500 字的文章。在与他们合作一个月后，我询问是否可以将费用增加到$70\. 他们进行了讨价还价，最后定在了$60。
 
 我为他们写了另一篇文章，然后离开了。报酬根本不值得我付出的努力，我决定将精力转向更有价值的任务。
 
@@ -146,14 +146,14 @@
 
 ### 了解更多相关话题
 
-+   [KDnuggets新闻 2022年3月16日：学习数据科学基础和5…](https://www.kdnuggets.com/2022/n11.html)
++   [KDnuggets 新闻 2022 年 3 月 16 日：学习数据科学基础和 5…](https://www.kdnuggets.com/2022/n11.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [成功构建机器学习模型中的数据质量重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
 +   [AI、分析、机器学习、数据科学、深度学习的主要发展和预测](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [数据科学与分析行业2021年主要发展及关键预测](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [数据科学与分析行业 2021 年主要发展及关键预测](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [2021年主要发展及2022年AI、数据科学的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年主要发展及 2022 年 AI、数据科学的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)

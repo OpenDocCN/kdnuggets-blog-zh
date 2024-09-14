@@ -1,44 +1,44 @@
-# 统计学习导论，Python版：免费书籍
+# 统计学习导论，Python 版：免费书籍
 
-> 原文：[https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
+> 原文：[`www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html`](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 
-![统计学习导论，Python版：免费书籍](../Images/b217950d441e39cc3be4ffb88f9eac7c.png)
+![统计学习导论，Python 版：免费书籍](img/b217950d441e39cc3be4ffb88f9eac7c.png)
 
 图片由作者提供
 
-多年来，[Introduction to Statistical Learning with Applications in R](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf)，更为人熟知的ISLR，一直被机器学习初学者和从业者视为最好的机器学习教科书之一。
+多年来，[Introduction to Statistical Learning with Applications in R](https://hastie.su.domains/ISLR2/ISLRv2_corrected_June_2023.pdf)，更为人熟知的 ISLR，一直被机器学习初学者和从业者视为最好的机器学习教科书之一。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-现在，Python版的书籍，[Introduction to Statistical Learning with Applications in Python](https://hastie.su.domains/ISLP/ISLP_website.pdf)——或称**ISL with Python**——终于来了，社区的兴奋之情更是与日俱增！
+现在，Python 版的书籍，[Introduction to Statistical Learning with Applications in Python](https://hastie.su.domains/ISLP/ISLP_website.pdf)——或称**ISL with Python**——终于来了，社区的兴奋之情更是与日俱增！
 
-# ISL with Python来了。太棒了！但为什么呢？
+# ISL with Python 来了。太棒了！但为什么呢？
 
 很高兴你问了。????
 
-如果你在机器学习领域待了很久，那么你可能已经听说、阅读或使用过这本书的R版本。而你也知道自己最喜欢其中的哪些内容。但这是我的故事。
+如果你在机器学习领域待了很久，那么你可能已经听说、阅读或使用过这本书的 R 版本。而你也知道自己最喜欢其中的哪些内容。但这是我的故事。
 
-在我开始研究生课程的那个夏天，我决定自学机器学习。我很幸运在机器学习的早期阶段遇到了ISLR。ISLR的作者非常擅长将复杂的机器学习算法拆解成易于理解的方式——包括所需的数学基础——而不会让学习者感到不堪重负。这是我喜欢这本书的一个方面。
+在我开始研究生课程的那个夏天，我决定自学机器学习。我很幸运在机器学习的早期阶段遇到了 ISLR。ISLR 的作者非常擅长将复杂的机器学习算法拆解成易于理解的方式——包括所需的数学基础——而不会让学习者感到不堪重负。这是我喜欢这本书的一个方面。
 
-**然而，ISLR中的代码示例和实验是在R中进行的**。遗憾的是，当时我并不懂R，但对Python编程很熟悉。所以我有两个选择。
+**然而，ISLR 中的代码示例和实验是在 R 中进行的**。遗憾的是，当时我并不懂 R，但对 Python 编程很熟悉。所以我有两个选择。
 
-![统计学习导论，Python版：免费书籍](../Images/497edd031f655926003a305fa950fff2.png)
+![统计学习导论，Python 版：免费书籍](img/497edd031f655926003a305fa950fff2.png)
 
 图片由作者提供
 
-我可以自学R。或者我可以使用其他资源——教程和文档——在Python中构建模型。像大多数其他Python爱好者一样，我选择了第二个选项（是的，更熟悉的路线，我知道）。
+我可以自学 R。或者我可以使用其他资源——教程和文档——在 Python 中构建模型。像大多数其他 Python 爱好者一样，我选择了第二个选项（是的，更熟悉的路线，我知道）。
 
-虽然R在统计分析方面表现出色，但如果你刚开始你的数据之旅，Python是一个很好的首选语言。
+虽然 R 在统计分析方面表现出色，但如果你刚开始你的数据之旅，Python 是一个很好的首选语言。
 
 **但这不再是问题了！因为这个新的 Python 版让你可以边编码边构建 Python 中的机器学习模型。** 不再担心为了跟上进度而必须学习一种新的编程语言。
 
@@ -92,7 +92,7 @@ ISLP 包有一个 [全面的文档](https://islp.readthedocs.io/en/latest/)。IS
 
 它还具有创建更高阶特征的辅助函数和功能，如多项式和样条特征。
 
-![统计学习介绍，Python 版：免费书籍](../Images/ca74da7281ee72118923240cea95e050.png)
+![统计学习介绍，Python 版：免费书籍](img/ca74da7281ee72118923240cea95e050.png)
 
 生成多项式特征 | [来自 ISLP 文档的图像](https://islp.readthedocs.io/en/latest/transforms/poly.html)
 
@@ -126,6 +126,6 @@ ISLP 包有一个 [全面的文档](https://islp.readthedocs.io/en/latest/)。IS
 
 +   [十大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)
 
-+   [神经网络与深度学习：教科书（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
++   [神经网络与深度学习：教科书（第 2 版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
 
 +   [Pydon'ts - 编写优雅的 Python 代码：免费书评](https://www.kdnuggets.com/2022/05/pydonts-write-elegant-python-code-free-book-review.html)

@@ -1,8 +1,8 @@
 # 使用谷歌 CoLaboratory 创建一个简单的文本分类器
 
-> 原文：[https://www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html](https://www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html)
+> 原文：[`www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html`](https://www.kdnuggets.com/2018/03/simple-text-classifier-google-colaboratory.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Sudipto Dasgupta](https://www.linkedin.com/in/dsudipto/), Flipkart.**
 
@@ -10,7 +10,7 @@
 
 **背景**：我在一家电子商务公司工作，在业务中误发货是普遍现象。当系统收到关于误发货的信息时，一组专家会阅读客户对每个案件生成的评论，以确定如何调查。由于开放文本字段难以控制，客户可以自由发布可能无法采取行动或有时甚至无法理解的消息。阅读评论需要相当长的时间，鉴于以前的标记信息，垃圾评论可以通过文本分类算法轻松标记。以下是一个简单的分类器，它可以在有足够的训练数据和均衡标签分布的情况下生成高准确度的标签。
 
-![二元文本分类器](../Images/b19924393dc974c34e1cfb8aad65a7d5.png)
+![二元文本分类器](img/b19924393dc974c34e1cfb8aad65a7d5.png)
 
 **加载语料库**：训练数据包括两列，第一列包含评论，第二列包含标签（0 和 1）。首先，我们使用以下代码将数据加载到 colab 环境中 -
 
@@ -34,7 +34,7 @@ y = df[1]
 
 尽管有几种不同的方法进行分类，但我使用的方法涉及 NLTK python 包。
 
-词干提取涉及将派生词还原为其基本形式。例如，‘fish’是‘fishing’、‘fished’和‘fisher’等词的词根。Martin Porter的算法是一个流行的词干提取工具，可以在NLTK中找到。停用词是从特征提取角度来看，对句子意义贡献不大的词。像‘after’、‘few’、‘right’等词经常被搜索引擎忽略。常见停用词的列表可以在[此处](https://www.webconfs.com/stop-words.php)找到。我通过以下命令从NLTK导入了‘PorterStemmer’和‘Stopwords’。
+词干提取涉及将派生词还原为其基本形式。例如，‘fish’是‘fishing’、‘fished’和‘fisher’等词的词根。Martin Porter 的算法是一个流行的词干提取工具，可以在 NLTK 中找到。停用词是从特征提取角度来看，对句子意义贡献不大的词。像‘after’、‘few’、‘right’等词经常被搜索引擎忽略。常见停用词的列表可以在[此处](https://www.webconfs.com/stop-words.php)找到。我通过以下命令从 NLTK 导入了‘PorterStemmer’和‘Stopwords’。
 
 **import** nltk
 
@@ -62,7 +62,7 @@ def pre_process(txt):
 
 ```
 
-现在让我们看看这个函数对文本的作用，使用代码对语料库中的前5条评论进行处理。
+现在让我们看看这个函数对文本的作用，使用代码对语料库中的前 5 条评论进行处理。
 
 ```py
 
@@ -98,7 +98,7 @@ dial color white order blackitem receivvari...
 
 issuqualiti price tag miss
 
-**分词：** 让我们考虑句子——‘你好吗？’。显然，程序无法理解单词，它们只理解字符。因此，如果采用词袋模型，句子‘你好吗？’和‘好吗 你’是相同的。然而，句子的二元组将会不同。二元组是n-grams的子集，n-grams是由基本对、音节或单词组成的集合。n-grams在自然语言处理和其他领域如DNA测序中都非常流行！二元组是：
+**分词：** 让我们考虑句子——‘你好吗？’。显然，程序无法理解单词，它们只理解字符。因此，如果采用词袋模型，句子‘你好吗？’和‘好吗 你’是相同的。然而，句子的二元组将会不同。二元组是 n-grams 的子集，n-grams 是由基本对、音节或单词组成的集合。n-grams 在自然语言处理和其他领域如 DNA 测序中都非常流行！二元组是：
 
 ‘你好吗？’ ---- ‘你好吗’ , ‘好吗 你’
 
@@ -114,7 +114,7 @@ vectorizer **=**TfidfVectorizer**(**ngram_range**=(**1**,**2**))**
 
 X_ngrams**=**vectorizer**.**fit_transform**(**processed**)**
 
-词频（tf）衡量每个n-gram在每个训练示例中的出现次数。这个值会通过逆文档频率（idf）进行加权，以确保对每个类别具有独特性的词或词对具有更高的权重，而常见的n-grams具有较低的权重。
+词频（tf）衡量每个 n-gram 在每个训练示例中的出现次数。这个值会通过逆文档频率（idf）进行加权，以确保对每个类别具有独特性的词或词对具有更高的权重，而常见的 n-grams 具有较低的权重。
 
 **创建分类器**：一旦特征由前一段代码生成，下一步就是使用数据拟合模型。数据按 80/20 的比例分割，并使用（二元）逻辑回归进行建模。
 
@@ -136,7 +136,7 @@ clf**.**fit**(**X_train**,**y_train**)**
 
 机器已经学会了！
 
-![机器学习机器人](../Images/65cdcf419067bd98e8d68da1c84c8f30.png)
+![机器学习机器人](img/65cdcf419067bd98e8d68da1c84c8f30.png)
 
 接下来，我们需要一个包装函数来将珍珠与垃圾分开。
 
@@ -170,7 +170,7 @@ clf**.**fit**(**X_train**,**y_train**)**
 
 建模非常简单。模型堆叠可能有助于提高准确性，而 Naïve Bayes 或 SVC 等其他算法在处理这些问题时表现更好。我没有尝试神经网络，但如果训练数据足够大，它也可能给出更好的结果。谷歌 Colab 也提供了免费的 GPU，所以值得一试。
 
-![谷歌 Colab 笔记本](../Images/7bb1889dead5dd2c3101c7a50bb01ac5.png)
+![谷歌 Colab 笔记本](img/7bb1889dead5dd2c3101c7a50bb01ac5.png)
 
 尽管我在 Jupyter 中创建了这段代码，但将其迁移到 Colaboratory 是非常轻松的。感谢你，谷歌！
 
@@ -192,11 +192,11 @@ clf**.**fit**(**X_train**,**y_train**)**
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在组织的 IT 工作
 
 * * *
 

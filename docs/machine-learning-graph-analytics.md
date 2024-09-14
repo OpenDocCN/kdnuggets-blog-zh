@@ -1,8 +1,8 @@
 # 机器学习与深度链接图分析：强大的组合
 
-> 原文：[https://www.kdnuggets.com/2019/04/machine-learning-graph-analytics.html](https://www.kdnuggets.com/2019/04/machine-learning-graph-analytics.html)
+> 原文：[`www.kdnuggets.com/2019/04/machine-learning-graph-analytics.html`](https://www.kdnuggets.com/2019/04/machine-learning-graph-analytics.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Yu Xu](https://www.linkedin.com/in/yuxusandiego/)（TigerGraph 创始人兼 CEO）和 [Gaurav Deshpande](https://www.linkedin.com/in/gauravdeshpande/)（TigerGraph 市场副总裁）**
 
@@ -28,7 +28,7 @@
 
 另一个表明好电话行为的特征是当一个电话拨打了一个已经在网络中存在了多个月或多年的电话，并且收到回电时。我们还看到在好电话、长期电话联系人和网络中的其他电话之间有大量的通话，这些电话频繁地拨打这两个号码。这表明好电话有很多“内部连接”。中国移动通过为每个电话生成 118 个基于图的特征，将数十亿的新训练数据记录输入到其机器学习解决方案中，从而改进了其欺诈检测过程。
 
-![好电话差电话](../Images/28190c5c91481e1a6473e9da5da0e5dc.png)
+![好电话差电话](img/28190c5c91481e1a6473e9da5da0e5dc.png)
 
 *可解释的机器学习/人工智能模型*
 
@@ -38,13 +38,13 @@
 
 可解释的人工智能模型有很多好处。例如，消费者已经习惯了个性化推荐。如果推荐附带一些解释或证据，用户更有可能采取行动。图形分析非常适合计算并展示这些个性化推荐背后的证据，并根据需要通过图形可视化进行解释。例如，图形分析可能会显示你两到三度关系中的一部分朋友喜欢这个产品或服务，或者与你兴趣相似的其他用户喜欢它，或者该产品类似于你之前的购买。
 
-基于图的机器学习和分析不仅对消费者有帮助，也对企业用户有用。以欺诈检测为例。许多企业雇佣大量训练有素的调查员来判断交易是否可能是欺诈性的。图形擅长将多个数据源结合起来，连接点，允许调查员直观且互动地看到该交易如何与之前标记为欺诈的交易相关联。这比仅仅收到一些机器学习模型给出的模糊0.7欺诈评分要有帮助。
+基于图的机器学习和分析不仅对消费者有帮助，也对企业用户有用。以欺诈检测为例。许多企业雇佣大量训练有素的调查员来判断交易是否可能是欺诈性的。图形擅长将多个数据源结合起来，连接点，允许调查员直观且互动地看到该交易如何与之前标记为欺诈的交易相关联。这比仅仅收到一些机器学习模型给出的模糊 0.7 欺诈评分要有帮助。
 
 另一个例子：实时电话诈骗防护。每天，数以亿计的电话被拨打，但其中只有极小的一部分是恶意诈骗。图形技术可以快速探索拨打者、电话号码和接收者之间的关系，并结合机器学习开发训练模型，以检测哪些是虚假的。
 
 此外，当涉及到监管机构或其他审计方时，可解释的机器学习成为一种必要条件。银行被要求拥有高质量的方法来检测可能的洗钱行为。越来越多的银行使用机器学习来提高检测准确性，但同时，他们必须能够向审计员展示他们的系统如何以及为何有效。使用基于图的特征的机器学习模型提供了所需的透明度。
 
-![图形增强可解释的人工智能](../Images/a5013da2812bed1db1746878711d3efe.png)
+![图形增强可解释的人工智能](img/a5013da2812bed1db1746878711d3efe.png)
 
 *本地并行图数据库*
 
@@ -52,9 +52,9 @@
 
 为了计算和解释个性化推荐和欺诈检测背后的原因，图形数据库需要一个强大的查询语言，它不仅能够遍历图中的连接，还能支持诸如过滤和聚合的计算以及复杂的数据结构来记住证据。
 
-深层图形分析推动了机器学习的下一次进步，通过无监督学习图形模式、为监督学习提供特征增强，并提供可解释的模型和结果。结合AI和ML，这是一种强大的组合，将在未来几年内为企业提供良好的服务。
+深层图形分析推动了机器学习的下一次进步，通过无监督学习图形模式、为监督学习提供特征增强，并提供可解释的模型和结果。结合 AI 和 ML，这是一种强大的组合，将在未来几年内为企业提供良好的服务。
 
-**Bio**[Yu Xu](https://www.linkedin.com/in/yuxusandiego/) 是 Tigergraph 的创始人兼首席执行官，专长包括并行计算、数据库管理、Hadoop、MapReduce、大规模数据分析、数据仓库、半结构化数据的信息检索、XML文档中的关键词搜索、空间数据库、可扩展的网络系统开发、搜索引擎优化、XML语言和查询引擎、PigLatin、Cassadra、HBase 和 HIVE。
+**Bio**[Yu Xu](https://www.linkedin.com/in/yuxusandiego/) 是 Tigergraph 的创始人兼首席执行官，专长包括并行计算、数据库管理、Hadoop、MapReduce、大规模数据分析、数据仓库、半结构化数据的信息检索、XML 文档中的关键词搜索、空间数据库、可扩展的网络系统开发、搜索引擎优化、XML 语言和查询引擎、PigLatin、Cassadra、HBase 和 HIVE。
 
 [Gaurav Deshpande](https://www.linkedin.com/in/gauravdeshpande/) 是一位经验丰富的技术高管，专注于组建获胜团队，创造新产品和行业解决方案，建立新市场并主导市场。
 
@@ -76,11 +76,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 

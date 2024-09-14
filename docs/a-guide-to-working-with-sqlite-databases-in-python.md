@@ -1,8 +1,8 @@
 # 使用 SQLite 数据库的指南
 
-> 原文：[https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)
+> 原文：[`www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python`](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)
 
-![sqlite](../Images/28370dcbc9584501c42815ae9bb8694f.png)
+![sqlite](img/28370dcbc9584501c42815ae9bb8694f.png)
 
 作者图片
 
@@ -12,11 +12,11 @@ SQLite 是一种轻量级、无服务器的关系数据库管理系统（RDBMS�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -55,7 +55,7 @@ conn = sqlite3.connect(‘example.db’)
 
 连接到数据库后，我们将创建一个数据库游标，以帮助我们运行查询。游标对象具有执行查询和获取查询结果的方法。它的工作方式与文件处理器非常相似。
 
-![sqlite](../Images/1e38fdc13b49a32fb2d938ac8e6e91e5.png)
+![sqlite](img/1e38fdc13b49a32fb2d938ac8e6e91e5.png)
 
 数据库游标 | 作者图片
 
@@ -71,11 +71,11 @@ with sqlite3.connect('example.db') as conn:
     # commit changes 
 ```
 
-这样你就不必担心关闭连接对象。当执行退出with块时，连接会自动关闭。不过，我们在本教程中会显式关闭游标对象。
+这样你就不必担心关闭连接对象。当执行退出 with 块时，连接会自动关闭。不过，我们在本教程中会显式关闭游标对象。
 
 ## 创建数据库表
 
-现在让我们在数据库中创建一个包含所需字段的`customers`表。为此，我们首先创建一个游标对象。然后我们运行一个CREATE TABLE语句，并将查询字符串传递给游标对象上调用的`execute()`方法：
+现在让我们在数据库中创建一个包含所需字段的`customers`表。为此，我们首先创建一个游标对象。然后我们运行一个 CREATE TABLE 语句，并将查询字符串传递给游标对象上调用的`execute()`方法：
 
 ```py
 import sqlite3
@@ -107,13 +107,13 @@ Output >>>
 Customers table created successfully. 
 ```
 
-## 执行CRUD操作
+## 执行 CRUD 操作
 
-让我们对数据库表进行一些基本的CRUD操作。如果愿意，你可以为每个操作创建单独的脚本。
+让我们对数据库表进行一些基本的 CRUD 操作。如果愿意，你可以为每个操作创建单独的脚本。
 
 ### 插入记录
 
-现在我们将一些记录插入到`customers`表中。我们将使用Faker生成合成记录。为了保持输出的可读性，我只插入了10条记录。但你可以插入任意数量的记录。
+现在我们将一些记录插入到`customers`表中。我们将使用 Faker 生成合成记录。为了保持输出的可读性，我只插入了 10 条记录。但你可以插入任意数量的记录。
 
 ```py
 import sqlite3
@@ -146,7 +146,7 @@ with sqlite3.connect('example.db') as conn:
 	cursor.close() 
 ```
 
-注意我们如何使用参数化查询：我们不是将值硬编码到INSERT语句中，而是使用?占位符并传入一个值的元组。
+注意我们如何使用参数化查询：我们不是将值硬编码到 INSERT 语句中，而是使用?占位符并传入一个值的元组。
 
 运行脚本应该会得到：
 
@@ -159,7 +159,7 @@ Output >>>
 
 现在我们已经将记录插入到表中，让我们运行一个查询以读取所有记录。注意我们如何使用`execute()`方法运行查询，以及如何在游标上使用`fetchall()`方法来检索查询结果。
 
-由于我们已经将之前查询的结果存储在`all_customers`中，让我们运行一个UPDATE查询来更新id为1的`num_orders`。以下是代码片段：
+由于我们已经将之前查询的结果存储在`all_customers`中，让我们运行一个 UPDATE 查询来更新 id 为 1 的`num_orders`。以下是代码片段：
 
 ```py
 import sqlite3
@@ -211,7 +211,7 @@ Orders updated for customer ID 1: now has 55 orders.
 
 ### 删除记录
 
-要删除特定客户ID的客户，让我们运行如下的DELETE语句：
+要删除特定客户 ID 的客户，让我们运行如下的 DELETE 语句：
 
 ```py
 import sqlite3
@@ -239,13 +239,13 @@ with sqlite3.connect('example.db') as conn:
 Customer with ID 3 deleted successfully. 
 ```
 
-## 使用WHERE子句过滤记录
+## 使用 WHERE 子句过滤记录
 
-![sqlite](../Images/1ddfac37a313ec252b2e49aaaf7a552d.png)
+![sqlite](img/1ddfac37a313ec252b2e49aaaf7a552d.png)
 
 图片由作者提供
 
-假设我们想要获取下单少于10次的客户记录，比如为了进行针对性的活动等。为此，我们运行一个SELECT查询，并使用WHERE子句指定过滤条件（在这种情况下是订单数量）。下面是如何实现：
+假设我们想要获取下单少于 10 次的客户记录，比如为了进行针对性的活动等。为此，我们运行一个 SELECT 查询，并使用 WHERE 子句指定过滤条件（在这种情况下是订单数量）。下面是如何实现：
 
 ```py
 import sqlite3
@@ -285,9 +285,9 @@ Customers with less than 10 orders:
 
 ## 总结
 
-这就是全部！这是一个关于如何使用Python开始SQLite的指南。希望你觉得这有帮助。你可以在[GitHub](https://github.com/balapriyac/python-basics/tree/main/sqlite-tut)上找到所有代码。在下一部分，我们将探讨运行联接和子查询、管理SQLite中的事务等内容。直到那时，祝编码愉快！
+这就是全部！这是一个关于如何使用 Python 开始 SQLite 的指南。希望你觉得这有帮助。你可以在[GitHub](https://github.com/balapriyac/python-basics/tree/main/sqlite-tut)上找到所有代码。在下一部分，我们将探讨运行联接和子查询、管理 SQLite 中的事务等内容。直到那时，祝编码愉快！
 
-如果你对学习数据库索引如何工作感兴趣，请阅读[如何使用索引加速SQL查询 [Python版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)。
+如果你对学习数据库索引如何工作感兴趣，请阅读[如何使用索引加速 SQL 查询 [Python 版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)。
 
 **[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点上工作。她的兴趣和专业领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过编写教程、操作指南、观点文章等方式，与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。**
 

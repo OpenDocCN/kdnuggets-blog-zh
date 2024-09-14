@@ -1,8 +1,8 @@
 # 5 个针对数据科学初学者的免费 SQL 课程
 
-> 原文：[https://www.kdnuggets.com/5-free-sql-courses-for-data-science-beginners](https://www.kdnuggets.com/5-free-sql-courses-for-data-science-beginners)
+> 原文：[`www.kdnuggets.com/5-free-sql-courses-for-data-science-beginners`](https://www.kdnuggets.com/5-free-sql-courses-for-data-science-beginners)
 
-![5 个针对数据科学初学者的免费 SQL 课程](../Images/e03c4b4be7b483a2463392c777a6b64f.png)
+![5 个针对数据科学初学者的免费 SQL 课程](img/e03c4b4be7b483a2463392c777a6b64f.png)
 
 图片来源：作者
 
@@ -92,36 +92,36 @@ Kaggle 上的 [Intro to SQL](https://www.kaggle.com/learn/intro-to-sql) 课程�
 
 如果你在寻找更广泛的课程的免费学习资源，这里有几个汇总你可能会觉得有帮助：
 
-+   [5 门免费课程掌握 SQL 数据科学](/5-free-courses-to-master-sql-for-data-science)
++   5 门免费课程掌握 SQL 数据科学
 
-+   [5 门免费大学课程学习数据库和 SQL](/5-free-university-courses-to-learn-databases-and-sql)
++   5 门免费大学课程学习数据库和 SQL
 
 这些课程也需要你付出更多的努力，通常需要几周时间来完成。所以继续学习和练习吧！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉领域工作。她的兴趣和专长包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正致力于通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。**
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉领域工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正致力于通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。**
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关内容
 
-+   [7门免费Kaggle微课程，适合数据科学初学者](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)
++   [7 门免费 Kaggle 微课程，适合数据科学初学者](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)
 
-+   [5门免费Python课程，适合数据科学初学者](https://www.kdnuggets.com/5-free-python-courses-for-data-science-beginners)
++   [5 门免费 Python 课程，适合数据科学初学者](https://www.kdnuggets.com/5-free-python-courses-for-data-science-beginners)
 
-+   [3门免费机器学习初学者课程](https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html)
++   [3 门免费机器学习初学者课程](https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
-+   [5门免费课程，掌握SQL用于数据科学](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
++   [5 门免费课程，掌握 SQL 用于数据科学](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
 
-+   [5门免费大学课程学习数据库和SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
++   [5 门免费大学课程学习数据库和 SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)

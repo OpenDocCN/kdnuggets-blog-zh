@@ -1,10 +1,10 @@
 # 机器学习难题，解释
 
-> 原文：[https://www.kdnuggets.com/2019/06/machine-learning-puzzle-explained.html](https://www.kdnuggets.com/2019/06/machine-learning-puzzle-explained.html)
+> 原文：[`www.kdnuggets.com/2019/06/machine-learning-puzzle-explained.html`](https://www.kdnuggets.com/2019/06/machine-learning-puzzle-explained.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-之前我写过关于 [数据科学难题](/2017/01/data-science-puzzle-revisited.html) 的文章，概述了与数据科学相关的多个关键概念，并尝试解释这些概念之间的关系及其如何结合在一起。这次我们将以类似的方式探讨机器学习模型。
+之前我写过关于 数据科学难题 的文章，概述了与数据科学相关的多个关键概念，并尝试解释这些概念之间的关系及其如何结合在一起。这次我们将以类似的方式探讨机器学习模型。
 
 请记住，我们将从监督学习的角度来探讨机器学习，所有概念都围绕分类作为我们的目标进行讨论（虽然回归也是类似的）。重要的是，这种难题视角不会涵盖其他机器学习范式，如无监督学习和强化学习，因此在揭示这些部分时要记住这一点。
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 说到这里，请继续阅读，了解机器学习难题如何组合在一起。
 
-![机器学习难题](../Images/8b7c9c27b37acd89e10122aa5c4922b6.png)
+![机器学习难题](img/8b7c9c27b37acd89e10122aa5c4922b6.png)
 
 **机器学习**是数据科学的主要技术驱动因素之一。数据科学的目标是从数据中提取洞察，而机器学习是使这一过程得以自动化的引擎。机器学习算法不断促进计算机程序从经验中自动改进，这些算法在各种不同领域中变得越来越重要。
 
@@ -38,9 +38,9 @@
 
 还有什么用来确定模型表现的好坏？有许多指标可用于模型**评估**。对于分类，最简单的形式是准确率，即正确预测的比例。精确率和召回率是另一对有用的分类指标，还有其他指标。回归，这一分类的连续变体，使用一组不同的指标来确定预测值与实际值之间的距离。
 
-![图像](../Images/628c051fa81b348e055c44294678c8d2.png)
+![图像](img/628c051fa81b348e055c44294678c8d2.png)
 
-来源：斯坦福大学Andrew Ng的机器学习课程
+来源：斯坦福大学 Andrew Ng 的机器学习课程
 
 你的模型在预测训练数据的类别方面做得很好，但对保留数据集的泛化效果不好吗？你可能陷入了**过拟合**的困境，这是一种模型对问题的内部理解紧密依赖于训练集中的特定实例的情况。过拟合是未能区分信号和噪声，而是将所有数据视为信号。
 
@@ -50,11 +50,11 @@
 
 **相关**：
 
-+   [数据科学难题，再探讨](/2017/01/data-science-puzzle-revisited.html)
++   数据科学难题，再探讨
 
-+   [机器学习的本质](/2018/12/essence-machine-learning.html)
++   机器学习的本质
 
-+   [机器学习项目检查清单](/2018/12/machine-learning-project-checklist.html)
++   机器学习项目检查清单
 
 ### 更多相关话题
 
@@ -62,9 +62,9 @@
 
 +   [学习数据科学的顶级统计资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [90亿美元的AI失败，检讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，检讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [为什么 Python 是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 

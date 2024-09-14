@@ -1,8 +1,8 @@
 # 如何使用 ChatGPT 将文本转换为 PowerPoint 演示文稿
 
-> 原文：[https://www.kdnuggets.com/2023/08/chatgpt-convert-text-powerpoint-presentation.html](https://www.kdnuggets.com/2023/08/chatgpt-convert-text-powerpoint-presentation.html)
+> 原文：[`www.kdnuggets.com/2023/08/chatgpt-convert-text-powerpoint-presentation.html`](https://www.kdnuggets.com/2023/08/chatgpt-convert-text-powerpoint-presentation.html)
 
-![如何使用 ChatGPT 将文本转换为 PowerPoint 演示文稿](../Images/7dbe441496392193e3621f3caf8965aa.png)
+![如何使用 ChatGPT 将文本转换为 PowerPoint 演示文稿](img/7dbe441496392193e3621f3caf8965aa.png)
 
 图片由 [ThisisEngineering RAEng](https://unsplash.com/@thisisengineering?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 ChatGPT 将生成类似于以下图中的文本：
 
-![如何使用 ChatGPT 将文本转换为 PowerPoint 演示文稿](../Images/d302c0c8b93bf22f09ce099807159354.png)
+![如何使用 ChatGPT 将文本转换为 PowerPoint 演示文稿](img/d302c0c8b93bf22f09ce099807159354.png)
 
 作者提供的图片
 

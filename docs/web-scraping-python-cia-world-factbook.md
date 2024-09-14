@@ -1,10 +1,10 @@
 # 使用 Python 进行网络爬取：以 CIA 世界概况为例
 
-> 原文：[https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html](https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html)
+> 原文：[`www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html`](https://www.kdnuggets.com/2018/03/web-scraping-python-cia-world-factbook.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Header image](../Images/c4416a7cb71936d981cf6bfc60ccf10a.png)
+![Header image](img/c4416a7cb71936d981cf6bfc60ccf10a.png)
 
 在数据科学项目中，几乎总是最耗时且最麻烦的部分是数据收集和清洗。每个人都喜欢构建一个炫酷的深度神经网络（或 XGboost）模型，并展示自己用炫酷的 3D 交互式图表的技能。但这些模型需要原始数据作为起点，而这些数据并不容易获得且不干净。
 
@@ -36,7 +36,7 @@
 
 这是 [CIA 世界概况书前页](https://www.cia.gov/library/publications/the-world-factbook/) 的样子，
 
-![](../Images/22915ed2c9976abdc65e383474499133.png)
+![](img/22915ed2c9976abdc65e383474499133.png)
 
 图：CIA 世界概况书前页
 
@@ -79,7 +79,7 @@ temp=country_names.pop(0) # *To remove the first entry 'World'*
 
 这个步骤是所谓的基本抓取或爬取。要做到这一点，**关键是要确定每个国家信息页面的 URL 是如何结构化的**。一般情况下，这可能很难获取。在这个特定的案例中，快速检查显示了一个非常简单且规律的结构可以遵循。以下是澳大利亚的截图，
 
-![](../Images/a73eaa4c4c6033315122e3fef1c36433.png)
+![](img/a73eaa4c4c6033315122e3fef1c36433.png)
 
 这意味着有一个固定的 URL，你需要将 2 字符的国家代码附加到这个 URL 上，就能到达该国家页面的 URL。因此，我们可以遍历国家代码列表，使用 BeautifulSoup 提取所有文本并存储在本地字典中。以下是代码片段，
 
@@ -115,15 +115,15 @@ pickle.dump(text_data,open("text_data_CIA_Factobook.p", "wb"))
 text_data = pickle.load(open("text_data_CIA_Factobook.p", "rb"))
 ```
 
-**使用正则表达式从文本转储中提取GDP/人数据**
+**使用正则表达式从文本转储中提取 GDP/人数据**
 
-这是程序的核心文本分析部分，我们借助 [***正则表达式*** 模块](https://docs.python.org/3/howto/regex.html) 来查找在庞大的文本字符串中寻找我们需要的信息，并提取相关的数字数据。正则表达式是Python（或几乎所有高级编程语言）中的丰富资源。它允许在大文本语料库中搜索/匹配特定模式的字符串。在这里，我们使用非常简单的正则表达式方法来匹配如“*GDP — per capita (PPP):*”这样的确切词汇，然后读取其后的几个字符，提取某些符号如$和括号的位置，最终提取GDP/人均的数值。这里用一个图示例说明了这个想法。
+这是程序的核心文本分析部分，我们借助 [***正则表达式*** 模块](https://docs.python.org/3/howto/regex.html) 来查找在庞大的文本字符串中寻找我们需要的信息，并提取相关的数字数据。正则表达式是 Python（或几乎所有高级编程语言）中的丰富资源。它允许在大文本语料库中搜索/匹配特定模式的字符串。在这里，我们使用非常简单的正则表达式方法来匹配如“*GDP — per capita (PPP):*”这样的确切词汇，然后读取其后的几个字符，提取某些符号如$和括号的位置，最终提取 GDP/人均的数值。这里用一个图示例说明了这个想法。
 
-![](../Images/7fd03b238605dbf2e7f7d7bd351fe3af.png)
+![](img/7fd03b238605dbf2e7f7d7bd351fe3af.png)
 
 图：文本分析的示意图
 
-在这个笔记本中使用了其他正则表达式技巧，例如提取总GDP，无论数字是以十亿还是万亿表示。
+在这个笔记本中使用了其他正则表达式技巧，例如提取总 GDP，无论数字是以十亿还是万亿表示。
 
 ```py
 # 'b' to catch 'billions', 't' to catch 'trillions'
@@ -139,7 +139,7 @@ if (start!=None and end!=None):
         a=1000*a
 ```
 
-这是示例代码片段。**注意代码中放置的多个错误处理检查**。这是必要的，因为HTML页面的不可预测性极高。不是所有国家都有GDP数据，页面上的数据表述可能不完全相同，数字的形式也可能不同，字符串中的$和()也可能放置得不同。可能会发生各种错误。
+这是示例代码片段。**注意代码中放置的多个错误处理检查**。这是必要的，因为 HTML 页面的不可预测性极高。不是所有国家都有 GDP 数据，页面上的数据表述可能不完全相同，数字的形式也可能不同，字符串中的$和()也可能放置得不同。可能会发生各种错误。
 
 > 准备和编写所有场景的代码几乎是不可能的，但至少你需要有代码来处理异常，以防出现异常，这样你的程序不会中断，并可以优雅地继续处理下一个页面。
 
@@ -176,7 +176,7 @@ for i in range(1,len(country_names)-1):
 print ("\nFinished finding all GDP/capita data")
 ```
 
-**不要忘记使用pandas的内连接/左连接方法**
+**不要忘记使用 pandas 的内连接/左连接方法**
 
 需要记住的一点是，这些文本分析将生成具有略微不同国家集的数据框，因为不同类型的数据可能在不同国家不可用。可以使用 [**Pandas 左连接**](https://pandas.pydata.org/pandas-docs/stable/merging.html) 来创建一个包含所有公共国家交集的数据框，这些国家的数据是可用的或可以提取的。
 
@@ -187,7 +187,7 @@ df_combined.dropna(inplace=True)
 
 **现在进入有趣的部分，建模……但等等！先做过滤吧！**
 
-在完成HTML解析、页面抓取和文本挖掘的所有艰苦工作后，现在你已经准备好获得成果——迫不及待地运行回归算法和酷炫的可视化脚本！但等等，通常你需要在生成这些图表之前对数据进行更多的清理（特别是对于这类社会经济问题）。基本上，你想要过滤掉离群值，例如非常小的国家（如岛国），这些国家的参数值可能极度偏斜，但不符合你想要调查的主要动态。几行代码足以完成这些过滤。虽然可能有更*Pythonic*的实现方式，但我尽量保持简单易懂。以下代码例如创建了过滤器，以排除总GDP小于500亿以及收入边界低于5000美元和高于25000美元的国家（人均GDP）。
+在完成 HTML 解析、页面抓取和文本挖掘的所有艰苦工作后，现在你已经准备好获得成果——迫不及待地运行回归算法和酷炫的可视化脚本！但等等，通常你需要在生成这些图表之前对数据进行更多的清理（特别是对于这类社会经济问题）。基本上，你想要过滤掉离群值，例如非常小的国家（如岛国），这些国家的参数值可能极度偏斜，但不符合你想要调查的主要动态。几行代码足以完成这些过滤。虽然可能有更*Pythonic*的实现方式，但我尽量保持简单易懂。以下代码例如创建了过滤器，以排除总 GDP 小于 500 亿以及收入边界低于 5000 美元和高于 25000 美元的国家（人均 GDP）。
 
 ```py
 # Create a filtered data frame and x and y arrays
@@ -200,19 +200,19 @@ df_filtered = df_combined[filter_gdp][filter_low_income][filter_high_income]
 
 **最后，数据可视化**
 
-我们使用了[**seaborn regplot** 函数](https://seaborn.pydata.org/generated/seaborn.regplot.html)来创建散点图（互联网用户比例 vs. 人均GDP），并显示线性回归拟合和95%的置信区间带。它们看起来如下。可以将结果解释为
+我们使用了[**seaborn regplot** 函数](https://seaborn.pydata.org/generated/seaborn.regplot.html)来创建散点图（互联网用户比例 vs. 人均 GDP），并显示线性回归拟合和 95%的置信区间带。它们看起来如下。可以将结果解释为
 
-> 国家互联网用户比例与人均GDP之间存在强正相关关系。此外，低收入/低GDP国家的相关性强度显著高于高GDP发达国家。**这可能意味着互联网访问帮助低收入国家更快地发展，并且在改善公民平均状况方面比发达国家更有效**。
+> 国家互联网用户比例与人均 GDP 之间存在强正相关关系。此外，低收入/低 GDP 国家的相关性强度显著高于高 GDP 发达国家。**这可能意味着互联网访问帮助低收入国家更快地发展，并且在改善公民平均状况方面比发达国家更有效**。
 
-![](../Images/b8cef33d49e1aa46fc0e38ede954c667.png)
+![](img/b8cef33d49e1aa46fc0e38ede954c667.png)
 
 **总结**
 
-本文介绍了一个演示Python笔记本，说明如何通过使用BeautifulSoup进行HTML解析来抓取网页以下载原始信息。随后，它还说明了使用正则表达式模块来搜索和提取用户所需的重要信息。
+本文介绍了一个演示 Python 笔记本，说明如何通过使用 BeautifulSoup 进行 HTML 解析来抓取网页以下载原始信息。随后，它还说明了使用正则表达式模块来搜索和提取用户所需的重要信息。
 
-> 总而言之，这展示了在挖掘混乱的HTML解析文本时，为什么没有简单、普遍的规则或程序结构。必须检查文本结构，并设置适当的错误处理检查，以优雅地处理所有情况，确保程序流程顺畅（不会崩溃），即使不能提取所有场景的数据。
+> 总而言之，这展示了在挖掘混乱的 HTML 解析文本时，为什么没有简单、普遍的规则或程序结构。必须检查文本结构，并设置适当的错误处理检查，以优雅地处理所有情况，确保程序流程顺畅（不会崩溃），即使不能提取所有场景的数据。
 
-希望读者能从提供的Notebook文件中受益，并根据自己的需求和想象进行扩展。有关更多网络数据分析的笔记本，[**请查看我的代码库。**](https://github.com/tirthajyoti/Web-Database-Analytics-Python)
+希望读者能从提供的 Notebook 文件中受益，并根据自己的需求和想象进行扩展。有关更多网络数据分析的笔记本，[**请查看我的代码库。**](https://github.com/tirthajyoti/Web-Database-Analytics-Python)
 
 如果你有任何问题或想法，请通过 [**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com) 联系作者。你也可以查看作者的 [**GitHub 仓库**](https://github.com/tirthajyoti?tab=repositories) 以获取其他有趣的 Python、R 或 MATLAB 代码片段和机器学习资源。如果你像我一样，对机器学习/数据科学充满热情，请随时 [在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 
@@ -222,21 +222,21 @@ df_filtered = df_combined[filter_gdp][filter_low_income][filter_high_income]
 
 **相关：**
 
-+   [使用 Python 的网页抓取教程：技巧与窍门](/2018/02/web-scraping-tutorial-python.html)
++   使用 Python 的网页抓取教程：技巧与窍门
 
-+   [为什么你应该忘记数据科学代码中的‘for-loop’，而接受矢量化](/2017/11/forget-for-loop-data-science-code-vectorization.html)
++   为什么你应该忘记数据科学代码中的‘for-loop’，而接受矢量化
 
-+   [IT 工程师需要学习多少数学才能进入数据科学领域](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)
++   IT 工程师需要学习多少数学才能进入数据科学领域
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

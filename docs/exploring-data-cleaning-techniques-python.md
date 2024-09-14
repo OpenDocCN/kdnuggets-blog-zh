@@ -1,8 +1,8 @@
 # 探索使用 Python 的数据清理技术
 
-> 原文：[https://www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html](https://www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html)
+> 原文：[`www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html`](https://www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html)
 
-![Exploring Data Cleaning Techniques With Python](../Images/252e0add27f5fc4968f30d2c5734ac89.png)
+![Exploring Data Cleaning Techniques With Python](img/252e0add27f5fc4968f30d2c5734ac89.png)
 
 图片来源：[freepik.com](https://www.freepik.com/free-vector/set-elements-chart-infographics-graphs-diagrams-chart-color_15573877.htm#query=graph&position=0&from_view=search&track=sph)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@ Python 中的多个库，包括 pandas 和 numpy，可用于数据清理和转�
 
 在本文中，我们将探索 Python 中用于清理、处理和转换数据的各种工具和技术。我们将使用下面展示的***data.cvs*** 数据集演示数据清理技术：
 
-![Exploring Data Cleaning Techniques With Python](../Images/75d823feaeebf8241fe270b4adc2d980.png)
+![Exploring Data Cleaning Techniques With Python](img/75d823feaeebf8241fe270b4adc2d980.png)
 
 data.csv 展示了多种缺陷，例如重复数据、NaN 等。数据由作者创建。
 

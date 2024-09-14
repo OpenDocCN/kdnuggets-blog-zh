@@ -1,14 +1,14 @@
 # 美国的下一个主题模型
 
-> 原文：[https://www.kdnuggets.com/2016/07/americas-next-topic-model.html](https://www.kdnuggets.com/2016/07/americas-next-topic-model.html)
+> 原文：[`www.kdnuggets.com/2016/07/americas-next-topic-model.html`](https://www.kdnuggets.com/2016/07/americas-next-topic-model.html)
 
 **由 Lev Konstantinovskiy，RaRe Technologies**。
 
 “如何选择最佳主题模型？”是我们社区邮件列表上的头号问题。在 RaRe Technologies，我管理 Python 开源主题建模包 [gensim](https://github.com/RaRe-Technologies/gensim) 的社区。由于很多人正在寻找答案，我们最近发布了更新的 gensim 0.13.1，包含了几个新兴功能，可以评估您的模型是否有效，帮助您选择最佳主题模型。
 
-[![可能的词汇](../Images/92cd05203ef7dab55314f8d5d082f309.png)](https://i.imgur.com/9UesuuB.png)
+![可能的词汇](https://i.imgur.com/9UesuuB.png)
 
-***图 1**。顶部：四个选定主题的15个最可能的词汇。底部：根据词汇所属的主题着色的文本文档。摘自 [David M. Blei的《潜在狄利克雷分配论文》](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)*
+***图 1**。顶部：四个选定主题的 15 个最可能的词汇。底部：根据词汇所属的主题着色的文本文档。摘自 [David M. Blei 的《潜在狄利克雷分配论文》](http://www.jmlr.org/papers/volume3/blei03a/blei03a.pdf)*
 
 ### 什么是主题建模？
 
@@ -22,27 +22,27 @@
 
 1.  (*哈利主题*) 42% “哈利·波特”，15% “伤疤”，7% “魁地奇”，7% “格兰芬多”...
 
-同样，我们可以将单个文档表示为对主题的概率分布。例如，《哈利·波特》第一本书的第一章介绍了达斯利一家，并让邓布利多讨论哈利父母的去世。如果我们把这一章当作一个文档，它可以被分解为这样的主题：40% 麻瓜主题，30% 伏地魔主题，剩下的30% 是哈利主题。
+同样，我们可以将单个文档表示为对主题的概率分布。例如，《哈利·波特》第一本书的第一章介绍了达斯利一家，并让邓布利多讨论哈利父母的去世。如果我们把这一章当作一个文档，它可以被分解为这样的主题：40% 麻瓜主题，30% 伏地魔主题，剩下的 30% 是哈利主题。
 
 当然，我们不想像这样手动提取主题和文档概率。我们希望机器利用我们的无标签文本集合作为唯一输入，自动完成这一任务。由于没有文档标注或人工注释，主题建模是一种无监督的机器学习技术。
 
 另一个更实际的例子是将您的公司内部文档分成主题，为其内容提供全局视图，方便可视化和浏览：
 
-[![全局视图](../Images/4e3270245e3fcacb881162095bf3ca66.png)](/wp-content/uploads/birds-eye-view.png)
+![全局视图](img/birds-eye-view.png)
 
 ***图 2**。使用主题模型创建公司内部文档的全局视图，并可通过主题（而非仅仅关键词）深入到单个文档中。*
 
 ### 隐狄利克雷分配 = LDA
 
-当前最受欢迎的主题模型是[隐狄利克雷分配](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation)。要了解它是如何工作的，Edwin Chen的[博客文章](http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/)是一个非常好的资源。这个[链接](https://www.quora.com/What-is-a-good-explanation-of-Latent-Dirichlet-Allocation)包含了LDA的各种解释，这可能需要一些数学背景。David Blei的这篇[论文](https://www.cs.princeton.edu/~blei/papers/Blei2012.pdf)总结了迄今为止开发的各种主题模型，是一个很好的参考。
+当前最受欢迎的主题模型是[隐狄利克雷分配](https://en.wikipedia.org/wiki/Latent_Dirichlet_allocation)。要了解它是如何工作的，Edwin Chen 的[博客文章](http://blog.echen.me/2011/08/22/introduction-to-latent-dirichlet-allocation/)是一个非常好的资源。这个[链接](https://www.quora.com/What-is-a-good-explanation-of-Latent-Dirichlet-Allocation)包含了 LDA 的各种解释，这可能需要一些数学背景。David Blei 的这篇[论文](https://www.cs.princeton.edu/~blei/papers/Blei2012.pdf)总结了迄今为止开发的各种主题模型，是一个很好的参考。
 
-如果你想深入了解一些LDA和向量空间代码，[gensim教程](https://radimrehurek.com/gensim/tutorial.html)总是很有用的。
+如果你想深入了解一些 LDA 和向量空间代码，[gensim 教程](https://radimrehurek.com/gensim/tutorial.html)总是很有用的。
 
 ### 选择最佳主题模型：着色词汇
 
 一旦你有了主题，下一步是确定它们是否有效。如果有效，那么你可以直接将它们插入你的集合浏览器或分类器中。如果无效，也许你应该再训练一下模型或使用不同的参数。
 
-分析模型的一种方法是根据文档词汇所属的主题来着色。这一功能最近由我们的2016年Google Summer of Code学生Bhargav添加到gensim中。你可以查看此[笔记本](https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/topic_methods.ipynb)中的Python代码。上面的图1是David Blei在原始LDA论文中的此功能的示例。
+分析模型的一种方法是根据文档词汇所属的主题来着色。这一功能最近由我们的 2016 年 Google Summer of Code 学生 Bhargav 添加到 gensim 中。你可以查看此[笔记本](https://github.com/RaRe-Technologies/gensim/blob/develop/docs/notebooks/topic_methods.ipynb)中的 Python 代码。上面的图 1 是 David Blei 在原始 LDA 论文中的此功能的示例。
 
 一个有趣的例子是‘银行’这个词，它可能指‘金融机构’或‘河岸’。一个好的主题建模算法可以根据上下文区分这两种含义。着色词汇是一种快速评估模型是否理解其含义以及是否有效的方法。
 
@@ -66,9 +66,9 @@ badLdaModel = LdaModel(corpus=corpus, id2word=dictionary, iterations=1, num_topi
 
 ```
 
-一个LDA模型训练了50次迭代，另一个只训练了一次迭代。我们期望模型训练时间越长，效果越好。
+一个 LDA 模型训练了 50 次迭代，另一个只训练了一次迭代。我们期望模型训练时间越长，效果越好。
 
-你可能会注意到，上面的文本看起来不像我们习惯的文本，而实际上它们是Python列表。这是因为我们将它们转换为[词袋模型](https://en.wikipedia.org/wiki/Bag-of-words_model)表示形式。这就是LDA模型如何查看文本的方式。词序不重要，一些非常频繁的词会被移除。例如，'A bank of a fast river.' 在词袋模型格式中变成了['bank', 'river', 'fast']。
+你可能会注意到，上面的文本看起来不像我们习惯的文本，而实际上它们是 Python 列表。这是因为我们将它们转换为[词袋模型](https://en.wikipedia.org/wiki/Bag-of-words_model)表示形式。这就是 LDA 模型如何查看文本的方式。词序不重要，一些非常频繁的词会被移除。例如，'A bank of a fast river.' 在词袋模型格式中变成了['bank', 'river', 'fast']。
 
 让我们看看这两个模型在区分‘河流银行’和‘金融银行’方面的效果。如果文档中的所有词汇都与自然相关，那么我们的多义词‘银行’应该被着色为‘蓝色’的自然主题颜色。
 
@@ -93,11 +93,11 @@ color_words(badLdaModel, bow_water)
 
 我们还可以看出，经过更好训练的模型非常合适，因为它具有明确的自然和金融主题。下面的可视化来自 pyLDAvis，这是一个用于定性评估主题模型的出色可视化工具。你可以在这个 [Jupyter notebook](http://nbviewer.jupyter.org/github/dsquareindia/gensim/blob/a4b2629c0fdb0a7932db24dfcf06699c928d112f/docs/notebooks/topic_coherence_tutorial.ipynb) 中互动式地玩这个特定的可视化。Ben Mabey 在 [YouTube 上的演讲](https://www.youtube.com/watch?v=tGxW2BzC_DU&index=4&list=PLykRMO7ZuHwP5cWnbEmP_mUIVgzd5DZgH) 中也对 pyLDAvis 进行了很好的介绍。
 
-[![好的主题模型](../Images/66ad9397f4928b9457fe6df1984cfc20.png)](/wp-content/uploads/good-model-pyldavis.gif)
+![好的主题模型](img/good-model-pyldavis.gif)
 
 ***图 3**. pyLDAvis 中的好主题模型。右侧显示了红色突出显示的圆圈（主题）的最相关词汇。例如，‘bank’ 旁边的蓝色条表示词汇‘bank’在文档集合中出现的频率。红色部分的条表示‘bank’在选定主题中的频率。我们可以自信地将主题 #1 命名为金融主题，因为显示在其旁边的词汇正是我们在金融中期望看到的：‘bank’，‘trading’，‘option’ 和 ‘rate’。此外，‘bank’ 这个词在这个主题中出现的频率最高，因为它有一个大红条。*
 
-[![差的主题模型](../Images/0d8af773b538237e0830383560b66655.png)](/wp-content/uploads/bad-model-pyldavis.gif)
+![差的主题模型](img/bad-model-pyldavis.gif)
 
 ***图 4**. pyLDAvis 中的差主题模型。一个主题中的词语彼此无关。让我们将训练了 50 次（9*50 = 450 个文档）的好模型与只训练了 1 次（九个文档）的差模型进行比较。差模型中的一个主题包含了彼此无关的词汇。‘tree’ 和 ‘trading’ 都出现在了同一主题 #2 的列表中。我们期望它们出现在不同的主题中：‘tree’ 与自然相关，而 ‘trading’ 应该与金融相关。所以这个主题模型是没有意义的。*
 
@@ -126,25 +126,25 @@ print badcm.get_coherence()
 
 我希望你发现这些模型选择技术在你的 NLP 应用中有用！如果你对它们有任何问题，请在 [gensim 邮件列表](https://groups.google.com/forum/#!forum/gensim) 上告诉我们。我们还在 RaRe Technologies 提供 [NLP 咨询服务](http://rare-technologies.com/services/)。
 
-![Lev KDN.jpg](../Images/ff97d9ccca765b9680325f8b10afbfec.png)**个人简介：Lev Konstantinovskiy**，自然语言处理专家，是一名 Python 和 Java 开发者。Lev 拥有丰富的金融机构工作经验，并且是 RaRe 的开源社区经理，包括 [gensim](https://github.com/RaRe-Technologies/gensim)，一个用于理解人类语言的开源机器学习工具包。Lev 在 [RaRe Technologies](http://rare-technologies.com) 担任开源布道者和研发职位。
+![Lev KDN.jpg](img/ff97d9ccca765b9680325f8b10afbfec.png)**个人简介：Lev Konstantinovskiy**，自然语言处理专家，是一名 Python 和 Java 开发者。Lev 拥有丰富的金融机构工作经验，并且是 RaRe 的开源社区经理，包括 [gensim](https://github.com/RaRe-Technologies/gensim)，一个用于理解人类语言的开源机器学习工具包。Lev 在 [RaRe Technologies](http://rare-technologies.com) 担任开源布道者和研发职位。
 
 **相关**：
 
-+   [HPE Haven OnDemand 文本提取 API 开发者备忘单](/2016/06/hpe-haven-ondemand-text-extraction-cheat-sheet.html)
++   HPE Haven OnDemand 文本提取 API 开发者备忘单
 
-+   [使用 Python 矿化 Twitter 数据 第 1 部分：数据收集](/2016/06/mining-twitter-data-python-part-1.html)
++   使用 Python 矿化 Twitter 数据 第一部分：数据收集
 
-+   [文本挖掘 101：主题建模](/2016/07/text-mining-101-topic-modeling.html)
++   文本挖掘 101：主题建模
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

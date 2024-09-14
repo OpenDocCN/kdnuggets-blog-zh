@@ -1,8 +1,8 @@
 # 强化学习入门
 
-> 原文：[https://www.kdnuggets.com/2022/05/reinforcement-learning-newbies.html](https://www.kdnuggets.com/2022/05/reinforcement-learning-newbies.html)
+> 原文：[`www.kdnuggets.com/2022/05/reinforcement-learning-newbies.html`](https://www.kdnuggets.com/2022/05/reinforcement-learning-newbies.html)
 
-![强化学习入门](../Images/a699338fa51c25e886d0207bcc63c1f2.png)
+![强化学习入门](img/a699338fa51c25e886d0207bcc63c1f2.png)
 
 作者提供的图片
 
@@ -12,25 +12,25 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT 工作
 
 * * *
 
 强化学习（RL）是一种机器学习模型，代理通过试错法学习以实现目标。这是一种以目标为导向的算法，当代理执行正确的动作时会获得奖励。这些奖励帮助代理在复杂的环境中导航以实现最终目标。就像幼儿通过试错法学习走路一样，机器也能在没有人工干预的情况下学习执行复杂任务。
 
-RL与其他机器学习算法有很大不同。它从环境中学习，并比人类表现更好。而监督学习和无监督学习模型依赖于从人类那里收集的现有数据，受限于人类智能。例如，Deepmind的[AlphaGo](https://deepmind.com/blog/alphago-zero-learning-scratch/)自行学习了各种策略以击败围棋世界冠军。
+RL 与其他机器学习算法有很大不同。它从环境中学习，并比人类表现更好。而监督学习和无监督学习模型依赖于从人类那里收集的现有数据，受限于人类智能。例如，Deepmind 的[AlphaGo](https://deepmind.com/blog/alphago-zero-learning-scratch/)自行学习了各种策略以击败围棋世界冠军。
 
 # 强化学习如何工作？
 
-以一个马里奥游戏为例。在游戏开始时，代理（马里奥）处于状态零，基于其状态，代理将采取一个动作。在这种情况下，马里奥将向前移动。现在代理处于新状态（新帧）。代理会因为向前移动而获得奖励。代理将继续移动，直到完成关卡或在过程中死亡。RL的主要目标是通过最小化步骤来最大化奖励的收集。
+以一个马里奥游戏为例。在游戏开始时，代理（马里奥）处于状态零，基于其状态，代理将采取一个动作。在这种情况下，马里奥将向前移动。现在代理处于新状态（新帧）。代理会因为向前移动而获得奖励。代理将继续移动，直到完成关卡或在过程中死亡。RL 的主要目标是通过最小化步骤来最大化奖励的收集。
 
-# RL的应用是什么？
+# RL 的应用是什么？
 
-目前，机器学习应用仅限于单一任务，并依赖于现有数据。但未来一切将发生变化，我们将把RL与计算机视觉、机器翻译以及各种模型结合起来，以实现超人类的表现，例如：
+目前，机器学习应用仅限于单一任务，并依赖于现有数据。但未来一切将发生变化，我们将把 RL 与计算机视觉、机器翻译以及各种模型结合起来，以实现超人类的表现，例如：
 
 1.  **自动驾驶汽车**：旅行变得更安全和快速
 
@@ -80,7 +80,7 @@ RL与其他机器学习算法有很大不同。它从环境中学习，并比人
 
 +   **探索**：采取随机行动以探索环境，而不考虑奖励。
 
-![强化学习的关键组件](../Images/550b7b7fc38b1f0dfc551b5bbeea164f.png)
+![强化学习的关键组件](img/550b7b7fc38b1f0dfc551b5bbeea164f.png)
 
 # 学习资源
 
@@ -90,7 +90,7 @@ RL与其他机器学习算法有很大不同。它从环境中学习，并比人
 
 +   [训练 AI 玩蛇 – 强化学习课程（Python, PyTorch, Pygame）](https://www.youtube.com/watch?v=L8ypSXwyBds)
 
-+   [25分钟Python强化学习教程](https://www.youtube.com/watch?v=nRHjymV2PX8)
++   [25 分钟 Python 强化学习教程](https://www.youtube.com/watch?v=nRHjymV2PX8)
 
 +   [MIT 6.S091: 深度强化学习导论 (Deep RL)](https://www.youtube.com/watch?v=zR11FLZ-O9M)
 
@@ -98,7 +98,7 @@ RL与其他机器学习算法有很大不同。它从环境中学习，并比人
 
 **课程**
 
-+   [CS234: 强化学习 | 2019冬季](https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u)
++   [CS234: 强化学习 | 2019 冬季](https://www.youtube.com/playlist?list=PLoROMvodv4rOSOPzutgyCTapiGlY2Nd8u)
 
 +   [Hugging Face 深度强化学习课程](https://github.com/huggingface/deep-rl-class)
 
@@ -136,15 +136,15 @@ RL与其他机器学习算法有很大不同。它从环境中学习，并比人
 
 +   [深度强化学习初学者指南](https://wiki.pathmind.com/deep-reinforcement-learning)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)**（[@1abidaliawan](https://twitter.com/1abidaliawan)）是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为遭受心理疾病困扰的学生构建一个AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)**（[@1abidaliawan](https://twitter.com/1abidaliawan)）是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为遭受心理疾病困扰的学生构建一个 AI 产品。
 
 ### 更多相关话题
 
-+   [实战强化学习课程第3部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
++   [实战强化学习课程第三部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
 
-+   [实战强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
++   [实战强化学习课程，第一部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
 
-+   [实战强化学习课程，第2部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
++   [实战强化学习课程，第二部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
 
 +   [强化学习：教计算机做出最优决策](https://www.kdnuggets.com/2023/07/reinforcement-learning-teaching-computers-make-optimal-decisions.html)
 

@@ -1,12 +1,12 @@
 # XGBoost 详解：用少于 200 行 Python 代码实现 DIY XGBoost 库
 
-> 原文：[https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html](https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html)
+> 原文：[`www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html`](https://www.kdnuggets.com/2021/05/xgboost-explained-diy-xgboost-library-200-lines-python.html)
 
-[comments](#comments)
+comments
 
 **由 [Guillaume Saupin](https://www.linkedin.com/in/guillaume-saupin-5802aa31/)，Verteego 的 CTO 提供**
 
-![](../Images/2af80546d15b24dbb95b3e7f06ad2b1d.png)
+![](img/2af80546d15b24dbb95b3e7f06ad2b1d.png)
 
 照片由[Jens Lelie](https://unsplash.com/@madebyjens?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -26,7 +26,7 @@ XGBoost 可能是数据科学中使用最广泛的库之一。全球许多数据
 
 正如常常所说，一图胜千言：
 
-![](../Images/f681ccf5b863618aa3ba615f5f7ed042.png)
+![](img/f681ccf5b863618aa3ba615f5f7ed042.png)
 
 三层决策树。图像由作者提供。
 
@@ -56,7 +56,7 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 和往常一样，在机器学习中，我们希望设置模型参数，以便使模型在训练集上的预测最小化给定的目标：
 
-![](../Images/1c6ea3b60063b729682ac9a687e59dd2.png)
+![](img/1c6ea3b60063b729682ac9a687e59dd2.png)
 
 目标公式。公式由作者提供。
 
@@ -68,7 +68,7 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 如 XGBoost [文档](https://xgboost.readthedocs.io/en/latest/tutorials/model.html)所述，复杂性是目标中非常重要的一部分，它允许我们调整偏差/方差权衡。可以使用许多不同的函数来定义这个正则化项。XGBoost 使用：
 
-![](../Images/0ce54f0ee55300ffbfdaa119f4139291.png)
+![](img/0ce54f0ee55300ffbfdaa119f4139291.png)
 
 正则化项。公式由作者提供。
 
@@ -76,13 +76,13 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 由于错误通常是复杂的非线性函数，我们使用二阶泰勒展开对其进行线性化：
 
-![](../Images/30f9a52c0856023e980b2ed196a90f7a.png)
+![](img/30f9a52c0856023e980b2ed196a90f7a.png)
 
 损失的二阶展开。公式由作者提供。
 
 其中：
 
-![](../Images/d15672d7944ba013a374896777a30f45.png)
+![](img/d15672d7944ba013a374896777a30f45.png)
 
 高斯和 Hessian 公式。公式由作者提供。
 
@@ -106,7 +106,7 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 在 XGBoost 文档中，关于目标的叶子 *j* 的最佳值由以下公式给出：
 
-![](../Images/30ba452986e0c2f8e110335381fe9963.png)
+![](img/30ba452986e0c2f8e110335381fe9963.png)
 
 相对于目标的最优叶子值。作者公式。
 
@@ -114,7 +114,7 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 使用此最优参数获得的目标函数的减少量是：
 
-![](../Images/92074bf0fd43651aab5b4918039c0764.png)
+![](img/92074bf0fd43651aab5b4918039c0764.png)
 
 使用最优权重时的目标改善。作者公式。
 
@@ -130,25 +130,25 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 我们将专注于平方误差，这是一种常用的损失函数，也是 XGBoost 的默认目标：
 
-![](../Images/bd91ae15b1e00e8ed1dd2fc927f73301.png)
+![](img/bd91ae15b1e00e8ed1dd2fc927f73301.png)
 
 平方误差损失函数。作者公式
 
 这是一个相当简单的公式，其梯度是：
 
-![](../Images/9941cb63747e203b1bc9de0f40549606.png)
+![](img/9941cb63747e203b1bc9de0f40549606.png)
 
 损失函数的梯度。作者公式。
 
 和赫希矩阵：
 
-![](../Images/4821077093599e50bb41001008817d81.png)
+![](img/4821077093599e50bb41001008817d81.png)
 
 损失函数的赫希矩阵。作者公式。
 
 因此，如果我们记住最大化误差减少的最优权重公式：
 
-![](../Images/30ba452986e0c2f8e110335381fe9963.png)
+![](img/30ba452986e0c2f8e110335381fe9963.png)
 
 相对于目标的最优叶子值。作者公式。
 
@@ -180,17 +180,17 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 +   如果没有分裂改善目标，则不要添加子节点。
 
-生成的代码创建了一个DecisionTree类，该类通过一个目标、一组估计器（即树的数量）和一个最大深度进行配置。
+生成的代码创建了一个 DecisionTree 类，该类通过一个目标、一组估计器（即树的数量）和一个最大深度进行配置。
 
-正如承诺的代码少于200行：
+正如承诺的代码少于 200 行：
 
 训练的核心编码在函数*_find_best_split*中。它本质上遵循上述详细步骤。
 
-请注意，为了支持任何类型的目标，而不必手动计算梯度和Hessian，我们使用自动微分和[jax](https://jax.readthedocs.io/en/latest/index.html)库来自动化计算。
+请注意，为了支持任何类型的目标，而不必手动计算梯度和 Hessian，我们使用自动微分和[jax](https://jax.readthedocs.io/en/latest/index.html)库来自动化计算。
 
-最初，我们从一个只有一个节点的树开始，其叶子节点的值为零。由于我们模仿XGBoost，我们还使用一个基准分数，设置为待预测值的平均值。
+最初，我们从一个只有一个节点的树开始，其叶子节点的值为零。由于我们模仿 XGBoost，我们还使用一个基准分数，设置为待预测值的平均值。
 
-此外，请注意在第126行，我们如果达到初始化树时定义的最大深度则停止树的构建。我们还可以使用其他条件，比如每个叶子节点的最小样本数量或新权重的最小值。
+此外，请注意在第 126 行，我们如果达到初始化树时定义的最大深度则停止树的构建。我们还可以使用其他条件，比如每个叶子节点的最小样本数量或新权重的最小值。
 
 另一个非常重要的点是选择用于分裂的特征。这里为了简化起见，特征是随机选择的，但我们本可以使用更智能的策略，例如使用方差最大的特征。
 
@@ -208,21 +208,21 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 **相关内容：**
 
-+   [梯度提升决策树 – 概念解释](/2021/04/gradient-boosted-trees-conceptual-explanation.html)
++   梯度提升决策树 – 概念解释
 
-+   [XGBoost：它是什么，何时使用](/2020/12/xgboost-what-when.html)
++   XGBoost：它是什么，何时使用
 
-+   [众人拾柴火焰高：集成学习的案例](/2019/09/ensemble-learning.html)
++   众人拾柴火焰高：集成学习的案例
 
 * * *
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 支持
 
 * * *
 
@@ -230,7 +230,7 @@ XGBoost 和所有**boosting**方法使用另一种方法：每个新模型尝试
 
 +   [少于 15 行代码的多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
 
 +   [机器学习算法每个不到 1 分钟解释](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 

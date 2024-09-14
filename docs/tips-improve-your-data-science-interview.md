@@ -1,12 +1,12 @@
-# 提升数据科学面试的10个技巧
+# 提升数据科学面试的 10 个技巧
 
-> 原文：[https://www.kdnuggets.com/2016/11/tips-improve-your-data-science-interview.html](https://www.kdnuggets.com/2016/11/tips-improve-your-data-science-interview.html)
+> 原文：[`www.kdnuggets.com/2016/11/tips-improve-your-data-science-interview.html`](https://www.kdnuggets.com/2016/11/tips-improve-your-data-science-interview.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 面试的目的是筛选出不合格的候选人。然而，面试并不完美，有些方面并不能代表实际工作。有些人持愤世嫉俗的态度，将这一点作为被拒绝时的借口。他们会说：“他们为什么问我这个？谁都可以查出来！”虽然这可能是真的，但发泄并不会帮你找到工作。对于公司来说，拒绝优秀的人比雇佣一个不合适的人更有意义。作为数据科学家，我们应该了解**假阳性**和**真阳性**率的权衡！在这篇文章中，我会给你一些提高面试技能的建议和资源，帮助你减少因为不合理原因被拒绝的可能性。
 
-![数据科学技能](../Images/1159720efdc022f053f12acba37ddeb3.png)
+![数据科学技能](img/1159720efdc022f053f12acba37ddeb3.png)
 
 1.  **准备并演练故事**。你应该预期会有旨在了解你的态度/性格的问题，并且已经考虑好几个展示你过去优秀品质的例子。例如，亚马逊有一份[领导力原则](https://www.amazon.jobs/en/principles)的清单，他们会根据这些原则进行面试。找类似的东西，花几个小时思考你做过的所有精彩事情，并写出**简洁**的回答。关键在于能够讲述一个短小的轶事，包含足够的细节来设置叙述，并证明你是完成了他们询问的好事的人。他们会问澄清性问题，如果他们愿意的话，但避免冗长和提供过多信息。无聊不会帮到你！
 
@@ -32,11 +32,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -44,11 +44,11 @@
 
 **相关：**
 
-+   [**如何成为数据科学家 – 第1部分**](/2016/08/become-data-scientist-part-1.html)
++   **如何成为数据科学家 – 第一部分**
 
-+   [**如何成为数据科学家 – 第2部分**](/2016/08/become-data-scientist-part-2.html)
++   **如何成为数据科学家 – 第二部分**
 
-+   [**完美数据科学面试的秘诀**](/2016/04/cartoon-interview-data-scientist.html)
++   **完美数据科学面试的秘诀**
 
 ### 更多相关话题
 

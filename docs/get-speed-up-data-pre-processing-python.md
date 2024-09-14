@@ -1,8 +1,8 @@
 # 使用 Python 对你的数据预处理进行 2–6 倍的加速
 
-> 原文：[https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html](https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html)
+> 原文：[`www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html`](https://www.kdnuggets.com/2018/10/get-speed-up-data-pre-processing-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 Python 是进行所有机器学习任务的首选编程语言。它易于使用，并且拥有许多出色的库，使得数据处理变得轻而易举！但当我们处理大量数据时，情况就会变得有些复杂……
 
@@ -94,42 +94,42 @@ time python fast_res_conversion.py
 
 ### 喜欢阅读关于技术的内容吗？
 
-在[twitter](https://twitter.com/GeorgeSeif94)上关注我，了解最新最酷的AI、技术和科学！
+在[twitter](https://twitter.com/GeorgeSeif94)上关注我，了解最新最酷的 AI、技术和科学！
 
-**简介： [George Seif](https://towardsdatascience.com/@george.seif94)** 是一名认证技术专家和AI/机器学习工程师。
+**简介： [George Seif](https://towardsdatascience.com/@george.seif94)** 是一名认证技术专家和 AI/机器学习工程师。
 
 [原文](https://towardsdatascience.com/heres-how-you-can-get-a-2-6x-speed-up-on-your-data-pre-processing-with-python-847887e63be5). 经授权转载。
 
 **相关：**
 
-+   [5个“干净代码”技巧将显著提升你的生产力](/2018/10/5-clean-code-tips-dramatically-improve-productivity.html)
++   5 个“干净代码”技巧将显著提升你的生产力
 
-+   [数据科学家需要了解的5种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家需要了解的 5 种聚类算法
 
-+   [为你的回归问题选择最佳机器学习算法](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
++   为你的回归问题选择最佳机器学习算法
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [Python数据预处理简单指南](https://www.kdnuggets.com/2020/07/easy-guide-data-preprocessing-python.html)
++   [Python 数据预处理简单指南](https://www.kdnuggets.com/2020/07/easy-guide-data-preprocessing-python.html)
 
 +   [通过这本免费电子书学习数据清理和预处理以应用于数据科学](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)
 
-+   [掌握数据清理和预处理技术的7个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
++   [掌握数据清理和预处理技术的 7 个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
 
-+   [利用ChatGPT进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)
++   [利用 ChatGPT 进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)
 
-+   [在Pandas中清理和预处理文本数据以进行NLP任务](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)
++   [在 Pandas 中清理和预处理文本数据以进行 NLP 任务](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)
 
 +   [如何在没有工作经验的情况下获得第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)

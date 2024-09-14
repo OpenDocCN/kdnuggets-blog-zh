@@ -1,8 +1,8 @@
 # PySpark 数据科学
 
-> 原文：[https://www.kdnuggets.com/2023/02/pyspark-data-science.html](https://www.kdnuggets.com/2023/02/pyspark-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/02/pyspark-data-science.html`](https://www.kdnuggets.com/2023/02/pyspark-data-science.html)
 
-![PySpark 数据科学](../Images/2ebe106d056da2fc385c3f18101024ef.png)
+![PySpark 数据科学](img/2ebe106d056da2fc385c3f18101024ef.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -107,7 +107,7 @@ data_schema = [
 final_struc = StructType(fields = data_schema)
 ```
 
-然后，我们将使用额外的参数`schema`加载CSV文件。之后，我们将打印模式以检查是否做了正确的更改。
+然后，我们将使用额外的参数`schema`加载 CSV 文件。之后，我们将打印模式以检查是否做了正确的更改。
 
 ```py
 df = spark.read.csv(
@@ -142,23 +142,23 @@ root
 
 你可以使用`toPandas()`函数将数据作为数据框进行探索。
 
-> **注意：** 我们使用了`limit`来显示前五行。这与SQL命令类似。这意味着我们可以使用PySpark Python API执行SQL命令以运行查询。
+> **注意：** 我们使用了`limit`来显示前五行。这与 SQL 命令类似。这意味着我们可以使用 PySpark Python API 执行 SQL 命令以运行查询。
 
 ```py
 df.limit(5).toPandas()
 ```
 
-![PySpark数据科学](../Images/edeb0c2579ecd4916d885888acf5f4e5.png)
+![PySpark 数据科学](img/edeb0c2579ecd4916d885888acf5f4e5.png)
 
-就像pandas一样，我们可以使用`describe()`函数来显示数据分布的摘要。
+就像 pandas 一样，我们可以使用`describe()`函数来显示数据分布的摘要。
 
 ```py
 df.describe().show()
 ```
 
-![PySpark数据科学](../Images/53998c47fa57c853807d74126e467011.png)
+![PySpark 数据科学](img/53998c47fa57c853807d74126e467011.png)
 
-`count()`函数用于显示行数。阅读 [Pandas API on Spark](https://spark.apache.org/docs/latest/api/python/reference/pyspark.pandas/index.html) 以了解类似的API。
+`count()`函数用于显示行数。阅读 [Pandas API on Spark](https://spark.apache.org/docs/latest/api/python/reference/pyspark.pandas/index.html) 以了解类似的 API。
 
 ```py
 df.count()
@@ -175,7 +175,7 @@ df = df.withColumnRenamed('Pos', 'Rank')
 df.show(5)
 ```
 
-![PySpark数据科学](../Images/3d14a8dd2bf66d7283cfb5810f0020e9.png)
+![PySpark 数据科学](img/3d14a8dd2bf66d7283cfb5810f0020e9.png)
 
 要删除单个或多个列，你可以使用`drop()`函数。
 
@@ -185,7 +185,7 @@ df = df.drop('P+','Pk','(x?)','Streams+')
 df.show(5)
 ```
 
-![PySpark数据科学](../Images/6d555820029802ccae6b87b18c37cf10.png)
+![PySpark 数据科学](img/6d555820029802ccae6b87b18c37cf10.png)
 
 你可以使用`.na`来处理缺失值。在我们的例子中，我们删除了所有缺失值的行。
 
@@ -197,15 +197,15 @@ df = df.na.drop()
 
 # 数据分析
 
-对于数据分析，我们将使用PySpark API来转换SQL命令。在第一个示例中，我们选择了三列，并显示了前5行。
+对于数据分析，我们将使用 PySpark API 来转换 SQL 命令。在第一个示例中，我们选择了三列，并显示了前 5 行。
 
 ```py
 df.select(['Artist', 'Artist', 'Total']).show(5)
 ```
 
-![PySpark数据科学](../Images/068bdd7d061c006700e66d9a39e063b1.png)
+![PySpark 数据科学](img/068bdd7d061c006700e66d9a39e063b1.png)
 
-对于更复杂的查询，我们将筛选“Total”大于或等于6亿到7亿的值。
+对于更复杂的查询，我们将筛选“Total”大于或等于 6 亿到 7 亿的值。
 
 > <fo not="" size="+1">**注意：** 你还可以使用`df.Total.between(600000000, 700000000)`来筛选记录。</fo>
 
@@ -217,9 +217,9 @@ df.filter(
 ).show(5)
 ```
 
-![PySpark数据科学](../Images/7858ab674eb36cec9d98c63941350995.png)
+![PySpark 数据科学](img/7858ab674eb36cec9d98c63941350995.png)
 
-编写if/else语句，使用`when`函数创建分类列。
+编写 if/else 语句，使用`when`函数创建分类列。
 
 ```py
 df.select('Artist', 'Title', 
@@ -227,9 +227,9 @@ df.select('Artist', 'Title',
            ).show(5)
 ```
 
-![PySpark数据科学](../Images/ad64ce3b32231f59d3f35b64409056f1.png)
+![PySpark 数据科学](img/ad64ce3b32231f59d3f35b64409056f1.png)
 
-你可以将所有SQL命令作为Python API运行完整的查询。
+你可以将所有 SQL 命令作为 Python API 运行完整的查询。
 
 ```py
 df.select(['Artist','Wks','Total'])\
@@ -239,7 +239,7 @@ df.select(['Artist','Wks','Total'])\
         .show(5)
 ```
 
-![PySpark数据科学](../Images/6b9760cfc2a485cf69d86f84929f0699.png)
+![PySpark 数据科学](img/6b9760cfc2a485cf69d86f84929f0699.png)
 
 # 数据可视化
 
@@ -265,13 +265,13 @@ vis_df.iloc[0:7].plot(
 ) 
 ```
 
-![PySpark数据科学](../Images/53998c47fa57c853807d74126e467011.png)
+![PySpark 数据科学](img/53998c47fa57c853807d74126e467011.png)
 
 # 保存结果
 
 在处理数据和运行分析之后，是时候保存结果了。
 
-你可以将结果保存为所有流行的文件类型，例如CSV、JSON和Parquet。
+你可以将结果保存为所有流行的文件类型，例如 CSV、JSON 和 Parquet。
 
 ```py
 final_data = (
@@ -330,7 +330,7 @@ data_scale_output = data_scale.transform(assembled_data)
 data_scale_output.show(5)
 ```
 
-![PySpark for Data Science](../Images/1df15b21db2ceea33176c94650c35653.png)
+![PySpark for Data Science](img/1df15b21db2ceea33176c94650c35653.png)
 
 # KMeans 聚类
 
@@ -347,7 +347,7 @@ preds=KMeans_fit.transform(data_scale_output)
 preds.show(5)
 ```
 
-![PySpark for Data Science](../Images/833dff07fe7525d2deb604b2a1a1419f.png)
+![PySpark for Data Science](img/833dff07fe7525d2deb604b2a1a1419f.png)
 
 # 可视化预测
 
@@ -369,7 +369,7 @@ for i in list1:
     plt.show() 
 ```
 
-![PySpark for Data Science](../Images/73b5ed95db0eec08514c9c4aa78ee445.png)![PySpark for Data Science](../Images/a30a4966f0e14616d98c81c26286af2e.png)
+![PySpark for Data Science](img/73b5ed95db0eec08514c9c4aa78ee445.png)![PySpark for Data Science](img/a30a4966f0e14616d98c81c26286af2e.png)
 
 # 总结
 
@@ -389,7 +389,7 @@ for i in list1:
 
 +   [数据科学最低要求：你需要知道的 10 项基础技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：一系列古怪的引用…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 

@@ -1,8 +1,8 @@
 # 12 个最具挑战性的数据科学面试问题
 
-> 原文：[https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html`](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
 
-![12 个最具挑战性的数据科学面试问题](../Images/35f3347974695925256b93e3f2cb0b64.png)
+![12 个最具挑战性的数据科学面试问题](img/35f3347974695925256b93e3f2cb0b64.png)
 
 图片来源 | Canva Pro
 
@@ -10,9 +10,9 @@
 
 例如，在与一家顶级电信公司的面试中，我被要求提出一个新的数据科学产品。我建议使用一个开源解决方案，并让社区参与到项目中。我解释了我的思路以及如何通过向付费客户提供高级服务来实现产品的货币化。
 
-我收集了12个最具挑战性的数据科学面试问题及其答案。这些问题被分为三部分：情境问题、数据分析和机器学习，以涵盖所有方面。
+我收集了 12 个最具挑战性的数据科学面试问题及其答案。这些问题被分为三部分：情境问题、数据分析和机器学习，以涵盖所有方面。
 
-你也可以查看完整的数据科学面试合集：[第1部分](/2022/06/complete-collection-data-science-interviews-part-1.html) 和 [第2部分](/2022/06/complete-collection-data-science-interviews-part-1.html)。该合集包含了关于数据科学所有子类别的数百个问题。
+你也可以查看完整的数据科学面试合集：第一部分 和 第二部分。该合集包含了关于数据科学所有子类别的数百个问题。
 
 # 情境面试问题
 
@@ -46,7 +46,7 @@ A/B 测试是一种用于随机实验的统计假设检验，涉及两个变量 
 
 在数据科学中，它用于测试公司内各种机器学习模型的生产和数据驱动解决方案分析。
 
-![我们为什么使用 A/B 测试？](../Images/b54efd528e1f1dc1a18f6dc75789b7f1.png)
+![我们为什么使用 A/B 测试？](img/b54efd528e1f1dc1a18f6dc75789b7f1.png)
 
 图片来源于 [Optimizely](https://www.optimizely.com/optimization-glossary/ab-testing/)
 
@@ -65,13 +65,13 @@ LEFT JOIN Orders as b
 ON a.ID = b.CUSTOMER
 ```
 
-上面的例子很简单。你必须为复杂的 SQL 查询做好准备，以通过面试环节。查看 Nate 最近的博客 [你可能在下次面试中看到的 24 个 SQL 问题](/2022/06/24-sql-questions-might-see-next-interview.html)。
+上面的例子很简单。你必须为复杂的 SQL 查询做好准备，以通过面试环节。查看 Nate 最近的博客 你可能在下次面试中看到的 24 个 SQL 问题。
 
 ## 6) 马尔科夫链是什么？
 
 马尔科夫链是一种通过概率方法从一个状态转换到另一个状态的模型。它定义了基于当前状态和经过的时间，转换到未来状态的概率。马尔科夫链被广泛应用于信息理论、搜索引擎和语音识别。通过阅读 [Brilliant Math’s](https://brilliant.org/wiki/markov-chains/) 维基页面来了解更多信息。
 
-![马尔科夫链是什么？](../Images/e8c5682b722d264ef512bd38abd91a61.png)
+![马尔科夫链是什么？](img/e8c5682b722d264ef512bd38abd91a61.png)
 
 图片来源于 [Brilliant Math & Science Wiki](https://brilliant.org/wiki/markov-chains/)
 
@@ -87,7 +87,7 @@ ON a.ID = b.CUSTOMER
 
 +   使用不受异常值影响的算法，例如随机森林。
 
-![如何处理异常值？](../Images/711bfe27c3a0426caea965a4b857b8a0.png)
+![如何处理异常值？](img/711bfe27c3a0426caea965a4b857b8a0.png)
 
 图片来源于 [dataanalyticsedge](http://dataanalyticsedge.com/2021/01/22/outlier-detection-and-treatment/)
 
@@ -97,7 +97,7 @@ ON a.ID = b.CUSTOMER
 
 TF-IDF（词频逆文档频率）用于计算一个词在文本序列或语料库中的相关性。在文本索引过程中，它评估文档或语料库中每个术语的值。它通常用于文本向量化，将一行或一句话转换为数值，并用于 NLP（自然语言处理）任务。
 
-![TF-IDF 是什么？](../Images/3633066195b3f037da44aa629ef9c403.png)
+![TF-IDF 是什么？](img/3633066195b3f037da44aa629ef9c403.png)
 
 图片由 [filotechnologia.blogspot](https://3.bp.blogspot.com/-u928a3xbrsw/UukmRVX_JzI/AAAAAAAAAKE/wIhuNmdQb7E/s1600/td-idf-graphic.png) 提供
 
@@ -129,7 +129,7 @@ TF-IDF（词频逆文档频率）用于计算一个词在文本序列或语料�
 
 过拟合发生在你的模型在训练集和验证集上表现良好，但在未见过的测试集上表现不佳时。
 
-![如何避免模型的过拟合？](../Images/bd46b8d1dccb96ac227c4334a0b4be42.png)
+![如何避免模型的过拟合？](img/bd46b8d1dccb96ac227c4334a0b4be42.png)
 
 图片由 [Ilyes Talbi](https://medium.com/analytics-vidhya/7-ways-to-avoid-overfitting-9ff0e03554d3) 提供
 
@@ -155,22 +155,22 @@ TF-IDF（词频逆文档频率）用于计算一个词在文本序列或语料�
 
 +   [2022 年前 30 名 NLP 面试问题及答案 - Intellipaat](https://intellipaat.com/blog/interview-question/nlp-interview-questions/)
 
-+   [2022年9个数据科学面试问题及答案 | Indeed.com](https://www.indeed.com/career-advice/interviewing/data-science-interview-questions)
++   [2022 年 9 个数据科学面试问题及答案 | Indeed.com](https://www.indeed.com/career-advice/interviewing/data-science-interview-questions)
 
-+   [23个时间序列面试问题（已回答）ML开发者必须知道 | MLStack.Cafe](https://www.mlstack.cafe/blog/time-series-interview-questions)
++   [23 个时间序列面试问题（已回答）ML 开发者必须知道 | MLStack.Cafe](https://www.mlstack.cafe/blog/time-series-interview-questions)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作，撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些遭受心理健康问题的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作，撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些遭受心理健康问题的学生。
 
 ### 相关阅读
 
-+   [多模态如何使LLM对齐更加具有挑战性](https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging)
++   [多模态如何使 LLM 对齐更加具有挑战性](https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging)
 
-+   [GPT-4之后：回答关于AI的常见问题](https://www.kdnuggets.com/2023/04/post-gpt4-answering-asked-questions-ai.html)
++   [GPT-4 之后：回答关于 AI 的常见问题](https://www.kdnuggets.com/2023/04/post-gpt4-answering-asked-questions-ai.html)
 
-+   [KDnuggets新闻，5月4日：9门免费哈佛课程，助你学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程，助你学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [如何回答数据科学编码面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [15个你必须知道的Python编码面试问题，适用于数据科学](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个你必须知道的 Python 编码面试问题，适用于数据科学](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [数据科学面试中的24个A/B测试面试问题及解答](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)
++   [数据科学面试中的 24 个 A/B 测试面试问题及解答](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)

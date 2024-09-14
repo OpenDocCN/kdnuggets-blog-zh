@@ -1,8 +1,8 @@
 # 5 个免费课程助你进入数据分析领域
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-to-break-into-data-analytics](https://www.kdnuggets.com/5-free-courses-to-break-into-data-analytics)
+> 原文：[`www.kdnuggets.com/5-free-courses-to-break-into-data-analytics`](https://www.kdnuggets.com/5-free-courses-to-break-into-data-analytics)
 
-![5 个免费课程助你进入数据分析领域](../Images/81e8bb0d34e6352dcead1ea18df6e52d.png)
+![5 个免费课程助你进入数据分析领域](img/81e8bb0d34e6352dcead1ea18df6e52d.png)
 
 图像由 DALLE-3 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的 3 个顶级课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -170,7 +170,7 @@
 
 希望你觉得这份数据分析课程列表对你有帮助。如果你打算很快转向数据分析领域，祝你学习顺利。
 
-如果你在寻找数据岗位市场的技巧，请阅读 [你在找数据科学工作时遇到的 7 个困难原因](/7-reasons-why-youre-struggling-to-land-a-data-science-job)。
+如果你在寻找数据岗位市场的技巧，请阅读 你在找数据科学工作时遇到的 7 个困难原因。
 
 **[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过撰写教程、使用指南、观点文章等与开发者社区分享她的知识。Bala 还创建了有趣的资源概述和编码教程。
 

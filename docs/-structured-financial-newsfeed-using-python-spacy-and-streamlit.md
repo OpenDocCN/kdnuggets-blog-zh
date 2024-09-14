@@ -1,12 +1,12 @@
 # 使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源
 
-> 原文：[https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html](https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html)
+> 原文：[`www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html`](https://www.kdnuggets.com/2021/09/-structured-financial-newsfeed-using-python-spacy-and-streamlit.html)
 
-[评论](#comments)
+评论
 
 **由 [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)，数据科学讲师 | 导师 | YouTuber**
 
-![使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源](../Images/525c4bf0536a3f880f235189e8c33d1c.png)
+![使用 Python、SpaCy 和 Streamlit 构建结构化金融新闻源](img/525c4bf0536a3f880f235189e8c33d1c.png)
 
 自然语言处理的一个非常有趣且广泛使用的应用是命名实体识别（NER）。
 
@@ -52,9 +52,9 @@
 
 如果你查看 RSS 源，它看起来像这样：
 
-![](../Images/cc1a6f5d622cf5f3e83e7bc7d0f6315a.png)
+![](img/cc1a6f5d622cf5f3e83e7bc7d0f6315a.png)
 
-[https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms](https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms)
+[`economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms`](https://economictimes.indiatimes.com/markets/rssfeeds/1977021501.cms)
 
 我们的目标是从这个 RSS 源中获取文本标题，然后使用 SpaCy 提取标题中的主要实体。
 
@@ -78,7 +78,7 @@ import requestsresp = requests.get("https://economictimes.indiatimes.com/markets
 
 它应该会给你一个带有 HTTP 代码 200 的成功响应，如下所示：
 
-![](../Images/32fa6a5235798fcfe47128fcc891a836.png)
+![](img/32fa6a5235798fcfe47128fcc891a836.png)
 
 现在你有了这个响应对象，我们可以将其内容传递给 BeautifulSoup 类来解析 XML 文档，如下所示：
 
@@ -89,7 +89,7 @@ soup.findAll('title')
 
 这将给你一个包含所有标题的 Python 列表：
 
-![](../Images/d243f2acf112117879f8e373ee8221c3.png)
+![](img/d243f2acf112117879f8e373ee8221c3.png)
 
 图片由作者提供
 
@@ -143,13 +143,13 @@ python -m spacy [download](https://spacy.io/api/cli#download) en_core_web_sm
 
 该管道执行从标记化到命名实体识别（NER）的所有任务。这里我们首先得到令牌：
 
-![](../Images/6d2917dbe55b3aaa0813afa881b488a9.png)
+![](img/6d2917dbe55b3aaa0813afa881b488a9.png)
 
 图片来源于作者
 
 你可以使用 `pos_` 属性查看标记的词性。
 
-![](../Images/5efb57780795368a90a99a8bafe56987.png)
+![](img/5efb57780795368a90a99a8bafe56987.png)
 
 图片来源于作者
 
@@ -157,7 +157,7 @@ python -m spacy [download](https://spacy.io/api/cli#download) en_core_web_sm
 
 然后，你可以通过查看依赖图来了解它们之间的关系，使用 `dep_` 属性：
 
-![](../Images/45aabe9dbacbb7638e622b37d4f2b7a8.png)
+![](img/45aabe9dbacbb7638e622b37d4f2b7a8.png)
 
 图片来源于作者
 
@@ -171,7 +171,7 @@ spacy.displacy.render(processed_hline, style='dep',jupyter=True, options={'dista
 
 这将生成如下图表：
 
-![](../Images/aaf67d47e41b6990f01d0a7e67f61cc6.png)
+![](img/aaf67d47e41b6990f01d0a7e67f61cc6.png)
 
 图片来源于作者
 
@@ -179,7 +179,7 @@ spacy.displacy.render(processed_hline, style='dep',jupyter=True, options={'dista
 
 要查看句子的主要实体，你可以在同一代码中将 `**'ent’**` 作为样式传递：
 
-![](../Images/aca72aeee53f1c5d7988bf6430bc89e4.png)
+![](img/aca72aeee53f1c5d7988bf6430bc89e4.png)
 
 图片来源于作者 — 我使用了另一个标题，因为我们上面用的那个没有任何实体。
 
@@ -189,7 +189,7 @@ spacy.displacy.render(processed_hline, style='dep',jupyter=True, options={'dista
 
 这将返回如下的公司列表：
 
-![](../Images/ea49df1fea8fe173af6aa627ea237b75.png)
+![](img/ea49df1fea8fe173af6aa627ea237b75.png)
 
 图片来源于作者
 
@@ -197,7 +197,7 @@ spacy.displacy.render(processed_hline, style='dep',jupyter=True, options={'dista
 
 这就是 spaCy 的魔力！
 
-下一步是查找所有这些公司在知识库中，以提取该公司的正确股票符号，然后使用像yahoo-finance这样的库提取市场详情，如价格、收益等。
+下一步是查找所有这些公司在知识库中，以提取该公司的正确股票符号，然后使用像 yahoo-finance 这样的库提取市场详情，如价格、收益等。
 
 ## 第三步 — 命名实体链接
 
@@ -205,35 +205,35 @@ spacy.displacy.render(processed_hline, style='dep',jupyter=True, options={'dista
 
 我们有公司名称，但为了获取它们的交易详情，我们需要公司的交易股票符号。
 
-由于我在提取印度公司的详细信息和新闻，我将使用[Nifty 500公司（一个CSV文件）](https://www1.nseindia.com/products/content/equities/indices/nifty_500.htm)的外部数据库。
+由于我在提取印度公司的详细信息和新闻，我将使用[Nifty 500 公司（一个 CSV 文件）](https://www1.nseindia.com/products/content/equities/indices/nifty_500.htm)的外部数据库。
 
-对于每家公司，我们将使用pandas在公司列表中查找它，然后使用[yahoo-finance](https://pypi.org/project/yfinance/)库捕获股票市场统计数据。
+对于每家公司，我们将使用 pandas 在公司列表中查找它，然后使用[yahoo-finance](https://pypi.org/project/yfinance/)库捕获股票市场统计数据。
 
 图片由作者提供
 
-你应该注意到的一点是，我在将每个股票符号传递给`yfinance`库的`Ticker`类之前，添加了一个`.NS`后缀。这是因为印度NSE股票符号在`yfinance`中以`.NS`后缀存储。
+你应该注意到的一点是，我在将每个股票符号传递给`yfinance`库的`Ticker`类之前，添加了一个`.NS`后缀。这是因为印度 NSE 股票符号在`yfinance`中以`.NS`后缀存储。
 
 之后，流行的股票将会出现在如下的数据框中：
 
-![](../Images/8a464b3bde7133a42af081ddc2a1cce0.png)
+![](img/8a464b3bde7133a42af081ddc2a1cce0.png)
 
 图片由作者提供
 
 太好了！这是不是很棒？这样一个简单却深刻的应用程序，可以帮助你找到正确的股票方向。
 
-现在，为了使其更易于访问，我们可以使用Streamlit将刚刚编写的代码创建为Web应用程序。
+现在，为了使其更易于访问，我们可以使用 Streamlit 将刚刚编写的代码创建为 Web 应用程序。
 
-## 第四步 — 使用Streamlit构建Web应用程序
+## 第四步 — 使用 Streamlit 构建 Web 应用程序
 
-该是移动到编辑器，创建一个新项目和虚拟环境来进行NLP应用程序的时候了。
+该是移动到编辑器，创建一个新项目和虚拟环境来进行 NLP 应用程序的时候了。
 
-开始使用Streamlit对于这样的演示数据应用程序非常简单。确保你已经安装了streamlit。
+开始使用 Streamlit 对于这样的演示数据应用程序非常简单。确保你已经安装了 streamlit。
 
 ```py
 pip install Streamlit
 ```
 
-现在，让我们创建一个名为app.py的新文件，并开始编写功能代码以准备应用程序。
+现在，让我们创建一个名为 app.py 的新文件，并开始编写功能代码以准备应用程序。
 
 在顶部导入所有所需的库。
 
@@ -247,9 +247,9 @@ import pandas as pdimport requestsimport spacyimport streamlit as stfrom bs4 imp
 st.title('Buzzing Stocks :zap:')
 ```
 
-通过在终端中运行`streamlit run app.p`y来测试你的应用程序。它应该会在你的Web浏览器中打开一个应用程序。
+通过在终端中运行`streamlit run app.p`y 来测试你的应用程序。它应该会在你的 Web 浏览器中打开一个应用程序。
 
-我添加了一些额外的功能，以从多个来源捕获数据。现在，你可以将你选择的RSS源URL添加到应用程序中，数据将被处理，趋势股票将在数据框中显示出来。
+我添加了一些额外的功能，以从多个来源捕获数据。现在，你可以将你选择的 RSS 源 URL 添加到应用程序中，数据将被处理，趋势股票将在数据框中显示出来。
 
 要访问完整的代码库，你可以查看我的仓库：
 
@@ -279,27 +279,27 @@ st.title('Buzzing Stocks :zap:')
 
 感谢 Elliot Gunn。
 
-**简介：[Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一位具有综合网页技术和数据科学（即全栈数据科学）经验的工程师。他已经指导了超过1000名AI/网页/数据科学的求职者，并设计了数据科学和机器学习工程学习课程。此前，Harshit与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发了数据处理算法。
+**简介：[Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一位具有综合网页技术和数据科学（即全栈数据科学）经验的工程师。他已经指导了超过 1000 名 AI/网页/数据科学的求职者，并设计了数据科学和机器学习工程学习课程。此前，Harshit 与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发了数据处理算法。
 
 [原文](https://dswharshit.medium.com/d19736fdd70c). 经许可转载。
 
 **相关：**
 
-+   [2021年数据科学学习路线图](/2021/02/data-science-learning-roadmap-2021.html)
++   2021 年数据科学学习路线图
 
-+   [机器学习如何利用线性代数解决数据问题](/2021/09/machine-learning-leverages-linear-algebra-solve-data-problems.html)
++   机器学习如何利用线性代数解决数据问题
 
-+   [学习数据科学和机器学习：路线图后的第一步](/2021/08/learn-data-science-machine-learning.html)
++   学习数据科学和机器学习：路线图后的第一步
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护。
 
 * * *
 
@@ -309,10 +309,10 @@ st.title('Buzzing Stocks :zap:')
 
 +   [使用 spaCy 进行 NLP 入门](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
 
-+   [使用spaCy进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
++   [使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
 
-+   [使用DAGsHub将Streamlit WebApp部署到Heroku](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
++   [使用 DAGsHub 将 Streamlit WebApp 部署到 Heroku](https://www.kdnuggets.com/2022/02/deploying-streamlit-webapp-heroku-dagshub.html)
 
-+   [使用HuggingFace Pipelines和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   [使用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 
-+   [使用Streamlit进行DIY自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
++   [使用 Streamlit 进行 DIY 自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)

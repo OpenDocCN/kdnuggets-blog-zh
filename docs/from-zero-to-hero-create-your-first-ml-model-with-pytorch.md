@@ -1,8 +1,8 @@
 # 从零到英雄：使用 PyTorch 创建你的第一个 ML 模型
 
-> 原文：[https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)
+> 原文：[`www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch`](https://www.kdnuggets.com/from-zero-to-hero-create-your-first-ml-model-with-pytorch)
 
-![从零到英雄：使用 PyTorch 创建你的第一个 ML 模型](../Images/aac9a7fec562df82c6895dad92e6871c.png)
+![从零到英雄：使用 PyTorch 创建你的第一个 ML 模型](img/aac9a7fec562df82c6895dad92e6871c.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
@@ -156,7 +156,7 @@ class Classifier(nn.Module):
 
 在 __init__ 方法中，我们声明了模型将使用的所有层。我们使用 PyTorch 提供的线性（也称为 Dense）层。第一层将输入映射到 512 个神经元。我们可以将 input_size 作为模型参数传递，这样我们以后也可以用于不同大小的输入。第二层将 512 个神经元映射到 256。第三个隐藏层将前一层的 256 个神经元映射到 128。最后一层将最终减少到输出大小。我们的输出大小将是一个大小为 (10, ) 的张量，因为我们正在预测十个不同的数字。
 
-![从零到英雄：使用 PyTorch 创建你的第一个机器学习模型](../Images/892683a58550b21fc5cd9d81645de015.png)
+![从零到英雄：使用 PyTorch 创建你的第一个机器学习模型](img/892683a58550b21fc5cd9d81645de015.png)
 
 作者提供的图片
 
@@ -227,7 +227,7 @@ loss.backward()
 optimizer.step()
 ```
 
-使用上述代码，我们可以计算所有的反向传播梯度，并使用Adam优化器优化模型权重。将所有上述代码结合起来，可以使我们的模型逐步收敛。
+使用上述代码，我们可以计算所有的反向传播梯度，并使用 Adam 优化器优化模型权重。将所有上述代码结合起来，可以使我们的模型逐步收敛。
 
 完整的训练循环如下所示：
 
@@ -259,7 +259,7 @@ for epoch in range(NUM_EPOCHS):
     	print(f'Epoch: {epoch + 1} / {NUM_EPOCHS}: Average Loss: {total_epoch_loss / steps}')
 ```
 
-损失值逐渐减少并接近0。然后，我们可以在我们最初声明的测试数据集上评估模型。
+损失值逐渐减少并接近 0。然后，我们可以在我们最初声明的测试数据集上评估模型。
 
 # 评估我们的模型性能
 
@@ -286,13 +286,13 @@ print(f"\nTEST ACCURACY: {((correct_predictions / total_predictions) * 100):.2f}
 
 # 结果
 
-我只训练了五个周期，并取得了超过96%的测试准确率，相比之下，训练前准确率为10%。下图显示了训练五个周期后的模型预测结果。
+我只训练了五个周期，并取得了超过 96%的测试准确率，相比之下，训练前准确率为 10%。下图显示了训练五个周期后的模型预测结果。
 
-![从零到英雄：用PyTorch创建你的第一个ML模型](../Images/eb5127ca41a590e3e22753e37e78bab3.png)
+![从零到英雄：用 PyTorch 创建你的第一个 ML 模型](img/eb5127ca41a590e3e22753e37e78bab3.png)
 
 就这样，你已经从零开始实现了一个可以仅通过图像像素值区分手写数字的模型。
 
-这绝不是PyTorch的全面指南，但它确实为你提供了机器学习项目中结构和数据流的一般理解。尽管如此，这些知识足以让你开始实施深度学习中的最先进架构。
+这绝不是 PyTorch 的全面指南，但它确实为你提供了机器学习项目中结构和数据流的一般理解。尽管如此，这些知识足以让你开始实施深度学习中的最先进架构。
 
 # 完整代码
 
@@ -434,7 +434,7 @@ if __name__ == "__main__":
 	plt.show()
 ```
 
-**[穆罕默德·阿赫曼](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)** 是一名从事计算机视觉和自然语言处理的深度学习工程师。他曾在Vyro.AI工作，负责多个生成AI应用的部署和优化，这些应用在全球排行榜上名列前茅。他对构建和优化智能系统的机器学习模型感兴趣，并相信持续改进。
+**[穆罕默德·阿赫曼](https://www.linkedin.com/in/muhammad-arham-a5b1b1237/)** 是一名从事计算机视觉和自然语言处理的深度学习工程师。他曾在 Vyro.AI 工作，负责多个生成 AI 应用的部署和优化，这些应用在全球排行榜上名列前茅。他对构建和优化智能系统的机器学习模型感兴趣，并相信持续改进。
 
 ### 更多相关话题
 
@@ -442,7 +442,7 @@ if __name__ == "__main__":
 
 +   [零样本学习详解](https://www.kdnuggets.com/2022/12/zeroshot-learning-explained.html)
 
-+   [一个能让你成为数据科学英雄的bug](https://www.kdnuggets.com/2022/03/bug-make-data-science-hero.html)
++   [一个能让你成为数据科学英雄的 bug](https://www.kdnuggets.com/2022/03/bug-make-data-science-hero.html)
 
 +   [部署你的第一个机器学习模型](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)
 

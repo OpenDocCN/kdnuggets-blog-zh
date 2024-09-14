@@ -1,6 +1,6 @@
-# 掌握微积分的5门免费课程
+# 掌握微积分的 5 门免费课程
 
-> 原文：[https://www.kdnuggets.com/2022/10/5-free-courses-master-calculus.html](https://www.kdnuggets.com/2022/10/5-free-courses-master-calculus.html)
+> 原文：[`www.kdnuggets.com/2022/10/5-free-courses-master-calculus.html`](https://www.kdnuggets.com/2022/10/5-free-courses-master-calculus.html)
 
 如果你希望理解机器学习算法是如何工作的，数学是不可避免的。线性代数、统计学、概率论和微积分是学习算法内部原理的四个关键子领域。本文列出了学习微积分的课程，但让我们首先了解为什么需要学习微积分。
 
@@ -10,17 +10,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 部门
 
 * * *
 
 你需要了解微积分才能计算导数，例如，调整神经网络反向传播中的神经元权重。实质上，你需要微积分来理解一组输入与输出变量之间的关联。这种多属性的研究被称为多元微积分，应用于计算函数的最小值和最大值、导数、成本函数等。
 
-![5 免费课程掌握微积分](../Images/153933964f16435e1be07fc2e1c2f7bc.png)
+![5 免费课程掌握微积分](img/153933964f16435e1be07fc2e1c2f7bc.png)
 
 [来源](https://www.freepik.com/free-vector/seminar-concept-illustration_19245711.htm)：图像由 Freepik 上的 storyset 提供
 
@@ -38,11 +38,11 @@
 
 ## 2\. 由 Jon Krohn 讲授的《机器学习的微积分》
 
-这是一个由Jon Krohn制作的[56个视频播放列表](https://www.youtube.com/playlist?list=PLRDl2inPrWQVu2OvnTvtkRpJ-wz-URMJx)。它涵盖了微积分的基础，如偏导数、增量法、幂法则等。Jon还创建了一个类似的线性代数课程，作为理解当代机器学习和数据科学技术的基础概念。
+这是一个由 Jon Krohn 制作的[56 个视频播放列表](https://www.youtube.com/playlist?list=PLRDl2inPrWQVu2OvnTvtkRpJ-wz-URMJx)。它涵盖了微积分的基础，如偏导数、增量法、幂法则等。Jon 还创建了一个类似的线性代数课程，作为理解当代机器学习和数据科学技术的基础概念。
 
 ## 3\. 机器学习数学：多变量微积分– 伦敦帝国学院
 
-[本课程](https://www.coursera.org/learn/multivariate-calculus-machine-learning)是Coursera平台上“机器学习数学专修”系列的一部分。这是一个自定进度的课程，具有灵活的截止日期，非常适合在职专业人士。完成课程总共需要18小时，由伦敦帝国学院提供。
+[本课程](https://www.coursera.org/learn/multivariate-calculus-machine-learning)是 Coursera 平台上“机器学习数学专修”系列的一部分。这是一个自定进度的课程，具有灵活的截止日期，非常适合在职专业人士。完成课程总共需要 18 小时，由伦敦帝国学院提供。
 
 根据课程列表页面，它帮助学习者建立对以下概念的理解：
 
@@ -60,11 +60,11 @@
 
 ## 4\. 悉尼大学的微积分导论
 
-这是一个[中级课程](https://www.coursera.org/learn/introduction-to-calculus)，总共需要59小时，分五周完成。课程由副教授David Easdown授课，由悉尼大学提供。课程解释了基础概念，如预备微积分、切线、极限等。课程在Coursera上提供，完成后可获得可分享的证书。
+这是一个[中级课程](https://www.coursera.org/learn/introduction-to-calculus)，总共需要 59 小时，分五周完成。课程由副教授 David Easdown 授课，由悉尼大学提供。课程解释了基础概念，如预备微积分、切线、极限等。课程在 Coursera 上提供，完成后可获得可分享的证书。
 
-## 5\. MIT的18.01x单变量微积分
+## 5\. MIT 的 18.01x 单变量微积分
 
-这是MIT提供的一个[高级课程](https://www.edx.org/xseries/mitx-18.01x-single-variable-calculus)，旨在掌握微积分的概念，并学习如何计算导数和积分。课程的关键收获在于，它不仅解释了几何解释，还通过实际应用帮助学习这些数学概念。
+这是 MIT 提供的一个[高级课程](https://www.edx.org/xseries/mitx-18.01x-single-variable-calculus)，旨在掌握微积分的概念，并学习如何计算导数和积分。课程的关键收获在于，它不仅解释了几何解释，还通过实际应用帮助学习这些数学概念。
 
 引用课程网页，学习者将理解
 
@@ -78,13 +78,13 @@
 
 +   如何通过一系列简单函数来近似复杂函数
 
-该项目是由三门课程组成——微分、积分和坐标系统，以及无穷级数。每门课程需要每周投入6-10小时，课程总时长约为13-15周。
+该项目是由三门课程组成——微分、积分和坐标系统，以及无穷级数。每门课程需要每周投入 6-10 小时，课程总时长约为 13-15 周。
 
 # 额外推荐
 
-一个额外的提示是来自Jason Brownlee的七天微积分迷你课程。他是一位AI/ML专家，擅长将理论和数学密集的机器学习概念以实际和代码导向的形式进行讲解。
+一个额外的提示是来自 Jason Brownlee 的七天微积分迷你课程。他是一位 AI/ML 专家，擅长将理论和数学密集的机器学习概念以实际和代码导向的形式进行讲解。
 
-他的[迷你课程](https://machinelearningmastery.com/calculus-for-machine-learning-7-day-mini-course/)涵盖了机器学习中常用的微积分概念，并包括python练习。课程为期七天，期望学习者具备机器学习模型、python和线性代数的基础知识。该课程涵盖的关键概念包括微分、积分、向量函数的梯度、反向传播、优化等。
+他的[迷你课程](https://machinelearningmastery.com/calculus-for-machine-learning-7-day-mini-course/)涵盖了机器学习中常用的微积分概念，并包括 python 练习。课程为期七天，期望学习者具备机器学习模型、python 和线性代数的基础知识。该课程涵盖的关键概念包括微分、积分、向量函数的梯度、反向传播、优化等。
 
 在每节课结束时，课程建议你完成一个类似于上节课所教内容的作业，并在课程结束时分享结果。
 
@@ -92,7 +92,7 @@
 
 为了帮助你成为一名熟悉机器学习算法内部运作的数据科学家，本文分享了五个免费课程来掌握微积分概念。希望你能在数据科学之旅中找到这些课程列表有用。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究的交汇处工作，以提供商业价值和洞察力。她是数据驱动科学的倡导者，也是数据治理领域的领先专家，致力于建立可信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究的交汇处工作，以提供商业价值和洞察力。她是数据驱动科学的倡导者，也是数据治理领域的领先专家，致力于建立可信赖的 AI 解决方案。
 
 ### 更多相关主题
 
@@ -102,8 +102,8 @@
 
 +   [数据科学的微积分](https://www.kdnuggets.com/2022/07/calculus-data-science.html)
 
-+   [掌握机器学习的5个免费课程](https://www.kdnuggets.com/5-free-courses-to-master-machine-learning)
++   [掌握机器学习的 5 个免费课程](https://www.kdnuggets.com/5-free-courses-to-master-machine-learning)
 
-+   [掌握MLOps的5个免费课程](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
++   [掌握 MLOps 的 5 个免费课程](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
 
-+   [掌握数据科学、数据工程、机器学习等的25个免费课程](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [掌握数据科学、数据工程、机器学习等的 25 个免费课程](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)

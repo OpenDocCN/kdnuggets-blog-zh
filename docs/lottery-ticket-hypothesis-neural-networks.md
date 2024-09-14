@@ -1,22 +1,22 @@
 # 彩票票假设如何挑战我们对神经网络训练的所有认知
 
-> 原文：[https://www.kdnuggets.com/2019/05/lottery-ticket-hypothesis-neural-networks.html](https://www.kdnuggets.com/2019/05/lottery-ticket-hypothesis-neural-networks.html)
+> 原文：[`www.kdnuggets.com/2019/05/lottery-ticket-hypothesis-neural-networks.html`](https://www.kdnuggets.com/2019/05/lottery-ticket-hypothesis-neural-networks.html)
 
-[评论](#comments) ![彩票票](../Images/c2df7583ac5ecd73a5de352405c466bb.png)
+评论 ![彩票票](img/c2df7583ac5ecd73a5de352405c466bb.png)
 
 来源：Pixabay
 
-训练机器学习模型是现实世界数据科学解决方案中最具挑战性和计算开销的方面之一。几十年来，人工智能（AI）社区已经开发了数百种技术来改进机器学习模型的训练，基于一个单一的公理假设，即训练应该覆盖整个模型。最近，来自麻省理工学院（MIT）的AI研究人员发表了一篇挑战这一假设的论文，提出了一种更聪明、更简单的方法，通过关注模型的子集来训练神经网络。在AI社区中，MIT的论文以引人注目的名字[彩票票假设](https://arxiv.org/abs/1803.03635)而闻名。
+训练机器学习模型是现实世界数据科学解决方案中最具挑战性和计算开销的方面之一。几十年来，人工智能（AI）社区已经开发了数百种技术来改进机器学习模型的训练，基于一个单一的公理假设，即训练应该覆盖整个模型。最近，来自麻省理工学院（MIT）的 AI 研究人员发表了一篇挑战这一假设的论文，提出了一种更聪明、更简单的方法，通过关注模型的子集来训练神经网络。在 AI 社区中，MIT 的论文以引人注目的名字[彩票票假设](https://arxiv.org/abs/1803.03635)而闻名。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@
 
 使用赌博世界的类比，机器学习模型的训练常常被比作通过购买每一张可能的彩票来赢得彩票。但如果我们知道中奖的彩票是什么样的，我们难道不能更聪明地选择票据吗？
 
-在机器学习模型中，训练过程会产生大型神经网络结构，这些结构相当于一大包彩票。经过初步训练后，模型需要经过优化技术，如剪枝，以去除网络中不必要的权重，从而减少模型的大小而不牺牲性能。这相当于在袋子中寻找中奖票据并丢弃其余部分。很常见的是，剪枝技术最终会产生比原始网络小90%的神经网络结构。显然的问题是：如果一个网络可以缩小尺寸，为什么我们不直接训练这个更小的结构，以便提高训练效率呢？矛盾的是，实际机器学习解决方案中的经验表明，剪枝所揭示的架构从一开始就更难训练，准确性低于原始网络。所以你可以买一大包彩票并逐步找到中奖号码，但相反的过程却太难了。或者我们曾经这样认为????
+在机器学习模型中，训练过程会产生大型神经网络结构，这些结构相当于一大包彩票。经过初步训练后，模型需要经过优化技术，如剪枝，以去除网络中不必要的权重，从而减少模型的大小而不牺牲性能。这相当于在袋子中寻找中奖票据并丢弃其余部分。很常见的是，剪枝技术最终会产生比原始网络小 90%的神经网络结构。显然的问题是：如果一个网络可以缩小尺寸，为什么我们不直接训练这个更小的结构，以便提高训练效率呢？矛盾的是，实际机器学习解决方案中的经验表明，剪枝所揭示的架构从一开始就更难训练，准确性低于原始网络。所以你可以买一大包彩票并逐步找到中奖号码，但相反的过程却太难了。或者我们曾经这样认为????
 
 麻省理工学院的彩票票据假设的主要思想是，一致地，大型神经网络将包含一个较小的子网络，如果从一开始进行训练，将会实现与较大结构相似的准确度。具体而言，研究论文将假设概述如下：
 
@@ -36,9 +36,9 @@
 
 在论文的背景下，小型子网络通常被称为*中奖票据*。
 
-考虑一个形式为 *f(t, a, p)* 的神经网络，其中 *t=训练时间，a=准确率和p=参数*。现在考虑 *s* 为从原始结构中生成的所有可训练神经网络的子集，经过剪枝过程。彩票票据假设告诉我们，存在 *a f’(t’, a’, p’) ∈ s*，使得 *t’ <= t, a’ >= a 和 p’ <= p*。简单来说，传统的剪枝技术揭示的神经网络结构比原始结构更小且更容易训练。
+考虑一个形式为 *f(t, a, p)* 的神经网络，其中 *t=训练时间，a=准确率和 p=参数*。现在考虑 *s* 为从原始结构中生成的所有可训练神经网络的子集，经过剪枝过程。彩票票据假设告诉我们，存在 *a f’(t’, a’, p’) ∈ s*，使得 *t’ <= t, a’ >= a 和 p’ <= p*。简单来说，传统的剪枝技术揭示的神经网络结构比原始结构更小且更容易训练。
 
-![](../Images/4e811ab9746fd2fa3834f3a5f5cd786b.png)
+![](img/4e811ab9746fd2fa3834f3a5f5cd786b.png)
 
 如果彩票票据假设成立，那么下一个显而易见的问题是找到识别中奖票据的策略。这个过程涉及到一个智能训练和剪枝的迭代过程，可以总结为以下五个步骤：
 
@@ -52,9 +52,9 @@
 
 1.  为了评估步骤（4）中得到的网络是否确实是一个“中奖票”，请训练剪枝后的未训练网络，并检查其收敛行为和准确性。
 
-这个过程可以运行一次或多次。在一次剪枝方法中，网络训练一次，剪枝p% 的权重，并重置剩余的权重。尽管一次剪枝肯定有效，但彩票票假设论文显示，当该过程在n轮中迭代应用时，效果最佳；每轮剪枝p1/n%的权重，而这些权重在前一轮中幸存下来。然而，一次剪枝通常产生非常稳健的结果，而无需计算上昂贵的训练。
+这个过程可以运行一次或多次。在一次剪枝方法中，网络训练一次，剪枝 p% 的权重，并重置剩余的权重。尽管一次剪枝肯定有效，但彩票票假设论文显示，当该过程在 n 轮中迭代应用时，效果最佳；每轮剪枝 p1/n%的权重，而这些权重在前一轮中幸存下来。然而，一次剪枝通常产生非常稳健的结果，而无需计算上昂贵的训练。
 
-![](../Images/a44f079fc3b7ed4756eec0de8994568c.png)
+![](img/a44f079fc3b7ed4756eec0de8994568c.png)
 
 麻省理工学院团队在一组神经网络架构中测试了彩票票假设，结果显示剪枝方法不仅能够优化架构，还能找到“中奖票”。查看下图：
 
@@ -62,7 +62,7 @@
 
 根据实验结果，麻省理工学院团队扩展了他们最初的假设，提出了所谓的彩票系统猜想，表达了以下内容：
 
-+   **彩票票猜想：**回到我们的动机问题，我们将假设扩展到一个未经测试的猜想，即SGD寻找并训练一个子集的良好初始化权重。密集的、随机初始化的网络比剪枝后的稀疏网络更容易训练，因为可能的子网络更多，从中训练可能恢复一个“中奖票”。
++   **彩票票猜想：**回到我们的动机问题，我们将假设扩展到一个未经测试的猜想，即 SGD 寻找并训练一个子集的良好初始化权重。密集的、随机初始化的网络比剪枝后的稀疏网络更容易训练，因为可能的子网络更多，从中训练可能恢复一个“中奖票”。
 
 这个猜想在概念上似乎是有意义的。剪枝子网络的池子越大，找到“中奖票”的机会就越大。
 
@@ -70,7 +70,7 @@
 
 [原文](https://www.linkedin.com/pulse/how-lottery-ticket-hypothesis-challenging-everything-we-rodriguez/)。经许可转载。
 
-**简介**：[耶稣·罗德里格斯](https://www.linkedin.com/in/jesusmrv/)是Invector Labs的管理合伙人、加密货币和天使投资人、演讲者、作家、CIO.com专栏作家以及人工智能爱好者。
+**简介**：[耶稣·罗德里格斯](https://www.linkedin.com/in/jesusmrv/)是 Invector Labs 的管理合伙人、加密货币和天使投资人、演讲者、作家、CIO.com 专栏作家以及人工智能爱好者。
 
 **资源：**
 
@@ -82,19 +82,19 @@
 
 +   [构建计算机视觉模型：方法和数据集](https://www.kdnuggets.com/2019/05/computer-vision-model-approaches-datasets.html)
 
-+   [自动编码器：使用TensorFlow的即时执行进行深度学习](https://www.kdnuggets.com/2019/05/autoencoders-deep-learning-with-tensorflows-eager-execution.html)
++   [自动编码器：使用 TensorFlow 的即时执行进行深度学习](https://www.kdnuggets.com/2019/05/autoencoders-deep-learning-with-tensorflows-eager-execution.html)
 
 +   [大规模图像分类器的演变](https://www.kdnuggets.com/2019/05/large-scale-evolution-image-classifiers.html)
 
 ### 更多相关内容
 
-+   [我希望在开始数据科学时知道的3件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
++   [我希望在开始数据科学时知道的 3 件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
 
-+   [12个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
++   [12 个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
 
-+   [多模态如何使LLM对齐变得更加困难](https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging)
++   [多模态如何使 LLM 对齐变得更加困难](https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging)
 
-+   [假设检验与A/B测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
++   [假设检验与 A/B 测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
 
 +   [假设检验解释](https://www.kdnuggets.com/2021/09/hypothesis-testing-explained.html)
 

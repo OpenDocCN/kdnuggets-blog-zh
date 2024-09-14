@@ -1,22 +1,22 @@
 # 从敏捷数据科学团队获得真实世界的结果
 
-> 原文：[https://www.kdnuggets.com/2017/02/real-world-results-agile-data-science-teams.html](https://www.kdnuggets.com/2017/02/real-world-results-agile-data-science-teams.html)
+> 原文：[`www.kdnuggets.com/2017/02/real-world-results-agile-data-science-teams.html`](https://www.kdnuggets.com/2017/02/real-world-results-agile-data-science-teams.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：John Akred，硅谷数据科学。**
 
-![Header](../Images/6e8825fcbdd50e4b1b6138f02cf415e6.png)
+![Header](img/6e8825fcbdd50e4b1b6138f02cf415e6.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -84,30 +84,30 @@
 
 敏捷团队是数据科学的未来，这些富有创意的队友们共同协作，创造出有用的东西，并解决实际问题。未来充满变数，我们必须保持灵活才能成功。
 
-*编辑注：我们感谢Amber McClincy和Edd Wilder-James的贡献。*
+*编辑注：我们感谢 Amber McClincy 和 Edd Wilder-James 的贡献。*
 
-**简介： [约翰·阿克雷德](https://twitter.com/BigDataAnalysis)** 是硅谷数据科学公司的首席技术官，拥有超过20年的先进分析解决方案和分析系统架构经验。他致力于帮助组织更加数据驱动，将其在分析和数据科学方面的深厚专业知识与商业头脑和动态工程领导力相结合。他是应用商业分析、机器学习、预测分析和操作数据挖掘领域的公认专家。
+**简介： [约翰·阿克雷德](https://twitter.com/BigDataAnalysis)** 是硅谷数据科学公司的首席技术官，拥有超过 20 年的先进分析解决方案和分析系统架构经验。他致力于帮助组织更加数据驱动，将其在分析和数据科学方面的深厚专业知识与商业头脑和动态工程领导力相结合。他是应用商业分析、机器学习、预测分析和操作数据挖掘领域的公认专家。
 
 [原文](http://svds.com/agile-data-science-teams-deliver-real-world-results/)。经许可转载。
 
 **相关内容：**
 
-+   [通过深度学习提升敏捷流程](/2017/02/turbo-charge-agile-processes-deep-learning.html)
++   通过深度学习提升敏捷流程
 
-+   [为数据团队奠定基础](/2016/12/laying-foundation-data-team.html)
++   为数据团队奠定基础
 
-+   [大数据分析的世界导航](/2016/12/navigating-world-big-data-analytics.html)
++   大数据分析的世界导航
 
 ### 了解更多相关内容
 
-+   [通过敏捷掌握数据科学项目管理的7个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [通过敏捷掌握数据科学项目管理的 7 个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
-+   [管理数据科学团队的5个技巧](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
++   [管理数据科学团队的 5 个技巧](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
 
-+   [AI的人才管理：构建高效的AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
++   [AI 的人才管理：构建高效的 AI 团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
 
 +   [数据科学项目帮助解决现实世界问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)
 
 +   [克服现实世界场景中的不平衡数据挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
 
-+   [NLP在现实世界中的应用范围：一种不同的解决方案](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
++   [NLP 在现实世界中的应用范围：一种不同的解决方案](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)

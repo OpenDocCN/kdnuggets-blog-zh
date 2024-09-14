@@ -1,10 +1,10 @@
 # 机器学习摘要：决策树
 
-> 原文：[https://www.kdnuggets.com/2017/08/machine-learning-abstracts-decision-trees.html](https://www.kdnuggets.com/2017/08/machine-learning-abstracts-decision-trees.html)
+> 原文：[`www.kdnuggets.com/2017/08/machine-learning-abstracts-decision-trees.html`](https://www.kdnuggets.com/2017/08/machine-learning-abstracts-decision-trees.html)
 
 **由纳伦德拉·纳斯·乔希，卡内基梅隆大学。**
 
-![Decisions, decisions...](../Images/240702f60e87ee704fd1f8bab010cd11.png)
+![Decisions, decisions...](img/240702f60e87ee704fd1f8bab010cd11.png)
 
 是存在还是不存在，这是个问题？但真的是吗？或者真的不是吗？天啊，这真是令人上瘾，不是吗？但再说一次，是吗？
 
@@ -14,13 +14,13 @@
 
 决策树的基本直觉是将所有可能的决策路径映射成一棵树。
 
-![](../Images/502244b74de5d9f3c28d3244dacfd2e8.png)
+![](img/502244b74de5d9f3c28d3244dacfd2e8.png)
 
 一棵显示乘客在[Titanic](https://en.wikipedia.org/wiki/Titanic)上生存情况的树（“sibsp”是船上配偶或兄弟姐妹的数量）。树叶下的数字显示了结果的概率和叶子中的观察百分比。**来源：维基百科**
 
 从根到树叶的每条路径表示一个决策过程。让我们尝试使用我们在[前一部分分类](https://medium.com/the-science-of-data/the-machine-learning-abstracts-part-1-classification-63c620bd3707)中讨论的春季清理示例来深入分析和理解决策树。
 
-![](../Images/d231adb32fe247a28a5c2c025d58eb4d.png)
+![](img/d231adb32fe247a28a5c2c025d58eb4d.png)
 
 我们的训练数据。
 
@@ -30,7 +30,7 @@
 
 因此，当前问题的决策树可能是这样的：
 
-![](../Images/c1d64ad3977bf60f12a693e93e96ac05.png)
+![](img/c1d64ad3977bf60f12a693e93e96ac05.png)
 
 我们春季清理问题的决策树
 
@@ -50,11 +50,11 @@
 
 **你所说的“*到达那个节点*”是什么意思？**
 
-并非所有训练示例都到达树的所有部分。例如，考虑我们春季清理示例中的第3项。
+并非所有训练示例都到达树的所有部分。例如，考虑我们春季清理示例中的第 3 项。
 
 它在我们的决策树根部被排除并分类为**“KEEP”**，并没有到达树的下层。
 
-![](../Images/a4b05160cf61a541bc1386e312524cb2.png)
+![](img/a4b05160cf61a541bc1386e312524cb2.png)
 
 构建决策树有许多算法。我刚才提到的是 [ID3 算法](https://en.wikipedia.org/wiki/ID3_algorithm)，这是一个基础算法。
 
@@ -68,21 +68,21 @@
 
 **相关：**
 
-+   [机器学习摘要：分类](/2017/07/machine-learning-abstracts-classification.html)
++   机器学习摘要：分类
 
-+   [我应该使用哪种机器学习算法？](/2017/06/which-machine-learning-algorithm.html)
++   我应该使用哪种机器学习算法？
 
-+   [为什么选择人工智能和机器学习？](/2017/06/why-artificial-intelligence-machine-learning.html)
++   为什么选择人工智能和机器学习？
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

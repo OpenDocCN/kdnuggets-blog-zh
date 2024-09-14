@@ -1,8 +1,8 @@
 # 最佳稀疏数据机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)
+> 原文：[`www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html`](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)
 
-![最佳稀疏数据机器学习模型](../Images/671203cd62e0f4332672e22ce8527e1a.png)
+![最佳稀疏数据机器学习模型](img/671203cd62e0f4332672e22ce8527e1a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 现在，让我们详细查看每一项。
 
-![最佳稀疏数据机器学习模型](../Images/f8b50e24377d552147b6d62f797db89e.png)
+![最佳稀疏数据机器学习模型](img/f8b50e24377d552147b6d62f797db89e.png)
 
 作者提供的图片
 
@@ -54,7 +54,7 @@
 
 结果可能导致模型对数据中的噪声过拟合，并在新数据上表现不佳。
 
-如果你对机器学习不熟悉或想了解更多，你可以参考[scikit-learn关于过拟合的文档](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html)。
+如果你对机器学习不熟悉或想了解更多，你可以参考[scikit-learn 关于过拟合的文档](https://scikit-learn.org/stable/auto_examples/model_selection/plot_underfitting_overfitting.html)。
 
 ## 丢失有用数据
 
@@ -78,7 +78,7 @@
 
 # 处理稀疏特征的方法有哪些？
 
-![适用于稀疏数据的最佳机器学习模型](../Images/1943174e04fa31dcc50b815eb278f98a.png)
+![适用于稀疏数据的最佳机器学习模型](img/1943174e04fa31dcc50b815eb278f98a.png)
 
 作者提供的图片
 
@@ -162,29 +162,29 @@ print(
 
 这是输出结果。
 
-![最佳稀疏数据机器学习模型](../Images/1f7e7f923e68f352886c4fdd2a123ecf.png)
+![最佳稀疏数据机器学习模型](img/1f7e7f923e68f352886c4fdd2a123ecf.png)
 
 ## PCA
 
-PCA是一种流行的降维技术。它识别数据的主成分，这些主成分是数据变化最大的方向。
+PCA 是一种流行的降维技术。它识别数据的主成分，这些主成分是数据变化最大的方向。
 
 然后可以使用这些主成分在较低维度的空间中表示数据。
 
-在稀疏数据的背景下，PCA可以用来识别数据中包含最多变异的最重要特征。
+在稀疏数据的背景下，PCA 可以用来识别数据中包含最多变异的最重要特征。
 
 通过仅选择这些特征，我们可以减少数据集的维度，同时保留大部分重要信息。
 
-你可以使用scikit-learn库来实现PCA，我们将在接下来的代码示例中这样做。[这里](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)是官方文档，如果你想了解更多信息。
+你可以使用 scikit-learn 库来实现 PCA，我们将在接下来的代码示例中这样做。[这里](https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html)是官方文档，如果你想了解更多信息。
 
 ### 代码示例
 
-要对稀疏数据应用PCA，我们可以使用Python中的scikit-learn库。
+要对稀疏数据应用 PCA，我们可以使用 Python 中的 scikit-learn 库。
 
-该库提供了一个PCA类，我们可以使用它来拟合PCA模型并将数据转换为较低维度的空间。
+该库提供了一个 PCA 类，我们可以使用它来拟合 PCA 模型并将数据转换为较低维度的空间。
 
 在接下来的代码的第一部分，我们创建一个数据集，如同在前一部分中一样，具有给定的维度和稀疏度。
 
-在第二部分，我们将应用PCA将数据集的维度减少到10。之后，我们将重新计算稀疏度。
+在第二部分，我们将应用 PCA 将数据集的维度减少到 10。之后，我们将重新计算稀疏度。
 
 这是代码。
 
@@ -222,7 +222,7 @@ print(f"Sparsity after PCA: {sparsity:.4f}")
 
 这是输出结果。
 
-![最佳稀疏数据机器学习模型](../Images/c722563f5d7f093ec75871b17dfc8296.png)
+![最佳稀疏数据机器学习模型](img/c722563f5d7f093ec75871b17dfc8296.png)
 
 ## 特征哈希
 
@@ -230,17 +230,17 @@ print(f"Sparsity after PCA: {sparsity:.4f}")
 
 哈希函数将每个输入特征映射到固定长度数组中的一组索引。如果多个输入特征映射到相同的索引，则将这些值相加。特征哈希对于存储大型特征字典可能不可行的大型数据集非常有用。
 
-我们将在下一部分一起讨论这个内容，但如果你想深入了解，[这里](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.FeatureHasher.html)可以查看scikit-learn库中特征哈希器的官方文档。
+我们将在下一部分一起讨论这个内容，但如果你想深入了解，[这里](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.FeatureHasher.html)可以查看 scikit-learn 库中特征哈希器的官方文档。
 
 ### 代码示例
 
 在这里，我们再次使用相同的方法来创建数据集。
 
-然后我们使用scikit-learn的FeatureHasher类对数据集应用特征哈希。
+然后我们使用 scikit-learn 的 FeatureHasher 类对数据集应用特征哈希。
 
 我们使用**n_features**参数指定输出特征的数量，并使用**input_type**参数指定输入类型为字典。
 
-然后我们使用FeatureHasher对象的transform方法将输入数据转换为哈希数组。
+然后我们使用 FeatureHasher 对象的 transform 方法将输入数据转换为哈希数组。
 
 最后，我们计算结果数据集的稀疏度。
 
@@ -285,23 +285,23 @@ print(f"Sparsity after feature hashing: {sparsity:.4f}")
 
 这是输出结果。
 
-![最佳稀疏数据机器学习模型](../Images/9415c1a75c52d781b730b48385a8e84b.png)
+![最佳稀疏数据机器学习模型](img/9415c1a75c52d781b730b48385a8e84b.png)
 
 ## t-SNE 嵌入
 
 t-SNE（t-分布随机邻域嵌入）是一种非线性降维技术，用于可视化高维数据。它在减少数据的维度的同时保持其全局结构，已成为机器学习中可视化和聚类高维数据的热门工具。
 
-t-SNE特别适用于处理稀疏数据，因为它可以有效地降低数据的维度，同时保持其结构。t-SNE算法通过计算高维和低维空间中数据点之间的成对距离来工作。然后，它最小化这些距离在高维和低维空间中的差异。
+t-SNE 特别适用于处理稀疏数据，因为它可以有效地降低数据的维度，同时保持其结构。t-SNE 算法通过计算高维和低维空间中数据点之间的成对距离来工作。然后，它最小化这些距离在高维和低维空间中的差异。
 
-为了在稀疏数据上使用t-SNE，数据必须首先转换为密集矩阵。这可以通过各种技术完成，如PCA或特征哈希。数据转换完成后，t-SNE可以用来获得数据的低维嵌入。
+为了在稀疏数据上使用 t-SNE，数据必须首先转换为密集矩阵。这可以通过各种技术完成，如 PCA 或特征哈希。数据转换完成后，t-SNE 可以用来获得数据的低维嵌入。
 
-此外，如果你对t-SNE感兴趣，[这里](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)是scikit-learn的官方文档，可以查看更多信息。
+此外，如果你对 t-SNE 感兴趣，[这里](https://scikit-learn.org/stable/modules/generated/sklearn.manifold.TSNE.html)是 scikit-learn 的官方文档，可以查看更多信息。
 
 ### 代码示例
 
-以下代码首先设置数据集的维度和稀疏度级别，生成具有指定稀疏度级别的随机数据，并计算应用t-SNE之前数据集的稀疏度，正如我们在前面的示例中所做的那样。
+以下代码首先设置数据集的维度和稀疏度级别，生成具有指定稀疏度级别的随机数据，并计算应用 t-SNE 之前数据集的稀疏度，正如我们在前面的示例中所做的那样。
 
-它然后对具有3个组件的数据集应用t-SNE，并计算t-SNE嵌入的稀疏度。最后，它打印出t-SNE嵌入的稀疏度。
+它然后对具有 3 个组件的数据集应用 t-SNE，并计算 t-SNE 嵌入的稀疏度。最后，它打印出 t-SNE 嵌入的稀疏度。
 
 这是代码。
 
@@ -340,7 +340,7 @@ print(f"Sparsity after t-SNE: {sparsity:.4f}")
 
 这是输出结果。
 
-![最佳稀疏数据机器学习模型](../Images/5f5d3328773ed82df3f8582ace6c31da.png)
+![最佳稀疏数据机器学习模型](img/5f5d3328773ed82df3f8582ace6c31da.png)
 
 # 稀疏数据的最佳机器学习模型
 
@@ -370,13 +370,13 @@ SVC（支持向量分类器）与线性核可以很好地处理稀疏数据，�
 
 该算法可以很好地处理稀疏数据，因为它计算数据点之间的距离，并且能够处理高维数据。
 
-你可以在 [这里的机器学习算法](https://www.stratascratch.com/blog/machine-learning-algorithms-you-should-know-for-data-science/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sparse+data) 查看KNN和其他你需要了解的数据科学算法。
+你可以在 [这里的机器学习算法](https://www.stratascratch.com/blog/machine-learning-algorithms-you-should-know-for-data-science/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sparse+data) 查看 KNN 和其他你需要了解的数据科学算法。
 
 ## MLPClassifier
 
-MLPClassifier在输入数据标准化时可以很好地处理稀疏数据，因为它使用梯度下降进行优化。
+MLPClassifier 在输入数据标准化时可以很好地处理稀疏数据，因为它使用梯度下降进行优化。
 
-[这里](https://www.stratascratch.com/blog/here-is-how-chatgpt-will-help-you-be-a-better-data-scientist/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sparse+data)你可以看到MLP分类器的实现，以及其他算法，借助ChatGPT的帮助。
+[这里](https://www.stratascratch.com/blog/here-is-how-chatgpt-will-help-you-be-a-better-data-scientist/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sparse+data)你可以看到 MLP 分类器的实现，以及其他算法，借助 ChatGPT 的帮助。
 
 ## 决策树分类器
 
@@ -386,7 +386,7 @@ MLPClassifier在输入数据标准化时可以很好地处理稀疏数据，因�
 
 RandomForestClassifier 在特征较少时可以很好地处理稀疏数据。
 
-![处理稀疏数据的最佳机器学习模型](../Images/5b2bb7e52165ba96f0ff593375d81136.png)
+![处理稀疏数据的最佳机器学习模型](img/5b2bb7e52165ba96f0ff593375d81136.png)
 
 图片由作者提供
 
@@ -482,7 +482,7 @@ df
 
 这里是输出结果。
 
-![处理稀疏数据的最佳机器学习模型](../Images/e3a1ac872b9e24830ac4b1b0935ba9cb.png)
+![处理稀疏数据的最佳机器学习模型](img/e3a1ac872b9e24830ac4b1b0935ba9cb.png)
 
 到目前为止，你可能会发现一个不适合稀疏数据的算法。没错，答案是 KMeans。但为什么呢？
 

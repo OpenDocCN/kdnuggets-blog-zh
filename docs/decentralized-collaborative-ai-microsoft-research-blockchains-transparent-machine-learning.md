@@ -1,10 +1,10 @@
 # 去中心化和协作式 AI：微软研究如何利用区块链构建更透明的机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2019/07/decentralized-collaborative-ai-microsoft-research-blockchains-transparent-machine-learning.html](https://www.kdnuggets.com/2019/07/decentralized-collaborative-ai-microsoft-research-blockchains-transparent-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/07/decentralized-collaborative-ai-microsoft-research-blockchains-transparent-machine-learning.html`](https://www.kdnuggets.com/2019/07/decentralized-collaborative-ai-microsoft-research-blockchains-transparent-machine-learning.html)
 
-![评论](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![评论](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![头图](../Images/5b5fb10468254b6e7062f2104a47ac47.png)
+![头图](img/5b5fb10468254b6e7062f2104a47ac47.png)
 
 未来十年人工智能（AI）面临的最大挑战是，数据和智能是否仍然是少数几个国家的大型技术公司特权，还是可以向世界其他地区普及。机器学习和 AI 应用的中心化特性促成了一种“富者愈富”的动态，只有那些拥有高质量数据集和数据科学人才的公司才能利用 AI 机会。去中心化 AI 是应对这一挑战的领先趋势之一。尽管对许多实际应用仍不切实际，但去中心化 AI 领域在 AI 社区中稳步获得关注。最近，微软的 AI 研究人员开源了[去中心化与协作 AI 区块链](https://github.com/microsoft/0xDeCA10B)项目，该项目支持基于区块链技术实现去中心化的机器学习模型。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,9 +26,9 @@
 
 ### 微软去中心化与协作人工智能
 
-去中心化与协作人工智能在区块链上的应用（DCAI）是一个在区块链基础设施上托管和训练机器学习模型的框架。当前版本的DCAI限于以太坊区块链，并利用智能合约作为机器学习程序的主要封装机制。从概念上讲，智能合约是不可变的程序，包含在区块链运行时上执行的业务逻辑。在DCAI框架中，智能合约用于实现机器学习模型中的去中心化训练机制。
+去中心化与协作人工智能在区块链上的应用（DCAI）是一个在区块链基础设施上托管和训练机器学习模型的框架。当前版本的 DCAI 限于以太坊区块链，并利用智能合约作为机器学习程序的主要封装机制。从概念上讲，智能合约是不可变的程序，包含在区块链运行时上执行的业务逻辑。在 DCAI 框架中，智能合约用于实现机器学习模型中的去中心化训练机制。
 
-从功能角度来看，DCAI根据三个主要组件来构建向机器学习模型添加数据/训练的过程。
+从功能角度来看，DCAI 根据三个主要组件来构建向机器学习模型添加数据/训练的过程。
 
 1.  **激励机制：** 这个组件旨在鼓励高质量数据的贡献。激励机制负责验证交易，例如，在某些情况下需要“质押”或存款。
 
@@ -36,7 +36,7 @@
 
 1.  **模型：** 这个组件封装了一个特定的机器学习模型，该模型根据预定义的训练算法进行更新。
 
-![未提供此图像的替代文本](../Images/cbf6a095199e5b0782286ca8d35b48ec.png)
+![未提供此图像的替代文本](img/cbf6a095199e5b0782286ca8d35b48ec.png)
 
 去中心化人工智能应用的一个基本挑战是依靠正确的激励机制，鼓励不同的参与方贡献新的数据集或训练机器学习模型。在当前版本中，DCAI 依赖于两个主要的激励模型：
 
@@ -74,11 +74,11 @@ DCAI 不是去中心化人工智能领域中唯一相关的倡议。虽然去中
 
 **相关：**
 
-+   [This New Google Technique Help Us Understand How Neural Networks are Thinking](/2019/07/google-technique-understand-neural-networks-thinking.html)
++   This New Google Technique Help Us Understand How Neural Networks are Thinking
 
-+   [Neural Code Search: How Facebook Uses Neural Networks to Help Developers Search for Code Snippets](/2019/07/neural-code-facebook-uses-neural-networks.html)
++   Neural Code Search: How Facebook Uses Neural Networks to Help Developers Search for Code Snippets
 
-+   [Introducing Gen: MIT’s New Language That Wants to be the TensorFlow of Programmable Inference](/2019/07/introducing-gen-language-progammable-inference.html)
++   Introducing Gen: MIT’s New Language That Wants to be the TensorFlow of Programmable Inference
 
 ### 更多相关话题
 
@@ -88,8 +88,8 @@ DCAI 不是去中心化人工智能领域中唯一相关的倡议。虽然去中
 
 +   [An Intuitive Explanation of Collaborative Filtering](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)
 
-+   [有效的小型语言模型：微软的13亿参数phi-1.5](https://www.kdnuggets.com/effective-small-language-models-microsoft-phi-15)
++   [有效的小型语言模型：微软的 13 亿参数 phi-1.5](https://www.kdnuggets.com/effective-small-language-models-microsoft-phi-15)
 
-+   [使用Python自动化Microsoft Excel和Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)
++   [使用 Python 自动化 Microsoft Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)
 
-+   [为什么越来越多的开发者在机器学习项目中使用Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
++   [为什么越来越多的开发者在机器学习项目中使用 Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)

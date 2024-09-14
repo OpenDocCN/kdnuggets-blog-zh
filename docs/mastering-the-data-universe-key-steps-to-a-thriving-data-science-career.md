@@ -1,8 +1,8 @@
 # 掌握数据宇宙：成功数据科学职业的关键步骤
 
-> 原文：[https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)
+> 原文：[`www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career`](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)
 
-![掌握数据宇宙：成功数据科学职业的关键步骤](../Images/9e71d4155b36ba2b375863b1ffc1422f.png)
+![掌握数据宇宙：成功数据科学职业的关键步骤](img/9e71d4155b36ba2b375863b1ffc1422f.png)
 
 图片作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
 
 * * *
 
@@ -32,9 +32,9 @@
 
 每个数据科学职位都需要扎实的数学、统计学和编程基础。掌握如 Python 或 R 等编程语言是必不可少的。几乎每个数据科学职位的描述中都会提到这两种语言之一。
 
-我还建议你考虑将 [学习 SQL](/2023/08/sql-data-science-understanding-leveraging-joins.html) 作为基本要求。SQL 数据库是数据科学家的现实需求，它是一种相对简单的语言。
+我还建议你考虑将 学习 SQL 作为基本要求。SQL 数据库是数据科学家的现实需求，它是一种相对简单的语言。
 
-![掌握数据宇宙：成功数据科学职业的关键步骤](../Images/dce9b3aa57f40211ab7cc883c9d2a847.png)
+![掌握数据宇宙：成功数据科学职业的关键步骤](img/dce9b3aa57f40211ab7cc883c9d2a847.png)
 
 图片来自 [r/datascience](https://www.reddit.com/r/datascience/comments/s0dn5b/2022_mood/)
 
@@ -60,7 +60,7 @@
 
 你可能知道合格的数据科学家稀缺。训练营毕业生填补了这一空缺。这带来了新的问题：缺乏信任。公司知道学位不一定是做好工作的必要资格。然而，不良的训练营也给有抱负的数据科学家带来了坏名声，因为许多训练营生产出“毕业生”，他们连连接和子查询都分不清。因此，你的个人作品集是证明你具备专业知识的机会。（值得注意的是，训练营非常昂贵，尤其是相比于目前稍微不乐观的就业前景。）
 
-![掌握数据宇宙：成功的数据科学职业的关键步骤](../Images/2dce413505af9d72d7026f8d781000a0.png)
+![掌握数据宇宙：成功的数据科学职业的关键步骤](img/2dce413505af9d72d7026f8d781000a0.png)
 
 图片来自 [r/ProgrammerHumor](https://www.reddit.com/r/ProgrammerHumor/comments/z1wbkb/coding_bootcamps_be_like/)
 
@@ -78,7 +78,7 @@
 
 # 3\. 网络建设
 
-记住求职的黄金法则，无论哪个领域：潜在的[多达](https://www.cnbc.com/2019/12/27/how-to-get-a-job-often-comes-down-to-one-elite-personal-asset.html) 70% 的职位信息从未被公开。这是一个旧统计数据，但即使是20%到30%，也证明了人际关系的重要性。更不用说[三分之一](https://compensationxl.com/study-finds-that-nearly-one-third-of-job-postings-are-fake/#:~:text=COMP%20NEWS%20%E2%80%93%20An%20alarming%20survey,ad%20stays%20online%20for%20months.)的职位招聘实际上是假的，旨在让公司看起来比实际更成功。个人网络可以帮助你避免浪费时间。
+记住求职的黄金法则，无论哪个领域：潜在的[多达](https://www.cnbc.com/2019/12/27/how-to-get-a-job-often-comes-down-to-one-elite-personal-asset.html) 70% 的职位信息从未被公开。这是一个旧统计数据，但即使是 20%到 30%，也证明了人际关系的重要性。更不用说[三分之一](https://compensationxl.com/study-finds-that-nearly-one-third-of-job-postings-are-fake/#:~:text=COMP%20NEWS%20%E2%80%93%20An%20alarming%20survey,ad%20stays%20online%20for%20months.)的职位招聘实际上是假的，旨在让公司看起来比实际更成功。个人网络可以帮助你避免浪费时间。
 
 你应该做的是：
 
@@ -88,7 +88,7 @@
 
 ## 社交媒体
 
-更随意地，你还应该在LinkedIn、Twitter和相关论坛上参与分享你的工作、见解，并从他人那里学习。
+更随意地，你还应该在 LinkedIn、Twitter 和相关论坛上参与分享你的工作、见解，并从他人那里学习。
 
 # 4\. 软技能
 
@@ -102,7 +102,7 @@
 
 这几乎是一个毫无意义的流行词，所以一定要真正理解“问题解决”是什么意思。在数据科学的背景下，解决问题不仅仅是调试。还包括知道何时与不同部门合作，何时重新调整项目的技术栈以满足新规格，或在测试数据集上遇到问题时回顾你的模型。
 
-![掌握数据宇宙：数据科学职业成功的关键步骤](../Images/7dc0f3c97073cfd1eaf271ca2ffa8645.png)
+![掌握数据宇宙：数据科学职业成功的关键步骤](img/7dc0f3c97073cfd1eaf271ca2ffa8645.png)
 
 图片来源于 [r/DataScienceMemes](https://www.reddit.com/r/DataScienceMemes/comments/12g78yx/why/?utm_source=share&utm_medium=web2x&context=3)
 
@@ -116,7 +116,7 @@
 
 # 5\. 行业专业化
 
-没听说过吗？我们正处于招聘的技术寒冬中。风险投资资金流动不如从前，公司正在收紧预算。现在不是做全能型人才的好时机。你需要[专业化以求生存](/2023/08/data-scientists-need-specialize-survive-tech-winter.html)。
+没听说过吗？我们正处于招聘的技术寒冬中。风险投资资金流动不如从前，公司正在收紧预算。现在不是做全能型人才的好时机。你需要专业化以求生存。
 
 ## 选择一个利基
 
@@ -144,18 +144,18 @@
 
 即使假装存在一个单一正确答案，或者它可以在一篇文章中解释也是有些自负的。希望这篇博客文章更像是一张路线图，而不是一个全面的解决方案。练习这六大数据科学工作的支柱，你将顺利走上数据科学职业发展的道路，直到你希望的时间。
 
-[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一位数据科学家和产品战略专家。他还担任分析学的兼职教授，并且是StrataScratch的创始人，该平台帮助数据科学家通过顶级公司的真实面试问题准备面试。内特撰写有关职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有SQL相关内容。
+[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一位数据科学家和产品战略专家。他还担任分析学的兼职教授，并且是 StrataScratch 的创始人，该平台帮助数据科学家通过顶级公司的真实面试问题准备面试。内特撰写有关职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有 SQL 相关内容。
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [掌握SQL在数据科学中的应用的7个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
++   [掌握 SQL 在数据科学中的应用的 7 个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
 
-+   [掌握Python在数据科学中的应用的7个步骤](https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
++   [掌握 Python 在数据科学中的应用的 7 个步骤](https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
 
-+   [掌握数据科学项目管理的7个步骤（敏捷方法）](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握数据科学项目管理的 7 个步骤（敏捷方法）](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
-+   [掌握数据清洗和预处理技术的7个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
++   [掌握数据清洗和预处理技术的 7 个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
 
-+   [掌握使用Pandas和Python进行数据整理的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)
++   [掌握使用 Pandas 和 Python 进行数据整理的 7 个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)

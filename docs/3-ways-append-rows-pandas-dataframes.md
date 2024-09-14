@@ -1,8 +1,8 @@
 # 3 种将行附加到 Pandas 数据框的方法
 
-> 原文：[https://www.kdnuggets.com/2022/08/3-ways-append-rows-pandas-dataframes.html](https://www.kdnuggets.com/2022/08/3-ways-append-rows-pandas-dataframes.html)
+> 原文：[`www.kdnuggets.com/2022/08/3-ways-append-rows-pandas-dataframes.html`](https://www.kdnuggets.com/2022/08/3-ways-append-rows-pandas-dataframes.html)
 
-![3 种将行附加到 Pandas 数据框的方法](../Images/f702bc510b7628c87cc920b6c35fec92.png)
+![3 种将行附加到 Pandas 数据框的方法](img/f702bc510b7628c87cc920b6c35fec92.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -42,7 +42,7 @@ data1
 
 我们有五列和五行不同的行。这将是基础数据框。
 
-![3 种将行附加到 Pandas 数据框的方法](../Images/8d6eb30dd734bfbbde277c66e65d40e1.png)
+![3 种将行附加到 Pandas 数据框的方法](img/8d6eb30dd734bfbbde277c66e65d40e1.png)
 
 我们可以以 pandas Series 的形式附加行。
 
@@ -57,7 +57,7 @@ data1
 
 正如我们可以观察到的，我们已经成功地将一名学生的信息添加到数据框中。
 
-![3 种将行附加到 Pandas 数据框的方法](../Images/65a329bebcd87aecce5263e1b466a6ce.png)
+![3 种将行附加到 Pandas 数据框的方法](img/65a329bebcd87aecce5263e1b466a6ce.png)
 
 类似地，我们也可以附加一个数据框。在我们的案例中，我们创建了一个**data2**数据框，并使用**.append()**函数将多行添加到**data1**中。
 
@@ -76,7 +76,7 @@ data2 = pd.DataFrame(
 
 要查看最后五行，我们使用了**.tail()**。
 
-![3 种将行附加到 Pandas 数据框的方法](../Images/aa39a681acef6a6a7fb93b4f6b0b8a2c.png)
+![3 种将行附加到 Pandas 数据框的方法](img/aa39a681acef6a6a7fb93b4f6b0b8a2c.png)
 
 # 方法 2
 
@@ -95,7 +95,7 @@ data1.tail()
 
 ```
 
-![3 种将行附加到 Pandas 数据框的方法](../Images/95a8ca6d6634cc9dbb62a4d0ae331e47.png)
+![3 种将行附加到 Pandas 数据框的方法](img/95a8ca6d6634cc9dbb62a4d0ae331e47.png)
 
 # 方法 3
 
@@ -120,7 +120,7 @@ data3 = pd.DataFrame(
 
 正如我们所见，我们已经成功地使用**concat**函数添加了行。
 
-![将行追加到 Pandas 数据框的三种方法](../Images/09a2cf1034d843cb5eca29430e3a4202.png)
+![将行追加到 Pandas 数据框的三种方法](img/09a2cf1034d843cb5eca29430e3a4202.png)
 
 # 结论
 

@@ -1,6 +1,6 @@
 # 为什么 SQL 是数据科学中必须学习的语言
 
-> 原文：[https://www.kdnuggets.com/why-sql-is-the-language-to-learn-for-data-science](https://www.kdnuggets.com/why-sql-is-the-language-to-learn-for-data-science)
+> 原文：[`www.kdnuggets.com/why-sql-is-the-language-to-learn-for-data-science`](https://www.kdnuggets.com/why-sql-is-the-language-to-learn-for-data-science)
 
 “Python!”
 
@@ -14,15 +14,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
-![为什么 SQL 是数据科学中必须学习的语言](../Images/d98a54a7fb11bd847262bee738833435.png)
+![为什么 SQL 是数据科学中必须学习的语言](img/d98a54a7fb11bd847262bee738833435.png)
 
 图片来自 [Reddit](https://www.reddit.com/r/datascience/comments/s0dn5b/2022_mood/)
 
@@ -34,29 +34,29 @@
 
 为什么？因为 SQL 是通用的数据库查询语言。没有其他语言可以替代。想象一下，如果有人告诉你，只要你学会了某种特定的语言，你就能与地球上每个人交流和理解他们，那将是多么有价值？SQL 就是数据科学中的那种语言，所有人都用来管理和访问数据库。
 
-![为什么 SQL 是数据科学中必须学习的语言](../Images/5677a9c2c9021af41a63196bee2ff5eb.png)
+![为什么 SQL 是数据科学中必须学习的语言](img/5677a9c2c9021af41a63196bee2ff5eb.png)
 
 图片来自 [X](https://twitter.com/bennstancil/status/1486031369327292421?t=CNXJYLuoC1MUbCK3y4ADLg&s=19)
 
 每个数据科学家都需要访问和检索数据，探索数据和建立假设，过滤、聚合和排序数据。因此，每个数据科学家都需要 SQL。只要你知道 [如何编写 SQL 查询](https://www.stratascratch.com/blog/best-practices-to-write-sql-queries-how-to-structure-your-code/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+for+ds)，你将会走得很远。
 
-现在，有人正在读这篇文章并谈论NoSQL运动。确实，现在有些数据更常被存储在非关系型数据库中，比如键值对或图数据。存储数据的这种方式确实有好处——你会获得更多的可扩展性和灵活性。但没有标准的NoSQL查询语言。你可能为一个工作学会一种，接着为新工作需要学习完全不同的语言。
+现在，有人正在读这篇文章并谈论 NoSQL 运动。确实，现在有些数据更常被存储在非关系型数据库中，比如键值对或图数据。存储数据的这种方式确实有好处——你会获得更多的可扩展性和灵活性。但没有标准的 NoSQL 查询语言。你可能为一个工作学会一种，接着为新工作需要学习完全不同的语言。
 
-此外，你很少会找到完全使用NoSQL数据库的公司，而许多公司并不需要非关系型数据库。
+此外，你很少会找到完全使用 NoSQL 数据库的公司，而许多公司并不需要非关系型数据库。
 
 # 清理和处理
 
-有个著名的（[已被揭穿](https://blog.ldodds.com/2020/01/31/do-data-scientists-spend-80-of-their-time-cleaning-data-turns-out-no/)）统计数据称数据科学家将80%的时间花在清理数据上。虽然这不是真的，但我认为如果你问任何数据科学家他们花时间做什么，数据清理将排在前五位。这就是为什么这一部分是最长的。
+有个著名的（[已被揭穿](https://blog.ldodds.com/2020/01/31/do-data-scientists-spend-80-of-their-time-cleaning-data-turns-out-no/)）统计数据称数据科学家将 80%的时间花在清理数据上。虽然这不是真的，但我认为如果你问任何数据科学家他们花时间做什么，数据清理将排在前五位。这就是为什么这一部分是最长的。
 
-你可以使用其他语言清理和处理数据，但特别是SQL在某些数据清理和处理方面提供了独特的优势。
+你可以使用其他语言清理和处理数据，但特别是 SQL 在某些数据清理和处理方面提供了独特的优势。
 
-SQL的表达性查询语言允许数据科学家使用简洁的语句高效地过滤、排序和汇总数据。这种灵活性在处理大型数据集时尤其有用，因为手动数据操作会非常耗时且容易出错。相比之下，像Python这样的语言，完成类似的数据操作任务可能需要编写更多的代码，并处理循环、条件和外部库。虽然Python以其多功能性和丰富的数据科学库生态系统而闻名，但SQL的专注语法可以**加快例行的数据清理操作**，使数据科学家能够迅速准备数据进行分析。
+SQL 的表达性查询语言允许数据科学家使用简洁的语句高效地过滤、排序和汇总数据。这种灵活性在处理大型数据集时尤其有用，因为手动数据操作会非常耗时且容易出错。相比之下，像 Python 这样的语言，完成类似的数据操作任务可能需要编写更多的代码，并处理循环、条件和外部库。虽然 Python 以其多功能性和丰富的数据科学库生态系统而闻名，但 SQL 的专注语法可以**加快例行的数据清理操作**，使数据科学家能够迅速准备数据进行分析。
 
-此外，任何数据科学家都会抱怨他们存在的痛点：**缺失值**。SQL处理缺失值的功能和能力——如使用[COALESCE](https://www.stratascratch.com/blog/sql-coalesce-function-a-guide-for-postgresql-users/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+for+ds)、CASE和NULL处理——提供了直接的方法来处理数据中的空白，而不需要复杂的编程逻辑。
+此外，任何数据科学家都会抱怨他们存在的痛点：**缺失值**。SQL 处理缺失值的功能和能力——如使用[COALESCE](https://www.stratascratch.com/blog/sql-coalesce-function-a-guide-for-postgresql-users/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+for+ds)、CASE 和 NULL 处理——提供了直接的方法来处理数据中的空白，而不需要复杂的编程逻辑。
 
-数据科学家存在的另一个痛点是**重复数据**。幸运的是，SQL提供了高效的方法来识别和消除数据集中的重复记录，如`DISTINCT`关键字和`[GROUP BY](https://www.stratascratch.com/blog/what-is-sql-group-by-and-how-to-use-it/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+for+ds)`子句。
+数据科学家存在的另一个痛点是**重复数据**。幸运的是，SQL 提供了高效的方法来识别和消除数据集中的重复记录，如`DISTINCT`关键字和`[GROUP BY](https://www.stratascratch.com/blog/what-is-sql-group-by-and-how-to-use-it/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sql+for+ds)`子句。
 
-你可能听说过ETL管道。实际上，SQL可以用于创建**数据转换管道**，这些管道将原始或半处理的数据转换为适合分析的格式。这对于自动化和标准化那些我们都知道且厌恶的重复数据清理过程尤其有益。
+你可能听说过 ETL 管道。实际上，SQL 可以用于创建**数据转换管道**，这些管道将原始或半处理的数据转换为适合分析的格式。这对于自动化和标准化那些我们都知道且厌恶的重复数据清理过程尤其有益。
 
 SQL 能够**连接**来自不同数据库或文件的表，这简化了数据合并的过程，对于涉及数据集成或来自多种来源的数据聚合的项目至关重要。对于数据科学家来说，这占据了大多数项目。
 
@@ -66,7 +66,7 @@ SQL 能够**连接**来自不同数据库或文件的表，这简化了数据合
 
 现在，如果你*仅仅*知道 SQL，你在数据科学领域不会走得太远。不过幸运的是，SQL 与其他顶级数据科学语言如 R、Python、Julia 或 Rust 完美集成。你可以获得分析、数据可视化和机器学习的所有好处，同时仍保留 SQL 在数据处理方面的优势。
 
-![为什么 SQL 是数据科学中必须学习的语言](../Images/756877fb24a3fbf37ced9cc555b5f968.png)
+![为什么 SQL 是数据科学中必须学习的语言](img/756877fb24a3fbf37ced9cc555b5f968.png)
 
 图片来自 [LinkedIn](https://www.linkedin.com/posts/datawithdanny_data-analytics-sql-activity-6798074219738624000-uGXM/)
 

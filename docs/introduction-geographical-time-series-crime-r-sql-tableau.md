@@ -1,22 +1,22 @@
 # 用 R、SQL 和 Tableau 进行犯罪数据的地理时间序列预测简介
 
-> 原文：[https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html](https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
+> 原文：[`www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html`](https://www.kdnuggets.com/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
 
-[评论](#comments)
+评论
 
 **作者：[Jason Wittenauer](https://www.linkedin.com/in/jason-wittenauer-28026110/)，Huron Consulting Group 首席数据科学家**
 
-![图示](../Images/bc2c323f6a4f8e743055941894d91e80.png)
+![图示](img/bc2c323f6a4f8e743055941894d91e80.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -58,7 +58,7 @@
 
 我们的数据流如下：
 
-![](../Images/bfe4230ca0e6a8e92a27fc5e1955cff9.png)
+![](img/bfe4230ca0e6a8e92a27fc5e1955cff9.png)
 
 ### 设置数据库
 
@@ -128,7 +128,7 @@ EXEC Insert_Crime
 
 现在，我们将数据填充到“犯罪”表中。这将允许我们完成下一步，即在城市中创建一个网格并将每个犯罪分配到一个网格方块中。你会注意到我们创建了两个网格（小的和大的）。这使我们能够创建在犯罪地点及其周围区域的特征，从而基本上给出城市中的犯罪热点。
 
-![](../Images/8d08d7dfe8dbdc5e32007faf6a1c3b15.png)
+![](img/8d08d7dfe8dbdc5e32007faf6a1c3b15.png)
 
 运行以下代码以创建网格并为“犯罪”表分配 SmallGridID 和 LargeGridID：
 
@@ -144,7 +144,7 @@ EXEC Update_CrimeCoordinates
 
 1.  将所有犯罪记录分配到地图上的小方块和大方块中。
 
-创建网格方块的两个过程需要变量来确定地图的角落以及我们希望在地图上有多少个方块。这默认为200x200的小网格和100x100的大网格。
+创建网格方块的两个过程需要变量来确定地图的角落以及我们希望在地图上有多少个方块。这默认为 200x200 的小网格和 100x100 的大网格。
 
 你可以通过运行以下命令查看一些网格数据：
 
@@ -184,7 +184,7 @@ EXEC Insert_CrimeGrid
 
 在这个步骤中，我们还将创建“滞后特征”。这些将是告诉我们在过去的一天、两天、一周、一月等时间段内，网格方格中发生了多少次犯罪的列。这实际上是帮助我们进行数据的“热点”分析，这可以用来查看附近的其他网格方格，以判断犯罪是否局限于我们的单个方格或是集中在所有附近方格中，类似于地震后的余震。这些特征可能会根据你所做的建模类型而有所不同。
 
-![](../Images/17d4f4d7c22d60ce58296c4584453326.png)
+![](img/17d4f4d7c22d60ce58296c4584453326.png)
 
 ### 预测设置
 
@@ -237,7 +237,7 @@ test[] <- lapply(test, as.numeric)
 head(train) 
 ```
 
-| 目标 | GridSmallId | GridLargeId | 星期几 | 年月份 | 年中的天数 | 年 | 过去1天事件 | 过去2天事件 | 过去3天事件 | 过去7天事件 | 过去14天事件 | 过去30天事件 | 过去1天事件_大 | 过去2天事件_大 | 过去3天事件_大 | 过去7天事件_大 | 过去14天事件_大 | 过去30天事件_大 |
+| 目标 | GridSmallId | GridLargeId | 星期几 | 年月份 | 年中的天数 | 年 | 过去 1 天事件 | 过去 2 天事件 | 过去 3 天事件 | 过去 7 天事件 | 过去 14 天事件 | 过去 30 天事件 | 过去 1 天事件 _ 大 | 过去 2 天事件 _ 大 | 过去 3 天事件 _ 大 | 过去 7 天事件 _ 大 | 过去 14 天事件 _ 大 | 过去 30 天事件 _ 大 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 0 | 3780 | 990 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 | 0 | 3781 | 991 | 5 | 9 | 262 | 2013 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -398,13 +398,13 @@ importance_matrix <- xgb.importance(feature.names, model = clf)
 xgb.plot.importance(importance_matrix[1:10,]) 
 ```
 
-![](../Images/b1cbdda4a2704fd96dfb44254024086d.png)
+![](img/b1cbdda4a2704fd96dfb44254024086d.png)
 
 看起来模型使用了小网格和大网格特征的组合来判断当前日是否会发生事件。有趣的是，长期特征似乎更重要，表明该区域及其周边地区存在犯罪活动历史。
 
-### 在测试集上预测并检查ROC曲线
+### 在测试集上预测并检查 ROC 曲线
 
-最后一步是将我们的预测与测试数据集进行对比，看看效果如何。我们总是希望ROC曲线会快速而高地跃升，但这并非总是如此。在我们的例子中，只有基本特征包含在模型中，我们得到了一个不错的得分。这确实表明我们可以进行预测，并且应该投入更多时间来提高预测的准确性。
+最后一步是将我们的预测与测试数据集进行对比，看看效果如何。我们总是希望 ROC 曲线会快速而高地跃升，但这并非总是如此。在我们的例子中，只有基本特征包含在模型中，我们得到了一个不错的得分。这确实表明我们可以进行预测，并且应该投入更多时间来提高预测的准确性。
 
 ```py
 # Predict on test data
@@ -430,11 +430,11 @@ abline(h=c(0.1, 0.3, 0.5, 0.7, 0.9), col="lightgray", lty="dotted")
 lines(x=c(0, 1), y=c(0, 1), col="black", lty="dotted") 
 ```
 
-![](../Images/8aed21f0ee9d475c63d428d2786b4f2a.png)
+![](img/8aed21f0ee9d475c63d428d2786b4f2a.png)
 
 ### 审查混淆矩阵
 
-我们知道有一个不错的AUC得分，但让我们看看我们预测的结果与实际发生的情况。最简单的方法是审查混淆矩阵。我们希望左上角和右下角的框（正确预测）较大，其他框（错误预测）较小。
+我们知道有一个不错的 AUC 得分，但让我们看看我们预测的结果与实际发生的情况。最简单的方法是审查混淆矩阵。我们希望左上角和右下角的框（正确预测）较大，其他框（错误预测）较小。
 
 ```py
 # Set our cutoff threshold
@@ -473,11 +473,11 @@ Prediction      0      1
        'Positive' Class : 1 
 ```
 
-在7天内，发生了821起事件，我们的模型正确预测了367起。另一个关键点是我们错误预测了62起事件，这基本上是将警察派往我们认为可能发生犯罪的地区，但实际上没有发生。从表面上看，这似乎还不算太糟，但我们需要查看这对犯罪活动响应时间的影响与当前响应时间的对比。目标是使警察在足够接近犯罪发生的区域，以便他们可以通过存在预防犯罪或快速响应尽可能减少伤害。
+在 7 天内，发生了 821 起事件，我们的模型正确预测了 367 起。另一个关键点是我们错误预测了 62 起事件，这基本上是将警察派往我们认为可能发生犯罪的地区，但实际上没有发生。从表面上看，这似乎还不算太糟，但我们需要查看这对犯罪活动响应时间的影响与当前响应时间的对比。目标是使警察在足够接近犯罪发生的区域，以便他们可以通过存在预防犯罪或快速响应尽可能减少伤害。
 
 ### 准备报告数据
 
-接下来，我们可以为测试数据集添加经度和纬度坐标，并将其导出为CSV文件。这将使我们能够在像Tableau这样的BI工具中查看实际预测结果。
+接下来，我们可以为测试数据集添加经度和纬度坐标，并将其导出为 CSV 文件。这将使我们能够在像 Tableau 这样的 BI 工具中查看实际预测结果。
 
 ```py
 # Read in the grid coordinates
@@ -495,7 +495,7 @@ head(results)
 write.csv(results,"Data\\CrimePredictions.csv", row.names = TRUE) 
 ```
 
-| GridSmallId | 目标 | GridLargeId.x | 星期几 | 月份 | 年中的天数 | 年份 | 前一天事件 | 前两天事件 | 前三天事件 | ... | 前三天事件_大 | 前七天事件_大 | 前十四天事件_大 | 前三十天事件_大 | 预测值 | 左下纬度 | 右上纬度 | 左下经度 | 右上经度 | GridLargeId.y |
+| GridSmallId | 目标 | GridLargeId.x | 星期几 | 月份 | 年中的天数 | 年份 | 前一天事件 | 前两天事件 | 前三天事件 | ... | 前三天事件 _ 大 | 前七天事件 _ 大 | 前十四天事件 _ 大 | 前三十天事件 _ 大 | 预测值 | 左下纬度 | 右上纬度 | 左下经度 | 右上经度 | GridLargeId.y |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | 0 | 1 | 3 | 2 | 52 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689 | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |
 | 1 | 0 | 1 | 5 | 2 | 54 | 2017 | 0 | 0 | 0 | ... | 0 | 0 | 0 | 0 | 0.2822689 | 39.20041 | 39.20128 | -76.71162 | -76.7107 | 1 |
@@ -506,7 +506,7 @@ write.csv(results,"Data\\CrimePredictions.csv", row.names = TRUE)
 
 ### 预测可视化
 
-现在是时候查看这些预测在7天内实际的情况了。Tableau仪表板可以在这里找到：
+现在是时候查看这些预测在 7 天内实际的情况了。Tableau 仪表板可以在这里找到：
 
 +   [犯罪预测仪表板](https://public.tableau.com/profile/jason.wittenauer#!/vizhome/CrimePrediction_15793180506290/CrimeMap)
 
@@ -514,11 +514,11 @@ write.csv(results,"Data\\CrimePredictions.csv", row.names = TRUE)
 
 **错误预测**
 
-![](../Images/216313171b15f9150960b9cb675e7d6d.png)
+![](img/216313171b15f9150960b9cb675e7d6d.png)
 
 **错误和正确预测**
 
-![](../Images/189e5980bb99f292bce1fae6eaed223e.png)
+![](img/189e5980bb99f292bce1fae6eaed223e.png)
 
 总体来看情况似乎还不错，但我们需要更多的特征和/或更多的数据来捕捉所有缺失的预测。此外，我们可能还可以做更多的工作，专注于发生的特定犯罪类型，并针对每种类型进行具体的预测建模。
 
@@ -542,11 +542,11 @@ write.csv(results,"Data\\CrimePredictions.csv", row.names = TRUE)
 
 **相关：**
 
-+   [使用时间序列分析进行股票市场预测](/2020/01/stock-market-forecasting-time-series-analysis.html)
++   使用时间序列分析进行股票市场预测
 
-+   [你需要知道的：现代开源数据科学/机器学习生态系统](/2019/06/top-data-science-machine-learning-tools.html)
++   你需要知道的：现代开源数据科学/机器学习生态系统
 
-+   [正义不能盲目：如何通过预测警务对抗偏见](/2018/02/fight-bias-predictive-policing.html)
++   正义不能盲目：如何通过预测警务对抗偏见
 
 ### 更多相关话题
 
@@ -560,4 +560,4 @@ write.csv(results,"Data\\CrimePredictions.csv", row.names = TRUE)
 
 +   [最常用的 10 个 Tableau 函数](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)
 
-+   [KDnuggets 新闻，8月3日：最常用的 10 个 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：最常用的 10 个 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)

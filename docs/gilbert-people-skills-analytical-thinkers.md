@@ -1,6 +1,6 @@
 # 分析型思维者的沟通技巧
 
-> 原文：[https://www.kdnuggets.com/2021/02/gilbert-people-skills-analytical-thinkers.html](https://www.kdnuggets.com/2021/02/gilbert-people-skills-analytical-thinkers.html)
+> 原文：[`www.kdnuggets.com/2021/02/gilbert-people-skills-analytical-thinkers.html`](https://www.kdnuggets.com/2021/02/gilbert-people-skills-analytical-thinkers.html)
 
 你的分析技能极其宝贵——尤其是在数据工作中。
 
@@ -18,11 +18,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -32,7 +32,7 @@
 
 提升这些技能的一个绝佳方法是阅读吉尔伯特·艾克伦布的新书：[**分析型思维者的沟通技巧**](https://www.mindspeaking.com/book)。
 
-[![吉尔伯特 人际交往技巧 分析型思维者](../Images/279a28dea6aa671cbe78e2b905f23935.png)](https://www.mindspeaking.com/book)
+![吉尔伯特 人际交往技巧 分析型思维者](https://www.mindspeaking.com/book)
 
 这不仅仅是一本关于沟通的书：它以分析语言写成。通过数据和算法的隐喻，你将加深对人类行为的理解。写作风格使其易于阅读。
 
@@ -52,7 +52,7 @@
 
 作为前职业扑克玩家，你可以在[吉尔伯特·艾克伦布](https://www.linkedin.com/in/eijkelenboom/)的职业生涯中发现心理学与数据的交汇点。虽然吉尔伯特的学术背景是行为科学，但他在分析咨询领域建立了职业生涯。结合这两个领域，吉尔伯特创办了公司[MindSpeaking](https://www.mindspeaking.com/)：数据科学与分析的软技能。
 
-他喜欢帮助数据专业人士利用他们的数据技能产生更大的影响。除了培训，吉尔伯特还喜欢写作。去年，他出版了畅销书《"[分析型思维者的沟通技巧](https://www.mindspeaking.com/book)"》，他的在线内容每年吸引超过1,000,000次浏览。
+他喜欢帮助数据专业人士利用他们的数据技能产生更大的影响。除了培训，吉尔伯特还喜欢写作。去年，他出版了畅销书《"[分析型思维者的沟通技巧](https://www.mindspeaking.com/book)"》，他的在线内容每年吸引超过 1,000,000 次浏览。
 
 ### 相关话题
 

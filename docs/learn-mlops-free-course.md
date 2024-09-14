@@ -1,8 +1,8 @@
 # 通过这个免费课程学习 MLOps
 
-> 原文：[https://www.kdnuggets.com/2022/06/learn-mlops-free-course.html](https://www.kdnuggets.com/2022/06/learn-mlops-free-course.html)
+> 原文：[`www.kdnuggets.com/2022/06/learn-mlops-free-course.html`](https://www.kdnuggets.com/2022/06/learn-mlops-free-course.html)
 
-![DataTalks.Club 免费 MLOps 课程概述](../Images/d603db3975589c99900b22e1abf5ac1f.png)
+![DataTalks.Club 免费 MLOps 课程概述](img/d603db3975589c99900b22e1abf5ac1f.png)
 
 作者提供的图片 | Canva Pro
 
@@ -22,11 +22,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

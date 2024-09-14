@@ -1,12 +1,12 @@
 # 创建好的有意义的图表：一些原则
 
-> 原文：[https://www.kdnuggets.com/2021/01/creating-good-meaningful-plots-principles.html](https://www.kdnuggets.com/2021/01/creating-good-meaningful-plots-principles.html)
+> 原文：[`www.kdnuggets.com/2021/01/creating-good-meaningful-plots-principles.html`](https://www.kdnuggets.com/2021/01/creating-good-meaningful-plots-principles.html)
 
-[评论](#comments)
+评论
 
 **作者：[Vikrant Dogra](http://www.linkedin.com/in/vikrantdogra01)，数据科学、分析和洞察专家**
 
-![图](../Images/a109615fc7c838832dc2b5b8e1e9acc9.png)
+![图](img/a109615fc7c838832dc2b5b8e1e9acc9.png)
 
 照片由 [Luke Porter](https://unsplash.com/@lukeporter?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -18,7 +18,7 @@
 
 图通常包括主图区域（显示图表的地方）、坐标轴（例如 x 轴、y 轴）、坐标轴的描述，包括用于解释数据的标记/标签（例如刻度、刻度标签）以及在需要时，用于区分子组的图例。
 
-![图](../Images/86123664ef01be24f5d16dcd8a6fc7de.png)
+![图](img/86123664ef01be24f5d16dcd8a6fc7de.png)
 
 *图像来源于作者*
 
@@ -66,7 +66,7 @@
 
 ### *条形图（用于分类变量）*
 
-![图形](../Images/2fc1a3fb25048293e616236d229919de.png)
+![图形](img/2fc1a3fb25048293e616236d229919de.png)
 
 *作者提供的图片*
 
@@ -78,7 +78,7 @@
 
 ### *直方图（用于连续变量）*
 
-![图形](../Images/2f33086aef85c586b414f4ae22de721b.png)
+![图形](img/2f33086aef85c586b414f4ae22de721b.png)
 
 *作者提供的图片*
 
@@ -88,7 +88,7 @@
 
 ### *密度/分布图*
 
-![图形](../Images/b23b4ba03d92671fac9aef952ace8a1f.png)
+![图形](img/b23b4ba03d92671fac9aef952ace8a1f.png)
 
 *作者提供的图片*
 
@@ -98,7 +98,7 @@
 
 ### *词云*
 
-![图形](../Images/14fb07f2c3be05d8861b9f73e33f6a3b.png)
+![图形](img/14fb07f2c3be05d8861b9f73e33f6a3b.png)
 
 *作者提供的图片*
 
@@ -108,17 +108,17 @@
 
 ### *饼图*
 
-![图形](../Images/a53f979d7bcc9b3bb13a105e8b3ebda0.png)
+![图形](img/a53f979d7bcc9b3bb13a105e8b3ebda0.png)
 
 *作者提供的图片*
 
 +   如果类别超过三个，使用条形图而不是饼图。
 
-+   饼图的问题在数据科学社区已经很明确，但大多数商业界人士仍然喜欢饼图（及甜甜圈图）。这可能是因为饼图总是加起来100%，而条形图可能不会。对于适合饼图的数据，我怀疑许多条形图的支持者（相对于饼图）忘记提到他们的条形图的列加起来是100%。
++   饼图的问题在数据科学社区已经很明确，但大多数商业界人士仍然喜欢饼图（及甜甜圈图）。这可能是因为饼图总是加起来 100%，而条形图可能不会。对于适合饼图的数据，我怀疑许多条形图的支持者（相对于饼图）忘记提到他们的条形图的列加起来是 100%。
 
 ### *箱线图*
 
-![图示](../Images/5ecd51c84e99a9316f774f2c4819c6f4.png)
+![图示](img/5ecd51c84e99a9316f774f2c4819c6f4.png)
 
 *作者提供的图片*
 
@@ -128,17 +128,17 @@
 
 ### *时间序列图*
 
-![图示](../Images/dfc339105ef764e35899f8be02b07123.png)
+![图示](img/dfc339105ef764e35899f8be02b07123.png)
 
 *作者提供的图片*
 
-+   这些图自然会重复出现模式。因此，对于跨越多年的每月数据——可以按月份（x轴）显示堆积（按年）的版本。这应该有助于读者注意到趋势和季节性。
++   这些图自然会重复出现模式。因此，对于跨越多年的每月数据——可以按月份（x 轴）显示堆积（按年）的版本。这应该有助于读者注意到趋势和季节性。
 
-+   如果存在周期，你可以通过显示一条跨越年份x月份的单线图来展示
++   如果存在周期，你可以通过显示一条跨越年份 x 月份的单线图来展示
 
 ### *散点图*
 
-![图示](../Images/5fe86426f5fff04969e55d29eb104df1.png)
+![图示](img/5fe86426f5fff04969e55d29eb104df1.png)
 
 *作者提供的图片*
 
@@ -146,11 +146,11 @@
 
 +   拟合模型并附上置信区间。如果需要，请提及模型规范
 
-+   帮助最终用户轻松读取数据点：独立为X和Y变量使用锚点/截断点，例如均值、中位数、四分位数、极值（例如底部/顶部10%）。在显示这些线时，也尽量提及数值
++   帮助最终用户轻松读取数据点：独立为 X 和 Y 变量使用锚点/截断点，例如均值、中位数、四分位数、极值（例如底部/顶部 10%）。在显示这些线时，也尽量提及数值
 
 +   突出显示感兴趣的数据点，例如为点着色，显示数据标签
 
-+   甚至可以显示边际图，例如x变量和y变量下方的箱线图或直方图
++   甚至可以显示边际图，例如 x 变量和 y 变量下方的箱线图或直方图
 
 ### 共同点：改善图表的重点区域
 
@@ -172,9 +172,9 @@
 
 +   间隔：设置良好的刻度间隔是至关重要的。过度使用会使这些刻度无法读取图表。然而，适当的刻度数量可以帮助创建矩形块的心理图，以更快、更好地读取数据
 
-*轴：y轴*
+*轴：y 轴*
 
-+   是否需要：有时你可以去掉y轴线本身（包括标题和刻度）。例如，条形图（对于分类变量），如果你在条形上方显示数据标签，则不需要y轴线/标题/刻度。
++   是否需要：有时你可以去掉 y 轴线本身（包括标题和刻度）。例如，条形图（对于分类变量），如果你在条形上方显示数据标签，则不需要 y 轴线/标题/刻度。
 
 ### 图例
 
@@ -186,7 +186,7 @@
 
 *主要图形：数据标签*
 
-+   使用时机：尽可能展示数据。例如，对于条形图；对于散点图，理想情况下仅显示极端值，例如底部5%和顶部5%。
++   使用时机：尽可能展示数据。例如，对于条形图；对于散点图，理想情况下仅显示极端值，例如底部 5%和顶部 5%。
 
 *主要图形：工具提示*
 
@@ -206,7 +206,7 @@
 
 *增强：参考/锚点*
 
-+   如何使用：显示表示例如均值、中位数、四分位数、极端5%（低端和高端）、中间80%等的锚点线
++   如何使用：显示表示例如均值、中位数、四分位数、极端 5%（低端和高端）、中间 80%等的锚点线
 
 *增强：突出显示差距*
 
@@ -224,25 +224,25 @@
 
 内化某物的最佳方式是通过实验，从这些实验中学习，通过尝试各种选项/组合并查看哪种方式对你最有效。
 
-为了获得实践经验，我从头开始创建了两个几乎相同的散点图——一个使用R，另一个使用Python。我这样做是为了最小化关于R与Python的争论，并帮助你专注于实验核心概念，制作良好的有意义的图形。
+为了获得实践经验，我从头开始创建了两个几乎相同的散点图——一个使用 R，另一个使用 Python。我这样做是为了最小化关于 R 与 Python 的争论，并帮助你专注于实验核心概念，制作良好的有意义的图形。
 
 为什么选择散点图？：它们是最具挑战性的图形之一，因为数据点很多——每个都单独表示。因此，制作有意义的散点图需要做很多工作。
 
 *关于这些绘图应用程序的一点说明：*
 
-**散点图（使用R）：**[使用应用程序](https://vikrant.shinyapps.io/scatterplot_r/)
+**散点图（使用 R）：**[使用应用程序](https://vikrant.shinyapps.io/scatterplot_r/)
 
 *基础图形使用*[*R*](https://cran.r-project.org/)*和*[*ggplot2*](https://ggplot2.tidyverse.org/)*可视化库创建。该图形随后被转换为网络应用程序，使用*[*R shiny*](https://shiny.rstudio.com/)*并托管在*[*shinyapps.io*](https://www.shinyapps.io/)*
 
-![图像](../Images/4ddb321566c0d0d7556f137b51bd59bf.png)
+![图像](img/4ddb321566c0d0d7556f137b51bd59bf.png)
 
 散点图- R 应用（作者提供的图片）
 
 **散点图（使用 Python）：**[使用应用程序](https://vikrant-scatterplot-py.herokuapp.com/)
 
-*基础图表使用*[*python*](https://www.python.org/)*和*[*plotly*](https://plotly.com/)*可视化库创建（为了生成本地回归模型，我使用了*[*scikit-misc库*](https://pypi.org/project/scikit-misc/)*）。然后，使用*[*streamlit.io*](https://www.streamlit.io/)*将此图表转换为Web应用程序，并托管在*[*heroku*](https://www.heroku.com/)*上。*
+*基础图表使用*[*python*](https://www.python.org/)*和*[*plotly*](https://plotly.com/)*可视化库创建（为了生成本地回归模型，我使用了*[*scikit-misc 库*](https://pypi.org/project/scikit-misc/)*）。然后，使用*[*streamlit.io*](https://www.streamlit.io/)*将此图表转换为 Web 应用程序，并托管在*[*heroku*](https://www.heroku.com/)*上。*
 
-![图像](../Images/c46bf86c919af39e700949418ed00131.png)
+![图像](img/c46bf86c919af39e700949418ed00131.png)
 
 散点图- Python 应用（作者提供的图片）
 
@@ -260,21 +260,21 @@
 
 **相关内容：**
 
-+   [数据科学、数据可视化与机器学习的顶级Python库](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   数据科学、数据可视化与机器学习的顶级 Python 库
 
-+   [14个数据科学项目来提升你的技能](/2020/12/14-data-science-projects-improve-skills.html)
++   14 个数据科学项目来提升你的技能
 
-+   [TabPy: 结合Python与Tableau](/2020/11/tabpy-combining-python-tableau.html)
++   TabPy: 结合 Python 与 Tableau
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 

@@ -1,28 +1,28 @@
-# 机器学习项目失败的5个主要原因
+# 机器学习项目失败的 5 个主要原因
 
-> 原文：[https://www.kdnuggets.com/2021/01/top-5-reasons-why-machine-learning-projects-fail.html](https://www.kdnuggets.com/2021/01/top-5-reasons-why-machine-learning-projects-fail.html)
+> 原文：[`www.kdnuggets.com/2021/01/top-5-reasons-why-machine-learning-projects-fail.html`](https://www.kdnuggets.com/2021/01/top-5-reasons-why-machine-learning-projects-fail.html)
 
-[评论](#comments)
+评论
 
-**作者 [Sudeep Srivastava](https://appinventiv.com/)，Appinventiv首席执行官**
+**作者 [Sudeep Srivastava](https://appinventiv.com/)，Appinventiv 首席执行官**
 
-![图片](../Images/cc23c6cb8c2d8f8709b89e70f9f3c674.png)
+![图片](img/cc23c6cb8c2d8f8709b89e70f9f3c674.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 随着每份趋势报告将机器学习吹捧为有助于增长的技术，能够使各行业（跨部门和区域）对客户和收入更加友好，组织们也在效仿，并加倍努力采用机器学习。
 
-尽管[机器学习应用开发项目](https://appinventiv.com/blog/machine-learning-app-development/)的数量明显增加，但项目失败的数量也几乎相等。机器学习项目失败率的增加在许多方面使得拥有出色AI想法的新企业避免实施这些想法。
+尽管[机器学习应用开发项目](https://appinventiv.com/blog/machine-learning-app-development/)的数量明显增加，但项目失败的数量也几乎相等。机器学习项目失败率的增加在许多方面使得拥有出色 AI 想法的新企业避免实施这些想法。
 
 我们今天文章的意图是帮助你了解机器学习项目失败的许多原因。我们希望这些信息能帮助你规划一个更好的实施方案，从而在机器学习执行的三个阶段：项目前期、项目实施期间和项目后期，降低失败的几率。
 
@@ -30,11 +30,11 @@
 
 **1\. 数据不足**
 
-如果图表能告诉你什么，那就是成功的机器学习项目需要大量的数据。为了[成功的机器学习项目](/2015/12/top-10-machine-learning-github.html)，企业需要访问干净的数据——相关、有用、无误差且易于访问的数据。
+如果图表能告诉你什么，那就是成功的机器学习项目需要大量的数据。为了成功的机器学习项目，企业需要访问干净的数据——相关、有用、无误差且易于访问的数据。
 
 除了拥有干净、结构化的数据外，数据还必须在一个地方——数据仓库、数据湖或某个数据平台——中随时可用，以便进行短期任务和大规模培训。
 
-![图片](../Images/b447151508638de682e479428112168d.png)
+![图片](img/b447151508638de682e479428112168d.png)
 
 **2\. 机器学习模型与遗留系统不同步**
 
@@ -44,7 +44,7 @@
 
 **3\. 数据科学家不足**
 
-市场上数据科学家严重短缺。虽然有很多工程师完成课程并自称为数据科学家，但真正具备深入分析复杂机器学习项目的技能的人极其有限。根据[2020年企业机器学习状况报告](https://info.algorithmia.com/2020?utm_medium=blog&utm_source=blog&utm_campaign=IC-1912-2020-State-of-ML)，虽然对机器学习专家的需求持续上升，但在填补这一角色方面的供应却急剧短缺。
+市场上数据科学家严重短缺。虽然有很多工程师完成课程并自称为数据科学家，但真正具备深入分析复杂机器学习项目的技能的人极其有限。根据[2020 年企业机器学习状况报告](https://info.algorithmia.com/2020?utm_medium=blog&utm_source=blog&utm_campaign=IC-1912-2020-State-of-ML)，虽然对机器学习专家的需求持续上升，但在填补这一角色方面的供应却急剧短缺。
 
 **4\. 更新困难**
 
@@ -74,11 +74,11 @@
 
 **相关：**
 
-+   [当良好的数据分析未能交付预期结果时](/2020/11/good-data-analyses-fail.html)
++   当良好的数据分析未能交付预期结果时
 
-+   [学习构建一个端到端的数据科学项目](/2020/11/build-data-science-project.html)
++   学习构建一个端到端的数据科学项目
 
-+   [想成为数据科学家？不要从机器学习开始](/2021/01/data-scientist-dont-start-machine-learning.html)
++   想成为数据科学家？不要从机器学习开始
 
 ### 相关阅读
 

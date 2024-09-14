@@ -1,22 +1,22 @@
 # 人工智能简史
 
-> 原文：[https://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html](https://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html)
+> 原文：[`www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html`](https://www.kdnuggets.com/2017/04/brief-history-artificial-intelligence.html)
 
-![人工智能历史](../Images/c4e564f5732d94995ba3db07fb2a26f7.png)
+![人工智能历史](img/c4e564f5732d94995ba3db07fb2a26f7.png)
 
 ### I. 起源
 
-尽管目前的炒作很多，人工智能并不是一个新兴领域，而是起源于五十年代。如果排除从古希腊到霍布斯、莱布尼茨和帕斯卡的纯哲学推理路径，人工智能作为我们所知的领域在**1956年于达特茅斯学院**正式开始，最杰出的专家们聚集在一起进行智能模拟的头脑风暴。
+尽管目前的炒作很多，人工智能并不是一个新兴领域，而是起源于五十年代。如果排除从古希腊到霍布斯、莱布尼茨和帕斯卡的纯哲学推理路径，人工智能作为我们所知的领域在**1956 年于达特茅斯学院**正式开始，最杰出的专家们聚集在一起进行智能模拟的头脑风暴。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -34,9 +34,9 @@
 
 1.  人工智能在掌握某个问题后的表现被低估，不断重新定义什么是智能。
 
-在美国，DARPA资助人工智能研究的原因主要是为了创造一个*完美的机器翻译器*，但两个连续事件破坏了这个提案，开启了后来被称为第一次*人工智能寒冬*的时期。
+在美国，DARPA 资助人工智能研究的原因主要是为了创造一个*完美的机器翻译器*，但两个连续事件破坏了这个提案，开启了后来被称为第一次*人工智能寒冬*的时期。
 
-实际上，美国**自动语言处理咨询委员会（ALPAC）**于1966年发布的报告，随后是“**莱特希尔报告（1973）**”，评估了人工智能在当前发展下的可行性，并对创建能够学习或被认为是智能的机器的可能性作出了否定结论。
+实际上，美国**自动语言处理咨询委员会（ALPAC）**于 1966 年发布的报告，随后是“**莱特希尔报告（1973）**”，评估了人工智能在当前发展下的可行性，并对创建能够学习或被认为是智能的机器的可能性作出了否定结论。
 
 这两份报告，加上有限的数据供给算法使用，以及那个时期计算能力的匮乏，使得这一领域崩溃，人工智能在整个十年中陷入了耻辱。
 
@@ -46,31 +46,31 @@
 
 这些程序实际上能够模拟特定领域的专家技能，但这已经足以刺激新的资助趋势。在这些年里，最活跃的参与者是日本政府，其急于创建第五代计算机间接迫使美国和英国重新恢复对人工智能研究的资助。
 
-然而，这一黄金时代并没有持续太久，当资助目标未能实现时，新的危机开始了。在1987年，个人计算机变得比***Lisp Machine***更强大，而***Lisp Machine***是多年来人工智能研究的成果。这标志着***第二次人工智能寒冬***的开始，DARPA明确反对人工智能和进一步资助。
+然而，这一黄金时代并没有持续太久，当资助目标未能实现时，新的危机开始了。在 1987 年，个人计算机变得比***Lisp Machine***更强大，而***Lisp Machine***是多年来人工智能研究的成果。这标志着***第二次人工智能寒冬***的开始，DARPA 明确反对人工智能和进一步资助。
 
 ### IV. Jed(AI)的回归
 
-幸运的是，1993年这一时期以**MIT Cog项目**的结束告终，该项目旨在构建一个类人机器人，还有动态分析和重规划工具（DART）——这一工具为美国政府自1950年以来的全部资助支付了回报——当1997年DeepBlue在国际象棋中击败了卡斯帕罗夫时，人工智能显然重回巅峰。
+幸运的是，1993 年这一时期以**MIT Cog 项目**的结束告终，该项目旨在构建一个类人机器人，还有动态分析和重规划工具（DART）——这一工具为美国政府自 1950 年以来的全部资助支付了回报——当 1997 年 DeepBlue 在国际象棋中击败了卡斯帕罗夫时，人工智能显然重回巅峰。
 
 在过去二十年中，学术研究取得了很多进展，但人工智能直到最近才被公认为一种范式转变。当然，有一系列原因可以帮助我们理解为什么我们现在在人工智能方面投入如此之多，但我们认为有一个特定事件对过去五年的趋势负有责任。
 
-如果我们查看下面的图表，会注意到尽管取得了所有这些进展，人工智能直到2012年底才被广泛认可。该图表确实是使用CBInsights Trends创建的，它基本上绘制了特定词汇或主题（在这种情况下是人工智能和机器学习）的趋势。
+如果我们查看下面的图表，会注意到尽管取得了所有这些进展，人工智能直到 2012 年底才被广泛认可。该图表确实是使用 CBInsights Trends 创建的，它基本上绘制了特定词汇或主题（在这种情况下是人工智能和机器学习）的趋势。
 
-![](../Images/8c01fb6331801bf71fe046861127ef13.png)
+![](img/8c01fb6331801bf71fe046861127ef13.png)
 
-2012–2016年的人工智能趋势。
+2012–2016 年的人工智能趋势。
 
-更详细地说，我在一个特定的日期上划了一条线，我认为这是这股新人工智能乐观潮流的真正触发点，即**2012年12月4日**。在那天星期二，一组研究人员在神经信息处理系统（NIPS）会议上展示了他们的卷积神经网络的详细信息，这使他们在几周前的**ImageNet 分类**竞赛中获得了第一名（Krizhevsky et al., 2012）。他们的工作将分类算法**从72%提高到85%**，并将神经网络的使用确立为人工智能的基础。
+更详细地说，我在一个特定的日期上划了一条线，我认为这是这股新人工智能乐观潮流的真正触发点，即**2012 年 12 月 4 日**。在那天星期二，一组研究人员在神经信息处理系统（NIPS）会议上展示了他们的卷积神经网络的详细信息，这使他们在几周前的**ImageNet 分类**竞赛中获得了第一名（Krizhevsky et al., 2012）。他们的工作将分类算法**从 72%提高到 85%**，并将神经网络的使用确立为人工智能的基础。
 
-在不到两年的时间里，该领域的进展使得 ImageNet 竞赛中的分类达到了**96%的准确率，略高于人类的约95%**。
+在不到两年的时间里，该领域的进展使得 ImageNet 竞赛中的分类达到了**96%的准确率，略高于人类的约 95%**。
 
 图片还展示了 AI 发展的三大主要增长趋势（断裂的虚线），由三大事件概述：
 
-1.  3岁的**DeepMind**于2014年1月被谷歌收购；
+1.  3 岁的**DeepMind**于 2014 年 1 月被谷歌收购；
 
-1.  **生命未来研究所**的公开信由超过8,000人签署，及Deepmind于2015年2月发布的强化学习研究（Mnih et al., 2015）；
+1.  **生命未来研究所**的公开信由超过 8,000 人签署，及 Deepmind 于 2015 年 2 月发布的强化学习研究（Mnih et al., 2015）；
 
-1.  2016年1月DeepMind科学家在《自然》上发表的关于**神经网络**的论文（Silver et al., 2016），以及2016年3月AlphaGo战胜李世石的令人印象深刻的胜利（后续还有一系列[其他令人印象深刻的成就](https://medium.com/on-coding/the-state-of-ai-9aae385c2038#.gcg3ceqbj)——查看[Ed Newton-Rex](https://medium.com/@ednewtonrex)的文章）。
+1.  2016 年 1 月 DeepMind 科学家在《自然》上发表的关于**神经网络**的论文（Silver et al., 2016），以及 2016 年 3 月 AlphaGo 战胜李世石的令人印象深刻的胜利（后续还有一系列[其他令人印象深刻的成就](https://medium.com/on-coding/the-state-of-ai-9aae385c2038#.gcg3ceqbj)——查看[Ed Newton-Rex](https://medium.com/@ednewtonrex)的文章）。
 
 ### V. 新的希望
 
@@ -90,7 +90,7 @@ AI 本质上高度依赖资金，因为它是一个**长期研究领域**，需�
 
 +   Dhar, V. (2016). “人工智能的未来”。《大数据》，4(1): 5–9。
 
-+   Krizhevsky, A., Sutskever, I., Hinton, G.E. (2012). “使用深度卷积神经网络进行Imagenet分类”。《神经信息处理系统进展》，1097–1105。
++   Krizhevsky, A., Sutskever, I., Hinton, G.E. (2012). “使用深度卷积神经网络进行 Imagenet 分类”。《神经信息处理系统进展》，1097–1105。
 
 +   Lighthill, J. (1973). “人工智能：概述”。在《人工智能：论文研讨会》，科学研究委员会。
 
@@ -108,11 +108,11 @@ AI 本质上高度依赖资金，因为它是一个**长期研究领域**，需�
 
 **相关内容：**
 
-+   [50家引领AI革命的公司，详细介绍](/2017/03/50-companies-leading-ai-revolution-detailed.html)
++   50 家引领 AI 革命的公司，详细介绍
 
-+   [数据挖掘的历史](/2016/06/rayli-history-data-mining.html)
++   数据挖掘的历史
 
-+   [为何要在人工智能上长线投资？](/2017/02/long-artificial-intelligence.html)
++   为何要在人工智能上长线投资？
 
 ### 更多相关主题
 
@@ -120,10 +120,10 @@ AI 本质上高度依赖资金，因为它是一个**长期研究领域**，需�
 
 +   [停止学习数据科学以寻找目标，并寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个可靠的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)

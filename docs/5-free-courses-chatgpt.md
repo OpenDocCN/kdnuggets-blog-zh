@@ -1,8 +1,8 @@
 # 5 个免费的 ChatGPT 课程
 
-> 原文：[https://www.kdnuggets.com/2023/07/5-free-courses-chatgpt.html](https://www.kdnuggets.com/2023/07/5-free-courses-chatgpt.html)
+> 原文：[`www.kdnuggets.com/2023/07/5-free-courses-chatgpt.html`](https://www.kdnuggets.com/2023/07/5-free-courses-chatgpt.html)
 
-![5 个免费的 ChatGPT 课程](../Images/db8794210d6ea330cecdc6d7b955fbd9.png)
+![5 个免费的 ChatGPT 课程](img/db8794210d6ea330cecdc6d7b955fbd9.png)
 
 你可能听说过很多关于 ChatGPT 的事情，使用过它，也听说过人们用它做的各种疯狂的事情。你可能会想，这些人是如何学会使用 ChatGPT 的，我该从哪里学习？
 
@@ -72,6 +72,6 @@
 
 +   [通过这些课程构建类似 ChatGPT 的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
 
-+   [实际上免费的免费课程：AI与机器学习版](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)
++   [实际上免费的免费课程：AI 与机器学习版](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)
 
 +   [GPT4All 是你文档的本地 ChatGPT，并且它是免费的！](https://www.kdnuggets.com/2023/06/gpt4all-local-chatgpt-documents-free.html)

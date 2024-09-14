@@ -1,22 +1,22 @@
-# 7个数据分析面试问题及答案
+# 7 个数据分析面试问题及答案
 
-> 原文：[https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
+> 原文：[`www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html`](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
 
-![7个数据分析面试问题及答案](../Images/edd97f9f2bb628dc60225b07e77c0f46.png)
+![7 个数据分析面试问题及答案](img/edd97f9f2bb628dc60225b07e77c0f46.png)
 
 图片由作者提供
 
-数据分析面试分为多个部分，如非技术性、技术性和SQL。招聘经理将评估你对统计工具和概念的了解。此外，你还会被问到情境问题，要求你解释如何准备分析报告、清理数据或进行图表解读。
+数据分析面试分为多个部分，如非技术性、技术性和 SQL。招聘经理将评估你对统计工具和概念的了解。此外，你还会被问到情境问题，要求你解释如何准备分析报告、清理数据或进行图表解读。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -68,11 +68,11 @@
 
 # SQL 问题
 
-## 6\. 创建一个SQL查询，从employee_details中检索重复记录，忽略主键和EmpId。
+## 6\. 创建一个 SQL 查询，从 employee_details 中检索重复记录，忽略主键和 EmpId。
 
-解决方案很简单。你将选择所需的列并计算（*Count(*)*）。之后，按唯一标识进行分组，例如员工姓名、经理ID、入职日期和城市。然后使用*HAVING*来筛选重复项。如果*Count(*)*值大于1，则为重复记录。
+解决方案很简单。你将选择所需的列并计算（*Count(*)*）。之后，按唯一标识进行分组，例如员工姓名、经理 ID、入职日期和城市。然后使用*HAVING*来筛选重复项。如果*Count(*)*值大于 1，则为重复记录。
 
-你可以将相同的策略应用于任何表。确保按多个唯一ID列（例如姓名和地址）对表进行分组。
+你可以将相同的策略应用于任何表。确保按多个唯一 ID 列（例如姓名和地址）对表进行分组。
 
 **解决方案**：
 
@@ -90,7 +90,7 @@ GROUP BY fullname,
 HAVING COUNT(*) > 1;
 ```
 
-## 7\. 编写一个SQL查询，以查找在其演示文稿中插入了1000到2000张图像的用户数量
+## 7\. 编写一个 SQL 查询，以查找在其演示文稿中插入了 1000 到 2000 张图像的用户数量
 
 **表**: event_log
 
@@ -101,9 +101,9 @@ HAVING COUNT(*) > 1;
 | 9566 | 1535308476 |
 | … | … |
 
-解决方案简单但棘手。首先，你需要计算每个用户的图像数量，然后计算图像数量在1000到2000之间的用户数量。
+解决方案简单但棘手。首先，你需要计算每个用户的图像数量，然后计算图像数量在 1000 到 2000 之间的用户数量。
 
-内部查询将计算**event_date_time**并按**user_id**分组，以找到每个用户的唯一用户 ID 和每个用户的图像数量。之后，创建外部查询，筛选出图像数量在1000到2000之间的用户，并计算他们的数量。
+内部查询将计算**event_date_time**并按**user_id**分组，以找到每个用户的唯一用户 ID 和每个用户的图像数量。之后，创建外部查询，筛选出图像数量在 1000 到 2000 之间的用户，并计算他们的数量。
 
 **解决方案**：
 
@@ -120,13 +120,13 @@ WHERE image_per_user < 2000
 
 ## 参考
 
-+   [前60名数据分析师面试问题及答案](https://www.simplilearn.com/tutorials/data-analytics-tutorial/data-analyst-interview-questions)
++   [前 60 名数据分析师面试问题及答案](https://www.simplilearn.com/tutorials/data-analytics-tutorial/data-analyst-interview-questions)
 
-+   [初创公司数据分析师面试的4个案例研究问题](https://www.holistics.io/blog/startup-data-analyst-interview-case-studies/)
++   [初创公司数据分析师面试的 4 个案例研究问题](https://www.holistics.io/blog/startup-data-analyst-interview-case-studies/)
 
-+   [15个数据分析师面试问题及答案](https://www.coursera.org/articles/data-analyst-interview-questions-and-answers)
++   [15 个数据分析师面试问题及答案](https://www.coursera.org/articles/data-analyst-interview-questions-and-answers)
 
-+   [30个数据分析师的SQL面试问题及答案](https://www.projectpro.io/article/sql-interview-questions-and-answers-for-data-analyst/484)
++   [30 个数据分析师的 SQL 面试问题及答案](https://www.projectpro.io/article/sql-interview-questions-and-answers-for-data-analyst/484)
 
 +   [SQL 面试问题：数据分析师的 3 个技术筛选练习](https://data36.com/sql-interview-questions-tech-screening-data-analysts/)
 
@@ -146,11 +146,11 @@ WHERE image_per_user < 2000
 
 +   [15 道你必须知道的 Python 编程面试题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-![](../Images/eb105b2b614c4a6165d83fbc2b9711a1.png)
+![](img/eb105b2b614c4a6165d83fbc2b9711a1.png)
 
 [](/news/subscribe.html)
 
-[获取免费的电子书《伟大的自然语言处理入门》和《数据科学备忘单全集》，以及有关数据科学、机器学习、人工智能和分析的领先新闻直达你的邮箱。](/news/subscribe.html)
+获取免费的电子书《伟大的自然语言处理入门》和《数据科学备忘单全集》，以及有关数据科学、机器学习、人工智能和分析的领先新闻直达你的邮箱。
 
 订阅即表示你接受 KDnuggets 的 [隐私政策](https://www.kdnuggets.com/news/privacy-policy.html)
 
@@ -158,7 +158,7 @@ WHERE image_per_user < 2000
 
 [<= 上一篇文章](https://www.kdnuggets.com/2022/09/everything-youve-ever-wanted-to-know-about-machine-learning.html)[下一篇文章 =>](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
 
-### [最新帖子](/news/index.html)
+### 最新帖子
 
 +   [你可能错过的 7 个免费的数据科学云 IDE](https://www.kdnuggets.com/7-free-cloud-ide-for-data-science-that-you-are-missing-out)
 
@@ -200,6 +200,6 @@ WHERE image_per_user < 2000
 
 * * *
 
-© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   [关于我们](/about/index.html)   |   [联系我们](/contact.html)   |   [广告](/advertise.html) |   [隐私政策](/news/privacy-policy.html)   |   [服务条款](/terms-of-service.html)
+© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   关于我们   |   联系我们   |   广告 |   隐私政策   |   服务条款
 
 由 Abid Ali Awan 于 2022 年 9 月 12 日发布

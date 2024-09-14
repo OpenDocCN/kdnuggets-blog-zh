@@ -1,8 +1,8 @@
 # 我希望自己在开始数据科学时知道的三件事
 
-> 原文：[https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html`](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
 
-![我希望自己在开始数据科学时知道的三件事](../Images/7a8fa1f13dd55ea0b3ea469cbd072550.png)
+![我希望自己在开始数据科学时知道的三件事](img/7a8fa1f13dd55ea0b3ea469cbd072550.png)
 
 图片由 [Moose Photos](https://www.pexels.com/photo/man-sitting-with-laptop-computer-on-desk-and-lamp-1586996/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -32,7 +32,7 @@
 
 “我完全错了”
 
-![我希望自己在开始数据科学时知道的三件事](../Images/3951c2acbb91cb356fbabda4b8db0113.png)
+![我希望自己在开始数据科学时知道的三件事](img/3951c2acbb91cb356fbabda4b8db0113.png)
 
 作者提供的图像
 
@@ -52,7 +52,7 @@
 
 对统计学和机器学习算法缺乏知识在面试和工作中给我带来了尴尬。此外，我像盲人一样尝试各种方法来找到解决方案，却不知道如何改善当前的模型或过程。
 
-![我希望开始数据科学时知道的三件事](../Images/a3b8d420c042b72eb6ca77fcdc6cf30f.png)
+![我希望开始数据科学时知道的三件事](img/a3b8d420c042b72eb6ca77fcdc6cf30f.png)
 
 图片来源：[Andrea Piacquadio](https://www.pexels.com/photo/woman-holding-books-3768126/)
 
@@ -70,7 +70,7 @@
 
 +   了解你时间的价值。
 
-![我希望开始数据科学时知道的三件事](../Images/479ea2e67a3389b5b9f700f48fa0c076.png)
+![我希望开始数据科学时知道的三件事](img/479ea2e67a3389b5b9f700f48fa0c076.png)
 
 图片来源：作者
 
@@ -94,20 +94,20 @@
 
 你可以通过专注于一个研究领域，学习算法背后的数学，并了解你的价值来简化你的历程。
 
-我相信任何背景的人都能学习数据科学。这一切都关乎于努力、坚持和好奇心。如果你想了解数据科学、机器学习、MLOps以及我的经历，请关注我的[社交平台](https://www.linkedin.com/in/1abidaliawan/)。
+我相信任何背景的人都能学习数据科学。这一切都关乎于努力、坚持和好奇心。如果你想了解数据科学、机器学习、MLOps 以及我的经历，请关注我的[社交平台](https://www.linkedin.com/in/1abidaliawan/)。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为挣扎于心理疾病的学生开发一个AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为挣扎于心理疾病的学生开发一个 AI 产品。
 
 ### 更多相关主题
 
-+   [选择下一个数据科学职位前需要注意的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [选择下一个数据科学职位前需要注意的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [关于SAS数据科学学院你不知道的3件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [关于 SAS 数据科学学院你不知道的 3 件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
 
-+   [学生在数据科学简历中遗漏的7件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
++   [学生在数据科学简历中遗漏的 7 件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
 
-+   [将数据科学家与其他职业区分开的5件事](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   [将数据科学家与其他职业区分开的 5 件事](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
 
-+   [你需要知道的数据管理6件事及其重要性……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [你需要知道的数据管理 6 件事及其重要性……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
 +   [扩展你的网络数据驱动产品时你应该知道的事情](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)

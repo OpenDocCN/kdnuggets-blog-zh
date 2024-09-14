@@ -1,8 +1,8 @@
 # 数据科学编程语言及其使用时机
 
-> 原文：[https://www.kdnuggets.com/2022/02/data-science-programming-languages.html](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)
+> 原文：[`www.kdnuggets.com/2022/02/data-science-programming-languages.html`](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)
 
-![数据科学编程语言及其使用时机](../Images/5af27d296385796fefc684694e14b278.png)
+![数据科学编程语言及其使用时机](img/5af27d296385796fefc684694e14b278.png)
 
 使用编程语言是数据科学不可或缺的。数据科学的广泛性和可用编程语言的数量使得决定使用哪种语言以及何时使用变得相当困难。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -26,11 +26,11 @@
 
 当谈到编程语言的受欢迎程度时，我们将使用 Anaconda（Python 的发行版）2021 年的调查。
 
-![数据科学编程语言及其使用时机](../Images/ff433fd9fecfcae389264bc017f245c1.png)
+![数据科学编程语言及其使用时机](img/ff433fd9fecfcae389264bc017f245c1.png)
 
-来源：[https://www.anaconda.com/state-of-data-science-2021](https://www.anaconda.com/state-of-data-science-2021)
+来源：[`www.anaconda.com/state-of-data-science-2021`](https://www.anaconda.com/state-of-data-science-2021)
 
-调查显示了最受欢迎的数据科学编程语言的使用频率。样本量为3,104，比较安全地得出结论，这些编程语言反映了数据科学中的受欢迎程度。一些其他的列表包含了其他语言，但我们将坚持这个列表来分析每一种语言。
+调查显示了最受欢迎的数据科学编程语言的使用频率。样本量为 3,104，比较安全地得出结论，这些编程语言反映了数据科学中的受欢迎程度。一些其他的列表包含了其他语言，但我们将坚持这个列表来分析每一种语言。
 
 问题是，这些编程语言在数据科学中什么时候使用？如果你不知道什么时候使用它，告诉你‘使用这种语言’是没有意义的。
 
@@ -66,11 +66,11 @@
 
 这是它们擅长的概述：
 
-![数据科学编程语言及其使用时机](../Images/2e19161f6305dea84db09e570d78ae07.png)
+![数据科学编程语言及其使用时机](img/2e19161f6305dea84db09e570d78ae07.png)
 
 ### SQL
 
-**优点：** SQL的主要目的是处理数据和数据库。因此，它在数据提取和操作（在一定程度上）方面非常理想，特别是在处理关系型数据库时。数据检索速度快，相对简单。语法也经过标准化。
+**优点：** SQL 的主要目的是处理数据和数据库。因此，它在数据提取和操作（在一定程度上）方面非常理想，特别是在处理关系型数据库时。数据检索速度快，相对简单。语法也经过标准化。
 
 **缺点：** 数据操作相对有限
 
@@ -82,9 +82,9 @@
 
 ### R
 
-**优点：** 由数学家和数据科学家为数学家和数据科学家设计。再一次，开源语言为数据操作提供了大量的R包。它是为处理大量数据而设计的。
+**优点：** 由数学家和数据科学家为数学家和数据科学家设计。再一次，开源语言为数据操作提供了大量的 R 包。它是为处理大量数据而设计的。
 
-**缺点：** 尽管可以在R中提取数据，但由于其复杂性和相对较慢，适用性不强。
+**缺点：** 尽管可以在 R 中提取数据，但由于其复杂性和相对较慢，适用性不强。
 
 ### 统计分析
 
@@ -104,37 +104,37 @@
 
 这是它们在统计分析方面表现的概述：
 
-![数据科学编程语言及其使用时机](../Images/0f4b67bd79810dcc9c9a061ccef91a0b.png)
+![数据科学编程语言及其使用时机](img/0f4b67bd79810dcc9c9a061ccef91a0b.png)
 
 ### R
 
-**优点：** 统计分析是R的主要目的，因此它在这方面表现出色。它提供了大量的数据分析工具，用于进行复杂的统计计算。可以处理大量的数据。
+**优点：** 统计分析是 R 的主要目的，因此它在这方面表现出色。它提供了大量的数据分析工具，用于进行复杂的统计计算。可以处理大量的数据。
 
 **缺点：** 作为一种相对较老的语言，有时可能会很慢，并需要更多的代码行。
 
 ### Python
 
-**优点：** 其数据分析库使其在大多数统计分析中表现出色。库设计用于处理高数据量。比R更快。
+**优点：** 其数据分析库使其在大多数统计分析中表现出色。库设计用于处理高数据量。比 R 更快。
 
-**缺点：** 在统计分析方面的库数量不如R多。
+**缺点：** 在统计分析方面的库数量不如 R 多。
 
 ### Java
 
-**优点:** Swift编程语言；比R和Python都要快。它可以在没有任何特殊软件的情况下运行，只需Java虚拟机（JVM）。这还提供了与许多分析框架一起工作的机会，例如Kafka、Hadoop、Hive或Apache Spark，它们都在JVM上运行。以下是一些[有关Java统计的建议以及使用哪些库](https://stats.stackexchange.com/questions/37466/open-source-java-library-for-statistics-at-the-level-offered-by-a-graduate-stati)。
+**优点:** Swift 编程语言；比 R 和 Python 都要快。它可以在没有任何特殊软件的情况下运行，只需 Java 虚拟机（JVM）。这还提供了与许多分析框架一起工作的机会，例如 Kafka、Hadoop、Hive 或 Apache Spark，它们都在 JVM 上运行。以下是一些[有关 Java 统计的建议以及使用哪些库](https://stats.stackexchange.com/questions/37466/open-source-java-library-for-statistics-at-the-level-offered-by-a-graduate-stati)。
 
-**缺点:** 不像R那样适合高强度的统计分析。
+**缺点:** 不像 R 那样适合高强度的统计分析。
 
 ### JavaScript
 
-**优点:** 它提供了一些统计分析的可能性。结合其可以在任何计算机（有JVM）上运行的能力，它可能适合一些较轻的统计分析。你可以在[Stack Overflow上找到一些JavaScript库的推荐](https://stackoverflow.com/questions/5656897/is-there-any-statistical-library-for-javascript)。
+**优点:** 它提供了一些统计分析的可能性。结合其可以在任何计算机（有 JVM）上运行的能力，它可能适合一些较轻的统计分析。你可以在[Stack Overflow 上找到一些 JavaScript 库的推荐](https://stackoverflow.com/questions/5656897/is-there-any-statistical-library-for-javascript)。
 
-**缺点:** 尽管有一些用于统计分析的库，但它们的可能性范围相对有限，尤其是与R相比。
+**缺点:** 尽管有一些用于统计分析的库，但它们的可能性范围相对有限，尤其是与 R 相比。
 
 ### Julia
 
-**优点:** 其语法简单，数学操作的书写方式非常接近现实世界。它也比Python快。它可以调用其他编程语言的库，例如Python的。对于描述性统计，以下是[Julia的标准统计库和其他库](https://docs.julialang.org/en/v1/stdlib/Statistics/)，这里是[一些附加库和有用示例](https://www.geeksforgeeks.org/descriptive-statistics-in-julia/)。如果你需要概率统计，Julia也有[大量相关包](https://juliapackages.com/c/probability-statistics)，这显示统计确实是这个编程语言的核心。甚至有[一本关于Julia统计的书](https://statisticswithjulia.org)。
+**优点:** 其语法简单，数学操作的书写方式非常接近现实世界。它也比 Python 快。它可以调用其他编程语言的库，例如 Python 的。对于描述性统计，以下是[Julia 的标准统计库和其他库](https://docs.julialang.org/en/v1/stdlib/Statistics/)，这里是[一些附加库和有用示例](https://www.geeksforgeeks.org/descriptive-statistics-in-julia/)。如果你需要概率统计，Julia 也有[大量相关包](https://juliapackages.com/c/probability-statistics)，这显示统计确实是这个编程语言的核心。甚至有[一本关于 Julia 统计的书](https://statisticswithjulia.org)。
 
-**缺点:** 相对不那么流行，导致社区和库的范围较小。也不像R那样适合高强度的统计分析。
+**缺点:** 相对不那么流行，导致社区和库的范围较小。也不像 R 那样适合高强度的统计分析。
 
 ### 数据可视化
 
@@ -152,7 +152,7 @@
 
 它们在数据可视化中的表现如下：
 
-![数据科学编程语言及其使用时机](../Images/cec9d316769e11d9748a1734eed2df61.png)
+![数据科学编程语言及其使用时机](img/cec9d316769e11d9748a1734eed2df61.png)
 
 ### R
 
@@ -164,7 +164,7 @@
 
 **优点：** 对数据可视化也很有帮助，因为它提供了大量用于此目的的库。
 
-**缺点：** 它提供的库仍然比R的要弱一些。
+**缺点：** 它提供的库仍然比 R 的要弱一些。
 
 ### JavaScript
 
@@ -176,7 +176,7 @@
 
 **优点：** 对数据可视化相对较好，因为它提供了一些用于此目的的包。
 
-**缺点：** 仍然是相对较新的语言，因此库的数量不像Python那样庞大。
+**缺点：** 仍然是相对较新的语言，因此库的数量不像 Python 那样庞大。
 
 ### 建模/机器学习（ML）
 
@@ -198,11 +198,11 @@
 
 我尝试根据优缺点评估它们的适用性：
 
-![数据科学编程语言及其使用时机](../Images/2c82a0b26ffeb2ab39309fd4a30266f0.png)
+![数据科学编程语言及其使用时机](img/2c82a0b26ffeb2ab39309fd4a30266f0.png)
 
 ### Python
 
-**优点：** Python的简洁性使得编写复杂的机器学习代码变得容易。由于其库的灵活性也很高。说到库，有很多（而且很强大的！）库可以帮助你获得非常高质量的机器学习。
+**优点：** Python 的简洁性使得编写复杂的机器学习代码变得容易。由于其库的灵活性也很高。说到库，有很多（而且很强大的！）库可以帮助你获得非常高质量的机器学习。
 
 **缺点：** 无。
 
@@ -214,33 +214,33 @@
 
 ### Java/JavaScript
 
-**优点：** 非常快速（比Python快）且在重负载数据处理方面可靠。有高质量的框架支持不同的机器学习技术和算法。
+**优点：** 非常快速（比 Python 快）且在重负载数据处理方面可靠。有高质量的框架支持不同的机器学习技术和算法。
 
-**缺点：** 不像Python那样灵活。
+**缺点：** 不像 Python 那样灵活。
 
 ### C/C++
 
-**优点：** 代码易于机器读取。提供了内存管理和其他性能参数的可能性。由于其速度以及许多机器学习库都是用C/C++编写的（甚至Python库也是），使其非常适合复杂的机器学习用例。非常适合程序员。这里有一些相当好的[Java、JavaScript和C++的机器学习库推荐](https://www.geeksforgeeks.org/top-5-programming-languages-and-their-libraries-for-machine-learning-in-2020/)。
+**优点：** 代码易于机器读取。提供了内存管理和其他性能参数的可能性。由于其速度以及许多机器学习库都是用 C/C++编写的（甚至 Python 库也是），使其非常适合复杂的机器学习用例。非常适合程序员。这里有一些相当好的[Java、JavaScript 和 C++的机器学习库推荐](https://www.geeksforgeeks.org/top-5-programming-languages-and-their-libraries-for-machine-learning-in-2020/)。
 
 **缺点：** 它的优点也是它的陷阱。它是一种代码密集型编程语言，对于那些编码经验较少的人来说，可能比较难以学习。此外，调试复杂算法通常也非常困难。不够灵活，因此如果仍在实验参数，效果不佳。
 
 ### Julia
 
-**优点：** 为机器学习计算和统计任务开发。对于没有重编程背景的用户来说，它非常快速且易于学习。可能拥有最好的机器学习、线性代数、微分方程、数学优化、并行和分布式计算以及自动微分库。非常多才多艺，这意味着其代码可以在C、Python和R中执行。
+**优点：** 为机器学习计算和统计任务开发。对于没有重编程背景的用户来说，它非常快速且易于学习。可能拥有最好的机器学习、线性代数、微分方程、数学优化、并行和分布式计算以及自动微分库。非常多才多艺，这意味着其代码可以在 C、Python 和 R 中执行。
 
 **缺点：** 仍然相对较小的社区在贡献其库。
 
 ### TypeScript
 
-**优点：** 它是JavaScript的超集。对于那些已经熟悉JavaScript并希望摆脱一些缺陷的用户来说非常理想。拥有强大的[机器学习库](https://analyticsindiamag.com/5-popular-machine-learning-libraries-built-on-typescript-for-2019/)，例如Kalimdor、TensorFlow Deep Playground、R.js、Machinelearn.js、Machine-learning或ML Classifier UI。它运行在浏览器或JS引擎上，因此非常适合基于浏览器的机器学习。其静态类型选项允许在模型部署之前发现代码中的错误。
+**优点：** 它是 JavaScript 的超集。对于那些已经熟悉 JavaScript 并希望摆脱一些缺陷的用户来说非常理想。拥有强大的[机器学习库](https://analyticsindiamag.com/5-popular-machine-learning-libraries-built-on-typescript-for-2019/)，例如 Kalimdor、TensorFlow Deep Playground、R.js、Machinelearn.js、Machine-learning 或 ML Classifier UI。它运行在浏览器或 JS 引擎上，因此非常适合基于浏览器的机器学习。其静态类型选项允许在模型部署之前发现代码中的错误。
 
-**缺点：** 相较于JavaScript，需要更多的代码行。因此，其性能可能较慢。
+**缺点：** 相较于 JavaScript，需要更多的代码行。因此，其性能可能较慢。
 
 ### 模型部署
 
 任何数据科学家的重要任务之一是部署他们创建的模型。这是模型和你之前工作的真正影响所在。它不再是玩笑，因为部署模型意味着它进入了现有业务环境的生产。这意味着真实的人将使用它，它在提供洞察方面的表现将极大地影响业务决策和现实世界。
 
-要让模型供人们使用，你必须创建一些应用程序（无论是移动端还是基于Web的）、桌面软件或API。一些最佳的数据科学编程语言包括：
+要让模型供人们使用，你必须创建一些应用程序（无论是移动端还是基于 Web 的）、桌面软件或 API。一些最佳的数据科学编程语言包括：
 
 +   Python
 
@@ -260,11 +260,11 @@
 
 他们执行任务的方式如下：
 
-![数据科学编程语言及其使用时机](../Images/34ed1ca55176cf5271f8e4a4371dca1a.png)
+![数据科学编程语言及其使用时机](img/34ed1ca55176cf5271f8e4a4371dca1a.png)
 
 ### Python
 
-**优点：** 作为一种通用编程语言，毫无疑问，它非常适合部署模型。它尤其适合软件开发和构建基于Web的应用程序。其普遍的优势是有大量优质的库。这也使它在这里表现出色，Django、Pyramid、TurboGears和Flask是一些推荐的库。它非常富有表现力、灵活且易于使用，使得创建应用程序更快。由于代码逐行执行，代码调试变得更加容易，错误发生时不会继续执行代码。Python的主要优势之一是其可移植性，这意味着它可以在多个平台上完美运行。
+**优点：** 作为一种通用编程语言，毫无疑问，它非常适合部署模型。它尤其适合软件开发和构建基于 Web 的应用程序。其普遍的优势是有大量优质的库。这也使它在这里表现出色，Django、Pyramid、TurboGears 和 Flask 是一些推荐的库。它非常富有表现力、灵活且易于使用，使得创建应用程序更快。由于代码逐行执行，代码调试变得更加容易，错误发生时不会继续执行代码。Python 的主要优势之一是其可移植性，这意味着它可以在多个平台上完美运行。
 
 **缺点：** 可能比其他编程语言运行速度较慢。它几乎完全不适合移动应用开发。它使用了大量的内存，因此在同时执行多个内存消耗较大的任务时应当小心。由 Python 构建的应用程序需要详细的测试，因为它是一种动态类型语言，意味着变量可以改变其数据类型。
 
@@ -332,7 +332,7 @@
 
 看看它们的排名：
 
-![数据科学编程语言及其使用时机](../Images/d0c7578bbbf4a8d2a81d9ed621ce7e20.png)
+![数据科学编程语言及其使用时机](img/d0c7578bbbf4a8d2a81d9ed621ce7e20.png)
 
 ### Python
 
@@ -342,27 +342,27 @@
 
 ### Bash/Shell
 
-**优点：** 为自动化Linux上的重复任务而创建（它也可以在Windows 10上运行），毫无疑问，它非常适合自动化。它的主要用途是数据提取和数据科学中的数据处理，这使它非常适合构建数据管道。如果你在Medium上，Towards Data Science博客有[一篇关于使用Bash自动化枯燥工作的文章](https://towardsdatascience.com/how-to-use-bash-to-automate-the-boring-stuff-for-data-science-d447cd23fffe)。
+**优点：** 为自动化 Linux 上的重复任务而创建（它也可以在 Windows 10 上运行），毫无疑问，它非常适合自动化。它的主要用途是数据提取和数据科学中的数据处理，这使它非常适合构建数据管道。如果你在 Medium 上，Towards Data Science 博客有[一篇关于使用 Bash 自动化枯燥工作的文章](https://towardsdatascience.com/how-to-use-bash-to-automate-the-boring-stuff-for-data-science-d447cd23fffe)。
 
 **缺点：** 不适合自动化数据科学家工作的其他部分。作为一种通用自动化语言，它的使用也不那么普遍。
 
 ### Java
 
-**优点：** 在Python缺乏的地方，Java表现出色：它非常适合移动应用程序。这一点并不令人惊讶。Java作为一种脚本语言，专门设计用于自动化任务执行。它的代码也非常容易更改和更新，非常适合工作流参数经常变化的动态环境。支持帮助自动化的框架。此外，它可以在任何安装了JVM的机器上运行，并且非常快速。这里有一些[你可以玩耍并与Java代码集成的ETL工具](https://rigorousthemes.com/blog/best-open-source-etl-tools/)。
+**优点：** 在 Python 缺乏的地方，Java 表现出色：它非常适合移动应用程序。这一点并不令人惊讶。Java 作为一种脚本语言，专门设计用于自动化任务执行。它的代码也非常容易更改和更新，非常适合工作流参数经常变化的动态环境。支持帮助自动化的框架。此外，它可以在任何安装了 JVM 的机器上运行，并且非常快速。这里有一些[你可以玩耍并与 Java 代码集成的 ETL 工具](https://rigorousthemes.com/blog/best-open-source-etl-tools/)。
 
 **缺点：** 缺乏灵活性。
 
 ### C#
 
-**优点：** 一般来说，它是最好的自动化语言之一，特别是如果你想自动化构建模型。为什么？因为有一个[模型构建器](https://docs.microsoft.com/en-us/dotnet/machine-learning/automate-training-with-model-builder)，正如微软文档所说，它“使用自动化机器学习来探索不同的机器学习算法和设置”。为此，它使用C#代码。
+**优点：** 一般来说，它是最好的自动化语言之一，特别是如果你想自动化构建模型。为什么？因为有一个[模型构建器](https://docs.microsoft.com/en-us/dotnet/machine-learning/automate-training-with-model-builder)，正如微软文档所说，它“使用自动化机器学习来探索不同的机器学习算法和设置”。为此，它使用 C#代码。
 
 **缺点：** 它依赖于平台。
 
 ### R
 
-**优点：** 作为统计分析和可视化的王者之一，这是一个完美的工具来自动化数据科学过程中的这部分。特别是当过程涉及到大量统计分析时，其质量比速度更为重要。如果你对自动化探索性数据分析感兴趣，[这里有一些可能对你有帮助的R包](https://towardsdatascience.com/four-r-packages-for-automated-exploratory-data-analysis-you-might-have-missed-c38b03d4ee16)。
+**优点：** 作为统计分析和可视化的王者之一，这是一个完美的工具来自动化数据科学过程中的这部分。特别是当过程涉及到大量统计分析时，其质量比速度更为重要。如果你对自动化探索性数据分析感兴趣，[这里有一些可能对你有帮助的 R 包](https://towardsdatascience.com/four-r-packages-for-automated-exploratory-data-analysis-you-might-have-missed-c38b03d4ee16)。
 
-**缺点：** 如果速度至关重要，那么R可能不如其他数据科学编程语言好。作为一种整体自动化语言，它的使用也不那么普遍。
+**缺点：** 如果速度至关重要，那么 R 可能不如其他数据科学编程语言好。作为一种整体自动化语言，它的使用也不那么普遍。
 
 ### 如何选择学习哪些数据科学编程语言？
 
@@ -404,7 +404,7 @@
 
 如果你还想了解 MATLAB 和 SAAS，请查看这篇“[前五大数据科学编程语言](https://www.stratascratch.com/blog/top-5-data-science-programming-languages/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)”的帖子。
 
-![数据科学编程语言及其使用时机](../Images/6bbc96f64dee69e25e1a005aa7b04c55.png)
+![数据科学编程语言及其使用时机](img/6bbc96f64dee69e25e1a005aa7b04c55.png)
 
 ### 总结
 
@@ -414,11 +414,11 @@
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets™ 新闻 22:n04，1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04，1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
-+   [2023年数据科学学习的8种编程语言](https://www.kdnuggets.com/2023/07/8-programming-languages-data-science-learn-2023.html)
++   [2023 年数据科学学习的 8 种编程语言](https://www.kdnuggets.com/2023/07/8-programming-languages-data-science-learn-2023.html)
 
 +   [顶级编程语言及其用途](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 

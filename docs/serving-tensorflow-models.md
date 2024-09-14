@@ -1,8 +1,8 @@
 # 使用 TensorFlow Serving 部署训练好的模型到生产环境
 
-> 原文：[https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)
+> 原文：[`www.kdnuggets.com/2020/11/serving-tensorflow-models.html`](https://www.kdnuggets.com/2020/11/serving-tensorflow-models.html)
 
-[评论](#comments)![图示](../Images/cc3390e60f5b0669e9916ac5a0a8c044.png)
+评论![图示](img/cc3390e60f5b0669e9916ac5a0a8c044.png)
 
 照片由 [Kate Townsend](https://unsplash.com/@k8townsend?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/serve?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -13,7 +13,7 @@
 [TensorFlow Serving](https://www.tensorflow.org/tfx/guide/serving) 是一个专门用于将机器学习模型投入生产的系统。TensorFlow 的 ModelServer 提供对 RESTful API 的支持。不过，在使用之前，我们需要先安装它。首先，让我们将其添加为软件包源。
 
 ```py
-echo "deb [arch=amd64] [http://storage.googleapis.com/tensorflow-serving-apt](https://storage.googleapis.com/tensorflow-serving-apt) stable tensorflow-model-server tensorflow-model-server-universal" | sudo tee /etc/apt/sources.list.d/tensorflow-serving.list && curl [https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg](https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg) | sudo apt-key add -
+echo "deb [arch=amd64] [`storage.googleapis.com/tensorflow-serving-apt`](https://storage.googleapis.com/tensorflow-serving-apt) stable tensorflow-model-server tensorflow-model-server-universal" | sudo tee /etc/apt/sources.list.d/tensorflow-serving.list && curl [`storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg`](https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg) | sudo apt-key add -
 ```
 
 现在可以通过更新系统并使用 `apt-get` 安装 TensorFlow ModelServer。
@@ -103,7 +103,7 @@ tensorflow_model_server — rest_api_port=8000 — model_config_file=models.conf
 
 ### 使用 REST API 进行预测
 
-此时，我们的模型的 [REST API](https://www.tensorflow.org/tfx/serving/api_rest) 可以在这里找到: [http://localhost:8000/v1/models/vgg16/versions/1:predict](http://localhost:8000/v1/models/vgg16/versions/1:predict)。
+此时，我们的模型的 [REST API](https://www.tensorflow.org/tfx/serving/api_rest) 可以在这里找到: [`localhost:8000/v1/models/vgg16/versions/1:predict`](http://localhost:8000/v1/models/vgg16/versions/1:predict)。
 
 我们可以使用这个端点进行预测。为此，我们需要将 [JSON](https://www.json.org/json-en.html) 格式的数据传递给端点。为了达到这一目的 — 并非双关 — 我们将使用 Python 中的 `*json*` 模块。为了向端点发出请求，我们将使用 `requests` Python 包。
 
@@ -116,7 +116,7 @@ import requests
 
 记住，*x* 变量包含了预处理的图像。我们将创建包含该图像的 JSON 数据。像其他 RESTFUL 请求一样，我们将内容类型设置为 `application/json`。然后，我们向端点发出请求，同时传递头信息和数据。获得预测结果后，我们将其解码，就像在本文开头一样。
 
-![Image for post](../Images/20bf95dec0e473ec61b0efb359e74d48.png)
+![Image for post](img/20bf95dec0e473ec61b0efb359e74d48.png)
 
 ### 使用 Docker 服务模型
 
@@ -150,43 +150,43 @@ docker run -p 8501:8501 --name tf_vgg_server --mount type=bind,source=/media/der
 
 现在我们可以使用 REST API 端点进行预测，就像之前一样。
 
-![Image for post](../Images/2efc691497994698fa72ade40bf44f76.png)
+![Image for post](img/2efc691497994698fa72ade40bf44f76.png)
 
-很明显，我们得到了相同的结果。通过这一点，我们已经看到如何在有无Docker的情况下服务TensorFlow模型。
+很明显，我们得到了相同的结果。通过这一点，我们已经看到如何在有无 Docker 的情况下服务 TensorFlow 模型。
 
 ### 最后的想法
 
-[这篇文章](https://www.tensorflow.org/tfx/serving/architecture)来自TensorFlow，将为你提供更多关于TensorFlow Serving架构的信息。如果你想深入了解，可以参考这个[资源](https://www.tensorflow.org/tfx/serving/serving_config)。
+[这篇文章](https://www.tensorflow.org/tfx/serving/architecture)来自 TensorFlow，将为你提供更多关于 TensorFlow Serving 架构的信息。如果你想深入了解，可以参考这个[资源](https://www.tensorflow.org/tfx/serving/serving_config)。
 
-你还可以探索使用标准的[TensorFlow ModelServer](https://www.tensorflow.org/tfx/serving/serving_advanced)来进行构建。在这篇文章中，我们专注于使用CPU进行服务，但你也可以探索如何[在GPU上服务](https://www.tensorflow.org/tfx/serving/docker)。
+你还可以探索使用标准的[TensorFlow ModelServer](https://www.tensorflow.org/tfx/serving/serving_advanced)来进行构建。在这篇文章中，我们专注于使用 CPU 进行服务，但你也可以探索如何[在 GPU 上服务](https://www.tensorflow.org/tfx/serving/docker)。
 
-这个[仓库包含链接](https://github.com/tensorflow/serving)到更多关于TensorFlow Serving的教程。希望这篇文章对你有所帮助！
+这个[仓库包含链接](https://github.com/tensorflow/serving)到更多关于 TensorFlow Serving 的教程。希望这篇文章对你有所帮助！
 
 [**mwitiderrick/TensorFlow-Serving**](https://github.com/mwitiderrick/TensorFlow-Serving)
 
-提供TensorFlow模型服务。通过在GitHub上创建账户，参与mwitiderrick/TensorFlow-Serving的开发。
+提供 TensorFlow 模型服务。通过在 GitHub 上创建账户，参与 mwitiderrick/TensorFlow-Serving 的开发。
 
-**个人简介：Derrick Mwiti** 是一名数据科学家，对分享知识充满热情。他通过Heartbeat、Towards Data Science、Datacamp、Neptune AI、KDnuggets等博客积极贡献于数据科学社区。他的内容在互联网上的浏览量已超过一百万次。Derrick还是一名作者和在线讲师。他还与各种机构合作实施数据科学解决方案，并提升其员工技能。Derrick在多媒体大学学习数学和计算机科学，同时也是Meltwater创业技术学院的校友。如果你对数据科学、机器学习和深度学习感兴趣，你可以查看他的[完整数据科学与机器学习Python训练营课程](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4)。
+**个人简介：Derrick Mwiti** 是一名数据科学家，对分享知识充满热情。他通过 Heartbeat、Towards Data Science、Datacamp、Neptune AI、KDnuggets 等博客积极贡献于数据科学社区。他的内容在互联网上的浏览量已超过一百万次。Derrick 还是一名作者和在线讲师。他还与各种机构合作实施数据科学解决方案，并提升其员工技能。Derrick 在多媒体大学学习数学和计算机科学，同时也是 Meltwater 创业技术学院的校友。如果你对数据科学、机器学习和深度学习感兴趣，你可以查看他的[完整数据科学与机器学习 Python 训练营课程](https://www.udemy.com/course/data-science-bootcamp-in-python/?referralCode=9F6DFBC3F92C44E8C7F4)。
 
 [原文](https://heartbeat.fritz.ai/serving-tensorflow-models-3989df5d7d53)。转载已获许可。
 
 **相关内容：**
 
-+   [处理机器学习中的数据不平衡](/2020/10/imbalanced-data-machine-learning.html)
++   处理机器学习中的数据不平衡
 
-+   [如何将PyTorch Lightning模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)
++   如何将 PyTorch Lightning 模型部署到生产环境
 
-+   [AI不仅仅是一个模型：完成工作流程成功的四个步骤](/2020/11/mathworks-ai-four-steps-workflow.html)
++   AI 不仅仅是一个模型：完成工作流程成功的四个步骤
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 

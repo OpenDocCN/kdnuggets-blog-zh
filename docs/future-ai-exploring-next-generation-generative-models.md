@@ -1,16 +1,16 @@
 # 人工智能的未来：探索下一代生成模型
 
-> 原文：[https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html](https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html)
+> 原文：[`www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html`](https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html)
 
-![人工智能的未来：探索下一代生成模型](../Images/37f24a88364760b5e5bbf50ec0dcd1ff.png)
+![人工智能的未来：探索下一代生成模型](img/37f24a88364760b5e5bbf50ec0dcd1ff.png)
 
 图片来源：作者
 
-如果你关注科技界，你会知道生成型人工智能是当前最热门的话题。我们听说了很多关于ChatGPT、DALL-E等的消息。
+如果你关注科技界，你会知道生成型人工智能是当前最热门的话题。我们听说了很多关于 ChatGPT、DALL-E 等的消息。
 
-生成型人工智能的最新突破将彻底改变我们继续进行内容创作的方式以及各领域AI工具的增长速度。Grand View Research在其《人工智能市场规模、份额与趋势分析报告》中指出：
+生成型人工智能的最新突破将彻底改变我们继续进行内容创作的方式以及各领域 AI 工具的增长速度。Grand View Research 在其《人工智能市场规模、份额与趋势分析报告》中指出：
 
-*“2022年全球人工智能市场规模为1365.5亿美元，预计从2023年到2030年将以37.3%的复合年增长率扩展。”*
+*“2022 年全球人工智能市场规模为 1365.5 亿美元，预计从 2023 年到 2030 年将以 37.3%的复合年增长率扩展。”*
 
 越来越多来自不同领域或背景的组织正在寻求通过使用生成型人工智能来提升技能。
 
@@ -20,11 +20,11 @@
 
 生成型人工智能已经在创作能够模仿像梵高这样的艺术家的艺术作品。时尚行业可以利用生成型人工智能为其下一系列创作新设计。室内设计师可以利用生成型人工智能在几天内为某人建造梦想家园，而不是几周或几个月。
 
-生成型人工智能相对较新，仍在不断完善中。然而，像ChatGPT这样的应用已树立了高标准，我们应该期待在未来几年中看到更多创新应用的发布。
+生成型人工智能相对较新，仍在不断完善中。然而，像 ChatGPT 这样的应用已树立了高标准，我们应该期待在未来几年中看到更多创新应用的发布。
 
 ## 生成型人工智能的角色
 
-当前没有关于生成型人工智能（Generative AI）具体限制的说明，如前所述，它仍在不断发展中。然而，截至今天，我们可以将其分为3个部分：
+当前没有关于生成型人工智能（Generative AI）具体限制的说明，如前所述，它仍在不断发展中。然而，截至今天，我们可以将其分为 3 个部分：
 
 1.  **生成新内容/信息：**
 
@@ -46,7 +46,7 @@
 
 扩散过程是指逐渐向压缩的潜在表示中添加或扩散噪声，并生成一个仅由噪声组成的图像。然而，扩散模型则朝着相反的方向进行，执行扩散的反向过程。噪声以受控的方式逐渐从图像中减少，使图像慢慢呈现出原始的样子。
 
-![AI 的未来：探索下一代生成模型](../Images/4e46be5356a7d7142cfac2d4069fa2f0.png)
+![AI 的未来：探索下一代生成模型](img/4e46be5356a7d7142cfac2d4069fa2f0.png)
 
 作者提供的图像
 
@@ -76,30 +76,30 @@ AI 工具，如用于 KYC 和 AML 过程的智能文档处理（IDP）。然而�
 
 +   数据隐私 - 生成型 AI 模型需要大量数据才能成功输出准确的结果。由于可能滥用敏感信息，数据隐私成为所有 AI 公司和工具面临的挑战。
 
-+   所有权 - 关于生成性AI创建的任何内容或信息的知识产权仍然是一个开放的讨论话题。有些人可能会认为这些内容是独特的，而另一些人则认为生成的文本内容是从各种互联网来源中改写的。
++   所有权 - 关于生成性 AI 创建的任何内容或信息的知识产权仍然是一个开放的讨论话题。有些人可能会认为这些内容是独特的，而另一些人则认为生成的文本内容是从各种互联网来源中改写的。
 
-+   质量 - 随着大量数据输入到生成性AI模型中，首要关注的问题是调查数据的质量，然后是生成输出的准确性。医学等领域尤为关键，因为处理虚假信息可能产生重大影响。
++   质量 - 随着大量数据输入到生成性 AI 模型中，首要关注的问题是调查数据的质量，然后是生成输出的准确性。医学等领域尤为关键，因为处理虚假信息可能产生重大影响。
 
-+   偏见 - 在我们考察数据质量时，还需要评估训练数据中可能存在的偏见。这可能导致歧视性输出，使得AI在许多人眼中不受欢迎。
++   偏见 - 在我们考察数据质量时，还需要评估训练数据中可能存在的偏见。这可能导致歧视性输出，使得 AI 在许多人眼中不受欢迎。
 
 # 总结
 
-生成性AI在被大家积极接受之前还有很多工作要做。这些AI模型需要更好地理解来自不同文化背景的人类语言。对于我们来说，与人交流时的常识是自然而然的，但对AI系统来说却不常见。它们很难适应不同的情况，因为它们被编程为基于事实信息进行训练。
+生成性 AI 在被大家积极接受之前还有很多工作要做。这些 AI 模型需要更好地理解来自不同文化背景的人类语言。对于我们来说，与人交流时的常识是自然而然的，但对 AI 系统来说却不常见。它们很难适应不同的情况，因为它们被编程为基于事实信息进行训练。
 
-未来生成性AI将扮演什么角色是值得关注的。我们只能拭目以待。
+未来生成性 AI 将扮演什么角色是值得关注的。我们只能拭目以待。
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由撰稿人及KDnuggets的社区经理。她特别关注于提供数据科学职业建议或教程以及基于理论的数据科学知识。她还希望探索人工智能如何有益于人类生命的延续。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助引导他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由撰稿人及 KDnuggets 的社区经理。她特别关注于提供数据科学职业建议或教程以及基于理论的数据科学知识。她还希望探索人工智能如何有益于人类生命的延续。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助引导他人。
 
 ### 相关主题更多内容
 
 +   [检索增强生成：信息检索与文本生成的交汇点](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)
 
-+   [与未来对话：对未来十年AI的预测](https://www.kdnuggets.com/2023/04/chatting-future-predictions-ai-next-decade.html)
++   [与未来对话：对未来十年 AI 的预测](https://www.kdnuggets.com/2023/04/chatting-future-predictions-ai-next-decade.html)
 
-+   [与SAS负责任地探索生成性AI](https://www.kdnuggets.com/exploring-generative-ai-responsibly-with-sas)
++   [与 SAS 负责任地探索生成性 AI](https://www.kdnuggets.com/exploring-generative-ai-responsibly-with-sas)
 
 +   [Bark：终极音频生成模型](https://www.kdnuggets.com/2023/05/bark-ultimate-audio-generation-model.html)
 
 +   [检索增强生成如何让大语言模型更智能](https://www.kdnuggets.com/how-retrieval-augment-generation-makes-llms-smarter)
 
-+   [揭开Midjourney 5.2的面纱：AI图像生成的一次飞跃](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)
++   [揭开 Midjourney 5.2 的面纱：AI 图像生成的一次飞跃](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)

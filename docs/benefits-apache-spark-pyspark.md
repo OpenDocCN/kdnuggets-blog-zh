@@ -1,28 +1,28 @@
 # 使用 Apache Spark 与 PySpark 的好处与示例
 
-> 原文：[https://www.kdnuggets.com/2020/04/benefits-apache-spark-pyspark.html](https://www.kdnuggets.com/2020/04/benefits-apache-spark-pyspark.html)
+> 原文：[`www.kdnuggets.com/2020/04/benefits-apache-spark-pyspark.html`](https://www.kdnuggets.com/2020/04/benefits-apache-spark-pyspark.html)
 
-[评论](#comments)
+评论
 
 ### **什么是 Apache Spark？**
 
 [Apache Spark](https://spark.apache.org/)是技术领域中最热门的新趋势之一。它可能是实现大数据与机器学习结合成果的最有潜力的框架。
 
-它运行速度很快（比传统的[Hadoop MapReduce](https://www.tutorialspoint.com/hadoop/hadoop_mapreduce.htm)快多达100倍），由于内存操作，提供强大、分布式、容错的数据对象（称为[RDD](https://www.tutorialspoint.com/apache_spark/apache_spark_rdd.htm)），并通过诸如[Mlib](https://spark.apache.org/mllib/)和[GraphX](https://spark.apache.org/graphx/)等补充包与机器学习和图形分析领域完美集成。
+它运行速度很快（比传统的[Hadoop MapReduce](https://www.tutorialspoint.com/hadoop/hadoop_mapreduce.htm)快多达 100 倍），由于内存操作，提供强大、分布式、容错的数据对象（称为[RDD](https://www.tutorialspoint.com/apache_spark/apache_spark_rdd.htm)），并通过诸如[Mlib](https://spark.apache.org/mllib/)和[GraphX](https://spark.apache.org/graphx/)等补充包与机器学习和图形分析领域完美集成。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-![使用 Apache Spark 与 PySpark 的好处与示例 | Apache Spark](../Images/30cb3911f9df0322fd922f31ff23852a.png)
+![使用 Apache Spark 与 PySpark 的好处与示例 | Apache Spark](img/30cb3911f9df0322fd922f31ff23852a.png)
 
 Spark 是基于[Hadoop/HDFS](https://hadoop.apache.org/docs/r1.2.1/hdfs_design.html)实现的，主要用[Scala](https://www.scala-lang.org/)编写，这是一种类似于 Java 的函数式编程语言。实际上，Scala 需要系统上最新的 Java 安装并在 JVM 上运行。然而，对于大多数初学者来说，Scala 并不是他们在进入数据科学领域时首先学习的语言。幸运的是，Spark 提供了一个出色的 Python 集成，称为**PySpark**，它允许 Python 程序员与 Spark 框架进行接口，学习如何大规模操作数据，并在分布式文件系统上处理对象和算法。
 
@@ -54,7 +54,7 @@ Apache Spark 起初是 2009 年在 UC Berkeley AMPLab 的一个研究项目，�
 
 [**这篇文章**](https://medium.com/free-code-camp/how-to-set-up-pyspark-for-your-jupyter-notebook-7399dd3cb389) 在 Medium 上提供了关于逐步设置过程的更多细节。
 
-![](../Images/881536150793aa5d361af9092960c036.png)
+![](img/881536150793aa5d361af9092960c036.png)
 
 另外，你可以使用 Databricks 设置来练习 Spark。这家公司由 Spark 的原始创建者创建，并提供了一个出色的即用环境来进行分布式分析。
 
@@ -66,7 +66,7 @@ Apache Spark 起初是 2009 年在 UC Berkeley AMPLab 的一个研究项目，�
 
 许多 Spark 程序围绕弹性分布式数据集（RDD）的概念展开，RDD 是一个可以并行操作的容错元素集合。SparkContext 存在于 Driver 程序中，通过集群管理器在工作节点上管理分布式数据。使用 PySpark 的好处是所有这些数据分区和任务管理的复杂性在后台自动处理，程序员可以专注于具体的分析或机器学习任务。
 
-![使用 Apache Spark 和 PySpark 在 Python 中的好处与示例 | Rdd-1](../Images/5bb0f6532941bb2fa5a40915e804a5df.png)
+![使用 Apache Spark 和 PySpark 在 Python 中的好处与示例 | Rdd-1](img/5bb0f6532941bb2fa5a40915e804a5df.png)
 
 *rdd-1*
 
@@ -253,19 +253,19 @@ B.histogram([x for x in range(0,100,10)])
 
 你还可以对 RDD 进行常规的集合操作，比如 union()、 intersection()、 subtract()，或 cartesian()。
 
-查看[**这个Jupyter笔记本**](https://github.com/tirthajyoti/Spark-with-Python/blob/master/SparkContext%20and%20RDD%20Basics.ipynb)获取更多示例。
+查看[**这个 Jupyter 笔记本**](https://github.com/tirthajyoti/Spark-with-Python/blob/master/SparkContext%20and%20RDD%20Basics.ipynb)获取更多示例。
 
-**使用PySpark的惰性计算（和**缓存**）**
+**使用 PySpark 的惰性计算（和**缓存**）**
 
-惰性计算是一种评估/计算策略，它为计算任务准备了详细的逐步内部执行管道图，但将最终执行延迟到绝对需要的时候。这种策略是Spark加速许多并行化大数据操作的核心。
+惰性计算是一种评估/计算策略，它为计算任务准备了详细的逐步内部执行管道图，但将最终执行延迟到绝对需要的时候。这种策略是 Spark 加速许多并行化大数据操作的核心。
 
-让我们使用两个CPU核心作为这个例子的说明，
+让我们使用两个 CPU 核心作为这个例子的说明，
 
 ```py
 sc = SparkContext(master="local[2]")
 ```
 
-**创建一个包含100万个元素的RDD**
+**创建一个包含 100 万个元素的 RDD**
 
 ```py
 %%time
@@ -282,7 +282,7 @@ def taketime(x):
 return cos(x)
 ```
 
-**检查taketime函数所花费的时间**
+**检查 taketime 函数所花费的时间**
 
 ```py
 %%time
@@ -291,9 +291,9 @@ taketime(2)
 >> -0.4161468365471424
 ```
 
-记住这个结果，`taketime()`函数的实际时间为31.5微秒。当然，确切的数字将取决于你使用的机器。
+记住这个结果，`taketime()`函数的实际时间为 31.5 微秒。当然，确切的数字将取决于你使用的机器。
 
-**现在对函数进行map操作**
+**现在对函数进行 map 操作**
 
 ```py
 %%time
@@ -301,9 +301,9 @@ interim = rdd1.map(lambda x: taketime(x))
 >> CPU times: user 23 µs, sys: 8 µs, total: 31 µs, Wall time: 34.8 µs
 ```
 
-*为什么每个**taketime**函数花费45.8微秒，但处理100万个元素的RDD的map操作也花费了类似的时间？*
+*为什么每个**taketime**函数花费 45.8 微秒，但处理 100 万个元素的 RDD 的 map 操作也花费了类似的时间？*
 
-**由于惰性计算，即在之前的步骤中没有计算任何内容，只是制定了执行计划**。变量`interim`并不指向数据结构，而是指向一个执行计划，表示为依赖关系图。依赖关系图定义了RDD如何从彼此之间计算。
+**由于惰性计算，即在之前的步骤中没有计算任何内容，只是制定了执行计划**。变量`interim`并不指向数据结构，而是指向一个执行计划，表示为依赖关系图。依赖关系图定义了 RDD 如何从彼此之间计算。
 
 **通过**reduce**方法的实际执行**
 
@@ -314,7 +314,7 @@ print('output =',interim.reduce(lambda x,y:x+y))
 >> CPU times: user 11.6 ms, sys: 5.56 ms, total: 17.2 ms, Wall time: 15.6 s
 ```
 
-所以，这里的实际时间是15.6秒。记住，`taketime()`函数的时间是31.5微秒吗？因此，我们期望对于一个100万的数组，总时间约为31秒。由于在两个核心上并行操作，它花费了大约15秒。
+所以，这里的实际时间是 15.6 秒。记住，`taketime()`函数的时间是 31.5 微秒吗？因此，我们期望对于一个 100 万的数组，总时间约为 31 秒。由于在两个核心上并行操作，它花费了大约 15 秒。
 
 现在，我们没有在`interim`中保存（具体化）任何中间结果，所以另一个简单操作（例如计数元素 > 0）将花费几乎相同的时间。
 
@@ -352,11 +352,11 @@ print(interim.filter(lambda x:x>0).count())
 >> CPU times: user 14.2 ms, sys: 3.27 ms, total: 17.4 ms, Wall time: 811 ms
 ```
 
-哇！计算时间从之前的12秒降到了不到1秒！这就是使用Spark编程的核心特性：缓存和并行化以及惰性执行。
+哇！计算时间从之前的 12 秒降到了不到 1 秒！这就是使用 Spark 编程的核心特性：缓存和并行化以及惰性执行。
 
-### **DataFrame和SparkSQL**
+### **DataFrame 和 SparkSQL**
 
-除了RDD，Spark框架中的第二个关键数据结构是*DataFrame*。如果你做过Python Pandas或R DataFrame的工作，这个概念可能会很熟悉。
+除了 RDD，Spark 框架中的第二个关键数据结构是*DataFrame*。如果你做过 Python Pandas 或 R DataFrame 的工作，这个概念可能会很熟悉。
 
 DataFrame 是在命名列下的分布式行集合。它在概念上等同于关系数据库中的表、带列标题的 Excel 表格或 R/Python 中的数据框，但具有更丰富的底层优化。DataFrames 可以从各种来源构建，如结构化数据文件、Hive 中的表、外部数据库或现有的 RDD。它还与 RDD 共享一些共同特征：
 
@@ -364,7 +364,7 @@ DataFrame 是在命名列下的分布式行集合。它在概念上等同于关�
 
 +   惰性计算：意味着任务不会执行，直到进行某个操作。分布式：RDD 和 DataFrame 本质上都是分布式的。
 
-![使用 Apache Spark 和 PySpark 在 Python 中的好处与示例 | PySpark 中的 DataFrame](../Images/197e1ce09b894ea1628c7da1c8d3c87d.png)
+![使用 Apache Spark 和 PySpark 在 Python 中的好处与示例 | PySpark 中的 DataFrame](img/197e1ce09b894ea1628c7da1c8d3c87d.png)
 
 ### **DataFrame 的优点**
 
@@ -394,7 +394,7 @@ DataFrame 是在命名列下的分布式行集合。它在概念上等同于关�
 
 Spark SQL 本质上试图弥合我们之前提到的两种模型——关系模型和过程模型之间的差距。Spark SQL 通过 DataFrame API 执行关系操作，可以在外部数据源和 Spark 内置的分布式集合上进行大规模操作！
 
-![使用 PySpark 和 Python 的 Apache Spark 的好处与示例 | Spark SQL](../Images/fbbca3e99c3728cb51c0284181460269.png)
+![使用 PySpark 和 Python 的 Apache Spark 的好处与示例 | Spark SQL](img/fbbca3e99c3728cb51c0284181460269.png)
 
 为什么 Spark SQL 这么快且经过优化？原因在于一种新的可扩展优化器**Catalyst**，基于 Scala 中的函数式编程构造。Catalyst 支持基于规则和基于成本的优化。虽然过去也提出过可扩展的优化器，但通常需要复杂的领域特定语言来指定规则。这通常会导致显著的学习曲线和维护负担。相比之下，Catalyst 使用 Scala 编程语言的标准特性，如模式匹配，使开发人员可以使用完整的编程语言，同时仍然使规则易于指定。
 
@@ -414,11 +414,11 @@ Spark SQL 本质上试图弥合我们之前提到的两种模型——关系模�
 
 **相关内容：**
 
-+   [学习如何在 5 分钟内使用 PySpark（安装 + 教程）](/2019/08/learn-pyspark-installation-tutorial.html)
++   学习如何在 5 分钟内使用 PySpark（安装 + 教程）
 
-+   [时间序列分析：使用 KNIME 和 Spark 的简单示例](/2019/10/time-series-analysis-simple-example-knime-spark.html)
++   时间序列分析：使用 KNIME 和 Spark 的简单示例
 
-+   [Spark NLP 101：LightPipeline](/2019/11/spark-nlp-101-lightpipeline.html)
++   Spark NLP 101：LightPipeline
 
 ### 更多相关主题
 

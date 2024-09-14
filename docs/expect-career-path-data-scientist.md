@@ -1,8 +1,8 @@
 # 作为数据科学家的职业路径的预期
 
-> 原文：[https://www.kdnuggets.com/2022/01/expect-career-path-data-scientist.html](https://www.kdnuggets.com/2022/01/expect-career-path-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2022/01/expect-career-path-data-scientist.html`](https://www.kdnuggets.com/2022/01/expect-career-path-data-scientist.html)
 
-![作为数据科学家，职业路径的预期](../Images/ca13f489dc9238d56c04b7e3dae554df.png)
+![作为数据科学家，职业路径的预期](img/ca13f489dc9238d56c04b7e3dae554df.png)
 
 数据科学是一个令人兴奋的领域。在应用和就业机会方面，它的可能性正在扩展。无论你是考虑进入这一领域，已经[拥有你的第一份数据科学工作](https://www.stratascratch.com/blog/how-to-get-a-data-science-job-the-ultimate-guide/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)，还是已经在这领域工作了几年，以下是当你期望继续留在数据科学领域时的概述。
 
@@ -16,7 +16,7 @@
 
 让我们深入探讨一下[data scientist 职业路径](https://www.stratascratch.com/blog/data-scientist-career-path-from-novice-to-first-job/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)的不同步骤。
 
-![作为数据科学家，职业路径的预期](../Images/8ceb79d52bfd9cdbd2d7b414ed492f3c.png)
+![作为数据科学家，职业路径的预期](img/8ceb79d52bfd9cdbd2d7b414ed492f3c.png)
 
 ### 1\. 数据科学助理
 
@@ -70,7 +70,7 @@
 
 ### 3\. 数据科学高级经理（IC）
 
-数据科学高级经理应有大约四到五年的经验。在这一阶段，你仍然是IC，并且没有直接下属。
+数据科学高级经理应有大约四到五年的经验。在这一阶段，你仍然是 IC，并且没有直接下属。
 
 **获得这份工作的技能要求**
 
@@ -120,11 +120,11 @@
 
 ### 4b. 数据科学总监/组经理
 
-数据科学总监或组经理通常有五到十年的经验，但与前面列出的所有角色不同，组经理通常有大约4名下属。报告给你的团队的确切规模将很大程度上取决于你的部门和你工作的公司。
+数据科学总监或组经理通常有五到十年的经验，但与前面列出的所有角色不同，组经理通常有大约 4 名下属。报告给你的团队的确切规模将很大程度上取决于你的部门和你工作的公司。
 
 **获取该职位所需的技能**
 
-作为数据科学总监，你需要在数据科学的大多数领域拥有广泛的知识和经验。你应该对大数据工具（如Spark、Hive等）非常熟悉。
+作为数据科学总监，你需要在数据科学的大多数领域拥有广泛的知识和经验。你应该对大数据工具（如 Spark、Hive 等）非常熟悉。
 
 作为数据科学总监，你还应该能够“理解和调试跨工具链和团队的复杂系统集成”。你可以熟练地识别数据模式背后的故事，并将分析洞察提炼成简洁、以业务为中心的要点。
 
@@ -146,7 +146,7 @@
 
 ### 5\. 数据科学高级总监/副总裁
 
-在你职业生涯的这个阶段，你应该有10年以上的经验。你将负责管理一个部门或多个部门。
+在你职业生涯的这个阶段，你应该有 10 年以上的经验。你将负责管理一个部门或多个部门。
 
 **获得职位所需的技能**
 

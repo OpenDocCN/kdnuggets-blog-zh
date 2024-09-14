@@ -1,10 +1,10 @@
 # 使用 Pandas 制作美丽的交互式可视化的最简单方法
 
-> 原文：[https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)
+> 原文：[`www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html`](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)
 
 **由 [Frank Andrade](https://frank-andrade.medium.com/) 数据科学家和 [Python 教师](https://bit.ly/30A2X3C)**
 
-![使用 Pandas 制作美丽的交互式可视化的最简单方法](../Images/92a35e18a664bd94794bebbed34a9d4b.png)
+![使用 Pandas 制作美丽的交互式可视化的最简单方法](img/92a35e18a664bd94794bebbed34a9d4b.png)
 
 图片由 [Jerry Zhang](https://unsplash.com/@z734923105?utm_source=medium&utm_medium=referral) 拍摄，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -63,7 +63,7 @@ from IPython.display import display,HTMLcf.set_config_file(sharing='public',them
 
 ## 数据
 
-在本指南中，我们将使用一个人口数据框。首先，从[Google Drive](https://drive.google.com/file/d/1QpCcE4U8NIhznbqf0kdeO2ITKPEs9OSm/view?usp=sharing)或[Github](https://github.com/ifrankandrade/data-visualization/tree/main/datasets/population)下载CSV文件，将文件移动到你的 Python 脚本所在的位置，然后如下面所示在 Pandas 数据框中读取它。
+在本指南中，我们将使用一个人口数据框。首先，从[Google Drive](https://drive.google.com/file/d/1QpCcE4U8NIhznbqf0kdeO2ITKPEs9OSm/view?usp=sharing)或[Github](https://github.com/ifrankandrade/data-visualization/tree/main/datasets/population)下载 CSV 文件，将文件移动到你的 Python 脚本所在的位置，然后如下面所示在 Pandas 数据框中读取它。
 
 ```py
 df_population = pd.read_csv('population_total.csv')
@@ -71,7 +71,7 @@ df_population = pd.read_csv('population_total.csv')
 
 数据框包含了世界上大多数国家多年来的人口数据，长这样：
 
-![用 Pandas 制作美丽交互式可视化的最简单方法](../Images/66516d5a70a2fd8c78da9f79d407574f.png)
+![用 Pandas 制作美丽交互式可视化的最简单方法](img/66516d5a70a2fd8c78da9f79d407574f.png)
 
 作者提供的图片
 
@@ -88,7 +88,7 @@ df_population = df_population[['United States', 'India', 'China',
 
 现在数据框看起来像下面的图片，已经准备好绘制了。
 
-![用 Pandas 制作美丽交互式可视化的最简单方法](../Images/c8f40adc1ec4f5eff95da4c7f26a9622.png)
+![用 Pandas 制作美丽交互式可视化的最简单方法](img/c8f40adc1ec4f5eff95da4c7f26a9622.png)
 
 作者提供的图片
 
@@ -98,7 +98,7 @@ df_population = df_population[['United States', 'India', 'China',
 
 ## 线形图
 
-让我们制作一个线形图，以比较1955年到2020年这5个国家的人口增长情况。
+让我们制作一个线形图，以比较 1955 年到 2020 年这 5 个国家的人口增长情况。
 
 如前所述，我们将使用`df_population.iplot(kind='name_of_plot')`语法来制作下图所示的图表。
 
@@ -107,7 +107,7 @@ df_population.iplot(kind='**line**',xTitle='Years', yTitle='Population',
                     title='Population (1955-2020)')
 ```
 
-![用 Pandas 制作美丽交互式可视化的最简单方法](../Images/4cf4d93a41d01ffa59c4070545952aa4.png)
+![用 Pandas 制作美丽交互式可视化的最简单方法](img/4cf4d93a41d01ffa59c4070545952aa4.png)
 
 作者提供的图片
 
@@ -119,7 +119,7 @@ df_population.iplot(kind='**line**',xTitle='Years', yTitle='Population',
 
 ## 单个条形图
 
-让我们创建一个条形图，展示每个国家到2020年的总人口。为此，首先，我们从索引中选择2020年，然后将行与列转置，以便将年份放入列中。我们将这个新的数据框命名为`df_population_2020`（我们在绘制饼图时还会用到这个数据框）
+让我们创建一个条形图，展示每个国家到 2020 年的总人口。为此，首先，我们从索引中选择 2020 年，然后将行与列转置，以便将年份放入列中。我们将这个新的数据框命名为`df_population_2020`（我们在绘制饼图时还会用到这个数据框）
 
 ```py
 df_population_2020 = df_population[df_population.index.isin([2020])]
@@ -134,7 +134,7 @@ df_population_2020.iplot(kind='**bar**', color='lightgreen',
                          title='Population in 2020')
 ```
 
-![用 Pandas 制作美丽交互式可视化的最简单方法](../Images/ea171837b7e5ab08fbb6219a84084116.png)
+![用 Pandas 制作美丽交互式可视化的最简单方法](img/ea171837b7e5ab08fbb6219a84084116.png)
 
 作者提供的图片
 
@@ -149,7 +149,7 @@ df_population_sample.iplot(kind='**bar**', xTitle='Years',
                            yTitle='Population')
 ```
 
-![用 Pandas 制作美丽交互式可视化的最简单方法](../Images/1b5a78575876458ee6b69fecd7fbb53a.png)
+![用 Pandas 制作美丽交互式可视化的最简单方法](img/1b5a78575876458ee6b69fecd7fbb53a.png)
 
 作者提供的图片
 
@@ -166,7 +166,7 @@ df_population['United States'].iplot(kind='**box**', color='green',
                                      yTitle='Population')
 ```
 
-![用 Pandas 制作美丽互动可视化的最简单方法](../Images/0525777f50ea01220867f042673cb1d3.png)
+![用 Pandas 制作美丽互动可视化的最简单方法](img/0525777f50ea01220867f042673cb1d3.png)
 
 作者提供的图片
 
@@ -177,7 +177,7 @@ df_population.iplot(kind='**box**', xTitle='Countries',
                     yTitle='Population')
 ```
 
-![用 Pandas 制作美丽互动可视化的最简单方法](../Images/3792cedd09244d5e8fe4352e0429f69b.png)
+![用 Pandas 制作美丽互动可视化的最简单方法](img/3792cedd09244d5e8fe4352e0429f69b.png)
 
 作者提供的图片
 
@@ -192,13 +192,13 @@ df_population[['United States', 'Indonesia']].iplot(kind='**hist**',
                                                 xTitle='Population')
 ```
 
-![用 Pandas 制作美丽互动可视化的最简单方法](../Images/48756348b485a7d7dd63129b02ecc675.png)
+![用 Pandas 制作美丽互动可视化的最简单方法](img/48756348b485a7d7dd63129b02ecc675.png)
 
 作者提供的图片
 
 ## 饼图
 
-让我们再次比较2020年的人口数据，但这次使用饼图。为此，我们将使用在“单条柱状图”部分创建的`df_population_2020`数据框。
+让我们再次比较 2020 年的人口数据，但这次使用饼图。为此，我们将使用在“单条柱状图”部分创建的`df_population_2020`数据框。
 
 然而，为了制作饼图，我们需要将“国家”作为列而不是索引，因此我们使用`.reset_index()`来恢复列。然后我们将`2020`转换为字符串。
 
@@ -211,7 +211,7 @@ df_population_2020.iplot(kind='**pie**', labels='country',
                          title='Population in 2020 (%)')
 ```
 
-![用 Pandas 制作美丽互动可视化的最简单方法](../Images/b50b37bc5b5c28326e46edbb51556f95.png)
+![用 Pandas 制作美丽互动可视化的最简单方法](img/b50b37bc5b5c28326e46edbb51556f95.png)
 
 作者提供的图片
 
@@ -225,15 +225,15 @@ df_population_2020.iplot(kind='**pie**', labels='country',
 df_population.iplot(kind='**scatter'**, **mode**='markers')
 ```
 
-![用 Pandas 制作美丽互动可视化的最简单方法](../Images/75638c1317f0366c0c812d1e856f93e5.png)
+![用 Pandas 制作美丽互动可视化的最简单方法](img/75638c1317f0366c0c812d1e856f93e5.png)
 
 就这样！现在你已经准备好使用 Pandas 制作自己的美丽互动可视化。如果你想学习 Python 中其他可视化库，如 Matplotlib 和 Seaborn，并且还想了解如何制作词云，[查看我制作的这些指南](https://frank-andrade.medium.com/list/data-visualization-in-python-7aea0e3f93ca)。
 
-[**加入我的3k+人邮件列表，获取我在所有教程中使用的 Python 数据科学备忘单（免费 PDF）**](https://frankandrade.ck.page/bd063ff2d3)
+[**加入我的 3k+人邮件列表，获取我在所有教程中使用的 Python 数据科学备忘单（免费 PDF）**](https://frankandrade.ck.page/bd063ff2d3)
 
 如果你喜欢阅读这样的故事并且想支持我作为作者，请考虑注册成为 Medium 会员。每月$5，你可以无限制访问成千上万的 Python 指南和数据科学文章。如果你通过[我的链接](https://frank-andrade.medium.com/membership)注册，我将获得少量佣金，对你没有额外费用。
 
-**简历: [Frank Andrade](https://frank-andrade.medium.com/)** 是数据科学家，[Python 教师](https://bit.ly/30A2X3C)，以及 Medium 上的前1000名作者。
+**简历: [Frank Andrade](https://frank-andrade.medium.com/)** 是数据科学家，[Python 教师](https://bit.ly/30A2X3C)，以及 Medium 上的前 1000 名作者。
 
 [原文](https://towardsdatascience.com/the-easiest-way-to-make-beautiful-interactive-visualizations-with-pandas-cdf6d5e91757)。经许可转载。
 

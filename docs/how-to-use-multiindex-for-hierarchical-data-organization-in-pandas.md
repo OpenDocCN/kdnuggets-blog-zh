@@ -1,38 +1,38 @@
-# 如何在Pandas中使用MultiIndex进行层次数据组织
+# 如何在 Pandas 中使用 MultiIndex 进行层次数据组织
 
-> 原文：[https://www.kdnuggets.com/how-to-use-multiindex-for-hierarchical-data-organization-in-pandas](https://www.kdnuggets.com/how-to-use-multiindex-for-hierarchical-data-organization-in-pandas)
+> 原文：[`www.kdnuggets.com/how-to-use-multiindex-for-hierarchical-data-organization-in-pandas`](https://www.kdnuggets.com/how-to-use-multiindex-for-hierarchical-data-organization-in-pandas)
 
-![如何在Pandas中使用MultiIndex进行层次数据组织](../Images/0306781eb2c5aaddbfd3b9791b35744b.png)
+![如何在 Pandas 中使用 MultiIndex 进行层次数据组织](img/0306781eb2c5aaddbfd3b9791b35744b.png)
 
 图片由编辑提供 | Midjourney & Canva
 
-让我们学习如何在Pandas中使用MultiIndex进行层次数据处理。
+让我们学习如何在 Pandas 中使用 MultiIndex 进行层次数据处理。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ## 准备
 
-我们需要确保安装了Pandas包。你可以使用以下代码进行安装：
+我们需要确保安装了 Pandas 包。你可以使用以下代码进行安装：
 
 ```py
 pip install pandas
 ```
 
-然后，让我们学习如何在Pandas中处理MultiIndex数据。
+然后，让我们学习如何在 Pandas 中处理 MultiIndex 数据。
 
-## 在Pandas中使用MultiIndex
+## 在 Pandas 中使用 MultiIndex
 
-Pandas中的MultiIndex指的是在DataFrame或Series上进行多级索引。当我们在二维表格结构中处理更高维的数据时，这个过程很有帮助。通过MultiIndex，我们可以用多个键来索引数据，并且更好地组织它们。让我们用一个数据集示例来更好地理解它们。
+Pandas 中的 MultiIndex 指的是在 DataFrame 或 Series 上进行多级索引。当我们在二维表格结构中处理更高维的数据时，这个过程很有帮助。通过 MultiIndex，我们可以用多个键来索引数据，并且更好地组织它们。让我们用一个数据集示例来更好地理解它们。
 
 ```py
 import pandas as pd
@@ -60,9 +60,9 @@ B        1          30
          2          40
 ```
 
-如你所见，上面的DataFrame有一个包含类别和编号的两级索引。
+如你所见，上面的 DataFrame 有一个包含类别和编号的两级索引。
 
-也可以使用DataFrame中现有的列来设置MultiIndex。
+也可以使用 DataFrame 中现有的列来设置 MultiIndex。
 
 ```py
 data = {
@@ -87,9 +87,9 @@ B        1          30
          2          40
 ```
 
-即使采用不同的方法，我们也能得到类似的结果。这就是为什么我们可以在DataFrame中使用MultiIndex。
+即使采用不同的方法，我们也能得到类似的结果。这就是为什么我们可以在 DataFrame 中使用 MultiIndex。
 
-如果你已经有了MultiIndex DataFrame，可以使用以下代码交换级别。
+如果你已经有了 MultiIndex DataFrame，可以使用以下代码交换级别。
 
 ```py
 print(df.swaplevel())
@@ -106,7 +106,7 @@ Number Category
 2      B            40
 ```
 
-当然，我们可以使用以下代码将MultiIndex返回为列：
+当然，我们可以使用以下代码将 MultiIndex 返回为列：
 
 ```py
 print(df.reset_index())
@@ -122,7 +122,7 @@ print(df.reset_index())
 3        B       2     40
 ```
 
-那么，如何在Pandas DataFrame中访问MultiIndex数据呢？我们可以使用`.loc`方法。例如，我们访问MultiIndex DataFrame的第一级。
+那么，如何在 Pandas DataFrame 中访问 MultiIndex 数据呢？我们可以使用`.loc`方法。例如，我们访问 MultiIndex DataFrame 的第一级。
 
 ```py
 print(df.loc['A']) 
@@ -150,7 +150,7 @@ Value    10
 Name: (A, 1), dtype: int64
 ```
 
-最后，我们可以使用`.groupby`方法对MultiIndex进行统计聚合。
+最后，我们可以使用`.groupby`方法对 MultiIndex 进行统计聚合。
 
 ```py
 print(df.groupby(level=['Category']).sum())
@@ -165,15 +165,15 @@ A            30
 B            70
 ```
 
-精通Pandas中的MultiIndex将帮助你深入了解层次数据。
+精通 Pandas 中的 MultiIndex 将帮助你深入了解层次数据。
 
 ## 额外资源
 
-+   [Pandas：如何在数据透视表中移除MultiIndex](https://www.statology.org/pandas-pivot-table-remove-multiindex/)
++   [Pandas：如何在数据透视表中移除 MultiIndex](https://www.statology.org/pandas-pivot-table-remove-multiindex/)
 
-+   [7步掌握Python和Pandas的数据清理](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)
++   [7 步掌握 Python 和 Pandas 的数据清理](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)
 
-+   [如何为机器学习索引、切片和重塑NumPy数组](https://machinelearningmastery.com/index-slice-reshape-numpy-arrays-machine-learning-python/)
++   [如何为机器学习索引、切片和重塑 NumPy 数组](https://machinelearningmastery.com/index-slice-reshape-numpy-arrays-machine-learning-python/)
 
 **[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰写者。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 涉猎多种 AI 和机器学习主题。
 

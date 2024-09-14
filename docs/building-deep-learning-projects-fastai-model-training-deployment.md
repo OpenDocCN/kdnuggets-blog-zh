@@ -1,12 +1,12 @@
 # 使用 fastai 构建深度学习项目——从模型训练到部署
 
-> 原文：[https://www.kdnuggets.com/2020/11/building-deep-learning-projects-fastai-model-training-deployment.html](https://www.kdnuggets.com/2020/11/building-deep-learning-projects-fastai-model-training-deployment.html)
+> 原文：[`www.kdnuggets.com/2020/11/building-deep-learning-projects-fastai-model-training-deployment.html`](https://www.kdnuggets.com/2020/11/building-deep-learning-projects-fastai-model-training-deployment.html)
 
-[评论](#comments)
+评论
 
 **由 [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)，顾问，网页与数据科学讲师**
 
-![图示](../Images/d82eb971a1046cbb93425da40507e14c.png)
+![图示](img/d82eb971a1046cbb93425da40507e14c.png)
 
 [Unsplash](https://unsplash.com/s/photos/neural-network)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -77,7 +77,7 @@ from fastai.vision.widgets import *
 
 进入你的门户，使用 [这个快速入门](https://docs.microsoft.com/en-us/azure/cognitive-services/cognitive-services-apis-create-account?tabs=multiservice%2Clinux) 创建一个新的认知服务资源。启用 Bing 图像搜索 API，然后从左侧面板中的`Keys and Endpoint`选项中复制 **密钥** 到你的资源中。
 
-![用于帖子的图片](../Images/b1635692e4f14ba07b05e665499d349f.png)
+![用于帖子的图片](img/b1635692e4f14ba07b05e665499d349f.png)
 
 使用检索到的密钥，将这些密钥设置到环境中，如下所示：
 
@@ -91,7 +91,7 @@ key = os.environ.get('AZURE_SEARCH_KEY', '<YOUR_KEY>')
 help(fastbook)
 ```
 
-![用于帖子的图片](../Images/5ba1ecb1f0f3ae1ce09b34269ff1340f.png)
+![用于帖子的图片](img/5ba1ecb1f0f3ae1ce09b34269ff1340f.png)
 
 你可以在这个帮助指南中查看`search_image_bing`函数。该函数接受你上面定义的资源的密钥和搜索查询，我们可以使用`attrgot`方法访问搜索结果的 URL：
 
@@ -103,7 +103,7 @@ len(images)
 
 我们已经获得了 150 个德国牧羊犬图片的 URL：
 
-![用于帖子的图片](../Images/094d201cad16cd816977b958f37ee8f3.png)
+![用于帖子的图片](img/094d201cad16cd816977b958f37ee8f3.png)
 
 现在，我们可以使用`download_url`函数下载这些图片。但首先让我们定义我们想要的狗的类型。在本教程中，我将处理三种类型的狗，德国牧羊犬、黑狗和拉布拉多。
 
@@ -138,7 +138,7 @@ files = get_image_files(path)
 files
 ```
 
-![用于帖子的图片](../Images/0c8ab2e51754d8fd12a377a98eaf7402.png)
+![用于帖子的图片](img/0c8ab2e51754d8fd12a377a98eaf7402.png)
 
 ### 验证图像
 
@@ -207,7 +207,7 @@ dls = dogs.dataloaders(path)
 dls.valid.show_batch()
 ```
 
-![帖子图片](../Images/905ebbbe0feea2002d8a362f147239db.png)
+![帖子图片](img/905ebbbe0feea2002d8a362f147239db.png)
 
 ### 数据增强
 
@@ -226,7 +226,7 @@ dls = dogs.dataloaders(path)
 dls.train.show_batch(max_n=8, nrows=2, unique=True)
 ```
 
-![帖子图片](../Images/4d0126ce252304e84a31439057e37e93.png)
+![帖子图片](img/4d0126ce252304e84a31439057e37e93.png)
 
 ### 模型训练和数据清洗
 
@@ -243,7 +243,7 @@ model.fine_tune(4)
 
 在这里，我们仅训练了 4 个周期：
 
-![用于帖子](../Images/ea4101cbd794989ac53cb4c5d8af0ce4.png)
+![用于帖子](img/ea4101cbd794989ac53cb4c5d8af0ce4.png)
 
 我们还可以使用混淆矩阵可视化预测结果，并将其与实际标签进行比较：
 
@@ -252,7 +252,7 @@ interp = ClassificationInterpretation.from_learner(learn)
 interp.plot_confusion_matrix()
 ```
 
-![用于帖子](../Images/8a6baf884e7e0baaf717aeece6ab931d.png)
+![用于帖子](img/8a6baf884e7e0baaf717aeece6ab931d.png)
 
 如你所见，我们只有五个错误预测。让我们查看损失最大的图像，即数据集中损失最高的图像：
 
@@ -260,13 +260,13 @@ interp.plot_confusion_matrix()
 interp.plot_top_losses(6, nrows=3)
 ```
 
-![用于帖子](../Images/87ebd9b850855e69b6f80cd69d91c73d.png)
+![用于帖子](img/87ebd9b850855e69b6f80cd69d91c73d.png)
 
 你可以看到，模型在黑色和拉布拉多之间混淆了。因此，我们可以使用 ImageClassifierCleaner 类将这些图像指定为特定类别。
 
 将模型传递给该类，它将打开一个具有直观 GUI 的数据清理小部件。我们可以更改训练集和验证集图像的标签，并查看损失最高的图像。
 
-![用于帖子](../Images/2d5f81b449d3b9e0918ce5cb795462bf.png)
+![用于帖子](img/2d5f81b449d3b9e0918ce5cb795462bf.png)
 
 将每张图像添加到其正确的类别后，我们必须使用以下方法将它们移动到正确的目录中：
 
@@ -299,7 +299,7 @@ model_inf = load_learner(path/'export.pkl')
 model_inf.predict('dogs/labrador/00000000.jpg')
 ```
 
-![用于帖子](../Images/f1efd5b6d2d141dd8e61dd0afc4c4a0b.png)
+![用于帖子](img/f1efd5b6d2d141dd8e61dd0afc4c4a0b.png)
 
 我们可以检查模型数据加载器词汇表中的标签：
 
@@ -307,7 +307,7 @@ model_inf.predict('dogs/labrador/00000000.jpg')
 model_inf.dls.vocab
 ```
 
-![用于帖子](../Images/6d0eb76f457dfb1eb5c650c3d8b083f8.png)
+![用于帖子](img/6d0eb76f457dfb1eb5c650c3d8b083f8.png)
 
 ### 从 Jupyter Notebook 构建应用程序
 
@@ -325,7 +325,7 @@ model_inf.dls.vocab
 
 [**使用 Flask 部署训练好的 ML 模型**](https://towardsdatascience.com/deploying-a-trained-ml-model-using-flask-541520b3cbe9)
 
-端到端 ML 项目教程系列的第 2 部分
+端到端 ML 项目教程系列的第二部分
 
 但如果你想要另一种简单且免费的 Voila 应用程序部署方式，你可以使用 [Binder](https://mybinder.org/)。按照这些步骤在 Binder 上部署应用程序：
 
@@ -355,7 +355,7 @@ model_inf.dls.vocab
 
 +   [与 Google、Microsoft、Amazon 等公司及大数据驱动公司的 CEO 的数据科学家和工程师的播客](https://www.youtube.com/watch?v=a2pkZCleJwM&t=2s)。
 
-+   [项目和说明](https://towardsdatascience.com/building-covid-19-analysis-dashboard-using-python-and-voila-ee091f65dcbb?source=---------2------------------) 以实施迄今为止学习的主题。了解新的认证、训练营和资源，以通过诸如[**Google的TensorFlow开发者证书考试**](https://youtu.be/yapSsspJzAw)之类的认证。
++   [项目和说明](https://towardsdatascience.com/building-covid-19-analysis-dashboard-using-python-and-voila-ee091f65dcbb?source=---------2------------------) 以实施迄今为止学习的主题。了解新的认证、训练营和资源，以通过诸如[**Google 的 TensorFlow 开发者证书考试**](https://youtu.be/yapSsspJzAw)之类的认证。
 
 欢迎通过[Twitter](https://twitter.com/tyagi_harshit24)或[LinkedIn](https://www.linkedin.com/in/tyagiharshit/)与我联系。
 
@@ -365,22 +365,22 @@ model_inf.dls.vocab
 
 **相关：**
 
-+   [与《深度学习编程》同行10天](/2020/10/10-days-deep-learning-coders.html)
++   与《深度学习编程》同行 10 天
 
-+   [在AWS上使用Docker Swarm、Traefik和Keycloak部署安全可扩展的Streamlit应用](/2020/10/deploying-secure-scalable-streamlit-apps-aws-docker-swarm-traefik-keycloak.html)
++   在 AWS 上使用 Docker Swarm、Traefik 和 Keycloak 部署安全可扩展的 Streamlit 应用
 
-+   [扩展机器学习模型的5个挑战](/2020/10/5-challenges-scaling-machine-learning-models.html)
++   扩展机器学习模型的 5 个挑战
 
 ### 更多相关主题
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
 
-+   [顶级7种模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
++   [顶级 7 种模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [将机器学习算法完整端到端部署到生产环境中](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [回到基础第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础第 4 周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
-+   [2022年通过构建15个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
++   [2022 年通过构建 15 个神经网络项目学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
 
-+   [使用TensorFlow和Keras构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
++   [使用 TensorFlow 和 Keras 构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)

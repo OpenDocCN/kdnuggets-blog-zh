@@ -1,8 +1,8 @@
 # 数据科学面试指南 – 第二部分：面试资源
 
-> 原文：[https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
+> 原文：[`www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html`](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
-![数据科学面试指南 - 第二部分：面试资源](../Images/ee5c6f5bfe45509d832ca26631e31425.png)
+![数据科学面试指南 - 第二部分：面试资源](img/ee5c6f5bfe45509d832ca26631e31425.png)
 
 来源: [Maya Maceka](https://unsplash.com/@mayamaceka) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -100,11 +100,11 @@ Krish Naik 是 iNeuron 的联合创始人，目前拥有 542K 订阅者。他有
 
 +   [5 个领域的 20+ 数据科学项目创意](https://www.youtube.com/watch?v=zk6OBmEI0xY&list=PLZoTAELRMXVMbpd_KBoOY_ecwMsDy92gS&index=2)
 
-+   [30+ Python练习题集，适合数据分析师和数据科学家](https://www.youtube.com/watch?v=rSOB2oOHAdQ&list=PLZoTAELRMXVMbpd_KBoOY_ecwMsDy92gS&index=3)
++   [30+ Python 练习题集，适合数据分析师和数据科学家](https://www.youtube.com/watch?v=rSOB2oOHAdQ&list=PLZoTAELRMXVMbpd_KBoOY_ecwMsDy92gS&index=3)
 
 +   [500+ 数据分析师和业务分析面试问题](https://www.youtube.com/watch?v=1oW2_QAuAyI&list=PLZoTAELRMXVMbpd_KBoOY_ecwMsDy92gS&index=4)
 
-+   [SQL完全路线图及100+面试问题及答案](https://www.youtube.com/watch?v=tT1oLM-EaYk&list=PLZoTAELRMXVMbpd_KBoOY_ecwMsDy92gS&index=5)
++   [SQL 完全路线图及 100+面试问题及答案](https://www.youtube.com/watch?v=tT1oLM-EaYk&list=PLZoTAELRMXVMbpd_KBoOY_ecwMsDy92gS&index=5)
 
 他有更多详细的播放列表：
 
@@ -116,11 +116,11 @@ Krish Naik 是 iNeuron 的联合创始人，目前拥有 542K 订阅者。他有
 
 # 备忘单
 
-备忘单是以通俗易懂的方式学习复杂主题的好方法。与其我列举所有备忘单，不如阅读[Abid Ali Awan](https://www.polywork.com/kingabzpro)（[@1abidaliawan](https://twitter.com/1abidaliawan)）发表在KDnuggets上的两篇文章。你将能找到学习数据科学和准备面试所需的每一份备忘单。
+备忘单是以通俗易懂的方式学习复杂主题的好方法。与其我列举所有备忘单，不如阅读[Abid Ali Awan](https://www.polywork.com/kingabzpro)（[@1abidaliawan](https://twitter.com/1abidaliawan)）发表在 KDnuggets 上的两篇文章。你将能找到学习数据科学和准备面试所需的每一份备忘单。
 
-1.  [数据科学备忘单完整合集 – 第1部分](/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
+1.  数据科学备忘单完整合集 – 第一部分
 
-1.  [数据科学备忘单完整合集 – 第2部分](/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
+1.  数据科学备忘单完整合集 – 第二部分
 
 上述提供的资源将帮助你在数据科学面试中取得最佳结果。然而，你可以做一些准备工作来使过程更加顺利。
 
@@ -164,7 +164,7 @@ Krish Naik 是 iNeuron 的联合创始人，目前拥有 542K 订阅者。他有
 
 +   [学习数据分析和数据科学的最佳免费资源](https://www.kdnuggets.com/2024/03/365datascience-best-free-resources-learn-data-analysis-data-science)
 
-+   [2022年最佳数据科学学习资源](https://www.kdnuggets.com/2022/01/best-learning-resources-data-science-2022.html)
++   [2022 年最佳数据科学学习资源](https://www.kdnuggets.com/2022/01/best-learning-resources-data-science-2022.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

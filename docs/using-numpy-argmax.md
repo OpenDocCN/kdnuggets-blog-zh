@@ -1,8 +1,8 @@
 # 使用 Numpy 的 argmax()
 
-> 原文：[https://www.kdnuggets.com/2022/07/using-numpy-argmax.html](https://www.kdnuggets.com/2022/07/using-numpy-argmax.html)
+> 原文：[`www.kdnuggets.com/2022/07/using-numpy-argmax.html`](https://www.kdnuggets.com/2022/07/using-numpy-argmax.html)
 
-![使用 Numpy 的 argmax()](../Images/8f28a3c503b099a667bf10b17d928f5b.png)
+![使用 Numpy 的 argmax()](img/8f28a3c503b099a667bf10b17d928f5b.png)
 
 而 `argmax()` 返回... 9?!? 对，没错！
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-回想一下5个W：*谁，什么，何时，哪里，为什么*。
+回想一下 5 个 W：*谁，什么，何时，哪里，为什么*。
 
 在处理问题时，用正确的“W”来框定问题可能意味着你能否获得所需的答案，或者陷入完全的困惑。
 
@@ -70,7 +70,7 @@
 
 ## 单维度
 
-在以通常的方式导入Numpy后，我们创建了一个单维度数组并将其传递给`argmax`。查看数组和代码，猜测一下你认为输出应该是什么。
+在以通常的方式导入 Numpy 后，我们创建了一个单维度数组并将其传递给`argmax`。查看数组和代码，猜测一下你认为输出应该是什么。
 
 ```py
 import numpy as np
@@ -86,7 +86,7 @@ print(max_idx)
 
 这个输出符合你的预期吗？
 
-如果你记得`argmax`返回的是索引而不是值，并且索引从0开始，我们可以看到我们得到的是索引9——实际上是第十个位置——它包含了'10'，即数组中的最大值。
+如果你记得`argmax`返回的是索引而不是值，并且索引从 0 开始，我们可以看到我们得到的是索引 9——实际上是第十个位置——它包含了'10'，即数组中的最大值。
 
 明白了吗？
 
@@ -114,7 +114,7 @@ print(max_idx)
 
 但是如果我们指定一个轴呢？
 
-首先，回顾一下轴0指的是*行*，而轴1指的是*列*。让我们看看当我们将`axis=0`传递给`argmax`时会发生什么。
+首先，回顾一下轴 0 指的是*行*，而轴 1 指的是*列*。让我们看看当我们将`axis=0`传递给`argmax`时会发生什么。
 
 ```py
 import numpy as np
@@ -136,13 +136,13 @@ array([1, 1, 1, 1, 1)
 
 **最大值**在哪里？它在第二行的最后一列。
 
-由于我们已经指定了我们想知道它在**行**中的位置（`axis=0`），对于数组中的每一列，Numpy报告了最大值出现的行。回顾一下索引从0开始，我们可以看到，在这个数组的每一列中，最大值出现在索引为1的行，即第二行。查看我们的代码，值'10'的位置似乎`argmax`是正确的。
+由于我们已经指定了我们想知道它在**行**中的位置（`axis=0`），对于数组中的每一列，Numpy 报告了最大值出现的行。回顾一下索引从 0 开始，我们可以看到，在这个数组的每一列中，最大值出现在索引为 1 的行，即第二行。查看我们的代码，值'10'的位置似乎`argmax`是正确的。
 
 如果我们指定`axis=1`，你期望输出是什么？我将这留给读者作为练习。
 
 # 总结
 
-在这篇文章中，我们了解了`argmax`是什么，为什么我们要使用它，并且介绍了几个使用Numpy的`argmax`函数的例子。
+在这篇文章中，我们了解了`argmax`是什么，为什么我们要使用它，并且介绍了几个使用 Numpy 的`argmax`函数的例子。
 
 你现在应该知道`argmax`是如何工作的。
 

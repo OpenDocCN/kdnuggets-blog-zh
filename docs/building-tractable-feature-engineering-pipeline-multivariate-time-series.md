@@ -1,22 +1,22 @@
 # 构建一个可处理的、多变量时间序列特征工程管道
 
-> 原文：[https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
+> 原文：[`www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html`](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
 
-![构建一个可处理的、多变量时间序列特征工程管道](../Images/ee523c67b75080a28800f479d5af0495.png)
+![构建一个可处理的、多变量时间序列特征工程管道](img/ee523c67b75080a28800f479d5af0495.png)
 
 图片来源：[Christophe Dion](https://unsplash.com/@chris_dion?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)于[Unsplash](https://unsplash.com/photos/3KA1M16PuoE)
 
-精确的时间序列预测对于业务问题至关重要，例如预测制造中的材料属性变化和销售预测。现代预测技术包括使用像Xgboost这样的机器学习算法，在表格数据上构建回归模型来预测未来。表格数据允许回归模型通过利用与实际销售相关的非目标因素（如零售店的每日客流量）来进行预测。
+精确的时间序列预测对于业务问题至关重要，例如预测制造中的材料属性变化和销售预测。现代预测技术包括使用像 Xgboost 这样的机器学习算法，在表格数据上构建回归模型来预测未来。表格数据允许回归模型通过利用与实际销售相关的非目标因素（如零售店的每日客流量）来进行预测。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持。
 
 * * *
 
@@ -28,17 +28,17 @@
 
 这仅需要转换器类通过参数 *names* 初始化时指定任何所需的输出名称。
 
-其他转换器也可以类似地自定义以支持检索输出名称，只要我们引入*get_feature_names_out()*。以下是一个[*TsfreshRollingMixin*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L15)类的示例，该类利用TSFresh库中的[*roll_time_series()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.utilities.html#tsfresh.utilities.dataframe_functions.roll_time_series)实用函数来提取时间序列的滚动窗口。要跟踪派生的滚动窗口特征，我们只需将特征分配为[*derived_names*属性](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L153-L168)。*TsfreshRollingMixin*类还包含其他辅助函数，如[*prepare_df()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L97)和[*get_combined()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L112)，以便将numpy数组转换为pandas.DataFrame，并将派生特征与输入特征结合在一起。感兴趣的读者可以查看[代码库](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/tsfresh_transformers.py)，更好地了解其实现。结合TSFresh的[*extract_features()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.feature_extraction.html#tsfresh.feature_extraction.extraction.extract_features)，我们可以设计一个*TSFreshRollingTransformer*类，使我们能够指定相关的[TSFresh参数](https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html)，以派生所需的时间序列特征，如下所示。
+其他转换器也可以类似地自定义以支持检索输出名称，只要我们引入*get_feature_names_out()*。以下是一个[*TsfreshRollingMixin*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L15)类的示例，该类利用 TSFresh 库中的[*roll_time_series()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.utilities.html#tsfresh.utilities.dataframe_functions.roll_time_series)实用函数来提取时间序列的滚动窗口。要跟踪派生的滚动窗口特征，我们只需将特征分配为[*derived_names*属性](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L153-L168)。*TsfreshRollingMixin*类还包含其他辅助函数，如[*prepare_df()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L97)和[*get_combined()*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/ceeb3e3ad639e64c9bc905686e590658133b315c/src/features/tsfresh_transformers.py#L112)，以便将 numpy 数组转换为 pandas.DataFrame，并将派生特征与输入特征结合在一起。感兴趣的读者可以查看[代码库](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/tsfresh_transformers.py)，更好地了解其实现。结合 TSFresh 的[*extract_features()*](https://tsfresh.readthedocs.io/en/latest/api/tsfresh.feature_extraction.html#tsfresh.feature_extraction.extraction.extract_features)，我们可以设计一个*TSFreshRollingTransformer*类，使我们能够指定相关的[TSFresh 参数](https://tsfresh.readthedocs.io/en/latest/text/feature_extraction_settings.html)，以派生所需的时间序列特征，如下所示。
 
 我们将*TSFreshRollingTransformer*派生的特征标记为类似于**(window #)**的名称，以指示聚合窗口的大小。
 
-除了TSFresh派生的时间序列特征，[*RollingLagsTrasformer*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L171)类展示了如何使用*TsfreshRollingMixin*类从给定的滚动窗口中提取滞后值，并将输出特征跟踪为**(lag #)**作为滞后顺序。其他在滚动窗口上执行的特定变换可以参考此示例，设计与可追踪管道兼容的转换器。
+除了 TSFresh 派生的时间序列特征，[*RollingLagsTrasformer*](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/tsfresh_transformers.py#L171)类展示了如何使用*TsfreshRollingMixin*类从给定的滚动窗口中提取滞后值，并将输出特征跟踪为**(lag #)**作为滞后顺序。其他在滚动窗口上执行的特定变换可以参考此示例，设计与可追踪管道兼容的转换器。
 
 [这个脚本](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/features/make_features.py)展示了如何使用上述变换器构建时间序列管道，以在不同阶段衍生特征。例如，从第一个管道提取的[特征](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L73)有一个名为*Pre-MedianImputer__Global_intensity*的特征，用于指示原始特征“Global_intensity”是基于*SimpleImputer*使用中位数策略进行填补的。随后，衍生出的[滚动特征](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L162)名称类似于*TSFreshRolling__Pre-MedianImputer–Global_intensity__maximum(window 30)*，表示在窗口大小为 30 步的范围内填补的“Global_intensity”的最大值。最后，滚动窗口特征将经过填补和标准化处理，[建议的名称](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/8ca4c9bacc5ae8fcd27702066d7e47f422c30fd3/src/features/make_features.py#L213) *ImputeAndScaler__TSFreshRolling__Pre-MedianImputer–Global_intensity__median(window 30)* 指示原始特征“Global_intensity”已经经历了上述所有变换。我们可以方便地通过相关标记追踪管道提供的变换名称，并验证变换后的输出。
 
 我们通过一个[示例](https://github.com/JQGoh/multivariate_time_series_pipeline/blob/master/src/models/train_and_predict.py)来补充这个演示，示例中使用了[Darts](https://github.com/unit8co/darts)包来构建线性回归模型进行预测。一旦管道准备好，就可以轻松加载输入数据集并相应地衍生特征。下图展示了基于从管道衍生特征训练的线性回归模型的预测结果。我们希望这篇文章能为读者提供一个基本模板，方便他们为时间序列预测用例构建时间序列管道。
 
-![构建可处理的多变量时间序列特征工程管道](../Images/1552414f230e4b4d59d8f86d00c6e877.png)
+![构建可处理的多变量时间序列特征工程管道](img/1552414f230e4b4d59d8f86d00c6e877.png)
 
 基于设计管道中的工程特征的线性回归模型预测。图像由作者提供。
 

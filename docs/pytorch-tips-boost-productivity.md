@@ -1,8 +1,8 @@
 # PyTorch 提升生产力的技巧
 
-> 原文：[https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)
+> 原文：[`www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html`](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)
 
-![PyTorch 提升生产力的技巧](../Images/8c8e68e22a2d3366038e409b423555d4.png)
+![PyTorch 提升生产力的技巧](img/8c8e68e22a2d3366038e409b423555d4.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -66,7 +66,7 @@ dataset = # Loading Data
 dataloder = DataLoader(dataset, shuffle=True)
 ```
 
-此外，在使用机器学习模型时，规范化数据是非常重要的。尤其是在数据方差较大且某个特定参数的值高于数据集中其他所有属性时，这一点尤为关键。这可能导致某个参数主导其他所有参数，从而降低模型的准确性。**我们希望所有输入参数都在相同范围内，最好是均值为0，方差为1.0。** 为此，我们必须转换数据集。了解数据集的均值和方差后，我们可以简单地使用 torchvision.transforms.Normalize 函数。
+此外，在使用机器学习模型时，规范化数据是非常重要的。尤其是在数据方差较大且某个特定参数的值高于数据集中其他所有属性时，这一点尤为关键。这可能导致某个参数主导其他所有参数，从而降低模型的准确性。**我们希望所有输入参数都在相同范围内，最好是均值为 0，方差为 1.0。** 为此，我们必须转换数据集。了解数据集的均值和方差后，我们可以简单地使用 torchvision.transforms.Normalize 函数。
 
 ```py
 import torchvision.transforms as transforms

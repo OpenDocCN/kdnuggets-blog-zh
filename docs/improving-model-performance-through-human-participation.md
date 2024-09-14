@@ -1,12 +1,12 @@
 # 通过人类参与提高模型性能
 
-> 原文：[https://www.kdnuggets.com/2021/04/improving-model-performance-through-human-participation.html](https://www.kdnuggets.com/2021/04/improving-model-performance-through-human-participation.html)
+> 原文：[`www.kdnuggets.com/2021/04/improving-model-performance-through-human-participation.html`](https://www.kdnuggets.com/2021/04/improving-model-performance-through-human-participation.html)
 
-[评论](#comments)
+评论
 
 **由 [Preetam Joshi](https://www.linkedin.com/in/preetambjoshi/)，Netflix 的高级软件工程师和 [Mudit Jain](https://www.linkedin.com/in/muditjai/)，Google 的软件工程师**。
 
-![](../Images/560fe77491cf4c263106734f1dea398d.png)
+![](img/560fe77491cf4c263106734f1dea398d.png)
 
 *人类 + 人工智能（图片来源：[Pixabay](https://pixabay.com/photos/technology-hands-agreement-ok-4256272/)）。*
 
@@ -16,7 +16,7 @@
 
 ### 基于模型的推断
 
-![](../Images/8a4de5d4b687067913d75130bb522276.png)
+![](img/8a4de5d4b687067913d75130bb522276.png)
 
 *图 1\. 经典模型推断系统。*
 
@@ -26,7 +26,7 @@
 
 阈值的选择是基于对精确度和召回率的要求 [5]。在图 1 中所示的示例中，精确度定义为正确预测的欺诈活动数量（真正例）除以预测为欺诈的总活动数（真正例 + 假阳性）。召回率定义为正确预测的欺诈活动数量（真正例）除以正确预测为欺诈的活动数量与实际欺诈活动数之和（真正例 + 假阴性）。在大多数情况下，需要在精确度和召回率之间做出权衡以实现系统的目标。一个有用的工具是精确度-召回率曲线。图 2 说明了精确度-召回率曲线。
 
-![](../Images/f42660a0cf7b8954f827413fc715e7b2.png)
+![](img/f42660a0cf7b8954f827413fc715e7b2.png)
 
 *图 2\. 精确度-召回率曲线。*
 
@@ -38,13 +38,13 @@
 
 图 3 显示了一个包含人工互动的修改系统。
 
-![](../Images/84ab6b6f18fc33adc6933652a9e84fb4.png)
+![](img/84ab6b6f18fc33adc6933652a9e84fb4.png)
 
 *图 3\. 通过人工互动提升模型性能。*
 
 提高召回率的一种方法是将人工代理纳入推理循环。在这种设置中，模型置信度低的活动子集将被发送给人工代理进行手动检查。在选择确定低置信度/模糊预测子集的阈值时，重要的是要考虑将发送给人工代理的模糊活动的数量，因为后者是稀缺资源。为了帮助选择阈值，可以使用精确度-召回率-阈值图（图 4）。
 
-![](../Images/037591fd6e4d621da2ebf67450cb50a2.png)
+![](img/037591fd6e4d621da2ebf67450cb50a2.png)
 
 *图 4\. 精确度-召回率-阈值 曲线*。
 
@@ -58,7 +58,7 @@
 
 如前所述，人力资源稀缺。因此，发送给人工审查员的请求量在选择阈值时是一个重要的考虑因素。图 5 显示了阈值与体积和召回率的关系示例。体积定义为每小时发送给人工审查员的项目数量。从图 5 中可以看出，阈值为 0.7 时，体积为 16K 项目（每小时）。
 
-![](../Images/ba9e900adfaeb4486a9d1c0728b048f7.png)
+![](img/ba9e900adfaeb4486a9d1c0728b048f7.png)
 
 *图 5\. 召回率与阈值的体积（每小时请求数量）图示。*
 
@@ -84,27 +84,27 @@
 
 ### 结论
 
-我们回顾了一个涉及人类代理的ML推理系统如何在保持高精确度的同时提高召回率。这种方法在对假阳性敏感的用例中特别有用。精确度-召回率-阈值曲线是选择人工审核和自动模型决策阈值的一个很好的工具。然而，涉及人类代理会增加成本，并可能导致在经历快速增长的系统中的瓶颈。在考虑这样的系统时，仔细权衡这些方面是很重要的。
+我们回顾了一个涉及人类代理的 ML 推理系统如何在保持高精确度的同时提高召回率。这种方法在对假阳性敏感的用例中特别有用。精确度-召回率-阈值曲线是选择人工审核和自动模型决策阈值的一个很好的工具。然而，涉及人类代理会增加成本，并可能导致在经历快速增长的系统中的瓶颈。在考虑这样的系统时，仔细权衡这些方面是很重要的。
 
 ### 参考文献
 
-1.  FCase 文章 [https://fcase.io/a-major-challenge-false-positives/#twelve](https://fcase.io/a-major-challenge-false-positives/#twelve)
+1.  FCase 文章 [`fcase.io/a-major-challenge-false-positives/#twelve`](https://fcase.io/a-major-challenge-false-positives/#twelve)
 
-1.  微软聊天机器人著名的问题 [https://spectrum.ieee.org/tech-talk/artificial-intelligence/machine-learning/in-2016-microsofts-racist-chatbot-revealed-the-dangers-of-online-conversation](https://spectrum.ieee.org/tech-talk/artificial-intelligence/machine-learning/in-2016-microsofts-racist-chatbot-revealed-the-dangers-of-online-conversation)
+1.  微软聊天机器人著名的问题 [`spectrum.ieee.org/tech-talk/artificial-intelligence/machine-learning/in-2016-microsofts-racist-chatbot-revealed-the-dangers-of-online-conversation`](https://spectrum.ieee.org/tech-talk/artificial-intelligence/machine-learning/in-2016-microsofts-racist-chatbot-revealed-the-dangers-of-online-conversation)
 
-1.  假阳性癌症筛查可能会影响患者接受未来筛查的意愿 [https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5992010/](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5992010/)
+1.  假阳性癌症筛查可能会影响患者接受未来筛查的意愿 [`www.ncbi.nlm.nih.gov/pmc/articles/PMC5992010/`](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5992010/)
 
-1.  “你能相信你模型的不确定性吗？在数据集偏移下评估预测不确定性”，Yaniv Ovadia 等 [https://arxiv.org/abs/1906.02530](https://arxiv.org/abs/1906.02530)
+1.  “你能相信你模型的不确定性吗？在数据集偏移下评估预测不确定性”，Yaniv Ovadia 等 [`arxiv.org/abs/1906.02530`](https://arxiv.org/abs/1906.02530)
 
-1.  精确度和召回率 [https://en.wikipedia.org/wiki/Precision_and_recall](https://en.wikipedia.org/wiki/Precision_and_recall)
+1.  精确度和召回率 [`en.wikipedia.org/wiki/Precision_and_recall`](https://en.wikipedia.org/wiki/Precision_and_recall)
 
-**个人简介：** [Preetam Joshi](https://www.linkedin.com/in/preetambjoshi/) 是Netflix的高级软件工程师，专注于应用机器学习和机器学习基础设施。他曾在Thumbtack和Yahoo工作过。他获得了乔治亚理工学院计算学院的硕士学位。
+**个人简介：** [Preetam Joshi](https://www.linkedin.com/in/preetambjoshi/) 是 Netflix 的高级软件工程师，专注于应用机器学习和机器学习基础设施。他曾在 Thumbtack 和 Yahoo 工作过。他获得了乔治亚理工学院计算学院的硕士学位。
 
-[Mudit Jain](https://www.linkedin.com/in/muditjai/) 是谷歌的自动化机器学习NLP工程师，专注于Google Cloud平台。他曾在微软工作过。他获得了印度理工学院坎普尔分校计算机科学与工程学士学位。
+[Mudit Jain](https://www.linkedin.com/in/muditjai/) 是谷歌的自动化机器学习 NLP 工程师，专注于 Google Cloud 平台。他曾在微软工作过。他获得了印度理工学院坎普尔分校计算机科学与工程学士学位。
 
 **相关：**
 
-+   [为什么AI系统需要人类干预才能良好运行？](https://www.kdnuggets.com/2020/06/ai-systems-need-human-intervention.html)
++   [为什么 AI 系统需要人类干预才能良好运行？](https://www.kdnuggets.com/2020/06/ai-systems-need-human-intervention.html)
 
 +   [如何评估你的机器学习模型的性能](https://www.kdnuggets.com/2020/09/performance-machine-learning-model.html)
 
@@ -114,24 +114,24 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [提升SQL查询性能的5个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
++   [提升 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
 
-+   [超越准确性：使用NLP测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
++   [超越准确性：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
 
 +   [提升你的机器学习模型性能！](https://www.kdnuggets.com/2023/04/manning-boost-machine-learning-model-performance.html)
 
-+   [使用Python监控MLOps管道中的模型性能](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)
++   [使用 Python 监控 MLOps 管道中的模型性能](https://www.kdnuggets.com/2023/05/monitor-model-performance-mlops-pipeline-python.html)
 
 +   [利用迁移学习提升模型性能](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)
 
-+   [探索思维树提示：AI如何通过搜索学习推理…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
++   [探索思维树提示：AI 如何通过搜索学习推理…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)

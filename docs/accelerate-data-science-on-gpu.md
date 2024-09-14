@@ -1,8 +1,8 @@
 # 这里是如何在 GPU 上加速你的数据科学
 
-> 原文：[https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html](https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html)
+> 原文：[`www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html`](https://www.kdnuggets.com/2019/07/accelerate-data-science-on-gpu.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 数据科学家需要计算能力。无论你是在用 Pandas 处理大型数据集，还是用 Numpy 在大规模矩阵上进行计算，你都需要一台强大的机器，以便在合理的时间内完成工作。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -30,7 +30,7 @@ Pandas 使用 C 语言编写的底层基础代码，能够很好地处理超过 
 
 在时钟速度更为重要的任务中，CPU 更具优势——或者你根本没有 GPU 实现。如果你要执行的过程有 GPU 实现，那么如果任务可以从并行处理中受益，GPU 将会更加有效。
 
-![figure-name](../Images/45f79f5c92359a10ccb30f2b8fbbef83.png)多核系统如何更快处理数据。对于单核系统（左），所有 10 个任务都分配给一个节点。对于双核系统（右），每个节点处理 5 个任务，从而加倍处理速度
+![figure-name](img/45f79f5c92359a10ccb30f2b8fbbef83.png)多核系统如何更快处理数据。对于单核系统（左），所有 10 个任务都分配给一个节点。对于双核系统（右），每个节点处理 5 个任务，从而加倍处理速度
 
 深度学习已经充分利用了 GPU。深度学习中的许多卷积操作是重复性的，因此可以在 GPU 上大大加速，甚至达到 100 倍。
 
@@ -44,7 +44,7 @@ Pandas 使用 C 语言编写的底层基础代码，能够很好地处理超过 
 
 Rapids 的美妙之处在于它与数据科学库的无缝集成——像 Pandas 数据框这样的数据可以轻松地传递给 Rapids 以进行 GPU 加速。下面的图示说明了 Rapids 如何实现低级加速，同时保持易于使用的顶层。
 
-![figure-name](../Images/f511cd54476f8f41e8586d8a442db6e8.png)
+![figure-name](img/f511cd54476f8f41e8586d8a442db6e8.png)
 
 Rapids 利用多个 Python 库：
 
@@ -103,7 +103,7 @@ plt.show()
 
 ```
 
-![figure-name](../Images/12a054c98c39b6df2d4aecb2381e666c.png)
+![figure-name](img/12a054c98c39b6df2d4aecb2381e666c.png)
 
 **在 CPU 上运行 DBSCAN**
 
@@ -127,7 +127,7 @@ y_db = db.fit_predict(X)
 
 对于这 100,000 个点，运行时间为 8.31 秒。结果图如下所示。
 
-![figure-name](../Images/d3b76a1e32d8538015ea451df118ecf2.png)使用 Scikit-Learn 在 CPU 上运行 DBSCAN 的结果
+![figure-name](img/d3b76a1e32d8538015ea451df118ecf2.png)使用 Scikit-Learn 在 CPU 上运行 DBSCAN 的结果
 
 **使用 Rapids 在 GPU 上运行 DBSCAN**
 
@@ -165,7 +165,7 @@ y_db_gpu = db_gpu.fit_predict(X_gpu)
 
 GPU 版本的运行时间为 4.22 秒，几乎是 2 倍的加速。结果图与 CPU 版本完全相同，因为我们使用的是相同的算法。
 
-![figure-name](../Images/d3b76a1e32d8538015ea451df118ecf2.png)使用 cuML 在 GPU 上运行 DBSCAN 的结果
+![figure-name](img/d3b76a1e32d8538015ea451df118ecf2.png)使用 cuML 在 GPU 上运行 DBSCAN 的结果
 
 ### 使用 Rapids GPU 获得超高速
 
@@ -201,7 +201,7 @@ y_db_gpu = db_gpu.fit_predict(X_gpu)
 
 查看下方 Matplotlib 结果的图示：
 
-![figure-name](../Images/6ec9f65915ba982f6379a5af54f22934.png)
+![figure-name](img/6ec9f65915ba982f6379a5af54f22934.png)
 
 使用 GPU 代替 CPU 时，性能提升幅度非常显著。即使在 10,000 点（最左边）时，我们仍然能获得 4.54 倍的加速。在高端情况下，使用 10,000,000 点时，切换到 GPU 可以获得 88.04 倍的加速！
 
@@ -221,11 +221,11 @@ y_db_gpu = db_gpu.fit_predict(X_gpu)
 
 **相关：**
 
-+   [Nvidia 的新数据科学工作站——评论与基准测试](/2019/07/nvidia-new-data-science-workstation.html)
++   Nvidia 的新数据科学工作站——评论与基准测试
 
-+   [探索 Transformer 架构——第 2 部分：Transformer 的工作原理简述](/2019/07/transformer-architecture-part-2.html)
++   探索 Transformer 架构——第二部分：Transformer 的工作原理简述
 
-+   [XGBoost 在 GPUs 上：解锁机器学习的性能和生产力](/2018/12/nvidia-xgboost-gpu-machine-learning-performance-productivity.html)
++   XGBoost 在 GPUs 上：解锁机器学习的性能和生产力
 
 ### 更多相关主题
 

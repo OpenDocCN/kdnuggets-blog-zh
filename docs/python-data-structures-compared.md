@@ -1,30 +1,30 @@
 # Python 数据结构比较
 
-> 原文：[https://www.kdnuggets.com/2021/07/python-data-structures-compared.html](https://www.kdnuggets.com/2021/07/python-data-structures-compared.html)
+> 原文：[`www.kdnuggets.com/2021/07/python-data-structures-compared.html`](https://www.kdnuggets.com/2021/07/python-data-structures-compared.html)
 
-[评论](#comments)![图示](../Images/beb472629858f9167f198fa19ad0f9ce.png)
+评论![图示](img/beb472629858f9167f198fa19ad0f9ce.png)
 
 图片由 [Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-选择存储数据的结构是解决编程任务和实施解决方案的重要部分，但往往没有得到应有的关注。不幸的是，在Python中，我经常看到列表被用作万能的数据结构。列表当然有其优点，但也有其缺点。还有很多其他的数据结构选项。
+选择存储数据的结构是解决编程任务和实施解决方案的重要部分，但往往没有得到应有的关注。不幸的是，在 Python 中，我经常看到列表被用作万能的数据结构。列表当然有其优点，但也有其缺点。还有很多其他的数据结构选项。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-让我们来看看5种不同的Python数据结构，看看它们如何用于存储我们在日常任务中可能处理的数据，以及它们在存储时所用的相对内存和创建及访问时所需的时间。
+让我们来看看 5 种不同的 Python 数据结构，看看它们如何用于存储我们在日常任务中可能处理的数据，以及它们在存储时所用的相对内存和创建及访问时所需的时间。
 
 ### 数据结构的类型
 
-首先，让我们列出我们将在此考虑的5种数据结构，并提供一些初步见解。
+首先，让我们列出我们将在此考虑的 5 种数据结构，并提供一些初步见解。
 
 **类**
 
@@ -36,9 +36,9 @@
 
 **数据类**
 
-在Python 3.7中新增的 [数据类](https://www.python.org/dev/peps/pep-0557/) 是一种特殊的类，主要用于持有数据，提供了一些开箱即用的免费方法，用于典型功能，如实例化和打印实例内容。创建数据类是通过使用 `@dataclass` 装饰器来实现的。
+在 Python 3.7 中新增的 [数据类](https://www.python.org/dev/peps/pep-0557/) 是一种特殊的类，主要用于持有数据，提供了一些开箱即用的免费方法，用于典型功能，如实例化和打印实例内容。创建数据类是通过使用 `@dataclass` 装饰器来实现的。
 
-> 尽管使用了非常不同的机制，数据类可以被认为是“带有默认值的可变命名元组”。因为数据类使用正常的类定义语法，你可以自由使用继承、 metaclasses、文档字符串、自定义方法、类工厂和其他Python类特性。这样的类被称为数据类，但实际上这个类没有什么特别之处：装饰器为类添加生成的方法，并返回与给定类相同的类。
+> 尽管使用了非常不同的机制，数据类可以被认为是“带有默认值的可变命名元组”。因为数据类使用正常的类定义语法，你可以自由使用继承、 metaclasses、文档字符串、自定义方法、类工厂和其他 Python 类特性。这样的类被称为数据类，但实际上这个类没有什么特别之处：装饰器为类添加生成的方法，并返回与给定类相同的类。
 
 正如你所见，[自动生成的方法](https://www.python.org/dev/peps/pep-0557/#id32)以及相关的时间节省是考虑数据类的主要原因。
 
@@ -48,29 +48,29 @@
 
 > 命名元组为元组中的每个位置赋予含义，使代码更具可读性和自文档性。它们可以在常规元组使用的地方使用，并且可以通过名称而不是位置索引访问字段。
 
-初看，命名元组似乎是Python中最接近简单C风格结构体的东西，使得它们对许多人具有天然的吸引力。
+初看，命名元组似乎是 Python 中最接近简单 C 风格结构体的东西，使得它们对许多人具有天然的吸引力。
 
 **字典**
 
 Python [字典](https://python-reference.readthedocs.io/en/latest/docs/dict/)是键值对的集合。
 
-> [Python字典](https://www.kdnuggets.com/2019/12/python-dictionary-methods.html)是可变的无序集合（它们不记录元素位置或插入顺序）的键值对。字典中的键必须是唯一且可哈希的。这包括数字、字符串和元组等类型。列表和字典不能用作键，因为它们是可变的。
+> [Python 字典](https://www.kdnuggets.com/2019/12/python-dictionary-methods.html)是可变的无序集合（它们不记录元素位置或插入顺序）的键值对。字典中的键必须是唯一且可哈希的。这包括数字、字符串和元组等类型。列表和字典不能用作键，因为它们是可变的。
 
 字典的优势在于它们简单，数据易于访问，而且使用和理解都很广泛。
 
 **列表**
 
-这就是所谓的“万用”Python数据超结构，或者说很多代码会让你这么认为。实际上，[列表](https://python-reference.readthedocs.io/en/latest/docs/list/)是这样的：
+这就是所谓的“万用”Python 数据超结构，或者说很多代码会让你这么认为。实际上，[列表](https://python-reference.readthedocs.io/en/latest/docs/list/)是这样的：
 
-> 列表是可变的有序且按索引排列的对象集合。列表的项是任意的Python对象。列表由放置在方括号中的逗号分隔的表达式列表组成。
+> 列表是可变的有序且按索引排列的对象集合。列表的项是任意的 Python 对象。列表由放置在方括号中的逗号分隔的表达式列表组成。
 
-为什么列表被广泛使用？它很简单易懂且易于实现，通常是学习Python时第一个接触的结构。是否存在与速度和内存使用相关的缺点？让我们来看看。
+为什么列表被广泛使用？它很简单易懂且易于实现，通常是学习 Python 时第一个接触的结构。是否存在与速度和内存使用相关的缺点？让我们来看看。
 
 ### 实现
 
 首先，让我们看看这些结构的创建过程以及它们之间的比较。
 
-我们可能使用这些数据结构存储数据的原因差异很大，但对于那些缺乏想象力的人，我们可以假设我们正在从SQL数据库中提取数据，需要将每条记录存储在这种结构中，以便在将数据进一步推进到我们的管道之前进行一些处理。
+我们可能使用这些数据结构存储数据的原因差异很大，但对于那些缺乏想象力的人，我们可以假设我们正在从 SQL 数据库中提取数据，需要将每条记录存储在这种结构中，以便在将数据进一步推进到我们的管道之前进行一些处理。
 
 鉴于此，以下是创建每个五种结构的实例化代码。
 
@@ -141,9 +141,9 @@ def make_customer_list(cust_num: int, f_name: str, l_name: str, address: str,
 
 ### 测试和结果。
 
-我们将为每种结构创建一个单独的实例，每个实例中包含一个数据记录。我们将重复这个过程，将相同的数据字段用于每种结构1,000,000次，以获得更好的平均时间，并在我的一台简朴的Dell笔记本电脑上执行此过程，使用的是基于Ubuntu的操作系统。
+我们将为每种结构创建一个单独的实例，每个实例中包含一个数据记录。我们将重复这个过程，将相同的数据字段用于每种结构 1,000,000 次，以获得更好的平均时间，并在我的一台简朴的 Dell 笔记本电脑上执行此过程，使用的是基于 Ubuntu 的操作系统。
 
-![Image](../Images/b4fba0e02b2ae02ceba2ec1d33b38e96.png)
+![Image](img/b4fba0e02b2ae02ceba2ec1d33b38e96.png)
 
 比较下面五种结构实例化的代码。
 
@@ -243,7 +243,7 @@ Size: 128 bytes
 Time: 0.184s
 ```
 
-最后，另一个有用的数据是了解我们结构中存储的值的相对访问时间（在下面的例子中为地址）。相同的检索操作将重复1,000,000次，下面报告了平均时间。
+最后，另一个有用的数据是了解我们结构中存储的值的相对访问时间（在下面的例子中为地址）。相同的检索操作将重复 1,000,000 次，下面报告了平均时间。
 
 ```py
 """ accessing an element """
@@ -313,7 +313,7 @@ Time: 0.117s
 
 也就是说，从以上分析中有一些事情显而易见：
 
-1.  在所有结构中，字典使用的存储量最大，在我们的例子中几乎是下一个最大结构的3倍——不过在我们查看扩展效应和内部字段数据类型之前，应该谨慎做出概括。
+1.  在所有结构中，字典使用的存储量最大，在我们的例子中几乎是下一个最大结构的 3 倍——不过在我们查看扩展效应和内部字段数据类型之前，应该谨慎做出概括。
 
 1.  不出所料，列表的实例化速度最快，但从中检索元素的速度却不是最快（几乎是最慢的）。
 
@@ -321,26 +321,26 @@ Time: 0.117s
 
 1.  两个类的实例化相对较长（这是预期的），但在元素检索和空间使用方面，两者与其他结构相比都非常具有竞争力。
 
-所以我们不仅不打算在每种情况下推荐单一结构，也没有明确的赢家可以在每种情况下推荐。即使基于我们的小实验谨慎地进行一般化，显然在选择用于特定工作的结构时需要考虑优先级。至少，这些有限的实验提供了一些对Python中数据结构性能的小窗口洞察。
+所以我们不仅不打算在每种情况下推荐单一结构，也没有明确的赢家可以在每种情况下推荐。即使基于我们的小实验谨慎地进行一般化，显然在选择用于特定工作的结构时需要考虑优先级。至少，这些有限的实验提供了一些对 Python 中数据结构性能的小窗口洞察。
 
 **相关**：
 
-+   [作为数据科学家管理你的可重用Python代码](/2021/06/managing-reusable-python-code-data-scientist.html)
++   作为数据科学家管理你的可重用 Python 代码
 
-+   [5个Python数据处理技巧及代码片段](/2021/07/python-tips-snippets-data-processing.html)
++   5 个 Python 数据处理技巧及代码片段
 
-+   [Python中的日期处理和特征工程](/2021/07/date-pre-processing-feature-engineering-python.html)
++   Python 中的日期处理和特征工程
 
 ### 更多相关内容
 
-+   [5步开始学习Python数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
++   [5 步开始学习 Python 数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
 
-+   [Python基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
++   [Python 基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
 
 +   [超级学习指南：免费算法和数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)
 
-+   [AI和机器学习的数据结构入门指南](https://www.kdnuggets.com/guide-data-structures-ai-and-machine-learning)
++   [AI 和机器学习的数据结构入门指南](https://www.kdnuggets.com/guide-data-structures-ai-and-machine-learning)
 
-+   [通过《快速Python数据科学》提升你的Python技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
++   [通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
 
-+   [优化Python代码性能：深入探讨Python分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
++   [优化 Python 代码性能：深入探讨 Python 分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)

@@ -1,8 +1,8 @@
 # 如何使用 Python 的 Pathlib 浏览文件系统
 
-> 原文：[https://www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib](https://www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib)
+> 原文：[`www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib`](https://www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib)
 
-![pathlib](../Images/0cfef492124b3397208b71330312bdc2.png)
+![pathlib](img/0cfef492124b3397208b71330312bdc2.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -126,11 +126,11 @@ False
 True
 ```
 
-> **注意**：`Path`类的对象为你的操作系统创建了一个具体的路径。但当你需要处理路径而不访问文件系统时，例如在Unix机器上处理Windows路径，你也可以使用`PurePath`。
+> **注意**：`Path`类的对象为你的操作系统创建了一个具体的路径。但当你需要处理路径而不访问文件系统时，例如在 Unix 机器上处理 Windows 路径，你也可以使用`PurePath`。
 
 ## 导航文件系统
 
-使用pathlib导航文件系统非常简单。你可以遍历目录的内容，重命名和解析路径等。
+使用 pathlib 导航文件系统非常简单。你可以遍历目录的内容，重命名和解析路径等。
 
 你可以像这样在路径对象上调用`iterdir()`方法，以遍历目录中的所有内容：
 
@@ -258,7 +258,7 @@ PosixPath('/home/balapriya/projectA/projectA2/file1.txt')]
 
 ## 总结
 
-在本教程中，我们探讨了pathlib模块及其如何使Python中的文件系统导航和操作变得更加便捷。我们已经覆盖了足够的内容，以帮助你在Python脚本中创建和使用文件系统路径。
+在本教程中，我们探讨了 pathlib 模块及其如何使 Python 中的文件系统导航和操作变得更加便捷。我们已经覆盖了足够的内容，以帮助你在 Python 脚本中创建和使用文件系统路径。
 
 你可以在这个教程中找到所使用的代码 [在 GitHub](https://github.com/balapriyac/python-basics/tree/main/pathlib-tutorial)。在下一个教程中，我们将探讨有趣的实际应用。在那之前，继续编程吧！
 

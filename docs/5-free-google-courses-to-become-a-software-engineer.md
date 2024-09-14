@@ -1,8 +1,8 @@
 # 5 个免费的 Google 课程助你成为软件工程师
 
-> 原文：[https://www.kdnuggets.com/5-free-google-courses-to-become-a-software-engineer](https://www.kdnuggets.com/5-free-google-courses-to-become-a-software-engineer)
+> 原文：[`www.kdnuggets.com/5-free-google-courses-to-become-a-software-engineer`](https://www.kdnuggets.com/5-free-google-courses-to-become-a-software-engineer)
 
-![5 免费 Google 课程助你成为软件工程师](../Images/06281e393dfb6d4eab779ac860531dd7.png)
+![5 免费 Google 课程助你成为软件工程师](img/06281e393dfb6d4eab779ac860531dd7.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -130,20 +130,20 @@ Google's [Python](https://developers.google.com/edu/python) 课程将帮助你�
 
 所以如果你想启动你的软件工程师职业生涯，我希望你能在学习过程中发现这些课程的帮助。正如你可能猜到的，这些课程是免费的，但需要你付出勤奋的努力、兴趣和练习来破解面试并获得软件工程师职位。所以继续努力！
 
-如果你特别寻找帮助你进行编码面试准备的资源，可以查看[5门免费大学课程以攻克编码面试](/5-free-university-courses-to-ace-coding-interviews)。
+如果你特别寻找帮助你进行编码面试准备的资源，可以查看 5 门免费大学课程以攻克编码面试。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、指南、评论文章等来学习和分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。**
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、指南、评论文章等来学习和分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。**
 
 ### 更多相关内容
 
-+   [7门免费谷歌课程成为机器学习工程师](https://www.kdnuggets.com/7-free-google-courses-to-become-a-machine-learning-engineer)
++   [7 门免费谷歌课程成为机器学习工程师](https://www.kdnuggets.com/7-free-google-courses-to-become-a-machine-learning-engineer)
 
 +   [软件开发者与软件工程师](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)
 
 +   [成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)
 
-+   [成为MLOps工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
++   [成为 MLOps 工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
 
 +   [如果你想进入科技领域：成为软件开发者](https://www.kdnuggets.com/if-you-want-to-get-in-the-tech-space-become-a-software-developer)
 
-+   [成为数据工程师所需的9项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [成为数据工程师所需的 9 项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)

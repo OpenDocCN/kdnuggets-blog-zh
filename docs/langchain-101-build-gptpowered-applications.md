@@ -1,8 +1,8 @@
 # LangChain 101: 构建你自己的 GPT 驱动应用程序
 
-> 原文：[https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
+> 原文：[`www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html`](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
 
-![LangChain 101: 构建你自己的 GPT 驱动应用程序](../Images/0711fa973721b2a2cd780e3a29c65d3f.png)
+![LangChain 101: 构建你自己的 GPT 驱动应用程序](img/0711fa973721b2a2cd780e3a29c65d3f.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@ ChatGPT 和 GPT-4 的成功展示了经过强化训练的大型语言模型如�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@ LangChain 由 [Harrison Chase](https://github.com/hwchase17) 创建，是一个 
 
 截至本文撰写时（2023 年 3 月），LangChain GitHub 仓库已有超过 14,000 个星标，来自世界各地的 270 多位贡献者。
 
-![LangChain 101: 构建你自己的 GPT 驱动应用程序](../Images/7ae145ae9ae3adccf20b6b3c17f8ef45.png)
+![LangChain 101: 构建你自己的 GPT 驱动应用程序](img/7ae145ae9ae3adccf20b6b3c17f8ef45.png)
 
 LangChain Github 星标历史 | 生成于 [star-history.com](https://star-history.com/)
 
@@ -52,7 +52,7 @@ LangChain Github 星标历史 | 生成于 [star-history.com](https://star-histor
 
 接下来让我们看看 LangChain 的一些模块：
 
-![LangChain 101: 构建你自己的 GPT 驱动应用程序](../Images/ae81ebf095966cabeafb4fcf86a501c8.png)
+![LangChain 101: 构建你自己的 GPT 驱动应用程序](img/ae81ebf095966cabeafb4fcf86a501c8.png)
 
 图片来源：作者
 
@@ -68,7 +68,7 @@ LLM 是 LangChain 的基本组件。它本质上是一个围绕大型语言模�
 
 链条也可以很简单。你可能需要读取用户输入，然后用这些输入构造提示。提示可以用于生成响应。
 
-![LangChain 101: 构建你自己的 GPT 驱动应用程序](../Images/adb321acdc73f888f9fe26e852a544d3.png)
+![LangChain 101: 构建你自己的 GPT 驱动应用程序](img/adb321acdc73f888f9fe26e852a544d3.png)
 
 图片由作者提供
 
@@ -114,27 +114,27 @@ pip install openai
 
 ## 第二步 – 将 OPENAI_API_KEY 设置为环境变量
 
-接下来，登录你的OpenAI账户。导航到账户设置 > **查看API密钥**。生成一个密钥并复制它。
+接下来，登录你的 OpenAI 账户。导航到账户设置 > **查看 API 密钥**。生成一个密钥并复制它。
 
-在你的Python脚本中，使用**os**模块并访问环境变量字典`os.environ`。将“OPENAI_API_KEY”设置为你刚刚复制的秘密API密钥：
+在你的 Python 脚本中，使用**os**模块并访问环境变量字典`os.environ`。将“OPENAI_API_KEY”设置为你刚刚复制的秘密 API 密钥：
 
 ```py
 import os
 os.environ["OPENAI_API_KEY"] = "your-api-key-here"
 ```
 
-## 步骤 3 – 使用LangChain进行简单的LLM调用
+## 步骤 3 – 使用 LangChain 进行简单的 LLM 调用
 
-现在我们已经安装了所需的库，让我们看看如何使用LangChain进行一个简单的LLM调用。
+现在我们已经安装了所需的库，让我们看看如何使用 LangChain 进行一个简单的 LLM 调用。
 
-为此，让我们导入OpenAI包装器。在这个示例中，我们将使用text-davinci-003模型：
+为此，让我们导入 OpenAI 包装器。在这个示例中，我们将使用 text-davinci-003 模型：
 
 ```py
 from langchain.llms import OpenAI
 llm = OpenAI(model_name="text-davinci-003")
 ```
 
-> “**text-davinci-003**: 相比于curie、babbage或ada模型，可以更好地完成任何语言任务，提供更长的输出和一致的指令跟随。还支持在文本中[插入](https://platform.openai.com/docs/guides/completion/inserting-text)补全。” – [OpenAI文档](https://platform.openai.com/docs/models/gpt-3-5)
+> “**text-davinci-003**: 相比于 curie、babbage 或 ada 模型，可以更好地完成任何语言任务，提供更长的输出和一致的指令跟随。还支持在文本中[插入](https://platform.openai.com/docs/guides/completion/inserting-text)补全。” – [OpenAI 文档](https://platform.openai.com/docs/models/gpt-3-5)
 
 让我们定义一个问题字符串并生成一个响应：
 
@@ -150,7 +150,7 @@ It is difficult to predict which programming language will be the most popular i
 
 ## 步骤 4 – 创建一个提示模板
 
-让我们问另一个问题，关于学习一种新的编程语言，比如Golang：
+让我们问另一个问题，关于学习一种新的编程语言，比如 Golang：
 
 ```py
 question = "What are the top 4 resources to learn Golang in 2023?"
@@ -170,7 +170,7 @@ Output >>
 
 这就是提示模板的用武之地。你可以创建一个可以使用一个或多个输入变量格式化的模板。
 
-我们可以创建一个简单的模板，以获取学习任何技术栈的前k个资源。在这里，我们使用`k`和`this`作为`input_variables`：
+我们可以创建一个简单的模板，以获取学习任何技术栈的前 k 个资源。在这里，我们使用`k`和`this`作为`input_variables`：
 
 ```py
 from langchain import PromptTemplate
@@ -178,23 +178,23 @@ template = "What are the top {k} resources to learn {this} in 2023?"
 prompt = PromptTemplate(template=template,input_variables=['k','this'])
 ```
 
-## 步骤 5 – 运行我们的第一个LLM链
+## 步骤 5 – 运行我们的第一个 LLM 链
 
-我们现在有了一个LLM和一个可以在多个LLM调用中重用的提示模板。
+我们现在有了一个 LLM 和一个可以在多个 LLM 调用中重用的提示模板。
 
 ```py
 llm = OpenAI(model_name="text-davinci-003")
 prompt = PromptTemplate(template=template,input_variables=['k','this'])
 ```
 
-让我们继续创建一个LLMChain：
+让我们继续创建一个 LLMChain：
 
 ```py
 from langchain import LLMChain
 chain = LLMChain(llm=llm,prompt=prompt)
 ```
 
-你现在可以将输入作为字典传入，并按如下所示运行LLM链：
+你现在可以将输入作为字典传入，并按如下所示运行 LLM 链：
 
 ```py
 input = {'k':3,'this':'Rust'}
@@ -213,15 +213,15 @@ Output >>
 
 # 总结
 
-就这样！你知道如何使用LangChain构建一个简单的问答应用程序。我希望你对LangChain的功能有了初步的了解。作为下一步，尝试探索LangChain来构建更有趣的应用程序。编程愉快！
+就这样！你知道如何使用 LangChain 构建一个简单的问答应用程序。我希望你对 LangChain 的功能有了初步的了解。作为下一步，尝试探索 LangChain 来构建更有趣的应用程序。编程愉快！
 
 # 参考资料及进一步学习
 
-+   [LangChain文档](https://langchain.readthedocs.io/en/latest/)
++   [LangChain 文档](https://langchain.readthedocs.io/en/latest/)
 
-+   [LangChain快速入门指南](https://langchain.readthedocs.io/en/latest/modules/prompts/getting_started.html)
++   [LangChain 快速入门指南](https://langchain.readthedocs.io/en/latest/modules/prompts/getting_started.html)
 
-+   [LangChain演示 + 与Harrison Chase的问答](https://www.youtube.com/watch?v=zaYTXQFR0_s)
++   [LangChain 演示 + 与 Harrison Chase 的问答](https://www.youtube.com/watch?v=zaYTXQFR0_s)
 
 +   Chase, H. (2022). LangChain [计算机软件]. https://github.com/hwchase17/langchain
 
@@ -229,13 +229,13 @@ Output >>
 
 ### 更多相关话题
 
-+   [使用LlamaIndex构建自己的PandasAI](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)
++   [使用 LlamaIndex 构建自己的 PandasAI](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)
 
 +   [LangChain + Streamlit + Llama：将对话式 AI 带到你的本地机器上](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
 
 +   [如何让大型语言模型与你的软件和谐共处……](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)
 
-+   [KDnuggets 新闻 2022年3月9日：在5分钟内构建机器学习网页应用……](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习网页应用……](https://www.kdnuggets.com/2022/n10.html)
 
 +   [使用 ChatGPT 的 GPTs 自制属于自己的 GPTs！](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)
 

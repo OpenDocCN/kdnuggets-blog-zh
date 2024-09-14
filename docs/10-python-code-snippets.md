@@ -1,12 +1,12 @@
 # 10 个我们都应该知道的 Python 代码片段
 
-> 原文：[https://www.kdnuggets.com/2021/06/10-python-code-snippets.html](https://www.kdnuggets.com/2021/06/10-python-code-snippets.html)
+> 原文：[`www.kdnuggets.com/2021/06/10-python-code-snippets.html`](https://www.kdnuggets.com/2021/06/10-python-code-snippets.html)
 
-[评论](#comments)
+评论
 
 **由[Pralabh Saxena](https://www.linkedin.com/in/pralabh-saxena-05/), 软件开发者**
 
-![图示](../Images/379ec36e37093fcf44efcc85755bd900.png)
+![图示](img/379ec36e37093fcf44efcc85755bd900.png)
 
 图片由[Johnson Martin](https://pixabay.com/users/johnsonmartin-724525/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1084923)提供，来源于[Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1084923)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -45,9 +45,9 @@ Output:True
 False
 ```
 
-### 3\. 打印字符串N次
+### 3\. 打印字符串 N 次
 
-我们可以使用这段代码在不使用任何循环的情况下输出一个字符串N次。
+我们可以使用这段代码在不使用任何循环的情况下输出一个字符串 N 次。
 
 ```py
 Output:
@@ -101,7 +101,7 @@ Output:{1: 'one', 2: 'two', 3: 'three'}
 
 ### 10. 错误处理
 
-与其他编程语言一样，Python也提供了使用 `try`、`except` 和 `finally` 块来处理异常的方法。
+与其他编程语言一样，Python 也提供了使用 `try`、`except` 和 `finally` 块来处理异常的方法。
 
 ```py
 Output:Can not divide by zero
@@ -114,38 +114,38 @@ Executing finally block
 
 感谢阅读！
 
-欲了解更多12个代码片段，[请参见原文](https://levelup.gitconnected.com/22-code-snippets-that-every-python-programmer-must-learn-b7f7ec35e9df)。
+欲了解更多 12 个代码片段，[请参见原文](https://levelup.gitconnected.com/22-code-snippets-that-every-python-programmer-must-learn-b7f7ec35e9df)。
 
 ### 提升编码能力
 
-感谢你成为我们社区的一部分！ [订阅我们的YouTube频道](https://www.youtube.com/channel/UC3v9kBR_ab4UHXXdknz8Fbg?sub_confirmation=1) 或加入 [**Skilled.dev编程面试课程**](https://skilled.dev/)。
+感谢你成为我们社区的一部分！ [订阅我们的 YouTube 频道](https://www.youtube.com/channel/UC3v9kBR_ab4UHXXdknz8Fbg?sub_confirmation=1) 或加入 [**Skilled.dev 编程面试课程**](https://skilled.dev/)。
 
 [**编程面试问题 + 拿到开发工作 | Skilled.dev**](https://skilled.dev/)
 
 掌握编程面试的课程
 
-**简历：[Pralabh Saxena](https://www.linkedin.com/in/pralabh-saxena-05/)** 是一名拥有1年经验的软件开发者。Pralabh [撰写文章](https://pralabhsaxena.medium.com/) 主题包括Python、机器学习、数据科学和SQL。
+**简历：[Pralabh Saxena](https://www.linkedin.com/in/pralabh-saxena-05/)** 是一名拥有 1 年经验的软件开发者。Pralabh [撰写文章](https://pralabhsaxena.medium.com/) 主题包括 Python、机器学习、数据科学和 SQL。
 
 [原文](https://levelup.gitconnected.com/22-code-snippets-that-every-python-programmer-must-learn-b7f7ec35e9df)。转载许可。
 
 **相关内容：**
 
-+   [数据科学家，你需要学会编程](/2021/06/data-scientists-need-know-code.html)
++   数据科学家，你需要学会编程
 
-+   [如何使Python代码运行得极快](/2021/06/make-python-code-run-incredibly-fast.html)
++   如何使 Python 代码运行得极快
 
-+   [如何排查Python中的内存问题](/2021/06/troubleshoot-memory-problems-python.html)
++   如何排查 Python 中的内存问题
 
 ### 更多相关主题
 
-+   [KDnuggets新闻，4月13日：数据科学家应知的Python库](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应知的 Python 库](https://www.kdnuggets.com/2022/n15.html)
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日：跟踪和可视化的3种工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日：跟踪和可视化的 3 种工具…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [2022年数据科学家应知的Python库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
++   [2022 年数据科学家应知的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
 
-+   [每位数据科学家都应知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [每位数据科学家都应了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
++   [每位数据科学家都应了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
 
-+   [KDnuggets 新闻，5月25日：6种Python机器学习工具](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)

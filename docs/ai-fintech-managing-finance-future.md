@@ -1,8 +1,8 @@
 # 人工智能在金融科技中的应用：管理未来的金融
 
-> 原文：[https://www.kdnuggets.com/2022/10/ai-fintech-managing-finance-future.html](https://www.kdnuggets.com/2022/10/ai-fintech-managing-finance-future.html)
+> 原文：[`www.kdnuggets.com/2022/10/ai-fintech-managing-finance-future.html`](https://www.kdnuggets.com/2022/10/ai-fintech-managing-finance-future.html)
 
-![人工智能在金融科技中的应用：管理未来的金融](../Images/72f84c3c68d0a5413bb54a5e581c4c4b.png)
+![人工智能在金融科技中的应用：管理未来的金融](img/72f84c3c68d0a5413bb54a5e581c4c4b.png)
 
 金融科技正在采用人工智能，这要归功于数据的丰富性和计算能力的成本效益。人工智能为金融行业提供了一系列好处，包括提高生产力、增加利润和提升产品质量。
 
@@ -10,21 +10,21 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 大多数金融科技公司有效地在网络安全和客户服务等各种金融领域部署人工智能。此外，人工智能也在改变在线银行的工作方式。例如，聊天机器人的自然语言处理和情感智能被证明是一种具有成本效益的替代方案。此外，随着人工智能解释更多的数据，它们对人工干预的依赖减少。
 
-+   成功的银行相关聊天机器人互动将在2019年至2023年间增长。
++   成功的银行相关聊天机器人互动将在 2019 年至 2023 年间增长。
 
-+   到2023年，聊天机器人互动将节省超过8.26亿小时。
++   到 2023 年，聊天机器人互动将节省超过 8.26 亿小时。
 
-+   超过70%的聊天机器人互动将通过移动银行应用程序进行。
++   超过 70%的聊天机器人互动将通过移动银行应用程序进行。
 
 随着对[**在线银行和支付服务**](https://www.gettrx.com/)需求的持续增长，采用人工智能已成为金融科技可持续发展和增长的关键。以下是一些[**人工智能趋势**](https://www.signitysolutions.com/blog/artificial-intelligence-and-machine-learning/)将如何管理未来的金融。
 
@@ -80,7 +80,7 @@ AI - 类似于机器学习，帮助执行股票交易，使用预编程的指令
 
 多亏了 AI 和 ML 自动化，贷款审批速度加快。专业的 AI 应用通过实时分析来加快贷款申请的审批成本，从而帮助做出明智的决策。
 
-不同的 AI 模型经过验证检查并评估个人的信用worthiness。此外，它还有助于优化贷款审批自动化。但最重要的是，AI 使用不同的数据点来创建客户的准确财务状况。
+不同的 AI 模型经过验证检查并评估个人的信用 worthiness。此外，它还有助于优化贷款审批自动化。但最重要的是，AI 使用不同的数据点来创建客户的准确财务状况。
 
 AI 在各个方面优化流程，高效地处理重复任务，承担复杂任务并提供有价值的见解。结果，它提升了客户体验，节省了时间，并使企业能够做出有意义的决策。
 

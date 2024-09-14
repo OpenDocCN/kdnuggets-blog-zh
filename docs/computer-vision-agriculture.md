@@ -1,10 +1,10 @@
 # 农业中的计算机视觉
 
-> 原文：[https://www.kdnuggets.com/2021/09/computer-vision-agriculture.html](https://www.kdnuggets.com/2021/09/computer-vision-agriculture.html)
+> 原文：[`www.kdnuggets.com/2021/09/computer-vision-agriculture.html`](https://www.kdnuggets.com/2021/09/computer-vision-agriculture.html)
 
-[评论](#comments)
+评论
 
-![Deep-Learning-in-the-Field.jpg](../Images/b346e8c53cfd9a026cfb49fb3d6fd630.png)
+![Deep-Learning-in-the-Field.jpg](img/b346e8c53cfd9a026cfb49fb3d6fd630.png)
 
 ### 田间的深度学习：现代计算机视觉在农业中的应用
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@
 
 卷积神经网络（CNNs）由多个卷积层构建，卷积是一种操作，其中权重的滑动窗口与输入矩阵相乘，每个点乘积的总和就是卷积的输出。
 
-![图示](../Images/c0ef57883df54939bbebfb35376d10fb.png)
+![图示](img/c0ef57883df54939bbebfb35376d10fb.png)
 
 *卷积层在输入矩阵（如图像）上应用滑动窗口中的权重。图示来源于公共领域，*[*source.*](https://rivesunder.github.io/public_domain/2021/07/25/public_domain.html)
 
@@ -46,7 +46,7 @@
 
 卷积神经网络作为视觉系统的另一个吸引人的方面是与动物视觉系统的紧密类比。在深度卷积网络中连续应用卷积核，使人联想到视网膜（以及视觉系统更远处）中一束束神经元，它们对按照特定模式出现的刺激作出共同反应。这些称为[感受野](https://en.wikipedia.org/wiki/Receptive_field)，它们与卷积核在简单训练目标下学习到的边缘、点、圆圈以及更抽象的特征非常相似。
 
-![图示](../Images/744a3ef231dc8d397e9377e64a697fbf.png)
+![图示](img/744a3ef231dc8d397e9377e64a697fbf.png)
 
 *卷积具有一个宝贵的特性，即对图像中不同位置出现的物体具有鲁棒性；图像左上角的西红柿与右下角的西红柿会被同样识别。图示来源于公共领域，*[*source.*](https://rivesunder.github.io/public_domain/2021/07/25/public_domain.html)
 
@@ -58,23 +58,23 @@
 
 **半自主：牵引式设备**
 
-在人工操作农用设备与将5吨农业工业设备配备自主智能和150瓦激光器之间存在一个中间点，一些公司选择了这一初步路径。实际情况是在传统拖拉机上添加一个配备摄像头传感器、执行器和分析软件的附件，但仍然依赖人工驾驶员和监督员。
+在人工操作农用设备与将 5 吨农业工业设备配备自主智能和 150 瓦激光器之间存在一个中间点，一些公司选择了这一初步路径。实际情况是在传统拖拉机上添加一个配备摄像头传感器、执行器和分析软件的附件，但仍然依赖人工驾驶员和监督员。
 
-这是瑞士公司Ecorobotix的[ Ara挂载喷雾器](https://www.ecorobotix.com/en/ara_mounted_sprayer/)的方法。Ara利用计算机视觉引导除草剂、杀菌剂或杀虫剂的施用，目标是由机载摄像头捕捉到的植物，公司声称这可以减少95%的 pesticide 输入。这也是[ 蓝河科技](https://bluerivertechnology.com/ourmethods/)采取的方法，总部位于加利福尼亚，他们开发了[ “See & Spray”技术](https://www.youtube.com/watch?v=XH-EFtTa6IU)。公司对“See & Spray”的声明是平均减少77%的除草剂使用量。
+这是瑞士公司 Ecorobotix 的[ Ara 挂载喷雾器](https://www.ecorobotix.com/en/ara_mounted_sprayer/)的方法。Ara 利用计算机视觉引导除草剂、杀菌剂或杀虫剂的施用，目标是由机载摄像头捕捉到的植物，公司声称这可以减少 95%的 pesticide 输入。这也是[ 蓝河科技](https://bluerivertechnology.com/ourmethods/)采取的方法，总部位于加利福尼亚，他们开发了[ “See & Spray”技术](https://www.youtube.com/watch?v=XH-EFtTa6IU)。公司对“See & Spray”的声明是平均减少 77%的除草剂使用量。
 
 针对杂草进行定点喷洒的主要激励之一是，相比于均匀喷洒整个田地（广播喷洒），杂草和其他植物会随着时间的发展对各种杀虫剂产生耐药性。这导致了对草甘膦（即“RoundUp”）等除草剂喷洒的耐受性增加，因为在每个季节受到强烈暴露的选择压力。
 
-这有点像抗生素耐药性，新的抗生素使用后耐药性迅速出现。青霉素作为第一个现代抗生素的耐药性[早在1940年](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5369031/)就被注意到了，这一现象与其发展同步，且早于其在人体患者中的广泛使用。事实上，草甘膦耐药性在著名的“RoundUp Ready”转基因作物于1990年代推向市场之前就通过定向进化实验[早已出现](https://www.semanticscholar.org/paper/Selection-of-Glyphosate-Tolerant-Tobacco-Calli-and-Singer-McDaniel/6f19cf8f6dcf8fdaff540059a783bbc407608474)，因此杂草在增加选择压力下发展耐药性并不令人惊讶。
+这有点像抗生素耐药性，新的抗生素使用后耐药性迅速出现。青霉素作为第一个现代抗生素的耐药性[早在 1940 年](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5369031/)就被注意到了，这一现象与其发展同步，且早于其在人体患者中的广泛使用。事实上，草甘膦耐药性在著名的“RoundUp Ready”转基因作物于 1990 年代推向市场之前就通过定向进化实验[早已出现](https://www.semanticscholar.org/paper/Selection-of-Glyphosate-Tolerant-Tobacco-Calli-and-Singer-McDaniel/6f19cf8f6dcf8fdaff540059a783bbc407608474)，因此杂草在增加选择压力下发展耐药性并不令人惊讶。
 
 有针对性的喷洒相比于广泛喷洒的主要优势在于减少了对整个田地的选择性压力，并且伴随着与较低投入相关的成本下降。然而，这只是一个部分解决方案，如果可能的话，完全摆脱化学除草解决方案还有额外的好处。通常这可能意味着激进的机械耕作或需要额外（且缓慢）人工的手工除草，但下一节的初创公司正在开发一系列机器人替代方案。
 
 **全自主除草机器人**
 
-![laser-weeding.png](../Images/7c1ae2316065260a26e9f89b4b660ca9.png)
+![laser-weeding.png](img/7c1ae2316065260a26e9f89b4b660ca9.png)
 
 *自主除草机器人，[来源](https://youtu.be/0QzevFlKrkc)*
 
-本节中描述的解决方案将除草自动化向前推进了一步，从有针对性的除草到精确除草。这些自主农业机器人尺寸从几百磅到近5吨或更多不等！
+本节中描述的解决方案将除草自动化向前推进了一步，从有针对性的除草到精确除草。这些自主农业机器人尺寸从几百磅到近 5 吨或更多不等！
 
 每种解决方案在细节上有所不同，最明显的区别在于除草工具的选择，这些工具包括激光、机械破坏、除草剂，甚至电流。还有许多相似之处：大多数这些机器人使用深度学习计算机视觉解决方案来定位杂草，避开作物植物，通过物理执行器或光学定位来施加除草工具。
 
@@ -102,54 +102,54 @@
 
 [Small Robot Company](https://www.smallrobotcompany.com/) 是一家在英国开发农业技术的初创公司，他们的机器人提供了一个轻便的田间监测和杂草管理解决方案。他们将机器人功能拆分成三个独立的实体：Tom，一个处理田间监测的移动传感器平台；Dick，一个配备强大电击的除草机器人；以及 Wilma，一套机器学习和分析工具，协调这一工作。第三个机器人 Harry 也在开发中。像本文中的其他机器人除草器一样，除草机器人 Dick 使用深度卷积网络来定位作物中的杂草。与其他机器人不同的是，它对杂草施加电流，燃烧不需要的植物的核心。
 
-你会记住[Ecorobotix](https://www.ecorobotix.com/en/)的“亚拉”挂载喷雾器在拖车部分的描述。他们还开发了一个独立的机器人，[Avo](https://www.ecorobotix.com/en/avo-autonomous-robot-weeder/)，用于完全自主操作。他们声称Avo与亚拉一样可以减少95%的除草剂使用，并且节省50%的成本。除了视觉系统，Avo还使用GPS、激光雷达和超声波进行导航和障碍物检测。与大型拖拉机相比，Avo重750公斤，并承诺在操作过程中减少土壤压实。
+你会记住[Ecorobotix](https://www.ecorobotix.com/en/)的“亚拉”挂载喷雾器在拖车部分的描述。他们还开发了一个独立的机器人，[Avo](https://www.ecorobotix.com/en/avo-autonomous-robot-weeder/)，用于完全自主操作。他们声称 Avo 与亚拉一样可以减少 95%的除草剂使用，并且节省 50%的成本。除了视觉系统，Avo 还使用 GPS、激光雷达和超声波进行导航和障碍物检测。与大型拖拉机相比，Avo 重 750 公斤，并承诺在操作过程中减少土壤压实。
 
 一些开发了自动化农场服务的公司提供机器人拖拉机作为服务，而不是直接销售或租赁资本设备。采取这种方法的企业包括[Farmwise](https://www.farmwise.io/services)，他们在加利福尼亚的部分地区试验了一台大型自动化除草拖拉机服务。
 
 ### 机器人温室、自动化搬运车和采摘机器人
 
-另一个正在经历兴趣激增的“农业技术”类别是先进的温室自动化。这些温室使用包括视觉、土壤湿度、温度和湿度在内的多种感应方式，记录大量数据，并在需要采取行动时提醒操作员。追求这种自动化温室方法的公司包括[Iron Ox](https://ironox.com/)和[iUNU](https://iunu.com/)。其中，iUNU似乎采取了一种更随意的方法，将自动化和分析添加到现有温室系统中，而Iron Ox的网站上展示了一台时尚的医疗白色机器，看起来就像是在医院或动画电影中出现的设备。
+另一个正在经历兴趣激增的“农业技术”类别是先进的温室自动化。这些温室使用包括视觉、土壤湿度、温度和湿度在内的多种感应方式，记录大量数据，并在需要采取行动时提醒操作员。追求这种自动化温室方法的公司包括[Iron Ox](https://ironox.com/)和[iUNU](https://iunu.com/)。其中，iUNU 似乎采取了一种更随意的方法，将自动化和分析添加到现有温室系统中，而 Iron Ox 的网站上展示了一台时尚的医疗白色机器，看起来就像是在医院或动画电影中出现的设备。
 
-另一个应用领域是自动化搬运农产品和植物。[Harvest Automation](https://www.public.harvestai.com/)提供了HV-100，这是一种中型机器人，对植物苗圃的作用类似于仓库机器人对分销中心的作用。[Burro.ai](https://burro.ai/)提供了一种工作马自驾车，它与人力工人一起工作，将手工采摘的农产品从田间搬运到附近的加工中心。可以把同名的Burro机器人看作是一种重型手推车，具备全面的自驾能力，不同于某些提供该功能的汽车，这台机器确实可以在没有人驾驶的情况下运行。
+另一个应用领域是自动化搬运农产品和植物。[Harvest Automation](https://www.public.harvestai.com/)提供了 HV-100，这是一种中型机器人，对植物苗圃的作用类似于仓库机器人对分销中心的作用。[Burro.ai](https://burro.ai/)提供了一种工作马自驾车，它与人力工人一起工作，将手工采摘的农产品从田间搬运到附近的加工中心。可以把同名的 Burro 机器人看作是一种重型手推车，具备全面的自驾能力，不同于某些提供该功能的汽车，这台机器确实可以在没有人驾驶的情况下运行。
 
-承担自主运输采摘产品的负担是一个有用的功能，但实际的收获呢？[Tevel](https://www.tevel-tech.com/)和[Abundant Robotics](https://www.abundantrobotics.com/)是两家早期公司，正在开发用于采摘水果的机器人。它们都首先关注果园的收获，但它们的方法大相径庭。Tevel正在开发一群飞行无人机，通过果园的行间快速穿梭，使用前置夹具抓取水果，而Abundant则建造了一种看起来像巨大的机械毛毛虫的东西，它在行间滚动时吸取苹果。看起来它确实是一只非常饥饿的毛毛虫。然而，它们无疑有一个共同点，那就是使用深度卷积神经网络来驱动视觉系统，使其能够精准锁定目标。
+承担自主运输采摘产品的负担是一个有用的功能，但实际的收获呢？[Tevel](https://www.tevel-tech.com/)和[Abundant Robotics](https://www.abundantrobotics.com/)是两家早期公司，正在开发用于采摘水果的机器人。它们都首先关注果园的收获，但它们的方法大相径庭。Tevel 正在开发一群飞行无人机，通过果园的行间快速穿梭，使用前置夹具抓取水果，而 Abundant 则建造了一种看起来像巨大的机械毛毛虫的东西，它在行间滚动时吸取苹果。看起来它确实是一只非常饥饿的毛毛虫。然而，它们无疑有一个共同点，那就是使用深度卷积神经网络来驱动视觉系统，使其能够精准锁定目标。
 
-![robot-picker.png](../Images/6881cba3e93c22ee525c718cb64c6da9.png)
+![robot-picker.png](img/6881cba3e93c22ee525c718cb64c6da9.png)
 
 *自动化机器人采摘产品，[来源](https://youtu.be/aijzVv6UeLQ)*
 
 ### 为什么计算机视觉农业创新？
 
-大量早期阶段的初创公司可能让人相信，使用自主机器人进行除草和其他劳动密集型（但又精细）的农业任务是一个新想法。实际上，这更多的是一种缓慢的进展（随后是疯狂的冲刺），十多年前就有类似的项目在为农场制造自主机器人。早在2007年，“Hortibot”就因其发明者来自奥胡斯大学而获得了主流的，[尽管不是特别有声望](https://www.theregister.com/2007/07/05/the_robo_peasantry_r_revolting/)，新闻报道。Hortibot是一种自动化拖拉机，主要用于针对性喷洒除草剂以控制杂草。
+大量早期阶段的初创公司可能让人相信，使用自主机器人进行除草和其他劳动密集型（但又精细）的农业任务是一个新想法。实际上，这更多的是一种缓慢的进展（随后是疯狂的冲刺），十多年前就有类似的项目在为农场制造自主机器人。早在 2007 年，“Hortibot”就因其发明者来自奥胡斯大学而获得了主流的，[尽管不是特别有声望](https://www.theregister.com/2007/07/05/the_robo_peasantry_r_revolting/)，新闻报道。Hortibot 是一种自动化拖拉机，主要用于针对性喷洒除草剂以控制杂草。
 
-实际上，它的目标与本文描述的深度学习驱动的除草机器人非常相似。尽管Hortibot项目似乎已经没有太多进展（旧网站是奇怪的丹麦垃圾邮件混合体），但它至少是一个足够现实的前景，以至于在2012年[《新科学家》](https://archive.is/TdQ0Y)的关于农业机器人的文章中再次被提及，这些主要是学术项目，不太可能推广到实际农业中。
+实际上，它的目标与本文描述的深度学习驱动的除草机器人非常相似。尽管 Hortibot 项目似乎已经没有太多进展（旧网站是奇怪的丹麦垃圾邮件混合体），但它至少是一个足够现实的前景，以至于在 2012 年[《新科学家》](https://archive.is/TdQ0Y)的关于农业机器人的文章中再次被提及，这些主要是学术项目，不太可能推广到实际农业中。
 
-像这样的机器人项目总是随着脆弱的实施与混乱的现实之间的碰撞而起伏不定，人们可能会被诱使认为这批热切的农场初创公司与过去的农业机器人项目没有什么不同。然而，正如凯文·邓拉普为[《风险投资》](https://venturebeat.com/2021/07/17/farming-is-finally-ready-for-robots/)撰写的那样，风险投资家在2020年对农业技术初创公司的投资比前一年多了60%，几乎是2010年的20倍。时间会证明这些投资是否像它们投资的机器人一样聪明。
+像这样的机器人项目总是随着脆弱的实施与混乱的现实之间的碰撞而起伏不定，人们可能会被诱使认为这批热切的农场初创公司与过去的农业机器人项目没有什么不同。然而，正如凯文·邓拉普为[《风险投资》](https://venturebeat.com/2021/07/17/farming-is-finally-ready-for-robots/)撰写的那样，风险投资家在 2020 年对农业技术初创公司的投资比前一年多了 60%，几乎是 2010 年的 20 倍。时间会证明这些投资是否像它们投资的机器人一样聪明。
 
-农场自动化的提升在过去二十年中形成了一种缓慢而稳步的趋势，而SARS-CoV-2疫情加速了这种技术的发展，就像它对许多其他趋势一样。与病毒相关的劳动和供应链中断[可能会促使农民重新考虑](https://pitchbook.com/news/reports/q4-2020-emerging-tech-research-agtech)那些可能曾经不确定、风险过高或其他原因使其不值得尝试的技术解决方案。
+农场自动化的提升在过去二十年中形成了一种缓慢而稳步的趋势，而 SARS-CoV-2 疫情加速了这种技术的发展，就像它对许多其他趋势一样。与病毒相关的劳动和供应链中断[可能会促使农民重新考虑](https://pitchbook.com/news/reports/q4-2020-emerging-tech-research-agtech)那些可能曾经不确定、风险过高或其他原因使其不值得尝试的技术解决方案。
 
-**作者： [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责管理Exxact Corp博客，并与许多撰写关于深度学习不同方面的才华横溢的作者合作。
+**作者： [Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责管理 Exxact Corp 博客，并与许多撰写关于深度学习不同方面的才华横溢的作者合作。
 
 [原文](https://www.exxactcorp.com/blog/Deep-Learning/computer-vision-in-agriculture)。已获许可转载。
 
 **相关内容：**
 
-+   [3种数据采集、注释和增强工具](/2021/08/3-data-labeling-synthesizing-augmentation-tools.html)
++   3 种数据采集、注释和增强工具
 
-+   [计算机视觉的开源数据集](/2021/08/open-source-datasets-computer-vision.html)
++   计算机视觉的开源数据集
 
-+   [用5行代码提取图像和视频中的对象](/2021/03/extraction-objects-images-videos-5-lines-code.html)
++   用 5 行代码提取图像和视频中的对象
 
 ### 更多相关话题
 
-+   [TensorFlow在计算机视觉中的应用 - 转移学习变得简单](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 在计算机视觉中的应用 - 转移学习变得简单](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
-+   [探索计算机视觉的世界：介绍MLM最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
++   [探索计算机视觉的世界：介绍 MLM 最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
 
-+   [计算机视觉的5种应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
++   [计算机视觉的 5 种应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
 
-+   [你需要知道的6个数据管理事项及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [你需要知道的 6 个数据管理事项及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets新闻2022年3月9日：5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
 
-+   [DINOv2：Meta AI的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
++   [DINOv2：Meta AI 的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)

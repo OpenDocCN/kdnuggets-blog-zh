@@ -1,8 +1,8 @@
 # 初学者友好的有趣 Python 项目！
 
-> 原文：[https://www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html](https://www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html)
+> 原文：[`www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html`](https://www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html)
 
-![初学者友好的有趣 Python 项目！](../Images/80a54cc8c53d4d41bed56d9ccfeb2cf9.png)
+![初学者友好的有趣 Python 项目！](img/80a54cc8c53d4d41bed56d9ccfeb2cf9.png)
 
 [Andrey Metelev](https://unsplash.com/@metelevan) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -239,11 +239,11 @@ while 1 < 2:
 
 +   [初学者的 Python 机器学习指南](https://www.kdnuggets.com/beginners-guide-to-machine-learning-with-python)
 
-![](../Images/eb105b2b614c4a6165d83fbc2b9711a1.png)
+![](img/eb105b2b614c4a6165d83fbc2b9711a1.png)
 
 [](/news/subscribe.html)
 
-[获取免费电子书《伟大的自然语言处理入门》以及《数据科学备忘单全集》和领先的关于数据科学、机器学习、人工智能与分析的新闻通讯，直接发送到您的邮箱。](/news/subscribe.html)
+获取免费电子书《伟大的自然语言处理入门》以及《数据科学备忘单全集》和领先的关于数据科学、机器学习、人工智能与分析的新闻通讯，直接发送到您的邮箱。
 
 订阅即表示您接受 KDnuggets 的 [隐私政策](https://www.kdnuggets.com/news/privacy-policy.html)
 
@@ -251,7 +251,7 @@ while 1 < 2:
 
 [<= 上一篇文章](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)[下一篇文章 =>](https://www.kdnuggets.com/2022/10/top-posts-week-0926-1002.html)
 
-### [最新文章](/news/index.html)
+### 最新文章
 
 +   [如何跟踪 Python 中的内存分配](https://www.kdnuggets.com/how-to-trace-memory-allocation-in-python)
 
@@ -273,9 +273,9 @@ while 1 < 2:
 
 +   [微软提供的 4 个入门级证书，助您获得热门工作](https://www.kdnuggets.com/4-entry-level-certificates-from-microsoft-to-land-in-demand-jobs)
 
-+   [5个数据科学的隐藏宝石Python库](https://www.kdnuggets.com/5-hidden-gem-python-libraries-for-data-science)
++   [5 个数据科学的隐藏宝石 Python 库](https://www.kdnuggets.com/5-hidden-gem-python-libraries-for-data-science)
 
-+   [每个数据工程师应该了解的10个内置Python模块](https://www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know)
++   [每个数据工程师应该了解的 10 个内置 Python 模块](https://www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know)
 
 +   [如何使用 Pandas 有效管理分类数据](https://www.kdnuggets.com/how-to-manage-categorical-data-effectively-with-pandas)
 
@@ -289,10 +289,10 @@ while 1 < 2:
 
 +   [本地使用 FLUX.1](https://www.kdnuggets.com/using-flux-1-locally)
 
-+   [5个常见的数据科学错误及其避免方法](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
++   [5 个常见的数据科学错误及其避免方法](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
 
 * * *
 
-© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   [关于](/about/index.html)   |   [联系](/contact.html)   |   [广告]((https://mailchi.mp/kdnuggets/media-kit) |   [隐私](/news/privacy-policy.html)   |   [服务条款](/terms-of-service.html)
+© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   关于   |   联系   |   广告 |   隐私   |   服务条款
 
-由 Nisha Arya 于 2022年10月3日 发布
+由 Nisha Arya 于 2022 年 10 月 3 日 发布

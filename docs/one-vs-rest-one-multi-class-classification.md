@@ -1,22 +1,22 @@
 # 数据科学实用技巧：如何使用一对多和一对一进行多分类
 
-> 原文：[https://www.kdnuggets.com/2020/08/one-vs-rest-one-multi-class-classification.html](https://www.kdnuggets.com/2020/08/one-vs-rest-one-multi-class-classification.html)
+> 原文：[`www.kdnuggets.com/2020/08/one-vs-rest-one-multi-class-classification.html`](https://www.kdnuggets.com/2020/08/one-vs-rest-one-multi-class-classification.html)
 
-[评论](#comments)
+评论
 
 **由机器学习专业人士兼作家托马斯·格雷**。
 
-![](../Images/eddab375a6fe2bcdb19f51b4eb2cea5d.png)
+![](img/eddab375a6fe2bcdb19f51b4eb2cea5d.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

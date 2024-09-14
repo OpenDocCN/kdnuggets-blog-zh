@@ -1,32 +1,32 @@
-# 2018年数据科学的前15个Scala库
+# 2018 年数据科学的前 15 个 Scala 库
 
-> 原文：[https://www.kdnuggets.com/2018/02/top-15-scala-libraries-data-science-2018.html](https://www.kdnuggets.com/2018/02/top-15-scala-libraries-data-science-2018.html)
+> 原文：[`www.kdnuggets.com/2018/02/top-15-scala-libraries-data-science-2018.html`](https://www.kdnuggets.com/2018/02/top-15-scala-libraries-data-science-2018.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[伊戈尔·博布里亚科夫](https://medium.com/@ibobriakov)，ActiveWizards**
 
-![2018年数据科学的前15个Scala库](../Images/b287610e48299e0a92035b8c47803d9c.png)
+![2018 年数据科学的前 15 个 Scala 库](img/b287610e48299e0a92035b8c47803d9c.png)
 
-在我们之前的文章中，我们讨论了 [顶级Python数据科学库](https://activewizards.com/blog/top-15-libraries-for-data-science-in-python/)。这次我们将重点关注Scala，近年来它已经成为数据科学家的另一个重要语言。Scala的流行主要是由于Spark的兴起，Spark是一个大数据处理引擎，使用Scala编写，因此提供了原生的Scala API。
-
-* * *
-
-## 我们的前3个课程推荐
-
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
-
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
-
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+在我们之前的文章中，我们讨论了 [顶级 Python 数据科学库](https://activewizards.com/blog/top-15-libraries-for-data-science-in-python/)。这次我们将重点关注 Scala，近年来它已经成为数据科学家的另一个重要语言。Scala 的流行主要是由于 Spark 的兴起，Spark 是一个大数据处理引擎，使用 Scala 编写，因此提供了原生的 Scala API。
 
 * * *
 
-我们不会在这里深入比较Scala与Python，但重要的是要注意，与Python不同，Scala是编译语言。因此，使用Scala编写的代码执行速度要快得多（与纯Python相比，而不是像NumPy这样的专用库）。
+## 我们的前 3 个课程推荐
 
-与Java相比，Scala的编写体验更佳，因为通常可以用显著更少的代码行来表达相同的逻辑。Scala的功能丝毫不逊色于Java，甚至具有一些更先进的特性。Java的老手们可能会提出很多反对意见，但毫无疑问，Scala更适合数据科学任务。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-目前，Python和R仍然是快速数据分析、构建、探索和操作强大模型的主要语言，而Scala则成为处理大数据的功能性产品开发中的关键语言，因为大数据需要稳定性、灵活性、高速、可扩展性等。在研究阶段，分析和模型通常在Python中完成，然后在生产过程中实现到Scala中。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+
+* * *
+
+我们不会在这里深入比较 Scala 与 Python，但重要的是要注意，与 Python 不同，Scala 是编译语言。因此，使用 Scala 编写的代码执行速度要快得多（与纯 Python 相比，而不是像 NumPy 这样的专用库）。
+
+与 Java 相比，Scala 的编写体验更佳，因为通常可以用显著更少的代码行来表达相同的逻辑。Scala 的功能丝毫不逊色于 Java，甚至具有一些更先进的特性。Java 的老手们可能会提出很多反对意见，但毫无疑问，Scala 更适合数据科学任务。
+
+目前，Python 和 R 仍然是快速数据分析、构建、探索和操作强大模型的主要语言，而 Scala 则成为处理大数据的功能性产品开发中的关键语言，因为大数据需要稳定性、灵活性、高速、可扩展性等。在研究阶段，分析和模型通常在 Python 中完成，然后在生产过程中实现到 Scala 中。
 
 为了方便起见，我们准备了一个关于在 Scala 中执行机器学习和数据科学任务的最重要库的全面概述。我们将使用与对应的 Python 工具的类比，以便更好地理解一些重要方面。实际上，只有一个顶级的综合工具构成了 Scala 中数据科学和大数据解决方案开发的基础，这就是 Apache Spark，它配备了多种用 Scala 和 Java 编写的库和工具。让我们详细了解一下它。
 
@@ -56,23 +56,23 @@ Breeze 还提供了绘图功能，我们将在下面讨论。
 
 +   Vec（1D 向量）
 
-    ![](../Images/3ee46085715b7f21c0763a21c9fbb3c7.png)
+    ![](img/3ee46085715b7f21c0763a21c9fbb3c7.png)
 
 +   Mat（2D 矩阵）
 
-    ![](../Images/2f7061b11192098f184b4940fea16a72.png)
+    ![](img/2f7061b11192098f184b4940fea16a72.png)
 
 +   Series（1D 索引矩阵）
 
-    ![](../Images/de1753148e1b89c1e7e4771c15d2f1f1.png)
+    ![](img/de1753148e1b89c1e7e4771c15d2f1f1.png)
 
 +   Frame（2D 索引矩阵）
 
-    ![](../Images/d72029b765138435ac4ce5a70a6e027c.png)
+    ![](img/d72029b765138435ac4ce5a70a6e027c.png)
 
 +   索引（类似哈希表）
 
-    ![](../Images/ed4b44af4d247bfa6796ac23b47bbcc4.png)
+    ![](img/ed4b44af4d247bfa6796ac23b47bbcc4.png)
 
 Vec 和 Mat 类是 Series 和 Frame 的基础。你可以在这些数据结构上实现不同的操作，并用于基本的数据分析。Saddle 另一个很棒的特点是对缺失值的强大鲁棒性。/span>
 
@@ -94,7 +94,7 @@ Scala 具有一些优秀的自然语言处理库，作为 ScalaNLP 的一部分�
 
 正如名字所示，Breeze-viz 是 Breeze 为 Scala 开发的绘图库。它基于著名的 Java 图表库 JFreeChart，并具有类似 MATLAB 的语法。尽管 Breeze-viz 的机会远少于 MATLAB、Python 中的 matplotlib 或 R，但它在开发和建立新模型的过程中仍然非常有用。
 
-![](../Images/7e4816a19280745f613df9eb29217cd7.png)
+![](img/7e4816a19280745f613df9eb29217cd7.png)
 
 ### **[Vegas](https://www.vegas-viz.org/)(提交次数: 210, 贡献者: 14)**
 
@@ -102,7 +102,7 @@ Scala 具有一些优秀的自然语言处理库，作为 ScalaNLP 的一部分�
 
 Vegas 提供了声明式可视化，允许你主要专注于指定需要对数据做什么，并进一步分析可视化结果，而无需担心代码实现。
 
-![](../Images/08e7c8e55717bf06849dc012d606ecdd.png)
+![](img/08e7c8e55717bf06849dc012d606ecdd.png)
 
 ### **机器学习**
 
@@ -110,9 +110,9 @@ Vegas 提供了声明式可视化，允许你主要专注于指定需要对数�
 
 Statistical Machine Intelligence and Learning Engine，简称 Smile，是一个有前景的现代机器学习系统，在某些方面类似于 Python 的 scikit-learn。它使用 Java 开发，也提供了 Scala 的 API。该库将以快速和广泛的应用、高效的内存使用以及大量的机器学习算法（如分类、回归、最近邻搜索、特征选择等）令你惊叹。
 
-![](../Images/3d412b1bd73341b08fe2cf3cdba304c2.png)
+![](img/3d412b1bd73341b08fe2cf3cdba304c2.png)
 
-![](../Images/6009473d6743e7259c7434a71c5f43cf.png)
+![](img/6009473d6743e7259c7434a71c5f43cf.png)
 
 ### **Apache Spark MLlib & ML**
 
@@ -132,35 +132,35 @@ DeepLearning.scala 是一个替代的机器学习工具包，提供了高效的�
 
 Summingbird 是一个领域特定的数据处理框架，允许批处理和在线 MapReduce 计算的集成，以及混合批处理/在线处理模式。设计该语言的主要推动者是 Twitter 的开发者，他们经常需要编写相同的代码：首先用于批处理，然后再次用于在线处理。
 
--   Summingbird处理并生成两种类型的数据：流（无限序列的元组）和快照（在某个时间点上数据集的完整状态）。最后，Summingbird提供了Storm、Scalding的平台实现和一个用于测试目的的内存执行引擎。
+-   Summingbird 处理并生成两种类型的数据：流（无限序列的元组）和快照（在某个时间点上数据集的完整状态）。最后，Summingbird 提供了 Storm、Scalding 的平台实现和一个用于测试目的的内存执行引擎。
 
 ### **[PredictionIO](http://predictionio.incubator.apache.org/index.html) （提交次数：4343，贡献者：125）**
 
--   当然，我们不能忽视一个用于构建和部署预测引擎的机器学习服务器，名为PredictionIO。它建立在Apache Spark、MLlib和HBase之上，并且曾被Github评选为最受欢迎的基于Apache Spark的机器学习产品。它使你能够轻松高效地构建、评估和部署引擎，实现自己的机器学习模型，并将其集成到你的引擎中。
+-   当然，我们不能忽视一个用于构建和部署预测引擎的机器学习服务器，名为 PredictionIO。它建立在 Apache Spark、MLlib 和 HBase 之上，并且曾被 Github 评选为最受欢迎的基于 Apache Spark 的机器学习产品。它使你能够轻松高效地构建、评估和部署引擎，实现自己的机器学习模型，并将其集成到你的引擎中。
 
 ### **附加**
 
 ### **[Akka](https://akka.io/) （提交次数：21430，贡献者：467）**
 
--   由Scala的创造公司开发的Akka是一个用于在JVM上构建分布式应用的并发框架。它使用基于演员的模型，其中一个演员代表一个接收消息并采取适当行动的对象。Akka取代了之前Scala版本中可用的Actor类的功能。
+-   由 Scala 的创造公司开发的 Akka 是一个用于在 JVM 上构建分布式应用的并发框架。它使用基于演员的模型，其中一个演员代表一个接收消息并采取适当行动的对象。Akka 取代了之前 Scala 版本中可用的 Actor 类的功能。
 
--   主要区别，也被认为是最重要的改进，是演员与底层系统之间的额外层，只需演员处理消息，而框架处理所有其他复杂问题。所有演员都是按层次结构排列的，从而创建一个Actor系统，这有助于演员之间更高效地互动，并通过将复杂问题拆分为更小的任务来解决复杂问题。
+-   主要区别，也被认为是最重要的改进，是演员与底层系统之间的额外层，只需演员处理消息，而框架处理所有其他复杂问题。所有演员都是按层次结构排列的，从而创建一个 Actor 系统，这有助于演员之间更高效地互动，并通过将复杂问题拆分为更小的任务来解决复杂问题。
 
 ### **[Spray](http://spray.io/) （提交次数：2663，贡献者：74）**
 
--   现在让我们看看Spray - 一个基于Akka构建的Scala库套件，用于构建REST/HTTP web服务。它保证了异步、非阻塞的基于演员的高性能请求处理，同时内部Scala DSL提供了定义web服务行为的功能，以及高效且便捷的测试能力。
+-   现在让我们看看 Spray - 一个基于 Akka 构建的 Scala 库套件，用于构建 REST/HTTP web 服务。它保证了异步、非阻塞的基于演员的高性能请求处理，同时内部 Scala DSL 提供了定义 web 服务行为的功能，以及高效且便捷的测试能力。
 
 ### **[Slick ](http://slick.lightbend.com/）（提交次数：1940，贡献者：92）**
 
--   最后但同样重要的是Slick，它代表了Scala语言集成连接工具包。它是一个用于创建和执行数据库查询的库，支持多种数据库，如H2、MySQL、PostgreSQL等。一些数据库可以通过slick-extensions获得。
+-   最后但同样重要的是 Slick，它代表了 Scala 语言集成连接工具包。它是一个用于创建和执行数据库查询的库，支持多种数据库，如 H2、MySQL、PostgreSQL 等。一些数据库可以通过 slick-extensions 获得。
 
--   为了构建查询，Slick提供了强大的DSL，使代码看起来就像在使用Scala集合一样。Slick支持简单的SQL查询和强类型的多个表的联接。此外，可以使用简单的子查询来构建更复杂的查询。
+-   为了构建查询，Slick 提供了强大的 DSL，使代码看起来就像在使用 Scala 集合一样。Slick 支持简单的 SQL 查询和强类型的多个表的联接。此外，可以使用简单的子查询来构建更复杂的查询。
 
 ### **结论**
 
 在这篇文章中，我们概述了一些在执行重要数据科学任务时非常有用的 Scala 库。这些库已被证明在实现最佳结果方面非常有帮助和有效。您还可以查看下面每个提供的库的 GitHub 活动统计数据。
 
-![](../Images/f26b046cd20e2cb81a19e7f0722850c3.png)
+![](img/f26b046cd20e2cb81a19e7f0722850c3.png)
 
 来源：[Google 表格](https://docs.google.com/spreadsheets/d/1wLOtLLJ65QMbLumc3F2Mop_4uPIFbyJ6iDZwOp0cXrQ)
 
@@ -170,17 +170,17 @@ Summingbird 是一个领域特定的数据处理框架，允许批处理和在�
 
 &nbsp
 
-![作者](../Images/141918280a7bec080378e3b4edaefcf7.png)**简介：[伊戈尔·博布里亚科夫](https://medium.com/@ibobriakov)** 是数据科学家和技术企业家。他帮助创新初创公司实施数据科学计划，并担任 [ActiveWizards](http://activewizards.com) 机器学习公司的顾问。他还帮助 [数据科学学院](http://datascience-school.com) 开发教育项目。
+![作者](img/141918280a7bec080378e3b4edaefcf7.png)**简介：[伊戈尔·博布里亚科夫](https://medium.com/@ibobriakov)** 是数据科学家和技术企业家。他帮助创新初创公司实施数据科学计划，并担任 [ActiveWizards](http://activewizards.com) 机器学习公司的顾问。他还帮助 [数据科学学院](http://datascience-school.com) 开发教育项目。
 
 [原文](https://activewizards.com/blog/top-15-scala-libraries-for-data-science/)。经许可转载。
 
 **相关：**
 
-+   [2017 年最佳 15 个 Python 数据科学库](/2017/06/top-15-python-libraries-data-science.html)
++   2017 年最佳 15 个 Python 数据科学库
 
-+   [最佳 Python 数据科学包](/2017/05/best-python-packages-data-science.html)
++   最佳 Python 数据科学包
 
-+   [前 20 个 Python 机器学习开源项目，更新版](/2016/11/top-20-python-machine-learning-open-source-updated.html)
++   前 20 个 Python 机器学习开源项目，更新版
 
 ### 相关阅读
 

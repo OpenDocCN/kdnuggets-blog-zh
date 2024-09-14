@@ -1,6 +1,6 @@
 # 新调查：你拥有哪些数据科学技能，哪些技能是你想要的？立即投票
 
-> 原文：[https://www.kdnuggets.com/2020/08/core-hot-data-science-skills-poll.html](https://www.kdnuggets.com/2020/08/core-hot-data-science-skills-poll.html)
+> 原文：[`www.kdnuggets.com/2020/08/core-hot-data-science-skills-poll.html`](https://www.kdnuggets.com/2020/08/core-hot-data-science-skills-poll.html)
 
 调查已结束 - 以下是结果：
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -26,11 +26,11 @@
 > 
 > 2\. 你希望添加或改进哪些技能？
 
-![图示](../Images/73b5551c22cdbc64ae40d9fc9e16af32.png)**图 1\. 来自 [去年数据科学技能调查分析](/2019/09/core-hot-data-science-skills.html) 的结果。**
+![图示](img/73b5551c22cdbc64ae40d9fc9e16af32.png)**图 1\. 来自 去年数据科学技能调查分析 的结果。**
 
 技能被收集到几个相关的子部分，读者被要求指出他们目前掌握哪些技能以及他们希望添加或改进哪些技能。请注意，你可能既有某项技能又希望改进它。
 
-你可以 **[在这里阅读去年的调查分析](/2019/09/core-hot-data-science-skills.html)**。
+你可以 **在这里阅读去年的调查分析**。
 
 ### 更多相关主题
 

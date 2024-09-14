@@ -1,22 +1,22 @@
 # 迁移学习变得简单：编码一种强大的技术
 
-> 原文：[https://www.kdnuggets.com/2019/11/transfer-learning-coding.html](https://www.kdnuggets.com/2019/11/transfer-learning-coding.html)
+> 原文：[`www.kdnuggets.com/2019/11/transfer-learning-coding.html`](https://www.kdnuggets.com/2019/11/transfer-learning-coding.html)
 
-[评论](#comments)
+评论
 
 ### 面向普通用户的人工智能
 
 人工智能（A.I.）正在成为[*最强大且具有变革性的全球性技术*](https://www.strategyand.pwc.com/uk/en/transformative-power-ai/transformative-power-artificial-intelligence.html)，以前所未有的方式影响全球经济、医疗、金融、工业、社会文化互动等各个方面。这一点在迁移学习和机器学习能力的发展中尤为重要。
 
-我们已经在日常生活中使用人工智能技术，无论我们是否意识到，它都在影响我们的生活和选择。从我们的Google搜索和导航、Netflix电影推荐、Amazon购买建议、日常任务的语音助手如Siri或Alexa、Facebook社区建设、医疗诊断、信用评分计算和按揭决策等，人工智能的应用只会不断增长。
+我们已经在日常生活中使用人工智能技术，无论我们是否意识到，它都在影响我们的生活和选择。从我们的 Google 搜索和导航、Netflix 电影推荐、Amazon 购买建议、日常任务的语音助手如 Siri 或 Alexa、Facebook 社区建设、医疗诊断、信用评分计算和按揭决策等，人工智能的应用只会不断增长。
 
 大多数现代人工智能系统目前由一类算法或技术驱动，即[深度学习](https://machinelearningmastery.com/what-is-deep-learning/)，它基本上训练和构建[具有不同架构配置的深层神经网络](https://blog.exxactcorp.com/deep-learning-vs-machine-learning-vs-data-science-how-do-they-differ/)。
 
-![](../Images/208231dc1b5052d184e745923aeea657.png)
+![](img/208231dc1b5052d184e745923aeea657.png)
 
 *图片来源：Fjodor van Veen – asimovinstitute.org.*
 
-经过50多年的起伏波动，深度学习革命已获得动力，看起来势不可挡——这得益于大数据技术、硬件创新和算法。因此，[深度学习网络有望影响并从根本上改变](https://elitedatascience.com/machine-learning-impact)我们人类在未来几十年的生活、工作和娱乐方式。
+经过 50 多年的起伏波动，深度学习革命已获得动力，看起来势不可挡——这得益于大数据技术、硬件创新和算法。因此，[深度学习网络有望影响并从根本上改变](https://elitedatascience.com/machine-learning-impact)我们人类在未来几十年的生活、工作和娱乐方式。
 
 *所以，我们终于可以看到人工智能为全球每个人带来的希望！*
 
@@ -42,7 +42,7 @@
 
 *转移学习的理念是克服孤立学习范式，并利用在一个任务中获得的知识来解决相关任务，这在机器学习，特别是在深度学习领域中得到了应用。*
 
-![](../Images/c6555dd2aeee750bd0f47985e3600e0d.png)
+![](img/c6555dd2aeee750bd0f47985e3600e0d.png)
 
 *图片来源：[转移学习综合实用指南：在深度学习中的实际应用](https://towardsdatascience.com/a-comprehensive-hands-on-guide-to-transfer-learning-with-real-world-applications-in-deep-learning-212bf3b2f27a)。*
 
@@ -72,7 +72,7 @@
 
 +   附加适合当前任务的新层，并使用新数据训练模型
 
-![](../Images/4513886ec76fb18b9b3ca3a77712aeaa.png)
+![](img/4513886ec76fb18b9b3ca3a77712aeaa.png)
 
 *图：我们将在这里探索的深度学习网络迁移学习策略。*
 
@@ -84,7 +84,7 @@
 
 **为什么不遵循传统方法？**
 
-传统上，这个主题的教程集中在从著名的高性能深度学习网络中学习，例如[VGGNet-16](https://neurohive.io/en/popular-networks/vgg16/)、[ResNet-50](https://medium.com/@14prakash/understanding-and-implementing-architectures-of-resnet-and-resnext-for-state-of-the-art-image-cf51669e1624) 或[Inception-V3/V4](https://towardsdatascience.com/a-simple-guide-to-the-versions-of-the-inception-network-7fc52b863202) 等。这些网络在庞大的[ImageNet数据库](http://www.image-net.org/)上进行了训练，并在[年度ImageNet比赛 - ILSVRC](http://www.image-net.org/challenges/LSVRC/)中获得了前列，从而成为图像分类任务的黄金基准模型。
+传统上，这个主题的教程集中在从著名的高性能深度学习网络中学习，例如[VGGNet-16](https://neurohive.io/en/popular-networks/vgg16/)、[ResNet-50](https://medium.com/@14prakash/understanding-and-implementing-architectures-of-resnet-and-resnext-for-state-of-the-art-image-cf51669e1624) 或[Inception-V3/V4](https://towardsdatascience.com/a-simple-guide-to-the-versions-of-the-inception-network-7fc52b863202) 等。这些网络在庞大的[ImageNet 数据库](http://www.image-net.org/)上进行了训练，并在[年度 ImageNet 比赛 - ILSVRC](http://www.image-net.org/challenges/LSVRC/)中获得了前列，从而成为图像分类任务的黄金基准模型。
 
 然而，这些网络的问题在于它们包含大量复杂的层，当你开始学习深度学习概念时，不容易理解。
 
@@ -148,25 +148,25 @@
 
 因此，
 
-![](../Images/2d79361e3f786d6866899a439699885b.png)
+![](img/2d79361e3f786d6866899a439699885b.png)
 
 *CIFAR-10 数据集中的 10 类图像。*
 
 这里是前 5 类的一些随机图像，第一个神经网络将“看到”并进行训练。这些类别是——**飞机、汽车、鸟、猫**或**鹿**。
 
-![](../Images/37af3bf1cfccd33cb5a0ec7f18282f57.png)
+![](img/37af3bf1cfccd33cb5a0ec7f18282f57.png)
 
 *图：前 5 类图像，仅被第一个神经网络看到。*
 
 但我们实际上感兴趣的是为最后 5 类图像构建一个神经网络——**狗、青蛙、马、羊**或**卡车**。
 
-![](../Images/8d2624dfcc6e5e50b7d33aa383dd7dcf.png)
+![](img/8d2624dfcc6e5e50b7d33aa383dd7dcf.png)
 
 *图：最后 5 类图像，仅被第二个神经网络看到。*
 
 接下来，我们定义两组/类型的层：特征层（卷积）和分类层（密集）。
 
-再次，请不要被这些代码片段的实现细节困扰。你可以从任何标准的Keras教程中了解细节。关键是理解概念。
+再次，请不要被这些代码片段的实现细节困扰。你可以从任何标准的 Keras 教程中了解细节。关键是理解概念。
 
 特征层：
 
@@ -222,7 +222,7 @@
 
 我们可以展示网络在训练轮次中的准确度演变：
 
-![](../Images/e35416277e8b1316d8d807f8a6b4cb6d.png)
+![](img/e35416277e8b1316d8d807f8a6b4cb6d.png)
 
 *图：训练第一个网络时验证集准确度随轮次变化。*
 
@@ -238,7 +238,7 @@
 
 1.  model_2 = **Sequential**(特征层 + 分类层)
 
-![](../Images/0e2f59f900013b67c13f41b64fa377c1.png)
+![](img/0e2f59f900013b67c13f41b64fa377c1.png)
 
 *图：第二个网络的模型摘要，显示了固定和可训练的权重。固定权重直接从第一个网络转移过来。*
 
@@ -250,13 +250,13 @@
 
 第二个模型的准确率甚至高于第一个模型，尽管这并不总是如此，且取决于模型架构和数据集。
 
-![](../Images/f74b9408a1d84fe41383f4fb5a738b53.png)
+![](img/f74b9408a1d84fe41383f4fb5a738b53.png)
 
 *图：训练第二个网络时验证集准确度随轮次变化。*
 
 两个模型的训练时间如下所示：
 
-![](../Images/5dec718a5302933f8930708ff6d0b97d.png)
+![](img/5dec718a5302933f8930708ff6d0b97d.png)
 
 *图：两个网络的训练时间。*
 
@@ -282,11 +282,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

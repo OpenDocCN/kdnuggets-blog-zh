@@ -1,8 +1,8 @@
 # 如何通过缓存加速 Python 代码
 
-> 原文：[https://www.kdnuggets.com/how-to-speed-up-python-code-with-caching](https://www.kdnuggets.com/how-to-speed-up-python-code-with-caching)
+> 原文：[`www.kdnuggets.com/how-to-speed-up-python-code-with-caching`](https://www.kdnuggets.com/how-to-speed-up-python-code-with-caching)
 
-![python-cache-fimg](../Images/106568a22d2fe62fa49f991f5e3224e6.png)
+![python-cache-fimg](img/106568a22d2fe62fa49f991f5e3224e6.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -147,18 +147,18 @@ Time with LRU cache: 0.000017 seconds
 
 如果你在寻找关于使用 Python 进行数据科学的最佳实践的全面指南，请阅读 [5 Python Best Practices for Data Science](https://www.kdnuggets.com/5-python-best-practices-for-data-science)。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编程教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编程教程。
 
 ### 相关话题
 
-+   [加速Python代码的3种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
++   [加速 Python 代码的 3 种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
 
-+   [如何通过索引加速SQL查询[Python版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
++   [如何通过索引加速 SQL 查询[Python 版]](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
 
-+   [如何将Python Pandas加速超过300倍](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)
++   [如何将 Python Pandas 加速超过 300 倍](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)
 
-+   [提高数据处理效率和速度的5个Python技巧](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)
++   [提高数据处理效率和速度的 5 个 Python 技巧](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)
 
-+   [如何加速XGBoost模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
++   [如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
 
 +   [通过快速克里金（FKR）加速机器学习](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)

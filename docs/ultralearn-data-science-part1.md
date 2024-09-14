@@ -1,10 +1,10 @@
 # 如何“极限学习”数据科学，第一部分
 
-> 原文：[https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)
+> 原文：[`www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html`](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)
 
-[评论](#comments)
+评论
 
-**由[Benthecoder](https://twitter.com/benthecoder1)撰写，开发者、作家、机器学习与AI爱好者**。
+**由[Benthecoder](https://twitter.com/benthecoder1)撰写，开发者、作家、机器学习与 AI 爱好者**。
 
 埃隆·马斯克、比尔·盖茨、沃伦·巴菲特和马克·库班。这些极度成功的人有什么共同点？
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -30,7 +30,7 @@
 
 比尔·盖茨和沃伦·巴菲特都极其好奇，并且有着难以满足的学习欲望。
 
-沃伦·巴菲特将80%的时间投入到阅读和思考中。比尔·盖茨每周读一本书，还会有两周的假期专门用来阅读。
+沃伦·巴菲特将 80%的时间投入到阅读和思考中。比尔·盖茨每周读一本书，还会有两周的假期专门用来阅读。
 
 > *“智力资本永远优于金融资本。” — 保罗·都铎·琼斯，自主创业的亿万富翁、投资者和慈善家。*
 
@@ -52,7 +52,7 @@
 
 但实际上，学习是艰难的。我这么说是因为学校和学院已经变成了商业，学习的行为已经成为了一门失传的艺术。学生们只是为了通过考试而学习，而不再是为了学习而学习。问一个学生“为什么”而不是“什么”，他们很可能会感到困难。
 
-关于数据科学，观看几个小时的YouTube视频、阅读数十本编程书籍和注册昂贵的在线课程单独是不够的。需要一个结构化的框架。
+关于数据科学，观看几个小时的 YouTube 视频、阅读数十本编程书籍和注册昂贵的在线课程单独是不够的。需要一个结构化的框架。
 
 需要对基础知识有深入理解。还有对该领域的大局观理解。
 
@@ -60,11 +60,11 @@
 
 元学习的核心是从全局视角出发，然后利用这一点制定你最优的学习策略。
 
-![](../Images/7829bef4a75baf26fa55d9b3ca1166d4.png)
+![](img/7829bef4a75baf26fa55d9b3ca1166d4.png)
 
 大局观思维本质上意味着完整的、宏观的故事或理念。这个短语通常意味着一个人应该考虑未来，或考虑其他平行因素，而不是强调细节。
 
-为了掌握大局观的概念，让我们将这一概念应用于数据科学。数据科学是21世纪最性感的工作。但大多数数据科学家在没有清晰了解数据科学的真正含义之前就跳入了这个领域。
+为了掌握大局观的概念，让我们将这一概念应用于数据科学。数据科学是 21 世纪最性感的工作。但大多数数据科学家在没有清晰了解数据科学的真正含义之前就跳入了这个领域。
 
 简而言之，数据科学是揭示数据隐藏价值的过程。
 
@@ -76,7 +76,7 @@
 
 ### 元学习数据科学的策略
 
-![](../Images/0f6c80e139bc9b6b08aa9577c34f571d.png)
+![](img/0f6c80e139bc9b6b08aa9577c34f571d.png)
 
 *照片由 [Tabea Damm](https://unsplash.com/@tabeadamm?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)*
 
@@ -144,7 +144,7 @@
 
 有了互联网，学习数据科学不再昂贵和有限。大量的资源使得各种人群都能平等地接触数据科学。
 
-类似于学习时面临的问题，这部分也依赖于个人。有些人可能更喜欢通过YouTube视频学习，而有些人则喜欢使用Udemy和Coursera等在线课程。
+类似于学习时面临的问题，这部分也依赖于个人。有些人可能更喜欢通过 YouTube 视频学习，而有些人则喜欢使用 Udemy 和 Coursera 等在线课程。
 
 尽管如此，拥有学习方法是必要的，以便根据你的偏好和能力个性化你的学习方式。
 
@@ -154,7 +154,7 @@
 
 ### 行动计划
 
-现在你对超学习、元学习和大局观有了初步了解。花5-10分钟思考一下你是否一直以这些概念为指导进行学习。如果没有，现在是改变的最佳时机。根据以下4个步骤制定你的元学习策略，今天就开始正确的学习方法吧！
+现在你对超学习、元学习和大局观有了初步了解。花 5-10 分钟思考一下你是否一直以这些概念为指导进行学习。如果没有，现在是改变的最佳时机。根据以下 4 个步骤制定你的元学习策略，今天就开始正确的学习方法吧！
 
 [原文](https://medium.com/better-programming/how-to-ultralearn-data-science-part-1-92e143b7257b)。经许可转载。
 
@@ -162,20 +162,20 @@
 
 +   [新手和初级数据科学家的建议](https://www.kdnuggets.com/2019/11/advice-new-junior-data-scientists.html)
 
-+   [5个适合初学者的步骤，通过Python学习机器学习和数据科学](https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html)
++   [5 个适合初学者的步骤，通过 Python 学习机器学习和数据科学](https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html)
 
 +   [机器学习与数据科学学习的比较](https://www.kdnuggets.com/2018/12/learning-machine-learning-data-science.html)
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，4月6日：8门免费MIT课程学习数据科学……](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学……](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
-+   [数据科学书籍完整合集 - 第1部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
++   [数据科学书籍完整合集 - 第一部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
 
-+   [数据科学书籍完整合集 - 第2部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
++   [数据科学书籍完整合集 - 第二部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)

@@ -1,22 +1,22 @@
 # 数据科学命令行：探索数据
 
-> 原文：[https://www.kdnuggets.com/2018/02/data-science-command-line-book-exploring-data.html](https://www.kdnuggets.com/2018/02/data-science-command-line-book-exploring-data.html)
+> 原文：[`www.kdnuggets.com/2018/02/data-science-command-line-book-exploring-data.html`](https://www.kdnuggets.com/2018/02/data-science-command-line-book-exploring-data.html)
 
-[评论](#comments)
+评论
 
-![数据科学命令行 - 书籍](../Images/ff0b28a9c33f280385a335b5c7bafd58.png) 数据科学的工具多种多样，涵盖了各种生态系统。Python 和 R 是一些比较受欢迎的编程环境，但还有许多其他选项，包括大量的编程和脚本语言、GUI 和基于 web 的工具。
+![数据科学命令行 - 书籍](img/ff0b28a9c33f280385a335b5c7bafd58.png) 数据科学的工具多种多样，涵盖了各种生态系统。Python 和 R 是一些比较受欢迎的编程环境，但还有许多其他选项，包括大量的编程和脚本语言、GUI 和基于 web 的工具。
 
-一种较少考虑的攻击方式是严格的命令行方法。确实，你可能使用命令行来执行Python脚本，运行C程序，或调用R环境……或进行其他操作。但从终端运行整个过程呢？
+一种较少考虑的攻击方式是严格的命令行方法。确实，你可能使用命令行来执行 Python 脚本，运行 C 程序，或调用 R 环境……或进行其他操作。但从终端运行整个过程呢？
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -26,13 +26,13 @@
 > 
 > ...
 > 
-> 发现为什么命令行是一种灵活、可扩展且可延展的技术。即使你已经熟练使用Python或R处理数据，通过利用命令行的强大功能，你的数据显示工作流将得到显著提升。
+> 发现为什么命令行是一种灵活、可扩展且可延展的技术。即使你已经熟练使用 Python 或 R 处理数据，通过利用命令行的强大功能，你的数据显示工作流将得到显著提升。
 
-除了编写关于数据科学命令行工具的详尽调查外，Jeroen 还准备了一个[Docker 镜像](https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line)，其中包含80多种相关工具，这些工具在书中都有涉及。
+除了编写关于数据科学命令行工具的详尽调查外，Jeroen 还准备了一个[Docker 镜像](https://hub.docker.com/r/datascienceworkshops/data-science-at-the-command-line)，其中包含 80 多种相关工具，这些工具在书中都有涉及。
 
 [**第七章**](https://www.datascienceatthecommandline.com/chapter-7-exploring-data.html)《数据科学命令行》一书的标题为“探索数据”，重点介绍在[OSEMN 模型](http://www.dataists.com/2010/09/a-taxonomy-of-data-science/)的第三步中使用命令行工具。
 
-![https://www.slideshare.net/snungd/big-data-in-public-safety](../Images/a2587ced5391ce71c623fa891fcc9da8.png)
+![`www.slideshare.net/snungd/big-data-in-public-safety`](img/a2587ced5391ce71c623fa891fcc9da8.png)
 
 OSEMN 模型（来源）。
 
@@ -52,7 +52,7 @@ $ sudo apt install python3-csvkit
 
 ```
 
-然后，下载一个CSV文件进行操作：
+然后，下载一个 CSV 文件进行操作：
 
 ```py
 
@@ -106,7 +106,7 @@ $ head iris.csv | csvlook
 $ cat iris.csv | more
 ```
 
-... Jeroen提倡使用`less`，这是一个更通用的命令行工具，操作风格类似于`vi`文本编辑器。它允许使用一系列单键命令在文本文件中移动。试试看（'q'表示退出）：
+... Jeroen 提倡使用`less`，这是一个更通用的命令行工具，操作风格类似于`vi`文本编辑器。它允许使用一系列单键命令在文本文件中移动。试试看（'q'表示退出）：
 
 ```py
 $ iris.csv csvlook | less -S
@@ -161,19 +161,19 @@ $ csvstat iris.csv --unique
 
 ```
 
-根据你对命令行的熟悉程度或依赖程度（或愿意成为的程度），你可以深入了解更高级的概念，如创建包含多个顺序执行命令的bash脚本。然而，这将从“命令行”数据科学转向更熟悉的脚本编写领域，但使用的是bash而不是例如Python。你也可以做一些介于两者之间的事情，比如创建一个包含bash片段的库作为函数，并将它们添加到你的`.bashrc`配置文件中，以便在命令行上重复调用它们处理不同的数据。可能性仅受限于你的想象力和技能。
+根据你对命令行的熟悉程度或依赖程度（或愿意成为的程度），你可以深入了解更高级的概念，如创建包含多个顺序执行命令的 bash 脚本。然而，这将从“命令行”数据科学转向更熟悉的脚本编写领域，但使用的是 bash 而不是例如 Python。你也可以做一些介于两者之间的事情，比如创建一个包含 bash 片段的库作为函数，并将它们添加到你的`.bashrc`配置文件中，以便在命令行上重复调用它们处理不同的数据。可能性仅受限于你的想象力和技能。
 
-这只是《[命令行中的数据科学](https://www.datascienceatthecommandline.com/chapter-7-exploring-data.html)》第7章中的一部分，而这本书只是触及了书中蕴含的丰富信息。
+这只是《[命令行中的数据科学](https://www.datascienceatthecommandline.com/chapter-7-exploring-data.html)》第七章中的一部分，而这本书只是触及了书中蕴含的丰富信息。
 
 无论你怎么看，拥有命令行技能都是无价的。在这种情况下，你应该给这本书一个机会。
 
 **相关：**
 
-+   [使用 Python 掌握数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   使用 Python 掌握数据准备的 7 个步骤
 
-+   [文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)
++   文本数据预处理的一般方法
 
-+   [Python 中的探索性数据分析](/2017/07/exploratory-data-analysis-python.html)
++   Python 中的探索性数据分析
 
 ### 进一步了解这个话题
 

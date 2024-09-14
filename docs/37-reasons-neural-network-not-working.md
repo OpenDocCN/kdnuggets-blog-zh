@@ -1,8 +1,8 @@
 # 37 个原因说明你的神经网络无法工作
 
-> 原文：[https://www.kdnuggets.com/2017/08/37-reasons-neural-network-not-working.html](https://www.kdnuggets.com/2017/08/37-reasons-neural-network-not-working.html)
+> 原文：[`www.kdnuggets.com/2017/08/37-reasons-neural-network-not-working.html`](https://www.kdnuggets.com/2017/08/37-reasons-neural-network-not-working.html)
 
-[评论](/2017/08/37-reasons-neural-network-not-working.html/2#comments)
+评论
 
 **由 [Slav Ivanov](https://twitter.com/slavivanov)，企业家与机器学习从业者**。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -56,7 +56,7 @@
 
 ### I. 数据集问题
 
-![](../Images/63268de4720c5d16ff843c53129d4356.png)
+![](img/63268de4720c5d16ff843c53129d4356.png)
 
 #### 1\. 检查你的输入数据
 
@@ -82,7 +82,7 @@
 
 我曾经在从一个食品网站抓取图像数据集时遇到过这种情况。标签错误太多，以至于网络无法学习。手动检查一批输入样本，看看标签是否有问题。
 
-这一点尚有争议，因为[这篇论文](https://arxiv.org/pdf/1412.6596.pdf)在使用50%标签被破坏的情况下在MNIST上达到了超过50%的准确率。
+这一点尚有争议，因为[这篇论文](https://arxiv.org/pdf/1412.6596.pdf)在使用 50%标签被破坏的情况下在 MNIST 上达到了超过 50%的准确率。
 
 #### 7\. 打乱数据集
 
@@ -90,15 +90,15 @@
 
 #### 8\. 减少类别不平衡
 
-是否每个类别B图像都有1000张类别A图像？那么你可能需要平衡你的损失函数或[尝试其他类别不平衡的方法](http://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)。
+是否每个类别 B 图像都有 1000 张类别 A 图像？那么你可能需要平衡你的损失函数或[尝试其他类别不平衡的方法](http://machinelearningmastery.com/tactics-to-combat-imbalanced-classes-in-your-machine-learning-dataset/)。
 
 #### 9\. 你是否有足够的训练样本？
 
-如果你从头开始训练一个网络（即不是微调），你可能需要大量数据。对于图像分类，[有人说](https://stats.stackexchange.com/a/226693/30773)你每个类别需要1000张图像或更多。
+如果你从头开始训练一个网络（即不是微调），你可能需要大量数据。对于图像分类，[有人说](https://stats.stackexchange.com/a/226693/30773)你每个类别需要 1000 张图像或更多。
 
 #### 10\. 确保你的批次不包含单一标签
 
-在排序的数据集中（即前10k个样本包含相同的类别）可能会发生这种情况。通过打乱数据集可以轻松解决。
+在排序的数据集中（即前 10k 个样本包含相同的类别）可能会发生这种情况。通过打乱数据集可以轻松解决。
 
 #### 11\. 减少批量大小
 
@@ -112,7 +112,7 @@
 
 ### II. 数据标准化/增强
 
-![](../Images/56f24da5948f3ae4863dff3e9c3d02f6.png)
+![](img/56f24da5948f3ae4863dff3e9c3d02f6.png)
 
 #### **12\. 标准化** 特征
 
@@ -120,7 +120,7 @@
 
 #### 13\. 你是否进行过多的数据增强？
 
-数据增强具有正则化效果。过多的增强与其他形式的正则化（如权重L2、dropout等）结合使用，可能导致模型欠拟合。
+数据增强具有正则化效果。过多的增强与其他形式的正则化（如权重 L2、dropout 等）结合使用，可能导致模型欠拟合。
 
 #### 14\. 检查你的预训练模型的预处理
 
@@ -140,10 +140,10 @@ CS231n 指出一个 [常见的陷阱](http://cs231n.github.io/neural-networks-2/
 
 +   [停止学习数据科学以找到目标，并以找到目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为一名出色的数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名出色的数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [一个90亿美元的AI失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个坚实的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)

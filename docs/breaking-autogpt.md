@@ -1,8 +1,8 @@
 # 解构 AutoGPT
 
-> 原文：[https://www.kdnuggets.com/2023/05/breaking-autogpt.html](https://www.kdnuggets.com/2023/05/breaking-autogpt.html)
+> 原文：[`www.kdnuggets.com/2023/05/breaking-autogpt.html`](https://www.kdnuggets.com/2023/05/breaking-autogpt.html)
 
-![XXXXX](../Images/7852e8c28d3c50b9cd62ae5d6ae4c25b.png)
+![XXXXX](img/7852e8c28d3c50b9cd62ae5d6ae4c25b.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@ ChatGPT 在 AI 世界中引起了很大的关注。我们看到许多其他模�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求。
 
 * * *
 
@@ -24,13 +24,13 @@ ChatGPT 在 AI 世界中引起了很大的关注。我们看到许多其他模�
 
 AutoGPT 是一个由 Toran Bruce Richards（游戏开发者及 Significant Gravitas 创始人）开发的开源应用程序。它利用 GPT-3.5 或 GPT-4 API 创建完全自主的 AI 代理。它的亮点在于你不需要根据理解来操控模型。你只需提供任务和目标列表，其余由它处理。与 ChatGPT 不同，它还可以访问外部资源来做出决策。你知道吗？在发布几周内，它获得的星数比 Pytorch（一个著名的开源机器学习库）还多。这里有一张显示其星数历史的图表。
 
-![XXXXX](../Images/e5bbaac305becf4d4cbd3dc7833a754a.png)
+![XXXXX](img/e5bbaac305becf4d4cbd3dc7833a754a.png)
 
 图片由 [Star-History](https://star-history.com/) 生成
 
 # AutoGPT 如何工作？
 
-![XXXXX](../Images/6f4cd00d2093245e34e237ec688321fa.png)
+![XXXXX](img/6f4cd00d2093245e34e237ec688321fa.png)
 
 图片来源：作者
 

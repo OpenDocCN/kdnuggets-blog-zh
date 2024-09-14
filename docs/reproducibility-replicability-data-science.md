@@ -1,8 +1,8 @@
 # 可重复性、再现性和数据科学
 
-> 原文：[https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html](https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html`](https://www.kdnuggets.com/2019/11/reproducibility-replicability-data-science.html)
 
-[评论](#comments)
+评论
 
 **由 [Sydney Firmin](https://www.linkedin.com/in/sydney-firmin-4369a65b/)，Alteryx**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 对不可重复研究的日益关注，部分归因于技术——我们联系更加紧密，科学发现的传播比以往任何时候都要广泛。技术还使我们能够识别和利用策略，使科学研究比以往任何时候都更具可重复性。
 
-![](../Images/31ce8d86f366a8acb480087c0888ee72.png)
+![](img/31ce8d86f366a8acb480087c0888ee72.png)
 
 *差异： https://xkcd.com/242/*
 
@@ -56,7 +56,7 @@
 
 这些障碍之一是计算环境。当你分享脚本时，你不能保证接收脚本的人拥有与你相同的环境组件——例如，Python 或 R 的相同版本。这可能会导致你记录和编写的过程在不同的机器上产生不同的结果。
 
-这个用例正是[Docker](https://www.docker.com/)容器、像[AWS](https://aws.amazon.com/)这样的云服务以及[Python虚拟环境](https://docs.python.org/3/tutorial/venv.html)创建的目的。通过共享一个支持你的过程的迷你环境，你在确保你的过程可重复性方面迈出了额外的一步。当你与合作者一起工作时（可以说，这对于复制性很重要），这种额外的步骤尤为重要。
+这个用例正是[Docker](https://www.docker.com/)容器、像[AWS](https://aws.amazon.com/)这样的云服务以及[Python 虚拟环境](https://docs.python.org/3/tutorial/venv.html)创建的目的。通过共享一个支持你的过程的迷你环境，你在确保你的过程可重复性方面迈出了额外的一步。当你与合作者一起工作时（可以说，这对于复制性很重要），这种额外的步骤尤为重要。
 
 ### 为什么复制性很重要
 
@@ -64,7 +64,7 @@
 
 复制性比可重复性更难以保证，但研究人员也有一些实践，比如 p-hacking，使得期待你的结果能被复制变得不切实际。
 
-![](../Images/98e60f0064af94d94fd94b298f24c335.png)
+![](img/98e60f0064af94d94fd94b298f24c335.png)
 
 *Significant: https://xkcd.com/882/*
 
@@ -72,7 +72,7 @@
 
 P-hacking（也称为[data dredging](https://en.wikipedia.org/wiki/Data_dredging)或数据钓鱼）是指科学家或不诚实的统计学家对数据集进行大量统计测试，直到发现一个“统计显著”的关系（通常定义为 p < 0.05）。
 
-你可以在FiveThirtyEight发布的文章[Science Isn’t Broken](https://fivethirtyeight.com/features/science-isnt-broken/)中阅读更多关于 p-hacking 的内容（并玩一个演示其工作原理的有趣互动应用）。这个[CrashCourseStatistics的视频](https://www.youtube.com/watch?v=Gx0fAjNHb1M)也很棒。
+你可以在 FiveThirtyEight 发布的文章[Science Isn’t Broken](https://fivethirtyeight.com/features/science-isnt-broken/)中阅读更多关于 p-hacking 的内容（并玩一个演示其工作原理的有趣互动应用）。这个[CrashCourseStatistics 的视频](https://www.youtube.com/watch?v=Gx0fAjNHb1M)也很棒。
 
 通常，p-hacking 并非出于恶意。在学术研究中，有各种各样的激励措施驱使研究人员操控他们的数据，直到他们找到一个有趣的结果。尝试找到支持你假设的数据也是很自然的。作为科学家或分析师，你必须在如何处理分析的不同方面上做出大量决策——从去除（或保留）异常值，到选择哪些预测变量来包含、转换或删除。p-hacking 通常是特定研究者偏见的结果——你相信某种方法有效，所以你折磨你的数据，直到它承认你“知道”的真相。研究人员对他们的假设情有独钟，并且（有意识或无意识地）操控数据直到证明自己是对的，这种情况并不罕见。
 
@@ -100,7 +100,7 @@ P-hacking（也称为[data dredging](https://en.wikipedia.org/wiki/Data_dredging
 
 [原文](https://community.alteryx.com/t5/Data-Science-Blog/Reproducibility-Replicability-and-Data-Science/ba-p/471058)。经许可转载。
 
-**个人简介：** 训练有素的地理学家和心中有数据的极客，[Sydney Firmin](https://www.linkedin.com/in/sydney-firmin-4369a65b/) 坚信，当数据和知识能够被清晰地传达和理解时，它们才最有价值。在她目前的角色中，作为Alteryx数据科学创新团队的数据显示科学家，她为广泛的用户开发数据科学工具。
+**个人简介：** 训练有素的地理学家和心中有数据的极客，[Sydney Firmin](https://www.linkedin.com/in/sydney-firmin-4369a65b/) 坚信，当数据和知识能够被清晰地传达和理解时，它们才最有价值。在她目前的角色中，作为 Alteryx 数据科学创新团队的数据显示科学家，她为广泛的用户开发数据科学工具。
 
 **相关：**
 
@@ -114,12 +114,12 @@ P-hacking（也称为[data dredging](https://en.wikipedia.org/wiki/Data_dredging
 
 +   [机器学习中可重复性的重要性](https://www.kdnuggets.com/2023/06/importance-reproducibility-machine-learning.html)
 
-+   [2022年及以后顶级AI和数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶级 AI 和数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
 +   [SQL 分组与分区场景：何时以及如何结合数据…](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets 新闻, 11月 30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻, 11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

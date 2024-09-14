@@ -1,8 +1,8 @@
 # 6 个令人惊叹的 ChatGPT 扩展，用于任何地方
 
-> 原文：[https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)
+> 原文：[`www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html`](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)
 
-![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](../Images/9698edf2ba4b439e9c5aa4fb0bcf79d5.png)
+![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](img/9698edf2ba4b439e9c5aa4fb0bcf79d5.png)
 
 由 Dall-E 生成的图像。AI 驱动的图像生成器
 
@@ -20,7 +20,7 @@
 
 你想要轻松地在任何地方使用 ChatGPT 吗？**今天是你的幸运日，**[**有一个很棒的 Chrome 扩展**](https://github.com/gragland/chatgpt-chrome-extension)** 你可以用来写推文、检查电子邮件、找出代码漏洞……**字面上的任何你能想象的事情！
 
-![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](../Images/3071c4d6e0f89f5e6ff5c728962aa3f5.png)
+![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](img/3071c4d6e0f89f5e6ff5c728962aa3f5.png)
 
 [Chrome 扩展所有者截图](https://github.com/gragland/chatgpt-chrome-extension)
 
@@ -30,13 +30,13 @@
 
 你只需为 Chrome 和 Firefox [添加这个扩展](https://github.com/wong2/chat-gpt-google-extension)，就能在 Google 搜索中直接获取 ChatGPT 的回应。
 
-![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](../Images/93ad739faaadac8535e8fb5ae0fedbe5.png)
+![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](img/93ad739faaadac8535e8fb5ae0fedbe5.png)
 
 [来自扩展的 GitHub 截图](https://medium.com/r?url=https%3A%2F%2Fgithub.com%2Fwong2%2Fchat-gpt-google-extension)
 
 如果你更愿意访问一个预集成的搜索引擎，你可以查看 [这个搜索引擎](https://www.perplexity.ai/)，它将 OpenAI ChatGPT 和 Bing 结合在一起，直接回答你的问题。
 
-![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](../Images/b52b88e10b6b8af45e5c0245e8d9b5ff.png)
+![6 个令人惊叹的 ChatGPT 扩展，用于任何地方](img/b52b88e10b6b8af45e5c0245e8d9b5ff.png)
 
 [Perplexity 网站截图](https://www.perplexity.ai/)
 
@@ -48,7 +48,7 @@
 
 你可以按照这些 [GitHub](https://github.com/altryne/chatGPT-telegram-bot/) 说明在 Telegram 中创建一个由 ChatGPT 驱动的机器人，并与它对话——或者我应该说是他或她？？？？
 
-![6 个让你随时随地使用 ChatGPT 的惊人扩展](../Images/809828e33e7f51dad12936d9b4b77a32.png)
+![6 个让你随时随地使用 ChatGPT 的惊人扩展](img/809828e33e7f51dad12936d9b4b77a32.png)
 
 Telegram 机器人的截图由 [ChatGPTTelegramBot](https://medium.com/r?url=https%3A%2F%2Fgithub.com%2Faltryne%2FchatGPT-telegram-bot%2F) 提供。
 
@@ -58,7 +58,7 @@ Telegram 机器人的截图由 [ChatGPTTelegramBot](https://medium.com/r?url=htt
 
 你可以在 Google Docs 和 Microsoft Word 中集成 ChatGPT，以便在你喜欢的文本编辑器中使用它的所有功能，使用以下 [GitHub](https://github.com/cesarhuret/docGPT)。
 
-![6 个让你随时随地使用 ChatGPT 的惊人扩展](../Images/a0085dd2e9fb9f0f0e32eaad45851b46.png)
+![6 个让你随时随地使用 ChatGPT 的惊人扩展](img/a0085dd2e9fb9f0f0e32eaad45851b46.png)
 
 ChatGPT 集成在 Google 文档中的截图。图片由 [CesarHuret](https://github.com/cesarhuret) 提供。
 
@@ -68,7 +68,7 @@ ChatGPT 集成在 Google 文档中的截图。图片由 [CesarHuret](https://git
 
 然后你可以使用 [以下扩展](https://github.com/liady/ChatGPT-pdf) 将所有对话保存为 PDF、PNG 或 HTML 链接，适用于 Chrome、Edge 或 Firefox。
 
-![6 个让你随时随地使用 ChatGPT 的惊人扩展](../Images/e021ad47ca2f401c409e8adb463bc82b.png)
+![6 个让你随时随地使用 ChatGPT 的惊人扩展](img/e021ad47ca2f401c409e8adb463bc82b.png)
 
 图片由 [liady](https://github.com/liady) 提供。
 
@@ -78,9 +78,9 @@ Twitter 上充斥着允许你在提及它们时向 ChatGPT 提问的机器人，
 
 一些示例包括：
 
-[https://mobile.twitter.com/chatwithgpt](https://mobile.twitter.com/chatwithgpt)
+[`mobile.twitter.com/chatwithgpt`](https://mobile.twitter.com/chatwithgpt)
 
-[https://twitter.com/ChatGPTBot/with_replies](https://twitter.com/ChatGPTBot/with_replies)
+[`twitter.com/ChatGPTBot/with_replies`](https://twitter.com/ChatGPTBot/with_replies)
 
 *希望你觉得这些 ChatGPT 扩展有用！ :)*
 
@@ -94,9 +94,9 @@ Twitter 上充斥着允许你在提及它们时向 ChatGPT 提问的机器人，
 
 +   [AI Chrome 扩展程序供数据科学家使用备忘单](https://www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html)
 
-+   [KDnuggets 新闻，7月6日：12 个必备数据科学 VSCode 插件…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备数据科学 VSCode 插件…](https://www.kdnuggets.com/2022/n27.html)
 
-+   [KDnuggets 新闻，7月5日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
 
 +   [Visual ChatGPT：微软将 ChatGPT 与 VFMs 结合](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
 

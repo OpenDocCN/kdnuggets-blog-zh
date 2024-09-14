@@ -1,6 +1,6 @@
 # 使用 SQL + Python 构建可扩展的 ETL
 
-> 原文：[https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
+> 原文：[`www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html`](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
 
 在这篇简短的文章中，我们将构建一个模块化的 ETL 流水线，该流水线使用 SQL 转换数据，并使用 Python 和 R 进行可视化。这个流水线将以经济高效的方式实现完全可扩展。它可以在你的一些其他项目中复制使用。我们将利用一个示例数据集（StackExchange），查看如何将数据提取到特定格式，进行转换和清理，然后将其加载到数据库中，以便进行下游分析，比如分析报告或机器学习预测。如果你想直接查看实时示例，你可以在[ETL 模板这里](https://github.com/ploomber/projects/tree/master/templates/etl)查看整个流水线。我将回顾一下这个模板中的一些原则，并提供如何实现这些原则的深入了解。
 
@@ -18,11 +18,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 我们将首先回顾一下我们流水线的整体架构和数据集，以更好地理解它是如何构建的以及我们可以通过这个演示流水线实现什么。
 
-![架构图](../Images/7ae9bfafceb1faa5c59039dbe93dd9f6.png)
+![架构图](img/7ae9bfafceb1faa5c59039dbe93dd9f6.png)
 
 在这里我们可以看到流水线；它开始时提取我们的数据集并存储它（这个代码片段的来源可以在 preprocess/download.py 找到）：
 
@@ -109,7 +109,7 @@ HAVING AVG(upvotes) > 1
 
 拥有这种模板化项目的概念，协调 SQL 任务允许我们开发、测试和部署多个目的的数据集。在我们的示例中，我们在 3 个表上运行，具有有限的行数和列数。在企业环境中，例如，我们可以轻松扩展到 20+ 个表，拥有数百万行，这可能会成为按顺序运行的实际难题。
 
-![并行化和协调](../Images/3b85db1f729f3aa1dc0313d5149d6f31.png)
+![并行化和协调](img/3b85db1f729f3aa1dc0313d5149d6f31.png)
 
 在我们的案例中，协调和并行化帮助我们专注于实际代码，这是主要任务，而不是基础设施。我们能够生成这 3 个独立的工作流程，并行运行它们，减少我们的洞察时间。
 

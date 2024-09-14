@@ -1,8 +1,8 @@
 # 管理深度学习数据集的新方式
 
-> 原文：[https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)
+> 原文：[`www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html`](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)
 
-![管理深度学习数据集的新方式](../Images/ffddfac73ba473fa6897fecbe7927bae.png)
+![管理深度学习数据集的新方式](img/ffddfac73ba473fa6897fecbe7927bae.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@ Hub 允许我们以闪电般的速度访问存储的图像、音频、视频和�
 
 Activeloop 为开源数据集和私人数据集提供免费存储。通过推荐他人，你还可以获得最多 200 GB 的免费存储空间。Activeloop 的 Hub 与 AI 数据库接口，使我们能够可视化带有标签的数据集，并通过复杂的搜索查询有效分析数据。该平台还包含超过 100 个关于图像分割、分类和目标检测的数据集。
 
-![管理深度学习数据集的新方式](../Images/e06eed015af0c30f966346024ac05645.png)
+![管理深度学习数据集的新方式](img/e06eed015af0c30f966346024ac05645.png)
 
 Activeloop 的 [AI 数据库](https://app.activeloop.ai/)
 
@@ -131,7 +131,7 @@ with ds:
 
 数据集现在可以在 [multiclass-weather-dataset](https://app.activeloop.ai/kingabzpro/muticlass-weather-dataset) 上公开访问。我们可以查看数据集的标签或添加描述，以便其他人可以了解更多关于许可证信息和数据分布的内容。Activeloop 正在不断添加新功能，以提升查看体验。
 
-![一种管理深度学习数据集的新方法](../Images/1af4d1019bc8334a3537a9af9e9474ac.png)
+![一种管理深度学习数据集的新方法](img/1af4d1019bc8334a3537a9af9e9474ac.png)
 
 作者提供的图像 | [multiclass-weather-dataset](https://app.activeloop.ai/kingabzpro/muticlass-weather-dataset)
 
@@ -141,7 +141,7 @@ with ds:
 Image.fromarray(ds["images"][0].numpy())
 ```
 
-![一种管理深度学习数据集的新方法](../Images/7ba21582d694074a86e85b4647dfe649.png)
+![一种管理深度学习数据集的新方法](img/7ba21582d694074a86e85b4647dfe649.png)
 
 要访问标签，我们将使用包含分类信息的 `class_names`，并使用“labels”张量来显示标签。
 
@@ -153,7 +153,7 @@ class_names[ds["labels"][0].numpy()[0]]
 
 # 提交
 
-我们还可以创建不同的分支并管理不同的版本，类似于Git和DVC。在本节中，我们将更新 `class_names` 信息并创建一个包含消息的提交。
+我们还可以创建不同的分支并管理不同的版本，类似于 Git 和 DVC。在本节中，我们将更新 `class_names` 信息并创建一个包含消息的提交。
 
 ```py
 ds.labels.info.update(class_names = class_names)
@@ -178,19 +178,19 @@ Time   : 2022-01-31 08:32:08
 Message: Class names added
 ```
 
-你还可以通过Hub UI查看所有的分支和提交。
+你还可以通过 Hub UI 查看所有的分支和提交。
 
-![管理深度学习数据集的新方法](../Images/842d04faa1f9fe781b6f2fc826d26e67.png)
+![管理深度学习数据集的新方法](img/842d04faa1f9fe781b6f2fc826d26e67.png)
 
-作者提供的Gif
+作者提供的 Gif
 
 # 结论
 
-Hub 2.0 提供了新的数据管理工具，使机器学习工程师的工作变得轻松。Hub可以与AWS/GCP存储集成，为深度学习框架如PyTorch提供直接的数据流。它还通过Activeloop云提供互动可视化和用于跟踪机器学习实验的版本控制。我认为Hub将成为未来数据管理的MLOps解决方案，因为它将解决数据科学家和工程师日常面临的许多核心问题。
+Hub 2.0 提供了新的数据管理工具，使机器学习工程师的工作变得轻松。Hub 可以与 AWS/GCP 存储集成，为深度学习框架如 PyTorch 提供直接的数据流。它还通过 Activeloop 云提供互动可视化和用于跟踪机器学习实验的版本控制。我认为 Hub 将成为未来数据管理的 MLOps 解决方案，因为它将解决数据科学家和工程师日常面临的许多核心问题。
 
-在这篇博客中，我们了解了Hub及如何创建和推送数据到Activeloop云。下一步自然就是使用相同的数据集来训练模型并部署到生产环境中。因此，如果你有兴趣了解更多并想训练一个图像分类模型，可以查看[在Pytorch中训练图像分类模型](https://docs.activeloop.ai/hub-tutorials/training-an-image-classification-model-in-pytorch)。
+在这篇博客中，我们了解了 Hub 及如何创建和推送数据到 Activeloop 云。下一步自然就是使用相同的数据集来训练模型并部署到生产环境中。因此，如果你有兴趣了解更多并想训练一个图像分类模型，可以查看[在 Pytorch 中训练图像分类模型](https://docs.activeloop.ai/hub-tutorials/training-an-image-classification-model-in-pytorch)。
 
-# 使用Hub进行深度学习项目
+# 使用 Hub 进行深度学习项目
 
 +   [创建对象检测数据集](https://docs.activeloop.ai/hub-tutorials/creating-object-detection-datasets)
 
@@ -200,7 +200,7 @@ Hub 2.0 提供了新的数据管理工具，使机器学习工程师的工作变
 
 +   [创建时间序列数据集](https://docs.activeloop.ai/hub-tutorials/creating-time-series-datasets)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些与心理疾病斗争的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些与心理疾病斗争的学生。
 
 ### 更多相关主题
 

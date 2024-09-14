@@ -1,32 +1,32 @@
 # 如何准备数据科学面试
 
-> 原文：[https://www.kdnuggets.com/2022/12/prepare-data-science-interview.html](https://www.kdnuggets.com/2022/12/prepare-data-science-interview.html)
+> 原文：[`www.kdnuggets.com/2022/12/prepare-data-science-interview.html`](https://www.kdnuggets.com/2022/12/prepare-data-science-interview.html)
 
-![如何准备数据科学面试](../Images/c9e4d865034a582e4c4a345d7f110e72.png)
+![如何准备数据科学面试](img/c9e4d865034a582e4c4a345d7f110e72.png)
 
 图片由作者提供
 
-如果你未能准备，你就是在准备失败。这不是我的话，而是本杰明·富兰克林的话。老Beejey考虑到他一生中担任的多个职位，可能是面试方面的专家。他的建议对数据科学面试来说再好不过了。
+如果你未能准备，你就是在准备失败。这不是我的话，而是本杰明·富兰克林的话。老 Beejey 考虑到他一生中担任的多个职位，可能是面试方面的专家。他的建议对数据科学面试来说再好不过了。
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-拿破仑·波拿巴采纳了Beejey的建议，但在滑铁卢公司面试失败后，意识到过度准备是灵感的敌人。
+拿破仑·波拿巴采纳了 Beejey 的建议，但在滑铁卢公司面试失败后，意识到过度准备是灵感的敌人。
 
 一如既往，真相总是在两个极端之间。你如何在准备充分与保持个性和自发性之间找到平衡？
 
 我将讨论你需要彻底准备的内容以及你应有意少准备的内容。
 
-![如何准备数据科学面试](../Images/e9891e40fc2f88f7bd9e7e501c8c0da5.png)
+![如何准备数据科学面试](img/e9891e40fc2f88f7bd9e7e501c8c0da5.png)
 
 图片由作者提供
 
@@ -52,7 +52,7 @@
 
 是的，这是真的。但留下好印象只是结果，而不是彻底研究公司的原因。你这么做的原因是你需要知道一旦你获得工作，你和你的技能如何适应。如果你想在那里适应的话。
 
-![如何为数据科学面试做准备](../Images/0c504cffd684d8a77c67c16ba245ef64.png)
+![如何为数据科学面试做准备](img/0c504cffd684d8a77c67c16ba245ef64.png)
 
 图片来源：作者
 
@@ -92,7 +92,7 @@
 
 让我向你展示，了解上述内容对你来说有多重要，而不仅仅是你留下的印象。希望你能够选择你想工作的雇主。[对数据科学家绝望的雇主](https://www.zdnet.com/article/employers-are-desperate-for-data-scientists-as-demand-booms/)可能会把你放在那种位置上，所以你需要了解你的谈判能力。
 
-如果你对此有所了解，这意味着你也可以选择你的雇主。如果你被面试的是一个成立了2年的初创公司（**历史**），他们销售市场上最受欢迎的产品，你是（**产品与竞争对手**）的粉丝，而且你只有一个老板（**层级结构**），这个老板非常直言不讳并且在为种族不平等问题做些什么（**新闻**），你可能会非常愿意为这样的公司工作。尤其是当他们为数据科学家提供高于平均水平的薪资（**员工**）时。
+如果你对此有所了解，这意味着你也可以选择你的雇主。如果你被面试的是一个成立了 2 年的初创公司（**历史**），他们销售市场上最受欢迎的产品，你是（**产品与竞争对手**）的粉丝，而且你只有一个老板（**层级结构**），这个老板非常直言不讳并且在为种族不平等问题做些什么（**新闻**），你可能会非常愿意为这样的公司工作。尤其是当他们为数据科学家提供高于平均水平的薪资（**员工**）时。
 
 从中，你还可以更清楚地了解公司可能如何利用你的技术专长以及他们使用什么技术。了解这些信息能为你的技术技能准备提供更多方向。
 
@@ -116,7 +116,7 @@
 
 现在你对公司了解得很清楚了，进一步了解你申请的职位。
 
-![如何准备数据科学面试](../Images/01c7b079593eab99f57c04cd7e0858b8.png)
+![如何准备数据科学面试](img/01c7b079593eab99f57c04cd7e0858b8.png)
 
 作者提供的图片
 
@@ -138,27 +138,27 @@
 
 +   面对面面试
 
-+   HR面试
++   HR 面试
 
-![如何准备数据科学面试](../Images/139e38e203266a414af7fce0a8d9c83a.png)
+![如何准备数据科学面试](img/139e38e203266a414af7fce0a8d9c83a.png)
 
 作者提供的图片
 
 **电话筛选**涉及到你未来的团队成员或老板了解你。你会讲解你的简历，谈论你的教育背景、工作经历以及职业兴趣。这个阶段通常包括几个行为问题，可能还会有一两个一般性的技术问题，以确保你是这个职位的合适人选。
 
-一些公司还喜欢通过在线评估来测试你的技术和编程知识。通常需要30到90分钟。
+一些公司还喜欢通过在线评估来测试你的技术和编程知识。通常需要 30 到 90 分钟。
 
 **面对面面试**的次数取决于公司。无论如何，这通常是面试过程中的最严峻环节。你将会被各种行为和技术问题轰炸，还有可能会有编程测试，甚至可能会有家庭作业。根据公司情况，这也可能包括与高管的面试。
 
 如果你能挺过这些，最后阶段通常只是形式上的。
 
-**HR面试**只是为了对雇主在其他面试阶段了解到的关于你的信息做最后确认。预计会有一些非常简单的行为问题，偶尔也会有技术问题。这个阶段主要是讨论薪资、福利以及其他与你的雇佣相关的细节。
+**HR 面试**只是为了对雇主在其他面试阶段了解到的关于你的信息做最后确认。预计会有一些非常简单的行为问题，偶尔也会有技术问题。这个阶段主要是讨论薪资、福利以及其他与你的雇佣相关的细节。
 
 ### 面试的相关人员
 
 相关人员？不是那个乐队。在这里你要找出谁将会是面试官。如果你知道他们的名字，可以进行调研。
 
-在LinkedIn上查找他们的工作经历。用谷歌搜索他们。试着找到他们的社交媒体账户。别担心，他们也会*偷偷关注*你。
+在 LinkedIn 上查找他们的工作经历。用谷歌搜索他们。试着找到他们的社交媒体账户。别担心，他们也会*偷偷关注*你。
 
 从你了解到的情况，你可以对他们有一定的了解。这可以帮助你知道在面试中期待什么，以及如何适应面试官。例如，如果面试官没有技术背景，你可以尝试不要在回答中使用过多的技术术语。也许这正是他们想测试的：你如何向非技术人员解释技术问题？此外，你也可以通过提及你们都喜爱的足球队来建立联系。
 
@@ -168,11 +168,11 @@
 
 没办法告诉你面试中会问到的具体问题。但我可以告诉你会遇到哪些类型的问题。
 
-我和我的团队在2021年为我们的[数据科学面试指南](https://www.stratascratch.com/blog/data-science-interview-guide-questions-from-80-different-companies/)进行了这个分析。可以放心地说，在这期间没有发生显著变化，所学内容没有过时。
+我和我的团队在 2021 年为我们的[数据科学面试指南](https://www.stratascratch.com/blog/data-science-interview-guide-questions-from-80-different-companies/)进行了这个分析。可以放心地说，在这期间没有发生显著变化，所学内容没有过时。
 
 我们的研究发现，数据科学家最常见的问题类型是编码。其他经常出现的主题包括建模、算法和统计。
 
-![如何准备数据科学面试](../Images/6608e11687acdae032bd52cbea85f57c.png)
+![如何准备数据科学面试](img/6608e11687acdae032bd52cbea85f57c.png)
 
 图片作者
 
@@ -220,7 +220,7 @@
 
 当然，并不是每个项目都值得展示在你的作品集里。当你选择做哪些项目时，最好选择那些涉及以下方面的项目：
 
-![如何准备数据科学面试](../Images/cfa38d38cf23f1a3e6fc16d2cf87212c.png)
+![如何准备数据科学面试](img/cfa38d38cf23f1a3e6fc16d2cf87212c.png)
 
 作者提供的图片
 
@@ -256,7 +256,7 @@
 
 如果你没有准备好问题，不要慌张。首先，说没有愚蠢的问题是不对的。是的，有愚蠢的问题。（当我说愚蠢时，我指的是为了提问而提问。）所以，没有提前准备好问题总比准备一些愚蠢的问题要好。
 
-其次，问题会在与你的面试官对话过程中自然地出现。如果面试官提到一个数据库，这时你可以问他们使用的是哪个数据库和SQL方言。他们说你将成为数据科学团队的一员，你可以问他们团队有多少成员，谁会是你的上司。
+其次，问题会在与你的面试官对话过程中自然地出现。如果面试官提到一个数据库，这时你可以问他们使用的是哪个数据库和 SQL 方言。他们说你将成为数据科学团队的一员，你可以问他们团队有多少成员，谁会是你的上司。
 
 你能看到它是多么自然吗？问题的要点在于不要假装专注。专注会导致你有问题要问。记住，尽管它被称为面试，它实际上是一场对话。在对话中，每个参与者都在提问和回答问题之间转换。
 
@@ -284,14 +284,14 @@
 
 ### 相关主题
 
-+   [数据可视化中的SQL：如何为图表和图形准备数据](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)
++   [数据可视化中的 SQL：如何为图表和图形准备数据](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)
 
-+   [SQL中的数据清洗：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
++   [SQL 中的数据清洗：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
 
-+   [使用AI与分析引擎更快速地准备时间序列数据](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)
++   [使用 AI 与分析引擎更快速地准备时间序列数据](https://www.kdnuggets.com/2021/12/piexchange-faster-way-prepare-timeseries-data-ai-analytics-engine.html)
 
-+   [为有效的Tableau和Power BI仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
++   [为有效的 Tableau 和 Power BI 仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
 +   [Interview Kickstart 数据科学面试课程—有什么特别之处](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)

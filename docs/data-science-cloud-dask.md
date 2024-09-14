@@ -1,8 +1,8 @@
 # 在云端使用 Dask 进行数据科学
 
-> 原文：[https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html](https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html)
+> 原文：[`www.kdnuggets.com/2020/10/data-science-cloud-dask.html`](https://www.kdnuggets.com/2020/10/data-science-cloud-dask.html)
 
-[评论](#comments)
+评论
 
 **由 [Hugo Bowne-Anderson](https://hugobowne.github.io/)，[Coiled](https://coiled.io/) 数据科学推广负责人和市场营销副总裁**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -141,7 +141,7 @@ df.to_parquet("data_taxi/yellow_tripdata_2019.parq")
 
 总之——客户端存在于你编写 Python 代码的地方，客户端与调度器进行通信，传递任务。
 
-![Dask](../Images/ca8caa73a57c3f6319bea6abe0e8f212.png)
+![Dask](img/ca8caa73a57c3f6319bea6abe0e8f212.png)
 
 ### COILED: 扩展你的数据科学
 
@@ -203,23 +203,23 @@ df.to_parquet("s3://hugo-coiled-tutorial/nyctaxi-2019.parq")
 
 ### 你需要更快的数据科学吗？
 
-你现在可以免费开始使用Coiled集群。Coiled还处理安全、conda/docker环境和团队管理，因此你可以专注于数据科学和工作。立即开始使用 [Coiled Cloud](http://beta.coiled.io/)。
+你现在可以免费开始使用 Coiled 集群。Coiled 还处理安全、conda/docker 环境和团队管理，因此你可以专注于数据科学和工作。立即开始使用 [Coiled Cloud](http://beta.coiled.io/)。
 
-**简介： [Hugo Bowne-Anderson](https://hugobowne.github.io/)** Hugo Bowne-Anderson是**[Coiled](https://coiled.io/)**的首席数据科学传播官和市场营销副总裁（[**@CoiledHQ,**](https://twitter.com/CoiledHQ) **[LinkedIn](https://www.linkedin.com/company/coiled-computing)**）。他在数据科学家、教育者、传播者、内容营销员和数据战略顾问方面具有丰富经验，涉及工业界和基础研究。他还在耶鲁大学和冷泉港实验室等机构、SciPy、PyCon和ODSC等会议以及Data Carpentry等组织中教授数据科学。他致力于传播数据技能、数据科学工具的使用以及开源软件，无论是个人还是企业。
+**简介： [Hugo Bowne-Anderson](https://hugobowne.github.io/)** Hugo Bowne-Anderson 是**[Coiled](https://coiled.io/)**的首席数据科学传播官和市场营销副总裁（[**@CoiledHQ,**](https://twitter.com/CoiledHQ) **[LinkedIn](https://www.linkedin.com/company/coiled-computing)**）。他在数据科学家、教育者、传播者、内容营销员和数据战略顾问方面具有丰富经验，涉及工业界和基础研究。他还在耶鲁大学和冷泉港实验室等机构、SciPy、PyCon 和 ODSC 等会议以及 Data Carpentry 等组织中教授数据科学。他致力于传播数据技能、数据科学工具的使用以及开源软件，无论是个人还是企业。
 
 **相关：**
 
-+   [Dask中的机器学习](/2020/06/machine-learning-dask.html)
++   Dask 中的机器学习
 
-+   [为什么以及如何在大数据中使用Dask](/2020/04/dask-big-data.html)
++   为什么以及如何在大数据中使用 Dask
 
-+   [Dask中的K-means聚类：猫咪图片的图像滤镜](/2019/06/k-means-clustering-dask-image-filters.html)
++   Dask 中的 K-means 聚类：猫咪图片的图像滤镜
 
 ### 更多相关话题
 
-+   [云和数据迁移到AWS云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [云和数据迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
-+   [来自Anaconda的新动态！数据科学培训和云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
++   [来自 Anaconda 的新动态！数据科学培训和云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
 
 +   [如何利用云计算高效扩展数据科学项目](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)
 
@@ -227,4 +227,4 @@ df.to_parquet("s3://hugo-coiled-tutorial/nyctaxi-2019.parq")
 
 +   [数据科学的云计算简介](https://www.kdnuggets.com/introduction-to-cloud-computing-for-data-science)
 
-+   [数据科学的前7个免费云笔记本](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)
++   [数据科学的前 7 个免费云笔记本](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)

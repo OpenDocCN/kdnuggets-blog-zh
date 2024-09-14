@@ -1,8 +1,8 @@
 # 使用 NumPy 的时间序列数据
 
-> 原文：[https://www.kdnuggets.com/time-series-data-with-numpy](https://www.kdnuggets.com/time-series-data-with-numpy)
+> 原文：[`www.kdnuggets.com/time-series-data-with-numpy`](https://www.kdnuggets.com/time-series-data-with-numpy)
 
-![NumPy 时间序列数据](../Images/a1f2c813547eec9b12d35f6be3515e78.png)[图片由 creativeart 提供于 Freepik](https://www.freepik.com/free-photo/studio-shot-transparent-baseball-cap-falling-reflection_1078052.htm#fromView=search&page=1&position=30&uuid=fbf287ce-3030-4564-b4c5-c7e5dd7a03bf)
+![NumPy 时间序列数据](img/a1f2c813547eec9b12d35f6be3515e78.png)[图片由 creativeart 提供于 Freepik](https://www.freepik.com/free-photo/studio-shot-transparent-baseball-cap-falling-reflection_1078052.htm#fromView=search&page=1&position=30&uuid=fbf287ce-3030-4564-b4c5-c7e5dd7a03bf)
 
 时间序列数据的独特之处在于它们彼此之间是顺序相关的。这是因为数据是按一致的时间间隔收集的，例如每年、每天甚至每小时。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
 
 * * *
 
@@ -103,7 +103,7 @@ array([ 99.97075433,  97.03945458,  98.20526648,  99.53106381,
        104.30217122])
 ```
 
-移动平均是一个简单的时间序列分析方法，其中我们计算系列子集的均值。在上述示例中，我们使用窗口12作为子集。这意味着我们取系列的前12个作为子集并计算它们的均值。然后，子集滑动一个位置，我们计算下一个均值子集。
+移动平均是一个简单的时间序列分析方法，其中我们计算系列子集的均值。在上述示例中，我们使用窗口 12 作为子集。这意味着我们取系列的前 12 个作为子集并计算它们的均值。然后，子集滑动一个位置，我们计算下一个均值子集。
 
 首先的子集是我们取均值的这个子集：
 
@@ -126,7 +126,7 @@ array([ 99.97075433,  97.03945458,  98.20526648,  99.53106381,
 
 然而，移动平均通常用于分析时间序列数据，以识别潜在模式和信号，例如金融领域的买入/卖出信号。
 
-说到模式，我们可以用NumPy模拟时间序列中的趋势。趋势是数据中的长期且持续的方向性运动。基本上，它是时间序列数据的总体方向。
+说到模式，我们可以用 NumPy 模拟时间序列中的趋势。趋势是数据中的长期且持续的方向性运动。基本上，它是时间序列数据的总体方向。
 
 ```py
 trend = np.polyfit(np.arange(len(data)), data, 1)
@@ -159,7 +159,7 @@ array([ 29.06583411,  -7.81944869, -18.46297706,  -2.71181657,
 
 上述输出中显示了去除趋势后的数据。在实际应用中，我们会分析这些数据，以查看哪个数据点偏离了常见模式。
 
-我们也可以尝试从我们拥有的时间序列数据中分析季节性。季节性是指在特定时间间隔内发生的规律性和可预测模式，例如每3个月、每6个月等。季节性通常受假期、天气、事件等外部因素的影响。
+我们也可以尝试从我们拥有的时间序列数据中分析季节性。季节性是指在特定时间间隔内发生的规律性和可预测模式，例如每 3 个月、每 6 个月等。季节性通常受假期、天气、事件等外部因素的影响。
 
 ```py
 seasonality = np.mean(data.reshape(-1, 12), axis=0)
@@ -178,17 +178,17 @@ array([111.26599544,  99.16760019,  89.68820205, 106.69381124,
 
 在上述代码中，我们计算了每个月的平均值，然后将数据扩展以匹配其长度。最终，我们得到两年间每个月的平均值，并尝试分析数据以查看是否有值得提及的季节性。
 
-这就是我们可以用NumPy对时间序列数据和分析所做的基本方法。虽然有很多高级方法，但上述方法是基本的。
+这就是我们可以用 NumPy 对时间序列数据和分析所做的基本方法。虽然有很多高级方法，但上述方法是基本的。
 
 ## 结论
 
-时间序列数据是一个独特的数据集，因为它以顺序方式表示，并且具有时间特性。使用NumPy，我们可以设置时间序列数据，同时进行基本的时间序列分析，如移动平均、趋势分析和季节性分析。
+时间序列数据是一个独特的数据集，因为它以顺序方式表示，并且具有时间特性。使用 NumPy，我们可以设置时间序列数据，同时进行基本的时间序列分析，如移动平均、趋势分析和季节性分析。
 
 **[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一位数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 撰写了各种人工智能和机器学习主题。
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，6月29日：20个基本的 Linux 命令用于数据科学……](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：20 个基本的 Linux 命令用于数据科学……](https://www.kdnuggets.com/2022/n26.html)
 
 +   [市场数据与新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)
 

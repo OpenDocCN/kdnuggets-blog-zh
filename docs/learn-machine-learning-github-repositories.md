@@ -1,38 +1,38 @@
-# 从这些GitHub仓库中学习机器学习
+# 从这些 GitHub 仓库中学习机器学习
 
-> 原文：[https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html](https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html)
+> 原文：[`www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html`](https://www.kdnuggets.com/2023/01/learn-machine-learning-github-repositories.html)
 
-![从这些GitHub仓库中学习机器学习](../Images/e66f547d26cc1a6f0121c2f2ab928118.png)
+![从这些 GitHub 仓库中学习机器学习](img/e66f547d26cc1a6f0121c2f2ab928118.png)
 
 作者提供的图片
 
-如果你还没有机会查看[从这些GitHub仓库中学习数据科学](/2022/12/learn-data-science-github-repositories.html)，请查阅一下。你可能会发现一些提到的GitHub仓库对你的机器学习之旅很有用。
+如果你还没有机会查看从这些 GitHub 仓库中学习数据科学，请查阅一下。你可能会发现一些提到的 GitHub 仓库对你的机器学习之旅很有用。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 深入了解数据科学将有助于你的机器学习职业发展。当你在新的一年中努力实现机器学习目标时，可能会被不断出现的在线课程和训练营所吸引。选择正确的课程可能很困难，而且当你不断选择错误的课程时，成本也会很高。
 
-另一个选择是使用GitHub仓库，它提供有价值的资源，且几乎没有成本。GitHub使用简单，支持公开和私人仓库，主要优点是小规模项目可以免费使用。
+另一个选择是使用 GitHub 仓库，它提供有价值的资源，且几乎没有成本。GitHub 使用简单，支持公开和私人仓库，主要优点是小规模项目可以免费使用。
 
-以下是可以帮助你在机器学习之旅中的GitHub仓库列表。
+以下是可以帮助你在机器学习之旅中的 GitHub 仓库列表。
 
-# GitHub社区
+# GitHub 社区
 
-仓库链接：[GitHub社区](https://github.com/community/community)
+仓库链接：[GitHub 社区](https://github.com/community/community)
 
-我将从GitHub社区开始。它旨在支持GitHub用户的教育旅程。我们都知道，学习新技能时，你会遇到需要解决的问题和难题。
+我将从 GitHub 社区开始。它旨在支持 GitHub 用户的教育旅程。我们都知道，学习新技能时，你会遇到需要解决的问题和难题。
 
-数据科学家和机器学习工程师经常使用GitHub，因此了解它的操作是很有价值的。这个GitHub社区将为你提供有价值的资源，向其他用户学习，提出问题，并成为一个鼓舞人心的社区的一部分。
+数据科学家和机器学习工程师经常使用 GitHub，因此了解它的操作是很有价值的。这个 GitHub 社区将为你提供有价值的资源，向其他用户学习，提出问题，并成为一个鼓舞人心的社区的一部分。
 
 # **超棒的机器学习**
 
@@ -54,7 +54,7 @@
 
 仓库链接：[Best of ML with Python](https://github.com/ml-tooling/best-of-ml-python)
 
-我在 [Learn Data Science From These GitHub Repositories](/2022/12/learn-data-science-github-repositories.html) 中提到过这个仓库，因为它对数据科学学习非常有价值。
+我在 Learn Data Science From These GitHub Repositories 中提到过这个仓库，因为它对数据科学学习非常有价值。
 
 **Best of ML with Python** GitHub 仓库包含 910 个开源项目，这些项目被分为 34 个类别。项目按照项目质量评分进行排名，方便你轻松找到受欢迎的项目。你可以选择各种项目进行实践，检验你的技能，了解你的优势，并关注你的弱点。
 
@@ -72,9 +72,9 @@
 
 这里有两个 GitHub 仓库提供了与机器学习相关的项目列表：
 
-+   [https://github.com/lukas/ml-class](https://github.com/lukas/ml-class)
++   [`github.com/lukas/ml-class`](https://github.com/lukas/ml-class)
 
-+   [https://github.com/rhiever/Data-Analysis-and-Machine-Learning-Projects](https://github.com/rhiever/Data-Analysis-and-Machine-Learning-Projects)
++   [`github.com/rhiever/Data-Analysis-and-Machine-Learning-Projects`](https://github.com/rhiever/Data-Analysis-and-Machine-Learning-Projects)
 
 # **Machine Learning Interview**
 
@@ -90,9 +90,9 @@
 
 如果你需要一些指导和结构来规划你的学习路线，可以阅读这个：
 
-[完整的机器学习学习路线图](/2022/12/complete-machine-learning-study-roadmap.html)。
+完整的机器学习学习路线图。
 
-如果你是一个书虫，并且喜欢以这种方式学习，可以阅读这个：[15本免费机器学习和深度学习书籍](/2022/10/15-free-machine-learning-deep-learning-books.html)
+如果你是一个书虫，并且喜欢以这种方式学习，可以阅读这个：15 本免费机器学习和深度学习书籍
 
 **[尼莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术作家。她特别关注提供数据科学职业建议或教程以及有关数据科学的理论知识。她还希望探索人工智能在促进人类寿命方面的不同方式。作为一名热心学习者，她寻求扩展自己的技术知识和写作技能，同时帮助指导他人。
 

@@ -1,12 +1,12 @@
 # 使用 5 行代码更改任何视频的背景
 
-> 原文：[https://www.kdnuggets.com/2020/12/change-background-video-5-lines-code.html](https://www.kdnuggets.com/2020/12/change-background-video-5-lines-code.html)
+> 原文：[`www.kdnuggets.com/2020/12/change-background-video-5-lines-code.html`](https://www.kdnuggets.com/2020/12/change-background-video-5-lines-code.html)
 
-[评论](#comments)
+评论
 
 **由 [Ayoola Olafenwa](https://www.linkedin.com/in/ayoola-olafenwa-003b901a9/)，独立 AI 研究员**
 
-![图示](../Images/c90ef44af509ee9620dd55a0fd935595.png)
+![图示](img/c90ef44af509ee9620dd55a0fd935595.png)
 
 作者提供的照片
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -60,7 +60,7 @@ person,bus,car,aeroplane, bicycle, ,motorbike,bird, boat, bottle,  cat, chair, c
 
 *示例图像*
 
-![图示](../Images/3844ccd3c79e2702e0710a8e6bb650ef.png)
+![图示](img/3844ccd3c79e2702e0710a8e6bb650ef.png)
 
 来源：[Unsplash.com](https://unsplash.com/photos/D5mCL7Q_6Us) 由 Strvnge Films 提供
 
@@ -70,7 +70,7 @@ person,bus,car,aeroplane, bicycle, ,motorbike,bird, boat, bottle,  cat, chair, c
 
 输出图像
 
-![帖子图片](../Images/dd2a391896609ec6e19d2b2ecc8882b8.png)
+![帖子图片](img/dd2a391896609ec6e19d2b2ecc8882b8.png)
 
 我们的目标是完全模糊图像中人物的背景，但对于其他对象的存在感到不满意。因此，需要修改代码以检测目标对象。
 
@@ -80,9 +80,9 @@ person,bus,car,aeroplane, bicycle, ,motorbike,bird, boat, bottle,  cat, chair, c
 change_bg.blur_bg("sample.jpg", extreme = True, output_image_name="output_img.jpg", detect = "person")
 ```
 
-**detect: **这是确定要检测的目标对象的参数。detect的值设置为***person***。这意味着模型将仅检测图像中的人。
+**detect: **这是确定要检测的目标对象的参数。detect 的值设置为***person***。这意味着模型将仅检测图像中的人。
 
-![用于帖子的图像](../Images/af4678c17099777cc6af3f59ac414219.png)
+![用于帖子的图像](img/af4678c17099777cc6af3f59ac414219.png)
 
 这是仅显示我们目标对象的新图像。
 
@@ -92,7 +92,7 @@ change_bg.blur_bg("sample.jpg", extreme = True, output_image_name="output_img.jp
 change_bg.blur_bg("sample.jpg", extreme = True, output_image_name="output_img.jpg", detect = "car")
 ```
 
-![用于帖子的图像](../Images/c831882ee424554647b31976a41d2941.png)
+![用于帖子的图像](img/c831882ee424554647b31976a41d2941.png)
 
 我们将目标对象设置为***car***，并且图像中存在的其他对象都与背景一起被模糊。
 
@@ -104,13 +104,13 @@ change_bg.blur_bg("sample.jpg", extreme = True, output_image_name="output_img.jp
 change_bg.color_bg("sample.jpg", colors = (0,128,0), output_image_name="output_img.jpg", detect = "person")
 ```
 
-![用于帖子的图像](../Images/b849e912cc6dfe47cfae912cb1d5cbd9.png)
+![用于帖子的图像](img/b849e912cc6dfe47cfae912cb1d5cbd9.png)
 
 ***用新图片更改目标对象的背景***
 
 ***背景图像***
 
-![图](../Images/ccef7e7882379916a9c419cb6457e54e.png)
+![图](img/ccef7e7882379916a9c419cb6457e54e.png)
 
 来源：[Unsplash.com by Dawid Zawila](https://unsplash.com/photos/9P2-bzjvIHk)
 
@@ -118,7 +118,7 @@ change_bg.color_bg("sample.jpg", colors = (0,128,0), output_image_name="output_i
 change_bg.change_bg_img("sample.jpg", "background.jpg", output_image_name="output_img.jpg", detect = "person")
 ```
 
-![用于帖子的图像](../Images/1602d3c22c22d9579a983ef93eeb1d1f.png)
+![用于帖子的图像](img/1602d3c22c22d9579a983ef93eeb1d1f.png)
 
 ***将目标对象的背景转换为灰度***
 
@@ -126,19 +126,19 @@ change_bg.change_bg_img("sample.jpg", "background.jpg", output_image_name="outpu
 change_bg.gray_bg("sample.jpg", output_image_name="output_img.jpg", detect = "person")
 ```
 
-![用于帖子的图像](../Images/c08f9107b96b6938bb4eb9e9dfca052b.png)
+![用于帖子的图像](img/c08f9107b96b6938bb4eb9e9dfca052b.png)
 
-阅读这篇文章可以全面了解如何使用PixelLib编辑图像背景。
+阅读这篇文章可以全面了解如何使用 PixelLib 编辑图像背景。
 
-[**用5行代码更改任何图像的背景**](https://towardsdatascience.com/change-the-background-of-any-image-with-5-lines-of-code-23a0ef10ce9a)
+[**用 5 行代码更改任何图像的背景**](https://towardsdatascience.com/change-the-background-of-any-image-with-5-lines-of-code-23a0ef10ce9a)
 
-### ***PixelLib的视频调节***
+### ***PixelLib 的视频调节***
 
 视频调节是改变任何视频背景的能力。
 
 **模糊视频背景**
 
-PixelLib使得只需五行代码即可方便地模糊任何视频的背景。
+PixelLib 使得只需五行代码即可方便地模糊任何视频的背景。
 
 **sample_video**
 
@@ -152,15 +152,15 @@ change_bg = alter_bg(model_type = "pb")
 change_bg.load_pascalvoc_model("xception_pascalvoc.pb")
 ```
 
-我们导入了pixellib，并从pixellib中导入了*alter_bg*类。创建了该类的实例，并在类内添加了一个参数*model_type*并将其设置为***pb***。最后，我们调用了函数来加载模型。
+我们导入了 pixellib，并从 pixellib 中导入了*alter_bg*类。创建了该类的实例，并在类内添加了一个参数*model_type*并将其设置为***pb***。最后，我们调用了函数来加载模型。
 
-**注意：** PixelLib支持两种类型的deeplabv3+模型，keras和tensorflow模型。keras模型是从tensorflow模型的检查点提取的。tensorflow模型的性能优于从检查点提取的keras模型。我们将使用tensorflow模型。从[这里](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/xception_pascalvoc.pb)下载tensorflow模型。
+**注意：** PixelLib 支持两种类型的 deeplabv3+模型，keras 和 tensorflow 模型。keras 模型是从 tensorflow 模型的检查点提取的。tensorflow 模型的性能优于从检查点提取的 keras 模型。我们将使用 tensorflow 模型。从[这里](https://github.com/ayoolaolafenwa/PixelLib/releases/download/1.1/xception_pascalvoc.pb)下载 tensorflow 模型。
 
 有三个参数决定背景的模糊程度。
 
-*low:* 当设置为true时，背景会被轻微模糊。
+*low:* 当设置为 true 时，背景会被轻微模糊。
 
-*moderate:* 当设置为true时，背景会被中等程度地模糊。
+*moderate:* 当设置为 true 时，背景会被中等程度地模糊。
 
 *extreme:* 当设置为 true 时，背景会被深度模糊。
 
@@ -212,7 +212,7 @@ PixelLib 使为任何视频创建虚拟背景变得非常简单，你可以使�
 
 **用作视频背景的图像**
 
-![图像](../Images/c5bdc32590fbb45357cd1a3591bdaa5f.png)
+![图像](img/c5bdc32590fbb45357cd1a3591bdaa5f.png)
 
 来源: [Unsplash.com](https://unsplash.com/photos/rCbdp8VCYhQ) [由 Handy Holmes](https://unsplash.com/photos/rCbdp8VCYhQ)
 
@@ -324,21 +324,21 @@ Facebook: [Ayoola Olafenwa](https://web.facebook.com/ayofen)
 
 **相关:**
 
-+   [用 5 行代码更改任何图像的背景](/2020/11/change-background-image-5-lines-code.html)
++   用 5 行代码更改任何图像的背景
 
-+   [计算机视觉路线图](/2020/10/roadmap-computer-vision.html)
++   计算机视觉路线图
 
-+   [使用深度学习自动旋转图像](/2020/07/auto-rotate-images-deep-learning.html)
++   使用深度学习自动旋转图像
 
 ### 更多相关话题
 
-+   [NExT-GPT介绍：任意对任意的多模态大语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
++   [NExT-GPT 介绍：任意对任意的多模态大语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
 
-+   [少于15行代码实现多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
++   [少于 15 行代码实现多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 
 +   [如何从不同背景过渡到数据科学领域？](https://www.kdnuggets.com/2023/05/transition-data-science-different-background.html)
 
-+   [SHAP：用Python解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
++   [SHAP：用 Python 解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
 
 +   [如何在没有工作经验的情况下获得数据科学的第一份工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 

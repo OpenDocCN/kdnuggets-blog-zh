@@ -1,12 +1,12 @@
 # 使用 PyPolars 使 Pandas 的速度提升 3 倍
 
-> 原文：[https://www.kdnuggets.com/2021/05/pandas-faster-pypolars.html](https://www.kdnuggets.com/2021/05/pandas-faster-pypolars.html)
+> 原文：[`www.kdnuggets.com/2021/05/pandas-faster-pypolars.html`](https://www.kdnuggets.com/2021/05/pandas-faster-pypolars.html)
 
-[评论](#comments)
+评论
 
 **由 [Satyam Kumar](https://www.linkedin.com/in/satkr/)，机器学习爱好者和程序员**
 
-![](../Images/d7e6cfa674476abb5778d3a3291c484b.png)
+![](img/d7e6cfa674476abb5778d3a3291c484b.png)
 
 照片由 [Tim Gouw](https://unsplash.com/@punttim?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -24,7 +24,7 @@ PyPolars 是一个开源的 Python 数据框架库，类似于 Pandas。PyPolars
 
 PyPolars 库有两个 API，一个是 Eager API，另一个是 Lazy API。Eager API 非常类似于 Pandas，结果在执行完成后立即产生。Lazy API 则类似于 Spark，当执行查询时会形成一个映射或计划，然后在 CPU 的所有核心上并行执行。
 
-![](../Images/0230c45ae7afe40f0abe487235ee4ba1.png)
+![](img/0230c45ae7afe40f0abe487235ee4ba1.png)
 
 （图片由作者提供），PyPolars API
 
@@ -48,7 +48,7 @@ PyPolars 基本上是 Polars 库的 Python 绑定。PyPolars 库的最佳部分�
 
 > 在演示中，我使用了一个大规模数据集（约 6.4GB），包含 2500 万个实例。
 
-![](../Images/016819891b0567cb7b42212697294dd6.png)
+![](img/016819891b0567cb7b42212697294dd6.png)
 
 （图片由作者提供），Pandas 和 Py-Polars 基本操作的基准时间数量
 
@@ -72,7 +72,7 @@ PyPolars 基本上是 Polars 库的 Python 绑定。PyPolars 库的最佳部分�
 
 **参考文献：**
 
-[1] Polars 文档和 GitHub 存储库：[https://github.com/ritchie46/polars](https://github.com/ritchie46/polars)
+[1] Polars 文档和 GitHub 存储库：[`github.com/ritchie46/polars`](https://github.com/ritchie46/polars)
 
 **感谢阅读**
 
@@ -82,21 +82,21 @@ PyPolars 基本上是 Polars 库的 Python 绑定。PyPolars 库的最佳部分�
 
 **相关：**
 
-+   [Vaex: Pandas 但快 1000 倍](/2021/05/vaex-pandas-1000x-faster.html)
++   Vaex: Pandas 但快 1000 倍
 
-+   [如何用 Modin 加速 Pandas](/2021/03/speed-up-pandas-modin.html)
++   如何用 Modin 加速 Pandas
 
-+   [如何处理机器学习中的分类数据](/2021/05/deal-with-categorical-data-machine-learning.html)
++   如何处理机器学习中的分类数据
 
 * * *
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 

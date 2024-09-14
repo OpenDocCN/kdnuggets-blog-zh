@@ -1,8 +1,8 @@
 # 不要成为商品化的数据科学家
 
-> 原文：[https://www.kdnuggets.com/2022/10/commoditized-data-scientist.html](https://www.kdnuggets.com/2022/10/commoditized-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2022/10/commoditized-data-scientist.html`](https://www.kdnuggets.com/2022/10/commoditized-data-scientist.html)
 
-![不要成为商品化的数据科学家](../Images/56444940e482eee3615b07cdeb81a3b9.png)
+![不要成为商品化的数据科学家](img/56444940e482eee3615b07cdeb81a3b9.png)
 
 保持独特并脱颖而出（照片由 [Ricardo Gomez Angel](https://unsplash.com/@rgaleriacom?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)）
 
@@ -10,11 +10,11 @@
 > 
 > ## 我们的前三课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 > 
 > * * *
 > 
@@ -88,7 +88,7 @@
 
 ## 经过验证（但未主流）
 
-这是一个慢烧过程。这个工具已经存在了一段时间，但尚未取得应有的成功。我认为JAX就是一个很好的例子。JAX已经存在了几年，它的层次低于其他类似工具，因此有一群寻求这种优势的人，它的受欢迎程度持续增长。在这里添加一些专业知识会让你从TensorFlow或PyTorch人群中脱颖而出，尤其是如果你对所有这些工具都很熟悉。
+这是一个慢烧过程。这个工具已经存在了一段时间，但尚未取得应有的成功。我认为 JAX 就是一个很好的例子。JAX 已经存在了几年，它的层次低于其他类似工具，因此有一群寻求这种优势的人，它的受欢迎程度持续增长。在这里添加一些专业知识会让你从 TensorFlow 或 PyTorch 人群中脱颖而出，尤其是如果你对所有这些工具都很熟悉。
 
 看到的不是不懂其他东西，而是懂得**和其他东西**。
 
@@ -98,7 +98,7 @@
 
 ## 沟通
 
-沟通在数据科学中至关重要。这点没有什么新鲜事。然而，沟通实际包含的内容在不断变化。你能想象在3年前，“在同步在线会议环境中与多个同事有效沟通思想”的技能有多么稀缺吗？
+沟通在数据科学中至关重要。这点没有什么新鲜事。然而，沟通实际包含的内容在不断变化。你能想象在 3 年前，“在同步在线会议环境中与多个同事有效沟通思想”的技能有多么稀缺吗？
 
 也许为了使自己与众不同，你可以想出自己的一种品牌推广方法：花时间开发用于传达项目结果的工件，以及围绕这些工件构建的故事。这是对新数据科学家始终强调的内容，但常常是闪亮的新工具或技术优先。作为团队中被其他人视为有效向其他利益相关者推销团队成果和愿景的人，并没有什么错。
 
@@ -106,19 +106,19 @@
 
 这是显而易见的。想把你的机器学习技能带到金融行业吗？你最好了解金融行业！
 
-这超越了行业领域；有太多人从技术角度攻击自然语言处理，却没有对语言学有扎实的理解，这一点显而易见。如果你有兴趣在NLP领域脱颖而出？去阅读一些语言学的书籍。计算机视觉也是如此：如果你不知道色调、插值、高斯噪声等，通过学习来脱颖而出。这只会帮助你融入你想要融入的领域。
+这超越了行业领域；有太多人从技术角度攻击自然语言处理，却没有对语言学有扎实的理解，这一点显而易见。如果你有兴趣在 NLP 领域脱颖而出？去阅读一些语言学的书籍。计算机视觉也是如此：如果你不知道色调、插值、高斯噪声等，通过学习来脱颖而出。这只会帮助你融入你想要融入的领域。
 
 # 总结
 
-让我们忘记所有数据科学家需要了解X、Y和Z的想法。技能的字母表中还有许多其他字母，所以学习一下E、J，甚至是一些M吧。
+让我们忘记所有数据科学家需要了解 X、Y 和 Z 的想法。技能的字母表中还有许多其他字母，所以学习一下 E、J，甚至是一些 M 吧。
 
 并且始终...
 
-![不要成为商品化的数据科学家](../Images/2e42838edd74ab8d684b22a67a7271d5.png)
+![不要成为商品化的数据科学家](img/2e42838edd74ab8d684b22a67a7271d5.png)
 
 作者提供的图像
 
-**[马修·梅奥](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一位数据科学家和KDnuggets的主编，KDnuggets是开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他的联系方式是editor1 at kdnuggets[dot]com。
+**[马修·梅奥](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一位数据科学家和 KDnuggets 的主编，KDnuggets 是开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他的联系方式是 editor1 at kdnuggets[dot]com。
 
 ### 更多相关话题
 
@@ -126,10 +126,10 @@
 
 +   [如果你没有合适的学位，如何进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
 
-+   [深度神经网络并未引领我们走向AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
++   [深度神经网络并未引领我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
 
-+   [不要错过！在2023年结束前注册免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！在 2023 年结束前注册免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
 
-+   [5个需求量高但未获得足够认可的IT职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
++   [5 个需求量高但未获得足够认可的 IT 职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
 
-+   [KDnuggets新闻 2022年3月16日：学习数据科学基础与5…](https://www.kdnuggets.com/2022/n11.html)
++   [KDnuggets 新闻 2022 年 3 月 16 日：学习数据科学基础与 5…](https://www.kdnuggets.com/2022/n11.html)

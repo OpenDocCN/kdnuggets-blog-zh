@@ -1,8 +1,8 @@
 # 什么是迁移学习？
 
-> 原文：[https://www.kdnuggets.com/2022/01/transfer-learning.html](https://www.kdnuggets.com/2022/01/transfer-learning.html)
+> 原文：[`www.kdnuggets.com/2022/01/transfer-learning.html`](https://www.kdnuggets.com/2022/01/transfer-learning.html)
 
-![什么是迁移学习？](../Images/7a6be2553ec0be9a7ea8f0a49778587a.png)
+![什么是迁移学习？](img/7a6be2553ec0be9a7ea8f0a49778587a.png)
 
 图片由 [qimono on Pixabary](https://pixabay.com/users/qimono-1962238/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -76,13 +76,13 @@
 
 **负迁移学习**：如上所述，负迁移学习是指以前的学习方法阻碍了新任务。这仅在源任务和目标任务不够相似时发生，导致第一次训练偏差过大。算法不一定总是与我们认为的相似一致，这使得理解什么类型的训练是足够的基础和标准变得困难。
 
-## 转移学习的6个步骤
+## 转移学习的 6 个步骤
 
-让我们深入了解转移学习的实现方式及其步骤。转移学习一般包括6个步骤，我们将逐一介绍这些步骤。
+让我们深入了解转移学习的实现方式及其步骤。转移学习一般包括 6 个步骤，我们将逐一介绍这些步骤。
 
 1.  选择源任务：第一步是选择一个拥有大量数据的预训练模型，该模型的输入和输出数据与您选择的目标任务有关系。
 
-1.  创建基础模型：实例化一个带有预训练权重的基础模型。预训练权重可以通过像Xception这样的架构获取。这是在开发你的源模型，使其比我们最初开始时的简单模型更好，确保学习率有所提升。
+1.  创建基础模型：实例化一个带有预训练权重的基础模型。预训练权重可以通过像 Xception 这样的架构获取。这是在开发你的源模型，使其比我们最初开始时的简单模型更好，确保学习率有所提升。
 
 1.  冻结层：为了避免再次初始化权重，冻结预训练模型的层是必要的。这将保留已经学到的知识，避免从头开始训练模型。
 

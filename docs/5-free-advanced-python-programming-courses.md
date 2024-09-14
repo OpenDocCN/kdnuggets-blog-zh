@@ -1,18 +1,18 @@
 # 5 门免费的高级 Python 编程课程
 
-> 原文：[https://www.kdnuggets.com/5-free-advanced-python-programming-courses](https://www.kdnuggets.com/5-free-advanced-python-programming-courses)
+> 原文：[`www.kdnuggets.com/5-free-advanced-python-programming-courses`](https://www.kdnuggets.com/5-free-advanced-python-programming-courses)
 
-![5 Free Advanced Python Programming Courses](../Images/3714cd7447ce21e9cc42f4168f56287a.png) 作者提供的图片
+![5 Free Advanced Python Programming Courses](img/3714cd7447ce21e9cc42f4168f56287a.png) 作者提供的图片
 
 * * *
 
 ## 我们的前 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 

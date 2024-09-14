@@ -1,8 +1,8 @@
 # 初级 ML 工程师实际需要知道什么才能获得聘用？
 
-> 原文：[https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired](https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired)
+> 原文：[`www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired`](https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired)
 
-![初级 ML 工程师实际需要知道什么才能获得聘用？](../Images/bbe0abb85cdaf4bfeb7c563184c2737c.png)
+![初级 ML 工程师实际需要知道什么才能获得聘用？](img/bbe0abb85cdaf4bfeb7c563184c2737c.png)
 
 照片由[Mikhail Nilov](https://www.pexels.com/photo/men-in-the-office-working-on-their-computer-7988116/)提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -58,23 +58,23 @@ GitHub 是软件开发中版本控制和协作的关键工具，包括机器学�
 
 ### 网页抓取项目
 
-本项目的目标是从特定网站抓取数据并存储到数据库中。这些数据可以用于各种目的，如分析或机器学习。项目可能涉及使用像BeautifulSoup或Scrapy这样的库进行网页抓取，以及使用SQLite或MySQL进行数据库存储。此外，项目还可以包括与Google Drive或其他云服务的集成，以便备份和方便访问数据。
+本项目的目标是从特定网站抓取数据并存储到数据库中。这些数据可以用于各种目的，如分析或机器学习。项目可能涉及使用像 BeautifulSoup 或 Scrapy 这样的库进行网页抓取，以及使用 SQLite 或 MySQL 进行数据库存储。此外，项目还可以包括与 Google Drive 或其他云服务的集成，以便备份和方便访问数据。
 
-### NLP项目
+### NLP 项目
 
-在这里，你需要构建一个能够理解和回应自然语言查询的聊天机器人。聊天机器人可以集成附加功能，如地图集成，以提供更有用的回应。你还可以使用像NLTK或spaCy这样的库进行自然语言处理，以及使用TensorFlow或PyTorch构建模型。
+在这里，你需要构建一个能够理解和回应自然语言查询的聊天机器人。聊天机器人可以集成附加功能，如地图集成，以提供更有用的回应。你还可以使用像 NLTK 或 spaCy 这样的库进行自然语言处理，以及使用 TensorFlow 或 PyTorch 构建模型。
 
-### CV项目
+### CV 项目
 
-本项目的目标是构建一个计算机视觉模型，能够检测图像中的物体。无需使用最复杂的模型，只需使用一些能够展示你在深度学习基础方面技能的模型，如U-net或YOLO。项目可以包括使用ngrok或类似工具将图像上传到网站，然后返回检测到物体并用方框标记的图像。
+本项目的目标是构建一个计算机视觉模型，能够检测图像中的物体。无需使用最复杂的模型，只需使用一些能够展示你在深度学习基础方面技能的模型，如 U-net 或 YOLO。项目可以包括使用 ngrok 或类似工具将图像上传到网站，然后返回检测到物体并用方框标记的图像。
 
 ### 声音项目
 
-你可以构建一个文本转语音模型，将录制的音频转换为文本。该模型可以使用深度学习算法如LSTM或GRU进行训练。项目可以涉及使用像PyDub或librosa这样的库进行音频处理，以及使用TensorFlow或PyTorch构建模型。
+你可以构建一个文本转语音模型，将录制的音频转换为文本。该模型可以使用深度学习算法如 LSTM 或 GRU 进行训练。项目可以涉及使用像 PyDub 或 librosa 这样的库进行音频处理，以及使用 TensorFlow 或 PyTorch 构建模型。
 
 ### 时间序列预测项目
 
-本项目的目标是构建一个能够根据过去的数据预测未来值的模型。项目可以涉及使用像Pandas或NumPy这样的库进行数据处理，以及使用scikit-learn或TensorFlow构建模型。数据可以来自各种地方，如股票市场数据或天气数据，并可以与网页抓取工具集成以自动化数据收集。
+本项目的目标是构建一个能够根据过去的数据预测未来值的模型。项目可以涉及使用像 Pandas 或 NumPy 这样的库进行数据处理，以及使用 scikit-learn 或 TensorFlow 构建模型。数据可以来自各种地方，如股票市场数据或天气数据，并可以与网页抓取工具集成以自动化数据收集。
 
 ## 还有其他什么？
 

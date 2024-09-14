@@ -1,8 +1,8 @@
 # 10 个在 ChatGPT 时代建立深科技初创公司的障碍
 
-> 原文：[https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
+> 原文：[`www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html`](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
 
-![10 个在 ChatGPT 时代建立深科技初创公司的障碍](../Images/823b57db545fb4088af331a2335c1963.png)
+![10 个在 ChatGPT 时代建立深科技初创公司的障碍](img/823b57db545fb4088af331a2335c1963.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
@@ -34,7 +34,7 @@ AI 和 ML 在这些公司中发挥了关键作用，使它们能够分析大量�
 
 开发和验证新技术可能需要相当长的时间。这可能导致较长的开发周期和市场进入延迟，这对资源有限的初创公司尤其具有财务挑战。
 
-![10 个在 ChatGPT 时代建立深科技初创公司的障碍](../Images/3d3278748c54704b98198d6470dc3d1e.png)
+![10 个在 ChatGPT 时代建立深科技初创公司的障碍](img/3d3278748c54704b98198d6470dc3d1e.png)
 
 图片来自 Unsplash
 
@@ -56,7 +56,7 @@ AI 和 ML 在这些公司中发挥了关键作用，使它们能够分析大量�
 
 这意味着我不得不采取更为保守的营销策略，仅在我们达到特定里程碑或对我们的技术有了特定信心的阈值后才推广我们的产品。维护我们在科学界以及潜在投资者和客户中的声誉至关重要，因为在这一领域，可信度是关键。任何过早或未经证实的主张都可能迅速损害我们的声誉，并阻碍我们在长期内取得成功的能力。
 
-![构建深科技初创企业的10大挑战](../Images/865b03c3622245541d0fb3027c4d1457.png)
+![构建深科技初创企业的 10 大挑战](img/865b03c3622245541d0fb3027c4d1457.png)
 
 图片来自 Unsplash
 

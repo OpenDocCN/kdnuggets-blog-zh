@@ -1,8 +1,8 @@
 # 机器学习中训练数据与测试数据的区别
 
-> 原文：[https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html`](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)
 
-![机器学习中训练数据与测试数据的区别](../Images/de4f13585fc7bc81633e3b74715263e5.png)
+![机器学习中训练数据与测试数据的区别](img/de4f13585fc7bc81633e3b74715263e5.png)
 
 在构建预测模型时，结果的质量取决于你使用的数据。如果你使用的数据不足或错误，你的模型将无法做出现实的预测，并会引导你走向错误的方向。为避免这种情况，你需要了解机器学习中训练数据与测试数据的区别。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -56,7 +56,7 @@
 
 ## 训练和测试数据如何运作的示例
 
-![训练和测试数据如何运作的示例](../Images/d8847e4d7042f71f3616fb798748602a.png)
+![训练和测试数据如何运作的示例](img/d8847e4d7042f71f3616fb798748602a.png)
 
 现在，让我们看看这两个数据集在实际中是如何运作的。作为示例，我们将使用 [GiniMachine](https://ginimachine.com/) —— 一个无代码的 AI 决策平台。
 
@@ -98,6 +98,6 @@
 
 +   [L1 和 L2 正则化的区别](https://www.kdnuggets.com/2022/08/difference-l1-l2-regularization.html)
 
-+   [GBM与XGBoost之间的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)
++   [GBM 与 XGBoost 之间的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)
 
-+   [假设检验与A/B测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
++   [假设检验与 A/B 测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)

@@ -1,8 +1,8 @@
 # 生成式 AI 泡沫即将破裂
 
-> 原文：[https://www.kdnuggets.com/the-generative-ai-bubble-will-burst-soon](https://www.kdnuggets.com/the-generative-ai-bubble-will-burst-soon)
+> 原文：[`www.kdnuggets.com/the-generative-ai-bubble-will-burst-soon`](https://www.kdnuggets.com/the-generative-ai-bubble-will-burst-soon)
 
-![生成式 AI 泡沫即将破裂](../Images/52fd1c01e869ca53551b6e5d46ebcbc8.png)
+![生成式 AI 泡沫即将破裂](img/52fd1c01e869ca53551b6e5d46ebcbc8.png)
 
 作者提供的图像
 
@@ -20,7 +20,7 @@
 
 互联网泡沫在 2000 年代初期破裂。股价经历了显著下跌，导致大量互联网公司破产。到 2000 年 10 月，曾在 3 月达到峰值的 NASDAQ 指数下跌了 76.81%。像思科、英特尔和甲骨文等大公司失去了超过 80% 的股值 - [互联网泡沫 - 维基百科](https://en.wikipedia.org/wiki/Dot-com_bubble).
 
-![生成式 AI 泡沫即将破裂](../Images/59bf91062893906048356587b1e11d1f.png)
+![生成式 AI 泡沫即将破裂](img/59bf91062893906048356587b1e11d1f.png)
 
 来源于 [维基百科](https://en.wikipedia.org/wiki/Dot-com_bubble)
 

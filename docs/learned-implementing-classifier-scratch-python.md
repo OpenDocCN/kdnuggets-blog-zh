@@ -1,20 +1,20 @@
-# 我在Python中从零实现分类器的收获
+# 我在 Python 中从零实现分类器的收获
 
-> 原文：[https://www.kdnuggets.com/2017/02/learned-implementing-classifier-scratch-python.html](https://www.kdnuggets.com/2017/02/learned-implementing-classifier-scratch-python.html)
+> 原文：[`www.kdnuggets.com/2017/02/learned-implementing-classifier-scratch-python.html`](https://www.kdnuggets.com/2017/02/learned-implementing-classifier-scratch-python.html)
 
 **作者：让-尼古拉斯·侯德，[JeanNicholasHould.com](http://JeanNicholasHould.com/?utm_source=kdnugget)。**
 
-> 本文是作者的[学习机器学习](http://www.jeannicholashould.com/learning-machine-learning.html)系列的一部分。它基于[Python机器学习](https://www.amazon.com/gp/product/1783555130/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1783555130&linkCode=as2&tag=nickhould-20&linkId=79334fab95b99f2021c47f06697c40c3)的第1章和第2章。
+> 本文是作者的[学习机器学习](http://www.jeannicholashould.com/learning-machine-learning.html)系列的一部分。它基于[Python 机器学习](https://www.amazon.com/gp/product/1783555130/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1783555130&linkCode=as2&tag=nickhould-20&linkId=79334fab95b99f2021c47f06697c40c3)的第一章和第二章。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -24,11 +24,11 @@
 
 ### 那么，什么是二元分类器呢？
 
-分类器是一个机器学习算法，它根据一组特征确定输入元素的类别。例如，分类器可以用于根据啤酒的特征预测其类别。这些特征可能包括其酒精含量、香气、外观等。机器学习分类器可以用来预测一瓶8%酒精含量、100 IBU、并带有强烈橙子香气的啤酒是印度淡色艾尔。
+分类器是一个机器学习算法，它根据一组特征确定输入元素的类别。例如，分类器可以用于根据啤酒的特征预测其类别。这些特征可能包括其酒精含量、香气、外观等。机器学习分类器可以用来预测一瓶 8%酒精含量、100 IBU、并带有强烈橙子香气的啤酒是印度淡色艾尔。
 
 在机器学习中，主要有三种任务类型：无监督学习、监督学习和强化学习。分类器算法属于监督学习范畴。监督学习意味着我们事先知道正确答案。期望的输出是已知的。在啤酒的例子中，我们可以拥有描述啤酒及其类别的数据集。我们可以训练分类器算法，根据啤酒的特征来预测这些类别。
 
-二分类器将元素分类为两组。零或一。真或假。IPA或不是。
+二分类器将元素分类为两组。零或一。真或假。IPA 或不是。
 
 ### 构建机器学习模型
 
@@ -42,9 +42,9 @@
 
 1.  预测
 
-![](../Images/ab50ecd3646752080fe903493cb7c77b.png)
+![](img/ab50ecd3646752080fe903493cb7c77b.png)
 
-来源：Sebastian Raschka的[《Python机器学习》](https://www.amazon.com/gp/product/1783555130/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1783555130&linkCode=as2&tag=nickhould-20&linkId=79334fab95b99f2021c47f06697c40c3)。
+来源：Sebastian Raschka 的[《Python 机器学习》](https://www.amazon.com/gp/product/1783555130/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1783555130&linkCode=as2&tag=nickhould-20&linkId=79334fab95b99f2021c47f06697c40c3)。
 
 ### 预处理
 
@@ -68,7 +68,7 @@
 
 一旦你准备好了数据集，第二步是选择一个算法来执行你想要的任务。在我们的案例中，我们选择的算法是一个称为感知机的二分类器。有许多算法被设计用来完成不同的任务，它们各自有优点和缺点。
 
-在这一步，你可以测试一些算法，查看它们的表现并选择性能最好的一个。有多种指标可以用来衡量机器学习模型的性能。根据Raschka的说法，“一个常用的指标是分类准确率，它被定义为正确分类实例的比例”。在这一步，你将对机器学习算法的参数进行调整，这些参数被称为超参数。
+在这一步，你可以测试一些算法，查看它们的表现并选择性能最好的一个。有多种指标可以用来衡量机器学习模型的性能。根据 Raschka 的说法，“一个常用的指标是分类准确率，它被定义为正确分类实例的比例”。在这一步，你将对机器学习算法的参数进行调整，这些参数被称为超参数。
 
 在这篇文章中，我们将主要关注机器学习工作流的这一部分。我们将深入探讨算法的内部工作原理。如果你对机器学习工作流的其他部分感兴趣，应该感兴趣，我将在文章末尾链接到一个很棒的笔记本。
 
@@ -102,13 +102,13 @@
 
 第三，我们对每一个训练数据点及其目标开始循环。目标是我们希望算法最终预测的期望输出。由于这是一个二分类器，目标值要么是`-1`，要么是`1`。它们是二进制值。
 
-根据数据点的特征，算法将预测类别：`1` 或 `-1`。预测计算是特征与其适当权重的矩阵乘法。我们将阈值的值加到这个乘法结果中。如果结果大于0，预测的类别是`1`。如果结果小于0，预测的类别是`-1`。
+根据数据点的特征，算法将预测类别：`1` 或 `-1`。预测计算是特征与其适当权重的矩阵乘法。我们将阈值的值加到这个乘法结果中。如果结果大于 0，预测的类别是`1`。如果结果小于 0，预测的类别是`-1`。
 
 在每次对数据点进行迭代时，如果预测不准确，算法将调整权重。在最初的几次迭代中，预测可能不准确，因为权重还没有调整很多次。它们还没有开始收敛。调整是根据目标值与预测值之间的差异按比例进行的。这个差异然后乘以学习率`eta`，这是一个数据科学家设置的在零和一之间的超参数。`eta`值越高，对权重的修正就越大。如果预测准确，算法将不会调整权重。
 
 感知机只有在两个类别线性可分时才会收敛。简单来说，如果你能够绘制一条直线完全分隔这两个类别，算法就会收敛。否则，算法将继续迭代并重新调整权重，直到达到最大迭代次数`n_iter`。
 
-![](../Images/81a651a78516e9af6e96c47b4ee0f87f.png)
+![](img/81a651a78516e9af6e96c47b4ee0f87f.png)
 
 来源: [Python 机器学习](https://www.amazon.com/gp/product/1783555130/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1783555130&linkCode=as2&tag=nickhould-20&linkId=79334fab95b99f2021c47f06697c40c3) by Sebastian Raschka.
 
@@ -158,11 +158,11 @@
 
 **相关内容：**
 
-+   [数据集策划中的网络爬虫，第一部分：收集精酿啤酒数据](/2017/02/web-scraping-dataset-curation-part-1.html)
++   数据集策划中的网络爬虫，第一部分：收集精酿啤酒数据
 
-+   [在 Python 中整理数据](/2017/01/tidying-data-python.html)
++   在 Python 中整理数据
 
-+   [数据科学中的中心极限定理](/2016/08/central-limit-theorem-data-science.html)
++   数据科学中的中心极限定理
 
 ### 更多相关主题
 

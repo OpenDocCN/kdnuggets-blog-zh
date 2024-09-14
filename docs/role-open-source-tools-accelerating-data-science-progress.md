@@ -1,8 +1,8 @@
 # 开源工具在加速数据科学进展中的作用
 
-> 原文：[https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)
+> 原文：[`www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html`](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)
 
-![黑白数据中心](../Images/62cefcb69ace5dd91ed754ccbc31f455.png)
+![黑白数据中心](img/62cefcb69ace5dd91ed754ccbc31f455.png)
 
 图片由作者使用 Midjourney 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 在大规模数据管理和分析领域，开源数据处理框架如 Hadoop 和 Spark 扮演了重要角色。这些工具使得从庞大复杂的数据集中提取有价值的见解变得民主化，而这些数据以前是难以处理的。这一转变为大数据分析的新范式铺平了道路，促进了创新，并使组织能够更有效地做出数据驱动的决策。
 
-开源机器学习库的普及，如TensorFlow、Scikit-learn和PyTorch，进一步促进了数据科学的发展。这些库简化了机器学习模型开发和部署中复杂的过程。它们使前沿算法的访问民主化，从而使机器学习变得更加可及，加速了数据科学的整体进展。
+开源机器学习库的普及，如 TensorFlow、Scikit-learn 和 PyTorch，进一步促进了数据科学的发展。这些库简化了机器学习模型开发和部署中复杂的过程。它们使前沿算法的访问民主化，从而使机器学习变得更加可及，加速了数据科学的整体进展。
 
 # 当前：开源工具的现有应用
 
@@ -44,7 +44,7 @@
 
 未来也承诺了数据科学进一步民主化的前景，这得益于开源工具。随着这些工具的不断发展，它们将使更多的参与者能够从数据中提取洞察，无论其技术专长如何。
 
-最后，开源工具将对在数据科学工作流程中利用大型语言模型（LLMs）如GPT-3或GPT-4的潜力发挥核心作用。它们将使数据科学家能够更有效地利用这些先进模型进行自然语言处理、生成技术和进一步的人工智能系统开发。
+最后，开源工具将对在数据科学工作流程中利用大型语言模型（LLMs）如 GPT-3 或 GPT-4 的潜力发挥核心作用。它们将使数据科学家能够更有效地利用这些先进模型进行自然语言处理、生成技术和进一步的人工智能系统开发。
 
 # 结论
 

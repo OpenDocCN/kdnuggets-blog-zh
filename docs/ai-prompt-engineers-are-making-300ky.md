@@ -1,8 +1,8 @@
 # AI 提示工程师年薪 $300k
 
-> 原文：[https://www.kdnuggets.com/ai-prompt-engineers-are-making-300ky](https://www.kdnuggets.com/ai-prompt-engineers-are-making-300ky)
+> 原文：[`www.kdnuggets.com/ai-prompt-engineers-are-making-300ky`](https://www.kdnuggets.com/ai-prompt-engineers-are-making-300ky)
 
-![AI 提示工程师年薪 $300k](../Images/c1e60211f25c5bb2578a45401ad111bf.png)
+![AI 提示工程师年薪 $300k](img/c1e60211f25c5bb2578a45401ad111bf.png)
 
 图片由作者提供
 
@@ -44,17 +44,17 @@ OpenAI 提供了一份指南，其中将介绍策略战术，帮助你从大型�
 
 链接：[提示工程大师课程](https://promptengineering.org/prompt-engineering-course/)
 
-如果你愿意订阅，Prompt Engineering Masterclass的内容对你是免费的！这是一个不断发展的系列，分为多个章节文章。你将深入了解用于生成AI的高级提示工程技术。
+如果你愿意订阅，Prompt Engineering Masterclass 的内容对你是免费的！这是一个不断发展的系列，分为多个章节文章。你将深入了解用于生成 AI 的高级提示工程技术。
 
-你将从学习生成AI基础、介绍大型语言模型和提示工程开始，然后逐渐深入到更高级的主题，如提示工程技术、对话AI模型、AGI和企业GenAI，以及实际示例。
+你将从学习生成 AI 基础、介绍大型语言模型和提示工程开始，然后逐渐深入到更高级的主题，如提示工程技术、对话 AI 模型、AGI 和企业 GenAI，以及实际示例。
 
 # 开发者的提示工程
 
 链接: [开发者的提示工程](https://www.deeplearning.ai/short-courses/chatgpt-prompt-engineering-for-developers/)
 
-DeepLearning.AI提供的1小时免费课程，由Isa Fulford和Andrew Ng担任课程协调员。该课程专为开发者量身定制，你将学习如何使用LLM并构建新的强大应用。
+DeepLearning.AI 提供的 1 小时免费课程，由 Isa Fulford 和 Andrew Ng 担任课程协调员。该课程专为开发者量身定制，你将学习如何使用 LLM 并构建新的强大应用。
 
-使用OpenAI API，你将学会创新，掌握最佳提示工程实践，并探索LLM API在各种任务中的应用。
+使用 OpenAI API，你将学会创新，掌握最佳提示工程实践，并探索 LLM API 在各种任务中的应用。
 
 # 提示工程指南
 
@@ -62,21 +62,21 @@ DeepLearning.AI提供的1小时免费课程，由Isa Fulford和Andrew Ng担任�
 
 最后但同样重要的是，另一个提示工程指南。免费指南再多也不嫌多！
 
-对LLM（大语言模型）发展充满高度兴趣的PromptingGuide.AI创建了一个提示工程指南。你不仅可以掌握提示工程，还包含最新的论文、先进的提示技巧、学习指南等内容。
+对 LLM（大语言模型）发展充满高度兴趣的 PromptingGuide.AI 创建了一个提示工程指南。你不仅可以掌握提示工程，还包含最新的论文、先进的提示技巧、学习指南等内容。
 
 # 总结
 
-离找到那份高薪新工作的目标还有6门课程！当然，掌握提示工程不仅仅是这样，你还需要将其付诸实践，创建一个优秀的作品集，尽力而为！
+离找到那份高薪新工作的目标还有 6 门课程！当然，掌握提示工程不仅仅是这样，你还需要将其付诸实践，创建一个优秀的作品集，尽力而为！
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术写作人，以及KDnuggets的编辑和社区经理。她特别关注提供数据科学职业建议或教程以及数据科学理论知识。Nisha涉及广泛的主题，并希望探索人工智能如何有益于人类寿命的不同方式。作为一个热衷学习者，Nisha致力于拓宽她的技术知识和写作技能，同时帮助他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术写作人，以及 KDnuggets 的编辑和社区经理。她特别关注提供数据科学职业建议或教程以及数据科学理论知识。Nisha 涉及广泛的主题，并希望探索人工智能如何有益于人类寿命的不同方式。作为一个热衷学习者，Nisha 致力于拓宽她的技术知识和写作技能，同时帮助他人。
 
 ### 主题更多信息
 
-+   [Ploomber与Kubeflow：简化MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
++   [Ploomber 与 Kubeflow：简化 MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
 
 +   [成功机器学习模型中的数据质量意义](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [让智能文档处理更聪明：第1部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
++   [让智能文档处理更聪明：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
 
 +   [从数据分析师到数据战略师：影响力职业路径](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
 

@@ -1,22 +1,22 @@
 # 前 10 名数据科学在能源和公用事业中的应用案例
 
-> 原文：[https://www.kdnuggets.com/2019/09/top-10-data-science-use-cases-energy-utilities.html](https://www.kdnuggets.com/2019/09/top-10-data-science-use-cases-energy-utilities.html)
+> 原文：[`www.kdnuggets.com/2019/09/top-10-data-science-use-cases-energy-utilities.html`](https://www.kdnuggets.com/2019/09/top-10-data-science-use-cases-energy-utilities.html)
 
-[评论](#comments)
+评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![图示](../Images/3ecb24d6e1d871ca339d61bc1ce0edeb.png)
+![图示](img/3ecb24d6e1d871ca339d61bc1ce0edeb.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
@@ -120,11 +120,11 @@
 
 **相关：**
 
-+   [金融领域数据科学的七大应用案例](/2018/05/top-7-data-science-use-cases-finance.html)
++   金融领域数据科学的七大应用案例
 
-+   [经理数据科学入门](/2018/11/intro-data-science-managers.html)
++   经理数据科学入门
 
-+   [顶级 6 个 Python NLP 库的比较](/2018/07/comparison-top-6-python-nlp-libraries.html)
++   顶级 6 个 Python NLP 库的比较
 
 ### 更多相关内容
 

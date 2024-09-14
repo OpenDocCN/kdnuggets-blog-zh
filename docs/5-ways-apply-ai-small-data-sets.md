@@ -1,46 +1,46 @@
-# 5种将AI应用于小数据集的方法
+# 5 种将 AI 应用于小数据集的方法
 
-> 原文：[https://www.kdnuggets.com/2022/02/5-ways-apply-ai-small-data-sets.html](https://www.kdnuggets.com/2022/02/5-ways-apply-ai-small-data-sets.html)
+> 原文：[`www.kdnuggets.com/2022/02/5-ways-apply-ai-small-data-sets.html`](https://www.kdnuggets.com/2022/02/5-ways-apply-ai-small-data-sets.html)
 
-![5种将AI应用于小数据集的方法](../Images/fed9eb27fdbd33a0cc676a227318abea.png)
+![5 种将 AI 应用于小数据集的方法](img/fed9eb27fdbd33a0cc676a227318abea.png)
 
 [技术照片由 rawpixel.com 创建 - www.freepik.com](https://www.freepik.com/photos/technology)
 
-人工智能和[数据科学](/2022/02/build-career-data-science.html)协同工作，以改善数据收集、分类、分析和解释。然而，我们只听说过使用AI理解大数据集。这是因为小数据集通常容易被人理解，应用AI来分析和解释它们并不必要。
+人工智能和数据科学协同工作，以改善数据收集、分类、分析和解释。然而，我们只听说过使用 AI 理解大数据集。这是因为小数据集通常容易被人理解，应用 AI 来分析和解释它们并不必要。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-如今，许多企业和制造商将AI集成到生产线中，逐渐造成数据稀缺。与大型公司不同，许多小型公司由于风险、时间和预算限制，无法收集大量训练数据。这导致了对小数据集的AI解决方案的忽视或错误应用。
+如今，许多企业和制造商将 AI 集成到生产线中，逐渐造成数据稀缺。与大型公司不同，许多小型公司由于风险、时间和预算限制，无法收集大量训练数据。这导致了对小数据集的 AI 解决方案的忽视或错误应用。
 
-由于大多数公司不知道如何正确地利用[AI在小数据集上的应用](https://www.industryweek.com/technology-and-iiot/digital-tools/article/21122846/making-ai-work-with-small-data)，它们盲目地将其应用于基于以往文件的未来预测。不幸的是，这会导致错误和风险决策。
+由于大多数公司不知道如何正确地利用[AI 在小数据集上的应用](https://www.industryweek.com/technology-and-iiot/digital-tools/article/21122846/making-ai-work-with-small-data)，它们盲目地将其应用于基于以往文件的未来预测。不幸的是，这会导致错误和风险决策。
 
-因此，学习正确的方法将AI应用于小数据集并避免任何误解是至关重要的。
+因此，学习正确的方法将 AI 应用于小数据集并避免任何误解是至关重要的。
 
-### AI在小数据集上的5种正确应用方法
+### AI 在小数据集上的 5 种正确应用方法
 
-将AI算法应用于小数据集可以获得无人工错误和虚假结果的结果，但前提是正确应用。你还可以[节省时间和资源](/2019/07/7-tips-dealing-small-data.html)，通常用于手动解释小数据。
+将 AI 算法应用于小数据集可以获得无人工错误和虚假结果的结果，但前提是正确应用。你还可以节省时间和资源，通常用于手动解释小数据。
 
-以下是将AI应用于小数据集的一些方法：
+以下是将 AI 应用于小数据集的一些方法：
 
 ### 1\. 少样本学习
 
-少样本学习模型向AI引入少量训练数据，以作为新数据集解释的参考。这是一种常用的计算机视觉方法，因为它不需要许多示例进行识别。
+少样本学习模型向 AI 引入少量训练数据，以作为新数据集解释的参考。这是一种常用的计算机视觉方法，因为它不需要许多示例进行识别。
 
-例如，财务分析系统并不需要大量库存就能有效运作。因此，你可以根据系统的容量输入一个[利润和损失表模板](https://www.freshbooks.com/accounting-templates/profit-and-loss)，而不是让AI系统承载大量信息。
+例如，财务分析系统并不需要大量库存就能有效运作。因此，你可以根据系统的容量输入一个[利润和损失表模板](https://www.freshbooks.com/accounting-templates/profit-and-loss)，而不是让 AI 系统承载大量信息。
 
-与其他AI系统不同的是，如果你在这个模板中输入更多信息，它将导致虚假的结果。
+与其他 AI 系统不同的是，如果你在这个模板中输入更多信息，它将导致虚假的结果。
 
-当你在AI系统中上传样本数据时，它会从训练数据集中学习模式，以便对未来的小数据集进行解释。少量学习模型的吸引力在于，你不需要一个庞大的训练数据集来训练AI，使其在低成本和低努力下可运行。
+当你在 AI 系统中上传样本数据时，它会从训练数据集中学习模式，以便对未来的小数据集进行解释。少量学习模型的吸引力在于，你不需要一个庞大的训练数据集来训练 AI，使其在低成本和低努力下可运行。
 
 ### 2\. 知识图谱
 
@@ -48,15 +48,15 @@
 
 除了作为数据存储，该模型还同时对特定数据集中的语义进行编码。
 
-[知识图谱模型](/2019/06/data-fabric-machine-learning-building-knowledge-graph.html)的主要功能是组织和结构化数据集中的重要点，以整合从各种来源收集的信息。知识图谱被标注以关联特定含义。图谱中有两个主要组件 - 节点和边。节点是两个或更多的项，而边表示它们之间的连接和关系。
+知识图谱模型的主要功能是组织和结构化数据集中的重要点，以整合从各种来源收集的信息。知识图谱被标注以关联特定含义。图谱中有两个主要组件 - 节点和边。节点是两个或更多的项，而边表示它们之间的连接和关系。
 
 你可以使用知识图谱来存储信息，通过多个算法整合数据并操控数据，以突出新信息。此外，它们在组织小数据集方面非常有用，使数据高度可解释和可重用。
 
 ### 3\. 迁移学习
 
-公司避免在小数据集上应用AI，因为他们对结果不确定。对于大数据集产生有效结果的方法在小数据集上往往适得其反，产生虚假的结果。然而，[迁移学习方法](https://builtin.com/data-science/transfer-learning)可以在数据集大小不同的情况下产生类似且可靠的结果。
+公司避免在小数据集上应用 AI，因为他们对结果不确定。对于大数据集产生有效结果的方法在小数据集上往往适得其反，产生虚假的结果。然而，[迁移学习方法](https://builtin.com/data-science/transfer-learning)可以在数据集大小不同的情况下产生类似且可靠的结果。
 
-迁移学习使用一个AI模型作为起点，但通过一个新的AI模型获得结果。简而言之，它是将知识从一个模型转移到另一个模型的过程。
+迁移学习使用一个 AI 模型作为起点，但通过一个新的 AI 模型获得结果。简而言之，它是将知识从一个模型转移到另一个模型的过程。
 
 该模型主要用于计算机视觉领域和自然语言处理。原因在于这些任务需要大量的数据和计算能力。因此，使用迁移学习可以减少额外的时间和精力。
 
@@ -86,7 +86,7 @@ SSL 模型主要用于执行回归分析和分类任务。然而，它在计算�
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其应用](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其应用](https://www.kdnuggets.com/2022/n46.html)
 
 +   [什么是切比雪夫定理，它如何应用于数据科学？](https://www.kdnuggets.com/2022/11/chebychev-theorem-apply-data-science.html)
 

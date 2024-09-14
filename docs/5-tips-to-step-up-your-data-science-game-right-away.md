@@ -1,8 +1,8 @@
-# 立即提升你的数据科学技能的5个建议
+# 立即提升你的数据科学技能的 5 个建议
 
-> 原文：[https://www.kdnuggets.com/5-tips-to-step-up-your-data-science-game-right-away](https://www.kdnuggets.com/5-tips-to-step-up-your-data-science-game-right-away)
+> 原文：[`www.kdnuggets.com/5-tips-to-step-up-your-data-science-game-right-away`](https://www.kdnuggets.com/5-tips-to-step-up-your-data-science-game-right-away)
 
-![立即提升你的数据科学技能的5个建议](../Images/fe265658fee15bbfb1d3727bdf5c5138.png)
+![立即提升你的数据科学技能的 5 个建议](img/fe265658fee15bbfb1d3727bdf5c5138.png)
 
 作者提供的图片 | Midjourney & Canva
 
@@ -14,7 +14,7 @@
 
 ## 1\. 掌握数学基础
 
-理解所需数学的基础知识是处理数据的基本部分。线性代数、微积分和概率论是数据科学家进行建模和算法工作的基础。[机器学习数学](https://mml-book.github.io/) 这本书是一个很好的起点，Coursera 的 [数据科学数学专攻](https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science) 课程也是如此。[3Brown1Blue的 YouTube 视频](https://www.youtube.com/c/3blue1brown) 是这些主题的另一个极好的资源。将这些数学基础知识应用于实际项目和练习中将确保你的知识保持扎实。
+理解所需数学的基础知识是处理数据的基本部分。线性代数、微积分和概率论是数据科学家进行建模和算法工作的基础。[机器学习数学](https://mml-book.github.io/) 这本书是一个很好的起点，Coursera 的 [数据科学数学专攻](https://www.coursera.org/specializations/mathematics-for-machine-learning-and-data-science) 课程也是如此。[3Brown1Blue 的 YouTube 视频](https://www.youtube.com/c/3blue1brown) 是这些主题的另一个极好的资源。将这些数学基础知识应用于实际项目和练习中将确保你的知识保持扎实。
 
 ## 2\. 跟踪行业趋势
 

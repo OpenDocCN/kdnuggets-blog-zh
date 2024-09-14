@@ -1,8 +1,8 @@
 # 人力资源如何利用数据科学和分析来缩小性别差距
 
-> 原文：[https://www.kdnuggets.com/2020/01/hr-data-science-analytics-gender-gap.html](https://www.kdnuggets.com/2020/01/hr-data-science-analytics-gender-gap.html)
+> 原文：[`www.kdnuggets.com/2020/01/hr-data-science-analytics-gender-gap.html`](https://www.kdnuggets.com/2020/01/hr-data-science-analytics-gender-gap.html)
 
-[评论](#comments)
+评论
 
 性别差距指的是男女在劳动力市场中所能或愿意达到的差异。人们常用的方式之一是提到女性通常没有男性赚得多，即使她们担任类似的角色。
 
@@ -10,17 +10,17 @@
 
 * * *
 
-## 我们的前3大课程推荐
+## 我们的前 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
-![图](../Images/729780591257e504cb5d1f56820cabaf.png)
+![图](img/729780591257e504cb5d1f56820cabaf.png)
 
 ### 1\. 人工智能可以消除一些偏见来源
 
@@ -28,7 +28,7 @@
 
 换句话说，该工具可能会查看某人成功的特征，然后导致人力资源专业人士不断选择符合这些参数的专业人士。例如，如果恰巧在角色中表现出色的大多数人是白人男性，就会出现问题。这是因为他们确实比其他人更优秀，还是因为系统从未给少数族裔机会？
 
-AI不会是完美的解决方案。它也可能表现出偏见，主要是因为人类编程是AI工作的核心，而人们并非完全没有判断。然而，通过实验和致力于改进AI算法的努力，我们或许有一天能消除工作场所和招聘过程中的许多潜在偏见。
+AI 不会是完美的解决方案。它也可能表现出偏见，主要是因为人类编程是 AI 工作的核心，而人们并非完全没有判断。然而，通过实验和致力于改进 AI 算法的努力，我们或许有一天能消除工作场所和招聘过程中的许多潜在偏见。
 
 ### 2\. 数据分析可以揭示现有的性别差距
 
@@ -42,9 +42,9 @@ AI不会是完美的解决方案。它也可能表现出偏见，主要是因为
 
 ### 3\. 挖掘数据揭示相关的社会问题
 
-正如引言中提到的，人们经常通过工资差异来讨论性别差距。例如，统计数据显示了企业合规官的收入情况。数据显示，女性合规专业人士的收入[比男性少76%](https://www.barkergilmore.com/blog/the-compliance-officers-guide-to-2019-compensation-trends)。
+正如引言中提到的，人们经常通过工资差异来讨论性别差距。例如，统计数据显示了企业合规官的收入情况。数据显示，女性合规专业人士的收入[比男性少 76%](https://www.barkergilmore.com/blog/the-compliance-officers-guide-to-2019-compensation-trends)。
 
-在另一个案例中，研究人员建立了一个大数据工具，以检查加拿大新闻媒体引用的来源的性别比例。它几乎实时跟踪每一个实例。不幸的是，考虑到结果显示[女性的提及频率从未超过26%](https://troymedia.com/viewpoint/big-data-analytics-gender-gap/)，这表明还有很大的进步空间。
+在另一个案例中，研究人员建立了一个大数据工具，以检查加拿大新闻媒体引用的来源的性别比例。它几乎实时跟踪每一个实例。不幸的是，考虑到结果显示[女性的提及频率从未超过 26%](https://troymedia.com/viewpoint/big-data-analytics-gender-gap/)，这表明还有很大的进步空间。
 
 即使人力资源专业人员很幸运地在那些努力提供性别无关的平等薪酬并定期呈现女性观点的组织中工作，上述基于数据的示例也可以帮助他们了解哪些错误需要避免，通过展示社会上发生的事情来提供帮助。
 
@@ -54,9 +54,9 @@ AI不会是完美的解决方案。它也可能表现出偏见，主要是因为
 
 企业也可以通过招聘来自其他文化或国家的人员、残疾人士或各年龄段的专业人士来改变自己。人力资源专业人员仍应看到多样性与性别平衡之间的联系。
 
-当金融品牌美国银行开始[使用数据驱动的招聘实践](https://www.gallup.com/workplace/247862/analytics-based-hiring-improved-bank-performance-diversity.aspx)时，结果对多样性产生了积极的影响。但成为更加多样化并不是公司主要的目标。相反，公司希望盖洛普分析能够帮助找到更多的顶级经理，或称之为“A级人才”。
+当金融品牌美国银行开始[使用数据驱动的招聘实践](https://www.gallup.com/workplace/247862/analytics-based-hiring-improved-bank-performance-diversity.aspx)时，结果对多样性产生了积极的影响。但成为更加多样化并不是公司主要的目标。相反，公司希望盖洛普分析能够帮助找到更多的顶级经理，或称之为“A 级人才”。
 
-由于采用了在整个过程中及早应用预测分析的调整流程，美国银行在五周内找到了比使用旧方法一年中更多的理想候选人。关于多样性，新雇员的多样性总体增长了17%，多样性高级管理人员增长了74%。
+由于采用了在整个过程中及早应用预测分析的调整流程，美国银行在五周内找到了比使用旧方法一年中更多的理想候选人。关于多样性，新雇员的多样性总体增长了 17%，多样性高级管理人员增长了 74%。
 
 ### 只是触及了可能性的一部分
 
@@ -64,29 +64,29 @@ AI不会是完美的解决方案。它也可能表现出偏见，主要是因为
 
 **进一步阅读：**
 
-+   [人力资源经理如何利用数据科学管理公司的人才](/2017/06/hr-managers-data-science-manage-talent.html)
++   人力资源经理如何利用数据科学管理公司的人才
 
-+   [利用机器学习预测和解释员工流失](/2017/10/machine-learning-predict-employee-attrition.html)
++   利用机器学习预测和解释员工流失
 
-+   [预测性劳动力分析初学者指南](/2015/10/beginners-guide-predictive-workforce-analytics.html)
++   预测性劳动力分析初学者指南
 
-+   [预测招聘算法会取代还是补充你的HR决策？](/2016/05/predictive-hiring-algorithms-replace-augment-your-hr-decisions.html)
++   预测招聘算法会取代还是补充你的 HR 决策？
 
-**个人简介：[凯拉·马修斯](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《The Data Center Journal》和VentureBeat等出版物上讨论技术和大数据，并且已经撰写了五年以上的文章。要阅读更多凯拉的文章，[**请订阅她的博客《生产力字节》**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
+**个人简介：[凯拉·马修斯](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《The Data Center Journal》和 VentureBeat 等出版物上讨论技术和大数据，并且已经撰写了五年以上的文章。要阅读更多凯拉的文章，[**请订阅她的博客《生产力字节》**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
 
 **相关：**
 
-+   [如何利用数据分析测量客流量](/2019/10/measure-foot-traffic-data-analytics.html)
++   如何利用数据分析测量客流量
 
-+   [数据分析如何协助防止欺诈](/2019/11/data-analytics-assist-fraud-detection.html)
++   数据分析如何协助防止欺诈
 
-+   [6个行业在逐步接受预测分析和预测](/2019/05/6-industries-warming-up-predictive-analytics-forecasting.html)
++   6 个行业在逐步接受预测分析和预测
 
 ### 更多相关话题
 
-+   [AI教育差距及如何弥补](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
++   [AI 教育差距及如何弥补](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
 
-+   [我们离AGI还有多近？](https://www.kdnuggets.com/how-close-are-we-to-agi)
++   [我们离 AGI 还有多近？](https://www.kdnuggets.com/how-close-are-we-to-agi)
 
 +   [深度学习与人类认知能力之间的差距](https://www.kdnuggets.com/2022/10/gap-deep-learning-human-cognitive-abilities.html)
 

@@ -1,34 +1,34 @@
-# 使用Snowflake和Dask构建机器学习管道
+# 使用 Snowflake 和 Dask 构建机器学习管道
 
-> 原文：[https://www.kdnuggets.com/2021/07/building-machine-learning-pipelines-snowflake-dask.html](https://www.kdnuggets.com/2021/07/building-machine-learning-pipelines-snowflake-dask.html)
+> 原文：[`www.kdnuggets.com/2021/07/building-machine-learning-pipelines-snowflake-dask.html`](https://www.kdnuggets.com/2021/07/building-machine-learning-pipelines-snowflake-dask.html)
 
-[评论](#comments)
+评论
 
 **作者：[Daniel Foley](https://www.linkedin.com/in/daniel-foley-1ab904a2/)，数据科学家**
 
-![Image](../Images/9a765e838d415cad554c4eb10c45ec3e.png)
+![Image](img/9a765e838d415cad554c4eb10c45ec3e.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 ## 介绍
 
-最近，我一直在尝试找到更好的方法来改善作为数据科学家的工作流程。我发现自己在工作中花了相当多的时间进行建模和构建ETL。这意味着我越来越需要依赖工具来可靠且高效地处理大型数据集。我很快意识到，使用pandas来操作这些数据集并不总是一个好方法，这促使我寻找其他的替代方案。
+最近，我一直在尝试找到更好的方法来改善作为数据科学家的工作流程。我发现自己在工作中花了相当多的时间进行建模和构建 ETL。这意味着我越来越需要依赖工具来可靠且高效地处理大型数据集。我很快意识到，使用 pandas 来操作这些数据集并不总是一个好方法，这促使我寻找其他的替代方案。
 
-在这篇文章中，我想分享一些我最近探索的工具，并展示我如何使用它们以及它们如何帮助提高工作效率。我特别要谈的是Snowflake和Dask。这两者是非常不同的工具，但它们在机器学习生命周期中相互补充。我的希望是，在阅读这篇文章后，你将对Snowflake和Dask有一个良好的理解，知道如何有效使用它们，并能够快速上手自己的用例。
+在这篇文章中，我想分享一些我最近探索的工具，并展示我如何使用它们以及它们如何帮助提高工作效率。我特别要谈的是 Snowflake 和 Dask。这两者是非常不同的工具，但它们在机器学习生命周期中相互补充。我的希望是，在阅读这篇文章后，你将对 Snowflake 和 Dask 有一个良好的理解，知道如何有效使用它们，并能够快速上手自己的用例。
 
-更具体地说，我想展示如何使用Snowflake和Python构建ETL管道，为机器学习任务生成训练数据。接着，我会介绍Dask和[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=daniel-foley)，并展示如何利用云中的并行处理来真正加速机器学习训练过程，从而提升你作为数据科学家的生产力。
+更具体地说，我想展示如何使用 Snowflake 和 Python 构建 ETL 管道，为机器学习任务生成训练数据。接着，我会介绍 Dask 和[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=daniel-foley)，并展示如何利用云中的并行处理来真正加速机器学习训练过程，从而提升你作为数据科学家的生产力。
 
-## 在Snowflake和Python中构建ETL
+## 在 Snowflake 和 Python 中构建 ETL
 
 在开始编码之前，我最好简要解释一下 Snowflake 是什么。这是我最近在团队决定开始使用它时问的一个问题。从高层次来看，它是一个云中的数据仓库。在玩了一段时间后，我意识到它的强大功能。我认为对我来说，最有用的功能之一是你可以使用的虚拟仓库。虚拟仓库使你可以访问相同的数据，但与其他虚拟仓库完全独立，因此计算资源不会在团队之间共享。这被证明非常有用，因为它消除了由于其他用户在一天中执行查询而引起的性能问题的潜在可能。这减少了因查询运行而产生的挫败感和等待时间。
 
@@ -231,29 +231,29 @@ field_optionally_enclosed_by=’”’);
 
 简要讨论一下我们 EtlTraining 类的主要组件。我们的类接受一个输入，即截止周。这是由于数据在数据集中被定义的方式，但通常，这将是一个与我们选择的生成训练数据的截止日期相对应的日期格式。
 
-我们初始化了一个查询列表，以便可以轻松地循环遍历这些查询并执行它们。我们还创建了一个包含我们参数的字典，并将其传递给我们的Snowflake连接。在这里，我们使用了在Saturn Cloud中设置的环境变量。[这里](https://saturncloud.io/docs/using-saturn-cloud/credentials/)是关于如何做到这一点的指南。连接Snowflake并不太困难，我们只需要使用Snowflake连接器并传入我们的凭据字典即可。我们在Snowflake连接方法中实现了这一点，并将此连接作为属性返回。
+我们初始化了一个查询列表，以便可以轻松地循环遍历这些查询并执行它们。我们还创建了一个包含我们参数的字典，并将其传递给我们的 Snowflake 连接。在这里，我们使用了在 Saturn Cloud 中设置的环境变量。[这里](https://saturncloud.io/docs/using-saturn-cloud/credentials/)是关于如何做到这一点的指南。连接 Snowflake 并不太困难，我们只需要使用 Snowflake 连接器并传入我们的凭据字典即可。我们在 Snowflake 连接方法中实现了这一点，并将此连接作为属性返回。
 
-为了使这些查询更容易运行，我将每个查询保存为`python`字符串变量在ml_query_pipeline.py文件中。execute_etl方法正如其名，我们循环遍历每个查询，对其进行格式化，执行它，并最后关闭Snowflake连接。
+为了使这些查询更容易运行，我将每个查询保存为`python`字符串变量在 ml_query_pipeline.py 文件中。execute_etl 方法正如其名，我们循环遍历每个查询，对其进行格式化，执行它，并最后关闭 Snowflake 连接。
 
-要运行这个ETL，我们可以简单地在终端中输入以下命令。（其中ml_pipeline是上面脚本的名称。）
+要运行这个 ETL，我们可以简单地在终端中输入以下命令。（其中 ml_pipeline 是上面脚本的名称。）
 
 ```py
 python -m ml_pipeline -w 102 -j ‘train’
 ```
 
-简单来说，你可能希望定期运行像这样的ETL。例如，如果你想进行每日预测，那么你将需要每天生成一个这样的数据集以传递给你的模型，从而识别哪些客户可能会流失。我不会在这里详细讲解，但在我的工作中，我们使用Airflow来编排我们的ETL，因此如果你感兴趣，我建议你去了解一下。实际上，我最近买了一本书‘[Data Pipelines with Apache Airflow](https://www.amazon.co.uk/gp/product/1617296902/ref=as_li_tl?ie=UTF8&camp=1634&creative=6738&creativeASIN=1617296902&linkCode=as2&tag=mediumdanny05-21&linkId=1ad3a1bf79e65482860570c3a484a73c)’，我认为它非常棒，提供了一些很好的示例和关于如何使用Airflow的建议。
+简单来说，你可能希望定期运行像这样的 ETL。例如，如果你想进行每日预测，那么你将需要每天生成一个这样的数据集以传递给你的模型，从而识别哪些客户可能会流失。我不会在这里详细讲解，但在我的工作中，我们使用 Airflow 来编排我们的 ETL，因此如果你感兴趣，我建议你去了解一下。实际上，我最近买了一本书‘[Data Pipelines with Apache Airflow](https://www.amazon.co.uk/gp/product/1617296902/ref=as_li_tl?ie=UTF8&camp=1634&creative=6738&creativeASIN=1617296902&linkCode=as2&tag=mediumdanny05-21&linkId=1ad3a1bf79e65482860570c3a484a73c)’，我认为它非常棒，提供了一些很好的示例和关于如何使用 Airflow 的建议。
 
-## Dask和建模
+## Dask 和建模
 
 现在我们已经构建了数据管道，我们可以开始考虑建模。我这篇文章的另一个主要目标是突出使用**Dask**作为机器学习开发过程的一部分的优势，并向大家展示它的易用性。
 
-在这个项目的部分，我还使用了[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=daniel-foley)，这是我最近遇到的一个非常好的工具，它允许我们在云中通过计算机集群利用Dask的力量。对我来说，使用Saturn的主要优势是非常容易共享你的工作、在需要时简单地扩展计算资源，并且它有一个免费的选项。模型开发通常是Dask的一个很好的应用场景，因为我们通常想要训练一组不同的模型，看看哪个效果最好。我们能越快做到这一点越好，因为我们可以有更多时间专注于模型开发的其他重要方面。类似于Snowflake，你只需要[在这里](https://www.saturncloud.io/s/?utm_source=daniel-foley)注册，你可以非常快速地启动一个Jupyter lab实例并开始自己动手实验。
+在这个项目的部分，我还使用了[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=daniel-foley)，这是我最近遇到的一个非常好的工具，它允许我们在云中通过计算机集群利用 Dask 的力量。对我来说，使用 Saturn 的主要优势是非常容易共享你的工作、在需要时简单地扩展计算资源，并且它有一个免费的选项。模型开发通常是 Dask 的一个很好的应用场景，因为我们通常想要训练一组不同的模型，看看哪个效果最好。我们能越快做到这一点越好，因为我们可以有更多时间专注于模型开发的其他重要方面。类似于 Snowflake，你只需要[在这里](https://www.saturncloud.io/s/?utm_source=daniel-foley)注册，你可以非常快速地启动一个 Jupyter lab 实例并开始自己动手实验。
 
 现在，我意识到我在这里提到 Dask 几次，但从未真正解释过它是什么。所以让我花点时间给你一个关于 Dask 的高层次概述，以及为什么我认为它很棒。简单来说，Dask 是一个 Python 库，利用并行计算来处理和执行非常大的数据集上的操作。而且，最棒的是，如果你已经熟悉 Python，那么 Dask 应该非常直接，因为其语法非常相似。
 
 下图突出显示了 Dask 的主要组件。
 
-![](../Images/1a682f60d9ac33bfbfc70cbb981a4bf0.png)
+![](img/1a682f60d9ac33bfbfc70cbb981a4bf0.png)
 
 来源: [Dask 文档](https://docs.dask.org/en/latest/)
 
@@ -293,7 +293,7 @@ fit_pipelines = dask.compute(*pipelines_)
 
 我之前提到过，你可能会想要定期运行这样的管道，使用类似 airflow 的工具。恰好的是，如果你不想经历设置 airflow 的初始麻烦，Saturn Cloud 提供了一个简单的替代方案，即 Jobs。Jobs 允许我们打包代码，并按需或在固定间隔内运行。你只需进入现有项目并点击创建作业。一旦我们这样做，它应该会像以下这样：
 
-![](../Images/8f159fecc5ad6c10629cf007cf4c029d.png)
+![](img/8f159fecc5ad6c10629cf007cf4c029d.png)
 
 来源: [Saturn](https://saturncloud.io/docs/using-saturn-cloud/jobs_and_deployments/)
 
@@ -335,11 +335,11 @@ python -m ml_pipeline -w 102 -j 'train'
 
 **相关内容：**
 
-+   [BigQuery 与 Snowflake：数据仓库巨头的比较](/2021/06/bigquery-snowflake-comparison-data-warehouse-giants.html)
++   BigQuery 与 Snowflake：数据仓库巨头的比较
 
-+   [Pandas 不够用？这里有几个处理更大更快数据的 Python 备选方案](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
++   Pandas 不够用？这里有几个处理更大更快数据的 Python 备选方案
 
-+   [你还在用 Pandas 处理 2021 年的大数据吗？这里有两个更好的选择](/2021/03/pandas-big-data-better-options.html)
++   你还在用 Pandas 处理 2021 年的大数据吗？这里有两个更好的选择
 
 ### 更多相关话题
 

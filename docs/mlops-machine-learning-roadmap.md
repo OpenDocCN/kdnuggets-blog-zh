@@ -1,12 +1,12 @@
 # MLOps 和机器学习路线图
 
-> 原文：[https://www.kdnuggets.com/2021/08/mlops-machine-learning-roadmap.html](https://www.kdnuggets.com/2021/08/mlops-machine-learning-roadmap.html)
+> 原文：[`www.kdnuggets.com/2021/08/mlops-machine-learning-roadmap.html`](https://www.kdnuggets.com/2021/08/mlops-machine-learning-roadmap.html)
 
-[评论](#comments)
+评论
 
 **由 [Ben Rogojan](https://www.theseattledataguy.com/data-science-consulting-blog)，数据科学和数据工程解决方案架构师**
 
-[![](../Images/e585c4bfb5eac82218a2d8368bbd8925.png)](https://miro.medium.com/max/1400/1*J3CbvCM8BMxiUveHUTkIug.png)
+![](https://miro.medium.com/max/1400/1*J3CbvCM8BMxiUveHUTkIug.png)
 
 图片由作者创建 — [PDF 来源](https://drive.google.com/file/d/1Fca-ohcIUsSYPTUHdzfV3XXesUlYdq8_/view?usp=sharing)
 
@@ -46,7 +46,7 @@
 
 可能的机器学习管道如下图所示。
 
-[![](../Images/2c6cb2dc77bcd539b4b849c26357b4b1.png)](https://miro.medium.com/max/1400/0*e7yFLBIMZSk0EaRX.png)
+![](https://miro.medium.com/max/1400/0*e7yFLBIMZSk0EaRX.png)
 
 图片由作者创建
 
@@ -106,17 +106,17 @@ Kubeflow 是一个机器学习平台，负责管理 Kubernetes 上 ML 工作流�
 
 该平台最适合那些希望构建和实验数据管道的数据科学家。Kubeflow 也很适合将机器学习系统部署到不同环境中，以进行测试、开发和生产级服务。
 
-Kubeflow由Google发起，作为一个运行TensorFlow的开源平台。它最初是通过Kubernetes运行TensorFlow作业的方式，但现在已经扩展为一个多云、多架构的框架，能够运行整个ML管道。使用Kubeflow，数据科学家不需要学习新的平台或概念来部署他们的应用程序或处理网络证书等问题。他们可以像在TensorBoard上一样简单地部署他们的应用程序。
+Kubeflow 由 Google 发起，作为一个运行 TensorFlow 的开源平台。它最初是通过 Kubernetes 运行 TensorFlow 作业的方式，但现在已经扩展为一个多云、多架构的框架，能够运行整个 ML 管道。使用 Kubeflow，数据科学家不需要学习新的平台或概念来部署他们的应用程序或处理网络证书等问题。他们可以像在 TensorBoard 上一样简单地部署他们的应用程序。
 
-### 了解更多关于Kubeflow的信息
+### 了解更多关于 Kubeflow 的信息
 
-为了开始学习Kubeflow，让我们从Google的课程开始，该课程专注于部署机器学习模型。现在这个课程只有一个部分专门讲解Kubeflow，但希望它足够。
+为了开始学习 Kubeflow，让我们从 Google 的课程开始，该课程专注于部署机器学习模型。现在这个课程只有一个部分专门讲解 Kubeflow，但希望它足够。
 
-[**在GCP上的智能分析、机器学习和AI**](https://www.coursera.org/learn/smart-analytics-machine-learning-ai-gcp?ranMID=40328&ranEAID=GjbDpcHcs4w&ranSiteID=GjbDpcHcs4w-O25buz64mmOiy8l5uAltCw&siteID=GjbDpcHcs4w-O25buz64mmOiy8l5uAltCw&utm_content=10&utm_medium=partners&utm_source=linkshare&utm_campaign=GjbDpcHcs4w)
+[**在 GCP 上的智能分析、机器学习和 AI**](https://www.coursera.org/learn/smart-analytics-machine-learning-ai-gcp?ranMID=40328&ranEAID=GjbDpcHcs4w&ranSiteID=GjbDpcHcs4w-O25buz64mmOiy8l5uAltCw&siteID=GjbDpcHcs4w-O25buz64mmOiy8l5uAltCw&utm_content=10&utm_medium=partners&utm_source=linkshare&utm_campaign=GjbDpcHcs4w)
 
-如果Google的课程不适合，那么[Amina A](https://medium.com/u/de46c1e173d3?source=post_page-----95efc59927a2--------------------------------)关于如何开始使用Kubeflow的文章应该有助于补充。文章中讲述了几个值得深入研究的其他资源。因此，我期待着解析这些内容。
+如果 Google 的课程不适合，那么[Amina A](https://medium.com/u/de46c1e173d3?source=post_page-----95efc59927a2--------------------------------)关于如何开始使用 Kubeflow 的文章应该有助于补充。文章中讲述了几个值得深入研究的其他资源。因此，我期待着解析这些内容。
 
-[**（更新！）如何开始使用Kubeflow**](http://)
+[**（更新！）如何开始使用 Kubeflow**](http://)
 
 <h3>想象一下在任何地方、任何设备上运行机器学习训练和推理堆栈，几乎无需配置……</h3>
 
@@ -124,17 +124,17 @@ Kubeflow由Google发起，作为一个运行TensorFlow的开源平台。它最�
 
 ## 5.Azure ML
 
-Azure Machine Learning (Azure ML) 是**一个用于创建和管理机器学习解决方案的云服务**。它结合了SDK和提供了一个Azure Machine Learning的网页门户，支持低代码和无代码的模型训练、部署和资产管理选项。
+Azure Machine Learning (Azure ML) 是**一个用于创建和管理机器学习解决方案的云服务**。它结合了 SDK 和提供了一个 Azure Machine Learning 的网页门户，支持低代码和无代码的模型训练、部署和资产管理选项。
 
-现在，够了营销。我对Azure ML提供的一些低代码解决方案方法很感兴趣。
+现在，够了营销。我对 Azure ML 提供的一些低代码解决方案方法很感兴趣。
 
-我学到的第一个工具是SSIS，它有类似的感觉。这是一个拖放自动化解决方案。显然，重点更多在于ETL和数据管道。那么我应该从哪里开始呢？
+我学到的第一个工具是 SSIS，它有类似的感觉。这是一个拖放自动化解决方案。显然，重点更多在于 ETL 和数据管道。那么我应该从哪里开始呢？
 
 首先，我总是尝试寻找由实际公司支持或开发的课程。
 
-微软有一个课程，旨在帮助准备名为AI-900: Microsoft Azure AI Fundamentals的认证。
+微软有一个课程，旨在帮助准备名为 AI-900: Microsoft Azure AI Fundamentals 的认证。
 
-本课程的目的是教授在AI基础考试领域中评估的核心概念和技能。它们似乎涵盖了Azure提供的自动化机器学习，以及回归、分类和聚类。
+本课程的目的是教授在 AI 基础考试领域中评估的核心概念和技能。它们似乎涵盖了 Azure 提供的自动化机器学习，以及回归、分类和聚类。
 
 最后，看看他们如何部署这些模型将会很有趣。
 
@@ -184,7 +184,7 @@ DataRobot 还整理了一份很有视觉吸引力的 PDF，似乎涵盖了如何
 
 +   [**数据科学面试学习指南**](https://betterprogramming.pub/the-data-science-interview-study-guide-c3824cb76c2e)
 
-    *121个资源帮助你找到数据科学的梦想工作*
+    *121 个资源帮助你找到数据科学的梦想工作*
 
 +   [**我如何从分析师转变为数据工程师**](https://www.youtube.com/watch?v=lGzh-QendJc)
 
@@ -198,21 +198,21 @@ DataRobot 还整理了一份很有视觉吸引力的 PDF，似乎涵盖了如何
 
 ### 关于我
 
-我在职业生涯中专注于各种形式的数据。我致力于开发算法以检测欺诈、减少患者再入院率以及重新设计保险公司政策，以帮助降低整体医疗成本。我还帮助开发了营销和IT运营的分析，以优化员工和预算等有限资源。我在数据科学和工程问题上提供私人咨询，既可以单独工作，也可以与名为 Acheron Analytics 的公司合作。我有处理技术问题的实践经验，同时也帮助领导团队制定战略，以最大化他们的数据。
+我在职业生涯中专注于各种形式的数据。我致力于开发算法以检测欺诈、减少患者再入院率以及重新设计保险公司政策，以帮助降低整体医疗成本。我还帮助开发了营销和 IT 运营的分析，以优化员工和预算等有限资源。我在数据科学和工程问题上提供私人咨询，既可以单独工作，也可以与名为 Acheron Analytics 的公司合作。我有处理技术问题的实践经验，同时也帮助领导团队制定战略，以最大化他们的数据。
 
 **[Seattle Data Guy 的 YouTube 频道](https://www.youtube.com/c/SeattleDataGuy/videos)**
 
 ### 在社交网络上与我联系
 
-✅ YouTube: [https://www.youtube.com/channel/SeattleDataGuy](https://www.youtube.com/channel/UCmLGJ3VYBcfRaWbP6JLJcpA)
+✅ YouTube: [`www.youtube.com/channel/SeattleDataGuy`](https://www.youtube.com/channel/UCmLGJ3VYBcfRaWbP6JLJcpA)
 
-✅ 网站: [https://www.theseattledataguy.com/](https://www.theseattledataguy.com/)
+✅ 网站: [`www.theseattledataguy.com/`](https://www.theseattledataguy.com/)
 
-✅ LinkedIn: [https://www.linkedin.com/company/18129251](https://www.linkedin.com/company/18129251)
+✅ LinkedIn: [`www.linkedin.com/company/18129251`](https://www.linkedin.com/company/18129251)
 
-✅ 个人 LinkedIn: [https://www.linkedin.com/in/benjaminrogojan/](https://www.linkedin.com/in/benjaminrogojan/)
+✅ 个人 LinkedIn: [`www.linkedin.com/in/benjaminrogojan/`](https://www.linkedin.com/in/benjaminrogojan/)
 
-✅ FaceBook: [https://www.facebook.com/SeattleDataGuy](https://www.facebook.com/SeattleDataGuy)
+✅ FaceBook: [`www.facebook.com/SeattleDataGuy`](https://www.facebook.com/SeattleDataGuy)
 
 **简介: [Ben Rogojan](https://www.theseattledataguy.com/data-science-consulting-blog)** 是一位数据科学和数据工程解决方案架构师，专注于数据架构和统计学。他专注于开发端到端的数据解决方案，帮助将数据从原始格式转化为数据产品和分析。他曾为医疗保健、金融、SaaS 和技术领域的客户提供项目服务，并在大型科技公司工作过。他在网络上保持强大的存在，为数据工程师和那些对进入数据工程职业路径感兴趣的人创建内容，并在线上被称为“Seattle Data Guy”。
 
@@ -220,21 +220,21 @@ DataRobot 还整理了一份很有视觉吸引力的 PDF，似乎涵盖了如何
 
 **相关内容：**
 
-+   [何时重新训练机器学习模型？运行这 5 个检查来决定计划](//2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
++   何时重新训练机器学习模型？运行这 5 个检查来决定计划
 
-+   [将 ModelOps 纳入您的 AI 战略](/2021/08/modelops-ai-strategy.html)
++   将 ModelOps 纳入您的 AI 战略
 
-+   [MLOps 最佳实践](/2021/07/mlops-best-practices.html)
++   MLOps 最佳实践
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

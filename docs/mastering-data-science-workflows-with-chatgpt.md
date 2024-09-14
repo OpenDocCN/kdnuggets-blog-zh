@@ -1,44 +1,44 @@
-# 使用ChatGPT掌握数据科学工作流程
+# 使用 ChatGPT 掌握数据科学工作流程
 
-> 原文：[https://www.kdnuggets.com/mastering-data-science-workflows-with-chatgpt](https://www.kdnuggets.com/mastering-data-science-workflows-with-chatgpt)
+> 原文：[`www.kdnuggets.com/mastering-data-science-workflows-with-chatgpt`](https://www.kdnuggets.com/mastering-data-science-workflows-with-chatgpt)
 
-![使用ChatGPT掌握数据科学工作流程](../Images/e15d2d18ae0d01cba4645ed4526a4da7.png)
+![使用 ChatGPT 掌握数据科学工作流程](img/e15d2d18ae0d01cba4645ed4526a4da7.png)
 
 图片由编辑提供
 
-数据科学是一个不断发展的领域，数据的不断涌入使得它成为一个用创新解决方案解决复杂问题的引人注目的案例。最近引起关注的一个解决方案是ChatGPT。这款由OpenAI开发的强大语言模型展现了出色的自然语言理解和生成能力。
+数据科学是一个不断发展的领域，数据的不断涌入使得它成为一个用创新解决方案解决复杂问题的引人注目的案例。最近引起关注的一个解决方案是 ChatGPT。这款由 OpenAI 开发的强大语言模型展现了出色的自然语言理解和生成能力。
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-虽然ChatGPT主要用于对话和文本生成任务，但数据科学家可以在他们的工作流程中利用其潜力，以简化和增强他们的工作，使其过程更加高效和生产力。
+虽然 ChatGPT 主要用于对话和文本生成任务，但数据科学家可以在他们的工作流程中利用其潜力，以简化和增强他们的工作，使其过程更加高效和生产力。
 
-*本文突出了数据科学家可以学习的技能，以充分利用ChatGPT的能力。*
+*本文突出了数据科学家可以学习的技能，以充分利用 ChatGPT 的能力。*
 
-# ChatGPT在数据科学工作流程中的应用
+# ChatGPT 在数据科学工作流程中的应用
 
-ChatGPT可以作为一个多功能助手，生成代码、解释和见解。有效的ChatGPT提示对于数据科学工作流程和代码调试非常有帮助。此外，迭代和实验性提示技术可以从ChatGPT获得更准确和有见地的回答。
+ChatGPT 可以作为一个多功能助手，生成代码、解释和见解。有效的 ChatGPT 提示对于数据科学工作流程和代码调试非常有帮助。此外，迭代和实验性提示技术可以从 ChatGPT 获得更准确和有见地的回答。
 
-![使用ChatGPT掌握数据科学工作流程](../Images/bab8c54e0b012d3d36849d7f83b17d08.png)
+![使用 ChatGPT 掌握数据科学工作流程](img/bab8c54e0b012d3d36849d7f83b17d08.png)
 
 图片由作者提供
 
 ## 掌握提示技术
 
-一些有效提示ChatGPT的常见方法如下。
+一些有效提示 ChatGPT 的常见方法如下。
 
 +   **迭代提示**：涉及到制定基于之前回答的提示，从而促进对话的流畅性。
 
-+   **实验性提示**：类似于机器学习模型的迭代和实验开发，数据科学家也可以通过不同层次的指导来进行提示实验。这是新兴数据科学家必备的技能，主要因为ChatGPT倾向于假设任何缺失的信息，而不是主动询问。一个典型的例子是让ChatGPT读取一个文件并对数据进行处理，这可能导致它假设输入文件是CSV格式。根据你的使用案例，这可能是对的也可能是不对的。因此，实验逐步的指导往往是一个最佳实践。
++   **实验性提示**：类似于机器学习模型的迭代和实验开发，数据科学家也可以通过不同层次的指导来进行提示实验。这是新兴数据科学家必备的技能，主要因为 ChatGPT 倾向于假设任何缺失的信息，而不是主动询问。一个典型的例子是让 ChatGPT 读取一个文件并对数据进行处理，这可能导致它假设输入文件是 CSV 格式。根据你的使用案例，这可能是对的也可能是不对的。因此，实验逐步的指导往往是一个最佳实践。
 
 +   **零样本学习和少样本学习**：当模型没有看到任何示例但接收到响应指令时，这种直接提示被称为零样本学习，而少样本学习涉及在提示之前提供一些示例供模型学习。
 
@@ -48,7 +48,7 @@ ChatGPT可以作为一个多功能助手，生成代码、解释和见解。有�
 
 +   学习如何在提示中指定输入参数、所需步骤和数据科学工作流函数的返回数据结构。
 
-![使用 ChatGPT 掌握数据科学工作流](../Images/8580478b1abc3436835217b605d5d4d3.png)
+![使用 ChatGPT 掌握数据科学工作流](img/8580478b1abc3436835217b605d5d4d3.png)
 
 图片由作者提供
 
@@ -64,7 +64,7 @@ ChatGPT可以作为一个多功能助手，生成代码、解释和见解。有�
 
 数据科学代码有时可能变得复杂，对于技术不太熟悉的受众来说可能很难理解。ChatGPT 可以解释或简化复杂的代码，使其更易读、易懂**。** CoT 提示对代码解释和简化非常有帮助。
 
-![使用 ChatGPT 掌握数据科学工作流](../Images/4ae01560b9c1adeb4ae97b8a91bbe183.png)
+![使用 ChatGPT 掌握数据科学工作流](img/4ae01560b9c1adeb4ae97b8a91bbe183.png)
 
 图片由作者提供
 
@@ -98,7 +98,7 @@ SQL 是数据分析中的基本工具，ChatGPT 可以协助生成各种任务�
 
 ChatGPT 还可以被提示来协助数据转换和重塑任务，这在数据分析中非常常见。我们可以应用基于上下文的零样本提示技术来整合来自不同来源的数据。此外，少样本提示也可用于创建混淆矩阵或透视表，以根据需要重塑数据。
 
-![掌握数据科学工作流程与 ChatGPT](../Images/49409fa6c9d2b99cb52ffd6f08a03ad8.png)
+![掌握数据科学工作流程与 ChatGPT](img/49409fa6c9d2b99cb52ffd6f08a03ad8.png)
 
 图片由作者提供
 
@@ -112,7 +112,7 @@ ChatGPT 还可以被提示来协助数据转换和重塑任务，这在数据分
 
 作为数据从业者，我们可以编写基于上下文的提示来生成用于创建各种图表、图形和图表的代码。通过提示 ChatGPT，我们还可以进行图表格式化和标注，添加相关标签、图例和标题，以改善数据表示。
 
-![掌握数据科学工作流程与 ChatGPT](../Images/91077eb25b8ae8d99ac9f9a3dc4c3c07.png)
+![掌握数据科学工作流程与 ChatGPT](img/91077eb25b8ae8d99ac9f9a3dc4c3c07.png)
 
 图片由作者提供
 

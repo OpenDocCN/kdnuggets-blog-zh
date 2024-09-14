@@ -1,8 +1,8 @@
 # 特征选择的实际重要性
 
-> 原文：[https://www.kdnuggets.com/2017/06/practical-importance-feature-selection.html](https://www.kdnuggets.com/2017/06/practical-importance-feature-selection.html)
+> 原文：[`www.kdnuggets.com/2017/06/practical-importance-feature-selection.html`](https://www.kdnuggets.com/2017/06/practical-importance-feature-selection.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 例如，如果你想根据大量收集到的相关数据来分类动物，你会迅速发现各种潜在的数据属性或特征对分类相对无用。例如，鉴于大多数生物都有一个心脏，从学习角度来看，这个特征不会有帮助。另一方面，表示某个动物是否有蹄的属性可能是一个强有力的预测因子。
 
@@ -20,27 +20,27 @@
 > 
 > 多次正确的特征选择可以帮助你开发更简单、更快速的机器学习模型。请看下面的图片（IRIS 数据集的支持向量机分类）：左侧展示了错误的变量选择。线性核无法正确处理分类任务，径向基函数核也无法处理。在右侧，选择了花瓣宽度和花瓣长度作为特征，即使是线性核也表现得相当准确。正确的变量选择、好的算法选择和超参数调整是成功的关键。下图使用 Python 制作。
 
-![变量选择](../Images/895154c762b80423be8ae02bc8dbe313.png)
+![变量选择](img/895154c762b80423be8ae02bc8dbe313.png)
 
 在充足的处理能力使我们可能认为特征选择可能不再像以前那样相关的时代里，重要的是要记住，这仅仅是知情特征选择的诸多好处之一——减少训练时间。正如 Zimbres 上面所述，通过一个简单的具体例子，特征选择可以确实意味着有效且可泛化的模型与浪费时间之间的区别。
 
 **相关**：
 
-+   [必须知道：为什么在机器学习模型中减少预测变量可能更好？](/2017/04/must-know-fewer-predictors-machine-learning-models.html)
++   必须知道：为什么在机器学习模型中减少预测变量可能更好？
 
-+   [回归分析真的属于机器学习吗？](/2017/06/regression-analysis-really-machine-learning.html)
++   回归分析真的属于机器学习吗？
 
-+   [识别可能是更好预测变量的变量](/2017/02/schmarzo-variables-better-predictors.html)
++   识别可能是更好预测变量的变量
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 

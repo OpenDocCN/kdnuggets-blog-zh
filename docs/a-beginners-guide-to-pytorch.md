@@ -1,8 +1,8 @@
-# PyTorch初学者指南
+# PyTorch 初学者指南
 
-> 原文：[https://www.kdnuggets.com/a-beginners-guide-to-pytorch](https://www.kdnuggets.com/a-beginners-guide-to-pytorch)
+> 原文：[`www.kdnuggets.com/a-beginners-guide-to-pytorch`](https://www.kdnuggets.com/a-beginners-guide-to-pytorch)
 
-![PyTorch初学者指南](../Images/de78123b8b7e42a4ca8e1e0143a58f88.png)
+![PyTorch 初学者指南](img/de78123b8b7e42a4ca8e1e0143a58f88.png)
 
 图片来源：编辑 | Midjourney & Canva
 
@@ -12,29 +12,29 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-最常用的深度学习包之一是[PyTorch](https://pytorch.org/)。它是由Meta AI于2016年创建的开源包，并且被许多人使用。
+最常用的深度学习包之一是[PyTorch](https://pytorch.org/)。它是由 Meta AI 于 2016 年创建的开源包，并且被许多人使用。
 
-PyTorch有很多优点，包括：
+PyTorch 有很多优点，包括：
 
 +   灵活的模型架构
 
-+   对CUDA的原生支持（可以使用GPU）
++   对 CUDA 的原生支持（可以使用 GPU）
 
-+   基于Python
++   基于 Python
 
 +   提供低级别的控制，这对于研究和许多用例非常有用
 
 +   开发者和社区的积极开发
 
-让我们通过这篇文章探索PyTorch，帮助你入门。
+让我们通过这篇文章探索 PyTorch，帮助你入门。
 
 ## 准备工作
 
@@ -44,11 +44,11 @@ PyTorch有很多优点，包括：
 pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 ```
 
-PyTorch准备好了，让我们进入核心部分。
+PyTorch 准备好了，让我们进入核心部分。
 
-## PyTorch张量
+## PyTorch 张量
 
-张量是PyTorch中的基本构件。它类似于NumPy数组，但可以使用GPU。我们可以使用以下代码尝试创建一个PyTorch张量：
+张量是 PyTorch 中的基本构件。它类似于 NumPy 数组，但可以使用 GPU。我们可以使用以下代码尝试创建一个 PyTorch 张量：
 
 ```py
 a = torch.tensor([2, 4, 5])
@@ -60,7 +60,7 @@ Output>>
 tensor([2, 4, 5])
 ```
 
-像NumPy数组张量一样，它允许矩阵运算。
+像 NumPy 数组张量一样，它允许矩阵运算。
 
 ```py
 e = torch.tensor([[1, 2, 3],
@@ -107,9 +107,9 @@ Data type: torch.float32
 Device: cpu
 ```
 
-## PyTorch的神经网络训练
+## PyTorch 的神经网络训练
 
-通过使用nn.Module类定义神经网络，我们可以开发一个简单的模型。让我们试试下面的代码。
+通过使用 nn.Module 类定义神经网络，我们可以开发一个简单的模型。让我们试试下面的代码。
 
 ```py
 import torch
@@ -143,7 +143,7 @@ SimpleNet(
 
 上面的代码定义了一个`SimpleNet`类，继承自`nn.Module`，用于设置层。我们使用`nn.Linear`作为层，`relu`作为激活函数。
 
-我们可以添加更多层或使用不同的层，如Conv2D或CNN。但我们不会使用这些。
+我们可以添加更多层或使用不同的层，如 Conv2D 或 CNN。但我们不会使用这些。
 
 接下来，我们将用样本张量数据训练我们开发的`SimpleNet`。
 
@@ -176,7 +176,7 @@ for epoch in range(numepochs):
         print(f'Epoch [{epoch+1}/{num_epochs}], Loss: {round(loss.item(),4})')
 ```
 
-在上述训练过程中，我们使用随机张量数据，并初始化一个称为`CrossEntropyLoss`的损失函数。同时，我们初始化SGD优化器来管理模型参数以最小化损失。
+在上述训练过程中，我们使用随机张量数据，并初始化一个称为`CrossEntropyLoss`的损失函数。同时，我们初始化 SGD 优化器来管理模型参数以最小化损失。
 
 训练过程根据周期次数多次运行，然后进行优化过程。这是通常的深度学习流程。
 

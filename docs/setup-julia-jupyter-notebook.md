@@ -1,8 +1,8 @@
 # 如何在 Jupyter Notebook 上设置 Julia
 
-> 原文：[https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
+> 原文：[`www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html`](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/1cd07fe2eb42abf602bb8f5e49f33aac.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/1cd07fe2eb42abf602bb8f5e49f33aac.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@ Julia 是一种高级通用语言，旨在进行高性能计算。由于自然�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -43,13 +43,13 @@ using Pkg
 Pkg.add("IJulia")
 ```
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/069fac9823e750c457c193a2b5d647cd.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/069fac9823e750c457c193a2b5d647cd.png)
 
 图片由作者提供 | Julia REPL
 
 你也可以通过输入“]”进入包菜单来安装 Julia 软件包。之后输入 `add Ijulia` 来安装该软件包。
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/7dc125cce36468d1d856a3e2b42238be.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/7dc125cce36468d1d856a3e2b42238be.png)
 
 图片由作者提供 | 安装 Ijulia
 
@@ -57,7 +57,7 @@ Pkg.add("IJulia")
 
 我们现在准备使用 Jupyter Notebook。启动 Jupyter notebook，点击**新建**按钮并选择**Julia**环境。
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/1c665ae6af8cd43335a026cab8447848.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/1c665ae6af8cd43335a026cab8447848.png)
 
 作者提供的图像 | Jupyter Notebook
 
@@ -65,7 +65,7 @@ Pkg.add("IJulia")
 
 现在我们有 R、Python 和 Julia 环境。你可以根据需求在它们之间切换。
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/069fac9823e750c457c193a2b5d647cd.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/069fac9823e750c457c193a2b5d647cd.png)
 
 作者提供的图像 | VScode Jupyter Notebook
 
@@ -73,7 +73,7 @@ Pkg.add("IJulia")
 
 安装 Julia 后，我们来写一个简单的代码来打印文本。与 Python 一样，它顺利执行了命令。
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/d002ed08eea799feeccb6acdcb0de62a.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/d002ed08eea799feeccb6acdcb0de62a.png)
 
 作者提供的图像 | Jupyter Notebook 上的代码执行
 
@@ -134,7 +134,7 @@ covid_df = sort(filter(row -> row.totalTestResultsIncrease > 0, covid_df))
 last(covid_df,5)
 ```
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/277e1a1962e2286b1e7de6be0880e918.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/277e1a1962e2286b1e7de6be0880e918.png)
 
 ## 数据可视化与 Plot 和 RollingFunctions
 
@@ -164,7 +164,7 @@ Plots.plot!(covid_df.date,
     lw=3)
 ```
 
-![如何在 Jupyter Notebook 上设置 Julia](../Images/9f004660c55e8d9de8ee7e24173db0f3.png)
+![如何在 Jupyter Notebook 上设置 Julia](img/9f004660c55e8d9de8ee7e24173db0f3.png)
 
 这太棒了。
 

@@ -1,14 +1,14 @@
 # 数据科学中的降维是什么？
 
-> 原文：[https://www.kdnuggets.com/2019/01/dimension-reduction-data-science.html](https://www.kdnuggets.com/2019/01/dimension-reduction-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/01/dimension-reduction-data-science.html`](https://www.kdnuggets.com/2019/01/dimension-reduction-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 现在我们可以访问大量数据。大量数据可能会导致我们将所有可用数据输入到预测模型中以预测目标变量。本文旨在解释引入大量特征时常见的问题，并提供我们可以利用的解决方案来解决这些问题。
 
 *每个数据科学家和机器学习专家都必须理解降维技术是什么以及何时使用它们。*
 
-![](../Images/006d7d77736e6ecab546ceb5e7acf823.png)
+![](img/006d7d77736e6ecab546ceb5e7acf823.png)
 
 **照片由 [Sergi Kabrera](https://unsplash.com/@skabrera?utm_source=medium&utm_medium=referral) 提供，发布在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**
 
@@ -34,7 +34,7 @@
 
 尽管有一个小的区别，即降维技术在降低维度时会丢失一些信息。
 
-视觉化大量维度是比较困难的。维度减少技术可以将20多个维度的特征空间转变为2或3维子空间。
+视觉化大量维度是比较困难的。维度减少技术可以将 20 多个维度的特征空间转变为 2 或 3 维子空间。
 
 **不同的维度减少技术有哪些？**
 
@@ -46,23 +46,23 @@
 
 如果你想更好地理解机器学习，请查看我的文章：
 
-[8分钟了解机器学习](https://medium.com/fintechexplained/introduction-to-machine-learning-4b2d7c57613b)
+[8 分钟了解机器学习](https://medium.com/fintechexplained/introduction-to-machine-learning-4b2d7c57613b)
 
 有许多减少维度的技术，如前向/后向特征选择或通过计算相关特征的加权平均来合并维度。然而，在这篇文章中，我将探讨两种主要的维度减少技术：
 
 #### 线性判别分析 (LDA)：
 
-LDA用于压缩监督数据。
+LDA 用于压缩监督数据。
 
-当我们有大量特征（类别），且数据呈正态分布且特征之间没有相关性时，我们可以使用LDA来减少维度。LDA是Fisher线性判别的广义版本。
+当我们有大量特征（类别），且数据呈正态分布且特征之间没有相关性时，我们可以使用 LDA 来减少维度。LDA 是 Fisher 线性判别的广义版本。
 
-*计算z-score以规范化高度偏斜的特征。*
+*计算 z-score 以规范化高度偏斜的特征。*
 
-如果你想了解如何丰富特征和计算z-score，请查看这篇文章：
+如果你想了解如何丰富特征和计算 z-score，请查看这篇文章：
 
 [处理数据以提高机器学习模型的准确性](https://medium.com/fintechexplained/processing-data-to-improve-machine-learning-models-accuracy-de17c655dc8e)
 
-Sci-kit learn提供了易于使用的LDA工具：
+Sci-kit learn 提供了易于使用的 LDA 工具：
 
 ```py
 from sklearn.lda import LDA
@@ -71,9 +71,9 @@ lda_components = my_lda.fit_transform(X_train, Y_train)
 
 ```
 
-这段代码将生成整个数据集的三个LDA组件。
+这段代码将生成整个数据集的三个 LDA 组件。
 
-![](../Images/a9b51b9491e5ee73e742e88d09cb8150.png)
+![](img/a9b51b9491e5ee73e742e88d09cb8150.png)
 
 **照片由 [NASA](https://unsplash.com/@nasa?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**
 
@@ -81,9 +81,9 @@ lda_components = my_lda.fit_transform(X_train, Y_train)
 
 它们主要用于压缩无监督数据。
 
-PCA是一种非常有用的技术，可以帮助去噪声和检测数据中的模式。PCA用于减少图像、文本内容和语音识别系统中的维度。
+PCA 是一种非常有用的技术，可以帮助去噪声和检测数据中的模式。PCA 用于减少图像、文本内容和语音识别系统中的维度。
 
-Sci-kit learn库提供了强大的PCA组件分类器。以下代码片段演示了如何创建PCA组件：
+Sci-kit learn 库提供了强大的 PCA 组件分类器。以下代码片段演示了如何创建 PCA 组件：
 
 ```py
 from sklearn.decomposition import PCA
@@ -92,47 +92,47 @@ my_pca_components = pca_classifier.fit_transform(X_train)
 
 ```
 
-**了解PCA的工作原理是明智的。**
+**了解 PCA 的工作原理是明智的。**
 
-#### 理解PCA
+#### 理解 PCA
 
 本文的这一部分提供了过程的概述：
 
-+   PCA技术分析整个数据集，然后找到具有最大方差的点。
++   PCA 技术分析整个数据集，然后找到具有最大方差的点。
 
 +   它创建了新的变量，使得新变量与原始变量之间存在线性关系，从而最大化方差。
 
 +   然后为特征创建协方差矩阵以理解其多重共线性。
 
-+   一旦计算了方差-协方差矩阵，PCA将使用收集到的信息来减少维度。它从原始特征轴计算正交轴。这些是具有最大方差的方向轴。
++   一旦计算了方差-协方差矩阵，PCA 将使用收集到的信息来减少维度。它从原始特征轴计算正交轴。这些是具有最大方差的方向轴。
 
 首先计算方差-协方差矩阵的特征向量。该向量表示最大方差的方向，这些方向称为主成分。然后生成定义主成分大小的特征值。
 
-*特征值是PCA组件。*
+*特征值是 PCA 组件。*
 
-因此，对于N维度，将有一个NxN方差-协方差矩阵，因此，我们将有一个N值和N特征值矩阵的特征向量。
+因此，对于 N 维度，将有一个 NxN 方差-协方差矩阵，因此，我们将有一个 N 值和 N 特征值矩阵的特征向量。
 
-我们可以使用以下Python模块来创建组件：
+我们可以使用以下 Python 模块来创建组件：
 
-使用linalg.eig创建特征向量
+使用 linalg.eig 创建特征向量
 
-使用numpy.cov计算方差-协方差矩阵
+使用 numpy.cov 计算方差-协方差矩阵
 
 我们需要选择最能代表数据集的特征向量。这些是具有最高特征值的向量。
 
-> *选择捕捉大约70%方差的特征向量。*
+> *选择捕捉大约 70%方差的特征向量。*
 
 *记住，具有最大特征值的特征向量是方差最高的，并且最接近原始数据集。同时，特征向量数量越多，计算性能越慢。*
 
-*我通常选择2-3个顶级特征向量来代表数据集。*
+*我通常选择 2-3 个顶级特征向量来代表数据集。*
 
-如果我们希望scikit-learn提供所有的PCA组件以便评估方差，则将PCA初始化为None组件：
+如果我们希望 scikit-learn 提供所有的 PCA 组件以便评估方差，则将 PCA 初始化为 None 组件：
 
-![](../Images/7cf98875a6bedcf8791460f87c4e2e29.png)
+![](img/7cf98875a6bedcf8791460f87c4e2e29.png)
 
 **照片由 [Chang Qing](https://unsplash.com/@lee0201?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**
 
-*在执行PCA之前，规范化/标准化数据是重要的，因为PCA对特征数据的尺度敏感。*
+*在执行 PCA 之前，规范化/标准化数据是重要的，因为 PCA 对特征数据的尺度敏感。*
 
 #### 核主成分分析 (KDA)：
 
@@ -140,13 +140,13 @@ my_pca_components = pca_classifier.fit_transform(X_train)
 
 当我们拥有非线性特征时，可以将它们投影到更大的特征集上，以去除它们的相关性并使其线性。
 
-本质上，非线性数据被映射和转换到更高维空间。然后使用PCA来减少维度。然而，这种方法的一个缺点是计算开销非常大。
+本质上，非线性数据被映射和转换到更高维空间。然后使用 PCA 来减少维度。然而，这种方法的一个缺点是计算开销非常大。
 
-就像在PCA中，我们首先计算方差-协方差矩阵，然后准备具有最高方差的特征向量和特征值来计算主成分。
+就像在 PCA 中，我们首先计算方差-协方差矩阵，然后准备具有最高方差的特征向量和特征值来计算主成分。
 
 然后我们计算核矩阵。这要求我们构建相似性矩阵。矩阵随后通过创建特征值和特征向量进行分解。
 
-Sci-Kit Learn提供了核PCA模块。要使用核PCA，我们可以使用以下代码片段：
+Sci-Kit Learn 提供了核 PCA 模块。要使用核 PCA，我们可以使用以下代码片段：
 
 ```py
 from sklearn.decomposition import KernelPCA
@@ -155,9 +155,9 @@ kpca_components = kpca.fit_transform(X)
 
 ```
 
-Gamma是RBF核的调节参数。
+Gamma 是 RBF 核的调节参数。
 
-![](../Images/cb6d57451b3efb60222c26792b1d2e47.png)
+![](img/cb6d57451b3efb60222c26792b1d2e47.png)
 
 **照片由 [Billy Huynh](https://unsplash.com/@billy_huy?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**
 

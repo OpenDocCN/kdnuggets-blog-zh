@@ -1,22 +1,22 @@
 # 图表示学习：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2021/01/graph-representation-learning-book-free-ebook.html](https://www.kdnuggets.com/2021/01/graph-representation-learning-book-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2021/01/graph-representation-learning-book-free-ebook.html`](https://www.kdnuggets.com/2021/01/graph-representation-learning-book-free-ebook.html)
 
-[评论](#comments)
+评论
 
 近年来，图分析和图在机器学习中的应用迅速增长。如果您需要一个入门点来了解这个领域，我们正好有您需要的免费电子书：**[图表示学习](https://www.cs.mcgill.ca/~wlh/grl_book/)**。
 
-[![书籍封面](../Images/48328f169203a42d42a5afd281f2a30c.png)](https://www.cs.mcgill.ca/~wlh/grl_book/)
+![书籍封面](https://www.cs.mcgill.ca/~wlh/grl_book/)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 部门
 
 * * *
 
@@ -34,7 +34,7 @@
 
 > 本书讨论了我们如何利用机器学习来应对这一挑战。当然，机器学习并不是分析图数据的唯一方法。然而，考虑到我们要分析的图数据集的规模和复杂性日益增加，显然机器学习将在提升我们建模、分析和理解图数据的能力方面发挥重要作用。
 
-![图](../Images/798e993862a4077ac7d8edab74228e5e.png)
+![图](img/798e993862a4077ac7d8edab74228e5e.png)
 
 为了更好地理解本书涉及的主题，以下是其目录：
 
@@ -66,22 +66,22 @@
 
 **相关**
 
-+   [2021年15本免费数据科学、机器学习与统计电子书](/2020/12/15-free-data-science-machine-learning-statistics-ebooks-2021.html)
++   2021 年 15 本免费数据科学、机器学习与统计电子书
 
-+   [学习数据科学的5本免费统计书籍](/2020/12/5-free-books-learn-statistics-data-science.html)
++   学习数据科学的 5 本免费统计书籍
 
-+   [每个人都应该阅读的5本免费机器学习和深度学习电子书](/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html)
++   每个人都应该阅读的 5 本免费机器学习和深度学习电子书
 
 ### 更多相关话题
 
-+   [无监督解缠代表学习（在类不平衡数据集上的Elastic InfoGAN）](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
++   [无监督解缠代表学习（在类不平衡数据集上的 Elastic InfoGAN）](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
 
-+   [Python中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
++   [Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
 
 +   [自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)
 
 +   [机器学习数学：免费电子书](https://www.kdnuggets.com/2020/04/mathematics-machine-learning-book.html)
 
-+   [免费电子书：10个实用的Python编程技巧](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)
++   [免费电子书：10 个实用的 Python 编程技巧](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)
 
 +   [命令行中的数据科学：免费电子书](https://www.kdnuggets.com/2022/03/data-science-command-line-free-ebook.html)

@@ -1,10 +1,10 @@
 # SQL 速查表
 
-> 原文：[https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2018/07/sql-cheat-sheet.html`](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![SQL 速查表](../Images/6e35b8c6a9cceb36baf0ef9a0dea61cb.png)
+![SQL 速查表](img/6e35b8c6a9cceb36baf0ef9a0dea61cb.png)
 
 SQL（结构化查询语言）是一种用于编程的领域特定语言，旨在查询数据库。与任何语言一样，拥有常见查询和函数名称的列表作为参考是有用的。我们希望这张速查表对你有所帮助：
 
@@ -14,11 +14,11 @@ SQL（结构化查询语言）是一种用于编程的领域特定语言，旨�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -52,40 +52,40 @@ SQL（结构化查询语言）是一种用于编程的领域特定语言，旨�
 
 ### 从表中查询数据
 
-数据库表是以垂直列和水平行的模型存储的数据元素（值）的集合。使用以下任一方法在SQL中查询表：
+数据库表是以垂直列和水平行的模型存储的数据元素（值）的集合。使用以下任一方法在 SQL 中查询表：
 
 | SQL | 解释 |
 | --- | --- |
-| **SELECT c1 FROM t** | 从名为t的表中选择列c1的数据 |
-| **SELECT * FROM t** | 从名为t的表中选择所有行和列 |
-| **SELECT c1 FROM t****WHERE c1 = ‘test’**  | 从名为t的表中选择列c1的数据，其中c1的值为‘test’ |
-| **SELECT c1 FROM t****ORDER BY c1 ASC (DESC)**  | 从名为t的表中选择列c1的数据，并按c1排序，可以是升序（默认）或降序 |
-| **SELECT c1 FROM t****ORDER BY c1LIMIT n OFFSET offset**  | 从名为t的表中选择列c1的数据，跳过指定的行偏移量，并返回接下来的n行 |
-| **SELECT c1, aggregate(c2)****FROM t****GROUP BY c1**  | 从名为t的表中选择列c1的数据，并使用聚合函数对行进行分组 |
-| **SELECT c1, aggregate(c2)****FROM t****GROUP BY c1HAVING condition**  | 从名为t的表中选择列c1的数据，使用聚合函数对行进行分组，并使用‘HAVING’子句筛选这些组 |
+| **SELECT c1 FROM t** | 从名为 t 的表中选择列 c1 的数据 |
+| **SELECT * FROM t** | 从名为 t 的表中选择所有行和列 |
+| **SELECT c1 FROM t****WHERE c1 = ‘test’**  | 从名为 t 的表中选择列 c1 的数据，其中 c1 的值为‘test’ |
+| **SELECT c1 FROM t****ORDER BY c1 ASC (DESC)**  | 从名为 t 的表中选择列 c1 的数据，并按 c1 排序，可以是升序（默认）或降序 |
+| **SELECT c1 FROM t****ORDER BY c1LIMIT n OFFSET offset**  | 从名为 t 的表中选择列 c1 的数据，跳过指定的行偏移量，并返回接下来的 n 行 |
+| **SELECT c1, aggregate(c2)****FROM t****GROUP BY c1**  | 从名为 t 的表中选择列 c1 的数据，并使用聚合函数对行进行分组 |
+| **SELECT c1, aggregate(c2)****FROM t****GROUP BY c1HAVING condition**  | 从名为 t 的表中选择列 c1 的数据，使用聚合函数对行进行分组，并使用‘HAVING’子句筛选这些组 |
 
 ### 从多个表中查询数据
 
-除了从单个表中查询数据，SQL还允许从多个表中查询数据：
+除了从单个表中查询数据，SQL 还允许从多个表中查询数据：
 
 | SQL | 解释 |
 | --- | --- |
-| **SELECT c1, c2****FROM t1****INNER JOIN t2 on condition** | 从名为t1的表中选择列c1和c2，并在t1和t2之间执行内连接 |
-| **SELECT c1, c2****FROM t1****LEFT JOIN t2 on condition**  | 从名为t1的表中选择列c1和c2，并在t1和t2之间执行左连接 |
-| **SELECT c1, c2****FROM t1****RIGHT JOIN t2 on condition**  | 从名为t1的表中选择列c1和c2，并在t1和t2之间执行右连接 |
-| **SELECT c1, c2****FROM t1****FULL OUTER JOIN t2 on condition** | 从名为t1的表中选择列c1和c2，并在t1和t2之间执行全外连接 |
-| **SELECT c1, c2****FROM t1****CROSS JOIN t2** | 从名为t1的表中选择列c1和c2，并生成表中行的笛卡尔积 |
-| **SELECT c1, c2****FROM t1, t2** | 同上 - 从名为t1的表中选择列c1和c2，并生成表中行的笛卡尔积 |
-| **SELECT c1, c2****FROM t1 A****INNER JOIN t2 B on condition** | 从名为t1的表中选择列c1和c2，并使用INNER JOIN子句将其连接到自身 |
+| **SELECT c1, c2****FROM t1****INNER JOIN t2 on condition** | 从名为 t1 的表中选择列 c1 和 c2，并在 t1 和 t2 之间执行内连接 |
+| **SELECT c1, c2****FROM t1****LEFT JOIN t2 on condition**  | 从名为 t1 的表中选择列 c1 和 c2，并在 t1 和 t2 之间执行左连接 |
+| **SELECT c1, c2****FROM t1****RIGHT JOIN t2 on condition**  | 从名为 t1 的表中选择列 c1 和 c2，并在 t1 和 t2 之间执行右连接 |
+| **SELECT c1, c2****FROM t1****FULL OUTER JOIN t2 on condition** | 从名为 t1 的表中选择列 c1 和 c2，并在 t1 和 t2 之间执行全外连接 |
+| **SELECT c1, c2****FROM t1****CROSS JOIN t2** | 从名为 t1 的表中选择列 c1 和 c2，并生成表中行的笛卡尔积 |
+| **SELECT c1, c2****FROM t1, t2** | 同上 - 从名为 t1 的表中选择列 c1 和 c2，并生成表中行的笛卡尔积 |
+| **SELECT c1, c2****FROM t1 A****INNER JOIN t2 B on condition** | 从名为 t1 的表中选择列 c1 和 c2，并使用 INNER JOIN 子句将其连接到自身 |
 
-### 使用SQL操作符
+### 使用 SQL 操作符
 
-SQL操作符是保留字或字符，主要用于SQL语句中的WHERE子句以执行操作：
+SQL 操作符是保留字或字符，主要用于 SQL 语句中的 WHERE 子句以执行操作：
 
 | SQL | 解释 |
 | --- | --- |
-| **SELECT c1 FROM t1****UNION [ALL]****SELECT c1 FROM t2** | 从名为t1的表中选择列c1，并从名为t2的表中选择列c1，将这两个查询的结果合并 |
-| **SELECT c1 FROM t1****INTERSECT****SELECT c1 FROM t2** | 从名为t1的表中选择列c1，并从名为t2的表中选择列c1，返回两个查询的交集 |
+| **SELECT c1 FROM t1****UNION [ALL]****SELECT c1 FROM t2** | 从名为 t1 的表中选择列 c1，并从名为 t2 的表中选择列 c1，将这两个查询的结果合并 |
+| **SELECT c1 FROM t1****INTERSECT****SELECT c1 FROM t2** | 从名为 t1 的表中选择列 c1，并从名为 t2 的表中选择列 c1，返回两个查询的交集 |
 | **SELECT c1 FROM t1****MINUS****SELECT c1 FROM t2** | 从名为 t1 的表中选择列 c1 和从名为 t2 的表中选择列 c1，并从第一个结果集中减去第二个结果集 |
 | **SELECT c1 FROM t****WHERE c1 [NOT] LIKE pattern** | 从名为 t 的表中选择列 c1，并使用模式匹配 % 查询行 |
 | **SELECT c1 FROM t****WHERE c1 [NOT] in test_list** | 从名为 t 的表中选择列 c1，并返回在 test_list 中（或不在） 的行 |

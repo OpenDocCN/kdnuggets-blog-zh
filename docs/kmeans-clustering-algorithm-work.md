@@ -1,8 +1,8 @@
 # 什么是 K-Means 聚类及其算法如何工作？
 
-> 原文：[https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
+> 原文：[`www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html`](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
 
-![什么是 K-Means 聚类及其算法如何工作？](../Images/be51730398ddbdd8cabde734b014732e.png)
+![什么是 K-Means 聚类及其算法如何工作？](img/be51730398ddbdd8cabde734b014732e.png)
 
 图片来自 Bing 图像生成器
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@ K 代表将数据点划分为的不同分组。如果 K 是 3，那么数据点�
 
 想象一个包含两个变量的数据集，如下所示。这些变量可以是个人的身高和体重。如果我们有一个第三个变量，如年龄，那我们就会有一个 3-D 图，但现在我们还是用下面的 2-D 图。
 
-![什么是 K-Means 聚类？其算法如何工作？](../Images/01fcf1cf4e0542a541c874ceef490e86.png)
+![什么是 K-Means 聚类？其算法如何工作？](img/01fcf1cf4e0542a541c874ceef490e86.png)
 
 ## 步骤 1：初始化
 
@@ -58,7 +58,7 @@ K 代表将数据点划分为的不同分组。如果 K 是 3，那么数据点�
 
 在初始迭代中，下面的示例中 K 个质心是随机选择的。
 
-![什么是 K-Means 聚类？其算法如何工作？](../Images/171e76e49bfde67cdab79bb665201172.png)
+![什么是 K-Means 聚类？其算法如何工作？](img/171e76e49bfde67cdab79bb665201172.png)
 
 你可以指定算法将数据点分组为的 K 个簇的数量，但还有一种更好的方法。我们稍后会详细讲解如何选择 K。
 
@@ -68,25 +68,25 @@ K 代表将数据点划分为的不同分组。如果 K 是 3，那么数据点�
 
 注意，除了欧氏距离外，还可以使用其他类型的距离测量方法，如曼哈顿距离、斯皮尔曼相关距离和皮尔逊相关距离，但经典的距离测量方法是欧氏距离和曼哈顿距离。
 
-![什么是 K-Means 聚类？其算法如何工作？](../Images/b2c29636c905add1da7cd48e797c50e9.png)
+![什么是 K-Means 聚类？其算法如何工作？](img/b2c29636c905add1da7cd48e797c50e9.png)
 
 ## 步骤 3：重新计算质心
 
 在第一次分组后，新的中心点会重新计算，这会要求重新分配点。下面的图示例显示了新的分组可能是什么样的，并注意到一些点已经移动到新的簇中。
 
-![什么是 K-Means 聚类？其算法如何工作？](../Images/5662ccca682a3d405e54f85d4520ac1a.png)
+![什么是 K-Means 聚类？其算法如何工作？](img/5662ccca682a3d405e54f85d4520ac1a.png)
 
 ## 迭代
 
 步骤 2 和 3 的过程会重复，直到数据点不再重新分配或达到最大迭代次数。最终的分组结果如下。
 
-![K-Means 聚类是什么以及其算法如何工作？](../Images/b7bee4c9d302597620ee9b52416dcfe3.png)
+![K-Means 聚类是什么以及其算法如何工作？](img/b7bee4c9d302597620ee9b52416dcfe3.png)
 
 ## K 的选择
 
 作为数据科学家，你将处理的数据在绘制图表时不会总是有明显的界限，就像你在鸢尾花数据集中看到的那样。通常，你会处理具有更高维度的数据，这些数据无法绘制，或者即使可以绘制，也无法确定最佳的分组数量。以下图表是一个很好的例子。
 
-![K-Means 聚类是什么以及其算法如何工作？](../Images/f2ca9e718098204e99136e38f3c001bb.png)
+![K-Means 聚类是什么以及其算法如何工作？](img/f2ca9e718098204e99136e38f3c001bb.png)
 
 你能确定分组的数量吗？不清楚。那么，我们如何找到上述数据点可以分组的最佳集群数量呢？
 

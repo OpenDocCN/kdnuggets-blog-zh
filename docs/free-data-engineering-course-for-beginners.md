@@ -1,8 +1,8 @@
 # 初学者免费数据工程课程
 
-> 原文：[https://www.kdnuggets.com/free-data-engineering-course-for-beginners](https://www.kdnuggets.com/free-data-engineering-course-for-beginners)
+> 原文：[`www.kdnuggets.com/free-data-engineering-course-for-beginners`](https://www.kdnuggets.com/free-data-engineering-course-for-beginners)
 
-![初学者免费数据工程课程](../Images/929b1c2ba1e2408a445d419b06e71126.png)
+![初学者免费数据工程课程](img/929b1c2ba1e2408a445d419b06e71126.png)
 
 [Image by storyset](https://www.freepik.com/free-vector/data-processing-concept-illustration_12219361.htm#query=data%20engineering&position=4&from_view=search&track=ais&uuid=7f623f02-b55e-49d0-a0c3-2a10039bc7fb) 在 Freepik 上
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

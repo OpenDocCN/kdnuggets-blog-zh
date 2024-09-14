@@ -1,8 +1,8 @@
 # 10 个最常用的 Tableau 函数
 
-> 原文：[https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)
+> 原文：[`www.kdnuggets.com/2022/08/10-used-tableau-functions.html`](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)
 
-![10 个最常用的 Tableau 函数](../Images/919b39bcb780833ea0abff000316c293.png)
+![10 个最常用的 Tableau 函数](img/919b39bcb780833ea0abff000316c293.png)
 
 图片作者 | [Carbon](https://carbon.now.sh/)
 
@@ -10,17 +10,17 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-我们将学习最常用的10个 Tableau 函数，用于商业智能测试和开发。这些函数将帮助你理解 Tableau 不仅仅是一个拖放的华丽工具。
+我们将学习最常用的 10 个 Tableau 函数，用于商业智能测试和开发。这些函数将帮助你理解 Tableau 不仅仅是一个拖放的华丽工具。
 
 # MIN 和 MAX
 
@@ -72,7 +72,7 @@ REPLACE("Abid Ali", "Ali", "Awan") = "Abid Awan"
 
 用于查找两个日期字段之间的差异。你可以提取周、天、月和年的差异。
 
-该函数需要4个参数：
+该函数需要 4 个参数：
 
 +   **date_part**：是一个日期单位，用于返回两个日期之间的差异。
 
@@ -204,7 +204,7 @@ LOOKUP(expression, [offset])
 LOOKUP(SUM([Profit]), 2)
 ```
 
-![Tableau LOOKUP 函数](../Images/371480ae60cecfbb1da2cf2563a476ad.png)
+![Tableau LOOKUP 函数](img/371480ae60cecfbb1da2cf2563a476ad.png)
 
 图片来自 [Tableau](https://help.tableau.com/current/pro/desktop/en-us/functions_functions_tablecalculation.htm)
 

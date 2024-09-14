@@ -1,8 +1,8 @@
 # 揭示 Midjourney 5.2：AI 图像生成的飞跃
 
-> 原文：[https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)
+> 原文：[`www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html`](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)
 
-![](../Images/55490c0d92e27c238056541904ad17fe.png)
+![](img/55490c0d92e27c238056541904ad17fe.png)
 
 使用 Midjourney 生成。提示：“Midjourney 5.2 真棒！--ar 16:9 --v 5.2”
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

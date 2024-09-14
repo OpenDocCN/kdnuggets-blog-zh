@@ -1,8 +1,8 @@
 # 5 个 ChatGPT 功能提升你的日常工作
 
-> 原文：[https://www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html](https://www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html)
+> 原文：[`www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html`](https://www.kdnuggets.com/2023/05/5-chatgpt-features-boost-daily-work.html)
 
-![5 ChatGPT features to boost your daily work](../Images/d4c06ff8e7b5738f44d3efe891b69f0f.png)
+![5 ChatGPT features to boost your daily work](img/d4c06ff8e7b5738f44d3efe891b69f0f.png)
 
 编辑器提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
 
 * * *
 
@@ -36,7 +36,7 @@ ChatGPT 是我在从零开始构建新项目时的秘密武器。只需几个提
 
 ChatGPT 立刻给出回答：
 
-![5 ChatGPT features to boost your daily work](../Images/04d366c640d2523fd211ac83cd943c09.png)
+![5 ChatGPT features to boost your daily work](img/04d366c640d2523fd211ac83cd943c09.png)
 
 截图 ChatGPT 聊天。ChatGPT 给我一个代码框架。
 
@@ -89,33 +89,33 @@ driver.quit()
 
 我现在可以直接询问它关于我的代码开发的最佳选项或库的专家意见。**这节省了我在决策过程中的时间和精力，并确保我使用了最好的工具来完成工作。**
 
-设想一下我想处理地理空间数据，但不确定是应该使用`Geopandas`还是`Plotly`。我可以请ChatGPT为我比较——附带类型 ;)——它会立即回答两个库之间的主要区别。
+设想一下我想处理地理空间数据，但不确定是应该使用`Geopandas`还是`Plotly`。我可以请 ChatGPT 为我比较——附带类型 ;)——它会立即回答两个库之间的主要区别。
 
-![5个ChatGPT功能提升你的日常工作](../Images/756ecdee160200ad207f68857339ab1a.png)
+![5 个 ChatGPT 功能提升你的日常工作](img/756ecdee160200ad207f68857339ab1a.png)
 
-截图ChatGPT聊天记录。ChatGPT向我解释了geopandas和plotly之间的区别。
+截图 ChatGPT 聊天记录。ChatGPT 向我解释了 geopandas 和 plotly 之间的区别。
 
-如果我现在想抓取一个网站，我可以询问哪个库最适合这样做。ChatGPT回答了Python中最流行的网页抓取库。
+如果我现在想抓取一个网站，我可以询问哪个库最适合这样做。ChatGPT 回答了 Python 中最流行的网页抓取库。
 
-![5个ChatGPT功能提升你的日常工作](../Images/ad406a8a11db64c63ba3d10454e5f99c.png)
+![5 个 ChatGPT 功能提升你的日常工作](img/ad406a8a11db64c63ba3d10454e5f99c.png)
 
-截图ChatGPT聊天记录。ChatGPT解释了最流行的抓取网站。
+截图 ChatGPT 聊天记录。ChatGPT 解释了最流行的抓取网站。
 
-你甚至可以询问哪个是抓取你想要的网站的最佳选项——尽管ChatGPT很可能会警告你这可能违反了该网站的内容政策——所以要小心。
+你甚至可以询问哪个是抓取你想要的网站的最佳选项——尽管 ChatGPT 很可能会警告你这可能违反了该网站的内容政策——所以要小心。
 
 > 抓取社交网络的最佳选项是什么？
 
-![5个ChatGPT功能提升你的日常工作](../Images/3a082847e4c8e4f624998d5b22347ba8.png)
+![5 个 ChatGPT 功能提升你的日常工作](img/3a082847e4c8e4f624998d5b22347ba8.png)
 
-截图ChatGPT聊天记录。ChatGPT解释了抓取社交网络的最佳选项。
+截图 ChatGPT 聊天记录。ChatGPT 解释了抓取社交网络的最佳选项。
 
 # #3. 理解代码
 
 我们都经历过**理解一个不是我们自己创建的代码库的痛苦**。在复杂且组织不良的代码中导航——也称为*意大利面条代码*——可能是一个令人沮丧且耗时的任务。
 
-但是，借助ChatGPT，理解新的代码库变得容易多了。我现在可以简单地询问它代码的功能，并迅速理解它。**不再浪费宝贵的时间和精力试图解读写得很差的代码。**
+但是，借助 ChatGPT，理解新的代码库变得容易多了。我现在可以简单地询问它代码的功能，并迅速理解它。**不再浪费宝贵的时间和精力试图解读写得很差的代码。**
 
-设想一下，我正在尝试抓取LinkedIn，并且在互联网上找到了一段随机的代码，它应该能够向下滚动LinkedIn的职位招聘网站。
+设想一下，我正在尝试抓取 LinkedIn，并且在互联网上找到了一段随机的代码，它应该能够向下滚动 LinkedIn 的职位招聘网站。
 
 > 以下代码做了什么？ [插入代码]
 
@@ -150,17 +150,17 @@ while i <= int(jobs_num/2)+1:
         pass
 ```
 
-ChatGPT会立即回答，并提供对上述代码的详细解释。你甚至可以要求更多关于代码某部分的细节——*只需多与ChatGPT互动，你会发现它能带来许多奇迹。*
+ChatGPT 会立即回答，并提供对上述代码的详细解释。你甚至可以要求更多关于代码某部分的细节——*只需多与 ChatGPT 互动，你会发现它能带来许多奇迹。*
 
-![5个ChatGPT功能提升你的日常工作](../Images/3702acc92bb270ed417243befbbc062f.png)
+![5 个 ChatGPT 功能提升你的日常工作](img/3702acc92bb270ed417243befbbc062f.png)
 
-截图ChatGPT聊天记录。ChatGPT解释了我不理解的代码。
+截图 ChatGPT 聊天记录。ChatGPT 解释了我不理解的代码。
 
 # #4. 为我们的代码添加注释
 
-ChatGPT还可以帮助我们提高自己代码的质量和可维护性。通过逐行添加注释，我们可以确保在发布之前代码得到了适当的文档记录。这消除了没有注释的代码的需求，并使其他人更容易理解和使用我们的代码。
+ChatGPT 还可以帮助我们提高自己代码的质量和可维护性。通过逐行添加注释，我们可以确保在发布之前代码得到了适当的文档记录。这消除了没有注释的代码的需求，并使其他人更容易理解和使用我们的代码。
 
-**ChatGPT可以显著提高代码的可读性、可维护性和与他人的协作能力。**
+**ChatGPT 可以显著提高代码的可读性、可维护性和与他人的协作能力。**
 
 让我们假设之前的代码完全没有注释。我们可以直接要求 ChaGPT 为其添加注释。
 
@@ -217,7 +217,7 @@ ChatGPT 不仅是理解陌生代码的宝贵工具，**它还可以帮助我们�
 
 *你能用 Pep8 标准重写以下代码吗 [在此插入代码]*
 
-![5 ChatGPT 功能提升日常工作](../Images/c0bd238a06804a4ee09756e3132debe3.png)
+![5 ChatGPT 功能提升日常工作](img/c0bd238a06804a4ee09756e3132debe3.png)
 
 截图 ChatGPT 聊天。ChatGPT 按照 Pep8 标准给我们的代码。
 

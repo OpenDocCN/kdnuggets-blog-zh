@@ -1,32 +1,32 @@
-# 操作化机器学习：成功MLOps的七个考虑因素
+# 操作化机器学习：成功 MLOps 的七个考虑因素
 
-> 原文：[https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html](https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html)
+> 原文：[`www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html`](https://www.kdnuggets.com/2018/04/operational-machine-learning-successful-mlops.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Nisha Talagala，[ParallelM](http://www.parallelm.com/)。**
 
-机器学习无处不在。从广告到物联网到医疗保健，以及其他领域，几乎所有行业都在采用或研究机器学习（ML）以提升业务。然而，为了利用ML获得正的投资回报率（ROI），它需要被*操作化*或投入生产。
+机器学习无处不在。从广告到物联网到医疗保健，以及其他领域，几乎所有行业都在采用或研究机器学习（ML）以提升业务。然而，为了利用 ML 获得正的投资回报率（ROI），它需要被*操作化*或投入生产。
 
 将机器学习投入生产带来了[一系列独特的挑战](http://www.parallelm.com/more-machine-learning-models-than-ever-but-are-they-making-it-into-production/)。
 
-*操作化的第一步是了解你的ML应用的样子、它的各个部分以及它们如何协同工作。*
+*操作化的第一步是了解你的 ML 应用的样子、它的各个部分以及它们如何协同工作。*
 
-**1: 了解你的ML应用**
+**1: 了解你的 ML 应用**
 
-在大多数情况下，ML用于优化（即添加洞察）业务应用。虽然这听起来很简单，但一个ML操作通常需要多个互补但独立的ML程序（训练、推理等）协同运行。什么是ML应用？ML应用是一起提供ML功能的程序和依赖项的集合。
+在大多数情况下，ML 用于优化（即添加洞察）业务应用。虽然这听起来很简单，但一个 ML 操作通常需要多个互补但独立的 ML 程序（训练、推理等）协同运行。什么是 ML 应用？ML 应用是一起提供 ML 功能的程序和依赖项的集合。
 
-图1(a)展示了将机器学习（ML）添加到业务应用中的最基本方式。业务应用请求预测，这些预测可以由ML推理程序提供（微服务方法在这里很受欢迎）。ML推理程序使用一个离线训练的模型，这通常由数据科学家完成。虽然这个流程很简单，但通常不够充分。在数据变化频繁的行业（如广告技术）中，需要对模型进行频繁的重新训练，以跟上变化的环境。此时需要添加一个重新训练管道以供推理使用，最终形成图1(b)中的模式。
+图 1(a)展示了将机器学习（ML）添加到业务应用中的最基本方式。业务应用请求预测，这些预测可以由 ML 推理程序提供（微服务方法在这里很受欢迎）。ML 推理程序使用一个离线训练的模型，这通常由数据科学家完成。虽然这个流程很简单，但通常不够充分。在数据变化频繁的行业（如广告技术）中，需要对模型进行频繁的重新训练，以跟上变化的环境。此时需要添加一个重新训练管道以供推理使用，最终形成图 1(b)中的模式。
 
-重新训练引入了许多模型，可能需要人工干预以决定哪些模型部署到生产环境中（在财政、健康或其他结果与ML预测相关的情况下，这一点尤为重要）。添加人工审批会导致图1(c)中的模式。如果使用先进的算法（如集成模型）来提高准确性，模式将变为图1(d)中的模式。
+重新训练引入了许多模型，可能需要人工干预以决定哪些模型部署到生产环境中（在财政、健康或其他结果与 ML 预测相关的情况下，这一点尤为重要）。添加人工审批会导致图 1(c)中的模式。如果使用先进的算法（如集成模型）来提高准确性，模式将变为图 1(d)中的模式。
 
-最后，许多生产部署会并行使用多个预测管道（如冠军/挑战者、金丝雀等）来监控预测模式，检测意外的变化或异常。添加这样的测试基础设施生成了类似于图1(e)的模式。
+最后，许多生产部署会并行使用多个预测管道（如冠军/挑战者、金丝雀等）来监控预测模式，检测意外的变化或异常。添加这样的测试基础设施生成了类似于图 1(e)的模式。
 
-![机器学习应用](../Images/ff41052418e4c68a37d7bec58e6cec04.png)
+![机器学习应用](img/ff41052418e4c68a37d7bec58e6cec04.png)
 
-![机器学习应用2](../Images/c09837c953a3bbfbc7f43f58f164cb66.png)
+![机器学习应用 2](img/c09837c953a3bbfbc7f43f58f164cb66.png)
 
-**图1: ML应用**
+**图 1: ML 应用**
 
 一旦你的机器学习（ML）应用程序定义完毕，下一步就是确保它能够安全且成功地投入生产。
 
@@ -38,13 +38,13 @@
 
 **3: 管理生产机器学习风险**
 
-风险管理并不会在模型开发阶段结束。一旦投入运行，模型需要被监控并不断评估，以确保它们在预期的范围内运行。生产机器学习的健康状况受到复杂性的影响，因为实时数据没有标签（因此无法使用常见的指标如准确率、精确度、召回率等）。替代方法（如数据偏差检测、漂移检测、金丝雀管道、生产A/B测试）应成为机器学习应用的一部分。
+风险管理并不会在模型开发阶段结束。一旦投入运行，模型需要被监控并不断评估，以确保它们在预期的范围内运行。生产机器学习的健康状况受到复杂性的影响，因为实时数据没有标签（因此无法使用常见的指标如准确率、精确度、召回率等）。替代方法（如数据偏差检测、漂移检测、金丝雀管道、生产 A/B 测试）应成为机器学习应用的一部分。
 
 **4: 确保治理和合规**
 
 一些行业，比如[金融服务](https://www.federalreserve.gov/supervisionreg/srletters/sr1107a1.pdf)，已经有了多年的机器学习合规要求。其他行业和地区也开始引入指导方针，比如欧盟的[GDPR](http://www.reubenbinns.com/blog/how-to-comply-with-gdpr-article-22-automated-credit-decisions/)或[纽约市算法问责法案](https://www.bizjournals.com/newyork/news/2017/12/13/n-y-c-council-passes-landmark-bill-to-ensure.html)。一个全面的生产治理机制对于确保机器学习应用程序（以及所有相关的模型、管道、代码、执行等）能够被追踪以实现可重复性、可审计性，并辅助[解释性](https://www.cc.gatech.edu/~alanwags/DLAI2016/(Gunning)%20IJCAI-16%20DLAI%20WS.pdf)是至关重要的。
 
-***与DevOps的和谐***：MLOps应该与现有的DevOps集成，同时提供管理机器学习所需的额外独特能力。
+***与 DevOps 的和谐***：MLOps 应该与现有的 DevOps 集成，同时提供管理机器学习所需的额外独特能力。
 
 **5: 自动化**
 
@@ -62,29 +62,29 @@ ML 应用可能需要不同于它们所服务的业务应用的硬件配置和�
 
 ***总结: 结合一切***
 
-![MLOps 元素](../Images/94c55c1cb9c630c35eac9c47f886a0b5.png)
+![MLOps 元素](img/94c55c1cb9c630c35eac9c47f886a0b5.png)
 
 总体而言，你的 MLOps 应该包含图 2 中的所有元素，所有元素应协同工作，以形成一个成功的 ML 操作的整体。
 
-**简介: [Nisha Talagala](https://www.linkedin.com/in/nisha-talagala-6a6b20/)** 是ParallelM的CTO/VP工程。她的背景是分布式系统的软件开发，专注于存储、I/O、文件系统、持久内存和闪存非易失性存储。之前在PM之前，她是Fusion-io（被SanDisk收购）的首席架构师/研究员，开发持久内存、非易失性内存文件系统（NVMFS）和应用加速的新技术和软件栈。她拥有加州大学伯克利分校的博士学位，并持有56项专利。
+**简介: [Nisha Talagala](https://www.linkedin.com/in/nisha-talagala-6a6b20/)** 是 ParallelM 的 CTO/VP 工程。她的背景是分布式系统的软件开发，专注于存储、I/O、文件系统、持久内存和闪存非易失性存储。之前在 PM 之前，她是 Fusion-io（被 SanDisk 收购）的首席架构师/研究员，开发持久内存、非易失性内存文件系统（NVMFS）和应用加速的新技术和软件栈。她拥有加州大学伯克利分校的博士学位，并持有 56 项专利。
 
 **相关：**
 
-+   [将机器学习应用于DevOps](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)
++   [将机器学习应用于 DevOps](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)
 
-+   [分析DevOps范式中的数据版本控制](https://www.kdnuggets.com/2017/08/data-version-control-analytics-devops-paradigm.html)
++   [分析 DevOps 范式中的数据版本控制](https://www.kdnuggets.com/2017/08/data-version-control-analytics-devops-paradigm.html)
 
-+   [2018年机器学习/人工智能的重点领域应该是什么？](https://www.kdnuggets.com/2018/04/focus-areas-ml-ai-2018.html)
++   [2018 年机器学习/人工智能的重点领域应该是什么？](https://www.kdnuggets.com/2018/04/focus-areas-ml-ai-2018.html)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -96,8 +96,8 @@ ML 应用可能需要不同于它们所服务的业务应用的硬件配置和�
 
 +   [成功数据科学家的五大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [如何在2022年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
++   [如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
-+   [MLOps中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
++   [MLOps 中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
 
-+   [优化和管理机器学习生命周期的前10大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化和管理机器学习生命周期的前 10 大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)

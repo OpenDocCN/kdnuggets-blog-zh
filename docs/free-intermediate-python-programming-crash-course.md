@@ -1,52 +1,52 @@
-# 免费中级Python编程速成课程
+# 免费中级 Python 编程速成课程
 
-> 原文：[https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html](https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html)
+> 原文：[`www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html`](https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html)
 
-![免费中级Python编程速成课程](../Images/5c73df9e38b142863ad2f8098a911b5c.png)
+![免费中级 Python 编程速成课程](img/5c73df9e38b142863ad2f8098a911b5c.png)
 
 编辑提供的图片
 
-Python是数据科学和机器学习中最受欢迎的编程语言。通过这个免费速成课程掌握Python的基础知识。
+Python 是数据科学和机器学习中最受欢迎的编程语言。通过这个免费速成课程掌握 Python 的基础知识。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
 ## 关键要点
 
-+   Python是一种灵活的、开源的、解释型的高级编程语言，适用于各种现实世界的应用场景。
++   Python 是一种灵活的、开源的、解释型的高级编程语言，适用于各种现实世界的应用场景。
 
-+   Python现在被认为是数据科学和机器学习中最受欢迎的编程语言。
++   Python 现在被认为是数据科学和机器学习中最受欢迎的编程语言。
 
-+   这个[免费速成课程](https://www.youtube.com/watch?v=HGOBQPFzWKo)来自freeCodeCamp.org，将帮助你学习Python编程的基础知识。
++   这个[免费速成课程](https://www.youtube.com/watch?v=HGOBQPFzWKo)来自 freeCodeCamp.org，将帮助你学习 Python 编程的基础知识。
 
-Python现在被认为是最受欢迎的编程语言，尤其在统计、工程、数据科学、机器学习和人工智能领域。最近使用LinkedIn的数据进行的分析显示，Python编程技能是全球大多数技术工作所需的前10项技能之一，美国的情况如下：
+Python 现在被认为是最受欢迎的编程语言，尤其在统计、工程、数据科学、机器学习和人工智能领域。最近使用 LinkedIn 的数据进行的分析显示，Python 编程技能是全球大多数技术工作所需的前 10 项技能之一，美国的情况如下：
 
-![免费中级Python编程速成课程](../Images/181e38224094ea87485147167425a95b.png)
-
-作者提供的图片
-
-![免费中级Python编程速成课程](../Images/0347243dbbb2a11f84e3e2a8e540d3c3.png)
+![免费中级 Python 编程速成课程](img/181e38224094ea87485147167425a95b.png)
 
 作者提供的图片
 
-# 为什么Python脱颖而出
+![免费中级 Python 编程速成课程](img/0347243dbbb2a11f84e3e2a8e540d3c3.png)
 
-Python是一种相对容易学习的高级编程语言。Python是免费的且开源的，拥有一个庞大的开源社区，并且提供大量免费的教育资源，帮助初学者掌握Python编程。
+作者提供的图片
 
-Python拥有多个专门的库，可用于各种应用，例如：
+# 为什么 Python 脱颖而出
+
+Python 是一种相对容易学习的高级编程语言。Python 是免费的且开源的，拥有一个庞大的开源社区，并且提供大量免费的教育资源，帮助初学者掌握 Python 编程。
+
+Python 拥有多个专门的库，可用于各种应用，例如：
 
 ## NumPy
 
-NumPy是Python中科学计算的基础包。它是一个提供多维数组对象、各种衍生对象（如掩码数组和矩阵）以及一系列用于快速操作数组的例程的库，包括数学、逻辑、形状操作、排序、选择、I/O、离散傅里叶变换、基本线性代数、基本统计操作、随机模拟等。
+NumPy 是 Python 中科学计算的基础包。它是一个提供多维数组对象、各种衍生对象（如掩码数组和矩阵）以及一系列用于快速操作数组的例程的库，包括数学、逻辑、形状操作、排序、选择、I/O、离散傅里叶变换、基本线性代数、基本统计操作、随机模拟等。
 
 ## Matplotlib
 

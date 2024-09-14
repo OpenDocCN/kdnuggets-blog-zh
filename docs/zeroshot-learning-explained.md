@@ -1,8 +1,8 @@
 # 零样本学习解释
 
-> 原文：[https://www.kdnuggets.com/2022/12/zeroshot-learning-explained.html](https://www.kdnuggets.com/2022/12/zeroshot-learning-explained.html)
+> 原文：[`www.kdnuggets.com/2022/12/zeroshot-learning-explained.html`](https://www.kdnuggets.com/2022/12/zeroshot-learning-explained.html)
 
-![零样本学习解释](../Images/70b20b91eb586e6dad9e5c6b7676de05.png)
+![零样本学习解释](img/70b20b91eb586e6dad9e5c6b7676de05.png)
 
 [布鲁斯·沃灵顿](https://unsplash.com/@brucebmax) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@
 
 人类天生具备零样本学习的能力，不需要付出太多努力。我们的脑海中已经储存了词典，并且能够通过观察物体的物理属性来区分物体，这是由于我们现有的知识基础。我们可以利用这一知识基础来查看物体之间的相似性和差异性，并找到它们之间的联系。
 
-例如，假设我们正在尝试建立一个动物物种的分类模型。根据 [OurWorldInData](https://ourworldindata.org/biodiversity-and-wildlife)，2021年计算出有213万种物种。因此，如果我们想为动物物种创建最有效的分类模型，我们需要213万种不同的类别。同时也需要大量数据。高质量和数量的数据很难获得。
+例如，假设我们正在尝试建立一个动物物种的分类模型。根据 [OurWorldInData](https://ourworldindata.org/biodiversity-and-wildlife)，2021 年计算出有 213 万种物种。因此，如果我们想为动物物种创建最有效的分类模型，我们需要 213 万种不同的类别。同时也需要大量数据。高质量和数量的数据很难获得。
 
 那么零样本学习如何解决这个问题呢？
 
@@ -90,21 +90,21 @@
 
 ## 训练
 
-![零样本学习，解释](../Images/506d733b30cd5456a07f167816685979.png)
+![零样本学习，解释](img/506d733b30cd5456a07f167816685979.png)
 
 [Jari Hytönen](https://unsplash.com/@jarispics) 通过 Unsplash
 
-作为人类，如果你阅读上图右侧的文本，你会立即认为有4只小猫在一个棕色的篮子里。但假设你对“小猫”没有任何概念。你会假设篮子里有4样东西，被称为“小猫”。一旦你看到更多包含类似“小猫”的图像，你就能够区分“小猫”和其他动物。
+作为人类，如果你阅读上图右侧的文本，你会立即认为有 4 只小猫在一个棕色的篮子里。但假设你对“小猫”没有任何概念。你会假设篮子里有 4 样东西，被称为“小猫”。一旦你看到更多包含类似“小猫”的图像，你就能够区分“小猫”和其他动物。
 
 当你使用 [对比语言-图像预训练](https://openai.com/blog/clip/)（CLIP）进行图像分类的零样本学习时，就会发生这种情况。这被称为辅助信息。
 
 你可能会想，“那只是标记数据”。我理解你为什么会这么想，但它们并不是。辅助信息不是数据的标签，而是一种监督方式，帮助模型在训练阶段进行学习。
 
-当一个零样本学习模型看到足够数量的图像-文本配对时，它将能够区分和理解短语及其如何与图像中的某些模式相关联。通过使用CLIP技术的“对比学习”，零样本学习模型已经积累了良好的知识基础，从而能够在分类任务上进行预测。
+当一个零样本学习模型看到足够数量的图像-文本配对时，它将能够区分和理解短语及其如何与图像中的某些模式相关联。通过使用 CLIP 技术的“对比学习”，零样本学习模型已经积累了良好的知识基础，从而能够在分类任务上进行预测。
 
-这是CLIP方法的总结，其中训练了一个图像编码器和一个文本编码器，以预测一批（图像，文本）训练示例的正确配对。请参见下图：
+这是 CLIP 方法的总结，其中训练了一个图像编码器和一个文本编码器，以预测一批（图像，文本）训练示例的正确配对。请参见下图：
 
-![零样本学习解析](../Images/7215f67e2b8545551db2af0610651bb4.png)
+![零样本学习解析](img/7215f67e2b8545551db2af0610651bb4.png)
 
 [从自然语言监督中学习可转移的视觉模型](https://arxiv.org/pdf/2103.00020.pdf)
 
@@ -112,7 +112,7 @@
 
 一旦模型完成了训练阶段，它就具备了图像-文本配对的良好知识基础，并且现在可以用来进行预测。但在我们真正开始预测之前，我们需要通过创建一个可能的标签列表来设置分类任务。
 
-例如，继续进行动物物种的图像分类任务，我们需要一个所有动物物种的列表。这些标签中的每一个都将被编码，从T?到T?，使用在训练阶段发生的预训练文本编码器。
+例如，继续进行动物物种的图像分类任务，我们需要一个所有动物物种的列表。这些标签中的每一个都将被编码，从 T?到 T?，使用在训练阶段发生的预训练文本编码器。
 
 一旦标签被编码，我们可以通过预训练的图像编码器输入图像。我们将使用距离度量余弦相似度来计算图像编码与每个文本标签编码之间的相似性。
 
@@ -150,10 +150,10 @@
 
 +   [深度学习关键术语解析](https://www.kdnuggets.com/2016/10/deep-learning-key-terms-explained.html)
 
-+   [KDnuggets新闻，11月16日：LinkedIn如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
-+   [7个最佳机器学习库解析](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
++   [7 个最佳机器学习库解析](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
 
-+   [5种机器学习模型在5分钟内解析](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
++   [5 种机器学习模型在 5 分钟内解析](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
 
-+   [每个机器学习算法在1分钟内解析](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
++   [每个机器学习算法在 1 分钟内解析](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)

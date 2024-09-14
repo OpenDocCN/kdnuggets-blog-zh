@@ -1,8 +1,8 @@
 # 揭示机器学习
 
-> 原文：[https://www.kdnuggets.com/demystifying-machine-learning](https://www.kdnuggets.com/demystifying-machine-learning)
+> 原文：[`www.kdnuggets.com/demystifying-machine-learning`](https://www.kdnuggets.com/demystifying-machine-learning)
 
-![揭示机器学习](../Images/ec7fa7aba64f9e4f048d2e0a735e873c.png)
+![揭示机器学习](img/ec7fa7aba64f9e4f048d2e0a735e873c.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -54,7 +54,7 @@
 
 +   **分类：** 将事物分类到不同的类别中，例如将图片分类为猫或狗，将电子邮件分类为垃圾邮件或非垃圾邮件等。
 
-+   **回归：** 它涉及预测数值，例如房价、你的GPA或基于某些特征的销售数量。
++   **回归：** 它涉及预测数值，例如房价、你的 GPA 或基于某些特征的销售数量。
 
 ## 无监督机器学习
 
@@ -70,9 +70,9 @@
 
 # 高级机器学习过程
 
-机器学习，就像烹饪艺术一样，拥有将原始、不同的元素转化为深刻见解的神奇能力。就像一位熟练的厨师巧妙地结合各种食材来制作美味的菜肴一样。以下是执行机器学习任务的6个基本步骤：
+机器学习，就像烹饪艺术一样，拥有将原始、不同的元素转化为深刻见解的神奇能力。就像一位熟练的厨师巧妙地结合各种食材来制作美味的菜肴一样。以下是执行机器学习任务的 6 个基本步骤：
 
-![揭开机器学习的神秘面纱](../Images/59bc5eff4a0157b31f459279d0fb8cf7.png)
+![揭开机器学习的神秘面纱](img/59bc5eff4a0157b31f459279d0fb8cf7.png)
 
 作者提供的图片
 
@@ -122,8 +122,8 @@
 
 +   [揭开现实世界决策树的神秘面纱](https://www.kdnuggets.com/demystifying-decision-trees-for-the-real-world)
 
-+   [每个机器学习工程师应具备的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应具备的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的完整计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)

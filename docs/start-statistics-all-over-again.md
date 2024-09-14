@@ -1,22 +1,22 @@
 # 如果你必须重新开始学习统计学，你会从哪里开始？
 
-> 原文：[https://www.kdnuggets.com/2020/06/start-statistics-all-over-again.html](https://www.kdnuggets.com/2020/06/start-statistics-all-over-again.html)
+> 原文：[`www.kdnuggets.com/2020/06/start-statistics-all-over-again.html`](https://www.kdnuggets.com/2020/06/start-statistics-all-over-again.html)
 
-[评论](#comments)
+评论
 
-**由[李·贝克](https://www.chi2innovations.com/about/)，Chi-Squared Innovations的联合创始人兼首席执行官**。
+**由[李·贝克](https://www.chi2innovations.com/about/)，Chi-Squared Innovations 的联合创始人兼首席执行官**。
 
-![Statistics](../Images/3442699db9a49d9827f893c03c94fd59.png)
+![Statistics](img/3442699db9a49d9827f893c03c94fd59.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -78,13 +78,13 @@
 
 那么，如果她必须重新开始统计学，她会怎么做呢？
 
-> “如果我重新开始，我会希望从学习统计学开始，这样我可以处理数据，进行动手的数据分析（使用R！），并且专注于如何提出正确的问题以及如何在真实复杂的数据集中寻找这些问题的答案。”
+> “如果我重新开始，我会希望从学习统计学开始，这样我可以处理数据，进行动手的数据分析（使用 R！），并且专注于如何提出正确的问题以及如何在真实复杂的数据集中寻找这些问题的答案。”
 
 在给统计学新手的三部分建议中的第二部分，Garrett Grolemund（看，我不是说过我们会再听到他的声音吗？）表示，如果他有机会重新开始统计学：
 
 > “我会认真思考随机性到底是什么。统计学是这些东西的应用版本，但我们往往过快地跳到数学/计算部分。”
 
-所以，我们得出了结论。10只猫中有9只统计学家更喜欢应用统计学！所以，下次你在没有理论背景的情况下分析数据时感到难过时，只要记住你正在走许多正规训练统计学家如果有机会重新来过的路。如果对他们来说足够好，你知道接下来会发生什么……
+所以，我们得出了结论。10 只猫中有 9 只统计学家更喜欢应用统计学！所以，下次你在没有理论背景的情况下分析数据时感到难过时，只要记住你正在走许多正规训练统计学家如果有机会重新来过的路。如果对他们来说足够好，你知道接下来会发生什么……
 
 ### 频率派统计学 *vs* 贝叶斯统计学
 
@@ -98,7 +98,7 @@
 
 有趣的是，我也是这样！那么，他的所有统计学知识从哪里来的呢？
 
-> “我在本科物理课程中学习了基础统计学，然后在研究生阶段及其之后，作为天体物理学家进行数据分析时学到了更多。我在大约22年前开始探索数据挖掘、统计学习和机器学习时学到了更多统计学。从那时起，我一直没有停止学习统计学。”
+> “我在本科物理课程中学习了基础统计学，然后在研究生阶段及其之后，作为天体物理学家进行数据分析时学到了更多。我在大约 22 年前开始探索数据挖掘、统计学习和机器学习时学到了更多统计学。从那时起，我一直没有停止学习统计学。”
 
 这开始听起来像我统计教育的经历。你只需将‘astro’从天体物理学中去掉，它们就是一样的！那么他如何看待重新开始统计学呢？
 
@@ -110,7 +110,7 @@
 
 当我问[Lillian Pierson](https://www.data-mania.com/)（[数据狂人](https://twitter.com/Strategy_Gal)）她会从哪里开始时，她也提到了贝叶斯统计学：
 
-> “如果我必须重新开始统计学，我会从三个基本的概念入手：t检验、贝叶斯概率和皮尔逊相关性。”
+> “如果我必须重新开始统计学，我会从三个基本的概念入手：t 检验、贝叶斯概率和皮尔逊相关性。”
 
 就个人而言，我没有做过很多贝叶斯统计学，这是我在统计学中最大的遗憾之一。我能看到用贝叶斯方法做事的潜力，但由于没有老师或导师，我一直没能真正找到入门的途径。
 
@@ -126,7 +126,7 @@
 
 ### 模拟统计学是新的黑色
 
-我还从谷歌决策智能部负责人Cassie Kozyrkov那里获得了一个非常有趣的观点（[@quaesita](https://twitter.com/quaesita)），她告诉我她会：
+我还从谷歌决策智能部负责人 Cassie Kozyrkov 那里获得了一个非常有趣的观点（[@quaesita](https://twitter.com/quaesita)），她告诉我她会：
 
 > “可能会享受把打印的统计表当作篝火烧！”
 
@@ -136,45 +136,45 @@
 
 好的，我明白了，但为什么特别是模拟？
 
-> “大多数STAT101课程中教授的‘传统’方法是在计算机出现之前发展起来的，过分依赖于那些将统计问题挤入可以用常见分布和那些过时的打印表格进行分析的限制性假设。”
+> “大多数 STAT101 课程中教授的‘传统’方法是在计算机出现之前发展起来的，过分依赖于那些将统计问题挤入可以用常见分布和那些过时的打印表格进行分析的限制性假设。”
 
 我明白了。那么你到底对打印表格有什么意见呢？
 
-> “嗯，我常常想传统课程是否弊大于利，因为我看到他们的幸存者在做‘III型错误’——正确回答错误的方便问题。通过模拟，你可以回到最基本的原则，发现统计学的真正魔力。”
+> “嗯，我常常想传统课程是否弊大于利，因为我看到他们的幸存者在做‘III 型错误’——正确回答错误的方便问题。通过模拟，你可以回到最基本的原则，发现统计学的真正魔力。”
 
 统计学有魔力吗？
 
 > “当然了！我最喜欢的一点是，通过模拟学习统计学迫使你面对假设所扮演的角色。毕竟，在统计学中，你的假设至少与数据一样重要，甚至更重要。”
 
-当谈到提供建议时，[KDnuggets](https://www.kdnuggets.com/)（[@kdnuggets](https://twitter.com/kdnuggets)）的创始人Gregory Piatetsky建议：
+当谈到提供建议时，[KDnuggets](https://www.kdnuggets.com/)（[@kdnuggets](https://twitter.com/kdnuggets)）的创始人 Gregory Piatetsky 建议：
 
-> “我会从Leo Breiman关于[两种文化](https://projecteuclid.org/download/pdf_1/euclid.ss/1009213726)的论文开始，并且我会学习贝叶斯推断。”
+> “我会从 Leo Breiman 关于[两种文化](https://projecteuclid.org/download/pdf_1/euclid.ss/1009213726)的论文开始，并且我会学习贝叶斯推断。”
 
-如果你还没读过那篇论文（它是开放访问的），Leo Breiman阐述了算法建模的案例，其中统计被模拟为一个黑箱模型，而不是遵循预定的统计模型。
+如果你还没读过那篇论文（它是开放访问的），Leo Breiman 阐述了算法建模的案例，其中统计被模拟为一个黑箱模型，而不是遵循预定的统计模型。
 
-这正是Cassie想表达的——统计模型很少适用于现实世界的数据，我们只能尝试将数据硬塞进模型中（得到对错误问题的正确答案），或者切换方法，做一些完全不同的事情——模拟！
+这正是 Cassie 想表达的——统计模型很少适用于现实世界的数据，我们只能尝试将数据硬塞进模型中（得到对错误问题的正确答案），或者切换方法，做一些完全不同的事情——模拟！
 
 ### 还有更多内容...
 
-这是我原始帖子的摘录，它相当长——长到无法在这里全部发布（有超过30位世界级的贡献者！）。
+这是我原始帖子的摘录，它相当长——长到无法在这里全部发布（有超过 30 位世界级的贡献者！）。
 
-如果你喜欢阅读，你可能会对Dez Blanchfield对领域专家的看法，或Michael Friendly和Alberto Cairo对数据可视化的过去、现在和未来的看法感兴趣。
+如果你喜欢阅读，你可能会对 Dez Blanchfield 对领域专家的看法，或 Michael Friendly 和 Alberto Cairo 对数据可视化的过去、现在和未来的看法感兴趣。
 
-还有一本**免费下载的书**详细列出了贡献者们的所有评论，包括Natalie Dean和Jen Stirrup对信息流和侦探工作的看法。
+还有一本**免费下载的书**详细列出了贡献者们的所有评论，包括 Natalie Dean 和 Jen Stirrup 对信息流和侦探工作的看法。
 
-更不要让我开始谈论Charles Wheelan和Chelsea Parlett-Pelleriti关于沟通的精彩建议，或者Apache Crunch项目创始人Josh Wills对统计食谱、微积分和模拟统计的比较。
+更不要让我开始谈论 Charles Wheelan 和 Chelsea Parlett-Pelleriti 关于沟通的精彩建议，或者 Apache Crunch 项目创始人 Josh Wills 对统计食谱、微积分和模拟统计的比较。
 
 太棒了——你真的不想错过它们！
 
 欢迎过来阅读**[原始帖子](https://www.chi2innovations.com/blog/discover-stats-blog-series/experts-say-this-is-the-future-of-statistics/)**。
 
-**个人简介：**[Lee Baker](https://www.chi2innovations.com/about/) 是一位获奖的软件创作者，常常在黑暗的房间里坐在键盘后面。他的工作仅由显示器的光线照亮，他希望找到灯开关。拥有数十年的科学、统计和人工智能经验，他热衷于用数据讲故事，但尽管已经解释过十几次，他的母亲仍然不理解他是做什么的。他坚持认为数据分析比我们想象的要简单得多，因此他创作了友好易懂的书籍和视频课程，教授数据分析和统计的基础知识。作为Chi-Squared Innovations的首席执行官，他有一天希望退休去做一些更简单的事情，比如抓鳄鱼。
+**个人简介：**[Lee Baker](https://www.chi2innovations.com/about/) 是一位获奖的软件创作者，常常在黑暗的房间里坐在键盘后面。他的工作仅由显示器的光线照亮，他希望找到灯开关。拥有数十年的科学、统计和人工智能经验，他热衷于用数据讲故事，但尽管已经解释过十几次，他的母亲仍然不理解他是做什么的。他坚持认为数据分析比我们想象的要简单得多，因此他创作了友好易懂的书籍和视频课程，教授数据分析和统计的基础知识。作为 Chi-Squared Innovations 的首席执行官，他有一天希望退休去做一些更简单的事情，比如抓鳄鱼。
 
 **相关：**
 
 +   [简明统计推断课程：免费电子书](https://www.kdnuggets.com/2020/04/statistics-concise-course-statistical-inference-free-ebook.html)
 
-+   [数据科学家应避免的5个统计陷阱](https://www.kdnuggets.com/2019/10/statistical-traps-data-scientists-avoid.html)
++   [数据科学家应避免的 5 个统计陷阱](https://www.kdnuggets.com/2019/10/statistical-traps-data-scientists-avoid.html)
 
 +   [如何成为一个（优秀的）数据科学家 – 初学者指南](https://www.kdnuggets.com/2019/10/good-data-scientist-beginner-guide.html)
 
@@ -182,12 +182,12 @@
 
 +   [如果我重新开始学习数据科学，我会怎么做？](https://www.kdnuggets.com/2020/08/start-learning-data-science-again.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学的顶级统计资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

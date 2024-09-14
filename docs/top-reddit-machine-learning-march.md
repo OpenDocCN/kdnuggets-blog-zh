@@ -1,10 +1,10 @@
 # Top /r/MachineLearning 帖子，三月：一份超级严厉的机器学习指南；是 Gaggle 还是 Koogle?!?
 
-> 原文：[https://www.kdnuggets.com/2017/04/top-reddit-machine-learning-march.html](https://www.kdnuggets.com/2017/04/top-reddit-machine-learning-march.html)
+> 原文：[`www.kdnuggets.com/2017/04/top-reddit-machine-learning-march.html`](https://www.kdnuggets.com/2017/04/top-reddit-machine-learning-march.html)
 
 在三月的 [/r/MachineLearning](https://www.reddit.com/r/MachineLearning/) 中，我们欣赏到了一份超级严厉的机器学习指南，得知 Google 正在收购 Kaggle，从 Salesforce 的首席数据科学家那里获得超监督学习建议，听到 Andrew Ng 退出百度的告别，并了解到更多有关 Distill 的激动人心的信息，这是一个基于网络的“机器学习研究互动视觉期刊”。
 
-![Reddit](../Images/d30c564a2c60454c0219fc68e6b7f725.png)
+![Reddit](img/d30c564a2c60454c0219fc68e6b7f725.png)
 
 过去一个月**/r/MachineLearning**的前 5 名帖子是：
 
@@ -12,7 +12,7 @@
 
 这本简短而直白的机器学习指南由 [/u/thatguydr](https://www.reddit.com/user/thatguydr) 编写，他的简洁性令人钦佩。他的整个指南——在随后的讨论中扩展、讨论，并有其他人提供的材料——如下：
 
-> 首先，阅读该死的 Hastie、Tibshirani 和其他人。第 1-4 章和第 7 章。如果不理解，就一直读，直到明白为止。
+> 首先，阅读该死的 Hastie、Tibshirani 和其他人。第 1-4 章和第七章。如果不理解，就一直读，直到明白为止。
 > 
 > 你可以继续阅读剩下的书。如果你愿意，你应该这么做，但我会假设你都知道了。
 > 
@@ -32,7 +32,7 @@ Google 收购了 Kaggle。这不应该是一个**巨大**的惊喜，考虑到�
 
 > Kaggle 与 Google 也有一段历史，不过那是最近的事。本月早些时候，Google 和 Kaggle 联手举办了一场价值 $100,000 的机器学习竞赛，主题是分类 YouTube 视频。该竞赛也与 Google Cloud Platform 进行了深度集成。
 
-![Koogles and Gaggles](../Images/cb6329756839735555c82783d6e4a0fd.png)
+![Koogles and Gaggles](img/cb6329756839735555c82783d6e4a0fd.png)
 
 我们将拭目以待谷歌在 Kaggle 上的最终目标是什么，但这里有各种交叉的可能性。根据你对潜在垄断的看法，这个事件要么令人兴奋，要么令人恐惧。但这是一个很好的品牌推广举措，并且可以帮助谷歌扩展其最近成为全球唯一机器学习巨头的兴趣。
 
@@ -40,7 +40,7 @@ Google 收购了 Kaggle。这不应该是一个**巨大**的惊喜，考虑到�
 
 来自 Salesforce 首席科学家 Richard Socher 的一条推特建议：
 
-![Richard Socher tweet](../Images/9877582cb7eddba624bf2655e49e7914.png)
+![Richard Socher tweet](img/9877582cb7eddba624bf2655e49e7914.png)
 
 尽管这是一个苹果和橙子的比较（“与其吃一块肉类披萨，不如去砍些木头”），我在某种程度上可以理解他的立场。这将是一个伟大的教育性项目，并且可以支持整个社区，特别是如果他鼓励分享这些精选数据集的话。但实际上，我不认为所有从事无监督学习问题的人都会或应该去标注分类数据。这显然不会推动无监督学习的进展。
 
@@ -62,25 +62,25 @@ Google 收购了 Kaggle。这不应该是一个**巨大**的惊喜，考虑到�
 
 这无疑是一个需要关注的关键资源。祝相关人员好运。
 
-![Distill](../Images/99724db6f2d959747c825e898550a231.png)
+![Distill](img/99724db6f2d959747c825e898550a231.png)
 
 **相关：**
 
-+   [顶级 /r/MachineLearning 帖子，二月：牛津深度 NLP 课程；Scikit-learn 结果的数据可视化](/2017/03/top-reddit-machine-learning-posts-february.html)
++   顶级 /r/MachineLearning 帖子，二月：牛津深度 NLP 课程；Scikit-learn 结果的数据可视化
 
-+   [顶级 /r/MachineLearning 帖子，一月：TensorFlow 更新；AlphaGo 野外表现；自动驾驶马里奥卡丁车](/2017/02/top-reddit-machine-learning-posts-january.html)
++   顶级 /r/MachineLearning 帖子，一月：TensorFlow 更新；AlphaGo 野外表现；自动驾驶马里奥卡丁车
 
-+   [顶级 /r/MachineLearning 帖子，十二月：OpenAI 宇宙；面向编码员的深度学习 MOOC；马斯克：特斯拉变得更棒](/2017/01/top-reddit-machine-learning-december.html)
++   顶级 /r/MachineLearning 帖子，十二月：OpenAI 宇宙；面向编码员的深度学习 MOOC；马斯克：特斯拉变得更棒
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 

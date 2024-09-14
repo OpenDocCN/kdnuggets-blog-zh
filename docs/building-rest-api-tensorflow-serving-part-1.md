@@ -1,12 +1,12 @@
-# 使用 Tensorflow Serving 构建 REST API（第 1 部分）
+# 使用 Tensorflow Serving 构建 REST API（第一部分）
 
-> 原文：[https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html](https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html)
+> 原文：[`www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html`](https://www.kdnuggets.com/2020/07/building-rest-api-tensorflow-serving-part-1.html)
 
-[评论](#comments)
+评论
 
 **由 [Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)，数据科学家和机器学习工程师**
 
-![Image](../Images/db70da63fa526846f86b9986f26b5dbc.png)
+![Image](img/db70da63fa526846f86b9986f26b5dbc.png)
 
 ### 什么是 Tensorflow Serving？
 
@@ -72,9 +72,9 @@ tf.saved_model.save(myfun2, "tmp/fun_runif/1")
 
 `tf.saved_model.save`的第一个参数指向类的实例对象，而第二个参数是本地文件系统中的路径，模型将在该路径下保存。
 
-### 可服务的Keras模型
+### 可服务的 Keras 模型
 
-你可以采用类似的程序来保存Keras模型。这个示例关注于一个预训练的图像分类模型，它通过TensorFlow Hub加载。此外，我们将围绕它构建一个自定义类来预处理输入图像。
+你可以采用类似的程序来保存 Keras 模型。这个示例关注于一个预训练的图像分类模型，它通过 TensorFlow Hub 加载。此外，我们将围绕它构建一个自定义类来预处理输入图像。
 
 ```py
 class CustomMobileNet_string(tf.keras.Model):
@@ -105,9 +105,9 @@ class CustomMobileNet_string(tf.keras.Model):
 
 该类继承自`tf.keras.Model`，关于它有几点需要讨论：
 
-1.  模型的输入是一个字节字符串，这些字节以JSON文件的形式出现，其中包含特定的键|值对。有关更多信息，请参见教程的第二部分。
+1.  模型的输入是一个字节字符串，这些字节以 JSON 文件的形式出现，其中包含特定的键|值对。有关更多信息，请参见教程的第二部分。
 
-1.  `tf.reshape`是预处理阶段的第一个函数，因为图像被放入JSON文件中的数组中。由于我们使用了`@tf.function`对输入进行限制，因此需要进行这种转换。
+1.  `tf.reshape`是预处理阶段的第一个函数，因为图像被放入 JSON 文件中的数组中。由于我们使用了`@tf.function`对输入进行限制，因此需要进行这种转换。
 
 1.  属性`labels`存储了*ImageNet*的图像标签（可在[这里](https://storage.googleapis.com/download.tensorflow.org/data/ImageNetLabels.txt)获取）。我们希望模型输出的是文本格式的标签，而不是模型输出层的标签索引。其定义方式的原因如下所述。
 
@@ -121,19 +121,19 @@ tf.saved_model.save(model_string, "tmp/mobilenet_v2_test/1/")
 
 ```
 
-为了将额外的组件存储到SavedModel对象中，我们必须定义一个资产。我们使用`tf.saved_model.Asset`来实现，我在类定义之外调用此函数以使其更为明确。如果我们在类定义中进行，也可能会以相同的方式工作。**请注意，我们必须在保存模型之前将资产作为类实例的属性保存。**
+为了将额外的组件存储到 SavedModel 对象中，我们必须定义一个资产。我们使用`tf.saved_model.Asset`来实现，我在类定义之外调用此函数以使其更为明确。如果我们在类定义中进行，也可能会以相同的方式工作。**请注意，我们必须在保存模型之前将资产作为类实例的属性保存。**
 
 ### 进一步的细节
 
-这些是我们在保存自定义Keras模型时在本地文件系统中生成的文件夹。
+这些是我们在保存自定义 Keras 模型时在本地文件系统中生成的文件夹。
 
-![](../Images/804c6f74f982c1da6a5b3ec4440cd907.png)
+![](img/804c6f74f982c1da6a5b3ec4440cd907.png)
 
 生成的文件有：
 
-+   函数或模型的图形，保存在扩展名为`.pb`的Protobuf文件中。
++   函数或模型的图形，保存在扩展名为`.pb`的 Protobuf 文件中。
 
-+   模型的权重或在可服务的过程中使用的任何TensorFlow变量，保存在`variables`文件夹中。
++   模型的权重或在可服务的过程中使用的任何 TensorFlow 变量，保存在`variables`文件夹中。
 
 +   额外的组件保存在`assets`文件夹中，但在我们的示例中是空的。
 
@@ -141,43 +141,43 @@ tf.saved_model.save(model_string, "tmp/mobilenet_v2_test/1/")
 
 +   **选择父类的理由是什么？** 将`tf.Module`类附加到`tf.function`上允许后者使用`tf.saved_model`进行保存。`tf.keras.Model`也是如此。你可以在[这里](https://www.tensorflow.org/guide/saved_model#reusing_savedmodels_in_python)找到更多信息。
 
-+   **为什么在模型路径中添加`/1`？** 可服务的模型必须有一个ID，以指示我们在容器中运行的模型版本。这有助于在监控模型的指标时跟踪多个版本。你可以在以下[链接](https://stackoverflow.com/a/45552938)中找到更详细的解释。
++   **为什么在模型路径中添加`/1`？** 可服务的模型必须有一个 ID，以指示我们在容器中运行的模型版本。这有助于在监控模型的指标时跟踪多个版本。你可以在以下[链接](https://stackoverflow.com/a/45552938)中找到更详细的解释。
 
 目前就这些，谢谢阅读！
 
-**简介：[Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)** 在公共基础设施和服务行业中构建基于机器学习的产品。他的网站上可以找到更多教程：[http://thelongrun.blog](http://thelongrun.blog)
+**简介：[Guillermo Gomez](https://www.linkedin.com/in/mlgxmez/)** 在公共基础设施和服务行业中构建基于机器学习的产品。他的网站上可以找到更多教程：[`thelongrun.blog`](http://thelongrun.blog)
 
 [原文](https://thelongrun.blog/2020/01/12/rest-api-tensorflow-serving-pt1/)。经许可转载。
 
 **相关内容：**
 
-+   [使用 torchlayers 轻松构建 PyTorch 模型](/2020/04/pytorch-models-torchlayers.html)
++   使用 torchlayers 轻松构建 PyTorch 模型
 
-+   [优化生产环境中机器学习 API 的响应时间](/2020/05/optimize-response-time-machine-learning-api-production.html)
++   优化生产环境中机器学习 API 的响应时间
 
-+   [TensorFlow 2 入门](/2020/07/getting-started-tensorflow2.html)
++   TensorFlow 2 入门
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [排名前7的模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
++   [排名前 7 的模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
-+   [构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [OpenAI 的 Whisper API 用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)
 

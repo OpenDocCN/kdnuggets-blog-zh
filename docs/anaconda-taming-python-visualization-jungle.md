@@ -1,6 +1,6 @@
-# 驯服 Python 可视化丛林，11月29日网络研讨会
+# 驯服 Python 可视化丛林，11 月 29 日网络研讨会
 
-> 原文：[https://www.kdnuggets.com/2017/11/anaconda-taming-python-visualization-jungle.html](https://www.kdnuggets.com/2017/11/anaconda-taming-python-visualization-jungle.html)
+> 原文：[`www.kdnuggets.com/2017/11/anaconda-taming-python-visualization-jungle.html`](https://www.kdnuggets.com/2017/11/anaconda-taming-python-visualization-jungle.html)
 
 | [![[网络研讨会] 驯服 Python 数据可视化丛林](../Images/79722ea7ae3bed19e1f86c8c521c8bb2.png)](https://go.anaconda.com/registration-taming-python-visualization-jungle/?utm_source=kdnuggets&utm_medium=email&utm_campaign=viz_webinar)  |
 | --- |
@@ -15,7 +15,7 @@
 
 |
 
-| [![](../Images/fb7989361dea7b495abceb6b2463b7c1.png)](https://go.anaconda.com/registration-taming-python-visualization-jungle/?utm_source=kdnuggets&utm_medium=email&utm_campaign=viz_webinar)  |
+| ![](https://go.anaconda.com/registration-taming-python-visualization-jungle/?utm_source=kdnuggets&utm_medium=email&utm_campaign=viz_webinar)  |
 | --- |
 | 随时联系[Anaconda 大使](https://www.anaconda.com/contact-us/?utm_source=kdnuggets&utm_medium=email&utm_campaign=viz_webinar)以了解更多关于 Anaconda Enterprise 如何将你的组织提升到一个新水平的信息。诚挚的问候，Anaconda 团队 |
 
@@ -23,11 +23,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -37,10 +37,10 @@
 
 +   [使用 Seaborn 进行 Python 数据可视化](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
 
-+   [KDnuggets 新闻 22:n16, 4月20日：顶级 YouTube 频道学习…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20 日：顶级 YouTube 频道学习…](https://www.kdnuggets.com/2022/n16.html)
 
 +   [Python 如何用于数据可视化？](https://www.kdnuggets.com/2022/12/python-used-data-visualization.html)
 
-+   [365数据科学提供免费课程访问权限至11月20日](https://www.kdnuggets.com/2023/11/365datascience-offers-free-course-access-nov-20)
++   [365 数据科学提供免费课程访问权限至 11 月 20 日](https://www.kdnuggets.com/2023/11/365datascience-offers-free-course-access-nov-20)
 
 +   [讲述伟大的数据故事：可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)

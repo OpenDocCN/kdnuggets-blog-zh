@@ -1,8 +1,8 @@
-# 24本最佳（且免费的）理解机器学习的书籍
+# 24 本最佳（且免费的）理解机器学习的书籍
 
-> 原文：[https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html`](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
 
-![24本最佳（且免费的）理解机器学习的书籍](../Images/897009f8fa0668a9b411febee277dde8.png)
+![24 本最佳（且免费的）理解机器学习的书籍](img/897009f8fa0668a9b411febee277dde8.png)
 
 图片由编辑提供
 
@@ -10,11 +10,11 @@
 > 
 > ## 我们的前三名课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 > 
 > * * *
 > 
@@ -22,7 +22,7 @@
 > 
 > 艾伦·图灵
 
-毋庸置疑，机器学习已经成为当今最受欢迎的话题之一。根据一项[研究](http://blog.indeed.com/2019/03/14/best-jobs-2019/)，机器学习工程师被评选为2019年美国最佳职业之一。
+毋庸置疑，机器学习已经成为当今最受欢迎的话题之一。根据一项[研究](http://blog.indeed.com/2019/03/14/best-jobs-2019/)，机器学习工程师被评选为 2019 年美国最佳职业之一。
 
 看着这个趋势，我们编制了一份最佳（且免费的）机器学习书籍的列表，这些书籍对每一个希望在这个领域建立职业的人都会有帮助。
 
@@ -32,9 +32,9 @@
 
 **书籍链接**: [ISLR](http://faculty.marshall.usc.edu/gareth-james/ISL/)
 
-![詹姆斯, 威滕, 哈斯提, 蒂布希拉尼, 用R语言进行统计学习导论](../Images/bb0c4ac86a3b76fc80995b62b97d3da6.png)
+![詹姆斯, 威滕, 哈斯提, 蒂布希拉尼, 用 R 语言进行统计学习导论](img/bb0c4ac86a3b76fc80995b62b97d3da6.png)
 
-最佳的机器学习理论入门书籍。即使是付费书籍也很少有比这本更好的。这本书对数学有很好的介绍，同时还有R语言的练习材料。对这本书赞不绝口。
+最佳的机器学习理论入门书籍。即使是付费书籍也很少有比这本更好的。这本书对数学有很好的介绍，同时还有 R 语言的练习材料。对这本书赞不绝口。
 
 # 2. 神经网络与深度学习
 
@@ -94,7 +94,7 @@
 
 **书籍链接**: [机器学习基础](https://cs.nyu.edu/~mohri/mlbook/)
 
-![机器学习基础](../Images/a8212d8558c50acfbb18fcd8028ea2df.png)
+![机器学习基础](img/a8212d8558c50acfbb18fcd8028ea2df.png)
 
 这是一本详细论述机器学习数学概念的著作。
 
@@ -110,31 +110,31 @@
 
 近年来，传统机器学习几乎已经简化为在完成特征工程后运行 AutoML 模型（例如 h2o、auto sklearn 或 tpot，我们在 ParallelDots 的最爱）。实际上，还有一些方法可以进行自动化的非领域特定特征工程。这本书涵盖了 AutoML 中使用的方法。
 
-# 14. 深度学习与Pytorch
+# 14. 深度学习与 Pytorch
 
 **书籍链接**: [Deep Learning with Pytorch](https://pytorch.org/deep-learning-with-pytorch)
 
-一本免费的书，帮助你使用PyTorch学习深度学习。PyTorch是我们在ParallelDots最喜欢的深度学习库，我们推荐给所有从事应用研究/开发深度学习的人。
+一本免费的书，帮助你使用 PyTorch 学习深度学习。PyTorch 是我们在 ParallelDots 最喜欢的深度学习库，我们推荐给所有从事应用研究/开发深度学习的人。
 
 # 15. 深入深度学习
 
 **书籍链接**: [Dive Into Deep Learning](http://d2l.ai/)
 
-另一本详细介绍深度学习的书籍，使用亚马逊的MXNet库来教授深度学习。
+另一本详细介绍深度学习的书籍，使用亚马逊的 MXNet 库来教授深度学习。
 
-# 16. Keras Github笔记
+# 16. Keras Github 笔记
 
-**书籍链接**: [Keras Github笔记](https://github.com/fchollet/deep-learning-with-python-notebooks)
+**书籍链接**: [Keras Github 笔记](https://github.com/fchollet/deep-learning-with-python-notebooks)
 
-François Chollet是Keras库的负责人。他的书《Python中的深度学习》旨在教授Keras中的深度学习，评价非常高。虽然书籍本身不能免费获得，但所有代码以笔记本形式在Github上提供（形成了一个包含深度学习示例的书），是一个很好的资源。我在几年前学习Keras时读过这本书，非常好的资源。
+François Chollet 是 Keras 库的负责人。他的书《Python 中的深度学习》旨在教授 Keras 中的深度学习，评价非常高。虽然书籍本身不能免费获得，但所有代码以笔记本形式在 Github 上提供（形成了一个包含深度学习示例的书），是一个很好的资源。我在几年前学习 Keras 时读过这本书，非常好的资源。
 
 # 17. 基于模型的机器学习
 
 **书籍链接**: [Model-based Machine Learning](http://mbmlbook.com/)
 
-![Model-based Machine Learning](../Images/a96a9d1304109c0a6316e1ef2e1c3a2c.png)
+![Model-based Machine Learning](img/a96a9d1304109c0a6316e1ef2e1c3a2c.png)
 
-在贝叶斯机器学习领域的一个优秀资源。使用微软的Infer.Net库进行教学，因此你可能需要安装IronPython来阅读/实现书中的示例。
+在贝叶斯机器学习领域的一个优秀资源。使用微软的 Infer.Net 库进行教学，因此你可能需要安装 IronPython 来阅读/实现书中的示例。
 
 # 18. 机器学习的贝叶斯模型
 
@@ -142,13 +142,13 @@ François Chollet是Keras库的负责人。他的书《Python中的深度学习�
 
 另一本详细介绍各种贝叶斯方法在机器学习中的书籍。
 
-# 19. 艾森斯坦NLP笔记
+# 19. 艾森斯坦 NLP 笔记
 
-**书籍链接**: [艾森斯坦NLP笔记](https://github.com/jacobeisenstein/gt-nlp-class/blob/master/notes/eisenstein-nlp-notes.pdf)
+**书籍链接**: [艾森斯坦 NLP 笔记](https://github.com/jacobeisenstein/gt-nlp-class/blob/master/notes/eisenstein-nlp-notes.pdf)
 
-自然语言处理是机器学习中最受欢迎的应用。这些来自GATech课程的笔记提供了机器学习如何用来解释人类语言的很好的概述。
+自然语言处理是机器学习中最受欢迎的应用。这些来自 GATech 课程的笔记提供了机器学习如何用来解释人类语言的很好的概述。
 
-# 20. 强化学习 – Sutton和Barto
+# 20. 强化学习 – Sutton 和 Barto
 
 **书籍链接**: [Reinforcement Learning – Sutton and Barto](http://www.incompleteideas.net/book/the-book-2nd.html)
 
@@ -158,9 +158,9 @@ François Chollet是Keras库的负责人。他的书《Python中的深度学习�
 
 **书籍链接**: [Gaussian Processes for Machine Learning](http://www.gaussianprocess.org/gpml/)
 
-![](../Images/cad5096ddecef7386c473def8ddc5935.png)
+![](img/cad5096ddecef7386c473def8ddc5935.png)
 
-使用贝叶斯优化和高斯过程进行机器学习的教学。利用像Edward/GpyTorch/BOTorch等基于变分推断的库，这种方法正在复兴。
+使用贝叶斯优化和高斯过程进行机器学习的教学。利用像 Edward/GpyTorch/BOTorch 等基于变分推断的库，这种方法正在复兴。
 
 # 22. 机器学习面试 机器学习系统设计 Chip Huyen
 
@@ -188,12 +188,12 @@ François Chollet是Keras库的负责人。他的书《Python中的深度学习�
 
 +   [挑选示例以理解机器学习模型](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)
 
-+   [15本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
++   [15 本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
 
-+   [KDnuggets新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
 
-+   [15本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
++   [15 本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
 
 +   [图形：理解数据的自然方式](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)
 
-+   [使用SQL理解数据科学职业趋势](https://www.kdnuggets.com/using-sql-to-understand-data-science-career-trends)
++   [使用 SQL 理解数据科学职业趋势](https://www.kdnuggets.com/using-sql-to-understand-data-science-career-trends)

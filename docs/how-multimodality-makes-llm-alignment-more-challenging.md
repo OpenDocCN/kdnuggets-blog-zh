@@ -1,8 +1,8 @@
 # 多模态如何使 LLM 对齐变得更具挑战性
 
-> 原文：[https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging](https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging)
+> 原文：[`www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging`](https://www.kdnuggets.com/how-multimodality-makes-llm-alignment-more-challenging)
 
-![多模态如何使 LLM 对齐变得更具挑战性](../Images/e6cbe8ab3a64b72a64c59cf090a65e96.png)
+![多模态如何使 LLM 对齐变得更具挑战性](img/e6cbe8ab3a64b72a64c59cf090a65e96.png)
 
 图片来源：[Gerd Altmann](https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2814937) 来自 [Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2814937)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -40,17 +40,17 @@
 
 Gary Marcus 写了一篇关于多模态幻觉的优秀[文章](https://garymarcus.substack.com/p/hello-multimodal-hallucinations)，揭示了不同的案例。一个例子展示了 ChatGPT 如何从图像中错误地读取时间。它在数数厨房照片中的椅子时也遇到了困难，并且无法识别照片中佩戴手表的人。
 
-![多模态如何使 LLM 对齐更具挑战性](../Images/d7bc069bbd2f12ae82a482f14874603e.png)
+![多模态如何使 LLM 对齐更具挑战性](img/d7bc069bbd2f12ae82a482f14874603e.png)
 
-图片来源：[https://twitter.com/anh_ng8](https://twitter.com/anh_ng8)
+图片来源：[`twitter.com/anh_ng8`](https://twitter.com/anh_ng8)
 
 图像作为输入也为对抗性攻击打开了一扇窗。它们可以成为提示注入攻击的一部分，或者用于传递指令以使模型生成有害内容。
 
 Simon Willison 在这篇[文章](https://simonwillison.net/2023/Oct/14/multi-modal-prompt-injection/)中记录了几个图像注入攻击的例子。一个基本的例子涉及上传一张包含你希望 ChatGPT 遵循的新指令的图像。见下例：
 
-![多模态如何使 LLM 对齐更具挑战性](../Images/732ae41196025f9798323744196d576d.png)
+![多模态如何使 LLM 对齐更具挑战性](img/732ae41196025f9798323744196d576d.png)
 
-图片来源：[https://twitter.com/mn_google/status/1709639072858436064](https://twitter.com/mn_google/status/1709639072858436064)
+图片来源：[`twitter.com/mn_google/status/1709639072858436064`](https://twitter.com/mn_google/status/1709639072858436064)
 
 同样，照片中的文本也可以被替换为模型生成仇恨言论或有害内容的指令。
 
@@ -68,20 +68,20 @@ Simon Willison 在这篇[文章](https://simonwillison.net/2023/Oct/14/multi-mod
 
 # 总结
 
-多模态性为模型的使用带来了新的可能性，但也给模型开发人员带来了新的挑战，他们需要确保答案的无害性、真实性和有用性。由于多模态性，需要对更多方面进行对齐，为SFT和RLHF提供优质的训练数据变得更加困难。希望构建或微调多模态模型的人需要为这些新的挑战做好准备，采用包含高质量人类反馈的开发流程。
+多模态性为模型的使用带来了新的可能性，但也给模型开发人员带来了新的挑战，他们需要确保答案的无害性、真实性和有用性。由于多模态性，需要对更多方面进行对齐，为 SFT 和 RLHF 提供优质的训练数据变得更加困难。希望构建或微调多模态模型的人需要为这些新的挑战做好准备，采用包含高质量人类反馈的开发流程。
 
-**[](https://www.aboutdatablog.com/about)**[Magdalena Konkiewicz](https://www.aboutdatablog.com/about) 是Toloka的数据推广专家，这是一家支持快速且可扩展的AI开发的全球公司。她拥有爱丁堡大学的人工智能硕士学位，曾在欧洲和美国的企业担任NLP工程师、开发人员和数据科学家。她还参与了数据科学家的教学和指导，并定期向数据科学和机器学习出版物做出贡献。
+**[](https://www.aboutdatablog.com/about)**[Magdalena Konkiewicz](https://www.aboutdatablog.com/about) 是 Toloka 的数据推广专家，这是一家支持快速且可扩展的 AI 开发的全球公司。她拥有爱丁堡大学的人工智能硕士学位，曾在欧洲和美国的企业担任 NLP 工程师、开发人员和数据科学家。她还参与了数据科学家的教学和指导，并定期向数据科学和机器学习出版物做出贡献。
 
 ### 更多相关话题
 
-+   [12个最具挑战的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
++   [12 个最具挑战的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
 
-+   [Web LLM：将LLM聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
++   [Web LLM：将 LLM 聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [什么使可视化效果良好？](https://www.kdnuggets.com/2022/10/sphere-makes-visualization-good.html)
 
-+   [Interview Kickstart数据科学面试课程——它的独特之处](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
++   [Interview Kickstart 数据科学面试课程——它的独特之处](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
 
-+   [7种ChatGPT让你编程更高效的方式](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)
++   [7 种 ChatGPT 让你编程更高效的方式](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)

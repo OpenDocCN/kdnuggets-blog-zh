@@ -1,22 +1,22 @@
-# 我从查看200个机器学习工具中学到的东西
+# 我从查看 200 个机器学习工具中学到的东西
 
-> 原文：[https://www.kdnuggets.com/2020/07/200-machine-learning-tools.html](https://www.kdnuggets.com/2020/07/200-machine-learning-tools.html)
+> 原文：[`www.kdnuggets.com/2020/07/200-machine-learning-tools.html`](https://www.kdnuggets.com/2020/07/200-machine-learning-tools.html)
 
-[评论](#comments)
+评论
 
 **作者：[Chip Huyen](https://huyenchip.com/)，一位作家和计算机科学家，目前在硅谷的一家机器学习初创公司工作**。
 
-为了更好地了解可用于机器学习生产的工具的格局，我决定查找所有我能找到的AI/ML工具。我使用的资源包括：
+为了更好地了解可用于机器学习生产的工具的格局，我决定查找所有我能找到的 AI/ML 工具。我使用的资源包括：
 
 +   [全栈深度学习](https://github.com/alirezadir/Production-Level-Deep-Learning)
 
-+   [LF AI基金会格局](https://landscape.lfai.foundation/)
++   [LF AI 基金会格局](https://landscape.lfai.foundation/)
 
-+   [AI数据格局](http://dfkoz.com/ai-data-landscape/)
++   [AI 数据格局](http://dfkoz.com/ai-data-landscape/)
 
-+   媒体对顶级AI初创公司的各种排名
++   媒体对顶级 AI 初创公司的各种排名
 
-+   对我的[tweet](https://twitter.com/chipro/status/1202815757593108480)和[LinkedIn帖子](https://www.linkedin.com/posts/chiphuyen_machinelearning-machinelearningproduction-activity-6608605129010753536-bdZ7)的回应
++   对我的[tweet](https://twitter.com/chipro/status/1202815757593108480)和[LinkedIn 帖子](https://www.linkedin.com/posts/chiphuyen_machinelearning-machinelearningproduction-activity-6608605129010753536-bdZ7)的回应
 
 +   人们（朋友、陌生人、风险投资者）与我分享他们的列表
 
@@ -24,27 +24,27 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-在筛选掉应用公司（例如，使用机器学习提供商业分析的公司）、不再积极开发的工具以及无人使用的工具后，我得到了202个工具。请查看[完整列表](https://docs.google.com/spreadsheets/d/1OV0cMh2lmXMU9bK8qv1Kk0oWdc_Odmu2K5sOULS9hHQ/edit?usp=sharing)。如果你觉得有我应该包含但尚未列出的工具，请告诉我！
+在筛选掉应用公司（例如，使用机器学习提供商业分析的公司）、不再积极开发的工具以及无人使用的工具后，我得到了 202 个工具。请查看[完整列表](https://docs.google.com/spreadsheets/d/1OV0cMh2lmXMU9bK8qv1Kk0oWdc_Odmu2K5sOULS9hHQ/edit?usp=sharing)。如果你觉得有我应该包含但尚未列出的工具，请告诉我！
 
 **免责声明**
 
-1.  这个列表是在2019年11月制作的，市场在过去6个月里肯定发生了变化。
+1.  这个列表是在 2019 年 11 月制作的，市场在过去 6 个月里肯定发生了变化。
 
-1.  一些科技公司拥有一整套工具，大到我无法一一列举。例如，亚马逊网络服务提供了超过165个功能齐全的服务。
+1.  一些科技公司拥有一整套工具，大到我无法一一列举。例如，亚马逊网络服务提供了超过 165 个功能齐全的服务。
 
 1.  有许多隐形初创公司我并不知晓，还有许多在我听说之前就已经关闭了。
 
 ### I. 概述
 
-[我认同的一种机器学习生产流程的概括](https://github.com/chiphuyen/machine-learning-systems-design)包含4个步骤：
+[我认同的一种机器学习生产流程的概括](https://github.com/chiphuyen/machine-learning-systems-design)包含 4 个步骤：
 
 1.  项目设置
 
@@ -60,75 +60,75 @@
 
 ### II. 随时间推移的领域
 
-我跟踪了每个工具推出的年份。如果是开源项目，我查看了第一次提交的时间，以了解项目何时开始公开。如果是公司，我查看了它在Crunchbase上的成立年份。然后我绘制了每个类别中工具数量随时间的变化图。
+我跟踪了每个工具推出的年份。如果是开源项目，我查看了第一次提交的时间，以了解项目何时开始公开。如果是公司，我查看了它在 Crunchbase 上的成立年份。然后我绘制了每个类别中工具数量随时间的变化图。
 
-![](../Images/3bd87471824b1397aeee3d3339679243.png)
+![](img/3bd87471824b1397aeee3d3339679243.png)
 
-正如预期的那样，这些数据表明，直到2012年，该领域才开始爆炸性增长，对深度学习的兴趣得到了重新燃起。
+正如预期的那样，这些数据表明，直到 2012 年，该领域才开始爆炸性增长，对深度学习的兴趣得到了重新燃起。
 
-**AlexNet之前（2012年之前）**
+**AlexNet 之前（2012 年之前）**
 
-直到2011年，该领域主要由建模和训练工具主导，一些框架仍然非常流行（例如，scikit-learn）或对当前框架产生了影响（Theano）。一些在2012年前开始的机器学习工具并且一直持续到今天，要么已经上市（Cloudera、Datadog、Alteryx），要么被收购（Figure Eight），或者成为社区积极开发的流行开源项目（Spark、Flink、Kafka）。
+直到 2011 年，该领域主要由建模和训练工具主导，一些框架仍然非常流行（例如，scikit-learn）或对当前框架产生了影响（Theano）。一些在 2012 年前开始的机器学习工具并且一直持续到今天，要么已经上市（Cloudera、Datadog、Alteryx），要么被收购（Figure Eight），或者成为社区积极开发的流行开源项目（Spark、Flink、Kafka）。
 
 **开发阶段（2012-2015）**
 
-随着机器学习社区采用“让我们大量使用数据”的方法，机器学习领域变成了数据领域。当我们查看每年每个类别中启动的工具数量时，这一点尤为明显。在2015年，57%（82个工具中的47个）是数据管道工具。
+随着机器学习社区采用“让我们大量使用数据”的方法，机器学习领域变成了数据领域。当我们查看每年每个类别中启动的工具数量时，这一点尤为明显。在 2015 年，57%（82 个工具中的 47 个）是数据管道工具。
 
-![](../Images/d1634c70d28c4946906e31dc65111bf4.png)
+![](img/d1634c70d28c4946906e31dc65111bf4.png)
 
-**生产阶段（2016年至今）**
+**生产阶段（2016 年至今）**
 
 尽管追求纯研究很重要，但大多数公司负担不起，除非它能带来短期商业应用。随着机器学习研究、数据和现成模型变得更加可及，越来越多的人和组织希望找到应用，从而增加了帮助将机器学习投入生产的工具需求。
 
-在2016年，谷歌宣布了[其使用神经机器翻译来改进Google翻译](https://ai.googleblog.com/2016/09/a-neural-network-for-machine.html)，标志着深度学习在现实世界中的第一次重大应用。从那时起，许多工具被开发出来以促进机器学习应用的服务。
+在 2016 年，谷歌宣布了[其使用神经机器翻译来改进 Google 翻译](https://ai.googleblog.com/2016/09/a-neural-network-for-machine.html)，标志着深度学习在现实世界中的第一次重大应用。从那时起，许多工具被开发出来以促进机器学习应用的服务。
 
 ### III. 该领域尚未成熟
 
-尽管有许多AI初创公司，但其中大多数是应用程序初创公司（提供如业务分析或客户支持的应用程序），而不是工具初创公司（创建帮助其他公司构建自己应用程序的工具）。或用VC术语来说，大多数初创公司是垂直AI。在[2019年《福布斯》50家AI初创公司](https://www.forbes.com/sites/jilliandonfro/2019/09/17/ai-50-americas-most-promising-artificial-intelligence-companies/#2ecf64d9565c)中，只有7家公司是工具公司。
+尽管有许多 AI 初创公司，但其中大多数是应用程序初创公司（提供如业务分析或客户支持的应用程序），而不是工具初创公司（创建帮助其他公司构建自己应用程序的工具）。或用 VC 术语来说，大多数初创公司是垂直 AI。在[2019 年《福布斯》50 家 AI 初创公司](https://www.forbes.com/sites/jilliandonfro/2019/09/17/ai-50-americas-most-promising-artificial-intelligence-companies/#2ecf64d9565c)中，只有 7 家公司是工具公司。
 
 应用程序更容易销售，因为你可以去公司并说：“我们可以自动化你们一半的客户支持工作。” 工具的销售时间更长，但可以产生更大的影响，因为你不是针对单一应用程序，而是针对生态系统的一部分。许多公司可以共存，提供相同的应用程序，但对于一个流程部分，通常只有少数几个工具可以共存。
 
-经过广泛搜索，我只能找到大约200个AI工具，这与传统软件工程工具的数量相比显得微不足道。如果你想为传统的Python应用程序开发进行测试，你可以在2分钟内找到至少20个工具。如果你想为机器学习模型进行测试，则没有任何工具。
+经过广泛搜索，我只能找到大约 200 个 AI 工具，这与传统软件工程工具的数量相比显得微不足道。如果你想为传统的 Python 应用程序开发进行测试，你可以在 2 分钟内找到至少 20 个工具。如果你想为机器学习模型进行测试，则没有任何工具。
 
-### IV. 面临的MLOps问题
+### IV. 面临的 MLOps 问题
 
 许多传统的软件工程工具可以用于开发和服务机器学习应用程序。然而，许多挑战是机器学习应用程序特有的，需要专门的工具。
 
-在传统软件工程中，编码是难点，而在机器学习中，编码只是战斗的一小部分。开发一个可以在实际任务中提供显著性能改进的新模型是非常困难且成本高昂的。大多数公司不会专注于开发机器学习模型，而是会使用现成的模型，例如，“如果你需要，就用一个BERT”。
+在传统软件工程中，编码是难点，而在机器学习中，编码只是战斗的一小部分。开发一个可以在实际任务中提供显著性能改进的新模型是非常困难且成本高昂的。大多数公司不会专注于开发机器学习模型，而是会使用现成的模型，例如，“如果你需要，就用一个 BERT”。
 
 对于机器学习，使用最多/最佳数据开发的应用程序获胜。大多数公司将专注于改进他们的数据，而不是改进深度学习算法。因为数据可以快速变化，机器学习应用程序需要更快的开发和部署周期。在许多情况下，你可能需要每晚部署一个新模型。
 
-机器学习算法的规模也是一个问题。预训练的大型BERT模型具有3.4亿个参数，大小为1.35GB。即使它可以适配于消费级设备（例如你的手机），BERT在新样本上进行推理的时间也使它在许多实际应用中变得无用。例如，如果建议下一个字符的时间比你输入的时间还长，那么一个自动补全模型是无用的。
+机器学习算法的规模也是一个问题。预训练的大型 BERT 模型具有 3.4 亿个参数，大小为 1.35GB。即使它可以适配于消费级设备（例如你的手机），BERT 在新样本上进行推理的时间也使它在许多实际应用中变得无用。例如，如果建议下一个字符的时间比你输入的时间还长，那么一个自动补全模型是无用的。
 
-Git通过逐行比较差异来进行版本控制，因此对大多数传统的软件工程程序来说效果很好。然而，它不适合对数据集或模型检查点进行版本控制。Pandas对大多数传统的数据框操作效果良好，但在GPU上不起作用。
+Git 通过逐行比较差异来进行版本控制，因此对大多数传统的软件工程程序来说效果很好。然而，它不适合对数据集或模型检查点进行版本控制。Pandas 对大多数传统的数据框操作效果良好，但在 GPU 上不起作用。
 
-行基数据格式如CSV适用于使用较少数据的应用。然而，如果你的样本具有许多特征，而你只想使用其中的子集，使用行基数据格式仍需要加载所有特征。列式文件格式如PARQUET和OCR对此用例进行了优化。
+行基数据格式如 CSV 适用于使用较少数据的应用。然而，如果你的样本具有许多特征，而你只想使用其中的子集，使用行基数据格式仍需要加载所有特征。列式文件格式如 PARQUET 和 OCR 对此用例进行了优化。
 
 面临的机器学习应用开发的一些问题：
 
-+   **监控**：如何知道数据分布发生了变化，需要重新训练模型？例如： [Dessa](https://www.dessa.com/)，由Alex Krizhevsky（AlexNet的支持者）支持，2020年2月被Square收购。
++   **监控**：如何知道数据分布发生了变化，需要重新训练模型？例如： [Dessa](https://www.dessa.com/)，由 Alex Krizhevsky（AlexNet 的支持者）支持，2020 年 2 月被 Square 收购。
 
 +   **数据标注**：如何快速标注新数据或为新模型重新标注现有数据？例如： [Snorkel](https://www.snorkel.org/)。
 
-+   **CI/CD测试**：如何运行测试以确保每次更改后模型仍能按预期工作，因为你不能花费几天时间等待模型训练和收敛？例如： [Argo](https://argoproj.github.io/)。
++   **CI/CD 测试**：如何运行测试以确保每次更改后模型仍能按预期工作，因为你不能花费几天时间等待模型训练和收敛？例如： [Argo](https://argoproj.github.io/)。
 
 +   **部署**：如何打包和部署新模型或替换现有模型？例如： [OctoML](https://octoml.ai/)。
 
-+   **模型压缩**：如何压缩机器学习模型以适应消费者设备？例如：Xnor.ai，一家从艾伦研究所分拆出来专注于模型压缩的初创公司，在2018年5月融资1460万美元，估值6200万美元。2020年1月，苹果以约2亿美元收购了它，并关闭了其网站。
++   **模型压缩**：如何压缩机器学习模型以适应消费者设备？例如：Xnor.ai，一家从艾伦研究所分拆出来专注于模型压缩的初创公司，在 2018 年 5 月融资 1460 万美元，估值 6200 万美元。2020 年 1 月，苹果以约 2 亿美元收购了它，并关闭了其网站。
 
 +   **推理优化**：如何加速模型的推理时间？我们能否将操作融合在一起？我们可以使用更低的精度吗？使模型更小可能会加快其推理速度。示例： [TensorRT](https://developer.nvidia.com/tensorrt)。
 
 +   **边缘设备**：旨在快速且廉价地运行机器学习算法的硬件。示例： [Coral SOM](https://coral.ai/products/som/)。
 
-+   **隐私**：如何使用用户数据来训练模型，同时保护其隐私？如何使你的过程符合GDPR？例如： [PySyft](https://github.com/OpenMined/PySyft)。
++   **隐私**：如何使用用户数据来训练模型，同时保护其隐私？如何使你的过程符合 GDPR？例如： [PySyft](https://github.com/OpenMined/PySyft)。
 
 我绘制了按主要问题划分的工具数量。
 
-![](../Images/29e20383271843e3082aed8121b9374b.png)
+![](img/29e20383271843e3082aed8121b9374b.png)
 
 大部分关注于数据管道：数据管理、标注、数据库/查询、数据处理、数据生成。数据管道工具也可能旨在成为一体化平台。由于数据处理是项目中最耗费资源的阶段，一旦你让人们将数据放到你的平台上，就很诱人提供几个预构建/预训练的模型。
 
-建模和训练工具大多是框架。深度学习框架的竞争主要在PyTorch和TensorFlow之间，以及为特定任务家族（如NLP、NLU和多模态问题）包装这两者的高级框架之间的竞争。还有用于分布式训练的框架。谷歌推出了一个新框架，每个讨厌TensorFlow的谷歌员工都在热烈讨论： [JAX](https://github.com/google/jax)。
+建模和训练工具大多是框架。深度学习框架的竞争主要在 PyTorch 和 TensorFlow 之间，以及为特定任务家族（如 NLP、NLU 和多模态问题）包装这两者的高级框架之间的竞争。还有用于分布式训练的框架。谷歌推出了一个新框架，每个讨厌 TensorFlow 的谷歌员工都在热烈讨论： [JAX](https://github.com/google/jax)。
 
 有独立的实验跟踪工具，流行框架也内置了实验跟踪功能。超参数调整很重要，发现几个专注于此的工具并不奇怪，但没有一个似乎引起关注，因为超参数调整的瓶颈不是设置，而是运行所需的计算能力。
 
@@ -144,11 +144,11 @@ Git通过逐行比较差异来进行版本控制，因此对大多数传统的�
 
 Google 可能希望普及他们的工具，以便人们使用他们的云服务。NVIDIA 维护 cuDF（以及之前的 dask），以便能销售更多的 GPU。Databricks 提供免费的 MLflow，但出售他们的数据分析平台。Netflix 最近刚刚成立了专门的机器学习团队，并发布了 Metaflow 框架，以便在 ML 地图上留下他们的名字以吸引人才。Explosion 提供免费的 SpaCy，但对 Prodigy 收费。HuggingFace 提供免费的 transformers，我不知道他们是如何盈利的。
 
-由于开源软件（OSS）已成为标准，初创公司很难找到有效的商业模式。任何新成立的工具公司都必须与现有的开源工具竞争。如果你遵循开源核心商业模式，你必须决定哪些功能包含在OSS中，哪些功能包含在付费版本中，同时不显得贪婪，或者如何让免费用户开始付费。
+由于开源软件（OSS）已成为标准，初创公司很难找到有效的商业模式。任何新成立的工具公司都必须与现有的开源工具竞争。如果你遵循开源核心商业模式，你必须决定哪些功能包含在 OSS 中，哪些功能包含在付费版本中，同时不显得贪婪，或者如何让免费用户开始付费。
 
 ### VI. 结论
 
-关于人工智能泡沫是否会破裂有很多讨论。大量的人工智能投资集中在自动驾驶汽车上，而完全自主的车辆距离成为商品还有很长的路要走，因此一些人假设投资者会对人工智能失去希望。谷歌已经冻结了机器学习研究员的招聘。优步裁掉了他们人工智能团队的一半研究人员。这些决定都是在COVID之前做出的。有传言称，由于大量人们正在参加机器学习课程，将会有更多具备机器学习技能的人，而机器学习岗位却没有相应增加。
+关于人工智能泡沫是否会破裂有很多讨论。大量的人工智能投资集中在自动驾驶汽车上，而完全自主的车辆距离成为商品还有很长的路要走，因此一些人假设投资者会对人工智能失去希望。谷歌已经冻结了机器学习研究员的招聘。优步裁掉了他们人工智能团队的一半研究人员。这些决定都是在 COVID 之前做出的。有传言称，由于大量人们正在参加机器学习课程，将会有更多具备机器学习技能的人，而机器学习岗位却没有相应增加。
 
 现在还是进入机器学习领域的好时机吗？我相信人工智能的炒作是真实的，某个时点它必须会平静下来。这个时点可能已经发生了。然而，我不认为机器学习会消失。可能会有更少的公司能够负担机器学习研究，但需要工具将机器学习引入生产的公司将不会短缺。
 
@@ -162,9 +162,9 @@ Google 可能希望普及他们的工具，以便人们使用他们的云服务�
 
 **相关：**
 
-+   [5种替代数据科学工具](https://www.kdnuggets.com/2019/09/5-alternative-data-science-tools.html)
++   [5 种替代数据科学工具](https://www.kdnuggets.com/2019/09/5-alternative-data-science-tools.html)
 
-+   [2020年最有用的机器学习工具](https://www.kdnuggets.com/2020/03/most-useful-machine-learning-tools-2020.html)
++   [2020 年最有用的机器学习工具](https://www.kdnuggets.com/2020/03/most-useful-machine-learning-tools-2020.html)
 
 +   [数据科学工具的流行度，动画版](https://www.kdnuggets.com/2020/06/data-science-tools-popularity-animated.html)
 
@@ -172,12 +172,12 @@ Google 可能希望普及他们的工具，以便人们使用他们的云服务�
 
 +   [数据科学家招聘经理寻找的素质](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)
 
-+   [我从使用ChatGPT进行数据科学中学到的东西](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
++   [我从使用 ChatGPT 进行数据科学中学到的东西](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
 
 +   [机器学习的数据标注：市场概况、方法和工具](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)
 
-+   [每位数据科学家应该了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
++   [每位数据科学家应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
 
-+   [KDnuggets 新闻，5月25日：每位…都应该了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每位…都应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)
 
-+   [优化与管理机器学习生命周期的前10大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化与管理机器学习生命周期的前 10 大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)

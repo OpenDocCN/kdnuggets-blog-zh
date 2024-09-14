@@ -1,8 +1,8 @@
 # 关于 MLOps 的一切你需要知道的：KDnuggets 技术简报
 
-> 原文：[https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
+> 原文：[`www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops`](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
 
-由 KDNuggets 和 Machine Learning Mastery 提供的技术简报[![关于 MLOps 的一切你需要知道的：KDnuggets 技术简报](../Images/7abe390a18d89c99f420e9089299a5ce.png)](https://bit.ly/kdnuggets-everything-mlops-tech-brief)
+由 KDNuggets 和 Machine Learning Mastery 提供的技术简报![关于 MLOps 的一切你需要知道的：KDnuggets 技术简报](https://bit.ly/kdnuggets-everything-mlops-tech-brief)
 
 来源于 [关于 MLOps 的一切你需要知道的](https://bit.ly/kdnuggets-everything-mlops-tech-brief)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -32,9 +32,9 @@ KDnuggets 很高兴今天能够向社区介绍我们的技术简报，这是我�
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该知道的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该知道的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
 
-+   [KDnuggets 新闻，4月27日：关于 Papers With Code 的简要介绍；……](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：关于 Papers With Code 的简要介绍；……](https://www.kdnuggets.com/2022/n17.html)
 
 +   [朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
 

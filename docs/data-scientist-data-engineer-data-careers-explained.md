@@ -1,8 +1,8 @@
 # 数据科学家、数据工程师及其他数据职业解析
 
-> 原文：[https://www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html](https://www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html)
+> 原文：[`www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html`](https://www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html)
 
-![数据科学家、数据工程师及其他数据职业解析](../Images/f8c061d85b6c6fc3e153b8ce9803457e.png)
+![数据科学家、数据工程师及其他数据职业解析](img/f8c061d85b6c6fc3e153b8ce9803457e.png)
 
 [木桌照片由 freepik 创建 - www.freepik.com](https://www.freepik.com/photos/wood-desk)
 
@@ -92,26 +92,26 @@ SQL 和其他数据查询语言——如 Jaql、Hive、Pig 等——将是宝贵
 
 数据架构师和数据工程师关注的是数据的基础设施，包括数据的存储和传输。数据分析师关注的是从现有数据中提取描述性事实。机器学习工程师则专注于推进和使用现有工具，以利用数据进行预测和关联分析，并使得生成的模型广泛可用。数据科学家主要关注数据、从数据中提取的洞察力以及数据所讲述的故事，不论完成这些任务需要什么技术或工具。
 
-数据科学家可能会使用上面提到的任何技术，具体取决于他们的角色。这也是“数据科学”相关的最大问题之一；这个术语并没有特指任何具体内容，却涵盖了所有内容。这个角色是数据领域的万金油，知道（或许）如何启动一个Spark生态系统；如何对存储在其中的数据执行查询；如何将数据提取并存储在非关系数据库中；如何将非关系数据提取到平面文件中；如何在R或Python中处理这些数据；如何在初步探索性描述分析后进行特征工程；如何选择合适的机器学习算法对数据进行预测分析；如何统计分析预测任务的结果；如何将结果可视化以便非技术人员易于理解；以及如何向高管讲述数据处理管道的最终结果。
+数据科学家可能会使用上面提到的任何技术，具体取决于他们的角色。这也是“数据科学”相关的最大问题之一；这个术语并没有特指任何具体内容，却涵盖了所有内容。这个角色是数据领域的万金油，知道（或许）如何启动一个 Spark 生态系统；如何对存储在其中的数据执行查询；如何将数据提取并存储在非关系数据库中；如何将非关系数据提取到平面文件中；如何在 R 或 Python 中处理这些数据；如何在初步探索性描述分析后进行特征工程；如何选择合适的机器学习算法对数据进行预测分析；如何统计分析预测任务的结果；如何将结果可视化以便非技术人员易于理解；以及如何向高管讲述数据处理管道的最终结果。
 
-这只是数据科学家可能具备的一组技能之一。然而，无论如何，这个角色的重点在于数据以及从中获取的洞察力。领域知识通常也是此角色的重要组成部分，这显然不是这里可以教授的内容。数据科学家需要关注的关键技术和技能包括统计学（!!!）、编程语言（特别是Python、R和SQL）、数据可视化以及沟通技能——以及上述典型角色中提到的所有其他内容。
+这只是数据科学家可能具备的一组技能之一。然而，无论如何，这个角色的重点在于数据以及从中获取的洞察力。领域知识通常也是此角色的重要组成部分，这显然不是这里可以教授的内容。数据科学家需要关注的关键技术和技能包括统计学（!!!）、编程语言（特别是 Python、R 和 SQL）、数据可视化以及沟通技能——以及上述典型角色中提到的所有其他内容。
 
-数据科学家和机器学习工程师之间可能存在很多重叠，至少在数据建模（即：预测分析过程）及相关领域中尤其如此。然而，对于这些角色之间的差异，常常存在混淆。要详细了解数据工程师和数据科学家之间的关系——这对角色也可能有显著的重叠，可以参考[这篇Mihail Eric的精彩文章](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)。
+数据科学家和机器学习工程师之间可能存在很多重叠，至少在数据建模（即：预测分析过程）及相关领域中尤其如此。然而，对于这些角色之间的差异，常常存在混淆。要详细了解数据工程师和数据科学家之间的关系——这对角色也可能有显著的重叠，可以参考[这篇 Mihail Eric 的精彩文章](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)。
 
 记住，这些只是五种主要数据职业角色的原型，它们在不同组织之间可能有所不同。享受你理想数据职业的旅程吧！
 
-**[马修·梅奥](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家兼KDnuggets的主编，这是一份开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络及机器学习的自动化方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1 at kdnuggets[dot]com联系。
+**[马修·梅奥](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家兼 KDnuggets 的主编，这是一份开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络及机器学习的自动化方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 联系。
 
 ### 更多相关话题
 
-+   [区分数据科学家与其他职业的5个特点](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   [区分数据科学家与其他职业的 5 个特点](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
 
-+   [区分数据科学家与其他职业的7项独特技能](https://www.kdnuggets.com/2022/05/7-unique-skills-set-data-scientists-apart-professions.html)
++   [区分数据科学家与其他职业的 7 项独特技能](https://www.kdnuggets.com/2022/05/7-unique-skills-set-data-scientists-apart-professions.html)
 
 +   [如何通过数据驱动的人工智能使自己与其他申请者区分开](https://www.kdnuggets.com/2022/12/set-apart-applicants-datacentric-ai.html)
 
-+   [数据掩码：确保GDPR及其他监管合规的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
++   [数据掩码：确保 GDPR 及其他监管合规的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
 
 +   [事情并非总是正常的：一些“其他”分布](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)
 
-+   [你终极的Chat GPT及其他缩写指南](https://www.kdnuggets.com/2023/06/ultimate-guide-chat-gpt-abbreviations.html)
++   [你终极的 Chat GPT 及其他缩写指南](https://www.kdnuggets.com/2023/06/ultimate-guide-chat-gpt-abbreviations.html)

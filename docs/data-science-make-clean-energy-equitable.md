@@ -1,8 +1,8 @@
 # 利用数据科学使清洁能源更加公平
 
-> 原文：[https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)
+> 原文：[`www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html`](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)
 
-![利用数据科学使清洁能源更加公平](../Images/d868379170fbb64c5d15deb01f9e9251.png)
+![利用数据科学使清洁能源更加公平](img/d868379170fbb64c5d15deb01f9e9251.png)
 
 图片由 [Pedro Henrique Santos](https://unsplash.com/@phcsantos?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -24,9 +24,9 @@
 
 当我们使用数据科学来帮助应对气候变化时，我们应该寻求既环保又公平的解决方案。例如，许多社区没有可靠的公共交通。根据[蒂埃拉·比尔斯博士](https://www.widsconference.org/tierra-bills.html)，加州大学洛杉矶分校土木与环境工程助理教授，关于[交通需求](https://link.springer.com/chapter/10.1007/978-3-030-76059-5_8)的数据通常不可用或不准确，尤其是对老年人或残疾人等面临出行问题的群体。新的地理定位数据源和直接从用户处收集出行偏好的方法可以提供更全面的交通需求图景。数据科学可以帮助我们优化路线规划，并为服务不足的地区创建按需公交线路和拼车匹配服务。
 
-数据科学支持公平解决方案的另一个领域是清洁、可靠能源的获取。全球有高达7.6亿人缺乏[电力](https://www.worldbank.org/en/news/press-release/2021/06/07/report-universal-access-to-sustainable-energy-will-remain-elusive-without-addressing-inequalities)，还有更多人经历频繁的中断。根据能源专家[马新博士](https://www.widsconference.org/xinma.html)，TotalEnergies Ventures亚太平台总监，数据科学的进步可以帮助我们扩展和民主化能源获取。例如，微电网和小型电网可以通过实现小规模的本地发电，为偏远和服务不足的社区提供能源，而不依赖于传统电网。数据科学用于基于天气模式预测能源供应，并监测和优化太阳能电池板和电池的状态。近年来，[微电网和小型电网](https://www.worldbank.org/en/news/press-release/2021/06/07/report-universal-access-to-sustainable-energy-will-remain-elusive-without-addressing-inequalities)已经为全球超过1100万人提供了电力。
+数据科学支持公平解决方案的另一个领域是清洁、可靠能源的获取。全球有高达 7.6 亿人缺乏[电力](https://www.worldbank.org/en/news/press-release/2021/06/07/report-universal-access-to-sustainable-energy-will-remain-elusive-without-addressing-inequalities)，还有更多人经历频繁的中断。根据能源专家[马新博士](https://www.widsconference.org/xinma.html)，TotalEnergies Ventures 亚太平台总监，数据科学的进步可以帮助我们扩展和民主化能源获取。例如，微电网和小型电网可以通过实现小规模的本地发电，为偏远和服务不足的社区提供能源，而不依赖于传统电网。数据科学用于基于天气模式预测能源供应，并监测和优化太阳能电池板和电池的状态。近年来，[微电网和小型电网](https://www.worldbank.org/en/news/press-release/2021/06/07/report-universal-access-to-sustainable-energy-will-remain-elusive-without-addressing-inequalities)已经为全球超过 1100 万人提供了电力。
 
-这些例子来源于我主持的去年秋季的[C3E会议](https://www.youtube.com/watch?v=7o_0Bq7T3cE&t=33s)，展示了数据科学的深思熟虑的使用如何支持公平的清洁能源解决方案。3月7日，讨论将继续由我的同事[珍妮·萨卡尔博士](https://www.widsconference.org/jenny-suckale.html)在[全球女性数据科学会议](https://www.widsconference.org/)上主持，该会议将在斯坦福大学和在线进行。以下是这些小组讨论启发的一些教训，关于数据科学家如何帮助将公平付诸实践。
+这些例子来源于我主持的去年秋季的[C3E 会议](https://www.youtube.com/watch?v=7o_0Bq7T3cE&t=33s)，展示了数据科学的深思熟虑的使用如何支持公平的清洁能源解决方案。3 月 7 日，讨论将继续由我的同事[珍妮·萨卡尔博士](https://www.widsconference.org/jenny-suckale.html)在[全球女性数据科学会议](https://www.widsconference.org/)上主持，该会议将在斯坦福大学和在线进行。以下是这些小组讨论启发的一些教训，关于数据科学家如何帮助将公平付诸实践。
 
 **1) 考虑公平的多个维度。** 过去，推动公平的努力通常集中在为人们提供平等的*资源*和机会。然而，当人们起点不平等时，平等的访问权很少能带来公平的*结果*。[公平](https://medium.com/paper-pinecone/teaching-the-difference-between-equality-equity-and-justice-in-preschool-paper-pinecone-3c6bbbd443ca)是一个更广泛的框架，部分关注利益和负担如何在不同群体（如种族、收入、性别等）以及地理区域（如城乡差异、全球北方与南方）之间分配。它还考虑了人们的*行动能力*，提出诸如：在决策时谁被代表？人们是否有权力改变他们的情况和塑造他们的社区？在用公平的视角查看数据集时，询问被测量的内容、由谁测量以及目的是什么，以及数据中包含了谁而不包含谁。同样，边缘化群体在数据科学和数据驱动决策中的代表性也至关重要，以确保他们参与会影响他们社区的决策。
 
@@ -42,18 +42,18 @@
 
 这些只是我们可以利用数据科学以更公平的方式应对气候变化的一些方法。目前，存在大量的“公平洗牌”现象。组织声称考虑公平性，但实际上并未真正挑战现状。相反，公平性需要在整个数据科学过程中占据核心地位，从数据收集和问题分析到解决方案设计和实施。这是我们如何建设一个既更环保又更公正的世界的方法。
 
-**[Margot Gerritsen博士](https://www.linkedin.com/in/margot-gerritsen-2b01084/)** 是斯坦福大学能源资源工程系的教授。她是[数据科学中的女性（WiDS）](https://www.widsconference.org/)的共同创始人和联合主任，该计划旨在激励和教育全球的数据科学家，无论性别如何，并支持该领域的女性。如果你想深入了解如何利用数据科学以公平的方式应对气候变化等关键问题，WiDS邀请你参加他们2022年3月7日在斯坦福大学及全球线上举办的年度会议。
+**[Margot Gerritsen 博士](https://www.linkedin.com/in/margot-gerritsen-2b01084/)** 是斯坦福大学能源资源工程系的教授。她是[数据科学中的女性（WiDS）](https://www.widsconference.org/)的共同创始人和联合主任，该计划旨在激励和教育全球的数据科学家，无论性别如何，并支持该领域的女性。如果你想深入了解如何利用数据科学以公平的方式应对气候变化等关键问题，WiDS 邀请你参加他们 2022 年 3 月 7 日在斯坦福大学及全球线上举办的年度会议。
 
 ### 更多主题
 
-+   [使用管道编写清晰的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写清晰的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [利用人工智能设计公平和公正的电动汽车充电网络](https://www.kdnuggets.com/leveraging-ai-to-design-fair-and-equitable-ev-charging-grids)
 
-+   [绿色人工智能：使应用程序更具可持续性的7种策略](https://www.kdnuggets.com/greening-ai-7-strategies-to-make-applications-more-sustainable)
++   [绿色人工智能：使应用程序更具可持续性的 7 种策略](https://www.kdnuggets.com/greening-ai-7-strategies-to-make-applications-more-sustainable)
 
 +   [如何让大型语言模型与你的软件和谐相处…](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)
 
-+   [为什么越来越多的开发者使用Python进行机器学习项目？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
++   [为什么越来越多的开发者使用 Python 进行机器学习项目？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
 +   [我如何通过数据科学每月在线赚取$3,500](https://www.kdnuggets.com/2023/01/make-3500-online-every-month-data-science.html)

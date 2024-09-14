@@ -1,14 +1,14 @@
-# 学生在数据科学简历中遗漏的7件事
+# 学生在数据科学简历中遗漏的 7 件事
 
-> 原文：[https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
+> 原文：[`www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume`](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
 
-![学生在数据科学简历中遗漏的7件事](../Images/9afb352c1ba6e9be15e9a15b7dbeb3bc.png)
+![学生在数据科学简历中遗漏的 7 件事](img/9afb352c1ba6e9be15e9a15b7dbeb3bc.png)
 
 作者提供的图片
 
 回顾我作为学生的日子，我现在意识到我的数据科学简历中缺少了一些关键要素。这些不足可能导致我被多种职位拒绝。我不仅无法向潜在团队展示自己作为有价值的资产的能力，还难以展示解决数据科学问题的能力。然而，随着时间的推移，我逐渐进步，并与多个团队合作，找出我遗漏的内容以及如果重新开始，我该如何做得更好。
 
-在这篇博客中，我将分享学生们在数据科学简历中常常忽略的7件事，这些遗漏可能会导致招聘经理不联系他们面试。
+在这篇博客中，我将分享学生们在数据科学简历中常常忽略的 7 件事，这些遗漏可能会导致招聘经理不联系他们面试。
 
 # 1\. 简单且易读的简历
 
@@ -18,13 +18,13 @@
 
 当你在经历部分列出你以前的工作经历或项目时，建议专注于量化的成就，而不是仅仅列出你的职责。
 
-例如，不要只是写“开发了机器学习模型”，你可以写成“开发了一个提高销售额15%的机器学习模型。”这将展示你工作的实际影响，并展示你推动结果的能力。
+例如，不要只是写“开发了机器学习模型”，你可以写成“开发了一个提高销售额 15%的机器学习模型。”这将展示你工作的实际影响，并展示你推动结果的能力。
 
 # 3\. 数据科学特定技能
 
 在列出你的技术技能时，至关重要的是要突出与数据科学直接相关的技能。避免包括与数据科学无关的技能，如平面设计或视频编辑。保持技能列表简洁，并写明你在每项技能上的经验年限。
 
-确保提及编程语言，如Python或R，数据可视化工具，如Tableau或Power BI，以及数据分析工具，如SQL或pandas。此外，值得提及你使用过流行的机器学习库，如PyTorch或scikit-learn的经验。
+确保提及编程语言，如 Python 或 R，数据可视化工具，如 Tableau 或 Power BI，以及数据分析工具，如 SQL 或 pandas。此外，值得提及你使用过流行的机器学习库，如 PyTorch 或 scikit-learn 的经验。
 
 # 4\. 软技能和团队合作
 
@@ -46,7 +46,7 @@
 
 # 7\. 专业作品集的链接
 
-创建一个在线作品集并在简历中分享是非常重要的。这将使招聘经理能够快速查看你的过去项目及你用于解决特定数据问题的工具。你可以查看创建数据科学作品集的顶级免费平台：[7个免费平台构建强大的数据科学作品集](/2022/10/7-free-platforms-building-strong-data-science-portfolio.html)
+创建一个在线作品集并在简历中分享是非常重要的。这将使招聘经理能够快速查看你的过去项目及你用于解决特定数据问题的工具。你可以查看创建数据科学作品集的顶级免费平台：7 个免费平台构建强大的数据科学作品集
 
 未能包含指向你的 GitHub 仓库或展示你项目的个人网站的链接是一个错失的机会。
 
@@ -66,6 +66,6 @@
 
 +   [提升简历的 7 个人工智能作品集项目](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
 
-+   [KDnuggets 新闻，9月21日：7 个机器学习作品集项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习作品集项目…](https://www.kdnuggets.com/2022/n37.html)
 
 +   [使用 Pandas fillna() 输入缺失数据的最佳方式](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)

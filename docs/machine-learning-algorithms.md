@@ -1,8 +1,8 @@
 # 机器学习算法 – 什么、为什么以及如何？
 
-> 原文：[https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)
+> 原文：[`www.kdnuggets.com/2022/09/machine-learning-algorithms.html`](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)
 
-![机器学习算法 – 什么、为什么以及如何？](../Images/83fe2fbc81f77092df8f4937eac75641.png)
+![机器学习算法 – 什么、为什么以及如何？](img/83fe2fbc81f77092df8f4937eac75641.png)
 
 图片由编辑提供
 
@@ -18,9 +18,9 @@
 
 +   数据本质上是动态的，并且在过去十年中随着技术的普及变得更加动态。静态的预编写规则对业务采取有意义的行动帮助甚微。这就是机器学习算法的模式挖掘能力发挥最大作用的地方。
 
-以一个欺诈检测案例为例。程序员会编写规则，例如如果交易金额超过$10K，交易地点是X，且是某种类型，即电汇，那么它将被标记为潜在的欺诈交易。
+以一个欺诈检测案例为例。程序员会编写规则，例如如果交易金额超过$10K，交易地点是 X，且是某种类型，即电汇，那么它将被标记为潜在的欺诈交易。
 
-![机器学习算法 – 什么、为什么以及如何？](../Images/00ff1313e43307caf8c69c6af884335e.png)
+![机器学习算法 – 什么、为什么以及如何？](img/00ff1313e43307caf8c69c6af884335e.png)
 
 来源：作者
 
@@ -38,11 +38,11 @@
 
 Sci-kit learn 发布了一个流程图，这是一个很好的起点，用于了解哪些算法适用于什么类型的数据和给定问题。
 
-![机器学习算法 - 什么，为什么，怎么做？](../Images/c22b41f963fa5a52278530b537194061.png)
+![机器学习算法 - 什么，为什么，怎么做？](img/c22b41f963fa5a52278530b537194061.png)
 
-来源：[https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
+来源：[`scikit-learn.org/stable/tutorial/machine_learning_map/index.html`](https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html)
 
-很容易被大量高级算法压倒，开始通过试错方法实施它们以找到合适的模型。但时间至关重要，你需要将算法选择缩小到少量候选集，例如2到3个。
+很容易被大量高级算法压倒，开始通过试错方法实施它们以找到合适的模型。但时间至关重要，你需要将算法选择缩小到少量候选集，例如 2 到 3 个。
 
 我们已经将算法搜索空间缩小到一个小集，现在将列出优缺点、限制和约束。
 
@@ -76,29 +76,29 @@ Sci-kit learn 发布了一个流程图，这是一个很好的起点，用于了
 
 文章的关键亮点在于理解机器学习算法的重要性。此外，它解释了不同的模型选择标准，以帮助你找到适合你业务问题的机器学习算法。值得注意的是，没有一个通用的算法能够适用于多个使用案例。文章最后分享了备忘单，以帮助理解数据类型和业务问题与算法之间的映射。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究的交汇处工作，以提供业务价值和洞察。她是数据中心科学的倡导者，并在数据治理方面是领先专家，致力于构建可信的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究的交汇处工作，以提供业务价值和洞察。她是数据中心科学的倡导者，并在数据治理方面是领先专家，致力于构建可信的 AI 解决方案。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [Python和R中的机器学习算法比较](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)
++   [Python 和 R 中的机器学习算法比较](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)
 
 +   [使用基础和现代方法解决计算机科学问题…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)
 
 +   [机器学习中使用的主要监督学习算法](https://www.kdnuggets.com/2022/06/primary-supervised-learning-algorithms-used-machine-learning.html)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
 +   [分类的机器学习算法](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)
 

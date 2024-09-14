@@ -1,8 +1,8 @@
 # 更多成功导航初级数据科学职位面试的技巧
 
-> 原文：[https://www.kdnuggets.com/more-tips-for-successfully-navigating-beginner-data-science-job-interviews](https://www.kdnuggets.com/more-tips-for-successfully-navigating-beginner-data-science-job-interviews)
+> 原文：[`www.kdnuggets.com/more-tips-for-successfully-navigating-beginner-data-science-job-interviews`](https://www.kdnuggets.com/more-tips-for-successfully-navigating-beginner-data-science-job-interviews)
 
-![更多成功导航初级数据科学职位面试的技巧](../Images/bef3037c3ed1790865ebfaddab77f6e8.png)
+![更多成功导航初级数据科学职位面试的技巧](img/bef3037c3ed1790865ebfaddab77f6e8.png)
 
 之前的九条建议涵盖了对初级数据科学家较为明显的建议。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,21 +26,21 @@
 
 创建一个数据科学项目作品集是展示你作为数据科学家能力的最佳方式之一。
 
-对于初学者来说，选择适合的项目来构建作品集可能会很困难。这里有一些[数据科学项目创意](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)作为开始。你也可以参考[Datacamp的建议](https://www.datacamp.com/blog/data-analytics-projects-all-levels)或[StrataScratch上的数据项目](https://platform.stratascratch.com/data-projects?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)。
+对于初学者来说，选择适合的项目来构建作品集可能会很困难。这里有一些[数据科学项目创意](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)作为开始。你也可以参考[Datacamp 的建议](https://www.datacamp.com/blog/data-analytics-projects-all-levels)或[StrataScratch 上的数据项目](https://platform.stratascratch.com/data-projects?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)。
 
-![更多成功导航初级数据科学职位面试的技巧](../Images/16ad72c21be7b08f334bb244414b4989.png)
+![更多成功导航初级数据科学职位面试的技巧](img/16ad72c21be7b08f334bb244414b4989.png)
 
 # 2\. 使用领域知识练习编码
 
 领域知识意味着你对特定行业、部门或主题领域有深入了解。这些知识包括该领域的复杂性、挑战、术语、流程和细微差别。
 
-![更多成功导航初级数据科学职位面试的技巧](../Images/0dda8df70c8b4fa862cf3405d7d73372.png)
+![更多成功导航初级数据科学职位面试的技巧](img/0dda8df70c8b4fa862cf3405d7d73372.png)
 
 这必须在你的编码技能中体现出来，因为你将使用这些技能来解决特定公司在特定行业中的问题。
 
 当你练习编码时，最好是在你面试的公司提供的实际问题上进行。我在第一篇文章中提到了[StrataScratch](https://www.stratascratch.com?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)和[LeetCode](https://leetcode.com)。
 
-当然，你可以在不直接来自面试的问题上进行练习。但是当你选择时，尽量找到[数据科学面试问题](https://www.stratascratch.com/blog/40-data-science-interview-questions-from-top-companies/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)和相关行业的数据集。比如，你正在面试Meta（科技行业）和Pfizer（制药行业）。这些公司处理的数据完全不同，数据行为也不同。自然，问题也会不同。所以，对Meta使用科技/社交媒体数据，对Pfizer使用制药数据。
+当然，你可以在不直接来自面试的问题上进行练习。但是当你选择时，尽量找到[数据科学面试问题](https://www.stratascratch.com/blog/40-data-science-interview-questions-from-top-companies/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+job+interview+tips)和相关行业的数据集。比如，你正在面试 Meta（科技行业）和 Pfizer（制药行业）。这些公司处理的数据完全不同，数据行为也不同。自然，问题也会不同。所以，对 Meta 使用科技/社交媒体数据，对 Pfizer 使用制药数据。
 
 通过这种方式，你也在确保你在提升领域知识。你可能会遇到一些你不熟悉的特定数据，因此你需要学习它以及它在行业中的重要性。
 
@@ -84,11 +84,11 @@
 
 > **I：** “你能告诉我一个项目或任务没有按计划进行的例子，以及你是如何处理的吗？”
 > 
-> **Y：** 当然！在我之前担任数据科学家的角色时，我负责一个旨在预测客户流失的项目。我根据最初的理解选择了k最近邻算法并使用了它。然而，结果并不像我期望的那样准确。
+> **Y：** 当然！在我之前担任数据科学家的角色时，我负责一个旨在预测客户流失的项目。我根据最初的理解选择了 k 最近邻算法并使用了它。然而，结果并不像我期望的那样准确。
 > 
 > **I：** 为什么？你意识到时做了什么？
 > 
-> **Y:** 有一些数据不一致，截止日期非常紧迫，所以我的EDA不够详细。尽管如此，我现在意识到我应该做得更详细。发现不一致后，我与数据质量团队合作，进一步了解这些问题。我还探索了其他算法并进行了评估。最后，我切换到了XGBoost算法，这显著提高了模型的预测准确性。我学到了不要低估EDA的重要性。我也很高兴我敢于承认错误，并从头开始，明白一个我们无法信任的模型是没有用的。
+> **Y:** 有一些数据不一致，截止日期非常紧迫，所以我的 EDA 不够详细。尽管如此，我现在意识到我应该做得更详细。发现不一致后，我与数据质量团队合作，进一步了解这些问题。我还探索了其他算法并进行了评估。最后，我切换到了 XGBoost 算法，这显著提高了模型的预测准确性。我学到了不要低估 EDA 的重要性。我也很高兴我敢于承认错误，并从头开始，明白一个我们无法信任的模型是没有用的。
 
 # 结论
 
@@ -102,7 +102,7 @@
 
 但是，通过我在这篇文章中给出的提示，我相信你会在下次数据科学面试中表现出色！
 
-[](https://twitter.com/StrataScratch)****[内特·罗斯迪](https://twitter.com/StrataScratch)****是一名数据科学家，专注于产品策略。他也是一名兼职教授，教授分析课程，并且是StrataScratch的创始人，该平台帮助数据科学家通过来自顶尖公司的真实面试问题准备面试。内特撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有SQL内容。
+[](https://twitter.com/StrataScratch)****[内特·罗斯迪](https://twitter.com/StrataScratch)****是一名数据科学家，专注于产品策略。他也是一名兼职教授，教授分析课程，并且是 StrataScratch 的创始人，该平台帮助数据科学家通过来自顶尖公司的真实面试问题准备面试。内特撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有 SQL 内容。
 
 ### 更多相关话题
 
@@ -112,8 +112,8 @@
 
 +   [数据科学职位名称的导航：数据分析师 vs 数据科学家…](https://www.kdnuggets.com/navigating-data-science-job-titles-data-analyst-vs-data-scientist-vs-data-engineer)
 
-+   [掌握NLP面试技巧](https://www.kdnuggets.com/2022/10/nlp-interview-questions.html)
++   [掌握 NLP 面试技巧](https://www.kdnuggets.com/2022/10/nlp-interview-questions.html)
 
-+   [7个必须知道的Python面试技巧](https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html)
++   [7 个必须知道的 Python 面试技巧](https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html)
 
-+   [KDnuggets 新闻，6月8日：21份数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 份数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)

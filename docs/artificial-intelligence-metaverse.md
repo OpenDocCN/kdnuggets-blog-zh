@@ -1,8 +1,8 @@
 # 人工智能与元宇宙
 
-> 原文：[https://www.kdnuggets.com/2022/02/artificial-intelligence-metaverse.html](https://www.kdnuggets.com/2022/02/artificial-intelligence-metaverse.html)
+> 原文：[`www.kdnuggets.com/2022/02/artificial-intelligence-metaverse.html`](https://www.kdnuggets.com/2022/02/artificial-intelligence-metaverse.html)
 
-![人工智能与元宇宙](../Images/741f6e03c563c0b74ede7d344aad4852.png)
+![人工智能与元宇宙](img/741f6e03c563c0b74ede7d344aad4852.png)
 
 [Barbara Zandoval](https://unsplash.com/@barbarazandoval) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -30,7 +30,7 @@
 
 ### 1. 化身
 
-![人工智能与元宇宙](../Images/f1b6d69cd739c3f66428c5857aaaee1e.png)
+![人工智能与元宇宙](img/f1b6d69cd739c3f66428c5857aaaee1e.png)
 
 [julien Tromeur](https://unsplash.com/@julientromeur) 通过 Unsplash
 
@@ -86,6 +86,6 @@ AI 可以将自然语言如英语分解，转换成机器可读的格式。然�
 
 +   [人工智能如何变革数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [2022年最受欢迎的人工智能技能学习指南](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最受欢迎的人工智能技能学习指南](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
 
 +   [从人工智能到机器学习的演变……](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)

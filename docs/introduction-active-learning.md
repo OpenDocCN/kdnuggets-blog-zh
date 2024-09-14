@@ -1,10 +1,10 @@
 # 活跃学习简介
 
-> 原文：[https://www.kdnuggets.com/2018/10/introduction-active-learning.html](https://www.kdnuggets.com/2018/10/introduction-active-learning.html)
+> 原文：[`www.kdnuggets.com/2018/10/introduction-active-learning.html`](https://www.kdnuggets.com/2018/10/introduction-active-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-**由 [Jennifer Prendki](https://www.linkedin.com/in/jennifer-prendki), Figure Eight的机器学习副总裁**
+**由 [Jennifer Prendki](https://www.linkedin.com/in/jennifer-prendki), Figure Eight 的机器学习副总裁**
 
 随着数据收集和存储变得越来越便宜，数据科学家面临的数据量超过了他们能够分析的能力。而且这一趋势没有减缓的迹象：物联网设备的爆炸性增长以及新的内存密集型数据格式的出现，使得数据专业人员在原始数据的海洋中挣扎。
 
@@ -14,17 +14,17 @@
 
 过去十年中，人工智能最有前景的进展之一来自于深度学习模型的使用。虽然神经网络几十年前就被发现了，但它们的实际使用直到最近才得以实现，这要归功于数据量和计算能力的增加，而旧硬件根本无法提供这些。由于大多数深度学习算法使用监督学习方法且对数据需求量大，因此现在机器学习中的新瓶颈不再是数据的收集，而是标注过程的速度和准确性。毕竟，我们大多数人都熟悉“垃圾进，垃圾出”的格言。除非你拥有高质量的数据来训练模型，否则模型的性能最终会受到影响。
 
-由于获取未标记实例现在基本上是免费的，赢得人工智能竞赛现在取决于拥有最快、最具扩展性、灵活和可靠的方式来获取数据集的质量标签。标注大量数据已经成为一个关键问题，因为待标注的数据量变得如此庞大，甚至全球所有的人工劳动都无法满足需求。例如，即使每个边界框标注几秒钟，单靠一个人对一个10秒钟的视频进行行人标注也可能需要几个小时，这就是为什么越来越多的公司现在专注于构建机器学习算法以自动化标注过程。单纯的人力方法根本无法扩展。
+由于获取未标记实例现在基本上是免费的，赢得人工智能竞赛现在取决于拥有最快、最具扩展性、灵活和可靠的方式来获取数据集的质量标签。标注大量数据已经成为一个关键问题，因为待标注的数据量变得如此庞大，甚至全球所有的人工劳动都无法满足需求。例如，即使每个边界框标注几秒钟，单靠一个人对一个 10 秒钟的视频进行行人标注也可能需要几个小时，这就是为什么越来越多的公司现在专注于构建机器学习算法以自动化标注过程。单纯的人力方法根本无法扩展。
 
-但数据的*数量*并不是唯一的问题。获取标签也往往耗时（例如，当注释员被要求对较长文档的主题进行标注时），经常容易出错（有时也具有主观性），费用昂贵（例如，“标注”患者记录为癌症阳性可能需要MRI扫描或其他昂贵的医学检查，或验证石油存在可能需要钻探），甚至可能很危险（例如，在地雷探测的情况下）。
+但数据的*数量*并不是唯一的问题。获取标签也往往耗时（例如，当注释员被要求对较长文档的主题进行标注时），经常容易出错（有时也具有主观性），费用昂贵（例如，“标注”患者记录为癌症阳性可能需要 MRI 扫描或其他昂贵的医学检查，或验证石油存在可能需要钻探），甚至可能很危险（例如，在地雷探测的情况下）。
 
 ### 更快标注与更聪明标注
 
-为应对对高质量注释的急剧需求，一种人机协作的AI方法，其中人类注释员验证机器学习算法的输出，看起来是一种有前途的方法。它不仅可以加快处理速度，还能提高质量，因为人类干预有助于弥补算法的不准确性。
+为应对对高质量注释的急剧需求，一种人机协作的 AI 方法，其中人类注释员验证机器学习算法的输出，看起来是一种有前途的方法。它不仅可以加快处理速度，还能提高质量，因为人类干预有助于弥补算法的不准确性。
 
-尽管这种蛮力方法有时是最佳途径，但另一个方法在ML社区中正在慢慢获得更多关注：即仅标注最重要的数据实例。作为数据科学家，我们习惯于认为更多的数据等于更高的模型准确率，但虽然这绝对正确，但也要承认并非所有数据都同等重要，因为并非所有例子都包含相同数量的信息。
+尽管这种蛮力方法有时是最佳途径，但另一个方法在 ML 社区中正在慢慢获得更多关注：即仅标注最重要的数据实例。作为数据科学家，我们习惯于认为更多的数据等于更高的模型准确率，但虽然这绝对正确，但也要承认并非所有数据都同等重要，因为并非所有例子都包含相同数量的信息。
 
-![主动学习图 1](../Images/f91da62539b031f5c44429c602abb0fb.png)
+![主动学习图 1](img/f91da62539b031f5c44429c602abb0fb.png)
 
 **图 1：应对新兴的大标签危机的两种方法**
 
@@ -32,13 +32,13 @@
 
 ### 什么是主动学习？
 
-尽管在流行的ML博客中覆盖率较低，但主动学习实际上在许多现代ML问题中得到了令人惊讶的充分激励，特别是当标签难以获得、耗时或昂贵时。
+尽管在流行的 ML 博客中覆盖率较低，但主动学习实际上在许多现代 ML 问题中得到了令人惊讶的充分激励，特别是当标签难以获得、耗时或昂贵时。
 
 在主动学习中，学习算法被允许从尚未标注的实例池中主动选择下一步要标注的样本。该概念背后的基本信念是，如果机器学习算法能够选择它想学习的数据，它可能在使用较少的训练标签的情况下实现更好的准确性。这种算法被称为**主动学习者**。主动学习者可以在训练过程中动态提出查询，通常以未标注的数据实例的形式，由被称为**oracle**的人类注释员进行标注。因此，主动学习是人机协作范式成功的最有力示例之一。
 
-![主动学习图 2](../Images/24677b9367112d57bd66fda411cfdeb2.png)
+![主动学习图 2](img/24677b9367112d57bd66fda411cfdeb2.png)
 
-**图 2：正如预期的那样，训练模型所需的数据越多，准确度越高，无论是否使用主动学习方法。然而，使用主动学习时，可以用显著更少的数据达到特定的准确度；在这个例子中，仅使用45%的可用数据总量就可以实现80%的准确度，而在常规监督学习的情况下则需要70%。**
+**图 2：正如预期的那样，训练模型所需的数据越多，准确度越高，无论是否使用主动学习方法。然而，使用主动学习时，可以用显著更少的数据达到特定的准确度；在这个例子中，仅使用 45%的可用数据总量就可以实现 80%的准确度，而在常规监督学习的情况下则需要 70%。**
 
 ### 主动学习是如何工作的？
 
@@ -76,7 +76,7 @@
 
 这些查询策略考察新标签的增加对模型整体性能的影响。**期望模型变化**策略旨在识别那些如果已知标签将对当前模型产生最大变化的实例。**期望误差减少**策略衡量的不是模型可能发生的变化量，而是模型的泛化误差可能减少的量。这种策略面临的挑战之一是，它也是最计算上昂贵的查询框架。由于最小化期望损失函数通常没有封闭形式的解，因此使用**方差减少**方法作为代理。
 
-总的来说，这些方法学将输入空间整体考虑，而不是像不确定性采样或QBC那样关注个别实例，这使得它们在选择离群点时具有明显的优势。
+总的来说，这些方法学将输入空间整体考虑，而不是像不确定性采样或 QBC 那样关注个别实例，这使得它们在选择离群点时具有明显的优势。
 
 #### 密度加权方法
 
@@ -84,9 +84,9 @@
 
 ### 性能与限制
 
-超过90%的进行过主动学习工作的研究者声称他们的期望得到或完全或部分满足。这非常令人鼓舞，但人们不禁想知道其他情况下发生了什么。
+超过 90%的进行过主动学习工作的研究者声称他们的期望得到或完全或部分满足。这非常令人鼓舞，但人们不禁想知道其他情况下发生了什么。
 
-现实情况是，主动学习仍未被很好地理解。例如，有一些关于NER的[深度主动学习的有前景的工作](https://arxiv.org/pdf/1707.05928.pdf)，但[许多重大问题仍然存在](http://burrsettles.com/pub/settles.activelearning.pdf)。例如，几乎没有研究预测特定任务或数据集是否特别容易从主动学习方法中受益。
+现实情况是，主动学习仍未被很好地理解。例如，有一些关于 NER 的[深度主动学习的有前景的工作](https://arxiv.org/pdf/1707.05928.pdf)，但[许多重大问题仍然存在](http://burrsettles.com/pub/settles.activelearning.pdf)。例如，几乎没有研究预测特定任务或数据集是否特别容易从主动学习方法中受益。
 
 最终，主动学习是一种特定的半监督学习情况，这类算法已被证明对偏见非常敏感，特别是因为它们容易自我满足于从基于相对较小数据集训练的模型中识别出的模式中得到的初始信念。随着高效标注成为机器学习中越来越关键的组成部分，可以预期未来几年将会有更多关于这个主题的研究成果发表。
 
@@ -98,30 +98,30 @@
 
 +   [机器学习训练数据的基本指南](https://www.kdnuggets.com/2018/08/figure-eight-essential-guide-training-data-machine-learning.html)
 
-+   [2018年数据科学家报告已发布](https://www.kdnuggets.com/2018/08/figure-eight-2018-data-scientist-report.html)
++   [2018 年数据科学家报告已发布](https://www.kdnuggets.com/2018/08/figure-eight-2018-data-scientist-report.html)
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
 ### 相关主题
 
-+   [KDnuggets新闻，4月27日：关于带代码的论文简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：关于带代码的论文简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
 
-+   [统计学习导论，Python版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
++   [统计学习导论，Python 版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 
-+   [深度学习库介绍：PyTorch和Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)
++   [深度学习库介绍：PyTorch 和 Lightning AI](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)
 
-+   [回到基础第3周：机器学习导论](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [回到基础第 3 周：机器学习导论](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
 
-+   [使用PyCaret进行二分类入门](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
++   [使用 PyCaret 进行二分类入门](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
 
-+   [使用PyCaret在Python中进行聚类入门](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
++   [使用 PyCaret 在 Python 中进行聚类入门](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)

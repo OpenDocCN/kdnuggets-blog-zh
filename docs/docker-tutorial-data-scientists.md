@@ -1,8 +1,8 @@
 # 数据科学家的 Docker 教程
 
-> 原文：[https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html](https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html`](https://www.kdnuggets.com/2023/07/docker-tutorial-data-scientists.html)
 
-![数据科学家的 Docker 教程](../Images/9c5138903fba5d31dcb5396014fb2ce5.png)
+![数据科学家的 Docker 教程](img/9c5138903fba5d31dcb5396014fb2ce5.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@ Python 和一系列 Python 数据分析和机器学习库，如 pandas 和 sciki
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@ Python 和一系列 Python 数据分析和机器学习库，如 pandas 和 sciki
 
 # 什么是 Docker？
 
-![数据科学家的 Docker 教程](../Images/577682a67594d7d65ebf5bf6577c66f8.png)
+![数据科学家的 Docker 教程](img/577682a67594d7d65ebf5bf6577c66f8.png)
 
 图片来源：作者
 
@@ -64,7 +64,7 @@ Docker 注册表是一个*存储*和*分发* Docker 镜像的系统。在将应�
 
 # 基本 Docker 命令
 
-让我们快速回顾一些基本的 Docker 命令，其中大多数将在本教程中使用。有关更详细的概述，请阅读：[12 个每个数据科学家都应该知道的 Docker 命令](/2023/01/12-docker-commands-every-data-scientist-know.html)。
+让我们快速回顾一些基本的 Docker 命令，其中大多数将在本教程中使用。有关更详细的概述，请阅读：12 个每个数据科学家都应该知道的 Docker 命令。
 
 | **命令** | **功能** |
 | --- | --- |
@@ -129,7 +129,7 @@ pandas==2.0
 scikit-learn==1.2.2
 ```
 
-![数据科学家的 Docker 教程](../Images/e5b3ad97278fcb3d702f2fc354717f60.png)
+![数据科学家的 Docker 教程](img/e5b3ad97278fcb3d702f2fc354717f60.png)
 
 作者提供的图片
 
@@ -139,7 +139,7 @@ scikit-learn==1.2.2
 
 那么 Dockerfile 是什么？它是一个包含逐步指令以构建 Docker 镜像的文本文件。
 
-![数据科学家的 Docker 教程](../Images/c1d34b207f02fc63c1705edf07d304fa.png)
+![数据科学家的 Docker 教程](img/c1d34b207f02fc63c1705edf07d304fa.png)
 
 作者提供的图片
 
@@ -221,7 +221,7 @@ Docker 镜像构建完成后，运行 `docker images` 命令。你也应该看�
 docker images
 ```
 
-![数据科学家的 Docker 教程](../Images/3afe943cb4d073124528e98f182fdfe0.png)
+![数据科学家的 Docker 教程](img/3afe943cb4d073124528e98f182fdfe0.png)
 
 你可以使用 `docker run` 命令运行 Docker 镜像 `ml-app`：
 
@@ -229,7 +229,7 @@ docker images
 docker run ml-app
 ```
 
-![数据科学家的 Docker 教程](../Images/21ce8f3f69f0e5256b06f86d62506fd1.png)
+![数据科学家的 Docker 教程](img/21ce8f3f69f0e5256b06f86d62506fd1.png)
 
 恭喜！你刚刚将你的第一个数据科学应用程序容器化。通过创建 DockerHub 账户，你可以将镜像推送到 DockerHub（或推送到组织内的私有仓库）。
 

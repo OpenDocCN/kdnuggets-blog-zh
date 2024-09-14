@@ -1,38 +1,38 @@
 # YOLOv5 PyTorch 教程
 
-> 原文：[https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)
+> 原文：[`www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html`](https://www.kdnuggets.com/2022/12/yolov5-pytorch-tutorial.html)
 
-![YOLOv5 PyTorch 教程](../Images/677a6a1db1a597d6d66c9f2dce9867b3.png)
+![YOLOv5 PyTorch 教程](img/677a6a1db1a597d6d66c9f2dce9867b3.png)
 
-# 使用YOLOv5进行PyTorch开发
+# 使用 YOLOv5 进行 PyTorch 开发
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
-YOLO，即“你只看一次”的缩写，是一种开源软件工具，因其高效的实时物体检测能力而被广泛使用。YOLO算法使用卷积神经网络（CNN）模型来检测图像中的物体。
+YOLO，即“你只看一次”的缩写，是一种开源软件工具，因其高效的实时物体检测能力而被广泛使用。YOLO 算法使用卷积神经网络（CNN）模型来检测图像中的物体。
 
-该算法仅需一次前向传播即可检测图像中的所有对象。这使得YOLO算法在速度上优于其他算法，成为迄今为止最知名的检测算法之一。
+该算法仅需一次前向传播即可检测图像中的所有对象。这使得 YOLO 算法在速度上优于其他算法，成为迄今为止最知名的检测算法之一。
 
-# 什么是YOLO物体检测？
+# 什么是 YOLO 物体检测？
 
 物体检测算法是一种能够在给定帧中检测特定对象或形状的算法。例如，简单的检测算法可能能够检测和识别图像中的形状，如圆形或方形，而更高级的检测算法可以检测更复杂的对象，如人类、自行车、汽车等。
 
-YOLO算法不仅通过其一次前向传播能力提供了高检测速度和性能，而且还以极高的准确性和精度进行检测。
+YOLO 算法不仅通过其一次前向传播能力提供了高检测速度和性能，而且还以极高的准确性和精度进行检测。
 
-在本教程中，我们将重点关注[YOLOv5](https://github.com/ultralytics/yolov5)，这是YOLO软件的第五个也是最新的版本。它最初发布于2020年5月18日。YOLO开源代码可以在[GitHub](https://github.com/ultralytics/yolov5)上找到。我们将使用YOLO与著名的PyTorch库。
+在本教程中，我们将重点关注[YOLOv5](https://github.com/ultralytics/yolov5)，这是 YOLO 软件的第五个也是最新的版本。它最初发布于 2020 年 5 月 18 日。YOLO 开源代码可以在[GitHub](https://github.com/ultralytics/yolov5)上找到。我们将使用 YOLO 与著名的 PyTorch 库。
 
-[PyTorch](https://pytorch.org/)是一个基于著名Torch库的深度学习开源包。它也是一个基于Python的库，通常用于自然语言处理和计算机视觉。
+[PyTorch](https://pytorch.org/)是一个基于著名 Torch 库的深度学习开源包。它也是一个基于 Python 的库，通常用于自然语言处理和计算机视觉。
 
-# YOLO算法是如何工作的？
+# YOLO 算法是如何工作的？
 
 ## 第一步：残差块（将图像划分为更小的网格状框）
 
@@ -40,17 +40,17 @@ YOLO算法不仅通过其一次前向传播能力提供了高检测速度和性�
 
 所有网格都绘制在原始图像上，形状和大小完全一致。这些分割的想法在于每个网格框将检测其内部的不同对象。
 
-![YOLOv5 PyTorch 教程](../Images/b697b57190ca3e06f2f0b3b6d35ee00f.png)
+![YOLOv5 PyTorch 教程](img/b697b57190ca3e06f2f0b3b6d35ee00f.png)
 
 ## 步骤 2：边界框回归（识别边界框中的对象）
 
 在检测到图像中的给定对象后，会绘制一个边界框将其包围。边界框具有诸如**中心点、高度、宽度和类别（检测到的对象类型）**等参数。
 
-![YOLOv5 PyTorch 教程](../Images/e8b6c4eab9ee049ccef69744a4194440.png)
+![YOLOv5 PyTorch 教程](img/e8b6c4eab9ee049ccef69744a4194440.png)
 
 ## 步骤 3：交并比（IOU）
 
-![YOLOv5 PyTorch 教程](../Images/30111de8b4f85a72d7daa1d9005134ca.png)
+![YOLOv5 PyTorch 教程](img/30111de8b4f85a72d7daa1d9005134ca.png)
 
 **IOU**，即**交并比**，用于计算我们模型的准确性。这是通过量化两个框的交集程度来实现的，这两个框分别是实际值框（图中的红框）和从结果中返回的框（图中的蓝框）。
 
@@ -58,7 +58,7 @@ YOLO算法不仅通过其一次前向传播能力提供了高检测速度和性�
 
 下面是显示 YOLO 检测算法完整过程的图像
 
-![YOLOv5 PyTorch 教程](../Images/1c627f3285b1a1621a7bf28cb7243337.png)
+![YOLOv5 PyTorch 教程](img/1c627f3285b1a1621a7bf28cb7243337.png)
 
 要了解更多关于 YOLO 算法如何工作的详细信息，请查看[YOLO 算法简介](https://www.section.io/engineering-education/introduction-to-yolo-algorithm-for-object-detection/#:~:text=YOLO%20is%20an%20algorithm%20that,%2C%20parking%20meters%2C%20and%20animals.)。
 
@@ -70,11 +70,11 @@ YOLO算法不仅通过其一次前向传播能力提供了高检测速度和性�
 
 本教程中使用的[VinBigData 512 图像数据集](https://www.kaggle.com/datasets/awsaf49/vinbigdata-512-image-dataset)可以在 Kaggle 上找到。数据集分为两部分，训练数据集和测试数据集。训练数据集包含 15,000 张图像，而测试数据集包含 3,000 张。这种数据划分在训练数据集通常是测试数据集的 4 到 5 倍的情况下是比较理想的。
 
-![YOLOv5 PyTorch 教程](../Images/495e553306a0277e683d55dfe65641c1.png)
+![YOLOv5 PyTorch 教程](img/495e553306a0277e683d55dfe65641c1.png)
 
 数据集的另一部分包含所有图像的标签。在这个数据集中，每张图像都标记有一个类别名称（发现的胸部疾病），以及类别 ID、图像的宽度和高度等。查看下面的图像以查看所有可用的列。
 
-![YOLOv5 PyTorch 教程](../Images/ab2b60451cc644a880b98d46a39186da.png)
+![YOLOv5 PyTorch 教程](img/ab2b60451cc644a880b98d46a39186da.png)
 
 # YOLOv5 教程
 
@@ -258,13 +258,13 @@ Wandb，缩写自 weights and biases，允许我们监控给定的神经网络�
 wandb.login()
 ```
 
-现在我们将对提供的vinbigdata数据集进行100轮的YOLOv5训练。我们还将传递一些其他标志，例如 --img 512，表示我们的图像大小为512像素， --batch 16 允许我们的模型每批处理16张图像。使用 --data ./vinbigdata.yaml 标志，我们将传递我们的数据集，即vinbigdata.yaml数据集。
+现在我们将对提供的 vinbigdata 数据集进行 100 轮的 YOLOv5 训练。我们还将传递一些其他标志，例如 --img 512，表示我们的图像大小为 512 像素， --batch 16 允许我们的模型每批处理 16 张图像。使用 --data ./vinbigdata.yaml 标志，我们将传递我们的数据集，即 vinbigdata.yaml 数据集。
 
 ```py
 !python train.py --img 512 --batch 16 --epochs 100 --data ./vinbigdata.yaml --cfg models/yolov5x.yaml --weights yolov5x.pt --cache --name vin 
 ```
 
-## 第9步：评估模型
+## 第 9 步：评估模型
 
 首先，我们将识别测试数据集目录以及权重目录。
 
@@ -276,7 +276,7 @@ weights_dir = "./runs/train/vin3/weights/best.pt"
 os.listdir("./runs/train/vin3/weights")
 ```
 
-在这一部分，我们将使用detect.py作为推理工具来检查我们预测的准确性。我们还将传递一些标志，例如 --conf 0.15\，这是模型的置信度阈值。如果检测到的对象的置信度低于15%，则将其从输出中删除。 --iou 0.4\ 标志告诉我们的模型，如果两个框的交集与并集的比例低于40%，则应将其移除。
+在这一部分，我们将使用 detect.py 作为推理工具来检查我们预测的准确性。我们还将传递一些标志，例如 --conf 0.15\，这是模型的置信度阈值。如果检测到的对象的置信度低于 15%，则将其从输出中删除。 --iou 0.4\ 标志告诉我们的模型，如果两个框的交集与并集的比例低于 40%，则应将其移除。
 
 ```py
 !python detect.py --weights $weights_dir\
@@ -289,26 +289,26 @@ os.listdir("./runs/train/vin3/weights")
 
 # 最后的思考
 
-在这篇文章中，我们解释了YOLOv5是什么以及基本的YOLO算法是如何工作的。接下来，我们简要说明了PyTorch。然后我们覆盖了几个使用YOLO而不是其他类似检测算法的理由。
+在这篇文章中，我们解释了 YOLOv5 是什么以及基本的 YOLO 算法是如何工作的。接下来，我们简要说明了 PyTorch。然后我们覆盖了几个使用 YOLO 而不是其他类似检测算法的理由。
 
-最后，我们带您了解了一个能够检测X光图像中胸部疾病的机器学习模型。在这个示例中，我们使用YOLO作为主要的检测算法来查找和定位胸部病变。然后，我们将每个病变分类为特定的类别或疾病。
+最后，我们带您了解了一个能够检测 X 光图像中胸部疾病的机器学习模型。在这个示例中，我们使用 YOLO 作为主要的检测算法来查找和定位胸部病变。然后，我们将每个病变分类为特定的类别或疾病。
 
-如果你对机器学习和构建自己的模型感兴趣，特别是那些需要检测给定图像或视频中多个对象的模型，那么YOLOv5绝对值得一试。
+如果你对机器学习和构建自己的模型感兴趣，特别是那些需要检测给定图像或视频中多个对象的模型，那么 YOLOv5 绝对值得一试。
 
-**[Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责管理Exxact Corp博客，并与许多撰写有关深度学习不同方面的才华横溢的作者合作。
+**[Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 负责管理 Exxact Corp 博客，并与许多撰写有关深度学习不同方面的才华横溢的作者合作。
 
 [原文](https://exxactcorp.com/blog/Deep-Learning/YOLOv5-PyTorch-Tutorial) 经许可转载。
 
 ### 更多相关主题
 
-+   [使用PyTorch解释性神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
++   [使用 PyTorch 解释性神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
 
-+   [深度学习的完整免费PyTorch课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)
++   [深度学习的完整免费 PyTorch 课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)
 
-+   [PyTorch Lightning入门](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
++   [PyTorch Lightning 入门](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
 
-+   [调整PyTorch中的Adam优化器参数](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
++   [调整 PyTorch 中的 Adam 优化器参数](https://www.kdnuggets.com/2022/12/tuning-adam-optimizer-parameters-pytorch.html)
 
-+   [使用PyTorch的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
++   [使用 PyTorch 的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
 
-+   [提升PyTorch生产力的技巧](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)
++   [提升 PyTorch 生产力的技巧](https://www.kdnuggets.com/2023/08/pytorch-tips-boost-productivity.html)

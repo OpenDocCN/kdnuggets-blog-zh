@@ -1,8 +1,8 @@
 # 层级系统如何帮助预测 AI 成本
 
-> 原文：[https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)
+> 原文：[`www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html`](https://www.kdnuggets.com/2022/03/level-system-help-forecast-ai-costs.html)
 
-![层级系统如何帮助预测 AI 成本](../Images/5508d68d4ed86099bfaefeee1139d76a.png)
+![层级系统如何帮助预测 AI 成本](img/5508d68d4ed86099bfaefeee1139d76a.png)
 
 由 [Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供的照片，来自 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -90,9 +90,9 @@ AI 系统的级别提供了会显著影响系统成本的断点，从传统软�
 
 *动态训练数据，动态测试数据，动态目标*
 
-既与环境动态互动又进行全局优化（例如，朝向一些下游目标），例如，在优化AHT和CST的同时辅助代理，或直接优化利润。例如，一个不优化下一个点击（*当前方法*）而是优化对话的最佳点击序列的AutoSuggest模型。
+既与环境动态互动又进行全局优化（例如，朝向一些下游目标），例如，在优化 AHT 和 CST 的同时辅助代理，或直接优化利润。例如，一个不优化下一个点击（*当前方法*）而是优化对话的最佳点击序列的 AutoSuggest 模型。
 
-第4级有着极大的潜力——如何达到这一点并不总是显而易见的，除非经过精心设计，这些系统可能会优化到退化的解决方案。将其对准正确的问题、塑造奖励机制以及审计其行为都是庞大且非平凡的任务。
+第 4 级有着极大的潜力——如何达到这一点并不总是显而易见的，除非经过精心设计，这些系统可能会优化到退化的解决方案。将其对准正确的问题、塑造奖励机制以及审计其行为都是庞大且非平凡的任务。
 
 ### 附录：矩阵布局
 
@@ -104,13 +104,13 @@ AI 系统的级别提供了会显著影响系统成本的断点，从传统软�
 | 1: **已学习** | 模型训练在离线环境中进行，并以“冻结”权重部署到生产中。模型可能有更新的频率（例如，添加更多的标注数据），但用于训练模型的数据并非直接由系统生成。 | 静态数据，通常是标注过的。 | 简单输出（*简单函数逼近*） | 单一目标，从输入数据映射到输出。 |
 | 2: **自我提升** | 使用从系统生成的训练数据来改进模型的系统，理想情况下数据是静态的（*所以我们期望随着数据的增加模型性能会不断提升*）。 | 使用从系统生成的新模型输入进行重新训练。 | 简单输出，接近输入数据。 | 单一目标，从输入数据映射到输出。 |
 | 3: **自主** | 同时*改变*人类行为和*直接从这种行为中学习*的系统。这一类别的问题通常涉及如探索与开发的赌博学习范式。 | 系统使用新的模型输入和对系统先前输出的明确反馈进行重新训练。 | 政策以随时间更新模型输出。 | 累积目标，捕捉模型如何引入偏差以及人们如何与系统互动。 |
-| 4: **智能** | 与环境动态互动并朝向下游目标自我优化的系统，例如，在优化AHT和CST的同时辅助代理。这一类别的问题有时涉及强化学习范式。 | 系统查看模型决策的下游影响，并优化整个系统的性能。 | 政策以优化整个系统。 | 系统目标，从局部决策到下游。 |
+| 4: **智能** | 与环境动态互动并朝向下游目标自我优化的系统，例如，在优化 AHT 和 CST 的同时辅助代理。这一类别的问题有时涉及强化学习范式。 | 系统查看模型决策的下游影响，并优化整个系统的性能。 | 政策以优化整个系统。 | 系统目标，从局部决策到下游。 |
 
 **[迈克尔·格里菲斯](https://www.linkedin.com/in/msjgriffiths/)** 是 ASAPP 的数据科学总监。他致力于识别提升客户和代理体验的机会。在 ASAPP 之前，迈克尔曾在广告、电商和管理咨询领域工作。
 
 ### 更多相关话题
 
-+   [百度研究发布2022年十大科技趋势预测](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)
++   [百度研究发布 2022 年十大科技趋势预测](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)
 
 +   [使用大型语言模型时优化性能和成本的策略…](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)
 
@@ -118,6 +118,6 @@ AI 系统的级别提供了会显著影响系统成本的断点，从传统软�
 
 +   [大多数公司数据访问严重不足，71% 认为…](https://www.kdnuggets.com/2023/07/mostly-data-access-severely-lacking-synthetic-data-help.html)
 
-+   [5项稀有的数据科学技能可以帮助你找到工作](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
++   [5 项稀有的数据科学技能可以帮助你找到工作](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
 
 +   [生成式 AI 如何帮助你改进数据可视化图表](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)

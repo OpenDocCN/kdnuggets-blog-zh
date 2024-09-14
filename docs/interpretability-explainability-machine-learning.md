@@ -1,8 +1,8 @@
 # 解释性、可解释性和机器学习——数据科学家需要知道的
 
-> 原文：[https://www.kdnuggets.com/2020/11/interpretability-explainability-machine-learning.html](https://www.kdnuggets.com/2020/11/interpretability-explainability-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/11/interpretability-explainability-machine-learning.html`](https://www.kdnuggets.com/2020/11/interpretability-explainability-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [Susan Sivek](https://www.linkedin.com/in/ssivek/)，Alteryx**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 一些机器学习模型被称为“黑箱”，这个术语常用来描述那些其内部工作——即不同变量如何通过算法相互关联——即使是设计者也可能无法完全解释和说明的模型。
 
-![](../Images/49b2e5e171ff20104ceeaf76253c98ea.png)
+![](img/49b2e5e171ff20104ceeaf76253c98ea.png)
 
 *照片由*[ *Christian Fregnan*](https://unsplash.com/@christianfregnan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)* 提供，来源于*[ *Unsplash*](https://unsplash.com/s/photos/box?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。
 
@@ -46,19 +46,19 @@
 
 如你所想，对于疾病预测这样的情况，患者希望知道模型是如何预测他们是否患病的。同样，我的信用评分计算可能对我的生活产生重大影响。因此，我们理想中希望拥有的不仅仅是专家能够解释的模型，而是*能够解释*给受其影响的人。
 
-![](../Images/c1989383d48517a3a26d02eaa8c37d68.png)
+![](img/c1989383d48517a3a26d02eaa8c37d68.png)
 
-这种可解释性非常重要，以至于在某些地方已经立法规定。欧盟的一般数据保护条例（GDPR）包含了一个[“解释权”](https://www.privacy-regulation.eu/en/recital-71-GDPR.htm)，这被证明在解释上有些[挑战](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3196985)，但它要求对做出影响个人的数据驱动决策的机构有更大的“算法责任”。美国《平等信用机会法》要求金融机构向被拒绝信贷或给予较差贷款条件的人提供明确的决策解释。如果决策中使用了算法，它应该是可以解释的。正如[Federal Trade Commission](https://www.ftc.gov/news-events/blogs/business-blog/2020/04/using-artificial-intelligence-algorithms)所说，“... AI工具的使用应该是透明的、可解释的、公正的，并且具有实证基础，同时促进问责制。”
+这种可解释性非常重要，以至于在某些地方已经立法规定。欧盟的一般数据保护条例（GDPR）包含了一个[“解释权”](https://www.privacy-regulation.eu/en/recital-71-GDPR.htm)，这被证明在解释上有些[挑战](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=3196985)，但它要求对做出影响个人的数据驱动决策的机构有更大的“算法责任”。美国《平等信用机会法》要求金融机构向被拒绝信贷或给予较差贷款条件的人提供明确的决策解释。如果决策中使用了算法，它应该是可以解释的。正如[Federal Trade Commission](https://www.ftc.gov/news-events/blogs/business-blog/2020/04/using-artificial-intelligence-algorithms)所说，“... AI 工具的使用应该是透明的、可解释的、公正的，并且具有实证基础，同时促进问责制。”
 
-即使在特定情况下解释性并不是法律要求，能够与受模型影响的利益相关者沟通模型的工作原理仍然很重要。有些模型天生更容易转化为不太技术化的受众。例如，有些模型可以方便地进行可视化并共享。[决策树模型](https://community.alteryx.com/t5/Alteryx-Knowledge-Base/Planting-Seeds-An-Introduction-to-Decision-Trees/ta-p/134623)通常可以绘制成熟悉的流程图形式，在许多情况下是可以解释的。（如果你想看看一个超级酷的动画可视化，可以浏览一下[这个教程](http://www.r2d3.us/visual-intro-to-machine-learning-part-1/)关于决策树的内容。）一些自然语言处理方法，如[主题建模](https://community.alteryx.com/t5/Data-Science-Blog/Getting-to-the-Point-with-Topic-Modeling-Part-1-What-is-LDA/ba-p/611874)使用LDA，可能[提供可视化](http://bl.ocks.org/AlessandraSozzi/raw/ce1ace56e4aed6f2d614ae2243aab5a5/)来帮助观众理解其结果的原理。
+即使在特定情况下解释性并不是法律要求，能够与受模型影响的利益相关者沟通模型的工作原理仍然很重要。有些模型天生更容易转化为不太技术化的受众。例如，有些模型可以方便地进行可视化并共享。[决策树模型](https://community.alteryx.com/t5/Alteryx-Knowledge-Base/Planting-Seeds-An-Introduction-to-Decision-Trees/ta-p/134623)通常可以绘制成熟悉的流程图形式，在许多情况下是可以解释的。（如果你想看看一个超级酷的动画可视化，可以浏览一下[这个教程](http://www.r2d3.us/visual-intro-to-machine-learning-part-1/)关于决策树的内容。）一些自然语言处理方法，如[主题建模](https://community.alteryx.com/t5/Data-Science-Blog/Getting-to-the-Point-with-Topic-Modeling-Part-1-What-is-LDA/ba-p/611874)使用 LDA，可能[提供可视化](http://bl.ocks.org/AlessandraSozzi/raw/ce1ace56e4aed6f2d614ae2243aab5a5/)来帮助观众理解其结果的原理。
 
-![](../Images/14f406d7f330e38239c3e828f682b3a3.png)
+![](img/14f406d7f330e38239c3e828f682b3a3.png)
 
 *照片由[*Morning Brew*](https://unsplash.com/@morningbrew?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，来源于[*Unsplash*](https://unsplash.com/s/photos/global-local?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
 在其他情况下，你可能需要依赖于定量度量来展示模型的构建方式，但它们的含义对于非技术观众来说不那么明显。例如，许多统计模型展示了每个变量如何与模型的输出相关（例如，线性回归中的预测变量系数）。即使是[random forest model](https://community.alteryx.com/t5/Alteryx-Designer-Knowledge-Base/Seeing-the-Forest-for-the-Trees-An-Introduction-to-Random-Forest/ta-p/158062)也可以提供每个变量在生成模型预测中的相对重要性度量。然而，你不会确切知道所有树是如何构建的，以及它们如何共同贡献于模型提供的最终预测。
 
-![](../Images/3aca55cf3cfecf78ca97c2c015dac4f8.png)
+![](img/3aca55cf3cfecf78ca97c2c015dac4f8.png)
 
 *由[*Forest Model Tool*](https://community.alteryx.com/t5/Alteryx-Designer-Knowledge-Base/Tool-Mastery-Forest-Model/ta-p/305724)*生成的变量（特征）重要性图的示例。*
 
@@ -72,7 +72,7 @@
 
 显然，在准确性和可解释性之间并不总是需要权衡，特别是考虑到新开发的工具和策略可以提供对复杂模型操作的洞察。[一些研究人员](https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=8882211)还提出了将“白箱”（可解释的）模型与黑箱模型“叠加”或以其他方式结合，以最大化准确性和可解释性。这些有时被称为“灰箱”模型。
 
-![](../Images/85d14e44ee8887643ee3be03b31b0801.png)
+![](img/85d14e44ee8887643ee3be03b31b0801.png)
 
 ### 黑箱模型窥探工具
 
@@ -82,13 +82,13 @@ Python 和 R 的模型可解释性包可以提供对模型功能的洞察。例�
 
 *这个视频提供了 LIME 的快速概述，由其创建者制作。*
 
-另一种工具包叫做[SHAP](https://github.com/slundberg/shap)，它基于博弈论中的Shapley值概念，计算每个特征对模型预测的贡献。这种方法提供了对任何模型的全局和局部解释性。（这里你可以选择在[Python](https://github.com/slundberg/shap)或[R](https://github.com/ModelOriented/shapper)中使用，并可以阅读[原始论文](http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions.pdf)，了解SHAP的工作原理。）
+另一种工具包叫做[SHAP](https://github.com/slundberg/shap)，它基于博弈论中的 Shapley 值概念，计算每个特征对模型预测的贡献。这种方法提供了对任何模型的全局和局部解释性。（这里你可以选择在[Python](https://github.com/slundberg/shap)或[R](https://github.com/ModelOriented/shapper)中使用，并可以阅读[原始论文](http://papers.nips.cc/paper/7062-a-unified-approach-to-interpreting-model-predictions.pdf)，了解 SHAP 的工作原理。）
 
-[部分依赖图](https://christophm.github.io/interpretable-ml-book/pdp.html)可以与许多模型一起使用，允许你查看模型的预测如何“依赖”于不同变量的大小。然而，这些图仅限于两个特征，这可能使它们在复杂的高维模型中不那么有用。部分依赖图可以在Python中使用[scikit-learn](https://scikit-learn.org/stable/modules/partial_dependence.html)或在R中使用[pdp](https://bgreenwell.github.io/pdp/articles/pdp.html)构建。
+[部分依赖图](https://christophm.github.io/interpretable-ml-book/pdp.html)可以与许多模型一起使用，允许你查看模型的预测如何“依赖”于不同变量的大小。然而，这些图仅限于两个特征，这可能使它们在复杂的高维模型中不那么有用。部分依赖图可以在 Python 中使用[scikit-learn](https://scikit-learn.org/stable/modules/partial_dependence.html)或在 R 中使用[pdp](https://bgreenwell.github.io/pdp/articles/pdp.html)构建。
 
-![](../Images/0c307eb4bc9a03669ab79bb6495694b0.png)
+![](img/0c307eb4bc9a03669ab79bb6495694b0.png)
 
-*图片来自*[*scikit-learn文档*](https://scikit-learn.org/stable/modules/partial_dependence.html)*，展示了每个特征如何影响房屋价值的结果变量。*
+*图片来自*[*scikit-learn 文档*](https://scikit-learn.org/stable/modules/partial_dependence.html)*，展示了每个特征如何影响房屋价值的结果变量。*
 
 [这篇论文](https://www.researchgate.net/profile/Josua_Krause/publication/301931162_Interacting_with_Predictions_Visual_Inspection_of_Black-box_Machine_Learning_Models/links/5a299994a6fdccfbbf8178ae/Interacting-with-Predictions-Visual-Inspection-of-Black-box-Machine-Learning-Models.pdf)展示了一个有趣的示例，说明了一个交互式界面的构建，该界面用于向利益相关者解释用于糖尿病诊断的随机森林模型。该界面以用户友好的格式使用了部分依赖的概念。通过这种解释，利益相关者不仅更好地理解了模型的操作方式，还对支持进一步开发额外的预测工具感到更加自信。
 
@@ -106,7 +106,7 @@ Python 和 R 的模型可解释性包可以提供对模型功能的洞察。例�
 
 [原始](https://community.alteryx.com/t5/Data-Science/Interpretability-Explainability-and-Machine-Learning/ba-p/630765)。经许可转载。
 
-**简历：** **[苏珊·库里·西维克](https://www.linkedin.com/in/ssivek/)，博士**，是一位作家和数据迷，喜欢用日常语言解释复杂的概念。在学术界担任了15年的新闻学教授和研究员后，苏珊将重点转向数据科学和分析，但仍然喜欢以创意的方式分享知识。她喜欢美食、科幻小说和狗。
+**简历：** **[苏珊·库里·西维克](https://www.linkedin.com/in/ssivek/)，博士**，是一位作家和数据迷，喜欢用日常语言解释复杂的概念。在学术界担任了 15 年的新闻学教授和研究员后，苏珊将重点转向数据科学和分析，但仍然喜欢以创意的方式分享知识。她喜欢美食、科幻小说和狗。
 
 **相关：**
 
@@ -124,7 +124,7 @@ Python 和 R 的模型可解释性包可以提供对模型功能的洞察。例�
 
 +   [使用 SHAP 值进行机器学习模型解释](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应关注的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应关注的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [使用 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
 

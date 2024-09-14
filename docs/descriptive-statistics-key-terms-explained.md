@@ -1,6 +1,6 @@
 # 描述性统计关键术语解释
 
-> 原文：[https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)
+> 原文：[`www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html`](https://www.kdnuggets.com/2017/05/descriptive-statistics-key-terms-explained.html)
 
 尽管统计学是数据科学的核心工具集，但它常常被更为技术性的技能如编程所忽视。即使是机器学习算法，它们依赖于数学概念如代数和微积分——更不用说统计学了！——也常常在处理时高于所需的基础数学水平，这可能导致一些“数据科学家”对其职业的一个关键方面缺乏基本理解。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
-![统计学标题](../Images/6f29d24dc50c36852ee81342902e085d.png)
+![统计学标题](img/6f29d24dc50c36852ee81342902e085d.png)
 
-这里是15个基本描述性统计关键术语的集合，以易于理解的语言进行解释。接下来是一个全面的示例，其中包含一些Python代码。请注意，作为基本介绍，本文中故意省略了术语的数学表示和描述。
+这里是 15 个基本描述性统计关键术语的集合，以易于理解的语言进行解释。接下来是一个全面的示例，其中包含一些 Python 代码。请注意，作为基本介绍，本文中故意省略了术语的数学表示和描述。
 
 # **1\. 描述性统计**
 
@@ -56,7 +56,7 @@
 
 # **9\. 中位数**
 
-中位数是分布中位于第50百分位的得分，分隔了得分的前后50%。中位数对将分布得分集合分成两半以及帮助识别分布的偏斜非常有用。
+中位数是分布中位于第 50 百分位的得分，分隔了得分的前后 50%。中位数对将分布得分集合分成两半以及帮助识别分布的偏斜非常有用。
 
 # **10\. 众数**
 
@@ -136,7 +136,7 @@ Standard deviation: 4.01870625948
 Distribution skew: -0.714152479663
 ```
 
-![直方图分布分数](../Images/aef8c81df19a924cd33afad8498d3447.png)
+![直方图分布分数](img/aef8c81df19a924cd33afad8498d3447.png)
 
 **[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一位数据科学家和 KDnuggets 的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 联系。
 

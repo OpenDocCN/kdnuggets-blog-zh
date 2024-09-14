@@ -1,8 +1,8 @@
 # 实现数据科学生产的检查清单
 
-> 原文：[https://www.kdnuggets.com/2017/06/dataiku-checklist-data-science-implemented-production.html](https://www.kdnuggets.com/2017/06/dataiku-checklist-data-science-implemented-production.html)
+> 原文：[`www.kdnuggets.com/2017/06/dataiku-checklist-data-science-implemented-production.html`](https://www.kdnuggets.com/2017/06/dataiku-checklist-data-science-implemented-production.html)
 
-**由Dataiku提供。**赞助文章。
+**由 Dataiku 提供。**赞助文章。
 
 构建数据科学项目和训练模型只是第一步。将模型投入生产环境是公司经常失败的地方。
 
@@ -10,23 +10,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-实际上，将模型实施到现有的数据科学和IT堆栈中对许多公司来说非常复杂。原因？设计环境和实际生产环境之间的工具和技术的不一致。
+实际上，将模型实施到现有的数据科学和 IT 堆栈中对许多公司来说非常复杂。原因？设计环境和实际生产环境之间的工具和技术的不一致。
 
 一年多来，我们[调查了成千上万家公司](https://pages.dataiku.com/how-do-companies-build-production-ready-data-analytics-projects)涵盖各种行业和数据科学发展，了解他们如何克服这些困难，并分析了结果。以下是你在设计到生产管道中需要牢记的关键事项。
 
-[![Dataiku](../Images/a6fd2d25eb752e83e7328450e5ed9746.png)](https://pages.dataiku.com/hubfs/PDF/Infographics/keys-data-science-production.pdf?t=1496154983353)
+![Dataiku](https://pages.dataiku.com/hubfs/PDF/Infographics/keys-data-science-production.pdf?t=1496154983353)
 
 [点击查看高质量信息图](https://pages.dataiku.com/hubfs/PDF/Infographics/keys-data-science-production.pdf?t=1496154983353)。
 
-![Dataiku](../Images/46669443ac9d47d6ec621d4ec92feab5.png)
+![Dataiku](img/46669443ac9d47d6ec621d4ec92feab5.png)
 
 ### 1\. 你的打包策略
 
@@ -36,11 +36,11 @@
 
 1.  设立版本控制工具来管理代码版本。
 
-1.  创建打包脚本，将代码和数据打包成zip文件。
+1.  创建打包脚本，将代码和数据打包成 zip 文件。
 
 1.  将其部署到生产环境中。
 
-![Dataiku](../Images/b931bbd4b34af4465740526cf224a40c.png)
+![Dataiku](img/b931bbd4b34af4465740526cf224a40c.png)
 
 ### 2\. 你的模型优化和再训练
 
@@ -48,7 +48,7 @@
 
 高效重新训练的关键是将其设置为数据科学生产工作流中的一个独立步骤。换句话说，一个自动命令每周重新训练一个预测模型候选者，对该模型进行评分和验证，并在经过人工操作员简单验证后进行更换。
 
-![Dataiku](../Images/0d7f511009a16dfac934c6f8a0b48cee.png)
+![Dataiku](img/0d7f511009a16dfac934c6f8a0b48cee.png)
 
 ### 3\. 你的业务团队的参与
 
@@ -56,7 +56,7 @@
 
 在项目开发过程中，这是至关重要的，以确保最终产品对业务用户是可理解和可用的。一旦数据产品投入生产，它仍然是业务用户评估模型性能的重要成功因素，因为他们的工作基于此。实现这一点有多种方式；最受欢迎的方法是设置实时仪表板以监控并深入了解模型性能。自动发送包含关键指标的电子邮件可能是一个更安全的选择，以确保业务团队随时掌握信息。
 
-![Dataiku](../Images/b5c9acd5161589e7732cea1810d64bc9.png)
+![Dataiku](img/b5c9acd5161589e7732cea1810d64bc9.png)
 
 ### 4\. 你的 IT 环境一致性策略
 
@@ -64,7 +64,7 @@
 
 工具的增多也会带来维护生产环境和设计环境的困难，需要保持当前版本和软件包（一个数据科学项目可能依赖于多达 100 个 R 包、40 个 Python 包和数百个 Java/Scala 包）。为了解决这个问题，两种流行的解决方案是维护一个通用包列表或为每个数据项目设置虚拟机环境。
 
-![Dataiku](../Images/7e4d2e932aef82bc76b5445e7c3f8f59.png)
+![Dataiku](img/7e4d2e932aef82bc76b5445e7c3f8f59.png)
 
 ### 5\. 你的回滚策略
 
@@ -72,7 +72,7 @@
 
 一个好的回滚策略必须包括数据项目的所有方面，包括数据、数据模式、转换代码和软件依赖关系。它还必须是用户（即使他们不是经过培训的数据工程师）可以访问的过程，以确保在失败时能快速反应。
 
-![Dataiku](../Images/d98bc978e49e73f54c12204d5152b960.png)
+![Dataiku](img/d98bc978e49e73f54c12204d5152b960.png)
 
 ### 6\. 你的项目和流程的可审计性
 
@@ -80,7 +80,7 @@
 
 控制版本的最常见方法是（毫不意外地）Git 或 SVN。然而，保持有关数据库系统的信息日志（包括表创建、修改和架构更改）也是一种最佳实践。
 
-![Dataiku](../Images/4206027f8a53d9da67669e4f59870180.png)
+![Dataiku](img/4206027f8a53d9da67669e4f59870180.png)
 
 ### 7\. 无论你的用例是否需要实时评分或在线机器学习
 
@@ -88,7 +88,7 @@
 
 这些技术在生产环境、回滚和故障转移策略、部署等方面带来了复杂性。然而，它们并不需要为这些技术设置独立的过程和堆栈，只需要监控调整。
 
-![Dataiku](../Images/0ccbea74dc1fbaec700861ccd9cfd745.png)
+![Dataiku](img/0ccbea74dc1fbaec700861ccd9cfd745.png)
 
 ### 8\. 你的系统和过程的可扩展性
 

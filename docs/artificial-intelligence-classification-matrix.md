@@ -1,8 +1,8 @@
 # 人工智能分类矩阵
 
-> 原文：[https://www.kdnuggets.com/2016/11/artificial-intelligence-classification-matrix.html](https://www.kdnuggets.com/2016/11/artificial-intelligence-classification-matrix.html)
+> 原文：[`www.kdnuggets.com/2016/11/artificial-intelligence-classification-matrix.html`](https://www.kdnuggets.com/2016/11/artificial-intelligence-classification-matrix.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 [之前的帖子](https://www.linkedin.com/today/author/0_1Vba-OcRDYE1f-C6okrX7s)中讨论的所有问题可能会产生两个主要的横向问题：即在达到相关里程碑之前可能会耗尽资金，以及是否应该追求特定的商业应用以实现盈亏平衡，而不是专注于产品开发。
 
@@ -26,17 +26,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 这种分类的结果可以总结为以下矩阵，将各组根据短期货币化（STM）和业务防御能力进行绘制。
 
-![分类矩阵](../Images/a574ad0c9d8a32b7ab3f8cb03f6c7869.png)
+![分类矩阵](img/a574ad0c9d8a32b7ab3f8cb03f6c7869.png)
 
 **图 1：人工智能分类矩阵**
 
@@ -48,11 +48,11 @@
 
 **相关：**
 
-+   [欧洲机器智能概况](/2016/10/european-machine-intelligence-landscape.html)
++   欧洲机器智能概况
 
-+   [构建数据创业公司时如何构建你的团队](/2016/10/datafiniti-structure-team-building-data-startup.html)
++   构建数据创业公司时如何构建你的团队
 
-+   [4 大趋势颠覆数据科学市场](/2016/07/4-trends-disrupting-data-science-market.html)
++   4 大趋势颠覆数据科学市场
 
 ### 更多相关话题
 
@@ -66,4 +66,4 @@
 
 +   [人工智能如何改变数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [2022年最值得学习的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最值得学习的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)

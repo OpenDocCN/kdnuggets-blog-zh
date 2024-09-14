@@ -1,8 +1,8 @@
 # 数据科学难题 — 2020 年版
 
-> 原文：[https://www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html](https://www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html)
+> 原文：[`www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html`](https://www.kdnuggets.com/2020/02/data-science-puzzle-2020-edition.html)
 
-[评论](#comments)![图](../Images/85c97df6935708eec8b53641d926a592.png)
+评论![图](img/85c97df6935708eec8b53641d926a592.png)
 
 关于数据科学韦恩图的一些看法（原始来源：[Saurav Dhungana](https://medium.com/craftdata-labs/on-building-effective-data-science-teams-4813a4b82939)）
 
@@ -10,23 +10,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 新的一年已经到来，让我们重新审视数据科学难题的现状。数据科学领域中最重要的组成概念是什么？它们如何相互结合？这些概念中哪些在上一期之后变得更为重要，哪些则变得不那么重要？
 
-由于距离我上次处理这个特定话题已经过去了几年，出于兴趣和比较的目的，值得[看看这个](/2017/01/data-science-puzzle-revisited.html)。我们将首先回顾一下上次的概念定义，然后看看自那时以来情况有何变化。
+由于距离我上次处理这个特定话题已经过去了几年，出于兴趣和比较的目的，值得看看这个。我们将首先回顾一下上次的概念定义，然后看看自那时以来情况有何变化。
 
-我们从被认为是数据科学革命最初驱动因素的**大数据**开始。2017年我所说的：
+我们从被认为是数据科学革命最初驱动因素的**大数据**开始。2017 年我所说的：
 
 > 大数据仍然对数据科学很重要。无论你选择什么比喻，大数据都是继续推动数据科学革命的原材料。
 > 
-> 关于大数据，我相信从商业角度来看，数据获取和保留的正当性、大数据项目开始提供实际财务回报的期望，以及与数据隐私和安全相关的挑战，将成为不仅仅是2017年，而且在未来的大数据重要话题。简而言之，现在是时候从大数据中获得丰厚回报，并对其进行严格保护了。
+> 关于大数据，我相信从商业角度来看，数据获取和保留的正当性、大数据项目开始提供实际财务回报的期望，以及与数据隐私和安全相关的挑战，将成为不仅仅是 2017 年，而且在未来的大数据重要话题。简而言之，现在是时候从大数据中获得丰厚回报，并对其进行严格保护了。
 > 
 > 然而，正如其他人所言，大数据现在“就是如此”，也许不再是一个值得特别关注的实体，尽管它在过去十年中获得了很多关注。
 
@@ -48,7 +48,7 @@
 
 机器学习与数据科学并不完全等同；然而，鉴于机器学习在从数据中提取见解的依赖性，你可以理解那些经常混淆这两个概念的人。
 
-![图](../Images/b5c2ab14a59b92c25bc5530e5ce4fe0e.png)
+![图](img/b5c2ab14a59b92c25bc5530e5ce4fe0e.png)
 
 关于数据科学领域的一些主要组件如何契合的看法（来源：[OmniSci](https://www.omnisci.com/learn/resources/data-science)）
 
@@ -58,19 +58,19 @@
 
 深度学习是一种特定类型的机器学习，即利用深度神经网络进行洞察提取。神经网络在许多领域——特别是计算机视觉和自然语言处理——仍然提供最先进的结果，这也是它们常常被与机器学习区别对待的原因。虽然它们只是一个工具，但这个工具在特定的数据科学任务中往往表现出特别的实用性。
 
-自从之前的数据科学难题文章以来，深度学习从在计算机视觉领域中占据主导地位并将目标瞄准自然语言处理，到现在已经完成了对NLP的全面覆盖。正如在计算机视觉中一样，深度学习算法现在并不是解决问题的唯一算法，但它们无疑已成为众多子任务中的首选之一，这也是有充分理由的。
+自从之前的数据科学难题文章以来，深度学习从在计算机视觉领域中占据主导地位并将目标瞄准自然语言处理，到现在已经完成了对 NLP 的全面覆盖。正如在计算机视觉中一样，深度学习算法现在并不是解决问题的唯一算法，但它们无疑已成为众多子任务中的首选之一，这也是有充分理由的。
 
-数据科学与**人工智能**的关系似乎在过去三年中发生了相当大的变化。人工智能在那时似乎使用得要少得多。如今，每个机器学习和数据科学初创公司似乎都在从事人工智能业务，还有许多其他公司完全没有使用AI。
+数据科学与**人工智能**的关系似乎在过去三年中发生了相当大的变化。人工智能在那时似乎使用得要少得多。如今，每个机器学习和数据科学初创公司似乎都在从事人工智能业务，还有许多其他公司完全没有使用 AI。
 
-那么人工智能是什么呢？注意，这里指的不是人工通用智能，即创造一种能够迅速适应新问题的智能，类似于人类智能。以下是我三年前对AI的看法：
+那么人工智能是什么呢？注意，这里指的不是人工通用智能，即创造一种能够迅速适应新问题的智能，类似于人类智能。以下是我三年前对 AI 的看法：
 
-> 在我看来，AI是一个标准，是一个不断变化的目标，是一个无法达到的理想。
+> 在我看来，AI 是一个标准，是一个不断变化的目标，是一个无法达到的理想。
 > 
 > 但这并不意味着人工智能不值得追求；人工智能研究带来的回报以灵感和动力的形式出现。然而，正如你可能已经注意到的，人工智能有一个认知问题。正如数据挖掘曾经是一个引起许多人恐惧的主流术语（主要与隐私侵犯有关），人工智能从完全不同的角度使大众感到恐惧，这种恐惧类似于天网式的恐慌。我不知道我们该感谢媒体、埃隆·马斯克、人工智能与深度学习及其成功的混淆，还是其他完全不同的原因，但我认为结果是不可避免的：这种认知问题是真实存在的，未接触者变得越来越恐惧。
 > 
 > 还有这一点：尽管机器学习、人工智能、深度学习、计算机视觉和自然语言处理（以及这些“智能”技术的其他各种应用）都是独立且不同的领域和应用领域，即便是从业者和研究人员也不得不承认，除了过去常见的困惑和混淆外，还有一些不断演变的“概念蔓延”现象。这是可以理解的；这些领域最初都是其他领域（计算机科学、统计学、语言学等）的小众子学科，因此它们的不断演变是可以预见的。虽然在某种程度上确保所有应该对这些领域有基本理解的人确实具备这种理解很重要，但就其在数据科学等领域的应用而言，我谦虚地认为，过于深入语义上的争论从长远来看对从业者并没有太大益处。
 > 
-> 到2030年，人工智能和机器智能将与现在大相径庭，缺乏对这一不断演变的技术集合及其研究的基本理解，或者对其作为数据科学家的应用不持开放态度，将对你的长期成功产生不利影响。
+> 到 2030 年，人工智能和机器智能将与现在大相径庭，缺乏对这一不断演变的技术集合及其研究的基本理解，或者对其作为数据科学家的应用不持开放态度，将对你的长期成功产生不利影响。
 
 正如我上面提到的，深入探讨人工智能到底是什么定义并不是我愿意做的事。我对什么可以被技术上归类为“人工智能”有一个模糊的概念，你也是如此；我们的模糊概念可能有所不同。我对人工智能的看法及其主要好处的根本性认识在于它的不可达性。人工智能代表了一组模糊定义的宏伟目标，我们离这些目标越近，就会被更宏伟的目标取代。
 
@@ -80,15 +80,15 @@
 
 我仍然喜欢这个定义。它简洁明了，把事情汇聚在一起，在我看来无需进一步阐述。不过我确实写了它，所以可能有些偏颇。
 
-最后，我们来谈谈**统计学**。统计学如何融入数据科学的广阔领域？这是Diego Kuonen在我发布上一篇关于这一主题的文章三年后的看法：
+最后，我们来谈谈**统计学**。统计学如何融入数据科学的广阔领域？这是 Diego Kuonen 在我发布上一篇关于这一主题的文章三年后的看法：
 
 > .[@mattmayo13](https://twitter.com/mattmayo13?ref_src=twsrc%5Etfw)，难道 [#统计学](https://twitter.com/hashtag/Statistics?src=hash&ref_src=twsrc%5Etfw) 不是拼图纸吗？
 > 
 > “[#数据科学](https://twitter.com/hashtag/DataScience?src=hash&ref_src=twsrc%5Etfw) 拼图”
 > 
-> > [https://t.co/9E1zqJoDx6](https://t.co/9E1zqJoDx6)[#大数据](https://twitter.com/hashtag/BigData?src=hash&ref_src=twsrc%5Etfw) [#机器学习](https://twitter.com/hashtag/ML?src=hash&ref_src=twsrc%5Etfw) [#深度学习](https://twitter.com/hashtag/DL?src=hash&ref_src=twsrc%5Etfw) [#人工智能](https://twitter.com/hashtag/AI?src=hash&ref_src=twsrc%5Etfw) [#分析](https://twitter.com/hashtag/Analytics?src=hash&ref_src=twsrc%5Etfw) [#物联网](https://twitter.com/hashtag/IoT?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/zjcHkUChKO](https://t.co/zjcHkUChKO)
+> > [`t.co/9E1zqJoDx6`](https://t.co/9E1zqJoDx6)[#大数据](https://twitter.com/hashtag/BigData?src=hash&ref_src=twsrc%5Etfw) [#机器学习](https://twitter.com/hashtag/ML?src=hash&ref_src=twsrc%5Etfw) [#深度学习](https://twitter.com/hashtag/DL?src=hash&ref_src=twsrc%5Etfw) [#人工智能](https://twitter.com/hashtag/AI?src=hash&ref_src=twsrc%5Etfw) [#分析](https://twitter.com/hashtag/Analytics?src=hash&ref_src=twsrc%5Etfw) [#物联网](https://twitter.com/hashtag/IoT?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/zjcHkUChKO](https://t.co/zjcHkUChKO)
 > > 
-> — Diego Kuonen 教授 (@DiegoKuonen) [2017年1月25日](https://twitter.com/DiegoKuonen/status/824255316347015169?ref_src=twsrc%5Etfw)
+> — Diego Kuonen 教授 (@DiegoKuonen) [2017 年 1 月 25 日](https://twitter.com/DiegoKuonen/status/824255316347015169?ref_src=twsrc%5Etfw)
 
 他是对的！如果数据科学是一个拼图，就像一个拼图，拼图纸在比喻上就是数据科学立足的基础。统计学就是那个基础。
 
@@ -98,11 +98,11 @@
 
 **相关**：
 
-+   [数据科学难题，再探讨](/2017/01/data-science-puzzle-revisited.html)
++   数据科学难题，再探讨
 
-+   [数据科学难题解析](/2016/03/data-science-puzzle-explained.html)
++   数据科学难题解析
 
-+   [机器学习难题解析](/2019/06/machine-learning-puzzle-explained.html)
++   机器学习难题解析
 
 ### 更多相关主题
 
@@ -110,10 +110,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

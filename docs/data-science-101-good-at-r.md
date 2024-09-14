@@ -1,6 +1,6 @@
 # 数据科学 101：如何在 R 方面变得出色
 
-> 原文：[https://www.kdnuggets.com/2016/11/data-science-101-good-at-r.html](https://www.kdnuggets.com/2016/11/data-science-101-good-at-r.html)
+> 原文：[`www.kdnuggets.com/2016/11/data-science-101-good-at-r.html`](https://www.kdnuggets.com/2016/11/data-science-101-good-at-r.html)
 
 **由 Ari Lamstein 撰写。**
 
@@ -10,11 +10,11 @@
 > 
 > ## 我们的前 3 个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 > 
 > * * *
 > 
@@ -22,7 +22,7 @@
 
 这个话题出现的次数足够多，我可以概述一下我的想法。这样，下次有人提问时，我可以简单地将他们转发到这篇文章。
 
-![数据科学家](../Images/8b75ef59eb455d02cc6bfb874b0dc877.png)
+![数据科学家](img/8b75ef59eb455d02cc6bfb874b0dc877.png)
 
 我的建议是面向那些想建立一个提升他们职业的在线作品集的人。这是我走过的道路，在某些方面，我只是说说对我有效的方法。
 
@@ -44,7 +44,7 @@
 
 我并没有打算学习 R。
 
-![R](../Images/4ab4ab39624be0b033dc8c47e879bde7.png)几年前，我在一家房地产公司担任软件工程师。我在处理销售线索时需要分析数据。
+![R](img/4ab4ab39624be0b033dc8c47e879bde7.png)几年前，我在一家房地产公司担任软件工程师。我在处理销售线索时需要分析数据。
 
 MySQL 是我开始分析的一个很好的起点，但我需要做更多的工作。我开始学习 R，希望它能帮助我更好地分析数据。它确实做到了。
 
@@ -54,17 +54,17 @@ MySQL 是我开始分析的一个很好的起点，但我需要做更多的工�
 
 ### 自定义需求
 
-在某个时候，我意识到自己有相当特殊的分析需求。我的主要分析单位是邮政编码，这本身就很不寻常。我还想将我们的内部数据与外部来源的人口数据进行融合，例如美国人口普查局。我在R生态系统中找不到完全符合需求的工具，所以我自己动手做了。这个项目最终变成了**choroplethr**。
+在某个时候，我意识到自己有相当特殊的分析需求。我的主要分析单位是邮政编码，这本身就很不寻常。我还想将我们的内部数据与外部来源的人口数据进行融合，例如美国人口普查局。我在 R 生态系统中找不到完全符合需求的工具，所以我自己动手做了。这个项目最终变成了**choroplethr**。
 
 由于我大部分职业生涯都是软件工程师，到目前为止的一切对我来说在某种程度上都是“正常”的。真正让我走出舒适区的是接下来的几个部分。
 
 ### 发布项目
 
-尽管我在旧金山作为软件工程师工作了10多年，但我从未创建过开源项目。R通过其包系统有着丰富的传统，这对我来说似乎是一个尝试新事物的好机会。
+尽管我在旧金山作为软件工程师工作了 10 多年，但我从未创建过开源项目。R 通过其包系统有着丰富的传统，这对我来说似乎是一个尝试新事物的好机会。
 
 将项目从内部使用转变为其他人可以“现成”使用的状态是非常辛苦的工作。我真的不确定是否会有其他人使用这个项目。但当时我想，“如果这个项目能帮助到至少一个人，那就值得了。”
 
-在R中没有准确测量包安装量的方法。但根据metacran/cranlogs应用程序的统计，截至本文撰写时，主要的**choroplethr**包已经被安装了39,000次。
+在 R 中没有准确测量包安装量的方法。但根据 metacran/cranlogs 应用程序的统计，截至本文撰写时，主要的**choroplethr**包已经被安装了 39,000 次。
 
 ### 营销项目
 
@@ -86,7 +86,7 @@ MySQL 是我开始分析的一个很好的起点，但我需要做更多的工�
 
 ### 货币化项目
 
-在推出产品之前，最好先有潜在客户排队。理想情况下，你应该通过Skype与他们进行过几次访谈、调查过他们，或者至少通过电子邮件与他们保持联系。实际上，这些潜在客户已经在你的邮件列表中。这就是为什么我将“市场”列在“货币化”之前的原因。
+在推出产品之前，最好先有潜在客户排队。理想情况下，你应该通过 Skype 与他们进行过几次访谈、调查过他们，或者至少通过电子邮件与他们保持联系。实际上，这些潜在客户已经在你的邮件列表中。这就是为什么我将“市场”列在“货币化”之前的原因。
 
 我已经通过两种方式实现了**choroplethr**的货币化：
 
@@ -100,7 +100,7 @@ MySQL 是我开始分析的一个很好的起点，但我需要做更多的工�
 
 ### 对初学者的建议
 
-我分享自己的故事只是为了帮助那些问我“我怎么才能在R方面变得优秀？”的初学者。
+我分享自己的故事只是为了帮助那些问我“我怎么才能在 R 方面变得优秀？”的初学者。
 
 我的回答是这是一个漫长的过程。但你今天可以做的两件事是：
 
@@ -108,7 +108,7 @@ MySQL 是我开始分析的一个很好的起点，但我需要做更多的工�
 
 1.  创建一个博客，并撰写你的第一篇帖子。那篇帖子可以介绍你自己并说明你计划研究的内容。
 
-当然，话题可以更改。但我建议尝试将一个话题坚持至少3个月。对特定领域有深入了解会使你在寻求该领域信息的人眼中更有价值。
+当然，话题可以更改。但我建议尝试将一个话题坚持至少 3 个月。对特定领域有深入了解会使你在寻求该领域信息的人眼中更有价值。
 
 ### 有问题吗？
 
@@ -122,21 +122,21 @@ MySQL 是我开始分析的一个很好的起点，但我需要做更多的工�
 
 **相关内容：**
 
-+   [学习在R中绘制人口普查数据 – 免费电子邮件课程](/2015/08/learn-map-census-data-r-free-course.html)
++   学习在 R 中绘制人口普查数据 – 免费电子邮件课程
 
-+   [R图形画廊数据可视化集合](/2016/10/r-graph-gallery-data-visualization.html)
++   R 图形画廊数据可视化集合
 
-+   [数据科学入门 – R](/2016/08/getting-started-data-science-r.html)
++   数据科学入门 – R
 
 ### 相关主题
 
-+   [数据科学家线性编程101](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)
++   [数据科学家线性编程 101](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)
 
-+   [LangChain 101: 构建你自己的GPT驱动应用程序](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
++   [LangChain 101: 构建你自己的 GPT 驱动应用程序](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
 
-+   [Prompt Engineering 101: 精通有效的LLM沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
++   [Prompt Engineering 101: 精通有效的 LLM 沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
 
-+   [优秀数据科学项目文档的5条规则](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)
++   [优秀数据科学项目文档的 5 条规则](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)
 
 +   [数据质量：好、坏和丑陋](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)
 

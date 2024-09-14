@@ -1,8 +1,8 @@
 # R 与 Python（再论）：一种人为因素的视角
 
-> 原文：[https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)
+> 原文：[`www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html`](https://www.kdnuggets.com/2022/01/r-python-human-factor-perspective.html)
 
-![R 与 Python（再论）：一种人为因素的视角](../Images/b7672ac69a5bb40ffca47deb2841af0b.png)
+![R 与 Python（再论）：一种人为因素的视角](img/b7672ac69a5bb40ffca47deb2841af0b.png)
 
 图像由作者根据 [OpenClipart-Vectors](https://pixabay.com/users/openclipart-vectors-30363/) 在 [pixabay](https://pixabay.com/) 的图像制作
 
@@ -38,29 +38,29 @@ R 通常作为辅助工具来完成他们的主要工作——进行研究。因
 
 **背景**
 
-大多数 Python 用户来自计算背景。Python 通常被用作大学介绍计算机科学概念的工具 ([https://www.edx.org/learn/python](https://www.edx.org/learn/python))。即使他们没有计算机科学的学位，Python 用户可能也接受过一些正式的 Python 编程培训，因为这是一项工作要求。此外，即使他们最初没有学习计算机科学，他们也很可能接受过一般计算机科学的正式培训，除了 Python 编程之外，并且熟悉良好的编码实践。
+大多数 Python 用户来自计算背景。Python 通常被用作大学介绍计算机科学概念的工具 ([`www.edx.org/learn/python`](https://www.edx.org/learn/python))。即使他们没有计算机科学的学位，Python 用户可能也接受过一些正式的 Python 编程培训，因为这是一项工作要求。此外，即使他们最初没有学习计算机科学，他们也很可能接受过一般计算机科学的正式培训，除了 Python 编程之外，并且熟悉良好的编码实践。
 
 **使用情况**
 
-Python 通常由软件开发人员使用——这些人的主要任务是编写代码。代码的目的是多次运行，在不同的计算机（甚至可能是不同的操作系统）上运行，并处理许多不同的数据集。代码通常是稳健和可靠的，能够处理异常情况，并优雅地处理错误。还期望代码需要维护，可能由其他人进行（修复错误、适应、演变），因此文档、风格、可读性、重用等概念自然成为开发过程的一部分。考虑到这一点，我们可以认为“普通”Python代码往往会**符合**高质量的编码标准。
+Python 通常由软件开发人员使用——这些人的主要任务是编写代码。代码的目的是多次运行，在不同的计算机（甚至可能是不同的操作系统）上运行，并处理许多不同的数据集。代码通常是稳健和可靠的，能够处理异常情况，并优雅地处理错误。还期望代码需要维护，可能由其他人进行（修复错误、适应、演变），因此文档、风格、可读性、重用等概念自然成为开发过程的一部分。考虑到这一点，我们可以认为“普通”Python 代码往往会**符合**高质量的编码标准。
 
 ## 结论
 
-在这篇文章中，我尝试探讨有关Python是否比R更适合编写生产级代码的信念来源的假设。我认为这种信念并不来自于两种语言及其生态系统的固有特性。我猜这更可能来自于普通R用户可能对代码质量的关注程度低于Python用户，这可以通过他们的背景和编程在各自工作中的地位来解释。
+在这篇文章中，我尝试探讨有关 Python 是否比 R 更适合编写生产级代码的信念来源的假设。我认为这种信念并不来自于两种语言及其生态系统的固有特性。我猜这更可能来自于普通 R 用户可能对代码质量的关注程度低于 Python 用户，这可以通过他们的背景和编程在各自工作中的地位来解释。
 
-当然，最终的结论是，认为Python在编写高质量代码方面优于R的信念是错误的！
+当然，最终的结论是，认为 Python 在编写高质量代码方面优于 R 的信念是错误的！
 
-**[Zivan Karaman](https://www.linkedin.com/in/zivankaraman/)** 是一位自由的数据科学与软件工程顾问，热衷于利用数学、统计学和计算来将数据转化为可操作的见解，以帮助解决实际问题。特别钟爱R生态系统，早在R创建之前就已经使用（自90年代初期开始使用R的前身S/S+）。 [在LinkedIn上与他联系](https://www.linkedin.com/in/zivankaraman/).
+**[Zivan Karaman](https://www.linkedin.com/in/zivankaraman/)** 是一位自由的数据科学与软件工程顾问，热衷于利用数学、统计学和计算来将数据转化为可操作的见解，以帮助解决实际问题。特别钟爱 R 生态系统，早在 R 创建之前就已经使用（自 90 年代初期开始使用 R 的前身 S/S+）。 [在 LinkedIn 上与他联系](https://www.linkedin.com/in/zivankaraman/).
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -68,11 +68,11 @@ Python 通常由软件开发人员使用——这些人的主要任务是编写�
 
 +   [最先进的深度学习解释性预测和实时预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)
 
-+   [云机器学习透视：2021年的惊喜和2022年的预测](https://www.kdnuggets.com/2021/12/cloud-ml-perspective-surprises-2021-projections-2022.html)
++   [云机器学习透视：2021 年的惊喜和 2022 年的预测](https://www.kdnuggets.com/2021/12/cloud-ml-perspective-surprises-2021-projections-2022.html)
 
 +   [如果我需要重新开始学习数据科学，我会怎么做？](https://www.kdnuggets.com/2020/08/start-learning-data-science-again.html)
 
-+   [去而复返……一则RAPIDS故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
++   [去而复返……一则 RAPIDS 故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
 
 +   [LSTMs 再度崛起：扩展-LSTM 模型挑战 Transformer 的优越性…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)
 

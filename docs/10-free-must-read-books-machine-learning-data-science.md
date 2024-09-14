@@ -1,6 +1,6 @@
 # 10 本机器学习和数据科学必读的免费书籍
 
-> 原文：[https://www.kdnuggets.com/2017/04/10-free-must-read-books-machine-learning-data-science.html](https://www.kdnuggets.com/2017/04/10-free-must-read-books-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/04/10-free-must-read-books-machine-learning-data-science.html`](https://www.kdnuggets.com/2017/04/10-free-must-read-books-machine-learning-data-science.html)
 
 有什么比用一些免费的机器学习和数据科学电子书来享受这个春天的天气更好的方式呢？对吧？对吧？
 
@@ -10,15 +10,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![免费书籍！](../Images/daaaa35cb07263fa738d353747ec317b.png)
+![免费书籍！](img/daaaa35cb07263fa738d353747ec317b.png)
 
 **1\. [思考统计：程序员的概率与统计](http://www.greenteapress.com/thinkstats/)**
 
@@ -40,7 +40,7 @@
 
 作者：Shai Shalev-Shwartz 和 Shai Ben-David
 
-> 机器学习是计算机科学中发展最快的领域之一，具有广泛的应用。本教材旨在以原则性的方式介绍机器学习及其提供的算法范式。书中对机器学习基础理论和将这些原理转化为实际算法的数学推导进行了理论性的描述。在介绍基本概念后，本书覆盖了之前教材未涉及的大量核心主题，包括学习的计算复杂性、凸性和稳定性概念；重要的算法范式，如随机梯度下降、神经网络和结构化输出学习；以及新兴的理论概念，如PAC-Bayes方法和基于压缩的界限。
+> 机器学习是计算机科学中发展最快的领域之一，具有广泛的应用。本教材旨在以原则性的方式介绍机器学习及其提供的算法范式。书中对机器学习基础理论和将这些原理转化为实际算法的数学推导进行了理论性的描述。在介绍基本概念后，本书覆盖了之前教材未涉及的大量核心主题，包括学习的计算复杂性、凸性和稳定性概念；重要的算法范式，如随机梯度下降、神经网络和结构化输出学习；以及新兴的理论概念，如 PAC-Bayes 方法和基于压缩的界限。
 
 **4\. [统计学习的要素](http://statweb.stanford.edu/~tibs/ElemStatLearn/printings/ESLII_print10.pdf)**
 
@@ -48,17 +48,17 @@
 
 > 本书在一个共同的概念框架中描述了这些领域的重要思想。虽然方法是统计性的，但重点在于概念而非数学。书中给出了许多例子，并大量使用了彩色图形。它应成为统计学家和任何对科学或工业中的数据挖掘感兴趣的人士的宝贵资源。书中的内容涵盖广泛，从监督学习（预测）到无监督学习，许多主题包括神经网络、支持向量机、分类树和提升——这是任何书籍中对这一主题的首次全面处理。
 
-**5\. [带有R应用的统计学习简介](http://www-bcf.usc.edu/~gareth/ISL/)**
+**5\. [带有 R 应用的统计学习简介](http://www-bcf.usc.edu/~gareth/ISL/)**
 
 作者：Gareth James, Daniela Witten, Trevor Hastie 和 Robert Tibshirani
 
-> 本书介绍了统计学习方法，主要面向本科高年级学生、硕士生和非数学科学领域的博士生。书中还包含了多个R实验室的详细解释，讲解了如何在实际环境中实施各种方法，对于从事数据科学工作的实践者来说，应该是一个宝贵的资源。
+> 本书介绍了统计学习方法，主要面向本科高年级学生、硕士生和非数学科学领域的博士生。书中还包含了多个 R 实验室的详细解释，讲解了如何在实际环境中实施各种方法，对于从事数据科学工作的实践者来说，应该是一个宝贵的资源。
 
 **6\. [数据科学基础](https://www.cs.cornell.edu/jeh/book.pdf)**
 
 作者：Avrim Blum, John Hopcroft, 和 Ravindran Kannan
 
-> 虽然传统的计算机科学领域仍然非常重要，但未来的研究人员将越来越多地涉及使用计算机理解和提取来自大量数据的可用信息，而不仅仅是如何在特定明确的问题上使计算机变得有用。考虑到这一点，我们编写了这本书，以覆盖未来40年可能有用的理论，就像对自动机理论、算法及相关主题的理解在过去40年中给学生带来了优势一样。
+> 虽然传统的计算机科学领域仍然非常重要，但未来的研究人员将越来越多地涉及使用计算机理解和提取来自大量数据的可用信息，而不仅仅是如何在特定明确的问题上使计算机变得有用。考虑到这一点，我们编写了这本书，以覆盖未来 40 年可能有用的理论，就像对自动机理论、算法及相关主题的理解在过去 40 年中给学生带来了优势一样。
 
 **7\. [程序员的数据挖掘指南：数字化古老的艺术](http://guidetodatamining.com/)**
 
@@ -98,11 +98,11 @@
 
 **相关**：
 
-+   [数据爱好者必读的十大书籍](/2016/04/top-10-essential-books-data-enthusiast.html)
++   数据爱好者必读的十大书籍
 
-+   [进入数据科学或大数据职业之前要读的 5 本电子书](/2016/08/simplilearn-5-free-ebooks-data-science-big-data.html)
++   进入数据科学或大数据职业之前要读的 5 本电子书
 
-+   [进入机器学习职业之前要读的 5 本电子书](/2016/10/5-free-ebooks-machine-learning-career.html)
++   进入机器学习职业之前要读的 5 本电子书
 
 ### 更多相关话题
 
@@ -116,4 +116,4 @@
 
 +   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

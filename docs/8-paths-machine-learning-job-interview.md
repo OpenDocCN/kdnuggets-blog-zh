@@ -1,12 +1,12 @@
-# 获取机器学习职位面试的8种途径
+# 获取机器学习职位面试的 8 种途径
 
-> 原文：[https://www.kdnuggets.com/2019/10/8-paths-machine-learning-job-interview.html](https://www.kdnuggets.com/2019/10/8-paths-machine-learning-job-interview.html)
+> 原文：[`www.kdnuggets.com/2019/10/8-paths-machine-learning-job-interview.html`](https://www.kdnuggets.com/2019/10/8-paths-machine-learning-job-interview.html)
 
-[comments](#comments)
+comments
 
 **作者 [Jaxson Khan](https://www.linkedin.com/in/jaxson/)，Khan & Associates 的首席执行官**。
 
-![](../Images/a47ea83dbc6da9c2d7c3ee626c92d1e6.png)
+![](img/a47ea83dbc6da9c2d7c3ee626c92d1e6.png)
 
 对于机器学习职位，获得面试有时是获取工作的最困难（也是最令人沮丧）部分，比*通过*面试更难。因此，在本文中，我们将帮助你搞清楚如何首先获得机器学习的面试。本文来源于 Jaxson Khan 的 [终极机器学习面试指南](https://www.springboard.com/resources/guides/machine-learning-interviews-guide/)。
 
@@ -28,7 +28,7 @@
 
 通常，你会在面试过程中与招聘人员合作，但你不必仅仅等待他们联系你。有时你可能希望直接联系招聘人员，无论是在公司内部（内部招聘人员）还是与公司联系优秀候选人的第三方招聘人员。
 
-一些招聘人员专注于机器学习和人工智能。他们通常在 LinkedIn 个人资料标题中包含这方面的信息，或者列出更为一般的描述，如“技术招聘人员”。招聘人员的重要之处在于，他们可能知道一些在线上未发布的职位。请记住，大约50%的职位不会公开列出。快速搜索 LinkedIn 会让你了解到一些可能能够找到最相关公司的招聘人员。
+一些招聘人员专注于机器学习和人工智能。他们通常在 LinkedIn 个人资料标题中包含这方面的信息，或者列出更为一般的描述，如“技术招聘人员”。招聘人员的重要之处在于，他们可能知道一些在线上未发布的职位。请记住，大约 50%的职位不会公开列出。快速搜索 LinkedIn 会让你了解到一些可能能够找到最相关公司的招聘人员。
 
 **3\. 招聘会和交易展**
 
@@ -46,15 +46,15 @@
 
 [国际机器学习会议（ICML）](https://icml.cc/)
 
-ICML 是全球领先的国际机器学习会议之一，已有超过35年的历史。通常在加利福尼亚州举办，汇聚了关于机器学习当前状态和未来的专家讲者。如果你是机器学习工程师，你应该考虑这个活动，但与机器学习相关的每个人在这里都有可能找到适合自己的内容。
+ICML 是全球领先的国际机器学习会议之一，已有超过 35 年的历史。通常在加利福尼亚州举办，汇聚了关于机器学习当前状态和未来的专家讲者。如果你是机器学习工程师，你应该考虑这个活动，但与机器学习相关的每个人在这里都有可能找到适合自己的内容。
 
 [人工智能会议](https://conferences.oreilly.com/artificial-intelligence/ai-ny)
 
-这个会议专注于人工智能和机器学习的最新突破。它是一个O'Reilly活动，汇集了科学与商业，邀请了来自顶级软件公司的讲者，提供培训课程和网络机会。它是了解人工智能不同应用的绝佳场所。特别适合产品经理和商业智能开发人员。
+这个会议专注于人工智能和机器学习的最新突破。它是一个 O'Reilly 活动，汇集了科学与商业，邀请了来自顶级软件公司的讲者，提供培训课程和网络机会。它是了解人工智能不同应用的绝佳场所。特别适合产品经理和商业智能开发人员。
 
 [神经信息处理系统会议](https://nips.cc/)
 
-另一个长期的会议（自1987年以来），这个会议可能是最专注于理论和最新机器学习发展研究的。它显著关注计算神经科学，因此对于机器学习研究人员或理论背景的个人来说，这是一个理想的选择。
+另一个长期的会议（自 1987 年以来），这个会议可能是最专注于理论和最新机器学习发展研究的。它显著关注计算神经科学，因此对于机器学习研究人员或理论背景的个人来说，这是一个理想的选择。
 
 *聚会*
 
@@ -76,7 +76,7 @@ ICML 是全球领先的国际机器学习会议之一，已有超过35年的历�
 
 **6\. 参与开源项目**
 
-另一个在机器学习社区中建立联系的方法是参与开源项目。这些是由分布式社区共同开发的非专有代码库和存储库，通常不以盈利为目的或被公司拥有。它们通常托管在[Github](https://github.com/)的开源存储库中。这包括[自然语言工具包项目](http://www.nltk.org/)，它帮助处理作为数据源的人类语言，以及构成Python [数据科学和机器学习工具包](/2015/06/top-20-python-machine-learning-open-source-projects.html)的各种库。
+另一个在机器学习社区中建立联系的方法是参与开源项目。这些是由分布式社区共同开发的非专有代码库和存储库，通常不以盈利为目的或被公司拥有。它们通常托管在[Github](https://github.com/)的开源存储库中。这包括[自然语言工具包项目](http://www.nltk.org/)，它帮助处理作为数据源的人类语言，以及构成 Python 数据科学和机器学习工具包的各种库。
 
 招聘工程师的公司通常特别倾向于[基于开源贡献](https://hackernoon.com/how-to-land-a-job-using-open-source-3f5b2744a3d4)进行招聘，有时会通过你所写的内容找到你。这类似于作品集效应。人们通常会在线查找你，并希望看到你所做的工作。
 
@@ -90,11 +90,11 @@ ICML 是全球领先的国际机器学习会议之一，已有超过35年的历�
 
 最终，你可以采取的最后一条途径或步骤是经典的，但可能是不可替代的。*最终*，人际关系能够让你踏上求职之路，并帮助你达成交易。超过一半的职位甚至不会在招聘网站上发布，有时穿透公司看似不可突破的外壳的唯一方式是开始结识该公司的人，并与他们建立强大的关系。
 
-网络建设的最佳方式之一是请求对方仅花费一点时间。一个简短的咖啡约会是理想的。按照对方的时间安排，在他们选择的地方见面。通过电子邮件或LinkedIn消息联系，简短说明一下你作为候选人的独特之处。你还可以使用[Steve Blank的这个绝佳框架](https://steveblank.com/2013/08/12/how-to-get-meetings-with-people-too-busy-to-see-you/)。
+网络建设的最佳方式之一是请求对方仅花费一点时间。一个简短的咖啡约会是理想的。按照对方的时间安排，在他们选择的地方见面。通过电子邮件或 LinkedIn 消息联系，简短说明一下你作为候选人的独特之处。你还可以使用[Steve Blank 的这个绝佳框架](https://steveblank.com/2013/08/12/how-to-get-meetings-with-people-too-busy-to-see-you/)。
 
 如果你成功约到咖啡，视其为一个从业内人士那里寻求建议和信息的机会。如果你擅长扩展网络，你将真正了解这个行业的运作方式。
 
-**个人简介：** [贾克逊·汗](https://www.linkedin.com/in/jaxson/) 是Khan & Associates的首席执行官 | 人工智能与金融科技顾问和作家 | 教育与经济发展志愿者。
+**个人简介：** [贾克逊·汗](https://www.linkedin.com/in/jaxson/) 是 Khan & Associates 的首席执行官 | 人工智能与金融科技顾问和作家 | 教育与经济发展志愿者。
 
 **相关内容：**
 
@@ -108,11 +108,11 @@ ICML 是全球领先的国际机器学习会议之一，已有超过35年的历�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -124,8 +124,8 @@ ICML 是全球领先的国际机器学习会议之一，已有超过35年的历�
 
 +   [数据分析的就业趋势：自然语言处理在就业趋势分析中的应用](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
-+   [2024年数据分析师面试问题的10个常见问题](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
++   [2024 年数据分析师面试问题的 10 个常见问题](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
 
 +   [免费数据科学面试书籍，助你获得理想工作](https://www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)

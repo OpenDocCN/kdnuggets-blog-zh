@@ -1,8 +1,8 @@
 # OpenChatKit: 开源的 ChatGPT 替代品
 
-> 原文：[https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
+> 原文：[`www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html`](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
 
-![OpenChatKit: 开源的 ChatGPT 替代品](../Images/f9019f2441d2a0bcb680a4bc00478b70.png)
+![OpenChatKit: 开源的 ChatGPT 替代品](img/f9019f2441d2a0bcb680a4bc00478b70.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 方面
 
 * * *
 
@@ -34,7 +34,7 @@ Together Computer 发布了在 Apache-2.0 许可下的 [OpenChatKit 0.15](https:
 
 你可以在 Hugging Face 上试用基于模型的演示：[OpenChatKit](https://huggingface.co/spaces/togethercomputer/OpenChatKit)。它类似于 ChatGPT，你写一个提示，模型会用答案、代码块、表格或文本来回应你。
 
-![OpenChatKit: 开源 ChatGPT 替代方案](../Images/05f65b7dbcc1c61523b4c56c5f67c645.png)
+![OpenChatKit: 开源 ChatGPT 替代方案](img/05f65b7dbcc1c61523b4c56c5f67c645.png)
 
 图片来自作者 | [OpenChatKit](https://huggingface.co/spaces/togethercomputer/OpenChatKit)
 
@@ -54,7 +54,7 @@ OpenChatKit 附带基础机器人和创建自定义聊天机器人应用程序�
 
 OpenChatKit 的基础是一个名为 GPT-NeoXT-Chat-Base-20B 的大型语言模型。它基于 EleutherAI 的 GPT-NeoX 模型，并在 4300 万条高质量对话指令上进行了微调。开发团队特别关注了多轮对话、问答、分类、提取和总结等多个任务的调优。
 
-![OpenChatKit: 开源 ChatGPT 替代方案](../Images/c67904e521b13536b4b629b1c541e902.png)
+![OpenChatKit: 开源 ChatGPT 替代方案](img/c67904e521b13536b4b629b1c541e902.png)
 
 图片来自 [TOGETHER](https://www.together.xyz/blog/openchatkit)
 
@@ -76,9 +76,9 @@ OpenChatKit 的基础是一个名为 GPT-NeoXT-Chat-Base-20B 的大型语言模�
 
 # 结论
 
-OpenChatKit是一个很好的倡议，借助社区的帮助，我们可以很快看到一个更好的聊天机器人版本。如果你期待OpenChatKit能像ChatGPT一样提供令人惊叹的回答，你可能会失望，因为它还处于早期阶段，并且训练数据集不够多样化。
+OpenChatKit 是一个很好的倡议，借助社区的帮助，我们可以很快看到一个更好的聊天机器人版本。如果你期待 OpenChatKit 能像 ChatGPT 一样提供令人惊叹的回答，你可能会失望，因为它还处于早期阶段，并且训练数据集不够多样化。
 
-在这篇文章中，我们了解了ChatGPT开源版本的宝贵见解，这对开发者和数据科学社区来说是好消息。此外，我们还探索了其工作原理，并深入研究了该工具包的四个组成部分，这些部分可以帮助创建一个完全可定制的聊天机器人，配备最新的新闻更新和管理功能。
+在这篇文章中，我们了解了 ChatGPT 开源版本的宝贵见解，这对开发者和数据科学社区来说是好消息。此外，我们还探索了其工作原理，并深入研究了该工具包的四个组成部分，这些部分可以帮助创建一个完全可定制的聊天机器人，配备最新的新闻更新和管理功能。
 
 ## 资源
 
@@ -92,18 +92,18 @@ OpenChatKit是一个很好的倡议，借助社区的帮助，我们可以很快
 
 +   [公告](https://www.together.xyz/blog/openchatkit)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，以帮助那些遭受心理疾病困扰的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，以帮助那些遭受心理疾病困扰的学生。
 
 ### 更多相关内容
 
-+   [8个开源ChatGPT和Bard替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
++   [8 个开源 ChatGPT 和 Bard 替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
 
-+   [ChatGLM-6B：一个轻量级的开源ChatGPT替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
++   [ChatGLM-6B：一个轻量级的开源 ChatGPT 替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
 
-+   [Dolly 2.0：用于商业用途的ChatGPT开源替代品](https://www.kdnuggets.com/2023/04/dolly-20-chatgpt-open-source-alternative-commercial.html)
++   [Dolly 2.0：用于商业用途的 ChatGPT 开源替代品](https://www.kdnuggets.com/2023/04/dolly-20-chatgpt-open-source-alternative-commercial.html)
 
 +   [机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
 
-+   [MiniGPT-4：对GPT-4的轻量级替代方案，增强…](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)
++   [MiniGPT-4：对 GPT-4 的轻量级替代方案，增强…](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)
 
 +   [HuggingChat Python API：你的免费替代方案](https://www.kdnuggets.com/2023/05/huggingchat-python-api-alternative.html)

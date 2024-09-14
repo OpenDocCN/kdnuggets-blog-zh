@@ -1,8 +1,8 @@
-# 精通数据科学中的Python的7个步骤
+# 精通数据科学中的 Python 的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html](https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html`](https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
 
-![精通数据科学中的Python的7个步骤](../Images/3e9e845c9ef4b0fae65d7c85d621d290.png)
+![精通数据科学中的 Python 的 7 个步骤](img/3e9e845c9ef4b0fae65d7c85d621d290.png)
 
 图片来源：[编辑提供的图片](https://www.pexels.com/photo/woman-programming-on-a-notebook-1181359/)
 
@@ -12,27 +12,27 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 我想从事数据科学和分析的职业，但缺乏获得相关工作的编程技能。
 
-即使跟随了无数编程YouTube视频进行编码，我发现自己仍然无法独立完成整个项目。我根本不知道从哪里开始，解决问题时没有编码教程的帮助，我感到很挣扎。
+即使跟随了无数编程 YouTube 视频进行编码，我发现自己仍然无法独立完成整个项目。我根本不知道从哪里开始，解决问题时没有编码教程的帮助，我感到很挣扎。
 
-在经历了看似无尽的Python学习失败后，我最终向几位在该领域有经验的程序员和数据科学家寻求建议。
+在经历了看似无尽的 Python 学习失败后，我最终向几位在该领域有经验的程序员和数据科学家寻求建议。
 
-我根据他们给我的建议制定了一个Python学习路线图，并严格遵循。在花了大约每天7-8小时编程三个月后，我在Python方面变得足够熟练，顺利获得了我的第一个数据科学实习。
+我根据他们给我的建议制定了一个 Python 学习路线图，并严格遵循。在花了大约每天 7-8 小时编程三个月后，我在 Python 方面变得足够熟练，顺利获得了我的第一个数据科学实习。
 
-在这篇文章中，我将把我用来学习Python的所有资源浓缩成7个步骤。为了确保这个路线图对每个人都能获取，我还将提供每个资源的免费替代方案。
+在这篇文章中，我将把我用来学习 Python 的所有资源浓缩成 7 个步骤。为了确保这个路线图对每个人都能获取，我还将提供每个资源的免费替代方案。
 
 # 第一步：学习基础知识
 
-如果你是一个完全没有编程知识的初学者，首先要学习Python的基础知识。这包括以下概念：
+如果你是一个完全没有编程知识的初学者，首先要学习 Python 的基础知识。这包括以下概念：
 
 +   变量
 
@@ -54,7 +54,7 @@
 
 编程曾经是一个令我感到畏惧的学科，有时甚至让我感到不知所措，但 Jose 的教学风格让我觉得这门学科很有趣。他的课程从简单的讲解和练习开始，复杂度逐渐增加，进度也很容易跟上。
 
-如果你想要一个免费的课程替代方案，可以跟随 [FreeCodeCamp’s](https://www.youtube.com/watch?v=rfscVS0vtbw) 在 YouTube 上的4小时 Python 教程来学习语言基础。补充观看 [W3School’s Python 学习路径](https://www.w3schools.com/python/)，其中包含了 FreeCodeCamp 教程中没有涉及的如读写文件等主题。
+如果你想要一个免费的课程替代方案，可以跟随 [FreeCodeCamp’s](https://www.youtube.com/watch?v=rfscVS0vtbw) 在 YouTube 上的 4 小时 Python 教程来学习语言基础。补充观看 [W3School’s Python 学习路径](https://www.w3schools.com/python/)，其中包含了 FreeCodeCamp 教程中没有涉及的如读写文件等主题。
 
 # 第 2 步：练习编码挑战
 
@@ -88,7 +88,7 @@ HackerRank 也常被公司用来在面试过程中评估候选人，因此在该
 
 如果你想要一个完全免费的课程，可以查看 FreeCodeCamp 的 [Python 数据分析](https://www.youtube.com/watch?v=r-uOLxNrNk8) 4 小时 YouTube 教程。
 
-# 第4步：用于机器学习的 Python
+# 第 4 步：用于机器学习的 Python
 
 作为数据科学家，你必须了解如何使用像 Scikit-Learn 这样的 Python 包来构建和解释预测算法的性能。
 
@@ -100,7 +100,7 @@ HackerRank 也常被公司用来在面试过程中评估候选人，因此在该
 
 如果你想要一个免费的替代课程，我建议跟随 Krish Naik 的 [Python 机器学习](https://www.youtube.com/playlist?list=PLZoTAELRMXVPBTrWtJkn3wWQxZkmTXGwe) 播放列表进行编码。这个播放列表包含了上述 Datacamp 课程中涉及的所有概念，尽管顺序和教学风格可能略有不同。
 
-# 第5步：用于数据收集的 Python
+# 第 5 步：用于数据收集的 Python
 
 许多公司依赖公开的外部数据来构建机器学习项目。作为数据科学家，你可能需要从在线来源收集数据，例如政府报告、社会情绪和评论。
 
@@ -110,7 +110,7 @@ HackerRank 也常被公司用来在面试过程中评估候选人，因此在该
 
 你还可以跟随我不久前创建的 [这个](https://www.natasshaselvaraj.com/web-scraping/) 网页抓取教程进行编码。
 
-# 第6步：项目
+# 第 6 步：项目
 
 完成上述所有步骤后，你应该对 Python 编程有足够的掌握，能够开始创建自己的项目。
 
@@ -124,7 +124,7 @@ HackerRank 也常被公司用来在面试过程中评估候选人，因此在该
 
 确保创建各种项目，以展示你在所有这些领域的能力，这将帮助你在只具备一两个领域技能的候选人中脱颖而出。
 
-如果你想用 Python 构建数据科学项目但不确定从哪里开始，可以阅读这篇文章，获取[可以让你的简历脱颖而出的项目创意](/2022/05/data-science-projects-land-job-2022.html)。
+如果你想用 Python 构建数据科学项目但不确定从哪里开始，可以阅读这篇文章，获取可以让你的简历脱颖而出的项目创意。
 
 # 第七步：建立一个引人注目的作品集
 
@@ -146,14 +146,14 @@ HackerRank 也常被公司用来在面试过程中评估候选人，因此在该
 
 ### 更多相关内容
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [掌握 Pandas 和 Python 数据清理的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)
++   [掌握 Pandas 和 Python 数据清理的 7 个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)
 
-+   [掌握Python和Pandas数据清洗的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)
++   [掌握 Python 和 Pandas 数据清洗的 7 个步骤](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)
 
-+   [2022年掌握Python机器学习的7个步骤](https://www.kdnuggets.com/2022/02/7-steps-mastering-machine-learning-python.html)
++   [2022 年掌握 Python 机器学习的 7 个步骤](https://www.kdnuggets.com/2022/02/7-steps-mastering-machine-learning-python.html)
 
 +   [掌握数据宇宙：成功的数据科学职业的关键步骤](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)
 
-+   [掌握数据科学SQL的7个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
++   [掌握数据科学 SQL 的 7 个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)

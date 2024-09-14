@@ -1,40 +1,40 @@
-# 掌握数据清理的7个步骤，使用Python和Pandas
+# 掌握数据清理的 7 个步骤，使用 Python 和 Pandas
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)
+> 原文：[`www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas`](https://www.kdnuggets.com/7-steps-to-mastering-data-cleaning-with-python-and-pandas)
 
-![7-steps-pandas](../Images/044f1484c6d7a0a69ebf6b54bfd06a62.png)
+![7-steps-pandas](img/044f1484c6d7a0a69ebf6b54bfd06a62.png)
 
 图片由作者提供
 
-Pandas是最广泛使用的Python数据分析和操作库。但从源头读取的数据通常需要一系列的数据清理步骤——在你能够分析数据以获得洞察、回答业务问题或构建机器学习模型之前。
+Pandas 是最广泛使用的 Python 数据分析和操作库。但从源头读取的数据通常需要一系列的数据清理步骤——在你能够分析数据以获得洞察、回答业务问题或构建机器学习模型之前。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-本指南将数据清理过程拆解为7个实际步骤。我们将创建一个示例数据集并逐步完成数据清理。
+本指南将数据清理过程拆解为 7 个实际步骤。我们将创建一个示例数据集并逐步完成数据清理。
 
 让我们开始吧！
 
-## 创建一个示例DataFrame
+## 创建一个示例 DataFrame
 
-[Colab笔记本链接](https://github.com/balapriyac/data-science-tutorials/blob/main/pandas/data_cleaning_with_pandas.ipynb)
+[Colab 笔记本链接](https://github.com/balapriyac/data-science-tutorials/blob/main/pandas/data_cleaning_with_pandas.ipynb)
 
-在开始实际的数据清理步骤之前，让我们创建一个包含员工记录的pandas数据框。我们将使用Faker进行合成数据生成。因此，请先安装它：
+在开始实际的数据清理步骤之前，让我们创建一个包含员工记录的 pandas 数据框。我们将使用 Faker 进行合成数据生成。因此，请先安装它：
 
 ```py
 !pip install Faker
 ```
 
-如果你愿意，可以跟随相同的示例，也可以使用你选择的数据集。这里是生成1000条记录的代码：
+如果你愿意，可以跟随相同的示例，也可以使用你选择的数据集。这里是生成 1000 条记录的代码：
 
 ```py
 import pandas as pd
@@ -86,11 +86,11 @@ for i in random.sample(range(len(data)), 20):
 df = pd.DataFrame(data)
 ```
 
-请注意，我们设置的是Faker的种子，而不是随机模块。因此，你生成的记录会有一些随机性。
+请注意，我们设置的是 Faker 的种子，而不是随机模块。因此，你生成的记录会有一些随机性。
 
 ## 第一步：理解数据
 
-**第0步始终是理解你要解决的业务问题/问题**。一旦你知道这一点，你就可以开始处理你已读入pandas数据框的数据。
+**第 0 步始终是理解你要解决的业务问题/问题**。一旦你知道这一点，你就可以开始处理你已读入 pandas 数据框的数据。
 
 但在你对数据集进行任何有意义的操作之前，首先获取数据集的总体概述是很重要的。这包括获取不同字段的一些基本信息和记录的总数，检查数据框的头部等。
 
@@ -125,7 +125,7 @@ memory usage: 77.5+ KB</class>
 df.head()
 ```
 
-![df-head](../Images/27e6ebda1c0d9224cc96b742098b8b2f.png)
+![df-head](img/27e6ebda1c0d9224cc96b742098b8b2f.png)
 
 df.head()的输出
 
@@ -149,7 +149,7 @@ Output >>>
 Number of duplicate rows: 100
 ```
 
-## 第3步：处理缺失数据
+## 第 3 步：处理缺失数据
 
 缺失数据是许多数据科学项目中的常见数据质量问题。如果你快速查看上一步的`info()`方法的结果，你应该会看到非空对象的数量在所有字段中并不相同，并且在电子邮件列中有缺失值。我们仍然会得到准确的计数。
 
@@ -184,7 +184,7 @@ dtype: int64
 df['Email'].fillna('unknown@example.com', inplace=True)
 ```
 
-## 第4步：数据转换
+## 第 4 步：数据转换
 
 当你处理数据集时，可能会有一个或多个字段没有预期的数据类型。在我们的示例数据框中，'Join_Date'字段必须被转换成有效的日期时间对象：
 
@@ -226,7 +226,7 @@ New feature 'Years_Employed':
 4 2023-10-04               1
 ```
 
-## 第5步：清理文本数据
+## 第 5 步：清理文本数据
 
 字符串字段中经常会遇到格式不一致或类似的问题。清理文本可以像应用大小写转换一样简单，也可以像编写复杂的正则表达式以使字符串符合要求格式一样困难。
 
@@ -250,13 +250,13 @@ Address after text cleaning:
 Name: Address, dtype: object
 ```
 
-## 第6步：处理异常值
+## 第 6 步：处理异常值
 
 如果你向上滚动，你会看到我们将'薪水'列中的一些值设置得极高。这些异常值也应被识别和适当处理，以免影响分析结果。
 
 你通常需要考虑*什么*使数据点成为异常值（如果是错误的数据输入，还是它们实际上是有效值而不是异常值）。然后你可以选择处理它们：删除异常值记录或获取包含异常值的行的子集并单独分析。
 
-让我们使用z-score找到那些比均值偏离三倍标准差以上的薪资值：
+让我们使用 z-score 找到那些比均值偏离三倍标准差以上的薪资值：
 
 ```py
 # Detecting outliers using z-score
@@ -277,11 +277,11 @@ Outliers based on Salary:
 352     Ashley Munoz  278539
 ```
 
-## 第7步：合并数据
+## 第 7 步：合并数据
 
 在大多数项目中，你拥有的数据可能*不是*你想用于分析的数据。你必须找到最相关的字段并从其他数据框中合并数据，以获得更多有用的数据用于分析。
 
-作为一个快速练习，创建另一个相关的数据框，并在一个公共列上与现有数据框合并，使合并具有意义。pandas中的合并与SQL中的连接非常相似，因此我建议你将其作为练习尝试！
+作为一个快速练习，创建另一个相关的数据框，并在一个公共列上与现有数据框合并，使合并具有意义。pandas 中的合并与 SQL 中的连接非常相似，因此我建议你将其作为练习尝试！
 
 ## 总结
 

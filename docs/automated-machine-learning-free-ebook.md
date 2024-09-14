@@ -1,12 +1,12 @@
 # 自动化机器学习：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2020/05/automated-machine-learning-free-ebook.html](https://www.kdnuggets.com/2020/05/automated-machine-learning-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2020/05/automated-machine-learning-free-ebook.html`](https://www.kdnuggets.com/2020/05/automated-machine-learning-free-ebook.html)
 
-[评论](#comments)
+评论
 
 新的一周开始了，还有什么比获取另一本免费电子书更好的时机呢？在过去几个月的大部分时间里，我们每周都会突出介绍一本新的电子书，尽力挑选并分享顶尖的学习资料，无论是对于目前被困在家中的人，还是对任何有兴趣学习新概念或复习已有知识的人。
 
-![图](../Images/079cfead53b1a9067edb9d6c9f15b648.png)
+![图](img/079cfead53b1a9067edb9d6c9f15b648.png)
 
 本周我们将注意力转向自动化机器学习（AutoML）的话题，这是我个人的最爱。什么是自动化机器学习？这是一个广泛（且不断扩展）的概念，但我[之前](https://www.linkedin.com/pulse/case-machine-learning-business-matthew-mayo/)曾试图捕捉其本质：
 
@@ -50,7 +50,7 @@
 
 1.  AutoML 挑战系列 2015–2018 分析
 
-![模型性能和选择](../Images/68724459bb923ad7da8cd922f4ea8cb4.png)
+![模型性能和选择](img/68724459bb923ad7da8cd922f4ea8cb4.png)
 
 如果你对自动化机器学习的实际应用了解甚少，不必担心。本书从一个扎实的介绍开始，明确列出了你可以期待的章节内容，这在由独立章节组成的书籍中非常重要。在此之后，在书的第一部分，你将直接阅读当代 AutoML 的重要主题，且可以放心，因为这本书是在 2019 年编写的。超参数优化无疑是自动化机器学习技术的核心，因此首先介绍这个话题。接下来是更广泛的元学习主题，即观察机器学习方法在不同学习任务上的相对表现。最后，解决神经网络架构搜索，即自动识别适用于特定任务的最佳神经网络架构的实践。
 
@@ -62,34 +62,34 @@
 
 **相关**：
 
-+   [深度学习：免费电子书](/2020/05/deep-learning-free-ebook.html)
++   深度学习：免费电子书
 
-+   [统计学习的要素：免费电子书](/2020/05/elements-statistical-learning-free-ebook.html)
++   统计学习的要素：免费电子书
 
-+   [统计推断简明课程：免费电子书](/2020/04/statistics-concise-course-statistical-inference-free-ebook.html)
++   统计推断简明课程：免费电子书
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 管理
 
 * * *
 
 ### 相关主题
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

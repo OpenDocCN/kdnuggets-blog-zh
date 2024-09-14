@@ -1,8 +1,8 @@
 # 开放数据的地理可视化
 
-> 原文：[https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html](https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html)
+> 原文：[`www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html`](https://www.kdnuggets.com/2020/01/open-data-germany-maps-viz.html)
 
-[评论](#comments)
+评论
 
 **由 [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)，数学家与数据科学家**
 
@@ -107,7 +107,7 @@ ax.set(
 );
 ```
 
-![png](../Images/ebc81095f2ae5fbe048b1fb8a15c6571.png)
+![png](img/ebc81095f2ae5fbe048b1fb8a15c6571.png)
 
 ### 首位数字邮政编码区域
 
@@ -157,7 +157,7 @@ ax.set(
 );
 ```
 
-![png](../Images/e9eb67e648bbc1d497bd41ff550020e1.png)
+![png](img/e9eb67e648bbc1d497bd41ff550020e1.png)
 
 ### 联邦州地图
 
@@ -245,7 +245,7 @@ ax.set(
 );
 ```
 
-![png](../Images/55d1533532248f13a617c61686bf4303.png)
+![png](img/55d1533532248f13a617c61686bf4303.png)
 
 ### 居民数量
 
@@ -328,7 +328,7 @@ ax.set(
 );
 ```
 
-![png](../Images/71ab1c3e70cba4906a33a3a3c2974d1a.png)
+![png](img/71ab1c3e70cba4906a33a3a3c2974d1a.png)
 
 ### 城市地图
 
@@ -356,7 +356,7 @@ ax.set(
 );
 ```
 
-![png](../Images/b2bc83046f1e0e632fbd5ad8e5065712.png)
+![png](img/b2bc83046f1e0e632fbd5ad8e5065712.png)
 
 +   柏林
 
@@ -380,11 +380,11 @@ ax.set(
 );
 ```
 
-![png](../Images/e905a6c238ae309666f1fad72e8afac6.png)
+![png](img/e905a6c238ae309666f1fad72e8afac6.png)
 
 ### 柏林
 
-我们可以使用门户网站 [https://www.statistik-berlin-brandenburg.de](https://www.statistik-berlin-brandenburg.de/) 获取柏林的官方邮政编码与区域映射信息，详见 [这里](https://www.statistik-berlin-brandenburg.de/produkte/verzeichnisse/ZuordnungderBezirkezuPostleitzahlen.xls)。经过一些格式化处理（非结构化原始数据）：
+我们可以使用门户网站 [`www.statistik-berlin-brandenburg.de`](https://www.statistik-berlin-brandenburg.de/) 获取柏林的官方邮政编码与区域映射信息，详见 [这里](https://www.statistik-berlin-brandenburg.de/produkte/verzeichnisse/ZuordnungderBezirkezuPostleitzahlen.xls)。经过一些格式化处理（非结构化原始数据）：
 
 ```py
 berlin_plz_area_df = pd.read_excel(
@@ -432,7 +432,7 @@ berlin_plz_area_df \
 
 ### 柏林社区
 
-幸运的是，网站[http://insideairbnb.com/get-the-data.html](http://insideairbnb.com/get-the-data.html)，包含了许多城市的AirBnB数据（这绝对值得研究！），有一个方便的数据集`neighbourhoods.geojson`，它将柏林的区域映射到*邻里*：
+幸运的是，网站[`insideairbnb.com/get-the-data.html`](http://insideairbnb.com/get-the-data.html)，包含了许多城市的 AirBnB 数据（这绝对值得研究！），有一个方便的数据集`neighbourhoods.geojson`，它将柏林的区域映射到*邻里*：
 
 ```py
 berlin_neighbourhoods_df = gpd.read_file('../Data/neighbourhoods.geojson')
@@ -475,7 +475,7 @@ ax.set(
 );
 ```
 
-![png](../Images/96fa7e23ac495fa53dd674754af1b7fe.png)这里的划分对应于`Neighbourhood`⊂⊂`Neighbourhood Group`。
+![png](img/96fa7e23ac495fa53dd674754af1b7fe.png)这里的划分对应于`Neighbourhood`⊂⊂`Neighbourhood Group`。
 
 ### 柏林精选地点
 
@@ -577,11 +577,11 @@ ax.set(
 );
 ```
 
-![png](../Images/d0167d8636642b4f5ce310934bff3af0.png)
+![png](img/d0167d8636642b4f5ce310934bff3af0.png)
 
 ### 圣诞市场
 
-让我们通过包含其他类型的信息来丰富地图。有关柏林公开数据的绝佳资源是[柏林开放数据](https://daten.berlin.de/)。在许多有趣的数据集中，我找到了一份关于城市周边圣诞市场的数据（这些市场真的很有趣！）[在这里](https://daten.berlin.de/datensaetze/berliner-weihnachtsm%C3%A4rkte-2019)。你可以通过公共API访问这些数据。让我们使用`requests`模块来完成这项任务：
+让我们通过包含其他类型的信息来丰富地图。有关柏林公开数据的绝佳资源是[柏林开放数据](https://daten.berlin.de/)。在许多有趣的数据集中，我找到了一份关于城市周边圣诞市场的数据（这些市场真的很有趣！）[在这里](https://daten.berlin.de/datensaetze/berliner-weihnachtsm%C3%A4rkte-2019)。你可以通过公共 API 访问这些数据。让我们使用`requests`模块来完成这项任务：
 
 ```py
 import requests
@@ -619,16 +619,16 @@ berlin_maerkte_df.head()
 
 |  | 名称 | 区域 | 纬度 | 经度 | 邮政编码 |
 | --- | --- | --- | --- | --- | --- |
-| 0 | Charlottenburg宫前的圣诞市场 | Charlottenburg-Wilmersdorf | 52.519951 | 13.295946 | 14059 |
+| 0 | Charlottenburg 宫前的圣诞市场 | Charlottenburg-Wilmersdorf | 52.519951 | 13.295946 | 14059 |
 | 1 |
 
-1.  Gedächtniskirche圣诞市场
+1.  Gedächtniskirche 圣诞市场
 
 | Charlottenburg-Wilmersdorf | 52.504886 | 13.335511 | 10789 |
 | --- | --- | --- | --- |
-| 2 | Wilmersdorf步行区的圣诞市场 | Charlottenburg-Wilmersdorf | 52.509313 | 13.305994 | 10627 |
+| 2 | Wilmersdorf 步行区的圣诞市场 | Charlottenburg-Wilmersdorf | 52.509313 | 13.305994 | 10627 |
 | 3 | 圣诞市场在西区 | Charlottenburg-Wilmersdorf | 52.512538 | 13.259213 | 14052 |
-| 4 | Johannisstraße的柏林-Grunewald圣诞市场 | Charlottenburg-Wilmersdorf | 52.488350 | 13.277250 | 14193 |
+| 4 | Johannisstraße 的柏林-Grunewald 圣诞市场 | Charlottenburg-Wilmersdorf | 52.488350 | 13.277250 | 14193 |
 
 让我们绘制圣诞市场的位置：
 
@@ -673,7 +673,7 @@ ax.set(
 );
 ```
 
-![png](../Images/d4837146030f223f6245220676889ae8.png)
+![png](img/d4837146030f223f6245220676889ae8.png)
 
 ### 互动地图
 
@@ -729,21 +729,21 @@ mplleaflet.display(fig=fig)
 
 **相关：**
 
-+   [每位数据科学家都应阅读的6本关于开放数据的书籍](/2019/02/6-books-open-data-every-data-scientist-read.html)
++   每位数据科学家都应阅读的 6 本关于开放数据的书籍
 
-+   [数据可视化的八个经典例子](/2018/08/iconic-data-visualisation.html)
++   数据可视化的八个经典例子
 
-+   [元数据丰富化对实现开放数据集的价值至关重要](/2018/11/metadata-enrichment-value-open-datasets.html)
++   元数据丰富化对实现开放数据集的价值至关重要
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 
@@ -755,7 +755,7 @@ mplleaflet.display(fig=fig)
 
 +   [使用开源工具生成合成时间序列数据](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
 
-+   [2023年十大开源数据科学工具比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
++   [2023 年十大开源数据科学工具比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
 
 +   [开放数据及其必要性](https://www.kdnuggets.com/2022/03/open-data-necessary.html)
 

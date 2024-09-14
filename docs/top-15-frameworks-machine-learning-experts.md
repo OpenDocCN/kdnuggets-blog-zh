@@ -1,10 +1,10 @@
 # 机器学习专家的前 15 个框架
 
-> 原文：[https://www.kdnuggets.com/2016/04/top-15-frameworks-machine-learning-experts.html](https://www.kdnuggets.com/2016/04/top-15-frameworks-machine-learning-experts.html)
+> 原文：[`www.kdnuggets.com/2016/04/top-15-frameworks-machine-learning-experts.html`](https://www.kdnuggets.com/2016/04/top-15-frameworks-machine-learning-experts.html)
 
-[评论](#comments)
+评论
 
-![机器学习框架](../Images/7ffbfa274264b04505bf3141af100194.png)
+![机器学习框架](img/7ffbfa274264b04505bf3141af100194.png)
 
 机器学习工程师是工程团队的一部分，负责构建产品和算法，确保其可靠、快速并能够大规模运作。他们与数据科学家紧密合作，以了解理论和业务方面的内容。在机器学习的背景下，主要的区别总结如下：
 
@@ -50,21 +50,21 @@
 
 **相关**:
 
-+   [Github 上的前 10 个数据科学资源](/2016/03/top-10-data-science-github.html)
++   Github 上的前 10 个数据科学资源
 
-+   [Github 上的前 10 个数据可视化项目](/2016/02/top-10-data-visualization-github.html)
++   Github 上的前 10 个数据可视化项目
 
-+   [数据科学工具 – 专有供应商仍然重要吗？](/2016/03/data-science-tools-proprietary-vendors-vs-open-source.html)
++   数据科学工具 – 专有供应商仍然重要吗？
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
 
 * * *
 
@@ -74,10 +74,10 @@
 
 +   [接近机器学习过程的框架](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)
 
-+   [PyTorch还是TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)
++   [PyTorch 还是 TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)
 
-+   [2023年你应该考虑的顶级AutoML框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
-+   [Chip Huyen分享了实施机器学习系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)
++   [Chip Huyen 分享了实施机器学习系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)
 
-+   [关于开发安全、可靠和值得信赖的AI框架的专家见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
++   [关于开发安全、可靠和值得信赖的 AI 框架的专家见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)

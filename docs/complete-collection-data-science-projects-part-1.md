@@ -1,22 +1,22 @@
-# 数据科学项目完整合集 - 第1部分
+# 数据科学项目完整合集 - 第一部分
 
-> 原文：[https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-1.html](https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-1.html)
+> 原文：[`www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-1.html`](https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-1.html)
 
-![数据科学项目完整合集 - 第1部分](../Images/dac94cfa6d77b999ce9d98399c806037.png)
+![数据科学项目完整合集 - 第一部分](img/dac94cfa6d77b999ce9d98399c806037.png)
 
 图片由作者提供
 
-> **编辑注**: 有关本系列2部分中包含的所有仓库的完整范围，请参见 [**数据科学项目完整合集 - 第2部分**](https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-2.html)。
+> **编辑注**: 有关本系列 2 部分中包含的所有仓库的完整范围，请参见 [**数据科学项目完整合集 - 第二部分**](https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-2.html)。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -102,7 +102,7 @@ SQL 是创建、管理和流式处理数据库系统的最常用工具。在大�
 
 在完成几个课程后，你应该立即开始项目。进行项目会提高你对主题的理解，同时也会成为你简历上的一部分。做项目还能提高你的问题解决能力。你将在解决更复杂的问题时学到新的工具和概念。
 
-在这篇博客中，我们学习了编程、网页抓取、数据分析、SQL、商业智能和时间序列项目。你可以通过源代码、教程或ReadMe中的初步描述来学习这些项目。关键是你需要复制这些结果。
+在这篇博客中，我们学习了编程、网页抓取、数据分析、SQL、商业智能和时间序列项目。你可以通过源代码、教程或 ReadMe 中的初步描述来学习这些项目。关键是你需要复制这些结果。
 
 **在下一部分，我们将涵盖：**
 
@@ -118,28 +118,28 @@ SQL 是创建、管理和流式处理数据库系统的最常用工具。在大�
 
 1.  MLOps
 
-**这是系列中的第5版，请查看：**
+**这是系列中的第 5 版，请查看：**
 
-1.  数据科学备忘单完整合集 – [第1部分](/2022/02/complete-collection-data-science-cheat-sheets-part-1.html) 和 [第2部分](/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
+1.  数据科学备忘单完整合集 – 第一部分 和 第二部分
 
-1.  数据仓库完整合集 – [第1部分](/2022/04/complete-collection-data-repositories-part-1.html) 和 [第2部分](/2022/04/complete-collection-data-repositories-part-2.html)
+1.  数据仓库完整合集 – 第一部分 和 第二部分
 
-1.  数据科学书籍完整合集 – [第1部分](/2022/05/complete-collection-data-science-books-part-1.html) 和 [第2部分](/2022/05/complete-collection-data-science-books-part-2.html)
+1.  数据科学书籍完整合集 – 第一部分 和 第二部分
 
-1.  数据科学面试完整合集 – [第1部分](/2022/06/complete-collection-data-science-interviews-part-1.html) 和 [第2部分](/2022/06/complete-collection-data-science-interviews-part-2.html)
+1.  数据科学面试完整合集 – 第一部分 和 第二部分
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些与心理疾病斗争的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些与心理疾病斗争的学生。
 
 ### 更多相关内容
 
-+   [数据科学项目完整合集 - 第2部分](https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-2.html)
++   [数据科学项目完整合集 - 第二部分](https://www.kdnuggets.com/2022/08/complete-collection-data-science-projects-part-2.html)
 
-+   [KDnuggets 新闻，6月1日：数据科学完整合集…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日：数据科学完整合集…](https://www.kdnuggets.com/2022/n22.html)
 
-+   [KDnuggets 新闻，8月17日：如何使用…进行运动检测](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何使用…进行运动检测](https://www.kdnuggets.com/2022/n33.html)
 
-+   [KDnuggets 新闻，4月6日：8个免费MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 个免费 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)

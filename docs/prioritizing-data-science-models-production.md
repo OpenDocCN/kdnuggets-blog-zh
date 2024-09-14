@@ -1,8 +1,8 @@
 # 优先排序数据科学模型以便投入生产
 
-> 原文：[https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)
+> 原文：[`www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html`](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)
 
-![优先排序数据科学模型以便投入生产](../Images/18b36492888b2ea4ced9c773fe1a48c4.png)
+![优先排序数据科学模型以便投入生产](img/18b36492888b2ea4ced9c773fe1a48c4.png)
 
 图片来源于 airfocus，在 unsplash.com
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -26,15 +26,15 @@ Therese Gorski，多个优先级排序工作的领导者，告诉我优先级排
 
 # 十二项考虑标准
 
-以下表格中的标准受到了Therese及其在几家公司工作的同事以及最近文献关于使模型有用的属性和应避免的陷阱的启发。其中一些标准可以在生产前进行权衡；其他标准则涉及已经生产出的模型。
+以下表格中的标准受到了 Therese 及其在几家公司工作的同事以及最近文献关于使模型有用的属性和应避免的陷阱的启发。其中一些标准可以在生产前进行权衡；其他标准则涉及已经生产出的模型。
 
 模型属性应在生产前后进行权衡，因为直到训练过程的后期甚至之后，才可能清楚任何模型是否可能变得或保持有用。此外，新模型通常要与长期出售但需要定期且重要投资以维持或更新的旧模型竞争有限的资金。因此，考虑每个模型对业务成功的可能贡献非常重要。这要求在评估投资或继续投资数据科学模型的效用时，权衡多种标准和视角。
 
 考虑到这些因素，以下表格列出了十二个考虑标准。这样的文件可以分发给利益相关者和员工，以便从多方收集对每个标准的评分，然后汇总讨论。
 
-![优先考虑数据科学模型生产 2](../Images/810c6f8328362559da95bbe73a8f7491.png)![优先考虑数据科学模型生产 3](../Images/78566228852d4fc62e26c8966aeae32d.png)![优先考虑数据科学模型生产 3](../Images/bd2c3bb026a0d7636532c74d27600318.png)
+![优先考虑数据科学模型生产 2](img/810c6f8328362559da95bbe73a8f7491.png)![优先考虑数据科学模型生产 3](img/78566228852d4fc62e26c8966aeae32d.png)![优先考虑数据科学模型生产 3](img/bd2c3bb026a0d7636532c74d27600318.png)
 
-如表格所示，这些十二个标准以声明的形式出现，每个回应者的任务是记录他们对每个模型中每个声明的同意程度。为了简化，我假设同意程度的范围从1（强烈不同意）到5（强烈同意）。使用相同的范围通过减少回应的差异性来增加结果的可靠性；它也使每个声明更易于解释。
+如表格所示，这些十二个标准以声明的形式出现，每个回应者的任务是记录他们对每个模型中每个声明的同意程度。为了简化，我假设同意程度的范围从 1（强烈不同意）到 5（强烈同意）。使用相同的范围通过减少回应的差异性来增加结果的可靠性；它也使每个声明更易于解释。
 
 另一个重要任务是权衡每个标准的重要性。在这里，重点是标准而非模型，Excel 文件包括一个列来指定每个标准的权重。您的业务利益相关者是否希望对每个标准赋予相同的重要性，还是认为某些标准比其他标准更重要，需要更高的权重？这个讨论可能会很有启发性，也可能会引发争议，有三种选项值得考虑。有些人可能认为权重的讨论应该在收集到一致性数据之后进行，这样可以促进标准权重与一致性水平之间的独立性，意味着一个不会影响另一个。其他人可能会持不同意见，先评估每个标准的重要性，然后评估每个模型中每个标准的一致性水平。第三种选择，如表中所示，是在评估一致性水平的同时，询问利益相关者对每个标准应给予多少权重，然后使用所有响应者的结果来共同决定每个标准的权重。使用对您的组织效果更好的选项。如果不确定哪种方法更好，可以对不同的独立随机评估子集尝试不同的方法，或随着时间的推移尝试不同的方法，以帮助决定哪种方法更适合您。
 
@@ -42,7 +42,7 @@ Therese Gorski，多个优先级排序工作的领导者，告诉我优先级排
 
 一旦这些活动完成并且所有受访者提供了每个模型的评分，就可以开始对每个模型进行评分。每个模型的得分可以从每个受访者那里计算，基于所有人一致同意的标准权重和受访者对每个标准的一致性水平：
 
-受访者 A 的总得分 = ![公式](../Images/c4395b9ea16758a4c40993c9ec0cc961.png) 标准权重 * 一致性水平
+受访者 A 的总得分 = ![公式](img/c4395b9ea16758a4c40993c9ec0cc961.png) 标准权重 * 一致性水平
 
 总和从 1 到 12，因为每个模型有十二个标准。例如，假设受访者 A 对每个标准都强烈同意，并且每个标准的权重都是 1.0\。那么他的得分将等于 60（即，12 个标准乘以 5 的值，表示对每个标准都强烈同意）。大多数受访者会将他们的分数从 1 到 5 进行变化，使得标准权重非常重要。
 
@@ -64,7 +64,7 @@ Therese Gorski，多个优先级排序工作的领导者，告诉我优先级排
 
 除了列出评估每个标准重要性的标准和建议外，该表还提到了关于每个标准需要考虑的几个问题。我还提供了引用或链接，以便在文献中找到关于这些问题的更多信息。
 
-![优先排序数据科学模型以进行生产](../Images/e29a2e31972ee1433e193c235e98ac7d.png)
+![优先排序数据科学模型以进行生产](img/e29a2e31972ee1433e193c235e98ac7d.png)
 
 图片由 Stephen Dawson 提供，来源于 unsplash.com
 
@@ -96,9 +96,9 @@ Hall 等人（2021）和 Obermeyer 等人（2021）提供了关于当模型表�
 
 1.  A. Christian, *对齐问题：机器学习与人类价值*（2020），纽约，NY：W.W. Norton & Company
 
-1.  A. Géron, *动手实践机器学习：使用 Scikit-Learn、Keras 和 TensorFlow 构建智能系统的概念、工具和技术，第2**版*（2019），Sebostopal，CA：O’Reilly Media, Inc.
+1.  A. Géron, *动手实践机器学习：使用 Scikit-Learn、Keras 和 TensorFlow 构建智能系统的概念、工具和技术，第 2**版*（2019），Sebostopal，CA：O’Reilly Media, Inc.
 
-1.  P. Hall 和 N. Gill, *机器学习可解释性简介：公平性、问责制、透明度和可解释 AI 的应用视角，第2**版*（2019），Sebostopal，CA：O’Reilly Media, Inc.
+1.  P. Hall 和 N. Gill, *机器学习可解释性简介：公平性、问责制、透明度和可解释 AI 的应用视角，第 2**版*（2019），Sebostopal，CA：O’Reilly Media, Inc.
 
 1.  P. Hall, N. Gill 和 B. Cox, *负责任的机器学习*（2021），Sebostopal，CA：O’Reilly Media, Inc.
 
@@ -106,13 +106,13 @@ Hall 等人（2021）和 Obermeyer 等人（2021）提供了关于当模型表�
 
 1.  M. Maziarz，*经济学中的因果关系哲学：因果推断与政策建议*（2020），纽约，NY：Routledge
 
-1.  M. Melchionna，世卫组织：是时候消除人工智能中的年龄歧视了（2022年2月10日），*健康 IT 分析*，[https://healthitanalytics.com/news/who-its-time-to-eliminate-ageism-in-artificial-intelligence](https://healthitanalytics.com/news/who-its-time-to-eliminate-ageism-in-artificial-intelligence)
+1.  M. Melchionna，世卫组织：是时候消除人工智能中的年龄歧视了（2022 年 2 月 10 日），*健康 IT 分析*，[`healthitanalytics.com/news/who-its-time-to-eliminate-ageism-in-artificial-intelligence`](https://healthitanalytics.com/news/who-its-time-to-eliminate-ageism-in-artificial-intelligence)
 
-1.  S.L. Morgan 和 C. Winship，*反事实与因果推断：社会研究的方法与原则，第2版*（2015），英国剑桥：剑桥大学出版社
+1.  S.L. Morgan 和 C. Winship，*反事实与因果推断：社会研究的方法与原则，第 2 版*（2015），英国剑桥：剑桥大学出版社
 
-1.  Z. Obermeyer, R. Nissan, M. Stern 等，*算法偏见手册*（2021年6月），芝加哥，IL：芝加哥大学应用人工智能中心
+1.  Z. Obermeyer, R. Nissan, M. Stern 等，*算法偏见手册*（2021 年 6 月），芝加哥，IL：芝加哥大学应用人工智能中心
 
-1.  R. Ozminkowski，什么原因导致什么，我们如何知道？（2021年9月14日），*迈向数据科学*，[https://towardsdatascience.com/what-causes-what-and-how-would-we-know-b736a3d0eefb](https://towardsdatascience.com/what-causes-what-and-how-would-we-know-b736a3d0eefb)
+1.  R. Ozminkowski，什么原因导致什么，我们如何知道？（2021 年 9 月 14 日），*迈向数据科学*，[`towardsdatascience.com/what-causes-what-and-how-would-we-know-b736a3d0eefb`](https://towardsdatascience.com/what-causes-what-and-how-would-we-know-b736a3d0eefb)
 
 1.  J. Pearl, M. Glymour 和 N.P. Jewell，*统计学中的因果推断：入门*（2016），英国威斯萨塞克斯，Chichester：John Wiley & Sons
 
@@ -120,9 +120,9 @@ Hall 等人（2021）和 Obermeyer 等人（2021）提供了关于当模型表�
 
 1.  B. Schmarzo，《数据、分析与数字化转型的经济学：引导组织数字化转型的定理、法则与赋能》（2020），英国伯明翰：Packt Publishing
 
-1.  L. Wee, M.J. Sander, F.J.van Kujik 等，《预测模型的报告标准与批判性评估》，见于*临床数据科学基础*（2019），编辑：A. Dekker, M. Dumontier, 和 P. Kubben，通过 [https://doi.org/10.1007/978-3-319-99713-1](https://doi.org/10.1007/978-3-319-99713-1) 开放获取
+1.  L. Wee, M.J. Sander, F.J.van Kujik 等，《预测模型的报告标准与批判性评估》，见于*临床数据科学基础*（2019），编辑：A. Dekker, M. Dumontier, 和 P. Kubben，通过 [`doi.org/10.1007/978-3-319-99713-1`](https://doi.org/10.1007/978-3-319-99713-1) 开放获取
 
-**[Ron Ozminkowski 博士](https://www.linkedin.com/in/ronozminkowski/)** 是一位国际认可的顾问、作家和高管，专注于医疗分析和机器学习，其出版的工作已被全球90多个国家的读者阅读。
+**[Ron Ozminkowski 博士](https://www.linkedin.com/in/ronozminkowski/)** 是一位国际认可的顾问、作家和高管，专注于医疗分析和机器学习，其出版的工作已被全球 90 多个国家的读者阅读。
 
 ### 更多相关话题
 

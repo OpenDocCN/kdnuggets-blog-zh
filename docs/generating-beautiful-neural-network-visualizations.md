@@ -1,8 +1,8 @@
 # 生成美丽的神经网络可视化
 
-> 原文：[https://www.kdnuggets.com/2020/12/generating-beautiful-neural-network-visualizations.html](https://www.kdnuggets.com/2020/12/generating-beautiful-neural-network-visualizations.html)
+> 原文：[`www.kdnuggets.com/2020/12/generating-beautiful-neural-network-visualizations.html`](https://www.kdnuggets.com/2020/12/generating-beautiful-neural-network-visualizations.html)
 
-[评论](#comments)
+评论
 
 您是否为论文构建了神经网络，或需要通过技术报告或其他媒介与他人分享其架构？
 
@@ -12,11 +12,11 @@ Python 库 **[PlotNeuralNet](https://github.com/HarisIqbal88/PlotNeuralNet)** �
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@ PlotNeuralNet 不能直接从现有的架构代码中工作。相反，您需要
 
 这是由 Python 脚本生成的 LaTeX 渲染结果的示例图像（明白了吗？）：
 
-![图](../Images/c87f54f6fc31e62368cf3e8dd3bb436d.png)
+![图](img/c87f54f6fc31e62368cf3e8dd3bb436d.png)
 
 PlotNeuralNet 生成的样本卷积神经网络架构（来自库的 [Github 页面](https://github.com/HarisIqbal88/PlotNeuralNet)）
 
@@ -96,22 +96,22 @@ bash ../tikzmake.sh your_script_name
 
 **相关**：
 
-+   [如何在深度学习中创建自定义实时图](/2020/12/create-custom-real-time-plots-deep-learning.html)
++   如何在深度学习中创建自定义实时图
 
-+   [在 Tableau 中创建强大的动画可视化](/2020/09/creating-powerful-animated-visualizations-tableau.html)
++   在 Tableau 中创建强大的动画可视化
 
-+   [用Python可视化决策树（Scikit-learn、Graphviz、Matplotlib）](/2020/04/visualizing-decision-trees-python.html)
++   用 Python 可视化决策树（Scikit-learn、Graphviz、Matplotlib）
 
 ### 更多相关主题
 
-+   [使用Pandas轻松制作美丽的互动可视化](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)
++   [使用 Pandas 轻松制作美丽的互动可视化](https://www.kdnuggets.com/2021/12/easiest-way-make-beautiful-interactive-visualizations-pandas.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并通过找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

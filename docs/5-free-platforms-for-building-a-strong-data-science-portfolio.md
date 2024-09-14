@@ -1,8 +1,8 @@
 # 构建强大数据科学作品集的 5 个免费平台
 
-> 原文：[https://www.kdnuggets.com/5-free-platforms-for-building-a-strong-data-science-portfolio](https://www.kdnuggets.com/5-free-platforms-for-building-a-strong-data-science-portfolio)
+> 原文：[`www.kdnuggets.com/5-free-platforms-for-building-a-strong-data-science-portfolio`](https://www.kdnuggets.com/5-free-platforms-for-building-a-strong-data-science-portfolio)
 
-![构建强大数据科学作品集的 5 个免费平台](../Images/2856d60456fa308ed987ca19a82889ea.png)
+![构建强大数据科学作品集的 5 个免费平台](img/2856d60456fa308ed987ca19a82889ea.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 Kaggle 进阶系统鼓励数据专业人士追求卓越并提升他们的技能。通过获得点赞，用户可以获得铜牌、银牌和金牌，从而使他们能够从贡献者晋升到大师级别。
 
-![建立强大数据科学作品集的 5 个免费平台](../Images/218870009c71a83a6649d24eb18968c0.png)
+![建立强大数据科学作品集的 5 个免费平台](img/218870009c71a83a6649d24eb18968c0.png)
 
 [Kaggle](https://www.kaggle.com/kingabzpro) 作品集
 
@@ -40,7 +40,7 @@ Kaggle 进阶系统鼓励数据专业人士追求卓越并提升他们的技能�
 
 使用 DagsHub，你可以轻松托管你的数据科学项目，包括代码、数据、模型、可视化、实验和文档。它还使部署你的机器学习模型变得无缝。
 
-![建立强大数据科学作品集的 5 个免费平台](../Images/b08291ca7605ef85e0bf159a6a904e77.png)
+![建立强大数据科学作品集的 5 个免费平台](img/b08291ca7605ef85e0bf159a6a904e77.png)
 
 [DagsHub](https://dagshub.com/kingabzpro) 作品集
 
@@ -52,7 +52,7 @@ Kaggle 进阶系统鼓励数据专业人士追求卓越并提升他们的技能�
 
 该平台还允许你与其他数据专业人士建立联系，关注你感兴趣的公司，并加入相关小组。通过积极参与 LinkedIn，你可以提高被发现从事数据角色或工作的机会。本质上，它使潜在的联系和雇主能够基于你最近的数据科学工作和成就轻松找到你。
 
-![建立强大数据科学作品集的 5 个免费平台](../Images/7b411484f6258980a11dc867c0f63d88.png)
+![建立强大数据科学作品集的 5 个免费平台](img/7b411484f6258980a11dc867c0f63d88.png)
 
 [LinkedIn](https://www.linkedin.com/in/1abidaliawan/) 作品集
 
@@ -64,7 +64,7 @@ Kaggle 进阶系统鼓励数据专业人士追求卓越并提升他们的技能�
 
 此外，你可以撰写关于最新数据科学研究和新闻的博客，以展示你对该领域的知识。撰写关于新算法、突破性模型、伦理问题和行业趋势的文章表明你跟上了最新进展。
 
-![构建强大数据科学作品集的5个免费平台](../Images/72535f9fe1e287d3d182fbc496c4d2aa.png)
+![构建强大数据科学作品集的 5 个免费平台](img/72535f9fe1e287d3d182fbc496c4d2aa.png)
 
 [Medium](https://medium.com/@abidaliawan) 作品集
 
@@ -74,7 +74,7 @@ Kaggle 进阶系统鼓励数据专业人士追求卓越并提升他们的技能�
 
 借助直观的界面，你可以轻松突出显示你在 datascienceportfol.io 页面上的教育背景、工作经历、技能、项目等。你可以提供有关数据科学项目的描述，解释其目的、使用的技术和结果。还可以包含指向 GitHub 仓库或实时演示的链接，以提供你动手能力的证据。
 
-![构建强大数据科学作品集的5个免费平台](../Images/acb93ee12ead015a2dd9edd00da8527a.png)
+![构建强大数据科学作品集的 5 个免费平台](img/acb93ee12ead015a2dd9edd00da8527a.png)
 
 [数据科学作品集](https://www.datascienceportfol.io/abid) 作品集
 

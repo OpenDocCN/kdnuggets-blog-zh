@@ -1,8 +1,8 @@
 # 多维多传感器时间序列数据分析框架
 
-> 原文：[https://www.kdnuggets.com/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html](https://www.kdnuggets.com/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html)
+> 原文：[`www.kdnuggets.com/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html`](https://www.kdnuggets.com/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html)
 
-[评论](#comments)
+评论
 
 **由 [Ajay Arunachalam](https://www.linkedin.com/in/ajay-arunachalam-4744581a/)，厄勒布大学**
 
@@ -96,7 +96,7 @@
 
 ### 时间序列分析的应用
 
-![图示](../Images/fe2ce6666a5787f854825179013806b2.png)
+![图示](img/fe2ce6666a5787f854825179013806b2.png)
 
 时间序列应用领域示例
 
@@ -140,19 +140,19 @@ MSDA 是一个开源低代码的多传感器数据分析库，旨在减少时间
 
 从多维异质/同质时间序列多传感器数据中进行特征/传感器选择的原型。框架的直观表示如下所示。
 
-![Figure](../Images/49a1ed279f40829a86f72ac28c9884cb.png)
+![Figure](img/49a1ed279f40829a86f72ac28c9884cb.png)
 
 多维时间序列数据特征选择的图示表示
 
 ### 功能包括：-
 
-![Figure](../Images/f525a071105f8fd9d37d16105591b0e6.png)
+![Figure](img/f525a071105f8fd9d37d16105591b0e6.png)
 
 MSDA 的核心功能
 
 ### MSDA 工作流程：-
 
-![Figure](../Images/15b9982db72ae24d5522c320da25f3ce.png)
+![Figure](img/15b9982db72ae24d5522c320da25f3ce.png)
 
 MSDA 算法工作流程
 
@@ -178,7 +178,7 @@ $ python setup.py install
 !pip install msda
 ```
 
-请按照演示示例中的其余部分操作 [这里] — [https://github.com/ajayarunachalam/msda/tree/master/demo.ipynb](https://github.com/ajayarunachalam/msda/tree/master/demo.ipynb)
+请按照演示示例中的其余部分操作 [这里] — [`github.com/ajayarunachalam/msda/tree/master/demo.ipynb`](https://github.com/ajayarunachalam/msda/tree/master/demo.ipynb)
 
 ### 谁应该使用 MSDA？
 
@@ -210,35 +210,35 @@ MSDA 是一个开源库，任何人都可以使用。在我看来，MSDA 的理�
 
 大家好，非常感谢你们阅读我的博客并激励我继续写作。你可以在这里阅读我所有的博客。
 
-**个人简介: [Ajay Arunachalam](https://www.linkedin.com/in/ajay-arunachalam-4744581a/)** ([个人网站](https://sites.google.com/site/ajayarunachalamprofile/)) 是瑞典厄勒布鲁大学应用自主传感器系统中心的人工智能博士后研究员。在此之前，他在True Corporation担任数据科学家，处理PB级数据，构建和部署深度模型。他真正相信，AI系统的透明性是当下的需求，才能完全接受AI的力量。基于这一点，他一直致力于让AI更加普及，并更倾向于构建可解释的模型。他的兴趣包括应用人工智能、机器学习、深度学习、深度强化学习和自然语言处理，特别是学习良好的表示。通过在现实问题中的经验，他完全认识到，找到良好的表示是设计能够解决超越人类智能的有趣挑战性现实问题的系统的关键，并最终解释我们无法理解的复杂数据。为实现这一目标，他设想了一种可以从未标记和标记数据中学习特征表示的学习算法，无论是否有人的互动进行指导，并且在不同的抽象层次上，以弥合低级数据和高级抽象概念之间的差距。
+**个人简介: [Ajay Arunachalam](https://www.linkedin.com/in/ajay-arunachalam-4744581a/)** ([个人网站](https://sites.google.com/site/ajayarunachalamprofile/)) 是瑞典厄勒布鲁大学应用自主传感器系统中心的人工智能博士后研究员。在此之前，他在 True Corporation 担任数据科学家，处理 PB 级数据，构建和部署深度模型。他真正相信，AI 系统的透明性是当下的需求，才能完全接受 AI 的力量。基于这一点，他一直致力于让 AI 更加普及，并更倾向于构建可解释的模型。他的兴趣包括应用人工智能、机器学习、深度学习、深度强化学习和自然语言处理，特别是学习良好的表示。通过在现实问题中的经验，他完全认识到，找到良好的表示是设计能够解决超越人类智能的有趣挑战性现实问题的系统的关键，并最终解释我们无法理解的复杂数据。为实现这一目标，他设想了一种可以从未标记和标记数据中学习特征表示的学习算法，无论是否有人的互动进行指导，并且在不同的抽象层次上，以弥合低级数据和高级抽象概念之间的差距。
 
 [原文](https://ajay-arunachalam08.medium.com/multidimensional-multi-sensor-time-series-data-analysis-framework-5c497d8d106b)。经授权转载。
 
 **相关:**
 
-+   [为高频流数据构建AI模型](/2020/12/mathworks-ai-models-high-frequency-streaming-data.html)
++   为高频流数据构建 AI 模型
 
-+   [R中的简单直观集成学习](/2020/12/simple-intuitive-meta-learning-r.html)
++   R 中的简单直观集成学习
 
-+   [用于比较、绘制和评估回归模型的简单Python包](/2020/11/simple-python-package-comparing-plotting-evaluating-regression-models.html)
++   用于比较、绘制和评估回归模型的简单 Python 包
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [AI/ML模型的风险管理框架](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)
++   [AI/ML 模型的风险管理框架](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)
 
-+   [Django框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)
++   [Django 框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)
 
 +   [适用于所有用途的唯一提示框架](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)
 

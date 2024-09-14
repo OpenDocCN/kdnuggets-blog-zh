@@ -1,8 +1,8 @@
 # 什么是数据血统，为什么重要？
 
-> 原文：[https://www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter](https://www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter)
+> 原文：[`www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter`](https://www.kdnuggets.com/what-is-data-lineage-and-why-does-it-matter)
 
-![什么是数据血统，为什么重要？](../Images/6cdac078918bcdc3318dbe294ef144fa.png)
+![什么是数据血统，为什么重要？](img/6cdac078918bcdc3318dbe294ef144fa.png)
 
 图片由 [storyset](https://www.freepik.com/free-vector/data-points-concept-illustration_8497396.htm#query=data%20lineage&position=0&from_view=search&track=ais&uuid=e1ab7fd5-a404-43db-8d0b-553ccb834e10) 提供，来自 Freepik
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 现在让我们探讨数据血统中需要考虑的关键组成部分：
 
-![什么是数据血统，为什么重要？](../Images/9b729fd37c49e7c1dd6c98f930e1ee91.png)
+![什么是数据血统，为什么重要？](img/9b729fd37c49e7c1dd6c98f930e1ee91.png)
 
 图片由作者提供
 
@@ -42,7 +42,7 @@
 
 +   **元数据**：捕捉与数据相关的元数据非常重要，因为它包括数据类型、格式以及对数据应用的任何业务规则或约束的详细信息。
 
-+   **数据移动和转换**：跟踪ETL过程有助于理解数据如何从源系统提取、经历多样的转换并加载到目标系统。
++   **数据移动和转换**：跟踪 ETL 过程有助于理解数据如何从源系统提取、经历多样的转换并加载到目标系统。
 
 +   **目的地**：数据血缘还应跟踪数据的各种中间和最终目的地，包括数据库、数据仓库、数据湖等。它还包括参与信息处理和存储的其他存储系统。最终目的地通常是存储处理数据以供分析或报告的地方。
 
@@ -98,7 +98,7 @@
 
 +   [Collibra](https://www.collibra.com/us/en/products/data-lineage)：包括强大的数据血缘功能，用于可视化和理解数据的端到端旅程。
 
-+   [Informatica Axon](https://www.informatica.com/in/products/data-quality/axon-data-governance.html)：作为Informatica平台的一部分，Axon提供数据治理和元数据管理。
++   [Informatica Axon](https://www.informatica.com/in/products/data-quality/axon-data-governance.html)：作为 Informatica 平台的一部分，Axon 提供数据治理和元数据管理。
 
 +   [IBM InfoSphere Information Governance Catalog](https://www.ibm.com/products/information-governance-catalog)：一个管理元数据并在复杂企业环境中提供端到端数据血缘跟踪的工具。
 
@@ -112,18 +112,18 @@
 
 最后，我们介绍了一些可以用来跟踪数据血缘的工具。希望你觉得这篇文章对你有帮助！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在学习并与开发者社区分享她的知识，通过撰写教程、操作指南、观点文章等方式。Bala还制作了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在学习并与开发者社区分享她的知识，通过撰写教程、操作指南、观点文章等方式。Bala 还制作了引人入胜的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [从新手到高手：为什么你的Python技能在数据科学中很重要](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)
++   [从新手到高手：为什么你的 Python 技能在数据科学中很重要](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)
 
-+   [ChatGPT在做什么，它为什么有效？](https://www.kdnuggets.com/2023/04/chatgpt-work.html)
++   [ChatGPT 在做什么，它为什么有效？](https://www.kdnuggets.com/2023/04/chatgpt-work.html)
 
 +   [机器学习未能为我的业务创造价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)
 
-+   [KDnuggets新闻，11月30日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [什么是切比雪夫定理，它如何应用于数据科学？](https://www.kdnuggets.com/2022/11/chebychev-theorem-apply-data-science.html)
 
-+   [什么是K-Means聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
++   [什么是 K-Means 聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)

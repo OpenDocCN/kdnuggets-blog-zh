@@ -1,44 +1,44 @@
 # 数据管道、Luigi、Airflow：你需要知道的一切
 
-> 原文：[https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html](https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
+> 原文：[`www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html`](https://www.kdnuggets.com/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Lorenzo Peppoloni](https://www.linkedin.com/in/lorenzo-peppoloni/)，Lyft**
 
-![图](../Images/aeac3093429c504079d98150e17d2689.png)
+![图](img/aeac3093429c504079d98150e17d2689.png)
 
 照片由 [Gerrie van der Walt](https://unsplash.com/photos/m3TYLFI_mDo) 提供，发布在 [Unsplash](https://unsplash.com/search/photos/pipeline)
 
-这篇文章基于我最近给同事讲解Airflow的讲座。
+这篇文章基于我最近给同事讲解 Airflow 的讲座。
 
-特别地，讲座的重点是：什么是Airflow，你可以用它做什么，以及它与Luigi的不同之处。
+特别地，讲座的重点是：什么是 Airflow，你可以用它做什么，以及它与 Luigi 的不同之处。
 
-### 为什么你需要一个WMS
+### 为什么你需要一个 WMS
 
 在公司中，移动和转换数据非常常见。
 
-比如，你有大量的日志存储在S3上，你希望定期获取这些数据，提取和汇总有意义的信息，然后将其存储在分析数据库中（例如，Redshift）。
+比如，你有大量的日志存储在 S3 上，你希望定期获取这些数据，提取和汇总有意义的信息，然后将其存储在分析数据库中（例如，Redshift）。
 
-通常，这类任务最初是手动执行的，然后随着事情需要扩展，过程会自动化，例如用cron触发。最终，你会达到一个好老的cron无法保证稳定和可靠性能的地步。它已经不够用了。
+通常，这类任务最初是手动执行的，然后随着事情需要扩展，过程会自动化，例如用 cron 触发。最终，你会达到一个好老的 cron 无法保证稳定和可靠性能的地步。它已经不够用了。
 
 这时你需要一个工作流管理系统（WMS）。
 
 ### Airflow
 
-Airflow是在2014年由Airbnb开发的，后来开源了。2016年，它加入了Apache软件基金会的孵化程序。
+Airflow 是在 2014 年由 Airbnb 开发的，后来开源了。2016 年，它加入了 Apache 软件基金会的孵化程序。
 
-当被问到“Airflow在WMS领域有什么不同？”时，Maxime Beauchemin（Airflow的创建者）回答说：
+当被问到“Airflow 在 WMS 领域有什么不同？”时，Maxime Beauchemin（Airflow 的创建者）回答说：
 
-> 一个关键的区别在于Airflow管道被定义为代码，并且任务是动态实例化的。
+> 一个关键的区别在于 Airflow 管道被定义为代码，并且任务是动态实例化的。
 
 希望在这篇文章的最后，你能够理解，并且更重要的是，同意（或不同意）这一观点。
 
 让我们首先定义主要概念。
 
-### 作为DAG的工作流
+### 作为 DAG 的工作流
 
-在Airflow中，工作流被定义为具有方向性依赖关系的任务集合，基本上是一个有向无环图（DAG）。
+在 Airflow 中，工作流被定义为具有方向性依赖关系的任务集合，基本上是一个有向无环图（DAG）。
 
 图中的每个节点都是一个任务，边缘定义了任务之间的依赖关系。
 
@@ -48,11 +48,11 @@ Airflow是在2014年由Airbnb开发的，后来开源了。2016年，它加入�
 
 1.  **传感器**：它们检查进程或数据结构的状态
 
-现实中的工作流可以从每个工作流只有一个任务（你不必总是追求花哨）到非常复杂的DAG，几乎无法可视化。
+现实中的工作流可以从每个工作流只有一个任务（你不必总是追求花哨）到非常复杂的 DAG，几乎无法可视化。
 
 **主要组件**
 
-Airflow的主要组件是：
+Airflow 的主要组件是：
 
 +   一个 **元数据数据库**
 
@@ -60,11 +60,11 @@ Airflow的主要组件是：
 
 +   一个 **执行器**
 
-![图](../Images/5d50f2047d09246177836cbcdca064ea.png)
+![图](img/5d50f2047d09246177836cbcdca064ea.png)
 
-Airflow架构
+Airflow 架构
 
-元数据数据库存储任务和工作流的状态。调度器使用DAG定义，加上元数据数据库中的任务状态，决定需要执行的内容。
+元数据数据库存储任务和工作流的状态。调度器使用 DAG 定义，加上元数据数据库中的任务状态，决定需要执行的内容。
 
 执行器是一个消息队列进程（通常是 [Celery](http://www.celeryproject.org/)），它决定哪个工作进程将执行每个任务。
 
@@ -86,13 +86,13 @@ Luigi 是一个用于构建复杂流水线的 Python 包，它是在 Spotify 开
 
 Luigi 的两个基本构建块是 **Tasks** 和 **Targets**。目标是任务通常输出的文件，任务执行计算并消耗由其他任务生成的目标。
 
-![图](../Images/0e6b19ba7f5f2673c8507fa2232e1dbc.png)
+![图](img/0e6b19ba7f5f2673c8507fa2232e1dbc.png)
 
 Luigi 流水线结构
 
 你可以把它看作是一个实际的流水线。一个任务完成其工作并生成一个目标，第二个任务将目标文件作为输入，进行一些操作并输出第二个目标文件，依此类推。
 
-![图](../Images/ae0083e7ca72412d3d52d851497d7423.png)
+![图](img/ae0083e7ca72412d3d52d851497d7423.png)
 
 咖啡休息（照片由 [rawpixel](https://unsplash.com/photos/qbrmH8y1jHY) 提供，来源于 [Unsplash](https://unsplash.com/search/photos/break)）
 
@@ -158,7 +158,7 @@ Airflow 通过多个文件实现并行 DAG
 
 任务（和依赖项）可以通过编程方式添加（例如，在循环中）。相应的 DAG 如下所示。
 
-![图](../Images/6c81e7e1b879cc3a2261322ddba3d115.png)
+![图](img/6c81e7e1b879cc3a2261322ddba3d115.png)
 
 并行 DAG
 
@@ -196,7 +196,7 @@ Airflow 通过多个文件实现并行 DAG
 
 +   强大的 UI，你可以看到执行情况并与运行中的任务互动。
 
-结论：在这篇文章中，我们查看了Airflow和Luigi，以及这两者在工作流管理系统中的差异。我们看了一些非常简单的管道示例，并展示了如何使用这两种工具来实现它们。最后，我们总结了Luigi和Airflow之间的主要区别。
+结论：在这篇文章中，我们查看了 Airflow 和 Luigi，以及这两者在工作流管理系统中的差异。我们看了一些非常简单的管道示例，并展示了如何使用这两种工具来实现它们。最后，我们总结了 Luigi 和 Airflow 之间的主要区别。
 
 如果你喜欢这篇文章并且觉得有用，请随意????或分享。
 
@@ -208,29 +208,29 @@ Airflow 通过多个文件实现并行 DAG
 
 **相关：**
 
-+   [数据科学管道初学者指南](/2018/05/beginners-guide-data-science-pipeline.html)
++   数据科学管道初学者指南
 
-+   [数据科学家如何提高生产力](/2017/05/data-scientist-improve-productivity.html)
++   数据科学家如何提高生产力
 
-+   [用MLflow管理你的机器学习生命周期  –  第1部分](/2018/07/manage-machine-learning-lifecycle-mlflow.html)
++   用 MLflow 管理你的机器学习生命周期  –  第一部分
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关主题
 
-+   [KDnuggets新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [5种Airflow替代方案用于数据编排](https://www.kdnuggets.com/5-airflow-alternatives-for-data-orchestration)
++   [5 种 Airflow 替代方案用于数据编排](https://www.kdnuggets.com/5-airflow-alternatives-for-data-orchestration)
 
 +   [关于数据湖屋的一切](https://www.kdnuggets.com/2022/09/everything-need-know-data-lakehouses.html)
 
@@ -238,4 +238,4 @@ Airflow 通过多个文件实现并行 DAG
 
 +   [关于张量的一切](https://www.kdnuggets.com/2022/05/everything-need-know-tensors.html)
 
-+   [关于MLOps的一切：KDnuggets技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
++   [关于 MLOps 的一切：KDnuggets 技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)

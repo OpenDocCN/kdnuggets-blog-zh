@@ -1,8 +1,8 @@
 # 作为数据科学家管理可重用的 Python 代码
 
-> 原文：[https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html`](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
 
-![图示](../Images/5a1e4b21f5d0290742182eb6a088e3ec.png)
+![图示](img/5a1e4b21f5d0290742182eb6a088e3ec.png)
 
 图片由 [Chris Ried](https://unsplash.com/@cdr6934?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，出处 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -32,7 +32,7 @@
 
 如果你发现自己在多个使用场景中频繁使用相同的功能，并且经常这样做，那么这就是最佳方法。如果你想重用的功能容易参数化，即可以通过编写并调用一个带有每次调用时可以定义的变量的通用函数来反复处理任务，那么这也很合理。
 
-例如，我经常发现需要查找字符串中某个子串的第n次出现，而Python标准库中没有这样的函数。因此，我有一段简单的代码，它接受一个字符串、一个子串和我要查找的第n次出现作为输入，并返回字符串中第n次出现的起始位置（很久以前从[这里](https://stackoverflow.com/questions/1883980/find-the-nth-occurrence-of-substring-in-a-string)借鉴的）。
+例如，我经常发现需要查找字符串中某个子串的第 n 次出现，而 Python 标准库中没有这样的函数。因此，我有一段简单的代码，它接受一个字符串、一个子串和我要查找的第 n 次出现作为输入，并返回字符串中第 n 次出现的起始位置（很久以前从[这里](https://stackoverflow.com/questions/1883980/find-the-nth-occurrence-of-substring-in-a-string)借鉴的）。
 
 ```py
 def find_nth(haystack, needle, n):
@@ -43,7 +43,7 @@ def find_nth(haystack, needle, n):
     return start
 ```
 
-由于我处理大量文本处理工作，我收集了许多我经常使用的文本处理函数，并创建了一个库，就像其他Python库一样存在于我的计算机上，我能够像使用其他库一样导入它。创建库的步骤虽然有点长，但很简单，因此我不会在这里详细说明，但[这篇文章](https://medium.com/analytics-vidhya/how-to-create-a-python-library-7d5aea80cc3f)是众多讲解得很好的文章之一。
+由于我处理大量文本处理工作，我收集了许多我经常使用的文本处理函数，并创建了一个库，就像其他 Python 库一样存在于我的计算机上，我能够像使用其他库一样导入它。创建库的步骤虽然有点长，但很简单，因此我不会在这里详细说明，但[这篇文章](https://medium.com/analytics-vidhya/how-to-create-a-python-library-7d5aea80cc3f)是众多讲解得很好的文章之一。
 
 现在我有了一个`textproc`库，我可以轻松地导入并使用我的`find_nth`函数，而且可以随意使用，而不必将函数复制并粘贴到每个使用它的程序中。
 
@@ -59,7 +59,7 @@ segment = line[:find_nth(line, ',', 4)].strip()
 
 也许你不需要一个全面的库，因为你要重用的代码似乎只在你当前工作的项目中有用，但你确实需要在特定项目中重用它。在这种情况下，你可以将这些函数放在一个脚本中，然后按名称导入该脚本。这是简易版的库，但通常正是所需的。
 
-在我的研究生工作中，我需要编写大量与无监督学习相关的代码，特别是k均值聚类。我编写了一些函数，用于初始化质心、计算数据点与质心之间的距离、重新计算质心等，并使用不同的算法执行这些任务。我很快发现将这些算法函数的副本保存在单独的脚本中并不是最优的，因此将它们移到自己的脚本中以供导入。它的工作方式几乎与库相同，但过程是特定路径的，仅用于该项目。
+在我的研究生工作中，我需要编写大量与无监督学习相关的代码，特别是 k 均值聚类。我编写了一些函数，用于初始化质心、计算数据点与质心之间的距离、重新计算质心等，并使用不同的算法执行这些任务。我很快发现将这些算法函数的副本保存在单独的脚本中并不是最优的，因此将它们移到自己的脚本中以供导入。它的工作方式几乎与库相同，但过程是特定路径的，仅用于该项目。
 
 很快，我有了不同的质心初始化函数和距离计算函数的脚本，还有数据加载和处理函数的脚本。随着这些代码变得越来越参数化和普遍有用，最终这些代码被整合进了一个真正的库中。
 
@@ -135,9 +135,9 @@ from fastapi import FastAPI
 
 +   [使用 Poetry 与 Conda & Pip 管理 Python 依赖](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip)
 
-+   [管理数据科学项目的4个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
++   [管理数据科学项目的 4 个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
 
-+   [管理数据科学团队的5个技巧](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
++   [管理数据科学团队的 5 个技巧](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
 
 +   [管理深度学习数据集的新方法](https://www.kdnuggets.com/2022/03/new-way-managing-deep-learning-datasets.html)
 

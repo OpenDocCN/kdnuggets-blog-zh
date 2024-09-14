@@ -1,8 +1,8 @@
 # 3 种合并 Pandas 数据框的方法
 
-> 原文：[https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)
+> 原文：[`www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html`](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)
 
-![3 种合并 Pandas 数据框的方法](../Images/7c30c61ece82d6988b8a8623a38824f2.png)
+![3 种合并 Pandas 数据框的方法](img/7c30c61ece82d6988b8a8623a38824f2.png)
 
 编辑器提供的图像
 
@@ -182,11 +182,11 @@ print(concatenated_df)
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

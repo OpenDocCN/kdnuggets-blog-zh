@@ -1,8 +1,8 @@
 # 在 Scikit-learn 中实现 Adaboost
 
-> 原文：[https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)
+> 原文：[`www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html`](https://www.kdnuggets.com/2022/10/implementing-adaboost-scikitlearn.html)
 
-![在 Scikit-learn 中实现 Adaboost](../Images/288548afff2b6f6e99236dd18a4f56ac.png)
+![在 Scikit-learn 中实现 Adaboost](img/288548afff2b6f6e99236dd18a4f56ac.png)
 
 来源：作者图片
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 AdaBoost 算法，简称为自适应提升，是一种用于机器学习中的集成方法的 Boosting 技术。由于权重会重新分配给每个实例，其中更高的权重分配给那些**未**被正确分类的实例，因此它被称为自适应提升。
 
-*如果你想了解更多关于集成方法及其使用时机的信息，请阅读这篇文章：* [*何时使用集成技术会是一个好选择？*](/2022/07/would-ensemble-techniques-good-choice.html)
+*如果你想了解更多关于集成方法及其使用时机的信息，请阅读这篇文章：* *何时使用集成技术会是一个好选择？*
 
 Boosting 是一种集成机器学习算法的方法，用于减少预测数据分析中的错误。它通过结合弱学习者的预测来实现这一点。在成为一个实际概念之前，Boosting 更多是一个理论概念。
 
-*如果你想了解更多关于 Boosting 的信息，请阅读这篇文章：* [*Boosting 机器学习算法概述*](/2022/07/boosting-machine-learning-algorithms-overview.html)
+*如果你想了解更多关于 Boosting 的信息，请阅读这篇文章：* *Boosting 机器学习算法概述*
 
 ## 术语
 
@@ -210,6 +210,6 @@ print('MAE: %.3f (%.3f)' % (mean(n_scores), std(n_scores)))
 
 +   [Chip Huyen 分享了实施机器学习系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)
 
-+   [KDnuggets 新闻，8月24日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)
++   [KDnuggets 新闻，8 月 24 日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)
 
 +   [理解和实现 Python 中的遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)

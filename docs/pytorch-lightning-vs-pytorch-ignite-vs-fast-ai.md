@@ -1,12 +1,12 @@
 # Pytorch Lightning 与 PyTorch Ignite 与 Fast.ai
 
-> 原文：[https://www.kdnuggets.com/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html](https://www.kdnuggets.com/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)
+> 原文：[`www.kdnuggets.com/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html`](https://www.kdnuggets.com/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[威廉·法尔孔](https://www.linkedin.com/in/wfalcon/)，AI 研究员**
 
-![图示](../Images/631434f0400fb0206fffbdd18564e11f.png)
+![图示](img/631434f0400fb0206fffbdd18564e11f.png)
 
 显然，狮子、熊和老虎是朋友
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -50,7 +50,7 @@ Lightning 和 Ignite 都具有非常简单的接口，因为大部分工作仍�
 
 ### Lightning vs Ignite
 
-![图](../Images/44b0a765c5c71a65d171a63c0a797a65.png)
+![图](img/44b0a765c5c71a65d171a63c0a797a65.png)
 
 更像是共享
 
@@ -72,7 +72,7 @@ Ignite 需要非常类似的设置，但没有一个 ***标准*** 接口，每�
 
 ### 可重复性
 
-![图](../Images/04f9431f398d5f0d0a8b1e65afbd8c1b.png)
+![图](img/04f9431f398d5f0d0a8b1e65afbd8c1b.png)
 
 当你尝试重现工作时
 
@@ -80,25 +80,25 @@ Ignite 需要非常类似的设置，但没有一个 ***标准*** 接口，每�
 
 如果你尝试阅读某人的论文实现，往往很难弄清楚发生了什么。我们早已不再只是设计不同的神经网络架构。
 
-现代的SOTA模型实际上是***系统***，**这些系统使用了多种模型或训练技术来实现特定的结果**。
+现代的 SOTA 模型实际上是***系统***，**这些系统使用了多种模型或训练技术来实现特定的结果**。
 
-正如我之前所说，LightningModule是一个***系统***，而不是一个模型。因此，如果你想知道所有那些复杂的技巧和超级复杂的训练发生在哪里，你可以查看training_step和validation_step。
+正如我之前所说，LightningModule 是一个***系统***，而不是一个模型。因此，如果你想知道所有那些复杂的技巧和超级复杂的训练发生在哪里，你可以查看 training_step 和 validation_step。
 
-如果每个研究项目和论文都使用LightningModule模板进行实现，那么**了解发生了什么将变得非常**容易（但可能不容易理解，哈哈）。
+如果每个研究项目和论文都使用 LightningModule 模板进行实现，那么**了解发生了什么将变得非常**容易（但可能不容易理解，哈哈）。
 
-在AI社区中进行这种标准化将允许一个生态系统蓬勃发展，该生态系统可以使用LightningModule接口来执行一些很酷的功能，比如自动化部署、审计系统中的偏差，甚至支持将权重哈希到区块链后端以重建用于关键预测的模型，这些模型可能需要进行审计。
+在 AI 社区中进行这种标准化将允许一个生态系统蓬勃发展，该生态系统可以使用 LightningModule 接口来执行一些很酷的功能，比如自动化部署、审计系统中的偏差，甚至支持将权重哈希到区块链后端以重建用于关键预测的模型，这些模型可能需要进行审计。
 
 ### 开箱即用的功能
 
-Ignite和Lightning之间的另一个主要区别在于Lightning开箱即用的功能。开箱即用意味着你**无需**额外编写代码。
+Ignite 和 Lightning 之间的另一个主要区别在于 Lightning 开箱即用的功能。开箱即用意味着你**无需**额外编写代码。
 
-举例来说，让我们尝试在同一台机器上的多个GPU上训练一个模型。
+举例来说，让我们尝试在同一台机器上的多个 GPU 上训练一个模型。
 
 **Ignite** (**[**demo**](https://github.com/pytorch/ignite/blob/master/examples/mnist/mnist_dist.py)**)**
 
 **Lightning** (**[**demo**](https://github.com/williamFalcon/pytorch-lightning/blob/master/examples/new_project_templates/single_gpu_node_ddp_template.py)**)**
 
-好的，没有哪个是坏的……但如果我们想在多台机器上使用多个GPU呢？让我们在200个GPU上进行训练。
+好的，没有哪个是坏的……但如果我们想在多台机器上使用多个 GPU 呢？让我们在 200 个 GPU 上进行训练。
 
 **Ignite**
 
@@ -108,13 +108,13 @@ Ignite和Lightning之间的另一个主要区别在于Lightning开箱即用的�
 
 **Lightning**
 
-使用Lightning，你只需设置节点数量并提交适当的作业。 [这里有一个关于如何正确配置作业的详细教程](https://medium.com/@_willfalcon/trivial-multi-node-training-with-pytorch-lightning-ff75dfb809bd)。
+使用 Lightning，你只需设置节点数量并提交适当的作业。 [这里有一个关于如何正确配置作业的详细教程](https://medium.com/@_willfalcon/trivial-multi-node-training-with-pytorch-lightning-ff75dfb809bd)。
 
-开箱即用的功能是指那些你***无需做任何事即可使用的功能***。这意味着你可能现在不需要它们，但当你需要例如...累积梯度、梯度裁剪或16位训练时，你不会花费数天/数周的时间阅读教程来使其工作。
+开箱即用的功能是指那些你***无需做任何事即可使用的功能***。这意味着你可能现在不需要它们，但当你需要例如...累积梯度、梯度裁剪或 16 位训练时，你不会花费数天/数周的时间阅读教程来使其工作。
 
-只需设置适当的Lightning标志，然后继续进行你的研究。
+只需设置适当的 Lightning 标志，然后继续进行你的研究。
 
-Lightning预构建了这些功能，以便用户花更多时间进行研究，而不是进行工程开发。这对于非计算机科学/数据科学研究人员，如物理学家、生物学家等尤其有用，他们可能在编程方面不那么精通。
+Lightning 预构建了这些功能，以便用户花更多时间进行研究，而不是进行工程开发。这对于非计算机科学/数据科学研究人员，如物理学家、生物学家等尤其有用，他们可能在编程方面不那么精通。
 
 这些功能使 PyTorch 的特性变得普及，只有高级用户可能会花时间去实现。
 
@@ -146,11 +146,11 @@ Lightning预构建了这些功能，以便用户花更多时间进行研究，�
 
 **相关内容：**
 
-+   [初学者和 Udacity 深度学习纳米学位的 PyTorch 备忘单](/2019/08/pytorch-cheat-sheet-beginners.html)
++   初学者和 Udacity 深度学习纳米学位的 PyTorch 备忘单
 
-+   [使用 PyTorch 框架入门 NLP](/2019/04/nlp-pytorch.html)
++   使用 PyTorch 框架入门 NLP
 
-+   [XLNet 在多个 NLP 任务中超越 BERT](/2019/07/xlnet-outperforms-bert-several-nlp-tasks.html)
++   XLNet 在多个 NLP 任务中超越 BERT
 
 ### 更多相关主题
 

@@ -1,8 +1,8 @@
 # 流形学习的扩散图，理论与实现
 
-> 原文：[https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html](https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html)
+> 原文：[`www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html`](https://www.kdnuggets.com/2020/03/diffusion-map-manifold-learning-theory-implementation.html)
 
-[comments](#comments)
+comments
 
 **由 [Rahul Raj](https://randomwalk.in)，印度理工学院坎普尔分校**
 
@@ -14,27 +14,27 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
 流形学习是一种非线性降维方法。流形学习算法的基础在于许多数据集的维度只是人为增加的¹。在这篇博客中，我们学习了流形学习中的一种技术，称为扩散图。其关键思想是，欧几里得距离，即最常见的相似性度量，仅在‘局部’上有意义。因此，假设数据存在一个低维结构或流形，测量这种结构上的相似性比在欧几里得空间中更为合适。
 
-让我们从以下2D数据点的例子开始探索，这些数据点整齐地排列成**S**形状。
+让我们从以下 2D 数据点的例子开始探索，这些数据点整齐地排列成**S**形状。
 
-![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)
+![alt](img/50288a3fb0963cff7205af177fd02cab.png)
 
 这个数据集具有明确的形状。如果我们需要测量这个集合中两个点的相似性，我们会计算欧几里得距离。如果这个距离很小，我们就说这些点相似，反之则不然。下图展示了这种情况。
 
-![alt](../Images/46b1f89c723e1d052a6d9a78b04e3107.png)
+![alt](img/46b1f89c723e1d052a6d9a78b04e3107.png)
 
 然而，了解几何结构后，我们知道这种相似性度量是不准确的。由于‘x’和‘y’坐标之间存在非线性关系，因此如果我们在下面的图中所示的几何结构上测量相似性（或距离），会更为准确。
 
-![alt](../Images/8f0caf1bcaf021a1c7a22b86b2ace876.png)
+![alt](img/8f0caf1bcaf021a1c7a22b86b2ace876.png)
 
 使用扩散映射，我们可以进行非线性维度减少以及学习高维数据的底层几何。让我们直接进入理论和实现，手牵手进行。
 
@@ -46,15 +46,15 @@
 
 核心思想是一个时间相关的扩散过程，这只是数据集上的随机游走，每一步都有一个相关的概率。当扩散过程运行一段时间 t 时，我们得到不同路径的概率，以计算底层几何结构的距离。从数学上讲，我们称之为马尔科夫链的稳态概率。
 
-![alt](../Images/5fee970a0b7519d60665416cdf94c65c.png)
+![alt](img/5fee970a0b7519d60665416cdf94c65c.png)
 
 两个数据点 x 和 y 之间的连通性定义为在随机游走的一步中从 x 跳到 y 的概率，为：
 
-![Equation](../Images/9fd609a3923aa64072013c1b281bb5e1.png)
+![Equation](img/9fd609a3923aa64072013c1b281bb5e1.png)
 
 然而，将连通性表示为一个行归一化的似然函数 K 使用高斯核是有用的。这将被称为**扩散核**。
 
-![Equation](../Images/b9f427b46dffb629be7b5d29599d85fa.png)
+![Equation](img/b9f427b46dffb629be7b5d29599d85fa.png)
 
 现在我们定义一个行归一化的扩散矩阵 P。从数学上讲，这等同于马尔科夫链中的转移矩阵。虽然 P 表示从点 x 到点 y 的单步跳跃概率（或在这种情况下的连通性），P² 表示从 x 在两步内到达 y 的概率，依此类推。随着跳跃次数或 Pᵗ 在 t 值增加的情况下增加，我们观察到扩散过程向前运行。换句话说，跟随几何结构的概率增加。
 
@@ -64,17 +64,17 @@
 
 为了演示算法，我们从一个具有明确几何结构的数据集开始。让我们首先创建一个二维图形，如前所示。我们的主要目标是找出扩散映射是否揭示了数据的底层几何结构。
 
-![alt](../Images/50288a3fb0963cff7205af177fd02cab.png)
+![alt](img/50288a3fb0963cff7205af177fd02cab.png)
 
 现在，让我们为这个二维数据集添加一个合成的第三维度（从均匀分布中提取的数据）。因此，我们的新三维数据集如下所示：
 
-![alt](../Images/6d5db19bd974ce6dab18d154de4f268b.png)
+![alt](img/6d5db19bd974ce6dab18d154de4f268b.png)
 
 正如您可能已经注意到的，3D 数据集在一个角度上保留了 ‘S’ 形，这一点是正确的。现在我们的目标是将维度扁平化为 2，同时保留这种形状。希望在应用扩散映射后，我们能在 2D 中看到类似 ‘S’ 的结构。
 
 ### 输出
 
-![alt](../Images/ed9ce1e228008f1fdb4ab3e9fc3e9c99.png)
+![alt](img/ed9ce1e228008f1fdb4ab3e9fc3e9c99.png)
 
 ### 结果
 
@@ -90,17 +90,17 @@
 
 1.  Porte, Herbst, Hereman, Walt，*扩散映射简介*
 
-**个人简介：[Rahul Raj](https://www.linkedin.com/in/rahul-r-909409184/)** (**[@rahulrajpl](https://twitter.com/rahulrajpl)**) 目前在印度理工学院坎普尔分校攻读计算机科学与工程硕士学位。他的兴趣领域包括机器学习、数据科学及其在网络安全中的应用。有关作者的更多信息请访问：**[https://randomwalk.in](https://randomwalk.in)**
+**个人简介：[Rahul Raj](https://www.linkedin.com/in/rahul-r-909409184/)** (**[@rahulrajpl](https://twitter.com/rahulrajpl)**) 目前在印度理工学院坎普尔分校攻读计算机科学与工程硕士学位。他的兴趣领域包括机器学习、数据科学及其在网络安全中的应用。有关作者的更多信息请访问：**[`randomwalk.in`](https://randomwalk.in)**
 
 [原文](https://randomwalk.in/python/ml/2020/03/14/Diffusion-Map.html)。经授权转载。
 
 **相关：**
 
-+   [高级特征工程和预处理的 4 个技巧](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)
++   高级特征工程和预处理的 4 个技巧
 
-+   [掌握中级机器学习的 7 个步骤——2019 年版](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)
++   掌握中级机器学习的 7 个步骤——2019 年版
 
-+   [什么是数据科学中的维度缩减？](/2019/01/dimension-reduction-data-science.html)
++   什么是数据科学中的维度缩减？
 
 ### 更多相关内容
 

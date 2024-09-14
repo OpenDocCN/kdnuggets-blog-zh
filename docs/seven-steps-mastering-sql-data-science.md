@@ -1,6 +1,6 @@
 # 掌握数据科学 SQL 的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/2016/06/seven-steps-mastering-sql-data-science.html/2](https://www.kdnuggets.com/2016/06/seven-steps-mastering-sql-data-science.html/2)
+> 原文：[`www.kdnuggets.com/2016/06/seven-steps-mastering-sql-data-science.html/2`](https://www.kdnuggets.com/2016/06/seven-steps-mastering-sql-data-science.html/2)
 
 ### 第 4 步：创建、删除、删除
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的 IT 组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的 IT 组织
 
 * * *
 
@@ -60,7 +60,7 @@
 
 +   [外连接与交叉连接](https://www.youtube.com/watch?v=3t2X1jczt4)
 
-[![SQL 连接的可视化表示](../Images/0d5efa70866c8ba79b596ec40adda7dc.png)](http://i.stack.imgur.com/VQ5XP.png)
+![SQL 连接的可视化表示](http://i.stack.imgur.com/VQ5XP.png)
 
 SQL 连接的可视化表示。
 
@@ -86,7 +86,7 @@ SQL 连接的可视化表示。
 
 我们经常会发现 SQL 被嵌入在用其他编程语言编写的软件中，作为更大系统的一部分。例如，在 web 开发中，你可能会发现 PHP 或 Ruby 或其他语言通过 SQL 调用数据库，以输入、修改或检索应用程序相关的数据。在数据科学中，你可能会看到 SQL 被调用作为某些用 Python 或 R 编写的应用程序的一部分。因此，了解这些语言如何与 SQL 配合并不是坏主意。
 
-![SQLite Python](../Images/b89a683dd98a7eac3d19d4da80aaa787.png)
+![SQLite Python](img/b89a683dd98a7eac3d19d4da80aaa787.png)
 
 使用 Python 和 SQLite 执行 SQL 查询。
 
@@ -112,11 +112,11 @@ SQL 连接的可视化表示。
 
 **相关**：
 
-+   [掌握 Python 中机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 中机器学习的 7 个步骤
 
-+   [理解深度学习的 7 个步骤](/2016/01/seven-steps-deep-learning.html)
++   理解深度学习的 7 个步骤
 
-+   [R 学习路径：从初学者到专家的 7 个步骤](/2016/03/datacamp-r-learning-path-7-steps.html)
++   R 学习路径：从初学者到专家的 7 个步骤
 
 ### 更多关于此主题
 
@@ -133,6 +133,6 @@ SQL 连接的可视化表示。
 +   [掌握 SQL、Python、数据清理、数据…的指南合集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
 tps://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
 
-+   [掌握数据科学项目管理与敏捷的7个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握数据科学项目管理与敏捷的 7 个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
 +   [关于掌握 SQL、Python、数据清洗、数据预处理和探索性数据分析的指南合集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)

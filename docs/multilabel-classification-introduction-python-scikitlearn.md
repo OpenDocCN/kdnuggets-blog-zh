@@ -1,8 +1,8 @@
-# 多标签分类：使用Python的Scikit-Learn入门
+# 多标签分类：使用 Python 的 Scikit-Learn 入门
 
-> 原文：[https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html](https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html)
+> 原文：[`www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html`](https://www.kdnuggets.com/2023/08/multilabel-classification-introduction-python-scikitlearn.html)
 
-![多标签分类：使用Python的Scikit-Learn入门](../Images/96a1064954da1a1b80998bc73e31769f.png)
+![多标签分类：使用 Python 的 Scikit-Learn 入门](img/96a1064954da1a1b80998bc73e31769f.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-photo/top-view-hands-pizza-chart_25629308.htm#query=classification&position=4&from_view=search&track=sph)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 我们经常遇到经典的分类任务，例如二分类（两个标签）和多分类（多个标签）。在这种情况下，我们会训练分类器，模型将尝试从所有可用标签中预测一个标签。用于分类的数据集类似于下图所示的图像。
 
-![多标签分类：使用Python的Scikit-Learn入门](../Images/c375c1b308daf4be103de5d6e6e56ce4.png)
+![多标签分类：使用 Python 的 Scikit-Learn 入门](img/c375c1b308daf4be103de5d6e6e56ce4.png)
 
 上图显示，目标（销售产品）在二分类中包含两个标签，而在多分类中包含三个标签。模型将从可用特征中进行训练，然后仅输出一个标签。
 
@@ -30,7 +30,7 @@
 
 多标签分类通常用于文本数据分类任务。例如，以下是多标签分类的示例数据集。
 
-![多标签分类：使用Python的Scikit-Learn入门](../Images/40df6531842b30b3fd218f6b024478f1.png)
+![多标签分类：使用 Python 的 Scikit-Learn 入门](img/40df6531842b30b3fd218f6b024478f1.png)
 
 在上面的示例中，假设 Text 1 到 Text 5 是可以分类到四个类别中的句子：事件、体育、流行文化和自然。通过上面的训练数据，多标签分类任务预测哪个标签适用于给定的句子。每个类别彼此独立，因为它们不是互斥的；每个标签可以被视为独立的。
 
@@ -42,7 +42,7 @@
 
 本教程将使用 Kaggle 上公开提供的[生物医学 PubMed 多标签分类数据集](https://www.kaggle.com/datasets/owaiskhan9654/pubmed-multilabel-text-classification)。数据集包含各种特征，但我们只使用 abstractText 特征及其 MeSH 分类（A: 解剖学，B: 生物体，C: 疾病等）。样本数据如下图所示。
 
-![多标签分类：使用 Python 的 Scikit-Learn 入门](../Images/9c94ed15c2c5b6948270793e134ae05e.png)
+![多标签分类：使用 Python 的 Scikit-Learn 入门](img/9c94ed15c2c5b6948270793e134ae05e.png)
 
 上述数据集显示每篇论文可以被分类到多个类别中，这就是多标签分类的情况。利用这个数据集，我们可以用 Scikit-Learn 构建多标签分类器。在训练模型之前，让我们准备数据集。
 
@@ -90,7 +90,7 @@ prediction = clf.predict(X_test_tfidf)
 prediction
 ```
 
-![多标签分类：使用 Python 的 Scikit-Learn 入门](../Images/d5cb897316d184b7a9f5334c0ab443f4.png)
+![多标签分类：使用 Python 的 Scikit-Learn 入门](img/d5cb897316d184b7a9f5334c0ab443f4.png)
 
 预测结果是每个 MeSH 类别的标签数组。每一行代表一个句子，每一列代表一个标签。
 
@@ -107,7 +107,7 @@ print('Accuracy Score: ', accuracy_score(y_test, prediction))
 
 例如，第一行预测与测试数据之间只差一个标签。
 
-![多标签分类：使用 Python 的 Scikit-Learn 介绍](../Images/d6fbf4ac7e26065465af5a4a5c998f02.png)
+![多标签分类：使用 Python 的 Scikit-Learn 介绍](img/d6fbf4ac7e26065465af5a4a5c998f02.png)
 
 如果标签组合不同，则会被视为错误预测。因此，我们的模型得分较低。
 

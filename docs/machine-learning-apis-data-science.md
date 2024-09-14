@@ -1,6 +1,6 @@
 # **数据科学的 5 个最佳机器学习 API**
 
-> 原文：[https://www.kdnuggets.com/2015/11/machine-learning-apis-data-science.html/2](https://www.kdnuggets.com/2015/11/machine-learning-apis-data-science.html/2)
+> 原文：[`www.kdnuggets.com/2015/11/machine-learning-apis-data-science.html/2`](https://www.kdnuggets.com/2015/11/machine-learning-apis-data-science.html/2)
 
 **3) Google Prediction API**
 
@@ -14,7 +14,7 @@ Google Prediction API 使用分类器来编程 API 服务以进行预测，因�
 
 +   总部位于加州的初创公司 Pondera Solutions 提供作为服务的欺诈检测，其基础是 Google 的 Prediction API。
 
-![machine-learning-api-examples](../Images/ab35bc62e991c0fb63ab5db971234874.png)
+![machine-learning-api-examples](img/ab35bc62e991c0fb63ab5db971234874.png)
 
 **4) 亚马逊机器学习 API**
 
@@ -54,36 +54,36 @@ BigML 是一个对用户友好和开发者友好的机器学习 API，主要集�
 
 **相关：**
 
-+   [预测和机器学习的 API：投票结果和分析](/2015/09/api-prediction-machine-learning-poll-results.html)
++   预测和机器学习的 API：投票结果和分析
 
-+   [标准化机器学习 Web 服务 API 的世界](/2015/07/psi-machine-learning-web-service-apis.html)
++   标准化机器学习 Web 服务 API 的世界
 
-+   [云机器学习之争：Amazon vs IBM Watson vs Microsoft Azure](/2015/04/cloud-machine-learning-amazon-ibm-watson-microsoft-azure.html)
++   云机器学习之争：Amazon vs IBM Watson vs Microsoft Azure
 
-+   [马萨诸塞州的文本挖掘与选举分析](/2014/10/text-mining-election-analytics-massachusetts.html)
++   马萨诸塞州的文本挖掘与选举分析
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 ### 更多相关内容
 
-+   [OpenAI的新ChatGPT和Whisper API](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)
++   [OpenAI 的新 ChatGPT 和 Whisper API](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)
 
-+   [FastAPI教程：用Python在几分钟内构建API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
++   [FastAPI 教程：用 Python 在几分钟内构建 API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
 
-+   [关注这些Instagram账户获取数据科学、机器学习与AI的最佳内容](https://www.kdnuggets.com/2022/08/best-instagram-accounts-follow-data-science-machine-learning-ai.html)
++   [关注这些 Instagram 账户获取数据科学、机器学习与 AI 的最佳内容](https://www.kdnuggets.com/2022/08/best-instagram-accounts-follow-data-science-machine-learning-ai.html)
 
 +   [最适合稀疏数据的机器学习模型](https://www.kdnuggets.com/2023/04/best-machine-learning-model-sparse-data.html)
 
-+   [24本最佳（免费）书籍来理解机器学习](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
++   [24 本最佳（免费）书籍来理解机器学习](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
 
-+   [7个最佳机器学习库解释](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
++   [7 个最佳机器学习库解释](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)

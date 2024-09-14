@@ -1,10 +1,10 @@
 # 深度学习、自然语言处理与计算机视觉的顶级 Python 库
 
-> 原文：[https://www.kdnuggets.com/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html](https://www.kdnuggets.com/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)
+> 原文：[`www.kdnuggets.com/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html`](https://www.kdnuggets.com/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)
 
-[评论](#comments)
+评论
 
-在之前的文章中，我们查看了 [数据科学、数据可视化和机器学习的顶级 Python 库](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)。这次，我们将关注深度学习、自然语言处理和计算机视觉的顶级库。这些类别实际上不需要进一步的说明。
+在之前的文章中，我们查看了 数据科学、数据可视化和机器学习的顶级 Python 库。这次，我们将关注深度学习、自然语言处理和计算机视觉的顶级库。这些类别实际上不需要进一步的说明。
 
 这种分隔和分类是随意的，有时比其他情况更多，但我们尽力将工具按照预期的使用场景进行分组，希望这对读者最有帮助。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 请注意，下图由 [Gregory Piatetsky](https://www.kdnuggets.com/author/gregory-piatetsky) 展示了每个库的类型，按星数和贡献者进行绘制，符号大小反映了库在 Github 上的提交次数，采用对数刻度。
 
-![图](../Images/ea3153d3e93ca65fa6291b2f432b9e70.png)**图 1：顶级 Python 库，用于深度学习、自然语言处理和计算机视觉**
+![图](img/ea3153d3e93ca65fa6291b2f432b9e70.png)**图 1：顶级 Python 库，用于深度学习、自然语言处理和计算机视觉**
 
 按星标数和贡献者数绘制；相对大小由提交日志数决定
 
@@ -222,11 +222,11 @@ Stars: 7500, Commits: 1286, Contributors: 334
 
 **相关**:
 
-+   [数据科学、数据可视化与机器学习的顶级 Python 库](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   数据科学、数据可视化与机器学习的顶级 Python 库
 
-+   [前 13 个 Python 深度学习库](/2018/11/top-python-deep-learning-libraries.html)
++   前 13 个 Python 深度学习库
 
-+   [前 8 个 Python 机器学习库](/2018/10/top-python-machine-learning-libraries.html)
++   前 8 个 Python 机器学习库
 
 ### 更多相关内容
 

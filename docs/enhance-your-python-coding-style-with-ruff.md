@@ -1,64 +1,64 @@
-# 使用Ruff提升您的Python编码风格
+# 使用 Ruff 提升您的 Python 编码风格
 
-> 原文：[https://www.kdnuggets.com/enhance-your-python-coding-style-with-ruff](https://www.kdnuggets.com/enhance-your-python-coding-style-with-ruff)
+> 原文：[`www.kdnuggets.com/enhance-your-python-coding-style-with-ruff`](https://www.kdnuggets.com/enhance-your-python-coding-style-with-ruff)
 
-![使用Ruff提升您的Python编码风格](../Images/4453ad957abb52cfc6dd95f9cef7557d.png)
+![使用 Ruff 提升您的 Python 编码风格](img/4453ad957abb52cfc6dd95f9cef7557d.png)
 
 编辑器提供的图片
 
-# 什么是Ruff
+# 什么是 Ruff
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
-[Ruff](https://github.com/astral-sh/ruff)是一个极其快速的Python linter和格式化工具，使用Rust编写，旨在取代和改进现有工具如Flake8、Black和isort。它提供10-100倍的更快性能，同时通过700多个内置规则和流行插件的重新实现保持一致性。
+[Ruff](https://github.com/astral-sh/ruff)是一个极其快速的 Python linter 和格式化工具，使用 Rust 编写，旨在取代和改进现有工具如 Flake8、Black 和 isort。它提供 10-100 倍的更快性能，同时通过 700 多个内置规则和流行插件的重新实现保持一致性。
 
-![使用Ruff提升您的Python编码风格](../Images/0b7ab29af3dce1c3308877fd8833cae1.png)
+![使用 Ruff 提升您的 Python 编码风格](img/0b7ab29af3dce1c3308877fd8833cae1.png)
 
-来自Ruff的统计数据 | 从头开始Linting CPython代码库
+来自 Ruff 的统计数据 | 从头开始 Linting CPython 代码库
 
-Ruff支持现代Python，兼容3.12，并支持`pyproject.toml`。它还提供自动修复支持、缓存和编辑器集成。Ruff对monorepo友好，广泛用于Pandas、FastAPI等主要开源项目中。通过结合速度、功能和可用性，Ruff将Linting、格式化和自动修复集成到一个工具中，比现有选项快几个数量级。
+Ruff 支持现代 Python，兼容 3.12，并支持`pyproject.toml`。它还提供自动修复支持、缓存和编辑器集成。Ruff 对 monorepo 友好，广泛用于 Pandas、FastAPI 等主要开源项目中。通过结合速度、功能和可用性，Ruff 将 Linting、格式化和自动修复集成到一个工具中，比现有选项快几个数量级。
 
-# 开始使用Ruff
+# 开始使用 Ruff
 
-我们可以通过使用PIP轻松安装`ruff`。
+我们可以通过使用 PIP 轻松安装`ruff`。
 
 ```py
 pip install ruff
 ```
 
-为了测试运行Ruff的简便性和速度，我们可以使用DagHub仓库[kingabzpro/Yoga-Pose-Classification](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)。您可以克隆它或使用您自己的项目进行格式化。
+为了测试运行 Ruff 的简便性和速度，我们可以使用 DagHub 仓库[kingabzpro/Yoga-Pose-Classification](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)。您可以克隆它或使用您自己的项目进行格式化。
 
-![使用Ruff提升您的Python编码风格](../Images/2e765ec943e4069f3c2e09ffc7840f97.png)
+![使用 Ruff 提升您的 Python 编码风格](img/2e765ec943e4069f3c2e09ffc7840f97.png)
 
 项目结构
 
-首先，我们将对项目运行linter。你也可以通过将“.”替换为文件位置来对单个文件运行linter。
+首先，我们将对项目运行 linter。你也可以通过将“.”替换为文件位置来对单个文件运行 linter。
 
 ```py
 ruff check .
 ```
 
-![使用Ruff提升您的Python编码风格](../Images/0cde7e7d9549a2939929d4af1b1cb133.png)
+![使用 Ruff 提升您的 Python 编码风格](img/0cde7e7d9549a2939929d4af1b1cb133.png)
 
-Ruff已识别出9个错误和1个可修复错误。要修复错误，我们将使用--fix标志。
+Ruff 已识别出 9 个错误和 1 个可修复错误。要修复错误，我们将使用--fix 标志。
 
 ```py
 ruff check --fix .
 ```
 
-如您所见，它已经修复了1个可修复的错误。
+如您所见，它已经修复了 1 个可修复的错误。
 
-![使用Ruff提升您的Python编码风格](../Images/a9638eee16ae1f359085b1994d48d3b7.png)
+![使用 Ruff 提升您的 Python 编码风格](img/a9638eee16ae1f359085b1994d48d3b7.png)
 
 要格式化项目，我们将使用`ruff format`命令。
 
@@ -69,7 +69,7 @@ $ ruff format .
 
 Ruff linter 和 formatter 对代码进行了大量更改。但我们为什么需要这些工具呢？答案很简单——它们有助于执行编码标准和规范。因此，您和您的团队可以专注于代码中的重要方面。此外，它们有助于提高我们代码的质量、可维护性和安全性。
 
-![使用 Ruff 提升您的 Python 编码风格](../Images/c29e3cd8488cdd81455da845a6243f24.png)
+![使用 Ruff 提升您的 Python 编码风格](img/c29e3cd8488cdd81455da845a6243f24.png)
 
 Gif 由作者提供
 
@@ -101,7 +101,7 @@ $ ruff check --fix .
 
 最终结果非常惊人。它在没有破坏代码的情况下完成了所有必要的更改。
 
-![使用 Ruff 提升您的 Python 编码风格](../Images/4f60bd2dfea11e8aa65a829e08e00f55.png)
+![使用 Ruff 提升您的 Python 编码风格](img/4f60bd2dfea11e8aa65a829e08e00f55.png)
 
 Gif 由作者提供
 
@@ -157,7 +157,7 @@ jobs:
 
 Ruff 最令人愉悦的方面是它的 VSCode 扩展。它简化了格式化和代码检查，免去了对第三方扩展的需求。只需在扩展市场中搜索 [Ruff](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff) 即可安装。
 
-![使用 Ruff 提升您的 Python 编码风格](../Images/9fcfef1c98fdd6fdc8b6cd7c9189d9fe.png)
+![使用 Ruff 提升您的 Python 编码风格](img/9fcfef1c98fdd6fdc8b6cd7c9189d9fe.png)
 
 图片来自 [Ruff - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=charliermarsh.ruff)
 

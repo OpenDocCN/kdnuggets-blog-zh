@@ -1,34 +1,34 @@
-# 使用ChatGPT进行网页构建
+# 使用 ChatGPT 进行网页构建
 
-> 原文：[https://www.kdnuggets.com/2023/03/chatgpt-webpage-construction.html](https://www.kdnuggets.com/2023/03/chatgpt-webpage-construction.html)
+> 原文：[`www.kdnuggets.com/2023/03/chatgpt-webpage-construction.html`](https://www.kdnuggets.com/2023/03/chatgpt-webpage-construction.html)
 
-你已经认识了ChatGPT，这是一种由OpenAI设计的高级语言模型，它利用机器学习来理解自然语言并生成类似人类的回应。它拥有广泛的知识库，并且凭借其对语言的复杂“理解”，能够作为任何寻找信息的人的强大助手。它可以回答各种问题，提供建议，就各种话题进行对话，并在许多领域证明了自己。
+你已经认识了 ChatGPT，这是一种由 OpenAI 设计的高级语言模型，它利用机器学习来理解自然语言并生成类似人类的回应。它拥有广泛的知识库，并且凭借其对语言的复杂“理解”，能够作为任何寻找信息的人的强大助手。它可以回答各种问题，提供建议，就各种话题进行对话，并在许多领域证明了自己。
 
-但是ChatGPT能创建网页吗？让我们来检验一下。
+但是 ChatGPT 能创建网页吗？让我们来检验一下。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-*请注意，这是使用ChatGPT 3.5编写的，早于最新版本的发布。*
+*请注意，这是使用 ChatGPT 3.5 编写的，早于最新版本的发布。*
 
-# 基本HTML网页
+# 基本 HTML 网页
 
-让我们从一些基本的HTML开始。鉴于[ChatGPT已经证明自己是一个天才的编码员和编程助手](https://www.kdnuggets.com/2023/01/chatgpt-python-programming-assistant.html)，这不应该是一个难题。
+让我们从一些基本的 HTML 开始。鉴于[ChatGPT 已经证明自己是一个天才的编码员和编程助手](https://www.kdnuggets.com/2023/01/chatgpt-python-programming-assistant.html)，这不应该是一个难题。
 
-这是我们用ChatGPT成功创建“Hello, World”HTML页面的提示：
+这是我们用 ChatGPT 成功创建“Hello, World”HTML 页面的提示：
 
-*创建一个简单的“Hello, World!”网页，使用HTML*
+*创建一个简单的“Hello, World!”网页，使用 HTML*
 
-ChatGPT生成了以下基本HTML，显然达到了预期效果。
+ChatGPT 生成了以下基本 HTML，显然达到了预期效果。
 
 ```py
 <!DOCTYPE html>
@@ -42,29 +42,29 @@ ChatGPT生成了以下基本HTML，显然达到了预期效果。
 </html>
 ```
 
-ChatGPT建议我们将其放在一个扩展名为“.html”的文件中，并用浏览器打开。任务完成。
+ChatGPT 建议我们将其放在一个扩展名为“.html”的文件中，并用浏览器打开。任务完成。
 
-我不打算提供截图；你们都见过未格式化的HTML输出。
+我不打算提供截图；你们都见过未格式化的 HTML 输出。
 
-让我们请ChatGPT来让事情看起来更好。
+让我们请 ChatGPT 来让事情看起来更好。
 
-*你能用CSS让这个页面看起来更好吗？*
+*你能用 CSS 让这个页面看起来更好吗？*
 
-ChatGPT的输出如下：
+ChatGPT 的输出如下：
 
-> 这个示例使用CSS将网页背景颜色更改为浅蓝色，将页面上的文本居中，将标题的颜色更改为海军蓝，并将标题的字体大小增加到4em。
+> 这个示例使用 CSS 将网页背景颜色更改为浅蓝色，将页面上的文本居中，将标题的颜色更改为海军蓝，并将标题的字体大小增加到 4em。
 > 
-> 你可以玩转CSS，给你的网页添加样式。
+> 你可以玩转 CSS，给你的网页添加样式。
 > 
-> 将CSS放在单独的文件中并将其链接到你的index.html文件中也是一个好习惯。
+> 将 CSS 放在单独的文件中并将其链接到你的 index.html 文件中也是一个好习惯。
 
 看起来像这样：
 
-![使用ChatGPT创建网页](../Images/0a2392d694c3264061d19b197ea8c4b9.png)
+![使用 ChatGPT 创建网页](img/0a2392d694c3264061d19b197ea8c4b9.png)
 
-ChatGPT使用HTML和CSS创建的简单网页
+ChatGPT 使用 HTML 和 CSS 创建的简单网页
 
-这确实是一个改进，但这仍然是小菜一碟。然而，在继续之前，让我们按照ChatGPT的建议，将HTML和CSS分开。
+这确实是一个改进，但这仍然是小菜一碟。然而，在继续之前，让我们按照 ChatGPT 的建议，将 HTML 和 CSS 分开。
 
 *我该如何将 CSS 放到一个单独的文件中，并将其链接到我的 index.html 文件？*
 
@@ -143,7 +143,7 @@ ChatGPT使用HTML和CSS创建的简单网页
 
 而 ChatGPT 顺应了（“添加”按钮在你悬停时甚至变成了红色）。
 
-![使用 ChatGPT 创建网页](../Images/f1ea50100219f483169c18df40ab5d2f.png)
+![使用 ChatGPT 创建网页](img/f1ea50100219f483169c18df40ab5d2f.png)
 
 ChatGPT 创建的带样式的简单 HTML 表单
 
@@ -185,7 +185,7 @@ addAdForm.addEventListener("submit", function(event) {
 
 结果是：
 
-![使用 ChatGPT 创建网页](../Images/f2b8e7e9c26725133ac7be165258980f.png)
+![使用 ChatGPT 创建网页](img/f2b8e7e9c26725133ac7be165258980f.png)
 
 ChatGPT 创建的带有 JavaScript 的半功能 HTML 表单
 
@@ -365,7 +365,7 @@ ChatGPT 创建的带有 JavaScript 的半功能 HTML 表单
 
 这是最终产品：
 
-![使用 ChatGPT 创建网页](../Images/ad3d93127c78aa1605efb8058278a4c5.png)
+![使用 ChatGPT 创建网页](img/ad3d93127c78aa1605efb8058278a4c5.png)
 
 ChatGPT 创建的简单博客主页
 

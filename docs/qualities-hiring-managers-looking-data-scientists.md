@@ -1,8 +1,8 @@
 # 招聘经理在数据科学家中寻找的素质
 
-> 原文：[https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html`](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)
 
-![招聘经理在数据科学家中寻找的素质](../Images/59cf986db2ce3e5cb3ca4d6cc2a8fde6.png)
+![招聘经理在数据科学家中寻找的素质](img/59cf986db2ce3e5cb3ca4d6cc2a8fde6.png)
 
 [Cytonn Photography](https://unsplash.com/@cytonn_photography) via Unsplash
 
@@ -30,7 +30,7 @@
 
 # 2. 将代码与业务相关联
 
-![将代码与业务相关联](../Images/9a832560fe34fb0b0f5b951ba02e9c32.png)
+![将代码与业务相关联](img/9a832560fe34fb0b0f5b951ba02e9c32.png)
 
 [Mars](https://unsplash.com/@heylagostechie) via Unsplash
 
@@ -38,7 +38,7 @@
 
 对任务和它如何与业务相关有全面的掌握，将使你编码得更好。这将向你的经理证明你理解什么是有利于业务的，而不仅仅是因为被要求完成任务。它可以区分你是否是团队和整个业务的积极成员。
 
-通过这一点，作为数据科学家的你将比技术能力较弱的CEO或董事总经理拥有更好的技能和对当前问题的理解。你将能够利用你的硬技能，通过编码和商业头脑引导业务朝正确方向发展。
+通过这一点，作为数据科学家的你将比技术能力较弱的 CEO 或董事总经理拥有更好的技能和对当前问题的理解。你将能够利用你的硬技能，通过编码和商业头脑引导业务朝正确方向发展。
 
 ## 你将在面试中如何被测试？
 
@@ -54,7 +54,7 @@
 
 这向招聘经理证明你愿意帮助业务改进，当你获得工作时，它将向公司证明你是业务成功的宝贵资产。
 
-说‘是’对每一个抛给你的任务很容易。但说‘我认为这不是正确的解决方案，试试X怎么样？’却更难。很多企业因未能采纳其他团队成员的建议和解决方案而失败。
+说‘是’对每一个抛给你的任务很容易。但说‘我认为这不是正确的解决方案，试试 X 怎么样？’却更难。很多企业因未能采纳其他团队成员的建议和解决方案而失败。
 
 提出你的建议并不会有害，最坏的情况就是你错了或者你的经理给你一个更好的理解，说明为什么业务不能使用那个特定的解决方案。最终，你仍然是在学习。
 
@@ -92,9 +92,9 @@
 
 如果你想了解更多，请阅读：
 
-+   [数据科学面试指南 - 第 1 部分：结构](/2022/04/data-science-interview-guide-part-1-structure.html)
++   数据科学面试指南 - 第一部分：结构
 
-+   [数据科学面试指南 - 第 2 部分：面试资源](/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   数据科学面试指南 - 第二部分：面试资源
 
 **[尼莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由技术写作人。她特别关注提供数据科学职业建议或教程以及数据科学相关的理论知识。她还希望探索人工智能如何/能够促进人类生命的延续。作为一个热心的学习者，她希望拓宽技术知识和写作技能，同时帮助指导他人。
 

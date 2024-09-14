@@ -1,8 +1,8 @@
-# 开始使用语言模型的5个技巧
+# 开始使用语言模型的 5 个技巧
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-getting-started-with-language-models](https://www.kdnuggets.com/5-tips-for-getting-started-with-language-models)
+> 原文：[`www.kdnuggets.com/5-tips-for-getting-started-with-language-models`](https://www.kdnuggets.com/5-tips-for-getting-started-with-language-models)
 
-![语言模型像一个知识渊博的图书馆员](../Images/70cf3580d51789211cc7248de79354eb.png)
+![语言模型像一个知识渊博的图书馆员](img/70cf3580d51789211cc7248de79354eb.png)
 
 语言模型（LMs）无疑革新了自然语言处理（NLP）和人工智能（AI）领域，推动了对文本理解和生成的重大进展。对于那些希望进入这一迷人领域并且不确定从何开始的人，这份清单涵盖了结合理论基础与实践操作的五个关键技巧，帮助你在开发和利用语言模型方面打下坚实的基础。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 +   **嵌入**：用于文本的数值表示，便于其计算处理。
 
-+   **Transformer架构**：这种强大的架构结合了深度神经网络堆叠、嵌入处理和创新的**注意机制**，是今天几乎所有最先进的语言模型的基础。
++   **Transformer 架构**：这种强大的架构结合了深度神经网络堆叠、嵌入处理和创新的**注意机制**，是今天几乎所有最先进的语言模型的基础。
 
 ## 2\. 熟悉相关工具和库
 

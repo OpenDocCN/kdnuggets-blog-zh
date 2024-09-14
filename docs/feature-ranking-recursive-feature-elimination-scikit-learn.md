@@ -1,8 +1,8 @@
 # 使用 Scikit-Learn 进行特征排名和递归特征消除
 
-> 原文：[https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html](https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html`](https://www.kdnuggets.com/2020/10/feature-ranking-recursive-feature-elimination-scikit-learn.html)
 
-[评论](#comments)![图示](../Images/95584b7d1e39d41ec7aaa93bdb355848.png)
+评论![图示](img/95584b7d1e39d41ec7aaa93bdb355848.png)
 
 [照片由 Element5 Digital 提供，来源于 Unsplash](https://unsplash.com/photos/LTyDj7u_TU4)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 部门
 
 * * *
 
@@ -46,13 +46,13 @@ Scikit-learn 使得通过 `sklearn.feature_selection.**RFE**` 类实现递归特
 
 ### 应用
 
-如前所述，我们需要使用一个提供`feature_importance_s`属性或`coeff_`属性的估算器。让我们通过一个快速示例来演示。数据集中有13个特征——我们将致力于获取最佳特征数量。
+如前所述，我们需要使用一个提供`feature_importance_s`属性或`coeff_`属性的估算器。让我们通过一个快速示例来演示。数据集中有 13 个特征——我们将致力于获取最佳特征数量。
 
 ```py
 import pandas as pddf = pd.read_csv(‘heart.csv’)df.head()
 ```
 
-![图像](../Images/209209c877a917a2b8030c25653e1f1d.png)
+![图像](img/209209c877a917a2b8030c25653e1f1d.png)
 
 让我们获取`X`和`y`特征。
 
@@ -89,7 +89,7 @@ import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
 ```
 
-第一步是创建一个`RFE`类的实例，并指定估算器和您希望选择的特征数量。在这个例子中，我们选择6个特征：
+第一步是创建一个`RFE`类的实例，并指定估算器和您希望选择的特征数量。在这个例子中，我们选择 6 个特征：
 
 ```py
 rfe = RFE(estimator=GradientBoostingClassifier(), n_features_to_select=6)
@@ -103,7 +103,7 @@ model = GradientBoostingClassifier()
 
 我们将使用`Pipeline`来转换数据。在`Pipeline`中，我们指定`rfe`作为特征选择步骤，并指定在下一步骤中将使用的模型。
 
-然后我们指定一个`RepeatedStratifiedKFold`，它有10个拆分和5次重复。分层K折确保每个折叠中每个类的样本数量得到良好平衡。`RepeatedStratifiedKFold`将分层K折重复指定次数，每次重复时随机化不同。
+然后我们指定一个`RepeatedStratifiedKFold`，它有 10 个拆分和 5 次重复。分层 K 折确保每个折叠中每个类的样本数量得到良好平衡。`RepeatedStratifiedKFold`将分层 K 折重复指定次数，每次重复时随机化不同。
 
 ```py
 pipe = Pipeline([(‘Feature Selection’, rfe), (‘Model’, model)])
@@ -131,7 +131,7 @@ array([ True, False,  True, False,  True, False, False,  True, False,True, False
 pd.DataFrame(rfe.support_,index=X.columns,columns=[‘Rank’])
 ```
 
-![图像](../Images/91d6aa62aa3531efcd67be1b1099da9d.png)
+![图像](img/91d6aa62aa3531efcd67be1b1099da9d.png)
 
 我们还可以检查相对排名。
 
@@ -139,7 +139,7 @@ pd.DataFrame(rfe.support_,index=X.columns,columns=[‘Rank’])
 rf_df = pd.DataFrame(rfe.ranking_,index=X.columns,columns=[‘Rank’]).sort_values(by=’Rank’,ascending=True)rf_df.head()
 ```
 
-![图像](../Images/1b2724743842b9841ead3da64919e86c.png)
+![图像](img/1b2724743842b9841ead3da64919e86c.png)
 
 ### 自动特征选择
 
@@ -167,7 +167,7 @@ rf_df = pd.DataFrame(rfe.ranking_,index=X.columns,columns=[‘Rank’]).sort_val
 from sklearn.feature_selection import RFECVrfecv = RFECV(estimator=GradientBoostingClassifier())
 ```
 
-下一步是指定管道和cv。在这个管道中，我们使用刚创建的`rfecv`。
+下一步是指定管道和 cv。在这个管道中，我们使用刚创建的`rfecv`。
 
 ```py
 pipeline = Pipeline([(‘Feature Selection’, rfecv), (‘Model’, model)])
@@ -206,7 +206,7 @@ plt.plot(range(1, len(rfecv.grid_scores_) + 1), rfecv.grid_scores_)
 plt.show()
 ```
 
-![图示](../Images/9fe7d440cbcadab2f300a2a7f716b781.png)
+![图示](img/9fe7d440cbcadab2f300a2a7f716b781.png)
 
 特征数量与准确率的图示
 
@@ -218,21 +218,21 @@ plt.show()
 
 特征排名与递归特征消除 - mwitiderrick/Feature-Ranking-with-Recursive-Feature-Elimination
 
-**简介: [Derrick Mwiti](https://derrickmwiti.com/)** 是一名数据分析师、作家和导师。他致力于在每项任务中交付优异的成果，并且是Lapid Leaders Africa的导师。
+**简介: [Derrick Mwiti](https://derrickmwiti.com/)** 是一名数据分析师、作家和导师。他致力于在每项任务中交付优异的成果，并且是 Lapid Leaders Africa 的导师。
 
 [原文](https://heartbeat.fritz.ai/feature-ranking-with-recursive-feature-elimination-3e22db639208)。经许可转载。
 
 **相关：**
 
-+   [我如何将机器学习模型的准确率从80%持续提升到90%以上](/2020/09/improve-machine-learning-models-accuracy.html)
++   我如何将机器学习模型的准确率从 80%持续提升到 90%以上
 
-+   [LightGBM：一种高效的梯度提升决策树](/2020/06/lightgbm-gradient-boosting-decision-tree.html)
++   LightGBM：一种高效的梯度提升决策树
 
-+   [使用CatBoost的快速梯度提升](/2020/10/fast-gradient-boosting-catboost.html)
++   使用 CatBoost 的快速梯度提升
 
 ### 更多相关主题
 
-+   [2022年特征商店峰会：免费的特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [2022 年特征商店峰会：免费的特征工程会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
 +   [特征选择：科学与艺术的交汇点](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
 
@@ -240,6 +240,6 @@ plt.show()
 
 +   [构建可处理的多变量特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
 
-+   [实时AI和机器学习的特征商店](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)
++   [实时 AI 和机器学习的特征商店](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)

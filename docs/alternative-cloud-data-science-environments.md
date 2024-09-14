@@ -1,8 +1,8 @@
 # 替代的云托管数据科学环境
 
-> 原文：[https://www.kdnuggets.com/2019/12/alternative-cloud-data-science-environments.html](https://www.kdnuggets.com/2019/12/alternative-cloud-data-science-environments.html)
+> 原文：[`www.kdnuggets.com/2019/12/alternative-cloud-data-science-environments.html`](https://www.kdnuggets.com/2019/12/alternative-cloud-data-science-environments.html)
 
-[评论](#comments)![figure-name](../Images/ea55d2e5e2142acc01848eba613ed120.png)[来源](https://towardsdatascience.com/how-to-run-jupyter-notebooks-in-the-cloud-6ba14ca164da)
+评论![figure-name](img/ea55d2e5e2142acc01848eba613ed120.png)[来源](https://towardsdatascience.com/how-to-run-jupyter-notebooks-in-the-cloud-6ba14ca164da)
 
 主要云服务提供商如 AWS、GCP 和 Azure 都提供使用 Jupyter 环境的数据科学环境。曾几何时，它们是需要强大计算和存储能力的数据科学家的唯一选择。多年来，新的替代提供商涌现，提供了一种独立的数据科学环境，托管在云端，供数据科学家分析、托管和分享他们的工作。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -22,7 +22,7 @@
 
 ### Matrix DS
 
-![figure-name](../Images/d50fc763179b855c59d43b58df75ee12.png)
+![figure-name](img/d50fc763179b855c59d43b58df75ee12.png)
 
 MatrixDS 提供一个数据科学环境，具有社交网络类型的界面，用于分享工作和接收对工作评价。用户可以轻松地添加其他人加入他们的项目，以便与同事合作。该平台还允许您像 GitHub 一样分叉其他人的项目，并具有私有和公开模式。我们可以直接在平台上上传文件，或从 GitHub、Amazon S3、Dropbox 或 Google Cloud 拉取文件。
 
@@ -38,7 +38,7 @@ MatrixDS 提供一个数据科学环境，具有社交网络类型的界面，�
 
 ### Saturn Cloud
 
-![figure-name](../Images/08407822c87cd84354a11e82a6be0df4.png)
+![figure-name](img/08407822c87cd84354a11e82a6be0df4.png)
 
 Saturn Cloud 是一个相对较新的服务，由[Hugo Shi](https://www.linkedin.com/in/hugo-shi/)于 2018 年共同创办，他也是 Anaconda 的共同创始人。Saturn Cloud 旨在成为一个平台，使我们可以成为数据科学家，而他们则可以成为数据工程师。他们的目标是为大众提供数据科学的 DevOps 服务，以便我们可以尽可能多地专注于分析阶段。
 
@@ -58,11 +58,11 @@ Saturn Cloud 最大的吸引力之一是其并行处理能力，可以加速任�
 
 **相关：**
 
-+   [2020 年数据科学的 4 大热门趋势](/2019/12/4-hottest-trends-data-science-2020.html)
++   2020 年数据科学的 4 大热门趋势
 
-+   [简便的一键 Jupyter 笔记本](/2019/07/easy-one-click-jupyter-notebooks.html)
++   简便的一键 Jupyter 笔记本
 
-+   [使用 DC/OS 加速企业中的数据科学](/2019/10/dc-os-accelerate-data-science-enterprise.html)
++   使用 DC/OS 加速企业中的数据科学
 
 ### 更多相关话题
 

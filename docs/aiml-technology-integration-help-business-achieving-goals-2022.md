@@ -1,16 +1,16 @@
-# 人工智能/机器学习技术集成将如何帮助企业在2022年实现目标
+# 人工智能/机器学习技术集成将如何帮助企业在 2022 年实现目标
 
-> 原文：[https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)
+> 原文：[`www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html`](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)
 
-**由[苏迪普·斯里瓦斯塔瓦](https://www.linkedin.com/in/sudeep-srivastava/?originalSubdomain=in)提供，Appinventiv首席执行官**
+**由[苏迪普·斯里瓦斯塔瓦](https://www.linkedin.com/in/sudeep-srivastava/?originalSubdomain=in)提供，Appinventiv 首席执行官**
 
-![Image](../Images/2387f4de01fd3c8523b88c1775ab089d.png)
+![Image](img/2387f4de01fd3c8523b88c1775ab089d.png)
 
 我们生活在一个充满颠覆的时代，**人工智能**和机器学习正在改变各个行业。人工智能和机器学习通过帮助组织实现目标、做出关键决策和开发产品与服务，正在改变科技行业。
 
 对于企业而言，销售人工智能帮助代表做出更好的数据驱动决策，以长期业务运作和通过符合最终客户个别需求的定制交易周期来增加收入。机器学习驱动的销售还可以进行超个性化，这是精细调整客户业务周期的重要进展。
 
-当今的企业领导者完全理解人工智能在企业中的相关性和应用。人工智能/机器学习系统在各种行业和部门中有广泛应用，本文强调了人工智能/机器学习将在2022年对小型企业产生影响的主要方式。
+当今的企业领导者完全理解人工智能在企业中的相关性和应用。人工智能/机器学习系统在各种行业和部门中有广泛应用，本文强调了人工智能/机器学习将在 2022 年对小型企业产生影响的主要方式。
 
 ### **超自动化**
 
@@ -26,7 +26,7 @@
 
 企业正在探索新的方法，以便通过人工智能和机器学习使网络安全变得更加自动化和无风险。[人工智能在企业中的集成](https://appinventiv.com/blog/integrating-ai-technologies-in-business/)正在帮助提升云迁移策略，并增强大数据技术的有效性。
 
-根据[市场和市场](https://www.marketsandmarkets.com/Market-Reports/artificial-intelligence-security-market-220634996.html)的报告，到2026年，人工智能和机器学习在网络安全领域的市场预计将达到382亿美元。
+根据[市场和市场](https://www.marketsandmarkets.com/Market-Reports/artificial-intelligence-security-market-220634996.html)的报告，到 2026 年，人工智能和机器学习在网络安全领域的市场预计将达到 382 亿美元。
 
 在网络安全领域，人工智能可以用于数据聚类、分类、处理和过滤。
 
@@ -48,9 +48,9 @@
 
 ### **认知服务**
 
-图像识别（计算机视觉）和自然语言处理是两种可以从机器学习中受益的认知服务。改进的图像识别技术将使企业能够构建更安全、更便捷的身份验证选项，以及支持自动化零售服务（如无人结账）的产品识别。因此，像亚马逊Go这样的新零售体验应运而生。
+图像识别（计算机视觉）和自然语言处理是两种可以从机器学习中受益的认知服务。改进的图像识别技术将使企业能够构建更安全、更便捷的身份验证选项，以及支持自动化零售服务（如无人结账）的产品识别。因此，像亚马逊 Go 这样的新零售体验应运而生。
 
-[机器学习与人工智能整合](/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)在商业中可以轻松满足来自不同地理、文化和民族背景的广泛受众，利用自然语言处理和对机器学习所提供的好处的更深入了解。此外，能够以客户本地语言提供服务或体验，将导致更大的消费者基础与公司互动。
+机器学习与人工智能整合在商业中可以轻松满足来自不同地理、文化和民族背景的广泛受众，利用自然语言处理和对机器学习所提供的好处的更深入了解。此外，能够以客户本地语言提供服务或体验，将导致更大的消费者基础与公司互动。
 
 ### **营销与销售**
 
@@ -72,11 +72,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -86,10 +86,10 @@
 
 +   [人工智能如何改变数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [ETL与ELT：数据集成的对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)
++   [ETL 与 ELT：数据集成的对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)
 
-+   [SQL与数据集成：ETL和ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
++   [SQL 与数据集成：ETL 和 ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
 
 +   [学习现代预测技术以帮助预测未来业务成果](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)
 
-+   [克服多语言语音技术的障碍：前5大挑战及创新解决方案](https://www.kdnuggets.com/2023/08/overcoming-barriers-multilingual-voice-technology-top-5-challenges-innovative-solutions.html)
++   [克服多语言语音技术的障碍：前 5 大挑战及创新解决方案](https://www.kdnuggets.com/2023/08/overcoming-barriers-multilingual-voice-technology-top-5-challenges-innovative-solutions.html)

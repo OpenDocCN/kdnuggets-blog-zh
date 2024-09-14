@@ -1,6 +1,6 @@
 # 使用 SQL 处理时间序列中的缺失值
 
-> 原文：[https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
+> 原文：[`www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html`](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
 
 今天早上我阅读了[Madison Schott](https://medium.com/u/3ed0ce2dcf93?source=post_page-----a910b5f481fe--------------------------------)的[文章](https://medium.com/towards-data-science/optimize-your-sql-code-with-this-window-function-409d3341cb20)，她在其中强调了这个鲜为人知的 SQL 函数`LAST_VALUE`的实用性。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 +   过去 12 小时的温度变化率
 
-![使用 SQL 处理时间序列中的缺失值](../Images/c11c4e344b4169f71568aab552a5e120.png)
+![使用 SQL 处理时间序列中的缺失值](img/c11c4e344b4169f71568aab552a5e120.png)
 
 将对预测模型有用的特征类型的说明
 

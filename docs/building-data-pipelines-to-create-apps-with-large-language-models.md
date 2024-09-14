@@ -1,30 +1,30 @@
 # 构建数据管道以创建大语言模型应用程序
 
-> 原文：[https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)
+> 原文：[`www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models`](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)
 
-![构建数据管道以创建大语言模型应用程序](../Images/a2f12381d3e4354246e2880210d93050.png)
+![构建数据管道以创建大语言模型应用程序](img/a2f12381d3e4354246e2880210d93050.png)
 
-DALL-E 3生成的图像
+DALL-E 3 生成的图像
 
-企业目前追求两种LLM驱动应用程序的方法——**微调**和**检索增强生成（RAG）**。从很高的层面来看，RAG接受一个输入，并根据来源（例如，公司维基）检索一组相关/支持的文档。这些文档与原始输入提示一起被连接作为上下文，输入到LLM模型中，生成最终响应。RAG似乎是将LLM推向市场的最受欢迎的方法，尤其是在[实时处理](https://github.com/pathwaycom/pathway/stargazers)场景中。支持这种方法的LLM架构大多数情况下包括构建有效的数据管道。
+企业目前追求两种 LLM 驱动应用程序的方法——**微调**和**检索增强生成（RAG）**。从很高的层面来看，RAG 接受一个输入，并根据来源（例如，公司维基）检索一组相关/支持的文档。这些文档与原始输入提示一起被连接作为上下文，输入到 LLM 模型中，生成最终响应。RAG 似乎是将 LLM 推向市场的最受欢迎的方法，尤其是在[实时处理](https://github.com/pathwaycom/pathway/stargazers)场景中。支持这种方法的 LLM 架构大多数情况下包括构建有效的数据管道。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
-在这篇文章中，我们将探讨LLM数据管道中的不同阶段，以帮助开发人员实施与其数据配合的生产级系统。跟随我们，了解如何导入、准备、丰富和提供数据，以驱动GenAI应用程序。
+在这篇文章中，我们将探讨 LLM 数据管道中的不同阶段，以帮助开发人员实施与其数据配合的生产级系统。跟随我们，了解如何导入、准备、丰富和提供数据，以驱动 GenAI 应用程序。
 
 # 大语言模型（LLM）管道的不同阶段是什么？
 
-这些是LLM管道的不同阶段：
+这些是 LLM 管道的不同阶段：
 
 非结构化数据的导入
 
@@ -32,15 +32,15 @@ DALL-E 3生成的图像
 
 向量索引（实时同步）
 
-AI查询处理器
+AI 查询处理器
 
-自然语言用户交互（通过聊天或API）
+自然语言用户交互（通过聊天或 API）
 
-![构建数据管道以创建大语言模型应用程序](../Images/ee54eacc09fc15956d2cbff854208344.png)
+![构建数据管道以创建大语言模型应用程序](img/ee54eacc09fc15956d2cbff854208344.png)
 
 ## 非结构化数据的导入
 
-第一步是收集正确的数据，以帮助实现业务目标。如果你正在构建面向消费者的聊天机器人，那么你必须特别注意将使用哪些数据。数据来源可以从公司门户（例如，Sharepoint、Confluent、文档存储）到内部API。理想情况下，你希望从这些来源到索引有一个推送机制，以便你的LLM应用程序能够为最终用户提供最新的信息。
+第一步是收集正确的数据，以帮助实现业务目标。如果你正在构建面向消费者的聊天机器人，那么你必须特别注意将使用哪些数据。数据来源可以从公司门户（例如，Sharepoint、Confluent、文档存储）到内部 API。理想情况下，你希望从这些来源到索引有一个推送机制，以便你的 LLM 应用程序能够为最终用户提供最新的信息。
 
 组织在提取文本数据以进行 LLM 上下文训练时，应实施数据治理政策和协议。组织可以通过审计文档数据来源，列出敏感级别、许可条款和来源来入手。识别需要修订或排除的数据。
 
@@ -72,15 +72,15 @@ AI查询处理器
 
 ## 用户互动
 
-在传统的管道环境中，你将数据推送到数据仓库，分析工具将从仓库中提取报告。在LLM管道中，最终用户界面通常是一个聊天界面，它在最简单的层面上接受用户查询并回应查询。
+在传统的管道环境中，你将数据推送到数据仓库，分析工具将从仓库中提取报告。在 LLM 管道中，最终用户界面通常是一个聊天界面，它在最简单的层面上接受用户查询并回应查询。
 
 # 摘要
 
-这种新型管道的挑战不仅在于获取一个原型，还在于将其投入生产。这时，企业级监控解决方案来跟踪你的管道和向量存储变得非常重要。从结构化和非结构化数据源获取业务数据的能力成为一个重要的架构决策。LLMs代表了自然语言处理的最前沿，构建企业级数据管道以支持LLM驱动的应用程序使你始终处于前沿。
+这种新型管道的挑战不仅在于获取一个原型，还在于将其投入生产。这时，企业级监控解决方案来跟踪你的管道和向量存储变得非常重要。从结构化和非结构化数据源获取业务数据的能力成为一个重要的架构决策。LLMs 代表了自然语言处理的最前沿，构建企业级数据管道以支持 LLM 驱动的应用程序使你始终处于前沿。
 
 这里可以访问一个可用的[实时流处理框架](https://github.com/pathwaycom/pathway)。
 
-**[](https://www.linkedin.com/in/anupsurendran/)**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)**** 是Pathway的产品营销负责人，专注于将AI产品推向市场。他曾与有两个成功退出（SAP和Kroll）的初创公司合作，并喜欢教授他人如何利用AI产品提高组织内的生产力。
+**[](https://www.linkedin.com/in/anupsurendran/)**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)**** 是 Pathway 的产品营销负责人，专注于将 AI 产品推向市场。他曾与有两个成功退出（SAP 和 Kroll）的初创公司合作，并喜欢教授他人如何利用 AI 产品提高组织内的生产力。
 
 ### 更多相关主题
 
@@ -90,7 +90,7 @@ AI查询处理器
 
 +   [了解大型语言模型](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)
 
-+   [来自John Snow Labs的医疗特定大型语言模型介绍](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)
++   [来自 John Snow Labs 的医疗特定大型语言模型介绍](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)
 
 +   [什么是大型语言模型，它们是如何工作的？](https://www.kdnuggets.com/2023/05/large-language-models-work.html)
 

@@ -1,8 +1,8 @@
 # GitHub Copilot：你的 AI 编程助手——究竟有何亮点？
 
-> 原文：[https://www.kdnuggets.com/2021/07/github-copilot-ai-pair-programmer.html](https://www.kdnuggets.com/2021/07/github-copilot-ai-pair-programmer.html)
+> 原文：[`www.kdnuggets.com/2021/07/github-copilot-ai-pair-programmer.html`](https://www.kdnuggets.com/2021/07/github-copilot-ai-pair-programmer.html)
 
-[评论](#comments)
+评论
 
 上周，GitHub 公开发布了 **[Copilot](https://copilot.github.com/)**，这是其“AI 编程助手”的预览版，是一种在 IDE 中提供行或函数建议的代码补全工具。它无疑在编程及其他领域引起了轰动，你可能已经听说过一些关于它的事情。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT。
 
 * * *
 
@@ -32,13 +32,13 @@ Copilot 的一些主要卖点，如 Copilot 网站上的突出介绍所示，包
 
 +   **无烦恼的测试**。测试是任何稳健软件工程项目的核心。导入单元测试包，让 GitHub Copilot 提供与实现代码匹配的测试建议。
 
-+   **显示替代方案**。想要评估几种不同的方法？GitHub Copilot可以为你显示解决方案列表。使用提供的代码，或编辑以满足你的需求。
++   **显示替代方案**。想要评估几种不同的方法？GitHub Copilot 可以为你显示解决方案列表。使用提供的代码，或编辑以满足你的需求。
 
-![Figure](../Images/7b441802bcb88227d4b76e19b1095eb1.png)
+![Figure](img/7b441802bcb88227d4b76e19b1095eb1.png)
 
-Copilot的工作原理 ([source](https://copilot.github.com/))
+Copilot 的工作原理 ([source](https://copilot.github.com/))
 
-这些都是令人印象深刻的用例和主张，并且从提供的示例来看，它们也是令人印象深刻的结果。以下是Copilot将其视为上下文来生成代码的一个示例，由函数名称和详细的文档字符串组合而成：
+这些都是令人印象深刻的用例和主张，并且从提供的示例来看，它们也是令人印象深刻的结果。以下是 Copilot 将其视为上下文来生成代码的一个示例，由函数名称和详细的文档字符串组合而成：
 
 ```py
 import datetime
@@ -54,7 +54,7 @@ def parse_expenses(expenses_string):
     """
 ```
 
-以下是Copilot生成的函数：
+以下是 Copilot 生成的函数：
 
 ```py
     expenses = []
@@ -70,33 +70,33 @@ def parse_expenses(expenses_string):
 
 这确实如描述的那样运作。
 
-我已经申请了Copilot，但截至出版时，尚未获得访问权限。因此，我们目前只能依赖于其他地方的阅读来形成我们的初步印象。
+我已经申请了 Copilot，但截至出版时，尚未获得访问权限。因此，我们目前只能依赖于其他地方的阅读来形成我们的初步印象。
 
-最让我兴奋的是Copilot在“从注释到代码”上下文中的应用，尤其是与函数文档字符串相关的部分。作为一名优秀的程序员，你应该在规划好函数功能并实现之前，为你的函数编写高质量的文档字符串（我当然也是如此！）。借助Copilot，我们应该能够将更多时间投入到规划和文档编写阶段，或许可以跳过实现阶段的初始步骤，专注于之后对生成代码的调整。
+最让我兴奋的是 Copilot 在“从注释到代码”上下文中的应用，尤其是与函数文档字符串相关的部分。作为一名优秀的程序员，你应该在规划好函数功能并实现之前，为你的函数编写高质量的文档字符串（我当然也是如此！）。借助 Copilot，我们应该能够将更多时间投入到规划和文档编写阶段，或许可以跳过实现阶段的初始步骤，专注于之后对生成代码的调整。
 
-这里是另一个简单却强大的例子，一个注释变成代码块的示例（来自[GitHub文档中对Copilot的分析](https://docs.github.com/en/github/copilot/research-recitation)，我鼓励你阅读）：
+这里是另一个简单却强大的例子，一个注释变成代码块的示例（来自[GitHub 文档中对 Copilot 的分析](https://docs.github.com/en/github/copilot/research-recitation)，我鼓励你阅读）：
 
-![Image](../Images/1a0ab0a2b1827cc6ff857d8bf4204d3a.png)
+![Image](img/1a0ab0a2b1827cc6ff857d8bf4204d3a.png)
 
-我最近写了[一篇关于数据科学家如何组织代码的文章](/2021/06/managing-reusable-python-code-data-scientist.html)，但我担心它可能很快需要更新，因为我预计Copilot可能会在某种程度上改变我写代码的方式。
+我最近写了一篇关于数据科学家如何组织代码的文章，但我担心它可能很快需要更新，因为我预计 Copilot 可能会在某种程度上改变我写代码的方式。
 
-Copilot页面上还有一些推荐信，来自已经使用该系统一段时间的GitHub和OpenAI开发人员，等等。这里有来自你可能听说过的人的强烈推荐：
+Copilot 页面上还有一些推荐信，来自已经使用该系统一段时间的 GitHub 和 OpenAI 开发人员，等等。这里有来自你可能听说过的人的强烈推荐：
 
-> 在第一天，GitHub Copilot已经教会了我Javascript对象比较的细微差别，对我们的数据库架构的熟悉程度和我一样。这是我见过的最令人震惊的机器学习应用。
+> 在第一天，GitHub Copilot 已经教会了我 Javascript 对象比较的细微差别，对我们的数据库架构的熟悉程度和我一样。这是我见过的最令人震惊的机器学习应用。
 > 
 > — Mike Krieger // Instagram 联合创始人
 
-目前来看，Copilot似乎是机器学习的一个非常令人印象深刻的应用。更值得注意的是，它不是理论上的或不切实际的；Copilot立即有用，并有望对编码方式产生实际影响。
+目前来看，Copilot 似乎是机器学习的一个非常令人印象深刻的应用。更值得注意的是，它不是理论上的或不切实际的；Copilot 立即有用，并有望对编码方式产生实际影响。
 
-相信我，当我说我真的很期待使用Copilot时，我是认真的，并承诺在使用后会分享一些来自我亲身体验的观察。
+相信我，当我说我真的很期待使用 Copilot 时，我是认真的，并承诺在使用后会分享一些来自我亲身体验的观察。
 
 **相关**：
 
-+   [作为数据科学家，如何管理你的可重用 Python 代码](/2021/06/managing-reusable-python-code-data-scientist.html)
++   作为数据科学家，如何管理你的可重用 Python 代码
 
-+   [数据科学家，你需要知道如何编码](/2021/06/data-scientists-need-know-code.html)
++   数据科学家，你需要知道如何编码
 
-+   [用 Python 自动化的 5 个任务](/2021/06/5-tasks-automate-python.html)
++   用 Python 自动化的 5 个任务
 
 ### 更多相关主题
 

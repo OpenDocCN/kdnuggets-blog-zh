@@ -1,47 +1,47 @@
-# FastAPI教程：用Python在几分钟内构建API
+# FastAPI 教程：用 Python 在几分钟内构建 API
 
-> 原文：[https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
+> 原文：[`www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes`](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
 
-![bala-fastapi](../Images/338920712642879f094fe7e242b95cdc.png)
+![bala-fastapi](img/338920712642879f094fe7e242b95cdc.png)
 
 图片来源：作者
 
-FastAPI是一个流行的用于构建Python API的Web框架。它非常简单易学，并受到开发者的喜爱。
+FastAPI 是一个流行的用于构建 Python API 的 Web 框架。它非常简单易学，并受到开发者的喜爱。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-FastAPI利用了Python的类型提示，并基于Pydantic。这使得定义数据模型和请求/响应模式变得简单。框架会自动根据这些模式验证请求数据，从而减少潜在错误。它还原生支持异步端点，使得构建能够高效处理I/O绑定操作的高性能API更为简便。
+FastAPI 利用了 Python 的类型提示，并基于 Pydantic。这使得定义数据模型和请求/响应模式变得简单。框架会自动根据这些模式验证请求数据，从而减少潜在错误。它还原生支持异步端点，使得构建能够高效处理 I/O 绑定操作的高性能 API 更为简便。
 
-本教程将教你如何使用FastAPI构建你的第一个API。从设置开发环境到为一个简单的机器学习应用构建API，本教程将带你完成所有步骤：定义数据模型、API端点、处理请求等。通过本教程，你将对如何使用FastAPI快速高效地构建API有一个良好的理解。那么，让我们开始吧。
+本教程将教你如何使用 FastAPI 构建你的第一个 API。从设置开发环境到为一个简单的机器学习应用构建 API，本教程将带你完成所有步骤：定义数据模型、API 端点、处理请求等。通过本教程，你将对如何使用 FastAPI 快速高效地构建 API 有一个良好的理解。那么，让我们开始吧。
 
 ## 第一步：设置环境
 
-FastAPI需要Python 3.7或更高版本。所以请确保你安装了最新版本的Python。在项目目录中，创建并激活一个专门的虚拟环境：
+FastAPI 需要 Python 3.7 或更高版本。所以请确保你安装了最新版本的 Python。在项目目录中，创建并激活一个专门的虚拟环境：
 
 ```py
 $ python3 -m venv v1
 $ source v1/bin/activate 
 ```
 
-上述激活虚拟环境的命令适用于Linux或MacOS。如果你是Windows用户，[查看文档](https://docs.python.org/3/library/venv.html)来创建和激活虚拟环境。
+上述激活虚拟环境的命令适用于 Linux 或 MacOS。如果你是 Windows 用户，[查看文档](https://docs.python.org/3/library/venv.html)来创建和激活虚拟环境。
 
-接下来，安装所需的包。你可以使用pip安装FastAPI和uvicorn：
+接下来，安装所需的包。你可以使用 pip 安装 FastAPI 和 uvicorn：
 
 ```py
 $ pip3 install fastapi uvicorn 
 ```
 
-这将安装FastAPI及所有必需的依赖项以及uvicorn，这是一种我们将用来运行和测试构建的API的服务器。由于我们将使用scikit-learn构建一个简单的机器学习模型，也请在你的项目环境中安装它：
+这将安装 FastAPI 及所有必需的依赖项以及 uvicorn，这是一种我们将用来运行和测试构建的 API 的服务器。由于我们将使用 scikit-learn 构建一个简单的机器学习模型，也请在你的项目环境中安装它：
 
 ```py
 $ pip3 install scikit-learn
@@ -49,9 +49,9 @@ $ pip3 install scikit-learn
 
 安装完成后，我们可以开始编码了！你可以在[GitHub](https://github.com/balapriyac/data-science-tutorials/tree/main/fastapi)上找到代码。
 
-## 第2步：创建一个FastAPI应用
+## 第 2 步：创建一个 FastAPI 应用
 
-在项目目录中创建一个main.py文件。第一步是像下面这样创建一个FastAPI应用实例：
+在项目目录中创建一个 main.py 文件。第一步是像下面这样创建一个 FastAPI 应用实例：
 
 ```py
 # Create a FastAPI app
@@ -62,13 +62,13 @@ from fastapi import FastAPI
 app = FastAPI() 
 ```
 
-Iris数据集是你在开始数据科学时使用的玩具数据集之一。它包含150条数据记录，4个特征和一个目标标签（鸢尾花的种类）。为了简单起见，让我们创建一个API来预测鸢尾花的种类。
+Iris 数据集是你在开始数据科学时使用的玩具数据集之一。它包含 150 条数据记录，4 个特征和一个目标标签（鸢尾花的种类）。为了简单起见，让我们创建一个 API 来预测鸢尾花的种类。
 
-在接下来的步骤中，我们将构建一个逻辑回归模型并创建一个用于预测的API端点。完成模型构建和`/predict/` API端点定义后，你应该能够向API发送包含输入特征的POST请求，并接收到预测的种类作为响应。
+在接下来的步骤中，我们将构建一个逻辑回归模型并创建一个用于预测的 API 端点。完成模型构建和`/predict/` API 端点定义后，你应该能够向 API 发送包含输入特征的 POST 请求，并接收到预测的种类作为响应。
 
-![fastapi-1](../Images/1be33281e29dd4523fab3c831c384951.png)
+![fastapi-1](img/1be33281e29dd4523fab3c831c384951.png)
 
-Iris预测API | 作者提供的图片
+Iris 预测 API | 作者提供的图片
 
 为了更有帮助，我们还定义一个根端点，它返回我们正在构建的应用的描述。为此，我们定义`get_app_description`函数，并使用`@app`装饰器创建根端点，如下所示：
 
@@ -88,21 +88,21 @@ async def root():
 	return {"message": get_app_description()} 
 ```
 
-向根端点发送GET请求会返回描述信息。
+向根端点发送 GET 请求会返回描述信息。
 
-## 第3步：构建逻辑回归分类器
+## 第 3 步：构建逻辑回归分类器
 
-到目前为止，我们已经实例化了一个FastAPI应用，并定义了根端点。现在是时候进行以下操作：
+到目前为止，我们已经实例化了一个 FastAPI 应用，并定义了根端点。现在是时候进行以下操作：
 
-+   构建一个机器学习模型。我们将使用逻辑回归分类器。如果你想了解更多关于逻辑回归的知识，请阅读[《构建预测模型：Python中的逻辑回归》](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)。
++   构建一个机器学习模型。我们将使用逻辑回归分类器。如果你想了解更多关于逻辑回归的知识，请阅读[《构建预测模型：Python 中的逻辑回归》](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)。
 
-+   定义一个预测函数，该函数接收输入特征，并使用机器学习模型来预测种类（setosa、versicolor或virginica）。
++   定义一个预测函数，该函数接收输入特征，并使用机器学习模型来预测种类（setosa、versicolor 或 virginica）。
 
-![fastapi-2](../Images/879cfea338f0d2cf05edc3c91a931725.png)
+![fastapi-2](img/879cfea338f0d2cf05edc3c91a931725.png)
 
 逻辑回归分类器 | 作者提供的图片
 
-我们从scikit-learn中构建了一个简单的逻辑回归分类器，并定义了如图所示的`predict_species`函数：
+我们从 scikit-learn 中构建了一个简单的逻辑回归分类器，并定义了如图所示的`predict_species`函数：
 
 ```py
 # Build a logistic regression classifier
@@ -124,9 +124,9 @@ def predict_species(sepal_length, sepal_width, petal_length, petal_width):
 	return iris.target_names[prediction[0]] 
 ```
 
-## 第4步：定义Pydantic模型以输入数据
+## 第 4 步：定义 Pydantic 模型以输入数据
 
-接下来，我们应该对POST请求中发送的数据进行建模。这里的输入特征是花萼和花瓣的长度及宽度——都是浮点值。为了建模，我们创建了一个继承自Pydantic `BaseModel`类的`IrisData`类，如下所示：
+接下来，我们应该对 POST 请求中发送的数据进行建模。这里的输入特征是花萼和花瓣的长度及宽度——都是浮点值。为了建模，我们创建了一个继承自 Pydantic `BaseModel`类的`IrisData`类，如下所示：
 
 ```py
 # Define the Pydantic model for your input data
@@ -139,11 +139,11 @@ class IrisData(BaseModel):
 	petal_width: float 
 ```
 
-如果你需要一个关于使用Pydantic进行数据建模和验证的快速教程，请阅读[《Pydantic教程：Python中的数据验证变得超级简单》](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)。
+如果你需要一个关于使用 Pydantic 进行数据建模和验证的快速教程，请阅读[《Pydantic 教程：Python 中的数据验证变得超级简单》](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)。
 
-## 第5步：创建API端点
+## 第 5 步：创建 API 端点
 
-现在我们已经构建了分类器，并定义好了`predict_species`函数，我们可以为预测创建API端点。如前所述，我们可以使用`@app`装饰器来定义接受POST请求并返回预测种类的`/predict/`端点：
+现在我们已经构建了分类器，并定义好了`predict_species`函数，我们可以为预测创建 API 端点。如前所述，我们可以使用`@app`装饰器来定义接受 POST 请求并返回预测种类的`/predict/`端点：
 
 ```py
 # Create API endpoint
@@ -155,7 +155,7 @@ async def predict_species_api(iris_data: IrisData):
 
 现在是运行应用的时候了！
 
-## 第6步：运行应用
+## 第 6 步：运行应用
 
 你可以使用以下命令运行应用：
 
@@ -163,9 +163,9 @@ async def predict_species_api(iris_data: IrisData):
 $ uvicorn main:app --reload
 ```
 
-这里`main`是模块的名称，`app`是FastAPI实例。`--reload`标志确保如果源代码有任何更改，应用会重新加载。
+这里`main`是模块的名称，`app`是 FastAPI 实例。`--reload`标志确保如果源代码有任何更改，应用会重新加载。
 
-运行命令后，你应该会看到类似的INFO消息：
+运行命令后，你应该会看到类似的 INFO 消息：
 
 ```py
 INFO: 	Will watch for changes in these directories: ['/home/balapriya/fastapi-tutorial']
@@ -180,7 +180,7 @@ INFO: 	Application startup complete.
 
 如果你访问“http://127.0.0.1:8000”（本地主机），你应该能看到应用程序描述：
 
-![fastapi-3](../Images/f052651c34e8c6995c37c60dcedafd43.png)
+![fastapi-3](img/f052651c34e8c6995c37c60dcedafd43.png)
 
 应用程序运行在本地主机
 
@@ -224,6 +224,6 @@ curl -X 'POST' \
 
 +   [使用 Hugging Face 和 Gradio 在 5 分钟内构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
 
-+   [KDnuggets 新闻 2022年3月9日：5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
 
 +   [OpenAI 的新 ChatGPT 和 Whisper API](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)

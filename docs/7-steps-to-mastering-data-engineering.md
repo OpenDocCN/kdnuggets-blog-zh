@@ -1,8 +1,8 @@
-# 掌握数据工程的7个步骤
+# 掌握数据工程的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-mastering-data-engineering](https://www.kdnuggets.com/7-steps-to-mastering-data-engineering)
+> 原文：[`www.kdnuggets.com/7-steps-to-mastering-data-engineering`](https://www.kdnuggets.com/7-steps-to-mastering-data-engineering)
 
-![掌握数据工程的7个步骤](../Images/94e0d15896e86bdb38d3943442234c0e.png)
+![掌握数据工程的 7 个步骤](img/94e0d15896e86bdb38d3943442234c0e.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -24,15 +24,15 @@
 
 容器化允许开发人员将他们的应用程序和依赖项打包成轻量级的、可移植的容器，这些容器可以在不同的环境中一致地运行。另一方面，基础设施即代码是通过代码管理和配置基础设施的实践，使开发人员能够定义、版本化和自动化云基础设施。
 
-在第一步中，你将了解SQL语法、Docker容器和Postgres数据库的基本知识。你将学习如何在本地使用Docker启动数据库服务器，以及如何在Docker中创建数据管道。此外，你将了解Google Cloud Provider (GCP)和Terraform。Terraform对于你在云端部署工具、数据库和框架特别有用。
+在第一步中，你将了解 SQL 语法、Docker 容器和 Postgres 数据库的基本知识。你将学习如何在本地使用 Docker 启动数据库服务器，以及如何在 Docker 中创建数据管道。此外，你将了解 Google Cloud Provider (GCP)和 Terraform。Terraform 对于你在云端部署工具、数据库和框架特别有用。
 
 # 2\. 工作流编排
 
 工作流编排管理和自动化数据流经不同处理阶段的过程，如数据摄取、清理、转换和分析。这是一种更高效、更可靠和可扩展的工作方式。
 
-在第二步中，你将学习关于数据编排工具的信息，例如Airflow、Mage或Prefect。它们都是开源的，具有观察、管理、部署和执行数据管道的多个重要功能。你将学习如何使用Docker设置Prefect，并利用Postgres、Google Cloud Storage (GCS)和BigQuery APIs构建ETL管道。
+在第二步中，你将学习关于数据编排工具的信息，例如 Airflow、Mage 或 Prefect。它们都是开源的，具有观察、管理、部署和执行数据管道的多个重要功能。你将学习如何使用 Docker 设置 Prefect，并利用 Postgres、Google Cloud Storage (GCS)和 BigQuery APIs 构建 ETL 管道。
 
-查看[5种Airflow替代方案](/5-airflow-alternatives-for-data-orchestration)，选择适合你的工具。
+查看 5 种 Airflow 替代方案，选择适合你的工具。
 
 # 3\. 数据仓储
 
@@ -68,7 +68,7 @@
 
 # 最后的思考
 
-本指南中提到的所有步骤都可以在 [数据工程 ZoomCamp](/the-only-free-course-you-need-to-become-a-professional-data-engineer) 中找到。此 ZoomCamp 包含多个模块，每个模块都包括教程、视频、问题和项目，以帮助你学习和构建数据管道。
+本指南中提到的所有步骤都可以在 数据工程 ZoomCamp 中找到。此 ZoomCamp 包含多个模块，每个模块都包括教程、视频、问题和项目，以帮助你学习和构建数据管道。
 
 在这个数据工程路线图中，我们学习了学习、构建和执行数据管道以进行数据处理、分析和建模的各种步骤。我们还了解了云应用程序和工具以及本地工具。你可以选择在本地构建所有内容，也可以使用云以方便操作。我建议使用云，因为大多数公司倾向于此，并希望你在如 GCP 等云平台上获得经验。
 
@@ -82,7 +82,7 @@
 
 +   [掌握数据宇宙：蓬勃发展数据科学职业的关键步骤](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的 7 个步骤](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤](https://www.kdnuggets.com/2022/n05.html)
 
 +   [掌握数据科学 SQL 的 7 个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
 

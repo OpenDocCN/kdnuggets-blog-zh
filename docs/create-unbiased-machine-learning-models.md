@@ -1,12 +1,12 @@
 # 如何创建无偏机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2021/07/create-unbiased-machine-learning-models.html](https://www.kdnuggets.com/2021/07/create-unbiased-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2021/07/create-unbiased-machine-learning-models.html`](https://www.kdnuggets.com/2021/07/create-unbiased-machine-learning-models.html)
 
-[评论](#comments)
+评论
 
 **作者：Philip Tannor，[Deepchecks](https://deepchecks.com/)的联合创始人兼首席执行官**。
 
-![图](../Images/f109257a81bf17a819ae1929ce210afe.png)
+![图](img/f109257a81bf17a819ae1929ce210afe.png)
 
 *图片由* [*Clker-Free-Vector-Images*](https://pixabay.com/users/clker-free-vector-images-3736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=307248) *提供，来源于* [*Pixabay*](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=307248)
 
@@ -14,21 +14,21 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
-AI系统在许多行业中变得越来越流行和核心。它们决定谁可能从银行获得贷款，个人是否应被定罪，甚至在不久的将来，我们可能会将生命托付给使用自动驾驶系统等技术。因此，迫切需要机制来驾驭和控制这些系统，以确保它们按预期行为。
+AI 系统在许多行业中变得越来越流行和核心。它们决定谁可能从银行获得贷款，个人是否应被定罪，甚至在不久的将来，我们可能会将生命托付给使用自动驾驶系统等技术。因此，迫切需要机制来驾驭和控制这些系统，以确保它们按预期行为。
 
 一个近年来越来越受到关注的重要问题是*公平性*。虽然通常机器学习模型的评估基于准确性等指标，但公平性的观点是，我们必须确保我们的模型在性别、种族及其他选定属性上不带有偏见。
 
-一个经典的关于AI系统种族偏见的例子是COMPAS软件系统，该系统由Northpointe开发，旨在协助美国法院评估被告成为再犯的可能性。Propublica发布了一篇[文章](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)，称该系统对黑人有偏见，给他们更高的风险评级。
+一个经典的关于 AI 系统种族偏见的例子是 COMPAS 软件系统，该系统由 Northpointe 开发，旨在协助美国法院评估被告成为再犯的可能性。Propublica 发布了一篇[文章](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)，称该系统对黑人有偏见，给他们更高的风险评级。
 
-![图](../Images/286f789c76493394720b3c8cbe64ca84.png)
+![图](img/286f789c76493394720b3c8cbe64ca84.png)
 
 *机器学习系统对非裔美国人的偏见？ (*[*来源*](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing)*)*
 
@@ -44,7 +44,7 @@ AI系统在许多行业中变得越来越流行和核心。它们决定谁可能
 
 记住，机器学习模型的好坏取决于其训练数据，因此如果训练数据包含偏见，我们可以预期我们的模型也会模仿这些偏见。在自然语言处理（NLP）领域的词嵌入（word embeddings）中可以找到一些具有代表性的例子。词嵌入是学习得到的词的稠密向量表示，旨在捕捉一个词的语义信息，然后可以将这些信息输入到机器学习模型中用于不同的下游任务。因此，具有相似含义的词的嵌入预计应该是“接近”的。
 
-![图示](../Images/226ab20e7f0444a5cf42625469fff5d4.png)
+![图示](img/226ab20e7f0444a5cf42625469fff5d4.png)
 
 *词嵌入可以捕捉词的语义含义。 (*[*来源*](https://www.ibm.com/blogs/research/2018/11/word-movers-embedding/)*)*
 
@@ -66,7 +66,7 @@ Output: nurse
 
 当前，互联网上使用最多的语言是[英语](https://www.statista.com/statistics/262946/share-of-the-most-common-languages-on-the-internet/#:~:text=As%20of%20January%202020%2C%20English,percent%20of%20global%20internet%20users.)。数据科学和机器学习领域的大部分研究和产品也是用英语进行的。因此，许多用于创建大型语言模型的“自然”数据集往往反映了美国的思想和文化，并且可能对其他国籍和文化存在偏见。
 
-![图示](../Images/3a6bd2ee7625df70901f1fe33257b7ca.png)
+![图示](img/3a6bd2ee7625df70901f1fe33257b7ca.png)
 
 *文化偏见：GPT-2 需要积极引导才能在给定的提示下生成正面的段落。 (*[*来源*](https://blog.einstein.ai/gedi/)*)*
 
@@ -74,9 +74,9 @@ Output: nurse
 
 数据中的一些偏见可能是在数据集构建过程中无意中产生的。在构建和评估过程中，人们更可能注意到他们熟悉的细节。一个众所周知的图像分类错误例子是谷歌照片 [将黑人误分类为猩猩](https://www.wsj.com/articles/BL-DGB-42522)。虽然这种单一的误分类可能对整体评估指标没有强烈影响，但这是一个敏感问题，并可能对产品及客户对产品的看法产生重大影响。
 
-![图示](../Images/05cedf7c97a4e086de2b0fa7ba670e26.png)
+![图示](img/05cedf7c97a4e086de2b0fa7ba670e26.png)
 
-*种族主义AI算法？将黑人误分类为猩猩。(*[*source*](https://www.wsj.com/articles/BL-DGB-42522)*)*
+*种族主义 AI 算法？将黑人误分类为猩猩。(*[*source*](https://www.wsj.com/articles/BL-DGB-42522)*)*
 
 总之，没有哪个数据集是完美的。无论数据集是手工制作的还是“自然”的，它都可能反映其创建者的偏见，因此结果模型也会包含相同的偏见。
 
@@ -92,7 +92,7 @@ Output: nurse
 
 [创建无偏见的机器学习模型](https://deepchecks.com/how-to-create-unbiased-ml-models/)的一个优雅方法是使用对抗去偏见。在这种方法中，我们同时训练两个模型。对抗模型被训练以预测受保护的属性，而预测器被训练以在原始任务上取得成功，同时使对抗模型失败，从而最小化偏见。
 
-![图示](../Images/ac04940d304eced71c619b269d1c2468.png)
+![图示](img/ac04940d304eced71c619b269d1c2468.png)
 
 *对抗去偏见的示意图：预测器损失函数由两个部分组成，即预测器损失和对抗损失。(*[*source*](https://arxiv.org/pdf/1801.07593.pdf)*)*
 
@@ -102,15 +102,15 @@ Output: nurse
 
 在后处理阶段，我们获得模型的预测结果作为概率，但我们仍然可以根据这些输出选择如何行动，例如，我们可以为不同的群体调整决策阈值，以满足我们的公平性要求。
 
-确保模型公平性的一种后处理方法是查看所有组的ROC曲线下的交集。这个交集代表了所有类别可以同时实现的TPR和FPR。请注意，为了满足所有类别的TPR和FPR相等的期望结果，可能需要故意选择在某些类别上得到较差的结果。
+确保模型公平性的一种后处理方法是查看所有组的 ROC 曲线下的交集。这个交集代表了所有类别可以同时实现的 TPR 和 FPR。请注意，为了满足所有类别的 TPR 和 FPR 相等的期望结果，可能需要故意选择在某些类别上得到较差的结果。
 
-![图示](../Images/1bd7e256c87e70aaceaf57dc23972269.png)
+![图示](img/1bd7e256c87e70aaceaf57dc23972269.png)
 
 *彩色区域是实现公平性分离标准时所能达到的范围。 (*[*来源*](https://fairmlbook.org/classification.html)*)*
 
-另一种在后处理阶段去偏差的方法涉及*独立校准*每个类别的预测。*校准*是一种确保分类模型的概率输出确实反映正标签匹配比例的方法。形式上，如果对于每个r值：
+另一种在后处理阶段去偏差的方法涉及*独立校准*每个类别的预测。*校准*是一种确保分类模型的概率输出确实反映正标签匹配比例的方法。形式上，如果对于每个 r 值：
 
-![方程](../Images/4261c701bf4517a4b0357b5fd7d1157d.png)
+![方程](img/4261c701bf4517a4b0357b5fd7d1157d.png)
 
 当模型经过适当校准后，不同保护属性值的误差率会相似。
 
@@ -136,11 +136,11 @@ Ninareh Mehrabi, Fred Morstatter, Nripsuta Saxena, Kristina Lerman, & Aram Galst
 
 **相关内容：**
 
-+   [保证隐私所需的数据保护技术](/2020/10/data-protection-techniques-guarantee-privacy.html)
++   保证隐私所需的数据保护技术
 
-+   [什么使人工智能值得信赖？](/2021/05/what-makes-ai-trustworthy.html)
++   什么使人工智能值得信赖？
 
-+   [人工智能中的伦理、公平性与偏差](/2021/06/ethics-fairness-ai.html)
++   人工智能中的伦理、公平性与偏差
 
 ### 更多相关内容
 

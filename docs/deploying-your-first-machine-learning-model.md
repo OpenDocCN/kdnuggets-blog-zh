@@ -1,8 +1,8 @@
 # 部署您的第一个机器学习模型
 
-> 原文：[https://www.kdnuggets.com/deploying-your-first-machine-learning-model](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)
+> 原文：[`www.kdnuggets.com/deploying-your-first-machine-learning-model`](https://www.kdnuggets.com/deploying-your-first-machine-learning-model)
 
-![部署您的第一个机器学习模型](../Images/30b7a469b92a895ba2fc5d6b23c675f2.png)
+![部署您的第一个机器学习模型](img/30b7a469b92a895ba2fc5d6b23c675f2.png)
 
 图片来源：[Lucas Fonseca](https://www.pexels.com/photo/man-in-front-of-monitor-2239655/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -63,7 +63,7 @@ glass_df.head(3)
 
 我们的数据集
 
-![部署您的第一个机器学习模型](../Images/48a488fe2a451ee7913f8bc95955424f.png)
+![部署您的第一个机器学习模型](img/48a488fe2a451ee7913f8bc95955424f.png)
 
 之后，我们使用数据集选择了模型特征和目标变量，并将其拆分为训练集和测试集。
 
@@ -142,7 +142,7 @@ sio.dump(pipe, "glass_pipeline.skops")
 sio.load("glass_pipeline.skops", trusted=True)
 ```
 
-![部署你的第一个机器学习模型](../Images/9bd13a9b738b01b8dbfc59c5bd4e0e51.png)
+![部署你的第一个机器学习模型](img/9bd13a9b738b01b8dbfc59c5bd4e0e51.png)
 
 # 构建 Web 应用
 
@@ -215,13 +215,13 @@ gr.Interface(
 
 要创建空间，你需要登录 https://huggingface.co。然后，点击右上角的个人资料图片，选择“+ 新建空间”。
 
-![部署你的第一个机器学习模型](../Images/ff769c581fbe825e4ffb1f12c0fd006b.png)
+![部署你的第一个机器学习模型](img/ff769c581fbe825e4ffb1f12c0fd006b.png)
 
 图片来自 HuggingFace
 
 写下你的应用程序名称，选择 SDK，并点击创建空间按钮。
 
-![部署你的第一个机器学习模型](../Images/8b2932f80b48a292ef1a576514707b78.png)
+![部署你的第一个机器学习模型](img/8b2932f80b48a292ef1a576514707b78.png)
 
 图片来自 Spaces
 
@@ -229,25 +229,25 @@ gr.Interface(
 
 在 `requirements.txt` 文件中，你需要添加 skops 和 scikit-learn。
 
-![部署你的第一个机器学习模型](../Images/3b05e80f445851d85eea57ff9e24ee90.png)
+![部署你的第一个机器学习模型](img/3b05e80f445851d85eea57ff9e24ee90.png)
 
 图片来自 Spaces
 
 之后，通过将模型和文件从本地文件夹拖放到空间中来添加它们。然后，提交。
 
-![部署你的第一个机器学习模型](../Images/5b32cd9226dbf2b8dfad02da6aefb072.png)
+![部署你的第一个机器学习模型](img/5b32cd9226dbf2b8dfad02da6aefb072.png)
 
 图片来自 Spaces
 
 安装所需的包和构建容器需要几分钟时间。
 
-![部署你的第一个机器学习模型](../Images/3fae1f801ce4efdcb7902dbda3b5da2c.png)
+![部署你的第一个机器学习模型](img/3fae1f801ce4efdcb7902dbda3b5da2c.png)
 
 图片来自 Spaces
 
 最后，你将获得一个无 bug 的应用程序，你可以与家人和同事分享。你还可以通过点击链接查看实时演示：[玻璃分类](https://huggingface.co/spaces/kingabzpro/glass-classification)。
 
-![部署你的第一个机器学习模型](../Images/cc7b7d686ad60bdae764a2e874241c09.png)
+![部署你的第一个机器学习模型](img/cc7b7d686ad60bdae764a2e874241c09.png)
 
 图片来自 [玻璃分类](https://huggingface.co/spaces/kingabzpro/glass-classification)
 

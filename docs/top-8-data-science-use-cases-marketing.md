@@ -1,22 +1,22 @@
 # 营销中的前 8 大数据科学应用场景
 
-> 原文：[https://www.kdnuggets.com/2019/11/top-8-data-science-use-cases-marketing.html](https://www.kdnuggets.com/2019/11/top-8-data-science-use-cases-marketing.html)
+> 原文：[`www.kdnuggets.com/2019/11/top-8-data-science-use-cases-marketing.html`](https://www.kdnuggets.com/2019/11/top-8-data-science-use-cases-marketing.html)
 
-[评论](#comments)
+评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![图示](../Images/c6119888955ca094eb7213c51c8afa37.png)
+![图示](img/c6119888955ca094eb7213c51c8afa37.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 微细分的应用似乎在营销中成为一种上升趋势。微细分远比传统的细分更加先进。它帮助将人们划分为更精确的类别，特别是在行为意图方面。因此，营销行动可以针对即使是最少数的客户群体的偏好进行定制。
 
-![客户细分](../Images/52da03c743ac68e2aab37ecd58a37774.png)
+![客户细分](img/52da03c743ac68e2aab37ecd58a37774.png)
 
 ### 实时分析
 
@@ -102,7 +102,7 @@
 
 此外，市场篮子分析可以显著提高营销信息的效率。除了营销信息的类型，无论是直接报价、电子邮件、社交媒体、电话还是新闻通讯，您都可以为特定客户提供下一个最佳产品。
 
-![市场篮子分析](../Images/c12c1f3a92282e28073e575754f7a7fa.png)
+![市场篮子分析](img/c12c1f3a92282e28073e575754f7a7fa.png)
 
 ### 营销活动的优化
 
@@ -154,17 +154,17 @@
 
 将数据转化为有意义的见解对于决策至关重要。我们列出的营销领域数据科学应用案例揭示了数据在这一领域的具体应用特征及其可能产生的实际正面效果。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）和数据密集型Web应用程序开发（RESTful APIs、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）和数据密集型 Web 应用程序开发（RESTful APIs、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/top-8-data-science-use-cases-in-marketing/)。经授权转载。
 
 **相关：**
 
-+   [能源和公用事业领域的数据科学十大应用案例](/2019/09/top-10-data-science-use-cases-energy-utilities.html)
++   能源和公用事业领域的数据科学十大应用案例
 
-+   [金融领域的数据科学七大应用案例](/2018/05/top-7-data-science-use-cases-finance.html)
++   金融领域的数据科学七大应用案例
 
-+   [建筑领域的数据科学八大应用案例](/2019/07/top-8-data-science-use-cases-construction.html)
++   建筑领域的数据科学八大应用案例
 
 ### 更多相关话题
 

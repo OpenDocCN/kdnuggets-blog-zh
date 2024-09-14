@@ -1,20 +1,20 @@
-# Scikit-Learn与MLR在机器学习中的对比
+# Scikit-Learn 与 MLR 在机器学习中的对比
 
-> 原文：[https://www.kdnuggets.com/2019/09/scikit-learn-mlr-machine-learning.html](https://www.kdnuggets.com/2019/09/scikit-learn-mlr-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/09/scikit-learn-mlr-machine-learning.html`](https://www.kdnuggets.com/2019/09/scikit-learn-mlr-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/4b0bc0e253bafaade27861da7aedba31.png)
+![](img/4b0bc0e253bafaade27861da7aedba31.png)
 
-Scikit-Learn以其易于理解的Python用户API而闻名，而MLR成为了流行的Caret包的替代品，提供了更多的算法库和简单的超参数调整方式。这两个包因许多人在分析工作中倾向于使用Python进行机器学习而R用于统计分析而处于竞争状态。
+Scikit-Learn 以其易于理解的 Python 用户 API 而闻名，而 MLR 成为了流行的 Caret 包的替代品，提供了更多的算法库和简单的超参数调整方式。这两个包因许多人在分析工作中倾向于使用 Python 进行机器学习而 R 用于统计分析而处于竞争状态。
 
-使用Python的一个原因可能是当前用于机器学习的R包通过其他包含算法的包提供。这些包通过MLR调用，但仍需额外安装。甚至外部特征选择库也需要，且它们还有其他外部依赖需要满足。
+使用 Python 的一个原因可能是当前用于机器学习的 R 包通过其他包含算法的包提供。这些包通过 MLR 调用，但仍需额外安装。甚至外部特征选择库也需要，且它们还有其他外部依赖需要满足。
 
-Scikit-Learn被称为一个统一的API，提供多个机器学习算法，无需用户调用更多库。
+Scikit-Learn 被称为一个统一的 API，提供多个机器学习算法，无需用户调用更多库。
 
-**这绝不会贬低R。** R在数据科学领域仍然是一个主要组成部分，不论在线调查如何说。任何有统计学或数学背景的人都会知道为什么你应该使用R（即使他们自己不使用，它们也认识到它的吸引力）。
+**这绝不会贬低 R。** R 在数据科学领域仍然是一个主要组成部分，不论在线调查如何说。任何有统计学或数学背景的人都会知道为什么你应该使用 R（即使他们自己不使用，它们也认识到它的吸引力）。
 
-现在我们将查看用户如何通过典型的机器学习工作流。我们将使用Scikit-Learn中的Logistic Regression和MLR中的决策树。
+现在我们将查看用户如何通过典型的机器学习工作流。我们将使用 Scikit-Learn 中的 Logistic Regression 和 MLR 中的决策树。
 
 **创建你的训练和测试数据**
 
@@ -22,7 +22,7 @@ Scikit-Learn被称为一个统一的API，提供多个机器学习算法，无�
 
     +   `x_train, x_test, y_train, y_test = train_test_split(x,y,test_size)`
 
-        这是在Scikit-Learn中分割数据集的最简单方法。test_size用于确定数据的百分比进入测试集。train_test_split将自动在一行代码中创建训练集和测试集。x是特征集，y是目标变量。
+        这是在 Scikit-Learn 中分割数据集的最简单方法。test_size 用于确定数据的百分比进入测试集。train_test_split 将自动在一行代码中创建训练集和测试集。x 是特征集，y 是目标变量。
 
 +   MLR
 
@@ -30,7 +30,7 @@ Scikit-Learn被称为一个统一的API，提供多个机器学习算法，无�
 
     +   `test <- setdiff(1:nrow(train), train)`
 
-    +   MLR没有内置的函数来子集数据集，因此用户需要依赖其他R函数。这是创建80/20训练测试集的一个例子。
+    +   MLR 没有内置的函数来子集数据集，因此用户需要依赖其他 R 函数。这是创建 80/20 训练测试集的一个例子。
 
 **选择算法**
 
@@ -128,7 +128,7 @@ Scikit-learn 将返回一个预测标签的数组，而 MLR 将返回一个预�
 
 分类问题中的阈值是将每个实例分类到预测类别的给定概率。默认阈值通常为 0.5（即 50%）。这是在 Python 和 R 中进行机器学习时的一个主要差异。R 提供了一行代码解决方案来调整阈值以应对类别不平衡。而 Python 没有内置函数来实现这一点，用户需要通过定义自定义脚本/函数来编程操作阈值。
 
-![](../Images/48225c67de6b8769d9300f4c0ff33966.png)
+![](img/48225c67de6b8769d9300f4c0ff33966.png)
 
 一对显示决策阈值的图表。
 
@@ -160,17 +160,17 @@ Scikit-learn 将返回一个预测标签的数组，而 MLR 将返回一个预�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，12月14日：3 个免费机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
 +   [每位机器学习工程师应具备的 5 项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 

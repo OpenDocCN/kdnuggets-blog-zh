@@ -1,8 +1,8 @@
 # 数据科学的十年
 
-> 原文：[https://www.kdnuggets.com/2020/01/decade-data-science.html](https://www.kdnuggets.com/2020/01/decade-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/01/decade-data-science.html`](https://www.kdnuggets.com/2020/01/decade-data-science.html)
 
-[评论](#comments)
+评论
 
 **作者 [Alex Mitrani](https://www.linkedin.com/in/alex-mitrani/)，数据科学家**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 数据科学家在 LinkedIn 的 [2020 美国新兴职位报告](https://business.linkedin.com/content/dam/me/business/en-us/talent-solutions/emerging-jobs-report/Emerging_Jobs_Report_U.S._FINAL.pdf)中排名第三，该领域年增长率为 37%。根据 [Glassdoor 调查](https://www.glassdoor.com/Salaries/entry-level-data-scientist-salary-SRCH_KO0,26.htm) 的 4,354 名受访者数据，入门级数据科学家的起薪为每年 $101,087。这些就业统计数据对从业和有志于成为数据科学家的人员来说应该很有吸引力。
 
-![](../Images/0010f4d7a490f73dcc7ac201c817d20e.png)
+![](img/0010f4d7a490f73dcc7ac201c817d20e.png)
 
 *“计算机和信息研究科学家”中的第 2 页包括数据科学。来源： [**美国劳工统计局**](https://www.bls.gov/ooh/computer-and-information-technology/computer-and-information-research-scientists.htm#tab-6)。*
 
@@ -84,7 +84,7 @@
 
 我使用 [Jupyter Notebooks](https://jupyter.org/) 来构建函数，因为我喜欢在编写 Python 脚本之前测试输出。TQDM 创建了一个可见的状态栏，使我们能够查看循环的进度。
 
-![](../Images/99e2d3389503bc40c5748887f513cd8f.png)
+![](img/99e2d3389503bc40c5748887f513cd8f.png)
 
 *一个在 lambda 函数上迭代 Pandas 数据框的 TQDM 状态栏的示例。*
 
@@ -96,39 +96,39 @@ TQDM 状态栏告诉你函数正在完成哪个迭代、预期的总迭代次数
 
 共享代码和项目的能力在数据科学领域正变得越来越必要。容器化是将软件打包成在所有机器上都能一致和高效运行的方式。[Docker](https://www.docker.com/) 是一个流行的容器化平台。它本质上创建了一个软件包，包含所使用的每个库的版本，以便可以在不同机器上一致地加载和运行。当你在机器上运行 Docker 容器时，你不需要下载原始计算机的操作系统或常见的依赖库，这就是容器化更高效的原因。
 
-![](../Images/29a86d2a0932feef4c208d69c0fece11.png)
+![](img/29a86d2a0932feef4c208d69c0fece11.png)
 
 *虚拟机（VM）与容器。虚拟机需要操作系统，然后下载相关的库，而容器不需要操作系统，只下载机器上未安装的库。来源： [docker.com](https://www.docker.com/resources/what-container)。*
 
-将容器化应用于数据科学项目可能会很棘手，因为容器的抽象性和可定制性。最常见的容器是包含SQL数据库和运行查询的python脚本的容器。Docker的[快速入门指南](https://docs.docker.com/get-started/)涵盖了容器及相关术语的基础知识。我发现，对专门为我设想的目的而设计的容器进行逆向工程，是实践构建不同类型容器的最佳方式。一旦我拥有了类似的容器，我可以利用Docker文档将其调整到我的目的上。
+将容器化应用于数据科学项目可能会很棘手，因为容器的抽象性和可定制性。最常见的容器是包含 SQL 数据库和运行查询的 python 脚本的容器。Docker 的[快速入门指南](https://docs.docker.com/get-started/)涵盖了容器及相关术语的基础知识。我发现，对专门为我设想的目的而设计的容器进行逆向工程，是实践构建不同类型容器的最佳方式。一旦我拥有了类似的容器，我可以利用 Docker 文档将其调整到我的目的上。
 
-**Keras的迁移学习**
+**Keras 的迁移学习**
 
 我期待着利用迁移学习构建更多深度学习项目。[迁移学习](https://machinelearningmastery.com/transfer-learning-for-deep-learning/)是将为一个目的构建的模型知识应用于另一个目的的实践。
 
-![](../Images/bf99fd9679b4b261550a2eb236bf33bc.png)
+![](img/bf99fd9679b4b261550a2eb236bf33bc.png)
 
 *“传统学习与迁移学习” 来源：“[深度学习中迁移学习的全面实践指南](https://towardsdatascience.com/a-comprehensive-hands-on-guide-to-transfer-learning-with-real-world-applications-in-deep-learning-212bf3b2f27a)” 作者：Dipanjan (DJ) Sarkar。*
 
-例如，你可以将一个预训练的面部识别模型整合到另一组图片数据集中，而无需从头开始训练模型。Keras使我们能够加载预训练模型并将其调整到其他数据集上。
+例如，你可以将一个预训练的面部识别模型整合到另一组图片数据集中，而无需从头开始训练模型。Keras 使我们能够加载预训练模型并将其调整到其他数据集上。
 
 **OpenScale**
 
-最近，我与IBM的一位首席发明家讨论了[Watson OpenScale](https://www.ibm.com/cloud/watson-openscale)。该项目以一种有趣的方式向我展示。我们一致认为，大多数数据科学家的时间都花在获取和清理数据上，然后提出正确的问题。实际构建模型所需的时间相对较少，也不像项目的前期那么困难。如果你在处理一个分类项目，你将建立多个模型，并使用像[GridSearch](https://scikit-learn.org/stable/modules/grid_search.html)这样的工具来调整模型到最有效的超参数。接着，你会选择一个度量标准来比较这些模型，并选择最适合你目的的模型。这种模型构建依赖于你选择每个参数的最佳范围的能力以及等待GridSearch定位最佳超参数值的耐心。OpenScale通过基本上作为云端的GridSearch来处理分类模型*和*每个模型的参数，将这一过程提升到一个新的水平。这使得数据科学项目中最短的部分变得更短，使数据科学家可以专注于项目中更重要的部分：EDA、提出正确的问题、提取可操作的见解，并将发现清晰地传达给所有利益相关者。
+最近，我与 IBM 的一位首席发明家讨论了[Watson OpenScale](https://www.ibm.com/cloud/watson-openscale)。该项目以一种有趣的方式向我展示。我们一致认为，大多数数据科学家的时间都花在获取和清理数据上，然后提出正确的问题。实际构建模型所需的时间相对较少，也不像项目的前期那么困难。如果你在处理一个分类项目，你将建立多个模型，并使用像[GridSearch](https://scikit-learn.org/stable/modules/grid_search.html)这样的工具来调整模型到最有效的超参数。接着，你会选择一个度量标准来比较这些模型，并选择最适合你目的的模型。这种模型构建依赖于你选择每个参数的最佳范围的能力以及等待 GridSearch 定位最佳超参数值的耐心。OpenScale 通过基本上作为云端的 GridSearch 来处理分类模型*和*每个模型的参数，将这一过程提升到一个新的水平。这使得数据科学项目中最短的部分变得更短，使数据科学家可以专注于项目中更重要的部分：EDA、提出正确的问题、提取可操作的见解，并将发现清晰地传达给所有利益相关者。
 
 ### 摘要
 
 数据科学领域的前景强劲。总有新的工具发布，我期待使用这些工具。该领域涵盖的主题不断增长，这意味着总有新的东西可以学习。数据科学可以应用于任何行业，用于多种目的，并且如果你提出正确的问题，可以为任何组织创造价值。
 
-[最初发表于Analytics Vidhya和Medium](https://medium.com/analytics-vidhya/the-decade-of-data-science-4ee6f7c10e9e)。经授权转载。
+[最初发表于 Analytics Vidhya 和 Medium](https://medium.com/analytics-vidhya/the-decade-of-data-science-4ee6f7c10e9e)。经授权转载。
 
-**个人简介：** [亚历克斯·米特拉尼](https://www.linkedin.com/in/alex-mitrani/) 是一位数据科学家，热衷于利用技术做出明智决策。亚历克斯的经验包括房地产和金融领域，他分析了投资并管理了客户关系。亚历克斯完成了Flatiron School的数据科学项目，并从波士顿大学金融专业毕业。
+**个人简介：** [亚历克斯·米特拉尼](https://www.linkedin.com/in/alex-mitrani/) 是一位数据科学家，热衷于利用技术做出明智决策。亚历克斯的经验包括房地产和金融领域，他分析了投资并管理了客户关系。亚历克斯完成了 Flatiron School 的数据科学项目，并从波士顿大学金融专业毕业。
 
 **相关：**
 
-+   [2020年前5大人工智能趋势](https://www.kdnuggets.com/2020/01/top-5-ai-trends-2020.html)
++   [2020 年前 5 大人工智能趋势](https://www.kdnuggets.com/2020/01/top-5-ai-trends-2020.html)
 
-+   [2020年数据科学的四大热门趋势](https://www.kdnuggets.com/2019/12/4-hottest-trends-data-science-2020.html)
++   [2020 年数据科学的四大热门趋势](https://www.kdnuggets.com/2019/12/4-hottest-trends-data-science-2020.html)
 
 +   [分析与数据科学的未来](https://www.kdnuggets.com/2019/09/future-analytics-data-science.html)
 
@@ -138,10 +138,10 @@ TQDM 状态栏告诉你函数正在完成哪个迭代、预期的总迭代次数
 
 +   [停止学习数据科学，寻找目标并找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学基础：你需要知道的10项必备技能…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：你需要知道的 10 项必备技能…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：奇特引言合集…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目，学习5项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目，学习 5 项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)

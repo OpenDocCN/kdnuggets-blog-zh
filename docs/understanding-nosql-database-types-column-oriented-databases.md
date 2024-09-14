@@ -1,22 +1,22 @@
 # 列导向数据库解析
 
-> 原文：[https://www.kdnuggets.com/2021/02/understanding-nosql-database-types-column-oriented-databases.html](https://www.kdnuggets.com/2021/02/understanding-nosql-database-types-column-oriented-databases.html)
+> 原文：[`www.kdnuggets.com/2021/02/understanding-nosql-database-types-column-oriented-databases.html`](https://www.kdnuggets.com/2021/02/understanding-nosql-database-types-column-oriented-databases.html)
 
-[评论](#comments)
+评论
 
 NoSQL 已越来越受到欢迎，作为传统 SQL 数据库和数据库管理方法的补充工具。正如我们所知，NoSQL 不遵循 SQL 的关系模型，这使得它能够做很多强大的事情。更重要的是，它非常灵活和可扩展，这对于没有时间或预算设计 SQL 数据库的新项目非常有用。
 
-因此，我们将深入了解不同的 [数据模型](https://hostingdata.co.uk/nosql-database/) 是如何工作的，本文将重点讨论列数据库。如果你想了解更一般的信息，应该查看我们的 [NoSQL 初学者指南](/2020/12/nosql-beginners.html)。
+因此，我们将深入了解不同的 [数据模型](https://hostingdata.co.uk/nosql-database/) 是如何工作的，本文将重点讨论列数据库。如果你想了解更一般的信息，应该查看我们的 NoSQL 初学者指南。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,17 +24,17 @@ NoSQL 已越来越受到欢迎，作为传统 SQL 数据库和数据库管理方
 
 从最表面上看，列存储数据库确实如其广告所述：即，它不是将信息组织成行，而是将其组织成列。这本质上使它们的功能与关系数据库中的表相同。当然，由于这是*NoSQL*数据库，这种数据模型使它们更加灵活。
 
-![Image](../Images/8e7c96a2dd6f24ce7573a605fae19e33.png)
+![Image](img/8e7c96a2dd6f24ce7573a605fae19e33.png)
 
 更具体地说，列数据库使用*键空间*的概念，这有点像关系模型中的模式。这个键空间包含所有列族，列族中包含行，行中再包含列。一开始理解起来有点棘手，但相对来说还是比较简单的。
 
-![Image](../Images/420e731f7baa234c5e633fd8f5dabfa2.png)![Image](../Images/fbb86c445be95d40bbd68cce53eb7a2d.png)
+![Image](img/420e731f7baa234c5e633fd8f5dabfa2.png)![Image](img/fbb86c445be95d40bbd68cce53eb7a2d.png)
 
 通过快速查看，我们可以看到一个列族有多个行。在每一行中，可以有多个不同的列，具有不同的名称、链接，甚至大小（意味着它们不需要遵循标准）。此外，这些列只存在于它们自己的行中，并且可以包含值对、名称和时间戳。
 
 以一个具体的行作为例子：
 
-![Image](../Images/693cf6110d5044826ce975d87d07376d.png)
+![Image](img/693cf6110d5044826ce975d87d07376d.png)
 
 *行键* 就是那一行的具体标识符，并且总是唯一的。列中包含名称、值和时间戳，这些都是直接明了的。名称/值对也很简单，而时间戳是数据输入数据库的日期和时间。
 
@@ -72,7 +72,7 @@ NoSQL 已越来越受到欢迎，作为传统 SQL 数据库和数据库管理方
 
 在结束之前，我们要指出，列式存储数据库并不一定仅仅是 NoSQL。通常的说法是，列式存储与关系数据库模型有很大不同，因此它完全归于 NoSQL 阵营。
 
-这并不一定总是如此，[NoSQL 与 SQL](/2020/12/sql-vs-nosql-7-key-takeaways.html) 的争论总体上相当复杂。
+这并不一定总是如此，NoSQL 与 SQL 的争论总体上相当复杂。
 
 在列存储数据库的情况下，它们与 SQL 方法论几乎相同。例如，关键空间充当模式，因此仍然存在某种形式的模式管理。另一个例子是元数据有时看起来完全像典型的关系型 DBMS。具有讽刺意味的是，列存储数据库也通常符合 SQL 和 ACID 标准。
 
@@ -90,11 +90,11 @@ NoSQL 已越来越受到欢迎，作为传统 SQL 数据库和数据库管理方
 
 **相关：**
 
-+   [SQL 与 NoSQL：7 个关键要点](/2020/12/sql-vs-nosql-7-key-takeaways.html)
++   SQL 与 NoSQL：7 个关键要点
 
-+   [NoSQL 初学者指南](/2020/12/nosql-beginners.html)
++   NoSQL 初学者指南
 
-+   [SQL 还是 NoSQL：这是个问题！](/2018/05/sql-not-sql-question.html)
++   SQL 还是 NoSQL：这是个问题！
 
 ### 更多相关主题
 

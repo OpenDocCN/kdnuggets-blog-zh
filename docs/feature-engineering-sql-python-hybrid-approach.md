@@ -1,12 +1,12 @@
 # SQL 和 Python 中的特征工程：一种混合方法
 
-> 原文：[https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
+> 原文：[`www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html`](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
 
-[评论](#comments)
+评论
 
 **由 [Shaw Lu](https://www.linkedin.com/in/shawlu95/)，Coupang 的数据科学家**
 
-![](../Images/387c7c1fb43091b8548d223324b19571.png)
+![](img/387c7c1fb43091b8548d223324b19571.png)
 
 我很早就学会了 SQL，对 Pandas 真实模拟 SQL 的方式感到非常好奇。传统上，SQL 主要用于分析师，他们将数据处理成有信息的报告，而 Python 则用于数据科学家，他们利用数据构建（并过拟合）模型。虽然这两者在功能上几乎等价，但我认为两者都是数据科学家高效工作的关键。从我使用 Pandas 的经验来看，我注意到以下几点：
 
@@ -22,11 +22,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 mysql -uroot -p1234567
 ```
 
-![](../Images/93c6c27ef213b648d77301786b19395a.png)
+![](img/93c6c27ef213b648d77301786b19395a.png)
 
 然后在 MySQL 控制台中创建一个名为“Shutterfly”的数据库（你可以根据需要命名）。这两个表将被加载到这个数据库中。
 
@@ -102,50 +102,50 @@ mysql < feature_group_4.sql -uroot -p1234567
 
 +   注意特征表如何依次连接。这实际上是高效的，因为我们总是按一对一的映射连接索引。
 
-最后，让我们看看5个训练示例及其特征。
+最后，让我们看看 5 个训练示例及其特征。
 
 现在你有了一个定义良好的数据集和特征集。你可以调整每个特征的规模和缺失值，以适应你模型的需求。
 
 对于基于树的方法，这些方法对特征缩放不变，我们可以直接应用模型，简单地专注于调整参数！查看一个普通的梯度提升机示例[这里](https://github.com/shawlu95/Data-Science-Toolbox/blob/master/case_study/shutterfly/gbm_benchmark_2.ipynb)。
 
-![](../Images/fa5fb7efe28cb82131c6f0edf7276e40.png)
+![](img/fa5fb7efe28cb82131c6f0edf7276e40.png)
 
-很高兴看到所有有用的特性都已被工程化，除了*类别*特性。我们的努力得到了回报！另外，event2中最具预测性的特征是观察到的null值数量。这是一个说明性的案例**我们不能用中位数或平均值替换null值**，因为它们的缺失与响应变量相关联！
+很高兴看到所有有用的特性都已被工程化，除了*类别*特性。我们的努力得到了回报！另外，event2 中最具预测性的特征是观察到的 null 值数量。这是一个说明性的案例**我们不能用中位数或平均值替换 null 值**，因为它们的缺失与响应变量相关联！
 
 ### 总结
 
-正如你所见，我们没有中间的CSV文件，我们的笔记本中的命名空间非常干净，而且我们的特征工程代码减少到了几个简单的SQL语句。在以下两种情况下，SQL方法的效率更高：
+正如你所见，我们没有中间的 CSV 文件，我们的笔记本中的命名空间非常干净，而且我们的特征工程代码减少到了几个简单的 SQL 语句。在以下两种情况下，SQL 方法的效率更高：
 
-+   如果你的数据集部署在云端，你可能可以运行分布式查询。大多数SQL服务器今天支持分布式查询。在Pandas中，你需要一个叫做*Dask DataFrame*的扩展。
++   如果你的数据集部署在云端，你可能可以运行分布式查询。大多数 SQL 服务器今天支持分布式查询。在 Pandas 中，你需要一个叫做*Dask DataFrame*的扩展。
 
-+   如果你能实时获取数据，你可以创建SQL **视图**而不是表格。这样，每次在Python中提取数据时，**你的数据将始终是最新的**。
++   如果你能实时获取数据，你可以创建 SQL **视图**而不是表格。这样，每次在 Python 中提取数据时，**你的数据将始终是最新的**。
 
-这种方法的一个基本限制是你必须能够在Python中直接连接到你的SQL服务器。如果这不可能，你可能需要将查询结果下载为CSV文件并在Python中加载它。
+这种方法的一个基本限制是你必须能够在 Python 中直接连接到你的 SQL 服务器。如果这不可能，你可能需要将查询结果下载为 CSV 文件并在 Python 中加载它。
 
 我希望你觉得这篇文章有帮助。尽管我没有提倡某种方法优于另一种，但了解每种方法的优点和限制是必要的，并且在我们的工具箱中准备好这两种方法。这样我们就可以在约束条件下应用最有效的方法。
 
-**个人简介：[Shaw Lu](https://www.linkedin.com/in/shawlu95/)** 是Coupang的数据科学家。他是一位工程学毕业生，寻求利用数据科学来指导业务管理、供应链优化、增长营销和运营研究。Toward Data Science的官方作者。
+**个人简介：[Shaw Lu](https://www.linkedin.com/in/shawlu95/)** 是 Coupang 的数据科学家。他是一位工程学毕业生，寻求利用数据科学来指导业务管理、供应链优化、增长营销和运营研究。Toward Data Science 的官方作者。
 
 [原文](https://towardsdatascience.com/feature-engineering-in-sql-and-python-a-hybrid-approach-b52347cd2de4)。经允许转载。
 
 **相关：**
 
-+   [4个高级特征工程和预处理技巧](/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)
++   4 个高级特征工程和预处理技巧
 
-+   [以艰难的方式学习SQL](/2020/01/learning-sql-hard-way.html)
++   以艰难的方式学习 SQL
 
-+   [掌握中级机器学习的7个步骤——2019版](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)
++   掌握中级机器学习的 7 个步骤——2019 版
 
 ### 更多相关话题
 
-+   [每个数据科学家都应了解的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应了解的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目的，寻找目的以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一项90亿美元的人工智能失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一项 90 亿美元的人工智能失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功的数据科学家具备的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家具备的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

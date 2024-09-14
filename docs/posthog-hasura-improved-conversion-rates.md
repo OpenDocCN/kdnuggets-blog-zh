@@ -1,10 +1,10 @@
 # Hasura 如何通过 PostHog 提升了 20% 的转化率
 
-> 原文：[https://www.kdnuggets.com/2021/10/posthog-hasura-improved-conversion-rates.html](https://www.kdnuggets.com/2021/10/posthog-hasura-improved-conversion-rates.html)
+> 原文：[`www.kdnuggets.com/2021/10/posthog-hasura-improved-conversion-rates.html`](https://www.kdnuggets.com/2021/10/posthog-hasura-improved-conversion-rates.html)
 
 赞助帖子。
 
-[![图片](../Images/9c2558e29c96dad468b8a5b4023cea0f.png)](https://posthog.com/?utm_source=kdnuggets&utm_medium=sponsored-blog&utm_campaign=13-oct-2021)
+![图片](https://posthog.com/?utm_source=kdnuggets&utm_medium=sponsored-blog&utm_campaign=13-oct-2021)
 
 自 2018 年推出以来，Hasura 的开源 GraphQL 引擎已被成千上万的团队采用，从独立开发者到像 Airbus 和 Atlassian 这样的企业。2021 年，Hasura 开始使用 PostHog 收集内部数据和洞察，以便团队继续改进其市场领先的平台。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 

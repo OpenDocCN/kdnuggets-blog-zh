@@ -1,22 +1,22 @@
 # 评估深度学习对象检测器的指标
 
-> 原文：[https://www.kdnuggets.com/2020/08/metrics-evaluate-deep-learning-object-detectors.html](https://www.kdnuggets.com/2020/08/metrics-evaluate-deep-learning-object-detectors.html)
+> 原文：[`www.kdnuggets.com/2020/08/metrics-evaluate-deep-learning-object-detectors.html`](https://www.kdnuggets.com/2020/08/metrics-evaluate-deep-learning-object-detectors.html)
 
-[评论](#comments)
+评论
 
 **由 [Venkatesh Wadawadagi](https://www.linkedin.com/in/venkateshwadawadagi/), Sahaj Software Solutions**
 
-已经采用了不同的方法来解决对准确对象检测模型日益增长的需求。最近，随着卷积神经网络（CNN）和GPU加速深度学习框架的普及，对象检测算法开始从新的角度进行开发。R-CNN、Fast R-CNN、Faster R-CNN、R-FCN、SSD 和 Yolo 等 CNN 显著提高了该领域的性能标准。
+已经采用了不同的方法来解决对准确对象检测模型日益增长的需求。最近，随着卷积神经网络（CNN）和 GPU 加速深度学习框架的普及，对象检测算法开始从新的角度进行开发。R-CNN、Fast R-CNN、Faster R-CNN、R-FCN、SSD 和 Yolo 等 CNN 显著提高了该领域的性能标准。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 检测器的结果通常由边界框列表、置信度水平和类别组成，如下图所示：
 
-![Image](../Images/b09e95eada3f708a1a9c9cc5a9e4fe24.png)
+![Image](img/b09e95eada3f708a1a9c9cc5a9e4fe24.png)
 
 对象检测指标作为评估模型在对象检测任务中表现的衡量标准。它还使我们能够客观地比较多个检测系统或将它们与基准进行比较。在大多数竞赛中，平均精度（AP）及其衍生指标是用于评估检测结果并排名的指标。
 
@@ -40,7 +40,7 @@
 
 交并比（IoU）分数 > 0.5 通常被认为是“好”的预测。
 
-![图片](../Images/fa365856db56d3f1bf8a868f88a755ed.png)
+![图片](img/fa365856db56d3f1bf8a868f88a755ed.png)
 
 IoU 指标确定了正确检测到的物体数量以及产生的假阳性数量（将稍后讨论）。
 
@@ -70,9 +70,9 @@ IoU 指标确定了正确检测到的物体数量以及产生的假阳性数量�
 
 **F1 分数**
 
-F1分数是精确度和召回率的调和均值（HM）。
+F1 分数是精确度和召回率的调和均值（HM）。
 
-![图片](../Images/a1168b5a7a008541e56040d5330fcbb6.png)
+![图片](img/a1168b5a7a008541e56040d5330fcbb6.png)
 
 **AP**
 
@@ -82,7 +82,7 @@ F1分数是精确度和召回率的调和均值（HM）。
 
 物体检测的 mAP 是计算所有类的 AP 的平均值。mAP@0.5 表示在 IOU 阈值 0.5 处计算的 mAP。
 
-![图片](../Images/6ea72c06bc64df3665ef8e6fe8daa6fc.png)
+![图片](img/6ea72c06bc64df3665ef8e6fe8daa6fc.png)
 
 **mAP 与其他指标**
 
@@ -90,7 +90,7 @@ mAP 是衡量神经网络灵敏度的良好指标。因此，较高的 mAP 表�
 
 如果“模型 A”的精确度、召回率和 F1 分数优于“模型 B”，但“模型 B”的 mAP 优于“模型 A”，这种情况表明“模型 B”在较高置信度阈值下的召回率很差，或在较低置信度阈值下的精确度很差。因此，“模型 A”在该置信度阈值下的较高精确度、召回率和 F1 分数表明，它在所有三个指标方面都优于“模型 B”。
 
-![图片](../Images/df1e7782c72ce4a2d3f1b2ab0bb7360f.png)
+![图片](img/df1e7782c72ce4a2d3f1b2ab0bb7360f.png)
 
 ### 哪个指标更重要？
 
@@ -118,23 +118,23 @@ mAP 是衡量神经网络灵敏度的良好指标。因此，较高的 mAP 表�
 
 **参考文献**
 
-+   [https://arxiv.org/pdf/1711.00164.pdf](https://arxiv.org/pdf/1711.00164.pdf)
++   [`arxiv.org/pdf/1711.00164.pdf`](https://arxiv.org/pdf/1711.00164.pdf)
 
-+   [https://www.researchgate.net/publication/343194514_A_Survey_on_Performance_Metrics_for_Object-Detection_Algorithms/link/5f1b5a5e45851515ef478268](https://www.researchgate.net/publication/343194514_A_Survey_on_Performance_Metrics_for_Object-Detection_Algorithms/link/5f1b5a5e45851515ef478268/download)
++   [`www.researchgate.net/publication/343194514_A_Survey_on_Performance_Metrics_for_Object-Detection_Algorithms/link/5f1b5a5e45851515ef478268`](https://www.researchgate.net/publication/343194514_A_Survey_on_Performance_Metrics_for_Object-Detection_Algorithms/link/5f1b5a5e45851515ef478268/download)
 
-+   [https://github.com/ultralytics/yolov3/issues/898](https://github.com/ultralytics/yolov3/issues/898)
++   [`github.com/ultralytics/yolov3/issues/898`](https://github.com/ultralytics/yolov3/issues/898)
 
-+   [https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/](https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/)
++   [`www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/`](https://www.pyimagesearch.com/2016/11/07/intersection-over-union-iou-for-object-detection/)
 
 **个人简介：[Venkatesh Wadawadagi](https://www.linkedin.com/in/venkateshwadawadagi/)** 是 [Sahaj Software Solutions](https://sahajsoft.com/) 的解决方案顾问。他帮助企业使用 AI 驱动的解决方案解决复杂问题。他专注于深度学习、计算机视觉、机器学习、自然语言处理（NLP）、嵌入式 AI、商业智能和数据分析。
 
 **相关：**
 
-+   [机器学习中的模型评估指标](/2020/05/model-evaluation-metrics-machine-learning.html)
++   机器学习中的模型评估指标
 
-+   [零售中的图像识别和目标检测](/2020/02/image-recognition-object-detection-retail.html)
++   零售中的图像识别和目标检测
 
-+   [你应该知道的更多分类问题性能评估指标](/2020/04/performance-evaluation-metrics-classification.html)
++   你应该知道的更多分类问题性能评估指标
 
 ### 相关主题
 
@@ -144,7 +144,7 @@ mAP 是衡量神经网络灵敏度的良好指标。因此，较高的 mAP 表�
 
 +   [SQL 与对象关系映射（ORM）之间的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [探索无监督学习指标](https://www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html)
 

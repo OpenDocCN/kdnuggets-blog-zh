@@ -1,20 +1,20 @@
 # 数据治理与可观测性，解读
 
-> 原文：[https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)
+> 原文：[`www.kdnuggets.com/2022/08/data-governance-observability-explained.html`](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)
 
-数据治理和数据可观测性在组织中越来越受到采用，因为它们构成了一个详尽却易于操作的数据管道的基础。两三年前，组织的目标是创建足够的概念验证，以赢得客户对基于AI产品的信任，即使是一个简单的AI功能也会成为区分因素。它可以轻松地在竞争中占据优势。
+数据治理和数据可观测性在组织中越来越受到采用，因为它们构成了一个详尽却易于操作的数据管道的基础。两三年前，组织的目标是创建足够的概念验证，以赢得客户对基于 AI 产品的信任，即使是一个简单的 AI 功能也会成为区分因素。它可以轻松地在竞争中占据优势。
 
-然而，在今天的环境中，基于AI的功能已成为话题，并且成为保持竞争力的必要条件。这就是为什么今天的组织关注于建立一个坚实的基础，以使数据解决方案与常规软件的生产一样无缝且高效。
+然而，在今天的环境中，基于 AI 的功能已成为话题，并且成为保持竞争力的必要条件。这就是为什么今天的组织关注于建立一个坚实的基础，以使数据解决方案与常规软件的生产一样无缝且高效。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -46,7 +46,7 @@
 
 ## 数据可观测性如何不同于数据监控？
 
-可观测性通常被称为监控2.0，但它是监控的一个更大的超集。可观测性更像是工程师的助手，通过考虑系统的深层状态来确定系统是否按预期工作。让我们回顾一下几个区分可观测性与监控的要点：
+可观测性通常被称为监控 2.0，但它是监控的一个更大的超集。可观测性更像是工程师的助手，通过考虑系统的深层状态来确定系统是否按预期工作。让我们回顾一下几个区分可观测性与监控的要点：
 
 ### 上下文
 
@@ -58,11 +58,11 @@
 
 ### 行动
 
-尽管监控的输出主要是反映系统性能或资源消耗的数字，但可观测性的输出则是行动建议。例如，监控会指出系统已经消耗了100 GB的内存。相比之下，可观测性会说明内存消耗是否不理想，以及是否需要开发者的干预来进行优化。
+尽管监控的输出主要是反映系统性能或资源消耗的数字，但可观测性的输出则是行动建议。例如，监控会指出系统已经消耗了 100 GB 的内存。相比之下，可观测性会说明内存消耗是否不理想，以及是否需要开发者的干预来进行优化。
 
-## ML监控与ML可观测性
+## ML 监控与 ML 可观测性
 
-可观测性已经是DevOps框架的一部分很长时间了。然而，在MLOps社区中，对其需求也越来越明显。此外，随着数据变得更加复杂，数据管道变得更复杂且难以跟踪。因此，当我们将可观测性融入机器学习世界时，定义ML监控和ML可观测性之间的关键区别是重要的。
+可观测性已经是 DevOps 框架的一部分很长时间了。然而，在 MLOps 社区中，对其需求也越来越明显。此外，随着数据变得更加复杂，数据管道变得更复杂且难以跟踪。因此，当我们将可观测性融入机器学习世界时，定义 ML 监控和 ML 可观测性之间的关键区别是重要的。
 
 观察能力的核心要素在 ML 观察能力中从头到尾得到体现。ML 监控仅收集关于解决方案的高级输出或成功指标的数据，如敏感度和准确性。之后，它会根据预设的阈值发送警报。
 
@@ -72,7 +72,7 @@
 
 数据观察力是几个关键特性或支柱的总和，这些支柱并行运行以改善数据健康：
 
-![数据观察的支柱](../Images/49875ea07229f0d7198d705fd899cb31.png)
+![数据观察的支柱](img/49875ea07229f0d7198d705fd899cb31.png)
 
 图 1：数据观察的支柱 | 图片由作者创建
 
@@ -124,7 +124,7 @@
 
 ### 背景
 
-数据可观察性的关键能力之一是通过追踪和建立数据与结果之间的适当联系来找到根本原因。当你拥有一个AI助手，它指出某一特定行的错误及其原因时，它将背景带入视图，并使数据问题的修复更加迅速。
+数据可观察性的关键能力之一是通过追踪和建立数据与结果之间的适当联系来找到根本原因。当你拥有一个 AI 助手，它指出某一特定行的错误及其原因时，它将背景带入视图，并使数据问题的修复更加迅速。
 
 ### 安全性
 
@@ -132,17 +132,17 @@
 
 ### 自动配置
 
-数据可观察性解决方案使用ML模型评估数据、元数据和ML解决方案，以确定环境、关键指标和潜在危机（如性能下降低于特定阈值）的因素。因此，它消除了维护和处理几乎总是变化的复杂规则的需求。
+数据可观察性解决方案使用 ML 模型评估数据、元数据和 ML 解决方案，以确定环境、关键指标和潜在危机（如性能下降低于特定阈值）的因素。因此，它消除了维护和处理几乎总是变化的复杂规则的需求。
 
 ### 轻松适配
 
-一个好的数据可观察性解决方案是灵活的，并且可以轻松集成到现有的ML堆栈中。除非ML堆栈组织较差，否则团队无需进行任何更改或重写模块。这很好，因为它节省了许多资源。它还允许评估不同的解决方案，并快速找到合适的解决方案。
+一个好的数据可观察性解决方案是灵活的，并且可以轻松集成到现有的 ML 堆栈中。除非 ML 堆栈组织较差，否则团队无需进行任何更改或重写模块。这很好，因为它节省了许多资源。它还允许评估不同的解决方案，并快速找到合适的解决方案。
 
 数据可观察性是一个广阔的领域，上述要点仅涉及常见问题。因此，让我们深入探讨数据治理，看看它如何适应创建完美的数据管道。
 
 # 什么是数据治理？
 
-**数据治理**是一套标准和规则，旨在维护整个数据管道中的数据质量。由于AI和ML等新兴技术在很大程度上依赖于数据这一独立变量，因此认证数据质量至关重要。
+**数据治理**是一套标准和规则，旨在维护整个数据管道中的数据质量。由于 AI 和 ML 等新兴技术在很大程度上依赖于数据这一独立变量，因此认证数据质量至关重要。
 
 重要的是要注意，数据治理不是数据管理，而是围绕最佳执行建立策略和政策，并分配适当的角色和职责。
 
@@ -150,13 +150,13 @@
 
 在如今数据解决方案竞争日益激烈的环境中，数据治理是必不可少的。以下好处将更好地说明为什么如此：
 
-![数据治理的好处](../Images/ea158372f0b715d2b717411cca521b7e.png)
+![数据治理的好处](img/ea158372f0b715d2b717411cca521b7e.png)
 
-图2：数据治理的好处 | 作者创建的图像
+图 2：数据治理的好处 | 作者创建的图像
 
 ### 端到端视图
 
-数据治理致力于实现数据的单一真实。然而，数据往往在新兴组织中跨多个团队和利益相关者共享而没有任何跟踪措施。这导致多个数据版本，产生数据不一致和不满意的最终客户。为所有团队提供360度视图的单一真实来源是解决上述问题的关键。
+数据治理致力于实现数据的单一真实。然而，数据往往在新兴组织中跨多个团队和利益相关者共享而没有任何跟踪措施。这导致多个数据版本，产生数据不一致和不满意的最终客户。为所有团队提供 360 度视图的单一真实来源是解决上述问题的关键。
 
 ### 更好的数据质量
 
@@ -180,7 +180,7 @@
 
 ### 缺乏业务理解
 
-数据通常被认为完全由IT/开发团队拥有和管理。这存在一个主要缺陷，因为IT团队没有端到端的业务视角，无法做出关键决策。因此，在数据收集过程中，客户提供必要数据或从其他来源收集数据时，会存在差距。
+数据通常被认为完全由 IT/开发团队拥有和管理。这存在一个主要缺陷，因为 IT 团队没有端到端的业务视角，无法做出关键决策。因此，在数据收集过程中，客户提供必要数据或从其他来源收集数据时，会存在差距。
 
 如果缺少只有全面业务团队才能识别的功能，数据将会是次优的。除非整合业务理解，否则当利益相关者传达结果时，也会存在相当大的差距。
 
@@ -206,7 +206,7 @@
 
 +   **提升数据质量：** 数据治理工具应能在无需干预的情况下清理、优化和验证数据。
 
-+   **无缝管理数据：** 工具应集成高效的ETL（提取、转换、加载）过程，以便轻松追踪数据血统。
++   **无缝管理数据：** 工具应集成高效的 ETL（提取、转换、加载）过程，以便轻松追踪数据血统。
 
 +   **记录数据：** 文档是任何过程中的最被低估的参与者，即使它为团队保留和传递了最大的价值。记录数据是必要的，以便提高可重复性、可搜索性、访问性、相关性和连接性。
 
@@ -220,7 +220,7 @@
 
 总的来说，在选择数据治理工具时，易用性也应成为主要关注点之一，因为用户与工具之间的高摩擦最终会拖慢过程。
 
-## 15个数据治理最佳实践
+## 15 个数据治理最佳实践
 
 尽管最佳实践是主观的并且取决于组织的现状，但这里列出了开始时的十五个常见数据治理实践：
 
@@ -228,7 +228,7 @@
 
 1.  **定义目标：** 增量计划必须有明确的目标，不仅分配给数据治理的参与者，还分配给每个过程和阶段。目标当然需要现实、可达成，并且朝着正确的方向展开。
 
-1.  **通过所有权确保问责：** 分配目标固然不够，每个数据治理参与者需要拥有过程并承诺他们的成功。认证所有权的最佳方法可能是将绩效KPI与过程关联起来。
+1.  **通过所有权确保问责：** 分配目标固然不够，每个数据治理参与者需要拥有过程并承诺他们的成功。认证所有权的最佳方法可能是将绩效 KPI 与过程关联起来。
 
 1.  **强调团队成长：** 为了让团队进步，并使个体玩家在层级之间的表现相当，高层过程所有者应直接对低层过程所有者负责。这可以激发问责制、团队合作，从而提高效率。
 
@@ -242,7 +242,7 @@
 
 1.  **标准化：** 在初期阶段，标准化数据流程可能是一项昂贵的过程，但从长远来看，它能大幅节省成本。标准化有助于解决多个方面的问题，包括消除数据差异、一次性数据接入、减少沟通中的来回反复、高效利用现有硬件等等。
 
-1.  **定义指标：** 我们能得到我们所衡量的结果，这一点在数据治理中同样适用。识别出可以定义过程成功与失败的关键指标，并非常小心地选择阈值。确保这些指标与业务KPI和结果直接相关。这将帮助业务团队更好地理解指标。
+1.  **定义指标：** 我们能得到我们所衡量的结果，这一点在数据治理中同样适用。识别出可以定义过程成功与失败的关键指标，并非常小心地选择阈值。确保这些指标与业务 KPI 和结果直接相关。这将帮助业务团队更好地理解指标。
 
 1.  **商业提案：** 准备好一个商业提案，列出数据治理能为组织带来的优势和利益。预算谈判、上下线目标以及节省的时间应进行估算并呈现给相关部门。
 
@@ -266,46 +266,46 @@
 
 ## 参考资料
 
-[https://towardsdatascience.com/what-is-data-observability-40b337971e3e](https://towardsdatascience.com/what-is-data-observability-40b337971e3e)
+[`towardsdatascience.com/what-is-data-observability-40b337971e3e`](https://towardsdatascience.com/what-is-data-observability-40b337971e3e)
 
-[https://www.montecarlodata.com/beyond-monitoring-the-rise-of-observability/](https://www.montecarlodata.com/beyond-monitoring-the-rise-of-observability/)
+[`www.montecarlodata.com/beyond-monitoring-the-rise-of-observability/`](https://www.montecarlodata.com/beyond-monitoring-the-rise-of-observability/)
 
-[https://www.montecarlodata.com/automated-data-quality-testing-at-scale-with-sql-and-machine-learning-2/](https://www.montecarlodata.com/automated-data-quality-testing-at-scale-with-sql-and-machine-learning-2/)
+[`www.montecarlodata.com/automated-data-quality-testing-at-scale-with-sql-and-machine-learning-2/`](https://www.montecarlodata.com/automated-data-quality-testing-at-scale-with-sql-and-machine-learning-2/)
 
-[https://www.montecarlodata.com/the-26-things-your-data-observability-platform-must-do/](https://www.montecarlodata.com/the-26-things-your-data-observability-platform-must-do/)
+[`www.montecarlodata.com/the-26-things-your-data-observability-platform-must-do/`](https://www.montecarlodata.com/the-26-things-your-data-observability-platform-must-do/)
 
-[https://www.montecarlodata.com/the-new-rules-of-data-quality/](https://www.montecarlodata.com/the-new-rules-of-data-quality/)
+[`www.montecarlodata.com/the-new-rules-of-data-quality/`](https://www.montecarlodata.com/the-new-rules-of-data-quality/)
 
-[https://www.montecarlodata.com/data-observability-in-practice-using-sql-1/](https://www.montecarlodata.com/data-observability-in-practice-using-sql-1/)
+[`www.montecarlodata.com/data-observability-in-practice-using-sql-1/`](https://www.montecarlodata.com/data-observability-in-practice-using-sql-1/)
 
-[https://www.montecarlodata.com/demystifying-data-observability/](https://www.montecarlodata.com/demystifying-data-observability/)
+[`www.montecarlodata.com/demystifying-data-observability/`](https://www.montecarlodata.com/demystifying-data-observability/)
 
-[https://www.montecarlodata.com/data-observability-the-next-frontier-of-data-engineering/](https://www.montecarlodata.com/data-observability-the-next-frontier-of-data-engineering/)
+[`www.montecarlodata.com/data-observability-the-next-frontier-of-data-engineering/`](https://www.montecarlodata.com/data-observability-the-next-frontier-of-data-engineering/)
 
-[https://www.montecarlodata.com/what-is-data-observability/](https://www.montecarlodata.com/what-is-data-observability/)
+[`www.montecarlodata.com/what-is-data-observability/`](https://www.montecarlodata.com/what-is-data-observability/)
 
-[https://www.eckerson.com/articles/data-observability-a-crucial-property-in-a-dataops-world](https://www.eckerson.com/articles/data-observability-a-crucial-property-in-a-dataops-world)
+[`www.eckerson.com/articles/data-observability-a-crucial-property-in-a-dataops-world`](https://www.eckerson.com/articles/data-observability-a-crucial-property-in-a-dataops-world)
 
-[https://blog.layer.ai/experiment-tracking-in-machine-learning/](https://blog.layer.ai/experiment-tracking-in-machine-learning/)
+[`blog.layer.ai/experiment-tracking-in-machine-learning/`](https://blog.layer.ai/experiment-tracking-in-machine-learning/)
 
-[https://profisee.com/data-governance-what-why-how-who/](https://profisee.com/data-governance-what-why-how-who/)
+[`profisee.com/data-governance-what-why-how-who/`](https://profisee.com/data-governance-what-why-how-who/)
 
-[https://www.talend.com/resources/what-is-data-governance/](https://www.talend.com/resources/what-is-data-governance/)
+[`www.talend.com/resources/what-is-data-governance/`](https://www.talend.com/resources/what-is-data-governance/)
 
-[https://bi-survey.com/data-governance](https://bi-survey.com/data-governance)
+[`bi-survey.com/data-governance`](https://bi-survey.com/data-governance)
 
-**[Samadrita Ghosh](https://www.linkedin.com/in/samadritaghosh/)** 是Censius的产品营销经理
+**[Samadrita Ghosh](https://www.linkedin.com/in/samadritaghosh/)** 是 Censius 的产品营销经理
 
 ### 更多相关内容
 
-+   [IMPACT：数据可观测性峰会将于11月8日回归……](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观测性峰会将于 11 月 8 日回归……](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
-+   [IMPACT 2022：数据可观测性峰会，将于10月25-26日举行](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)
++   [IMPACT 2022：数据可观测性峰会，将于 10 月 25-26 日举行](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)
 
-+   [数据治理能解决AI疲劳问题吗？](https://www.kdnuggets.com/can-data-governance-address-ai-fatigue)
++   [数据治理能解决 AI 疲劳问题吗？](https://www.kdnuggets.com/can-data-governance-address-ai-fatigue)
 
-+   [什么是AI模型治理？](https://www.kdnuggets.com/2021/12/ai-model-governance.html)
++   [什么是 AI 模型治理？](https://www.kdnuggets.com/2021/12/ai-model-governance.html)
 
 +   [混淆矩阵、精确度和召回率解释](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)
 
-+   [KDnuggets新闻，11月16日：LinkedIn如何使用机器学习•……](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习•……](https://www.kdnuggets.com/2022/n45.html)

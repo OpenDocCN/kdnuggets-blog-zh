@@ -1,8 +1,8 @@
-# 2020年每位数据科学家必读的50本免费书籍
+# 2020 年每位数据科学家必读的 50 本免费书籍
 
-> 原文：[https://www.kdnuggets.com/2020/03/50-must-read-free-books-every-data-scientist-2020.html](https://www.kdnuggets.com/2020/03/50-must-read-free-books-every-data-scientist-2020.html)
+> 原文：[`www.kdnuggets.com/2020/03/50-must-read-free-books-every-data-scientist-2020.html`](https://www.kdnuggets.com/2020/03/50-must-read-free-books-every-data-scientist-2020.html)
 
-[评论](#comments)
+评论
 
 **作者：[Reashikaa Verma](https://blog.paralleldots.com/author/reashikaa/)，[ParallelDots](https://www.paralleldots.com/)**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 ### 1. [数据分析风格的元素](https://leanpub.com/datastyle)
 
-![数据科学书籍](../Images/5a481878d928447712dcc6da0f3db007.png)
+![数据科学书籍](img/5a481878d928447712dcc6da0f3db007.png)
 
 本书概述了数据科学。数据科学是一个非常大的伞形术语，这本书适合任何第一次接触该领域的人。阅读它可以理解数据科学是什么、一些常见任务和算法，以及一些一般性建议和技巧。
 
@@ -32,27 +32,27 @@
 
 ### 3. [大规模数据集挖掘](http://infolab.stanford.edu/~ullman/mmds/book0n.pdf)
 
-基于斯坦福课程CS246和CS35A，该书帮助用户学习如何在大数据集上进行数据挖掘。数据科学家常常需要在非常大的数据集上执行简单的数值任务（可以通过编写小程序来完成）。《MMDS》正是为此而作。此外，还有像降维和推荐系统这样的主题，帮助你了解线性代数和度量距离在现实世界中的应用。这是所有数据科学家必须阅读的书籍。
+基于斯坦福课程 CS246 和 CS35A，该书帮助用户学习如何在大数据集上进行数据挖掘。数据科学家常常需要在非常大的数据集上执行简单的数值任务（可以通过编写小程序来完成）。《MMDS》正是为此而作。此外，还有像降维和推荐系统这样的主题，帮助你了解线性代数和度量距离在现实世界中的应用。这是所有数据科学家必须阅读的书籍。
 
-### 4. [Python数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)
+### 4. [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
-![数据科学书籍](../Images/6b628fc2c410d9c818050c990af30564.png)
+![数据科学书籍](img/6b628fc2c410d9c818050c990af30564.png)
 
 《Python 数据科学手册》教授了在 Python 中应用各种数据科学概念的知识。这本书可能是学习 Python 数据科学的最佳书籍（唯一的等效书籍是 [Wes McKinney 的《Python 数据分析》](https://github.com/wesm/pydata-book)），这本书在 Github 上也是免费的。所以你可以在不花费任何金钱的情况下学习。
 
 ### 5. [实践中的机器学习与大数据](http://www.kareemalkaseer.com/books/ml/)
 
-![](../Images/e63eb30ce10a6b16b137b706f31a90af.png)
+![](img/e63eb30ce10a6b16b137b706f31a90af.png)
 
 ### 6. [统计思维](http://greenteapress.com/thinkstats/)
 
-![数据科学书籍](../Images/e548adfca3f25b9a25de7c6a2bbfd83a.png)
+![数据科学书籍](img/e548adfca3f25b9a25de7c6a2bbfd83a.png)
 
 《统计思维》教授读者统计学的基础，即读者将应用统计概念和分布于现实世界的数据集，并试图通过数学特征了解更多数据。如果你想用 Python 学习统计学，这本书可能是最佳的入门书籍之一。
 
 ### 7. [贝叶斯思维](https://greenteapress.com/wp/think-bayes/)
 
-![数据科学书籍](../Images/67b2a177efacf82957139b304f783f37.png)
+![数据科学书籍](img/67b2a177efacf82957139b304f783f37.png)
 
 贝叶斯统计与常规统计的工作方式有所不同。由于不确定性和将分布拟合到现实世界数据集的概念，使得贝叶斯方法更适合学习实际的数据集。道尼教授极其酷炫的“通过用 Python 编程学习”风格使这本书成为了那些刚开始接触贝叶斯方法者的美好读物。
 
@@ -62,13 +62,13 @@
 
 ### 9. [凸优化](http://stanford.edu/~boyd/cvxbook/)
 
-![数据科学书籍](../Images/9a732450d84e3dc2b18bdc3b58f5ef2d.png)
+![数据科学书籍](img/9a732450d84e3dc2b18bdc3b58f5ef2d.png)
 
 凸优化是许多机器学习（几乎所有深度学习算法）算法在后台使用的技术，以达到最佳参数集。
 
 ### 10. [元启发式算法基础](https://cs.gmu.edu/~sean/book/metaheuristics/)
 
-![数据科学书籍](../Images/16e7c748d0beef8f7633fb1233da555b.png)
+![数据科学书籍](img/16e7c748d0beef8f7633fb1233da555b.png)
 
 元启发式算法是一种快速学习的概率性方法，用于完成那些需要编写程序以暴力搜索的任务。对于可能较小的数据集，暴力搜索方法的实现需要的努力较少，但随着数据量的增加，它们会迅速耗尽。这本书可能是介绍元启发式方法（如遗传算法、爬山算法、共同进化和（基础）强化学习）的最佳入门书籍。
 
@@ -78,7 +78,7 @@
 
 ### 12. [应用数据科学](https://columbia-applied-data-science.github.io/appdatasci.pdf)
 
-![数据科学书籍](../Images/853a313131f4badf8f58b25f8327f03d.png)
+![数据科学书籍](img/853a313131f4badf8f58b25f8327f03d.png)
 
 Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍，旨在教授数据科学。从使用 Git、基础 Python 教学开始，书中继续建立各种在数据科学领域中频繁使用的算法的基础。
 
@@ -92,7 +92,7 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 ### 15. [计算机时代的统计推断](https://web.stanford.edu/~hastie/CASI_files/PDF/casi.pdf)
 
-![数据科学书籍](../Images/5a15b61c5a0b03fe237692225155875b.png)
+![数据科学书籍](img/5a15b61c5a0b03fe237692225155875b.png)
 
 这是 Efron 和传奇人物 Hastie 的一本书，探讨了如何利用现代计算能力进行统计推断（包括频率学派和贝叶斯学派），而不是大多数其他书籍所采用的笔纸方法。这是任何有意在现实生活中使用统计学的读者（无论是初学者还是有经验的）必须阅读的书籍。
 
@@ -110,17 +110,17 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 ### 19. [数据挖掘与分析](http://www.dataminingbook.info/pmwiki.php)
 
-![](../Images/0186b2ea71108a2610882c4293074daa.png)
+![](img/0186b2ea71108a2610882c4293074daa.png)
 
-数据挖掘，正如你可能在之前提到的更著名的MMDS书中看到的，是在大型数据集上有效进行计算的一种方法。这些计算可以通过蛮力方法完成，可能在小数据集上效果很好，但在大型数据集上可能需要很长时间运行。一本很好的数据挖掘入门和参考书。
+数据挖掘，正如你可能在之前提到的更著名的 MMDS 书中看到的，是在大型数据集上有效进行计算的一种方法。这些计算可以通过蛮力方法完成，可能在小数据集上效果很好，但在大型数据集上可能需要很长时间运行。一本很好的数据挖掘入门和参考书。
 
 ### 20. [计算与推理思维](https://www.inferentialthinking.com/chapters/intro.html)
 
-探讨了数据科学的各个方面，包括Python编程、因果关系、表格、可视化和基本统计。来自UC Berkeley的基础课程，是初学者的好资源。
+探讨了数据科学的各个方面，包括 Python 编程、因果关系、表格、可视化和基本统计。来自 UC Berkeley 的基础课程，是初学者的好资源。
 
 ### 21. [数据科学的数学基础](https://mathematical-tours.github.io/book-sources/FundationsDataScience.pdf)
 
-![](../Images/8bdefb7d83bd970724338bc8c868021d.png)
+![](img/8bdefb7d83bd970724338bc8c868021d.png)
 
 正如书名所示，本书给出了数据科学概念如凸优化和维度约简的数学理论及其解释。如果你喜欢数学或特别想了解这些概念背后的数学，这本书值得推荐。
 
@@ -128,17 +128,17 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 信息论是数据科学中的四大数学理论之一，其他三种是线性代数、凸优化和统计学。这是一个很好的教程来理解该理论。好在这个教程适合初学者。
 
-### 23. [应用线性代数导论 – VMLS书籍](http://vmls-book.stanford.edu/)
+### 23. [应用线性代数导论 – VMLS 书籍](http://vmls-book.stanford.edu/)
 
-![](../Images/4add5b0b5834ed5b2d7c2c07ad67693b.png)
+![](img/4add5b0b5834ed5b2d7c2c07ad67693b.png)
 
 我最喜欢的线性代数书籍之一。在我列出的许多书中，它适合初学者，并且有很强的应用感，让读者不会在大量数学概念中迷失。
 
 ### 24. [线性代数 – 赫弗伦](http://joshua.smcvt.edu/linearalgebra/)
 
-![](../Images/b2ff5fdc6e8a93a13badf7722e9d2644.png)
+![](img/b2ff5fdc6e8a93a13badf7722e9d2644.png)
 
-很多人认为这是继吉尔伯特·斯特朗的线性代数书之后最好的初学者线性代数资源。应用性也很强，（SAGE中的编程练习，本质上是Python），但更适合初学者而非从业者。
+很多人认为这是继吉尔伯特·斯特朗的线性代数书之后最好的初学者线性代数资源。应用性也很强，（SAGE 中的编程练习，本质上是 Python），但更适合初学者而非从业者。
 
 ### 25. [线性代数 – 作为抽象数学的介绍](https://www.math.ucdavis.edu/~anne/linear_algebra/)
 
@@ -174,7 +174,7 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 ### 33\. Scipy 讲义
 
-![](../Images/75122625ec085392d1e0e1b72a315c41.png)
+![](img/75122625ec085392d1e0e1b72a315c41.png)
 
 如果你打算从事数据科学工作，你需要学习科学计算的 Python 堆栈。可能这是学习 Numpy、Scipy、Scikit-Learn、Scikit-Image 和所有你需要的库的最佳常见教程。
 
@@ -188,13 +188,13 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 ### 36. [数据科学的统计推断](https://leanpub.com/LittleInferenceBook)
 
-![](../Images/4931e7bb9b24feaad91168c02efd55aa.png)
+![](img/4931e7bb9b24feaad91168c02efd55aa.png)
 
 我们在此之前已经看过多本统计推断的书籍，但这本书特别针对数据科学家编写。如果你是一名数据科学家，想快速掌握统计推断，这就是你的书。
 
 ### 37. [机器学习数学](https://mml-book.github.io/)
 
-![](../Images/b21c1058134c1a76fc1b896f19672138.png)
+![](img/b21c1058134c1a76fc1b896f19672138.png)
 
 一本详细讲解数学的书，以帮助理解大多数机器学习算法。适合初学者。
 
@@ -212,7 +212,7 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 ### 41. [从基础视角看高级数据分析](https://www.stat.cmu.edu/~cshalizi/ADAfaEPoV/)
 
-一本介绍数据科学不同概念的书。这包括因果模型、回归模型、因子模型等。示例程序使用R语言。
+一本介绍数据科学不同概念的书。这包括因果模型、回归模型、因子模型等。示例程序使用 R 语言。
 
 ### 42. [快速数据、智能且可扩展](https://www.voltdb.com/wp-content/uploads/2017/03/hv-ebook-fast-data-smart-and-at-scale.pdf)
 
@@ -224,15 +224,15 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 ### 44. [量化经济学讲座](https://quantecon.org/lectures/)
 
-关于定量经济学的讲座，以及用你喜欢的编程语言：Python或Julia的代码。
+关于定量经济学的讲座，以及用你喜欢的编程语言：Python 或 Julia 的代码。
 
-### 45. [使用Julia的统计学](https://people.smp.uq.edu.au/YoniNazarathy/julia-stats/StatisticsWithJulia.pdf)
+### 45. [使用 Julia 的统计学](https://people.smp.uq.edu.au/YoniNazarathy/julia-stats/StatisticsWithJulia.pdf)
 
-统计学家学习Julia或（较少见的情况）Julia程序员学习统计学？试试这本书。
+统计学家学习 Julia 或（较少见的情况）Julia 程序员学习统计学？试试这本书。
 
 ### 46. [信息论、推断与学习算法](https://www.inference.org.uk/itprnn/book.pdf)
 
-信息论和推断通常被分别处理，但已故的MacKay教授的书尝试同时处理这两个主题。
+信息论和推断通常被分别处理，但已故的 MacKay 教授的书尝试同时处理这两个主题。
 
 ### 47. [决策制定和风险管理的科学改进](https://yngve.hoiseth.net/Empiricast_White_Paper.pdf)
 
@@ -246,9 +246,9 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 遗传算法是所有数据科学家在某个时候都需要使用的工具。这个教程帮助初学者理解遗传算法是如何工作的。
 
-### 50. [使用Julia进行运筹学计算](https://arxiv.org/abs/1312.1431)
+### 50. [使用 Julia 进行运筹学计算](https://arxiv.org/abs/1312.1431)
 
-如果你在处理排队或其他运筹学问题，Julia可能是你会非常喜欢的编程语言。程序像Python一样易于阅读，运行速度极快。
+如果你在处理排队或其他运筹学问题，Julia 可能是你会非常喜欢的编程语言。程序像 Python 一样易于阅读，运行速度极快。
 
 如果你是一名有志成为数据科学家的新手，并且认为自己具备从事该领域工作的能力，请将你的[简历](https://www.paralleldots.com/careers)发送给我们，以获得成为[ParallelDots](https://www.paralleldots.com/)数据科学团队成员的机会。
 
@@ -256,22 +256,22 @@ Langmore 和 Krasner 的《应用数据科学》是一部非常实用的书籍�
 
 **相关：**
 
-+   [机器学习和数据科学的10本免费必读书籍](/2017/04/10-free-must-read-books-machine-learning-data-science.html)
++   机器学习和数据科学的 10 本免费必读书籍
 
-+   [机器学习和数据科学的另外10本免费必读书籍](/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html)
++   机器学习和数据科学的另外 10 本免费必读书籍
 
-+   [机器学习和数据科学的另外10本免费必读书籍](/2019/03/another-10-free-must-read-books-for-machine-learning-and-data-science.html)
++   机器学习和数据科学的另外 10 本免费必读书籍
 
 ### 更多相关话题
 
-+   [每位数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [停止学习数据科学以寻找目标，然后寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一项90亿美元的人工智能失败，详尽分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一项 90 亿美元的人工智能失败，详尽分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

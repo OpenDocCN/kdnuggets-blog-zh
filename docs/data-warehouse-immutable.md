@@ -1,44 +1,44 @@
 # 数据仓库是否应该是不可变的？
 
-> 原文：[https://www.kdnuggets.com/2022/05/data-warehouse-immutable.html](https://www.kdnuggets.com/2022/05/data-warehouse-immutable.html)
+> 原文：[`www.kdnuggets.com/2022/05/data-warehouse-immutable.html`](https://www.kdnuggets.com/2022/05/data-warehouse-immutable.html)
 
 *作者：[Barr Moses](https://www.linkedin.com/in/barrmoses/) & [Chad Sanderson](https://www.linkedin.com/in/chad-sanderson/)*
 
-数据仓库是现代数据架构的基础，因此当我看到Convoy数据负责人[Chad Sanderson](https://www.linkedin.com/in/chad-sanderson/)在LinkedIn上宣称“[数据仓库已经破损](https://www.linkedin.com/posts/chad-sanderson_there-are-two-main-types-of-data-quality-activity-6909891078686953472-keb3?utm_source=linkedin_share&utm_medium=member_desktop_web)”时，引起了我的注意。
+数据仓库是现代数据架构的基础，因此当我看到 Convoy 数据负责人[Chad Sanderson](https://www.linkedin.com/in/chad-sanderson/)在 LinkedIn 上宣称“[数据仓库已经破损](https://www.linkedin.com/posts/chad-sanderson_there-are-two-main-types-of-data-quality-activity-6909891078686953472-keb3?utm_source=linkedin_share&utm_medium=member_desktop_web)”时，引起了我的注意。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-当然，Chad并不是在谈论技术，而是谈论技术的使用方式。
+当然，Chad 并不是在谈论技术，而是谈论技术的使用方式。
 
 他认为，数据质量和可用性问题源于传统最佳实践，即将数据“倾倒”到数据仓库中，然后再进行操作和转换，以适应业务需求。
 
-这与像Snowflake和Databricks这样的供应商确保他们的客户在存储和消费中高效（换句话说，节省金钱和资源）的总体努力是一致的。
+这与像 Snowflake 和 Databricks 这样的供应商确保他们的客户在存储和消费中高效（换句话说，节省金钱和资源）的总体努力是一致的。
 
-无论你是否同意Chad下面详细描述的方法，无法争辩的是他的观点引发了大量的讨论。
+无论你是否同意 Chad 下面详细描述的方法，无法争辩的是他的观点引发了大量的讨论。
 
-Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么新意，需要长时间的手动过程和拥有30年经验的数据架构师。另一个阵营对我感到愤怒，因为他们的现代数据架构基本上不是这种设置，而且这不是他们构建数据产品的方式。”
+Chad 表示：“一个阵营对我感到愤怒，因为他们认为这没什么新意，需要长时间的手动过程和拥有 30 年经验的数据架构师。另一个阵营对我感到愤怒，因为他们的现代数据架构基本上不是这种设置，而且这不是他们构建数据产品的方式。”
 
-我会让你自己决定“不可变数据仓库”（或主动与被动ETL）是否是你们数据团队的正确路径。
+我会让你自己决定“不可变数据仓库”（或主动与被动 ETL）是否是你们数据团队的正确路径。
 
 不管怎样，我坚信推动我们行业前进不仅需要对技术的概述，还需要对如何部署它们的坦诚讨论和独特视角。
 
 # 不可变数据仓库如何结合规模与可用性
 
-**Chad Sanderson的观点**
+**Chad Sanderson 的观点**
 
 现代数据架构有许多变体，但数据仓库是一个基础组件。简单来说：
 
-+   数据通过被动管道（实际上只是ETL中的“E”）被提取并倾倒到…
++   数据通过被动管道（实际上只是 ETL 中的“E”）被提取并倾倒到…
 
 +   一个数据仓库在处理和存储数据之后…
 
@@ -64,7 +64,7 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 # 数据仓库中被动 ETL 或转换的挑战
 
-![数据仓库应该是不可变的吗？](../Images/c2620b35aae8a950205844750a462b85.png)
+![数据仓库应该是不可变的吗？](img/c2620b35aae8a950205844750a462b85.png)
 
 现代数据仓库架构在多个层面上产生了问题。图片由 Chad Sanderson 提供。
 
@@ -74,13 +74,13 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 项目经理和数据工程师将在分析师上游建立管道，分析师将负责回答内部利益相关者提出的某些业务问题。不可避免地，分析师会发现数据无法回答他们的所有问题，而项目经理和数据工程师已经离开了。
 
-第二个挑战出现，当分析师的回应是直接进入仓库编写一个脆弱的600行SQL查询来获取答案。或者，数据科学家可能发现他们构建模型的唯一方式是从作为服务实现细节的生产表中提取数据。
+第二个挑战出现，当分析师的回应是直接进入仓库编写一个脆弱的 600 行 SQL 查询来获取答案。或者，数据科学家可能发现他们构建模型的唯一方式是从作为服务实现细节的生产表中提取数据。
 
 生产表中的数据并非用于分析或机器学习。事实上，服务工程师通常明确表示不要对这些数据建立关键依赖，因为它随时可能发生变化。然而，我们的数据科学家需要完成工作，所以他们还是这样做了，当表被修改时，一切都会崩溃。
 
 第三个挑战是当你的数据仓库成为一个垃圾场时，它就会变成数据废料场。
 
-一项[较早的Forrester研究](https://www.forrester.com/blogs/hadoop-is-datas-darling-for-a-reason/)发现，企业中60%到73%的数据未被用于分析。一项[较新的Seagate研究](https://www.seagate.com/news/news-archive/seagates-rethink-data-report-reveals-that-68-percent-of-data-available-to-businesses-goes-unleveraged-pr-master/)发现，68%的企业可用数据未被利用。
+一项[较早的 Forrester 研究](https://www.forrester.com/blogs/hadoop-is-datas-darling-for-a-reason/)发现，企业中 60%到 73%的数据未被用于分析。一项[较新的 Seagate 研究](https://www.seagate.com/news/news-archive/seagates-rethink-data-report-reveals-that-68-percent-of-data-available-to-businesses-goes-unleveraged-pr-master/)发现，68%的企业可用数据未被利用。
 
 结果是，数据科学家和分析师花费太多时间在过度处理的生产代码针毯中寻找上下文。作为数据工程师，我们需要强调数据*可用性*，除了数据质量之外。
 
@@ -88,45 +88,45 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 # 另一种方法：引入不可变数据仓库
 
-不可变数据仓库概念（也称为主动ETL）认为，仓库应通过数据表示现实世界，而不是随机查询、破碎管道和重复信息的混乱。
+不可变数据仓库概念（也称为主动 ETL）认为，仓库应通过数据表示现实世界，而不是随机查询、破碎管道和重复信息的混乱。
 
 有五个核心支柱：
 
 +   **业务被映射并分配了负责人**。为了使企业真正从其拥有的大量数据中获得价值，团队需要退后一步，在通过代码定义实体和事件之前，先对其业务进行语义建模，以便用于分析。这可以是一个迭代过程，从业务中最关键的元素开始。
 
-    实体关系图（ERD）是基于现实世界的业务地图，而不是今天存在于数据仓库或生产数据库中的内容。它定义了关键实体、它们之间的关系（基数等），以及表明它们已互动的现实世界行为。为每个实体和事件设立工程负责人。端到端的自动化血统可以帮助建立ERD并使其具有可操作性。
+    实体关系图（ERD）是基于现实世界的业务地图，而不是今天存在于数据仓库或生产数据库中的内容。它定义了关键实体、它们之间的关系（基数等），以及表明它们已互动的现实世界行为。为每个实体和事件设立工程负责人。端到端的自动化血统可以帮助建立 ERD 并使其具有可操作性。
 
 +   **数据使用者提前定义他们的需求，合同就会被创建**。最具争议的观点可能是数据应从业务需求中浮现，而不是从无结构的管道中流出。与其让数据分析师和科学家在你仓库的尘封架子上寻找*足够接近*他们需求的数据，不如在数据消费者直接请求并定义之前，数据不会进入仓库。
 
     没有业务问题、流程或问题驱动的数据不会进入数据仓库。所有内容都是为了完成特定任务而量身定制的。
 
-    设计这个过程时必须简单，因为数据需求总在变化，增加的摩擦将威胁到采用。Convoy的合同实施通常需要几分钟到几小时，而不是几天到几周。
+    设计这个过程时必须简单，因为数据需求总在变化，增加的摩擦将威胁到采用。Convoy 的合同实施通常需要几分钟到几小时，而不是几天到几周。
 
-    接下来是制定数据合同，这是一项业务和工程领导之间关于事件/实体模式及其最有效所需数据的协议。例如，现有的inboundCall事件可能缺少OrderID，这使得将电话与已完成的订单关联变得困难。
+    接下来是制定数据合同，这是一项业务和工程领导之间关于事件/实体模式及其最有效所需数据的协议。例如，现有的 inboundCall 事件可能缺少 OrderID，这使得将电话与已完成的订单关联变得困难。
 
-    SLA、SLI和SLO是你可以应用于这种变更管理和利益相关者对齐模型的[数据合同](https://www.montecarlodata.com/blog-one-sla-at-a-time-our-data-quality-journey-at-red-digital/)之一。
+    SLA、SLI 和 SLO 是你可以应用于这种变更管理和利益相关者对齐模型的[数据合同](https://www.montecarlodata.com/blog-one-sla-at-a-time-our-data-quality-journey-at-red-digital/)之一。
 
 +   **在活跃环境中进行的同行评审文档**。就像我们需要代码（GitHub）或用户体验（Figma）进行同行评审一样，数据资产也应有类似的评审机制。然而，这种评审的适当抽象层级不是代码，而是语义。
 
-    这个评审过程应有与GitHub拉取请求相同的结果——版本控制、相关方签字等——所有这些都通过云端处理。通过应用现代的云技术，我们可以加快旧流程，使它们更适合快速增长的互联网企业。
+    这个评审过程应有与 GitHub 拉取请求相同的结果——版本控制、相关方签字等——所有这些都通过云端处理。通过应用现代的云技术，我们可以加快旧流程，使它们更适合快速增长的互联网企业。
 
-    数据目录作为数据仓库定义表面的一部分是有用的，但挑战在于缺乏激励措施来促使数据使用者保持元数据的更新。使用ELT流程并完成模型的数据科学家有什么激励回去记录他们的工作？
+    数据目录作为数据仓库定义表面的一部分是有用的，但挑战在于缺乏激励措施来促使数据使用者保持元数据的更新。使用 ELT 流程并完成模型的数据科学家有什么激励回去记录他们的工作？
 
-+   **数据按照合同中定义的预建模式输入数据仓库。转换在消费层之前的上游发生（理想情况下在服务中）**。工程师然后在他们的服务中实施数据合同。数据被导入数据仓库，利用建模元数据可以理想地自动进行JOIN和分类。
++   **数据按照合同中定义的预建模式输入数据仓库。转换在消费层之前的上游发生（理想情况下在服务中）**。工程师然后在他们的服务中实施数据合同。数据被导入数据仓库，利用建模元数据可以理想地自动进行 JOIN 和分类。
 
-+   **强调防止数据丢失，并确保数据可观测性、完整性、可用性和生命周期管理**。使用事务性外发模式以确保生产系统中的事件与数据仓库中的一致，而日志和偏移处理模式（[我们在Convoy广泛使用的](https://medium.com/convoy-tech/logs-offsets-near-real-time-elt-with-apache-kafka-snowflake-473da1e4d776)）则防止数据丢失。这两个系统共同确保数据完整保存，使得不可变数据仓库直接反映和真实呈现业务中的发生情况。
++   **强调防止数据丢失，并确保数据可观测性、完整性、可用性和生命周期管理**。使用事务性外发模式以确保生产系统中的事件与数据仓库中的一致，而日志和偏移处理模式（[我们在 Convoy 广泛使用的](https://medium.com/convoy-tech/logs-offsets-near-real-time-elt-with-apache-kafka-snowflake-473da1e4d776)）则防止数据丢失。这两个系统共同确保数据完整保存，使得不可变数据仓库直接反映和真实呈现业务中的发生情况。
 
 数据质量和可用性需要两种不同的思维方式。数据质量主要是技术挑战，类似于“后端”工程。另一方面，数据可用性是“前端”工程挑战，需要用来创建出色客户体验的相同技能。
 
-最后，不可变数据仓库不适合用来进行PB级别的测量比赛或展示大数据统计。弃用和维护与配置同样重要。
+最后，不可变数据仓库不适合用来进行 PB 级别的测量比赛或展示大数据统计。弃用和维护与配置同样重要。
 
 这种方法利用了技术的优势，达到两全其美的效果。结合了传统方法的治理和业务驱动的优势以及现代数据堆栈相关的速度和可扩展性。
 
-# 如何让不可变数据仓库运作，将数据视作API
+# 如何让不可变数据仓库运作，将数据视作 API
 
-![不可变数据仓库的层级。图片由Chad Sanderson提供](../Images/ae0492666de9c033ea5fb8ebd72ee630.png)
+![不可变数据仓库的层级。图片由 Chad Sanderson 提供](img/ae0492666de9c033ea5fb8ebd72ee630.png)
 
-不可变数据仓库的层级。图片由Chad Sanderson提供
+不可变数据仓库的层级。图片由 Chad Sanderson 提供
 
 让我们从回顾不可变数据仓库的完整堆栈开始。
 
@@ -134,7 +134,7 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 1.  **数据仓库：** 仓库主要作为‘数据展示’和底层计算层。
 
-1.  **语义层：** 数据消费者构建经过验证并与业务共享的数据产品。语义层中的资产应定义、版本化、审查，然后通过API提供给应用层使用。
+1.  **语义层：** 数据消费者构建经过验证并与业务共享的数据产品。语义层中的资产应定义、版本化、审查，然后通过 API 提供给应用层使用。
 
 1.  **应用层：** 这是数据用于完成某些业务功能的地方，例如实验、机器学习或分析。
 
@@ -142,7 +142,7 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 不可变数据仓库本身设计用于流处理——从流处理转到批处理比反向更容易——因此由三种不同类型的 API 提供支持。
 
-![不可变数据仓库本身设计用于流处理](../Images/cf41cedec61927c4766c0816aeb2f410.png)
+![不可变数据仓库本身设计用于流处理](img/cf41cedec61927c4766c0816aeb2f410.png)
 
 图片由 Monte Carlo 提供。
 
@@ -176,7 +176,7 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 如果有一个核心业务概念跨多个团队，并且由一个整体系统而不是微服务生成，那么前进的最佳方式是建立一个强大的审查系统，并有一个专门的团队待命进行更改。
 
-数据工程师仍然可以进行实验，并获得灵活性而不限制工作流。一个实现这一点的方法是通过一个单独的暂存层。然而，这些暂存区域的API数据不应允许下游使用或跨外部团队使用。
+数据工程师仍然可以进行实验，并获得灵活性而不限制工作流。一个实现这一点的方法是通过一个单独的暂存层。然而，这些暂存区域的 API 数据不应允许下游使用或跨外部团队使用。
 
 关键是，当你从实验阶段转到生产阶段或使其对边界团队可访问时，它必须经过相同的审核过程。就像在软件工程中一样，你不能因为想要更快地推进就跳过审核过程进行代码更改。
 
@@ -194,14 +194,14 @@ Chad表示：“一个阵营对我感到愤怒，因为他们认为这没什么�
 
 ### 更多相关话题
 
-+   [KDnuggets™ News 22:n03, Jan 19: 深入了解13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ News 22:n03, Jan 19: 深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
-+   [KDnuggets 新闻，5月25日：每个…都需要的6个Python机器学习工具](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个…都需要的 6 个 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)
 
-+   [每个初学者数据科学家都应该掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [数据科学家应使用LightGBM的3个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
++   [数据科学家应使用 LightGBM 的 3 个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
 
-+   [每个数据科学家都应该具备的13项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每个数据科学家都应该具备的 13 项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
 
-+   [2022年数据科学家应该了解的Python库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
++   [2022 年数据科学家应该了解的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)

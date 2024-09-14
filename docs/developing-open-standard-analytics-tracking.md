@@ -1,26 +1,26 @@
 # 开发开放标准的分析跟踪
 
-> 原文：[https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)
+> 原文：[`www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html`](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)
 
-在2021年初，我们的长期数据爱好者团队开始开发[**开放分析分类法**](https://github.com/objectiv/objectiv-analytics)。目标是提出一种通用的方式来构建分析数据，以便在一个数据集上建立的模型可以在另一个数据集上部署和运行。
+在 2021 年初，我们的长期数据爱好者团队开始开发[**开放分析分类法**](https://github.com/objectiv/objectiv-analytics)。目标是提出一种通用的方式来构建分析数据，以便在一个数据集上建立的模型可以在另一个数据集上部署和运行。
 
 # 简要历史
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-我们曾经的工作是为企业客户构建模型和运行深入的用户行为分析，这些数据集主要是通过流行的分析工具如谷歌分析、Mixpanel和Adobe分析收集的。
+我们曾经的工作是为企业客户构建模型和运行深入的用户行为分析，这些数据集主要是通过流行的分析工具如谷歌分析、Mixpanel 和 Adobe 分析收集的。
 
-在为50多个客户服务的过程中，有一件事特别突出：大多数客户的分析目标非常相似，但他们的数据集看起来却各不相同。
+在为 50 多个客户服务的过程中，有一件事特别突出：大多数客户的分析目标非常相似，但他们的数据集看起来却各不相同。
 
 他们都希望防止用户流失、提高参与度或转化率、个性化用户体验和预测行为，但每个内部团队都制定了自己的事件类型、命名约定和数据结构方式。因此，无法复用。所有的管道和模型都需要从头开始构建，花费了大量时间将数据整理成干净的、适合模型的状态。
 
@@ -34,19 +34,19 @@
 
 [开放分析分类法](https://github.com/objectiv/objectiv-analytics)是对常见事件类型及其可能发生的上下文的通用分类。它是层次化的，每种事件和上下文类型都有其自己的属性、要求和关系。
 
-![开放分析分类法的结构](../Images/e5417cbcdbf32ca3a8ca1b5c17927be9.png)
+![开放分析分类法的结构](img/e5417cbcdbf32ca3a8ca1b5c17927be9.png)
 
 ## 事件
 
 让我们更详细地查看其中一个事件类，**PressEvent**：
 
-![PressEvent](../Images/2241e1a35045acba94b51af0602037a8.png)
+![PressEvent](img/2241e1a35045acba94b51af0602037a8.png)
 
-**PressEvent**用于描述用户点击或触摸（与设备无关）UI中的元素。这是**InteractiveEvent**类的一个子类，**InteractiveEvent**是所有交互事件的父类。
+**PressEvent**用于描述用户点击或触摸（与设备无关）UI 中的元素。这是**InteractiveEvent**类的一个子类，**InteractiveEvent**是所有交互事件的父类。
 
 事件被分为两个子类：交互事件和非交互事件。第一种类型由用户触发，第二种类型通常由应用程序触发。**NonInteractiveEvent**的一个例子是**MediaStartEvent**，它在音频或视频开始播放时触发：
 
-![MediaStartEvent](../Images/b9e8c4e2dc23467bf29c7e893674d0f7.png)
+![MediaStartEvent](img/b9e8c4e2dc23467bf29c7e893674d0f7.png)
 
 ## 上下文
 
@@ -56,11 +56,11 @@
 
 **全局上下文**包含一般信息。例子包括用户会话信息、应用信息或与事件相关的营销活动细节。
 
-![ data-lazy-src=](../Images/5a77fefe77fbb5990b30d0115f8180cc.png)
+![ data-lazy-src=](img/5a77fefe77fbb5990b30d0115f8180cc.png)
 
-其次，**位置上下文**包含有关事件在UI中发生*位置*的信息。例如，前面提到的**MediaStartEvent**需要一个**MediaPlayerContext**来准确指出事件的来源。在这种情况下，特指媒体播放器，因为它的事件类。
+其次，**位置上下文**包含有关事件在 UI 中发生*位置*的信息。例如，前面提到的**MediaStartEvent**需要一个**MediaPlayerContext**来准确指出事件的来源。在这种情况下，特指媒体播放器，因为它的事件类。
 
-![MediaStartEvent](../Images/4b7a519605a55276b6b2059d3923438c.png)
+![MediaStartEvent](img/4b7a519605a55276b6b2059d3923438c.png)
 
 # 用例与设计选择
 
@@ -74,13 +74,13 @@
 
 当前端开发者正在设置追踪器以收集数据时，同样的原则适用。你可以根据开放分类法验证追踪仪器，以确保其配置能够按预期捕捉事件，并在条件未满足时抛出错误。
 
-例如，我们自己的追踪SDK通过在浏览器控制台运行时抛出错误来实现这一点，并指向文档以展示如何修复：
+例如，我们自己的追踪 SDK 通过在浏览器控制台运行时抛出错误来实现这一点，并指向文档以展示如何修复：
 
-![Instrumentation validation](../Images/e2063f29889106f2f0640d2d4d340ba0.png)
+![Instrumentation validation](img/e2063f29889106f2f0640d2d4d340ba0.png)
 
 我们还利用它通过 TypeScript 定义在 IDE 中提供内联文档和验证问题的 linting：
 
-![在你的 IDE 中通过 TypeScript 定义进行的验证问题](../Images/ca2ce5be9c0c49a2bb57ef328b732586.png)
+![在你的 IDE 中通过 TypeScript 定义进行的验证问题](img/ca2ce5be9c0c49a2bb57ef328b732586.png)
 
 ## 特征选择
 
@@ -154,7 +154,7 @@ press_events = df[(df.event_type=='PressEvent')]
    }
 ```
 
-*事件位置栈的一个示例，捕获自我们文档的建模部分*![Objective.io docs](../Images/b31b7bf19675503991ffc75fe06f1459.png)
+*事件位置栈的一个示例，捕获自我们文档的建模部分*![Objective.io docs](img/b31b7bf19675503991ffc75fe06f1459.png)
 
 上述事件是在用户点击侧边栏中的 is_new_user 标签时捕获的
 
@@ -162,11 +162,11 @@ press_events = df[(df.event_type=='PressEvent')]
 
 例如，你可以轻松选择所有带有 NavigationContext 的事件：
 
-![NavigationContext](../Images/6ae947f7527c424985ba99d6e086fbf4.png)
+![NavigationContext](img/6ae947f7527c424985ba99d6e086fbf4.png)
 
 或者更具体地说，那些发生在文档侧边栏上的事件：
 
-![docs sidebar](../Images/5ff461aa60caf3ea3ad484e3bb327c51.png)
+![docs sidebar](img/5ff461aa60caf3ea3ad484e3bb327c51.png)
 
 …等等。
 
@@ -176,7 +176,7 @@ press_events = df[(df.event_type=='PressEvent')]
 
 你为 Android 应用开发的用户细分模型？你可以与负责 iOS 应用或 Web 应用的团队分享，他们可以在不做任何更改的情况下进行部署和运行。
 
-![它们可以在任何接受开放分析分类法的数据集上运行](../Images/659c137a4aeadea3bcfc7ac0f9f0443c.png)
+![它们可以在任何接受开放分析分类法的数据集上运行](img/659c137a4aeadea3bcfc7ac0f9f0443c.png)
 
 我们的一个[示例笔记本](https://objectiv.io/docs/modeling/example-notebooks/)的摘录。它们可以在任何接受开放分析分类法的数据集上运行。
 

@@ -1,8 +1,8 @@
-# 机器学习培训数据策略的**6个提示**
+# 机器学习培训数据策略的**6 个提示**
 
-> 原文：[https://www.kdnuggets.com/2019/09/6-tips-training-data-strategy-machine-learning.html](https://www.kdnuggets.com/2019/09/6-tips-training-data-strategy-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/09/6-tips-training-data-strategy-machine-learning.html`](https://www.kdnuggets.com/2019/09/6-tips-training-data-strategy-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **作者：[Wilson Pang](https://www.linkedin.com/in/wilsonpang/)，Appen 首席技术官**。
 
@@ -20,7 +20,7 @@ AI 系统通过示例进行学习，示例越多、质量越高，它们的学�
 
 例如，对于计算机视觉或模式识别项目，培训项目可能是由人工标注者标记的图像数据，以识别图像中的内容（树木、停车标志、人物、汽车等）。此外，根据你所构建的解决方案类型，你的模型可能需要不断重新训练或更新。你的解决方案可能需要季度、每月甚至每周更新。
 
-![](../Images/ce9eb3513ce5f129a81edbde161d1348.png)
+![](img/ce9eb3513ce5f129a81edbde161d1348.png)
 
 一旦培训项目和更新频率确定后，你就可以评估数据来源的选项，并计算预算。
 
@@ -30,7 +30,7 @@ AI 系统通过示例进行学习，示例越多、质量越高，它们的学�
 
 你所需的数据类型取决于你所构建的解决方案类型。一些数据来源选项包括现实世界使用数据、调查数据、公共数据集和合成数据。例如，一个能够理解口头指令的语音识别解决方案必须在高质量的语音数据（现实世界数据）上进行训练，并且这些数据已被转录为文本。一个搜索解决方案需要人类评审员注释的文本数据，以告诉它哪些结果最相关。
 
-在机器学习中最常见的数据类型包括图像、视频、语音、音频和文本。在用于机器学习之前，训练数据项必须被注释或标记，以识别它们的内容。注释告诉模型如何处理每一条数据。例如，如果虚拟家庭助手的数据项是录音中有人说“再订购一些双A电池”，注释可能会告诉系统在听到“order”时开始向特定的在线零售商下单，在听到“double-A batteries”时搜索“AA batteries”。
+在机器学习中最常见的数据类型包括图像、视频、语音、音频和文本。在用于机器学习之前，训练数据项必须被注释或标记，以识别它们的内容。注释告诉模型如何处理每一条数据。例如，如果虚拟家庭助手的数据项是录音中有人说“再订购一些双 A 电池”，注释可能会告诉系统在听到“order”时开始向特定的在线零售商下单，在听到“double-A batteries”时搜索“AA batteries”。
 
 **3: 确保数据质量**
 
@@ -62,11 +62,11 @@ AI 系统通过示例进行学习，示例越多、质量越高，它们的学�
 
 ### **制定策略使 AI 成功**
 
-最近一项[来自 IHS Markit 的研究](https://cdn.ihs.com/www/pdf/0419/ihs-markit-digital-orbit-brochure.pdf)显示，87%的组织正在采用至少一种形式的变革性技术，如 AI，但只有26%认为有合适的商业模式来充分捕捉这些技术的价值。
+最近一项[来自 IHS Markit 的研究](https://cdn.ihs.com/www/pdf/0419/ihs-markit-digital-orbit-brochure.pdf)显示，87%的组织正在采用至少一种形式的变革性技术，如 AI，但只有 26%认为有合适的商业模式来充分捕捉这些技术的价值。
 
 制定一个坚实的训练数据策略是捕捉 AI 价值的第一步。这包括设定预算、确定数据来源、确保质量，并构建安全措施。一个清晰的数据策略也有助于提供大多数机器学习模型所需的稳定数据管道。仅有的训练数据策略不能保证 AI 成功，但它可以帮助确保公司更好地利用 AI 提供的好处。
 
-**个人简介：** [Wilson Pang](https://www.linkedin.com/in/wilsonpang/) 是一位工程和数据科学技术领导者，精通大数据、数据科学、分布式系统工程、搜索科学、互联网营销和网络应用。Wilson的热情是通过数据科学和工程创新与聪明的人才一起推动业务发展。
+**个人简介：** [Wilson Pang](https://www.linkedin.com/in/wilsonpang/) 是一位工程和数据科学技术领导者，精通大数据、数据科学、分布式系统工程、搜索科学、互联网营销和网络应用。Wilson 的热情是通过数据科学和工程创新与聪明的人才一起推动业务发展。
 
 **相关：**
 
@@ -80,24 +80,24 @@ AI 系统通过示例进行学习，示例越多、质量越高，它们的学�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 ### 更多相关主题
 
-+   [KDnuggets新闻，6月22日：主要监督学习算法……](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法……](https://www.kdnuggets.com/2022/n25.html)
 
-+   [使用TensorFlow和Keras构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
++   [使用 TensorFlow 和 Keras 构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
-+   [掌握数据战略的15本书](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据战略的 15 本书](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
 
-+   [GenAI时代的AI转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
++   [GenAI 时代的 AI 转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
 
-+   [如何创建有效的AI战略](https://www.kdnuggets.com/2022/11/create-effective-ai-strategy.html)
++   [如何创建有效的 AI 战略](https://www.kdnuggets.com/2022/11/create-effective-ai-strategy.html)
 
-+   [终极AI战略手册](https://www.kdnuggets.com/the-ultimate-ai-strategy-playbook)
++   [终极 AI 战略手册](https://www.kdnuggets.com/the-ultimate-ai-strategy-playbook)

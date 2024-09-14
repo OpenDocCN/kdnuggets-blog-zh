@@ -1,10 +1,10 @@
-# 4个你不应该使用机器学习的理由
+# 4 个你不应该使用机器学习的理由
 
-> 原文：[https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html`](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
-**由[Terence Shin](https://www.linkedin.com/in/terenceshin/)，数据科学家 | MSc Analytics & MBA学生**
+**由[Terence Shin](https://www.linkedin.com/in/terenceshin/)，数据科学家 | MSc Analytics & MBA 学生**
 
-![4个你不应该使用机器学习的理由](../Images/977db7fcadc23ddf6ae042fd5b5843b2.png)
+![4 个你不应该使用机器学习的理由](img/977db7fcadc23ddf6ae042fd5b5843b2.png)
 
 照片由[Nadine Shaabana](https://unsplash.com/@nadineshaabana?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来源于[Unsplash](https://unsplash.com/s/photos/stop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,15 +26,15 @@
 
 别误解我的意思。机器学习是一个有用的工具，但仅仅是一个工具。说它像瑞士军刀一样是不切实际的——我更愿意把它看作是一个水刀（某种小众工具）。
 
-根据我的经验，机器学习确实在一些应用场景中表现出色。例如，[亚马逊的推荐系统将销售额提高了30%以上](https://evdelo.com/amazons-recommendation-algorithm-drives-35-of-its-sales/)。然而，还有更多应用场景中，机器学习是一个次优的解决方案。
+根据我的经验，机器学习确实在一些应用场景中表现出色。例如，[亚马逊的推荐系统将销售额提高了 30%以上](https://evdelo.com/amazons-recommendation-algorithm-drives-35-of-its-sales/)。然而，还有更多应用场景中，机器学习是一个次优的解决方案。
 
-在本文中，我们将讨论4个你不应该使用机器学习的理由。
+在本文中，我们将讨论 4 个你不应该使用机器学习的理由。
 
 话虽如此，让我们深入了解吧！
 
 ## 1\. 与数据相关的问题
 
-如[AI需求层次](https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007)所示，机器学习依赖于几个作为基础的其他因素。这个基础包括从数据收集、数据存储、数据传输到数据转换的所有内容。拥有一个健全的流程来实现这些初步步骤是很重要的，否则你可能不会有可靠的数据。
+如[AI 需求层次](https://hackernoon.com/the-ai-hierarchy-of-needs-18f111fcc007)所示，机器学习依赖于几个作为基础的其他因素。这个基础包括从数据收集、数据存储、数据传输到数据转换的所有内容。拥有一个健全的流程来实现这些初步步骤是很重要的，否则你可能不会有可靠的数据。
 
 为什么这如此重要？你一定听过“垃圾进，垃圾出”的说法——你的机器学习模型的性能受限于数据的质量，这就是为什么有可靠的数据是如此重要的原因。
 
@@ -70,11 +70,11 @@
 
 最后，当存在同样有效的简单替代方案时，不应使用机器学习。在我之前的文章中，*“*[*想成为数据科学家？不要从机器学习开始*](https://towardsdatascience.com/want-to-be-a-data-scientist-dont-learn-machine-learning-28e418d9af2f)*，”* 我强调了机器学习不是解决所有问题的答案。
 
-一个简单的解决方案，花费1周时间构建，准确率90%，**几乎总是**会被选择，胜过一个需要3个月构建、准确率95%的机器学习模型。
+一个简单的解决方案，花费 1 周时间构建，准确率 90%，**几乎总是**会被选择，胜过一个需要 3 个月构建、准确率 95%的机器学习模型。
 
 理想情况下，你应该从最简单的解决方案开始实施，并逐步判断下一最佳替代方案的边际收益是否超过边际成本。
 
-如果你能用Python脚本或SQL查询解决你的问题，你应该先使用这些方法。如果你能用决策树解决你的问题，你应该先使用决策树。如果你能用线性回归模型解决你的问题，你应该先使用线性回归模型。
+如果你能用 Python 脚本或 SQL 查询解决你的问题，你应该先使用这些方法。如果你能用决策树解决你的问题，你应该先使用决策树。如果你能用线性回归模型解决你的问题，你应该先使用线性回归模型。
 
 你明白了。越简单=越好。
 
@@ -84,26 +84,26 @@
 
 ## Terence Shin
 
-+   ***如果你喜欢这个内容， ***[***订阅我的Medium***](https://terenceshin.medium.com/subscribe)*** 以获取独家内容！***
++   ***如果你喜欢这个内容， ***[***订阅我的 Medium***](https://terenceshin.medium.com/subscribe)*** 以获取独家内容！***
 
-+   ***同样，你也可以 ***[***关注我在Medium上的动态***](https://medium.com/@terenceshin)
++   ***同样，你也可以 ***[***关注我在 Medium 上的动态***](https://medium.com/@terenceshin)
 
-+   ***有兴趣合作吗？让我们在 ***[***LinkedIn上连接***](https://www.linkedin.com/in/terenceshin/)
++   ***有兴趣合作吗？让我们在 ***[***LinkedIn 上连接***](https://www.linkedin.com/in/terenceshin/)
 
-**个人简介： [Terence Shin](https://www.linkedin.com/in/terenceshin/)** 是一位数据爱好者，拥有3年以上SQL经验和2年以上Python经验，同时也是Towards Data Science和KDnuggets的博客作者。
+**个人简介： [Terence Shin](https://www.linkedin.com/in/terenceshin/)** 是一位数据爱好者，拥有 3 年以上 SQL 经验和 2 年以上 Python 经验，同时也是 Towards Data Science 和 KDnuggets 的博客作者。
 
 [原文](https://towardsdatascience.com/4-reasons-why-you-shouldnt-use-machine-learning-639d1d99fe11)。经许可转载。
 
 ### 更多相关话题
 
-+   [你不应该成为数据科学家的7个理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
++   [你不应该成为数据科学家的 7 个理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
 
-+   [你应该使用线性回归模型而不是…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [你应该使用线性回归模型而不是…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [数据科学家应该使用LightGBM的3个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
++   [数据科学家应该使用 LightGBM 的 3 个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
 
-+   [你需要合成数据的5个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [你需要合成数据的 5 个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [你应该避免从事数据科学职业的前5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [你应该避免从事数据科学职业的前 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [你应该获得认证的5个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
++   [你应该获得认证的 5 个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)

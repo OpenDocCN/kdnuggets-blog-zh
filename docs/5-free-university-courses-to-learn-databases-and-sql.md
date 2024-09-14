@@ -1,8 +1,8 @@
 # 5 免费大学课程学习数据库和 SQL
 
-> 原文：[https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
+> 原文：[`www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql`](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
 
-![5 免费大学课程学习数据库和 SQL](../Images/d5acbbb3fcb2d6930c620ac0d85eeb5f.png)
+![5 免费大学课程学习数据库和 SQL](img/d5acbbb3fcb2d6930c620ac0d85eeb5f.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 +   超越关系数据
 
-课程链接：[数据库系统 - 康奈尔大学课程（SQL、NoSQL、大规模数据分析）](https://www.youtube.com/watch?v=4cWkVbC2bNE) 和 [课程第 2 部分](https://www.youtube.com/watch?v=lxEdaElkQhQ&t=0s)。
+课程链接：[数据库系统 - 康奈尔大学课程（SQL、NoSQL、大规模数据分析）](https://www.youtube.com/watch?v=4cWkVbC2bNE) 和 [课程第二部分](https://www.youtube.com/watch?v=lxEdaElkQhQ&t=0s)。
 
 # 2\. 数据库和 SQL 简介 - 哈佛
 
@@ -150,11 +150,11 @@
 
 # 5\. 高级数据库系统 - CMU
 
-如果你有兴趣专注于数据库工程、数据工程或相关领域，了解现代OLAP数据库的内部结构将非常有帮助。[高级数据库系统课程](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYzlLMbX3cR0sxWnRM7CLFn)正是涉及这一点。
+如果你有兴趣专注于数据库工程、数据工程或相关领域，了解现代 OLAP 数据库的内部结构将非常有帮助。[高级数据库系统课程](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYzlLMbX3cR0sxWnRM7CLFn)正是涉及这一点。
 
-本课程深入探讨数据库内部结构：从构成OLAP系统的组件到现代分析数据仓库如Google BigQuery和Snowflake的内部，本课程涵盖了广泛的话题，包括：
+本课程深入探讨数据库内部结构：从构成 OLAP 系统的组件到现代分析数据仓库如 Google BigQuery 和 Snowflake 的内部，本课程涵盖了广泛的话题，包括：
 
-+   现代OLAP数据库
++   现代 OLAP 数据库
 
 +   存储模型和数据布局
 
@@ -164,7 +164,7 @@
 
 +   高级算法
 
-+   Google BigQuery、Amazon RedShift、Databricks、Snowflake等数据库内部
++   Google BigQuery、Amazon RedShift、Databricks、Snowflake 等数据库内部
 
 课程链接: [高级数据库系统](https://www.youtube.com/playlist?list=PLSE8ODhjZXjYzlLMbX3cR0sxWnRM7CLFn)
 
@@ -172,20 +172,20 @@
 
 当你开始职业生涯时，你在大学修读的数据库系统课程通常会证明是最有帮助的！但即使你不能上大学获得计算机科学学位，这些课程也应该教会你几乎所有你想了解的数据库知识。
 
-无论你是希望学习SQL和足够的关系数据库设计，还是想深入了解数据库内部结构，这些课程都能满足你的需求。祝学习愉快！
+无论你是希望学习 SQL 和足够的关系数据库设计，还是想深入了解数据库内部结构，这些课程都能满足你的需求。祝学习愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等方式学习并分享她的知识。Bala还创建了有趣的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等方式学习并分享她的知识。Bala 还创建了有趣的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [免费哈佛SQL数据库入门课程](https://www.kdnuggets.com/introduction-to-databases-with-sql-free-harvard-course)
++   [免费哈佛 SQL 数据库入门课程](https://www.kdnuggets.com/introduction-to-databases-with-sql-free-harvard-course)
 
-+   [5门免费的大学课程学习Python](https://www.kdnuggets.com/5-free-university-courses-to-learn-python)
++   [5 门免费的大学课程学习 Python](https://www.kdnuggets.com/5-free-university-courses-to-learn-python)
 
-+   [5门免费的大学课程学习数据科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
++   [5 门免费的大学课程学习数据科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
 
-+   [5门免费的大学课程学习数据科学编程](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
++   [5 门免费的大学课程学习数据科学编程](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
 
-+   [5门免费的大学课程学习计算机科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
++   [5 门免费的大学课程学习计算机科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
 
-+   [5门免费的斯坦福大学数据科学课程](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)
++   [5 门免费的斯坦福大学数据科学课程](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)

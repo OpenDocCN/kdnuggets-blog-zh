@@ -1,16 +1,16 @@
 # 谷歌建议你在参加他们的机器学习或数据科学课程之前做的事
 
-> 原文：[https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
+> 原文：[`www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html`](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
 
-[![谷歌建议你在参加他们的机器学习或数据科学课程之前做的事](../Images/a339a428613ea268d1e5688d61841939.png)](https://miro.medium.com/max/2000/1*8PHMlvY3ZuqtO7xEcZjIWw.png)
+![谷歌建议你在参加他们的机器学习或数据科学课程之前做的事](https://miro.medium.com/max/2000/1*8PHMlvY3ZuqtO7xEcZjIWw.png)
 
 图片由作者提供
 
-无论是Andrew Ng在YouTube上的机器学习/深度学习课程，还是任何数据科学训练营，你都需要一定程度的数学和统计知识，不仅是为了理解，还为了在数据专业领域建立一个持久而稳固的职业生涯。
+无论是 Andrew Ng 在 YouTube 上的机器学习/深度学习课程，还是任何数据科学训练营，你都需要一定程度的数学和统计知识，不仅是为了理解，还为了在数据专业领域建立一个持久而稳固的职业生涯。
 
 这是针对所有自学者和数据科学及机器学习初学者的简短而精准的指南。
 
-在我所有的培训项目、LinkedIn课程、YouTube视频或新闻通讯中，一个常见的问题是，当他们开始学习数据科学/机器学习后，在某个点，他们会感到在数学、统计学甚至编程方面迷失。
+在我所有的培训项目、LinkedIn 课程、YouTube 视频或新闻通讯中，一个常见的问题是，当他们开始学习数据科学/机器学习后，在某个点，他们会感到在数学、统计学甚至编程方面迷失。
 
 我一直推荐学习或刷新一些支撑机器学习的数学概念，因为这有助于你建立直觉，保持在学习过程中的好奇心。
 
@@ -20,11 +20,11 @@
 
 我建议你先阅读这篇文章，然后逐个查阅所有链接，并将这篇博客作为参考。
 
-在阅读了谷歌文章中提到的所有概念和技能的完整列表后，我还查阅了几本书（如Ian Goodfellow的《深度学习》，Francois Chollet的《Python深度学习》等），并尝试将其精华提炼为建立数据分析师/科学家/机器学习工程师职业生涯的三个基础支柱。
+在阅读了谷歌文章中提到的所有概念和技能的完整列表后，我还查阅了几本书（如 Ian Goodfellow 的《深度学习》，Francois Chollet 的《Python 深度学习》等），并尝试将其精华提炼为建立数据分析师/科学家/机器学习工程师职业生涯的三个基础支柱。
 
 以下是三个支柱以及建立这些支柱所需的一系列概念。
 
-![谷歌建议你在参加他们的机器学习或数据科学课程之前做的事](../Images/67dd85c9d12b435238a7bdfc61f02d24.png)
+![谷歌建议你在参加他们的机器学习或数据科学课程之前做的事](img/67dd85c9d12b435238a7bdfc61f02d24.png)
 
 # 数据科学和机器学习初学者的编程指南
 
@@ -68,17 +68,17 @@
 
 ## 2.1 使用线性代数表示数据
 
-![Google 推荐你在参加他们的机器学习或数据科学课程之前做什么](../Images/cbf1a5a55ece99eae4e78d6d87ef8e4e.png)
+![Google 推荐你在参加他们的机器学习或数据科学课程之前做什么](img/cbf1a5a55ece99eae4e78d6d87ef8e4e.png)
 
-课程中的一张图片：[https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)
+课程中的一张图片：[`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
 机器学习（ML）本质上是数据驱动的；数据是机器学习的核心。我们可以将数据视为**向量**——一个遵循算术规则的对象。这使我们能够理解线性代数规则如何作用于数据数组。
 
 ## 2.2 微积分在训练机器学习模型中的应用
 
-![谷歌推荐你在参加他们的机器学习或数据科学课程之前做的事情](../Images/6c7c0bd3c41ec5ee514cee43a9ba182d.png)
+![谷歌推荐你在参加他们的机器学习或数据科学课程之前做的事情](img/6c7c0bd3c41ec5ee514cee43a9ba182d.png)
 
-课程中的图片：[https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)
+课程中的图片：[`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
 如果你认为模型训练是“自动进行”的，那你就错了。微积分是推动大多数机器学习和深度学习算法学习的关键。
 
@@ -110,9 +110,9 @@
 
 **以下是构成统计学基础的几个主要要素：**
 
-![谷歌推荐你在参加他们的机器学习或数据科学课程之前做的事情](../Images/01d4bb9d64952795496c9eb492a6658a.png)
+![谷歌推荐你在参加他们的机器学习或数据科学课程之前做的事情](img/01d4bb9d64952795496c9eb492a6658a.png)
 
-泊松分布讲座中的图片——[https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)
+泊松分布讲座中的图片——[`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
 +   位置估计——均值、中位数及其其他变体
 
@@ -130,9 +130,9 @@
 
 +   重要的定理 — 大数法则和中心极限定理。
 
-![Google 推荐你在参加他们的机器学习或数据科学课程之前做的事](../Images/355b75c7450c97786a29122aca12b170.png)
+![Google 推荐你在参加他们的机器学习或数据科学课程之前做的事](img/355b75c7450c97786a29122aca12b170.png)
 
-来自泊松分布讲座的图片 — [https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)
+来自泊松分布讲座的图片 — [`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
 > 每位初学者级别的数据科学爱好者在深入任何核心数据科学或核心机器学习课程之前，都应该专注于这三个支柱。
 
@@ -162,7 +162,7 @@
 
 在这里，我向你展示了 [**数据科学或机器学习的基础**](https://www.wiplane.com/p/foundations-for-data-science-ml)** — **[**学习数据科学和机器学习的第一步**](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
-[https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)
+[`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
 一个全面而紧凑且实惠的课程，不仅涵盖**所有必需的基础知识、前提条件和预备工作**，而且还解释了每个概念如何**在计算上和编程上（Python）使用**。
 
@@ -178,7 +178,7 @@
 
 +   [在进入 Transformers 之前你应该知道的概念](https://www.kdnuggets.com/2023/01/concepts-know-getting-transformer.html)
 
-+   [KDnuggets™ 新闻 22:n03, 1月 19: 深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19: 深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [在转行数据科学之前请阅读这些](https://www.kdnuggets.com/read-this-before-making-a-career-switch-to-data-science)
 

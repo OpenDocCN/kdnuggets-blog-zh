@@ -1,8 +1,8 @@
-# 管理数据科学团队的5个技巧
+# 管理数据科学团队的 5 个技巧
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-managing-data-science-teams](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
+> 原文：[`www.kdnuggets.com/5-tips-for-managing-data-science-teams`](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
 
-![5个管理数据科学团队的技巧](../Images/c92ad9c38c2ace560117d6097d998028.png)
+![5 个管理数据科学团队的技巧](img/c92ad9c38c2ace560117d6097d998028.png)
 
 [图片来源 pch.vector 于 Freepik](https://www.freepik.com/free-vector/help-support-climbing-employee-from-mentor-leader-hand-team-corporate-people-walking-up-ladder-together-flat-vector-illustration-success-career-growth-leadership-teamwork-concept_22343850.htm#fromView=image_search_similar&page=1&position=1&uuid=4cb2054c-fce0-4e04-bc5b-da68bc800fa4)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 

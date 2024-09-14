@@ -1,14 +1,14 @@
 # 免费 Python 速成课程
 
-> 原文：[https://www.kdnuggets.com/2022/07/free-python-crash-course.html](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)
+> 原文：[`www.kdnuggets.com/2022/07/free-python-crash-course.html`](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)
 
 Python 是一种灵活、开源、解释型的高级编程语言，适用于各种现实世界的环境。由于其简单的语法和快速原型开发的适应性，Python 在某种程度上成为了[数据科学的语言](https://www.geeksforgeeks.org/python-for-data-science/)。
 
-Python 还恰好是世界上最流行的编程语言之一——如果不是**最**流行的编程语言的话——正如[TIOBE指数](https://www.tiobe.com/tiobe-index/) 2022年6月排名Python第1所证明的那样。
+Python 还恰好是世界上最流行的编程语言之一——如果不是**最**流行的编程语言的话——正如[TIOBE 指数](https://www.tiobe.com/tiobe-index/) 2022 年 6 月排名 Python 第 1 所证明的那样。
 
 [](https://www.kdnuggets.com/wp-content/uploads/tiobe-index-jun-2022.jpg)
 
-[![XXXXX](../Images/2a50136335070299e7347be4cdd59d0c.png)](https://www.kdnuggets.com/wp-content/uploads/tiobe-index-jun-2022.jpg)
+![XXXXX](https://www.kdnuggets.com/wp-content/uploads/tiobe-index-jun-2022.jpg)
 
 TIOBE 编程社区指数（[来源](https://www.tiobe.com/tiobe-index/)）
 
@@ -74,11 +74,11 @@ TIOBE 编程社区指数（[来源](https://www.tiobe.com/tiobe-index/)）
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -92,6 +92,6 @@ TIOBE 编程社区指数（[来源](https://www.tiobe.com/tiobe-index/)）
 
 +   [通过这个免费的 DevOps 快速课程解锁你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
 
-+   [KDnuggets 新闻，9月14日：免费的数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
++   [KDnuggets 新闻，9 月 14 日：免费的数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
 
 +   [免费的 Python 自动化课程](https://www.kdnuggets.com/2022/07/free-automate-python-course.html)

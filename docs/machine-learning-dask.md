@@ -1,10 +1,10 @@
 # Dask 中的机器学习
 
-> 原文：[https://www.kdnuggets.com/2020/06/machine-learning-dask.html](https://www.kdnuggets.com/2020/06/machine-learning-dask.html)
+> 原文：[`www.kdnuggets.com/2020/06/machine-learning-dask.html`](https://www.kdnuggets.com/2020/06/machine-learning-dask.html)
 
-[评论](#comments)
+评论
 
-在个人电脑上处理几GB的数据通常是一个艰巨的任务，除非该电脑具有高 RAM 和大量计算能力。
+在个人电脑上处理几 GB 的数据通常是一个艰巨的任务，除非该电脑具有高 RAM 和大量计算能力。
 
 尽管如此，数据科学家仍然需要寻找替代方案来处理这个问题。一些解决方法包括调整 Pandas 以使其能够处理大型数据集，购买 GPU 机器或在云端购买计算资源。在本文中，我们将看到如何使用[Dask](https://dask.org/)在本地机器上处理大数据集。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@ Dask 是一个用于 Python 的灵活并行计算库。它被构建为能够很�
 
 这些相似性使得将 Dask 轻松地融入您的工作流程。使用 Dask 的优势在于您可以将计算扩展到计算机上的多个核心。这使得您能够处理内存无法容纳的大型数据集。它还帮助加快通常需要很长时间的计算。
 
-![图示](../Images/e812ece84005237a2818fcfe66918ac8.png)
+![图示](img/e812ece84005237a2818fcfe66918ac8.png)
 
 [来源](https://dask.org/)
 
@@ -39,7 +39,7 @@ data_types ={'column1': str,'column2': float}
 df = dd.read_csv(“data,csv”,dtype = data_types,blocksize=64000000 )
 ```
 
-![图示](../Images/5742054bfc128a1492d8afc31c6a87ec.png)
+![图示](img/5742054bfc128a1492d8afc31c6a87ec.png)
 
 [来源](https://dask.org/)
 
@@ -69,7 +69,7 @@ from dask.distributed import Client
 client = Client()
 ```
 
-![](../Images/5c70485c72f6d940cbc7583df741811a.png)
+![](img/5c70485c72f6d940cbc7583df741811a.png)
 
 即使在单台机器上使用 `dask.distributed` 也是有利的，因为它通过仪表板提供了一些诊断功能。
 
@@ -144,15 +144,15 @@ Dask 有一个中央调度器，用于跟踪工作节点和集群上的数据。
 
 **相关:**
 
-+   [为什么以及如何在大数据中使用 Dask](/2020/04/dask-big-data.html)
++   为什么以及如何在大数据中使用 Dask
 
-+   [五个有趣的数据工程项目](/2020/03/data-engineering-projects.html)
++   五个有趣的数据工程项目
 
-+   [Python 中的自动化机器学习](/2019/01/automated-machine-learning-python.html)
++   Python 中的自动化机器学习
 
 ### 相关阅读
 
-+   [KDnuggets 新闻，12月14日: 3 门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日: 3 门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [每位机器学习工程师都应该掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 

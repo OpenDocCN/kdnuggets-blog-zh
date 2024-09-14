@@ -1,8 +1,8 @@
 # 最新 Scikit-learn 发布版本中的 5 个重要新特性
 
-> 原文：[https://www.kdnuggets.com/2019/12/5-features-scikit-learn-release-highlights.html](https://www.kdnuggets.com/2019/12/5-features-scikit-learn-release-highlights.html)
+> 原文：[`www.kdnuggets.com/2019/12/5-features-scikit-learn-release-highlights.html`](https://www.kdnuggets.com/2019/12/5-features-scikit-learn-release-highlights.html)
 
-[评论](#comments)![图示](../Images/af7c40c6dbf55897ff31b808c010e204.png)
+评论![图示](img/af7c40c6dbf55897ff31b808c010e204.png)
 
 Python 的主要机器学习库的最新版本包含了许多新特性和错误修复。您可以在官方的 Scikit-learn 0.22 [发布亮点](https://scikit-learn.org/stable/auto_examples/release_highlights/plot_release_highlights_0_22_0.html) 中找到这些更改的完整说明，并可以在 [变更日志](https://scikit-learn.org/stable/whats_new/v0.22.html#changes-0-22) 中查看详细内容。
 
@@ -33,7 +33,7 @@ svc.fit(X_train, y_train)
 svc_disp = plot_roc_curve(svc, X_test, y_test)
 ```
 
-![图示](../Images/78f780b3ffe836fc2e9b8333cc9f20d7.png)
+![图示](img/78f780b3ffe836fc2e9b8333cc9f20d7.png)
 
 请注意，绘图是通过代码的最后一行完成的。
 
@@ -91,7 +91,7 @@ fig.tight_layout()
 plt.show()
 ```
 
-![图示](../Images/a763ee46ff64e0c595bfcc16be9aeb6e.png)
+![图示](img/a763ee46ff64e0c595bfcc16be9aeb6e.png)
 
 ### 4\. 梯度提升缺失值支持
 
@@ -143,34 +143,34 @@ print(imputer.fit_transform(X))
 
 **相关**：
 
-+   [训练 sklearn 快速 100 倍](/2019/09/train-sklearn-100x-faster.html)
++   训练 sklearn 快速 100 倍
 
-+   [如何扩展 Scikit-learn 并为你的机器学习工作流带来理智](/2019/10/extend-scikit-learn-bring-sanity-machine-learning-workflow.html)
++   如何扩展 Scikit-learn 并为你的机器学习工作流带来理智
 
-+   [Scikit-Learn & 更多用于机器学习的合成数据集生成](/2019/09/scikit-learn-synthetic-dataset.html)
++   Scikit-Learn & 更多用于机器学习的合成数据集生成
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [解锁AI的力量 - KDnuggets与Machine…的特别发布](https://www.kdnuggets.com/2023/07/mlm-unlock-power-ai-special-release-kdnuggets-machine-learning-mastery.html)
++   [解锁 AI 的力量 - KDnuggets 与 Machine…的特别发布](https://www.kdnuggets.com/2023/07/mlm-unlock-power-ai-special-release-kdnuggets-machine-learning-mastery.html)
 
-+   [数据驱动的AI：你需要了解的最新研究](https://www.kdnuggets.com/2022/02/datacentric-ai-latest-research-need-know.html)
++   [数据驱动的 AI：你需要了解的最新研究](https://www.kdnuggets.com/2022/02/datacentric-ai-latest-research-need-know.html)
 
-+   [探索AI/DL的最新趋势：从元宇宙到量子计算](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)
++   [探索 AI/DL 的最新趋势：从元宇宙到量子计算](https://www.kdnuggets.com/2023/07/exploring-latest-trends-aidl-metaverse-quantum-computing.html)
 
-+   [探索Zephyr 7B：最新大型语言模型的全面指南](https://www.kdnuggets.com/exploring-the-zephyr-7b-a-comprehensive-guide-to-the-latest-large-language-model)
++   [探索 Zephyr 7B：最新大型语言模型的全面指南](https://www.kdnuggets.com/exploring-the-zephyr-7b-a-comprehensive-guide-to-the-latest-large-language-model)
 
-+   [生成式AI游乐场：带有Camel-5b和Open LLaMA 3B的LLM](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-llms-with-camel-5b-and-open-llama-3b)
++   [生成式 AI 游乐场：带有 Camel-5b 和 Open LLaMA 3B 的 LLM](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-llms-with-camel-5b-and-open-llama-3b)
 
-+   [发现计算机视觉的世界：介绍MLM的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
++   [发现计算机视觉的世界：介绍 MLM 的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)

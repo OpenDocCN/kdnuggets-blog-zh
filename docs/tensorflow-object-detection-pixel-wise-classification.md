@@ -1,8 +1,8 @@
 # 使用 Tensorflow Object Detection 进行逐像素分类
 
-> 原文：[https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html](https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html)
+> 原文：[`www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html`](https://www.kdnuggets.com/2018/03/tensorflow-object-detection-pixel-wise-classification.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Priyanka Kochhar](https://github.com/priya-dwivedi)，深度学习顾问**
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-![](../Images/8ada5265389d313a808b67abc2756e52.png)
+![](img/8ada5265389d313a808b67abc2756e52.png)
 
 Tensorflow Object Detection Mask RCNN
 
@@ -42,7 +42,7 @@ ii) 机器人系统——能够将两个部分连接在一起的机器人，如�
 
 让我们从对 Mask RCNN 的温和介绍开始。
 
-![](../Images/806d8ced7ec61ac42c409220b5910737.png)
+![](img/806d8ced7ec61ac42c409220b5910737.png)
 
 Mask RCNN 架构
 
@@ -50,7 +50,7 @@ Faster RCNN 是一种非常优秀的对象检测算法。Faster R-CNN 由两个�
 
 Mask R-CNN 从概念上讲是简单的：Faster R-CNN 为每个候选对象提供两个输出，一个是类别标签，一个是边界框偏移量；在此基础上，我们增加了第三个分支，该分支输出对象掩码 — 这是一个二值掩码，指示对象在边界框中的像素。但额外的掩码输出与类别和框的输出不同，需要提取对象的更精细的空间布局。为此，Mask RCNN 使用了[Fully Convolution Network](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf)Mask RCNN 论文（FCN）所描述的网络。
 
-![](../Images/c695f8b73516faad893949d212fd42ed.png)
+![](img/c695f8b73516faad893949d212fd42ed.png)
 
 完全卷积网络架构
 
@@ -66,7 +66,7 @@ Mask RCNN 有一些额外的改进，使其比 FCN 更准确。你可以在他�
 
 要在图像上测试这个模型，你可以利用在 tensorflow 网站上共享的[代码](https://github.com/tensorflow/models/blob/master/research/object_detection/object_detection_tutorial.ipynb)。我测试了他们最轻量级的模型 — [mask_rcnn_inception_v2_coco](http://download.tensorflow.org/models/object_detection/mask_rcnn_inception_v2_coco_2018_01_28.tar.gz)。只需下载模型并升级到 tensorflow 1.5（这一点很重要！）。请参见下面的示例结果：
 
-![](../Images/5ee142c3cc54af6d658a858a20600741.png)
+![](img/5ee142c3cc54af6d658a858a20600741.png)
 
 Mask RCNN 在风筝图像上的应用
 
@@ -110,17 +110,17 @@ PS: 我有自己的深度学习咨询公司，喜欢构建有趣的深度学习�
 
 +   对 Mask RCNN 的非常好的 [解释](https://www.youtube.com/watch?v=UdZnhZrM2vQ&t=111s)
 
-**简介: [Priyanka Kochhar](https://github.com/priya-dwivedi)** 拥有超过 10 年的数据科学经验。她现在拥有自己的深度学习咨询公司，喜欢解决有趣的问题。她帮助了多家初创公司部署创新的 AI 解决方案。如果你有一个可以合作的项目，请通过 [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com) 联系她。
+**简介: [Priyanka Kochhar](https://github.com/priya-dwivedi)** 拥有超过 10 年的数据科学经验。她现在拥有自己的深度学习咨询公司，喜欢解决有趣的问题。她帮助了多家初创公司部署创新的 AI 解决方案。如果你有一个可以合作的项目，请通过 priya.toronto3@gmail.com 联系她。
 
 [原文](https://towardsdatascience.com/using-tensorflow-object-detection-to-do-pixel-wise-classification-702bf2605182)。经许可转载。
 
 **相关：**
 
-+   [Google Tensorflow Object Detection API 是实现图像识别的最简单方式吗？](/2018/03/google-tensorflow-object-detection-api-the-easiest-way-implement-image-recognition.html)
++   Google Tensorflow Object Detection API 是实现图像识别的最简单方式吗？
 
-+   [使用 Tensorflow Object Detection API 构建一个玩具检测器](/2018/02/building-toy-detector-tensorflow-object-detection-api.html)
++   使用 Tensorflow Object Detection API 构建一个玩具检测器
 
-+   [训练和可视化词向量](/2018/01/training-visualising-word-vectors.html)
++   训练和可视化词向量
 
 ### 更多相关主题
 
@@ -134,4 +134,4 @@ PS: 我有自己的深度学习咨询公司，喜欢构建有趣的深度学习�
 
 +   [使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
 
-+   [KDnuggets 新闻，8月17日：如何使用运动检测…](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何使用运动检测…](https://www.kdnuggets.com/2022/n33.html)

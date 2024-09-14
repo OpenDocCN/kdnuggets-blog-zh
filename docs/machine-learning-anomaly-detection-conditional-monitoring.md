@@ -1,8 +1,8 @@
 # 如何使用机器学习进行异常检测和条件监控
 
-> 原文：[https://www.kdnuggets.com/2020/12/machine-learning-anomaly-detection-conditional-monitoring.html](https://www.kdnuggets.com/2020/12/machine-learning-anomaly-detection-conditional-monitoring.html)
+> 原文：[`www.kdnuggets.com/2020/12/machine-learning-anomaly-detection-conditional-monitoring.html`](https://www.kdnuggets.com/2020/12/machine-learning-anomaly-detection-conditional-monitoring.html)
 
-[评论](#comments)
+评论
 
 **由 [Michael Garbade](https://www.linkedin.com/in/garbade)，教育生态系统首席执行官兼创始人**
 
@@ -26,13 +26,13 @@
 
 ### **什么是异常检测？实际应用案例。**
 
-异常检测分析的主要目标是识别那些不符合正常行为的一般模式的观察值。例如，*图1* 显示了分类和回归问题中的异常。我们可以看到一些值偏离了大多数例子。
+异常检测分析的主要目标是识别那些不符合正常行为的一般模式的观察值。例如，*图 1* 显示了分类和回归问题中的异常。我们可以看到一些值偏离了大多数例子。
 
-![图示](../Images/f2730b87f308c3cbf3fb6177e8f0a588.png)
+![图示](img/f2730b87f308c3cbf3fb6177e8f0a588.png)
 
-***图1\. 分类（a，左）和回归（b，右）问题中的异常值***
+***图 1\. 分类（a，左）和回归（b，右）问题中的异常值***
 
-数据分析中有两个方向用于搜索异常：异常值检测和新颖性检测。因此，异常值是与训练数据集中其他数据点不同的观察值。新颖性数据点也与数据集中的其他观察值不同，但与异常值不同，新颖性点出现在测试数据集中，而通常在训练数据集中不存在。因此，图1中显示了异常值。
+数据分析中有两个方向用于搜索异常：异常值检测和新颖性检测。因此，异常值是与训练数据集中其他数据点不同的观察值。新颖性数据点也与数据集中的其他观察值不同，但与异常值不同，新颖性点出现在测试数据集中，而通常在训练数据集中不存在。因此，图 1 中显示了异常值。
 
 异常值最常见的原因是；
 
@@ -44,13 +44,13 @@
 
 因此，异常值处理取决于数据的性质和领域。噪声数据点应进行过滤（噪声去除）；数据错误应进行纠正。一些应用专注于异常选择，我们将进一步讨论一些应用。
 
-在各种商业应用中，异常检测都很有用。例如，入侵检测系统（IDS）基于异常检测。图2展示了NSL-KDD数据集的观察分布，这是一种用于IDS的先进数据集。我们可以看到，大多数观察都是正常请求，而Probe或U2R是一些异常点。自然，计算机系统中的大多数请求是正常的，只有一部分是攻击尝试。
+在各种商业应用中，异常检测都很有用。例如，入侵检测系统（IDS）基于异常检测。图 2 展示了 NSL-KDD 数据集的观察分布，这是一种用于 IDS 的先进数据集。我们可以看到，大多数观察都是正常请求，而 Probe 或 U2R 是一些异常点。自然，计算机系统中的大多数请求是正常的，只有一部分是攻击尝试。
 
-![图](../Images/835e18c19e149416f7e915d898ab9039.png)
+![图](img/835e18c19e149416f7e915d898ab9039.png)
 
-***图2\. IDS观察分布***
+***图 2\. IDS 观察分布***
 
-信用卡欺诈检测系统（CCFDS）是另一个异常检测的应用案例。例如，来自kaggle.com的开放数据集（https://www.kaggle.com/mlg-ulb/creditcardfraud）包含了2013年9月欧洲持卡人使用信用卡的交易记录。该数据集展示了发生在两天内的交易，共有284,807笔交易，其中492笔为欺诈交易。数据集高度不平衡。正类（欺诈交易）占所有交易的0.172%。
+信用卡欺诈检测系统（CCFDS）是另一个异常检测的应用案例。例如，来自 kaggle.com 的开放数据集（https://www.kaggle.com/mlg-ulb/creditcardfraud）包含了 2013 年 9 月欧洲持卡人使用信用卡的交易记录。该数据集展示了发生在两天内的交易，共有 284,807 笔交易，其中 492 笔为欺诈交易。数据集高度不平衡。正类（欺诈交易）占所有交易的 0.172%。
 
 异常检测有两种方法：
 
@@ -58,25 +58,25 @@
 
 +   无监督方法。
 
-在监督异常检测方法中，数据集具有正常和异常观察或数据点的标签。IDS和CCFDS数据集适合用于监督方法。这些用例中使用了标准的机器学习方法。监督异常检测是一种二分类问题。需要注意的是，异常检测问题的数据集往往高度不平衡。因此，在使用监督分类方法之前，使用一些数据增强程序（如k-最近邻算法、ADASYN、SMOTE、随机抽样等）是很重要的。Jordan Sweeney展示了如何在Education Ecosystem的一个项目中使用k-最近邻算法，[旅行推销员 - 最近邻](https://www.education-ecosystem.com/jsweeney91/2oPDm-travelling-salesman-nearest-neighbour)。
+在监督异常检测方法中，数据集具有正常和异常观察或数据点的标签。IDS 和 CCFDS 数据集适合用于监督方法。这些用例中使用了标准的机器学习方法。监督异常检测是一种二分类问题。需要注意的是，异常检测问题的数据集往往高度不平衡。因此，在使用监督分类方法之前，使用一些数据增强程序（如 k-最近邻算法、ADASYN、SMOTE、随机抽样等）是很重要的。Jordan Sweeney 展示了如何在 Education Ecosystem 的一个项目中使用 k-最近邻算法，[旅行推销员 - 最近邻](https://www.education-ecosystem.com/jsweeney91/2oPDm-travelling-salesman-nearest-neighbour)。
 
-无监督异常检测在没有关于异常和相关模式的信息时非常有用。此时使用孤立森林、OneClassSVM或k-means方法。这里的主要思想是将所有观察划分为若干个簇，并分析这些簇的结构和大小。
+无监督异常检测在没有关于异常和相关模式的信息时非常有用。此时使用孤立森林、OneClassSVM 或 k-means 方法。这里的主要思想是将所有观察划分为若干个簇，并分析这些簇的结构和大小。
 
-有不同的开放数据集用于异常检测方法的测试，例如，异常检测数据集 ([http://odds.cs.stonybrook.edu/](http://odds.cs.stonybrook.edu/))。
+有不同的开放数据集用于异常检测方法的测试，例如，异常检测数据集 ([`odds.cs.stonybrook.edu/`](http://odds.cs.stonybrook.edu/))。
 
 ### **基于孤立森林的无监督异常检测**
 
-Isolation Forests 方法基于决策树的随机实现和其他结果的集成。每棵决策树都会构建到训练数据集耗尽为止。为构建决策树的新分支而选择一个随机特征和随机分裂。该算法通过决策树叶子的深度均值来区分正常点和离群点。此方法已在 scikit-learn 库中实现 ([https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html))。
+Isolation Forests 方法基于决策树的随机实现和其他结果的集成。每棵决策树都会构建到训练数据集耗尽为止。为构建决策树的新分支而选择一个随机特征和随机分裂。该算法通过决策树叶子的深度均值来区分正常点和离群点。此方法已在 scikit-learn 库中实现 ([`scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.IsolationForest.html))。
 
 为了说明异常检测方法，让我们考虑一些带有离群点的玩具数据集，这些数据集已经在图 3 中展示。类 1 的点是离群点。‘class’ 列在分析中未使用，仅用于说明。
 
-![图](../Images/30caf3b01255575047765b447f3a9b92.png)
+![图](img/30caf3b01255575047765b447f3a9b92.png)
 
 ***图 3\. 数据集样本和散点图***
 
 让我们对这个玩具例子应用 Isolation Forests 方法，并在一些玩具测试数据集上进一步测试。结果如 *图 4* 所示。完整代码请见： https://www.kaggle.com/avk256/anomaly-detection。
 
-![图](../Images/ef29303642b6bd78cb8f940a13b47881.png)
+![图](img/ef29303642b6bd78cb8f940a13b47881.png)
 
 ***图 4\. 数据集和 Isolation Forests 方法的实现***
 
@@ -90,21 +90,21 @@ Isolation Forests 方法基于决策树的随机实现和其他结果的集成�
 
 **相关:**
 
-+   [异常检测，AI 和机器学习的关键任务，解释](./2019/10/anomaly-detection-explained.html)
++   异常检测，AI 和机器学习的关键任务，解释
 
-+   [介绍 MIDAS：图形异常检测的新基准](/2020/04/midas-new-baseline-anomaly-detection-graphs.html)
++   介绍 MIDAS：图形异常检测的新基准
 
-+   [异常检测简介](/2017/04/datascience-introduction-anomaly-detection.html)
++   异常检测简介
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

@@ -1,12 +1,12 @@
 # 使用 PyCaret 编写和训练你自己的自定义机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2021/05/pycaret-write-train-custom-machine-learning-models.html](https://www.kdnuggets.com/2021/05/pycaret-write-train-custom-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2021/05/pycaret-write-train-custom-machine-learning-models.html`](https://www.kdnuggets.com/2021/05/pycaret-write-train-custom-machine-learning-models.html)
 
-[评论](#comments)
+评论
 
 **作者 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 创始人兼作者**
 
-![](../Images/f3d71174487d3e14feeed2b4cbb3a143.png)
+![](img/f3d71174487d3e14feeed2b4cbb3a143.png)
 
 由 [Rob Lambert](https://unsplash.com/@roblambertjr?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供的照片
 
@@ -50,7 +50,7 @@ pip install pycaret[full]
 data = get_data('insurance')
 ```
 
-![](../Images/fae3dfa9a10905b75b6f8853af494e65.png)
+![](img/fae3dfa9a10905b75b6f8853af494e65.png)
 
 来自保险数据集的示例行
 
@@ -63,13 +63,13 @@ data = get_data('insurance')
 s = setup(data, target = 'charges')
 ```
 
-![](../Images/85fe7b54a3626a0d00b62f41f5db0383.png)
+![](img/85fe7b54a3626a0d00b62f41f5db0383.png)
 
 pycaret.regression 模块中的 setup 函数
 
 每当你初始化 PyCaret 中的 `setup` 函数时，它会对数据集进行分析，并推断所有输入特征的数据类型。如果所有数据类型都被正确推断，你可以按回车键继续。
 
-![](../Images/49ed9255c57fd3ed7f1bb7c02d87be52.png)
+![](img/49ed9255c57fd3ed7f1bb7c02d87be52.png)
 
 从 `setup` 输出 — 输出已截断以便展示
 
@@ -81,7 +81,7 @@ pycaret.regression 模块中的 setup 函数
 **# check all the available models** models()
 ```
 
-![](../Images/ecaedf0bb163f9a78072d41633c664a1.png)
+![](img/ecaedf0bb163f9a78072d41633c664a1.png)
 
 从 `models()` 输出 — 输出已截断以便展示
 
@@ -93,7 +93,7 @@ PyCaret 中用于训练任何模型的最常用函数是 `create_model`。它接
 **# train decision tree** dt = create_model('dt')
 ```
 
-![](../Images/22cb20e0d040a8e0edc793f817188b44.png)
+![](img/22cb20e0d040a8e0edc793f817188b44.png)
 
 从 `create_model('dt')` 输出
 
@@ -103,7 +103,7 @@ PyCaret 中用于训练任何模型的最常用函数是 `create_model`。它接
 print(dt)
 ```
 
-![](../Images/0c1ce4f0ba7e039a693b28c7ad4cbb86.png)
+![](img/0c1ce4f0ba7e039a693b28c7ad4cbb86.png)
 
 从 `print(dt)` 输出
 
@@ -115,7 +115,7 @@ multiple_models = [create_model(i) for i in ['dt', 'lr', 'xgboost']]**# check mu
 >>> (list, 3)print(multiple_models)
 ```
 
-![](../Images/f2b1f7f0b90b9f4ebd8acf7354ef1b64.png)
+![](img/f2b1f7f0b90b9f4ebd8acf7354ef1b64.png)
 
 从 `print(multiple_models)` 输出
 
@@ -126,7 +126,7 @@ multiple_models = [create_model(i) for i in ['dt', 'lr', 'xgboost']]**# check mu
 best_model = compare_models()
 ```
 
-![](../Images/7c0cdf94f96072890f7952396eff0051.png)
+![](img/7c0cdf94f96072890f7952396eff0051.png)
 
 从 `compare_models` 函数输出
 
@@ -137,7 +137,7 @@ best_model = compare_models()
 print(best_model)
 ```
 
-![](../Images/ec8516090da521d25b6e9d7ab052c4ee.png)
+![](img/ec8516090da521d25b6e9d7ab052c4ee.png)
 
 从 `print(best_model)` 输出
 
@@ -147,7 +147,7 @@ print(best_model)
 **# predict on hold-out** pred_holdout = predict_model(best_model)
 ```
 
-![](../Images/e426eb5120cfa56c6097b5ea9cc3c8cd.png)
+![](img/e426eb5120cfa56c6097b5ea9cc3c8cd.png)
 
 从 `predict_model(best_model)` 函数输出
 
@@ -159,7 +159,7 @@ data2 = data.copy()
 data2.drop('charges', axis=1, inplace=True)**# generate predictions** predictions = predict_model(best_model, data = data2)
 ```
 
-![](../Images/862cf3d9f8cd723b9b7ed0ed6bf4708b.png)
+![](img/862cf3d9f8cd723b9b7ed0ed6bf4708b.png)
 
 从 `predict_model(best_model, data = data2)` 输出
 
@@ -189,7 +189,7 @@ from gplearn.genetic import SymbolicRegressor
 sc = SymbolicRegressor()**# train using create_model** sc_trained = create_model(sc)
 ```
 
-![](../Images/66a630f98663fa2b1d63ba0a98212b6d.png)
+![](img/66a630f98663fa2b1d63ba0a98212b6d.png)
 
 从 create_model(sc_trained) 的输出
 
@@ -197,7 +197,7 @@ sc = SymbolicRegressor()**# train using create_model** sc_trained = create_model
 print(sc_trained)
 ```
 
-![](../Images/e676a570f81885915b30dc18cc24d3d4.png)
+![](img/e676a570f81885915b30dc18cc24d3d4.png)
 
 从 print(sc_trained) 的输出
 
@@ -207,7 +207,7 @@ print(sc_trained)
 **# check hold-out score** pred_holdout_sc = predict_model(sc_trained)
 ```
 
-![](../Images/3757871ff51629c0fd8b13f78442af2d.png)
+![](img/3757871ff51629c0fd8b13f78442af2d.png)
 
 从 predict_model(sc_trained) 的输出
 
@@ -230,7 +230,7 @@ from ngboost import NGBRegressor
 ng = NGBRegressor()**# train using create_model** ng_trained = create_model(ng)
 ```
 
-![](../Images/f19311e7720b0d9f3ebc5f4e144ec2bc.png)
+![](img/f19311e7720b0d9f3ebc5f4e144ec2bc.png)
 
 从 create_model(ng) 的输出
 
@@ -238,7 +238,7 @@ ng = NGBRegressor()**# train using create_model** ng_trained = create_model(ng)
 print(ng_trained)
 ```
 
-![](../Images/68f00a25b30e14e6761fa8691a97c516.png)
+![](img/68f00a25b30e14e6761fa8691a97c516.png)
 
 从 print(ng_trained) 的输出
 
@@ -270,7 +270,7 @@ import numpy as npfrom sklearn.base import BaseEstimatorclass MyOwnModel(BaseEst
 mom = MyOwnModel()**# train using create_model** mom_trained = create_model(mom)
 ```
 
-![](../Images/c089fe6ac015fa821cee2295f480baa6.png)
+![](img/c089fe6ac015fa821cee2295f480baa6.png)
 
 来自 create_model(mom) 的输出
 
@@ -279,7 +279,7 @@ mom = MyOwnModel()**# train using create_model** mom_trained = create_model(mom)
 predictions = predict_model(mom_trained, data=data)
 ```
 
-![](../Images/6cc6e0701a9efb401a9a87a096e5b04c.png)
+![](img/6cc6e0701a9efb401a9a87a096e5b04c.png)
 
 来自 predict_model(mom, data=data) 的输出
 
@@ -345,21 +345,21 @@ predictions = predict_model(mom_trained, data=data)
 
 **相关:**
 
-+   [使用 PyCaret + MLflow 进行简单的 MLOps](/2021/05/easy-mlops-pycaret-mlflow.html)
++   使用 PyCaret + MLflow 进行简单的 MLOps
 
-+   [GitHub 是你所需的最佳 AutoML](/2020/08/github-best-automl-ever-need.html)
++   GitHub 是你所需的最佳 AutoML
 
-+   [使用 Docker 容器将机器学习管道部署到云端](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
++   使用 Docker 容器将机器学习管道部署到云端
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

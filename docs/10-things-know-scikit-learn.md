@@ -1,12 +1,12 @@
 # 你可能不知道的 10 件关于 Scikit-Learn 的事
 
-> 原文：[https://www.kdnuggets.com/2020/09/10-things-know-scikit-learn.html](https://www.kdnuggets.com/2020/09/10-things-know-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2020/09/10-things-know-scikit-learn.html`](https://www.kdnuggets.com/2020/09/10-things-know-scikit-learn.html)
 
-[评论](#comments)
+评论
 
 **作者：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)，数据科学家**
 
-![图示](../Images/cbdc641473704432ff7792a819e0fc6d.png)
+![图示](img/cbdc641473704432ff7792a819e0fc6d.png)
 
 图片由 [Sasha • Stories](https://unsplash.com/@sanfrancisco?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/crystal-ball?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -68,7 +68,7 @@ plt.show()
 
 ```
 
-![Image for post](../Images/adae73e95dd662f04474adbc8c32218a.png)
+![Image for post](img/adae73e95dd662f04474adbc8c32218a.png)
 
 ### 5\. Scikit-learn 具有内置的特征选择方法
 
@@ -92,13 +92,13 @@ Scikit-learn 管道中有一个叫 [**ColumnTransformer**](https://scikit-learn.
 
 管道往往会变得相当复杂，特别是在处理实际数据时。因此，Scikit-learn 提供了一种方法来输出 [**HTML 图示**](https://scikit-learn.org/stable/modules/compose.html#visualizing-composite-estimators) 以显示管道中的步骤非常方便。
 
-![文章配图](../Images/5427a5b0ffaa48ee38798396281e2b25.png)
+![文章配图](img/5427a5b0ffaa48ee38798396281e2b25.png)
 
 ### 9\. 有一个绘图函数用于可视化树
 
 ` [**plot_tree()**](https://scikit-learn.org/stable/modules/generated/sklearn.tree.plot_tree.html)` 函数允许你创建决策树模型中步骤的图示。
 
-![文章配图](../Images/e02b4283a42a67f179b6df6016b20cb4.png)
+![文章配图](img/e02b4283a42a67f179b6df6016b20cb4.png)
 
 ### 10\. 有许多第三方库可以扩展 Scikit-learn 的功能
 
@@ -118,22 +118,22 @@ Scikit-learn 管道中有一个叫 [**ColumnTransformer**](https://scikit-learn.
 
 **相关：**
 
-+   [可解释机器学习的 Python 库](/2019/09/python-libraries-interpretable-machine-learning.html)
++   可解释机器学习的 Python 库
 
-+   [数据科学的五个命令行工具](/2019/07/five-command-line-tools-data-science.html)
++   数据科学的五个命令行工具
 
-+   [每位数据科学家都应该知道的命令行基础知识](/2019/08/command-line-basics-every-data-scientist.html)
++   每位数据科学家都应该知道的命令行基础知识
 
 ### 更多相关话题
 
 +   [你不知道的低代码工具的 7 件事](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
-+   [你不知道的SAS数据科学学院的3件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [你不知道的 SAS 数据科学学院的 3 件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
 
-+   [你可能不知道的4个Python Itertools过滤函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
++   [你可能不知道的 4 个 Python Itertools 过滤函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
 
-+   [关于数据管理你需要知道的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理你需要知道的 6 件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [扩展你的Web数据驱动产品时你应该知道的事](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
++   [扩展你的 Web 数据驱动产品时你应该知道的事](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
 
-+   [构建LLM应用时需要知道的5件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
++   [构建 LLM 应用时需要知道的 5 件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)

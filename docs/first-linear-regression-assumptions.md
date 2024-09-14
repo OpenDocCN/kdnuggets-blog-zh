@@ -1,8 +1,8 @@
 # 你已经创建了你的第一个线性回归模型。你验证了这些假设吗？
 
-> 原文：[https://www.kdnuggets.com/2017/11/first-linear-regression-assumptions.html](https://www.kdnuggets.com/2017/11/first-linear-regression-assumptions.html)
+> 原文：[`www.kdnuggets.com/2017/11/first-linear-regression-assumptions.html`](https://www.kdnuggets.com/2017/11/first-linear-regression-assumptions.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **由 [Sudipto Dasgupta](https://www.linkedin.com/in/dsudipto/)，Flipkart 提供。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,13 +28,13 @@
 
 **3\. 同方差性** – *Homo* 意为相似，而 *scedasticity* 意为误差项的分布。因此，同方差性意味着误差项的分布是相似的（即随机的）。如果误差项中存在任何非随机行为，如下图中的残差与拟合图，则模型被认为存在称为异方差性的病症。这也可以通过 ncv 测试等方法检测到。使用 Box-Cox 等方法对变量进行变换，或者尝试完全不同的变量可以解决模型中的这个问题。
 
-![](../Images/7ec18901b4ebf5f25ad517c8900d55b7.png)
+![](img/7ec18901b4ebf5f25ad517c8900d55b7.png)
 
 **4\. 残差正态性** - 误差项也称为残差。这是 DV(y) 的观测值与预测值 (ŷ) 之间的差异。误差项是阻碍我们实现完美预测的因素。请记住，在计算标准差时，我们使用 {x-x̄}，而在卡方检验中，我们使用 {观测值-期望值} 进行计算。残差分析是多种统计方法的一个组成部分，包括 LR。LR 的假设是残差必须独立且随机分布，均值为零，这在技术上意味着残差应该通过正态性测试。这可以通过提取残差并进行正态性测试（如 Anderson-Darling 测试或 Shapiro 测试）来验证，或者通过分位数图或概率图进行图形化验证。非随机行为的存在表明模型需要某些调整。离群值可能是罪魁祸首，或者需要更高阶项。在某些情况下，转换也可能有所帮助。
 
 **5\. 自相关** - 不应存在。在前一点中，我提到过残差必须独立且正态分布。当残差的独立性被破坏时，我们可以看到如下模式，或在残差与顺序图中出现周期性趋势。这也可以通过对数据应用 Durbin-Watson 测试来检测。解决方案也有多种类型，如使用不同的模型或转换某些变量。
 
-![](../Images/22494367d7f53bdb4f12272b53361468.png)
+![](img/22494367d7f53bdb4f12272b53361468.png)
 
 简单线性回归，顾名思义，容易理解和应用。我在项目中发现，线性回归在建模数据方面表现良好。因此，线性回归仍然是最常用的数据建模算法之一，这并不令人惊讶。
 
@@ -42,11 +42,11 @@
 
 **相关：**
 
-+   [初学者的十大机器学习算法](/2017/10/top-10-machine-learning-algorithms-beginners.html)
++   初学者的十大机器学习算法
 
-+   [使用 R 学习广义线性模型（GLM）](/2017/10/learn-generalized-linear-models-glm-r.html)
++   使用 R 学习广义线性模型（GLM）
 
-+   [回归分析真的属于机器学习吗？](/2017/06/regression-analysis-really-machine-learning.html)
++   回归分析真的属于机器学习吗？
 
 ### 更多相关内容
 
@@ -54,10 +54,10 @@
 
 +   [DataLang: 一种面向数据科学家的新编程语言… 创建…](https://www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html)
 
-+   [我在3天内创建了一个AI应用](https://www.kdnuggets.com/2023/08/created-ai-app-3-days.html)
++   [我在 3 天内创建了一个 AI 应用](https://www.kdnuggets.com/2023/08/created-ai-app-3-days.html)
 
 +   [线性回归模型选择：平衡简易性与复杂性](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)
 
-+   [为什么你应该使用线性回归模型而不是… 的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [为什么你应该使用线性回归模型而不是… 的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
 +   [线性回归与逻辑回归的比较](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)

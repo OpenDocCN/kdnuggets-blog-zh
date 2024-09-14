@@ -1,46 +1,46 @@
-# 你可以用R做的5件令人惊讶的事
+# 你可以用 R 做的 5 件令人惊讶的事
 
-> 原文：[https://www.kdnuggets.com/2022/08/5-surprising-things-r.html](https://www.kdnuggets.com/2022/08/5-surprising-things-r.html)
+> 原文：[`www.kdnuggets.com/2022/08/5-surprising-things-r.html`](https://www.kdnuggets.com/2022/08/5-surprising-things-r.html)
 
-![你可以用R做的5件令人惊讶的事](../Images/c73f6aa7e8b29e0e35a274c2511f877f.png)
+![你可以用 R 做的 5 件令人惊讶的事](img/c73f6aa7e8b29e0e35a274c2511f877f.png)
 
 编辑器提供的图片
 
-R已经改变了我们处理数据的方式。从数据可视化和分析到机器学习和人工智能，R在数据科学的众多领域产生了深远的影响。因此，许多数据科学家、分析师和学术专业人士都在使用功能强大的R编程语言。
+R 已经改变了我们处理数据的方式。从数据可视化和分析到机器学习和人工智能，R 在数据科学的众多领域产生了深远的影响。因此，许多数据科学家、分析师和学术专业人士都在使用功能强大的 R 编程语言。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-R是[TIOBE指数](https://www.tiobe.com/tiobe-index/)的长期成员，该指数衡量不同编程语言的流行程度，R被各类专业背景的人士使用。本文将深入探讨R的不同用途，并展示你学习这个[编程语言](/2021/05/top-programming-languages.html)后可以做些什么。
+R 是[TIOBE 指数](https://www.tiobe.com/tiobe-index/)的长期成员，该指数衡量不同编程语言的流行程度，R 被各类专业背景的人士使用。本文将深入探讨 R 的不同用途，并展示你学习这个编程语言后可以做些什么。
 
 # 1\. 创建和定制仪表板和数据可视化
 
 没有数据可视化，几乎无法理解你的数据。数据可视化将你收集和分析的数据转化为易于消化的视觉内容，如图像和图表。这些视觉效果帮助数据科学家和分析师识别数据中难以察觉的趋势。
 
-数据可视化是分析大型数据集时不可或缺的工具，而R的ggplot2包是其中最优秀的数据可视化工具之一。这个包允许用户绘制几乎任何想要的数据图表，掌握ggplot2是充分发挥R潜力的一个重要步骤。
+数据可视化是分析大型数据集时不可或缺的工具，而 R 的 ggplot2 包是其中最优秀的数据可视化工具之一。这个包允许用户绘制几乎任何想要的数据图表，掌握 ggplot2 是充分发挥 R 潜力的一个重要步骤。
 
-你还可以考虑将ggplot2包提供的语法与Plotly或Shiny等工具结合使用。这将使你能够定制数据可视化和仪表板，并使其更具交互性。如果你有一个前端开发人员合作，你可以[利用他们的技能](https://www.waveapps.com/freelancing/what-is-front-end-developer)使你的视觉效果更具吸引力和易于阅读。同时，也可以考虑探索与ggplot2、Plotly和Shiny相关的数据可视化课程。
+你还可以考虑将 ggplot2 包提供的语法与 Plotly 或 Shiny 等工具结合使用。这将使你能够定制数据可视化和仪表板，并使其更具交互性。如果你有一个前端开发人员合作，你可以[利用他们的技能](https://www.waveapps.com/freelancing/what-is-front-end-developer)使你的视觉效果更具吸引力和易于阅读。同时，也可以考虑探索与 ggplot2、Plotly 和 Shiny 相关的数据可视化课程。
 
 # 2\. 更高级的探索性数据分析
 
 大多数数据科学项目要求在开始其他工作之前进行探索性数据分析。探索性数据分析包括你用来描述数据集的相同步骤。确定不同类型的数据、找到缺失的信息，以及识别值的分布和数据点之间的相关性通常都属于探索性数据分析的范畴。
 
-在使用和掌握 R 时，了解你的数据集包含什么通过[探索性数据分析](/2021/02/powerful-exploratory-data-analysis-sweetviz.html)是获取新数据后必不可少的。R 提供了一个名为 "tidyverse" 的套件，包括 tidyr 和 dplyr，允许用户探索、操作和计算数据集。tidyverse 套件具有简单易用的语法，使用户能够快速获得他们想要的答案。
+在使用和掌握 R 时，了解你的数据集包含什么通过探索性数据分析是获取新数据后必不可少的。R 提供了一个名为 "tidyverse" 的套件，包括 tidyr 和 dplyr，允许用户探索、操作和计算数据集。tidyverse 套件具有简单易用的语法，使用户能够快速获得他们想要的答案。
 
 如果你对使用 R 的 tidyverse 套件来探索、操作和计算数据集感兴趣，探索那些深入讲解如何使用 dplyr 和 tidyr 操作数据的课程是个好主意。
 
 # 3\. 执行更具科学严谨性的数据分析
 
-如果你打算学习和掌握 R 编程语言，你需要一种确保你的数据分析具有科学严谨性的方法。统计正是你确保[数据分析中存在科学严谨性](/2022/06/statistics-probability-data-science.html)的关键，而 R 是你可以利用多个统计工具的语言。
+如果你打算学习和掌握 R 编程语言，你需要一种确保你的数据分析具有科学严谨性的方法。统计正是你确保数据分析中存在科学严谨性的关键，而 R 是你可以利用多个统计工具的语言。
 
 在所有可用的编程语言中，R 可能拥有最多专注于统计的工具。R 的工具套件允许你执行各种统计功能。无论你需要获得描述性统计，如标准差和均值，创建映射逻辑回归和线性回归的模型，还是进行 A/B 测试，R 的统计能力确实非常广泛。
 
@@ -64,7 +64,7 @@ Markdown 的扩展，[R Markdown 是一种标记语言](https://blog.nebu.com/us
 
 # 结论
 
-R 编程语言在[数据科学](/2021/12/what-does-a-data-scientist-do.html)的几乎每个方面都有专长，它彻底改变了数据科学家和分析师处理数据的方式。一旦掌握了 R，它提供了许多潜在的用途，我们希望我们介绍的五种令人惊讶的 R 使用方式能激励你开始你的学习之旅！
+R 编程语言在数据科学的几乎每个方面都有专长，它彻底改变了数据科学家和分析师处理数据的方式。一旦掌握了 R，它提供了许多潜在的用途，我们希望我们介绍的五种令人惊讶的 R 使用方式能激励你开始你的学习之旅！
 
 **[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在将全部精力投入技术写作之前，她曾担任许多有趣的职位，包括作为一家 Inc. 5,000 实验性品牌机构的首席程序员，该机构的客户包括三星、时代华纳、Netflix 和索尼。
 

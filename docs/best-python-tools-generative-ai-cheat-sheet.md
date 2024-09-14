@@ -1,6 +1,6 @@
 # 构建生成式 AI 应用程序的最佳 Python 工具备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html`](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)
 
 # 新一代的声音
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -24,7 +24,7 @@ KDnuggets 发布了一个[富有洞察力的新备忘单](https://www.kdnuggets.
 
 要了解更多关于生成式 AI 应用程序构建中使用哪些 Python 工具的信息，[查看我们的最新备忘单](https://www.kdnuggets.com/wp-content/uploads/Best_Python_Tools_for_Building_Generative_AI_Applications_KDnuggets.pdf)。
 
-![构建生成式 AI 应用程序的最佳 Python 工具备忘单](../Images/6f3fd360a8bf19a1a5c06b39fbcfaf1d.png)
+![构建生成式 AI 应用程序的最佳 Python 工具备忘单](img/6f3fd360a8bf19a1a5c06b39fbcfaf1d.png)
 
 > 目前有许多开源的 Python 库和框架可以使开发人员构建创新的生成式 AI 应用程序，从图像和文本生成到自主 AI。
 

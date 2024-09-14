@@ -1,32 +1,32 @@
-# SAS®视觉数据科学决策，由SAS® Viya®驱动：免费试用
+# SAS®视觉数据科学决策，由 SAS® Viya®驱动：免费试用
 
-> 原文：[https://www.kdnuggets.com/2021/06/sas-viya-visual-data-science-free-trial.html](https://www.kdnuggets.com/2021/06/sas-viya-visual-data-science-free-trial.html)
+> 原文：[`www.kdnuggets.com/2021/06/sas-viya-visual-data-science-free-trial.html`](https://www.kdnuggets.com/2021/06/sas-viya-visual-data-science-free-trial.html)
 
 赞助帖子。
 
 由 [Lindsay Marshall](https://blogs.sas.com/content/author/lindsaymarshall/)撰写
 
-[![Sas Viya 免费试用](../Images/36156f485b0db53e83ca67ad5aff86e8.png)](https://ad.doubleclick.net/ddm/trackclk/N6626.289580.KDNUGGETS.COM/B23482492.305689651;dc_trk_aid=498426990;dc_trk_cid=152464299;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;ltd=)![广告](../Images/001826f9a0ff785eef29cbccec3f5bcf.png)
+![Sas Viya 免费试用](https://ad.doubleclick.net/ddm/trackclk/N6626.289580.KDNUGGETS.COM/B23482492.305689651;dc_trk_aid=498426990;dc_trk_cid=152464299;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;ltd=)![广告](img/001826f9a0ff785eef29cbccec3f5bcf.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-能够解读和分析数据的组织在数字经济中具备了获胜的条件。在COVID-19之后，[Gartner表示69%的董事会已经加快了他们的数字业务计划](https://www.gartner.com/en/newsroom/press-releases/2020-09-30-gartner-says-sixty-nine-percent-of-boards-of-directors-accelerated-their-digital-business-initiatives-folloing-covid-19-disruptions)。分析是整个企业的重要投资，组织需要对所选择的供应商充满信心。为何不免费发现SAS®如何帮助你准备、探索、分析和可视化你的数据？
+能够解读和分析数据的组织在数字经济中具备了获胜的条件。在 COVID-19 之后，[Gartner 表示 69%的董事会已经加快了他们的数字业务计划](https://www.gartner.com/en/newsroom/press-releases/2020-09-30-gartner-says-sixty-nine-percent-of-boards-of-directors-accelerated-their-digital-business-initiatives-folloing-covid-19-disruptions)。分析是整个企业的重要投资，组织需要对所选择的供应商充满信心。为何不免费发现 SAS®如何帮助你准备、探索、分析和可视化你的数据？
 
-使用 [SAS视觉数据科学决策（VDSD）试用版](https://www.sas.com/id_id/trials/software/visual-data-science-decisioning/viya-trial-form.html)，你可以获得终极的分析体验，免费访问所有SAS Viya分析功能，时间为14天。 ​SAS视觉数据科学决策提供涵盖整个分析生命周期的终极体验——从数据管理、模型开发，到模型部署和决策。
+使用 [SAS 视觉数据科学决策（VDSD）试用版](https://www.sas.com/id_id/trials/software/visual-data-science-decisioning/viya-trial-form.html)，你可以获得终极的分析体验，免费访问所有 SAS Viya 分析功能，时间为 14 天。 ​SAS 视觉数据科学决策提供涵盖整个分析生命周期的终极体验——从数据管理、模型开发，到模型部署和决策。
 
-SAS [视觉数据科学决策](https://www.sas.com/en_us/trials.html)由SAS® Viya®驱动，我们的AI、分析和数据管理平台，运行在现代、可扩展的架构上，使得每时每刻的决策都充满信心。
+SAS [视觉数据科学决策](https://www.sas.com/en_us/trials.html)由 SAS® Viya®驱动，我们的 AI、分析和数据管理平台，运行在现代、可扩展的架构上，使得每时每刻的决策都充满信心。
 
-这个[免费试用版](https://www.sas.com/en_us/trials.html)为你提供对SAS Viya功能的访问，包括：
+这个[免费试用版](https://www.sas.com/en_us/trials.html)为你提供对 SAS Viya 功能的访问，包括：
 
 +   数据访问、数据准备、数据质量与信息目录
 
@@ -62,7 +62,7 @@ SAS [视觉数据科学决策](https://www.sas.com/en_us/trials.html)由SAS® V
 
 为什么等待？今天就开始您的[免费 SAS 试用](https://www.sas.com/en_us/trials.html)吧！
 
-[![Sas Viya 免费试用开始](../Images/33849e9b0e4dd3df346ecbe36eccd8fe.png)](https://ad.doubleclick.net/ddm/trackclk/N6626.289580.KDNUGGETS.COM/B23482492.305689651;dc_trk_aid=498426990;dc_trk_cid=152464299;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;ltd=)
+![Sas Viya 免费试用开始](https://ad.doubleclick.net/ddm/trackclk/N6626.289580.KDNUGGETS.COM/B23482492.305689651;dc_trk_aid=498426990;dc_trk_cid=152464299;dc_lat=;dc_rdid=;tag_for_child_directed_treatment=;tfua=;ltd=)
 
 ### 相关主题
 

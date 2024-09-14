@@ -1,10 +1,10 @@
 # 建立成熟的机器学习团队
 
-> 原文：[https://www.kdnuggets.com/2020/03/mature-machine-learning-team.html](https://www.kdnuggets.com/2020/03/mature-machine-learning-team.html)
+> 原文：[`www.kdnuggets.com/2020/03/mature-machine-learning-team.html`](https://www.kdnuggets.com/2020/03/mature-machine-learning-team.html)
 
-[评论](#comments)
+评论
 
-**由[张纪超](https://georgianpartners.com/team/ji-chao-zhang/)，Georgian Partners的软件工程总监撰写**。
+**由[张纪超](https://georgianpartners.com/team/ji-chao-zhang/)，Georgian Partners 的软件工程总监撰写**。
 
 虽然新员工的知识和技能可以推动单个项目的成功，但良好的流程才能推动整个项目组合和团队的成功。在创建流程时，与团队合作，专注于采取小步骤和快速迭代想法，而不是重大突破。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你们组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你们组织的 IT 工作
 
 * * *
 
@@ -32,9 +32,9 @@
 
 在每个级别，你的组织都将面临一套独特的挑战，无论是制定战略、增加新员工，还是实施更成熟的流程。
 
-![](../Images/10e5827a059c2faa379daff217aefc2c.png)
+![](img/10e5827a059c2faa379daff217aefc2c.png)
 
-![](../Images/d512b6e6fd13f55012fa87ff3a5ceef0.png)
+![](img/d512b6e6fd13f55012fa87ff3a5ceef0.png)
 
 ### 入门
 
@@ -62,15 +62,15 @@
 
 有了愿景和策略，你就准备好进行第一次招聘，将这些计划付诸实践。
 
-![](../Images/ce6bb6f4e022d91a93d2605088ce66e6.png)
+![](img/ce6bb6f4e022d91a93d2605088ce66e6.png)
 
-![](../Images/ea77b26c9e93fa7ebc17394b4e52752c.png)
+![](img/ea77b26c9e93fa7ebc17394b4e52752c.png)
 
 ### 探索
 
 让你的第一次招聘发挥作用！在这个早期阶段，将你的机器学习团队视为一个创业中的创业公司通常是更好的。通常，寻找具有广泛技能并习惯于跨机器学习开发过程工作的通才候选人更为理想。你的理想候选人应该在类似的创业环境中工作过——那些能在有限资源下创造性解决问题的人。这是因为在企业中，角色更加专业化，团队有更多资源来解决问题。你的早期招聘人员需要做一切工作，直到你准备好扩展团队。
 
-首先，聘请或指派一名产品经理，帮助验证市场问题、制定产品需求并管理路线图。如果你招聘PM，必须具备第一手的机器学习经验。你也可能找到一位高级科学家，可以暂时担任PM角色。
+首先，聘请或指派一名产品经理，帮助验证市场问题、制定产品需求并管理路线图。如果你招聘 PM，必须具备第一手的机器学习经验。你也可能找到一位高级科学家，可以暂时担任 PM 角色。
 
 内部分配有其优缺点。它们可以帮助团队快速了解领域和背景，但可能需要外部导师或培训资源来指导他们完成第一个机器学习项目。
 
@@ -110,7 +110,7 @@
 
 尽管选择一个可能提供更高回报的项目很有诱惑，但这也是有风险的。过于雄心勃勃的项目可能需要更长的时间才能推向市场，甚至可能失败。造成延迟的原因有很多：你的数据可能比预期的更混乱，你可能会发现额外的需求，或者你可能没有部署的流程。延迟会随着时间的推移导致信心和支持的丧失，并可能对初创的机器学习团队造成致命打击。
 
-![](../Images/41876440221b8c143f4d2a2ee0f766ab.png)
+![](img/41876440221b8c143f4d2a2ee0f766ab.png)
 
 ### 构建
 
@@ -128,17 +128,17 @@
 
 +   一名机器学习架构师负责监督整体技术愿景和实施。
 
-+   一名QA工程师。
++   一名 QA 工程师。
 
 随着团队的成长，集中精力优化流程，以减少摩擦、提高可预测性，并促进跨功能协作。可以使用敏捷方法作为起点，但需要根据机器学习进行调整。请记住，数据科学工作不像软件开发那样可预测，需要更快的迭代。
 
-如果整个团队一次只处理一个项目，Kanban可以加速迭代，而不需要冗长的规划周期。可以通过团队深度探讨来鼓励知识共享，克服技术挑战。
+如果整个团队一次只处理一个项目，Kanban 可以加速迭代，而不需要冗长的规划周期。可以通过团队深度探讨来鼓励知识共享，克服技术挑战。
 
-现在是确定机器学习技术栈的时候了。生态系统发展迅速，新产品不断涌现。主要的选择包括语言（Python或R）、框架（Tensorflow或PyTorch）、云服务提供商、ETL和部署解决方案。
+现在是确定机器学习技术栈的时候了。生态系统发展迅速，新产品不断涌现。主要的选择包括语言（Python 或 R）、框架（Tensorflow 或 PyTorch）、云服务提供商、ETL 和部署解决方案。
 
 [阅读我们的应用人工智能原则](https://georgianpartners.com/principles-of-applied-artificial-intelligence-whitepaper/)
 
-![](../Images/7bd6057542e96913c9bcb85c48d674e3.png)
+![](img/7bd6057542e96913c9bcb85c48d674e3.png)
 
 我们的应用人工智能原则提供了一个务实的框架，以协助在你的软件解决方案中采用机器学习及其他人工智能构件。
 
@@ -148,7 +148,7 @@
 
 +   提供成熟度模型，以便你可以衡量自己的进展。
 
-![](../Images/fa23aaf9e9e0ae8defd1ca296755f238.png)
+![](img/fa23aaf9e9e0ae8defd1ca296755f238.png)
 
 ### 扩展
 
@@ -160,23 +160,23 @@
 
 +   分散式模型：在分散式模型中，个别数据科学团队向相应的产品或业务部门汇报。这种模式允许数据科学团队与其业务相关者密切合作，但也有将数据科学团队孤立的风险。
 
-+   集中式模型：在集中式模型中，所有数据科学团队都向CTO或数据科学负责人汇报。这种方法促进了同行之间的合作，有助于招聘和知识共享。如果采用这种模型，请特别关注与业务目标的对齐。
++   集中式模型：在集中式模型中，所有数据科学团队都向 CTO 或数据科学负责人汇报。这种方法促进了同行之间的合作，有助于招聘和知识共享。如果采用这种模型，请特别关注与业务目标的对齐。
 
 +   混合模型：第三种方法，已经在许多案例中成功采用，是一种混合模式，其中数据科学团队与业务伙伴紧密合作，但仍集中汇报。
 
 [查看这篇文章](https://towardsdatascience.com/what-is-the-most-effective-way-to-structure-a-data-science-team-498041b88dae)以深入讨论这个话题。
 
-每个成长中的团队都会面临效率问题。随着团队的发展，抽出一些时间，远离日常的繁忙事务，专注于长期项目。例如，通过完善注释的数据目录、数据仓库和ETL解决方案来实现数据访问的民主化。寻求系统化地自动化工作流程中的手动步骤，提高其他工具的可用性，如管道编排和数据/模型质量监控。
+每个成长中的团队都会面临效率问题。随着团队的发展，抽出一些时间，远离日常的繁忙事务，专注于长期项目。例如，通过完善注释的数据目录、数据仓库和 ETL 解决方案来实现数据访问的民主化。寻求系统化地自动化工作流程中的手动步骤，提高其他工具的可用性，如管道编排和数据/模型质量监控。
 
 随着你将越来越多的模型投入生产，你需要监控每个模型的版本并比较性能。
 
-有关如何跟踪机器学习产品性能的一些考虑，请参阅我们《应用人工智能原则》第5条，[了解性能目标](https://georgianpartners.com/principles-of-applied-artificial-intelligence-whitepaper/)和《信任原则》第9条，[使信任可衡量](https://georgianpartners.com/principles-of-trust/)。
+有关如何跟踪机器学习产品性能的一些考虑，请参阅我们《应用人工智能原则》第 5 条，[了解性能目标](https://georgianpartners.com/principles-of-applied-artificial-intelligence-whitepaper/)和《信任原则》第 9 条，[使信任可衡量](https://georgianpartners.com/principles-of-trust/)。
 
-![](../Images/09b5ee5e6db4bd6326c36fb6b045f714.png)
+![](img/09b5ee5e6db4bd6326c36fb6b045f714.png)
 
 ### 高级
 
-在高级阶段，你是一个成熟的ML组织，拥有一个与产品和工程团队紧密对齐的ML团队。你的流程和工具使你能够管理生产中的多个ML模型。你的团队和公司被认为是你领域的思想领袖，你能够利用这一点明确区分你的竞争对手。
+在高级阶段，你是一个成熟的 ML 组织，拥有一个与产品和工程团队紧密对齐的 ML 团队。你的流程和工具使你能够管理生产中的多个 ML 模型。你的团队和公司被认为是你领域的思想领袖，你能够利用这一点明确区分你的竞争对手。
 
 在此时添加一名首席工程师和一名首席产品经理，以推动由科学家领导的子团队的最佳实践。考虑任命一位数据科学负责人，以推动子团队之间的最佳实践和一致性。
 
@@ -190,23 +190,23 @@
 
 +   使用基于元数据的编排来跟踪数据/模型依赖关系并管理变更。
 
-+   构建统一的ETL和训练基础设施管理，以降低计算成本。
++   构建统一的 ETL 和训练基础设施管理，以降低计算成本。
 
-处于前沿的公司可能正在开发自己的ML框架，以填补开源和商业工具的空白，并可能将最新的ML研究部署到生产中，以建立强大而独特的产品。
+处于前沿的公司可能正在开发自己的 ML 框架，以填补开源和商业工具的空白，并可能将最新的 ML 研究部署到生产中，以建立强大而独特的产品。
 
 ### 为什么使用成熟度框架？
 
-我们的成熟度框架允许处于AI/ML成熟路径上的公司对当前状况进行诚实评估，并了解达到下一个阶段所需的措施。
+我们的成熟度框架允许处于 AI/ML 成熟路径上的公司对当前状况进行诚实评估，并了解达到下一个阶段所需的措施。
 
 [原文](https://georgianpartners.com/ml-maturity-framework/)。经许可转载。
 
-**简介：** [季超](https://www.linkedin.com/in/ji-chao-zhang-8022033/)是我们的软件工程总监，并且是Georgian Impact团队的成员。在这个角色中，他领导我们的内部软件工程工作，并支持投资组合参与。在加入Georgian Partners之前，季超是亚马逊的软件开发工程师，他在设计和开发数据平台、商业分析和机器学习系统方面工作，以支持供应链优化和履行。在亚马逊之前，季超是Bloomberg的高级软件开发人员，他设计并实施了Bloomberg Tradebook股票交易系统的软件组件，并倡导OOD/OOP/C++的最佳实践。他还曾是IBM的高级软件开发人员，致力于编译器技术、编程语言实现和测试失败调查的专家系统。
+**简介：** [季超](https://www.linkedin.com/in/ji-chao-zhang-8022033/)是我们的软件工程总监，并且是 Georgian Impact 团队的成员。在这个角色中，他领导我们的内部软件工程工作，并支持投资组合参与。在加入 Georgian Partners 之前，季超是亚马逊的软件开发工程师，他在设计和开发数据平台、商业分析和机器学习系统方面工作，以支持供应链优化和履行。在亚马逊之前，季超是 Bloomberg 的高级软件开发人员，他设计并实施了 Bloomberg Tradebook 股票交易系统的软件组件，并倡导 OOD/OOP/C++的最佳实践。他还曾是 IBM 的高级软件开发人员，致力于编译器技术、编程语言实现和测试失败调查的专家系统。
 
 **相关：**
 
 +   [如何让敏捷团队适用于大数据分析](https://www.kdnuggets.com/2019/10/agile-team-big-data-analytics.html)
 
-+   [如何建立颠覆性数据科学团队：10个最佳实践](https://www.kdnuggets.com/2019/07/disruptive-data-science-teams-best-practices.html)
++   [如何建立颠覆性数据科学团队：10 个最佳实践](https://www.kdnuggets.com/2019/07/disruptive-data-science-teams-best-practices.html)
 
 +   [建立有效数据科学团队](https://www.kdnuggets.com/2019/03/building-effective-data-science-teams.html)
 
@@ -216,7 +216,7 @@
 
 +   [如何建立数据科学赋能团队：完整指南](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)
 
-+   [数据科学团队协作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队协作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
 
 +   [微积分：机器学习的隐藏构建块](https://www.kdnuggets.com/2022/02/mlm-hidden-building-block-machine-learning.html)
 

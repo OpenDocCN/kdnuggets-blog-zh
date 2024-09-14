@@ -1,42 +1,42 @@
-# BigData London会议和展览的主要收获
+# BigData London 会议和展览的主要收获
 
-> 原文：[https://www.kdnuggets.com/2022/10/key-takeaways-bigdata-london-conference-exhibition.html](https://www.kdnuggets.com/2022/10/key-takeaways-bigdata-london-conference-exhibition.html)
+> 原文：[`www.kdnuggets.com/2022/10/key-takeaways-bigdata-london-conference-exhibition.html`](https://www.kdnuggets.com/2022/10/key-takeaways-bigdata-london-conference-exhibition.html)
 
-![BigData London会议和展览的主要收获](../Images/da61599f73c83889453ffb85eff67ae3.png)
+![BigData London 会议和展览的主要收获](img/da61599f73c83889453ffb85eff67ae3.png)
 
 来源: [BigDataLDN](https://bigdataldn.com/)
 
-作为KDNuggets团队的一员，我有机会参加了9月20-21日的BigData LDN会议和展览。
+作为 KDNuggets 团队的一员，我有机会参加了 9 月 20-21 日的 BigData LDN 会议和展览。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
-这是英国的一场免费数据与分析会议和展览，由领先的数据和分析专家主办。共有100家展商、12个演讲厅和200位演讲者——这无疑是一天忙碌的活动！
+这是英国的一场免费数据与分析会议和展览，由领先的数据和分析专家主办。共有 100 家展商、12 个演讲厅和 200 位演讲者——这无疑是一天忙碌的活动！
 
-《HumblePi》的作者，[Matt Parker](https://standupmaths.com/)——一位澳大利亚休闲数学家、作者、喜剧演员和YouTube名人，作为主旨演讲者出席了此次活动。这真的很酷！
+《HumblePi》的作者，[Matt Parker](https://standupmaths.com/)——一位澳大利亚休闲数学家、作者、喜剧演员和 YouTube 名人，作为主旨演讲者出席了此次活动。这真的很酷！
 
 我有机会与几位人士交流并获取他们公司的更多信息，让我们开始吧。
 
 # DataOps
 
-我有机会与DataOps的副总裁、宣传与支持部的[Patrick Connolly](https://www.linkedin.com/in/pctech/)交谈。他说了以下内容……
+我有机会与 DataOps 的副总裁、宣传与支持部的[Patrick Connolly](https://www.linkedin.com/in/pctech/)交谈。他说了以下内容……
 
-DataOps是应用于数据的DevOps，关注灵活性、敏捷性和控制。公司相对较新，成立于2018年，旨在减少洞察时间，并加快客户的价值实现时间。2019年，他们明确关注DevOps的真实原则，并从IoT时间序列数据中提取价值，以开发围绕DataOps的技术。
+DataOps 是应用于数据的 DevOps，关注灵活性、敏捷性和控制。公司相对较新，成立于 2018 年，旨在减少洞察时间，并加快客户的价值实现时间。2019 年，他们明确关注 DevOps 的真实原则，并从 IoT 时间序列数据中提取价值，以开发围绕 DataOps 的技术。
 
-随后，他们公开分享了他们的DataOps理念，您可以在[TrueDataOps](https://www.truedataops.org/)找到这些内容，他们还发布了DataOps for Snowflake平台。
+随后，他们公开分享了他们的 DataOps 理念，您可以在[TrueDataOps](https://www.truedataops.org/)找到这些内容，他们还发布了 DataOps for Snowflake 平台。
 
-DataOps的支柱包括：
+DataOps 的支柱包括：
 
-+   ELT及其精神
++   ELT 及其精神
 
 +   持续集成/持续部署（CI/CD）
 
@@ -74,13 +74,13 @@ DataOps 的联合创始人贾斯廷·穆伦和盖·亚当斯与其他 DataOps �
 
 我还有幸与 [杰兹·克拉克](https://www.linkedin.com/in/edensmithjezclark/)，伊登·史密斯的首席执行官交谈。他们提供数据人员配备、数据咨询、教育和培训。他们在技术行业拥有超过 20 年的人员配备经验，随后逐渐扩展到数据咨询。
 
-随着公司业务的增长，他们发现了一个新市场——教育和培训。他们提供一个名为[Nurture](https://edensmith.group/wp-content/uploads/2022/01/Eden-Smith-Nurture-1221-1_compressed-1.pdf)的教育项目，该项目曾入围2020年和2021年的Data IQ奖‘最佳发展项目’，后来他们还推出了[Nurture Plus](https://edensmith.group/education-training/#Nurture_Plus)和[Nourish](https://edensmith.group/education-training/#Nurture_Plus)。
+随着公司业务的增长，他们发现了一个新市场——教育和培训。他们提供一个名为[Nurture](https://edensmith.group/wp-content/uploads/2022/01/Eden-Smith-Nurture-1221-1_compressed-1.pdf)的教育项目，该项目曾入围 2020 年和 2021 年的 Data IQ 奖‘最佳发展项目’，后来他们还推出了[Nurture Plus](https://edensmith.group/education-training/#Nurture_Plus)和[Nourish](https://edensmith.group/education-training/#Nurture_Plus)。
 
-如果你对他们的实习和其他形式的教育感兴趣，可以查看这里：[https://edensmith.group/](https://edensmith.group/)。如果你在英国，并且寻找技术领域的新机会，可以查看他们的实时职位：[https://esjobs.powerappsportals.com/](https://esjobs.powerappsportals.com/)
+如果你对他们的实习和其他形式的教育感兴趣，可以查看这里：[`edensmith.group/`](https://edensmith.group/)。如果你在英国，并且寻找技术领域的新机会，可以查看他们的实时职位：[`esjobs.powerappsportals.com/`](https://esjobs.powerappsportals.com/)
 
 # 总结
 
-现场有多家公司参展，如微软、Databricks、Snowflake等。这一天极具洞察力，我建立了很多联系，了解了不同的公司，也学到了更多关于新工具和软件的知识
+现场有多家公司参展，如微软、Databricks、Snowflake 等。这一天极具洞察力，我建立了很多联系，了解了不同的公司，也学到了更多关于新工具和软件的知识
 
 我强烈建议参加这类会议和展览，以深入了解数据的世界、范式转变以及如何成为未来的一部分
 
@@ -88,14 +88,14 @@ DataOps 的联合创始人贾斯廷·穆伦和盖·亚当斯与其他 DataOps �
 
 ### 更多相关话题
 
-+   [SQL与NoSQL：7个关键要点](https://www.kdnuggets.com/2020/12/sql-vs-nosql-7-key-takeaways.html)
++   [SQL 与 NoSQL：7 个关键要点](https://www.kdnuggets.com/2020/12/sql-vs-nosql-7-key-takeaways.html)
 
-+   [在NVIDIA会议上免费提升你的AI和ML技能](https://www.kdnuggets.com/2022/03/nvidia-fourday-conference-offers-hundreds-learning-development-opportunities.html)
++   [在 NVIDIA 会议上免费提升你的 AI 和 ML 技能](https://www.kdnuggets.com/2022/03/nvidia-fourday-conference-offers-hundreds-learning-development-opportunities.html)
 
 +   [AI、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [2021年数据科学与分析行业的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [2021 年数据科学与分析行业的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [2021年的主要发展及2022年的关键趋势：AI、数据科学、…](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年的主要发展及 2022 年的关键趋势：AI、数据科学、…](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
-+   [2022年及以后10个关键AI与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
++   [2022 年及以后 10 个关键 AI 与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)

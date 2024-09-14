@@ -1,8 +1,8 @@
 # 如何使用插值技术处理 Pandas 中的缺失数据
 
-> 原文：[https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
+> 原文：[`www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas`](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
 
-![使用插值技术处理缺失数据的 Pandas](../Images/dda5fbd49996fb026458e295787c567f.png)
+![使用插值技术处理缺失数据的 Pandas](img/dda5fbd49996fb026458e295787c567f.png)
 
 图片来源 | DALLE-3 & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -96,13 +96,13 @@ plt.ylabel('Passengers')
 plt.show()
 ```
 
-![插值后的图表](../Images/e9dd40ecbd7dbfdc49f35a8dc895278b.png)
+![插值后的图表](img/e9dd40ecbd7dbfdc49f35a8dc895278b.png)
 
 原始数据集的图表
 
 你可以看到图表在中间被分割，显示了这些位置上缺少值的情况。
 
-#### 步骤4：使用插值
+#### 步骤 4：使用插值
 
 尽管稍后我会分享一些技巧来帮助你选择合适的插值技术，但让我们先专注于这个数据集。我们知道这是时间序列数据，但由于趋势似乎不是线性的，简单的线性插值不适合这里。我们可以观察到一些模式和振荡，以及线性趋势在小范围内。考虑到这些因素，样条插值将在这里表现良好。因此，让我们应用它，并检查插值后缺失值的可视化效果。
 
@@ -122,7 +122,7 @@ plt.ylabel('Passengers')
 plt.show()
 ```
 
-![插值后的图表](../Images/2d70d3ccedc65c63fac5ce32bdffcbe0.png)
+![插值后的图表](img/2d70d3ccedc65c63fac5ce32bdffcbe0.png)
 
 插值后的图表
 
@@ -144,20 +144,20 @@ plt.show()
 
 1.  在数据样本上测试不同的方法，并评估插值值与实际数据点的拟合程度。
 
-如果你想探索`dataframe.interpolate`方法的其他参数，Pandas文档是最佳的参考资料：[Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.interpolate.html)。
+如果你想探索`dataframe.interpolate`方法的其他参数，Pandas 文档是最佳的参考资料：[Pandas Documentation](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.interpolate.html)。
 
-**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)** Kanwal是一位机器学习工程师和技术作家，对数据科学及人工智能与医学的交汇处充满热情。她合著了电子书《利用ChatGPT最大化生产力》。作为2022年APAC地区的Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为Teradata多样性技术学者、Mitacs Globalink研究学者和哈佛WeCode学者。Kanwal是变革的坚定倡导者，创办了FEMCodes，以赋权女性进入STEM领域。
+**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)** Kanwal 是一位机器学习工程师和技术作家，对数据科学及人工智能与医学的交汇处充满热情。她合著了电子书《利用 ChatGPT 最大化生产力》。作为 2022 年 APAC 地区的 Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为 Teradata 多样性技术学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 是变革的坚定倡导者，创办了 FEMCodes，以赋权女性进入 STEM 领域。
 
 ### 相关主题更多内容
 
 +   [如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
 
-+   [应对机器学习中数据不足的5种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)
++   [应对机器学习中数据不足的 5 种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)
 
-+   [黑色星期五特惠 - 通过DataCamp以更低的价格精通机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)
++   [黑色星期五特惠 - 通过 DataCamp 以更低的价格精通机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)
 
-+   [使用Pandas fillna()填补缺失数据的最佳方法](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)
++   [使用 Pandas fillna()填补缺失数据的最佳方法](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)
 
-+   [使用Datawig，一个AWS深度学习库进行缺失值插补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)
++   [使用 Datawig，一个 AWS 深度学习库进行缺失值插补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)
 
 +   [如何识别时间序列数据集中的缺失数据](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)

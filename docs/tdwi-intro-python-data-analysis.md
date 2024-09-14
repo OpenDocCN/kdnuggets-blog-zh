@@ -1,6 +1,6 @@
 # 实践：数据分析的 Python 入门
 
-> 原文：[https://www.kdnuggets.com/2018/05/tdwi-intro-python-data-analysis.html](https://www.kdnuggets.com/2018/05/tdwi-intro-python-data-analysis.html)
+> 原文：[`www.kdnuggets.com/2018/05/tdwi-intro-python-data-analysis.html`](https://www.kdnuggets.com/2018/05/tdwi-intro-python-data-analysis.html)
 
 |
 
@@ -20,21 +20,21 @@
 
 &#124;   &#124;
 
-&#124; [![标志](../Images/9f51db30cb546c1dbb93aff47943ef73.png)](https://tdwi.org?utm_source=in+house&utm_medium=email&utm_campaign=ZombieData) &#124;
+&#124; ![标志](https://tdwi.org?utm_source=in+house&utm_medium=email&utm_campaign=ZombieData) &#124;
 
 &#124;   &#124;
 
-&#124; [![](../Images/160ebc840543d2de2bd512e2025db7f3.png)](https://tdwi.org/facebook)  [![](../Images/160ebc840543d2de2bd512e2025db7f3.png)](https://tdwi.org/linkedin)  [![](../Images/160ebc840543d2de2bd512e2025db7f3.png)](https://tdwi.org/twitter) &#124;
-
-&#124;   &#124;
-
-&#124;
+&#124; ![](https://tdwi.org/facebook)  ![](https://tdwi.org/linkedin)  ![](https://tdwi.org/twitter) &#124;
 
 &#124;   &#124;
 
 &#124;
 
-&#124; [![免费预览](../Images/4689b863623d3dcbc6e8ea5d6bbf7dca.png)](https://online-learning.tdwi.org/courses/hands-on-intro-to-python-for-data-analysis-free-preview?utm_source=KDnuggets&utm_medium=email&utm_campaign=KD050218) &#124;
+&#124;   &#124;
+
+&#124;
+
+&#124; ![免费预览](https://online-learning.tdwi.org/courses/hands-on-intro-to-python-for-data-analysis-free-preview?utm_source=KDnuggets&utm_medium=email&utm_campaign=KD050218) &#124;
 
 &#124;   &#124;
 
@@ -108,7 +108,7 @@
 
 &#124;   &#124;
 
-&#124; ![被领先公司信任](../Images/cdaac1caa0c3c1352fac432bb8d29c78.png) &#124;
+&#124; ![被领先公司信任](img/cdaac1caa0c3c1352fac432bb8d29c78.png) &#124;
 
 &#124;   &#124;
 
@@ -120,7 +120,7 @@
 
 &#124;   &#124;
 
-&#124; [![facebook_icon](../Images/b395b7282de1a456e6d55c10a10e185f.png)](https://tdwi.org/facebook)  [![linkedin_icon](../Images/6daecb755ad8c839033913dbb46740a9.png)](https://tdwi.org/linkedin)  [![YouTube_icon](../Images/a4bd3fde316d202b96266cbe4217d013.png)](https://www.youtube.com/user/TDWI1995)  [![twitter_icon](../Images/3f93c19ee5a4f53ac31c86bf4225b0b2.png)](https://tdwi.org/twitter)  [![google_plus_icon](../Images/3d33d6aff0601b028f50b8a6c74d4723.png)](https://plus.google.com/+TdwiOrg) &#124;
+&#124; ![facebook_icon](https://tdwi.org/facebook)  ![linkedin_icon](https://tdwi.org/linkedin)  ![YouTube_icon](https://www.youtube.com/user/TDWI1995)  ![twitter_icon](https://tdwi.org/twitter)  ![google_plus_icon](https://plus.google.com/+TdwiOrg) &#124;
 
 &#124;   &#124;
 
@@ -146,7 +146,7 @@
 
 &#124;   &#124;
 
-&#124; 想了解更多或联系我们的服务，请通过 [info@tdwi.org.](mailto:info@tdwi.org) 给我们发邮件。 &#124;
+&#124; 想了解更多或联系我们的服务，请通过 info@tdwi.org. 给我们发邮件。 &#124;
 
 &#124;   &#124;
 
@@ -166,24 +166,24 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [实用强化学习课程第3部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
++   [实用强化学习课程第三部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
 
-+   [实用强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
++   [实用强化学习课程，第一部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
 
-+   [实用强化学习课程，第2部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
++   [实用强化学习课程，第二部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
 
-+   [生成式AI与大型语言模型：实用培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
++   [生成式 AI 与大型语言模型：实用培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
 
 +   [实用监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)
 
-+   [实用无监督学习：K-Means聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
++   [实用无监督学习：K-Means 聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)

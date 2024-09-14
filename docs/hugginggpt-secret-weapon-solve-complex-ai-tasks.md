@@ -1,8 +1,8 @@
 # HuggingGPT: 解决复杂 AI 任务的秘密武器
 
-> 原文：[https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
+> 原文：[`www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html`](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
 
-![HuggingGPT: 解决复杂 AI 任务的秘密武器](../Images/c3a67fbc0536fa8043d01f54b81d98c1.png)
+![HuggingGPT: 解决复杂 AI 任务的秘密武器](img/c3a67fbc0536fa8043d01f54b81d98c1.png)
 
 作者提供的图片
 
@@ -18,13 +18,13 @@
 
 假设你希望模型生成一段关于图像上文字的音频朗读。HuggingGPT 将使用最合适的模型按顺序执行此任务。首先，它会从文本生成图像，并利用该结果进行音频生成。你可以在下面的图像中查看响应细节。简直令人惊叹！
 
-![HuggingGPT: 解决复杂 AI 任务的秘密武器](../Images/6dd819fb645e69a61220b3f7328ccd66.png)
+![HuggingGPT: 解决复杂 AI 任务的秘密武器](img/6dd819fb645e69a61220b3f7328ccd66.png)
 
 多模型协作在视频和音频模态下的定性分析 ([来源](https://arxiv.org/abs/2303.17580))
 
 # HuggingGPT 是如何工作的？
 
-![HuggingGPT: 解决复杂 AI 任务的秘密武器](../Images/4158bcf3dc73ee7c60466ea16263076c.png)
+![HuggingGPT: 解决复杂 AI 任务的秘密武器](img/4158bcf3dc73ee7c60466ea16263076c.png)
 
 作者提供的图片
 
@@ -148,7 +148,7 @@ python models_server.py --config configs/config.gradio.yaml
 python run_gradio_demo.py --config configs/config.gradio.yaml
 ```
 
-1.  在浏览器中访问 [http://localhost:7860](http://localhost:7860) 并通过输入各种数据进行测试
+1.  在浏览器中访问 [`localhost:7860`](http://localhost:7860) 并通过输入各种数据进行测试
 
 1.  可选地，您还可以通过运行以下命令将演示作为 Docker 镜像运行：
 
@@ -168,11 +168,11 @@ HuggingGPT 也有一些限制，我在这里想要强调。例如，系统的效
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

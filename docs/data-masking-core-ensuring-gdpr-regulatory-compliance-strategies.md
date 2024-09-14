@@ -1,8 +1,8 @@
 # 数据掩码：确保 GDPR 和其他合规策略的核心
 
-> 原文：[https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
+> 原文：[`www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html`](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
 
-![数据掩码：确保 GDPR 和其他合规策略的核心](../Images/dcedd3df481ae83a83979f61916027c8.png)
+![数据掩码：确保 GDPR 和其他合规策略的核心](img/dcedd3df481ae83a83979f61916027c8.png)
 
 图片由 Bing Image Creator 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@
 
 # 我们为什么需要这项技术来符合 GDPR 和其他规定？
 
-尽管数据脱敏在消除敏感数据暴露方面已被证明有效，但许多企业仍未遵循相关指南，面临违规风险。最受关注的案例是服装零售商 H&M，因为违反 GDPR 规范，被罚款 [3500万欧元](https://edpb.europa.eu/news/national-news/2020/hamburg-commissioner-fines-hm-353-million-euro-data-protection-violations_en)。调查发现，管理层可以访问敏感数据，如个人的宗教信仰、个人问题等。这正是 GDPR 试图避免的情况，因此数据脱敏至关重要。
+尽管数据脱敏在消除敏感数据暴露方面已被证明有效，但许多企业仍未遵循相关指南，面临违规风险。最受关注的案例是服装零售商 H&M，因为违反 GDPR 规范，被罚款 [3500 万欧元](https://edpb.europa.eu/news/national-news/2020/hamburg-commissioner-fines-hm-353-million-euro-data-protection-violations_en)。调查发现，管理层可以访问敏感数据，如个人的宗教信仰、个人问题等。这正是 GDPR 试图避免的情况，因此数据脱敏至关重要。
 
 然而，像 BFSI（银行、金融服务和保险）和医疗保健等高度受监管的行业已经开始实施数据脱敏，以遵守隐私法规。这些法规包括支付卡行业数据安全标准（PCI DSS）和健康保险流通与问责法案（HIPAA）。
 
@@ -60,32 +60,32 @@
 
 这种数据掩码技术用唯一的假名替代个人标识符，如姓名、地址和社会保险号码，同时保持性别和出生日期等非敏感属性不变。假名可以使用加密技术生成，如哈希或加密，以确保原始个人数据无法恢复。
 
-它还符合对科学、历史和统计目的（分析）数据处理的安全和安全要求。这是确保符合GDPR数据保护设计原则的重要工具。
+它还符合对科学、历史和统计目的（分析）数据处理的安全和安全要求。这是确保符合 GDPR 数据保护设计原则的重要工具。
 
-你可以优化你的DevOps功能。对于DevOps，数据掩码提供了真实但安全的虚拟数据用于测试。这对依赖内部或第三方开发人员的组织尤其有益，因为它确保了安全性并减少了DevOps过程中的延迟。数据掩码使你能够在维护客户隐私的同时测试他们的数据。
+你可以优化你的 DevOps 功能。对于 DevOps，数据掩码提供了真实但安全的虚拟数据用于测试。这对依赖内部或第三方开发人员的组织尤其有益，因为它确保了安全性并减少了 DevOps 过程中的延迟。数据掩码使你能够在维护客户隐私的同时测试他们的数据。
 
-# 针对GDPR及其他法规的数据掩码
+# 针对 GDPR 及其他法规的数据掩码
 
-将数据视为产品并使用掩码技术具有很多好处。2022年，许多数据架构和产品平台因其创新方法而受到关注。例如，K2view在业务实体级别执行数据掩码，确保一致性和完整性，同时保持引用完整性。
+将数据视为产品并使用掩码技术具有很多好处。2022 年，许多数据架构和产品平台因其创新方法而受到关注。例如，K2view 在业务实体级别执行数据掩码，确保一致性和完整性，同时保持引用完整性。
 
-为确保最大安全性，每个业务实体的数据在其Micro-Database中进行管理，并由256位加密密钥保护。此外，Micro-Database中的个人身份信息（PII）会实时掩码，遵循预定义的业务规则，提供额外的保护层。
+为确保最大安全性，每个业务实体的数据在其 Micro-Database 中进行管理，并由 256 位加密密钥保护。此外，Micro-Database 中的个人身份信息（PII）会实时掩码，遵循预定义的业务规则，提供额外的保护层。
 
 # 参考资料
 
-实施数据掩码技术可以帮助组织避免巨额罚款和声誉损害。然而，需要注意的是，数据掩码本身不足以实现GDPR合规，应与其他安全措施结合使用。
+实施数据掩码技术可以帮助组织避免巨额罚款和声誉损害。然而，需要注意的是，数据掩码本身不足以实现 GDPR 合规，应与其他安全措施结合使用。
 
-**[Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/)** 是国际公认的物联网（IoT）、机器对机器（M2M）及大数据技术专家。他撰写了多篇广受认可的数据科学、物联网、商业创新和认知智能方面的文章。他是名为Expersight的数据洞察平台的创始人。他的文章曾被最权威的出版物刊登，并被IBM和思科物联网部门评为最具创新性和影响力的连通技术行业作品之一。
+**[Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/)** 是国际公认的物联网（IoT）、机器对机器（M2M）及大数据技术专家。他撰写了多篇广受认可的数据科学、物联网、商业创新和认知智能方面的文章。他是名为 Expersight 的数据洞察平台的创始人。他的文章曾被最权威的出版物刊登，并被 IBM 和思科物联网部门评为最具创新性和影响力的连通技术行业作品之一。
 
 ### 更多相关话题
 
 +   [深度学习在合规检查中的新进展](https://www.kdnuggets.com/2022/05/deep-learning-compliance-checks-new.html)
 
-+   [使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
-+   [确保LLMs的可靠少量样本提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
++   [确保 LLMs 的可靠少量样本提示选择](https://www.kdnuggets.com/2023/07/ensuring-reliable-fewshot-prompt-selection-llms.html)
 
 +   [关于人工智能监管环境的一切](https://www.kdnuggets.com/all-about-the-ai-regulatory-landscape)
 
-+   [您的终极指南：Chat GPT及其他缩写](https://www.kdnuggets.com/2023/06/ultimate-guide-chat-gpt-abbreviations.html)
++   [您的终极指南：Chat GPT 及其他缩写](https://www.kdnuggets.com/2023/06/ultimate-guide-chat-gpt-abbreviations.html)
 
 +   [数据科学家、数据工程师及其他数据职业解析](https://www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html)

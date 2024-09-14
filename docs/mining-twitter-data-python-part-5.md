@@ -1,12 +1,12 @@
 # 使用 Python 挖掘 Twitter 数据 第五部分：数据可视化基础
 
-> 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-5.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-5.html)
+> 原文：[`www.kdnuggets.com/2016/06/mining-twitter-data-python-part-5.html`](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-5.html)
 
 **作者：Marco Bonzanini，自由数据科学顾问**。
 
 一图胜千言：设计一个好的[可视化表现](https://en.wikipedia.org/wiki/Data_visualization)可以帮助我们理解数据并突出有趣的见解。收集和分析 Twitter 数据后，本教程将继续介绍使用 Python 进行数据可视化的一些概念。
 
-![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)
+![Twitter](img/3da5b4dea824ea453ca3ae25f3548634.png)
 
 ### 从 Python 到 JavaScript 使用 Vincent
 
@@ -69,7 +69,7 @@ python -m SimpleHTTPServer 8888 # Python 2
 
 现在你可以打开浏览器访问**http://localhost:8888/chart.html**，观察结果：
 
-[![术语频率](../Images/b1f3356aba782317f239a457ff539d1d.png)](https://marcobonzanini.files.wordpress.com/2015/04/term_freq.png)
+![术语频率](https://marcobonzanini.files.wordpress.com/2015/04/term_freq.png)
 
 *点击放大。*
 
@@ -125,7 +125,7 @@ per_minute = ITAvWAL.resample('1Min', how='sum').fillna(0)
 
 ```
 
-最后一行使我们能够跟踪频率的变化。序列以1分钟的间隔重新采样。这意味着所有在特定一分钟内的推文将被汇总，更准确地说，它们将被求和，给定`how='sum'`。时间索引将不再跟踪秒数。如果在特定的一分钟内没有推文，`fillna()`函数将用零填充空白。
+最后一行使我们能够跟踪频率的变化。序列以 1 分钟的间隔重新采样。这意味着所有在特定一分钟内的推文将被汇总，更准确地说，它们将被求和，给定`how='sum'`。时间索引将不再跟踪秒数。如果在特定的一分钟内没有推文，`fillna()`函数将用零填充空白。
 
 要将时间序列绘制到图表中，使用 Vincent：
 
@@ -138,7 +138,7 @@ time_chart.to_json('time_chart.json')
 
 一旦将`time_chart.json`文件嵌入到上面讨论的 HTML 模板中，你将看到以下输出：
 
-[![Time Series](../Images/c07ddda13c75deb1b47a79f071bb8cb6.png)](https://marcobonzanini.files.wordpress.com/2015/04/time1.png)
+![Time Series](https://marcobonzanini.files.wordpress.com/2015/04/time1.png)
 
 *点击放大。*
 
@@ -165,7 +165,7 @@ time_chart.to_json('time_chart.json')
 
 以及输出：
 
-[![time2](../Images/68b37061e2635500f804fbd18f407310.png)](https://marcobonzanini.files.wordpress.com/2015/04/time2.png)
+![time2](https://marcobonzanini.files.wordpress.com/2015/04/time2.png)
 
 *点击放大。*
 
@@ -181,21 +181,21 @@ time_chart.to_json('time_chart.json')
 
 **相关**：
 
-+   [用 Python 挖掘 Twitter 数据 第 2 部分：文本预处理](/2016/06/mining-twitter-data-python-part-2.html)
++   用 Python 挖掘 Twitter 数据 第二部分：文本预处理
 
-+   [用 Python 挖掘 Twitter 数据 第 3 部分：术语频率](/2016/06/mining-twitter-data-python-part-3.html)
++   用 Python 挖掘 Twitter 数据 第三部分：术语频率
 
-+   [用 Python 挖掘 Twitter 数据 第 4 部分：橄榄球和术语共现](/2016/06/mining-twitter-data-python-part-4.html)
++   用 Python 挖掘 Twitter 数据 第四部分：橄榄球和术语共现
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -211,4 +211,4 @@ time_chart.to_json('time_chart.json')
 
 +   [如何通过 ChatGPT 学习 Python 基础](https://www.kdnuggets.com/how-to-learn-python-basics-with-chatgpt)
 
-+   [基础回顾第2周：数据库、SQL、数据管理与统计概念](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [基础回顾第 2 周：数据库、SQL、数据管理与统计概念](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)

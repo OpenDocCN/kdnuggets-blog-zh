@@ -1,34 +1,34 @@
-# Inflection-1: 个人AI的下一前沿
+# Inflection-1: 个人 AI 的下一前沿
 
-> 原文：[https://www.kdnuggets.com/2023/08/inflection1-next-frontier-personal-ai.html](https://www.kdnuggets.com/2023/08/inflection1-next-frontier-personal-ai.html)
+> 原文：[`www.kdnuggets.com/2023/08/inflection1-next-frontier-personal-ai.html`](https://www.kdnuggets.com/2023/08/inflection1-next-frontier-personal-ai.html)
 
-![Inflection-1: 个人AI的下一前沿](../Images/f6c1158629553819164717a11c6881de.png)
+![Inflection-1: 个人 AI 的下一前沿](img/f6c1158629553819164717a11c6881de.png)
 
 图片来自作者
 
-人工智能（AI）对当今世界产生了如此巨大的影响，而且看起来它没有减缓的迹象。AI技术的革命正在改变未来以及我们生活的世界。
+人工智能（AI）对当今世界产生了如此巨大的影响，而且看起来它没有减缓的迹象。AI 技术的革命正在改变未来以及我们生活的世界。
 
-2023年我们收到了很多新闻，AI系统在各个方面纷纷推出。围绕GPT-3.5和LLaMa有着极大的炒作，大家普遍期望没有其他东西能够超越它们的表现。为了在生成AI中获得更好的表现，涉及大量的预训练和微调。
+2023 年我们收到了很多新闻，AI 系统在各个方面纷纷推出。围绕 GPT-3.5 和 LLaMa 有着极大的炒作，大家普遍期望没有其他东西能够超越它们的表现。为了在生成 AI 中获得更好的表现，涉及大量的预训练和微调。
 
-[Inflection.AI](https://inflection.ai/)是一家AI初创公司，致力于为每个人的独特需求创建个人AI。2023年5月，他们发布了他们的个人AI助手——[Pi.ai](https://pi.ai/)，设计旨在体现同理心和安全性。大型语言模型（LLM）的主要挑战之一是安全性、数据隐私和输出准确性的问题。Inflection.AI的目标是实现高质量、安全且有用的AI LLM。
+[Inflection.AI](https://inflection.ai/)是一家 AI 初创公司，致力于为每个人的独特需求创建个人 AI。2023 年 5 月，他们发布了他们的个人 AI 助手——[Pi.ai](https://pi.ai/)，设计旨在体现同理心和安全性。大型语言模型（LLM）的主要挑战之一是安全性、数据隐私和输出准确性的问题。Inflection.AI 的目标是实现高质量、安全且有用的 AI LLM。
 
-Inflection.AI是一个集成的AI工作室，所有AI训练和推理均在内部进行，并建立了Inflection-1——他们的内部LLM，使用Pi.ai。
+Inflection.AI 是一个集成的 AI 工作室，所有 AI 训练和推理均在内部进行，并建立了 Inflection-1——他们的内部 LLM，使用 Pi.ai。
 
-# Inflection-1是什么？
+# Inflection-1 是什么？
 
-当你使用像ChatGPT这样的LLM时，回应通常不会特别针对你个人。想象一下拥有一个了解你思维方式、充满同理心并且对你日常需求有用的AI助手或伴侣。
+当你使用像 ChatGPT 这样的 LLM 时，回应通常不会特别针对你个人。想象一下拥有一个了解你思维方式、充满同理心并且对你日常需求有用的 AI 助手或伴侣。
 
-这就是Inflection-1。
+这就是 Inflection-1。
 
-Inflection.AI到底是如何实现这一点的呢？使用Pi.ai。一种将你与技术更紧密结合的个人AI。Pi由AI模型Inflection-1驱动。Inflection-1旨在创建一个可以像人类一样与你交谈的个人助手。
+Inflection.AI 到底是如何实现这一点的呢？使用 Pi.ai。一种将你与技术更紧密结合的个人 AI。Pi 由 AI 模型 Inflection-1 驱动。Inflection-1 旨在创建一个可以像人类一样与你交谈的个人助手。
 
-Inflection-1在规模和能力上类似于GPT-3.5，有些人甚至认为它比GPT-3.5、Chinchilla和LLaMA更优秀。它使用数千个NVIDIA H100 GPU在大型数据集上进行训练。
+Inflection-1 在规模和能力上类似于 GPT-3.5，有些人甚至认为它比 GPT-3.5、Chinchilla 和 LLaMA 更优秀。它使用数千个 NVIDIA H100 GPU 在大型数据集上进行训练。
 
-![Inflection-1: 个人AI的下一前沿](../Images/673f789212aa432334cc17d7346e052d.png)
+![Inflection-1: 个人 AI 的下一前沿](img/673f789212aa432334cc17d7346e052d.png)
 
-图片来自[Inflection-1技术备忘录](https://inflection.ai/assets/Inflection-1.pdf)
+图片来自[Inflection-1 技术备忘录](https://inflection.ai/assets/Inflection-1.pdf)
 
-Inflection-1有一份[技术备忘录](https://inflection.ai/assets/Inflection-1.pdf)，总结了公司的评估并比较了Inflection-1与其他LLM的性能。该技术备忘录指出，Inflection-1在其计算类别中排名第一，表明它超越了GPT-3.5、LLaMA、Chinchilla和PaLM-540B。公司还将发布一份技术备忘录，展示其模型与PaLM-2和GPT-4的比较。
+Inflection-1 有一份[技术备忘录](https://inflection.ai/assets/Inflection-1.pdf)，总结了公司的评估并比较了 Inflection-1 与其他 LLM 的性能。该技术备忘录指出，Inflection-1 在其计算类别中排名第一，表明它超越了 GPT-3.5、LLaMA、Chinchilla 和 PaLM-540B。公司还将发布一份技术备忘录，展示其模型与 PaLM-2 和 GPT-4 的比较。
 
 为了使 Inflection-1 达到这一点，它必须经历许多不同的任务，以满足独特的需求。例如，从解决日常问题到高中考试题目——都带有个人化的触感。
 

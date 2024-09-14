@@ -1,8 +1,8 @@
 # 10 个适合有志数据科学家的优秀 Python 资源
 
-> 原文：[https://www.kdnuggets.com/2019/09/10-great-python-resources-aspiring-data-scientists.html](https://www.kdnuggets.com/2019/09/10-great-python-resources-aspiring-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/09/10-great-python-resources-aspiring-data-scientists.html`](https://www.kdnuggets.com/2019/09/10-great-python-resources-aspiring-data-scientists.html)
 
-[评论](#comments)![头图](../Images/028778782d18a1ada83470e2f1627872.png)
+评论![头图](img/028778782d18a1ada83470e2f1627872.png)
 
 Python 是数据科学中使用最广泛的语言之一，还是一个[极受欢迎的通用编程语言](https://spectrum.ieee.org/computing/software/the-top-programming-languages-2019)。
 
@@ -10,11 +10,11 @@ Python 是数据科学中使用最广泛的语言之一，还是一个[极受欢
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -68,7 +68,7 @@ Python 是数据科学中使用最广泛的语言之一，还是一个[极受欢
 > 
 > Python 有四种内置数据结构——*列表、元组、字典* 和 *集合*。我们将看看如何使用它们，以及它们如何使我们的生活更轻松。
 
-**8\. [Django 入门教程 第 1 部分：构建一个作品集应用](https://realpython.com/get-started-with-django-1/)**
+**8\. [Django 入门教程 第一部分：构建一个作品集应用](https://realpython.com/get-started-with-django-1/)**
 
 > Django 是一个功能齐全的 Python 网络框架，可以用来构建复杂的网络应用程序。在本教程中，你将通过示例学习 Django。你将按照步骤创建一个功能完整的网络应用程序，同时了解框架的一些重要特性及其如何协同工作。
 > 
@@ -88,11 +88,11 @@ Python 是数据科学中使用最广泛的语言之一，还是一个[极受欢
 
 **相关内容**：
 
-+   [10 个更多必看免费课程，适用于机器学习和数据科学](/2018/12/10-more-free-must-see-courses-machine-learning-data-science.html)
++   10 个更多必看免费课程，适用于机器学习和数据科学
 
-+   [10 本机器学习和数据科学必读的免费书籍](/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html)
++   10 本机器学习和数据科学必读的免费书籍
 
-+   [另外 10 本机器学习和数据科学必读的免费书籍](/2019/03/another-10-free-must-read-books-for-machine-learning-and-data-science.html)
++   另外 10 本机器学习和数据科学必读的免费书籍
 
 ### 更多相关内容
 

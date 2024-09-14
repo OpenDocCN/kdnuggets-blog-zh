@@ -1,8 +1,8 @@
 # 导航数据科学职位标题：数据分析师 vs. 数据科学家 vs. 数据工程师
 
-> 原文：[https://www.kdnuggets.com/navigating-data-science-job-titles-data-analyst-vs-data-scientist-vs-data-engineer](https://www.kdnuggets.com/navigating-data-science-job-titles-data-analyst-vs-data-scientist-vs-data-engineer)
+> 原文：[`www.kdnuggets.com/navigating-data-science-job-titles-data-analyst-vs-data-scientist-vs-data-engineer`](https://www.kdnuggets.com/navigating-data-science-job-titles-data-analyst-vs-data-scientist-vs-data-engineer)
 
-![导航数据科学职位标题：数据分析师 vs. 数据科学家 vs. 数据工程师](../Images/4e747c590a9d122de955f21fc840d4bf.png)
+![导航数据科学职位标题：数据分析师 vs. 数据科学家 vs. 数据工程师](img/4e747c590a9d122de955f21fc840d4bf.png)
 
 “导航”似乎是合适的词汇。数据科学有时可能像一片狂野的海洋，每隔几分钟就会出现一个新的职位名称或专业化方向。谢谢你，数据科学。我们感激你充满活力和狂野，但我们该如何应对呢？
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -74,7 +74,7 @@
 
 **关键技能和工具：** 主要技能和工具可以从角色描述中得出。
 
-![数据科学职位名称：数据分析师 vs. 数据科学家 vs. 数据工程师](../Images/192dc7a20edd3bbf5ba9d27c9afacef8.png)
+![数据科学职位名称：数据分析师 vs. 数据科学家 vs. 数据工程师](img/192dc7a20edd3bbf5ba9d27c9afacef8.png)
 
 **职业发展路径：** 数据分析师可以晋升到更高级的分析师角色。随着经验的增加和额外教育的完成，他们可以转型为专业角色，如统计师、业务分析师，甚至数据科学家。
 
@@ -94,7 +94,7 @@
 
 **关键技能和工具：** 以下是成为数据科学家所需的技能和工具。你会看到它们与数据分析师有一些重叠。
 
-![数据科学职位标题导航：数据分析师 vs. 数据科学家 vs. 数据工程师](../Images/f235ba9489ff0a54af90f8a4d3977f04.png)
+![数据科学职位标题导航：数据分析师 vs. 数据科学家 vs. 数据工程师](img/f235ba9489ff0a54af90f8a4d3977f04.png)
 
 **职业发展路径：** 数据科学家从初级数据科学家开始，可以晋升为高级数据科学家、首席数据科学家和数据科学总监。他们还可以朝其他方向发展，如成为人工智能专家、机器学习工程师或计算机与信息研究科学家。
 
@@ -114,7 +114,7 @@
 
 **关键技能和工具：** 这是数据工程师所使用的技能和工具。
 
-![数据科学职位标题导航：数据分析师 vs. 数据科学家 vs. 数据工程师](../Images/c2ec089b80bb6ebbe1172b68ab63cd83.png)
+![数据科学职位标题导航：数据分析师 vs. 数据科学家 vs. 数据工程师](img/c2ec089b80bb6ebbe1172b68ab63cd83.png)
 
 **职业发展路径：** 数据工程师的职业可以晋升为高级数据工程师或数据架构师。他们也可以专注于大数据、机器学习或商业智能等领域。
 
@@ -124,7 +124,7 @@
 
 为了快速了解，这些可以通过维恩图进行展示。
 
-![数据科学职位标题导航：数据分析师 vs. 数据科学家 vs. 数据工程师](../Images/03420ef976e95250e38cd43088d69e93.png)
+![数据科学职位标题导航：数据分析师 vs. 数据科学家 vs. 数据工程师](img/03420ef976e95250e38cd43088d69e93.png)
 
 你可以看到这三个职位共享的技能有：
 
@@ -154,7 +154,7 @@
 
 现在让我们使用相同的可视化工具展示这些职位使用的工具。
 
-![导航数据科学职位：数据分析师 vs. 数据科学家 vs. 数据工程师](../Images/6724dc66f552648ba866c08214153e62.png)
+![导航数据科学职位：数据分析师 vs. 数据科学家 vs. 数据工程师](img/6724dc66f552648ba866c08214153e62.png)
 
 图像显示所有三个职位共享这些工具：
 
@@ -214,7 +214,7 @@
 
 如果你想了解更多，请参考有关[数据工程师和数据科学家](https://www.stratascratch.com/blog/data-engineer-vs-data-scientist-similarities-and-differences/?utm_source=Blog&utm_medium=click&utm_campaign=kdn+data+science+job+titles)以及[数据分析师和数据科学家](https://www.stratascratch.com/blog/7-differences-between-a-data-analyst-vs-a-data-scientist/?utm_source=Blog&utm_medium=click&utm_campaign=kdn+data+science+job+titles)的更多细节。
 
-[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一名数据科学家，专注于产品战略。他还是一名兼职教授，教授分析课程，并且是StrataScratch的创始人，这是一个帮助数据科学家通过真实的面试问题准备面试的平台。内特撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并覆盖所有SQL相关内容。
+[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一名数据科学家，专注于产品战略。他还是一名兼职教授，教授分析课程，并且是 StrataScratch 的创始人，这是一个帮助数据科学家通过真实的面试问题准备面试的平台。内特撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并覆盖所有 SQL 相关内容。
 
 ### 更多相关内容
 

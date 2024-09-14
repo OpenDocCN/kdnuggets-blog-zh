@@ -1,42 +1,42 @@
 # 回到基础 第四周：高级主题与部署
 
-> 原文：[https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
+> 原文：[`www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment`](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
-![回到基础 第四周：高级主题与部署](../Images/56040aad16a3e32bae5f305fb39ac92b.png)
+![回到基础 第四周：高级主题与部署](img/56040aad16a3e32bae5f305fb39ac92b.png)
 
 作者提供的图片
 
-加入KDnuggets，通过我们的回到基础路径，帮助您启动新职业或提升数据科学技能。回到基础路径分为4周，加上一周额外的内容。我们希望您能将这些博客作为课程指南。
+加入 KDnuggets，通过我们的回到基础路径，帮助您启动新职业或提升数据科学技能。回到基础路径分为 4 周，加上一周额外的内容。我们希望您能将这些博客作为课程指南。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 如果您还没有，看看：
 
-+   第一周：[Python编程与数据科学基础](/back-to-basics-week-1-python-programming-data-science-foundations)
++   第一周：Python 编程与数据科学基础
 
-+   第二周：[数据库、SQL、数据管理和统计概念](/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   第二周：数据库、SQL、数据管理和统计概念
 
-+   第三周：[回到基础 第三周：机器学习介绍](/back-to-basics-week-3-introduction-to-machine-learning)
++   第三周：回到基础 第三周：机器学习介绍
 
 进入第三周，我们将深入探讨高级主题和部署。
 
 +   第一天：探索神经网络
 
-+   第二天：深度学习库介绍：PyTorch和Lightening AI
++   第二天：深度学习库介绍：PyTorch 和 Lightening AI
 
-+   第三天：通过5个步骤开始使用PyTorch
++   第三天：通过 5 个步骤开始使用 PyTorch
 
-+   第四天：使用PyTorch构建卷积神经网络
++   第四天：使用 PyTorch 构建卷积神经网络
 
 +   第五天：自然语言处理介绍
 
@@ -46,21 +46,21 @@
 
 # 探索神经网络
 
-第四周 - 第一部分：[探索神经网络](/exploring-neural-networks)
+第四周 - 第一部分：探索神经网络
 
-解锁AI的力量：神经网络及其应用指南。
+解锁 AI 的力量：神经网络及其应用指南。
 
 想象一下，一台机器像人脑一样思考、学习和适应，并发现数据中的隐藏模式。
 
-这项技术，即神经网络（NN），其算法模仿认知。我们稍后将探讨NN是什么以及它们如何运作。
+这项技术，即神经网络（NN），其算法模仿认知。我们稍后将探讨 NN 是什么以及它们如何运作。
 
 在这篇文章中，我将向您解释神经网络（NN）的基本方面——结构、类型、实际应用和定义操作的关键术语。
 
-# 深度学习库介绍：PyTorch和Lightening AI
+# 深度学习库介绍：PyTorch 和 Lightening AI
 
-第四周 - 第二部分：[深度学习库介绍：PyTorch和Lightning AI](/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)
+第四周 - 第二部分：深度学习库介绍：PyTorch 和 Lightning AI
 
-对PyTorch和Lightning AI的简单解释。
+对 PyTorch 和 Lightning AI 的简单解释。
 
 深度学习是基于 [神经网络](https://en.wikipedia.org/wiki/Neural_network) 的机器学习模型的一部分。在其他机器模型中，数据处理以寻找有意义的特征通常是手动完成的或依赖于领域专长；然而，深度学习可以模仿人脑发现重要特征，从而提高模型性能。
 
@@ -70,7 +70,7 @@
 
 # 开始使用 PyTorch 的 5 个步骤
 
-第 4 周 - 第 3 部分: [5 步骤开始使用 PyTorch](/5-steps-getting-started-pytorch)
+第 4 周 - 第三部分: 5 步骤开始使用 PyTorch
 
 本教程提供了一个关于使用 PyTorch 及其高级封装 PyTorch Lightning 的机器学习深度介绍。文章涵盖了从安装到高级主题的基本步骤，提供了构建和训练神经网络的实践方法，并强调了使用 Lightning 的好处。
 
@@ -80,7 +80,7 @@
 
 # 使用 PyTorch 构建卷积神经网络
 
-第 4 周 - 第 4 部分: [使用 PyTorch 构建卷积神经网络](/building-a-convolutional-neural-network-with-pytorch)
+第 4 周 - 第四部分: 使用 PyTorch 构建卷积神经网络
 
 本博客文章提供了一个关于在 PyTorch 中构建用于图像分类的卷积神经网络的教程，利用卷积层和池化层进行特征提取，以及全连接层进行预测。
 
@@ -90,7 +90,7 @@
 
 # 自然语言处理简介
 
-第四周 - 第五部分：[自然语言处理简介](/introduction-to-natural-language-processing)
+第四周 - 第五部分：自然语言处理简介
 
 自然语言处理（NLP）及其应用的概述。
 
@@ -102,7 +102,7 @@ NLP 的目标是弥合人类和计算机之间的沟通鸿沟。NLP 模型通常
 
 # 部署你的第一个机器学习模型
 
-第四周 - 第六部分：[部署你的第一个机器学习模型](/deploying-your-first-machine-learning-model)
+第四周 - 第六部分：部署你的第一个机器学习模型
 
 只需 3 个简单步骤，你就能比说“玻璃分类模型”还快地构建和部署一个玻璃分类模型！
 
@@ -134,7 +134,7 @@ NLP 的目标是弥合人类和计算机之间的沟通鸿沟。NLP 模型通常
 
 # 数据科学的云计算介绍
 
-第四周 - 第七部分：[数据科学的云计算介绍](/introduction-to-cloud-computing-for-data-science)
+第四周 - 第七部分：数据科学的云计算介绍
 
 现代科技的强大组合。
 
@@ -152,24 +152,24 @@ NLP 的目标是弥合人类和计算机之间的沟通鸿沟。NLP 模型通常
 
 # 总结一下
 
-恭喜你完成了第4周！！
+恭喜你完成了第 4 周！！
 
-KDnuggets团队希望“基础回顾”路径为读者提供了一个全面且结构化的方法，以掌握数据科学的基础。
+KDnuggets 团队希望“基础回顾”路径为读者提供了一个全面且结构化的方法，以掌握数据科学的基础。
 
 奖励周将在下周一发布——敬请期待！
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**** 是一名数据科学家、自由技术作家，以及KDnuggets的编辑和社区经理。她特别关注提供数据科学职业建议、教程和基于理论的知识。Nisha涉及广泛的话题，并希望探索人工智能如何有利于人类生命的持久性。作为一个热衷学习者，Nisha致力于拓宽她的技术知识和写作技能，同时帮助他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**** 是一名数据科学家、自由技术作家，以及 KDnuggets 的编辑和社区经理。她特别关注提供数据科学职业建议、教程和基于理论的知识。Nisha 涉及广泛的话题，并希望探索人工智能如何有利于人类生命的持久性。作为一个热衷学习者，Nisha 致力于拓宽她的技术知识和写作技能，同时帮助他人。
 
 ### 相关主题
 
-+   [基础回顾 第2周：数据库、SQL、数据管理及……](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [基础回顾 第 2 周：数据库、SQL、数据管理及……](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
 
-+   [基础回顾 第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [基础回顾 第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
-+   [基础回顾 第3周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [基础回顾 第 3 周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
 
 +   [基础回顾 奖励周：云端部署](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)
 
-+   [基础回顾，第Dos部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
++   [基础回顾，第 Dos 部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
 
 +   [基础回顾路径](https://www.kdnuggets.com/back-to-basics-pathway)

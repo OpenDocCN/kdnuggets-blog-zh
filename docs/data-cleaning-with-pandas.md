@@ -1,8 +1,8 @@
 # 数据清洗与 Pandas
 
-> 原文：[https://www.kdnuggets.com/data-cleaning-with-pandas](https://www.kdnuggets.com/data-cleaning-with-pandas)
+> 原文：[`www.kdnuggets.com/data-cleaning-with-pandas`](https://www.kdnuggets.com/data-cleaning-with-pandas)
 
-![Data Cleaning with Pandas](../Images/4d7ef9a022460c8e9009883084da54ff.png)
+![Data Cleaning with Pandas](img/4d7ef9a022460c8e9009883084da54ff.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -83,7 +83,7 @@ memory usage: 7.2+ KB
 None</class>
 ```
 
-![Data Cleaning with Pandas](../Images/2358828d44ba39e3f759d6dc9986b6e8.png)
+![Data Cleaning with Pandas](img/2358828d44ba39e3f759d6dc9986b6e8.png)
 
 iris_data.describe() 的输出
 
@@ -147,7 +147,7 @@ iris_data = pd.concat([iris_data, encoded_species], axis=1)
 iris_data.drop(columns=['species'], inplace=True)
 ```
 
-![使用 Pandas 进行数据清洗](../Images/476d06368bc9b14541a405819bc3d427.png)
+![使用 Pandas 进行数据清洗](img/476d06368bc9b14541a405819bc3d427.png)
 
 图片来源：作者
 
@@ -164,7 +164,7 @@ scaled_data = scaler.fit(iris_data[cols_to_normalize])
 iris_data[cols_to_normalize] = scaler.transform(iris_data[cols_to_normalize])
 ```
 
-![使用 Pandas 进行数据清洗](../Images/69e35ac2ad4d8fff336dc543bc02288c.png)
+![使用 Pandas 进行数据清洗](img/69e35ac2ad4d8fff336dc543bc02288c.png)
 
 归一化后的 iris_data.describe() 输出
 
@@ -188,10 +188,10 @@ iris_data.to_csv('cleaned_iris.csv', index=False)
 
 +   [在 Pandas 中清洗和预处理文本数据以进行 NLP 任务](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)
 
-+   [掌握SQL、Python、数据清洗、数据整理及探索性数据分析的指南合集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
++   [掌握 SQL、Python、数据清洗、数据整理及探索性数据分析的指南合集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
 
 +   [数据科学中数据清洗的重要性](https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html)
 
 +   [通过这本免费电子书学习数据清洗和数据预处理](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)
 
-+   [SQL中的数据清洗：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)**
++   [SQL 中的数据清洗：如何为分析准备混乱的数据](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)**

@@ -1,12 +1,12 @@
 # 如何使用 Python 构建数据库
 
-> 原文：[https://www.kdnuggets.com/2021/09/build-database-using-python.html](https://www.kdnuggets.com/2021/09/build-database-using-python.html)
+> 原文：[`www.kdnuggets.com/2021/09/build-database-using-python.html`](https://www.kdnuggets.com/2021/09/build-database-using-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Irfan Alghani Khalid](https://www.linkedin.com/in/alghaniirfan/)，计算机科学学生**
 
-![](../Images/ce52fd46adf211dce1be3d55a04ee65c.png)
+![](img/ce52fd46adf211dce1be3d55a04ee65c.png)
 
 由 [Taylor Vick](https://unsplash.com/@tvick?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 摄影，刊登于 [Unsplash](https://unsplash.com/s/photos/server?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -24,7 +24,7 @@ Flask-SQLAlchemy 是一个用于在 Flask 项目中连接 SQLAlchemy 库的库�
 
 在数据科学中，你可能会以类似电子表格的形式插入和分析数据。在软件开发领域，这略有不同。我们来看看这个电子表格。
 
-![](../Images/6e533ae64100beee9b91915fe965f58d.png)
+![](img/6e533ae64100beee9b91915fe965f58d.png)
 
 这张图片由作者拍摄。
 
@@ -34,7 +34,7 @@ Flask-SQLAlchemy 是一个用于在 Flask 项目中连接 SQLAlchemy 库的库�
 
 总结来说，规范化过程将把数据集分成几个表格，每个表格都有其唯一的标识符，我们将这些标识符称为主键。如果我们分开上述数据集，它将会像这样：
 
-![](../Images/50d8ae1eb5820bbc625bca7eae4307c1.png)
+![](img/50d8ae1eb5820bbc625bca7eae4307c1.png)
 
 这张图片由作者拍摄。
 
@@ -66,7 +66,7 @@ SQLite 是一种数据库管理系统，我们可以在其中构建和分析我�
 
 在我们设置好对象和参数之后，我们可以开始实现数据库。让我们回顾一下我们之前的数据库表：
 
-![](../Images/7b9c4c9111b45a12f0401e85f8eff70b.png)
+![](img/7b9c4c9111b45a12f0401e85f8eff70b.png)
 
 这张图片由作者拍摄。
 
@@ -94,7 +94,7 @@ SQLite 是一种数据库管理系统，我们可以在其中构建和分析我�
 
 之后，它将显示类似这样的 SQLite 界面：
 
-![](../Images/1d9e8b3434bc88c1343b334ec12dc725.png)
+![](img/1d9e8b3434bc88c1343b334ec12dc725.png)
 
 这张图片由作者拍摄。
 
@@ -112,7 +112,7 @@ SQLite 是一种数据库管理系统，我们可以在其中构建和分析我�
 
 它将生成如下结果：
 
-![](../Images/4875eeee1a17496754dd8de667edd35b.png)
+![](img/4875eeee1a17496754dd8de667edd35b.png)
 
 这张图片由作者拍摄。
 
@@ -124,7 +124,7 @@ SQLite 是一种数据库管理系统，我们可以在其中构建和分析我�
 
 这是结果：
 
-![](../Images/9b320fb36608d78b40b98eebc96c8044.png)
+![](img/9b320fb36608d78b40b98eebc96c8044.png)
 
 图片由作者拍摄。
 
@@ -137,7 +137,7 @@ INNER JOIN Author ON Book.author_id = Author.id;**
 
 结果如下：
 
-![](../Images/89026163943c619d7c977e4804f93a21.png)
+![](img/89026163943c619d7c977e4804f93a21.png)
 
 图片由作者拍摄。
 
@@ -155,21 +155,21 @@ INNER JOIN Author ON Book.author_id = Author.id;**
 
 **相关内容:**
 
-+   [如何用几行代码和 Flash 构建图像分类器](/2021/07/build-image-classifier-in-few-lines-of-code-with-flash.html)
++   如何用几行代码和 Flash 构建图像分类器
 
-+   [原生 Python 中的简单 SQL](/2021/09/easy-sql-native-python.html)
++   原生 Python 中的简单 SQL
 
-+   [如何查询你的 Pandas 数据框](/2021/08/query-pandas-dataframe.html)
++   如何查询你的 Pandas 数据框
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 

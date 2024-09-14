@@ -1,8 +1,8 @@
 # 最佳机器学习语言、数据可视化工具、深度学习框架和大数据工具
 
-> 原文：[https://www.kdnuggets.com/2018/12/machine-learning-data-visualization-deep-learning-tools.html](https://www.kdnuggets.com/2018/12/machine-learning-data-visualization-deep-learning-tools.html)
+> 原文：[`www.kdnuggets.com/2018/12/machine-learning-data-visualization-deep-learning-tools.html`](https://www.kdnuggets.com/2018/12/machine-learning-data-visualization-deep-learning-tools.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Altexsoft](https://www.altexsoft.com/)**。
 
@@ -10,7 +10,7 @@
 
 最训练有素的士兵不能空手完成任务。数据科学家有自己的武器——机器学习（ML）软件。已经有大量文章列出了可靠的机器学习工具，并深入描述了它们的功能。然而，我们的目标是获取行业专家的反馈。
 
-这就是为什么我们采访了数据科学实践者——真正的专家——关于他们为*自己的*项目选择的有用工具。我们联系的专家有不同的专长，分别在Facebook和三星等公司工作。其中一些代表了AI初创公司（Objection Co、NEAR.AI和Respeecher）；一些在大学（哈尔科夫国立无线电电子大学）教授。AltexSoft的数据科学团队也参与了讨论。
+这就是为什么我们采访了数据科学实践者——真正的专家——关于他们为*自己的*项目选择的有用工具。我们联系的专家有不同的专长，分别在 Facebook 和三星等公司工作。其中一些代表了 AI 初创公司（Objection Co、NEAR.AI 和 Respeecher）；一些在大学（哈尔科夫国立无线电电子大学）教授。AltexSoft 的数据科学团队也参与了讨论。
 
 如果你在寻找特定类型的机器学习工具，只需跳到你感兴趣的领域：
 
@@ -76,7 +76,7 @@ pandas 通过将 CSV、JSON 和 TSV 数据文件或 SQL 数据库转换为数据
 
 matplotlib 允许用几行代码生成生产质量的可视化。库的开发者 [强调](https://matplotlib.org/users/history.html) 了使用的简便性：“*如果你想看到数据的直方图，你不应该需要实例化对象、调用方法、设置属性等等，它应该直接工作*。”
 
-![](../Images/38e2e2c5f3120af8b64ff105dad3679a.png)
+![](img/38e2e2c5f3120af8b64ff105dad3679a.png)
 
 **matplotlib 可视化演示。图像来源：[matplotlib Style Gallery](https://tonysyu.github.io/raw_content/matplotlib-style-gallery/gallery.html)**
 
@@ -104,7 +104,7 @@ NEAR.AI 的 Illia Polosukhin 分享了他主要用于自定义临时分析的 Ju
 
 通过数据探索和发现，Tableau 软件可以快速从数据中提取见解并以易于理解的格式展示出来。它不需要出色的编程技能，并且可以轻松安装在各种设备上。虽然需要编写少量脚本，但大多数操作都是通过拖放完成的。
 
-![](../Images/341956a5d42a6b0f582a6cb51ed2b3b2.png)
+![](img/341956a5d42a6b0f582a6cb51ed2b3b2.png)
 
 **Tableau 拖放菜单的工作原理**
 
@@ -150,7 +150,7 @@ Aleksander Konduforov 更喜欢这个工具用于 NLP 任务。*“NLTK 是 Pyth
 
 这个库的一个显著特点是，数值计算通过由节点和边组成的数据流图来完成。节点代表数学运算，而边是多维数据数组或 *张量*，这些操作在其上执行。
 
-![](../Images/4d6f1cb0c0a38a337d3633876a58aa47.png)**TensorFlow 中操作间数据流的可视化**
+![](img/4d6f1cb0c0a38a337d3633876a58aa47.png)**TensorFlow 中操作间数据流的可视化**
 
 TensorFlow 灵活，可以在各种计算平台（CPU、GPU 和 TPU）和设备上使用，从桌面到服务器集群，再到移动设备和边缘系统。它支持 Mac、Windows 和 Linux。
 
@@ -168,7 +168,7 @@ TensorBoard 读取 TensorFlow 事件文件，这些文件包含在 TensorFlow �
 
 通过图示展示的模型结构可以让研究人员确保模型组件的位置和连接都正确。
 
-![](../Images/ca5be939acb85c77cac28444548f8b3d.png)
+![](img/ca5be939acb85c77cac28444548f8b3d.png)
 
 **TensorBoard 中的模型图形表示**
 
@@ -262,11 +262,11 @@ Apache Spark 的其他有益特性包括多种运行选项（本地、集群、�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
 
 * * *
 

@@ -1,8 +1,8 @@
 # 免费 SQL 和数据库课程
 
-> 原文：[https://www.kdnuggets.com/2022/09/free-sql-database-course.html](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)
+> 原文：[`www.kdnuggets.com/2022/09/free-sql-database-course.html`](https://www.kdnuggets.com/2022/09/free-sql-database-course.html)
 
-![免费 SQL 和数据库课程](../Images/e41f609976ecb9e58bec1bbd218eec5d.png)
+![免费 SQL 和数据库课程](img/e41f609976ecb9e58bec1bbd218eec5d.png)
 
 SQL 是数据科学家——或者任何编程人员——能够掌握的最受欢迎和最有用的语言之一。
 
@@ -10,11 +10,11 @@ SQL 是数据科学家——或者任何编程人员——能够掌握的最受�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -30,9 +30,9 @@ SQL 可能是数据科学家的最佳朋友，而且有充分的理由。 Jorge 
 
 正如前面提到的，除了 SQL 之外，这门课程还涵盖了关系数据库管理系统，并特别使用 MySQL 来探讨这些概念。关系数据库，特别是 MySQL 数据库系统的需求有多大？[DB-Engines 排名](https://db-engines.com/en/ranking)根据数据库管理系统的受欢迎程度进行排名，并且每月更新一次。截至目前，排名前十的数据库引擎中有 8 个基于 RDBMS，其中前五名全部都是。MySQL 本身总体排名第二，因此你在学习这个系统时绝对不会浪费时间。
 
-![免费 SQL 和数据库课程](../Images/04d345e1da9a83daca982fde3a4e6329.png)
+![免费 SQL 和数据库课程](img/04d345e1da9a83daca982fde3a4e6329.png)
 
-[DB-Engines 排名](https://db-engines.com/en/ranking)，2022年9月。
+[DB-Engines 排名](https://db-engines.com/en/ranking)，2022 年 9 月。
 
 回到相关课程。这门课程由 [Mike Dane](https://www.youtube.com/channel/UCvmINlrza7JHB1zkIOuXEbw) 开发，时长刚刚超过 4 小时，涵盖了以下内容：
 
@@ -92,9 +92,9 @@ SQL 可能是数据科学家的最佳朋友，而且有充分的理由。 Jorge 
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，9月21日：7 个机器学习投资组合项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习投资组合项目…](https://www.kdnuggets.com/2022/n37.html)
 
-+   [回到基础第2周：数据库、SQL、数据管理等](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [回到基础第 2 周：数据库、SQL、数据管理等](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
 
 +   [数据库内分析：利用 SQL 的分析函数](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)
 

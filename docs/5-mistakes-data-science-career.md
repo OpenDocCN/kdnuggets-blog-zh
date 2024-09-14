@@ -1,22 +1,22 @@
 # 我希望在数据科学职业生涯中避免的 5 个错误
 
-> 原文：[https://www.kdnuggets.com/2021/07/5-mistakes-data-science-career.html](https://www.kdnuggets.com/2021/07/5-mistakes-data-science-career.html)
+> 原文：[`www.kdnuggets.com/2021/07/5-mistakes-data-science-career.html`](https://www.kdnuggets.com/2021/07/5-mistakes-data-science-career.html)
 
-[评论](#comments)
+评论
 
 **由 [Tessa Xie](https://www.linkedin.com/in/tessayuqingxie/)，Cruise 高级数据科学家**。
 
-![](../Images/4052634524495385938094c17eb43d60.png)
+![](img/4052634524495385938094c17eb43d60.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 从小到大，我们总是根据我们遵循规则和指令的能力来评估，特别是在学校里。如果你按照教材和模拟考试进行练习并努力工作，你就会成为顶尖学生。许多人似乎把这种“步兵”心态带入工作环境。在我看来，这正是阻碍许多数据科学家最大化影响力并从同事中脱颖而出的心态。我观察到很多数据科学家，尤其是初级的，认为他们对决策过程没有贡献，宁愿退到背景中，消极地执行为他们做出的决策。这开启了一个恶性循环——你对这些讨论的贡献越少，利益相关者就越不可能让你参与未来的会议，你将获得的贡献机会也会越少。
 
-让我举一个在模型开发中步兵和思想伙伴之间区别的具体例子。在数据收集和特征头脑风暴会议中，我以前会消极地记录利益相关者的建议，以便后来可以“完美”地实施它们。当有人提议一个我知道我们没有数据的特征时，我会因为假设他们更资深、一定知道我忽视的东西而不说任何话。但猜猜怎么着，他们并不知道。后来，我会遇到这样的问题：我们头脑风暴的50%特征需要额外的数据收集，这将使我们的项目截止日期面临风险。结果，我常常发现自己处于最后的坏消息传播者的位置。现在为了成为思想伙伴，我会在对话中早早介入，并利用我作为离数据最近的人的独特位置。这种方式让我可以早早管理利益相关者的期望，并提出建议以帮助团队前进。
+让我举一个在模型开发中步兵和思想伙伴之间区别的具体例子。在数据收集和特征头脑风暴会议中，我以前会消极地记录利益相关者的建议，以便后来可以“完美”地实施它们。当有人提议一个我知道我们没有数据的特征时，我会因为假设他们更资深、一定知道我忽视的东西而不说任何话。但猜猜怎么着，他们并不知道。后来，我会遇到这样的问题：我们头脑风暴的 50%特征需要额外的数据收集，这将使我们的项目截止日期面临风险。结果，我常常发现自己处于最后的坏消息传播者的位置。现在为了成为思想伙伴，我会在对话中早早介入，并利用我作为离数据最近的人的独特位置。这种方式让我可以早早管理利益相关者的期望，并提出建议以帮助团队前进。
 
 **如何避免这一点：**
 
@@ -58,7 +58,7 @@
 
 每个士兵都知道这一点，每个 DS 也应当知道。对自己的数据技能感到自满，并不花时间学习新技能是一个常见的错误。在数据领域，这种情况比在其他领域更危险，因为数据科学是一个相对较新的领域，仍在经历急剧的变化和发展。不断有新的算法、新的工具，甚至新的编程语言被引入。
 
-如果你不想成为那个在2021年仍然只会使用 STATA 的数据科学家（他确实存在，我曾与他合作过），那么你需要跟上该领域的发展。
+如果你不想成为那个在 2021 年仍然只会使用 STATA 的数据科学家（他确实存在，我曾与他合作过），那么你需要跟上该领域的发展。
 
 *不要成为这样的人 ([GIF](http://gph.is/2lFlHIK) 由 GIPHY 提供)。*
 
@@ -82,7 +82,7 @@
 
 ### 错误 5：认为建立数据文化是其他人的工作
 
-在我的文章“[构建伟大数据文化的6个关键步骤](https://towardsdatascience.com/6-essential-steps-to-building-a-great-data-culture-e529d4dcad7e)”中，我写到，如果公司没有良好的数据文化，数据科学家的生活可能会变得糟糕而低效。事实上，我听到很多数据科学家抱怨那些应该由利益相关者自助处理的不必要的临时数据请求（例如，在Looker中将聚合从每月改为每日，实际上只需两次点击）。不要认为改变这种文化是别人的工作。如果你想看到改变，就去做。毕竟，谁比数据科学家更适合建立数据文化并教育利益相关者呢？帮助建立公司的数据文化将使你和你的利益相关者在未来的工作中轻松很多。
+在我的文章“[构建伟大数据文化的 6 个关键步骤](https://towardsdatascience.com/6-essential-steps-to-building-a-great-data-culture-e529d4dcad7e)”中，我写到，如果公司没有良好的数据文化，数据科学家的生活可能会变得糟糕而低效。事实上，我听到很多数据科学家抱怨那些应该由利益相关者自助处理的不必要的临时数据请求（例如，在 Looker 中将聚合从每月改为每日，实际上只需两次点击）。不要认为改变这种文化是别人的工作。如果你想看到改变，就去做。毕竟，谁比数据科学家更适合建立数据文化并教育利益相关者呢？帮助建立公司的数据文化将使你和你的利益相关者在未来的工作中轻松很多。
 
 **如何避免这些问题：**
 
@@ -94,23 +94,23 @@
 
 [原文](https://towardsdatascience.com/5-mistakes-i-wish-i-had-avoided-in-my-data-science-career-6c22a44304a1)。经许可转载。
 
-**简介：**[Tessa Xie](https://www.linkedin.com/in/tessayuqingxie/)是一位经验丰富的高级分析顾问，擅长数据科学、SQL、R、Python、消费者研究和经济研究，拥有强大的工程背景，硕士学位专注于金融工程，毕业于MIT。
+**简介：**[Tessa Xie](https://www.linkedin.com/in/tessayuqingxie/)是一位经验丰富的高级分析顾问，擅长数据科学、SQL、R、Python、消费者研究和经济研究，拥有强大的工程背景，硕士学位专注于金融工程，毕业于 MIT。
 
 **相关内容：**
 
-+   [一个错误如何浪费了我3年的数据科学旅程](https://www.kdnuggets.com/2021/06/single-mistake-wasted-3-years-data-science.html)
++   [一个错误如何浪费了我 3 年的数据科学旅程](https://www.kdnuggets.com/2021/06/single-mistake-wasted-3-years-data-science.html)
 
 +   [数据科学家认为数据是他们的头号问题。这里解释为什么他们错了。](https://www.kdnuggets.com/2020/09/data-scientist-data-problem-wrong.html)
 
-+   [从3个重大数据科学职业错误中学习](https://www.kdnuggets.com/2020/02/learning-from-big-data-science-career-mistakes.html)
++   [从 3 个重大数据科学职业错误中学习](https://www.kdnuggets.com/2020/02/learning-from-big-data-science-career-mistakes.html)
 
 ### 更多相关话题
 
 +   [如果我需要重新开始学习数据科学，我会怎么做？](https://www.kdnuggets.com/2020/08/start-learning-data-science-again.html)
 
-+   [我希望在开始数据科学时知道的3件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
++   [我希望在开始数据科学时知道的 3 件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
 
-+   [我在转行到数据科学领域时犯的5个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
++   [我在转行到数据科学领域时犯的 5 个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
 
 +   [5 个常见的数据科学错误及其避免方法](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
 

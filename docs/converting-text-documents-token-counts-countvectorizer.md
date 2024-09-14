@@ -1,10 +1,10 @@
 # 使用 CountVectorizer 将文本文件转换为令牌计数
 
-> 原文：[https://www.kdnuggets.com/2022/10/converting-text-documents-token-counts-countvectorizer.html](https://www.kdnuggets.com/2022/10/converting-text-documents-token-counts-countvectorizer.html)
+> 原文：[`www.kdnuggets.com/2022/10/converting-text-documents-token-counts-countvectorizer.html`](https://www.kdnuggets.com/2022/10/converting-text-documents-token-counts-countvectorizer.html)
 
-我们每天都在与机器互动——无论是询问“OK Google，设置早上6点的闹钟”还是“Alexa，播放我喜欢的播放列表”。但这些机器并不理解自然语言。那么当我们与设备交谈时会发生什么？它需要将语音即文本转换为数字，以便处理信息并学习上下文。在这篇文章中，你将学习一种使用 CountVectorizer 将语言转换为数字的流行工具。[Scikit-learn 的 CountVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html) 用于将文本语料库重新转换并预处理为令牌计数向量表示。
+我们每天都在与机器互动——无论是询问“OK Google，设置早上 6 点的闹钟”还是“Alexa，播放我喜欢的播放列表”。但这些机器并不理解自然语言。那么当我们与设备交谈时会发生什么？它需要将语音即文本转换为数字，以便处理信息并学习上下文。在这篇文章中，你将学习一种使用 CountVectorizer 将语言转换为数字的流行工具。[Scikit-learn 的 CountVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html) 用于将文本语料库重新转换并预处理为令牌计数向量表示。
 
-![使用 CountVectorizer 将文本文件转换为令牌计数](../Images/fc067cd21dca6b31af364682a86f4fc8.png)
+![使用 CountVectorizer 将文本文件转换为令牌计数](img/fc067cd21dca6b31af364682a86f4fc8.png)
 
 [来源](https://img.freepik.com/free-vector/human-hand-typing-computer-with-different-symbols-located-near-cup-coffee-side-view-open-laptop-flat-vector-illustration-new-technologies-millennials-work-concept_74855-21931.jpg?w=1480&t=st=1665332617~exp=1665333217~hmac=75d8c5ae364cabb50f74dbc02bc175292145468ab3c10b2f506adff151278f11)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@ text = ["Brown Bear, Brown Bear, What do you see?"]
 
 向量中有六个独特的词，因此向量表示的长度为六。该向量表示每个令牌/词在文本中的出现频率。
 
-![使用 CountVectorizer 将文本文件转换为令牌计数](../Images/aa0ff5a87c7c089c1e76b8275f32a5be.png)
+![使用 CountVectorizer 将文本文件转换为令牌计数](img/aa0ff5a87c7c089c1e76b8275f32a5be.png)
 
 让我们添加另一个文档到我们的语料库中，以观察结果矩阵的维度如何增加。
 
@@ -40,7 +40,7 @@ text = ["Brown Bear, Brown Bear, What do you see?", “I love you to the moon an
 
 CountVectorizer 将生成以下输出，通过添加一个文档，矩阵从 1 X 6 变为 2 X 13。
 
-![使用 CountVectorizer 将文本文件转换为令牌计数](../Images/10bd82304842443ba4df35a023c1fea0.png)
+![使用 CountVectorizer 将文本文件转换为令牌计数](img/10bd82304842443ba4df35a023c1fea0.png)
 
 矩阵中的每一列表示由语料库中的所有令牌组成的字典中的唯一令牌（单词），而每一行表示一个文档。上述示例有两个书名，即由两行表示的文档，每个单元格包含一个值，标识文档中对应的单词计数。由于这种表示方式，某些单元格在对应文档中令牌缺失时会有零值。
 
@@ -88,7 +88,7 @@ df
 
 好消息！文档已转换为数字。但仔细观察会发现，“哈利·波特与凤凰令”与“印第安纳·琼斯与失落的圣杯”相比，与其他哈利·波特电影相似——至少在初步观察时是这样。
 
-![使用 CountVectorizer 将文本文件转换为令牌计数](../Images/c6fd74a880e106bbbd3cf1d5aa1d74d5.png)
+![使用 CountVectorizer 将文本文件转换为令牌计数](img/c6fd74a880e106bbbd3cf1d5aa1d74d5.png)
 
 你一定在想像 ‘and’、‘the’ 和 ‘of’ 这样的令牌是否对我们的特征集添加了任何信息。这引导我们到下一步，即去除停用词。
 
@@ -110,7 +110,7 @@ df
 
 看起来更好！现在行向量看起来更有意义。
 
-![使用 CountVectorizer 将文本文件转换为令牌计数](../Images/4bc31a8008f051607bac5c87b88c1cb1.png)
+![使用 CountVectorizer 将文本文件转换为令牌计数](img/4bc31a8008f051607bac5c87b88c1cb1.png)
 
 ## max_df
 
@@ -127,7 +127,7 @@ df
 
 以下输出演示了停用词以及“harry”和“potter”从列中被删除：
 
-![使用 CountVectorizer 将文本文件转换为令牌计数](../Images/6572c77d22e3d8fc438cc45c58ffde9d.png)
+![使用 CountVectorizer 将文本文件转换为令牌计数](img/6572c77d22e3d8fc438cc45c58ffde9d.png)
 
 ## min_df
 
@@ -144,7 +144,7 @@ df
 
 以下列（单词）在至少两个文档中出现。
 
-![使用 CountVectorizer 将文本文档转换为令牌计数](../Images/e7a006bf406429d69c168750e6f31a72.png)
+![使用 CountVectorizer 将文本文档转换为令牌计数](img/e7a006bf406429d69c168750e6f31a72.png)
 
 ## max_features
 
@@ -161,7 +161,7 @@ df
 
 选择了下列四个最常出现的单词。
 
-![使用 CountVectorizer 将文本文档转换为令牌计数](../Images/f1dff0e8706c7f132871f6d592a61937.png)
+![使用 CountVectorizer 将文本文档转换为令牌计数](img/f1dff0e8706c7f132871f6d592a61937.png)
 
 ## binary
 
@@ -179,7 +179,7 @@ df
 
 与先前的输出进行比较后，名为“the”的列的频率表在下方结果中被限制为‘1’：
 
-![使用 CountVectorizer 将文本文档转换为令牌计数](../Images/4b36f2b5d183f6a654b4c7c685626dbc.png)
+![使用 CountVectorizer 将文本文档转换为令牌计数](img/4b36f2b5d183f6a654b4c7c685626dbc.png)
 
 ## vocabulary_
 

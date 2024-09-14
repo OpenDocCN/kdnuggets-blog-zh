@@ -1,8 +1,8 @@
 # 2024 年数据科学家工具箱中必备的 5 种工具
 
-> 原文：[https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
+> 原文：[`www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024`](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
 
-![数据科学工具](../Images/83ba9635e2c66a1e86235988f4305310.png)
+![数据科学工具](img/83ba9635e2c66a1e86235988f4305310.png)
 
 图片来源于 DALL-E
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -102,6 +102,6 @@
 
 +   [Python f-Strings 魔法：每位程序员需要了解的 5 个颠覆性技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [深入了解 13 个数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)

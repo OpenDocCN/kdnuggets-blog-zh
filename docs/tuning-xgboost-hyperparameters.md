@@ -1,8 +1,8 @@
 # 调整 XGBoost 超参数
 
-> 原文：[https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
+> 原文：[`www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html`](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
 
-![调整 XGBoost 超参数](../Images/0ed85dd2a0f411bb383af072d8093e46.png)
+![调整 XGBoost 超参数](img/0ed85dd2a0f411bb383af072d8093e46.png)
 
 [Garett Mizunaka](https://unsplash.com/@garett3) via Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -62,9 +62,9 @@ XGBoost 参数分为 4 类：
 
 这与我们用于增强的提升器类型有关。最常见的类型是树模型或线性模型。
 
-## 2\. Booster参数
+## 2\. Booster 参数
 
-这取决于你选择了哪个booster。
+这取决于你选择了哪个 booster。
 
 ## 3\. 学习任务参数
 
@@ -72,33 +72,33 @@ XGBoost 参数分为 4 类：
 
 ## 4\. 命令行参数
 
-这与XGBoost的CLI版本的行为有关。
+这与 XGBoost 的 CLI 版本的行为有关。
 
-一般参数、Booster参数和任务参数在运行XGBoost模型之前设置。命令行参数仅在XGBoost的控制台版本中使用。
+一般参数、Booster 参数和任务参数在运行 XGBoost 模型之前设置。命令行参数仅在 XGBoost 的控制台版本中使用。
 
 # 一般参数
 
-这些是XGBoost中的一般参数：
+这些是 XGBoost 中的一般参数：
 
 `booster [default=gbtree]`
 
-选择使用哪个booster，如树基模型的gbtree和dart，以及线性函数的gblinear。
+选择使用哪个 booster，如树基模型的 gbtree 和 dart，以及线性函数的 gblinear。
 
 `verbosity [default=1]`
 
-这是消息的打印，合法值为0（静默）、1（警告）、2（信息）、3（调试）。
+这是消息的打印，合法值为 0（静默）、1（警告）、2（信息）、3（调试）。
 
 `validate_parameters [default to false, except for Python, R and CLI interface]`
 
-当设置为True时，XGBoost将执行输入参数的验证，以检查是否使用了某个参数。
+当设置为 True 时，XGBoost 将执行输入参数的验证，以检查是否使用了某个参数。
 
 `nthread`
 
-这是用于运行XGBoost的并行线程数。
+这是用于运行 XGBoost 的并行线程数。
 
 `disable_default_eval_metric [default=false]`
 
-这将标记以禁用默认度量。你可以将其设置为1或true来禁用。
+这将标记以禁用默认度量。你可以将其设置为 1 或 true 来禁用。
 
 `num_feature`
 
@@ -108,21 +108,21 @@ XGBoost 参数分为 4 类：
 
 `max_depth [default=6]`
 
-增加此值将使模型更复杂，更容易过拟合，因此在选择值时需要小心。值必须是大于0的整数。
+增加此值将使模型更复杂，更容易过拟合，因此在选择值时需要小心。值必须是大于 0 的整数。
 
 `eta [default=0.3, alias: learning_rate]`
 
-这决定了每次迭代的步长。值必须在0和1之间，默认值为0.3。较低的学习率使计算变慢，并且需要更多轮次来减少错误，相比之下，学习率较高的模型则更快。
+这决定了每次迭代的步长。值必须在 0 和 1 之间，默认值为 0.3。较低的学习率使计算变慢，并且需要更多轮次来减少错误，相比之下，学习率较高的模型则更快。
 
 `n_estimators [default=100]`
 
 这是我们集成中的树的数量，即提升轮次的数量。
 
-值必须是大于0的整数，默认值为100。
+值必须是大于 0 的整数，默认值为 100。
 
 `subsample [default=1]`
 
-这表示每棵树需要采样的观察值的比例。较低的值有助于防止过拟合，但会增加欠拟合的可能性。值必须在0和1之间，默认值为1。
+这表示每棵树需要采样的观察值的比例。较低的值有助于防止过拟合，但会增加欠拟合的可能性。值必须在 0 和 1 之间，默认值为 1。
 
 `colsample_bytree, colsample_bylevel, colsample_bynode [default=1]`
 
@@ -143,7 +143,7 @@ params = {
 
 `alpha [default=0, alias: reg_alpha]`
 
-对权重进行L1（Lasso回归）正则化。增加此值将使模型更保守。当特征数量较多时，可能会提高速度性能。可以是任何整数，默认值为0。
+对权重进行 L1（Lasso 回归）正则化。增加此值将使模型更保守。当特征数量较多时，可能会提高速度性能。可以是任何整数，默认值为 0。
 
 `lambda [default=1, alias: reg_lambda]`
 

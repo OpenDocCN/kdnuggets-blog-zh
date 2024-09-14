@@ -1,6 +1,6 @@
-# 使用Python和Scikit-learn简化决策树的可解释性
+# 使用 Python 和 Scikit-learn 简化决策树的可解释性
 
-> 原文：[https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
+> 原文：[`www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html`](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
 
 在讨论分类器时，与许多更复杂的分类器（尤其是黑箱类型的分类器）相比，决策树通常被认为是容易解释的模型。这通常是正确的。
 
@@ -10,21 +10,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
 简洁的文本表示可以很好地总结决策树模型。此外，某些文本表示的功能超出了总结能力。例如，自动生成能够通过传递实例对未来数据进行分类的函数，在特定情况下可能会有所帮助。但我们不要偏离主题——可解释性是我们在这里讨论的目标。
 
-本文将探讨几种简化决策树表示及其最终可解释性的方法。所有代码均为Python，决策树建模使用Scikit-learn。
+本文将探讨几种简化决策树表示及其最终可解释性的方法。所有代码均为 Python，决策树建模使用 Scikit-learn。
 
 # 构建分类器
 
-首先，让我们使用我最喜欢的数据集，通过使用[Scikit-learn的决策树分类器](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)在Python中构建一个简单的决策树，指定信息增益作为标准，其余则使用默认设置。由于在这篇文章中我们不关注对未见实例的分类，因此我们不会拆分数据，而是直接使用整个数据集来构建分类器。
+首先，让我们使用我最喜欢的数据集，通过使用[Scikit-learn 的决策树分类器](http://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)在 Python 中构建一个简单的决策树，指定信息增益作为标准，其余则使用默认设置。由于在这篇文章中我们不关注对未见实例的分类，因此我们不会拆分数据，而是直接使用整个数据集来构建分类器。
 
 ```py
 import numpy as np
@@ -43,7 +43,7 @@ dt.fit(X, y)
 
 # 视觉化模型的表示
 
-解释决策树的最简单方法之一是通过视觉效果，这可以通过Scikit-learn和这几行代码实现：
+解释决策树的最简单方法之一是通过视觉效果，这可以通过 Scikit-learn 和这几行代码实现：
 
 ```py
 dotfile = open("dt.dot", 'w')
@@ -51,9 +51,9 @@ tree.export_graphviz(dt, out_file=dotfile, feature_names=iris.feature_names)
 dotfile.close()
 ```
 
-将创建的文件（在我们的示例中为'dt.dot'）的内容复制到[graphviz渲染工具](http://webgraphviz.com/)，我们可以得到以下决策树表示：
+将创建的文件（在我们的示例中为'dt.dot'）的内容复制到[graphviz 渲染工具](http://webgraphviz.com/)，我们可以得到以下决策树表示：
 
-![决策树图](../Images/99f151aa5cdb993d4ce7e211b834f70e.png)
+![决策树图](img/99f151aa5cdb993d4ce7e211b834f70e.png)
 
 使用[graphviz 渲染代理](http://webgraphviz.com/)的决策树的可视化表示
 
@@ -235,6 +235,6 @@ tree_to_pseudo(dt, list(iris.feature_names))
 
 +   [随机森林与决策树: 关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日: 讲述一个精彩的数据故事: A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日: 讲述一个精彩的数据故事: A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [决策树软件完整指南](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)

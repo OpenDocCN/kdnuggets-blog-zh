@@ -1,8 +1,8 @@
 # 哪些数据科学技能是核心的，哪些是热点/新兴的？
 
-> 原文：[https://www.kdnuggets.com/2019/09/core-hot-data-science-skills.html](https://www.kdnuggets.com/2019/09/core-hot-data-science-skills.html)
+> 原文：[`www.kdnuggets.com/2019/09/core-hot-data-science-skills.html`](https://www.kdnuggets.com/2019/09/core-hot-data-science-skills.html)
 
-[评论](#comments)最新的 KDnuggets 调查问卷
+评论最新的 KDnuggets 调查问卷
 
 > **1\. 你目前拥有哪些技能/知识领域（达到可以在工作或研究中使用的水平）？** 和
 > 
@@ -16,7 +16,7 @@
 
 注意：*其他大数据工具* 条目指的是*除 Hadoop 或 Spark 外的大数据工具*。
 
-![技能需求散点图](../Images/73b5551c22cdbc64ae40d9fc9e16af32.png)
+![技能需求散点图](img/73b5551c22cdbc64ae40d9fc9e16af32.png)
 
 **图 1：数据科学相关技能，拥有技能与希望增加或改善的技能**
 
@@ -62,13 +62,13 @@
 | Kaggle | 14.5% | 18.4% | **1.27** |
 | 非结构化数据 | 22.3% | 27.7% | **1.24** |
 
-有趣的是，尽管有观点认为Hadoop在下降，但在这次调查中，更多人想学习Hadoop而不是已经了解它，因此它可能仍会增长。
+有趣的是，尽管有观点认为 Hadoop 在下降，但在这次调查中，更多人想学习 Hadoop 而不是已经了解它，因此它可能仍会增长。
 
-尽管Julia的需求/拥有比例为**3.4**，我们仍未将其列为热门/新兴技能，因为只有2%的投票者选择了它，它目前还没有足够的支持。
+尽管 Julia 的需求/拥有比例为**3.4**，我们仍未将其列为热门/新兴技能，因为只有 2%的投票者选择了它，它目前还没有足够的支持。
 
-剩余技能 - XGBoost、软件工程、Java、MATLAB、SAS 的拥有比例在10%到30%之间，但没有增长 - 需求/拥有比例 < 1。
+剩余技能 - XGBoost、软件工程、Java、MATLAB、SAS 的拥有比例在 10%到 30%之间，但没有增长 - 需求/拥有比例 < 1。
 
-**表3：其他数据科学技能，按拥有比例的降序排列**
+**表 3：其他数据科学技能，按拥有比例的降序排列**
 
 | 技能 | %拥有 | %需求 | %需求/ %拥有 |
 | --- | --- | --- | --- |
@@ -79,19 +79,19 @@
 | MATLAB | 10.9% | 7.9% | 0.73 |
 | Julia | 2.0% | 6.9% | 3.44 |
 
-这里是关于调查的更多细节。图2按拥有比例的降序排列了所有技能。
+这里是关于调查的更多细节。图 2 按拥有比例的降序排列了所有技能。
 
-![技能拥有全部](../Images/baecb6eb35c0204f2a2454945d78fcd0.png)
+![技能拥有全部](img/baecb6eb35c0204f2a2454945d78fcd0.png)
 
-**图2：数据科学技能 KDnuggets 读者拥有的**
+**图 2：数据科学技能 KDnuggets 读者拥有的**
 
-图3显示了读者想要增加或改善的技能，以及他们拥有的技能的叠加。
+图 3 显示了读者想要增加或改善的技能，以及他们拥有的技能的叠加。
 
-![技能需求拥有全部](../Images/359617a30ed1fbd3dc10d0b2281d2ccb.png)
+![技能需求拥有全部](img/359617a30ed1fbd3dc10d0b2281d2ccb.png)
 
-**图3：数据科学技能 KDnuggets 读者想要增加或改善（红色）和拥有（蓝色）**
+**图 3：数据科学技能 KDnuggets 读者想要增加或改善（红色）和拥有（蓝色）**
 
-我们看到当前和有志成为数据科学家的顶级技能包括深度学习、Tensorflow、机器学习和Python。
+我们看到当前和有志成为数据科学家的顶级技能包括深度学习、Tensorflow、机器学习和 Python。
 
 调查还询问了就业类型：
 
@@ -121,41 +121,41 @@
 
 本次调查提供了初步分析，根据本帖的受欢迎程度，我们将进一步深入研究技能、就业类型和地区之间的关联。
 
-*注意：我们最初使用Google表单进行这项调查，但遭到机器人攻击，每个Julia和MATLAB的投票均超过50,000票。我们删除了机器人投票，同时保留了其他投票，并使用另一个平台重新启动调查，但不包括Julia和MATLAB - 以避免再次攻击。最终Julia和MATLAB的结果是基于第一次调查版本中的有效投票估算的。*
+*注意：我们最初使用 Google 表单进行这项调查，但遭到机器人攻击，每个 Julia 和 MATLAB 的投票均超过 50,000 票。我们删除了机器人投票，同时保留了其他投票，并使用另一个平台重新启动调查，但不包括 Julia 和 MATLAB - 以避免再次攻击。最终 Julia 和 MATLAB 的结果是基于第一次调查版本中的有效投票估算的。*
 
 **相关：**
 
-+   [Python引领数据科学和机器学习的11大平台：趋势与分析](/2019/05/poll-top-data-science-machine-learning-platforms.html)
++   Python 引领数据科学和机器学习的 11 大平台：趋势与分析
 
-+   [Python蚕食R：2018年分析、数据科学、机器学习的顶级软件：趋势与分析](/2018/05/poll-tools-analytics-data-science-machine-learning-results.html)
++   Python 蚕食 R：2018 年分析、数据科学、机器学习的顶级软件：趋势与分析
 
-+   [成为摇滚明星数据科学家的13项顶级技能](/2019/07/top-13-skills-become-rockstar-data-scientist.html)
++   成为摇滚明星数据科学家的 13 项顶级技能
 
-+   [数据科学家最需要的技能](/2018/11/most-demand-skills-data-scientists.html)
++   数据科学家最需要的技能
 
-+   [我没有被聘为数据科学家。因此我寻找了谁在被雇佣的数据。](/2019/09/getting-hired-data-scientist-sought-data.html)
++   我没有被聘为数据科学家。因此我寻找了谁在被雇佣的数据。
 
-[如何提升作为数据科学家的市场竞争力](/2019/08/marketable-data-scientist.html)
+如何提升作为数据科学家的市场竞争力
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关主题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标去……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

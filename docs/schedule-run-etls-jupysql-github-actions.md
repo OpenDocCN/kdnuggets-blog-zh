@@ -1,44 +1,44 @@
-# 使用Jupysql和GitHub Actions安排和运行ETL
+# 使用 Jupysql 和 GitHub Actions 安排和运行 ETL
 
-> 原文：[https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)
+> 原文：[`www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html`](https://www.kdnuggets.com/2023/05/schedule-run-etls-jupysql-github-actions.html)
 
-![使用Jupysql和GitHub Actions安排和运行ETL](../Images/4f0d1e0ad6d0308517fba43087bd543c.png)
+![使用 Jupysql 和 GitHub Actions 安排和运行 ETL](img/4f0d1e0ad6d0308517fba43087bd543c.png)
 
 作者提供的图片
 
 在本博客中你将实现：
 
-1.  了解ETL和JupySQL的基本概念
+1.  了解 ETL 和 JupySQL 的基本概念
 
-1.  使用公共企鹅数据集并执行ETL。
+1.  使用公共企鹅数据集并执行 ETL。
 
-1.  在GitHub Actions上安排我们构建的ETL。
+1.  在 GitHub Actions 上安排我们构建的 ETL。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 # 介绍
 
-在这份简短而信息丰富的指南中，我们旨在为你提供对ETL（提取、转换、加载）和JupySQL这一灵活且多功能工具的基本概念的全面理解，该工具允许从Jupyter中无缝地进行基于SQL的ETL操作。
+在这份简短而信息丰富的指南中，我们旨在为你提供对 ETL（提取、转换、加载）和 JupySQL 这一灵活且多功能工具的基本概念的全面理解，该工具允许从 Jupyter 中无缝地进行基于 SQL 的 ETL 操作。
 
-我们的主要关注点将是演示如何通过JupySQL这一流行且强大的Python库有效地执行ETL操作，同时强调通过GitHub Actions安排完整的ETL笔记本的自动化ETL过程的好处。
+我们的主要关注点将是演示如何通过 JupySQL 这一流行且强大的 Python 库有效地执行 ETL 操作，同时强调通过 GitHub Actions 安排完整的 ETL 笔记本的自动化 ETL 过程的好处。
 
-## 但首先，什么是ETL？
+## 但首先，什么是 ETL？
 
-现在，让我们深入了解细节。`ETL`（提取、转换、加载）是数据管理中至关重要的过程，它涉及从各种来源提取数据，将提取的数据转换为可用格式，并将转换后的数据加载到目标数据库或数据仓库中。它是数据分析、数据科学、数据集成和数据迁移等多个目的的关键过程。另一方面，JupySQL是一个广泛使用的Python库，它通过SQL查询的强大功能简化了与数据库的交互。通过使用JupySQL，数据科学家和分析师可以轻松执行SQL查询，操作数据框，并在Jupyter笔记本中与数据库交互。
+现在，让我们深入了解细节。`ETL`（提取、转换、加载）是数据管理中至关重要的过程，它涉及从各种来源提取数据，将提取的数据转换为可用格式，并将转换后的数据加载到目标数据库或数据仓库中。它是数据分析、数据科学、数据集成和数据迁移等多个目的的关键过程。另一方面，JupySQL 是一个广泛使用的 Python 库，它通过 SQL 查询的强大功能简化了与数据库的交互。通过使用 JupySQL，数据科学家和分析师可以轻松执行 SQL 查询，操作数据框，并在 Jupyter 笔记本中与数据库交互。
 
-## 为什么ETL很重要？
+## 为什么 ETL 很重要？
 
-ETL在数据分析和商业智能中扮演着重要角色。它们帮助企业从各种来源收集数据，包括社交媒体、网页、传感器以及其他内部和外部系统。通过这样做，企业可以获得其运营、客户和市场趋势的整体视图。
+ETL 在数据分析和商业智能中扮演着重要角色。它们帮助企业从各种来源收集数据，包括社交媒体、网页、传感器以及其他内部和外部系统。通过这样做，企业可以获得其运营、客户和市场趋势的整体视图。
 
 提取数据后，ETL 将其转换为结构化格式，例如关系数据库，这使企业能够轻松分析和操作数据。通过转换数据，ETL 可以清理、验证和标准化数据，使其更易于理解和分析。
 

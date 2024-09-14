@@ -1,22 +1,22 @@
 # Level 50 数据科学家：需要了解的 Python 库
 
-> 原文：[https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)
+> 原文：[`www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know`](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)
 
-![Level 50 Data Scientist: Python Libraries to Know](../Images/6235570513c9e896e0585ae74faa4e67.png)
+![Level 50 Data Scientist: Python Libraries to Know](img/6235570513c9e896e0585ae74faa4e67.png)
 
 图片来源：作者
 
-数据科学仍然是21世纪最热门的职位之一。因此，对于数据科学的好奇心也就不足为奇了。但首先，什么是数据科学？
+数据科学仍然是 21 世纪最热门的职位之一。因此，对于数据科学的好奇心也就不足为奇了。但首先，什么是数据科学？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 在本文中，我们将深入探讨这些元素，并通过使用 Python 探索可以应用这些元素的库。无论你是专业人士还是自认为是初学者，本文一定会拓展你的知识。让我们开始吧！
 
-![Level 50 Data Scientist: Python Libraries to Know](../Images/64df547ac5092dac698ff06d1ef47804.png)
+![Level 50 Data Scientist: Python Libraries to Know](img/64df547ac5092dac698ff06d1ef47804.png)
 
 图片来源：作者
 
@@ -86,7 +86,7 @@ Pandas 的一个新颖之处在于 DataFrames，这使其与其他数据处理�
 
 # 第 3 步：数据处理
 
-![Level 50 Data Scientist: Python Libraries to Know](../Images/f13b20b793c3d58f5fa81a9e936b5957.png)
+![Level 50 Data Scientist: Python Libraries to Know](img/f13b20b793c3d58f5fa81a9e936b5957.png)
 
 作者提供的图片
 
@@ -168,38 +168,38 @@ FastAPI 的一个独特特点是其自动生成文档和使用 Python 类型提�
 
 一个支持多种编程语言的云平台即服务 (PaaS)。
 
-相比AWS，它对初学者更友好，也提供更简单的网页应用部署过程。如果你是一个完全的初学者，它可能更适合你，比如PythonAnywhere。
+相比 AWS，它对初学者更友好，也提供更简单的网页应用部署过程。如果你是一个完全的初学者，它可能更适合你，比如 PythonAnywhere。
 
 ## PythonAnywhere
 
-PythonAnywhere是一个基于Python编程语言的在线开发环境，同时提供网页托管服务，从其名称就可以理解。
+PythonAnywhere 是一个基于 Python 编程语言的在线开发环境，同时提供网页托管服务，从其名称就可以理解。
 
-相比其他工具，它更专注于特定于Python的项目。如果你在第6步选择了Flask，你可以将你的模型上传到[pythonanywhere](https://www.pythonanywhere.com/)，它也提供了一个免费的功能。
+相比其他工具，它更专注于特定于 Python 的项目。如果你在第 6 步选择了 Flask，你可以将你的模型上传到[pythonanywhere](https://www.pythonanywhere.com/)，它也提供了一个免费的功能。
 
 ## AWS（亚马逊网络服务）
 
-AWS有太多不同的选项，每个功能都有不同的选择。如果你打算选择一个数据库，即使是它，也有太多的选择。
+AWS 有太多不同的选项，每个功能都有不同的选择。如果你打算选择一个数据库，即使是它，也有太多的选择。
 
 它比其他工具更复杂和全面，适合大规模操作。
 
-比如如果你在前一部分选择了django，并花时间创建一个大规模的网页应用程序，你的下一个选择可能会是AWS。
+比如如果你在前一部分选择了 django，并花时间创建一个大规模的网页应用程序，你的下一个选择可能会是 AWS。
 
 # 结束语
 
-在这篇文章中，我们探讨了数据科学中使用的主要Python库。在进行数据科学项目时，请记住，没有一种**终极**的方法。我希望这篇文章能向你介绍不同的工具。
+在这篇文章中，我们探讨了数据科学中使用的主要 Python 库。在进行数据科学项目时，请记住，没有一种**终极**的方法。我希望这篇文章能向你介绍不同的工具。
 
-[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一名数据科学家，专注于产品策略。他还是一位兼任教授，教授分析学，并且是StrataScratch的创始人，这是一个帮助数据科学家准备面试的在线平台，提供来自顶级公司的真实面试问题。Nate撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有SQL相关内容。
+[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一名数据科学家，专注于产品策略。他还是一位兼任教授，教授分析学，并且是 StrataScratch 的创始人，这是一个帮助数据科学家准备面试的在线平台，提供来自顶级公司的真实面试问题。Nate 撰写有关职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有 SQL 相关内容。
 
 ### 更多相关话题
 
-+   [KDnuggets新闻，4月13日：数据科学家应该知道的Python库](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该知道的 Python 库](https://www.kdnuggets.com/2022/n15.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [每个数据科学家都应该知道的10个Python库](https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know)
++   [每个数据科学家都应该知道的 10 个 Python 库](https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know)
 
-+   [2022年数据科学家应该知道的Python库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
++   [2022 年数据科学家应该知道的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
 
-+   [每个数据工程师都应该知道的7个Python库](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
++   [每个数据工程师都应该知道的 7 个 Python 库](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
 
 +   [初级数据科学家：下一阶段](https://www.kdnuggets.com/2022/02/junior-data-scientist-next-level.html)

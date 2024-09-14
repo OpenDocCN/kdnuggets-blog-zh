@@ -1,32 +1,32 @@
 # 为什么机器学习项目如此难以管理？
 
-> 原文：[https://www.kdnuggets.com/2020/02/machine-learning-projects-manage.html](https://www.kdnuggets.com/2020/02/machine-learning-projects-manage.html)
+> 原文：[`www.kdnuggets.com/2020/02/machine-learning-projects-manage.html`](https://www.kdnuggets.com/2020/02/machine-learning-projects-manage.html)
 
-[评论](#comments)
+评论
 
-**由[Lukas Biewald](https://twitter.com/l2k)——Weights and Biases的创始人/首席执行官**。
+**由[Lukas Biewald](https://twitter.com/l2k)——Weights and Biases 的创始人/首席执行官**。
 
 我看过很多公司尝试部署机器学习——有些取得了巨大的成功，有些则失败得非常惨烈。一个共同点是，机器学习团队在设定目标和期望方面遇到困难。这是为什么呢？
 
-![](../Images/cea8236a453e807ed5a339d72d25f435.png)
+![](img/cea8236a453e807ed5a339d72d25f435.png)
 
 ### 1\. 很难事先判断什么是困难的，什么是简单的。
 
-是击败卡斯帕罗夫下棋更难，还是拿起并移动棋子更难？计算机早在二十多年前就击败了世界冠军棋手，但可靠地抓取和移动物体仍然是一个未解决的研究问题。人类不擅长评估什么对AI来说会很难，什么会很容易。即使在同一个领域，性能也可能有很大差异。预测情感的准确度是什么？在电影评论中，有很多文本，作者往往对自己的观点非常明确，如今期望的准确率是90%到95%。在Twitter上，两个人可能仅在80%的时间内就某条推文的情感达成一致。对于关于某些航空公司的推文，通过始终预测情感为负面，可能能够达到95%的准确率。
+是击败卡斯帕罗夫下棋更难，还是拿起并移动棋子更难？计算机早在二十多年前就击败了世界冠军棋手，但可靠地抓取和移动物体仍然是一个未解决的研究问题。人类不擅长评估什么对 AI 来说会很难，什么会很容易。即使在同一个领域，性能也可能有很大差异。预测情感的准确度是什么？在电影评论中，有很多文本，作者往往对自己的观点非常明确，如今期望的准确率是 90%到 95%。在 Twitter 上，两个人可能仅在 80%的时间内就某条推文的情感达成一致。对于关于某些航空公司的推文，通过始终预测情感为负面，可能能够达到 95%的准确率。
 
-在项目的早期阶段，指标也可能会迅速增加，然后突然碰到瓶颈。我曾经举办过一个Kaggle比赛，成千上万的人在全球范围内竞争我的数据。在第一周，准确率从35%上升到65%，但在接下来的几个月中，它从未超过68%。68%的准确率显然是数据在最好的、最新的机器学习技术下的极限。那些参加Kaggle比赛的人为了达到68%的准确率付出了极大的努力，我相信他们觉得这是一个巨大的成就。但对于大多数用例来说，65%与68%之间的差异是完全无法区分的。如果那是一个内部项目，我肯定会对结果感到失望。
+在项目的早期阶段，指标也可能会迅速增加，然后突然碰到瓶颈。我曾经举办过一个 Kaggle 比赛，成千上万的人在全球范围内竞争我的数据。在第一周，准确率从 35%上升到 65%，但在接下来的几个月中，它从未超过 68%。68%的准确率显然是数据在最好的、最新的机器学习技术下的极限。那些参加 Kaggle 比赛的人为了达到 68%的准确率付出了极大的努力，我相信他们觉得这是一个巨大的成就。但对于大多数用例来说，65%与 68%之间的差异是完全无法区分的。如果那是一个内部项目，我肯定会对结果感到失望。
 
-我的朋友Pete Skomoroch最近告诉我，作为一名从事机器学习的数据科学家，进行工程立会是多么令人沮丧。工程项目通常会有进展，但机器学习项目可能会完全停滞。花一周时间进行数据建模可能完全没有任何改进，这种情况是可能的，甚至很常见。
+我的朋友 Pete Skomoroch 最近告诉我，作为一名从事机器学习的数据科学家，进行工程立会是多么令人沮丧。工程项目通常会有进展，但机器学习项目可能会完全停滞。花一周时间进行数据建模可能完全没有任何改进，这种情况是可能的，甚至很常见。
 
-![](../Images/344aa757e20c4a4556bec5285d52dfaf.png)
+![](img/344aa757e20c4a4556bec5285d52dfaf.png)
 
 ‍
 
 ### 2\. 机器学习容易以意想不到的方式失败。
 
-只要你有大量的训练数据*并且*生产环境中的数据与训练数据非常相似，机器学习通常能表现良好。人类在从训练数据中泛化方面非常出色，但我们对这一点的直觉非常糟糕。我用一个相机和一个基于ImageNet数百万张图像训练的视觉模型构建了一个小机器人，这些图像是从网上获取的。我在机器人相机上预处理了图像，使其看起来像来自网上的图像，但准确性远低于我预期的水平。为什么？网上的图像往往会把目标框起来。我的机器人可能不会像人类摄影师那样直接看着物体。人类可能甚至不会注意到这种差异，但现代深度学习网络却受到了很大的影响。有办法处理这种现象，但我只是因为性能下降非常明显，花了很多时间调试。
+只要你有大量的训练数据*并且*生产环境中的数据与训练数据非常相似，机器学习通常能表现良好。人类在从训练数据中泛化方面非常出色，但我们对这一点的直觉非常糟糕。我用一个相机和一个基于 ImageNet 数百万张图像训练的视觉模型构建了一个小机器人，这些图像是从网上获取的。我在机器人相机上预处理了图像，使其看起来像来自网上的图像，但准确性远低于我预期的水平。为什么？网上的图像往往会把目标框起来。我的机器人可能不会像人类摄影师那样直接看着物体。人类可能甚至不会注意到这种差异，但现代深度学习网络却受到了很大的影响。有办法处理这种现象，但我只是因为性能下降非常明显，花了很多时间调试。
 
-更棘手的是那些微妙的差异，这些差异导致性能下降且难以察觉。训练在《纽约时报》上的语言模型不适合社交媒体文本。这是我们可以预期的。然而，显然，训练于2017年文本的模型在处理2018年写的文本时性能下降。上游分布随着时间以多种方式发生变化。欺诈模型在对手适应模型行为时完全崩溃。
+更棘手的是那些微妙的差异，这些差异导致性能下降且难以察觉。训练在《纽约时报》上的语言模型不适合社交媒体文本。这是我们可以预期的。然而，显然，训练于 2017 年文本的模型在处理 2018 年写的文本时性能下降。上游分布随着时间以多种方式发生变化。欺诈模型在对手适应模型行为时完全崩溃。
 
 ### 3\. 机器学习需要大量相关的训练数据。
 
@@ -50,9 +50,9 @@
 
 几乎所有的机器学习模型都有一定的失败率，如何处理这些失败至关重要。模型通常有一个可靠的置信度评分可以使用。通过批处理流程，你可以建立人工干预系统，将低置信度的预测发送给操作员，从而使系统在端到端的工作中保持可靠，并收集高质量的训练数据。在其他用例中，你可能能够以某种方式展示低置信度的预测，从而标记潜在的错误或减少对最终用户的困扰。
 
-这是一个未能优雅处理的失败示例。微软未能预测到他们的Tay机器人会多快从Twitter上的恶意用户那里学到不良行为。
+这是一个未能优雅处理的失败示例。微软未能预测到他们的 Tay 机器人会多快从 Twitter 上的恶意用户那里学到不良行为。
 
-‍![](../Images/82515c2a691c6c6dc75ff4e3cf64a1ee.png)
+‍![](img/82515c2a691c6c6dc75ff4e3cf64a1ee.png)
 
 ‍
 
@@ -64,11 +64,11 @@
 
 [原文](https://medium.com/@l2k/why-are-machine-learning-projects-so-hard-to-manage-8e9b9cf49641)。已获许可转载。
 
-**个人简介：** [卢卡斯·比沃尔德](https://twitter.com/l2k) 是Weights & Biases的创始人，曾是Figure Eight（前身为CrowdFlower）的创始人。
+**个人简介：** [卢卡斯·比沃尔德](https://twitter.com/l2k) 是 Weights & Biases 的创始人，曾是 Figure Eight（前身为 CrowdFlower）的创始人。
 
 **相关内容：**
 
-+   [9个原因说明你的机器学习项目会失败](https://www.kdnuggets.com/2018/07/why-machine-learning-project-fail.html)
++   [9 个原因说明你的机器学习项目会失败](https://www.kdnuggets.com/2018/07/why-machine-learning-project-fail.html)
 
 +   [如何将你的数据科学项目转变为成功](https://www.kdnuggets.com/2017/07/olavlaudy-turn-data-science-projects-into-success.html)
 
@@ -76,13 +76,13 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -90,12 +90,12 @@
 
 +   [停止在数据科学项目中硬编码 - 使用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 
-+   [数据科学领域的3个难题Python编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
++   [数据科学领域的 3 个难题 Python 编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
 
-+   [进入FAANG公司有多难](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
++   [进入 FAANG 公司有多难](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
 
-+   [想成为数据科学家？第一部分：你需要的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要的 10 项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
 
-+   [为什么越来越多的开发者使用Python进行机器学习项目？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
++   [为什么越来越多的开发者使用 Python 进行机器学习项目？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
-+   [优化和管理机器学习生命周期的10大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化和管理机器学习生命周期的 10 大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)

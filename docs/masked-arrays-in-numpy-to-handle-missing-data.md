@@ -1,8 +1,8 @@
 # NumPy 中处理缺失数据的掩码数组
 
-> 原文：[https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)
+> 原文：[`www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data`](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)
 
-![NumPy 中处理缺失数据的掩码数组](../Images/3e6cefa0a51bdb948693bd090ff75e54.png)
+![NumPy 中处理缺失数据的掩码数组](img/3e6cefa0a51bdb948693bd090ff75e54.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -128,11 +128,11 @@ print(mean_value)
 
 **场景**：你有来自五个传感器的十天温度读数。由于传感器问题，一些读数缺失。我们需要计算平均每日温度，同时忽略缺失数据。
 
-**数据集**：数据集表示为二维NumPy数组，行表示日期，列表示传感器。缺失值由`np.nan`表示。
+**数据集**：数据集表示为二维 NumPy 数组，行表示日期，列表示传感器。缺失值由`np.nan`表示。
 
 步骤：
 
-1.  **导入NumPy**：用于数组操作和处理掩码数组。
+1.  **导入 NumPy**：用于数组操作和处理掩码数组。
 
 1.  **定义数据**：创建一个包含一些缺失值的二维温度读数数组。
 
@@ -180,11 +180,11 @@ for day, avg_temp in enumerate(daily_averages, start=1):
 
 **输出：**
 
-![掩码数组示例-III](../Images/2f82b19dc3d74d02be449c6b5010d167.png)
+![掩码数组示例-III](img/2f82b19dc3d74d02be449c6b5010d167.png)
 
 **解释**：
 
-+   **导入NumPy**：导入**NumPy**库以利用其功能。
++   **导入 NumPy**：导入**NumPy**库以利用其功能。
 
 +   **定义数据**：创建一个二维数组`temperature_data`，其中每行代表特定日期传感器的温度，且有些值缺失（`np.nan`）。
 
@@ -198,28 +198,28 @@ for day, avg_temp in enumerate(daily_averages, start=1):
 
 ## 结论
 
-在这篇文章中，我们探讨了掩码数组的概念以及如何利用它们处理缺失数据。我们讨论了掩码数组的两个关键组成部分：数据数组，它包含实际值，和掩码数组，它指示哪些值是有效的或缺失的。我们还考察了它们的好处，包括高效处理缺失数据、与NumPy函数的无缝集成以及提高计算准确性。
+在这篇文章中，我们探讨了掩码数组的概念以及如何利用它们处理缺失数据。我们讨论了掩码数组的两个关键组成部分：数据数组，它包含实际值，和掩码数组，它指示哪些值是有效的或缺失的。我们还考察了它们的好处，包括高效处理缺失数据、与 NumPy 函数的无缝集成以及提高计算准确性。
 
 我们通过简单和复杂的示例演示了掩码数组的使用。初始示例展示了如何处理由特定标记如 **-999** 表示的缺失值，而更全面的示例则展示了如何分析来自多个传感器的温度数据，其中缺失值由 `np.nan` 表示。这两个示例都突出了掩码数组通过忽略无效数据来准确计算结果的能力。
 
 进一步阅读请查看以下两个资源：
 
-+   [numpy.ma模块](https://numpy.org/doc/stable/reference/maskedarray.generic.html)
++   [numpy.ma 模块](https://numpy.org/doc/stable/reference/maskedarray.generic.html)
 
 +   [掩码数组](https://numpy.org/doc/1.21/user/tutorial-ma.html)
 
-[](https://www.linkedin.com/in/olumide-shittu)****[Shittu Olumide](https://www.linkedin.com/in/olumide-shittu/)**** 是一位软件工程师和技术写作者，热衷于利用前沿技术来编写引人入胜的叙述，具有敏锐的细节观察力和简化复杂概念的天赋。你也可以在 [Twitter](https://twitter.com/Shittu_Olumide_) 上找到Shittu。
+[](https://www.linkedin.com/in/olumide-shittu)****[Shittu Olumide](https://www.linkedin.com/in/olumide-shittu/)**** 是一位软件工程师和技术写作者，热衷于利用前沿技术来编写引人入胜的叙述，具有敏锐的细节观察力和简化复杂概念的天赋。你也可以在 [Twitter](https://twitter.com/Shittu_Olumide_) 上找到 Shittu。
 
 ### 更多相关话题
 
-+   [如何使用Scikit-learn的Imputer模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
++   [如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
 
-+   [如何使用NumPy对数组进行填充](https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy)
++   [如何使用 NumPy 对数组进行填充](https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy)
 
-+   [如何计算两个NumPy数组之间的互相关](https://www.kdnuggets.com/how-to-compute-the-cross-correlation-between-two-numpy-arrays)
++   [如何计算两个 NumPy 数组之间的互相关](https://www.kdnuggets.com/how-to-compute-the-cross-correlation-between-two-numpy-arrays)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
-+   [处理不平衡数据的7种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
++   [处理不平衡数据的 7 种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
 
-+   [如何使用Pandas处理数据集中的异常值](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)
++   [如何使用 Pandas 处理数据集中的异常值](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)

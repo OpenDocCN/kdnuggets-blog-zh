@@ -1,46 +1,46 @@
-# 为什么你需要在2022年学习Python
+# 为什么你需要在 2022 年学习 Python
 
-> 原文：[https://www.kdnuggets.com/2022/04/need-learn-python-2022.html](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
+> 原文：[`www.kdnuggets.com/2022/04/need-learn-python-2022.html`](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
 
-![为什么你需要在2022年学习Python](../Images/65e6cc6bebd8bb9ce1299a779ff53888.png)
+![为什么你需要在 2022 年学习 Python](img/65e6cc6bebd8bb9ce1299a779ff53888.png)
 
-[Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary) 来自Unsplash
+[Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary) 来自 Unsplash
 
-我与其他开发者的对话越多，Python的受欢迎程度就越高。当我刚开始编码时，当被问到使用什么编程语言时，我会回答“Python”。我会得到各种回答，比如‘哦，太酷了，我需要学习Python’或‘我用R，Python怎么样？’
+我与其他开发者的对话越多，Python 的受欢迎程度就越高。当我刚开始编码时，当被问到使用什么编程语言时，我会回答“Python”。我会得到各种回答，比如‘哦，太酷了，我需要学习 Python’或‘我用 R，Python 怎么样？’
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-现在，当我被问及使用什么编程语言时，回答有些不同。我会得到‘哦，是的，我从使用R开始学习Python’或‘是的，Python目前是最好的语言之一’。
+现在，当我被问及使用什么编程语言时，回答有些不同。我会得到‘哦，是的，我从使用 R 开始学习 Python’或‘是的，Python 目前是最好的语言之一’。
 
-在短短几年内，我关于Python的对话发生了积极的变化！我与没有Python经验的同事合作，他们对当前的编程语言感到厌倦，觉得太耗时。
+在短短几年内，我关于 Python 的对话发生了积极的变化！我与没有 Python 经验的同事合作，他们对当前的编程语言感到厌倦，觉得太耗时。
 
-这就是我写这篇文章的原因，给你一些理由说明为什么你需要在2022年学习Python。如果你还不懂编程语言，或者你在考虑选择另一种语言，读读这篇文章，看看Python是否适合你。
+这就是我写这篇文章的原因，给你一些理由说明为什么你需要在 2022 年学习 Python。如果你还不懂编程语言，或者你在考虑选择另一种语言，读读这篇文章，看看 Python 是否适合你。
 
-# Python的历史
+# Python 的历史
 
-Python首次出现于1991年2月20日。它由荷兰程序员Guido van Rossum创建。Python的设计重点是通过使用显著的缩进来提高代码的易读性。该语言的构建和面向对象的方法帮助新的和现有的程序员编写清晰且易于理解的代码，从小型项目到大型项目，从小数据到大数据。
+Python 首次出现于 1991 年 2 月 20 日。它由荷兰程序员 Guido van Rossum 创建。Python 的设计重点是通过使用显著的缩进来提高代码的易读性。该语言的构建和面向对象的方法帮助新的和现有的程序员编写清晰且易于理解的代码，从小型项目到大型项目，从小数据到大数据。
 
-31年后，Python被认为是今天最好的编程语言之一。
+31 年后，Python 被认为是今天最好的编程语言之一。
 
-# 为什么在2022年选择Python？
+# 为什么在 2022 年选择 Python？
 
 ## 1\. 易于学习
 
-多年来，人们被学习编程语言的复杂性所阻碍。然而，这正是Guido van Rossum在创建Python时的目标，使其成为一种通用语言。
+多年来，人们被学习编程语言的复杂性所阻碍。然而，这正是 Guido van Rossum 在创建 Python 时的目标，使其成为一种通用语言。
 
-Python的语法简单，非常适合初学者和新手学习，同时也方便业余开发者阅读和理解。
+Python 的语法简单，非常适合初学者和新手学习，同时也方便业余开发者阅读和理解。
 
-Python学习速度远快于几乎任何其他编程语言，越来越受欢迎。
+Python 学习速度远快于几乎任何其他编程语言，越来越受欢迎。
 
 ## 2\. 多才多艺且灵活
 
@@ -76,7 +76,7 @@ Python 中流行的框架和库包括：
 
 +   ，以及更多。
 
-如果你想了解更多关于 Python 库的信息，可以阅读我的文章：[2022年数据科学家应该知道的Python库](/2022/04/python-libraries-data-scientists-know-2022.html)。
+如果你想了解更多关于 Python 库的信息，可以阅读我的文章：2022 年数据科学家应该知道的 Python 库。
 
 ## 5\. 高效、快速且可靠
 
@@ -122,14 +122,14 @@ Python 编程语言几乎为每个领域提供了解决方案，从机器学习�
 
 ### 更多内容
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [2022年你需要阅读的机器学习书籍](https://www.kdnuggets.com/2022/04/machine-learning-books-need-read-2022.html)
++   [2022 年你需要阅读的机器学习书籍](https://www.kdnuggets.com/2022/04/machine-learning-books-need-read-2022.html)
 
-+   [KDnuggets 新闻，4月27日：简要介绍“带代码的论文”](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：简要介绍“带代码的论文”](https://www.kdnuggets.com/2022/n17.html)
 
 +   [为什么你需要学习不止一种编程语言！](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的7个步骤](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤](https://www.kdnuggets.com/2022/n05.html)
 
-+   [关于数据管理的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理的 6 件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)

@@ -1,14 +1,14 @@
 # 机器学习没有为我的业务创造价值。为什么？
 
-> 原文：[https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)
+> 原文：[`www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html`](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)
 
-**由[Necati Demir](https://www.linkedin.com/in/necatidemir/)，datagran.io的联合创始人兼首席技术官**
+**由[Necati Demir](https://www.linkedin.com/in/necatidemir/)，datagran.io 的联合创始人兼首席技术官**
 
-![图](../Images/8287b8983a3e7c78ea3fe619b3d7210b.png)
+![图](img/8287b8983a3e7c78ea3fe619b3d7210b.png)
 
 [Anton Grabolle](https://www.instagram.com/antongrabolle) / [Better Images of AI](https://www.betterimagesofai.org) / Classification Cupboard / [Licenced by CC-BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
-关键词“机器学习”一直在被提及。你不断听到它，人们把它说成是解决一切问题的魔法，作为领导者，你希望在业务中解决你的问题。你开始招聘数据科学家，并要求他们做X，你不断听到他们在测试数据集中“有很好的准确性结果”，你喜欢你听到的；你听说这是一件好事。一段时间后，你想在日常操作中使用它，它却开始失败。那么，发生了什么？发生了什么事？
+关键词“机器学习”一直在被提及。你不断听到它，人们把它说成是解决一切问题的魔法，作为领导者，你希望在业务中解决你的问题。你开始招聘数据科学家，并要求他们做 X，你不断听到他们在测试数据集中“有很好的准确性结果”，你喜欢你听到的；你听说这是一件好事。一段时间后，你想在日常操作中使用它，它却开始失败。那么，发生了什么？发生了什么事？
 
 当然，可能有多个需要关注的原因，但在这篇文章中，我将重点关注三个非技术点：
 
@@ -22,9 +22,9 @@
 
 上一段有以下句子：
 
-> 你开始招聘数据科学家，并要求他们做X……
+> 你开始招聘数据科学家，并要求他们做 X……
 
-你是怎么想到X的？数据科学团队还有其他可以帮助的X吗？可能，X是你认为最适合你问题的解决方案，但你是否考虑过其他解决方案？在继续之前，让我们非常简短地解释一下什么是*问题*，什么是*解决方案*。
+你是怎么想到 X 的？数据科学团队还有其他可以帮助的 X 吗？可能，X 是你认为最适合你问题的解决方案，但你是否考虑过其他解决方案？在继续之前，让我们非常简短地解释一下什么是*问题*，什么是*解决方案*。
 
 +   *问题*是你想要实现的目标
 
@@ -76,7 +76,7 @@
 
 +   如果这是一个计算机视觉应用，可能是工厂的光照条件不够好，输入到视觉系统中的图像非常黑暗，
 
-+   也许用户行为发生了变化，数据科学家团队用来开发机器学习系统的数据分布不再有效；这正是COVID爆发时信用卡欺诈检测系统发生的情况，因为每个人开始在网站上使用信用卡购物，造成了急剧的变化。
++   也许用户行为发生了变化，数据科学家团队用来开发机器学习系统的数据分布不再有效；这正是 COVID 爆发时信用卡欺诈检测系统发生的情况，因为每个人开始在网站上使用信用卡购物，造成了急剧的变化。
 
 *那该怎么办呢？*
 
@@ -92,7 +92,7 @@
 
 +   *迭代* 是在现实世界与数据科学家团队所处理的数据集之间建立桥梁的关键。这可以通过构建一个将生产/现实世界数据提供给数据科学家团队的过程来实现，但这面临着一个挑战，即商业领导者可能不会将其视为组织变革，而只是将其视为技术问题。
 
-**简历: [Necati Demir](https://www.linkedin.com/in/necatidemir/)** 是 [datagran.io](https://www.datagran.io/) 的联合创始人兼首席技术官。Necati 是一位计算机工程师，拥有机器学习博士学位，并在私营行业有15年的软件开发经验。
+**简历: [Necati Demir](https://www.linkedin.com/in/necatidemir/)** 是 [datagran.io](https://www.datagran.io/) 的联合创始人兼首席技术官。Necati 是一位计算机工程师，拥有机器学习博士学位，并在私营行业有 15 年的软件开发经验。
 
 [原文](https://blog.demir.io/machine-learning-does-not-produce-value-for-my-business-why-cc016c242b1d#ed03-df28ce1186b)。经许可转载。
 
@@ -100,11 +100,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

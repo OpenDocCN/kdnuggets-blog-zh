@@ -1,12 +1,12 @@
-# 每个Python开发者都应该知道的25个Github仓库
+# 每个 Python 开发者都应该知道的 25 个 Github 仓库
 
-> 原文：[https://www.kdnuggets.com/2021/11/25-github-repositories-python-developer.html](https://www.kdnuggets.com/2021/11/25-github-repositories-python-developer.html)
+> 原文：[`www.kdnuggets.com/2021/11/25-github-repositories-python-developer.html`](https://www.kdnuggets.com/2021/11/25-github-repositories-python-developer.html)
 
-[comments](#comments)
+comments
 
 **由 [Abhay Parashar](https://www.linkedin.com/in/abhay-parashar-328488185/), 机器学习爱好者**
 
-![](../Images/e7fb86fc128c9f768eee50f77ca81b03.png)
+![](img/e7fb86fc128c9f768eee50f77ca81b03.png)
 
 照片由 [heylagostechie](https://unsplash.com/@heylagostechie?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 你是否曾经被困在这样的问题中：
 
-1.  FAANG公司编写的代码是什么样的？
+1.  FAANG 公司编写的代码是什么样的？
 
 1.  我怎样才能像他们一样写代码？
 
@@ -32,17 +32,17 @@
 
 嗯，所有这些问题的答案是 [Github](https://github.com/)。
 
-## 什么是Github？
+## 什么是 Github？
 
-学习如何编码很简单，但学习如何写更好的代码则很困难。Github可以准确地展示你需要知道的内容。它就像是开发者的金矿，其中的“黄金”是*其他*开发者编写的代码。在GitHub的帮助下，你可以学习如何编写更好的代码、优秀代码的样子，以及成为更好开发者所需遵循的步骤。
+学习如何编码很简单，但学习如何写更好的代码则很困难。Github 可以准确地展示你需要知道的内容。它就像是开发者的金矿，其中的“黄金”是*其他*开发者编写的代码。在 GitHub 的帮助下，你可以学习如何编写更好的代码、优秀代码的样子，以及成为更好开发者所需遵循的步骤。
 
 ## 你知道吗？
 
-> *根据Stackoverflow，Python是最受欢迎的语言。*
+> *根据 Stackoverflow，Python 是最受欢迎的语言。*
 > 
-> 它是GitHub上第二受欢迎的语言。
+> 它是 GitHub 上第二受欢迎的语言。
 > 
-> Python的包仓库中有超过147,000+个包。
+> Python 的包仓库中有超过 147,000+个包。
 > 
 > 它被报道为数据科学领域最常用且最好的工具之一。
 
@@ -66,7 +66,7 @@
 
 正如仓库名称所解释的，这个仓库包含了你可能需要的几乎所有算法。你甚至可以使用 `pip install algorithms` 将其安装为包。
 
-使用repo包的归并排序示例。
+使用 repo 包的归并排序示例。
 
 这个库不仅限于算法。它还包含矩阵、图等的各种操作。
 
@@ -74,7 +74,7 @@
 
 ### 2. [vinta/awesome-python](https://github.com/vinta/awesome-python)
 
-精选的优秀Python框架、库、软件和资源列表。
+精选的优秀 Python 框架、库、软件和资源列表。
 
 这个仓库是自解释的，但如果你发现理解有困难，他们有自己的网站 [website](https://awesome-python.com/) 具有出色的 GUI。
 
@@ -138,9 +138,9 @@
 
 一种命令行工具，当出现异常时会即时获取 Stack Overflow 结果。运行程序时只需使用 `rebound`。
 
-![](../Images/a4c0a24b46066fdf2dc97f9d1b053355.png)
+![](img/a4c0a24b46066fdf2dc97f9d1b053355.png)
 
-[https://github.com/shobrook/rebound](https://github.com/shobrook/rebound)
+[`github.com/shobrook/rebound`](https://github.com/shobrook/rebound)
 
 **统计信息： (3.6k+ ⭐) (336+ Forked)**
 
@@ -158,9 +158,9 @@ Detectron 是 Facebook AI 研究团队的一个用于对象检测的软件。它
 
 它是用 Python 编写的，并由 caffe2 深度学习框架支持。
 
-![](../Images/f518044d3a3bc8240e1354b1078fc5b1.png)
+![](img/f518044d3a3bc8240e1354b1078fc5b1.png)
 
-[https://github.com/facebookresearch/Detectron](https://github.com/facebookresearch/Detectron)
+[`github.com/facebookresearch/Detectron`](https://github.com/facebookresearch/Detectron)
 
 **统计信息 : (24.4k+ ⭐) (5.3k+ Forked)**
 
@@ -266,9 +266,9 @@ Seaborn 是一个用于统计数据可视化的 Python 库，建立在 matplotli
 
 ### 25. [numpy](https://github.com/numpy)/[numpy](https://github.com/numpy/numpy)
 
-NumPy是进行科学计算所需的基础包。
+NumPy 是进行科学计算所需的基础包。
 
-它代表了数值Python，是一个用于各种科学计算的Python库。它包含了许多多维数组和处理这些数组的例程集合。
+它代表了数值 Python，是一个用于各种科学计算的 Python 库。它包含了许多多维数组和处理这些数组的例程集合。
 
 它通过添加大量高层次的数学函数，为矩阵和大型多维数组提供额外支持。
 
@@ -278,41 +278,41 @@ NumPy是进行科学计算所需的基础包。
 
 ### [**1\. 基于项目的学习/tuvtran**](https://github.com/tuvtran/project-based-learning#python)
 
-这个库包含了各种编程语言的不同教程，如Python、Go、PHP、Java等，总共涵盖了20种编程语言。该库的主要目标是专注于基于项目的学习。他们的Python部分包括大量构建项目的教程，从网络爬虫、机器人和网络应用程序到数据科学、机器学习和深度学习解决方案。
+这个库包含了各种编程语言的不同教程，如 Python、Go、PHP、Java 等，总共涵盖了 20 种编程语言。该库的主要目标是专注于基于项目的学习。他们的 Python 部分包括大量构建项目的教程，从网络爬虫、机器人和网络应用程序到数据科学、机器学习和深度学习解决方案。
 
 **统计数据 : (50.6k+ ⭐) (7.9k+ Forked)**
 
 ### 2. [public-apis](https://github.com/public-apis)/[public-apis](https://github.com/public-apis/public-apis)
 
-一个用于软件和网页开发的免费API的集合列表。
+一个用于软件和网页开发的免费 API 的集合列表。
 
 **统计数据 : (126k+ ⭐) (15.4k+ Forked)**
 
 ### 3. [EbookFoundation](https://github.com/EbookFoundation)/[free-programming-books](https://github.com/EbookFoundation/free-programming-books)
 
-包含一个学习用的免费编程书籍列表。它拥有超过1.5万名贡献者和超过10,000本免费书籍pdf。它支持多种语言，如中文、荷兰语、俄语、意大利语等。
+包含一个学习用的免费编程书籍列表。它拥有超过 1.5 万名贡献者和超过 10,000 本免费书籍 pdf。它支持多种语言，如中文、荷兰语、俄语、意大利语等。
 
 **统计数据 : (190k+ ⭐) (42.4k+ Forked)**
 
 ## 作者精选文章 ✍
 
-[**Python中的面向对象编程快速入门**](https://medium.com/pythoneers/a-quick-look-at-object-oriented-programming-oop-in-python-975fc3cb9618)
+[**Python 中的面向对象编程快速入门**](https://medium.com/pythoneers/a-quick-look-at-object-oriented-programming-oop-in-python-975fc3cb9618)
 
-[**提升你Python技能的10个高级Python概念**](https://levelup.gitconnected.com/10-advance-python-concepts-to-level-up-your-python-skills-da3d6284ad53)
+[**提升你 Python 技能的 10 个高级 Python 概念**](https://levelup.gitconnected.com/10-advance-python-concepts-to-level-up-your-python-skills-da3d6284ad53)
 
-[**你不知道的10个Python事实**](https://medium.com/pythoneers/10-facts-you-didnt-know-about-python-b18d87529c23)
+[**你不知道的 10 个 Python 事实**](https://medium.com/pythoneers/10-facts-you-didnt-know-about-python-b18d87529c23)
 
-[**提升你代码速度的10个Python技巧**](https://levelup.gitconnected.com/10-python-tricks-for-speed-up-your-code-8c189d8c99b6)
+[**提升你代码速度的 10 个 Python 技巧**](https://levelup.gitconnected.com/10-python-tricks-for-speed-up-your-code-8c189d8c99b6)
 
-[**Python中必须知道的10个内置函数**](https://medium.com/pythoneers/10-must-known-built-in-functions-in-python-2f196b9c0359)
+[**Python 中必须知道的 10 个内置函数**](https://medium.com/pythoneers/10-must-known-built-in-functions-in-python-2f196b9c0359)
 
-[**15个你可能不知道的Python包**](https://medium.com/pythoneers/15-python-packages-you-probably-dont-know-exits-aef0525a965f)
+[**15 个你可能不知道的 Python 包**](https://medium.com/pythoneers/15-python-packages-you-probably-dont-know-exits-aef0525a965f)
 
-[**为机器学习准备数据的7个阶段**](https://pub.towardsai.net/the-7-stages-of-preparing-data-for-machine-learning-dfe454da960b)
+[**为机器学习准备数据的 7 个阶段**](https://pub.towardsai.net/the-7-stages-of-preparing-data-for-machine-learning-dfe454da960b)
 
 ## 提升编码技能
 
-感谢您成为我们社区的一部分！[订阅我们的YouTube频道](https://www.youtube.com/channel/UC3v9kBR_ab4UHXXdknz8Fbg?sub_confirmation=1) 或加入 [**Skilled.dev编码面试课程**](https://skilled.dev/)。
+感谢您成为我们社区的一部分！[订阅我们的 YouTube 频道](https://www.youtube.com/channel/UC3v9kBR_ab4UHXXdknz8Fbg?sub_confirmation=1) 或加入 [**Skilled.dev 编码面试课程**](https://skilled.dev/)。
 
 [编码面试问题 + 找到你的开发工作 | Skilled.dev](https://skilled.dev/)
 
@@ -322,22 +322,22 @@ NumPy是进行科学计算所需的基础包。
 
 **相关内容：**
 
-+   [机器学习与深度学习汇编开放书籍](/2021/09/machine-deep-learning-open-book.html)
++   机器学习与深度学习汇编开放书籍
 
-+   [超越仓库：GitHub在人工智能和机器学习职业发展的作用](/2021/01/github-career-growth-ai-machine-learning.html)
++   超越仓库：GitHub 在人工智能和机器学习职业发展的作用
 
-+   [如何作为初学者建立强大的数据科学作品集](/2021/10/strong-data-science-portfolio-as-beginner.html)
++   如何作为初学者建立强大的数据科学作品集
 
 ### 更多相关话题
 
-+   [掌握Python的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-python)
++   [掌握 Python 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-python)
 
-+   [从这些GitHub仓库学习数据科学](https://www.kdnuggets.com/2022/12/learn-data-science-github-repositories.html)
++   [从这些 GitHub 仓库学习数据科学](https://www.kdnuggets.com/2022/12/learn-data-science-github-repositories.html)
 
-+   [从这些GitHub仓库学习数据工程](https://www.kdnuggets.com/2023/02/learn-data-engineering-github-repositories.html)
++   [从这些 GitHub 仓库学习数据工程](https://www.kdnuggets.com/2023/02/learn-data-engineering-github-repositories.html)
 
-+   [掌握机器学习的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
++   [掌握机器学习的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
 
-+   [掌握计算机科学的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
++   [掌握计算机科学的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
 
-+   [掌握数据工程的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)
++   [掌握数据工程的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)

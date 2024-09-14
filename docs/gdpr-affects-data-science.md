@@ -1,48 +1,48 @@
-# GDPR如何影响数据科学
+# GDPR 如何影响数据科学
 
-> 原文：[https://www.kdnuggets.com/2017/07/gdpr-affects-data-science.html](https://www.kdnuggets.com/2017/07/gdpr-affects-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/07/gdpr-affects-data-science.html`](https://www.kdnuggets.com/2017/07/gdpr-affects-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Thomas W. Dinsmore](https://thomaswdinsmore.com/author/thomaswdinsmore/)撰写。**
 
-*改编自原文[发布](https://vision.cloudera.com/general-data-protection-regulation-gdpr-and-data-science/)于Cloudera VISION博客。*
+*改编自原文[发布](https://vision.cloudera.com/general-data-protection-regulation-gdpr-and-data-science/)于 Cloudera VISION 博客。*
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
-如果你的组织收集有关欧盟（EU）公民的数据，你可能已经了解了通用数据保护条例（GDPR）。GDPR定义并加强了对消费者的数据保护，并在欧盟内统一了数据安全规则。欧洲议会[批准](http://www.europarl.europa.eu/news/en/news-room/20160407IPR21776/data-protection-reform-parliament-approves-new-rules-fit-for-the-digital-era)了这一措施，并于2016年4月27日通过。该条例将在不到一年的时间内生效，即2018年5月25日。
+如果你的组织收集有关欧盟（EU）公民的数据，你可能已经了解了通用数据保护条例（GDPR）。GDPR 定义并加强了对消费者的数据保护，并在欧盟内统一了数据安全规则。欧洲议会[批准](http://www.europarl.europa.eu/news/en/news-room/20160407IPR21776/data-protection-reform-parliament-approves-new-rules-fit-for-the-digital-era)了这一措施，并于 2016 年 4 月 27 日通过。该条例将在不到一年的时间内生效，即 2018 年 5 月 25 日。
 
-![](../Images/a65c2f5273c11593cf004f99d939cc3c.png)
+![](img/a65c2f5273c11593cf004f99d939cc3c.png)
 
-关于GDPR的大部分[评论](http://www.williamfry.com/newsandinsights/news-article/2016/06/08/key-impacts-of-the-eu-general-data-protection-regulation)集中在新规则如何影响消费者个人信息（PII）的收集和管理。然而，GDPR也将改变组织进行数据科学的方式。这正是本文的主题。
+关于 GDPR 的大部分[评论](http://www.williamfry.com/newsandinsights/news-article/2016/06/08/key-impacts-of-the-eu-general-data-protection-regulation)集中在新规则如何影响消费者个人信息（PII）的收集和管理。然而，GDPR 也将改变组织进行数据科学的方式。这正是本文的主题。
 
-在开始之前有一个警告。GDPR非常复杂。在某些领域，GDPR定义了高层次的结果，但将详细的合规规则委托给了一个新的实体——欧洲数据保护委员会。GDPR法规与许多国家的法律和规定交织在一起；在英国开展业务的组织还必须评估脱欧带来的未知影响。受GDPR约束的组织应寻求专家管理和法律顾问的帮助，以制定合规计划。
+在开始之前有一个警告。GDPR 非常复杂。在某些领域，GDPR 定义了高层次的结果，但将详细的合规规则委托给了一个新的实体——欧洲数据保护委员会。GDPR 法规与许多国家的法律和规定交织在一起；在英国开展业务的组织还必须评估脱欧带来的未知影响。受 GDPR 约束的组织应寻求专家管理和法律顾问的帮助，以制定合规计划。
 
-#### GDPR与数据科学
+#### GDPR 与数据科学
 
-GDPR在三个领域影响数据科学实践。首先，GDPR对数据处理和消费者画像施加了限制。其次，对于使用自动化决策的组织，GDPR为消费者创造了“解释权”。第三，GDPR要求公司对自动化决策中的偏见和歧视负责。
+GDPR 在三个领域影响数据科学实践。首先，GDPR 对数据处理和消费者画像施加了限制。其次，对于使用自动化决策的组织，GDPR 为消费者创造了“解释权”。第三，GDPR 要求公司对自动化决策中的偏见和歧视负责。
 
-**数据处理和分析**。GDPR对数据处理和消费者分析施加控制；这些规则补充了数据收集和管理的要求。GDPR将分析定义为：
+**数据处理和分析**。GDPR 对数据处理和消费者分析施加控制；这些规则补充了数据收集和管理的要求。GDPR 将分析定义为：
 
 *任何形式的个人数据自动化处理，包括使用个人数据评估与自然人相关的某些个人方面，特别是分析或预测有关自然人在工作中的表现、经济状况、健康、个人偏好、兴趣、可靠性、行为、位置或移动的方面。*
 
 一般而言，组织在能够证明合法商业目的（如客户或雇佣关系）且不与消费者的权利和自由相冲突时，可以处理个人数据。组织必须告知消费者分析及其后果，并提供选择退出的机会。
 
-**解释权**。GDPR赋予消费者“不得仅基于自动化处理作出决策，并对当事人产生法律效力”的权利。专家[将](https://arxiv.org/abs/1606.08813)这一规则称为“解释权”。GDPR并未精确定义该部分涵盖的决策范围。英国信息专员办公室（ICO）[表示](https://ico.org.uk/media/for-organisations/documents/2013559/big-data-ai-ml-and-data-protection.pdf)该权利“很可能”适用于信用申请、招聘和保险决策。其他机构、法院或欧洲数据保护委员会可能会对这一范围作出不同的定义。
+**解释权**。GDPR 赋予消费者“不得仅基于自动化处理作出决策，并对当事人产生法律效力”的权利。专家[将](https://arxiv.org/abs/1606.08813)这一规则称为“解释权”。GDPR 并未精确定义该部分涵盖的决策范围。英国信息专员办公室（ICO）[表示](https://ico.org.uk/media/for-organisations/documents/2013559/big-data-ai-ml-and-data-protection.pdf)该权利“很可能”适用于信用申请、招聘和保险决策。其他机构、法院或欧洲数据保护委员会可能会对这一范围作出不同的定义。
 
 **偏见和歧视**。当组织使用自动化决策时，他们必须防止基于种族或民族出身、政治观点、宗教或信仰、工会成员身份、基因或健康状况或性取向的歧视性效果，或导致产生这种效果的措施。此外，他们不得在自动化决策中使用特定类别的个人数据，除非在规定的情况下。
 
-#### GDPR对数据科学实践的影响
+#### GDPR 对数据科学实践的影响
 
 新规则将如何影响数据科学团队的工作方式？让我们在三个关键领域探讨其影响。
 
@@ -68,9 +68,9 @@ GDPR 对数据处理和数据分析的限制仅适用于能够识别个人消费
 
 — 需要提供解释会影响*决策引擎*，但不必影响*模型训练*的方法选择。现有技术使得即使数据科学家使用不透明的方法来训练模型，也可以“逆向工程”出可解释的模型评分解释。
 
-尽管如此，[数据科学家](http://www.csail.mit.edu/making_computers_explain_themselves)确实有充分的理由考虑使用可解释的技术。金融服务巨头Capital One [认为](https://www.technologyreview.com/s/604122/the-financial-world-wants-to-open-ais-black-boxes/)这些技术是对抗隐性偏见（如下文所述）的有力武器。但不应因此得出结论，GDPR将迫使数据科学家限制他们用于训练预测模型的技术。
+尽管如此，[数据科学家](http://www.csail.mit.edu/making_computers_explain_themselves)确实有充分的理由考虑使用可解释的技术。金融服务巨头 Capital One [认为](https://www.technologyreview.com/s/604122/the-financial-world-wants-to-open-ais-black-boxes/)这些技术是对抗隐性偏见（如下文所述）的有力武器。但不应因此得出结论，GDPR 将迫使数据科学家限制他们用于训练预测模型的技术。
 
-**偏见与歧视。** GDPR要求组织必须避免在自动化决策中出现歧视性效果。这一规则对建立预测模型的数据科学家以及组织批准预测模型用于生产的程序施加了额外的尽职调查负担。
+**偏见与歧视。** GDPR 要求组织必须避免在自动化决策中出现歧视性效果。这一规则对建立预测模型的数据科学家以及组织批准预测模型用于生产的程序施加了额外的尽职调查负担。
 
 使用自动化决策的组织必须：
 
@@ -80,25 +80,25 @@ GDPR 对数据处理和数据分析的限制仅适用于能够识别个人消费
 
 +   建立措施以确保在决策中使用的主题数据的准确性
 
-GDPR明确禁止在自动化决策中使用个人特征（如年龄、种族、民族和其他列举的类别）。然而，仅仅避免使用这些数据是不够的。禁止歧视性结果的规定意味着数据科学家还必须采取措施防止由代理变量、多重共线性或其他原因引起的间接偏倚。例如，使用看似中立的特征（如消费者的居住社区）的自动决策可能会无意中对少数民族群体造成歧视。
+GDPR 明确禁止在自动化决策中使用个人特征（如年龄、种族、民族和其他列举的类别）。然而，仅仅避免使用这些数据是不够的。禁止歧视性结果的规定意味着数据科学家还必须采取措施防止由代理变量、多重共线性或其他原因引起的间接偏倚。例如，使用看似中立的特征（如消费者的居住社区）的自动决策可能会无意中对少数民族群体造成歧视。
 
-数据科学家还必须采取积极措施确认他们在开发预测模型时使用的数据是准确的；“垃圾进/垃圾出”或GIGO，不能成为借口。他们还必须考虑以往结果的偏倚训练数据是否会影响模型。结果是，数据科学家需要关注[数据血统](https://en.wikipedia.org/wiki/Data_lineage)，追踪数据从源头到目标的所有处理步骤。GDPR还将推动对[可重复性](https://en.wikipedia.org/wiki/Reproducibility)的更大关注，即准确复制预测建模项目的能力。
+数据科学家还必须采取积极措施确认他们在开发预测模型时使用的数据是准确的；“垃圾进/垃圾出”或 GIGO，不能成为借口。他们还必须考虑以往结果的偏倚训练数据是否会影响模型。结果是，数据科学家需要关注[数据血统](https://en.wikipedia.org/wiki/Data_lineage)，追踪数据从源头到目标的所有处理步骤。GDPR 还将推动对[可重复性](https://en.wikipedia.org/wiki/Reproducibility)的更大关注，即准确复制预测建模项目的能力。
 
 #### 下一步
 
-如果你在欧盟开展业务，现在是开始规划GDPR的时机。需要做的事情很多：评估你收集的数据，实施合规程序，评估你的处理操作等。如果你目前使用机器学习进行分析和自动决策，你现在需要做四件事。
+如果你在欧盟开展业务，现在是开始规划 GDPR 的时机。需要做的事情很多：评估你收集的数据，实施合规程序，评估你的处理操作等。如果你目前使用机器学习进行分析和自动决策，你现在需要做四件事。
 
 **限制对消费者个人身份信息（PII）的访问。**
 
-实施稳健的匿名化，以便默认情况下分析用户无法访问PII。定义一个允许在特殊情况下在适当安全下访问PII的例外过程。
+实施稳健的匿名化，以便默认情况下分析用户无法访问 PII。定义一个允许在特殊情况下在适当安全下访问 PII 的例外过程。
 
-**识别当前使用PII的预测模型。**
+**识别当前使用 PII 的预测模型。**
 
 在每种情况下，询问：
 
 +   这些数据在分析上是否必要？
 
-+   这些PII是否提供独特且不可替代的信息价值？
++   这些 PII 是否提供独特且不可替代的信息价值？
 
 +   预测模型是否支持被允许的使用案例？
 
@@ -118,19 +118,19 @@ GDPR明确禁止在自动化决策中使用个人特征（如年龄、种族、�
 
 +   实施同行评审，以独立评估每个模型。
 
-即使你的组织不受GDPR约束，也可以考虑实施这些实践。这是正确的商业方式。
+即使你的组织不受 GDPR 约束，也可以考虑实施这些实践。这是正确的商业方式。
 
 [原文](https://thomaswdinsmore.com/2017/07/17/how-gdpr-affects-data-science/)。经允许转载。
 
-**简介：[托马斯·W·丁斯莫尔](https://thomaswdinsmore.com/)** 最近加入Cloudera，担任数据科学产品营销总监。此前，作为独立顾问，他为寻求机器学习市场情报的私人客户提供了市场见解。
+**简介：[托马斯·W·丁斯莫尔](https://thomaswdinsmore.com/)** 最近加入 Cloudera，担任数据科学产品营销总监。此前，作为独立顾问，他为寻求机器学习市场情报的私人客户提供了市场见解。
 
 **相关：**
 
-+   [**数据科学治理 - 为什么重要？为什么现在？**](/2017/07/data-science-governance.html)
++   **数据科学治理 - 为什么重要？为什么现在？**
 
-+   [**数据匿名化与数据科学的未来**](/2017/04/anonymization-future-data-science.html)
++   **数据匿名化与数据科学的未来**
 
-+   [**算法偏见的基础**](/2016/11/foundations-algorithmic-bias.html)
++   **算法偏见的基础**
 
 ### 更多相关主题
 
@@ -140,8 +140,8 @@ GDPR明确禁止在自动化决策中使用个人特征（如年龄、种族、�
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

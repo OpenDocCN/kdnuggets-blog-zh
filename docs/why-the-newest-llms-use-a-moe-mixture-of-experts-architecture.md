@@ -1,32 +1,32 @@
-# 为什么最新的LLM使用MoE（专家混合）架构
+# 为什么最新的 LLM 使用 MoE（专家混合）架构
 
-> 原文：[https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)
+> 原文：[`www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture`](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)
 
-![为什么最新的LLM使用MoE（专家混合）架构](../Images/04132d59d743f55cc347207e9fe0e535.png)
+![为什么最新的 LLM 使用 MoE（专家混合）架构](img/04132d59d743f55cc347207e9fe0e535.png)
 
 ## 专业化的必要性
 
-医院里挤满了各类专家和医生，他们各自拥有不同的专业领域，解决各种独特的问题。外科医生、心脏科医生、儿科医生——各类专家携手合作，提供护理，常常需要合作以满足患者的需求。我们可以在AI中实现类似的做法。
+医院里挤满了各类专家和医生，他们各自拥有不同的专业领域，解决各种独特的问题。外科医生、心脏科医生、儿科医生——各类专家携手合作，提供护理，常常需要合作以满足患者的需求。我们可以在 AI 中实现类似的做法。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-在人工智能中，专家混合（MoE）架构定义为不同“专家”模型的组合，这些模型共同处理或响应复杂的数据输入。对于AI而言，每个MoE模型中的专家专注于更大的问题——就像每位医生专注于其医学领域一样。这提高了效率，增加了系统的效能和准确性。
+在人工智能中，专家混合（MoE）架构定义为不同“专家”模型的组合，这些模型共同处理或响应复杂的数据输入。对于 AI 而言，每个 MoE 模型中的专家专注于更大的问题——就像每位医生专注于其医学领域一样。这提高了效率，增加了系统的效能和准确性。
 
-Mistral AI 提供了与 OpenAI 相媲美的开源基础LLM。他们正式讨论了在其 Mixtral 8x7B 模型中使用 MoE 架构，这是一种突破性的前沿大型语言模型（LLM）。我们将深入探讨为什么 Mistral AI 的 Mixtral 在其他基础LLM中脱颖而出，以及为什么当前LLM采用MoE架构，突出其速度、规模和准确性。
+Mistral AI 提供了与 OpenAI 相媲美的开源基础 LLM。他们正式讨论了在其 Mixtral 8x7B 模型中使用 MoE 架构，这是一种突破性的前沿大型语言模型（LLM）。我们将深入探讨为什么 Mistral AI 的 Mixtral 在其他基础 LLM 中脱颖而出，以及为什么当前 LLM 采用 MoE 架构，突出其速度、规模和准确性。
 
 ## 升级大型语言模型（LLM）的常见方式
 
-为了更好地理解MoE架构如何提升我们的LLM，让我们讨论一下提高LLM效率的常见方法。AI从业者和开发者通过增加参数、调整架构或微调来提升模型性能。
+为了更好地理解 MoE 架构如何提升我们的 LLM，让我们讨论一下提高 LLM 效率的常见方法。AI 从业者和开发者通过增加参数、调整架构或微调来提升模型性能。
 
 +   **增加参数：** 通过输入更多信息并进行解读，模型学习和表示复杂模式的能力提高。然而，这可能导致过拟合和幻觉现象，需要进行大量的来自人类反馈的强化学习（RLHF）。
 
@@ -58,25 +58,25 @@ MoE 模型中的每个专家代表一个较小的神经网络、机器学习模�
 
 ### MoE 损失函数
 
-虽然不被视为MoE架构的主要组成部分，但损失函数在模型未来的性能中扮演着关键角色，因为它旨在优化个别专家和门控网络。
+虽然不被视为 MoE 架构的主要组成部分，但损失函数在模型未来的性能中扮演着关键角色，因为它旨在优化个别专家和门控网络。
 
 它通常结合了为每个专家计算的损失，并根据门控网络分配给它们的概率或重要性进行加权。这有助于为专家的特定任务进行微调，同时调整门控网络以提高路由准确性。
 
-![MoE 专家混合 LLM 架构](../Images/fb2e31286a6d2a442ab292ee207382f4.png)
+![MoE 专家混合 LLM 架构](img/fb2e31286a6d2a442ab292ee207382f4.png)
 
-## MoE过程从开始到结束
+## MoE 过程从开始到结束
 
 现在让我们总结一下整个过程，添加更多细节。
 
 下面是路由过程从开始到结束的总结说明：
 
-+   输入处理：对输入数据进行初步处理。在LLMs的情况下，主要是我们的提示。
++   输入处理：对输入数据进行初步处理。在 LLMs 的情况下，主要是我们的提示。
 
 +   特征提取：将原始输入转换为可分析的数据。
 
 +   门控网络评估：通过概率或权重评估专家的适用性。
 
-+   加权路由：根据计算的权重分配输入。在这里，选择最合适的LLM的过程完成。在某些情况下，会选择多个LLM来回答单一输入。
++   加权路由：根据计算的权重分配输入。在这里，选择最合适的 LLM 的过程完成。在某些情况下，会选择多个 LLM 来回答单一输入。
 
 +   任务执行：处理每个专家分配的输入。
 
@@ -86,15 +86,15 @@ MoE 模型中的每个专家代表一个较小的神经网络、机器学习模�
 
 +   迭代优化：对路由和模型参数进行持续的改进。
 
-## 利用MoE架构的流行模型
+## 利用 MoE 架构的流行模型
 
-+   **OpenAI的GPT-4和GPT-4o：** GPT-4和GPT-4o为ChatGPT的高级版本提供支持。这些多模态模型利用MoE能够处理不同来源的媒介，如图像、文本和语音。有传闻且略微证实GPT-4拥有8个专家，每个专家拥有2200亿参数，总模型超过1.7万亿参数。
++   **OpenAI 的 GPT-4 和 GPT-4o：** GPT-4 和 GPT-4o 为 ChatGPT 的高级版本提供支持。这些多模态模型利用 MoE 能够处理不同来源的媒介，如图像、文本和语音。有传闻且略微证实 GPT-4 拥有 8 个专家，每个专家拥有 2200 亿参数，总模型超过 1.7 万亿参数。
 
-+   **Mistral AI的Mixtral 8x7b：** Mistral AI提供了非常强大的开源AI模型，并表示他们的Mixtral模型是一种sMoE模型或稀疏专家混合模型，体积小巧。Mixtral 8x7b总共有467亿参数，但每个token只使用129亿参数，因此以此成本处理输入和输出。他们的MoE模型在性能上 consistently 超越了Llama2（70B）和GPT-3.5（175B），而运行成本更低。
++   **Mistral AI 的 Mixtral 8x7b：** Mistral AI 提供了非常强大的开源 AI 模型，并表示他们的 Mixtral 模型是一种 sMoE 模型或稀疏专家混合模型，体积小巧。Mixtral 8x7b 总共有 467 亿参数，但每个 token 只使用 129 亿参数，因此以此成本处理输入和输出。他们的 MoE 模型在性能上 consistently 超越了 Llama2（70B）和 GPT-3.5（175B），而运行成本更低。
 
-## MoE的好处以及为何它是首选架构
+## MoE 的好处以及为何它是首选架构
 
-最终，MoE架构的主要目标是提出一种新的范式，来应对复杂的机器学习任务。它提供了独特的好处，并在多个方面展示了其优于传统模型的优势。
+最终，MoE 架构的主要目标是提出一种新的范式，来应对复杂的机器学习任务。它提供了独特的好处，并在多个方面展示了其优于传统模型的优势。
 
 +   **增强的模型可扩展性**
 
@@ -118,7 +118,7 @@ MoE 模型中的每个专家代表一个较小的神经网络、机器学习模�
 
     +   MoE 可以从狭窄领域中生成更好的结果，因为它对细微差别的理解、详细知识以及在专门任务上超越通用模型的能力。
 
-![以动态方式使用专家组合提高了 LLM 能力](../Images/6038e2df244ba9a66975dfe9f5e1f48b.png)
+![以动态方式使用专家组合提高了 LLM 能力](img/6038e2df244ba9a66975dfe9f5e1f48b.png)
 
 ## MoE 架构的缺点
 
@@ -146,11 +146,11 @@ MoE 的旅程才刚刚开始，其持续演变有望推动 AI 及其他领域的
 
 +   [数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 
-+   [KDnuggets™ 新闻 22:n07, 2月 16: 如何学习机器学习中的数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07, 2 月 16: 如何学习机器学习中的数学…](https://www.kdnuggets.com/2022/n07.html)
 
 +   [数据网格架构：重新定义数据管理](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)
 
-+   [KDnuggets 新闻，5月 18: 5 个免费的机器学习托管平台…](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18: 5 个免费的机器学习托管平台…](https://www.kdnuggets.com/2022/n20.html)
 
 +   [如何使用 Apache Kafka 构建可扩展的数据架构](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)
 

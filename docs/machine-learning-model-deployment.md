@@ -1,12 +1,12 @@
 # 机器学习模型部署
 
-> 原文：[https://www.kdnuggets.com/2020/09/machine-learning-model-deployment.html](https://www.kdnuggets.com/2020/09/machine-learning-model-deployment.html)
+> 原文：[`www.kdnuggets.com/2020/09/machine-learning-model-deployment.html`](https://www.kdnuggets.com/2020/09/machine-learning-model-deployment.html)
 
-[评论](#comments)
+评论
 
 **由 Asha Ganesh，数据科学家**
 
-![图示](../Images/a98e5be040f45f45831681a90d890ccf.png)
+![图示](img/a98e5be040f45f45831681a90d890ccf.png)
 
 机器学习模型无服务器部署
 
@@ -16,7 +16,7 @@
 
 机器学习模型部署与软件开发不完全相同。在机器学习模型中，需要不断输入新数据以保持模型的良好性能。模型需要在现实世界中进行调整，因为有各种原因，如添加新类别、新级别等。部署模型只是开始，因为模型往往需要重新训练并检查其性能。因此，使用无服务器部署可以节省时间和精力，并且每次重新训练模型，这很酷！
 
-![图示](../Images/fdc150c4062ea588b13ea3ddd9c7bbac.png)
+![图示](img/fdc150c4062ea588b13ea3ddd9c7bbac.png)
 
 机器学习工作流
 
@@ -40,13 +40,13 @@
 
 +   特定于云平台的框架，如 AWS Sagemaker、Google AI Platform、Azure Functions
 
-![图示](../Images/350d1ed417640dcaaf99abfb6ffb2b33.png)
+![图示](img/350d1ed417640dcaaf99abfb6ffb2b33.png)
 
 以各种方式部署模型
 
 ### 无服务器部署架构概述
 
-![图示](../Images/abecd7cd1ce937dde00423c2c3d1a435.png)
+![图示](img/abecd7cd1ce937dde00423c2c3d1a435.png)
 
 图片来源并修改自 Google Cloud
 
@@ -64,7 +64,7 @@
 
 点击 Storage 选项中的浏览器，创建新桶，如图所示：
 
-![图](../Images/76e4743c8d274376c486e840f4f4189e.png)
+![图](img/76e4743c8d274376c486e840f4f4189e.png)
 
 创建存储桶
 
@@ -80,7 +80,7 @@
 
 +   **logistic_regression_model**
 
-![图](../Images/c709dbf5d678910b2c2e977283bd4d36.png)
+![图](img/c709dbf5d678910b2c2e977283bd4d36.png)
 
 在 Google 存储中将模型存储在 3 个文件夹中
 
@@ -88,7 +88,7 @@
 
 然后前往 Google Cloud Functions 并创建一个函数，选择触发器类型为 HTTP，选择语言为 Python（你可以选择任何语言）：
 
-![图](../Images/15081fc33623e2e959f2beb6f6a43bd4.png)
+![图](img/15081fc33623e2e959f2beb6f6a43bd4.png)
 
 创建云函数
 
@@ -122,31 +122,31 @@
 
 +   在 main.py 后编写 requirement.txt，包含所需的库和版本
 
-![图示](../Images/07029e39e0807ffeee84322b2bbd15b5.png)
+![图示](img/07029e39e0807ffeee84322b2bbd15b5.png)
 
 [谷歌云函数](https://github.com/Asha-ai/ServerlessDeployment/blob/master/cloud%20function)（图像不清晰，但为了理解目的在此提及）
 
 **6\. 部署模型**
 
-![图示](../Images/db54075ef25758c5969104b92c809c1e.png)
+![图示](img/db54075ef25758c5969104b92c809c1e.png)
 
 绿色勾选表示模型部署成功
 
 **7\. 测试模型**
 
-![图示](../Images/42fdfbebd5f92ec22b3f65265303fd83.png)
+![图示](img/42fdfbebd5f92ec22b3f65265303fd83.png)
 
 提供模型名称和测试的评价
 
 用其他模型测试功能。
 
-![帖子图像](../Images/edbf62492abbc7b4ca6273aed7dcb54e.png)
+![帖子图像](img/edbf62492abbc7b4ca6273aed7dcb54e.png)
 
-将为你提供该模型部署的完整UI细节。
+将为你提供该模型部署的完整 UI 细节。
 
 ### 代码参考：
 
-我的 GitHub 仓库：[https://github.com/Asha-ai/ServerlessDeployment](https://github.com/Asha-ai/ServerlessDeployment)
+我的 GitHub 仓库：[`github.com/Asha-ai/ServerlessDeployment`](https://github.com/Asha-ai/ServerlessDeployment)
 
 不要犹豫，尽情点赞 :)
 
@@ -156,33 +156,33 @@
 
 **相关：**
 
-+   [使用 Python 和 Heroku 创建并部署你的第一个 Flask 应用](/2020/09/flask-app-using-python-heroku.html)
++   使用 Python 和 Heroku 创建并部署你的第一个 Flask 应用
 
-+   [为什么要将 Scikit-learn 放入浏览器？](/2020/07/why-put-scikit-learn-browser.html)
++   为什么要将 Scikit-learn 放入浏览器？
 
-+   [停止训练更多模型，开始部署它们](/2020/06/stop-training-models-start-deploying.html)
++   停止训练更多模型，开始部署它们
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
 ### 更多相关话题
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
 
-+   [前7名模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
++   [前 7 名模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [将机器学习算法全面部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [基础回顾第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [基础回顾第 4 周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
 +   [Segment Anything Model：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)
 

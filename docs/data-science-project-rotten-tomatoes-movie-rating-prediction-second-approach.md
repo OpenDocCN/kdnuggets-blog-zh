@@ -1,26 +1,26 @@
 # 烂番茄电影评分预测数据科学项目：第二种方法
 
-> 原文：[https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
+> 原文：[`www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html`](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
 
-这个数据科学项目曾在Meta（Facebook）的招聘过程中作为家庭作业使用。在这个家庭作业中，我们将发现烂番茄如何进行“烂片”、“新鲜”或“认证新鲜”的标签。
+这个数据科学项目曾在 Meta（Facebook）的招聘过程中作为家庭作业使用。在这个家庭作业中，我们将发现烂番茄如何进行“烂片”、“新鲜”或“认证新鲜”的标签。
 
-数据科学项目链接：[https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction](https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)
+数据科学项目链接：[`platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction`](https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
 为此，我们将开发两种不同的方法。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/d79afba4c7ed2b547c017515ca1b08f0.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/d79afba4c7ed2b547c017515ca1b08f0.png)
 
 作者提供的图片
 
@@ -47,7 +47,7 @@ df_critics.head()
 
 这是输出。
 
-![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/749cb085c1d57e200b7a99de6fa6e80e.png)![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/3f049646d350b280b0e4cce693543493.png)
+![数据科学项目：烂番茄电影评分预测的第二种方法](img/749cb085c1d57e200b7a99de6fa6e80e.png)![数据科学项目：烂番茄电影评分预测的第二种方法](img/3f049646d350b280b0e4cce693543493.png)
 
 作者图片
 
@@ -69,7 +69,7 @@ df_merged.head()
 
 这是输出结果。
 
-![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/819de42e235cdfb7eeea13722a570404.png)
+![数据科学项目：烂番茄电影评分预测的第二种方法](img/819de42e235cdfb7eeea13722a570404.png)
 
 在这种方法中，我们将只使用 review_content 列作为输入特征，将 review_type 作为真实标签。
 
@@ -100,13 +100,13 @@ ax.bar_label(ax.containers[0])
 
 这是输出结果。
 
-![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/696df7516e1530102fb86bbcabe412ab.png)
+![数据科学项目：烂番茄电影评分预测的第二种方法](img/696df7516e1530102fb86bbcabe412ab.png)
 
 看起来我们在特征之间存在不平衡问题。
 
 而且，我们的数据点也太多了，这可能会降低我们的速度。
 
-所以，我们将首先从原始数据集中挑选5000条记录。
+所以，我们将首先从原始数据集中挑选 5000 条记录。
 
 ```py
 df_sub = df_merged[0:5000]
@@ -118,7 +118,7 @@ df_sub = df_merged[0:5000]
 review_type = pd.DataFrame(df_sub.review_type.replace(['Rotten','Fresh'],[0,1]))
 ```
 
-最后，我们将创建一个数据框，包含使用 Python 的 concat() 方法编码的标签和评论内容，并通过使用 head() 方法查看前5行。
+最后，我们将创建一个数据框，包含使用 Python 的 concat() 方法编码的标签和评论内容，并通过使用 head() 方法查看前 5 行。
 
 ```py
 df_feature_critics = pd.concat([df_sub[['review_content']]
@@ -143,7 +143,7 @@ df_feature_critics.head()
 
 这是输出结果。
 
-![数据科学项目：烂番茄电影评分预测的第二种方法](../Images/4546f8377d91a7bbad2aadab16a6ad20.png)
+![数据科学项目：烂番茄电影评分预测的第二种方法](img/4546f8377d91a7bbad2aadab16a6ad20.png)
 
 很好，现在作为这一部分的最终步骤，让我们将数据集分成训练集和测试集。
 
@@ -233,13 +233,13 @@ plot_confusion_matrix(rf, vectorizer.transform(X_test).toarray(), y_test, cmap =
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/5f1de493df13d2aeaf572daaedffcc82.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/5f1de493df13d2aeaf572daaedffcc82.png)
 
 ## 加权随机森林
 
 从我们最新的混淆矩阵可以看出，我们模型的表现还不够好。
 
-然而，由于处理的数据点数量有限（5000而非100000），这可能是预期中的结果。
+然而，由于处理的数据点数量有限（5000 而非 100000），这可能是预期中的结果。
 
 让我们看看是否可以通过解决类别不平衡问题来提高性能。
 
@@ -255,7 +255,7 @@ class_weight_dict
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/24cfa8796c7db9e130b3a194681aa333.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/24cfa8796c7db9e130b3a194681aa333.png)
 
 我们现在在向量化的文本输入上训练我们的 Random Forest 分类器，但这次包括了类权重信息，以提高评估指标。
 
@@ -316,7 +316,7 @@ plot_confusion_matrix(rf_weighted, vectorizer.transform(X_test).toarray(), y_tes
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/add1c22409040bb1eb38f42b80aa6b02.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/add1c22409040bb1eb38f42b80aa6b02.png)
 
 现在我们模型的准确性略高于没有类权重的模型。
 
@@ -370,7 +370,7 @@ df_bol.head()
 
 这是输出。
 
-![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/997a30ce9ecd213bf0d9b65717f229bd.png)
+![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](img/997a30ce9ecd213bf0d9b65717f229bd.png)
 
 太好了，在这个阶段，我们应用加权随机森林算法来预测状态。然后我们在之前定义的自定义函数中使用它，该函数接受一个预测作为参数。
 
@@ -383,7 +383,7 @@ predict_movie_status(y_predicted_bol)
 
 这是输出。
 
-![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/18908c0362d7de3784801139be380238.png)
+![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](img/18908c0362d7de3784801139be380238.png)
 
 这是我们的结果，让我们通过与 ground_truth 状态进行比较来检查结果是否有效。
 
@@ -395,7 +395,7 @@ df_merged['tomatometer_status'].loc[df_merged['movie_title'] == 'Body of Lies'].
 
 这是输出。
 
-![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/d681f9bdd39e3cd79513d900d693a6a4.png)
+![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](img/d681f9bdd39e3cd79513d900d693a6a4.png)
 
 看起来我们的预测非常有效，因为我们预测的电影状态是 Rotten。
 
@@ -420,7 +420,7 @@ df_ah.head()
 
 这是输出。
 
-![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/50a607e97a05bfe7228b92d989082558.png)
+![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](img/50a607e97a05bfe7228b92d989082558.png)
 
 现在是时候使用随机森林和我们的自定义函数进行预测了。
 
@@ -433,7 +433,7 @@ predict_movie_status(y_predicted_ah)
 
 这是输出。
 
-![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](../Images/c43d69b0d86a15ef24d7f635f836a1a5.png)
+![数据科学项目：Rotten Tomatoes 电影评分预测：第二种方法](img/c43d69b0d86a15ef24d7f635f836a1a5.png)
 
 让我们进行比较。
 
@@ -445,7 +445,7 @@ df_merged['tomatometer_status'].loc[df_merged['movie_title'] == 'Angel Heart'].u
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/d681f9bdd39e3cd79513d900d693a6a4.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/d681f9bdd39e3cd79513d900d693a6a4.png)
 
 我们的模型再次预测正确。
 
@@ -464,7 +464,7 @@ df_duchess.head()
 
 这是输出结果。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/ab6cc352f6fa8be8df43e19b58ee2563.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/ab6cc352f6fa8be8df43e19b58ee2563.png)
 
 现在是时候进行预测了。
 
@@ -477,7 +477,7 @@ predict_movie_status(y_predicted_duchess)
 
 这是输出结果。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/4afdc0278cd0b83d3149c868ec77513c.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/4afdc0278cd0b83d3149c868ec77513c.png)
 
 让我们将预测结果与实际情况进行比较。
 
@@ -489,11 +489,11 @@ df_merged['tomatometer_status'].loc[df_merged['movie_title'] == 'The Duchess'].u
 
 这是输出结果。
 
-![烂番茄电影评分预测数据科学项目：第二种方法](../Images/68020877ddebd9867658c3fdf8f1cb5b.png)
+![烂番茄电影评分预测数据科学项目：第二种方法](img/68020877ddebd9867658c3fdf8f1cb5b.png)
 
 电影的实际标签是 '新鲜'，这表明我们模型的预测是错误的。
 
-但可以注意到，我们模型的预测值非常接近60%的阈值，这表明对模型进行微调可能会将预测结果从 '烂' 改变为 '新鲜'。
+但可以注意到，我们模型的预测值非常接近 60%的阈值，这表明对模型进行微调可能会将预测结果从 '烂' 改变为 '新鲜'。
 
 显然，我们上面训练的随机森林模型并不是最佳模型，因为仍有改进的潜力。在下一部分，我们将提供许多建议，以提高我们模型的性能。
 
@@ -527,7 +527,7 @@ df_merged['tomatometer_status'].loc[df_merged['movie_title'] == 'The Duchess'].u
 
 +   [数据科学项目：Rotten Tomatoes 电影评分预测：…](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)
 
-+   [KDnuggets 新闻，7月5日：一个烂数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个烂数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)
 
 +   [311 呼叫中心表现：服务水平评分](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
 

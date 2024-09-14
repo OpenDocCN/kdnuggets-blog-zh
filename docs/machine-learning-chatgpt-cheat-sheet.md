@@ -1,6 +1,6 @@
 # 使用 ChatGPT 的机器学习备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html](https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html`](https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html)
 
 # 利用 ChatGPT 进行整个 ML 流程
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,7 +24,7 @@ ChatGPT 被用于教育、餐饮和健身规划、编程等方方面面。
 
 [](https://www.kdnuggets.com/publications/sheets/Machine_Learning_with_ChatGPT_Cheat_Sheet_KDnuggets.pdf)
 
-[![使用 ChatGPT 的机器学习备忘单](../Images/992fb316d990f40edd7bee3f66018a24.png)](https://www.kdnuggets.com/publications/sheets/Machine_Learning_with_ChatGPT_Cheat_Sheet_KDnuggets.pdf)
+![使用 ChatGPT 的机器学习备忘单](https://www.kdnuggets.com/publications/sheets/Machine_Learning_with_ChatGPT_Cheat_Sheet_KDnuggets.pdf)
 
 > 使用 ChatGPT，构建机器学习项目从未如此简单。只需编写后续提示并分析结果，你就能快速轻松地训练模型，以响应用户查询并提供有用的见解。
 

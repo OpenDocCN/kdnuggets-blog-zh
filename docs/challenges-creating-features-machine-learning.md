@@ -1,8 +1,8 @@
 # 机器学习特征创建的挑战
 
-> 原文：[https://www.kdnuggets.com/2022/02/challenges-creating-features-machine-learning.html](https://www.kdnuggets.com/2022/02/challenges-creating-features-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/02/challenges-creating-features-machine-learning.html`](https://www.kdnuggets.com/2022/02/challenges-creating-features-machine-learning.html)
 
-![机器学习特征创建的挑战](../Images/7f085cd9f51e120bb2b0fe9b99f34132.png)
+![机器学习特征创建的挑战](img/7f085cd9f51e120bb2b0fe9b99f34132.png)
 
 图片由 [Monsterkoi](https://pixabay.com/es/users/monsterkoi-65294/) 提供，来源于 [Pixabay](https://pixabay.com/es/photos/diente-de-le%C3%B3n-multicolor-de-colores-2817950/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,9 +28,9 @@
 
 使用 Feature-engine，我们可以进行大量特征变换，比如填补缺失数据、编码分类变量、离散化数值变量以及通过数学函数如对数、平方根和指数变换变量。我们还可以组合现有特征来创建新特征、删除或屏蔽异常值，并从日期和时间中提取特征。
 
-![机器学习特征创建的挑战](../Images/835b2b530a52609e220a0d11d430b774.png)
+![机器学习特征创建的挑战](img/835b2b530a52609e220a0d11d430b774.png)
 
-Feature-engine 拥有一个专门的 [模块](https://feature-engine.readthedocs.io/en/latest/api_doc/selection/index.html) 用于特征选择，包含在数据科学竞赛或组织内开发的特征选择技术，这些技术在 Scikit-learn 或其他 Python 库中都没有。我在 [之前的文章](/2021/12/alternative-feature-selection-methods-machine-learning.html) 中讨论了一些这些技术。
+Feature-engine 拥有一个专门的 [模块](https://feature-engine.readthedocs.io/en/latest/api_doc/selection/index.html) 用于特征选择，包含在数据科学竞赛或组织内开发的特征选择技术，这些技术在 Scikit-learn 或其他 Python 库中都没有。我在 之前的文章 中讨论了一些这些技术。
 
 ## **是什么** **让** **Feature-engine 独特？**
 
@@ -68,7 +68,7 @@ Feature-engine 专注于创建人们易于理解的变量。因此，每当模�
 
 当然，Feature-engine 不是首个出现的工具。还有其他优秀的 Python 库用于特征转换，如 [Pandas](https://pandas.pydata.org/)、[Scikit-learn](https://scikit-learn.org/stable/index.html)、[Category encoders](https://contrib.scikit-learn.org/category_encoders/)、[Featuretools](https://www.featuretools.com/) 和 [tsfresh](https://tsfresh.com/)，以及更多。Python 生态系统年年增长。
 
-![机器学习特征创建的挑战](../Images/333fc8a470c7142596694f0abbe1b97f.png)
+![机器学习特征创建的挑战](img/333fc8a470c7142596694f0abbe1b97f.png)
 
 开源的 Python 特征工程和选择库。
 

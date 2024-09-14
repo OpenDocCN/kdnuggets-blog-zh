@@ -1,8 +1,8 @@
 # 语义搜索与向量数据库
 
-> 原文：[https://www.kdnuggets.com/semantic-search-with-vector-databases](https://www.kdnuggets.com/semantic-search-with-vector-databases)
+> 原文：[`www.kdnuggets.com/semantic-search-with-vector-databases`](https://www.kdnuggets.com/semantic-search-with-vector-databases)
 
-![语义搜索与向量数据库](../Images/0d380decc923ed3d6b78479336b53c8b.png)
+![语义搜索与向量数据库](img/0d380decc923ed3d6b78479336b53c8b.png)
 
 使用[Ideogram.ai](http://ideogram.ai)生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -52,7 +52,7 @@
 
 那么，语义搜索如何利用向量工作呢？语义搜索的目的是将你的语料库嵌入到一个向量空间中。这允许每个数据点提供信息（文本、句子、文档等）并成为一个坐标点。查询输入在搜索时会通过嵌入处理成向量，进入相同的向量空间。我们会使用向量相似性度量，如余弦相似度，从我们的语料库中找到与查询输入最接近的嵌入。为了更好地理解，你可以查看下面的图像。
 
-![使用向量数据库的语义搜索](../Images/e2a936a4331997d952b0f9f1b182fa0b.png)
+![使用向量数据库的语义搜索](img/e2a936a4331997d952b0f9f1b182fa0b.png)
 
 作者提供的图片
 
@@ -62,7 +62,7 @@
 
 在下面的图像中可以看到使用向量数据库进行语义搜索的高级过程。
 
-![使用向量数据库的语义搜索](../Images/0bb964f620744ef930c6de098053c620.png)
+![使用向量数据库的语义搜索](img/0bb964f620744ef930c6de098053c620.png)
 
 作者提供的图片
 
@@ -72,26 +72,26 @@
 
 在本文中，我们将使用开源向量数据库 [Weaviate](https://weaviate.io/)。为了教学目的，我们还使用 Weaviate 云服务（WCS）来存储我们的向量。
 
-首先，我们需要安装Weaviate Python包。
+首先，我们需要安装 Weaviate Python 包。
 
 ```py
 pip install weaviate-client
 ```
 
-接下来，请通过[Weaviate Console](https://console.weaviate.cloud/signin)注册他们的免费集群，并确保获得集群URL和API密钥。
+接下来，请通过[Weaviate Console](https://console.weaviate.cloud/signin)注册他们的免费集群，并确保获得集群 URL 和 API 密钥。
 
-对于数据集示例，我们将使用[Kaggle的法律文本数据](https://www.kaggle.com/datasets/amohankumar/legal-text-classification-dataset)。为了简化操作，我们还将只使用前100行数据。
+对于数据集示例，我们将使用[Kaggle 的法律文本数据](https://www.kaggle.com/datasets/amohankumar/legal-text-classification-dataset)。为了简化操作，我们还将只使用前 100 行数据。
 
 ```py
 import pandas as pd
 data = pd.read_csv('legal_text_classification.csv', nrows = 100)
 ```
 
-![使用向量数据库的语义搜索](../Images/9f1726241c297e30476e590591e70cfc.png)
+![使用向量数据库的语义搜索](img/9f1726241c297e30476e590591e70cfc.png)
 
 图片来源：作者
 
-接下来，我们将把所有数据存储到Weaviate云服务上的向量数据库中。为此，我们需要设置与数据库的连接。
+接下来，我们将把所有数据存储到 Weaviate 云服务上的向量数据库中。为此，我们需要设置与数据库的连接。
 
 ```py
 import weaviate
@@ -112,7 +112,7 @@ client = weaviate.connect_to_wcs(
 )
 ```
 
-接下来，我们需要连接到Weaviate云服务，并创建一个类（类似于SQL中的表）来存储所有文本数据。
+接下来，我们需要连接到 Weaviate 云服务，并创建一个类（类似于 SQL 中的表）来存储所有文本数据。
 
 ```py
 import weaviate.classes as wvc
@@ -125,7 +125,7 @@ legal_cases = client.collections.create(
 )
 ```
 
-在上面的代码中，我们创建了一个使用OpenAI Embedding模型的LegalCases类。在后台，存储在LegalCases类中的任何文本对象都会经过OpenAI Embedding模型，并作为嵌入向量进行存储。
+在上面的代码中，我们创建了一个使用 OpenAI Embedding 模型的 LegalCases 类。在后台，存储在 LegalCases 类中的任何文本对象都会经过 OpenAI Embedding 模型，并作为嵌入向量进行存储。
 
 让我们尝试将法律文本数据存储到向量数据库中。为此，你可以使用以下代码。
 
@@ -134,9 +134,9 @@ sent_to_vdb = data.to_dict(orient='records')
 legal_cases.data.insert_many(sent_to_vdb)
 ```
 
-你应该会在Weaviate集群中看到你的法律文本数据已经存储在那里。
+你应该会在 Weaviate 集群中看到你的法律文本数据已经存储在那里。
 
-向量数据库准备好后，让我们尝试语义搜索。Weaviate API使这变得更加简单，如下代码所示。在下面的示例中，我们将尝试查找发生在澳大利亚的案件。
+向量数据库准备好后，让我们尝试语义搜索。Weaviate API 使这变得更加简单，如下代码所示。在下面的示例中，我们将尝试查找发生在澳大利亚的案件。
 
 ```py
 response = legal_cases.query.near_text(
@@ -166,7 +166,7 @@ for i in range(len(response.objects)):
 
 尽管传统的基于词汇匹配的搜索引擎主导了互联网的信息获取，但这种方法存在一个缺陷，即无法捕捉用户意图。这一局限性催生了**语义搜索**，一种能够解释文档查询含义的搜索引擎方法。通过向量数据库的增强，语义搜索的能力变得更加高效。
 
-在本文中，我们探讨了**语义搜索**的工作原理以及如何使用开源的Weaviate向量数据库进行Python实现。希望这对你有所帮助！
+在本文中，我们探讨了**语义搜索**的工作原理以及如何使用开源的 Weaviate 向量数据库进行 Python 实现。希望这对你有所帮助！
 
 **[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰稿人。在 Allianz Indonesia 全职工作时，他喜欢通过社交媒体和写作分享 Python 和数据技巧。Cornellius 涉及多种 AI 和机器学习主题的撰写。
 

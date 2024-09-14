@@ -1,8 +1,8 @@
 # 如何微调机器学习模型以提高预测准确性
 
-> 原文：[https://www.kdnuggets.com/2019/01/fine-tune-machine-learning-models-forecasting.html](https://www.kdnuggets.com/2019/01/fine-tune-machine-learning-models-forecasting.html)
+> 原文：[`www.kdnuggets.com/2019/01/fine-tune-machine-learning-models-forecasting.html`](https://www.kdnuggets.com/2019/01/fine-tune-machine-learning-models-forecasting.html)
 
-[评论](#comments)
+评论
 
 微调机器学习预测模型是提高预测结果准确性的关键步骤。最近，我写了许多文章，解释了机器学习的工作原理以及如何丰富和分解特征集，以提高机器学习模型的准确性。
 
@@ -30,7 +30,7 @@
 
 该图表说明了参数如何相互依赖。
 
-![](../Images/c405e98432cd3ba1ebdcfb94ce39f3a9.png)
+![](img/c405e98432cd3ba1ebdcfb94ce39f3a9.png)
 
 +   X 训练数据——自变量的训练数据，也称为特征
 
@@ -50,7 +50,7 @@
 
 如果你是机器学习的新手，请看看这篇文章：
 
-[8分钟了解机器学习](https://medium.com/fintechexplained/introduction-to-machine-learning-4b2d7c57613b)
+[8 分钟了解机器学习](https://medium.com/fintechexplained/introduction-to-machine-learning-4b2d7c57613b)
 
 改进我们输入模型的数据通常比微调模型参数更容易。如果你想提高预测模型的准确性，请首先丰富特征集中的数据。
 
@@ -64,11 +64,11 @@
 
 [机器学习算法比较](https://medium.com/fintechexplained/machine-learning-algorithm-comparison-f14ce372b855)
 
-### 第3步：找到你的评分指标
+### 第 3 步：找到你的评分指标
 
 最重要的前提是决定你将用来评分预测模型准确性的指标。
 
-这些评分指标可能包括R平方、调整后的R平方、混淆矩阵、F1、召回率、方差等。
+这些评分指标可能包括 R 平方、调整后的 R 平方、混淆矩阵、F1、召回率、方差等。
 
 阅读这篇文章以了解每个数据科学家应该知道的最重要的数学测量。这些测量以易于理解的方式解释：
 
@@ -78,7 +78,7 @@
 from sklearn.metrics contains a large number of scoring metrics
 ```
 
-### 第4步：获取准确的预测评分
+### 第 4 步：获取准确的预测评分
 
 一旦你准备好了训练集，丰富了其特征，缩放了数据，分解了特征集，决定了评分指标并在训练数据上训练了你的模型，你就应该在未见过的数据上测试模型的准确性。未见过的数据被称为“测试数据”。
 
@@ -104,9 +104,9 @@ from sklearn.metrics contains a large number of scoring metrics
 
 > *根据机器学习模型的需求和数据的可用性来创建训练、验证和测试数据集的比例。*
 
-**K折交叉验证**
+**K 折交叉验证**
 
-K折交叉验证比使用留出交叉验证机制更优。其工作方式是将数据划分为k个折（部分）。k-1个折用于训练模型，最后一个折用于测试模型。
+K 折交叉验证比使用留出交叉验证机制更优。其工作方式是将数据划分为 k 个折（部分）。k-1 个折用于训练模型，最后一个折用于测试模型。
 
 这个机制会重复 k 次。此外，每次都可以使用一些性能指标来评估和评分性能。然后报告性能指标的平均值。StratifiedKFold 保留了类别比例。
 
@@ -131,7 +131,7 @@ mean_scores = scores.mean()
 
 > *这些参数也称为超参数*
 
-![](../Images/7865807d4b2919a6d632824348392dd2.png)
+![](img/7865807d4b2919a6d632824348392dd2.png)
 
 **照片来源：[Dominik Scythe](https://unsplash.com/@drscythe?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)**
 
@@ -169,7 +169,7 @@ from sklearn.grid_search import GridSearchCV
 
 始终在模型未见过的更丰富的测试数据上测试你的预测模型。
 
-![](../Images/00672f7fdfa86218d6675b45b6e9a87e.png)
+![](img/00672f7fdfa86218d6675b45b6e9a87e.png)
 
 始终确保为任务选择正确的模型和参数值。
 
@@ -207,11 +207,11 @@ from sklearn.grid_search import GridSearchCV
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

@@ -1,8 +1,8 @@
 # 数据科学定义幽默：一系列关于数据科学定义的古怪名言
 
-> 原文：[https://www.kdnuggets.com/2022/02/data-science-definition-humor.html](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
+> 原文：[`www.kdnuggets.com/2022/02/data-science-definition-humor.html`](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-![数据科学定义幽默](../Images/a505de6680f94f2918cc09e07b5b4e8c.png)
+![数据科学定义幽默](img/a505de6680f94f2918cc09e07b5b4e8c.png)
 
 图片来源：[Tengyart](https://unsplash.com/@tengyart?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -30,13 +30,13 @@
 
 > ―凯瑟琳·卡森 ([Azam 2014](https://www.berkeleysciencereview.com/article/2014/04/27/the-first-rule-of-data-science))
 > 
-> “定义数据科学就像定义互联网——问10个人，你会得到10个不同的答案。”
+> “定义数据科学就像定义互联网——问 10 个人，你会得到 10 个不同的答案。”
 > 
 > ―米凯拉·S·帕克、阿林·E·伯吉斯和菲利普·E·伯恩 ([Parker et al. 2021](https://doi.org/10.1371/journal.pcbi.1008628))
 > 
 > “数据科学不过是统计学在不同领域中的新瓶装旧酒版本。”
 > 
-> ―兰迪·巴特利特 ([Bartlett 2015](/2015/07/statistics-denial-myth-repackaging-statistics-straddling-terms.html))
+> ―兰迪·巴特利特 (Bartlett 2015)
 > 
 > “‘数据科学’这个术语实际上是一个同时意味着一切和什么都不意味着的术语。”
 > 
@@ -56,7 +56,7 @@
 > 
 > “数据科学有一个有趣的特点，就是它是少数几个让从业者没有特定领域的研究领域之一。”
 > 
-> ―米哈伊尔·梅夫 ([Mew 2021](/2021/06/data-scientists-extinct-10-years.html))
+> ―米哈伊尔·梅夫 (Mew 2021)
 > 
 > “数据科学是使数据变得有用的科学。”
 > 
@@ -66,7 +66,7 @@
 > 
 > ―朱安·李 ([Coresignal 2021](https://coresignal.com/blog/data-science-quotes/))
 > 
-> “数据科学的座右铭：如果一开始不成功，那就称之为版本1.0。”
+> “数据科学的座右铭：如果一开始不成功，那就称之为版本 1.0。”
 > 
 > ―[普拉奈·帕索尔](https://mobile.twitter.com/ppathole/status/1189532789588119552)
 > 
@@ -74,7 +74,7 @@
 > 
 > ―理查德·科内利乌斯·苏万迪 (Suwandi 2020)
 > 
-> “数据科学是80%处理数据，20%抱怨处理数据。”
+> “数据科学是 80%处理数据，20%抱怨处理数据。”
 > 
 > ―理查德·科内利乌斯·苏万迪 ([Suwandi 2020](https://towardsdatascience.com/5-reasons-why-data-science-is-like-cooking-daa506b4166a))
 > 
@@ -86,7 +86,7 @@
 > 
 > ―[迈克·德里斯科尔](https://researchhubs.com/post/ai/introduction-to-data-science/what-is_data_science.html)
 > 
-> “而且数据科学不仅仅是统计学，因为当统计学家完成了理论上的完美模型时，如果他们的工作依赖于此，很少有人能将制表符分隔的文件读入R中。”
+> “而且数据科学不仅仅是统计学，因为当统计学家完成了理论上的完美模型时，如果他们的工作依赖于此，很少有人能将制表符分隔的文件读入 R 中。”
 > 
 > ―迈克·德里斯科尔 ([O’Neil and Schutt 2013](https://www.oreilly.com/library/view/doing-data-science/9781449363871/ch01.html))
 > 
@@ -108,14 +108,14 @@
 
 ### 更多相关主题
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
 
-+   [KDnuggets 新闻，4月6日：8门免费的MIT数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费的 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [KDnuggets 新闻，5月25日：每个人都应该知道的6个Python机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个人都应该知道的 6 个 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
 
 +   [学习数据科学、数据工程等的免费课程集合](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)
 
-+   [数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)

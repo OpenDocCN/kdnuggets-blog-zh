@@ -1,6 +1,6 @@
-# 深入探讨GPT模型：演变与性能比较
+# 深入探讨 GPT 模型：演变与性能比较
 
-> 原文：[https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)
+> 原文：[`www.kdnuggets.com/2023/05/deep-dive-gpt-models.html`](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)
 
 作者：Ankit、Bhaskar & Malhar
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
-在我们的[上一篇博客](https://www.sigmoid.com/blogs/gpt-3-all-you-need-to-know-about-the-ai-language-model/)中，我们提供了对GPT-3模型各个方面的全面解释，评估了Open AI的GPT-3 API提供的功能，并探讨了模型的使用和局限性。在这篇博客中，我们将把重点转向GPT模型及其基础组件。我们还将回顾从GPT-1到最近推出的GPT-4的演变，并深入探讨每一代中所做的关键改进，这些改进使模型随着时间的推移变得更为强大。
+在我们的[上一篇博客](https://www.sigmoid.com/blogs/gpt-3-all-you-need-to-know-about-the-ai-language-model/)中，我们提供了对 GPT-3 模型各个方面的全面解释，评估了 Open AI 的 GPT-3 API 提供的功能，并探讨了模型的使用和局限性。在这篇博客中，我们将把重点转向 GPT 模型及其基础组件。我们还将回顾从 GPT-1 到最近推出的 GPT-4 的演变，并深入探讨每一代中所做的关键改进，这些改进使模型随着时间的推移变得更为强大。
 
-# 1. 了解GPT模型
+# 1. 了解 GPT 模型
 
 GPT（生成预训练变换器）是一个基于深度学习的大型语言模型（LLM），利用基于变换器的解码器架构。它的目的是处理文本数据并生成类似人类语言的文本输出。
 
@@ -34,7 +34,7 @@ GPT（生成预训练变换器）是一个基于深度学习的大型语言模�
 
 让我们通过这些组件来探索模型：
 
-**生成性：** 这一特性强调了模型通过理解和响应给定文本样本生成文本的能力。在GPT模型之前，文本输出是通过重新排列或提取输入中的单词来生成的。GPT模型的生成能力使其相较于现有模型具有优势，能够产生更连贯且更像人类的文本。
+**生成性：** 这一特性强调了模型通过理解和响应给定文本样本生成文本的能力。在 GPT 模型之前，文本输出是通过重新排列或提取输入中的单词来生成的。GPT 模型的生成能力使其相较于现有模型具有优势，能够产生更连贯且更像人类的文本。
 
 这种生成能力源自于训练过程中使用的建模目标。
 
@@ -44,7 +44,7 @@ GPT 模型使用自回归语言建模进行训练，模型接收一个词序列�
 
 简而言之，使用大量数据以无监督的方式训练模型有助于模型理解语言的普遍特征和结构。一旦学习完成，模型可以利用这些理解来执行特定任务，例如问答和摘要。
 
-**变换器：** 一种神经网络架构，旨在处理不同长度的文本序列。变换器的概念在2017年发表的开创性论文《Attention Is All You Need》之后获得了广泛关注。
+**变换器：** 一种神经网络架构，旨在处理不同长度的文本序列。变换器的概念在 2017 年发表的开创性论文《Attention Is All You Need》之后获得了广泛关注。
 
 GPT 使用仅解码器架构。变换器的主要组件是其“自注意力机制”，它使模型能够捕捉同一句子中每个词与其他词之间的关系。
 
@@ -60,7 +60,7 @@ GPT 使用仅解码器架构。变换器的主要组件是其“自注意力机�
 
 现在，让我们更详细地了解 GPT 模型的各种版本，重点关注每个后续模型中引入的改进和新增功能。
 
-![深入了解 GPT 模型](../Images/43b75d49c63cb8a4737cd4563ffe403c.png)
+![深入了解 GPT 模型](img/43b75d49c63cb8a4737cd4563ffe403c.png)
 
 ***第 3 幻灯片** [GPT 模型](https://docs.google.com/presentation/d/1xxyE18P-G6eZ6l34iP1-Xu2Junx6Sm4KDoaYhCFGVGk/edit#slide=id.g21eb2c7aeab_0_0)
 
@@ -122,15 +122,15 @@ OpenAI 使用来自人类反馈的强化学习来微调 GPT-3，使其能够遵�
 
 GPT-4 代表了 GPT 系列的最新模型，引入了多模态能力，允许其处理文本和图像输入，同时生成文本输出。它支持各种图像格式，包括含文本的文档、照片、图表、图示、图形和截图。
 
-尽管OpenAI没有披露GPT-4的技术细节，如模型大小、架构、训练方法或模型权重，但一些估计表明，它包含了近1万亿个参数。GPT-4的基础模型遵循类似于之前GPT模型的训练目标，旨在预测给定一系列词语后的下一个词。训练过程涉及使用大量公开可用的互联网数据和授权数据。
+尽管 OpenAI 没有披露 GPT-4 的技术细节，如模型大小、架构、训练方法或模型权重，但一些估计表明，它包含了近 1 万亿个参数。GPT-4 的基础模型遵循类似于之前 GPT 模型的训练目标，旨在预测给定一系列词语后的下一个词。训练过程涉及使用大量公开可用的互联网数据和授权数据。
 
-GPT-4在OpenAI内部的对抗性事实评估和像TruthfulQA这样的公开基准测试中，表现出比GPT-3.5更出色的性能。GPT-3.5中使用的RLHF技术也被纳入了GPT-4中。OpenAI积极根据ChatGPT和其他来源的反馈来提升GPT-4。
+GPT-4 在 OpenAI 内部的对抗性事实评估和像 TruthfulQA 这样的公开基准测试中，表现出比 GPT-3.5 更出色的性能。GPT-3.5 中使用的 RLHF 技术也被纳入了 GPT-4 中。OpenAI 积极根据 ChatGPT 和其他来源的反馈来提升 GPT-4。
 
-# GPT模型在标准建模任务中的性能比较
+# GPT 模型在标准建模任务中的性能比较
 
-GPT-1、GPT-2和GPT-3在标准NLP建模任务LAMBDA、GLUE和SQuAD中的分数。
+GPT-1、GPT-2 和 GPT-3 在标准 NLP 建模任务 LAMBDA、GLUE 和 SQuAD 中的分数。
 
-| 模型 | GLUE | LAMBADA | SQuAD F1 | SQuAD准确匹配 |
+| 模型 | GLUE | LAMBADA | SQuAD F1 | SQuAD 准确匹配 |
 | --- | --- | --- | --- | --- |
 | GPT-1 | 68.4 | 48.4 | 82.0 | 74.6 |
 | GPT-2 | 84.6 | 60.1 | 89.5 | 83.0 |
@@ -142,44 +142,44 @@ GPT-1、GPT-2和GPT-3在标准NLP建模任务LAMBDA、GLUE和SQuAD中的分数�
 
 这个表格展示了结果的一致改进，这可以归因于前述的增强。
 
-GPT-3.5和GPT-4在较新的基准测试和标准考试中进行了测试。
+GPT-3.5 和 GPT-4 在较新的基准测试和标准考试中进行了测试。
 
-较新的GPT模型（3.5和4）在需要推理和领域知识的任务上进行了测试。这些模型已在众多被认为具有挑战性的考试中进行测试。一个这样的考试是MBE考试，GPT-3（ada、babbage、curie、davinci）、GPT-3.5、ChatGPT和GPT-4都进行了比较。从图表中可以看到分数的持续改进，GPT-4甚至超过了平均学生分数。
+较新的 GPT 模型（3.5 和 4）在需要推理和领域知识的任务上进行了测试。这些模型已在众多被认为具有挑战性的考试中进行测试。一个这样的考试是 MBE 考试，GPT-3（ada、babbage、curie、davinci）、GPT-3.5、ChatGPT 和 GPT-4 都进行了比较。从图表中可以看到分数的持续改进，GPT-4 甚至超过了平均学生分数。
 
-图1展示了不同GPT模型在MBE*中获得的分数百分比的比较：
+图 1 展示了不同 GPT 模型在 MBE*中获得的分数百分比的比较：
 
-![深入了解GPT模型](../Images/ba177b1c6a8a0666ac0ead25b7ea812a.png)
+![深入了解 GPT 模型](img/ba177b1c6a8a0666ac0ead25b7ea812a.png)
 
 *多州律师考试（MBE）是一项旨在评估申请人法律知识和技能的挑战性测试，是在美国从事法律工作的前提条件。
 
 下面的图表还突出了模型的进展，并且再次超过了不同法律学科领域的平均学生分数。
 
-![深入了解GPT模型](../Images/a6aecc3fa0218f7fb877e17f9b277bf6.png)
+![深入了解 GPT 模型](img/a6aecc3fa0218f7fb877e17f9b277bf6.png)
 
 来源：[数据科学协会](https://www.datascienceassn.org/sites/default/files/GPT-4%20Passes%20the%20Bar%20Exam.pdf)
 
 # 结论
 
-随着基于Transformer的大型语言模型（LLMs）的崛起，自然语言处理领域正在迅速演变。在基于这一架构的各种语言模型中，GPT模型在输出和性能方面表现出色。作为GPT背后的组织，OpenAI自首个模型发布以来，始终在多个方面不断提升模型。
+随着基于 Transformer 的大型语言模型（LLMs）的崛起，自然语言处理领域正在迅速演变。在基于这一架构的各种语言模型中，GPT 模型在输出和性能方面表现出色。作为 GPT 背后的组织，OpenAI 自首个模型发布以来，始终在多个方面不断提升模型。
 
-在五年的时间里，模型的规模显著扩大，从GPT-1到GPT-4约增加了8,500倍。这一显著进展可归因于在训练数据规模、数据质量、数据来源、训练技术以及参数数量等方面的持续改进。这些因素在使模型能够在各种任务中提供出色性能方面发挥了关键作用。
+在五年的时间里，模型的规模显著扩大，从 GPT-1 到 GPT-4 约增加了 8,500 倍。这一显著进展可归因于在训练数据规模、数据质量、数据来源、训练技术以及参数数量等方面的持续改进。这些因素在使模型能够在各种任务中提供出色性能方面发挥了关键作用。
 
-+   **[Ankit Mehra](https://www.linkedin.com/in/ankit-mehra-11979617b/)** 是Sigmoid的高级数据科学家。他专注于分析和基于机器学习的数据解决方案。
++   **[Ankit Mehra](https://www.linkedin.com/in/ankit-mehra-11979617b/)** 是 Sigmoid 的高级数据科学家。他专注于分析和基于机器学习的数据解决方案。
 
-+   **[Malhar Yadav](https://www.linkedin.com/in/malhar-yadav-772693210/)** 是Sigmoid的助理数据科学家，同时也是编码和机器学习爱好者。
++   **[Malhar Yadav](https://www.linkedin.com/in/malhar-yadav-772693210/)** 是 Sigmoid 的助理数据科学家，同时也是编码和机器学习爱好者。
 
-+   **[Bhaskar Ammu](https://www.linkedin.com/in/bhaskar-ammu-04a99213/)** 是Sigmoid的高级数据科学领导。他专注于为客户设计数据科学解决方案，构建数据库架构，以及管理项目和团队。
++   **[Bhaskar Ammu](https://www.linkedin.com/in/bhaskar-ammu-04a99213/)** 是 Sigmoid 的高级数据科学领导。他专注于为客户设计数据科学解决方案，构建数据库架构，以及管理项目和团队。
 
 ### 了解更多相关话题
 
-+   [优化Python代码性能：深入探讨Python分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
++   [优化 Python 代码性能：深入探讨 Python 分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
 
-+   [认识Gorilla：UC Berkeley和微软的API增强LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
++   [认识 Gorilla：UC Berkeley 和微软的 API 增强 LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
 
 +   [揭开神经魔法：深入探讨激活函数](https://www.kdnuggets.com/unveiling-neural-magic-a-dive-into-activation-functions)
 
-+   [与Kaggle的AI报告2023一起探索未来——看看什么是热门](https://www.kdnuggets.com/dive-into-the-future-with-kaggle-ai-report-2023-see-what-hot)
++   [与 Kaggle 的 AI 报告 2023 一起探索未来——看看什么是热门](https://www.kdnuggets.com/dive-into-the-future-with-kaggle-ai-report-2023-see-what-hot)
 
-+   [ChatGPT与Google Bard：技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
++   [ChatGPT 与 Google Bard：技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
 
-+   [Python和R中的机器学习算法比较](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)
++   [Python 和 R 中的机器学习算法比较](https://www.kdnuggets.com/2023/06/machine-learning-algorithms-python-r.html)

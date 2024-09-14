@@ -1,8 +1,8 @@
 # 免费大学课程来学习数据科学
 
-> 原文：[https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
+> 原文：[`www.kdnuggets.com/5-free-university-courses-to-learn-data-science`](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
 
-![5 免费大学课程来学习数据科学](../Images/878a44fb88c17a21fbc2e6d6e005b307.png)
+![5 免费大学课程来学习数据科学](img/878a44fb88c17a21fbc2e6d6e005b307.png)
 
 使用 Segmind SSD-1B 模型生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -74,7 +74,7 @@
 
 [统计学习](https://online.stanford.edu/courses/sohs-ystatslearning-statistical-learning)是斯坦福大学的另一个受欢迎的课程，用于学习不同的机器学习算法如何工作。
 
-本课程中的编程练习使用的是 R。不过你也可以使用 Python 来完成这些练习。我还建议你使用[统计学习导论（Python 版）](/2023/07/introduction-statistical-learning-python-edition-free-book.html)（也是免费的）作为本课程的辅助教材。
+本课程中的编程练习使用的是 R。不过你也可以使用 Python 来完成这些练习。我还建议你使用统计学习导论（Python 版）（也是免费的）作为本课程的辅助教材。
 
 本课程涵盖以下主题：
 
@@ -102,7 +102,7 @@
 
 学习数学概念将对你进入机器学习研究有所帮助，并在技术面试中给予你优势。这些学习对你获得技术面试的优势是重要的。
 
-MIT的[数据科学中的数学主题](https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-of-data-science-fall-2015/)课程将教授你与数据科学相关的某些数学主题。具体而言，高级降维和聚类概念。
+MIT 的[数据科学中的数学主题](https://ocw.mit.edu/courses/18-s096-topics-in-mathematics-of-data-science-fall-2015/)课程将教授你与数据科学相关的某些数学主题。具体而言，高级降维和聚类概念。
 
 以下是你将学习的一些主题：
 

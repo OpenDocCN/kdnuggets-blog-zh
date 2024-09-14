@@ -1,6 +1,6 @@
 # 使用 SQL 进行统计分析
 
-> 原文：[https://www.kdnuggets.com/2016/08/doing-statistics-sql.html](https://www.kdnuggets.com/2016/08/doing-statistics-sql.html)
+> 原文：[`www.kdnuggets.com/2016/08/doing-statistics-sql.html`](https://www.kdnuggets.com/2016/08/doing-statistics-sql.html)
 
 **作者：Jean-Nicholas Hould，JeanNicholasHould.com**
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)
+![SQL](img/7b90faf67d8c5a9b93c5838add6004a0.png)
 
 对于这篇文章，我使用了一个开放数据集。百万歌曲数据集是一个*“自由获取的现代流行音乐曲目音频特征和元数据的集合”*。
 
@@ -76,7 +76,7 @@ OFFSET (SELECT COUNT(*) FROM songs) / 2
 
 +   `LIMIT`：*指定从结果数据集中返回的最大行数。*
 
-+   `OFFSET`：*在开始返回行之前跳过X行。在这个特定示例中，我们跳过了5000行（相当于总行数`COUNT(*)`除以2）。*
++   `OFFSET`：*在开始返回行之前跳过 X 行。在这个特定示例中，我们跳过了 5000 行（相当于总行数`COUNT(*)`除以 2）。*
 
 **众数**
 
@@ -144,7 +144,7 @@ ORDER BY songs.year ASC
 
 ### 下一步
 
-这篇文章中的SQL查询相对简单。它们不是技术性技巧的结果。它们只是帮助我们理解数据集的简单度量，这正是它们的优点。
+这篇文章中的 SQL 查询相对简单。它们不是技术性技巧的结果。它们只是帮助我们理解数据集的简单度量，这正是它们的优点。
 
 在这个特定的数据集中，我们注意到超过一半的数据集中，歌曲的年份为`0`。这意味着我们要么在查看非常旧的歌曲数据集，要么在处理缺失值。后者更为现实。如果我们过滤掉年份为`0`的歌曲，我们的数据就更有意义了。歌曲的年份范围从`1926`到`2010`，中位数是`2001`年。
 
@@ -156,11 +156,11 @@ ORDER BY songs.year ASC
 
 **相关：**
 
-+   [掌握数据科学SQL的7个步骤](/2016/06/seven-steps-mastering-sql-data-science.html)
++   掌握数据科学 SQL 的 7 个步骤
 
-+   [数据科学统计学101](/2016/07/data-science-statistics-101.html)
++   数据科学统计学 101
 
-+   [构建与购买 – 分析仪表盘](/2016/07/build-buy-analytics-dashboards.html)
++   构建与购买 – 分析仪表盘
 
 ### 更多相关主题
 

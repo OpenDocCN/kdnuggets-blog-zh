@@ -1,22 +1,22 @@
 # 七个最推荐的学习数据科学技能
 
-> 原文：[https://www.kdnuggets.com/2021/02/7-most-recommended-skills-data-scientist.html](https://www.kdnuggets.com/2021/02/7-most-recommended-skills-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/02/7-most-recommended-skills-data-scientist.html`](https://www.kdnuggets.com/2021/02/7-most-recommended-skills-data-scientist.html)
 
-[comments](#comments)
+comments
 
-![](../Images/8b878beaa6080cb3fb87408ac1b8c278.png)
+![](img/8b878beaa6080cb3fb87408ac1b8c278.png)
 
-我想分享**七个最推荐的数据科学技能**，这些技能来源于与世界上一些最大数据领袖的数十次互动和讨论，包括Google的数据与分析主管、NVIDIA的工程高级总监以及Wealthsimple的数据科学和工程副总裁。
+我想分享**七个最推荐的数据科学技能**，这些技能来源于与世界上一些最大数据领袖的数十次互动和讨论，包括 Google 的数据与分析主管、NVIDIA 的工程高级总监以及 Wealthsimple 的数据科学和工程副总裁。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 你可能会注意到**七个技能**中没有涉及机器学习或深度学习，这并不是错误。目前，对于在建模前和建模后的阶段使用的技能需求远高于对机器学习和深度学习技能的需求。因此，七个最推荐的技能实际上与数据分析师、软件工程师和数据工程师的技能有重叠。
 
-话虽如此，让我们深入探讨一下**2021年最推荐学习的七个数据科学技能**：
+话虽如此，让我们深入探讨一下**2021 年最推荐学习的七个数据科学技能**：
 
 ### 1) SQL
 
@@ -54,39 +54,39 @@ SQL 用于从数据库中提取数据、处理数据和创建数据管道——�
 
 *以下是我学习数据可视化与讲述的一些最爱资源：*
 
-+   [*使用Matplotlib的数据可视化*](https://towardsdatascience.com/data-visualization-using-matplotlib-16f1aae5ce70)
++   [*使用 Matplotlib 的数据可视化*](https://towardsdatascience.com/data-visualization-using-matplotlib-16f1aae5ce70)
 
-+   [*使用Plotly的数据可视化*](https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
++   [*使用 Plotly 的数据可视化*](https://towardsdatascience.com/the-next-level-of-data-visualization-in-python-dd6e99039d5e)
 
 +   [*Google — 数据讲述*](https://www.youtube.com/watch?v=8EMW7io4rSI)
 
 ### 3) Python
 
-根据我的互动，Python似乎是学习的首选编程语言，而不是R。这并不意味着使用R就不能成为数据科学家，只是说明你将使用与大多数人不同的语言。
+根据我的互动，Python 似乎是学习的首选编程语言，而不是 R。这并不意味着使用 R 就不能成为数据科学家，只是说明你将使用与大多数人不同的语言。
 
-学习Python语法很简单，但你应该能够编写高效的脚本并利用Python提供的广泛库和包。Python编程是构建应用程序的基础，如数据处理、构建机器学习模型、编写DAG文件等。
+学习 Python 语法很简单，但你应该能够编写高效的脚本并利用 Python 提供的广泛库和包。Python 编程是构建应用程序的基础，如数据处理、构建机器学习模型、编写 DAG 文件等。
 
-*以下是我学习Python的一些最爱资源：*
+*以下是我学习 Python 的一些最爱资源：*
 
-+   [*FreeCodeCamp — 初学者Python完整课程*](https://www.youtube.com/watch?v=rfscVS0vtbw&feature=youtu.be)
++   [*FreeCodeCamp — 初学者 Python 完整课程*](https://www.youtube.com/watch?v=rfscVS0vtbw&feature=youtu.be)
 
 +   [*Leetcode*](https://leetcode.com/explore/)
 
 ### 4) Pandas
 
-可以说，在Python中最重要的库是Pandas，这是一个用于数据处理和分析的包。作为数据科学家，你将经常使用这个包，无论是清理数据、探索数据还是处理数据。
+可以说，在 Python 中最重要的库是 Pandas，这是一个用于数据处理和分析的包。作为数据科学家，你将经常使用这个包，无论是清理数据、探索数据还是处理数据。
 
-Pandas已成为一个非常流行的包，不仅因为它的功能，还因为DataFrames已成为机器学习模型的标准数据结构。
+Pandas 已成为一个非常流行的包，不仅因为它的功能，还因为 DataFrames 已成为机器学习模型的标准数据结构。
 
-*以下是我学习Pandas的一些最爱资源：*
+*以下是我学习 Pandas 的一些最爱资源：*
 
-+   [*Kaggle — 学习Pandas教程*](https://www.kaggle.com/learn/pandas)
++   [*Kaggle — 学习 Pandas 教程*](https://www.kaggle.com/learn/pandas)
 
-+   [*Guipsamora — Pandas练习*](https://github.com/guipsamora/pandas_exercises)
++   [*Guipsamora — Pandas 练习*](https://github.com/guipsamora/pandas_exercises)
 
 ### 5) Git/版本控制
 
-Git是技术社区中主要的版本控制系统。
+Git 是技术社区中主要的版本控制系统。
 
 如果这还不清楚，可以考虑这个例子。在高中或大学时，如果你曾经写过论文，你可能会在写作过程中保存不同版本的论文。例如：
 
@@ -164,14 +164,14 @@ Airflow 强大之处在于它允许你将可能用于进一步分析或建模的
 
 ### 更多相关主题
 
-+   [专家推荐的5种机器学习最佳实践](https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html)
++   [专家推荐的 5 种机器学习最佳实践](https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html)
 
-+   [2022年最热门的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最热门的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
 
-+   [KDnuggets新闻 3月30日：最受欢迎的编程入门…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻 3 月 30 日：最受欢迎的编程入门…](https://www.kdnuggets.com/2022/n13.html)
 
 +   [为什么大多数人无法学习编程？](https://www.kdnuggets.com/2022/03/people-fail-learn-programming.html)
 
-+   [学习Python的3个最受欢迎的训练营](https://www.kdnuggets.com/3-most-popular-bootcamps-to-learn-python)
++   [学习 Python 的 3 个最受欢迎的训练营](https://www.kdnuggets.com/3-most-popular-bootcamps-to-learn-python)
 
-+   [5个数据科学项目，学习5项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目，学习 5 项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)

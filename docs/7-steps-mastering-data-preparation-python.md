@@ -1,12 +1,12 @@
 # 7 步掌握 Python 数据准备
 
-> 原文：[https://www.kdnuggets.com/2017/06/7-steps-mastering-data-preparation-python.html/2](https://www.kdnuggets.com/2017/06/7-steps-mastering-data-preparation-python.html/2)
+> 原文：[`www.kdnuggets.com/2017/06/7-steps-mastering-data-preparation-python.html/2`](https://www.kdnuggets.com/2017/06/7-steps-mastering-data-preparation-python.html/2)
 
 ### 第 4 步：处理异常值
 
 这不是关于制定处理数据中异常值策略的教程；在建模时，有时包括异常值是合适的，有时则不合适（无论有人怎样告诉你）。这取决于情况，没人能对你的情况是否属于 A 列或 B 列做出笼统的断言。
 
-![异常值](../Images/83f05baa9ceceac3e6681aadf81698c0.png)
+![异常值](img/83f05baa9ceceac3e6681aadf81698c0.png)
 
 你能找到异常值吗？
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -34,37 +34,37 @@
 
 我们将决定是否在数据集中保留异常值留给你。然而，如果你的模型确实需要以某种方式处理异常值，这里有一些讨论方法：
 
-+   [处理异常值的 3 种方法](/2017/01/3-methods-deal-outliers.html)，作者：Alberto Quesada
++   处理异常值的 3 种方法，作者：Alberto Quesada
 
-+   [使用标准差去除 Python 中的异常值](/2017/02/removing-outliers-standard-deviation-python.html)，作者：Punit Jajodia
++   使用标准差去除 Python 中的异常值，作者：Punit Jajodia
 
 +   [使用百分位数在 Pandas DataFrame 中去除异常值](https://stackoverflow.com/questions/35827863/remove-outliers-in-pandas-dataframe-using-percentiles)，Stack Overflow
 
 ### 第 5 步：处理不平衡数据
 
-那么，如果你的数据集在其他方面都很强大——没有缺失值和异常值——但由2个类别组成：一个包含95%的实例，另一个仅包含5%？或者更糟——99.8%对0.2%？
+那么，如果你的数据集在其他方面都很强大——没有缺失值和异常值——但由 2 个类别组成：一个包含 95%的实例，另一个仅包含 5%？或者更糟——99.8%对 0.2%？
 
 如果是这样，那么你的数据集是不平衡的，至少在类别方面是这样。这可能会带来问题，我相信这些问题不需要指出。但也无需急于抛弃数据；当然有处理这种情况的策略。
 
-请注意，虽然这可能不真正是数据准备任务，但这种数据集特征会在数据准备阶段早期显现出来（EDA的重要性），并且这种数据的有效性可以在这一准备阶段初步评估。
+请注意，虽然这可能不真正是数据准备任务，但这种数据集特征会在数据准备阶段早期显现出来（EDA 的重要性），并且这种数据的有效性可以在这一准备阶段初步评估。
 
 首先，看看 Tom Fawcett 对如何处理的讨论：
 
-+   [从不平衡类中学习](/2016/08/learning-from-imbalanced-classes.html)，作者 Tom Fawcett
++   从不平衡类中学习，作者 Tom Fawcett
 
 接下来，看看关于处理类别不平衡的技术的讨论：
 
-+   [处理不平衡数据的7种技术](/2017/06/7-techniques-handle-imbalanced-data.html)，作者 Ye Wu & Rick Radewagen
++   处理不平衡数据的 7 种技术，作者 Ye Wu & Rick Radewagen
 
-![不平衡数据](../Images/c9cbb484ef13d59bff657b921d1b6624.png)
+![不平衡数据](img/c9cbb484ef13d59bff657b921d1b6624.png)
 
 识别和处理不平衡是很重要的。
 
-对于为什么我们可能会遇到不平衡数据的一个很好的解释，以及为什么在某些领域中我们可能比其他领域更频繁地遇到这种情况（来自上述链接的《处理不平衡数据的7种技术》）：
+对于为什么我们可能会遇到不平衡数据的一个很好的解释，以及为什么在某些领域中我们可能比其他领域更频繁地遇到这种情况（来自上述链接的《处理不平衡数据的 7 种技术》）：
 
-> 这些领域使用的数据通常包含不到1%的稀有但“有趣”的事件（例如，信用卡欺诈者，用户点击广告或损坏的服务器扫描其网络）。然而，大多数机器学习算法在处理不平衡数据集时效果不好。以下七种技术可以帮助你训练分类器以检测异常类别。
+> 这些领域使用的数据通常包含不到 1%的稀有但“有趣”的事件（例如，信用卡欺诈者，用户点击广告或损坏的服务器扫描其网络）。然而，大多数机器学习算法在处理不平衡数据集时效果不好。以下七种技术可以帮助你训练分类器以检测异常类别。
 
-### 第6步：数据变换
+### 第 6 步：数据变换
 
 维基百科将 [数据变换](https://en.wikipedia.org/wiki/Data_transformation_(statistics)) 定义为：
 
@@ -78,7 +78,7 @@ Scikit-learn 文档中的这一概述提供了对一些最重要的预处理转�
 
 +   [数据预处理](http://scikit-learn.org/stable/modules/preprocessing.html)，Scikit-learn 文档
 
-![独热编码](../Images/5fadf8e114fa3bd5734554c29040064e.png)
+![独热编码](img/5fadf8e114fa3bd5734554c29040064e.png)
 
 独热编码转换的示例结果。
 
@@ -96,7 +96,7 @@ Scikit-learn 文档中的这一概述提供了对一些最重要的预处理转�
 
 请注意，整个讨论完全有意跳过了特征选择的提及，原因是：它在这篇更广泛的讨论中值得比简单几句话更多的关注。即将发布的特征选择专门指南将在完成后链接到这里。
 
-### 第7步：最后润色与前进
+### 第 7 步：最后润色与前进
 
 好的，你的数据是“干净”的。就我们而言，这意味着你此时拥有一个有效且可用的 Pandas DataFrame。但你该如何处理它呢？
 
@@ -104,15 +104,15 @@ Scikit-learn 文档中的这一概述提供了对一些最重要的预处理转�
 
 +   [将 Pandas DataFrame 转换为数组并评估多元线性回归模型](https://stackoverflow.com/questions/28334091/turning-a-pandas-dataframe-to-an-array-and-evaluate-multiple-linear-regression-m)，Stack Overflow
 
-![机器学习管道](../Images/2b1892e803954b3888cf48f32e0c71b7.png)
+![机器学习管道](img/2b1892e803954b3888cf48f32e0c71b7.png)
 
 非常简单的数据准备过程。
 
 一旦你在 Python 中获得了适合机器学习的干净数据，为什么不看看以下这对文章呢，它们旨在涵盖你现在已经准备好的领域：
 
-+   [掌握 Python 机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)，作者 Matthew Mayo
++   掌握 Python 机器学习的 7 个步骤，作者 Matthew Mayo
 
-+   [掌握 Python 机器学习的 7 个额外步骤](/2017/03/seven-more-steps-machine-learning-python.html)，作者 Matthew Mayo
++   掌握 Python 机器学习的 7 个额外步骤，作者 Matthew Mayo
 
 如果你不想马上进入建模阶段怎么办？或者，即使你想进入建模阶段，但你希望将数据输出到更适合你情况的存储形式呢？以下是有关 Pandas DataFrame 存储的一些信息：
 
@@ -128,19 +128,19 @@ Scikit-learn 文档中的这一概述提供了对一些最重要的预处理转�
 
 作为纯粹的惩罚，以下是一些关于数据准备的额外见解：
 
-+   [在 Python 中整理数据](/2017/01/tidying-data-python.html)，作者 Jean-Nicholas Hould
++   在 Python 中整理数据，作者 Jean-Nicholas Hould
 
-+   [数据科学实践：Kaggle 指南 第 3 部分 – 清理数据](/2016/06/doing-data-science-kaggle-walkthrough-data-cleaning.html)，作者 Brett Romero
++   数据科学实践：Kaggle 指南 第三部分 – 清理数据，作者 Brett Romero
 
-+   [从零开始的 Python 机器学习工作流 第 1 部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)，作者 Matthew Mayo
++   从零开始的 Python 机器学习工作流 第一部分：数据准备，作者 Matthew Mayo
 
 **相关内容：**
 
-+   [理解 NoSQL 数据库的 7 个步骤](/2016/07/seven-steps-understanding-nosql-databases.html)
++   理解 NoSQL 数据库的 7 个步骤
 
-+   [掌握数据科学 SQL 的 7 个步骤](/2016/06/seven-steps-mastering-sql-data-science.html)
++   掌握数据科学 SQL 的 7 个步骤
 
-+   [理解深度学习的 7 个步骤](/2016/01/seven-steps-deep-learning.html)
++   理解深度学习的 7 个步骤
 
 ### 更多相关内容
 

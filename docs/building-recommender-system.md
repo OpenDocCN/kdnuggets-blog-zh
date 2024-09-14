@@ -1,14 +1,14 @@
 # 构建推荐系统
 
-> 原文：[https://www.kdnuggets.com/2019/04/building-recommender-system.html](https://www.kdnuggets.com/2019/04/building-recommender-system.html)
+> 原文：[`www.kdnuggets.com/2019/04/building-recommender-system.html`](https://www.kdnuggets.com/2019/04/building-recommender-system.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Matthew Mahowald， [开放数据组](https://www.opendatagroup.com/)**。
 
 推荐系统是今天最突出的机器学习实例之一。它们决定了你的 Facebook 新闻源中出现的内容、产品在 Amazon 上的展示顺序、Netflix 队列中建议的视频，以及无数其他例子。但什么是推荐系统，它们是如何工作的？这篇文章是探索构建推荐系统的一些常见技术及其实现的系列文章中的第一篇。
 
-![数据工程](../Images/efe8223e7c92f882a8d32fd9e5e37cb1.png)
+![数据工程](img/efe8223e7c92f882a8d32fd9e5e37cb1.png)
 
 ### 什么是推荐系统？
 
@@ -40,13 +40,13 @@ movies = movies.join(movies.genres.str.get_dummies("|"))
 
 `genres` 特征由一个或多个管道符号（“|”）分隔的类别组成。上面的最后一行添加了每个可能类别的列，如果类别标签存在，则在该条目中放置 1，否则放置 0。
 
-基于这些标签，让我们生成一些基于项目相似性的推荐。对于类别数据（如标签），*余弦相似度*是一种非常常见的相似度度量。对于任何两个项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j")， ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") 的余弦相似度就是 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") 之间夹角的余弦值，其中 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](../Images/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") 被解释为特征空间中的向量。请记住，余弦值是从这些向量的内积中获得的：
+基于这些标签，让我们生成一些基于项目相似性的推荐。对于类别数据（如标签），*余弦相似度*是一种非常常见的相似度度量。对于任何两个项目 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](img/4b5e5503442fdfa2029fcc9208d6ca1a.png "j")， ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](img/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") 的余弦相似度就是 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](img/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") 之间夹角的余弦值，其中 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 和 ![j](img/4b5e5503442fdfa2029fcc9208d6ca1a.png "j") 被解释为特征空间中的向量。请记住，余弦值是从这些向量的内积中获得的：
 
-![ \cos \theta = \frac{i \cdot j}{||i|| ||j||} ](../Images/3a502cd0acbdd797c1f8c8e41b7b7a9f.png " \cos \theta = \frac{i \cdot j}{||i|| ||j||} ")
+![ \cos \theta = \frac{i \cdot j}{||i|| ||j||} ](img/cdot j}{||i|| ||j||} ")
 
-作为一个具体的例子，考虑电影 $i := $ 《玩具总动员》（类型标签：“冒险”、“动画”、“儿童”、“喜剧”和“奇幻”）和 $j := $ 《勇敢的心》（类型标签：“冒险”、“儿童”和“奇幻”）。点积 ![i \cdot j](../Images/18c1f73139dbcc8f400317cc1558e470.png "i \cdot j") 是 3（这两部电影有三个标签相同）。 ![||i|| = \sqrt{5}](../Images/f9e775e1a1102b4e3de42072875562fd.png "||i|| = \sqrt{5}") 和 ![||j|| = \sqrt{3}](../Images/c683224c2c69453efeae2284e2fe7f58.png "||j|| = \sqrt{3}"), 所以这两部电影之间的余弦相似度是
+作为一个具体的例子，考虑电影 $i := $ 《玩具总动员》（类型标签：“冒险”、“动画”、“儿童”、“喜剧”和“奇幻”）和 $j := $ 《勇敢的心》（类型标签：“冒险”、“儿童”和“奇幻”）。点积 ![i \cdot j](img/cdot j") 是 3（这两部电影有三个标签相同）。 ![||i|| = \sqrt{5}](img/sqrt{5}") 和 ![||j|| = \sqrt{3}](img/sqrt{3}"), 所以这两部电影之间的余弦相似度是
 
-![ \cos \theta = \frac{3}{\sqrt{15}} \approx 0.775 ](../Images/86e2624d8c47a992e299576a1b6b9b64.png " \cos \theta = \frac{3}{\sqrt{15}} \approx 0.775 ")
+![ \cos \theta = \frac{3}{\sqrt{15}} \approx 0.775 ](img/approx 0.775 ")
 
 我们可以计算数据集中所有项目的余弦相似度：
 
@@ -66,7 +66,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 #       1706, 6486, 6260, 5490])* 
 ```
 
-| 电影ID | 类型 |
+| 电影 ID | 类型 |
 | --- | --- |
 | 《玩具总动员》（1995） | 冒险, 动画, 儿童, 喜剧, 奇幻 |
 | 《极速蜗牛》（2013） | 冒险, 动画, 儿童, 喜剧, 奇幻 |
@@ -74,7 +74,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 | 《海洋奇缘》（2016） | 冒险, 动画, 儿童, 喜剧, 奇幻 |
 | 《皇帝的新装》（2000） | 冒险, 动画, 儿童, 喜剧, 奇幻 |
 
-前五部电影的类型标签与《玩具总动员》完全相同，因此其余弦相似度为 1。事实上，对于这里使用的样本数据，共有十三部电影的相似度为 1；最相似的没有完全相同标签的电影是2006年的《蚂蚁大兵》，它有额外的类型标签“IMAX”。
+前五部电影的类型标签与《玩具总动员》完全相同，因此其余弦相似度为 1。事实上，对于这里使用的样本数据，共有十三部电影的相似度为 1；最相似的没有完全相同标签的电影是 2006 年的《蚂蚁大兵》，它有额外的类型标签“IMAX”。
 
 ### 简单协同过滤
 
@@ -82,17 +82,17 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 一种简单的方法是使用其他用户的评分为每个物品分配一个加权评分：
 
-![ \hat{r}_{u,i} = \frac{\sum_{v\neq u} s(u,v) r_{v, i}}{\sum_{v \neq u} s(u,v)} ](../Images/5f6421befb7e1eb480685c5260bd8dd9.png " \hat{r}_{u,i} = \frac{\sum_{v\neq u} s(u,v) r_{v, i}}{\sum_{v \neq u} s(u,v)} ")
+![ \hat{r}_{u,i} = \frac{\sum_{v\neq u} s(u,v) r_{v, i}}{\sum_{v \neq u} s(u,v)} ](img/neq u} s(u,v) r_{v, i}}{\sum_{v \neq u} s(u,v)} ")
 
-其中 ![\hat{r}_{u,i}](../Images/bd523a20b848a5e6853139d33b96e37c.png "\hat{r}_{u,i}") 是用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png "u") 对物品 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 的预测评分，![s(u,v)](../Images/f6abcb8dc87947b544bb5ff5fba0b39e.png "s(u,v)") 是用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png "u") 和 ![v](../Images/73161e4d85d5c3cc1fa03163b0a92a77.png "v") 之间相似度的度量，![r](../Images/dc16d9309e95f2dd60bba8a2d99d78b4.png "r") 是用户 ![v](../Images/73161e4d85d5c3cc1fa03163b0a92a77.png "v") 对物品 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 的已知评分。
+其中 ![\hat{r}_{u,i}](img/hat{r}_{u,i}") 是用户 ![u](img/c1155b10039d460302206caf78e70b84.png "u") 对物品 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 的预测评分，![s(u,v)](img/f6abcb8dc87947b544bb5ff5fba0b39e.png "s(u,v)") 是用户 ![u](img/c1155b10039d460302206caf78e70b84.png "u") 和 ![v](img/73161e4d85d5c3cc1fa03163b0a92a77.png "v") 之间相似度的度量，![r](img/dc16d9309e95f2dd60bba8a2d99d78b4.png "r") 是用户 ![v](img/73161e4d85d5c3cc1fa03163b0a92a77.png "v") 对物品 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 的已知评分。
 
 对于我们的用户相似度度量，我们将查看用户对电影的评分。评分相似的用户将被认为是相似的。处理这些评分数据的一个重要第一步是对我们的评分进行归一化。我们将分三步进行：首先，减去整体平均评分（跨所有电影和用户），使调整后的评分以 0 为中心。接下来，我们对每部电影做同样的操作，以考虑给定电影的平均评分的差异。最后，我们减去每个用户的平均评分——这考虑了个人的变化（例如，一些用户的评分始终较高）。
 
-在数学上，我们的调整评分 ![\tilde{r}_{u,i}](../Images/52a9c49297042d77a17cce1bba397ac4.png "\tilde{r}_{u,i}") 是
+在数学上，我们的调整评分 ![\tilde{r}_{u,i}](img/tilde{r}_{u,i}") 是
 
-![ \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u} ](../Images/7e596563eff0b2daefe4be7079d610a7.png " \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u} ")
+![ \tilde{r}_{u,i} := r_{u,i} - \bar{r} - \bar{r}_{i} - \bar{r}_{u} ](img/bar{r}_{u} ")
 
-其中 ![r_{u,i}](../Images/30a460c76c42202245eafbf4be93163d.png "r_{u,i}") 是基础评分，![\bar{r}](../Images/37a022e0abffb5ed0c15433d52b6d2ca.png "\bar{r}") 是总体均值评分，![\bar{r},i](../Images/fa2dead136fcde4516fc578fb3ca28d5.png "\bar{r},i") 是项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 的均值评分（在减去总体均值之后），而 ![\bar{r},u](../Images/f7aa7e448aef9d73800f713f228bac10.png "\bar{r},u") 是用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png "u") 的均值评分（在调整了总体均值评分和项目均值评分之后）。为了方便，我会将调整后的评分 ![\tilde{r}](../Images/15faa8d8c7bbf110f5cdc90f3df75b49.png "\tilde{r}") 称为用户 ![u](../Images/c1155b10039d460302206caf78e70b84.png "u") 对项目 ![i](../Images/7e670de46a6672b7c7196f23e4711b0b.png "i") 的*偏好*。
+其中 ![r_{u,i}](img/30a460c76c42202245eafbf4be93163d.png "r_{u,i}") 是基础评分，![\bar{r}](img/bar{r}") 是总体均值评分，![\bar{r},i](img/bar{r},i") 是项目 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 的均值评分（在减去总体均值之后），而 ![\bar{r},u](img/bar{r},u") 是用户 ![u](img/c1155b10039d460302206caf78e70b84.png "u") 的均值评分（在调整了总体均值评分和项目均值评分之后）。为了方便，我会将调整后的评分 ![\tilde{r}](img/tilde{r}") 称为用户 ![u](img/c1155b10039d460302206caf78e70b84.png "u") 对项目 ![i](img/7e670de46a6672b7c7196f23e4711b0b.png "i") 的*偏好*。
 
 让我们加载评分数据并计算调整后的评分：
 
@@ -152,7 +152,7 @@ mat[12][[304, 596]]
 
 本文中使用的方法是*基于邻域*的，我们刚刚看到生成基于邻域的推荐时的一个潜在陷阱：邻域可能实际上不会推荐任何用户尚未看过的项目。由于需要计算成对距离，基于邻域的方法也往往在用户数量增加时表现不佳。
 
-在本系列的第 2 部分，我们将查看另一种构建推荐系统的方法，这次使用*潜在因子*方法。潜在因子模型避免了一些基于邻域的方法的陷阱，但正如我们将看到的，它们也有一些自身的挑战！
+在本系列的第二部分，我们将查看另一种构建推荐系统的方法，这次使用*潜在因子*方法。潜在因子模型避免了一些基于邻域的方法的陷阱，但正如我们将看到的，它们也有一些自身的挑战！
 
 **资源：**
 
@@ -164,7 +164,7 @@ mat[12][[304, 596]]
 
 +   [为意外情况做准备](https://www.kdnuggets.com/2019/02/preparing-unexpected.html)
 
-+   [NLP中的词嵌入及其应用](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html)
++   [NLP 中的词嵌入及其应用](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html)
 
 +   [人工智能和机器学习的最新进展 – 带代码的论文亮点](https://www.kdnuggets.com/2019/02/paperswithcode-ai-machine-learning-highlights.html)
 
@@ -172,11 +172,11 @@ mat[12][[304, 596]]
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

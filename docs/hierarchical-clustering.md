@@ -1,14 +1,14 @@
 # 什么是层次聚类？
 
-> 原文：[https://www.kdnuggets.com/2019/09/hierarchical-clustering.html](https://www.kdnuggets.com/2019/09/hierarchical-clustering.html)
+> 原文：[`www.kdnuggets.com/2019/09/hierarchical-clustering.html`](https://www.kdnuggets.com/2019/09/hierarchical-clustering.html)
 
-[评论](#comments)
+评论
 
 **什么是聚类？？**
 
 **聚类**是一种将相似对象分组的技术，使得同一组中的对象比其他组中的对象更相似。相似对象的组称为**簇**。
 
-![图示](../Images/d864c96c4c7666187cbf8c49c37b343e.png)
+![图示](img/d864c96c4c7666187cbf8c49c37b343e.png)
 
 聚类的数据点
 
@@ -16,15 +16,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-数据科学家需要了解5种流行的聚类算法：
+数据科学家需要了解 5 种流行的聚类算法：
 
 1.  **K-均值聚类**：欲了解更多信息，请点击[这里](https://towardsdatascience.com/introduction-to-image-segmentation-with-k-means-clustering-83fd0a9e2fc3)。
 
@@ -52,7 +52,7 @@
 
 ### **凝聚层次聚类**
 
-凝聚层次聚类是最常见的层次聚类类型，用于根据对象的相似性将对象分组。它也称为AGNES（凝聚嵌套）。它是一种“[自下而上](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design)”的方法：***每个观察从自己的簇开始，随着层次的上升，簇对簇被合并。***
+凝聚层次聚类是最常见的层次聚类类型，用于根据对象的相似性将对象分组。它也称为 AGNES（凝聚嵌套）。它是一种“[自下而上](https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design)”的方法：***每个观察从自己的簇开始，随着层次的上升，簇对簇被合并。***
 
 **它是如何工作的？**
 
@@ -66,7 +66,7 @@
 
 查看聚合层次聚类的可视化表示以便更好地理解：
 
-![图](../Images/2d5c84fed59033b3130bd242b7e92738.png)
+![图](img/2d5c84fed59033b3130bd242b7e92738.png)
 
 [聚合层次聚类](https://gfycat.com/somelonelycaterpillar)
 
@@ -90,7 +90,7 @@
 
 如前所述，树状图包含层次聚类算法的记忆，因此仅通过查看树状图，你可以了解簇是如何形成的。
 
-![图](../Images/21be7560a8fe5a22873d0b7907c2d922.png)
+![图](img/21be7560a8fe5a22873d0b7907c2d922.png)
 
 [树状图](https://giphy.com/explore/dendrogram)
 
@@ -104,7 +104,7 @@
 
 **树状图的组成部分**
 
-![图](../Images/61b86c9b3b38eb3d02057b488973efc2.png)
+![图](img/61b86c9b3b38eb3d02057b488973efc2.png)
 
 [图片来源](https://www.statisticshowto.datasciencecentral.com/hierarchical-clustering/)
 
@@ -128,7 +128,7 @@
 
 例如，在下图中，L3 可以在上下方向上最大程度地穿越而不交叉合并点。因此，我们画一条水平线，线与垂直线的交点数就是最佳簇数。
 
-![图示](../Images/e468c33d0dae5aa5b033ffad73e4c21b.png)
+![图示](img/e468c33d0dae5aa5b033ffad73e4c21b.png)
 
 [选择最佳簇数。](https://www.google.com/imgres?imgurl=https%3A%2F%2Fars.els-cdn.com%2Fcontent%2Fimage%2F3-s2.0-B978012811654800004X-f04-03-9780128116548.jpg&imgrefurl=https%3A%2F%2Fwww.sciencedirect.com%2Ftopics%2Fcomputer-science%2Fagglomerative-algorithm&docid=4v7-F4YYs4wofM&tbnid=ZDsxb9kaKxWmWM%3A&vet=12ahUKEwizmMT5vtTkAhWHad4KHXc5ByQ4rAIQMygvMC96BAgBEDE..i&w=314&h=226&bih=691&biw=1440&q=dendrogram%20explained&ved=2ahUKEwizmMT5vtTkAhWHad4KHXc5ByQ4rAIQMygvMC96BAgBEDE&iact=mrc&uact=8)
 
@@ -138,7 +138,7 @@
 
 *分裂* 或 DIANA（DIvisive ANAlysis Clustering）是一种自顶向下的聚类方法，我们将所有观测分配到一个簇中，然后将该簇分割成两个最不相似的簇。最后，我们在每个簇上递归地进行，直到每个观测都有一个簇。所以这种聚类方法正好与凝聚聚类相反。
 
-![图示](../Images/fcda2a4b265cb4b2bf061a6726d9e62c.png)
+![图示](img/fcda2a4b265cb4b2bf061a6726d9e62c.png)
 
 [图片来源](https://www.researchgate.net/figure/Conceptual-dendrogram-for-agglomerative-and-divisive-Hierarchical-based-clustering-19_fig2_321399805)
 
@@ -168,7 +168,7 @@ import pandas as pd
 dataset = pd.read_csv('/.../Mall_Customers.csv')
 ```
 
-![图](../Images/daaa2201747eb4c09b8c92b61d618025.png)
+![图](img/daaa2201747eb4c09b8c92b61d618025.png)
 
 原始数据集
 
@@ -191,11 +191,11 @@ plt.ylabel('Euclidean distance')
 plt.show()
 ```
 
-![](../Images/3f388b0ef4b8de84cbd26d87f31da321.png)
+![](img/3f388b0ef4b8de84cbd26d87f31da321.png)
 
 正如我们之前讨论的，选择簇的数量时，我们绘制一条水平线，穿过最大上下距离而不与合并点相交的最长线段。因此，我们绘制水平线，它所交叉的垂直线数量就是最优的簇数量。
 
-在这种情况下，是5。因此，让我们用5个簇来拟合我们的聚合模型。
+在这种情况下，是 5。因此，让我们用 5 个簇来拟合我们的聚合模型。
 
 ```py
 from sklearn.cluster import AgglomerativeClustering
@@ -219,7 +219,7 @@ plt.legend()
 plt.show()
 ```
 
-![图](../Images/5aca25e413a6f4f2840bf998959e4520.png)
+![图](img/5aca25e413a6f4f2840bf998959e4520.png)
 
 根据他们的年收入和消费评分对客户进行聚类。
 
@@ -231,7 +231,7 @@ plt.show()
 
 你可以通过[LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/?source=post_page---------------------------)联系我，有任何疑问都可以问我。
 
-![](../Images/36fac5b8825e21f2e39f62ab62445132.png)
+![](img/36fac5b8825e21f2e39f62ab62445132.png)
 
 感谢阅读 !!!
 
@@ -241,11 +241,11 @@ plt.show()
 
 **相关：**
 
-+   [使用卷积神经网络和 OpenCV 预测年龄和性别](/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html)
++   使用卷积神经网络和 OpenCV 预测年龄和性别
 
-+   [K-Means 聚类的图像分割简介](/2019/08/introduction-image-segmentation-k-means-clustering.html)
++   K-Means 聚类的图像分割简介
 
-+   [使用 K-最近邻分类心脏病](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)
++   使用 K-最近邻分类心脏病
 
 ### 更多相关内容
 

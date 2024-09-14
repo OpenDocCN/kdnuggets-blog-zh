@@ -1,28 +1,28 @@
-# 数据库的完整收藏 – 第1部分
+# 数据库的完整收藏 – 第一部分
 
-> 原文：[https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)
+> 原文：[`www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html`](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)
 
-![数据仓库的完整收藏 - 第1部分](../Images/4568b11318b7d58e52c1b37f5a0e3405.png)
+![数据仓库的完整收藏 - 第一部分](img/4568b11318b7d58e52c1b37f5a0e3405.png)
 
 作者提供的图片
 
-> **编辑注**：有关本系列两个部分所包含的完整数据库范围，请参见 [**数据仓库的完整收藏 – 第2部分**](/2022/04/complete-collection-data-repositories-part-2.html)。
+> **编辑注**：有关本系列两个部分所包含的完整数据库范围，请参见 **数据仓库的完整收藏 – 第二部分**。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 找到适合您业务的数据可能需要大量时间。虽然有多个数据共享平台提供各种数据集，但它们不能为特定的研究领域提供数据集。因此，我创建了一个数据仓库列表，可以帮助您找到任何数据集，而无需在互联网上搜索。单个数据仓库包含了某一特定研究领域的多个数据集。
 
-数据库的集合分为两部分，共20个类别，涵盖各种科学领域。下面列出的大多数数据来源是免费的，但也有一些不是。我花了超过两天的时间来收集这些高质量且易于下载的数据库。我使用了duckduckgo.com搜索大多数资源，但大部分数据库来自于 [Awesome Public Datasets](https://github.com/awesomedata/awesome-public-datasets) 和 [KDnuggets](/datasets/index.html)。
+数据库的集合分为两部分，共 20 个类别，涵盖各种科学领域。下面列出的大多数数据来源是免费的，但也有一些不是。我花了超过两天的时间来收集这些高质量且易于下载的数据库。我使用了 duckduckgo.com 搜索大多数资源，但大部分数据库来自于 [Awesome Public Datasets](https://github.com/awesomedata/awesome-public-datasets) 和 KDnuggets。
 
 **在第一部分中我们将涵盖：**
 
@@ -112,7 +112,7 @@
 
 +   [全球风能图集](https://globalwindatlas.info/)
 
-![数据存储库的完整集合 - 第1部分](../Images/e78ddb1389c57e7ef7a09491e12eb446.png)
+![数据存储库的完整集合 - 第一部分](img/e78ddb1389c57e7ef7a09491e12eb446.png)
 
 图片来源 [Freepik](https://www.freepik.com/freepik)
 
@@ -130,7 +130,7 @@
 
 +   [Imagenet](https://image-net.org/download.php)
 
-+   [YouTube人脸数据库](http://www.cs.tau.ac.il/~wolf/ytfaces/index.html#download)
++   [YouTube 人脸数据库](http://www.cs.tau.ac.il/~wolf/ytfaces/index.html#download)
 
 +   [太阳数据库](http://groups.csail.mit.edu/vision/SUN/hierarchy.html)
 
@@ -162,7 +162,7 @@
 
 +   [纽约州教育数据网站](https://data.nysed.gov/downloads.php)
 
-+   [PISA数据](https://www.oecd.org/pisa/data/)
++   [PISA 数据](https://www.oecd.org/pisa/data/)
 
 # 能源
 
@@ -176,7 +176,7 @@
 
 +   [能源数据资源](https://energy.duke.edu/research/energy-data/resources)
 
-![数据存储库完整集合 - 第1部分](../Images/df8435b4f425738b2498a9b051ffeacf.png)
+![数据存储库完整集合 - 第一部分](img/df8435b4f425738b2498a9b051ffeacf.png)
 
 图片来源 [rawpixel.com](https://www.freepik.com/rawpixel-com)
 
@@ -216,7 +216,7 @@
 
 # 结论
 
-在这篇博客中，我们涵盖了10个类别的数据仓库。我们还发现了数据集的类型及其使用案例。这些数据集是宝贵的金矿，你无法在Kaggle或任何普通网站上找到它们。大多数数据科学家要么在Kaggle上，要么在Google上搜索数据集，有时他们对所得到的数据感到满意。他们大部分时间都在清理和增强数据，而不是寻找更好的数据资源。这一切都将改变，因为我将利用我的数据仓库收藏来寻找我所需要的内容。
+在这篇博客中，我们涵盖了 10 个类别的数据仓库。我们还发现了数据集的类型及其使用案例。这些数据集是宝贵的金矿，你无法在 Kaggle 或任何普通网站上找到它们。大多数数据科学家要么在 Kaggle 上，要么在 Google 上搜索数据集，有时他们对所得到的数据感到满意。他们大部分时间都在清理和增强数据，而不是寻找更好的数据资源。这一切都将改变，因为我将利用我的数据仓库收藏来寻找我所需要的内容。
 
 在第二部分，我们将探讨医疗保健、自然语言、神经科学、物理学、社交网络、体育、时间序列、交通、杂项和超级数据仓库。
 
@@ -224,14 +224,14 @@
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻, 4月6日: 8个免费的MIT课程来学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻, 4 月 6 日: 8 个免费的 MIT 课程来学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据仓库完整收藏 - 第2部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)
++   [数据仓库完整收藏 - 第二部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)
 
-+   [数据科学备忘单完整收藏 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整收藏 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学备忘单完整收藏 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整收藏 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [数据科学书籍完整收藏 - 第1部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
++   [数据科学书籍完整收藏 - 第一部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
 
-+   [数据科学书籍完整收藏 - 第2部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
++   [数据科学书籍完整收藏 - 第二部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)

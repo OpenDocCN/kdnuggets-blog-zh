@@ -1,8 +1,8 @@
 # 使用 NumPy 从头开始线性回归
 
-> 原文：[https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy](https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy)
+> 原文：[`www.kdnuggets.com/linear-regression-from-scratch-with-numpy`](https://www.kdnuggets.com/linear-regression-from-scratch-with-numpy)
 
-![使用 NumPy 从头开始线性回归](../Images/1951ea4b9d9ce604ed154efff3629c4f.png)
+![使用 NumPy 从头开始线性回归](img/1951ea4b9d9ce604ed154efff3629c4f.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的信息技术。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的信息技术。
 
 * * *
 
@@ -39,7 +39,7 @@ X, y = datasets.make_regression(
 
 可视化的数据集如下所示：
 
-![使用 NumPy 从头开始线性回归](../Images/a1f435f09880ff61db42c639fa6d2b15.png)
+![使用 NumPy 从头开始线性回归](img/a1f435f09880ff61db42c639fa6d2b15.png)
 
 作者提供的图像
 
@@ -116,23 +116,23 @@ y_pred = np.dot(X, self.weights) + self.bias
 
 现在我们有了预测的 y 值和目标 y 值，我们可以找到这两者之间的差异。均方误差（MSE）用于比较实际值。方程如下：
 
-![从零开始的线性回归与 NumPy](../Images/d5f03ab0e7f212765a705a6189468d4d.png)
+![从零开始的线性回归与 NumPy](img/d5f03ab0e7f212765a705a6189468d4d.png)
 
 我们只关心值之间的绝对差异。预测值高于原始值和低于原始值同样糟糕。因此，我们对目标值和预测值之间的差异进行平方处理，以将负差异转换为正值。此外，这也惩罚了目标和预测之间的较大差异，因为较大的差异平方后会对最终损失贡献更多。
 
 为了使我们的预测尽可能接近原始目标，我们现在尝试最小化这个函数。损失函数在梯度为零时达到最小值。由于我们只能优化权重和偏置值，我们对 MSE 函数关于权重和偏置值的偏导数进行计算。
 
-![使用 NumPy 从头开始进行线性回归](../Images/83e89da79a360a5709bf54902e4a76cb.png)
+![使用 NumPy 从头开始进行线性回归](img/83e89da79a360a5709bf54902e4a76cb.png)
 
 然后，我们使用梯度下降法根据梯度值优化我们的权重。
 
-![使用 NumPy 从头开始进行线性回归](../Images/19a05045d5c5faa8874379aad3328eda.png)
+![使用 NumPy 从头开始进行线性回归](img/19a05045d5c5faa8874379aad3328eda.png)
 
 图片来自 [Sebasitan Raschka](https://sebastianraschka.com/faq/docs/gradient-optimization.html)
 
 我们对每个权重值取梯度，然后将其移动到梯度的相反方向。这将使损失值趋向最小值。根据图片，梯度为正，因此我们减少权重。这将使 J(W) 或损失值趋向最小值。因此，优化方程如下：
 
-![使用 NumPy 从头开始进行线性回归](../Images/87a11aefee51baeef82929e742c74a05.png)
+![使用 NumPy 从头开始进行线性回归](img/87a11aefee51baeef82929e742c74a05.png)
 
 学习率（或 alpha）控制图片中显示的增量步长。我们只对值进行小幅度的调整，以稳定地向最小值移动。
 
@@ -140,7 +140,7 @@ y_pred = np.dot(X, self.weights) + self.bias
 
 如果我们使用基本的代数运算简化导数方程，这将变得非常简单。
 
-![使用 NumPy 从头开始进行线性回归](../Images/d05edcda87c786e8fe178a475a1d8375.png)
+![使用 NumPy 从头开始进行线性回归](img/d05edcda87c786e8fe178a475a1d8375.png)
 
 对于导数，我们使用两行代码来实现：
 
@@ -194,11 +194,11 @@ def predict(self, X):
 
 使用随机初始化的权重和偏置，我们的预测结果如下：
 
-![使用 NumPy 从头开始进行线性回归](../Images/30983147e20a744358c6845a763a3492.png)
+![使用 NumPy 从头开始进行线性回归](img/30983147e20a744358c6845a763a3492.png)
 
 作者提供的图片
 
-权重和偏差初始化非常接近 0，因此我们得到了一条水平线。经过 1000 次迭代训练后，我们得到了这个：![从零开始的线性回归与 NumPy](../Images/ff5eda8a6ccf432c7b79a8a6d371f38d.png)
+权重和偏差初始化非常接近 0，因此我们得到了一条水平线。经过 1000 次迭代训练后，我们得到了这个：![从零开始的线性回归与 NumPy](img/ff5eda8a6ccf432c7b79a8a6d371f38d.png)
 
 图片来源：作者
 

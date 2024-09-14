@@ -1,8 +1,8 @@
 # 哪些统计学主题对于在数据科学中表现出色是必要的？
 
-> 原文：[https://www.kdnuggets.com/2016/08/statistics-topics-needed-excelling-data-science.html](https://www.kdnuggets.com/2016/08/statistics-topics-needed-excelling-data-science.html)
+> 原文：[`www.kdnuggets.com/2016/08/statistics-topics-needed-excelling-data-science.html`](https://www.kdnuggets.com/2016/08/statistics-topics-needed-excelling-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 Sergey Feldman 提供，Data Cowboys。**
 
@@ -10,7 +10,7 @@
 
 总的来说，我建议你能够（a）用数学思维，（b）将这些思维转化为代码。其他的你可以随时自学。但这里有一个大致按复杂程度递增的列表。
 
-![统计学词云](../Images/477edd536a0222b567bd064bf3e4c4d9.png)
+![统计学词云](img/477edd536a0222b567bd064bf3e4c4d9.png)
 
 **编码。** 精通 Python 和/或 R。虽然还有其他选择，但这两个语言现在非常普及。
 
@@ -60,34 +60,34 @@
 
 **相关：**
 
-+   [为什么大数据陷入困境：他们忘记了应用统计学](/2016/07/big-data-trouble-forgot-applied-statistics.html)
++   为什么大数据陷入困境：他们忘记了应用统计学
 
-+   [大数据、圣经密码和邦费罗尼](/2016/07/big-data-bible-codes-bonferroni.html)
++   大数据、圣经密码和邦费罗尼
 
-+   [15个用于数据科学的数学MOOCs](/2015/09/15-math-mooc-data-science.html)
++   15 个用于数据科学的数学 MOOCs
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [在生成式AI时代，数据科学家还需要吗？](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)
++   [在生成式 AI 时代，数据科学家还需要吗？](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)
 
 +   [低代码：开发者还需要吗？](https://www.kdnuggets.com/2022/04/low-code-developers-still-needed.html)
 
-+   [创建一个Web应用程序以使用Python从音频中提取主题](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
++   [创建一个 Web 应用程序以使用 Python 从音频中提取主题](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
 
-+   [回到基础第4周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础第 4 周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
-+   [KDnuggets新闻，7月6日：12个必备的数据科学VSCode…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode…](https://www.kdnuggets.com/2022/n27.html)

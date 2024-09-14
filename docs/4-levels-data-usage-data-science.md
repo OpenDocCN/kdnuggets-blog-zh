@@ -1,12 +1,12 @@
 # 数据科学中的 4 个数据使用层级
 
-> 原文：[https://www.kdnuggets.com/2018/07/4-levels-data-usage-data-science.html](https://www.kdnuggets.com/2018/07/4-levels-data-usage-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/07/4-levels-data-usage-data-science.html`](https://www.kdnuggets.com/2018/07/4-levels-data-usage-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 在 O'Reilly Data Show 播客的[最新一期](https://www.oreilly.com/ideas/teaching-and-implementing-data-science-and-ai-in-the-enterprise)中，Ben Lorica 采访了来自[DXC Technology](http://www.dxc.technology/)的嘉宾 Jerry Overton，讨论了数据从业者必须处理的一些非技术性问题，如隐私、安全和伦理，以及当前数据科学在商业中的状态。
 
-![图片](../Images/1f8b0aedb40a0a269fd53ec9c23d094f.png)
+![图片](img/1f8b0aedb40a0a269fd53ec9c23d094f.png)
 
 **图 1：** 利用数据科学积累竞争优势的过程（来源：[数据科学职业进阶](https://www.oreilly.com/data/free/going-pro-in-data-science.csp?intcmp=il-data-free-lp-awareness_new_site_jerry_overton_data_show_related_link)）
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -34,7 +34,7 @@ Ben 和 Jerry 讨论的一个话题是商业中数据使用的层级，或称“
 
 +   收集有关发生情况的信息
 
-+   收集的信息就是Overton称之为“数字数据排放”
++   收集的信息就是 Overton 称之为“数字数据排放”
 
 +   我们能够回答“是否存在问题？”这个问题
 
@@ -64,28 +64,28 @@ Ben 和 Jerry 讨论的一个话题是商业中数据使用的层级，或称“
 
 +   使人类能够做更有意义的工作，专注于业务**需要**人类做的事情
 
-![图片](../Images/1fec262b00e58dfca4ad42e02f1c271d.png)
+![图片](img/1fec262b00e58dfca4ad42e02f1c271d.png)
 
-**图2：** 企业数据科学（来源：[DXC Technology](http://www.dxc.technology/)，如[这里所见](https://www.oreilly.com/ideas/teaching-and-implementing-data-science-and-ai-in-the-enterprise)）
+**图 2：** 企业数据科学（来源：[DXC Technology](http://www.dxc.technology/)，如[这里所见](https://www.oreilly.com/ideas/teaching-and-implementing-data-science-and-ai-in-the-enterprise)）
 
 **相关信息**：
 
-+   [数据科学的什么、哪里和如何](/2018/06/what-where-how-data-science.html)
++   数据科学的什么、哪里和如何
 
-+   [数据科学：大多数人失败的4个原因](/2018/05/data-science-4-reasons-failing-deliver.html)
++   数据科学：大多数人失败的 4 个原因
 
-+   [人工智能如何改变你的业务](/2017/10/ways-ai-change-business.html)
++   人工智能如何改变你的业务
 
 ### 更多相关主题
 
-+   [免费的数据科学学习路线图：适合所有水平，IBM提供](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
++   [免费的数据科学学习路线图：适合所有水平，IBM 提供](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
 
-+   [以3个难度等级解释的大型语言模型](https://www.kdnuggets.com/large-language-models-explained-in-3-levels-of-difficulty)
++   [以 3 个难度等级解释的大型语言模型](https://www.kdnuggets.com/large-language-models-explained-in-3-levels-of-difficulty)
 
-+   [311呼叫中心表现：服务水平评分](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
++   [311 呼叫中心表现：服务水平评分](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
 
-+   [学习生成AI的免费亚马逊课程：适合所有水平](https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels)
++   [学习生成 AI 的免费亚马逊课程：适合所有水平](https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels)
 
-+   [NVIDIA的免费AI课程：适合所有水平](https://www.kdnuggets.com/free-ai-courses-from-nvidia-for-all-levels)
++   [NVIDIA 的免费 AI 课程：适合所有水平](https://www.kdnuggets.com/free-ai-courses-from-nvidia-for-all-levels)
 
 +   [停止学习数据科学来寻找目标，并找到目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

@@ -1,10 +1,10 @@
 # 哪些大数据、数据挖掘和数据科学工具常常一起使用？
 
-> 原文：[https://www.kdnuggets.com/2015/06/data-mining-data-science-tools-associations.html](https://www.kdnuggets.com/2015/06/data-mining-data-science-tools-associations.html)
+> 原文：[`www.kdnuggets.com/2015/06/data-mining-data-science-tools-associations.html`](https://www.kdnuggets.com/2015/06/data-mining-data-science-tools-associations.html)
 
-由 **[Gregory Piatetsky](https://www.kdnuggets.com/author/gregory-piatetsky "Posts by Gregory Piatetsky")** 撰写，发表于 2015 年 6 月 11 日，内容涉及 [Apache Spark](https://www.kdnuggets.com/tag/apache-spark)、[数据挖掘软件](https://www.kdnuggets.com/tag/data-mining-software)、[Excel](https://www.kdnuggets.com/tag/excel)、[Hadoop](https://www.kdnuggets.com/tag/hadoop)、[Knime](https://www.kdnuggets.com/tag/knime)、[调查](https://www.kdnuggets.com/tag/poll)、[Python](https://www.kdnuggets.com/tag/python)、[R](https://www.kdnuggets.com/tag/r)、[RapidMiner](https://www.kdnuggets.com/tag/rapidminer)、[SQL](https://www.kdnuggets.com/tag/sql)![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+由 **[Gregory Piatetsky](https://www.kdnuggets.com/author/gregory-piatetsky "Posts by Gregory Piatetsky")** 撰写，发表于 2015 年 6 月 11 日，内容涉及 [Apache Spark](https://www.kdnuggets.com/tag/apache-spark)、[数据挖掘软件](https://www.kdnuggets.com/tag/data-mining-software)、[Excel](https://www.kdnuggets.com/tag/excel)、[Hadoop](https://www.kdnuggets.com/tag/hadoop)、[Knime](https://www.kdnuggets.com/tag/knime)、[调查](https://www.kdnuggets.com/tag/poll)、[Python](https://www.kdnuggets.com/tag/python)、[R](https://www.kdnuggets.com/tag/r)、[RapidMiner](https://www.kdnuggets.com/tag/rapidminer)、[SQL](https://www.kdnuggets.com/tag/sql)![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-*（与 Shashank Iyer 共同撰写。）* 我们使用了 [2015 KDnuggets 数据挖掘软件调查](/2015/05/poll-r-rapidminer-python-big-data-spark.html) 的匿名数据，并对前 20 个工具进行了关联分析。数据集包含 2759 票，每票为一个或多个工具。在这篇文章的底部有一个链接可以下载匿名数据集。
+*（与 Shashank Iyer 共同撰写。）* 我们使用了 2015 KDnuggets 数据挖掘软件调查 的匿名数据，并对前 20 个工具进行了关联分析。数据集包含 2759 票，每票为一个或多个工具。在这篇文章的底部有一个链接可以下载匿名数据集。
 
 我们使用了一种 Apriori 算法的版本来分析结果。
 
@@ -30,13 +30,13 @@ Spark 和 Hadoop 的提升度最高，达到了 3.31，其次是 Spark 和 Pytho
 
 最低的关联度出现在 SAS base 和 KNIME（0.51），SAS base 和 RapidMiner（0.52），以及 KNIME 和 RapidMiner（0.56）之间。
 
-![前 10 大数据挖掘工具热图](../Images/0484f94fa4fb39691a033ad2d2cb32b4.png)
+![前 10 大数据挖掘工具热图](img/0484f94fa4fb39691a033ad2d2cb32b4.png)
 
 图 1：前 10 大数据挖掘工具的关联矩阵热图
 
 计算了一个类似的热图（图 2），显示了开源工具和商业工具之间的各种关联。
 
-![关联——开源与商业数据挖掘工具](../Images/1906236195dab0204f36f96f75f95347.png)
+![关联——开源与商业数据挖掘工具](img/1906236195dab0204f36f96f75f95347.png)
 
 图 2: 开源工具与商业工具之间的混淆矩阵热图
 
@@ -44,7 +44,7 @@ Spark 和 Hadoop 的提升度最高，达到了 3.31，其次是 Spark 和 Pytho
 
 每个节点代表一个前 20 名工具，节点的颜色为红色：免费/开源工具，绿色：商业工具，紫红色：Hadoop/大数据工具。节点大小根据每个工具获得的投票百分比而变化。边缘大致分为两个部分——低关联到高关联，这在从浅粉色到深紫色的陡色渐变中显示。此分段还显示在每条边的权重中，较厚的边表示高关联，较细的边表示低关联。
 
-[![前 20 名数据挖掘工具关联网络](../Images/4ec6e4676db17e332e02fd141ecca899.png)](/wp-content/uploads/associations-top-20-data-mining-tools-network-large.jpg)
+![前 20 名数据挖掘工具关联网络](img/associations-top-20-data-mining-tools-network-large.jpg)
 
 图 3: 最受欢迎的 20 个工具的网络图（点击图表以获取更高分辨率的图像）
 
@@ -120,7 +120,7 @@ Spark 和 Hadoop 的提升度最高，达到了 3.31，其次是 Spark 和 Pytho
 | Weka | 1.30 |
 | Microsoft SQL Server | 1.29 |
 
-这是[匿名数据集](/aps/sw15-ord-n-votes.csv)的链接（CSV 格式），包含 3 列
+这是匿名数据集的链接（CSV 格式），包含 3 列
 
 +   ord: 投票顺序
 
@@ -134,11 +134,11 @@ Spark 和 Hadoop 的提升度最高，达到了 3.31，其次是 Spark 和 Pytho
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

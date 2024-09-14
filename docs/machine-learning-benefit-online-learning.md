@@ -1,6 +1,6 @@
 # 机器学习如何使在线学习受益
 
-> 原文：[https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html](https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html)
+> 原文：[`www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html`](https://www.kdnuggets.com/2022/12/machine-learning-benefit-online-learning.html)
 
 从手机到手表再到电视，我们周围的一切都变得越来越[‘智能’](https://www.forbes.com/sites/forbestechcouncil/2022/01/12/smart-everything-industries-will-be-more-intelligent-than-ever-in-2022/?sh=5eac79cf7878)。教育也不落后。
 
@@ -24,11 +24,11 @@
 
 基于所有过去的评分数据、课程历史和能力水平，机器学习可以帮助为每位学习者制定个性化报告。这些报告概述了每位学生的能力所在领域，以及他们需要改进的领域。通过这种方式，算法以公平和无偏见的方式评估学习者的知识差距。一旦识别出这些差距，学生就可以着手弥补它们。
 
-利用机器学习理解技能差距和识别风险学习者，可以帮助机构以及其学生。一份[Mckinsey报告](https://www.mckinsey.com/industries/education/our-insights/using-machine-learning-to-improve-student-success-in-higher-education)研究了一所在线大学在疫情期间应用机器学习模型来降低流失率的结果。这涉及分析十年的数据，以了解决定学生继续学习可能性的关键特征。
+利用机器学习理解技能差距和识别风险学习者，可以帮助机构以及其学生。一份[Mckinsey 报告](https://www.mckinsey.com/industries/education/our-insights/using-machine-learning-to-improve-student-success-in-higher-education)研究了一所在线大学在疫情期间应用机器学习模型来降低流失率的结果。这涉及分析十年的数据，以了解决定学生继续学习可能性的关键特征。
 
 一旦验证初始模型在预测流失率方面比基准模型更成功，该模型被修改并应用于当前学生。结果模型提供了五种特征类别的学生详细见解，这些学生可能会中断学习。这五种类型中只有两种可以通过线性规则识别。这项研究证明了在高等教育中利用机器学习的价值，结果可以在下面的图像中看到：
 
-![机器学习如何有利于在线学习](../Images/c86c6cc38e58a38f3f30533585603500.png)
+![机器学习如何有利于在线学习](img/c86c6cc38e58a38f3f30533585603500.png)
 
 处于流失风险中的学生：麦肯锡
 
@@ -46,13 +46,13 @@
 
 聊天机器人是智能软件，可以对学生提出的问题给出即时答案。在某些情况下，这些聊天机器人被编程为回答讲师已预见的问题，或者可以用来向学生推荐与他们问题相关的有用链接。
 
-聊天机器人作为随时可用的个人导师，是融入互动学习的一个非常有用的工具。在线学习有时可能会令人感到孤立，而拥有一个AI聊天机器人可以带来显著的变化。
+聊天机器人作为随时可用的个人导师，是融入互动学习的一个非常有用的工具。在线学习有时可能会令人感到孤立，而拥有一个 AI 聊天机器人可以带来显著的变化。
 
 聊天机器人还在指导潜在学生和引导他们寻找相关资源方面发挥了重要作用。许多新生对直接联系教职员工犹豫不决，或者不知道联系哪个部门。在许多情况下，这些是没有正确指导的第一代大学生。
 
-虚拟聊天助手可以帮助打破困惑和不确定性，正如Pounce，乔治亚州立大学的聊天机器人所证明的那样，它于2016年首次部署。该大学以前在夏季期间会失去多达20%的新生，这种现象被称为“夏季融化”。这主要是由于对财政援助的缺乏了解。Pounce帮助[减少了20%的夏季融化](https://files.eric.ed.gov/fulltext/EJ1224780.pdf) 。
+虚拟聊天助手可以帮助打破困惑和不确定性，正如 Pounce，乔治亚州立大学的聊天机器人所证明的那样，它于 2016 年首次部署。该大学以前在夏季期间会失去多达 20%的新生，这种现象被称为“夏季融化”。这主要是由于对财政援助的缺乏了解。Pounce 帮助[减少了 20%的夏季融化](https://files.eric.ed.gov/fulltext/EJ1224780.pdf) 。
 
-![机器学习如何使在线学习受益](../Images/aabfc208ed187c1a0948369cd7a92e5e.png)
+![机器学习如何使在线学习受益](img/aabfc208ed187c1a0948369cd7a92e5e.png)
 
 Pounce: 乔治亚州立大学的聊天机器人
 
@@ -68,7 +68,7 @@ Pounce: 乔治亚州立大学的聊天机器人
 
 正如你所见，机器学习具有改善学习体验的潜力。现代教育方法理解学习者，把他们置于学习体验的中心，并且赋予他们塑造自己学习旅程的权力。机器学习提供了这一切及更多。
 
-尽管这仍处于早期阶段，但在学习与发展（L&D）中实施机器学习是值得探索的，无论你是K12教育机构、高等教育机构，还是寻求简化员工培训过程的公司。机器学习不仅对学习者、讲师和管理员都有好处，而且也是一种出色的投资，未来还可能证明其具有成本效益。
+尽管这仍处于早期阶段，但在学习与发展（L&D）中实施机器学习是值得探索的，无论你是 K12 教育机构、高等教育机构，还是寻求简化员工培训过程的公司。机器学习不仅对学习者、讲师和管理员都有好处，而且也是一种出色的投资，未来还可能证明其具有成本效益。
 
 **[Maira Afzal](https://www.linkedin.com/in/maira-afzal-78034b108)** 是 [Edly](https://edly.io?utm_source=utm-link-generator&utm_medium=kd nuggets&utm_campaign=) 的内容写作专家，该公司是一家教育技术解决方案提供商及 Open edX 合作伙伴。如需联系，请发送邮件至 hello@edly.io。
 
@@ -76,24 +76,24 @@ Pounce: 乔治亚州立大学的聊天机器人
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关话题
 
-+   [企业如何从机器学习中获益的6种方式](https://www.kdnuggets.com/2022/08/6-ways-businesses-benefit-machine-learning.html)
++   [企业如何从机器学习中获益的 6 种方式](https://www.kdnuggets.com/2022/08/6-ways-businesses-benefit-machine-learning.html)
 
 +   [如何利用机器学习自动标注数据](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)
 
 +   [每位工程师都应该且可以学习机器学习](https://www.kdnuggets.com/2022/06/corise-every-engineer-learn-machine-learning.html)
 
-+   [机器学习与大脑的不同 第5部分：生物神经元…](https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html)
++   [机器学习与大脑的不同 第五部分：生物神经元…](https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html)
 
-+   [7种你不能错过的机器学习算法](https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss)
++   [7 种你不能错过的机器学习算法](https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss)
 
-+   [2024年你可以参加的5个顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
++   [2024 年你可以参加的 5 个顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)

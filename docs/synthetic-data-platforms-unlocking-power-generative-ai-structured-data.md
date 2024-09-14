@@ -1,8 +1,8 @@
 # 合成数据平台：解锁生成性 AI 对结构化数据的力量
 
-> 原文：[https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
+> 原文：[`www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html`](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
 
-![合成数据平台：解锁生成性 AI 对结构化数据的力量](../Images/41df866de53a1c796dd3b517b32012d5.png)
+![合成数据平台：解锁生成性 AI 对结构化数据的力量](img/41df866de53a1c796dd3b517b32012d5.png)
 
 [图像来源：GarryKillian](https://www.freepik.com/free-vector/big-data-background_9136685.htm#page=2&query=Synthetic%20Data&position=22&from_view=search&track=ais) 由 Freepik 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -28,19 +28,19 @@
 
 1.  **生成机密数据：** 银行、保险、医疗甚至电信中的数据可能极其敏感。接触这些数据通常需要为每个项目获得特殊权限。合成数据生成可以解锁这些数据资产，并用于创建特征、理解用户行为、测试模型和探索新想法。
 
-1.  **重新平衡数据：** 高度不平衡的数据可以通过合成数据生成器有效且轻松地重新平衡。这比简单的过采样方法效果更好，并且在高不平衡情况下，如欺诈模式，它可以优于更复杂的方法，如SMOTE。
+1.  **重新平衡数据：** 高度不平衡的数据可以通过合成数据生成器有效且轻松地重新平衡。这比简单的过采样方法效果更好，并且在高不平衡情况下，如欺诈模式，它可以优于更复杂的方法，如 SMOTE。
 
 1.  **填补缺失的数据点：** 在处理数据时，空值是一个令人烦恼的问题。用有意义的合成数据点填补这些空白可以使样本阅读成为一个更有信息量的过程。
 
 # 合成数据是如何生成的？
 
-生成式AI模型在合成数据生产中至关重要，因为它们是专门在原始数据集上训练的，可以复制其特征和统计属性。生成式AI模型，如生成对抗网络（GANs）或变分自编码器（VAEs），理解底层数据并生成逼真且具有代表性的合成实例。
+生成式 AI 模型在合成数据生产中至关重要，因为它们是专门在原始数据集上训练的，可以复制其特征和统计属性。生成式 AI 模型，如生成对抗网络（GANs）或变分自编码器（VAEs），理解底层数据并生成逼真且具有代表性的合成实例。
 
 目前有许多开源和闭源的合成数据生成器，有些比其他的更好。在评估合成数据生成器的性能时，重要的是要关注两个方面：准确性和隐私。准确性需要高，但合成数据不应过度拟合原始数据，原始数据中的极端值需要以不危害数据主体隐私的方式处理。一些合成数据生成器提供自动化的隐私和准确性检查 - 先从这些开始是个好主意。[MOSTLY AI 的合成数据生成器](https://mostly.ai/synthetic-data-platform/generate-synthetic-data)提供了免费的这一服务 - 任何人只需用电子邮件地址就可以注册一个账户。
 
 ## 合成数据的好处
 
-合成数据按定义不是个人数据。因此，它免于GDPR和类似的隐私法律，使数据科学家能够自由探索数据集的合成版本。合成数据也是匿名化行为数据而不破坏模式和相关性的最佳工具之一。这两种特性使它在使用个人数据的所有情况下特别有用 - 从简单的分析到训练复杂的机器学习模型。
+合成数据按定义不是个人数据。因此，它免于 GDPR 和类似的隐私法律，使数据科学家能够自由探索数据集的合成版本。合成数据也是匿名化行为数据而不破坏模式和相关性的最佳工具之一。这两种特性使它在使用个人数据的所有情况下特别有用 - 从简单的分析到训练复杂的机器学习模型。
 
 然而，隐私并不是唯一的应用场景。合成数据生成还可以用于以下用途：
 
@@ -58,19 +58,19 @@
 
 为了生成合成数据，我们可以使用市场上提供的不同工具。让我们来探讨一些这些工具并了解它们的工作原理。
 
-1.  **MOSTLY AI：** [MOSTLY AI](https://mostly.ai/)是结构化合成数据创建的先驱领导者。它使任何人都能生成高质量、类似生产的数据，用于分析、AI/ML开发和数据探索。数据团队可以利用它生成、修改和共享数据集，从而克服使用真实、匿名或虚拟数据的伦理和实际挑战。
+1.  **MOSTLY AI：** [MOSTLY AI](https://mostly.ai/)是结构化合成数据创建的先驱领导者。它使任何人都能生成高质量、类似生产的数据，用于分析、AI/ML 开发和数据探索。数据团队可以利用它生成、修改和共享数据集，从而克服使用真实、匿名或虚拟数据的伦理和实际挑战。
 
-1.  **SDV：** 最受欢迎的[开源Python库](https://pypi.org/project/sdv/#:~:text=The%20Synthetic%20Data%20Vault%20(SDV,emulate%20them%20in%20synthetic%20data.)，用于合成数据生成。虽然不是最复杂的工具，但对于高精度要求不高的简单使用场景，它能够完成任务。
+1.  **SDV：** 最受欢迎的[开源 Python 库](https://pypi.org/project/sdv/#:~:text=The%20Synthetic%20Data%20Vault%20(SDV,emulate%20them%20in%20synthetic%20data.)，用于合成数据生成。虽然不是最复杂的工具，但对于高精度要求不高的简单使用场景，它能够完成任务。
 
-1.  **YData：** 如果你想在Azure或AWS市场尝试合成数据生成，[YData的生成器](https://ydata.ai/ydata-fabric-free-trial)在这两个平台上均可用，提供一种符合GDPR的方式来生成用于AI和机器学习模型的数据。
+1.  **YData：** 如果你想在 Azure 或 AWS 市场尝试合成数据生成，[YData 的生成器](https://ydata.ai/ydata-fabric-free-trial)在这两个平台上均可用，提供一种符合 GDPR 的方式来生成用于 AI 和机器学习模型的数据。
 
 关于合成数据工具和公司的综合[列表](https://syntheticdata.carrd.co/)，这里有一个精选的合成数据类型列表。
 
-现在我们已经讨论了使用上述工具和库进行合成数据生成的优缺点，接下来让我们看看如何使用Mostly AI，这是市场上最好的工具之一，并且易于使用。
+现在我们已经讨论了使用上述工具和库进行合成数据生成的优缺点，接下来让我们看看如何使用 Mostly AI，这是市场上最好的工具之一，并且易于使用。
 
 **MOSTLY AI**是一个合成数据创建平台，帮助企业生成高质量、隐私保护的合成数据，用于机器学习、高级分析、软件测试和数据共享等多种应用场景。它使用专有的人工智能驱动算法生成合成数据，该算法学习原始数据的统计特征，如相关性、分布和属性。这使得**MOSTLY AI**能够生成在统计上代表实际数据的合成数据，同时保护数据主体的隐私。
 
-它的合成数据不仅是私密的，而且使用简单，可以在几分钟内生成。该平台拥有一个易于使用的界面，采用生成性AI技术，允许组织输入现有数据，选择适当的输出格式，并在几秒钟内生成合成数据。它的合成数据是一个对组织非常有用的工具，能够在保护数据隐私的同时用于多种目的。该技术易于使用，并能迅速创建高质量、统计上具有代表性的合成数据。
+它的合成数据不仅是私密的，而且使用简单，可以在几分钟内生成。该平台拥有一个易于使用的界面，采用生成性 AI 技术，允许组织输入现有数据，选择适当的输出格式，并在几秒钟内生成合成数据。它的合成数据是一个对组织非常有用的工具，能够在保护数据隐私的同时用于多种目的。该技术易于使用，并能迅速创建高质量、统计上具有代表性的合成数据。
 
 MOSTLY AI 提供的合成数据有多种格式，包括 CSV、JSON 和 XML。它可以与多个软件程序一起使用，包括 SAS、R 和 Python。此外，MOSTLY AI 提供了一些工具和服务，如数据生成器、数据探索器和数据共享平台，以帮助组织使用合成数据。
 
@@ -78,15 +78,15 @@ MOSTLY AI 提供的合成数据有多种格式，包括 CSV、JSON 和 XML。它
 
 [MOSTLY AI：合成数据生成与知识中心 - MOSTLY AI](https://mostly.ai/)
 
-![合成数据平台：解锁生成性 AI 在结构化数据中的力量](../Images/954cf53238526ee7cdc1736e243d8a7e.png)
+![合成数据平台：解锁生成性 AI 在结构化数据中的力量](img/954cf53238526ee7cdc1736e243d8a7e.png)
 
 一旦创建了账户，我们可以看到主页，在那里我们可以选择与数据生成相关的不同选项。
 
-![合成数据平台：解锁生成性 AI 在结构化数据中的力量](../Images/2fc95c423d9a581691391fe901f6e75c.png)
+![合成数据平台：解锁生成性 AI 在结构化数据中的力量](img/2fc95c423d9a581691391fe901f6e75c.png)
 
 如上图所示，在主页上，我们可以上传原始数据集以生成合成数据，或者为了尝试，我们可以使用示例数据。我们可以根据需要上传数据。
 
-![合成数据平台：解锁生成性 AI 在结构化数据中的力量](../Images/7133ad54b0c37e6acff832b5a35ccb66.png)
+![合成数据平台：解锁生成性 AI 在结构化数据中的力量](img/7133ad54b0c37e6acff832b5a35ccb66.png)
 
 如上图所示，一旦我们上传数据，我们可以根据需要对生成的列进行更改，并设置与数据、训练和输出相关的不同设置。
 
@@ -102,7 +102,7 @@ MOSTLY AI 提供的合成数据有多种格式，包括 CSV、JSON 和 XML。它
 
 +   [揭示 CTGAN 的潜力：利用生成性 AI 进行…](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
 
-+   [揭示Meta的Llama 2的力量：生成式AI的飞跃？](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)
++   [揭示 Meta 的 Llama 2 的力量：生成式 AI 的飞跃？](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)
 
 +   [高保真合成数据：适用于数据工程师和数据科学家的工具](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)
 

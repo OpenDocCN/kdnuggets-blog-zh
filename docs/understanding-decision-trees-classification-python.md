@@ -1,12 +1,12 @@
 # 理解 Python 中的决策树分类
 
-> 原文：[https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html](https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html)
+> 原文：[`www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html`](https://www.kdnuggets.com/2019/08/understanding-decision-trees-classification-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学家**
 
-![图示](../Images/1279716ceb53cae5f0ee4c396b8bdbf3.png)
+![图示](img/1279716ceb53cae5f0ee4c396b8bdbf3.png)
 
 本教程将详细讲解决策树的工作原理。
 
@@ -32,39 +32,39 @@
 
 分类树本质上是一系列问题，用于分配分类。下图是一个在 IRIS 数据集（花卉种类）上训练的分类树。根节点（棕色）和决策节点（蓝色）包含的问题会分裂成子节点。根节点就是最顶层的决策节点。换句话说，它是你开始遍历分类树的地方。叶节点（绿色），也称为终端节点，是不会再分裂成更多节点的节点。叶节点是通过多数投票来分配类别的地方。
 
-![图示](../Images/65a3459e504df08826b476c86386cd7f.png)
+![图示](img/65a3459e504df08826b476c86386cd7f.png)
 
 分类树对三种花卉种类（IRIS 数据集）的分类
 
 **如何使用分类树**
 
-使用分类树时，从根节点（棕色）开始，遍历树直到到达叶子（终端）节点。使用下面图中的分类树，假设你有一朵花，花瓣长度为4.5 cm，你想对其进行分类。从根节点开始，你首先会问“花瓣长度（cm）≤ 2.45”？长度大于2.45，因此这个问题为假。继续到下一个决策节点，问“花瓣长度（cm）≤ 4.95”？这是对的，所以你可以预测花的种类为versicolor。这只是一个例子。
+使用分类树时，从根节点（棕色）开始，遍历树直到到达叶子（终端）节点。使用下面图中的分类树，假设你有一朵花，花瓣长度为 4.5 cm，你想对其进行分类。从根节点开始，你首先会问“花瓣长度（cm）≤ 2.45”？长度大于 2.45，因此这个问题为假。继续到下一个决策节点，问“花瓣长度（cm）≤ 4.95”？这是对的，所以你可以预测花的种类为 versicolor。这只是一个例子。
 
-![](../Images/1279716ceb53cae5f0ee4c396b8bdbf3.png)
+![](img/1279716ceb53cae5f0ee4c396b8bdbf3.png)
 
 **分类树是如何生长的？（非数学版本）**
 
-分类树学习的是一系列的“如果…那么…”问题，每个问题涉及一个特征和一个拆分点。看看下面的部分树（A），问题“花瓣长度（cm）≤ 2.45”根据某个值（在此例中为2.45）将数据拆分为两个分支。节点之间的值称为拆分点。一个好的拆分点值（即产生最大信息增益的值）是能够很好地将一个类别与其他类别分开的值。看下面的图B，拆分点左侧的所有点被分类为setosa，而拆分点右侧的所有点被分类为versicolor。
+分类树学习的是一系列的“如果…那么…”问题，每个问题涉及一个特征和一个拆分点。看看下面的部分树（A），问题“花瓣长度（cm）≤ 2.45”根据某个值（在此例中为 2.45）将数据拆分为两个分支。节点之间的值称为拆分点。一个好的拆分点值（即产生最大信息增益的值）是能够很好地将一个类别与其他类别分开的值。看下面的图 B，拆分点左侧的所有点被分类为 setosa，而拆分点右侧的所有点被分类为 versicolor。
 
-![](../Images/d3c64db5d8c0282bacb3b24928fa1ad4.png)
+![](img/d3c64db5d8c0282bacb3b24928fa1ad4.png)
 
-图中显示所有38个点的setosa分类都正确。它是一个纯节点。分类树不会在纯节点上进行拆分。这会导致没有进一步的信息增益。然而，非纯节点可以进一步拆分。注意图B的右侧显示许多点被错误分类为versicolor。换句话说，它包含了两种不同类别的点（virginica和versicolor）。分类树是一个贪婪算法，这意味着它默认会继续拆分直到得到一个纯节点。算法再次为非纯节点选择最佳的拆分点（我们将在下一节中深入探讨数学方法）。
+图中显示所有 38 个点的 setosa 分类都正确。它是一个纯节点。分类树不会在纯节点上进行拆分。这会导致没有进一步的信息增益。然而，非纯节点可以进一步拆分。注意图 B 的右侧显示许多点被错误分类为 versicolor。换句话说，它包含了两种不同类别的点（virginica 和 versicolor）。分类树是一个贪婪算法，这意味着它默认会继续拆分直到得到一个纯节点。算法再次为非纯节点选择最佳的拆分点（我们将在下一节中深入探讨数学方法）。
 
-![](../Images/80f24154f01eb353c78f83d847b112c7.png)
+![](img/80f24154f01eb353c78f83d847b112c7.png)
 
-上面的图像中，树的最大深度为2。树的深度是衡量一棵树在做出预测之前能进行多少次拆分的指标。这个过程可以继续进行更多的拆分，直到树尽可能纯净。许多重复这一过程的问题是，这可能会导致一棵非常深的分类树，拥有许多节点。这通常会导致对训练数据集的过拟合。幸运的是，大多数分类树实现允许你控制树的最大深度，从而减少过拟合。例如，Python的scikit-learn允许你预剪枝决策树。换句话说，你可以设置最大深度来停止决策树超过某个深度。要直观理解最大深度，你可以查看下面的图像。
+上面的图像中，树的最大深度为 2。树的深度是衡量一棵树在做出预测之前能进行多少次拆分的指标。这个过程可以继续进行更多的拆分，直到树尽可能纯净。许多重复这一过程的问题是，这可能会导致一棵非常深的分类树，拥有许多节点。这通常会导致对训练数据集的过拟合。幸运的是，大多数分类树实现允许你控制树的最大深度，从而减少过拟合。例如，Python 的 scikit-learn 允许你预剪枝决策树。换句话说，你可以设置最大深度来停止决策树超过某个深度。要直观理解最大深度，你可以查看下面的图像。
 
-![图](../Images/c15dd3aa17a5097083f415558381cd2b.png)
+![图](img/c15dd3aa17a5097083f415558381cd2b.png)
 
-不同深度的分类树在IRIS数据集上的拟合情况。
+不同深度的分类树在 IRIS 数据集上的拟合情况。
 
 ### 选择标准
 
-![](../Images/0f29aac1bae7f47ec6e8e678787e5e36.png)
+![](img/0f29aac1bae7f47ec6e8e678787e5e36.png)
 
-本节回答了信息增益以及Gini和熵这两个标准的计算方法。
+本节回答了信息增益以及 Gini 和熵这两个标准的计算方法。
 
-本节的重点是理解在分类树上对根节点/决策节点的良好分割点。决策树会在特征和相应的分割点上进行分裂，以获得给定标准（本例中的Gini或熵）的最大信息增益（IG）。大致上，我们可以将信息增益定义为
+本节的重点是理解在分类树上对根节点/决策节点的良好分割点。决策树会在特征和相应的分割点上进行分裂，以获得给定标准（本例中的 Gini 或熵）的最大信息增益（IG）。大致上，我们可以将信息增益定义为
 
 ```py
 IG = information before splitting (parent) — information after splitting (children)
@@ -72,37 +72,37 @@ IG = information before splitting (parent) — information after splitting (chil
 
 为了更清楚地理解父节点和子节点，请查看下方的决策树。
 
-![](../Images/10124ea94f8e023bed0fe6a75d155971.png)
+![](img/10124ea94f8e023bed0fe6a75d155971.png)
 
 更为恰当的信息增益公式如下。
 
-![](../Images/6a295347c0ad85b49c81d1feed0af966.png)
+![](img/6a295347c0ad85b49c81d1feed0af966.png)
 
 由于分类树有二元分裂，因此公式可以简化为如下公式。
 
-![](../Images/08e00b983acb7d02e836bad0651867a6.png)
+![](img/08e00b983acb7d02e836bad0651867a6.png)
 
-两个常见的`I`标准，用于测量节点的 impurity 是Gini指数和熵。
+两个常见的`I`标准，用于测量节点的 impurity 是 Gini 指数和熵。
 
-![](../Images/aed1afe2dbc527a99c2c1a89d7946119.png)
+![](img/aed1afe2dbc527a99c2c1a89d7946119.png)
 
-为了更好地理解这些公式，下图展示了如何使用Gini标准计算决策树的信息增益。
+为了更好地理解这些公式，下图展示了如何使用 Gini 标准计算决策树的信息增益。
 
-![](../Images/8d6d9a72ce75262c2c562dc2029a8bdc.png)
+![](img/8d6d9a72ce75262c2c562dc2029a8bdc.png)
 
 下图展示了如何计算决策树的熵信息增益。
 
-![](../Images/717e47477f736322937f65a4002364b2.png)
+![](img/717e47477f736322937f65a4002364b2.png)
 
-我不打算深入探讨这一点，因为需要指出的是，不同的 impurity 测量（Gini指数和熵）[通常会产生相似的结果](https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf)。下图展示了Gini指数和熵是非常相似的 impurity 标准。我猜测Gini作为Scikit-learn中的默认值之一的原因可能是熵的计算可能稍慢（因为它使用了对数）。
+我不打算深入探讨这一点，因为需要指出的是，不同的 impurity 测量（Gini 指数和熵）[通常会产生相似的结果](https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf)。下图展示了 Gini 指数和熵是非常相似的 impurity 标准。我猜测 Gini 作为 Scikit-learn 中的默认值之一的原因可能是熵的计算可能稍慢（因为它使用了对数）。
 
-![图](../Images/2b36fd282c42280a9cc175015eb65141.png)
+![图](img/2b36fd282c42280a9cc175015eb65141.png)
 
-不同的 impurity 测量（Gini指数和熵）[通常会产生相似的结果](https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf)。感谢[Data Science StackExchange](https://datascience.stackexchange.com/questions/10228/gini-impurity-vs-entropy)和[Sebastian Raschka](https://twitter.com/rasbt)对本图的启发。
+不同的 impurity 测量（Gini 指数和熵）[通常会产生相似的结果](https://www.unine.ch/files/live/sites/imi/files/shared/documents/papers/Gini_index_fulltext.pdf)。感谢[Data Science StackExchange](https://datascience.stackexchange.com/questions/10228/gini-impurity-vs-entropy)和[Sebastian Raschka](https://twitter.com/rasbt)对本图的启发。
 
-在完成本节之前，我需要指出，存在各种不同的决策树算法，它们彼此有所不同。一些更受欢迎的算法包括ID3、C4.5和CART。Scikit-learn使用了[CART算法的优化版本](http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart)。你可以在[这里](http://scikit-learn.org/stable/modules/tree.html#complexity)了解其时间复杂度。
+在完成本节之前，我需要指出，存在各种不同的决策树算法，它们彼此有所不同。一些更受欢迎的算法包括 ID3、C4.5 和 CART。Scikit-learn 使用了[CART 算法的优化版本](http://scikit-learn.org/stable/modules/tree.html#tree-algorithms-id3-c4-5-c5-0-and-cart)。你可以在[这里](http://scikit-learn.org/stable/modules/tree.html#complexity)了解其时间复杂度。
 
-### 使用Python的分类树
+### 使用 Python 的分类树
 
 之前的部分讲述了分类树的理论。学习如何在编程语言中制作决策树的一个原因是，处理数据可以帮助理解算法。
 
@@ -117,7 +117,7 @@ df = pd.DataFrame(data.data, columns=data.feature_names)
 df['target'] = data.target
 ```
 
-![图示](../Images/8f7cea2bde50ecfe1af75c5983f582d5.png)
+![图示](img/8f7cea2bde50ecfe1af75c5983f582d5.png)
 
 原始 Pandas df（特征 + 目标）
 
@@ -129,7 +129,7 @@ df['target'] = data.target
 X_train, X_test, Y_train, Y_test = train_test_split(df[data.feature_names], df['target'], random_state=0)
 ```
 
-![图示](../Images/7d3764ca625fb8c22e62cdca6532a91c.png)
+![图示](img/7d3764ca625fb8c22e62cdca6532a91c.png)
 
 图片中的颜色表示数据框 df 的数据在这个特定的训练测试分割中属于哪个变量（X_train, X_test, Y_train, Y_test）。
 
@@ -205,34 +205,34 @@ accuracy = []for depth in max_depth_range:
 
 由于下面的图表显示，当参数 `max_depth` 大于或等于 3 时，模型的准确率最佳，因此选择 `max_depth = 3` 的最简单模型可能是最好的选择。
 
-![图](../Images/6b374458fabce5b952a6e233f7e6a67e.png)
+![图](img/6b374458fabce5b952a6e233f7e6a67e.png)
 
 我选择`max_depth =3`，因为它似乎是一个准确的模型且不是最复杂的。
 
-需要记住的是，`max_depth`并不等于决策树的深度。`max_depth`是对决策树进行预剪枝的一种方法。换句话说，如果树在某个深度已经尽可能纯净，它将不会继续分裂。下图显示了`max_depth`为3、4和5的决策树。请注意，`max_depth`为4和5的树是相同的。它们的深度都是4。
+需要记住的是，`max_depth`并不等于决策树的深度。`max_depth`是对决策树进行预剪枝的一种方法。换句话说，如果树在某个深度已经尽可能纯净，它将不会继续分裂。下图显示了`max_depth`为 3、4 和 5 的决策树。请注意，`max_depth`为 4 和 5 的树是相同的。它们的深度都是 4。
 
-![图](../Images/911049a033b2de4b61830401eb81b236.png)
+![图](img/911049a033b2de4b61830401eb81b236.png)
 
 请注意，我们有两个完全相同的树。
 
 如果你想知道你训练的决策树的深度，可以使用`get_depth`方法。此外，你还可以使用`get_n_leaves`方法获取训练决策树的叶节点数量。
 
-虽然本教程涵盖了更改选择标准（Gini指数、熵等）和树的`max_depth`，但请记住，你还可以调整节点分裂的最小样本数（`min_samples_leaf`）、最大叶节点数（`max_leaf_nodes`）等。
+虽然本教程涵盖了更改选择标准（Gini 指数、熵等）和树的`max_depth`，但请记住，你还可以调整节点分裂的最小样本数（`min_samples_leaf`）、最大叶节点数（`max_leaf_nodes`）等。
 
 ### 特征重要性
 
-分类树的一个优点是相对容易解释。scikit-learn中的分类树允许你计算特征重要性，即由于特征分裂而使gini指数或熵减少的总量。scikit-learn为每个特征输出一个0到1之间的数字。所有特征的重要性值都被归一化为总和为1。以下代码显示了决策树模型中每个特征的重要性。
+分类树的一个优点是相对容易解释。scikit-learn 中的分类树允许你计算特征重要性，即由于特征分裂而使 gini 指数或熵减少的总量。scikit-learn 为每个特征输出一个 0 到 1 之间的数字。所有特征的重要性值都被归一化为总和为 1。以下代码显示了决策树模型中每个特征的重要性。
 
 ```py
 importances = pd.DataFrame({'feature':X_train.columns,'importance':np.round(clf.feature_importances_,3)})
 importances = importances.sort_values('importance',ascending=False)
 ```
 
-![图](../Images/f2d0662304902618333fa4e671964ef5.png)
+![图](img/f2d0662304902618333fa4e671964ef5.png)
 
 在上面的例子中（针对某个特定的鸢尾花训练测试分割），花瓣宽度具有最高的特征重要性权重。我们可以通过查看相应的决策树来确认这一点。
 
-![图](../Images/3f8f902adbb1d014e099e449f749cf78.png)
+![图](img/3f8f902adbb1d014e099e449f749cf78.png)
 
 该决策树分裂的只有两个特征，即花瓣宽度（cm）和花瓣长度（cm），
 
@@ -240,7 +240,7 @@ importances = importances.sort_values('importance',ascending=False)
 
 ### 总结
 
-尽管这篇文章只讨论了用于分类的决策树，但你可以查看我另一篇文章《决策树用于回归（Python）》。**C**lassification **a**nd **R**egression **T**rees (CART) 是一种相对较旧的技术（1984年），是更复杂技术的基础。决策树的主要弱点之一是它们通常不是最准确的算法。这部分是因为决策树是一种高方差算法，这意味着训练数据中的不同分裂可以导致非常不同的树。如果你对教程有任何问题或想法，请随时在下面的评论中或通过 [Twitter](https://twitter.com/GalarnykMichael) 联系我。
+尽管这篇文章只讨论了用于分类的决策树，但你可以查看我另一篇文章《决策树用于回归（Python）》。**C**lassification **a**nd **R**egression **T**rees (CART) 是一种相对较旧的技术（1984 年），是更复杂技术的基础。决策树的主要弱点之一是它们通常不是最准确的算法。这部分是因为决策树是一种高方差算法，这意味着训练数据中的不同分裂可以导致非常不同的树。如果你对教程有任何问题或想法，请随时在下面的评论中或通过 [Twitter](https://twitter.com/GalarnykMichael) 联系我。
 
 **简介: [迈克尔·加拉尼克](https://www.linkedin.com/in/michaelgalarnyk/)** 是一名数据科学家和企业培训师。他目前在斯克里普斯转化研究所工作。你可以在 Twitter (https://twitter.com/GalarnykMichael)、Medium (https://medium.com/@GalarnykMichael) 和 GitHub (https://github.com/mGalarnyk) 上找到他。
 
@@ -248,21 +248,21 @@ importances = importances.sort_values('importance',ascending=False)
 
 **相关:**
 
-+   [决策树——直观介绍](/2019/02/decision-trees-introduction.html)
++   决策树——直观介绍
 
-+   [如何建立数据科学作品集](/2018/07/build-data-science-portfolio.html)
++   如何建立数据科学作品集
 
-+   [随机森林与神经网络：哪个更好，何时使用？](/2019/06/random-forest-vs-neural-network.html)
++   随机森林与神经网络：哪个更好，何时使用？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 

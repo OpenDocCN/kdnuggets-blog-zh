@@ -1,30 +1,30 @@
-# Spark SQL用于实时分析
+# Spark SQL 用于实时分析
 
-> 原文：[https://www.kdnuggets.com/2015/09/spark-sql-real-time-analytics.html](https://www.kdnuggets.com/2015/09/spark-sql-real-time-analytics.html)
+> 原文：[`www.kdnuggets.com/2015/09/spark-sql-real-time-analytics.html`](https://www.kdnuggets.com/2015/09/spark-sql-real-time-analytics.html)
 
-**由Sumit Pal和Ajit Jaokar编写，**（FutureText）。
+**由 Sumit Pal 和 Ajit Jaokar 编写，**（FutureText）。
 
-本文是即将推出的**物联网数据科学从业者课程**在伦敦的一部分。如果你想成为物联网的数据科学家，这个密集课程非常适合你。我们涵盖了传感器融合、时间序列、深度学习等复杂领域。我们使用Apache Spark、R语言以及领先的物联网平台。有关更多信息，请联系[info@futuretext.com](mailto:info@futuretext.com)。
+本文是即将推出的**物联网数据科学从业者课程**在伦敦的一部分。如果你想成为物联网的数据科学家，这个密集课程非常适合你。我们涵盖了传感器融合、时间序列、深度学习等复杂领域。我们使用 Apache Spark、R 语言以及领先的物联网平台。有关更多信息，请联系 info@futuretext.com。
 
 **概述**
 
-这是讨论Spark在物联网实时分析中使用SQL的3部分系列文章的第一部分。第一部分讨论了使用Spark的SQL的技术基础。第二部分讨论了使用Spark SQL进行实时分析。最后，第三部分讨论了一个物联网实时分析的用例。
+这是讨论 Spark 在物联网实时分析中使用 SQL 的 3 部分系列文章的第一部分。第一部分讨论了使用 Spark 的 SQL 的技术基础。第二部分讨论了使用 Spark SQL 进行实时分析。最后，第三部分讨论了一个物联网实时分析的用例。
 
 **介绍**
 
-在第一部分中，我们讨论了Spark SQL以及为什么它是实时分析的首选方法。Spark SQL是Apache Spark中的一个模块，它将关系处理与Spark的函数式编程API集成。自1.0版本以来，Spark SQL就是Spark Core的一部分。它可以与现有的Hive部署并行运行HiveQL/SQL，或替代现有的Hive部署。它可以连接到现有的BI工具。它在Python、Scala和Java中都有绑定。它为框架提供了两个重要的补充。首先，它提供了关系和过程处理之间的紧密集成，具有与过程式Spark API集成的声明性DataFrame API。其次，它包括一个可扩展的优化器，使用Scala构建，利用其强大的模式匹配能力，使得添加可组合规则、控制代码生成和定义扩展变得容易。
+在第一部分中，我们讨论了 Spark SQL 以及为什么它是实时分析的首选方法。Spark SQL 是 Apache Spark 中的一个模块，它将关系处理与 Spark 的函数式编程 API 集成。自 1.0 版本以来，Spark SQL 就是 Spark Core 的一部分。它可以与现有的 Hive 部署并行运行 HiveQL/SQL，或替代现有的 Hive 部署。它可以连接到现有的 BI 工具。它在 Python、Scala 和 Java 中都有绑定。它为框架提供了两个重要的补充。首先，它提供了关系和过程处理之间的紧密集成，具有与过程式 Spark API 集成的声明性 DataFrame API。其次，它包括一个可扩展的优化器，使用 Scala 构建，利用其强大的模式匹配能力，使得添加可组合规则、控制代码生成和定义扩展变得容易。
 
-**Spark SQL的目标和目标**
+**Spark SQL 的目标和目标**
 
-尽管关系方法已被应用于解决大数据问题，但它对许多大数据应用来说仍然不够充分。直到最近，关系和过程方法一直保持分离，迫使开发人员选择其中一种范式。Spark SQL框架结合了这两种模型。
+尽管关系方法已被应用于解决大数据问题，但它对许多大数据应用来说仍然不够充分。直到最近，关系和过程方法一直保持分离，迫使开发人员选择其中一种范式。Spark SQL 框架结合了这两种模型。
 
 正如他们所说，“读取数据的最快方式就是根本不读取它”。
 
-Spark SQL支持在Spark程序（通过RDDs）和外部数据源上的关系处理。它可以轻松支持新的数据源，包括半结构化数据和适用于查询联合的外部数据库。
+Spark SQL 支持在 Spark 程序（通过 RDDs）和外部数据源上的关系处理。它可以轻松支持新的数据源，包括半结构化数据和适用于查询联合的外部数据库。
 
-Spark SQL通过以下方式帮助这一理念
+Spark SQL 通过以下方式帮助这一理念
 
-+   通过使用各种列式格式将数据转换为更高效的格式（从存储、网络和IO的角度来看）
++   通过使用各种列式格式将数据转换为更高效的格式（从存储、网络和 IO 的角度来看）
 
 +   使用数据分区
 
@@ -34,7 +34,7 @@ Spark SQL通过以下方式帮助这一理念
 
 +   尽可能晚地优化，直到获取有关数据管道的所有信息
 
-在内部，Spark SQL和DataFrame利用Catalyst查询优化器智能地规划查询的执行。
+在内部，Spark SQL 和 DataFrame 利用 Catalyst 查询优化器智能地规划查询的执行。
 
 **Spark SQL**
 
@@ -46,11 +46,11 @@ Spark SQL 可以支持批处理或流处理 SQL。使用 RDDs，核心 Spark 框
 
 Spark 在 RDDs（弹性分布式数据集）上操作，这是一种内存中的数据结构。每个 RDD 代表数据的一部分，这些数据被分区到集群中的数据节点。RDD 是不可变的，当应用变换时会创建新的 RDD。RDDs 在并行中操作，使用诸如映射、过滤等变换/操作。这些操作在所有分区上同时进行。RDDs 是弹性的，如果由于节点崩溃而丢失某个分区，可以从原始来源重建它。
 
-![Spark RDD](../Images/76981d00d9f9634e21074e9cdd8f42fc.png)
+![Spark RDD](img/76981d00d9f9634e21074e9cdd8f42fc.png)
 
 Spark Streaming 提供了一种称为 DStream（离散流）的抽象，它是一个连续的数据流。DStreams 可以从输入数据流或 Kafka、Flume 等源创建，或通过对其他 DStreams 应用操作创建。DStream 本质上是 RDD 的序列。
 
-![实时 RDD](../Images/58e5b962f873f68db85bccce6b212219.png)
+![实时 RDD](img/58e5b962f873f68db85bccce6b212219.png)
 
 由 DStreams 生成的 RDD 可以转换为 DataFrames 并使用 SQL 查询。该流可以通过 Spark 的 JDBC 驱动程序暴露给任何外部应用程序，进行 SQL 查询。流数据的批次存储在 Spark 的工作内存中，可以通过 SQL 或 Spark 的 API 进行交互式查询。
 
@@ -134,7 +134,7 @@ Spark SQL 的数据源 API 可以从各种数据源和数据格式中读取和�
 
 **Spark SQL 的缺点**
 
-![lambda-architecture-spark-sql](../Images/f34f18a8fb3c7c2708686cefbea49f34.png)
+![lambda-architecture-spark-sql](img/f34f18a8fb3c7c2708686cefbea49f34.png)
 
 与任何运行在 Hadoop 集群上的工具一样——服务水平协议（SLA）并不依赖于引擎的速度——而是依赖于系统上运行的其他并发用户的数量。
 
@@ -148,9 +148,9 @@ Spark SQL 是核心 Spark API 的重要进化。尽管 Spark 的原始函数式�
 
 **参考文献：**
 
-StreamSQL – [https://en.wikipedia.org/wiki/StreamSQL](https://en.wikipedia.org/wiki/StreamSQL)
+StreamSQL – [`en.wikipedia.org/wiki/StreamSQL`](https://en.wikipedia.org/wiki/StreamSQL)
 
-StreamSQL – [https://github.com/thunderain-project/StreamSQL](https://github.com/thunderain-project/StreamSQL)
+StreamSQL – [`github.com/thunderain-project/StreamSQL`](https://github.com/thunderain-project/StreamSQL)
 
 **简历：** **[Sumit Pal](https://www.linkedin.com/profile/view?id=AAIAAADShS4B8ypiJ59lZDz0YeioS2qlAuFkKtI&trk)** 是一位大数据、可视化和数据科学顾问。他还是一名软件架构师和大数据爱好者，构建端到端的数据驱动分析系统。Sumit 曾在微软（SQL 服务器开发团队）、甲骨文（OLAP 开发团队）和 Verizon（大数据分析团队）工作，拥有 22 年的职业生涯。目前，他为多个客户提供数据架构和大数据解决方案的建议，并进行 Spark、Scala、Java 和 Python 的实际编码。Sumit 在 [sumitpal.wordpress.com/](https://sumitpal.wordpress.com/) 撰写博客。
 
@@ -158,21 +158,21 @@ StreamSQL – [https://github.com/thunderain-project/StreamSQL](https://github.c
 
 **相关内容：**
 
-+   [使用 Apache Spark 介绍大数据](/2015/06/introduction-big-data-apache-spark.html)
++   使用 Apache Spark 介绍大数据
 
-+   [50+ 数据科学和机器学习备忘单](/2015/07/good-data-science-machine-learning-cheat-sheets.html)
++   50+ 数据科学和机器学习备忘单
 
-+   [大数据的“重大”问题：Hadoop 还是 Spark？](/2015/08/big-data-question-hadoop-spark.html)
++   大数据的“重大”问题：Hadoop 还是 Spark？
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 

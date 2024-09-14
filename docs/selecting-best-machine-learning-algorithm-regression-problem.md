@@ -1,18 +1,18 @@
 # 选择最佳机器学习算法以解决回归问题
 
-> 原文：[https://www.kdnuggets.com/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html](https://www.kdnuggets.com/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
+> 原文：[`www.kdnuggets.com/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html`](https://www.kdnuggets.com/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![图片](../Images/4ad2b5bffcfcc54ab520646aaba54ebb.png)
+![图片](img/4ad2b5bffcfcc54ab520646aaba54ebb.png)
 
-在处理任何类型的机器学习（ML）问题时，有许多不同的算法可供选择。在机器学习中，有一个称为“无免费午餐”定理的理论，该定理基本上表示没有一种ML算法对所有问题都最好。不同ML算法的性能很大程度上依赖于数据的大小和结构。因此，正确的算法选择通常不明确，除非我们通过简单的试验和错误直接测试算法。
+在处理任何类型的机器学习（ML）问题时，有许多不同的算法可供选择。在机器学习中，有一个称为“无免费午餐”定理的理论，该定理基本上表示没有一种 ML 算法对所有问题都最好。不同 ML 算法的性能很大程度上依赖于数据的大小和结构。因此，正确的算法选择通常不明确，除非我们通过简单的试验和错误直接测试算法。
 
 但是，每种机器学习（ML）算法都有其优缺点，我们可以以此作为指导。虽然一种算法并不总是优于另一种，但每种算法都有一些特性，我们可以利用这些特性快速选择合适的算法并调整超参数。我们将查看一些针对回归问题的突出的机器学习算法，并根据它们的优缺点制定使用指南。本文将作为选择最佳机器学习算法以解决回归问题的一个很好的参考！
 
 ### **线性和多项式回归**
 
-![](../Images/c5741565cd2db9d609ffeafbb1d47950.png)
+![](img/c5741565cd2db9d609ffeafbb1d47950.png)
 
 线性回归
 
@@ -34,11 +34,11 @@
 
 ### **神经网络**
 
-![](../Images/b79dd528e35fd383732c591cc86dfdcd.png)
+![](img/b79dd528e35fd383732c591cc86dfdcd.png)
 
 神经网络
 
-神经网络由一组互相连接的节点组成，这些节点称为神经元。数据中的输入特征变量作为多变量线性组合传递给这些神经元，其中每个特征变量乘以的值称为权重。然后，对这个线性组合应用非线性，使神经网络能够建模复杂的非线性关系。神经网络可以拥有多个层，其中一层的输出以相同的方式传递给下一层。在输出处，通常不应用非线性。神经网络使用随机梯度下降（SGD）和反向传播算法（在上面的GIF中显示）进行训练。
+神经网络由一组互相连接的节点组成，这些节点称为神经元。数据中的输入特征变量作为多变量线性组合传递给这些神经元，其中每个特征变量乘以的值称为权重。然后，对这个线性组合应用非线性，使神经网络能够建模复杂的非线性关系。神经网络可以拥有多个层，其中一层的输出以相同的方式传递给下一层。在输出处，通常不应用非线性。神经网络使用随机梯度下降（SGD）和反向传播算法（在上面的 GIF 中显示）进行训练。
 
 **优点：**
 
@@ -58,7 +58,7 @@
 
 ### ****回归树和随机森林****
 
-![](../Images/bbc7d349f85c1c10074cbf7f4c908957.png)
+![](img/bbc7d349f85c1c10074cbf7f4c908957.png)
 
 随机森林
 
@@ -88,21 +88,21 @@
 
 **相关：**
 
-+   [接收器操作特性曲线揭秘（Python版）](/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
++   接收器操作特性曲线揭秘（Python 版）
 
-+   [Python 中的 5 个快速简单的数据可视化示例（附代码）](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   Python 中的 5 个快速简单的数据可视化示例（附代码）
 
-+   [数据科学家需要了解的 5 种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家需要了解的 5 种聚类算法
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
 
 * * *
 

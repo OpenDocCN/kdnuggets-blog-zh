@@ -1,8 +1,8 @@
 # 在 Python 中将字节转换为字符串：初学者教程
 
-> 原文：[https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners](https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners)
+> 原文：[`www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners`](https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners)
 
-![在 Python 中将字节转换为字符串：初学者教程](../Images/ddc34a7dda9cd40fa9f91fdaabfdb07d.png)
+![在 Python 中将字节转换为字符串：初学者教程](img/ddc34a7dda9cd40fa9f91fdaabfdb07d.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 

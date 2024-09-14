@@ -1,8 +1,8 @@
-# 每个数据科学家都应该知道的10个基本Pandas函数
+# 每个数据科学家都应该知道的 10 个基本 Pandas 函数
 
-> 原文：[https://www.kdnuggets.com/10-essential-pandas-functions-every-data-scientist-should-know](https://www.kdnuggets.com/10-essential-pandas-functions-every-data-scientist-should-know)
+> 原文：[`www.kdnuggets.com/10-essential-pandas-functions-every-data-scientist-should-know`](https://www.kdnuggets.com/10-essential-pandas-functions-every-data-scientist-should-know)
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/5b9d1f3a3bddc655a852e9e6325de10e.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/5b9d1f3a3bddc655a852e9e6325de10e.png)
 
 作者图片
 
@@ -10,17 +10,17 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-本教程将深入探讨功能强大的Python库`pandas`，我们将讨论该库中对数据分析最重要的函数。由于其简洁性和高效性，初学者也可以跟随本教程。如果你的系统中没有安装Python，你可以使用Google Colaboratory。
+本教程将深入探讨功能强大的 Python 库`pandas`，我们将讨论该库中对数据分析最重要的函数。由于其简洁性和高效性，初学者也可以跟随本教程。如果你的系统中没有安装 Python，你可以使用 Google Colaboratory。
 
 # 数据导入
 
@@ -35,7 +35,7 @@ df.head()  # Show first five rows
 
 输出：
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/d79b9cd89e2e2614e17e2e8a99aa9b62.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/d79b9cd89e2e2614e17e2e8a99aa9b62.png)
 
 # 数据探索
 
@@ -45,19 +45,19 @@ df.head()  # Show first five rows
 
 1.  `df.head()`: 显示样本数据的前五行
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/d79b9cd89e2e2614e17e2e8a99aa9b62.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/d79b9cd89e2e2614e17e2e8a99aa9b62.png)
 
 1.  `df.tail()`: 显示样本数据的最后五行
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/11a952ce9450215dabe3acb59b2a344f.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/11a952ce9450215dabe3acb59b2a344f.png)
 
-1.  `df.sample(n)`: 显示样本数据中的随机n行
+1.  `df.sample(n)`: 显示样本数据中的随机 n 行
 
 ```py
 df.sample(6)
 ```
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/7b7e1f56d911ce767f3df3385e0e61e0.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/7b7e1f56d911ce767f3df3385e0e61e0.png)
 
 1.  `df.shape`: 显示样本数据的行和列（维度）。
 
@@ -65,7 +65,7 @@ df.sample(6)
 (2823, 25)
 ```
 
-这意味着我们的数据集有2823行，每行包含25列。
+这意味着我们的数据集有 2823 行，每行包含 25 列。
 
 ## 2\. 统计
 
@@ -73,17 +73,17 @@ df.sample(6)
 
 1.  `df.describe()`: 获取样本数据每列的基本统计信息
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/26a4cc20855be9b53a3812ffb86f3d54.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/26a4cc20855be9b53a3812ffb86f3d54.png)
 
-1.  `df.info()`：获取有关使用的各种数据类型以及每列的非空计数的信息。![每个数据科学家都应该知道的10个基本Pandas函数](../Images/75fbc353acfeb83d103c3cdf5deffe0c.png)
+1.  `df.info()`：获取有关使用的各种数据类型以及每列的非空计数的信息。![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/75fbc353acfeb83d103c3cdf5deffe0c.png)
 
 1.  `df.corr()`：这可以给你数据框中所有整数列之间的相关性矩阵。
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/2445c39af0961c103748b8b8d02caa9b.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/2445c39af0961c103748b8b8d02caa9b.png)
 
 1.  `df.memory_usage()`：它将告诉你每列消耗的内存量。
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/3e839015446ba7995150125406872e8c.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/3e839015446ba7995150125406872e8c.png)
 
 ## 3. 数据选择
 
@@ -107,7 +107,7 @@ df["SALES"]
 
 输出：
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/7bfdc756624e7dba11afbf920aa4416c.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/7bfdc756624e7dba11afbf920aa4416c.png)
 
 1.  `df[[‘col1’, ‘col2’]]`：这将选择给定的多个列。
 
@@ -119,7 +119,7 @@ df[["SALES", "PRICEEACH"]]
 
 输出：
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/6c6c93d46e098f967d6c8876a3a30720.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/6c6c93d46e098f967d6c8876a3a30720.png)
 
 # 4. 数据清洗
 
@@ -139,9 +139,9 @@ df[["SALES", "PRICEEACH"]]
 df["SALES"].astype(int)
 ```
 
-我们将SALES列的数据类型从浮点型转换为整型。
+我们将 SALES 列的数据类型从浮点型转换为整型。
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/c2af723905b1b39d25f62feda6a3c85e.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/c2af723905b1b39d25f62feda6a3c85e.png)
 
 # 5. 数据分析
 
@@ -163,7 +163,7 @@ df.groupby("CITY").agg({"SALES": "sum"})
 
 它将给出每个城市的总销售额。
 
-![每个数据科学家都应该知道的10个基本Pandas函数](../Images/b6a28433c28fec9ab8c4e84cd630cb16.png)
+![每个数据科学家都应该知道的 10 个基本 Pandas 函数](img/b6a28433c28fec9ab8c4e84cd630cb16.png)
 
 如果你想一次应用多个聚合，可以像这样编写它们。
 
@@ -193,7 +193,7 @@ dtype: float64
 df[df["SALES"] > 5000]
 ```
 
-显示销售额大于5000的行。
+显示销售额大于 5000 的行。
 
 你也可以使用`query()`函数来过滤数据框。它将生成类似的输出。
 
@@ -235,7 +235,7 @@ pd.pivot_table(df, values="SALES", index="CITY", columns="YEAR_ID", aggfunc="sum
 
 输出：
 
-![10 Essential Pandas Functions Every Data Scientist Should Know](../Images/d67238d9c896a542aa9d396700b9f2da.png)
+![10 Essential Pandas Functions Every Data Scientist Should Know](img/d67238d9c896a542aa9d396700b9f2da.png)
 
 该输出显示了一个图表，描述了某个城市在特定年份的总销售额。
 
@@ -306,7 +306,7 @@ df["ORDERDATE"] = pd.to_datetime(df["ORDERDATE"])
 
 输出：
 
-![10 Essential Pandas Functions Every Data Scientist Should Know](../Images/a933247c8865091fab44e9faee45a572.png)
+![10 Essential Pandas Functions Every Data Scientist Should Know](img/a933247c8865091fab44e9faee45a572.png)
 
 **Calculate Rolling Average:**
 
@@ -320,7 +320,7 @@ rolling_avg = df["SALES"].rolling(window=5).mean()
 
 输出：
 
-![每个数据科学家都应了解的 10 个 Pandas 函数](../Images/abc0fcfe99ec1b44500b14254819a941.png)
+![每个数据科学家都应了解的 10 个 Pandas 函数](img/abc0fcfe99ec1b44500b14254819a941.png)
 
 ## 9\. 交叉表
 
@@ -336,7 +336,7 @@ cross_tab = pd.crosstab(df["COUNTRY"], df["DEALSIZE"])
 
 它可以显示按不同国家排序的订单大小（‘DEALSIZE’）。
 
-![每个数据科学家都应了解的 10 个 Pandas 函数](../Images/9a1c4e7d37d6d2b05a2dd65f04fc5191.png)
+![每个数据科学家都应了解的 10 个 Pandas 函数](img/9a1c4e7d37d6d2b05a2dd65f04fc5191.png)
 
 ## 10\. 处理离群值
 
@@ -362,7 +362,7 @@ Q1 是第一个四分位数，表示数据的第 25 百分位数，而 Q3 是第
 
 然后，你需要筛选出低于下界或高于上界的离群值。
 
-![每个数据科学家都应了解的 10 个 Pandas 函数](../Images/a2be5a948c74f1e0280dcc7c21115dba.png)
+![每个数据科学家都应了解的 10 个 Pandas 函数](img/a2be5a948c74f1e0280dcc7c21115dba.png)
 
 # 总结一下
 

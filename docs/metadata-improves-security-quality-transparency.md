@@ -1,30 +1,30 @@
 # 元数据如何改善安全性、质量和透明度
 
-> 原文：[https://www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html](https://www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html)
+> 原文：[`www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html`](https://www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html)
 
-Spotify如何与像Apple这样的巨头抗衡？一个字：数据。通过机器学习和AI，Spotify通过提供更个性化和定制化的体验为用户创造价值。让我们快速了解一下用于增强其平台的聚合信息层：
+Spotify 如何与像 Apple 这样的巨头抗衡？一个字：数据。通过机器学习和 AI，Spotify 通过提供更个性化和定制化的体验为用户创造价值。让我们快速了解一下用于增强其平台的聚合信息层：
 
-+   Spotify使用自然语言处理（NLP）扫描关于你正在听的音乐的讨论论坛，然后将你的偏好与其他讨论相似的音乐匹配；
++   Spotify 使用自然语言处理（NLP）扫描关于你正在听的音乐的讨论论坛，然后将你的偏好与其他讨论相似的音乐匹配；
 
 +   音乐的组成被分析以了解音调、声音、响度、音质（即大调或小调）以及其他用于推荐类似歌曲和艺术家的因素；
 
-+   当然，Spotify会在听音乐时测量行为，追踪重复播放或跳过歌曲，建立偏好，从而改进推荐。
++   当然，Spotify 会在听音乐时测量行为，追踪重复播放或跳过歌曲，建立偏好，从而改进推荐。
 
 这里的核心数据是音乐——歌曲的基本组成部分，如标题、艺术家和时长。选择一首歌来听定下了基线（也许你喜欢它的低音线）。其他一切都可以视为元数据：关于如何听歌、歌曲的构成以及其他类似的音乐的附加元素。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
-在这里，元数据是Spotify算法的驱动力，它被不断收集和应用，以提供智能推荐，保持你不断听歌。
+在这里，元数据是 Spotify 算法的驱动力，它被不断收集和应用，以提供智能推荐，保持你不断听歌。
 
 # 什么是元数据？
 
@@ -34,7 +34,7 @@ Spotify如何与像Apple这样的巨头抗衡？一个字：数据。通过机�
 
 # 元数据如何组织？
 
-有3种主要的元数据类型相互作用：行政性、描述性和结构性。每种类型在解释相应数据方面发挥不同的作用。
+有 3 种主要的元数据类型相互作用：行政性、描述性和结构性。每种类型在解释相应数据方面发挥不同的作用。
 
 结构化元数据 – 提供数据元素组织方式的见解。这便于快速和轻松的导航，如目录或页码。结构化元数据允许将类似数据分组，记录唯一数据集之间的关系。
 
@@ -44,7 +44,7 @@ Spotify如何与像Apple这样的巨头抗衡？一个字：数据。通过机�
 
 这些类型的元数据的组合使组织能够高效地在大量数据中导航，使其在需要时容易找到所需的信息。
 
-![如何组织元数据？](../Images/41e790f2508f6c320d301df73c55c03d.png)
+![如何组织元数据？](img/41e790f2508f6c320d301df73c55c03d.png)
 
 # 元数据为何重要？
 
@@ -60,7 +60,7 @@ Spotify如何与像Apple这样的巨头抗衡？一个字：数据。通过机�
 
 因此，关注元数据管理的主要原因与实施数据治理策略的原因相同：提高数据安全性、数据质量和整体透明度。
 
-![数据目录平台中的元数据管理](../Images/d7b9ebb1be48a22d9a308b7d822abff8.png)
+![数据目录平台中的元数据管理](img/d7b9ebb1be48a22d9a308b7d822abff8.png)
 
 **提高数据安全性：**
 
@@ -90,7 +90,7 @@ Spotify如何与像Apple这样的巨头抗衡？一个字：数据。通过机�
 
 # 元数据在数据目录中的好处是什么？
 
-使用ThinkData Works的特定工具和功能，你可以解锁源于元数据的宝贵收益：
+使用 ThinkData Works 的特定工具和功能，你可以解锁源于元数据的宝贵收益：
 
 **自定义元数据** – 向数据集添加任何元数据的能力，包括关联/相关的数据集、上传使用协议、成本与许可以及数据字典
 
@@ -100,28 +100,28 @@ Spotify如何与像Apple这样的巨头抗衡？一个字：数据。通过机�
 
 **数据健康监控** – 一个用于报告和警报配置的仪表板，根据数据随时间变化的情况，包括“宏观”信息（如行和列计数）或“微观”信息（如值类型或值范围）
 
-**访问审计** – 具体的使用统计信息和描述用户行为、API调用及对数据进行或进行的数据操作的信息。
+**访问审计** – 具体的使用统计信息和描述用户行为、API 调用及对数据进行或进行的数据操作的信息。
 
 # 灵活管理，严格治理
 
 元数据管理是健全数据治理的关键部分 – 是有效数据战略中最重要的部分之一。我们知道每个组织都有独特的需求，因此一个好的元数据解决方案应当强大且可执行，同时足够灵活以便按照每家公司量身定制的数据管理方式。
 
-通过提供全面的元数据管理，ThinkData Works使我们的客户能够在强大、安全的基础上构建数据驱动的解决方案。
+通过提供全面的元数据管理，ThinkData Works 使我们的客户能够在强大、安全的基础上构建数据驱动的解决方案。
 
 你认为你的业务是否需要一个数据目录来查找、理解和使用可信的数据以推动业务成果？ [联系我们](https://www.thinkdataworks.com/contact) 以解锁数据的价值。
 
-**[Tim Lysecki](https://www.linkedin.com/in/timlysecki/)** 是ThinkData Works的产品营销经理，他负责塑造公司的市场战略，指导媒体报道公司和产品，并扩展客户名单。在业余时间，他还是一位热衷于创作歌曲、表演和摄影的人。
+**[Tim Lysecki](https://www.linkedin.com/in/timlysecki/)** 是 ThinkData Works 的产品营销经理，他负责塑造公司的市场战略，指导媒体报道公司和产品，并扩展客户名单。在业余时间，他还是一位热衷于创作歌曲、表演和摄影的人。
 
 ### 更多相关内容
 
 +   [数据质量维度：用伟大的期望确保你的数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [生产ML的元数据存储！](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)
++   [生产 ML 的元数据存储！](https://www.kdnuggets.com/2022/05/layer-metadata-store-production-ml.html)
 
 +   [机器学习元数据存储](https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html)
 
 +   [世界需要更多的网络安全分析师！](https://www.kdnuggets.com/the-world-needs-more-cyber-security-analysts)
 
-+   [10种最常见的数据质量问题及解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 种最常见的数据质量问题及解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
 +   [数据质量：好、坏与丑](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)

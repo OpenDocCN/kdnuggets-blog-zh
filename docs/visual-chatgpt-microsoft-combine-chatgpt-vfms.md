@@ -1,48 +1,48 @@
-# Visual ChatGPT：微软结合ChatGPT和VFM
+# Visual ChatGPT：微软结合 ChatGPT 和 VFM
 
-> 原文：[https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
+> 原文：[`www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html`](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
 
-![Visual ChatGPT: 微软结合ChatGPT和VFM](../Images/1818e4e60b1715274dddc991a119f193.png)
+![Visual ChatGPT: 微软结合 ChatGPT 和 VFM](img/1818e4e60b1715274dddc991a119f193.png)
 
 图片由作者提供
 
-当我们以为已经消化了足够多的大型语言模型（LLMs）新闻时，微软亚洲研究院团队带来了Visual ChatGPT。Visual ChatGPT克服了ChatGPT无法处理视觉信息的现有限制，因为它只训练了一种语言模式。
+当我们以为已经消化了足够多的大型语言模型（LLMs）新闻时，微软亚洲研究院团队带来了 Visual ChatGPT。Visual ChatGPT 克服了 ChatGPT 无法处理视觉信息的现有限制，因为它只训练了一种语言模式。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-# 什么是Visual ChatGPT？
+# 什么是 Visual ChatGPT？
 
-Visual ChatGPT是一个结合了Visual Foundation Models（VFM）的系统，帮助ChatGPT更好地理解、生成和编辑视觉信息。VFM能够指定输入输出格式，将视觉信息转换为语言格式，并处理VFM的历史记录、优先级和冲突。
+Visual ChatGPT 是一个结合了 Visual Foundation Models（VFM）的系统，帮助 ChatGPT 更好地理解、生成和编辑视觉信息。VFM 能够指定输入输出格式，将视觉信息转换为语言格式，并处理 VFM 的历史记录、优先级和冲突。
 
-因此，Visual ChatGPT是一个AI模型，它在ChatGPT的限制与允许用户通过聊天沟通并生成视觉内容之间架起了桥梁。
+因此，Visual ChatGPT 是一个 AI 模型，它在 ChatGPT 的限制与允许用户通过聊天沟通并生成视觉内容之间架起了桥梁。
 
-## ChatGPT的限制
+## ChatGPT 的限制
 
-ChatGPT在过去几周和几个月里成为了大多数人的谈话话题。然而，由于其语言训练能力，它不允许处理和生成图像。
+ChatGPT 在过去几周和几个月里成为了大多数人的谈话话题。然而，由于其语言训练能力，它不允许处理和生成图像。
 
-你有像Visual Transformers和Steady Diffusion这样的视觉基础模型，它们具有惊人的视觉能力。这就是语言和图像模型结合创造了Visual ChatGPT的地方。
+你有像 Visual Transformers 和 Steady Diffusion 这样的视觉基础模型，它们具有惊人的视觉能力。这就是语言和图像模型结合创造了 Visual ChatGPT 的地方。
 
-## 什么是Visual Foundation Models？
+## 什么是 Visual Foundation Models？
 
-Visual Foundation Models用于汇集计算机视觉中使用的基本算法。它们将标准计算机视觉技能转移到AI应用程序上，以处理更复杂的任务。
+Visual Foundation Models 用于汇集计算机视觉中使用的基本算法。它们将标准计算机视觉技能转移到 AI 应用程序上，以处理更复杂的任务。
 
-Visual ChatGPT中的Prompt Manager包含22个VFM，包括Text-to-Image、ControlNet、Edge-To-Image等。这帮助ChatGPT将图像的所有视觉信号转换为语言，以便ChatGPT更好地理解。那么Visual ChatGPT是如何工作的呢？
+Visual ChatGPT 中的 Prompt Manager 包含 22 个 VFM，包括 Text-to-Image、ControlNet、Edge-To-Image 等。这帮助 ChatGPT 将图像的所有视觉信号转换为语言，以便 ChatGPT 更好地理解。那么 Visual ChatGPT 是如何工作的呢？
 
-# Visual ChatGPT是如何工作的？
+# Visual ChatGPT 是如何工作的？
 
-Visual ChatGPT由不同的组件组成，帮助大型语言模型ChatGPT理解视觉信息。
+Visual ChatGPT 由不同的组件组成，帮助大型语言模型 ChatGPT 理解视觉信息。
 
-## Visual ChatGPT的架构组件
+## Visual ChatGPT 的架构组件
 
 +   **用户查询**：这是用户提交查询的地方
 
@@ -58,7 +58,7 @@ Visual ChatGPT由不同的组件组成，帮助大型语言模型ChatGPT理解�
 
 +   **中级回答**：利用 VFMs，模型将尝试输出几个具有逻辑理解的中级答案。
 
-![微软 GitHub](../Images/3fc89bb2c2b81a7b86eb47c955b6dcbb.png)
+![微软 GitHub](img/3fc89bb2c2b81a7b86eb47c955b6dcbb.png)
 
 图片来自于 [微软 GitHub](https://github.com/microsoft/visual-chatgpt)
 
@@ -70,7 +70,7 @@ Visual ChatGPT由不同的组件组成，帮助大型语言模型ChatGPT理解�
 
 在下图中，你可以看到提示管理器如何为 Visual ChatGPT 启动规则：
 
-![Visual ChatGPT：用视觉基础模型进行对话、绘图和编辑](../Images/2c23b8473c5115ca18a14eb6f0f629b0.png)
+![Visual ChatGPT：用视觉基础模型进行对话、绘图和编辑](img/2c23b8473c5115ca18a14eb6f0f629b0.png)
 
 图片来自于 [Visual ChatGPT：用视觉基础模型进行对话、绘图和编辑](https://arxiv.org/pdf/2303.04671.pdf)
 
@@ -153,14 +153,14 @@ Visual ChatGPT 是否类似于 ChatGPT4？如果你尝试过这两者，你的�
 
 ### 更多相关话题
 
-+   [SQL中的Group By和Partition By场景：何时以及如何结合…](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
++   [SQL 中的 Group By 和 Partition By 场景：何时以及如何结合…](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
 
 +   [数据科学中的基本数学：奇异值分解的可视化介绍](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)
 
-+   [构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
 +   [人工智能：大型语言和视觉模型](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
-+   [认识Gorilla：UC Berkeley和微软的API增强LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
++   [认识 Gorilla：UC Berkeley 和微软的 API 增强 LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)

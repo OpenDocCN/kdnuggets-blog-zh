@@ -1,14 +1,14 @@
 # 极简且干净的机器学习算法实现的优秀合集。
 
-> 原文：[https://www.kdnuggets.com/2017/01/great-collection-clean-machine-learning-algorithms.html](https://www.kdnuggets.com/2017/01/great-collection-clean-machine-learning-algorithms.html)
+> 原文：[`www.kdnuggets.com/2017/01/great-collection-clean-machine-learning-algorithms.html`](https://www.kdnuggets.com/2017/01/great-collection-clean-machine-learning-algorithms.html)
 
 想从头实现机器学习算法吗？
 
-最近的 KDnuggets 投票询问了 "[你在过去 12 个月中用于实际数据科学应用的方法/算法？](/2016/08/new-poll-data-science-methods-algorithms-used.html)"，结果可以在 [这里找到](/2016/09/poll-algorithms-used-data-scientists.html)。结果按行业就业部门和地区进行了分析，但对新手来说，主要收获是涵盖了各种算法。
+最近的 KDnuggets 投票询问了 "你在过去 12 个月中用于实际数据科学应用的方法/算法？"，结果可以在 这里找到。结果按行业就业部门和地区进行了分析，但对新手来说，主要收获是涵盖了各种算法。
 
-![前 10 大算法](../Images/f40f1e7b92b0e89bcbbd0b5980c159b2.png)明确一点：这不是可用的 [机器学习算法](https://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html) 的完整展示，而是最常用算法的一个子集（根据我们的读者）。**今天存在很多机器学习算法。** 但既然有这么多机器学习 [库、项目、程序和其他项目](/2016/11/top-20-python-machine-learning-open-source-updated.html) 涵盖了这些算法，涉及各种编程语言、不同平台和环境，为什么你还想从头实现一个算法呢？
+![前 10 大算法](img/f40f1e7b92b0e89bcbbd0b5980c159b2.png)明确一点：这不是可用的 [机器学习算法](https://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html) 的完整展示，而是最常用算法的一个子集（根据我们的读者）。**今天存在很多机器学习算法。** 但既然有这么多机器学习 库、项目、程序和其他项目 涵盖了这些算法，涉及各种编程语言、不同平台和环境，为什么你还想从头实现一个算法呢？
 
-[Sebastian Raschka](https://twitter.com/rasbt)，著名的机器学习爱好者、“数据科学家”（他的引号，注意不是我的），博士生以及 [《Python 机器学习》](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130) 的作者，对于 [从头实现机器学习算法](/2016/05/implement-machine-learning-algorithms-scratch.html) 有如下看法：
+[Sebastian Raschka](https://twitter.com/rasbt)，著名的机器学习爱好者、“数据科学家”（他的引号，注意不是我的），博士生以及 [《Python 机器学习》](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130) 的作者，对于 从头实现机器学习算法 有如下看法：
 
 > 从头实现算法有几个不同的原因可能是有用的：
 > 
@@ -42,7 +42,7 @@
 
 **深度学习（MLP、CNN、RNN、LSTM）**
 
-![深度学习](../Images/35cca5c97cb4d4033c23fdadcb5820b8.png)从这里开始：[理解深度学习的 7 步](/2016/01/seven-steps-deep-learning.html)
+![深度学习](img/35cca5c97cb4d4033c23fdadcb5820b8.png)从这里开始：理解深度学习的 7 步
 
 *从对深度神经网络的模糊理解到在 7 步中成为知识渊博的实践者！*
 
@@ -50,7 +50,7 @@
 
 **线性回归/逻辑回归**
 
-![线性回归](../Images/9ad77abc2d73c45236832b6f4edf7c6c.png) 从这里开始： [线性回归、最小二乘法与矩阵乘法：简明技术概述](/2016/11/linear-regression-least-squares-matrix-multiplication-concise-technical-overview.html)
+![线性回归](img/9ad77abc2d73c45236832b6f4edf7c6c.png) 从这里开始： 线性回归、最小二乘法与矩阵乘法：简明技术概述
 
 *线性回归是一个简单的代数工具，试图找到最“优”的线来拟合两个或更多属性。*
 
@@ -58,7 +58,7 @@
 
 **随机森林**
 
-![随机森林](../Images/d7df51ea9647f66d47d5ac3397320dda.png) 从这里开始： [随机森林：犯罪教程](/2016/09/reandom-forest-criminal-tutorial.html)
+![随机森林](img/d7df51ea9647f66d47d5ac3397320dda.png) 从这里开始： 随机森林：犯罪教程
 
 *在这里了解随机森林的概况，根据最近的调查，这是 KDnuggets 读者使用最广泛的算法之一。*
 
@@ -66,7 +66,7 @@
 
 **支持向量机**
 
-![支持向量机](../Images/d5f9a91b5d6ed87326db5bc95500daf4.png) 从这里开始： [支持向量机：简明技术概述](/2016/09/support-vector-machines-concise-technical-overview.html)
+![支持向量机](img/d5f9a91b5d6ed87326db5bc95500daf4.png) 从这里开始： 支持向量机：简明技术概述
 
 *支持向量机仍然是一个流行且经过时间考验的分类算法。本文提供了它们功能的高层次简明技术概述。*
 
@@ -74,7 +74,7 @@
 
 **K 最近邻**
 
-![KNN](../Images/4322b5f9ae66be35375b65bec3b6c05f.png) 从这里开始： [使用 Python 实现自己的 k 最近邻算法](/2016/01/implementing-your-own-knn-using-python.html)
+![KNN](img/4322b5f9ae66be35375b65bec3b6c05f.png) 从这里开始： 使用 Python 实现自己的 k 最近邻算法
 
 *对最常用的机器学习算法之一，k 最近邻，进行详细解释。*
 
@@ -82,7 +82,7 @@
 
 **朴素贝叶斯**
 
-![贝叶斯](../Images/4bbaac39ca24078ff088ace99cc9b745.png) 从这里开始： [贝叶斯机器学习解释](/2016/07/bayesian-machine-learning-explained.html)
+![贝叶斯](img/4bbaac39ca24078ff088ace99cc9b745.png) 从这里开始： 贝叶斯机器学习解释
 
 *在这里获取精彩的贝叶斯机器学习介绍解释，以及进一步学习的建议。*
 
@@ -90,7 +90,7 @@
 
 **K 均值聚类**
 
-![聚类](../Images/a4235ade8eec2481aba75af7b5189ef6.png) 从这里开始： [比较聚类技术：简明技术概述](/2016/09/comparing-clustering-techniques-concise-technical-overview.html)
+![聚类](img/a4235ade8eec2481aba75af7b5189ef6.png) 从这里开始： 比较聚类技术：简明技术概述
 
 *今天使用了多种聚类技术。鉴于聚类在日常数据挖掘中的广泛应用，本文提供了两种典型技术的简明技术概述。*
 
@@ -116,21 +116,21 @@
 
 **相关**：
 
-+   [为什么从零开始实现机器学习算法？](/2016/05/implement-machine-learning-algorithms-scratch.html)
++   为什么从零开始实现机器学习算法？
 
-+   [伟大的算法教程汇总](/2016/09/great-algorithm-tutorial-roundup.html)
++   伟大的算法教程汇总
 
-+   [机器学习工程师需要了解的 10 个算法](/2016/08/10-algorithms-machine-learning-engineers.html)
++   机器学习工程师需要了解的 10 个算法
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -144,6 +144,6 @@
 
 +   [免费数据科学、数据工程等课程合集](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)
 
-+   [KDnuggets 新闻，5月25日：每个 Python 机器学习工程师都需要了解的 6 个工具…](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个 Python 机器学习工程师都需要了解的 6 个工具…](https://www.kdnuggets.com/2022/n21.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

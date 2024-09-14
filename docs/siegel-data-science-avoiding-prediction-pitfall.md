@@ -1,8 +1,8 @@
 # 健全的数据科学：避免最棘手的预测陷阱
 
-> 原文：[https://www.kdnuggets.com/2017/01/siegel-data-science-avoiding-prediction-pitfall.html](https://www.kdnuggets.com/2017/01/siegel-data-science-avoiding-prediction-pitfall.html)
+> 原文：[`www.kdnuggets.com/2017/01/siegel-data-science-avoiding-prediction-pitfall.html`](https://www.kdnuggets.com/2017/01/siegel-data-science-avoiding-prediction-pitfall.html)
 
-![orange-car](../Images/6b0bfef8ca40173e4e77e0fd0ea97040.png)
+![orange-car](img/6b0bfef8ca40173e4e77e0fd0ea97040.png)
 
 *在* [《预测分析：预测谁会点击、购买、撒谎或死亡，修订版》](http://www.thepredictionbook.com/)* 的更新版中，我展示了尽管数据科学和预测分析的爆炸性流行承诺了巨大的价值，但一个常见的错误应用很容易适得其反。只有应用了一个基本却常被忽视的安全措施，数字分析才能真正发挥作用。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
@@ -38,11 +38,11 @@
 
 单独审视，“橙色柠檬”发现从数学角度来看似乎是可靠的。以下是具体结果：
 
-![bar-graph-cars-lemons](../Images/7f7e7890c520045395aa4b7c9359e224.png)
+![bar-graph-cars-lemons](img/7f7e7890c520045395aa4b7c9359e224.png)
 
-这表明橙色汽车变成柠檬的几率比平均水平低三分之一。换句话说，如果你购买一辆*非*橙色的汽车，你的风险增加了50%。
+这表明橙色汽车变成柠檬的几率比平均水平低三分之一。换句话说，如果你购买一辆*非*橙色的汽车，你的风险增加了 50%。
 
-确立的统计数据似乎支持这一“色彩丰富”的发现。正式评估表明，这具有*统计显著性*，意味着这个模式仅仅是随机出现的机会很小。似乎可以安全地假设这一发现是可靠的。更具体地说，一项标准数学测试表明，如果橙色汽车实际上不更可靠，这一趋势出现在数据中的机会不到1%。
+确立的统计数据似乎支持这一“色彩丰富”的发现。正式评估表明，这具有*统计显著性*，意味着这个模式仅仅是随机出现的机会很小。似乎可以安全地假设这一发现是可靠的。更具体地说，一项标准数学测试表明，如果橙色汽车实际上不更可靠，这一趋势出现在数据中的机会不到 1%。
 
 但事情发生了严重错误。后来的“橙色汽车”洞察被证明结论不确。统计测试以一种有缺陷的方式进行；媒体也过早地报道了这一发现。随着数据量的增加，应用常见的统计方法可能会陷入潜在的陷阱。
 
@@ -64,43 +64,43 @@
 
 在数据发现中，总是存在我们可能被*随机性所欺骗*的可能性，就像纳西姆·尼古拉斯·塔勒布在他那本引人注目的书中所提到的那样。书中揭示了人们倾向于为自己的成功和失败寻找毫无根据的解释，而不是将许多事件正确归因于纯粹的随机性。这种失败的科学解药是概率，塔勒布亲切地称之为“应用怀疑论的一个分支”。
 
-统计学是我们用来衡量概率的资源。它通过计算如果橙色汽车实际上没有优势时，观察到的数据随机出现的概率来回答上述橙色汽车问题。计算考虑了数据量——在这种情况下，有72,983辆二手车，涵盖15种颜色，其中415辆是橙色的。[iv]
+统计学是我们用来衡量概率的资源。它通过计算如果橙色汽车实际上没有优势时，观察到的数据随机出现的概率来回答上述橙色汽车问题。计算考虑了数据量——在这种情况下，有 72,983 辆二手车，涵盖 15 种颜色，其中 415 辆是橙色的。[iv]
 
-**对问题的计算答案：** 低于0.68%
+**对问题的计算答案：** 低于 0.68%
 
 看起来是一个安全的选择。常规做法认为这种风险可以接受，足够低到至少可以暂时相信数据。但不要急于购买一辆橙色汽车——或者为此事在报纸上撰写文章。
 
 ### 出错原因：累积风险
 
-*在中国，当你是百万分之一时，就有1300人和你一模一样。*
+*在中国，当你是百万分之一时，就有 1300 人和你一模一样。*
 
 —比尔·盖茨
 
-那么，如果只有1%的机会我们会被随机性误导，那出了什么问题？
+那么，如果只有 1%的机会我们会被随机性误导，那出了什么问题？
 
 实验者的错误在于没有考虑到运行许多小风险，这些小风险加起来变成了一个大风险……
 
-[**点击这里访问在OR/MS Today原刊发表的完整文章**](https://www.informs.org/ORMS-Today/Public-Articles/December-Volume-43-Number-6/Predictive-Analytics-Sound-data-science)
+[**点击这里访问在 OR/MS Today 原刊发表的完整文章**](https://www.informs.org/ORMS-Today/Public-Articles/December-Volume-43-Number-6/Predictive-Analytics-Sound-data-science)
 
 * * *
 
-[i] 有关这些发现的更多细节，请参见我书中“奇异和令人惊讶的见解”部分，PDF在线版可在[www.PredictiveNotes.com](http://www.predictivenotes.com/)获取。有关本文章总体主题的进一步阅读，请参阅同一文档中的“广泛搜索的进一步阅读”部分。
+[i] 有关这些发现的更多细节，请参见我书中“奇异和令人惊讶的见解”部分，PDF 在线版可在[www.PredictiveNotes.com](http://www.predictivenotes.com/)获取。有关本文章总体主题的进一步阅读，请参阅同一文档中的“广泛搜索的进一步阅读”部分。
 
 [ii] 这一发现还被*赫芬顿邮报*、*纽约时报*、*国家公共电台*、*华尔街日报*以及*纽约时报*畅销书*大数据：一场将改变我们生活、工作和思维方式的革命*报道。
 
-[iii] 橙色汽车没有优势的观点称为*零假设*。如果零假设为真，那么观察到的效果在数据中出现的概率称为*p值*。如果p值足够低，例如低于1%或5%，那么研究人员通常会拒绝零假设，认为这种情况不太可能，从而将其视为对发现的支持，这样就被认为是*统计显著的*。
+[iii] 橙色汽车没有优势的观点称为*零假设*。如果零假设为真，那么观察到的效果在数据中出现的概率称为*p 值*。如果 p 值足够低，例如低于 1%或 5%，那么研究人员通常会拒绝零假设，认为这种情况不太可能，从而将其视为对发现的支持，这样就被认为是*统计显著的*。
 
-[iv] 适用的统计方法是*单侧比例相等假设检验*，其计算的p值低于0.0068。
+[iv] 适用的统计方法是*单侧比例相等假设检验*，其计算的 p 值低于 0.0068。
 
 原文发表于[OR/MS Today](https://www.informs.org/ORMS-Today/Public-Articles/December-Volume-43-Number-6/Predictive-Analytics-Sound-data-science)。已获许可转载。
 
 **相关内容：**
 
-+   [4个原因导致你的机器学习模型出错（及如何修复）](/2016/12/4-reasons-machine-learning-model-wrong.html)
++   4 个原因导致你的机器学习模型出错（及如何修复）
 
-+   [提高回归模型鲁棒性的一个巧妙技巧](/2016/08/neat-trick-increase-robustness-regression-models.html)
++   提高回归模型鲁棒性的一个巧妙技巧
 
-+   [避免过拟合的大创意：可重复使用的保留集以保持适应性数据分析的有效性](/2015/08/feldman-avoid-overfitting-holdout-adaptive-data-analysis.html)
++   避免过拟合的大创意：可重复使用的保留集以保持适应性数据分析的有效性
 
 ### 更多相关话题
 
@@ -108,9 +108,9 @@
 
 +   [烂番茄电影评分预测的数据科学项目：…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
 
-+   [使用BQML进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
++   [使用 BQML 进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
 
-+   [12个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
++   [12 个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
 
 +   [大多数公司在数据访问方面严重不足，71%的人认为…](https://www.kdnuggets.com/2023/07/mostly-data-access-severely-lacking-synthetic-data-help.html)
 

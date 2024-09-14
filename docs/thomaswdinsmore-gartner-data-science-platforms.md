@@ -1,24 +1,24 @@
 # Gartner 数据科学平台 – 更深层的分析
 
-> 原文：[https://www.kdnuggets.com/2017/03/thomaswdinsmore-gartner-data-science-platforms.html](https://www.kdnuggets.com/2017/03/thomaswdinsmore-gartner-data-science-platforms.html)
+> 原文：[`www.kdnuggets.com/2017/03/thomaswdinsmore-gartner-data-science-platforms.html`](https://www.kdnuggets.com/2017/03/thomaswdinsmore-gartner-data-science-platforms.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **由 [Thomas Dinsmore](https://thomaswdinsmore.com/about/) 提供，分析与机器学习顾问**。
 
-![gartner looks](../Images/e6aad0e56c5b171367eb9b6189eae4a1.png)
+![gartner looks](img/e6aad0e56c5b171367eb9b6189eae4a1.png)
 
-Gartner 最近发布了2017年数据科学平台的魔力象限。如果你是客户，可以直接从 [Gartner](https://www.gartner.com/doc/3606026?ref=unauthreader&srcId=1-4730952011) 获取一份，或者你可以从 [这里](https://www.gartner.com/doc/reprints?id=1-3TK9NW2&ct=170215&st=sb) 免费获得一份，由 SAS 提供。
+Gartner 最近发布了 2017 年数据科学平台的魔力象限。如果你是客户，可以直接从 [Gartner](https://www.gartner.com/doc/3606026?ref=unauthreader&srcId=1-4730952011) 获取一份，或者你可以从 [这里](https://www.gartner.com/doc/reprints?id=1-3TK9NW2&ct=170215&st=sb) 免费获得一份，由 SAS 提供。
 
-下图展示了2016年和2017年的 MQ，并用红色标记了变化。
+下图展示了 2016 年和 2017 年的 MQ，并用红色标记了变化。
 
-![2016-magic-quadrant](../Images/c5cf74b60c915e9f54a279ccb94b7195.png)
+![2016-magic-quadrant](img/c5cf74b60c915e9f54a279ccb94b7195.png)
 
-[这里](https://thomaswdinsmore.com/2016/02/22/gartners-2016-mq-for-advanced-analytics-platforms/)是我去年写的关于2016年 MQ 的评论。
+[这里](https://thomaswdinsmore.com/2016/02/22/gartners-2016-mq-for-advanced-analytics-platforms/)是我去年写的关于 2016 年 MQ 的评论。
 
-[这里](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html)是 Gregory Piatetsky 的分析。
+这里是 Gregory Piatetsky 的分析。
 
-这里有关于2017年版本的9个观察点：
+这里有关于 2017 年版本的 9 个观察点：
 
 #### (1) 五个供应商被淘汰。
 
@@ -60,43 +60,43 @@ Gartner 对五个较弱的玩家下手了。
 
 — **Alteryx** 和 **KNIME** 在“愿景完整性”上的评分显著较低，原因是可视化工具有限以及一些可扩展性问题。这些产品属性每年没有变化；这意味着 Gartner 在今年的 MQ 中对此给予了更多重视。
 
-**FICO** 在关键能力、开源工具支持、算法选择和创新方面表现不佳。这让人不禁怀疑为什么还会有人购买这款软件，或者为什么FICO仍然在MQ中。
+**FICO** 在关键能力、开源工具支持、算法选择和创新方面表现不佳。这让人不禁怀疑为什么还会有人购买这款软件，或者为什么 FICO 仍然在 MQ 中。
 
-**Quest (Statistica)** 下降的原因在于其难以学习和使用，存在性能和稳定性问题，缺乏关键特性，没有弹性云功能，并且在Spark集成方面滞后。除此之外，它仍然是一个优秀的产品。
+**Quest (Statistica)** 下降的原因在于其难以学习和使用，存在性能和稳定性问题，缺乏关键特性，没有弹性云功能，并且在 Spark 集成方面滞后。除此之外，它仍然是一个优秀的产品。
 
 **RapidMiner** 在“交付能力”上的评分有所提升，但其在“愿景完整性”上的评分无明显原因地下降了。
 
-#### (4) Hadoop和Spark的集成是基本要求。
+#### (4) Hadoop 和 Spark 的集成是基本要求。
 
-在市场概述部分，Gartner写道：
+在市场概述部分，Gartner 写道：
 
-> 在这个魔力象限中的所有供应商——实际上，包括整个市场——都已转向将数据纳入开源Hadoop生态系统，现在被视为一流。这样，它与主要用于传统数据仓库的专有存储在地位上相等。
+> 在这个魔力象限中的所有供应商——实际上，包括整个市场——都已转向将数据纳入开源 Hadoop 生态系统，现在被视为一流。这样，它与主要用于传统数据仓库的专有存储在地位上相等。
 
-当然，虽然所有供应商都可以使用Hadoop作为*数据源*，但并非所有供应商都能利用Hadoop作为*计算平台*。此外，供应商在与Hadoop的集成程度上差异很大。
+当然，虽然所有供应商都可以使用 Hadoop 作为*数据源*，但并非所有供应商都能利用 Hadoop 作为*计算平台*。此外，供应商在与 Hadoop 的集成程度上差异很大。
 
 > Spark 正在成为这个魔力象限中的供应商以及这个市场中其他参与者的事实上的数据科学基础。
 
 Nick Heudecker，[请联系你的办公室](https://thomaswdinsmore.com/2017/02/14/spark-is-the-future-of-analytics/)。
 
-2016年MQ中的七个供应商没有明显的Spark故事。其中五个已经退出MQ。请允许我绕场胜利一圈。
+2016 年 MQ 中的七个供应商没有明显的 Spark 故事。其中五个已经退出 MQ。请允许我绕场胜利一圈。
 
-#### (5) Gartner的标准奇怪地“灵活”。
+#### (5) Gartner 的标准奇怪地“灵活”。
 
 三个例子：
 
-示例 1：你可以在[Enterprise Miner](https://communities.sas.com/t5/SAS-Communities-Library/Tip-How-to-execute-a-Python-script-in-SAS-Enterprise-Miner/ta-p/223761)中运行现有的Python脚本，也可以在[Alteryx](https://community.alteryx.com/t5/Data-Preparation-Blending/Run-a-python-script-in-Alteryx/td-p/10973)中运行现有的Python脚本。然而，两个应用程序都没有提供创作工具。这通常不是问题，因为希望运行Python脚本的人通常已经有了首选的IDE。然而，Gartner特别指出Alteryx，而非SAS，存在“缺乏Python集成”的问题。
+示例 1：你可以在[Enterprise Miner](https://communities.sas.com/t5/SAS-Communities-Library/Tip-How-to-execute-a-Python-script-in-SAS-Enterprise-Miner/ta-p/223761)中运行现有的 Python 脚本，也可以在[Alteryx](https://community.alteryx.com/t5/Data-Preparation-Blending/Run-a-python-script-in-Alteryx/td-p/10973)中运行现有的 Python 脚本。然而，两个应用程序都没有提供创作工具。这通常不是问题，因为希望运行 Python 脚本的人通常已经有了首选的 IDE。然而，Gartner 特别指出 Alteryx，而非 SAS，存在“缺乏 Python 集成”的问题。
 
-示例 2：Microsoft Azure Machine Learning 仅在Microsoft Azure云中运行。IBM Data Science Experience (DSx) 仅在IBM Cloud中运行。Gartner批评Azure Machine Learning缺乏本地部署能力，同时称赞DSx为“最具吸引力的平台之一”。
+示例 2：Microsoft Azure Machine Learning 仅在 Microsoft Azure 云中运行。IBM Data Science Experience (DSx) 仅在 IBM Cloud 中运行。Gartner 批评 Azure Machine Learning 缺乏本地部署能力，同时称赞 DSx 为“最具吸引力的平台之一”。
 
-示例 3：Statistica无法将模型训练推送到Spark中；SAS Enterprise Miner也不能。Gartner特别指出Statistica在Spark能力上“落后”。
+示例 3：Statistica 无法将模型训练推送到 Spark 中；SAS Enterprise Miner 也不能。Gartner 特别指出 Statistica 在 Spark 能力上“落后”。
 
-#### (6) 数据科学家不使用Gartner的顶级“数据科学”平台。
+#### (6) 数据科学家不使用 Gartner 的顶级“数据科学”平台。
 
 如果你想基于数据科学家实际[使用](http://www.oreilly.com/data/free/2016-data-science-salary-survey.csp)的工具创建一个魔力象限，你可能会产生类似的结果：
 
-![2016-magic-quadrant](../Images/a6675cb04ff8061fe99e470e7b5243ef.png)
+![2016-magic-quadrant](img/a6675cb04ff8061fe99e470e7b5243ef.png)
 
-仅有 **5%** 的 O’Reilly 调查的数据科学家使用任何 SAS 软件，而 **0%** 使用任何 IBM 分析软件。在稍微广泛的 [KDnuggets 调查](/2016/06/r-python-top-analytics-data-mining-data-science-software.html/2) 中，**6%** 使用 SAS Enterprise Miner，**8%** 说他们使用 IBM SPSS Modeler。
+仅有 **5%** 的 O’Reilly 调查的数据科学家使用任何 SAS 软件，而 **0%** 使用任何 IBM 分析软件。在稍微广泛的 KDnuggets 调查 中，**6%** 使用 SAS Enterprise Miner，**8%** 说他们使用 IBM SPSS Modeler。
 
 高德纳对“公民数据科学家”的痴迷使其批评 Domino 和 H2O，因为它们“难以使用”：
 
@@ -140,29 +140,29 @@ Nick Heudecker，[请联系你的办公室](https://thomaswdinsmore.com/2017/02/
 
 可视分析套件运行在 SAS 自有的 LASR 服务器内存数据存储上；要将数据转入该格式，客户还需要 SAS 数据加载器或 SAS ETL 服务器。
 
-客户必须单独从SAS处许可所有这些产品；这样做将使成本增加三倍以上，并显著增加架构的复杂性。实际上，只有少数SAS客户这样做；大约15%的SAS客户许可了SAS Enterprise Miner，而这些客户中的一小部分则许可了Gartner评估中反映的所有软件。
+客户必须单独从 SAS 处许可所有这些产品；这样做将使成本增加三倍以上，并显著增加架构的复杂性。实际上，只有少数 SAS 客户这样做；大约 15%的 SAS 客户许可了 SAS Enterprise Miner，而这些客户中的一小部分则许可了 Gartner 评估中反映的所有软件。
 
-绝大多数SAS客户使用其遗留软件，该软件的代码基于1990年代中期。因此，Gartner对SAS的评估假设了一个几乎无人使用的软件配置。
+绝大多数 SAS 客户使用其遗留软件，该软件的代码基于 1990 年代中期。因此，Gartner 对 SAS 的评估假设了一个几乎无人使用的软件配置。
 
-IBM的情况也是如此。Gartner基于SPSS Modeler的优势以及在较小程度上基于SPSS Statistics，给予IBM领导者的评价。然而，Gartner的评估再次依赖于其他IBM产品。例如，Gartner称赞IBM的模型管理能力：
+IBM 的情况也是如此。Gartner 基于 SPSS Modeler 的优势以及在较小程度上基于 SPSS Statistics，给予 IBM 领导者的评价。然而，Gartner 的评估再次依赖于其他 IBM 产品。例如，Gartner 称赞 IBM 的模型管理能力：
 
-> 调查显示，IBM客户对SPSS的模型管理给予了高度评价，称赞其模型种类的广泛、工作流程的准确性和透明性、模型部署、性能下降的监控以及自动调优功能。SPSS提供了出色的分析治理功能：版本控制、元数据和审计能力。
+> 调查显示，IBM 客户对 SPSS 的模型管理给予了高度评价，称赞其模型种类的广泛、工作流程的准确性和透明性、模型部署、性能下降的监控以及自动调优功能。SPSS 提供了出色的分析治理功能：版本控制、元数据和审计能力。
 
-这很好。只是这些功能在SPSS Modeler中不可用。要获得这些功能，客户必须许可[IBM SPSS Collaboration and Deployment Services](https://www.ibm.com/support/knowledgecenter/SS69YH_8.0.0/cads_portal_ddita/model_management/pex/mmd_peb_overview.html)这一附加产品。类似地，Gartner赞扬了IBM与Hadoop的集成。这是一个有价值的功能，但需要另一个产品，[IBM SPSS Analytics Server](https://www.gartner.com/doc/reprints?hsCtaTracking=8f38fcc9-d157-4611-918c-ee0da0089ec8%257C0cf839a7-33e8-4731-a312-e445aa0bb7aa&ct=170207&st=sb&utm_campaign=Gartner&utm_medium=email&id=1-3SYBOLI&_hsenc=p2ANqtz-8Y8SxrEn1ZGmCW0oqwWdqCVoU-vWcAZM6GBlbTLh1gNYwwnRDB9D6MK4SElXfeREqAtUZuPbptxXqNQjm3N4rbXQ1p8AYBHh05mOS_BpKyLsjkZK8&_hsmi=42679348&utm_content=42679348&utm_source=hs_automation)。
+这很好。只是这些功能在 SPSS Modeler 中不可用。要获得这些功能，客户必须许可[IBM SPSS Collaboration and Deployment Services](https://www.ibm.com/support/knowledgecenter/SS69YH_8.0.0/cads_portal_ddita/model_management/pex/mmd_peb_overview.html)这一附加产品。类似地，Gartner 赞扬了 IBM 与 Hadoop 的集成。这是一个有价值的功能，但需要另一个产品，[IBM SPSS Analytics Server](https://www.gartner.com/doc/reprints?hsCtaTracking=8f38fcc9-d157-4611-918c-ee0da0089ec8%257C0cf839a7-33e8-4731-a312-e445aa0bb7aa&ct=170207&st=sb&utm_campaign=Gartner&utm_medium=email&id=1-3SYBOLI&_hsenc=p2ANqtz-8Y8SxrEn1ZGmCW0oqwWdqCVoU-vWcAZM6GBlbTLh1gNYwwnRDB9D6MK4SElXfeREqAtUZuPbptxXqNQjm3N4rbXQ1p8AYBHh05mOS_BpKyLsjkZK8&_hsmi=42679348&utm_content=42679348&utm_source=hs_automation)。
 
-简而言之，由于未披露客户必须许可哪些产品才能实现所述功能，Gartner对大多数客户实际许可的软件产生了虚假的印象。
+简而言之，由于未披露客户必须许可哪些产品才能实现所述功能，Gartner 对大多数客户实际许可的软件产生了虚假的印象。
 
 就像仅仅根据总统套房的检查来评价一家酒店，或通过试驾一辆凯迪拉克来评估一辆雪佛兰。
 
-#### (9) Gartner对IBM有很高的评价。
+#### (9) Gartner 对 IBM 有很高的评价。
 
 这个瑰宝隐藏在报告的深处：
 
-> 客户经常被（IBM的）营销信息与实际可购产品之间的不匹配所困扰。
+> 客户经常被（IBM 的）营销信息与实际可购产品之间的不匹配所困扰。
 
-换句话说，IBM是一个巨大的炒作机器。Gartner对IBM的新数据科学体验（DSx）深信不疑：
+换句话说，IBM 是一个巨大的炒作机器。Gartner 对 IBM 的新数据科学体验（DSx）深信不疑：
 
-> DSx可能成为未来最具吸引力的平台之一——现代、开放、灵活，适合从专家数据科学家到业务人员的各种用户。
+> DSx 可能成为未来最具吸引力的平台之一——现代、开放、灵活，适合从专家数据科学家到业务人员的各种用户。
 
 请记住，DSx 是 IBM Cloud 上的 Spark 和 R 的托管服务。它包括 Jupyter 和 RStudio IDE。这就是全部——一个简单的托管服务，功能不如 Altiscale、Databricks、Domino、Microsoft Azure 或 Qubole 提供的托管服务。
 
@@ -190,27 +190,27 @@ IBM 可能价格昂贵，但你会得到一流的技术支持，对吧？
 
 **相关：**
 
-+   [Gartner 2017 数据科学平台魔力象限：赢家和输家](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html)
++   Gartner 2017 数据科学平台魔力象限：赢家和输家
 
-+   [Gartner 2016 高级分析平台魔力象限：赢家和输家](/2016/02/gartner-2016-mq-analytics-platforms-gainers-losers.html)
++   Gartner 2016 高级分析平台魔力象限：赢家和输家
 
-+   [Gartner 2015 高级分析平台魔力象限：谁赢了，谁输了](/2015/02/gartner-2015-magic-quadrant-advanced-analytics-platforms.html)。
++   Gartner 2015 高级分析平台魔力象限：谁赢了，谁输了。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关信息
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [深入了解 13 个数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
 

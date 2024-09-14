@@ -1,6 +1,6 @@
 # 转移学习用于图像识别和自然语言处理
 
-> 原文：[https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
+> 原文：[`www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html`](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 
 如果你有机会阅读了本文的第一部分，你会记得转移学习是一种机器学习方法，其中从一个任务中获得的模型的知识应用可以作为另一个任务的基础点被重用。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -85,7 +85,7 @@ m.build([None, 224, 224, 3])  # Batch input shape.
 
 如果你希望从基本模型中获得有效的特征表示，微调是至关重要的，这样可以更好地适应你的任务。
 
-## 示例：如何在Keras中使用预训练的图像模型
+## 示例：如何在 Keras 中使用预训练的图像模型
 
 现在让我们看一个例子。由于我们一直在讨论猫和狗，让我们对它们做一个图像识别的示例。
 
@@ -102,7 +102,7 @@ import tensorflow_datasets as tfds
 
 打印出训练和测试的样本量总是好的，以了解你正在处理的数据量，并查看图像，这样你可以了解你正在处理的数据。
 
-![图像识别和自然语言处理的迁移学习](../Images/b3fd27648714f720ac95c80bac98cf59.png)
+![图像识别和自然语言处理的迁移学习](img/b3fd27648714f720ac95c80bac98cf59.png)
 
 由于图像大小各异，将图像标准化为固定大小是一种良好的方法，因为这是神经网络的一个一致输入。
 
@@ -120,7 +120,7 @@ data_augmentation = keras.Sequential(
 
 ## 从选择的架构（Xception）创建一个基本模型
 
-下一步是创建模型。我们首先将实例化一个基本模型，[Xception](https://keras.io/api/applications/xception/)，并将预训练的权重加载到其中。在这个例子中，我们使用的是ImageNet。然后，我们冻结基本模型中的所有层。冻结有助于防止在训练过程中更新权重。
+下一步是创建模型。我们首先将实例化一个基本模型，[Xception](https://keras.io/api/applications/xception/)，并将预训练的权重加载到其中。在这个例子中，我们使用的是 ImageNet。然后，我们冻结基本模型中的所有层。冻结有助于防止在训练过程中更新权重。
 
 ```py
 base_model = keras.applications.Xception(
@@ -142,7 +142,7 @@ inputs = keras.Input(shape=(150, 150, 3))
 x = data_augmentation(inputs)  # Apply random data augmentation
 ```
 
-![图像识别和自然语言处理的迁移学习](../Images/f61240edecb4a96c89b8cd19a90f78a3.png)
+![图像识别和自然语言处理的迁移学习](img/f61240edecb4a96c89b8cd19a90f78a3.png)
 
 ## 微调
 
@@ -164,13 +164,13 @@ epochs = 10
 model.fit(train_ds, epochs=epochs, validation_data=validation_ds)
 ```
 
-![图像识别和自然语言处理的迁移学习](../Images/5cb503590a101193a082457b4d4319d9.png)
+![图像识别和自然语言处理的迁移学习](img/5cb503590a101193a082457b4d4319d9.png)
 
 如果你想进一步了解，可以点击[这里](https://colab.research.google.com/drive/10WqNas4nwDeBqpWzDgC098Fkzu8sbzLB?usp=sharing)查看 Colab 笔记本。
 
 ## 自然语言处理
 
-我们已经讨论了很多关于图像分类的内容，现在让我们来看看自然语言处理（NLP）。那么，NLP是什么呢？NLP是计算机通过语音和文本检测和理解人类语言的能力，就像我们人类一样。
+我们已经讨论了很多关于图像分类的内容，现在让我们来看看自然语言处理（NLP）。那么，NLP 是什么呢？NLP 是计算机通过语音和文本检测和理解人类语言的能力，就像我们人类一样。
 
 人类语言包含许多歧义，这使得创建能够准确检测语音和文本的软件变得困难。例如，讽刺、语法和同音词，然而，这些只是学习人类语言过程中遇到的一些小障碍。
 
@@ -251,9 +251,9 @@ os.listdir(dataset_dir)
 
 你可以在下面的图像中看到区别，0 表示负面，1 表示正面。
 
-![图像识别与自然语言处理的迁移学习](../Images/4657f2679672895c02e8d53998547640.png)
+![图像识别与自然语言处理的迁移学习](img/4657f2679672895c02e8d53998547640.png)
 
-然后，我转向使用Keras的Embedding Layer，将正整数转换为固定大小的稠密向量。嵌入的权重是随机初始化的，并在反向传播过程中进行调整。一旦知识学会了，词嵌入将编码它们所学过的词与之前学过的词之间的相似性。
+然后，我转向使用 Keras 的 Embedding Layer，将正整数转换为固定大小的稠密向量。嵌入的权重是随机初始化的，并在反向传播过程中进行调整。一旦知识学会了，词嵌入将编码它们所学过的词与之前学过的词之间的相似性。
 
 ```py
 # Embed a 1,000-word vocabulary into 5 dimensions.
@@ -263,7 +263,7 @@ embedding_layer = tf.keras.layers.Embedding(1000, 5)
 
 ## 文本预处理
 
-在文本预处理阶段，我们将初始化一个TextVectorization层，以期望的参数对电影评论进行向量化。文本向量化层将帮助拆分和映射来自电影评论的字符串到整数。
+在文本预处理阶段，我们将初始化一个 TextVectorization 层，以期望的参数对电影评论进行向量化。文本向量化层将帮助拆分和映射来自电影评论的字符串到整数。
 
 ```py
 # text vectorization layer to split, and map strings to integers.
@@ -277,9 +277,9 @@ vectorize_layer = TextVectorization(
 
 ## 创建模型
 
-上述预处理中的vectorize_layer将作为模型的第一层实现，因为它已经将字符串转换为词汇索引。它将把转换后的字符串输入到Embedding层中。
+上述预处理中的 vectorize_layer 将作为模型的第一层实现，因为它已经将字符串转换为词汇索引。它将把转换后的字符串输入到 Embedding 层中。
 
-然后，Embedding层会接受这些词汇索引，并扫描每个词索引的向量，在模型训练时进行学习。
+然后，Embedding 层会接受这些词汇索引，并扫描每个词索引的向量，在模型训练时进行学习。
 
 ```py
 model = Sequential([
@@ -295,7 +295,7 @@ model = Sequential([
 
 ## 编译模型
 
-我们将使用Adam优化器和BinaryCrossentropy损失函数来编译模型。
+我们将使用 Adam 优化器和 BinaryCrossentropy 损失函数来编译模型。
 
 ```py
 model.compile(optimizer='adam',
@@ -303,13 +303,13 @@ model.compile(optimizer='adam',
              metrics=['accuracy'])
 ```
 
-![图像识别和自然语言处理的迁移学习](../Images/3752ccb3a402ba4dafec117e9e1222de.png)
+![图像识别和自然语言处理的迁移学习](img/3752ccb3a402ba4dafec117e9e1222de.png)
 
-我提到了TensorBoard，它可视化模型指标，你可以在下面看到。
+我提到了 TensorBoard，它可视化模型指标，你可以在下面看到。
 
-![图像识别和自然语言处理的迁移学习](../Images/ee91bb8de47eca756eb55dae91a67005.png)
+![图像识别和自然语言处理的迁移学习](img/ee91bb8de47eca756eb55dae91a67005.png)
 
-你已经了解了如何使用预训练的词嵌入模型训练和测试NLP模型。如果你想进一步查看Colab笔记本，你可以[在这里](https://colab.research.google.com/drive/1Du5GMWWh8-a5UEXtdbaaDgHy71joSG-K?usp=sharing)查看。
+你已经了解了如何使用预训练的词嵌入模型训练和测试 NLP 模型。如果你想进一步查看 Colab 笔记本，你可以[在这里](https://colab.research.google.com/drive/1Du5GMWWh8-a5UEXtdbaaDgHy71joSG-K?usp=sharing)查看。
 
 ## 迁移学习的最佳实践是什么？
 

@@ -1,14 +1,14 @@
 # 一个 Python 数据处理脚本模板
 
-> 原文：[https://www.kdnuggets.com/2021/08/python-data-processing-script-template.html](https://www.kdnuggets.com/2021/08/python-data-processing-script-template.html)
+> 原文：[`www.kdnuggets.com/2021/08/python-data-processing-script-template.html`](https://www.kdnuggets.com/2021/08/python-data-processing-script-template.html)
 
-[评论](#comments)
+评论
 
-![图片](../Images/2af4a97469a9a229181550d8825a4383.png)
+![图片](img/2af4a97469a9a229181550d8825a4383.png)
 
 像你们中的许多人一样，我倾向于编写许多用于执行类似任务的 Python 脚本，或至少遵循类似的功能模式。为了避免重复自己（或者从不同角度看，为了以完全相同的方式重复自己），我喜欢为这些类型的脚本设置模板代码，以保持编程生活尽可能轻松。
 
-我最近写了关于 [作为数据科学家的可重用 Python 代码管理](/2021/06/managing-reusable-python-code-data-scientist.html) 的文章，基于相同的思路，我整理了一个通用的 Python 数据处理脚本模板，这几乎是我现在开始大多数项目时使用的。它随着时间的推移发生了变化并进行了调整，但当前版本是我大多数非专业（即非机器学习）脚本的首选模板。
+我最近写了关于 作为数据科学家的可重用 Python 代码管理 的文章，基于相同的思路，我整理了一个通用的 Python 数据处理脚本模板，这几乎是我现在开始大多数项目时使用的。它随着时间的推移发生了变化并进行了调整，但当前版本是我大多数非专业（即非机器学习）脚本的首选模板。
 
 首先，这里简要介绍一下我现在通常希望通过脚本广泛实现的目标：
 
@@ -200,7 +200,7 @@ input_file.close()
 
 ### 自定义库
 
-这是一些自定义库功能的示例。有关此代码创建一些简单日期特征的功能，请查看 [这里](/2021/08/engineer-date-features-python.html)。由于我经常使用我的预处理代码片段集合，它们已被打包为 my_preprocessing 库，我会自动导入。
+这是一些自定义库功能的示例。有关此代码创建一些简单日期特征的功能，请查看 这里。由于我经常使用我的预处理代码片段集合，它们已被打包为 my_preprocessing 库，我会自动导入。
 
 ```py
 # Date feature engineering
@@ -216,21 +216,21 @@ pprint.pprint(my_date)
 
 **相关**：
 
-+   [作为数据科学家的可重用 Python 代码管理](/2021/06/managing-reusable-python-code-data-scientist.html)
++   作为数据科学家的可重用 Python 代码管理
 
-+   [Python 数据结构比较](/2021/07/python-data-structures-compared.html)
++   Python 数据结构比较
 
-+   [使用 Python 自动化 Microsoft Excel 和 Word](/2021/08/automate-microsoft-excel-word-python.html)
++   使用 Python 自动化 Microsoft Excel 和 Word
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
 
 * * *
 

@@ -1,6 +1,6 @@
 # 人工智能、深度学习和神经网络的解释
 
-> 原文：[https://www.kdnuggets.com/2016/10/artificial-intelligence-deep-learning-neural-networks-explained.html](https://www.kdnuggets.com/2016/10/artificial-intelligence-deep-learning-neural-networks-explained.html)
+> 原文：[`www.kdnuggets.com/2016/10/artificial-intelligence-deep-learning-neural-networks-explained.html`](https://www.kdnuggets.com/2016/10/artificial-intelligence-deep-learning-neural-networks-explained.html)
 
 ### 介绍
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
 这里讨论的概念极其技术性、复杂，并且基于数学、统计学、概率论、物理学、信号处理、机器学习、计算机科学、心理学、语言学和神经科学。
 
-![InnoArchiTech 帖子图片](../Images/93a1ca286541e8415a9614f2ec80ddac.png)
+![InnoArchiTech 帖子图片](img/93a1ca286541e8415a9614f2ec80ddac.png)
 
 也就是说，本文并非旨在提供如此技术性的处理，而是以大多数非专业人士能够理解的水平来解释这些概念，同时也可以作为技术人员的参考或复习。
 
@@ -44,7 +44,7 @@
 
 因此，可以自然地认为人工智能可以被描述为机器所表现出的智能。那么，这到底是什么意思？它何时有用？它是如何工作的？
 
-一个熟悉的人工智能解决方案是*IBM的沃森*，它因战胜了历史上两位最伟大的*危险边缘*冠军而闻名，现在被用作*问答计算系统*用于商业应用。*苹果的Siri*和*亚马逊的Alexa*也是类似的例子。
+一个熟悉的人工智能解决方案是*IBM 的沃森*，它因战胜了历史上两位最伟大的*危险边缘*冠军而闻名，现在被用作*问答计算系统*用于商业应用。*苹果的 Siri*和*亚马逊的 Alexa*也是类似的例子。
 
 除了语音识别和自然语言（处理、生成和理解）应用外，人工智能还用于其他识别任务（模式、文本、音频、图像、视频、面部等）、自动驾驶车辆、医学诊断、游戏、搜索引擎、垃圾邮件过滤、打击犯罪、营销、机器人技术、遥感、计算机视觉、交通、音乐识别、分类等。
 
@@ -54,21 +54,21 @@
 
 正如前面提到的，人工智能有许多不同的目标，每个目标使用不同的技术。本文的主要话题是人工神经网络及其高级版本，即深度学习。
 
-![InnoArchiTech 文章图片](../Images/7ac6a32a14ccbe2e182793abe4be37f7.png)
+![InnoArchiTech 文章图片](img/7ac6a32a14ccbe2e182793abe4be37f7.png)
 
 ### 生物神经网络概述
 
 人脑极其复杂，确切地说是已知的最强大计算机器。
 
-人脑的内部工作机制通常围绕*神经元*的概念以及被称为*生物神经网络*的神经元网络进行建模。根据维基百科的估计，人脑中大约有1000亿个神经元，这些神经元沿着这些网络的通路连接在一起。
+人脑的内部工作机制通常围绕*神经元*的概念以及被称为*生物神经网络*的神经元网络进行建模。根据维基百科的估计，人脑中大约有 1000 亿个神经元，这些神经元沿着这些网络的通路连接在一起。
 
 从很高的层次来看，神经元通过由*轴突末端*和跨越间隙（*突触*）连接的*树突*组成的界面进行互动和通信。
 
-![由LadyofHats [公有领域]提供，来自Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/a/a9/Complete_neuron_cell_diagram_en.svg](../Images/75941c9da6dbb22d72c7dd0ebc1fb72c.png)
+![由 LadyofHats [公有领域]提供，来自 Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/a/a9/Complete_neuron_cell_diagram_en.svg](../Images/75941c9da6dbb22d72c7dd0ebc1fb72c.png)
 
 用简单的语言来说，如果一个神经元接收到来自一个或多个神经元的*加权输入信号*的总和（*求和*）足够大（超过*阈值*），它就会将消息传递给另一个神经元。当阈值被超过且消息被传递到下一个神经元时，这称为*激活*。
 
-![由Chrislb（Chrislb创作） [GFDL (http://www.gnu.org/copyleft/fdl.html) 或 CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/)]提供，来自Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/6/60/ArtificialNeuronModel_english.png](../Images/42fd960f63c56ebdf87bbe59f461b516.png)
+![由 Chrislb（Chrislb 创作） [GFDL (http://www.gnu.org/copyleft/fdl.html) 或 CC-BY-SA-3.0 (http://creativecommons.org/licenses/by-sa/3.0/)]提供，来自 Wikimedia Commons | https://upload.wikimedia.org/wikipedia/commons/6/60/ArtificialNeuronModel_english.png](../Images/42fd960f63c56ebdf87bbe59f461b516.png)
 
 *求和*过程可以在数学上是复杂的。每个神经元的输入信号实际上是潜在多个输入信号的*加权组合*，每个输入的权重意味着该输入对任何后续计算以及最终网络的输出都会产生不同的影响。
 
@@ -98,7 +98,7 @@
 
 模型可以变得越来越复杂，通过增加*隐藏层*的数量、每个层中的神经元数量和/或神经元之间的路径数量，模型的抽象和问题解决能力也会增加。请注意，模型复杂度增加也可能会增加*过拟合*的风险。
 
-![InnoArchiTech 发布的图片](../Images/681d2512d53ae39a82645d503e395470.png)
+![InnoArchiTech 发布的图片](img/681d2512d53ae39a82645d503e395470.png)
 
 因此，模型架构和调优是人工神经网络技术的重要组成部分，除了实际的学习算法。这些人工神经网络的所有特性都可能对模型的性能产生重大影响。
 
@@ -106,7 +106,7 @@
 
 将输出抽象为输入数据通过神经元和层的变换结果是一种*分布式表示*，与*局部表示*形成对比。例如，单个人工神经元表示的意义是一种局部表示。然而，整个网络的意义由于神经元和层之间的许多变换，形成了一种分布式表示。
 
-值得注意的是，虽然人工神经网络（ANNs）非常强大，但它们也可能非常复杂，并被认为是*黑箱*算法，这意味着它们的内部工作机制非常难以理解和解释。因此，在选择是否使用ANNs解决问题时，应考虑这一点。
+值得注意的是，虽然人工神经网络（ANNs）非常强大，但它们也可能非常复杂，并被认为是*黑箱*算法，这意味着它们的内部工作机制非常难以理解和解释。因此，在选择是否使用 ANNs 解决问题时，应考虑这一点。
 
 ### 深度学习简介
 
@@ -132,13 +132,13 @@
 
 许多在物理宇宙中观察到的现象实际上最适合用非线性变换来建模。在机器学习和人工智能解决方案中，输入和目标输出之间的变换也同样如此。
 
-![InnoArchiTech post image](../Images/7fc91ad8cc6140a0b8d27f274cb8bdca.png)
+![InnoArchiTech post image](img/7fc91ad8cc6140a0b8d27f274cb8bdca.png)
 
 ### 深入探讨深度学习 - 并非玩笑
 
 如前所述，输入数据在深度学习神经网络的各层之间通过人工神经元或处理单元进行转换。从输入到输出的转换链称为*信用分配路径*，或*CAP*。
 
-CAP值是深度学习模型架构中“深度”的测量或概念的代理。根据维基百科，大多数领域的研究者一致认为深度学习具有多个非线性层，CAP大于二，有些人认为CAP大于十为*非常深度学习*。
+CAP 值是深度学习模型架构中“深度”的测量或概念的代理。根据维基百科，大多数领域的研究者一致认为深度学习具有多个非线性层，CAP 大于二，有些人认为 CAP 大于十为*非常深度学习*。
 
 虽然对许多不同的深度学习模型架构和学习算法的详细讨论超出了本文的范围，但一些较为显著的包括：
 
@@ -176,17 +176,17 @@ CAP值是深度学习模型架构中“深度”的测量或概念的代理。�
 
 尽管像终结者那样的场景不太可能很快发生，但人工智能技术和应用的发展肯定会让人非常兴奋！
 
-[亚历克斯·卡斯特罗尼斯](https://www.whyofai.com/alex-castrounis)是[Why of AI](https://www.whyofai.com/)的创始人兼首席执行官，并且是[《AI for People and Business》](https://www.whyofai.com/ai-book)的作者。他还是西北大学凯洛格/麦考密克MBAi项目的兼职讲师。
+[亚历克斯·卡斯特罗尼斯](https://www.whyofai.com/alex-castrounis)是[Why of AI](https://www.whyofai.com/)的创始人兼首席执行官，并且是[《AI for People and Business》](https://www.whyofai.com/ai-book)的作者。他还是西北大学凯洛格/麦考密克 MBAi 项目的兼职讲师。
 
 本文最初发布在[InnoArchiTech 博客](http://www.innoarchitech.com/artificial-intelligence-deep-learning-neural-networks-explained/?utm_source=kdnuggets&utm_medium=post&utm_content=postlink&utm_campaign=republish)上。
 
 **相关：**
 
-+   [深度学习关键术语解析](/2016/10/deep-learning-key-terms-explained.html)
++   深度学习关键术语解析
 
-+   [9篇关键深度学习论文解析](/2016/09/9-key-deep-learning-papers-explained.html)
++   9 篇关键深度学习论文解析
 
-+   [深度学习阅读小组：具有随机深度的深度网络](/2016/09/deep-learning-reading-group-stochastic-depth-networks.html)
++   深度学习阅读小组：具有随机深度的深度网络
 
 ### 更多相关主题
 
@@ -194,10 +194,10 @@ CAP值是深度学习模型架构中“深度”的测量或概念的代理。�
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

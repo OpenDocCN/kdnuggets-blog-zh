@@ -1,8 +1,8 @@
 # 使用 Prefect 构建数据管道
 
-> 原文：[https://www.kdnuggets.com/building-data-pipeline-with-prefect](https://www.kdnuggets.com/building-data-pipeline-with-prefect)
+> 原文：[`www.kdnuggets.com/building-data-pipeline-with-prefect`](https://www.kdnuggets.com/building-data-pipeline-with-prefect)
 
-![使用 Prefect 构建数据管道](../Images/4d13b082e59808e5824b4489d6e1fbe1.png)
+![使用 Prefect 构建数据管道](img/4d13b082e59808e5824b4489d6e1fbe1.png)
 
 图片来源：作者 | Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@ Prefect 作为一个开源框架和托管云服务提供，进一步简化了你
 
 ## 使用 Pandas 构建数据管道
 
-我们将复制我在之前教程中使用的数据管道（[使用 Pandas 构建数据科学管道—KDnuggets](/building-data-science-pipelines-using-pandas)），以便你了解每个任务在管道中的工作方式以及如何将它们结合起来。我在这里提到它，以便你可以清楚地比较完美的数据管道与普通管道的区别。
+我们将复制我在之前教程中使用的数据管道（使用 Pandas 构建数据科学管道—KDnuggets），以便你了解每个任务在管道中的工作方式以及如何将它们结合起来。我在这里提到它，以便你可以清楚地比较完美的数据管道与普通管道的区别。
 
 ```py
 import pandas as pd
@@ -72,7 +72,7 @@ df = (
 
 当我们运行上述代码时，每个任务将按顺序运行并生成数据可视化。除此之外，它不会做其他事情。我们可以安排它、查看运行日志，甚至集成第三方工具进行通知或监控。
 
-![使用 Prefect 构建数据管道](../Images/79beb4560737e97df467c8f9d7ff23a5.png)
+![使用 Prefect 构建数据管道](img/79beb4560737e97df467c8f9d7ff23a5.png)
 
 ## 使用 Prefect 构建数据管道
 
@@ -160,7 +160,7 @@ if __name__ == "__main__":
 
 最终，你将获得转换后的数据框和可视化结果。
 
-![使用 Prefect 构建数据管道](../Images/c74d76a8f60b64e2a696a39dcd248852.png)
+![使用 Prefect 构建数据管道](img/c74d76a8f60b64e2a696a39dcd248852.png)
 
 ## 部署 Prefect 管道
 
@@ -232,7 +232,7 @@ $ python data_pipe.py
 
 当我们运行 Python 文件时，会收到一条消息，说明要运行已部署的管道，我们需要使用以下命令：
 
-![使用 Prefect 构建数据管道](../Images/7de84a30f6d0c14c52f3ba144649446f.png)
+![使用 Prefect 构建数据管道](img/7de84a30f6d0c14c52f3ba144649446f.png)
 
 启动一个新的终端窗口并输入命令以触发此流的运行。
 
@@ -242,7 +242,7 @@ $ prefect deployment run 'Data Pipeline/pass-params-deployment'
 
 正如我们所见，流运行已启动，这意味着管道在后台运行。我们始终可以回到第一个终端窗口以查看日志。
 
-![使用 Prefect 构建数据管道](../Images/50e3e5c9ca50ab412878a272c357108a.png)
+![使用 Prefect 构建数据管道](img/50e3e5c9ca50ab412878a272c357108a.png)
 
 要在仪表板中查看日志，我们需要通过输入以下命令来启动 Prefect 仪表板：
 
@@ -252,11 +252,11 @@ $ prefect server start
 
 点击仪表板链接以在您的网络浏览器中启动仪表板。
 
-![使用 Prefect 构建数据管道](../Images/a3adf6f824b5460e04567e9d3adb3aff.png)
+![使用 Prefect 构建数据管道](img/a3adf6f824b5460e04567e9d3adb3aff.png)
 
 仪表板包含各种选项卡和与管道、工作流以及运行相关的信息。要查看当前运行，请导航到“流运行”选项卡并选择最新的流运行。
 
-![使用 Prefect 构建数据管道](../Images/071f403e8756b9a9161de8310b94c8d2.png)
+![使用 Prefect 构建数据管道](img/071f403e8756b9a9161de8310b94c8d2.png)
 
 所有源代码、数据和信息都可以在 [Kingabzpro/Data-Pipeline-with-Prefect](https://github.com/kingabzpro/Data-Pipeline-with-Prefect) GitHub 仓库中找到。请不要忘记 ⭐ 赞一下。
 

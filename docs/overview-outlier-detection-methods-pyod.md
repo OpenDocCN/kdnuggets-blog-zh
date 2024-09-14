@@ -1,10 +1,10 @@
-# 来自 PyOD 的异常检测方法概述 – 第 1 部分
+# 来自 PyOD 的异常检测方法概述 – 第一部分
 
-> 原文：[https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html](https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html)
+> 原文：[`www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html`](https://www.kdnuggets.com/2019/06/overview-outlier-detection-methods-pyod.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-Matthew Mayo 以前的一篇文章标题为：[异常检测方法的直观可视化](/2019/02/outlier-detection-methods-cheat-sheet.html) 概述了由 [Yue Zhao](https://www.yuezhao.me/) 开发的 [PyOD](https://github.com/yzhao062/pyod) 包。
+Matthew Mayo 以前的一篇文章标题为：异常检测方法的直观可视化 概述了由 [Yue Zhao](https://www.yuezhao.me/) 开发的 [PyOD](https://github.com/yzhao062/pyod) 包。
 
 本文将从这里继续，形成一个多部分系列，概述包中提供的不同异常检测方法。我将使用 PyOD 文档中的信息，以避免因重叠技术而造成混淆。
 
@@ -14,11 +14,11 @@ Matthew Mayo 以前的一篇文章标题为：[异常检测方法的直观可视
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -56,15 +56,15 @@ pyod.models.lof.LOF(n_neighbors=20, algorithm='auto', leaf_size=30, metric='mink
 
 ```
 
-每个样本的异常评分称为局部异常因子。它衡量给定样本相对于其邻居的局部密度偏差。局部性在于异常评分依赖于对象与周围邻域的隔离程度。更准确地说，局部性由k近邻确定，其距离用于估计局部密度。通过将样本的局部密度与其邻居的局部密度进行比较，可以识别出那些密度明显低于其邻居的样本。这些样本被视为异常值。
+每个样本的异常评分称为局部异常因子。它衡量给定样本相对于其邻居的局部密度偏差。局部性在于异常评分依赖于对象与周围邻域的隔离程度。更准确地说，局部性由 k 近邻确定，其距离用于估计局部密度。通过将样本的局部密度与其邻居的局部密度进行比较，可以识别出那些密度明显低于其邻居的样本。这些样本被视为异常值。
 
 **相关内容：**
 
-+   [异常检测方法的直观可视化](/2019/02/outlier-detection-methods-cheat-sheet.html)
++   异常检测方法的直观可视化
 
-+   [异常检测的四种技术](/2018/12/four-techniques-outlier-detection.html)
++   异常检测的四种技术
 
-+   [如何使你的机器学习模型对异常值具有鲁棒性](/2018/08/make-machine-learning-models-robust-outliers.html)
++   如何使你的机器学习模型对异常值具有鲁棒性
 
 ### 更多相关内容
 
@@ -78,4 +78,4 @@ pyod.models.lof.LOF(n_neighbors=20, algorithm='auto', leaf_size=30, metric='mink
 
 +   [数据科学方法推动业务成功](https://www.kdnuggets.com/2023/10/nwu-data-science-methods-drive-business-success)
 
-+   [每个程序员都应该知道的11种 Python 魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
++   [每个程序员都应该知道的 11 种 Python 魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)

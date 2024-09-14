@@ -1,8 +1,8 @@
 # 使用迁移学习和弱监督廉价构建 NLP 分类器
 
-> 原文：[https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2)
+> 原文：[`www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2`](https://www.kdnuggets.com/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### ****第二步：使用 Snorkel 构建训练集****
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -60,7 +60,7 @@ display(lf_summary(sparse.csr_matrix(LF_matrix),
 
 我总共有 24 个 LF，但以下是我部分 LF 的 LF 摘要。你可以在表格下方找到每一列的含义。
 
-![Figure](../Images/61cbdc47a245bcd4a768cf0151c13ee0.png)
+![Figure](img/61cbdc47a245bcd4a768cf0151c13ee0.png)
 
 LF 摘要
 
@@ -93,13 +93,13 @@ Y_train_majority_votes = mv.predict(LF_matrix)
 print(classification_report(Y_LFs, Y_train_majority_votes))
 ```
 
-![Figure](../Images/d2ae2e4485ec439f323acc6f507f227b.png)
+![Figure](img/d2ae2e4485ec439f323acc6f507f227b.png)
 
 多数投票者基线的分类报告
 
 我们可以看到，对正类（“1”）的 F1-score 是 0.61。为了提高这一点，我制作了一个电子表格，其中每一行都有一条推文、它的真实标签、以及基于每个 LF 的分配标签。目标是找到 LF 与真实标签不一致的地方，并相应地修正 LF。
 
-![Figure](../Images/4c9dd3dfd4e27c6de09cd16e169f6f34.png)
+![Figure](img/4c9dd3dfd4e27c6de09cd16e169f6f34.png)
 
 我用来调整我的 LFs 的 Google 表格
 
@@ -117,7 +117,7 @@ label_model.train_model(Ls_train, n_epochs=2000, print_every=1000,
 
 现在要测试标签模型，我将其与我的测试集进行了验证，并绘制了精度-召回率曲线。我们可以看到，我们能够获得大约 80% 的精度和 20% 的召回率，这相当不错。使用标签模型的一个重大优势是我们现在可以调整预测概率阈值，以获得更好的精度。
 
-![Figure](../Images/44c2019443a72a3723541b05f77eaf72.png)
+![Figure](img/44c2019443a72a3723541b05f77eaf72.png)
 
 标签模型的精度-召回率曲线
 
@@ -145,15 +145,15 @@ Y_train = label_model.predict(Ls_train) + Y_LF_set
 
 1.  为了验证标签模型，我对我的训练集运行了标签模型，并打印了前 100 个反犹太主义最强的推文和 100 个反犹太主义最弱的推文，以确保它正常工作。
 
-现在我们有了标签模型，我们可以为**2.5万条推文计算概率标签，并将其用作训练集**。现在，继续训练我们的分类模型吧！
+现在我们有了标签模型，我们可以为**2.5 万条推文计算概率标签，并将其用作训练集**。现在，继续训练我们的分类模型吧！
 
-Snorkel的一般提示：
+Snorkel 的一般提示：
 
-+   关于LF准确率：在WS步骤中，我们追求高精度。你的所有LF在LF集合上的准确率应至少达到50%。如果能达到75%或更高，那就更好了。
++   关于 LF 准确率：在 WS 步骤中，我们追求高精度。你的所有 LF 在 LF 集合上的准确率应至少达到 50%。如果能达到 75%或更高，那就更好了。
 
-+   关于LF覆盖率：你需要确保至少65%的训练集有一个LF投票为正或负。这被称为Snorkel的LF覆盖率。
++   关于 LF 覆盖率：你需要确保至少 65%的训练集有一个 LF 投票为正或负。这被称为 Snorkel 的 LF 覆盖率。
 
-+   如果你一开始不是领域专家，你将在标记600个初始数据点的过程中获得新LF的想法。
++   如果你一开始不是领域专家，你将在标记 600 个初始数据点的过程中获得新 LF 的想法。
 
 ### **第三步：构建**分类模型****
 
@@ -161,21 +161,21 @@ Snorkel的一般提示：
 
 **基准线**
 
-我们将从设定一些基准线开始**。我尝试在没有深度学习的情况下构建最佳模型。我尝试了Tf-idf特征化结合sklearn的逻辑回归、XGBoost和前馈神经网络。
+我们将从设定一些基准线开始**。我尝试在没有深度学习的情况下构建最佳模型。我尝试了 Tf-idf 特征化结合 sklearn 的逻辑回归、XGBoost 和前馈神经网络。
 
-以下是结果。为了获得这些数字，我绘制了一个针对开发集的精确度-召回率曲线，然后选择了我喜欢的分类阈值（尽可能争取90%以上的精确度，同时召回率尽可能高）。
+以下是结果。为了获得这些数字，我绘制了一个针对开发集的精确度-召回率曲线，然后选择了我喜欢的分类阈值（尽可能争取 90%以上的精确度，同时召回率尽可能高）。
 
-![图](../Images/ebc7de5adec8e85b81bdad411fd25e76.png)
+![图](img/ebc7de5adec8e85b81bdad411fd25e76.png)
 
 基准线
 
-**尝试ULMFiT**
+**尝试 ULMFiT**
 
-一旦我们下载了在维基百科上训练的ULM，我们需要调整它以适应推文，因为它们的语言差异较大。我按照[这个很棒的博客](https://towardsdatascience.com/transfer-learning-in-nlp-for-tweet-stance-classification-8ab014da8dde)中的所有步骤和代码操作，并且我还使用了来自Kaggle的[Twitter Sentiment140数据集](https://www.kaggle.com/kazanova/sentiment140)来微调语言模型。
+一旦我们下载了在维基百科上训练的 ULM，我们需要调整它以适应推文，因为它们的语言差异较大。我按照[这个很棒的博客](https://towardsdatascience.com/transfer-learning-in-nlp-for-tweet-stance-classification-8ab014da8dde)中的所有步骤和代码操作，并且我还使用了来自 Kaggle 的[Twitter Sentiment140 数据集](https://www.kaggle.com/kazanova/sentiment140)来微调语言模型。
 
-我们从数据集中随机抽取100万条推文，并在这些推文上微调语言模型。这样，语言模型将能够在推特领域进行泛化。
+我们从数据集中随机抽取 100 万条推文，并在这些推文上微调语言模型。这样，语言模型将能够在推特领域进行泛化。
 
-下面的代码加载推文并训练语言模型。我使用了Paperspace的GPU和fastai的公共镜像，这效果非常好。你可以按照[这些步骤](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/paperspace.md)进行设置。
+下面的代码加载推文并训练语言模型。我使用了 Paperspace 的 GPU 和 fastai 的公共镜像，这效果非常好。你可以按照[这些步骤](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/paperspace.md)进行设置。
 
 ```py
 data_lm = TextLMDataBunch.from_df(train_df=LM_TWEETS,         valid_df=df_test, path="")
@@ -189,7 +189,7 @@ learn_lm = language_model_learner(data_lm, pretrained_model=URLs.WT103_1, drop_m
 learn_lm.unfreeze()
 ```
 
-我们运行了20个周期。我将周期放入一个循环中，以便在每次迭代后保存模型。我没找到使用fastai轻松做到这一点的方法。
+我们运行了 20 个周期。我将周期放入一个循环中，以便在每次迭代后保存模型。我没找到使用 fastai 轻松做到这一点的方法。
 
 ```py
 for i in range(20):
@@ -206,7 +206,7 @@ learn_lm.predict("jews", n_words=10)
 >> 'jews out there though probably okay jew back xxbos xxmaj my'
 ```
 
-像“xxmaj”这样的奇怪标记是fastai添加的一些特殊标记，有助于文本理解。例如，它们为大写字母、句子的开头、重复的词等添加了特殊标记。语言模型的表现可能不是很理想，但这没关系。
+像“xxmaj”这样的奇怪标记是 fastai 添加的一些特殊标记，有助于文本理解。例如，它们为大写字母、句子的开头、重复的词等添加了特殊标记。语言模型的表现可能不是很理想，但这没关系。
 
 现在我们将训练我们的分类器：
 
@@ -223,14 +223,14 @@ learn = text_classifier_learner(data_clas, drop_mult=0.5)
 learn.freeze()
 ```
 
-使用fastai的方法寻找合适的学习率：
+使用 fastai 的方法寻找合适的学习率：
 
 ```py
 learn.lr_find(start_lr=1e-8, end_lr=1e2)
 learn.recorder.plot()
 ```
 
-![](../Images/085c485797cd64642a08e461f5295ae2.png)
+![](img/085c485797cd64642a08e461f5295ae2.png)
 
 我们将通过逐渐解冻来微调分类器：
 
@@ -244,21 +244,21 @@ learn.unfreeze()
 learn.fit_one_cycle(4, slice(1e-5,1e-3), moms=(0.8,0.7))
 ```
 
-![图示](../Images/60007d60c67b4d38edde397b5a420512.png)
+![图示](img/60007d60c67b4d38edde397b5a420512.png)
 
 一些训练轮次
 
 在微调后，让我们绘制我们的精确率-召回率曲线！看到第一次尝试后的结果非常好。
 
-![图示](../Images/905e709274b4cbfaba8028d2682a822e.png)
+![图示](img/905e709274b4cbfaba8028d2682a822e.png)
 
-ULMFiT在弱监督下的精确率-召回率曲线
+ULMFiT 在弱监督下的精确率-召回率曲线
 
-我选择了0.63的概率阈值，这使我们获得了**95% 的精准率和39% 的召回率**。这在召回率上有了很大的提升，同时在精准率上也有所提高。
+我选择了 0.63 的概率阈值，这使我们获得了**95% 的精准率和 39% 的召回率**。这在召回率上有了很大的提升，同时在精准率上也有所提高。
 
-![图示](../Images/8d2c36dbb72e91604057d120b11e3b54.png)
+![图示](img/8d2c36dbb72e91604057d120b11e3b54.png)
 
-ULMFiT模型的分类报告
+ULMFiT 模型的分类报告
 
 **与我们的模型玩得开心**
 
@@ -301,41 +301,41 @@ learn.predict("at least the stolen election got the temple jew shooter off the d
 
 ****弱监督真的有帮助吗？****
 
-我很好奇是否需要弱监督才能获得这种性能，因此我进行了一个小实验。我进行了与之前相同的过程，但没有WS标签，并得到了这个精确率-召回率曲线：
+我很好奇是否需要弱监督才能获得这种性能，因此我进行了一个小实验。我进行了与之前相同的过程，但没有 WS 标签，并得到了这个精确率-召回率曲线：
 
-![图示](../Images/887a4d2d3e0a53f16609374ca2f158e2.png)
+![图示](img/887a4d2d3e0a53f16609374ca2f158e2.png)
 
-ULMFiT在没有弱监督下的精确率-召回率曲线
+ULMFiT 在没有弱监督下的精确率-召回率曲线
 
-我们可以看到召回率大幅下降（我们只有**10% 的召回率**，而精准率为90%）和ROC-AUC **(-0.15)**，与我们使用WS标签的之前精确率-召回率曲线相比。
+我们可以看到召回率大幅下降（我们只有**10% 的召回率**，而精准率为 90%）和 ROC-AUC **(-0.15)**，与我们使用 WS 标签的之前精确率-召回率曲线相比。
 
 **结论**
 
-+   弱监督 + ULMFiT帮助我们达到了95%的精准率和39%的召回率。这远远超过了所有基准，因此非常令人兴奋。我完全没有预料到这一点。
++   弱监督 + ULMFiT 帮助我们达到了 95%的精准率和 39%的召回率。这远远超过了所有基准，因此非常令人兴奋。我完全没有预料到这一点。
 
-+   这个模型非常容易保持最新。无需重新标注，我们只需更新LFs并重新运行WS + ULMFiT管道。
++   这个模型非常容易保持最新。无需重新标注，我们只需更新 LFs 并重新运行 WS + ULMFiT 管道。
 
-+   弱监督通过允许ULMFiT更好地泛化，带来了很大的不同。
++   弱监督通过允许 ULMFiT 更好地泛化，带来了很大的不同。
 
 ****下一步****
 
-+   我相信我们可以通过进一步努力改进我的LFs来获得最大的收益，以提高弱监督模型。我会首先包含基于外部知识库如[Hatebase’s](https://hatebase.org/)的仇恨言论模式的LFs。然后，我会基于Spacy的依赖树解析编写新的LFs。
++   我相信我们可以通过进一步努力改进我的 LFs 来获得最大的收益，以提高弱监督模型。我会首先包含基于外部知识库如[Hatebase’s](https://hatebase.org/)的仇恨言论模式的 LFs。然后，我会基于 Spacy 的依赖树解析编写新的 LFs。
 
-+   我们没有进行任何超参数调整，但这可能会帮助提升Label Model和ULMFiT的性能。
++   我们没有进行任何超参数调整，但这可能会帮助提升 Label Model 和 ULMFiT 的性能。
 
-+   我们可以尝试不同的分类模型，比如微调BERT或OpenAI的Transformer。
++   我们可以尝试不同的分类模型，比如微调 BERT 或 OpenAI 的 Transformer。
 
-**个人简介: [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/)** (**[starosta@stanford.edu](mailto:starosta@stanford.edu)**) 来自委内瑞拉，目前在斯坦福大学完成计算机科学硕士学位，专注于人工智能和自然语言处理。在开始斯坦福的硕士课程之前，他曾是Primer AI的数据科学家，这是一家开发文本理解和总结技术的初创公司。他还是Nav Talent的共同创始人，这是一家为顶级初创公司提供技术招聘服务的机构，该机构起步于斯坦福大学。多年来，他还有机会在其他顶级初创公司如Livongo、Zugata和Splunk担任软件工程师。在闲暇时，他喜欢踢足球和打乒乓球。
+**个人简介: [Abraham Starosta](https://www.linkedin.com/in/abraham-starosta-ba662764/)** (**starosta@stanford.edu**) 来自委内瑞拉，目前在斯坦福大学完成计算机科学硕士学位，专注于人工智能和自然语言处理。在开始斯坦福的硕士课程之前，他曾是 Primer AI 的数据科学家，这是一家开发文本理解和总结技术的初创公司。他还是 Nav Talent 的共同创始人，这是一家为顶级初创公司提供技术招聘服务的机构，该机构起步于斯坦福大学。多年来，他还有机会在其他顶级初创公司如 Livongo、Zugata 和 Splunk 担任软件工程师。在闲暇时，他喜欢踢足球和打乒乓球。
 
 [原始文章](https://towardsdatascience.com/a-technique-for-building-nlp-classifiers-efficiently-with-transfer-learning-and-weak-supervision-a8e2f21ca9c8)。已获转载许可。
 
 **相关:**
 
-+   [如何解决90%的自然语言处理问题：逐步指南](/2019/01/solve-90-nlp-problems-step-by-step-guide.html)
++   如何解决 90%的自然语言处理问题：逐步指南
 
-+   [OpenAI的GPT-2：模型、炒作与争议](/2019/03/openai-gpt-2-model-hype-controversy.html)
++   OpenAI 的 GPT-2：模型、炒作与争议
 
-+   [更有效的自然语言处理迁移学习](/2018/10/more-effective-transfer-learning-nlp.html)
++   更有效的自然语言处理迁移学习
 
 ### 更多相关内容
 
@@ -343,10 +343,10 @@ ULMFiT在没有弱监督下的精确率-召回率曲线
 
 +   [迁移学习在图像识别和自然语言处理中的应用](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 
-+   [TensorFlow在计算机视觉中的应用 - 迁移学习简化版](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 在计算机视觉中的应用 - 迁移学习简化版](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
 +   [什么是迁移学习？](https://www.kdnuggets.com/2022/01/transfer-learning.html)
 
-+   [使用PyTorch的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
++   [使用 PyTorch 的迁移学习实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
 
 +   [探索小数据场景中的迁移学习潜力](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)

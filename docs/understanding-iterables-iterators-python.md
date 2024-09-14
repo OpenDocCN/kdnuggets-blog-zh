@@ -1,8 +1,8 @@
 # 理解 Python 中的可迭代对象与迭代器
 
-> 原文：[https://www.kdnuggets.com/2022/01/understanding-iterables-iterators-python.html](https://www.kdnuggets.com/2022/01/understanding-iterables-iterators-python.html)
+> 原文：[`www.kdnuggets.com/2022/01/understanding-iterables-iterators-python.html`](https://www.kdnuggets.com/2022/01/understanding-iterables-iterators-python.html)
 
-![理解 Python 中的可迭代对象与迭代器](../Images/f687a94152e04fa892eb31852b49e233.png)
+![理解 Python 中的可迭代对象与迭代器](img/f687a94152e04fa892eb31852b49e233.png)
 
 图片由 [geralt on Pixabay](https://pixabay.com/users/geralt-9301/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -82,7 +82,7 @@ print(next(numbers))
 
 **输出：**
 
-我们可以看到类型是‘list_iterator’。输出在10处停止，并引发了`StopIteration`，因为数字列表中没有更多元素。
+我们可以看到类型是‘list_iterator’。输出在 10 处停止，并引发了`StopIteration`，因为数字列表中没有更多元素。
 
 ```py
 <class 'list_iterator'>

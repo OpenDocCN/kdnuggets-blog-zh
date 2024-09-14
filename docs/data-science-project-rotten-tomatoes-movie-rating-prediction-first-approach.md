@@ -1,8 +1,8 @@
 # Rotten Tomatoes 电影评分预测的数据科学项目：第一种方法
 
-> 原文：[https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)
+> 原文：[`www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html`](https://www.kdnuggets.com/2023/06/data-science-project-rotten-tomatoes-movie-rating-prediction-first-approach.html)
 
-![Rotten Tomatoes 电影评分预测的数据科学项目：第一种方法](../Images/d3f12f9c00b48733d43b0fb8d5b5dde2.png)作者提供的图像
+![Rotten Tomatoes 电影评分预测的数据科学项目：第一种方法](img/d3f12f9c00b48733d43b0fb8d5b5dde2.png)作者提供的图像
 
 毫无疑问，预测娱乐行业中电影的成功与否可以决定一个制片厂的财务前景。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在组织的 IT
 
 * * *
 
@@ -24,11 +24,11 @@
 
 幸运的是，机器学习技术提供了一个强大的工具来解决这个复杂的问题。毫无疑问，通过利用数据驱动的洞察，制片厂可以显著改善其决策过程。
 
-这个数据科学项目曾作为Meta（Facebook）招聘过程中的家庭作业。在这项家庭作业中，我们将了解 Rotten Tomatoes 如何将电影标记为“烂片”、“新鲜”或“认证新鲜”。
+这个数据科学项目曾作为 Meta（Facebook）招聘过程中的家庭作业。在这项家庭作业中，我们将了解 Rotten Tomatoes 如何将电影标记为“烂片”、“新鲜”或“认证新鲜”。
 
 为此，我们将制定两种不同的方法。
 
-![Rotten Tomatoes 电影评分预测的数据科学项目：第一种方法](../Images/d2ba235dba50e9a968c7483d9c033db9.png)
+![Rotten Tomatoes 电影评分预测的数据科学项目：第一种方法](img/d2ba235dba50e9a968c7483d9c033db9.png)
 
 作者提供的图像
 
@@ -46,7 +46,7 @@
 
 我们将采用几种[机器学习算法](https://www.stratascratch.com/blog/machine-learning-algorithms-you-should-know-for-data-science/?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)来构建我们的模型，包括决策树、随机森林以及具有特征选择的加权随机森林。
 
-![烂番茄电影评分预测的数据科学项目：首次尝试](../Images/ef349f80d0ea44292afd887bee532061.png)
+![烂番茄电影评分预测的数据科学项目：首次尝试](img/ef349f80d0ea44292afd887bee532061.png)
 
 图片来自作者
 
@@ -61,7 +61,7 @@ df_movie.head()
 
 这是输出结果。
 
-![烂番茄电影评分预测的数据科学项目：首次尝试](../Images/80ab8fe1aebf46e262502dbdfd7fa2a2.png)
+![烂番茄电影评分预测的数据科学项目：首次尝试](img/80ab8fe1aebf46e262502dbdfd7fa2a2.png)
 
 现在，让我们开始数据预处理。
 
@@ -69,7 +69,7 @@ df_movie.head()
 
 让我们来看看。
 
-为了更好地理解统计特征，让我们使用describe()方法。 这是代码。
+为了更好地理解统计特征，让我们使用 describe()方法。 这是代码。
 
 ```py
 df_movie.describe()
@@ -77,7 +77,7 @@ df_movie.describe()
 
 这是输出结果。
 
-![烂番茄电影评分预测的数据科学项目：首次尝试](../Images/83e81ed677afed0819b13a56cb93d54a.png)
+![烂番茄电影评分预测的数据科学项目：首次尝试](img/83e81ed677afed0819b13a56cb93d54a.png)
 
 现在，我们对数据有了一个快速概览，让我们进入预处理阶段。
 
@@ -87,7 +87,7 @@ df_movie.describe()
 
 这涉及到通过处理类别特征并将其转换为数值表示来清理数据，并对数据进行缩放，以确保所有特征具有相等的重要性。
 
-我们首先检查了content_rating列，以查看数据集中唯一的类别及其分布。
+我们首先检查了 content_rating 列，以查看数据集中唯一的类别及其分布。
 
 ```py
 print(f'Content Rating category: {df_movie.content_rating.unique()}')
@@ -110,7 +110,7 @@ ax.bar_label(ax.containers[0])
 
 这是输出结果。
 
-![烂番茄电影评分预测的数据科学项目：首次尝试](../Images/cfabddab78f786c89eeb9865985442a2.png)
+![烂番茄电影评分预测的数据科学项目：首次尝试](img/cfabddab78f786c89eeb9865985442a2.png)
 
 将类别特征转换为数值形式对我们的机器学习模型至关重要，因为这些模型需要数值输入。对于此数据科学项目中的多个元素，我们将应用两种普遍接受的方法：有序编码和独热编码。当类别表示一个强度的程度时，有序编码更好，而当没有提供幅度表示时，独热编码更为理想。对于“content_rating”资产，我们将使用独热编码方法。
 
@@ -123,7 +123,7 @@ content_rating.head()
 
 这是输出结果。
 
-![烂番茄电影评分预测的数据科学项目：首次尝试](../Images/5474ac96a1205c695b4644b9ff12494e.png)
+![烂番茄电影评分预测的数据科学项目：首次尝试](img/5474ac96a1205c695b4644b9ff12494e.png)
 
 让我们继续处理另一个特征，audience_status。
 
@@ -158,7 +158,7 @@ ax.bar_label(ax.containers[0])
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/7e9fdc231fab564dd748169fd0638186.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/7e9fdc231fab564dd748169fd0638186.png)
 
 好的，现在是时候使用 replace 方法进行序数编码了。
 
@@ -174,7 +174,7 @@ audience_status.head()
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/e20360e4b3699fc6afde10925e6093b4.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/e20360e4b3699fc6afde10925e6093b4.png)
 
 由于我们的目标变量 tomatometer_status 有三个不同的类别，“腐烂”、“新鲜”和“认证新鲜”，这些类别也表示一个量级的顺序。
 
@@ -190,7 +190,7 @@ tomatometer_status
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/d2cede449752b53b6ee15418bfde4d03.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/d2cede449752b53b6ee15418bfde4d03.png)
 
 在将分类数据转换为数值数据后，现在是时候合并两个数据框了。我们将使用 Pandas 的 pd.concat() 函数，并使用 dropna() 方法删除所有列中包含缺失值的行。
 
@@ -205,7 +205,7 @@ df_feature.head()
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/c48639fb47bbf970ccaabadfff2f9d25.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/c48639fb47bbf970ccaabadfff2f9d25.png)
 
 很好，现在让我们使用 describe 方法检查数值变量。
 
@@ -217,7 +217,7 @@ df_feature.describe()
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/d6642d87f1dad3996c8d6a1d87997727.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/d6642d87f1dad3996c8d6a1d87997727.png)
 
 现在让我们使用 len 方法检查数据框的长度。
 
@@ -229,7 +229,7 @@ len(df)
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/9ffc2bbb2c40a97b36d34cc8cd90a771.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/9ffc2bbb2c40a97b36d34cc8cd90a771.png)
 
 在移除缺失值的行并进行机器学习构建所需的转换后，我们的数据框现在有 17017 行。
 
@@ -246,9 +246,9 @@ ax.bar_label(ax.containers[0])
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/9995c293b9ef09be88c2a22fa59776df.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/9995c293b9ef09be88c2a22fa59776df.png)
 
-我们的数据集包含7375部“腐烂”、6475部“新鲜”和3167部“认证新鲜”的电影，这表明存在类别不平衡问题。
+我们的数据集包含 7375 部“腐烂”、6475 部“新鲜”和 3167 部“认证新鲜”的电影，这表明存在类别不平衡问题。
 
 这个问题将稍后解决。
 
@@ -263,7 +263,7 @@ print(f'Size of training data is {len(X_train)} and the size of test data is {le
 
 这是输出结果。
 
-![腐烂番茄电影评分预测数据科学项目：初步方法](../Images/cf106f5eb38848b0de88509d8f86a48c.png)
+![腐烂番茄电影评分预测数据科学项目：初步方法](img/cf106f5eb38848b0de88509d8f86a48c.png)
 
 ## 决策树分类器
 
@@ -273,7 +273,7 @@ print(f'Size of training data is {len(X_train)} and the size of test data is {le
 
 按照这些分支并考虑条件（True 或 False），数据点被分隔到适当的类别中。过程如下所示。
 
-![数据科学项目：烂番茄电影评分预测：第一次尝试](../Images/52392afd9add822e7801f26a62f64ddb.png)
+![数据科学项目：烂番茄电影评分预测：第一次尝试](img/52392afd9add822e7801f26a62f64ddb.png)
 
 作者提供的图像
 
@@ -338,11 +338,11 @@ plot_confusion_matrix(tree_3_leaf, X_test, y_test, cmap ='cividis', ax=ax)
 
 这是输出结果。
 
-![数据科学项目：烂番茄电影评分预测：第一次尝试](../Images/71d216300278a3de9a1c1c7c4ce567bc.png)
+![数据科学项目：烂番茄电影评分预测：第一次尝试](img/71d216300278a3de9a1c1c7c4ce567bc.png)
 
 从输出结果可以清楚地看到，我们的决策树表现良好，特别是考虑到我们将其限制为三个叶节点。一个简单分类器的优点是决策树可以被可视化且易于理解。
 
-现在，为了理解决策树如何做出决策，让我们通过使用sklearn.tree的plot_tree方法来可视化决策树分类器。
+现在，为了理解决策树如何做出决策，让我们通过使用 sklearn.tree 的 plot_tree 方法来可视化决策树分类器。
 
 这是代码。
 
@@ -354,39 +354,39 @@ plt.show()
 
 这是输出结果。
 
-![Rotten Tomatoes电影评分预测的数据科学项目：首次方法](../Images/22869d2d8fcb0fdfd7540eae9d6307b6.png)
+![Rotten Tomatoes 电影评分预测的数据科学项目：首次方法](img/22869d2d8fcb0fdfd7540eae9d6307b6.png)
 
 现在让我们分析这个决策树，找出它如何进行决策过程。
 
 具体而言，算法使用'tomatometer_rating'特征作为每个测试数据点分类的主要决定因素。
 
-+   如果'tomatometer_rating'小于或等于59.5，则数据点被标记为0（'Rotten'）。否则，分类器会继续到下一个分支。
++   如果'tomatometer_rating'小于或等于 59.5，则数据点被标记为 0（'Rotten'）。否则，分类器会继续到下一个分支。
 
 +   在第二个分支中，分类器使用'tomatometer_fresh_critics_count'特征来分类剩余的数据点。
 
-    +   如果该特征的值小于或等于35.5，则数据点被标记为1（'Fresh'）。
+    +   如果该特征的值小于或等于 35.5，则数据点被标记为 1（'Fresh'）。
 
-    +   如果不是，则标记为2（'Certified-Fresh'）。
+    +   如果不是，则标记为 2（'Certified-Fresh'）。
 
-这一决策过程与Rotten Tomatoes用来分配电影状态的规则和标准紧密对齐。
+这一决策过程与 Rotten Tomatoes 用来分配电影状态的规则和标准紧密对齐。
 
-根据Rotten Tomatoes网站，电影被分类为
+根据 Rotten Tomatoes 网站，电影被分类为
 
-+   如果他们的tomatometer_rating为60%或更高，则标记为‘Fresh’。
++   如果他们的 tomatometer_rating 为 60%或更高，则标记为‘Fresh’。
 
-+   如果低于60%，则标记为'Rotten'。
++   如果低于 60%，则标记为'Rotten'。
 
-我们的决策树分类器遵循类似的逻辑，若电影的tomatometer_rating低于59.5，则分类为'Rotten'，否则为'Fresh'。
+我们的决策树分类器遵循类似的逻辑，若电影的 tomatometer_rating 低于 59.5，则分类为'Rotten'，否则为'Fresh'。
 
 然而，在区分'Fresh'和'Certified-Fresh'电影时，分类器必须考虑更多的特征。
 
-根据Rotten Tomatoes，电影必须满足特定标准才能被分类为'Certified-Fresh'，例如：
+根据 Rotten Tomatoes，电影必须满足特定标准才能被分类为'Certified-Fresh'，例如：
 
-+   Tomatometer评分至少为75%的电影。
++   Tomatometer 评分至少为 75%的电影。
 
 +   至少要有五条来自顶级评论家的评论。
 
-+   广泛上映的电影至少要有80条评论。
++   广泛上映的电影至少要有 80 条评论。
 
 我们的有限决策树模型仅考虑了来自顶级评论家的评论数量，以区分'Fresh'和'Certified-Fresh'电影。
 
@@ -452,9 +452,9 @@ plot_confusion_matrix(tree, X_test, y_test, cmap ='cividis', ax=ax)
 
 这是输出结果。
 
-![Rotten Tomatoes电影评分预测的数据科学项目：首次方法](../Images/59551a1c7379f5b49c358f22a8ba7773.png)
+![Rotten Tomatoes 电影评分预测的数据科学项目：首次方法](img/59551a1c7379f5b49c358f22a8ba7773.png)
 
-移除最大叶节点限制后，我们分类器的准确率、精确度和召回率都提高了。分类器现在的准确率达到99%，而之前为94%。
+移除最大叶节点限制后，我们分类器的准确率、精确度和召回率都提高了。分类器现在的准确率达到 99%，而之前为 94%。
 
 这表明当我们允许分类器自行选择最佳叶节点数量时，它的表现更好。
 
@@ -466,7 +466,7 @@ plot_confusion_matrix(tree, X_test, y_test, cmap ='cividis', ax=ax)
 
 Bagging 方法因使用自助法来抽样数据点而著名，使得同一数据点可以被多个决策树选择。
 
-![Data Science Project of Rotten Tomatoes Movie Rating Prediction: First Approach](../Images/8d92b624046c6ea940b8819d9547404a.png)
+![Data Science Project of Rotten Tomatoes Movie Rating Prediction: First Approach](img/8d92b624046c6ea940b8819d9547404a.png)
 
 作者提供的图像
 
@@ -537,15 +537,15 @@ plot_confusion_matrix(rf, X_test, y_test, cmap ='cividis', ax=ax)
 
 这里是输出结果。
 
-![Data Science Project of Rotten Tomatoes Movie Rating Prediction: First Approach](../Images/060d5686be6ad07d748f462fcfa37337.png)
+![Data Science Project of Rotten Tomatoes Movie Rating Prediction: First Approach](img/060d5686be6ad07d748f462fcfa37337.png)
 
 准确率和混淆矩阵结果显示，随机森林算法优于决策树分类器。这展示了像随机森林这样的集成方法相较于单个 [分类算法](https://www.stratascratch.com/blog/overview-of-machine-learning-algorithms-classification/?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes) 的优势。
 
-此外，基于树的方法允许我们在模型训练后识别每个特征的重要性。因此，Scikit-learn提供了feature_importances_函数。
+此外，基于树的方法允许我们在模型训练后识别每个特征的重要性。因此，Scikit-learn 提供了 feature_importances_ 函数。
 
 太好了，再次让我们一步步查看代码以理解它。
 
-首先，使用Random Forest Classifier对象的feature_importances_属性来获取数据集中每个特征的重要性分数。
+首先，使用 Random Forest Classifier 对象的 feature_importances_ 属性来获取数据集中每个特征的重要性分数。
 
 重要性分数表示每个特征对模型预测性能的贡献程度。
 
@@ -562,14 +562,14 @@ for i, feature in enumerate(X_train.columns):
     print(f'{feature} = {feature_importance[i]}')
 ```
 
-然后，为了从最重要到最不重要的特征进行可视化，让我们使用numpy中的argsort()方法。
+然后，为了从最重要到最不重要的特征进行可视化，让我们使用 numpy 中的 argsort()方法。
 
 ```py
 # Visualize feature from the most important to the least important
 indices = np.argsort(feature_importance)
 ```
 
-最后，创建一个水平条形图来可视化特征重要性，y轴上从最重要到最不重要排列特征，x轴上显示对应的重要性分数。
+最后，创建一个水平条形图来可视化特征重要性，y 轴上从最重要到最不重要排列特征，x 轴上显示对应的重要性分数。
 
 这个图表让我们可以轻松识别数据集中最重要的特征，并确定哪些特征对模型性能的影响最大。
 
@@ -605,9 +605,9 @@ plt.show()
 
 这是输出。
 
-![数据科学项目：烂番茄电影评分预测：第一种方法](../Images/c3065a1fd4ff864dabcf536e0cf9eede.png)
+![数据科学项目：烂番茄电影评分预测：第一种方法](img/c3065a1fd4ff864dabcf536e0cf9eede.png)
 
-从这个图中可以看出，模型在预测未见数据点时没有考虑NR、PG-13、R和runtime这些特征。在下一部分，我们将看看解决这个问题是否能提高模型的性能。
+从这个图中可以看出，模型在预测未见数据点时没有考虑 NR、PG-13、R 和 runtime 这些特征。在下一部分，我们将看看解决这个问题是否能提高模型的性能。
 
 ## 随机森林分类器与特征选择
 
@@ -615,7 +615,7 @@ plt.show()
 
 在最后一部分，我们发现一些特征被我们的随机森林模型认为在预测中不太重要。
 
-因此，为了提升模型的性能，让我们排除这些不太相关的特征，包括NR、runtime、PG-13、R、PG、G和NC17。
+因此，为了提升模型的性能，让我们排除这些不太相关的特征，包括 NR、runtime、PG-13、R、PG、G 和 NC17。
 
 在以下代码中，我们将首先获取特征重要性，然后将数据集拆分为训练集和测试集，但在代码块内部我们去除了这些不太重要的特征。然后我们将打印出训练集和测试集的大小。
 
@@ -630,7 +630,7 @@ print(f'Size of training data is {len(X_train)} and the size of test data is {le
 
 这是输出。
 
-![数据科学项目：烂番茄电影评分预测：第一种方法](../Images/ef5a3e2489296672855aa3bffc3c20ed.png)
+![数据科学项目：烂番茄电影评分预测：第一种方法](img/ef5a3e2489296672855aa3bffc3c20ed.png)
 
 太好了，由于我们去除了这些不太重要的特征，让我们看看性能是否有所提升。
 
@@ -681,11 +681,11 @@ plot_confusion_matrix(rf, X_test, y_test, cmap ='cividis', ax=ax)
 
 这是输出。
 
-![数据科学项目：烂番茄电影评分预测：第一种方法](../Images/61a3a53b741f51ca254241f03236c745.png)
+![数据科学项目：烂番茄电影评分预测：第一种方法](img/61a3a53b741f51ca254241f03236c745.png)
 
 看起来我们新的方法效果相当好。
 
-经过特征选择后，准确率提高到了99.1%。
+经过特征选择后，准确率提高到了 99.1%。
 
 与之前的模型相比，我们的模型的假阳性和假阴性率也有所降低。
 
@@ -695,7 +695,7 @@ plot_confusion_matrix(rf, X_test, y_test, cmap ='cividis', ax=ax)
 
 ## 带特征选择的加权随机森林分类器
 
-在第一部分，我们意识到我们的特征有些不平衡。我们有三个不同的值，'Rotten'（由0表示）、'Fresh'（由1表示）和'Certified-Fresh'（由2表示）。
+在第一部分，我们意识到我们的特征有些不平衡。我们有三个不同的值，'Rotten'（由 0 表示）、'Fresh'（由 1 表示）和'Certified-Fresh'（由 2 表示）。
 
 首先，让我们看看我们特征的分布。
 
@@ -708,19 +708,19 @@ ax.bar_label(ax.containers[0])
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第一种方法](../Images/9995c293b9ef09be88c2a22fa59776df.png)
+![烂番茄电影评分预测数据科学项目：第一种方法](img/9995c293b9ef09be88c2a22fa59776df.png)
 
 很明显，‘Certified Fresh’特征的数据量远少于其他特征。
 
-为了解决数据不平衡的问题，我们可以使用SMOTE算法等方法来过采样少数类，或在训练阶段向模型提供类别权重信息。
+为了解决数据不平衡的问题，我们可以使用 SMOTE 算法等方法来过采样少数类，或在训练阶段向模型提供类别权重信息。
 
 这里我们将使用第二种方法。
 
-为了计算类别权重，我们将使用scikit-learn库中的`compute_class_weight()`函数。
+为了计算类别权重，我们将使用 scikit-learn 库中的`compute_class_weight()`函数。
 
-在这个函数中，`class_weight`参数被设置为'balance'以处理类别不平衡，而`classes`参数被设置为df_feature中`tomatometer_status`列的唯一值。
+在这个函数中，`class_weight`参数被设置为'balance'以处理类别不平衡，而`classes`参数被设置为 df_feature 中`tomatometer_status`列的唯一值。
 
-`y`参数设置为df_feature中`tomatometer_status`列的值。
+`y`参数设置为 df_feature 中`tomatometer_status`列的值。
 
 ```py
 class_weight = compute_class_weight(class_weight= 'balanced', classes= np.unique(df_feature.tomatometer_status), 
@@ -755,9 +755,9 @@ class_weight_dict
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第一种方法](../Images/bb3a71287eb61694de069b7487357223.png)
+![烂番茄电影评分预测数据科学项目：第一种方法](img/bb3a71287eb61694de069b7487357223.png)
 
-类别0（'Rotten'）的权重最小，而类别2（'Certified-Fresh'）的权重最大。
+类别 0（'Rotten'）的权重最小，而类别 2（'Certified-Fresh'）的权重最大。
 
 当我们应用随机森林分类器时，现在可以将这些权重信息作为参数包括进来。
 
@@ -788,15 +788,15 @@ plot_confusion_matrix(rf_weighted, X_test, y_test, cmap ='cividis', ax=ax)
 
 这是输出。
 
-![烂番茄电影评分预测数据科学项目：第一种方法](../Images/969b2ef7332d5a76357b1a70a7b80632.png)
+![烂番茄电影评分预测数据科学项目：第一种方法](img/969b2ef7332d5a76357b1a70a7b80632.png)
 
-当我们添加类别权重时，模型的性能有所提升，现在准确率达到99.2%。
+当我们添加类别权重时，模型的性能有所提升，现在准确率达到 99.2%。
 
 “Fresh”标签的正确预测数量也增加了一次。
 
 使用类别权重来解决数据不平衡问题是一种有效的方法，因为它鼓励我们的模型在训练阶段更加关注权重较高的标签。
 
-**该数据科学项目链接：** [https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction](https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)
+**该数据科学项目链接：** [`platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction`](https://platform.stratascratch.com/data-projects/rotten-tomatoes-movies-rating-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+rotten+tomatoes)
 
 **[Nate Rosidi](https://www.stratascratch.com)** 是一名数据科学家，专注于产品策略。他也是一位讲授分析学的兼职教授，并且是[StrataScratch](https://www.stratascratch.com/)，一个帮助数据科学家准备顶级公司面试真实问题的平台的创始人。在[Twitter: StrataScratch](https://twitter.com/StrataScratch)或[LinkedIn](https://www.linkedin.com/in/nathanrosidi/)上与他联系。
 
@@ -804,11 +804,11 @@ plot_confusion_matrix(rf_weighted, X_test, y_test, cmap ='cividis', ax=ax)
 
 +   [烂番茄电影评分预测数据科学项目：…](https://www.kdnuggets.com/2023/07/data-science-project-rotten-tomatoes-movie-rating-prediction-second-approach.html)
 
-+   [KDnuggets新闻，7月5日：一个糟糕的数据科学项目 • 10个AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
 
-+   [311呼叫中心绩效：评级服务水平](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
++   [311 呼叫中心绩效：评级服务水平](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
 
-+   [使用BQML进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
++   [使用 BQML 进行多变量时间序列预测](https://www.kdnuggets.com/2023/07/multivariate-timeseries-prediction-bqml.html)
 
 +   [如何逐步成为数据科学家指南](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)
 

@@ -1,12 +1,12 @@
 # 远程数据科学：如何从 Jupyter Notebooks 向 SQL Server 发送 R 和 Python 执行
 
-> 原文：[https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html](https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html)
+> 原文：[`www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html`](https://www.kdnuggets.com/2018/07/r-python-execution-sql-server-jupyter.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/)**
 
-![SQL Server 中的 R 和 Python](../Images/cf5ff7d619b8bcc49c2e7183cf96d9b2.png)
+![SQL Server 中的 R 和 Python](img/cf5ff7d619b8bcc49c2e7183cf96d9b2.png)
 
 ### **简介**
 
@@ -14,7 +14,7 @@
 
 本教程将展示如何将你的 Python 代码从 Jupyter Notebooks 发送到 SQL Server 执行。相同的原则也适用于 R 和任何其他 IDE。如果你更喜欢通过视频学习，本教程也在 YouTube 上发布，点击这里：
 
-![微软云](../Images/60ebebfdb8a421779f5c0c9d33354ff3.png)
+![微软云](img/60ebebfdb8a421779f5c0c9d33354ff3.png)
 
 ### **环境设置前提条件**
 
@@ -42,11 +42,11 @@ mkdir JupyterNotebooks; cd JupyterNotebooks; ..\Scripts\jupyter-notebook
 
 创建一个新的使用 Python 3 解释器的笔记本：
 
-![Python 3 笔记本](../Images/278231a10d909a743eff4e148e7ba193.png)
+![Python 3 笔记本](img/278231a10d909a743eff4e148e7ba193.png)
 
 为了测试一切是否设置正确，请在第一个单元格中导入 revoscalepy 并执行。如果没有错误消息，你可以继续进行。
 
-![导入 revoscalepy](../Images/ca6dd77d9b37907e0928e6ff275dce07.png)
+![导入 revoscalepy](img/ca6dd77d9b37907e0928e6ff275dce07.png)
 
 ### **数据库设置（仅本教程需要）**
 
@@ -168,47 +168,47 @@ display.Image(data=image)
 
 查看 [SQL 机器学习服务文档](https://aka.ms/SQLMLDocs)，了解如何轻松部署你的 R/Python 代码，使用 SQL 存储过程使其在 ETL 过程或任何应用程序中可访问。在你的数据库中训练和存储机器学习模型，将智能带到数据所在的位置。
 
-基本的 R 和 Python 执行在 SQL Server 中：[https://aka.ms/BasicMLServicesExecution](https://aka.ms/BasicMLServicesExecution)
+基本的 R 和 Python 执行在 SQL Server 中：[`aka.ms/BasicMLServicesExecution`](https://aka.ms/BasicMLServicesExecution)
 
-设置 SQL Server 中的机器学习服务：[https://aka.ms/SetupMLServices](https://aka.ms/SetupMLServices)
+设置 SQL Server 中的机器学习服务：[`aka.ms/SetupMLServices`](https://aka.ms/SetupMLServices)
 
-Github 上的端到端教程解决方案：[https://microsoft.github.io/sql-ml-tutorials/](https://microsoft.github.io/sql-ml-tutorials/)
+Github 上的端到端教程解决方案：[`microsoft.github.io/sql-ml-tutorials/`](https://microsoft.github.io/sql-ml-tutorials/)
 
 其他 YouTube 教程：
 
-如何安装SQL Server机器学习服务： [https://aka.ms/InstallMLServices](https://aka.ms/InstallMLServices) 如何启用SQL Server机器学习服务： [https://aka.ms/EnableMLServices](https://aka.ms/EnableMLServices) SQL中R和Python执行的基础： [https://aka.ms/ExecuteMLServices](https://aka.ms/ExecuteMLServices)
+如何安装 SQL Server 机器学习服务： [`aka.ms/InstallMLServices`](https://aka.ms/InstallMLServices) 如何启用 SQL Server 机器学习服务： [`aka.ms/EnableMLServices`](https://aka.ms/EnableMLServices) SQL 中 R 和 Python 执行的基础： [`aka.ms/ExecuteMLServices`](https://aka.ms/ExecuteMLServices)
 
-**个人简介**：[Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/)是微软Azure机器学习团队的项目经理。在几家初创公司担任软件开发人员后，他加入微软，并在Office和Bing从事可扩展数据仪表、平台和API解决方案的工作。他曾在Cortana数据与分析团队负责测量策略，研究用户行为模式，标准化KPI，并为产品识别增长机会。他现在从事Azure机器学习产品的工作，专注于将智能带到数据存储的位置。这包括SQL Server的新机器学习服务，允许在SQL中执行R + Python。
+**个人简介**：[Kyle Weller](https://www.linkedin.com/in/ai-is-the-future/)是微软 Azure 机器学习团队的项目经理。在几家初创公司担任软件开发人员后，他加入微软，并在 Office 和 Bing 从事可扩展数据仪表、平台和 API 解决方案的工作。他曾在 Cortana 数据与分析团队负责测量策略，研究用户行为模式，标准化 KPI，并为产品识别增长机会。他现在从事 Azure 机器学习产品的工作，专注于将智能带到数据存储的位置。这包括 SQL Server 的新机器学习服务，允许在 SQL 中执行 R + Python。
 
 **相关内容：**
 
-+   [初学者的Jupyter Notebook教程](https://www.kdnuggets.com/2018/05/jupyter-notebook-beginners-tutorial.html)
++   [初学者的 Jupyter Notebook 教程](https://www.kdnuggets.com/2018/05/jupyter-notebook-beginners-tutorial.html)
 
-+   [SQL备忘单](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)
++   [SQL 备忘单](https://www.kdnuggets.com/2018/07/sql-cheat-sheet.html)
 
-+   [Python中的遗传算法实现](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)
++   [Python 中的遗传算法实现](https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [Kubernetes中的高可用SQL Server Docker容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
++   [Kubernetes 中的高可用 SQL Server Docker 容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
 
-+   [SQL执行顺序的基本指南](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)
++   [SQL 执行顺序的基本指南](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)
 
-+   [KDnuggets™新闻 22:n01, 1月5日：3种跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™新闻 22:n01, 1 月 5 日：3 种跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [跟踪和可视化你的Python代码执行的3种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
++   [跟踪和可视化你的 Python 代码执行的 3 种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
 
 +   [数据科学中的远程工作：利与弊](https://www.kdnuggets.com/remote-work-in-data-science-pros-and-cons)
 

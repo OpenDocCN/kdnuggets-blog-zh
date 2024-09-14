@@ -1,6 +1,6 @@
-# 识别机器学习可解决问题的4个因素
+# 识别机器学习可解决问题的 4 个因素
 
-> 原文：[https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
+> 原文：[`www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html`](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
 
 根据最新的 [研究](https://haas.berkeley.edu/wp-content/uploads/UCB_Playbook_R10_V2_spreads2.pdf)，AI 到 2030 年有望为全球经济贡献 15.7 万亿美元。自从疫情引发的数字加速以来，世界已经看到 AI 在商业中的广泛应用。IBM 领导者预测，在接下来的 18-24 个月内，采用率将增加 90%。这完全与无处不在的 AI 形成了共鸣。
 
@@ -20,21 +20,21 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 数据以惊人的速度生成，无疑是新的货币。许多公司积累了大量数据，并发现自己在争分夺秒地获取竞争优势。每个人都在快速构建原型，但却忽视了一个基础问题——他们是否真的需要 AI 来解决这个问题，而不是所有问题。将产品作为 AI 驱动的解决方案进行销售看起来和听起来都很花哨，但现实却不同。
 
-![识别机器学习可解决问题的4个因素](../Images/d18c8f4240e8d4eaf2cec4650915cfe4.png)
+![识别机器学习可解决问题的 4 个因素](img/d18c8f4240e8d4eaf2cec4650915cfe4.png)
 
 [来源](https://www.freepik.com/psd/technology-cartoon)：科技漫画 PSD，由 jcomp 创建 - freepik，加作者编辑
 
-因此，我们需要提升自身技能，了解AI/ML能够解决哪些问题。
+因此，我们需要提升自身技能，了解 AI/ML 能够解决哪些问题。
 
 [Google](https://developers.google.com/machine-learning/problem-framing/good) 已简洁地总结了什么问题适合机器学习的特点。
 
@@ -68,7 +68,7 @@
 
 在高度动态的环境中构建机器学习模型将非常困难。让我举个例子。假设你正在构建一个股票价格预测模型，其中股票价格因各种原因而变化——情绪驱动、季度和年度发布、宏观经济因素、新闻、外国投资、临近衍生品到期波动、美联储公告等。
 
-![识别机器学习可解决问题的四个因素](../Images/21117ad82c1bcfd6fc1af6f82127d27d.png)
+![识别机器学习可解决问题的四个因素](img/21117ad82c1bcfd6fc1af6f82127d27d.png)
 
 [来源](https://www.freepik.com/vectors/business): 商业矢量图由 pch.vector 创建 - freepik 以及作者编辑
 
@@ -78,7 +78,7 @@
 
 在开始建模之前，了解模型性能如何转化为业务指标。
 
-科学指标如精确度、召回率、均方根误差（RMSE）、ROC-AUC可以评估模型在未见数据上的表现，以判断一个机器学习模型的优劣，但这是否能很好地与业务产生共鸣。
+科学指标如精确度、召回率、均方根误差（RMSE）、ROC-AUC 可以评估模型在未见数据上的表现，以判断一个机器学习模型的优劣，但这是否能很好地与业务产生共鸣。
 
 例如：80% 的精确度对转换率和业务收入有什么影响？
 
@@ -90,7 +90,7 @@
 
 接下来，你会关注其他因素，比如房子的房间数量或它的年龄，即建造年份，以获取更接近的估计。同样，你也会考虑其他因素，比如——这栋房子附近是否有学校，周围是否有医疗设施，以便更好地预测价格。
 
-![识别机器学习可解决问题的四个因素](../Images/0650a0873934b8976e42ebe015f46f62.png)
+![识别机器学习可解决问题的四个因素](img/0650a0873934b8976e42ebe015f46f62.png)
 
 [来源](https://www.freepik.com/vectors/finance)：财经矢量图由 pch.vector 创建，[来源](https://unsplash.com/s/photos/house?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)：Unsplash- 作者进行的额外编辑
 

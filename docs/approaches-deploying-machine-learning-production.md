@@ -1,22 +1,22 @@
 # 机器学习模型生产部署的不同方法概述
 
-> 原文：[https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)
+> 原文：[`www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html`](https://www.kdnuggets.com/2019/06/approaches-deploying-machine-learning-production.html)
 
-[评论](#comments)
+评论
 
 **[Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)，GrandVision NV 高级企业数据架构师**
 
-![概述](../Images/ce0a597f4c1c6e1fb4ae387d6727da48.png)
+![概述](img/ce0a597f4c1c6e1fb4ae387d6727da48.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -34,7 +34,7 @@
 
 模型不一定需要持续训练才能投入生产。通常，数据科学家可以通过临时训练一个模型，并将其投入生产，直到其性能下降到需要刷新为止。
 
-![](../Images/f86924f2ec8ad58a1101e565195c5c47.png)
+![](img/f86924f2ec8ad58a1101e565195c5c47.png)
 
 **从 Jupyter 到生产**
 
@@ -62,11 +62,11 @@
 
 批量训练可以从 AutoML 类型的框架中受益，AutoML 使您能够执行/自动化活动，如特征处理、特征选择、模型选择和参数优化。它们最近的表现已达到或超越了最勤奋的数据科学家。
 
-![图](../Images/55b92ce5dd110284bdb0b317125b48f9.png)[LinkedIn 帖子](https://www.linkedin.com/pulse/future-data-science-one-image-charles-givre/?fbclid=IwAR0zVvLTmiDT4ReAqe59HjCXym_pNXW6AvC2RgeC-zY5sEESnhKHYI_TfT8)
+![图](img/55b92ce5dd110284bdb0b317125b48f9.png)[LinkedIn 帖子](https://www.linkedin.com/pulse/future-data-science-one-image-charles-givre/?fbclid=IwAR0zVvLTmiDT4ReAqe59HjCXym_pNXW6AvC2RgeC-zY5sEESnhKHYI_TfT8)
 
 使用它们允许比传统的模型训练方法更全面的模型训练：仅仅是重新训练模型权重。
 
-存在不同的技术支持这种连续批量训练，这些技术可以通过混合使用[airflow](https://medium.com/analytics-and-data/airflow-the-easy-way-f1c26859ee21)来管理不同的工作流和类似[tpot](https://epistasislab.github.io/tpot/)的AutoML库来设置。不同的云服务提供商提供他们的AutoML解决方案，可以纳入数据工作流。例如，Azure 将机器学习预测和模型训练与他们的[数据工厂服务](https://azure.microsoft.com/es-es/blog/retraining-and-updating-azure-machine-learning-models-with-azure-data-factory/)集成。
+存在不同的技术支持这种连续批量训练，这些技术可以通过混合使用[airflow](https://medium.com/analytics-and-data/airflow-the-easy-way-f1c26859ee21)来管理不同的工作流和类似[tpot](https://epistasislab.github.io/tpot/)的 AutoML 库来设置。不同的云服务提供商提供他们的 AutoML 解决方案，可以纳入数据工作流。例如，Azure 将机器学习预测和模型训练与他们的[数据工厂服务](https://azure.microsoft.com/es-es/blog/retraining-and-updating-azure-machine-learning-models-with-azure-data-factory/)集成。
 
 ### 实时训练
 
@@ -107,7 +107,7 @@ print(clf.predict([[0,1]])) # -> 1
 
 **负载影响**
 
-实时预测需要处理峰值负载。根据所采取的方法以及预测的使用方式，选择实时方法可能还需要额外的计算能力，以便在某个SLA内提供预测。这与批量方法形成对比，后者的预测计算可以根据可用容量分散到一天中。
+实时预测需要处理峰值负载。根据所采取的方法以及预测的使用方式，选择实时方法可能还需要额外的计算能力，以便在某个 SLA 内提供预测。这与批量方法形成对比，后者的预测计算可以根据可用容量分散到一天中。
 
 **基础设施影响**
 
@@ -123,17 +123,17 @@ print(clf.predict([[0,1]])) # -> 1
 
 ### 批量预测集成
 
-批量预测依赖于两种不同的信息，一种是预测模型，另一种是我们将提供给模型的特征。在大多数批量预测架构中，ETL操作用于从特定的数据存储（特征存储）中提取预计算的特征，或在多个数据集之间执行某种类型的转换，以提供预测模型的输入。然后，预测模型在数据集中的所有行上进行迭代，提供不同的分数。
+批量预测依赖于两种不同的信息，一种是预测模型，另一种是我们将提供给模型的特征。在大多数批量预测架构中，ETL 操作用于从特定的数据存储（特征存储）中提取预计算的特征，或在多个数据集之间执行某种类型的转换，以提供预测模型的输入。然后，预测模型在数据集中的所有行上进行迭代，提供不同的分数。
 
-![图示](../Images/60d22376a65ac66c24b3e0dc68902dcf.png)批量预测模型服务的示例流程
+![图示](img/60d22376a65ac66c24b3e0dc68902dcf.png)批量预测模型服务的示例流程
 
-一旦所有预测计算完成，我们可以将分数“服务”到不同的系统中。这可以根据我们想要使用分数的用例以不同的方式完成，例如，如果我们想在前端应用程序中使用分数，我们可能会将数据推送到“缓存”或NoSQL数据库，如Redis，以提供毫秒级的响应。而对于某些用例，例如创建电子邮件旅程，我们可能会依赖CSV SFTP导出或数据加载到更传统的RDBMS中。
+一旦所有预测计算完成，我们可以将分数“服务”到不同的系统中。这可以根据我们想要使用分数的用例以不同的方式完成，例如，如果我们想在前端应用程序中使用分数，我们可能会将数据推送到“缓存”或 NoSQL 数据库，如 Redis，以提供毫秒级的响应。而对于某些用例，例如创建电子邮件旅程，我们可能会依赖 CSV SFTP 导出或数据加载到更传统的 RDBMS 中。
 
 ### **实时预测集成**
 
 将模型推送到生产环境以用于实时应用需要 3 个基本组件：客户/用户概况、一组触发器和预测模型。
 
-![](../Images/a92fec2b10f8928597a646450dd5dde4.png)
+![](img/a92fec2b10f8928597a646450dd5dde4.png)
 
 **概况：** 客户概况包含与客户相关的所有属性以及进行预测所需的不同属性（例如：计数器）。这是进行客户级别预测所必需的，以减少从多个地方提取信息的延迟，并简化机器学习模型在生产中的集成。在大多数情况下，需要类似类型的数据存储，以有效地提取驱动预测模型所需的数据。
 
@@ -147,7 +147,7 @@ print(clf.predict([[0,1]])) # -> 1
 
 +   *利用发布/订阅模型：* 预测模型本质上是一个应用程序，依赖数据流并执行某些操作，例如提取客户概况信息。
 
-+   *Web服务：* 在模型预测周围设置 API 包装器，并将其部署为 Web 服务。根据 Web 服务的设置方式，它可能会或可能不会提取驱动模型所需的数据。
++   *Web 服务：* 在模型预测周围设置 API 包装器，并将其部署为 Web 服务。根据 Web 服务的设置方式，它可能会或可能不会提取驱动模型所需的数据。
 
 +   *应用内：* 还可以将模型直接部署到本地或 Web 应用程序中，并让模型在本地或外部数据源上运行。
 
@@ -159,7 +159,7 @@ Postgres 具有一个集成，允许将 Python 代码作为函数或存储过程
 
 这可以与 Postgres 的[触发器](https://www.tutorialspoint.com/postgresql/postgresql_triggers.htm)机制结合使用，执行数据库运行并更新流失评分。例如，如果在投诉表中添加了新条目，则实时重新运行模型将非常有价值。
 
-![](../Images/28b9641a71155fe9744fd6bd06c66070.png)
+![](img/28b9641a71155fe9744fd6bd06c66070.png)
 
 **序列流**
 
@@ -183,11 +183,11 @@ Postgres 具有一个集成，允许将 Python 代码作为函数或存储过程
 
 一个如何设置的示例如下：
 
-![](../Images/473338fb8960a92196c2b0b5106e85fb.png)
+![](img/473338fb8960a92196c2b0b5106e85fb.png)
 
 页面视图事件被触发到一个特定的事件主题上，在这个主题上有两个应用程序，一个订阅页面视图计数器，另一个订阅预测。这两个应用程序从主题中过滤出特定相关的事件以满足各自的目的，并消费主题中的不同消息。页面视图计数器应用提供数据以支持仪表板，而预测应用则更新客户档案。
 
-![](../Images/ec05d3e486382ceeb9a2616bb6aff4ab.png)
+![](img/ec05d3e486382ceeb9a2616bb6aff4ab.png)
 
 **序列流：**
 
@@ -197,15 +197,15 @@ Postgres 具有一个集成，允许将 Python 代码作为函数或存储过程
 
 **技术：**
 
-在数据生态系统中，支持这种用例的典型开源组合是Kafka和Spark流处理，但在云上也可以进行不同的设置。在Google上，Google Pub/Sub/数据流（Beam）提供了一个不错的替代组合；在Azure上，Azure-Service Bus或Eventhub与Azure Functions的组合可以很好地处理消息并生成这些预测。
+在数据生态系统中，支持这种用例的典型开源组合是 Kafka 和 Spark 流处理，但在云上也可以进行不同的设置。在 Google 上，Google Pub/Sub/数据流（Beam）提供了一个不错的替代组合；在 Azure 上，Azure-Service Bus 或 Eventhub 与 Azure Functions 的组合可以很好地处理消息并生成这些预测。
 
-*Web服务*
+*Web 服务*
 
-我们可以将模型实施为Web服务。将预测模型实现为Web服务特别适用于工程团队的分散情况，并且需要处理多个不同的接口，如Web、桌面和移动。
+我们可以将模型实施为 Web 服务。将预测模型实现为 Web 服务特别适用于工程团队的分散情况，并且需要处理多个不同的接口，如 Web、桌面和移动。
 
-与Web服务的接口可以以不同方式设置：
+与 Web 服务的接口可以以不同方式设置：
 
-+   通过提供标识符，让Web服务拉取所需信息，计算预测并返回其值。
++   通过提供标识符，让 Web 服务拉取所需信息，计算预测并返回其值。
 
 +   或者接受一个有效负载，将其转换为数据框，进行预测并返回其值。
 
@@ -213,17 +213,17 @@ Postgres 具有一个集成，允许将 Python 代码作为函数或存储过程
 
 使用本地存储的系统，通常有一个还原函数，其作用是计算如果将本地存储中的事件重新集成，会形成什么样的客户档案。因此，它提供了基于本地数据的客户档案近似值。
 
-![](../Images/715d2d6161321c99fcf2cec609365c2f.png)
+![](img/715d2d6161321c99fcf2cec609365c2f.png)
 
 **序列流程**
 
-处理使用移动应用进行预测的流程，可以分为4个阶段。
+处理使用移动应用进行预测的流程，可以分为 4 个阶段。
 
-*应用初始化（1到3）****：*** 应用程序初始化，向客户档案发出请求，检索其初始值，并在本地存储中初始化档案。
+*应用初始化（1 到 3）****：*** 应用程序初始化，向客户档案发出请求，检索其初始值，并在本地存储中初始化档案。
 
 *应用程序（4）：* 应用程序将发生在应用程序中的不同事件存储到本地存储中的一个数组里。
 
-*预测准备（5到8）****：*** 应用程序希望检索新的流失预测，因此需要准备提供给流失Web服务的信息。为此，它向本地存储发出初始请求，以检索档案的值和已存储的事件数组。一旦检索到这些数据，它会向还原函数发出请求，将这些值作为参数提供，还原函数输出一个更新的档案，将本地事件重新集成到档案中。
+*预测准备（5 到 8）****：*** 应用程序希望检索新的流失预测，因此需要准备提供给流失 Web 服务的信息。为此，它向本地存储发出初始请求，以检索档案的值和已存储的事件数组。一旦检索到这些数据，它会向还原函数发出请求，将这些值作为参数提供，还原函数输出一个更新的档案，将本地事件重新集成到档案中。
 
 *Web 服务预测 (9 到 10)：* 应用程序向流失预测 Web 服务发出请求，提供从第 8 步更新的*/减少的客户档案作为有效负载的一部分。Web 服务可以使用有效负载提供的信息生成预测并将其值输出回应用程序。
 
@@ -309,7 +309,7 @@ Android-ML Kit 或类似的 Caffe2 允许在本地应用程序中使用模型，
 
 **实验框架**
 
-建立实验框架，进行A/B测试以评估不同模型的性能与客观指标的对比。同时确保有足够的跟踪以准确调试和评估模型的后期性能。
+建立实验框架，进行 A/B 测试以评估不同模型的性能与客观指标的对比。同时确保有足够的跟踪以准确调试和评估模型的后期性能。
 
 ### 总结
 
@@ -317,25 +317,25 @@ Android-ML Kit 或类似的 Caffe2 允许在本地应用程序中使用模型，
 
 了解特定用例、团队的技术和分析成熟度、整体组织结构及其互动，有助于找到将预测模型部署到生产环境中的正确方法。
 
-**个人简介：[Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)** 是GrandVision NV的高级企业数据架构师。
+**个人简介：[Julien Kervizic](https://www.linkedin.com/in/julienkervizic/)** 是 GrandVision NV 的高级企业数据架构师。
 
 [原文](https://medium.com/analytics-and-data/overview-of-the-different-approaches-to-putting-machinelearning-ml-models-in-production-c699b34abf86)。经许可转载。
 
 **相关：**
 
-+   [如何在5分钟内使用Flask为机器学习模型构建API](/2019/01/build-api-machine-learning-model-using-flask.html)
++   如何在 5 分钟内使用 Flask 为机器学习模型构建 API
 
-+   [管理你的机器学习生命周期与MLflow  –  第一部分](/2018/07/manage-machine-learning-lifecycle-mlflow.html)
++   管理你的机器学习生命周期与 MLflow  –  第一部分
 
-+   [将机器学习投入生产](/2017/09/putting-machine-learning-production.html)
++   将机器学习投入生产
 
 ### 更多相关内容
 
-+   [使用Python的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
++   [使用 Python 的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
 
 +   [Feature Store Summit 2023：部署机器学习模型的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)
 
-+   [AI生成的体育亮点：不同的方法](https://www.kdnuggets.com/2022/03/aigenerated-sports-highlights-different-approaches.html)
++   [AI 生成的体育亮点：不同的方法](https://www.kdnuggets.com/2022/03/aigenerated-sports-highlights-different-approaches.html)
 
 +   [将你的机器学习模型部署到云中的生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)
 

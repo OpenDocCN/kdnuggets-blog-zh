@@ -1,8 +1,8 @@
 # 如何进行 R 中的时间序列分析
 
-> 原文：[https://www.kdnuggets.com/how-to-conduct-time-series-analysis-in-r](https://www.kdnuggets.com/how-to-conduct-time-series-analysis-in-r)
+> 原文：[`www.kdnuggets.com/how-to-conduct-time-series-analysis-in-r`](https://www.kdnuggets.com/how-to-conduct-time-series-analysis-in-r)
 
-![如何进行 R 中的时间序列分析](../Images/ba6256c6251e3412b5cf1817be66e9af.png)
+![如何进行 R 中的时间序列分析](img/ba6256c6251e3412b5cf1817be66e9af.png)
 
 图片来源：编辑 | Ideogram
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@ data <- read.csv ("timeseries.csv", header = TRUE)
 head(data) 
 ```
 
-![head()](../Images/9109adea99391b8ceb24c8a348ba3dfa.png)
+![head()](img/9109adea99391b8ceb24c8a348ba3dfa.png)
 
 ## 创建时间序列对象
 
@@ -56,7 +56,7 @@ ts_data <- ts(data$Price)
 plot(ts_data) 
 ```
 
-![可视化](../Images/491bf6143b644c9dcf52ceb5939c5b32.png)
+![可视化](img/491bf6143b644c9dcf52ceb5939c5b32.png)
 
 ## ARIMA 模型
 
@@ -74,7 +74,7 @@ fit <- auto.arima(ts_data)
 acf(ts_data) 
 ```
 
-![ACF](../Images/748d80b8579a9ba279f8e92359c16bbd.png)
+![ACF](img/748d80b8579a9ba279f8e92359c16bbd.png)
 
 ## 偏自相关函数（PACF）
 
@@ -84,7 +84,7 @@ acf(ts_data)
 pacf(ts_data) 
 ```
 
-![PACF](../Images/3e28105ab37b024d2c5a29a1fa600aeb.png)
+![PACF](img/3e28105ab37b024d2c5a29a1fa600aeb.png)
 
 ## Ljung-Box 检验
 
@@ -94,7 +94,7 @@ Ljung-Box 检验用于检查时间序列模型残差中的自相关。它测试�
 Box.test(fit$residuals, lag = 20, type = "Ljung-Box") 
 ```
 
-![Box 检验](../Images/5639a55cc1a6170ab6be6fdbe7e5dccd.png)
+![Box 检验](img/5639a55cc1a6170ab6be6fdbe7e5dccd.png)
 
 ## 残差分析
 
@@ -105,7 +105,7 @@ plot (fit$residuals, main="Residuals of ARIMA Model", ylab="Residuals")
 abline(h=0, col="red") 
 ```
 
-![残差分析](../Images/a569cc9f6f30f8a697cd5a47ca505cb6.png)
+![残差分析](img/a569cc9f6f30f8a697cd5a47ca505cb6.png)
 
 ## 预测
 
@@ -123,7 +123,7 @@ forecast_result <- forecast (fit)
 autoplot(forecast_result) 
 ```
 
-![预测](../Images/828895eb738004e803bd7332b4fff66e.png)
+![预测](img/828895eb738004e803bd7332b4fff66e.png)
 
 ## 模型准确性
 
@@ -133,7 +133,7 @@ autoplot(forecast_result)
 accuracy(fit) 
 ```
 
-![准确性](../Images/1e7d41abfbfe97e594490e36f2e07768.png)
+![准确性](img/1e7d41abfbfe97e594490e36f2e07768.png)
 
 ## 总结
 
@@ -145,12 +145,12 @@ R 中的时间序列分析从加载数据和创建时间序列对象开始。接
 
 +   [市场数据与新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)
 
-+   [无代码时间序列分析与KNIME](https://www.kdnuggets.com/2022/10/packt-codeless-time-series-analysis-knime.html)
++   [无代码时间序列分析与 KNIME](https://www.kdnuggets.com/2022/10/packt-codeless-time-series-analysis-knime.html)
 
 +   [创建时间序列比率分析仪表板](https://www.kdnuggets.com/2023/06/wolfer-create-time-series-ratio-analysis-dashboard.html)
 
-+   [时间序列分析：Python中的ARIMA模型](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)
++   [时间序列分析：Python 中的 ARIMA 模型](https://www.kdnuggets.com/2023/08/times-series-analysis-arima-models-python.html)
 
-+   [KDnuggets 新闻，6月29日：数据科学的20个基本Linux命令……](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基本 Linux 命令……](https://www.kdnuggets.com/2022/n26.html)
 
 +   [避免时间序列预测中的这些错误](https://www.kdnuggets.com/2021/12/avoid-mistakes-time-series-forecasting.html)

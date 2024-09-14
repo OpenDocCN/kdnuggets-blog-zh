@@ -1,8 +1,8 @@
 # 如何编写高效的 Python 代码：初学者教程
 
-> 原文：[https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)
+> 原文：[`www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners`](https://www.kdnuggets.com/how-to-write-efficient-python-code-a-tutorial-for-beginners)
 
-![如何编写高效的 Python 代码：初学者教程](../Images/fbb354c3b1dea917f46b644f09631a9a.png)
+![如何编写高效的 Python 代码：初学者教程](img/fbb354c3b1dea917f46b644f09631a9a.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -44,7 +44,7 @@
 
 `range()`函数生成一个数字序列，通常在循环中作为迭代器使用。
 
-`range()`函数返回一个范围对象，该对象默认从0开始，到指定的数字（但不包括）为止。
+`range()`函数返回一个范围对象，该对象默认从 0 开始，到指定的数字（但不包括）为止。
 
 这里是一个例子：
 
@@ -145,17 +145,17 @@ Bob scored 89 points.
 Charlie scored 78 points.
 ```
 
-使用`zip()`的Pythonic版本更优雅，避免了手动索引的需要，使代码更清晰易读。
+使用`zip()`的 Pythonic 版本更优雅，避免了手动索引的需要，使代码更清晰易读。
 
 # 2\. 使用列表和字典推导
 
-在Python中，列表推导和字典推导是用来分别创建列表和字典的简洁单行表达式。它们还可以包含条件语句来根据某些条件过滤项。
+在 Python 中，列表推导和字典推导是用来分别创建列表和字典的简洁单行表达式。它们还可以包含条件语句来根据某些条件过滤项。
 
 我们从循环版本开始，然后转到对列表和字典的推导式。
 
-## Python中的列表推导
+## Python 中的列表推导
 
-假设你有一个`numbers`列表。你想创建一个`squared_numbers`列表。你可以使用如下的for循环：
+假设你有一个`numbers`列表。你想创建一个`squared_numbers`列表。你可以使用如下的 for 循环：
 
 ```py
 numbers = [1, 2, 3, 4, 5]
@@ -173,7 +173,7 @@ Output >>> [1, 4, 9, 16, 25]
 
 但列表推导提供了更清晰和简洁的语法来完成这项工作。它们允许你通过对可迭代对象中的每个项应用表达式来创建一个新列表。
 
-![如何编写高效的Python代码：初学者教程](../Images/834dac015d44de3b2c62355bee951c6a.png)
+![如何编写高效的 Python 代码：初学者教程](img/834dac015d44de3b2c62355bee951c6a.png)
 
 列表推导语法 | 图片作者
 
@@ -209,17 +209,17 @@ Output >>> [1, 3, 5]
 
 在这个例子中，列表推导创建了一个只包含`numbers`列表中奇数的新列表。
 
-## Python中的字典推导
+## Python 中的字典推导
 
 使用类似于列表推导的语法，字典推导允许你从现有的可迭代对象创建字典。
 
-![如何编写高效的Python代码：初学者教程](../Images/21e98d330d1a850a65d653b892ec8cde.png)
+![如何编写高效的 Python 代码：初学者教程](img/21e98d330d1a850a65d653b892ec8cde.png)
 
 字典推导语法 | 图片作者
 
 假设你有一个`fruits`列表。你想创建一个`fruit:len(fruit)`键值对的字典。
 
-下面是如何使用for循环来实现这一点：
+下面是如何使用 for 循环来实现这一点：
 
 ```py
 fruits = ["apple", "banana", "cherry", "date"]
@@ -265,11 +265,11 @@ print(long_fruit_names)
 Output >>> {'banana': 6, 'cherry': 6}
 ```
 
-在这里，字典推导创建了一个字典，键是水果名称，值是它们的长度，但只对名称长度超过5个字符的水果。
+在这里，字典推导创建了一个字典，键是水果名称，值是它们的长度，但只对名称长度超过 5 个字符的水果。
 
 # 3\. 使用上下文管理器进行有效的资源处理
 
-Python中的上下文管理器帮助你有效管理资源。使用上下文管理器，你可以轻松地设置和清理资源。上下文管理器最简单和最常见的例子是在文件处理上。
+Python 中的上下文管理器帮助你有效管理资源。使用上下文管理器，你可以轻松地设置和清理资源。上下文管理器最简单和最常见的例子是在文件处理上。
 
 看下面的代码片段：
 
@@ -334,7 +334,7 @@ Output >>> True
 
 ## 生成器是如何工作的？
 
-![如何编写高效的 Python 代码：初学者教程](../Images/f84840331325804f35f889783903659b.png)
+![如何编写高效的 Python 代码：初学者教程](img/f84840331325804f35f889783903659b.png)
 
 图片由作者提供
 

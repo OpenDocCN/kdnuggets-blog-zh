@@ -1,8 +1,8 @@
 # 如何在 Python 中工程化日期特征
 
-> 原文：[https://www.kdnuggets.com/2021/08/engineer-date-features-python.html](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)
+> 原文：[`www.kdnuggets.com/2021/08/engineer-date-features-python.html`](https://www.kdnuggets.com/2021/08/engineer-date-features-python.html)
 
-![图片](../Images/83f524b541d4e54f4d905839a5cb4b07.png)
+![图片](img/83f524b541d4e54f4d905839a5cb4b07.png)
 
 原图由 [Sonja Langford](https://unsplash.com/@sonjalangford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -203,21 +203,21 @@ date
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 事务
 
 * * *
 
 ### 更多相关话题
 
-+   [滴答：使用Pendulum轻松管理Python中的日期和时间](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)
++   [滴答：使用 Pendulum 轻松管理 Python 中的日期和时间](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)
 
-+   [作为数据科学家保持更新的5个项目创意](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
++   [作为数据科学家保持更新的 5 个项目创意](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
 
-+   [使用NumPy进行日期和时间计算](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)
++   [使用 NumPy 进行日期和时间计算](https://www.kdnuggets.com/using-numpy-to-perform-date-and-time-calculations)
 
 +   [从工程师到机器学习工程师：声明式机器学习的转变](https://www.kdnuggets.com/2023/05/predibase-go-engineer-ml-engineer-declarative-ml.html)
 

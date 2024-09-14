@@ -1,54 +1,54 @@
-# 开始使用Claude 2 API
+# 开始使用 Claude 2 API
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-claude-2-api](https://www.kdnuggets.com/getting-started-with-claude-2-api)
+> 原文：[`www.kdnuggets.com/getting-started-with-claude-2-api`](https://www.kdnuggets.com/getting-started-with-claude-2-api)
 
-![开始使用Claude 2 API](../Images/23d6640d3c41a581cbde7bd6f9c39627.png)
+![开始使用 Claude 2 API](img/23d6640d3c41a581cbde7bd6f9c39627.png)
 
 图片由作者提供
 
-# Claude 2是什么？
+# Claude 2 是什么？
 
 * * *
 
-## 我们的前3大课程推荐
+## 我们的前 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理。
 
 * * *
 
-Anthropic的对话AI助手，[Claude 2](https://www.anthropic.com/index/claude-2)，是最新版本，相比于前一版本在性能、响应长度和可用性方面有了显著的提升。最新版本的模型可以通过我们的API和claude.ai的新公共测试网站进行访问。
+Anthropic 的对话 AI 助手，[Claude 2](https://www.anthropic.com/index/claude-2)，是最新版本，相比于前一版本在性能、响应长度和可用性方面有了显著的提升。最新版本的模型可以通过我们的 API 和 claude.ai 的新公共测试网站进行访问。
 
-Claude 2因其易于聊天、清晰解释推理、避免有害输出和拥有强大的记忆能力而闻名。它增强了推理能力。
+Claude 2 因其易于聊天、清晰解释推理、避免有害输出和拥有强大的记忆能力而闻名。它增强了推理能力。
 
-Claude 2在律师考试的多项选择题部分表现出显著的改进，得分为76.5%，相比Claude 1.3的73.0%有所提升。此外，Claude 2在GRE阅读和写作部分超过了90%的考生。在像HumanEval这样的编码评估中，Claude 2的准确率达到了71.2%，相比过去的56.0%有了显著提高。
+Claude 2 在律师考试的多项选择题部分表现出显著的改进，得分为 76.5%，相比 Claude 1.3 的 73.0%有所提升。此外，Claude 2 在 GRE 阅读和写作部分超过了 90%的考生。在像 HumanEval 这样的编码评估中，Claude 2 的准确率达到了 71.2%，相比过去的 56.0%有了显著提高。
 
-Claude 2 API以与Claude 1.3相同的价格提供给我们的数千名企业客户。你可以通过网页API以及Python和Typescript客户端轻松使用它。本教程将指导你完成Claude 2 Python API的设置和使用，并帮助你了解它提供的各种功能。
+Claude 2 API 以与 Claude 1.3 相同的价格提供给我们的数千名企业客户。你可以通过网页 API 以及 Python 和 Typescript 客户端轻松使用它。本教程将指导你完成 Claude 2 Python API 的设置和使用，并帮助你了解它提供的各种功能。
 
 # 设置
 
-在我们开始访问API之前，我们需要首先申请[API早期访问](https://www.anthropic.com/earlyaccess)。你需要填写表格并等待确认。确保你使用的是企业邮箱地址。我使用的是**@kdnuggets.com**。
+在我们开始访问 API 之前，我们需要首先申请[API 早期访问](https://www.anthropic.com/earlyaccess)。你需要填写表格并等待确认。确保你使用的是企业邮箱地址。我使用的是**@kdnuggets.com**。
 
-收到确认邮件后，你将获得控制台访问权限。从那里，你可以通过访问[账户设置](https://console.anthropic.com/account/keys)来生成API密钥。
+收到确认邮件后，你将获得控制台访问权限。从那里，你可以通过访问[账户设置](https://console.anthropic.com/account/keys)来生成 API 密钥。
 
-使用PiP安装Anthropic Python客户端。确保你使用的是最新的Python版本。
+使用 PiP 安装 Anthropic Python 客户端。确保你使用的是最新的 Python 版本。
 
 ```py
 pip install anthropic
 ```
 
-使用API密钥设置anthropic客户端。
+使用 API 密钥设置 anthropic 客户端。
 
 ```py
 client = anthropic.Anthropic(api_key=os.environ["API_KEY"])
 ```
 
-除了为创建客户端对象提供API密钥外，你还可以设置`ANTHROPIC_API_KEY`环境变量并提供密钥。
+除了为创建客户端对象提供 API 密钥外，你还可以设置`ANTHROPIC_API_KEY`环境变量并提供密钥。
 
-# 访问Claude 2
+# 访问 Claude 2
 
 这里是使用提示生成响应的基本同步版本。
 
@@ -148,13 +148,13 @@ for completion in stream:
 
 **输出：**
 
-![开始使用 Claude 2 API](../Images/39e8ce742bdd6aa34bbc6cd8cecaccdd.png)
+![开始使用 Claude 2 API](img/39e8ce742bdd6aa34bbc6cd8cecaccdd.png)
 
 # 计费
 
 计费是将 API 集成到应用程序中最重要的方面。这将帮助你规划预算并向客户收费。所有 LLMs API 都基于令牌收费。你可以查看下面的表格来了解定价结构。
 
-![开始使用 Claude 2 API](../Images/785f7e1734371aac50d7001a80d1d3b5.png)
+![开始使用 Claude 2 API](img/785f7e1734371aac50d7001a80d1d3b5.png)
 
 来自 Anthropic 的图像
 

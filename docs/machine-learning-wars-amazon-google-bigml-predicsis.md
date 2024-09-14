@@ -1,6 +1,6 @@
 # 机器学习大战：Amazon 对抗 Google 对抗 BigML 对抗 PredicSis
 
-> 原文：[https://www.kdnuggets.com/2015/05/machine-learning-wars-amazon-google-bigml-predicsis.html/2](https://www.kdnuggets.com/2015/05/machine-learning-wars-amazon-google-bigml-predicsis.html/2)
+> 原文：[`www.kdnuggets.com/2015/05/machine-learning-wars-amazon-google-bigml-predicsis.html/2`](https://www.kdnuggets.com/2015/05/machine-learning-wars-amazon-google-bigml-predicsis.html/2)
 
 Kaggle 竞赛中的大致排名
 
@@ -34,9 +34,9 @@ Kaggle 竞赛中的大致排名
 
 **了解更多**
 
-+   如果你想了解更多关于 PredicSis 和 BigML 的信息，它们将在 5月21日于巴黎的 [PAPIs Connect](http://www.papis.io/connect) 会议上出现——欢迎来加入我们！
++   如果你想了解更多关于 PredicSis 和 BigML 的信息，它们将在 5 月 21 日于巴黎的 [PAPIs Connect](http://www.papis.io/connect) 会议上出现——欢迎来加入我们！
 
-+   BigML 也将在 [APIdays Mediterranea](http://mediterranea.apidays.io/) 参加会议，日期是5月7日，地点是巴塞罗那，他们的首席技术官将就 ML API 的未来进行精彩演讲。
++   BigML 也将在 [APIdays Mediterranea](http://mediterranea.apidays.io/) 参加会议，日期是 5 月 7 日，地点是巴塞罗那，他们的首席技术官将就 ML API 的未来进行精彩演讲。
 
 +   我正在赠送两个会议的免费票！ [在此注册 PAPIs Connect](https://docs.google.com/forms/d/1Nrn6u0Z7BrRxV1MFFjuGolg36s2Olwfdk7PtdflgBBU/viewform?c=0&w=1) 和 [在此注册 APIdays Mediterranea](https://docs.google.com/forms/d/1l7xXHK6OxdmM2jMky9kwzrqsl0LuSm3jBs9Y4ZUvjPg/viewform?c=0&w=1)。
 
@@ -50,21 +50,21 @@ Kaggle 竞赛中的大致排名
 
 **相关内容：**
 
-+   [云机器学习大战：亚马逊 vs IBM Watson vs 微软 Azure](/2015/04/cloud-machine-learning-amazon-ibm-watson-microsoft-azure.html)
++   云机器学习大战：亚马逊 vs IBM Watson vs 微软 Azure
 
-+   [BigML 机器学习平台 2015 年冬季发布，2 月 11 日](/2015/02/bigml-machine-learning-platform-winter-release.html)
++   BigML 机器学习平台 2015 年冬季发布，2 月 11 日
 
-+   [Google BigQuery 公共数据集](/2015/02/google-bigquery-public-datasets.html)
++   Google BigQuery 公共数据集
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

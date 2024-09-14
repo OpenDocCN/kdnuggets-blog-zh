@@ -1,8 +1,8 @@
 # **辛普森悖论**及其在数据科学中的影响
 
-> 原文：[https://www.kdnuggets.com/2023/03/simpson-paradox-implications-data-science.html](https://www.kdnuggets.com/2023/03/simpson-paradox-implications-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/03/simpson-paradox-implications-data-science.html`](https://www.kdnuggets.com/2023/03/simpson-paradox-implications-data-science.html)
 
-![辛普森悖论及其在数据科学中的影响](../Images/1f99f13bc213ec5816ae2678b750c4d9.png)
+![辛普森悖论及其在数据科学中的影响](img/1f99f13bc213ec5816ae2678b750c4d9.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,15 +26,15 @@
 
 # 什么是辛普森悖论？
 
-1972年，**科林·R·布莱斯**引入了“辛普森悖论”这一名称，也称为辛普森反转、尤尔-辛普森效应、合并悖论或反转悖论。
+1972 年，**科林·R·布莱斯**引入了“辛普森悖论”这一名称，也称为辛普森反转、尤尔-辛普森效应、合并悖论或反转悖论。
 
 **辛普森悖论**指的是，当数据被分组时，某个趋势或结果出现，但当数据合并时，该趋势或结果会反转或消失。这是一个统计学悖论，根据数据如何分组，它可以从相同的数据得出两个相反的结论。
 
 ## 加州大学伯克利分校与辛普森悖论
 
-辛普森悖论的一个经典例子是加州大学伯克利分校关于研究生招生性别偏见的研究。1973年，在学年开始时，加州大学伯克利分校的研究生院录取了约44%的男性申请者和35%的女性申请者。学校担心可能会面临诉讼，因此请统计学家**彼得·比克尔**查看数据。
+辛普森悖论的一个经典例子是加州大学伯克利分校关于研究生招生性别偏见的研究。1973 年，在学年开始时，加州大学伯克利分校的研究生院录取了约 44%的男性申请者和 35%的女性申请者。学校担心可能会面临诉讼，因此请统计学家**彼得·比克尔**查看数据。
 
-研究发现，在6个部门中，有4个部门存在显著的性别偏见，偏向女性，而在剩余的2个部门中没有显著的性别偏见。团队的发现显示，女性申请的是整体申请者比例较小的部门。
+研究发现，在 6 个部门中，有 4 个部门存在显著的性别偏见，偏向女性，而在剩余的 2 个部门中没有显著的性别偏见。团队的发现显示，女性申请的是整体申请者比例较小的部门。
 
 在辛普森悖论中，你需要考虑现实世界中的场景和可能隐藏的变量，这些变量不容易通过数据解释。在这个例子中，隐藏变量是更多女性申请了特定部门。这影响了被接受申请者的总体百分比，从而展示出数据最初存在的反向趋势。
 
@@ -42,7 +42,7 @@
 
 下图解释了数据分组时趋势如何反转：
 
-![辛普森悖论及其在数据科学中的影响](../Images/18cf2a580745a51fe3a84a6b958df4ec.png)
+![辛普森悖论及其在数据科学中的影响](img/18cf2a580745a51fe3a84a6b958df4ec.png)
 
 图片来自 [维基百科](https://en.wikipedia.org/wiki/Simpson%27s_paradox)
 

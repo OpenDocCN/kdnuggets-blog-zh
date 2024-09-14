@@ -1,10 +1,10 @@
 # 不要浪费时间建立你的数据科学网络。
 
-> 原文：[https://www.kdnuggets.com/2021/11/waste-time-building-data-science-network.html](https://www.kdnuggets.com/2021/11/waste-time-building-data-science-network.html)
+> 原文：[`www.kdnuggets.com/2021/11/waste-time-building-data-science-network.html`](https://www.kdnuggets.com/2021/11/waste-time-building-data-science-network.html)
 
-[评论](#comments)
+评论
 
-![](../Images/07148e0a28352daa5caae4c8bc1cdfd8.png)
+![](img/07148e0a28352daa5caae4c8bc1cdfd8.png)
 
 由[Aron Visuals](https://unsplash.com/@aronvisuals?utm_source=medium&utm_medium=referral)拍摄，发布在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。
 
@@ -12,7 +12,7 @@
 
 我最近注意到，在与人进行口头或书面互动时，我对我所交流的对象做出了许多假设。我没有在明确说明我所说的内容之前定义非常重要的方面，这在不同的上下文中可能会稀释我想表达的实际信息。
 
-最近，我写了一篇关于如何通过网络简化进入数据科学初期阶段的文章。回应这篇文章，我在LinkedIn上收到了许多连接请求，他们希望与我建立联系，以便扩展他们的职业网络。
+最近，我写了一篇关于如何通过网络简化进入数据科学初期阶段的文章。回应这篇文章，我在 LinkedIn 上收到了许多连接请求，他们希望与我建立联系，以便扩展他们的职业网络。
 
 [**不要让进入数据科学变得比必要的更困难**](https://towardsdatascience.com/dont-make-breaking-into-data-science-harder-than-it-needs-to-be-96835553260)。
 
@@ -48,9 +48,9 @@
 
 人们想见伊隆·马斯克是因为他做出人们想要的东西。他是一个解决问题的人，他是被需要的！
 
-如果你试图为了上述3个原因中的任何一个建立网络，那么**你绝对是在浪费时间**——这些时间本可以用来创建一些有趣的东西，让人们想要了解你。
+如果你试图为了上述 3 个原因中的任何一个建立网络，那么**你绝对是在浪费时间**——这些时间本可以用来创建一些有趣的东西，让人们想要了解你。
 
-如果你看看在LinkedIn上讨论数据科学的热门人物，你会看到我在说什么；
+如果你看看在 LinkedIn 上讨论数据科学的热门人物，你会看到我在说什么；
 
 +   [维尼特·瓦希斯塔](https://www.linkedin.com/in/vineetvashishta/) — 建立围绕数据科学最佳实践的心态。这包括从生产中的机器学习到招聘的所有内容。
 
@@ -66,7 +66,7 @@
 
 这确实很真实… 每个建筑必须从某个地方开始。
 
-[**用4个步骤开始你的数据科学之旅**](https://towardsdatascience.com/start-your-data-science-journey-in-4-steps-f5b5a6e7e80b)
+[**用 4 个步骤开始你的数据科学之旅**](https://towardsdatascience.com/start-your-data-science-journey-in-4-steps-f5b5a6e7e80b)
 
 ## 合适的人会找到你
 
@@ -82,7 +82,7 @@
 
 这并不是说我没有遇到过向我询问工作和其他不在这个列表上的事情的人，我有。但这些人很快就会消失。
 
-在我看来，如果你发现自己试图在线与某人建立联系，而不符合这3个原因中的任何一个，那么我建议你当场自省。无论你做什么或说什么，都可能显得急切，并可能在关系开始之前就把它破坏掉。
+在我看来，如果你发现自己试图在线与某人建立联系，而不符合这 3 个原因中的任何一个，那么我建议你当场自省。无论你做什么或说什么，都可能显得急切，并可能在关系开始之前就把它破坏掉。
 
 > 如果你真的想建立一个强大的网络，合适的人会在你决定开始创造的那一刻找到你。
 
@@ -114,7 +114,7 @@
 
 +   [**成为数据科学家的战略方法**](https://medium.com/analytics-vidhya/a-strategic-approach-to-becoming-a-data-scientist-2e0f1bf65ebf)
 
-+   [**吸引自由职业数据科学客户的5种方法**](https://medium.datadriveninvestor.com/5-ways-to-attract-freelance-data-science-clients-to-you-b79fdb76eab)
++   [**吸引自由职业数据科学客户的 5 种方法**](https://medium.datadriveninvestor.com/5-ways-to-attract-freelance-data-science-clients-to-you-b79fdb76eab)
 
 +   [**在数据科学中找到一个导师**](https://towardsdatascience.com/finding-a-mentor-in-data-science-9863de5b3620)
 
@@ -124,17 +124,17 @@
 
 **相关：**
 
-+   [数据科学家和机器学习工程师的区别](/2021/08/difference-between-data-scientists-ml-engineers.html)
++   数据科学家和机器学习工程师的区别
 
-+   [如何在8个月内提升我的数据科学技能](/2020/10/level-up-data-science-skills-8-months.html)
++   如何在 8 个月内提升我的数据科学技能
 
-+   [最重要的数据科学项目](/2020/09/most-important-data-science-project.html)
++   最重要的数据科学项目
 
 ### 更多相关主题
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 

@@ -1,12 +1,12 @@
 # 使用 PyCaret 的新时间序列模块
 
-> 原文：[https://www.kdnuggets.com/2021/12/pycaret-new-time-series-module.html](https://www.kdnuggets.com/2021/12/pycaret-new-time-series-module.html)
+> 原文：[`www.kdnuggets.com/2021/12/pycaret-new-time-series-module.html`](https://www.kdnuggets.com/2021/12/pycaret-new-time-series-module.html)
 
-[评论](#comments)
+评论
 
 **作者及创始人 [Moez Ali](https://www.linkedin.com/in/profile-moez/)**
 
-![](../Images/214b781dbc4b8244cf59c14877494c2a.png)
+![](img/214b781dbc4b8244cf59c14877494c2a.png)
 
 (图像来自作者) PyCaret 新时间序列模块
 
@@ -50,7 +50,7 @@ data = data.asfreq('D')
 data.head()
 ```
 
-![](../Images/b7cd78114d744b47a4cf6680461376cd.png)
+![](img/b7cd78114d744b47a4cf6680461376cd.png)
 
 （图像来自作者）
 
@@ -59,7 +59,7 @@ data.head()
 data.plot()
 ```
 
-![](../Images/07fd9c74bb83513ba4f3b54ce578b79a.png)
+![](img/07fd9c74bb83513ba4f3b54ce578b79a.png)
 
 （图像来自作者）‘pycaret_downloads’的时间序列图
 
@@ -74,7 +74,7 @@ exp = TimeSeriesExperiment()
 exp.setup(data, fh = 7, fold = 3, session_id = 123)
 ```
 
-![](../Images/08e15ab445ff2add1ae0f6b7001af033.png)
+![](img/08e15ab445ff2add1ae0f6b7001af033.png)
 
 （图像来自作者）setup 函数的输出
 
@@ -84,7 +84,7 @@ exp.setup(data, fh = 7, fold = 3, session_id = 123)
 check_stats()
 ```
 
-![](../Images/4aa5b8687a0a78c4324ab3391f727d71.png)
+![](img/4aa5b8687a0a78c4324ab3391f727d71.png)
 
 （图像来自作者）check_stats 函数的输出
 
@@ -95,7 +95,7 @@ check_stats()
 plot_model(plot = 'ts')**# object-oriented API** exp.plot_model(plot = 'ts')
 ```
 
-![](../Images/568ca3df87574029bcf5af0cba97bfaa.png)
+![](img/568ca3df87574029bcf5af0cba97bfaa.png)
 
 （图像来自作者）
 
@@ -103,7 +103,7 @@ plot_model(plot = 'ts')**# object-oriented API** exp.plot_model(plot = 'ts')
 **# cross-validation plot** plot_model(plot = 'cv')
 ```
 
-![](../Images/17d4e664ecdc5417d773b8f704b2a2b6.png)
+![](img/17d4e664ecdc5417d773b8f704b2a2b6.png)
 
 （图像来自作者）
 
@@ -111,20 +111,20 @@ plot_model(plot = 'ts')**# object-oriented API** exp.plot_model(plot = 'ts')
 **# ACF plot** plot_model(plot = 'acf')
 ```
 
-![](../Images/1a0f9254dbf296fbd23db4c7d3dac301.png)
+![](img/1a0f9254dbf296fbd23db4c7d3dac301.png)
 
 ```py
 **# Diagnostics plot** plot_model(plot = 'diagnostics')
 ```
 
-![](../Images/c2e216700adc14cef23c9bf682fcf88f.png)
+![](img/c2e216700adc14cef23c9bf682fcf88f.png)
 
 ```py
 **# Decomposition plot**
 plot_model(plot = 'decomp_stl')
 ```
 
-![](../Images/d04990ad4302042f3155aad6259400e0.png)
+![](img/d04990ad4302042f3155aad6259400e0.png)
 
 ## ✈️ 模型训练与选择
 
@@ -132,7 +132,7 @@ plot_model(plot = 'decomp_stl')
 **# functional API** best = compare_models()**# object-oriented API** best = exp.compare_models()
 ```
 
-![](../Images/5e6ffc971e1b3c902be33833cb833f33.png)
+![](img/5e6ffc971e1b3c902be33833cb833f33.png)
 
 （图像来自作者）compare_models 函数的输出
 
@@ -143,11 +143,11 @@ plot_model(plot = 'decomp_stl')
 print(prophet)
 ```
 
-![](../Images/8179824fd5df72669fa383fd42829b04.png)
+![](img/8179824fd5df72669fa383fd42829b04.png)
 
 （图像来自作者）create_model 函数的输出
 
-![](../Images/b12de944fbdeaafd5fa2321ade9665bd.png)
+![](img/b12de944fbdeaafd5fa2321ade9665bd.png)
 
 （图像来自作者）打印函数的输出
 
@@ -158,11 +158,11 @@ tuned_prophet = tune_model(prophet)
 print(tuned_prophet)
 ```
 
-![](../Images/693cc4efc7af8f191ee8a4c3cefbc9a6.png)
+![](img/693cc4efc7af8f191ee8a4c3cefbc9a6.png)
 
 （图像来自作者）tune_model 函数的输出
 
-![](../Images/5de77902f6b674d1e60e8574398eefb6.png)
+![](img/5de77902f6b674d1e60e8574398eefb6.png)
 
 （图像来自作者）打印函数的输出
 
@@ -170,7 +170,7 @@ print(tuned_prophet)
 plot_model(best, plot = 'forecast')
 ```
 
-![](../Images/04c2119ac531641a6e710b9eb41bbea2.png)
+![](img/04c2119ac531641a6e710b9eb41bbea2.png)
 
 （图像来自作者）
 
@@ -178,7 +178,7 @@ plot_model(best, plot = 'forecast')
 **# forecast in unknown future** plot_model(best, plot = 'forecast', data_kwargs = {'fh' : 30})
 ```
 
-![](../Images/14e983295afdc5b71ae152ede35055e2.png)
+![](img/14e983295afdc5b71ae152ede35055e2.png)
 
 （图像来自作者）
 
@@ -187,21 +187,21 @@ plot_model(best, plot = 'forecast')
 plot_model(best, plot = 'insample')
 ```
 
-![](../Images/78504083ded80f476ef509fd0ae00a75.png)
+![](img/78504083ded80f476ef509fd0ae00a75.png)
 
 ```py
 # residuals plot
 plot_model(best, plot = 'residuals')
 ```
 
-![](../Images/69215f9a7985ff80cabcaf14dbdf369f.png)
+![](img/69215f9a7985ff80cabcaf14dbdf369f.png)
 
 ```py
 # diagnostics plot
 plot_model(best, plot = 'diagnostics')
 ```
 
-![](../Images/17656c81dbf81fe7d337412b4fdc270f.png)
+![](img/17656c81dbf81fe7d337412b4fdc270f.png)
 
 ## ???? 部署
 
@@ -209,7 +209,7 @@ plot_model(best, plot = 'diagnostics')
 **# finalize model** final_best = finalize_model(best)**# generate predictions** predict_model(final_best, fh = 90)
 ```
 
-![](../Images/27101ae08abf044d4c06e3b0b906b232.png)
+![](img/27101ae08abf044d4c06e3b0b906b232.png)
 
 （图像来自作者）
 
@@ -217,7 +217,7 @@ plot_model(best, plot = 'diagnostics')
 **# save the model** save_model(final_best, 'my_best_model')
 ```
 
-![](../Images/cafa69bcdcddc7a4ad38407aa9f74204.png)
+![](img/cafa69bcdcddc7a4ad38407aa9f74204.png)
 
 （图像来自作者）
 
@@ -263,21 +263,21 @@ plot_model(best, plot = 'diagnostics')
 
 **相关：**
 
-+   [多变量时间序列分析与基于 LSTM 的 RNN](/2021/10/multivariate-time-series-analysis-lstm-based-rnn.html)
++   多变量时间序列分析与基于 LSTM 的 RNN
 
-+   [PyCaret 2.3.5 新版发布！了解新功能](/2021/11/pycaret-here-learn-new.html)
++   PyCaret 2.3.5 新版发布！了解新功能
 
-+   [前 5 大时间序列方法](/2021/11/top-5-time-series-methods.html)
++   前 5 大时间序列方法
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

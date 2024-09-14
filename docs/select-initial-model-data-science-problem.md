@@ -1,12 +1,12 @@
 # 如何为您的数据科学问题选择初始模型
 
-> 原文：[https://www.kdnuggets.com/2021/08/select-initial-model-data-science-problem.html](https://www.kdnuggets.com/2021/08/select-initial-model-data-science-problem.html)
+> 原文：[`www.kdnuggets.com/2021/08/select-initial-model-data-science-problem.html`](https://www.kdnuggets.com/2021/08/select-initial-model-data-science-problem.html)
 
-[评论](#comments)
+评论
 
 **由 [Zachary Warnes](https://www.linkedin.com/in/zjwarnes/)，数据科学家**
 
-![](../Images/b93028ea511d655cf16593e39f61e150.png)
+![](img/b93028ea511d655cf16593e39f61e150.png)
 
 照片由 [Cesar Carlevarino Aragon](https://unsplash.com/@carlevarino?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -52,7 +52,7 @@
 
 ## **线性回归 & 逻辑回归**
 
-![](../Images/3c72d683de98ff51e0f7058e6b385854.png)
+![](img/3c72d683de98ff51e0f7058e6b385854.png)
 
 照片由 [iMattSmart](https://unsplash.com/@imattsmart?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -86,7 +86,7 @@ clf.score(X,y)
 
 为什么要从这些简单模型开始？ **因为可能您的问题不需要任何复杂的模型。**
 
-如果只是为了获得稍微提高的准确率而投入大量精力和花费在AWS上的费用，那么这是不值得的。
+如果只是为了获得稍微提高的准确率而投入大量精力和花费在 AWS 上的费用，那么这是不值得的。
 
 这两种模型已经研究了几十年，是一些**在机器学习中最为理解透彻的模型**。
 
@@ -96,11 +96,11 @@ clf.score(X,y)
 
 即使你是一名经验丰富的数据科学家，你也应该了解这些模型在你的问题上的表现，主要是因为它们非常容易实现和测试。
 
-我曾经犯过这种错误。我曾经直接深入并构建复杂的模型。**以为我使用的xgboost模型在总体上是更优的**，因此它应该是我的起始模型。结果发现，线性回归模型的表现只差几个百分点。线性回归被使用是因为它更简单且更易解释。
+我曾经犯过这种错误。我曾经直接深入并构建复杂的模型。**以为我使用的 xgboost 模型在总体上是更优的**，因此它应该是我的起始模型。结果发现，线性回归模型的表现只差几个百分点。线性回归被使用是因为它更简单且更易解释。
 
 这里涉及到一定的自我认知。
 
-![](../Images/e8e37dac1e1b9805ce5f6e3dfeee479b.png)
+![](img/e8e37dac1e1b9805ce5f6e3dfeee479b.png)
 
 图片由[Sebastian Herrmann](https://unsplash.com/@officestock?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -118,7 +118,7 @@ clf.score(X,y)
 
 你是否试图预测一个连续的输出？
 
-![](../Images/936a86401dfe37adea518d52e2161070.png)
+![](img/936a86401dfe37adea518d52e2161070.png)
 
 线性回归（作者拍摄）
 
@@ -134,7 +134,7 @@ clf.score(X,y)
 
 你是否试图预测一个二元输出或多个唯一且离散的输出？
 
-![](../Images/45f28ad68cffad0af0d559a60ac9cc99.png)
+![](img/45f28ad68cffad0af0d559a60ac9cc99.png)
 
 逻辑回归（作者拍摄）
 
@@ -154,28 +154,28 @@ clf.score(X,y)
 
 节省时间和精力。只需从线性回归和逻辑回归开始。
 
-**简介：[扎卡里·沃恩斯](https://www.linkedin.com/in/zjwarnes/)** 是Pacmed的数据科学家，他不断寻求新的挑战。多年前，扎卡里认识到解决新问题和克服障碍是学习和发展新技能的最快方式，因此他不断地将自己置于新的环境中，以便从每一个新挑战中受益。
+**简介：[扎卡里·沃恩斯](https://www.linkedin.com/in/zjwarnes/)** 是 Pacmed 的数据科学家，他不断寻求新的挑战。多年前，扎卡里认识到解决新问题和克服障碍是学习和发展新技能的最快方式，因此他不断地将自己置于新的环境中，以便从每一个新挑战中受益。
 
 [原始内容](https://towardsdatascience.com/how-to-select-an-initial-model-for-your-data-science-problem-77f7b811bd0)。经许可转载。
 
 **相关：**
 
-+   [数据科学和机器学习中的基础线性代数](/2021/05/essential-linear-algebra-data-science-machine-learning.html)
++   数据科学和机器学习中的基础线性代数
 
-+   [你应该使用线性回归模型而非神经网络的3个理由](/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   你应该使用线性回归模型而非神经网络的 3 个理由
 
-+   [10个机器学习模型训练错误](/2021/07/10-machine-learning-model-training-mistakes.html)
++   10 个机器学习模型训练错误
 
 ### 主题更多
 
-+   [解决下一个数据科学问题的5步蓝图](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)
++   [解决下一个数据科学问题的 5 步蓝图](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)
 
 +   [如何正确从机器学习中的巨大数据集中选择样本](https://www.kdnuggets.com/2019/05/sample-huge-dataset-machine-learning.html)
 
-+   [如何使用[ ]、.loc、iloc、.at等在Pandas中选择行和列](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)
++   [如何使用[ ]、.loc、iloc、.at 等在 Pandas 中选择行和列](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)
 
-+   [现实世界中NLP应用的范围：不同的…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
++   [现实世界中 NLP 应用的范围：不同的…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
 
-+   [Python中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
++   [Python 中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
 
 +   [梯度消失问题：原因、后果及解决方案](https://www.kdnuggets.com/2022/02/vanishing-gradient-problem.html)

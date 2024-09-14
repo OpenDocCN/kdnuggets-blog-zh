@@ -1,6 +1,6 @@
 # 如何设计你的数据科学作品集
 
-> 原文：[https://www.kdnuggets.com/2022/01/design-data-science-portfolio.html](https://www.kdnuggets.com/2022/01/design-data-science-portfolio.html)
+> 原文：[`www.kdnuggets.com/2022/01/design-data-science-portfolio.html`](https://www.kdnuggets.com/2022/01/design-data-science-portfolio.html)
 
 拥有一个整理得当的作品集对于突出你的工作和讲述你的故事能力至关重要。精心挑选的项目是展示你专业知识和分享经验的最佳方式。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -22,7 +22,7 @@
 
 ## 介绍
 
-![我如何设计我的数据科学作品集](../Images/38e4d50799638c29543253cf2e20b49a.png)
+![我如何设计我的数据科学作品集](img/38e4d50799638c29543253cf2e20b49a.png)
 
 kathleenlara.com: 介绍部分
 
@@ -34,7 +34,7 @@ kathleenlara.com: 介绍部分
 
 ## 项目
 
-![我如何设计我的数据科学作品集](../Images/3f79b340d72d595aba3cd85924ebf9a0.png)
+![我如何设计我的数据科学作品集](img/3f79b340d72d595aba3cd85924ebf9a0.png)
 
 kathleenlara.com: 项目部分
 
@@ -46,7 +46,7 @@ kathleenlara.com: 项目部分
 
 ## 我曾工作过的公司
 
-![我如何设计我的数据科学作品集](../Images/a1010659813681584314caac08a81865.png)
+![我如何设计我的数据科学作品集](img/a1010659813681584314caac08a81865.png)
 
 kathleenlara.com：我曾工作过的公司部分
 
@@ -54,7 +54,7 @@ kathleenlara.com：我曾工作过的公司部分
 
 ## 更多关于我
 
-![我如何设计我的数据科学作品集](../Images/9ed2a983b653bb9faf2e44814f4128f5.png)
+![我如何设计我的数据科学作品集](img/9ed2a983b653bb9faf2e44814f4128f5.png)
 
 kathleenlara.com：关于我
 
@@ -66,7 +66,7 @@ kathleenlara.com：关于我
 
 ## 联系我
 
-![我设计数据科学作品集的过程](../Images/cea48593e95bf978e631081646ab40e6.png)
+![我设计数据科学作品集的过程](img/cea48593e95bf978e631081646ab40e6.png)
 
 kathleenlara.com：联系我
 
@@ -74,7 +74,7 @@ kathleenlara.com：联系我
 
 ## 作品集改进
 
-我对网页开发不是很擅长，希望我能有更多时间来真正改进我的作品集——但网页设计不是我的强项，我的主要目标只是展示我的工作。我开始使用**Webflow**来节省开发时间，并添加了自己的一些CSS和Javascript代码来增加额外功能。Webflow还使得网站的设备响应变得更加容易。虽然有一些相关费用，并且需要一点UI / UX开发知识，但还有其他选项，比如Square Space或Wix，对于没有编码或开发经验的用户来说可能更友好。
+我对网页开发不是很擅长，希望我能有更多时间来真正改进我的作品集——但网页设计不是我的强项，我的主要目标只是展示我的工作。我开始使用**Webflow**来节省开发时间，并添加了自己的一些 CSS 和 Javascript 代码来增加额外功能。Webflow 还使得网站的设备响应变得更加容易。虽然有一些相关费用，并且需要一点 UI / UX 开发知识，但还有其他选项，比如 Square Space 或 Wix，对于没有编码或开发经验的用户来说可能更友好。
 
 对我来说，整体上我花了一个周末来构建这个网站，内容和草图已经准备好。我还需要优化作品集中的各个元素，以提高加载速度，特别是在移动设备上。我还需要添加更多项目，或者挑选一些更好的项目来展示——但总体来说，我对目前所建的内容感到满意。
 
@@ -92,10 +92,10 @@ kathleenlara.com：联系我
 
 +   [如何作为初学者建立强大的数据科学作品集](https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html)
 
-+   [Mercury概述：创建数据科学作品集和……](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
++   [Mercury 概述：创建数据科学作品集和……](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
 
-+   [一个数据科学作品集，助你在2022年获得工作](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [一个数据科学作品集，助你在 2022 年获得工作](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [7个平台免费构建强大数据科学作品集](https://www.kdnuggets.com/2022/10/7-free-platforms-building-strong-data-science-portfolio.html)
++   [7 个平台免费构建强大数据科学作品集](https://www.kdnuggets.com/2022/10/7-free-platforms-building-strong-data-science-portfolio.html)
 
-+   [5个提升数据科学作品集的高级项目](https://www.kdnuggets.com/2023/03/5-advance-projects-data-science-portfolio.html)
++   [5 个提升数据科学作品集的高级项目](https://www.kdnuggets.com/2023/03/5-advance-projects-data-science-portfolio.html)

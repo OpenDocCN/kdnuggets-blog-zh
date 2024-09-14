@@ -1,36 +1,36 @@
 # 在转行至数据科学之前请阅读此文
 
-> 原文：[https://www.kdnuggets.com/read-this-before-making-a-career-switch-to-data-science](https://www.kdnuggets.com/read-this-before-making-a-career-switch-to-data-science)
+> 原文：[`www.kdnuggets.com/read-this-before-making-a-career-switch-to-data-science`](https://www.kdnuggets.com/read-this-before-making-a-career-switch-to-data-science)
 
-![在转行至数据科学之前请阅读此文](../Images/cae04fd974af251467a4e5442ed03294.png)
+![在转行至数据科学之前请阅读此文](img/cae04fd974af251467a4e5442ed03294.png)
 
 作者提供的图片
 
-你正在阅读这篇文章，因为你在考虑加入有志成为数据科学家的行列。谁能怪你呢？即便在哈佛商业评论给予其“最性感工作”称号十年后，数据科学依然是一个快速发展的领域。美国劳工统计局目前 [预测](https://www.bls.gov/ooh/math/data-scientists.htm) 数据科学家的就业率将在2022年至2032年间增长35%。相比之下，平均职位增长率仅为5%。
+你正在阅读这篇文章，因为你在考虑加入有志成为数据科学家的行列。谁能怪你呢？即便在哈佛商业评论给予其“最性感工作”称号十年后，数据科学依然是一个快速发展的领域。美国劳工统计局目前 [预测](https://www.bls.gov/ooh/math/data-scientists.htm) 数据科学家的就业率将在 2022 年至 2032 年间增长 35%。相比之下，平均职位增长率仅为 5%。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 它还有其他优势：
 
-+   收入丰厚（同样，BLS [发现](https://www.bls.gov/ooh/math/data-scientists.htm) 2022年的中位薪资为103k美元）
++   收入丰厚（同样，BLS [发现](https://www.bls.gov/ooh/math/data-scientists.htm) 2022 年的中位薪资为 103k 美元）
 
 +   生活质量高（比平均工作相关幸福度 [更高](https://www.careerexplorer.com/careers/data-scientist/satisfaction/) 根据 Career Explorer 的数据）
 
-+   尽管最近经历了一轮 [裁员](/2023/02/layoffs-tech.html)，但职位依然有保障——因为对这个角色的需求非常大。
++   尽管最近经历了一轮 裁员，但职位依然有保障——因为对这个角色的需求非常大。
 
 因此，有很多理由想要进入这个领域。
 
-![在转行至数据科学之前请阅读此文](../Images/783381e68bbb2d6bb305ddb055140ea2.png)
+![在转行至数据科学之前请阅读此文](img/783381e68bbb2d6bb305ddb055140ea2.png)
 
 来源:  https://www.bls.gov/ooh/math/data-scientists.html
 
@@ -58,7 +58,7 @@
 
 ## 实践经验
 
-你不应只是观看视频和阅读博客文章。实践经验在数据科学中至关重要。参与允许你在真实场景中应用新技能的项目，这可以是个人项目、对开源平台的贡献，或参加像Kaggle这样的数据竞赛。
+你不应只是观看视频和阅读博客文章。实践经验在数据科学中至关重要。参与允许你在真实场景中应用新技能的项目，这可以是个人项目、对开源平台的贡献，或参加像 Kaggle 这样的数据竞赛。
 
 如果你有一些基础技能，你可能想考虑寻求实习或自由职业以获得行业经验。
 
@@ -66,7 +66,7 @@
 
 ## 扩展人脉
 
-进入数据科学领域往往取决于你认识谁，除了你知道什么。寻找导师，参加聚会、会议和研讨会以了解新趋势，并参与像Stack Overflow、GitHub或Reddit这样的在线数据科学社区。这些平台让你可以向他人学习，分享你的知识，并在数据科学社区中引起注意。
+进入数据科学领域往往取决于你认识谁，除了你知道什么。寻找导师，参加聚会、会议和研讨会以了解新趋势，并参与像 Stack Overflow、GitHub 或 Reddit 这样的在线数据科学社区。这些平台让你可以向他人学习，分享你的知识，并在数据科学社区中引起注意。
 
 # 每个数据科学角色都需要……
 
@@ -74,11 +74,11 @@
 
 每个数据科学家都需要的三项主要技能，无论他们走向哪个方向：
 
-## 使用SQL进行数据处理/整理
+## 使用 SQL 进行数据处理/整理
 
-数据科学基本上就是处理和组织大型数据集。为此，你需要知道SQL。这是*数据处理和整理*的基本工具。
+数据科学基本上就是处理和组织大型数据集。为此，你需要知道 SQL。这是*数据处理和整理*的基本工具。
 
-![在转行到数据科学前阅读此文](../Images/31bb2261426b63e4a7d07e509199f96c.png)
+![在转行到数据科学前阅读此文](img/31bb2261426b63e4a7d07e509199f96c.png)
 
 作者提供的图片
 
@@ -98,7 +98,7 @@
 
 尽管如上所述有一些共同的技能，但每个角色都要求其特定的技能集。（记得吗？分支。）例如，统计分析、Python/R 编程技能和数据可视化都是更专业的数据科学职位所特有的技能。
 
-![在转行数据科学之前请阅读这个](../Images/8305295a7fd21f1e895e1210828b1456.png)
+![在转行数据科学之前请阅读这个](img/8305295a7fd21f1e895e1210828b1456.png)
 
 图片由作者提供
 
@@ -146,7 +146,7 @@
 
 尽管如此，这仍然是一个很好的职业选择。掌握我提到的三个主要能力后，你将具备承担任何吸引你的[数据科学角色](https://www.stratascratch.com/blog/14-different-data-science-job-titles/?utm_source=blog&utm_medium=click&utm_campaign=Kdn+career+switch+to+data+science)的能力。
 
-[](https://twitter.com/StrataScratch)****[内特·罗斯迪](https://twitter.com/StrataScratch)**** 是一名数据科学家和产品战略专家。他还是一位兼职教授，教授分析学，并且是StrataScratch的创始人，该平台帮助数据科学家通过真实的面试问题为面试做准备。内特撰写关于职业市场的最新趋势，提供面试建议，分享数据科学项目，并覆盖所有SQL相关内容。
+[](https://twitter.com/StrataScratch)****[内特·罗斯迪](https://twitter.com/StrataScratch)**** 是一名数据科学家和产品战略专家。他还是一位兼职教授，教授分析学，并且是 StrataScratch 的创始人，该平台帮助数据科学家通过真实的面试问题为面试做准备。内特撰写关于职业市场的最新趋势，提供面试建议，分享数据科学项目，并覆盖所有 SQL 相关内容。
 
 ### 相关话题更多信息
 
@@ -156,8 +156,8 @@
 
 +   [谷歌建议你在参加他们的机器学习…课程之前做的事情](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
 
-+   [选择下一个数据科学职位前要记住的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [选择下一个数据科学职位前要记住的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [在神经网络之前尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [在神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
 
-+   [不要错过！在2023年结束前报名免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！在 2023 年结束前报名免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)

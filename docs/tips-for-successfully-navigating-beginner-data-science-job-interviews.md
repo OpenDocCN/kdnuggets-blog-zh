@@ -1,8 +1,8 @@
 # 成功应对初级数据科学职位面试的技巧
 
-> 原文：[https://www.kdnuggets.com/tips-for-successfully-navigating-beginner-data-science-job-interviews](https://www.kdnuggets.com/tips-for-successfully-navigating-beginner-data-science-job-interviews)
+> 原文：[`www.kdnuggets.com/tips-for-successfully-navigating-beginner-data-science-job-interviews`](https://www.kdnuggets.com/tips-for-successfully-navigating-beginner-data-science-job-interviews)
 
-![成功应对初级数据科学职位面试的技巧](../Images/d9f17b6ba00103656ca201206ada509b.png)
+![成功应对初级数据科学职位面试的技巧](img/d9f17b6ba00103656ca201206ada509b.png)
 
 数据科学。它令人兴奋，也令人紧张。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -22,7 +22,7 @@
 
 数据科学有时也令人沮丧，原因有时是相同的。加上激烈的竞争和期望、不断变化的目标和伦理困境。
 
-踏入其中让你既想抓狂，又奇怪地享受其中。有点像跟随技术狂人在Twitter上。抱歉，埃隆，X。
+踏入其中让你既想抓狂，又奇怪地享受其中。有点像跟随技术狂人在 Twitter 上。抱歉，埃隆，X。
 
 对于那些初学者来说，尤其如此，他们在求职面试中争取获得第一个数据科学职位。
 
@@ -46,7 +46,7 @@
 
 +   机器学习
 
-![成功应对初级数据科学职位面试的技巧](../Images/768ac78535829f7ebc0e7d075f50cfaa.png)
+![成功应对初级数据科学职位面试的技巧](img/768ac78535829f7ebc0e7d075f50cfaa.png)
 
 ## 统计学
 
@@ -72,7 +72,7 @@
 
 +   抽样——总体、样本、抽样技术
 
-+   假设检验 – 原假设和备择假设，I型和II型错误，p值和显著性水平
++   假设检验 – 原假设和备择假设，I 型和 II 型错误，p 值和显著性水平
 
 +   置信区间 – 基于样本数据估计总体参数。
 
@@ -80,7 +80,7 @@
 
 +   理解两个变量之间的关系及其相互依赖性
 
-+   Pearson相关系数
++   Pearson 相关系数
 
 ***   **回归分析：**
 
@@ -112,9 +112,9 @@
 
 一切都取决于职位描述。不同的公司和职位需要不同的语言。在数据科学中，通常是提到的三种语言中的一种。
 
-如果你问我应该学习哪一个，只有一个的话，我会选择SQL。查询数据库是数据科学家无法缺少的基础。SQL专为此设计，没有其他语言能像它一样处理数据清理。
+如果你问我应该学习哪一个，只有一个的话，我会选择 SQL。查询数据库是数据科学家无法缺少的基础。SQL 专为此设计，没有其他语言能像它一样处理数据清理。
 
-它也可以轻松与其他语言集成。这样，你可以利用其他语言完成SQL不适合的任务，例如，构建模型或数据可视化。
+它也可以轻松与其他语言集成。这样，你可以利用其他语言完成 SQL 不适合的任务，例如，构建模型或数据可视化。
 
 ## 数据处理
 
@@ -122,21 +122,21 @@
 
 这意味着你需要了解最受欢迎的数据处理库：
 
-+   [pandas](https://pandas.pydata.org) 和 [NumPy](https://numpy.org) – 用于Python
++   [pandas](https://pandas.pydata.org) 和 [NumPy](https://numpy.org) – 用于 Python
 
-+   [dplyr](https://dplyr.tidyverse.org) – 用于R
++   [dplyr](https://dplyr.tidyverse.org) – 用于 R
 
 ## 数据可视化
 
 你必须了解不同类型数据和洞察的最佳可视化技术。你还必须知道如何使用可视化工具将其付诸实践：
 
-+   [matplotlib](https://matplotlib.org) 和 [seaborn](https://seaborn.pydata.org) – 用于Python
++   [matplotlib](https://matplotlib.org) 和 [seaborn](https://seaborn.pydata.org) – 用于 Python
 
-+   [ggplot2](https://ggplot2.tidyverse.org) – 用于R
++   [ggplot2](https://ggplot2.tidyverse.org) – 用于 R
 
 ## 关系型数据库
 
-作为数据科学家，你需要对关系型数据库及其工作原理有一个基本了解。如果你至少对使用SQL进行查询有基本知识，那更好。
+作为数据科学家，你需要对关系型数据库及其工作原理有一个基本了解。如果你至少对使用 SQL 进行查询有基本知识，那更好。
 
 一些最受欢迎的数据管理系统包括：
 
@@ -152,7 +152,7 @@
 
 你必须熟悉机器学习的基础知识。例如，了解[监督学习与无监督学习的区别](https://www.stratascratch.com/blog/supervised-vs-unsupervised-learning/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+interview+tips)。
 
-你还需要熟悉分类、聚类和回归。这包括了解一些基本算法，如[线性回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)、[决策树](https://scikit-learn.org/stable/modules/tree.html#decision-trees)、[支持向量机](https://scikit-learn.org/stable/modules/svm.html)、[朴素贝叶斯](https://scikit-learn.org/stable/modules/naive_bayes.html)和[k均值](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)。
+你还需要熟悉分类、聚类和回归。这包括了解一些基本算法，如[线性回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html)、[决策树](https://scikit-learn.org/stable/modules/tree.html#decision-trees)、[支持向量机](https://scikit-learn.org/stable/modules/svm.html)、[朴素贝叶斯](https://scikit-learn.org/stable/modules/naive_bayes.html)和[k 均值](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html)。
 
 # 2\. 了解你的工具
 
@@ -160,13 +160,13 @@
 
 你不需要了解所有工具。但如果你能在每个类别中至少有一个工具的使用经验，那将是理想的。
 
-![成功导航初级数据科学职位面试的技巧](../Images/438ea3cf9e82798c1753c37a756be79d.png)
+![成功导航初级数据科学职位面试的技巧](img/438ea3cf9e82798c1753c37a756be79d.png)
 
 # 3\. 准备编码和技术问题
 
 使用如[StrataScratch](https://www.stratascratch.com/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+interview+tips)、[LeetCode](https://leetcode.com)等平台来准备编码和技术问题。
 
-此外，利用YouTube频道、博客和其他资源来复习其他技术概念。如果你专注于“彻底理解基础”中提到的内容，你会做得很好。
+此外，利用 YouTube 频道、博客和其他资源来复习其他技术概念。如果你专注于“彻底理解基础”中提到的内容，你会做得很好。
 
 模拟面试可以非常有帮助。利用提供模拟面试的在线平台，或者与朋友和导师进行练习。
 
@@ -236,6 +236,6 @@
 
 +   [掌握自然语言处理职位面试](https://www.kdnuggets.com/2022/10/nlp-interview-questions.html)
 
-+   [7个编码面试必知的Python技巧](https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html)
++   [7 个编码面试必知的 Python 技巧](https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html)
 
-+   [KDnuggets 新闻，6月8日：21个数据科学速查表…](https://www.kdnuggets.com/2022/n23.html)************
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学速查表…](https://www.kdnuggets.com/2022/n23.html)************

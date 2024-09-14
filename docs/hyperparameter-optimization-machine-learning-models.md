@@ -1,8 +1,8 @@
 # 机器学习模型的超参数优化
 
-> 原文：[https://www.kdnuggets.com/2020/05/hyperparameter-optimization-machine-learning-models.html](https://www.kdnuggets.com/2020/05/hyperparameter-optimization-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2020/05/hyperparameter-optimization-machine-learning-models.html`](https://www.kdnuggets.com/2020/05/hyperparameter-optimization-machine-learning-models.html)
 
-[评论](#comments)![图示](../Images/e60360ab2907502e8bfd8adc536d14bf.png)
+评论![图示](img/e60360ab2907502e8bfd8adc536d14bf.png)
 
 [致谢](https://swisscognitive.ch/2020/01/13/machine-learning-in-adversity/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT。
 
 * * *
 
@@ -34,7 +34,7 @@
 
 超参数优化找到一个超参数组合，以返回一个最优模型，该模型减少了预定义的损失函数，从而提高了给定独立数据上的准确性。
 
-![图示](../Images/1a76857e56c4740636dc8f28879c8971.png)
+![图示](img/1a76857e56c4740636dc8f28879c8971.png)
 
 [带有相应超参数的分类模型。](https://www.computer.org/csdl/journal/ts/2018/06/07990590/13rRUx0gerA)
 
@@ -50,13 +50,13 @@
 
 网格搜索可以说是最基本的超参数调优方法。使用这种技术，我们只是为提供的所有超参数值的每个可能组合构建一个模型，评估每个模型，并选择产生最佳结果的架构。
 
-![](../Images/0d65f74594b1f825f12beb47db397245.png)
+![](img/0d65f74594b1f825f12beb47db397245.png)
 
 网格搜索不仅适用于一种模型类型，还可以应用于机器学习中的各类模型，以计算用于任何给定模型的最佳参数。
 
 例如，典型的软间隔支持向量机（SVM）分类器配备了 RBF 核函数，它有至少两个超参数需要优化以在未见数据上获得良好性能：正则化常数*C*和核超参数 γ。两个参数都是连续的，因此为了进行网格搜索，需要为每个参数选择一个有限的“合理”值，比如
 
-![](../Images/e78be57e455f5dfa0eac00be4c135791.png)
+![](img/e78be57e455f5dfa0eac00be4c135791.png)
 
 网格搜索然后用这两个集合的笛卡尔积中的每一对（*C*, γ）训练一个 SVM，并在保留的验证集上评估它们的性能（或者通过对训练集的内部交叉验证，在这种情况下，每对会训练多个 SVM）。最后，网格搜索算法输出在验证过程中获得的最高分的设置。
 
@@ -106,7 +106,7 @@ print grid.best_param_
 
 通常，有些超参数比其他超参数更为重要。进行随机搜索而不是网格搜索可以更精确地发现重要超参数的良好值。
 
-![](../Images/8292a0cb03eeaa9f5cf4f473a2581516.png)
+![](img/8292a0cb03eeaa9f5cf4f473a2581516.png)
 
 随机搜索设置了一个超参数值的网格，并选择随机组合来训练模型和评分。这允许你明确控制尝试的参数组合的数量。搜索迭代的次数根据时间或资源进行设置。Scikit Learn 提供了`RandomizedSearchCV`函数来执行这一过程。
 
@@ -116,13 +116,13 @@ print grid.best_param_
 
 在深度学习算法的情况下，它优于网格搜索。
 
-![图示](../Images/b1b1600a34c9a27779b36bbb9d9a02cc.png)
+![图示](img/b1b1600a34c9a27779b36bbb9d9a02cc.png)
 
 [致谢](https://community.alteryx.com/t5/Data-Science-Blog/Hyperparameter-Tuning-Black-Magic/ba-p/449289)
 
-在上图中，恭喜你有两个参数，通过5x6网格搜索你只检查每个参数的5种不同值（左侧图中的六行五列），而通过随机搜索你检查了每个参数的14种不同值。
+在上图中，恭喜你有两个参数，通过 5x6 网格搜索你只检查每个参数的 5 种不同值（左侧图中的六行五列），而通过随机搜索你检查了每个参数的 14 种不同值。
 
-**它在Python中如何工作？**
+**它在 Python 中如何工作？**
 
 ```py
 from sklearn.datasets import load_iris
@@ -131,7 +131,7 @@ iris **=** load_iris()
 rf = RandomForestRegressor(random_state = 42)
 ```
 
-下面是使用`sklearn`库的`RandomizedSearchCV`进行网格搜索的Python实现。
+下面是使用`sklearn`库的`RandomizedSearchCV`进行网格搜索的 Python 实现。
 
 ```py
 from sklearn.model_selection import RandomizedSearchCV
@@ -173,15 +173,15 @@ print rf_random.best_param_Output:
 
 我们可以在下面的图像中看到这一点：
 
-![图示](../Images/23d29016155406c3b70ff0644e409dd3.png)
+![图示](img/23d29016155406c3b70ff0644e409dd3.png)
 
 来源：[贝叶斯优化](https://github.com/fmfn/BayesianOptimization)
 
-当你一遍遍迭代时，算法会在考虑目标函数已知信息的基础上平衡探索和开发的需求。在每一步中，将为已知样本（之前探索过的点）拟合一个高斯过程，并结合探索策略（如UCB（上置信界）或EI（期望改进）），以确定应探索的下一点。
+当你一遍遍迭代时，算法会在考虑目标函数已知信息的基础上平衡探索和开发的需求。在每一步中，将为已知样本（之前探索过的点）拟合一个高斯过程，并结合探索策略（如 UCB（上置信界）或 EI（期望改进）），以确定应探索的下一点。
 
 使用贝叶斯优化，我们可以更智能地探索参数空间，从而减少进行此过程所需的时间。
 
-你可以查看下面的贝叶斯优化的Python实现：
+你可以查看下面的贝叶斯优化的 Python 实现：
 
 [**thuijskens/bayesian-optimization**](https://github.com/thuijskens/bayesian-optimization/blob/master/ipython-notebooks/svm-optimization.ipynb)
 
@@ -189,21 +189,21 @@ print rf_random.best_param_Output:
 
 它特别用于神经网络的情况。它计算关于超参数的梯度，并使用梯度下降算法对其进行优化。
 
-计算梯度问题并不是最难的，至少在高级的[自动微分](https://en.wikipedia.org/wiki/Automatic_differentiation)软件出现之后。（**当然，为所有sklearn分类器以通用方式实现这一点并不容易**）
+计算梯度问题并不是最难的，至少在高级的[自动微分](https://en.wikipedia.org/wiki/Automatic_differentiation)软件出现之后。（**当然，为所有 sklearn 分类器以通用方式实现这一点并不容易**）
 
-![Figure](../Images/43a7177eaea30f7a4c2b619f758eb304.png)
+![Figure](img/43a7177eaea30f7a4c2b619f758eb304.png)
 
 [Credits](https://www.mathworks.com/matlabcentral/fileexchange/27631-derivative-based-optimization)
 
-尽管有一些人使用这种想法的工作，但他们只是为一些特定且明确的问题（例如SVM调优）做了这件事。此外，这可能有很多假设，因为：
+尽管有一些人使用这种想法的工作，但他们只是为一些特定且明确的问题（例如 SVM 调优）做了这件事。此外，这可能有很多假设，因为：
 
 > 为什么这不是一个好主意？
 
 **1\. 超参数优化通常是不平滑的**
 
-+   GD真的喜欢平滑函数，因为零梯度没有帮助。
++   GD 真的喜欢平滑函数，因为零梯度没有帮助。
 
-+   每个由某些离散集合定义的超参数（例如l1与l2惩罚的选择）会引入不平滑的表面。
++   每个由某些离散集合定义的超参数（例如 l1 与 l2 惩罚的选择）会引入不平滑的表面。
 
 **2\. 超参数优化通常是非凸的**
 
@@ -213,13 +213,13 @@ print rf_random.best_param_Output:
 
 +   最坏的情况：梯度下降甚至没有收敛到某个局部最小值。
 
-要获取Python实现和更多关于梯度下降优化算法的信息，请[点击这里](https://hackernoon.com/implementing-different-variants-of-gradient-descent-optimization-algorithm-in-python-using-numpy-809e7ab3bab4)。
+要获取 Python 实现和更多关于梯度下降优化算法的信息，请[点击这里](https://hackernoon.com/implementing-different-variants-of-gradient-descent-optimization-algorithm-in-python-using-numpy-809e7ab3bab4)。
 
 ### **6\. 进化优化**
 
 进化优化遵循一个受生物进化概念启发的过程，由于自然进化是在变化环境中的动态过程，因此它们也非常适合动态优化问题。
 
-![](../Images/801484956ac7dd0a3414aecce35df824.png)
+![](img/801484956ac7dd0a3414aecce35df824.png)
 
 进化算法通常用于寻找良好的近似解决方案，这些方案无法通过其他技术轻易解决。优化问题通常没有精确的解决方案，因为找到最优解决方案可能过于耗时和计算密集。然而，在这种情况下，进化算法是理想的，因为它们可以用于找到一个接近最优的解决方案，这通常是足够的。
 
@@ -243,11 +243,11 @@ print rf_random.best_param_Output:
 
 **相关：**
 
-+   [如何在 3 个简单步骤中对任何 Python 脚本进行超参数调优](/2020/04/hyperparameter-tuning-python.html)
++   如何在 3 个简单步骤中对任何 Python 脚本进行超参数调优
 
-+   [使用 Biopython 进行冠状病毒 COVID-19 基因组分析](/2020/04/coronavirus-covid-19-genome-analysis-biopython.html)
++   使用 Biopython 进行冠状病毒 COVID-19 基因组分析
 
-+   [实用超参数优化](/2020/02/practical-hyperparameter-optimization.html)
++   实用超参数优化
 
 ### 更多相关内容
 

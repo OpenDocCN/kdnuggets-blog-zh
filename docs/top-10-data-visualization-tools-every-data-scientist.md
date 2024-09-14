@@ -1,26 +1,26 @@
 # 每个数据科学家的十大数据可视化工具
 
-> 原文：[https://www.kdnuggets.com/2020/05/top-10-data-visualization-tools-every-data-scientist.html](https://www.kdnuggets.com/2020/05/top-10-data-visualization-tools-every-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2020/05/top-10-data-visualization-tools-every-data-scientist.html`](https://www.kdnuggets.com/2020/05/top-10-data-visualization-tools-every-data-scientist.html)
 
-[评论](#comments)
+评论
 
 **作者：Andrea Laura， freelance writer**
 
-![数据可视化工具](../Images/43eea67d9b222450c6f237bbcd4d4401.png)
+![数据可视化工具](img/43eea67d9b222450c6f237bbcd4d4401.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 
-数据科学是今天IT行业中最成熟的研究和实践领域之一，至今已经有近十年的光辉岁月。没错，它已经被证明在多个行业领域中是一项福音。从顶尖的方法论到市场分析，这项技术主要包括从数据中获取有价值的洞察。
+数据科学是今天 IT 行业中最成熟的研究和实践领域之一，至今已经有近十年的光辉岁月。没错，它已经被证明在多个行业领域中是一项福音。从顶尖的方法论到市场分析，这项技术主要包括从数据中获取有价值的洞察。
 
 然后对获取的数据进行处理，数据分析师进一步分析信息以找出模式，然后基于分析的信息预测用户行为。这就是数据可视化工具发挥作用的部分。
 
@@ -34,19 +34,19 @@
 
 ### **数据科学家需要使用的最佳数据可视化工具**
 
-现在，雇用一名Android开发者或iOS开发者在一定程度上取决于他们使用的工具和技术。对于全球的企业来说，使用这些工具可以帮助获得业务洞察并保持竞争优势。大多数顶尖的iOS和[Android移动应用开发公司](https://appinventiv.com/android-application-development/)正在使用这些工具来分析从移动应用中提取的数据集，以帮助业务增长和维持客户基础。
+现在，雇用一名 Android 开发者或 iOS 开发者在一定程度上取决于他们使用的工具和技术。对于全球的企业来说，使用这些工具可以帮助获得业务洞察并保持竞争优势。大多数顶尖的 iOS 和[Android 移动应用开发公司](https://appinventiv.com/android-application-development/)正在使用这些工具来分析从移动应用中提取的数据集，以帮助业务增长和维持客户基础。
 
-以下是2020年每个数据科学家必须使用的一些最佳数据可视化工具：
+以下是 2020 年每个数据科学家必须使用的一些最佳数据可视化工具：
 
 ### **1\. Tableau**
 
 这是一款交互式数据可视化软件。该工具用于行业中的有效数据分析和数据可视化。它具有拖放界面，这一功能使其能够轻松快速地执行任务。
 
-该软件不强制用户编写代码。该软件兼容许多数据源。虽然工具稍贵，但它是像亚马逊这样的顶级公司最受欢迎的选择。QlikView是Tableau的最大竞争对手，因其独特的拖放功能而广泛使用。
+该软件不强制用户编写代码。该软件兼容许多数据源。虽然工具稍贵，但它是像亚马逊这样的顶级公司最受欢迎的选择。QlikView 是 Tableau 的最大竞争对手，因其独特的拖放功能而广泛使用。
 
-**Tableau的主要特点：**
+**Tableau 的主要特点：**
 
-+   Tableau被称为最简单的数据可视化商业智能工具。
++   Tableau 被称为最简单的数据可视化商业智能工具。
 
 +   数据科学家无需在此工具中编写自定义代码。
 
@@ -54,27 +54,27 @@
 
 ### **2. D3**
 
-[D3.js是一个Javascript库](https://d3js.org/)，用于在网页浏览器中生成交互式数据可视化。它是进行数据可视化的最有效平台。该工具最初于2011年2月18日发布，并在8月成为正式版本。
+[D3.js 是一个 Javascript 库](https://d3js.org/)，用于在网页浏览器中生成交互式数据可视化。它是进行数据可视化的最有效平台。该工具最初于 2011 年 2 月 18 日发布，并在 8 月成为正式版本。
 
-它支持HTML、CSS和SVG。开发人员可以将数据呈现为创意图片和图形。它是一个非常灵活的平台，允许创建不同图表的变化。
+它支持 HTML、CSS 和 SVG。开发人员可以将数据呈现为创意图片和图形。它是一个非常灵活的平台，允许创建不同图表的变化。
 
-**D3的主要特点：**
+**D3 的主要特点：**
 
-+   该数据可视化工具提供强大的SVG操作功能。
++   该数据可视化工具提供强大的 SVG 操作功能。
 
-+   D3集成了多种方法和工具用于数据处理。
++   D3 集成了多种方法和工具用于数据处理。
 
-+   数据科学家可以轻松地将数据映射到SVG属性。
++   数据科学家可以轻松地将数据映射到 SVG 属性。
 
 ### **3. QlikView**
 
-QlikView是一款类似于Tableau的软件，但在商业用途前需要付费。它是一个将数据转化为有用信息的商业智能平台。
+QlikView 是一款类似于 Tableau 的软件，但在商业用途前需要付费。它是一个将数据转化为有用信息的商业智能平台。
 
-该软件有助于改进数据可视化过程。该工具受到经验丰富的数据科学家青睐，用于分析大规模数据。QlikView在100个国家使用，并拥有一个非常强大的社区。
+该软件有助于改进数据可视化过程。该工具受到经验丰富的数据科学家青睐，用于分析大规模数据。QlikView 在 100 个国家使用，并拥有一个非常强大的社区。
 
-**QlikView的主要特点：**
+**QlikView 的主要特点：**
 
-+   该工具与广泛的数据源（如EC2、Impala、HP Vertica等）集成。
++   该工具与广泛的数据源（如 EC2、Impala、HP Vertica 等）集成。
 
 +   在数据分析方面，它非常快速。
 
@@ -86,7 +86,7 @@ QlikView是一款类似于Tableau的软件，但在商业用途前需要付费�
 
 该工具适用于移动端和桌面端版本。因此，如果企业使用微软工具，这对他们来说将是一个巨大的好处。
 
-**Microsoft Power BI的主要特点：**
+**Microsoft Power BI 的主要特点：**
 
 +   在多个数据中心生成交互式数据可视化。
 
@@ -196,22 +196,22 @@ FusionCharts 可以从零开始创建任何类型的可视化，这也是它的�
 
 **相关：**
 
-+   [Plotnine: Python 版 ggplot2 替代品](/2019/12/python-alternative-ggplot2.html)
++   Plotnine: Python 版 ggplot2 替代品
 
-+   [学习和实践数据科学的前 9 款移动应用](/2020/01/top-9-mobile-apps-learning-practicing-data-science.html)
++   学习和实践数据科学的前 9 款移动应用
 
-+   [如何在Python（和R）中可视化数据](/2019/11/visualize-data-python-and-r.html)
++   如何在 Python（和 R）中可视化数据
 
 ### 更多相关主题
 
-+   [每个数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
 +   [停止学习数据科学以寻找目的并找到目的以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [一桩90亿美元的AI失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一桩 90 亿美元的 AI 失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

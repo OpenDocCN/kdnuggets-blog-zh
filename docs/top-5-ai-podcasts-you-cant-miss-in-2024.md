@@ -1,8 +1,8 @@
-# 2024年你不能错过的五大AI播客
+# 2024 年你不能错过的五大 AI 播客
 
-> 原文：[https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
+> 原文：[`www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024`](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
 
-![2024年你不能错过的五大AI播客](../Images/2364e4ce39e17d27ef46767f93963576.png)
+![2024 年你不能错过的五大 AI 播客](img/2364e4ce39e17d27ef46767f93963576.png)
 
 图片由编辑提供
 
@@ -12,39 +12,39 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-我已整理出2024年你需要收听的五大AI播客，以跟上这一趋势。那么我们开始吧……
+我已整理出 2024 年你需要收听的五大 AI 播客，以跟上这一趋势。那么我们开始吧……
 
-# 1\. 商业中的AI
+# 1\. 商业中的 AI
 
-链接：[商业中的AI](https://podcast.emerj.com/)
+链接：[商业中的 AI](https://podcast.emerj.com/)
 
-主持人丹尼尔·法杰拉提供了一个面向非技术商业领袖的播客，旨在帮助他们了解AI所能带来的机会。在这个播客中，你将了解AI的能力，以及如何制定策略并实现投资回报。
+主持人丹尼尔·法杰拉提供了一个面向非技术商业领袖的播客，旨在帮助他们了解 AI 所能带来的机会。在这个播客中，你将了解 AI 的能力，以及如何制定策略并实现投资回报。
 
-每周，主持人将采访顶级AI高管，讨论AI在商业中的实际应用，从财富500强公司到初创企业。
+每周，主持人将采访顶级 AI 高管，讨论 AI 在商业中的实际应用，从财富 500 强公司到初创企业。
 
-如果你想学习如何进入AI商业世界或利用AI提升你的公司——这是你要收听的播客。
+如果你想学习如何进入 AI 商业世界或利用 AI 提升你的公司——这是你要收听的播客。
 
-# 2\. AI播客
+# 2\. AI 播客
 
-链接：[AI播客](https://blogs.nvidia.com/ai-podcast/)
+链接：[AI 播客](https://blogs.nvidia.com/ai-podcast/)
 
-由NVIDIA制作，加入他们深入探讨AI对我们世界的影响。你将聆听在AI领域具有影响力的人物，并了解他们的故事。它不限于科技行业，你将从各种各样的人身上学到东西，例如野生动物、医疗保健等。
+由 NVIDIA 制作，加入他们深入探讨 AI 对我们世界的影响。你将聆听在 AI 领域具有影响力的人物，并了解他们的故事。它不限于科技行业，你将从各种各样的人身上学到东西，例如野生动物、医疗保健等。
 
-想了解AI和机器学习对不同领域的影响——请收听！
+想了解 AI 和机器学习对不同领域的影响——请收听！
 
-# 3\. Lex Fridman播客
+# 3\. Lex Fridman 播客
 
-链接：[Lex Fridman播客](https://lexfridman.com/podcast/)
+链接：[Lex Fridman 播客](https://lexfridman.com/podcast/)
 
-Lex Fridman是AI领域著名的采访者。他是AI领域的研究者，并与多位在AI领域具有影响力的人物进行了深入对话。他的播客包括智能、意识、爱和权力的本质。
+Lex Fridman 是 AI 领域著名的采访者。他是 AI 领域的研究者，并与多位在 AI 领域具有影响力的人物进行了深入对话。他的播客包括智能、意识、爱和权力的本质。
 
 通过 Lex Fridman 的播客，你不仅能学习到 AI 的世界，还能了解来自各行各业的生活其他方面。Lex Fridman 在 AI 领域很有名，他的声誉使他能够采访到合适的人，并提出有 AI 知识支持的问题。
 

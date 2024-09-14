@@ -1,22 +1,22 @@
 # 提示工程的兴衰：潮流还是未来？
 
-> 原文：[https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)
+> 原文：[`www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future`](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)
 
-![提示工程的兴衰：潮流还是未来？](../Images/befdef63251419eb94c3013fa1a5e97a.png)
+![提示工程的兴衰：潮流还是未来？](img/befdef63251419eb94c3013fa1a5e97a.png)
 
-图像由DALLE-3生成
+图像由 DALLE-3 生成
 
-在不断扩展的AI和机器学习宇宙中，一颗新星已然崭露头角：[提示工程](/2023/06/art-prompt-engineering-decoding-chatgpt.html)。这个新兴领域围绕着策略性地构建输入，以引导AI模型生成特定的、期望的输出。
+在不断扩展的 AI 和机器学习宇宙中，一颗新星已然崭露头角：提示工程。这个新兴领域围绕着策略性地构建输入，以引导 AI 模型生成特定的、期望的输出。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -26,15 +26,15 @@
 
 # 提示工程的崛起
 
-我们都看到过这些数据——全球AI市场到2030年将[价值1.6万亿美元](https://youngandtheinvested.com/artificial-intelligence-statistics/)，OpenAI正在[提供90万美元的薪水](https://medium.com/tech-pulse/openai-900k-total-compensation-for-senior-engineers-821fe03ed0fe)，这还不包括GPT-4、Claude以及各种其他LLM所产生的数十亿、甚至数万亿的字数。当然，数据科学家、机器学习专家以及该领域的其他高级专业人士处于前沿。
+我们都看到过这些数据——全球 AI 市场到 2030 年将[价值 1.6 万亿美元](https://youngandtheinvested.com/artificial-intelligence-statistics/)，OpenAI 正在[提供 90 万美元的薪水](https://medium.com/tech-pulse/openai-900k-total-compensation-for-senior-engineers-821fe03ed0fe)，这还不包括 GPT-4、Claude 以及各种其他 LLM 所产生的数十亿、甚至数万亿的字数。当然，数据科学家、机器学习专家以及该领域的其他高级专业人士处于前沿。
 
-然而，2022年改变了一切，因为GPT-3在公开发布的那一刻变得无处不在。突然间，普通人意识到提示的重要性以及“垃圾进，垃圾出”的概念。如果你写一个没有任何细节的草率提示，LLM将对输出拥有完全的自由。起初这很简单，但用户很快意识到模型的真实能力。
+然而，2022 年改变了一切，因为 GPT-3 在公开发布的那一刻变得无处不在。突然间，普通人意识到提示的重要性以及“垃圾进，垃圾出”的概念。如果你写一个没有任何细节的草率提示，LLM 将对输出拥有完全的自由。起初这很简单，但用户很快意识到模型的真实能力。
 
-然而，人们很快开始尝试更复杂的工作流程和更长的提示，进一步强调了巧妙编织语言的价值。[自定义指令](/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)只会扩大可能性，并加速了提示工程师的崛起——一种能够运用逻辑、推理和对LLM行为的知识，以随心所欲地生成所需输出的专业人士。
+然而，人们很快开始尝试更复杂的工作流程和更长的提示，进一步强调了巧妙编织语言的价值。自定义指令只会扩大可能性，并加速了提示工程师的崛起——一种能够运用逻辑、推理和对 LLM 行为的知识，以随心所欲地生成所需输出的专业人士。
 
 # 提示工程：机器的语言？
 
-在其潜力的巅峰，提示工程催生了自然语言处理（NLP）领域的显著进展。从普通的GPT-3.5到Meta的[LLaMa](https://replicate.com/blog/run-llama-locally)的特定版本，当喂入精心设计的提示时，AI模型展示了适应各种任务的惊人灵活性。
+在其潜力的巅峰，提示工程催生了自然语言处理（NLP）领域的显著进展。从普通的 GPT-3.5 到 Meta 的[LLaMa](https://replicate.com/blog/run-llama-locally)的特定版本，当喂入精心设计的提示时，AI 模型展示了适应各种任务的惊人灵活性。
 
 提示工程的支持者将其视为人工智能创新的途径，展望一个通过精心设计的提示艺术无缝促进人类与人工智能互动的未来。
 
@@ -46,11 +46,11 @@
 
 他们认为，提示工程只是一个虚假的面纱，是对输入的巧妙编排，掩盖了人工智能固有的理解或推理能力的不足。同样，以下论点也支持他们的观点：
 
-+   AI模型来来去去。例如，GPT-3中有效的方法在GPT-3.5中已经被修补，而在GPT-4中则成为实际的不可能。这难道不会使提示工程师仅仅是特定版本LLM的鉴赏家吗？
++   AI 模型来来去去。例如，GPT-3 中有效的方法在 GPT-3.5 中已经被修补，而在 GPT-4 中则成为实际的不可能。这难道不会使提示工程师仅仅是特定版本 LLM 的鉴赏家吗？
 
-+   即便是最优秀的提示工程师也不真正算是‘工程师’。例如，一位SEO专家可以使用GPT插件或甚至本地运行的LLM [来寻找反向链接机会](https://bluetree.ai/backlink-importance-and-benefits/)，或一位软件工程师可能知道如何[在编写、测试和部署代码时使用Copilot](https://docs.github.com/en/copilot/getting-started-with-github-copilot?tool=vimneovim)。但归根结底，他们只是在执行单一任务，这在大多数情况下依赖于在某一领域的先前专长。
++   即便是最优秀的提示工程师也不真正算是‘工程师’。例如，一位 SEO 专家可以使用 GPT 插件或甚至本地运行的 LLM [来寻找反向链接机会](https://bluetree.ai/backlink-importance-and-benefits/)，或一位软件工程师可能知道如何[在编写、测试和部署代码时使用 Copilot](https://docs.github.com/en/copilot/getting-started-with-github-copilot?tool=vimneovim)。但归根结底，他们只是在执行单一任务，这在大多数情况下依赖于在某一领域的先前专长。
 
-+   除了[硅谷偶尔的提示工程职位空缺](https://jobs.lever.co/Anthropic/e3cde481-d446-460f-b576-93cab67bd1ed)外，几乎没有对提示工程的意识，更不用说其他方面了。公司正在缓慢而谨慎地采用LLMs，这与每项创新一样。但我们都知道，这并不会阻止炒作的浪潮。
++   除了[硅谷偶尔的提示工程职位空缺](https://jobs.lever.co/Anthropic/e3cde481-d446-460f-b576-93cab67bd1ed)外，几乎没有对提示工程的意识，更不用说其他方面了。公司正在缓慢而谨慎地采用 LLMs，这与每项创新一样。但我们都知道，这并不会阻止炒作的浪潮。
 
 ## 提示工程的炒作
 
@@ -60,13 +60,13 @@
 
 ## 炒作背后的现实
 
-剥去炒作的层层外衣，揭示出一个更为微妙的现实。技术和伦理挑战无处不在，从在多种应用中扩展提示工程的可扩展性到对可重复性和标准化的担忧。当与[传统且成熟的AI职业](/2021/12/ucsd-become-freelance-artificial-intelligence-engineer.html)相比较时，如数据科学相关的职业，提示工程的光环开始黯淡，揭示了一个虽然强大但存在显著局限性的工具。
+剥去炒作的层层外衣，揭示出一个更为微妙的现实。技术和伦理挑战无处不在，从在多种应用中扩展提示工程的可扩展性到对可重复性和标准化的担忧。当与传统且成熟的 AI 职业相比较时，如数据科学相关的职业，提示工程的光环开始黯淡，揭示了一个虽然强大但存在显著局限性的工具。
 
-这就是为什么提示工程如果只是一个时尚——认为任何人都可以每天与ChatGPT对话并获得中六位数的工作只是一个神话。当然，一些过于热情的硅谷初创公司可能在寻找提示工程师，但这并不是一个可行的职业。至少现在还不是。
+这就是为什么提示工程如果只是一个时尚——认为任何人都可以每天与 ChatGPT 对话并获得中六位数的工作只是一个神话。当然，一些过于热情的硅谷初创公司可能在寻找提示工程师，但这并不是一个可行的职业。至少现在还不是。
 
-同时，作为一个概念，提示工程将保持相关性，并且肯定会在重要性上不断增长。写出一个好的提示、有效使用你的令牌以及知道如何触发某些输出的技能，将在数据科学、LLMs和整体AI之外发挥重要作用。
+同时，作为一个概念，提示工程将保持相关性，并且肯定会在重要性上不断增长。写出一个好的提示、有效使用你的令牌以及知道如何触发某些输出的技能，将在数据科学、LLMs 和整体 AI 之外发挥重要作用。
 
-我们已经看到ChatGPT[改变了人们学习、工作、沟通甚至组织生活的方式](https://www.sfchronicle.com/bayarea/article/ai-chatgpt-education-work-17846358.php)，因此提示技巧将变得更加相关。实际上，谁不期待用可靠的AI助手来自动化那些乏味的工作呢？
+我们已经看到 ChatGPT[改变了人们学习、工作、沟通甚至组织生活的方式](https://www.sfchronicle.com/bayarea/article/ai-chatgpt-education-work-17846358.php)，因此提示技巧将变得更加相关。实际上，谁不期待用可靠的 AI 助手来自动化那些乏味的工作呢？
 
 # 提示工程及其未来：它会超越短暂的时尚吗？
 

@@ -1,12 +1,12 @@
 # 最适合数据科学的 Python IDE 是什么？
 
-> 原文：[https://www.kdnuggets.com/2018/11/best-python-ide-data-science.html](https://www.kdnuggets.com/2018/11/best-python-ide-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/11/best-python-ide-data-science.html`](https://www.kdnuggets.com/2018/11/best-python-ide-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Saurabh Hooda](https://www.linkedin.com/in/hoodasaurabh/)，Hackr.io**
 
-![图片](../Images/d912d448d0c40d0b7139de1af9dda9a2.png)
+![图片](img/d912d448d0c40d0b7139de1af9dda9a2.png)
 
 版权： [Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary) 通过 [Unsplash](https://unsplash.com/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -38,7 +38,7 @@ Python 由 Guido van Rossum 创建，首次发布于 1991 年。这种解释型�
 
 ***平台*** – Linux/macOS/Windows
 
-***官方网站*** – [https://atom.io/](https://atom.io/)
+***官方网站*** – [`atom.io/`](https://atom.io/)
 
 ***类型*** – 通用文本编辑器
 
@@ -66,7 +66,7 @@ Atom 带来的最伟大的特性之一是对 SQL 查询的支持。然而，你�
 
 ***平台*** – Linux/macOS/Windows
 
-***官方网站*** – [https://jupyter.org/](https://jupyter.org/)
+***官方网站*** – [`jupyter.org/`](https://jupyter.org/)
 
 ***类型*** – 基于 Web 的 IDE
 
@@ -92,7 +92,7 @@ Jupyter Notebook 源自于 2014 年的 IPython，是一个基于服务器-客户
 
 ***平台*** – Linux/macOS/Windows
 
-***官方网站*** – [https://www.jetbrains.com/pycharm/](https://www.jetbrains.com/pycharm/)
+***官方网站*** – [`www.jetbrains.com/pycharm/`](https://www.jetbrains.com/pycharm/)
 
 ***类型*** – 专为 Python 设计的 IDE
 
@@ -124,7 +124,7 @@ PyCharm 是一个专为 Python 设计的 IDE。PyCharm 对 Python 就像 Eclipse
 
 ***平台*** – Linux/macOS/Windows
 
-***官方网站*** – [https://rodeo.yhat.com/](https://rodeo.yhat.com/)
+***官方网站*** – [`rodeo.yhat.com/`](https://rodeo.yhat.com/)
 
 ***类型*** – Python 专用 IDE
 
@@ -154,15 +154,15 @@ Rodeo 的最佳之处在于它为初学者和资深用户提供了相同级别�
 
 ***平台*** – Linux/macOS/Windows
 
-***官方网站*** – [https://www.github.com/spyder-ide/spyder](https://www.github.com/spyder-ide/spyder)
+***官方网站*** – [`www.github.com/spyder-ide/spyder`](https://www.github.com/spyder-ide/spyder)
 
 ***类型*** – Python 专用 IDE
 
-Spyder是一个开源的专用Python IDE。其独特之处在于它针对数据科学工作流程进行了优化。它配有Anaconda包管理器，这是[Python编程语言](https://hackr.io/tutorials/learn-python)的标准发行版。Spyder具备所有必要的IDE功能，包括代码自动补全和集成文档浏览器。
+Spyder 是一个开源的专用 Python IDE。其独特之处在于它针对数据科学工作流程进行了优化。它配有 Anaconda 包管理器，这是[Python 编程语言](https://hackr.io/tutorials/learn-python)的标准发行版。Spyder 具备所有必要的 IDE 功能，包括代码自动补全和集成文档浏览器。
 
-专为数据科学项目构建，Spyder拥有平滑的学习曲线，让你能够迅速上手。在线帮助选项允许你在开发项目的同时查找有关库的具体信息。此外，这款专为Python设计的IDE与RStudio相似。因此，当从R转向Python时，这是一个不错的选择。
+专为数据科学项目构建，Spyder 拥有平滑的学习曲线，让你能够迅速上手。在线帮助选项允许你在开发项目的同时查找有关库的具体信息。此外，这款专为 Python 设计的 IDE 与 RStudio 相似。因此，当从 R 转向 Python 时，这是一个不错的选择。
 
-Spyder对Python库（如Matplotlib和SciPy）的集成支持进一步证明了该IDE专为数据科学家设计。除了值得称赞的IPython/Jupyter集成，Spyder还具有一个独特的“变量浏览器”功能，允许以表格形式显示数据。
+Spyder 对 Python 库（如 Matplotlib 和 SciPy）的集成支持进一步证明了该 IDE 专为数据科学家设计。除了值得称赞的 IPython/Jupyter 集成，Spyder 还具有一个独特的“变量浏览器”功能，允许以表格形式显示数据。
 
 **优点：**
 
@@ -180,38 +180,38 @@ Spyder对Python库（如Matplotlib和SciPy）的集成支持进一步证明了�
 
 +   对非数据科学项目能力不足
 
-+   对于高级Python开发者来说过于基础
++   对于高级 Python 开发者来说过于基础
 
-### **如何选择最佳的Python IDE？**
+### **如何选择最佳的 Python IDE？**
 
 这完全取决于你需要满足的要求。然而，这里有一些通用建议：
 
-+   刚开始使用Python时，选择一个自定义和附加功能较少的IDE。干扰越少，开始得越容易。
++   刚开始使用 Python 时，选择一个自定义和附加功能较少的 IDE。干扰越少，开始得越容易。
 
-+   将IDE功能与你的期望进行比较
++   将 IDE 功能与你的期望进行比较
 
-+   尝试多个IDE将帮助你更好地了解哪个最适合特定需求。
++   尝试多个 IDE 将帮助你更好地了解哪个最适合特定需求。
 
-**个人简介：[Saurabh Hooda](https://www.linkedin.com/in/hoodasaurabh/)** 曾在全球电信和金融巨头担任多种职务。在Infosys和Sapient工作十年后，他创建了自己的第一个创业公司Leno，解决超本地图书共享问题。他对产品营销和分析感兴趣。他最新的项目[Hackr.io](https://hackr.io/)推荐了最佳的[数据科学教程](https://hackr.io/tutorials/learn-data-science)和每种编程语言的在线编程课程。所有教程都由编程社区提交和投票。
+**个人简介：[Saurabh Hooda](https://www.linkedin.com/in/hoodasaurabh/)** 曾在全球电信和金融巨头担任多种职务。在 Infosys 和 Sapient 工作十年后，他创建了自己的第一个创业公司 Leno，解决超本地图书共享问题。他对产品营销和分析感兴趣。他最新的项目[Hackr.io](https://hackr.io/)推荐了最佳的[数据科学教程](https://hackr.io/tutorials/learn-data-science)和每种编程语言的在线编程课程。所有教程都由编程社区提交和投票。
 
 **相关：**
 
-+   [数据科学编程最佳实践](/2018/08/programming-best-practices-data-science.html)
++   数据科学编程最佳实践
 
-+   [5个“干净代码”技巧将显著提高你的生产力](/2018/10/5-clean-code-tips-dramatically-improve-productivity.html)
++   5 个“干净代码”技巧将显著提高你的生产力
 
-+   [初学者数据可视化与探索使用Pandas](/2018/10/beginner-data-visualization-exploration-using-pandas-beginner.html)
++   初学者数据可视化与探索使用 Pandas
 
 ### 更多相关话题
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻求目标，并寻找目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [每位数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [为何Python是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [为何 Python 是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

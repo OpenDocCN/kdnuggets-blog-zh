@@ -1,8 +1,8 @@
 # 使用 d6tjoin 在 Python 中进行模糊连接
 
-> 原文：[https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html](https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html)
+> 原文：[`www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html`](https://www.kdnuggets.com/2020/07/fuzzy-joins-python-d6tjoin.html)
 
-[评论](#comments)
+评论
 
 **由 [Norman Niemer](https://www.linkedin.com/in/normanniemer/)，首席数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -30,9 +30,9 @@
 
 假设我关注了几家公司的股票一段时间，并且制定了一个策略来对这些公司的表现进行 1-5 分的评分。对历史数据进行回测将帮助我评估股价是否真的反映了这些分数，并找出如何根据这些分数进行交易。我需要的回测信息包含在以下两个数据集中：df_price 包含 2019 年的历史股价，df_score 包含我定期更新的分数。
 
-[![df_price](../Images/67e246648d2e09dbd95e8b4c319ac548.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_price.png)
+![df_price](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_price.png)
 
-[![df_score](../Images/4d4bcc44740f8afc61d10b767d583622.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_score.png)
+![df_score](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/df_score.png)
 
 为了准备回测，我需要将“score”列合并到 df_price 中。显然，股票代码和日期应该是合并键。但存在两个问题：1. df_price 和 df_valuation 的“ticker”值不一致；2. 分数是按月记录的，我希望 df_price 中的每一行都分配上最近的分数，假设下一个分数在下一个更新日期之前不会出现。
 
@@ -52,13 +52,13 @@ except:
 
 在此之后，我们知道两个表在合并键上并非完全匹配。当你处理较大的数据集或混乱的字符串标识符时，这将更加有用，因为你无法一眼看出两个数据集是否具有不同的键值。
 
-对于我们的情况，更有用的方法是 `Prejoin.match_quality()`。它总结了每个连接键的匹配/未匹配记录的数量。在我们的案例中，没有ticker名称完全匹配，且匹配的日期很少。这就是我们需要 d6tjoin 帮助进行模糊连接的原因。
+对于我们的情况，更有用的方法是 `Prejoin.match_quality()`。它总结了每个连接键的匹配/未匹配记录的数量。在我们的案例中，没有 ticker 名称完全匹配，且匹配的日期很少。这就是我们需要 d6tjoin 帮助进行模糊连接的原因。
 
 ```py
 j.match_quality() 
 ```
 
-[![match_quality()](../Images/005abbd14b3072355351643592ddf80a.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/match_quality.png)
+![match_quality()](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/match_quality.png)
 
 ### 连接具有不对齐的 ID（名称）和日期
 
@@ -79,9 +79,9 @@ result['top1']['ticker']
 result['merged'] 
 ```
 
-第一行返回关于 'ticker' 键的性能总结。它不仅显示了左右两边匹配的键值，还显示了在 `_top1diff_` 列中计算的差异分数。默认情况下，左表中的每个键值应该与右表中的一个键值匹配。因此，即使 "SRPT-US" 和 "VRTX-US" 没有记录在 df_score 中，它们仍会与某些值匹配。我们可以通过设置 `top_limit=3` 来解决这个问题，这将使任何差异大于 3 的匹配被忽略。[![top1](../Images/80503f8e9a5a21da51fbf0e5219ee8a0.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_ticker_match_quality.png)
+第一行返回关于 'ticker' 键的性能总结。它不仅显示了左右两边匹配的键值，还显示了在 `_top1diff_` 列中计算的差异分数。默认情况下，左表中的每个键值应该与右表中的一个键值匹配。因此，即使 "SRPT-US" 和 "VRTX-US" 没有记录在 df_score 中，它们仍会与某些值匹配。我们可以通过设置 `top_limit=3` 来解决这个问题，这将使任何差异大于 3 的匹配被忽略。![top1](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_ticker_match_quality.png)
 
-第二行返回合并后的数据集。[![merged](../Images/39162354e5fc14a7d475ebf3f64428b4.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_result.png)
+第二行返回合并后的数据集。![merged](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/1attempt_result.png)
 
 原始的 df_price 数据集仅包含 1536 行，但为什么合并后变成了 5209 行？这是因为在原始数据集中，我们将 "date" 解析为字符串。d6tjoin 默认使用 Levenshtein 距离计算字符串的差异，因此左边的一个日期可能会与右边的多个日期匹配。这告诉你每次处理日期时应首先检查其数据类型。
 
@@ -102,9 +102,9 @@ result['top1']['ticker']
 result['merged'] 
 ```
 
-[![top1](../Images/085c379b8c12262cd5da1d06e70350dd.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_ticker_match_qualtiy.png)
+![top1](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_ticker_match_qualtiy.png)
 
-[![result](../Images/87d063e99c19987461e639b9776b03c3.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_result.png)
+![result](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/2attempt_result.png)
 
 看起来不错！左侧的所有股票代码都匹配得很好，左侧的日期与右侧的最接近日期匹配。
 
@@ -136,9 +136,9 @@ result['top1']['date']
 result['merged'] 
 ```
 
-[![top1](../Images/7cf175a76b611f90b08070cdb51b7afe.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_date_match_quality.png)
+![top1](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_date_match_quality.png)
 
-[![result](../Images/f96676afd13554d4a4de1cbb5c5cf557.png)](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_result.png)
+![result](https://github.com/HaijingLi94/d6t-python/blob/master/blogs/d6tjoin-blogs/pic/3attempt_result.png)
 
 现在我们有了最终合并的数据集：未分配过分数的价格数据会被忽略，其它数据则各自分配了最近的分数。
 
@@ -148,7 +148,7 @@ d6tjoin 提供的功能包括：
 
 +   预连接诊断以识别不匹配的连接键
 
-+   最佳匹配连接，找到最相似的错位id、名称和日期
++   最佳匹配连接，找到最相似的错位 id、名称和日期
 
 +   能够自定义差异函数、设置最大差异及其他高级功能
 
@@ -166,11 +166,11 @@ d6tjoin 提供的功能包括：
 
 **相关：**
 
-+   [解释“黑箱”机器学习模型：SHAP的实际应用](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)
++   解释“黑箱”机器学习模型：SHAP 的实际应用
 
-+   [数据科学家常犯的前10个编码错误](/2019/04/top-10-coding-mistakes-data-scientists.html)
++   数据科学家常犯的前 10 个编码错误
 
-+   [数据科学家常犯的前10个统计错误](/2019/06/statistics-mistakes-data-scientists.html)
++   数据科学家常犯的前 10 个统计错误
 
 ### 更多相关话题
 

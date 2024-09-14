@@ -1,12 +1,12 @@
 # 制作你的第一个数据科学应用
 
-> 原文：[https://www.kdnuggets.com/2021/02/build-first-data-science-application.html](https://www.kdnuggets.com/2021/02/build-first-data-science-application.html)
+> 原文：[`www.kdnuggets.com/2021/02/build-first-data-science-application.html`](https://www.kdnuggets.com/2021/02/build-first-data-science-application.html)
 
-[评论](#comments)
+评论
 
 **由 [Naser Tamimi](https://www.linkedin.com/in/nasertamimi/)，壳牌的数据科学家**
 
-![图片](../Images/19cd12f42e1819c095846cfdb6db31ec.png)
+![图片](img/19cd12f42e1819c095846cfdb6db31ec.png)
 
 由 [Kelly Sikkema](https://unsplash.com/@kellysikkema?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/app?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上拍摄
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@
 
 如果你是一名数据科学家，想要制作你的第一个数据科学应用，在这篇文章中，我会展示你需要学习的 7 个 Python 库。我相信你已经知道其中的一些，但我在这里提到它们是为了那些不熟悉的人。
 
-![图片](../Images/3758020ee6a5388afa4f20bc06bc0ea6.png)
+![图片](img/3758020ee6a5388afa4f20bc06bc0ea6.png)
 
 由 [Med Badr Chemmaoui](https://unsplash.com/@medbadrc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/design?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上拍摄
 
@@ -82,21 +82,21 @@
 
 ### 摘要
 
-使用我在本文中提到的7个库，你可以构建出人们使用的数据科学应用。通过精通这些工具，你可以在几小时内构建MVP，并用真实用户测试你的想法。之后，如果你决定扩展应用程序，你可以使用Flask和Django等更专业的工具，除了HTML、CSS和JS代码。
+使用我在本文中提到的 7 个库，你可以构建出人们使用的数据科学应用。通过精通这些工具，你可以在几小时内构建 MVP，并用真实用户测试你的想法。之后，如果你决定扩展应用程序，你可以使用 Flask 和 Django 等更专业的工具，除了 HTML、CSS 和 JS 代码。
 
 在 [Medium](https://tamimi-naser.medium.com/) 和 [Twitter](https://twitter.com/TamimiNas) 上关注我，获取最新故事。
 
-**个人简介： [Naser Tamimi](https://www.linkedin.com/in/nasertamimi/)** 是一名为Shell工作的数据科学家。他的使命是教会读者他通过艰难的方式学到的东西。
+**个人简介： [Naser Tamimi](https://www.linkedin.com/in/nasertamimi/)** 是一名为 Shell 工作的数据科学家。他的使命是教会读者他通过艰难的方式学到的东西。
 
 [原文](https://towardsdatascience.com/build-your-first-data-science-application-9f1b816a5d67)。经许可转载。
 
 **相关内容：**
 
-+   [使用Pipes进行更清晰的数据分析](/2021/01/cleaner-data-analysis-pandas-pipes.html)
++   使用 Pipes 进行更清晰的数据分析
 
-+   [使用5个必备的自然语言处理库入门](/2021/02/getting-started-5-essential-nlp-libraries.html)
++   使用 5 个必备的自然语言处理库入门
 
-+   [机器学习项目失败的五大原因](/2021/01/top-5-reasons-why-machine-learning-projects-fail.html)
++   机器学习项目失败的五大原因
 
 ### 更多相关话题
 
@@ -104,10 +104,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应该了解的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该了解的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败，剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

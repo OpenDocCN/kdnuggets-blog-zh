@@ -1,10 +1,10 @@
 # 有效数据科学经理的五个迹象
 
-> 原文：[https://www.kdnuggets.com/2022/06/five-signs-effective-data-science-manager.html](https://www.kdnuggets.com/2022/06/five-signs-effective-data-science-manager.html)
+> 原文：[`www.kdnuggets.com/2022/06/five-signs-effective-data-science-manager.html`](https://www.kdnuggets.com/2022/06/five-signs-effective-data-science-manager.html)
 
-![有效数据科学经理的五个迹象](../Images/fc55ea117d98d274d68051b029d67320.png)
+![有效数据科学经理的五个迹象](img/fc55ea117d98d274d68051b029d67320.png)
 
-[由pikisuperstar创建的生产力矢量](https://www.freepik.com/free-vector/young-woman-multitasking-concept_6528209.htm?query=multitasking)
+[由 pikisuperstar 创建的生产力矢量](https://www.freepik.com/free-vector/young-woman-multitasking-concept_6528209.htm?query=multitasking)
 
 时代迅速变化，如今的职位名称和职责并不完全取决于经验年限。只要你理解业务目标并将其与团队的期望和兴趣对齐，你可以在任何年龄领导数据科学团队。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -38,7 +38,7 @@
 
 # 满足团队的期望
 
-如果你已经说服管理层接受了你解决方案的价值主张，但数据科学经理的任务还包括感知团队的脉搏。虽然有一种看法认为数据科学团队整天都在使用最先进的前沿模型，但现实中还包括为重复任务构建自动化工作流程，进行4个月的概念验证却只看到其被废弃，模型监控和维护，解释模型预测等。
+如果你已经说服管理层接受了你解决方案的价值主张，但数据科学经理的任务还包括感知团队的脉搏。虽然有一种看法认为数据科学团队整天都在使用最先进的前沿模型，但现实中还包括为重复任务构建自动化工作流程，进行 4 个月的概念验证却只看到其被废弃，模型监控和维护，解释模型预测等。
 
 关键是你需要识别并调整团队成员的兴趣 - 有些可能来自核心研究背景，能够思考创新解决方案，而其他人可能对成为全栈数据科学家，即全能型人才感兴趣。
 
@@ -66,7 +66,7 @@
 
 是的，每个人都应该足够灵活，以便快速学习和交付。但是，这种交付很可能来自他们感兴趣的领域，而不是强迫他们走别人的路。一个好的数据科学经理对团队的学习曲线负责，并推广一些缓冲时间，让他们探索自己感兴趣的工作。哦，但你可能会认为你感兴趣的领域不一定能找到业务成果。
 
-这就是管理的优点所在——你激励他们花15-20%的时间探索新的算法，学习像编程语言这样的新技能等。实质上，是给他们翅膀，去思考超越纯商业背景的边界。
+这就是管理的优点所在——你激励他们花 15-20%的时间探索新的算法，学习像编程语言这样的新技能等。实质上，是给他们翅膀，去思考超越纯商业背景的边界。
 
 # 摘要
 
@@ -74,18 +74,18 @@
 
 每个人都有自己的管理风格，并应该坚持自己轻松自然的方式。你不能在管理团队时长时间伪装自己。因此，最好做真实的自己，并做到一个有效的经理应该做的事情——在保持团队积极的同时实现业务成果。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领导者和AI伦理学家。她在数据科学、产品和研究的交汇处工作，以提供业务价值和洞察力。她是数据驱动科学的倡导者，并在数据治理领域是一位领先专家，致力于构建可信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领导者和 AI 伦理学家。她在数据科学、产品和研究的交汇处工作，以提供业务价值和洞察力。她是数据驱动科学的倡导者，并在数据治理领域是一位领先专家，致力于构建可信赖的 AI 解决方案。
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入探讨13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [五步成为数据科学专业人士](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-+   [你应该知道的五大SQL窗口函数，适用于数据科学面试](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
++   [你应该知道的五大 SQL 窗口函数，适用于数据科学面试](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
 
-+   [在Pandas中进行条件过滤的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)
++   [在 Pandas 中进行条件过滤的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)
 
-+   [为有效的Tableau和Power BI仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
++   [为有效的 Tableau 和 Power BI 仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
 
 +   [数据可视化最佳实践与有效沟通的资源](https://www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html)

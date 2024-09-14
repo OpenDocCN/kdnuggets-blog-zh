@@ -1,8 +1,8 @@
 # 初学者指南：十大机器学习算法
 
-> 原文：[https://www.kdnuggets.com/a-beginner-guide-to-the-top-10-machine-learning-algorithms](https://www.kdnuggets.com/a-beginner-guide-to-the-top-10-machine-learning-algorithms)
+> 原文：[`www.kdnuggets.com/a-beginner-guide-to-the-top-10-machine-learning-algorithms`](https://www.kdnuggets.com/a-beginner-guide-to-the-top-10-machine-learning-algorithms)
 
-![初学者指南：十大机器学习算法](../Images/c61fade647057aa7f541f92bf60c1c8e.png)
+![初学者指南：十大机器学习算法](img/c61fade647057aa7f541f92bf60c1c8e.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 算法的主要区别在于它们的学习方式。
 
-![初学者指南：十大机器学习算法](../Images/9c86c3e47609298d9a1d121b42afa55c.png)
+![初学者指南：十大机器学习算法](img/9c86c3e47609298d9a1d121b42afa55c.png)
 
 作者图片
 
@@ -44,7 +44,7 @@
 
 再次强调，还有一些任务，但它们不适合初学者。
 
-![初学者指南：十大机器学习算法](../Images/474bcad6f883c13f494915c57162ba05.png)
+![初学者指南：十大机器学习算法](img/474bcad6f883c13f494915c57162ba05.png)
 
 作者图片
 
@@ -68,7 +68,7 @@
 
 以下是我将涵盖的算法概述。
 
-![初学者指南：前10大机器学习算法](../Images/22605766626df3f651f636f465e1f248.png)
+![初学者指南：前 10 大机器学习算法](img/22605766626df3f651f636f465e1f248.png)
 
 作者提供的图片
 
@@ -96,29 +96,29 @@
 
 **用于：** 分类
 
-**描述：** 它使用 [逻辑函数](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/2880px-Logistic-curve.svg.png) 将数据值转换为二元类别，即0或1。通常使用0.5的阈值。二元结果使得该算法非常适合预测二元结果，如YES/NO、TRUE/FALSE或0/1。
+**描述：** 它使用 [逻辑函数](https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/2880px-Logistic-curve.svg.png) 将数据值转换为二元类别，即 0 或 1。通常使用 0.5 的阈值。二元结果使得该算法非常适合预测二元结果，如 YES/NO、TRUE/FALSE 或 0/1。
 
 **评估指标：**
 
-+   准确度：正确预测与总预测的比率。越接近1越好。
++   准确度：正确预测与总预测的比率。越接近 1 越好。
 
-+   精确度：模型在正预测中的准确性度量；表示为正确正预测与总期望正结果之间的比率。越接近1越好。
++   精确度：模型在正预测中的准确性度量；表示为正确正预测与总期望正结果之间的比率。越接近 1 越好。
 
-+   召回率：它同样衡量模型在正预测中的准确性。表示为正确正预测与在类别中所做总观察之间的比率。有关这些指标的更多信息，请参见 [这里](/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)。
++   召回率：它同样衡量模型在正预测中的准确性。表示为正确正预测与在类别中所做总观察之间的比率。有关这些指标的更多信息，请参见 这里。
 
-+   [F1分数](https://www.v7labs.com/blog/f1-score-guide)：模型召回率和精确度的调和平均数。越接近1越好。
++   [F1 分数](https://www.v7labs.com/blog/f1-score-guide)：模型召回率和精确度的调和平均数。越接近 1 越好。
 
 ### 3\. 决策树
 
 **用途：** 回归与分类
 
-**描述：** [决策树](/2020/01/decision-tree-algorithm-explained.html) 是利用层次或树状结构来预测值或类别的算法。根节点代表整个数据集，然后根据变量值分支成决策节点、分支和叶子。
+**描述：** 决策树 是利用层次或树状结构来预测值或类别的算法。根节点代表整个数据集，然后根据变量值分支成决策节点、分支和叶子。
 
 **评估指标：**
 
-+   准确度、精确度、召回率和F1分数 -> 用于分类
++   准确度、精确度、召回率和 F1 分数 -> 用于分类
 
-+   MSE, R平方 -> 用于回归
++   MSE, R 平方 -> 用于回归
 
 ### 4\. 朴素贝叶斯
 
@@ -134,19 +134,19 @@
 
 +   召回率
 
-+   F1分数
++   F1 分数
 
 ### 5\. K-最近邻（KNN）
 
 **用途：** 回归与分类
 
-**描述：** 它计算测试数据与训练数据中 [k个最近数据点](https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning) 之间的距离。测试数据属于‘邻居’数量较多的类别。关于回归，预测值是k个选定训练点的平均值。
+**描述：** 它计算测试数据与训练数据中 [k 个最近数据点](https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning) 之间的距离。测试数据属于‘邻居’数量较多的类别。关于回归，预测值是 k 个选定训练点的平均值。
 
 **评估指标：**
 
-+   准确度、精确度、召回率和F1分数 -> 用于分类
++   准确度、精确度、召回率和 F1 分数 -> 用于分类
 
-+   MSE, R平方 -> 用于回归
++   MSE, R 平方 -> 用于回归
 
 ### 6\. 支持向量机（SVM）
 
@@ -156,7 +156,7 @@
 
 **评估指标：**
 
-+   准确率、精确率、召回率和F1分数 -> 用于分类
++   准确率、精确率、召回率和 F1 分数 -> 用于分类
 
 +   均方误差（MSE）、决定系数（R-squared） -> 用于回归
 
@@ -168,7 +168,7 @@
 
 **评估指标：**
 
-+   准确率、精确率、召回率和F1分数 -> 用于分类
++   准确率、精确率、召回率和 F1 分数 -> 用于分类
 
 +   均方误差（MSE）、决定系数（R-squared） -> 用于回归
 
@@ -180,23 +180,23 @@
 
 **评估指标：**
 
-+   准确率、精确率、召回率和F1分数 -> 用于分类
++   准确率、精确率、召回率和 F1 分数 -> 用于分类
 
 +   均方误差（MSE）、决定系数（R-squared） -> 用于回归
 
 ## 无监督学习算法
 
-### 9\. K均值聚类
+### 9\. K 均值聚类
 
 **用途：** 聚类
 
-**描述：** [该算法](https://realpython.com/k-means-clustering-python/)将数据集划分为k个簇，每个簇由其[质心或几何中心](https://en.wikipedia.org/wiki/Centroid)表示。通过将数据划分为k个簇的迭代过程，目标是最小化数据点与其簇的质心之间的距离。另一方面，它还试图最大化这些数据点与其他簇的质心之间的距离。简而言之，属于同一簇的数据应该尽可能相似，而与其他簇的数据尽可能不同。
+**描述：** [该算法](https://realpython.com/k-means-clustering-python/)将数据集划分为 k 个簇，每个簇由其[质心或几何中心](https://en.wikipedia.org/wiki/Centroid)表示。通过将数据划分为 k 个簇的迭代过程，目标是最小化数据点与其簇的质心之间的距离。另一方面，它还试图最大化这些数据点与其他簇的质心之间的距离。简而言之，属于同一簇的数据应该尽可能相似，而与其他簇的数据尽可能不同。
 
 **评估指标：**
 
 +   惯性：每个数据点距离最近簇质心的距离的平方和。惯性值越低，簇越紧凑。
 
-+   轮廓分数：它衡量簇的凝聚力（数据在自身簇中的相似性）和分离度（数据与其他簇的差异）。该分数的值范围从-1到+1。值越高，数据越适合其簇，越不适合其他簇。
++   轮廓分数：它衡量簇的凝聚力（数据在自身簇中的相似性）和分离度（数据与其他簇的差异）。该分数的值范围从-1 到+1。值越高，数据越适合其簇，越不适合其他簇。
 
 ### 10\. 主成分分析（PCA）
 
@@ -230,4 +230,4 @@
 
 +   [初学者 AI 和机器学习职业指南](https://www.kdnuggets.com/beginners-guide-to-careers-in-ai-and-machine-learning)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法……](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法……](https://www.kdnuggets.com/2022/n25.html)

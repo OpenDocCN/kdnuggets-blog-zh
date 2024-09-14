@@ -1,8 +1,8 @@
 # 一个学习 ChatGPT 背后所有基础的优秀资源
 
-> 原文：[https://www.kdnuggets.com/023/08/excellent-resource-learn-foundations-everything-underneath-chatgpt.html](https://www.kdnuggets.com/023/08/excellent-resource-learn-foundations-everything-underneath-chatgpt.html)
+> 原文：[`www.kdnuggets.com/023/08/excellent-resource-learn-foundations-everything-underneath-chatgpt.html`](https://www.kdnuggets.com/023/08/excellent-resource-learn-foundations-everything-underneath-chatgpt.html)
 
-![一个学习 ChatGPT 背后所有基础的优秀资源](../Images/2e8906182a21478030c961f264a7ac68.png)
+![一个学习 ChatGPT 背后所有基础的优秀资源](img/2e8906182a21478030c961f264a7ac68.png)
 
 图片来自 [Freepik](https://www.freepik.com/free-photo/opened-ai-chat-laptop_38259334.htm#query=chatgpt&position=0&from_view=search&track=sph)
 
@@ -12,11 +12,11 @@ OpenAI、ChatGPT、GPT 系列以及大型语言模型（LLMs） – 如果你与
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -28,7 +28,7 @@ OpenAI、ChatGPT、GPT 系列以及大型语言模型（LLMs） – 如果你与
 
 因此，如果你因为算法的复杂细节和 AI 领域的复杂性而感到退缩，我强烈推荐这个资源来了解“[ChatGPT 在做什么……以及它为何有效？](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)”
 
-![一个学习 ChatGPT 背后所有基础的优秀资源](../Images/5fbf35ca39bc7777659de8d7c2fcd566.png)
+![一个学习 ChatGPT 背后所有基础的优秀资源](img/5fbf35ca39bc7777659de8d7c2fcd566.png)
 
 图片来自 [Stephen Wolfram Writings](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
 
@@ -44,7 +44,7 @@ OpenAI、ChatGPT、GPT 系列以及大型语言模型（LLMs） – 如果你与
 
 其主要亮点是关注“大型语言模型”中的‘模型’部分，通过一个例子说明了球从每一层到达地面的时间。
 
-![一个很好的资源，帮助你了解 ChatGPT 背后的基础知识](../Images/6ead3cc06ef1bdae2f274d2aefdfba10.png)
+![一个很好的资源，帮助你了解 ChatGPT 背后的基础知识](img/6ead3cc06ef1bdae2f274d2aefdfba10.png)
 
 图片来源：[斯蒂芬·沃尔弗拉姆的写作](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
 
@@ -62,7 +62,7 @@ OpenAI、ChatGPT、GPT 系列以及大型语言模型（LLMs） – 如果你与
 
 文章从数字识别到典型的猫与狗分类器，清楚地解释了每一层所提取的特征，从猫的轮廓开始。值得注意的是，神经网络的前几层会提取图像的某些方面，如物体的边缘。
 
-![一个很好的资源，帮助你了解 ChatGPT 背后的基础知识](../Images/44a51cb82820df7bde09c52a76f64876.png)
+![一个很好的资源，帮助你了解 ChatGPT 背后的基础知识](img/44a51cb82820df7bde09c52a76f64876.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-vector/gradient-brain-background_44416640.htm#query=deep%20learning&position=6&from_view=search&track=ais)
 
@@ -82,7 +82,7 @@ OpenAI、ChatGPT、GPT 系列以及大型语言模型（LLMs） – 如果你与
 
 ### 权重（参数）
 
-你一定听说过某个大型语言模型拥有惊人的1750亿个参数。嗯，这说明了模型的结构如何根据旋钮的调整而变化。
+你一定听说过某个大型语言模型拥有惊人的 1750 亿个参数。嗯，这说明了模型的结构如何根据旋钮的调整而变化。
 
 本质上，参数是“你可以调节的旋钮”，用于拟合数据。文章强调，神经网络的实际学习过程就是寻找正确的权重 – *“最终，这一切都是关于确定哪些权重能够最好地捕捉给定的训练示例”*
 
@@ -122,17 +122,17 @@ OpenAI、ChatGPT、GPT 系列以及大型语言模型（LLMs） – 如果你与
 
 通过这次阅读，我们涵盖了许多内容，从理解模型及人脑如何工作到将其应用于神经网络、它们的设计及相关术语。
 
-请关注后续文章，了解如何在此基础上深入理解chatgpt的工作原理。
+请关注后续文章，了解如何在此基础上深入理解 chatgpt 的工作原理。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位AI策略专家和数字化转型领导者，专注于产品、科学和工程的交汇点，以构建可扩展的机器学习系统。她是一位获奖的创新领导者、作者和国际演讲者。她的使命是使机器学习民主化，并打破术语，使每个人都能参与这场转型。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位 AI 策略专家和数字化转型领导者，专注于产品、科学和工程的交汇点，以构建可扩展的机器学习系统。她是一位获奖的创新领导者、作者和国际演讲者。她的使命是使机器学习民主化，并打破术语，使每个人都能参与这场转型。
 
 ### 更多相关主题
 
-+   [ChatGPT能否作为教育资源被信任？](https://www.kdnuggets.com/2023/05/chatgpt-trusted-educational-resource.html)
++   [ChatGPT 能否作为教育资源被信任？](https://www.kdnuggets.com/2023/05/chatgpt-trusted-educational-resource.html)
 
-+   [基础回顾第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [基础回顾第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
-+   [ChatGPT插件：你需要了解的一切](https://www.kdnuggets.com/2023/06/chatgpt-plugins-everything-need-know.html)
++   [ChatGPT 插件：你需要了解的一切](https://www.kdnuggets.com/2023/06/chatgpt-plugins-everything-need-know.html)
 
 +   [ChatGPT：你需要了解的一切](https://www.kdnuggets.com/2023/01/chatgpt-everything-need-know.html)
 

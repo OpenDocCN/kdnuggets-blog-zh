@@ -1,8 +1,8 @@
-# 向前特征选择：Python中的实际示例
+# 向前特征选择：Python 中的实际示例
 
-> 原文：[https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html](https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html)
+> 原文：[`www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html`](https://www.kdnuggets.com/2018/06/step-forward-feature-selection-python.html)
 
-[评论](#comments)
+评论
 
 存在许多[特征选择](https://en.wikipedia.org/wiki/Feature_selection)的方法，其中一些将过程视为艺术形式，另一些视为科学，而实际上，一些领域知识结合严格的方法可能是你最好的选择。
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 特征选择的两个显著包装方法是向前特征选择和向后特征选择。
 
-![图片](../Images/17075aa097f90c967aa0ef0730e1a2ba.png)
+![图片](img/17075aa097f90c967aa0ef0730e1a2ba.png)
 
 [图片来源](https://en.wikipedia.org/wiki/Feature_selection)
 
-向前特征选择从评估每个单独特征开始，选择那些能产生最佳表现的算法模型的特征。什么是“最佳”？这完全取决于定义的评估标准（AUC、预测准确率、RMSE等）。接下来，评估所有可能的选定特征与随后的特征的组合，选择第二个特征，依此类推，直到选择出所需的预定义数量的特征。
+向前特征选择从评估每个单独特征开始，选择那些能产生最佳表现的算法模型的特征。什么是“最佳”？这完全取决于定义的评估标准（AUC、预测准确率、RMSE 等）。接下来，评估所有可能的选定特征与随后的特征的组合，选择第二个特征，依此类推，直到选择出所需的预定义数量的特征。
 
 向后特征选择密切相关，正如你可能已经猜到的那样，它从整个特征集开始，然后向后操作，从中去除特征，以找到预定义大小的最佳子集。
 
@@ -34,19 +34,19 @@
 
 为了了解它们是如何工作的，我们具体看一下逐步前进特征选择。请注意，如前所述，机器学习算法必须在开始我们的共生特征选择过程之前定义。
 
-请记住，使用给定算法选择的优化特征集可能在不同算法下表现不同。例如，如果我们使用逻辑回归选择特征，并不能保证这些相同的特征在使用K近邻算法或支持向量机时也能表现最佳。
+请记住，使用给定算法选择的优化特征集可能在不同算法下表现不同。例如，如果我们使用逻辑回归选择特征，并不能保证这些相同的特征在使用 K 近邻算法或支持向量机时也能表现最佳。
 
 ### 实现特征选择和构建模型
 
-那么，我们如何在Python中执行逐步前进特征选择呢？[Sebastian Raschka的mlxtend库](https://github.com/rasbt/mlxtend)包含了一个实现（[Sequential Feature Selector](https://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)），因此我们将使用它来演示。显然，在继续之前你应该已经安装了mlxtend（查看Github仓库）。
+那么，我们如何在 Python 中执行逐步前进特征选择呢？[Sebastian Raschka 的 mlxtend 库](https://github.com/rasbt/mlxtend)包含了一个实现（[Sequential Feature Selector](https://rasbt.github.io/mlxtend/user_guide/feature_selection/SequentialFeatureSelector/)），因此我们将使用它来演示。显然，在继续之前你应该已经安装了 mlxtend（查看 Github 仓库）。
 
-![Image](../Images/d13fd31db64ac19a44c703d8cdc720ec.png)
+![Image](img/d13fd31db64ac19a44c703d8cdc720ec.png)
 
 我们将使用随机森林分类器进行特征选择和模型构建（再次强调，在逐步前进特征选择的情况下，这两者是紧密相关的）。
 
 我们需要数据来进行演示，所以我们使用[葡萄酒质量数据集](https://archive.ics.uci.edu/ml/datasets/wine+quality)。具体来说，我在下面的代码中使用了未处理的`winequality-white.csv`文件作为输入。
 
-随意地，我们将所需的特征数量设置为5（数据集中有12个特征）。我们能够做的是比较特征选择过程每次迭代的评估分数，因此请记住，如果我们发现特征数量较少的情况下得分更好，我们可以选择该表现最佳的子集来继续在我们的“实时”模型中使用。同时，请注意，设置所需的特征数量过低可能会导致决定一个次优的特征数量和组合（例如，如果我们发现某些11个特征的组合比我们在选择过程中找到的<=10个特征的最佳组合更好）。
+随意地，我们将所需的特征数量设置为 5（数据集中有 12 个特征）。我们能够做的是比较特征选择过程每次迭代的评估分数，因此请记住，如果我们发现特征数量较少的情况下得分更好，我们可以选择该表现最佳的子集来继续在我们的“实时”模型中使用。同时，请注意，设置所需的特征数量过低可能会导致决定一个次优的特征数量和组合（例如，如果我们发现某些 11 个特征的组合比我们在选择过程中找到的<=10 个特征的最佳组合更好）。
 
 由于我们更关注演示如何实现逐步前进特征选择，而不是对这个特定数据集的实际结果，我们不会过于关注模型的实际性能，但我们会进行比较，以展示如何在一个有意义的项目中进行。
 
@@ -84,7 +84,7 @@ Training dataset shape: (3673, 11) (3673,)
 Testing dataset shape: (1225, 11) (1225,)
 ```
 
-接下来，我们将定义一个分类器，以及一个逐步前进特征选择器，然后执行特征选择。mlxtend中的特征选择器有一些我们可以定义的参数，以下是我们的处理方式：
+接下来，我们将定义一个分类器，以及一个逐步前进特征选择器，然后执行特征选择。mlxtend 中的特征选择器有一些我们可以定义的参数，以下是我们的处理方式：
 
 +   首先，我们将我们的分类器传递给定义的特征选择器
 

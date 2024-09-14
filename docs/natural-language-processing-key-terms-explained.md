@@ -1,8 +1,8 @@
 # 自然语言处理关键术语，解释如下
 
-> 原文：[https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)
+> 原文：[`www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html`](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)
 
-![自然语言处理关键术语，解释如下](../Images/a3ba527eaac054fcd0b030ff29fe0702.png)
+![自然语言处理关键术语，解释如下](img/a3ba527eaac054fcd0b030ff29fe0702.png)
 
 照片由 [Towfiqu barbhuiya](https://unsplash.com/es/@towfiqu999999?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,15 +12,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
-本文旨在为第二组术语提供入门级的介绍，我们将以不含废话的方式来定义一些关键的NLP术语。虽然阅读完本文后你不会成为语言学专家，但我们希望你能够更好地理解一些NLP相关的讨论，并对如何进一步学习这些话题获得一些视角。
+本文旨在为第二组术语提供入门级的介绍，我们将以不含废话的方式来定义一些关键的 NLP 术语。虽然阅读完本文后你不会成为语言学专家，但我们希望你能够更好地理解一些 NLP 相关的讨论，并对如何进一步学习这些话题获得一些视角。
 
 下面是 18 个精选的自然语言处理术语，简明定义。
 
@@ -30,7 +30,7 @@
 
 # 2\. 分词
 
-分词，通常是NLP过程中的早期步骤，这一步骤将较长的文本字符串拆分成更小的部分或**标记**。较大的文本块可以被分词成句子，句子可以被分词成单词，等等。文本在适当分词后，通常会进行进一步处理。
+分词，通常是 NLP 过程中的早期步骤，这一步骤将较长的文本字符串拆分成更小的部分或**标记**。较大的文本块可以被分词成句子，句子可以被分词成单词，等等。文本在适当分词后，通常会进行进一步处理。
 
 # 3\. 标准化
 
@@ -66,11 +66,11 @@ better → good
 
 词性标注包括为句子的分词部分分配类别标签。最常见的词性标注是识别单词作为名词、动词、形容词等。
 
-![词性标注](../Images/a8df09740c1f85d2d5d57166eca3d9ae.png)
+![词性标注](img/a8df09740c1f85d2d5d57166eca3d9ae.png)
 
 # 9. 统计语言建模
 
-统计语言建模是构建统计语言模型的过程，旨在提供自然语言的估计。对于一系列输入单词，模型会为整个序列分配一个概率，这有助于估计各种可能序列的可能性。这对于生成文本的NLP应用特别有用。
+统计语言建模是构建统计语言模型的过程，旨在提供自然语言的估计。对于一系列输入单词，模型会为整个序列分配一个概率，这有助于估计各种可能序列的可能性。这对于生成文本的 NLP 应用特别有用。
 
 # 10. 词袋模型
 
@@ -119,7 +119,7 @@ Zipf 定律用于描述文档集合中词频之间的关系。如果按频率排
 
 > Zipf 定律表明，给定一些自然语言的语料库，任何词的频率与其在频率表中的排名成反比。因此，最频繁的词出现的频率大约是第二频繁词的两倍，第三频繁词的三倍，等等。
 
-![Zipf 定律](../Images/f70adbb5177c5ec11689f09c1d048bea.png)
+![Zipf 定律](img/f70adbb5177c5ec11689f09c1d048bea.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/Zipf%27s_law)
 
@@ -131,7 +131,7 @@ Zipf 定律用于描述文档集合中词频之间的关系。如果按频率排
 
 +   **贾卡德** - 2 个集合之间重叠的度量；在 NLP 的情况下，通常文档是词的集合
 
-+   **史密斯-沃特曼** - 类似于Levenshtein，但对替换、插入和删除分配了成本。
++   **史密斯-沃特曼** - 类似于 Levenshtein，但对替换、插入和删除分配了成本。
 
 # 15\. 语法分析
 
@@ -147,13 +147,13 @@ Zipf 定律用于描述文档集合中词频之间的关系。如果按频率排
 
 # 18\. 信息检索
 
-信息检索是基于特定查询，从文本中访问和检索最相关信息的过程，使用基于上下文的索引或元数据。最著名的信息检索实例之一是Google搜索。
+信息检索是基于特定查询，从文本中访问和检索最相关信息的过程，使用基于上下文的索引或元数据。最著名的信息检索实例之一是 Google 搜索。
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一名数据科学家和KDnuggets的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过editor1 at kdnuggets[dot]com联系他。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一名数据科学家和 KDnuggets 的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过 editor1 at kdnuggets[dot]com 联系他。
 
 ### 了解更多相关内容
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
 +   [数据库关键术语解析](https://www.kdnuggets.com/2016/07/database-key-terms-explained.html)
 

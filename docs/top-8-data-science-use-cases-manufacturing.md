@@ -1,22 +1,22 @@
 # 制造业中的前 8 大数据科学应用案例
 
-> 原文：[https://www.kdnuggets.com/2019/03/top-8-data-science-use-cases-manufacturing.html](https://www.kdnuggets.com/2019/03/top-8-data-science-use-cases-manufacturing.html)
+> 原文：[`www.kdnuggets.com/2019/03/top-8-data-science-use-cases-manufacturing.html`](https://www.kdnuggets.com/2019/03/top-8-data-science-use-cases-manufacturing.html)
 
-[评论](#comments)
+评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-制造业目前面临着巨大的变革。由于数字世界的快速发展和数据科学的广泛应用，各个领域的人类活动都在寻求改进。现代制造业常被称为工业4.0，即在第四次工业革命条件下进行的制造，带来了机器人化、自动化和数据的广泛应用。
+制造业目前面临着巨大的变革。由于数字世界的快速发展和数据科学的广泛应用，各个领域的人类活动都在寻求改进。现代制造业常被称为工业 4.0，即在第四次工业革命条件下进行的制造，带来了机器人化、自动化和数据的广泛应用。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -34,7 +34,7 @@
 
 预防性维护通常应用于仍在运行的设备，以减少设备故障的可能性。预防性维护有两种主要类型：基于时间的和基于使用的。预防性维护的最大优势是计划。通过预测设备未来可能出现的问题，制造商可以规划维修的停机时间。这些停机时间通常是为了避免由于更严重问题引起的显著延误和故障。
 
-![预测分析](../Images/2b27665756de535c83f6ad24554cb172.png)
+![预测分析](img/2b27665756de535c83f6ad24554cb172.png)
 
 ### 需求预测与库存管理
 
@@ -54,7 +54,7 @@
 
 ### 保修分析
 
-![保修分析](../Images/e86fc208fffd18407d4e75cc1280fabd.png)
+![保修分析](img/e86fc208fffd18407d4e75cc1280fabd.png)
 
 制造商每年在支持保修索赔方面花费大量资金。保修索赔揭示了产品质量和可靠性的宝贵信息。它们有助于揭示产品的早期预警或缺陷。
 
@@ -72,7 +72,7 @@
 
 通过使用大数据进行产品开发，制造商可以设计出具有更高客户价值的产品，并将新产品进入市场的风险降到最低。建模和规划时会考虑可操作的洞察力。这些数据可以增强决策过程。此外，数据管理工具被广泛应用于优化分销链的运营方面。
 
-![产品开发](../Images/a1a22bbfdde73941a4c1c81aaaff70d3.png)
+![产品开发](img/a1a22bbfdde73941a4c1c81aaaff70d3.png)
 
 处理客户反馈并将这些数据提供给产品营销人员可能有助于创意生成阶段。因此，可能会开发出对客户更有用、对制造商更有利的新产品。
 
@@ -88,7 +88,7 @@
 
 +   高速处理能力
 
-+   持续的24/7操作能力。
++   持续的 24/7 操作能力。
 
 ### 管理供应链风险
 
@@ -98,32 +98,32 @@
 
 ### 结论
 
-制造领域正因技术发展以及ML和AI解决方案的出现而发生显著变化。本文提供了数据科学在制造业中应用的几个生动例子，并介绍了这些例子为商业人士带来的好处。
+制造领域正因技术发展以及 ML 和 AI 解决方案的出现而发生显著变化。本文提供了数据科学在制造业中应用的几个生动例子，并介绍了这些例子为商业人士带来的好处。
 
 除了预测潜在风险、需求和市场要求外，数据分析还可以帮助保持高质量标准和质量指标。此外，将智能数据技术融入制造业可能有助于预测意外的浪费或问题。大数据可以帮助制造商以更少的时间和金钱实现更多业务目标。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专业领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）以及数据密集型Web应用开发（RESTful APIs、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专业领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）以及数据密集型 Web 应用开发（RESTful APIs、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/top-8-data-science-use-cases-in-manufacturing/)。转载已获许可。
 
 **相关：**
 
-+   [金融领域数据科学的前7大应用场景](/2018/05/top-7-data-science-use-cases-finance.html)
++   金融领域数据科学的前 7 大应用场景
 
-+   [管理者的数据科学简介](/2018/11/intro-data-science-managers.html)
++   管理者的数据科学简介
 
-+   [前6大Python NLP库的比较](/2018/07/comparison-top-6-python-nlp-libraries.html)
++   前 6 大 Python NLP 库的比较
 
 ### 更多相关话题
 
 +   [企业中的机器学习：用例与挑战](https://www.kdnuggets.com/2022/08/dss-machine-learning-enterprise-cases-challenges.html)
 
-+   [NoSQL数据库及其应用场景](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
++   [NoSQL 数据库及其应用场景](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
-+   [DALLE-3的5个应用场景](https://www.kdnuggets.com/5-use-cases-of-dalle-3)
++   [DALLE-3 的 5 个应用场景](https://www.kdnuggets.com/5-use-cases-of-dalle-3)
 
-+   [AI和LLM用例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
++   [AI 和 LLM 用例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 
 +   [为什么 TinyML 案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9日: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

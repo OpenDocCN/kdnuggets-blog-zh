@@ -1,12 +1,12 @@
 # 使用 Tensorflow.js 实现计算机视觉应用的 6 个简单步骤
 
-> 原文：[https://www.kdnuggets.com/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html](https://www.kdnuggets.com/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)
+> 原文：[`www.kdnuggets.com/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html`](https://www.kdnuggets.com/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)
 
-[评论](#comments)
+评论
 
 **由 [Bala Venkatesh](https://www.linkedin.com/in/bala-venkatesh-67964247/)，数据科学家**
 
-![图示](../Images/6f9a5f006f06f67de9585dfe1a971869.png)
+![图示](img/6f9a5f006f06f67de9585dfe1a971869.png)
 
 [图片来源](https://i.imgur.com/V6uxcpY.jpg)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT 工作
 
 * * *
 
@@ -40,7 +40,7 @@
 
 我使用了 [facemesh](https://storage.googleapis.com/tfjs-models/demos/facemesh/index.html) 模型来根据我的面部运动移动视频帧。请看下面的演示。我将告诉你实现下面的计算机视觉应用涉及的步骤。
 
-![图示](../Images/4cc353cc75fcf763a6046cd526021908.png)
+![图示](img/4cc353cc75fcf763a6046cd526021908.png)
 
 演示
 
@@ -114,9 +114,9 @@ draw.drawImage(frame, 0, 0, 640, 480);//check if face is detected
 
 大家都说如果你想成为数据科学家，你应该熟悉 Python 或 R 编程语言，但现在我们可以使用 JavaScript 实现一个机器学习应用。
 
-![图示](../Images/43076ce4269f102fd9d78670eae0d878.png)
+![图示](img/43076ce4269f102fd9d78670eae0d878.png)
 
-来源: [https://miro.medium.com/max/1400/1*F-1fq9TNjDnAYPAXnZP4Ww.png](https://miro.medium.com/max/1400/1*F-1fq9TNjDnAYPAXnZP4Ww.png)
+来源: [`miro.medium.com/max/1400/1*F-1fq9TNjDnAYPAXnZP4Ww.png`](https://miro.medium.com/max/1400/1*F-1fq9TNjDnAYPAXnZP4Ww.png)
 
 > 祝大家学习愉快！如果你需要任何帮助或支持，请通过 [LinkedIn](https://www.linkedin.com/in/bala-venkatesh-67964247/) 和 [Twitter](https://twitter.com/balavenkatesh22) 与我联系。
 
@@ -126,11 +126,11 @@ draw.drawImage(frame, 0, 0, 640, 480);//check if face is detected
 
 **相关:**
 
-+   [利用 AI 对抗冠状病毒：通过深度学习和计算机视觉改进检测](/2020/04/fighting-coronavirus-ai-improving-testing-deep-learning-computer-vision.html)
++   利用 AI 对抗冠状病毒：通过深度学习和计算机视觉改进检测
 
-+   [利用机器学习和计算机视觉进行作物疾病检测](/2020/06/crop-disease-detection-computer-vision.html)
++   利用机器学习和计算机视觉进行作物疾病检测
 
-+   [构建一个使用 TensorFlow 和 Streamlit 生成逼真面孔的应用](/2020/04/app-generate-photorealistic-faces-tensorflow-streamlit.html)
++   构建一个使用 TensorFlow 和 Streamlit 生成逼真面孔的应用
 
 ### 更多相关话题
 
@@ -142,6 +142,6 @@ draw.drawImage(frame, 0, 0, 640, 480);//check if face is detected
 
 +   [计算机视觉的 5 种应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
 
-+   [关于数据管理及其重要性的6件事](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理及其重要性的 6 件事](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在5步内构建一个机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 步内构建一个机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)

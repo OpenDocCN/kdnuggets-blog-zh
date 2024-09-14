@@ -1,6 +1,6 @@
 # 数据科学中实验设计的重要性
 
-> 原文：[https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html`](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)
 
 # 引言
 
@@ -8,17 +8,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 我们每个人或多或少都是实验的参与者。要么是某个广告定位机构正在进行实验，以检查展示给用户的广告类型以获取销售，即转化。要么是一些流行机器学习课程提供商的网站上的功能变更，以评估用户对哪些变化最敏感，以及这些变化是否推动了实验组织者希望观察的商业 KPI。这种随机化实验被称为 AB 测试，广泛归类于假设测试的范畴。
 
-![数据科学中实验设计的重要性](../Images/a8ffbf76b6c42995f36526a8b059f6c4.png)
+![数据科学中实验设计的重要性](img/a8ffbf76b6c42995f36526a8b059f6c4.png)
 
 [来源](https://www.freepik.com/free-vector/people-analyzing-growth-charts_12643928.htm#query=data%20science&position=25&from_view=search)：图像由 freepik 创建
 
@@ -78,7 +78,7 @@
 
 # 实验管理
 
-到目前为止，我们讨论了实验设计的样子。如果你对如何管理多个实验和工件感兴趣，可以参考这篇[优秀文章](https://towardsdatascience.com/a-quick-guide-to-managing-machine-learning-experiments-af84da6b060b)。它涵盖了AI/ML项目中的变量组合，包括但不限于以下内容：
+到目前为止，我们讨论了实验设计的样子。如果你对如何管理多个实验和工件感兴趣，可以参考这篇[优秀文章](https://towardsdatascience.com/a-quick-guide-to-managing-machine-learning-experiments-af84da6b060b)。它涵盖了 AI/ML 项目中的变量组合，包括但不限于以下内容：
 
 +   预处理、模型训练和后处理模块
 
@@ -94,17 +94,17 @@
 
 在这篇文章中，我们讨论了实验的重要性，特别是在数据科学项目中的重要性。此外，我们谈到了在设计和进行机器学习实验之前需要考虑的各种因素。文章最后强调了实验设计中需要管理的多个实体和工件。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位屡获殊荣的AI/ML创新领导者和AI伦理学家。她在数据科学、产品和研究交汇的领域工作，以提供商业价值和洞察力。她倡导以数据为中心的科学，并且是数据治理领域的领先专家，致力于构建值得信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位屡获殊荣的 AI/ML 创新领导者和 AI 伦理学家。她在数据科学、产品和研究交汇的领域工作，以提供商业价值和洞察力。她倡导以数据为中心的科学，并且是数据治理领域的领先专家，致力于构建值得信赖的 AI 解决方案。
 
 ### 相关主题
 
-+   [机器学习实验跟踪的7个最佳工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
++   [机器学习实验跟踪的 7 个最佳工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
 
 +   [数据清洗在数据科学中的重要性](https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html)
 
 +   [概率在数据科学中的重要性](https://www.kdnuggets.com/2023/02/importance-probability-data-science.html)
 
-+   [Berkson-Jekel悖论及其对数据科学的重要性](https://www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html)
++   [Berkson-Jekel 悖论及其对数据科学的重要性](https://www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html)
 
 +   [庆祝对数据隐私重要性的认识](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)
 

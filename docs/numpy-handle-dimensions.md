@@ -1,8 +1,8 @@
 # 如何处理 NumPy 中的维度
 
-> 原文：[https://www.kdnuggets.com/2020/07/numpy-handle-dimensions.html](https://www.kdnuggets.com/2020/07/numpy-handle-dimensions.html)
+> 原文：[`www.kdnuggets.com/2020/07/numpy-handle-dimensions.html`](https://www.kdnuggets.com/2020/07/numpy-handle-dimensions.html)
 
-![Figure](../Images/630d520ae43ec63ecb94940c09f0b1ee.png)
+![Figure](img/630d520ae43ec63ecb94940c09f0b1ee.png)
 
 **图片来源：Garik Barseghyan，来自 [Pixabay](https://pixabay.com/illustrations/fractal-abstract-background-physics-1352598/)**
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -88,7 +88,7 @@ column vector using expand_dims:
 
 创建另一个形状为 (2,4,28) 的数组 x2，并检查如何将 x2 的维度从 3D 扩展到 5D
 
-![Image for post](../Images/dce53809e3b9fa8707c283dd74be3d55.png)
+![Image for post](img/dce53809e3b9fa8707c283dd74be3d55.png)
 
 从上述内容中需要注意的关键点是 np.reshape 也允许你拆分维度。
 
@@ -100,11 +100,11 @@ column vector using expand_dims:
 
 例如，当我们将以下两个数组相加时，由于形状不匹配，会显示 'ValueError'：
 
-![Image for post](../Images/95564eee381c3b6dc91399f714caff3f.png)
+![Image for post](img/95564eee381c3b6dc91399f714caff3f.png)
 
 让我们看看 np.newaxis 如何增加下面一个数组的维度：
 
-![Image for post](../Images/a45db121f93285c2a6972adf91bbbb11.png)
+![Image for post](img/a45db121f93285c2a6972adf91bbbb11.png)
 
 由于我们主要需要调整数组的维度以进行正确的广播操作，`np.reshape` 和 `np.expand_dims` 增加维度的方式效果相同（如前面的例子所示）。
 
@@ -114,9 +114,9 @@ column vector using expand_dims:
 
 **参考资料：**
 
-+   [https://stackoverflow.com/questions/46334014/np-reshapex-1-1-vs-x-np-newaxis?noredirect=1&lq=1](https://stackoverflow.com/questions/46334014/np-reshapex-1-1-vs-x-np-newaxis?noredirect=1&lq=1)
++   [`stackoverflow.com/questions/46334014/np-reshapex-1-1-vs-x-np-newaxis?noredirect=1&lq=1`](https://stackoverflow.com/questions/46334014/np-reshapex-1-1-vs-x-np-newaxis?noredirect=1&lq=1)
 
-+   [https://stackoverflow.com/questions/28385666/numpy-use-reshape-or-newaxis-to-add-dimensions](https://stackoverflow.com/questions/28385666/numpy-use-reshape-or-newaxis-to-add-dimensions)
++   [`stackoverflow.com/questions/28385666/numpy-use-reshape-or-newaxis-to-add-dimensions`](https://stackoverflow.com/questions/28385666/numpy-use-reshape-or-newaxis-to-add-dimensions)
 
 **[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究的交汇处工作，以提供商业价值和洞察力。她倡导以数据为中心的科学，并在数据治理领域拥有领先的专业知识，致力于构建可信赖的 AI 解决方案。
 
@@ -130,7 +130,7 @@ column vector using expand_dims:
 
 +   [7 种处理不平衡数据的技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
 

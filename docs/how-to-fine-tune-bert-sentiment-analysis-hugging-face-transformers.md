@@ -1,8 +1,8 @@
 # 如何使用 Hugging Face Transformers 微调 BERT 进行情感分析
 
-> 原文：[https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
+> 原文：[`www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers`](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
 
-![如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](../Images/0e059bc833fc77fec44bf0e5333af868.png)
+![如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](img/0e059bc833fc77fec44bf0e5333af868.png)
 
 图片由作者使用 Midjourney 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -152,7 +152,7 @@ print(predictions)
 
 这些资源值得深入研究，以更好地理解这些问题并提升你的自然语言处理和情感分析能力。
 
-[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 [KDnuggets](https://www.kdnuggets.com/) 和 [Statology](https://www.statology.org/) 的执行编辑以及 [Machine Learning Mastery](https://machinelearningmastery.com/) 的特约编辑，马修旨在让复杂的数据科学概念变得易于理解。他的职业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他致力于使数据科学社区中的知识实现民主化。马修从6岁起就开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 [KDnuggets](https://www.kdnuggets.com/) 和 [Statology](https://www.statology.org/) 的执行编辑以及 [Machine Learning Mastery](https://machinelearningmastery.com/) 的特约编辑，马修旨在让复杂的数据科学概念变得易于理解。他的职业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他致力于使数据科学社区中的知识实现民主化。马修从 6 岁起就开始编程。
 
 ### 更多相关主题
 

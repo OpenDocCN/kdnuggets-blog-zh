@@ -1,8 +1,8 @@
 # SQL 和数据集成：ETL 和 ELT
 
-> 原文：[https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
+> 原文：[`www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html`](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
 
-![SQL 和数据集成：ETL 和 ELT](../Images/8fa22ecbca564e8b68a224fb46c632c4.png)
+![SQL 和数据集成：ETL 和 ELT](img/8fa22ecbca564e8b68a224fb46c632c4.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -127,7 +127,7 @@ INSERT INTO customers (name, email, country)
 VALUES ('John Doe', 'johndoe@example.com', 'USA');
 ```
 
-*这条语句将会在customers表中插入一行新数据，并为* ***‘name’***、***‘email’*** 和 ***‘country’*** *列指定值。*
+*这条语句将会在 customers 表中插入一行新数据，并为* ***‘name’***、***‘email’*** 和 ***‘country’*** *列指定值。*
 
 要更新表中的现有行，你可以使用**‘UPDATE’**语句，并结合**‘SET’**和**‘WHERE’**子句：
 
@@ -141,7 +141,7 @@ WHERE name = 'John Smith';
 
 # 结论
 
-我希望你喜欢阅读这篇文章。请随时在评论区分享你的想法或反馈。我将用一些最终的想法结束我的讨论。数据集成的未来可能涉及机器学习算法的集成、与大数据技术的更大整合，以及更复杂的ETL和ELT过程。通过了解最新的数据集成方式和技术，企业可以确保自己能够充分利用数据驱动经济中的机遇和挑战。
+我希望你喜欢阅读这篇文章。请随时在评论区分享你的想法或反馈。我将用一些最终的想法结束我的讨论。数据集成的未来可能涉及机器学习算法的集成、与大数据技术的更大整合，以及更复杂的 ETL 和 ELT 过程。通过了解最新的数据集成方式和技术，企业可以确保自己能够充分利用数据驱动经济中的机遇和挑战。
 
 **[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有抱负的软件开发者，对数据科学和人工智能在医学中的应用充满兴趣。Kanwal 被选为 2022 年 APAC 区域的 Google Generation Scholar。Kanwal 喜欢通过撰写关于热门话题的文章分享技术知识，并对提升女性在技术行业中的代表性充满热情。
 
@@ -155,6 +155,6 @@ WHERE name = 'John Smith';
 
 +   [人工智能如何改变数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [AI/ML技术集成将如何帮助业务实现…](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)
++   [AI/ML 技术集成将如何帮助业务实现…](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)
 
 +   [数据仓储和 ETL 最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)

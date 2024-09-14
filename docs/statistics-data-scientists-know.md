@@ -1,10 +1,10 @@
 # 5 个数据科学家需要知道的有用统计信息
 
-> 原文：[https://www.kdnuggets.com/2019/06/statistics-data-scientists-know.html](https://www.kdnuggets.com/2019/06/statistics-data-scientists-know.html)
+> 原文：[`www.kdnuggets.com/2019/06/statistics-data-scientists-know.html`](https://www.kdnuggets.com/2019/06/statistics-data-scientists-know.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![数据科学家的有用统计信息](../Images/9b92245b5cfa486377031e642627276b.png)
+![数据科学家的有用统计信息](img/9b92245b5cfa486377031e642627276b.png)
 
 数据科学可以实际定义为从数据中获得额外信息的过程。在进行数据科学时，我们真正尝试做的是解释所有数据在现实世界中的*意义*，超越数字本身。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -46,7 +46,7 @@
 
 数据集的均值是*平均值*，即数据围绕的数值。计算平均值时使用的所有值在定义均值时被权重相同。
 
-例如，我们来计算以下5个数字的均值：
+例如，我们来计算以下 5 个数字的均值：
 
 (3 + 64 + 187 + 12 + 52) / 5 = 63.6
 
@@ -56,11 +56,11 @@
 
 中位数是数据集中的中间值，即如果我们将数据从最小到最大（或从最大到最小）排序，然后取数据集中的中间值，那就是中位数。
 
-我们再次计算这5个数字的中位数：
+我们再次计算这 5 个数字的中位数：
 
 [3, 12, **52**, 64, 187] → **52**
 
-中位数值与均值63.6相差甚远。它们都没有对错之分，但我们可以根据具体情况和目标选择使用其中之一。
+中位数值与均值 63.6 相差甚远。它们都没有对错之分，但我们可以根据具体情况和目标选择使用其中之一。
 
 计算中位数需要对数据进行排序——如果数据集很大，这将不太实际。
 
@@ -83,23 +83,23 @@ numpy.median(array)
 
 图例展示了这些曲线的标准差值，下一节会进行解释。
 
-![](../Images/7667b0c773907b8cc63242b4a3cb44f6.png)
+![](img/7667b0c773907b8cc63242b4a3cb44f6.png)
 
 **标准差**
 
-**标准差**是量化数据分布最常见的方法。计算标准差涉及5个步骤：
+**标准差**是量化数据分布最常见的方法。计算标准差涉及 5 个步骤：
 
 1.  计算均值。
 
 1.  对每个数据点，计算其距离均值的平方。
 
-1.  汇总第2步的值。
+1.  汇总第 2 步的值。
 
 1.  按数据点数量进行除法。
 
 1.  取平方根。
 
-![](../Images/25f9e9362d4fbd08ae5ee17b18b2fce5.png)
+![](img/25f9e9362d4fbd08ae5ee17b18b2fce5.png)
 
 较大的值意味着我们的数据在均值周围“分布更广”。较小的值则意味着我们的数据更集中在均值附近。
 
@@ -115,19 +115,19 @@ numpy.std(array)
 
 百分位数描述了数据点在数值范围中位置的精确度。
 
-更正式地说，第p百分位数是数据集中可以将其分成两部分的值。下部分包含**p**百分比的数据，即第p百分位数。
+更正式地说，第 p 百分位数是数据集中可以将其分成两部分的值。下部分包含**p**百分比的数据，即第 p 百分位数。
 
-例如，考虑下面的11个数字：
+例如，考虑下面的 11 个数字：
 
 ```py
 1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21
 ```
 
-数字15是第70百分位数，因为当我们在数字15处将数据集分成两部分时，剩余数据中70%小于15。
+数字 15 是第 70 百分位数，因为当我们在数字 15 处将数据集分成两部分时，剩余数据中 70%小于 15。
 
-百分位数结合均值和标准差可以很好地帮助我们了解某个特定点在数据的分布/范围中的位置。如果它是异常值，则其百分位数会接近两端——低于5%或高于95%。另一方面，如果百分位数接近50，则说明它接近我们的中心趋势。
+百分位数结合均值和标准差可以很好地帮助我们了解某个特定点在数据的分布/范围中的位置。如果它是异常值，则其百分位数会接近两端——低于 5%或高于 95%。另一方面，如果百分位数接近 50，则说明它接近我们的中心趋势。
 
-可以使用 Numpy 计算数组的第50百分位数，如下所示：
+可以使用 Numpy 计算数组的第 50 百分位数，如下所示：
 
 ```py
 numpy.percentile(array, 50)
@@ -141,11 +141,11 @@ numpy.percentile(array, 50)
 
 下面的图表提供了一个很好的示例。
 
-![](../Images/1439047ba3a88561da953713dedc1f5b.png)
+![](img/1439047ba3a88561da953713dedc1f5b.png)
 
 我们可以使用以下方程计算偏度：
 
-![](../Images/5bcde4767d2d770a44e6598f87967884.png)
+![](img/5bcde4767d2d770a44e6598f87967884.png)
 
 偏度将使我们了解数据分布与高斯分布的接近程度。偏度的幅度越大，我们的数据集与高斯分布的距离越远。
 
@@ -167,36 +167,36 @@ scipy.stats.skew(array)
 
 **相关性**
 
-相关性只是归一化（缩放）后的协方差，我们通过将分析的两个变量的标准差乘积进行除法来实现。这有效地将相关性的范围限制在-1.0到1.0之间。
+相关性只是归一化（缩放）后的协方差，我们通过将分析的两个变量的标准差乘积进行除法来实现。这有效地将相关性的范围限制在-1.0 到 1.0 之间。
 
-如果两个特征变量的相关性为1.0，则这两个变量具有完全的正相关性。这意味着如果一个变量按给定的量变化，则第二个变量也会按比例在同一方向变化。
+如果两个特征变量的相关性为 1.0，则这两个变量具有完全的正相关性。这意味着如果一个变量按给定的量变化，则第二个变量也会按比例在同一方向变化。
 
-![图示](../Images/a80a2e97fae6faf5989d20830365203c.png) PCA用于降维的示意图
+![图示](img/a80a2e97fae6faf5989d20830365203c.png) PCA 用于降维的示意图
 
-小于1的正相关系数表示正相关性不完美，相关性的强度随着系数接近1而增加。负相关系数的情况也是如此，只是特征变量的值方向相反，而不是相同方向变化。
+小于 1 的正相关系数表示正相关性不完美，相关性的强度随着系数接近 1 而增加。负相关系数的情况也是如此，只是特征变量的值方向相反，而不是相同方向变化。
 
-了解相关性对使用[主成分分析](https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fprincipal-component-analysis-your-tutorial-and-code-9719d3d3f376)（PCA）进行降维的技术极为有用。我们首先计算相关矩阵——如果有2个或更多的变量高度相关，则它们在解释数据时实际上是冗余的，可以丢弃一些以减少复杂性。
+了解相关性对使用[主成分分析](https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fprincipal-component-analysis-your-tutorial-and-code-9719d3d3f376)（PCA）进行降维的技术极为有用。我们首先计算相关矩阵——如果有 2 个或更多的变量高度相关，则它们在解释数据时实际上是冗余的，可以丢弃一些以减少复杂性。
 
-**个人简介：[George Seif](https://towardsdatascience.com/@george.seif94)** 是一位认证的极客和AI / 机器学习工程师。
+**个人简介：[George Seif](https://towardsdatascience.com/@george.seif94)** 是一位认证的极客和 AI / 机器学习工程师。
 
 **相关：**
 
-+   [数据科学家需要了解的5个基本统计概念](/2018/11/5-basic-statistics-concepts-data-scientists-need-know.html)
++   数据科学家需要了解的 5 个基本统计概念
 
-+   [数据科学家需要掌握的10种统计技术](/2017/11/10-statistical-techniques-data-scientists-need-master.html)
++   数据科学家需要掌握的 10 种统计技术
 
-+   [数据科学统计入门](/2018/12/introduction-statistics-data-science.html)
++   数据科学统计入门
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [每个数据科学家都应了解的三种R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应了解的三种 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，然后找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

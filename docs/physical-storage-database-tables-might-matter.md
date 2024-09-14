@@ -1,14 +1,14 @@
 # 为什么数据库表的物理存储可能很重要
 
-> 原文：[https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html](https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html)
+> 原文：[`www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html`](https://www.kdnuggets.com/2019/05/physical-storage-database-tables-might-matter.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) comments
 
 **由 [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/) 提供，Grofers 的机器学习和数据工程师**
 
-![Header image](../Images/3f45e8b7a780a3d4ea36631f77ad2b47.png)
+![Header image](img/3f45e8b7a780a3d4ea36631f77ad2b47.png)
 
-在简化和丰富我们用户的在线购物体验的过程中，我们尝试为每位用户提供个性化的商品推荐。为此，我们以批处理模式操作，预计算了每个用户的相关前200项推荐，并将结果存储在我们的OLTP PostgreSQL数据库中的一张表里，以便实时提供这些推荐。对此表的查询时间过长，导致用户体验不佳。
+在简化和丰富我们用户的在线购物体验的过程中，我们尝试为每位用户提供个性化的商品推荐。为此，我们以批处理模式操作，预计算了每个用户的相关前 200 项推荐，并将结果存储在我们的 OLTP PostgreSQL 数据库中的一张表里，以便实时提供这些推荐。对此表的查询时间过长，导致用户体验不佳。
 
 ### **缩小问题范围**
 
@@ -115,11 +115,11 @@ Postgres 提供了一个`[CLUSTER](https://www.postgresql.org/docs/9.1/static/sq
 
 Spark 作为一个分布式计算框架，将特定的数据框分配到其工作节点的分区中。它允许你根据分区键显式地对数据框进行分区，以确保最小化数据的重新分布（将分区从一个工作节点转移到另一个节点进行读取/写入操作）。通过代码我们发现，我们在特定的转换操作中对`product_id`进行了分区。
 
-![Figure](../Images/976d6ac4550cd709f9e6312e234bcb80.png)
+![Figure](img/976d6ac4550cd709f9e6312e234bcb80.png)
 
 Spark 数据框的分区。注意包含特定产品 ID 的行位于一个分区中
 
-这意味着写入我们Postgres表的数据应该按`product_id`分类，即所有推荐为特定产品ID的客户ID的行应该被聚集在一起。我们通过查看以下结果来测试我们的假设：
+这意味着写入我们 Postgres 表的数据应该按`product_id`分类，即所有推荐为特定产品 ID 的客户 ID 的行应该被聚集在一起。我们通过查看以下结果来测试我们的假设：
 
 ```py
 SELECT *, ctid FROM personalized_recommendations WHERE product_id = 284670
@@ -142,7 +142,7 @@ SELECT *, ctid FROM personalized_recommendations WHERE product_id = 284670
      284670 |        8011 | (479502,85)
 ```
 
-确实，表中所有特定产品ID的行都在一起。所以如果我们改为按`customer_id`分区，我们的目标就是将所有属于一个`customer_id`的结果行集中在一起。这可以通过重新分区数据框来实现。 [这个](https://deepsense.ai/optimize-spark-with-distribute-by-and-cluster-by/)帖子详细讨论了重新分区。
+确实，表中所有特定产品 ID 的行都在一起。所以如果我们改为按`customer_id`分区，我们的目标就是将所有属于一个`customer_id`的结果行集中在一起。这可以通过重新分区数据框来实现。 [这个](https://deepsense.ai/optimize-spark-with-distribute-by-and-cluster-by/)帖子详细讨论了重新分区。
 
 **尝试对齐数据**
 
@@ -152,7 +152,7 @@ SELECT *, ctid FROM personalized_recommendations WHERE product_id = 284670
 df.repartition($”customer_id”)
 ```
 
-然后将最终的数据框写入Postgres。现在我们检查了行的分布情况。
+然后将最终的数据框写入 Postgres。现在我们检查了行的分布情况。
 
 ```py
 db=> SELECT product_id,customer_id,ctid FROM personalized_recommendations WHERE customer_id = 28460
@@ -177,11 +177,11 @@ limit 20;
 
 可惜的是，表仍然没有以`customer_id`为中心进行透视。我们做错了什么？
 
-显然，数据重新排列的默认分区数量是200。但由于不同的客户ID数量超过了200（约1000万），这意味着单个分区将包含超过1个客户的推荐产品，如下图所示。在这种情况下，接近（~1000万/200=50,000）个客户。
+显然，数据重新排列的默认分区数量是 200。但由于不同的客户 ID 数量超过了 200（约 1000 万），这意味着单个分区将包含超过 1 个客户的推荐产品，如下图所示。在这种情况下，接近（~1000 万/200=50,000）个客户。
 
-![Figure](../Images/53f3b4ae9d27e7ec5dd63a8a08bb00ca.png)
+![Figure](img/53f3b4ae9d27e7ec5dd63a8a08bb00ca.png)
 
-重新分区的数据框。注意一个产品ID的所有行都在一个分区中
+重新分区的数据框。注意一个产品 ID 的所有行都在一个分区中
 
 当这个特定的分区写入数据库时，这仍然不能确保所有属于一个`customer_id`的行被一起写入。于是我们在分区内按`customer_id`对行进行了排序：
 
@@ -189,11 +189,11 @@ limit 20;
 df.repartition($”customer_id”).sortWithinPartitions($”customer_id”)
 ```
 
-![Figure](../Images/1bf72e28d7420e0b9cff23423d8bdf17.png)
+![Figure](img/1bf72e28d7420e0b9cff23423d8bdf17.png)
 
 分区后按`customer_id`键排序的数据框
 
-对Spark来说，这是一项昂贵的操作，但对我们来说却是必要的。我们进行了这项操作，并再次写入数据库。接下来，我们检查了分布情况。
+对 Spark 来说，这是一项昂贵的操作，但对我们来说却是必要的。我们进行了这项操作，并再次写入数据库。接下来，我们检查了分布情况。
 
 ```py
 customer_id | product_id | ctid
@@ -244,15 +244,15 @@ Bitmap Heap Scan on personalized_recommendations(cost=66.87..13129.94 rows=3394 
  Execution time: 3.322 ms
 ```
 
-> **执行时间从~100毫秒降至~3毫秒。**
+> **执行时间从~100 毫秒降至~3 毫秒。**
 
-这种优化确实帮助我们使用个性化推荐服务各种用例，如为超过20万用户的不断增长的消费群体生成定向广告推送等。首次启动时，数据的大小约为12 GB。现在过去一年，它增长到了约22GB，但重新排列表中的记录有助于将数据库检索延迟保持到最低。虽然现在生成这些推荐、排列数据框和写入数据库所需的时间增加了很多倍，但由于这些操作是在批处理模式下进行的，因此仍然可以接受。
+这种优化确实帮助我们使用个性化推荐服务各种用例，如为超过 20 万用户的不断增长的消费群体生成定向广告推送等。首次启动时，数据的大小约为 12 GB。现在过去一年，它增长到了约 22GB，但重新排列表中的记录有助于将数据库检索延迟保持到最低。虽然现在生成这些推荐、排列数据框和写入数据库所需的时间增加了很多倍，但由于这些操作是在批处理模式下进行的，因此仍然可以接受。
 
 随着平台用户规模的增长，数据也在每天增长，处理这些数据并使其对数据驱动的决策有用的挑战也在增加。如果你喜欢在大规模下解决类似问题，我们始终在寻找新的人才。可以在 [这里](https://grofers.recruiterbox.com/?team=Technology+-+Engineering%2C+Product+and+Design#content) 查看空缺职位。
 
 **脚注：**
 
-[1]. [https://use-the-index-luke.com/sql/anatomy/slow-indexes](https://use-the-index-luke.com/sql/anatomy/slow-indexes)
+[1]. [`use-the-index-luke.com/sql/anatomy/slow-indexes`](https://use-the-index-luke.com/sql/anatomy/slow-indexes)
 
 **个人简介： [Apoorva Aggarwal](https://www.linkedin.com/in/apoorvaaggarwal/)** 是 Grofers 的机器学习和数据工程师。
 
@@ -260,21 +260,21 @@ Bitmap Heap Scan on personalized_recommendations(cost=66.87..13129.94 rows=3394 
 
 **相关：**
 
-+   [掌握 SQL 的 7 个步骤 — 2019 版](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)
++   掌握 SQL 的 7 个步骤 — 2019 版
 
-+   [PostgreSQL 查询优化的简单技巧](/2018/06/simple-tips-postgresql-query-optimization.html)
++   PostgreSQL 查询优化的简单技巧
 
-+   [将 PB 级数据从 Postgres 加载到 BigQuery](/2018/04/loading-terabytes-data-postgres-into-bigquery.html)
++   将 PB 级数据从 Postgres 加载到 BigQuery
 
 * * *
 
 ## 我们的 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 

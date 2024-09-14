@@ -1,8 +1,8 @@
 # 数据来源 101
 
-> 原文：[https://www.kdnuggets.com/2019/10/data-sources-101.html](https://www.kdnuggets.com/2019/10/data-sources-101.html)
+> 原文：[`www.kdnuggets.com/2019/10/data-sources-101.html`](https://www.kdnuggets.com/2019/10/data-sources-101.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ayswarrya G](https://www.linkedin.com/in/ayswarrya/)，内容策略师，Atlan**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -40,7 +40,7 @@
 
 当你从其他人拥有的来源收集数据时，这被称为次级数据。如果你使用谷歌分析的数据来了解有多少人访问你的网站，那你就是在使用次级数据。这仍然是关于你组织的数据，但这是由一个次级组织（在我们的例子中是谷歌）为你收集的。
 
-![图示](../Images/8dfed2e739ecf957ca62c9a75b2aeac4.png)
+![图示](img/8dfed2e739ecf957ca62c9a75b2aeac4.png)
 
 到目前为止，还不错，对吧？
 
@@ -56,7 +56,7 @@
 
 当你通过调查你组织内的人员并利用这些洞察来展示影响工作场所生产力的因素时，这些数据就是内部数据和原始数据。
 
-另一方面，当你使用Google Analytics的数据来显示大多数网站访问者搜索的是替代数据产品时，这些数据是内部和次级的。
+另一方面，当你使用 Google Analytics 的数据来显示大多数网站访问者搜索的是替代数据产品时，这些数据是内部和次级的。
 
 ### 外部数据 — 来自外部来源的数据
 
@@ -64,19 +64,19 @@
 
 1.  公开可用的数据，例如人口普查、选举统计、税务记录和互联网搜索
 
-1.  来自第三方的私有数据，如亚马逊、Facebook、Google、沃尔玛以及像Experian这样的信用报告机构
+1.  来自第三方的私有数据，如亚马逊、Facebook、Google、沃尔玛以及像 Experian 这样的信用报告机构
 
 外部数据也可以是主要数据或次级数据吗？如果你在考虑这些问题，你就走在正确的轨道上了！
 
 当你与全球的数据科学领导者进行访谈时，你正在收集主要数据，但来源于外部。所以，这些数据是外部的和主要的。
 
-当你使用像Kaggle或Stack Overflow这样的数字出版物进行的访谈数据时，你使用的是外部的和次级的数据。
+当你使用像 Kaggle 或 Stack Overflow 这样的数字出版物进行的访谈数据时，你使用的是外部的和次级的数据。
 
 ### 但是等一下……难道不是还有一种叫做替代数据的吗？
 
 等等！我正要提到这个。
 
-替代数据是复杂、独特且大多数未被探索的次级数据。为了理解替代数据，让我们快速绕道2分钟，了解一下大数据。
+替代数据是复杂、独特且大多数未被探索的次级数据。为了理解替代数据，让我们快速绕道 2 分钟，了解一下大数据。
 
 **大数据**
 
@@ -90,13 +90,13 @@
 
 1.  结构化数据：在关系数据库中以固定格式组织的数据（可以想象成你存储在计算机上的文件）
 
-1.  非结构化数据：没有特定格式的数据（可以想象成监控数据）；[Gartner](https://www.google.com/url?q=https://www.forbes.com/sites/forbestechcouncil/2017/06/05/the-big-unstructured-data-problem/%2376fa13e4493a&sa=D&ust=1569918282395000)估计超过80%的企业数据是非结构化的。
+1.  非结构化数据：没有特定格式的数据（可以想象成监控数据）；[Gartner](https://www.google.com/url?q=https://www.forbes.com/sites/forbestechcouncil/2017/06/05/the-big-unstructured-data-problem/%2376fa13e4493a&sa=D&ust=1569918282395000)估计超过 80%的企业数据是非结构化的。
 
 大数据的例子包括社交媒体数据📱、交易数据📈（股票价格、购买历史）、传感器数据（位置数据、天气数据）以及卫星数据📡。（这里有一篇关于今天世界上大数据的[有趣阅读](https://www.google.com/url?q=https://www.domo.com/solution/data-never-sleeps-6&sa=D&ust=1569918282396000)）
 
-[![图示](../Images/a408be87a618f15ad12499ba9643dafa.png)](https://i.ibb.co/Nx9n8rb/image4.jpg)
+![图示](https://i.ibb.co/Nx9n8rb/image4.jpg)
 
-IBM的大数据4Vs。图片来源：[IBM Big Data & Analytics Hub](https://www.google.com/url?q=https://www.ibmbigdatahub.com/sites/default/files/infographic_file/4-Vs-of-big-data.jpg&sa=D&ust=1569918282396000)
+IBM 的大数据 4Vs。图片来源：[IBM Big Data & Analytics Hub](https://www.google.com/url?q=https://www.ibmbigdatahub.com/sites/default/files/infographic_file/4-Vs-of-big-data.jpg&sa=D&ust=1569918282396000)
 
 [传统数据系统](https://www.google.com/url?q=http://www.pearsonitcertification.com/articles/article.aspx?p%3D2427073%26seqNum%3D2&sa=D&ust=1569918282397000) 无法完全处理如此大量的非结构化数据。
 
@@ -108,7 +108,7 @@ IBM的大数据4Vs。图片来源：[IBM Big Data & Analytics Hub](https://www.g
 
 很快，其他行业也意识到了它的潜力以及如何帮助他们保持竞争优势。
 
-![图像](../Images/a42ca8affcc97033cd3a23e728369a01.png)
+![图像](img/a42ca8affcc97033cd3a23e728369a01.png)
 
 替代数据当前使用的一些示例。图片来源： [Humans of Data](https://www.google.com/url?q=https://humansofdata.atlan.com/2018/07/what-is-alternative-data/&sa=D&ust=1569918282398000)
 
@@ -130,7 +130,7 @@ IBM的大数据4Vs。图片来源：[IBM Big Data & Analytics Hub](https://www.g
 
 这样你就对世界数据的来源有了大致了解。这里有一张图，快速总结了各种数据来源。
 
-![图像](../Images/82b7cb31f046f0e8913c00b578f37a43.png)
+![图像](img/82b7cb31f046f0e8913c00b578f37a43.png)
 
 附言：在过去几个月里，我一直在参与一个名为 The Atlan Data Wiki 的社区项目——这是一个有趣、有帮助、无行话的百科全书，用于导航数据宇宙。如果你喜欢我的文章， [请查看这个 wiki](https://www.google.com/url?q=http://wiki.atlan.com&sa=D&ust=1569918282400000) ，我用类似的方法处理其他数据主题。我很想听听你的想法。
 
@@ -138,11 +138,11 @@ IBM的大数据4Vs。图片来源：[IBM Big Data & Analytics Hub](https://www.g
 
 **相关：**
 
-+   [了解你的数据：第 1 部分](/2019/09/know-data-part-1.html)
++   了解你的数据：第一部分
 
-+   [处理机器学习中数据缺乏的 5 种方法](/2019/06/5-ways-lack-data-machine-learning.html)
++   处理机器学习中数据缺乏的 5 种方法
 
-+   [了解你的数据：第 2 部分](/2019/10/know-data-part-2.html)
++   了解你的数据：第二部分
 
 ### 更多相关主题
 

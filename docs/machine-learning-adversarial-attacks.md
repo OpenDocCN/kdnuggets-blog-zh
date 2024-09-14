@@ -1,22 +1,22 @@
 # 为什么机器学习容易受到对抗性攻击以及如何解决这个问题
 
-> 原文：[https://www.kdnuggets.com/2019/06/machine-learning-adversarial-attacks.html](https://www.kdnuggets.com/2019/06/machine-learning-adversarial-attacks.html)
+> 原文：[`www.kdnuggets.com/2019/06/machine-learning-adversarial-attacks.html`](https://www.kdnuggets.com/2019/06/machine-learning-adversarial-attacks.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-AI安全辩论跟随领域内顶尖研究者及许多当今技术愿景者的脚步进行，例如支持[生命未来研究所](http://futureoflife.org/team)和[机器智能研究所](http://intelligence.org/team)的人士。通过媒体，这一对话可能看起来像是在担忧那些将消灭人类的未来机器人。
+AI 安全辩论跟随领域内顶尖研究者及许多当今技术愿景者的脚步进行，例如支持[生命未来研究所](http://futureoflife.org/team)和[机器智能研究所](http://intelligence.org/team)的人士。通过媒体，这一对话可能看起来像是在担忧那些将消灭人类的未来机器人。
 
-然而，我们在实际问题中观察到有关如何轻易失去对我们AI创作的掌控的真实迹象，这些问题与设计不良的机器学习系统的不良行为相关。潜在的“AI事故”之一就是[对抗性技术](https://www.kdnuggets.com/2018/10/adversarial-examples-explained.html)的案例。这种方法以一个训练好的分类模型为例，该模型在识别输入时表现良好，与人类的分类方式相比。但随后出现一个新输入，其中包含微妙但恶意伪造的数据，这导致模型表现非常糟糕。令人担忧的是，这种糟糕的行为不是模型的*统计性能*下降。使用这样的操控输入，模型可能仍以非常高的信心分类对象，但分类结果*不再是*人类所预期的。
+然而，我们在实际问题中观察到有关如何轻易失去对我们 AI 创作的掌控的真实迹象，这些问题与设计不良的机器学习系统的不良行为相关。潜在的“AI 事故”之一就是[对抗性技术](https://www.kdnuggets.com/2018/10/adversarial-examples-explained.html)的案例。这种方法以一个训练好的分类模型为例，该模型在识别输入时表现良好，与人类的分类方式相比。但随后出现一个新输入，其中包含微妙但恶意伪造的数据，这导致模型表现非常糟糕。令人担忧的是，这种糟糕的行为不是模型的*统计性能*下降。使用这样的操控输入，模型可能仍以非常高的信心分类对象，但分类结果*不再是*人类所预期的。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@ AI安全辩论跟随领域内顶尖研究者及许多当今技术愿景者的脚
 
 不要急于行动。
 
-2017年，宾州州立大学的研究人员，包括 Nicolas Papernot 和 Goodfellow，[展示了](https://arxiv.org/pdf/1602.02697.pdf)远程对抗攻击可以对被视为“黑箱”的机器学习算法进行——换句话说，无需访问模型的训练数据或代码。这种方法使用了[可转移性](https://arxiv.org/pdf/1605.07277.pdf)的概念，即训练来误导一个模型的样本可能会误导另一个模型（即被攻击的目标模型）。
+2017 年，宾州州立大学的研究人员，包括 Nicolas Papernot 和 Goodfellow，[展示了](https://arxiv.org/pdf/1602.02697.pdf)远程对抗攻击可以对被视为“黑箱”的机器学习算法进行——换句话说，无需访问模型的训练数据或代码。这种方法使用了[可转移性](https://arxiv.org/pdf/1605.07277.pdf)的概念，即训练来误导一个模型的样本可能会误导另一个模型（即被攻击的目标模型）。
 
 Papernot 的团队创建了局部图像分类器模型，并训练它们以查看修改样本如何导致错误分类。然后，他们将这些对抗样本（以人眼不可察觉的方式修改的停车标志图像）发送给通过亚马逊和谷歌的 API 访问的远程深度神经网络。这些棘手的图像也欺骗了远程模型。他们甚至报告了包括对抗性防御策略的误导性远程托管模型。
 
@@ -36,13 +36,13 @@ Papernot 的团队创建了局部图像分类器模型，并训练它们以查�
 
 最近，麻省理工学院的一组研究人员发布了[一项研究](https://arxiv.org/pdf/1905.02175.pdf)，假设先前对机器学习易受对抗性技术影响的观察是标准数据集中固有模式的直接结果。虽然这些模式对人类来说难以理解，但它们作为自然特征存在，主要被监督学习算法使用。
 
-在这篇论文中，Andrew Ilyas等人描述了数据集中存在的稳健特征和非稳健特征的概念，这些特征*都*为分类提供了有用的信号。回顾起来，当我们记得分类器通常只被训练以最大化准确性时，这可能并不令人惊讶。模型使用哪些特征来获得最高准确性——由人类监督标记确定——留给模型用蛮力来处理。对我们来说像人鼻的输入图像，在算法的角度下，只是与下巴的另一个0和1的组合。
+在这篇论文中，Andrew Ilyas 等人描述了数据集中存在的稳健特征和非稳健特征的概念，这些特征*都*为分类提供了有用的信号。回顾起来，当我们记得分类器通常只被训练以最大化准确性时，这可能并不令人惊讶。模型使用哪些特征来获得最高准确性——由人类监督标记确定——留给模型用蛮力来处理。对我们来说像人鼻的输入图像，在算法的角度下，只是与下巴的另一个 0 和 1 的组合。
 
-为了展示这些人类可感知和不可感知的特征如何支持准确分类，麻省理工学院团队构建了一个框架，将特征分离到不同的训练数据集中。两者都经过训练，并能按预期进行分类。如图1所示，模型被发现以*有意义的方式*使用非稳健特征，就像使用稳健特征一样，尽管这些特征对我们来说看起来像是乱码信息。
+为了展示这些人类可感知和不可感知的特征如何支持准确分类，麻省理工学院团队构建了一个框架，将特征分离到不同的训练数据集中。两者都经过训练，并能按预期进行分类。如图 1 所示，模型被发现以*有意义的方式*使用非稳健特征，就像使用稳健特征一样，尽管这些特征对我们来说看起来像是乱码信息。
 
-![](../Images/e3a143e102045c2966404c87fe678a73.png)
+![](img/e3a143e102045c2966404c87fe678a73.png)
 
-**图1.** 一只青蛙的图像被分解为“稳健”的特征，用于训练分类器准确识别为青蛙，以及“非稳健”的特征，这些特征也用于训练分类器准确识别青蛙，但当输入中包含对抗性扰动时则不适用。模型使用的这些非稳健特征是*固有的*图像特征，并非攻击者操控或插入的 [来自 [Ilyas et al.](https://arxiv.org/pdf/1905.02175.pdf) 的许可]。
+**图 1.** 一只青蛙的图像被分解为“稳健”的特征，用于训练分类器准确识别为青蛙，以及“非稳健”的特征，这些特征也用于训练分类器准确识别青蛙，但当输入中包含对抗性扰动时则不适用。模型使用的这些非稳健特征是*固有的*图像特征，并非攻击者操控或插入的 [来自 [Ilyas et al.](https://arxiv.org/pdf/1905.02175.pdf) 的许可]。
 
 让我们再次明确这一点。
 
@@ -50,7 +50,7 @@ Papernot 的团队创建了局部图像分类器模型，并训练它们以查�
 
 换句话说，算法可能会发现那些我们作为人类期望看到的有用分类模式。然而，*其他*模式也在被识别，它们对我们来说毫无意义——但它们仍然是支持算法进行良好分类的模式。
 
-麻省理工学院的Dimitris Tsipras对他们的结果感到兴奋，称“它有力地证明了模型确实可以学习不可感知的良好泛化特征。”
+麻省理工学院的 Dimitris Tsipras 对他们的结果感到兴奋，称“它有力地证明了模型确实可以学习不可感知的良好泛化特征。”
 
 虽然这些模式对我们看起来毫无意义，但机器学习分类器正在发现并利用它们。
 
@@ -80,33 +80,33 @@ Papernot 的团队创建了局部图像分类器模型，并训练它们以查�
 
 本文引用的资源：
 
-1.  Amodei, D. 等. “AI 安全中的具体问题。” [arXiv.org](https://arxiv.org/abs/1606.06565), 2016年6月。
+1.  Amodei, D. 等. “AI 安全中的具体问题。” [arXiv.org](https://arxiv.org/abs/1606.06565), 2016 年 6 月。
 
-1.  Tanay, T. “对抗样本的解释。” [KDnuggets](https://www.kdnuggets.com/2018/10/adversarial-examples-explained.html)，2018年10月。
+1.  Tanay, T. “对抗样本的解释。” [KDnuggets](https://www.kdnuggets.com/2018/10/adversarial-examples-explained.html)，2018 年 10 月。
 
-1.  Jain, A. “用对抗攻击破解神经网络。” [KDnuggets](https://www.kdnuggets.com/2019/03/breaking-neural-networks-adversarial-attacks.html)，2019年3月。
+1.  Jain, A. “用对抗攻击破解神经网络。” [KDnuggets](https://www.kdnuggets.com/2019/03/breaking-neural-networks-adversarial-attacks.html)，2019 年 3 月。
 
-1.  Papernot, N. 等. “针对机器学习的实际黑箱攻击。” [arXiv.org](https://arxiv.org/abs/1602.02697)，2016年2月。
+1.  Papernot, N. 等. “针对机器学习的实际黑箱攻击。” [arXiv.org](https://arxiv.org/abs/1602.02697)，2016 年 2 月。
 
-1.  Papernot, N. 等. “机器学习中的可迁移性：从现象到使用对抗样本的黑箱攻击。” [arXiv.org](https://arxiv.org/abs/1605.07277)，2016年5月。
+1.  Papernot, N. 等. “机器学习中的可迁移性：从现象到使用对抗样本的黑箱攻击。” [arXiv.org](https://arxiv.org/abs/1605.07277)，2016 年 5 月。
 
-1.  Jost, Z. “机器学习安全性。” [KDnuggets](https://www.kdnuggets.com/2019/01/machine-learning-security.html)，2019年1月。
+1.  Jost, Z. “机器学习安全性。” [KDnuggets](https://www.kdnuggets.com/2019/01/machine-learning-security.html)，2019 年 1 月。
 
-1.  Ilyas, A. 等. “对抗样本不是错误，它们是特性。” [arXiv.org](https://arxiv.org/abs/1905.02175)，2019年5月。
+1.  Ilyas, A. 等. “对抗样本不是错误，它们是特性。” [arXiv.org](https://arxiv.org/abs/1905.02175)，2019 年 5 月。
 
 **相关：**
 
-+   [大数据的3个重大问题及其解决方法](https://www.kdnuggets.com/2019/04/3-big-problems-big-data.html)
++   [大数据的 3 个重大问题及其解决方法](https://www.kdnuggets.com/2019/04/3-big-problems-big-data.html)
 
-+   [机器学习与人类的相遇——来自HUML 2016的见解](https://www.kdnuggets.com/2017/01/machine-learning-humans-huml-2016.html)
++   [机器学习与人类的相遇——来自 HUML 2016 的见解](https://www.kdnuggets.com/2017/01/machine-learning-humans-huml-2016.html)
 
-+   [AI会议SF第2天的关键要点：AI与安全、对抗样本、创新](https://www.kdnuggets.com/2018/10/key-takeaways-aiconf-san-francisco-day2.html)
++   [AI 会议 SF 第 2 天的关键要点：AI 与安全、对抗样本、创新](https://www.kdnuggets.com/2018/10/key-takeaways-aiconf-san-francisco-day2.html)
 
 ### 更多相关话题
 
-+   [GPT-4易受提示注入攻击导致误导信息](https://www.kdnuggets.com/2023/05/gpt4-vulnerable-prompt-injection-attacks-causing-misinformation.html)
++   [GPT-4 易受提示注入攻击导致误导信息](https://www.kdnuggets.com/2023/05/gpt4-vulnerable-prompt-injection-attacks-causing-misinformation.html)
 
-+   [10个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
 +   [什么是对抗性机器学习？](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)
 

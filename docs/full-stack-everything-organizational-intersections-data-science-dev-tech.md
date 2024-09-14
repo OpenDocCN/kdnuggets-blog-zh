@@ -1,6 +1,6 @@
 # 全栈一切？数据科学、开发与技术之间的组织交集
 
-> 原文：[https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html](https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html)
+> 原文：[`www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html`](https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html)
 
 每家公司都有自己管理业务技术的术语和组织结构。这些术语可能已经演变了几十年，或者是由领导者强加以塑造部门品牌。组织结构可能符合行业规范，或可能是公司特殊需求所独有的。但所有组织的共同点是需要用共同的语言来谈论每个部门或团队的职责，并且一致努力弥合团队之间的差距。
 
@@ -10,21 +10,21 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
-[![全栈一切？数据科学、开发与技术之间的组织交集](../Images/411a78cd5eed29280530bc12723a95c0.png)](https://www.kdnuggets.com/wp-content/uploads/pugsley_full_stack_everything_organizational_intersections_data_science_dev_tech_1.png)
+![全栈一切？数据科学、开发与技术之间的组织交集](https://www.kdnuggets.com/wp-content/uploads/pugsley_full_stack_everything_organizational_intersections_data_science_dev_tech_1.png)
 
 外层职能和内层职能同样重要，但外层主要扮演支持角色，而内层职能则创建核心技术成果。每个职能都致力于招聘和培训该职能核心技能的专业人才。   而且，组与组之间的界限经常因领土争夺而有意扩大，或因忽视关系建设而意外扩大。这些交集中会出现摩擦、延误和低效。
 
 下图展示了成为创造业务价值的重要机会的共享交集。
 
-[![全栈一切？数据科学、开发与技术之间的组织交集](../Images/dc6b25931f8a958062022de0fac6784a.png)](https://www.kdnuggets.com/wp-content/uploads/pugsley_full_stack_everything_organizational_intersections_data_science_dev_tech_2.png)
+![全栈一切？数据科学、开发与技术之间的组织交集](https://www.kdnuggets.com/wp-content/uploads/pugsley_full_stack_everything_organizational_intersections_data_science_dev_tech_2.png)
 
 该图并非全面，但展示了团队如何在关键业务需求上进行合作的示例。   没有合作，这些交集区域将不会如此有效或创新。
 
@@ -46,7 +46,7 @@
 
 鼓励技术职能交汇处的合作所需的时间和精力会随着时间的推移带来回报。第一步是使用这些图示作为沟通工具，开始讨论这些边界在哪里以及如何弥合这些边界。
 
-[**斯坦·帕格斯利**](https://www.linkedin.com/in/spugsley/)是总部位于犹他州盐湖城的自由数据工程和分析顾问。他还是犹他大学埃克尔斯商学院的讲师。您可以通过[电子邮件](mailto:S.pugsley@utah.edu)联系作者。
+[**斯坦·帕格斯利**](https://www.linkedin.com/in/spugsley/)是总部位于犹他州盐湖城的自由数据工程和分析顾问。他还是犹他大学埃克尔斯商学院的讲师。您可以通过电子邮件联系作者。
 
 ### 相关话题
 

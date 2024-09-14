@@ -1,34 +1,34 @@
-# 如何合并Pandas DataFrames
+# 如何合并 Pandas DataFrames
 
-> 原文：[https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)
+> 原文：[`www.kdnuggets.com/2023/01/merge-pandas-dataframes.html`](https://www.kdnuggets.com/2023/01/merge-pandas-dataframes.html)
 
-![如何合并Pandas DataFrames](../Images/dbea643af0f687e6cc05cc962f702313.png)
+![如何合并 Pandas DataFrames](img/dbea643af0f687e6cc05cc962f702313.png)
 
 图片由[catalyststuff](https://www.freepik.com/free-vector/cute-panda-writing-book-with-pencil-cartoon-icon-illustration_12158331.htm#query=pandas&position=9&from_view=search&track=sph)在[Freepik](https://www.freepik.com/)上提供
 
-在数据处理过程中，两个或更多数据集之间的数据合并是典型的。在本博客中，我们将学习如何使用Pandas进行数据合并以及各种提升数据合并技能的技巧。让我们深入探讨数据合并技术。
+在数据处理过程中，两个或更多数据集之间的数据合并是典型的。在本博客中，我们将学习如何使用 Pandas 进行数据合并以及各种提升数据合并技能的技巧。让我们深入探讨数据合并技术。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
-# 合并Pandas DataFrame
+# 合并 Pandas DataFrame
 
-首先，我们需要导入Pandas Python包。
+首先，我们需要导入 Pandas Python 包。
 
 ```py
 import pandas as pd
 ```
 
-合并两个Pandas DataFrames需要使用Pandas包中的merge方法。这个函数会根据我们意图连接的变量或列合并两个DataFrame。让我们通过一个示例DataFrame来尝试Pandas的合并方法。
+合并两个 Pandas DataFrames 需要使用 Pandas 包中的 merge 方法。这个函数会根据我们意图连接的变量或列合并两个 DataFrame。让我们通过一个示例 DataFrame 来尝试 Pandas 的合并方法。
 
 ```py
 # Create Population DataFrame
@@ -51,34 +51,34 @@ merged_df = pd.merge(df1, df2, on='Country')
 merged_df
 ```
 
-![如何合并Pandas DataFrames](../Images/f1741d44d929df98267213fe4271d2b9.png)
+![如何合并 Pandas DataFrames](img/f1741d44d929df98267213fe4271d2b9.png)
 
 图片由作者提供
 
-在上面的示例中，我们创建了两个具有稍微不同列的DataFrame，并在‘Country’列上合并它们。结果是两个DataFrame中具有相似值的行被合并在一起。我们通过一行代码成功合并了两个不同的DataFrame。
+在上面的示例中，我们创建了两个具有稍微不同列的 DataFrame，并在‘Country’列上合并它们。结果是两个 DataFrame 中具有相似值的行被合并在一起。我们通过一行代码成功合并了两个不同的 DataFrame。
 
 # 应用可选参数
 
-Pandas的.merge方法有各种可选参数可以利用。让我们看一下其中一些有用的参数。
+Pandas 的.merge 方法有各种可选参数可以利用。让我们看一下其中一些有用的参数。
 
 ## 重命名合并的同名列
 
-在上面的示例中，我们可以看到一个名为‘Location’的列，在合并后该列带有后缀_x和_y。如果我们想在合并时更改列名，可以使用以下代码来实现。
+在上面的示例中，我们可以看到一个名为‘Location’的列，在合并后该列带有后缀 _x 和 _y。如果我们想在合并时更改列名，可以使用以下代码来实现。
 
 ```py
 merged_df = pd.merge(df1, df2, on='Country', suffixes = ('_Population', '_Income'))
 merged_df
 ```
 
-![如何合并Pandas DataFrames](../Images/4d0219fe6d346fc5b1b417eff64bd0cc.png)
+![如何合并 Pandas DataFrames](img/4d0219fe6d346fc5b1b417eff64bd0cc.png)
 
 图片由作者提供
 
-在这段代码中，我们传递了带有两个值的元组作为suffixes参数；第一个和第二个DataFrame的名称。在我的示例中，我们将第一个DataFrame命名为Population，将第二个命名为Income。
+在这段代码中，我们传递了带有两个值的元组作为 suffixes 参数；第一个和第二个 DataFrame 的名称。在我的示例中，我们将第一个 DataFrame 命名为 Population，将第二个命名为 Income。
 
 ## 基于不同列名进行合并
 
-如果我们有两个DataFrame，其列名不同但指代相同的定义，我们仍然可以合并它们，但需要指定要合并的DataFrame和列。
+如果我们有两个 DataFrame，其列名不同但指代相同的定义，我们仍然可以合并它们，但需要指定要合并的 DataFrame 和列。
 
 ```py
 df2 = pd.DataFrame({
@@ -92,7 +92,7 @@ merged_df = pd.merge(df1, df2, left_on='Country', right_on = 'Index')
 merged_df
 ```
 
-![如何合并Pandas DataFrames](../Images/9d185ad01291d5e02c3374878f87ba37.png)
+![如何合并 Pandas DataFrames](img/9d185ad01291d5e02c3374878f87ba37.png)
 
 图片由作者提供
 
@@ -111,7 +111,7 @@ merged_df = pd.merge(df1, df2, on='Country', how = 'left')
 merged_df
 ```
 
-![如何合并 Pandas DataFrame](../Images/f1741d44d929df98267213fe4271d2b9.png)
+![如何合并 Pandas DataFrame](img/f1741d44d929df98267213fe4271d2b9.png)
 
 图片由作者提供
 
@@ -124,7 +124,7 @@ merged_df = pd.merge(df1, df2, on='Country', how = 'right')
 merged_df
 ```
 
-![如何合并 Pandas DataFrame](../Images/5fcec12f1fa210c7e757f0a4d1211573.png)
+![如何合并 Pandas DataFrame](img/5fcec12f1fa210c7e757f0a4d1211573.png)
 
 图片由作者提供
 
@@ -132,7 +132,7 @@ merged_df
 
 通过使用两个 DataFrame 键的并集来包含两个 DataFrame 中的所有行。
 
-![如何合并 Pandas DataFrame](../Images/d86c365021c730d12231cb1559abb141.png)
+![如何合并 Pandas DataFrame](img/d86c365021c730d12231cb1559abb141.png)
 
 图片由作者提供
 
@@ -145,7 +145,7 @@ merged_df = pd.merge(df1, df2, how = 'cross')
 merged_df
 ```
 
-![如何合并 Pandas DataFrame](../Images/d883e108c322609119312c6beabda5db.png)
+![如何合并 Pandas DataFrame](img/d883e108c322609119312c6beabda5db.png)
 
 图片由作者提供
 
@@ -158,7 +158,7 @@ merged_df = pd.merge(df1, df2, on = ['Country', 'Location'])
 merged_df
 ```
 
-![如何合并 Pandas DataFrame](../Images/f1e87a18556f05fa453659433aace177.png)
+![如何合并 Pandas DataFrame](img/f1e87a18556f05fa453659433aace177.png)
 
 图片由作者提供
 

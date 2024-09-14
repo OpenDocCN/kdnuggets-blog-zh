@@ -1,8 +1,8 @@
 # 软件开发人员与软件工程师
 
-> 原文：[https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)
+> 原文：[`www.kdnuggets.com/2022/05/software-developer-software-engineer.html`](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)
 
-![软件开发人员与软件工程师](../Images/ef824802cce02da378b91e5a7496814d.png)
+![软件开发人员与软件工程师](img/ef824802cce02da378b91e5a7496814d.png)
 
 [Nubelson Fernandes](https://unsplash.com/@nublson) 通过 Unsplash
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
-随着SaaS（软件即服务）、大数据等行业的不断崛起，软件开发人员和工程师的职业需求也随之增加。
+随着 SaaS（软件即服务）、大数据等行业的不断崛起，软件开发人员和工程师的职业需求也随之增加。
 
 为了理解这两者的区别，让我们从定义开始。
 
@@ -68,7 +68,7 @@
 
 +   设计操作系统的代码
 
-+   精通测试自动化工具，如Gherkin、Cucumber或Ansible
++   精通测试自动化工具，如 Gherkin、Cucumber 或 Ansible
 
 +   构建可扩展的部署管道
 
@@ -80,9 +80,9 @@
 
 无论是软件开发人员还是软件工程师都需求量很大，因此他们的薪酬也非常丰厚。
 
-约21%的技术职位是[软件开发人员](https://www.cv-library.co.uk/career-advice/development/what-most-demand-developer-skills/)，他们的需求超过供应，[软件工程师](https://www.glassdoor.co.uk/List/Best-Jobs-in-America-LST_KQ0,20.htm)在2022年被评为美国第8大最佳职位。
+约 21%的技术职位是[软件开发人员](https://www.cv-library.co.uk/career-advice/development/what-most-demand-developer-skills/)，他们的需求超过供应，[软件工程师](https://www.glassdoor.co.uk/List/Best-Jobs-in-America-LST_KQ0,20.htm)在 2022 年被评为美国第 8 大最佳职位。
 
-根据[payscale](https://www.payscale.com/)，[软件开发人员](https://www.payscale.com/research/US/Job=Software_Developer/Salary)的平均工资为73,441美元，而[软件工程师的平均工资为88,540美元](https://www.payscale.com/research/US/Job=Software_Engineer/Salary)
+根据[payscale](https://www.payscale.com/)，[软件开发人员](https://www.payscale.com/research/US/Job=Software_Developer/Salary)的平均工资为 73,441 美元，而[软件工程师的平均工资为 88,540 美元](https://www.payscale.com/research/US/Job=Software_Engineer/Salary)
 
 正如我们所见，软件工程师的收入高于软件开发人员，他们处理的任务更多。软件工程师能够做软件开发人员的工作，但只有少数或没有多少软件开发人员可以被视为软件工程师。
 
@@ -138,13 +138,13 @@
 
 如果你想阅读更多帮助你做出决定的内容，可以阅读以下内容：
 
-+   [哈佛最受欢迎的编程入门课程免费提供](/2022/03/popular-intro-programming-course-harvard-free.html) 由KDNuggets发布
++   哈佛最受欢迎的编程入门课程免费提供 由 KDNuggets 发布
 
-+   [低代码：开发者仍然需要吗？](/2022/04/low-code-developers-still-needed.html) 由KDNuggets发布
++   低代码：开发者仍然需要吗？ 由 KDNuggets 发布
 
-+   [选择数据领域的正确工作：5个迹象来判断工程文化](/2021/10/choose-right-job-data-signs-engineering-culture.html) 由KDNuggets发布
++   选择数据领域的正确工作：5 个迹象来判断工程文化 由 KDNuggets 发布
 
-+   [顶级机器学习软件工具供开发者使用](/2019/11/top-machine-learning-software-developers.html) 由KDNuggets发布
++   顶级机器学习软件工具供开发者使用 由 KDNuggets 发布
 
 **[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由技术作家。她特别关注提供数据科学职业建议或教程以及围绕数据科学的理论知识。她还希望探索人工智能如何/可以有利于人类寿命的不同方式。她是一个热心的学习者，寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 

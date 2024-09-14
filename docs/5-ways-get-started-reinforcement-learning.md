@@ -1,8 +1,8 @@
-# 强化学习入门的5种方法
+# 强化学习入门的 5 种方法
 
-> 原文：[https://www.kdnuggets.com/2017/09/5-ways-get-started-reinforcement-learning.html](https://www.kdnuggets.com/2017/09/5-ways-get-started-reinforcement-learning.html)
+> 原文：[`www.kdnuggets.com/2017/09/5-ways-get-started-reinforcement-learning.html`](https://www.kdnuggets.com/2017/09/5-ways-get-started-reinforcement-learning.html)
 
-![](../Images/b1f1892f4476b0d4d7ff79f1901c2b3a.png)
+![](img/b1f1892f4476b0d4d7ff79f1901c2b3a.png)
 
 艺术作品由 [Robert Aguilera](http://robertaguileradesign.com/)
 
@@ -18,19 +18,19 @@
 
 这就是强化学习的作用所在。其概念非常简单，就像我们的进化过程一样：环境奖励代理正确的行为，并惩罚其错误的行为。主要的挑战是开发出学习数百万种可能行为的能力。
 
-### Q学习与深度Q学习
+### Q 学习与深度 Q 学习
 
-Q学习是一种广泛使用的强化学习算法。在不涉及详细数学的情况下，某个行动的质量由代理所在的状态决定。代理通常执行能获得最大奖励的行动。详细的数学内容可以在[**这里**](https://en.wikipedia.org/wiki/Q-learning)找到。
+Q 学习是一种广泛使用的强化学习算法。在不涉及详细数学的情况下，某个行动的质量由代理所在的状态决定。代理通常执行能获得最大奖励的行动。详细的数学内容可以在[**这里**](https://en.wikipedia.org/wiki/Q-learning)找到。
 
-在这个算法中，代理根据环境给予的奖励量来学习每个行动（行动也称为策略）的质量（Q值）。每个环境状态的值以及Q值通常存储在表格中。随着代理与环境的交互，Q值会从随机值更新为实际有助于最大化奖励的值。
+在这个算法中，代理根据环境给予的奖励量来学习每个行动（行动也称为策略）的质量（Q 值）。每个环境状态的值以及 Q 值通常存储在表格中。随着代理与环境的交互，Q 值会从随机值更新为实际有助于最大化奖励的值。
 
-#### 深度Q学习
+#### 深度 Q 学习
 
-使用Q学习和表格的问题在于其扩展性较差。如果状态数量过多，表格将无法存储在内存中。这时可以应用深度Q学习。深度学习基本上是一种通用的逼近机器，它可以理解并生成抽象表示。深度学习可以用来逼近Q值，也可以通过梯度下降轻松学习最优Q值。
+使用 Q 学习和表格的问题在于其扩展性较差。如果状态数量过多，表格将无法存储在内存中。这时可以应用深度 Q 学习。深度学习基本上是一种通用的逼近机器，它可以理解并生成抽象表示。深度学习可以用来逼近 Q 值，也可以通过梯度下降轻松学习最优 Q 值。
 
 > *趣味事实：*
 > 
-> 谷歌对深度Q学习的一些元素拥有专利：[US20150100530](https://www.google.com/patents/US20150100530)
+> 谷歌对深度 Q 学习的一些元素拥有专利：[US20150100530](https://www.google.com/patents/US20150100530)
 
 ### 探索与利用
 
@@ -46,7 +46,7 @@ Q学习是一种广泛使用的强化学习算法。在不涉及详细数学的�
 
 这就是深度 Q 学习的整个框架。注意到*γ*。这表示折扣奖励。它是一个超参数，用于控制未来奖励的权重。符号***´*** 表示下一个。例如，s´ 表示下一个状态。
 
-![](../Images/bec61ce4815420ff287ea8593a29a62e.png)
+![](img/bec61ce4815420ff287ea8593a29a62e.png)
 
 **图 1.0** 深度 Q 学习训练框架。致谢：[Robert Aguilera](http://robertaguileradesign.com/)
 
@@ -56,7 +56,7 @@ Q学习是一种广泛使用的强化学习算法。在不涉及详细数学的�
 
 这样做允许代理执行复杂的动作，并基本上允许代理‘规划’事务。[**层次化学习**](https://arxiv.org/pdf/1604.06057.pdf) 允许这种抽象学习。
 
-![](../Images/df0237426aeb85f512c80ad4af86a8de.png)
+![](img/df0237426aeb85f512c80ad4af86a8de.png)
 
 **图 2.0 层次化深度 Q 学习**
 
@@ -78,7 +78,7 @@ Q学习是一种广泛使用的强化学习算法。在不涉及详细数学的�
 
 1.  [**使用单个 python 脚本实现深度 Q 学习。**](https://gist.github.com/EderSantana/c7222daa328f0e885093#file-qlearn-py-L157) 也许是最简单的深度 Q 学习实现。这非常易读，是一个很好的起点。
 
-![](../Images/3373f1c2c0122aa4b193371fc9365e4d.png)
+![](img/3373f1c2c0122aa4b193371fc9365e4d.png)
 
 **图 3.0 深度 Q 学习实际操作。** Python 脚本在第 5 点的输出
 
@@ -92,21 +92,21 @@ Q学习是一种广泛使用的强化学习算法。在不涉及详细数学的�
 
 **相关内容：**
 
-+   [从自主学习到智能学习：强化学习基础](/2017/08/transforming-autonomous-smart-reinforcement-learning-basics.html)
++   从自主学习到智能学习：强化学习基础
 
-+   [从零到一的深度学习：5 个令人惊叹的演示和代码，适合初学者](/2017/06/deep-learning-demos-code-beginners.html)
++   从零到一的深度学习：5 个令人惊叹的演示和代码，适合初学者
 
-+   [强化学习的下一个挑战](/2017/03/next-challenges-reinforcement-learning.html)
++   强化学习的下一个挑战
 
 * * *
 
 ## 我们的 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 

@@ -1,20 +1,20 @@
 # 数据科学的定性研究方法？
 
-> 原文：[https://www.kdnuggets.com/2017/05/qualitative-research-methods-data-science.html](https://www.kdnuggets.com/2017/05/qualitative-research-methods-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/05/qualitative-research-methods-data-science.html`](https://www.kdnuggets.com/2017/05/qualitative-research-methods-data-science.html)
 
-![定性研究标题](../Images/41f2080ccb51228debe91a5f56b85449.png)
+![定性研究标题](img/41f2080ccb51228debe91a5f56b85449.png)
 
-虽然我接受过定性方法的培训，但我是一名量化专家，已经从事这个领域超过30年。然而，我在整个职业生涯中都是定性研究的*用户*。除非我们的数据科学领域与人类完全无关，否则这对于量化研究人员来说是非常相关的。我们所做的工作越接近市场研究——用户体验（UX）和客户关系管理（CRM）就是两个例子——它就变得越有用。
+虽然我接受过定性方法的培训，但我是一名量化专家，已经从事这个领域超过 30 年。然而，我在整个职业生涯中都是定性研究的*用户*。除非我们的数据科学领域与人类完全无关，否则这对于量化研究人员来说是非常相关的。我们所做的工作越接近市场研究——用户体验（UX）和客户关系管理（CRM）就是两个例子——它就变得越有用。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -34,11 +34,11 @@
 
 我个人的观点是传统的：一般来说，定性研究应该仅作为探索工具使用，结论和影响应该比定量研究更为谨慎。然而，即使在这种限制下，它在帮助设计和解读定量研究以及发现定量方法无法揭示的洞察方面也可以是无价的。
 
-虽然我不是定性研究专家，但我的许多联系人和商业伙伴是。其中之一是[大卫·麦考汉](https://www.linkedin.com/in/davidmccaughan/)，他是我们音频播客系列*MR现实*的共同主持人。“MR”是市场研究的缩写，戴夫和我与特别嘉宾讨论了与市场研究相关的广泛话题。到目前为止，我们已经做了二十多个播客，这里是专门讨论定性研究的播客链接：
+虽然我不是定性研究专家，但我的许多联系人和商业伙伴是。其中之一是[大卫·麦考汉](https://www.linkedin.com/in/davidmccaughan/)，他是我们音频播客系列*MR 现实*的共同主持人。“MR”是市场研究的缩写，戴夫和我与特别嘉宾讨论了与市场研究相关的广泛话题。到目前为止，我们已经做了二十多个播客，这里是专门讨论定性研究的播客链接：
 
 +   ["符号学：定性研究中的问题儿童"](http://zoom.us/recording/play/VdKg0Jxirv8AoEWkP2CowEThCnFNPAau9yeHH1sxw3cSgE63_amBOxGTSC1GTvbF)（苏·贝尔，苏珊·贝尔研究）
 
-+   ["社交媒体：承诺、挑战与未来"](http://zoom.us/recording/play/qGyPn9sHhHZH_08i-FzPjfLQe-Ya15YDE_erul46rXagdGYdujMkh8Bm_YHWb4q_)（拉乌尔·库布勒教授，Ozyegin大学）
++   ["社交媒体：承诺、挑战与未来"](http://zoom.us/recording/play/qGyPn9sHhHZH_08i-FzPjfLQe-Ya15YDE_erul46rXagdGYdujMkh8Bm_YHWb4q_)（拉乌尔·库布勒教授，Ozyegin 大学）
 
 +   ["如何选择合适的在线定性方法？"](http://zoom.us/recording/play/pV2H0dKbbZaBdW5lmfkkq45yi9gk93DyJd7fHKmIW7s0Wy2JiW62Nnr6W-4e9Jvc)（詹妮弗·戴尔，InsideHeads）
 
@@ -76,11 +76,11 @@
 
 **相关：**
 
-+   [回归分析：入门](/2017/02/regression-analysis-primer.html)
++   回归分析：入门
 
-+   [时间序列分析：入门](/2017/01/time-series-analysis-primer.html)
++   时间序列分析：入门
 
-+   [文本分析：入门](/2017/03/text-analytics-primer.html)
++   文本分析：入门
 
 ### 更多相关主题
 

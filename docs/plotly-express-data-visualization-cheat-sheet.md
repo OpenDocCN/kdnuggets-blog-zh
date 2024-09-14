@@ -1,6 +1,6 @@
 # Plotly Express 数据可视化备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html](https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html`](https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html)
 
 # 展现自我
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 [](https://www.kdnuggets.com/publications/sheets/Plotly_Express_for_Data_Visualization_Cheat_Sheet_KDnuggets.pdf)
 
-[![Plotly Express 数据可视化备忘单](../Images/7874782c3b4a9ebc4fad5c2988805ca0.png)](https://www.kdnuggets.com/publications/sheets/Plotly_Express_for_Data_Visualization_Cheat_Sheet_KDnuggets.pdf)
+![Plotly Express 数据可视化备忘单](https://www.kdnuggets.com/publications/sheets/Plotly_Express_for_Data_Visualization_Cheat_Sheet_KDnuggets.pdf)
 
 > Plotly Express 是一个基于 Plotly 的高级数据可视化库，Plotly 是一个用于创建交互式可视化的低级库。它提供了一个简单且富有表现力的 API，用于创建各种互动图表。
 
@@ -44,20 +44,20 @@
 
 最终，你将获得一些图表自定义的经验，包括调整标记和布局。
 
-不要继续使用那些单调乏味的可视化方式来分享你的发现。开始使用Plotly Express，并将备忘单随时放在手边，以便在学习过程中参考。
+不要继续使用那些单调乏味的可视化方式来分享你的发现。开始使用 Plotly Express，并将备忘单随时放在手边，以便在学习过程中参考。
 
 [立即查看](https://www.kdnuggets.com/publications/sheets/Plotly_Express_for_Data_Visualization_Cheat_Sheet_KDnuggets.pdf)，并且请随时回来查看更多内容。
 
 ### 更多相关内容
 
-+   [KDnuggets新闻，7月5日：一个糟糕的数据科学项目 • 10个AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
 
-+   [使用Python进行数据清理备忘单](https://www.kdnuggets.com/2023/02/data-cleaning-python-cheat-sheet.html)
++   [使用 Python 进行数据清理备忘单](https://www.kdnuggets.com/2023/02/data-cleaning-python-cheat-sheet.html)
 
-+   [Docker数据科学备忘单](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)
++   [Docker 数据科学备忘单](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)
 
-+   [ChatGPT数据科学备忘单](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
++   [ChatGPT 数据科学备忘单](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
 
-+   [GitHub CLI数据科学备忘单](https://www.kdnuggets.com/2023/03/github-cli-data-science-cheat-sheet.html)
++   [GitHub CLI 数据科学备忘单](https://www.kdnuggets.com/2023/03/github-cli-data-science-cheat-sheet.html)
 
-+   [Bard数据科学备忘单](https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html)
++   [Bard 数据科学备忘单](https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html)

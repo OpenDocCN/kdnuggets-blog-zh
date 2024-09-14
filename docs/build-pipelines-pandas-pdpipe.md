@@ -1,10 +1,10 @@
 # 使用 pdpipe 构建 Pandas 管道
 
-> 原文：[https://www.kdnuggets.com/2019/12/build-pipelines-pandas-pdpipe.html](https://www.kdnuggets.com/2019/12/build-pipelines-pandas-pdpipe.html)
+> 原文：[`www.kdnuggets.com/2019/12/build-pipelines-pandas-pdpipe.html`](https://www.kdnuggets.com/2019/12/build-pipelines-pandas-pdpipe.html)
 
-[评论](#comments)
+评论
 
-![](../Images/35dc4b78af29432b47da1a6c94187323.png)
+![](img/35dc4b78af29432b47da1a6c94187323.png)
 
 ### 引言
 
@@ -20,7 +20,7 @@ Pandas 是 Python 生态系统中一个了不起的数据分析和机器学习�
 
 以下是一篇关于在机器学习工作流程中使用管道的精彩文章。
 
-[**使用 Scikit-learn Pipelines 管理机器学习工作流程 第1部分：温和入门**](https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html?source=post_page-----cade6128cd31----------------------)
+[**使用 Scikit-learn Pipelines 管理机器学习工作流程 第一部分：温和入门**](https://www.kdnuggets.com/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html?source=post_page-----cade6128cd31----------------------)
 
 你对 Scikit-learn Pipelines 熟悉吗？它们是管理机器学习的极简而非常有用的工具...
 
@@ -36,21 +36,21 @@ Pandas 还提供了一个`**.pipe**`方法，可以用于类似的目的与用�
 
 为了演示，我们将使用一个[美国住房价格数据集](https://www.kaggle.com/vedavyasv/usa-housing)（从 Kaggle 下载）。我们可以在 Pandas 中加载数据集，并显示其摘要统计信息如下，
 
-![](../Images/fec6e833a0de5a47dadd841113509ca2.png)
+![](img/fec6e833a0de5a47dadd841113509ca2.png)
 
 然而，数据集中也有一个包含文本数据的“Address”字段。
 
-![](../Images/82af45ead8d94494050e8834814a9587.png)
+![](img/82af45ead8d94494050e8834814a9587.png)
 
 ### 添加大小限定符列
 
 为了演示，我们向数据集添加了一列来标示房子的大小，代码如下，
 
-![](../Images/bec265b90a72104255320186bb0880b7.png)
+![](img/bec265b90a72104255320186bb0880b7.png)
 
 数据集在处理后如下所示，
 
-![](../Images/0600cabbbf97f788eecefe6f6485a709.png)
+![](img/0600cabbbf97f788eecefe6f6485a709.png)
 
 ### 最简单的管道 — 一个操作
 
@@ -69,7 +69,7 @@ df2 = drop_age(df)
 
 结果 DataFrame，如预期的那样，如下所示，
 
-![](../Images/98a36d37e0343974e7ee173153763177.png)
+![](img/98a36d37e0343974e7ee173153763177.png)
 
 ### 通过添加来链式链接管道的各个阶段
 
@@ -87,7 +87,7 @@ df3 = pipeline(df)
 
 结果 DataFrame 如下所示。注意由一热编码过程创建的附加指示器列 `House_size_Medium` 和 `House_size_Small`。
 
-![](../Images/f28f16ec5fc6c724925932d3fa92e28b.png)
+![](img/f28f16ec5fc6c724925932d3fa92e28b.png)
 
 ### 根据其值删除某些行
 
@@ -107,7 +107,7 @@ pipeline+= pdp.ColDrop('Price_tag')
 
 第一种方法通过应用用户定义的函数 `price_tag()`，根据 `Price` 列中的值标记行，
 
-![](../Images/160d29fd4df1f23cf5a9212239a4768f.png)
+![](img/160d29fd4df1f23cf5a9212239a4768f.png)
 
 第二种方法查找 `Price_tag` 列中的字符串 `drop`，并删除匹配的行。最后，第三种方法删除 `Price_tag` 列，清理 DataFrame。毕竟，这个 `Price_tag` 列只是暂时需要的，用于标记特定的行，并在完成其用途后应被删除。
 
@@ -155,7 +155,7 @@ df6 = pipeline_scale(df5)
 
 哇！我们得到了缩放后的数据框，
 
-![](../Images/9c395fb9f3a24f89c8681e0bdd1c6a89.png)
+![](img/9c395fb9f3a24f89c8681e0bdd1c6a89.png)
 
 ### NLTK 的分词器
 
@@ -175,53 +175,53 @@ df7 = pipeline_state_extract(df6)
 
 结果数据框如下所示，
 
-![](../Images/423cabcab7c4c503e70de4a239380d78.png)
+![](img/423cabcab7c4c503e70de4a239380d78.png)
 
 ### 总结
 
 如果我们总结一下演示中展示的所有操作，它看起来像以下内容，
 
-![](../Images/dc42570defa14208de7f4f03da36a377.png)
+![](img/dc42570defa14208de7f4f03da36a377.png)
 
 所有这些操作可能会在类似类型的数据集上频繁使用，拥有一组简单的顺序代码块来执行数据集预处理操作将会非常棒，以便在数据集准备好进行下一阶段建模之前进行处理。
 
-管道化是实现那一组统一的顺序代码块的关键。Pandas是机器学习/数据科学团队中用于数据预处理任务的最广泛使用的Python库，[**pdpipe**](https://github.com/shaypal5/pdpipe)提供了一种简单而强大的方式来构建管道，使用类似Pandas的操作，这些操作可以直接应用于Pandas DataFrame对象。
+管道化是实现那一组统一的顺序代码块的关键。Pandas 是机器学习/数据科学团队中用于数据预处理任务的最广泛使用的 Python 库，[**pdpipe**](https://github.com/shaypal5/pdpipe)提供了一种简单而强大的方式来构建管道，使用类似 Pandas 的操作，这些操作可以直接应用于 Pandas DataFrame 对象。
 
 [自行探索此库](https://github.com/shaypal5/pdpipe)并为你的特定数据科学任务构建更强大的管道。
 
-如果你有任何问题或想法分享，请通过[**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)联系作者。此外，你还可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，了解有关机器学习和数据科学的代码、想法和资源。如果你像我一样，对AI/机器学习/数据科学充满热情，请随时[在LinkedIn上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[在Twitter上关注我](https://twitter.com/tirthajyotiS)。
+如果你有任何问题或想法分享，请通过[**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)联系作者。此外，你还可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，了解有关机器学习和数据科学的代码、想法和资源。如果你像我一样，对 AI/机器学习/数据科学充满热情，请随时[在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 
 [原文](https://towardsdatascience.com/https-medium-com-tirthajyoti-build-pipelines-with-pandas-using-pdpipe-cade6128cd31)。已获得许可转载。
 
 **相关：**
 
-+   [如何用一行代码将Pandas加速4倍](/2019/11/speed-up-pandas-4x.html)
++   如何用一行代码将 Pandas 加速 4 倍
 
-+   [最新Scikit-learn版本中的5个重要新特性](/2019/12/5-features-scikit-learn-release-highlights.html)
++   最新 Scikit-learn 版本中的 5 个重要新特性
 
-+   [数据管道、Luigi、Airflow：你需要了解的一切](/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
++   数据管道、Luigi、Airflow：你需要了解的一切
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关话题
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [使用管道编写清晰的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写清晰的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

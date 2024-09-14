@@ -1,8 +1,8 @@
 # 机器学习和数据科学的决策树指南
 
-> 原文：[https://www.kdnuggets.com/2018/12/guide-decision-trees-machine-learning-data-science.html](https://www.kdnuggets.com/2018/12/guide-decision-trees-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/12/guide-decision-trees-machine-learning-data-science.html`](https://www.kdnuggets.com/2018/12/guide-decision-trees-machine-learning-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[George Seif](https://towardsdatascience.com/@george.seif94)提供，人工智能/机器学习工程师**
 
@@ -12,23 +12,23 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-![](../Images/247d774fc1b4a93bcba12afc67523f20.png)
+![](img/247d774fc1b4a93bcba12afc67523f20.png)
 
 ### 现实生活中的决策树
 
 你可能在自己的生活中使用过决策树来做出决策。例如，关于你这个周末应该做什么活动的*决定*。这可能取决于你是否想和朋友出去，还是想一个人度过周末；在这两种情况下，你的决定还取决于天气。如果天气晴朗且你的朋友有空，你可能会想去踢足球。如果下雨了，你就会去看电影。如果你的朋友根本没有出现，那么不管天气如何，你都会喜欢玩视频游戏！
 
-![](../Images/4476e73464585bcc9cddaf0ae303d4a1.png)
+![](img/4476e73464585bcc9cddaf0ae303d4a1.png)
 
-这是一个*现实生活中的决策树*的清晰示例。我们构建了一棵树来建模一系列**顺序的、层级的决策**，最终得出一些最终结果。注意，我们还选择了相当“高层次”的决策，以便保持树的简洁。例如，如果我们为天气设定*许多*可能的选项，如25度晴天、25度雨天、26度晴天、26度雨天、27度晴天……等等，我们的树将会非常庞大！**确切**的温度实际上并不太重要，我们只是想知道是否可以在外面活动。
+这是一个*现实生活中的决策树*的清晰示例。我们构建了一棵树来建模一系列**顺序的、层级的决策**，最终得出一些最终结果。注意，我们还选择了相当“高层次”的决策，以便保持树的简洁。例如，如果我们为天气设定*许多*可能的选项，如 25 度晴天、25 度雨天、26 度晴天、26 度雨天、27 度晴天……等等，我们的树将会非常庞大！**确切**的温度实际上并不太重要，我们只是想知道是否可以在外面活动。
 
 机器学习中的决策树概念是相同的。我们想要建立一个具有一组层次决策的树，最终给出一个结果，即我们的分类或回归预测。决策将被选择，以使树尽可能小，同时目标是实现高分类/回归准确度。
 
@@ -38,7 +38,7 @@
 
 **归纳**
 
-从高层次来看，决策树的归纳过程包括4个主要步骤来构建树：
+从高层次来看，决策树的归纳过程包括 4 个主要步骤来构建树：
 
 1.  从你的训练数据集开始，该数据集应包含一些特征变量和分类或回归输出。
 
@@ -46,25 +46,25 @@
 
 1.  将数据拆分为包含该最佳特征的所有可能值的子集。这种拆分基本上定义了树上的一个节点，即每个节点是基于数据中的某个特征的分裂点。
 
-1.  通过使用第3步创建的数据子集递归生成新的树节点。我们不断分裂，直到达到一个点，在这个点上我们通过某种度量优化了最大准确度，同时最小化了分裂/节点的数量。
+1.  通过使用第 3 步创建的数据子集递归生成新的树节点。我们不断分裂，直到达到一个点，在这个点上我们通过某种度量优化了最大准确度，同时最小化了分裂/节点的数量。
 
 第一步很简单，只需获取你的数据集！
 
-对于第2步，选择使用哪个特征和具体的分裂通常使用贪婪算法来最小化成本函数。如果我们稍微考虑一下，构建决策树时进行的分裂等同于划分特征空间。我们将迭代尝试不同的分裂点，然后在最后选择成本最低的一个。当然，我们可以做一些聪明的事情，比如仅在数据集的值范围内进行分裂。这将避免浪费计算资源在测试明显不佳的分裂点上。
+对于第 2 步，选择使用哪个特征和具体的分裂通常使用贪婪算法来最小化成本函数。如果我们稍微考虑一下，构建决策树时进行的分裂等同于划分特征空间。我们将迭代尝试不同的分裂点，然后在最后选择成本最低的一个。当然，我们可以做一些聪明的事情，比如仅在数据集的值范围内进行分裂。这将避免浪费计算资源在测试明显不佳的分裂点上。
 
 对于回归树，我们可以使用简单的平方误差作为我们的成本函数：
 
-![](../Images/9e737360b5111722e071106141110538.png)
+![](img/9e737360b5111722e071106141110538.png)
 
 其中 Y 是我们的真实值，Y-hat 是我们的预测值；我们对数据集中的所有样本求和，以获取总误差。对于分类，我们使用 *基尼指数函数：*
 
-![](../Images/cbd57496eddd6d3825f64340081d9c88.png)
+![](img/cbd57496eddd6d3825f64340081d9c88.png)
 
 其中 pk 是特定预测节点中类别 k 的训练实例比例。一个节点*理想情况下*应该有零误差值，这意味着每个分割在 100% 的时间内输出单一类别。这正是我们想要的，因为这样我们一旦到达特定的决策节点，就能知道无论我们在决策边界的哪一侧，我们的输出将是什么。
 
 这种在数据集中每个分割中只有一个类别的概念被称为*信息增益*。请查看下面的示例。
 
-![](../Images/a52e214cfcc8a71a438dc70e9007a719.png)
+![](img/a52e214cfcc8a71a438dc70e9007a719.png)
 
 如果我们选择的分割使得每个输出根据输入数据具有类别混合，那么我们实际上并没有*获得*任何信息；我们并不清楚某个特定节点，即特征，是否对分类数据有影响！另一方面，如果我们的分割在每个输出中具有较高的每个类别百分比，那么我们就*获得了*信息，即在特定特征变量上的这种分割方式能给我们特定的输出！
 
@@ -86,7 +86,7 @@ Scikit Learn 中的分类和回归决策树都非常易于使用，且自带一�
 
 Scikit Learn 还允许我们使用 graphviz 库来可视化我们的树。它提供了一些选项，可以帮助可视化模型学习到的决策节点和分裂，这对于理解整个过程非常有用！下面我们将根据特征名称对节点进行着色，并显示每个节点的类别和特征信息。
 
-![](../Images/ecaf20a53098ea1fa03240e432bd03e3.png)
+![](img/ecaf20a53098ea1fa03240e432bd03e3.png)
 
 在 Scikit Learn 中，你也可以为决策树模型设置几个参数。以下是一些有趣的参数，可以尝试调整以获得更好的结果：
 
@@ -128,11 +128,11 @@ Scikit Learn 还允许我们使用 graphviz 库来可视化我们的树。它提
 
 **相关：**
 
-+   [Python中的5种快速且简单的数据可视化方法及代码](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   Python 中的 5 种快速且简单的数据可视化方法及代码
 
-+   [数据科学家必须了解的5种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家必须了解的 5 种聚类算法
 
-+   [使用 Python 提升数据预处理速度2到6倍](/2018/10/get-speed-up-data-pre-processing-python.html)
++   使用 Python 提升数据预处理速度 2 到 6 倍
 
 ### 更多相关话题
 
@@ -140,10 +140,10 @@ Scikit Learn 还允许我们使用 graphviz 库来可视化我们的树。它提
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [每位数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [分析一笔90亿美元的AI失败](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [分析一笔 90 亿美元的 AI 失败](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

@@ -1,22 +1,22 @@
 # 机器学习中的模型漂移 – 如何在大数据中处理它
 
-> 原文：[https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html](https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html)
+> 原文：[`www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html`](https://www.kdnuggets.com/2021/08/model-drift-machine-learning-big-data.html)
 
-[评论](#comments)
+评论
 
 **由 [Sai Geetha](https://www.saigeetha.in/about) 编写，她是大数据工程和数据科学领域的专家**。
 
-![](../Images/ac179ecb1bad142c35e7ed68f869139d.png)
+![](img/ac179ecb1bad142c35e7ed68f869139d.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -46,13 +46,13 @@
 
 冠军模型通常会在所有输入数据上运行以提供预测。然而，挑战者模型在什么数据上运行呢？
 
-挑战者模型可以通过两种方式进行测试。理想情况下，是在所有数据上与冠军模型并行运行挑战者模型，并比较结果。这将真正证明挑战者模型是否能够表现得更好。然而，这在大数据世界中似乎是不可行的，因此挑战者模型总是会在输入数据的一个子集上进行试验。一旦表现良好，它会逐渐推广到更多的数据上，几乎像是alpha-beta测试。
+挑战者模型可以通过两种方式进行测试。理想情况下，是在所有数据上与冠军模型并行运行挑战者模型，并比较结果。这将真正证明挑战者模型是否能够表现得更好。然而，这在大数据世界中似乎是不可行的，因此挑战者模型总是会在输入数据的一个子集上进行试验。一旦表现良好，它会逐渐推广到更多的数据上，几乎像是 alpha-beta 测试。
 
-正如你可能知道的，在alpha-beta测试中，一小部分用户或输入数据（在这种情况下）会通过新的测试或挑战者流程，而其余的全部通过原始冠军流程。这种alpha-beta测试对某些应用程序是有效的，但在机器学习的世界中并不特别令人印象深刻。你无法在相同的数据上比较模型，因此很难自信地说哪个模型在所有数据上更好。一旦推广到所有数据上，可能会出现意外情况，模型漂移可能会比预期更早发生。
+正如你可能知道的，在 alpha-beta 测试中，一小部分用户或输入数据（在这种情况下）会通过新的测试或挑战者流程，而其余的全部通过原始冠军流程。这种 alpha-beta 测试对某些应用程序是有效的，但在机器学习的世界中并不特别令人印象深刻。你无法在相同的数据上比较模型，因此很难自信地说哪个模型在所有数据上更好。一旦推广到所有数据上，可能会出现意外情况，模型漂移可能会比预期更早发生。
 
-一个典型的alpha-beta流程如下：
+一个典型的 alpha-beta 流程如下：
 
-![](../Images/815ebfe995cca0d92ee17be5ae9b10ca.png)
+![](img/815ebfe995cca0d92ee17be5ae9b10ca.png)
 
 数据根据某些标准（如产品类别）在两个管道之间分配。随着对 Challenger 模型性能的信心增加，这种数据分配会不断增加，逐渐倾向于 Challenger。
 
@@ -62,7 +62,7 @@
 
 它可能看起来是这样的：
 
-![](../Images/79af4a7798d8a039595f6e3b3d2a5d9b.png)
+![](img/79af4a7798d8a039595f6e3b3d2a5d9b.png)
 
 这具有巨大的工程意义，因此也会影响市场时间。随着时间推移，这种成本可能变得非常高。
 
@@ -78,19 +78,19 @@
 
 书中所描述的 Rendezvous 架构倾向于处理小规模数据的 ML。我已经对其进行了调整，以满足大数据世界及相关管道的需求，如下图所示：*(书籍和另一篇文章的引用见参考部分)*
 
-![](../Images/64f95c58d6146d8d3da9b7dea09f8ef5.png)
+![](img/64f95c58d6146d8d3da9b7dea09f8ef5.png)
 
 现在让我逐部分解释这个架构。
 
-**第1部分：**
+**第一部分：**
 
 这包括接收传入数据、清洗数据、准备数据和创建所需特征的标准数据管道。每个要部署的模型应该只有一个管道。准备好的数据应该保持一个标准接口，该接口具有该领域可能需要的所有特征，而与手头的模型无关。(*我理解这并非总是可能，可能需要随着时间的推移进行逐步调整。但我们可以在需要时单独处理这一部分。*)
 
-**第2部分：**
+**第二部分：**
 
 这是一个类似 Kafka 的消息基础设施，通过引入异步性发挥作用。作为特征准备好的数据会被发布到消息总线上。现在，每个模型都监听这个消息总线并触发自身，用准备好的数据执行。这个消息总线使得这里的即插即用架构成为可能。
 
-**第 3 部分：**
+**第三部分：**
 
 这是所有模型逐一部署的部分。可以部署一个新的 Challenger 模型并使其监听消息总线，随着数据流入，它可以执行。可以在这里部署任意数量的模型，而不仅仅是一个 Challenger 模型！此外，基础设施要求仅仅是额外模型的运行。无论是预模型管道还是后模型管道都不需要单独开发或部署。
 
@@ -98,13 +98,13 @@
 
 还有一个特殊的模型叫做诱饵模型。为了确保每个模型过程不被持久化负担所困扰，准备好的数据还会被所谓的**诱饵模型**读取，该模型的唯一任务是读取准备好的数据并进行持久化。这有助于审计目的、追踪和调试。
 
-**第 4 部分：**
+**第四部分：**
 
 所有这些模型再次将它们的预测或分数输出到另一个消息总线上，从而避免了彼此之间的依赖。此外，这在确保模型的可插拔性而不干扰管道中的其他部分方面也发挥了重要作用。
 
-从那里，Rendezvous 过程会获取分数并决定需要做什么，如第 5 部分所述。
+从那里，Rendezvous 过程会获取分数并决定需要做什么，如第五部分所述。
 
-**第 5 部分：**
+**第五部分：**
 
 这里引入了**Rendezvous 过程**的新概念，它有两个重要的子过程。一个即时子过程负责从接收到的众多分数中为消费者提供正确的输出，另一个过程则是将所有模型的输出持久化，以便进行进一步的比较和分析。
 
@@ -118,9 +118,9 @@
 
 另一种标准可能是输出应基于模型性能。在这种情况下，汇合过程会等待所有模型完成并发布到消息总线。然后，它会寻找最佳性能指标，并将其作为结果发送出去。
 
-是的，另一个标准可以是时间或延迟。如果我们需要在例如5秒内获得结果，过程会等待模型返回的所有结果，最多5秒，只比较这些结果，并返回最佳数据。即使另一个模型在第6秒返回，可能表现更好，但也会被忽略，因为它不符合延迟标准。
+是的，另一个标准可以是时间或延迟。如果我们需要在例如 5 秒内获得结果，过程会等待模型返回的所有结果，最多 5 秒，只比较这些结果，并返回最佳数据。即使另一个模型在第 6 秒返回，可能表现更好，但也会被忽略，因为它不符合延迟标准。
 
-但这个过程如何知道遵循哪些标准来处理哪些数据或模型呢？这可以作为第2部分输入数据的一部分传入消息总线。请注意，汇合过程也在监听这些消息，并了解如何处理与输入对应的输出。也可能有其他聪明的方式，但这是提出的其中一种方法。
+但这个过程如何知道遵循哪些标准来处理哪些数据或模型呢？这可以作为第二部分输入数据的一部分传入消息总线。请注意，汇合过程也在监听这些消息，并了解如何处理与输入对应的输出。也可能有其他聪明的方式，但这是提出的其中一种方法。
 
 ## 结论
 
@@ -142,7 +142,7 @@
 
 ### 参考文献
 
-1.  [机器学习物流](https://learning.oreilly.com/library/view/machine-learning-logistics/9781491997628/) by Ted Dunning; Ellen Friedman - 第3章“机器学习的汇合架构”
+1.  [机器学习物流](https://learning.oreilly.com/library/view/machine-learning-logistics/9781491997628/) by Ted Dunning; Ellen Friedman - 第三章“机器学习的汇合架构”
 
 1.  一篇来自 [towardsdatascience.com](http://towardsdatascience.com/) 的文章，标题为"[生产中的数据科学约会架构](https://towardsdatascience.com/rendezvous-architecture-for-data-science-in-production-79c4d48f12b)"，作者：Jan Teichmann
 
@@ -160,14 +160,14 @@
 
 ### 更多相关内容
 
-+   [使用Eurybia检测数据漂移以确保生产机器学习模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产机器学习模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
-+   [使用MLOps管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
++   [使用 MLOps 管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 
-+   [KDnuggets新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
-+   [处理不平衡数据的7种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
++   [处理不平衡数据的 7 种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
 
-+   [如何使用Scikit-learn的Imputer模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
++   [如何使用 Scikit-learn 的 Imputer 模块处理缺失数据](https://www.kdnuggets.com/how-to-handle-missing-data-with-scikit-learns-imputer-module)
 
-+   [在NumPy中使用掩码数组处理缺失数据](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)
++   [在 NumPy 中使用掩码数组处理缺失数据](https://www.kdnuggets.com/masked-arrays-in-numpy-to-handle-missing-data)

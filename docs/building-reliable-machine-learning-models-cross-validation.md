@@ -1,8 +1,8 @@
 # 使用交叉验证构建可靠的机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html](https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html)
+> 原文：[`www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html`](https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Gideon Mendels](https://www.linkedin.com/in/mendels/)，联合创始人兼首席执行官 @ [Comet.ml](https://www.comet.ml/)**
 
@@ -10,7 +10,7 @@
 
 交叉验证经常被用来训练、测量并最终选择一个机器学习模型，因为它帮助评估模型的结果如何在独立数据集上*实际应用*。最重要的是，交叉验证已被证明能生成比其他方法偏差更低的模型。
 
-本教程将重点介绍一种名为**k折交叉验证**的交叉验证变体。
+本教程将重点介绍一种名为**k 折交叉验证**的交叉验证变体。
 
 在本教程中，我们将涵盖以下内容：
 
@@ -40,7 +40,7 @@
 
 1.  探索不同折叠下的模型性能
 
-交叉验证通常被使用，因为它易于解释，并且通常会比其他方法，如简单的训练/测试拆分，得到更少偏差或更少乐观的模型性能估计。使用交叉验证的最大缺点之一是训练时间的增加，因为我们实际上是在训练K次而不是1次。
+交叉验证通常被使用，因为它易于解释，并且通常会比其他方法，如简单的训练/测试拆分，得到更少偏差或更少乐观的模型性能估计。使用交叉验证的最大缺点之一是训练时间的增加，因为我们实际上是在训练 K 次而不是 1 次。
 
 ### 使用 scikit-learn 的交叉验证示例
 
@@ -67,7 +67,7 @@ for train_index, test_index in kf.split(X):
 
 在每一轮中，我们将准确度报告给[Comet.ml](https://www.comet.ml/)，最后我们报告所有轮次的平均准确度。实验结束后，我们可以[**访问 Comet.ml 并检查我们的模型**](https://www.comet.ml/gidim/cross-validation/dd73c9696cbc497cb8274abcb883e03e/chart)**:**
 
-![](../Images/9c186b05771d604cf5115e3aa2283e35.png)
+![](img/9c186b05771d604cf5115e3aa2283e35.png)
 
 以下图表由 Comet.ml 自动生成。最右侧的条形（紫色）表示**所有轮次的** **平均** **准确度**。如图所示，一些轮次的表现明显优于平均水平，展示了 k 折交叉验证的重要性。
 
@@ -97,21 +97,21 @@ for train_index, test_index in kf.split(X):
 
 **相关内容：**
 
-+   [训练集、测试集和10折交叉验证](/2018/01/training-test-sets-cross-validation.html)
++   训练集、测试集和 10 折交叉验证
 
-+   [可视化交叉验证代码](/2017/09/visualizing-cross-validation-code.html)
++   可视化交叉验证代码
 
-+   [如何（以及为什么）创建一个好的验证集](/2017/11/create-good-validation-set.html)
++   如何（以及为什么）创建一个好的验证集
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

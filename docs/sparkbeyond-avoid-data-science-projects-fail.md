@@ -1,10 +1,10 @@
 # 85%的数据科学项目失败——以下是如何避免
 
-> 原文：[https://www.kdnuggets.com/2021/09/sparkbeyond-avoid-data-science-projects-fail.html](https://www.kdnuggets.com/2021/09/sparkbeyond-avoid-data-science-projects-fail.html)
+> 原文：[`www.kdnuggets.com/2021/09/sparkbeyond-avoid-data-science-projects-fail.html`](https://www.kdnuggets.com/2021/09/sparkbeyond-avoid-data-science-projects-fail.html)
 
 赞助文章。
 
-[![Sparkbeyond 避免数据科学项目失败](../Images/22e0673dd201b93d588f7fe40fea9bc9.png)](https://bit.ly/3k6hBqp-sparkb-P10913)
+![Sparkbeyond 避免数据科学项目失败](https://bit.ly/3k6hBqp-sparkb-P10913)
 
 **由 Sparkbeyond 提供。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的信息技术
 
 * * *
 
@@ -50,7 +50,7 @@
 
 +   [无法找到数据科学工作？原因如下](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
 +   [数据科学被高估了，原因在这里](https://www.kdnuggets.com/2022/06/data-science-overrated.html)
 

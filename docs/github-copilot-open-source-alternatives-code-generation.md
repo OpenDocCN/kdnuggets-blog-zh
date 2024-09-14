@@ -1,10 +1,10 @@
 # GitHub Copilot 开源替代品
 
-> 原文：[https://www.kdnuggets.com/2021/07/github-copilot-open-source-alternatives-code-generation.html](https://www.kdnuggets.com/2021/07/github-copilot-open-source-alternatives-code-generation.html)
+> 原文：[`www.kdnuggets.com/2021/07/github-copilot-open-source-alternatives-code-generation.html`](https://www.kdnuggets.com/2021/07/github-copilot-open-source-alternatives-code-generation.html)
 
 去年，GitHub 公开发布了**[Copilot](https://www.kdnuggets.com/2021/07/github-copilot-ai-pair-programmer.html)**，这是其“AI 编程助手”的预览版，一种代码补全工具，旨在为您的 IDE 提供代码行或函数建议。它在编程界及其他领域确实引起了轰动，您可能至少听说过一些关于它的事宜。
 
-![GitHub Copilot](../Images/eec4051ec1f5e342ec18a5b37ac0b2e1.png)
+![GitHub Copilot](img/eec4051ec1f5e342ec18a5b37ac0b2e1.png)
 
 但 Copilot 不仅仅是简单的自动补全，它比其他代码助手更具上下文意识。由 OpenAI 的 Codex AI 系统驱动，Copilot 使用文档字符串、函数名称、注释和前面的代码来最佳地生成和建议它认为最合适的代码。Copilot 旨在随着时间的推移不断改进，从开发者的使用中“学习”。
 
@@ -22,7 +22,7 @@
 
 > 这个功能有点类似于 [Github Copilot](https://copilot.github.com/) 的代码建议。但它不是使用 AI，而是将您的搜索查询发送到 Google，然后检索 StackOverflow 的回答并为您自动补全。
 
-![Image](../Images/d1414b1445f955f4e52df0106ced4c4d.png)
+![Image](img/d1414b1445f955f4e52df0106ced4c4d.png)
 
 Captain Stack 仅适用于 VSCode，使其成为一个特别的 Copilot 类似工具，并作为 VSCode 插件安装。
 
@@ -34,7 +34,7 @@ Captain Stack 仅适用于 VSCode，使其成为一个特别的 Copilot 类似�
 
 > GPT-Code-Clippy（GPT-CC）是 [GitHub Copilot](https://copilot.github.com/) 的开源版本，基于 [GPT-3](https://arxiv.org/abs/2005.14165) 的语言模型，称为 [GPT-Codex](https://arxiv.org/abs/2107.03374)，它在 GitHub 上的公开代码上进行了微调。
 
-![图片](../Images/3488da309d8b9460f22cb162e5af14e0.png)
+![图片](img/3488da309d8b9460f22cb162e5af14e0.png)
 
 GPT-CC 的 VSCode 扩展可以在 [这里](https://github.com/ncoop57/code-clippy-vscode) 获取。有些好奇的是，从这个扩展的代码库中，有以下提及坐落于前述的 Captain Stack 之上的参考：
 
@@ -48,7 +48,7 @@ GPT-CC 的 VSCode 扩展可以在 [这里](https://github.com/ncoop57/code-clipp
 > 
 > 这是一个较小的模型，因此可能不会像 Copilot 那样有效，但仍然可以玩玩看！
 
-![图片](../Images/c83c15d5f9984bc00a514bf7dea14c0e.png)
+![图片](img/c83c15d5f9984bc00a514bf7dea14c0e.png)
 
 二副的设置包括运行 Flask 应用程序作为后台，并配置 Emacs 插件以指向该后台服务器的 URL 来提交请求。
 
@@ -70,11 +70,11 @@ GPT-CC 的 VSCode 扩展可以在 [这里](https://github.com/ncoop57/code-clipp
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 

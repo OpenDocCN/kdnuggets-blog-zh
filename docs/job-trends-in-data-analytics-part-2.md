@@ -1,22 +1,22 @@
-# 数据分析中的职业趋势：第2部分
+# 数据分析中的职业趋势：第二部分
 
-> 原文：[https://www.kdnuggets.com/job-trends-in-data-analytics-part-2](https://www.kdnuggets.com/job-trends-in-data-analytics-part-2)
+> 原文：[`www.kdnuggets.com/job-trends-in-data-analytics-part-2`](https://www.kdnuggets.com/job-trends-in-data-analytics-part-2)
 
-**由Andrea De Mauro 和** [**Mahantesh Pattadkal**](mailto:mahantesh.pattadkal@knime.com)
+**由 Andrea De Mauro 和** **Mahantesh Pattadkal**
 
-*在我们从博客系列第1部分的“[数据分析职业趋势](/job-trends-in-data-analytics-nlp-for-job-trend-analysis)”继续之前，我们的数据分析职业趋势和自然语言处理（NLP）作用的旅程仍在继续。*
+*在我们从博客系列第一部分的“数据分析职业趋势”继续之前，我们的数据分析职业趋势和自然语言处理（NLP）作用的旅程仍在继续。*
 
-在第1部分中，我们介绍了“[数据分析职业趋势](https://communityserver.knime.com/knime/webportal/space/Users/paolotamag/job_listings_data_app?exec&embed&knime:access_token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdWJsaWNfZGF0YV9hcHBfYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiIsImtuaW1lIl0sInNhbHQiOiI5ODBmNTQxODJjMjhlNzljIiwid29ya2tmbG93ZFBhdGgiOiIvVXNlcnMvcGFvbG90YW1hZy9qb2JfbGlzdGluZ3NfZGF0YV9hcHBpIiwidG9rZW5UeXBlIjoid29ya2Zsb3dUb2tlbiIsInVzYWdlVHlwZSI6ImxpbmsiLCJ0b2tlbklkIjoiNGIwZTUwY2QtMTFjNC00NmNlLTg3Y2UtZWU5OWFjOTAxZWVkIn0.5Vo10tEa1KpX0SJ7jHJ92Z77jiBfRR0zs6fUhl0s7ew)”应用，介绍了如何收集数据并应用NLP进行分析，由[KNIME分析平台](https://www.knime.com/knime-analytics-platform)提供支持。我们讨论了用于收集有关数据分析职业市场的实时数据的网页抓取阶段，随后使用NLP技术清理数据。然后，我们介绍了一个主题模型，揭示了职位发布中的七种同质化技能集。这些技能集代表了各行业雇主在数据分析专业人员中寻找的能力和活动。
+在第一部分中，我们介绍了“[数据分析职业趋势](https://communityserver.knime.com/knime/webportal/space/Users/paolotamag/job_listings_data_app?exec&embed&knime:access_token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwdWJsaWNfZGF0YV9hcHBfYWRtaW4iLCJyb2xlcyI6WyJhZG1pbiIsImtuaW1lIl0sInNhbHQiOiI5ODBmNTQxODJjMjhlNzljIiwid29ya2tmbG93ZFBhdGgiOiIvVXNlcnMvcGFvbG90YW1hZy9qb2JfbGlzdGluZ3NfZGF0YV9hcHBpIiwidG9rZW5UeXBlIjoid29ya2Zsb3dUb2tlbiIsInVzYWdlVHlwZSI6ImxpbmsiLCJ0b2tlbklkIjoiNGIwZTUwY2QtMTFjNC00NmNlLTg3Y2UtZWU5OWFjOTAxZWVkIn0.5Vo10tEa1KpX0SJ7jHJ92Z77jiBfRR0zs6fUhl0s7ew)”应用，介绍了如何收集数据并应用 NLP 进行分析，由[KNIME 分析平台](https://www.knime.com/knime-analytics-platform)提供支持。我们讨论了用于收集有关数据分析职业市场的实时数据的网页抓取阶段，随后使用 NLP 技术清理数据。然后，我们介绍了一个主题模型，揭示了职位发布中的七种同质化技能集。这些技能集代表了各行业雇主在数据分析专业人员中寻找的能力和活动。
 
 在系列博客的第二部分中，我们将描述已识别的技能集，并对数据科学职业发展的变化趋势进行一些基于数据的考虑。
 
 # 话题及其描述
 
-为了标记技能集，我们使用了LDA算法在职位发布中识别的最常见术语和权重。我们进一步分析每个主题中的职位描述，以突出关键活动、必要技能和最常见的行业。了解这些主题有助于求职者将其技能集与市场需求对齐，增加在数据分析领域找到合适职位的机会。在接下来的段落中，您将找到每个技能集的简要描述。
+为了标记技能集，我们使用了 LDA 算法在职位发布中识别的最常见术语和权重。我们进一步分析每个主题中的职位描述，以突出关键活动、必要技能和最常见的行业。了解这些主题有助于求职者将其技能集与市场需求对齐，增加在数据分析领域找到合适职位的机会。在接下来的段落中，您将找到每个技能集的简要描述。
 
-## 主题0：研究与数据分析
+## 主题 0：研究与数据分析
 
-下表展示了主题0的前五个术语及其权重。这些权重表示术语在定义特定主题时的重要性。考虑到这些术语及标记为主题0的文档，我们将这一技能集解释为“研究与数据分析”。
+下表展示了主题 0 的前五个术语及其权重。这些权重表示术语在定义特定主题时的重要性。考虑到这些术语及标记为主题 0 的文档，我们将这一技能集解释为“研究与数据分析”。
 
 | **术语** | **权重** |
 | --- | --- |
@@ -26,7 +26,7 @@
 | 健康 | 3404 |
 | 大学 | 2118 |
 
-表0：主题0的术语权重
+表 0：主题 0 的术语权重
 
 这项技能集包括进行研究、分析数据以及提供驱动决策的见解等活动。作为数据分析的基石，这项技能集促进了从数据中提取有价值的见解、识别趋势以及做出明智决策。
 
@@ -44,7 +44,7 @@
 
 ## 主题 1：行政和客户支持
 
-通过查看表1中的术语和权重以及与主题1相关的文件，我们决定将其标记为“行政和客户支持”。这项技能集包括管理客户互动、提供行政支持以及协调物流或采购流程。
+通过查看表 1 中的术语和权重以及与主题 1 相关的文件，我们决定将其标记为“行政和客户支持”。这项技能集包括管理客户互动、提供行政支持以及协调物流或采购流程。
 
 | **术语** | **权重** |
 | --- | --- |
@@ -54,7 +54,7 @@
 | 职位 | 2126 |
 | 客户 | 1909 |
 
-表1：主题1的术语-权重
+表 1：主题 1 的术语-权重
 
 在我们看来，成功完成需要此技能集的工作的基本能力是：
 
@@ -68,7 +68,7 @@
 
 ## 主题 2：市场营销和产品管理
 
-根据表2中的术语，我们将其解读为“**市场营销和产品管理**”技能集。
+根据表 2 中的术语，我们将其解读为“**市场营销和产品管理**”技能集。
 
 | **术语** | **权重** |
 | --- | --- |
@@ -78,7 +78,7 @@
 | 客户 | 3923 |
 | 市场营销 | 3740 |
 
-表2：主题2的术语-权重
+表 2：主题 2 的术语-权重
 
 这项技能集涉及开发市场营销策略、管理产品生命周期和推动市场增长。在数据分析驱动的工作中至关重要，因为它允许专业人士利用数据驱动的见解来做出有关市场趋势、客户偏好和产品表现的明智决策。
 
@@ -96,7 +96,7 @@
 
 ## 主题 3：业务管理、数据治理与合规
 
-根据表2中的术语，我们得出结论，它指的是“**业务管理、数据治理与合规**”技能集。
+根据表 2 中的术语，我们得出结论，它指的是“**业务管理、数据治理与合规**”技能集。
 
 该技能集涵盖了监督业务运营、确保数据质量和安全，以及管理风险和监管要求。在数据分析密集型工作中，这一技能集有助于维护数据完整性、监控合规性、识别风险和利用数据驱动的见解优化业务流程。
 
@@ -176,7 +176,7 @@
 
 ## 主题 6：机器学习
 
-根据表6中显示的术语，我们将其解读为“**机器学习**”技能集，这一技能集围绕设计AI模型、研究前沿机器学习技术以及开发智能软件解决方案。在数据分析密集型的工作中，它是AI模型训练和性能优化的基础。
+根据表 6 中显示的术语，我们将其解读为“**机器学习**”技能集，这一技能集围绕设计 AI 模型、研究前沿机器学习技术以及开发智能软件解决方案。在数据分析密集型的工作中，它是 AI 模型训练和性能优化的基础。
 
 | **术语** | **权重** |
 | --- | --- |
@@ -186,15 +186,15 @@
 | 计算机 | 4209 |
 | Python | 4053 |
 
-表6：主题6的术语权重
+表 6：主题 6 的术语权重
 
 根据我们的发现，今天在机器学习中所需的基本能力是
 
 +   强大的编程和数学能力
 
-+   对机器学习框架（如TensorFlow、PyTorch）的专业知识
++   对机器学习框架（如 TensorFlow、PyTorch）的专业知识
 
-+   具备先进AI技术经验（如深度学习和自然语言处理）
++   具备先进 AI 技术经验（如深度学习和自然语言处理）
 
 +   高效的沟通和协作技能
 
@@ -204,19 +204,19 @@
 
 使用潜在狄利克雷分配（LDA）主题建模为每个职位发布提供了七种不同技能集的主题权重。通过计算所有专业档案中每种技能集的平均权重，我们得出了特定角色的平均技能集权重。值得注意的是，这些权重随后被标准化并表示为百分比。
 
-如图1所示，我们展示了专业职位与相应技能集之间互动的深刻可视化。这一视觉图集成了雇主对数据工程师、数据分析师和数据科学家所需基本技能的集体期望。
+如图 1 所示，我们展示了专业职位与相应技能集之间互动的深刻可视化。这一视觉图集成了雇主对数据工程师、数据分析师和数据科学家所需基本技能的集体期望。
 
 正如预期，数据工程师的角色显著要求掌握“数据仓库与云基础设施”技能集。此外，对可视化和机器学习的额外理解也至关重要。这种对技能多样性的重视可以归因于对数据工程师将在支持数据分析师和数据科学家方面发挥关键作用的预期。
 
 相反，数据科学家所需的主要专业技能在于“机器学习”，其次是“研究”方法的熟练程度。值得注意的是，涵盖“商业管理”和“产品管理”的混合技能集也具有重要意义。这概括了就业市场对有志数据科学家的复杂技能需求。
 
-转向数据分析领域，一个关键要求是精通“BI和可视化”。考虑到他们在生成业务报告、驱动仪表板和监控业务活力中的作用，这并不令人惊讶。作为辅助关键技能的“商业管理”需求也反映了这一角色的战略眼光。此外，与数据科学家角色类似，数据分析师领域也存在“产品管理”和“研究”能力的需求。
+转向数据分析领域，一个关键要求是精通“BI 和可视化”。考虑到他们在生成业务报告、驱动仪表板和监控业务活力中的作用，这并不令人惊讶。作为辅助关键技能的“商业管理”需求也反映了这一角色的战略眼光。此外，与数据科学家角色类似，数据分析师领域也存在“产品管理”和“研究”能力的需求。
 
 总结来说，这项探索突显了各类数据分析角色技能要求的复杂性。它描绘了雇主对数据工程师、数据分析师和数据科学家等职位的多方面期望。
 
-[![图1：雷达图显示了专业配置与技能集之间的关联。](../Images/a798911375adff08ccd00906093a0ae8.png)](https://www.kdnuggets.com/wp-content/uploads/data-analytics-job-demand-analysis-part2-fig1.png)
+![图 1：雷达图显示了专业配置与技能集之间的关联。](https://www.kdnuggets.com/wp-content/uploads/data-analytics-job-demand-analysis-part2-fig1.png)
 
-图1：雷达图显示了专业配置与维度中显示的技能集之间的关联（点击放大）。
+图 1：雷达图显示了专业配置与维度中显示的技能集之间的关联（点击放大）。
 
 # 结论
 
@@ -230,24 +230,24 @@
 
 # 接下来是什么？
 
-展望未来，我们看到这项研究有显著扩展的潜力。这包括开发KNIME组件以实现第1部分中描述的“停止词移除”方法，以及在KNIME中建立一个人机交互的可视化框架。这样的框架将简化选择最连贯主题模型的过程，提升我们的工作规模。我们还设想使用LLM辅助机制来支持和简化主题建模阶段：这一场景无疑为进一步实验和研究留下了空间。
+展望未来，我们看到这项研究有显著扩展的潜力。这包括开发 KNIME 组件以实现第一部分中描述的“停止词移除”方法，以及在 KNIME 中建立一个人机交互的可视化框架。这样的框架将简化选择最连贯主题模型的过程，提升我们的工作规模。我们还设想使用 LLM 辅助机制来支持和简化主题建模阶段：这一场景无疑为进一步实验和研究留下了空间。
 
 数据分析领域的专业人士必须保持信息灵通并具备适应能力，以应对新兴技术。这确保了他们的技能在不断变化的数据驱动决策环境中保持相关性和价值。通过识别和培养与所识别主题相关的技能，求职者可以在这一充满活力的市场中获得竞争优势。为了保持在该领域的相关性，数据分析专业人士必须在整个职业生涯中保持好奇心，并持续学习。
 
-**[玛汉特什·帕塔德卡尔](https://www.linkedin.com/in/mahantesh-pattadkal-7a2607101/)**拥有超过6年的数据科学项目和产品咨询经验。他拥有数据科学硕士学位，专长于深度学习、自然语言处理和可解释的机器学习。此外，他积极参与KNIME社区的合作，以推进数据科学相关项目。
+**[玛汉特什·帕塔德卡尔](https://www.linkedin.com/in/mahantesh-pattadkal-7a2607101/)**拥有超过 6 年的数据科学项目和产品咨询经验。他拥有数据科学硕士学位，专长于深度学习、自然语言处理和可解释的机器学习。此外，他积极参与 KNIME 社区的合作，以推进数据科学相关项目。
 
-[](https://www.linkedin.com/in/andread/)****[安德烈亚·德·毛罗](https://www.linkedin.com/in/andread/)****在宝洁和沃达丰等跨国公司拥有超过15年的商业分析和数据科学团队建设经验。除了他的企业角色，他还在意大利和瑞士的几所大学教授市场营销分析和应用机器学习。通过他的研究和著作，他探讨了数据和人工智能的商业及社会影响，并坚信更广泛的分析素养将使世界变得更好。他的最新著作《数据分析简易指南》由Packt出版。他出现在CDO杂志2022年的全球‘40位40岁以下’榜单中。
+[](https://www.linkedin.com/in/andread/)****[安德烈亚·德·毛罗](https://www.linkedin.com/in/andread/)****在宝洁和沃达丰等跨国公司拥有超过 15 年的商业分析和数据科学团队建设经验。除了他的企业角色，他还在意大利和瑞士的几所大学教授市场营销分析和应用机器学习。通过他的研究和著作，他探讨了数据和人工智能的商业及社会影响，并坚信更广泛的分析素养将使世界变得更好。他的最新著作《数据分析简易指南》由 Packt 出版。他出现在 CDO 杂志 2022 年的全球‘40 位 40 岁以下’榜单中。
 
 ### 更多相关主题
 
 +   [数据分析中的职业趋势：自然语言处理在职业趋势分析中的应用](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
-+   [5个关键的数据科学趋势与分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
++   [5 个关键的数据科学趋势与分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
 
 +   [人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [数据科学与分析行业在2021年的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [数据科学与分析行业在 2021 年的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [2022年及以后10大关键AI和数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
++   [2022 年及以后 10 大关键 AI 和数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
 
-+   [2023年上半年分析与数据科学支出及趋势报告](https://www.kdnuggets.com/2023/07/h1-2023-analytics-data-science-spend-trends-report.html)
++   [2023 年上半年分析与数据科学支出及趋势报告](https://www.kdnuggets.com/2023/07/h1-2023-analytics-data-science-spend-trends-report.html)

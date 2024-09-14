@@ -1,8 +1,8 @@
-# 集成学习：5种主要方法
+# 集成学习：5 种主要方法
 
-> 原文：[https://www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html](https://www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html)
+> 原文：[`www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html`](https://www.kdnuggets.com/2019/01/ensemble-learning-5-main-approaches.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Diogo Menezes Borges](https://www.linkedin.com/in/diogomenezesborges/?locale=en_US)，数据科学家**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -36,19 +36,19 @@
 
 在本文中，我们将讨论包括*bagging、boosting、stacking*及其他一些最流行的集成方法。在详细介绍之前，请记住以下几点：
 
-> *“集成方法在预测器尽可能独立时效果最佳。获得多样化分类器的一种方法是使用非常不同的算法进行训练。这增加了它们产生不同类型错误的机会，从而提高集成的准确性。”**—**“**动手学深度学习与Scikit-Learn & TensorFlow，第7章*
+> *“集成方法在预测器尽可能独立时效果最佳。获得多样化分类器的一种方法是使用非常不同的算法进行训练。这增加了它们产生不同类型错误的机会，从而提高集成的准确性。”**—**“**动手学深度学习与 Scikit-Learn & TensorFlow，第七章*
 
 #### 简单集成技术
 
 +   **硬投票分类器**
 
-这是该技术最简单的例子，我们已经友好地介绍过。投票分类器通常用于分类问题。想象一下你训练并拟合了几个分类器（逻辑回归分类器、SVM分类器、随机森林分类器等）到你的训练数据集中。
+这是该技术最简单的例子，我们已经友好地介绍过。投票分类器通常用于分类问题。想象一下你训练并拟合了几个分类器（逻辑回归分类器、SVM 分类器、随机森林分类器等）到你的训练数据集中。
 
 创建更好分类器的一种简单方法是汇总每个分类器的预测，并将多数选择作为最终预测。基本上，我们可以将其视为获取所有预测器的众数。
 
-![](../Images/47f934cb71cb7bc891c09b53aa4f05c0.png)
+![](img/47f934cb71cb7bc891c09b53aa4f05c0.png)
 
-**《动手学深度学习与Scikit-Learn & TensorFlow》第7章**
+**《动手学深度学习与 Scikit-Learn & TensorFlow》第七章**
 
 +   **平均法**
 
@@ -64,17 +64,17 @@
 
 也称为堆叠泛化，这种技术基于训练一个模型，该模型将执行我们之前看到的常规聚合操作。
 
-![](../Images/3de67bd350f8377dff6234d11b2941a2.png)
+![](img/3de67bd350f8377dff6234d11b2941a2.png)
 
-我们有N个预测器，每个预测器做出预测并返回最终值。之后，Meta Learner或Blender将这些预测作为输入并做出最终预测。
+我们有 N 个预测器，每个预测器做出预测并返回最终值。之后，Meta Learner 或 Blender 将这些预测作为输入并做出最终预测。
 
 让我们看看它是如何工作的……
 
-![](../Images/c5d9ec1621328d9551334c66854e76cf.png)
+![](img/c5d9ec1621328d9551334c66854e76cf.png)
 
-![](../Images/0ff34a0ef0985ecb605628f573f34add.png)
+![](img/0ff34a0ef0985ecb605628f573f34add.png)
 
-训练Meta Learner的常用方法是保留集。首先，将训练集拆分为两个子集。第一个子集的数据用于训练预测器。
+训练 Meta Learner 的常用方法是保留集。首先，将训练集拆分为两个子集。第一个子集的数据用于训练预测器。
 
 之后，将在第一个子集上训练的相同预测器用于对第二个（保留的）集合进行预测。通过这样做，确保了预测的清洁性，因为这些算法从未见过数据。
 
@@ -88,7 +88,7 @@
 
 另一种方法是对每个预测器使用相同的算法（例如，所有的决策树），然而，使用不同的训练集随机子集以获得更一般化的结果。
 
-![](../Images/26bc0060612255b816373487062371f2.png)
+![](img/26bc0060612255b816373487062371f2.png)
 
 **文章“[使用可适应随机森林的降尺度降水](https://www.researchgate.net/publication/309031320_Spatial_downscaling_of_precipitation_using_adaptable_random_forests?_sg=0FdXhCBDcpE3PGA1c_SnLcE36GH-G47WJbTr70zdEg1yUkijY1C0U1FyRmBlsfxbxdCOXKDiYDi-QiAXqOwjYua8wVUOz-M45Q)”**
 
@@ -104,7 +104,7 @@
 
 也被称为*假设提升*，指的是任何可以将弱学习者组合成更强学习者的集成方法。这是一个顺序过程，每个后续模型试图修正其前任模型的错误。
 
-![](../Images/b9560d9caee2ae35a7676585aaa28a88.png)
+![](img/b9560d9caee2ae35a7676585aaa28a88.png)
 
 **[来源](https://blog.bigml.com/2017/03/14/introduction-to-boosted-trees/)**
 
@@ -128,7 +128,7 @@
 
 +   [Light GBM](https://medium.com/diogo-menezes-borges/boosting-with-adaboost-and-gradient-boosting-9cbab2a1af81)
 
-**简介**：[Diogo Menezes Borges](https://www.linkedin.com/in/diogomenezesborges/?locale=en_US) 是一名数据科学家，拥有工程背景和2年的经验，使用预测建模、数据处理和数据挖掘算法解决复杂的商业问题。
+**简介**：[Diogo Menezes Borges](https://www.linkedin.com/in/diogomenezesborges/?locale=en_US) 是一名数据科学家，拥有工程背景和 2 年的经验，使用预测建模、数据处理和数据挖掘算法解决复杂的商业问题。
 
 [原文](https://medium.com/diogo-menezes-borges/ensemble-learning-when-everybody-takes-a-guess-i-guess-ec35f6cb4600)。已获许可转载。
 
@@ -144,13 +144,13 @@
 
 +   [提高神经网络性能](https://www.kdnuggets.com/2018/05/improving-performance-neural-network.html)
 
-+   [机器学习新手的前10大算法巡礼](https://www.kdnuggets.com/2018/02/tour-top-10-algorithms-machine-learning-newbies.html)
++   [机器学习新手的前 10 大算法巡礼](https://www.kdnuggets.com/2018/02/tour-top-10-algorithms-machine-learning-newbies.html)
 
 ### 相关主题更多内容
 
 +   [带示例的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)
 
-+   [集成学习技术：Python中的随机森林演练](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
++   [集成学习技术：Python 中的随机森林演练](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 
 +   [何时使用集成技术是一个好选择？](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)
 

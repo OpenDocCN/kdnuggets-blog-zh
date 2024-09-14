@@ -1,8 +1,8 @@
 # ChatGPT 会取代数据科学家吗？
 
-> 原文：[https://www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html](https://www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html`](https://www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html)
 
-![ChatGPT 会取代数据科学家吗？](../Images/eb8711876704c2ac3404db0ebc3472b7.png)
+![ChatGPT 会取代数据科学家吗？](img/eb8711876704c2ac3404db0ebc3472b7.png)
 
 图片由作者提供
 
@@ -12,7 +12,7 @@
 
 作为一个在数据科学领域工作了三年的人，我想分享我的看法。
 
-在我之前写的一篇文章中，我强烈不同意自动化 AI 软件可以 [取代数据科学家](/2022/01/data-science-dying-career.html) 的观点。我的论点是，这些工具会在一定程度上提高组织效率，但缺乏定制性，并且在每个阶段都需要人工参与。
+在我之前写的一篇文章中，我强烈不同意自动化 AI 软件可以 取代数据科学家 的观点。我的论点是，这些工具会在一定程度上提高组织效率，但缺乏定制性，并且在每个阶段都需要人工参与。
 
 但那是在 2022 年 2 月，远在 ChatGPT，即 OpenAI 的革命性语言模型发布之前。
 
@@ -48,41 +48,41 @@
 
 除了建立统计模型和学习编程，这些专业人士还需要使用 SQL 进行数据提取，使用如 Tableau 和 PowerBI 之类的软件进行可视化，并有效地将见解传达给利益相关者。
 
-然而，借助像ChatGPT这样的LLM，进入数据科学或分析领域的障碍将大大降低。候选人不再需要掌握各种软件的专长，而是可以利用LLM的力量在几分钟内完成通常需要几个小时的工作。
+然而，借助像 ChatGPT 这样的 LLM，进入数据科学或分析领域的障碍将大大降低。候选人不再需要掌握各种软件的专长，而是可以利用 LLM 的力量在几分钟内完成通常需要几个小时的工作。
 
-例如，在我曾经工作过的一家公司，我被要求完成一个计时的Excel评估，因为该组织的大部分数据库都存在于电子表格中。他们希望聘请一个能够迅速提取和分析这些数据的人。
+例如，在我曾经工作过的一家公司，我被要求完成一个计时的 Excel 评估，因为该组织的大部分数据库都存在于电子表格中。他们希望聘请一个能够迅速提取和分析这些数据的人。
 
-然而，随着LLM的普及，对具备特定工具使用专长的候选人的招聘要求将会消失。
+然而，随着 LLM 的普及，对具备特定工具使用专长的候选人的招聘要求将会消失。
 
-例如，通过ChatGPT-Excel集成，你可以简单地高亮要分析的单元格，并向LLM提问，如“这些销售数字在上个季度的趋势如何，”或“你能进行回归分析吗？”
+例如，通过 ChatGPT-Excel 集成，你可以简单地高亮要分析的单元格，并向 LLM 提问，如“这些销售数字在上个季度的趋势如何，”或“你能进行回归分析吗？”
 
-![ChatGPT会取代数据科学家吗？](../Images/11d56f8b103a50b4c7b0817b1a08298d.png)
+![ChatGPT 会取代数据科学家吗？](img/11d56f8b103a50b4c7b0817b1a08298d.png)
 
-ChatGPT对Excel集成的回应会是什么样子
+ChatGPT 对 Excel 集成的回应会是什么样子
 
-这样的产品集成将使Excel及其他类似软件对那些通常不使用它们的人变得可用，而对工具专家的需求将减少。
+这样的产品集成将使 Excel 及其他类似软件对那些通常不使用它们的人变得可用，而对工具专家的需求将减少。
 
 ## 代码插件
 
-[ChatGPT代码解释器插件](https://ai.plainenglish.io/i-got-chatgpt-plugins-access-is-the-excitement-justified-ef76ea18d94f)是数据科学工作流程民主化的另一个例子。它允许你在聊天中运行Python代码和分析数据。
+[ChatGPT 代码解释器插件](https://ai.plainenglish.io/i-got-chatgpt-plugins-access-is-the-excitement-justified-ef76ea18d94f)是数据科学工作流程民主化的另一个例子。它允许你在聊天中运行 Python 代码和分析数据。
 
-![ChatGPT会取代数据科学家吗？](../Images/1941c2fded9650b21b0658438c61279a.png)
+![ChatGPT 会取代数据科学家吗？](img/1941c2fded9650b21b0658438c61279a.png)
 
-图片来源于“[The Latest Now](https://ai.plainenglish.io/i-got-chatgpt-plugins-access-is-the-excitement-justified-ef76ea18d94f)”在Medium
+图片来源于“[The Latest Now](https://ai.plainenglish.io/i-got-chatgpt-plugins-access-is-the-excitement-justified-ef76ea18d94f)”在 Medium
 
-你可以上传CSV文件，并让ChatGPT帮助你清理、分析数据以及构建统计模型。
+你可以上传 CSV 文件，并让 ChatGPT 帮助你清理、分析数据以及构建统计模型。
 
-一旦你分析了数据并告诉它你想做什么（例如，预测下个季度的销售数字），ChatGPT会告诉你实现最终结果的步骤。
+一旦你分析了数据并告诉它你想做什么（例如，预测下个季度的销售数字），ChatGPT 会告诉你实现最终结果的步骤。
 
 它将继续为你进行实际分析和建模，并在每个阶段解释输出结果。
 
-在[这篇](https://medium.com/mlearning-ai/do-data-science-in-minutes-with-this-chatgpt-plugin-afb580980351)文章中，作者要求ChatGPT的代码解释器使用联邦储备经济数据（FRED）预测未来的通货膨胀趋势。算法从可视化数据中的当前趋势开始。
+在[这篇](https://medium.com/mlearning-ai/do-data-science-in-minutes-with-this-chatgpt-plugin-afb580980351)文章中，作者要求 ChatGPT 的代码解释器使用联邦储备经济数据（FRED）预测未来的通货膨胀趋势。算法从可视化数据中的当前趋势开始。
 
-然后它检查了数据的平稳性，对其进行了变换，并决定使用ARIMA进行建模。它甚至能够找到用于生成ARIMA预测的最佳参数：
+然后它检查了数据的平稳性，对其进行了变换，并决定使用 ARIMA 进行建模。它甚至能够找到用于生成 ARIMA 预测的最佳参数：
 
-![ChatGPT会取代数据科学家吗？](../Images/bece5ce27cf46e2dbafd36cb55e1198c.png)
+![ChatGPT 会取代数据科学家吗？](img/bece5ce27cf46e2dbafd36cb55e1198c.png)
 
-图片来源于“[The Latest Now](https://medium.com/mlearning-ai/do-data-science-in-minutes-with-this-chatgpt-plugin-afb580980351)”在Medium
+图片来源于“[The Latest Now](https://medium.com/mlearning-ai/do-data-science-in-minutes-with-this-chatgpt-plugin-afb580980351)”在 Medium
 
 这些步骤通常需要数据科学家花费大约 3-4 小时来完成，而 ChatGPT 只需几分钟，就能通过简单地摄取用户上传的数据来完成。
 
@@ -124,9 +124,9 @@ LLM 不能创建完整的数据产品，因为人类仍需执行需求收集、�
 
 ## 拥抱 AI
 
-根据皮尤研究中心的数据，只有[14%的成年人](https://www.pewresearch.org/short-reads/2023/05/24/a-majority-of-americans-have-heard-of-chatgpt-but-few-have-tried-it-themselves/)实际上尝试过ChatGPT。如果你正在阅读这篇文章，利用ChatGPT学习新事物，并跟上人工智能的最新进展，那么你就是一个早期采用者。
+根据皮尤研究中心的数据，只有[14%的成年人](https://www.pewresearch.org/short-reads/2023/05/24/a-majority-of-americans-have-heard-of-chatgpt-but-few-have-tried-it-themselves/)实际上尝试过 ChatGPT。如果你正在阅读这篇文章，利用 ChatGPT 学习新事物，并跟上人工智能的最新进展，那么你就是一个早期采用者。
 
-我建议将LLM（大型语言模型）融入到你的工作流程中，使用集成了人工智能的产品，并学习利用这些模型最大化效率的最佳实践。
+我建议将 LLM（大型语言模型）融入到你的工作流程中，使用集成了人工智能的产品，并学习利用这些模型最大化效率的最佳实践。
 
 这样，你可以保持领先，并更好地了解你工作中的哪些部分可以自动化，哪些部分需要人工干预。
 
@@ -150,11 +150,11 @@ LLM 不能创建完整的数据产品，因为人类仍需执行需求收集、�
 
 最后，《哈佛商业评论》建议[创建个人品牌](https://hbr.org/2023/04/5-ways-to-future-proof-your-career-in-the-age-of-ai)以使自己从人群中脱颖而出。
 
-像[Tim Denning](https://timdenning.medium.com/)和[Jessica Wildfire](https://jessicalexicus.medium.com/)这样的Medium作者，即使人工智能能够模拟他们的写作风格，他们仍然会拥有一群忠实的粉丝和消费他们作品的人。
+像[Tim Denning](https://timdenning.medium.com/)和[Jessica Wildfire](https://jessicalexicus.medium.com/)这样的 Medium 作者，即使人工智能能够模拟他们的写作风格，他们仍然会拥有一群忠实的粉丝和消费他们作品的人。
 
 这是因为最终，人们喜欢真实的故事，想要与他人建立联系，而这是人工智能无法提供的。
 
-同样，组织将继续聘用在领域内被认可的行业领袖，以此作为质量和品牌的象征。建立个人品牌的一些方法包括建立一个 [数据科学作品集](/2022/10/data-science-portfolio-land-job-2022.html)、创建内容并不断提升技能。
+同样，组织将继续聘用在领域内被认可的行业领袖，以此作为质量和品牌的象征。建立个人品牌的一些方法包括建立一个 数据科学作品集、创建内容并不断提升技能。
 
 # 要点
 

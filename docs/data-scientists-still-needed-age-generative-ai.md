@@ -1,26 +1,26 @@
-# 数据科学家在生成式AI时代仍然需要吗？
+# 数据科学家在生成式 AI 时代仍然需要吗？
 
-> 原文：[https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)
+> 原文：[`www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html`](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)
 
-![数据科学家在生成式AI时代仍然需要吗？](../Images/c3ce00dac65af6ec09c4c21ad4b059e0.png)
+![数据科学家在生成式 AI 时代仍然需要吗？](img/c3ce00dac65af6ec09c4c21ad4b059e0.png)
 
 使用稳定扩散技术创建的图像
 
-恰好两年前，我写了一篇名为“数据科学家将在10年内灭绝”的观点文章。令我惊讶的是，这篇文章成为我在Medium和KDnuggets上阅读量最高的文章之一。然而，反响却是两极分化的。这篇文章引发了我成年生活中收到的最多批评。我预言了21世纪最性感（也是最需求）工作的消亡，而我的同行们对此提出了异议，但我接受了反馈，生活继续前行。快进到现在，两年的时间带来了如此大的变化。ChatGPT风靡全球，与此同时，特定角色将被淘汰的叙述被更大的议题所掩盖——人力资本在各个行业中的过时。
+恰好两年前，我写了一篇名为“数据科学家将在 10 年内灭绝”的观点文章。令我惊讶的是，这篇文章成为我在 Medium 和 KDnuggets 上阅读量最高的文章之一。然而，反响却是两极分化的。这篇文章引发了我成年生活中收到的最多批评。我预言了 21 世纪最性感（也是最需求）工作的消亡，而我的同行们对此提出了异议，但我接受了反馈，生活继续前行。快进到现在，两年的时间带来了如此大的变化。ChatGPT 风靡全球，与此同时，特定角色将被淘汰的叙述被更大的议题所掩盖——人力资本在各个行业中的过时。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-革命似乎一夜之间发生了。但我们这些密切关注深度学习进展的人都知道，事实并非如此。ChatGPT是数十年研究的积累，不可思议地汇聚成了一个不起眼的聊天机器人。ChatGPT成功的核心在于它使AI民主化。掌握代码和拥有深厚的技术知识不再是进入门槛，前沿深度学习的可及性已超越了学术研究和大科技公司，任何有wifi和电子邮件地址的人都可以触及。
+革命似乎一夜之间发生了。但我们这些密切关注深度学习进展的人都知道，事实并非如此。ChatGPT 是数十年研究的积累，不可思议地汇聚成了一个不起眼的聊天机器人。ChatGPT 成功的核心在于它使 AI 民主化。掌握代码和拥有深厚的技术知识不再是进入门槛，前沿深度学习的可及性已超越了学术研究和大科技公司，任何有 wifi 和电子邮件地址的人都可以触及。
 
 # 为什么数据科学家已经灭绝？
 
@@ -42,18 +42,18 @@
 
 > **免责声明：观点和意见仅代表作者本人。**
 
-**[Michael Wang](https://www.linkedin.com/in/michael-wang-9a78011b5/)** 是一位拥有超过10年行业经验的投资与数据科学从业者，涉足金融科技、投资、交易及教学等多个领域。他是WhyPred的首席顾问及创始人，该公司是一家将金融市场专业知识与人工智能和机器学习相结合的分析咨询公司。
+**[Michael Wang](https://www.linkedin.com/in/michael-wang-9a78011b5/)** 是一位拥有超过 10 年行业经验的投资与数据科学从业者，涉足金融科技、投资、交易及教学等多个领域。他是 WhyPred 的首席顾问及创始人，该公司是一家将金融市场专业知识与人工智能和机器学习相结合的分析咨询公司。
 
 ### 更多相关话题
 
 +   [低代码：开发者仍然需要吗？](https://www.kdnuggets.com/2022/04/low-code-developers-still-needed.html)
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2024年数据科学仍然值得吗？](https://www.kdnuggets.com/is-data-science-still-worth-it-in-2024)
++   [2024 年数据科学仍然值得吗？](https://www.kdnuggets.com/is-data-science-still-worth-it-in-2024)
 
 +   [调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)
 
 +   [理解 AI 时代的数据隐私](https://www.kdnuggets.com/understanding-data-privacy-in-the-age-of-ai)
 
-+   [在 ChatGPT 时代构建深科技创业公司的10大难题](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
++   [在 ChatGPT 时代构建深科技创业公司的 10 大难题](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)

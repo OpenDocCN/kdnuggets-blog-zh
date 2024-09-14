@@ -1,10 +1,10 @@
-# 下一步数据科学问题的5步蓝图
+# 下一步数据科学问题的 5 步蓝图
 
-> 原文：[https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)
+> 原文：[`www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem`](https://www.kdnuggets.com/5-step-blueprint-to-your-next-data-science-problem)
 
-![下一步数据科学问题的5步蓝图](../Images/ff95a570fde5b58693b79f64bd800ee8.png)
+![下一步数据科学问题的 5 步蓝图](img/ff95a570fde5b58693b79f64bd800ee8.png)
 
-图片由fanjianhua提供，[来源于Freepik](https://www.freepik.com/free-photo/architectural-blueprints_1120546.htm#query=blue%20print&position=3&from_view=search&track=ais)
+图片由 fanjianhua 提供，[来源于 Freepik](https://www.freepik.com/free-photo/architectural-blueprints_1120546.htm#query=blue%20print&position=3&from_view=search&track=ais)
 
 公司在处理数据时面临的主要挑战之一是实施连贯的数据战略。我们都知道问题不在于数据不足，我们知道我们有很多数据。问题在于我们如何将数据转化为可操作的见解。
 

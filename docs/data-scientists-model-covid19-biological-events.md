@@ -1,8 +1,8 @@
 # 数据科学家是否应该对 COVID19 和其他生物事件进行建模
 
-> 原文：[https://www.kdnuggets.com/2020/04/data-scientists-model-covid19-biological-events.html](https://www.kdnuggets.com/2020/04/data-scientists-model-covid19-biological-events.html)
+> 原文：[`www.kdnuggets.com/2020/04/data-scientists-model-covid19-biological-events.html`](https://www.kdnuggets.com/2020/04/data-scientists-model-covid19-biological-events.html)
 
-[评论](#comments)![新冠数据科学](../Images/9b312a2dbb976fd452818e5bf037641a.png)
+评论![新冠数据科学](img/9b312a2dbb976fd452818e5bf037641a.png)
 
 数据科学家的角色多年来一直在扩展。从用统计数据处理数字，到构建可扩展的数据库，再到构建生产级的机器学习或深度学习模型。生物统计学和流行病学是统计学的高度专业化领域，大学为其提供不同的学位课程。
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 ### 流行病学家和生物统计学家
 
-![流行病学-生物统计学家](../Images/7b55dc3e3f0a8d71c109d8dc1633d3b1.png)[来源](https://publichealth.gsu.edu/academics-student-life/graduate-divisions/graduate-studies-epidemiology-biostatistics/)
+![流行病学-生物统计学家](img/7b55dc3e3f0a8d71c109d8dc1633d3b1.png)[来源](https://publichealth.gsu.edu/academics-student-life/graduate-divisions/graduate-studies-epidemiology-biostatistics/)
 
 流行病学是研究疾病在特定人群和环境中的频率和分布的学科。流行病学是公共健康的重要方面，因为它涉及对人群中疾病的理解和风险评估。流行病学家通常具有生物学、医学和病毒学等领域的科学背景。这是流行病学家建立领域知识的方式，从而能够理解他们所建模的内容。
 
@@ -48,7 +48,7 @@
 
 上述三个因素并非都适用于疾病，但我们可以看到第二点因实际病例数量被低估而成为问题。第二个问题是，COVID-19 的预测可能会影响我们试图预测的内容，因为各国政府正在做出反应，有些比其他国家更好。除非能够考虑到减缓传播的各种措施，否则使用现有数据的简单模型将会产生误导。
 
-他和其他科学家使用分 compartments 流行病学模型来模拟感染过程。最简单的模型是基于将人口中的活跃个体分类为易感、传染或康复——因此它们被称为SIR模型。
+他和其他科学家使用分 compartments 流行病学模型来模拟感染过程。最简单的模型是基于将人口中的活跃个体分类为易感、传染或康复——因此它们被称为 SIR 模型。
 
 ### 结论
 
@@ -56,22 +56,22 @@
 
 **相关内容：**
 
-+   [用AI对抗冠状病毒：利用深度学习和计算机视觉改进检测](/2020/04/fighting-coronavirus-ai-improving-testing-deep-learning-computer-vision.html)
++   用 AI 对抗冠状病毒：利用深度学习和计算机视觉改进检测
 
-+   [数据科学家应避免的5个统计陷阱](/2019/10/statistical-traps-data-scientists-avoid.html)
++   数据科学家应避免的 5 个统计陷阱
 
-+   [数据科学家应对COVID-19的5种方式及5个应避免的行动](/2020/04/5-ways-data-scientists-can-help-covid-19.html)
++   数据科学家应对 COVID-19 的 5 种方式及 5 个应避免的行动
 
 ### 更多相关主题
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标去……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [一个90亿美元的AI失败案例，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么使Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

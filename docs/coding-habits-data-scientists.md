@@ -1,28 +1,28 @@
 # 数据科学家的编码习惯
 
-> 原文：[https://www.kdnuggets.com/2020/05/coding-habits-data-scientists.html](https://www.kdnuggets.com/2020/05/coding-habits-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/05/coding-habits-data-scientists.html`](https://www.kdnuggets.com/2020/05/coding-habits-data-scientists.html)
 
-[评论](#comments)
+评论
 
 **作者：[David Tan](https://www.thoughtworks.com/profiles/david-tan)，ThoughtWorks**。
 
 *[最初发布于](https://www.thoughtworks.com/insights/blog/coding-habits-data-scientists) ThoughtWorks Insights。经许可转载。*
 
-作为一个ML从业者，你会知道代码很快就会失控。一个出色的ML模型很容易变成一个难以理解的大块代码。因此，修改代码变得痛苦且容易出错，同时ML从业者在演进其ML解决方案时变得越来越困难。
+作为一个 ML 从业者，你会知道代码很快就会失控。一个出色的 ML 模型很容易变成一个难以理解的大块代码。因此，修改代码变得痛苦且容易出错，同时 ML 从业者在演进其 ML 解决方案时变得越来越困难。
 
 本文分享了一些识别增加代码复杂性的坏习惯的技巧，以及有助于我们分解复杂性的习惯。它现在也是一个**[视频系列](https://www.youtube.com/watch?v=Edn6XxWmtEs&list=PLO9pkowc_99ZhP2yuPU8WCfFNYEx2IkwR&index=2)**，涵盖了以下主题：
 
-+   如何重构Jupyter notebook
++   如何重构 Jupyter notebook
 
-+   针对你的ML代码库的自动化测试
++   针对你的 ML 代码库的自动化测试
 
-+   如何使用IDE提高生产力
++   如何使用 IDE 提高生产力
 
-+   在17分钟内入门Docker
++   在 17 分钟内入门 Docker
 
 如果你尝试过机器学习或数据科学，你会知道代码可以迅速变得[混乱](https://github.com/davified/clean-code-ml/blob/master/notebooks/titanic-original.ipynb)。
 
-通常，训练ML模型的代码是用Jupyter notebooks编写的，里面充满了（i）副作用（例如打印语句、格式化的数据框、数据可视化）和（ii）没有任何抽象、模块化和自动化测试的粘合代码。虽然这对于旨在教授机器学习过程的笔记本可能没问题，但在实际项目中，这会变成一个难以维护的混乱。缺乏良好的编码习惯使得代码难以理解，因此，修改代码变得痛苦且容易出错。这使得数据科学家和开发人员在演进其ML解决方案时变得越来越困难。
+通常，训练 ML 模型的代码是用 Jupyter notebooks 编写的，里面充满了（i）副作用（例如打印语句、格式化的数据框、数据可视化）和（ii）没有任何抽象、模块化和自动化测试的粘合代码。虽然这对于旨在教授机器学习过程的笔记本可能没问题，但在实际项目中，这会变成一个难以维护的混乱。缺乏良好的编码习惯使得代码难以理解，因此，修改代码变得痛苦且容易出错。这使得数据科学家和开发人员在演进其 ML 解决方案时变得越来越困难。
 
 在本文中，我们将分享识别增加代码复杂性的不良习惯的技巧，以及有助于我们分解复杂性的习惯。
 
@@ -117,13 +117,13 @@ model = train_model(df)
 
 想象你在一家餐厅，你得到了一份菜单。这个菜单不是告诉你菜品的名称，而是详细列出了每道菜的食谱。例如，其中一道菜是：
 
-> *第1步。在一个大锅中，加热油。加入胡萝卜、洋葱和芹菜；搅拌至洋葱变软。加入香草和大蒜，再煮几分钟。*
+> *第 1 步。在一个大锅中，加热油。加入胡萝卜、洋葱和芹菜；搅拌至洋葱变软。加入香草和大蒜，再煮几分钟。*
 > 
-> *第2步。加入扁豆、番茄和水。将汤煮沸后转小火炖煮30分钟。加入菠菜并煮至菠菜变软。最后，用醋、盐和胡椒调味。*
+> *第 2 步。加入扁豆、番茄和水。将汤煮沸后转小火炖煮 30 分钟。加入菠菜并煮至菠菜变软。最后，用醋、盐和胡椒调味。*
 
 如果菜单隐藏了菜谱中的所有步骤（即实现细节），而只给出了菜品的名称（一个接口，即菜品的抽象），对我们来说会更容易（答案是：那是扁豆汤）。
 
-为了说明这一点，这里是来自Kaggle Titanic比赛的一个笔记本中的代码示例，重构前后对比。
+为了说明这一点，这里是来自 Kaggle Titanic 比赛的一个笔记本中的代码示例，重构前后对比。
 
 ```py
 # bad example
@@ -176,11 +176,11 @@ X, y = prepare_data(df)
 
 我们的心理负担现在大大减少了。我们不再被迫处理大量的实现细节来理解整个流程。相反，抽象（即函数）抽象了复杂性，告诉我们它们的功能，免去了我们在弄清楚它们如何实现时所需的心理努力。
 
-**尽快将代码从Jupyter笔记本中剥离出来**
+**尽快将代码从 Jupyter 笔记本中剥离出来**
 
 在室内设计中，有一个概念（“[平面表面法则](https://en.wikipedia.org/wiki/Law_of_flat_surfaces)”）指出“家或办公室中的任何平面表面都倾向于积累杂物。” Jupyter 笔记本是机器学习世界的平面表面。
 
-![](../Images/6555c8c503fcbd08787c0828595c5e45.png)
+![](img/6555c8c503fcbd08787c0828595c5e45.png)
 
 当然，Jupyter 笔记本非常适合快速原型开发。但这也是我们倾向于放入许多东西的地方——粘合代码、打印语句、被夸大的打印语句**（df.describe() **或** df.plot()）**、未使用的导入语句，甚至堆栈跟踪。尽管我们尽了最大努力，但只要笔记本存在，混乱往往会积累。
 
@@ -188,7 +188,7 @@ X, y = prepare_data(df)
 
 相反，如果我们将代码提取到函数和 Python 模块中，并且有单元测试，测试运行器会在几秒钟内对我们的更改进行反馈，即使有数百个函数也是如此。
 
-![](../Images/aab1436e8dea2ef7b6d4dccc99589dae.png)
+![](img/aab1436e8dea2ef7b6d4dccc99589dae.png)
 
 *图 1: 代码越多，笔记本就越难快速反馈我们是否一切正常。*
 
@@ -198,7 +198,7 @@ X, y = prepare_data(df)
 
 假设你已经在 Jupyter 笔记本中有了代码，你可以遵循这个过程：
 
-![](../Images/f182b2d0c197d0d9b1c6b448a2d23c67.png)
+![](img/f182b2d0c197d0d9b1c6b448a2d23c67.png)
 
 *图 2: [如何重构 Jupyter 笔记本](https://github.com/davified/clean-code-ml/blob/master/docs/refactoring-process.md)。*
 
@@ -208,7 +208,7 @@ X, y = prepare_data(df)
 
 到目前为止，我们已经讨论了在代码已经写在笔记本之后编写测试。这种推荐并不是理想的，但总比没有单元测试要好得多。
 
-有一个误解认为我们不能将测试驱动开发（[TDD](https://www.thoughtworks.com/insights/blog/test-driven-development-best-thing-has-happened-software-design)）应用于机器学习项目。对我们来说，这显然是不正确的。在任何机器学习项目中，大部分代码涉及数据转换（例如数据清洗、特征工程），而小部分代码才是实际的机器学习。这样的数据转换可以写成纯函数，对于相同的输入返回相同的输出，因此我们可以应用TDD并获得其好处。例如，TDD可以帮助我们将大型复杂的数据转换拆解为可以逐个处理的小问题。
+有一个误解认为我们不能将测试驱动开发（[TDD](https://www.thoughtworks.com/insights/blog/test-driven-development-best-thing-has-happened-software-design)）应用于机器学习项目。对我们来说，这显然是不正确的。在任何机器学习项目中，大部分代码涉及数据转换（例如数据清洗、特征工程），而小部分代码才是实际的机器学习。这样的数据转换可以写成纯函数，对于相同的输入返回相同的输出，因此我们可以应用 TDD 并获得其好处。例如，TDD 可以帮助我们将大型复杂的数据转换拆解为可以逐个处理的小问题。
 
 至于测试代码的实际机器学习部分是否按预期工作，我们可以编写功能测试以验证模型的指标（如准确性、精确度等）是否高于我们预期的阈值。换句话说，这些测试验证模型是否按照我们的预期运行（因此得名功能测试）。以下是一个[示例](https://github.com/davified/clean-code-ml/blob/master/src/tests/test_model_metrics.py)：
 
@@ -235,9 +235,9 @@ class TestModelMetrics(unittest.TestCase):
 
 例如，请看下面的第一张和第二张图片。你能找出我们正在处理哪个函数吗？哪张图片让你更容易理解？
 
-![](../Images/5876a792c417d3bf346971b0694a3176.png)
+![](img/5876a792c417d3bf346971b0694a3176.png)
 
-![](../Images/2d0e582607aa4da59dc8d5eb21d22d8e.png)
+![](img/2d0e582607aa4da59dc8d5eb21d22d8e.png)
 
 当我们进行小而频繁的提交时，我们会获得以下好处：
 
@@ -251,35 +251,35 @@ class TestModelMetrics(unittest.TestCase):
 
 ### 结论
 
-> *“我不是一个伟大的程序员；我只是一个有着良好习惯的好程序员。” - Kent Beck，极限编程和xUnit测试框架的先驱*
+> *“我不是一个伟大的程序员；我只是一个有着良好习惯的好程序员。” - Kent Beck，极限编程和 xUnit 测试框架的先驱*
 
 这些习惯帮助我们管理机器学习和数据科学项目中的复杂性。我们希望这些习惯也能帮助你在数据项目中变得更加灵活和高效。
 
-**简介：** [David](https://www.thoughtworks.com/profiles/david-tan)在ThoughtWorks工作了2年，在决定转行做软件工程之前，他在政府部门从事非技术性工作。在过去两年中，他参与了多个机器学习的副项目，包括股票市场价格预测、欺诈保护以及啤酒数量图像识别。他还是ThoughtWorks JumpStart!计划的培训师。David对敏捷软件开发和知识共享充满热情。在空闲时间，他喜欢和家人一起度过时光，作为一个新晋爸爸。
+**简介：** [David](https://www.thoughtworks.com/profiles/david-tan)在 ThoughtWorks 工作了 2 年，在决定转行做软件工程之前，他在政府部门从事非技术性工作。在过去两年中，他参与了多个机器学习的副项目，包括股票市场价格预测、欺诈保护以及啤酒数量图像识别。他还是 ThoughtWorks JumpStart!计划的培训师。David 对敏捷软件开发和知识共享充满热情。在空闲时间，他喜欢和家人一起度过时光，作为一个新晋爸爸。
 
 **相关：**
 
-+   [你今天应该学习的10个Python技巧和窍门](https://www.kdnuggets.com/2020/01/10-python-tips-tricks-learn-today.html)
++   [你今天应该学习的 10 个 Python 技巧和窍门](https://www.kdnuggets.com/2020/01/10-python-tips-tricks-learn-today.html)
 
-+   [数据科学家常犯的10个编程错误](https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html)
++   [数据科学家常犯的 10 个编程错误](https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html)
 
-+   [你的机器学习代码可能很糟糕的4个原因](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)
++   [你的机器学习代码可能很糟糕的 4 个原因](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，5月4日：9个免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 个免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 

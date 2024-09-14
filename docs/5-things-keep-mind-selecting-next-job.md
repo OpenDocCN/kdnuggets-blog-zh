@@ -1,8 +1,8 @@
-# 选择下一个数据科学工作的5个注意事项
+# 选择下一个数据科学工作的 5 个注意事项
 
-> 原文：[https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
+> 原文：[`www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html`](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-![选择下一个工作的5个注意事项](../Images/35cc59030b98cb5f183ae14a498f2154.png)
+![选择下一个工作的 5 个注意事项](img/35cc59030b98cb5f183ae14a498f2154.png)
 
 图片来源：[Jac Alexandru](https://unsplash.com/@rolls0ut?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/question-mark?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，(2020)
 
@@ -14,23 +14,23 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-## **你的团队里有MLOps工程师吗？**
+## **你的团队里有 MLOps 工程师吗？**
 
 学习数据科学通常包括掌握机器学习算法，但有一个巨大的部分在学术界常被忽视，那就是这些算法的操作。这可能是因为有许多不同的方法来部署模型，而很多选项可能包括成本高昂的、已经集成到你业务中的特定平台。由于这种变异性，学校或课程可能选择不在教学大纲中包含操作部分，这是可以理解的。
 
-话虽如此，你很可能需要问清楚这项工作是否会由你作为数据科学家负责，还是会有专门的MLOps工程师（*或机器学习工程师等*）。当然，也有一些人能够同时处理这两个部分，并且希望精通模型创建和部署的两个过程，但仅专注于算法的数据科学家也是可以的。与未来或当前的经理明确这一点尤为重要。
+话虽如此，你很可能需要问清楚这项工作是否会由你作为数据科学家负责，还是会有专门的 MLOps 工程师（*或机器学习工程师等*）。当然，也有一些人能够同时处理这两个部分，并且希望精通模型创建和部署的两个过程，但仅专注于算法的数据科学家也是可以的。与未来或当前的经理明确这一点尤为重要。
 
-## **你会与SQL/数据/业务分析师合作吗？**
+## **你会与 SQL/数据/业务分析师合作吗？**
 
-与上述考虑类似，你会想知道你的团队中是否有精通SQL的人员。一些数据科学职位对SQL的要求较少，而其他职位几乎每天都需要使用SQL。在面试中，你需要明确你将需要使用多少SQL，以及是否是唯一负责的人。
+与上述考虑类似，你会想知道你的团队中是否有精通 SQL 的人员。一些数据科学职位对 SQL 的要求较少，而其他职位几乎每天都需要使用 SQL。在面试中，你需要明确你将需要使用多少 SQL，以及是否是唯一负责的人。
 
 有时，可能会有其他人，如数据分析师、业务分析师或数据工程师，他们是 SQL 方面的专家。然而，在某些数据科学职位中，你将需要在建模过程之前和之后查询数据。
 

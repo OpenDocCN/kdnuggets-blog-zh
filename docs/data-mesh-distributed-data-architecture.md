@@ -1,8 +1,8 @@
 # 数据网格及其分布式数据架构
 
-> 原文：[https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
+> 原文：[`www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html`](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 
-![数据网格及其分布式数据架构](../Images/48a44ce10ca7a27509371732af4ec1bf.png)
+![数据网格及其分布式数据架构](img/48a44ce10ca7a27509371732af4ec1bf.png)
 
 图片由 [Ricardo Gomez Angel](https://unsplash.com/@rgaleria?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，发布在 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -46,7 +46,7 @@
 
 ### 使用基于实体的数据结构实施数据网格
 
-以K2View的基于实体的数据结构架构为例。它为每个业务实体保存数据到一个独立的微型数据库，从而支持成千上万个这些数据库。此外，通过将‘业务实体’和‘数据作为产品’的概念融合，他们的结构支持数据网格设计模式的实施。在这里，数据结构创建了一个连接来自多个来源的数据集的集成层。这为操作和分析工作负载提供了全景视图。
+以 K2View 的基于实体的数据结构架构为例。它为每个业务实体保存数据到一个独立的微型数据库，从而支持成千上万个这些数据库。此外，通过将‘业务实体’和‘数据作为产品’的概念融合，他们的结构支持数据网格设计模式的实施。在这里，数据结构创建了一个连接来自多个来源的数据集的集成层。这为操作和分析工作负载提供了全景视图。
 
 实体基础结构标准化了所有数据产品的语义定义。根据规定，它建立了数据摄取方法和治理政策，以确保数据集的安全性。由于基础结构的支持，网格模式在实体级存储方面表现更好。
 
@@ -54,32 +54,32 @@
 
 ### 去中心化数据所有权模型
 
-企业必须将来自多个来源的多种数据类型导入集中式存储库，如数据湖。在这里，数据处理通常消耗大量精力，并且容易出错。查询这种异构数据集进行分析会直接增加成本。因此，数据专业人士一直在寻找这种集中式方法的替代方案。凭借Mesh的分布式架构，他们能够实现每个业务实体的所有权去中心化。现在，这种模式减少了生成定性见解的时间，从而增加了核心目标的价值——快速访问数据并影响关键业务决策。
+企业必须将来自多个来源的多种数据类型导入集中式存储库，如数据湖。在这里，数据处理通常消耗大量精力，并且容易出错。查询这种异构数据集进行分析会直接增加成本。因此，数据专业人士一直在寻找这种集中式方法的替代方案。凭借 Mesh 的分布式架构，他们能够实现每个业务实体的所有权去中心化。现在，这种模式减少了生成定性见解的时间，从而增加了核心目标的价值——快速访问数据并影响关键业务决策。
 
 去中心化方法解决了更多问题。例如，传统数据管理中的查询方法可能会因数据量无法控制的增长而失去效率。这必然会迫使整个流程发生变化，并最终无法响应。因此，随着数据源数量的增加，响应时间急剧下降。这一直影响着提取数据价值和扩大业务成果的过程敏捷性。
 
 通过去中心化，Mesh [将所有权分配](https://roundup.getdbt.com/p/data-mesh-contracts-and-distributed)给不同的领域，以应对数据量的挑战，并最终在其层面上、为其相关的数据集执行查询。因此，该架构使企业流程能够缩短事件与其消费分析之间的差距。企业能够在关键决策制定方面进行改进。
 
-通过提供数据即服务架构，Mesh带来了业务运营的敏捷性。它不仅减少了IT积压，还使数据团队只处理精简和相关的数据流。
+通过提供数据即服务架构，Mesh 带来了业务运营的敏捷性。它不仅减少了 IT 积压，还使数据团队只处理精简和相关的数据流。
 
 因此，授权的消费者可以轻松访问他们各自的数据集，而无需了解其底层复杂性。
 
 ### 结论
 
-从数字数据开始，Web 3.0致力于去中心化企业流程。数据管理是这一方向上的一个重要用例。显然，集中式权威在处理爆炸性增长的数据方面已经超出了某个极限。期待2022年，它将把Data Mesh架构推向前沿。
+从数字数据开始，Web 3.0 致力于去中心化企业流程。数据管理是这一方向上的一个重要用例。显然，集中式权威在处理爆炸性增长的数据方面已经超出了某个极限。期待 2022 年，它将把 Data Mesh 架构推向前沿。
 
-**[Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/)** 是一位物联网和大数据爱好者，他在IDG、IEEE、Entrepreneur等刊物上发表了许多文章。他共同开发了像[Getlua](https://getlua.com/)这样的平台，允许用户轻松地[合并多个文件](https://getlua.com/merge-pdf)。他还创办了一个研究平台，从专家那里生成可操作的见解。
+**[Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/)** 是一位物联网和大数据爱好者，他在 IDG、IEEE、Entrepreneur 等刊物上发表了许多文章。他共同开发了像[Getlua](https://getlua.com/)这样的平台，允许用户轻松地[合并多个文件](https://getlua.com/merge-pdf)。他还创办了一个研究平台，从专家那里生成可操作的见解。
 
 ### 更多相关内容
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何学习机器学习数学](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何学习机器学习数学](https://www.kdnuggets.com/2022/n07.html)
 
 +   [数据网格架构：重新构想数据管理](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)
 
-+   [KDnuggets 新闻，5月18日：5个免费机器学习托管平台](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费机器学习托管平台](https://www.kdnuggets.com/2022/n20.html)
 
 +   [探索数据网格：数据架构的范式转变](https://www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture)
 
-+   [如何使用Apache Kafka构建可扩展的数据架构](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)
++   [如何使用 Apache Kafka 构建可扩展的数据架构](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)
 
 +   [文本分类任务的最佳架构：基准测试](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)

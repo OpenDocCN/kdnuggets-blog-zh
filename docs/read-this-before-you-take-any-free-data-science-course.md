@@ -1,22 +1,22 @@
 # 在参加任何免费的数据科学课程之前请阅读此信息
 
-> 原文：[https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
+> 原文：[`www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course`](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
 
-![在参加任何免费的数据科学课程之前请阅读此信息](../Images/27556a22d7a85e23c64882672441585d.png)
+![在参加任何免费的数据科学课程之前请阅读此信息](img/27556a22d7a85e23c64882672441585d.png)
 
 图片来源：作者
 
-在今天的数字时代，迈克尔·哈克沃特的名言“如果你没有为产品付费，那么你就是产品”从未如此相关。虽然我们通常将其与Facebook等社交媒体平台联系在一起，但它同样适用于看似无害的免费资源，例如YouTube课程。
+在今天的数字时代，迈克尔·哈克沃特的名言“如果你没有为产品付费，那么你就是产品”从未如此相关。虽然我们通常将其与 Facebook 等社交媒体平台联系在一起，但它同样适用于看似无害的免费资源，例如 YouTube 课程。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -38,15 +38,15 @@
 
 这里列出了一些我认为高质量的免费课程：
 
-1.  [用Python编程入门](https://www.edx.org/learn/python/harvard-university-cs50-s-introduction-to-programming-with-python?irclickid=zzjUuezqoxyPUIQXCo0XOVbQUkH22K1TgU1hW40&utm_source=affiliate&utm_medium=admitad%20GmbH.&utm_campaign=edX%20Tracking%20Link_&utm_content=TEXT_LINK&irgwc=1) 由 HarvardX 提供
+1.  [用 Python 编程入门](https://www.edx.org/learn/python/harvard-university-cs50-s-introduction-to-programming-with-python?irclickid=zzjUuezqoxyPUIQXCo0XOVbQUkH22K1TgU1hW40&utm_source=affiliate&utm_medium=admitad%20GmbH.&utm_campaign=edX%20Tracking%20Link_&utm_content=TEXT_LINK&irgwc=1) 由 HarvardX 提供
 
-1.  [用R进行统计学习](https://www.edx.org/learn/statistics/stanford-university-statistical-learning?irclickid=zzjUuezqoxyPUIQXCo0XOVbQUkH22Ky6gU1hW40&utm_source=affiliate&utm_medium=admitad%20GmbH.&utm_campaign=edX%20Tracking%20Link_&utm_content=TEXT_LINK&irgwc=1) 由 StanfordOnline 提供
+1.  [用 R 进行统计学习](https://www.edx.org/learn/statistics/stanford-university-statistical-learning?irclickid=zzjUuezqoxyPUIQXCo0XOVbQUkH22Ky6gU1hW40&utm_source=affiliate&utm_medium=admitad%20GmbH.&utm_campaign=edX%20Tracking%20Link_&utm_content=TEXT_LINK&irgwc=1) 由 StanfordOnline 提供
 
 1.  [数据科学入门](https://github.com/microsoft/Data-Science-For-Beginners) 由 Microsoft 提供
 
-1.  [数据库与SQL](https://www.youtube.com/watch?v=HXV3zeQKqGY) 由 freeCodeCamp 提供
+1.  [数据库与 SQL](https://www.youtube.com/watch?v=HXV3zeQKqGY) 由 freeCodeCamp 提供
 
-1.  [机器学习Zoomcamp](https://github.com/DataTalksClub/machine-learning-zoomcamp) 由 DataTalks.Club 提供
+1.  [机器学习 Zoomcamp](https://github.com/DataTalksClub/machine-learning-zoomcamp) 由 DataTalks.Club 提供
 
 # 4\. 动机与承诺
 

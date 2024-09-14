@@ -1,8 +1,8 @@
 # 5 个你不应忽视的机器学习项目
 
-> 原文：[https://www.kdnuggets.com/2018/02/5-machine-learning-projects-overlook-feb-2018.html](https://www.kdnuggets.com/2018/02/5-machine-learning-projects-overlook-feb-2018.html)
+> 原文：[`www.kdnuggets.com/2018/02/5-machine-learning-projects-overlook-feb-2018.html`](https://www.kdnuggets.com/2018/02/5-machine-learning-projects-overlook-feb-2018.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 在暂别之后，本月的“[忽视...](https://www.kdnuggets.com/tag/overlook)”帖子将卷土重来，继续温和地引入一些强大的鲜为人知的 [机器学习项目](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)。
 
@@ -31,7 +31,7 @@
 [0]
 ```
 
-![PHP-ML](../Images/f7fb43d3e37db911485b376f2c04c89f.png)
+![PHP-ML](img/f7fb43d3e37db911485b376f2c04c89f.png)
 
 **2\. [PHP-ML: PHP 的机器学习库](https://github.com/php-ai/php-ml)**
 
@@ -41,7 +41,7 @@
 
 虽然我是在开玩笑，但我已经远离 PHP 世界，不知道这是否能满足某些特定的紧迫需求；5K+ 的星标表明它可能确实有这个作用！除此之外，我总是对不同编程语言环境中的机器学习生态系统如何展开感兴趣。也许你也一样，或者更重要的是，你可能真的需要一个初看起来对 PHP 用户来说是一个坚实的库。
 
-![Keras](../Images/2c0ef14f22fd4f68dc8fec252e13820a.png)
+![Keras](img/2c0ef14f22fd4f68dc8fec252e13820a.png)
 
 **3\. [Keras Scikit-Learn API 封装器](https://keras.io/scikit-learn-api/)**
 
@@ -53,7 +53,7 @@
 
 如果你已经在使用 Keras，这对你来说可能并不陌生。如果你还没有，知道这个集成是可能的可能足以让你看看。
 
-![CatBoost](../Images/d8d86bb0d0785a1faef7410b7a8fd49a.png)
+![CatBoost](img/d8d86bb0d0785a1faef7410b7a8fd49a.png)
 
 **4\. [CatBoost: 基于决策树的梯度提升机器学习方法](https://github.com/catboost/catboost)**
 
@@ -73,7 +73,7 @@
 
 CatBoost 提供 Python、R 和命令行界面版本。查看 [这里的教程](https://github.com/catboost/catboost/tree/master/catboost/tutorials)，以及完整的 [文档](https://tech.yandex.com/catboost/doc/dg/concepts/about-docpage/)。
 
-![PyMC3](../Images/284f5cf62db5858af8a93bafc5868596.png)
+![PyMC3](img/284f5cf62db5858af8a93bafc5868596.png)
 
 **5\. [PyMC3: Python 中的概率编程](https://github.com/pymc-devs/pymc3)**
 
@@ -93,21 +93,21 @@ PyMC3 基于 Theano 提供：
 
 **相关：**
 
-+   [5 个你无法再忽视的机器学习项目](/2016/05/five-machine-learning-projects-cant-overlook.html)
++   5 个你无法再忽视的机器学习项目
 
-+   [5 个你无法再忽视的机器学习项目](/2016/06/five-more-machine-learning-projects-cant-overlook.html)
++   5 个你无法再忽视的机器学习项目
 
-+   [5 个你无法再忽视的机器学习项目 – 第六集](/2017/09/five-machine-learning-projects-cant-overlook-episode-vi.html)
++   5 个你无法再忽视的机器学习项目 – 第六集
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 

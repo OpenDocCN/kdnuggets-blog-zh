@@ -1,12 +1,12 @@
 # 系好安全带：Falcon 180B 到来了！
 
-> 原文：[https://www.kdnuggets.com/fasten-your-seatbelt-falcon-180b-is-here](https://www.kdnuggets.com/fasten-your-seatbelt-falcon-180b-is-here)
+> 原文：[`www.kdnuggets.com/fasten-your-seatbelt-falcon-180b-is-here`](https://www.kdnuggets.com/fasten-your-seatbelt-falcon-180b-is-here)
 
-![系好安全带：Falcon 180B 到来了！](../Images/e65a7e76e2f4c174d5c28fe9e2c34569.png)
+![系好安全带：Falcon 180B 到来了！](img/e65a7e76e2f4c174d5c28fe9e2c34569.png)
 
 图片来自作者
 
-几个月前，我们了解到 [Falcon LLM](/2023/06/falcon-llm-new-king-llms.html)，这是由 [技术创新研究所](https://www.tii.ae/)（TII）创立的，该公司是阿布扎比政府先进技术研究委员会的一部分。几个月后，他们变得更大、更强——字面上的意义，更大。
+几个月前，我们了解到 Falcon LLM，这是由 [技术创新研究所](https://www.tii.ae/)（TII）创立的，该公司是阿布扎比政府先进技术研究委员会的一部分。几个月后，他们变得更大、更强——字面上的意义，更大。
 
 # Falcon 180B: 你需要了解的一切
 
@@ -38,9 +38,9 @@ Falcon 180B 使用的数据集主要来自 RefinedWeb，占比达 85%，此外�
 
 你们都想知道的部分——Falcon 180B 在竞争对手中表现如何？
 
-到目前为止（2023年9月），Falcon 180B 是公开发布的最佳大语言模型。它在 [MMLU](https://paperswithcode.com/dataset/mmlu) 上的表现超过了 Llama 2 70B 和 OpenAI 的 GPT-3.5。它通常介于 GPT 3.5 和 GPT 4 之间。
+到目前为止（2023 年 9 月），Falcon 180B 是公开发布的最佳大语言模型。它在 [MMLU](https://paperswithcode.com/dataset/mmlu) 上的表现超过了 Llama 2 70B 和 OpenAI 的 GPT-3.5。它通常介于 GPT 3.5 和 GPT 4 之间。
 
-![系好安全带：Falcon 180B 到来了！](../Images/2b578ab8e51a55f1336154eed1d9b9a5.png)
+![系好安全带：Falcon 180B 到来了！](img/2b578ab8e51a55f1336154eed1d9b9a5.png)
 
 图片来自 [HuggingFace Falcon 180B](https://huggingface.co/blog/falcon-180b)
 
@@ -52,7 +52,7 @@ Falcon 180B 在 Hugging Face 排行榜上排名 68.74，使其成为最高分的
 
 然而，正如你可以想象的，由于模型的体积，你需要考虑硬件要求。为了更好地了解硬件要求，HuggingFace 进行了不同使用案例所需的模型运行测试，如下图所示：
 
-![系好安全带：Falcon 180B 来了！](../Images/424f925c66da18a9be9a9153c7800098.png)
+![系好安全带：Falcon 180B 来了！](img/424f925c66da18a9be9a9153c7800098.png)
 
 图片由 [HuggingFace Falcon 180B](https://huggingface.co/blog/falcon-180b) 提供
 

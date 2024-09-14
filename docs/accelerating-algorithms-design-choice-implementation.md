@@ -1,10 +1,10 @@
 # 加速算法：设计、算法选择和实现中的注意事项
 
-> 原文：[https://www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html](https://www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html)
+> 原文：[`www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html`](https://www.kdnuggets.com/2017/12/accelerating-algorithms-design-choice-implementation.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2017/12/accelerating-algorithms-design-choice-implementation.html/#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/546d443636f0c7cf6486c8f12e2311d8.png)
+![](img/546d443636f0c7cf6486c8f12e2311d8.png)
 
 **由 [Tom Radcliffe](https://www.activestate.com/blog/authors/tomr)**。
 
@@ -12,13 +12,13 @@
 
 有许多加速算法的方法。一些方法对上下文依赖性强，有些则较为通用。我将探讨整体设计选择、算法选择和实现细节。我的背景和经验主要集中在优化问题和数值算法上，所以这将是主要关注的领域。
 
-传统上，讨论优化时都会提到要谨慎。Knuth的第一条优化法则是：“不要做”而他的第二条类似：“还不要做。”我们还被告知“过早优化是万恶之源”，但什么算作“过早”？何时为时已晚？
+传统上，讨论优化时都会提到要谨慎。Knuth 的第一条优化法则是：“不要做”而他的第二条类似：“还不要做。”我们还被告知“过早优化是万恶之源”，但什么算作“过早”？何时为时已晚？
 
 我自己的优化法则旨在回答这个问题：“没有量化就没有优化。”我们不应该在没有先测量当前性能和对代码进行性能分析以确定时间消耗最多的地方之前尝试加速算法。正确推断算法花费大部分时间的地方是非常困难的。
 
-比如，我写的一个光学蒙特卡罗模拟程序发现其运行时间有四分之一是用于对接近1的数字进行平方根运算。这是由于在散射事件后重新归一化方向向量的过程。通过为这种特殊情况编写一些高度优化的代码，我能够避免在数学协处理器中使用较慢的通用实现，从而在整体性能上提高了约20%，在运行时间长达数天的情况下，这并非小事。如果没有对代码进行性能分析，我不可能发现这个时间消耗点。
+比如，我写的一个光学蒙特卡罗模拟程序发现其运行时间有四分之一是用于对接近 1 的数字进行平方根运算。这是由于在散射事件后重新归一化方向向量的过程。通过为这种特殊情况编写一些高度优化的代码，我能够避免在数学协处理器中使用较慢的通用实现，从而在整体性能上提高了约 20%，在运行时间长达数天的情况下，这并非小事。如果没有对代码进行性能分析，我不可能发现这个时间消耗点。
 
-Python中的cProfile和profile模块（它们都是[ActivePython发行版](https://www.activestate.com/activepython "Download and install Python with ActivePython")的一部分）提供了确定性性能分析，使结果相对容易解读。其他语言可能支持基于程序计数器采样的性能分析，由于统计效应，这种方法可能会因运行而异。即使是确定性性能分析，程序的某些部分由于资源限制或代码中的随机数使用，可能会有性能波动。I/O和通信都是外部依赖可能影响性能的领域，因此如果可能的话，最好单独对这些进行性能分析。
+Python 中的 cProfile 和 profile 模块（它们都是[ActivePython 发行版](https://www.activestate.com/activepython "Download and install Python with ActivePython")的一部分）提供了确定性性能分析，使结果相对容易解读。其他语言可能支持基于程序计数器采样的性能分析，由于统计效应，这种方法可能会因运行而异。即使是确定性性能分析，程序的某些部分由于资源限制或代码中的随机数使用，可能会有性能波动。I/O 和通信都是外部依赖可能影响性能的领域，因此如果可能的话，最好单独对这些进行性能分析。
 
 这假设我们已有代码来进行性能分析，但算法加速可以在开发过程的多个不同层面进行：设计、算法选择和实现。
 
@@ -74,17 +74,17 @@ map() 函数比循环更快：对一个包含 100,000,000 个整数的数组进�
 
 +   [**从创意到成功数据科学项目的 7 个超级简单步骤**](https://www.kdnuggets.com/2017/11/7-super-simple-steps-idea-successful-data-science-project.html)
 
-+   [**2017年使用的顶级数据科学与机器学习方法**](https://www.kdnuggets.com/2017/12/top-data-science-machine-learning-methods.html)
++   [**2017 年使用的顶级数据科学与机器学习方法**](https://www.kdnuggets.com/2017/12/top-data-science-machine-learning-methods.html)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -98,6 +98,6 @@ map() 函数比循环更快：对一个包含 100,000,000 个整数的数组进�
 
 +   [DeepMind 的 AlphaTensor 的首个开源实现](https://www.kdnuggets.com/2023/03/first-open-source-implementation-deepmind-alphatensor.html)
 
-+   [了解如何设计、测量和实施可靠的A/B测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
++   [了解如何设计、测量和实施可靠的 A/B 测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
 
 +   [利用人工智能设计公平和公正的电动车充电网络](https://www.kdnuggets.com/leveraging-ai-to-design-fair-and-equitable-ev-charging-grids)

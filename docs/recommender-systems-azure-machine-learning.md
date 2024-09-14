@@ -1,12 +1,12 @@
 # 使用 Azure 机器学习服务构建推荐系统
 
-> 原文：[https://www.kdnuggets.com/2019/05/recommender-systems-azure-machine-learning.html](https://www.kdnuggets.com/2019/05/recommender-systems-azure-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/05/recommender-systems-azure-machine-learning.html`](https://www.kdnuggets.com/2019/05/recommender-systems-azure-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Heather Spetalnick](https://www.linkedin.com/in/heather-spetalnick-16674445/)，程序经理，ML 平台**
 
-![](../Images/ed696d137e2bad6fe0d95f208557ef45.png)
+![](img/ed696d137e2bad6fe0d95f208557ef45.png)
 
 推荐系统在零售、新闻和媒体等多个行业中都有应用。如果你曾经使用过流媒体服务或电子商务网站，并根据你之前观看或购买的内容收到过推荐，那么你就与推荐系统互动过。随着大量数据的可用性，许多企业将推荐系统作为关键的收入驱动因素。然而，找到合适的推荐算法对于数据科学家来说可能非常耗时。这就是微软提供一个[GitHub 存储库](https://github.com/Microsoft/Recommenders/tree/master/)的原因，该存储库包含了 Python 最佳实践示例，以方便使用[Azure 机器学习服务](https://azure.microsoft.com/en-us/services/machine-learning-service/)来构建和评估推荐系统。
 
@@ -34,7 +34,7 @@
 
 在下图中，你将找到仓库中可用的推荐算法列表。我们一直在增加更多推荐算法，所以请访问 GitHub 仓库以查看最新列表。
 
-![](../Images/f1241b944942209f2376f822dd801d2e.png)
+![](img/f1241b944942209f2376f822dd801d2e.png)
 
 ### 让我们更详细地了解推荐系统仓库如何解决数据科学家的痛点。
 
@@ -48,27 +48,27 @@
 
 ### 实施更多最先进的算法可能看起来令人望而生畏
 
-+   当被要求构建推荐系统时，数据科学家通常会转向更常见的算法，以减轻选择和测试更先进算法所需的时间和成本，即使这些更先进的算法可能更适合项目/数据集。推荐系统的GitHub代码库提供了一些知名和最先进的推荐算法，适合特定场景。它还提供了最佳实践，遵循这些实践会使实现更先进的算法变得更容易。
++   当被要求构建推荐系统时，数据科学家通常会转向更常见的算法，以减轻选择和测试更先进算法所需的时间和成本，即使这些更先进的算法可能更适合项目/数据集。推荐系统的 GitHub 代码库提供了一些知名和最先进的推荐算法，适合特定场景。它还提供了最佳实践，遵循这些实践会使实现更先进的算法变得更容易。
 
-### 数据科学家对如何使用Azure机器学习服务来训练、测试、优化和部署推荐算法不熟悉
+### 数据科学家对如何使用 Azure 机器学习服务来训练、测试、优化和部署推荐算法不熟悉
 
-+   最后，推荐系统的GitHub代码库提供了如何在Azure和[Azure 机器学习 (Azure ML) 服务](https://docs.microsoft.com/azure/machine-learning/service/)上训练、测试、优化和部署推荐模型的最佳实践。实际上，有[几个可用的笔记本](https://github.com/Microsoft/Recommenders/tree/master/notebooks#submit-an-existing-notebook-to-azure-machine-learning)演示了如何在Azure ML服务上运行代码库中的推荐算法。数据科学家还可以将任何已创建的笔记本提交到Azure，几乎无需修改。
++   最后，推荐系统的 GitHub 代码库提供了如何在 Azure 和[Azure 机器学习 (Azure ML) 服务](https://docs.microsoft.com/azure/machine-learning/service/)上训练、测试、优化和部署推荐模型的最佳实践。实际上，有[几个可用的笔记本](https://github.com/Microsoft/Recommenders/tree/master/notebooks#submit-an-existing-notebook-to-azure-machine-learning)演示了如何在 Azure ML 服务上运行代码库中的推荐算法。数据科学家还可以将任何已创建的笔记本提交到 Azure，几乎无需修改。
 
-### Azure ML可以在各种笔记本中广泛用于AI模型开发相关任务，例如：
+### Azure ML 可以在各种笔记本中广泛用于 AI 模型开发相关任务，例如：
 
 +   超参数调优
 
 +   跟踪和监控指标以提升模型创建过程
 
-+   在DSVM和Azure ML计算中进行规模扩展
++   在 DSVM 和 Azure ML 计算中进行规模扩展
 
-+   将Web服务部署到Azure Kubernetes服务
++   将 Web 服务部署到 Azure Kubernetes 服务
 
 +   提交管道
 
 ### 了解更多
 
-利用[GitHub代码库创建你自己的推荐系统](https://github.com/Microsoft/Recommenders/tree/master/)。
+利用[GitHub 代码库创建你自己的推荐系统](https://github.com/Microsoft/Recommenders/tree/master/)。
 
 了解更多关于[Azure 机器学习服务](https://azure.microsoft.com/en-us/services/machine-learning-service/)的信息。
 
@@ -76,17 +76,17 @@
 
 [原文](https://azure.microsoft.com/en-us/blog/building-recommender-systems-with-azure-machine-learning-service/)。经许可转载。
 
-**简介**：[Heather Spetalnick](https://www.linkedin.com/in/heather-spetalnick-16674445/)是微软在马萨诸塞州剑桥的项目经理，负责Azure机器学习的用户体验工作。
+**简介**：[Heather Spetalnick](https://www.linkedin.com/in/heather-spetalnick-16674445/)是微软在马萨诸塞州剑桥的项目经理，负责 Azure 机器学习的用户体验工作。
 
 **资源：**
 
-+   [在线和基于Web的：分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)
++   [在线和基于 Web 的：分析、数据挖掘、数据科学、机器学习教育](https://www.kdnuggets.com/education/online.html)
 
 +   [用于分析、数据科学、数据挖掘和机器学习的软件](https://www.kdnuggets.com/software/index.html)
 
 **相关：**
 
-+   [K-Means聚类：推荐系统的无监督学习](https://www.kdnuggets.com/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)
++   [K-Means 聚类：推荐系统的无监督学习](https://www.kdnuggets.com/2019/04/k-means-clustering-unsupervised-learning-recommender-systems.html)
 
 +   [构建推荐系统](https://www.kdnuggets.com/2019/04/building-recommender-system.html)
 
@@ -96,11 +96,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 

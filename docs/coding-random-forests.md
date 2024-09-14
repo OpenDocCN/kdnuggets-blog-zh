@@ -1,8 +1,8 @@
-# 用100行代码编写随机森林®*
+# 用 100 行代码编写随机森林®*
 
-> 原文：[https://www.kdnuggets.com/2019/08/coding-random-forests.html](https://www.kdnuggets.com/2019/08/coding-random-forests.html)
+> 原文：[`www.kdnuggets.com/2019/08/coding-random-forests.html`](https://www.kdnuggets.com/2019/08/coding-random-forests.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [STATWORX](https://www.statworx.com/) 提供**
 
@@ -12,9 +12,9 @@
 
 ### 为什么要从头开始编写？
 
-虽然我喜欢阅读机器学习研究论文，但数学有时难以理解。这就是为什么我喜欢自己用R实现算法。当然，这意味着深入挖掘数学和算法。然而，你可以直接挑战你对算法的理解。
+虽然我喜欢阅读机器学习研究论文，但数学有时难以理解。这就是为什么我喜欢自己用 R 实现算法。当然，这意味着深入挖掘数学和算法。然而，你可以直接挑战你对算法的理解。
 
-在我上一篇博客中，我用150行R代码介绍了两种机器学习算法。你可以在我们的 [博客](https://www.statworx.com/blog/coding-gradient-boosted-machines-in-100-lines-of-code) 上找到关于用代码实现 [梯度提升机](https://www.statworx.com/blog/coding-gradient-boosted-machines-in-100-lines-of-code) 和 [回归树](https://www.statworx.com/blog/coding-regression-trees-in-150-lines-of-code) 的其他博客帖子，或者在我的 [GitHub](https://www.github.com/andrebleier/cheapml) 上的readme中找到。这篇博客文章介绍了随机森林，这可能是最著名的机器学习算法。你可能注意到了标题中的星号（*）。这些通常暗示着有些问题。就像在电视广告中看到手机计划的价格，而在阅读小字时你发现它仅适用于你成功攀登了珠穆朗玛峰，并且你的游艇上有三只长颈鹿。此外，是的，你的怀疑是合理的；不幸的是，100行代码仅适用于如果我们不添加回归树算法的代码，而回归树算法对随机森林来说是至关重要的。因此，如果你不熟悉回归树算法，我强烈建议阅读关于 [回归树](https://www.statworx.com/blog/coding-regression-trees-in-150-lines-of-code) 的博客。
+在我上一篇博客中，我用 150 行 R 代码介绍了两种机器学习算法。你可以在我们的 [博客](https://www.statworx.com/blog/coding-gradient-boosted-machines-in-100-lines-of-code) 上找到关于用代码实现 [梯度提升机](https://www.statworx.com/blog/coding-gradient-boosted-machines-in-100-lines-of-code) 和 [回归树](https://www.statworx.com/blog/coding-regression-trees-in-150-lines-of-code) 的其他博客帖子，或者在我的 [GitHub](https://www.github.com/andrebleier/cheapml) 上的 readme 中找到。这篇博客文章介绍了随机森林，这可能是最著名的机器学习算法。你可能注意到了标题中的星号（*）。这些通常暗示着有些问题。就像在电视广告中看到手机计划的价格，而在阅读小字时你发现它仅适用于你成功攀登了珠穆朗玛峰，并且你的游艇上有三只长颈鹿。此外，是的，你的怀疑是合理的；不幸的是，100 行代码仅适用于如果我们不添加回归树算法的代码，而回归树算法对随机森林来说是至关重要的。因此，如果你不熟悉回归树算法，我强烈建议阅读关于 [回归树](https://www.statworx.com/blog/coding-regression-trees-in-150-lines-of-code) 的博客。
 
 ### 用简单和可访问的代码理解机器学习
 
@@ -32,7 +32,7 @@
 
 回归树通过选择最小化某个标准的特征来分割数据，例如我们预测的平方误差。当然，有些特征可能永远不会被选择用于分割，这使得计算它们的重要性变得非常简单。然而，如何计算已选择特征的重要性呢？一个初步的方法可能是计算每个特征的分割次数，并以所有分割的总数进行相对化。这个度量简单而直观，但它不能量化分割的影响力，这可以通过一个简单但更复杂的度量来实现。这个度量是加权拟合优度。我们从定义每个节点的拟合优度开始。例如，均方误差，定义为：
 
-![MSE_{node} = \frac{1}{n_{node}} \sum_{i = 1}^{n_{node}} (y_i - \bar{y}_{node}))^2](../Images/06b98047f3df3521f7fcf81a2166027b.png)
+![MSE_{node} = \frac{1}{n_{node}} \sum_{i = 1}^{n_{node}} (y_i - \bar{y}_{node}))²](img/06b98047f3df3521f7fcf81a2166027b.png)
 
 该指标描述了我们在用预测器（当前节点的平均值 \bar(y)_{node}）估计目标 y_i 时所犯的平均平方误差。现在我们可以通过选择特征来分裂数据来测量改进，并比较父节点的拟合优度与其子节点的表现。本质上，这与我们为当前节点评估最佳分裂特征时所执行的步骤基本相同。
 
@@ -40,7 +40,7 @@
 
 树顶的分裂具有更大的影响，因为在树的这一阶段，更多的数据到达了这些节点。这就是为什么在考虑到到达该节点的观测数量时，更早的分裂显得更为重要。
 
-![w_{node} = \frac{n_{node}}{n}](../Images/ea7138c77f3291744cc275fc151db827.png)
+![w_{node} = \frac{n_{node}}{n}](img/ea7138c77f3291744cc275fc151db827.png)
 
 这个权重描述了当前节点中的观测数量，相对于总观测数量。结合以上结果，我们可以推导出单个节点中特征 p 的加权改进：
 
@@ -216,7 +216,7 @@ reg_rf <- function(formula, n_trees, feature_frac, data) {
 
 从我们的完整特征集 `X` 中，我们随机抽取 `feature_frac * 100` 百分比来减少维度。通过特征抽样，我们可以 a) 更快地计算和 b) 从假设上较弱的特征捕捉数据的角度，因为我们降低了 `feature_frac` 的值。假设，我们的特征之间存在一定程度的多重共线性。如果我们在每棵树中使用所有特征，回归树可能只会选择某个特定的特征。
 
-然而，特征的改进较少可能会带来对模型有价值的新信息，但却未获得机会。这可以通过将参数`feature_frac`降低来实现。如果分析的目标是特征选择，例如特征重要性，你可能希望将该参数设置为80%-100%，因为这样你会得到更明确的选择。好吧，函数的其余部分是拟合回归树，并导出拟合值以及重要性。
+然而，特征的改进较少可能会带来对模型有价值的新信息，但却未获得机会。这可以通过将参数`feature_frac`降低来实现。如果分析的目标是特征选择，例如特征重要性，你可能希望将该参数设置为 80%-100%，因为这样你会得到更明确的选择。好吧，函数的其余部分是拟合回归树，并导出拟合值以及重要性。
 
 ### 培育森林
 
@@ -269,7 +269,7 @@ eq <- y ~ LIN_1 + LIN_2 + LIN_3 + LIN_4 + LIN_5 + NOISE_1 + NOISE_2 + NOISE_3 + 
 
 随机森林和回归树都没有选择任何不必要的特征。然而，回归树仅由两个最重要的变量进行分裂。相反，随机森林选择了所有五个相关特征。
 
-![figure-name](../Images/59136161b342dd98f09c5aa53c1e854a.png)
+![figure-name](img/59136161b342dd98f09c5aa53c1e854a.png)
 
 这并不意味着回归树无法找到正确的答案。这取决于树的最小观测量(`minsize`)。如果我们降低最小尺寸，回归树肯定会最终找到所有重要特征。然而，随机森林在相同的最小尺寸下找到了所有五个关键特征。
 
@@ -285,21 +285,21 @@ RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
 **相关:**
 
-+   [机器学习和数据科学的决策树指南](/2018/12/guide-decision-trees-machine-learning-data-science.html)
++   机器学习和数据科学的决策树指南
 
-+   [解释随机森林（带 Python 实现）](/2019/03/random-forest-python.html)
++   解释随机森林（带 Python 实现）
 
-+   [随机森林直观解释](/2019/01/random-forests-explained-intuitively.html)
++   随机森林直观解释
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

@@ -1,8 +1,8 @@
 # 深度学习可以应用于自然语言处理
 
-> 原文：[https://www.kdnuggets.com/2017/01/deep-learning-applied-natural-language-processing.html](https://www.kdnuggets.com/2017/01/deep-learning-applied-natural-language-processing.html)
+> 原文：[`www.kdnuggets.com/2017/01/deep-learning-applied-natural-language-processing.html`](https://www.kdnuggets.com/2017/01/deep-learning-applied-natural-language-processing.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![](../Images/d7c1e236ba300848f00cebec470c16f1.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![](img/d7c1e236ba300848f00cebec470c16f1.png)
 
 *[图片来源](https://unsplash.com/collections/144450/music-learning-blog-collateral?photo=gN_nIUnjYJI)*
 
@@ -62,7 +62,7 @@ ICLR 2017 提交的“[理解深度学习需要重新思考泛化](https://openr
 
 符号系统无法读取这些内容，但人类可以。
 
-在2015年，NLP 从业者 Chris Manning 讨论了有关深度学习的领域关切（见：[计算语言学与深度学习](http://www.mitpressjournals.org/doi/pdf/10.1162/COLI_a_00239)）。了解他的论点非常重要，因为这些论点并不与深度学习的能力相冲突。他的两个论点说明了为何 NLP 专家不必担心如下：
+在 2015 年，NLP 从业者 Chris Manning 讨论了有关深度学习的领域关切（见：[计算语言学与深度学习](http://www.mitpressjournals.org/doi/pdf/10.1162/COLI_a_00239)）。了解他的论点非常重要，因为这些论点并不与深度学习的能力相冲突。他的两个论点说明了为何 NLP 专家不必担心如下：
 
 > （1）对于我们的领域来说，最聪明和最有影响力的机器学习专家将 NLP 作为重点关注领域是非常令人振奋的；（2）我们的领域是语言技术的领域科学；它不是关于最佳的机器学习方法——核心问题仍然是领域问题。
 
@@ -78,21 +78,21 @@ ICLR 2017 提交的“[理解深度学习需要重新思考泛化](https://openr
 
 **相关：**
 
-+   [深度学习为何与机器学习截然不同](/2016/12/deep-learning-radically-different-machine-learning.html)
++   深度学习为何与机器学习截然不同
 
-+   [深度学习智能的五个能力层次](/2016/12/5-capability-levels-deep-learning-intelligence.html)
++   深度学习智能的五个能力层次
 
-+   [博弈论揭示深度学习的未来](/2016/12/game-theory-reveals-future-deep-learning.html)
++   博弈论揭示深度学习的未来
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

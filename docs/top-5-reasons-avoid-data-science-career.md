@@ -1,8 +1,8 @@
-# 避免从事数据科学职业的5大理由
+# 避免从事数据科学职业的 5 大理由
 
-> 原文：[https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
+> 原文：[`www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html`](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-我们都目睹了数据科学是21世纪最性感工作的经典声明。
+我们都目睹了数据科学是 21 世纪最性感工作的经典声明。
 
 谁不想获得这样一种特权：确保每个人的金融交易无欺诈，让用户知道他们接下来想观看的是什么视频，并拯救这个世界免于崩溃呢？
 
@@ -18,7 +18,7 @@
 
 在避免对每个人在数据科学中取得巨大成功的能力进行泛化，并让他们争取一线机会的同时，本文旨在让你在跨入这一领域之前，提前评估自己是否已经做好准备。
 
-![top_5_reasons_avoid_data_science_career](../Images/e080bb3764afe76cfe7591157c6b4ad0.png)
+![top_5_reasons_avoid_data_science_career](img/e080bb3764afe76cfe7591157c6b4ad0.png)
 
 来源：[freepik pic1](https://www.freepik.com/free-vector/pensive-businessman-making-decision_7732656.htm#query=confused&position=7&from_view=keyword) 和 [freepik pic2](https://www.freepik.com/free-vector/young-businessman-levitating-yoga-position_1311241.htm#query=calm&position=40&from_view=keyword)
 
@@ -28,7 +28,7 @@
 
 你是否也觉得你在本科阶段学到的内容与实际工作中的内容之间存在巨大的差距？我个人确实有这种感觉。学习理论在数据科学中是不够的——你可能在 Kaggle 上进行了大量的 Titanic 练习，并在精心准备的数据上建立了情感分析。但在实际项目中工作则完全是另一回事。没有人会要求或建议你去构建完成特定项目所需的多项技能之一——你需要在工作中学习并完成任务。老兵们总是关注前沿的先进算法以及现有算法的优缺点。他们不会等待合适的机会敲响他们的门来戴上眼镜熬夜工作。基本上，他们从不陷入“我无所不知”的舒适区。
 
-![在职学习](../Images/0e8ca22474faf9da84bd951ab944c94a.png)
+![在职学习](img/0e8ca22474faf9da84bd951ab944c94a.png)
 
 来源：由 makyzz 创建的背景矢量 - www.freepik.com
 
@@ -48,7 +48,7 @@
 
 +   在你获得向高管展示结果的荣耀之前，你需要不断重复你的解决方案和结果，以获得技术小组和管理层的批准。虽然这可以确保你的模型在早期接受审查，但有时这会有点困难，需要强大的耐力来应对重复的演示。
 
-![持续学习](../Images/8cd5e83354edbce50794fe24cf0afdcf.png)
+![持续学习](img/8cd5e83354edbce50794fe24cf0afdcf.png)
 
 来源：由 freepik 创建的人物矢量 - www.freepik.com</a>
 
@@ -66,11 +66,11 @@
 
 数据科学和实验是类似的。在对利益相关者喊出“尤里卡”之前，你需要尝试多种方法。你是否能够在经历多次失败后仍保持高容忍度，依然坚韧地以全新的视角看待业务问题？
 
-通常，大多数数据科学家在99%的时间里都失败了，但仍然能从剩下的1%的尝试中创造出成功而稳健的解决方案。这一切都在于不断尝试。
+通常，大多数数据科学家在 99%的时间里都失败了，但仍然能从剩下的 1%的尝试中创造出成功而稳健的解决方案。这一切都在于不断尝试。
 
 移动指针所需的时间，即在构建机器学习模型时向前迈出一步，是非常疲惫和耗费精力的。
 
-哦，还有人告诉你数据科学家将80%的时间花在收集、清理和转换数据以使其“适合机器学习”，而只有20%的时间用于实际的模型构建和分析。我敢打赌他们是这样说的。
+哦，还有人告诉你数据科学家将 80%的时间花在收集、清理和转换数据以使其“适合机器学习”，而只有 20%的时间用于实际的模型构建和分析。我敢打赌他们是这样说的。
 
 你需要适应数据科学项目的迭代性质，并从容应对，否则在数据科学行业中生存下来将变得非常困难，更不用说繁荣发展了。
 
@@ -78,18 +78,18 @@
 
 我经常被问到——数据科学家做什么？这篇文章是我在行业中的第一手经验的汇编，同时也是对初入数据科学领域的人的指导。希望它能帮助你一窥真实的行业经验，并为你未来的挑战做好准备。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究的交汇处工作，以提供商业价值和洞察力。她是数据中心科学的倡导者，也是数据治理领域的领先专家，致力于构建值得信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究的交汇处工作，以提供商业价值和洞察力。她是数据中心科学的倡导者，也是数据治理领域的领先专家，致力于构建值得信赖的 AI 解决方案。
 
 ### 更多相关话题
 
-+   [你为何应使用线性回归模型而不是…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [你为何应使用线性回归模型而不是…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [你为何应该获得认证的5个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
++   [你为何应该获得认证的 5 个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
 
-+   [数据科学家为何应使用LightGBM的3个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
++   [数据科学家为何应使用 LightGBM 的 3 个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
 
-+   [你为何难以找到数据科学工作的7个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [你为何难以找到数据科学工作的 7 个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
-+   [你为何需要合成数据的5个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [你为何需要合成数据的 5 个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [你为何不应该成为数据科学家的7个理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
++   [你为何不应该成为数据科学家的 7 个理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)

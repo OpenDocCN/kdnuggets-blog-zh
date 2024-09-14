@@ -1,6 +1,6 @@
 # R 数据准备备忘单
 
-> 原文：[https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html`](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
 
 # 数据准备的重要性
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -42,7 +42,7 @@ dplyr 自 2016 年推出以来，具有一些重要功能，使其成为 R 中�
 
 以下[快速参考备忘单指南](https://www.kdnuggets.com/publications/sheets/Data-Prep-in-R-dyplr-Pugsley-KDnuggets.pdf)将提供 dplyr 在数据准备每个步骤中的方法样例。这不是一个 dplyr 函数或选项的详尽列表，而是一个起点。
 
-[![R 数据准备备忘单](../Images/b24af19659a7a94b18b71a6fce6812f4.png)](https://www.kdnuggets.com/publications/sheets/Data-Prep-in-R-dyplr-Pugsley-KDnuggets.pdf)
+![R 数据准备备忘单](https://www.kdnuggets.com/publications/sheets/Data-Prep-in-R-dyplr-Pugsley-KDnuggets.pdf)
 
 点击查看完整备忘单
 
@@ -50,7 +50,7 @@ dplyr 自 2016 年推出以来，具有一些重要功能，使其成为 R 中�
 
 十年前，R 是数据科学的唯一选择，但 Python 和 SQL 的竞争让它变得更好，因为一个生态系统中引入的功能很快会被复制或移植到另一个生态系统中。广泛的 R 用户社区有着确保其库活跃和发展的历史，确保你对 R 的投资在未来十年仍然具有相关性。未来某一天，也许 dplyr 和 Tidyverse 将不再是数据准备的最佳选择。但目前它们仍是极佳的选择（尽管有一些尴尬的语法元素，比如 %>% 管道！）。
 
-**[Stan Pugsley](https://www.linkedin.com/in/spugsley/)** 是一位驻盐湖城，犹他州的独立数据仓库和分析顾问。他还是犹他大学 - 埃克尔斯商学院的助理教授/讲师。你可以通过 [电子邮件](mailto:stanford.pugsley@eccles.utah.edu) 联系作者。
+**[Stan Pugsley](https://www.linkedin.com/in/spugsley/)** 是一位驻盐湖城，犹他州的独立数据仓库和分析顾问。他还是犹他大学 - 埃克尔斯商学院的助理教授/讲师。你可以通过 电子邮件 联系作者。
 
 ### 更多相关主题
 
@@ -58,7 +58,7 @@ dplyr 自 2016 年推出以来，具有一些重要功能，使其成为 R 中�
 
 +   [机器学习中的数据准备和原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [数据科学的 Git 备忘单](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
 

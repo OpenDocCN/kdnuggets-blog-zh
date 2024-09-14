@@ -1,14 +1,14 @@
 # 如何发现机器学习模型中的弱点
 
-> 原文：[https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html](https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html`](https://www.kdnuggets.com/2021/09/weaknesses-machine-learning-models.html)
 
-[评论](#comments)
+评论
 
 **由 [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/), Tubi 数据科学家**
 
 每当你使用总结统计来简化数据时，你都会丢失信息。模型准确性也不例外。当简化模型的拟合到总结统计时，你失去了确定性能最低/最高以及原因的能力。
 
-![机器学习准确性表现 深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/f4d29e3365fe6c2bbed992bac867cd27.png)
+![机器学习准确性表现 深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](img/f4d29e3365fe6c2bbed992bac867cd27.png)
 
 图 1：模型表现差的数据区域示例。图片由作者提供。
 
@@ -34,7 +34,7 @@ FreaAI 在测试数据中找到统计上显著低性能的切片。它们被返�
 
 在开发模型时，我们经常使用“准确性”指标来判断模型的拟合度。例如均方误差，这在图 2 中定义并用于线性回归。
 
-![机器学习准确性表现 深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/e8f1354a8ec32a3f741874c6a5b525cf.png)
+![机器学习准确性表现 深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](img/e8f1354a8ec32a3f741874c6a5b525cf.png)
 
 图 2：均方误差公式。图片由作者提供 — [源](https://www.probabilitycourse.com/chapter9/9_1_5_mean_squared_error_MSE.php)。
 
@@ -54,7 +54,7 @@ FreaAI 在测试数据中找到统计上显著低性能的切片。它们被返�
 
 然而，利用组合测试在大型数据集上是计算上不可行的 — 每增加一列，我们会看到所需组合数量的指数增长。因此，我们需要定义一种方法来帮助我们搜索特征，以找到潜在的不准确区域。
 
-![机器学习准确性表现深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/94461909e59d19dc5df2267481024fb4.png)
+![机器学习准确性表现深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](img/94461909e59d19dc5df2267481024fb4.png)
 
 图 3：50% 最高密度区域 (HDR) 的蓝色示例。图像由作者提供 — [源](https://mathematica.stackexchange.com/questions/173282/computing-credible-region-highest-posterior-density-from-empirical-distributio)。
 
@@ -68,7 +68,7 @@ FreaAI 使用的第一种方法利用了叫做 [最高密度区域 (HDR)](https:
 
 第二种方法利用决策树来处理所有非数值预测变量以及两个特征的组合。简而言之，我们拟合一个决策树，并寻找使准确性最小化的特征切分。
 
-![机器学习准确性表现深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](../Images/9fbe22ea608bbee93f4f618bc932facf.png)
+![机器学习准确性表现深度学习模型漂移偏差 FreaAI Frea ai IBM 数据切片](img/9fbe22ea608bbee93f4f618bc932facf.png)
 
 图 4：关于连续单变量预测变量“年龄”的决策树示例。图像由作者提供。
 
@@ -110,27 +110,27 @@ FreaAI 还具有其他应用的有趣潜力。一个例子是识别模型漂移�
 
 *感谢阅读！我将撰写 37 篇帖子，将学术研究引入数据科学行业。请查看我的评论，获取本文主要来源的链接以及一些有用的资源。*
 
-**简介： [迈克尔·伯克](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[https://michaeldberk.com/](https://michaeldberk.com/)**) 是 Tubi 的数据科学家。
+**简介： [迈克尔·伯克](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[`michaeldberk.com/`](https://michaeldberk.com/)**) 是 Tubi 的数据科学家。
 
 [原文](https://towardsdatascience.com/how-to-find-weaknesses-in-your-machine-learning-models-ae8bd18880a3)。经许可转载。
 
 **相关：**
 
-+   [反脆弱性与机器学习](/2021/09/antifragility-machine-learning.html)
++   反脆弱性与机器学习
 
-+   [与 Github Actions、Iterative.ai、Label Studio 和 NBDEV 的 MLOps 探险](/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)
++   与 Github Actions、Iterative.ai、Label Studio 和 NBDEV 的 MLOps 探险
 
-+   [数学 2.0：机器学习的基础重要性](/2021/09/math-fundamental-importance-machine-learning.html)
++   数学 2.0：机器学习的基础重要性
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

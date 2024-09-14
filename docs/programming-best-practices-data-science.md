@@ -1,8 +1,8 @@
 # 数据科学编程最佳实践
 
-> 原文：[https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html](https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/08/programming-best-practices-data-science.html`](https://www.kdnuggets.com/2018/08/programming-best-practices-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Srini Kadamati，[Dataquest.io](https://www.dataquest.io/)**
 
@@ -18,19 +18,19 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速踏上网络安全职业生涯之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速踏上网络安全职业生涯之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 虽然这些组件有助于理解不同的阶段，但它们并没有帮助我们深入*编程*工作流程。
 
-通常，整个数据科学生命周期最终变成了*任意*的笔记本单元格混合体，这些单元格位于Jupyter Notebook中或是一个混乱的脚本中。此外，大多数数据科学问题要求我们在数据检索、数据清理、数据探索、数据可视化和统计/预测建模之间切换。
+通常，整个数据科学生命周期最终变成了*任意*的笔记本单元格混合体，这些单元格位于 Jupyter Notebook 中或是一个混乱的脚本中。此外，大多数数据科学问题要求我们在数据检索、数据清理、数据探索、数据可视化和统计/预测建模之间切换。
 
 但还有更好的方法！在这篇文章中，我将深入探讨大多数人在进行数据科学编程工作时切换的两种思维方式：**原型**思维和**生产**思维。
 
@@ -41,7 +41,7 @@
 | 代码结构较少（模块化较少） | 代码结构更多（模块化更多） |
 | 帮助你和他人理解代码和数据 | 帮助计算机自动运行代码 |
 
-我个人使用[JupyterLab](http://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html)来完成整个过程（原型设计和生产化）。我推荐至少在原型设计阶段使用JupyterLab**。
+我个人使用[JupyterLab](http://jupyterlab.readthedocs.io/en/stable/getting_started/installation.html)来完成整个过程（原型设计和生产化）。我推荐至少在原型设计阶段使用 JupyterLab**。
 
 ### **Lending Club 数据**
 
@@ -49,7 +49,7 @@
 
 Lending Club 提供详细的历史数据，涵盖已完成的贷款（Lending Club 批准的贷款申请，并找到贷方）和被拒绝的贷款（Lending Club 拒绝的贷款申请，资金未发生变动）。请前往他们的[data download page](https://www.lendingclub.com/info/download-data.action)并在**DOWLNOAD LOAN DATA**下选择**2007-2011**。
 
-![lendingclub](../Images/5893dcd88190c71f1a9b9914ef8fd8e0.png)
+![lendingclub](img/5893dcd88190c71f1a9b9914ef8fd8e0.png)
 
 ### **原型思维**
 
@@ -84,7 +84,7 @@ loans_2007.head(2)
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | d | member_id | loan_amnt | funded_amnt | funded_amnt_inv | term | int_rate | installment | grade | sub_grade | emp_title | emp_length | home_ownership | annual_inc | verification_status | issue_d | loan_status | pymnt_plan | url | desc | purpose | title | zip_code | addr_state | dti | delinq_2yrs | earliest_cr_line | inq_last_6mths | mths_since_last_delinq | mths_since_last_record | open_acc | pub_rec | revol_bal | revol_util | total_acc | initial_list_status | out_prncp | out_prncp_inv | total_pymnt | total_pymnt_inv | total_rec_prncp | total_rec_int | total_rec_late_fee | recoveries | collection_recovery_fee | last_pymnt_d | last_pymnt_amnt | next_pymnt_d | last_credit_pull_d | collections_12_mths_ex_med | mths_since_last_major_derog | policy_code | application_type | annual_inc_joint | dti_joint | verification_status_joint | acc_now_delinq | tot_coll_amt | tot_cur_bal | open_acc_6m | open_act_il | open_il_12m | open_il_24m | mths_since_rcnt_il | total_bal_il | il_util | open_rv_12m | open_rv_24m | max_bal_bc | all_util | total_rev_hi_lim | inq_fi | total_cu_tl | inq_last_12m | acc_open_past_24mths | avg_cur_bal | bc_open_to_buy | bc_util | chargeoff_within_12_mths | delinq_amnt | mo_sin_old_il_acct | mo_sin_old_rev_tl_op | mo_sin_rcnt_rev_tl_op | mo_sin_rcnt_tl | mort_acc | mths_since_recent_bc | mths_since_recent_bc_dlq | mths_since_recent_inq | mths_since_recent_revol_delinq | num_accts_ever_120_pd | num_actv_bc_tl | num_actv_rev_tl | num_bc_sats | num_bc_tl | num_il_tl | num_op_rev_tl | num_rev_accts | num_rev_tl_bal_gt_0 | num_sats | num_tl_120dpd_2m | num_tl_30dpd | num_tl_90g_dpd_24m | num_tl_op_past_12m | pct_tl_nvr_dlq | percent_bc_gt_75 | pub_rec_bankruptcies | tax_liens | tot_hi_cred_lim | total_bal_ex_mort | total_bc_limit | total_il_high_credit_limit | revol_bal_joint | sec_app_earliest_cr_line | sec_app_inq_last_6mths | sec_app_mort_acc | sec_app_open_acc | sec_app_revol_util | sec_app_open_act_il | sec_app_num_rev_accts | sec_app_chargeoff_within_12_mths | sec_app_collections_12_mths_ex_med | sec_app_mths_since_last_major_derog | hardship_flag | hardship_type | hardship_reason | hardship_status | deferral_term | hardship_amount | hardship_start_date | hardship_end_date | payment_plan_start_date | hardship_length | hardship_dpd | hardship_loan_status | orig_projected_additional_accrued_interest | hardship_payoff_balance_amount | hardship_last_payment_amount | disbursement_method | debt_settlement_flag | debt_settlement_flag_date | settlement_status | settlement_date | settlement_amount | settlement_percentage | settlement_term |
 
-警告提示我们，如果在调用`pandas.read_csv()`时将`low_memory`参数设置为`False`，pandas对每列的类型推断将会得到改善。
+警告提示我们，如果在调用`pandas.read_csv()`时将`low_memory`参数设置为`False`，pandas 对每列的类型推断将会得到改善。
 
 第二个输出更有问题，因为 DataFrame 存储数据的方式存在问题。JupyterLab 内置了一个终端环境，我们可以打开它并使用 bash 命令 `head` 来观察原始文件的前两行：
 
@@ -278,7 +278,7 @@ print(metrics)
 
 如果你有兴趣深化理解和进一步实践，我推荐以下步骤：
 
-+   学习如何将管道转换为可以作为模块或从命令行运行的独立脚本： [https://docs.python.org/3/library/**main**.html](https://docs.python.org/3/library/__main__.html)
++   学习如何将管道转换为可以作为模块或从命令行运行的独立脚本： [`docs.python.org/3/library/**main**.html`](https://docs.python.org/3/library/__main__.html)
 
 +   学习如何使用 Luigi 构建可以在云中运行的更复杂的管道： [在 Python 和 Luigi 中构建数据管道](https://marcobonzanini.com/2015/10/24/building-data-pipelines-with-python-and-luigi/)
 
@@ -290,11 +290,11 @@ print(metrics)
 
 **相关：**
 
-+   [Swiftapply  – 自动高效的 pandas apply 操作](/2018/04/swiftapply-automatically-efficient-pandas-apply-operations.html)
++   Swiftapply  – 自动高效的 pandas apply 操作
 
-+   [与机器学习算法相关的数据结构](/2018/01/data-structures-related-machine-learning-algorithms.html)
++   与机器学习算法相关的数据结构
 
-+   [Python 函数式编程简介](/2018/02/introduction-functional-programming-python.html)
++   Python 函数式编程简介
 
 ### 更多相关主题
 

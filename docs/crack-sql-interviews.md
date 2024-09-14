@@ -1,32 +1,32 @@
-# 破解SQL面试
+# 破解 SQL 面试
 
-> 原文：[https://www.kdnuggets.com/2020/12/crack-sql-interviews.html](https://www.kdnuggets.com/2020/12/crack-sql-interviews.html)
+> 原文：[`www.kdnuggets.com/2020/12/crack-sql-interviews.html`](https://www.kdnuggets.com/2020/12/crack-sql-interviews.html)
 
-[评论](#comments)
+评论
 
 **由 [Xinran Waibel](https://medium.com/@xinran.waibel), Netflix 数据工程师**。
 
-![](../Images/28bddf5e7e3e283bf5224f93505b4d39.png)
+![](img/28bddf5e7e3e283bf5224f93505b4d39.png)
 
 *照片由 [Green Chameleon](https://unsplash.com/@craftedbygc?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/exam?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-[SQL](https://en.wikipedia.org/wiki/SQL) 是数据分析和数据处理最重要的编程语言之一，因此SQL问题总是数据科学相关职位面试的一部分，如数据分析师、数据科学家和 [数据工程师](https://towardsdatascience.com/introduction-to-data-engineering-e16c9942dc2c)。SQL面试旨在评估候选人的技术和解决问题的能力。因此，不仅要基于样本数据编写正确的查询，还要考虑各种场景和边界情况，就像处理实际数据集一样。
+[SQL](https://en.wikipedia.org/wiki/SQL) 是数据分析和数据处理最重要的编程语言之一，因此 SQL 问题总是数据科学相关职位面试的一部分，如数据分析师、数据科学家和 [数据工程师](https://towardsdatascience.com/introduction-to-data-engineering-e16c9942dc2c)。SQL 面试旨在评估候选人的技术和解决问题的能力。因此，不仅要基于样本数据编写正确的查询，还要考虑各种场景和边界情况，就像处理实际数据集一样。
 
-我曾帮助设计和进行数据科学候选人的SQL面试问题，并且自己也经历了许多大型科技公司和初创公司的SQL面试。在这篇博客文章中，我将解释SQL面试问题中常见的模式，并提供如何在SQL查询中整洁处理它们的技巧。
+我曾帮助设计和进行数据科学候选人的 SQL 面试问题，并且自己也经历了许多大型科技公司和初创公司的 SQL 面试。在这篇博客文章中，我将解释 SQL 面试问题中常见的模式，并提供如何在 SQL 查询中整洁处理它们的技巧。
 
 ### 提问
 
-要顺利通过SQL面试，最重要的是确保你掌握了给定任务和数据样本的所有细节，通过提出尽可能多的问题来理解需求。这将节省你后来在解决问题上的时间，并使你能够妥善处理边界情况。
+要顺利通过 SQL 面试，最重要的是确保你掌握了给定任务和数据样本的所有细节，通过提出尽可能多的问题来理解需求。这将节省你后来在解决问题上的时间，并使你能够妥善处理边界情况。
 
-我注意到许多候选人往往直接进入解决方案，而没有对SQL问题或数据集有充分的理解。后来，当我指出他们解决方案中的问题时，他们不得不反复修改查询。最终，他们在迭代过程中浪费了很多面试时间，甚至可能没有找到正确的解决方案。
+我注意到许多候选人往往直接进入解决方案，而没有对 SQL 问题或数据集有充分的理解。后来，当我指出他们解决方案中的问题时，他们不得不反复修改查询。最终，他们在迭代过程中浪费了很多面试时间，甚至可能没有找到正确的解决方案。
 
-我建议把SQL面试当作与工作中的业务伙伴合作来对待。在提供解决方案之前，你需要收集所有关于数据请求的需求。
+我建议把 SQL 面试当作与工作中的业务伙伴合作来对待。在提供解决方案之前，你需要收集所有关于数据请求的需求。
 
 **示例**
 
 > *找出薪资最高的前三名员工。*
 
-![](../Images/f38e6aee1128074d742ba43ce4e81b82.png)
+![](img/f38e6aee1128074d742ba43ce4e81b82.png)
 
 *样本 employee_salary 表。*
 
@@ -34,7 +34,7 @@
 
 ### 哪种 JOIN
 
-![](../Images/b38c9f82146473cbd37793e5e0609cd8.png)
+![](img/b38c9f82146473cbd37793e5e0609cd8.png)
 
 *来源：[dofactory](https://www.dofactory.com/sql/join).*
 
@@ -44,7 +44,7 @@
 
 > *找出每个学生修过的课程总数。（提供学生 ID、姓名和修课数。）*
 
-* ![](../Images/650f1a96487e5f43af701546c2040aaa.png)*
+* ![](img/650f1a96487e5f43af701546c2040aaa.png)*
 
 *示例学生和* class_history *表。*
 
@@ -68,7 +68,7 @@ JOIN student s ON c.student_id = s.student_id
 
 ```
 
-![](../Images/aaa40b526da2e49e36a8e2dc76dc1a6a.png)
+![](img/aaa40b526da2e49e36a8e2dc76dc1a6a.png)
 
 *图片由 [petr sidorov](https://unsplash.com/@m_malkovich?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/order-by?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -80,7 +80,7 @@ GROUP BY 是 SQL 中最重要的函数，因为它广泛用于数据汇总。如
 
 > *计算每个学生每学年的平均必修课 GPA，并找出每学期符合院长名单要求的学生（GPA ≥ 3.5）。*
 
-* ![](../Images/b23087bb326c363ff9b6294b553bb92d.png)*
+* ![](img/b23087bb326c363ff9b6294b553bb92d.png)*
 
 *示例 GPA 历史表。*
 
@@ -126,7 +126,7 @@ HAVING AVG(gpa) >= 3.5
 
 我建议在编写查询时遵循执行顺序，这对于那些在编写复杂查询时遇到困难的人很有帮助。
 
-![](../Images/6f497e6a24f2e659176822bf94302f9a.png)
+![](img/6f497e6a24f2e659176822bf94302f9a.png)
 
 *照片由 [Stefano Ghezzi](https://unsplash.com/@steghe?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/window?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -144,7 +144,7 @@ HAVING AVG(gpa) >= 3.5
 
 > *找到每个部门中薪资最高的前 3 名员工。*
 
-![](../Images/bfafcaee8b5a24f01d1d144f69b5cbc1.png)
+![](img/bfafcaee8b5a24f01d1d144f69b5cbc1.png)
 
 *另一个示例* employee_salary *表。*
 
@@ -166,19 +166,19 @@ WHERE rank_in_dep <= 3
 
 此外，根据如何处理并列情况，我们可以选择不同的排名函数。细节很重要！
 
-![](../Images/091814c9fbb9f74228418c5b4fe99c55.png)
+![](img/091814c9fbb9f74228418c5b4fe99c55.png)
 
 *ROW_NUMBER*、*RANK* 和 *DENSE_RANK* 函数的结果比较。
 
-![](../Images/31d0d737fa464a8561b58b3faba81720.png)
+![](img/31d0d737fa464a8561b58b3faba81720.png)
 
 *照片由 [Héctor J. Rivas](https://unsplash.com/@hjrc33?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/order?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
 ### 复制
 
-另一个常见的SQL面试陷阱是忽略数据重复。虽然某些列在样本数据中似乎有不同的值，但候选人需要考虑所有可能性，就像他们在处理真实世界的数据集一样。例如，在前面的*employee_salary*表中，可能会有员工共享相同的姓名。
+另一个常见的 SQL 面试陷阱是忽略数据重复。虽然某些列在样本数据中似乎有不同的值，但候选人需要考虑所有可能性，就像他们在处理真实世界的数据集一样。例如，在前面的*employee_salary*表中，可能会有员工共享相同的姓名。
 
-避免潜在重复问题的一种简单方法是始终使用ID列来唯一标识不同记录。
+避免潜在重复问题的一种简单方法是始终使用 ID 列来唯一标识不同记录。
 
 **示例**
 
@@ -190,15 +190,15 @@ WHERE rank_in_dep <= 3
 
 ### NULL
 
-在SQL中，任何谓词都可能产生三种值之一：true、false 和[NULL](https://towardsdatascience.com/demystify-null-values-in-sql-bc7e7e1b913a)，一个保留的关键字表示*未知或缺失的数据值*。处理NULL数据集可能出乎意料地棘手。在SQL面试中，面试官可能会特别关注你的解决方案是否处理了NULL值。有时候，如果一个列不允许NULL（例如ID列），这点是明显的，但对于大多数其他列，可能会存在NULL值。
+在 SQL 中，任何谓词都可能产生三种值之一：true、false 和[NULL](https://towardsdatascience.com/demystify-null-values-in-sql-bc7e7e1b913a)，一个保留的关键字表示*未知或缺失的数据值*。处理 NULL 数据集可能出乎意料地棘手。在 SQL 面试中，面试官可能会特别关注你的解决方案是否处理了 NULL 值。有时候，如果一个列不允许 NULL（例如 ID 列），这点是明显的，但对于大多数其他列，可能会存在 NULL 值。
 
-我建议确认样本数据中的关键列是否允许NULL，如果允许，请使用*IS (NOT) NULL*、*IFNULL*和*COALESCE*等函数来处理这些边界情况。
+我建议确认样本数据中的关键列是否允许 NULL，如果允许，请使用*IS (NOT) NULL*、*IFNULL*和*COALESCE*等函数来处理这些边界情况。
 
-(想了解更多关于如何处理NULL值的信息？查看[我关于SQL中NULL处理的指南](https://towardsdatascience.com/demystify-null-values-in-sql-bc7e7e1b913a)。)
+(想了解更多关于如何处理 NULL 值的信息？查看[我关于 SQL 中 NULL 处理的指南](https://towardsdatascience.com/demystify-null-values-in-sql-bc7e7e1b913a)。)
 
 ### 沟通
 
-最后但同样重要的是——在SQL面试中保持沟通。
+最后但同样重要的是——在 SQL 面试中保持沟通。
 
 我面试过许多候选人，他们除了有问题时几乎不说话，这在他们最终提出完美解决方案的情况下是可以接受的。然而，在技术面试中，保持沟通通常是一个好主意。例如，你可以讨论你对问题和数据的理解，计划如何解决问题，为什么选择某些函数而不是其他替代方案，以及你考虑了哪些边界情况。
 
@@ -206,17 +206,17 @@ WHERE rank_in_dep <= 3
 
 +   始终先提问以获取所需的详细信息。
 
-+   仔细选择INNER、LEFT和FULL JOIN。
++   仔细选择 INNER、LEFT 和 FULL JOIN。
 
-+   使用GROUP BY来汇总数据，并正确使用WHERE和HAVING。
++   使用 GROUP BY 来汇总数据，并正确使用 WHERE 和 HAVING。
 
 +   理解三种排名函数之间的区别。
 
-+   了解何时使用LAG/LEAD窗口函数。
++   了解何时使用 LAG/LEAD 窗口函数。
 
-+   如果你在创建复杂查询时遇到困难，可以尝试遵循SQL执行顺序。
++   如果你在创建复杂查询时遇到困难，可以尝试遵循 SQL 执行顺序。
 
-+   考虑潜在的数据问题，如重复和NULL值。
++   考虑潜在的数据问题，如重复和 NULL 值。
 
 +   与面试官沟通你的思路。
 
@@ -238,11 +238,11 @@ WHERE rank_in_dep <= 3
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 

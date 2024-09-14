@@ -1,28 +1,28 @@
-# 人工智能、大数据和数据科学的10种算法类别
+# 人工智能、大数据和数据科学的 10 种算法类别
 
-> 原文：[https://www.kdnuggets.com/2016/07/10-algorithm-categories-data-science.html](https://www.kdnuggets.com/2016/07/10-algorithm-categories-data-science.html)
+> 原文：[`www.kdnuggets.com/2016/07/10-algorithm-categories-data-science.html`](https://www.kdnuggets.com/2016/07/10-algorithm-categories-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Chris Pehura, C-SUITE DATA**。
 
-![大数据全景](../Images/0dde194b818ff3615570abe6796879bb.png)
+![大数据全景](img/0dde194b818ff3615570abe6796879bb.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
 算法会取代我们的工作吗？是的，是的，确实会……这反而是一件好事。
 
-算法是一系列带有规则的步骤，帮助我们解决问题并实现目标。当我们以正确的方式构建这些步骤和规则时，我们可以自动化算法来建立人工智能（A.I.）。正是这种A.I.帮助我们进行繁重的分析工作，使我们可以专注于我们擅长的事情……即我们被聘用来做的事情。
+算法是一系列带有规则的步骤，帮助我们解决问题并实现目标。当我们以正确的方式构建这些步骤和规则时，我们可以自动化算法来建立人工智能（A.I.）。正是这种 A.I.帮助我们进行繁重的分析工作，使我们可以专注于我们擅长的事情……即我们被聘用来做的事情。
 
 人工智能正在改变我们的工作、工作方式和商业文化。人工智能帮助我们发现并专注于使我们的人力资本优秀的关键专业知识。但是，在工作场所使用人工智能确实会变得复杂。因为用于实施人工智能的算法有不同的层次，每个层次的使用和影响都不同。为了更好地平衡我们的人力资本和人工智能资本，以下是用于实施人工智能、大数据和数据科学的十大算法类别。
 
@@ -46,25 +46,25 @@
 
 1.  **管理者。** 这些算法对我们的业务运作具有关键的专业知识。它们管理我们和我们的工作，以保持我们和业务的健康、生产力和财务稳定。这些算法协调我们和其他所有算法，帮助我们实现战略性的长期目标。
 
-**个人简介: [Chris Pehura](https://www.linkedin.com/in/chrispehura)** 是一名管理顾问，专注于数据，帮助财富100/1000公司从战略上演变和重塑其业务，以最大化收入增长。通过重新调整、彻底改革、从顶层到底层和从底层到顶层重建，他将领导者、战略和解决方案整合并巩固到组织的各个方面。
+**个人简介: [Chris Pehura](https://www.linkedin.com/in/chrispehura)** 是一名管理顾问，专注于数据，帮助财富 100/1000 公司从战略上演变和重塑其业务，以最大化收入增长。通过重新调整、彻底改革、从顶层到底层和从底层到顶层重建，他将领导者、战略和解决方案整合并巩固到组织的各个方面。
 
 [原文](http://bizcatalyst360.com/10-algorithm-categories-for-a-i-big-data-and-data-science/)。经许可转载。
 
 **相关内容:**
 
-+   [前10名数据挖掘算法解析](/2015/05/top-10-data-mining-algorithms-explained.html)
++   前 10 名数据挖掘算法解析
 
-+   [算法经济与容器如何改变应用程序](/2016/02/how-algorithm-economy-containers-are-changing-apps.html)
++   算法经济与容器如何改变应用程序
 
-+   [为什么从零开始实现机器学习算法？](/2016/05/implement-machine-learning-algorithms-scratch.html)
++   为什么从零开始实现机器学习算法？
 
 ### 更多主题
 
-+   [KDnuggets 新闻，7月27日：AIoT革命：AI和物联网如何…](https://www.kdnuggets.com/2022/n30.html)
++   [KDnuggets 新闻，7 月 27 日：AIoT 革命：AI 和物联网如何…](https://www.kdnuggets.com/2022/n30.html)
 
-+   [什么是K均值聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
++   [什么是 K 均值聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应关注的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应关注的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [决策树算法解析](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)
 

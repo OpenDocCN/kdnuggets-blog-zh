@@ -1,8 +1,8 @@
 # 数据科学家的实用统计学
 
-> 原文：[https://www.kdnuggets.com/2023/05/practical-statistics-data-scientists.html](https://www.kdnuggets.com/2023/05/practical-statistics-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2023/05/practical-statistics-data-scientists.html`](https://www.kdnuggets.com/2023/05/practical-statistics-data-scientists.html)
 
-![数据科学家的实用统计学](../Images/be9af0b18dee5e58cf65173f50e17943.png)
+![数据科学家的实用统计学](img/be9af0b18dee5e58cf65173f50e17943.png)
 
 图片由[unsplash](https://unsplash.com/photos/uKlneQRwaxY)提供
 
@@ -10,13 +10,13 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -35,7 +35,7 @@ sns.kdeplot(data=iris)
 plt.show()
 ```
 
-![数据科学家的实用统计学](../Images/26484a5624b1fc52e7c76ea7e23f0914.png)
+![数据科学家的实用统计学](img/26484a5624b1fc52e7c76ea7e23f0914.png)
 
 萼片长度、萼片宽度、花瓣长度和花瓣宽度的概率分布 | 图片由作者提供
 
@@ -43,19 +43,19 @@ plt.show()
 
 现在让我们关注萼片长度变量。下图展示了萼片长度变量的概率分布。
 
-![数据科学家的实用统计学](../Images/d99ebc7b14e5231923ae6ed515869af8.png)
+![数据科学家的实用统计学](img/d99ebc7b14e5231923ae6ed515869af8.png)
 
 萼片长度变量的概率分布 | 图片由作者提供
 
-我们观察到，萼片长度变量的概率分布具有单一的最大值，因此它是**单峰的**。出现最大值的萼片长度值是众数，约为5.8。
+我们观察到，萼片长度变量的概率分布具有单一的最大值，因此它是**单峰的**。出现最大值的萼片长度值是众数，约为 5.8。
 
 下图展示了花瓣宽度变量的概率分布。
 
-![数据科学家的实用统计学](../Images/b7eea2f2ea04fab3c6102dad0513cb83.png)
+![数据科学家的实用统计学](img/b7eea2f2ea04fab3c6102dad0513cb83.png)
 
 花瓣宽度变量的概率分布 | 图片由作者提供
 
-从这张图中，我们观察到花瓣长度变量的概率分布有2个最大值，因此它是**双峰的**。出现最大值的花瓣长度值是众数，即1.7和5.0。
+从这张图中，我们观察到花瓣长度变量的概率分布有 2 个最大值，因此它是**双峰的**。出现最大值的花瓣长度值是众数，即 1.7 和 5.0。
 
 # 平均值
 
@@ -92,20 +92,20 @@ std = np.std(sepal_length)
 
 # 置信区间
 
-置信区间是围绕均值的值范围。65%的置信区间是从均值偏离一个标准差的值范围。95%的置信区间是从均值偏离两个标准差的值范围。下面的箱线图显示了花萼长度特征的均值和65%的置信区间。
+置信区间是围绕均值的值范围。65%的置信区间是从均值偏离一个标准差的值范围。95%的置信区间是从均值偏离两个标准差的值范围。下面的箱线图显示了花萼长度特征的均值和 65%的置信区间。
 
 ```py
 sns.boxplot(data = iris, y='sepal_length')
 plt.show()
 ```
 
-![数据科学家的实用统计学](../Images/46a44853ac299c60de8e514ab46409ce.png)
+![数据科学家的实用统计学](img/46a44853ac299c60de8e514ab46409ce.png)
 
-花萼长度特征的箱线图。蓝色区域表示65%的置信区间 | 作者提供的图片
+花萼长度特征的箱线图。蓝色区域表示 65%的置信区间 | 作者提供的图片
 
 # 正态分布
 
-概率分布可以用于预测建模。花萼长度特征只有150个数据点。假设我们希望生成更多的数据点。如果假设花萼长度特征呈正态分布，我们可以生成更多的数据点。在下面的示例中，我们为花萼长度特征生成了N = 1000个数据点。
+概率分布可以用于预测建模。花萼长度特征只有 150 个数据点。假设我们希望生成更多的数据点。如果假设花萼长度特征呈正态分布，我们可以生成更多的数据点。在下面的示例中，我们为花萼长度特征生成了 N = 1000 个数据点。
 
 ```py
 np.random.seed(10**7)
@@ -134,7 +134,7 @@ plt.title('matplotlib.pyplot.hist() function Example\n\n',
 plt.show()
 ```
 
-![数据科学家的实用统计学](../Images/e7b767d1e574419154bbf24ffd64ba53.png)
+![数据科学家的实用统计学](img/e7b767d1e574419154bbf24ffd64ba53.png)
 
 花萼长度宽度的概率分布 | 作者提供的图片
 
@@ -160,4 +160,4 @@ plt.show()
 
 +   [机器学习中的特征工程实用方法](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)
 
-+   [Python中的客户细分：一种实用方法](https://www.kdnuggets.com/customer-segmentation-in-python-a-practical-approach)
++   [Python 中的客户细分：一种实用方法](https://www.kdnuggets.com/customer-segmentation-in-python-a-practical-approach)

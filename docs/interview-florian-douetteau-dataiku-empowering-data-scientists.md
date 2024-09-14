@@ -1,22 +1,22 @@
 # 采访：Florian Douetteau，Dataiku 创始人，谈数据科学家赋能
 
-> 原文：[https://www.kdnuggets.com/2016/07/interview-florian-douetteau-dataiku-empowering-data-scientists.html](https://www.kdnuggets.com/2016/07/interview-florian-douetteau-dataiku-empowering-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2016/07/interview-florian-douetteau-dataiku-empowering-data-scientists.html`](https://www.kdnuggets.com/2016/07/interview-florian-douetteau-dataiku-empowering-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Ajay Ohri**。
 
 [Dataiku](http://www.dataiku.com/) 开发了一款名为 Data Science Studio (DSS) 的协作式端到端软件平台，企业可以利用它加速内部业务和预测解决方案的开发。它承诺大幅提高公司数据科学家、业务分析师和产品经理的效率和生产力。
 
-[Florian Douetteau](https://www.linkedin.com/in/fdouetteau) 是 Dataiku 的首席执行官。Florian 在 Exalead 开始了他的职业生涯，这是一家创新的搜索引擎技术公司。在那里，他领导了一个由50位杰出数据专家组成的研发团队，直到该公司在2010年被 Dassault Systemes 以1.5亿美元收购。随后，Florian 在 IsCool 担任首席技术官，这是一个欧洲社交游戏领域的领军企业，他管理了游戏分析和其中一个最大的欧洲云设置。Florian 还曾担任多家公司（如欧洲广告领导者 Criteo）的自由职业首席数据科学家。
+[Florian Douetteau](https://www.linkedin.com/in/fdouetteau) 是 Dataiku 的首席执行官。Florian 在 Exalead 开始了他的职业生涯，这是一家创新的搜索引擎技术公司。在那里，他领导了一个由 50 位杰出数据专家组成的研发团队，直到该公司在 2010 年被 Dassault Systemes 以 1.5 亿美元收购。随后，Florian 在 IsCool 担任首席技术官，这是一个欧洲社交游戏领域的领军企业，他管理了游戏分析和其中一个最大的欧洲云设置。Florian 还曾担任多家公司（如欧洲广告领导者 Criteo）的自由职业首席数据科学家。
 
-![Florian Douetteau](../Images/707dcfcb5bf52a8eb05bd27b77ed096a.png)
+![Florian Douetteau](img/707dcfcb5bf52a8eb05bd27b77ed096a.png)
 
 这是我与他的采访：
 
 **Ajay Ohri: 描述一下你作为数据科学创业公司的历程。是什么原因让你决定制作 DSS？**
 
-**Florian Douetteau**: 在2012年，我和我的合作伙伴看到了一次机会：数据科学市场极其碎片化。我们生活在一个非常有趣的技术宇宙中，有很多工具和选项可供使用和处理数据。今天的挑战更多在于应用合适的工具和位置，然后解决多个存储系统和语言的复杂性。例如，你可能会选择使用 Pig 进行一些数据处理，使用 Hive 进行计算，使用 Python 或 R 进行高级建模，使用 ElasticSearch 进行搜索，使用 Hadoop 进行大规模处理，等等。
+**Florian Douetteau**: 在 2012 年，我和我的合作伙伴看到了一次机会：数据科学市场极其碎片化。我们生活在一个非常有趣的技术宇宙中，有很多工具和选项可供使用和处理数据。今天的挑战更多在于应用合适的工具和位置，然后解决多个存储系统和语言的复杂性。例如，你可能会选择使用 Pig 进行一些数据处理，使用 Hive 进行计算，使用 Python 或 R 进行高级建模，使用 ElasticSearch 进行搜索，使用 Hadoop 进行大规模处理，等等。
 
 因此，我们退后一步，审视整体情况：我们试图解决什么问题，为什么？现有的是什么，其他人又在尝试解决什么问题。接着，我们专注于用户。我们如何比其他解决方案更好地解决数据科学生态系统的碎片化问题（包括专有和开源解决方案）？这些用户从现有解决方案中得到了什么，如何智能地将其带给他们？对我们而言，这意味着使我们的用户，无论他们的技能水平如何，都能在保持使用自己熟悉的工具和语言的自由的同时进行协作。
 
@@ -30,7 +30,7 @@
 
 **阿贾伊·奥赫里：您的客户的用户反馈是什么？您能描述一些使用 DSS 的案例研究，这些案例研究显示 DSS 比其他数据科学编辑器带来了更好的结果吗？**
 
-**弗洛里安·杜埃托**：由于 Dataiku DSS 的协作功能和高级分析能力，像 AXA、欧莱雅、贝克特、Webbmason、Urban Insights 等客户能够轻松地将机器学习和数据科学技术应用于各种类型、规模和格式的原始数据，以构建和部署预测数据流。应用场景包括流失预测、欺诈检测、动态客户细分、成本和物流优化、预测性维护、趋势预测等。到目前为止，反馈非常好：团队生产力提高（“在几个月内，我们的生产力提高了30%”），新的业务机会（“有了 DSS，我们已经内部化了数据解决方案的设计和部署”），开发出能带来额外收入和节省的解决方案（“DSS 已经回本”），快速上手（“我甚至让我们的营销和业务团队尝试了”），轻松安全的部署（“我们不再需要重新编写所有代码”）等等。我们计划保持这种状态！
+**弗洛里安·杜埃托**：由于 Dataiku DSS 的协作功能和高级分析能力，像 AXA、欧莱雅、贝克特、Webbmason、Urban Insights 等客户能够轻松地将机器学习和数据科学技术应用于各种类型、规模和格式的原始数据，以构建和部署预测数据流。应用场景包括流失预测、欺诈检测、动态客户细分、成本和物流优化、预测性维护、趋势预测等。到目前为止，反馈非常好：团队生产力提高（“在几个月内，我们的生产力提高了 30%”），新的业务机会（“有了 DSS，我们已经内部化了数据解决方案的设计和部署”），开发出能带来额外收入和节省的解决方案（“DSS 已经回本”），快速上手（“我甚至让我们的营销和业务团队尝试了”），轻松安全的部署（“我们不再需要重新编写所有代码”）等等。我们计划保持这种状态！
 
 **阿贾伊·奥赫里：您如何看待在数据科学工作流中同时使用 Python 和 R？这种方法相比于单一语言的方法有什么优势？**
 
@@ -40,15 +40,15 @@
 
 +   人们对所有不同的语言和技术的适应程度差异不大。如果团队经理允许他们使用最熟悉的工具，就能确保优化生产力和个人自由。
 
-![Dataiku logo](../Images/bf366a165532f9e98e77d582bd2ec1ca.png)
+![Dataiku logo](img/bf366a165532f9e98e77d582bd2ec1ca.png)
 
-**Ajay Ohri**: 许多数据输入越来越通过API或通过网页解析文本进行。DSS如何处理构建API请求并将其解析为数据框架结构这一通常耗时的任务？
+**Ajay Ohri**: 许多数据输入越来越通过 API 或通过网页解析文本进行。DSS 如何处理构建 API 请求并将其解析为数据框架结构这一通常耗时的任务？
 
-**Florian Douetteau**: 我们通过DSS提供了一套插件，帮助与不同的文本分析或API集成。例如，我们提供了一个免费的插件，供流行的import.io服务使用，一个IMDB API的插件，一个用于各种丰富开放数据源的插件，如美国专利数据库、OpenStreetMap或古腾堡计划。
+**Florian Douetteau**: 我们通过 DSS 提供了一套插件，帮助与不同的文本分析或 API 集成。例如，我们提供了一个免费的插件，供流行的 import.io 服务使用，一个 IMDB API 的插件，一个用于各种丰富开放数据源的插件，如美国专利数据库、OpenStreetMap 或古腾堡计划。
 
-**Ajay Ohri**: 我们有Jupyter和RStudio作为成熟的数据科学界面。DSS相对于它们有什么优势？DSS在哪些方面不会是更好的选择？
+**Ajay Ohri**: 我们有 Jupyter 和 RStudio 作为成熟的数据科学界面。DSS 相对于它们有什么优势？DSS 在哪些方面不会是更好的选择？
 
-**Florian Douetteau**: 我们已经将Jupyter集成到我们的产品中。我们产品的核心功能包括：可视化数据准备、可视化机器学习、可视化、工作流、SQL笔记本、代码笔记本。代码笔记本实际上是用Jupyter框架实现的。
+**Florian Douetteau**: 我们已经将 Jupyter 集成到我们的产品中。我们产品的核心功能包括：可视化数据准备、可视化机器学习、可视化、工作流、SQL 笔记本、代码笔记本。代码笔记本实际上是用 Jupyter 框架实现的。
 
 **Ajay Ohri**: 你未来的计划和想法是什么？我们可以通过使用更易于使用的工具来扩展数据科学家的池吗？
 
@@ -68,21 +68,21 @@
 
 **相关**：
 
-+   [Dataiku 数据科学工作室，现在也支持 Apache Spark](/2015/09/dataiku-data-science-studio-now-also-apache-spark.html)
++   Dataiku 数据科学工作室，现在也支持 Apache Spark
 
-+   [Python 和 R 结合使用：3 种主要方法](/2015/12/using-python-r-together.html)
++   Python 和 R 结合使用：3 种主要方法
 
-+   [数据科学的碎片化是否会导致一个帝国还是多个共和国？](/2015/11/balkanization-data-science.html)
++   数据科学的碎片化是否会导致一个帝国还是多个共和国？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 支持
 
 * * *
 
@@ -94,7 +94,7 @@
 
 +   [12 个建议：从数据分析师到初创公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
 
-+   [数据科学面试指南 - 第 2 部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
 +   [Interview Kickstart 数据科学面试课程——它有什么特别之处…](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
 

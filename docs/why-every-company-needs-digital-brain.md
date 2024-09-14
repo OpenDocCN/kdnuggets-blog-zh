@@ -1,20 +1,20 @@
 # 为什么每个公司都需要一个数字大脑
 
-> 原文：[https://www.kdnuggets.com/2017/07/why-every-company-needs-digital-brain.html](https://www.kdnuggets.com/2017/07/why-every-company-needs-digital-brain.html)
+> 原文：[`www.kdnuggets.com/2017/07/why-every-company-needs-digital-brain.html`](https://www.kdnuggets.com/2017/07/why-every-company-needs-digital-brain.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：SriSatish Ambati，H2O.ai CEO 和联合创始人**
 
-![数字大脑](../Images/0914a802b28d4e12fb661d2c456de2e1.png)
+![数字大脑](img/0914a802b28d4e12fb661d2c456de2e1.png)
 
-几乎每一家《财富》全球500强公司都在数字化转型的道路上，但每家公司的阶段不同，许多公司还需要清除最后的障碍才能真正释放其潜力。转型的过程无疑是艰难的，大型公司有时需要忍受高失败率才能推进。然而，仍然有希望。
+几乎每一家《财富》全球 500 强公司都在数字化转型的道路上，但每家公司的阶段不同，许多公司还需要清除最后的障碍才能真正释放其潜力。转型的过程无疑是艰难的，大型公司有时需要忍受高失败率才能推进。然而，仍然有希望。
 
 公司在进行数字化转型时面临的主要问题之一是缺乏企业范围的智能和团队合作文化来协调他们的努力。简而言之，他们缺乏一个“数字大脑”，这是一个从所有业务单元、部门、产品线和服务的数据中进行持续自动学习的中心，赋予组织更高的认知能力。这就是为什么每个公司都需要一个数字大脑来使他们的数字化转型变得生动，否则他们面临着渐进、短视和肤浅的变化风险。
 
 就像人类生命从一个单细胞开始，逐渐分裂产生出不同功能的新细胞一样，公司在进行数字化转型时也采用非常渐进或分步的方法。这是绝对必要的，因为变化从小处开始，并逐渐增长。任何数字大脑的创建都始于微服务的形成，其中公司的应用架构被组织为一个松散的服务集合，这些服务不断学习并致力于预测特定的结果。
 
-Capital One 是微服务模型的典型例子。他们利用开源软件和云技术构建了优秀的数字产品和世界级的开发者体验。这些微服务开辟了新的收入来源和创新金融服务，因为他们对客户有360度的视角。
+Capital One 是微服务模型的典型例子。他们利用开源软件和云技术构建了优秀的数字产品和世界级的开发者体验。这些微服务开辟了新的收入来源和创新金融服务，因为他们对客户有 360 度的视角。
 
 微服务模型和物联网的兴起迅速将智能推向边缘，在那里，小型传感器和轻量级设备的计算能力已接近智能手机。这种智能的去中心化通过开源软件运动得到了进一步放大，这种运动催生了创造者文化。它是参与式的，使公司能够成为软件的创造者，而不仅仅是软件的消费者。开源还推动了货币化——这在谷歌、亚马逊、苹果等公司中我们都可以看到。
 
@@ -32,21 +32,21 @@ Capital One 是微服务模型的典型例子。他们利用开源软件和云�
 
 **相关内容：**
 
-+   [用于物联网的深度学习与 H2O](/2016/04/deep-learning-iot-h2o.html)
++   用于物联网的深度学习与 H2O
 
-+   [人工智能、机器学习和深度学习是什么？](/2017/07/rapidminer-ai-machine-learning-deep-learning.html)
++   人工智能、机器学习和深度学习是什么？
 
-+   [企业数据科学与机器学习平台](/2017/05/data-science-machine-learning-platforms-enterprise.html)
++   企业数据科学与机器学习平台
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

@@ -1,8 +1,8 @@
 # 超级 Bard：可以做到一切且更好的 AI
 
-> 原文：[https://www.kdnuggets.com/2023/05/super-bard-ai-better.html](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)
+> 原文：[`www.kdnuggets.com/2023/05/super-bard-ai-better.html`](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)
 
-![超级 Bard：可以做到一切且更好的 AI](../Images/7c80163cbc5959a5c5c5b08e5fc4b333.png)
+![超级 Bard：可以做到一切且更好的 AI](img/7c80163cbc5959a5c5c5b08e5fc4b333.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@ Pathways 语言模型（PaLM）已更新，改进了多语言、推理和编码�
 
 根据 [Google 主题演讲 (Google I/O ‘23)](https://www.youtube.com/watch?v=cNfINi5CNbY)，Bard 现在运行在 PaLM 2 模型上。它在编码、推理和创意写作问题上的表现远胜于 [LaMDA](https://blog.google/technology/ai/lamda/)。
 
-![XXXXX](../Images/65b04f823941b807e5192e4b0ecfefb3.png)
+![XXXXX](img/65b04f823941b807e5192e4b0ecfefb3.png)
 
 图片来自 [Google 主题演讲 (Google I/O ‘23)](https://www.youtube.com/watch?v=cNfINi5CNbY)
 
@@ -38,13 +38,13 @@ Pathways 语言模型（PaLM）已更新，改进了多语言、推理和编码�
 
 我仍然看到新版 Bard 有一些错误，但总体上我对 Google 所取得的进展感到满意。
 
-![XXXXX](../Images/d999dc788452130ba06a2da8c486dad7.png)
+![XXXXX](img/d999dc788452130ba06a2da8c486dad7.png)
 
 图片来自 Bard
 
 我让 ChatGPT 和 HuggingChat 生成代码来解决类似的问题。ChatGPT 生成了无错误的代码，并且功能更多，而 HuggingChat 生成的代码有几个错误，缺少库，并存在安全漏洞。
 
-![XXXXX](../Images/0b41083532fa5cc3eb762297d3840b5c.png)
+![XXXXX](img/0b41083532fa5cc3eb762297d3840b5c.png)
 
 作者提供的图片 | 使用 ChatGPT
 
@@ -54,13 +54,13 @@ Pathways 语言模型（PaLM）已更新，改进了多语言、推理和编码�
 
 要访问草稿，你需要点击“查看其他草稿”。
 
-![XXXXX](../Images/717958365a254175e2e1f1dabb4f0b5d.png)
+![XXXXX](img/717958365a254175e2e1f1dabb4f0b5d.png)
 
 来自 Bard 的图片
 
 要访问 Google 集成，请点击左下角的向上箭头。这是一个代码响应。你将获得在 Google Colab 上运行代码的选项。
 
-![XXXXX](../Images/7dd6c9154bcafd1c8ef7a6d4f77c5e56.png)
+![XXXXX](img/7dd6c9154bcafd1c8ef7a6d4f77c5e56.png)
 
 来自 Bard 的图片
 
@@ -80,7 +80,7 @@ Pathways 语言模型（PaLM）已更新，改进了多语言、推理和编码�
 
 +   **提供外部资源链接：** Bard 擅长提供外部资源链接。如果你想深入了解某个话题或查看 Bard 生成的示例，这会很有帮助。
 
-![XXXXX](../Images/4f9f66b786dee8ccca501af257bfc13a.png)
+![XXXXX](img/4f9f66b786dee8ccca501af257bfc13a.png)
 
 来自 Bard 的图片
 
@@ -96,7 +96,7 @@ Pathways 语言模型（PaLM）已更新，改进了多语言、推理和编码�
 
 将来，你将能够直接从 Bard 使用 Adobe Firefly 生成图像。你只需输入提示，就能自动完成大部分任务。
 
-![XXXXX](../Images/dbfd935d0325886697e8f192ea65beb7.png)
+![XXXXX](img/dbfd935d0325886697e8f192ea65beb7.png)
 
 图片由作者提供，自 Google I/O ‘23
 

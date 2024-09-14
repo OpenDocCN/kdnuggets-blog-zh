@@ -1,10 +1,10 @@
 # 数据科学项目基础设施：如何创建它
 
-> 原文：[https://www.kdnuggets.com/2021/08/data-science-project-infrastructure.html](https://www.kdnuggets.com/2021/08/data-science-project-infrastructure.html)
+> 原文：[`www.kdnuggets.com/2021/08/data-science-project-infrastructure.html`](https://www.kdnuggets.com/2021/08/data-science-project-infrastructure.html)
 
-[评论](#comments)
+评论
 
-![](../Images/396024f37481e6c3c20242af4d4808dd.png)
+![](img/396024f37481e6c3c20242af4d4808dd.png)
 
 任何数据科学项目的主要起点是商业或任何其他现实生活中的问题。这是你在决定数据科学项目应该如何时需要记住的最重要的一点。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
 
 * * *
 
@@ -38,7 +38,7 @@
 
 通过遵循这些步骤，你将通常遵循所谓的 OSEMN 框架。这是一个概述你数据科学项目应该经过的过程的框架：
 
-![](../Images/47f3ceab4fe9f725a210547f52ac55a5.png)
+![](img/47f3ceab4fe9f725a210547f52ac55a5.png)
 
 *来源：TOWARDS DATA SCIENCE*
 
@@ -50,7 +50,7 @@
 
 主要的问题是你如何以及在哪里获取真实的数据。你通过使用 API 来获取这些数据。为了获取所需的真实数据，你必须知道如何使用、配置和设置 API。有一种简单的方法可以帮助你可视化 API 是什么以及它们的功能：
 
-![](../Images/1d23320b6f998c1cdbd9e3c3e2ce49a5.png)
+![](img/1d23320b6f998c1cdbd9e3c3e2ce49a5.png)
 
 *来源：ALTEXSOFT*
 
@@ -96,13 +96,13 @@
 
 +   [Google Cloud](https://cloud.google.com/)
 
-但为什么你特别应该使用云数据库？假设你在做一个相对较大的项目，并且有大量自动更新的实时数据，在这种情况下，云数据库将允许你以相对便宜的方式存储这些数据，并具有几乎无限的存储容量。例如，Amazon Web Services和Google Cloud也提供运行机器学习算法的可能性。如果你使用内部数据存储，你将无法做到这一点。而且你也不必担心备份和数据可用性。
+但为什么你特别应该使用云数据库？假设你在做一个相对较大的项目，并且有大量自动更新的实时数据，在这种情况下，云数据库将允许你以相对便宜的方式存储这些数据，并具有几乎无限的存储容量。例如，Amazon Web Services 和 Google Cloud 也提供运行机器学习算法的可能性。如果你使用内部数据存储，你将无法做到这一点。而且你也不必担心备份和数据可用性。
 
 如果你为某家公司工作，尤其是那些生成大量数据的大公司，你很可能需要精通（或至少想要学习）云计算。公司之所以转向云数据库，正是因为你也应该这样做的原因。即使你现在还不是数据科学家，也不意味着你不能成为。看看这个 [如何获得数据科学职位的指南](https://www.stratascratch.com/blog/how-to-get-a-data-science-job-the-ultimate-guide/)，我相信它会帮助你实现目标。
 
-[Pupuweb上的一篇精彩文章](https://pupuweb.com/enterprise-cloud-database/)值得阅读，如果你想了解云数据库的基本特征、其提供者、优缺点，以便决定哪个选项最适合你。
+[Pupuweb 上的一篇精彩文章](https://pupuweb.com/enterprise-cloud-database/)值得阅读，如果你想了解云数据库的基本特征、其提供者、优缺点，以便决定哪个选项最适合你。
 
-如果你不想自己学习云数据库，可能可以尝试一个在线课程。我认为 [这个Coursera课程](https://www.coursera.org/learn/cloud-data-engineering-duke#syllabus) 可能是一个很好的起点。这是杜克大学的课程，而且是免费的。如果你参加这个课程，你将与Amazon Web Services、[Azure](https://azure.microsoft.com/en-us/free/) 和Google Cloud Platform合作。
+如果你不想自己学习云数据库，可能可以尝试一个在线课程。我认为 [这个 Coursera 课程](https://www.coursera.org/learn/cloud-data-engineering-duke#syllabus) 可能是一个很好的起点。这是杜克大学的课程，而且是免费的。如果你参加这个课程，你将与 Amazon Web Services、[Azure](https://azure.microsoft.com/en-us/free/) 和 Google Cloud Platform 合作。
 
 ### 建立模型
 
@@ -134,9 +134,9 @@
 
 1.  云原生机器学习服务（MLaaS）
 
-首先，我推荐这篇[Forbes文章](https://www.forbes.com/sites/cognitiveworld/2021/05/30/the-five-ways-to-build-machine-learning-models/?sh=3857d08311a8)来熟悉每个类别所提供的内容。
+首先，我推荐这篇[Forbes 文章](https://www.forbes.com/sites/cognitiveworld/2021/05/30/the-five-ways-to-build-machine-learning-models/?sh=3857d08311a8)来熟悉每个类别所提供的内容。
 
-如果你掌握了Python编程、数学和统计学知识，并且有一定的机器学习基础，一些课程可以进一步提升你的模型构建技能。例如，AT&T提供了[一个免费的Udacity课程](https://www.udacity.com/course/model-building-and-validation--ud919)，专注于构建优秀模型所需的关键问题。
+如果你掌握了 Python 编程、数学和统计学知识，并且有一定的机器学习基础，一些课程可以进一步提升你的模型构建技能。例如，AT&T 提供了[一个免费的 Udacity 课程](https://www.udacity.com/course/model-building-and-validation--ud919)，专注于构建优秀模型所需的关键问题。
 
 通常认为数据科学家的唯一工作就是构建模型。虽然这并不完全正确，但这确实非常重要。所以我不需要强调你为什么应该擅长构建模型。
 
@@ -148,13 +148,13 @@
 
 这是构建任何数据科学项目基础设施时非常重要的一部分。这最后一步真正考验了你的模型及其目的。你可以通过让其他人成为你项目的一部分来实现这一点。允许他们使用你的模型及其产生的见解。
 
-请记住，你的工作是通过将数据转化为见解，再将见解转化为建议来帮助他人。你如何接触到其他人？理想情况下，你会部署你的模型。你可以使用如[ Django](https://www.djangoproject.com/)或[ Flask](https://palletsprojects.com/p/flask/)等应用框架来实现这一点。或者，你可以使用云服务提供商如Amazon Web Services或Google Cloud。
+请记住，你的工作是通过将数据转化为见解，再将见解转化为建议来帮助他人。你如何接触到其他人？理想情况下，你会部署你的模型。你可以使用如[ Django](https://www.djangoproject.com/)或[ Flask](https://palletsprojects.com/p/flask/)等应用框架来实现这一点。或者，你可以使用云服务提供商如 Amazon Web Services 或 Google Cloud。
 
-你可以将你的见解以简单的仪表盘形式展示给用户，用户可以进行交互。或者，也许它可以是一个API，用户可以连接到该API以获取你的见解和建议。
+你可以将你的见解以简单的仪表盘形式展示给用户，用户可以进行交互。或者，也许它可以是一个 API，用户可以连接到该 API 以获取你的见解和建议。
 
 为什么部署模型是一个重要的步骤以及你应该掌握的技能？它将导致业务流程中有时会出现根本性的变化。曾经手动执行的任务将由基于算法的解决方案接管。只有通过部署，你的模型才能实现其解决现实问题的目的。部署模型将展示你作为数据科学家的更广泛技能：不仅是你的技术技能，还包括对业务及其流程的理解。
 
-再次，这需要通过经验来获得。如果你缺乏经验，弥补一点技术知识总是明智的。因此，如果你已经学会了如何使用API和云服务来获取和存储模型数据，你也可以使用它们来部署模型。
+再次，这需要通过经验来获得。如果你缺乏经验，弥补一点技术知识总是明智的。因此，如果你已经学会了如何使用 API 和云服务来获取和存储模型数据，你也可以使用它们来部署模型。
 
 如果你真的想将应用框架添加到你的技能中，我只能鼓励你。有大量的 [Flask](https://www.fullstackpython.com/flask.html) 和 [Django](https://www.fullstackpython.com/django.html) 书籍、教程和资源可以帮助你掌握这些工具。
 

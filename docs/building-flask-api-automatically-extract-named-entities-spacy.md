@@ -1,12 +1,12 @@
 # 使用 SpaCy 自动提取命名实体的 Flask API
 
-> 原文：[https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html](https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
+> 原文：[`www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html`](https://www.kdnuggets.com/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [注释](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 注释
 
 **作者：[Susan Li](https://www.linkedin.com/in/susanli/)，高级数据科学家**
 
-![图](../Images/06957073c64dec6ad611e5c88f73a537.png)
+![图](img/06957073c64dec6ad611e5c88f73a537.png)
 
 图片来源：Pixabay
 
@@ -20,7 +20,7 @@
 
 我们的目标是构建一个 API，我们提供文本，例如《纽约时报》文章（或任何文章）作为输入，我们的命名实体提取器将识别并提取四种类型的实体：组织、人物、地点和金额。基本架构如下：
 
-![图](../Images/585cde79738ef16ac1a52385245ccd80.png)
+![图](img/585cde79738ef16ac1a52385245ccd80.png)
 
 图 1
 
@@ -32,7 +32,7 @@
 
 最终产品将如下所示：
 
-![图](../Images/989fa6eb53ead63fcf32dca581c1051d.png)
+![图](img/989fa6eb53ead63fcf32dca581c1051d.png)
 
 图 2
 
@@ -40,13 +40,13 @@
 
 +   我们的项目位于 ***Named-Entity-Extractor ***文件夹中。
 
-![图](../Images/1895f7c9d56de5641d784aed7d26a6c4.png)
+![图](img/1895f7c9d56de5641d784aed7d26a6c4.png)
 
 图 3
 
 +   `templates` 目录与创建的 app.py 文件在同一文件夹中。
 
-![图](../Images/c7f1e889a9f905b696473b42f2c7489a.png)
+![图](img/c7f1e889a9f905b696473b42f2c7489a.png)
 
 图 4
 
@@ -100,45 +100,45 @@
 
 +   进入我们的 ***命名实体提取器*** 文件夹。
 
-![图示](../Images/64bb7dcffead7af0d6de91d0cb17737c.png)
+![图示](img/64bb7dcffead7af0d6de91d0cb17737c.png)
 
-图5
+图 5
 
-+   打开你的Web浏览器，将 “[http://127.0.0.1:5000/](http://127.0.0.1:5000/)” 粘贴到地址栏中，我们将看到这个表单：
++   打开你的 Web 浏览器，将 “[`127.0.0.1:5000/`](http://127.0.0.1:5000/)” 粘贴到地址栏中，我们将看到这个表单：
 
-![图示](../Images/d4ef9a0f40e572fa1a51bea04c77bfde.png)
+![图示](img/d4ef9a0f40e572fa1a51bea04c77bfde.png)
 
-图6
+图 6
 
 +   我从 [nytimes](https://www.nytimes.com/2019/03/01/world/canada/trudeau-scandal-snc-lavalin.html)复制粘贴了一些文章段落，这是一个加拿大故事：
 
-![图示](../Images/b2e2dd8f627bc6d86d5a2d258b4cc421.png)
+![图示](img/b2e2dd8f627bc6d86d5a2d258b4cc421.png)
 
-图7
+图 7
 
 +   在“选择任务”下选择“***Organization***”，然后点击“提交”，我们得到的是：
 
-![图示](../Images/790997a85dbe822e89de2695edd43287.png)
+![图示](img/790997a85dbe822e89de2695edd43287.png)
 
-图8
+图 8
 
 +   很好。让我们尝试“***Person***”实体：
 
-![图示](../Images/3a13f59dc8cfc3263caf0d394371f43b.png)
+![图示](img/3a13f59dc8cfc3263caf0d394371f43b.png)
 
-图9
+图 9
 
 +   “***Geopolitical***”实体：
 
-![图示](../Images/a34c95635d45bceac6a497c5b6d382cc.png)
+![图示](img/a34c95635d45bceac6a497c5b6d382cc.png)
 
-图10
+图 10
 
 +   “***Money***”实体：
 
-![图示](../Images/9010368909f99c58dccbbd0c57633cb6.png)
+![图示](img/9010368909f99c58dccbbd0c57633cb6.png)
 
-图11
+图 11
 
 完成了！
 
@@ -156,21 +156,21 @@
 
 **相关：**
 
-+   [你需要了解的关于NLP和机器学习的文本预处理](/2019/04/text-preprocessing-nlp-machine-learning.html)
++   你需要了解的关于 NLP 和机器学习的文本预处理
 
-+   [利用迁移学习和弱监督廉价构建NLP分类器](/2019/03/building-nlp-classifiers-cheaply-transfer-learning-weak-supervision.html)
++   利用迁移学习和弱监督廉价构建 NLP 分类器
 
-+   [简单神经网络与LSTM时间序列预测介绍](/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)
++   简单神经网络与 LSTM 时间序列预测介绍
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

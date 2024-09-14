@@ -1,22 +1,22 @@
 # 数据科学被高估了，这里是原因
 
-> 原文：[https://www.kdnuggets.com/2022/06/data-science-overrated.html](https://www.kdnuggets.com/2022/06/data-science-overrated.html)
+> 原文：[`www.kdnuggets.com/2022/06/data-science-overrated.html`](https://www.kdnuggets.com/2022/06/data-science-overrated.html)
 
-![数据科学被高估了，这里是原因](../Images/a4bd05a80db5b0d5276d34630b7462f7.png)
+![数据科学被高估了，这里是原因](img/a4bd05a80db5b0d5276d34630b7462f7.png)
 
 图片来自 [freepik](https://www.freepik.com/free-photo/skilled-satisfied-freelance-student-watches-streaming-business-news-sits-good-mood-coworking-space-with-opened-laptop-computer-thinks-ideas-new-science-project_12930957.htm#query=thinking%20science&position=11&from_view=search)
 
-人们已经为数据科学大肆宣扬了大约10年，自从《哈佛商业评论》称其为“21世纪最性感的职业”以来。我自己也被这种炒作所吸引，这也是我4年前攻读该学科学位的原因。
+人们已经为数据科学大肆宣扬了大约 10 年，自从《哈佛商业评论》称其为“21 世纪最性感的职业”以来。我自己也被这种炒作所吸引，这也是我 4 年前攻读该学科学位的原因。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -82,7 +82,7 @@ Hiren 随后决定深入挖掘并了解更多业务需求，以便他可以更�
 
 # 招聘没有数据的 数据科学家
 
-当数据科学在2012年急剧流行时，公司开始大规模招聘数据科学家。他们中的大多数人没有建立数据管道，但期望数据科学家能够进来并开始创造价值。
+当数据科学在 2012 年急剧流行时，公司开始大规模招聘数据科学家。他们中的大多数人没有建立数据管道，但期望数据科学家能够进来并开始创造价值。
 
 不出所料，这并没有发生。
 
@@ -120,12 +120,12 @@ Hiren 随后决定深入挖掘并了解更多业务需求，以便他可以更�
 
 +   [找不到数据科学工作的原因？这里是为什么](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
 +   [一个针对合成数据的社区来了，这就是我们需要它的原因](https://www.kdnuggets.com/2022/04/community-synthetic-data-need.html)
 
-+   [Burtch Works 2023年数据科学与AI专业人士薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
++   [Burtch Works 2023 年数据科学与 AI 专业人士薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
 
 +   [想用你的数据技能解决全球问题？这里有一些建议…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [这里是我用来赚取$10,000的AI工具及我的技能…](https://www.kdnuggets.com/2023/07/ai-tools-along-skills-make-10000-monthly-bs.html)
++   [这里是我用来赚取$10,000 的 AI 工具及我的技能…](https://www.kdnuggets.com/2023/07/ai-tools-along-skills-make-10000-monthly-bs.html)

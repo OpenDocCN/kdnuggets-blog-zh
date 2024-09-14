@@ -1,10 +1,10 @@
 # 预测科学与数据科学
 
-> 原文：[https://www.kdnuggets.com/2016/11/predictive-science-vs-data-science.html](https://www.kdnuggets.com/2016/11/predictive-science-vs-data-science.html)
+> 原文：[`www.kdnuggets.com/2016/11/predictive-science-vs-data-science.html`](https://www.kdnuggets.com/2016/11/predictive-science-vs-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![水晶球](../Images/db6244b8704a222ae67298a83bc9f175.png)
+![水晶球](img/db6244b8704a222ae67298a83bc9f175.png)
 
 我们可以谈论营养科学，它关注我们吃什么。我们可以谈论运动科学，它关注我们如何利用这些卡路里。或者我们可以全面地讨论结果——我认为这涉及到一个更重要的问题，大多数人最终关心的——健康科学。鉴于结果——健康科学——通常比原料——营养学——或将原料转化为更有用的东西的过程——运动科学——更有趣，我们为何往往讨论数据科学而非预测科学？
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-明确来说，数据科学不仅仅是预测或分类。它还包括其他机器学习技术，如聚类和频繁项集挖掘。它还包括数据可视化和数据讲述。它也可以涵盖传统的[数据挖掘框架](/2016/03/data-science-process-rediscovered.html)的各个方面，例如KDD过程，包括数据选择、预处理和转换。数据科学还可以包括其他算法和数据相关任务的方法，超出我在这里提到的内容。
+明确来说，数据科学不仅仅是预测或分类。它还包括其他机器学习技术，如聚类和频繁项集挖掘。它还包括数据可视化和数据讲述。它也可以涵盖传统的数据挖掘框架的各个方面，例如 KDD 过程，包括数据选择、预处理和转换。数据科学还可以包括其他算法和数据相关任务的方法，超出我在这里提到的内容。
 
-我以前已经[全面定义了数据科学](/2016/03/data-science-puzzle-explained.html/2)：
+我以前已经全面定义了数据科学：
 
 > 数据科学是一门多方面的学科，包括机器学习和其他分析过程、统计学及相关的数学分支，越来越多地借用高性能科学计算，以最终从数据中提取洞察，并利用这些新发现的信息讲述故事。
 
@@ -52,22 +52,22 @@
 
 **相关**：
 
-+   [数据科学与大数据的解释](/2016/11/big-data-data-science-explained.html)
++   数据科学与大数据的解释
 
-+   [数据科学的核心](/2016/08/core-data-science.html)
++   数据科学的核心
 
-+   [数据科学的分裂会导致一个帝国还是多个共和国？](/2015/11/balkanization-data-science.html)
++   数据科学的分裂会导致一个帝国还是多个共和国？
 
 ### 相关话题
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [KDnuggets™ News 22:n01, Jan 5: 3 Tools to Track and Visualize…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [构建预测模型：Python中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
++   [构建预测模型：Python 中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
 
-+   [通过预测性GenAI提升能力](https://www.kdnuggets.com/2024/01/pecan-powering-predictive-genai)
++   [通过预测性 GenAI 提升能力](https://www.kdnuggets.com/2024/01/pecan-powering-predictive-genai)
 
-+   [为什么仅用LLMs无法满足你公司的预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
++   [为什么仅用 LLMs 无法满足你公司的预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
 
 +   [预测分析如何革新科技领域的决策制定](https://www.kdnuggets.com/how-predictive-analytics-is-revolutionizing-decisionmaking-in-tech)

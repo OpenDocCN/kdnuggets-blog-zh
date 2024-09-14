@@ -1,8 +1,8 @@
-# 假设检验和A/B测试
+# 假设检验和 A/B 测试
 
-> 原文：[https://www.kdnuggets.com/hypothesis-testing-and-ab-testing](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
+> 原文：[`www.kdnuggets.com/hypothesis-testing-and-ab-testing`](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
 
-![假设检验和A/B测试](../Images/b427073d50cc1e09fa59edd479db241e.png)
+![假设检验和 A/B 测试](img/b427073d50cc1e09fa59edd479db241e.png)
 
 图片来源：编辑
 
@@ -10,13 +10,13 @@
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 这些决策的核心是什么？
 
-A/B测试和假设检验。
+A/B 测试和假设检验。
 
 *但它们是什么？为什么在我们以数据为中心的世界中如此关键？*
 
@@ -46,7 +46,7 @@ A/B测试和假设检验。
 
 这正是通过分析数据中的模式所能发现的。
 
-像亚马逊或Netflix这样的公司建立了复杂的推荐系统，分析用户行为中的模式，如查看的产品、喜欢的项目和购买记录。
+像亚马逊或 Netflix 这样的公司建立了复杂的推荐系统，分析用户行为中的模式，如查看的产品、喜欢的项目和购买记录。
 
 但由于数据通常会受到噪声和随机波动的影响，这些公司如何确保他们看到的模式是真实的呢？
 
@@ -64,7 +64,7 @@ A/B测试和假设检验。
 
 这涉及到提出一个**零假设**，它被假设为真实的，通常是假设观察结果是随机的，还有一个**替代假设**，这是研究者希望证明的。
 
-![假设检验与 A/B 测试](../Images/3fcbd739dfe5c03eebe8e544d517ab7f.png)
+![假设检验与 A/B 测试](img/3fcbd739dfe5c03eebe8e544d517ab7f.png)
 
 作者提供的图片
 
@@ -82,7 +82,7 @@ Alpha 指的是对结果的信心程度。这意味着 alpha 为 5% 意味着有
 
 *通常，较低的 p 值更受欢迎。*
 
-![假设检验与 A/B 测试](../Images/7480bb4d2d304f4987ff7c1d352b587e.png)
+![假设检验与 A/B 测试](img/7480bb4d2d304f4987ff7c1d352b587e.png)
 
 作者提供的图片
 
@@ -102,7 +102,7 @@ A/B 测试是假设检验的实际应用。这是一种用于比较产品或特�
 
 所以……让我们想象一下，我们是一家社交媒体平台，我们想了解用户在使用绿色或蓝色按钮时是否更容易参与。
 
-![假设检验与 A/B 测试](../Images/1d8eec3b5f2c38ed7fb0a27d52ff4b94.png)
+![假设检验与 A/B 测试](img/1d8eec3b5f2c38ed7fb0a27d52ff4b94.png)
 
 作者提供的图片
 

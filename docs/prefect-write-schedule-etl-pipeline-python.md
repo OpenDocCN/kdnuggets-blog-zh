@@ -1,12 +1,12 @@
-# Prefect: 如何用Python编写和调度您的第一个ETL管道
+# Prefect: 如何用 Python 编写和调度您的第一个 ETL 管道
 
-> 原文：[https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html](https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html)
+> 原文：[`www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html`](https://www.kdnuggets.com/2021/08/prefect-write-schedule-etl-pipeline-python.html)
 
-[评论](#comments)
+评论
 
-**由 [Dario Radečić](https://www.linkedin.com/in/darioradecic/)，NEOS的顾问**
+**由 [Dario Radečić](https://www.linkedin.com/in/darioradecic/)，NEOS 的顾问**
 
-![](../Images/5249229d128331d161c3d8fb44a6d46d.png)
+![](img/5249229d128331d161c3d8fb44a6d46d.png)
 
 照片由 [**Helena Lopes**](https://www.pexels.com/@wildlittlethingsphoto?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，来自 [**Pexels**](https://www.pexels.com/photo/young-man-writing-reminder-on-fridge-and-drinking-coffee-at-home-3867001/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -14,23 +14,23 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您在 IT 领域的组织
 
 * * *
 
-Prefect是一个基于Python的工作流管理系统，基于一个简单的前提*— 您的代码可能正常工作，但有时它并不*([source](https://docs.prefect.io/core/))。当一切按预期工作时，没有人会考虑工作流系统。但当事情出问题时，Prefect将确保您的代码成功失败。
+Prefect 是一个基于 Python 的工作流管理系统，基于一个简单的前提*— 您的代码可能正常工作，但有时它并不*([source](https://docs.prefect.io/core/))。当一切按预期工作时，没有人会考虑工作流系统。但当事情出问题时，Prefect 将确保您的代码成功失败。
 
-作为一个工作流管理系统，Prefect使得在数据管道中添加日志记录、重试、动态映射、缓存、失败通知等变得非常容易。当您不需要它时，它是隐形的——当一切按预期运行时；而当您需要它时，它是可见的。就像保险一样。
+作为一个工作流管理系统，Prefect 使得在数据管道中添加日志记录、重试、动态映射、缓存、失败通知等变得非常容易。当您不需要它时，它是隐形的——当一切按预期运行时；而当您需要它时，它是可见的。就像保险一样。
 
-虽然Prefect不是唯一的Python用户工作流管理系统，但它无疑是最高效的一个。像Apache Airflow这样的替代品通常表现良好，但在处理大型项目时会带来很多麻烦。您可以在[这里](https://docs.prefect.io/core/getting_started/why-not-airflow.html#overview)阅读Prefect与Airflow的详细比较。
+虽然 Prefect 不是唯一的 Python 用户工作流管理系统，但它无疑是最高效的一个。像 Apache Airflow 这样的替代品通常表现良好，但在处理大型项目时会带来很多麻烦。您可以在[这里](https://docs.prefect.io/core/getting_started/why-not-airflow.html#overview)阅读 Prefect 与 Airflow 的详细比较。
 
 本文涵盖了库的基础知识，例如任务、流程、参数、失败和计划，并解释了如何在本地和云端设置环境。我们将使用 [Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic) 来完成这部分，因为它使配置变得毫不费力。这是由数据科学家制作的云平台，因此大部分繁重的工作都为您完成了。
 
-Saturn Cloud可以轻松处理Prefect工作流。它也是从仪表板到分布式机器学习、深度学习和GPU训练的前沿解决方案。
+Saturn Cloud 可以轻松处理 Prefect 工作流。它也是从仪表板到分布式机器学习、深度学习和 GPU 训练的前沿解决方案。
 
 今天您将学习如何：
 
@@ -64,7 +64,7 @@ conda install -c conda-forge prefect
 
 今天我们将使用 Prefect 完成一个相对简单的任务——运行一个 ETL 管道。这个管道将从一个虚拟 API 下载数据，转换数据，并将其保存为 CSV 文件。[JSON Placeholder](https://jsonplaceholder.typicode.com/) 网站将作为我们的虚拟 API。除此之外，它还包含十个用户的虚假数据：
 
-![](../Images/bcfa7885385bdf0fd93c4cf2ac283a07.png)
+![](img/bcfa7885385bdf0fd93c4cf2ac283a07.png)
 
 *图 1 — 虚假用户数据（来源：*[*https://jsonplaceholder.typicode.com/users)*](https://jsonplaceholder.typicode.com/users))*（图片由作者提供）*
 
@@ -88,7 +88,7 @@ python 01_etl_pipeline.py
 
 如果一切正常，你不应该看到任何输出。然而，你应该在`data`文件夹中看到 CSV 文件（我运行了文件两次）：
 
-![](../Images/d3079cf5ba91efe531e3ead0424c981e.png)
+![](img/d3079cf5ba91efe531e3ead0424c981e.png)
 
 *图 2 — 运行 ETL 管道两次后 data 文件夹中的 CSV 文件列表（图片由作者提供）*
 
@@ -118,7 +118,7 @@ def my_function():
 python 02_task_conversion.py
 ```
 
-![](../Images/f77285a7859419a9f8af5f5a4caa7b1e.png)
+![](img/f77285a7859419a9f8af5f5a4caa7b1e.png)
 
 *图 3 — 使用 Prefect 将函数转换为任务（图片由作者提供）*
 
@@ -140,13 +140,13 @@ python 02_task_conversion.py
 python 03_flow.py
 ```
 
-![](../Images/e9143ea481b80645655a29a2fdbabdc9.png)
+![](img/e9143ea481b80645655a29a2fdbabdc9.png)
 
 *图 4 — 第一次运行 Prefect 流程（图片由作者提供）*
 
 这真是太棒了！不仅 ETL 流程被执行了，我们还获得了关于每个任务开始和结束时间的详细信息。我已经运行了文件两次，因此应该会有两个新的 CSV 文件保存到 `data` 文件夹中。让我们验证一下是否如此：
 
-![](../Images/2669022cbf0222d1245d5ff7cef47ee1.png)
+![](img/2669022cbf0222d1245d5ff7cef47ee1.png)
 
 *图 5 — Prefect 流程生成的 CSV 文件（图片由作者提供）*
 
@@ -176,13 +176,13 @@ python 03_flow.py
 python 04_parameters.py
 ```
 
-![](../Images/d1c9d67e156af243c384a1e213f22675.png)
+![](img/d1c9d67e156af243c384a1e213f22675.png)
 
 *图 6 — 运行包含参数的 Prefect 流（图像作者提供）*
 
 我已经运行了两次文件，因此`data`文件夹中应出现两个新的 CSV 文件。让我们确认一下：
 
-![](../Images/fd67d3d16e5347058c72fd92f0e7cc86.png)
+![](img/fd67d3d16e5347058c72fd92f0e7cc86.png)
 
 *图 7 — Prefect 流生成的 CSV 文件（图像作者提供）*
 
@@ -208,7 +208,7 @@ python 04_parameters.py
 python 05_interval_scheduler.py
 ```
 
-![](../Images/c78581f0667eedf10c00cad7735337d4.png)
+![](img/c78581f0667eedf10c00cad7735337d4.png)
 
 *图 8 — 使用间隔调度（图像作者提供）*
 
@@ -226,7 +226,7 @@ python 05_interval_scheduler.py
 python 06_cron_scheduler.py
 ```
 
-![](../Images/e150c047bec34dc8d3ca8f32bee62a5e.png)
+![](img/e150c047bec34dc8d3ca8f32bee62a5e.png)
 
 *图 9 — 使用 Cron 调度（图像作者提供）*
 
@@ -248,7 +248,7 @@ python 06_cron_scheduler.py
 python 07_failures.py
 ```
 
-![](../Images/a04275dc4d17dbd8e87e9e0e2949d3b3.png)
+![](img/a04275dc4d17dbd8e87e9e0e2949d3b3.png)
 
 *图 10 — 使用 Prefect 防止失败（作者提供的图像）*
 
@@ -262,37 +262,37 @@ python 07_failures.py
 
 在转到[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic)之前，你需要在 Prefect 中创建一个 API 密钥来连接这两个服务。你可以在设置中找到*API Key*选项。如你所见，我将其命名为`SaturnDemoKey`：
 
-![](../Images/51a921e70591960e8bb016d1cb1a8878.png)
+![](img/51a921e70591960e8bb016d1cb1a8878.png)
 
 *图 11 — 创建 Prefect Cloud API 密钥（作者提供的图像）*
 
 现在你已经具备了所需的一切，前往[Saturn Cloud](https://www.saturncloud.io/s/?utm_source=dario-radecic)创建一个免费账户。一旦进入仪表板，你会看到多个项目创建选项。选择*Prefect*选项，如下所示：
 
-![](../Images/6f2a97587fad4691545cb6573270fad3.png)
+![](img/6f2a97587fad4691545cb6573270fad3.png)
 
 *图 12 — 在 Saturn Cloud 中创建 Prefect 项目（作者提供的图像）*
 
 Saturn Cloud 现在会自动为你完成所有繁重的工作，几分钟后，你可以通过点击按钮打开 JupyterLab 实例：
 
-![](../Images/cc518b006f6e7688278f377bbb321d64.png)
+![](img/cc518b006f6e7688278f377bbb321d64.png)
 
 *图 13 — 在 Saturn Cloud 中打开 JupyterLab（作者提供的图像）*
 
 你将可以访问两个笔记本 — 第二个笔记本展示了在 Saturn Cloud 中使用 Prefect 的快速演示。如下所示：
 
-![](../Images/a040269b2120ae00bcc1a264f5c2b070.png)
+![](img/a040269b2120ae00bcc1a264f5c2b070.png)
 
 *图 14 — Saturn Cloud 中的 Prefect Cloud 笔记本（作者提供的图像）*
 
 你只需要更改两个设置来使笔记本正常工作。首先，将项目名称更改为 Prefect Cloud 中你的项目名称。其次，将 ` <your_api_key_here> ` 替换为几分钟前生成的 API 密钥。如果你做对了，你应该会看到以下消息：
 
-![](../Images/e1632b0fc736cfe7b6c53c700f27baee.png)
+![](img/e1632b0fc736cfe7b6c53c700f27baee.png)
 
 *图 15 — Saturn Cloud 中的登录成功消息（图片由作者提供）*
 
 为了进行测试，请运行接下来的每个单元格。然后转到 Prefect Cloud 仪表板并打开你的项目。它不会像几分钟前那样空着：
 
-![](../Images/c6def1d6bd1f03d8c29ba18bfc905410.png)
+![](img/c6def1d6bd1f03d8c29ba18bfc905410.png)
 
 *图 16 — 成功的 Prefect 任务调度（图片由作者提供）*
 
@@ -320,11 +320,11 @@ Saturn Cloud 现在会自动为你完成所有繁重的工作，几分钟后，�
 
 **相关内容：**
 
-+   [AWS 本地 ETL 管道的开发与测试](/2021/08/development-testing-etl-pipelines-aws-locally.html)
++   AWS 本地 ETL 管道的开发与测试
 
-+   [什么是 ETL？](/2021/04/whats-etl.html)
++   什么是 ETL？
 
-+   [dbt 数据转换 – 实用教程](/2021/07/dbt-data-transformation-tutorial.html)
++   dbt 数据转换 – 实用教程
 
 ### 更多相关主题
 

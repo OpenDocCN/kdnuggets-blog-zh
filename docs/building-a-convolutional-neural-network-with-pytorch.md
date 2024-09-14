@@ -1,8 +1,8 @@
 # 使用 PyTorch 构建卷积神经网络
 
-> 原文：[https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)
+> 原文：[`www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch`](https://www.kdnuggets.com/building-a-convolutional-neural-network-with-pytorch)
 
-![使用 PyTorch 构建卷积神经网络](../Images/ef57307f5583535b4a1ad4932adafb8b.png)
+![使用 PyTorch 构建卷积神经网络](img/ef57307f5583535b4a1ad4932adafb8b.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@
 
 例如，当一个过滤器看到垂直线时，它可能会激活，产生一个特征图，显示图像中的垂直线。应用于相同输入的多个过滤器会产生一系列特征图，捕捉图像的不同方面。
 
-![使用 PyTorch 构建卷积神经网络](../Images/d6733d2f3d9da90f08c34a309f0339f6.png)
+![使用 PyTorch 构建卷积神经网络](img/d6733d2f3d9da90f08c34a309f0339f6.png)
 
 Gif 来源于 [IceCream Labs](https://icecreamlabs.medium.com/3x3-convolution-filters-a-popular-choice-75ab1c8b4da8)
 
@@ -130,11 +130,11 @@ show_batch(trainloader)
 
 正如我们所见，我们有汽车、动物、飞机和船只的图像。
 
-![使用 PyTorch 构建卷积神经网络](../Images/b79babc9d3e180de665c0c58332fc19d.png)
+![使用 PyTorch 构建卷积神经网络](img/b79babc9d3e180de665c0c58332fc19d.png)
 
 接下来，我们将构建我们的 CNN 模型。为此，我们需要创建一个 Python 类并初始化卷积层、最大池化层和全连接层。我们的架构包含 2 个卷积层以及池化和线性层。
 
-初始化后，我们不会在前向函数中按顺序连接所有层。如果你是 PyTorch 新手，你应该阅读 [可解释的 PyTorch 神经网络](/2022/01/interpretable-neural-networks-pytorch.html) 来详细了解每个组件。
+初始化后，我们不会在前向函数中按顺序连接所有层。如果你是 PyTorch 新手，你应该阅读 可解释的 PyTorch 神经网络 来详细了解每个组件。
 
 ```py
 class CNNModel(nn.Module):

@@ -1,22 +1,22 @@
 # 10 个你需要掌握的数据科学面试备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html](https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html)
+> 原文：[`www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html`](https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html)
 
-![10 个你需要掌握的数据科学面试备忘单](../Images/430e6760ca9272e9d5015baa08057d78.png)
+![10 个你需要掌握的数据科学面试备忘单](img/430e6760ca9272e9d5015baa08057d78.png)
 
 图片来源：作者
 
-这10个备忘单适用于初学者、学生、求职者和专业人士。这些是我的最爱，它们经过精心挑选，以便你不必为数据科学的每个子类别寻找最佳备忘单。
+这 10 个备忘单适用于初学者、学生、求职者和专业人士。这些是我的最爱，它们经过精心挑选，以便你不必为数据科学的每个子类别寻找最佳备忘单。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -48,7 +48,7 @@
 
 # SQL
 
-![10 个你需要掌握的数据科学面试备忘单](../Images/cd34c75c067988306596c4eccf85e2fa.png)
+![10 个你需要掌握的数据科学面试备忘单](img/cd34c75c067988306596c4eccf85e2fa.png)
 
 [Dataquest](https://www.dataquest.io/blog/sql-cheat-sheet/) 提供的备忘单示例
 
@@ -64,15 +64,15 @@
 
 # 网络爬虫
 
-![10 个你需要掌握的数据科学面试备忘单](../Images/262aa9cfa2db7702a937a0133f6dc8bc.png)
+![10 个你需要掌握的数据科学面试备忘单](img/262aa9cfa2db7702a937a0133f6dc8bc.png)
 
 图片来源：[Frank Andrade](https://frank-andrade.medium.com/)
 
-[网络爬虫](https://medium.com/geekculture/web-scraping-cheat-sheet-2021-python-for-web-scraping-cad1540ce21c) 由 Frank Andrade 提供，是一个基于博客的备忘单，涵盖了网络爬虫的所有基础知识以及如何利用它创建自动化网页爬虫。对于数据专业人士来说，掌握网络爬虫技能是一个加分项。它将帮助他们从基于HTML的网站和API中收集数据。
+[网络爬虫](https://medium.com/geekculture/web-scraping-cheat-sheet-2021-python-for-web-scraping-cad1540ce21c) 由 Frank Andrade 提供，是一个基于博客的备忘单，涵盖了网络爬虫的所有基础知识以及如何利用它创建自动化网页爬虫。对于数据专业人士来说，掌握网络爬虫技能是一个加分项。它将帮助他们从基于 HTML 的网站和 API 中收集数据。
 
 **你将学习到：**
 
-1.  网络爬虫的HTML
+1.  网络爬虫的 HTML
 
 1.  Beautiful Soup
 
@@ -82,19 +82,19 @@
 
 1.  Scrapy
 
-1.  网络爬虫的Python基础
+1.  网络爬虫的 Python 基础
 
-备忘单包含易于遵循的代码示例和可视化辅助。你可以学习各种网络爬虫Python库的函数，并自动化你的工作流程。
+备忘单包含易于遵循的代码示例和可视化辅助。你可以学习各种网络爬虫 Python 库的函数，并自动化你的工作流程。
 
 # 统计学
 
-![10 Cheat Sheets You Need To Ace Data Science Interview](../Images/7c85cd0b94bd96f4a2594502fb2165ed.png)
+![10 Cheat Sheets You Need To Ace Data Science Interview](img/7c85cd0b94bd96f4a2594502fb2165ed.png)
 
 来自 [stanford.edu](https://stanford.edu/~shervine/teaching/cme-106/cheatsheet-statistics) 的备忘单示例
 
-[统计学](https://stanford.edu/~shervine/teaching/cme-106/cheatsheet-statistics) 由 stanford.edu 提供，是一个基于HTML的备忘单。它涵盖了所有统计概念，包括数学公式和可视化示例（如果可能的话）。
+[统计学](https://stanford.edu/~shervine/teaching/cme-106/cheatsheet-statistics) 由 stanford.edu 提供，是一个基于 HTML 的备忘单。它涵盖了所有统计概念，包括数学公式和可视化示例（如果可能的话）。
 
-**它被分为5个核心部分：**
+**它被分为 5 个核心部分：**
 
 1.  参数估计
 
@@ -106,15 +106,15 @@
 
 1.  相关性分析
 
-在技术工作展示中，你需要用统计术语支持你的论点。阅读备忘单5分钟将帮助你记住核心术语和公式。
+在技术工作展示中，你需要用统计术语支持你的论点。阅读备忘单 5 分钟将帮助你记住核心术语和公式。
 
 # Pandas 数据处理
 
-![10 Cheat Sheets You Need To Ace Data Science Interview](../Images/a5b807bd1b497745d77d80ce25215b44.png)
+![10 Cheat Sheets You Need To Ace Data Science Interview](img/a5b807bd1b497745d77d80ce25215b44.png)
 
 来自 [DataCamp](https://datacamp-community-prod.s3.amazonaws.com/d4efb29b-f9c6-4f1c-8c98-6f568d88b48f) 的备忘单示例
 
-[Pandas 数据处理](https://datacamp-community-prod.s3.amazonaws.com/d4efb29b-f9c6-4f1c-8c98-6f568d88b48f) 由 DataCamp 提供，是一个基于PDF的单页备忘单。它包含各种数据处理技术的代码和可视化示例。
+[Pandas 数据处理](https://datacamp-community-prod.s3.amazonaws.com/d4efb29b-f9c6-4f1c-8c98-6f568d88b48f) 由 DataCamp 提供，是一个基于 PDF 的单页备忘单。它包含各种数据处理技术的代码和可视化示例。
 
 1.  **重塑数据：** 数据透视、透视表、堆叠和拆分以及熔化
 
@@ -134,11 +134,11 @@
 
 1.  **可视化**
 
-这是一个很好的资源，可以复习pandas库的所有核心功能。
+这是一个很好的资源，可以复习 pandas 库的所有核心功能。
 
 # 数据可视化
 
-![10 Cheat Sheets You Need To Ace Data Science Interview](../Images/7000ab3638f17ae105aa8abb71b8f93b.png)
+![10 Cheat Sheets You Need To Ace Data Science Interview](img/7000ab3638f17ae105aa8abb71b8f93b.png)
 
 来自 [DataCamp](https://www.datacamp.com/cheat-sheet/data-viz-cheat-sheet) 的图像
 
@@ -162,7 +162,7 @@
 
 # Tableau 商业智能
 
-![你需要的 10 个备忘单以通过数据科学面试](../Images/97dac66626fb27b77e7da9f0b19fd498.png)
+![你需要的 10 个备忘单以通过数据科学面试](img/97dac66626fb27b77e7da9f0b19fd498.png)
 
 备忘单示例来自 [learnovita.com](https://www.learnovita.com/tableau-cheat-sheet-tutorial)
 
@@ -194,7 +194,7 @@ Tableau 是商业智能领域最著名的工具。它将帮助你通过几次点
 
 # 机器学习
 
-![你需要的 10 个备忘单以通过数据科学面试](../Images/119a094daadb7a2ba3996e2317f68057.png)
+![你需要的 10 个备忘单以通过数据科学面试](img/119a094daadb7a2ba3996e2317f68057.png)
 
 备忘单示例来自 [DataCamp](https://datacamp-community-prod.s3.amazonaws.com/eb807da5-dce5-4b97-a54d-74e89f14266b)
 
@@ -222,7 +222,7 @@ Tableau 是商业智能领域最著名的工具。它将帮助你通过几次点
 
 # 深度学习
 
-![你需要的 10 个备忘单以通过数据科学面试](../Images/e5f59edba8c663d9e92ae273aaef8065.png)
+![你需要的 10 个备忘单以通过数据科学面试](img/e5f59edba8c663d9e92ae273aaef8065.png)
 
 备忘单示例来自 [DataCamp](https://datacamp-community-prod.s3.amazonaws.com/af9bb467-170d-41c9-a0bd-26e675384c4e)
 
@@ -252,11 +252,11 @@ Tableau 是商业智能领域最著名的工具。它将帮助你通过几次点
 
 # 自然语言处理
 
-![你需要的10个数据科学面试备忘单](../Images/1b18323bca9f21c5f31fa7994d46b3de.png)
+![你需要的 10 个数据科学面试备忘单](img/1b18323bca9f21c5f31fa7994d46b3de.png)
 
 来自[janlukasschroeder](https://github.com/janlukasschroeder/nlp-cheat-sheet-python)的备忘单示例
 
-[NLP](https://github.com/janlukasschroeder/nlp-cheat-sheet-python)由[janlukasschroeder](https://github.com/janlukasschroeder)提供，是一本独一无二的自然语言处理（NLP）备忘单。这是一份基于GitHub的备忘单，其中所有内容都使用Markdown格式在README.md文件中创建。
+[NLP](https://github.com/janlukasschroeder/nlp-cheat-sheet-python)由[janlukasschroeder](https://github.com/janlukasschroeder)提供，是一本独一无二的自然语言处理（NLP）备忘单。这是一份基于 GitHub 的备忘单，其中所有内容都使用 Markdown 格式在 README.md 文件中创建。
 
 **你将学到：**
 
@@ -272,7 +272,7 @@ Tableau 是商业智能领域最著名的工具。它将帮助你通过几次点
 
 1.  词性标注（POS）
 
-1.  BILUO标注
+1.  BILUO 标注
 
 1.  词干提取
 
@@ -304,15 +304,15 @@ Tableau 是商业智能领域最著名的工具。它将帮助你通过几次点
 
 1.  概率以丢弃词语以减少噪音
 
-它包含了你想了解的NLP基础知识和语言应用。你还将学习各种神经网络架构、损失函数、优化器和正则化器。如果你喜欢这份备忘单，给它一个星标。
+它包含了你想了解的 NLP 基础知识和语言应用。你还将学习各种神经网络架构、损失函数、优化器和正则化器。如果你喜欢这份备忘单，给它一个星标。
 
 # 超级备忘单
 
-![你需要的10个数据科学面试备忘单](../Images/8838b4f7975e980d5b7d77fc80e5bec3.png)
+![你需要的 10 个数据科学面试备忘单](img/8838b4f7975e980d5b7d77fc80e5bec3.png)
 
 来自[GitHub](https://github.com/ml874/Data-Science-Cheatsheet/blob/master/data-science-cheatsheet.pdf)的备忘单示例
 
-[超级数据科学](https://github.com/ml874/Data-Science-Cheatsheet/blob/master/data-science-cheatsheet.pdf)由[马弗里克·林](https://github.com/ml874)提供，是一本基于PDF的多页备忘单，也是我最喜欢的。它涵盖了从算法到SQL的所有主题。备忘单纯粹是理论性的，包含数学和视觉辅助。
+[超级数据科学](https://github.com/ml874/Data-Science-Cheatsheet/blob/master/data-science-cheatsheet.pdf)由[马弗里克·林](https://github.com/ml874)提供，是一本基于 PDF 的多页备忘单，也是我最喜欢的。它涵盖了从算法到 SQL 的所有主题。备忘单纯粹是理论性的，包含数学和视觉辅助。
 
 **它包含各种类别：**
 
@@ -350,20 +350,20 @@ Tableau 是商业智能领域最著名的工具。它将帮助你通过几次点
 
 1.  SQL
 
-如果你像我一样懒惰，我想你会喜欢一次性复习所有内容，并对面试充满信心。我并不是说你应该忽视上述所有内容。这十项都是你在数据科学、数据分析或机器学习面试中成功所必需的，尤其是基于HTML和博客文章的内容。
+如果你像我一样懒惰，我想你会喜欢一次性复习所有内容，并对面试充满信心。我并不是说你应该忽视上述所有内容。这十项都是你在数据科学、数据分析或机器学习面试中成功所必需的，尤其是基于 HTML 和博客文章的内容。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专家，热爱构建机器学习模型。目前，他专注于内容创作，撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些在精神疾病方面挣扎的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专家，热爱构建机器学习模型。目前，他专注于内容创作，撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些在精神疾病方面挣扎的学生。
 
 ### 更多相关主题
 
-+   [7份超级备忘单助你在机器学习面试中表现出色](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
++   [7 份超级备忘单助你在机器学习面试中表现出色](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
 
-+   [7份必备备忘单助你在数据科学面试中脱颖而出](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
++   [7 份必备备忘单助你在数据科学面试中脱颖而出](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
 
-+   [5份超级有用的SQL备忘单你不能错过！](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
++   [5 份超级有用的 SQL 备忘单你不能错过！](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
 
-+   [10个统计学问题助你在数据科学面试中脱颖而出](https://www.kdnuggets.com/10-statistics-questions-to-ace-your-data-science-interview)
++   [10 个统计学问题助你在数据科学面试中脱颖而出](https://www.kdnuggets.com/10-statistics-questions-to-ace-your-data-science-interview)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets 新闻，6月8日：21份数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 份数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)

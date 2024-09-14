@@ -1,8 +1,8 @@
 # 数据专业人士如何在繁忙时刻依然给人留下深刻印象
 
-> 原文：[https://www.kdnuggets.com/2021/10/data-professionals-impress-busy.html](https://www.kdnuggets.com/2021/10/data-professionals-impress-busy.html)
+> 原文：[`www.kdnuggets.com/2021/10/data-professionals-impress-busy.html`](https://www.kdnuggets.com/2021/10/data-professionals-impress-busy.html)
 
-[评论](#comments)![专业人士会议](../Images/4e10a5c62dbd8c15ced264e224f028c9.png)
+评论![专业人士会议](img/4e10a5c62dbd8c15ced264e224f028c9.png)
 
 图片由 fauxels 提供，来源于 Pexels
 
@@ -40,7 +40,7 @@
 
 在空闲时间获得新认证可以展示主动性和对领域的尊重。这也向你的老板展示你对职业发展的认真态度。你可以通过寻找与公司业务相关且符合公司目标的个人项目来强调这些因素。
 
-这些项目中一个重要的方面是你如何向上级展示你的进展。数据科学经理表示他们[希望找到能简洁沟通的人](/2018/01/how-grow-data-scientist.html)担任高级数据科学家职位。如果你能简洁明了地展示你的个人项目，你可以展示出管理层所期望的。
+这些项目中一个重要的方面是你如何向上级展示你的进展。数据科学经理表示他们希望找到能简洁沟通的人担任高级数据科学家职位。如果你能简洁明了地展示你的个人项目，你可以展示出管理层所期望的。
 
 ### **5. 跟上数据趋势的发展**
 
@@ -48,9 +48,9 @@
 
 你可以通过阅读行业领先组织或数据科学论坛的更新来跟上这些趋势。如果你注意到任何增长或有前景的趋势，可以在公司领导面前提及，无论是在随意谈话还是相关会议中。如果你能展示出对这些发展有深入了解，可能会给他们留下深刻印象。
 
-### **在2022年推进你的职业生涯**
+### **在 2022 年推进你的职业生涯**
 
-这个假日季节是给管理层留下深刻印象和提升职业生涯的绝佳时机。如果你想在2022年有所进步，按照这些步骤在年末给你的老板留下印象。
+这个假日季节是给管理层留下深刻印象和提升职业生涯的绝佳时机。如果你想在 2022 年有所进步，按照这些步骤在年末给你的老板留下印象。
 
 在数据科学领域的进步往往取决于展示你如何为公司带来价值。这些步骤将展示你的技能和知识，帮助你获得应得的职位。
 
@@ -58,17 +58,17 @@
 
 **相关：**
 
-+   [数据专业人士如何为简历增加更多变化](/2020/11/data-professionals-add-variation-resumes.html)
++   数据专业人士如何为简历增加更多变化
 
-+   [数据科学家如何在全球就业市场中竞争](/2021/09/data-scientists-compete-global-job-market.html)
++   数据科学家如何在全球就业市场中竞争
 
-+   [如何成功成为自由职业的数据科学家](/2021/03/succeed-becoming-freelance-data-scientist.html)
++   如何成功成为自由职业的数据科学家
 
 ### 更多相关话题
 
 +   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [KDnuggets 新闻，5月11日：面向专业人士的 SQL 笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
++   [KDnuggets 新闻，5 月 11 日：面向专业人士的 SQL 笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
 
 +   [Burtch Works 2023 数据科学与 AI 专业人士薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
 

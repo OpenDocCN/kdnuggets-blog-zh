@@ -1,8 +1,8 @@
-# 数据工程的7个重要备忘单
+# 数据工程的 7 个重要备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/12/7-essential-cheat-sheets-data-engineering.html](https://www.kdnuggets.com/2022/12/7-essential-cheat-sheets-data-engineering.html)
+> 原文：[`www.kdnuggets.com/2022/12/7-essential-cheat-sheets-data-engineering.html`](https://www.kdnuggets.com/2022/12/7-essential-cheat-sheets-data-engineering.html)
 
-![数据工程的7个重要备忘单](../Images/577bdd8561bad192857e2f106f8409c3.png)
+![数据工程的 7 个重要备忘单](img/577bdd8561bad192857e2f106f8409c3.png)
 
 图片由作者提供
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
 
 * * *
 
 使用 GCP 的数据工程是一个完整的数据生命周期备忘单，适用于希望复习数据工程生态系统和工具的经验丰富的人员。
 
-![数据工程的7个重要备忘单](../Images/2434a85b64e8cee2d29be8fd2ec237c5.png)
+![数据工程的 7 个重要备忘单](img/2434a85b64e8cee2d29be8fd2ec237c5.png)
 
 图片来自[备忘单](https://github.com/ml874/Data-Engineering-on-GCP-Cheatsheet)
 
@@ -52,7 +52,7 @@
 
 [PySpark 备忘单](https://www.datacamp.com/cheat-sheet/pyspark-cheat-sheet-spark-dataframes-in-python) 包含处理 Python 中 DataFrames 的实用命令及示例。备忘单涵盖了从初始化 SparkSession 到运行查询和保存数据的 Apache Spark DataFrames 的基本操作。
 
-![数据工程的7个重要备忘单](../Images/e20a689120f6219f16618a0b179f1b96.png)
+![数据工程的 7 个重要备忘单](img/e20a689120f6219f16618a0b179f1b96.png)
 
 图片来自[备忘单](https://www.datacamp.com/cheat-sheet/pyspark-cheat-sheet-spark-dataframes-in-python)
 
@@ -84,7 +84,7 @@
 
 [dbt（数据构建工具）命令](https://datacaffee.com/dbt-data-built-tool-commands-cheat-sheet/) 备忘单提供了多种命令的简单示例，你可以用来转换数据。dbt 是一个转换工具，它不执行加载或提取。
 
-![数据工程的7个重要备忘单](../Images/909b9dfd84127c2ffbc531c4e8dfb1fa.png)
+![数据工程的 7 个重要备忘单](img/909b9dfd84127c2ffbc531c4e8dfb1fa.png)
 
 图片来自[备忘单](https://datacaffee.com/dbt-data-built-tool-commands-cheat-sheet/)
 
@@ -108,7 +108,7 @@
 
 [Apache Kafka](https://gist.github.com/sahilsk/d2a6ec384f5f2333e3fef40a581a97e1) 是一个基于命令的备忘单，涵盖了分布式数据流的基本命令。
 
-![数据工程的 7 个必备备忘单](../Images/6dcffc994ee3b3f77b3fdc983175bf85.png)
+![数据工程的 7 个必备备忘单](img/6dcffc994ee3b3f77b3fdc983175bf85.png)
 
 图片来自 [备忘单](https://gist.github.com/sahilsk/d2a6ec384f5f2333e3fef40a581a97e1)
 
@@ -142,7 +142,7 @@
 
 [Google BigQuery](https://www.zuar.com/blog/bigquery-cheat-sheet/) 是一个基于命令的备忘单，详细解释了 BigQuery 的每个功能。BigQuery 是一个完全托管的数据仓库，具有地理空间分析、BI 工具和机器学习等高级功能。
 
-![数据工程的 7 个必备备忘单](../Images/c4b716f2afebecb053acef7bed6739be.png)
+![数据工程的 7 个必备备忘单](img/c4b716f2afebecb053acef7bed6739be.png)
 
 图片来自 [备忘单](https://www.zuar.com/blog/bigquery-cheat-sheet/)
 
@@ -170,7 +170,7 @@
 
 [Airflow](https://poopcode.com/airflow-commands-cheat-sheet/) 是一个基于命令的备忘单，涵盖了创建、调度和监控工作流的基本命令。Apache Airflow 是行业中广泛使用的数据管道工具。它提供了可扩展性、可扩展性和动态管道生成。
 
-![数据工程的 7 个必备备忘单](../Images/32ab3af2fa5e155d0d14cfb383cf819d.png)
+![数据工程的 7 个必备备忘单](img/32ab3af2fa5e155d0d14cfb383cf819d.png)
 
 图片来自 [备忘单](https://poopcode.com/airflow-commands-cheat-sheet/)
 
@@ -200,7 +200,7 @@
 
 [Docker 备忘单](https://dockerlabs.collabnix.com/docker/cheatsheet/) 涵盖了构建、运行和管理 Docker 镜像的基本功能。Docker 提供了操作系统级别的虚拟化，以便将软件打包为称为容器的形式。它用于可重复性和资源管理。
 
-![数据工程的 7 个必备备忘单](../Images/7a69ac0846318fe9fd0b6aa7f1e22021.png)
+![数据工程的 7 个必备备忘单](img/7a69ac0846318fe9fd0b6aa7f1e22021.png)
 
 图片来自 [备忘单](https://dockerlabs.collabnix.com/docker/cheatsheet/)
 
@@ -216,22 +216,22 @@
 
 # 结论
 
-数据工程每日执行数据摄取、数据仓储、分析工程、工作流管理、批处理和流处理。为了完成所有这些任务，你需要了解相关工具和命令。这7份备忘单将帮助你复习各种工具、命令和概念。此外，它将帮助你在数据工程技术面试阶段以最小的努力取得成功。
+数据工程每日执行数据摄取、数据仓储、分析工程、工作流管理、批处理和流处理。为了完成所有这些任务，你需要了解相关工具和命令。这 7 份备忘单将帮助你复习各种工具、命令和概念。此外，它将帮助你在数据工程技术面试阶段以最小的努力取得成功。
 
 希望你喜欢这些备忘单。别忘了在 [Twitter](https://www.linkedin.com/in/1abidaliawan/) 和 [LinkedIn](https://twitter.com/1abidaliawan) 上关注我，我会在这些平台上发布有趣的数据科学博客。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)**（[@1abidaliawan](https://twitter.com/1abidaliawan)）是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款AI产品，帮助那些在心理健康方面挣扎的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)**（[@1abidaliawan](https://twitter.com/1abidaliawan)）是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款 AI 产品，帮助那些在心理健康方面挣扎的学生。
 
 ### 更多相关主题
 
-+   [成功通过数据科学面试的7个必备备忘单](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
++   [成功通过数据科学面试的 7 个必备备忘单](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets 新闻，6月8日：21个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
-+   [数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [21个数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
++   [21 个数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)

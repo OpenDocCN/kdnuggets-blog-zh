@@ -1,8 +1,8 @@
 # 集成学习全面指南 – 正是你需要知道的内容
 
-> 原文：[https://www.kdnuggets.com/2021/05/comprehensive-guide-ensemble-learning.html](https://www.kdnuggets.com/2021/05/comprehensive-guide-ensemble-learning.html)
+> 原文：[`www.kdnuggets.com/2021/05/comprehensive-guide-ensemble-learning.html`](https://www.kdnuggets.com/2021/05/comprehensive-guide-ensemble-learning.html)
 
-[评论](#comments)
+评论
 
 [集成学习技术](https://www.toptal.com/machine-learning/ensemble-methods-machine-learning)已经证明在机器学习问题上能取得更好的表现。我们可以将这些技术用于回归和分类问题。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -58,13 +58,13 @@
 
 +   回归器 3 – 400
 
-最终预测结果是200、300和400的平均值。
+最终预测结果是 200、300 和 400 的平均值。
 
 **加权平均**
 
 在加权平均中，具有更高预测能力的基础模型更重要。在价格预测示例中，每个回归模型会被分配一个权重。
 
-权重的总和应等于1。假设回归模型的权重分别为0.35、0.45和0.2。最终模型的预测可以如下计算：
+权重的总和应等于 1。假设回归模型的权重分别为 0.35、0.45 和 0.2。最终模型的预测可以如下计算：
 
 0.35 * 200 + 0.45 * 300 + 0.2 * 400 = 285
 
@@ -78,7 +78,7 @@
 
 堆叠可以用于回归和分类问题。
 
-![集成学习技术](../Images/171b9e69dd3a956d32a20582ebe4f151.png)
+![集成学习技术](img/171b9e69dd3a956d32a20582ebe4f151.png)
 
 [*来源*](https://towardsdatascience.com/stacking-classifiers-for-higher-predictive-performance-566f963e4840)
 
@@ -86,9 +86,9 @@
 
 1.  将数据分割为训练集和验证集，
 
-1.  将训练集划分为K折，例如10折，
+1.  将训练集划分为 K 折，例如 10 折，
 
-1.  在9折上训练一个基础模型（例如SVM）并对第10折进行预测，
+1.  在 9 折上训练一个基础模型（例如 SVM）并对第 10 折进行预测，
 
 1.  直到你对每一折有一个预测，
 
@@ -96,7 +96,7 @@
 
 1.  使用模型对测试集进行预测，
 
-1.  对其他基础模型（例如决策树）重复步骤3至6，
+1.  对其他基础模型（例如决策树）重复步骤 3 至 6，
 
 1.  使用测试集的预测作为新模型的特征——*元模型*，
 
@@ -122,13 +122,13 @@
 
 +   使用此模型进行最终预测。
 
-混合的概念[*由Netflix奖竞赛推广*](https://netflixprize.com/assets/ProgressPrize2008_BellKor.pdf)。获胜团队使用了混合解决方案，在Netflix的电影推荐算法上实现了10倍的性能提升。
+混合的概念[*由 Netflix 奖竞赛推广*](https://netflixprize.com/assets/ProgressPrize2008_BellKor.pdf)。获胜团队使用了混合解决方案，在 Netflix 的电影推荐算法上实现了 10 倍的性能提升。
 
 根据这个[Kaggle 集成指南](https://mlwave.com/kaggle-ensembling-guide/)：
 
-> **“混合”**是Netflix获胜者引入的术语。它非常接近堆叠泛化，但更简单，且信息泄露的风险较小。一些研究人员将“堆叠集成”和“混合”互换使用。
+> **“混合”**是 Netflix 获胜者引入的术语。它非常接近堆叠泛化，但更简单，且信息泄露的风险较小。一些研究人员将“堆叠集成”和“混合”互换使用。
 > 
-> 使用混合时，不是为训练集创建折外预测，而是创建一个小的保留集，比如训练集的10%。然后，堆叠模型仅在这个保留集上进行训练。”
+> 使用混合时，不是为训练集创建折外预测，而是创建一个小的保留集，比如训练集的 10%。然后，堆叠模型仅在这个保留集上进行训练。”
 
 ### 混合与堆叠
 
@@ -188,7 +188,7 @@
 
 **自助法元估计器**
 
-Scikit-learn允许我们实现一个`[BaggingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)`和一个`[BaggingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingRegressor.html)`。包袋元估计器在原始数据集的随机子集上拟合每个基础模型。然后通过汇总单个基础模型的预测来计算最终预测。汇总是通过投票或平均来完成的。这种方法通过在构建过程中引入随机化来减少估计器的方差。
+Scikit-learn 允许我们实现一个`[BaggingClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingClassifier.html)`和一个`[BaggingRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.BaggingRegressor.html)`。包袋元估计器在原始数据集的随机子集上拟合每个基础模型。然后通过汇总单个基础模型的预测来计算最终预测。汇总是通过投票或平均来完成的。这种方法通过在构建过程中引入随机化来减少估计器的方差。
 
 包袋有几种变体：
 
@@ -200,7 +200,7 @@ Scikit-learn允许我们实现一个`[BaggingClassifier](https://scikit-learn.or
 
 +   当你从样本和特征的子集创建基础估计器时，这被称为*随机补丁*。
 
-让我们看看如何使用Scikit-learn创建一个包袋估计器。
+让我们看看如何使用 Scikit-learn 创建一个包袋估计器。
 
 这需要几个步骤：
 
@@ -252,7 +252,7 @@ model.score(X_test,y_test)
 
 平均和投票通过防止过拟合来提高模型的准确性。
 
-在Scikit-learn中，随机化树的森林可以通过`RandomForestClassifier`和`ExtraTreesClassifier`来实现。类似的估计器也适用于回归问题。
+在 Scikit-learn 中，随机化树的森林可以通过`RandomForestClassifier`和`ExtraTreesClassifier`来实现。类似的估计器也适用于回归问题。
 
 ```py
 from sklearn.ensemble import RandomForestClassifier
@@ -326,11 +326,11 @@ model.score(X_test,y_test)
 
 [LightGBM](https://lightgbm.readthedocs.io/en/latest/) 是一种基于树学习的梯度提升算法。与使用按深度增长的其他基于树的算法不同，LightGBM 使用按叶子增长的树。叶子增长算法的收敛速度通常比基于深度的算法要快。
 
-![按层次增长的树](../Images/4d9ff80253d95bfb7b410103ab1659c3.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
+![按层次增长的树](img/4d9ff80253d95bfb7b410103ab1659c3.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
 
-![按叶子增长的树](../Images/a8823777b46d64bee45eb7773159b426.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
+![按叶子增长的树](img/a8823777b46d64bee45eb7773159b426.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
 
-![按叶子增长的树](../Images/f8c9ea60502b0df73fed238f77564c07.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
+![按叶子增长的树](img/f8c9ea60502b0df73fed238f77564c07.png)[*来源*](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
 
 LightGBM 可以通过设置适当的目标来用于回归和分类问题。
 
@@ -358,7 +358,7 @@ gbm = lgb.train(params,
 
 [CatBoost](https://github.com/catboost) 是一个由 [Yandex](https://yandex.com/company/) 开发的深度梯度提升库。它使用遗忘决策树来生长平衡树。正如下面的图像所示，在每一层的左右分裂时使用相同的特征。
 
-![梯度提升 CatBoost](../Images/4b59e5ba164ef50d380c1c489426a112.png)*[来源](https://heartbeat.fritz.ai/fast-gradient-boosting-with-catboost-38779b0d5d9a)*
+![梯度提升 CatBoost](img/4b59e5ba164ef50d380c1c489426a112.png)*[来源](https://heartbeat.fritz.ai/fast-gradient-boosting-with-catboost-38779b0d5d9a)*
 
 研究人员需要 Catboost 的原因如下：
 
@@ -492,15 +492,15 @@ meta_classifier = LogisticRegression())
 
 **相关：**
 
-+   [XGBoost：它是什么，何时使用](/2020/12/xgboost-what-when.html)
++   XGBoost：它是什么，何时使用
 
-+   [梯度提升决策树 – 概念解释](/2021/04/gradient-boosted-trees-conceptual-explanation.html)
++   梯度提升决策树 – 概念解释
 
-+   [最佳机器学习框架及 Scikit-learn 的扩展](/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html)
++   最佳机器学习框架及 Scikit-learn 的扩展
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应使用的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应使用的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [带示例的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)
 

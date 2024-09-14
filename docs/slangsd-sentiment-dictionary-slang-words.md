@@ -1,6 +1,6 @@
 # SlangSD：俚语词汇的情感词典
 
-> 原文：[https://www.kdnuggets.com/2016/09/slangsd-sentiment-dictionary-slang-words.html](https://www.kdnuggets.com/2016/09/slangsd-sentiment-dictionary-slang-words.html)
+> 原文：[`www.kdnuggets.com/2016/09/slangsd-sentiment-dictionary-slang-words.html`](https://www.kdnuggets.com/2016/09/slangsd-sentiment-dictionary-slang-words.html)
 
 **作者：梁武、弗雷德·莫斯塔特、刘欢，亚利桑那州立大学。**
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
@@ -24,7 +24,7 @@ SlangSD 是第一个针对俚语词汇的情感词典，提供超过 90,000 个�
 
 作为一个附加词典，SlangSD 可以下载 ([slangsd.com/data/SlangSD.zip](http://slangsd.com/data/SlangSD.zip)) 并轻松与现有情感分析项目集成。
 
-![Slang SD](../Images/21883d81980ad46ed9559944d90b9ee2.png)
+![Slang SD](img/21883d81980ad46ed9559944d90b9ee2.png)
 
 **扩展并构建你自己的词典**
 
@@ -44,11 +44,11 @@ SlangSD 建立在 Urban Dictionary、社交媒体内容和现有情感词典之�
 
 **相关：**
 
-+   [2016 年里约奥运会在 Twitter 上：积极情绪（75%），水上运动，西蒙·拜尔斯获胜](/2016/08/rio-olympics-twitter-sentiment.html)
++   2016 年里约奥运会在 Twitter 上：积极情绪（75%），水上运动，西蒙·拜尔斯获胜
 
-+   [用 Python 矿工 Twitter 数据 第 6 部分：情感分析基础](/2016/07/mining-twitter-data-python-part-6.html)
++   用 Python 矿工 Twitter 数据 第六部分：情感分析基础
 
-+   [选举中的开放数据：利用可视化和图形发现分析进行选民教育和公民参与](/2016/04/open-data-elections-using-visualization-graphical-discovery-analysis.html)
++   选举中的开放数据：利用可视化和图形发现分析进行选民教育和公民参与
 
 ### 更多相关内容
 

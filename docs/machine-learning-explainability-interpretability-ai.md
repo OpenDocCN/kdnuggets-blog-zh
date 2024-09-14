@@ -1,12 +1,12 @@
 # 机器学习可解释性与可理解性：两个概念可能有助于恢复对 AI 的信任
 
-> 原文：[https://www.kdnuggets.com/2018/12/machine-learning-explainability-interpretability-ai.html](https://www.kdnuggets.com/2018/12/machine-learning-explainability-interpretability-ai.html)
+> 原文：[`www.kdnuggets.com/2018/12/machine-learning-explainability-interpretability-ai.html`](https://www.kdnuggets.com/2018/12/machine-learning-explainability-interpretability-ai.html)
 
-[评论](#comments)
+评论
 
 **由 [Richard Gall](https://www.linkedin.com/in/richard-gall-5a6a235a/?originalSubdomain=uk)，Packt**
 
-![](../Images/812d3cd84e6ad9f407ca723c00c24a22.png)
+![](img/812d3cd84e6ad9f407ca723c00c24a22.png)
 
 不需要数据科学家来发现，内置于自动化和人工智能系统中的机器和深度学习算法缺乏透明性。也不需要太多侦探工作就能看到，这些系统中包含了开发这些系统的工程师无意识偏见的印记。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 ### 为什么在人工智能和机器学习中，可解释性和可理解性如此重要？
 
-如果2018年的技术反弹教会了我们什么，那就是尽管技术确实可以被用于可疑的用途，但它也有很多方式可能产生不良 - 歧视性 - 结果，而这些结果并非有意造成伤害。
+如果 2018 年的技术反弹教会了我们什么，那就是尽管技术确实可以被用于可疑的用途，但它也有很多方式可能产生不良 - 歧视性 - 结果，而这些结果并非有意造成伤害。
 
 随着医疗保健等领域希望部署人工智能和深度学习系统，其中问责制和透明度的问题尤其重要，如果我们无法在算法中妥善提升可解释性，最终实现可解释性，我们将严重限制人工智能的潜在影响。这将是非常可惜的。
 
@@ -62,19 +62,19 @@
 
 #### LIME：局部可解释模型无关解释
 
-虽然上述技术提供了数据科学家可以采取的实际步骤，但LIME是由研究人员开发的一种实际方法，用于获得对算法内部发生的事情的更大透明度。研究人员解释说，LIME可以以“可解释且忠实的方式解释任何分类器的预测，通过在预测周围局部学习一个可解释的模型”。
+虽然上述技术提供了数据科学家可以采取的实际步骤，但 LIME 是由研究人员开发的一种实际方法，用于获得对算法内部发生的事情的更大透明度。研究人员解释说，LIME 可以以“可解释且忠实的方式解释任何分类器的预测，通过在预测周围局部学习一个可解释的模型”。
 
-实际上，这意味着LIME模型通过测试来开发模型的近似值，以查看当模型中的某些方面发生变化时会发生什么。本质上，这就是通过实验过程尝试从相同的输入重现输出。
+实际上，这意味着 LIME 模型通过测试来开发模型的近似值，以查看当模型中的某些方面发生变化时会发生什么。本质上，这就是通过实验过程尝试从相同的输入重现输出。
 
 #### DeepLIFT（深度学习重要特征）
 
-DeepLIFT是一个在深度学习领域特别棘手的情况中非常有用的模型。它通过一种反向传播形式工作：它获取输出，然后尝试通过“读取”形成该原始输出的各种神经元来分解它。
+DeepLIFT 是一个在深度学习领域特别棘手的情况中非常有用的模型。它通过一种反向传播形式工作：它获取输出，然后尝试通过“读取”形成该原始输出的各种神经元来分解它。
 
 实质上，这是一种深入挖掘算法内部特征选择的方法（正如名称所示）。
 
 #### 层级相关传播
 
-层级相关传播类似于DeepLIFT，它从输出向后工作，识别神经网络中的最相关神经元，直到你回到输入（例如，一张图片）。如果你想了解更多关于这一概念背后的数学知识，[Dan Shiebler的这篇文章是一个很好的起点](http://danshiebler.com/2017-04-16-deep-taylor-lrp/)。
+层级相关传播类似于 DeepLIFT，它从输出向后工作，识别神经网络中的最相关神经元，直到你回到输入（例如，一张图片）。如果你想了解更多关于这一概念背后的数学知识，[Dan Shiebler 的这篇文章是一个很好的起点](http://danshiebler.com/2017-04-16-deep-taylor-lrp/)。
 
 ### 增加复杂性以应对复杂性：这能提高透明度吗？
 

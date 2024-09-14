@@ -1,18 +1,18 @@
 # 学习深度学习的地方 – 课程、教程、软件
 
-> 原文：[https://www.kdnuggets.com/2014/05/learn-deep-learning-courses-tutorials-overviews.html](https://www.kdnuggets.com/2014/05/learn-deep-learning-courses-tutorials-overviews.html)
+> 原文：[`www.kdnuggets.com/2014/05/learn-deep-learning-courses-tutorials-overviews.html`](https://www.kdnuggets.com/2014/05/learn-deep-learning-courses-tutorials-overviews.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)Gregory Piatetsky，[**@kdnuggets**](https://twitter.com/kdnuggets)，2014年5月26日。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论 Gregory Piatetsky，[**@kdnuggets**](https://twitter.com/kdnuggets)，2014 年 5 月 26 日。
 
-深度学习是机器学习研究的一个热门领域，取得了许多显著的成功，例如在面部识别中达到97.5%的准确率、几乎完美的德国交通标志识别，甚至在[狗与猫图像识别](https://www.kdnuggets.com/2014/05/learn-deep-learning-courses-tutorials-overviews.html)中达到98.9%的准确率。最近许多Kaggle数据科学竞赛的获胜作品都使用了深度学习。
+深度学习是机器学习研究的一个热门领域，取得了许多显著的成功，例如在面部识别中达到 97.5%的准确率、几乎完美的德国交通标志识别，甚至在[狗与猫图像识别](https://www.kdnuggets.com/2014/05/learn-deep-learning-courses-tutorials-overviews.html)中达到 98.9%的准确率。最近许多 Kaggle 数据科学竞赛的获胜作品都使用了深度学习。
 
-“深度学习”一词指的是训练多层神经网络的方法，并在Geoffrey Hinton及其合作者发表的[论文](http://www.mitpressjournals.org/doi/abs/10.1162/neco.2006.18.7.1527#.U4NC_ygvCls)之后变得流行，这些论文展示了一种快速训练这些网络的方法。
+“深度学习”一词指的是训练多层神经网络的方法，并在 Geoffrey Hinton 及其合作者发表的[论文](http://www.mitpressjournals.org/doi/abs/10.1162/neco.2006.18.7.1527#.U4NC_ygvCls)之后变得流行，这些论文展示了一种快速训练这些网络的方法。
 
-Yann LeCun，Geoff Hinton 的学生，还开发了一种非常有效的深度学习算法，称为[![ConvNet 通过卷积网络学习的过滤器](../Images/59c33c368a67a25d88956ce7a3c1e37a.png)ConvNet](https://code.google.com/p/cuda-convnet/)，该算法在80年代末和90年代初成功用于自动读取支票上的金额。
+Yann LeCun，Geoff Hinton 的学生，还开发了一种非常有效的深度学习算法，称为![ConvNet 通过卷积网络学习的过滤器 ConvNet](https://code.google.com/p/cuda-convnet/)，该算法在 80 年代末和 90 年代初成功用于自动读取支票上的金额。
 
-在我的独家[**与 Yann LeCun 的采访**](/2014/02/exclusive-yann-lecun-deep-learning-facebook-ai-lab.html)中，了解更多关于卷积网络和推动深度学习成功的因素。
+在我的独家**与 Yann LeCun 的采访**中，了解更多关于卷积网络和推动深度学习成功的因素。
 
-2014年5月，中国搜索巨头百度[聘请了 Andrew Ng](http://www.technologyreview.com/news/527301/chinese-search-giant-baidu-hires-man-behind-the-google-brain/)，一位领先的机器学习和深度学习专家（也是Coursera的联合创始人），来领导他们在硅谷的新AI实验室，与谷歌（聘请了Geoff Hinton）和Facebook（聘请了Yann LeCun来领导Facebook AI实验室）展开AI和深度学习的竞赛。
+2014 年 5 月，中国搜索巨头百度[聘请了 Andrew Ng](http://www.technologyreview.com/news/527301/chinese-search-giant-baidu-hires-man-behind-the-google-brain/)，一位领先的机器学习和深度学习专家（也是 Coursera 的联合创始人），来领导他们在硅谷的新 AI 实验室，与谷歌（聘请了 Geoff Hinton）和 Facebook（聘请了 Yann LeCun 来领导 Facebook AI 实验室）展开 AI 和深度学习的竞赛。
 
 这里有一些有用且免费的 (!) 深度学习资源：
 
@@ -28,7 +28,7 @@ Yann LeCun，Geoff Hinton 的学生，还开发了一种非常有效的深度学
 
 +   [Geoff Hinton Coursera 课程](https://www.coursera.org/course/neuralnets) 关于神经网络
 
-+   [深度学习：方法与应用书籍](http://research.microsoft.com/apps/pubs/?id=209355)（134页）来自微软语音组
++   [深度学习：方法与应用书籍](http://research.microsoft.com/apps/pubs/?id=209355)（134 页）来自微软语音组
 
 +   [CMU 阅读列表](http://deeplearning.cs.cmu.edu/)，包括学生笔记
 
@@ -50,13 +50,13 @@ Yann LeCun，Geoff Hinton 的学生，还开发了一种非常有效的深度学
 
 **相关内容：**
 
-+   [**KDnuggets 独家：对深度学习专家 Yann LeCun 的采访，Facebook AI Lab 的主任**](/2014/02/exclusive-yann-lecun-deep-learning-facebook-ai-lab.html)
++   **KDnuggets 独家：对深度学习专家 Yann LeCun 的采访，Facebook AI Lab 的主任**
 
-+   [**KDnuggets 独家：对 Yann LeCun 的采访第二部分**](/2014/02/exclusive-yann-lecun-deep-learning-facebook-ai-lab-part2.html)
++   **KDnuggets 独家：对 Yann LeCun 的采访第二部分**
 
-+   [**深度学习如何模拟人脑**](/2014/03/how-deep-learning-analytics-mimic-mind.html)
++   **深度学习如何模拟人脑**
 
-+   [**深度学习在 Kaggle 的“狗与猫”竞赛中获胜**](/2014/02/deep-learning-wins-dogs-vs-cats-competition.html)
++   **深度学习在 Kaggle 的“狗与猫”竞赛中获胜**
 
 ### 更多相关内容
 

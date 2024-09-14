@@ -1,8 +1,8 @@
 # ChatGPT 作为 Python 编程助手
 
-> 原文：[https://www.kdnuggets.com/2023/01/chatgpt-python-programming-assistant.html](https://www.kdnuggets.com/2023/01/chatgpt-python-programming-assistant.html)
+> 原文：[`www.kdnuggets.com/2023/01/chatgpt-python-programming-assistant.html`](https://www.kdnuggets.com/2023/01/chatgpt-python-programming-assistant.html)
 
-![ChatGPT 作为 Python 编程助手](../Images/32321145a60260b7a97d82cf9a9ef925.png)
+![ChatGPT 作为 Python 编程助手](img/32321145a60260b7a97d82cf9a9ef925.png)
 
 原图由[Sigmund](https://unsplash.com/de/@sigmund?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来源于[Unsplash](https://unsplash.com/photos/Im_cQ6hQo10?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) | 作者编辑
 
@@ -295,7 +295,7 @@ if __name__ == '__main__':
 
 它完成了它应该做的事情。ChatGPT 利用我们的功能...函数构建了一个简单的 Streamlit 网页应用程序。
 
-![使用 ChatGPT 生成的脚本创建的 Streamlit 网页应用程序的截图](../Images/b12cad776e2a9ee2653691692c80c9cb.png)
+![使用 ChatGPT 生成的脚本创建的 Streamlit 网页应用程序的截图](img/b12cad776e2a9ee2653691692c80c9cb.png)
 
 使用 ChatGPT 生成的脚本创建的 Streamlit 网页应用程序
 
@@ -311,24 +311,24 @@ ChatGPT 在创建、重构、扩展和为我们编写的简单数据预处理 Py
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关主题
 
-+   [忘掉ChatGPT吧，这个新的AI助手遥遥领先，并将…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
++   [忘掉 ChatGPT 吧，这个新的 AI 助手遥遥领先，并将…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
 
-+   [认识MetaGPT：由ChatGPT驱动的AI助手，能够将文本转换成…](https://www.kdnuggets.com/meet-metagpt-the-chatgptpowered-ai-assistant-that-turns-text-into-web-apps)
++   [认识 MetaGPT：由 ChatGPT 驱动的 AI 助手，能够将文本转换成…](https://www.kdnuggets.com/meet-metagpt-the-chatgptpowered-ai-assistant-that-turns-text-into-web-apps)
 
 +   [DataLang：为数据科学家创造的新编程语言… 创建…](https://www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html)
 
-+   [ChatGPT如何改变编程的面貌](https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming)
++   [ChatGPT 如何改变编程的面貌](https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming)
 
 +   [Python：机器学习的编程语言](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

@@ -1,22 +1,22 @@
 # 数据科学简历中的 7 个必备要素
 
-> 原文：[https://www.kdnuggets.com/2021/04/7-must-haves-data-science-cv.html](https://www.kdnuggets.com/2021/04/7-must-haves-data-science-cv.html)
+> 原文：[`www.kdnuggets.com/2021/04/7-must-haves-data-science-cv.html`](https://www.kdnuggets.com/2021/04/7-must-haves-data-science-cv.html)
 
-[评论](#comments)
+评论
 
 **由 [Elad Cohen](https://www.linkedin.com/in/elad-cohen-ai/)，Riskified 数据科学与研究副总裁**。
 
-![](../Images/83f096d85398804955fd96d34b3c3669.png)
+![](img/83f096d85398804955fd96d34b3c3669.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -36,35 +36,35 @@
 
 ### 2\. 以业务为导向的成就
 
-理想情况下，我希望了解你所做的工作（技术方面）以及业务结果如何。缺乏能够用业务术语交流的技术精湛的数据科学家[（了解业务术语的数据科学家）](https://medium.com/riskified-technology/data-vs-insight-the-thin-line-between-good-and-bad-reports-91997d5e9cd)。如果你能分享你的工作对业务KPI的影响，这在我看来是一个很大的优点。例如，说明你的模型在AUC上的改进是可以的，但如果能说明由于模型改进导致的转化率提升，这意味着你“明白了”——最终业务影响才是最重要的。比较以下两个描述相同工作的替代方案（技术与业务）：
+理想情况下，我希望了解你所做的工作（技术方面）以及业务结果如何。缺乏能够用业务术语交流的技术精湛的数据科学家[（了解业务术语的数据科学家）](https://medium.com/riskified-technology/data-vs-insight-the-thin-line-between-good-and-bad-reports-91997d5e9cd)。如果你能分享你的工作对业务 KPI 的影响，这在我看来是一个很大的优点。例如，说明你的模型在 AUC 上的改进是可以的，但如果能说明由于模型改进导致的转化率提升，这意味着你“明白了”——最终业务影响才是最重要的。比较以下两个描述相同工作的替代方案（技术与业务）：
 
-1.  银行贷款违约率模型——将模型的精准率-召回率AUC从0.94提高到0.96。
+1.  银行贷款违约率模型——将模型的精准率-召回率 AUC 从 0.94 提高到 0.96。
 
-1.  银行贷款违约率模型——使业务单位的年收入增加了3%（每年50万美元），同时保持违约率不变。
+1.  银行贷款违约率模型——使业务单位的年收入增加了 3%（每年 50 万美元），同时保持违约率不变。
 
 ### 3\. 教育背景
 
-你的正式教育背景是什么，专业是什么？是否来自知名机构？对于较新的毕业生，我还会关注他们的GPA以及是否获得过任何卓越奖项或荣誉，例如是否进入了校长名单或院长名单。由于数据科学是一个广泛开放的领域，没有任何标准化测试或必要的知识要求，人们可以通过各种方式进入这个领域。在我上一篇博客中，我写到了[进入数据科学领域的3条主要路径](https://towardsdatascience.com/3-ways-to-break-into-data-science-6a7a8fd679b3)，根据你的教育背景和时间安排，我会判断你可能采取了哪一种路径。因此，时间帮助理解你的故事——你是如何以及何时转入数据科学领域的。如果你没有正式的数据科学教育背景也没关系，但你需要展示在该领域的工作记录和/或类似领域的高级学位。
+你的正式教育背景是什么，专业是什么？是否来自知名机构？对于较新的毕业生，我还会关注他们的 GPA 以及是否获得过任何卓越奖项或荣誉，例如是否进入了校长名单或院长名单。由于数据科学是一个广泛开放的领域，没有任何标准化测试或必要的知识要求，人们可以通过各种方式进入这个领域。在我上一篇博客中，我写到了[进入数据科学领域的 3 条主要路径](https://towardsdatascience.com/3-ways-to-break-into-data-science-6a7a8fd679b3)，根据你的教育背景和时间安排，我会判断你可能采取了哪一种路径。因此，时间帮助理解你的故事——你是如何以及何时转入数据科学领域的。如果你没有正式的数据科学教育背景也没关系，但你需要展示在该领域的工作记录和/或类似领域的高级学位。
 
 ### 4\. 布局和视觉吸引力
 
-我见过一些漂亮的简历（我也保存了一些供个人灵感使用），但我也收到过没有任何格式的文本文件（.txt）。制作简历可能是件痛苦的事，如果你选择了数据科学作为你的追求，你很可能不喜欢在空闲时间制作美观的设计。在不走极端的情况下，你确实希望找到一个合适的模板，使你能够在有限的空间内传达所有信息。明智地利用空间——将页面拆分并突出显示不属于按时间顺序排列的工作/教育经验的特定部分是有用的。这可以包括你熟悉的技术栈、自我项目列表、Github或博客的链接等。几个简单的图标也有助于强调部分标题。
+我见过一些漂亮的简历（我也保存了一些供个人灵感使用），但我也收到过没有任何格式的文本文件（.txt）。制作简历可能是件痛苦的事，如果你选择了数据科学作为你的追求，你很可能不喜欢在空闲时间制作美观的设计。在不走极端的情况下，你确实希望找到一个合适的模板，使你能够在有限的空间内传达所有信息。明智地利用空间——将页面拆分并突出显示不属于按时间顺序排列的工作/教育经验的特定部分是有用的。这可以包括你熟悉的技术栈、自我项目列表、Github 或博客的链接等。几个简单的图标也有助于强调部分标题。
 
-许多候选人在每种语言/工具旁边使用1–5星或条形图。我个人对这种方法不是很喜欢，原因有几个：
+许多候选人在每种语言/工具旁边使用 1–5 星或条形图。我个人对这种方法不是很喜欢，原因有几个：
 
-+   这极其主观——你的‘5星’是否等同于别人的‘2星’？
++   这极其主观——你的‘5 星’是否等同于别人的‘2 星’？
 
-+   他们将语言与工具混合，最糟糕的是，还与软技能混合——说你在领导力方面‘4.5星’没有帮助。作为一个坚定的[growth mentality](https://www.brainpickings.org/2014/01/29/carol-dweck-mindset/)的信仰者，声称在某项技能（尤其是难以量化和掌握的软技能）上达到极致，感觉非常自负。
++   他们将语言与工具混合，最糟糕的是，还与软技能混合——说你在领导力方面‘4.5 星’没有帮助。作为一个坚定的[growth mentality](https://www.brainpickings.org/2014/01/29/carol-dweck-mindset/)的信仰者，声称在某项技能（尤其是难以量化和掌握的软技能）上达到极致，感觉非常自负。
 
 我还见过这种方法的进一步滥用，将主观测量转化为饼图（30% python，10% team-player 等）。虽然这可能本来是为了以创意的方式脱颖而出，但它展示了对不同图表概念的基本理解的缺乏。
 
 这里有两个我发现视觉上令人愉悦的简历示例，细节已模糊处理以保持匿名。
 
-![](../Images/500b2b5ec5c50cb7c408198a30fb4df0.png)
+![](img/500b2b5ec5c50cb7c408198a30fb4df0.png)
 
 *感谢 Eva Mishor（经许可使用）。*
 
-![](../Images/5d6d1da72fe878cf8e1102563615875c.png)
+![](img/5d6d1da72fe878cf8e1102563615875c.png)
 
 *数据科学家的视觉上令人愉悦的简历，细节已模糊处理。请注意两个示例中使用的垂直分割，以区分经验、技能、成就和出版物。在这两种情况下，简短的总结段落有助于描述他们的背景和愿望。经所有者许可使用。*
 
@@ -98,9 +98,9 @@
 
 +   [是什么让我这么久才找到数据科学家的工作](https://www.kdnuggets.com/2021/03/land-data-scientist-job.html)
 
-+   [我从高效数据科学家那里学到的15个习惯](https://www.kdnuggets.com/2021/03/15-habits-learned-from-highly-effective-data-scientists.html)
++   [我从高效数据科学家那里学到的 15 个习惯](https://www.kdnuggets.com/2021/03/15-habits-learned-from-highly-effective-data-scientists.html)
 
-+   [帮助你获得数据科学职位的5项支持技能](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
++   [帮助你获得数据科学职位的 5 项支持技能](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
 
 ### 更多相关主题
 
@@ -110,8 +110,8 @@
 
 +   [通过西北大学的数据科学学位启动你的职业生涯](https://www.kdnuggets.com/2022/04/nwu-launch-career-northwestern-data-science-degree.html)
 
-+   [理解贝叶斯定理的3种方法将提升你的数据科学能力](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
++   [理解贝叶斯定理的 3 种方法将提升你的数据科学能力](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
 
 +   [如何在没有工作经验的情况下获得你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
-+   [你需要的6项数据科学技术来构建你的供应链管道](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
++   [你需要的 6 项数据科学技术来构建你的供应链管道](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)

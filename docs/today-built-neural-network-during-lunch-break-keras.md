@@ -1,12 +1,12 @@
 # 今天我在午休时间用 Keras 构建了一个神经网络
 
-> 原文：[https://www.kdnuggets.com/2017/12/today-built-neural-network-during-lunch-break-keras.html](https://www.kdnuggets.com/2017/12/today-built-neural-network-during-lunch-break-keras.html)
+> 原文：[`www.kdnuggets.com/2017/12/today-built-neural-network-during-lunch-break-keras.html`](https://www.kdnuggets.com/2017/12/today-built-neural-network-during-lunch-break-keras.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Matthijs Cox](https://www.linkedin.com/in/matthijscox/)，纳米技术数据科学家**
 
-![Header image](../Images/e3407a546b1be84a961d5c5974960663.png)
+![Header image](img/e3407a546b1be84a961d5c5974960663.png)
 
 > 从想法到结果的最短延迟是进行良好研究的关键。
 > 
@@ -46,7 +46,7 @@ np.savetxt("keras_fit.csv", model.predict(data), delimiter=",")
 
 现在我对实际性能非常好奇，所以我必须对一些基准进行测试。不过别告诉我的经理们我在花时间做这个哦！（开玩笑的，他们鼓励探索和学习。）所以我将数据加载回我的测试框架中，并运行一些其他算法。以下是我的最终性能指标的结果。
 
-![](../Images/1e758095034e43b9289ffa64ee9f2ff9.png)
+![](img/1e758095034e43b9289ffa64ee9f2ff9.png)
 
 在不到一个小时的模型构建时间内，这真是太令人尴尬地好。我们花了 1.5 年时间研发的超级秘密模型仍然超越了它（幸运的是）。除此之外，任何神经网络的一个大缺点当然是它完全是一个黑匣子，不知道它实际学到了什么。而我们的秘密模型使用的是我们后来可以作为人类诊断的模式识别。
 
@@ -68,21 +68,21 @@ np.savetxt("keras_fit.csv", model.predict(data), delimiter=",")
 
 **相关：**
 
-+   [掌握 Keras 深度学习的 7 个步骤](/2017/10/seven-steps-deep-learning-keras.html)
++   掌握 Keras 深度学习的 7 个步骤
 
-+   [Keras 速查表：Python 中的深度学习](/2017/09/datacamp-keras-cheat-sheet-deep-learning-python.html)
++   Keras 速查表：Python 中的深度学习
 
-+   [Keras 教程：使用神经网络识别井字棋赢家](/2017/09/neural-networks-tic-tac-toe-keras.html)
++   Keras 教程：使用神经网络识别井字棋赢家
 
 * * *
 
 ## 我们的 Top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

@@ -1,8 +1,8 @@
 # 如何让 Python 代码运行得极快
 
-> 原文：[https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)
+> 原文：[`www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html`](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)
 
-![如何让 Python 代码运行得极快](../Images/cf09bbaf063f4212ca4ecc13d7713603.png)
+![如何让 Python 代码运行得极快](img/cf09bbaf063f4212ca4ecc13d7713603.png)
 
 [由 brgfx 制作的图片](https://www.freepik.com/free-vector/young-boy-laptop-python-concept_3576656.htm#query=Python&position=5&from_view=search&track=sph) 在 Freepik 上
 
@@ -12,11 +12,11 @@ Python 是开发者中最受欢迎的编程语言之一。无论是网页开发�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

@@ -1,30 +1,30 @@
-# 如何在你的第一个Kaggle竞赛中排名前10%
+# 如何在你的第一个 Kaggle 竞赛中排名前 10%
 
-> 原文：[https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/4](https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/4)
+> 原文：[`www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/4`](https://www.kdnuggets.com/2016/11/rank-ten-precent-first-kaggle-competition.html/4)
 
 ### Home Depot 搜索相关性
 
 在这一部分，我将分享我在[Home Depot 搜索相关性竞赛](https://www.kaggle.com/c/home-depot-product-search-relevance)中的解决方案，以及我从竞赛后顶尖团队中学到的东西。
 
-本次竞赛的任务是预测搜索词在Home Depot网站上的结果相关性。相关性是三名人工评估者的平均分，范围在1~3之间。因此这是一个回归任务。数据集包含搜索词、产品标题/描述以及品牌、尺寸和颜色等属性。评估指标是[RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation)。
+本次竞赛的任务是预测搜索词在 Home Depot 网站上的结果相关性。相关性是三名人工评估者的平均分，范围在 1~3 之间。因此这是一个回归任务。数据集包含搜索词、产品标题/描述以及品牌、尺寸和颜色等属性。评估指标是[RMSE](https://en.wikipedia.org/wiki/Root-mean-square_deviation)。
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-这很像[Crowdflower 搜索结果相关性](https://www.kaggle.com/c/crowdflower-search-relevance)。不同之处在于[Cohen's Kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa#Weighted_kappa)在Crowdflower竞赛中被使用，这使得回归分数的最终截止点更加复杂。此外，Crowdflower没有提供属性。
+这很像[Crowdflower 搜索结果相关性](https://www.kaggle.com/c/crowdflower-search-relevance)。不同之处在于[Cohen's Kappa](https://en.wikipedia.org/wiki/Cohen%27s_kappa#Weighted_kappa)在 Crowdflower 竞赛中被使用，这使得回归分数的最终截止点更加复杂。此外，Crowdflower 没有提供属性。
 
 **EDA**
 
-在我参加竞赛时，有几个相当好的EDA，特别是[这个](https://www.kaggle.com/briantc/home-depot-product-search-relevance/homedepot-first-dataexploreation-k)。我了解到：
+在我参加竞赛时，有几个相当好的 EDA，特别是[这个](https://www.kaggle.com/briantc/home-depot-product-search-relevance/homedepot-first-dataexploreation-k)。我了解到：
 
 +   许多搜索词/产品出现了多次。
 
@@ -32,7 +32,7 @@
 
 +   许多产品没有属性特征。这会是一个问题吗？
 
-+   产品ID似乎具有很强的预测能力。然而，训练集和测试集之间的产品ID重叠度不是很高。这会导致过拟合吗？
++   产品 ID 似乎具有很强的预测能力。然而，训练集和测试集之间的产品 ID 重叠度不是很高。这会导致过拟合吗？
 
 **预处理**
 
@@ -62,7 +62,7 @@
 
     +   品牌（编码为整数）
 
-    +   产品ID
+    +   产品 ID
 
 +   匹配
 
@@ -84,19 +84,19 @@
 
     +   [Word2Vec](https://en.wikipedia.org/wiki/Word2vec) 距离（我没有包括这个，因为它的表现差且计算缓慢。不过，似乎我使用得不对。）
 
-+   **[潜在语义分析](https://en.wikipedia.org/wiki/Latent_semantic_indexing)：通过对从BOW/TF-IDF向量化获得的矩阵进行[SVD分解](https://en.wikipedia.org/wiki/Singular_value_decomposition)，我们获得了不同搜索词/产品组的潜在表示。这使我们的模型能够区分不同组并为特征分配不同的权重，从而在一定程度上解决了数据依赖和产品缺乏某些特征的问题。**
++   **[潜在语义分析](https://en.wikipedia.org/wiki/Latent_semantic_indexing)：通过对从 BOW/TF-IDF 向量化获得的矩阵进行[SVD 分解](https://en.wikipedia.org/wiki/Singular_value_decomposition)，我们获得了不同搜索词/产品组的潜在表示。这使我们的模型能够区分不同组并为特征分配不同的权重，从而在一定程度上解决了数据依赖和产品缺乏某些特征的问题。**
 
-请注意，上面列出的带`*`的特征是我最后添加的一批特征。问题是，训练了这些特征的数据模型的表现比之前的模型差。起初我认为特征数量的增加会要求重新调整模型参数。然而，在浪费了大量CPU时间进行网格搜索后，我仍然无法超越旧模型。我认为这可能是上述**特征相关性**的问题。我实际上知道一个可能有效的解决方案，即**通过堆叠将不同特征版本训练的模型进行组合**。不幸的是，我没有足够的时间尝试它。**事实上，大多数顶尖团队认为使用不同预处理和特征工程管道训练的模型的集成是成功的关键**。
+请注意，上面列出的带`*`的特征是我最后添加的一批特征。问题是，训练了这些特征的数据模型的表现比之前的模型差。起初我认为特征数量的增加会要求重新调整模型参数。然而，在浪费了大量 CPU 时间进行网格搜索后，我仍然无法超越旧模型。我认为这可能是上述**特征相关性**的问题。我实际上知道一个可能有效的解决方案，即**通过堆叠将不同特征版本训练的模型进行组合**。不幸的是，我没有足够的时间尝试它。**事实上，大多数顶尖团队认为使用不同预处理和特征工程管道训练的模型的集成是成功的关键**。
 
 **模型**
 
-起初我使用`RandomForestRegressor`来构建模型。然后我尝试了**Xgboost**，结果发现它比Sklearn快了两倍以上。从那时起，我每天做的基本上就是在工作站上运行网格搜索，同时在笔记本上处理特征。
+起初我使用`RandomForestRegressor`来构建模型。然后我尝试了**Xgboost**，结果发现它比 Sklearn 快了两倍以上。从那时起，我每天做的基本上就是在工作站上运行网格搜索，同时在笔记本上处理特征。
 
-本次比赛的数据集验证并不简单。数据不是独立同分布的，许多记录是相关的。我多次使用更好的特征/参数，结果LB分数却更差。正如许多成功的Kaggle选手所反复强调的那样，在这种情况下，你必须相信自己的CV分数。因此，我决定在交叉验证中使用10折而不是5折，并在接下来的尝试中忽略LB分数。
+本次比赛的数据集验证并不简单。数据不是独立同分布的，许多记录是相关的。我多次使用更好的特征/参数，结果 LB 分数却更差。正如许多成功的 Kaggle 选手所反复强调的那样，在这种情况下，你必须相信自己的 CV 分数。因此，我决定在交叉验证中使用 10 折而不是 5 折，并在接下来的尝试中忽略 LB 分数。
 
 **集成**
 
-我的最终模型是由4个基础模型组成的集成模型：
+我的最终模型是由 4 个基础模型组成的集成模型：
 
 +   `RandomForestRegressor`
 
@@ -108,13 +108,13 @@
 
 堆叠模型也是一个`XGBRegressor`。
 
-问题在于我所有的基础模型高度相关（最低相关系数为0.9）。我考虑将线性回归、SVM 回归和`XGBRegressor`（使用线性提升器）纳入集成模型，但这些模型的 RMSE 分数比我最终使用的4个模型高出0.02（这在排行榜上相当于数百个名次）。因此，我决定不再使用更多模型，尽管它们会带来更多的多样性。
+问题在于我所有的基础模型高度相关（最低相关系数为 0.9）。我考虑将线性回归、SVM 回归和`XGBRegressor`（使用线性提升器）纳入集成模型，但这些模型的 RMSE 分数比我最终使用的 4 个模型高出 0.02（这在排行榜上相当于数百个名次）。因此，我决定不再使用更多模型，尽管它们会带来更多的多样性。
 
-好消息是，尽管基础模型高度相关，堆叠模型仍然大大提升了我的分数。**更重要的是，自从开始使用堆叠模型后，我的CV分数和LB分数完全同步。**
+好消息是，尽管基础模型高度相关，堆叠模型仍然大大提升了我的分数。**更重要的是，自从开始使用堆叠模型后，我的 CV 分数和 LB 分数完全同步。**
 
-在比赛的最后两天，我还做了一件事：**使用大约20个不同的随机种子生成集成模型，并将它们的加权平均作为最终提交**。这实际上是一种**袋装法（bagging）**。理论上是有意义的，因为在堆叠中，我使用80%的数据来训练每次迭代中的基础模型，而100%的数据用于训练堆叠模型。因此它的效果不够干净。进行多次不同种子的运行可以确保**每次使用不同的80%数据**，从而降低信息泄露的风险。然而，通过这种方式，我只取得了`0.0004`的提升，这可能仅仅是由于随机性造成的。
+在比赛的最后两天，我还做了一件事：**使用大约 20 个不同的随机种子生成集成模型，并将它们的加权平均作为最终提交**。这实际上是一种**袋装法（bagging）**。理论上是有意义的，因为在堆叠中，我使用 80%的数据来训练每次迭代中的基础模型，而 100%的数据用于训练堆叠模型。因此它的效果不够干净。进行多次不同种子的运行可以确保**每次使用不同的 80%数据**，从而降低信息泄露的风险。然而，通过这种方式，我只取得了`0.0004`的提升，这可能仅仅是由于随机性造成的。
 
-比赛结束后，我发现我最好的单一模型在私人排行榜上的分数是`0.46378`，而我最好的堆叠集成模型的分数是`0.45849`。这代表了174名和98名之间的差距。换句话说，特征工程和模型调优让我进入了前10%，而堆叠模型让我进入了前5%。
+比赛结束后，我发现我最好的单一模型在私人排行榜上的分数是`0.46378`，而我最好的堆叠集成模型的分数是`0.45849`。这代表了 174 名和 98 名之间的差距。换句话说，特征工程和模型调优让我进入了前 10%，而堆叠模型让我进入了前 5%。
 
 **经验教训**
 
@@ -188,17 +188,17 @@
 
 1.  [(中文) 保诚人寿保险评估解决方案 - Nutastray](http://rstudio-pubs-static.s3.amazonaws.com/158725_5d2f977f4004490e9b095c0ef9357c6b.html)
 
-![Linghao Zhang](../Images/47effce75b02d75ca99360d2793970ea.png)**简介：[Linghao Zhang](https://www.linkedin.com/in/linghaozh)** 是复旦大学计算机科学大四学生和 Strikingly 的数据挖掘工程师。他的兴趣包括机器学习、数据挖掘、自然语言处理、知识图谱和大数据分析。
+![Linghao Zhang](img/47effce75b02d75ca99360d2793970ea.png)**简介：[Linghao Zhang](https://www.linkedin.com/in/linghaozh)** 是复旦大学计算机科学大四学生和 Strikingly 的数据挖掘工程师。他的兴趣包括机器学习、数据挖掘、自然语言处理、知识图谱和大数据分析。
 
 [原文](https://dnc1994.com/2016/05/rank-10-percent-in-first-kaggle-competition-en/)。经授权转载。
 
 **相关：**
 
-+   [接近（几乎）任何机器学习问题](/2016/08/approaching-almost-any-machine-learning-problem.html)
++   接近（几乎）任何机器学习问题
 
-+   [自动化数据科学与机器学习：与 Auto-sklearn 团队的访谈](/2016/10/interview-auto-sklearn-automated-data-science-machine-learning-team.html)
++   自动化数据科学与机器学习：与 Auto-sklearn 团队的访谈
 
-+   [数据科学基础：集成学习者简介](/2016/11/data-science-basics-intro-ensemble-learners.html)
++   数据科学基础：集成学习者简介
 
 ### 更多相关内容
 

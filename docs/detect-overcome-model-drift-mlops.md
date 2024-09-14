@@ -1,22 +1,22 @@
 # 如何检测和克服 MLOps 中的模型漂移
 
-> 原文：[https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html](https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html)
+> 原文：[`www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html`](https://www.kdnuggets.com/2021/08/detect-overcome-model-drift-mlops.html)
 
-[评论](#comments)
+评论
 
 **由 [Bhaskar Ammu](https://www.sigmoid.com/)，[Sigmoid](https://www.sigmoid.com/) 的高级数据科学家**
 
-![](../Images/d3d4445359db348c3d3000d7f0fcf71d.png)
+![](img/d3d4445359db348c3d3000d7f0fcf71d.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -42,7 +42,7 @@
 
 ## 解决模型漂移
 
-及早检测模型漂移对于维护模型准确性至关重要。这是因为随着时间的推移，模型的准确性会下降，预测值会继续偏离实际值。这个过程越进一步，对模型整体造成的不可替代的损害就越大。因此，及早发现问题是必要的。F1得分可以快速检测是否有异常，其中模型的精准度和召回能力被评估其准确性。
+及早检测模型漂移对于维护模型准确性至关重要。这是因为随着时间的推移，模型的准确性会下降，预测值会继续偏离实际值。这个过程越进一步，对模型整体造成的不可替代的损害就越大。因此，及早发现问题是必要的。F1 得分可以快速检测是否有异常，其中模型的精准度和召回能力被评估其准确性。
 
 同样，根据模型的用途，各种其他指标在不同情况下也会显得重要。用于医疗用途的机器学习模型将需要与用于业务操作的机器学习模型不同的一组指标。然而，最终结果是一样的：每当指定的指标低于设定的阈值时，就有很高的可能性发生模型漂移。
 
@@ -56,36 +56,36 @@
 
 没有一种万能的方法可以确保及时检测和解决模型漂移。无论是通过计划的模型重训练还是通过实时的**[机器学习](https://www.sigmoid.com/blogs/5-best-practices-for-putting-ml-models-into-production/)**，创建一个可持续的机器学习模型本身就是一个挑战。
 
-然而，MLOps的出现简化了更频繁且时间更短的模型重训练过程。它使数据团队能够自动化模型重训练，而触发这一过程的最可靠方法是通过调度。通过自动化重训练，公司可以在特定时间框架内用新的新鲜数据来强化现有的数据管道。好消息是，这不需要任何特定的代码更改或重建管道。然而，如果公司发现了在模型训练过程中未曾出现的新特征或算法，那么在部署重训练模型时将其纳入其中，可以显著提高模型的准确性。
+然而，MLOps 的出现简化了更频繁且时间更短的模型重训练过程。它使数据团队能够自动化模型重训练，而触发这一过程的最可靠方法是通过调度。通过自动化重训练，公司可以在特定时间框架内用新的新鲜数据来强化现有的数据管道。好消息是，这不需要任何特定的代码更改或重建管道。然而，如果公司发现了在模型训练过程中未曾出现的新特征或算法，那么在部署重训练模型时将其纳入其中，可以显著提高模型的准确性。
 
 在决定模型需要多频繁重训练时，有几个变量需要考虑。有时，等待问题出现成为唯一的实际选择（特别是如果没有过去的历史可供参考的话）。在其他情况下，模型应根据与变量季节性变化相关的模式进行重训练。然而，在这片变化的海洋中，保持监控的重要性是恒定的。无论是时间表还是业务领域；在定期间隔内进行持续监控始终是检测模型漂移的最佳方式。
 
-尽管管理、检测和解决成千上万个机器学习模型的模型漂移的挑战可能看起来令人望而生畏，但来自服务提供商如Sigmoid的机器学习操作化解决方案可以为您提供直面这些问题所需的优势。**[Sigmoid的MLOps实践](https://www.sigmoid.com/machine-learning-operationalization-mlops/)** 提供了**[数据科学](https://www.sigmoid.com/data-science-services/)**、**[数据工程](https://www.sigmoid.com/data-engineering/)**和**[DataOps专业知识](https://www.sigmoid.com/data-devops/)**的正确组合，这些组合是实现机器学习操作化和扩展以交付业务价值所必需的，并构建一个**[有效的AI战略](https://www.sigmoid.com/blogs/mlops-for-effective-ai-strategy/)**。
+尽管管理、检测和解决成千上万个机器学习模型的模型漂移的挑战可能看起来令人望而生畏，但来自服务提供商如 Sigmoid 的机器学习操作化解决方案可以为您提供直面这些问题所需的优势。**[Sigmoid 的 MLOps 实践](https://www.sigmoid.com/machine-learning-operationalization-mlops/)** 提供了**[数据科学](https://www.sigmoid.com/data-science-services/)**、**[数据工程](https://www.sigmoid.com/data-engineering/)**和**[DataOps 专业知识](https://www.sigmoid.com/data-devops/)**的正确组合，这些组合是实现机器学习操作化和扩展以交付业务价值所必需的，并构建一个**[有效的 AI 战略](https://www.sigmoid.com/blogs/mlops-for-effective-ai-strategy/)**。
 
-*想了解更多关于我们如何帮助数据驱动的公司加快AI项目的商业价值实现并克服模型漂移的挑战，请点击链接**[这里](https://www.sigmoid.com/machine-learning-operationalization-mlops/)**。*
+*想了解更多关于我们如何帮助数据驱动的公司加快 AI 项目的商业价值实现并克服模型漂移的挑战，请点击链接**[这里](https://www.sigmoid.com/machine-learning-operationalization-mlops/)**。*
 
-**简介： [Bhaskar Ammu](https://www.sigmoid.com/)** 是Sigmoid的高级数据科学家。他专注于为客户设计数据科学解决方案，构建数据库架构，以及管理项目和团队。
+**简介： [Bhaskar Ammu](https://www.sigmoid.com/)** 是 Sigmoid 的高级数据科学家。他专注于为客户设计数据科学解决方案，构建数据库架构，以及管理项目和团队。
 
 [原文](https://www.sigmoid.com/blogs/how-to-detect-and-overcome-model-drift-in-mlops/)。已获转载许可。
 
 **相关：**
 
-+   [MLOps是工程学科：初学者概述](/2021/07/mlops-engineering-discipline.html)
++   MLOps 是工程学科：初学者概述
 
-+   [使用PyCaret + MLflow轻松实现MLOps](/2021/05/easy-mlops-pycaret-mlflow.html)
++   使用 PyCaret + MLflow 轻松实现 MLOps
 
-+   [何时重新训练机器学习模型？运行这5个检查以决定时间表](/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
++   何时重新训练机器学习模型？运行这 5 个检查以决定时间表
 
 ### 更多相关内容
 
-+   [使用MLOps管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
++   [使用 MLOps 管理生产中的模型漂移](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 
-+   [使用Eurybia检测数据漂移以确保生产机器学习模型的质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产机器学习模型的质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
 +   [如何使用合成数据克服机器学习模型训练中的数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)
 
-+   [识别虚假数据科学家的20个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
++   [识别虚假数据科学家的 20 个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-+   [识别虚假数据科学家的20个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
++   [识别虚假数据科学家的 20 个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
 +   [如何克服对数学的恐惧并学习数据科学中的数学](https://www.kdnuggets.com/2021/03/overcome-fear-learn-math-data-science.html)

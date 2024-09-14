@@ -1,8 +1,8 @@
 # 将非结构化数据转换为结构化见解的 5 种方法
 
-> 原文：[https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
+> 原文：[`www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms`](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
 
-![将非结构化数据转换为结构化见解的 5 种方法](../Images/c2807ddd5c93757b7626528072c212ed.png)
+![将非结构化数据转换为结构化见解的 5 种方法](img/c2807ddd5c93757b7626528072c212ed.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -38,7 +38,7 @@
 
 为了展示 LLMs 处理这类数据所代表的机会，我正在使用一个 [包含亚马逊评论的 Kaggle 数据集。](https://www.kaggle.com/datasets/snap/amazon-fine-food-reviews/data)
 
-![将非结构化数据转换为结构化见解的 5 种方法](../Images/1f5c2edd0ba8b884e278218ac3471fbb.png)
+![将非结构化数据转换为结构化见解的 5 种方法](img/1f5c2edd0ba8b884e278218ac3471fbb.png)
 
 原始数据集
 
@@ -90,7 +90,7 @@ Summarize the following review: \"{review}\" with a 3 words sentence.
 
 我们将得到如下结果……
 
-![5种使用LLMs将非结构化数据转换为结构化见解的方法](../Images/f7dd1c02286d9d7907662ec90a6b0384.png)
+![5 种使用 LLMs 将非结构化数据转换为结构化见解的方法](img/f7dd1c02286d9d7907662ec90a6b0384.png)
 
 由作者提供的图片
 
@@ -116,7 +116,7 @@ Summarize the following review: \"{review}\" with a 3 words sentence.
 
 我们将获得如下结果：
 
-![利用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](../Images/d41ebc4f76a7d110a59fcc97c5994013.png)
+![利用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](img/d41ebc4f76a7d110a59fcc97c5994013.png)
 
 作者图片
 
@@ -130,7 +130,7 @@ LLMs 可以识别和分类大型数据集中的主题或话题。这在定性数
 
 作者代码
 
-![利用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](../Images/256653c5460567e748606ab818d2acfa.png)
+![利用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](img/256653c5460567e748606ab818d2acfa.png)
 
 作者图片
 
@@ -146,7 +146,7 @@ LLMs 可以用来提取关键词。这意味着，检测我们要求的任何元
 
 作者代码
 
-![利用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](../Images/354fe9a7375096829a213bf1ea70bcaa.png)
+![利用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](img/354fe9a7375096829a213bf1ea70bcaa.png)
 
 作者图片
 

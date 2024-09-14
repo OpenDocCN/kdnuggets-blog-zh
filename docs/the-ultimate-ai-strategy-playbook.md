@@ -1,8 +1,8 @@
-# 终极AI战略手册
+# 终极 AI 战略手册
 
-> 原文：[https://www.kdnuggets.com/the-ultimate-ai-strategy-playbook](https://www.kdnuggets.com/the-ultimate-ai-strategy-playbook)
+> 原文：[`www.kdnuggets.com/the-ultimate-ai-strategy-playbook`](https://www.kdnuggets.com/the-ultimate-ai-strategy-playbook)
 
-![终极AI战略手册](../Images/ca142f74714fa23e51d58e75d568d63e.png) 图片由作者提供
+![终极 AI 战略手册](img/ca142f74714fa23e51d58e75d568d63e.png) 图片由作者提供
 
 如果没有人工智能；从某种程度上讲，没有这种技术的狂热席卷了整个行业。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -40,7 +40,7 @@
 
 在此时，企业需要一个框架来决定哪些使用案例适合人工智能。我建议使用“PRS”框架。它代表“**模式**在**规模**下**重复**”。
 
-![终极AI战略手册](../Images/f90080e44a5b2e85d60de18aecb84fac.png) 图片由作者提供
+![终极 AI 战略手册](img/f90080e44a5b2e85d60de18aecb84fac.png) 图片由作者提供
 
 ## 模式
 
@@ -58,7 +58,7 @@
 
 +   出租车的可用性和定价也会因常规与高级出租车服务、一天中的时间或不利的天气条件等因素而有所不同。
 
-![终极人工智能战略手册](../Images/4ad506cb420ea3a3597f398be4102d40.png)
+![终极人工智能战略手册](img/4ad506cb420ea3a3597f398be4102d40.png)
 
 图片来源：作者
 
@@ -96,11 +96,11 @@
 
 这是大多数组织出现失误的地方。确保获得必要的授权，或者更好的是，仅使用您已经获得权限的数据。
 
-有了数据战略的3A，仍然有一个未解答的问题，即商业、数据和人工智能战略之间的顺序或顺序是什么？
+有了数据战略的 3A，仍然有一个未解答的问题，即商业、数据和人工智能战略之间的顺序或顺序是什么？
 
 ## 这么多策略!!!
 
-从大体上讲，人工智能战略始终是商业战略的一部分，并且与数据战略保持一致。在继续推进数据的3A的同时，务必要不断研究人工智能用例。
+从大体上讲，人工智能战略始终是商业战略的一部分，并且与数据战略保持一致。在继续推进数据的 3A 的同时，务必要不断研究人工智能用例。
 
 类似于人工智能项目的迭代性质，人工智能路线图在准备和增强数据基础设施以最大化组织内部人工智能技术潜力的过程中需要不断改进。
 

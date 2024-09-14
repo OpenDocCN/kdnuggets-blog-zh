@@ -1,10 +1,10 @@
-# 揭示Meta的Llama 2的力量：生成式AI的跃进？
+# 揭示 Meta 的 Llama 2 的力量：生成式 AI 的跃进？
 
-> 原文：[https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)
+> 原文：[`www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html`](https://www.kdnuggets.com/2023/07/unveiling-power-metas-llama-2-leap-forward-generative-ai.html)
 
-![揭示Meta的Llama 2的力量：生成式AI的跃进？](../Images/9fb2ec446842418cda7f5ee1c30928b3.png)
+![揭示 Meta 的 Llama 2 的力量：生成式 AI 的跃进？](img/9fb2ec446842418cda7f5ee1c30928b3.png)
 
-图像由作者使用Midjourney创建
+图像由作者使用 Midjourney 创建
 
 # 介绍
 
@@ -12,27 +12,27 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-最近在人工智能（AI）领域，尤其是在生成式AI方面的突破，引起了公众的广泛关注，并展示了这些技术推动新时代经济和社会机会的潜力。其中一个突破是[Meta的Llama 2](https://ai.meta.com/llama/)，它是其开源大型语言模型的下一代产品。
+最近在人工智能（AI）领域，尤其是在生成式 AI 方面的突破，引起了公众的广泛关注，并展示了这些技术推动新时代经济和社会机会的潜力。其中一个突破是[Meta 的 Llama 2](https://ai.meta.com/llama/)，它是其开源大型语言模型的下一代产品。
 
-Meta的Llama 2是在混合的公开数据上进行训练的，旨在推动诸如OpenAI的ChatGPT、Bing Chat及其他现代聊天机器人等应用。Meta声称，Llama 2的性能相比于以前的Llama模型有了显著提升。该模型以预训练形式可在AWS、Azure和Hugging Face的AI模型托管平台上进行微调，使其更易于访问和运行。你还可以[在这里下载模型](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)。
+Meta 的 Llama 2 是在混合的公开数据上进行训练的，旨在推动诸如 OpenAI 的 ChatGPT、Bing Chat 及其他现代聊天机器人等应用。Meta 声称，Llama 2 的性能相比于以前的 Llama 模型有了显著提升。该模型以预训练形式可在 AWS、Azure 和 Hugging Face 的 AI 模型托管平台上进行微调，使其更易于访问和运行。你还可以[在这里下载模型](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)。
 
-那么，是什么让Llama 2与其前身以及其他大型语言模型有所不同呢？让我们深入探讨其技术细节和影响。
+那么，是什么让 Llama 2 与其前身以及其他大型语言模型有所不同呢？让我们深入探讨其技术细节和影响。
 
 # 技术细节和性能
 
-Llama 2有两种版本：Llama 2和Llama-2-Chat。Llama-2-Chat经过了针对双向对话的微调。这两个版本都进一步细分为不同复杂度的模型：70亿参数、130亿参数和700亿参数模型。这些模型在两万亿个令牌上进行训练，比第一个Llama模型多40%，包括超过100万个人工注释。
+Llama 2 有两种版本：Llama 2 和 Llama-2-Chat。Llama-2-Chat 经过了针对双向对话的微调。这两个版本都进一步细分为不同复杂度的模型：70 亿参数、130 亿参数和 700 亿参数模型。这些模型在两万亿个令牌上进行训练，比第一个 Llama 模型多 40%，包括超过 100 万个人工注释。
 
-Llama 2的上下文长度为4096，并特别在Llama-Chat-2的训练中使用了来自人类反馈的强化学习，以确保安全性和有用性。根据Meta的说法，Llama 2在推理、编码、能力和知识测试方面超过了包括Falcon和MPT在内的其他LLM。
+Llama 2 的上下文长度为 4096，并特别在 Llama-Chat-2 的训练中使用了来自人类反馈的强化学习，以确保安全性和有用性。根据 Meta 的说法，Llama 2 在推理、编码、能力和知识测试方面超过了包括 Falcon 和 MPT 在内的其他 LLM。
 
-![揭示 Meta 的 Llama 2 的力量：生成性 AI 的飞跃？](../Images/efa52708aabb29cb8efc3fca62429540.png)
+![揭示 Meta 的 Llama 2 的力量：生成性 AI 的飞跃？](img/efa52708aabb29cb8efc3fca62429540.png)
 
 Llama 2 技术概述
 
@@ -50,7 +50,7 @@ Llama 2 的一个关键方面是其开源性质。Meta 认为，通过公开 AI 
 
 Meta 还强调安全性和透明度。Llama 2 已经过“红队测试”，因此通过生成对抗性提示进行安全性测试，以便对模型进行微调，无论是内部还是外部。Meta 公开了模型如何被评估和调整，促进了开发过程中的透明度。
 
-![揭示 Meta 的 Llama 2 的力量：生成性 AI 的飞跃？](../Images/78e4e874273f4ad8e9773b74a492cd97.png)
+![揭示 Meta 的 Llama 2 的力量：生成性 AI 的飞跃？](img/78e4e874273f4ad8e9773b74a492cd97.png)
 
 在 Llama-2-Chat 模型训练过程中，使用了来自人类反馈的强化学习，以确保安全性和有用性
 

@@ -1,8 +1,8 @@
 # Python 与 R - 谁在数据科学、机器学习领域真正领先？
 
-> 原文：[https://www.kdnuggets.com/2017/09/python-vs-r-data-science-machine-learning.html](https://www.kdnuggets.com/2017/09/python-vs-r-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2017/09/python-vs-r-data-science-machine-learning.html`](https://www.kdnuggets.com/2017/09/python-vs-r-data-science-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)我最近对 KDnuggets 调查结果的分析（[**Python 超越 R，成为数据科学和机器学习平台的领导者**](/2017/08/python-overtakes-r-leader-analytics-data-science.html)）引起了广泛关注，并生成了大量评论、讨论，以及来自两种语言支持者的不可避免的批评。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论我最近对 KDnuggets 调查结果的分析（**Python 超越 R，成为数据科学和机器学习平台的领导者**）引起了广泛关注，并生成了大量评论、讨论，以及来自两种语言支持者的不可避免的批评。
 
 一些人抱怨调查不具备科学性，投票者代表的是自我选择的样本。这显然是正确的。但 KDnuggets 自 2001 年以来一直进行调查，并且每月覆盖了数十万的访问者。根据我们的经验，KDnuggets 的调查一直是数据挖掘和数据科学趋势和发展的良好指标。我们跟踪了 R 与 Python 的辩论好几年，因此与其他网站不同，我们可以将最新的调查结果与几年前的结果进行比较。
 
@@ -14,17 +14,17 @@ Python 是一个更受欢迎的编程语言，它在 [2017 年 IEEE Spectrum 第
 
 这是自 2012 年 1 月以来的图表。*注意，如果选择包含完整月份的范围，并且从 2012 年开始，那么你会获得平滑的月度趋势，而不是更为混乱的每周趋势。*
 
-![Google Trends Python 数据科学 R 2012-2017](../Images/0f058dd1502a1d2dccec4125d074bc84.png)
+![Google Trends Python 数据科学 R 2012-2017](img/0f058dd1502a1d2dccec4125d074bc84.png)
 
-**图 1: [Google Trends](https://trends.google.com/trends/explore?date=2012-01-01%202017-08-31&q=Python%20data%20science,R%20data%20science)，2012年1月 - 2017年8月，“Python 数据科学”与“R 数据科学”。**
+**图 1: [Google Trends](https://trends.google.com/trends/explore?date=2012-01-01%202017-08-31&q=Python%20data%20science,R%20data%20science)，2012 年 1 月 - 2017 年 8 月，“Python 数据科学”与“R 数据科学”。**
 
 我们注意到，在 2014 年和 2015 年，随着数据科学的普及，R 略微领先，但“Python 数据科学”搜索在 2016 年底超过了“R 数据科学”，并且自 2017 年 1 月以来明显领先。
 
 *注意：无论数据科学如何大写（“Data Science”或“data science”），统计数据都是相同的，但 Google 自动完成建议在 Python 和 R 中都使用“data science”。*
 
-不过，最近机器学习变得非常流行 - 请参见我在 [机器学习超越大数据？](/2017/05/machine-learning-overtaking-big-data.html) 的帖子（2017年5月），所以我们来看看 Google Trends 上的 Python 与 R 在“机器学习”方面的对比。
+不过，最近机器学习变得非常流行 - 请参见我在 机器学习超越大数据？ 的帖子（2017 年 5 月），所以我们来看看 Google Trends 上的 Python 与 R 在“机器学习”方面的对比。
 
-![Google Trends Python R Data Science Machine Learning 2012 2017](../Images/c8905d7198404ff03048d965f890cb46.png)
+![Google Trends Python R Data Science Machine Learning 2012 2017](img/c8905d7198404ff03048d965f890cb46.png)
 
 **图 2：[Google 趋势](https://trends.google.com/trends/explore?date=2012-01-01%202017-08-31&q=Python%20data%20science,R%20data%20science,Python%20Machine%20Learning,R%20Machine%20Learning)，2012 年 1 月 - 2017 年 8 月，“Python 机器学习”、“R 机器学习”、“Python 数据科学”和“R 数据科学”。**
 
@@ -42,7 +42,7 @@ Python 是一个更受欢迎的编程语言，它在 [2017 年 IEEE Spectrum 第
 
 *（注意：虽然 Google 自动完成建议搜索词“Python 数据科学”，并且以小写“data science”，它还建议了以大写的“Python 机器学习”。这里可能有一些深层次的含义……）*
 
-![Indeed 数据科学家职位，Python 和 R，2017](../Images/da5cddb96fb691ddf9ded80923ed287e.png)
+![Indeed 数据科学家职位，Python 和 R，2017](img/da5cddb96fb691ddf9ded80923ed287e.png)
 
 **图 3：Snapshot of indeed.com 数据科学家职位广告在美国，同时包含 Python 和/或 R，2017 年 9 月**接下来，我们来看 indeed.com 上的职位广告。以下所有数字均为截至 2017 年 9 月 11 日在美国的职位。
 
@@ -60,7 +60,7 @@ Python 是一个更受欢迎的编程语言，它在 [2017 年 IEEE Spectrum 第
 
 Indeed 职位趋势也显示，了解 Python 和了解 R 的数据科学家的需求直到最近才接近，并且这些职位占所有数据科学家职位的很大一部分。
 
-![Indeed 数据科学家 Python R 职位趋势](../Images/8e4d6c29872971f9fb37e0e0de6eff9c.png)
+![Indeed 数据科学家 Python R 职位趋势](img/8e4d6c29872971f9fb37e0e0de6eff9c.png)
 
 **图 4：Indeed “数据科学家”、“数据科学家” Python 和 “数据科学家” R 职位趋势，2014-2017**
 
@@ -70,23 +70,23 @@ Google 趋势结果表明，Python 的优势将会增长，而与 Python 相关�
 
 *注意：使用 indeed.com 时，你需要仔细指定搜索字符串，搜索 [数据科学家 Python] 会包含很多职位，这些职位可能包含“数据”或“科学家”，但不一定两者都有。*
 
-最后，在我原始帖子 [Python 超越 R 在数据科学中](/2017/08/python-overtakes-r-leader-analytics-data-science.html#comments) 上的许多评论中，我想强调两个观察点：
+最后，在我原始帖子 Python 超越 R 在数据科学中 上的许多评论中，我想强调两个观察点：
 
-+   Stanislav Seltser 指出，在 github 上排名前 15 的语言中，[https://octoverse.github.com](https://octoverse.github.com)中，Python 排名第 3，而 R 不在列表中。
++   Stanislav Seltser 指出，在 github 上排名前 15 的语言中，[`octoverse.github.com`](https://octoverse.github.com)中，Python 排名第 3，而 R 不在列表中。
 
 +   Stanislav 还提到 [Kaggle 2016 年总结](https://blog.kaggle.com/2017/01/05/your-year-on-kaggle-most-memorable-community-stats-from-2016/)，其中指出
 
     > 过去几年，R 是 Kaggle 上的首选语言，但 2016 年 Python 在编写的 kernels 数量上脱颖而出，成为明显的赢家。
 
-    ![Kaggle Python 与 R Kernels 2016](../Images/6011d72510b2c92141ddbf86b4b05097.png)
+    ![Kaggle Python 与 R Kernels 2016](img/6011d72510b2c92141ddbf86b4b05097.png)
 
 **相关：**
 
-+   [Python 超越 R，成为数据科学和机器学习平台的领导者](/2017/08/python-overtakes-r-leader-analytics-data-science.html)
++   Python 超越 R，成为数据科学和机器学习平台的领导者
 
-+   [Python 超越 R？](/2017/09/python-overtaking-r.html)
++   Python 超越 R？
 
-+   [Python 与 R 在人工智能、机器学习和数据科学中的对比](/2017/09/python-vs-r-ai-machine-learning-data-science.html)
++   Python 与 R 在人工智能、机器学习和数据科学中的对比
 
 ### 更多相关话题
 

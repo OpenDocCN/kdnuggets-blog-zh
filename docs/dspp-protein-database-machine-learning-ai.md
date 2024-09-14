@@ -1,12 +1,12 @@
 # 世界首个用于机器学习和人工智能的蛋白质数据库
 
-> 原文：[https://www.kdnuggets.com/2017/06/dspp-protein-database-machine-learning-ai.html](https://www.kdnuggets.com/2017/06/dspp-protein-database-machine-learning-ai.html)
+> 原文：[`www.kdnuggets.com/2017/06/dspp-protein-database-machine-learning-ai.html`](https://www.kdnuggets.com/2017/06/dspp-protein-database-machine-learning-ai.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **由 Peptone 创始人 Kamil Tamiola 提供**
 
-![机器学习和人工智能的蛋白质数据库](../Images/284fe97f87be7300d6b84955e2d1c3b7.png)
+![机器学习和人工智能的蛋白质数据库](img/284fe97f87be7300d6b84955e2d1c3b7.png)
 
 我非常自豪和兴奋地介绍 [Peptone](https://peptone.io/) 的首个公开产品，[蛋白质结构倾向数据库](https://peptone.io/dspp)。
 
@@ -16,15 +16,15 @@ dSPP 基于来自世界各地领先学术机构的同行评审研究，这些机
 
 dSPP 是一个独特的信息来源，专注于固有无序蛋白质 (IDPs)，这是一类研究难度较大的蛋白质。IDPs 涉及到许多使人虚弱的病理状况，包括阿尔茨海默病、帕金森病、朊病毒病、癌症的分子基础、HIV、HSV、HVC、ZIKVR 等。
 
-![固有无序蛋白质](../Images/622e2b7ea7ab7306d18d1e55afe9a8b8.png)
+![固有无序蛋白质](img/622e2b7ea7ab7306d18d1e55afe9a8b8.png)
 
-*MOAG-4 蛋白质的倾向分数的结构解释，提取自 dSPP 数据库 [https://peptone.io/dspp/entry/dSPP27058_0\](https://peptone.io/dspp/entry/dSPP27058_0)* [*MOAG-4 被认为能增强动物脑模型中的蛋白质聚集过程，从而加速帕金森病的早期发作。*](http://www.jbc.org/content/early/2017/03/23/jbc.M116.764886)
+*MOAG-4 蛋白质的倾向分数的结构解释，提取自 dSPP 数据库 [`peptone.io/dspp/entry/dSPP27058_0\`](https://peptone.io/dspp/entry/dSPP27058_0)* [*MOAG-4 被认为能增强动物脑模型中的蛋白质聚集过程，从而加速帕金森病的早期发作。*](http://www.jbc.org/content/early/2017/03/23/jbc.M116.764886)
 
 dSPP 数据可以被实验人员轻松使用，以深入了解二级结构基序的结构稳定性，以及旨在提供医学相关蛋白质现实模型的高通量计算技术。
 
-与其他蛋白质数据集中为实验人员和机器学习社区提供的二元 (*logits*) 二级结构分配不同，dSPP 数据报告了蛋白质结构和局部动态，具有原子分辨率，基于**-1.0到1.0**的连续结构倾向分配。
+与其他蛋白质数据集中为实验人员和机器学习社区提供的二元 (*logits*) 二级结构分配不同，dSPP 数据报告了蛋白质结构和局部动态，具有原子分辨率，基于**-1.0 到 1.0**的连续结构倾向分配。
 
-![连续结构倾向](../Images/49732abe9f76228c12c2aa2a6fbb94e2.png)
+![连续结构倾向](img/49732abe9f76228c12c2aa2a6fbb94e2.png)
 
 dSPP 实验数据是在生理相关条件下收集的，使其在结构和无序预测方法中具有绝对的唯一性，这些方法旨在处理生物学和医学相关背景下的蛋白质折叠和稳定性。
 
@@ -40,11 +40,11 @@ dSPP 是 Peptone 首个公开发布的产品，具有**自动化 14 天更新周
 
 ### 可用性和行动呼吁
 
-+   互动搜索引擎和数据渲染：[https://peptone.io/dspp](https://peptone.io/dspp)
++   互动搜索引擎和数据渲染：[`peptone.io/dspp`](https://peptone.io/dspp)
 
-+   独立 JSON 和 Python cPickle 下载：[https://peptone.io/dspp/download](https://peptone.io/dspp/download)
++   独立 JSON 和 Python cPickle 下载：[`peptone.io/dspp/download`](https://peptone.io/dspp/download)
 
-+   Keras 和 Tensorflow 集成：[https://github.com/PeptoneInc/dspp-keras](https://github.com/PeptoneInc/dspp-keras)
++   Keras 和 Tensorflow 集成：[`github.com/PeptoneInc/dspp-keras`](https://github.com/PeptoneInc/dspp-keras)
 
 +   在终端中：**pip install dspp-keras**
 
@@ -64,11 +64,11 @@ dSPP 是 Peptone 首个公开发布的产品，具有**自动化 14 天更新周
 
 ### **新闻稿**
 
-+   本新闻稿及媒体资产可从[https://drive.google.com/open?id=0B0VsF9FO3J_OMXljcm1MS3NCRHc](https://drive.google.com/open?id=0B0VsF9FO3J_OMXljcm1MS3NCRHc)下载。
++   本新闻稿及媒体资产可从[`drive.google.com/open?id=0B0VsF9FO3J_OMXljcm1MS3NCRHc`](https://drive.google.com/open?id=0B0VsF9FO3J_OMXljcm1MS3NCRHc)下载。
 
 ### 关于 Peptone
 
-成立于2016年（荷兰阿姆斯特丹），[Peptone](https://peptone.io/) 通过机器学习和人工智能提供先进的蛋白质生物技术解决方案。我们将来自公共和私人数据库的大数据转化为强大的预测模型和直观的工具，用于蛋白质生产、稳定性、无序性、工程和定向进化实验，为客户提供透明且互补的软件，节省时间并提供精准的研究答案。
+成立于 2016 年（荷兰阿姆斯特丹），[Peptone](https://peptone.io/) 通过机器学习和人工智能提供先进的蛋白质生物技术解决方案。我们将来自公共和私人数据库的大数据转化为强大的预测模型和直观的工具，用于蛋白质生产、稳定性、无序性、工程和定向进化实验，为客户提供透明且互补的软件，节省时间并提供精准的研究答案。
 
 [原始](https://www.linkedin.com/pulse/worlds-first-protein-database-machine-learning-ai-kamil-tamiola)文章。转载经许可。
 
@@ -76,21 +76,21 @@ dSPP 是 Peptone 首个公开发布的产品，具有**自动化 14 天更新周
 
 **相关：**
 
-+   [科学的大数据生态系统：基因组学](/2016/12/big-data-ecosystem-science-genomics.html)
++   科学的大数据生态系统：基因组学
 
-+   [使用可视化进行高级数据分析的5个步骤](/2016/10/qlucore-5-steps-data-analysis-visualization.html)
++   使用可视化进行高级数据分析的 5 个步骤
 
-+   [深度学习：通过XML和PMML编程TensorFlow](/2017/06/deep-learning-tensorflow-programming-xml-pmml.html)
++   深度学习：通过 XML 和 PMML 编程 TensorFlow
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -100,10 +100,10 @@ dSPP 是 Peptone 首个公开发布的产品，具有**自动化 14 天更新周
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [9亿美元AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [构建一个可靠的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

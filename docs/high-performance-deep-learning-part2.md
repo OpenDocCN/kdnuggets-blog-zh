@@ -1,22 +1,22 @@
-# 高性能深度学习：如何训练更小、更快、更好的模型 – 第2部分
+# 高性能深度学习：如何训练更小、更快、更好的模型 – 第二部分
 
-> 原文：[https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)
+> 原文：[`www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html`](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)
 
-[评论](#comments)
+评论
 
-![](../Images/9970edb2850289adc136ca465d25bc5e.png)
+![](img/9970edb2850289adc136ca465d25bc5e.png)
 
-在[第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)中，我们讨论了为什么效率对深度学习模型至关重要，以实现高性能的帕累托最优模型。让我们进一步深入探讨实现效率的工具和技术。
+在[第一部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)中，我们讨论了为什么效率对深度学习模型至关重要，以实现高性能的帕累托最优模型。让我们进一步深入探讨实现效率的工具和技术。
 
 ### 深度学习中的效率关注领域
 
 我们可以将关于效率的工作大致分为四个建模技术支柱和一个基础的基础设施与硬件。
 
-![](../Images/da8235ca2af85196243d7dd45e540c35.png)
+![](img/da8235ca2af85196243d7dd45e540c35.png)
 
 *高效深度学习的关注领域。*
 
-1.  **压缩技术**：这些是常见的技术和算法，旨在优化架构本身，通常通过压缩其层来实现。这些方法通常足够通用，可以跨架构使用。一个经典的例子是量化[1,2]，它尝试通过减少其精度（例如，从32位浮点值到8位无符号整数）来压缩层的权重矩阵。量化通常可以应用于任何具有权重矩阵的网络。
+1.  **压缩技术**：这些是常见的技术和算法，旨在优化架构本身，通常通过压缩其层来实现。这些方法通常足够通用，可以跨架构使用。一个经典的例子是量化[1,2]，它尝试通过减少其精度（例如，从 32 位浮点值到 8 位无符号整数）来压缩层的权重矩阵。量化通常可以应用于任何具有权重矩阵的网络。
 
 1.  **学习技术**：这些算法专注于不同的训练模型方式，以减少预测错误。通过裁剪参数数量，可以将改进的准确性转换为更小的占用空间或更高效的模型。如果需要，学习技术还可以使模型更精简。一个学习技术的例子是蒸馏[3]，正如前面提到的，它帮助一个较小的模型从一个更大、更准确的模型中学习。
 
@@ -38,35 +38,35 @@
 
 [1] Benoit Jacob, Skirmantas Kligys, Bo Chen, Menglong Zhu, Matthew Tang, Andrew Howard, Hartwig Adam, 和 Dmitry Kalenichenko. 2018\. 量化和训练神经网络以实现高效的整数运算推理。见于 IEEE 计算机视觉与模式识别会议论文集。2704–2713。
 
-[2] Raghuraman Krishnamoorthi. 2018\. 量化深度卷积网络以实现高效推理：白皮书。arXiv (2018年6月)。arXiv:1806.08342
+[2] Raghuraman Krishnamoorthi. 2018\. 量化深度卷积网络以实现高效推理：白皮书。arXiv (2018 年 6 月)。arXiv:1806.08342
 
-[3] Geoffrey Hinton, Oriol Vinyals, 和 Jeff Dean. 2015\. 提炼神经网络中的知识。arXiv预印本 arXiv:1503.02531 (2015)
+[3] Geoffrey Hinton, Oriol Vinyals, 和 Jeff Dean. 2015\. 提炼神经网络中的知识。arXiv 预印本 arXiv:1503.02531 (2015)
 
-[4] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, 和 D Sculley. 2017\. Google vizier: 一项黑箱优化服务。发表于第23届ACM SIGKDD国际知识发现与数据挖掘会议。1487–1495.
+[4] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro, 和 D Sculley. 2017\. Google vizier: 一项黑箱优化服务。发表于第 23 届 ACM SIGKDD 国际知识发现与数据挖掘会议。1487–1495.
 
-[5] Barret Zoph 和 Quoc V Le. 2016\. 使用强化学习的神经网络架构搜索。arXiv预印本 arXiv:1611.01578 (2016).
+[5] Barret Zoph 和 Quoc V Le. 2016\. 使用强化学习的神经网络架构搜索。arXiv 预印本 arXiv:1611.01578 (2016).
 
-[6] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew Howard, 和 Quoc V Le. 2019\. Mnasnet: 针对移动设备的平台感知神经网络架构搜索。发表于IEEE/CVF计算机视觉与模式识别会议。2820–2828.
+[6] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew Howard, 和 Quoc V Le. 2019\. Mnasnet: 针对移动设备的平台感知神经网络架构搜索。发表于 IEEE/CVF 计算机视觉与模式识别会议。2820–2828.
 
-[7] 移动和边缘设备的机器学习。 [https://www.tensorflow.org/lite](https://www.tensorflow.org/lite)
+[7] 移动和边缘设备的机器学习。 [`www.tensorflow.org/lite`](https://www.tensorflow.org/lite)
 
-[8] GEMMLOWP. - [https://github.com/google/gemmlowp](https://github.com/google/gemmlowp)
+[8] GEMMLOWP. - [`github.com/google/gemmlowp`](https://github.com/google/gemmlowp)
 
-[9] XNNPACK. - [https://github.com/google/XNNPACK](https://github.com/google/XNNPACK)
+[9] XNNPACK. - [`github.com/google/XNNPACK`](https://github.com/google/XNNPACK)
 
-[10] Marat Dukhan, Yiming Wu Wu, 和 Hao Lu. 2020\. QNNPACK: 用于优化移动深度学习的开源库 - Facebook工程。 [https://engineering.fb.com/2018/10/29/ml-applications/qnnpack](https://engineering.fb.com/2018/10/29/ml-applications/qnnpack)
+[10] Marat Dukhan, Yiming Wu Wu, 和 Hao Lu. 2020\. QNNPACK: 用于优化移动深度学习的开源库 - Facebook 工程。 [`engineering.fb.com/2018/10/29/ml-applications/qnnpack`](https://engineering.fb.com/2018/10/29/ml-applications/qnnpack)
 
-[11] Norman P Jouppi, Cliff Young, Nishant Patil, David Patterson, Gaurav Agrawal, Raminder Bajwa, Sarah Bates, Suresh Bhatia, Nan Boden, Al Borchers, 等. 2017\. 数据中心内的张量处理单元性能分析。发表于第44届国际计算机架构年会。1–12.
+[11] Norman P Jouppi, Cliff Young, Nishant Patil, David Patterson, Gaurav Agrawal, Raminder Bajwa, Sarah Bates, Suresh Bhatia, Nan Boden, Al Borchers, 等. 2017\. 数据中心内的张量处理单元性能分析。发表于第 44 届国际计算机架构年会。1–12.
 
-[12] EdgeTPU. [https://cloud.google.com/edge-tpu](https://cloud.google.com/edge-tpu)
+[12] EdgeTPU. [`cloud.google.com/edge-tpu`](https://cloud.google.com/edge-tpu)
 
-**个人简介：** [Gaurav Menghani](http://www.gaurav.im/) ([@GauravML](https://twitter.com/GauravML)) 是Google Research的高级软件工程师，领导旨在优化大型机器学习模型以实现高效训练和推理的研究项目，涵盖从微控制器到基于TPU的服务器的设备。他的工作对YouTube、Cloud、Ads、Chrome等超过10亿活跃用户产生了积极影响。他还是即将出版的《高效机器学习》一书的作者之一。在Google之前，Gaurav在Facebook工作了4.5年，对Facebook的搜索系统和大规模分布式数据库做出了重要贡献。他拥有斯托尼布鲁克大学计算机科学硕士学位。
+**个人简介：** [Gaurav Menghani](http://www.gaurav.im/) ([@GauravML](https://twitter.com/GauravML)) 是 Google Research 的高级软件工程师，领导旨在优化大型机器学习模型以实现高效训练和推理的研究项目，涵盖从微控制器到基于 TPU 的服务器的设备。他的工作对 YouTube、Cloud、Ads、Chrome 等超过 10 亿活跃用户产生了积极影响。他还是即将出版的《高效机器学习》一书的作者之一。在 Google 之前，Gaurav 在 Facebook 工作了 4.5 年，对 Facebook 的搜索系统和大规模分布式数据库做出了重要贡献。他拥有斯托尼布鲁克大学计算机科学硕士学位。
 
 **相关：**
 
-+   [高性能深度学习，第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)
++   [高性能深度学习，第一部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)
 
-+   [5个挑战：扩展机器学习模型](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)
++   [5 个挑战：扩展机器学习模型](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)
 
 +   [在生产环境中扩展大规模先进深度学习模型](https://www.kdnuggets.com/2019/07/scaling-massive-deep-learning-model-production.html)
 
@@ -74,11 +74,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 

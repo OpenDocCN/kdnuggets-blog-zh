@@ -1,16 +1,16 @@
 # 深度学习中的过拟合问题
 
-> 原文：[https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html](https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html`](https://www.kdnuggets.com/2019/12/fighting-overfitting-deep-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![图示](../Images/ed0cde5a50a91862ae85dce52e2095cb.png)
+![图示](img/ed0cde5a50a91862ae85dce52e2095cb.png)
 
 ### 问题
 
-在训练模型时，我们希望根据选择的指标获得最佳结果。同时，我们还希望在新数据上保持类似的结果。残酷的现实是，我们无法获得100%的准确性。即使我们做到了，结果仍然难免有错误。测试情况太少，难以发现它们。你可能会问，这有什么关系？
+在训练模型时，我们希望根据选择的指标获得最佳结果。同时，我们还希望在新数据上保持类似的结果。残酷的现实是，我们无法获得 100%的准确性。即使我们做到了，结果仍然难免有错误。测试情况太少，难以发现它们。你可能会问，这有什么关系？
 
 错误有两种类型：可减少的和不可减少的。不可减少的错误是由于数据不足产生的。例如，除了类型、时长、演员之外，人们的心情和观看电影时的氛围也会影响评分。但我们无法预测未来人的心情。另一个原因是数据质量。
 
@@ -24,7 +24,7 @@
 
 方差描述了预测的稳健性，即当数据变化时预测会变化多少。理想情况下，数据有小的变化时，预测也会有轻微的变化。
 
-![图示](../Images/78746f1bfe3c49494312fdd94c8060d0.png)
+![图示](img/78746f1bfe3c49494312fdd94c8060d0.png)
 
 偏差和方差对预测的影响
 
@@ -34,7 +34,7 @@
 
 有一张图描述了偏差-方差权衡。红线是损失函数（例如 MSE - 均方误差）。蓝线是偏差，橙线是方差。正如你所见，最佳解决方案会出现在这些线交点的某处。
 
-![图示](../Images/8ad6f1fff405cfe68a39b0b9affbc63b.png)
+![图示](img/8ad6f1fff405cfe68a39b0b9affbc63b.png)
 
 错误函数的分解
 
@@ -52,7 +52,7 @@
 
 ### 正则化
 
-![图](../Images/ef95db2d8a50a5a51c548cc02b25523c.png)
+![图](img/ef95db2d8a50a5a51c548cc02b25523c.png)
 
 或者，换句话说：
 
@@ -64,7 +64,7 @@
 
 每个神经元可以表示为
 
-![图](../Images/f215f4ce311ca65ee2e1082564e19b21.png)
+![图](img/f215f4ce311ca65ee2e1082564e19b21.png)
 
 其中 f 是激活函数，*w* 是权重，X 是数据。
 
@@ -72,15 +72,15 @@
 
 ****L2 范数（L2 正则化，岭回归）****
 
-![图](../Images/b70e3f5187a63ae32403856a7e04deed.png)
+![图](img/b70e3f5187a63ae32403856a7e04deed.png)
 
 如果损失是 MSE，那么具有 L2 范数的成本函数可以通过解析方法求解。
 
-![图](../Images/8ce8dbe63c2dc8a7af0dd7f41e0957ef.png)
+![图](img/8ce8dbe63c2dc8a7af0dd7f41e0957ef.png)
 
 你可以看到，我们只是添加了一个乘以 λ 的单位矩阵（岭），以获得一个非奇异矩阵，并增加问题的收敛性。
 
-![图](../Images/efacff284bf0087323f5a99baa0c62c2.png)
+![图](img/efacff284bf0087323f5a99baa0c62c2.png)
 
 通过添加单位矩阵，将多重共线性的 XTX 矩阵转换为非奇异矩阵。
 
@@ -92,19 +92,19 @@ w^T 是权重的向量行。
 
 正则化之前：
 
-![图](../Images/c84979bf97f86f93cd5d251224df7aa9.png)
+![图](img/c84979bf97f86f93cd5d251224df7aa9.png)
 
 数据的微小变化
 
-![图](../Images/2fbbd8f9fe43ab51fcc9e8a90c7f91c0.png)
+![图](img/2fbbd8f9fe43ab51fcc9e8a90c7f91c0.png)
 
 正则化后，我们将在测试数据上得到相同的结果，
 
-![图](../Images/6ac186edf099c845a012f3abf9282217.png)
+![图](img/6ac186edf099c845a012f3abf9282217.png)
 
 但，数据的微小变化会导致结果的微小变化。
 
-![图](../Images/92881580f84db5d3409f297884f479b7.png)
+![图](img/92881580f84db5d3409f297884f479b7.png)
 
 ****示例****
 
@@ -120,7 +120,7 @@ model.add(Dense(64, input_dim=64,
 
 L1 范数意味着我们使用权重的绝对值而不是平方值。没有解析方法来解决这个问题。
 
-![图](../Images/950fc3ae7822523377aaded861a145f0.png)
+![图](img/950fc3ae7822523377aaded861a145f0.png)
 
 这种回归将一些权重置为零。在我们尝试压缩模型时，它非常有用。
 
@@ -136,7 +136,7 @@ model.add(Dense(64, input_dim=64,
 
 我们来看一个有两个参数（B1 和 B2）的简单损失函数，并绘制一个三维图。
 
-![图](../Images/343a9fd77c2c8aea5d0077dd1c9cb24d.png)
+![图](img/343a9fd77c2c8aea5d0077dd1c9cb24d.png)
 
 在三维空间中的梯度下降与等高线表示 | [来源](https://towardsdatascience.com/regularization-in-machine-learning-connecting-the-dots-c6e030bfaddd)
 
@@ -144,7 +144,7 @@ model.add(Dense(64, input_dim=64,
 
 设 Lambda = 1。L2 正则化对于两个参数的函数是 B12 + B22，这在图上形成一个圆。L1 正则化是 |B1| + |B2|，这在图上形成一个菱形。
 
-![图](../Images/66b2320cd4352efa1a1178346deb522b.png)
+![图](img/66b2320cd4352efa1a1178346deb522b.png)
 
 L1 和 L2 范数与不同的成本函数 | [来源](https://towardsdatascience.com/regularization-in-machine-learning-connecting-the-dots-c6e030bfaddd)
 
@@ -154,13 +154,13 @@ L1 和 L2 范数与不同的成本函数 | [来源](https://towardsdatascience.c
 
 想象一个简单的网络。例如，黑客马拉松中的开发团队。团队中有经验丰富或更聪明的开发者，他们承担了整个开发的主要工作，而其他人只做一些小帮助。如果这种情况持续下去，经验丰富的开发者会变得更有经验，而其他人则很难得到训练。神经元也是如此。
 
-![图](../Images/e9dc1415db6283be40232cec7c534fbb.png)
+![图](img/e9dc1415db6283be40232cec7c534fbb.png)
 
 **全连接网络**
 
 但想象一下，在每次产品开发迭代中，我们随机断开一些开发者的连接。那么其余的开发者不得不更加投入，大家学习得更好。
 
-![图](../Images/3dfdcfb6d929ddbb227c06b64bce4db6.png)
+![图](img/3dfdcfb6d929ddbb227c06b64bce4db6.png)
 
 随机丢失节点的网络
 
@@ -217,11 +217,11 @@ for batch in datagen.flow(x, batch_size=1,
 
 ****原始图像：****
 
-![图](../Images/9c61094028e19f432db482e6933ff0a5.png)
+![图](img/9c61094028e19f432db482e6933ff0a5.png)
 
 ****增强图像：****
 
-![图](../Images/8249bc4d5b185a0dda76243edf1b8859.png)![图](../Images/01dee9199a92378367caad7d25114b0a.png)![图](../Images/01dee9199a92378367caad7d25114b0a.png)![图](../Images/a3420c9ad50b4452112de6744f1d936e.png)![图](../Images/10a73410076a8d297c4f20f864d92a40.png)![图](../Images/2202c647c9cf80fbd279a67fadafc005.png)
+![图](img/8249bc4d5b185a0dda76243edf1b8859.png)![图](img/01dee9199a92378367caad7d25114b0a.png)![图](img/01dee9199a92378367caad7d25114b0a.png)![图](img/a3420c9ad50b4452112de6744f1d936e.png)![图](img/10a73410076a8d297c4f20f864d92a40.png)![图](img/2202c647c9cf80fbd279a67fadafc005.png)
 
 ### 提前停止
 
@@ -235,7 +235,7 @@ from keras.callbacks import EarlyStopping
 es = EarlyStopping(monitor='val_loss', mode='min')
 ```
 
-这就是我们所需的最简单形式的提前停止。当选定的性能测量指标不再改善时，训练将停止。要发现训练在哪个时期停止，可以将“verbose”参数设置为1。
+这就是我们所需的最简单形式的提前停止。当选定的性能测量指标不再改善时，训练将停止。要发现训练在哪个时期停止，可以将“verbose”参数设置为 1。
 
 通常，第一次没有进一步改善的迹象可能不是停止训练的最佳时机。这是因为模型可能会在改善之前进入一个没有改进的平稳期，甚至可能稍微变得更差。
 
@@ -247,13 +247,13 @@ es = EarlyStopping(monitor='val_loss', mode='min', verbose=1, patience=50)
 
 精确的耐心值将在模型和问题之间有所不同。
 
-默认情况下，性能测量指标的任何变化，无论多么微小，都将被视为改善。你可能需要考虑一个特定的增量，例如均方误差的1单位或准确率的1%。这可以通过“min_delta”参数指定。
+默认情况下，性能测量指标的任何变化，无论多么微小，都将被视为改善。你可能需要考虑一个特定的增量，例如均方误差的 1 单位或准确率的 1%。这可以通过“min_delta”参数指定。
 
 ```py
 es = EarlyStopping(monitor='val_accuracy', mode='max', min_delta=1)
 ```
 
-EarlyStopping回调可以与其他回调一起应用，例如tensorboard。
+EarlyStopping 回调可以与其他回调一起应用，例如 tensorboard。
 
 ```py
 model.fit(
@@ -267,19 +267,19 @@ callbacks=[get_tensorboard_callback('baseline_pca(45)_log', True), es])
 
 了解更多信息：[这里](https://keras.io/callbacks/)
 
-也可以附加Tensorboard并手动监控变化。每5分钟，模型将保存到日志目录中，因此你可以随时检查更好的版本。
+也可以附加 Tensorboard 并手动监控变化。每 5 分钟，模型将保存到日志目录中，因此你可以随时检查更好的版本。
 
 ### 神经网络架构
 
-众所周知，深度为2的足够大的网络已经可以在[0,1]d上以任意精度逼近任何连续目标函数（Cybenko,1989；Hornik, 1991）。另一方面，较深的网络通常比浅层网络表现更好，这一点早已显而易见。
+众所周知，深度为 2 的足够大的网络已经可以在[0,1]d 上以任意精度逼近任何连续目标函数（Cybenko,1989；Hornik, 1991）。另一方面，较深的网络通常比浅层网络表现更好，这一点早已显而易见。
 
-[最近的分析](http://proceedings.mlr.press/v49/eldan16.pdf)表明，“深度——即使增加1——对于标准前馈神经网络的价值可能是宽度的指数倍”。
+[最近的分析](http://proceedings.mlr.press/v49/eldan16.pdf)表明，“深度——即使增加 1——对于标准前馈神经网络的价值可能是宽度的指数倍”。
 
 你可以认为每一层新层提取了一个新的特征，从而增加了非线性。
 
 记住，增加深度意味着你的模型更复杂，优化函数可能无法找到最佳的权重集。
 
-想象一下，你有一个具有2层隐藏层的神经网络，每层5个神经元。高度 = 2，宽度 = 5。让我们在每层添加一个神经元并计算连接数：（5+1）*（5+1）= 36个连接。现在，让我们在原始网络中添加一层并计算连接数：5*5*5 = 125个连接。因此，每层将显著增加连接数和执行时间。
+想象一下，你有一个具有 2 层隐藏层的神经网络，每层 5 个神经元。高度 = 2，宽度 = 5。让我们在每层添加一个神经元并计算连接数：（5+1）*（5+1）= 36 个连接。现在，让我们在原始网络中添加一层并计算连接数：5*5*5 = 125 个连接。因此，每层将显著增加连接数和执行时间。
 
 但与此同时，这也会增加过拟合的机会。
 
@@ -297,7 +297,7 @@ callbacks=[get_tensorboard_callback('baseline_pca(45)_log', True), es])
 
 另一个好处是迁移学习可以提高生产力并减少训练时间：
 
-![图](../Images/86a67d6d2409c24bb3985ea500815371.png)
+![图](img/86a67d6d2409c24bb3985ea500815371.png)
 
 衡量函数
 
@@ -342,21 +342,21 @@ model = Sequential([
 
 **相关：**
 
-+   [开启深度学习革命](/2019/12/enabling-deep-learning-revolution.html)
++   开启深度学习革命
 
-+   [使用更少数据进行图像分类的深度学习](/2019/11/deep-learning-image-classification-less-data.html)
++   使用更少数据进行图像分类的深度学习
 
-+   [2019 年热门深度学习课程](/2019/12/deep-learning-courses.html)
++   2019 年热门深度学习课程
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -372,4 +372,4 @@ model = Sequential([
 
 +   [人工智能、分析、机器学习、数据科学、深度学习……](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [15本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
++   [15 本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)

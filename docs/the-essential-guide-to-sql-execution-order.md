@@ -1,8 +1,8 @@
 # SQL 执行顺序的基础指南
 
-> 原文：[https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)
+> 原文：[`www.kdnuggets.com/the-essential-guide-to-sql-execution-order`](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)
 
-![SQL 执行顺序的基础指南](../Images/4df5e29a889174c6f93c2c6175d256c5.png)
+![SQL 执行顺序的基础指南](img/4df5e29a889174c6f93c2c6175d256c5.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@ SQL 已成为任何数据专业人员的必备语言。
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -40,13 +40,13 @@ SQL 通常通过使用来学习，而且在大多数情况下，人们通常不�
 
 通常，查询的展开结构如下：
 
-![SQL 执行顺序的基础指南](../Images/6d28ace4db36e78dc8c55fa7dfa3a4c1.png)
+![SQL 执行顺序的基础指南](img/6d28ace4db36e78dc8c55fa7dfa3a4c1.png)
 
 作者提供的图片
 
 即使一个人按照之前的结构阅读和编写代码，但在考虑这些代码如何执行时，顺序会完全改变。
 
-![SQL 执行顺序的基础指南](../Images/b9b1c383746d8f1b61b4d20f393ef3a7.png)
+![SQL 执行顺序的基础指南](img/b9b1c383746d8f1b61b4d20f393ef3a7.png)
 
 作者提供的图片
 
@@ -56,7 +56,7 @@ SQL 通常通过使用来学习，而且在大多数情况下，人们通常不�
 
 为了进一步理解这个执行顺序，让我们逐步探讨 SQL 对每条命令的处理。
 
-![SQL 执行顺序的基础指南](../Images/9d01702d7b4b51c9139f78b82c78cce4.png)
+![SQL 执行顺序的基础指南](img/9d01702d7b4b51c9139f78b82c78cce4.png)
 
 作者提供的图片
 
@@ -68,13 +68,13 @@ SQL 查询的旅程始于 FROM 子句，它指向数据的来源。虽然简单�
 
 这一配对总是引领开场，通过明确数据的角色来设定查询的基础。
 
-## 第2步 - WHERE
+## 第 2 步 - WHERE
 
 在初步选择后，WHERE 子句成为焦点。
 
 它的主要作用是筛选基础表或连接操作后的合并结果，确保只保留满足特定条件的行。
 
-## 第3步 - GROUP BY
+## 第 3 步 - GROUP BY
 
 GROUP BY 子句介入以组织数据，将其按一个或多个列中的值分组。这使我们能够执行聚合或汇总。
 
@@ -82,7 +82,7 @@ GROUP BY 子句介入以组织数据，将其按一个或多个列中的值分�
 
 这个子句是数据聚合的核心命令，为使用如 COUNT()、SUM()、MIN() 和 MAX() 等函数进行汇总表演奠定了基础。
 
-## 第4步 - HAVING
+## 第 4 步 - HAVING
 
 HAVING 子句作为筛选器，去除那些未能满足设定标准的分组。
 
@@ -94,7 +94,7 @@ HAVING 子句作为筛选器，去除那些未能满足设定标准的分组。
 
 这是因为 WHERE 在 GROUP BY 子句之前出现，那时单个数据点尚未被编组。而 HAVING 则在 GROUP BY 已经计算完成后进行。
 
-## 第5步 - SELECT
+## 第 5 步 - SELECT
 
 SELECT 子句定义了我们希望在表中保留的列，以及在执行过程中计算出的任何分组或聚合字段。
 
@@ -102,7 +102,7 @@ SELECT 子句定义了我们希望在表中保留的列，以及在执行过程�
 
 SELECT 命令通常与 DISTINCT 一起使用，这样可以丢弃所有标记为 DISTINCT 的列中具有重复值的行。
 
-## 第6步 - ORDER BY
+## 第 6 步 - ORDER BY
 
 在基础任务完成后，ORDER BY 子句介入，安排值的排序展示，按升序 (ASC) 或降序 (DESC) 排列。
 
@@ -110,7 +110,7 @@ SELECT 命令通常与 DISTINCT 一起使用，这样可以丢弃所有标记为
 
 我们从源表中收集了数据，通过过滤器进行精炼，创建了有意义的分组和汇总，并确定了在最终输出中展示的列。
 
-## 第7步 - LIMIT
+## 第 7 步 - LIMIT
 
 最后，LIMIT 子句帮助定义我们希望返回的行数。
 
@@ -130,7 +130,7 @@ SELECT 命令通常与 DISTINCT 一起使用，这样可以丢弃所有标记为
 
 SQL 中的一个常见陷阱是尝试使用 WHERE 子句来过滤聚合数据，这是一个会导致错误的误步骤。
 
-![SQL 执行顺序的基本指南](../Images/25dce99fe8a7428141cb87ba177a2a81.png)
+![SQL 执行顺序的基本指南](img/25dce99fe8a7428141cb87ba177a2a81.png)
 
 图片由作者提供
 
@@ -142,7 +142,7 @@ SQL 中的一个常见陷阱是尝试使用 WHERE 子句来过滤聚合数据，
 
 因此，SQL 目前还不知晓这个新别名。
 
-![SQL 执行顺序的基本指南](../Images/61a6fb9fcbd7723510f8140106e01ae1.png)
+![SQL 执行顺序的基本指南](img/61a6fb9fcbd7723510f8140106e01ae1.png)
 
 图片由作者提供
 

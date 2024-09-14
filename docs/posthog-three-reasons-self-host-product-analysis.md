@@ -1,10 +1,10 @@
 # 自托管产品分析的三大理由
 
-> 原文：[https://www.kdnuggets.com/2021/11/posthog-three-reasons-self-host-product-analysis.html](https://www.kdnuggets.com/2021/11/posthog-three-reasons-self-host-product-analysis.html)
+> 原文：[`www.kdnuggets.com/2021/11/posthog-three-reasons-self-host-product-analysis.html`](https://www.kdnuggets.com/2021/11/posthog-three-reasons-self-host-product-analysis.html)
 
 赞助帖子。
 
-[![自托管产品分析的三大理由](../Images/0cb3c5b1f48f84f27a49a15504e9f602.png)](https://posthog.com/?utm_source=kdnuggets&utm_medium=sponsored-blog&utm_campaign=02-nov-2021)
+![自托管产品分析的三大理由](https://posthog.com/?utm_source=kdnuggets&utm_medium=sponsored-blog&utm_campaign=02-nov-2021)
 
 在选择新的分析平台时，您可以做出的最重要决定之一就是平台和数据将托管在哪里——在第三方的云中，还是在您自己的基础设施上。云托管分析通常是常规做法，有些可以让您迅速入门，但越来越多的团队选择使用像 PostHog 这样的自托管平台。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

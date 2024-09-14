@@ -1,8 +1,8 @@
-# 数据科学职位报告2019：Python大幅上升，TensorFlow快速增长，R使用量翻倍超过SAS
+# 数据科学职位报告 2019：Python 大幅上升，TensorFlow 快速增长，R 使用量翻倍超过 SAS
 
-> 原文：[https://www.kdnuggets.com/2019/06/data-science-jobs-report.html](https://www.kdnuggets.com/2019/06/data-science-jobs-report.html)
+> 原文：[`www.kdnuggets.com/2019/06/data-science-jobs-report.html`](https://www.kdnuggets.com/2019/06/data-science-jobs-report.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Bob Muenchen](http://r4stats.com/)，分析分析世界**。
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 测量数据科学软件的普及度或市场份额的最佳方法之一是计算那些将知识作为要求的职位广告数量。职位广告信息丰富且有资金支持，因此它们可能是衡量每种软件当前受欢迎程度的最佳指标。职位需求的变化图表为我们提供了未来可能会变得更加流行的良好线索。
 
-Indeed.com 是美国最大的招聘网站，使其职位广告收集成为最好的选择。正如他们的联合创始人兼前首席执行官Paul Forster所述，Indeed.com 包括“来自1000多个独特来源的所有职位，包括主要的招聘网站 – Monster、CareerBuilder、HotJobs、Craigslist – 以及数百份报纸、协会和公司网站。” Indeed.com 还拥有出色的搜索功能。它曾经有一个职位趋势图表工具，但这个工具显然已经关闭。
+Indeed.com 是美国最大的招聘网站，使其职位广告收集成为最好的选择。正如他们的联合创始人兼前首席执行官 Paul Forster 所述，Indeed.com 包括“来自 1000 多个独特来源的所有职位，包括主要的招聘网站 – Monster、CareerBuilder、HotJobs、Craigslist – 以及数百份报纸、协会和公司网站。” Indeed.com 还拥有出色的搜索功能。它曾经有一个职位趋势图表工具，但这个工具显然已经关闭。
 
 使用 Indeed.com 搜索职位很容易，但以确保在不同包之间公平比较的方式搜索软件则具有挑战性。一些软件仅用于数据科学（例如 SPSS、Apache Spark），而其他软件既用于数据科学职位，也用于更广泛的报告撰写职位（例如 SAS、Tableau）。通用语言（例如 Python、C、Java）在数据科学职位中被广泛使用，但绝大多数使用这些语言的职位与数据科学无关。为了公平比较，我制定了一个协议，将每个软件的搜索范围仅限定于数据科学家的职位。该协议的详细信息在另一篇文章中描述，* [如何搜索数据科学职位](http://r4stats.com/articles/how-to-search-for-data-science-jobs/) *。本节中的所有图表都使用这些程序来进行所需的查询。
 
@@ -34,7 +34,7 @@ Indeed.com 是美国最大的招聘网站，使其职位广告收集成为最好
 
 图 1a 的比例尺非常宽，以至于底部的包 H20 看起来似乎为零，而实际上它有 257 个职位。
 
-![](../Images/6ebdbc08c2b0b9a249b5e1dc93afbdae.png)
+![](img/6ebdbc08c2b0b9a249b5e1dc93afbdae.png)
 
 *图 1a。更受欢迎的软件的数据科学职位数量。*
 
@@ -42,31 +42,31 @@ Indeed.com 是美国最大的招聘网站，使其职位广告收集成为最好
 
 有几个工具使用工作流界面：Enterprise Miner、KNIME、RapidMiner 和 SPSS Modeler。它们的职位数量都在 50 到 100 个之间。在许多其他受欢迎度指标中，RapidMiner 超过了非常相似的 KNIME 工具，但在这里后者的职位数量多出 50%。Alteryx 也是基于工作流的工具，但它已从其他工具中脱颖而出，在图 1a 上显示有 901 个职位。
 
-![](../Images/7493328421ac7f8dbe9b87c7afbf76ff.png)
+![](img/7493328421ac7f8dbe9b87c7afbf76ff.png)
 
-*图1b. 低于250个广告的数据科学软件工具的职位数量。*
+*图 1b. 低于 250 个广告的数据科学软件工具的职位数量。*
 
-在解释图1b中的尺度时，看似零的确实是零。从Systat开始，没有一个软件包的工作列表超过10个。
+在解释图 1b 中的尺度时，看似零的确实是零。从 Systat 开始，没有一个软件包的工作列表超过 10 个。
 
-重要的是要注意，图1a和图1b中显示的值是单一时间点的快照。更受欢迎的软件的职位数量每天变化不大。因此，图1a中显示的软件的相对排名在接下来的一两年内不太可能发生太大变化。图1b中显示的不太受欢迎的软件包的职位数量非常低，它们的排名更有可能从月到月发生变化，但与主要软件包相比，它们的位置应该保持更稳定。
+重要的是要注意，图 1a 和图 1b 中显示的值是单一时间点的快照。更受欢迎的软件的职位数量每天变化不大。因此，图 1a 中显示的软件的相对排名在接下来的一两年内不太可能发生太大变化。图 1b 中显示的不太受欢迎的软件包的职位数量非常低，它们的排名更有可能从月到月发生变化，但与主要软件包相比，它们的位置应该保持更稳定。
 
-接下来，让我们看看2017年到现在（2019年）工作的变化。图1c显示了那些在2017年时至少有100个职位列表的软件包的百分比变化。如果没有这样的限制，软件从2017年的1个职位增加到2019年的5个职位将有500%的增长，但仍然不会引起太大兴趣。工作市场正在升温或增长的软件以红色显示，而那些降温的软件以蓝色显示。
+接下来，让我们看看 2017 年到现在（2019 年）工作的变化。图 1c 显示了那些在 2017 年时至少有 100 个职位列表的软件包的百分比变化。如果没有这样的限制，软件从 2017 年的 1 个职位增加到 2019 年的 5 个职位将有 500%的增长，但仍然不会引起太大兴趣。工作市场正在升温或增长的软件以红色显示，而那些降温的软件以蓝色显示。
 
-![](../Images/83dde99876d334754fa62a17a9264acd.png)
+![](img/83dde99876d334754fa62a17a9264acd.png)
 
-*图1c. 从2017年到2019年职位列表的百分比变化。仅显示2017年时至少有100个职位的软件。*
+*图 1c. 从 2017 年到 2019 年职位列表的百分比变化。仅显示 2017 年时至少有 100 个职位的软件。*
 
-Tensorflow是来自Google的深度学习软件，其增长最快，达到523%。接下来是Apache Flink，一个分析流数据的工具，增长为289%。H2O紧随其后，增长为150%。Caffe是另一个深度学习框架，其123%的增长反映了人工智能算法的流行。
+Tensorflow 是来自 Google 的深度学习软件，其增长最快，达到 523%。接下来是 Apache Flink，一个分析流数据的工具，增长为 289%。H2O 紧随其后，增长为 150%。Caffe 是另一个深度学习框架，其 123%的增长反映了人工智能算法的流行。
 
-Python显示出“仅”97%的增长，但其受欢迎程度已经如此之高，以至于其增加的13,471个职位超越了许多其他软件包的总职位数！
+Python 显示出“仅”97%的增长，但其受欢迎程度已经如此之高，以至于其增加的 13,471 个职位超越了许多其他软件包的总职位数！
 
-Tableau显示出类似的增长率，尽管增加的职位数相对较少，为4,784个。
+Tableau 显示出类似的增长率，尽管增加的职位数相对较少，为 4,784 个。
 
-从Julia语言开始，我们看到增长放缓。我惊讶于SAS和SPSS的职位仍在增长，尽管分别仅为6%和1%。
+从 Julia 语言开始，我们看到增长放缓。我惊讶于 SAS 和 SPSS 的职位仍在增长，尽管分别仅为 6%和 1%。
 
 [原文](http://r4stats.com/2019/05/28/data-science-jobs-report-2019-python-way-up-tensorflow-growing-rapidly-r-use-double-sas/)。已获得许可转载。
 
-**简介：** 罗伯特·A·穆恩琴（Robert A. Muenchen）是一个拥有35年经验的ASA认证专业统计师™，目前担任田纳西大学OIT研究计算支持（前身为统计咨询中心）经理。他是《*R for SAS and SPSS Users*》一书的作者，并与约瑟夫·M·希尔比（Joseph M. Hilbe）共同编写了《*R for Stata Users*》，Bob也是r4stats.com的创建者，这是一个受欢迎的网站，致力于分析数据科学软件的趋势，评审这些软件，并帮助人们学习R语言。
+**简介：** 罗伯特·A·穆恩琴（Robert A. Muenchen）是一个拥有 35 年经验的 ASA 认证专业统计师™，目前担任田纳西大学 OIT 研究计算支持（前身为统计咨询中心）经理。他是《*R for SAS and SPSS Users*》一书的作者，并与约瑟夫·M·希尔比（Joseph M. Hilbe）共同编写了《*R for Stata Users*》，Bob 也是 r4stats.com 的创建者，这是一个受欢迎的网站，致力于分析数据科学软件的趋势，评审这些软件，并帮助人们学习 R 语言。
 
 **相关：**
 
@@ -78,14 +78,14 @@ Tableau显示出类似的增长率，尽管增加的职位数相对较少，为4
 
 ### 了解更多此话题
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [通过数据科学将收入翻倍的5种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
++   [通过数据科学将收入翻倍的 5 种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
 
 +   [停止学习数据科学以寻找目标，然后找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [是什么让Python成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

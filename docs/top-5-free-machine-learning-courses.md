@@ -1,8 +1,8 @@
 # 前五名免费机器学习课程
 
-> 原文：[https://www.kdnuggets.com/2022/02/top-5-free-machine-learning-courses.html](https://www.kdnuggets.com/2022/02/top-5-free-machine-learning-courses.html)
+> 原文：[`www.kdnuggets.com/2022/02/top-5-free-machine-learning-courses.html`](https://www.kdnuggets.com/2022/02/top-5-free-machine-learning-courses.html)
 
-![前五名免费机器学习课程](../Images/84d2c6b06a10bce2a59e433b0fbfc8f3.png)
+![前五名免费机器学习课程](img/84d2c6b06a10bce2a59e433b0fbfc8f3.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,11 +26,11 @@
 
 [机器学习](https://www.coursera.org/learn/machine-learning) 由斯坦福大学提供，是互联网上最受欢迎和高度评价的在线课程。我大多数同事都参加过安德鲁·吴的各种课程，他们都取得了积极的效果。如果你是一个有 Python 语言经验的初学者，我强烈建议你通过斯坦福大学的免费课程开始你的学习之旅。你还可以支付额外的 $75 来获得证书并获取更多学习资源。
 
-![前五名免费机器学习课程](../Images/9c6f9ccc6c6162863e6890b9fe1b9f32.png)
+![前五名免费机器学习课程](img/9c6f9ccc6c6162863e6890b9fe1b9f32.png)
 
 图片来源 [Coursera](https://www.coursera.org/learn/machine-learning)
 
-**时长：** 61小时
+**时长：** 61 小时
 
 **评分：** 4.9
 
@@ -46,7 +46,7 @@
 
 [CS50 的《Python 人工智能入门》| edX](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python) 教授你成为机器学习工程师所需的技能。在这门课程中，你将学习那些催生了游戏引擎、图像分类、机器翻译和股票价格预测等技术的机器学习算法。这是一门免费的课程，但你可以付费获得证书、完整的课程内容以及互动项目。
 
-![前 5 名免费机器学习课程](../Images/b5b4e62bb39dd68b9271baead84adea1.png)
+![前 5 名免费机器学习课程](img/b5b4e62bb39dd68b9271baead84adea1.png)
 
 图片来自 [edX](https://www.edx.org/course/cs50s-introduction-to-artificial-intelligence-with-python)
 
@@ -62,7 +62,7 @@
 
 [机器学习 | edX](https://www.edx.org/course/machine-learning?source=aw&awc=6798_1643709211_3fa74b465e9915e9050ca6eef892222c&utm_source=aw&utm_medium=affiliate_partner&utm_content=text-link&utm_term=619683_E-Student) 由哥伦比亚大学提供，是一门中级课程，帮助你掌握基本的机器学习算法。这是一门免费的课程，但付费选项将提供额外的功能和证书。
 
-![前 5 名免费机器学习课程](../Images/dd08d05431e84cee417bb5c0064eb069.png)
+![前 5 名免费机器学习课程](img/dd08d05431e84cee417bb5c0064eb069.png)
 
 图片来自 [edX](https://www.edx.org/course/machine-learning?source=aw&awc=6798_1643709211_3fa74b465e9915e9050ca6eef892222c&utm_source=aw&utm_medium=affiliate_partner&utm_content=text-link&utm_term=619683_E-Student)
 
@@ -70,23 +70,23 @@
 
 **级别：** 中级
 
-课程包括监督学习（回归/分类）、无监督学习数据建模和分析，以及优化模型性能。课程还涉及Markov模型、非负矩阵分解、连续状态空间模型、Laplace近似、核方法和高斯过程。此课程适合希望深入学习模型架构和算法的个人。
+课程包括监督学习（回归/分类）、无监督学习数据建模和分析，以及优化模型性能。课程还涉及 Markov 模型、非负矩阵分解、连续状态空间模型、Laplace 近似、核方法和高斯过程。此课程适合希望深入学习模型架构和算法的个人。
 
 ## 实用深度学习课程
 
-我是[Jeremy Howard](https://www.linkedin.com/in/howardjeremy/)的忠实粉丝，他的[实用深度学习课程 (fast.ai)](https://course.fast.ai/)简直太棒了。你可以享受到评估练习、社区支持以及易于跟随的YouTube教程。你还将学习到最先进的模型以及一个易于使用的深度学习框架（fast.ai），它是建立在PyTorch之上的。
+我是[Jeremy Howard](https://www.linkedin.com/in/howardjeremy/)的忠实粉丝，他的[实用深度学习课程 (fast.ai)](https://course.fast.ai/)简直太棒了。你可以享受到评估练习、社区支持以及易于跟随的 YouTube 教程。你还将学习到最先进的模型以及一个易于使用的深度学习框架（fast.ai），它是建立在 PyTorch 之上的。
 
-该课程涵盖了机器学习的所有核心主题，并结合了实际案例。它还包括数据伦理、生产中的机器学习和开发网页应用程序。你会看到许多fast.ai的校友在Google和Amazon工作，因此，如果你对你的职业生涯非常认真并且想要学习能够让你找到工作的机器学习概念，那么请在一个月内完成这门课程，然后进入第二部分。
+该课程涵盖了机器学习的所有核心主题，并结合了实际案例。它还包括数据伦理、生产中的机器学习和开发网页应用程序。你会看到许多 fast.ai 的校友在 Google 和 Amazon 工作，因此，如果你对你的职业生涯非常认真并且想要学习能够让你找到工作的机器学习概念，那么请在一个月内完成这门课程，然后进入第二部分。
 
-![前5名免费机器学习课程](../Images/25ab6ac40c4e5bba135d532c03622c5d.png)
+![前 5 名免费机器学习课程](img/25ab6ac40c4e5bba135d532c03622c5d.png)
 
 图片来源：[fast.ai](https://course.fast.ai/)
 
-**时长：** 20 - 60小时
+**时长：** 20 - 60 小时
 
 **级别：** 初学者到中级
 
-课程包括训练深度学习模型、基于证据的学习、生产中的机器学习、随机梯度下降、数据伦理、表格数据和自然语言处理。每一章都有问题和项目练习，你可以在Google Colab或Gradient上运行。我强烈推荐你在学习机器学习基础后参加这门课程。该课程帮助我理解了神经网络的深层工作原理，并学会了跳出思维框框。
+课程包括训练深度学习模型、基于证据的学习、生产中的机器学习、随机梯度下降、数据伦理、表格数据和自然语言处理。每一章都有问题和项目练习，你可以在 Google Colab 或 Gradient 上运行。我强烈推荐你在学习机器学习基础后参加这门课程。该课程帮助我理解了神经网络的深层工作原理，并学会了跳出思维框框。
 
 ## 生产中的机器学习工程
 
@@ -102,36 +102,36 @@
 
 +   生产中的机器学习模型部署
 
-![前五名免费机器学习课程](../Images/5d6a45677158dd9a8e1e54a39fa5b1a5.png)
+![前五名免费机器学习课程](img/5d6a45677158dd9a8e1e54a39fa5b1a5.png)
 
 图片来自[Coursera](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops)
 
-**时长：** 96小时
+**时长：** 96 小时
 
 **评分：** 4.7
 
 **级别：** 高级
 
-这些课程将帮助你在职业生涯中脱颖而出，并准备你通过使用先进工具来提升AI产品的性能。你将学习数据漂移、概念漂移、以数据为中心的方法，开发端到端的机器学习系统，构建数据管道，机器学习操作，并学习在持续监控生产系统中的高级技术。
+这些课程将帮助你在职业生涯中脱颖而出，并准备你通过使用先进工具来提升 AI 产品的性能。你将学习数据漂移、概念漂移、以数据为中心的方法，开发端到端的机器学习系统，构建数据管道，机器学习操作，并学习在持续监控生产系统中的高级技术。
 
 ## 结论
 
-2022年是学习机器学习技能的最佳时机。如果你有兴趣开始你的学习之旅，或者想在数据领域中脱颖而出，开始参加这些课程并按时完成它们。这些课程将帮助你建立作品集，并提供必要的技能。免费的课程还提供社区驱动的职业支持，专业人士互相帮助找到合适的工作。
+2022 年是学习机器学习技能的最佳时机。如果你有兴趣开始你的学习之旅，或者想在数据领域中脱颖而出，开始参加这些课程并按时完成它们。这些课程将帮助你建立作品集，并提供必要的技能。免费的课程还提供社区驱动的职业支持，专业人士互相帮助找到合适的工作。
 
 在这篇博客中，我们介绍了五个顶级免费机器学习课程。这些课程培养了能够胜任工作的专业人士，他们在顶尖科技公司工作。课程的排名基于理论、实用性、互动项目与练习、受欢迎程度、真实世界项目以及讲师风格。我希望你喜欢我的工作，如果你对机器学习职业有进一步的问题，请在下方评论。我会尽力回答你的所有问题。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是为那些面临心理健康问题的学生构建一个使用图神经网络的AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是为那些面临心理健康问题的学生构建一个使用图神经网络的 AI 产品。
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
-+   [来自顶级大学的10个免费机器学习课程](https://www.kdnuggets.com/2023/02/10-free-machine-learning-courses-top-universities.html)
++   [来自顶级大学的 10 个免费机器学习课程](https://www.kdnuggets.com/2023/02/10-free-machine-learning-courses-top-universities.html)
 
 +   [提升技能的前五名免费机器学习课程](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
 
-+   [真正免费的课程：AI与ML版](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)
++   [真正免费的课程：AI 与 ML 版](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)
 
-+   [掌握机器学习的5个免费课程](https://www.kdnuggets.com/5-free-courses-to-master-machine-learning)
++   [掌握机器学习的 5 个免费课程](https://www.kdnuggets.com/5-free-courses-to-master-machine-learning)
 
-+   [初学者的3个免费机器学习课程](https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html)
++   [初学者的 3 个免费机器学习课程](https://www.kdnuggets.com/2022/12/3-free-machine-learning-courses-beginners.html)

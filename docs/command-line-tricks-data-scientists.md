@@ -1,22 +1,22 @@
 # 数据科学家的命令行技巧
 
-> 原文：[https://www.kdnuggets.com/2018/06/command-line-tricks-data-scientists.html](https://www.kdnuggets.com/2018/06/command-line-tricks-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2018/06/command-line-tricks-data-scientists.html`](https://www.kdnuggets.com/2018/06/command-line-tricks-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Kade Killary](http://kadekillary.work/)，数据科学家与工程师**
 
-![图片](../Images/41bfa054c7f477d9be3f2d3a5bcb3cee.png)
+![图片](img/41bfa054c7f477d9be3f2d3a5bcb3cee.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -68,7 +68,7 @@ iconv -f ISO-8859-1 -t UTF-8 < input.txt > output.txt
 
 ### HEAD
 
-如果你是频繁使用Pandas的用户，那么`head`将是熟悉的。通常在处理新数据时，我们首先想要了解数据的内容。这导致我们启动Pandas，读取数据，然后调用`df.head()`——可以说是相当费劲。`head`在没有任何标志的情况下，会打印出文件的前10行。`head`的真正力量在于测试清理操作。例如，如果我们想将文件的分隔符从逗号更改为管道字符。一个快速的测试方法是：`head mydata.csv | sed 's/,/|/g'`。
+如果你是频繁使用 Pandas 的用户，那么`head`将是熟悉的。通常在处理新数据时，我们首先想要了解数据的内容。这导致我们启动 Pandas，读取数据，然后调用`df.head()`——可以说是相当费劲。`head`在没有任何标志的情况下，会打印出文件的前 10 行。`head`的真正力量在于测试清理操作。例如，如果我们想将文件的分隔符从逗号更改为管道字符。一个快速的测试方法是：`head mydata.csv | sed 's/,/|/g'`。
 
 ```py
 # Prints out first 10 lines
@@ -113,7 +113,7 @@ cat tab_delimited.txt | tr "\\t" "," comma_delimited.csv
 [:xdigit:] all hexadecimal digits
 ```
 
-你可以将各种这些选项链在一起，组成强大的程序。以下是一个基本的单词计数程序，你可以用来检查你的README文件是否过度使用。
+你可以将各种这些选项链在一起，组成强大的程序。以下是一个基本的单词计数程序，你可以用来检查你的 README 文件是否过度使用。
 
 ```py
 cat README.md | tr "[:punct:][:space:]" "\n" | tr "[:upper:]" "[:lower:]" | grep . | sort | uniq -c | sort -nr
@@ -139,7 +139,7 @@ cat filename.csv | tr '[A-Z]' '[a-z]'
 
 +   `\v` 垂直制表符
 
-+   `\NNN` 具有八进制值NNN的字符
++   `\NNN` 具有八进制值 NNN 的字符
 
 ### WC
 
@@ -195,7 +195,7 @@ find . -type f -exec mv '{}' '{}'.csv \;
 
 +   `split -b` 按特定字节大小拆分
 
-+   `split -a` 生成长度为N的后缀
++   `split -a` 生成长度为 N 的后缀
 
 +   `split -x` 使用十六进制后缀进行拆分
 
@@ -203,7 +203,7 @@ find . -type f -exec mv '{}' '{}'.csv \;
 
 前面的命令很直观：它们执行的正是它们所描述的功能。这两个命令配合使用效果最佳（即唯一词汇计数）。这是因为`uniq`只作用于相邻的重复行。因此，原因在于在将输出通过管道传输之前需要`sort`。一个有趣的说明是，`sort -u`将实现与典型的`sort file.txt | uniq`模式相同的结果。
 
-`sort`对数据科学家有一个非常有用的功能：根据特定列对整个CSV文件进行排序。
+`sort`对数据科学家有一个非常有用的功能：根据特定列对整个 CSV 文件进行排序。
 
 ```py
 # Sorting a CSV file by the second column alphabetically
@@ -402,7 +402,7 @@ sed -i '' 's/\([0-9]\),\([0-9]\)/\1\2/g' data.txt
 # 2000,jack
 ```
 
-最后，Jack决定有一天辞职了。所以，再见，我的朋友。
+最后，Jack 决定有一天辞职了。所以，再见，我的朋友。
 
 ```py
 sed -i '' '/jack/d' data.txt
@@ -415,7 +415,7 @@ sed -i '' '/jack/d' data.txt
 
 ### AWK
 
-最后的最好。Awk不仅仅是一个简单的命令：它是一种全面的语言。在本文涵盖的一切中，`awk`无疑是最酷的。如果你感到印象深刻，还有很多很棒的资源 - 见[这里](https://www.amazon.com/AWK-Programming-Language-Alfred-Aho/dp/020107981X/ref=sr_1_1?ie=UTF8&qid=1524388936&sr=8-1&keywords=awk)、[这里](http://www.grymoire.com/Unix/Awk.html)和[这里](https://www.tutorialspoint.com/awk/index.htm)。
+最后的最好。Awk 不仅仅是一个简单的命令：它是一种全面的语言。在本文涵盖的一切中，`awk`无疑是最酷的。如果你感到印象深刻，还有很多很棒的资源 - 见[这里](https://www.amazon.com/AWK-Programming-Language-Alfred-Aho/dp/020107981X/ref=sr_1_1?ie=UTF8&qid=1524388936&sr=8-1&keywords=awk)、[这里](http://www.grymoire.com/Unix/Awk.html)和[这里](https://www.tutorialspoint.com/awk/index.htm)。
 
 `awk`的常见用例包括：
 
@@ -427,7 +427,7 @@ sed -i '' '/jack/d' data.txt
 
 +   执行字符串操作
 
-Awk可以在最初形态上与`grep`并驾齐驱。
+Awk 可以在最初形态上与`grep`并驾齐驱。
 
 ```py
 awk '/word/' filename.csv
@@ -439,7 +439,7 @@ awk '/word/' filename.csv
 awk -F, '/word/ { print $3 "\t" $4 }' filename.csv
 ```
 
-Awk内置了许多有用的变量。例如，`NF` - 字段数 - 和`NR` - 记录数。要获取文件中的第53条记录：
+Awk 内置了许多有用的变量。例如，`NF` - 字段数 - 和`NR` - 记录数。要获取文件中的第 53 条记录：
 
 ```py
 awk -F, 'NR == 53' filename.csv
@@ -511,7 +511,7 @@ awk '!($0 in a) {a[$0];print}
 awk '{gsub(/scarlet|ruby|puce/, "red"); print}'
 ```
 
-这个`awk`命令会合并多个CSV文件，忽略头部，然后在末尾追加。
+这个`awk`命令会合并多个 CSV 文件，忽略头部，然后在末尾追加。
 
 ```py
 awk 'FNR==1 && NR!=1{next;}{print}' *.csv > final_file.csv
@@ -557,11 +557,11 @@ sed '1d;$d' big_data.csv | awk 'NR%100000==1{x="data_"++i".csv";}{print > x}'
 
 **相关：**
 
-+   [数据科学家的 12 大必备命令行工具](/2018/03/top-12-essential-command-line-tools-data-scientists.html)
++   数据科学家的 12 大必备命令行工具
 
-+   [命令行中的数据科学：探索数据](/2018/02/data-science-command-line-book-exploring-data.html)
++   命令行中的数据科学：探索数据
 
-+   [使用 Python 掌握数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   使用 Python 掌握数据准备的 7 个步骤
 
 ### 更多相关主题
 

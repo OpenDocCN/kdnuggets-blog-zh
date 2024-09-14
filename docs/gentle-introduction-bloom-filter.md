@@ -1,6 +1,6 @@
 # Bloom 过滤器的温和介绍
 
-> 原文：[https://www.kdnuggets.com/2016/08/gentle-introduction-bloom-filter.html](https://www.kdnuggets.com/2016/08/gentle-introduction-bloom-filter.html)
+> 原文：[`www.kdnuggets.com/2016/08/gentle-introduction-bloom-filter.html`](https://www.kdnuggets.com/2016/08/gentle-introduction-bloom-filter.html)
 
 **Bugra Akyildiz, Hinge App.**
 
@@ -12,15 +12,15 @@ Bloom 过滤器是概率性空间高效的数据结构。它们与哈希表非�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
-![Bloom filter](../Images/4ba62d65a42be5ff5d825ea2d494adbb.png)
+![Bloom filter](img/4ba62d65a42be5ff5d825ea2d494adbb.png)
 
 ### 空间效率
 
@@ -169,7 +169,7 @@ hawk is not in the bloom filter as expected
 
 ### 确定性
 
-如果你使用相同的大小和相同数量的哈希函数以及哈希函数，布隆过滤器在给出正面响应和负面响应时是确定性的。对于一个项目 `x`，如果它对该特定项目给出 `probably in` 的响应，那么5分钟后、1小时后、1天后和1周后它将给出相同的响应。我对这一点感到有些惊讶。它是“概率性的”，所以布隆过滤器的响应应该是某种随机的，对吧？其实不然。它的概率性在于你不能知道它会说哪个项目是 `probably in`。
+如果你使用相同的大小和相同数量的哈希函数以及哈希函数，布隆过滤器在给出正面响应和负面响应时是确定性的。对于一个项目 `x`，如果它对该特定项目给出 `probably in` 的响应，那么 5 分钟后、1 小时后、1 天后和 1 周后它将给出相同的响应。我对这一点感到有些惊讶。它是“概率性的”，所以布隆过滤器的响应应该是某种随机的，对吧？其实不然。它的概率性在于你不能知道它会说哪个项目是 `probably in`。
 
 > 否则，当它说 `probably in` 时，它会一直说同样的话。
 
@@ -209,11 +209,11 @@ hawk is not in the bloom filter as expected
 
 **相关:**
 
-+   [你会在泰坦尼克号中生存吗？Python 机器学习指南第 1 部分](/2016/07/titanic-machine-learning-guide-part-1.html)
++   你会在泰坦尼克号中生存吗？Python 机器学习指南第一部分
 
-+   [数据科学入门 - Python](/2016/07/getting-started-data-science-python.html)
++   数据科学入门 - Python
 
-+   [美国的下一个话题模型](/2016/07/americas-next-topic-model.html)
++   美国的下一个话题模型
 
 ### 更多相关内容
 

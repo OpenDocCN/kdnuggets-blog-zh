@@ -1,22 +1,22 @@
-# 识别虚假数据科学家的20个问题（带答案）：ChatGPT版，第1部分
+# 识别虚假数据科学家的 20 个问题（带答案）：ChatGPT 版，第一部分
 
-> 原文：[https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
+> 原文：[`www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html`](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-![识别虚假数据科学家的20个问题（带答案）：ChatGPT版，第1部分](../Images/390f4ff1a58d7d3ec8ee90b7bbc26ecd.png)
+![识别虚假数据科学家的 20 个问题（带答案）：ChatGPT 版，第一部分](img/390f4ff1a58d7d3ec8ee90b7bbc26ecd.png)
 
 由 DALL•E 创建的图像
 
-七年前的这个月，KDnuggets 发布了一篇题为 [识别虚假数据科学家的20个问题](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html) 的文章，作者是 Andrew Fogg。接下来一个月，KDnuggets 编辑们在随后的文章 [21个必知的数据科学面试问题及答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html) 中共同回答了这些问题。
+七年前的这个月，KDnuggets 发布了一篇题为 [识别虚假数据科学家的 20 个问题](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html) 的文章，作者是 Andrew Fogg。接下来一个月，KDnuggets 编辑们在随后的文章 [21 个必知的数据科学面试问题及答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html) 中共同回答了这些问题。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -24,13 +24,13 @@
 
 我将明确说明本文中的所有问题答案均由 ChatGPT 提供。请根据这些信息自行判断。
 
-我鼓励读者将这些答案与 [KDnuggets 编辑在2016年提供的答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html) 进行比较，以了解哪些答案更全面，哪些更准确，以及哪些更易读。欢迎在下面的评论中批评特定答案或整个项目。
+我鼓励读者将这些答案与 [KDnuggets 编辑在 2016 年提供的答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html) 进行比较，以了解哪些答案更全面，哪些更准确，以及哪些更易读。欢迎在下面的评论中批评特定答案或整个项目。
 
-现在让我们看看 ChatGPT 在回答以下10个问题时表现如何，这些问题仍然被认为是识别申请你组织的虚假数据科学家的优秀候选题。
+现在让我们看看 ChatGPT 在回答以下 10 个问题时表现如何，这些问题仍然被认为是识别申请你组织的虚假数据科学家的优秀候选题。
 
 **1\. 解释什么是正则化以及它为什么有用。**
 
-正则化是一种在机器学习中用于防止过拟合的技术。过拟合发生在模型对训练数据过度训练时，导致在未见过的数据上表现不佳。正则化是一种通过在损失函数中添加惩罚项来抑制模型中的大权重的方法。这个惩罚项是一个系数乘以权重的大小。通过添加这个项，模型被迫拥有较小的权重，从而有助于减少过拟合并提高模型的泛化能力。两种常见的正则化类型是L1和L2正则化。L1正则化添加的惩罚项与权重的绝对值成正比，而L2正则化添加的惩罚项与权重的平方成正比。
+正则化是一种在机器学习中用于防止过拟合的技术。过拟合发生在模型对训练数据过度训练时，导致在未见过的数据上表现不佳。正则化是一种通过在损失函数中添加惩罚项来抑制模型中的大权重的方法。这个惩罚项是一个系数乘以权重的大小。通过添加这个项，模型被迫拥有较小的权重，从而有助于减少过拟合并提高模型的泛化能力。两种常见的正则化类型是 L1 和 L2 正则化。L1 正则化添加的惩罚项与权重的绝对值成正比，而 L2 正则化添加的惩罚项与权重的平方成正比。
 
 **2\. 你最崇拜哪些数据科学家？哪些创业公司？**
 
@@ -54,23 +54,23 @@
 
 +   Google Brain，这是谷歌的深度学习研究团队。
 
-+   DeepMind，一家成立于2010年9月的英国人工智能公司，2015年被Alphabet Inc收购。
++   DeepMind，一家成立于 2010 年 9 月的英国人工智能公司，2015 年被 Alphabet Inc 收购。
 
 +   Nervana，一家正在构建专用硬件以加速深度学习工作负载的创业公司。
 
-+   NVIDIA，一家专注于图形处理单元（GPU）的公司，在深度学习革命中处于前沿，其GPU优化了深度学习工作负载。
++   NVIDIA，一家专注于图形处理单元（GPU）的公司，在深度学习革命中处于前沿，其 GPU 优化了深度学习工作负载。
 
 **3\. 你会如何验证你创建的模型，以使用多元回归生成定量结果变量的预测模型。**
 
 有几种方法可以验证使用多元回归创建的模型，以预测定量结果变量。一些常见的方法包括：
 
-1.  Holdout方法：这涉及将数据随机分为训练集和测试集，使用训练集来拟合模型，使用测试集来评估模型的性能。
+1.  Holdout 方法：这涉及将数据随机分为训练集和测试集，使用训练集来拟合模型，使用测试集来评估模型的性能。
 
-1.  k折交叉验证：这种方法涉及将数据随机分成k折，在k-1折上训练模型，并使用剩下的一折作为测试集，重复k次并平均结果。
+1.  k 折交叉验证：这种方法涉及将数据随机分成 k 折，在 k-1 折上训练模型，并使用剩下的一折作为测试集，重复 k 次并平均结果。
 
 1.  自助法：该方法涉及重复抽样数据以创建多个“伪样本”，并使用这些样本来拟合和评估模型。
 
-1.  R^2 和调整后的 R^2：这些是统计度量，表示预测变量解释的结果变量方差的比例。
+1.  R² 和调整后的 R²：这些是统计度量，表示预测变量解释的结果变量方差的比例。
 
 1.  均方根误差（RMSE）或平均绝对误差（MAE）：用于衡量预测值与实际值之间的差异。
 
@@ -80,7 +80,7 @@
 
 使用多种方法验证模型很重要，因为每种方法可以揭示模型的不同错误或问题。
 
-**4\. 解释精确度和召回率是什么。它们如何与ROC曲线相关？**
+**4\. 解释精确度和召回率是什么。它们如何与 ROC 曲线相关？**
 
 精确度和召回率是二分类器性能的两个重要指标。
 
@@ -88,9 +88,9 @@
 
 召回率（也称为敏感性或真正正例率）是所有实际正例中真正正例预测的比例。它衡量了分类器识别所有正例的能力。
 
-接收器操作特征（ROC）曲线是分类器性能的图形表示。它将真正正例率（召回率）与假正例率（1-特异性）在不同的分类器阈值下绘制在一起。ROC曲线下面积（AUC）是分类器整体性能的一个衡量标准。
+接收器操作特征（ROC）曲线是分类器性能的图形表示。它将真正正例率（召回率）与假正例率（1-特异性）在不同的分类器阈值下绘制在一起。ROC 曲线下面积（AUC）是分类器整体性能的一个衡量标准。
 
-精确度和召回率与ROC曲线密切相关。一个精确度高、召回率高的分类器将具有高真正正例率和低假正例率，从而在图表的左上角紧贴ROC曲线。而精确度低、召回率低的分类器将具有低真正正例率和高假正例率，其ROC曲线接近对角线。
+精确度和召回率与 ROC 曲线密切相关。一个精确度高、召回率高的分类器将具有高真正正例率和低假正例率，从而在图表的左上角紧贴 ROC 曲线。而精确度低、召回率低的分类器将具有低真正正例率和高假正例率，其 ROC 曲线接近对角线。
 
 在实践中，通常需要在精确度和召回率之间进行权衡，以实现两者之间的平衡。这可以通过调整分类器的阈值来完成，阈值控制真正正例与假正例之间的平衡。更高的阈值会导致更高的精确度但较低的召回率，而较低的阈值会导致较低的精确度但较高的召回率。
 
@@ -154,7 +154,7 @@ RCA 通常包括以下步骤：
 
 **8\. 什么是统计功效？**
 
-统计功效是统计测试在备择假设为真的情况下正确拒绝原假设（即发现效果）的概率。换句话说，它是测试在实际存在差异或效果时检测到的能力。通常表示为0到1之间的一个数字，常用希腊字母β（beta）表示。较高的统计功效意味着测试更有可能发现真实的差异或效果，而较低的统计功效则意味着测试更可能未能发现真实的差异或效果。
+统计功效是统计测试在备择假设为真的情况下正确拒绝原假设（即发现效果）的概率。换句话说，它是测试在实际存在差异或效果时检测到的能力。通常表示为 0 到 1 之间的一个数字，常用希腊字母β（beta）表示。较高的统计功效意味着测试更有可能发现真实的差异或效果，而较低的统计功效则意味着测试更可能未能发现真实的差异或效果。
 
 统计功效受多个因素影响，包括样本大小、显著性水平（alpha）和效果大小。一般而言，增加样本大小、降低显著性水平和增加效果大小将提高测试的统计功效。
 
@@ -178,9 +178,9 @@ RCA 通常包括以下步骤：
 
 是否有更多假阳性或更多假阴性更好取决于具体的背景和分析的期望结果。
 
-假阳性，也称为I型错误，发生在测试或分析错误地表明存在效应或差异时，而实际上并不存在。一般来说，在负面结果（例如，患者没有某种疾病）比正面结果（例如，患者有某种疾病但未接受治疗）后果更严重的情况下，假阳性被认为是较不理想的。
+假阳性，也称为 I 型错误，发生在测试或分析错误地表明存在效应或差异时，而实际上并不存在。一般来说，在负面结果（例如，患者没有某种疾病）比正面结果（例如，患者有某种疾病但未接受治疗）后果更严重的情况下，假阳性被认为是较不理想的。
 
-假阴性，也称为II型错误，发生在测试或分析错误地表明某种效应或差异不存在时，而实际上它确实存在。一般来说，假阴性在阳性结果（例如，患者有疾病并接受治疗）比阴性结果（例如，患者没有疾病但未接受治疗）后果更严重的情况下被认为是不理想的。
+假阴性，也称为 II 型错误，发生在测试或分析错误地表明某种效应或差异不存在时，而实际上它确实存在。一般来说，假阴性在阳性结果（例如，患者有疾病并接受治疗）比阴性结果（例如，患者没有疾病但未接受治疗）后果更严重的情况下被认为是不理想的。
 
 例如，在医疗背景下，假阴性可能导致患者未能接受严重疾病的治疗，而假阳性可能导致不必要的治疗及其相关风险。另一方面，在安全背景下，假阴性可能导致攻击者突破安全防线，而假阳性可能导致合法用户的不便。
 
@@ -188,20 +188,20 @@ RCA 通常包括以下步骤：
 
 总之，过多的假阳性或过多的假阴性的选择取决于具体的背景和期望的结果，考虑每种错误的成本和收益对于做出明智的决策是重要的。
 
-这是[原始发布](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html)中的20个问题的前半部分。我们将在接下来的几周内为你带来后半部分，请保持关注。
+这是[原始发布](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html)中的 20 个问题的前半部分。我们将在接下来的几周内为你带来后半部分，请保持关注。
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** （[**@mattmayo13**](https://twitter.com/mattmayo13)）是数据科学家和KDnuggets的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过editor1 at kdnuggets[dot]com联系他。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** （[**@mattmayo13**](https://twitter.com/mattmayo13)）是数据科学家和 KDnuggets 的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过 editor1 at kdnuggets[dot]com 联系他。
 
 ### 更多相关话题
 
-+   [20个问题（附答案）识别虚假的数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
++   [20 个问题（附答案）识别虚假的数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
-+   [7个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
++   [7 个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
 
-+   [5个Python面试问题及答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
++   [5 个 Python 面试问题及答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
 
 +   [假装直到成功：生成逼真的合成客户数据集](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)
 
-+   [25个高级SQL面试问题，针对数据科学家](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
++   [25 个高级 SQL 面试问题，针对数据科学家](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
 
 +   [《使用 Python 深度学习：第二版》由**弗朗索瓦·肖莱**编著](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)

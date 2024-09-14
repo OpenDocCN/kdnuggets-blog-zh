@@ -1,8 +1,8 @@
 # 如何使用 Hugging Face 的数据集库进行高效的数据加载
 
-> 原文：[https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)
+> 原文：[`www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading`](https://www.kdnuggets.com/how-to-use-hugging-faces-datasets-library-for-efficient-data-loading)
 
-![如何使用 Hugging Face 的数据集库进行高效的数据加载](../Images/181c3f2e2e35e4967f6a643cedcd22f7.png)
+![如何使用 Hugging Face 的数据集库进行高效的数据加载](img/181c3f2e2e35e4967f6a643cedcd22f7.png)
 
 图片由编辑 | Midjourney 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -48,7 +48,7 @@ data = load_dataset("jeffnyman/emotions")
 
 如果您想加载在浏览 Hugging Face 网站时遇到的数据集，并且不确定正确的命名约定是什么，请点击数据集名称旁边的“复制”图标，如下所示：
 
-![](../Images/4bbac1454b4283697f5b6dc478ff2721.png)
+![](img/4bbac1454b4283697f5b6dc478ff2721.png)
 
 数据集被加载到一个 **DatasetDict** 对象中，该对象包含三个子集或折叠：训练集、验证集和测试集。
 
@@ -139,7 +139,7 @@ penguins = dataset["train"].to_pandas()
 penguins.head()
 ```
 
-![XXX](../Images/35c613f0ce5168adfa6e8729d1699eb9.png)
+![XXX](img/35c613f0ce5168adfa6e8729d1699eb9.png)
 
 现在你已经学会了如何使用 Hugging Face 的专用库高效加载数据集，下一步是通过使用大语言模型（LLMs）来利用它们。
 
@@ -157,4 +157,4 @@ penguins.head()
 
 +   [一个开发 Hugging Face 用于客户数据建模的社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)
 
-+   [前10大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)
++   [前 10 大机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)

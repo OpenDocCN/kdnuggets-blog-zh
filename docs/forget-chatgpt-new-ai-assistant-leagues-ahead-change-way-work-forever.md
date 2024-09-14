@@ -1,8 +1,8 @@
 # 忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式
 
-> 原文：[https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
+> 原文：[`www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html`](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
 
-![忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式](../Images/c193dac4bba5c3a03bc7a04ebc968d4d.png)
+![忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式](img/c193dac4bba5c3a03bc7a04ebc968d4d.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 [Poe](https://poe.com/) 是一个聊天机器人服务，允许你使用最先进的模型，如 Claude +、GPT-3.5-Turbo、GPT-4、LlaMA 2、PaLM 和所有新型 LLM 模型。此外，它将使用户能够使用初始提示创建和共享可定制的聊天机器人。Poe 速度快，易于使用，并提供准确的答案。
 
-![忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式](../Images/179b506c9357552a48904a373bb7cdbb.png)
+![忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式](img/179b506c9357552a48904a373bb7cdbb.png)
 
 来自 Poe 的图像
 
@@ -34,7 +34,7 @@
 
 # Poe 的特点
 
-![忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式](../Images/93041e625915f3e7a37da3dbfe577d1b.png)
+![忘掉 ChatGPT，这款全新的 AI 助手遥遥领先，将永远改变你的工作方式](img/93041e625915f3e7a37da3dbfe577d1b.png)
 
 来自 Poe 的图像
 
@@ -48,43 +48,43 @@
 
 1.  **自定义聊天机器人：** 你可以根据个人偏好通过提供初始提示来创建可定制的聊天机器人。
 
-1.  **社区聊天机器人：** 你可以访问和探索其他Poe用户为特定任务创建的聊天机器人。
+1.  **社区聊天机器人：** 你可以访问和探索其他 Poe 用户为特定任务创建的聊天机器人。
 
-1.  **简洁性：** 注册和开始使用Poe非常简单明了。
+1.  **简洁性：** 注册和开始使用 Poe 非常简单明了。
 
-1.  **高级访问：** 付费订阅可以让你访问更多高级模型，如GPT-4和Claude。
+1.  **高级访问：** 付费订阅可以让你访问更多高级模型，如 GPT-4 和 Claude。
 
-1.  **应用程序：** Poe既有Android版也有iOS版。
+1.  **应用程序：** Poe 既有 Android 版也有 iOS 版。
 
-1.  **稳定性：** 它不会崩溃或出现bug。
+1.  **稳定性：** 它不会崩溃或出现 bug。
 
 1.  **易用性：** 清除上下文并开始新的聊天非常简单。
 
 # 我如何用于数据科学任务
 
-你需要了解这些生成型AI聊天机器人是你的助手。它们可以帮助你完成各种任务，从写文章到构建端到端的数据科学项目。
+你需要了解这些生成型 AI 聊天机器人是你的助手。它们可以帮助你完成各种任务，从写文章到构建端到端的数据科学项目。
 
-我通常使用Poe来编写和创建内容结构。如果我不喜欢Claude-Instant的回答，我会询问ChatGPT或Google PaLM。这使我能够选择最佳回复。此外，我还使用Poe来：
+我通常使用 Poe 来编写和创建内容结构。如果我不喜欢 Claude-Instant 的回答，我会询问 ChatGPT 或 Google PaLM。这使我能够选择最佳回复。此外，我还使用 Poe 来：
 
-+   **代码生成：** 我使用Poe生成Python、R和SQL代码，用于特定任务，如清理数据、执行统计测试和构建机器学习模型。它帮助调试我的代码，甚至生成完整的代码示例来构建网页应用。
++   **代码生成：** 我使用 Poe 生成 Python、R 和 SQL 代码，用于特定任务，如清理数据、执行统计测试和构建机器学习模型。它帮助调试我的代码，甚至生成完整的代码示例来构建网页应用。
 
-+   **内容写作：** Poe帮助改善我的博客文章和教程的语法和结构。它还总结了长文档，并生成更好的标题和摘录。
++   **内容写作：** Poe 帮助改善我的博客文章和教程的语法和结构。它还总结了长文档，并生成更好的标题和摘录。
 
-+   **技术学习：** 我请Poe解释新的数据科学技术和统计测试，帮助我学习新技能。
++   **技术学习：** 我请 Poe 解释新的数据科学技术和统计测试，帮助我学习新技能。
 
-+   **数据分析和探索：** Poe生成代码以清理、探索、分析和建模我的数据。它帮助验证数据质量并识别问题。
++   **数据分析和探索：** Poe 生成代码以清理、探索、分析和建模我的数据。它帮助验证数据质量并识别问题。
 
-+   **翻译：** 我利用Poe进行代码和文本的翻译。
++   **翻译：** 我利用 Poe 进行代码和文本的翻译。
 
-总的来说，Poe是一个有用的助手，可以完成许多重复的任务，从而释放出我的时间用于更高层次的工作和决策。它显著提高了我作为数据科学家的生产力。
+总的来说，Poe 是一个有用的助手，可以完成许多重复的任务，从而释放出我的时间用于更高层次的工作和决策。它显著提高了我作为数据科学家的生产力。
 
 # 结束语
 
-让我们开始使用它，感受不同。我已经使用Poe Free三个月了，并且不打算回到官方的ChatGPT或Bard。如果我想从ChatGPT生成回复，我会在Poe中切换模型。就是这么简单快捷。
+让我们开始使用它，感受不同。我已经使用 Poe Free 三个月了，并且不打算回到官方的 ChatGPT 或 Bard。如果我想从 ChatGPT 生成回复，我会在 Poe 中切换模型。就是这么简单快捷。
 
-如果你有兴趣了解我如何利用其他AI工具来提升我的数据科学和内容创作技能，请在评论中告诉我，我将来会写关于这些工具的文章。
+如果你有兴趣了解我如何利用其他 AI 工具来提升我的数据科学和内容创作技能，请在评论中告诉我，我将来会写关于这些工具的文章。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/)) 是一位认证的数据科学专家，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个AI产品，帮助那些与心理健康问题斗争的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/)) 是一位认证的数据科学专家，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个 AI 产品，帮助那些与心理健康问题斗争的学生。
 
 ### 了解更多相关信息
 

@@ -1,8 +1,8 @@
 # 用 Python 图表画廊制作惊人的可视化
 
-> 原文：[https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)
+> 原文：[`www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html`](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)
 
-![用 Python 图表画廊制作惊人的可视化](../Images/96ec0eba1b4a78592f9f813145fa0d9f.png)
+![用 Python 图表画廊制作惊人的可视化](img/96ec0eba1b4a78592f9f813145fa0d9f.png)
 
 截图来自 [Python 图表画廊](https://www.python-graph-gallery.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -54,19 +54,19 @@
 
 ## 动态气泡图
 
-![用 Python 图表画廊制作惊人的可视化](../Images/346f4353388ef86aac5279a63ea6dfab.png)
+![用 Python 图表画廊制作惊人的可视化](img/346f4353388ef86aac5279a63ea6dfab.png)
 
 ## 基本圆形条形图
 
-![用 Python 图表画廊制作惊人的可视化](../Images/db9204d114b89fb22069188eb9d7a250.png)
+![用 Python 图表画廊制作惊人的可视化](img/db9204d114b89fb22069188eb9d7a250.png)
 
 ## 和弦图
 
-![用 Python 图表画廊制作惊人的可视化](../Images/e9f8c170ab1077f761070460bb31d785.png)
+![用 Python 图表画廊制作惊人的可视化](img/e9f8c170ab1077f761070460bb31d785.png)
 
 ## 雷达图
 
-![用 Python 图表画廊制作惊人的可视化](../Images/d3b4bfa733633ad7cf764abd6582a8bb.png)
+![用 Python 图表画廊制作惊人的可视化](img/d3b4bfa733633ad7cf764abd6582a8bb.png)
 
 # 结论
 

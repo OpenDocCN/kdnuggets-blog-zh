@@ -1,14 +1,14 @@
-# Tensorflow中的多任务学习：第一部分
+# Tensorflow 中的多任务学习：第一部分
 
-> 原文：[https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2](https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2)
+> 原文：[`www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2`](https://www.kdnuggets.com/2016/07/multi-task-learning-tensorflow-part-1.html/2)
 
 ### 交替训练
 
-第一个解决方案特别适合于你会有一批任务1的数据，然后是一批任务2的数据的情况。
+第一个解决方案特别适合于你会有一批任务 1 的数据，然后是一批任务 2 的数据的情况。
 
-记住，Tensorflow会自动确定操作所需的计算，并仅进行这些计算。这意味着**如果我们只在一个任务上定义优化器，它只会训练计算该任务所需的参数——并且不会动其他参数**。由于任务1仅依赖于任务1和共享层，任务2层将不会被触及。让我们画另一个图示，显示每个任务末尾的期望优化器。
+记住，Tensorflow 会自动确定操作所需的计算，并仅进行这些计算。这意味着**如果我们只在一个任务上定义优化器，它只会训练计算该任务所需的参数——并且不会动其他参数**。由于任务 1 仅依赖于任务 1 和共享层，任务 2 层将不会被触及。让我们画另一个图示，显示每个任务末尾的期望优化器。
 
-![带有优化器的图表](../Images/5bd03318ff44c0d9530716319655d482.png)
+![带有优化器的图表](img/5bd03318ff44c0d9530716319655d482.png)
 
 ```py
 #  GRAPH CODE
@@ -98,7 +98,7 @@ with tf.Session() as session:
 
 当你有一个包含多个标签的数据集时，你真正需要的是同时训练这些任务。问题是，如何保持任务特定函数的独立性？答案出奇简单 - 你只需将各个任务的损失函数相加，并在此基础上进行优化。下面是一个展示可以联合训练的网络的图示，附有相应的代码：
 
-![联合训练](../Images/7e111a03e0943c04ebd6be7be88209f6.png)
+![联合训练](img/7e111a03e0943c04ebd6be7be88209f6.png)
 
 ```py
 #  GRAPH CODE
@@ -172,21 +172,21 @@ with tf.Session() as session:
 
 **相关：**
 
-+   [TensorFlow 中的递归网络介绍](/2016/05/intro-recurrent-networks-tensorflow.html)
++   TensorFlow 中的递归网络介绍
 
-+   [TensorFlow 的优缺点](./2016/05/good-bad-ugly-tensorflow.html)
++   TensorFlow 的优缺点
 
-+   [Scikit Flow：使用 TensorFlow 和 Scikit-learn 轻松深度学习](/2016/02/scikit-flow-easy-deep-learning-tensorflow-scikit-learn.html)
++   Scikit Flow：使用 TensorFlow 和 Scikit-learn 轻松深度学习
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

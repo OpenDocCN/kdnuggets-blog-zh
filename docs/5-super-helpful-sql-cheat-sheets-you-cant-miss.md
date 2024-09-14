@@ -1,8 +1,8 @@
 # 5 个你不能错过的超级有用的 SQL 备忘单！
 
-> 原文：[https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
+> 原文：[`www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss`](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
 
-![5 个你不能错过的超级有用的 SQL 备忘单！](../Images/47d6ec83795c45ff448fd2909fe950f3.png)
+![5 个你不能错过的超级有用的 SQL 备忘单！](img/47d6ec83795c45ff448fd2909fe950f3.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-vector/hand-drawn-flat-design-sql-illustration_21901976.htm#query=SQL%20learn&position=8&from_view=search&track=ais&uuid=d05b072d-227f-463a-878c-24260b062fd4)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -56,7 +56,7 @@
 
 # 2\. 数据准备与 SQL
 
-对于任何数据科学项目来说，数据准备都是非常重要的。[Stan Pugsley 为 KDnuggets 提供的《数据准备与 SQL》](/2021/05/data-preparation-sql-cheat-sheet.html) 备忘单将帮助你回顾关键的数据准备技巧。
+对于任何数据科学项目来说，数据准备都是非常重要的。Stan Pugsley 为 KDnuggets 提供的《数据准备与 SQL》 备忘单将帮助你回顾关键的数据准备技巧。
 
 你可以回顾如何使用 SQL 执行以下数据准备任务：
 
@@ -74,7 +74,7 @@
 
 +   拆分数据集
 
-链接: [数据准备与 SQL 备忘单 – KDnuggets](/2021/05/data-preparation-sql-cheat-sheet.html)
+链接: 数据准备与 SQL 备忘单 – KDnuggets
 
 # 3\. SQL 连接
 
@@ -160,20 +160,20 @@ DataCamp 的[SQL 连接](https://www.datacamp.com/cheat-sheet/sql-joins-cheat-sh
 
 无论你是在工作中使用 SQL、学习 SQL，还是在下次面试前需要快速复习，我相信这些备忘单会帮助你回顾所需内容。
 
-但要精通 SQL，实践与学习同样重要。事实上，实践应该是学习过程的*一部分*。所以，如果你正在寻找好的 SQL 实践平台，可以查看汇总的[7 个最佳 SQL 实践平台](/2023/01/7-best-platforms-practice-sql.html)。
+但要精通 SQL，实践与学习同样重要。事实上，实践应该是学习过程的*一部分*。所以，如果你正在寻找好的 SQL 实践平台，可以查看汇总的 7 个最佳 SQL 实践平台。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，学习并与开发者社区分享她的知识。Bala还制作了引人入胜的资源概述和编程教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，学习并与开发者社区分享她的知识。Bala 还制作了引人入胜的资源概述和编程教程。
 
 ### 更多相关内容
 
-+   [7张你需要的超级备忘单来征服机器学习面试](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
++   [7 张你需要的超级备忘单来征服机器学习面试](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
 
-+   [掌握数据科学的5张超级备忘单](https://www.kdnuggets.com/5-super-cheat-sheets-to-master-data-science)
++   [掌握数据科学的 5 张超级备忘单](https://www.kdnuggets.com/5-super-cheat-sheets-to-master-data-science)
 
-+   [2024年你不能错过的5个AI播客](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
++   [2024 年你不能错过的 5 个 AI 播客](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
 
-+   [7个你不能错过的机器学习算法](https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss)
++   [7 个你不能错过的机器学习算法](https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss)
 
-+   [10张你需要的备忘单来征服数据科学面试](https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html)
++   [10 张你需要的备忘单来征服数据科学面试](https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html)
 
-+   [超级巴德：可以做一切且做得更好的AI](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)
++   [超级巴德：可以做一切且做得更好的 AI](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)

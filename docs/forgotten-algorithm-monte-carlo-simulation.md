@@ -1,8 +1,8 @@
 # 被遗忘的算法
 
-> 原文：[https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html](https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html)
+> 原文：[`www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html`](https://www.kdnuggets.com/2020/02/forgotten-algorithm-monte-carlo-simulation.html)
 
-[评论](#comments)
+评论
 
 **由 [Ian Xiao](https://www.linkedin.com/in/ianxiao/)，Dessa 的参与负责人**
 
@@ -16,11 +16,11 @@
 
 在近期的机器学习（ML）崛起中，监督学习和无监督学习算法，如使用 [深度学习](https://machinelearningmastery.com/what-is-deep-learning/) 的分类和使用 KNN 的聚类，得到了大多数关注。当这些算法获得热情社区的高度赞扬时，一些同样强大而优雅的技术却在角落里静静地等待。它的名字是 **蒙特卡洛** — 这个在原子物理学、现代金融和赌博中被遗忘而不应得的英雄（或者说是恶棍，这取决于你对这些问题的看法）。
 
-*注意：为了简洁，我将监督学习和无监督学习方法称为“ML算法”，将蒙特卡洛方法称为“模拟”。*
+*注意：为了简洁，我将监督学习和无监督学习方法称为“ML 算法”，将蒙特卡洛方法称为“模拟”。*
 
 ### 简短历史
 
-[斯坦尼斯瓦夫·乌拉姆](https://en.wikipedia.org/wiki/Stanislaw_Ulam)、[恩里科·费米](https://en.wikipedia.org/wiki/Enrico_Fermi) 和 [约翰·冯·诺伊曼](https://en.wikipedia.org/wiki/John_von_Neumann) — 洛斯阿拉莫斯的天才们 — 在1930年代发明、改进并推广了蒙特卡洛方法，目的并不那么高尚 *(提示：不是为了原子弹)*。观看视频了解更多。
+[斯坦尼斯瓦夫·乌拉姆](https://en.wikipedia.org/wiki/Stanislaw_Ulam)、[恩里科·费米](https://en.wikipedia.org/wiki/Enrico_Fermi) 和 [约翰·冯·诺伊曼](https://en.wikipedia.org/wiki/John_von_Neumann) — 洛斯阿拉莫斯的天才们 — 在 1930 年代发明、改进并推广了蒙特卡洛方法，目的并不那么高尚 *(提示：不是为了原子弹)*。观看视频了解更多。
 
 蒙特卡洛模拟简短历史（YouTube）
 
@@ -58,9 +58,9 @@
 
 ### 如何设计蒙特卡洛仿真？
 
-要创建一个蒙特卡洛仿真，至少需要遵循一个3步过程：
+要创建一个蒙特卡洛仿真，至少需要遵循一个 3 步过程：
 
-![图像](../Images/7cfa3ac902ecabf6ad63a7b51e6ec576.png)
+![图像](img/7cfa3ac902ecabf6ad63a7b51e6ec576.png)
 
 仿真过程，作者分析
 
@@ -72,21 +72,21 @@
 
 在**欢迎页面**上，你可以尝试各种输入设置，并观察根据你应用的函数，结果如何变化。
 
-![图像](../Images/d6aa3e2960ecb980663c0431c87d3809.png)
+![图像](img/d6aa3e2960ecb980663c0431c87d3809.png)
 
 [Yet Another Simulator](https://yet-another-sim.herokuapp.com/)的欢迎页面，作者的工作
 
-除了基本示例外，该工具还包括4个案例研究，讨论了各种设计技术，如影响图、敏感性分析、优化和将机器学习与仿真相结合。
+除了基本示例外，该工具还包括 4 个案例研究，讨论了各种设计技术，如影响图、敏感性分析、优化和将机器学习与仿真相结合。
 
-例如，在**CMO示例**中，我讨论了如何使用影响图来帮助设计一个模拟以解决广告预算分配问题。
+例如，在**CMO 示例**中，我讨论了如何使用影响图来帮助设计一个模拟以解决广告预算分配问题。
 
-![图](../Images/170a8bada18519a92027c156df36e9da.png)
+![图](img/170a8bada18519a92027c156df36e9da.png)
 
 影响图，作者的工作
 
-最终，你将踏入数据科学家的角色，建议首席营销官（CMO）。你的目标是帮助CMO决定广告支出金额，探索各种情景，并提出在不同不确定性下最大化回报的策略。
+最终，你将踏入数据科学家的角色，建议首席营销官（CMO）。你的目标是帮助 CMO 决定广告支出金额，探索各种情景，并提出在不同不确定性下最大化回报的策略。
 
-![图](../Images/97f89c1ef8e9b93adfbdfce136f81e8a.png)
+![图](img/97f89c1ef8e9b93adfbdfce136f81e8a.png)
 
 广告预算分配，作者的工作
 
@@ -110,9 +110,9 @@
 
 ### 如果你喜欢这篇文章，你可能也会喜欢这些：
 
-[**12小时机器学习挑战**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)
+[**12 小时机器学习挑战**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)
 
-如何使用Streamlit和DevOps工具构建和部署机器学习应用
+如何使用 Streamlit 和 DevOps 工具构建和部署机器学习应用
 
 [**机器学习与敏捷的注定失败的结合**](https://towardsdatascience.com/a-doomed-marriage-of-ml-and-agile-b91b95b37e35)
 
@@ -152,15 +152,15 @@
 
 ### 参考资料
 
-**决策树的历史** — [http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf](http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf)
+**决策树的历史** — [`pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf`](http://pages.stat.wisc.edu/~loh/treeprogs/guide/LohISI14.pdf)
 
-**聚类的历史** — [https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15](https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15)
+**聚类的历史** — [`link.springer.com/chapter/10.1007/978-3-540-73560-1_15`](https://link.springer.com/chapter/10.1007/978-3-540-73560-1_15)
 
-**将仿真与机器学习结合的时机** — [https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning](https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning)
+**将仿真与机器学习结合的时机** — [`www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning`](https://www.benjamin-schumann.com/blog/2018/5/7/time-to-marry-simulation-models-and-machine-learning)
 
-**仿真的分类** — [https://gamingthepast.net/theory-practice/simulation-design-guide/](https://gamingthepast.net/theory-practice/simulation-design-guide/)
+**仿真的分类** — [`gamingthepast.net/theory-practice/simulation-design-guide/`](https://gamingthepast.net/theory-practice/simulation-design-guide/)
 
-**蒙特卡洛方法及其工作原理** — [https://www.palisade.com/risk/monte_carlo_simulation.asp](https://www.palisade.com/risk/monte_carlo_simulation.asp)
+**蒙特卡洛方法及其工作原理** — [`www.palisade.com/risk/monte_carlo_simulation.asp`](https://www.palisade.com/risk/monte_carlo_simulation.asp)
 
 **简介：[Ian Xiao](https://www.linkedin.com/in/ianxiao/)** 是 Dessa 的参与负责人，负责在企业中部署机器学习。他领导业务和技术团队部署机器学习解决方案，并为 F100 企业改进市场营销和销售。
 
@@ -168,21 +168,21 @@
 
 **相关：**
 
-+   [数据科学很无聊（第1部分）](/2019/09/data-science-boring-part-1.html)
++   数据科学很无聊（第一部分）
 
-+   [我们创建了一个懒惰的 AI](/2020/01/created-lazy-ai.html)
++   我们创建了一个懒惰的 AI
 
-+   [12小时机器学习挑战：使用 Streamlit 和 DevOps 工具构建并部署应用](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)
++   12 小时机器学习挑战：使用 Streamlit 和 DevOps 工具构建并部署应用
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
@@ -198,4 +198,4 @@
 
 +   [为数据集选择正确的聚类算法](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)
 
-+   [机器学习中的DBSCAN聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)
++   [机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)

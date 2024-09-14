@@ -1,8 +1,8 @@
 # 使用主成分分析（PCA）进行降维
 
-> 原文：[https://www.kdnuggets.com/2020/05/dimensionality-reduction-principal-component-analysis.html](https://www.kdnuggets.com/2020/05/dimensionality-reduction-principal-component-analysis.html)
+> 原文：[`www.kdnuggets.com/2020/05/dimensionality-reduction-principal-component-analysis.html`](https://www.kdnuggets.com/2020/05/dimensionality-reduction-principal-component-analysis.html)
 
-[评论](#comments)![图](../Images/794e2a70f5ae4d67b0e90c08f32dd767.png)
+评论![图](img/794e2a70f5ae4d67b0e90c08f32dd767.png)
 
 [致谢](https://medium.com/datadriveninvestor/principal-components-analysis-pca-71cc9d43d9fb)
 
@@ -18,9 +18,9 @@
 
 **降维**是一组技术，研究如何在保留最重要信息的同时缩小数据的大小，并进一步消除维度诅咒。它在分类和聚类问题的性能中发挥了重要作用。
 
-![图](../Images/7d40c39e40111d5c0194acdbebff0f1a.png)
+![图](img/7d40c39e40111d5c0194acdbebff0f1a.png)
 
-[该图示例展示了一个3-D特征空间被分割成两个1-D特征空间，之后如果发现相关性，特征数量可以进一步减少。](https://www.geeksforgeeks.org/dimensionality-reduction/)
+[该图示例展示了一个 3-D 特征空间被分割成两个 1-D 特征空间，之后如果发现相关性，特征数量可以进一步减少。](https://www.geeksforgeeks.org/dimensionality-reduction/)
 
 用于降维的各种技术包括：
 
@@ -48,23 +48,23 @@
 
 在下图中，数据在二维空间中沿红色线的方差最大。
 
-![](../Images/ee73debf16c2275f7e1c520259589717.png)
+![](img/ee73debf16c2275f7e1c520259589717.png)
 
 ### 直观理解
 
-让我们对PCA有一个直观的理解。假设你希望根据食品的营养成分区分不同的食物项目。哪个变量将是区分食物项目的好选择？如果你选择一个在不同食物项目之间变化很大的变量，你将能够很好地区分它们。如果所选变量在食物项目中几乎相同，你的工作将会更加困难。如果数据中没有可以很好区分食物项目的变量怎么办？我们可以通过原始变量的线性组合创建一个人工变量，如
+让我们对 PCA 有一个直观的理解。假设你希望根据食品的营养成分区分不同的食物项目。哪个变量将是区分食物项目的好选择？如果你选择一个在不同食物项目之间变化很大的变量，你将能够很好地区分它们。如果所选变量在食物项目中几乎相同，你的工作将会更加困难。如果数据中没有可以很好区分食物项目的变量怎么办？我们可以通过原始变量的线性组合创建一个人工变量，如
 
 `New_Var = 4*Var1 - 4*Var2 + 5*Var3`。
 
-这就是PCA的本质，它找到原始变量的最佳线性组合，使得新变量的方差或扩展最大。
+这就是 PCA 的本质，它找到原始变量的最佳线性组合，使得新变量的方差或扩展最大。
 
 假设我们要将二维数据点的表示转换为一维表示。那么我们将尝试找一条直线，并将数据点投影到这条直线上（直线是一维的）。选择直线有许多可能性。
 
-![图示](../Images/529937a1420cac8bde037badbfafa5ba.png)
+![图示](img/529937a1420cac8bde037badbfafa5ba.png)
 
-[数据集](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)![图示](../Images/f5d5bc755632bf9f9d2ce18dd2988a39.png)
+[数据集](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)![图示](img/f5d5bc755632bf9f9d2ce18dd2988a39.png)
 
-[PCA的实际应用](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)
+[PCA 的实际应用](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)
 
 假设品红色的线将是我们的新维度。
 
@@ -76,7 +76,7 @@
 
 > 主成分本质上是原始变量的线性组合，这些组合中的权重向量实际上是找到的特征向量，而这些特征向量又满足最小二乘原则。
 
-幸运的是，得益于线性代数，我们不必为主成分分析（PCA）付出太多汗水。线性代数中的特征值分解和奇异值分解（SVD）是PCA中用于降维的两个主要过程。
+幸运的是，得益于线性代数，我们不必为主成分分析（PCA）付出太多汗水。线性代数中的特征值分解和奇异值分解（SVD）是 PCA 中用于降维的两个主要过程。
 
 ### 特征值分解
 
@@ -94,7 +94,7 @@
 
 简而言之，矩阵 `**A**` 对向量 `**v**` 的线性变换具有相同的效果，即按因子 `????` 缩放向量。请注意，对于 `**m*n**` 非方阵 **A**（m ≠ n），`**A.v**` 是一个 m 维向量，但 `????.v` 是一个 n 维向量，即没有定义特征值和特征向量。如果你想深入了解数学，[请查看这个](http://fourier.eng.hmc.edu/e176/lectures/algebra/node9.html)。
 
-![图](../Images/92eb12576988649be276033fd927146e.png)
+![图](img/92eb12576988649be276033fd927146e.png)
 
 [特征值分解](https://guzintamath.com/textsavvy/2019/02/02/eigenvalue-decomposition/)
 
@@ -106,13 +106,13 @@
 
 奇异值分解是一种将矩阵分解为三个其他矩阵的方法。
 
-![图](../Images/d36700e54ef763f98ee3b1cbad9a8c36.png)
+![图](img/d36700e54ef763f98ee3b1cbad9a8c36.png)
 
 [SVD](https://blog.paperspace.com/dimension-reduction-with-principal-component-analysis/)
 
 从数学上讲，奇异值分解表示为：
 
-![](../Images/7fae8befbd0ec05bf24083e0017af212.png)
+![](img/7fae8befbd0ec05bf24083e0017af212.png)
 
 其中：
 
@@ -124,7 +124,7 @@
 
 +   *V* 是一个 *n* × *n* 正交矩阵
 
-如图所示，SVD产生了三个矩阵U、S和V。U和V是正交矩阵，其列分别表示AAT和ATA的特征向量。矩阵S是对角矩阵，对角线上的值称为奇异值。每个奇异值是对应特征值的平方根。
+如图所示，SVD 产生了三个矩阵 U、S 和 V。U 和 V 是正交矩阵，其列分别表示 AAT 和 ATA 的特征向量。矩阵 S 是对角矩阵，对角线上的值称为奇异值。每个奇异值是对应特征值的平方根。
 
 **降维如何适应这些数学方程？**
 
@@ -146,17 +146,17 @@
 
 从碎石图中，我们可以读取添加主成分时数据中方差的解释百分比。
 
-它在y轴上显示特征值，在x轴上显示因子数量。它总是显示一个向下的曲线。曲线斜率趋于平缓的点（“肘部”）表示因子的数量。
+它在 y 轴上显示特征值，在 x 轴上显示因子数量。它总是显示一个向下的曲线。曲线斜率趋于平缓的点（“肘部”）表示因子的数量。
 
-![Figure](../Images/dead94de468da0f20315d549a33a011b.png)
+![Figure](img/dead94de468da0f20315d549a33a011b.png)
 
 [碎石图](https://www.stata.com/features/overview/principal-components/)
 
-例如，在上图中的碎石图中，急剧弯曲（肘部）出现在4处。因此，主轴的数量应该是4。
+例如，在上图中的碎石图中，急剧弯曲（肘部）出现在 4 处。因此，主轴的数量应该是 4。
 
-### Python中从零开始的主成分分析（PCA）
+### Python 中从零开始的主成分分析（PCA）
 
-下面的例子定义了一个小的3×2矩阵，对矩阵中的数据进行中心化，计算中心化数据的协方差矩阵，然后对协方差矩阵进行特征值分解。特征向量和特征值被作为主成分和奇异值，最终用来将原始数据投影到新的轴上。
+下面的例子定义了一个小的 3×2 矩阵，对矩阵中的数据进行中心化，计算中心化数据的协方差矩阵，然后对协方差矩阵进行特征值分解。特征向量和特征值被作为主成分和奇异值，最终用来将原始数据投影到新的轴上。
 
 ```py
 Output:original Matrix:  [[ 5  6]  [ 8 10]  [12 18]]Covariance Matrix:  [[12.33333333 21.33333333]  [21.33333333 37.33333333]]Eigen vectors:  [[-0.86762506 -0.49721902]  [ 0.49721902 -0.86762506]]Eigen values:  [ 0.10761573 49.55905094]Projected data: [[ 0.24024879  6.28473039]  [-0.37375033  1.32257309]  [ 0.13350154 -7.60730348]]
@@ -164,9 +164,9 @@ Output:original Matrix:  [[ 5  6]  [ 8 10]  [12 18]]Covariance Matrix:  [[12.333
 
 ### 结论
 
-尽管PCA提供了很高的有效性，但如果变量的数量很大，就很难解释主成分。PCA最适用于变量之间具有线性关系的情况。此外，PCA对大离群值比较敏感。
+尽管 PCA 提供了很高的有效性，但如果变量的数量很大，就很难解释主成分。PCA 最适用于变量之间具有线性关系的情况。此外，PCA 对大离群值比较敏感。
 
-主成分分析（PCA）是一种古老的方法，并且已经得到了充分的研究。基础PCA有许多扩展版本，例如鲁棒PCA、核PCA、增量PCA等，这些扩展版本解决了其不足之处。通过这篇文章，我们对PCA进行了基本且直观的理解。我们讨论了与PCA实施相关的一些重要概念。
+主成分分析（PCA）是一种古老的方法，并且已经得到了充分的研究。基础 PCA 有许多扩展版本，例如鲁棒 PCA、核 PCA、增量 PCA 等，这些扩展版本解决了其不足之处。通过这篇文章，我们对 PCA 进行了基本且直观的理解。我们讨论了与 PCA 实施相关的一些重要概念。
 
 好了，这篇文章就到此为止，希望大家喜欢阅读，如果有所帮助我会很高兴。欢迎在评论区分享你的意见/想法/反馈。
 
@@ -178,27 +178,27 @@ Output:original Matrix:  [[ 5  6]  [ 8 10]  [12 18]]Covariance Matrix:  [[12.333
 
 **相关内容：**
 
-+   [Python中的稀疏矩阵表示](/2020/05/sparse-matrix-representation-python.html)
++   Python 中的稀疏矩阵表示
 
-+   [机器学习模型的超参数优化](/2020/05/hyperparameter-optimization-machine-learning-models.html)
++   机器学习模型的超参数优化
 
-+   [掌握中级机器学习的7个步骤：2019版](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)
++   掌握中级机器学习的 7 个步骤：2019 版
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [Scikit-Learn中的主成分分析（PCA）](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
++   [Scikit-Learn 中的主成分分析（PCA）](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
 
 +   [数据科学中的降维技术](https://www.kdnuggets.com/2022/09/dimensionality-reduction-techniques-data-science.html)
 
@@ -206,6 +206,6 @@ Output:original Matrix:  [[ 5  6]  [ 8 10]  [12 18]]Covariance Matrix:  [[12.333
 
 +   [市场数据与新闻：时间序列分析](https://www.kdnuggets.com/2022/06/market-data-news-time-series-analysis.html)
 
-+   [最佳Python课程：分析总结](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)
++   [最佳 Python 课程：分析总结](https://www.kdnuggets.com/2022/01/best-python-courses-analysis-summary.html)
 
-+   [机器学习的甜蜜点：NLP和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)
++   [机器学习的甜蜜点：NLP 和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)

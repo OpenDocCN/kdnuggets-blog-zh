@@ -1,10 +1,10 @@
 # 机器学习中的偏差全都不好吗？
 
-> 原文：[https://www.kdnuggets.com/2019/07/bias-machine-learning-bad.html](https://www.kdnuggets.com/2019/07/bias-machine-learning-bad.html)
+> 原文：[`www.kdnuggets.com/2019/07/bias-machine-learning-bad.html`](https://www.kdnuggets.com/2019/07/bias-machine-learning-bad.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![图像名称](../Images/1efd83fa84124475a2da048279623546.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![图像名称](img/1efd83fa84124475a2da048279623546.png)
 
-Tom M. Mitchell 在1980年发表了一篇论文：[学习归纳中的偏差需求](http://dml.cs.byu.edu/~cgc/docs/mldm_tools/Reading/Need%20for%20Bias.pdf?source=post_page---------------------------)中指出：
+Tom M. Mitchell 在 1980 年发表了一篇论文：[学习归纳中的偏差需求](http://dml.cs.byu.edu/~cgc/docs/mldm_tools/Reading/Need%20for%20Bias.pdf?source=post_page---------------------------)中指出：
 
 > 学习涉及从过去的经验中归纳，以应对与这些经验“相关”的新情况。处理新情况所需的归纳飞跃似乎只能在选择某种归纳而非另一种的特定偏差下才可能实现。本文准确地定义了归纳问题中的偏差概念，并表明偏差对于归纳飞跃是必要的。
 
@@ -12,11 +12,11 @@ Tom M. Mitchell 在1980年发表了一篇论文：[学习归纳中的偏差需�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -50,17 +50,17 @@ Tom M. Mitchell 在1980年发表了一篇论文：[学习归纳中的偏差需�
 
     用于描述结构类别的偏差，可能会产生对其他特征的偏好。这种学习到的偏差的理由必须基于对所学习概念预期用途的某种相似性。
 
-尽管这篇论文的时间是1980年，但其背后的逻辑确实让我们思考如何区分模型中的必要偏差和不必要的偏差。显然，我们必须消除那些会成为障碍的偏差，但随着我们不断实践并深入挖掘数据，我们可能会意识到一些偏差实际上可以使我们的模型更接近我们真正想要的效果。
+尽管这篇论文的时间是 1980 年，但其背后的逻辑确实让我们思考如何区分模型中的必要偏差和不必要的偏差。显然，我们必须消除那些会成为障碍的偏差，但随着我们不断实践并深入挖掘数据，我们可能会意识到一些偏差实际上可以使我们的模型更接近我们真正想要的效果。
 
 在后续文章中，我将讨论在机器学习中应该避免的偏差类型。
 
 **相关**：
 
-+   [大数据的三个主要问题及解决方法](/2019/04/3-big-problems-big-data.html)
++   大数据的三个主要问题及解决方法
 
-+   [设计伦理算法](/2019/03/designing-ethical-algorithms.html)
++   设计伦理算法
 
-+   [算法并非偏见，我们才是](/2019/01/algorithms-arent-biased-we-are.html)
++   算法并非偏见，我们才是
 
 ### 更多相关话题
 
@@ -68,10 +68,10 @@ Tom M. Mitchell 在1980年发表了一篇论文：[学习归纳中的偏差需�
 
 +   [揭秘糟糕的科学](https://www.kdnuggets.com/2022/01/demystifying-bad-science.html)
 
-+   [3分钟了解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
++   [3 分钟了解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
 
 +   [处理推荐系统和搜索中的位置偏差](https://www.kdnuggets.com/2023/03/dealing-position-bias-recommendations-search.html)
 
 +   [偏差-方差权衡](https://www.kdnuggets.com/2022/08/biasvariance-tradeoff.html)
 
-+   [免费的数据科学学习路线图：适用于所有级别，与IBM合作](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
++   [免费的数据科学学习路线图：适用于所有级别，与 IBM 合作](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)

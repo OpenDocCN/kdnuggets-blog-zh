@@ -1,12 +1,12 @@
 # 加速数据科学写作的 4 个工具
 
-> 原文：[https://www.kdnuggets.com/2020/09/4-tools-speed-up-data-science-writing.html](https://www.kdnuggets.com/2020/09/4-tools-speed-up-data-science-writing.html)
+> 原文：[`www.kdnuggets.com/2020/09/4-tools-speed-up-data-science-writing.html`](https://www.kdnuggets.com/2020/09/4-tools-speed-up-data-science-writing.html)
 
-[评论](#comments)
+评论
 
 **由 [Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)，数据科学家**
 
-![图像](../Images/01f79c6efa0f0ca7ab5e84d2eb689c6a.png)
+![图像](img/01f79c6efa0f0ca7ab5e84d2eb689c6a.png)
 
 图片由[Kat Stokes](https://unsplash.com/@katstokes_?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，发布于[Unsplash](https://unsplash.com/s/photos/writing?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 支持
 
 * * *
 
@@ -46,7 +46,7 @@ jupyter bundlerextension enable --py jupyter_to_medium._bundler --sys-prefix
 
 一旦安装完成，当你打开 Jupyter Notebook 并导航到** 文件 >> 部署为**，你现在会发现一个选项可以将其部署为**Medium 文章**。
 
-![发布图片](../Images/fce71e478aa3c4ac6e4ddf2c01523511.png)
+![发布图片](img/fce71e478aa3c4ac6e4ddf2c01523511.png)
 
 当你选择此选项时，你会看到一个表单。在顶部，它要求你输入一个集成令牌。如果你是 Medium 的常规作者，你可能会在 Medium 账户的设置中找到这个令牌。如果你的设置中没有令牌，你需要通过电子邮件联系 Medium 请求一个，地址是 yourfriends@medium.com。
 
@@ -54,7 +54,7 @@ jupyter bundlerextension enable --py jupyter_to_medium._bundler --sys-prefix
 
 你可以每次将集成令牌粘贴到此表单中，或者为了节省重复访问的时间，你可以将令牌保存为文件，并在以下方式标记目录 `.jupyter_to_medium/integration_token`。
 
-![Image for post](../Images/eb418bc34282094107815d2d683d43cb.png)
+![Image for post](img/eb418bc34282094107815d2d683d43cb.png)
 
 Jupyter 到 Medium 会将你的 Markdown 发布为文本，将代码作为代码块发布，图像则直接以草稿形式发布到 Medium。我发现通常只需进行最小的编辑，即可将其转变为可发布的博客文章。
 
@@ -64,7 +64,7 @@ Github 有一个名为 Github Gists 的工具，可以让你轻松地将代码�
 
 你需要一个 Github 账户来创建 Gist。创建一个后，只需导航到 Gists 页面 [gist.github.com](https://gist.github.com/)。创建 Gist 非常简单，只需给它起个名字，粘贴你的代码，然后点击发布。发布后，你将看到此页面。要在 Medium 帖子中嵌入 Gist，只需在‘Embed’下编码 URL，并粘贴到你的文章中。
 
-![Image for post](../Images/c50772ae8907690dc2500376f1a96e64.png)
+![Image for post](img/c50772ae8907690dc2500376f1a96e64.png)
 
 代码在你的 Medium 帖子中的显示如下。
 
@@ -87,25 +87,25 @@ jovian.commit()
 
 这将提示你输入一个 API 密钥，你可以在你的账户中找到它。
 
-![Image for post](../Images/4a2f397126c993d6bdb3c6a308e738b5.png)
+![Image for post](img/4a2f397126c993d6bdb3c6a308e738b5.png)
 
 要在单元格中嵌入特定的代码片段，请导航到你上传到在线账户的笔记本，以及包含你要分享的代码的单元格。点击 **Embed Cell**。
 
-![Image for post](../Images/87978a2e3554e72c0f96156d6ab5d815.png)
+![Image for post](img/87978a2e3554e72c0f96156d6ab5d815.png)
 
-这将给你一个可以粘贴到你的Medium帖子的链接。
+这将给你一个可以粘贴到你的 Medium 帖子的链接。
 
-![帖子图片](../Images/c54a484bf4bcac40e41c5543a9a9acdb.png)
+![帖子图片](img/c54a484bf4bcac40e41c5543a9a9acdb.png)
 
 这将显示如下所示。
 
 ### 4\. [Grammarly](https://app.grammarly.com/)
 
-Grammarly是一个非常知名的应用程序，它检查你的内容中的拼写错误、语法错误甚至文本的情感。虽然它是一个显而易见的写作工具，但我花了一段时间才开始使用它，并且它对我文章的编辑时间产生了巨大的影响，所以我觉得值得在这里分享。
+Grammarly 是一个非常知名的应用程序，它检查你的内容中的拼写错误、语法错误甚至文本的情感。虽然它是一个显而易见的写作工具，但我花了一段时间才开始使用它，并且它对我文章的编辑时间产生了巨大的影响，所以我觉得值得在这里分享。
 
-Grammarly可以作为浏览器扩展、桌面应用程序或移动应用程序进行安装。为了最大限度地利用我的时间，我在许多不同的环境中写作，因此在离线写作时本地安装Grammarly非常有用，当我在浏览器中直接写作时也很方便，如果我在移动中写作，Grammarly的移动版也很有帮助。
+Grammarly 可以作为浏览器扩展、桌面应用程序或移动应用程序进行安装。为了最大限度地利用我的时间，我在许多不同的环境中写作，因此在离线写作时本地安装 Grammarly 非常有用，当我在浏览器中直接写作时也很方便，如果我在移动中写作，Grammarly 的移动版也很有帮助。
 
-如果你对Medium上的数据科学写作感兴趣，你可能会发现我之前写的相关文章也很有用。
+如果你对 Medium 上的数据科学写作感兴趣，你可能会发现我之前写的相关文章也很有用。
 
 [**我如何写数据科学博客**](https://towardsdatascience.com/how-i-write-a-data-science-blog-62e4108fe478)
 
@@ -119,28 +119,28 @@ Grammarly可以作为浏览器扩展、桌面应用程序或移动应用程序�
 
 [**我每月发送一次新闻通讯，如果你想加入，请通过这个链接注册。期待成为你学习旅程的一部分！**](https://mailchi.mp/ce8ccd91d6d5/datacademy-signup)
 
-**简历：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)** 通过自学学习数据科学。Holiday Extras的数据科学家。alGo的联合创始人。
+**简历：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)** 通过自学学习数据科学。Holiday Extras 的数据科学家。alGo 的联合创始人。
 
 [原文](https://towardsdatascience.com/4-tools-to-speed-up-your-data-science-writing-11d3823cd01b)。经许可转载。
 
 **相关：**
 
-+   [如果我必须重新开始学习数据科学，我会怎么做？](/2020/08/start-learning-data-science-again.html)
++   如果我必须重新开始学习数据科学，我会怎么做？
 
-+   [成功的数据科学家需要具备什么？](/2020/09/successful-data-scientist.html)
++   成功的数据科学家需要具备什么？
 
-+   [最重要的数据科学项目](/2020/09/most-important-data-science-project.html)
++   最重要的数据科学项目
 
 ### 更多相关话题
 
-+   [RAPIDS cuDF加速你的下一步数据科学工作流程](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)
++   [RAPIDS cuDF 加速你的下一步数据科学工作流程](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)
 
-+   [加速你的Python代码的3种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
++   [加速你的 Python 代码的 3 种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
 
-+   [宣布博客写作比赛，获胜者将获得NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)
++   [宣布博客写作比赛，获胜者将获得 NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)
 
-+   [掌握Python：7种策略以编写清晰、有组织的代码](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
++   [掌握 Python：7 种策略以编写清晰、有组织的代码](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
 
-+   [提升Python函数写作的5个技巧](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
++   [提升 Python 函数写作的 5 个技巧](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
 
 +   [提高数据效率和速度的 5 个 Python 小技巧](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)

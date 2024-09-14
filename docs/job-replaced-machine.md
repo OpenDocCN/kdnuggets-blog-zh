@@ -1,12 +1,12 @@
 # 你的工作会被机器取代吗？
 
-> 原文：[https://www.kdnuggets.com/2021/10/job-replaced-machine.html](https://www.kdnuggets.com/2021/10/job-replaced-machine.html)
+> 原文：[`www.kdnuggets.com/2021/10/job-replaced-machine.html`](https://www.kdnuggets.com/2021/10/job-replaced-machine.html)
 
-[评论](#comments)
+评论
 
 **由 [马丁·佩里](https://www.linkedin.com/in/martinperry/)，微软高级数据专业人士**
 
-![图示](../Images/5d64ae6bb5d2ded0e7c8a4f2c0da8fd1.png)
+![图示](img/5d64ae6bb5d2ded0e7c8a4f2c0da8fd1.png)
 
 [由 macrovector / Freepik 设计](https://www.freepik.com)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -40,7 +40,7 @@
 
 我们在**知识经济**中的工作方式已经改变——使用浏览器和搜索引擎进行信息发现的时代已经结束。现在，期望数据能即时传递到最终用户设备作为信息。搜索不再是在未处理数据的海洋中进行，而是期望在最终用户设备上提供清晰可消费的信息流。应用在这方面**非常棒**。
 
-这导致了应用需求的**爆炸**。预计应用的增长速度是全球IT交付能力的五倍——四年内将超过5亿个应用。IT功能的专业发展无法跟上。你可以转变以填补这一空缺，自我服务，并在未来保持相关性。公民开发**工具**现已可用，以满足应用生产和业务流程自动化的需求。
+这导致了应用需求的**爆炸**。预计应用的增长速度是全球 IT 交付能力的五倍——四年内将超过 5 亿个应用。IT 功能的专业发展无法跟上。你可以转变以填补这一空缺，自我服务，并在未来保持相关性。公民开发**工具**现已可用，以满足应用生产和业务流程自动化的需求。
 
 这个大规模的数字转型时代将要求你的参与。静坐不动只会让机器自动化你的当前角色，并做得更好。调整方向，创造你的未来。设计机器高效的工作流程和过程。利用生产力指数增长的好处。专注于更高价值的工作。
 
@@ -48,26 +48,26 @@
 
 **成为公民开发者！**
 
-**简介: [马丁·佩里的个人资料](https://www.linkedin.com/in/martinperry/)** 完成了公路工程博士学位，并在建筑材料行业担任了5年的项目管理职位。2000年，他进入软件行业，担任IBM和微软的财务、战略及高级领导角色。他目前的领导角色是高级数据专业人士。他秉持成长心态，不断寻找学习和成长的机会，以保持在现代职场中的相关技能。他最近完成了由EDX.org主办的微软专业数据科学课程，获得了爱尔兰分析协会认证的数据科学家称号，并成为了微软认证培训师。
+**简介: [马丁·佩里的个人资料](https://www.linkedin.com/in/martinperry/)** 完成了公路工程博士学位，并在建筑材料行业担任了 5 年的项目管理职位。2000 年，他进入软件行业，担任 IBM 和微软的财务、战略及高级领导角色。他目前的领导角色是高级数据专业人士。他秉持成长心态，不断寻找学习和成长的机会，以保持在现代职场中的相关技能。他最近完成了由 EDX.org 主办的微软专业数据科学课程，获得了爱尔兰分析协会认证的数据科学家称号，并成为了微软认证培训师。
 
 **相关：**
 
-+   [数据分析师会被AI取代吗？](/2021/10/data-analysts-replaced-ai.html)
++   数据分析师会被 AI 取代吗？
 
-+   [在数据领域选择合适的工作：工程文化中的5个标志](/2021/10/choose-right-job-data-signs-engineering-culture.html)
++   在数据领域选择合适的工作：工程文化中的 5 个标志
 
-+   [GitHub Copilot与编程自动化中的AI语言模型的崛起](/2021/09/github-copilot-rise-ai-language-models-programming-automation.html)
++   GitHub Copilot 与编程自动化中的 AI 语言模型的崛起
 
 ### 更多相关内容
 
-+   [数据分析中的工作趋势：用于工作趋势分析的NLP](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
++   [数据分析中的工作趋势：用于工作趋势分析的 NLP](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
 +   [如何在没有任何工作经验的情况下获得你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
-+   [选择下一个数据科学工作前需要记住的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [选择下一个数据科学工作前需要记住的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [获得第一份数据科学工作的7个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
++   [获得第一份数据科学工作的 7 个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
 
-+   [掌握数据科学求职的5个免费资源](https://www.kdnuggets.com/5-free-resources-to-master-your-data-science-job-search)
++   [掌握数据科学求职的 5 个免费资源](https://www.kdnuggets.com/5-free-resources-to-master-your-data-science-job-search)
 
 +   [免费数据科学面试书，助你获得理想工作](https://www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job)

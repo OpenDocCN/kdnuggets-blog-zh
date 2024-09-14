@@ -1,8 +1,8 @@
-# 5个优化机器学习算法的提示
+# 5 个优化机器学习算法的提示
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-optimizing-machine-learning-algorithms](https://www.kdnuggets.com/5-tips-for-optimizing-machine-learning-algorithms)
+> 原文：[`www.kdnuggets.com/5-tips-for-optimizing-machine-learning-algorithms`](https://www.kdnuggets.com/5-tips-for-optimizing-machine-learning-algorithms)
 
-![](../Images/6d1533cb1164e87c1f181f0e2462ee7b.png)
+![](img/6d1533cb1164e87c1f181f0e2462ee7b.png)
 
 图片来源：编辑
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
-![ML算法和模型概念](../Images/fa94f6f2ebf62075ba2656789be932da.png)
+![ML 算法和模型概念](img/fa94f6f2ebf62075ba2656789be932da.png)
 
 以下列表总结了优化机器学习算法性能的五个关键提示，特别是优化所构建的机器学习模型的准确性或预测能力。我们来看一下。
 
@@ -46,7 +46,7 @@
 
 ## 5\. 集成方法
 
-团结就是力量：这一历史格言是集成技术背后的原则，集成技术通过策略如自助法、提升法或堆叠法将多个机器学习模型结合在一起，能够显著提升解决方案的性能，相较于单一模型。随机森林和XGBoost是常见的集成技术，与许多预测问题中的深度学习模型表现相当。通过利用个体模型的优势，集成方法可以成为构建更准确且稳健预测系统的关键。
+团结就是力量：这一历史格言是集成技术背后的原则，集成技术通过策略如自助法、提升法或堆叠法将多个机器学习模型结合在一起，能够显著提升解决方案的性能，相较于单一模型。随机森林和 XGBoost 是常见的集成技术，与许多预测问题中的深度学习模型表现相当。通过利用个体模型的优势，集成方法可以成为构建更准确且稳健预测系统的关键。
 
 ## 结论
 

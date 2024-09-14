@@ -1,8 +1,8 @@
 # 数据质量在成功的机器学习模型中的重要性
 
-> 原文：[https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
+> 原文：[`www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html`](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-![数据质量在成功的机器学习模型中的重要性](../Images/09709ac5b3b414b08aee573456633d85.png)
+![数据质量在成功的机器学习模型中的重要性](img/09709ac5b3b414b08aee573456633d85.png)
 
 来源：商业照片由 frimufilms 创建 - [www.freepik.com](https://www.freepik.com)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-人工智能已经成为一个流行词，并且非常普遍。市场上启用AI的应用程序显著增加。我们也‘幸运地’拥有强大的基础设施和先进的算法。然而，这并没有使将你的机器学习项目推向生产变得更容易。
+人工智能已经成为一个流行词，并且非常普遍。市场上启用 AI 的应用程序显著增加。我们也‘幸运地’拥有强大的基础设施和先进的算法。然而，这并没有使将你的机器学习项目推向生产变得更容易。
 
-![数据质量在成功的机器学习模型中的重要性](../Images/cde0909fe2adb4d0c938182764d1e218.png)
+![数据质量在成功的机器学习模型中的重要性](img/cde0909fe2adb4d0c938182764d1e218.png)
 
 **来源：** 聊天机器人矢量图由 roserodionova 创建 - [www.freepik.com](https://www.freepik.com)
 
@@ -38,7 +38,7 @@
 
 +   或者，你可以采取前瞻性的办法，直接进阶到更复杂的算法。
 
-简而言之，依赖更高级的机器学习算法以提高准确度，如果数据无法为机器提供良好的信号，将不会取得显著效果。这在Andrew Ng关于“MLOps：从模型中心到数据中心AI”的讲座中阐述得非常清楚。
+简而言之，依赖更高级的机器学习算法以提高准确度，如果数据无法为机器提供良好的信号，将不会取得显著效果。这在 Andrew Ng 关于“MLOps：从模型中心到数据中心 AI”的讲座中阐述得非常清楚。
 
 # **数据质量评估**
 
@@ -50,7 +50,7 @@
 
 大多数数据科学家认为，数据准备、清理和转换占用了模型构建的大部分时间——这绝对是事实。因此，建议不要急于将数据输入模型，而是进行全面的数据质量检查。虽然可以对数据执行的检查数量和类型可能非常主观，但我们将讨论在准备数据质量评分和评估数据质量时需要检查的一些关键因素：
 
-![数据质量在成功机器学习模型中的重要性](../Images/9f5d31e4c2f80999ac4e846955cda839.png)
+![数据质量在成功机器学习模型中的重要性](img/9f5d31e4c2f80999ac4e846955cda839.png)
 
 维护数据质量的技术：
 
@@ -84,7 +84,7 @@
 
 ## **高质量数据的好处**
 
-![数据质量在成功的机器学习模型中的重要性](../Images/efd13be985271172f55c6bd0ae14b836.png)
+![数据质量在成功的机器学习模型中的重要性](img/efd13be985271172f55c6bd0ae14b836.png)
 
 ## **大规模理解你的数据**
 
@@ -102,40 +102,40 @@ TensorFlow 的文档展示了如何使用 TFDV 分析数据并提高数据质量
 
 以下是出租车数据的数值和分类数据的统计分析：
 
-![数据质量在成功的机器学习模型中的重要性](../Images/6558b34d905de305aac232922f502b83.png)
+![数据质量在成功的机器学习模型中的重要性](img/6558b34d905de305aac232922f502b83.png)
 
 总计，右侧可视化中缺失值的百分比有助于更好地理解数据。
 
-![数据质量在成功机器学习模型中的重要性](../Images/6a6969d9d0d864cc2f7166de35c20658.png)
+![数据质量在成功机器学习模型中的重要性](img/6a6969d9d0d864cc2f7166de35c20658.png)
 
-pickup_census_tract中包含所有缺失值的记录，因此没有信号供ML算法进一步学习。可以根据这一EDA进行筛选。
+pickup_census_tract 中包含所有缺失值的记录，因此没有信号供 ML 算法进一步学习。可以根据这一 EDA 进行筛选。
 
 **数据漂移：** 这是部署模型管道中最关键的部分，可能会发生在训练数据和测试数据之间的时间跨度内，或者在多天的训练数据之间。
 
-ML算法的表现基于训练数据和测试数据具有类似特征的假设，违反此假设将导致模型性能下降。
+ML 算法的表现基于训练数据和测试数据具有类似特征的假设，违反此假设将导致模型性能下降。
 
-![数据质量在成功机器学习模型中的重要性](../Images/1b5b47a099a5001ee8b52f191f78d7d0.png)
+![数据质量在成功机器学习模型中的重要性](img/1b5b47a099a5001ee8b52f191f78d7d0.png)
 
-谷歌在[这个Colab笔记本](https://colab.research.google.com/github/tensorflow/tfx/blob/master/docs/tutorials/data_validation/tfdv_basic.ipynb)中分享了代码。
+谷歌在[这个 Colab 笔记本](https://colab.research.google.com/github/tensorflow/tfx/blob/master/docs/tutorials/data_validation/tfdv_basic.ipynb)中分享了代码。
 
 期待听到您在维护和使用高质量数据方面的一些最佳实践。
 
 ## 参考资料
 
-[开始使用Tensorflow数据验证](https://www.tensorflow.org/tfx/data_validation/get_started)
+[开始使用 Tensorflow 数据验证](https://www.tensorflow.org/tfx/data_validation/get_started)
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究的交叉点上工作，以提供商业价值和洞察。她倡导数据驱动的科学，并在数据治理方面是一位领先专家，致力于构建值得信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究的交叉点上工作，以提供商业价值和洞察。她倡导数据驱动的科学，并在数据治理方面是一位领先专家，致力于构建值得信赖的 AI 解决方案。
 
 ### 更多相关话题
 
 +   [数据质量维度：通过伟大期望确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [检测数据漂移以确保生产ML模型质量（使用Eurybia）](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [检测数据漂移以确保生产 ML 模型质量（使用 Eurybia）](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [如何在2022年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
++   [如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
 +   [从数据分析师到数据战略家：影响力职业路径](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
 
-+   [免费的4周数据科学课程：AI质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费的 4 周数据科学课程：AI 质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)

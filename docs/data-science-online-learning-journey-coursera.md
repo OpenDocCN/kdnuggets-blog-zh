@@ -1,12 +1,12 @@
-# 我在Coursera上的数据科学在线学习之旅
+# 我在 Coursera 上的数据科学在线学习之旅
 
-> 原文：[https://www.kdnuggets.com/2020/11/data-science-online-learning-journey-coursera.html](https://www.kdnuggets.com/2020/11/data-science-online-learning-journey-coursera.html)
+> 原文：[`www.kdnuggets.com/2020/11/data-science-online-learning-journey-coursera.html`](https://www.kdnuggets.com/2020/11/data-science-online-learning-journey-coursera.html)
 
-[评论](#comments)
+评论
 
 **由 [Ruben Winastwan](https://www.linkedin.com/in/marcellusrubenwinastwan/)，数据科学爱好者**
 
-![图像](../Images/777544f25fd541b397c000d0f7dcd1fa.png)
+![图像](img/777544f25fd541b397c000d0f7dcd1fa.png)
 
 图片由 [Caleb Jones](https://unsplash.com/@gcalebjones?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/path?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,33 +14,33 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
 ### 介绍：我的背景
 
-是在2016年，我在完成机械工程学士学位后，直接开始攻读计算力学硕士学位。那时，我对编程了解有限，更别说了解数据科学和机器学习了。
+是在 2016 年，我在完成机械工程学士学位后，直接开始攻读计算力学硕士学位。那时，我对编程了解有限，更别说了解数据科学和机器学习了。
 
-启程的契机发生在我硕士学习期间，当时我需要构建一个对象检测和对象跟踪算法的经典计算机视觉项目，使用Python、C++和OpenCV。那个项目确实迫使我艰难地学习Python和C++，以及如何正确编写干净的代码。
+启程的契机发生在我硕士学习期间，当时我需要构建一个对象检测和对象跟踪算法的经典计算机视觉项目，使用 Python、C++和 OpenCV。那个项目确实迫使我艰难地学习 Python 和 C++，以及如何正确编写干净的代码。
 
 长话短说，我发现自己对计算机视觉领域非常着迷，这引发了我的执念：我想成为一名计算机视觉工程师。
 
 但当我阅读计算机视觉工程师职位的招聘要求时，高期望变成了泡影：他们期望候选人了解机器学习和深度学习，特别是卷积神经网络（CNN）。
 
-![图像](../Images/286ae06c32f682bc00bdb1d904863b60.png)
+![图像](img/286ae06c32f682bc00bdb1d904863b60.png)
 
 计算机视觉工程师的常见职位描述
 
-那时，我甚至不知道什么是机器学习，更别提CNN了。尽管我的学习计划涉及了编程、数学和统计，但我们从未讨论过机器学习。
+那时，我甚至不知道什么是机器学习，更别提 CNN 了。尽管我的学习计划涉及了编程、数学和统计，但我们从未讨论过机器学习。
 
-经过一些研究，我发现如果你想了解CNN，你需要首先了解一般的深度神经网络（DNN）。如果你想了解DNN，你需要首先了解经典的神经网络。如果你想了解神经网络，你需要首先了解机器学习。如果你想了解机器学习，你需要首先了解数据科学的基础。
+经过一些研究，我发现如果你想了解 CNN，你需要首先了解一般的深度神经网络（DNN）。如果你想了解 DNN，你需要首先了解经典的神经网络。如果你想了解神经网络，你需要首先了解机器学习。如果你想了解机器学习，你需要首先了解数据科学的基础。
 
-![图像](../Images/163197c43112e701e562c96f601e0808.png)
+![图像](img/163197c43112e701e562c96f601e0808.png)
 
 这就像一个视频游戏，我需要逐步升级，直到达到我想要的主题。此外，我是自下而上的方法的忠实粉丝，因此我决定首先学习数据科学的基础。
 
@@ -48,13 +48,13 @@
 
 我需要自己学习所有这些内容。
 
-那时我第一次知道Coursera的存在。
+那时我第一次知道 Coursera 的存在。
 
-### 那为什么是Coursera呢？
+### 那为什么是 Coursera 呢？
 
-首先，我并不打算在这篇文章中推荐Coursera。我只是发现它们是对我来说最好的在线学习平台，因为有许多来自知名机构的数据科学和机器学习课程。此外，你还可以选择免费旁听课程，并仍然获得学习材料的访问权限。
+首先，我并不打算在这篇文章中推荐 Coursera。我只是发现它们是对我来说最好的在线学习平台，因为有许多来自知名机构的数据科学和机器学习课程。此外，你还可以选择免费旁听课程，并仍然获得学习材料的访问权限。
 
-更重要的是，如果你真的想追求这个专业的证书，总体费用比Udacity Nanodegree便宜得多，尤其是如果你还在读书的话。
+更重要的是，如果你真的想追求这个专业的证书，总体费用比 Udacity Nanodegree 便宜得多，尤其是如果你还在读书的话。
 
 好了，说了这么多，我们来看看我的学习路径吧。
 
@@ -62,17 +62,17 @@
 
 我们都同意，一切的最难部分总是在开始时。就像我想涉足数据科学时一样。我不断问自己一个问题：我从哪里开始？
 
-经过一些研究，我终于制定了我的在线学习课程，这里是我在Coursera上按时间顺序进行的课程或专业列表。
+经过一些研究，我终于制定了我的在线学习课程，这里是我在 Coursera 上按时间顺序进行的课程或专业列表。
 
 ### [IBM 数据科学](https://www.coursera.org/professional-certificates/ibm-data-science)
 
-![图像](../Images/b318d15c48a07f8bf549c788613ff5b2.png)
+![图像](img/b318d15c48a07f8bf549c788613ff5b2.png)
 
-我决定从基础层面开始学习数据科学，因为我不想错过一些重要概念。这就是我选择将IBM数据科学作为我第一门专业课程的原因。
+我决定从基础层面开始学习数据科学，因为我不想错过一些重要概念。这就是我选择将 IBM 数据科学作为我第一门专业课程的原因。
 
 在参加这门课程之前，你不需要对数据科学、统计学、机器学习或编程有任何先前的知识。这门专业的第一门课程被称为*‘什么是数据科学？’*。我的意思是，你不会找到比这更基础的了，对吧？
 
-这个专业有9门课程。它从数据科学的概念和方法开始，然后深入讲解Python和SQL编程。接着，它将带你进入数据科学的核心——统计学、数据分析、数据可视化和机器学习。
+这个专业有 9 门课程。它从数据科学的概念和方法开始，然后深入讲解 Python 和 SQL 编程。接着，它将带你进入数据科学的核心——统计学、数据分析、数据可视化和机器学习。
 
 完成这个专门化课程后，你不会成为数据科学方面的专家，因为这个专门化课程不会详细讲解每一个主题。然而，它给了我数据科学的一个很好的概述，并帮助我决定接下来应该学习什么。
 
@@ -92,7 +92,7 @@
 
 ### [现代大数据分析与 SQL](https://www.coursera.org/specializations/cloudera-big-data-analysis-sql?)
 
-![帖子图片](../Images/9548d607ef0af6430855bb7df5b5ae10.png)
+![帖子图片](img/9548d607ef0af6430855bb7df5b5ae10.png)
 
 这是由 Cloudera 提供的一个专门化课程，重点是利用 SQL 进行大数据分析。这个专门化课程总共有 3 门课程。
 
@@ -104,7 +104,7 @@
 
 ### [从数据到洞察：Google Cloud Platform](https://www.coursera.org/specializations/from-data-to-insights-google-cloud-platform?)
 
-![帖子图片](../Images/da9a3a13debc01cade7fbe8e3419b0d3.png)
+![帖子图片](img/da9a3a13debc01cade7fbe8e3419b0d3.png)
 
 我修这门课程是为了补充我从 Cloudera 的之前专门化课程中学到的材料。虽然 Cloudera 的专门化课程更多地集中于在分布式集群中应用 SQL，这个专门化课程让我能够在云端应用 SQL。
 
@@ -116,7 +116,7 @@
 
 ### [使用 R 统计](https://www.coursera.org/specializations/statistics)
 
-![帖子图片](../Images/88475041971bdfa87f67660a9dacfc06.png)
+![帖子图片](img/88475041971bdfa87f67660a9dacfc06.png)
 
 我们可以达成共识，统计学是数据科学的核心。由于我之前已经了解统计学，我选择了这个专门化，希望能够刷新统计学的基础理论。但最终，我获得的比预期要多。
 
@@ -124,51 +124,51 @@
 
 我喜欢这个专门化的两点：
 
-1.  所有最终项目都具有投资组合价值，这意味着你需要做真实的统计数据分析工作，并且不要指望在1或2小时内完成它们。完成专门化后，你将拥有3或4个投资组合价值的项目，可以放在你的简历中。
+1.  所有最终项目都具有投资组合价值，这意味着你需要做真实的统计数据分析工作，并且不要指望在 1 或 2 小时内完成它们。完成专门化后，你将拥有 3 或 4 个投资组合价值的项目，可以放在你的简历中。
 
-1.  你需要使用R来完成每门课程的项目。这对我来说很好，因为我之前从未使用过R。我认为学习一种新的编程语言从长远来看是有益的，而R绝对是一个很好的数据科学和统计工具箱，可以加入到你的技能库中。
+1.  你需要使用 R 来完成每门课程的项目。这对我来说很好，因为我之前从未使用过 R。我认为学习一种新的编程语言从长远来看是有益的，而 R 绝对是一个很好的数据科学和统计工具箱，可以加入到你的技能库中。
 
 完成专门化后，我觉得我想深入研究一下贝叶斯统计学，特别是关于马尔可夫链蒙特卡罗的方法。这就是为什么我在这个专门化之后又选修了一门关于统计学的课程，那就是……
 
 ### [贝叶斯统计：技术与模型](https://www.coursera.org/learn/mcmc-bayesian-statistics)
 
-![Image for post](../Images/32612012b1976c5a64fb575b9342eeec.png)
+![Image for post](img/32612012b1976c5a64fb575b9342eeec.png)
 
 如果你想全面了解贝叶斯统计学的概念，我认为这将是适合你的课程。在这门课程中，你将学习关于马尔可夫链蒙特卡罗的概念，以及如何使用贝叶斯概念解决回归问题。
 
 我特别喜欢这门课程的地方在于理论与实践的平衡。
 
-每个材料都会首先讲解理论，然后进行演示，讲师会向你展示如何在代码中实现你刚刚学到的理论。在这门课程中，你将学习如何在R和JAGS中实现贝叶斯统计学。
+每个材料都会首先讲解理论，然后进行演示，讲师会向你展示如何在代码中实现你刚刚学到的理论。在这门课程中，你将学习如何在 R 和 JAGS 中实现贝叶斯统计学。
 
-本课程的最终项目也具有投资组合价值，并且与上述的R统计学专门化非常相似。你将被要求使用贝叶斯概念在R中进行统计分析工作。
+本课程的最终项目也具有投资组合价值，并且与上述的 R 统计学专门化非常相似。你将被要求使用贝叶斯概念在 R 中进行统计分析工作。
 
 完成课程后，我决定继续学习下一个主题，即数据可视化。
 
-### [Tableau数据可视化](https://www.coursera.org/specializations/data-visualization?)
+### [Tableau 数据可视化](https://www.coursera.org/specializations/data-visualization?)
 
-![Image for post](../Images/ebb89633422a01b8799e1f8cf4593198.png)
+![Image for post](img/ebb89633422a01b8799e1f8cf4593198.png)
 
-通常情况下，当涉及到数据可视化时，我会使用Python，借助Matplotlib、Seaborn或Plotly。然而，我想学习一些新东西——我想学会如何使用商业智能工具进行数据可视化，无论是PowerBI还是Tableau。然后我发现了这个专门化。
+通常情况下，当涉及到数据可视化时，我会使用 Python，借助 Matplotlib、Seaborn 或 Plotly。然而，我想学习一些新东西——我想学会如何使用商业智能工具进行数据可视化，无论是 PowerBI 还是 Tableau。然后我发现了这个专门化。
 
-如果你对Tableau不熟悉并想学习如何用它来可视化数据，我会推荐这门专业。
+如果你对 Tableau 不熟悉并想学习如何用它来可视化数据，我会推荐这门专业。
 
-这个专业包含5门课程和一个Capstone项目。前三门课程将为你提供数据可视化最佳实践的理论理解，以及如何用数据讲故事。第四门课程基本上就是让你动手使用Tableau，你将学习如何创建交互式数据可视化仪表板和故事。
+这个专业包含 5 门课程和一个 Capstone 项目。前三门课程将为你提供数据可视化最佳实践的理论理解，以及如何用数据讲故事。第四门课程基本上就是让你动手使用 Tableau，你将学习如何创建交互式数据可视化仪表板和故事。
 
-我非常喜欢这门专业的地方是，当你注册这门专业时，你会获得6个月免费使用Tableau Desktop的权限。
+我非常喜欢这门专业的地方是，当你注册这门专业时，你会获得 6 个月免费使用 Tableau Desktop 的权限。
 
-这意味着你可以在本地机器上探索Tableau的许多功能，并用它创建很多有趣的可视化。如果许可证在6个月后过期，你将有机会再延续6个月。
+这意味着你可以在本地机器上探索 Tableau 的许多功能，并用它创建很多有趣的可视化。如果许可证在 6 个月后过期，你将有机会再延续 6 个月。
 
 ### [机器学习](https://www.coursera.org/learn/machine-learning?) 
 
-![Image for post](../Images/f43782eea189b5c360c197736ebda392.png)
+![Image for post](img/f43782eea189b5c360c197736ebda392.png)
 
-到目前为止，我已经学习了数据科学概述、使用SQL进行大数据分析、统计学和数据可视化最佳实践。接下来，终于到了学习机器学习的时机。
+到目前为止，我已经学习了数据科学概述、使用 SQL 进行大数据分析、统计学和数据可视化最佳实践。接下来，终于到了学习机器学习的时机。
 
-作为机器学习的完全初学者，我决定参加安德鲁·吴的机器学习课程，因为我知道这是Coursera上最著名的机器学习课程。
+作为机器学习的完全初学者，我决定参加安德鲁·吴的机器学习课程，因为我知道这是 Coursera 上最著名的机器学习课程。
 
 这完全是合理的。我相信对于初学者来说，我找不到比这更好的机器学习课程了。
 
-这门课程将教你经典的监督学习和无监督学习算法的概念，如线性回归、逻辑回归、支持向量机（SVM）、K均值聚类以及人工神经网络。不仅如此，安德鲁还给了我们在实践中应用机器学习系统的技巧和窍门。
+这门课程将教你经典的监督学习和无监督学习算法的概念，如线性回归、逻辑回归、支持向量机（SVM）、K 均值聚类以及人工神经网络。不仅如此，安德鲁还给了我们在实践中应用机器学习系统的技巧和窍门。
 
 基本上，我喜欢这门课程的一切。
 
@@ -178,7 +178,7 @@
 
 ### [深度学习](https://www.coursera.org/specializations/deep-learning?) 
 
-![Image for post](../Images/9789fb0209de993ec38de1d7414f4e3a.png)
+![Image for post](img/9789fb0209de993ec38de1d7414f4e3a.png)
 
 最终，我越来越接近实现我的初衷——了解卷积神经网络的概念。
 
@@ -192,7 +192,7 @@ Andrew Ng 一如既往地在教授有关深度学习算法的难点概念方面�
 
 ### [DeepLearning.AI TensorFlow 开发者专业证书](https://www.coursera.org/professional-certificates/tensorflow-in-practice?) 
 
-![Image for post](../Images/7faa0e4c189393afa8e60ad606f51b64.png)
+![Image for post](img/7faa0e4c189393afa8e60ad606f51b64.png)
 
 我相信在 DeepLearning.AI 将名称改为 *TensorFlow 开发者专业证书* 之前，这个专业化课程曾被称为 *TensorFlow 实践*。
 
@@ -224,11 +224,11 @@ Andrew Ng 一如既往地在教授有关深度学习算法的难点概念方面�
 
 **相关内容：**
 
-+   [MIT 免费课程：计算思维与数据科学入门](/2020/10/free-mit-intro-computational-thinking-data-science-python.html)
++   MIT 免费课程：计算思维与数据科学入门
 
-+   [提升数据科学技能必修的在线课程](/2020/09/online-courses-better-data-scientist.html)
++   提升数据科学技能必修的在线课程
 
-+   [2020 年最佳机器学习课程前 10 名](/2020/10/10-best-machine-learning-courses-2020.html)
++   2020 年最佳机器学习课程前 10 名
 
 ### 更多相关内容
 

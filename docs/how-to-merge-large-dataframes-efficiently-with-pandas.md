@@ -1,8 +1,8 @@
 # 如何高效合并大型 DataFrames
 
-> 原文：[https://www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas](https://www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas`](https://www.kdnuggets.com/how-to-merge-large-dataframes-efficiently-with-pandas)
 
-![如何高效合并大型 DataFrames](../Images/81ec6527fc5abdff19a63f285a14f816.png)
+![如何高效合并大型 DataFrames](img/81ec6527fc5abdff19a63f285a14f816.png)
 
 图片由编辑 | Midjourney & Canva 提供 让我们学习如何高效合并大型 DataFrames。
 
@@ -12,11 +12,11 @@
 
 ## 我们的 top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -71,7 +71,7 @@ merged_df_debug = pd.merge(df1.reset_index(), df2.reset_index(), on='key', how='
 
 +   [合并 Pandas DataFrames 的 3 种方法](https://www.kdnuggets.com/2023/03/3-ways-merge-pandas-dataframes.html)
 
-+   [如何合并 Pandas DataFrames](kdnuggets.com/2023/01/merge-pandas-dataframes.html/)
++   如何合并 Pandas DataFrames
 
 +   [掌握 Python 数据科学：超越基础](https://www.kdnuggets.com/mastering-python-for-data-science-beyond-the-basics)
 

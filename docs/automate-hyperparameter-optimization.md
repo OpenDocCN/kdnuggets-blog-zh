@@ -1,8 +1,8 @@
 # 如何自动化超参数优化
 
-> 原文：[https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html](https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html)
+> 原文：[`www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html`](https://www.kdnuggets.com/2019/06/automate-hyperparameter-optimization.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Suleka Helmini](https://www.linkedin.com/in/suleka-helmini-09803b132/detail/recent-activity/)，WSO2**
 
@@ -110,7 +110,7 @@ lstm_init_learning_rate = Real(low=1e-4, high=1e-1, prior='log-uniform', name='l
 
 如果你仔细观察，你会发现我们在 log-uniform 之前声明了 ‘lstm_init_learning_rate’，而不是直接使用 uniform。这是因为，如果你使用 uniform，优化器将从 1e-4（0.0001）到 1e-1（0.1）的均匀分布中进行搜索。但当声明为 log-uniform 时，优化器将在 -4 和 -1 之间搜索，从而使过程更高效。这是 [skopt 库](https://scikit-optimize.github.io/notebooks/hyperparameter-optimization.html) 在为学习率分配搜索空间时所建议的。
 
-你可以使用几种数据类型来定义搜索空间，包括Categorical、Real和Integer。当定义涉及浮点值的搜索空间时，你应该选择“Real”；当涉及整数时，选择“Integer”。如果你的搜索空间涉及如不同激活函数这样的分类值，则应选择“Categorical”类型。
+你可以使用几种数据类型来定义搜索空间，包括 Categorical、Real 和 Integer。当定义涉及浮点值的搜索空间时，你应该选择“Real”；当涉及整数时，选择“Integer”。如果你的搜索空间涉及如不同激活函数这样的分类值，则应选择“Categorical”类型。
 
 我们现在要将待优化的参数列出在“dimensions”列表中。这个列表稍后将传递给‘gp_minimize’函数。你可以看到我们也声明了‘default_parameters’。这些是我们为每个超参数设置的默认值。****记得按照你在“dimensions”列表中列出超参数的顺序输入默认值。****
 
@@ -125,13 +125,13 @@ default_parameters = [2,128,3,30,0.99,64,0.2,0.001]
 
 最重要的一点是，“default_parameters”列表中的超参数将是你优化任务的起始点。贝叶斯优化器将在第一次迭代中使用你声明的默认参数，根据结果，获取函数将决定下一个要探索的点。
 
-可以说，如果你之前多次运行模型并找到了一组不错的超参数值，你可以将它们作为默认超参数值，从那里开始探索。这可能会帮助算法更快地找到最低的RMSE值（减少迭代次数）。然而，请记住这并不总是成立的。此外，分配默认值时请记得赋值在你定义的搜索空间内。
+可以说，如果你之前多次运行模型并找到了一组不错的超参数值，你可以将它们作为默认超参数值，从那里开始探索。这可能会帮助算法更快地找到最低的 RMSE 值（减少迭代次数）。然而，请记住这并不总是成立的。此外，分配默认值时请记得赋值在你定义的搜索空间内。
 
-到目前为止，我们完成了超参数优化任务的所有初步工作。接下来我们将专注于深度学习模型的实现。由于本文仅关注超参数优化任务，因此我们不会讨论模型开发过程中的数据预处理。我们将在文章末尾提供完整实现的GitHub链接。
+到目前为止，我们完成了超参数优化任务的所有初步工作。接下来我们将专注于深度学习模型的实现。由于本文仅关注超参数优化任务，因此我们不会讨论模型开发过程中的数据预处理。我们将在文章末尾提供完整实现的 GitHub 链接。
 
-为了提供更多背景，我们将数据集分为训练集、验证集和测试集。训练集用于训练模型，验证集用于超参数优化任务。如前所述，我们使用均方根误差（RMSE）来评估模型并进行优化（最小化RMSE）。
+为了提供更多背景，我们将数据集分为训练集、验证集和测试集。训练集用于训练模型，验证集用于超参数优化任务。如前所述，我们使用均方根误差（RMSE）来评估模型并进行优化（最小化 RMSE）。
 
-使用验证集评估的准确性不能用来评估模型，因为在超参数优化过程中，最小化RMSE的超参数可能会对验证集过拟合。因此，标准做法是使用未在任何管道中使用的测试集来测量最终模型的准确性。
+使用验证集评估的准确性不能用来评估模型，因为在超参数优化过程中，最小化 RMSE 的超参数可能会对验证集过拟合。因此，标准做法是使用未在任何管道中使用的测试集来测量最终模型的准确性。
 
 下面展示了我们深度学习模型的实现：
 
@@ -298,9 +298,9 @@ logger("Start Program")
 
 现在，当你运行 *gp_optimize* 函数时，事件流程将是：
 
-适应度函数将使用传递给x0的参数。LSTM将按照指定的epoch进行训练，验证输入将被运行以获得预测的RMSE值。然后根据该值，贝叶斯优化器将决定使用获取函数探索下一组超参数值。
+适应度函数将使用传递给 x0 的参数。LSTM 将按照指定的 epoch 进行训练，验证输入将被运行以获得预测的 RMSE 值。然后根据该值，贝叶斯优化器将决定使用获取函数探索下一组超参数值。
 
-在第2次迭代中，适应度函数将使用贝叶斯优化得出的超参数值进行运行，并且这一过程将重复，直到迭代了“n_call”次。当完整过程结束时，Scikit-Optimize 对象将被分配给“search_result”变量。
+在第 2 次迭代中，适应度函数将使用贝叶斯优化得出的超参数值进行运行，并且这一过程将重复，直到迭代了“n_call”次。当完整过程结束时，Scikit-Optimize 对象将被分配给“search_result”变量。
 
 我们可以使用这个对象来检索文档中所述的有用信息。
 
@@ -320,9 +320,9 @@ logger("Start Program")
 
 +   rng [RandomState 实例]: 最小化结束时的随机状态。
 
-“search_result.x”给出了最佳超参数值，使用“search_result.fun”我们可以获得对应于这些超参数值的验证集的RMSE值（验证集中获得的最低RMSE值）。
+“search_result.x”给出了最佳超参数值，使用“search_result.fun”我们可以获得对应于这些超参数值的验证集的 RMSE 值（验证集中获得的最低 RMSE 值）。
 
-下图展示了我们为模型获得的最佳超参数值及验证集的最低RMSE值。如果你发现很难确定在使用“search_result.x”时超参数值的排列顺序，它与在“dimensions”列表中指定超参数的顺序一致。
+下图展示了我们为模型获得的最佳超参数值及验证集的最低 RMSE 值。如果你发现很难确定在使用“search_result.x”时超参数值的排列顺序，它与在“dimensions”列表中指定超参数的顺序一致。
 
 ****超参数值：****
 
@@ -342,15 +342,15 @@ logger("Start Program")
 
 +   lstm_init_learning_rate: 0.0006401363567813549
 
-****最低RMSE:**** 2.73755355221523
+****最低 RMSE:**** 2.73755355221523
 
 ### 收敛图
 
 在这张图中产生贝叶斯优化最低点的超参数就是我们得到的最佳超参数值集合。
 
-![figure-name](../Images/bdd75378596d881565195f7e17f34e3b.png)
+![figure-name](img/bdd75378596d881565195f7e17f34e3b.png)
 
-图表显示了贝叶斯优化和随机搜索中每次迭代（50次迭代）记录的最低RMSE值的比较。我们可以看到贝叶斯优化的收敛效果明显优于随机搜索。然而，在开始阶段，我们可以看到随机搜索比贝叶斯优化器更快地找到了更好的最小值。这可能是因为随机搜索的性质就是随机采样。
+图表显示了贝叶斯优化和随机搜索中每次迭代（50 次迭代）记录的最低 RMSE 值的比较。我们可以看到贝叶斯优化的收敛效果明显优于随机搜索。然而，在开始阶段，我们可以看到随机搜索比贝叶斯优化器更快地找到了更好的最小值。这可能是因为随机搜索的性质就是随机采样。
 
 我们终于来到了这篇文章的结尾，总结一下，我们希望这篇文章通过展示一种更好的方式来找到最优的超参数集，从而使你的深度学习模型构建任务变得更简单。希望你不再为超参数优化而感到压力。祝编码愉快，亲爱的极客们！
 
@@ -368,21 +368,21 @@ logger("Start Program")
 
 **相关：**
 
-+   [高斯过程的贝叶斯优化直观理解](/2018/10/intuitions-behind-bayesian-optimization-gaussian-processes.html)
++   高斯过程的贝叶斯优化直观理解
 
-+   [在 Google Colab 中使用 Hyperas 进行 Keras 超参数调整](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
++   在 Google Colab 中使用 Hyperas 进行 Keras 超参数调整
 
-+   [使用 AutoML 生成具有 TPOT 的机器学习管道](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)
++   使用 AutoML 生成具有 TPOT 的机器学习管道
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

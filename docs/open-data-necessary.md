@@ -1,8 +1,8 @@
 # 开放数据及其必要性
 
-> 原文：[https://www.kdnuggets.com/2022/03/open-data-necessary.html](https://www.kdnuggets.com/2022/03/open-data-necessary.html)
+> 原文：[`www.kdnuggets.com/2022/03/open-data-necessary.html`](https://www.kdnuggets.com/2022/03/open-data-necessary.html)
 
-![开放数据及其必要性](../Images/ca555bfab25b3f69de38dcfc0586c9e2.png)
+![开放数据及其必要性](img/ca555bfab25b3f69de38dcfc0586c9e2.png)
 
 图片作者
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -30,9 +30,9 @@
 
 +   **普遍参与：** 每个人都可以使用、重用和重新分发数据，不受任何研究领域、个人或团体的歧视。
 
-为了推动开放数据的使用，全球数据社区每年庆祝 [国际开放数据日](https://en.wikipedia.org/wiki/International_Open_Data_Day)。在3月6日，全球各地的各种组织会举办讲座、研讨会、演示、黑客马拉松，并宣布开放数据发布。
+为了推动开放数据的使用，全球数据社区每年庆祝 [国际开放数据日](https://en.wikipedia.org/wiki/International_Open_Data_Day)。在 3 月 6 日，全球各地的各种组织会举办讲座、研讨会、演示、黑客马拉松，并宣布开放数据发布。
 
-![开放数据及其必要性](../Images/ec9d4afb6c29935789ea4632927d3264.png)
+![开放数据及其必要性](img/ec9d4afb6c29935789ea4632927d3264.png)
 
 图片来源于 [it24hrs](https://www.it24hrs.com/wp-content/uploads/2018/03/open-data-day-1-768x512.jpg)
 
@@ -56,7 +56,7 @@
 
 研究出版物中提供的解决方案或方法论应当是可重复和可验证的。这只有在数据与研究解决方案一起共享时才有可能。验证将提高研究的质量并加速创新。它还帮助我们避免机器学习模型中的偏见，从而创建面向共同利益的包容性数据应用。
 
-![开放数据及其必要性](../Images/c4598b47f4c3c85836633cb0aa27438c.png)
+![开放数据及其必要性](img/c4598b47f4c3c85836633cb0aa27438c.png)
 
 图片由作者提供
 
@@ -66,15 +66,15 @@
 
 ## Kaggle
 
-[Kaggle](https://www.kaggle.com/datasets)是一个社区驱动的平台，数据科学家们在这里分享数据、研究、代码，并参与数据竞赛。如果你在寻找数据集，Kaggle应该是你的首选目的地，因为你可以通过简单的搜索找到各种开放源代码的数据集。
+[Kaggle](https://www.kaggle.com/datasets)是一个社区驱动的平台，数据科学家们在这里分享数据、研究、代码，并参与数据竞赛。如果你在寻找数据集，Kaggle 应该是你的首选目的地，因为你可以通过简单的搜索找到各种开放源代码的数据集。
 
 ## 谷歌数据集搜索
 
-[谷歌数据集搜索](https://datasetsearch.research.google.com/)使用谷歌搜索引擎，但专门用于数据。通过简单的搜索，你可以从各种来源找到任何类型的数据。例如，如果你喜欢某个数据集并想了解更多，它将提供GitHub、Kaggle和其他各种平台的链接以供查看和下载。
+[谷歌数据集搜索](https://datasetsearch.research.google.com/)使用谷歌搜索引擎，但专门用于数据。通过简单的搜索，你可以从各种来源找到任何类型的数据。例如，如果你喜欢某个数据集并想了解更多，它将提供 GitHub、Kaggle 和其他各种平台的链接以供查看和下载。
 
 ## Data.Gov
 
-美国政府在2015年公开了所有数据。这些数据收集包括了200,000个数据集，涵盖从气候变化到犯罪的各个领域。该平台用户友好，数据集以常见文件格式提供。你会惊讶于从[Data.Gov](https://data.gov/)获取的最详细人口统计数据集中学到的东西。
+美国政府在 2015 年公开了所有数据。这些数据收集包括了 200,000 个数据集，涵盖从气候变化到犯罪的各个领域。该平台用户友好，数据集以常见文件格式提供。你会惊讶于从[Data.Gov](https://data.gov/)获取的最详细人口统计数据集中学到的东西。
 
 ## Datahub.io
 

@@ -1,8 +1,8 @@
 # 自然语言处理的温和介绍
 
-> 原文：[https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)
+> 原文：[`www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html`](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)
 
-![自然语言处理的温和介绍](../Images/55bb4de431787fd628247e82e877fa52.png)
+![自然语言处理的温和介绍](img/55bb4de431787fd628247e82e877fa52.png)
 
 图片由 [Ryan Wallace](https://unsplash.com/@accrualbowtie?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/language?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
 在数据处理、数据采集、数据排序甚至数据操作中，计算机需要从机器获取某些输入，并且机器将某些输出告知用户，这些都是以某种语言的形式存在的。这种语言对于人类和机器来说都是不同且难以理解的。为了编码输入并使机器更容易理解，反之亦然，涉及到一些被称为计算机编程的语言。所有这些都属于自然语言处理的广泛领域，通过它，编码语言被转换为二进制形式，以便机器可以理解，而二进制语言则被解码，使人类能够理解。（Nadkarni et al., 2011）自然语言处理被归类为 [人工智能](https://algoscale.com/artificial-intelligence-solution-providers/) 的一个子领域。以下框图稍微演示了 NLP 如何与 AI 相关。
 
-![理解 NLP 如何与 AI 相关](../Images/ea887438f9bc1e3647229e65096c6881.png)
+![理解 NLP 如何与 AI 相关](img/ea887438f9bc1e3647229e65096c6881.png)
 
-图 1\. AI、ML、DL 和 NLP 之间的关系（简易表示）（*自然语言处理：提升您的业务水平*，2021年9月）
+图 1\. AI、ML、DL 和 NLP 之间的关系（简易表示）（*自然语言处理：提升您的业务水平*，2021 年 9 月）
 
 # 与 NLP 相关的示例
 
@@ -46,13 +46,13 @@
 
 自然语言处理包含机器学习、深度学习和计算机视觉的部分。简单来说，当处理自然语言处理时，某些机器或系统可能记录了所有用户输入的数据。这可以通过一个简单的例子来解释。如前所述，我们手机中的自动纠错功能涉及自然语言处理。当你输入诸如“我住在”这样的词语时，你的手机的句子完成算法会根据你最近的活动显示“洛杉矶”。这与一些反向传播、线性代数和统计工具相关。反向传播在用户使用不同词汇时起作用。例如，当我们最初写“我住在”时，句子完成会显示纽约，在某些打字和写作后，系统知道用户写“洛杉矶”后，现在每次在系统中使用“在”时即使是在其他句子中也会显示“洛杉矶”。经过一段时间，当用户在“在”后不再使用“洛杉矶”时，系统已经训练到这种程度，知道在用户写“住在”时应该显示“洛杉矶”，否则使用其他在写作或聊天中更常用的词。这是自然语言处理中的反向传播的主要例子。简单来说，神经网络中权重的调整和误差的最小化完全是数学问题。（*自然语言处理文本相似度，它是如何工作的及其背后的数学 | 作者 Jaskaran S. Puri | Towards Data Science*，2018）
 
-![ 反向传播的简单表示](../Images/aed57e43ff981655ac9af0baff4c9493.png)
+![ 反向传播的简单表示](img/aed57e43ff981655ac9af0baff4c9493.png)
 
 图 2\. 反向传播的简单表示 (*反向传播算法及其工作原理介绍* 2020)
 
 类似地，统计学已被应用于自然语言处理（NLP），以记录用户数据并制作用户使用哪些词汇的完整数据。例如，当用户开始对话时使用“Hello”。每次用户打开消息或 WhatsApp 时，开头都会出现 hello。这一切都得益于系统记录的最近数据，文本会根据用户采用的风格出现。这种对用户数据的统计分析还使用了概率分布。例如，通过适当的训练和错误修正，以及反向传播，系统经过良好训练，从而提出了令人兴奋的建议。概率和统计在 NLP 中的另一个例子是谷歌搜索历史或 YouTube 搜索历史。统计 NLP 的基本目标是获取具有某些未知概率分布的数据，并对其进行已知概率分布的推断。现在，借助于这些来自概率分布的结果，统计数据已被计算并优化，搜索结果也得到了改进，就像之前提到的谷歌搜索平台等一样。(*什么是自然语言处理？*, 2017)
 
-![训练 NLP 系统所需的输入、输出和用户输入](../Images/34e4c4913a339f05cfc091c23c59441b.png)
+![训练 NLP 系统所需的输入、输出和用户输入](img/34e4c4913a339f05cfc091c23c59441b.png)
 
 图 3\. 训练 NLP 系统所需的输入、输出和用户输入（Friedman et al., 2013）
 
@@ -68,17 +68,17 @@
 
 1.  *自然语言处理：将您的业务提升到新水平* (n.d.). 取自 https://datacenterfrontier.com/natural-language-processing-how-this-technique-can-take-your-business-to-the-next-level/
 
-1.  *NLP文本相似性，它是如何工作的及其背后的数学 | Jaskaran S. Puri | 数据科学前沿*。（无日期）。检索于2022年1月26日，来自 https://towardsdatascience.com/nlp-text-similarity-how-it-works-and-the-math-behind-it-a0fb90a05095
+1.  *NLP 文本相似性，它是如何工作的及其背后的数学 | Jaskaran S. Puri | 数据科学前沿*。（无日期）。检索于 2022 年 1 月 26 日，来自 https://towardsdatascience.com/nlp-text-similarity-how-it-works-and-the-math-behind-it-a0fb90a05095
 
-1.  *什么是自然语言处理？*（无日期）。检索于2022年1月26日，来自 https://machinelearningmastery.com/natural-language-processing/
+1.  *什么是自然语言处理？*（无日期）。检索于 2022 年 1 月 26 日，来自 https://machinelearningmastery.com/natural-language-processing/
 
-1.  Zhao, W., Peng, H., Eger, S., … E. C. 预印本 arXiv, & 2019，未定义。（无日期）。面向可扩展和可靠的胶囊网络在挑战性NLP应用中的应用。*Arxiv.Org*。检索于2022年1月26日，来自 https://arxiv.org/abs/1906.02829
+1.  Zhao, W., Peng, H., Eger, S., … E. C. 预印本 arXiv, & 2019，未定义。（无日期）。面向可扩展和可靠的胶囊网络在挑战性 NLP 应用中的应用。*Arxiv.Org*。检索于 2022 年 1 月 26 日，来自 https://arxiv.org/abs/1906.02829
 
-**[Neeraj Agarwal](https://www.linkedin.com/in/neeagl/)** 是 [Algoscale](https://www.linkedin.com/company/algoscale) 的创始人，该公司提供数据工程、应用AI、数据科学和产品工程等数据咨询服务。他在这一领域有超过9年的经验，帮助了从初创公司到《财富》100强企业等各种组织摄取和存储大量原始数据，以便将其转化为可操作的洞见，从而更好地决策并加速业务价值。
+**[Neeraj Agarwal](https://www.linkedin.com/in/neeagl/)** 是 [Algoscale](https://www.linkedin.com/company/algoscale) 的创始人，该公司提供数据工程、应用 AI、数据科学和产品工程等数据咨询服务。他在这一领域有超过 9 年的经验，帮助了从初创公司到《财富》100 强企业等各种组织摄取和存储大量原始数据，以便将其转化为可操作的洞见，从而更好地决策并加速业务价值。
 
 ### 更多相关内容
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
 +   [自然语言处理简介](https://www.kdnuggets.com/introduction-to-natural-language-processing)
 

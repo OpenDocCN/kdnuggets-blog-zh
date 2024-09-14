@@ -1,8 +1,8 @@
 # 如何实现一个联邦学习项目与医疗数据
 
-> 原文：[https://www.kdnuggets.com/2023/02/implement-federated-learning-project-healthcare-data.html](https://www.kdnuggets.com/2023/02/implement-federated-learning-project-healthcare-data.html)
+> 原文：[`www.kdnuggets.com/2023/02/implement-federated-learning-project-healthcare-data.html`](https://www.kdnuggets.com/2023/02/implement-federated-learning-project-healthcare-data.html)
 
-![如何实现一个联邦学习项目与医疗数据](../Images/ba49b93b733cd9c329dcdb16766b4e38.png)
+![如何实现一个联邦学习项目与医疗数据](img/ba49b93b733cd9c329dcdb16766b4e38.png)
 
 图片由 [Nataliya Vaitkevich](https://www.pexels.com/photo/food-healthy-sugar-business-8965129/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 接下来，你需要准备数据。这包括从不同的临床系统中提取数据，协调不同站点的数据（因为数据可能以不同的方式编码、格式不同，并且每个站点的数据分布也不同），注释数据（有时需要医生审查和注释数据），以及将数据划分为训练、测试和验证的部分。确保数据正确平衡并且能够代表整体人群，以确保结果的准确性是非常重要的。
 
-一旦你的数据准备好后，你需要选择一个联邦学习框架。现有几个可供选择的选项，包括[NVIDIA FLARE](https://developer.nvidia.com/flare)、[TensorFlow Federated](https://www.tensorflow.org/federated)、[PySyft](https://blog.openmined.org/tag/pysyft/)、[OpenFL](https://github.com/intel/openfl)和[Flower](https://flower.dev/)。这些框架各有其特性和能力，因此选择最适合你项目需求的框架非常重要。我们发现NVIDIA FLARE提供了一个强大的框架，可以与任何底层机器学习框架（如PyTorch、TensorFlow、sklearn等）兼容使用。
+一旦你的数据准备好后，你需要选择一个联邦学习框架。现有几个可供选择的选项，包括[NVIDIA FLARE](https://developer.nvidia.com/flare)、[TensorFlow Federated](https://www.tensorflow.org/federated)、[PySyft](https://blog.openmined.org/tag/pysyft/)、[OpenFL](https://github.com/intel/openfl)和[Flower](https://flower.dev/)。这些框架各有其特性和能力，因此选择最适合你项目需求的框架非常重要。我们发现 NVIDIA FLARE 提供了一个强大的框架，可以与任何底层机器学习框架（如 PyTorch、TensorFlow、sklearn 等）兼容使用。
 
 接下来，你需要为你的联邦学习项目建立基础设施。这包括选择一个云服务器来托管最终模型并协调联邦学习过程，以及在每个参与站点设置服务器，安装所需的软件，使本地数据集对该服务器可用，并确保服务器能够与云服务器通信。根据你选择的联邦学习框架，你可能还需要在每个站点的本地服务器和云服务器之间设置一个安全的通信通道，以确保数据的隐私和安全。
 
@@ -48,6 +48,6 @@
 
 +   [学习如何设计、测量和实施可信的 A/B 测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
 
-+   [如何使用 LangChain 实现自主 RAG：第 1 部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)
++   [如何使用 LangChain 实现自主 RAG：第一部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)
 
 +   [介绍来自 John Snow Labs 的医疗保健专用大语言模型](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)

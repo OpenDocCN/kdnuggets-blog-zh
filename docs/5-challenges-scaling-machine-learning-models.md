@@ -1,12 +1,12 @@
 # 扩展机器学习模型的 5 个挑战
 
-> 原文：[https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html`](https://www.kdnuggets.com/2020/10/5-challenges-scaling-machine-learning-models.html)
 
-[评论](#comments)
+评论
 
 **由 [Sigmoid Analyitcs](https://www.sigmoid.com/) 提供**
 
-![](../Images/5e7210238b61fc50dad0c9ef0d13f02b.png)
+![](img/5e7210238b61fc50dad0c9ef0d13f02b.png)
 
 机器学习（ML）模型是为了特定的业务目标而设计的。ML 模型的生产化是指在相关数据集上托管、扩展和运行 ML 模型。生产中的 ML 模型还需要具备对未来变化和反馈的弹性和灵活性。最近的一项研究[Forrester](https://www.rtinsights.com/forrester-ml-development/) 表示，提高客户体验、提升盈利能力和收入增长是组织计划通过 ML 计划实现的关键目标。
 
@@ -38,21 +38,21 @@
 
 **相关：**
 
-+   [机器学习模型部署](/2020/09/machine-learning-model-deployment.html)
++   机器学习模型部署
 
-+   [使用 Python 和 Heroku 创建并部署您的第一个 Flask 应用](/2020/09/flask-app-using-python-heroku.html)
++   使用 Python 和 Heroku 创建并部署您的第一个 Flask 应用
 
-+   [停止训练更多模型，开始部署它们](/2020/06/stop-training-models-start-deploying.html)
++   停止训练更多模型，开始部署它们
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

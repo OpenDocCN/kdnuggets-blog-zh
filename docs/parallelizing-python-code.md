@@ -1,8 +1,8 @@
 # 并行化 Python 代码
 
-> 原文：[https://www.kdnuggets.com/2021/10/parallelizing-python-code.html](https://www.kdnuggets.com/2021/10/parallelizing-python-code.html)
+> 原文：[`www.kdnuggets.com/2021/10/parallelizing-python-code.html`](https://www.kdnuggets.com/2021/10/parallelizing-python-code.html)
 
-[评论](#comments)
+评论
 
 **由 [Dawid Borycki](https://www.linkedin.com/in/dawidborycki/)，生物医学研究员和软件工程师 & [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学专家**
 
@@ -51,13 +51,13 @@ run_complex_operations(complex_operation, input)
 
 执行 [这个脚本](https://gist.github.com/mGalarnyk/8c491fbdfe6ce3e498a7f62f03fa9ca4)后，你将获得类似于下面的输出：
 
-![并行化博客 1](../Images/556b374ed5ce8fe0d936731ac27c8969.png)
+![并行化博客 1](img/556b374ed5ce8fe0d936731ac27c8969.png)
 
 如你所见，在本教程中使用的笔记本电脑上执行此代码大约花费了 39 秒。让我们看看如何改进这个结果。
 
-## 基于进程的并行ism
+## 基于进程的并行 ism
 
-第一种方法是使用基于进程的并行ism。通过这种方法，可以同时启动多个进程。这种方式可以使它们并行地执行计算。
+第一种方法是使用基于进程的并行 ism。通过这种方法，可以同时启动多个进程。这种方式可以使它们并行地执行计算。
 
 从 Python 3 开始，[multiprocessing 包](https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing) 已经预装，并且为我们提供了启动并发进程的便捷语法。它提供了 Pool 对象，该对象自动将输入划分为子集，并在多个进程中分配它们。
 
@@ -88,9 +88,9 @@ if __name__ == '__main__':
 
 [代码示例](https://gist.github.com/mGalarnyk/b5455b0454815b04363ef9994f22fbf3)
 
-每个进程并行执行复杂的操作。因此，理论上代码可以将总执行时间减少最多十倍。然而，下面的代码输出仅显示了大约四倍的改进（上一节的39秒 vs 本节的9.4秒）。
+每个进程并行执行复杂的操作。因此，理论上代码可以将总执行时间减少最多十倍。然而，下面的代码输出仅显示了大约四倍的改进（上一节的 39 秒 vs 本节的 9.4 秒）。
 
-![parallelizing blog 2](../Images/586ee96a1d06dc9d5c7323aed2b130ef.png)
+![parallelizing blog 2](img/586ee96a1d06dc9d5c7323aed2b130ef.png)
 
 改进效果没有达到十倍的原因有几个。首先，能够同时运行的最大进程数取决于系统中的 CPU 数量。你可以通过使用`os.cpu_count()`方法来查看系统中的 CPU 数量。
 
@@ -99,13 +99,13 @@ import os
 print('Number of CPUs in the system: {}'.format(os.cpu_count()))
 ```
 
-![Figure](../Images/e533ca816283748e2fbec835c8a9607d.png)
+![Figure](img/e533ca816283748e2fbec835c8a9607d.png)
 
 本教程中使用的机器有八个 CPU。
 
 改进效果没有更好的原因是，本教程中的计算相对较小。最后，需要注意的是，进行并行计算时通常会有一些开销，因为需要通信的进程必须利用[进程间通信机制](https://en.wikipedia.org/wiki/Inter-process_communication)。这意味着对于非常小的任务，并行计算往往比串行计算（普通 Python）要慢。如果你对了解更多关于 multiprocessing 的内容感兴趣，Selva Prabhakaran 有一篇[优秀的博客](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray) ，这篇博客启发了本教程的这一部分。如果你想了解更多关于并行/分布式计算的权衡，[可以查看这个教程](https://towardsdatascience.com/writing-your-first-distributed-python-application-with-ray-4248ebc07f41)。
 
-![parallelizing blog 4](../Images/0950f9777fafefce27b2135f25e3ebea.png)
+![parallelizing blog 4](img/0950f9777fafefce27b2135f25e3ebea.png)
 
 ## 专用库
 
@@ -137,11 +137,11 @@ if __name__ == '__main__':
 
 以下输出显示了使用和不使用 NumPy 的性能对比，针对 [这个脚本](https://gist.github.com/mGalarnyk/703c53bb98aa94d66bb6c49d48ce5c09)。
 
-![并行化博客 5](../Images/674158bdcd5d5338901af10c077dfd72.png)
+![并行化博客 5](img/674158bdcd5d5338901af10c077dfd72.png)
 
-NumPy 提供了显著的性能提升。在这里，NumPy 将计算时间减少到原始时间的大约 10%（859ms 对比 9.515秒）。它更快的原因之一是因为 NumPy 中的大部分处理都是向量化的。通过向量化，底层代码有效地被“并行化”，因为操作可以一次计算多个数组元素，而不是逐一循环处理。如果你对了解更多内容感兴趣，Jake Vanderplas 进行了一次很好的讲座，[可以在这里](https://youtu.be/EEUXKG97YRw?t=613)观看。
+NumPy 提供了显著的性能提升。在这里，NumPy 将计算时间减少到原始时间的大约 10%（859ms 对比 9.515 秒）。它更快的原因之一是因为 NumPy 中的大部分处理都是向量化的。通过向量化，底层代码有效地被“并行化”，因为操作可以一次计算多个数组元素，而不是逐一循环处理。如果你对了解更多内容感兴趣，Jake Vanderplas 进行了一次很好的讲座，[可以在这里](https://youtu.be/EEUXKG97YRw?t=613)观看。
 
-![并行化博客 6](../Images/5202adfec876af490cac38a2ffebf8a9.png)
+![并行化博客 6](img/5202adfec876af490cac38a2ffebf8a9.png)
 
 ## IPython Parallel
 
@@ -153,7 +153,7 @@ ipcluster start -n 10
 
 最后的参数控制要启动的引擎（节点）数量。上述命令在 [安装 ipyparallel Python 包](https://ipyparallel.readthedocs.io/en/latest/)后变得可用。以下是一个示例输出：
 
-![并行化博客 7](../Images/49b3a897c2a925662927af084c4d024c.png)
+![并行化博客 7](img/49b3a897c2a925662927af084c4d024c.png)
 
 下一步是提供应该连接到 ipcluster 并启动并行作业的 Python 代码。幸运的是，IPython 提供了一个方便的 API 来实现这一点。代码看起来像是基于 Pool 对象的进程并行：
 
@@ -194,17 +194,17 @@ run_complex_operations(complex_operation_numpy, input, pool)
 
 在终端中新标签页中执行的代码生成了如下输出：
 
-![并行化博客 8](../Images/e475926323d5f6e832d388f481c8efc1.png)
+![并行化博客 8](img/e475926323d5f6e832d388f481c8efc1.png)
 
 对于 IPython Parallel，使用和不使用 NumPy 的执行时间分别为 13.88 毫秒和 9.98 毫秒。注意，标准输出中没有包含日志，但可以通过额外的命令进行评估。
 
-![并行化博客 9](../Images/433106b430695e82862e568760b0396d.png)
+![并行化博客 9](img/433106b430695e82862e568760b0396d.png)
 
 ## Ray
 
 类似于 IPython Parallel，[Ray](https://docs.ray.io/en/master/index.html) 可以用于并行 **和** 分布式计算。Ray 是一个快速、简单的分布式执行框架，使得扩展应用程序和利用最先进的机器学习库变得容易。使用 Ray，你可以将顺序运行的 Python 代码转化为分布式应用程序，代码修改最小。
 
-![Figure](../Images/8e1afe4eff7de3591f54c705e0083009.png)
+![Figure](img/8e1afe4eff7de3591f54c705e0083009.png)
 
 虽然这个教程简要讲解了 Ray 如何简化普通 Python 代码的并行化，但值得注意的是，Ray 及其生态系统也使得并行化现有库变得容易，如 [scikit-learn](https://medium.com/distributed-computing-with-ray/how-to-speed-up-scikit-learn-model-training-aaf17e2d1e1)、[XGBoost](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray)、[LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray)、[PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead) 等等。
 
@@ -234,17 +234,17 @@ def run_complex_operations(operation, input):
 
 执行 [这个脚本](https://gist.github.com/mGalarnyk/30c8672620c8655a37940be935899a57) 后，你将得到类似以下的输出：
 
-![parallelizing blog 11](../Images/464768f1d47ae3ef302ee401e8f70cac.png)
+![parallelizing blog 11](img/464768f1d47ae3ef302ee401e8f70cac.png)
 
 使用和不使用 NumPy 的 Ray 执行时间分别为 3.382 秒和 419.98 毫秒。重要的是要记住，当执行长时间运行的任务时，Ray 的性能优势会更加明显，如下图所示。
 
-![Figure](../Images/da5f3e3440818c336832cd06dfbab026.png)
+![Figure](img/da5f3e3440818c336832cd06dfbab026.png)
 
 当运行更大规模的任务时，Ray 的好处更为明显 [(image source)](https://towardsdatascience.com/10x-faster-parallel-python-without-python-multiprocessing-e5017c93cce1)
 
 如果你想了解 Ray 的语法，可以在 [这里](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray) 查阅介绍教程。
 
-![parallelizing blog 13](../Images/ff1bcf03b91977091f603a756bd3e9a3.png)
+![parallelizing blog 13](img/ff1bcf03b91977091f603a756bd3e9a3.png)
 
 ## 其他 Python 实现
 
@@ -264,21 +264,21 @@ def run_complex_operations(operation, input):
 
 **相关内容：**
 
-+   [如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)
++   如何加速 Scikit-Learn 模型训练
 
-+   [使用 Ray 编写你的第一个分布式 Python 应用程序](/2021/08/distributed-python-application-ray.html)
++   使用 Ray 编写你的第一个分布式 Python 应用程序
 
-+   [Dask 和 Pandas：数据量再多也不为过](/2021/03/dask-pandas-data.html)
++   Dask 和 Pandas：数据量再多也不为过
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

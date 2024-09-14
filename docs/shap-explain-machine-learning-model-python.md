@@ -1,6 +1,6 @@
 # SHAP: 用 Python 解释任何机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
+> 原文：[`www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html`](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
 
 # 动机
 
@@ -8,23 +8,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 假设你正在训练一个机器学习模型，预测某个人是否会点击广告。在接收到有关某个人的一些信息后，模型预测该人不会点击广告。
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/3b30d440cb417081f0bb238bf94a000c.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/3b30d440cb417081f0bb238bf94a000c.png)
 
 图片由作者提供
 
 但为什么模型会有这样的预测？每个特征对预测的贡献有多大？如果能看到一个图示，展示每个特征对预测的贡献情况，会不会很不错呢？
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/4b1a6818bd977e96f5dc0c6b454656c1.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/4b1a6818bd977e96f5dc0c6b454656c1.png)
 
 图片由作者提供
 
@@ -36,7 +36,7 @@ Shapley 值是一种游戏理论方法，涉及在联盟中公平地分配收益
 
 由于每个参与者对联盟的贡献不同，Shapley 值确保每个参与者**根据他们的贡献获得公平的份额**。
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/3e9bf83ef146048b60cbf1886bafde1e.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/3e9bf83ef146048b60cbf1886bafde1e.png)
 
 图片由作者提供
 
@@ -62,13 +62,13 @@ Shapley 值用于解决各种问题，涉及对每个工作者/特征在一个�
 
 +   邮件营销、谷歌广告和社交媒体：$450
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/449d824635515d27a596cf0b37eb620e.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/449d824635515d27a596cf0b37eb620e.png)
 
 图片由作者提供
 
 使用三种广告与不使用广告之间的收入差为 $300。**每种广告对这一差异的贡献有多少？**
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/6b4b9968cef63b06a607e3a4c92eacd7.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/6b4b9968cef63b06a607e3a4c92eacd7.png)
 
 图片由作者提供
 
@@ -76,7 +76,7 @@ Shapley 值用于解决各种问题，涉及对每个工作者/特征在一个�
 
 我们首先计算 Google 广告对公司收入的总贡献。Google 广告的总贡献可以通过以下公式计算：
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/cc602f3fd670a9e28005d002e8543cc8.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/cc602f3fd670a9e28005d002e8543cc8.png)
 
 图片由作者提供
 
@@ -94,31 +94,31 @@ Shapley 值用于解决各种问题，涉及对每个工作者/特征在一个�
 
 +   Google 广告 + 邮件营销 + 社交媒体
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/400acda745fee657d1d12d91e0a7223d.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/400acda745fee657d1d12d91e0a7223d.png)
 
 图片由作者提供
 
 Google 广告对无广告的边际贡献是：
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/4cdc3cdd36e65e573ef6c2aa9d40cafd.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/4cdc3cdd36e65e573ef6c2aa9d40cafd.png)
 
 图片由作者提供
 
 Google 广告对 Google 广告和社交媒体组合的边际贡献是：
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/a7a5a6a05f437b8228620bf44b6cf4ce.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/a7a5a6a05f437b8228620bf44b6cf4ce.png)
 
 图片由作者提供
 
 Google 广告对 Google 广告和邮件营销组合的边际贡献是：
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/00d32e8e7b834e04bc0d42b778eb1208.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/00d32e8e7b834e04bc0d42b778eb1208.png)
 
 图片由作者提供
 
 Google 广告对 Google 广告、邮件营销和社交媒体组合的边际贡献是：
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/09edb469c85e8a6d4c8cdf7b13b096bf.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/09edb469c85e8a6d4c8cdf7b13b096bf.png)
 
 图片由作者提供
 
@@ -128,13 +128,13 @@ Google 广告对 Google 广告、邮件营销和社交媒体组合的边际贡�
 
 然后我们将根据每个层级中的边数分配权重。我们看到：
 
-+   第一层包含**3条边**，所以每条边的权重将是**1/3**
++   第一层包含**3 条边**，所以每条边的权重将是**1/3**
 
-+   第二层包含**6条边**，所以每条边的权重将是**1/6**
++   第二层包含**6 条边**，所以每条边的权重将是**1/6**
 
-+   第三层包含**3条边**，所以每条边的权重将是**1/3**
++   第三层包含**3 条边**，所以每条边的权重将是**1/3**
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/9c86a68002fb59152d2014f2a6979ef3.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/9c86a68002fb59152d2014f2a6979ef3.png)
 
 图片由作者提供
 
@@ -142,17 +142,17 @@ Google 广告对 Google 广告、邮件营销和社交媒体组合的边际贡�
 
 现在我们准备好根据之前找到的权重和边际贡献来找出 Google 广告的总贡献！
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/a5a128331e8948d95ede48cda6815deb.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/a5a128331e8948d95ede48cda6815deb.png)
 
 图片由作者提供
 
-![SHAP: 解释任何机器学习模型的 Python 库](../Images/c865e74919223dd7a960cd4fbd8d8d87.png)
+![SHAP: 解释任何机器学习模型的 Python 库](img/c865e74919223dd7a960cd4fbd8d8d87.png)
 
 图片由作者提供
 
 太棒了！所以 Google 广告对使用三种广告策略和不使用广告之间的总收入差异贡献了 $36.67。36.67 是 Google 广告的 Shapley 值。
 
-![SHAP: 解释任何机器学习模型的 Python 库](../Images/4cde13a07089c1fa9093fec319eda42e.png)
+![SHAP: 解释任何机器学习模型的 Python 库](img/4cde13a07089c1fa9093fec319eda42e.png)
 
 图片由作者提供
 
@@ -164,7 +164,7 @@ Google 广告对 Google 广告、邮件营销和社交媒体组合的边际贡�
 
 +   Google 广告贡献了 $36.67
 
-![SHAP: 解释任何机器学习模型的 Python 库](../Images/27526b46d60f4e9395c71581c8cceb97.png)
+![SHAP: 解释任何机器学习模型的 Python 库](img/27526b46d60f4e9395c71581c8cceb97.png)
 
 图片由作者提供
 
@@ -222,13 +222,13 @@ pip install shap
 
 可视化第一次预测的解释：
 
-![SHAP: 解释任何机器学习模型的 Python 库](../Images/bd7178c7376b4a180d961773567aceef.png)
+![SHAP: 解释任何机器学习模型的 Python 库](img/bd7178c7376b4a180d961773567aceef.png)
 
 图片由作者提供
 
 哦！现在我们知道了每个特征对第一次预测的贡献。以上图表的解释如下：
 
-![SHAP: 解释任何机器学习模型的 Python 实现](../Images/238b3e7f3c8a917a6b2a6ba6ef6b4e0b.png)
+![SHAP: 解释任何机器学习模型的 Python 实现](img/238b3e7f3c8a917a6b2a6ba6ef6b4e0b.png)
 
 图片由作者提供
 
@@ -242,7 +242,7 @@ pip install shap
 
 我们应当期望总贡献等于预测与均值预测之间的差值。让我们来检查一下：
 
-![SHAP: 解释任何机器学习模型的 Python 实现](../Images/643dc5338b0e7fe8c2ea0652ea9c61bb.png)
+![SHAP: 解释任何机器学习模型的 Python 实现](img/643dc5338b0e7fe8c2ea0652ea9c61bb.png)
 
 图片由作者提供
 
@@ -250,7 +250,7 @@ pip install shap
 
 可视化第二次预测的解释：
 
-![SHAP: 解释任何机器学习模型的 Python 实现](../Images/1aa86245f98e416efa7c029b8b04611b.png)
+![SHAP: 解释任何机器学习模型的 Python 实现](img/1aa86245f98e416efa7c029b8b04611b.png)
 
 图片由作者提供
 
@@ -258,7 +258,7 @@ pip install shap
 
 我们可以使用 SHAP 总结图可视化这些特征在多个实例中的整体影响，而不是查看每个个体实例。
 
-![SHAP: 解释任何机器学习模型的 Python 实现](../Images/22ca7fd9b6cebe3fc38f23a61b9d117a.png)
+![SHAP: 解释任何机器学习模型的 Python 实现](img/22ca7fd9b6cebe3fc38f23a61b9d117a.png)
 
 图片由作者提供
 
@@ -282,7 +282,7 @@ SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 
 我们还可以使用 SHAP 条形图获取全局特征重要性图。
 
-![SHAP: 解释任何机器学习模型的 Python 实现](../Images/a9d0566b64a4029dcf31f0ea63934b37.png)
+![SHAP: 解释任何机器学习模型的 Python 实现](img/a9d0566b64a4029dcf31f0ea63934b37.png)
 
 图片由作者提供
 
@@ -294,7 +294,7 @@ SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 
 每日互联网使用特征的散点图：
 
-![SHAP: 解释任何机器学习模型的 Python 实现](../Images/fbc15be0826789197d67b3d116e2c1d1.png)
+![SHAP: 解释任何机器学习模型的 Python 实现](img/fbc15be0826789197d67b3d116e2c1d1.png)
 
 图片由作者提供
 
@@ -304,7 +304,7 @@ SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 
 散点图将尝试挑选出与每日互联网使用最强交互的特征列，即每日网站使用时间。
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/520b6d842131e2570085e3a9298cc8b6.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/520b6d842131e2570085e3a9298cc8b6.png)
 
 作者提供的图片
 
@@ -314,25 +314,25 @@ SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 
 ## 每日网站使用时间
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/b57a8a8fb5e97ab2050fcd8b726c0c3f.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/b57a8a8fb5e97ab2050fcd8b726c0c3f.png)
 
 作者提供的图片
 
 ## 区域收入
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/7b03af5d34caf7a20f509044dd2c22ee.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/7b03af5d34caf7a20f509044dd2c22ee.png)
 
 作者提供的图片
 
 ## 年龄
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/e15a46c55b39439f040ff894113590c0.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/e15a46c55b39439f040ff894113590c0.png)
 
 作者提供的图片
 
 ## 性别
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/332c51197f0fe98e3c9c3224de04cb12.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/332c51197f0fe98e3c9c3224de04cb12.png)
 
 作者提供的图片
 
@@ -340,7 +340,7 @@ SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 
 你还可以通过 SHAP 交互值汇总图观察**特征之间的交互矩阵**。在这个图中，主要效应位于对角线上，而交互效应则位于对角线之外。
 
-![SHAP: 用 Python 解释任何机器学习模型](../Images/eb70796205fff65c237132a5dfb3c8e3.png)
+![SHAP: 用 Python 解释任何机器学习模型](img/eb70796205fff65c237132a5dfb3c8e3.png)
 
 作者提供的图片
 
@@ -356,7 +356,7 @@ SHAP 总结图告诉我们数据集中最重要的特征及其影响范围。
 
 ## 参考
 
-Mazzanti, S. (2021年4月21日)。*SHAP 以我希望有人向我解释的方式进行了说明*。Medium。于2021年9月23日获取，来源：[https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.)
+Mazzanti, S. (2021 年 4 月 21 日)。*SHAP 以我希望有人向我解释的方式进行了说明*。Medium。于 2021 年 9 月 23 日获取，来源：[`towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.`](https://towardsdatascience.com/shap-explained-the-way-i-wish-someone-explained-it-to-me-ab81cc69ef30.)
 
 **[Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)** 是一位高产的数据科学作家，撰写了[一系列令人印象深刻的有用数据科学主题以及代码和文章](https://github.com/khuyentran1401/Data-science)。Khuyen 目前正在寻找 Bay Area 的机器学习工程师角色、数据科学家角色或开发者推广者角色，预计从 2022 年 5 月开始，如果你在寻找具备她技能的人才，请联系她。
 
@@ -364,14 +364,14 @@ Mazzanti, S. (2021年4月21日)。*SHAP 以我希望有人向我解释的方式�
 
 ### 更多相关主题
 
-+   [NExT-GPT介绍：全方位多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
++   [NExT-GPT 介绍：全方位多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
 
-+   [使用SHAP值进行机器学习模型解释](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)
++   [使用 SHAP 值进行机器学习模型解释](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)
 
-+   [使用LIME解释NLP模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
++   [使用 LIME 解释 NLP 模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
 
 +   [如何在没有工作经验的情况下找到你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
 +   [在你参加任何免费的数据科学课程之前，请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
 
-+   [Segment Anything模型：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)
++   [Segment Anything 模型：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)

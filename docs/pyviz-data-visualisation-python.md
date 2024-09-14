@@ -1,8 +1,8 @@
 # PyViz：简化 Python 中的数据可视化过程
 
-> 原文：[https://www.kdnuggets.com/2019/06/pyviz-data-visualisation-python.html](https://www.kdnuggets.com/2019/06/pyviz-data-visualisation-python.html)
+> 原文：[`www.kdnuggets.com/2019/06/pyviz-data-visualisation-python.html`](https://www.kdnuggets.com/2019/06/pyviz-data-visualisation-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Parul Pandey](https://www.linkedin.com/in/parul-pandey-a5498975/)，数据科学爱好者**
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 现有的 Python 数据可视化系统似乎是一个令人困惑的网状结构。
 
-![图](../Images/27489845e7199d0bd1c90d77cb52c567.png)
+![图](img/27489845e7199d0bd1c90d77cb52c567.png)
 
 [来源](http://pyviz.org/tutorial/01_Workflow_Introduction.html)
 
@@ -40,7 +40,7 @@
 
 > **这是 PyViz 下的 Python 可视化格局。**
 
-![Python 的可视化 landscape 与 PyViz。](../Images/a831c55e528b8bb66bed02795e43ead6.png)
+![Python 的可视化 landscape 与 PyViz。](img/a831c55e528b8bb66bed02795e43ead6.png)
 
 [源代码](http://pyviz.org/tutorial/01_Workflow_Introduction.html)
 
@@ -62,9 +62,9 @@ Pyviz 的一些重要目标包括：
 
 组成 PyViz 的开源 [库](http://pyviz.org/background.html)有：
 
-![](../Images/18677c51bc84cd86b6ac162149548f1c.png)
+![](img/18677c51bc84cd86b6ac162149548f1c.png)
 
-![](../Images/765a5c8e55fc50fcda48c268c989b007.png)
+![](img/765a5c8e55fc50fcda48c268c989b007.png)
 
 +   [**HoloViews**](http://holoviews.org/): 用于立即可视化数据的声明性对象，从方便的高级规格构建 Bokeh 绘图
 
@@ -82,11 +82,11 @@ Pyviz 的一些重要目标包括：
 
 除此之外，PyViz 核心工具可以与以下库无缝配合。
 
-![](../Images/56a5d7549a531177559b06d2c88375a2.png)
+![](img/56a5d7549a531177559b06d2c88375a2.png)
 
-![](../Images/545550091b111de208200cf88f94da4c.png)
+![](img/545550091b111de208200cf88f94da4c.png)
 
-![](../Images/b2eac12dddc9b91b672a900cde72701e.png)
+![](img/b2eac12dddc9b91b672a900cde72701e.png)
 
 此外，几乎所有其他绘图库中的对象都可以与 [**Panel**](https://panel.pyviz.org/) 一起使用，包括对这里列出的所有内容的特定支持，以及任何可以生成 HTML、PNG 或 SVG 的内容。**HoloViews** 还支持 [**Plotly**](https://plot.ly/) 进行 3D 可视化。
 
@@ -140,7 +140,7 @@ import bokeh
 
 **数据集**
 
-所用数据集涉及每10万人中记录的 [麻疹和百日咳病例数](http://graphics.wsj.com/infectious-diseases-and-vaccines/#b02g20t20w15)，涵盖了美国每个州随时间变化的数据。该数据集在 PyViz 教程中预装。
+所用数据集涉及每 10 万人中记录的 [麻疹和百日咳病例数](http://graphics.wsj.com/infectious-diseases-and-vaccines/#b02g20t20w15)，涵盖了美国每个州随时间变化的数据。该数据集在 PyViz 教程中预装。
 
 **使用 Pandas 进行数据探索**
 
@@ -155,7 +155,7 @@ diseases_data = pd.read_csv('../data/diseases.csv.gz')
 diseases_data.head()
 ```
 
-![](../Images/319c1858c1ff6b833f2427dc22e1783f.png)
+![](img/319c1858c1ff6b833f2427dc22e1783f.png)
 
 数字是好的，但图表能更好地展示数据中的模式。
 
@@ -169,7 +169,7 @@ diseases_data.head()
 diseases_data.plot();
 ```
 
-![](../Images/e83fb97312cf103486b62752ef31c456.png)
+![](img/e83fb97312cf103486b62752ef31c456.png)
 
 这并没有传达太多信息。让我们使用 pandas 进行一些操作，以获得有意义的结果。
 
@@ -185,9 +185,9 @@ diseases_by_year = diseases_data[["Year","measles"]].groupby("Year").aggregate(n
 diseases_by_year.plot();
 ```
 
-![](../Images/0b2c2ad5b4effed9811d7b7b51dcb0a3.png)
+![](img/0b2c2ad5b4effed9811d7b7b51dcb0a3.png)
 
-这就更有意义了。在这里，我们可以清楚地推断出大约在1970年发生了某些事情，导致麻疹的发生率几乎降为零。这是正确的，因为麻疹疫苗大约在1963年引入美国 [[Wikipedia](https://en.wikipedia.org/wiki/Measles_vaccine)]
+这就更有意义了。在这里，我们可以清楚地推断出大约在 1970 年发生了某些事情，导致麻疹的发生率几乎降为零。这是正确的，因为麻疹疫苗大约在 1963 年引入美国 [[Wikipedia](https://en.wikipedia.org/wiki/Measles_vaccine)]
 
 **使用 HVPlot 和 Bokeh 进行数据探索**
 
@@ -201,7 +201,7 @@ import hvplot.pandas
 diseases_by_year.hvplot()
 ```
 
-![](../Images/275fc8c22d85f1cdeaa0ed355756f083.png)
+![](img/275fc8c22d85f1cdeaa0ed355756f083.png)
 
 调用返回的对象称为 [**HoloViews**](http://holoviews.org/) 对象（这里是 Holoviews [Curve](http://holoviews.org/reference/elements/bokeh/Curve.html)），它 *显示* 为 Bokeh 图表。Holoviews 图表更丰富，方便在探索数据时捕捉你的理解。
 
@@ -225,7 +225,7 @@ vaccination_introduced = diseases_by_year.hvplot() * vline * \
 vaccination_introduced
 ```
 
-![](../Images/c0bffa04f10ce31d0f62f7a9b5c605b7.png)
+![](img/c0bffa04f10ce31d0f62f7a9b5c605b7.png)
 
 Holoviews 对象保存了原始数据，而不是其他绘图库。例如，可以以表格格式访问原始数据。
 
@@ -234,7 +234,7 @@ print(vaccination_introduced)
 vaccination_introduced.Curve.I.data.head()
 ```
 
-![](../Images/64582432bf292870cede1ecee10e8cc4.png)
+![](img/64582432bf292870cede1ecee10e8cc4.png)
 
 在这里，我们能够使用用于绘制图表的数据。此外，现在很容易以多种不同的方式拆分数据。
 
@@ -247,7 +247,7 @@ by_state = measles_agg.hvplot('Year', groupby='State', width=500, dynamic=False)
 by_state * vline
 ```
 
-![](../Images/e8cc8b167576881bb62ce8ee47ac4a89.png)
+![](img/e8cc8b167576881bb62ce8ee47ac4a89.png)
 
 我们可以将图表并排放置，以便更好地进行比较，而不是使用下拉菜单。
 
@@ -255,22 +255,22 @@ by_state * vline
 by_state["Alabama"].relabel('Alabama') + by_state["Florida"].relabel('Florida')
 ```
 
-![](../Images/793732d49a2711dcea19f5b26e636304.png)
+![](img/793732d49a2711dcea19f5b26e636304.png)
 
-我们还可以改变图表的类型，比如改为柱状图。让我们比较1980年至1985年四个州的麻疹模式。
+我们还可以改变图表的类型，比如改为柱状图。让我们比较 1980 年至 1985 年四个州的麻疹模式。
 
 ```py
 states = ['New York', 'Alabama', 'California', 'Florida']
 measles_agg.loc[1980:1990, states].hvplot.bar('Year', by='State', rot=90)
 ```
 
-![](../Images/fb6aaa4a69096c3ca9b9db1ffd57c756.png)
+![](img/fb6aaa4a69096c3ca9b9db1ffd57c756.png)
 
 从以上示例可以明显看出，通过选择**HoloViews+Bokeh**图表，我们可以在浏览器中探索数据，具有完全的互动性和最小的代码。
 
-**使用PyViz可视化大型数据集**
+**使用 PyViz 可视化大型数据集**
 
-PyViz还能够轻松处理非常大的数据集。对于这样的数据集，PyViz套件的其他成员将发挥作用。
+PyViz 还能够轻松处理非常大的数据集。对于这样的数据集，PyViz 套件的其他成员将发挥作用。
 
 +   [**GeoViews**](http://geoviews.org/)
 
@@ -282,7 +282,7 @@ PyViz还能够轻松处理非常大的数据集。对于这样的数据集，PyV
 
 +   [**Colorcet**](https://colorcet.pyviz.org/)**用于**感知上均匀的大数据色图
 
-为了展示这些库在处理大量数据时的能力，让我们使用NYC出租车数据集，该数据集包含了高达1000万次出租车行程的数据。这些数据已在教程中提供。
+为了展示这些库在处理大量数据时的能力，让我们使用 NYC 出租车数据集，该数据集包含了高达 1000 万次出租车行程的数据。这些数据已在教程中提供。
 
 ```py
 #Importing the necessary libraries
@@ -295,9 +295,9 @@ from holoviews.operation.datashader import datashade
 from geoviews.tile_sources import EsriImagery
 ```
 
-[**Dask**](http://docs.dask.org/en/latest/) 是一个用于Python的灵活并行计算库。Dask DataFrame是一个大型并行DataFrame，由许多较小的Pandas DataFrame组成，按索引拆分。这些Pandas DataFrame可以存储在磁盘上，以便在单台机器上进行超出内存限制的计算，或在集群中的许多不同机器上进行计算。一个Dask DataFrame操作会触发许多操作在组成的Pandas DataFrame上。
+[**Dask**](http://docs.dask.org/en/latest/) 是一个用于 Python 的灵活并行计算库。Dask DataFrame 是一个大型并行 DataFrame，由许多较小的 Pandas DataFrame 组成，按索引拆分。这些 Pandas DataFrame 可以存储在磁盘上，以便在单台机器上进行超出内存限制的计算，或在集群中的许多不同机器上进行计算。一个 Dask DataFrame 操作会触发许多操作在组成的 Pandas DataFrame 上。
 
-[**Cartopy**](https://scitools.org.uk/cartopy/docs/latest/) 是一个Python包，旨在进行地理空间数据处理，以生成地图和其他地理空间数据分析。
+[**Cartopy**](https://scitools.org.uk/cartopy/docs/latest/) 是一个 Python 包，旨在进行地理空间数据处理，以生成地图和其他地理空间数据分析。
 
 ```py
 topts = dict(width=700, height=600, bgcolor='black', xaxis=None, yaxis=None, show_grid=False)
@@ -320,9 +320,9 @@ trips = datashade(pts, cmap=fire, **dopts)
 tiles * trips
 ```
 
-![](../Images/ed57941c710831220406025436a02947.png)
+![](img/ed57941c710831220406025436a02947.png)
 
-我们还可以添加[**小部件**](http://pyviz.org/tutorial/01_Workflow_Introduction.html)来控制选择。这可以在笔记本中完成，也可以通过标记可服务对象为`.servable()`，然后通过Bokeh Server运行.ipynb文件，或者将代码提取到单独的.py文件中并执行相同操作。
+我们还可以添加[**小部件**](http://pyviz.org/tutorial/01_Workflow_Introduction.html)来控制选择。这可以在笔记本中完成，也可以通过标记可服务对象为`.servable()`，然后通过 Bokeh Server 运行.ipynb 文件，或者将代码提取到单独的.py 文件中并执行相同操作。
 
 ```py
 import param, panel as pn
@@ -350,36 +350,36 @@ pn.Row(explorer.param, explorer.make_view).servable()
 
 **出租车探索器**
 
-![](../Images/9cabd372c826098738ab75c89c7c3b0d.png)
+![](img/9cabd372c826098738ab75c89c7c3b0d.png)
 
-含有所有运行代码的Notebook可以从[**这里**](https://github.com/parulnith/Data-Visualisation-libraries/tree/master/Data%20Visualisation%20with%20PyViz)访问。然而，互动性在GitHub上无法呈现，但你仍然可以访问笔记本并在本地运行。
+含有所有运行代码的 Notebook 可以从[**这里**](https://github.com/parulnith/Data-Visualisation-libraries/tree/master/Data%20Visualisation%20with%20PyViz)访问。然而，互动性在 GitHub 上无法呈现，但你仍然可以访问笔记本并在本地运行。
 
 ### 结论
 
-PyViz工具帮助我们即使用少量代码也能创建美观的可视化图表。PyViz工具集合在一起构建高性能、可扩展、灵活且可部署的可视化、应用程序和仪表板，无需显式使用JavaScript或其他网页技术。本文只是对多功能PyViz生态系统的简单介绍。深入学习整个教程，以了解其复杂性及其在不同数据类型中的使用。
+PyViz 工具帮助我们即使用少量代码也能创建美观的可视化图表。PyViz 工具集合在一起构建高性能、可扩展、灵活且可部署的可视化、应用程序和仪表板，无需显式使用 JavaScript 或其他网页技术。本文只是对多功能 PyViz 生态系统的简单介绍。深入学习整个教程，以了解其复杂性及其在不同数据类型中的使用。
 
-**简介： [Parul Pandey](https://www.linkedin.com/in/parul-pandey-a5498975/)** 是一位数据科学爱好者，常为数据科学出版物如Towards Data Science撰稿。
+**简介： [Parul Pandey](https://www.linkedin.com/in/parul-pandey-a5498975/)** 是一位数据科学爱好者，常为数据科学出版物如 Towards Data Science 撰稿。
 
 [原文](https://towardsdatascience.com/pyviz-simplifying-the-data-visualisation-process-in-python-1b6d2cb728f1)。经许可转载。
 
 **相关：**
 
-+   [用代码在Python中进行5个快速而简单的数据可视化](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   用代码在 Python 中进行 5 个快速而简单的数据可视化
 
-+   [Python图形库](/2017/11/python-graph-gallery.html)
++   Python 图形库
 
-+   [使用Folium在Python中可视化地理空间数据](/2018/09/visualising-geospatial-data-python-folium.html)
++   使用 Folium 在 Python 中可视化地理空间数据
 
 ### 更多相关话题
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [一个90亿美元的AI失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

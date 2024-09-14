@@ -1,8 +1,8 @@
 # 使用 Gensim 的稳健 Word2Vec 模型与应用 Word2Vec 特征于机器学习任务
 
-> 原文：[https://www.kdnuggets.com/2018/04/robust-word2vec-models-gensim.html](https://www.kdnuggets.com/2018/04/robust-word2vec-models-gensim.html)
+> 原文：[`www.kdnuggets.com/2018/04/robust-word2vec-models-gensim.html`](https://www.kdnuggets.com/2018/04/robust-word2vec-models-gensim.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 > **编辑注：** 本文只是一个更全面、更深入的原文的一部分，[原文链接](https://towardsdatascience.com/understanding-feature-engineering-part-4-deep-learning-methods-for-text-data-96c44370bbfa)包含了更多内容。
 
@@ -20,17 +20,17 @@
 
 构建模型后，我们将使用感兴趣的词查看每个词的最相似词。
 
-![](../Images/ca2b2f3fb686c91a092f9e806ac00ddb.png)
+![](img/ca2b2f3fb686c91a092f9e806ac00ddb.png)
 
 这里的相似词确实与我们感兴趣的词更相关，这符合预期，因为我们运行了更多次数的模型，这应该带来了更好、更具上下文的嵌入。你注意到任何有趣的关联吗？
 
-![](../Images/775e2a392863dacc34e2c4181fd5dee0.png)
+![](img/775e2a392863dacc34e2c4181fd5dee0.png)
 
 诺亚的儿子被我们的模型识别为最具上下文相似性的实体！
 
 让我们在使用 t-SNE 将维度减少到二维空间后，使用词嵌入向量可视化感兴趣的词及其相似词。
 
-![](../Images/72f48cdd6154c442a2a26cae94e64f8b.png)
+![](img/72f48cdd6154c442a2a26cae94e64f8b.png)
 
 使用 t-SNE 可视化我们的 word2vec 词嵌入
 
@@ -40,7 +40,7 @@
 
 如果你记得阅读过之前的文章 [***Part-3: 传统文本数据方法***](https://towardsdatascience.com/understanding-feature-engineering-part-3-traditional-methods-for-text-data-f6f7d70acd41)，你可能看到我使用了一些实际的机器学习任务特征，如聚类。我们将利用其他顶级语料库，尝试实现相同的目标。首先，我们将基于语料库构建一个简单的 Word2Vec 模型，并可视化嵌入。
 
-![](../Images/8b3bc365fee36478c6c1a7c8621bf9c2.png)
+![](img/8b3bc365fee36478c6c1a7c8621bf9c2.png)
 
 在我们的玩具语料库上可视化 word2vec 词嵌入
 
@@ -59,19 +59,19 @@ array([ 0.04576328,  0.02328374, -0.04483001,  0.0086611 ,
 
 现在假设我们想要对来自玩具语料库的八个文档进行聚类，我们需要从每个文档中每个词的文档级嵌入中获取信息。一种策略是计算每个文档中每个词的词嵌入的平均值。这是一种非常有用的策略，你可以将其应用到你自己的问题中。现在让我们在我们的语料库上应用这个方法，获取每个文档的特征。
 
-![](../Images/29c8deae1fd070bcbcf525afbcec1bae.png)
+![](img/29c8deae1fd070bcbcf525afbcec1bae.png)
 
 文档级别的嵌入
 
 现在我们已经获得了每个文档的特征，让我们使用[***亲和传播***](https://en.wikipedia.org/wiki/Affinity_propagation)算法对这些文档进行聚类。该算法基于数据点之间的*“消息传递”*概念，不需要显式输入簇的数量，而这是基于分区的聚类算法通常需要的。
 
-![](../Images/b39b4c68ab91b60f63ed7e20aa842781.png)
+![](img/b39b4c68ab91b60f63ed7e20aa842781.png)
 
 根据我们从 word2vec 获得的文档特征进行簇的分配
 
 我们可以看到，我们的算法已经根据 Word2Vec 特征将每个文档归入了正确的组，非常棒！我们还可以通过使用[***主成分分析 (PCA)***](https://en.wikipedia.org/wiki/Principal_component_analysis)将特征维度降到 2-D 并可视化（通过为每个簇进行颜色编码）来可视化每个文档在每个簇中的位置。
 
-![](../Images/640851dacfaad50813cd37baaf08bd8f.png)
+![](img/640851dacfaad50813cd37baaf08bd8f.png)
 
 可视化我们的文档簇
 
@@ -83,21 +83,21 @@ array([ 0.04576328,  0.02328374, -0.04483001,  0.0086611 ,
 
 **相关：**
 
-+   [文本数据预处理：Python中的操作指南](/2018/03/text-data-preprocessing-walkthrough-python.html)
++   文本数据预处理：Python 中的操作指南
 
-+   [处理文本数据的一般方法](/2017/12/general-approach-preprocessing-text-data.html)
++   处理文本数据的一般方法
 
-+   [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   处理文本数据科学任务的框架
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

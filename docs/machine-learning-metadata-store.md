@@ -1,8 +1,8 @@
 # 机器学习元数据存储
 
-> 原文：[https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html](https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html)
+> 原文：[`www.kdnuggets.com/2022/08/machine-learning-metadata-store.html`](https://www.kdnuggets.com/2022/08/machine-learning-metadata-store.html)
 
-![机器学习元数据存储](../Images/9b61054c90f90f731ac5245ff6e0298a.png)
+![机器学习元数据存储](img/9b61054c90f90f731ac5245ff6e0298a.png)
 
 图片由 [Manuel Geissinger](https://www.pexels.com/photo/black-server-racks-on-a-room-325229/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -38,13 +38,13 @@
 
 +   流行的元数据存储及其特点
 
-+   文章末尾有这些存储的TL;DR对比表。
++   文章末尾有这些存储的 TL;DR 对比表。
 
 # 为什么我们需要一个元数据存储？
 
 构建机器学习模型的过程与从理论上进行科学实验有些相似。你从一个假设开始，设计一个模型来测试你的假设，测试并改进你的设计以适应你的假设，然后根据你的数据选择最佳方法。在机器学习中，你从一个关于哪些输入数据可能产生期望结果的假设开始，训练模型，并调整超参数，直到你构建出产生所需结果的模型。
 
-![机器学习元数据存储](../Images/7af1b7e74dbcce96745a8554024e5072.png)
+![机器学习元数据存储](img/7af1b7e74dbcce96745a8554024e5072.png)
 
 图：机器学习开发生命周期。 [[来源](https://www.jeremyjordan.me/ml-projects-guide/)]
 
@@ -150,9 +150,9 @@
 
 ## 元数据管理架构
 
-Assaf Araki和Ben Lorica在[元数据管理的崛起](https://thedataexchange.media/the-rise-of-metadata-management-systems/)播客中精彩地解释了元数据管理系统的三个构建块。
+Assaf Araki 和 Ben Lorica 在[元数据管理的崛起](https://thedataexchange.media/the-rise-of-metadata-management-systems/)播客中精彩地解释了元数据管理系统的三个构建块。
 
-![机器学习元数据存储](../Images/26bcbf67263dc5ceb13c15acf2325485.png)
+![机器学习元数据存储](img/26bcbf67263dc5ceb13c15acf2325485.png)
 
 图：元数据堆栈。 [[来源](https://thedataexchange.media/the-rise-of-metadata-management-systems/)]
 
@@ -160,13 +160,13 @@ Assaf Araki和Ben Lorica在[元数据管理的崛起](https://thedataexchange.me
 
 需要从所有系统中收集元数据。这一层中的三个组件完成这项工作：
 
-+   **提取、加载、转换 -** ELT是从一个或多个来源提取数据并将其加载到数据仓库中的过程。它是传统ETL（提取、转换、加载）的替代方案。
++   **提取、加载、转换 -** ELT 是从一个或多个来源提取数据并将其加载到数据仓库中的过程。它是传统 ETL（提取、转换、加载）的替代方案。
 
-由于它利用了数据存储基础设施中已经构建的处理能力，ELT减少了数据在传输中的时间，并提高了效率。
+由于它利用了数据存储基础设施中已经构建的处理能力，ELT 减少了数据在传输中的时间，并提高了效率。
 
 +   **精炼和存储** - 精炼和以一种格式存储有助于数据的轻松检索。
 
-+   **访问** - 用于从元数据系统中提取数据的API或特定领域语言，用于构建后续层。
++   **访问** - 用于从元数据系统中提取数据的 API 或特定领域语言，用于构建后续层。
 
 ### 数据目录
 
@@ -176,7 +176,7 @@ Assaf Araki和Ben Lorica在[元数据管理的崛起](https://thedataexchange.me
 
 +   **数据血缘** - 数据从创建到经过时间的转化的全过程记录。这是理解、记录和可视化数据流动的过程。
 
-![机器学习元数据存储](../Images/69d6da1b094023d9d9975feed4ce36a4.png)
+![机器学习元数据存储](img/69d6da1b094023d9d9975feed4ce36a4.png)
 
 图：数据血缘过程 [[来源](https://www.imperva.com/learn/data-security/data-lineage/)]
 
@@ -188,7 +188,7 @@ Assaf Araki和Ben Lorica在[元数据管理的崛起](https://thedataexchange.me
 
 正如其名称所示，这一层共同工作以治理数据，确保数据的一致性和安全性。这是组织用于管理、利用和保护企业系统中的数据的过程。
 
-![机器学习元数据存储](../Images/f9b32fb2f011e82e6fe32a8234173b76.png)
+![机器学习元数据存储](img/f9b32fb2f011e82e6fe32a8234173b76.png)
 
 图：数据治理的支柱。[[来源](https://searchdatamanagement.techtarget.com/definition/data-governance)]
 
@@ -218,15 +218,15 @@ Assaf Araki和Ben Lorica在[元数据管理的崛起](https://thedataexchange.me
 
 在这里，实验元数据和机器学习管道，构成了一种定义复杂特征转换链的方式，会自动提取，从而简化其元数据跟踪系统。这通过一个[模式](https://github.com/awslabs/ml-experiments-schema)实现，该模式旨在存储血统信息和机器学习特定属性。下图展示了声明式元数据管理的重要原则。
 
-![机器学习元数据存储](../Images/385c04c2575c4b473048248527a0466b.png)
+![机器学习元数据存储](img/385c04c2575c4b473048248527a0466b.png)
 
 图：声明式元数据管理的重要原则。来源：[DMM](https://mlsys.org/Conferences/doc/2018/23.pdf) 中讨论的原则的图形表示 - 图片由作者创建
 
 系统采用三层架构来使用上述讨论的原则。
 
-+   **第1层** 是一个文档数据库存储，存储实际的实验数据。
++   **第 1 层** 是一个文档数据库存储，存储实际的实验数据。
 
-+   **第2层** 是一个集中式数据存储，向外界开放，允许用户显式地存储特定工件的元数据并查询现有数据。
++   **第 2 层** 是一个集中式数据存储，向外界开放，允许用户显式地存储特定工件的元数据并查询现有数据。
 
 +   **第 3 层：** 这一最上层，也称为高级客户端，旨在与流行的 ML 库（如 [SparkML](https://spark.apache.org/docs/1.2.2/ml-guide.html)、[scikit-learn](https://scikit-learn.org/stable/)、[MXNet](https://mxnet.apache.org/versions/1.8.0/)）兼容。
 
@@ -278,7 +278,7 @@ Assaf Araki和Ben Lorica在[元数据管理的崛起](https://thedataexchange.me
 
 ## 层数据目录
 
-[Layer](http://layer.co)提供了一个集中存储数据集和特征的库，便于系统化构建、监控和评估。Layer与其他元数据存储的不同之处在于它是一个**声明式工具，赋予**它提供自动化实体提取和自动化管道的能力。此外，它还提供数据管理、监控和搜索工具等功能。
+[Layer](http://layer.co)提供了一个集中存储数据集和特征的库，便于系统化构建、监控和评估。Layer 与其他元数据存储的不同之处在于它是一个**声明式工具，赋予**它提供自动化实体提取和自动化管道的能力。此外，它还提供数据管理、监控和搜索工具等功能。
 
 它的一些功能包括：
 
@@ -328,7 +328,7 @@ Layer 数据目录的大多数属性与自动化紧密配合。数据集、特�
 
 ## Tensorflow Extended ML Metadata
 
-[ML Metadata](https://www.tensorflow.org/tfx/guide/mlmd)或MLMD是一个库，其唯一目的就是作为元数据存储。它存储并记录元数据，并在需要时通过API从存储后端检索。
+[ML Metadata](https://www.tensorflow.org/tfx/guide/mlmd)或 MLMD 是一个库，其唯一目的就是作为元数据存储。它存储并记录元数据，并在需要时通过 API 从存储后端检索。
 
 其一些特性包括：
 
@@ -342,13 +342,13 @@ Layer 数据目录的大多数属性与自动化紧密配合。数据集、特�
 
 [Kubeflow](https://github.com/kubeflow/kubeflow)不仅提供了元数据存储，还提供了整个企业机器学习工作流的解决方案。
 
-我们现在感兴趣的是KubeFlow Metadata。它的一些特性包括：
+我们现在感兴趣的是 KubeFlow Metadata。它的一些特性包括：
 
-+   **易于扩展** - 作为企业机器学习解决方案的Kubeflow，扩展性扮演了重要角色。
++   **易于扩展** - 作为企业机器学习解决方案的 Kubeflow，扩展性扮演了重要角色。
 
 +   **版本控制** - 所有元数据和其他工件都受到版本控制。
 
-+   它内置了Jupyter notebook服务器，帮助进行**数据清理**。
++   它内置了 Jupyter notebook 服务器，帮助进行**数据清理**。
 
 +   它可以轻松集成到你的机器学习工作流中。
 
@@ -362,7 +362,7 @@ Layer 数据目录的大多数属性与自动化紧密配合。数据集、特�
 
 +   **查看数据沿袭** - 在数据流经管道组件的过程中查看其沿袭信息。
 
-+   你可以**动态创建分类**，如SENSITIVE_DATA、EXPIRES_ON等，并通过沿袭传播这些分类。它会自动确保分类在数据流经组件时保持一致。
++   你可以**动态创建分类**，如 SENSITIVE_DATA、EXPIRES_ON 等，并通过沿袭传播这些分类。它会自动确保分类在数据流经组件时保持一致。
 
 +   细粒度**元数据安全**访问，允许对实体实例进行控制。
 
@@ -370,11 +370,11 @@ Layer 数据目录的大多数属性与自动化紧密配合。数据集、特�
 
 [Amazon SageMaker](https://aws.amazon.com/sagemaker/feature-store/)特征存储是一个完全托管的仓库，用于存储、更新、检索和共享机器学习特征。它跟踪存储特征的元数据。
 
-所以如果你希望存储特征的元数据而不是整个管道的元数据，Sagemaker特征存储是适合你的选择。它的一些其他特性包括：
+所以如果你希望存储特征的元数据而不是整个管道的元数据，Sagemaker 特征存储是适合你的选择。它的一些其他特性包括：
 
 +   **从多个来源摄取数据** - 你可以使用像[Amazon SageMaker Data Wrangler](https://aws.amazon.com/sagemaker/data-wrangler/)这样的数据准备工具创建数据，或者使用像[Amazon Kinesis Data Firehose](https://aws.amazon.com/kinesis/data-firehose/)这样的流数据源。
 
-+   **数据发现** - 它通过[在SageMaker Studio](https://aws.amazon.com/sagemaker/studio/)的可视化界面对元数据进行标记和索引，方便发现。它还允许浏览数据目录。
++   **数据发现** - 它通过[在 SageMaker Studio](https://aws.amazon.com/sagemaker/studio/)的可视化界面对元数据进行标记和索引，方便发现。它还允许浏览数据目录。
 
 +   **确保功能一致性** - 它允许模型访问相同的元数据和特性集，无论是离线批量训练还是实时推理。
 
@@ -402,7 +402,7 @@ MLflow 在运行机器学习代码时记录参数、代码版本、指标、键�
 
 我已经总结了我们之前讨论的七个元数据存储。我希望这能给你一个关于一些著名元数据存储的概述，并促使你找到合适的存储。这个结论纯粹基于元数据存储文档中的信息。
 
-![机器学习元数据存储](../Images/65d9efa8fbd817f2ea6ad701bb6e6351.png)
+![机器学习元数据存储](img/65d9efa8fbd817f2ea6ad701bb6e6351.png)
 
 ## 进一步阅读
 
@@ -432,6 +432,6 @@ MLflow 在运行机器学习代码时记录参数、代码版本、指标、键�
 
 +   [Feature Store Summit 2023：部署机器学习的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)
 
-+   [每个机器学习工程师应该具备的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应该具备的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)**
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)**

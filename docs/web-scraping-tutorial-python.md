@@ -1,8 +1,8 @@
-# 使用Python进行网页抓取教程：技巧和窍门
+# 使用 Python 进行网页抓取教程：技巧和窍门
 
-> 原文：[https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html](https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html)
+> 原文：[`www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html`](https://www.kdnuggets.com/2018/02/web-scraping-tutorial-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Jekaterina Kokatjuhha](https://hackernoon.com/@k.kokatjuhha)提供**
 
@@ -14,7 +14,7 @@
 
 本文旨在介绍与网页抓取相关的常见设计模式、陷阱和规则。文章呈现了几个**用例**和一系列典型的**问题**，例如如何**避免被检测**、**注意事项**和**禁忌事项**，以及如何**加速（并行化）**你的抓取器。
 
-一切都将配有Python代码片段，以便你可以立即开始。本文档还将介绍几个有用的Python包。
+一切都将配有 Python 代码片段，以便你可以立即开始。本文档还将介绍几个有用的 Python 包。
 
 **用例**
 
@@ -54,7 +54,7 @@
 
 大多数时候，你会发现自己在检查网站的 [HTML](https://www.w3schools.com/html/html_intro.asp)。你可以通过浏览器的“检查” [选项](https://www.lifewire.com/get-inspect-element-tool-for-browser-756549) 来轻松做到这一点。
 
-![](../Images/19d6260b4014095739c9557a0b1e2e84.png)
+![](img/19d6260b4014095739c9557a0b1e2e84.png)
 
 网站上包含我的名字、头像和描述的部分被称为 `hero hero--profile u-flexTOP`（有趣的是 Medium 称其作者为‘英雄’ :))。包含我名字的 <h1> 类被称为 `ui-h2 hero-title`，而描述则包含在 <p> 类 `ui-body hero-description` 中。
 
@@ -80,23 +80,23 @@
 
 开始抓取网站是非常直接的。大多数时候，你会发现自己在检查 [HTML](https://www.w3schools.com/html/html_intro.asp) 以访问所需的类和 ID。假设我们有以下 HTML 结构，我们想要提取 `main_price` 元素。注意：`discounted_price` 元素是可选的。
 
-![](../Images/6c1a80f169ffa3d5c17b025d14e354c7.png)
+![](img/6c1a80f169ffa3d5c17b025d14e354c7.png)
 
 基本代码是导入库，进行请求，解析 HTML，然后找到 `class main_price`。
 
-![](../Images/459bac4d01e6984cbc4c548222f663bd.png)
+![](img/459bac4d01e6984cbc4c548222f663bd.png)
 
 `class main_price`可能出现在网站的其他部分。为了避免从网页的其他部分提取不必要的`class main_price`，我们可以先处理`id listings_prices`，然后再找到所有具有`class main_price`的元素。
 
 **3\. 陷阱**
 
-**3.1 检查robots.txt**
+**3.1 检查 robots.txt**
 
-网站的抓取规则可以在[robots.txt](https://www.robotstxt.org/robotstxt.html)文件中找到。你可以通过在主域名后面添加robots.txt来找到它，例如[www.website_to_scrape.com/robots.txt](https://www.website_to_scrap.com/robots.txt)。这些规则标识了哪些网站部分不允许被自动提取或一个机器人请求页面的频率。大多数人对此不太在意，但即使你不打算遵守规则，也要尊重并至少查看一下这些规则。
+网站的抓取规则可以在[robots.txt](https://www.robotstxt.org/robotstxt.html)文件中找到。你可以通过在主域名后面添加 robots.txt 来找到它，例如[www.website_to_scrape.com/robots.txt](https://www.website_to_scrap.com/robots.txt)。这些规则标识了哪些网站部分不允许被自动提取或一个机器人请求页面的频率。大多数人对此不太在意，但即使你不打算遵守规则，也要尊重并至少查看一下这些规则。
 
-**3.2 HTML可能是恶意的**
+**3.2 HTML 可能是恶意的**
 
-HTML标签可以包含`id`、`class`或两者。HTML id指定一个*唯一*的id，而HTML class是非唯一的。类名或元素的更改可能会破坏你的代码或导致错误的结果。
+HTML 标签可以包含`id`、`class`或两者。HTML id 指定一个*唯一*的 id，而 HTML class 是非唯一的。类名或元素的更改可能会破坏你的代码或导致错误的结果。
 
 有两种方法可以避免或者至少对其有所警觉：
 
@@ -114,11 +114,11 @@ else:
 
 ```
 
-然而，由于某些字段可能是可选的（如我们HTML示例中的`discounted_price`），相应的元素可能不会出现在每个列表中。在这种情况下，你可以计算这个特定元素返回None的次数占总列表的百分比。如果是100%，你可能需要检查元素名称是否被更改了。
+然而，由于某些字段可能是可选的（如我们 HTML 示例中的`discounted_price`），相应的元素可能不会出现在每个列表中。在这种情况下，你可以计算这个特定元素返回 None 的次数占总列表的百分比。如果是 100%，你可能需要检查元素名称是否被更改了。
 
 **3.3 用户代理伪装**
 
-每次你访问一个网站时，它会通过[用户代理](https://en.wikipedia.org/wiki/User_agent)获取你的[浏览器信息](https://www.whoishostingthis.com/tools/user-agent/)。有些网站不会显示任何内容，除非你提供一个用户代理。此外，一些网站会向不同的浏览器提供不同的内容。网站不想封锁真实用户，但如果你使用相同的用户代理每秒发送200个请求，你会显得很可疑。一种解决办法是生成（几乎）随机的用户代理，或者自己设置一个。
+每次你访问一个网站时，它会通过[用户代理](https://en.wikipedia.org/wiki/User_agent)获取你的[浏览器信息](https://www.whoishostingthis.com/tools/user-agent/)。有些网站不会显示任何内容，除非你提供一个用户代理。此外，一些网站会向不同的浏览器提供不同的内容。网站不想封锁真实用户，但如果你使用相同的用户代理每秒发送 200 个请求，你会显得很可疑。一种解决办法是生成（几乎）随机的用户代理，或者自己设置一个。
 
 ```py
 # library to generate user agent
@@ -142,7 +142,7 @@ page_response = requests.get(page_link, timeout=5, headers=headers)
 
 **3.5 我被封锁了吗？**
 
-频繁出现[状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)如404（未找到）、403（禁止访问）、408（请求超时）可能表明你被封锁了。你可能需要检查这些错误代码并相应地采取行动。此外，要准备好处理请求中的异常。
+频繁出现[状态码](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes)如 404（未找到）、403（禁止访问）、408（请求超时）可能表明你被封锁了。你可能需要检查这些错误代码并相应地采取行动。此外，要准备好处理请求中的异常。
 
 ```py
 try:
@@ -159,7 +159,7 @@ except # other exception
 
 ```
 
-**3.6 IP轮换**
+**3.6 IP 轮换**
 
 即使你随机化了用户代理，你的所有请求仍将来自同一个 IP 地址。这并不显得异常，因为图书馆、大学以及公司只有少数几个 IP 地址。然而，如果单个 IP 地址有异常多的请求，服务器可能会检测到。
 
@@ -261,11 +261,11 @@ def perform_extraction(page_ranges):
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 

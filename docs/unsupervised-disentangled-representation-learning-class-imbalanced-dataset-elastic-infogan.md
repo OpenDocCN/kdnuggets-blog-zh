@@ -1,6 +1,6 @@
 # 在类别不平衡数据集上使用弹性 Info-GAN 的无监督解耦表示学习
 
-> 原文：[https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
+> 原文：[`www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html`](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
 
 # 介绍
 
@@ -16,7 +16,7 @@
 
 **观察：** 这意味着他们提供的类别分布是平衡的。然而，现实世界中的数据集可能没有平衡的类别分布。不平衡的数据将尝试使生成器生成更多来自主导类别的图像。
 
-![在类别不平衡数据集上使用弹性 Info-GAN 的无监督解耦表示学习](../Images/da5ba186b60fd9734f369634c4b78069.png)
+![在类别不平衡数据集上使用弹性 Info-GAN 的无监督解耦表示学习](img/da5ba186b60fd9734f369634c4b78069.png)
 
 图像来源：[弹性 Info-GAN 论文](https://arxiv.org/pdf/1910.01112.pdf)
 
@@ -36,51 +36,51 @@
 
 让我们看看这个 softmax 温度表示了什么：
 
-+   它控制Gumbel-Softmax样本与类别分布的相似程度。
++   它控制 Gumbel-Softmax 样本与类别分布的相似程度。
 
 +   这个参数的低值会使样本具有类似于单一类别样本的属性。
 
 ## 第二个问题的解决方案
 
-这里他们尝试通过对比损失帮助Q学习表示。
+这里他们尝试通过对比损失帮助 Q 学习表示。
 
 **核心思想（直观解决方案）：**
 
-这个想法是基于对象身份生成正样本对（例如，一辆车及其镜像翻转的对照）和负样本对（例如，一个红色的哈士奇帽和一辆白色轿车），并且Q应为它们生成相似和不相似的表示（上图表示了相同的事物）。
+这个想法是基于对象身份生成正样本对（例如，一辆车及其镜像翻转的对照）和负样本对（例如，一个红色的哈士奇帽和一辆白色轿车），并且 Q 应为它们生成相似和不相似的表示（上图表示了相同的事物）。
 
 **数学意义：**
 
-+   从数学角度来看，对于一批N个真实图像，
++   从数学角度来看，对于一批 N 个真实图像，
 
-+   通过构建其增强版本，利用身份保留变换对每个图像进行处理，最终生成总计2N张图像。
++   通过构建其增强版本，利用身份保留变换对每个图像进行处理，最终生成总计 2N 张图像。
 
-+   对于批次中的每个图像，我们还定义了相应的变换图像Ipos和所有其他2(N-1)张图像作为Ineg。
++   对于批次中的每个图像，我们还定义了相应的变换图像 Ipos 和所有其他 2(N-1)张图像作为 Ineg。
 
-![无监督解耦表示学习在类不平衡数据集中的应用](../Images/92bedda4df38cf6c1218697e3eb94701.png)
+![无监督解耦表示学习在类不平衡数据集中的应用](img/92bedda4df38cf6c1218697e3eb94701.png)
 
 图片来源: [论文链接](https://arxiv.org/pdf/1910.01112.pdf)
 
 # 在其中一个数据库上重现的结果
 
-在这里，我们将使用MNIST数据集来训练这种类型的模型：
+在这里，我们将使用 MNIST 数据集来训练这种类型的模型：
 
-**关于MNIST数据集：**
+**关于 MNIST 数据集：**
 
-MNIST默认是一个平衡数据集，有70k张图像以及每个类别的训练样本数相似。我们人工引入了50个随机分割的不平衡，并报告了平均结果。
+MNIST 默认是一个平衡数据集，有 70k 张图像以及每个类别的训练样本数相似。我们人工引入了 50 个随机分割的不平衡，并报告了平均结果。
 
-MNIST数据集中有很多手写数字。AI/ML/数据科学社区的成员钟爱这个数据集，用于验证他们的算法。事实上，MNIST经常是研究人员首先尝试的数据集。“如果在MNIST上不起作用，那就完全没用，”他们说。“即使在MNIST上有效，也可能在其他数据集上无效。”
+MNIST 数据集中有很多手写数字。AI/ML/数据科学社区的成员钟爱这个数据集，用于验证他们的算法。事实上，MNIST 经常是研究人员首先尝试的数据集。“如果在 MNIST 上不起作用，那就完全没用，”他们说。“即使在 MNIST 上有效，也可能在其他数据集上无效。”
 
-# GitHub仓库中的不同文件
+# GitHub 仓库中的不同文件
 
-***evаl_metriсs.рy:*** 这个文件包含打印评估指标的代码，包括与入口和NMI相关的均值和标准差。
+***evаl_metriсs.рy:*** 这个文件包含打印评估指标的代码，包括与入口和 NMI 相关的均值和标准差。
 
-***mnist-trаin.рy:*** 这个文件包含在MNIST数据集上运行给定模型的代码。
+***mnist-trаin.рy:*** 这个文件包含在 MNIST 数据集上运行给定模型的代码。
 
 ***dаtаlоаder.рy:*** 这个文件包含数据加载程序，说明如何将数据加载到环境中。如果我们需要在不同的数据集上运行相同的模型，需要更改这个文件。
 
 ## 评估指标
 
-我们的评估应具体捕捉在不平衡数据集中将类别特定信息与其他因素分离的能力。由于前述指标，包括Gumbel-Softmax等，并未捕捉到这一属性，因此我们提议使用以下指标：
+我们的评估应具体捕捉在不平衡数据集中将类别特定信息与其他因素分离的能力。由于前述指标，包括 Gumbel-Softmax 等，并未捕捉到这一属性，因此我们提议使用以下指标：
 
 1.  **入口：** 这个指标评估两个属性：
 
@@ -88,43 +88,43 @@ MNIST数据集中有很多手写数字。AI/ML/数据科学社区的成员钟爱
 
 （ii）每个真实类别是否与一个唯一的分类代码相关联。
 
-1.  **NMI：** NMI代表归一化互信息。我们将生成的虚假图像的潜在类别分配（我们为每个分类代码生成1000张虚假图像）视为一个聚类，将预训练分类器对虚假图像的类别分配视为另一个聚类。NMI测量这两个聚类之间的相关性。NMI的值介于0到1之间；NMI越高，相关性越强。
+1.  **NMI：** NMI 代表归一化互信息。我们将生成的虚假图像的潜在类别分配（我们为每个分类代码生成 1000 张虚假图像）视为一个聚类，将预训练分类器对虚假图像的类别分配视为另一个聚类。NMI 测量这两个聚类之间的相关性。NMI 的值介于 0 到 1 之间；NMI 越高，相关性越强。
 
 ## 结果
 
-**完成5个时期后的结果：**
+**完成 5 个时期后的结果：**
 
-![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性Info-GAN）](../Images/c11f137d549b3469cc68935120c3077d.png)
+![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性 Info-GAN）](img/c11f137d549b3469cc68935120c3077d.png)
 
-**完成10个时期后的结果：**
+**完成 10 个时期后的结果：**
 
-![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性Info-GAN）](../Images/522ae683192574499233c2dc0f9639fb.png)
+![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性 Info-GAN）](img/522ae683192574499233c2dc0f9639fb.png)
 
-**完成15个时期后的结果：**
+**完成 15 个时期后的结果：**
 
-![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性Info-GAN）](../Images/a01a8b3d4d389f18bc5034510ee0d973.png)
+![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性 Info-GAN）](img/a01a8b3d4d389f18bc5034510ee0d973.png)
 
-**完成20个时期后的结果：**
+**完成 20 个时期后的结果：**
 
-![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性Info-GAN）](../Images/ca0e6c12b4f735293f84309ffb853b2e.png)
+![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性 Info-GAN）](img/ca0e6c12b4f735293f84309ffb853b2e.png)
 
-总共20个时期时间：896.10秒
+总共 20 个时期时间：896.10 秒
 
 **最终结论结果：**
 
-实验数量为19
+实验数量为 19
 
 +   熵均值 - 0.52500474
 
 +   熵标准差 - 0.30017176
 
-+   NMI均值 - 0.750077
++   NMI 均值 - 0.750077
 
-+   NMI标准差 - 0.134824
++   NMI 标准差 - 0.134824
 
 **损失与迭代次数的曲线：**
 
-![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性Info-GAN）](../Images/f90130f3ed683c45e56fed29d47c2f86.png)
+![无监督解缠表示学习在类不平衡数据集中的应用（使用弹性 Info-GAN）](img/f90130f3ed683c45e56fed29d47c2f86.png)
 
 # 结论
 
@@ -132,7 +132,7 @@ MNIST数据集中有很多手写数字。AI/ML/数据科学社区的成员钟爱
 
 **本文的主要观点：**
 
-1.  在本文中，我们讨论了与弹性Info-GAN相关的一篇论文，该论文尝试解决传统GAN无法克服的缺陷。
+1.  在本文中，我们讨论了与弹性 Info-GAN 相关的一篇论文，该论文尝试解决传统 GAN 无法克服的缺陷。
 
 1.  以上对两个问题的主要数学解决方案已用适当的数据分布假设进行说明。
 
@@ -148,11 +148,11 @@ MNIST数据集中有很多手写数字。AI/ML/数据科学社区的成员钟爱
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -166,6 +166,6 @@ MNIST数据集中有很多手写数字。AI/ML/数据科学社区的成员钟爱
 
 +   [克服现实世界场景中的数据不平衡挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [通过 DataCamp 以 25% 折扣获取世界级的数据科学学习](https://www.kdnuggets.com/2023/03/datacamp-world-class-data-science-learning.html)

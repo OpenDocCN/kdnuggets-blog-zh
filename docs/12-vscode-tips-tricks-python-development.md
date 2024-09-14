@@ -1,8 +1,8 @@
 # 12 个 VSCode 的 Python 开发技巧和窍门
 
-> 原文：[https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
+> 原文：[`www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html`](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
 
-![12 个 VSCode 的 Python 开发技巧和窍门](../Images/d56491937200bf93c18bde6c0c7a9966.png)
+![12 个 VSCode 的 Python 开发技巧和窍门](img/d56491937200bf93c18bde6c0c7a9966.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -42,7 +42,7 @@ VSCode 的 Python 扩展是我将其用于所有工作相关任务的主要原�
 
 根据当前上下文访问所有可用的命令和快捷键。你可以通过使用键盘快捷键来启动命令面板：**Ctrl+Shift+P**。之后，你可以输入相关的关键词以访问特定命令。
 
-![12 个 VSCode 的 Python 开发技巧和窍门](../Images/6691a56d9145e6d6205ccdd4c1e1e215.png)
+![12 个 VSCode 的 Python 开发技巧和窍门](img/6691a56d9145e6d6205ccdd4c1e1e215.png)
 
 图片由作者提供
 
@@ -56,29 +56,29 @@ VSCode 的 Python 扩展是我将其用于所有工作相关任务的主要原�
 
 通过使用键盘快捷键**Ctrl+Shift+M**快速访问错误和警告，并通过点击警告或按**F8**或**Shift+F8**键在它们之间循环。
 
-![12 VSCode技巧与窍门](../Images/df565eb6396d6d31e05fe0b77709f091.png)
+![12 VSCode 技巧与窍门](img/df565eb6396d6d31e05fe0b77709f091.png)
 
 图片由作者提供
 
 # 5\. 完全可定制的开发环境
 
-你可以自定义主题、图标、键盘快捷键、调试设置、字体、代码检查和代码片段。VSCode是一个完全可定制的开发环境，允许你甚至创建自己的扩展。
+你可以自定义主题、图标、键盘快捷键、调试设置、字体、代码检查和代码片段。VSCode 是一个完全可定制的开发环境，允许你甚至创建自己的扩展。
 
 # 6\. 扩展
 
-Python的VSCode扩展可以提升开发体验，并使你更高效。这不仅仅关乎生产力，还关乎视觉效果。大多数流行的Python扩展在[Visual Studio Marketplace](https://marketplace.visualstudio.com/vscode)上提供带有统计数据和图表的互动GUI。
+Python 的 VSCode 扩展可以提升开发体验，并使你更高效。这不仅仅关乎生产力，还关乎视觉效果。大多数流行的 Python 扩展在[Visual Studio Marketplace](https://marketplace.visualstudio.com/vscode)上提供带有统计数据和图表的互动 GUI。
 
-![12 VSCode技巧与窍门](../Images/9e46e9562e4c069d8614ba670a58be0f.png)
+![12 VSCode 技巧与窍门](img/9e46e9562e4c069d8614ba670a58be0f.png)
 
 图片由作者提供
 
-查看我列出的[12个数据科学必备VSCode扩展](/2022/07/12-essential-vscode-extensions-data-science.html)，这些扩展会使VSCode成为一个超级应用，你可以在不离开应用的情况下执行所有数据科学任务。
+查看我列出的 12 个数据科学必备 VSCode 扩展，这些扩展会使 VSCode 成为一个超级应用，你可以在不离开应用的情况下执行所有数据科学任务。
 
 # 7\. Jupyter Notebook
 
 让你进行数据分析和机器学习实验的最重要的扩展是[Jupyter Notebook](https://marketplace.visualstudio.com/items?itemName=ms-toolsai.jupyter)扩展。
 
-![12 VSCode技巧与窍门](../Images/08a72d7072aa5adc56e54164aadf3797.png)
+![12 VSCode 技巧与窍门](img/08a72d7072aa5adc56e54164aadf3797.png)
 
 图片由作者提供
 
@@ -94,7 +94,7 @@ Python的VSCode扩展可以提升开发体验，并使你更高效。这不仅�
 
 +   使用**Ctrl+Shift+L**将额外的光标添加到当前选择的所有出现位置
 
-![12 VSCode技巧与窍门](../Images/bd7771da69ea36c2c2de21e1ce3298fe.png)
+![12 VSCode 技巧与窍门](img/bd7771da69ea36c2c2de21e1ce3298fe.png)
 
 图片来自[Visual Studio Code](https://code.visualstudio.com/docs/getstarted/tips-and-tricks#_editing-hacks)
 
@@ -104,15 +104,15 @@ Python的VSCode扩展可以提升开发体验，并使你更高效。这不仅�
 
 要重命名符号或参数，请选择该符号并按下**F2**键。
 
-![12 VSCode技巧与窍门](../Images/e2ca942c060646b77dbc6cc6f7a194d7.png)
+![12 VSCode 技巧与窍门](img/e2ca942c060646b77dbc6cc6f7a194d7.png)
 
 图片由作者提供
 
-# 10\. 内置Git集成
+# 10\. 内置 Git 集成
 
 这是一种内置集成，允许你通过点击几个按钮来执行所有与 Git 相关的任务，而不是在 CLI 中输入 Git 命令。你可以通过与用户友好的 GUI 互动来可视化历史记录、查看差异并创建新分支。这甚至比 GitHub Desktop 应用程序还要简单。
 
-![12 个 Python 开发的 VSCode 提示与技巧](../Images/d5baf03cb92e6ea30262df84fa0d0b88.png)
+![12 个 Python 开发的 VSCode 提示与技巧](img/d5baf03cb92e6ea30262df84fa0d0b88.png)
 
 图片由作者提供
 
@@ -122,7 +122,7 @@ Python的VSCode扩展可以提升开发体验，并使你更高效。这不仅�
 
 要创建自定义代码片段，请选择 **文件** > **首选项** > **配置用户代码片段**，然后选择语言。
 
-![12 个 Python 开发的 VSCode 提示与技巧](../Images/4aa463f8d0cbd5c05123b729ce6d611b.png)
+![12 个 Python 开发的 VSCode 提示与技巧](img/4aa463f8d0cbd5c05123b729ce6d611b.png)
 
 图片由作者提供
 
@@ -130,7 +130,7 @@ Python的VSCode扩展可以提升开发体验，并使你更高效。这不仅�
 
 每个人都在谈论 ChatGPT 的代码建议，但 [GitHub Copilot](https://github.com/features/copilot) 已经存在了两年多，它在理解用户行为和帮助他们快速高效地编写代码方面越来越出色。GitHub Copilot 基于 GPT-3，通过建议代码行或整个函数来提升开发体验。
 
-![12 个 Python 开发的 VSCode 提示与技巧](../Images/194ddde6045ff3760d349ac8b8c67652.png)
+![12 个 Python 开发的 VSCode 提示与技巧](img/194ddde6045ff3760d349ac8b8c67652.png)
 
 图片来自 [GitHub Copilot](https://github.com/features/copilot)
 
@@ -138,7 +138,7 @@ Python的VSCode扩展可以提升开发体验，并使你更高效。这不仅�
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，7月6日：12 个必备的数据科学 VSCode…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode…](https://www.kdnuggets.com/2022/n27.html)
 
 +   [12 个必备的 VSCode 扩展插件](https://www.kdnuggets.com/2022/07/12-essential-vscode-extensions-data-science.html)
 

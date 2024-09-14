@@ -1,18 +1,18 @@
 # 部署机器学习模型是什么意思？
 
-> 原文：[https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)
+> 原文：[`www.kdnuggets.com/2020/02/deploy-machine-learning-model.html`](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)
 
-[评论](#comments)
+评论
 
 **由 [Luigi Patruno](https://mlinproduction.com/about/)、数据科学家和 ML in Production 的创始人**。
 
-我最近向[Twitter 社区](https://twitter.com/MLinProduction/status/1211359661980626945)询问了他们在机器学习方面最大的痛点，以及他们的团队在2020年的工作重点。最常提到的痛点之一是部署机器学习模型。更具体地说，**“你如何以自动化、可重现和可审计的方式部署机器学习模型？”**
+我最近向[Twitter 社区](https://twitter.com/MLinProduction/status/1211359661980626945)询问了他们在机器学习方面最大的痛点，以及他们的团队在 2020 年的工作重点。最常提到的痛点之一是部署机器学习模型。更具体地说，**“你如何以自动化、可重现和可审计的方式部署机器学习模型？”**
 
-![](../Images/5759b6c72706b494901df2657ae4c751.png)
+![](img/5759b6c72706b494901df2657ae4c751.png)
 
 好问题！
 
-在教授机器学习时，很少讨论ML部署的话题。训练算法和神经网络架构往往是重点，因为这些是“核心”机器学习思想。我并不反对这一点，但我认为如果数据科学家不能部署模型，他将无法为业务增加多少价值。
+在教授机器学习时，很少讨论 ML 部署的话题。训练算法和神经网络架构往往是重点，因为这些是“核心”机器学习思想。我并不反对这一点，但我认为如果数据科学家不能部署模型，他将无法为业务增加多少价值。
 
 如果你搜索有关如何部署模型的资源，你会发现很多关于编写 Flask API 的博客文章。虽然这些文章做得很好，但并非所有 ML 模型都需要部署在 Flask API 后面。实际上，有时这会适得其反。这些文章很少讨论部署模型时需要考虑的因素、可使用的各种工具以及其他重要概念。这些话题非常广泛，一篇博客文章无法全面覆盖。
 
@@ -30,7 +30,7 @@
 
 **此阶段的目标**是构建一个预测性能水平达到或超过规划阶段设定目标的模型。在这些初始阶段，驱动这个项目的用户需求仍未得到满足。即使存在一个达到最低预测性能要求的模型，这些需求也不会得到满足。
 
-![](../Images/266944f1f97e3f77c84bc654c67932b0.png)
+![](img/266944f1f97e3f77c84bc654c67932b0.png)
 
 *[设置机器学习项目。全栈深度学习](https://full-stack-deep-learning.aerobaticapp.com/e372_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_2_projects.pdf)*
 
@@ -60,13 +60,13 @@
 
 **考虑一个稍微复杂一点的情况。**
 
-销售部门负责人了解了模型，并希望将模型的见解提供给他的账户执行者。自然地，也让我们感到遗憾的是，账户执行者不知道SQL，因此在这种情况下，将预测存储在数据库中还不够。
+销售部门负责人了解了模型，并希望将模型的见解提供给他的账户执行者。自然地，也让我们感到遗憾的是，账户执行者不知道 SQL，因此在这种情况下，将预测存储在数据库中还不够。
 
-产品经理决定，为了增加业务价值，必须在账户执行者使用的CRM工具中显示潜在客户评分。
+产品经理决定，为了增加业务价值，必须在账户执行者使用的 CRM 工具中显示潜在客户评分。
 
-之前示例中的部署方面 1 和 2（为一组潜在客户生成预测并每天生成一次）仍然有效，但方面 3 不再适用。部署涉及将分数从数据库流入CRM工具。这将涉及设置额外的ETL过程。
+之前示例中的部署方面 1 和 2（为一组潜在客户生成预测并每天生成一次）仍然有效，但方面 3 不再适用。部署涉及将分数从数据库流入 CRM 工具。这将涉及设置额外的 ETL 过程。
 
-![](../Images/b1e21f1c0ce21536fc93739a638013b9.png)
+![](img/b1e21f1c0ce21536fc93739a638013b9.png)
 
 **部署示例 2：部署推荐系统**
 
@@ -88,11 +88,11 @@
 
 ### 结论
 
-机器学习模型的自动化部署是2020年数据科学家和机器学习工程师面临的最大难题之一。由于模型只有在洞察定期提供给最终用户时才能为组织增值，因此机器学习从业者必须了解如何尽可能简单高效地部署他们的模型。确定如何部署模型的第一步是理解最终用户应如何与模型的预测进行互动。
+机器学习模型的自动化部署是 2020 年数据科学家和机器学习工程师面临的最大难题之一。由于模型只有在洞察定期提供给最终用户时才能为组织增值，因此机器学习从业者必须了解如何尽可能简单高效地部署他们的模型。确定如何部署模型的第一步是理解最终用户应如何与模型的预测进行互动。
 
 [原文](https://mlinproduction.com/what-does-it-mean-to-deploy-a-machine-learning-model-deployment-series-01/)。经授权转载。
 
-**简介：**[Luigi Patruno](https://twitter.com/MLinProduction)是一位数据科学家和机器学习顾问。他目前是2U的数据科学总监，领导一个负责构建机器学习模型和基础设施的数据科学团队。作为顾问，Luigi帮助公司通过应用现代数据科学方法来生成战略业务和产品倡议的价值。他创办了[MLinProduction.com](http://mlinproduction.com/)以收集和分享将机器学习应用于实际操作的最佳实践，并且他还教授了统计学、数据分析和大数据工程的研究生课程。
+**简介：**[Luigi Patruno](https://twitter.com/MLinProduction)是一位数据科学家和机器学习顾问。他目前是 2U 的数据科学总监，领导一个负责构建机器学习模型和基础设施的数据科学团队。作为顾问，Luigi 帮助公司通过应用现代数据科学方法来生成战略业务和产品倡议的价值。他创办了[MLinProduction.com](http://mlinproduction.com/)以收集和分享将机器学习应用于实际操作的最佳实践，并且他还教授了统计学、数据分析和大数据工程的研究生课程。
 
 **相关：**
 
@@ -106,11 +106,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -126,4 +126,4 @@
 
 +   [学习如何设计和部署负责任的 AI 系统](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)
 
-+   [人工智能驱动的RPA和IA对企业的意义是什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)
++   [人工智能驱动的 RPA 和 IA 对企业的意义是什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)

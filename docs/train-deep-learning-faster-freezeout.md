@@ -1,10 +1,10 @@
 # 让你的深度学习训练更快：FreezeOut
 
-> 原文：[https://www.kdnuggets.com/2017/08/train-deep-learning-faster-freezeout.html](https://www.kdnuggets.com/2017/08/train-deep-learning-faster-freezeout.html)
+> 原文：[`www.kdnuggets.com/2017/08/train-deep-learning-faster-freezeout.html`](https://www.kdnuggets.com/2017/08/train-deep-learning-faster-freezeout.html)
 
 深度神经网络有许多可学习的参数用于进行推断。这通常在两个方面构成问题：有时，模型的预测不够准确，同时训练所需时间也很长。
 
-在之前的文章中，我们介绍了 [让你的深度学习模型训练更快更精准：Snapshot Ensembling — 用1的成本实现M个模型](/2017/08/train-deep-learning-faster-snapshot-ensembling.html)。
+在之前的文章中，我们介绍了 让你的深度学习模型训练更快更精准：Snapshot Ensembling — 用 1 的成本实现 M 个模型。
 
 本文讨论了使用一种新颖的方法减少训练时间，对准确性几乎没有影响。
 
@@ -32,15 +32,15 @@
 
 作者们使用了学习率退火来控制模型的学习率。他们使用的显著不同的技术是**逐层**而不是整个模型来**改变**学习率。他们使用了以下方程：
 
-![学习率逐层调整](../Images/3ee3d24d4a8960a68c1ed13706be64d5.png)
+![学习率逐层调整](img/3ee3d24d4a8960a68c1ed13706be64d5.png)
 
-方程 2.0：**α**是学习率。**t**是迭代次数。***i***表示模型的第i层。
+方程 2.0：**α**是学习率。**t**是迭代次数。***i***表示模型的第 i 层。
 
 #### 方程 2.0 解释
 
-子*i*表示第i层。因此*α*子*i*表示第i层的学习率。类似地，*t[i]*表示第i层训练的迭代次数。*t*表示整个模型的总迭代次数。
+子*i*表示第 i 层。因此*α*子*i*表示第 i 层的学习率。类似地，*t[i]*表示第 i 层训练的迭代次数。*t*表示整个模型的总迭代次数。
 
-![alpha](../Images/7b2da0a9a0e9eb8a88a5b558cfe03f31.png)
+![alpha](img/7b2da0a9a0e9eb8a88a5b558cfe03f31.png)
 
 这表示第 i 层的初始学习率。
 
@@ -52,13 +52,13 @@
 
 记住，由于模型的第一层会首先停止训练，因此它会被训练最少的时间。为了解决这个问题，他们对每层的学习率进行了缩放。
 
-![线性计划](../Images/b36a7082533ab3cf8168df5b0e18f6e9.png)
+![线性计划](img/b36a7082533ab3cf8168df5b0e18f6e9.png)
 
 进行缩放是为了确保所有层的权重在权重空间中均匀移动，即被训练时间最长的层（后面的层）具有较低的学习率。
 
 作者们还尝试了**立方缩放**，即将 t 子 i 的值替换为其立方。
 
-![DenseNet 上的性能与误差](../Images/eee55845ce5249ed089173cdc233e562.png)
+![DenseNet 上的性能与误差](img/eee55845ce5249ed089173cdc233e562.png)
 
 图 2.1：DenseNet 上的性能与误差
 
@@ -98,27 +98,27 @@
 
 **相关：**
 
-+   [让你的深度学习模型更快更精准：Snapshot Ensembling — 用1的成本获得M个模型](/2017/08/train-deep-learning-faster-snapshot-ensembling.html)
++   让你的深度学习模型更快更精准：Snapshot Ensembling — 用 1 的成本获得 M 个模型
 
-+   [DeepSense：用于时间序列移动传感数据处理的统一深度学习框架](/2017/08/deepsense-unified-deep-learning-framework-time-series-mobile.html)
++   DeepSense：用于时间序列移动传感数据处理的统一深度学习框架
 
-+   [如何从训练数据中挤出更多价值](/2017/07/squeeze-most-from-training-data.html)
++   如何从训练数据中挤出更多价值
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 ### 主题更多
 
-+   [通过参与比赛，4倍速学习机器学习](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)
++   [通过参与比赛，4 倍速学习机器学习](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)
 
 +   [为什么我们总是需要人类来训练 AI——有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)
 

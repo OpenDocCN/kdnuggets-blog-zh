@@ -1,12 +1,12 @@
 # 分析 Jupyter 笔记本中的 Python 代码
 
-> 原文：[https://www.kdnuggets.com/2021/10/analyze-python-code-jupyter-notebooks.html](https://www.kdnuggets.com/2021/10/analyze-python-code-jupyter-notebooks.html)
+> 原文：[`www.kdnuggets.com/2021/10/analyze-python-code-jupyter-notebooks.html`](https://www.kdnuggets.com/2021/10/analyze-python-code-jupyter-notebooks.html)
 
-[评论](#comments)
+评论
 
 **作者 [Julien Delange](https://www.linkedin.com/in/juli1/)，Codiga 首席执行官**
 
-![图片](../Images/05ab40eb82322f3b05051363d71b5f05.png)
+![图片](img/05ab40eb82322f3b05051363d71b5f05.png)
 
 ## 摘要
 
@@ -14,7 +14,7 @@ Jupyter 笔记本不支持传统的代码分析工具，这使得发现错误变
 
 ## 为什么验证 Python 代码？
 
-Python 成为最受欢迎的编程语言（在 [TIOBE 指数](https://www.tiobe.com/tiobe-index/)中排名第1）。即使是这样一个受欢迎的语言也可能容易出错，特别是因为其特性（解释型语言，动态类型）由于其控制流由缩进定义。在 [2018年的研究](https://developers.slashdot.org/story/18/01/01/0242218/which-programming-languages-are-most-prone-to-bugs)中，Python 被发现是最容易出错的语言之一（与 C++、C 和 Objective-C 一起）。与其他编程语言一样，Python 有其自身的陷阱，开发者应该避免（并且这些问题已经在多年来得到了修复）。
+Python 成为最受欢迎的编程语言（在 [TIOBE 指数](https://www.tiobe.com/tiobe-index/)中排名第 1）。即使是这样一个受欢迎的语言也可能容易出错，特别是因为其特性（解释型语言，动态类型）由于其控制流由缩进定义。在 [2018 年的研究](https://developers.slashdot.org/story/18/01/01/0242218/which-programming-languages-are-most-prone-to-bugs)中，Python 被发现是最容易出错的语言之一（与 C++、C 和 Objective-C 一起）。与其他编程语言一样，Python 有其自身的陷阱，开发者应该避免（并且这些问题已经在多年来得到了修复）。
 
 因此，使用代码分析工具检查代码并检测潜在错误始终是一个良好的实践。主要目的是帮助你在将代码交付生产环境之前找到潜在错误。同时，它还帮助你遵循良好的编码规范。
 
@@ -30,7 +30,7 @@ Python 成为最受欢迎的编程语言（在 [TIOBE 指数](https://www.tiobe.
 
 该工具执行静态分析器，如 [Pylint](https://pylint.org/) 和 [Bandit](https://github.com/PyCQA/bandit)，以检测 Python 代码中的语法、语义和安全错误，并将错误直接报告到 Jupyter 笔记本中。该插件目前兼容 Jupyter 笔记本，并将很快支持 Google Colab 或 AWS Sagemaker 等其他平台。
 
-![图片](../Images/4c81858ee0ce59e15a017a575ea72a70.png)
+![图片](img/4c81858ee0ce59e15a017a575ea72a70.png)
 
 ## 结论
 
@@ -50,21 +50,21 @@ Python 是当今最受欢迎的编程语言，但编写无瑕疵的 Python 代�
 
 **相关：**
 
-+   [计算机视觉的开源数据集](/2021/08/open-source-datasets-computer-vision.html)
++   计算机视觉的开源数据集
 
-+   [机器学习与深度学习大全开放书籍](/2021/09/machine-deep-learning-open-book.html)
++   机器学习与深度学习大全开放书籍
 
-+   [Albumentations 概述：用于高级图像增强的开源库](/2021/07/overview-albumentations-open-source-library-advanced-image-augmentations.html)
++   Albumentations 概述：用于高级图像增强的开源库
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

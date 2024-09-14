@@ -1,22 +1,22 @@
 # 有效提示工程的艺术，免费课程和认证
 
-> 原文：[https://www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications](https://www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications)
+> 原文：[`www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications`](https://www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications)
 
-![有效提示工程的艺术，免费课程和认证](../Images/6abd1d8f03a938bbadca4cfad4475607.png)
+![有效提示工程的艺术，免费课程和认证](img/6abd1d8f03a938bbadca4cfad4475607.png)
 
 图片由作者提供
 
-大型语言模型已经成为我们日常和职业生活的一部分。我们使用像ChatGPT这样的工具来帮助我们处理日常任务，如营销策略、数据分析等。然而，当我使用这些工具时，总会有一个问题浮现在我的脑海中：
+大型语言模型已经成为我们日常和职业生活的一部分。我们使用像 ChatGPT 这样的工具来帮助我们处理日常任务，如营销策略、数据分析等。然而，当我使用这些工具时，总会有一个问题浮现在我的脑海中：
 
 ‘我是否正确使用它，如果没有，我该怎么做？’
 
 提示工程。
 
-正如[麦肯锡](https://www.mckinsey.com/featured-insights/mckinsey-explainers/what-is-prompt-engineering)所述，提示工程是为生成AI工具设计输入的最佳实践，旨在产生最佳输出。
+正如[麦肯锡](https://www.mckinsey.com/featured-insights/mckinsey-explainers/what-is-prompt-engineering)所述，提示工程是为生成 AI 工具设计输入的最佳实践，旨在产生最佳输出。
 
-我相信每个使用生成AI工具的人都应该掌握这项技能。它不仅帮助你为日常任务生成最佳输出，还可以让你从中找到职业生涯：[AI提示工程师年薪30万美元](/ai-prompt-engineers-are-making-300ky)。
+我相信每个使用生成 AI 工具的人都应该掌握这项技能。它不仅帮助你为日常任务生成最佳输出，还可以让你从中找到职业生涯：AI 提示工程师年薪 30 万美元。
 
-说到这一点，我整理了一份免费课程的清单，帮助你提示生成AI工具，以产生你想要的输出！
+说到这一点，我整理了一份免费课程的清单，帮助你提示生成 AI 工具，以产生你想要的输出！
 
 # 试试：提示工程
 
@@ -24,7 +24,7 @@
 
 价格：免费
 
-在一周内，你将能够向ChatGPT提出具体问题，以生成你想要的输出。但在你开始工程化有效的AI提示之前，了解AI的关键概念并能够解释它们是很重要的。掌握这些知识后，你将能够为你的日常任务工程化有效的AI提示。
+在一周内，你将能够向 ChatGPT 提出具体问题，以生成你想要的输出。但在你开始工程化有效的 AI 提示之前，了解 AI 的关键概念并能够解释它们是很重要的。掌握这些知识后，你将能够为你的日常任务工程化有效的 AI 提示。
 
 # 提示工程简介
 
@@ -32,19 +32,19 @@
 
 价格：免费
 
-假设你了解了AI的关键概念，但你需要了解提示工程，它是什么以及如何使用它。这个为期3周的课程将帮助你释放生成AI工具（如ChatGPT）的全部潜力。课程由3个模块组成，你将学习到编写有效提示的最佳实践和技巧。
+假设你了解了 AI 的关键概念，但你需要了解提示工程，它是什么以及如何使用它。这个为期 3 周的课程将帮助你释放生成 AI 工具（如 ChatGPT）的全部潜力。课程由 3 个模块组成，你将学习到编写有效提示的最佳实践和技巧。
 
-# 提示工程与高级ChatGPT
+# 提示工程与高级 ChatGPT
 
-链接：[提示工程与高级ChatGPT](http://edx.sjv.io/AWOE3x)
+链接：[提示工程与高级 ChatGPT](http://edx.sjv.io/AWOE3x)
 
 价格：免费
 
-想要更进一步？查看这个高级ChatGPT课程，它将教你在一周内可以在ChatGPT中使用的高级技术。你不仅会学习如何使用高级技巧提示ChatGPT，还能将其应用于多个用例，与其他工具集成并开发应用程序。
+想要更进一步？查看这个高级 ChatGPT 课程，它将教你在一周内可以在 ChatGPT 中使用的高级技术。你不仅会学习如何使用高级技巧提示 ChatGPT，还能将其应用于多个用例，与其他工具集成并开发应用程序。
 
-# 生成AI适合每个人
+# 生成 AI 适合每个人
 
-链接：[生成AI适合每个人](http://edx.sjv.io/m5K2Zq)
+链接：[生成 AI 适合每个人](http://edx.sjv.io/m5K2Zq)
 
 价格：目前全程折扣价为£173
 

@@ -1,22 +1,22 @@
 # 如何 Docker 化任何机器学习应用程序
 
-> 原文：[https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html](https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html)
+> 原文：[`www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html`](https://www.kdnuggets.com/2021/04/dockerize-any-machine-learning-application.html)
 
-[评论](#comments)
+评论
 
 **作者 [Arunn Thevapalan](https://www.linkedin.com/in/arunn-thevapalan/)，Octave 的高级数据科学家、导师和作家。**
 
-![](../Images/374bfc6c12e4d4a4c9cded164c94e76e.png)
+![](img/374bfc6c12e4d4a4c9cded164c94e76e.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -60,7 +60,7 @@
 
 我强烈建议你阅读 [这篇文章](https://medium.com/towards-artificial-intelligence/how-i-build-machine-learning-apps-in-hours-a1b1eaa642ed?source=friends_link&sk=66a5df0a2570e1cf0f12211f3b4f2fc2)，其中我们使用 Streamlit 从头开始逐步构建这个机器学习应用程序。
 
-![](../Images/d6e07d63154495339887923b7e8a35de.png)
+![](img/d6e07d63154495339887923b7e8a35de.png)
 
 *作者制作的糖尿病预测应用程序的屏幕录制。*
 
@@ -98,38 +98,38 @@ CMD streamlit run app.py
 
 ```
 
-就这些了。6行代码。按顺序排列。每一行都在构建在前一行之上。让我们逐行解析。
+就这些了。6 行代码。按顺序排列。每一行都在构建在前一行之上。让我们逐行解析。
 
-1.  每个Dockerfile必须以 ***FROM*** 开头。紧接着 ***FROM ***的内容必须是一个已存在的镜像（本地或来自 [DockerHub仓库](https://hub.docker.com/search?type=image)）。由于我们的环境基于Python，我们使用*python:3.7*作为基础镜像，并最终使用此Dockerfile创建一个新镜像。
+1.  每个 Dockerfile 必须以 ***FROM*** 开头。紧接着 ***FROM ***的内容必须是一个已存在的镜像（本地或来自 [DockerHub 仓库](https://hub.docker.com/search?type=image)）。由于我们的环境基于 Python，我们使用*python:3.7*作为基础镜像，并最终使用此 Dockerfile 创建一个新镜像。
 
-1.  Streamlit默认运行在8501端口。因此，为了使应用程序运行，重要的是要暴露该端口。我们使用 ***EXPOSE ***命令来实现。
+1.  Streamlit 默认运行在 8501 端口。因此，为了使应用程序运行，重要的是要暴露该端口。我们使用 ***EXPOSE ***命令来实现。
 
 1.  ***WORKDIR ***设置应用程序的工作目录。其余命令将从这个路径执行。
 
-1.  这里的 ***COPY ***命令将Docker客户端当前目录中的所有文件复制到镜像的工作目录。
+1.  这里的 ***COPY ***命令将 Docker 客户端当前目录中的所有文件复制到镜像的工作目录。
 
 1.  ***RUN ***命令确保我们在*requirements.txt*中定义的库已正确安装。
 
-1.  ***CMD ***指定在容器启动时运行的命令。因此，*streamlit run app.py*确保Streamlit应用程序在容器启动后立即运行。
+1.  ***CMD ***指定在容器启动时运行的命令。因此，*streamlit run app.py*确保 Streamlit 应用程序在容器启动后立即运行。
 
-编写Dockerfiles需要一些实践，除非你花费大量时间在Docker上，否则无法掌握所有可用命令。我建议先熟悉一些基本命令，然后参考 [Docker的官方文档](https://docs.docker.com/engine/reference/commandline/docker/) 。
+编写 Dockerfiles 需要一些实践，除非你花费大量时间在 Docker 上，否则无法掌握所有可用命令。我建议先熟悉一些基本命令，然后参考 [Docker 的官方文档](https://docs.docker.com/engine/reference/commandline/docker/) 。
 
 **3\. 构建镜像**
 
-现在我们已经定义了Dockerfile，是时候构建它并创建一个镜像了。这个镜像的目的是创建一个与底层系统无关的可重复环境。
+现在我们已经定义了 Dockerfile，是时候构建它并创建一个镜像了。这个镜像的目的是创建一个与底层系统无关的可重复环境。
 
 ```py
 docker build --tag app:1.0 .
 
 ```
 
-如名字所示，*build *命令按Dockerfile中定义的逐层构建镜像。最好给镜像标记一个名称和版本号，如*<name>:version.number*。
+如名字所示，*build *命令按 Dockerfile 中定义的逐层构建镜像。最好给镜像标记一个名称和版本号，如*<name>:version.number*。
 
-末尾的点表示Dockerfile的路径，即当前目录。
+末尾的点表示 Dockerfile 的路径，即当前目录。
 
-等等，我构建了镜像，但我该如何处理它？根据要求，你可以 [在DockerHub上分享构建的镜像](https://docs.docker.com/get-started/part3/) 或 [将其部署到云端](https://docs.docker.com/engine/context/aci-integration/)，等等。但首先，你现在需要运行镜像以获取容器。
+等等，我构建了镜像，但我该如何处理它？根据要求，你可以 [在 DockerHub 上分享构建的镜像](https://docs.docker.com/get-started/part3/) 或 [将其部署到云端](https://docs.docker.com/engine/context/aci-integration/)，等等。但首先，你现在需要运行镜像以获取容器。
 
-如名字所示，*run *命令在主机上运行指定的容器。*--publish 8501:8501* 将容器的8501端口映射到主机的8501端口，而*-it* 用于运行交互式进程（如shell/terminal）。
+如名字所示，*run *命令在主机上运行指定的容器。*--publish 8501:8501* 将容器的 8501 端口映射到主机的 8501 端口，而*-it* 用于运行交互式进程（如 shell/terminal）。
 
 ```py
 docker run --publish 8501:8501 -it app:1.0
@@ -138,7 +138,7 @@ docker run --publish 8501:8501 -it app:1.0
 
 现在跟随终端上提示的链接，亲自见证奇迹吧！;)
 
-![](../Images/8a5514c448dc9fd17532eea0db842931.png)
+![](img/8a5514c448dc9fd17532eea0db842931.png)
 
 *你做到了！（照片由 [Nghia Le](https://unsplash.com/@lephunghia?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)）*
 

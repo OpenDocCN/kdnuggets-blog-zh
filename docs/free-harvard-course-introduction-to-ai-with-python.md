@@ -1,8 +1,8 @@
 # 免费哈佛课程：Python 介绍人工智能
 
-> 原文：[https://www.kdnuggets.com/free-harvard-course-introduction-to-ai-with-python](https://www.kdnuggets.com/free-harvard-course-introduction-to-ai-with-python)
+> 原文：[`www.kdnuggets.com/free-harvard-course-introduction-to-ai-with-python`](https://www.kdnuggets.com/free-harvard-course-introduction-to-ai-with-python)
 
-![免费哈佛课程：Python 介绍人工智能](../Images/f47bb9f0fa43ebba3eb6fba1aa4bb20c.png)
+![免费哈佛课程：Python 介绍人工智能](img/f47bb9f0fa43ebba3eb6fba1aa4bb20c.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 接下来，我们来回顾一下课程内容。
 
-课程链接：[CS50的Python人工智能介绍](https://cs50.harvard.edu/ai/2023/)
+课程链接：[CS50 的 Python 人工智能介绍](https://cs50.harvard.edu/ai/2023/)
 
 # 1\. 搜索
 
@@ -76,9 +76,9 @@
 
 你将构建的项目包括：
 
-+   骑士：一个解决逻辑谜题的程序，以及一个构建AI以玩扫雷的程序
++   骑士：一个解决逻辑谜题的程序，以及一个构建 AI 以玩扫雷的程序
 
-+   构建一个玩扫雷的AI
++   构建一个玩扫雷的 AI
 
 链接: [知识](https://cs50.harvard.edu/ai/2023/weeks/1/)
 
@@ -106,9 +106,9 @@
 
 你将构建的项目包括：
 
-+   一个按重要性排序网页的AI
++   一个按重要性排序网页的 AI
 
-+   一个评估一个人是否具有遗传特征的AI
++   一个评估一个人是否具有遗传特征的 AI
 
 链接: [不确定性](https://cs50.harvard.edu/ai/2023/weeks/2/)
 
@@ -130,7 +130,7 @@
 
 +   回溯搜索
 
-在本模块中，你将构建一个生成填字游戏的AI。
+在本模块中，你将构建一个生成填字游戏的 AI。
 
 链接: [优化](https://cs50.harvard.edu/ai/2023/weeks/3/)
 
@@ -154,21 +154,21 @@
 
 +   马尔可夫决策过程
 
-+   Q学习
++   Q 学习
 
-+   K均值聚类
++   K 均值聚类
 
 本模块的项目包括：
 
 +   预测客户是否会完成在线购买
 
-+   使用强化学习的Nim游戏学习AI
++   使用强化学习的 Nim 游戏学习 AI
 
 链接: [学习](https://cs50.harvard.edu/ai/2023/weeks/4/)
 
 # 6\. 神经网络
 
-本模块专注于深度学习基础知识。除了学习深度学习的基础知识外，你还将学习如何使用TensorFlow构建和训练神经网络。
+本模块专注于深度学习基础知识。除了学习深度学习的基础知识外，你还将学习如何使用 TensorFlow 构建和训练神经网络。
 
 这是神经网络模块涵盖的主题概述：
 
@@ -222,22 +222,22 @@
 
 # 总结
 
-从图算法到机器学习、深度学习和语言模型——本课程涵盖了AI中的多个基础主题。
+从图算法到机器学习、深度学习和语言模型——本课程涵盖了 AI 中的多个基础主题。
 
 我相信每周进行讲座、复习讲义和进行项目将是一次极好的学习体验。祝学习愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集上工作。她的兴趣和专业领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集上工作。她的兴趣和专业领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [使用SQL的数据库入门：免费哈佛课程](https://www.kdnuggets.com/introduction-to-databases-with-sql-free-harvard-course)
++   [使用 SQL 的数据库入门：免费哈佛课程](https://www.kdnuggets.com/introduction-to-databases-with-sql-free-harvard-course)
 
 +   [哈佛大学最受欢迎的编程入门课程现在免费！](https://www.kdnuggets.com/2022/03/popular-intro-programming-course-harvard-free.html)
 
-+   [KDnuggets 新闻，3月30日：最受欢迎的编程入门课程…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻，3 月 30 日：最受欢迎的编程入门课程…](https://www.kdnuggets.com/2022/n13.html)
 
-+   [KDnuggets 新闻，5月4日：9门免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
-+   [9门免费的哈佛数据科学课程](https://www.kdnuggets.com/2022/05/9-free-harvard-courses-learn-data-science-2022.html)
++   [9 门免费的哈佛数据科学课程](https://www.kdnuggets.com/2022/05/9-free-harvard-courses-learn-data-science-2022.html)
 
 +   [哈佛大学为有志数据科学家的顶级免费课程](https://www.kdnuggets.com/harvard-top-free-courses-for-aspiring-data-scientists)

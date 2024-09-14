@@ -1,8 +1,8 @@
 # 超越 Numpy 和 Pandas：解锁鲜为人知的 Python 库的潜力
 
-> 原文：[https://www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html](https://www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html)
+> 原文：[`www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html`](https://www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html)
 
-![超越 Numpy 和 Pandas：解锁鲜为人知的 Python 库的潜力](../Images/8924a62a76a8da5ab3c63d2d62fc1a70.png)
+![超越 Numpy 和 Pandas：解锁鲜为人知的 Python 库的潜力](img/8924a62a76a8da5ab3c63d2d62fc1a70.png)
 
 图片由 [OrMaVaredo](https://pixabay.com/it/users/ormavaredo-14515736/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5826755) 提供，发布在 [Pixabay](https://pixabay.com/it//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=5826755)
 
@@ -44,7 +44,7 @@ Dask 是一个灵活的并行计算库，支持大规模数据处理的分布式
 
 因此，我们有了这样的结果：
 
-![超越 Numpy 和 Pandas：解锁鲜为人知的 Python 库的潜力](../Images/bde0c15d84502738b390a1f47612f471.png)
+![超越 Numpy 和 Pandas：解锁鲜为人知的 Python 库的潜力](img/bde0c15d84502738b390a1f47612f471.png)
 
 Dask 和 Pandas 数据框之间的区别。图像由作者提供，自 Dask 网站上引用的图像自由改编。
 
@@ -316,21 +316,21 @@ Xarray 是一个扩展 NumPy 功能的 Python 库，使我们能够处理带标�
 
 [同样](https://docs.xarray.dev/en/stable/getting-started-guide/why-xarray.html)：
 
-> Xarray在原始类似NumPy的多维数组之上引入了维度、坐标和属性的标签，这使得开发者的体验更加直观、简洁且不易出错。
+> Xarray 在原始类似 NumPy 的多维数组之上引入了维度、坐标和属性的标签，这使得开发者的体验更加直观、简洁且不易出错。
 
-换句话说，它通过在数组维度上添加标签或坐标来扩展NumPy数组的功能。这些标签提供了元数据，并使多维数据的更高级分析和操作成为可能。
+换句话说，它通过在数组维度上添加标签或坐标来扩展 NumPy 数组的功能。这些标签提供了元数据，并使多维数据的更高级分析和操作成为可能。
 
-例如，在NumPy中，数组是通过基于整数的索引来访问的。
+例如，在 NumPy 中，数组是通过基于整数的索引来访问的。
 
-在Xarray中，每个维度都可以有一个关联的标签，使得根据有意义的名称来理解和操作数据变得更加容易。
+在 Xarray 中，每个维度都可以有一个关联的标签，使得根据有意义的名称来理解和操作数据变得更加容易。
 
-例如，与其用`arr[0, 1, 2]`访问数据，我们可以在Xarray中使用`arr.sel(x=0, y=1, z=2)`，其中`x`、`y`和`z`是维度标签。
+例如，与其用`arr[0, 1, 2]`访问数据，我们可以在 Xarray 中使用`arr.sel(x=0, y=1, z=2)`，其中`x`、`y`和`z`是维度标签。
 
 这使得代码更易读！
 
-那么，让我们看看Xarray的一些功能。
+那么，让我们看看 Xarray 的一些功能。
 
-## Xarray的一些功能演示
+## Xarray 的一些功能演示
 
 和往常一样，安装方法如下：
 
@@ -391,11 +391,11 @@ Coordinates:
 
 那么，让我们一步步看一下这个过程：
 
-1.  我们已将温度值创建为NumPy数组。
+1.  我们已将温度值创建为 NumPy 数组。
 
-1.  我们将纬度和经度值定义为NumPy数组。
+1.  我们将纬度和经度值定义为 NumPy 数组。
 
-1.  我们使用`DataArray()`方法将所有数据存储在Xarray数组中。
+1.  我们使用`DataArray()`方法将所有数据存储在 Xarray 数组中。
 
 1.  我们使用`sel()`方法选择了一部分纬度和经度，这个方法可以选择我们想要的子集值。
 
@@ -446,9 +446,9 @@ Coordinates:
   * longitude  (longitude) float64 -180.0 -172.7 -165.3 ... 165.3 172.7 180.0</xarray.dataarray>
 ```
 
-因此，我们得出有10个空值。
+因此，我们得出有 10 个空值。
 
-另外，如果我们仔细观察代码，我们可以看到，我们可以将Pandas的方法应用于Xarray，如`isnull.sum()`，它统计了缺失值的总数。
+另外，如果我们仔细观察代码，我们可以看到，我们可以将 Pandas 的方法应用于 Xarray，如`isnull.sum()`，它统计了缺失值的总数。
 
 **特性一：处理和分析多维数据**
 
@@ -555,15 +555,15 @@ Coordinates:
 
 我们也以清晰可读的方式得到了我们想要的结果。
 
-再次如前所述，为了计算温度的最大值、最小值和均值，我们使用了应用于数组的Pandas函数。
+再次如前所述，为了计算温度的最大值、最小值和均值，我们使用了应用于数组的 Pandas 函数。
 
 # 结论
 
 在这篇文章中，我们展示了三个用于科学计算和运算的库。
 
-虽然SymPy可以替代其他工具和软件，使我们能够使用Python代码进行数学计算，但Dask和Xarray扩展了其他库的功能，帮助我们在遇到其他最著名的Python数据分析和处理库存在困难的情况下提供帮助。
+虽然 SymPy 可以替代其他工具和软件，使我们能够使用 Python 代码进行数学计算，但 Dask 和 Xarray 扩展了其他库的功能，帮助我们在遇到其他最著名的 Python 数据分析和处理库存在困难的情况下提供帮助。
 
-**[费德里科·特罗塔](https://www.linkedin.com/in/federico-trotta/)** 从小就热爱写作，在学校时就写侦探故事作为班级考试的一部分。由于他的好奇心，他发现了编程和AI。由于对写作的强烈热情，他无法避免开始写作这些话题，因此决定转行成为一名技术作家。他的目标是通过写作来教育人们有关Python编程、机器学习和数据科学的知识。了解更多关于他的内容，请访问 [federicotrotta.com](https://federicotrotta.com/)。
+**[费德里科·特罗塔](https://www.linkedin.com/in/federico-trotta/)** 从小就热爱写作，在学校时就写侦探故事作为班级考试的一部分。由于他的好奇心，他发现了编程和 AI。由于对写作的强烈热情，他无法避免开始写作这些话题，因此决定转行成为一名技术作家。他的目标是通过写作来教育人们有关 Python 编程、机器学习和数据科学的知识。了解更多关于他的内容，请访问 [federicotrotta.com](https://federicotrotta.com/)。
 
 [原文](https://towardsdatascience.com/beyond-numpy-and-pandas-unlocking-the-potential-of-lesser-known-python-libraries-86d2bdc4d230)。经授权转载。
 
@@ -571,24 +571,24 @@ Coordinates:
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
 ### 更多相关内容
 
-+   [解锁数据洞察：有效分析的关键Pandas函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
++   [解锁数据洞察：有效分析的关键 Pandas 函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
 
-+   [通过这门免费的DevOps速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
++   [通过这门免费的 DevOps 速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
 
-+   [揭示CTGAN的潜力：利用生成型AI进行…](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
++   [揭示 CTGAN 的潜力：利用生成型 AI 进行…](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
 
-+   [ChatGPT是否有潜力成为新的国际象棋超级大满贯？](https://www.kdnuggets.com/does-chatgpt-have-the-potential-to-become-a-new-chess-super-grandmaster)
++   [ChatGPT 是否有潜力成为新的国际象棋超级大满贯？](https://www.kdnuggets.com/does-chatgpt-have-the-potential-to-become-a-new-chess-super-grandmaster)
 
 +   [探索小数据场景中迁移学习的潜力](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)
 
-+   [挖掘2023年数据产品的潜力](https://www.kdnuggets.com/2023/01/tapping-potential-data-products-2023.html)
++   [挖掘 2023 年数据产品的潜力](https://www.kdnuggets.com/2023/01/tapping-potential-data-products-2023.html)

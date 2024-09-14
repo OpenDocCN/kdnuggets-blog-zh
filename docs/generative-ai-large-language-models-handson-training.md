@@ -1,30 +1,30 @@
-# 大语言模型的生成性AI：实践培训
+# 大语言模型的生成性 AI：实践培训
 
-> 原文：[https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
+> 原文：[`www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html`](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
 
-![大语言模型的生成性AI：实践培训](../Images/01def53e562530ba40bbe263a58c60e7.png)
+![大语言模型的生成性 AI：实践培训](img/01def53e562530ba40bbe263a58c60e7.png)
 
 作者提供的图片
 
 # 介绍
 
-大型语言模型（LLMs）如GPT-4正在迅速改变世界和数据科学领域。在过去几年中，一度看似科幻的能力现在通过LLMs变成了现实。
+大型语言模型（LLMs）如 GPT-4 正在迅速改变世界和数据科学领域。在过去几年中，一度看似科幻的能力现在通过 LLMs 变成了现实。
 
-[大语言模型的生成性AI：实践培训](https://www.youtube.com/watch?v=Ku9PM26Cc2c)将向你介绍推动这一革命的深度学习突破，重点关注变换器架构。更重要的是，你将直接体验最新LLMs如GPT-4所能提供的惊人能力。
+[大语言模型的生成性 AI：实践培训](https://www.youtube.com/watch?v=Ku9PM26Cc2c)将向你介绍推动这一革命的深度学习突破，重点关注变换器架构。更重要的是，你将直接体验最新 LLMs 如 GPT-4 所能提供的惊人能力。
 
-你将学习LLMs如何从根本上改变机器学习模型的开发和商业成功的数据产品。你将亲眼看到它们如何加速数据科学家的创造能力，同时推动他们成为成熟的数据产品经理。
+你将学习 LLMs 如何从根本上改变机器学习模型的开发和商业成功的数据产品。你将亲眼看到它们如何加速数据科学家的创造能力，同时推动他们成为成熟的数据产品经理。
 
-通过利用Hugging Face和PyTorch Lightning的实际代码演示，本培训将涵盖处理LLMs的完整生命周期。从高效的训练技巧到在生产中优化部署，你将学习到直接适用的技能，释放LLMs的潜力。
+通过利用 Hugging Face 和 PyTorch Lightning 的实际代码演示，本培训将涵盖处理 LLMs 的完整生命周期。从高效的训练技巧到在生产中优化部署，你将学习到直接适用的技能，释放 LLMs 的潜力。
 
-在这场充满活力的会议结束时，你将对LLMs有基础性的理解，并获得利用GPT-4的实践经验。
+在这场充满活力的会议结束时，你将对 LLMs 有基础性的理解，并获得利用 GPT-4 的实践经验。
 
-![大语言模型的生成性AI：实践培训](../Images/bec7e37feccf6441ebd88f43c62bcdc6.png)
+![大语言模型的生成性 AI：实践培训](img/bec7e37feccf6441ebd88f43c62bcdc6.png)
 
 训练中的图片
 
 # 训练大纲
 
-该培训有4个简短模块，介绍你大型语言模型，并教你如何训练自己的大型语言模型并将其部署到服务器。除此之外，你还将了解LLMs带来的商业价值。
+该培训有 4 个简短模块，介绍你大型语言模型，并教你如何训练自己的大型语言模型并将其部署到服务器。除此之外，你还将了解 LLMs 带来的商业价值。
 
 ## 1\. 大型语言模型（LLMs）简介
 
@@ -36,45 +36,45 @@
 
 +   自回归模型与自编码模型
 
-+   ELMo, BERT和T5
++   ELMo, BERT 和 T5
 
 +   GPT（生成预训练变换器）家族
 
-+   LLM应用领域
++   LLM 应用领域
 
-## 2\. LLM能力的广度
+## 2\. LLM 能力的广度
 
-+   LLM实验室
++   LLM 实验室
 
-+   GPT家族的惊人进展
++   GPT 家族的惊人进展
 
-+   GPT-4的关键更新
++   GPT-4 的关键更新
 
-+   调用OpenAI API，包括GPT-4
++   调用 OpenAI API，包括 GPT-4
 
-## 3\. 训练和部署LLMs
+## 3\. 训练和部署 LLMs
 
-+   硬件加速（CPU、GPU、TPU、IPU、AWS芯片）
++   硬件加速（CPU、GPU、TPU、IPU、AWS 芯片）
 
-+   Hugging Face变换器库
++   Hugging Face 变换器库
 
-+   高效LLM训练的最佳实践
++   高效 LLM 训练的最佳实践
 
 +   低秩适应（LoRA）的参数高效微调（PEFT）
 
-+   开源预训练LLMs
++   开源预训练 LLMs
 
-+   使用PyTorch Lightning进行LLM训练
++   使用 PyTorch Lightning 进行 LLM 训练
 
-+   多GPU训练
++   多 GPU 训练
 
-+   LLM部署注意事项
++   LLM 部署注意事项
 
-+   监控生产中的LLMs
++   监控生产中的 LLMs
 
-## 4\. 从LLMs中获取商业价值
+## 4\. 从 LLMs 中获取商业价值
 
-+   用LLMs支持机器学习
++   用 LLMs 支持机器学习
 
 +   可以自动化的任务
 
@@ -88,7 +88,7 @@
 
 该培训包括指向外部资源的链接，如源代码、演示文稿幻灯片和 Google Colab 笔记本。这些资源使培训具有互动性，并对将生成性 AI 应用于工作空间的工程师和数据科学家非常有用。
 
-![使用大型语言模型的生成性 AI：实践培训](../Images/0f08407c7fdd94c96bcb8409c07048d6.png)
+![使用大型语言模型的生成性 AI：实践培训](img/0f08407c7fdd94c96bcb8409c07048d6.png)
 
 培训中的图片
 

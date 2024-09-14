@@ -1,24 +1,24 @@
 # 如何优化你的 Jupyter Notebook
 
-> 原文：[https://www.kdnuggets.com/2020/01/optimize-jupyter-notebook.html](https://www.kdnuggets.com/2020/01/optimize-jupyter-notebook.html)
+> 原文：[`www.kdnuggets.com/2020/01/optimize-jupyter-notebook.html`](https://www.kdnuggets.com/2020/01/optimize-jupyter-notebook.html)
 
-[评论](#comments)
+评论
 
 **由 [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/) 提供，南安普顿大学**
 
-![图示](../Images/756e760e18232e12e321fa3a2863c788.png)
+![图示](img/756e760e18232e12e321fa3a2863c788.png)
 
-（来源: [https://gdcoder.com/how-to-create-and-add-a-conda-environment-as-jupyter-kernel/](https://gdcoder.com/how-to-create-and-add-a-conda-environment-as-jupyter-kernel/))
+（来源: [`gdcoder.com/how-to-create-and-add-a-conda-environment-as-jupyter-kernel/`](https://gdcoder.com/how-to-create-and-add-a-conda-environment-as-jupyter-kernel/))
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -72,7 +72,7 @@ Jupyter Notebook 是一种客户端-服务器应用程序，用于在浏览器�
 
 +   **Ctrl + ]**：增加代码缩进
 
-+   **Ctrl + [**：减少代码缩进
++   **Ctrl + **：减少代码缩进
 
 +   **Ctrl + z**：撤销
 
@@ -102,43 +102,7 @@ Jupyter Notebook 是一种客户端-服务器应用程序，用于在浏览器�
 
 如果你对改变 Jupyter notebook 的外观感兴趣，可以安装一个包含不同主题的包。默认的 Jupyter 主题如图 1 所示。在图 2 中你将看到我们如何能够个性化它的外观。
 
-![图](../Images/79c2092344a137f3926b62cd20e8c451.png)
-
-图 1：默认 Jupyter Notebook 主题
-
-我们可以直接在 notebook 中使用我在上一节中展示的技巧来安装我们的包：
-
-```py
-!pip install jupyterthemes
-```
-
-我们可以运行以下命令来列出所有可用主题的名称：
-
-```py
-!jt -l
-
-# Cell output:
-# Available Themes: 
-#   chesterish
-#   grade3
-#   gruvboxd
-#   gruvboxl
-#   monokai
-#   oceans16
-#   onedork
-#   solarizedd
-#   solarizedl
-```
-
-最后，我们可以使用以下命令选择一个主题（在这个例子中我决定使用 solarized1 主题）：
-
-```py
-!jt -t solarizedl
-```
-
-一旦我们运行了这个命令并刷新了页面，我们的 notebook 应该会像图 2 中的那样。
-
-![图](../Images/e061a645b7af95b5486e5d8adcae5980.png)
+![图图 1：默认 Jupyter Notebook 主题我们可以直接在 notebook 中使用我在上一节中展示的技巧来安装我们的包：```py!pip install jupyterthemes```我们可以运行以下命令来列出所有可用主题的名称：```py!jt -l# Cell output:# Available Themes: #   chesterish#   grade3#   gruvboxd#   gruvboxl#   monokai#   oceans16#   onedork#   solarizedd#   solarizedl```最后，我们可以使用以下命令选择一个主题（在这个例子中我决定使用 solarized1 主题）：```py!jt -t solarizedl```一旦我们运行了这个命令并刷新了页面，我们的 notebook 应该会像图 2 中的那样。![图](img/e061a645b7af95b5486e5d8adcae5980.png)
 
 图 2：Solarized1 notebook 主题
 
@@ -161,13 +125,13 @@ Notebook 扩展可以用来增强用户体验，并提供各种个性化技巧�
 
 一旦 *nbextensions* 被安装，你会注意到在 Jupyter notebook 主页上多了一个额外的标签（图 3）。
 
-![图](../Images/515390d2eb42d5f007422df854aa5b47.png)
+![图](img/515390d2eb42d5f007422df854aa5b47.png)
 
 图 3：将 *nbextensions* 添加到 Jupyter notebook
 
 通过点击 Nbextensions 标签，我们将看到可用的控件列表。在我的案例中，我决定启用图 4 中显示的控件。
 
-![图](../Images/3f1502b0fbd457e677cacaaabedf08db.png)
+![图](img/3f1502b0fbd457e677cacaaabedf08db.png)
 
 图 4：*nbextensions 控件选项*
 
@@ -177,25 +141,25 @@ Notebook 扩展可以用来增强用户体验，并提供各种个性化技巧�
 
 自动从 markdown 标题生成目录（图 5）。
 
-![图](../Images/92fa44cd011de1a7d04b11fad2fcb99a.png)
+![图](img/92fa44cd011de1a7d04b11fad2fcb99a.png)
 
 图 5：目录
 
 **2\. 代码片段**
 
-加载常用库和创建样本图的代码示例，你可以将其作为数据分析的起点（图6）。
+加载常用库和创建样本图的代码示例，你可以将其作为数据分析的起点（图 6）。
 
-![图示](../Images/6de60e3afd2c502ea88423c344dffe0e.png)
+![图示](img/6de60e3afd2c502ea88423c344dffe0e.png)
 
-图6：代码片段
+图 6：代码片段
 
 **3\. Hinterland**
 
-Jupyter 笔记本的代码自动补全（图7）。
+Jupyter 笔记本的代码自动补全（图 7）。
 
-![图示](../Images/1302258e8865edd1e7201dc32df4d00a.png)
+![图示](img/1302258e8865edd1e7201dc32df4d00a.png)
 
-图7：代码自动补全
+图 7：代码自动补全
 
 *nbextensions* 库提供了许多其他扩展，因此我鼓励你尝试和测试其他对你可能感兴趣的扩展！
 
@@ -208,7 +172,7 @@ from IPython.core.interactiveshell import InteractiveShell
 InteractiveShell.ast_node_interactivity = "all"
 ```
 
-此外，可以通过将文本包围在美元符号（$）之间来在Markdown单元格中编写LaTex。
+此外，可以通过将文本包围在美元符号（$）之间来在 Markdown 单元格中编写 LaTex。
 
 ### 笔记本幻灯片
 
@@ -224,7 +188,7 @@ pip install jupyter_contrib_nbextensions
 jupyter nbconvert my_notebook_name.ipynb --to slides --post serve
 ```
 
-![](../Images/94cdbf5eeafb9a93df018111680f2f6a.png)
+![](img/94cdbf5eeafb9a93df018111680f2f6a.png)
 
 ### 魔法命令
 
@@ -254,17 +218,17 @@ jupyter nbconvert my_notebook_name.ipynb --to slides --post serve
 
 +   [Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)
 
-**简介：[Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是南安普顿大学人工智能硕士课程的最后一年学生。他是一名AI爱好者、数据科学家和RPA开发者。
+**简介：[Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是南安普顿大学人工智能硕士课程的最后一年学生。他是一名 AI 爱好者、数据科学家和 RPA 开发者。
 
 [原文](https://www.freecodecamp.org/news/optimize-your-jupyter-notebook/)。经授权转载。
 
 **相关内容：**
 
-+   [笔记本反模式](/2019/11/notebook-anti-pattern.html)
++   笔记本反模式
 
-+   [GPU 加速的数据分析与机器学习](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)
++   GPU 加速的数据分析与机器学习
 
-+   [利用机器学习理解癌症](/2019/08/understanding-cancer-machine-learning.html)
++   利用机器学习理解癌症
 
 ### 了解更多此主题
 

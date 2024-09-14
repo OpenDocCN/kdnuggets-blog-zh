@@ -1,8 +1,8 @@
 # 探索 Python 中 itertools 的无限迭代器
 
-> 原文：[https://www.kdnuggets.com/exploring-infinite-iterators-in-python-itertools](https://www.kdnuggets.com/exploring-infinite-iterators-in-python-itertools)
+> 原文：[`www.kdnuggets.com/exploring-infinite-iterators-in-python-itertools`](https://www.kdnuggets.com/exploring-infinite-iterators-in-python-itertools)
 
-![探索 Python itertools 中的无限迭代器](../Images/bc48474833119e8c06ebd0daef145804.png)
+![探索 Python itertools 中的无限迭代器](img/bc48474833119e8c06ebd0daef145804.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

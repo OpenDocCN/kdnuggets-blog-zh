@@ -1,36 +1,36 @@
-# ChatGLM-6B：轻量级开源ChatGPT替代品
+# ChatGLM-6B：轻量级开源 ChatGPT 替代品
 
-> 原文：[https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
+> 原文：[`www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html`](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
 
-![ChatGLM-6B: 轻量级开源ChatGPT替代品](../Images/9dfdd021af6594d2e14b5f24f29d0ddb.png)
+![ChatGLM-6B: 轻量级开源 ChatGPT 替代品](img/9dfdd021af6594d2e14b5f24f29d0ddb.png)
 
 图片由作者提供
 
-最近，我们都很难跟上LLM领域的最新发布。在过去几周里，几个开源ChatGPT替代品变得非常受欢迎。
+最近，我们都很难跟上 LLM 领域的最新发布。在过去几周里，几个开源 ChatGPT 替代品变得非常受欢迎。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-在这篇文章中，我们将了解**ChatGLM**系列和**ChatGLM-6B**，一个开源且轻量级的ChatGPT替代品。
+在这篇文章中，我们将了解**ChatGLM**系列和**ChatGLM-6B**，一个开源且轻量级的 ChatGPT 替代品。
 
 让我们开始吧！
 
-# 什么是ChatGLM？
+# 什么是 ChatGLM？
 
-中国清华大学的研究人员开发了ChatGLM系列模型，这些模型的性能与GPT-3和BLOOM等其他模型相当。
+中国清华大学的研究人员开发了 ChatGLM 系列模型，这些模型的性能与 GPT-3 和 BLOOM 等其他模型相当。
 
 ChatGLM 是一个双语大型语言模型，训练时涵盖了中文和英文。目前，以下模型已提供：
 
-+   ChatGLM-130B：一个开源的LLM
++   ChatGLM-130B：一个开源的 LLM
 
 +   ChatGLM-100B：未开源，但通过邀请制访问
 
@@ -38,17 +38,17 @@ ChatGLM 是一个双语大型语言模型，训练时涵盖了中文和英文。
 
 虽然这些模型可能与生成预训练变换器（GPT）系列的大型语言模型相似，但**通用语言模型（GLM）预训练框架**使它们有所不同。我们将在下一节中详细了解这一点。
 
-# ChatGLM是如何工作的？
+# ChatGLM 是如何工作的？
 
-在机器学习中，你可能会知道GLM作为*广义线性模型*，但ChatGLM中的GLM代表*通用语言模型*。
+在机器学习中，你可能会知道 GLM 作为*广义线性模型*，但 ChatGLM 中的 GLM 代表*通用语言模型*。
 
-## GLM预训练框架
+## GLM 预训练框架
 
-LLM预训练已经被广泛研究，并且仍然是一个活跃的研究领域。让我们试着理解GLM预训练和GPT风格模型之间的关键区别。
+LLM 预训练已经被广泛研究，并且仍然是一个活跃的研究领域。让我们试着理解 GLM 预训练和 GPT 风格模型之间的关键区别。
 
-GPT-3系列模型使用的是仅解码器的自回归语言建模。另一方面，在GLM中，目标的优化被制定为**自回归空白填充问题**。
+GPT-3 系列模型使用的是仅解码器的自回归语言建模。另一方面，在 GLM 中，目标的优化被制定为**自回归空白填充问题**。
 
-![ChatGLM-6B: 轻量级开源ChatGPT替代品](../Images/23df7f00c157d578290e442e5cae1240.png)
+![ChatGLM-6B: 轻量级开源 ChatGPT 替代品](img/23df7f00c157d578290e442e5cae1240.png)
 
 GLM | [图片来源](https://arxiv.org/abs/2103.10360)
 
@@ -60,13 +60,13 @@ GLM | [图片来源](https://arxiv.org/abs/2103.10360)
 
 在 GLM 中，使用 GELU（高斯误差线性单元）激活代替了 ReLU 激活 [1]。
 
-![ChatGLM-6B: 一个轻量级的开源 ChatGPT 替代品](../Images/9f6d2d8afebf440a8d9f0363b8a4db6d.png)
+![ChatGLM-6B: 一个轻量级的开源 ChatGPT 替代品](img/9f6d2d8afebf440a8d9f0363b8a4db6d.png)
 
 GELU、ReLU 和 ELU 激活 | [图像来源](https://arxiv.org/abs/1606.08415)
 
 GELU 激活对所有输入有非零值，形式如下 [3]：
 
-![ChatGLM-6B: 一个轻量级的开源 ChatGPT 替代品](../Images/c42f168b0c87a3a5c1a921182a2a019d.png)
+![ChatGLM-6B: 一个轻量级的开源 ChatGPT 替代品](img/c42f168b0c87a3a5c1a921182a2a019d.png)
 
 与 ReLU 激活相比，GELU 激活被发现可以提高性能，尽管计算上比 ReLU 更为复杂。
 
@@ -78,7 +78,7 @@ GELU 激活对所有输入有非零值，形式如下 [3]：
 
 +   约有 62 亿个参数。
 
-+   该模型在1万亿个标记上进行预训练——英文和中文各占一半。
++   该模型在 1 万亿个标记上进行预训练——英文和中文各占一半。
 
 +   随后，使用了如监督微调和带有人类反馈的强化学习等技术。
 
@@ -112,7 +112,7 @@ GELU 激活对所有输入有非零值，形式如下 [3]：
 
 # 结论
 
-作为下一步，运行本地的 ChatGLM-6B 或尝试 HuggingFace spaces 上的演示。如果你想要深入了解 LLM 的工作原理，这里有一份 [大型语言模型的免费课程列表](/2023/03/top-free-courses-large-language-models.html)。
+作为下一步，运行本地的 ChatGLM-6B 或尝试 HuggingFace spaces 上的演示。如果你想要深入了解 LLM 的工作原理，这里有一份 大型语言模型的免费课程列表。
 
 # 参考文献
 

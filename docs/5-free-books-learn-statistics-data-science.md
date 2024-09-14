@@ -1,12 +1,12 @@
-# 5本免费书籍，帮助你学习数据科学的统计学
+# 5 本免费书籍，帮助你学习数据科学的统计学
 
-> 原文：[https://www.kdnuggets.com/2020/12/5-free-books-learn-statistics-data-science.html](https://www.kdnuggets.com/2020/12/5-free-books-learn-statistics-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/12/5-free-books-learn-statistics-data-science.html`](https://www.kdnuggets.com/2020/12/5-free-books-learn-statistics-data-science.html)
 
-[评论](#comments)
+评论
 
 **由[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)，数据科学家**
 
-![图像](../Images/d334173a5d384d57e884a2886d5a565b.png)
+![图像](img/d334173a5d384d57e884a2886d5a565b.png)
 
 照片由[Daniel Schludi](https://unsplash.com/@schluditsch?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，来源于[Unsplash](https://unsplash.com/s/photos/books?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -38,7 +38,7 @@
 
 作者：Peter Bruce 和 Andrew Bruce
 
-![图像](../Images/1ab705eb4b6e17a3caf2eed0c168afb0.png)
+![图像](img/1ab705eb4b6e17a3caf2eed0c168afb0.png)
 
 图片：[amazon.co.uk](https://www.amazon.co.uk/Practical-Statistics-Scientists-Peter-Bruce/dp/1491952962)
 
@@ -58,7 +58,7 @@
 
 统计学是一个非常广泛的领域，只有其中一部分与数据科学相关。这本书非常好地只涵盖了与数据科学相关的领域。所以，如果你在寻找一本能快速让你具备足够的理解以便实践数据科学的书籍，这本书绝对是首选。
 
-书中充满了很多实际的代码示例（用R语言编写），对任何使用的统计术语提供了非常清晰的解释，并且还链接到其他资源以供进一步阅读。
+书中充满了很多实际的代码示例（用 R 语言编写），对任何使用的统计术语提供了非常清晰的解释，并且还链接到其他资源以供进一步阅读。
 
 这本书总体上是一本很好的基础入门书籍，适合对该领域的绝对初学者。
 
@@ -66,7 +66,7 @@
 
 作者：艾伦·B·道尼
 
-![图片](../Images/64dc0d8c86e08806330ab23422302345.png)
+![图片](img/64dc0d8c86e08806330ab23422302345.png)
 
 图片：[greenteapress.com](http://greenteapress.com/thinkstats/)
 
@@ -82,19 +82,19 @@
 
 +   ***相关性。***
 
-***适合人群：具备基础Python知识的初学者。***
+***适合人群：具备基础 Python 知识的初学者。***
 
 这本书的介绍说明了“这本书关于将知识转化为数据”，并且它通过实际的数据分析例子非常好地介绍了统计概念。
 
 > “这本书关于将知识转化为数据”
 
-这是另一本只涵盖直接与数据科学相关的概念的书籍，并且包含了大量的代码示例，这次用Python编写。它主要面向程序员，依赖于使用这种技能来理解介绍的关键统计概念。因此，这本书非常适合那些已经至少具备基础Python知识的人。
+这是另一本只涵盖直接与数据科学相关的概念的书籍，并且包含了大量的代码示例，这次用 Python 编写。它主要面向程序员，依赖于使用这种技能来理解介绍的关键统计概念。因此，这本书非常适合那些已经至少具备基础 Python 知识的人。
 
 ### 《黑客的贝叶斯方法》
 
 作者：卡梅隆·戴维森-皮隆
 
-![图片](../Images/775c8a0122f5ecf0b60479aea0cd3300.png)
+![图片](img/775c8a0122f5ecf0b60479aea0cd3300.png)
 
 图片：[amazon.com](https://www.amazon.com/Bayesian-Methods-Hackers-Probabilistic-Addison-Wesley-ebook/dp/B016060UHA)
 
@@ -110,17 +110,17 @@
 
 +   ***先验知识。***
 
-***适合人群：具备Python基础知识的非统计学家。***
+***适合人群：具备 Python 基础知识的非统计学家。***
 
 贝叶斯推断是统计学的一个分支，处理理解不确定性。作为数据科学家，不确定性是你需要经常建模的内容。例如，如果你在构建机器学习模型，你需要能够理解你的模型所做预测的不确定性。
 
-贝叶斯方法可能非常抽象且难以理解。这本书明确面向程序员（因此需要一些Python基础），是我找到的唯一一本以简单的方式解释这些概念的书籍，使非统计学家也能理解。书中包含了大量代码示例，GitHub上的仓库也包含了大量笔记本。因此，这是一个极好的动手入门资料。
+贝叶斯方法可能非常抽象且难以理解。这本书明确面向程序员（因此需要一些 Python 基础），是我找到的唯一一本以简单的方式解释这些概念的书籍，使非统计学家也能理解。书中包含了大量代码示例，GitHub 上的仓库也包含了大量笔记本。因此，这是一个极好的动手入门资料。
 
 ### 《通俗英语统计学》
 
 作者：Timothy C. Urdan
 
-![图](../Images/a12415ec1f5fe8188f3b3265221c6f9a.png)
+![图](img/a12415ec1f5fe8188f3b3265221c6f9a.png)
 
 图片：[amazon.co.uk](https://www.amazon.com/Bayesian-Methods-Hackers-Probabilistic-Addison-Wesley-ebook/dp/B016060UHA)
 
@@ -146,7 +146,7 @@
 
 作者：Bradley Efron 和 Trevor Hastie
 
-![图](../Images/bd7257005578d6f348cace2bee8d3f85.png)
+![图](img/bd7257005578d6f348cace2bee8d3f85.png)
 
 图片：[amazon.co.uk](https://www.amazon.co.uk/Computer-Age-Statistical-Inference-Mathematical/dp/1107149894)
 
@@ -172,17 +172,17 @@
 
 欲了解更多数据科学阅读清单，请查看我下面的相关文章。
 
-[**5本免费书籍用于学习数据科学中的Python**](https://towardsdatascience.com/5-free-books-for-learning-python-for-data-science-87be443c084)
+[**5 本免费书籍用于学习数据科学中的 Python**](https://towardsdatascience.com/5-free-books-for-learning-python-for-data-science-87be443c084)
 
-完全免费的Python学习阅读清单
+完全免费的 Python 学习阅读清单
 
 [**完全免费的机器学习阅读清单**](https://towardsdatascience.com/completely-free-machine-learning-reading-list-eab0c8990c54)
 
-学习机器学习时值得阅读的10本免费书籍
+学习机器学习时值得阅读的 10 本免费书籍
 
-[**应用AI的阅读清单**](https://towardsdatascience.com/reading-list-for-applied-ai-5f4b84c75c1f)
+[**应用 AI 的阅读清单**](https://towardsdatascience.com/reading-list-for-applied-ai-5f4b84c75c1f)
 
-2020年，如果你将AI应用于你的业务，值得阅读的六本书
+2020 年，如果你将 AI 应用于你的业务，值得阅读的六本书
 
 感谢阅读！
 
@@ -194,22 +194,22 @@
 
 **相关：**
 
-+   [最佳免费数据科学电子书：2020 更新](/2020/09/best-free-data-science-ebooks-2020-update.html)
++   最佳免费数据科学电子书：2020 更新
 
-+   [每个人都应该阅读的前5本免费机器学习和深度学习电子书](/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html)
++   每个人都应该阅读的前 5 本免费机器学习和深度学习电子书
 
-+   [机器学习的数学：免费电子书](/2020/04/mathematics-machine-learning-book.html)
++   机器学习的数学：免费电子书
 
 ### 更多相关话题
 
-+   [5本免费书籍掌握数据科学中的统计学](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
++   [5 本免费书籍掌握数据科学中的统计学](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
 
-+   [与O’Reilly一起学习生成AI的书籍、课程和实时活动](https://www.kdnuggets.com/books-courses-and-live-events-to-learn-generative-ai-with-oreilly)
++   [与 O’Reilly 一起学习生成 AI 的书籍、课程和实时活动](https://www.kdnuggets.com/books-courses-and-live-events-to-learn-generative-ai-with-oreilly)
 
-+   [KDnuggets新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
 
-+   [2023年你必须阅读的5本免费数据科学书籍](https://www.kdnuggets.com/2023/01/5-free-data-science-books-must-read-2023.html)
++   [2023 年你必须阅读的 5 本免费数据科学书籍](https://www.kdnuggets.com/2023/01/5-free-data-science-books-must-read-2023.html)
 
-+   [25本免费书籍掌握SQL、Python、数据科学、机器学习…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍掌握 SQL、Python、数据科学、机器学习…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [5本免费Julia书籍用于数据科学](https://www.kdnuggets.com/2023/06/5-free-julia-books-data-science.html)
++   [5 本免费 Julia 书籍用于数据科学](https://www.kdnuggets.com/2023/06/5-free-julia-books-data-science.html)

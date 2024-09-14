@@ -1,8 +1,8 @@
 # 免费的前五大机器学习课程，提升你的技能
 
-> 原文：[https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
+> 原文：[`www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills`](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
 
-![免费机器学习课程前五名](../Images/006a91c8f81e21d328e728089fc40eb3.png)
+![免费机器学习课程前五名](img/006a91c8f81e21d328e728089fc40eb3.png)
 
 图片来源 | Midjourney & Canva
 
@@ -12,33 +12,33 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-在我们现代社会中，持续学习是唯一不变的事物。这就是为什么，在AI和机器学习的浪潮之后，越来越多的人希望提升他们的技能并增强在这些领域的自信心。
+在我们现代社会中，持续学习是唯一不变的事物。这就是为什么，在 AI 和机器学习的浪潮之后，越来越多的人希望提升他们的技能并增强在这些领域的自信心。
 
-无论你是非技术人员还是有技术背景，深入了解AI和机器学习都将极为有益。
+无论你是非技术人员还是有技术背景，深入了解 AI 和机器学习都将极为有益。
 
 主要问题是什么？
 
 由于机器学习资源众多，找到高质量且相关的资源可能很困难。这就是为什么在这篇文章中，我将分享我个人最喜欢的来自顶级大学的机器学习课程。
 
-## 1\. DeepLearning.ai的《人人皆可学生成AI》
+## 1\. DeepLearning.ai 的《人人皆可学生成 AI》
 
-第一个课程必须专注于今年的热词——AI和LLMs。由DeepLearning.AI设计并由Andrew Ng授课的《人人皆可学生成AI》是一个很好的起点，即使你对这个领域没有任何先验知识。
+第一个课程必须专注于今年的热词——AI 和 LLMs。由 DeepLearning.AI 设计并由 Andrew Ng 授课的《人人皆可学生成 AI》是一个很好的起点，即使你对这个领域没有任何先验知识。
 
-课程旨在清晰且顺畅地学习生成AI的过程，并指导你如何理解生成AI的工作原理以及它能做什么（以及不能做什么）。
+课程旨在清晰且顺畅地学习生成 AI 的过程，并指导你如何理解生成 AI 的工作原理以及它能做什么（以及不能做什么）。
 
-它包括实践任务，你将学习如何使用生成性AI来帮助日常工作，并获得提升提示以从LLMs中获得最大价值。此外，你还将深入探讨实际应用，并学习常见用例。
+它包括实践任务，你将学习如何使用生成性 AI 来帮助日常工作，并获得提升提示以从 LLMs 中获得最大价值。此外，你还将深入探讨实际应用，并学习常见用例。
 
-到课程结束时，你将理解大型语言模型、深度学习和生成性AI技能的概念。你将能够将你的知识付诸实践，并根据当今机器学习世界的三个核心元素，洞察AI对商业和社会的影响。
+到课程结束时，你将理解大型语言模型、深度学习和生成性 AI 技能的概念。你将能够将你的知识付诸实践，并根据当今机器学习世界的三个核心元素，洞察 AI 对商业和社会的影响。
 
-你还将学习如何将生成性AI应用于日常任务，使其立即变得实用和有用。[课程可以在Deeplearning.ai上免费获取。](https://www.deeplearning.ai/courses/generative-ai-for-everyone/)
+你还将学习如何将生成性 AI 应用于日常任务，使其立即变得实用和有用。[课程可以在 Deeplearning.ai 上免费获取。](https://www.deeplearning.ai/courses/generative-ai-for-everyone/)
 
 ## 2\. CS229: 斯坦福大学的机器学习
 

@@ -1,8 +1,8 @@
 # Python 数据准备案例文件：基于分组的插补
 
-> 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html)
+> 原文：[`www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html`](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-group-based-imputation.html)
 
-![标题图像](../Images/00e1dafff08a57b5dc7e3551854f78ad.png)
+![标题图像](img/00e1dafff08a57b5dc7e3551854f78ad.png)
 
 这是本系列关于 Python 数据准备的第二篇文章，专注于基于分组的插补。
 
@@ -10,23 +10,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 ### 复习
 
-虽然第一篇文章展示了一种简单的插补缺失值的方法，基于相同变量的均值，但这并不是填补缺失值的最复杂方法。假设，如我们的数据集示例（见[第一篇文章](/2017/09/python-data-preparation-case-files-basic-imputation.html)），我们有四个州的客户，我们希望利用这些州的居住地作为区分客户的手段，并相应地填补缺失值。这是一种更为细致的方法。
+虽然第一篇文章展示了一种简单的插补缺失值的方法，基于相同变量的均值，但这并不是填补缺失值的最复杂方法。假设，如我们的数据集示例（见第一篇文章），我们有四个州的客户，我们希望利用这些州的居住地作为区分客户的手段，并相应地填补缺失值。这是一种更为细致的方法。
 
 更具体地说，让我们使用给定状态下客户的平均账户余额来确定在相同状态下其他客户缺失余额值的替代值。
 
-我不会详细介绍模拟数据或任务；可以查看[第一篇文章](/2017/09/python-data-preparation-case-files-basic-imputation.html)以获取必要的背景。同时，[在这里获取数据集](https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing)（在第一篇文章练习后的状态）。
+我不会详细介绍模拟数据或任务；可以查看第一篇文章以获取必要的背景。同时，[在这里获取数据集](https://drive.google.com/file/d/0B6GhBwm5vaB2ekdlZW5WZnppb28/view?usp=sharing)（在第一篇文章练习后的状态）。
 
-![数据集](../Images/b227855f302f981c69eaedf6495c4b1a.png)
+![数据集](img/b227855f302f981c69eaedf6495c4b1a.png)
 
 **图 1：** 我们练习的模拟银行数据集（练习 1 之后）。
 
@@ -112,9 +112,9 @@ TX     9611.70
 Name: savings_balance, dtype: float64
 ```
 
-虽然可能没有预期的那么戏剧性，但很明显为什么这种基于分组的填补方法对于这种问题是有效的。例如，加利福尼亚州（$9174.56）和纽约州（$10443.61）之间的平均储蓄账户余额差异接近$1270。使用$9603.64的整体均值来填补缺失值不会提供最准确的画面。这涉及到[拟合优度](https://en.wikipedia.org/wiki/Goodness_of_fit)。
+虽然可能没有预期的那么戏剧性，但很明显为什么这种基于分组的填补方法对于这种问题是有效的。例如，加利福尼亚州（$9174.56）和纽约州（$10443.61）之间的平均储蓄账户余额差异接近$1270。使用$9603.64 的整体均值来填补缺失值不会提供最准确的画面。这涉及到[拟合优度](https://en.wikipedia.org/wiki/Goodness_of_fit)。
 
-现在我们可以使用Pandas的‘groupby’和‘transform’功能，以及一个lambda函数来填补这些缺失值。然后我们在下面的代码行中对结果进行四舍五入。
+现在我们可以使用 Pandas 的‘groupby’和‘transform’功能，以及一个 lambda 函数来填补这些缺失值。然后我们在下面的代码行中对结果进行四舍五入。
 
 ```py
 # Replace cheq_balance NaN with mean cheq_balance of same state
@@ -156,22 +156,22 @@ df.to_csv('mock_bank_data_original_PART2.csv', index=False)
 
 **相关**：
 
-+   [7步掌握Python数据准备](/2017/06/7-steps-mastering-data-preparation-python.html)
++   7 步掌握 Python 数据准备
 
-+   [从零开始的Python机器学习工作流第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从零开始的 Python 机器学习工作流第一部分：数据准备
 
-+   [数据准备技巧、窍门和工具：与内部人士的访谈](/2016/10/data-preparation-tips-tricks-tools.html)
++   数据准备技巧、窍门和工具：与内部人士的访谈
 
 ### 更多相关内容
 
-+   [数据填补的3种方法](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)
++   [数据填补的 3 种方法](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)
 
 +   [数据填补方法](https://www.kdnuggets.com/2023/01/approaches-data-imputation.html)
 
-+   [使用Datawig，一个AWS深度学习库进行缺失值填补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)
++   [使用 Datawig，一个 AWS 深度学习库进行缺失值填补](https://www.kdnuggets.com/2021/12/datawig-aws-deep-learning-library-missing-value-imputation.html)
 
 +   [机器学习中的数据准备和原始数据](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)
 
-+   [SQL数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
-+   [R中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
++   [R 中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)

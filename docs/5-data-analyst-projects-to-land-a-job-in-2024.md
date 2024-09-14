@@ -1,22 +1,22 @@
-# 2024年获得工作的5个数据分析项目
+# 2024 年获得工作的 5 个数据分析项目
 
-> 原文：[https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
+> 原文：[`www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024`](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
 
-![2024年获得工作的5个数据分析项目](../Images/34a2d423b0fb97356f66112daec3d643.png)
+![2024 年获得工作的 5 个数据分析项目](img/34a2d423b0fb97356f66112daec3d643.png)
 
 图片由作者提供
 
-我在2020年获得了我的第一个数据分析实习机会。
+我在 2020 年获得了我的第一个数据分析实习机会。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -42,11 +42,11 @@
 
 例如，如果你参加了流行的谷歌数据分析证书课程，你可能已经完成了这个认证所附带的结业项目。
 
-![2024年获得工作的5个数据分析项目](../Images/3550b3a914ae6b0b23c2a274ef649ee5.png)
+![2024 年获得工作的 5 个数据分析项目](img/3550b3a914ae6b0b23c2a274ef649ee5.png)
 
 图片来源于 [Coursera](https://coursera.org/google-certificates/data-analytics-certificate)
 
-然而，已经有超过200万人报名了相同的课程，并可能完成了相同的结业项目。
+然而，已经有超过 200 万人报名了相同的课程，并可能完成了相同的结业项目。
 
 招聘人员可能已经在数百份申请者的简历上见过这些项目，这样的展示不会让他们印象深刻。
 
@@ -58,7 +58,7 @@
 
 下面是具体方法。
 
-# 5个数据分析项目助你获得工作
+# 5 个数据分析项目助你获得工作
 
 一个突出的项目必须是独特的。
 
@@ -72,7 +72,7 @@
 
 互联网上关于数据分析项目的建议大多不准确且无用。
 
-你会被建议创建像Titanic数据集分析这样的通用项目——这些项目对你的简历没有实际价值。
+你会被建议创建像 Titanic 数据集分析这样的通用项目——这些项目对你的简历没有实际价值。
 
 不幸的是，那些告诉你做这些事情的人甚至不在数据行业工作，因此你必须对这些建议保持鉴别力。
 
@@ -84,55 +84,55 @@
 
 [第一个项目](https://skillquery.com/)是一个展示数据行业职业趋势的仪表板。
 
-我在[视频](https://youtu.be/5Q0gB7imNOo?si=y3GvFF_dC9wxhp8B)中发现了这个项目，该视频由前首席数据分析师Luke Barousse制作，他还专注于内容创作。
+我在[视频](https://youtu.be/5Q0gB7imNOo?si=y3GvFF_dC9wxhp8B)中发现了这个项目，该视频由前首席数据分析师 Luke Barousse 制作，他还专注于内容创作。
 
 这是这个仪表板的截图：
 
-![5个数据分析项目助你获得2024年工作](../Images/a5e706ae2d2fff2b4dc732d173a52d0a.png)
+![5 个数据分析项目助你获得 2024 年工作](img/a5e706ae2d2fff2b4dc732d173a52d0a.png)
 
-图片来源于SkillQuery
+图片来源于 SkillQuery
 
-上述仪表板名为SkillQuery，它展示了雇主在数据行业中寻找的顶级技术和技能。
+上述仪表板名为 SkillQuery，它展示了雇主在数据行业中寻找的顶级技术和技能。
 
-例如，通过查看仪表板，我们可以知道雇主在数据科学家中最看重的语言是Python，其次是SQL和R。
+例如，通过查看仪表板，我们可以知道雇主在数据科学家中最看重的语言是 Python，其次是 SQL 和 R。
 
 这个项目之所以有价值，是因为它解决了一个实际问题。
 
 每个求职者都想知道雇主在他们的领域寻找的顶级技能，以便做好相应准备。
 
-SkillQuery帮助你做到了这一点，形式是一个你可以互动的仪表板。
+SkillQuery 帮助你做到了这一点，形式是一个你可以互动的仪表板。
 
-这个项目的创建者展示了诸如Python、网络抓取和数据可视化等关键的数据分析技能。
+这个项目的创建者展示了诸如 Python、网络抓取和数据可视化等关键的数据分析技能。
 
-你可以在这里找到这个项目的[GitHub仓库](https://github.com/Emilianopp/SkillQuery)链接。
+你可以在这里找到这个项目的[GitHub 仓库](https://github.com/Emilianopp/SkillQuery)链接。
 
 ## 2. 信用卡审批
 
 [这个项目](https://github.com/semasuka/Credit-card-approval-prediction-classification)旨在预测一个人是否会被批准信用卡。
 
-我在同一个由Luke Barousse制作的视频中发现了它，这个项目的创建者最终获得了一个全职的数据分析师职位。
+我在同一个由 Luke Barousse 制作的视频中发现了它，这个项目的创建者最终获得了一个全职的数据分析师职位。
 
-信用卡审批模型被部署为一个Streamlit应用：
+信用卡审批模型被部署为一个 Streamlit 应用：
 
-![5 Data Analyst Projects to Land a Job in 2024](../Images/d3e67cbb47959eae20e140ed0424af06.png)
+![5 Data Analyst Projects to Land a Job in 2024](img/d3e67cbb47959eae20e140ed0424af06.png)
 
-图片来自 [Semasuka的GitHub项目](https://github.com/semasuka/Credit-card-approval-prediction-classification)
+图片来自 [Semasuka 的 GitHub 项目](https://github.com/semasuka/Credit-card-approval-prediction-classification)
 
 你只需回答这个仪表盘上显示的问题，应用程序将告诉你是否获得了信用卡批准。
 
 再次，这个项目是一个创造性的项目，通过一个用户友好的仪表盘解决了一个现实世界的问题，这也是它在雇主面前脱颖而出的原因。
 
-这个项目展示的技能包括Python、数据可视化和云存储。
+这个项目展示的技能包括 Python、数据可视化和云存储。
 
 ## 3\. 社交媒体情感分析
 
-这个项目是我几年前创建的，涉及对YouTube和Twitter内容进行情感分析。
+这个项目是我几年前创建的，涉及对 YouTube 和 Twitter 内容进行情感分析。
 
-我一直喜欢观看YouTube视频，并特别对平台上创建化妆教程的频道感到着迷。
+我一直喜欢观看 YouTube 视频，并特别对平台上创建化妆教程的频道感到着迷。
 
-当时，在YouTube上出现了一场巨大的丑闻，涉及到我最喜欢的两位美容影响者——**詹姆斯·查尔斯**和**塔蒂·韦斯特布鲁克**。
+当时，在 YouTube 上出现了一场巨大的丑闻，涉及到我最喜欢的两位美容影响者——**詹姆斯·查尔斯**和**塔蒂·韦斯特布鲁克**。
 
-我决定通过抓取YouTube和Twitter上的数据来分析这个丑闻。
+我决定通过抓取 YouTube 和 Twitter 上的数据来分析这个丑闻。
 
 我建立了一个情感分析模型，以评估公众对争端的情感，并甚至创建了可视化图表来理解人们对这些影响者的看法。
 
@@ -140,17 +140,17 @@ SkillQuery帮助你做到了这一点，形式是一个你可以互动的仪表�
 
 我还写了一篇博客文章概述了我的发现，你可以在 [这里](https://www.natasshaselvaraj.com/sentiment-analysis-twitter-youtube/) 找到。
 
-在这个项目中展示的技能包括网络抓取、API使用、Python、数据可视化和机器学习。
+在这个项目中展示的技能包括网络抓取、API 使用、Python、数据可视化和机器学习。
 
-## 4\. 使用Python进行顾客细分
+## 4\. 使用 Python 进行顾客细分
 
 这是另一个由我创建的项目。
 
-在这个项目中，我使用Python构建了一个K-Means聚类模型，使用了 [Kaggle上的数据集](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)。
+在这个项目中，我使用 Python 构建了一个 K-Means 聚类模型，使用了 [Kaggle 上的数据集](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)。
 
 我使用了性别、年龄和收入等变量来创建各种购物中心顾客的细分：
 
-![5 Data Analyst Projects to Land a Job in 2024](../Images/73f4690ffbec2ff2ab4bc5c3cc954990.png)
+![5 Data Analyst Projects to Land a Job in 2024](img/73f4690ffbec2ff2ab4bc5c3cc954990.png)
 
 图片来自 [Kaggle](https://www.kaggle.com/datasets/vjchoudhary7/customer-segmentation-tutorial-in-python)
 
@@ -160,15 +160,15 @@ SkillQuery帮助你做到了这一点，形式是一个你可以互动的仪表�
 
 由于我采取了这些额外的步骤，我的项目专门针对营销和客户分析领域，这增加了我在该领域获得工作的机会。
 
-我还创建了一个关于这个项目的教程，提供了一个 [逐步指南](https://www.natasshaselvaraj.com/customer-segmentation-with-python/)，帮助你在Python中构建自己的顾客细分模型。
+我还创建了一个关于这个项目的教程，提供了一个 [逐步指南](https://www.natasshaselvaraj.com/customer-segmentation-with-python/)，帮助你在 Python 中构建自己的顾客细分模型。
 
-这个项目展示的技能包括Python、无监督机器学习和数据分析。
+这个项目展示的技能包括 Python、无监督机器学习和数据分析。
 
 ## 5\. Udemy 课程数据分析仪表板
 
 这个列表中的最终项目是一个展示 Udemy 课程洞察的仪表板：
 
-![2024年数据分析师职位的5个项目](../Images/64dd29a7e7a55baf19d9c14e268119a8.png)
+![2024 年数据分析师职位的 5 个项目](img/64dd29a7e7a55baf19d9c14e268119a8.png)
 
 图片来自[Medium](https://medium.com/pipeline-a-data-engineering-resource/creating-the-dashboard-that-got-me-a-data-analyst-job-offer-de3f0d6b1771)
 
@@ -206,14 +206,14 @@ ChatGPT 例如，可以提供大量项目想法，甚至生成虚假数据集，
 
 ### 更多相关内容
 
-+   [2024年数据分析师面试问题](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
++   [2024 年数据分析师面试问题](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
 
-+   [2022年将帮助你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年将帮助你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [3个保证让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个保证让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [KDnuggets 新闻，6月1日：数据科学的完整合集](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日：数据科学的完整合集](https://www.kdnuggets.com/2022/n22.html)
 
 +   [无法找到数据科学工作？这就是原因](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的7个步骤](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤](https://www.kdnuggets.com/2022/n05.html)

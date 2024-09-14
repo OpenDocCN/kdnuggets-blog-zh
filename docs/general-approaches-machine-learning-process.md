@@ -1,20 +1,20 @@
 # 机器学习过程的框架
 
-> 原文：[https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)
+> 原文：[`www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html`](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)
 
 比较机器学习过程的方法是否值得？这些框架之间是否存在根本性的差异？
 
-尽管 [经典方法](/2016/03/data-science-process-rediscovered.html) 存在且存在已久，但从新的和不同的角度咨询仍然值得，原因有很多：我是否遗漏了什么？是否有之前未考虑的新方法？我是否应该改变处理机器学习的视角？
+尽管 经典方法 存在且存在已久，但从新的和不同的角度咨询仍然值得，原因有很多：我是否遗漏了什么？是否有之前未考虑的新方法？我是否应该改变处理机器学习的视角？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 实际上，我是通过先观看 [他的一个视频](https://youtu.be/nKW8Ndu7Mjw?list=PLIivdWyY5sqJxnwJhe3etaK7utrBiPBQ2) 在 YouTube 上发现郭的文章的。该帖子与视频的内容相同，因此如果有兴趣，任一资源都足够。
 
-![图片](../Images/bb2013560dcb54a0a997f3e3533b3671.png)
+![图片](img/bb2013560dcb54a0a997f3e3533b3671.png)
 
 [图片来源](https://towardsdatascience.com/the-7-steps-of-machine-learning-2877d7e5548e)
 
@@ -72,7 +72,7 @@
 
     → 这些未见数据旨在某种程度上代表模型在实际世界中的表现，但仍有助于调整模型（与测试数据不同，测试数据没有这样的作用）
 
-    → 良好的训练/评估划分？80/20、70/30或类似的，取决于领域、数据可用性、数据集细节等
+    → 良好的训练/评估划分？80/20、70/30 或类似的，取决于领域、数据可用性、数据集细节等
 
 1.  参数调整
 
@@ -88,11 +88,11 @@
 
 # 机器学习的通用工作流程
 
-在[他的书](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)的第4.5节中，Chollet概述了机器学习的通用工作流程，他将其描述为解决机器学习问题的蓝图：
+在[他的书](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)的第 4.5 节中，Chollet 概述了机器学习的通用工作流程，他将其描述为解决机器学习问题的蓝图：
 
 > 这个蓝图将我们在本章中学到的概念联系起来：问题定义、评估、特征工程和抗过拟合。
 
-这与上述郭的框架相比如何？让我们看看Chollet的7个步骤（记住，虽然没有明确说明专门针对它们，但他的蓝图是为*神经网络*的书籍而写的）：
+这与上述郭的框架相比如何？让我们看看 Chollet 的 7 个步骤（记住，虽然没有明确说明专门针对它们，但他的蓝图是为*神经网络*的书籍而写的）：
 
 1.  定义问题并组建数据集
 
@@ -108,9 +108,9 @@
 
 1.  正则化你的模型并调整参数
 
-![机器学习](../Images/628c051fa81b348e055c44294678c8d2.png)
+![机器学习](img/628c051fa81b348e055c44294678c8d2.png)
 
-来源：斯坦福大学Andrew Ng的机器学习课程
+来源：斯坦福大学 Andrew Ng 的机器学习课程
 
 Chollet 的工作流程更高层次，更多关注于将模型从良好提升到卓越，而 Guo 的方法则更关注于从零开始到良好。虽然它并不会为了做到这一点而舍弃其他重要步骤，但其蓝图更强调超参数调整和[正则化](http://neuralnetworksanddeeplearning.com/chap3.html#overfitting_and_regularization)以追求卓越。这里的简化似乎是：
 
@@ -118,7 +118,7 @@ Chollet 的工作流程更高层次，更多关注于将模型从良好提升到
 
 # 制定简化框架
 
-我们可以合理地得出结论，Guo 的框架勾勒出了一种“初学者”机器学习过程，更明确地定义了早期步骤，而 Chollet 的方法则更为高级，强调了模型评估的明确决策和机器学习模型的调整。这两种方法都同样有效，并没有本质上的不同；你可以将 Chollet 的方法叠加在 Guo 的方法之上，虽然两个模型的7个步骤不完全对齐，但它们最终会覆盖相同的任务。
+我们可以合理地得出结论，Guo 的框架勾勒出了一种“初学者”机器学习过程，更明确地定义了早期步骤，而 Chollet 的方法则更为高级，强调了模型评估的明确决策和机器学习模型的调整。这两种方法都同样有效，并没有本质上的不同；你可以将 Chollet 的方法叠加在 Guo 的方法之上，虽然两个模型的 7 个步骤不完全对齐，但它们最终会覆盖相同的任务。
 
 将 Chollet 的方法与 Guo 的方法对照，这里是我看到步骤对接的地方（Guo 的步骤编号，Chollet 的步骤则列在相应的 Guo 步骤下方，Chollet 工作流程步骤的编号在括号中）：
 
@@ -156,7 +156,7 @@ Chollet 的工作流程更高层次，更多关注于将模型从良好提升到
 
 # 一个简化的机器学习过程
 
-让我们利用上述内容来组成一个简化的机器学习框架，即**机器学习过程的5个主要领域**：
+让我们利用上述内容来组成一个简化的机器学习框架，即**机器学习过程的 5 个主要领域**：
 
 1.  数据收集与准备
 
@@ -194,6 +194,6 @@ Chollet 的工作流程更高层次，更多关注于将模型从良好提升到
 
 +   [Chip Huyen 分享了实施机器学习系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)
 
-+   [2023年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
 +   [如何在几秒钟内处理包含百万行的数据框](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)

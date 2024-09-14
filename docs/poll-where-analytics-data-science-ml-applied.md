@@ -1,16 +1,16 @@
-# 主要变化：2020/21年分析、数据科学和机器学习的应用领域
+# 主要变化：2020/21 年分析、数据科学和机器学习的应用领域
 
-> 原文：[https://www.kdnuggets.com/2021/06/poll-where-analytics-data-science-ml-applied.html](https://www.kdnuggets.com/2021/06/poll-where-analytics-data-science-ml-applied.html)
+> 原文：[`www.kdnuggets.com/2021/06/poll-where-analytics-data-science-ml-applied.html`](https://www.kdnuggets.com/2021/06/poll-where-analytics-data-science-ml-applied.html)
 
-[评论](#comments)拥有像KDnuggets这样长期运行的网站的一个优势是能够审视趋势并将调查结果与我们过去进行的类似调查结果进行比较。最新的调查结果与之前的结果进行比较显示了重大变化，许多传统的数据科学应用领域如CRM出现了大幅下降，而计算机视觉、农业、COVID和教育等领域则有所增长。
+评论拥有像 KDnuggets 这样长期运行的网站的一个优势是能够审视趋势并将调查结果与我们过去进行的类似调查结果进行比较。最新的调查结果与之前的结果进行比较显示了重大变化，许多传统的数据科学应用领域如 CRM 出现了大幅下降，而计算机视觉、农业、COVID 和教育等领域则有所增长。
 
-最新的KDnuggets调查询问了
+最新的 KDnuggets 调查询问了
 
-> **你在2020/21年应用了哪些分析、数据科学和机器学习？**
+> **你在 2020/21 年应用了哪些分析、数据科学和机器学习？**
 
-这项调查显示了应用领域的显著变化。排名第一的是计算机视觉（2018年的调查中没有涉及），其次是金融（2018年没有涉及）。长期排名第一的CRM/消费者应用领域已降至第三位。
+这项调查显示了应用领域的显著变化。排名第一的是计算机视觉（2018 年的调查中没有涉及），其次是金融（2018 年没有涉及）。长期排名第一的 CRM/消费者应用领域已降至第三位。
 
-下面是份额超过10%的主要应用领域：
+下面是份额超过 10%的主要应用领域：
 
 +   **计算机视觉 / 图像识别**，15.0%
 
@@ -30,13 +30,13 @@
 
 +   **科学**，10.7%
 
-接下来，我们将2020/21年的应用领域与2018年的结果进行比较 - 见图1。我们注意到大多数应用领域标记为红色，表示它们的份额下降。
+接下来，我们将 2020/21 年的应用领域与 2018 年的结果进行比较 - 见图 1。我们注意到大多数应用领域标记为红色，表示它们的份额下降。
 
-![2020年与2019年数据科学应用调查](../Images/bb59ebce1212e217436eaf9bf4790667.png) **图1：2020/21年与2018年相比的人工智能、数据科学和机器学习的应用领域，前六大领域在2020/21年份额至少为6%。**
+![2020 年与 2019 年数据科学应用调查](img/bb59ebce1212e217436eaf9bf4790667.png) **图 1：2020/21 年与 2018 年相比的人工智能、数据科学和机器学习的应用领域，前六大领域在 2020/21 年份额至少为 6%。**
 
-两个领域：计算机视觉和COVID在2018年的调查中没有涉及，并在Y轴上显示为灰色圆圈。
+两个领域：计算机视觉和 COVID 在 2018 年的调查中没有涉及，并在 Y 轴上显示为灰色圆圈。
 
-形状大小对应于2020/21年调查中的份额。
+形状大小对应于 2020/21 年调查中的份额。
 
 形状表示变化的方向，上升或下降。
 
@@ -58,7 +58,7 @@
 
 +   约会，0.7%
 
-只有3个领域的份额增加超过10%：
+只有 3 个领域的份额增加超过 10%：
 
 +   农业，39.6%
 
@@ -66,7 +66,7 @@
 
 +   电信 / 有线电视，11.7%
 
-另一方面，24个领域的份额下降超过10%，其中18个领域的下降幅度超过20%：
+另一方面，24 个领域的份额下降超过 10%，其中 18 个领域的下降幅度超过 20%：
 
 +   社会政策 / 调查，-56%
 
@@ -104,15 +104,15 @@
 
 +   社会公益 / 非营利组织，-20%
 
-这是另一种查看这些数据的方式，由[Cong Tran](https://www.linkedin.com/in/trancong/)创建。 ![Poll Where Applied Data Science 2020 Vs 2019 Vertical](../Images/3ff2c0160656d31c5e6944c49327cdaf.png)
+这是另一种查看这些数据的方式，由[Cong Tran](https://www.linkedin.com/in/trancong/)创建。 ![Poll Where Applied Data Science 2020 Vs 2019 Vertical](img/3ff2c0160656d31c5e6944c49327cdaf.png)
 
 **图 2：分析、数据科学、机器学习应用领域的范围图：2020/21 与 2018 年对比**
 
-本次调查共收到447人的回应，而2019年的调查为435人。平均受访者选择了2.9个领域，而2019年为3.0，2018年为2.8，因此数据科学家平均仍在大约3个不同领域工作。
+本次调查共收到 447 人的回应，而 2019 年的调查为 435 人。平均受访者选择了 2.9 个领域，而 2019 年为 3.0，2018 年为 2.8，因此数据科学家平均仍在大约 3 个不同领域工作。
 
 最后，这里是一个更详细的表格。
 
-| 应用领域 | 2020/21年份额 | 2018年份额 | 与2018年对比变化 |
+| 应用领域 | 2020/21 年份额 | 2018 年份额 | 与 2018 年对比变化 |
 | --- | --- | --- | --- |
 | **计算机视觉 / 图像识别** | 15.0% | 新增 | 无数据 |
 | **金融** | 14.5% | 16.1% | -9.6% |
@@ -162,22 +162,22 @@
 
 **相关：**
 
-+   [2018年分析、数据科学、机器学习应用情况：趋势与分析](https://www.kdnuggets.com/2019/03/poll-analytics-data-science-ml-applied-2018.html)
++   [2018 年分析、数据科学、机器学习应用情况：趋势与分析](https://www.kdnuggets.com/2019/03/poll-analytics-data-science-ml-applied-2018.html)
 
-+   [2017年分析、数据科学、机器学习应用情况：趋势与分析](https://www.kdnuggets.com/2018/04/poll-analytics-data-science-ml-applied-2017.html)
++   [2017 年分析、数据科学、机器学习应用情况：趋势与分析](https://www.kdnuggets.com/2018/04/poll-analytics-data-science-ml-applied-2017.html)
 
-+   [2016年分析、数据挖掘、数据科学应用情况](https://www.kdnuggets.com/2016/12/poll-analytics-data-mining-data-science-applied-2016.html)
++   [2016 年分析、数据挖掘、数据科学应用情况](https://www.kdnuggets.com/2016/12/poll-analytics-data-mining-data-science-applied-2016.html)
 
 ### 更多相关话题
 
-+   [KDnuggets应用数据科学调查](https://www.kdnuggets.com/2022/09/applied-data-science-survey.html)
++   [KDnuggets 应用数据科学调查](https://www.kdnuggets.com/2022/09/applied-data-science-survey.html)
 
 +   [人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
 +   [学习数据科学、机器学习和深度学习的实用计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 
-+   [2022年关键数据科学、机器学习、人工智能和分析发展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)
++   [2022 年关键数据科学、机器学习、人工智能和分析发展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)
 
-+   [每个机器学习工程师都应该掌握的5种机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该掌握的 5 种机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets新闻，12月14日：3门免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)

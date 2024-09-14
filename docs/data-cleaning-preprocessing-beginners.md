@@ -1,12 +1,12 @@
 # 数据清洗与预处理入门
 
-> 原文：[https://www.kdnuggets.com/2019/11/data-cleaning-preprocessing-beginners.html](https://www.kdnuggets.com/2019/11/data-cleaning-preprocessing-beginners.html)
+> 原文：[`www.kdnuggets.com/2019/11/data-cleaning-preprocessing-beginners.html`](https://www.kdnuggets.com/2019/11/data-cleaning-preprocessing-beginners.html)
 
-[评论](#comments)
+评论
 
 **由 [Sciforce](https://sciforce.solutions) 提供。**
 
-当我们团队的[项目](https://arxiv.org/abs/1908.02505)在今年的CALL共享任务挑战的文本子任务中获得第一名时，我们成功的关键因素之一是对数据的仔细准备和清理。数据清理和准备是任何AI项目中最关键的第一步。证据表明，[大多数数据科学家将大部分时间 — 多达**70%** — 用于清理数据](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/#77d304176f63)。
+当我们团队的[项目](https://arxiv.org/abs/1908.02505)在今年的 CALL 共享任务挑战的文本子任务中获得第一名时，我们成功的关键因素之一是对数据的仔细准备和清理。数据清理和准备是任何 AI 项目中最关键的第一步。证据表明，[大多数数据科学家将大部分时间 — 多达**70%** — 用于清理数据](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/#77d304176f63)。
 
 在这篇博客文章中，我们将引导你完成数据清理和预处理的初始步骤，从导入最流行的库到实际编码特征。
 
@@ -14,11 +14,11 @@
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 > 
 > * * *
 > 
@@ -26,7 +26,7 @@
 
 ### 第一步：加载数据集
 
-![](../Images/ad30e2684164aac3dcbd2a80f07f2552.png)
+![](img/ad30e2684164aac3dcbd2a80f07f2552.png)
 
 **导入库**
 
@@ -61,7 +61,7 @@ my_dataset = my_dataset.drop([‘url’],axis=1)
 
 ```
 
-+   删除所有只有一个值或缺失值超过50%的列，以便提高处理速度（如果你的数据集足够大，这样做仍然有意义）：
++   删除所有只有一个值或缺失值超过 50%的列，以便提高处理速度（如果你的数据集足够大，这样做仍然有意义）：
 
 ```py
 my_dataset = my_dataset.dropna(thresh=half_count,axis=1)
@@ -70,9 +70,9 @@ my_dataset = my_dataset.dropna(thresh=half_count,axis=1)
 
 另外，一个好的做法是将筛选后的数据集命名为不同的名称，以便与原始数据分开。这确保了你仍然保留了原始数据，以备需要时可以返回。
 
-### 第2步。探索数据集
+### 第 2 步。探索数据集
 
-![](../Images/a236f09b6fbe813c2f84daf5c39f23b4.png)
+![](img/a236f09b6fbe813c2f84daf5c39f23b4.png)
 
 **理解数据**
 
@@ -112,25 +112,25 @@ y = dataset.iloc[:, -1].values
 
 ```
 
-### 第3步。为机器学习准备特征
+### 第 3 步。为机器学习准备特征
 
-![](../Images/0ffa2ab48587877da91d164b39e5af97.png)
+![](img/0ffa2ab48587877da91d164b39e5af97.png)
 
 最后，到了为机器学习算法准备特征的数据清理工作。为了清理数据集，你需要**处理缺失值和类别特征**，因为大多数机器学习模型的数学基础假设数据是数值型的且没有缺失值。此外，`scikit-learn`库会在你尝试使用包含缺失值或非数值值的数据训练线性回归和逻辑回归模型时返回错误。
 
 **处理缺失值**
 
-缺失数据可能是数据不洁的最常见特征。这些值通常以NaN或None的形式存在。
+缺失数据可能是数据不洁的最常见特征。这些值通常以 NaN 或 None 的形式存在。
 
-这里是缺失值的几种原因：有时值缺失是因为它们不存在，或由于数据收集不当或数据录入错误。例如，如果某人未成年，而问题适用于18岁以上的人群，那么问题将包含缺失值。在这种情况下，为该问题填补一个值是不正确的。
+这里是缺失值的几种原因：有时值缺失是因为它们不存在，或由于数据收集不当或数据录入错误。例如，如果某人未成年，而问题适用于 18 岁以上的人群，那么问题将包含缺失值。在这种情况下，为该问题填补一个值是不正确的。
 
 填补缺失值的方法有几种：
 
-+   如果你的数据集足够大且缺失值的比例很高（例如超过50%），你可以删除包含数据的行；
++   如果你的数据集足够大且缺失值的比例很高（例如超过 50%），你可以删除包含数据的行；
 
-+   如果处理的是数值型数据，你可以用0填补所有空变量；
++   如果处理的是数值型数据，你可以用 0 填补所有空变量；
 
-+   你可以使用来自`scikit-learn`库的Imputer类用数据的（均值、中位数、最频繁值）填补缺失值。
++   你可以使用来自`scikit-learn`库的 Imputer 类用数据的（均值、中位数、最频繁值）填补缺失值。
 
 +   你还可以决定用同一列中紧接着的值填补缺失值。
 
@@ -138,7 +138,7 @@ y = dataset.iloc[:, -1].values
 
 **处理类别数据**
 
-机器学习仅使用数值型数据（浮点型或整数型）。然而，数据集通常包含需要转换为数值的对象数据类型。在大多数情况下，类别值是离散的，可以编码为虚拟变量，为每个类别分配一个数字。最简单的方法是使用One Hot Encoder，指定你要处理的列的索引：
+机器学习仅使用数值型数据（浮点型或整数型）。然而，数据集通常包含需要转换为数值的对象数据类型。在大多数情况下，类别值是离散的，可以编码为虚拟变量，为每个类别分配一个数字。最简单的方法是使用 One Hot Encoder，指定你要处理的列的索引：
 
 ```py
 from sklearn.preprocessing import OneHotEncoder

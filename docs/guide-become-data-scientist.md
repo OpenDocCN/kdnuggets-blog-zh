@@ -1,52 +1,52 @@
 # 成为数据科学家的指南（逐步方法）
 
-> 原文：[https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/05/guide-become-data-scientist.html`](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)
 
-有很多资源和链接，但我们经常会困惑选择哪个资源。别担心，我已经为你准备好了。我附上了几个我认为适合初学者的YouTube频道、博客、课程和其他网站的链接。
+有很多资源和链接，但我们经常会困惑选择哪个资源。别担心，我已经为你准备好了。我附上了几个我认为适合初学者的 YouTube 频道、博客、课程和其他网站的链接。
 
-你也可以使用像Analytics Vidhya和Kaggle这样的数据科学社区网站来实施你的学习，并获得数据科学的实践经验。
+你也可以使用像 Analytics Vidhya 和 Kaggle 这样的数据科学社区网站来实施你的学习，并获得数据科学的实践经验。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-![成为数据科学家的指南（逐步方法）](../Images/c33e739c9a6b8e61c3c4d634e6d44cb2.png)
+![成为数据科学家的指南（逐步方法）](img/c33e739c9a6b8e61c3c4d634e6d44cb2.png)
 
 数据科学路线图
 
-# 步骤1：选择编程语言（Python / R）
+# 步骤 1：选择编程语言（Python / R）
 
-在开始数据科学之旅时，第一步是熟悉一种编程语言。在两者之间，Python是最受欢迎的编程语言，大多数数据科学家都采用它。它易于理解、多功能，并支持各种内置库，如Numpy、Pandas、Matplotlib、Seaborn、Scipy等。
+在开始数据科学之旅时，第一步是熟悉一种编程语言。在两者之间，Python 是最受欢迎的编程语言，大多数数据科学家都采用它。它易于理解、多功能，并支持各种内置库，如 Numpy、Pandas、Matplotlib、Seaborn、Scipy 等。
 
-1.  [FreeCodeCamp的Python教程](https://www.youtube.com/watch?v=rfscVS0vtbwl)（推荐）
+1.  [FreeCodeCamp 的 Python 教程](https://www.youtube.com/watch?v=rfscVS0vtbwl)（推荐）
 
-1.  [Kaggle的Python课程](https://www.kaggle.com/learn/python)
+1.  [Kaggle 的 Python 课程](https://www.kaggle.com/learn/python)
 
-1.  [Krish Naik的Python教程](https://www.youtube.com/playlist?list=PLZoTAELRMXVNUL99R4bDlVYsncUNvwUBB)（推荐）
+1.  [Krish Naik 的 Python 教程](https://www.youtube.com/playlist?list=PLZoTAELRMXVNUL99R4bDlVYsncUNvwUBB)（推荐）
 
-1.  [Udemy的数据科学与机器学习Python训练营](https://bit.ly/dataprofessor-udemy-python-ds)
+1.  [Udemy 的数据科学与机器学习 Python 训练营](https://bit.ly/dataprofessor-udemy-python-ds)
 
-1.  [Coursera Python课程](https://www.coursera.org/learn/python)
+1.  [Coursera Python 课程](https://www.coursera.org/learn/python)
 
-> **注意：** 在学习Python时，应了解基本的Python变量、数据类型、面向对象的概念、Numpy、Pandas、Matplotlib和Seaborn。
+> **注意：** 在学习 Python 时，应了解基本的 Python 变量、数据类型、面向对象的概念、Numpy、Pandas、Matplotlib 和 Seaborn。
 
-# 步骤2：统计学
+# 步骤 2：统计学
 
 对于成为数据科学家来说，了解统计学和概率学就像食物中需要盐一样重要。了解这些知识将帮助数据科学家解读大量数据集，从中获得洞察，并更好地分析数据。
 
-1.  [Krish Naik的统计学播放列表](https://www.youtube.com/watch?v=zRUliXuwJCQ&list=PLZoTAELRMXVMhVyr3Ri9IQ-t5QPBtxzJO)（推荐）
+1.  [Krish Naik 的统计学播放列表](https://www.youtube.com/watch?v=zRUliXuwJCQ&list=PLZoTAELRMXVMhVyr3Ri9IQ-t5QPBtxzJO)（推荐）
 
-1.  [Coursera统计课程](https://www.coursera.org/learn/statistics-for-data-science-python)
+1.  [Coursera 统计课程](https://www.coursera.org/learn/statistics-for-data-science-python)
 
-1.  [Khan Academy统计与概率课程](https://www.khanacademy.org/math/statistics-probability)
+1.  [Khan Academy 统计与概率课程](https://www.khanacademy.org/math/statistics-probability)
 
 1.  [FreeCodeCamp 统计学课程](https://www.youtube.com/watch?v=xxpc-HPKN28)（推荐）
 
@@ -96,7 +96,7 @@ C) 数据可视化
 
 1.  [Coursera 课程：EDA、统计学、概率](https://www.coursera.org/learn/probability-theory-statistics)
 
-![如何成为数据科学家指南（逐步方法）](../Images/f3062ab3feea6eda38b128a717394845.png)
+![如何成为数据科学家指南（逐步方法）](img/f3062ab3feea6eda38b128a717394845.png)
 
 Seaborn Python 库中的图表类型。
 
@@ -116,7 +116,7 @@ Seaborn Python 库中的图表类型。
 
 1.  [Coursera 深度学习专业课程](https://www.coursera.org/specializations/deep-learning)
 
-![如何成为数据科学家的指南（逐步方法）](../Images/af22e068ddb10bf6504e44afbce54d24.png)
+![如何成为数据科学家的指南（逐步方法）](img/af22e068ddb10bf6504e44afbce54d24.png)
 
 机器学习领域。
 

@@ -1,6 +1,6 @@
 # 利用 GeoPandas 在 Python 中处理地理空间数据
 
-> 原文：[https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)
+> 原文：[`www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas`](https://www.kdnuggets.com/leveraging-geospatial-data-in-python-with-geopandas)
 
 空间数据由与位置相关的记录组成。这些数据可以来自 GPS 跟踪、地球观测影像和地图。每个空间数据点可以使用坐标参考系统（如经度/纬度对）在地图上精确定位，这使我们能够调查它们之间的关系。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
 GeoPandas 是一个开源的 Python 包，专门用于处理信息。它在 pandas 提供的各种数据类型的基础上扩展，提供了对几何对象的空间操作——这使得使用 pandas 数据处理工具 pandas 在 Python 中进行空间分析变得更加便利。由于 GeoPandas 是建立在 Pandas 之上，因此对于熟悉 Python 语法的专业人士来说，可以迅速掌握 GeoPandas 语法。
 
-![利用 GeoPandas 在 Python 中处理地理空间数据](../Images/57a482a9238b63706df83bbc2859b7b9.png)
+![利用 GeoPandas 在 Python 中处理地理空间数据](img/57a482a9238b63706df83bbc2859b7b9.png)
 
 # 1\. 安装 GeoPandas
 
@@ -74,7 +74,7 @@ districts = gpd.read_file(url)
 districts.head()
 ```
 
-![在 Python 中利用 GeoPandas 处理地理空间数据](../Images/93700d532c04edf9c9b30b5a7ba35eb6.png)
+![在 Python 中利用 GeoPandas 处理地理空间数据](img/93700d532c04edf9c9b30b5a7ba35eb6.png)
 
 接下来，为了将数据写入文件，我们可以使用 **GeoDataFrame.to_file()** 函数将数据写入 **Shapefile**，但你可以通过 **driver** 参数将其转换为 **GeoJSON**。
 
@@ -84,7 +84,7 @@ districts.to_file("districts.geojson", driver="GeoJSON")
 
 # 3\. GeoDataFrames 属性
 
-由于**GeoDataFrames**是 pandas DataFrame 的子类，它继承了很多属性。然而，也存在一些区别，主要的区别是它可以存储几何列（也称为 GeoSeries）并执行空间操作。GeoDataFrame中的几何列可以包含各种类型的矢量数据，包括点、线和多边形。然而，只有一列被认为是活动几何列，所有空间操作都将基于该列。
+由于**GeoDataFrames**是 pandas DataFrame 的子类，它继承了很多属性。然而，也存在一些区别，主要的区别是它可以存储几何列（也称为 GeoSeries）并执行空间操作。GeoDataFrame 中的几何列可以包含各种类型的矢量数据，包括点、线和多边形。然而，只有一列被认为是活动几何列，所有空间操作都将基于该列。
 
 另一个关键特性是每列都有其相关的 CRS 信息，告诉我们候选者在地球上的位置。这个特性之所以关键，是因为如果需要合并两个空间数据集，需要确保它们表达在相同的 CRS 中，否则会得到错误的结果。CRS 信息存储在 GeoPandas 的 crs 属性中：
 
@@ -92,7 +92,7 @@ districts.to_file("districts.geojson", driver="GeoJSON")
 districts.crs
 ```
 
-![利用 GeoPandas 在 Python 中的地理空间数据](../Images/31f4b918a845cfe2fc153dadc09783da.png)
+![利用 GeoPandas 在 Python 中的地理空间数据](img/31f4b918a845cfe2fc153dadc09783da.png)
 
 现在我们已设置正确的投影 CRS，我们准备好探索 GeoDataFrames 的属性了。
 
@@ -117,7 +117,7 @@ districts['area'] = districts.area / 1000000
 districts['area']
 ```
 
-![利用 GeoPandas 在 Python 中的地理空间数据](../Images/a8b24dcfbd134d7190d2d04c3b7d5971.png)
+![利用 GeoPandas 在 Python 中的地理空间数据](img/a8b24dcfbd134d7190d2d04c3b7d5971.png)
 
 ## 4.2\. 质心
 
@@ -128,7 +128,7 @@ districts['centroid']=districts.centroid
 districts['centroid']
 ```
 
-![利用 GeoPandas 在 Python 中的地理空间数据](../Images/6d2b8590b1a6b19fad391c35978a61ed.png)
+![利用 GeoPandas 在 Python 中的地理空间数据](img/6d2b8590b1a6b19fad391c35978a61ed.png)
 
 ## 4.3\. 边界
 
@@ -138,7 +138,7 @@ districts['centroid']
 districts['boundary']=districts.boundary
 ```
 
-![利用 GeoPandas 在 Python 中的地理空间数据](../Images/b63de49bc7136f86a7b70e0127a4037e.png)
+![利用 GeoPandas 在 Python 中的地理空间数据](img/b63de49bc7136f86a7b70e0127a4037e.png)
 
 ## 4.4\. 距离
 
@@ -153,7 +153,7 @@ sagrada_fam= sagrada_fam.to_crs(epsg=2062)
 districts['sagrada_fam_dist'] = [float(sagrada_fam.distance(centroid)) / 1000 for centroid in districts.centroid]
 ```
 
-![利用 GeoPandas 在 Python 中的地理空间数据](../Images/dd7292d0c8b66796fbb93c818f0e6fc4.png)
+![利用 GeoPandas 在 Python 中的地理空间数据](img/dd7292d0c8b66796fbb93c818f0e6fc4.png)
 
 # 5\. 使用 GeoPandas 绘制数据
 
@@ -165,7 +165,7 @@ districts['sagrada_fam_dist'] = [float(sagrada_fam.distance(centroid)) / 1000 fo
 ax= districts.plot(figsize=(10,6))
 ```
 
-![利用GeoPandas在Python中利用地理空间数据](../Images/e5fd076ccf9a7edcc906b960ab6345f0.png)
+![利用 GeoPandas 在 Python 中利用地理空间数据](img/e5fd076ccf9a7edcc906b960ab6345f0.png)
 
 这是一个非常基础的图表，未能提供太多信息。然而，我们可以通过为每个区域着色来使其更具信息性。
 
@@ -173,7 +173,7 @@ ax= districts.plot(figsize=(10,6))
 ax= districts.plot(column='DISTRICTE', figsize=(10,6), edgecolor='black', legend=True)
 ```
 
-![利用GeoPandas在Python中利用地理空间数据](../Images/f7aeb7ee69677ada997d71de90cefe29.png)
+![利用 GeoPandas 在 Python 中利用地理空间数据](img/f7aeb7ee69677ada997d71de90cefe29.png)
 
 最后，我们可以通过添加区域的质心来向我们的图表中添加更多信息。
 
@@ -189,17 +189,17 @@ plt.axis('off')
 plt.show()
 ```
 
-![利用GeoPandas在Python中利用地理空间数据](../Images/4afa93df50e4a1c7ae79e3811d27a31a.png)
+![利用 GeoPandas 在 Python 中利用地理空间数据](img/4afa93df50e4a1c7ae79e3811d27a31a.png)
 
-接下来，我们将探索GeoPandas的一个非常重要的特性，即空间关系及其如何相互关联。
+接下来，我们将探索 GeoPandas 的一个非常重要的特性，即空间关系及其如何相互关联。
 
 # 6. 定义空间关系
 
-地理空间数据在空间上相互关联。GeoPandas使用pandas和shapely包来处理空间关系。本节涵盖常见操作。有两种主要方式来合并GeoPandas DataFrames，即属性连接和空间连接。在本节中，我们将探讨这两者。
+地理空间数据在空间上相互关联。GeoPandas 使用 pandas 和 shapely 包来处理空间关系。本节涵盖常见操作。有两种主要方式来合并 GeoPandas DataFrames，即属性连接和空间连接。在本节中，我们将探讨这两者。
 
 ## 6.1. 属性连接
 
-属性连接允许你使用非几何变量连接两个GeoPandas DataFrame，这使得它类似于Pandas中的常规连接操作。连接操作使用pandas.merge()方法，如下面的示例所示。在这个例子中，我们将把[**巴塞罗那人口数据**](https://opendata-ajuntament.barcelona.cat/data/es/dataset/est-padro-sexe/resource/cd3125e4-f7d3-4217-8f9d-6d7abdad6ab0)连接到我们的地理空间数据中，以添加更多信息。
+属性连接允许你使用非几何变量连接两个 GeoPandas DataFrame，这使得它类似于 Pandas 中的常规连接操作。连接操作使用 pandas.merge()方法，如下面的示例所示。在这个例子中，我们将把[**巴塞罗那人口数据**](https://opendata-ajuntament.barcelona.cat/data/es/dataset/est-padro-sexe/resource/cd3125e4-f7d3-4217-8f9d-6d7abdad6ab0)连接到我们的地理空间数据中，以添加更多信息。
 
 ```py
 import pandas as pd
@@ -210,7 +210,7 @@ districts = districts.merge(pop)
 districts
 ```
 
-![利用GeoPandas在Python中利用地理空间数据](../Images/3be56fdedc3a281dcc0ec5374743eff4.png)
+![利用 GeoPandas 在 Python 中利用地理空间数据](img/3be56fdedc3a281dcc0ec5374743eff4.png)
 
 ## 6.2. 空间连接
 
@@ -223,16 +223,16 @@ bike_lane = bike_lane.loc[:,['ID','geometry']]
 bike_lane.to_crs(epsg=2062, inplace=True)
 ```
 
-![利用GeoPandas在Python中利用地理空间数据](../Images/706a8dba115cbce5d1eaccb75e93aeda.png)
+![利用 GeoPandas 在 Python 中利用地理空间数据](img/706a8dba115cbce5d1eaccb75e93aeda.png)
 
-要在空间上连接两个数据帧，我们可以使用` sjoin()`函数。` sjoin()`函数有四个主要参数：第一个是GeoDataFrame，第二个参数是我们将添加到第一个GeoDataFrame的GeoDataFrame，第三个参数是连接类型，最后一个参数是**谓词**，它定义了我们希望用来匹配两个GeoDataFrame的空间关系。最常见的部分关系有**交叉**、**包含**和**在内**。在这个例子中，我们将使用**交叉**参数。
+要在空间上连接两个数据帧，我们可以使用` sjoin()`函数。` sjoin()`函数有四个主要参数：第一个是 GeoDataFrame，第二个参数是我们将添加到第一个 GeoDataFrame 的 GeoDataFrame，第三个参数是连接类型，最后一个参数是**谓词**，它定义了我们希望用来匹配两个 GeoDataFrame 的空间关系。最常见的部分关系有**交叉**、**包含**和**在内**。在这个例子中，我们将使用**交叉**参数。
 
 ```py
 lanes_districts = gpd.sjoin(districts, bike_lane, how='inner', predicate='intersects')
 lanes_districts
 ```
 
-![利用GeoPandas在Python中利用地理空间数据](../Images/db3714a05546bb3c038c019083c7fd79.png)
+![利用 GeoPandas 在 Python 中利用地理空间数据](img/db3714a05546bb3c038c019083c7fd79.png)
 
 在这篇文章中，我向你介绍了如何使用开源的 GeoPandas 库进行地理空间数据分析。我们从下载 GeoPandas 包开始，然后讨论了不同类型的地理空间数据以及如何加载它们。最后，我们将探索一些基本操作，以便你能亲自接触到地理空间数据集。尽管地理空间数据分析还有很多需要探索的内容，但这篇博客作为你学习之旅的起点。
 

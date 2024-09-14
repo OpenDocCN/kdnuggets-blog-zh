@@ -1,10 +1,10 @@
 # 哈佛的顶级免费课程为有志于成为数据科学家的人提供
 
-> 原文：[https://www.kdnuggets.com/harvard-top-free-courses-for-aspiring-data-scientists](https://www.kdnuggets.com/harvard-top-free-courses-for-aspiring-data-scientists)
+> 原文：[`www.kdnuggets.com/harvard-top-free-courses-for-aspiring-data-scientists`](https://www.kdnuggets.com/harvard-top-free-courses-for-aspiring-data-scientists)
 
-![哈佛的顶级免费课程](../Images/94d4b820de4dc888a0829f1771975993.png)
+![哈佛的顶级免费课程](img/94d4b820de4dc888a0829f1771975993.png)
 
-编辑器使用Midjourney创建的图像
+编辑器使用 Midjourney 创建的图像
 
 许多课程可以教授你数据科学的基础，但哈佛大学无疑是最顶尖的。作为一所精英大学，他们的所有课程无疑都会提供成为数据科学家所需的技能。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,13 +24,13 @@
 
 让我们深入了解一下。
 
-## HarvardX: CS50的Python编程入门
+## HarvardX: CS50 的 Python 编程入门
 
-Python是任何有志于成为数据科学家的就业关键。
+Python 是任何有志于成为数据科学家的就业关键。
 
-在现代时代，数据科学家需要理解编程语言。Python是许多行业中使用的事实标准语言，因此学习它是有益的。
+在现代时代，数据科学家需要理解编程语言。Python 是许多行业中使用的事实标准语言，因此学习它是有益的。
 
-[HarvardX: CS50的Python编程入门](https://www.edx.org/learn/python/harvard-university-cs50-s-introduction-to-programming-with-python) 将教授你作为数据科学家所需的主要Python编程语言。在这门课程中，我们将学习以下内容：
+[HarvardX: CS50 的 Python 编程入门](https://www.edx.org/learn/python/harvard-university-cs50-s-introduction-to-programming-with-python) 将教授你作为数据科学家所需的主要 Python 编程语言。在这门课程中，我们将学习以下内容：
 
 +   函数，变量
 
@@ -42,7 +42,7 @@ Python是任何有志于成为数据科学家的就业关键。
 
 +   单元测试
 
-如果每周投入大约3-9小时，你将在十周内学习更多内容。你应该在进入其他课程之前从这门免费的哈佛课程开始，因为之后的许多数据科学课程都依赖于你使用Python的能力。
+如果每周投入大约 3-9 小时，你将在十周内学习更多内容。你应该在进入其他课程之前从这门免费的哈佛课程开始，因为之后的许多数据科学课程都依赖于你使用 Python 的能力。
 
 ## HarvardX: Fat Chance: 从基础到概率
 
@@ -60,7 +60,7 @@ Python是任何有志于成为数据科学家的就业关键。
 
 +   正态分布
 
-该课程设计为自学，通常需要大约七周的时间完成，如果你每周投入3-5小时用于学习。
+该课程设计为自学，通常需要大约七周的时间完成，如果你每周投入 3-5 小时用于学习。
 
 ## HarvardX：Python 数据科学导论
 
@@ -122,4 +122,4 @@ Python是任何有志于成为数据科学家的就业关键。
 
 +   [7 门免费哈佛大学课程提升你的技能](https://www.kdnuggets.com/7-free-harvard-university-courses-to-advance-your-skills)
 
-+   [KDnuggets 新闻 3月30日：最受欢迎的编程入门…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻 3 月 30 日：最受欢迎的编程入门…](https://www.kdnuggets.com/2022/n13.html)

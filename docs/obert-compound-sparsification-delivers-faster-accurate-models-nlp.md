@@ -1,8 +1,8 @@
 # oBERT: 复合稀疏化为 NLP 提供更快、更准确的模型
 
-> 原文：[https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
+> 原文：[`www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html`](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
 
-![The Optimal BERT Surgeon 推理性能加速比较](../Images/120c07b58ced24c19051c4e1d1908546.png)
+![The Optimal BERT Surgeon 推理性能加速比较](img/120c07b58ced24c19051c4e1d1908546.png)
 
 比较了在 SQuAD 数据集上，The Optimal BERT Surgeon (oBERT) 与其他方法的推理性能加速。oBERT 的性能是在 c5.12xlarge AWS 实例上使用 DeepSparse Engine 测量的。
 
@@ -18,55 +18,55 @@ BERT 的低效特性并未被忽视。许多研究人员致力于降低其成本
 
 +   [运动剪枝](https://arxiv.org/abs/2005.07683)结合了幅度和梯度信息，以在使用蒸馏进行微调时移除冗余参数。
 
-![DistilBERT 训练示意图](../Images/2b69b82b72a797d19cc1d44de32d5070.png)
+![DistilBERT 训练示意图](img/2b69b82b72a797d19cc1d44de32d5070.png)
 
-DistilBERT 训练示意图 ![TinyBERT 训练示意图](../Images/7ef98e9a8e1ed4db71abe59f3559b84d.png)
+DistilBERT 训练示意图 ![TinyBERT 训练示意图](img/7ef98e9a8e1ed4db71abe59f3559b84d.png)
 
 TinyBERT 训练示意图
 
 # BERT 是高度过参数化的
 
-我们在最近的论文中展示了BERT的高度过度参数化，[*The Optimal BERT Surgeon*](https://arxiv.org/pdf/2203.07259.pdf)。**网络的90%可以在对模型和其准确性影响最小的情况下移除**！
+我们在最近的论文中展示了 BERT 的高度过度参数化，[*The Optimal BERT Surgeon*](https://arxiv.org/pdf/2203.07259.pdf)。**网络的 90%可以在对模型和其准确性影响最小的情况下移除**！
 
-真的，90%？是的！我们在Neural Magic的研究团队与IST Austria合作，通过实施二阶剪枝算法Optimal BERT Surgeon，将之前最佳的70%稀疏度提高到了90%。该算法使用泰勒展开来近似每个权重对损失函数的影响——这意味着我们确切知道网络中哪些权重是多余的，可以安全移除。当将此技术与蒸馏训练结合时，我们能够实现90%的稀疏度，同时恢复99%的基准准确性！
+真的，90%？是的！我们在 Neural Magic 的研究团队与 IST Austria 合作，通过实施二阶剪枝算法 Optimal BERT Surgeon，将之前最佳的 70%稀疏度提高到了 90%。该算法使用泰勒展开来近似每个权重对损失函数的影响——这意味着我们确切知道网络中哪些权重是多余的，可以安全移除。当将此技术与蒸馏训练结合时，我们能够实现 90%的稀疏度，同时恢复 99%的基准准确性！
 
-![相对于当前最先进的无结构剪枝方法在12层BERT-base-uncased模型和问答SQuAD v1.1数据集上的性能概述。](../Images/3bce90acca3987094978000a4b979dbc.png)
+![相对于当前最先进的无结构剪枝方法在 12 层 BERT-base-uncased 模型和问答 SQuAD v1.1 数据集上的性能概述。](img/3bce90acca3987094978000a4b979dbc.png)
 
-相对于当前最先进的无结构剪枝方法在12层BERT-base-uncased模型和问答SQuAD v1.1数据集上的性能概述。
+相对于当前最先进的无结构剪枝方法在 12 层 BERT-base-uncased 模型和问答 SQuAD v1.1 数据集上的性能概述。
 
-但是，BERT的结构化剪枝版本是否也过度参数化了呢？为了解答这个问题，我们移除了最多3/4的层来创建我们的6层和3层稀疏版本。我们首先用蒸馏技术重新训练了这些压缩模型，然后应用了Optimal BERT Surgeon剪枝。通过这样做，我们发现这些已经压缩的模型中80%的权重可以进一步移除而不影响准确性。例如，我们的3层模型在保留95%准确性的同时移除了BERT中的1.1亿个参数中的8100万个，从而创建了我们的**Optimal BERT Surgeon模型（oBERT）**。
+但是，BERT 的结构化剪枝版本是否也过度参数化了呢？为了解答这个问题，我们移除了最多 3/4 的层来创建我们的 6 层和 3 层稀疏版本。我们首先用蒸馏技术重新训练了这些压缩模型，然后应用了 Optimal BERT Surgeon 剪枝。通过这样做，我们发现这些已经压缩的模型中 80%的权重可以进一步移除而不影响准确性。例如，我们的 3 层模型在保留 95%准确性的同时移除了 BERT 中的 1.1 亿个参数中的 8100 万个，从而创建了我们的**Optimal BERT Surgeon 模型（oBERT）**。
 
-鉴于我们引入的oBERT模型的高稀疏度，我们使用了[DeepSparse](https://github.com/neuralmagic/deepsparse) [Engine](https://github.com/neuralmagic/deepsparse)来测量推理性能——这是一种自由提供的、稀疏感知的推理引擎，旨在提高稀疏神经网络在普通CPU上的性能，比如笔记本电脑中的CPU。下图显示了经过剪枝的12层模型和3层模型的加速结果，前者优于DistilBERT，后者优于TinyBERT。结合DeepSparse Engine和oBERT，高准确度的NLP CPU部署现在的时间为几毫秒（几=个位数）。
+鉴于我们引入的 oBERT 模型的高稀疏度，我们使用了[DeepSparse](https://github.com/neuralmagic/deepsparse) [Engine](https://github.com/neuralmagic/deepsparse)来测量推理性能——这是一种自由提供的、稀疏感知的推理引擎，旨在提高稀疏神经网络在普通 CPU 上的性能，比如笔记本电脑中的 CPU。下图显示了经过剪枝的 12 层模型和 3 层模型的加速结果，前者优于 DistilBERT，后者优于 TinyBERT。结合 DeepSparse Engine 和 oBERT，高准确度的 NLP CPU 部署现在的时间为几毫秒（几=个位数）。
 
 # 更好的算法使得深度学习在任何地方都能高效运作
 
-在应用结构化剪枝和Optimal BERT Surgeon剪枝技术后，我们结合了量化感知训练，以利用DeepSparse Engine对X86 CPU的稀疏量化支持。将量化和我们的稀疏模型与[4块剪枝](https://arxiv.org/pdf/2203.07259.pdf)及DeepSparse [VNNI支持](https://www.intel.com/content/dam/www/public/us/en/documents/product-overviews/dl-boost-product-overview.pdf)结合，最终得到了一个量化的、80%稀疏的12层模型，达到了99%的恢复目标。这些技术的结合被称为“[复合稀疏化](https://neuralmagic.com/blog/pruning-hugging-face-bert-compound-sparsification/)”。
+在应用结构化剪枝和 Optimal BERT Surgeon 剪枝技术后，我们结合了量化感知训练，以利用 DeepSparse Engine 对 X86 CPU 的稀疏量化支持。将量化和我们的稀疏模型与[4 块剪枝](https://arxiv.org/pdf/2203.07259.pdf)及 DeepSparse [VNNI 支持](https://www.intel.com/content/dam/www/public/us/en/documents/product-overviews/dl-boost-product-overview.pdf)结合，最终得到了一个量化的、80%稀疏的 12 层模型，达到了 99%的恢复目标。这些技术的结合被称为“[复合稀疏化](https://neuralmagic.com/blog/pruning-hugging-face-bert-compound-sparsification/)”。
 
-![oBERT在CPU和GPU上以批处理大小1、序列长度128进行的延迟推理比较。](../Images/120c07b58ced24c19051c4e1d1908546.png)
+![oBERT 在 CPU 和 GPU 上以批处理大小 1、序列长度 128 进行的延迟推理比较。](img/120c07b58ced24c19051c4e1d1908546.png)
 
-oBERT在CPU和GPU上以批处理大小1、序列长度128进行的延迟推理比较。
+oBERT 在 CPU 和 GPU 上以批处理大小 1、序列长度 128 进行的延迟推理比较。
 
-结果是BERT模型在现成的CPU上达到了GPU级别的性能。使用稀疏量化的oBERT 12层模型时，4核Intel MacBook的性能现在优于T4 GPU，而8核服务器在对延迟敏感的应用中表现优于V100。使用3层和6层模型会进一步加速，但准确率稍低。
+结果是 BERT 模型在现成的 CPU 上达到了 GPU 级别的性能。使用稀疏量化的 oBERT 12 层模型时，4 核 Intel MacBook 的性能现在优于 T4 GPU，而 8 核服务器在对延迟敏感的应用中表现优于 V100。使用 3 层和 6 层模型会进一步加速，但准确率稍低。
 
-**“4核Intel MacBook的性能现在比T4 GPU更强，而8核服务器在对延迟敏感的应用中表现优于V100。”**
+**“4 核 Intel MacBook 的性能现在比 T4 GPU 更强，而 8 核服务器在对延迟敏感的应用中表现优于 V100。”**
 
 # 让复合稀疏化为你服务
 
-Twitter自然语言处理视频对比了从oBERT到未经优化的基线模型的性能改进。
+Twitter 自然语言处理视频对比了从 oBERT 到未经优化的基线模型的性能改进。
 
-结合研究社区的精神并促进持续贡献，创建oBERT模型的源代码已通过[SparseML](https://github.com/neuralmagic/sparseml)开源，模型也可以在[SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=masked_language_modeling&page=1&dataset=wikipedia_bookcorpus)上免费获取。此外，DeepSparse Twitter加密示例在[DeepSparse仓库](https://github.com/neuralmagic/deepsparse/tree/main/examples/twitter-nlp)中开源。试试它来高效跟踪加密趋势或其他趋势！最后，我们还推出了简单的[用例演示](https://neuralmagic.com/use-cases/#nlp)，以突出应用这些研究到数据中所需的基本流程。
+结合研究社区的精神并促进持续贡献，创建 oBERT 模型的源代码已通过[SparseML](https://github.com/neuralmagic/sparseml)开源，模型也可以在[SparseZoo](https://sparsezoo.neuralmagic.com/?domain=nlp&sub_domain=masked_language_modeling&page=1&dataset=wikipedia_bookcorpus)上免费获取。此外，DeepSparse Twitter 加密示例在[DeepSparse 仓库](https://github.com/neuralmagic/deepsparse/tree/main/examples/twitter-nlp)中开源。试试它来高效跟踪加密趋势或其他趋势！最后，我们还推出了简单的[用例演示](https://neuralmagic.com/use-cases/#nlp)，以突出应用这些研究到数据中所需的基本流程。
 
-**[Mark Kurtz](https://www.linkedin.com/in/markkurtzjr/)** ([@markurtz_](https://twitter.com/markurtz_)) 是Neural Magic的机器学习总监，并且是一位经验丰富的软件和机器学习领导者。Mark精通工程和机器学习的全栈，并对模型优化和高效推理充满热情。
+**[Mark Kurtz](https://www.linkedin.com/in/markkurtzjr/)** ([@markurtz_](https://twitter.com/markurtz_)) 是 Neural Magic 的机器学习总监，并且是一位经验丰富的软件和机器学习领导者。Mark 精通工程和机器学习的全栈，并对模型优化和高效推理充满热情。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 

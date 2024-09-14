@@ -1,22 +1,22 @@
 # 描述性统计：数据科学中的强大小巨人
 
-> 原文：[https://www.kdnuggets.com/2018/03/descriptive-statistics-mighty-dwarf-data-science.html](https://www.kdnuggets.com/2018/03/descriptive-statistics-mighty-dwarf-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/03/descriptive-statistics-mighty-dwarf-data-science.html`](https://www.kdnuggets.com/2018/03/descriptive-statistics-mighty-dwarf-data-science.html)
 
-![评论](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![评论](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/)、[Codewise.com](http://www.codewise.com/)**
 
-![标题图片](../Images/0f78f5338daee3562d88e869a289ce2e.png)
+![标题图片](img/0f78f5338daee3562d88e869a289ce2e.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 一种非常快速的描述性统计方法，旨在总结信号分布的形状，被称为“峰度”。用数学术语定义如下：
 
-![公式 1](../Images/ff63e490a7ba3b2e5e77a9cfa05a68f6.png)
+![公式 1](img/ff63e490a7ba3b2e5e77a9cfa05a68f6.png)
 
 其中 n 是数据中样本的总数，xi 是数据中的第 i 个样本，x 是数据的样本均值。
 
@@ -48,7 +48,7 @@ sales = np.random.normal(loc = 10, size = 1000)
 
 数据如 *图 1* 所示。
 
-![图](../Images/a14c609bc9e495ab06964f3c0e736b26.png)
+![图](img/a14c609bc9e495ab06964f3c0e736b26.png)
 
 *图 1*
 
@@ -73,13 +73,13 @@ print(kurtosis(100 * sales, fisher = False))
 
 回到案例研究：假设由于需求的季节性变化，我们期望在销售中看到一些异常值。假设在第 200 天，我们看到销售商品的数量大幅上升，随后在第 201 天出现大幅下降（*图 2*）。
 
-![图](../Images/d64f0b0c8607b7050ac2ae05a7c281bb.png)
+![图](img/d64f0b0c8607b7050ac2ae05a7c281bb.png)
 
 *图 2*
 
 我们希望能够自动检测这些事件。这就是数据科学的潜力所在，它会说：“我很高兴能迅速检测到这样的异常！我将使用我的魔法‘峰度’工具。”
 
-![图片](../Images/518b353ff321f77f8e08cef46424755f.png)
+![图片](img/518b353ff321f77f8e08cef46424755f.png)
 
 让我们创建讨论情境的数据：
 
@@ -98,9 +98,9 @@ print(kurtosis(sales_spike, fisher = False)
 
 回到峰度的非正式定义，作为分布峰度的度量。比较图 3 和图 4 中显示的“销售”和“销售峰值”的直方图。尽管这两个直方图几乎是由相同的信号生成的，除了“销售峰值”有两个脉冲之外，幅度分布看起来非常不同，其中一个明显显得更尖锐（即具有更高峰度值的那个）相比于另一个。
 
-![图片](../Images/6b668214288f77aa07b948e22e814808.png)
+![图片](img/6b668214288f77aa07b948e22e814808.png)
 
-*图 3* ![图片](../Images/9a6ba78d5316a308b955f6f01e947b9d.png)
+*图 3* ![图片](img/9a6ba78d5316a308b955f6f01e947b9d.png)
 
 *图 4*
 
@@ -108,15 +108,15 @@ print(kurtosis(sales_spike, fisher = False)
 
 峰度在检测数据中的冲动内容方面非常高效，它对数据幅度差异进行了归一化处理，并且计算速度非常快。然而，它确实存在一些缺点，我将在文章中进行讨论。
 
-**简历：[帕维尔·日舍钦斯基](https://www.linkedin.com/in/pawelrzeszucinski/)** 获得了克兰菲尔德大学计算机科学硕士学位和弗罗茨瓦夫理工大学电子学硕士学位。之后他转到曼彻斯特大学，在QinetiQ赞助的项目上获得了与直升机齿轮箱诊断相关的数据分析博士学位。回到波兰后，他在ABB企业研究中心担任高级科学家，并在汇丰银行战略分析部门担任高级风险建模师。目前，他在Codewise担任数据科学家。
+**简历：[帕维尔·日舍钦斯基](https://www.linkedin.com/in/pawelrzeszucinski/)** 获得了克兰菲尔德大学计算机科学硕士学位和弗罗茨瓦夫理工大学电子学硕士学位。之后他转到曼彻斯特大学，在 QinetiQ 赞助的项目上获得了与直升机齿轮箱诊断相关的数据分析博士学位。回到波兰后，他在 ABB 企业研究中心担任高级科学家，并在汇丰银行战略分析部门担任高级风险建模师。目前，他在 Codewise 担任数据科学家。
 
 **相关：**
 
-+   [描述性统计学关键术语解释](/2017/05/descriptive-statistics-key-terms-explained.html)
++   描述性统计学关键术语解释
 
-+   [一些营销人员的统计学小贴士](/2018/03/statistics-tips-marketers.html)
++   一些营销人员的统计学小贴士
 
-+   [使用 Python 移除异常值的标准差方法](/2017/02/removing-outliers-standard-deviation-python.html)
++   使用 Python 移除异常值的标准差方法
 
 ### 更多相关主题
 

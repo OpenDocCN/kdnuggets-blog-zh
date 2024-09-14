@@ -1,8 +1,8 @@
 # 打破数据障碍：**零样本学习**、**单样本学习**和**少样本学习**如何改变机器学习
 
-> 原文：[https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html`](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)
 
-![打破数据障碍：**零样本学习**、**单样本学习**和**少样本学习**如何改变机器学习](../Images/d9c4f3c60e1a21d54b41ce0a931627e0.png)
+![打破数据障碍：**零样本学习**、**单样本学习**和**少样本学习**如何改变机器学习](img/d9c4f3c60e1a21d54b41ce0a931627e0.png)
 
 图片来源：Allison Saeng via Unsplash
 
@@ -10,9 +10,9 @@
 
 在当今快速变化的世界中，技术每天都在进步，[机器学习](https://saturncloud.io/glossary/machine-learning/)和[人工智能](https://saturncloud.io/glossary/artificial-intelligence/)利用过程自动化和提高效率的力量彻底改变了各种行业。然而，人类仍然在传统机器学习算法面前具有明显优势，因为这些算法需要数千个样本来响应潜在的关联和识别对象。
 
-*想象一下，在解锁你的智能手机时，需要通过进行100次扫描才让算法工作，这种挫败感。如果这种功能被推出市场，它绝不会成功。*
+*想象一下，在解锁你的智能手机时，需要通过进行 100 次扫描才让算法工作，这种挫败感。如果这种功能被推出市场，它绝不会成功。*
 
-然而，自2005年以来，机器学习专家们开发出了可能彻底改变游戏规则的新算法。在过去近二十年中取得的改进，产生了可以从最少（零、单或少量）样本中学习的算法。
+然而，自 2005 年以来，机器学习专家们开发出了可能彻底改变游戏规则的新算法。在过去近二十年中取得的改进，产生了可以从最少（零、单或少量）样本中学习的算法。
 
 在这篇文章中，我们深入探讨了这些算法背后的概念，并提供了对这些学习技术如何运作的全面理解，同时揭示了在实现它们时面临的一些挑战。
 
@@ -20,11 +20,11 @@
 
 **零样本学习**的核心概念是训练一个模型来分类它从未见过的对象。核心思想是利用另一个模型的现有知识，获得新类别的有意义表示。
 
-![打破数据障碍：**零样本学习**、**单样本学习**和**少样本学习**如何改变机器学习](../Images/71b329385eacb9f59f45cfee8a265921.png)
+![打破数据障碍：**零样本学习**、**单样本学习**和**少样本学习**如何改变机器学习](img/71b329385eacb9f59f45cfee8a265921.png)
 
 它利用**语义嵌入**或**基于属性的学习**，以有意义的方式利用先验知识，从而提供对已知和未知类别之间关系的高层次理解。这两者可以一起使用，也可以单独使用。
 
-**语义嵌入**是单词、短语或文档的向量表示，捕捉它们在连续向量空间中的基本意义和关系。这些嵌入通常使用[无监督学习](https://saturncloud.io/glossary/unsupervised-learning)算法生成，例如Word2Vec、GloVe或[BERT](https://saturncloud.io/glossary/bert)。目标是创建语言信息的紧凑表示，其中相似的意义通过相似的向量进行编码。通过这种方式，语义嵌入允许对文本数据进行高效准确的比较和操作，并通过将实例投影到一个连续的、共享的语义空间来对未见类别进行概括。
+**语义嵌入**是单词、短语或文档的向量表示，捕捉它们在连续向量空间中的基本意义和关系。这些嵌入通常使用[无监督学习](https://saturncloud.io/glossary/unsupervised-learning)算法生成，例如 Word2Vec、GloVe 或[BERT](https://saturncloud.io/glossary/bert)。目标是创建语言信息的紧凑表示，其中相似的意义通过相似的向量进行编码。通过这种方式，语义嵌入允许对文本数据进行高效准确的比较和操作，并通过将实例投影到一个连续的、共享的语义空间来对未见类别进行概括。
 
 **基于属性的学习**使得在没有任何这些类别标记示例的情况下对未见类别的对象进行分类成为可能。它将对象分解为其有意义和显著的属性，这些属性作为中间表示，使模型能够建立已见类别和未见类别之间的对应关系。这个过程通常包括**属性提取**、**属性预测**和**标签推断**。
 
@@ -34,7 +34,7 @@
 
 1.  **标签推断**涉及使用预测的属性和属性与未见类别标签之间的关系来预测新实例的类别标签，而无需依赖标记示例。
 
-尽管零-shot学习具有令人鼓舞的潜力，但仍然存在一些挑战，例如：
+尽管零-shot 学习具有令人鼓舞的潜力，但仍然存在一些挑战，例如：
 
 +   **领域适应**：目标领域中的实例分布可能与源领域中的分布显著不同，从而导致对已见类别和未见类别的语义嵌入之间的差异。这种领域偏移可能会损害性能，因为模型可能无法在领域之间建立实例和属性之间的有意义的对应关系。为克服这一挑战，提出了各种领域适应技术，例如对抗学习、特征解缠结和自监督学习，旨在对齐源领域和目标领域中实例和属性的分布。
 
@@ -42,7 +42,7 @@
 
 在开发传统神经网络的过程中，例如识别汽车，模型需要数千个样本，这些样本从不同角度和对比度拍摄，以有效地区分它们。**单样本学习采取了不同的方法**。该方法不是识别问题中的汽车，而是确定图像 A 是否等同于图像 B。这是通过概括模型从先前任务中获得的经验信息来实现的。单样本学习主要用于 [计算机视觉](https://saturncloud.io/glossary/computer-vision)。
 
-![突破数据障碍：零样本、单样本和少样本学习如何改变机器学习](../Images/774d935d433cd70825be8f399b0fbfdd.png)
+![突破数据障碍：零样本、单样本和少样本学习如何改变机器学习](img/774d935d433cd70825be8f399b0fbfdd.png)
 
 实现这一点的技术包括 **记忆增强型神经网络 (MANNs) 和 Siamese 网络**。通过独立利用这些技术，单样本学习模型可以迅速适应新任务，即使在数据非常有限的情况下也能表现良好，使其适合在获取标注数据可能昂贵或耗时的实际场景中使用。
 
@@ -68,7 +68,7 @@ Siamese 网络的训练分为两个阶段：验证阶段和泛化阶段。
 
 需要介绍的最后一种学习方法是**少样本学习**，这是元学习的一个子领域，旨在开发能够从少量标记样本中学习的算法。
 
-![打破数据壁垒：零样本、单样本和少样本学习如何改变机器学习](../Images/c8392b969323a61b1868d4095fc8376e.png)
+![打破数据壁垒：零样本、单样本和少样本学习如何改变机器学习](img/c8392b969323a61b1868d4095fc8376e.png)
 
 在这种情况下，**原型网络和模型无关元学习（MAML）**是两种突出的替代技术，已在少样本学习场景中取得了成功。
 
@@ -88,9 +88,9 @@ Siamese 网络的训练分为两个阶段：验证阶段和泛化阶段。
 
 ### 模型无关元学习（MAML）
 
-MAML是一个元学习[算法](https://saturncloud.io/glossary/algorithm)，旨在为模型的参数找到最佳初始化，使其能够通过少量梯度步骤快速适应新任务。MAML是模型无关的，这意味着它可以应用于任何使用梯度下降进行训练的模型。
+MAML 是一个元学习[算法](https://saturncloud.io/glossary/algorithm)，旨在为模型的参数找到最佳初始化，使其能够通过少量梯度步骤快速适应新任务。MAML 是模型无关的，这意味着它可以应用于任何使用梯度下降进行训练的模型。
 
-MAML包括以下步骤：
+MAML 包括以下步骤：
 
 1.  **任务采样**：在元训练过程中，从任务的分布中采样任务，每个任务是一个少样本学习问题，具有少量标记样本。
 
@@ -106,7 +106,7 @@ MAML 需要大量的计算资源，因为它涉及多次嵌套的梯度更新，
 
 机器学习的奇妙世界为我们带来了开创性的技术，如零样本、单样本和少样本学习。这些方法允许人工智能模型仅通过少量示例来学习和识别对象或模式，类似于人类的学习方式。这为医疗保健、零售和制造等各个行业开辟了广阔的可能性，因为在这些行业中，获得大量标记数据并非总是一种奢侈。
 
-**[Christophe Atten](https://www.linkedin.com/in/christophe-atten-331a8ab9/)** 领导着一个充满活力的数据科学团队，并自2022年起成为中等人工智能作者，专注于将原始数据转化为有洞察力的解决方案。
+**[Christophe Atten](https://www.linkedin.com/in/christophe-atten-331a8ab9/)** 领导着一个充满活力的数据科学团队，并自 2022 年起成为中等人工智能作者，专注于将原始数据转化为有洞察力的解决方案。
 
 [原文](https://saturncloud.io/blog/breaking-the-data-barrier-how-zero-shot-one-shot-and-few-shot-learning-are-transforming-machine-learning/)。转载授权。
 
@@ -114,11 +114,11 @@ MAML 需要大量的计算资源，因为它涉及多次嵌套的梯度更新，
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -126,7 +126,7 @@ MAML 需要大量的计算资源，因为它涉及多次嵌套的梯度更新，
 
 +   [AIoT 革命：人工智能与物联网如何改变我们的世界](https://www.kdnuggets.com/2022/07/aiot-revolution-ai-iot-transforming-world.html)
 
-+   [KDnuggets 新闻，7月27日：AIoT 革命：人工智能与物联网如何…](https://www.kdnuggets.com/2022/n30.html)
++   [KDnuggets 新闻，7 月 27 日：AIoT 革命：人工智能与物联网如何…](https://www.kdnuggets.com/2022/n30.html)
 
 +   [用 LangChain 改变人工智能：文本数据的游戏规则改变者](https://www.kdnuggets.com/2023/08/transforming-ai-langchain-text-data-game-changer.html)
 

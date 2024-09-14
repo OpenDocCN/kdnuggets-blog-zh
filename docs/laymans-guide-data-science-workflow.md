@@ -1,28 +1,28 @@
-# 数据科学的外行指南。第3部分：数据科学工作流程
+# 数据科学的外行指南。第三部分：数据科学工作流程
 
-> 原文：[https://www.kdnuggets.com/2020/07/laymans-guide-data-science-workflow.html](https://www.kdnuggets.com/2020/07/laymans-guide-data-science-workflow.html)
+> 原文：[`www.kdnuggets.com/2020/07/laymans-guide-data-science-workflow.html`](https://www.kdnuggets.com/2020/07/laymans-guide-data-science-workflow.html)
 
-[评论](#comments)
+评论
 
 **由 [Sciforce](https://sciforce.solutions)**。
 
-> 注意：这是第1部分：[**如何成为一名（优秀的）数据科学家 – 初学者指南**](https://www.kdnuggets.com/2019/10/good-data-scientist-beginner-guide.html) 和
+> 注意：这是第一部分：[**如何成为一名（优秀的）数据科学家 – 初学者指南**](https://www.kdnuggets.com/2019/10/good-data-scientist-beginner-guide.html) 和
 > 
-> 第2部分：[**数据科学的外行指南。如何构建数据项目**](https://www.kdnuggets.com/2020/04/guide-data-science-build-data-project.html)
+> 第二部分：[**数据科学的外行指南。如何构建数据项目**](https://www.kdnuggets.com/2020/04/guide-data-science-build-data-project.html)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![](../Images/d4b0e7f575720d537f17451ed86bb3af.png)
+![](img/d4b0e7f575720d537f17451ed86bb3af.png)
 
 *数据科学工作流程。*
 
@@ -40,19 +40,19 @@
 
 在任何数据科学项目中，获取正确的数据是关键。在进行任何分析之前，你必须获取相关数据，将其重新格式化为适合计算的形式，并进行清理。
 
-![](../Images/32d1dc2f3d53e0ed7d21a1e13d1d9ba3.png)
+![](img/32d1dc2f3d53e0ed7d21a1e13d1d9ba3.png)
 
 **获取数据**
 
 任何数据科学工作流的第一步是获取要分析的数据。数据可以来自各种来源：
 
-+   从本地计算机的CSV文件中导入；
++   从本地计算机的 CSV 文件中导入；
 
-+   从SQL服务器中查询；
++   从 SQL 服务器中查询；
 
 +   从在线存储库中剥离，如公共网站；
 
-+   通过API从在线源按需流式传输；
++   通过 API 从在线源按需流式传输；
 
 +   由物理设备自动生成，如连接到计算机的科学实验室设备；
 
@@ -68,7 +68,7 @@
 
 ***数据存储***：随着现代数据访问几乎没有限制，常常出现数据量如此庞大的情况，以至于无法放入硬盘中，因此必须存储在远程服务器上。尽管云服务越来越受欢迎，但大量的数据分析仍然是在桌面计算机上进行的，数据集可以适应现代硬盘（即少于一太字节）。
 
-![](../Images/27087f3ec8354e90f30977526e647bd0.png)
+![](img/27087f3ec8354e90f30977526e647bd0.png)
 
 **重新格式化和清理数据**
 
@@ -76,25 +76,25 @@
 
 ***数据整理（munging）***是清理数据的过程，将所有内容放入一个工作空间，并确保数据没有缺陷。可以通过手动或编写脚本来重新格式化和清理数据。将所有值转换为正确的格式可能涉及从字符串中剥离字符、将整数转换为浮点数等许多操作。之后，需要处理缺失值和稀疏矩阵中常见的空值。处理这些数据的过程称为***缺失数据插补***，即用替代数据替换缺失的数据。
 
-***数据集成***是一个相关的挑战，因为所有来源的数据需要整合到一个中心MySQL关系数据库中，该数据库作为分析的主数据源。
+***数据集成***是一个相关的挑战，因为所有来源的数据需要整合到一个中心 MySQL 关系数据库中，该数据库作为分析的主数据源。
 
 通常，这需要大量时间，无法完全自动化，但同时它可以提供有关数据结构和质量以及可能应用的模型和分析的洞察。
 
-![](../Images/88a694d4c783f6454db005e4e097bdf9.png)
+![](img/88a694d4c783f6454db005e4e097bdf9.png)
 
 **探索数据**
 
 在这里，你将开始获取关于你所查看内容的概要级洞察，并提取大的趋势。在这一步，有三个维度需要探索：数据是否暗示监督学习还是无监督学习？这是分类问题，还是回归问题？这是预测问题还是推断问题？这三组问题在解决数据科学问题时可以提供很多指导。
 
-有许多工具可以帮助你快速理解数据。你可以从检查数据框的前几行开始，获得数据组织的初步印象。集成在多个库中的自动工具，如Pandas的.describe()，可以快速提供均值、计数、标准差，你可能已经会发现值得深入研究的内容。有了这些信息，你将能够确定哪个变量是目标，哪些特征是重要的。
+有许多工具可以帮助你快速理解数据。你可以从检查数据框的前几行开始，获得数据组织的初步印象。集成在多个库中的自动工具，如 Pandas 的.describe()，可以快速提供均值、计数、标准差，你可能已经会发现值得深入研究的内容。有了这些信息，你将能够确定哪个变量是目标，哪些特征是重要的。
 
 ### 分析阶段
 
-分析是数据科学的核心阶段，包括编写、执行和完善计算机程序，以从前一阶段准备的数据中分析并获取洞察。尽管有许多编程语言用于数据科学项目，从解释型的“脚本”语言如Python、Perl、R和MATLAB到编译型的语言如Java、C、C++或甚至Fortran，但编写分析软件的工作流程在不同语言中是类似的。
+分析是数据科学的核心阶段，包括编写、执行和完善计算机程序，以从前一阶段准备的数据中分析并获取洞察。尽管有许多编程语言用于数据科学项目，从解释型的“脚本”语言如 Python、Perl、R 和 MATLAB 到编译型的语言如 Java、C、C++或甚至 Fortran，但编写分析软件的工作流程在不同语言中是类似的。
 
 如你所见，分析是一个重复的*迭代循环*，涉及编辑脚本或程序、执行以生成输出文件、检查输出文件以获取洞察和发现错误、调试以及重新编辑。
 
-![](../Images/e99fad50e35a25b75368c730230eb9d5.png)
+![](img/e99fad50e35a25b75368c730230eb9d5.png)
 
 **基线建模**
 
@@ -102,11 +102,11 @@
 
 在模型预处理阶段，你可以将特征与依赖变量分开，缩放数据，并使用训练-测试拆分或交叉验证来防止模型过拟合——过拟合是指模型过于紧密地跟踪训练数据，并且在新数据上表现不佳的问题。
 
-模型准备好后，可以在训练数据上进行拟合，并通过预测*X_test*数据的*y*值来进行测试。最后，使用适合任务的[评估指标](https://www.saedsayad.com/model_evaluation_r.htm)来评估模型，如回归问题的[R平方](https://blog.minitab.com/blog/adventures-in-statistics-2/regression-analysis-how-do-i-interpret-r-squared-and-assess-the-goodness-of-fit)和分类任务的[准确率](https://blog.exsilio.com/all/accuracy-precision-recall-f1-score-interpretation-of-performance-measures/)或[ROC-AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)分数。
+模型准备好后，可以在训练数据上进行拟合，并通过预测*X_test*数据的*y*值来进行测试。最后，使用适合任务的[评估指标](https://www.saedsayad.com/model_evaluation_r.htm)来评估模型，如回归问题的[R 平方](https://blog.minitab.com/blog/adventures-in-statistics-2/regression-analysis-how-do-i-interpret-r-squared-and-assess-the-goodness-of-fit)和分类任务的[准确率](https://blog.exsilio.com/all/accuracy-precision-recall-f1-score-interpretation-of-performance-measures/)或[ROC-AUC](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)分数。
 
-![](../Images/b623b8a5fcbbb667dd0fb21206201825.png)
+![](img/b623b8a5fcbbb667dd0fb21206201825.png)
 
-![](../Images/a5d1981372f82eb76cb142c8ed592995.png)
+![](img/a5d1981372f82eb76cb142c8ed592995.png)
 
 **次级建模**
 
@@ -124,11 +124,11 @@
 
 ***数据科学产品***意味着将你的模型投入生产。在大多数公司中，数据科学家将与软件工程团队合作编写生产代码。该软件既可以用于重现实验或测试原型系统，也可以作为独立解决方案来应对市场上的已知问题，例如评估金融欺诈的风险。
 
-另外，你还可以创建**数据科学报告**。你可以通过演示展示你的结果，并提供过程的技术概述。记住要考虑你的观众：如果是向数据科学同行展示，可以详细说明；如果是向销售团队或高管汇报，则应关注发现。如果公司允许发布结果，这也是获得其他专家反馈的好机会。此外，你还可以写博客文章，并将代码推送到GitHub，以便数据科学社区可以从你的成功中学习。沟通结果是科学过程的重要部分，因此这一阶段不应被忽视。
+另外，你还可以创建**数据科学报告**。你可以通过演示展示你的结果，并提供过程的技术概述。记住要考虑你的观众：如果是向数据科学同行展示，可以详细说明；如果是向销售团队或高管汇报，则应关注发现。如果公司允许发布结果，这也是获得其他专家反馈的好机会。此外，你还可以写博客文章，并将代码推送到 GitHub，以便数据科学社区可以从你的成功中学习。沟通结果是科学过程的重要部分，因此这一阶段不应被忽视。
 
 [原文](https://medium.com/sciforce/a-laymans-guide-to-data-science-part-3-data-science-workflow-eec301da3ffa?source=friends_link&sk=72bad5a9cdc66deb895c7023260a64c3)。已获授权转载。
 
-**简介：** [SciForce](https://sciforce.solutions) 是一家总部位于乌克兰的IT公司，专注于基于科学驱动的信息技术的软件解决方案开发。我们在许多关键AI技术方面拥有广泛的专业知识，包括数据挖掘、数字信号处理、自然语言处理、机器学习、图像处理和计算机视觉。
+**简介：** [SciForce](https://sciforce.solutions) 是一家总部位于乌克兰的 IT 公司，专注于基于科学驱动的信息技术的软件解决方案开发。我们在许多关键 AI 技术方面拥有广泛的专业知识，包括数据挖掘、数字信号处理、自然语言处理、机器学习、图像处理和计算机视觉。
 
 **相关：**
 

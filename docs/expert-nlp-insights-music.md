@@ -1,6 +1,6 @@
 # 企鹅咖啡乐团的 NLP 洞察
 
-> 原文：[https://www.kdnuggets.com/2021/08/expert-nlp-insights-music.html](https://www.kdnuggets.com/2021/08/expert-nlp-insights-music.html)
+> 原文：[`www.kdnuggets.com/2021/08/expert-nlp-insights-music.html`](https://www.kdnuggets.com/2021/08/expert-nlp-insights-music.html)
 
 赞助帖子。
 
@@ -66,9 +66,9 @@ plot_cloud(wordcloud)
 
 ```
 
-![专家AI企鹅咖啡词云](../Images/ab67ee776659865bf40688108c2bfd7c.png)
+![专家 AI 企鹅咖啡词云](img/ab67ee776659865bf40688108c2bfd7c.png)
 
-图1：一个词云，其中使用频率最高的词以较大的字体显示，而使用频率较低的词则以较小的字体显示。
+图 1：一个词云，其中使用频率最高的词以较大的字体显示，而使用频率较低的词则以较小的字体显示。
 
 **他们的音乐让你感觉如何？**
 
@@ -133,9 +133,9 @@ plt.show()
 
 ```
 
-![专家AI饼图](../Images/a51e0ffd85128a4fc331fe8e220b2384.png)
+![专家 AI 饼图](img/a51e0ffd85128a4fc331fe8e220b2384.png)
 
-图2：一个饼图，展示每种情感及其百分比。
+图 2：一个饼图，展示每种情感及其百分比。
 
 **他们的最佳专辑是什么？**
 
@@ -165,7 +165,7 @@ print(sentiment_ratings)
 
 [11.6, 2.7, 10.89, 3.9]**
 
-现在我们可以使用柱状图可视化每条评论的情感。这将快速提供对企鹅咖啡馆管弦乐队最佳专辑和他们职业生涯的视觉反馈。为此，我们再次使用matplotlib。
+现在我们可以使用柱状图可视化每条评论的情感。这将快速提供对企鹅咖啡馆管弦乐队最佳专辑和他们职业生涯的视觉反馈。为此，我们再次使用 matplotlib。
 
 ```py
 
@@ -181,19 +181,19 @@ plt.show()
 
 ```
 
-![Expert Ai 评分柱状图](../Images/58c21cf638e06489296266c994a8bbcf.png)
+![Expert Ai 评分柱状图](img/58c21cf638e06489296266c994a8bbcf.png)
 
 最初发布于 [这里](https://community.expert.ai/articles-showcase-48/penguin-cafe-orchestra-insights-with-expert-ai-130)。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -201,12 +201,12 @@ plt.show()
 
 +   [影响洞察时间的关键因素](https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html)
 
-+   [ChatGPT驱动的数据探索：解锁数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
++   [ChatGPT 驱动的数据探索：解锁数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
 
-+   [CDC数据复制：技术、权衡、洞察](https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html)
++   [CDC 数据复制：技术、权衡、洞察](https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html)
 
 +   [学术界是否过于迷恋方法论以至于忽视了真正的洞察？](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)
 
-+   [专家对开发安全、可靠和可信的AI框架的见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
++   [专家对开发安全、可靠和可信的 AI 框架的见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
 
-+   [使用LLM将非结构化数据转换为结构化洞察的5种方法](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
++   [使用 LLM 将非结构化数据转换为结构化洞察的 5 种方法](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)

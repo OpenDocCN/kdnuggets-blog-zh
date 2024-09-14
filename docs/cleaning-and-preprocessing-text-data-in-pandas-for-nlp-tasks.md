@@ -1,30 +1,30 @@
-# 在Pandas中清理和预处理文本数据以用于NLP任务
+# 在 Pandas 中清理和预处理文本数据以用于 NLP 任务
 
-> 原文：[https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)
+> 原文：[`www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks`](https://www.kdnuggets.com/cleaning-and-preprocessing-text-data-in-pandas-for-nlp-tasks)
 
-![NLP（自然语言处理）](../Images/5ae96669735b9ef013b0b884100fcb7a.png)
+![NLP（自然语言处理）](img/5ae96669735b9ef013b0b884100fcb7a.png)
 
 图片由作者提供
 
-清理和预处理数据通常是构建由数据驱动的AI和机器学习解决方案中最令人畏惧但又至关重要的阶段，而文本数据也不例外。
+清理和预处理数据通常是构建由数据驱动的 AI 和机器学习解决方案中最令人畏惧但又至关重要的阶段，而文本数据也不例外。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-本教程破冰地解决了为NLP任务（如语言模型（LMs）可以解决的任务）准备文本数据的挑战。通过将你的文本数据封装在pandas DataFrames中，以下步骤将帮助你准备文本数据，以便被NLP模型和算法处理。
+本教程破冰地解决了为 NLP 任务（如语言模型（LMs）可以解决的任务）准备文本数据的挑战。通过将你的文本数据封装在 pandas DataFrames 中，以下步骤将帮助你准备文本数据，以便被 NLP 模型和算法处理。
 
-## 将数据加载到Pandas DataFrame中
+## 将数据加载到 Pandas DataFrame 中
 
-为了保持本教程简单明了并专注于理解必要的文本清理和预处理步骤，让我们考虑一个包含四个单属性文本数据实例的小样本，这些实例将被移动到一个pandas DataFrame实例中。从现在起，我们将在这个DataFrame对象上应用每个预处理步骤。
+为了保持本教程简单明了并专注于理解必要的文本清理和预处理步骤，让我们考虑一个包含四个单属性文本数据实例的小样本，这些实例将被移动到一个 pandas DataFrame 实例中。从现在起，我们将在这个 DataFrame 对象上应用每个预处理步骤。
 
 ```py
 import pandas as pd
@@ -81,7 +81,7 @@ print(df)
 
 ## 去除噪音
 
-噪音是指不必要或意外收集的数据，如果处理不当，可能会妨碍后续的建模或预测过程。在我们的示例中，我们假设像“！”这样的标点符号在后续的NLP任务中是不需要的，因此我们通过使用正则表达式检测文本中的标点符号来进行噪音去除。Python的're'包用于基于正则表达式匹配进行文本操作。
+噪音是指不必要或意外收集的数据，如果处理不当，可能会妨碍后续的建模或预测过程。在我们的示例中，我们假设像“！”这样的标点符号在后续的 NLP 任务中是不需要的，因此我们通过使用正则表达式检测文本中的标点符号来进行噪音去除。Python 的're'包用于基于正则表达式匹配进行文本操作。
 
 ```py
 import re
@@ -189,12 +189,12 @@ print(X.toarray())
 
 +   [学习数据清理和预处理以进行数据科学，这本免费电子书](https://www.kdnuggets.com/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)
 
-+   [掌握数据清理和预处理技术的7个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
++   [掌握数据清理和预处理技术的 7 个步骤](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
 
-+   [利用ChatGPT进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)
++   [利用 ChatGPT 进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)
 
 +   [自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)
 
-+   [用Python自动化的5个任务](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)
++   [用 Python 自动化的 5 个任务](https://www.kdnuggets.com/2021/06/5-tasks-automate-python.html)
 
-+   [HuggingGPT：解决复杂AI任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
++   [HuggingGPT：解决复杂 AI 任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)

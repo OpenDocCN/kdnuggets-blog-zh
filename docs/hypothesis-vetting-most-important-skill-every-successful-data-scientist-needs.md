@@ -1,8 +1,8 @@
 # 假设验证：每个成功的数据科学家都需要的最重要技能
 
-> 原文：[https://www.kdnuggets.com/2020/11/hypothesis-vetting-most-important-skill-every-successful-data-scientist-needs.html](https://www.kdnuggets.com/2020/11/hypothesis-vetting-most-important-skill-every-successful-data-scientist-needs.html)
+> 原文：[`www.kdnuggets.com/2020/11/hypothesis-vetting-most-important-skill-every-successful-data-scientist-needs.html`](https://www.kdnuggets.com/2020/11/hypothesis-vetting-most-important-skill-every-successful-data-scientist-needs.html)
 
-[评论](#comments)
+评论
 
 **由 [AbderRahman Sobh](https://www.linkedin.com/in/abderrahman-sobh-507355122/)，数据科学家、机器学习工程师、软件开发者、导师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -48,13 +48,13 @@
 
 选择这个项目是因为数据上下文被简化了，由于预测是在虚拟世界中进行的。模拟的预测预计会表现得更为一致，并沿着非常明确的路径操作，而不是现实生活系统中可能有的不易观察的因素。换句话说，数据上下文可以非常自信地被全面定义。在这个视频游戏中，玩家控制一个可以执行有限动作的单元。数据上下文已在下图中映射出：
 
-![图像用于帖子](../Images/c664608bf2d9f097ae213791738a727c.png)
+![图像用于帖子](img/c664608bf2d9f097ae213791738a727c.png)
 
 数据可以映射到的四个主要实体是：玩家、玩家控制的角色、地图和比赛本身。我选择了这些高层次的实体，是基于它们之间的重要交互以及每个实体的独特性。因此，它们共同定义了这个场景中大部分甚至全部的数据上下文。
 
 接下来，目标是观察比赛提供的数据中有多少符合数据上下文：
 
-![图像用于帖子](../Images/cc1ef06fd187ade2ebb3789a8e9f62dd.png)
+![图像用于帖子](img/cc1ef06fd187ade2ebb3789a8e9f62dd.png)
 
 +   对于玩家数据，主要提供的是过去比赛的历史记录。关于玩家本身的信息非常有限。
 
@@ -66,17 +66,17 @@
 
 一些示例假设在下文中进行了评估，包括比赛中给定的假设：
 
-![图像用于帖子](../Images/692faeec7e6632c42838013395af9194.png)
+![图像用于帖子](img/692faeec7e6632c42838013395af9194.png)
 
 **项目 2：预测哥斯达黎加贫困** ([*https://www.kaggle.com/c/costa-rican-household-poverty-prediction*](https://www.kaggle.com/c/costa-rican-household-poverty-prediction))
 
 对于第二个示例，我选择了一个具有现实世界元素的项目，但仍保持了相对简单的背景。具体而言，这个比赛的假设是，可以利用给定的数据预测贫困水平。围绕这个假设的数据上下文可以定义为家庭成本与收入，如下图所示：
 
-![图像用于帖子](../Images/4e6c40a70a514a62b0cc767d07677bf8.png)
+![图像用于帖子](img/4e6c40a70a514a62b0cc767d07677bf8.png)
 
-这个比赛中的数据特征非常详细，所以我将它们大致总结为几个类别：53个特征用于房屋状况（材料、建筑、质量），6个特征用于家庭状况，23个特征用于家庭属性，32个特征用于个人属性，6个特征用于租赁状况，8个特征用于位置。接下来，演示了给定数据与数据背景的重叠情况：
+这个比赛中的数据特征非常详细，所以我将它们大致总结为几个类别：53 个特征用于房屋状况（材料、建筑、质量），6 个特征用于家庭状况，23 个特征用于家庭属性，32 个特征用于个人属性，6 个特征用于租赁状况，8 个特征用于位置。接下来，演示了给定数据与数据背景的重叠情况：
 
-![文章配图](../Images/ac9a47d37e37fd4888d902592164c5c0.png)
+![文章配图](img/ac9a47d37e37fd4888d902592164c5c0.png)
 
 +   主要的导致贫困的成本因素未被收集在数据中。生活中的变化，如家庭成员的最近去世，也没有被包含在内。同样，未提及任何未偿债务。
 
@@ -88,13 +88,13 @@
 
 以下是一些示例假设的评估，包括比赛给出的假设：
 
-![文章配图](../Images/42a122075876855a887ce7eff88917d2.png)
+![文章配图](img/42a122075876855a887ce7eff88917d2.png)
 
 ### 进一步阅读
 
 我写这篇文章的目标是帮助他人获得对数据科学本质的实际理解，并提供一个使用它的起点。数据科学的工作应旨在真正解释我们周围的世界，帮助我们用数字方法填补空白，以便发现。
 
-回到所有这些背后的强大模型和算法，它们本身就是深入的研究，帮助我们从复杂的数据场景中获得更多的理解。如果你对这些算法的工作原理感兴趣，我鼓励你查看我在Kindle上的书籍：[“*Essential Data Science: A Guide to the Applied Machine Learning Toolkit*”](https://www.amazon.com/Essential-Data-Science-Applied-Toolkit/dp/1092130330)。
+回到所有这些背后的强大模型和算法，它们本身就是深入的研究，帮助我们从复杂的数据场景中获得更多的理解。如果你对这些算法的工作原理感兴趣，我鼓励你查看我在 Kindle 上的书籍：[“*Essential Data Science: A Guide to the Applied Machine Learning Toolkit*”](https://www.amazon.com/Essential-Data-Science-Applied-Toolkit/dp/1092130330)。
 
 **个人简介：[AbderRahman Sobh](https://www.linkedin.com/in/abderrahman-sobh-507355122/)** 是一位数据科学家、机器学习工程师、软件开发人员和导师。
 
@@ -102,22 +102,22 @@
 
 **相关内容：**
 
-+   [如何获得最受欢迎的数据科学技能](/2020/11/acquire-most-wanted-data-science-skills.html)
++   如何获得最受欢迎的数据科学技能
 
-+   [我在8个月内提升数据科学技能的经历](/2020/10/level-up-data-science-skills-8-months.html)
++   我在 8 个月内提升数据科学技能的经历
 
-+   [数据科学的基本要求：开始数据科学需要掌握的10项关键技能](/2020/10/data-science-minimum-10-essential-skills.html)
++   数据科学的基本要求：开始数据科学需要掌握的 10 项关键技能
 
 ### 更多相关主题
 
-+   [未来数据游戏的保障：2023年每位数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来数据游戏的保障：2023 年每位数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
 +   [每位数据科学家必备的软技能](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
 
-+   [2024年每位数据科学家必备的5项基本技能](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
++   [2024 年每位数据科学家必备的 5 项基本技能](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
 
-+   [2024年每位数据科学家工具箱中必备的5个工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
++   [2024 年每位数据科学家工具箱中必备的 5 个工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
 
-+   [团队合作是数据科学中不可或缺的技能的3个原因](https://www.kdnuggets.com/2022/05/3-reasons-teamwork-essential-skill-data-science.html)
++   [团队合作是数据科学中不可或缺的技能的 3 个原因](https://www.kdnuggets.com/2022/05/3-reasons-teamwork-essential-skill-data-science.html)
 
-+   [成功数据科学家的5大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

@@ -1,36 +1,36 @@
-# 更新版的YouTube前10个机器学习视频
+# 更新版的 YouTube 前 10 个机器学习视频
 
-> 原文：[https://www.kdnuggets.com/2017/05/top-10-machine-learning-videos-on-youtube-updated.html](https://www.kdnuggets.com/2017/05/top-10-machine-learning-videos-on-youtube-updated.html)
+> 原文：[`www.kdnuggets.com/2017/05/top-10-machine-learning-videos-on-youtube-updated.html`](https://www.kdnuggets.com/2017/05/top-10-machine-learning-videos-on-youtube-updated.html)
 
-YouTube上有很多关于机器学习的视频，但很难判断哪些值得观看，特别是每分钟都有300小时的视频被上传到YouTube。我们为你带来了值得观看的最受欢迎的近期机器学习视频。这篇文章更新了2015年非常受欢迎的[YouTube上的前10个机器学习视频](/2015/06/top-10-machine-learning-videos-youtube.html)的帖子。我们还增加了一些顶级相关的播放列表。
+YouTube 上有很多关于机器学习的视频，但很难判断哪些值得观看，特别是每分钟都有 300 小时的视频被上传到 YouTube。我们为你带来了值得观看的最受欢迎的近期机器学习视频。这篇文章更新了 2015 年非常受欢迎的 YouTube 上的前 10 个机器学习视频的帖子。我们还增加了一些顶级相关的播放列表。
 
-![](../Images/98f2fdfe50d40fe1bcf1c1a97c426559.png)
+![](img/98f2fdfe50d40fe1bcf1c1a97c426559.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-这里是截至2017年5月3日按观看次数排名的热门视频。
+这里是截至 2017 年 5 月 3 日按观看次数排名的热门视频。
 
 [1\. MarI/O - 视频游戏中的机器学习](https://www.youtube.com/watch?v=qv6UVOQ0F44) (4.3M 次观看)
 
-![](../Images/9bbc8d223fc78adb9f16f764e3ca4e05.png)这个有趣的演示视频展示了机器学习如何应用于视频游戏。这是通过神经网络和遗传算法实现的。这个视频的精彩之处在于作者简明扼要地描述了神经网络如何实现给定的性能。我自己玩过《超级马里奥世界》，可以说游戏玩法非常令人印象深刻，不论是否学习过！
+![](img/9bbc8d223fc78adb9f16f764e3ca4e05.png)这个有趣的演示视频展示了机器学习如何应用于视频游戏。这是通过神经网络和遗传算法实现的。这个视频的精彩之处在于作者简明扼要地描述了神经网络如何实现给定的性能。我自己玩过《超级马里奥世界》，可以说游戏玩法非常令人印象深刻，不论是否学习过！
 
 [2\. 机器学习（斯坦福）](https://www.youtube.com/watch?v=UzxYlbK2c7E) (1.4M 次观看)
 
-这是斯坦福大学机器学习讲座系列的第一段视频（第1讲发布于8年前），由**Andrew Ng**讲授。这是自学机器学习基础的一个不错的起点。如果你对这个视频中的内容感兴趣，他的[Coursera课程](https://www.coursera.org/course/ml)也许会引起你的兴趣。
+这是斯坦福大学机器学习讲座系列的第一段视频（第 1 讲发布于 8 年前），由**Andrew Ng**讲授。这是自学机器学习基础的一个不错的起点。如果你对这个视频中的内容感兴趣，他的[Coursera 课程](https://www.coursera.org/course/ml)也许会引起你的兴趣。
 
-3\. [谷歌深度学习解释！- 自学习A.I.](https://www.youtube.com/watch?v=TnUYcTuZJpM) (1.3M 次观看)
+3\. [谷歌深度学习解释！- 自学习 A.I.](https://www.youtube.com/watch?v=TnUYcTuZJpM) (1.3M 次观看)
 
-由ColdFusion（以前称为Cold fusTion）上传的视频展示了“在轻松愉快的氛围中展现我们周围世界的前沿”；包括示例来源：为什么AlphaGo不是“专家系统”、 “深入DeepMind”的自然视频、 “AlphaGo与人工智能的未来”BBC新闻之夜。
+由 ColdFusion（以前称为 Cold fusTion）上传的视频展示了“在轻松愉快的氛围中展现我们周围世界的前沿”；包括示例来源：为什么 AlphaGo 不是“专家系统”、 “深入 DeepMind”的自然视频、 “AlphaGo 与人工智能的未来”BBC 新闻之夜。
 
 4\. [遗传算法。学习跳过球](https://www.youtube.com/watch?v=Gl3EjiVlz_4&t=65s). (1.05M 次观看)
 
@@ -64,21 +64,21 @@ YouTube上有很多关于机器学习的视频，但很难判断哪些值得观�
 
 1\. [机器学习简介](https://www.youtube.com/playlist?list=PLAwxTw4SYaPkQXg8TkVdIvYv4HfLG7SiH) (494 videos; 1,281,106 views in total)
 
-这些视频是“机器学习入门”在线课程的一部分。该课程设计为帮助您和他人成为数据分析师的一部分计划；由[Udacity](https://www.youtube.com/user/Udacity)上传。2\. [机器学习](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA)（160个视频；765,050次观看）
+这些视频是“机器学习入门”在线课程的一部分。该课程设计为帮助您和他人成为数据分析师的一部分计划；由[Udacity](https://www.youtube.com/user/Udacity)上传。2\. [机器学习](https://www.youtube.com/playlist?list=PLD0F06AA0D2E8FFBA)（160 个视频；765,050 次观看）
 
-这些视频从数学的角度讲解机器学习，适用于研究生或高级本科生水平。该播放列表由mathematicalmonk上传。
+这些视频从数学的角度讲解机器学习，适用于研究生或高级本科生水平。该播放列表由 mathematicalmonk 上传。
 
-3\. [讲座合集 | 斯坦福大学机器学习](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599)（20个视频；730,896次观看）
+3\. [讲座合集 | 斯坦福大学机器学习](https://www.youtube.com/playlist?list=PLA89DCFA6ADACE599)（20 个视频；730,896 次观看）
 
-![](../Images/da5db9d3d0c26b91961fa39c9ec304ac.png)本课程（CS229）由安德鲁·吴教授讲授，提供了对机器学习和统计模式识别的广泛介绍。主题包括监督学习、无监督学习、学习理论、强化学习和自适应控制。还讨论了机器学习的最新应用，如机器人控制、数据挖掘、自动导航、生物信息学、语音识别以及文本和网络数据处理。
+![](img/da5db9d3d0c26b91961fa39c9ec304ac.png)本课程（CS229）由安德鲁·吴教授讲授，提供了对机器学习和统计模式识别的广泛介绍。主题包括监督学习、无监督学习、学习理论、强化学习和自适应控制。还讨论了机器学习的最新应用，如机器人控制、数据挖掘、自动导航、生物信息学、语音识别以及文本和网络数据处理。
 
-4\. [Python机器学习](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)（72个视频；687,041次观看）
+4\. [Python 机器学习](https://www.youtube.com/playlist?list=PLQVvvaa0QuDfKTOs3Keq_kaG2P55YRn5v)（72 个视频；687,041 次观看）
 
-这是一个Python编程教程合集，超越了基础知识。学习机器学习、金融、数据分析、机器人、网络开发、游戏开发等更多内容。
+这是一个 Python 编程教程合集，超越了基础知识。学习机器学习、金融、数据分析、机器人、网络开发、游戏开发等更多内容。
 
 #### 我们的播放列表：
 
-在这里观看。相关帖子：[YouTube上的前10大机器学习视频](/2015/06/top-10-machine-learning-videos-youtube.html)，截至2015年6月。
+在这里观看。相关帖子：YouTube 上的前 10 大机器学习视频，截至 2015 年 6 月。
 
 ### 更多相关主题
 
@@ -86,10 +86,10 @@ YouTube上有很多关于机器学习的视频，但很难判断哪些值得观�
 
 +   [停止学习数据科学以寻找目标，并寻找目标……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [一场90亿美元的AI失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一场 90 亿美元的 AI 失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)

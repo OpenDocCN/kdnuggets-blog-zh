@@ -1,6 +1,6 @@
 # 数据共享平台的 5 个关键组成部分
 
-> 原文：[https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)
+> 原文：[`www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html`](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)
 
 越来越多的公司专注于寻找连接新的、宝贵的数据源的方法，以增强其分析能力，丰富其模型，或为其业务部门提供更多洞察。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
-数据共享受到了很多关注。部分原因是因为[数据货币化](/2021/07/data-monetization-101.html)正在成为一个大问题，公司需要找到一种机制来将数据展示给愿意购买的人。更普遍地说，公司对来自非传统来源的数据非常渴望，这些数据可以用来增强模型，揭示隐藏的趋势，并（是的）发现“alpha”。这种需求引起了对数据发现平台和市场的广泛关注。Venturebeat 特别将数据共享作为其[2021年机器学习、人工智能和数据生态](https://venturebeat.com/2021/10/16/the-2021-machine-learning-ai-and-data-landscape/)的一部分，并重点介绍了该领域的一些关键发展：
+数据共享受到了很多关注。部分原因是因为数据货币化正在成为一个大问题，公司需要找到一种机制来将数据展示给愿意购买的人。更普遍地说，公司对来自非传统来源的数据非常渴望，这些数据可以用来增强模型，揭示隐藏的趋势，并（是的）发现“alpha”。这种需求引起了对数据发现平台和市场的广泛关注。Venturebeat 特别将数据共享作为其[2021 年机器学习、人工智能和数据生态](https://venturebeat.com/2021/10/16/the-2021-machine-learning-ai-and-data-landscape/)的一部分，并重点介绍了该领域的一些关键发展：
 
 Google 于 2021 年 5 月推出了[Analytics Hub](https://cloud.google.com/analytics-hub)作为一个结合数据集和共享数据、仪表板和机器学习模型的平台。Google 还推出了[Datashare](https://cloud.google.com/solutions/financial-services/datashare)，这是一个针对金融服务并基于 Analytics Hub 开发的工具。
 
@@ -28,7 +28,7 @@ Databricks 在 Google 发布的同一天宣布了[Delta Sharing](https://delta.i
 
 2021 年 6 月，Snowflake 开放了其[数据市场](https://www.snowflake.com/data-marketplace/#datasets)的广泛访问权限，并配备了安全的数据共享功能。
 
-我工作的公司ThinkData最初是在开放数据领域起步的，因此一直将数据共享作为我们技术的基石。最近，我们利用数据虚拟化来帮助我们合作的组织安全地共享数据（你可以在[这里](https://blog.thinkdataworks.com/secure-data-sharing-why-we-recommend-vertica)阅读更多相关内容）。
+我工作的公司 ThinkData 最初是在开放数据领域起步的，因此一直将数据共享作为我们技术的基石。最近，我们利用数据虚拟化来帮助我们合作的组织安全地共享数据（你可以在[这里](https://blog.thinkdataworks.com/secure-data-sharing-why-we-recommend-vertica)阅读更多相关内容）。
 
 # 企业需求的变化
 
@@ -54,7 +54,7 @@ Databricks 在 Google 发布的同一天宣布了[Delta Sharing](https://delta.i
 
 元数据是让我们有效理解和使用数据的关键。无论是描述性（告诉我们谁创建了数据以及我们应该如何解读）还是管理性（声明谁拥有数据以及如何使用），附加和维护高质量的元数据是确保任何人都能理解如何使用他们所访问的数据的最有效方式。
 
-![ThinkData 平台](../Images/4851b23139ffbbcdd3a27820643230f5.png)
+![ThinkData 平台](img/4851b23139ffbbcdd3a27820643230f5.png)
 
 在 ThinkData 平台中构建自定义元数据模板。这些模板可以添加到任何引入数据目录的数据集中。
 
@@ -84,13 +84,13 @@ Databricks 在 Google 发布的同一天宣布了[Delta Sharing](https://delta.i
 
 然而，数据市场通常失败的地方在于，它们提供的是购物体验，而不是消费模型。数据市场历来是一个让用户能够找到数据的地方，但不是一个可以让他们连接到数据的机制，这有点像让某人购物但不给他们试穿任何衣物的感觉。
 
-从这一需求中，出现了一个新的数据共享模型，Snowflake在去年推出了Snowflake数据市场，作为一个用户可以双向共享数据到彼此账户的地方，引起了轰动。
+从这一需求中，出现了一个新的数据共享模型，Snowflake 在去年推出了 Snowflake 数据市场，作为一个用户可以双向共享数据到彼此账户的地方，引起了轰动。
 
 这种模型在公共云中效果良好，在那里创建一个新云区域中的数据集相对容易，但它有点笨重（在每个云区域中重新创建数据会给过程带来相当大的开销），如果不小心，还可能产生计算和存储的高额费用。
 
-ThinkData平台允许任何组织在各种数据源中一致地获取数据，并以标准化的方式直接交付。 [ThinkData市场](https://marketplace.namara.io/?__hstc=82057097.e66629f923de7e9dd48c7927fe61eee4.1642011453209.1644847224594.1644867810973.37&__hssc=82057097.8.1644867810973&__hsfp=4126683531) 是一个展示可用公共数据的商店，也是数据提供者与数据买家连接的中心枢纽。
+ThinkData 平台允许任何组织在各种数据源中一致地获取数据，并以标准化的方式直接交付。 [ThinkData 市场](https://marketplace.namara.io/?__hstc=82057097.e66629f923de7e9dd48c7927fe61eee4.1642011453209.1644847224594.1644867810973.37&__hssc=82057097.8.1644867810973&__hsfp=4126683531) 是一个展示可用公共数据的商店，也是数据提供者与数据买家连接的中心枢纽。
 
-ThinkData平台提供了一系列的消费模型。通过按需数据产品化，你可以轻松地将公共数据资产配置成理想的格式和模式。通过数据虚拟化，你可以确保即时的数据共享，而不引发数据仓库和安全问题。ThinkData市场提供了一个数据消费模型，使数据需求旺盛的组织不仅能够发现各种数据，还能快速有效地开始使用新的数据来源。
+ThinkData 平台提供了一系列的消费模型。通过按需数据产品化，你可以轻松地将公共数据资产配置成理想的格式和模式。通过数据虚拟化，你可以确保即时的数据共享，而不引发数据仓库和安全问题。ThinkData 市场提供了一个数据消费模型，使数据需求旺盛的组织不仅能够发现各种数据，还能快速有效地开始使用新的数据来源。
 
 # 引入低迁移数据共享
 
@@ -98,7 +98,7 @@ ThinkData平台提供了一系列的消费模型。通过按需数据产品化�
 
 数据虚拟化提供了一个解决方案，它允许用户在不移动或复制数据的情况下，将外部仓库的数据与其他来源的数据一起查看。
 
-![引入低迁移数据共享](../Images/8635659ffce3b048b428972be00edcf2.png)
+![引入低迁移数据共享](img/8635659ffce3b048b428972be00edcf2.png)
 
 | **公共云数据共享模型** | **私有云数据共享模型** |
 | --- | --- |
@@ -133,10 +133,10 @@ ThinkData 平台使组织能够实现数据虚拟化，这些组织希望对数�
 
 +   [数据科学家的代码块共享新方式](https://www.kdnuggets.com/2022/03/new-ways-sharing-code-blocks.html)
 
-+   [KDnuggets 新闻，5月18日：5个免费的机器学习平台](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费的机器学习平台](https://www.kdnuggets.com/2022/n20.html)
 
 +   [数据成熟度金字塔：从报告到主动的智能数据平台](https://www.kdnuggets.com/the-data-maturity-pyramid-from-reporting-to-a-proactive-intelligent-data-platform)
 
-+   [5个免费的机器学习应用托管平台](https://www.kdnuggets.com/2022/05/5-free-hosting-platform-machine-learning-applications.html)
++   [5 个免费的机器学习应用托管平台](https://www.kdnuggets.com/2022/05/5-free-hosting-platform-machine-learning-applications.html)
 
 +   [Qdrant: 开源向量搜索引擎与托管云平台](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)

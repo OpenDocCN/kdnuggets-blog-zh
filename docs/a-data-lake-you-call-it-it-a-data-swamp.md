@@ -1,8 +1,8 @@
 # 数据湖，你称它为数据沼泽？
 
-> 原文：[https://www.kdnuggets.com/a-data-lake-you-call-it-it-a-data-swamp](https://www.kdnuggets.com/a-data-lake-you-call-it-it-a-data-swamp)
+> 原文：[`www.kdnuggets.com/a-data-lake-you-call-it-it-a-data-swamp`](https://www.kdnuggets.com/a-data-lake-you-call-it-it-a-data-swamp)
 
-![数据湖，你称它为数据沼泽？](../Images/28f9baae7762dd4b69df06cf280eca6a.png)
+![数据湖，你称它为数据沼泽？](img/28f9baae7762dd4b69df06cf280eca6a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -36,7 +36,7 @@
 
 +   **存储层**：数据湖的存储层通常建立在分布式文件系统或基于云的对象存储上。
 
-+   **处理框架**：数据湖利用如Apache Spark、Flink和Hadoop MapReduce等分布式处理框架进行并行和可扩展的数据处理。
++   **处理框架**：数据湖利用如 Apache Spark、Flink 和 Hadoop MapReduce 等分布式处理框架进行并行和可扩展的数据处理。
 
 +   **与分析工具的集成**：数据湖与各种分析和商业智能工具集成，允许用户使用熟悉的界面分析和可视化数据。
 
@@ -50,7 +50,7 @@
 
 +   **经济高效的存储**：通过利用基于云的对象存储或分布式文件系统，数据湖提供了一种经济高效的解决方案，用于存储大量数据。特别是基于云的数据湖允许组织只为实际使用的存储和计算资源付费。
 
-要了解数据湖与数据仓库和数据集市的比较，请阅读[数据仓库与数据湖与数据集市：需要帮助决定吗？](/data-warehouses-vs-data-lakes-vs-data-marts-need-help-deciding)
+要了解数据湖与数据仓库和数据集市的比较，请阅读数据仓库与数据湖与数据集市：需要帮助决定吗？
 
 # 数据湖如何以及为何会变成数据沼泽
 
@@ -88,7 +88,7 @@
 
 让我们深入探讨上述每一项策略，了解它们的重要性以及如何有助于保持数据湖的高效和有用。
 
-![数据湖，你称它为什么？这是一个数据沼泽。](../Images/c4d8478096332c5a71d98a40607f3fa5.png)
+![数据湖，你称它为什么？这是一个数据沼泽。](img/c4d8478096332c5a71d98a40607f3fa5.png)
 
 作者提供的图片
 
@@ -144,11 +144,11 @@
 
 然而，为了避免将数据湖变成数据沼泽，组织必须投资于强大的数据治理，实施有效的元数据管理，执行安全措施，进行定期的数据质量评估，并建立清晰的数据生命周期管理政策。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 了解更多信息
 
-+   [最后召集：Stefan Krawcyzk的《掌握MLOps》直播班](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)
++   [最后召集：Stefan Krawcyzk 的《掌握 MLOps》直播班](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)
 
 +   [311 呼叫中心绩效：服务水平评分](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
 

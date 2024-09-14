@@ -1,8 +1,8 @@
 # Dolly 2.0：ChatGPT 开源商业用途替代方案
 
-> 原文：[https://www.kdnuggets.com/2023/04/dolly-20-chatgpt-open-source-alternative-commercial.html](https://www.kdnuggets.com/2023/04/dolly-20-chatgpt-open-source-alternative-commercial.html)
+> 原文：[`www.kdnuggets.com/2023/04/dolly-20-chatgpt-open-source-alternative-commercial.html`](https://www.kdnuggets.com/2023/04/dolly-20-chatgpt-open-source-alternative-commercial.html)
 
-![Dolly 2.0：ChatGPT 开源商业用途替代方案](../Images/d7a0e4eeda75b95cbe58eaf90ced9033.png)
+![Dolly 2.0：ChatGPT 开源商业用途替代方案](img/d7a0e4eeda75b95cbe58eaf90ced9033.png)
 
 作者提供的图片 | Bing 图片创作者
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-![Dolly 2.0：ChatGPT 开源商业用途替代方案](../Images/6d3c390dddca565bff213d3fe789e4f5.png)
+![Dolly 2.0：ChatGPT 开源商业用途替代方案](img/6d3c390dddca565bff213d3fe789e4f5.png)
 
 图片来源于 [Hugging Face Space by RamAnanth1](https://huggingface.co/spaces/RamAnanth1/Dolly-v2)
 
@@ -50,7 +50,7 @@ dolly-v2-12b 不是一个最先进的模型。在一些评估基准上，它的�
 
 简而言之，dolly-v2-12b 模型在性能上优于 EleutherAI/gpt-neox-20b 和 EleutherAI/pythia-6.9b。
 
-![Dolly 2.0: ChatGPT 开源商业替代方案](../Images/13fad0e6224eb488700484ed15d74930.png)
+![Dolly 2.0: ChatGPT 开源商业替代方案](img/13fad0e6224eb488700484ed15d74930.png)
 
 图片来自 [Free Dolly](https://www.databricks.com/blog/2023/04/12/dolly-first-open-commercially-viable-instruction-tuned-llm)
 
@@ -58,7 +58,7 @@ dolly-v2-12b 不是一个最先进的模型。在一些评估基准上，它的�
 
 Dolly 2.0 完全开源。它包括训练代码、数据集、模型权重和推理管道。所有组件都适合商业使用。你可以在 Hugging Face Spaces 上尝试该模型，[Dolly V2 by RamAnanth1](https://huggingface.co/spaces/RamAnanth1/Dolly-v2)。
 
-![Dolly 2.0: ChatGPT 开源商业替代方案](../Images/29d7308f79126c2abd0270170ddc33af.png)
+![Dolly 2.0: ChatGPT 开源商业替代方案](img/29d7308f79126c2abd0270170ddc33af.png)
 
 图片来自 [Hugging Face](https://huggingface.co/databricks/dolly-v2-12b)
 
@@ -72,18 +72,18 @@ Dolly 2.0 完全开源。它包括训练代码、数据集、模型权重和推�
 
 Dolly 2.0 演示：[Dolly V2 by RamAnanth1](https://huggingface.co/spaces/RamAnanth1/Dolly-v2)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)**（[@1abidaliawan](https://twitter.com/1abidaliawan)）是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些受心理疾病困扰的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)**（[@1abidaliawan](https://twitter.com/1abidaliawan)）是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些受心理疾病困扰的学生。
 
 ### 更多相关话题
 
-+   [OpenChatKit：开源ChatGPT替代方案](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
++   [OpenChatKit：开源 ChatGPT 替代方案](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
 
-+   [8种开源ChatGPT和Bard的替代方案](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
++   [8 种开源 ChatGPT 和 Bard 的替代方案](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
 
-+   [ChatGLM-6B：一种轻量级的开源ChatGPT替代方案](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
++   [ChatGLM-6B：一种轻量级的开源 ChatGPT 替代方案](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
 
 +   [闭源与开源图像标注](https://www.kdnuggets.com/closed-source-vs-open-source-image-annotation)
 
 +   [机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
 
-+   [MiniGPT-4：一种轻量级的GPT-4替代方案，用于增强…](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)
++   [MiniGPT-4：一种轻量级的 GPT-4 替代方案，用于增强…](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)

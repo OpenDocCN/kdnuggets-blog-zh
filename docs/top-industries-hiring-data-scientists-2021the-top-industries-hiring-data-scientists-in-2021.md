@@ -1,8 +1,8 @@
-# 2021年招聘数据科学家的顶级行业
+# 2021 年招聘数据科学家的顶级行业
 
-> 原文：[https://www.kdnuggets.com/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html](https://www.kdnuggets.com/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html)
+> 原文：[`www.kdnuggets.com/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html`](https://www.kdnuggets.com/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html)
 
-[评论](#comments)![图](../Images/3b27e46b6f433398fba97c95d2b95182.png)
+评论![图](img/3b27e46b6f433398fba97c95d2b95182.png)
 
 图片由 [Gerd Altmann](https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6494073) 提供，来源于 [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=6494073)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -24,9 +24,9 @@
 
 ## 1\. 电信
 
-对顶级大数据行业的研究显示，电信和信息技术处于领先地位。此外，预测预计该行业的价值[将在2023年达到1052亿美元](https://www.analyticsinsight.net/data-scientists-must-target-telecom-and-bfsi-for-better-career-prospects/)，相比2019年的590亿美元有所增长。例如，南非品牌Telkom[为女性数据科学家创造了机会](https://www.techfinancials.co.za/2021/08/23/women-data-scientists-help-lead-telkoms-digital-revolution/)在公司担任数据科学专家。
+对顶级大数据行业的研究显示，电信和信息技术处于领先地位。此外，预测预计该行业的价值[将在 2023 年达到 1052 亿美元](https://www.analyticsinsight.net/data-scientists-must-target-telecom-and-bfsi-for-better-career-prospects/)，相比 2019 年的 590 亿美元有所增长。例如，南非品牌 Telkom[为女性数据科学家创造了机会](https://www.techfinancials.co.za/2021/08/23/women-data-scientists-help-lead-telkoms-digital-revolution/)在公司担任数据科学专家。
 
-电信公司中的商业领导者可以利用数据科学家的专业知识来决定何时何地推出5G技术。他们还可以开始分析客户服务电话中的趋势，以检测和解决常见问题。
+电信公司中的商业领导者可以利用数据科学家的专业知识来决定何时何地推出 5G 技术。他们还可以开始分析客户服务电话中的趋势，以检测和解决常见问题。
 
 ## 2\. 交通运输
 
@@ -42,13 +42,13 @@
 
 ## 4\. 银行 / 财务
 
-银行业的领导者也认识到雇佣数据科学家的价值。在一个例子中，美国银行分析了超过[41,000条社交媒体评论并发现](https://www.techerati.com/features-hub/opinions/how-big-data-has-revolutionised-the-finance-industry/)了大量关于购买限制的虚假谣言。代表们随后可以提供澄清，以防止声誉损害。
+银行业的领导者也认识到雇佣数据科学家的价值。在一个例子中，美国银行分析了超过[41,000 条社交媒体评论并发现](https://www.techerati.com/features-hub/opinions/how-big-data-has-revolutionised-the-finance-industry/)了大量关于购买限制的虚假谣言。代表们随后可以提供澄清，以防止声誉损害。
 
 银行还分析数据以标记可疑的交易或消费模式。他们在决定是否向客户提供贷款时也会这样做。一些银行客户也可以从数据分析中受益，例如如果应用程序功能告诉他们在某个月可能会花费比平常更多的钱。
 
 ## 5\. 零售
 
-零售品牌在高管意识到对可用信息有更清晰的理解可以帮助满足客户需求后，雇佣了数据科学家。例如，一项节日购物研究显示，人们在**两年**的时间里搜索“礼品盒”的频率比其他时间[高1.85倍](https://rehack.com/featured/investor-insight/how-could-you-use-big-data-in-business/)。这些结果帮助零售商调整他们的产品。
+零售品牌在高管意识到对可用信息有更清晰的理解可以帮助满足客户需求后，雇佣了数据科学家。例如，一项节日购物研究显示，人们在**两年**的时间里搜索“礼品盒”的频率比其他时间[高 1.85 倍](https://rehack.com/featured/investor-insight/how-could-you-use-big-data-in-business/)。这些结果帮助零售商调整他们的产品。
 
 从 [COVID-19 相关困境中恢复的努力](https://www.mytotalretail.com/article/how-retailers-can-use-data-analytics-to-bounce-back-post-covid-19/) 也可能推动零售领域的数据科学家招聘活动。疫情改变了人们的购物方式和购买偏好。数据专家在发现这些新趋势并向零售高管提供所需统计数据以采取行动和增加利润方面将发挥至关重要的作用。
 
@@ -66,11 +66,11 @@
 
 **相关链接：**
 
-+   [如何成为数据科学家](/2021/01/get-job-data-scientist.html)
++   如何成为数据科学家
 
-+   [将无代码机器学习推向极限](/2021/07/pushing-no-code-machine-learning-edge.html)
++   将无代码机器学习推向极限
 
-+   [如何成功成为自由职业数据科学家](/2021/03/succeed-becoming-freelance-data-scientist.html)
++   如何成功成为自由职业数据科学家
 
 ### 进一步了解这个话题
 

@@ -1,26 +1,26 @@
 # 数据科学家的四项工作
 
-> 原文：[https://www.kdnuggets.com/2021/01/four-jobs-data-scientist.html](https://www.kdnuggets.com/2021/01/four-jobs-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/01/four-jobs-data-scientist.html`](https://www.kdnuggets.com/2021/01/four-jobs-data-scientist.html)
 
-[评论](#comments)
+评论
 
-**由[罗杰·D·彭](http://www.biostat.jhsph.edu/~rpeng/)、[@jhubiostat](https://twitter.com/jhubiostat)教授；《R编程数据科学》作者；[@simplystats](https://twitter.com/simplystats)**。
+**由[罗杰·D·彭](http://www.biostat.jhsph.edu/~rpeng/)、[@jhubiostat](https://twitter.com/jhubiostat)教授；《R 编程数据科学》作者；[@simplystats](https://twitter.com/simplystats)**。
 
-![data-scientist](../Images/8b75ef59eb455d02cc6bfb874b0dc877.png)
+![data-scientist](img/8b75ef59eb455d02cc6bfb874b0dc877.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-2019年，我写了一篇关于[数据科学的支柱](https://simplystatistics.org/2019/01/18/the-tentpoles-of-data-science/)的文章，尝试提炼数据科学家的关键技能。在文章中，我写道：
+2019 年，我写了一篇关于[数据科学的支柱](https://simplystatistics.org/2019/01/18/the-tentpoles-of-data-science/)的文章，尝试提炼数据科学家的关键技能。在文章中，我写道：
 
 > 当我问自己“什么是数据科学？”时，我倾向于思考以下五个组成部分。数据科学是（1）将设计思维应用于数据问题；（2）创建和管理数据转换和处理的工作流程；（3）通过协商人际关系来识别背景、分配资源和描述数据分析产品的受众；（4）应用统计方法来量化证据；（5）将数据分析信息转化为连贯的叙述和故事。
 
@@ -108,7 +108,7 @@
 
 ### 应用迭代
 
-如果你在阅读此内容时发现自己说“我不是X”，其中X是科学家、统计学家、系统工程师或政治家，那么很可能你在数据科学方面存在不足。我认为一个好的数据科学家必须在这些领域中具备一些技能，以完成基本的数据分析迭代。
+如果你在阅读此内容时发现自己说“我不是 X”，其中 X 是科学家、统计学家、系统工程师或政治家，那么很可能你在数据科学方面存在不足。我认为一个好的数据科学家必须在这些领域中具备一些技能，以完成基本的数据分析迭代。
 
 在任何给定的分析中，迭代可以从一次应用到几十次甚至几百次。如果你曾经制作过同一数据集的两个图，那么你可能已经进行了两次迭代。尽管迭代的具体细节和频率在应用中可能会有所不同，但核心性质和涉及的技能变化不大。
 
@@ -118,20 +118,20 @@
 
 +   [没有人谈论的核心数据科学技能](https://www.kdnuggets.com/2020/11/essential-data-science-skills-no-one-talks-about.html)
 
-+   [现代数据科学技能：8类技能、核心技能和热门技能](https://www.kdnuggets.com/2020/09/modern-data-science-skills.html)
++   [现代数据科学技能：8 类技能、核心技能和热门技能](https://www.kdnuggets.com/2020/09/modern-data-science-skills.html)
 
 +   [这些数据科学技能将成为你的超级力量](https://www.kdnuggets.com/2020/08/data-science-skills-superpower.html)
 
 ### 更多相关话题
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应了解的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应了解的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目的，并寻找目的以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [数据科学学习统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [90亿美元的AI失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [是什么使 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

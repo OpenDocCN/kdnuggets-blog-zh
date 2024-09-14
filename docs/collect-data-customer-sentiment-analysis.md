@@ -1,8 +1,8 @@
 # 如何收集客户情感分析的数据
 
-> 原文：[https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)
+> 原文：[`www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html`](https://www.kdnuggets.com/2022/12/collect-data-customer-sentiment-analysis.html)
 
-![如何收集客户情感分析的数据](../Images/d5c921358e40963337bfc11abeb13799.png)
+![如何收集客户情感分析的数据](img/d5c921358e40963337bfc11abeb13799.png)
 
 编辑提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
@@ -30,7 +30,7 @@
 
 +   结论
 
-情感分析细致地检查客户反馈数据，以识别特定的[情感或情绪](/2018/08/emotion-sentiment-analysis-practitioners-guide-nlp-5.html)。大致上，这些情感是积极的、消极的或中性的。但在这些参数内，基于机器学习任务如自然语言处理（NLP）和语义分析的情感分析模型可以发现词语的语义和句法方面，从而帮助发现不同类型的消极情感。
+情感分析细致地检查客户反馈数据，以识别特定的情感或情绪。大致上，这些情感是积极的、消极的或中性的。但在这些参数内，基于机器学习任务如自然语言处理（NLP）和语义分析的情感分析模型可以发现词语的语义和句法方面，从而帮助发现不同类型的消极情感。
 
 例如，它可以根据表示不同负面情绪的词汇，如焦虑、失望、遗憾、愤怒等，提供不同的情感评分。积极的微观情感也同样如此。
 
@@ -44,31 +44,31 @@
 
 社交媒体监听是你获取关于品牌的当前客户反馈的方式之一，包括你的产品以及服务。一个能够处理和评估社交媒体评论以及视频内容的情感分析模型，是利用这一数据来源的最佳选择。
 
-借助这样的工具，你可以从以文本为主的社交媒体网站（如Twitter）到以视频为主的网站（如TikTok或Instagram）中获取客户情感分析数据。这给你带来了极大的优势，因为并不是所有社交媒体平台在客户选择上都是一刀切的。[客户选择](https://www.journalism.co.uk/news/ofcom-news-consumption-report-shows-social-media-users-are-still-concerned-by-fake-news-/s2/a845925/)。
+借助这样的工具，你可以从以文本为主的社交媒体网站（如 Twitter）到以视频为主的网站（如 TikTok 或 Instagram）中获取客户情感分析数据。这给你带来了极大的优势，因为并不是所有社交媒体平台在客户选择上都是一刀切的。[客户选择](https://www.journalism.co.uk/news/ofcom-news-consumption-report-shows-social-media-users-are-still-concerned-by-fake-news-/s2/a845925/)。
 
-例如，虽然客户主要使用Twitter直接与品牌互动，但Facebook用户通常会留下详细的关于他们与企业相关的评论。这种明显的差异是由于业务性质、年龄、地理位置、数字使用等因素造成的。
+例如，虽然客户主要使用 Twitter 直接与品牌互动，但 Facebook 用户通常会留下详细的关于他们与企业相关的评论。这种明显的差异是由于业务性质、年龄、地理位置、数字使用等因素造成的。
 
 以下示例展示了客户在两个不同社交媒体渠道上留下评论的情况。
 
-![如何收集客户情感分析数据](../Images/69534c0e090245b8589957565b156a9b.png)
+![如何收集客户情感分析数据](img/69534c0e090245b8589957565b156a9b.png)
 
-![如何收集客户情感分析数据](../Images/2c46ae65cadb4c9c050bc6c13f3d9772.png)
+![如何收集客户情感分析数据](img/2c46ae65cadb4c9c050bc6c13f3d9772.png)
 
 社交媒体情感分析的另一个巨大优势是，你还可以找到符合要求的社交媒体意见领袖，他们可以成为你数字营销策略中的绝佳补充。意见领袖的成本仅为雇用公关公司或名人代言的一半。
 
-此外，人们信任产品评论和他们可以[相关](https://www.forbes.com/sites/forbesagencycouncil/2021/02/04/influencer-marketings-surprising-rise-of-the-everyperson/)的意见领袖的推荐。这无论是你是寻找专业造型建议的实习生，还是寻找青少年手机最佳选择的四个孩子的父亲，这都是事实。[这就是](https://www.repustate.com/blog/finding-tiktok-influencers-for-your-brand-using-ai/)数据科学和机器学习如何帮助找到适合业务的TikTok意见领袖。
+此外，人们信任产品评论和他们可以[相关](https://www.forbes.com/sites/forbesagencycouncil/2021/02/04/influencer-marketings-surprising-rise-of-the-everyperson/)的意见领袖的推荐。这无论是你是寻找专业造型建议的实习生，还是寻找青少年手机最佳选择的四个孩子的父亲，这都是事实。[这就是](https://www.repustate.com/blog/finding-tiktok-influencers-for-your-brand-using-ai/)数据科学和机器学习如何帮助找到适合业务的 TikTok 意见领袖。
 
-## 2\. 超越定量调查，如NPS、CES或CSAT
+## 2\. 超越定量调查，如 NPS、CES 或 CSAT
 
 客户反馈指标，如净推荐值（NPS）、客户努力值（CES）或星级评分，可以一眼看出人们是否对你的业务满意。但这并不会真正提供任何实际的业务洞察。
 
-![如何收集客户情感分析数据](../Images/c364cb7647aa897094708d32a5b39ca7.png)
+![如何收集客户情感分析数据](img/c364cb7647aa897094708d32a5b39ca7.png)
 
 要获取真实的客户情感洞察，你需要超越定量指标。为此，你需要分析评论和开放式调查回应，这些回应没有固定的回答。这允许客户写下自由流动的评论，从而为你提供关于你业务的某些方面的洞察，甚至是你未曾意识到的。
 
-![如何收集客户情感分析数据](../Images/6635382ef6b52b662c32f638e5b302b4.png)
+![如何收集客户情感分析数据](img/6635382ef6b52b662c32f638e5b302b4.png)
 
-在上述示例中，我们可以看到客户对企业给予了1星评价。但在阅读评论后，我们意识到负面情绪背后的原因完全不同。
+在上述示例中，我们可以看到客户对企业给予了 1 星评价。但在阅读评论后，我们意识到负面情绪背后的原因完全不同。
 
 一位客户对公司的在线客服感到不满，而另一位则提到，尽管他们是长期客户，但由于质量下降和新的定价，他们可能不再购买他们的产品。
 
@@ -92,7 +92,7 @@
 
 包含文章、新闻视频和播客的新闻数据可以为品牌绩效和认知提供详细的见解。新闻来源的市场反馈可以帮助企业进行有效的公关（PR）活动，以管理品牌声誉。
 
-![如何收集客户情感分析数据](../Images/38399954455dcc5cb05e350f42c36741.png)
+![如何收集客户情感分析数据](img/38399954455dcc5cb05e350f42c36741.png)
 
 它还可以通过行业趋势来帮助进行竞争对手分析，这些趋势是情感分析模型从新闻文章或视频中的品牌体验数据中提取的，同时帮助他们了解消费者行为。
 
@@ -140,7 +140,7 @@
 
 **### 负面-正面词汇计数比例
 
-积极词汇的总数除以消极词汇的总数，然后结果加上1。这比其他方法更为平衡，尤其是在大量数据的情况下。
+积极词汇的总数除以消极词汇的总数，然后结果加上 1。这比其他方法更为平衡，尤其是在大量数据的情况下。
 
 1/ 2+1 = 0.33333
 
@@ -152,20 +152,20 @@
 
 # 结论
 
-在营销活动中，AI和数据科学具有巨大的重要性，尤其是在不断创新和市场动态不断变化的时代。由直接从客户反馈数据中获取的客户情感分析，可以为你提供确保持续增长的可持续营销策略所需的一切杠杆。
+在营销活动中，AI 和数据科学具有巨大的重要性，尤其是在不断创新和市场动态不断变化的时代。由直接从客户反馈数据中获取的客户情感分析，可以为你提供确保持续增长的可持续营销策略所需的一切杠杆。
 
-**[马丁·奥斯特罗夫斯基](https://www.linkedin.com/in/martinostrovsky/)** 是Repustate的创始人兼首席执行官。他对AI、机器学习和自然语言处理充满热情。他制定了Repustate全球文本分析API、情感分析、深度搜索和命名实体识别解决方案的战略、路线图和功能定义。
+**[马丁·奥斯特罗夫斯基](https://www.linkedin.com/in/martinostrovsky/)** 是 Repustate 的创始人兼首席执行官。他对 AI、机器学习和自然语言处理充满热情。他制定了 Repustate 全球文本分析 API、情感分析、深度搜索和命名实体识别解决方案的战略、路线图和功能定义。
 
 ### 更多相关话题
 
 +   [对加密数据进行情感分析：同态加密技术](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)
 
-+   [Python中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)
++   [Python 中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)
 
-+   [如何使用Hugging Face Transformers微调BERT进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
++   [如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
 
 +   [数据管理：如何保持在客户心中占据重要地位？](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)
 
-+   [一个为客户数据建模开发Hugging Face的社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)
++   [一个为客户数据建模开发 Hugging Face 的社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)
 
 +   [假装直到成功：生成真实的合成客户数据集](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)**

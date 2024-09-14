@@ -1,24 +1,24 @@
 # 如何成为一名成功的医疗数据分析师
 
-> 原文：[https://www.kdnuggets.com/2019/11/become-successful-healthcare-data-analyst.html](https://www.kdnuggets.com/2019/11/become-successful-healthcare-data-analyst.html)
+> 原文：[`www.kdnuggets.com/2019/11/become-successful-healthcare-data-analyst.html`](https://www.kdnuggets.com/2019/11/become-successful-healthcare-data-analyst.html)
 
-[评论](#comments)
+评论
 
-**作者：[Ritesh Patil](https://www.mobisoftinfotech.com)，Mobisoft Infotech的联合创始人**
+**作者：[Ritesh Patil](https://www.mobisoftinfotech.com)，Mobisoft Infotech 的联合创始人**
 
 你是否有兴趣开始你的数据分析职业生涯？作为一名医疗数据分析师可能是你最好的选择！查看这篇文章，以获取有关健康数据分析师及其如何成为一名详细的信息。
 
-![医疗保健](../Images/b8ad8fbcb297803999bf0eb128bbb0a1.png)
+![医疗保健](img/b8ad8fbcb297803999bf0eb128bbb0a1.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
@@ -92,26 +92,26 @@
 
 这是你在计划成为医疗保健数据分析师时需要了解的基本信息。请通过所提供的信息，确定你是否有资格成为健康数据分析师。提升与健康数据分析师相关的技能和知识，并寻找提供良好工作机会的最佳公司。祝你的职业生涯好运！
 
-**简介: [Ritesh Patil](https://www.mobisoftinfotech.com)** ([**@ritesh_patil**](https://twitter.com/ritesh_patil)) 是Mobisoft Infotech的联合创始人，该公司是印度和美国领先的[医疗保健软件开发](https://mobisoftinfotech.com/industry/healthcare-software-development)公司。他是一位热衷的博主，热爱创新，撰写多种医疗保健应用领域的文章。他与经验丰富的数字健康应用开发人员合作，推出了创新的移动应用程序。他相信知识共享，并专注于初创企业。
+**简介: [Ritesh Patil](https://www.mobisoftinfotech.com)** ([**@ritesh_patil**](https://twitter.com/ritesh_patil)) 是 Mobisoft Infotech 的联合创始人，该公司是印度和美国领先的[医疗保健软件开发](https://mobisoftinfotech.com/industry/healthcare-software-development)公司。他是一位热衷的博主，热爱创新，撰写多种医疗保健应用领域的文章。他与经验丰富的数字健康应用开发人员合作，推出了创新的移动应用程序。他相信知识共享，并专注于初创企业。
 
 **相关：**
 
-+   [人工智能如何改变医疗保健（它能否解决美国医疗保健系统的问题？)](/2019/09/ai-transform-healthcare.html)
++   人工智能如何改变医疗保健（它能否解决美国医疗保健系统的问题？)
 
-+   [数据科学很无聊（第二部分）](/2019/10/data-science-boring-part-2.html)
++   数据科学很无聊（第二部分）
 
-+   [乳腺癌分类的卷积神经网络](/2019/10/convolutional-neural-network-breast-cancer-classification.html)
++   乳腺癌分类的卷积神经网络
 
 ### 了解更多此主题的信息
 
-+   [如何在2022年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
++   [如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [数据质量在成功构建机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [通过DataCamp的分析师接管更快地实现数据驱动](https://www.kdnuggets.com/2022/10/datacamp-data-driven-faster-analyst-takeover.html)
++   [通过 DataCamp 的分析师接管更快地实现数据驱动](https://www.kdnuggets.com/2022/10/datacamp-data-driven-faster-analyst-takeover.html)
 
-+   [如果你想成为数据分析师，应该考虑的3个课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，应该考虑的 3 个课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-+   [在不到6个月的时间里成为商业智能分析师](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)
++   [在不到 6 个月的时间里成为商业智能分析师](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)

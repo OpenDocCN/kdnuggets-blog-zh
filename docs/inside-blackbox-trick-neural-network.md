@@ -1,14 +1,14 @@
 # 探索黑箱：如何欺骗神经网络
 
-> 原文：[https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html](https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html)
+> 原文：[`www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html`](https://www.kdnuggets.com/2020/09/inside-blackbox-trick-neural-network.html)
 
-[评论](#comments)
+评论
 
-**作者：[William Falcon](https://www.linkedin.com/in/wfalcon/)，PyTorch Lightning创始人**
+**作者：[William Falcon](https://www.linkedin.com/in/wfalcon/)，PyTorch Lightning 创始人**
 
-![图像用于帖子](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)
+![图像用于帖子](img/6ddc83afb3793567dba0feeb3ab56ae5.png)
 
-使用梯度上升来确定如何改变输入，使其被分类为5。（所有图像均为作者自有，版权所有）。
+使用梯度上升来确定如何改变输入，使其被分类为 5。（所有图像均为作者自有，版权所有）。
 
 神经网络因被视为黑箱而声名不佳。虽然理解它们的决策过程确实需要创造力，但它们并不像人们所认为的那样不透明。
 
@@ -22,47 +22,47 @@
 
 让我们考虑人类的情况。如果我给你展示以下输入：
 
-![图像用于帖子](../Images/03c7d3f8e8c802c6935b4453d30397a0.png)
+![图像用于帖子](img/03c7d3f8e8c802c6935b4453d30397a0.png)
 
-你很可能不知道这是不是5还是6。实际上，我相信我甚至可以说服你认为这也*可能*是8。
+你很可能不知道这是不是 5 还是 6。实际上，我相信我甚至可以说服你认为这也*可能*是 8。
 
-现在，如果你问一个人如何使某物更接近于5，你可能会这样做：
+现在，如果你问一个人如何使某物更接近于 5，你可能会这样做：
 
-![图像用于帖子](../Images/87315b2a5e7a928f9050c800c32aed84.png)
+![图像用于帖子](img/87315b2a5e7a928f9050c800c32aed84.png)
 
-如果我想让你把这个调整得更像8，你可能会这样做：
+如果我想让你把这个调整得更像 8，你可能会这样做：
 
-![图像用于帖子](../Images/8f1abfd0624d81fdb93fb26bcac3bb7b.png)
+![图像用于帖子](img/8f1abfd0624d81fdb93fb26bcac3bb7b.png)
 
-现在，这个问题的答案并不容易通过几个if语句或查看几个系数来解释（是的，我在看你，回归）。不幸的是，对于某些类型的输入（图像、声音、视频等），可解释性确实变得更困难**但并非不可能**。
+现在，这个问题的答案并不容易通过几个 if 语句或查看几个系数来解释（是的，我在看你，回归）。不幸的是，对于某些类型的输入（图像、声音、视频等），可解释性确实变得更困难**但并非不可能**。
 
 ### 询问神经网络
 
 神经网络如何回答我上面提出的相同问题？要回答这个问题，我们可以使用梯度上升来实现。
 
-这是神经网络认为我们需要如何修改输入，使其更接近于5的方式。
+这是神经网络认为我们需要如何修改输入，使其更接近于 5 的方式。
 
-![图像用于帖子](../Images/853d48279ee53c804e71b9b6dd02bb10.png)
+![图像用于帖子](img/853d48279ee53c804e71b9b6dd02bb10.png)
 
 这有两个有趣的结果。首先，黑色区域是网络认为我们需要去除像素密度的地方。第二，黄色区域是它认为我们需要增加像素密度的地方。
 
 我们可以通过将梯度添加到原始图像中，朝着那个梯度方向迈出一步。我们当然可以重复这个过程，最终将输入形态调整为我们期望的预测。
 
-![图像用于帖子](../Images/502f67373e4db5cc3c222c7f4fe1d9ec.png)
+![图像用于帖子](img/502f67373e4db5cc3c222c7f4fe1d9ec.png)
 
 你可以看到图像左下角的黑色斑块与人类可能认为的非常**相似**。
 
-![图像](../Images/01456796f6f2dab3ad9a0c48c06503b5.png)
+![图像](img/01456796f6f2dab3ad9a0c48c06503b5.png)
 
 人类在左下角添加了黑色。网络也建议这样做
 
 那么，如何让输入看起来更像一个 8 呢？以下是网络认为你需要如何改变输入的方式。
 
-![帖子用图像](../Images/dbcd6e19fecf7925c7f4590d40726455.png)
+![帖子用图像](img/dbcd6e19fecf7925c7f4590d40726455.png)
 
 在这里，再次值得注意的是，左下角有一个黑色的区域，而中间有一个明亮的区域。如果我们将这些与输入相加，我们会得到以下结果：
 
-![帖子用图像](../Images/b7ff288901f3e6c9deb2adfa8bcb1b8f.png)
+![帖子用图像](img/b7ff288901f3e6c9deb2adfa8bcb1b8f.png)
 
 在这种情况下，我不是特别相信我们已经把这个 5 转换成了 8。不过，我们已经减少了一个 5，用右侧的图像来说服你这是一个 8 的论点肯定会更容易。
 
@@ -74,43 +74,43 @@
 
 这就是我们所称的*前向传播*。
 
-![图像](../Images/8708a9e4f509d04cd35f4e5fe7f75603.png)
+![图像](img/8708a9e4f509d04cd35f4e5fe7f75603.png)
 
 在前向传播过程中，我们计算输出的概率分布
 
 代码中它看起来是这样的（[可以使用这个 colab 跟随操作](https://colab.research.google.com/drive/16HVAJHdCkyj7W43Q3ZChnxZ7DOwx6K5i?usp=sharing)）：
 
-![帖子用图像](../Images/fc6670de2f2882aba6eed014289fde55.png)
+![帖子用图像](img/fc6670de2f2882aba6eed014289fde55.png)
 
 现在，想象一下我们想要欺骗网络，使其对输入 x 预测“5”。那么实现这一目标的方法是给它一个图像（x），计算图像的预测，然后**最大化**预测标签“5”的概率。
 
 为了做到这一点，我们可以使用梯度上升来计算第 6 个索引（即：标签 = 5）（**p**）的预测梯度相对于输入**x**。
 
-![帖子用图像](../Images/cf08bc766b5787508fe1093b6ad3af00.png)
+![帖子用图像](img/cf08bc766b5787508fe1093b6ad3af00.png)
 
 要在代码中做到这一点，我们将输入 x 作为参数传递给神经网络，选择第 6 个预测（因为我们有标签：0、1、2、3、4、5、……）第 6 个索引意味着标签“5”。
 
 从视觉上看，这样：
 
-![图像](../Images/6ddc83afb3793567dba0feeb3ab56ae5.png)
+![图像](img/6ddc83afb3793567dba0feeb3ab56ae5.png)
 
 预测“5”的梯度相对于输入的变化。
 
 在代码中：
 
-![帖子用图像](../Images/ad172a3ec602c6a3842d0753fa8a24e2.png)
+![帖子用图像](img/ad172a3ec602c6a3842d0753fa8a24e2.png)
 
 当我们调用 .backward() 时，发生的过程可以通过前面的动画进行可视化。
 
 现在我们已经计算了梯度，我们可以对它们进行可视化和绘图：
 
-![帖子用图像](../Images/7c1a1a81b0d0422c3eb204d15f80a3b0.png)
+![帖子用图像](img/7c1a1a81b0d0422c3eb204d15f80a3b0.png)
 
-![帖子用图像](../Images/1d98a6aa283b8478938ded66d0feeaf8.png)
+![帖子用图像](img/1d98a6aa283b8478938ded66d0feeaf8.png)
 
 上述梯度看起来像随机噪声，因为网络尚未训练……然而，一旦我们对网络进行训练，梯度将会更具信息量：
 
-![Image for post](../Images/9442f2f7ebc4fa0dd2e4ca9d3d836fba.png)
+![Image for post](img/9442f2f7ebc4fa0dd2e4ca9d3d836fba.png)
 
 ### 通过回调自动化这一过程
 
@@ -136,13 +136,13 @@ pip install pytorch-lightning-bolts
 
 Tensorboard 将自动生成类似这样的图像：
 
-![Image for post](../Images/049f207dacc0e2290f9703fb9462af63.png)
+![Image for post](img/049f207dacc0e2290f9703fb9462af63.png)
 
-![Image for post](../Images/606f77a46517b30e651038992c4c54db.png)
+![Image for post](img/606f77a46517b30e651038992c4c54db.png)
 
 ### 摘要
 
-![Image for post](../Images/b84ae810c072e5fa7cd9a55a4847b2d3.png)
+![Image for post](img/b84ae810c072e5fa7cd9a55a4847b2d3.png)
 
 总结一下：你学会了如何使用 PyTorch 查看黑箱内部，了解了直觉，编写了一个 PyTorch Lightning 中的回调，并自动使你的 Tensorboard 实例绘制出可疑的预测。
 
@@ -156,21 +156,21 @@ Tensorboard 将自动生成类似这样的图像：
 
 **相关:**
 
-+   [PyTorch 多 GPU 指标库及 PyTorch Lightning 新版本中的更多内容](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)
++   PyTorch 多 GPU 指标库及 PyTorch Lightning 新版本中的更多内容
 
-+   [Pytorch Lightning 与 PyTorch Ignite 与 Fast.ai 比较](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)
++   Pytorch Lightning 与 PyTorch Ignite 与 Fast.ai 比较
 
-+   [Lit BERT: NLP 转移学习的 3 个步骤](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)
++   Lit BERT: NLP 转移学习的 3 个步骤
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -182,7 +182,7 @@ Tensorboard 将自动生成类似这样的图像：
 
 +   [使用 AIMET 进行神经网络优化](https://www.kdnuggets.com/2022/04/qualcomm-neural-network-optimization-aimet.html)
 
-+   [通过构建 15 个神经网络项目来学习深度学习（2022年）](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
++   [通过构建 15 个神经网络项目来学习深度学习（2022 年）](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
 
 +   [使用 TensorFlow 和 Keras 构建和训练你的第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 

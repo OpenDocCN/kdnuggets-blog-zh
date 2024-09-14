@@ -1,12 +1,12 @@
 # 现代图形查询语言 – GSQL
 
-> 原文：[https://www.kdnuggets.com/2018/06/modern-graph-query-language-gsql.html](https://www.kdnuggets.com/2018/06/modern-graph-query-language-gsql.html)
+> 原文：[`www.kdnuggets.com/2018/06/modern-graph-query-language-gsql.html`](https://www.kdnuggets.com/2018/06/modern-graph-query-language-gsql.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[余旭博士](https://www.linkedin.com/in/yuxusandiego/)，TigerGraph CEO**
 
-![](../Images/7096252793ba2888d2c9290a436f77fe.png)
+![](img/7096252793ba2888d2c9290a436f77fe.png)
 
 根据咨询公司[DB-Engines.com](http://db-engines.com/)，图形数据库技术是所有数据管理类别中增长最快的。最近的[Forrester](https://www.forrester.com/report/Vendor+Landscape+Graph+Databases/-/E-RES121473)调查显示，全球超过一半的数据和分析技术决策者现在使用图形数据库。
 
@@ -36,9 +36,9 @@ Gremlin 是图灵完备的，但层次较低。该语言适用于非常简单的
 
 图数据库提供了解决这些问题的平台，但用户仍然需要适当的查询语言：以定义图模式来建模复杂的实体和关系，以轻松将各种数据源映射到图中，以快速将数据加载到图中，并且具有足够的表达能力（图灵完备），以建模和解决各类行业的现实商业问题。这些都是使图技术能够跨越鸿沟，实现更广泛企业采纳的关键。
 
-鉴于此，专家指出了现代图查询语言的重要八个关键特征：1）基于模式并具有动态模式更改的能力，2）图遍历的高级表达，3）图遍历的精细控制，4）内置并行语义以保证高性能，5）高度表达的加载语言，6）数据安全和隐私，7）支持查询调用查询（递归）和8）SQL用户友好。关于这些要求的更多细节可以在[这里](https://www.tigergraph.com/2018/05/22/crossing-the-chasm-eight-prerequisites-for-a-graph-query-language/)找到。
+鉴于此，专家指出了现代图查询语言的重要八个关键特征：1）基于模式并具有动态模式更改的能力，2）图遍历的高级表达，3）图遍历的精细控制，4）内置并行语义以保证高性能，5）高度表达的加载语言，6）数据安全和隐私，7）支持查询调用查询（递归）和 8）SQL 用户友好。关于这些要求的更多细节可以在[这里](https://www.tigergraph.com/2018/05/22/crossing-the-chasm-eight-prerequisites-for-a-graph-query-language/)找到。
 
-**介绍GSQL**
+**介绍 GSQL**
 
 GSQL 是一种用户友好、高度表达和图灵完备的图查询语言。与其他选项不同，GSQL 支持组织已经遇到的现实商业需求，并从头开始设计以满足上述标准。
 
@@ -82,7 +82,7 @@ s.@rcvd_score = 0，
 
 }
 
-**个人简介**: [余旭博士](https://www.linkedin.com/in/yuxusandiego/)是TigerGraph的创始人兼首席执行官，TigerGraph是世界上首个原生并行图数据库。余博士在加州大学圣地亚哥分校获得计算机科学与工程博士学位。他是大数据、并行数据库系统以及图数据库方面的专家，并拥有26项并行数据管理和优化的专利。在创办TigerGraph之前，余博士曾在Twitter负责大规模数据分析的数据基础设施工作。在此之前，他曾担任Teradata的Hadoop架构师，领导公司的大数据项目。
+**个人简介**: [余旭博士](https://www.linkedin.com/in/yuxusandiego/)是 TigerGraph 的创始人兼首席执行官，TigerGraph 是世界上首个原生并行图数据库。余博士在加州大学圣地亚哥分校获得计算机科学与工程博士学位。他是大数据、并行数据库系统以及图数据库方面的专家，并拥有 26 项并行数据管理和优化的专利。在创办 TigerGraph 之前，余博士曾在 Twitter 负责大规模数据分析的数据基础设施工作。在此之前，他曾担任 Teradata 的 Hadoop 架构师，领导公司的大数据项目。
 
 **相关内容:**
 
@@ -90,30 +90,30 @@ s.@rcvd_score = 0，
 
 +   [利用大数据进行图分析](https://www.kdnuggets.com/2017/12/graph-analytics-using-big-data.html)
 
-+   [如何在SQL Server中通过机器学习服务执行R和Python](https://www.kdnuggets.com/2018/06/microsoft-azure-machine-learning-r-python-sql-server.html)
++   [如何在 SQL Server 中通过机器学习服务执行 R 和 Python](https://www.kdnuggets.com/2018/06/microsoft-azure-machine-learning-r-python-sql-server.html)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 ### 相关话题
 
-+   [用SQL查询你的Pandas数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
++   [用 SQL 查询你的 Pandas 数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
 
-+   [我们能用T5查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)
++   [我们能用 T5 查询表格吗？](https://www.kdnuggets.com/2022/05/query-table-t5.html)
 
-+   [SQL查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
++   [SQL 查询优化技巧](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
 
-+   [提高SQL查询性能的5个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
++   [提高 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
 
 +   [思想图谱：大型语言模型中复杂问题解决的新范式](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)

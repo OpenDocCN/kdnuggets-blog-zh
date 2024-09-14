@@ -1,8 +1,8 @@
-# 2022年顶级数据科学工具
+# 2022 年顶级数据科学工具
 
-> 原文：[https://www.kdnuggets.com/2022/03/top-data-science-tools-2022.html](https://www.kdnuggets.com/2022/03/top-data-science-tools-2022.html)
+> 原文：[`www.kdnuggets.com/2022/03/top-data-science-tools-2022.html`](https://www.kdnuggets.com/2022/03/top-data-science-tools-2022.html)
 
-![2022年顶级数据科学工具](../Images/313298b2a218b102050008afc9a8f544.png)
+![2022 年顶级数据科学工具](img/313298b2a218b102050008afc9a8f544.png)
 
 图片由[Fullvector](https://www.freepik.com/fullvector)提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -34,51 +34,51 @@
 
 ## 数据库
 
-![2022年顶级数据科学工具](../Images/242ce78060f43bd8cfc11d53062469f8.png)
+![2022 年顶级数据科学工具](img/242ce78060f43bd8cfc11d53062469f8.png)
 
 图片由[Fullvector](https://www.freepik.com/fullvector)提供
 
 ### DuckDB
 
-[DuckDB](https://duckdb.org/)是一个关系型表导向的数据库管理系统，支持SQL查询以生成数据分析。它的设计旨在加快分析查询的工作负载。它还提供了与R、Python和Java的集成。你可以将其与当前的数据堆栈集成，以生成分析结果。我通常用它来分析***.csv***文件和存储网络应用日志。欲了解更多信息，请阅读：[使用DuckDB进行数据分析的指南](https://www.analyticsvidhya.com/blog/2021/12/the-guide-to-data-analysis-with-duckdb/)。
+[DuckDB](https://duckdb.org/)是一个关系型表导向的数据库管理系统，支持 SQL 查询以生成数据分析。它的设计旨在加快分析查询的工作负载。它还提供了与 R、Python 和 Java 的集成。你可以将其与当前的数据堆栈集成，以生成分析结果。我通常用它来分析***.csv***文件和存储网络应用日志。欲了解更多信息，请阅读：[使用 DuckDB 进行数据分析的指南](https://www.analyticsvidhya.com/blog/2021/12/the-guide-to-data-analysis-with-duckdb/)。
 
 ### PostgreSQL
 
-[PostgreSQL](https://www.postgresql.org/)是一个开源的对象关系数据库系统，由社区开发并为社区服务，已经开发了30年。它可以处理复杂的查询、处理大量数据，并优化查询运行时间。在开发人员和数据工程师中，它是最受欢迎的数据库。几乎所有的技术面试或测试都涉及某种PostgreSQL问题。我使用[psycopg2](https://pypi.org/project/psycopg2/)来摄取数据并在Jupyter笔记本中进行数据分析。
+[PostgreSQL](https://www.postgresql.org/)是一个开源的对象关系数据库系统，由社区开发并为社区服务，已经开发了 30 年。它可以处理复杂的查询、处理大量数据，并优化查询运行时间。在开发人员和数据工程师中，它是最受欢迎的数据库。几乎所有的技术面试或测试都涉及某种 PostgreSQL 问题。我使用[psycopg2](https://pypi.org/project/psycopg2/)来摄取数据并在 Jupyter 笔记本中进行数据分析。
 
 ## 网络抓取
 
-![2022年顶级数据科学工具](../Images/dca2221c6c266f789a97c2e544bdd384.png)
+![2022 年顶级数据科学工具](img/dca2221c6c266f789a97c2e544bdd384.png)
 
 图片由[Fullvector](https://www.freepik.com/fullvector)提供
 
 ### Beautiful Soup
 
-[Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)是一个用于从HTML和XML文件中提取数据的Python库。如果你是数据工程师或数据科学家，你必须掌握这个工具来从网站中提取数据。在数据收集过程中，你的经理会要求你学习一个新的网页抓取工具，或者让你创建一个Python文件来自动化网页抓取。这是创建完全自动化数据管道的重要一步。我使用Beautiful Soup来抓取COVID19数据和提取各种社交媒体数据。
+[Beautiful Soup](https://www.crummy.com/software/BeautifulSoup/)是一个用于从 HTML 和 XML 文件中提取数据的 Python 库。如果你是数据工程师或数据科学家，你必须掌握这个工具来从网站中提取数据。在数据收集过程中，你的经理会要求你学习一个新的网页抓取工具，或者让你创建一个 Python 文件来自动化网页抓取。这是创建完全自动化数据管道的重要一步。我使用 Beautiful Soup 来抓取 COVID19 数据和提取各种社交媒体数据。
 
 ### Zyte
 
-[Zyte](https://www.zyte.com/)是一个用于运行**网络爬虫**和网页抓取程序的云平台。你可以管理你的网络爬虫并运行网页抓取作业。我立刻爱上了它的易用性和完全自动化的网页抓取解决方案。我的网络爬虫仍在运行，收集书籍数据到一个*.csv*文件中，所以我可以手动下载文件，或者将其与其他数据库集成以创建一个完全自动化的生态系统。如果你是学生，可以注册GitHub的[教育包](https://education.github.com/pack)，获得1个免费永久Scrapy Cloud单元——无限的团队成员、项目或请求。
+[Zyte](https://www.zyte.com/)是一个用于运行**网络爬虫**和网页抓取程序的云平台。你可以管理你的网络爬虫并运行网页抓取作业。我立刻爱上了它的易用性和完全自动化的网页抓取解决方案。我的网络爬虫仍在运行，收集书籍数据到一个*.csv*文件中，所以我可以手动下载文件，或者将其与其他数据库集成以创建一个完全自动化的生态系统。如果你是学生，可以注册 GitHub 的[教育包](https://education.github.com/pack)，获得 1 个免费永久 Scrapy Cloud 单元——无限的团队成员、项目或请求。
 
 ## 数据分析
 
-![2022年顶级数据科学工具](../Images/c494679d0a146b79cb782ccf21c1c761.png)
+![2022 年顶级数据科学工具](img/c494679d0a146b79cb782ccf21c1c761.png)
 
 图片由[Fullvector](https://www.freepik.com/fullvector)提供
 
 ### Python
 
-Python是数据科学家和机器学习工程师中使用最广泛的语言。你几乎可以在Python中找到所有库来执行任何数据相关的任务，从可视化到构建机器学习API。我通常使用**Pandas**和**Plotly**来进行数据处理和可视化。
+Python 是数据科学家和机器学习工程师中使用最广泛的语言。你几乎可以在 Python 中找到所有库来执行任何数据相关的任务，从可视化到构建机器学习 API。我通常使用**Pandas**和**Plotly**来进行数据处理和可视化。
 
 +   [Pandas](https://pandas.pydata.org/)是一个流行的库，用于执行数据摄取、处理和可视化任务。
 
-+   [Seaborn](https://seaborn.pydata.org/)：是matplotlib.pyplot的高级版本，可以让你用几行代码创建复杂的数据可视化。
++   [Seaborn](https://seaborn.pydata.org/)：是 matplotlib.pyplot 的高级版本，可以让你用几行代码创建复杂的数据可视化。
 
 +   [Plotly](https://plotly.com/)提供了一种交互式的数据可视化方式。我使用它来完成所有的可视化任务，主要是为了打动管理团队。自定义动画和互动性让数据栩栩如生。
 
 ### R
 
-R在数据分析和统计学家中相当受欢迎。它被创建用于解决统计问题，现在它已发展成一个完整的数据科学生态系统。R附带了[Tidyverse](https://www.tidyverse.org/)，这是所有包的母体。
+R 在数据分析和统计学家中相当受欢迎。它被创建用于解决统计问题，现在它已发展成一个完整的数据科学生态系统。R 附带了[Tidyverse](https://www.tidyverse.org/)，这是所有包的母体。
 
 **以下是一些著名的包：**
 
@@ -86,7 +86,7 @@ R在数据分析和统计学家中相当受欢迎。它被创建用于解决统�
 
 +   **dplyr：** 用于数据扩充和处理。
 
-+   **readr：** 用于加载CSV和TSV文件。
++   **readr：** 用于加载 CSV 和 TSV 文件。
 
 ### Julia
 
@@ -106,7 +106,7 @@ Julia 是一种新兴的编程语言，旨在解决科学问题。随着流行�
 
 ## 机器学习
 
-![2022 年最佳数据科学工具](../Images/67eb70d074355067db3a27c44f858631.png)
+![2022 年最佳数据科学工具](img/67eb70d074355067db3a27c44f858631.png)
 
 图片由 [Fullvector](https://www.freepik.com/fullvector) 提供
 
@@ -124,7 +124,7 @@ Julia 是一种新兴的编程语言，旨在解决科学问题。随着流行�
 
 ## 报告
 
-![2022 年最佳数据科学工具](../Images/8215aa0ca7346c35eb19324ffc1bf725.png)
+![2022 年最佳数据科学工具](img/8215aa0ca7346c35eb19324ffc1bf725.png)
 
 图片由 [Fullvector](https://www.freepik.com/fullvector) 提供
 
@@ -142,7 +142,7 @@ Julia 是一种新兴的编程语言，旨在解决科学问题。随着流行�
 
 ## 结论
 
-数据科学领域仍在不断发展，人们正在学习最新的工具以执行多种任务。大多数公司希望你能够执行数据工程、机器学习和MLOps任务。有时，他们会宣称自己在寻找数据科学家，但实际上，他们是在寻找能够自动化工作流程的人。
+数据科学领域仍在不断发展，人们正在学习最新的工具以执行多种任务。大多数公司希望你能够执行数据工程、机器学习和 MLOps 任务。有时，他们会宣称自己在寻找数据科学家，但实际上，他们是在寻找能够自动化工作流程的人。
 
 在这篇博客中，我们学习了关于数据库、网页抓取、数据分析、机器学习和报告工具的内容。在数据科学领域，没有一站式解决所有问题的方案，你需要不断寻找更好的工具以被视为一个合格的员工。所以，如果你希望提高生产力并给老板留下深刻印象，那么开始学习这些工具，以在该领域中脱颖而出。
 
@@ -150,14 +150,14 @@ Julia 是一种新兴的编程语言，旨在解决科学问题。随着流行�
 
 ### 更多相关主题
 
-+   [2022年及以后顶尖的AI和数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶尖的 AI 和数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
-+   [2022年最佳数据科学播客](https://www.kdnuggets.com/2022/06/top-data-science-podcasts-2022.html)
++   [2022 年最佳数据科学播客](https://www.kdnuggets.com/2022/06/top-data-science-podcasts-2022.html)
 
-+   [2022年数据科学领域的最佳职位和薪资](https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html)
++   [2022 年数据科学领域的最佳职位和薪资](https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html)
 
-+   [2022年最佳数据分析师认证课程](https://www.kdnuggets.com/2022/11/top-data-analyst-certification-courses-2022.html)
++   [2022 年最佳数据分析师认证课程](https://www.kdnuggets.com/2022/11/top-data-analyst-certification-courses-2022.html)
 
-+   [2022年数据科学家招聘的最佳行业和雇主](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
++   [2022 年数据科学家招聘的最佳行业和雇主](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
 
-+   [2022年5款最佳免费云笔记本](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
++   [2022 年 5 款最佳免费云笔记本](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)

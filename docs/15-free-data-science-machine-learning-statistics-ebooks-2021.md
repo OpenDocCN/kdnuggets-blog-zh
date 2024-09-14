@@ -1,12 +1,12 @@
-# 2021年15本免费数据科学、机器学习与统计学电子书
+# 2021 年 15 本免费数据科学、机器学习与统计学电子书
 
-> 原文：[https://www.kdnuggets.com/2020/12/15-free-data-science-machine-learning-statistics-ebooks-2021.html](https://www.kdnuggets.com/2020/12/15-free-data-science-machine-learning-statistics-ebooks-2021.html)
+> 原文：[`www.kdnuggets.com/2020/12/15-free-data-science-machine-learning-statistics-ebooks-2021.html`](https://www.kdnuggets.com/2020/12/15-free-data-science-machine-learning-statistics-ebooks-2021.html)
 
-[评论](#comments)
+评论
 
-在KDnuggets，我们在过去一年中为读者带来了一些免费的电子书。在其他突显这些材料的文章中，自从疫情爆发以来，我写了一系列文章，考虑到更多人可能会在家中度过更多时间，从而增加了阅读时间。当然，过去九个月的生活显然不是大家所期待的，但是对于那些能在空闲时光抽出一点时间的人，我们希望在这段困难时期我们分享的一些电子书可能会有所帮助。
+在 KDnuggets，我们在过去一年中为读者带来了一些免费的电子书。在其他突显这些材料的文章中，自从疫情爆发以来，我写了一系列文章，考虑到更多人可能会在家中度过更多时间，从而增加了阅读时间。当然，过去九个月的生活显然不是大家所期待的，但是对于那些能在空闲时光抽出一点时间的人，我们希望在这段困难时期我们分享的一些电子书可能会有所帮助。
 
-![图像](../Images/59a136278b8c7cd5b087089382fcd08b.png)
+![图像](img/59a136278b8c7cd5b087089382fcd08b.png)
 
 [图片来源](http://www.jessicascottauthor.com/why-free-books-dont-sell-books/)
 
@@ -14,45 +14,45 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-当我回顾那些我在2020年撰写过书评的书籍时，我决定通过将15本书汇总到一个地方来结束这一年。如果你最初错过了其中的一些或全部书籍，这是你赶上阅读的机会。
+当我回顾那些我在 2020 年撰写过书评的书籍时，我决定通过将 15 本书汇总到一个地方来结束这一年。如果你最初错过了其中的一些或全部书籍，这是你赶上阅读的机会。
 
-随着这一点，我们随机再次呈现15本顶级免费电子书，帮助你开启2021年，并附上了我原始书评中的书单。
+随着这一点，我们随机再次呈现 15 本顶级免费电子书，帮助你开启 2021 年，并附上了我原始书评中的书单。
 
 **[数据科学与机器学习：数学与统计方法](https://acems.org.au/data-science-machine-learning-book-available-download)**，作者：D.P. Kroese, Z.I. Botev, T. Taimre & R. Vaisman
 
-> 《数据科学与机器学习：数学与统计方法》是一本以实践为导向的教材，重点在于使用Python进行数据科学和实现机器学习模型。它很好地解释了相关理论，并在需要时介绍了必要的数学知识，从而使得这本实用书的节奏非常好。
+> 《数据科学与机器学习：数学与统计方法》是一本以实践为导向的教材，重点在于使用 Python 进行数据科学和实现机器学习模型。它很好地解释了相关理论，并在需要时介绍了必要的数学知识，从而使得这本实用书的节奏非常好。
 
-**[R文本挖掘：简洁方法](https://www.tidytextmining.com/index.html)**，作者：Julia Silge 和 David Robinson
+**[R 文本挖掘：简洁方法](https://www.tidytextmining.com/index.html)**，作者：Julia Silge 和 David Robinson
 
-> 《R的文本挖掘：一种整洁的方法》代码密集，似乎能很好地解释概念。重点在于实际应用，这与书名不谋而合，对R新手来说，似乎做得非常好。我没有跟着整本书的内容，但读了前两章，感觉得到了预期的内容。
+> 《R 的文本挖掘：一种整洁的方法》代码密集，似乎能很好地解释概念。重点在于实际应用，这与书名不谋而合，对 R 新手来说，似乎做得非常好。我没有跟着整本书的内容，但读了前两章，感觉得到了预期的内容。
 
-**[因果推断：如果](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)**，作者Miguel Hernán和Jamie Robins
+**[因果推断：如果](https://www.hsph.harvard.edu/miguel-hernan/causal-inference-book/)**，作者 Miguel Hernán 和 Jamie Robins
 
-> 因果推断是一个复杂而全面的主题，但这本书的作者尽力将他们认为最重要的基本方面压缩到约300页的文本中。由于很少有专门讲述这个主题的书籍，如果你有兴趣建立自己的概念基础，这本书可能是你的首选。
+> 因果推断是一个复杂而全面的主题，但这本书的作者尽力将他们认为最重要的基本方面压缩到约 300 页的文本中。由于很少有专门讲述这个主题的书籍，如果你有兴趣建立自己的概念基础，这本书可能是你的首选。
 
-**[使用Julia进行统计：数据科学、机器学习和人工智能的基础](https://statisticswithjulia.org/StatisticsWithJuliaDRAFT.pdf)**，作者Yoni Nazarathy和Hayden Klok
+**[使用 Julia 进行统计：数据科学、机器学习和人工智能的基础](https://statisticswithjulia.org/StatisticsWithJuliaDRAFT.pdf)**，作者 Yoni Nazarathy 和 Hayden Klok
 
 > 这本书在下一章将进入统计概念，从那时起，概念将层层递进，涉及更高级的主题，如统计推断、置信区间、假设检验、线性回归、机器学习等。
 > 
-> 这是我一直在等待的资源，它将有效地教我如何使用Julia进行数据科学，就像我一直想学的那样。我希望你和我一样，对开始你的学习之旅感到兴奋。
+> 这是我一直在等待的资源，它将有效地教我如何使用 Julia 进行数据科学，就像我一直想学的那样。我希望你和我一样，对开始你的学习之旅感到兴奋。
 
-**[数据科学基础](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf)**，作者Avrim Blum、John Hopcroft和Ravindran Kannan
+**[数据科学基础](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf)**，作者 Avrim Blum、John Hopcroft 和 Ravindran Kannan
 
 > 在许多当代书籍中，数据科学被简化为一系列编程工具，只要掌握这些工具，就能为你完成数据科学工作。似乎对与代码无关的基本概念和理论的强调较少。这本书是这种趋势的一个反例，它无疑会为你提供从事数据科学所需的理论知识，建立坚实的基础。
 
-**[理解机器学习：从理论到算法](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/index.html)**，作者Shai Shalev-Shwartz和Shai Ben-David
+**[理解机器学习：从理论到算法](https://www.cse.huji.ac.il/~shais/UnderstandingMachineLearning/index.html)**，作者 Shai Shalev-Shwartz 和 Shai Ben-David
 
 > 一旦可能的数学理论冲击消退，你会发现对从偏差-方差权衡到线性回归再到模型验证策略、模型提升、核方法、预测问题等主题的全面阐述。这种全面处理的好处在于，你的理解将超越仅仅掌握抽象直觉。
 
-**[使用Python进行自然语言处理](https://www.nltk.org/book/)**，作者Steven Bird、Ewan Klein和Edward Loper
+**[使用 Python 进行自然语言处理](https://www.nltk.org/book/)**，作者 Steven Bird、Ewan Klein 和 Edward Loper
 
 > 这本书开篇较慢——描述了自然语言处理（NLP）、Python 如何用于执行一些 NLP 编程任务、如何访问自然语言内容进行处理——然后逐步转向更大的概念，无论是概念上（NLP）还是编程上（Python）。很快，它就会涉及到分类、文本分类、信息提取以及其他通常被认为是经典 NLP 的主题。在掌握了这本书的 NLP 基础知识后，你可以继续学习更现代和前沿的技术，例如通过一些斯坦福大学的免费课程。
 
@@ -88,17 +88,17 @@
 
 > 所有这些都是在说，作者们也是研究人员和讲师，他们在传达他们的专业知识时有自己的方法。他们的方法似乎遵循了一个逻辑有序的方式，来决定读者应该学习什么以及何时学习。然而，单独的章节也可以独立阅读，因此，如果你已经理解了书中前面的内容，直接阅读关于模型推断的章节也会效果很好。
 
-**[统计学习导论：R语言应用](https://statlearning.com/ISLR%20Seventh%20Printing.pdf)**，作者：Gareth James, Daniela Witten, Trevor Hastie 和 Robert Tibshirani
+**[统计学习导论：R 语言应用](https://statlearning.com/ISLR%20Seventh%20Printing.pdf)**，作者：Gareth James, Daniela Witten, Trevor Hastie 和 Robert Tibshirani
 
-> 《统计学习导论：R语言应用》可以被视为对《统计学习要素》这本经典著作中涉及的主题的较少进阶的处理，后者由一些相同的作者编写。这两个标题之间的另一个主要区别，除了材料的深度外，是《统计学习导论》在介绍这些主题时结合了编程语言的实际实现，在这种情况下是R语言。
+> 《统计学习导论：R 语言应用》可以被视为对《统计学习要素》这本经典著作中涉及的主题的较少进阶的处理，后者由一些相同的作者编写。这两个标题之间的另一个主要区别，除了材料的深度外，是《统计学习导论》在介绍这些主题时结合了编程语言的实际实现，在这种情况下是 R 语言。
 
 **相关**：
 
-+   [2020年最佳免费数据科学电子书：更新版](/2020/09/best-free-data-science-ebooks-2020-update.html)
++   2020 年最佳免费数据科学电子书：更新版
 
-+   [5本免费统计学书籍学习数据科学](/2020/12/5-free-books-learn-statistics-data-science.html)
++   5 本免费统计学书籍学习数据科学
 
-+   [每个人都应该阅读的5本免费机器学习和深度学习电子书](/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html)
++   每个人都应该阅读的 5 本免费机器学习和深度学习电子书
 
 ### 更多相关话题
 

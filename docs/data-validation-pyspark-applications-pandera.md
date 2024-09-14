@@ -1,8 +1,8 @@
 # 使用 Pandera 进行 PySpark 应用的数据验证
 
-> 原文：[https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html](https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html)
+> 原文：[`www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html`](https://www.kdnuggets.com/2023/08/data-validation-pyspark-applications-pandera.html)
 
-![使用 Pandera 进行 PySpark 应用的数据验证](../Images/dcef72aa649e62b1541405e7fd23c7e0.png)
+![使用 Pandera 进行 PySpark 应用的数据验证](img/dcef72aa649e62b1541405e7fd23c7e0.png)
 
 照片由 [Jakub Skafiriak](https://unsplash.com/@jakubskafiriak?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/photos/AljDaiCbCVY?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 本文简要介绍了 Pandera 的关键特性，然后深入说明了如何将 Pandera 数据验证集成到使用本地 PySpark SQL 的数据处理工作流中，自最新版本 [(Pandera 0.16.0](https://github.com/unionai-oss/pandera/releases/tag/v0.16.0)) 起。
 
-Pandera 设计用于与其他流行的 Python 库如 pandas、pyspark.pandas、Dask 等一起工作。这使得将数据验证融入现有的数据处理工作流程变得容易。直到最近，Pandera 还缺乏对[PySpark SQL](https://spark.apache.org/docs/latest/api/python/)的原生支持，但为了弥补这一空白，[QuantumBlack, AI by McKinsey](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients)的团队包括[Ismail Negm-PARI](https://github.com/mkinegm)、[Neeraj Malhotra](https://github.com/NeerajMalhotra-QB)、[Jaskaran Singh Sidana](https://github.com/jaskaransinghsidana)、[Kasper Janehag](https://github.com/kasperjanehag)、[Oleksandr Lazarchuk](https://github.com/oleksandr-lazarchuk)及Pandera 创始人[ Niels Bantilan](https://github.com/cosmicBboy)开发了对 PySpark SQL 的原生支持，并将其贡献给了 Pandera。本文的文字也是由该团队准备的，以下是他们的描述。
+Pandera 设计用于与其他流行的 Python 库如 pandas、pyspark.pandas、Dask 等一起工作。这使得将数据验证融入现有的数据处理工作流程变得容易。直到最近，Pandera 还缺乏对[PySpark SQL](https://spark.apache.org/docs/latest/api/python/)的原生支持，但为了弥补这一空白，[QuantumBlack, AI by McKinsey](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients)的团队包括[Ismail Negm-PARI](https://github.com/mkinegm)、[Neeraj Malhotra](https://github.com/NeerajMalhotra-QB)、[Jaskaran Singh Sidana](https://github.com/jaskaransinghsidana)、[Kasper Janehag](https://github.com/kasperjanehag)、[Oleksandr Lazarchuk](https://github.com/oleksandr-lazarchuk)及 Pandera 创始人[ Niels Bantilan](https://github.com/cosmicBboy)开发了对 PySpark SQL 的原生支持，并将其贡献给了 Pandera。本文的文字也是由该团队准备的，以下是他们的描述。
 
 # Pandera 的关键特性
 
@@ -100,9 +100,9 @@ schema = pa.DataFrameSchema({
 
 +   PySpark 性能优化。
 
-首先，让我们深入探讨一致性的问题，因为从用户的角度来看，他们需要无论选择什么框架，都能有一套一致的API和接口。由于Pandera提供了多个框架选择，因此在PySpark SQL API中拥有一致的用户体验变得尤为重要。
+首先，让我们深入探讨一致性的问题，因为从用户的角度来看，他们需要无论选择什么框架，都能有一套一致的 API 和接口。由于 Pandera 提供了多个框架选择，因此在 PySpark SQL API 中拥有一致的用户体验变得尤为重要。
 
-有了这一点，我们可以使用PySpark SQL来定义Pandera模式，如下所示：
+有了这一点，我们可以使用 PySpark SQL 来定义 Pandera 模式，如下所示：
 
 ```py
 from pyspark.sql import DataFrame, SparkSession
@@ -138,7 +138,7 @@ spark_schema = T.StructType(
 df_fail = spark_df(spark, data_fail, spark_schema)
 ```
 
-在上述代码中，`PanderaSchema`定义了传入的pyspark数据框的模式。它有5个字段，具有不同的`dtypes`，并对`id`和`product_name`字段进行了数据检查的强制执行。
+在上述代码中，`PanderaSchema`定义了传入的 pyspark 数据框的模式。它有 5 个字段，具有不同的`dtypes`，并对`id`和`product_name`字段进行了数据检查的强制执行。
 
 ```py
 class PanderaSchema(DataFrameModel):
@@ -150,7 +150,7 @@ class PanderaSchema(DataFrameModel):
        meta: T.MapType(T.StringType(), T.StringType()) = Field()
 ```
 
-接下来，我们制作了一个虚拟数据并强制执行` spark_schema`*中定义的本地PySpark SQL模式*。
+接下来，我们制作了一个虚拟数据并强制执行` spark_schema`*中定义的本地 PySpark SQL 模式*。
 
 ```py
 spark_schema = T.StructType(
@@ -183,7 +183,7 @@ df_fail.show()
    +---+-------+--------+--------------------+--------------------+
 ```
 
-接下来，我们可以调用Pandera的validate函数来执行模式和数据级验证，如下所示：
+接下来，我们可以调用 Pandera 的 validate 函数来执行模式和数据级验证，如下所示：
 
 ```py
 df_out = PanderaSchema.validate(check_obj=df)
@@ -191,21 +191,21 @@ df_out = PanderaSchema.validate(check_obj=df)
 
 我们将很快探索`df_out`的内容。
 
-# PySpark性能优化
+# PySpark 性能优化
 
-我们的贡献专门针对在处理PySpark数据框时的最佳性能进行设计，这对于处理大型数据集以应对PySpark分布式计算环境的独特挑战至关重要。
+我们的贡献专门针对在处理 PySpark 数据框时的最佳性能进行设计，这对于处理大型数据集以应对 PySpark 分布式计算环境的独特挑战至关重要。
 
-Pandera利用PySpark的分布式计算架构来高效处理大型数据集，同时保持数据的一致性和准确性。我们重写了Pandera的自定义验证函数以提高PySpark性能，使得大型数据集的验证更快、更高效，同时降低了在高负载情况下数据错误和不一致的风险。
+Pandera 利用 PySpark 的分布式计算架构来高效处理大型数据集，同时保持数据的一致性和准确性。我们重写了 Pandera 的自定义验证函数以提高 PySpark 性能，使得大型数据集的验证更快、更高效，同时降低了在高负载情况下数据错误和不一致的风险。
 
 ## 综合错误报告
 
-我们在Pandera中新增了生成详细错误报告的功能，这些报告以Python字典对象的形式提供。这些报告可以通过validate函数返回的数据框访问，提供了所有模式和数据级验证的全面摘要，依据用户的配置。
+我们在 Pandera 中新增了生成详细错误报告的功能，这些报告以 Python 字典对象的形式提供。这些报告可以通过 validate 函数返回的数据框访问，提供了所有模式和数据级验证的全面摘要，依据用户的配置。
 
 这一功能对开发人员来说非常有价值，可以快速识别和解决数据相关问题。通过使用生成的错误报告，团队可以编制应用程序中的模式和数据问题的全面列表，从而高效而精准地优先解决问题。
 
-需要注意的是，这一功能目前仅对PySpark SQL可用，为用户在处理Pandera中的错误报告时提供了增强的体验。
+需要注意的是，这一功能目前仅对 PySpark SQL 可用，为用户在处理 Pandera 中的错误报告时提供了增强的体验。
 
-在上述代码示例中，请记住我们对spark数据框调用了`validate()`：
+在上述代码示例中，请记住我们对 spark 数据框调用了`validate()`：
 
 ```py
 df_out = PanderaSchema.validate(check_obj=df)
@@ -256,7 +256,7 @@ print(df_out.pandera.errors)
 }
 ```
 
-如上所示，错误报告以两级汇总的形式存储在一个Python字典对象中，以便下游应用程序轻松使用，比如使用Grafana等工具对错误的时间序列进行可视化：
+如上所示，错误报告以两级汇总的形式存储在一个 Python 字典对象中，以便下游应用程序轻松使用，比如使用 Grafana 等工具对错误的时间序列进行可视化：
 
 1.  验证类型 = `SCHEMA` 或 `DATA`
 
@@ -302,11 +302,11 @@ export PANDERA_VALIDATION_DEPTH=SCHEMA_ONLY
 
 默认情况下，验证是启用的，深度设置为`SCHEMA_AND_DATA`，可以根据用例需要更改为`SCHEMA_ONLY`或`DATA_ONLY`。
 
-目前，这一功能仅适用于从版本0.16.0开始的PySpark SQL，因为这是我们贡献的新概念。
+目前，这一功能仅适用于从版本 0.16.0 开始的 PySpark SQL，因为这是我们贡献的新概念。
 
 ## 列和数据框级别的元数据
 
-我们的团队为Pandera添加了一个新功能，允许用户在`Field`和`Schema / Model`级别存储额外的元数据。此功能旨在让用户在其模式定义中嵌入上下文信息，以供其他应用程序使用。
+我们的团队为 Pandera 添加了一个新功能，允许用户在`Field`和`Schema / Model`级别存储额外的元数据。此功能旨在让用户在其模式定义中嵌入上下文信息，以供其他应用程序使用。
 
 例如，通过存储关于特定列的详细信息，如数据类型、格式或单位，开发人员可以确保下游应用程序能够正确解释和使用数据。类似地，通过存储关于某个模式中哪些列对于特定用例是必要的信息，开发人员可以优化数据处理管道，降低存储成本，并提高查询性能。
 
@@ -351,15 +351,15 @@ The output will be dictionary object as follows:
 }
 ```
 
-当前，这一功能在0.16.0中是一个新概念，并已添加到PySpark SQL和Pandas中。
+当前，这一功能在 0.16.0 中是一个新概念，并已添加到 PySpark SQL 和 Pandas 中。
 
 # 摘要
 
-我们引入了几个新功能和概念，包括一个开关，允许团队在生产中禁用验证而无需更改代码，对Pandera验证流程的精细控制，以及在列和数据框级别存储额外元数据的能力。您可以在[更新的Pandera文档](https://pandera.readthedocs.io/en/stable/pyspark_sql.html)中找到更多关于版本0.16.0的详细信息。
+我们引入了几个新功能和概念，包括一个开关，允许团队在生产中禁用验证而无需更改代码，对 Pandera 验证流程的精细控制，以及在列和数据框级别存储额外元数据的能力。您可以在[更新的 Pandera 文档](https://pandera.readthedocs.io/en/stable/pyspark_sql.html)中找到更多关于版本 0.16.0 的详细信息。
 
-正如Pandera创始人Niels Bantilan在[关于Pandera 0.16.0发布的近期博客文章中所解释的：](https://www.union.ai/blog-post/pandera-0-16-going-beyond-pandas-data-validation)
+正如 Pandera 创始人 Niels Bantilan 在[关于 Pandera 0.16.0 发布的近期博客文章中所解释的：](https://www.union.ai/blog-post/pandera-0-16-going-beyond-pandas-data-validation)
 
-> *为了证明Pandera在新的模式规范和后端API中的可扩展性，我们与* [*QuantumBlack*](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients) *团队合作，实现了一个模式和后端，用于* [*Pyspark SQL*](https://spark.apache.org/docs/3.3.1/api/python/index.html#:~:text=PySpark%20is%20an%20interface%20for,data%20in%20a%20distributed%20environment.) *…并在几个月内完成了一个MVP！*
+> *为了证明 Pandera 在新的模式规范和后端 API 中的可扩展性，我们与* [*QuantumBlack*](https://www.mckinsey.com/capabilities/quantumblack/how-we-help-clients) *团队合作，实现了一个模式和后端，用于* [*Pyspark SQL*](https://spark.apache.org/docs/3.3.1/api/python/index.html#:~:text=PySpark%20is%20an%20interface%20for,data%20in%20a%20distributed%20environment.) *…并在几个月内完成了一个 MVP！*
 
 最近对 [Pandera](https://github.com/unionai-oss/pandera/pull/1243) 开源代码库的贡献将惠及使用 PySpark 和其他大数据技术的团队。
 

@@ -1,12 +1,12 @@
 # 15 个数据科学家在 Python 中常犯的错误（以及如何修复它们）
 
-> 原文：[https://www.kdnuggets.com/2021/03/15-common-mistakes-python.html](https://www.kdnuggets.com/2021/03/15-common-mistakes-python.html)
+> 原文：[`www.kdnuggets.com/2021/03/15-common-mistakes-python.html`](https://www.kdnuggets.com/2021/03/15-common-mistakes-python.html)
 
-[评论](#comments)
+评论
 
 **由 [Gerold Csendes](https://www.linkedin.com/in/gcsendes/)，EPAM Systems 的数据科学家**。
 
-![](../Images/ec752ba42e144fea772521e9af7c7416.png)
+![](img/ec752ba42e144fea772521e9af7c7416.png)
 
 *照片由 [Joshua Aragon](https://unsplash.com/@goshua13?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -22,23 +22,23 @@
 
 Notebook 在教育用途和完成一些快速且粗糙的工作时确实很有用，但它在作为一个良好的 IDE 时却表现不佳。一个好的 IDE 是你处理数据科学任务时的真正武器，并且可以大大提高你的生产力。很多聪明的人都在指出 Notebook 的不足之处。我认为 Joel Grus 的 [演讲](https://www.youtube.com/watch?v=7jiPeIFXb6U) 是最好的，而且非常有趣。
 
-别误解我的意思，笔记本对于实验是很好的，你可以轻松地向同事展示结果。然而，它们非常容易出错，当涉及到长期的、协作的和可部署的项目时，你最好寻找一个真正的IDE，比如VScode、Pycharm、Spyder等。我确实偶尔使用笔记本，但我建立了一个心理模型：只有在项目不超过一天的情况下，我才会使用笔记本。
+别误解我的意思，笔记本对于实验是很好的，你可以轻松地向同事展示结果。然而，它们非常容易出错，当涉及到长期的、协作的和可部署的项目时，你最好寻找一个真正的 IDE，比如 VScode、Pycharm、Spyder 等。我确实偶尔使用笔记本，但我建立了一个心理模型：只有在项目不超过一天的情况下，我才会使用笔记本。
 
 ### 3\. 你没有组织你的代码
 
 数据科学家有一个习惯，就是将所有项目文件堆放在一个目录中。这是一种不好的做法。看看下面的图，想象一下你需要接手同事的一个项目。哪种项目结构会让你在几个小时内尝试弄清楚发生了什么后陷入生存危机？当然，左侧的结构是你的首选。 [Cookiecutter](https://drivendata.github.io/cookiecutter-data-science/) 是一个促进数据科学标准化项目结构的出色倡议。确保查看一下。
 
-![](../Images/71a013d2741c042d3691b309182aa879.png)
+![](img/71a013d2741c042d3691b309182aa879.png)
 
 *良好与不良的项目结构 — 作者截图。*
 
 ### 4\. 绝对路径而非相对路径
 
-是否曾遇到过代码中的评论“pls fix your path”？这样的评论暗示了糟糕的代码设计。修复这个问题包括两个步骤。1) 与你的同事（也许是上述建议的那个）分享项目结构 2) 将你的IDE根目录/工作目录设置为项目根目录，通常是项目中的最外层目录。后者有时可能不那么简单，但绝对值得付出努力，因为你的同事将能够在不修改代码的情况下运行它。
+是否曾遇到过代码中的评论“pls fix your path”？这样的评论暗示了糟糕的代码设计。修复这个问题包括两个步骤。1) 与你的同事（也许是上述建议的那个）分享项目结构 2) 将你的 IDE 根目录/工作目录设置为项目根目录，通常是项目中的最外层目录。后者有时可能不那么简单，但绝对值得付出努力，因为你的同事将能够在不修改代码的情况下运行它。
 
 ### 5\. 魔法数字
 
-魔法数字是代码中没有上下文的数字。使用魔法数字可能会导致很难追踪的错误。下面的要点清楚地显示了，通过简单地在乘法中使用未赋值的数字，你会失去为什么会发生这种情况的上下文，并且如果你后来需要更改它，会感到相当有压力。因此，建议在Python中使用大写的命名常量。你实际上不必使用大写，这只是一个约定，但区分“常量”和“普通”变量是个好主意。
+魔法数字是代码中没有上下文的数字。使用魔法数字可能会导致很难追踪的错误。下面的要点清楚地显示了，通过简单地在乘法中使用未赋值的数字，你会失去为什么会发生这种情况的上下文，并且如果你后来需要更改它，会感到相当有压力。因此，建议在 Python 中使用大写的命名常量。你实际上不必使用大写，这只是一个约定，但区分“常量”和“普通”变量是个好主意。
 
 ### 6\. 不处理警告
 
@@ -50,7 +50,7 @@ Notebook 在教育用途和完成一些快速且粗糙的工作时确实很有�
 
 此外，带有类型注解的代码可以静态（在不实际运行代码的情况下）检查错误。下面的截图显示了前两个参数没有很好地指定。静态检查你的代码是运行前进行预检查的一个好方法。
 
-![](../Images/265435f278090cebd9ed4a563ab16e6e.png)
+![](img/265435f278090cebd9ed4a563ab16e6e.png)
 
 *作者截图。*
 
@@ -80,7 +80,7 @@ Notebook 在教育用途和完成一些快速且粗糙的工作时确实很有�
 
 任何好的 Python IDE 都可以通过 linter 扩展。下面的图片演示了 linter 在实践中的工作原理。它们指出代码质量问题，如果这对你来说仍然不清楚，你可以查看括号中指示的具体 PEP 索引。如果你想了解有哪些可用的 linter，那么一如既往，[realpython.com](https://realpython.com/python-code-quality/#linters) 是一个关于 Python 的好资源。
 
-![](../Images/b91396aada9f5194acc8e4673d24152b.png)
+![](img/b91396aada9f5194acc8e4673d24152b.png)
 
 *由作者截屏。*
 
@@ -108,24 +108,24 @@ Notebook 在教育用途和完成一些快速且粗糙的工作时确实很有�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
 ### 更多相关话题
 
-+   [10种最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 种最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
-+   [5个常见的数据科学错误及其避免方法](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
++   [5 个常见的数据科学错误及其避免方法](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
 
-+   [5个常见的Python陷阱（及其避免方法）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
++   [5 个常见的 Python 陷阱（及其避免方法）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
 
-+   [避免这5个每个AI新手都会犯的常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个每个 AI 新手都会犯的常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
 
 +   [新手数据科学家应避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-+   [2022年数据科学家的收入有多少？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)
++   [2022 年数据科学家的收入有多少？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)

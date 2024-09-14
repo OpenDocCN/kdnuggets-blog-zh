@@ -1,6 +1,6 @@
 # ModelDB 2.0 已经到来！
 
-> 原文：[https://www.kdnuggets.com/2020/03/verta-modeldb-20.html](https://www.kdnuggets.com/2020/03/verta-modeldb-20.html)
+> 原文：[`www.kdnuggets.com/2020/03/verta-modeldb-20.html`](https://www.kdnuggets.com/2020/03/verta-modeldb-20.html)
 
 赞助帖子。
 
@@ -26,7 +26,7 @@
 
 当我们最初创建 ModelDB 1.0 时，我们仅追踪有关模型的元数据。然而，与许多组织（包括受监管行业及其他领域）合作，将其模型投入实际使用后，我们发现这还不够。尽管元数据非常详尽，但它不能让你回到模型的特定状态。比如，仅靠元数据，你无法回到三个月前模型创建时的确切状态。因此，我们基于 Git 的灵感，构建了新的模型版本管理解决方案，以管理创建模型的所有要素：**数据集、代码、环境和配置**。
 
-![模型版本管理 (1)](../Images/405f1dfc69bdd81ca3887bf6dab580b2.png)
+![模型版本管理 (1)](img/405f1dfc69bdd81ca3887bf6dab580b2.png)
 
 通过新的版本管理功能，你可以：
 
@@ -38,7 +38,7 @@
 
 +   **提交、回滚、分支、比较和合并** 仓库中的任何更改，就像你对 Git 一样。专门的工具可以操作模型的组成部分，通过嵌入应用知识而不是仅仅假设所有内容都是文本，从而使体验更加顺畅。享受 GitOps 的所有好处，而无需直接操作 Git，获得真正的 MLOps 体验！
 
-![repo](../Images/b917cc19e6a8bf803a344fdbe7419eb5.png)
+![repo](img/b917cc19e6a8bf803a344fdbe7419eb5.png)
 
 我们将发布一系列关于版本创建幕后工作的博客文章。 [订阅](https://www.verta.ai/newsletter)我们的新闻通讯，以便不错过它们！
 
@@ -46,7 +46,7 @@
 
 ModelDB 1.0 能够存储模型信息，但不支持身份验证和授权。这些都是确保数据安全的关键功能，尤其是对于企业。因此，在 ModelDB 2.0 中，我们现在终于添加了必要的接口，使你可以准确知道谁做了什么以及何时做的，确保只有授权用户可以访问。这也将使用户能够为不同团队隔离实验集。
 
-![Picture3](../Images/699dba149fd3f2d62cbba0496adcd9b0.png)
+![Picture3](img/699dba149fd3f2d62cbba0496adcd9b0.png)
 
 新版本使你能够：
 
@@ -62,7 +62,7 @@ ModelDB 1.0 能够存储模型信息，但不支持身份验证和授权。这�
 
 ModelDB 中一个用户最喜欢的功能是网页体验，它允许他们全面查看他们所做的实验。在这个新版本中，我们更加注重通过我们的用户界面构建出色的用户体验，以帮助我们的用户更轻松地浏览他们的模型。
 
-![projects](../Images/0ef0ad371b4a9c6938744f6933b90af5.png)
+![projects](img/0ef0ad371b4a9c6938744f6933b90af5.png)
 
 使用 ModelDB 2.0，你可以：
 
@@ -76,7 +76,7 @@ ModelDB 中一个用户最喜欢的功能是网页体验，它允许他们全面
 
 +   **比较不同版本** 的模型，以了解哪些发生了变化以及如何影响质量。只需存储开发过程中所有的信息，并了解项目在多个迭代中的演变。
 
-![charts](../Images/b5845cd4137a87a6a3757777350244b4.png)
+![charts](img/b5845cd4137a87a6a3757777350244b4.png)
 
 如果你想更好地利用你和你的团队所做的所有建模工作，报名参加我们的 [即将到来的网络研讨会](https://info.verta.ai/modeldb-v2-walkthrough?__hstc=53819695.6c42b0f6aa1ebe7e32e83908771f1ec2.1584576927510.1584576927510.1584576927510.1&__hssc=53819695.1.1584576927511&__hsfp=2979428226)。我们将展示如何通过让你专注于建模来提高建模速度！
 
@@ -84,44 +84,44 @@ ModelDB 中一个用户最喜欢的功能是网页体验，它允许他们全面
 
 我们提供了 [ModelDB 2.0](https://github.com/VertaAI/modeldb) 的多种格式：
 
-+   Docker容器
++   Docker 容器
 
-+   Helm模板
++   Helm 模板
 
 +   AMIs
 
 +   随你所想 :)
 
-我们希望确保每个人都能迈出通向敏捷和稳健建模的第一步！查看我们的 [Git仓库](https://github.com/VertaAI/modeldb) 或注册我们的 [SaaS服务](https://verta.ai/)。我们很期待听到你的反馈，欢迎加入我们的 [Slack](http://bit.ly/modeldb-mlops)，讨论如何继续改进ML版本控制。
+我们希望确保每个人都能迈出通向敏捷和稳健建模的第一步！查看我们的 [Git 仓库](https://github.com/VertaAI/modeldb) 或注册我们的 [SaaS 服务](https://verta.ai/)。我们很期待听到你的反馈，欢迎加入我们的 [Slack](http://bit.ly/modeldb-mlops)，讨论如何继续改进 ML 版本控制。
 
 附言：我们正在招聘。如果这个领域让你兴奋，请告诉我们！
 
-### 关于Verta：
+### 关于 Verta：
 
-[Verta.ai](https://verta.ai/) 构建了一个完整的机器学习模型生命周期的软件，涵盖了从模型版本控制到模型部署和监控，并通过协作功能将所有环节紧密联系在一起，让你的AI和ML团队能够快速推进而不出错。我们是MIT CSAIL的一个衍生公司，开发了 [ModelDB](https://github.com/mitdbg/modeldb)，这是第一个开源模型管理系统之一。
+[Verta.ai](https://verta.ai/) 构建了一个完整的机器学习模型生命周期的软件，涵盖了从模型版本控制到模型部署和监控，并通过协作功能将所有环节紧密联系在一起，让你的 AI 和 ML 团队能够快速推进而不出错。我们是 MIT CSAIL 的一个衍生公司，开发了 [ModelDB](https://github.com/mitdbg/modeldb)，这是第一个开源模型管理系统之一。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
 ### 了解更多相关话题
 
-+   [这些是我用来每月赚取$10,000的AI工具和技能](https://www.kdnuggets.com/2023/07/ai-tools-along-skills-make-10000-monthly-bs.html)
++   [这些是我用来每月赚取$10,000 的 AI 工具和技能](https://www.kdnuggets.com/2023/07/ai-tools-along-skills-make-10000-monthly-bs.html)
 
 +   [无法找到数据科学工作？这就是原因](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 精通机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 精通机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
 +   [数据科学被高估了，这就是原因](https://www.kdnuggets.com/2022/06/data-science-overrated.html)
 
 +   [人工智能不是来取代我们的](https://www.kdnuggets.com/2023/02/ai-replace-us.html)
 
-+   [我每天使用ChatGPT 5个月。这些是一些隐藏的宝石…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
++   [我每天使用 ChatGPT 5 个月。这些是一些隐藏的宝石…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)

@@ -1,12 +1,12 @@
 # 初级数据科学家和高级数据科学家之间的无形差异
 
-> 原文：[https://www.kdnuggets.com/2020/10/unspoken-difference-junior-senior-data-scientists.html](https://www.kdnuggets.com/2020/10/unspoken-difference-junior-senior-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/10/unspoken-difference-junior-senior-data-scientists.html`](https://www.kdnuggets.com/2020/10/unspoken-difference-junior-senior-data-scientists.html)
 
-[评论](#comments)
+评论
 
 **[Mısra Turp](https://www.linkedin.com/in/misraturp/)，数据科学家**
 
-![图示](../Images/ae5a98016f27cf8519e7208a5eb40658.png)
+![图示](img/ae5a98016f27cf8519e7208a5eb40658.png)
 
 图片由 [Christina @ wocintechchat.com](https://unsplash.com/@wocintechchat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://www.soyouwanttobeadatascientist.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -64,7 +64,7 @@
 
 你是项目的领导者。你不仅参与决策过程，还主导它。项目的成功是你的责任，在许多情况下，团队成员的幸福也是如此。在领导项目的同时，你还需要与外界沟通。向业务部门报告是你的职责。在项目中，你需要牢记非技术性的限制，并确保将技术团队引导到正确的方向。你必须对上下文和领域有整体和完整的理解。保持目标并交付成果是你的责任。
 
-当然，并不是每位数据科学家的职业生涯在世界上每家公司中都是这样的。你可能是一个自由职业的数据科学家，或者你可能创办了自己的公司并成为CTO，那么你的职业路径会显得非常不同。但一般来说，根据我与数据科学社区人士交流所学到的，这是一个良好的数据科学家职业路径的总体代表。
+当然，并不是每位数据科学家的职业生涯在世界上每家公司中都是这样的。你可能是一个自由职业的数据科学家，或者你可能创办了自己的公司并成为 CTO，那么你的职业路径会显得非常不同。但一般来说，根据我与数据科学社区人士交流所学到的，这是一个良好的数据科学家职业路径的总体代表。
 
 我们今天探讨这个问题的原因是，每家公司都有自己的结构、规则和路径，你需要知道在有选择时选择哪个方向。有些会随着你变得更资深而倾向于更多的技术工作，有些则倾向于更多的管理和行政工作。你可以利用本文中的解释作为基准，确定你希望在职业旅程的高级阶段处于何种位置，并据此调整你的求职方向。当然，计划和偏好会随着时间变化，但对自己想要的目标有个大致的想法总比盲目进入要好。
 
@@ -72,7 +72,7 @@
 
 查看[你想成为数据科学家？](https://www.soyouwanttobeadatascientist.com/)获取专门为忙碌的职业人士准备的文章和免费资源，帮助他们将职业转向数据科学。
 
-**个人简介：[Mısra Turp](https://www.linkedin.com/in/misraturp/)**：我白天是数据科学家，晚上是在线创作者。目前我在荷兰阿姆斯特丹的制药科技公司myTomorrows工作。在此之前，我在IBM担任数据科学家。
+**个人简介：[Mısra Turp](https://www.linkedin.com/in/misraturp/)**：我白天是数据科学家，晚上是在线创作者。目前我在荷兰阿姆斯特丹的制药科技公司 myTomorrows 工作。在此之前，我在 IBM 担任数据科学家。
 
 除了我的数据科学工作，我喜欢教人们我所知道的。我总是收到很多关于我的职业生涯和数据科学的一般性问题，这些问题来自那些希望达到我现在位置的人。因此，我创建了**[你想成为数据科学家？](https://www.soyouwanttobeadatascientist.com/)**，在那里我通过文章分享我的知识和经验，并通过播客分享我的人脉。
 
@@ -82,9 +82,9 @@
 
 **相关：**
 
-+   [作为数据科学家的6个月学到的6个经验教训](/2020/10/6-lessons-6-months-data-scientist.html)
++   作为数据科学家的 6 个月学到的 6 个经验教训
 
-+   [我如何在8个月内提升我的数据科学技能](/2020/10/level-up-data-science-skills-8-months.html)
++   我如何在 8 个月内提升我的数据科学技能
 
 +   [我是一名数据科学家，不仅仅是处理数据的小手](https://www.soyouwanttobeadatascientist.com/post/the-unspoken-difference-between-junior-and-senior-data-scientists)
 
@@ -98,6 +98,6 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

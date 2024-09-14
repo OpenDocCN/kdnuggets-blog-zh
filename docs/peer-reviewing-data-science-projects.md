@@ -1,8 +1,8 @@
 # 同行评审数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2020/04/peer-reviewing-data-science-projects.html](https://www.kdnuggets.com/2020/04/peer-reviewing-data-science-projects.html)
+> 原文：[`www.kdnuggets.com/2020/04/peer-reviewing-data-science-projects.html`](https://www.kdnuggets.com/2020/04/peer-reviewing-data-science-projects.html)
 
-[评论](#comments)
+评论
 
 **作者：[Shay Palachy](http://www.shaypalachy.com/)，数据科学顾问**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 这个框架也基于我作为首席数据科学家、团队领导的经验，以及作为 [独立顾问](http://www.shaypalachy.com/) 目睹了我咨询过的各种公司遵循的工作模式。我还依赖于许多领导团队或数据科学家小组的朋友们的经验。
 
-![](../Images/3f279370f61b954f98ef2f4879dcea0f.png)
+![](img/3f279370f61b954f98ef2f4879dcea0f.png)
 
 *图 1：数据科学项目流程（来源：作者）。*
 
@@ -50,9 +50,9 @@
 
 为了帮助你记忆，我们称“研究阶段”为在数据探索和文献回顾之间进行迭代往返的过程（可以包括审查现有代码和实现）。这一阶段还包括描绘可能的方法论方法的空间，以框定和解决当前问题，并形成我们对前进最佳方式的推荐，同时列出每个选择固有的优缺点。
 
-![](../Images/2097efaf3047ffcd2163e4f9cb5d647d.png)
+![](img/2097efaf3047ffcd2163e4f9cb5d647d.png)
 
-*图2：研究阶段的三项检查（来源：作者）。*
+*图 2：研究阶段的三项检查（来源：作者）。*
 
 请注意，在这一阶段进行三种类型的检查以验证自然影响力选择的方法：
 
@@ -60,11 +60,11 @@
 
 1.  **研究审查**，同行帮助数据科学家验证他的过程和建议。我们将在稍后深入探讨。
 
-1.  **范围和KPI有效性检查**，与负责产品的人一起进行，以确保推荐的方法仍在项目范围内，并且看起来能够满足项目的KPI。
+1.  **范围和 KPI 有效性检查**，与负责产品的人一起进行，以确保推荐的方法仍在项目范围内，并且看起来能够满足项目的 KPI。
 
 **动机**
 
-我认为数据科学家对项目研究阶段进行同行评审的主要动机是防止他们在项目的早期阶段选择错误的方法或方向。这些错误——在 [DS工作流程](https://towardsdatascience.com/data-science-project-flow-for-startups-282a93d4508d?source=friends_link&sk=7c29bb9683e4c3564d92d89d31a666d1) 中称为 *方法失败*——是 *非常* 昂贵的，并且会阻碍项目在其余生命周期中的进展。
+我认为数据科学家对项目研究阶段进行同行评审的主要动机是防止他们在项目的早期阶段选择错误的方法或方向。这些错误——在 [DS 工作流程](https://towardsdatascience.com/data-science-project-flow-for-startups-282a93d4508d?source=friends_link&sk=7c29bb9683e4c3564d92d89d31a666d1) 中称为 *方法失败*——是 *非常* 昂贵的，并且会阻碍项目在其余生命周期中的进展。
 
 如果我们幸运的话，我们在经过几个模型开发迭代后发现方法失败，这会浪费宝贵的数据科学家工作时间。这种情况是指方法失败导致使用我们选择的指标进行跟踪和优化时性能下降。
 
@@ -84,7 +84,7 @@
 
 1.  被评审的数据科学家准备一个关于他所经历的研究过程的演示（不一定是幻灯片）。
 
-1.  被评审的数据科学家与评审员安排了一个长时间的会议（至少60分钟；上次我们花了两个小时）。
+1.  被评审的数据科学家与评审员安排了一个长时间的会议（至少 60 分钟；上次我们花了两个小时）。
 
 1.  评审员在会议前检查清单。
 
@@ -96,7 +96,7 @@
 
 1.  初步的指导方针和关键绩效指标（KPIs）。
 
-    *在许多情况下，这将是评审数据科学家第一次看到产品需求转化为技术KPIs的过程，这是一种很好的机会来暴露这一点接受同行审查。覆盖问题特征和限制。*
+    *在许多情况下，这将是评审数据科学家第一次看到产品需求转化为技术 KPIs 的过程，这是一种很好的机会来暴露这一点接受同行审查。覆盖问题特征和限制。*
 
 1.  做出的假设。
 
@@ -120,7 +120,7 @@
 
 最后，这里是审查会议的建议结构：
 
-1.  *待审查的DS*: 研究阶段演示
+1.  *待审查的 DS*: 研究阶段演示
 
 1.  *评审者*: 一般反馈
 
@@ -162,7 +162,7 @@
 
 +   生成是如何完成的？样本是如何选择的？是否进行了更新？
 
-    *例如，上个月10%的数据是从现有五个客户中的每一个均匀采样的。*
+    *例如，上个月 10%的数据是从现有五个客户中的每一个均匀采样的。*
 
 +   这引入了什么噪声、采样偏差和缺失数据？
 
@@ -244,21 +244,21 @@
 
 对于基于优化的监督学习方法：
 
-+   在拟合模型参数时可以使用哪些损失函数？它们与项目KPIs的关系如何？
++   在拟合模型参数时可以使用哪些损失函数？它们与项目 KPIs 的关系如何？
 
-+   可以使用哪些指标进行模型选择/超参数优化？它们与项目KPIs的关系如何？
++   可以使用哪些指标进行模型选择/超参数优化？它们与项目 KPIs 的关系如何？
 
-+   应该添加哪些硬性约束以反映KPIs？
++   应该添加哪些硬性约束以反映 KPIs？
 
 对于无监督学习方法：
 
 +   该方法优化了什么指标？
 
-+   这与KPIs有何关联？
++   这与 KPIs 有何关联？
 
     *例如，最大化平均词向量的可分离性与寻找一组捕捉不同意见的文章的近似效果如何？*
 
-+   有哪些边缘案例满足指标但不符合KPI？
++   有哪些边缘案例满足指标但不符合 KPI？
 
 对于无监督表示学习：
 
@@ -288,9 +288,9 @@
 
 +   一般模型是否可以分解为每个领域的模型？可以识别和利用这些模型的每个领域相关的内部组件吗？
 
-![](../Images/4aaea8d7562722a8e013a3a1abb478c5.png)
+![](img/4aaea8d7562722a8e013a3a1abb478c5.png)
 
-*图3：模型的可组合性可能是一个要求，并且有不同的形式（来源：作者）。*
+*图 3：模型的可组合性可能是一个要求，并且有不同的形式（来源：作者）。*
 
 > ***示例：*** 假设我们正在开发一个主题动态播放列表生成系统，作为音乐流媒体服务的一部分。这意味着我们想自动生成和更新围绕“新独立”、“英国新浪潮”、“女性主义音乐”或“俗气情歌”等主题的播放列表。为了增加复杂性，我们可能还希望允许主题组合的播放列表，例如“女性主义新浪潮”或“新忧郁独立”。或者，也许我们希望能够为每个听众个性化每个播放列表。最终，如果我们有一个为主题播放列表排名歌曲的模型和另一个通过特定用户喜欢的可能性排名歌曲的个性化模型，我们可能希望能够结合这两个模型的结果。*
 > 
@@ -344,11 +344,11 @@
 
 你可以把整个过程看作是一个大的迭代——无论检查了多少种方法——但我更倾向于将其视为几个迭代，每个迭代专注于单一方法。这些迭代要么并行进行，要么按研究阶段末尾概述的排名顺序进行，在这种情况下，方法失败——即模型子性能估计由于当前方法与问题的不匹配或基本不适用——将导致对下一个最佳方法的模型开发迭代。
 
-![](../Images/732b1d34b41a104f768603b97e3116f0.png)
+![](img/732b1d34b41a104f768603b97e3116f0.png)
 
-*图4：模型开发阶段的两个检查点（来源：作者）。*
+*图 4：模型开发阶段的两个检查点（来源：作者）。*
 
-与所有其他阶段类似，最终检查点是与负责的产品经理进行联合讨论，以验证即将部署的模型是否满足项目KPI。然而，在此之前，还需要由同事进行另一次审查。
+与所有其他阶段类似，最终检查点是与负责的产品经理进行联合讨论，以验证即将部署的模型是否满足项目 KPI。然而，在此之前，还需要由同事进行另一次审查。
 
 **动机与目标**
 
@@ -362,7 +362,7 @@
 
 1.  被评审的数据科学家准备模型开发过程的演示（不一定是幻灯片）。
 
-1.  被评审的数据科学家安排一个详细的会议（至少60分钟）与评审的数据科学家。
+1.  被评审的数据科学家安排一个详细的会议（至少 60 分钟）与评审的数据科学家。
 
 1.  评审的数据科学家在会议前检查清单。
 
@@ -416,11 +416,11 @@
 
 +   微不足道的问题
 
-在这里重复清单没有意义，尤其是因为Philip计划维护它，所以直接去阅读 [他的博客文章](https://medium.com/@ptannor/checklist-for-data-science-research-review-8a817b50697b)。
+在这里重复清单没有意义，尤其是因为 Philip 计划维护它，所以直接去阅读 [他的博客文章](https://medium.com/@ptannor/checklist-for-data-science-research-review-8a817b50697b)。
 
 [原文](https://towardsdatascience.com/peer-reviewing-data-science-projects-7bfbc2919724?source=friends_link&sk=914d618224f713cbcabf1f6ead3ba3d9)。经许可转载。
 
-**简介：**[Shay Palachy](http://www.shaypalachy.com/)在担任过[ZenCity](http://zencity.io/)的首席数据科学家、[Neura](http://www.theneura.com/)的数据科学家，以及英特尔和[Ravello](http://www.ravellosystems.com/)（现为Oracle Cloud）的开发人员之后，现在作为机器学习和数据科学顾问工作。Shay还创办并管理了[NLPH](https://github.com/NLPH/NLPH)，这是一个旨在促进希伯来语开放NLP工具的倡议。
+**简介：**[Shay Palachy](http://www.shaypalachy.com/)在担任过[ZenCity](http://zencity.io/)的首席数据科学家、[Neura](http://www.theneura.com/)的数据科学家，以及英特尔和[Ravello](http://www.ravellosystems.com/)（现为 Oracle Cloud）的开发人员之后，现在作为机器学习和数据科学顾问工作。Shay 还创办并管理了[NLPH](https://github.com/NLPH/NLPH)，这是一个旨在促进希伯来语开放 NLP 工具的倡议。
 
 **相关：**
 
@@ -438,8 +438,8 @@
 
 +   [成功数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

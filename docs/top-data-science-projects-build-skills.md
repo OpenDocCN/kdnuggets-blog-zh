@@ -1,8 +1,8 @@
 # 提升技能的顶级数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2022/04/top-data-science-projects-build-skills.html](https://www.kdnuggets.com/2022/04/top-data-science-projects-build-skills.html)
+> 原文：[`www.kdnuggets.com/2022/04/top-data-science-projects-build-skills.html`](https://www.kdnuggets.com/2022/04/top-data-science-projects-build-skills.html)
 
-![提升技能的顶级数据科学项目](../Images/fdd26463d84b0c32d1bd32e1024e3531.png)
+![提升技能的顶级数据科学项目](img/fdd26463d84b0c32d1bd32e1024e3531.png)
 
 [Octavian Dan](https://unsplash.com/@octadan) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -102,7 +102,7 @@
 
 ## 城市声音分类
 
-这是一个分类任务，介绍了音频处理。数据集包含来自10个类别的8,732个标记的城市声音片段。你可以使用神经网络模型来分类音频中的声音类型。
+这是一个分类任务，介绍了音频处理。数据集包含来自 10 个类别的 8,732 个标记的城市声音片段。你可以使用神经网络模型来分类音频中的声音类型。
 
 数据集链接：[Analytics Vidhya 城市声音分类](https://datahack.analyticsvidhya.com/contest/practice-problem-urban-sound-classification/#About)
 
@@ -112,9 +112,9 @@
 
 ## VoxCeleb
 
-VoxCeleb 是一个音视频数据集，包含从上传到YouTube的访谈视频中提取的短片人类语音。这个数据集允许你通过隔离和识别探索语音识别。
+VoxCeleb 是一个音视频数据集，包含从上传到 YouTube 的访谈视频中提取的短片人类语音。这个数据集允许你通过隔离和识别探索语音识别。
 
-该数据集包含两个版本，VoxCeleb1 和 VoxCeleb2。VoxCeleb1 包含超过100,000个发言，涉及1,251位名人，而 VoxCeleb2 包含超过一百万个发言，涉及6,112个身份。
+该数据集包含两个版本，VoxCeleb1 和 VoxCeleb2。VoxCeleb1 包含超过 100,000 个发言，涉及 1,251 位名人，而 VoxCeleb2 包含超过一百万个发言，涉及 6,112 个身份。
 
 数据集链接：[VoxCeleb](https://www.robots.ox.ac.uk/~vgg/data/voxceleb/)
 
@@ -126,7 +126,7 @@ VoxCeleb 是一个音视频数据集，包含从上传到YouTube的访谈视频�
 
 VQA 是一个包含有关图像的开放性问题的新数据集。你需要具备计算机视觉、语言和常识知识才能回答。
 
-该数据集包含265,016张图像，每张图像至少有3个问题，你将被要求使用深度学习来回答有关图像的开放性问题。
+该数据集包含 265,016 张图像，每张图像至少有 3 个问题，你将被要求使用深度学习来回答有关图像的开放性问题。
 
 数据集链接：[visualqa](https://visualqa.org/)
 
@@ -144,14 +144,14 @@ VQA 是一个包含有关图像的开放性问题的新数据集。你需要具�
 
 ### 更多相关话题
 
-+   [学习5项关键数据科学技能的5个数据科学项目](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [学习 5 项关键数据科学技能的 5 个数据科学项目](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [你的项目所需的5大数据管理工具](https://www.kdnuggets.com/top-5-data-management-tools-for-your-projects)
++   [你的项目所需的 5 大数据管理工具](https://www.kdnuggets.com/top-5-data-management-tools-for-your-projects)
 
-+   [未来-proof你的数据游戏：2023年每个数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来-proof 你的数据游戏：2023 年每个数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [构建供应链管道所需的6种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
++   [构建供应链管道所需的 6 种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
 
 +   [如何在数据科学领域建立你的职业](https://www.kdnuggets.com/2022/02/build-career-data-science.html)
 
-+   [提升你的机器学习技能的15个顶级YouTube频道](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
++   [提升你的机器学习技能的 15 个顶级 YouTube 频道](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)

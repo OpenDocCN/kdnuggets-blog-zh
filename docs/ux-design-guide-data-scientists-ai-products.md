@@ -1,26 +1,26 @@
-# 数据科学家和人工智能产品的UX设计指南
+# 数据科学家和人工智能产品的 UX 设计指南
 
-> 原文：[https://www.kdnuggets.com/2018/08/ux-design-guide-data-scientists-ai-products.html](https://www.kdnuggets.com/2018/08/ux-design-guide-data-scientists-ai-products.html)
+> 原文：[`www.kdnuggets.com/2018/08/ux-design-guide-data-scientists-ai-products.html`](https://www.kdnuggets.com/2018/08/ux-design-guide-data-scientists-ai-products.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/), 分析科学家**
 
-![Header image](../Images/7c2cd712b6b74daaa0a8128b54110683.png)
+![Header image](img/7c2cd712b6b74daaa0a8128b54110683.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-在寻找针对人工智能产品的UX设计策略时，我发现几乎没有相关材料。在我找到的少数资料中，大多数要么过于领域特定，要么完全集中于网页用户界面的视觉设计。我遇到的最好文章是 [Vladimir Shapiro](https://medium.com/@vshapiro24) 的 “[人工智能的UX：信任作为设计挑战](https://medium.com/sap-design/ux-for-ai-trust-as-a-design-challenge-62044e22c4ec)” 和 [Dávid Pásztor](https://uxstudioteam.com/ux-blog/author/pasztord/) 的 “[AI UX：设计优秀AI产品的7个原则](https://uxstudioteam.com/ux-blog/ai-ux/)”。意识到UX设计师和数据科学家之间存在一个真正的知识差距，我决定尝试从数据科学家的角度来解决这些需求。因此，我的假设是读者对数据科学有一定的基础理解。对于**数据科学背景很少或没有的UX设计师**，我避免使用复杂的数学和编程（虽然我鼓励阅读 [Michael Galarnyk](https://towardsdatascience.com/@GalarnykMichael) 的 “[如何建立数据科学作品集](https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c)” 和我的 “[数据科学面试指南](https://towardsdatascience.com/data-science-interview-guide-4ee9f5dc778)”）。
+在寻找针对人工智能产品的 UX 设计策略时，我发现几乎没有相关材料。在我找到的少数资料中，大多数要么过于领域特定，要么完全集中于网页用户界面的视觉设计。我遇到的最好文章是 [Vladimir Shapiro](https://medium.com/@vshapiro24) 的 “[人工智能的 UX：信任作为设计挑战](https://medium.com/sap-design/ux-for-ai-trust-as-a-design-challenge-62044e22c4ec)” 和 [Dávid Pásztor](https://uxstudioteam.com/ux-blog/author/pasztord/) 的 “[AI UX：设计优秀 AI 产品的 7 个原则](https://uxstudioteam.com/ux-blog/ai-ux/)”。意识到 UX 设计师和数据科学家之间存在一个真正的知识差距，我决定尝试从数据科学家的角度来解决这些需求。因此，我的假设是读者对数据科学有一定的基础理解。对于**数据科学背景很少或没有的 UX 设计师**，我避免使用复杂的数学和编程（虽然我鼓励阅读 [Michael Galarnyk](https://towardsdatascience.com/@GalarnykMichael) 的 “[如何建立数据科学作品集](https://towardsdatascience.com/how-to-build-a-data-science-portfolio-5f566517c79c)” 和我的 “[数据科学面试指南](https://towardsdatascience.com/data-science-interview-guide-4ee9f5dc778)”）。
 
 人工智能正在占据我们日常生活的几乎每一个方面。这将改变我们的行为方式以及我们对这些产品的期望。作为设计师，我们的目标是创建有用且易于理解的产品，以便为这个模糊的新世界带来清晰度。最重要的是，我们希望利用人工智能的力量使人们的生活变得更加轻松和愉悦。
 
@@ -42,7 +42,7 @@
 
 虽然大多数人都追求准确的模型，但常常忽略了理解模型为什么会这样做。模型的优点和缺点是什么？为什么它会对给定的输入特征提供这样的预测？虽然这个问题看似简单，但许多行业需要将其作为产品价值主张的一部分来提供答案。
 
-![](../Images/7de4ad8e754985335c224f81b1ebd4ed.png)
+![](img/7de4ad8e754985335c224f81b1ebd4ed.png)
 
 在 Credit Karma、Netflix 和 Amazon 上的模型解释
 
@@ -58,13 +58,13 @@
 
 一些神经网络模型比其他模型更容易解释，例如下面的图像识别模型。
 
-![](../Images/95a822da41d57515f5883e8e35be95ef.png)
+![](img/95a822da41d57515f5883e8e35be95ef.png)
 
 可视化图像分类模型的卷积神经网络（来源：[Simonyan et al. 2013](https://arxiv.org/abs/1312.6034)）
 
-有时，我们可以根据预测和输入推断出工程特征。例如，模型可能没有针对道路上冰的特征。然而，如果模型接受到的输入包括道路上的水和道路表面温度，我们可以直观地认为冰的存在可以通过隐藏层中的特征工程来推导出来。[特斯拉自动驾驶导致致命事故](https://www.wired.com/story/tesla-autopilot-self-driving-crash-california/)就是需要在自动驾驶领域中使用可解释AI的一个例子。
+有时，我们可以根据预测和输入推断出工程特征。例如，模型可能没有针对道路上冰的特征。然而，如果模型接受到的输入包括道路上的水和道路表面温度，我们可以直观地认为冰的存在可以通过隐藏层中的特征工程来推导出来。[特斯拉自动驾驶导致致命事故](https://www.wired.com/story/tesla-autopilot-self-driving-crash-california/)就是需要在自动驾驶领域中使用可解释 AI 的一个例子。
 
-![](../Images/b56a71d911263562d8c38ac9b18f97b4.png)
+![](img/b56a71d911263562d8c38ac9b18f97b4.png)
 
 神经网络如何在隐藏层中创建更高阶特征的示例，应用于自动驾驶车辆
 
@@ -72,15 +72,15 @@
 
 模型解释不一定需要是数学的。定性地观察输入及其对应的输出通常可以提供有价值的见解。下面是一个[智能安全摄像头](https://www.youtube.com/watch?v=20H-7QOaPFs)错误地将窃贼识别为自拍者，仅仅因为他拿着杆子像自拍杆一样。
 
-![](../Images/1b639c152b6282a6f7e673b0280698a8.png)
+![](img/1b639c152b6282a6f7e673b0280698a8.png)
 
-来源：[Mark West — 使用Raspberry Pi Zero、Node.js和云构建智能安全摄像头](https://www.youtube.com/watch?v=20H-7QOaPFs)
+来源：[Mark West — 使用 Raspberry Pi Zero、Node.js 和云构建智能安全摄像头](https://www.youtube.com/watch?v=20H-7QOaPFs)
 
 ### 处理边缘情况
 
 AI 可以生成内容并采取以前无人想到的行动。对于这些不可预测的情况，我们必须花费更多时间测试产品，寻找奇怪、有趣甚至令人不安的边界情况。一个例子是下面聊天机器人的误解。
 
-![](../Images/73717e7a7dff973044b8780c332f58f4.png)
+![](img/73717e7a7dff973044b8780c332f58f4.png)
 
 聊天机器人对意外用户命令的失败
 
@@ -100,29 +100,29 @@ AI 可以生成内容并采取以前无人想到的行动。对于这些不可�
 
 金融产品是很好的例子。根据政府规定，您的信用评分可能只考虑价值超过 $2000 的资产。因此，任何低于 $2000 的资产在计算您的信用评分时不会被模型考虑。网络安全产品也有类似的情况。如果模型以每天或每周的频率收集数据，您不能期望模型监控 DDoS 攻击。
 
-![](../Images/59cf3473d1bf4ef52e8946cdaef9f0b5.png)
+![](img/59cf3473d1bf4ef52e8946cdaef9f0b5.png)
 
-在碰撞前1.3秒，Uber的汽车决定需要紧急制动——但没有能力自行完成这项操作。黄色带显示了米数，紫色则表示了汽车的行驶路径。（来源：[国家运输安全委员会](https://www.ntsb.gov/Pages/default.aspx)）
+在碰撞前 1.3 秒，Uber 的汽车决定需要紧急制动——但没有能力自行完成这项操作。黄色带显示了米数，紫色则表示了汽车的行驶路径。（来源：[国家运输安全委员会](https://www.ntsb.gov/Pages/default.aspx)）
 
-这种情况在最近的 [Uber无人驾驶汽车事故](https://www.wired.com/story/uber-self-driving-crash-arizona-ntsb-report/) 中尤为明显：
+这种情况在最近的 [Uber 无人驾驶汽车事故](https://www.wired.com/story/uber-self-driving-crash-arizona-ntsb-report/) 中尤为明显：
 
-> 报告中提到，碰撞前约1秒，“自驾系统判断需要紧急制动以减轻碰撞。”然而，Uber并不允许其系统自行执行紧急制动操作。为了避免“车辆行为不稳定”——比如猛踩刹车或避开塑料袋——Uber依赖其人工操作员观察道路并在出现问题时接管控制。
+> 报告中提到，碰撞前约 1 秒，“自驾系统判断需要紧急制动以减轻碰撞。”然而，Uber 并不允许其系统自行执行紧急制动操作。为了避免“车辆行为不稳定”——比如猛踩刹车或避开塑料袋——Uber 依赖其人工操作员观察道路并在出现问题时接管控制。
 
 自然反应是摄像头没有捕捉到自行车。然而，摄像头确实识别了行人，但系统选择不停车。这是因为模型并未设计为完全替代司机。
 
 ### 提供反馈的机会
 
-优秀的用户体验设计的目标是交付一个令最终用户满意的产品。为了确保用户获得他们想要的东西，提供他们反馈AI内容的机会是必要的。这可以包括电影的评分系统或让银行知道他们的信用卡交易是否存在欺诈行为。以下是来自Google Now的一个示例。
+优秀的用户体验设计的目标是交付一个令最终用户满意的产品。为了确保用户获得他们想要的东西，提供他们反馈 AI 内容的机会是必要的。这可以包括电影的评分系统或让银行知道他们的信用卡交易是否存在欺诈行为。以下是来自 Google Now 的一个示例。
 
-![](../Images/be9e9fe2c444606138642449496c3bc2.png)
+![](img/be9e9fe2c444606138642449496c3bc2.png)
 
-Google Now请求对推荐系统的预测提供反馈
+Google Now 请求对推荐系统的预测提供反馈
 
-记住，用户反馈也可以作为你模型的训练数据。如果我们将更多数据输入到机器学习算法中，AI产品的用户体验将变得越来越好。
+记住，用户反馈也可以作为你模型的训练数据。如果我们将更多数据输入到机器学习算法中，AI 产品的用户体验将变得越来越好。
 
 ### 最终总结
 
-到头来，AI的设计目的是解决问题并让生活更轻松。人本设计必须始终贯穿于成功产品的开发过程中。不满足客户需求是主要行业破产和被更好服务提供商取代的原因。理解客户需求是前进的关键。
+到头来，AI 的设计目的是解决问题并让生活更轻松。人本设计必须始终贯穿于成功产品的开发过程中。不满足客户需求是主要行业破产和被更好服务提供商取代的原因。理解客户需求是前进的关键。
 
 如果你有想法或评论，随时订阅我的博客并在 [Twitter](https://twitter.com/ssnazrul1) 上关注我。
 
@@ -134,11 +134,11 @@ Google Now请求对推荐系统的预测提供反馈
 
 **相关内容：**
 
-+   [数据科学家的DevOps：驯服独角兽](/2018/07/devops-data-scientists-taming-unicorn.html)
++   数据科学家的 DevOps：驯服独角兽
 
-+   [来自 Google Assistant 的视角：我们是否变得依赖 AI？](/2017/12/google-assistant-becoming-reliant-ai.html)
++   来自 Google Assistant 的视角：我们是否变得依赖 AI？
 
-+   [AI 和数据科学中的十大角色](/2018/08/top-10-roles-ai-data-science.html)
++   AI 和数据科学中的十大角色
 
 ### 更多相关话题
 

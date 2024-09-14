@@ -1,6 +1,6 @@
 # 机器学习模型解释性如何加速金融服务的 AI 采用之旅
 
-> 原文：[https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)
+> 原文：[`www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html`](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)
 
 金融服务公司越来越多地使用人工智能来改进其运营操作，以及业务相关任务，包括分配信用评分、识别欺诈、优化投资组合和支持创新。AI 提高了这些操作中人类工作的速度、精确度和效率，并且可以自动化目前由人工完成的数据管理任务。然而，随着 AI 的进步，新挑战也随之而来。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,11 +24,11 @@
 
 # 什么是可解释的 AI？
 
-可解释的人工智能模型允许利益相关者理解模型驱动决策的主要驱动因素，并解释人工智能和机器学习模型做出的决策。事实上，欧洲GDPR规定，自动化决策的存在应提供关于涉及逻辑的有意义信息。可解释的模型必须能够解释其理由，描述其优缺点，并传达对未来行为的理解，从而克服无法解释为何以及如何达到特定决策点的黑箱人工智能的挑战。
+可解释的人工智能模型允许利益相关者理解模型驱动决策的主要驱动因素，并解释人工智能和机器学习模型做出的决策。事实上，欧洲 GDPR 规定，自动化决策的存在应提供关于涉及逻辑的有意义信息。可解释的模型必须能够解释其理由，描述其优缺点，并传达对未来行为的理解，从而克服无法解释为何以及如何达到特定决策点的黑箱人工智能的挑战。
 
 可解释的人工智能克服了信任问题和由于设计者偏见、错误的训练数据或缺乏适当的业务背景而可能出现的偏见。它使机器学习算法变得透明、稳健和负责任。通过为决策分配理由代码并使其对用户可见，解决这些问题。利益相关者可以审查这些代码，以解释决策并验证结果。好的可解释人工智能必须具有高度的可扩展性、易于理解、高度个性化，并根据用例和国家遵守监管和隐私要求。
 
-![如何让机器学习模型的可解释性加速金融服务领域的人工智能应用](../Images/98c15215fe214b760f4c881ea8e1a6ca.png)
+![如何让机器学习模型的可解释性加速金融服务领域的人工智能应用](img/98c15215fe214b760f4c881ea8e1a6ca.png)
 
 图：黑箱人工智能与可解释人工智能模型的工作原理
 
@@ -76,7 +76,7 @@
 
 1.  确保强大的模型监控框架
 
-![如何通过可解释的机器学习模型加速金融服务的 AI 采用之旅](../Images/69c02723d4510f2d06cf2e220faca039.png)
+![如何通过可解释的机器学习模型加速金融服务的 AI 采用之旅](img/69c02723d4510f2d06cf2e220faca039.png)
 
 图：确保 AI 模型可解释性需要注意的要点
 

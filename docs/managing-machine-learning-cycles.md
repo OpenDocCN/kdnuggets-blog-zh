@@ -1,10 +1,10 @@
 # 管理机器学习周期：从比较数据科学实验/协作工具中获得的五个经验
 
-> 原文：[https://www.kdnuggets.com/2020/01/managing-machine-learning-cycles.html](https://www.kdnuggets.com/2020/01/managing-machine-learning-cycles.html)
+> 原文：[`www.kdnuggets.com/2020/01/managing-machine-learning-cycles.html`](https://www.kdnuggets.com/2020/01/managing-machine-learning-cycles.html)
 
-[评论](#comments)
+评论
 
-**由 [Dr. Michael Eble](http://twitter.michael-eble.de) 提供，hlthfwd的联合创始人及总经理**。
+**由 [Dr. Michael Eble](http://twitter.michael-eble.de) 提供，hlthfwd 的联合创始人及总经理**。
 
 机器学习项目需要处理不同版本的输入数据、源代码、超参数、环境配置等。通常，在机器学习模型可以投入生产之前，需要计算许多模型迭代。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -36,11 +36,11 @@
 
 +   最终，能够协作和复现迭代是重要的（即使或特别是当团队成员离开项目/公司时）。
 
-![](../Images/f91405f404d137f628b9ce0d7fcebdb1.png)
+![](img/f91405f404d137f628b9ce0d7fcebdb1.png)
 
 ### 考虑或排除的工具
 
-![](../Images/88f147b069358b9f422346f1603d242d.png)
+![](img/88f147b069358b9f422346f1603d242d.png)
 
 我们发现，AI、dotscience、MLFlow 和 Polyaxon 针对大型企业，而 Comet.ml、Neptune.ml 以及 Weights and Biases 面向较小的组织/初创公司。
 
@@ -82,7 +82,7 @@
 
 +   [数据科学家如何提高生产力](https://www.kdnuggets.com/2017/05/data-scientist-improve-productivity.html)
 
-+   [使用 MLflow 管理机器学习生命周期  –  第 1 部分](https://www.kdnuggets.com/2018/07/manage-machine-learning-lifecycle-mlflow.html)
++   [使用 MLflow 管理机器学习生命周期  –  第一部分](https://www.kdnuggets.com/2018/07/manage-machine-learning-lifecycle-mlflow.html)
 
 ### 更多相关内容
 
@@ -94,6 +94,6 @@
 
 +   [协作的力量：开源项目如何推动人工智能发展](https://www.kdnuggets.com/2023/08/power-collaboration-opensource-projects-advancing-ai.html)
 
-+   [学习如何设计、衡量和实施可靠的A/B测试……](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
++   [学习如何设计、衡量和实施可靠的 A/B 测试……](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
 
-+   [管理数据科学项目的4个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)
++   [管理数据科学项目的 4 个步骤](https://www.kdnuggets.com/2022/05/4-steps-managing-data-science-project.html)

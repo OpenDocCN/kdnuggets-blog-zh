@@ -1,8 +1,8 @@
 # Pydon’ts – 编写优雅的 Python 代码：免费书评
 
-> 原文：[https://www.kdnuggets.com/2022/05/pydonts-write-elegant-python-code-free-book-review.html](https://www.kdnuggets.com/2022/05/pydonts-write-elegant-python-code-free-book-review.html)
+> 原文：[`www.kdnuggets.com/2022/05/pydonts-write-elegant-python-code-free-book-review.html`](https://www.kdnuggets.com/2022/05/pydonts-write-elegant-python-code-free-book-review.html)
 
-![Pydon'ts - 编写优雅的 Python 代码：免费书评](../Images/4ee0476c83de4f1d96b7af79c85187a4.png)
+![Pydon'ts - 编写优雅的 Python 代码：免费书评](img/4ee0476c83de4f1d96b7af79c85187a4.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -28,13 +28,13 @@
 
 # 书评
 
-[Pydon'ts](https://mathspp.gumroad.com/l/pydonts) 是完全免费的，包含超过330页的纯知识。这本书适合所有希望提高编写优雅且可用于生产的代码能力的专业人士和爱好者。尤其是那些仍在编写只能自己理解的代码的数据科学家。书中包括20章内容，讲解了Python内置函数及其各种用法模式。每章包括介绍、单个函数的各种用法模式、编码示例、结论和参考资料。简而言之，每章都像是一篇详细解释每个概念的短博客，并附有真实项目示例。
+[Pydon'ts](https://mathspp.gumroad.com/l/pydonts) 是完全免费的，包含超过 330 页的纯知识。这本书适合所有希望提高编写优雅且可用于生产的代码能力的专业人士和爱好者。尤其是那些仍在编写只能自己理解的代码的数据科学家。书中包括 20 章内容，讲解了 Python 内置函数及其各种用法模式。每章包括介绍、单个函数的各种用法模式、编码示例、结论和参考资料。简而言之，每章都像是一篇详细解释每个概念的短博客，并附有真实项目示例。
 
-![enumerate-python](../Images/e4b5da356e09f8867c007bef5de075e2.png)
+![enumerate-python](img/e4b5da356e09f8867c007bef5de075e2.png)
 
-书的作者 [Rodrigo](https://twitter.com/mathsppblog) 编写Python已有七年半，他有一个博客 [Mathspp Blog](https://mathspp.com/blog/tag:python)，涵盖了数学和编程语言的有趣概念。他在Python社区中备受尊敬，他的愿景是免费教导人们Python语言的最佳实践。Python是一门丰富的语言，本书中的每一章都详细探讨了单一特性，并附有覆盖所有角度的代码示例。
+书的作者 [Rodrigo](https://twitter.com/mathsppblog) 编写 Python 已有七年半，他有一个博客 [Mathspp Blog](https://mathspp.com/blog/tag:python)，涵盖了数学和编程语言的有趣概念。他在 Python 社区中备受尊敬，他的愿景是免费教导人们 Python 语言的最佳实践。Python 是一门丰富的语言，本书中的每一章都详细探讨了单一特性，并附有覆盖所有角度的代码示例。
 
-**本书详细涵盖的Python特性**：
+**本书详细涵盖的 Python 特性**：
 
 +   代码风格很重要
 
@@ -50,7 +50,7 @@
 
 +   使用星号赋值进行解包
 
-+   EAFP和LBYL编码风格
++   EAFP 和 LBYL 编码风格
 
 +   Zip up
 
@@ -92,7 +92,7 @@
 
 +   字符串格式化比较
 
-要下载免费书籍，您需要点击这个 [链接](https://mathspp.gumroad.com/l/pydonts)，然后将价格设置为$0以购买书籍。它会要求您添加姓名和电子邮件，然后带您到一个新窗口，您可以在其中下载pdf。您还可以以$5购买一本书以表示感谢，或者以$13购买以表示对作者工作的更多喜爱。完全由您决定。
+要下载免费书籍，您需要点击这个 [链接](https://mathspp.gumroad.com/l/pydonts)，然后将价格设置为$0 以购买书籍。它会要求您添加姓名和电子邮件，然后带您到一个新窗口，您可以在其中下载 pdf。您还可以以$5 购买一本书以表示感谢，或者以$13 购买以表示对作者工作的更多喜爱。完全由您决定。
 
 # 结束语
 
@@ -100,7 +100,7 @@ Python 在数据专业人士中很受欢迎。我们用它来进行统计实验�
 
 《Pydon’ts》是一本编写得很好的有趣书籍。如果你是一个非常有动力的专业人士，可以利用这本书来提升你对 Python 内置功能的知识。此外，你还可以用这本书来学习如何编写简洁和富有表现力的代码。这本书的独特之处在于它包括了来自真实项目的 Python 代码示例。
 
-![Rodrigo Tips](../Images/16509936b3674333162cc7ac827ff93e.png)
+![Rodrigo Tips](img/16509936b3674333162cc7ac827ff93e.png)
 
 在 Twitter 上关注 [Rodrigo ????????](https://twitter.com/mathsppblog/status/1519227653835923456/photo/2)，他会发布带解释的代码片段。目前，他正在教授 Python 列表推导式。这些课程简短，学习和理解这些迷你课程只需 5 分钟。
 

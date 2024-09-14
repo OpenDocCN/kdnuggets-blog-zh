@@ -1,8 +1,8 @@
 # 我们是否低估了简单模型？
 
-> 原文：[https://www.kdnuggets.com/are-we-undervaluing-simple-models](https://www.kdnuggets.com/are-we-undervaluing-simple-models)
+> 原文：[`www.kdnuggets.com/are-we-undervaluing-simple-models`](https://www.kdnuggets.com/are-we-undervaluing-simple-models)
 
-![我们是否低估了简单模型？](../Images/a3690d5af39c2cd01ac109531e13a173.png)
+![我们是否低估了简单模型？](img/a3690d5af39c2cd01ac109531e13a173.png)
 
 由 DALL-E 2 生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -44,11 +44,11 @@
 
 参数是模型固有的配置，在训练过程中学习或估计得到。不同于超参数的概念，参数不能由用户初始设置，而是受超参数选择的影响。
 
-参数的示例包括线性回归系数、神经网络的权重和偏置以及K-means聚类中心。正如你所见，模型参数的值在学习数据时会独立变化。参数值在模型迭代中不断更新，直到最终模型呈现。
+参数的示例包括线性回归系数、神经网络的权重和偏置以及 K-means 聚类中心。正如你所见，模型参数的值在学习数据时会独立变化。参数值在模型迭代中不断更新，直到最终模型呈现。
 
-线性回归是一个简单的模型，因为它的参数较少。线性回归的参数是它的系数和截距。根据我们训练的特征数量，线性回归将有**n+1**个参数（n是特征系数的数量，加上1作为截距）。
+线性回归是一个简单的模型，因为它的参数较少。线性回归的参数是它的系数和截距。根据我们训练的特征数量，线性回归将有**n+1**个参数（n 是特征系数的数量，加上 1 作为截距）。
 
-与神经网络相比，这个模型的计算更加复杂。神经网络中的参数包括权重和偏置。权重取决于层输入（**n**）和神经元（**p**），权重参数的数量为n*p。每个神经元都有自己的偏置，因此每个**p**都有一个**p**的偏置。总的来说，参数数量大约为**(n*p) + p**。复杂性随着每个额外层的增加而增加，每增加一层就会增加**(n*p) + p**个参数。
+与神经网络相比，这个模型的计算更加复杂。神经网络中的参数包括权重和偏置。权重取决于层输入（**n**）和神经元（**p**），权重参数的数量为 n*p。每个神经元都有自己的偏置，因此每个**p**都有一个**p**的偏置。总的来说，参数数量大约为**(n*p) + p**。复杂性随着每个额外层的增加而增加，每增加一层就会增加**(n*p) + p**个参数。
 
 我们已经看到参数的数量影响模型复杂性，但它如何影响整体模型输出性能？最关键的概念是它影响过拟合风险。
 
@@ -86,18 +86,18 @@
 
 - 此外，更少的参数意味着简单模型在计算上更为高效。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一名数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia的同时，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius撰写了各种人工智能和机器学习主题的文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 撰写了各种人工智能和机器学习主题的文章。
 
 ### 相关主题
 
-+   [神经网络之前尝试的10件简单事情](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [神经网络之前尝试的 10 件简单事情](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
 
 +   [机器学习可视化的简单指南](https://www.kdnuggets.com/2022/04/simple-guide-machine-learning-visualisations.html)
 
-+   [2022年技术专家简单薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
++   [2022 年技术专家简单薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
 
-+   [简单合并Pandas DataFrame](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)
++   [简单合并 Pandas DataFrame](https://www.kdnuggets.com/2022/09/combining-pandas-dataframes-made-simple.html)
 
-+   [加速Python代码的3种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
++   [加速 Python 代码的 3 种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
 
 +   [简单而快速的数据流处理用于机器学习项目](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)

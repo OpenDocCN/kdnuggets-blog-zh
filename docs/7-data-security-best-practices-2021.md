@@ -1,8 +1,8 @@
 # 2021 年七个数据安全最佳实践
 
-> 原文：[https://www.kdnuggets.com/2021/06/7-data-security-best-practices-2021.html](https://www.kdnuggets.com/2021/06/7-data-security-best-practices-2021.html)
+> 原文：[`www.kdnuggets.com/2021/06/7-data-security-best-practices-2021.html`](https://www.kdnuggets.com/2021/06/7-data-security-best-practices-2021.html)
 
-[评论](#comments)![图示](../Images/088cb9b6fdefe1da3ec95df04866f1a6.png)
+评论![图示](img/088cb9b6fdefe1da3ec95df04866f1a6.png)
 
 Pixabay 提供的照片来自 Pexels
 
@@ -12,11 +12,11 @@ Pixabay 提供的照片来自 Pexels
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -74,11 +74,11 @@ IBM 估计，[数据泄露的平均成本为 386 万美元](https://www.ibm.com/
 
 **相关：**
 
-+   [自动化如何改善数据科学家的角色](/2020/10/automation-improving-data-scientists.html)
++   自动化如何改善数据科学家的角色
 
-+   [数据科学家开发了一种更快的减少污染和减少温室气体排放的方法](/2020/07/data-scientists-faster-way-reduce-pollution-cut-greenhouse-gas-emissions.html)
++   数据科学家开发了一种更快的减少污染和减少温室气体排放的方法
 
-+   [数据专业人士如何为简历增加更多变化](/2020/11/data-professionals-add-variation-resumes.html)
++   数据专业人士如何为简历增加更多变化
 
 ### 了解更多相关话题
 

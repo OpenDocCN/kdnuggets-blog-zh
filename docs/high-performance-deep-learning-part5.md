@@ -1,12 +1,12 @@
-# 高性能深度学习：如何训练更小、更快、更好的模型——第 5 部分
+# 高性能深度学习：如何训练更小、更快、更好的模型——第五部分
 
-> 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html)
+> 原文：[`www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html`](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part5.html)
 
-[评论](#comments)
+评论
 
-![](../Images/9970edb2850289adc136ca465d25bc5e.png)
+![](img/9970edb2850289adc136ca465d25bc5e.png)
 
-在之前的部分中（[第 1 部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)，[第 2 部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)，[第 3 部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)，[第 4 部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)），我们讨论了效率为何对深度学习模型的重要性，以实现高性能的帕累托最优模型，以及深度学习中效率的关注领域。我们还涵盖了四个关注领域（压缩技术、学习技术、自动化和高效架构）。让我们以关于基础设施的最终部分结束这一系列，这对训练和部署高性能模型至关重要。
+在之前的部分中（[第一部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)，[第二部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)，[第三部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)，[第四部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)），我们讨论了效率为何对深度学习模型的重要性，以实现高性能的帕累托最优模型，以及深度学习中效率的关注领域。我们还涵盖了四个关注领域（压缩技术、学习技术、自动化和高效架构）。让我们以关于基础设施的最终部分结束这一系列，这对训练和部署高性能模型至关重要。
 
 顺便提一下，欢迎您阅读我们关于深度学习效率的[调查论文](https://arxiv.org/abs/2106.08962)，该论文详细涵盖了这个主题。
 
@@ -14,7 +14,7 @@
 
 为了高效地训练和运行推断，必须有一个稳健的软件和硬件基础设施。在这一部分，我们将探讨这两个方面。
 
-![](../Images/731ef6c8b32607021623999d6c9877f7.png)
+![](img/731ef6c8b32607021623999d6c9877f7.png)
 
 *软件和硬件基础设施的心理模型，以及它们如何相互作用。*
 
@@ -60,31 +60,31 @@ PyTorch 还提供了一个模型调优指南 [17]，详细说明了 ML 从业者
 
 GPU：图形处理单元（GPUs），最初设计用于加速计算机图形，但自 2007 年 CUDA 库 [22] 发布后，开始用于通用用途。AlexNet [23] 在 2012 年赢得 ImageNet 比赛，标准化了 GPU 在深度学习模型中的使用。自那时起，Nvidia 发布了几代 GPU 微架构，越来越注重深度学习性能。它还引入了 Tensor Cores [24]，这些是专用执行单元，支持多种精度（fp32、TensorFloat32、fp16、bfloat16、int8、int4）的训练和推理。
 
-![](../Images/565b5a29e37b45b895dd6b165cd28f3c.png)
+![](img/565b5a29e37b45b895dd6b165cd28f3c.png)
 
 *降低精度的乘加（MAC）操作：B x C 是一个昂贵的操作，因此使用降低精度来完成。*
 
-张量核心优化了标准的乘法和累加（MAC）操作，A = (B × C) + D。其中，B和C采用减少精度（fp16、bfloat16、TensorFloat32），而A和D采用fp32。NVIDIA报告说，这种减少精度的MAC操作在训练速度上可以提高1×到15×，具体取决于模型架构和选择的GPU [25]。NVidia最新的Ampere架构GPU中的张量核心也支持稀疏性下的更快推理（特别是2:4的结构稀疏性，即在一个4元素块中有2个元素是稀疏的）。它们在推理时间上能提高多达1.5×的速度，在单层上能提高多达1.8×的速度。除此之外，NVidia还提供了cuDNN库 [29]，其中包含了标准神经网络操作的优化版本，如全连接、卷积、批量归一化、激活等。
+张量核心优化了标准的乘法和累加（MAC）操作，A = (B × C) + D。其中，B 和 C 采用减少精度（fp16、bfloat16、TensorFloat32），而 A 和 D 采用 fp32。NVIDIA 报告说，这种减少精度的 MAC 操作在训练速度上可以提高 1×到 15×，具体取决于模型架构和选择的 GPU [25]。NVidia 最新的 Ampere 架构 GPU 中的张量核心也支持稀疏性下的更快推理（特别是 2:4 的结构稀疏性，即在一个 4 元素块中有 2 个元素是稀疏的）。它们在推理时间上能提高多达 1.5×的速度，在单层上能提高多达 1.8×的速度。除此之外，NVidia 还提供了 cuDNN 库 [29]，其中包含了标准神经网络操作的优化版本，如全连接、卷积、批量归一化、激活等。
 
-![](../Images/e9cc7b74251b383ecca7ae12475ef576.png)
+![](img/e9cc7b74251b383ecca7ae12475ef576.png)
 
-*用于GPU和TPU训练和推理的数据类型。bfloat16起源于TPU，而Tensor Float 32仅在NVidia GPU上支持。*
+*用于 GPU 和 TPU 训练和推理的数据类型。bfloat16 起源于 TPU，而 Tensor Float 32 仅在 NVidia GPU 上支持。*
 
-TPU: TPU是谷歌设计的专有应用特定集成电路（ASIC），用于加速深度学习应用，并且针对并行化和加速线性代数运算进行了精细调优。TPU架构支持使用TPU进行训练和推理，并通过谷歌云服务向公众提供。TPU芯片的核心架构利用了脉动阵列设计 [26]，在这种设计中，大规模计算被分割到类似网格的拓扑中，每个单元计算一个部分结果，并在每个时钟周期（以类似于脉动心跳的节奏）将结果传递给下一个单元，而无需将中间结果存储在内存中。
+TPU: TPU 是谷歌设计的专有应用特定集成电路（ASIC），用于加速深度学习应用，并且针对并行化和加速线性代数运算进行了精细调优。TPU 架构支持使用 TPU 进行训练和推理，并通过谷歌云服务向公众提供。TPU 芯片的核心架构利用了脉动阵列设计 [26]，在这种设计中，大规模计算被分割到类似网格的拓扑中，每个单元计算一个部分结果，并在每个时钟周期（以类似于脉动心跳的节奏）将结果传递给下一个单元，而无需将中间结果存储在内存中。
 
-每个TPU芯片有两个张量核心（不要与NVidia的张量核心混淆），每个核心都有一个脉动阵列网格。一个TPU板上有4个互联的TPU芯片。为了进一步扩展训练和推理，可以将更多的TPU板以网状拓扑结构连接起来，形成一个“pod”。根据公开发布的数据，每个TPU芯片（v3）可以达到420 teraflops，而一个TPU pod可以达到100+ petaflops [27]。TPU在谷歌内部用于训练谷歌搜索模型、通用的BERT模型、如DeepMind的世界领先AlphaGo和AlphaZero模型等应用，以及许多其他研究应用 [28]。与GPU类似，TPU支持bfloat16数据类型，这是一种减少精度的替代方案，用于全浮点32位精度训练。XLA支持允许在不改变模型的情况下透明地切换到bfloat16。
+每个 TPU 芯片有两个张量核心（不要与 NVidia 的张量核心混淆），每个核心都有一个脉动阵列网格。一个 TPU 板上有 4 个互联的 TPU 芯片。为了进一步扩展训练和推理，可以将更多的 TPU 板以网状拓扑结构连接起来，形成一个“pod”。根据公开发布的数据，每个 TPU 芯片（v3）可以达到 420 teraflops，而一个 TPU pod 可以达到 100+ petaflops [27]。TPU 在谷歌内部用于训练谷歌搜索模型、通用的 BERT 模型、如 DeepMind 的世界领先 AlphaGo 和 AlphaZero 模型等应用，以及许多其他研究应用 [28]。与 GPU 类似，TPU 支持 bfloat16 数据类型，这是一种减少精度的替代方案，用于全浮点 32 位精度训练。XLA 支持允许在不改变模型的情况下透明地切换到 bfloat16。
 
-![](../Images/dd046fd4d4c0c60ff9e84a57d199abf3.png)
+![](img/dd046fd4d4c0c60ff9e84a57d199abf3.png)
 
-*基本脉动阵列单元的示意图，以及使用脉动阵列单元网格进行4x4矩阵乘法的演示。*
+*基本脉动阵列单元的示意图，以及使用脉动阵列单元网格进行 4x4 矩阵乘法的演示。*
 
-![](../Images/e07609aef4d23226d614e16bb983f126.png)
+![](img/e07609aef4d23226d614e16bb983f126.png)
 
 *EdgeTPU、Coral 和开发板的近似大小。**（提供者：Bhuwan Chopra）*
 
 EdgeTPU: EdgeTPU 也是 Google 设计的定制 ASIC 芯片。类似于 TPU，它专门用于加速线性代数操作，但仅限于推理，并且在边缘设备上具有更低的计算预算。它还仅限于部分操作，并且仅与 int8 量化的 TensorFlow Lite 模型兼容。EdgeTPU 芯片本身比美国便士还小，使其适合部署在多种 IoT 设备中。它已被部署在类似 Raspberry-Pi 的开发板上，在 Pixel 4 智能手机中作为 Pixel Neural Core，也可以独立焊接到 PCB 上。
 
-![](../Images/9a43025da1ed0691405d0901df757dec.png)
+![](img/9a43025da1ed0691405d0901df757dec.png)
 
 *Jetson Nano 模块。([来源](https://www.nvidia.com/en-us/autonomous-machines/jetson-store/))*
 
@@ -96,19 +96,19 @@ Jetson: Jetson 是 Nvidia 提供的一系列加速器，用于支持嵌入式和
 
 ### 参考文献
 
-[1] Martín Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard 等。2016\. Tensorflow: 大规模机器学习系统。在第12届 {USENIX} 操作系统设计与实现会议 ({OSDI} 16)。265–283。
+[1] Martín Abadi, Paul Barham, Jianmin Chen, Zhifeng Chen, Andy Davis, Jeffrey Dean, Matthieu Devin, Sanjay Ghemawat, Geoffrey Irving, Michael Isard 等。2016\. Tensorflow: 大规模机器学习系统。在第 12 届 {USENIX} 操作系统设计与实现会议 ({OSDI} 16)。265–283。
 
-[2] Tensorflow 作者。2021\. TensorFlow Lite | 移动和边缘设备的 ML。https://www.tensorflow.org/lite [在线; 访问日期 2021\. 6月3日]。
+[2] Tensorflow 作者。2021\. TensorFlow Lite | 移动和边缘设备的 ML。https://www.tensorflow.org/lite [在线; 访问日期 2021\. 6 月 3 日]。
 
 [3] XNNPACK 作者。2021\. XNNPACK 后端用于 TensorFlow Lite。https://github.com/tensorflow/tensorflow/blob/master/tensorflow/lite/delegates/xnnpack/README.md/#sparse-inference。
 
 [4] Pete Warden 和 Daniel Situnayake。2019\. Tinyml: 在 Arduino 和超低功耗微控制器上使用 TensorFlow Lite 进行机器学习。“O’Reilly Media, Inc.”。
 
-[5] Tensorflow JS: [https://www.tensorflow.org/js](https://www.tensorflow.org/js)
+[5] Tensorflow JS: [`www.tensorflow.org/js`](https://www.tensorflow.org/js)
 
-[6] WebGL: [https://en.wikipedia.org/wiki/WebGL](https://en.wikipedia.org/wiki/WebGL)
+[6] WebGL: [`en.wikipedia.org/wiki/WebGL`](https://en.wikipedia.org/wiki/WebGL)
 
-[7] TensorFlow. 2019\. TensorFlow 模型优化工具包 — 后训练整数量化。Medium（2019年11月）。[https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba)
+[7] TensorFlow. 2019\. TensorFlow 模型优化工具包 — 后训练整数量化。Medium（2019 年 11 月）。[`medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba`](https://medium.com/tensorflow/tensorflow-model-optimization-toolkit-post-training-integer-quantizationb4964a1ea9ba)
 
 [8] Tensorflow 作者. 2021\. XLA：机器学习优化编译器 | TensorFlow。https://www.tensorflow.org/xla
 
@@ -140,46 +140,46 @@ Jetson: Jetson 是 Nvidia 提供的一系列加速器，用于支持嵌入式和
 
 [22] 维基媒体项目贡献者. 2021\. CUDA - 维基百科。 https://en.wikipedia.org/w/index.php?title=CUDA&oldid=1025500257.
 
-[23] Alex Krizhevsky, Ilya Sutskever, 和 Geoffrey E Hinton. 2012\. 使用深度卷积神经网络进行Imagenet分类。神经信息处理系统进展 25 (2012), 1097–1105.
+[23] Alex Krizhevsky, Ilya Sutskever, 和 Geoffrey E Hinton. 2012\. 使用深度卷积神经网络进行 Imagenet 分类。神经信息处理系统进展 25 (2012), 1097–1105.
 
-[24] NVIDIA. 2020\. 深入Volta：全球最先进的数据中心GPU | NVIDIA开发者博客。 https://developer.nvidia.com/blog/inside-volta.
+[24] NVIDIA. 2020\. 深入 Volta：全球最先进的数据中心 GPU | NVIDIA 开发者博客。 https://developer.nvidia.com/blog/inside-volta.
 
-[25] Dusan Stosic. 2020\. 使用Tensor Cores训练神经网络 - Dusan Stosic, NVIDIA。 https://www.youtube.com/watch?v=jF4-_ZK_tyc
+[25] Dusan Stosic. 2020\. 使用 Tensor Cores 训练神经网络 - Dusan Stosic, NVIDIA。 https://www.youtube.com/watch?v=jF4-_ZK_tyc
 
-[26] HT Kung 和 CE Leiserson. 1980\. 《VLSI系统简介》。Mead, C. A_ 和 Conway, L., (编辑), Addison-Wesley, Reading, MA (1980), 271–292.
+[26] HT Kung 和 CE Leiserson. 1980\. 《VLSI 系统简介》。Mead, C. A_ 和 Conway, L., (编辑), Addison-Wesley, Reading, MA (1980), 271–292.
 
-[27] Kaz Sato. 2021\. 什么使TPU适合深度学习？| Google Cloud博客。 https://cloud.google.com/blog/products/ai-machine-learning/what-makes-tpus-fine-tuned-for-deep-learning
+[27] Kaz Sato. 2021\. 什么使 TPU 适合深度学习？| Google Cloud 博客。 https://cloud.google.com/blog/products/ai-machine-learning/what-makes-tpus-fine-tuned-for-deep-learning
 
 **相关：**
 
-+   [如何使用NVIDIA GPU加速库](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)
++   [如何使用 NVIDIA GPU 加速库](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)
 
-+   [使用PyTorch和Ray进行分布式机器学习入门](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
++   [使用 PyTorch 和 Ray 进行分布式机器学习入门](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
 
-+   [适用于TensorFlow的最佳机器学习框架及扩展](https://www.kdnuggets.com/2021/04/best-machine-learning-frameworks-extensions-tensorflow.html)
++   [适用于 TensorFlow 的最佳机器学习框架及扩展](https://www.kdnuggets.com/2021/04/best-machine-learning-frameworks-extensions-tensorflow.html)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [7种ChatGPT让你编程更高效的方式](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)
++   [7 种 ChatGPT 让你编程更高效的方式](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)
 
-+   [oBERT：复合稀疏化为NLP带来更快更准确的模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
++   [oBERT：复合稀疏化为 NLP 带来更快更准确的模型](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
 
-+   [如何从零开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
++   [如何从零开始构建和训练 Transformer 模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
 
-+   [通过参与竞赛将机器学习学习速度提高4倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)
++   [通过参与竞赛将机器学习学习速度提高 4 倍](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)
 
-+   [为何我们始终需要人类来训练AI — 有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)
++   [为何我们始终需要人类来训练 AI — 有时是实时的](https://www.kdnuggets.com/2021/12/why-we-need-humans-training-ai.html)
 
 +   [使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)

@@ -1,8 +1,8 @@
 # 没有复杂正则表达式语法的 Python 字符串匹配
 
-> 原文：[https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
+> 原文：[`www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html`](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
 
-![没有复杂正则表达式语法的 Python 字符串匹配](../Images/5943947bd74ec9e16ea6fb4b391f5096.png)
+![没有复杂正则表达式语法的 Python 字符串匹配](img/5943947bd74ec9e16ea6fb4b391f5096.png)
 
 图片由作者提供
 
@@ -205,11 +205,11 @@ print(results)
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 

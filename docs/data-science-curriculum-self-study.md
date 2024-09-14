@@ -1,10 +1,10 @@
 # 自学数据科学课程
 
-> 原文：[https://www.kdnuggets.com/2020/02/data-science-curriculum-self-study.html](https://www.kdnuggets.com/2020/02/data-science-curriculum-self-study.html)
+> 原文：[`www.kdnuggets.com/2020/02/data-science-curriculum-self-study.html`](https://www.kdnuggets.com/2020/02/data-science-curriculum-self-study.html)
 
-[评论](#comments)
+评论
 
-![](../Images/29a357573d91d14f811985f816dcd053.png)
+![](img/29a357573d91d14f811985f816dcd053.png)
 
 *照片由 [Kelly Sikkema](https://unsplash.com/@kellysikkema?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -120,7 +120,7 @@ Python 和 R 被认为是数据科学领域的顶级编程语言。你可以选�
 
 a) **数据组件：** 决定如何可视化数据的一个重要第一步是了解数据的类型，例如，分类数据、离散数据、连续数据、时间序列数据等。
 
-b) **几何组件：** 在这里你决定什么样的可视化适合你的数据，例如，散点图、折线图、柱状图、直方图、Q-Q图、平滑密度图、箱线图、配对图、热图等。
+b) **几何组件：** 在这里你决定什么样的可视化适合你的数据，例如，散点图、折线图、柱状图、直方图、Q-Q 图、平滑密度图、箱线图、配对图、热图等。
 
 c) **映射组件：** 在这里，你需要决定使用哪个变量作为 x 变量，哪个作为 y 变量。这一点尤为重要，特别是当你的数据集是多维的，具有多个特征时。
 
@@ -130,7 +130,7 @@ e) **标签组件：** 这包括坐标轴标签、标题、图例、使用的字
 
 f) **伦理组件：** 在这里，你需要确保你的可视化展示了真实的故事。你需要在清理、总结、操控和生成数据可视化时保持意识，确保你的可视化不会误导或操控你的观众。
 
-重要的数据可视化工具包括Python的matplotlib和seaborn包，以及R的ggplot2包。
+重要的数据可视化工具包括 Python 的 matplotlib 和 seaborn 包，以及 R 的 ggplot2 包。
 
 ### 6. 线性回归基础
 
@@ -138,7 +138,7 @@ f) **伦理组件：** 在这里，你需要确保你的可视化展示了真实
 
 Python：NumPy、pylab、sci-kit-learn
 
-R：caret包
+R：caret 包
 
 ### 7. 机器学习基础
 
@@ -156,7 +156,7 @@ R：caret包
 
 +   支持向量机（SVM）分类器
 
-+   K最近邻（KNN）分类器
++   K 最近邻（KNN）分类器
 
 +   决策树分类器
 
@@ -166,25 +166,25 @@ R：caret包
 
 **c) 无监督学习**
 
-+   K均值聚类算法
++   K 均值聚类算法
 
-机器学习的Python工具：Scikit-learn、Pytorch、TensorFlow。
+机器学习的 Python 工具：Scikit-learn、Pytorch、TensorFlow。
 
 ### 8. 时间序列分析基础
 
-用于预测模型的时间依赖性场景，例如预测股票价格。分析时间序列数据有3种基本方法：
+用于预测模型的时间依赖性场景，例如预测股票价格。分析时间序列数据有 3 种基本方法：
 
 +   指数平滑
 
 +   ARIMA（自回归积分滑动平均），是指数平滑的推广
 
-+   GARCH（广义自回归条件异方差性），是一种用于分析方差的类似ARIMA的模型。
++   GARCH（广义自回归条件异方差性），是一种用于分析方差的类似 ARIMA 的模型。
 
-这三种技术可以在Python和R中实现。
+这三种技术可以在 Python 和 R 中实现。
 
 ### 9. 生产力工具基础
 
-掌握如何使用基本的生产力工具，如R studio、Jupyter notebook和GitHub至关重要。对于Python，Anaconda Python是最佳的生产力工具。高级生产力工具，如AWS和Azure，也是需要学习的重要工具。
+掌握如何使用基本的生产力工具，如 R studio、Jupyter notebook 和 GitHub 至关重要。对于 Python，Anaconda Python 是最佳的生产力工具。高级生产力工具，如 AWS 和 Azure，也是需要学习的重要工具。
 
 ### 10. 数据科学项目规划基础
 
@@ -194,11 +194,11 @@ R：caret包
 
 [机器学习的基本数学技能](https://medium.com/towards-artificial-intelligence/4-math-skills-for-machine-learning-12bfbc959c92)
 
-[3个最佳数据科学MOOC专门化课程](https://medium.com/towards-artificial-intelligence/3-best-data-science-mooc-specializations-d58da382f628)
+[3 个最佳数据科学 MOOC 专门化课程](https://medium.com/towards-artificial-intelligence/3-best-data-science-mooc-specializations-d58da382f628)
 
-[进入数据科学的5个最佳学位](https://towardsdatascience.com/5-best-degrees-for-getting-into-data-science-c3eb067883b1)
+[进入数据科学的 5 个最佳学位](https://towardsdatascience.com/5-best-degrees-for-getting-into-data-science-c3eb067883b1)
 
-[2020年你应该开始数据科学之旅的5个理由](https://towardsdatascience.com/5-reasons-why-you-should-begin-your-data-science-journey-in-2020-2b4a0a5e4239)
+[2020 年你应该开始数据科学之旅的 5 个理由](https://towardsdatascience.com/5-reasons-why-you-should-begin-your-data-science-journey-in-2020-2b4a0a5e4239)
 
 [数据科学的理论基础——我应该关心还是仅仅专注于实际技能？](https://towardsdatascience.com/theoretical-foundations-of-data-science-should-i-care-or-simply-focus-on-hands-on-skills-c53fb0caba66)
 
@@ -208,11 +208,11 @@ R：caret包
 
 [大规模数据科学项目的生产力工具](https://medium.com/towards-artificial-intelligence/productivity-tools-for-large-scale-data-science-projects-64810dfbb971)
 
-[数据可视化的艺术——使用Matplotlib和Ggplot2进行天气数据可视化](https://medium.com/p/4d4b48b5b7c4?source=post_stats_page---------------------------)
+[数据可视化的艺术——使用 Matplotlib 和 Ggplot2 进行天气数据可视化](https://medium.com/p/4d4b48b5b7c4?source=post_stats_page---------------------------)
 
 [使用协方差矩阵图进行特征选择和降维](https://medium.com/towards-artificial-intelligence/feature-selection-and-dimensionality-reduction-using-covariance-matrix-plot-b4c7498abd07)
 
-[数据科学101——包含R和Python代码的简短课程](https://medium.com/towards-artificial-intelligence/data-science-101-a-short-course-on-medium-platform-with-r-and-python-code-included-3cdc9d489c6d)
+[数据科学 101——包含 R 和 Python 代码的简短课程](https://medium.com/towards-artificial-intelligence/data-science-101-a-short-course-on-medium-platform-with-r-and-python-code-included-3cdc9d489c6d)
 
 [原文](https://medium.com/towards-artificial-intelligence/data-science-curriculum-bf3bb6805576)。已获许可转载。
 
@@ -228,12 +228,12 @@ R：caret包
 
 +   [停止学习数据科学以寻找目标，找到目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学最低要求：你需要知道的10项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学最低要求：你需要知道的 10 项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：一些古怪的名言集锦](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目，学习5项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目，学习 5 项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其应用](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其应用](https://www.kdnuggets.com/2022/n46.html)

@@ -1,8 +1,8 @@
-# 开始使用 PyTorch 第 1 部分：理解自动微分是如何工作的
+# 开始使用 PyTorch 第一部分：理解自动微分是如何工作的
 
-> 原文：[https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html/2](https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html/2)
+> 原文：[`www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html/2`](https://www.kdnuggets.com/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 构建块 #3：变量和 Autograd
 
@@ -26,7 +26,7 @@ var_ex = Variable(torch.randn((4,3))   #creating a Variable
 
 *变量*持有的第三个属性是***grad_fn***，这是创建该变量的*函数*对象。
 
-![](../Images/db001b7058cc95475452d2b2f0c97638.png)
+![](img/db001b7058cc95475452d2b2f0c97638.png)
 
 > **注意：** PyTorch 0.4 将变量和张量类合并为一个，张量可以通过切换而不是实例化新对象来变成“变量”。但由于我们在本教程中使用的是 v 0.3，我们将继续进行。
 
@@ -60,25 +60,25 @@ PyTorch 结合了 *Variables* 和 *Functions* 来创建计算图。
 
 +   现在，我告诉你我之前绘制的图不完全准确的原因是什么？因为当 PyTorch 创建图时，图中的节点不是 *Variable* 对象。实际上，是每个 *Variable* 的 *grad_fn* 构成了图中的节点。所以，PyTorch 图的样子会是这样。
 
-![](../Images/bd1ab5ae2e471579c37576784c3b1341.png)
+![](img/bd1ab5ae2e471579c37576784c3b1341.png)
 
 每个 Function 是 PyTorch 计算图中的一个节点。
 
 +   我已经通过它们的名称表示了叶子节点，但它们也有自己的 *grad_fn* （返回 None 值）。这很有意义，因为你不能在叶子节点之外进行反向传播。其余的节点现在被它们的 *grad_fn* 替换。我们看到单个节点 *d* 被三个 Functions、两个乘法和一个加法替换，而损失则被一个 *minus* Function 替换。
 
-+   **计算梯度（第18行）。**我们现在通过在*L*上调用`*.backward()*`函数来计算梯度。这里到底发生了什么？首先，L的梯度是1（*dL / dL*）。**然后，我们调用它的*backward*函数，这个函数的任务基本上是计算*Function*对象的输出相对于*Function*对象输入的梯度。**在这里，L是10 - d的结果，这意味着，反向函数将计算梯度（*dL/dd*）为-1。
++   **计算梯度（第 18 行）。**我们现在通过在*L*上调用`*.backward()*`函数来计算梯度。这里到底发生了什么？首先，L 的梯度是 1（*dL / dL*）。**然后，我们调用它的*backward*函数，这个函数的任务基本上是计算*Function*对象的输出相对于*Function*对象输入的梯度。**在这里，L 是 10 - d 的结果，这意味着，反向函数将计算梯度（*dL/dd*）为-1。
 
 +   现在，这个计算出的梯度与累计梯度相乘（存储在与当前节点对应的*Variable*的*grad*属性中，在我们的例子中是*dL/dL = 1*），然后发送到输入节点，存储在与输入节点对应的*Variable*的***grad*属性中。**从技术上讲，我们所做的就是应用链式法则（*dL/dL*） × （*dL/dd*） = *dL/dd*。
 
-+   现在，让我们理解梯度是如何在*Variable* *d*上进行传播的。*d*是从它的输入（w3, w4, b, c）计算出来的。在我们的图中，它包含3个节点，2次乘法和1次加法。
++   现在，让我们理解梯度是如何在*Variable* *d*上进行传播的。*d*是从它的输入（w3, w4, b, c）计算出来的。在我们的图中，它包含 3 个节点，2 次乘法和 1 次加法。
 
-+   首先，函数*AddBackward*（代表我们图中节点*d*的加法操作）计算其输出（*w3*b + w4*c*）相对于其输入（*w3*b和w4*c*）的梯度（两者都是1）。现在，这些*local*梯度与累计梯度（*dL/dd* × *1* = -1）相乘，结果保存在各自输入节点的*grad*属性中。
++   首先，函数*AddBackward*（代表我们图中节点*d*的加法操作）计算其输出（*w3*b + w4*c*）相对于其输入（*w3*b 和 w4*c*）的梯度（两者都是 1）。现在，这些*local*梯度与累计梯度（*dL/dd* × *1* = -1）相乘，结果保存在各自输入节点的*grad*属性中。
 
-+   然后，函数*MulBackward*（代表*w3*c*的乘法操作）计算其输入输出相对于其输入（*w3和c*）的梯度。局部梯度与累计梯度（*dL/d(w3*c)* = -1）相乘。结果值（*-1 × c* 和 *-1 × w3*）然后存储在*Variables*的*w3*和*c*的*grad*属性中。
++   然后，函数*MulBackward*（代表*w3*c*的乘法操作）计算其输入输出相对于其输入（*w3 和 c*）的梯度。局部梯度与累计梯度（*dL/d(w3*c)* = -1）相乘。结果值（*-1 × c* 和 *-1 × w3*）然后存储在*Variables*的*w3*和*c*的*grad*属性中。
 
 +   所有节点的梯度都是以类似的方式计算的。
 
-+   任何节点的*L*的梯度可以通过调用*grad*来访问，该节点对应的Variable，**前提是它是一个叶节点**（PyTorch的默认行为不允许访问非叶节点的梯度。稍后会详细说明）。现在我们得到了梯度，我们可以使用SGD或任何你喜欢的优化算法来更新权重。
++   任何节点的*L*的梯度可以通过调用*grad*来访问，该节点对应的 Variable，**前提是它是一个叶节点**（PyTorch 的默认行为不允许访问非叶节点的梯度。稍后会详细说明）。现在我们得到了梯度，我们可以使用 SGD 或任何你喜欢的优化算法来更新权重。
 
 ```py
 w1 = w1 — (learning_rate) * w1.grad    #update the wieghts using GD
@@ -106,7 +106,7 @@ PyTorch 创建了一种叫做 **动态计算图** 的东西，这意味着图是
 
 这是 *Variable* 类的一个属性。默认情况下，它是 False。当你需要冻结某些层并在训练时阻止它们更新参数时，它非常方便。你可以简单地将 *requires_grad* 设置为 False，这些 *Variables* 将不会被包含在计算图中。因此，没有梯度会传播到它们，或者到那些依赖于这些层进行梯度流动的层。*requires_grad*，**当设置为 True 时是** **传染性的**，这意味着即使一个操作的一个操作数具有 *requires_grad* 设置为 True，结果也将是如此。
 
-![](../Images/df9e5f91cec8821b5f0aff2c1a35d7ae.png)
+![](img/df9e5f91cec8821b5f0aff2c1a35d7ae.png)
 
 **b** 不包括在图中。现在没有梯度通过 ***b*** 进行反向传播。**a** 现在仅从 **c** 获取梯度。即使 **w1** 的 requires_grad = True，也无法接收梯度。
 
@@ -118,11 +118,11 @@ PyTorch 创建了一种叫做 **动态计算图** 的东西，这意味着图是
 
 在推断时不创建图形非常有用，因为我们不需要梯度。首先，消除了创建计算图形的开销，速度得到了提升。其次，如果我们创建了图形，并且没有在之后调用*backward*，则用于缓存值的缓冲区将永远不会释放，可能导致内存耗尽。
 
-通常，我们在神经网络中有许多层，可能在训练时已将*requires_grad*设置为 True。为了防止在推断时创建图形，我们可以采取以下两种方法之一。将*requires_grad*设置为**False**（可能是152层？）。**或者，只在输入上设置*volatile*为 True，我们可以确保不会创建图形。**你可以选择。
+通常，我们在神经网络中有许多层，可能在训练时已将*requires_grad*设置为 True。为了防止在推断时创建图形，我们可以采取以下两种方法之一。将*requires_grad*设置为**False**（可能是 152 层？）。**或者，只在输入上设置*volatile*为 True，我们可以确保不会创建图形。**你可以选择。
 
-![](../Images/91704abbdd0a52fd54d325cb261738ee.png)
+![](img/91704abbdd0a52fd54d325cb261738ee.png)
 
-对于**b或任何依赖于b的节点**，不会创建图形。
+对于**b 或任何依赖于 b 的节点**，不会创建图形。
 
 > **注意：** PyTorch 0.4 没有针对合并 Tensor/Variable 类的 volatile 参数。相反，推断代码应放在 torch.no_grad() 上下文管理器中。
 
@@ -141,7 +141,7 @@ with torch.no_grad():
 
 1.  [理解链式法则](https://www.youtube.com/watch?v=MKWBx78L7Qg)
 
-1.  Python 类 [第 1 部分](https://www.hackerearth.com/practice/python/object-oriented-programming/classes-and-objects-i/tutorial/) 和 [第 2 部分](https://www.hackerearth.com/practice/python/object-oriented-programming/classes-and-objects-ii-inheritance-and-composition/tutorial/)
+1.  Python 类 [第一部分](https://www.hackerearth.com/practice/python/object-oriented-programming/classes-and-objects-i/tutorial/) 和 [第二部分](https://www.hackerearth.com/practice/python/object-oriented-programming/classes-and-objects-ii-inheritance-and-composition/tutorial/)
 
 1.  [PyTorch 官方教程](http://pytorch.org/tutorials/beginner/deep_learning_60min_blitz.html)
 
@@ -151,21 +151,21 @@ with torch.no_grad():
 
 **相关：**
 
-+   [构建神经网络的简单入门指南](/2018/02/simple-starter-guide-build-neural-network.html)
++   构建神经网络的简单入门指南
 
-+   [比较深度学习框架：罗塞塔石碑方法](/2018/03/deep-learning-frameworks.html)
++   比较深度学习框架：罗塞塔石碑方法
 
-+   [排名前列的数据科学深度学习库](/2017/10/ranking-popular-deep-learning-libraries-data-science.html)
++   排名前列的数据科学深度学习库
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 

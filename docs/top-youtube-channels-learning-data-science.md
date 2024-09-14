@@ -1,8 +1,8 @@
-# 学习数据科学的顶级YouTube频道
+# 学习数据科学的顶级 YouTube 频道
 
-> 原文：[https://www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html](https://www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html`](https://www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html)
 
-![学习数据科学的顶级YouTube频道封面](../Images/6638ec1790a4990943b3e11ec922b97f.png)
+![学习数据科学的顶级 YouTube 频道封面](img/6638ec1790a4990943b3e11ec922b97f.png)
 
 [Christian Wiediger](https://unsplash.com/@christianw) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -78,13 +78,13 @@ Sentdex 提供从基础到复杂的 Python 编程教程。Sentdex 于 2012 年 1
 
 Sentdex 涵盖了各种主题的教程，如机器学习、金融、数据分析、机器人技术、网络开发、游戏开发等。
 
-Sentdex的视频相比其他YouTube频道时间较短，但他仍提供了理解主题所需的所有信息，这使得他的视频对那些需要信息且容易因长视频而感到失望的人非常有用。
+Sentdex 的视频相比其他 YouTube 频道时间较短，但他仍提供了理解主题所需的所有信息，这使得他的视频对那些需要信息且容易因长视频而感到失望的人非常有用。
 
 # 8\. [Joma Tech](https://www.youtube.com/c/JomaOppa/featured)
 
-如果你已经在进行数据科学之旅，但需要一些关于该领域和市场趋势的建议，Joma Tech就是你需要的人。
+如果你已经在进行数据科学之旅，但需要一些关于该领域和市场趋势的建议，Joma Tech 就是你需要的人。
 
-Joma Tech谈论硅谷的生活和主要科技公司。Joma Tech于2016年8月31日加入YouTube，目前有165万订阅者。
+Joma Tech 谈论硅谷的生活和主要科技公司。Joma Tech 于 2016 年 8 月 31 日加入 YouTube，目前有 165 万订阅者。
 
 他告诉你作为数据科学家、工程师等你将要做的真实情况，以及有关招聘过程的信息。
 
@@ -92,14 +92,14 @@ Joma Tech谈论硅谷的生活和主要科技公司。Joma Tech于2016年8月31�
 
 ### 更多相关主题
 
-+   [KDnuggets新闻22:n16, 4月20日:学习的最佳YouTube频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20 日:学习的最佳 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
 
-+   [提升你的机器学习技能的前15个YouTube频道](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
++   [提升你的机器学习技能的前 15 个 YouTube 频道](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
 
-+   [了解AI的6个YouTube频道](https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai)
++   [了解 AI 的 6 个 YouTube 频道](https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai)
 
-+   [适合数据科学初学者的前6个YouTube系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)
++   [适合数据科学初学者的前 6 个 YouTube 系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)
 
-+   [关于数据分析的前7个YouTube课程](https://www.kdnuggets.com/2022/02/top-7-youtube-courses-data-analytics.html)
++   [关于数据分析的前 7 个 YouTube 课程](https://www.kdnuggets.com/2022/02/top-7-youtube-courses-data-analytics.html)
 
-+   [来自大学的最佳AI课程及YouTube播放列表](https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html)
++   [来自大学的最佳 AI 课程及 YouTube 播放列表](https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html)

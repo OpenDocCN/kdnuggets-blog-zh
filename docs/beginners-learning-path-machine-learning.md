@@ -1,10 +1,10 @@
 # 机器学习的初学者学习路径
 
-> 原文：[https://www.kdnuggets.com/2020/05/beginners-learning-path-machine-learning.html](https://www.kdnuggets.com/2020/05/beginners-learning-path-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/05/beginners-learning-path-machine-learning.html`](https://www.kdnuggets.com/2020/05/beginners-learning-path-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/0fe9d2beb5b10d67b36e019e52b1ba97.png)
+![](img/0fe9d2beb5b10d67b36e019e52b1ba97.png)
 
 *照片由 [Franck V.](https://unsplash.com/@franckinjapan?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,9 +30,9 @@
 
 如果你想直接从 Python 开始，那么我建议你参加 MIT 的《Python 计算机科学导论》，它在 edX 上提供[免费](https://www.edx.org/course/6-00-1x-introduction-to-computer-science-and-programming-using-python-3)课程。请注意，这门课程的先决条件是高中代数，因为你需要解决许多现实世界的数学问题。
 
-如果你觉得自己的计算逻辑不好，且编程中的问题解决能力不强，我推荐微软的这门课程，它与计算思维相关，且在edx上完全是[免费](https://www.edx.org/course/logic-and-computational-thinking-4)。这门课程非常棒，教授了很多计算逻辑和批判性思维。
+如果你觉得自己的计算逻辑不好，且编程中的问题解决能力不强，我推荐微软的这门课程，它与计算思维相关，且在 edx 上完全是[免费](https://www.edx.org/course/logic-and-computational-thinking-4)。这门课程非常棒，教授了很多计算逻辑和批判性思维。
 
-如果你对编程基础很熟练但对面向对象编程没有了解，我建议你学习面向对象编程。虽然它在机器学习（基础级别）中使用不多，但确实很有帮助。我会推荐这门课程，它讲授了OOP和Python中的算法基础。你可以在edx.org上找到这门[免费](https://www.edx.org/course/computing-in-python-iv-objects-algorithms-2)的课程。
+如果你对编程基础很熟练但对面向对象编程没有了解，我建议你学习面向对象编程。虽然它在机器学习（基础级别）中使用不多，但确实很有帮助。我会推荐这门课程，它讲授了 OOP 和 Python 中的算法基础。你可以在 edx.org 上找到这门[免费](https://www.edx.org/course/computing-in-python-iv-objects-algorithms-2)的课程。
 
 下一步是熟悉数据结构和算法。一个好的程序员必须了解一些基本算法，比如链表、二叉树等。微软的这门课程将教你这些：
 
@@ -42,21 +42,21 @@
 
 +   数据结构：链表、栈、队列
 
-这门课程可以在edx.org上[免费](https://www.edx.org/course/algorithms-and-data-structures-4)获得。
+这门课程可以在 edx.org 上[免费](https://www.edx.org/course/algorithms-and-data-structures-4)获得。
 
-如果你想深入了解数据结构和算法，UC San Diego的专业化是一个杰作。它包含6门课程，将你从零基础带到数据结构和算法的高手级别。你可以点击每门课程并免费审阅其材料，但如果你想获得证书，价格为50$/月，取决于你完成的速度。可以在Coursera.org上找到这个专业化或点击[这里](https://www.coursera.org/specializations/data-structures-algorithms)。
+如果你想深入了解数据结构和算法，UC San Diego 的专业化是一个杰作。它包含 6 门课程，将你从零基础带到数据结构和算法的高手级别。你可以点击每门课程并免费审阅其材料，但如果你想获得证书，价格为 50$/月，取决于你完成的速度。可以在 Coursera.org 上找到这个专业化或点击[这里](https://www.coursera.org/specializations/data-structures-algorithms)。
 
-### 机器学习的第2步
+### 机器学习的第 2 步
 
 是的，你猜对了，大多数初学者最危险的部分，数学。
 
-![](../Images/362e0fc4745259dbd41d48d30010a65b.png)
+![](img/362e0fc4745259dbd41d48d30010a65b.png)
 
 *照片由 [Antoine Dautry](https://unsplash.com/@antoine1003?utm_source=medium&utm_medium=referral) 提供，发布于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
-但不用担心，它并不像我们想象的那么困难。如果你认为自己在高中数学（向量、矩阵、微积分、概率和统计）方面有良好的基础，你可以简单地参加一个复习课程。如果你觉得自己不够好，那么学习数学的最佳地方是[KHAN ACADEMY](https://www.khanacademy.org/)。Khan Academy的内容非常丰富且有帮助，一切都可以免费获得。你可以在这里找到所有线性代数、概率和统计以及多变量微积分的课程。
+但不用担心，它并不像我们想象的那么困难。如果你认为自己在高中数学（向量、矩阵、微积分、概率和统计）方面有良好的基础，你可以简单地参加一个复习课程。如果你觉得自己不够好，那么学习数学的最佳地方是[KHAN ACADEMY](https://www.khanacademy.org/)。Khan Academy 的内容非常丰富且有帮助，一切都可以免费获得。你可以在这里找到所有线性代数、概率和统计以及多变量微积分的课程。
 
-另一个不错的课程是来自Imperial College London的Coursera机器学习数学专业化。这是一门很棒的课程，讲解基础并复习概念，但不会深入探讨。练习和测验非常具有挑战性，共有3门课程。
+另一个不错的课程是来自 Imperial College London 的 Coursera 机器学习数学专业化。这是一门很棒的课程，讲解基础并复习概念，但不会深入探讨。练习和测验非常具有挑战性，共有 3 门课程。
 
 +   [机器学习数学：线性代数](https://www.coursera.org/learn/linear-algebra-machine-learning/)
 
@@ -78,9 +78,9 @@
 
 在 edx.org 上[免费](https://www.edx.org/course/fundamentals-of-statistics-2)提供。
 
-如果你想在编程的同时学习数学，微软有一门很好的课程，“机器学习的基础数学：Python版”。这是一门互动课程，使用Python的著名库Numpy、pandas和matplotlib进行图形化数学教学，这些库是该课程的先决条件。可以在 edx.org 上[免费](https://www.edx.org/course/essential-math-for-machine-learning-python-edition-3)找到这门课程。
+如果你想在编程的同时学习数学，微软有一门很好的课程，“机器学习的基础数学：Python 版”。这是一门互动课程，使用 Python 的著名库 Numpy、pandas 和 matplotlib 进行图形化数学教学，这些库是该课程的先决条件。可以在 edx.org 上[免费](https://www.edx.org/course/essential-math-for-machine-learning-python-edition-3)找到这门课程。
 
-Udacity提供了3门很棒的免费统计学课程。
+Udacity 提供了 3 门很棒的免费统计学课程。
 
 +   [统计学入门](https://www.udacity.com/course/intro-to-statistics--st101)
 
@@ -88,13 +88,13 @@ Udacity提供了3门很棒的免费统计学课程。
 
 +   [推论统计入门](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)
 
-你还可以在学习实际机器学习的同时学习数学，遇到不懂的内容，可以在可汗学院或YouTube上搜索，有许多相关的优秀视频。
+你还可以在学习实际机器学习的同时学习数学，遇到不懂的内容，可以在可汗学院或 YouTube 上搜索，有许多相关的优秀视频。
 
 ### 机器学习的第三步
 
-既然你已经熟悉了线性代数、多变量微积分和统计学，现在你需要学习Python著名的数据可视化库，包括Numpy、Pandas、Matplotlib和Scipy，它们帮助你分析和操作各种数据，并以图形方式展示。虽然还有很多其他的数据可视化库，但这些是最重要的。将你的线性代数和微积分概念以图形方式实现并可视化。
+既然你已经熟悉了线性代数、多变量微积分和统计学，现在你需要学习 Python 著名的数据可视化库，包括 Numpy、Pandas、Matplotlib 和 Scipy，它们帮助你分析和操作各种数据，并以图形方式展示。虽然还有很多其他的数据可视化库，但这些是最重要的。将你的线性代数和微积分概念以图形方式实现并可视化。
 
-在这方面的杰作之一是密歇根大学的“Python统计学专业化”课程，详细讲授数据可视化及其操作。当然，可以在 coursera.org 上[免费](https://www.coursera.org/specializations/statistics-with-python)（点击每门课程进行免费旁听）。
+在这方面的杰作之一是密歇根大学的“Python 统计学专业化”课程，详细讲授数据可视化及其操作。当然，可以在 coursera.org 上[免费](https://www.coursera.org/specializations/statistics-with-python)（点击每门课程进行免费旁听）。
 
 另一门由密歇根大学提供的适合数据分析初学者的课程是“Introduction to Data Science in Python”，它以非常好的方式从 numpy 的基础知识开始教授 pandas。在 coursera.org 上[免费](https://www.coursera.org/learn/python-data-analysis?specialization=data-science-python)提供。该课程的下一部分是颠覆性的。名为“Applied Plotting, Charting, and Data Representation in Python”，它教授所有图形可视化及其技巧和方法。
 
@@ -122,7 +122,7 @@ Udacity提供了3门很棒的免费统计学课程。
 
 ### 第四步 实用机器学习
 
-![](../Images/8f25107edb03757a617bf4f3c5da79e2.png)
+![](img/8f25107edb03757a617bf4f3c5da79e2.png)
 
 *照片由[Franck V.](https://unsplash.com/@franckinjapan?utm_source=medium&utm_medium=referral)提供，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -186,9 +186,9 @@ Udacity提供了3门很棒的免费统计学课程。
 
 这里有一些推荐。
 
-+   现在就开始收听OC Devel的“机器学习指南”播客吧。这将给你提供一个关于机器学习的全面概述，以及一名安卓和网络应用开发者转向机器学习道路的经历。可在[Apple Podcasts](https://podcasts.apple.com/us/podcast/machine-learning-guide/id1204521130)/iTunes、Google Podcasts及其[官网](http://ocdevel.com/mlg)收听。
++   现在就开始收听 OC Devel 的“机器学习指南”播客吧。这将给你提供一个关于机器学习的全面概述，以及一名安卓和网络应用开发者转向机器学习道路的经历。可在[Apple Podcasts](https://podcasts.apple.com/us/podcast/machine-learning-guide/id1204521130)/iTunes、Google Podcasts 及其[官网](http://ocdevel.com/mlg)收听。
 
-+   获取《动手学机器学习：Scikit-Learn和TensorFlow实践》（或其2019年10月发布的新版本，名为《动手学机器学习：Scikit-Learn、Keras和TensorFlow实践》）。本书作者是[Aurélien Géron](https://www.amazon.com/Aur%C3%A9lien-G%C3%A9ron/e/B004MOO740/ref=dp_byline_cont_book_1)。本书第一版在[人工智能（图书）](https://www.amazon.com/gp/bestsellers/books/491300/ref=pd_zg_hrsr_books)、[自然语言处理（图书）](https://www.amazon.com/gp/bestsellers/books/271581011/ref=pd_zg_hrsr_books)和[计算机神经网络](https://www.amazon.com/gp/bestsellers/books/3896/ref=pd_zg_hrsr_books)类别中均排名第一。这本书内容非常全面，值得推荐。
++   获取《动手学机器学习：Scikit-Learn 和 TensorFlow 实践》（或其 2019 年 10 月发布的新版本，名为《动手学机器学习：Scikit-Learn、Keras 和 TensorFlow 实践》）。本书作者是[Aurélien Géron](https://www.amazon.com/Aur%C3%A9lien-G%C3%A9ron/e/B004MOO740/ref=dp_byline_cont_book_1)。本书第一版在[人工智能（图书）](https://www.amazon.com/gp/bestsellers/books/491300/ref=pd_zg_hrsr_books)、[自然语言处理（图书）](https://www.amazon.com/gp/bestsellers/books/271581011/ref=pd_zg_hrsr_books)和[计算机神经网络](https://www.amazon.com/gp/bestsellers/books/3896/ref=pd_zg_hrsr_books)类别中均排名第一。这本书内容非常全面，值得推荐。
 
 +   不要忘了阅读[这篇](https://towardsdatascience.com/5-steps-and-10-steps-to-learn-machine-learning-c4b61f78c712)。其中有很多有用的信息。
 
@@ -210,14 +210,14 @@ Udacity提供了3门很棒的免费统计学课程。
 
 ### 相关话题
 
-+   [成为优秀数据科学家的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学数据科学的人都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学数据科学的人都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以找到目标，找到目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

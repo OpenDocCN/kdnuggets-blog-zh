@@ -1,20 +1,20 @@
 # 处理离群点的三种方法
 
-> 原文：[https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html](https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html)
+> 原文：[`www.kdnuggets.com/2017/01/3-methods-deal-outliers.html`](https://www.kdnuggets.com/2017/01/3-methods-deal-outliers.html)
 
 **由 [Alberto Quesada](https://www.linkedin.com/in/alberto-quesada-le%C3%B3n-01a6b912a)， [Artelnics](https://www.artelnics.com/).**
 
-![离群点检测](../Images/fb15314161e17dc090e10ff6ca0efe21.png)
+![离群点检测](img/fb15314161e17dc090e10ff6ca0efe21.png)
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -36,49 +36,49 @@
 
 y = sin(π·x)
 
-一旦我们获得数据集，我们将两个y值替换为远离我们函数的其他值。下图展示了这个数据集。
+一旦我们获得数据集，我们将两个 y 值替换为远离我们函数的其他值。下图展示了这个数据集。
 
-![离群点检测-1](../Images/59e5e269dbcbf6262b91886543d5fe0d.png)
+![离群点检测-1](img/59e5e269dbcbf6262b91886543d5fe0d.png)
 
-点A=(-0.5,-1.5)和B=(0.5,0.5)是离群点。点A在y数据定义的范围之外，而点B在该范围内。正如我们将看到的那样，这使得它们的性质不同，我们需要不同的方法来检测和处理它们。
+点 A=(-0.5,-1.5)和 B=(0.5,0.5)是离群点。点 A 在 y 数据定义的范围之外，而点 B 在该范围内。正如我们将看到的那样，这使得它们的性质不同，我们需要不同的方法来检测和处理它们。
 
 ### 1. 单变量方法
 
 检测离群点的最简单方法之一是使用箱线图。箱线图是一种用于描述数据分布的图形显示。箱线图使用中位数以及下四分位数和上四分位数。
 
-Tukey的方法将异常值定义为那些远离数据集中心点——中位数的值。允许到数据中心的最大距离称为清理参数。如果清理参数非常大，则测试对异常值的敏感度降低。相反，如果它过小，许多值将被检测为异常值。
+Tukey 的方法将异常值定义为那些远离数据集中心点——中位数的值。允许到数据中心的最大距离称为清理参数。如果清理参数非常大，则测试对异常值的敏感度降低。相反，如果它过小，许多值将被检测为异常值。
 
-下图显示了变量y的箱线图。该变量的最小值为-1.5，第一个四分位数为-0.707，第二个四分位数或中位数为0，第三个四分位数为0.588，最大值为0.988。
+下图显示了变量 y 的箱线图。该变量的最小值为-1.5，第一个四分位数为-0.707，第二个四分位数或中位数为 0，第三个四分位数为 0.588，最大值为 0.988。
 
-![异常值检测-2](../Images/da5e5297ec8089173875e4934e88fed2.png)
+![异常值检测-2](img/da5e5297ec8089173875e4934e88fed2.png)
 
-如我们所见，最小值远离第一个四分位数和中位数。如果我们将清理参数设置为0.6，Tukey方法将检测到点A是异常值，并将其从数据集中删除。
+如我们所见，最小值远离第一个四分位数和中位数。如果我们将清理参数设置为 0.6，Tukey 方法将检测到点 A 是异常值，并将其从数据集中删除。
 
-重新绘制该变量的箱线图后，我们可以注意到异常值已经被移除。因此，数据的分布现在好得多。现在，y的最小值为-0.9858，第一个四分位数为-0.588，第二个四分位数或中位数为0.078，第三个四分位数为0.707，最大值为0.988。
+重新绘制该变量的箱线图后，我们可以注意到异常值已经被移除。因此，数据的分布现在好得多。现在，y 的最小值为-0.9858，第一个四分位数为-0.588，第二个四分位数或中位数为 0.078，第三个四分位数为 0.707，最大值为 0.988。
 
-![异常值检测-3](../Images/0aee746ef56626cef2d6ecd4d87a099a.png)
+![异常值检测-3](img/0aee746ef56626cef2d6ecd4d87a099a.png)
 
-然而，这种单变量方法没有检测到点B，因此我们还没有完成。
+然而，这种单变量方法没有检测到点 B，因此我们还没有完成。
 
 ### 2\. 多变量方法
 
-异常值不需要是极端值。因此，正如我们在点B中看到的，单变量方法并不总是有效。多变量方法试图通过使用所有可用数据构建模型，然后清理那些误差超过给定值的实例来解决这个问题。
+异常值不需要是极端值。因此，正如我们在点 B 中看到的，单变量方法并不总是有效。多变量方法试图通过使用所有可用数据构建模型，然后清理那些误差超过给定值的实例来解决这个问题。
 
-在这种情况下，我们使用所有可用的数据（但排除了由单变量方法排除的点B）训练了一个神经网络。一旦我们拥有了预测模型，我们就会执行线性回归分析，以获得下一个图表。预测值以方形图示表示，实际值以方形表示。彩色线表示最佳线性拟合。灰色线表示完美拟合。
+在这种情况下，我们使用所有可用的数据（但排除了由单变量方法排除的点 B）训练了一个神经网络。一旦我们拥有了预测模型，我们就会执行线性回归分析，以获得下一个图表。预测值以方形图示表示，实际值以方形表示。彩色线表示最佳线性拟合。灰色线表示完美拟合。
 
-![异常值检测-4](../Images/1adf093616ac03e5950806952bda3932.png)
+![异常值检测-4](img/1adf093616ac03e5950806952bda3932.png)
 
 如我们所见，有一个点远离模型。这一点干扰了模型，因此我们可以认为它是另一个异常值。
 
-为了定量地找到那个点，我们可以计算模型输出与数据中目标之间的最大误差。下表列出了具有最大误差的5个实例。
+为了定量地找到那个点，我们可以计算模型输出与数据中目标之间的最大误差。下表列出了具有最大误差的 5 个实例。
 
-![异常值错误表](../Images/f14ee0648b2cbe63ce2f1d91cea86b81.png)
+![异常值错误表](img/f14ee0648b2cbe63ce2f1d91cea86b81.png)
 
-我们可以注意到实例11在与其他实例的比较中具有较大的错误（0.430对比0.069,…）。如果我们查看线性回归图，可以看到这个实例对应于远离模型的点。
+我们可以注意到实例 11 在与其他实例的比较中具有较大的错误（0.430 对比 0.069,…）。如果我们查看线性回归图，可以看到这个实例对应于远离模型的点。
 
 如果我们选择 20% 的最大误差，这种方法会将 B 点识别为离群点，并将其从数据集中清除。我们可以通过再次进行线性回归分析来验证这一点。
 
-![离群点检测-5](../Images/c88f847a26b4e6f9c30374ac967441ed.png)
+![离群点检测-5](img/c88f847a26b4e6f9c30374ac967441ed.png)
 
 数据集中没有更多的离群点，因此我们模型的泛化能力将显著提高。
 
@@ -92,11 +92,11 @@ Minkowski 误差是一种损失指标，比标准的平方和误差对离群点�
 
 使用平方和误差训练的模型绘制在下图中。我们可以看到，两个离群点正在破坏模型。
 
-![离群点检测-6](../Images/24a24da8ce907fc7053acc836308fe84.png)
+![离群点检测-6](img/24a24da8ce907fc7053acc836308fe84.png)
 
 现在，我们将使用 Minkowski 误差训练相同的神经网络。结果模型如图所示。我们可以看到，Minkowski 误差使训练过程对离群点的敏感性低于平方和误差。
 
-![离群点检测-7](../Images/bc68f54a5c1894769627c2f858781799.png)
+![离群点检测-7](img/bc68f54a5c1894769627c2f858781799.png)
 
 结果表明，Minkowski 误差显著提高了我们模型的质量。
 
@@ -112,7 +112,7 @@ Minkowski 误差是一种损失指标，比标准的平方和误差对离群点�
 
 **相关内容：**
 
-+   [数据科学基础：从数据中可以挖掘出哪些类型的模式？](/2016/12/data-science-basics-types-patterns-mined-data.html)
++   数据科学基础：从数据中可以挖掘出哪些类型的模式？
 
 +   [提高回归模型鲁棒性的巧妙技巧](https://www.kdnuggets.com/2016/08/neat-trick-increase-robustness-regression-models.html)
 
@@ -122,12 +122,12 @@ Minkowski 误差是一种损失指标，比标准的平方和误差对离群点�
 
 +   [如何处理机器学习中的分类数据](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
 
-+   [处理机器学习中数据不足的5种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)
++   [处理机器学习中数据不足的 5 种方法](https://www.kdnuggets.com/2019/06/5-ways-lack-data-machine-learning.html)
 
-+   [黑色星期五优惠 - 通过DataCamp以更低的价格掌握机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)
++   [黑色星期五优惠 - 通过 DataCamp 以更低的价格掌握机器学习](https://www.kdnuggets.com/2022/11/datacamp-black-friday-deal-master-machine-learning-less-datacamp.html)
 
-+   [如何使用插值技术处理Pandas中的缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
++   [如何使用插值技术处理 Pandas 中的缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
 
 +   [如何在数据集中处理异常值](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)
 
-+   [使用Python中的标准差移除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
++   [使用 Python 中的标准差移除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)

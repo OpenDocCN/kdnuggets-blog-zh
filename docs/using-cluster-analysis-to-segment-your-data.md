@@ -1,22 +1,22 @@
 # 使用聚类分析对数据进行分段
 
-> 原文：[https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)
+> 原文：[`www.kdnuggets.com/using-cluster-analysis-to-segment-your-data`](https://www.kdnuggets.com/using-cluster-analysis-to-segment-your-data)
 
-![将水果和蔬菜归类作为聚类的现实世界示例](../Images/95ced2ac71a362b812921fbdca0b7b6e.png)
+![将水果和蔬菜归类作为聚类的现实世界示例](img/95ced2ac71a362b812921fbdca0b7b6e.png)
 
 图片来源：Pexels
 
-机器学习（简称ML）不仅仅是关于预测。还有其他无监督的过程，其中聚类尤为突出。本文介绍了聚类和聚类分析，突出展示了聚类分析在分段、分析和从相似数据组中获取洞察的潜力。
+机器学习（简称 ML）不仅仅是关于预测。还有其他无监督的过程，其中聚类尤为突出。本文介绍了聚类和聚类分析，突出展示了聚类分析在分段、分析和从相似数据组中获取洞察的潜力。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
@@ -28,7 +28,7 @@
 
 这是聚类在机器学习技术谱系中的定位：
 
-![ML领域中的聚类](../Images/e6195f16cbc7854761ce1acc418e31db.png)
+![ML 领域中的聚类](img/e6195f16cbc7854761ce1acc418e31db.png)
 
 为了更好地理解聚类的概念，可以考虑在超市中寻找具有相似购物行为的顾客群体，或者在电子商务平台上将大量产品分成类别或相似项。这些都是涉及聚类过程的现实世界场景的常见示例。
 
@@ -36,7 +36,7 @@
 
 存在各种数据聚类方法。三种最受欢迎的方法类别是：
 
-+   **迭代聚类**：这些算法反复将（有时重新分配）数据点分配到各自的簇中，直到它们收敛到一个“足够好”的解决方案。最受欢迎的迭代聚类算法是**k均值**，它通过将数据点分配给由代表点（簇质心）定义的簇，并逐步更新这些质心，直到达到收敛。
++   **迭代聚类**：这些算法反复将（有时重新分配）数据点分配到各自的簇中，直到它们收敛到一个“足够好”的解决方案。最受欢迎的迭代聚类算法是**k 均值**，它通过将数据点分配给由代表点（簇质心）定义的簇，并逐步更新这些质心，直到达到收敛。
 
 +   **层次聚类**：顾名思义，这些算法使用自上而下的方法（将数据点集合拆分直到得到所需数量的子组）或自下而上的方法（逐渐将相似的数据点像气泡一样合并成越来越大的组）构建一个基于树状结构的层次体系。**AHC**（*Agglomerative Hierarchical Clustering*，聚合层次聚类）是自下而上的层次聚类算法的一个常见示例。
 
@@ -54,7 +54,7 @@
 
 以下图示说明了这两个常被混淆的术语之间的区别和关系。
 
-![聚类与簇分析](../Images/59aa9f495ea209e82c7d51ca383ae957.png)
+![聚类与簇分析](img/59aa9f495ea209e82c7d51ca383ae957.png)
 
 ## 实际示例
 
@@ -81,7 +81,7 @@ X = X.drop(['island', 'sex'], axis=1)
 y = penguins.species.astype("category").cat.codes
 ```
 
-通过以下几行代码，可以应用*sklearn*库中可用的K-means聚类算法，来找到数据中的若干个簇。我们只需要指定要找到的簇的数量，在这个例子中，我们将数据分成k=3个簇：
+通过以下几行代码，可以应用*sklearn*库中可用的 K-means 聚类算法，来找到数据中的若干个簇。我们只需要指定要找到的簇的数量，在这个例子中，我们将数据分成 k=3 个簇：
 
 ```py
 from sklearn.cluster import KMeans
@@ -89,7 +89,7 @@ kmeans = KMeans(n_clusters = 3, n_init=100)
 X["cluster"] = kmeans.fit_predict(X)
 ```
 
-上述代码的最后一行将聚类结果，即分配给每个数据实例的簇的ID，存储在一个名为“cluster”的新属性中。
+上述代码的最后一行将聚类结果，即分配给每个数据实例的簇的 ID，存储在一个名为“cluster”的新属性中。
 
 现在是时候生成一些簇的可视化图来进行分析和解释了！以下代码片段稍长，但归结起来就是生成两个数据可视化图：第一个图展示了围绕两个数据特征——嘴喙长度和翅膀长度——的散点图，以及每个观测值所属的簇，第二个可视化图展示了每个数据点所属的实际企鹅物种。
 
@@ -121,11 +121,11 @@ plt.show
 
 这里是可视化图：
 
-![聚类企鹅数据](../Images/101820f3b6c1cf346f9fedc090f28cc6.png)
+![聚类企鹅数据](img/101820f3b6c1cf346f9fedc090f28cc6.png)
 
 通过观察这些簇，我们可以提取出初步的见解：
 
-+   在不同簇之间的数据点（企鹅）之间存在微妙但不太明显的分隔，并且发现一些子组之间有轻微的重叠。这并不一定让我们得出聚类结果好坏的结论：我们在数据集的多个属性上应用了k-means算法，但该可视化图仅显示了两个属性：'嘴喙长度'和'翅膀长度'下的数据点在簇中的位置。可能还有其他属性对，簇在视觉上表现得更加明显分开。
++   在不同簇之间的数据点（企鹅）之间存在微妙但不太明显的分隔，并且发现一些子组之间有轻微的重叠。这并不一定让我们得出聚类结果好坏的结论：我们在数据集的多个属性上应用了 k-means 算法，但该可视化图仅显示了两个属性：'嘴喙长度'和'翅膀长度'下的数据点在簇中的位置。可能还有其他属性对，簇在视觉上表现得更加明显分开。
 
 这引出了一个问题：如果我们尝试在训练模型时使用的其他两个变量下可视化我们的簇，会怎样？
 
@@ -145,7 +145,7 @@ plt.legend(fontsize=10)
 plt.show
 ```
 
-![聚类企鹅数据](../Images/3e772a3bf79fd532f54d3de2861b6e9e.png)
+![聚类企鹅数据](img/3e772a3bf79fd532f54d3de2861b6e9e.png)
 
 这个图看起来非常清晰！现在我们将数据分为三个可区分的组。通过进一步分析我们的可视化图，我们可以从中提取出额外的见解：
 

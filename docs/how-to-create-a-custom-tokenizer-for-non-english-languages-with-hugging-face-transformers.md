@@ -1,8 +1,8 @@
 # 如何使用 Hugging Face Transformers 为非英文语言创建自定义分词器
 
-> 原文：[https://www.kdnuggets.com/how-to-create-a-custom-tokenizer-for-non-english-languages-with-hugging-face-transformers](https://www.kdnuggets.com/how-to-create-a-custom-tokenizer-for-non-english-languages-with-hugging-face-transformers)
+> 原文：[`www.kdnuggets.com/how-to-create-a-custom-tokenizer-for-non-english-languages-with-hugging-face-transformers`](https://www.kdnuggets.com/how-to-create-a-custom-tokenizer-for-non-english-languages-with-hugging-face-transformers)
 
-![非英文语言的自定义分词器](../Images/cc11ae130d36388a8ade84799bcca8fe.png)
+![非英文语言的自定义分词器](img/cc11ae130d36388a8ade84799bcca8fe.png)
 
 作者插图 | Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -55,7 +55,7 @@ dataset = load_dataset('oscar', 'unshuffled_deduplicated_ur)
 
 **输出：**
 
-![output](../Images/e7cc24805f76c9489210cc7c3484ba78.png)
+![output](img/e7cc24805f76c9489210cc7c3484ba78.png)
 
 请注意，你可以在此步骤中加载任何语言的数据集。我们的乌尔都语数据集的一个示例如下所示：
 
@@ -105,7 +105,7 @@ tokenizer.save_model('my_tokenizer')
 
 将 `path_to_save_tokenizer` 替换为保存分词器文件的所需路径。运行此代码将保存两个文件，即：
 
-![](../Images/308b6424472f4314a60e0cf5e71da9b2.png)
+![](img/308b6424472f4314a60e0cf5e71da9b2.png)
 
 #### 第六步：加载和使用分词器
 
@@ -137,14 +137,14 @@ print(encoded_input)
 
 ### 相关话题
 
-+   [如何使用MarianMT和Hugging Face Transformers进行语言翻译](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)
++   [如何使用 MarianMT 和 Hugging Face Transformers 进行语言翻译](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)
 
-+   [如何使用Hugging Face Transformers微调BERT进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
++   [如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
 
-+   [如何利用GPT生成创意内容，使用Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)
++   [如何利用 GPT 生成创意内容，使用 Hugging Face…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)
 
-+   [使用Hugging Face Transformers构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)
++   [使用 Hugging Face Transformers 构建推荐系统](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)
 
-+   [使用Hugging Face Transformers进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
++   [使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
 
-+   [如何从零开始构建和训练Transformer模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)
++   [如何从零开始构建和训练 Transformer 模型…](https://www.kdnuggets.com/how-to-build-and-train-a-transformer-model-from-scratch-with-hugging-face-transformers)

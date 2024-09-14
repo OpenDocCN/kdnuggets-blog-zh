@@ -1,8 +1,8 @@
 # 使用 PyTest 入门：轻松编写和运行 Python 测试
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)
+> 原文：[`www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python`](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)
 
-![使用 PyTest 入门](../Images/e14abc30eccb9a742052e136c5e1a866.png)
+![使用 PyTest 入门](img/e14abc30eccb9a742052e136c5e1a866.png)
 
 图片来源于作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 

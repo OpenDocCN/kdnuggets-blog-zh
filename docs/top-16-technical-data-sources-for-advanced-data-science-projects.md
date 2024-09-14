@@ -1,8 +1,8 @@
-# 高级数据科学项目的16个顶级技术数据源
+# 高级数据科学项目的 16 个顶级技术数据源
 
-> 原文：[https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects](https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects)
+> 原文：[`www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects`](https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects)
 
-![高级数据科学项目的16个顶级技术数据源](../Images/c1cdb21da72049b6eb7c329b9492c0b3.png)
+![高级数据科学项目的 16 个顶级技术数据源](img/c1cdb21da72049b6eb7c329b9492c0b3.png)
 
 图片由作者提供
 
@@ -12,29 +12,29 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 问题是，在哪里找到这些该死的数据？幸运的是，许多网站提供了丰富的数据，适用于各种目的。
 
-![高级数据科学项目的16个顶级技术数据源](../Images/911833bdefa544df1af82e490f251cfb.png)
+![高级数据科学项目的 16 个顶级技术数据源](img/911833bdefa544df1af82e490f251cfb.png)
 
 图片由作者提供
 
 # 1\. Kaggle
 
-你听说过[Kaggle](https://www.kaggle.com)，它可能是数据科学社区中最知名的平台。它托管了各种格式（CSV、JSON、SQLite、BigQuery）和来自多个行业及主题的数据集，如健康、汽车、艺术与娱乐、生物学、社会科学、投资、社交网络、体育等。你也可以根据数据集的技术焦点进行搜索，例如计算机科学、分类、计算机视觉、NLP或数据可视化。
+你听说过[Kaggle](https://www.kaggle.com)，它可能是数据科学社区中最知名的平台。它托管了各种格式（CSV、JSON、SQLite、BigQuery）和来自多个行业及主题的数据集，如健康、汽车、艺术与娱乐、生物学、社会科学、投资、社交网络、体育等。你也可以根据数据集的技术焦点进行搜索，例如计算机科学、分类、计算机视觉、NLP 或数据可视化。
 
-目前，提供274,855个数据集，你不会缺少数据。
+目前，提供 274,855 个数据集，你不会缺少数据。
 
-Kaggle的用户友好界面和活跃的社区论坛使其成为初学者和专业人士的绝佳资源。
+Kaggle 的用户友好界面和活跃的社区论坛使其成为初学者和专业人士的绝佳资源。
 
-# 2\. UCI机器学习库
+# 2\. UCI 机器学习库
 
 如果你是机器学习爱好者，[UCI 机器学习库](https://archive.ics.uci.edu)应该是你的首选网站。顾名思义，这个库是由加州大学欧文分校（UCI）创建的。他们收集了大量针对机器学习的数据集。这些数据集覆盖了各种主题，因此对那些希望练习和提升机器学习技能的人特别有用。
 
@@ -64,9 +64,9 @@ Kaggle的用户友好界面和活跃的社区论坛使其成为初学者和专�
 
 # 7\. FiveThirtyEight
 
-[FiveThirtyEight](https://data.fivethirtyeight.com)由ABC新闻提供，是他们文章和图表的数据与代码库。它是数据记者和对统计故事讲述感兴趣的人的完美资源。如果你对涉及时事、政治、体育等项目感兴趣，这里是你的数据来源。
+[FiveThirtyEight](https://data.fivethirtyeight.com)由 ABC 新闻提供，是他们文章和图表的数据与代码库。它是数据记者和对统计故事讲述感兴趣的人的完美资源。如果你对涉及时事、政治、体育等项目感兴趣，这里是你的数据来源。
 
-它提供了从2014年至今的超过160个数据集。
+它提供了从 2014 年至今的超过 160 个数据集。
 
 # 8\. 世界银行开放数据
 
@@ -74,15 +74,15 @@ Kaggle的用户友好界面和活跃的社区论坛使其成为初学者和专�
 
 # 9\. GitHub
 
-[GitHub](https://github.com)不仅是一个分享代码的平台。它也可以用来寻找数据项目的数据。许多组织和个人用户在GitHub仓库中托管他们的数据集。这些数据覆盖了广泛的话题，通常附有详尽的文档和分析代码。
+[GitHub](https://github.com)不仅是一个分享代码的平台。它也可以用来寻找数据项目的数据。许多组织和个人用户在 GitHub 仓库中托管他们的数据集。这些数据覆盖了广泛的话题，通常附有详尽的文档和分析代码。
 
 # 10\. OpenML
 
-[OpenML](https://www.openml.org)是一个在线机器学习平台。这也意味着你可以访问大量数据。更具体地说，几乎有5,400个数据集。它旨在分享、组织和讨论数据以及机器学习实验的结果。OpenML可以与流行的机器学习环境集成，这对你的数据科学学习是一个加分项。
+[OpenML](https://www.openml.org)是一个在线机器学习平台。这也意味着你可以访问大量数据。更具体地说，几乎有 5,400 个数据集。它旨在分享、组织和讨论数据以及机器学习实验的结果。OpenML 可以与流行的机器学习环境集成，这对你的数据科学学习是一个加分项。
 
 # 11\. Reddit 数据集
 
-[Datasets subreddit](https://www.reddit.com/r/datasets/)是一个由社区驱动的数据来源。人们在reddit上分享各种信息。好吧，他们也分享和请求数据集用于数据项目。有时候在那里找到数据比较困难。但这不是因为数据的缺乏。恰恰相反！这个地方充满了数据，这可能使得数据搜索有时显得相当混乱。数据范围从高度特定和不寻常的到更传统的数据集。由于这基本上是一个论坛，你也可以参与讨论并请求对数据集的帮助。
+[Datasets subreddit](https://www.reddit.com/r/datasets/)是一个由社区驱动的数据来源。人们在 reddit 上分享各种信息。好吧，他们也分享和请求数据集用于数据项目。有时候在那里找到数据比较困难。但这不是因为数据的缺乏。恰恰相反！这个地方充满了数据，这可能使得数据搜索有时显得相当混乱。数据范围从高度特定和不寻常的到更传统的数据集。由于这基本上是一个论坛，你也可以参与讨论并请求对数据集的帮助。
 
 # 12\. Eurostat
 
@@ -92,7 +92,7 @@ Kaggle的用户友好界面和活跃的社区论坛使其成为初学者和专�
 
 [HDX](https://data.humdata.org)是一个开放平台，你可以在这里找到人道主义数据。该平台由联合国人道主义事务协调办公室管理。这个平台提供围绕全球每个国家的人道主义危机和紧急情况的数据。如果你对关注全球问题、灾害响应和人类福利的项目感兴趣，你可能会发现这很有用。
 
-这里有20,344个活跃的数据集和2,570个归档的数据集，具有各种特征和格式。
+这里有 20,344 个活跃的数据集和 2,570 个归档的数据集，具有各种特征和格式。
 
 # 14\. 疾病控制与预防中心 (CDC)
 
@@ -106,11 +106,11 @@ Kaggle的用户友好界面和活跃的社区论坛使其成为初学者和专�
 
 我提到的最后一个数据来源是[NASA](https://data.nasa.gov)。那里有大量关于航空航天、应用科学、应用程序、地球科学、管理/操作、原始数据、软件和空间科学的数据。
 
-它有超过10,000个数据集，所以不要在其数据宇宙中迷失方向！
+它有超过 10,000 个数据集，所以不要在其数据宇宙中迷失方向！
 
 # 结论
 
-我相信这16个网站会给你提供足够的数据，直到时间的尽头，这正是我的最终目标！然而，数据的数量并不是一切。
+我相信这 16 个网站会给你提供足够的数据，直到时间的尽头，这正是我的最终目标！然而，数据的数量并不是一切。
 
 我选择这些网站是因为它们会为你提供非常多样化的数据集，适合各种数据科学项目。数据集的具体内容因行业而异。因此，使用不同的数据集也能让你获得领域知识。
 
@@ -118,17 +118,17 @@ Kaggle的用户友好界面和活跃的社区论坛使其成为初学者和专�
 
 现在，你可以开始自己的数据科学项目了！如果需要更多的创意，这里有一些[数据科学项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+16+websites+for+ds+projects)可以作为初学者进行。
 
-[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一名数据科学家，专注于产品策略。他还是一名兼职教授，教授分析课程，并且是StrataScratch的创始人，该平台帮助数据科学家准备顶级公司的真实面试问题。Nate写关于职业市场的最新趋势，提供面试建议，分享数据科学项目，并覆盖所有SQL内容。
+[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一名数据科学家，专注于产品策略。他还是一名兼职教授，教授分析课程，并且是 StrataScratch 的创始人，该平台帮助数据科学家准备顶级公司的真实面试问题。Nate 写关于职业市场的最新趋势，提供面试建议，分享数据科学项目，并覆盖所有 SQL 内容。
 
 ### 更多相关主题
 
-+   [使用Tableau创建高效的组合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
++   [使用 Tableau 创建高效的组合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
 
 +   [学习数据隐私，实施技术隐私解决方案……](https://www.kdnuggets.com/2022/04/manning-data-privacy-learn-implement-technical-privacy-solutions-tools-scale.html)
 
 +   [如何写引人入胜的技术博客](https://www.kdnuggets.com/2022/04/write-engaging-technical-blogs.html)
 
-+   [每个AI从业者都应了解的隐藏技术债务](https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html)
++   [每个 AI 从业者都应了解的隐藏技术债务](https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html)
 
 +   [ChatGPT 与 Google Bard 的技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
 

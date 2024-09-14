@@ -1,8 +1,8 @@
 # 使用 PyTorch 的可解释神经网络
 
-> 原文：[https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
+> 原文：[`www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html`](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
 
-![可解释神经网络与 PyTorch](../Images/5ba5c52449e7cf37809764fe94987d2c.png)
+![可解释神经网络与 PyTorch](img/5ba5c52449e7cf37809764fe94987d2c.png)
 
 图片由 [Jan Schulz # Webdesigner Stuttgart](https://unsplash.com/@wombat?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -20,7 +20,7 @@
 
 在我的旧文章中，我创建了以下图表，展示了我们如何将一些模型放置在 *可解释性-准确性空间* 中。
 
-![可解释神经网络与 PyTorch](../Images/62ba27e46c8b8ea08845bc506f6bd858.png)
+![可解释神经网络与 PyTorch](img/62ba27e46c8b8ea08845bc506f6bd858.png)
 
 作者提供的图片。
 
@@ -34,7 +34,7 @@
 
 考虑以下玩具神经网络，它具有三个输入节点 *x*₁、*x*₂、*x*₃，一个输出节点 *ŷ*，以及三个具有六个节点的隐藏层。我在这里省略了偏置项。
 
-![可解释的神经网络与 PyTorch](../Images/73ca1116db1a3c9fe17827a150296371.png)
+![可解释的神经网络与 PyTorch](img/73ca1116db1a3c9fe17827a150296371.png)
 
 图片由作者提供。
 
@@ -48,7 +48,7 @@
 
 将树限制为这样的形式在许多情况下不会对性能产生太大影响，但使我们能够像这样可视化特征的影响：
 
-![可解释的神经网络与 PyTorch](../Images/6010d7abeb3804d7d84a7e363a4dcfc6.png)
+![可解释的神经网络与 PyTorch](img/6010d7abeb3804d7d84a7e363a4dcfc6.png)
 
 **interpretml** 的 show 函数输出。图片由作者提供。
 
@@ -68,23 +68,23 @@
 
 因此，如果问题在于神经网络的输入由于边缘过多而散布在隐藏层中，我们可以考虑删除一些边缘。特别是，我们需要删除那些允许一个特征的信息流向另一个特征的边缘。仅删除这些*溢出边缘*，上面的玩具神经网络变为：
 
-![可解释的神经网络与 PyTorch](../Images/e9f1afaa6b7136c25c2db9c8e15edef7.png)
+![可解释的神经网络与 PyTorch](img/e9f1afaa6b7136c25c2db9c8e15edef7.png)
 
 图片由作者提供。
 
 我们为三个输入变量创建了三个单独的**块**，每个块都是一个具有单个部分输出的完全连接网络*ŷᵢ*。作为最后一步，这些*ŷᵢ*被加和，并且加上一个偏置（在图示中省略）以产生最终输出*ŷ*。
 
-我们引入部分输出是为了能够创建与EBM允许的相同类型的图。上图中的一个块允许一个图：*xᵢ* 输入，ŷᵢ* 输出。稍后我们将看到如何做到这一点。
+我们引入部分输出是为了能够创建与 EBM 允许的相同类型的图。上图中的一个块允许一个图：*xᵢ* 输入，ŷᵢ* 输出。稍后我们将看到如何做到这一点。
 
 现在我们已经有了完整的架构！我认为理论上理解它是相当简单的，但让我们也来实现一下。这样，你会很高兴，因为你可以使用神经网络，而业务也会很高兴，因为神经网络是可解释的。
 
-## 在PyTorch中的实现
+## 在 PyTorch 中的实现
 
-我不期望你完全熟悉[PyTorch](https://pytorch.org/)，所以我会在过程中解释一些基础知识，这将帮助你理解我们自定义的实现。如果你了解PyTorch的基础知识，可以跳过**完全连接层**部分。如果你还没有安装PyTorch，[选择你的版本](https://pytorch.org/)。
+我不期望你完全熟悉[PyTorch](https://pytorch.org/)，所以我会在过程中解释一些基础知识，这将帮助你理解我们自定义的实现。如果你了解 PyTorch 的基础知识，可以跳过**完全连接层**部分。如果你还没有安装 PyTorch，[选择你的版本](https://pytorch.org/)。
 
 ### 完全连接层
 
-这些层在PyTorch中也被称为**线性**，在[Keras](https://keras.io/)中称为**密集**。它们将*n*个输入节点连接到*m*个输出节点，使用*nm*条带有乘法权重的边。这基本上是矩阵乘法加上一个偏置项，如以下两个代码片段所示：
+这些层在 PyTorch 中也被称为**线性**，在[Keras](https://keras.io/)中称为**密集**。它们将*n*个输入节点连接到*m*个输出节点，使用*nm*条带有乘法权重的边。这基本上是矩阵乘法加上一个偏置项，如以下两个代码片段所示：
 
 ```py
 import torchtorch.manual_seed(0) **# keep things reproducible**x = torch.tensor([1., 2.]) **# create an input array**
@@ -93,14 +93,14 @@ print(linear_layer(x)) **# putting the input array into the layer****# Output:
 # tensor([ 0.7393, -1.0621,  0.0441], grad_fn=<AddBackward0>)**
 ```
 
-这就是你如何创建完全连接层并将它们应用于PyTorch张量。你可以通过`linear_layer.weight`获取用于乘法的矩阵，通过`linear_layer.bias`获取偏置。然后你可以这样做
+这就是你如何创建完全连接层并将它们应用于 PyTorch 张量。你可以通过`linear_layer.weight`获取用于乘法的矩阵，通过`linear_layer.bias`获取偏置。然后你可以这样做
 
 ```py
 print(linear_layer.weight @ x + linear_layer.bias) **# @ = matrix mult****# Output:
 # tensor([ 0.7393, -1.0621,  0.0441], grad_fn=<AddBackward0>)**
 ```
 
-很好，它是一样的！现在，PyTorch、Keras等的一个好处是你可以将许多这样的层堆叠在一起以创建神经网络。在PyTorch中，你可以通过`torch.nn.Sequential`来实现这种堆叠。为了重建上面的密集网络，你可以做一个简单的
+很好，它是一样的！现在，PyTorch、Keras 等的一个好处是你可以将许多这样的层堆叠在一起以创建神经网络。在 PyTorch 中，你可以通过`torch.nn.Sequential`来实现这种堆叠。为了重建上面的密集网络，你可以做一个简单的
 
 ```py
 model = torch.nn.Sequential(
@@ -116,7 +116,7 @@ model = torch.nn.Sequential(
 
 > ***注意：*** 我尚未向你展示如何训练这个网络，这只是架构的定义，包括参数的初始化。但你可以输入三维输入并接收一维输出。
 
-既然我们想要创建自己的层，让我们先从简单的开始：重建PyTorch的`Linear`层。以下是如何做到这一点：
+既然我们想要创建自己的层，让我们先从简单的开始：重建 PyTorch 的`Linear`层。以下是如何做到这一点：
 
 ```py
 import torch
@@ -141,7 +141,7 @@ import mathclass MyLinearLayer(torch.nn.Module):
 
 这段代码需要一些解释。在第一个**粗体**块中，我们通过
 
-1.  创建一个PyTorch张量（包含所有零，但这并不重要）
+1.  创建一个 PyTorch 张量（包含所有零，但这并不重要）
 
 1.  将其注册为可学习的参数到该层，这意味着梯度下降可以在训练过程中更新它，然后
 
@@ -157,11 +157,11 @@ import mathclass MyLinearLayer(torch.nn.Module):
 
 现在我们设计一个`BlockLinear`层，我们将以以下方式使用它：首先，我们从*n*特征开始。`BlockLinear`层应该创建*n*个块，每个块由*h*个隐藏神经元组成。为了简化问题，*h*在每个块中是相同的，但你当然可以对其进行泛化。总的来说，第一个隐藏层将由*nh*个神经元组成，但只有*nh*条边连接到它们（而不是*n*²*h *用于完全连接的层*）。*要更好地理解，请再次查看上面的图片。在这里，*n* = 3，*h* = 2。
 
-![使用 PyTorch 的可解释神经网络](../Images/850b88736969d2cad733483126d2b29b.png)
+![使用 PyTorch 的可解释神经网络](img/850b88736969d2cad733483126d2b29b.png)
 
 作者提供的图片。
 
-然后——在使用一些非线性操作如ReLU之后——我们将在这层后面再加一个`BlockLinear`层，因为不同的块不应该再次合并。我们重复这个过程，直到最后使用`Linear`层将一切重新绑定起来。
+然后——在使用一些非线性操作如 ReLU 之后——我们将在这层后面再加一个`BlockLinear`层，因为不同的块不应该再次合并。我们重复这个过程，直到最后使用`Linear`层将一切重新绑定起来。
 
 ### 实现 Block Linear Layer
 
@@ -206,7 +206,7 @@ class BlockLinear(torch.nn.Module):
 
 我再次强调了几行。第一组粗体行类似于我们在自制线性层中看到的，只是重复了`n_blocks`次。这为每个块创建了一个独立的线性层。
 
-在前向方法中，我们得到一个`x`作为单个张量，我们首先需要使用`torch.split`将其拆分成块。举例来说，块大小为2时，结果如下：[1, 2, 3, 4, 5, 6] -> [1, 2], [3, 4], [5, 6]。然后，我们对不同的块应用独立的线性变换，并使用`torch.cat`将结果粘合在一起。完成了！
+在前向方法中，我们得到一个`x`作为单个张量，我们首先需要使用`torch.split`将其拆分成块。举例来说，块大小为 2 时，结果如下：[1, 2, 3, 4, 5, 6] -> [1, 2], [3, 4], [5, 6]。然后，我们对不同的块应用独立的线性变换，并使用`torch.cat`将结果粘合在一起。完成了！
 
 ### 训练可解释神经网络
 
@@ -218,7 +218,7 @@ y = 3*X[:, 0] + 2*X[:, 1]**2 + X[:, 2]**3 + torch.randn(1000)
 y = y.reshape(-1, 1)
 ```
 
-我们可以看到这里处理的是一个包含一千个样本的三维数据集。真实关系是线性的，如果你对特征1进行平方，对特征2进行立方——这就是我们想要用模型恢复的！所以，让我们定义一个小模型，应该能够捕捉到这种关系。
+我们可以看到这里处理的是一个包含一千个样本的三维数据集。真实关系是线性的，如果你对特征 1 进行平方，对特征 2 进行立方——这就是我们想要用模型恢复的！所以，让我们定义一个小模型，应该能够捕捉到这种关系。
 
 ```py
 class Model(torch.nn.Module):
@@ -282,11 +282,11 @@ x = torch.hstack(3*[x])for i in range(3):
 
 并获得
 
-![可解释的神经网络与 PyTorch](../Images/21a485232a93af651ab9510e4408481f.png)
+![可解释的神经网络与 PyTorch](img/21a485232a93af651ab9510e4408481f.png)
 
-![可解释的神经网络与 PyTorch](../Images/7d728428c5301fd14a4a70d1ca9995b6.png)
+![可解释的神经网络与 PyTorch](img/7d728428c5301fd14a4a70d1ca9995b6.png)
 
-![可解释的神经网络与 PyTorch](../Images/3109aaf24d8963643432d4720e885970.png)
+![可解释的神经网络与 PyTorch](img/3109aaf24d8963643432d4720e885970.png)
 
 图片由作者提供。
 
@@ -310,9 +310,9 @@ x = torch.hstack(3*[x])for i in range(3):
 
 请注意，上述学习到的得分函数只能对**实际有训练数据**的区域有信心。在我们的数据集中，我们实际上只观察到每个特征在 -3 到 3 之间的值。因此，我们可以看到，在边缘没有得到完美的*x*²和*x*³多项式。但我认为即便如此，图形的方向也大致正确，这还是很令人印象深刻的。为了充分欣赏这一点，可以将其与 EBM 的结果进行比较：
 
-![可解释的神经网络与 PyTorch](../Images/6f653b465a72e7ced37b73d08bc971a9.png)
+![可解释的神经网络与 PyTorch](img/6f653b465a72e7ced37b73d08bc971a9.png)
 
--   ![使用PyTorch的可解释神经网络](../Images/64cb4eb2acb266b653ac6cc856e9f59d.png)
+-   ![使用 PyTorch 的可解释神经网络](img/64cb4eb2acb266b653ac6cc856e9f59d.png)
 
 -   作者提供的图片。
 
@@ -320,9 +320,9 @@ x = torch.hstack(3*[x])for i in range(3):
 
 ## -   结论
 
--   在这篇文章中，我们讨论了模型的可解释性，以及神经网络和梯度提升如何未能提供它。虽然interpretml包的作者创建了EBM，一个可解释的梯度提升算法，但我向你介绍了一种创建可解释神经网络的方法。
+-   在这篇文章中，我们讨论了模型的可解释性，以及神经网络和梯度提升如何未能提供它。虽然 interpretml 包的作者创建了 EBM，一个可解释的梯度提升算法，但我向你介绍了一种创建可解释神经网络的方法。
 
--   我们已经在PyTorch中实现了它，虽然代码量有点多，但也没什么太疯狂的。至于EBM，我们可以提取每个特征的学习得分函数，甚至可以用它们来进行预测。
+-   我们已经在 PyTorch 中实现了它，虽然代码量有点多，但也没什么太疯狂的。至于 EBM，我们可以提取每个特征的学习得分函数，甚至可以用它们来进行预测。
 
 -   **实际训练的模型甚至不再必要，这使得在低配置硬件上部署和使用成为可能。** 这是因为我们只需存储每个特征的一个查找表，这在内存上很轻量。使用每个查找表的网格大小为*g*会导致**只存储*O*(*n*_features * *g*)个元素**，而不是可能的数百万甚至数十亿个模型参数。进行预测也很便宜：只需从查找表中加一些数字。由于这有**仅为***O*(*n*_features)**的时间复杂度，查找和加法速度远快于网络的前向传播。
 
@@ -334,7 +334,7 @@ x = torch.hstack(3*[x])for i in range(3):
 
 1.  -   **想要支持我继续撰写更多关于机器学习的内容**
 
-1.  -   **计划无论如何获取Medium订阅，**
+1.  -   **计划无论如何获取 Medium 订阅，**
 
 -   **为什么不通过[这个链接](https://dr-robert-kuebler.medium.com/membership)来支持我呢**？这对我帮助很大！????
 
@@ -344,7 +344,7 @@ x = torch.hstack(3*[x])for i in range(3):
 
 > -   如果你有任何问题，可以在[LinkedIn](https://www.linkedin.com/in/dr-robert-k%C3%BCbler-983859150/)上联系我！
 
--   **[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** 是Publicis Media的数据科学家和Towards Data Science的作者。
+-   **[Dr. Robert Kübler](https://www.linkedin.com/in/robert-kuebler/)** 是 Publicis Media 的数据科学家和 Towards Data Science 的作者。
 
 -   [原文](https://towardsdatascience.com/interpretable-neural-networks-with-pytorch-76f1c31260fe)。转载许可。
 
@@ -352,11 +352,11 @@ x = torch.hstack(3*[x])for i in range(3):
 
 ## -   我们的前三个课程推荐
 
--   ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+-   ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
--   ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+-   ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

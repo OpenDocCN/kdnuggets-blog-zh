@@ -1,28 +1,28 @@
-# ChatGPT与Google Bard：技术差异比较
+# ChatGPT 与 Google Bard：技术差异比较
 
-> 原文：[https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
+> 原文：[`www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html`](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
 
-![ChatGPT与Google Bard：技术差异比较](../Images/c0bb15cfda44c7ebf972b3663bd86491.png)
+![ChatGPT 与 Google Bard：技术差异比较](img/c0bb15cfda44c7ebf972b3663bd86491.png)
 
 作者提供的图片
 
-Google Bard和ChatGPT之间最大的区别是，截至目前，Bard知道ChatGPT的存在，但ChatGPT对Bard一无所知。但我可以玩转ChatGPT，而Google Bard对我们大多数人来说仍然遥不可及。
+Google Bard 和 ChatGPT 之间最大的区别是，截至目前，Bard 知道 ChatGPT 的存在，但 ChatGPT 对 Bard 一无所知。但我可以玩转 ChatGPT，而 Google Bard 对我们大多数人来说仍然遥不可及。
 
-![ChatGPT与Google Bard：技术差异比较](../Images/3ae5b360c2a038ea7dd2922a6e488a61.png)
+![ChatGPT 与 Google Bard：技术差异比较](img/3ae5b360c2a038ea7dd2922a6e488a61.png)
 
 来源：[ChatGPT](https://chat.openai.com/) 的截图
 
-# ChatGPT与Google Bard对决的开始
+# ChatGPT 与 Google Bard 对决的开始
 
-ChatGPT和Google Bard都是AI聊天机器人。这种技术的最简单版本已经存在于你的智能手机上——你输入“Good”，手机预测你可能想用的下一个词是“morning”。
+ChatGPT 和 Google Bard 都是 AI 聊天机器人。这种技术的最简单版本已经存在于你的智能手机上——你输入“Good”，手机预测你可能想用的下一个词是“morning”。
 
-ChatGPT最初由OpenAI开发，然后微软以高达100亿美元的巨额投资进行了投资（除此之外还早期投资了10亿美元）。Google略显恐慌地认为他们的搜索垄断可能要结束了，于是推出了Bard，这是他们的技术版本，但有一些缺陷。在第一次现场演示中，Bard [出现了几处事实错误。](https://www.theverge.com/2023/2/8/23590864/google-ai-chatbot-bard-mistake-error-exoplanet-demo) 对Google来说，至少是尴尬的。
+ChatGPT 最初由 OpenAI 开发，然后微软以高达 100 亿美元的巨额投资进行了投资（除此之外还早期投资了 10 亿美元）。Google 略显恐慌地认为他们的搜索垄断可能要结束了，于是推出了 Bard，这是他们的技术版本，但有一些缺陷。在第一次现场演示中，Bard [出现了几处事实错误。](https://www.theverge.com/2023/2/8/23590864/google-ai-chatbot-bard-mistake-error-exoplanet-demo) 对 Google 来说，至少是尴尬的。
 
-ChatGPT和Google Bard比智能手机预测文本要复杂一些，但要理解这两种AI聊天机器人的差异，你只需要了解这些基本信息。
+ChatGPT 和 Google Bard 比智能手机预测文本要复杂一些，但要理解这两种 AI 聊天机器人的差异，你只需要了解这些基本信息。
 
-让我们更深入地探讨这两种AI引擎之间的技术差异。
+让我们更深入地探讨这两种 AI 引擎之间的技术差异。
 
-# ChatGPT与Bard：底层技术是什么？
+# ChatGPT 与 Bard：底层技术是什么？
 
 你在这里是为了快速、轻松地获取这两种引擎的技术差异表格。这里正是你需要的。如果你想要更详细的了解，随时可以继续浏览。
 
@@ -30,9 +30,9 @@ ChatGPT和Google Bard比智能手机预测文本要复杂一些，但要理解�
 | --- | --- | --- |
 | **模型** | GPT-3.5 | [LaMDA](https://arxiv.org/pdf/2201.08239.pdf)，即对话应用的语言模型 |
 | **神经网络架构** | [Transformer](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html) | [Transformer](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html) |
-| **训练数据** | 网络文本，主要是一个名为“common crawl”的数据集，截止到2021年中期 | 156万字的公共对话数据和网络文本 |
+| **训练数据** | 网络文本，主要是一个名为“common crawl”的数据集，截止到 2021 年中期 | 156 万字的公共对话数据和网络文本 |
 | **目的** | 成为一个多功能的文本生成聊天机器人 | 专门用于协助搜索 |
-| **参数** | 1750亿参数 | 1370亿参数 |
+| **参数** | 1750 亿参数 | 1370 亿参数 |
 | **创建者** | OpenAI | Google |
 | **优点** | - 目前对所有人开放 - 更加灵活且能够处理开放式文本 - 训练数据截止到 2021 年 | - 训练数据更新到现在 - 专门为对话训练，因此在你使用时听起来更像人类 |
 | **缺点** | - 对话不够令人信服 - 不如精细调整 | - 当前不可用 - 可能不适合通用文本创作 |
@@ -55,7 +55,7 @@ GPT-3.5 是在一个巨大的网络文本数据集上训练的，包括一个名
 
 Common Crawl 负责了 60% 的训练数据，但 GPT-3.5 也从其他来源获得了数据。
 
-![ChatGPT 与 Google Bard：技术差异的比较](../Images/b5fe987df1090a3122b1933625f3cc79.png)
+![ChatGPT 与 Google Bard：技术差异的比较](img/b5fe987df1090a3122b1933625f3cc79.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/GPT-3)
 
@@ -67,7 +67,7 @@ Google Bard 的主要优势在于它能够访问互联网。问 ChatGPT 谁是�
 
 尽管你还不能亲自体验，但很容易看出 Bard 在几个关键方面如何与 ChatGPT 区分开来。
 
-![ChatGPT 与 Google Bard：技术差异对比](../Images/2ef23d6439628353feffb4492c6b5b9b.png)
+![ChatGPT 与 Google Bard：技术差异对比](img/2ef23d6439628353feffb4492c6b5b9b.png)
 
 来源: 谷歌的 [博客帖子](https://blog.google/technology/ai/lamda/) 关于 LaMDA
 
@@ -91,7 +91,7 @@ Google Bard 的主要优势在于它能够访问互联网。问 ChatGPT 谁是�
 
 LaMDA 是通过微调一系列基于 Transformer 的神经语言模型构建的，这是一种最初由 [谷歌](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html) 开发的开源神经网络架构。（有趣的是，GPT 也是基于 Transformer 的。）
 
-![ChatGPT 与 Google Bard：技术差异对比](../Images/e2215bf6024dbdeefbe80c2e6ab7b1d2.png)
+![ChatGPT 与 Google Bard：技术差异对比](img/e2215bf6024dbdeefbe80c2e6ab7b1d2.png)
 
 来源: [谷歌关于 Bard 的博客帖子](https://blog.google/technology/ai/bard-google-ai-search-updates/)
 

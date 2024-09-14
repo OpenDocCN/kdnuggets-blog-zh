@@ -1,8 +1,8 @@
 # 为建立你的数据科学团队制定的制胜计划
 
-> 原文：[https://www.kdnuggets.com/2018/09/winning-game-plan-building-data-science-team.html](https://www.kdnuggets.com/2018/09/winning-game-plan-building-data-science-team.html)
+> 原文：[`www.kdnuggets.com/2018/09/winning-game-plan-building-data-science-team.html`](https://www.kdnuggets.com/2018/09/winning-game-plan-building-data-science-team.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 作为 Hitachi “数据科学部会”的副主席，我在 Hitachi 面临的最令人兴奋的挑战之一是帮助领导 Hitachi 数据科学能力的发展。我们有一个目标，到 2020 年希望培训并投入使用的人数，因此确实感受到紧迫感。我喜欢这种紧迫感，因为它有助于清除变革的阻碍和抗拒。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-[![图片](../Images/7ab09b98994bc48bc8c8a671f04ce5cb.png)](https://image.ibb.co/kkrsCK/schmarzo_data_science_team_1.png)
+![图片](https://image.ibb.co/kkrsCK/schmarzo_data_science_team_1.png)
 
 **图 1: 数据集成与数据工程**
 
@@ -30,7 +30,7 @@
 
 我们从研究硅谷领先数据科学组织的数据工程师和数据科学家的招聘职位开始了这个任务（感谢 John！）。我们随后创建了一个图形，突出了这些角色的重点和能力，以及这些角色之间的互动——数据科学能力的维恩图（见图 2）。
 
-[![图片](../Images/170552e6e557f0b7a6a9057e5d4361a7.png)](https://image.ibb.co/hK1sCK/schmarzo_data_science_team_2.png)
+![图片](https://image.ibb.co/hK1sCK/schmarzo_data_science_team_2.png)
 
 **图 2：数据科学能力 Venn 图表**
 
@@ -46,7 +46,7 @@
 
 研究的支持细节可以在图 3 的视力图表中看到。
 
-[![图片](../Images/63785aeac287b77849712e0f83310126.png)](https://image.ibb.co/ggiDHK/image2.png)
+![图片](https://image.ibb.co/ggiDHK/image2.png)
 
 **图 3：定义数据科学职责和工具**
 
@@ -58,7 +58,7 @@
 
 图 4 显示了一个例子，即我们希望为其开发数据工程技能的初级数据科学家进行的这种映射练习。
 
-[![图片](../Images/74e88bd6288a28f25b3e792a25b253d3.png)](https://image.ibb.co/jQnAzz/schmarzo_data_science_team_4.png)
+![图片](https://image.ibb.co/jQnAzz/schmarzo_data_science_team_4.png)
 
 **图 4：样本数据科学家发展计划**
 
@@ -66,7 +66,7 @@
 
 图 5 显示了使用 Spider 图表来提高业务利益相关者的数据科学和数据工程意识的另一个示例。
 
-[![图片](../Images/220663303e25dcccab3490162706ab66.png)](https://image.ibb.co/ghZqzz/schmarzo_data_science_team_5.png)
+![图片](https://image.ibb.co/ghZqzz/schmarzo_data_science_team_5.png)
 
 **图 5：样本业务利益相关者数据科学发展计划**
 
@@ -82,11 +82,11 @@
 
 **相关：**
 
-+   [数据集成和数据工程之间的区别是什么？](/2018/06/difference-between-data-integration-data-engineering.html)
++   数据集成和数据工程之间的区别是什么？
 
-+   [伟大的数据科学家不仅仅是跳出框框思考，他们重新定义了框框](/2018/03/great-data-scientists-think-outside-redefine-box.html)
++   伟大的数据科学家不仅仅是跳出框框思考，他们重新定义了框框
 
-+   [识别可能更好的预测变量](/2017/02/schmarzo-variables-better-predictors.html)
++   识别可能更好的预测变量
 
 ### 更多相关主题
 
@@ -96,8 +96,8 @@
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

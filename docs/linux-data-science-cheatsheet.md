@@ -1,6 +1,6 @@
 # 数据科学的 Linux 备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)
+> 原文：[`www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html`](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)
 
 # 为什么要学习 Linux？
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@ Linux 及其各种版本是一个非常 [模块化的操作系统](https://www.d
 
 [](https://www.kdnuggets.com/publications/sheets/Linux_for_Data_Science_Cheatsheet_KDnuggets.pdf)
 
-[![数据科学的 Linux 备忘单](../Images/77db8ad64451111438b383bd9505baab.png)](https://www.kdnuggets.com/publications/sheets/Linux_for_Data_Science_Cheatsheet_KDnuggets.pdf)
+![数据科学的 Linux 备忘单](https://www.kdnuggets.com/publications/sheets/Linux_for_Data_Science_Cheatsheet_KDnuggets.pdf)
 
 在这份备忘单中，你将学习（并参考）诸如以下的命令：
 
@@ -54,9 +54,9 @@ Linux 及其各种版本是一个非常 [模块化的操作系统](https://www.d
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
 
-+   [KDnuggets 新闻，6月29日：数据科学中的 20 个基础 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学中的 20 个基础 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)
 
 +   [数据科学初学者的 20 个基础 Linux 命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
 

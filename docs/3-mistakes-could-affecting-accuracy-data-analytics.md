@@ -1,22 +1,22 @@
-# 3个可能影响数据分析准确性的错误
+# 3 个可能影响数据分析准确性的错误
 
-> 原文：[https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
+> 原文：[`www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html`](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
 
-![3个可能影响数据分析准确性的错误](../Images/f781692c908991daa71724108d172f3d.png)
+![3 个可能影响数据分析准确性的错误](img/f781692c908991daa71724108d172f3d.png)
 
 图片由编辑提供
 
-现在是2023年，这意味着大多数行业的大多数企业都在借助大数据收集洞察并做出更聪明的决策。这在如今并不令人惊讶——能够收集、分类和分析大数据集在[做出数据驱动的业务决策](https://www.kdnuggets.com/2019/04/psu-make-better-data-driven-business-decisions.html)时极为有用。
+现在是 2023 年，这意味着大多数行业的大多数企业都在借助大数据收集洞察并做出更聪明的决策。这在如今并不令人惊讶——能够收集、分类和分析大数据集在[做出数据驱动的业务决策](https://www.kdnuggets.com/2019/04/psu-make-better-data-driven-business-decisions.html)时极为有用。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -24,7 +24,7 @@
 
 关于大数据，有一点是这样的：随着更多组织依赖大数据，它们使用大数据的错误几率也会增大。为什么？因为大数据及其提供的洞察力只有在组织准确分析数据时才有用。
 
-![3个可能影响数据分析准确性的错误](../Images/c108f5b23f742ab9adf4a01988021f1a.png)
+![3 个可能影响数据分析准确性的错误](img/c108f5b23f742ab9adf4a01988021f1a.png)
 
 图片来源：[dataladder](https://dataladder.com/what-is-data-accuracy/)
 
@@ -48,7 +48,7 @@
 
 此外，如果您的组织中即便只有几个数据科学家，也应确保他们定期更新其数据分析程序中的算法——甚至可能值得建立一个时间表，使团队对按照约定时间表维护和更新数据分析算法负责。
 
-更好的做法可能是建立一个[利用AI/ML基础算法](/2021/05/essential-machine-learning-algorithms-beginners.html)的策略，这些算法应能自动更新。
+更好的做法可能是建立一个利用 AI/ML 基础算法的策略，这些算法应能自动更新。
 
 # 你使用的模型并不是很好
 
@@ -56,7 +56,7 @@
 
 算法可以全天处理数据，但如果其输出没有经过设计用于检查后续分析的模型，那么你将得不到任何可用或有用的见解。
 
-想象一下：如果你有复杂的算法在处理数据，但没有任何洞察来展示，那么你做出的数据驱动决策不会比在拥有这些算法之前更好；这就像是想把用户研究纳入你的产品路线图，却忽略了例如市场研究行业在2021年[创造了764亿美元](https://blog.heymarvin.com/2022/07/20/how-to-build-user-research-into-your-product-roadmap/)的收入，自2008年以来增长了100%。
+想象一下：如果你有复杂的算法在处理数据，但没有任何洞察来展示，那么你做出的数据驱动决策不会比在拥有这些算法之前更好；这就像是想把用户研究纳入你的产品路线图，却忽略了例如市场研究行业在 2021 年[创造了 764 亿美元](https://blog.heymarvin.com/2022/07/20/how-to-build-user-research-into-your-product-roadmap/)的收入，自 2008 年以来增长了 100%。
 
 你的意图可能很值得赞赏，但你需要利用现代工具和知识，尽最大能力提取这些洞察或将用户研究纳入你的路线图。
 
@@ -72,17 +72,17 @@
 
 数据是强大的：当使用得当时，它可以为商业领袖及其组织提供极其有用的洞察，改变他们开发和交付产品给客户的方式。只需确保你尽一切努力确保你的数据分析准确，不会遭遇我们在本文中概述的那些容易避免的错误。
 
-**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她曾管理过——除了其他令人着迷的事情——在一家《财富》5000强的体验品牌组织中担任首席程序员，该组织的客户包括三星、时代华纳、Netflix和索尼。
+**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她曾管理过——除了其他令人着迷的事情——在一家《财富》5000 强的体验品牌组织中担任首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 相关话题
 
 +   [影响洞察时间的关键因素](https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html)
 
-+   [你不知道的7种低代码工具应用](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [你不知道的 7 种低代码工具应用](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
 +   [理解分类指标：评估模型…的指南](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)
 
-+   [天空才是极限：了解JetBlue如何使用蒙特卡洛和Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)
++   [天空才是极限：了解 JetBlue 如何使用蒙特卡洛和 Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)
 
 +   [我应该使用哪个指标？准确率 vs. AUC](https://www.kdnuggets.com/2022/10/metric-accuracy-auc.html)
 

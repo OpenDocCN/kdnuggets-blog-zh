@@ -1,30 +1,30 @@
-# 7种ChatGPT让你编码更好更快的方法
+# 7 种 ChatGPT 让你编码更好更快的方法
 
-> 原文：[https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)
+> 原文：[`www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html`](https://www.kdnuggets.com/2023/06/7-ways-chatgpt-makes-code-better-faster.html)
 
-![7种ChatGPT让你编码更好更快的方法](../Images/3e74c2f9dbe0cc2dd09f2f1491095850.png)
+![7 种 ChatGPT 让你编码更好更快的方法](img/3e74c2f9dbe0cc2dd09f2f1491095850.png)
 
 作者提供的图片
 
-我很高兴与您分享七种个人帮助我成为更好、更快的编码者的绝妙方法，这都要感谢ChatGPT！这些奇妙的技巧不仅可以帮助您避免常见的错误，还能揭示在编码过程中拥有AI副驾驶的巨大能力。所以，让我们深入探索，一起提升你的编码技能吧！
+我很高兴与您分享七种个人帮助我成为更好、更快的编码者的绝妙方法，这都要感谢 ChatGPT！这些奇妙的技巧不仅可以帮助您避免常见的错误，还能揭示在编码过程中拥有 AI 副驾驶的巨大能力。所以，让我们深入探索，一起提升你的编码技能吧！
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 # 1\. 项目规划
 
-项目规划是任何项目中最重要的阶段，你在这里为成功奠定基础。在规划阶段获得ChatGPT的帮助非常宝贵，因为它可以帮助你考虑软件开发或数据科学项目的总体范围、架构、需求和可行性。
+项目规划是任何项目中最重要的阶段，你在这里为成功奠定基础。在规划阶段获得 ChatGPT 的帮助非常宝贵，因为它可以帮助你考虑软件开发或数据科学项目的总体范围、架构、需求和可行性。
 
-通过向ChatGPT描述你的目标、限制和使用案例，它可以提供有关以下方面的有用建议：
+通过向 ChatGPT 描述你的目标、限制和使用案例，它可以提供有关以下方面的有用建议：
 
 +   根据你的具体需求选择技术和工具
 
@@ -34,13 +34,13 @@
 
 +   需要注意的潜在问题、风险和障碍
 
-我已经利用ChatGPT的见解进行机器学习和数据科学项目规划。它有效地帮助我选择适当的工具、技术和数据集来解决特定问题。ChatGPT建议的工作流程和路线图也通过从一开始就将我指向正确的方向，为我节省了时间。您可以阅读[使用ChatGPT进行数据科学项目的指南](https://www.datacamp.com/tutorial/chatgpt-data-science-projects)以了解更多有关ChatGPT项目规划的信息。
+我已经利用 ChatGPT 的见解进行机器学习和数据科学项目规划。它有效地帮助我选择适当的工具、技术和数据集来解决特定问题。ChatGPT 建议的工作流程和路线图也通过从一开始就将我指向正确的方向，为我节省了时间。您可以阅读[使用 ChatGPT 进行数据科学项目的指南](https://www.datacamp.com/tutorial/chatgpt-data-science-projects)以了解更多有关 ChatGPT 项目规划的信息。
 
 # 2\. 分解复杂系统
 
-避免要求ChatGPT从头开始编写整个端到端系统的代码。它可能会产生通用的、有缺陷的代码，遗漏边界情况，无法满足你的特定要求。
+避免要求 ChatGPT 从头开始编写整个端到端系统的代码。它可能会产生通用的、有缺陷的代码，遗漏边界情况，无法满足你的特定要求。
 
-相反，将ChatGPT的帮助集中在你整体系统中的较小、定义明确的任务上。请让它生成代码来：
+相反，将 ChatGPT 的帮助集中在你整体系统中的较小、定义明确的任务上。请让它生成代码来：
 
 +   执行一个逻辑步骤的具体函数或方法
 

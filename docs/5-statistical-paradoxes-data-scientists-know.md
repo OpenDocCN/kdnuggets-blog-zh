@@ -1,8 +1,8 @@
-# 数据科学家应该了解的5个统计悖论
+# 数据科学家应该了解的 5 个统计悖论
 
-> 原文：[https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html](https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html)
+> 原文：[`www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html`](https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html)
 
-![数据科学家应了解的5个统计悖论](../Images/562301ccf1afe501fc699b8a9778ba7d.png)
+![数据科学家应了解的 5 个统计悖论](img/562301ccf1afe501fc699b8a9778ba7d.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,11 +24,11 @@
 
 我将向你解释的这些悖论易于理解，不包括复杂的公式。
 
-在本文中，我们将探讨数据科学家应了解的5个统计悖论：准确性悖论、假阳性悖论、赌徒谬论、辛普森悖论和伯克森悖论。
+在本文中，我们将探讨数据科学家应了解的 5 个统计悖论：准确性悖论、假阳性悖论、赌徒谬论、辛普森悖论和伯克森悖论。
 
 这些悖论中的每一个都可能是导致你分析结果不可靠的潜在原因。
 
-![数据科学家应了解的5个统计悖论](../Images/ab597d5545e0e90fe48acd142317dcda.png)
+![数据科学家应了解的 5 个统计悖论](img/ab597d5545e0e90fe48acd142317dcda.png)
 
 图片由作者提供
 
@@ -38,33 +38,33 @@
 
 # 准确性悖论
 
-![数据科学家应了解的5个统计悖论](../Images/7e5cb497243a668808380deaf7e831d0.png)
+![数据科学家应了解的 5 个统计悖论](img/7e5cb497243a668808380deaf7e831d0.png)
 
 图片由作者提供
 
 准确性显示出在分类时准确性不是一个好的评价指标。
 
-假设你正在分析一个包含1000个患者指标的数据集。你想检测一种罕见的疾病，这种疾病最终会在5%的人群中显现。所以总体上，你必须在1000人中找到50个人。
+假设你正在分析一个包含 1000 个患者指标的数据集。你想检测一种罕见的疾病，这种疾病最终会在 5%的人群中显现。所以总体上，你必须在 1000 人中找到 50 个人。
 
-即使你总是说这些人没有疾病，你的准确率也会是95%。而你的模型在这个群体中不能捕捉到一个生病的人。（0/50）
+即使你总是说这些人没有疾病，你的准确率也会是 95%。而你的模型在这个群体中不能捕捉到一个生病的人。（0/50）
 
 ## 数字数据集
 
 让我们通过一个著名的数字数据集的例子来解释这一点。
 
-该数据集包含从0到9的手写数字。
+该数据集包含从 0 到 9 的手写数字。
 
-![5 个数据科学家应知道的统计悖论](../Images/f83f8067555a3e7802796201698e1671.png)
+![5 个数据科学家应知道的统计悖论](img/f83f8067555a3e7802796201698e1671.png)
 
 图片由作者提供
 
 这是一个简单的多标签分类任务，但也可以被解读为图像识别，因为数字是以图像的形式呈现的。
 
-现在我们将加载这些数据集，并重新塑造数据集以应用机器学习模型。我跳过了这些部分的解释，因为你可能也对这些部分很熟悉。如果不熟悉，可以尝试搜索数字数据集或MNIST数据集。MNIST数据集也包含相同类型的数据，但形状比这个更大。
+现在我们将加载这些数据集，并重新塑造数据集以应用机器学习模型。我跳过了这些部分的解释，因为你可能也对这些部分很熟悉。如果不熟悉，可以尝试搜索数字数据集或 MNIST 数据集。MNIST 数据集也包含相同类型的数据，但形状比这个更大。
 
 好的，我们继续。
 
-现在我们尝试预测数字是否为6。为此，我们将定义一个预测不是6的分类器。让我们查看这个分类器的交叉验证分数。
+现在我们尝试预测数字是否为 6。为此，我们将定义一个预测不是 6 的分类器。让我们查看这个分类器的交叉验证分数。
 
 ```py
 from sklearn import datasets
@@ -97,9 +97,9 @@ cross_val_score(dumb_clf, x_train, y_train_6, cv=3, scoring="accuracy")
 
 结果将如下所示。
 
-![5 个数据科学家应知道的统计悖论](../Images/9b625149f8b42f496b2269390400afc6.png)
+![5 个数据科学家应知道的统计悖论](img/9b625149f8b42f496b2269390400afc6.png)
 
-这意味着什么？这意味着即使你创建一个从不估计6的估计器并将其放入你的模型中，准确率也可能超过90%。为什么？因为我们的数据集中存在其他9个数字。所以如果你说这个数字不是6，你会有9/10的准确率。
+这意味着什么？这意味着即使你创建一个从不估计 6 的估计器并将其放入你的模型中，准确率也可能超过 90%。为什么？因为我们的数据集中存在其他 9 个数字。所以如果你说这个数字不是 6，你会有 9/10 的准确率。
 
 这表明选择评估指标非常重要。如果你想评估分类任务，准确率不是一个好的选择。你应该选择精确度或召回率。
 
@@ -107,7 +107,7 @@ cross_val_score(dumb_clf, x_train, y_train_6, cv=3, scoring="accuracy")
 
 # 假阳性悖论
 
-![5 个数据科学家应知道的统计悖论](../Images/00f8a4860e442a84ed155a9360c6e82b.png)
+![5 个数据科学家应知道的统计悖论](img/00f8a4860e442a84ed155a9360c6e82b.png)
 
 图片由作者提供
 
@@ -121,7 +121,7 @@ cross_val_score(dumb_clf, x_train, y_train_6, cv=3, scoring="accuracy")
 
 ## 欺诈检测
 
-![5 个数据科学家应知道的统计悖论](../Images/a53755e8783272ec93fd6fdbf792ddd4.png)
+![5 个数据科学家应知道的统计悖论](img/a53755e8783272ec93fd6fdbf792ddd4.png)
 
 图片由作者提供
 
@@ -129,7 +129,7 @@ cross_val_score(dumb_clf, x_train, y_train_6, cv=3, scoring="accuracy")
 
 经过进一步调查，你会发现现实世界中欺诈交易的发生率远低于训练数据集中的发生率。
 
-假设1/10,000的交易是欺诈的，并且假设测试也有5%的假阳性率。
+假设 1/10,000 的交易是欺诈的，并且假设测试也有 5%的假阳性率。
 
 TP = 1/10,000
 
@@ -139,11 +139,11 @@ FP = 10,000*(100-40)/100*0,05 = 499,95 / 9,999
 
 P = 1/500,95 =0,001996
 
-结果接近0.2%。这意味着当事件被标记为欺诈时，实际为欺诈事件的概率仅为0.2%。
+结果接近 0.2%。这意味着当事件被标记为欺诈时，实际为欺诈事件的概率仅为 0.2%。
 
 这就是**假阳性悖论**。
 
-下面是如何在Python代码中实现它。
+下面是如何在 Python 代码中实现它。
 
 ```py
 import pandas as pd
@@ -178,7 +178,7 @@ print(f"Accuracy: {accuracy:.2f}")
 
 你可以看到，召回率非常高，但精确度却很低。
 
-![5 个数据科学家应该了解的统计悖论](../Images/a6ffddff783cb2ffd84fa7200f126b97.png)
+![5 个数据科学家应该了解的统计悖论](img/a6ffddff783cb2ffd84fa7200f126b97.png)
 
 要理解为什么系统会这样做，让我解释一下精确度/召回率和精确度/召回率权衡。
 
@@ -204,7 +204,7 @@ print(f"Accuracy: {accuracy:.2f}")
 
 # 赌徒谬误
 
-![5 个数据科学家应该了解的统计悖论](../Images/060b9846e420e7211b1a203ecb0997e1.png)
+![5 个数据科学家应该了解的统计悖论](img/060b9846e420e7211b1a203ecb0997e1.png)
 
 图片由作者提供
 
@@ -214,7 +214,7 @@ print(f"Accuracy: {accuracy:.2f}")
 
 ## 客户流失
 
-![5 个数据科学家应该了解的统计悖论](../Images/7e5c9e2ea97ba717445d90018296629f.png)
+![5 个数据科学家应该了解的统计悖论](img/7e5c9e2ea97ba717445d90018296629f.png)
 
 图片由作者提供
 
@@ -234,7 +234,7 @@ print(f"Accuracy: {accuracy:.2f}")
 
 首先让我们看看硬币抛掷概率的变化。你可能会觉得如果硬币多次出现正面，未来出现正面的可能性会减少。这实际上是赌徒谬误的一个很好的例子。
 
-正如你所见，在开始时，可能性有所波动。然而，当翻转次数增加时，得到正面的概率将趋于0.5。
+正如你所见，在开始时，可能性有所波动。然而，当翻转次数增加时，得到正面的概率将趋于 0.5。
 
 ```py
 import random
@@ -264,31 +264,31 @@ plt.show()
 
 现在，让我们看看输出结果。
 
-![5个数据科学家应该知道的统计悖论](../Images/15aaa2df1535b4163ffe9b66968f3a7e.png)
+![5 个数据科学家应该知道的统计悖论](img/15aaa2df1535b4163ffe9b66968f3a7e.png)
 
 作者提供的图片
 
-显然，概率会随时间波动，但最终它会趋向于0.5。
+显然，概率会随时间波动，但最终它会趋向于 0.5。
 
-这个例子展示了赌徒谬误，因为之前翻转的结果不会影响任何一次翻转中得到正面的概率。概率始终保持在50%，无论过去发生了什么。
+这个例子展示了赌徒谬误，因为之前翻转的结果不会影响任何一次翻转中得到正面的概率。概率始终保持在 50%，无论过去发生了什么。
 
 # 辛普森悖论
 
-![5个数据科学家应该知道的统计悖论](../Images/d2be3dd08034f53b63d44c5aeaf234a2.png)
+![5 个数据科学家应该知道的统计悖论](img/d2be3dd08034f53b63d44c5aeaf234a2.png)
 
 图片由[Roland Steinmann](https://pixabay.com/users/rollstein-13853955/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7041935)提供，来源于[Pixabay](https://pixabay.com//?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=7041935)
 
 这个悖论发生在当数据被汇总时，两变量之间的关系似乎发生了变化。
 
-现在，为了解释这个悖论，我们来使用seaborn中的内置数据集tips。
+现在，为了解释这个悖论，我们来使用 seaborn 中的内置数据集 tips。
 
 ## 提示
 
-![5个数据科学家应该知道的统计悖论](../Images/0de06f07e11116533b3bd5bacdc25a7f.png)
+![5 个数据科学家应该知道的统计悖论](img/0de06f07e11116533b3bd5bacdc25a7f.png)
 
 作者提供的图片
 
-为了解释辛普森悖论，我们将使用tips数据集计算女性和男性在午餐时间和整体的平均小费。tips数据集包含客户在餐馆给出的提示数据，如总小费、性别、日期、时间等。
+为了解释辛普森悖论，我们将使用 tips 数据集计算女性和男性在午餐时间和整体的平均小费。tips 数据集包含客户在餐馆给出的提示数据，如总小费、性别、日期、时间等。
 
 小费数据集是顾客在餐馆给小费的数据集合。它包括小费金额、顾客性别、星期几和一天中的时间等信息。该数据集可用于分析顾客的小费行为并识别数据中的趋势。
 
@@ -334,7 +334,7 @@ df
 
 好的，这就是我们的数据框。
 
-![5 个数据科学家应了解的统计悖论](../Images/aa1619317f018492aa5e4be7d85713f8.png)
+![5 个数据科学家应了解的统计悖论](img/aa1619317f018492aa5e4be7d85713f8.png)
 
 如我们所见，午餐时男性和女性的平均小费更高。然而，当数据汇总时，均值发生了变化。
 
@@ -375,7 +375,7 @@ plt.show()
 
 这是输出结果。
 
-![5 个数据科学家应了解的统计悖论](../Images/e33083b2b5729ad54d7f5aa8a5ecd6cf.png)
+![5 个数据科学家应了解的统计悖论](img/e33083b2b5729ad54d7f5aa8a5ecd6cf.png)
 
 图片来源：作者
 
@@ -395,7 +395,7 @@ plt.show()
 
 ## Iris 数据集
 
-![5 个数据科学家应了解的统计悖论](../Images/6c45311109b9ca66517b029f522e5ae5.png)
+![5 个数据科学家应了解的统计悖论](img/6c45311109b9ca66517b029f522e5ae5.png)
 
 图片来源：作者
 
@@ -431,7 +431,7 @@ ax1.plot(
 ax1.set_xlabel("Sepal Length")
 ax1.set_ylabel("Sepal Width")
 ax1.set_title("Sepal Length and Width")
-ax1.legend([f"R^2 = {r_value:.3f}"])
+ax1.legend([f"R² = {r_value:.3f}"])
 
 # Plot the relationship between setosa sepal length and width for setosa.
 slope, intercept, r_value, p_value, std_err = linregress(
@@ -447,7 +447,7 @@ ax2.plot(
 ax2.set_xlabel("Setosa Sepal Length")
 ax2.set_ylabel("Setosa Sepal Width")
 ax2.set_title("Setosa Sepal Length and Width ")
-ax2.legend([f"R^2 = {r_value:.3f}"])
+ax2.legend([f"R² = {r_value:.3f}"])
 
 # Show the plot
 plt.show() 
@@ -455,7 +455,7 @@ plt.show()
 
 你可以看到萼片长度与 Setosa 物种之间的变化。实际上，它显示了与其他物种不同的相关性。
 
-![5 个数据科学家应了解的统计悖论](../Images/596dda1398e2941cbdb0a0f11cbc5f06.png)
+![5 个数据科学家应了解的统计悖论](img/596dda1398e2941cbdb0a0f11cbc5f06.png)
 
 图片来源：作者
 
@@ -509,7 +509,7 @@ ax1.legend([f"R = {r_value_1:.3f}"])
 
 这里是图表。
 
-![5 个数据科学家应了解的统计悖论](../Images/af9b8193b2d5bb1aa2229c678a8512c4.png)
+![5 个数据科学家应了解的统计悖论](img/af9b8193b2d5bb1aa2229c678a8512c4.png)
 
 图片来源：作者
 

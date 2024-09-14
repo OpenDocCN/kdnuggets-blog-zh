@@ -1,8 +1,8 @@
 # 数据科学项目管理方法指南
 
-> 原文：[https://www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html](https://www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html)
+> 原文：[`www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html`](https://www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html)
 
-![数据科学项目管理方法指南](../Images/4cb12e73666a13f73c058546b6f9fe25.png)
+![数据科学项目管理方法指南](img/4cb12e73666a13f73c058546b6f9fe25.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 # 数据科学生命周期
 
-数据科学生命周期可以分为7个步骤。
+数据科学生命周期可以分为 7 个步骤。
 
 ## 业务理解
 
@@ -46,7 +46,7 @@
 
 一些数据科学家选择将数据挖掘和数据清理阶段合并。然而，将这些阶段区分开来有助于更好的工作流程。
 
-数据清理是数据科学工作流中最耗时的阶段。数据越大，所需时间越长。通常，这个过程会占据数据科学家50%-80%的时间。之所以花费如此长的时间，是因为数据从来不会是干净的。你可能会遇到数据不一致、缺失数据、标签错误、拼写错误等问题。
+数据清理是数据科学工作流中最耗时的阶段。数据越大，所需时间越长。通常，这个过程会占据数据科学家 50%-80%的时间。之所以花费如此长的时间，是因为数据从来不会是干净的。你可能会遇到数据不一致、缺失数据、标签错误、拼写错误等问题。
 
 在进行任何分析工作之前，你需要纠正这些错误，以确保你计划使用的数据是正确的，并将产生准确的输出。
 
@@ -72,7 +72,7 @@
 
 根据你在“业务理解”阶段提出的所有问题，你将能够确定哪个模型适合你当前的任务。你的模型选择可能是一个反复试验的过程，但这是确保你创建成功模型并产生准确输出的重要步骤。
 
-一旦你建立了模型，你会想要在数据集上训练它并评估其表现。你可以使用不同的评估指标，例如k折交叉验证，来衡量准确性，并持续进行直到你对准确性值感到满意。
+一旦你建立了模型，你会想要在数据集上训练它并评估其表现。你可以使用不同的评估指标，例如 k 折交叉验证，来衡量准确性，并持续进行直到你对准确性值感到满意。
 
 使用测试和验证数据来测试你的模型可以确保准确性并确保模型表现良好。用未见过的数据来测试模型是一个好方法，可以了解模型在未曾训练过的数据上的表现。这让你的模型实际运作起来！
 
@@ -80,7 +80,7 @@
 
 一旦你对模型的表现感到满意，你就可以回到公司向高层解释所有内容。创建数据可视化是一种有效的方式，可以向非技术人员解释你的发现，同时也是讲述数据故事的好方法。
 
-数据可视化是沟通、统计和艺术的结合。你可以用多种方式以美观的方式展示数据发现。你可以使用工具如[Matplotlib 文档](https://matplotlib.org/2.0.2/contents.html)、[Seaborn 教程](https://seaborn.pydata.org/tutorial.html)和[Plotly 库](https://plotly.com/python/)。如果你使用Python，可以阅读这个：[用Python图形库制作惊人的可视化](/2022/12/make-amazing-visualizations-python-graph-gallery.html)。
+数据可视化是沟通、统计和艺术的结合。你可以用多种方式以美观的方式展示数据发现。你可以使用工具如[Matplotlib 文档](https://matplotlib.org/2.0.2/contents.html)、[Seaborn 教程](https://seaborn.pydata.org/tutorial.html)和[Plotly 库](https://plotly.com/python/)。如果你使用 Python，可以阅读这个：用 Python 图形库制作惊人的可视化。
 
 就这样，你到了生命周期的终点，但请记住这是一个循环。因此，你需要回到开始：业务理解。你需要评估模型在原始业务理解和目标，以及所创建的假设方面的成功。
 
@@ -108,11 +108,11 @@
 
 那么什么时候应该使用瀑布方法呢？由于它像水一样流动，一切都需要明确。这意味着目标已经定义，团队对技术栈了如指掌，并且项目元素都到位，以确保过程顺畅有效。
 
-但让我们回到现实中。数据科学项目是否像水一样流动？不。它们需要大量的实验、需求变化等等。然而，这并不意味着你不能使用瀑布方法的元素。瀑布方法需要大量规划。如果你规划好一切，是的，你可能仍会遇到1或2个问题，但挑战会减少，并且对过程的冲击不会那么大。
+但让我们回到现实中。数据科学项目是否像水一样流动？不。它们需要大量的实验、需求变化等等。然而，这并不意味着你不能使用瀑布方法的元素。瀑布方法需要大量规划。如果你规划好一切，是的，你可能仍会遇到 1 或 2 个问题，但挑战会减少，并且对过程的冲击不会那么大。
 
 ## 敏捷方法
 
-[敏捷方法](https://agilemanifesto.org/)诞生于2001年初，当时17人聚集在一起讨论软件开发的未来。它建立在4个核心价值观和12个原则之上。
+[敏捷方法](https://agilemanifesto.org/)诞生于 2001 年初，当时 17 人聚集在一起讨论软件开发的未来。它建立在 4 个核心价值观和 12 个原则之上。
 
 敏捷方法更符合当今的技术，因为它适应了快节奏、不断变化的技术行业。如果你是技术专业人士，你知道数据科学或软件项目中的需求总是在变化。因此，拥有一种能够快速适应这些变化的方法是重要的。
 
@@ -120,7 +120,7 @@
 
 这被证明是非常有效的，因为模型不断发展以反映以用户为中心的输出，从而节省了时间、金钱和精力。
 
-一个敏捷方法的例子是**Scrum**。Scrum方法使用一种框架，帮助团队通过一套价值观、原则和实践来建立结构。例如，使用Scrum，数据科学项目可以将其较大的项目拆分成一系列较小的项目。每个小项目称为一个迭代周期，并包括迭代周期规划，以定义目标、需求、责任等。
+一个敏捷方法的例子是**Scrum**。Scrum 方法使用一种框架，帮助团队通过一套价值观、原则和实践来建立结构。例如，使用 Scrum，数据科学项目可以将其较大的项目拆分成一系列较小的项目。每个小项目称为一个迭代周期，并包括迭代周期规划，以定义目标、需求、责任等。
 
 ## 混合方法
 
@@ -146,15 +146,15 @@
 
 个人可能有不同的工作方式，因此最好的方法是创建一个适合每个人的方法。
 
-想了解如何自动化你的数据科学工作流程，可以阅读这篇文章：[数据科学工作流程中的自动化](/2023/03/automation-data-science-workflows.html)。
+想了解如何自动化你的数据科学工作流程，可以阅读这篇文章：数据科学工作流程中的自动化。
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作人和 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程以及围绕数据科学的理论知识。她也希望探索人工智能如何有益于人类生命的延续。她是一位热衷学习者，寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关内容
 
-+   [数据科学项目管理的7个技巧](https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html)
++   [数据科学项目管理的 7 个技巧](https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html)
 
-+   [掌握敏捷数据科学项目管理的7个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握敏捷数据科学项目管理的 7 个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
 +   [如何构建数据科学项目：逐步指南](https://www.kdnuggets.com/2022/05/structure-data-science-project-stepbystep-guide.html)
 

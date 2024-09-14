@@ -1,8 +1,8 @@
 # Pandas 入门教程
 
-> 原文：[https://www.kdnuggets.com/2022/03/introductory-pandas-tutorial.html](https://www.kdnuggets.com/2022/03/introductory-pandas-tutorial.html)
+> 原文：[`www.kdnuggets.com/2022/03/introductory-pandas-tutorial.html`](https://www.kdnuggets.com/2022/03/introductory-pandas-tutorial.html)
 
-![Pandas 入门教程](../Images/b9663d8e3475040f36514d2a8056485c.png)
+![Pandas 入门教程](img/b9663d8e3475040f36514d2a8056485c.png)
 
 图片由作者提供
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -43,7 +43,7 @@ type(data)
 data.head()
 ```
 
-![Pandas 入门教程](../Images/40c0a465cc7d1dd5526c4b8b2ef1bda1.png)
+![Pandas 入门教程](img/40c0a465cc7d1dd5526c4b8b2ef1bda1.png)
 
 Pandas 数据框包含 **Age**、**EstimatedSalary** 和 **Purchased** 列。
 
@@ -230,7 +230,7 @@ print(data[(data['Purchased']==1) & (data['Age']>=35)])
 data.sort_values('Purchased', ascending=False).head()
 ```
 
-![入门 Pandas 教程](../Images/b6905956f43a9ed79038eb648901243b.png)
+![入门 Pandas 教程](img/b6905956f43a9ed79038eb648901243b.png)
 
 **sort_index()** 类似于排序索引，但它将根据索引号对数据框进行排序。
 
@@ -247,7 +247,7 @@ data = data.rename(columns= {'EstimatedSalary' : 'Salary'})
 data.head()
 ```
 
-![入门 Pandas 教程](../Images/8529672f5179c044edc44214a8e9826d.png)
+![入门 Pandas 教程](img/8529672f5179c044edc44214a8e9826d.png)
 
 # 删除数据
 
@@ -257,7 +257,7 @@ data.head()
 data.drop(columns='Salary').head()
 ```
 
-![入门 Pandas 教程](../Images/7aa6e6a25ff489088a20736ed17297ef.png)
+![入门 Pandas 教程](img/7aa6e6a25ff489088a20736ed17297ef.png)
 
 要删除一行，你可以简单地写下行号。
 
@@ -267,7 +267,7 @@ data.drop(1)
 
 # 转换数据类型
 
-我们有三列，所有列都是整数。让我们将“Purchased”列更改为布尔型，因为它只包含1和0。
+我们有三列，所有列都是整数。让我们将“Purchased”列更改为布尔型，因为它只包含 1 和 0。
 
 ```py
 data.dtypes
@@ -332,7 +332,7 @@ Pandas 使用**matplotlib**库来可视化数据。我们可以使用此函数�
 data.plot( kind='box');
 ```
 
-![入门 Pandas 教程](../Images/e9a8a0427d4037eb8ec30109b3274b7a.png)
+![入门 Pandas 教程](img/e9a8a0427d4037eb8ec30109b3274b7a.png)
 
 要绘制密度图，我们需要 x 和 y 参数以及 kind。在此示例中，我们绘制了**年龄**与**薪资**的密度图。
 
@@ -340,7 +340,7 @@ data.plot( kind='box');
 data.plot(x="Age",y = "Salary", kind='density');
 ```
 
-![入门 Pandas 教程](../Images/d2be3c029a74e74c8e288dabe669d798.png)
+![入门 Pandas 教程](img/d2be3c029a74e74c8e288dabe669d798.png)
 
 # 结论
 

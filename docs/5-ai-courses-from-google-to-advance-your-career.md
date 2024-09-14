@@ -1,48 +1,48 @@
-# 5门来自Google的AI课程，助力你的职业发展
+# 5 门来自 Google 的 AI 课程，助力你的职业发展
 
-> 原文：[https://www.kdnuggets.com/5-ai-courses-from-google-to-advance-your-career](https://www.kdnuggets.com/5-ai-courses-from-google-to-advance-your-career)
+> 原文：[`www.kdnuggets.com/5-ai-courses-from-google-to-advance-your-career`](https://www.kdnuggets.com/5-ai-courses-from-google-to-advance-your-career)
 
-![5门来自Google的AI课程，助力你的职业发展](../Images/77651364276c1b64462aaaa30ebb8e21.png)
+![5 门来自 Google 的 AI 课程，助力你的职业发展](img/77651364276c1b64462aaaa30ebb8e21.png)
 
 图片由编辑提供
 
-人工智能或AI是一个令人兴奋的领域，无论你是否想成为AI开发者或AI研究员。
+人工智能或 AI 是一个令人兴奋的领域，无论你是否想成为 AI 开发者或 AI 研究员。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-为帮助你探索，我们整理了Google提供的课程和学习路径。从AI的基础构建块到构建和部署AI模型，这些课程将帮助你全面学习。
+为帮助你探索，我们整理了 Google 提供的课程和学习路径。从 AI 的基础构建块到构建和部署 AI 模型，这些课程将帮助你全面学习。
 
 所以让我们来详细了解一下。对机器学习相关工作的些许了解将有助于你从这些课程中获得最大收益。
 
-# 1\. Google Cloud上的AI和机器学习介绍
+# 1\. Google Cloud 上的 AI 和机器学习介绍
 
-课程[Google Cloud上的AI和机器学习介绍](https://www.cloudskillsboost.google/paths/17/course_templates/593)将帮助你了解如何将数据转化为AI解决方案。因此，你将学习如何构建机器学习模型，设计机器学习管道，并在探索Google Cloud产品的同时构建一个完全功能的AI系统。
+课程[Google Cloud 上的 AI 和机器学习介绍](https://www.cloudskillsboost.google/paths/17/course_templates/593)将帮助你了解如何将数据转化为 AI 解决方案。因此，你将学习如何构建机器学习模型，设计机器学习管道，并在探索 Google Cloud 产品的同时构建一个完全功能的 AI 系统。
 
 本课程包括以下内容：
 
-+   AI基础
++   AI 基础
 
-+   AI开发选项
++   AI 开发选项
 
-+   AI开发工作流程
++   AI 开发工作流程
 
-链接：[Google Cloud上的AI和机器学习介绍](https://www.cloudskillsboost.google/paths/17/course_templates/593)
+链接：[Google Cloud 上的 AI 和机器学习介绍](https://www.cloudskillsboost.google/paths/17/course_templates/593)
 
 # 2\. 深入机器学习
 
 [深入机器学习](https://www.cloudskillsboost.google/paths/17/course_templates/8)课程将帮助你建立前进所需的机器学习基础。
 
-课程首先探讨了基本概念，如探索性数据分析及其有效应用以改善数据质量。然后涵盖了使用Vertex AI AutoML构建和部署应用程序。此外，你还将学习如何使用BigQuery ML。
+课程首先探讨了基本概念，如探索性数据分析及其有效应用以改善数据质量。然后涵盖了使用 Vertex AI AutoML 构建和部署应用程序。此外，你还将学习如何使用 BigQuery ML。
 
 本课程包含以下模块：
 
@@ -50,9 +50,9 @@
 
 +   实践中的机器学习
 
-+   使用Vertex AI训练AutoML模型
++   使用 Vertex AI 训练 AutoML 模型
 
-+   BigQuery机器学习：为你的数据生活开发ML模型
++   BigQuery 机器学习：为你的数据生活开发 ML 模型
 
 +   优化
 
@@ -60,7 +60,7 @@
 
 链接：[深入机器学习](https://www.cloudskillsboost.google/paths/17/course_templates/8)
 
-# 3\. Google Cloud上的TensorFlow
+# 3\. Google Cloud 上的 TensorFlow
 
 TensorFlow 是开发深度学习和 AI 应用程序最受欢迎的开发框架之一。课程 [TensorFlow 在 Google Cloud 上](https://www.cloudskillsboost.google/paths/17/course_templates/12) 深入探讨了使用 TensorFlow 构建应用程序。
 
@@ -120,7 +120,7 @@ TensorFlow 是开发深度学习和 AI 应用程序最受欢迎的开发框架�
 
 +   [通过第三名最佳在线数据硕士学位提升你的职业](https://www.kdnuggets.com/2023/07/bay-path-advance-career-3rd-best-online-masters-data-science-program.html)
 
-+   [通过这3个热门证书提升你的技术职业](https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates)
++   [通过这 3 个热门证书提升你的技术职业](https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates)
 
 +   [7 门免费的哈佛大学课程来提升你的技能](https://www.kdnuggets.com/7-free-harvard-university-courses-to-advance-your-skills)
 

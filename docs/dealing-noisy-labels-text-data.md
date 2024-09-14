@@ -1,8 +1,8 @@
 # 处理文本数据中的噪声标签
 
-> 原文：[https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)
+> 原文：[`www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html`](https://www.kdnuggets.com/2023/04/dealing-noisy-labels-text-data.html)
 
-![处理文本数据中的噪声标签](../Images/15973e5270fd138ec4bc5d0349e92906.png)
+![处理文本数据中的噪声标签](img/15973e5270fd138ec4bc5d0349e92906.png)
 
 编辑器提供的图像
 
@@ -16,7 +16,7 @@
 
 我们将使用为本教程创建的 ITSM（IT 服务管理）数据集（CCO 许可）。它可以在下面的 Kaggle 链接中找到：
 
-[https://www.kaggle.com/datasets/nikolagreb/small-itsm-dataset](https://www.kaggle.com/datasets/nikolagreb/small-itsm-dataset)
+[`www.kaggle.com/datasets/nikolagreb/small-itsm-dataset`](https://www.kaggle.com/datasets/nikolagreb/small-itsm-dataset)
 
 是时候开始导入所有需要的库和基本数据检查了。做好准备，代码来了！
 
@@ -49,7 +49,7 @@ Data columns (total 7 columns):
  4   Date_request_recieved  118 non-null    datetime64[ns]
  5   Date_request_solved    118 non-null    datetime64[ns]
  6   ID_agent               118 non-null    int64         
-dtypes: datetime64[ns](2), int64(2), object(3)
+dtypes: datetime64ns, int64(2), object(3)
 memory usage: 6.6+ KB</class> 
 ```
 
@@ -173,7 +173,7 @@ def clean_row(row):
 df["Keywords"] = df.Keywords.apply(clean_row) 
 ```
 
-此外，请注意，使用“if word in str(words_categories)”而不是“if word in words_categories”将捕捉到来自多词类别（在我们的例子中是Internet Browser）的词，但也需要更多的数据预处理。为了保持简单和直接，我们将使用仅包含一个词的类别的代码。这是我们数据集现在的样子：
+此外，请注意，使用“if word in str(words_categories)”而不是“if word in words_categories”将捕捉到来自多词类别（在我们的例子中是 Internet Browser）的词，但也需要更多的数据预处理。为了保持简单和直接，我们将使用仅包含一个词的类别的代码。这是我们数据集现在的样子：
 
 ```py
 df.head(2)
@@ -181,7 +181,7 @@ df.head(2)
 
 以图像输出：
 
-![XXXXX](../Images/7f8932ac292c1f768b45f3d6520af4f8.png)
+![XXXXX](img/7f8932ac292c1f768b45f3d6520af4f8.png)
 
 提取关键词列后，我们将评估票据的质量。我们的假设是：
 
@@ -253,7 +253,7 @@ Help Needed
 -------------------------------------------------------------------- 
 ```
 
-我们了解到来自Outlook和Mail类别的票据与相同的问题相关，因此我们将合并这两个类别并改进我们未来机器学习分类算法的结果。
+我们了解到来自 Outlook 和 Mail 类别的票据与相同的问题相关，因此我们将合并这两个类别并改进我们未来机器学习分类算法的结果。
 
 # 合并到集群
 
@@ -323,7 +323,7 @@ Help Needed          6
 Name: Category, dtype: int64 
 ```
 
-我们进行了数据重新标记和清理，但如果我们不做至少一个科学实验来测试我们工作的最终分类影响，我们不应自称为数据科学家。我们将通过在sklearn中实现互补朴素贝叶斯分类器来完成这一点。你可以尝试其他更复杂的算法。此外，还要注意，进一步的数据清理可能会进行，例如，我们还可以删除所有仍留在“需要帮助”类别中的票据。
+我们进行了数据重新标记和清理，但如果我们不做至少一个科学实验来测试我们工作的最终分类影响，我们不应自称为数据科学家。我们将通过在 sklearn 中实现互补朴素贝叶斯分类器来完成这一点。你可以尝试其他更复杂的算法。此外，还要注意，进一步的数据清理可能会进行，例如，我们还可以删除所有仍留在“需要帮助”类别中的票据。
 
 # 测试数据处理的影响
 
@@ -366,11 +366,11 @@ Accuracy of  Complement Naive Bayes classifier model on dataset after deeper cle
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

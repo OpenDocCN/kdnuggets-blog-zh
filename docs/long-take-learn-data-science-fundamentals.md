@@ -1,8 +1,8 @@
 # 学习数据科学基础需要多长时间？
 
-> 原文：[https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)
+> 原文：[`www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html`](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)
 
-![学习数据科学基础需要多长时间？](../Images/df08b1626ee950fdf86eb2e0fa821ab2.png)
+![学习数据科学基础需要多长时间？](img/df08b1626ee950fdf86eb2e0fa821ab2.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

@@ -1,12 +1,12 @@
 # 如何进入数据科学：为有志数据科学家提供的终极问答指南
 
-> 原文：[https://www.kdnuggets.com/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html](https://www.kdnuggets.com/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html`](https://www.kdnuggets.com/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Admond Lee](https://www.linkedin.com/in/admond1994/)**
 
-![figure-name](../Images/9fd1e63a0bac1dc34e04ef7c6ec43d63.png)
+![figure-name](img/9fd1e63a0bac1dc34e04ef7c6ec43d63.png)
 
 那么……你想成为一名**数据科学家**？很好。你是一个自我驱动的人，对数据科学充满热情，并希望通过解决复杂问题为公司带来价值。很棒。但你在数据科学方面没有**零经验**，也不知道如何入门这个领域。**我明白。我也经历过这个阶段，真的非常理解你**。这就是为什么这篇文章专门献给你——充满热情和抱负的数据科学家——回答最常见的问题和挑战。
 
@@ -14,11 +14,11 @@
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 > 
 > * * *
 > 
@@ -26,15 +26,15 @@
 > 
 > — [Eva Short](https://www.linkedin.com/in/eva-short/)
 
-下面所有的问题不是我提出的，而是你们——充满活力的数据科学社区。非常感谢你们对我之前的[LinkedIn帖子](https://www.linkedin.com/feed/update/urn:li:activity:6460119534715138049)的支持，包括我从电子邮件和其他渠道收到的问题！*请注意，下面的问题没有特定顺序，因此可以跳到你觉得合适的部分。*
+下面所有的问题不是我提出的，而是你们——充满活力的数据科学社区。非常感谢你们对我之前的[LinkedIn 帖子](https://www.linkedin.com/feed/update/urn:li:activity:6460119534715138049)的支持，包括我从电子邮件和其他渠道收到的问题！*请注意，下面的问题没有特定顺序，因此可以跳到你觉得合适的部分。*
 
 我希望通过分享我的经验，这篇文章能够揭示如何追求数据科学职业，并给你一些通用的指南，以使你的学习之旅更加愉快。让我们开始吧！
 
 ### 当前数据科学技能差距的趋势是什么？
 
-国际数据公司（IDC）预测，全球大数据和商业分析的收入将在2020年超过[$210亿](https://www.siliconrepublic.com/careers/data-science-skills-gap)。
+国际数据公司（IDC）预测，全球大数据和商业分析的收入将在 2020 年超过[$210 亿](https://www.siliconrepublic.com/careers/data-science-skills-gap)。
 
-根据[2018年8月美国LinkedIn工作报告](https://economicgraph.linkedin.com/resources/linkedin-workforce-report-august-2018)，2015年时数据科学技能人才的**过剩**。三年后，趋势发生了巨大的变化，越来越多的公司面临**数据科学技能人才的短缺**，因为大数据被越来越多地用于生成洞见和做出决策。
+根据[2018 年 8 月美国 LinkedIn 工作报告](https://economicgraph.linkedin.com/resources/linkedin-workforce-report-august-2018)，2015 年时数据科学技能人才的**过剩**。三年后，趋势发生了巨大的变化，越来越多的公司面临**数据科学技能人才的短缺**，因为大数据被越来越多地用于生成洞见和做出决策。
 
 > 从经济学角度来看，这一切都与**供给**和**需求**有关。
 
@@ -44,7 +44,7 @@
 
 ### 问题与答案
 
-![figure-name](../Images/d6e38ee5b0e679c5037014cf93c11a93.png)[(来源)](https://unsplash.com/photos/V3DokM1NQcs)
+![figure-name](img/d6e38ee5b0e679c5037014cf93c11a93.png)[(来源)](https://unsplash.com/photos/V3DokM1NQcs)
 
 **1\. 需要哪些技能，以及如何补充这些技能？**
 
@@ -54,9 +54,9 @@
 
 **技术技能**。数学和统计学、编程以及商业知识。尽管无论使用何种编程语言都能表现出卓越的编程能力，但作为数据科学家，我们应该能够用商业上下文的语言解释我们的模型结果，并辅以数学和统计学。
 
-![data-science-venn-diagram](../Images/84e26a698ab5c6d8198a64c8674f440f.png)[(来源)](https://towardsdatascience.com/introduction-to-statistics-e9d72d818745)
+![data-science-venn-diagram](img/84e26a698ab5c6d8198a64c8674f440f.png)[(来源)](https://towardsdatascience.com/introduction-to-statistics-e9d72d818745)
 
-我仍然记得当我刚开始学习数据科学时，我读了这本教科书——[统计学习导论——R语言应用](https://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=admond-20&linkId=7c20154d3e579c537decf3cbead8d412)。我强烈推荐这本教科书给初学者，因为这本书专注于统计建模和机器学习的基本概念，并提供了详细且直观的解释。如果你是一个数学硬核爱好者，也许你会更喜欢这本书：[统计学习的要素](https://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=admond1994-20&linkId=9227cfc7f0e3c430e6151a96d31369fd)。
+我仍然记得当我刚开始学习数据科学时，我读了这本教科书——[统计学习导论——R 语言应用](https://www.amazon.com/Introduction-Statistical-Learning-Applications-Statistics/dp/1461471370/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=admond-20&linkId=7c20154d3e579c537decf3cbead8d412)。我强烈推荐这本教科书给初学者，因为这本书专注于统计建模和机器学习的基本概念，并提供了详细且直观的解释。如果你是一个数学硬核爱好者，也许你会更喜欢这本书：[统计学习的要素](https://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576/ref=as_li_ss_tl?ie=UTF8&linkCode=ll1&tag=admond1994-20&linkId=9227cfc7f0e3c430e6151a96d31369fd)。
 
 *要学习编程技能*，特别是对于没有先前经验的初学者，我建议专注于学习一种语言（个人来说，我更喜欢 Python！????），因为这些概念也适用于其他语言，且 Python 更易于学习。[Python 或 R 的重要性和用途](https://www.datacamp.com/community/tutorials/r-or-python-for-data-analysis)在数据科学中一直是一个争论的话题。就个人而言，我认为应该关注如何帮助企业解决问题，而不论使用哪种语言。
 
@@ -102,7 +102,7 @@
 
 **4\. 初学者（来自完全不同的背景）是否应该先通过阅读材料来了解基础知识？你会推荐哪本书？**
 
-![figure-name](../Images/03b8024af2c2f76ad4571fff3a4949f4.png)[（来源）](https://unsplash.com/photos/YLSwjSy7stw)
+![figure-name](img/03b8024af2c2f76ad4571fff3a4949f4.png)[（来源）](https://unsplash.com/photos/YLSwjSy7stw)
 
 学习没有固定的路径，所有道路通向罗马。阅读材料无疑是了解基础的好开始，我也是这样做的！
 
@@ -166,29 +166,29 @@
 
 +   [简历专家提供职业建议](https://www.facebook.com/businessinsider/videos/10153537949019071/)
 
-+   [如何通过6秒简历测试](https://www.topresume.com/career-advice/how-to-pass-the-6-second-resume-test)
++   [如何通过 6 秒简历测试](https://www.topresume.com/career-advice/how-to-pass-the-6-second-resume-test)
 
 +   [如何为数据科学职位量身定制学术简历](https://www.linkedin.com/pulse/how-tailor-your-academic-cv-data-science-roles-jason-byrne/?trackingId=3ykuEpfW%2BISNc%2Fx9YFbIZQ%3D%3D)
 
 +   [招聘经理在数据科学家的简历中寻找什么？](https://www.linkedin.com/pulse/what-do-hiring-managers-look-data-scientists-cv-ben-dias/)
 
-+   [你简历上需要的14件事，以获得理想工作](https://www.elitedaily.com/money/14-signs-you-have-a-strong-resume/617472)
++   [你简历上需要的 14 件事，以获得理想工作](https://www.elitedaily.com/money/14-signs-you-have-a-strong-resume/617472)
 
 **8\. 什么样的作品集可以帮助我们获得数据科学或机器学习领域的第一份工作？**
 
-![figure-name](../Images/468b80dfefd55f9daff68c8b350fcbe2.png)[（来源）](https://unsplash.com/photos/gPRvTP0sZ2M)
+![figure-name](img/468b80dfefd55f9daff68c8b350fcbe2.png)[（来源）](https://unsplash.com/photos/gPRvTP0sZ2M)
 
-在我[第一篇Medium文章](https://towardsdatascience.com/my-journey-from-physics-into-data-science-5d578d0f9aa6)中，我提到了建立作品集的重要性。如果没有一个好的作品集，拥有一个精致的简历也不足以让你获得面试机会。
+在我[第一篇 Medium 文章](https://towardsdatascience.com/my-journey-from-physics-into-data-science-5d578d0f9aa6)中，我提到了建立作品集的重要性。如果没有一个好的作品集，拥有一个精致的简历也不足以让你获得面试机会。
 
 在雇主第一次浏览你的简历后，他们想了解你更多的背景，这就是你的作品集发挥作用的地方。虽然你可能会想知道如何从头开始建立一个作品集，但可以从**记录你的学习历程**开始。通过社交媒体平台（LinkedIn、Medium、Facebook、Instagram、个人博客——都可以）分享你的学习经验、错误、收获——技术性或非技术性——。
 
-**对在摄像机前讲话感兴趣？** 那就开始制作视频（采访其他有抱负的/成熟的数据科学家）并分享在YouTube上。**擅长写作？** 那就开始在不同平台上写你感兴趣的主题。如果你对视觉和写作不感兴趣，那么**联系他人并进行播客**。
+**对在摄像机前讲话感兴趣？** 那就开始制作视频（采访其他有抱负的/成熟的数据科学家）并分享在 YouTube 上。**擅长写作？** 那就开始在不同平台上写你感兴趣的主题。如果你对视觉和写作不感兴趣，那么**联系他人并进行播客**。
 
 **我的意思是：** 利用互联网建立你的作品集和获得关注的机会确实丰富，或者可能引起未来雇主的注意。
 
-我做过的最好的决定之一是与数据科学社区在[LinkedIn](https://www.linkedin.com/in/admond1994/)互动，并在[Medium](https://medium.com/@admond1994)上记录我的学习历程。我在LinkedIn上通过紧密联系的数据科学社区，在这种有利于分享和学习的环境中学到了最多。
+我做过的最好的决定之一是与数据科学社区在[LinkedIn](https://www.linkedin.com/in/admond1994/)互动，并在[Medium](https://medium.com/@admond1994)上记录我的学习历程。我在 LinkedIn 上通过紧密联系的数据科学社区，在这种有利于分享和学习的环境中学到了最多。
 
-渐渐地，我学会了（还在学习中！）如何利用我从不同来源获得的经验在LinkedIn上建立我的作品集。在这个过程中，我收到了来自不同招聘人员的职位机会信息，甚至有机会和他们中的一些人喝咖啡聊聊天！
+渐渐地，我学会了（还在学习中！）如何利用我从不同来源获得的经验在 LinkedIn 上建立我的作品集。在这个过程中，我收到了来自不同招聘人员的职位机会信息，甚至有机会和他们中的一些人喝咖啡聊聊天！
 
 **— 更多资源 —**
 
@@ -198,7 +198,7 @@
 
 尽管如此，我还是列出了一些有用的资源：
 
-+   **[Towards Data Science](https://towardsdatascience.com/)，[Quora](https://www.quora.com/)，[DZone](https://dzone.com/)，[KDnuggets](/)，[Analytics Vidhya](https://www.analyticsvidhya.com/)，[DataTau](http://www.datatau.com/news)，[fast.ai](http://www.fast.ai/)**
++   **[Towards Data Science](https://towardsdatascience.com/)，[Quora](https://www.quora.com/)，[DZone](https://dzone.com/)，KDnuggets，[Analytics Vidhya](https://www.analyticsvidhya.com/)，[DataTau](http://www.datatau.com/news)，[fast.ai](http://www.fast.ai/)**
 
 +   **网络研讨会** — [数据科学办公时间](https://www.youtube.com/channel/UC5c7r0SlnNmPfqxEyni71FA), [数据科学连接](https://www.youtube.com/channel/UCr6_XCxMLXWGguWZi_93n7w), [数据科学的人物](https://www.youtube.com/channel/UCU9GTVEPqlSNRDHypVf3BRw)
 
@@ -206,19 +206,19 @@
 
 +   [进入数据领域的绝佳指南](http://www.data-mania.com/blog/guide-to-breaking-into-data/)
 
-+   [10个必备的数据科学技能](https://www.kdnuggets.com/2016/05/10-must-have-skills-data-scientist.html?utm_content=buffer7c1a3&utm_medium=social&utm_source=linkedin.com&utm_campaign=buffer)
++   [10 个必备的数据科学技能](https://www.kdnuggets.com/2016/05/10-must-have-skills-data-scientist.html?utm_content=buffer7c1a3&utm_medium=social&utm_source=linkedin.com&utm_campaign=buffer)
 
 +   [我的数据科学与机器学习，初学者学习路径](https://www.linkedin.com/pulse/my-data-science-machine-learning-beginners-path-vin-vashishta/?trackingId=J16vYmqLQEZ5wr4oElpnNA%3D%3D)
 
 +   [机器学习大师](https://machinelearningmastery.com/)
 
-+   [24个终极数据科学项目，提升你的知识和技能](https://www.analyticsvidhya.com/blog/2018/05/24-ultimate-data-science-projects-to-boost-your-knowledge-and-skills/)
++   [24 个终极数据科学项目，提升你的知识和技能](https://www.analyticsvidhya.com/blog/2018/05/24-ultimate-data-science-projects-to-boost-your-knowledge-and-skills/)
 
 ### 关注激励人心的数据科学家和专业人士
 
-![figure-name](../Images/5ef07fa8fe5d8ff2ecc09748daaeb204.png)[（来源）](https://unsplash.com/photos/McIrFk1i5eg)
+![figure-name](img/5ef07fa8fe5d8ff2ecc09748daaeb204.png)[（来源）](https://unsplash.com/photos/McIrFk1i5eg)
 
-LinkedIn上的数据科学社区非常棒，我强烈建议你关注下面提到的激励人心的数据科学家和专业人士：
+LinkedIn 上的数据科学社区非常棒，我强烈建议你关注下面提到的激励人心的数据科学家和专业人士：
 
 +   [Randy Lao](https://www.linkedin.com/in/randylaosat/)
 
@@ -254,7 +254,7 @@ LinkedIn上的数据科学社区非常棒，我强烈建议你关注下面提到
 
 ### 最后的想法
 
-![figure-name](../Images/1e6f79f23730b1396c544968e9bc5126.png)[勇敢踏出第一步](https://unsplash.com/photos/wPlzrculha8)
+![figure-name](img/1e6f79f23730b1396c544968e9bc5126.png)[勇敢踏出第一步](https://unsplash.com/photos/wPlzrculha8)
 
 *你已经到达这里了？！感谢阅读。*
 
@@ -276,11 +276,11 @@ LinkedIn上的数据科学社区非常棒，我强烈建议你关注下面提到
 
 **相关：**
 
-+   [选择最佳机器学习课程的完整指南](/2018/11/simplilearn-complete-guide-machine-learning-course.html)
++   选择最佳机器学习课程的完整指南
 
-+   [如何在数据科学、AI、大数据领域工作](/2019/03/work-data-science-ai-big-data.html)
++   如何在数据科学、AI、大数据领域工作
 
-+   [关于数据科学职位申请的秘密](/2019/03/data-science-job-applications.html)
++   关于数据科学职位申请的秘密
 
 ### 更多相关话题
 
@@ -288,10 +288,10 @@ LinkedIn上的数据科学社区非常棒，我强烈建议你关注下面提到
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例研究](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例研究](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

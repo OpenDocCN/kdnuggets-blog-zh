@@ -1,8 +1,8 @@
 # 电信领域数据科学的十大应用案例
 
-> 原文：[https://www.kdnuggets.com/2019/02/top-10-data-science-use-cases-telecom.html](https://www.kdnuggets.com/2019/02/top-10-data-science-use-cases-telecom.html)
+> 原文：[`www.kdnuggets.com/2019/02/top-10-data-science-use-cases-telecom.html`](https://www.kdnuggets.com/2019/02/top-10-data-science-use-cases-telecom.html)
 
-[评论](#comments)
+评论
 
 **由[ActiveWizards](https://activewizards.com/)提供**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -34,7 +34,7 @@
 
 电信公司应用预测分析来获取有价值的见解，以便变得更快、更好，并做出数据驱动的决策。了解客户的偏好和需求可以更好地理解客户。预测分析利用历史数据来构建预测。数据的质量越高，历史越长，预测的准确性也越高。
 
-![](../Images/d75853734aa5bfa14784b3f762c31152.png)
+![](img/d75853734aa5bfa14784b3f762c31152.png)
 
 让我们考虑几个在电信行业中预测分析的应用案例。
 
@@ -52,7 +52,7 @@
 
 客户倾向于寻找更好和更便宜的服务，因此，电信公司需要衡量、管理和预测客户终身价值（CLV）。未能预测这一价值可能会导致利润损失。
 
-客户终身价值是客户未来所有利润和收入的折现值。CLV模型集中于客户的购买行为、活动、所使用的服务和平均客户价值。智能解决方案处理实时洞察，区分盈利、接近盈利和不盈利的客户群体，从而预测未来的现金流。
+客户终身价值是客户未来所有利润和收入的折现值。CLV 模型集中于客户的购买行为、活动、所使用的服务和平均客户价值。智能解决方案处理实时洞察，区分盈利、接近盈利和不盈利的客户群体，从而预测未来的现金流。
 
 ### 网络管理与优化
 
@@ -60,7 +60,7 @@
 
 ### 产品开发
 
-![](../Images/538b8ca155c3c17160d87e830f5ef688.png)
+![](img/538b8ca155c3c17160d87e830f5ef688.png)
 
 产品开发是一个复杂的过程，从概念开发阶段到持续的生命周期管理和维护，都需要控制和深思熟虑的管理。要确保产品的高质量性能，符合客户的要求，就必须应用智能数据解决方案。数据驱动的产品开发过程不仅应考虑客户需求，还应考虑数字分析实施的结果、内部反馈和市场情报。
 
@@ -82,13 +82,13 @@
 
 ### 实时分析
 
-电信行业因其多年处理大量数据流的经验而闻名。由于互联网的快速发展以及3G、4G甚至5G连接的不断演变，电信公司面临着不断变化的客户需求的挑战。用户变得越来越挑剔，流量每天都在增加。
+电信行业因其多年处理大量数据流的经验而闻名。由于互联网的快速发展以及 3G、4G 甚至 5G 连接的不断演变，电信公司面临着不断变化的客户需求的挑战。用户变得越来越挑剔，流量每天都在增加。
 
-实时流分析可以处理这个任务。现代流分析解决方案专门用于持续摄取、分析和关联来自多个来源的数据，并在实时模式下生成响应行动。实时分析结合了与客户档案、网络、位置、流量和使用相关的数据，以创建产品或服务的360度用户中心视图。它还捕捉和分析客户之间的互动和沟通。
+实时流分析可以处理这个任务。现代流分析解决方案专门用于持续摄取、分析和关联来自多个来源的数据，并在实时模式下生成响应行动。实时分析结合了与客户档案、网络、位置、流量和使用相关的数据，以创建产品或服务的 360 度用户中心视图。它还捕捉和分析客户之间的互动和沟通。
 
 ### 价格优化
 
-![](../Images/571e78b2158fa170855b3c77eae2dcf6.png)
+![](img/571e78b2158fa170855b3c77eae2dcf6.png)
 
 电信领域属于高度竞争的行业。尽可能多地获取订阅者仍然是一个关键目标。由于近年来用户数量增长极快，定价成为了一种限制拥堵和同时增加收入的工具。
 
@@ -100,17 +100,17 @@
 
 电信领域不得不采用现代技术和方法，以保持相关性并在全球市场严峻的环境下不失去地位。电信公司运营着庞大的通信网络和基础设施，数据流动十分密集。利用数据科学算法、方法论和工具处理和分析这些数据具有实际应用。因此，我们尝试明确几个这些应用案例，并展示可以获得的实际好处。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）和数据密集型Web应用开发（RESTful APIs、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个专注于数据项目（大数据、数据科学、机器学习、数据可视化）的数据科学家和工程师团队。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）和数据密集型 Web 应用开发（RESTful APIs、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/top-10-data-science-use-cases-in-telecom/)。经许可转载。
 
 **相关：**
 
-+   [金融领域数据科学的前7个应用案例](/2018/05/top-7-data-science-use-cases-finance.html)
++   金融领域数据科学的前 7 个应用案例
 
-+   [管理者数据科学入门](/2018/11/intro-data-science-managers.html)
++   管理者数据科学入门
 
-+   [前6大Python NLP库比较](/2018/07/comparison-top-6-python-nlp-libraries.html)
++   前 6 大 Python NLP 库比较
 
 ### 更多相关内容
 

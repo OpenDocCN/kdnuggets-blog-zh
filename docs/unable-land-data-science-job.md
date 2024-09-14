@@ -1,8 +1,8 @@
 # 无法找到数据科学工作？原因在这里
 
-> 原文：[https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
+> 原文：[`www.kdnuggets.com/2022/01/unable-land-data-science-job.html`](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-![无法找到数据科学工作？原因在这里](../Images/56b786fee862c376ebd0d4b8ba0db05d.png)
+![无法找到数据科学工作？原因在这里](img/56b786fee862c376ebd0d4b8ba0db05d.png)
 
 > *我有心理学学位。我想从事数据科学，所以我报名参加了一个训练营。我已经试图找到数据科学工作好几个月了，但毫无结果。我要么没有回应，要么公司告诉我我没有他们所寻找的经验。*
 
@@ -40,7 +40,7 @@
 
 我从未见过一个领域像数据科学那样充满炒作。
 
-问题在于那些承诺在接下来的几个月内将你培养成数据科学家的培训营和在线课程。问题在于那些不断编造自己如何轻松找到数据科学工作的博主和YouTuber，并让人觉得你也可以轻松做到。
+问题在于那些承诺在接下来的几个月内将你培养成数据科学家的培训营和在线课程。问题在于那些不断编造自己如何轻松找到数据科学工作的博主和 YouTuber，并让人觉得你也可以轻松做到。
 
 要在六个月或一年内找到数据科学的工作**是** **可能的**。人们之前已经做到过。但这**绝对不容易**。如果你想在没有任何正式培训的情况下做到这一点，那就准备付出至少三倍的努力。
 
@@ -88,7 +88,7 @@
 
 再次强调，数据科学课程非常有帮助，但它们只能帮助打下基础。重任需要由你来完成。
 
-在过去的一年里，我花时间学习了统计学、机器学习、数据收集、网页开发、编程、数据库操作、模型部署和商业分析的基础知识。我目前正朝着成为Google Cloud数据工程师认证的方向努力，尽管我们在工作场所并不使用GCP。
+在过去的一年里，我花时间学习了统计学、机器学习、数据收集、网页开发、编程、数据库操作、模型部署和商业分析的基础知识。我目前正朝着成为 Google Cloud 数据工程师认证的方向努力，尽管我们在工作场所并不使用 GCP。
 
 这是一项艰巨的工作，我学到了比任何培训班所能提供的更多的知识。
 
@@ -102,14 +102,14 @@
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 精通机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 精通机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [你难以找到数据科学工作的7个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [你难以找到数据科学工作的 7 个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
-+   [2022年将帮助你找到工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年将帮助你找到工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [2022年将帮助你找到工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [2022 年将帮助你找到工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [3个数据科学项目，确保让你找到那份工作](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个数据科学项目，确保让你找到那份工作](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [利用ChatGPT助力获得数据科学职位](https://www.kdnuggets.com/using-chatgpt-to-help-land-a-data-science-job)
++   [利用 ChatGPT 助力获得数据科学职位](https://www.kdnuggets.com/using-chatgpt-to-help-land-a-data-science-job)

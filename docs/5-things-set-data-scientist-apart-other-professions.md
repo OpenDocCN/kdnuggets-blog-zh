@@ -1,22 +1,22 @@
 # 区分数据科学家与其他职业的五大特点
 
-> 原文：[https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
+> 原文：[`www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html`](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
 
-![区分数据科学家与其他职业的五大特点](../Images/0a9dba5793e120401007143d195febcf.png)
+![区分数据科学家与其他职业的五大特点](img/0a9dba5793e120401007143d195febcf.png)
 
 [由 pressfoto 提供的照片，来源于 www.freepik.com](https://www.freepik.com/photos/programmer-code)
 
-我最近写了一篇文章，标题为 [数据科学家、数据工程师及其他数据职业解析](/2021/05/data-scientist-data-engineer-data-careers-explained.html)，在文章中我尽力简明扼要地定义和区分了五种流行的数据相关职业。每种职业在文章中都进行了非常高水平的单句总结，数据科学家则被描述如下：
+我最近写了一篇文章，标题为 数据科学家、数据工程师及其他数据职业解析，在文章中我尽力简明扼要地定义和区分了五种流行的数据相关职业。每种职业在文章中都进行了非常高水平的单句总结，数据科学家则被描述如下：
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -52,9 +52,9 @@
 
 +   “为什么*这*需要像*那样*做？”
 
-+   “如果我们对Y做X，会发生什么？”
++   “如果我们对 Y 做 X，会发生什么？”
 
-+   “X是如何融入这里发生的事情中的？”
++   “X 是如何融入这里发生的事情中的？”
 
 +   “我们尝试过...吗？”
 

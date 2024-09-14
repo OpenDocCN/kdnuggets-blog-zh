@@ -1,26 +1,26 @@
 # 通过实现理解：决策树
 
-> 原文：[https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)
+> 原文：[`www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html`](https://www.kdnuggets.com/2023/02/understanding-implementing-decision-tree.html)
 
-![通过实现理解：决策树](../Images/2a3d41a545fa5b47a7f6524b9046821a.png)
+![通过实现理解：决策树](img/2a3d41a545fa5b47a7f6524b9046821a.png)
 
 作者提供的图片
 
-许多高级机器学习模型，例如随机森林或梯度提升算法，如XGBoost、CatBoost或LightGBM（甚至[自编码器](https://medium.com/towards-data-science/building-a-simple-auto-encoder-via-decision-trees-28ba9342a349)！）都依赖于一个重要的共同成分：**决策树**！
+许多高级机器学习模型，例如随机森林或梯度提升算法，如 XGBoost、CatBoost 或 LightGBM（甚至[自编码器](https://medium.com/towards-data-science/building-a-simple-auto-encoder-via-decision-trees-28ba9342a349)！）都依赖于一个重要的共同成分：**决策树**！
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
-如果不理解决策树，也无法理解上述高级的袋装算法或梯度提升算法，这对任何数据科学家来说都是一个耻辱！所以，让我们通过在Python中实现一个决策树来揭开它的神秘面纱。
+如果不理解决策树，也无法理解上述高级的袋装算法或梯度提升算法，这对任何数据科学家来说都是一个耻辱！所以，让我们通过在 Python 中实现一个决策树来揭开它的神秘面纱。
 
 在本文中，您将学习
 
@@ -28,15 +28,15 @@
 
 +   信息增益，以及
 
-+   如何使用NumPy在Python中实现决策树。
++   如何使用 NumPy 在 Python 中实现决策树。
 
-> 您可以在[我的Github](https://github.com/Garve/Towards-Data-Science---Notebooks/blob/main/TDS%20-%20Decision%20Tree.ipynb)上找到代码。
+> 您可以在[我的 Github](https://github.com/Garve/Towards-Data-Science---Notebooks/blob/main/TDS%20-%20Decision%20Tree.ipynb)上找到代码。
 
 # 理论
 
 为了进行预测，决策树依赖于**将**数据集递归地**分裂**成更小的部分。
 
-![通过实现理解：决策树](../Images/9b00e12744e927f329f5e8d19f29d46c.png)
+![通过实现理解：决策树](img/9b00e12744e927f329f5e8d19f29d46c.png)
 
 作者提供的图片
 
@@ -64,7 +64,7 @@ y = ((X[:, 0] > 0) * (X[:, 1] < 0)) # labels (0 and 1)
 
 二维数据如下所示：
 
-![通过实现理解：决策树](../Images/554cbca0ca349471b45b9ef532caf57b.png)
+![通过实现理解：决策树](img/554cbca0ca349471b45b9ef532caf57b.png)
 
 作者提供的图片
 
@@ -74,7 +74,7 @@ y = ((X[:, 0] > 0) * (X[:, 1] < 0)) # labels (0 and 1)
 
 树就是这样做的。
 
-![通过实现理解：决策树](../Images/ece4cb957d4cfa280d757eca55a617d7.png)
+![通过实现理解：决策树](img/ece4cb957d4cfa280d757eca55a617d7.png)
 
 图片来源：作者
 
@@ -84,13 +84,13 @@ y = ((X[:, 0] > 0) * (X[:, 1] < 0)) # labels (0 and 1)
 
 > * ***注意：****在这里，紫色和黄色在图片中是否分开并不重要。只有两部分中不同标签的**原始数量**才是关键。**
 
-*![通过实现理解：决策树](../Images/cd6a8063e5483dd3283407b8c6e3d717.png)
+*![通过实现理解：决策树](img/cd6a8063e5483dd3283407b8c6e3d717.png)
 
 图片来源：作者
 
 尽管如此，这仍然是树的第一步，因此它继续前进。虽然它不会再在顶部的*干净*部分创建另一个分裂，但它可以在底部部分创建另一个分裂来进行清理。
 
-![通过实现理解：决策树](../Images/4c38bd5c08fe69bd3e39b5e99888316a.png)
+![通过实现理解：决策树](img/4c38bd5c08fe69bd3e39b5e99888316a.png)
 
 图片来源：作者
 
@@ -98,7 +98,7 @@ Voilà，三个独立的部分完全干净，因为我们每个部分只找到�
 
 现在做预测非常简单：如果一个新的数据点出现，你只需检查它位于哪一个**三个部分**中，然后给它相应的颜色。现在之所以效果如此好，是因为每个部分都是*干净的*。简单吧？
 
-![通过实现理解：决策树](../Images/3c98457e2b72d4013552e09d1ef5848e.png)
+![通过实现理解：决策树](img/3c98457e2b72d4013552e09d1ef5848e.png)
 
 图片来源：作者
 
@@ -121,7 +121,7 @@ y_3 = [1, 0, 1, 1, 0, 0, 1, 0]
 
 例如，*y₂* 总共有 8 个条目——6 个零和 2 个一。因此，我们自定义的**清洁度得分**将是 |6 - 2| / 8 = 0.5。很容易计算出 *y₁* 和 *y₃* 的清洁度得分分别为 1.0 和 0.0。在这里，我们可以看到通用公式：
 
-![通过实现理解：决策树](../Images/b7483ae67d73bcffdc9d3bf191b064cc.png)
+![通过实现理解：决策树](img/b7483ae67d73bcffdc9d3bf191b064cc.png)
 
 图片来源：作者
 
@@ -129,19 +129,19 @@ y_3 = [1, 0, 1, 1, 0, 0, 1, 0]
 
 这个公式的问题在于它**专门针对两个类别的情况**，但我们很常见的是多类别分类。一个效果相当好的公式是**Gini 不纯度度量**：
 
-![通过实现理解：决策树](../Images/decde949856b7174d1d4cb86f9ec1860.png)
+![通过实现理解：决策树](img/decde949856b7174d1d4cb86f9ec1860.png)
 
 图片来源：作者
 
 或者一般情况：
 
-![通过实现理解：决策树](../Images/3cf6b03fa036e6e4a3f9d432d2384018.png)
+![通过实现理解：决策树](img/3cf6b03fa036e6e4a3f9d432d2384018.png)
 
 图片来源：作者
 
 它效果非常好，以至于 scikit-learn [将其作为默认度量](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html)用于其`DecisionTreeClassifier`类。
 
-![通过实现理解：决策树](../Images/31661e3c05c0e279e73ceb48861b095c.png)
+![通过实现理解：决策树](img/31661e3c05c0e279e73ceb48861b095c.png)
 
 图片来源：作者
 
@@ -153,25 +153,25 @@ y_3 = [1, 0, 1, 1, 0, 0, 1, 0]
 
 我们有很多分裂选择，但哪个是好的呢？让我们再次使用我们的初始数据集，结合 Gini 不纯度度量。
 
-![通过实现理解：决策树](../Images/8ea233e9da061b673a7c6e958b48929c.png)
+![通过实现理解：决策树](img/8ea233e9da061b673a7c6e958b48929c.png)
 
 图片来源：作者
 
 我们现在不会计算点数，但假设 75% 是紫色的，25% 是黄色的。根据 Gini 的定义，整个数据集的不纯度是
 
-![通过实现理解：决策树](../Images/5234e837ea39350ce44f5fe171fbd64f.png)
+![通过实现理解：决策树](img/5234e837ea39350ce44f5fe171fbd64f.png)
 
 图片来源：作者
 
 如果我们像之前那样沿 *x* 轴分裂数据集：
 
-![通过实现理解：决策树](../Images/f84e74cf628ae0ff15d1ce417d6d1b95.png)
+![通过实现理解：决策树](img/f84e74cf628ae0ff15d1ce417d6d1b95.png)
 
 图片来源：作者
 
 **顶部部分的 Gini 不纯度是 0.0**，而底部部分
 
-![通过实现理解：决策树](../Images/0aa3e0aad38846e2ecbe4149c772c0c3.png)
+![通过实现理解：决策树](img/0aa3e0aad38846e2ecbe4149c772c0c3.png)
 
 图片来源：作者
 
@@ -185,11 +185,11 @@ y_3 = [1, 0, 1, 1, 0, 0, 1, 0]
 
 需要记住的一件重要事情是，**通过部分的大小来权衡 Gini 不纯度**是有用的。例如，假设
 
-+   第1部分包含50个数据点，Gini不纯度为0.0，并且
++   第一部分包含 50 个数据点，Gini 不纯度为 0.0，并且
 
-+   第2部分包含450个数据点，Gini不纯度为0.5，
++   第二部分包含 450 个数据点，Gini 不纯度为 0.5，
 
-然后，平均Gini不纯度应该不是 (0.0 + 0.5) / 2 = 0.25，而是50 / (50 + 450) * 0.0 + 450 / (50 + 450) * 0.5 = **0.45**。
+然后，平均 Gini 不纯度应该不是 (0.0 + 0.5) / 2 = 0.25，而是 50 / (50 + 450) * 0.0 + 450 / (50 + 450) * 0.5 = **0.45**。
 
 好的，我们如何找到最佳分割？简单但令人清醒的答案是：
 
@@ -222,7 +222,7 @@ class Node:
 
 一个节点知道用于分割的特征（`feature`）以及分割值（`value`）。`value` 还被用作决策树最终预测的存储。由于我们将构建一棵二叉树，每个节点需要知道它的左子节点和右子节点，分别存储在`left`和`right`中。
 
-现在，让我们进行实际的决策树实现。我将其与scikit-learn兼容，因此我使用了来自`sklearn.base`的一些类。如果你不熟悉，可以查看我的文章[如何构建兼容scikit-learn的模型](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)。
+现在，让我们进行实际的决策树实现。我将其与 scikit-learn 兼容，因此我使用了来自`sklearn.base`的一些类。如果你不熟悉，可以查看我的文章[如何构建兼容 scikit-learn 的模型](https://towardsdatascience.com/build-your-own-custom-scikit-learn-regression-5d0d718f289)。
 
 让我们实现吧！
 
@@ -304,7 +304,7 @@ class DecisionTreeClassifier(BaseEstimator, ClassifierMixin):
         return np.array([self._find_path(x, self.root) for x in X])
 ```
 
-就这样！你现在可以做你喜欢的所有scikit-learn的事情了：
+就这样！你现在可以做你喜欢的所有 scikit-learn 的事情了：
 
 ```py
 dt = DecisionTreeClassifier().fit(X, y)
@@ -350,7 +350,7 @@ print(dt.root)
 
 作为图示，它将是这样的：
 
-![通过实现了解：决策树](../Images/e09eb496451c654e69c87a8984dbb0c2.png)
+![通过实现了解：决策树](img/e09eb496451c654e69c87a8984dbb0c2.png)
 
 图片由作者提供
 
@@ -366,7 +366,7 @@ print(dt.root)
 
 +   和最小信息增益
 
-以及许多其他内容。幸运的是，这些实现起来并不难，这使得它成为你完美的作业。例如，如果你将`leaf_size=10`作为参数，那么包含超过10个样本的节点就不再拆分。此外，这种实现是**不高效的**。通常，你不希望将数据集的部分内容存储在节点中，而只存储索引。因此，你（可能很大的）数据集只在内存中存在一次。
+以及许多其他内容。幸运的是，这些实现起来并不难，这使得它成为你完美的作业。例如，如果你将`leaf_size=10`作为参数，那么包含超过 10 个样本的节点就不再拆分。此外，这种实现是**不高效的**。通常，你不希望将数据集的部分内容存储在节点中，而只存储索引。因此，你（可能很大的）数据集只在内存中存在一次。
 
 好消息是你现在可以尽情使用这个决策树模板。你可以：
 
@@ -392,6 +392,6 @@ print(dt.root)
 
 +   [随机森林与决策树：关键区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日: 讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日: 讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [决策树软件的完整指南](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)**

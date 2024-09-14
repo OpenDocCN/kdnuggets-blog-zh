@@ -1,34 +1,34 @@
-# 2022年技术专家薪资指南
+# 2022 年技术专家薪资指南
 
-> 原文：[https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
+> 原文：[`www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html`](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
 
-![2022年技术专家薪资指南](../Images/39d1a5e375f5f2866cff9f933bf49c99.png)
+![2022 年技术专家薪资指南](img/39d1a5e375f5f2866cff9f933bf49c99.png)
 
 [Towfiqu barbhuiya](https://unsplash.com/@towfiqu999999) 通过 Unsplash
 
-这是一个简单的指南，列出了不同技术职业的薪资。所有信息均来自[Indeed的薪资信息](https://www.indeed.com/career/salaries)。这些数据基于人们对其工作的评价，并提供给Indeed薪资信息；因此，您需要对此持保留态度。根据您的位置、经验和公司，这些数据可能会有所不同。下面的图片提供了更多解释。
+这是一个简单的指南，列出了不同技术职业的薪资。所有信息均来自[Indeed 的薪资信息](https://www.indeed.com/career/salaries)。这些数据基于人们对其工作的评价，并提供给 Indeed 薪资信息；因此，您需要对此持保留态度。根据您的位置、经验和公司，这些数据可能会有所不同。下面的图片提供了更多解释。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 维护
 
 * * *
 
 薪资薪酬等级：
 
-![薪资薪酬等级](../Images/c4ae7280e17cb18249cef99b6cce9e40.png)
+![薪资薪酬等级](img/c4ae7280e17cb18249cef99b6cce9e40.png)
 
 来源：[Indeed](https://www.indeed.com/career/data-scientist/salaries)
 
 按地点划分的薪资：
 
-![按地点划分的薪资](../Images/350c67cc592ff32ba902b4ae449c0b94.png)
+![按地点划分的薪资](img/350c67cc592ff32ba902b4ae449c0b94.png)
 
 来源：[Indeed](https://www.indeed.com/career/data-scientist/salaries)
 
@@ -40,7 +40,7 @@
 | --- | --- | --- | --- |
 | 数据科学家 | $83,460 | $140,772 | $237,440 |
 
-![数据科学家](../Images/04909711a796bba4be9b5c721b30a02e.png)
+![数据科学家](img/04909711a796bba4be9b5c721b30a02e.png)
 
 来源：[Indeed](https://www.indeed.com/career/data-scientist/salaries)
 
@@ -52,19 +52,19 @@
 | --- | --- | --- | --- |
 | 数据工程师 | $77,872 | $125,974 | $203,789 |
 
-![数据工程师](../Images/8267865aa9216a354d5fe61b2811a6d7.png)
+![数据工程师](img/8267865aa9216a354d5fe61b2811a6d7.png)
 
 来源：[Indeed](https://www.indeed.com/career/data-engineer/salaries?from=top_sb)
 
 # Python 开发者
 
-在涉及Python时，Python开发者可以被视为多面手。他们可以是网页开发者、数据分析师或软件工程师。
+在涉及 Python 时，Python 开发者可以被视为多面手。他们可以是网页开发者、数据分析师或软件工程师。
 
 | 职位 | 低 | 平均 | 高 |
 | --- | --- | --- | --- |
-| Python开发者 | $71,632 | $114,684 | $183,612 |
+| Python 开发者 | $71,632 | $114,684 | $183,612 |
 
-![Python开发者](../Images/71f6999911963bca128f215f2948b35f.png)
+![Python 开发者](img/71f6999911963bca128f215f2948b35f.png)
 
 来源：[Indeed](https://www.indeed.com/career/python-developer/salaries?from=top_sb)
 
@@ -76,7 +76,7 @@
 | --- | --- | --- | --- |
 | 数据架构师 | $50,023 | $85,344 | $145,605 |
 
-![数据架构师](../Images/f6264eabf1b9ef1b56cf81fcdb002639.png)
+![数据架构师](img/f6264eabf1b9ef1b56cf81fcdb002639.png)
 
 来源：[Indeed](https://www.indeed.com/career/architect/salaries?from=top_sb)
 
@@ -88,7 +88,7 @@
 | --- | --- | --- | --- |
 | 数据分析师 | $44,884 | $69,068 | $106,282 |
 
-![数据分析师](../Images/c621633970b850d510bde903622b1273.png)
+![数据分析师](img/c621633970b850d510bde903622b1273.png)
 
 来源：[Indeed](https://www.indeed.com/career/data-analyst/salaries?from=top_sb)
 
@@ -100,7 +100,7 @@
 | --- | --- | --- | --- |
 | 业务分析师 | $52,738 | $79,347 | $119,383 |
 
-![业务分析师](../Images/04f62676c2107d0014f53c87f6a37eec.png)
+![业务分析师](img/04f62676c2107d0014f53c87f6a37eec.png)
 
 来源：[Indeed](https://www.indeed.com/career/business-analyst/salaries?from=top_sb)
 
@@ -112,7 +112,7 @@
 | --- | --- | --- | --- |
 | 数据库管理员 | $60,420 | $90,041 | $134,183 |
 
-![数据库管理员](../Images/35fbcda149948013f0abd6fc98d7148d.png)
+![数据库管理员](img/35fbcda149948013f0abd6fc98d7148d.png)
 
 来源：[Indeed](https://www.indeed.com/career/database-administrator/salaries?from=top_sb)
 
@@ -124,7 +124,7 @@
 | --- | --- | --- | --- |
 | 网络安全专家  | $77,260 | $108,671 | $152,853 |
 
-![网络安全专家](../Images/44d33934f555a082426ec9b1dafe0749.png)
+![网络安全专家](img/44d33934f555a082426ec9b1dafe0749.png)
 
 来源：[Indeed](https://www.indeed.com/career/it-security-specialist/salaries?from=top_sb)
 
@@ -136,7 +136,7 @@
 | --- | --- | --- | --- |
 | 机器学习工程师 | $66,040 | $124,850 | $236,030 |
 
-![机器学习工程师](../Images/676d71e5919c23e30eef1f2f88597aea.png)
+![机器学习工程师](img/676d71e5919c23e30eef1f2f88597aea.png)
 
 来源：[Indeed](https://www.indeed.com/career/machine-learning-engineer/salaries?from=top_sb)
 
@@ -148,19 +148,19 @@
 | --- | --- | --- | --- |
 | 统计学家 | $62,503 | $97,353 | $151,633 |
 
-![统计学家](../Images/94a2c28e68135599e4eaed4299dbc776.png)
+![统计学家](img/94a2c28e68135599e4eaed4299dbc776.png)
 
 来源：[Indeed](https://www.indeed.com/career/statistician/salaries?from=top_sb)
 
-# DevOps工程师
+# DevOps 工程师
 
-DevOps工程师负责引入新的流程、工具和方法，以改进当前的软件开发生命周期。这包括部署、代码、测试系统、总体维护和执行正确的更新。
+DevOps 工程师负责引入新的流程、工具和方法，以改进当前的软件开发生命周期。这包括部署、代码、测试系统、总体维护和执行正确的更新。
 
 | 职位 | 低 | 平均 | 高 |
 | --- | --- | --- | --- |
-| DevOps工程师 | $79,687 | $117,652 | $173,704 |
+| DevOps 工程师 | $79,687 | $117,652 | $173,704 |
 
-![DevOps工程师](../Images/9dbbfc7dd6309dcdc39d4384763a4648.png)
+![DevOps 工程师](img/9dbbfc7dd6309dcdc39d4384763a4648.png)
 
 来源：[Indeed](https://www.indeed.com/career/development-operations-engineer/salaries?from=top_sb)
 
@@ -172,19 +172,19 @@ DevOps工程师负责引入新的流程、工具和方法，以改进当前的�
 | --- | --- | --- | --- |
 | 云计算工程师 | $77,235 | $120,712 | $188,663 |
 
-![云计算工程师](../Images/872d933927fc1eaf7c5907273af15d74.png)
+![云计算工程师](img/872d933927fc1eaf7c5907273af15d74.png)
 
 来源：[Indeed](https://www.indeed.com/career/cloud-engineer/salaries?from=top_sb)
 
-# Java开发人员
+# Java 开发人员
 
-Java开发人员负责设计基于Java的应用程序，并进一步管理其开发和维护。他们参与产品的开发生命周期，并与团队中的其他成员如网页开发人员和软件工程师密切合作，以帮助将基于Java的知识、专业技能和产品整合到业务的应用程序、软件等中。
+Java 开发人员负责设计基于 Java 的应用程序，并进一步管理其开发和维护。他们参与产品的开发生命周期，并与团队中的其他成员如网页开发人员和软件工程师密切合作，以帮助将基于 Java 的知识、专业技能和产品整合到业务的应用程序、软件等中。
 
 | 职位 | 低 | 平均 | 高 |
 | --- | --- | --- | --- |
-| Java开发人员 | $72,505 | $111,840 | $172,514 |
+| Java 开发人员 | $72,505 | $111,840 | $172,514 |
 
-![Java开发人员](../Images/a356e028060a64bbf2b58d7b85212154.png)
+![Java 开发人员](img/a356e028060a64bbf2b58d7b85212154.png)
 
 来源：[Indeed](https://www.indeed.com/career/java-developer/salaries?from=top_sb)
 
@@ -198,7 +198,7 @@ Java开发人员负责设计基于Java的应用程序，并进一步管理其开
 | --- | --- | --- | --- |
 | 技术作家 | $22.03 | $35.21 | $56.27 |
 
-![技术作家](../Images/a11b4926d558b314755d2bc9a24fc5e8.png)
+![技术作家](img/a11b4926d558b314755d2bc9a24fc5e8.png)
 
 来源：[Indeed](https://www.indeed.com/career/technical-writer/salaries?from=top_sb)
 
@@ -210,14 +210,14 @@ Java开发人员负责设计基于Java的应用程序，并进一步管理其开
 
 ### 更多相关话题
 
-+   [百度研究发布2022年十大技术趋势预测](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)
++   [百度研究发布 2022 年十大技术趋势预测](https://www.kdnuggets.com/2022/02/baidu-research-unveils-top-10-tech-trends-forecast-2022.html)
 
-+   [专家推荐的前5大机器学习实践](https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html)
++   [专家推荐的前 5 大机器学习实践](https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html)
 
-+   [为什么最新的LLM使用MoE（专家混合）架构](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)
++   [为什么最新的 LLM 使用 MoE（专家混合）架构](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)
 
 +   [初级与高级数据科学家薪资：有什么区别？](https://www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html)
 
-+   [我如何在14年内将薪资提高14倍作为数据分析/科学专业人员](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
++   [我如何在 14 年内将薪资提高 14 倍作为数据分析/科学专业人员](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
 
-+   [Burtch Works 2023数据科学与人工智能专业人士薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
++   [Burtch Works 2023 数据科学与人工智能专业人士薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)

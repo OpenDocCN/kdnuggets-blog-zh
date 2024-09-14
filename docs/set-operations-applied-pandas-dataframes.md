@@ -1,8 +1,8 @@
 # 应用于 Pandas DataFrames 的集合操作
 
-> 原文：[https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html](https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html)
+> 原文：[`www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html`](https://www.kdnuggets.com/2019/11/set-operations-applied-pandas-dataframes.html)
 
-[评论](#comments)
+评论
 
 **由 [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17)，ENCE/IBGE**
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 假设你有两个 DataFrames，分别命名为 P 和 S，它们分别包含注册了 SQL 和 Python 两门不同课程的学生的姓名和电子邮件。
 
-![图示](../Images/a6a3df6dea2d135e34c3bc8c517f24f0.png)![图示](../Images/bbf6fee30f92261470e8da08ebd0f29b.png)
+![图示](img/a6a3df6dea2d135e34c3bc8c517f24f0.png)![图示](img/bbf6fee30f92261470e8da08ebd0f29b.png)
 
 考虑你需要回答以下问题：
 
@@ -42,19 +42,19 @@
 
 P ∪ S，即 P 和 S 的并集，是在 P 或 S 或两者中都存在的元素的集合。注意元素（学生）Elizabeth 在结果中只出现一次。
 
-![图示](../Images/f95c23f5e568a2505b219b35f75f905a.png)
+![图示](img/f95c23f5e568a2505b219b35f75f905a.png)
 
 P ∩ S，即 P 和 S 的交集，是既在 P 中又在 S 中的元素的集合。现在，只有 Elizabeth 出现，因为她是两个集合中的唯一一个。
 
-![图示](../Images/bf379304640b60f3bc5dfa4a1f7cba76.png)
+![图示](img/bf379304640b60f3bc5dfa4a1f7cba76.png)
 
 P − S，即 P 和 S 的差集，是包含所有在 P 中但不在 S 中的元素的集合：
 
-![图示](../Images/842ac2a9f6a32fc97fdb3e8c2f868293.png)
+![图示](img/842ac2a9f6a32fc97fdb3e8c2f868293.png)
 
 请注意，S − P 与 P − S 是不同的：
 
-![图示](../Images/af2e6f3d74aed541a4d35629658c4c71.png)
+![图示](img/af2e6f3d74aed541a4d35629658c4c71.png)
 
 重要的是要指出，对这些操作应用的 DataFrames 必须具有相同的属性（如示例中所示）。
 
@@ -186,25 +186,25 @@ sql_only = S[S.email.isin(P.email) == False]
 
 **Pandas 文档**
 
-[https://pandas.pydata.org/pandas-docs/stable/](https://pandas.pydata.org/pandas-docs/stable/)
+[`pandas.pydata.org/pandas-docs/stable/`](https://pandas.pydata.org/pandas-docs/stable/)
 
 **斯坦福哲学百科全书 - 基本集合论**
 
-[https://plato.stanford.edu/entries/set-theory/basic-set-theory.html](https://plato.stanford.edu/entries/set-theory/basic-set-theory.html)
+[`plato.stanford.edu/entries/set-theory/basic-set-theory.html`](https://plato.stanford.edu/entries/set-theory/basic-set-theory.html)
 
-**詹妮弗·维多姆 - 关系代数 2 第 1 部分**
+**詹妮弗·维多姆 - 关系代数 2 第一部分**
 
-[https://www.youtube.com/watch?v=r_h9yBnNh0U](https://www.youtube.com/watch?v=r_h9yBnNh0U)
+[`www.youtube.com/watch?v=r_h9yBnNh0U`](https://www.youtube.com/watch?v=r_h9yBnNh0U)
 
 **个人简介： [Eduardo Corrêa Gonçalves](https://www.researchgate.net/profile/Eduardo_Goncalves17)** 在巴西地理与统计研究所（IBGE）担任数据库管理员，并在国家统计科学学院（ENCE/IBGE）担任助理教授。他参与了不同经济和农业调查的数据库建模和实施的各个阶段，例如：“企业中央登记统计”、“市级牲畜统计”和“农业生产系统调查”。他的研究、教学和专业活动集中在算法、人工智能和数据库领域。
 
 **相关内容：**
 
-+   [5 个 Pandas 高级功能及其使用方法](/2019/10/5-advanced-features-pandas.html)
++   5 个 Pandas 高级功能及其使用方法
 
-+   [了解你的数据：第 1 部分](/2019/09/know-data-part-1.html)
++   了解你的数据：第一部分
 
-+   [25 个 Pandas 小技巧](/2019/08/25-tricks-pandas.html)
++   25 个 Pandas 小技巧
 
 ### 相关话题更多内容
 

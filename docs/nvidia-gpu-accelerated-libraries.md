@@ -1,36 +1,36 @@
-# 如何使用NVIDIA GPU加速库
+# 如何使用 NVIDIA GPU 加速库
 
-> 原文：[https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)
+> 原文：[`www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html`](https://www.kdnuggets.com/2021/07/nvidia-gpu-accelerated-libraries.html)
 
-[评论](#comments)
+评论
 
-![blog-nv-gpu-for-ai.png](../Images/6e31ff9f16623e779500246952a05f3a.png)
+![blog-nv-gpu-for-ai.png](img/6e31ff9f16623e779500246952a05f3a.png)
 
-### 如何使用NVIDIA GPU加速库进行AI
+### 如何使用 NVIDIA GPU 加速库进行 AI
 
-如果你正在进行AI项目，那么是时候利用 [NVIDIA GPU](https://www.sabrepc.com/NVIDIA-GPU-Solutions) 加速库了，如果你还没有这样做的话。直到2000年代末，AI项目才通过GPU训练的[神经网络](https://www.sabrepc.com/blog/Deep-Learning-and-AI/6-types-of-neural-networks-to-know-about)变得可行，从而大幅加速了这一过程。从那时起，NVIDIA便开始制造一些最佳的深度学习GPU，使得GPU加速库成为AI项目的热门选择。
+如果你正在进行 AI 项目，那么是时候利用 [NVIDIA GPU](https://www.sabrepc.com/NVIDIA-GPU-Solutions) 加速库了，如果你还没有这样做的话。直到 2000 年代末，AI 项目才通过 GPU 训练的[神经网络](https://www.sabrepc.com/blog/Deep-Learning-and-AI/6-types-of-neural-networks-to-know-about)变得可行，从而大幅加速了这一过程。从那时起，NVIDIA 便开始制造一些最佳的深度学习 GPU，使得 GPU 加速库成为 AI 项目的热门选择。
 
-如果你想知道如何利用NVIDIA GPU加速库进行AI项目，这个指南将帮助解答问题，并让你走上正确的道路。
+如果你想知道如何利用 NVIDIA GPU 加速库进行 AI 项目，这个指南将帮助解答问题，并让你走上正确的道路。
 
-### 为什么要使用NVIDIA GPU加速库进行AI？
+### 为什么要使用 NVIDIA GPU 加速库进行 AI？
 
-![图示](../Images/78bfd6190a9f396ba17d1af8df1448ec.png)
+![图示](img/78bfd6190a9f396ba17d1af8df1448ec.png)
 
-*关于NVIDIA CUDA-X库的演示，[图片来源](https://www.hardwarezone.com.sg/feature-how-cuda-x-ai-and-supporting-hardware-will-power-data-science-new-pillar-discovery)*
+*关于 NVIDIA CUDA-X 库的演示，[图片来源](https://www.hardwarezone.com.sg/feature-how-cuda-x-ai-and-supporting-hardware-will-power-data-science-new-pillar-discovery)*
 
-说到AI或更广泛的机器学习，使用GPU加速库是一个很好的选择。GPU具有显著更多的核心和大量的内存带宽，这使得GPU能够以高速进行并行处理——这是大多数机器学习项目的必需条件。
+说到 AI 或更广泛的机器学习，使用 GPU 加速库是一个很好的选择。GPU 具有显著更多的核心和大量的内存带宽，这使得 GPU 能够以高速进行并行处理——这是大多数机器学习项目的必需条件。
 
-使用GPU进行AI和深度学习已经成为解析极其复杂的数学矩阵的常规方法。NVIDIA GPU的并行处理能力使它们能够轻松分解这些矩阵。利用GPU加速库进行下一次AI项目将*最终*是最快和最有效的解决方案。
+使用 GPU 进行 AI 和深度学习已经成为解析极其复杂的数学矩阵的常规方法。NVIDIA GPU 的并行处理能力使它们能够轻松分解这些矩阵。利用 GPU 加速库进行下一次 AI 项目将*最终*是最快和最有效的解决方案。
 
-**最终，虽然CPU *****可以***** 用于操作深度学习项目中的神经网络，但它们根本无法超越GPU加速库。**
+**最终，虽然 CPU *****可以***** 用于操作深度学习项目中的神经网络，但它们根本无法超越 GPU 加速库。**
 
-### 哪款NVIDIA GPU最适合AI？
+### 哪款 NVIDIA GPU 最适合 AI？
 
-![图示](../Images/d848a5b3611fb8cdc9f334fb4937a71c.png)
+![图示](img/d848a5b3611fb8cdc9f334fb4937a71c.png)
 
 *计算机屏幕上的编码，[图片来源](https://unsplash.com/photos/Skf7HxARcoc)*
 
-简单来说，最佳的图形渲染GPU通常也是AI项目的最佳选择。然而，GPU需要足够强大。GPU的处理能力越强，神经网络的解析能力也就越强。
+简单来说，最佳的图形渲染 GPU 通常也是 AI 项目的最佳选择。然而，GPU 需要足够强大。GPU 的处理能力越强，神经网络的解析能力也就越强。
 
 实际上，在选择一个 [NVIDIA GPU](https://www.sabrepc.com/Video-Cards?filters=manufacturer::NVIDIA)时，有几个因素需要考虑：
 
@@ -48,7 +48,7 @@
 
 ### TDP（热设计功耗）值
 
-![图](../Images/3698ab4ae8dbe1945320d440ea76d16a.png)
+![图](img/3698ab4ae8dbe1945320d440ea76d16a.png)
 
 *用于冷却计算机的风扇，[图片来源](https://commons.wikimedia.org/wiki/File:Silent_PC-CPU_fan.JPG)*
 
@@ -60,7 +60,7 @@ GPU 在处理大量数据时可能会变热。制造商标示的**TDP 值**将�
 
 ### CUDA
 
-![图](../Images/f4882cb28d117bece2bb0e4fd894ac16.png)
+![图](img/f4882cb28d117bece2bb0e4fd894ac16.png)
 
 *CUDA 生态系统图，[图片来源](https://developer.nvidia.com/blog/cuda-refresher-the-gpu-computing-ecosystem/)*
 
@@ -70,7 +70,7 @@ GPU 在处理大量数据时可能会变热。制造商标示的**TDP 值**将�
 
 ### [NVIDIA GeForce RTX 2080 Ti Founders Edition](https://www.sabrepc.com/900-1G150-2530-000-NVIDIA-S1847353)
 
-![图](../Images/83eea56e557f82425ce752c67510bc9e.png)
+![图](img/83eea56e557f82425ce752c67510bc9e.png)
 
 *GeForce RTX 2080 Ti Founders Edition 在盒子里，[图片来源](https://www.pcgamer.com/nvidia-geforce-rtx-2080-ti-founders-edition-review/)*
 
@@ -84,7 +84,7 @@ GPU 在处理大量数据时可能会变热。制造商标示的**TDP 值**将�
 
 ### NVIDIA GPU 加速库有哪些不同类型？
 
-![图示](../Images/8fd547ec52e0903becfc5533dfb971af.png)
+![图示](img/8fd547ec52e0903becfc5533dfb971af.png)
 
 *各种 Python 库，[图片来源](https://towardsdatascience.com/best-python-libraries-for-machine-learning-and-deep-learning-b0bd40c7e8c)*
 
@@ -238,21 +238,21 @@ NVIDIA 提供了一个 [快速入门指南](http://docs.nvidia.com/cuda/thrust/i
 
 **相关：**
 
-+   [通过 Saturn Cloud 使用 Pandas 在 GPU 上超充 Python](/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html)
++   通过 Saturn Cloud 使用 Pandas 在 GPU 上超充 Python
 
-+   [作为数据科学家管理你的可重用 Python 代码](/2021/06/managing-reusable-python-code-data-scientist.html)
++   作为数据科学家管理你的可重用 Python 代码
 
-+   [告别大数据。你好，海量数据！](/2020/10/sqream-massive-data.html)
++   告别大数据。你好，海量数据！
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

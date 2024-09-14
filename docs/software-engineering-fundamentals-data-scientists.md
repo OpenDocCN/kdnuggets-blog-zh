@@ -1,10 +1,10 @@
 # 数据科学家的软件工程基础
 
-> 原文：[https://www.kdnuggets.com/2020/06/software-engineering-fundamentals-data-scientists.html](https://www.kdnuggets.com/2020/06/software-engineering-fundamentals-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/06/software-engineering-fundamentals-data-scientists.html`](https://www.kdnuggets.com/2020/06/software-engineering-fundamentals-data-scientists.html)
 
-[评论](#comments)
+评论
 
-![](../Images/b7d920f619a83d06ea12e871e38b632c.png)
+![](img/b7d920f619a83d06ea12e871e38b632c.png)
 
 *来源： [Chris Ried](https://unsplash.com/photos/ieic5Tq8YMk) @ unsplash。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -36,7 +36,7 @@
 
 ### 编写干净代码的重要性
 
-![](../Images/fe1216b521d448a294432b1746174096.png)
+![](img/fe1216b521d448a294432b1746174096.png)
 
 *来源：[Oliver Hale](https://unsplash.com/photos/oTvU7Zmteic) @ unsplash.*
 
@@ -46,13 +46,13 @@
 
 这些都是让我们多花些心思编写更好代码的有效理由。因此，让我们从基础开始，了解一些编写更清洁脚本的技巧：
 
-+   **在你的代码中使用描述性的名称**。我从大学学习Java课程时学到的一个概念就是：让你的代码具有*助记性*。助记性指的是一种帮助记忆的系统，比如字母、思想或关联的模式。也就是说，编写自解释的名称。
++   **在你的代码中使用描述性的名称**。我从大学学习 Java 课程时学到的一个概念就是：让你的代码具有*助记性*。助记性指的是一种帮助记忆的系统，比如字母、思想或关联的模式。也就是说，编写自解释的名称。
 
 +   尽可能**尝试隐含类型**。例如，对于返回布尔对象的函数，你可以用 is_ 或 has 前缀它。
 
 +   **避免缩写，尤其是单个字母。**
 
-+   另一方面，**避免长名称和长行**。编写长名称并不意味着更具描述性，在行长度方面，[PEP 8 Python代码风格指南](https://www.python.org/dev/peps/pep-0008/)建议每行长度最多为约79个字符。
++   另一方面，**避免长名称和长行**。编写长名称并不意味着更具描述性，在行长度方面，[PEP 8 Python 代码风格指南](https://www.python.org/dev/peps/pep-0008/)建议每行长度最多为约 79 个字符。
 
 +   **不要为了保持一致性而牺牲清晰性**。例如，如果你有表示员工的对象和一个包含所有员工的列表，employee_list 和 employee_1 比 employees 和 employee_1 更加清晰。
 
@@ -60,13 +60,13 @@
 
 ### 编写模块化代码的重要性
 
-![](../Images/13e65db455b071d50666ec8f4d63901a.png)
+![](img/13e65db455b071d50666ec8f4d63901a.png)
 
 *来源：[Sharon McCutcheon](https://www.pexels.com/photo/art-materials-art-supplies-blocks-blur-1148496/) @ pexels.*
 
 我认为这一点对于数据科学家和数据分析师来说是最重要的，并且常常与软件工程师讨论，因为我们习惯于在 Jupyter Notebooks 等工具中编码。这些工具非常适合探索性数据分析，但不适合编写生产代码。事实上，Python 本质上是一种面向对象的编程语言，讨论其详细含义超出了本讨论范围。但简而言之，与程序化编程不同，后者是编写一系列指令让脚本执行，面向对象编程则是构建具有自身特性和操作的模块。以下是一个例子：
 
-![](../Images/a8ede08cba7ff915b06d51bb1e8a7d6e.png)
+![](img/a8ede08cba7ff915b06d51bb1e8a7d6e.png)
 
 *来源：由作者创建的图像。*
 
@@ -84,21 +84,21 @@
 
 +   单一职责原则：一个类应该有唯一的责任。这比预期的要难。
 
-+   遵循开闭原则，即对象应该对扩展开放，对修改关闭。这个理念是编写代码时，使得你能在不改变现有代码的情况下添加新功能，避免在一个类的变更同时需要调整所有依赖类的情况。[应对这一挑战的方式有很多](https://stackify.com/solid-design-open-closed-principle/)，不过在Python中，使用继承是非常常见的。
++   遵循开闭原则，即对象应该对扩展开放，对修改关闭。这个理念是编写代码时，使得你能在不改变现有代码的情况下添加新功能，避免在一个类的变更同时需要调整所有依赖类的情况。[应对这一挑战的方式有很多](https://stackify.com/solid-design-open-closed-principle/)，不过在 Python 中，使用继承是非常常见的。
 
-+   尽量每个函数使用不超过三个参数。如果参数较多，可以考虑拆分它。对函数长度也有类似标准；理想情况下，一个函数应包含20到50行代码。如果超出这个范围，可能需要将其拆分为多个函数。
++   尽量每个函数使用不超过三个参数。如果参数较多，可以考虑拆分它。对函数长度也有类似标准；理想情况下，一个函数应包含 20 到 50 行代码。如果超出这个范围，可能需要将其拆分为多个函数。
 
-+   同样要注意类的长度。如果一个类有超过300行代码，那么它可能需要被拆分成更小的类。
++   同样要注意类的长度。如果一个类有超过 300 行代码，那么它可能需要被拆分成更小的类。
 
-如果你已经在使用Python，但对面向对象编程没有或只有很少的了解，我强烈推荐这两个免费的课程：
+如果你已经在使用 Python，但对面向对象编程没有或只有很少的了解，我强烈推荐这两个免费的课程：
 
-+   [Python中的面向对象编程](https://www.datacamp.com/courses/object-oriented-programming-in-python) 见 Datacamp
++   [Python 中的面向对象编程](https://www.datacamp.com/courses/object-oriented-programming-in-python) 见 Datacamp
 
-+   [Python中的面向对象编程（OOP）简介](https://realpython.com/courses/intro-object-oriented-programming-oop-python/) 见 [https://realpython.com/](https://realpython.com/)
++   [Python 中的面向对象编程（OOP）简介](https://realpython.com/courses/intro-object-oriented-programming-oop-python/) 见 [`realpython.com/`](https://realpython.com/)
 
 ### 重构的重要性
 
-![](../Images/bae4178d7b038c4cc46b8108bbaf8fcc.png)
+![](img/bae4178d7b038c4cc46b8108bbaf8fcc.png)
 
 *来源： [RyanMcGuire](https://pixabay.com/photos/car-repair-car-workshop-repair-shop-362150/) @ pixabay。*
 
@@ -228,7 +228,7 @@ a[a<0.3] = 100
 
 ### 测试的重要性
 
-![](../Images/b0fac3f71716a374de4c187c387c41f9.png)
+![](img/b0fac3f71716a374de4c187c387c41f9.png)
 
 *来源： [Pixabay](https://www.pexels.com/photo/red-and-yellow-hatchback-axa-crash-tests-163016/) 在 @ pexels。*
 
@@ -314,15 +314,15 @@ def test_func_4_8():
 
 如果一切按预期运行，你会看到这样的输出：
 
-![](../Images/efa239201e3ca82744ad7f7d84db4362.png)
+![](img/efa239201e3ca82744ad7f7d84db4362.png)
 
 未来，我会写另一个故事来讨论更复杂的单元测试示例，以及如何测试整个类（如果这是你需要的）。但与此同时，这些示例应该足以帮助你入门并测试一些函数。请注意，在上面的示例中，我测试的是返回的确切数字，但你也可以测试数据框的形状、NumPy 数组的长度、返回对象的类型等。
 
 我们在本章开始时提到的另一个重点是 **测试驱动开发（TDD）**。这种测试方法或方法论包括在开始开发之前编写单元测试。接下来，你将编写尽可能简单和/或快速的代码，以通过最初编写的测试，这将帮助你通过在编写代码之前专注于需求来确保质量。此外，它将强迫你保持代码简单、干净，并可测试，通过将其拆分为与最初编写的测试相符的小块代码。一旦你有了一段实际通过测试的代码，你就可以专注于重构，以提高代码质量或实现更多功能。
 
-![](../Images/d9994ecd4b3ba3238aa4cbe5f036c495.png)
+![](img/d9994ecd4b3ba3238aa4cbe5f036c495.png)
 
-*来源：[https://me.me/](https://me.me/)*
+*来源：[`me.me/`](https://me.me/)*
 
 TDD 的一个主要好处是，如果将来需要对代码进行更改而你不再参与该项目，可能是你转到另一家公司或只是度假，了解最初编写的测试将帮助任何接手代码的人确保更改后不会破坏任何东西。
 
@@ -336,7 +336,7 @@ TDD 的一个主要好处是，如果将来需要对代码进行更改而你不�
 
 ### 代码审查的重要性
 
-![](../Images/dd9c380898050c5dcffa3a5a687649f4.png)
+![](img/dd9c380898050c5dcffa3a5a687649f4.png)
 
 *来源： [Charles Deluvio](https://unsplash.com/photos/Lks7vei-eAg) @ unsplash。*
 

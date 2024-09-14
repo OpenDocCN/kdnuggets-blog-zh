@@ -1,10 +1,10 @@
 # 机器学习：如何从零开始构建模型
 
-> 原文：[https://www.kdnuggets.com/2018/09/whitepages-machine-learning-build-model-from-scratch.html](https://www.kdnuggets.com/2018/09/whitepages-machine-learning-build-model-from-scratch.html)
+> 原文：[`www.kdnuggets.com/2018/09/whitepages-machine-learning-build-model-from-scratch.html`](https://www.kdnuggets.com/2018/09/whitepages-machine-learning-build-model-from-scratch.html)
 
 |
 
-&#124; ![](../Images/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
+&#124; ![](img/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
 
 &#124;
 
@@ -18,13 +18,13 @@
 
 &#124;
 
-注册参加9月27日的网络研讨会
+注册参加 9 月 27 日的网络研讨会
 
 &#124;
 
 &#124;   &#124;
 
-&#124; [![Whitepages PRO®](../Images/286aa78cbef6714f8b9d44bec8031e41.png)](https://pro.whitepages.com/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=logo) &#124;
+&#124; ![Whitepages PRO®](https://pro.whitepages.com/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=logo) &#124;
 
 &#124;   &#124;
 
@@ -38,7 +38,7 @@
 
 &#124;
 
-[![注册学习Momentum Travel如何将机器学习变为现实](../Images/9cc2307be4cd3566b2994830dff76ea8.png)](https://pro.whitepages.com/machine-learning-webinar-momentum-travel/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=header)
+![注册学习 Momentum Travel 如何将机器学习变为现实](https://pro.whitepages.com/machine-learning-webinar-momentum-travel/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=header)
 
 &#124;
 
@@ -46,19 +46,19 @@
 
 &#124;
 
-&#124; ![](../Images/7bf36d7979e4b72d562012ef359fc34a.png) &#124;   &#124;
+&#124; ![](img/7bf36d7979e4b72d562012ef359fc34a.png) &#124;   &#124;
 
 &#124;   &#124;
 
 &#124;
 
-网络研讨会：使用Momentum Travel构建机器学习欺诈模型
+网络研讨会：使用 Momentum Travel 构建机器学习欺诈模型
 
 &#124;
 
 &#124;
 
-周四，9月27日 &#124; 上午10点 PT
+周四，9 月 27 日 &#124; 上午 10 点 PT
 
 &#124;
 
@@ -78,9 +78,9 @@
 
 &#124;
 
-作为一家在线旅游预订公司，Momentum Travel早期就认识到，识别和防止欺诈是他们业务的重要组成部分。
+作为一家在线旅游预订公司，Momentum Travel 早期就认识到，识别和防止欺诈是他们业务的重要组成部分。
 
-听听防欺诈高级总监Dustin MacDonald讲述他的团队如何从零开始构建机器学习欺诈模型，包括：
+听听防欺诈高级总监 Dustin MacDonald 讲述他的团队如何从零开始构建机器学习欺诈模型，包括：
 
 +   开始的必要资源
 
@@ -88,7 +88,7 @@
 
 +   推送模型到生产环境
 
-+   模型性能以及Whitepages Pro的信心评分的影响
++   模型性能以及 Whitepages Pro 的信心评分的影响
 
 无论你是刚刚开始接触机器学习还是已经是专家，了解如何通过机器学习模型提高性能。
 
@@ -96,7 +96,7 @@
 
 &#124;
 
-![Dustin MacDonald headshot](../Images/805e813d8995c2441659f0421db9efee.png)
+![Dustin MacDonald headshot](img/805e813d8995c2441659f0421db9efee.png)
 
 &#124;
 
@@ -110,7 +110,7 @@ Momentum Travel
 
 &#124;
 
-![Ajay Andrews headshot](../Images/e5cb16d001c7575ea6bac4323c03e092.png)
+![Ajay Andrews headshot](img/e5cb16d001c7575ea6bac4323c03e092.png)
 
 &#124;
 
@@ -124,7 +124,7 @@ Whitepages Pro
 
 &#124;
 
-我们将有时间进行现场问答，所以请带上你的问题！如果你不能参加9月27日的研讨会，[注册](https://pro.whitepages.com/machine-learning-webinar-momentum-travel/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=link)也没关系，我们会在之后把录制的视频发给你。
+我们将有时间进行现场问答，所以请带上你的问题！如果你不能参加 9 月 27 日的研讨会，[注册](https://pro.whitepages.com/machine-learning-webinar-momentum-travel/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=link)也没关系，我们会在之后把录制的视频发给你。
 
 &#124;
 
@@ -134,11 +134,11 @@ Whitepages Pro
 
 &#124;   &#124;
 
-&#124;   &#124; ![](../Images/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
+&#124;   &#124; ![](img/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
 
 &#124;
 
-&#124; ![](../Images/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
+&#124; ![](img/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
 
 &#124;
 
@@ -152,7 +152,7 @@ Whitepages Pro
 
 &#124;
 
-&#124; [![Linkedin](../Images/db3ebfd1f3cd9ee195b306a6a1fdb7a3.png)](https://www.linkedin.com/company/whitepages-pro) &#124;   &#124; [![Youtube](../Images/f4964f9efba2373527a6d5e6e8b2eecf.png)](https://pro.whitepages.com/blog/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=footer) &#124;   &#124; [![Youtube](../Images/e02aa18e3e7bdf9fde878f85d3c337a9.png)](https://twitter.com/whitepagespro) &#124;
+&#124; ![Linkedin](https://www.linkedin.com/company/whitepages-pro) &#124;   &#124; ![Youtube](https://pro.whitepages.com/blog/?utm_source=kdnuggets&utm_medium=email&utm_campaign=momentum-webinar&utm_content=footer) &#124;   &#124; ![Youtube](https://twitter.com/whitepagespro) &#124;
 
 &#124;
 
@@ -172,7 +172,7 @@ Whitepages Pro
 
 &#124;
 
-&#124; ![](../Images/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
+&#124; ![](img/7bf36d7979e4b72d562012ef359fc34a.png) &#124;
 
 &#124;   &#124;
 
@@ -186,11 +186,11 @@ Whitepages Pro
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

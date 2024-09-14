@@ -1,6 +1,6 @@
 # 开始使用图形数据库查询，附带备忘单！
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-graph-database-queries-with-cheat-sheet](https://www.kdnuggets.com/getting-started-with-graph-database-queries-with-cheat-sheet)
+> 原文：[`www.kdnuggets.com/getting-started-with-graph-database-queries-with-cheat-sheet`](https://www.kdnuggets.com/getting-started-with-graph-database-queries-with-cheat-sheet)
 
 图形数据库每年都在获得关注。它们不会完全取代关系数据库，也不打算这样做。但它们会开始进入数据湖和数据仓库 struggling 的领域。图形数据库在分析事件、资源和人员的网络时更快、更直观：
 
@@ -18,15 +18,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
-[![开始使用图形数据库查询，附带备忘单！](../Images/ab566ed79c28b876e2665122ca3f03cd.png)](https://www.kdnuggets.com/wp-content/uploads/Queries_with_Cypher_Cheat_Sheet_Pugsley.pdf)
+![开始使用图形数据库查询，附带备忘单！](https://www.kdnuggets.com/wp-content/uploads/Queries_with_Cypher_Cheat_Sheet_Pugsley.pdf)
 
 当你开始使用图形数据库和查询语言时，重要的是要为思维模式的变化做好准备。首先，目前还没有广泛接受的标准查询语言像 SQL 一样。正如你在附件中看到的，存在一组竞争的语言和一个委员会在努力让所有人达成一致的 GQL 标准。为了今天的目的，我们将使用 Cypher 查询语言，该语言由顶级数据库供应商 Neo4j 开发和推广。
 
@@ -34,7 +34,7 @@
 
 以下是将用于[附带备忘单](https://www.kdnuggets.com/wp-content/uploads/Queries_with_Cypher_Cheat_Sheet_Pugsley.pdf)的图模型：
 
-[![开始使用图数据库查询，附备忘单！](../Images/5d3a97e58a9a5cb96b65e38e775b857c.png)](https://www.kdnuggets.com/wp-content/uploads/Queries_with_Cypher_Cheat_Sheet_Pugsley.pdf)
+![开始使用图数据库查询，附备忘单！](https://www.kdnuggets.com/wp-content/uploads/Queries_with_Cypher_Cheat_Sheet_Pugsley.pdf)
 
 我选择了一个租赁图，因为几乎每个人在生活中都曾租过房！显然，如果我们为每个节点添加完整的属性列表，这个图会复杂得多。
 
@@ -44,7 +44,7 @@
 
 [**立即下载备忘单！**](https://www.kdnuggets.com/wp-content/uploads/Queries_with_Cypher_Cheat_Sheet_Pugsley.pdf)
 
-[](https://www.linkedin.com/in/spugsley/)****[Stan Pugsley](https://www.linkedin.com/in/spugsley/)**** 是一名驻盐湖城, UT的自由数据工程和分析顾问。他还是犹他大学埃克尔斯商学院的讲师。你可以通过[电子邮件](mailto:S.pugsley@utah.edu)联系作者。
+[](https://www.linkedin.com/in/spugsley/)****[Stan Pugsley](https://www.linkedin.com/in/spugsley/)**** 是一名驻盐湖城, UT 的自由数据工程和分析顾问。他还是犹他大学埃克尔斯商学院的讲师。你可以通过电子邮件联系作者。
 
 ### 更多相关内容
 

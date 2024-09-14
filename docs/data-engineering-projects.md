@@ -1,8 +1,8 @@
 # 五个有趣的数据工程项目
 
-> 原文：[https://www.kdnuggets.com/2020/03/data-engineering-projects.html](https://www.kdnuggets.com/2020/03/data-engineering-projects.html)
+> 原文：[`www.kdnuggets.com/2020/03/data-engineering-projects.html`](https://www.kdnuggets.com/2020/03/data-engineering-projects.html)
 
-[评论](#comments)
+评论
 
 **由[德米特里·里亚博伊](https://www.linkedin.com/in/dmitriy-ryaboy/)，Zymergen 的软件工程副总裁**。
 
@@ -10,7 +10,7 @@
 
 ### DBT
 
-![](../Images/3d4f5f9c0fe981793933a5ca46fb4a12.png)
+![](img/3d4f5f9c0fe981793933a5ca46fb4a12.png)
 
 DBT，或称“数据构建工具”，是对一个本质上简单的想法的清晰且执行良好的实现：用于执行重要工作的 SQL 语句应进行版本控制，并且最好能轻松参数化，可能相互引用。DBT 针对的是“数据分析师”，而不是数据工程师（尽管没有理由数据工程师不能使用它）。一切都在 SQL 中完成（嗯，还有 YAML）。
 
@@ -20,7 +20,7 @@ DBT，或称“数据构建工具”，是对一个本质上简单的想法的�
 
 ### Prefect
 
-![](../Images/426e5b49e7ef2f1bf56d29090406bd29.png)
+![](img/426e5b49e7ef2f1bf56d29090406bd29.png)
 
 Prefect 是一个新兴的 AirFlow 挑战者：[另一个数据管道管理器](https://github.com/pditommaso/awesome-pipeline)，它帮助设置 DAG 过程、参数化它们、适当响应错误条件、创建时间表和处理触发器等。如果你忽略它们稍显傲慢的营销（显然，Prefect 已经是“数据流自动化的全球领导者”，而 Airflow 只是一个“历史上重要的工具”），Prefect 有几个值得称道的地方，赢得了大量用户的赞誉：
 
@@ -36,19 +36,19 @@ Prefect 是一个新兴的 AirFlow 挑战者：[另一个数据管道管理器](
 
 ### Dask
 
-![](../Images/0b1d18ab2f26894dfe46c8345561261a.png)
+![](img/0b1d18ab2f26894dfe46c8345561261a.png)
 
 人们还在忽视 Dask 吗？停止忽视 Dask 吧。
 
-“[Dask](https://dask.org/) 是一个‘灵活的 Python 并行计算库’。如果你经常用 Python 进行数据工作，主要使用 NumPy / Scikit-learn / Pandas，你可能会发现引入 Dask 可以让事情变得非常顺畅。它轻量且快速，无论是在单机还是集群上都表现良好，它与 [RAPIDS](https://rapids.ai/dask.html) 协同工作，以获得 GPU 加速，并且相对于将你的 Python 代码迁移到 PySpark，可能会更容易进行扩展。他们有一份意外平衡的文档，讨论了 Dask 与 Spark 的优缺点，详细信息见 [https://docs.dask.org/en/latest/spark.html](https://docs.dask.org/en/latest/spark.html)。”
+“[Dask](https://dask.org/) 是一个‘灵活的 Python 并行计算库’。如果你经常用 Python 进行数据工作，主要使用 NumPy / Scikit-learn / Pandas，你可能会发现引入 Dask 可以让事情变得非常顺畅。它轻量且快速，无论是在单机还是集群上都表现良好，它与 [RAPIDS](https://rapids.ai/dask.html) 协同工作，以获得 GPU 加速，并且相对于将你的 Python 代码迁移到 PySpark，可能会更容易进行扩展。他们有一份意外平衡的文档，讨论了 Dask 与 Spark 的优缺点，详细信息见 [`docs.dask.org/en/latest/spark.html`](https://docs.dask.org/en/latest/spark.html)。”
 
 ### DVC
 
-![](../Images/91351f50fee592559d2d048429aa68aa.png)
+![](img/91351f50fee592559d2d048429aa68aa.png)
 
 DVC 代表“数据版本控制”。这个项目邀请数据科学家和工程师进入一个受 Git 启发的世界，在这里，所有工作流版本都被跟踪，以及所有数据工件和模型，还有相关的指标。
 
-说实话，我对“数据的 git”以及各种自动化数据/工作流版本控制方案持有一些怀疑态度：我过去看到的各种方法要么过于局部而不够有用，要么需要数据科学家在工作方式上做出过于剧烈的改变，才有可能被实际采纳。因此，我忽略了，甚至有意回避了查看 DVC。现在我终于看了一下……看起来也许这个方案有前途？与分支/版本关联的指标是一个很棒的功能。将类似 git 的分支概念与训练多个模型结合，使得价值主张变得清晰。它的实现方式是使用 Git 进行代码和数据文件索引存储，同时利用可扩展的数据存储进行数据管理，通过聪明的重用来降低整体存储成本，看起来是合理的。他们在 [https://dvc.org/doc/understanding-dvc](https://dvc.org/doc/understanding-dvc) 上提到的很多内容都很真实。Thoughtworks 使用 DVC 作为他们的演示工具来 [讨论“CD4ML”](https://martinfowler.com/articles/cd4ml.html)。
+说实话，我对“数据的 git”以及各种自动化数据/工作流版本控制方案持有一些怀疑态度：我过去看到的各种方法要么过于局部而不够有用，要么需要数据科学家在工作方式上做出过于剧烈的改变，才有可能被实际采纳。因此，我忽略了，甚至有意回避了查看 DVC。现在我终于看了一下……看起来也许这个方案有前途？与分支/版本关联的指标是一个很棒的功能。将类似 git 的分支概念与训练多个模型结合，使得价值主张变得清晰。它的实现方式是使用 Git 进行代码和数据文件索引存储，同时利用可扩展的数据存储进行数据管理，通过聪明的重用来降低整体存储成本，看起来是合理的。他们在 [`dvc.org/doc/understanding-dvc`](https://dvc.org/doc/understanding-dvc) 上提到的很多内容都很真实。Thoughtworks 使用 DVC 作为他们的演示工具来 [讨论“CD4ML”](https://martinfowler.com/articles/cd4ml.html)。
 
 另一方面，我并不特别热衷于将管道定义交给 DVC —— Airflow 或 Prefect 或其他许多工具似乎在这方面提供了更多。对互联网资源的随意浏览揭示了多次提到将 DVC 与 MLFlow 或其他工具一起使用，但尚不清楚这如何运作以及会放弃什么。
 
@@ -56,7 +56,7 @@ DVC 代表“数据版本控制”。这个项目邀请数据科学家和工程�
 
 ### Great Expectations
 
-![](../Images/a08bbfba2cd52652d4134822e076bac9.png)
+![](img/a08bbfba2cd52652d4134822e076bac9.png)
 
 Great Expectations 是一个非常好的 Python 库，允许你声明规则，期望某些数据集符合这些规则，并在遇到（生成或消费）这些数据集时进行验证。这些期望可能包括 *expect_colum_values_to_match_strftime_format 或 expect_column_distinct_values_to_be_in_set*。
 
@@ -72,19 +72,19 @@ Great Expectations 是一个非常好的 Python 库，允许你声明规则，�
 
 +   [Amundsen](https://eng.lyft.com/open-sourcing-amundsen-a-data-discovery-and-metadata-platform-2282bb436234) 是来自 Lyft 的一个有趣的“数据发现和元数据平台”。每个自尊心强的科技独角兽似乎现在都有这样一个平台。我们能否停下来选出一个赢家？
 
-+   [Cadence](http://cadenceworkflow.io/) 是一个“容错的有状态代码平台”，换句话说，就是一种将有关函数中长期状态的常见问题外包给其他人的方法。无论如何，抽时间观看这个视频，考虑一下它在你生活中的应用： [https://www.youtube.com/watch?v=llmsBGKOuWI](https://www.youtube.com/watch?v=llmsBGKOuWI)
++   [Cadence](http://cadenceworkflow.io/) 是一个“容错的有状态代码平台”，换句话说，就是一种将有关函数中长期状态的常见问题外包给其他人的方法。无论如何，抽时间观看这个视频，考虑一下它在你生活中的应用： [`www.youtube.com/watch?v=llmsBGKOuWI`](https://www.youtube.com/watch?v=llmsBGKOuWI)
 
 +   [Calcite](https://calcite.apache.org/) 是解构数据库的核心，提供 SQL 解析器、数据库无关的查询执行规划器和优化器等功能。它 [可以在这里找到](https://calcite.apache.org/docs/powered_by.html)，出现在许多支持 SQL 的“大数据”项目中（Hive、Flink、Drill、Phoenix 等）。
 
 +   [Dagster](https://github.com/dagster-io/dagster) 是 GraphQL 的创始人开发的数据工作流引擎，旨在以 GraphQL 对前端工程师的影响方式来改变数据工程师的开发体验。这是个好东西，可能值得单独写一篇文章。
 
-+   [Json-Schema](https://json-schema.org/) 并不是什么新东西，但出于某种原因，人们似乎不知道它的存在。它存在，它在不断发展，你应该定义和验证你的架构。这里有规格，这里有工具，你可以将它应用于现有的JSON API中，而不必羡慕Avro/Thrift/Proto。
++   [Json-Schema](https://json-schema.org/) 并不是什么新东西，但出于某种原因，人们似乎不知道它的存在。它存在，它在不断发展，你应该定义和验证你的架构。这里有规格，这里有工具，你可以将它应用于现有的 JSON API 中，而不必羡慕 Avro/Thrift/Proto。
 
 [原文](https://medium.com/@squarecog/five-interesting-data-engineering-projects-48ffb9c9c501)。已获授权转载。
 
 **相关：**
 
-+   [成为数据工程师的7个资源](https://www.kdnuggets.com/2020/01/resources-become-data-engineer.html)
++   [成为数据工程师的 7 个资源](https://www.kdnuggets.com/2020/01/resources-become-data-engineer.html)
 
 +   [数据科学与数据工程之间的微妙界限](https://www.kdnuggets.com/2019/09/thin-line-between-data-science-data-engineering.html)
 
@@ -92,14 +92,14 @@ Great Expectations 是一个非常好的 Python 库，允许你声明规则，�
 
 ### 了解更多此主题
 
-+   [Python上下文管理器的三个有趣用法](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)
++   [Python 上下文管理器的三个有趣用法](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日：深入探讨13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [五步成为数据科学专业人士](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-+   [数据科学面试中你应该知道的五个SQL窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
++   [数据科学面试中你应该知道的五个 SQL 窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
 
 +   [有效数据科学经理的五个标志](https://www.kdnuggets.com/2022/06/five-signs-effective-data-science-manager.html)
 
-+   [在Pandas中进行条件筛选的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)
++   [在 Pandas 中进行条件筛选的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)

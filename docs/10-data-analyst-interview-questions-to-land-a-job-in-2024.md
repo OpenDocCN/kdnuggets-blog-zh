@@ -1,8 +1,8 @@
-# 2024年数据分析师面试问题
+# 2024 年数据分析师面试问题
 
-> 原文：[https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
+> 原文：[`www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024`](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
 
-![2024年数据分析师面试问题](../Images/716921bcff4be138800b58213311ead0.png)
+![2024 年数据分析师面试问题](img/716921bcff4be138800b58213311ead0.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 我经常遇到边缘案例、业务问题和棘手的技术问题，每次面试之后，我都会感到信心动摇。
 
-然而，在行业中工作了4年并帮助进行初级面试后，我对雇主在数据分析师候选人中寻找的东西有了更多了解。
+然而，在行业中工作了 4 年并帮助进行初级面试后，我对雇主在数据分析师候选人中寻找的东西有了更多了解。
 
 在本文中，我们将深入探讨通常有三个重点领域——技术专长、业务问题解决以及软技能。
 
@@ -56,27 +56,27 @@
 
 它始于制定原假设（H0），原假设代表没有效应的默认假设。
 
-然后选择一个显著性水平，通常为0.05或0.10。这是原假设将被拒绝的概率阈值。
+然后选择一个显著性水平，通常为 0.05 或 0.10。这是原假设将被拒绝的概率阈值。
 
-然后应用统计检验，如T检验、ANOVA或卡方检验，以使用样本数据测试初始假设。
+然后应用统计检验，如 T 检验、ANOVA 或卡方检验，以使用样本数据测试初始假设。
 
-然后计算检验统计量以及p值，p值是指在原假设下观察到检验结果的概率。
+然后计算检验统计量以及 p 值，p 值是指在原假设下观察到检验结果的概率。
 
-如果p值低于显著性水平，则可以拒绝原假设，并有足够的证据支持备择假设。
+如果 p 值低于显著性水平，则可以拒绝原假设，并有足够的证据支持备择假设。
 
-### 2\. T检验和卡方检验之间的区别是什么，何时使用它们？
+### 2\. T 检验和卡方检验之间的区别是什么，何时使用它们？
 
 **样本答案：**
 
-T检验和卡方检验是用于比较不同数据组分布的统计技术。它们用于不同的场景。
+T 检验和卡方检验是用于比较不同数据组分布的统计技术。它们用于不同的场景。
 
-+   T检验：此检验用于比较两组定量数据的均值，并评估它们是否在统计上存在显著差异。
++   T 检验：此检验用于比较两组定量数据的均值，并评估它们是否在统计上存在显著差异。
 
 +   卡方检验：此检验用于比较分类数据的分布，以检查变量是否相互关联。
 
 以下是我会使用每种检验情况的描述：
 
-+   T检验：假设我们想了解广告对产品销售的影响。我们会使用配对T检验来比较广告前后产品销售的均值。
++   T 检验：假设我们想了解广告对产品销售的影响。我们会使用配对 T 检验来比较广告前后产品销售的均值。
 
 +   卡方检验：如果你在销售一种产品，并想测量性别与个人是否喜欢该产品之间的关系，可以使用卡方检验。
 
@@ -98,7 +98,7 @@ T检验和卡方检验是用于比较不同数据组分布的统计技术。它�
 
 为了检测异常值，我会使用箱线图可视化变量，以识别图表“胡须”外的点。
 
-我还会计算每个变量的Z分数，并将Z分数为+3或-3的数据点识别为异常值。
+我还会计算每个变量的 Z 分数，并将 Z 分数为+3 或-3 的数据点识别为异常值。
 
 为了减少异常值的影响，我会使用像 Scikit-Learn 中的 RobustScaler() 这样的函数来转换数据集，该函数根据分位数范围对数据进行缩放。
 
@@ -130,7 +130,7 @@ T检验和卡方检验是用于比较不同数据组分布的统计技术。它�
 
 这里有一些资源可以帮助你在技术 SQL 面试中脱颖而出：
 
-1\. [如何在2024年学习 SQL 进行数据分析](https://youtu.be/TNNRBYsijeE?si=JbelGUv_z37BDuTm)
+1\. [如何在 2024 年学习 SQL 进行数据分析](https://youtu.be/TNNRBYsijeE?si=JbelGUv_z37BDuTm)
 
 2\. [4 小时内学习 SQL 进行数据分析](https://youtu.be/7mz73uXD9DA?si=LYOl_sWAjd2gWZvL)
 
@@ -158,9 +158,9 @@ T检验和卡方检验是用于比较不同数据组分布的统计技术。它�
 
 +   步骤 3：将当前的指标，如店内客流量，与营销活动启动前的类似指标进行比较。
 
-+   步骤 4：使用配对T检验等方法评估转化率或销售额是否有统计学意义上的改善。对于比例，如点击率，可以实施卡方检验。
++   步骤 4：使用配对 T 检验等方法评估转化率或销售额是否有统计学意义上的改善。对于比例，如点击率，可以实施卡方检验。
 
-+   步骤 5：对广告创意和社交媒体帖子进行A/B测试，以识别影响销售和转化的最有效因素。
++   步骤 5：对广告创意和社交媒体帖子进行 A/B 测试，以识别影响销售和转化的最有效因素。
 
 ### 准备数据分析师问题解决面试
 
@@ -210,13 +210,13 @@ T检验和卡方检验是用于比较不同数据组分布的统计技术。它�
 
 在我最新的数据分析项目中，我分析了我国数据相关工作所需的各种技能的需求。
 
-我通过抓取5,000个职位列表收集数据，并在Python中对这些数据进行了预处理。
+我通过抓取 5,000 个职位列表收集数据，并在 Python 中对这些数据进行了预处理。
 
 然后，我识别了这些职位列表中的显著术语，如“Python”，“SQL”和“沟通”。
 
-最终，我建立了一个Tableau仪表板，显示了每项技能在这些职位列表中出现的频率。
+最终，我建立了一个 Tableau 仪表板，显示了每项技能在这些职位列表中出现的频率。
 
-我写了一篇文章，解释了我从这个项目中得到的发现，并将我的代码上传到了GitHub。
+我写了一篇文章，解释了我从这个项目中得到的发现，并将我的代码上传到了 GitHub。
 
 ### 3\. 在你看来，数据分析师应该具备的最重要的特质是什么，为什么？
 
@@ -256,13 +256,13 @@ T检验和卡方检验是用于比较不同数据组分布的统计技术。它�
 
 简而言之，发挥你的优势，并确保它们传达给雇主。
 
-虽然这听起来可能过于简单，但这比只是盲目申请Indeed上看到的每个空缺职位要好，并且不明白为什么在求职中无所进展。
+虽然这听起来可能过于简单，但这比只是盲目申请 Indeed 上看到的每个空缺职位要好，并且不明白为什么在求职中无所进展。
 
-## 10个数据分析师面试问题以获得工作——下一步
+## 10 个数据分析师面试问题以获得工作——下一步
 
 如果你能跟到这里，恭喜你！
 
-你现在了解了数据分析师面试中问到的3种问题，并且对雇主在寻找初级候选人时的要求有了深入了解。
+你现在了解了数据分析师面试中问到的 3 种问题，并且对雇主在寻找初级候选人时的要求有了深入了解。
 
 以下是一些潜在的下一步措施，能提高你获得该领域工作的机会：
 
@@ -274,28 +274,28 @@ T检验和卡方检验是用于比较不同数据组分布的统计技术。它�
 
 我还建议建立一个个人网站，以展示你的所有工作。这将提升你的可见性，并最大化你获得数据分析师职位的机会。
 
-如果你不知道从哪里开始，我有一个[视频教程，教你从零开始用ChatGPT构建个人网站](https://youtu.be/jtfwcyDAcvE?si=c98TcaFtzHP9fW4l)。
+如果你不知道从哪里开始，我有一个[视频教程，教你从零开始用 ChatGPT 构建个人网站](https://youtu.be/jtfwcyDAcvE?si=c98TcaFtzHP9fW4l)。
 
 ### 3\. 提升你的技术技能
 
-温习如统计学、数据可视化、SQL和编程等技能。关于这些主题，有许多资源更详细地介绍了它们，我最喜欢的包括[Luke Barousse的YouTube频道](https://www.youtube.com/c/lukebarousse)、[W3Schools](https://www.w3schools.com/sql/)和[StatQuest](https://www.youtube.com/@statquest)。
+温习如统计学、数据可视化、SQL 和编程等技能。关于这些主题，有许多资源更详细地介绍了它们，我最喜欢的包括[Luke Barousse 的 YouTube 频道](https://www.youtube.com/c/lukebarousse)、[W3Schools](https://www.w3schools.com/sql/)和[StatQuest](https://www.youtube.com/@statquest)。
 
 &nbsp
 
 &nbsp
 
-[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)** 是一位自学成才的数据科学家，热衷于写作。Natassha撰写所有与数据科学相关的内容，是所有数据主题的真正大师。你可以在[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系，或查看她的[YouTube频道](https://www.youtube.com/@natassha_ds)。
+[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)** 是一位自学成才的数据科学家，热衷于写作。Natassha 撰写所有与数据科学相关的内容，是所有数据主题的真正大师。你可以在[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系，或查看她的[YouTube 频道](https://www.youtube.com/@natassha_ds)。
 
 ### 更多相关内容
 
-+   [2024年获得数据分析师职位的5个项目](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
++   [2024 年获得数据分析师职位的 5 个项目](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
 
 +   [免费数据科学面试书籍，助你获得理想工作](https://www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job)
 
 +   [无法找到数据科学工作？原因在这里](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™新闻22:n05，2月2日：掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [2022年将帮助你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年将帮助你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [2022年将帮助你获得工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [2022 年将帮助你获得工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)

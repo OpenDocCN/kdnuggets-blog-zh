@@ -1,12 +1,12 @@
 # 停止为高风险决策解释黑箱机器学习模型，改用可解释的模型
 
-> 原文：[https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html](https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html)
+> 原文：[`www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html`](https://www.kdnuggets.com/2019/11/stop-explaining-black-box-models.html)
 
-[评论](#comments)
+评论
 
-[停止为高风险决策解释黑箱机器学习模型，改用可解释的模型](https://arxiv.org/abs/1811.10154) 由Rudin等人，*arXiv 2019*
+[停止为高风险决策解释黑箱机器学习模型，改用可解释的模型](https://arxiv.org/abs/1811.10154) 由 Rudin 等人，*arXiv 2019*
 
-感谢Glyn Normington指出了这篇论文。
+感谢 Glyn Normington 指出了这篇论文。
 
 从标题中可以很清楚地看出辛西娅·鲁丁希望我们做什么！这篇论文混合了技术性和哲学性的论点，对我来说有两个主要的收获：首先，加深了我对可解释性与解释性的区别的理解，以及为什么前者可能存在问题；其次，提供了一些很好的方法来创建真正可解释的模型。
 
@@ -34,7 +34,7 @@
 
 在图像空间中，显著性图展示了网络关注的区域，但即使是这些图也无法告诉我们它真正关注的内容。不同类别的显著性图可能非常相似。在下面的例子中，模型认为图像是哈士奇的显著性“解释”和认为图像是长笛的显著性“解释”看起来非常相似！
 
-![](../Images/e66f228dd34d0b1544bfcb140b069b74.png)
+![](img/e66f228dd34d0b1544bfcb140b069b74.png)
 
 由于解释并没有真正解释，识别和排查黑箱模型的问题可能非常困难
 
@@ -46,7 +46,7 @@
 
 由于相信复杂的东西更好，也有一种普遍的误解，即如果你想要好的性能，你必须牺牲可解释性：
 
-![](../Images/d21235ffd41cfe8d022b1c6d55b7c07d.png)
+![](img/d21235ffd41cfe8d022b1c6d55b7c07d.png)
 
 > 认为准确性和可解释性之间总是存在权衡的信念使许多研究人员放弃了**尝试**产生可解释模型。这个问题由于研究人员现在受过深度学习训练，但没有受过可解释机器学习训练而变得更加复杂…
 
@@ -58,25 +58,25 @@
 
 ### 创建可解释的模型
 
-论文的第5节讨论了在寻找可解释机器学习模型时常遇到的三个常见挑战：构建最佳逻辑模型、构建最佳（稀疏）评分系统，以及在特定领域中定义可解释性可能意味着什么。
+论文的第五部分讨论了在寻找可解释机器学习模型时常遇到的三个常见挑战：构建最佳逻辑模型、构建最佳（稀疏）评分系统，以及在特定领域中定义可解释性可能意味着什么。
 
 **逻辑模型**
 
-逻辑模型只是一些if-then-else语句！这些语句已经手工制作了很长时间。理想的逻辑模型应具有给定准确性水平下最少的分支数。[CORELS](https://corels.eecs.harvard.edu/index.html) 是一个旨在寻找这种最佳逻辑模型的机器学习系统。以下是一个输出模型的示例，它在来自佛罗里达州布劳沃德县的数据上具有与黑箱COMPAS模型类似的准确性：
+逻辑模型只是一些 if-then-else 语句！这些语句已经手工制作了很长时间。理想的逻辑模型应具有给定准确性水平下最少的分支数。[CORELS](https://corels.eecs.harvard.edu/index.html) 是一个旨在寻找这种最佳逻辑模型的机器学习系统。以下是一个输出模型的示例，它在来自佛罗里达州布劳沃德县的数据上具有与黑箱 COMPAS 模型类似的准确性：
 
-![](../Images/fa82ab8b6e0fc0e660f3f07f7e1e33c0.png)
+![](img/fa82ab8b6e0fc0e660f3f07f7e1e33c0.png)
 
-请注意，图例称其为“机器学习模型”。我认为这个术语不太准确。它是一个机器*学习*模型，而CORELS是一个生成它的机器学习模型，但IF-THEN-ELSE语句本身不是一个机器学习模型。不过，CORELS看起来很有趣，我们将在下一期《晨报》中对其进行深入探讨。
+请注意，图例称其为“机器学习模型”。我认为这个术语不太准确。它是一个机器*学习*模型，而 CORELS 是一个生成它的机器学习模型，但 IF-THEN-ELSE 语句本身不是一个机器学习模型。不过，CORELS 看起来很有趣，我们将在下一期《晨报》中对其进行深入探讨。
 
 **评分系统**
 
 评分系统在医学中被广泛使用。我们对作为机器学习模型输出的最佳评分系统感兴趣，但*看起来像是由人类产生的*。例如：
 
-![](../Images/bf08ff918280541f56732be46d22cb9c.png)
+![](img/bf08ff918280541f56732be46d22cb9c.png)
 
 这个模型实际上是由 [RiskSLIM](https://www.kdd.org/kdd2017/papers/view/optimized-risk-scores) 产生的，即风险超稀疏线性整数模型算法（我们将在本周晚些时候对此进行更深入的探讨）。
 
-对于CORELS和RiskSLIM模型，关键在于尽管它们看起来简单且高度可解释，但它们的结果具有高度竞争的准确性。让这些东西看起来如此简单并不容易！我当然知道如果有选择的话，我更愿意部署和故障排除哪些模型。
+对于 CORELS 和 RiskSLIM 模型，关键在于尽管它们看起来简单且高度可解释，但它们的结果具有高度竞争的准确性。让这些东西看起来如此简单并不容易！我当然知道如果有选择的话，我更愿意部署和故障排除哪些模型。
 
 **在特定领域设计可解释性**
 
@@ -86,11 +86,11 @@
 
 > 这些解释是模型的实际计算过程，而不是事后解释。该网络被称为“这看起来像那”，因为它的推理过程考虑了图像的“这”部分是否像“那”原型。
 
-![](../Images/db78028091ac65304cab1c502dba973b.png)
+![](img/db78028091ac65304cab1c502dba973b.png)
 
 ### 解释、解释性和政策
 
-论文第4节讨论了鼓励优先使用（或甚至在高风险情况下要求使用）可解释模型的潜在政策变化。
+论文第四部分讨论了鼓励优先使用（或甚至在高风险情况下要求使用）可解释模型的潜在政策变化。
 
 > 让我们考虑一个可能的要求，即对于某些高风险决策，**如果存在一个性能水平相同的可解释模型，则不应部署黑箱模型**。
 
@@ -110,21 +110,21 @@
 
 **相关：**
 
-+   [选择机器学习模型](/2019/10/choosing-machine-learning-model.html)
++   选择机器学习模型
 
-+   [“请解释。”机器学习模型的可解释性](/2019/05/interpretability-machine-learning-models.html)
++   “请解释。”机器学习模型的可解释性
 
-+   [可解释机器学习的Python库](/2019/09/python-libraries-interpretable-machine-learning.html)
++   可解释机器学习的 Python 库
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -134,10 +134,10 @@
 
 +   [停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 
-+   [每个数据科学家都应该知道的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [90亿美元的AI失败，详细审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，详细审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

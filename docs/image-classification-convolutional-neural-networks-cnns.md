@@ -1,8 +1,8 @@
 # 使用卷积神经网络 (CNN) 进行图像分类
 
-> 原文：[https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)
+> 原文：[`www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html`](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)
 
-![使用卷积神经网络 (CNN) 进行图像分类](../Images/d31df1465f041fd9f4014c1e72487e2e.png)
+![使用卷积神经网络 (CNN) 进行图像分类](img/d31df1465f041fd9f4014c1e72487e2e.png)
 
 # 什么是卷积神经网络 (CNN)？
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -22,21 +22,21 @@
 
 # 卷积神经网络如何工作？
 
-像其他类型的神经网络一样，CNN消耗数值数据。
+像其他类型的神经网络一样，CNN 消耗数值数据。
 
-因此，输入这些网络的图像必须转换为数值表示形式。由于图像由像素组成，它们被转换为数值形式，然后传递给CNN。
+因此，输入这些网络的图像必须转换为数值表示形式。由于图像由像素组成，它们被转换为数值形式，然后传递给 CNN。
 
-然而，正如我们将在下一部分讨论的那样，并非所有的数值表示都传递到网络中。要理解这一点，我们来看看训练CNN时涉及的一些步骤。
+然而，正如我们将在下一部分讨论的那样，并非所有的数值表示都传递到网络中。要理解这一点，我们来看看训练 CNN 时涉及的一些步骤。
 
 ## 卷积
 
-通过***卷积***操作减少传递给CNN的数值表示的大小。这一过程至关重要，以便只有在图像分类中重要的特征被传递给神经网络。除了提高网络的准确性，这也确保了在训练网络时使用最少的计算资源。
+通过***卷积***操作减少传递给 CNN 的数值表示的大小。这一过程至关重要，以便只有在图像分类中重要的特征被传递给神经网络。除了提高网络的准确性，这也确保了在训练网络时使用最少的计算资源。
 
 卷积操作的结果称为**特征图**、**卷积特征**或**激活图**。应用**特征检测器**会生成特征图。特征检测器也被称为**核心**或**滤波器**。
 
-核心通常是一个3x3的矩阵。通过对核心与输入图像进行逐元素乘法，并将值求和，得到特征图。这是通过在输入图像上滑动核心来完成的。滑动的步骤被称为**步幅**。在创建CNN时，可以手动设置步幅和核心的大小。
+核心通常是一个 3x3 的矩阵。通过对核心与输入图像进行逐元素乘法，并将值求和，得到特征图。这是通过在输入图像上滑动核心来完成的。滑动的步骤被称为**步幅**。在创建 CNN 时，可以手动设置步幅和核心的大小。
 
-![卷积](../Images/f1b3bab4eaa566a6a47f03c428a4caf7.png)
+![卷积](img/f1b3bab4eaa566a6a47f03c428a4caf7.png)
 
 [3x3 卷积操作](https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks)
 
@@ -48,7 +48,7 @@
 
 填充涉及通过用零“填充”图像来增加输入图像的大小。因此，将滤波器应用于图像会导致特征图的大小与输入图像相同。
 
-![填充](../Images/12665ab6d814838225950e1f750f45ca.png)
+![填充](img/12665ab6d814838225950e1f750f45ca.png)
 
 [未着色区域表示填充区域](https://commons.wikimedia.org/wiki/File:Convolution_arithmetic_-_Padding_strides.gif)
 
@@ -56,13 +56,13 @@
 
 在构建 CNN 时，你将有选项定义所需的填充类型或完全不使用填充。这里常见的选项是 ***valid*** 或 ***same***。Valid 表示不应用填充，而 ***same*** 表示应用填充，以便特征图的大小与输入图像的大小相同。
 
-![3x3 卷积核对 5x5 输入进行降维](../Images/3b544f10953e66d230c3775ff00f6337.png)
+![3x3 卷积核对 5x5 输入进行降维](img/3b544f10953e66d230c3775ff00f6337.png)
 
 [3x3 卷积核将 5x5 输入降维为 3x3 输出](https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks)
 
 这里是上述特征图和滤波器逐元素乘法的效果。
 
-![5x5 输入与 3x3 滤波器的逐元素乘法](../Images/019f20ad536f4ec66373614bfe4c5f0a.png)
+![5x5 输入与 3x3 滤波器的逐元素乘法](img/019f20ad536f4ec66373614bfe4c5f0a.png)
 
 [5x5 输入与 3x3 滤波器的逐元素乘法](https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks)
 
@@ -72,7 +72,7 @@
 
 在变换之后，所有低于零的值都被返回为零，而其他值保持不变。
 
-![ReLu 函数图](../Images/fdf8fd39d5c14cdad49d37daee199912.png)
+![ReLu 函数图](img/fdf8fd39d5c14cdad49d37daee199912.png)
 
 [ReLu 函数图](https://www.researchgate.net/figure/ReLU-activation-function_fig3_319235847)
 
@@ -80,17 +80,17 @@
 
 在这个操作中，特征图的大小进一步减少。有各种[池化方法](https://keras.io/api/layers/pooling_layers/)。
 
-一种常见的技术是**最大池化**。池化滤波器的大小通常是一个2×2的矩阵。在最大池化中，2×2的滤波器在特征图上滑动，并在给定的区域中选取最大值。此操作的结果是一个**池化特征图**。
+一种常见的技术是**最大池化**。池化滤波器的大小通常是一个 2×2 的矩阵。在最大池化中，2×2 的滤波器在特征图上滑动，并在给定的区域中选取最大值。此操作的结果是一个**池化特征图**。
 
-![将2×2池化滤波器应用于4×4特征图](../Images/44d367354205b41010ff38d754b7142c.png)
+![将 2×2 池化滤波器应用于 4×4 特征图](img/44d367354205b41010ff38d754b7142c.png)
 
-[将2×2池化滤波器应用于4×4特征图](https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks)。
+[将 2×2 池化滤波器应用于 4×4 特征图](https://developers.google.com/machine-learning/practica/image-classification/convolutional-neural-networks)。
 
 池化迫使网络识别图像中的关键特征，而不考虑其位置。减少的图像大小也使训练网络变得更快。
 
-## Dropout正则化
+## Dropout 正则化
 
-应用Dropout正则化是CNN中常见的做法。这涉及到随机丢弃某些层中的节点，使其在反向传播过程中不会被更新。这可以防止过拟合。
+应用 Dropout 正则化是 CNN 中常见的做法。这涉及到随机丢弃某些层中的节点，使其在反向传播过程中不会被更新。这可以防止过拟合。
 
 ## 扁平化
 
@@ -100,21 +100,21 @@
 
 扁平化后的特征图接着传递给全连接层。根据问题和网络结构，可能会有多个全连接层。最后一个全连接层负责输出预测结果。
 
-最终层使用的激活函数取决于问题的类型。用于二分类的激活函数是 [sigmoid激活函数](https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid)，而用于多类图像分类的则是 [softmax激活函数](https://keras.io/api/layers/activation_layers/softmax)。
+最终层使用的激活函数取决于问题的类型。用于二分类的激活函数是 [sigmoid 激活函数](https://www.tensorflow.org/api_docs/python/tf/keras/activations/sigmoid)，而用于多类图像分类的则是 [softmax 激活函数](https://keras.io/api/layers/activation_layers/softmax)。
 
-![全连接卷积神经网络](../Images/f1b3bab4eaa566a6a47f03c428a4caf7.png)
+![全连接卷积神经网络](img/f1b3bab4eaa566a6a47f03c428a4caf7.png)
 
 [全连接卷积神经网络](https://commons.wikimedia.org/wiki/File:Typical_cnn.png)
 
 # 为什么选择卷积网络而不是前馈神经网络？
 
-在学习了CNN之后，你可能会想知道为什么我们不能用普通神经网络处理图像问题。普通神经网络无法像CNN一样从图像中提取复杂特征。
+在学习了 CNN 之后，你可能会想知道为什么我们不能用普通神经网络处理图像问题。普通神经网络无法像 CNN 一样从图像中提取复杂特征。
 
-CNN通过应用过滤器从图像中提取特征的能力使其更适合处理图像问题。此外，直接将图像输入到前馈神经网络中计算成本也很高。
+CNN 通过应用过滤器从图像中提取特征的能力使其更适合处理图像问题。此外，直接将图像输入到前馈神经网络中计算成本也很高。
 
 # 卷积神经网络架构
 
-你可以从零开始设计你的CNN。然而，你也可以利用许多已经开发并公开发布的架构。其中一些网络还提供了预训练模型，你可以轻松地将其适配到你的用例中。一些流行的架构包括：
+你可以从零开始设计你的 CNN。然而，你也可以利用许多已经开发并公开发布的架构。其中一些网络还提供了预训练模型，你可以轻松地将其适配到你的用例中。一些流行的架构包括：
 
 +   [ResNet50](https://keras.io/api/applications/resnet/#resnet50-function)
 
@@ -124,7 +124,7 @@ CNN通过应用过滤器从图像中提取特征的能力使其更适合处理�
 
 +   [Inception](https://keras.io/api/applications/inceptionv3)
 
-你可以通过[Keras应用](https://keras.io/api/applications/)开始使用这些架构。例如，以下是如何使用VGG19：
+你可以通过[Keras 应用](https://keras.io/api/applications/)开始使用这些架构。例如，以下是如何使用 VGG19：
 
 ```py
 from tensorflow.keras.applications.vgg19 import VGG19
@@ -143,9 +143,9 @@ x = preprocess_input(x)
 features = model.predict(x)
 ```
 
-# TensorFlow中的卷积神经网络（CNN）示例
+# TensorFlow 中的卷积神经网络（CNN）示例
 
-现在，让我们使用[食物数据集](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)构建一个食物分类CNN。该数据集包含超过十万张属于101个类别的图像。
+现在，让我们使用[食物数据集](http://data.vision.ee.ethz.ch/cvl/food-101.tar.gz)构建一个食物分类 CNN。该数据集包含超过十万张属于 101 个类别的图像。
 
 ## 加载图像
 
@@ -166,11 +166,11 @@ plt.axis('off')
 plt.show()
 ```
 
-![output](../Images/a9134fbc9b70c3c77835fb19d9f32dd4.png)
+![output](img/a9134fbc9b70c3c77835fb19d9f32dd4.png)
 
-## 生成tf.data.Dataset
+## 生成 tf.data.Dataset
 
-接下来，将图像加载到[TensorFlow数据集](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)中。我们将使用20%的数据进行测试，其余用于训练。因此，我们需要为训练集和测试集创建一个`[ImageDataGenerator](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator?authuser=1)`。
+接下来，将图像加载到[TensorFlow 数据集](https://www.tensorflow.org/api_docs/python/tf/data/Dataset)中。我们将使用 20%的数据进行测试，其余用于训练。因此，我们需要为训练集和测试集创建一个`[ImageDataGenerator](https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/image/ImageDataGenerator?authuser=1)`。
 
 训练集生成器还将指定一些[图像增强](https://www.tensorflow.org/tutorials/images/data_augmentation)技术，如缩放和翻转图像。增强可以防止网络的过拟合。
 
@@ -203,7 +203,7 @@ training_set = train_datagen.flow_from_directory(base_dir,
 
 +   加载图像的目录。
 
-+   批量大小，此处为32，这意味着图像将以32张为一批加载。
++   批量大小，此处为 32，这意味着图像将以 32 张为一批加载。
 
 +   子集；无论是训练还是验证。
 
@@ -219,7 +219,7 @@ validation_set = validation_gen.flow_from_directory(base_dir,
 
 ## 模型定义
 
-下一步是定义CNN模型。网络的架构将类似于我们在CNN工作原理部分讨论的步骤。我们将使用[Keras Sequential API](https://keras.io/api/models/sequential/)来定义网络。CNN是通过[Conv2D](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D)层定义的。
+下一步是定义 CNN 模型。网络的架构将类似于我们在 CNN 工作原理部分讨论的步骤。我们将使用[Keras Sequential API](https://keras.io/api/models/sequential/)来定义网络。CNN 是通过[Conv2D](https://www.tensorflow.org/api_docs/python/tf/keras/layers/Conv2D)层定义的。
 
 ```py
 model = Sequential([
@@ -242,21 +242,21 @@ model = Sequential([
 ])
 ```
 
-Conv2D层期望：
+Conv2D 层期望：
 
-+   要应用的过滤器数量，此处为32。
++   要应用的过滤器数量，此处为 32。
 
-+   卷积核的大小，此处为3 x 3。
++   卷积核的大小，此处为 3 x 3。
 
-+   输入图像的大小。200 x 200是图像的大小，3表示这是一个彩色图像。
++   输入图像的大小。200 x 200 是图像的大小，3 表示这是一个彩色图像。
 
 +   激活函数；通常是[ReLu](https://keras.io/api/layers/activation_layers/relu)。
 
-在网络中，我们应用2 x 2的池化滤波器，并应用[Dropout](https://keras.io/api/layers/regularization_layers/dropout/)层以防止过拟合。
+在网络中，我们应用 2 x 2 的池化滤波器，并应用[Dropout](https://keras.io/api/layers/regularization_layers/dropout/)层以防止过拟合。
 
-最后一层有101个单元，因为有101个食物类别。激活函数是[softmax](https://keras.io/api/layers/activation_layers/softmax)，因为这是一个多类别图像分类问题。
+最后一层有 101 个单元，因为有 101 个食物类别。激活函数是[softmax](https://keras.io/api/layers/activation_layers/softmax)，因为这是一个多类别图像分类问题。
 
-## 编译CNN模型
+## 编译 CNN 模型
 
 我们 [编译](https://keras.io/api/models/model_training_apis) 网络时使用了类别损失和准确率，因为它涉及多个类别。
 
@@ -376,7 +376,7 @@ def train():
 layer.run([train])
 ```
 
-![训练](../Images/8ee120dd5167c4569cc8d3579c3294ef.png)
+![训练](img/8ee120dd5167c4569cc8d3579c3294ef.png)
 
 ## 做出预测
 

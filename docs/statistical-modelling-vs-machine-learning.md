@@ -1,8 +1,8 @@
 # 统计建模与机器学习
 
-> 原文：[https://www.kdnuggets.com/2019/08/statistical-modelling-vs-machine-learning.html](https://www.kdnuggets.com/2019/08/statistical-modelling-vs-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/08/statistical-modelling-vs-machine-learning.html`](https://www.kdnuggets.com/2019/08/statistical-modelling-vs-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![figure-name](../Images/6ec5114864dcd8faee8f8510f86ba056.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![figure-name](img/6ec5114864dcd8faee8f8510f86ba056.png)
 
 统计模型是使用统计学构建数据的表示，然后进行分析以推断变量之间的关系或发现洞察。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 ### 统计建模
 
-![figure-name](../Images/cac8c2706faf54a5f1ea16558bb987dd.png)
+![figure-name](img/cac8c2706faf54a5f1ea16558bb987dd.png)
 
 统计建模是一种数学上近似世界的方法。统计模型包含可以用来解释其他变量之间关系的变量。我们使用假设检验、置信区间等来进行推断和验证我们的假设。
 
@@ -38,7 +38,7 @@
 
 ### 机器学习
 
-![figure-name](../Images/a2c058ab5379625ff543dd646f541355.png)来源: https://existek.com/blog/deep-learning-vs-machine-learning/
+![figure-name](img/a2c058ab5379625ff543dd646f541355.png)来源: https://existek.com/blog/deep-learning-vs-machine-learning/
 
 > 机器学习是使计算机在没有明确编程的情况下进行操作的科学。 - 安德鲁·吴
 
@@ -50,7 +50,7 @@
 
 数据被清理和组织成机器可以理解的形式。这个过程几乎不涉及统计学。
 
-机器学习的预测会根据其类型不同而有所不同：‘分类’，‘回归’，‘聚类’或‘监督学习’和‘非监督学习’。我们可以使用如RMSE、MSE等误差度量来处理回归问题，使用真正例、假正例等来处理分类问题。
+机器学习的预测会根据其类型不同而有所不同：‘分类’，‘回归’，‘聚类’或‘监督学习’和‘非监督学习’。我们可以使用如 RMSE、MSE 等误差度量来处理回归问题，使用真正例、假正例等来处理分类问题。
 
 ### 结论
 
@@ -60,11 +60,11 @@
 
 **相关：**
 
-+   [安德鲁·恩的“机器学习渴望”中的6个关键概念](/2019/08/key-concepts-andrew-ng-machine-learning-yearning.html)
++   安德鲁·恩的“机器学习渴望”中的 6 个关键概念
 
-+   [数据科学家解释的P值](/2019/07/p-values-explained-data-scientist.html)
++   数据科学家解释的 P 值
 
-+   [所有模型都是错误的——这是什么意思？](/2019/06/all-models-are-wrong.html)
++   所有模型都是错误的——这是什么意思？
 
 ### 更多相关话题
 
@@ -72,10 +72,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三种R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三种 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

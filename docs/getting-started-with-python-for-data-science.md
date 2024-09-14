@@ -1,8 +1,8 @@
 # 数据科学入门 Python
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-python-for-data-science](https://www.kdnuggets.com/getting-started-with-python-for-data-science)
+> 原文：[`www.kdnuggets.com/getting-started-with-python-for-data-science`](https://www.kdnuggets.com/getting-started-with-python-for-data-science)
 
-![数据科学入门 Python](../Images/5184a1a748fb8e759327ff24b49805db.png)
+![数据科学入门 Python](img/5184a1a748fb8e759327ff24b49805db.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 不同角色的人希望保住他们的工作，因此他们会致力于发展适应当前市场的技能。这是一个竞争激烈的市场，我们看到越来越多的人对数据科学产生兴趣；在这个领域有成千上万的在线课程、训练营和硕士（MSc）课程可供选择。
 
-如果你想知道可以参加哪些免费的数据科学课程，请阅读 [2023 年最佳免费数据科学在线课程](/2023/03/top-free-data-science-online-courses-2023.html)
+如果你想知道可以参加哪些免费的数据科学课程，请阅读 2023 年最佳免费数据科学在线课程
 
 话虽如此，如果你想进入数据科学领域，你需要了解 Python。
 
@@ -36,23 +36,23 @@
 
 Python 包含各种库和框架，因此你不必从头开始做所有事情。这些预构建的组件包含有用且易读的代码，你可以将其应用到你的程序中。例如，[NumPy](https://numpy.org/)、[Matplotlib](https://matplotlib.org/)、[SciPy](https://scipy.org/)、[BeautifulSoup](https://pypi.org/project/beautifulsoup4/) 等。
 
-如果你想了解更多关于Python库的内容，请阅读以下文章：[2022年数据科学家应该知道的Python库](/2022/04/python-libraries-data-scientists-know-2022.html)。
+如果你想了解更多关于 Python 库的内容，请阅读以下文章：2022 年数据科学家应该知道的 Python 库。
 
-Python高效、快速且可靠，这使得开发人员能够以最小的努力创建应用程序、执行分析和生成可视化输出。这就是你成为数据科学家的所需的一切！
+Python 高效、快速且可靠，这使得开发人员能够以最小的努力创建应用程序、执行分析和生成可视化输出。这就是你成为数据科学家的所需的一切！
 
-# 设置Python
+# 设置 Python
 
-如果你想成为数据科学家，我们将通过一步步的指南帮助你开始使用Python：
+如果你想成为数据科学家，我们将通过一步步的指南帮助你开始使用 Python：
 
-## 安装Python
+## 安装 Python
 
-首先，你需要下载最新版本的Python。你可以通过访问官方网站[这里](https://www.python.org/downloads/)来查找最新版本。
+首先，你需要下载最新版本的 Python。你可以通过访问官方网站[这里](https://www.python.org/downloads/)来查找最新版本。
 
 根据你的操作系统，按照安装说明进行操作，直到完成。
 
-## 选择你的IDE或代码编辑器
+## 选择你的 IDE 或代码编辑器
 
-IDE是集成开发环境，它是程序员用来更高效地开发软件代码的软件应用程序。代码编辑器有相同的目的，但它是一个文本编辑程序。
+IDE 是集成开发环境，它是程序员用来更高效地开发软件代码的软件应用程序。代码编辑器有相同的目的，但它是一个文本编辑程序。
 
 如果你不确定选择哪个，我将提供一些流行的选项：
 
@@ -62,7 +62,7 @@ IDE是集成开发环境，它是程序员用来更高效地开发软件代码�
 
 +   [Jupyter Notebook](https://jupyter.org/)
 
-当我开始我的数据科学职业生涯时，我使用了VSC和Jupyter Notebook，这在我的数据科学学习和互动编码中非常有用。一旦你选择了适合你需求的工具，安装它，并按照说明书进行操作。
+当我开始我的数据科学职业生涯时，我使用了 VSC 和 Jupyter Notebook，这在我的数据科学学习和互动编码中非常有用。一旦你选择了适合你需求的工具，安装它，并按照说明书进行操作。
 
 # 学习基础知识
 
@@ -76,13 +76,13 @@ IDE是集成开发环境，它是程序员用来更高效地开发软件代码�
 
 ## 运算符和表达式
 
-运算符是允许计算任务的符号，如加法、减法、乘法、除法、指数等。在Python中，表达式是运算符和操作数的组合。
+运算符是允许计算任务的符号，如加法、减法、乘法、除法、指数等。在 Python 中，表达式是运算符和操作数的组合。
 
 例如 `x = x + 1 0x = x + 10 x = x+ 10`
 
 ## 控制结构
 
-控制结构通过指定代码的执行流程使你的编程生活更轻松。在Python中，你需要学习几种类型的控制结构，如条件语句、循环和异常处理。
+控制结构通过指定代码的执行流程使你的编程生活更轻松。在 Python 中，你需要学习几种类型的控制结构，如条件语句、循环和异常处理。
 
 例如：
 
@@ -106,9 +106,9 @@ def greet(name):
 
 ## 模块和库
 
-Python中的一个模块是包含Python定义和语句的文件。它可以定义函数、类和变量。一个库是相关模块或包的集合。模块和库可以通过使用`import`语句导入。
+Python 中的一个模块是包含 Python 定义和语句的文件。它可以定义函数、类和变量。一个库是相关模块或包的集合。模块和库可以通过使用`import`语句导入。
 
-例如，上面提到Python包含了各种库和框架，如NumPy。你可以通过运行以下命令导入这些不同的库：
+例如，上面提到 Python 包含了各种库和框架，如 NumPy。你可以通过运行以下命令导入这些不同的库：
 
 ```py
 import numpy as np
@@ -117,15 +117,15 @@ import math
 import random 
 ```
 
-你可以使用Python导入各种库和模块。
+你可以使用 Python 导入各种库和模块。
 
 # 处理数据
 
 一旦你对基础知识及其工作原理有了更好的理解，你的下一步是利用这些技能处理数据。你需要学习如何：
 
-## 使用Pandas导入和导出数据
+## 使用 Pandas 导入和导出数据
 
-[Pandas](https://pandas.pydata.org/) 是数据科学领域广泛使用的Python库，它提供了一种灵活而直观的方式来处理各种规模的数据集。假设你有一个CSV文件数据，你可以使用pandas通过以下方式导入数据集：
+[Pandas](https://pandas.pydata.org/) 是数据科学领域广泛使用的 Python 库，它提供了一种灵活而直观的方式来处理各种规模的数据集。假设你有一个 CSV 文件数据，你可以使用 pandas 通过以下方式导入数据集：
 
 ```py
 import pandas as pd
@@ -163,7 +163,7 @@ example_data = pd.read_csv("data/example_dataset1.csv")
 
 +   数据透视和交叉表分析
 
-你需要学习所有这些要素及其在Python中的使用方法。想现在开始，可以 [学习数据清洗和预处理数据科学的免费电子书。](/2023/08/learn-data-cleaning-preprocessing-data-science-free-ebook.html)
+你需要学习所有这些要素及其在 Python 中的使用方法。想现在开始，可以 学习数据清洗和预处理数据科学的免费电子书。
 
 ## 统计分析
 
@@ -171,7 +171,7 @@ example_data = pd.read_csv("data/example_dataset1.csv")
 
 这个阶段用于通过数值分析去除偏差，使你能够进一步研究、开发统计模型等。得出的结论用于决策过程，以便根据过去的趋势做出未来的预测。
 
-统计分析有6种类型：
+统计分析有 6 种类型：
 
 1.  描述性分析
 
@@ -191,7 +191,7 @@ example_data = pd.read_csv("data/example_dataset1.csv")
 
 一旦你清洗和操作了数据，它就准备好进行下一步：探索性数据分析。这时，数据科学家会分析和调查数据集，并创建主要特征/变量的总结，以帮助他们获得进一步的洞察并创建数据可视化。
 
-EDA工具包括
+EDA 工具包括
 
 +   预测建模，如线性回归
 
@@ -201,7 +201,7 @@ EDA工具包括
 
 +   单变量、双变量和多变量可视化
 
-数据科学的这个阶段可能是最具挑战性的方面，需要大量的实践。库和模块可以提供帮助，但你需要理解手头的任务以及你想要的结果，以确定你需要什么EDA工具。
+数据科学的这个阶段可能是最具挑战性的方面，需要大量的实践。库和模块可以提供帮助，但你需要理解手头的任务以及你想要的结果，以确定你需要什么 EDA 工具。
 
 # 数据可视化
 
@@ -221,11 +221,11 @@ EDA 用于获得更多见解并创建数据可视化。作为数据科学家，�
 
 本博客旨在指导初学者学习数据科学职业生涯中需要掌握的 Python 学习步骤。每个阶段都需要时间和注意力来掌握。由于我不能详细讲解每一项内容，因此我创建了一个简短的列表，以进一步指导你：
 
-+   [数据清理在数据科学中的重要性](/2023/08/importance-data-cleaning-data-science.html)
++   数据清理在数据科学中的重要性
 
-+   [数据科学入门：初学者指南](/2023/07/introduction-data-science-beginner-guide.html)
++   数据科学入门：初学者指南
 
-+   [如何从不同背景过渡到数据科学？](/2023/05/transition-data-science-different-background.html)
++   如何从不同背景过渡到数据科学？
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家以及 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程以及数据科学的理论知识。她还希望探索人工智能如何或可以促进人类生命的延续。她是一个热衷于学习的学生，希望扩大她的技术知识和写作技能，同时帮助指导他人。
 

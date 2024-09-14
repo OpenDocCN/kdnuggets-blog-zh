@@ -1,12 +1,12 @@
 # GitHub 是你所需的最佳 AutoML 解决方案
 
-> 原文：[https://www.kdnuggets.com/2020/08/github-best-automl-ever-need.html](https://www.kdnuggets.com/2020/08/github-best-automl-ever-need.html)
+> 原文：[`www.kdnuggets.com/2020/08/github-best-automl-ever-need.html`](https://www.kdnuggets.com/2020/08/github-best-automl-ever-need.html)
 
-[评论](#comments)
+评论
 
 **作者：[Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 创始人及作者**
 
-![图](../Images/1c266288614c3c6c6f7071109f5a5a22.png)
+![图](img/1c266288614c3c6c6f7071109f5a5a22.png)
 
 PyCaret — 一个开源、低代码的 Python 机器学习库！
 
@@ -52,9 +52,9 @@ PyCaret 是一个用于监督和无监督机器学习的工作流自动化工具
 
 PyCaret 的所有模块支持数据准备（包括 25+ 种重要的数据预处理技术，提供大量未训练的模型和自定义模型支持，自动超参数调整，模型分析与解释，自动模型选择，实验记录和便捷的云部署选项）。
 
-![图](../Images/e1bfc98d5038945c37c5b77cf7db884e.png)
+![图](img/e1bfc98d5038945c37c5b77cf7db884e.png)
 
-[https://www.pycaret.org/guide](https://www.pycaret.org/guide)
+[`www.pycaret.org/guide`](https://www.pycaret.org/guide)
 
 要了解更多关于 PyCaret 的信息，[点击这里](https://towardsdatascience.com/announcing-pycaret-2-0-39c11014540e) 阅读我们的官方发布公告。
 
@@ -112,43 +112,43 @@ Docker actions 需要一个元数据文件。元数据文件名必须是`action.
 
 此时你的项目文件夹应如下所示：
 
-![图](../Images/16acdcc5339565ec188a08a18dafd493.png)
+![图](img/16acdcc5339565ec188a08a18dafd493.png)
 
-[https://github.com/pycaret/pycaret-git-actions](https://github.com/pycaret/pycaret-git-actions)
+[`github.com/pycaret/pycaret-git-actions`](https://github.com/pycaret/pycaret-git-actions)
 
 点击**‘Releases’**：
 
-![图](../Images/e009338b6ce68ef034e824c83ad6ce44.png)
+![图](img/e009338b6ce68ef034e824c83ad6ce44.png)
 
 GitHub Action — 点击 Releases
 
 草拟一个新版本：
 
-![图](../Images/b7ffe2205eaae51c95a13a6f00e1a827.png)
+![图](img/b7ffe2205eaae51c95a13a6f00e1a827.png)
 
 GitHub Action — 草拟一个新版本
 
 填写详细信息（标签、版本标题和描述），然后点击**‘Publish release’**：
 
-![图](../Images/7c1fadf219949087d48a2a3c00ede469.png)
+![图](img/7c1fadf219949087d48a2a3c00ede469.png)
 
 GitHub Action — 发布版本
 
 发布后，点击版本，然后点击**‘Marketplace’**：
 
-![图](../Images/c55d89bf90ac457d5e543bdfa39542d8.png)
+![图](img/c55d89bf90ac457d5e543bdfa39542d8.png)
 
 GitHub Action — 市场
 
 点击**‘Use latest version’**：
 
-![图](../Images/0a6f9a8a5bb232fa33c943d1a516deec.png)
+![图](img/0a6f9a8a5bb232fa33c943d1a516deec.png)
 
 GitHub Action — 使用最新版本
 
 保存这些信息，这些是你软件的安装细节。这是你在任何公共 GitHub 仓库上安装此软件所需的信息：
 
-![图](../Images/f6f327c28a408260b35079d84b963883.png)
+![图](img/f6f327c28a408260b35079d84b963883.png)
 
 GitHub Action — 安装
 
@@ -158,9 +158,9 @@ GitHub Action — 安装
 
 要安装我们在上一步骤发布的软件，请点击‘**Actions**’：
 
-![图](../Images/ee2dfb44c190d0792c0e27de72637ad9.png)
+![图](img/ee2dfb44c190d0792c0e27de72637ad9.png)
 
-[https://github.com/pycaret/pycaret-automl-test/tree/master](https://github.com/pycaret/pycaret-automl-test/tree/master) ![图](../Images/f0196468e435234efec1bbab703eea17.png)
+[`github.com/pycaret/pycaret-automl-test/tree/master`](https://github.com/pycaret/pycaret-automl-test/tree/master) ![图](img/f0196468e435234efec1bbab703eea17.png)
 
 开始使用 GitHub Actions
 
@@ -170,15 +170,15 @@ GitHub Action — 安装
 
 一旦开始提交，请点击 **‘actions’**：
 
-![图示](../Images/3beebc77410d21d43509c9b502a0e733.png)
+![图示](img/3beebc77410d21d43509c9b502a0e733.png)
 
 GitHub Action — 工作流
 
 这是您可以在构建时监控日志的地方，一旦工作流完成，您也可以从此位置收集您的文件。
 
-![图示](../Images/800d6a90d25a0ee03bd0ce1008e8d662.png)
+![图示](img/800d6a90d25a0ee03bd0ce1008e8d662.png)
 
-GitHub Action — 工作流构建日志![图示](../Images/c75ea889f28bef8b11a40acbd8f87d14.png)
+GitHub Action — 工作流构建日志![图示](img/c75ea889f28bef8b11a40acbd8f87d14.png)
 
 GitHub Action — 运行详情
 
@@ -192,7 +192,7 @@ GitHub Action — 运行详情
 
 这是一个 .csv 文件，其中包含您模型所需的所有详细信息。它包含在 app.py 脚本中训练的所有模型、它们的性能指标、超参数和其他重要的元数据。
 
-![图示](../Images/9f17497ecf00625a43f33aba23845e7f.png)
+![图示](img/9f17497ecf00625a43f33aba23845e7f.png)
 
 实验日志文件
 
@@ -200,7 +200,7 @@ GitHub Action — 运行详情
 
 这是 PyCaret 生成的系统日志文件。它可用于审计过程。它包含重要的元数据，并且对故障排除软件错误非常有用。
 
-![图示](../Images/3c2500358ce61e6ba505a2737c0deae1.png)
+![图示](img/3c2500358ce61e6ba505a2737c0deae1.png)
 
 由 PyCaret 生成的系统日志文件
 
@@ -292,21 +292,21 @@ GitHub Actions 使您能够直接在您的 GitHub 仓库中创建自定义软件
 
 **相关:**
 
-+   [宣布 PyCaret 2.0](/2020/08/announcing-pycaret-2.html)
++   宣布 PyCaret 2.0
 
-+   [你不知道的5件关于 PyCaret 的事](/2020/07/5-things-pycaret.html)
++   你不知道的 5 件关于 PyCaret 的事
 
-+   [将机器学习管道部署到使用 Docker 容器的云端](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
++   将机器学习管道部署到使用 Docker 容器的云端
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -314,12 +314,12 @@ GitHub Actions 使您能够直接在您的 GitHub 仓库中创建自定义软件
 
 +   [关于机器学习你想知道的一切](https://www.kdnuggets.com/2022/09/everything-youve-ever-wanted-to-know-about-machine-learning.html)
 
-+   [KDnuggets 新闻，9月14日：免费数据科学Python课程 •…](https://www.kdnuggets.com/2022/n36.html)
++   [KDnuggets 新闻，9 月 14 日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
 
-+   [2023年你应该考虑的顶级AutoML框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
 +   [如何在不断变化的世界中成长为数据科学家](https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html)
 
-+   [IMPACT: 数据可观察性峰会将于11月8日重磅回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT: 数据可观察性峰会将于 11 月 8 日重磅回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
-+   [无需脑力的AutoML与AutoXGB](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)
++   [无需脑力的 AutoML 与 AutoXGB](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)

@@ -1,6 +1,6 @@
 # 为有效的 Tableau 和 Power BI 仪表板准备数据
 
-> 原文：[https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
+> 原文：[`www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html`](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
 
 商业智能（BI）技术如 Power BI 和 Tableau 用于收集、集成、分析和展示商业信息。这些工具可以帮助你分析商业数据并可视化信息，以获得有价值的见解。
 
@@ -20,11 +20,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -96,13 +96,13 @@ BI 工具可以在展示数据、创建用户视图，甚至有时执行行级�
 
 从快速胜利开始，确保在流程早期有一个简单的演示，并专注于拥有一些数据。获取最原始的数据，而不是那些无人负责的处理过的数据。如果原始数据过大，那么就使用它的一个子集。一个典型的错误是过早地将数据聚合，直到太晚时才意识到需要更多。在演示时，摄取每个数据源的原始子集。
 
-在这一点上（而不是更晚的时候！），记录和文档你所获取的内容，并始终告知客户你已获得足够的数据来构建第一个演示。有些仪表板可能需要二十多个不同的数据源，结合多种方式，这些方式难以记住。在这里，摄取后，你开始建立你的ERD ([如何构建实体关系图](https://www.smartdraw.com/entity-relationship-diagram/))，或针对更简单的用例，[构建你的数据库图](https://www.smartdraw.com/entity-relationship-diagram/#ERDAutomated)以简单记录你拥有的（或计划拥有的）数据。无需花哨，你可以使用笔和纸、白板、数字白板工具（如Excalidraw、Microsoft Whiteboard、Visio、Google Draw……）或markdown ([mermaid ERD](https://mermaid-js.github.io/mermaid/#/./entityRelationshipDiagram))，只要你理解你拥有的数据以及它们如何合并成最终的平面表格即可。
+在这一点上（而不是更晚的时候！），记录和文档你所获取的内容，并始终告知客户你已获得足够的数据来构建第一个演示。有些仪表板可能需要二十多个不同的数据源，结合多种方式，这些方式难以记住。在这里，摄取后，你开始建立你的 ERD ([如何构建实体关系图](https://www.smartdraw.com/entity-relationship-diagram/))，或针对更简单的用例，[构建你的数据库图](https://www.smartdraw.com/entity-relationship-diagram/#ERDAutomated)以简单记录你拥有的（或计划拥有的）数据。无需花哨，你可以使用笔和纸、白板、数字白板工具（如 Excalidraw、Microsoft Whiteboard、Visio、Google Draw……）或 markdown ([mermaid ERD](https://mermaid-js.github.io/mermaid/#/./entityRelationshipDiagram))，只要你理解你拥有的数据以及它们如何合并成最终的平面表格即可。
 
 # 数据合并
 
 这是你创造最大价值的地方。通过在数据之间建立强有力的关系，你构建了干净且完整的操作数据集，使最终用户的工作更加轻松。理想情况下，他们可以在几秒钟内连接到产品（使用 SQL、Python、Tableau、PowerBI 等），并直接开始分析。这不是一项容易的任务，它取决于你在第一步（*理解最终需求*）做得有多好。像处理任何棘手任务一样，先将其拆解为步骤，并使用一个 [可视化示例：](https://wcs.smartdraw.com/entity-relationship-diagram/img/basic-database-erd-diagram.png?bn=15100111822)
 
-![在当前示例中，我们有五个数据集（UserAgent、Session、Event、EventType、EventData）](../Images/67a10cb1a9f414f7ba14ec03668c02fb.png)
+![在当前示例中，我们有五个数据集（UserAgent、Session、Event、EventType、EventData）](img/67a10cb1a9f414f7ba14ec03668c02fb.png)
 
 在当前示例中，我们有五个数据集（UserAgent、Session、Event、EventType、EventData）
 
@@ -124,7 +124,7 @@ BI 工具可以在展示数据、创建用户视图，甚至有时执行行级�
 
 # 清理和格式化数据。
 
-首先，快速浏览数据，以了解你使用了什么数据。然后查看（例如，前10行和最后10行），注意细节。这包括：
+首先，快速浏览数据，以了解你使用了什么数据。然后查看（例如，前 10 行和最后 10 行），注意细节。这包括：
 
 +   数据类型（数值、文本、日期、布尔值、数组）。
 
@@ -136,7 +136,7 @@ BI 工具可以在展示数据、创建用户视图，甚至有时执行行级�
 
 +   如果是文本数据 -> 它是什么？城市名称？产品代码？
 
-这些都有助于理解数据之间的关系，确定数据需要什么样的准备/处理，并调整可视化技术。记得查找空值、数字/文本、语言之间的不同格式（对于自由文本）和HTML标签清理。
+这些都有助于理解数据之间的关系，确定数据需要什么样的准备/处理，并调整可视化技术。记得查找空值、数字/文本、语言之间的不同格式（对于自由文本）和 HTML 标签清理。
 
 通过过滤或快速摘要完成这项工作。所有这些都会避免在可视化过程中繁琐的步骤，如果数据清晰且格式正确，准备可视化只需几次点击。
 

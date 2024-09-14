@@ -1,8 +1,8 @@
 # 掌握自然语言处理的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-mastering-natural-language-processing](https://www.kdnuggets.com/7-steps-to-mastering-natural-language-processing)
+> 原文：[`www.kdnuggets.com/7-steps-to-mastering-natural-language-processing`](https://www.kdnuggets.com/7-steps-to-mastering-natural-language-processing)
 
-![掌握自然语言处理的 7 个步骤](../Images/2d4758fac525c44f4aacf750fbd279ee.png)
+![掌握自然语言处理的 7 个步骤](img/2d4758fac525c44f4aacf750fbd279ee.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -64,7 +64,7 @@
 
 从理解神经网络、其结构以及如何处理数据开始。了解激活函数、损失函数和优化器，这些都是训练神经网络所必需的。
 
-理解反向传播的概念，它促进了神经网络的学习，以及梯度下降作为优化技术。熟悉深度学习框架如TensorFlow和PyTorch以便于实际应用。
+理解反向传播的概念，它促进了神经网络的学习，以及梯度下降作为优化技术。熟悉深度学习框架如 TensorFlow 和 PyTorch 以便于实际应用。
 
 总结来说，你应该了解：
 
@@ -74,9 +74,9 @@
 
 +   反向传播和梯度下降
 
-+   TensorFlow和PyTorch等框架
++   TensorFlow 和 PyTorch 等框架
 
-以下资源将对学习PyTorch和TensorFlow的基础知识非常有帮助：
+以下资源将对学习 PyTorch 和 TensorFlow 的基础知识非常有帮助：
 
 +   [PyTorch 深度学习](https://www.youtube.com/watch?v=GIsg-ZUy0MY)
 
@@ -86,11 +86,11 @@
 
 +   手写数字识别
 
-+   CIFAR-10或类似数据集上的图像分类
++   CIFAR-10 或类似数据集上的图像分类
 
-# 第3步：NLP基础和重要语言学概念
+# 第 3 步：NLP 基础和重要语言学概念
 
-首先了解NLP *是什么*及其广泛应用，从情感分析到机器翻译、问答系统等。
+首先了解 NLP *是什么*及其广泛应用，从情感分析到机器翻译、问答系统等。
 
 理解语言学概念，如分词，这涉及将文本分解为更小的单位（标记）。了解词干提取和词形还原，这些技术将单词还原为其根形式。
 
@@ -98,7 +98,7 @@
 
 总结来说，你应该理解：
 
-+   NLP及其应用介绍
++   NLP 及其应用介绍
 
 +   分词、词干提取和词形还原
 
@@ -106,27 +106,27 @@
 
 +   基本语言学概念，如句法、语义和依存句法分析
 
-[CS 224n的依存句法分析讲座](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1224/)提供了你所需语言学概念的良好概述。免费的书籍[用Python进行自然语言处理](https://www.nltk.org/book/)（NLTK）也是一个很好的参考资源。
+[CS 224n 的依存句法分析讲座](https://web.stanford.edu/class/archive/cs/cs224n/cs224n.1224/)提供了你所需语言学概念的良好概述。免费的书籍[用 Python 进行自然语言处理](https://www.nltk.org/book/)（NLTK）也是一个很好的参考资源。
 
 尝试构建一个命名实体识别（NER）应用程序，选择一个用例（如解析简历和其他文档）。
 
-# 第4步：传统自然语言处理技术
+# 第 4 步：传统自然语言处理技术
 
-在深度学习革命化NLP之前，传统技术奠定了基础。你应该理解词袋模型（BoW）和TF-IDF表示，这些方法将文本数据转换为机器学习模型所需的数值形式。
+在深度学习革命化 NLP 之前，传统技术奠定了基础。你应该理解词袋模型（BoW）和 TF-IDF 表示，这些方法将文本数据转换为机器学习模型所需的数值形式。
 
-学习N-grams，它们捕捉单词的上下文及其在文本分类中的应用。接着，探索情感分析和文本摘要技术。此外，理解隐马尔可夫模型（HMMs）用于词性标注等任务，矩阵分解及其他算法如潜在狄利克雷分配（LDA）用于主题建模。
+学习 N-grams，它们捕捉单词的上下文及其在文本分类中的应用。接着，探索情感分析和文本摘要技术。此外，理解隐马尔可夫模型（HMMs）用于词性标注等任务，矩阵分解及其他算法如潜在狄利克雷分配（LDA）用于主题建模。
 
 因此，你应该熟悉：
 
-+   词袋模型（BoW）和TF-IDF表示
++   词袋模型（BoW）和 TF-IDF 表示
 
-+   N-grams和文本分类
++   N-grams 和文本分类
 
 +   情感分析、主题建模和文本摘要
 
 +   隐马尔可夫模型（HMMs）用于词性标注
 
-这里有一个学习资源：[完整的Python自然语言处理教程](https://www.youtube.com/watch?v=M7SWr5xObkA)。
+这里有一个学习资源：[完整的 Python 自然语言处理教程](https://www.youtube.com/watch?v=M7SWr5xObkA)。
 
 以及几个项目想法：
 
@@ -136,7 +136,7 @@
 
 # 第五步：深度学习用于自然语言处理
 
-目前，你已经熟悉了NLP和深度学习的基础知识。现在，将你的深度学习知识应用于NLP任务。从词嵌入开始，例如Word2Vec和GloVe，它们将单词表示为密集向量并捕捉语义关系。
+目前，你已经熟悉了 NLP 和深度学习的基础知识。现在，将你的深度学习知识应用于 NLP 任务。从词嵌入开始，例如 Word2Vec 和 GloVe，它们将单词表示为密集向量并捕捉语义关系。
 
 然后深入学习序列模型，例如递归神经网络（RNNs），用于处理顺序数据。理解长短期记忆（LSTM）和门控递归单元（GRU），它们以捕捉文本数据中的长期依赖关系而著称。探索序列到序列模型用于诸如机器翻译等任务。
 
@@ -144,7 +144,7 @@
 
 +   RNNs
 
-+   LSTM和GRUs
++   LSTM 和 GRUs
 
 +   序列到序列模型
 
@@ -156,21 +156,21 @@
 
 +   在自定义语料库上的问答
 
-# 第六步：使用Transformers进行自然语言处理
+# 第六步：使用 Transformers 进行自然语言处理
 
-**Transformers**的出现彻底改变了NLP领域。了解**注意力机制**，这是Transformers的一个关键组成部分，使模型能够专注于输入的相关部分。了解Transformer架构及其各种应用。
+**Transformers**的出现彻底改变了 NLP 领域。了解**注意力机制**，这是 Transformers 的一个关键组成部分，使模型能够专注于输入的相关部分。了解 Transformer 架构及其各种应用。
 
 你应该理解：
 
 +   注意力机制及其重要性
 
-+   Transformer架构简介
++   Transformer 架构简介
 
-+   Transformers的应用
++   Transformers 的应用
 
 +   利用预训练语言模型；对预训练模型进行微调以适应特定的自然语言处理任务
 
-学习NLP与Transformers最全面的资源是[HuggingFace团队的Transformers课程](https://huggingface.co/learn/nlp-course/chapter1/1)。
+学习 NLP 与 Transformers 最全面的资源是[HuggingFace 团队的 Transformers 课程](https://huggingface.co/learn/nlp-course/chapter1/1)。
 
 你可以构建的有趣项目包括：
 
@@ -182,17 +182,17 @@
 
 在像自然语言处理这样的快速发展领域（或任何领域），你只能不断学习并通过更具挑战性的项目进行探索。
 
-实践项目是必不可少的，因为它们提供了实际经验，并加深对概念的理解。此外，通过博客、研究论文和在线社区保持与自然语言处理研究社区的互动，将帮助你跟上NLP的最新进展。
+实践项目是必不可少的，因为它们提供了实际经验，并加深对概念的理解。此外，通过博客、研究论文和在线社区保持与自然语言处理研究社区的互动，将帮助你跟上 NLP 的最新进展。
 
-OpenAI的ChatGPT在2022年底上市，GPT-4于2023年初发布。同时（我们已经看到并且仍在看到）有大量开源大型语言模型的发布、LLM驱动的编码助手、新颖且资源高效的微调技术等。
+OpenAI 的 ChatGPT 在 2022 年底上市，GPT-4 于 2023 年初发布。同时（我们已经看到并且仍在看到）有大量开源大型语言模型的发布、LLM 驱动的编码助手、新颖且资源高效的微调技术等。
 
-如果你希望提升你的LLM技能，这里有一份由两部分组成的有用资源汇编：
+如果你希望提升你的 LLM 技能，这里有一份由两部分组成的有用资源汇编：
 
-+   [大型语言模型的顶级免费课程](/2023/03/top-free-courses-large-language-models.html)
++   大型语言模型的顶级免费课程
 
-+   [更多关于大型语言模型的免费课程](/2023/06/free-courses-large-language-models.html)
++   更多关于大型语言模型的免费课程
 
-你还可以探索像 [Langchain](/2023/04/langchain-101-build-gptpowered-applications.html) 和 LlamaIndex 这样的框架，以构建有用且有趣的LLM驱动的应用程序。
+你还可以探索像 Langchain 和 LlamaIndex 这样的框架，以构建有用且有趣的 LLM 驱动的应用程序。
 
 # 总结
 
@@ -212,13 +212,13 @@ OpenAI的ChatGPT在2022年底上市，GPT-4于2023年初发布。同时（我们
 
 +   第七步：构建项目，持续学习，并保持更新！
 
-如果你在寻找教程、项目演练等，查看 KDnuggets 上的 [自然语言处理资源合集](/tag/natural-language-processing)。
+如果你在寻找教程、项目演练等，查看 KDnuggets 上的 自然语言处理资源合集。
 
-**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。
+**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。
 
 ### 相关阅读
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
 +   [自然语言处理的关键术语解释](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)
 
@@ -226,6 +226,6 @@ OpenAI的ChatGPT在2022年底上市，GPT-4于2023年初发布。同时（我们
 
 +   [图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 
-+   [如何开始使用PyTorch进行自然语言处理](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)
++   [如何开始使用 PyTorch 进行自然语言处理](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)
 
 +   [自然语言处理的温和介绍](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)

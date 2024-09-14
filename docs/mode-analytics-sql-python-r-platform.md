@@ -1,12 +1,12 @@
 # SQL、Python 和 R 一个平台
 
-> 原文：[https://www.kdnuggets.com/2018/10/mode-analytics-sql-python-r-platform.html](https://www.kdnuggets.com/2018/10/mode-analytics-sql-python-r-platform.html)
+> 原文：[`www.kdnuggets.com/2018/10/mode-analytics-sql-python-r-platform.html`](https://www.kdnuggets.com/2018/10/mode-analytics-sql-python-r-platform.html)
 
 赞助文章。
 
 |  |
 | --- |
-| [![](../Images/553e748f58abbb6cd4c3da16aae602f5.png)](https://about.modeanalytics.com/?utm_source=kdnuggets&utm_medium=sponsored_email&utm_campaign=studio&utm_content=studio_20181026)  |
+| ![](https://about.modeanalytics.com/?utm_source=kdnuggets&utm_medium=sponsored_email&utm_campaign=studio&utm_content=studio_20181026)  |
 
 | 不再需要在应用程序之间跳转。Mode Studio 将 SQL 编辑器、Python 和 R 笔记本以及可视化构建器集成到一个平台中。**从 SQL 查询到 Python 或 R 笔记本** 将数据连接到 Mode，在我们的 SQL 编辑器中进行探索，并将结果传递给集成的 Python 或 R 笔记本，以便进行更深入的探索和可视化。**创建自定义可视化，或使用我们内置的图表**
 
@@ -38,7 +38,7 @@
 
 [<= 上一篇文章](https://www.kdnuggets.com/2018/10/notes-feature-preprocessing-what-why-how.html)[下一篇文章 =>](https://www.kdnuggets.com/2018/10/introduction-deep-learning-keras.html)
 
-### [最新文章](/news/index.html)
+### 最新文章
 
 +   [我参加了 Google 提供的 Udacity 免费 A/B 测试课程：我学到了什么](https://www.kdnuggets.com/i-took-udacitys-free-a-b-testing-course-by-google-heres-what-i-learned)
 
@@ -80,6 +80,6 @@
 
 * * *
 
-© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   [关于](/about/index.html)   |   [联系](/contact.html)   |   [广告](/mailchi.mp/kdnuggets/media-kit) |   [隐私](/news/privacy-policy.html)   |   [服务条款](/terms-of-service.html)
+© 2024 [Guiding Tech Media](https://www.guidingtechmedia.com/)   |   关于   |   联系   |   广告 |   隐私   |   服务条款
 
-发表日期：2018年10月26日，作者
+发表日期：2018 年 10 月 26 日，作者

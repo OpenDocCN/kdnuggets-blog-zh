@@ -1,28 +1,28 @@
 # 手动编码还是自动化数据集成 – 何者为最佳的数据集成方式？
 
-> 原文：[https://www.kdnuggets.com/2019/08/manual-coding-automated-data-integration-best-way.html](https://www.kdnuggets.com/2019/08/manual-coding-automated-data-integration-best-way.html)
+> 原文：[`www.kdnuggets.com/2019/08/manual-coding-automated-data-integration-best-way.html`](https://www.kdnuggets.com/2019/08/manual-coding-automated-data-integration-best-way.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Tehreem Naeem](https://www.linkedin.com/in/tehreem-naeem/)，Astera**
 
-![图示](../Images/f44f59fd05114910befd7f6de7cc6a4a.png)
+![图示](img/f44f59fd05114910befd7f6de7cc6a4a.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
 数据到洞察的旅程对每个组织在做出决策和获得盈利结果方面都非常重要。集成是这一旅程中的关键步骤，它简化了数据处理流程，使决策者能够获取信息。
 
-[Gartner 估计](https://www.gartner.com/smarterwithgartner/use-a-hybrid-integration-approach-to-empower-digital-transformation/)到2020年，构建数字平台的成本和时间中有50%将用于集成。这意味着通过简化集成，您可以消除数据管道中的瓶颈。
+[Gartner 估计](https://www.gartner.com/smarterwithgartner/use-a-hybrid-integration-approach-to-empower-digital-transformation/)到 2020 年，构建数字平台的成本和时间中有 50%将用于集成。这意味着通过简化集成，您可以消除数据管道中的瓶颈。
 
 所有这些挑战使得企业必须将[数据集成](https://www.astera.com/type/blog/data-integration-tools-for-businesses/)作为一种策略进行适应；这种策略应符合您的企业需求和目标。选择合适的数据集成策略时，数据的类型、量和质量都会影响决定。根据这些因素和其他一些因素，组织会决定是采用手动还是自动化的集成方式。
 
@@ -38,7 +38,7 @@
 
 **成本**
 
-无论是手动还是自动化的数据集成方案都会产生成本。这包括设计、维护和扩展持续流项目所需的资源，如果你希望建立数据驱动的组织声誉。同时，这可能还需要在公司范围内对组织功能进行变更，除了技术方面。如果你希望修改公司的数据环境，请确保与那些了解这些变化如何影响业务和数据工作的IT用户的利益相关者合作。
+无论是手动还是自动化的数据集成方案都会产生成本。这包括设计、维护和扩展持续流项目所需的资源，如果你希望建立数据驱动的组织声誉。同时，这可能还需要在公司范围内对组织功能进行变更，除了技术方面。如果你希望修改公司的数据环境，请确保与那些了解这些变化如何影响业务和数据工作的 IT 用户的利益相关者合作。
 
 **可扩展性**
 
@@ -46,15 +46,15 @@
 
 ### 手动与自动化的困境——找到正确的方法
 
-![图示](../Images/98410b20e1f7af16828c1af953d796ab.png)
+![图示](img/98410b20e1f7af16828c1af953d796ab.png)
 
-手动与自动化的方法一直是数据专业人士讨论的焦点。倾向于手动方法的组织认为这是一个成本效益高的选项，而使用ETL工具的用户则看重其自动化功能。
+手动与自动化的方法一直是数据专业人士讨论的焦点。倾向于手动方法的组织认为这是一个成本效益高的选项，而使用 ETL 工具的用户则看重其自动化功能。
 
-根据数据管理专家[里克·谢尔曼](https://www.elsevier.com/books/business-intelligence-guidebook/sherman/978-0-12-411461-6)的说法，一些组织仍然倾向于手动集成方法。这在中小型企业中是一种普遍的做法。即使一些大型企业也会使用SQL编码和存储过程来提取和集成数据，以进行报告和分析。
+根据数据管理专家[里克·谢尔曼](https://www.elsevier.com/books/business-intelligence-guidebook/sherman/978-0-12-411461-6)的说法，一些组织仍然倾向于手动集成方法。这在中小型企业中是一种普遍的做法。即使一些大型企业也会使用 SQL 编码和存储过程来提取和集成数据，以进行报告和分析。
 
 对于其他组织来说，可能合适的选择，对你来说也许是一个错误的方向。为了使这一点更加透明，我们根据常见的决定因素讨论了这两种方法：
 
-![图示](../Images/836625e3390e1c3abdefc691ec2bdde4.png)
+![图示](img/836625e3390e1c3abdefc691ec2bdde4.png)
 
 两种方法都有其优点，但主要问题是，如何找到适合你组织的方法。考虑以下问题，这将帮助你做出决定：
 
@@ -82,15 +82,15 @@
 
 在当今世界，数据集成是获取商业关键洞察和获得竞争优势的最快方法之一。因此，选择正确的策略和工具来实现预期的商业目标对于组织来说至关重要。手动编码的简单性使其成为一个有吸引力的选择，但从长远来看，ETL 的自动化、直接体验效果更佳。哪种集成策略适合您的组织？
 
-**简历：[Tehreem Naeem](https://www.linkedin.com/in/tehreem-naeem/)** 是 Astera 的技术内容策略师，Astera 是一家数据管理解决方案提供商，她在这里创建以产品为重点的内容。她拥有来自知名机构的电子工程学位，并在该领域有超过7年的经验。
+**简历：[Tehreem Naeem](https://www.linkedin.com/in/tehreem-naeem/)** 是 Astera 的技术内容策略师，Astera 是一家数据管理解决方案提供商，她在这里创建以产品为重点的内容。她拥有来自知名机构的电子工程学位，并在该领域有超过 7 年的经验。
 
 **相关：**
 
-+   [数据工程师的角色正在发生变化](/2019/01/role-data-engineer-changing.html)
++   数据工程师的角色正在发生变化
 
-+   [ETL 与 ELT：考虑数据仓库的进展](/2018/05/etl-vs-elt-considering-advancement-data-warehouses.html)
++   ETL 与 ELT：考虑数据仓库的进展
 
-+   [数据集成与数据工程有什么区别？](/2018/06/difference-between-data-integration-data-engineering.html)
++   数据集成与数据工程有什么区别？
 
 ### 更多相关话题
 
@@ -100,8 +100,8 @@
 
 +   [人工智能如何改变数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [SQL与数据集成：ETL与ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
++   [SQL 与数据集成：ETL 与 ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
 
-+   [ETL与ELT：数据集成对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)
++   [ETL 与 ELT：数据集成对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)
 
-+   [AI/ML技术集成如何帮助企业实现…](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)
++   [AI/ML 技术集成如何帮助企业实现…](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)

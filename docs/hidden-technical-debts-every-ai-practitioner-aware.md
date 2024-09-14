@@ -1,6 +1,6 @@
 # 每位 AI 从业者应注意的隐性技术债务
 
-> 原文：[https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html](https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html)
+> 原文：[`www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html`](https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html)
 
 # 介绍
 
@@ -8,11 +8,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 确定机器学习预测的用户对于评估模型新版本的影响至关重要。模型预测的反馈为模型修订提供了基础，并融入了对用户的潜在影响。
 
-![了解你的用户](../Images/bd6739a11b56a7040a8b0c96dcb45156.png)
+![了解你的用户](img/bd6739a11b56a7040a8b0c96dcb45156.png)
 
 Coffee work vector created by catalyststuff; Web analytics vector created by storyset
 
@@ -64,7 +64,7 @@ Coffee work vector created by catalyststuff; Web analytics vector created by sto
 
 管理单一模型本身就是一场艰难的战斗，因此许多组织倾向于构建一个一般化模型。尽管它看起来是一场胜利的游戏，但这是一把双刃剑。
 
-![限制的级联效应](../Images/79471a63c4b86b81c2e5ed96e8d98cf9.png)
+![限制的级联效应](img/79471a63c4b86b81c2e5ed96e8d98cf9.png)
 
 Coffee work vector created by catalyststuff
 
@@ -86,19 +86,19 @@ Coffee work vector created by catalyststuff
 
 ## 参考文献
 
-+   [https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
++   [`proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf`](https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf)
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究的交汇处工作，旨在提供商业价值和洞察。她是数据驱动科学的倡导者，也是数据治理领域的领先专家，致力于构建值得信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究的交汇处工作，旨在提供商业价值和洞察。她是数据驱动科学的倡导者，也是数据治理领域的领先专家，致力于构建值得信赖的 AI 解决方案。
 
 ### 更多相关内容
 
 +   [Nota AI 发布了 NetPresso 模型搜索的测试版，他们的…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)
 
-+   [我每天使用ChatGPT 5个月。这些隐藏的宝石...](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
++   [我每天使用 ChatGPT 5 个月。这些隐藏的宝石...](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
 
-+   [数据科学的30年：数据科学从业者的回顾](https://www.kdnuggets.com/30-years-of-data-science-a-review-from-a-data-science-practitioner)
++   [数据科学的 30 年：数据科学从业者的回顾](https://www.kdnuggets.com/30-years-of-data-science-a-review-from-a-data-science-practitioner)
 
-+   [ChatGPT驱动的数据探索：解锁数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
++   [ChatGPT 驱动的数据探索：解锁数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
 
 +   [揭示隐藏的模式：层次聚类简介](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)
 

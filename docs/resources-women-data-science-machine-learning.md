@@ -1,10 +1,10 @@
 # 数据科学和机器学习领域女性的资源
 
-> 原文：[https://www.kdnuggets.com/2018/06/resources-women-data-science-machine-learning.html](https://www.kdnuggets.com/2018/06/resources-women-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/06/resources-women-data-science-machine-learning.html`](https://www.kdnuggets.com/2018/06/resources-women-data-science-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/91d57e42e28a2be3878a929f5932854c.png)
+![](img/91d57e42e28a2be3878a929f5932854c.png)
 
 ### 多样性
 
@@ -22,11 +22,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -76,7 +76,7 @@
 > 
 > 我邀请其他男性也这样做。[#多样性](https://twitter.com/hashtag/diversity?src=hash&ref_src=twsrc%5Etfw) [#包容性](https://twitter.com/hashtag/inclusion?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/gJlECWOAux](https://t.co/gJlECWOAux)
 > 
-> — Francesc @ #io18 (@francesc) [2018年4月12日](https://twitter.com/francesc/status/984500776671240192?ref_src=twsrc%5Etfw)
+> — Francesc @ #io18 (@francesc) [2018 年 4 月 12 日](https://twitter.com/francesc/status/984500776671240192?ref_src=twsrc%5Etfw)
 
 ### 参与指南
 
@@ -174,7 +174,7 @@
 | [Black Girls Code](http://www.blackgirlscode.com) | [@blackgirlscode](https://twitter.com/blackgirlscode) |
 | [Black in AI](https://blackinai.github.io) | [@black_in_ai](https://twitter.com/black_in_ai) |
 | [Black Women in Computing](http://blackwomenincomputing.org) | [@BWiComputing](https://twitter.com/BWiComputing) |
-| [Codebar](https://codebar.io) | [@codebar](twitter.com/codebar) |
+| [Codebar](https://codebar.io) | @codebar |
 | [Django Girls](https://djangogirls.org) | [@djangogirls](https://twitter.com/djangogirls?lang=en) |
 | [EdTechWomen](http://edtechwomen.com/chapters-and-events) | [@edtechwomen](https://twitter.com/edtechwomen) |
 | [Girl Develop It](https://www.girldevelopit.com) | [@girldevelopit](https://twitter.com/girldevelopit) |
@@ -207,7 +207,7 @@
 
 | 组织名称 | 推特 |
 | --- | --- |
-| [性别少数群体的AI俱乐部](https://www.meetup.com/ai-club/)（伦敦） | [@AIClubGenderMin](https://twitter.com/AIClubGenderMin) |
+| [性别少数群体的 AI 俱乐部](https://www.meetup.com/ai-club/)（伦敦） | [@AIClubGenderMin](https://twitter.com/AIClubGenderMin) |
 | [女性学习编程](https://www.canadalearningcode.ca)（加拿大） | [@learningcode](https://twitter.com/learningcode) |
 
 #### 需要申请才能加入的组织
@@ -229,7 +229,7 @@
 
 #### [多样性门票](https://diversitytickets.org)
 
-一个Travis基金会的应用程序，帮助会议组织者通过提供票务和旅行补助来联系少数群体
+一个 Travis 基金会的应用程序，帮助会议组织者通过提供票务和旅行补助来联系少数群体
 
 #### [极客女性主义](http://geekfeminism.wikia.com/wiki/Geek_Feminism_Wiki)
 
@@ -237,7 +237,7 @@
 
 #### [技术女孩](https://girlsintech.org)
 
-GIT旨在通过创建专有的、创新的编程和战略全球合作伙伴关系，加速创新女性进入高科技行业和创办初创公司的成长。
+GIT 旨在通过创建专有的、创新的编程和战略全球合作伙伴关系，加速创新女性进入高科技行业和创办初创公司的成长。
 
 #### [全球女性基金](https://www.globalfundforwomen.org)
 
@@ -249,7 +249,7 @@ GIT旨在通过创建专有的、创新的编程和战略全球合作伙伴关�
 
 +   [数据科学领域女性](https://twitter.com/BecomingDataSci/lists/women-in-data-science/members)
 
-    +   你可以订阅这个推特列表，其中有1400+名女性成员
+    +   你可以订阅这个推特列表，其中有 1400+名女性成员
 
 +   [机器学习领域女性的综合列表](http://wimlworkshop.org/directory-of-women-in-machine-learning/)
 
@@ -259,25 +259,25 @@ GIT旨在通过创建专有的、创新的编程和战略全球合作伙伴关�
 
 +   [深度学习领域女性的推特列表](https://twitter.com/wimlds/lists/women-in-deep-learning/members)
 
-+   [R女性目录](https://rladies.org/directory/)
++   [R 女性目录](https://rladies.org/directory/)
 
-+   [这里有508名可以在你的科技活动上演讲的英国女性](https://www.techworld.com/careers/here-are-508-uk-women-who-could-speak-at-your-tech-event-3645661/?platform=hootsuite)
++   [这里有 508 名可以在你的科技活动上演讲的英国女性](https://www.techworld.com/careers/here-are-508-uk-women-who-could-speak-at-your-tech-event-3645661/?platform=hootsuite)
 
 +   [服务于科学计算中代表性不足群体的组织](https://docs.google.com/spreadsheets/d/1mabliZfmuElyQhyzgn3rlaOyG7njVu5HJC45t7RpjPs/edit?usp=sharing)，NumFOCUS
 
-+   Meta Brown的[180+ 位杰出数据分析女性](https://www.slideshare.net/metabrown/outstanding-women-in-analytics-2017-83016733)名单
++   Meta Brown 的[180+ 位杰出数据分析女性](https://www.slideshare.net/metabrown/outstanding-women-in-analytics-2017-83016733)名单
 
-+   Meta Brown的[285位撰写数据分析书籍的女性](https://www.slideshare.net/metabrown/women-who-wrote-the-analytics-book-2nd-edition-83016736)
++   Meta Brown 的[285 位撰写数据分析书籍的女性](https://www.slideshare.net/metabrown/women-who-wrote-the-analytics-book-2nd-edition-83016736)
 
-+   Onalytica的[科技女性顶级影响者名单](http://www.onalytica.com/blog/posts/women-tech-hot-topics-top-influencers/) 涵盖了AI、金融科技、区块链、大数据、物联网、教育科技、市场科技
++   Onalytica 的[科技女性顶级影响者名单](http://www.onalytica.com/blog/posts/women-tech-hot-topics-top-influencers/) 涵盖了 AI、金融科技、区块链、大数据、物联网、教育科技、市场科技
 
-> 45%的演讲者是女性 ????????[@NumFOCUS](https://twitter.com/NumFOCUS?ref_src=twsrc%5Etfw) [@wimlds](https://twitter.com/wimlds?ref_src=twsrc%5Etfw) [#diversityawards](https://twitter.com/hashtag/diversityawards?src=hash&ref_src=twsrc%5Etfw) [#rstatsnyc](https://twitter.com/hashtag/rstatsnyc?src=hash&ref_src=twsrc%5Etfw) [https://t.co/UNbqBESRa4](https://t.co/UNbqBESRa4)
+> 45%的演讲者是女性 ????????[@NumFOCUS](https://twitter.com/NumFOCUS?ref_src=twsrc%5Etfw) [@wimlds](https://twitter.com/wimlds?ref_src=twsrc%5Etfw) [#diversityawards](https://twitter.com/hashtag/diversityawards?src=hash&ref_src=twsrc%5Etfw) [#rstatsnyc](https://twitter.com/hashtag/rstatsnyc?src=hash&ref_src=twsrc%5Etfw) [`t.co/UNbqBESRa4`](https://t.co/UNbqBESRa4)
 > 
-> — Reshama Shaikh (@reshamas) [2018年4月20日](https://twitter.com/reshamas/status/987384241070616576?ref_src=twsrc%5Etfw)
+> — Reshama Shaikh (@reshamas) [2018 年 4 月 20 日](https://twitter.com/reshamas/status/987384241070616576?ref_src=twsrc%5Etfw)
 
 #### 开源领域女性
 
-女性在开源领域明显[代表性不足](https://www.newamerica.org/weekly/111/and-now-an-infuriating-statistic-about-women-and-coding/)。这里是一个受到[Twitter讨论](https://twitter.com/wimlds/status/972005489771921416)启发的[开源女性Twitter名单](https://twitter.com/reshamas/lists/women-in-open-source/members)。
+女性在开源领域明显[代表性不足](https://www.newamerica.org/weekly/111/and-now-an-infuriating-statistic-about-women-and-coding/)。这里是一个受到[Twitter 讨论](https://twitter.com/wimlds/status/972005489771921416)启发的[开源女性 Twitter 名单](https://twitter.com/reshamas/lists/women-in-open-source/members)。
 
 #### 提升数据领域女性可见性的例子
 
@@ -285,21 +285,21 @@ GIT旨在通过创建专有的、创新的编程和战略全球合作伙伴关�
 
 +   RLadies: [国际妇女节（IWD）推文流](https://twitter.com/rladies_iwd2018)
 
-+   统计学女性: [Twitter标签 #statswomen](https://twitter.com/hashtag/statswomen)
++   统计学女性: [Twitter 标签 #statswomen](https://twitter.com/hashtag/statswomen)
 
-+   David Robinson的推文: [五位令人惊叹的 #rstats 数据科学家，如果你还没有关注的话](https://twitter.com/drob/status/839564664321282048)
++   David Robinson 的推文: [五位令人惊叹的 #rstats 数据科学家，如果你还没有关注的话](https://twitter.com/drob/status/839564664321282048)
 
 +   Amstat News: [庆祝统计学女性](http://magazine.amstat.org/blog/2018/03/01/wis/)
 
 +   KD Nuggets: [激励人心的数据领域女性](https://www.kdnuggets.com/2018/03/inspiring-women-ai-big-data-science.html)
 
-> 你不会被这位酷炫的R-Lady惊艳到吗？！[https://t.co/SQKK9oVU5Q](https://t.co/SQKK9oVU5Q) [#rladies](https://twitter.com/hashtag/rladies?src=hash&ref_src=twsrc%5Etfw) [#iwd2018](https://twitter.com/hashtag/iwd2018?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/KueF3yZb5E](https://t.co/KueF3yZb5E)
+> 你不会被这位酷炫的 R-Lady 惊艳到吗？！[`t.co/SQKK9oVU5Q`](https://t.co/SQKK9oVU5Q) [#rladies](https://twitter.com/hashtag/rladies?src=hash&ref_src=twsrc%5Etfw) [#iwd2018](https://twitter.com/hashtag/iwd2018?src=hash&ref_src=twsrc%5Etfw) [pic.twitter.com/KueF3yZb5E](https://t.co/KueF3yZb5E)
 > 
-> — IWD 2018 featured R-Ladies (@rladies_iwd2018) [2018年3月8日](https://twitter.com/rladies_iwd2018/status/971878712319922177?ref_src=twsrc%5Etfw)
+> — IWD 2018 featured R-Ladies (@rladies_iwd2018) [2018 年 3 月 8 日](https://twitter.com/rladies_iwd2018/status/971878712319922177?ref_src=twsrc%5Etfw)
 
-为了纪念女性历史月，我们正在庆祝几位在统计学和数据科学领域工作的ASA女性。这些杰出的女性之所以被选中，是因为她们激励和影响了她们领域中的其他女性。[阅读她们的传记](http://magazine.amstat.org/blog/2018/03/01/wis/)以了解她们为何选择统计学、谁影响了她们，以及她们取得的成就。
+为了纪念女性历史月，我们正在庆祝几位在统计学和数据科学领域工作的 ASA 女性。这些杰出的女性之所以被选中，是因为她们激励和影响了她们领域中的其他女性。[阅读她们的传记](http://magazine.amstat.org/blog/2018/03/01/wis/)以了解她们为何选择统计学、谁影响了她们，以及她们取得的成就。
 
-#### Slack团队
+#### Slack 团队
 
 +   [PyLadies](http://slackin.pyladies.com)
 
@@ -313,15 +313,15 @@ GIT旨在通过创建专有的、创新的编程和战略全球合作伙伴关�
 
 #### [CoderDojo](https://coderdojo.com)
 
-一个全球性的免费志愿者主导的社区编程俱乐部网络，面向7至17岁的年轻人。在Dojo中，他们可以学习编程、建立网站、创建应用程序或游戏，并在非正式、富有创意和社交的环境中探索技术。
+一个全球性的免费志愿者主导的社区编程俱乐部网络，面向 7 至 17 岁的年轻人。在 Dojo 中，他们可以学习编程、建立网站、创建应用程序或游戏，并在非正式、富有创意和社交的环境中探索技术。
 
 #### [Girls Who Code](https://girlswhocode.com/about-us/)
 
-Girls Who Code的使命是缩小科技领域的性别差距。
+Girls Who Code 的使命是缩小科技领域的性别差距。
 
 #### [AI 4 All](http://www.ai-4-all.org)
 
-核心模型是通过暑期营教育和支持下一代多样化的AI领导者，参与大学包括斯坦福大学、加州大学伯克利分校、普林斯顿大学、卡内基梅隆大学和波士顿大学的**代表性不足的高中生**。
+核心模型是通过暑期营教育和支持下一代多样化的 AI 领导者，参与大学包括斯坦福大学、加州大学伯克利分校、普林斯顿大学、卡内基梅隆大学和波士顿大学的**代表性不足的高中生**。
 
 #### 支持组织
 
@@ -355,13 +355,13 @@ Girls Who Code的使命是缩小科技领域的性别差距。
 
 +   [顶级五大女性科技组织：建立网络与弥合差距](https://www.huffingtonpost.com/ivo-lukas/women-tech_b_1583348.html)
 
-+   [10万人将参加全球女性数据科学大会](https://www.forbes.com/sites/metabrown/2018/03/01/100000-people-will-attend-global-women-in-data-science-conference/#146417c96d9a)
++   [10 万人将参加全球女性数据科学大会](https://www.forbes.com/sites/metabrown/2018/03/01/100000-people-will-attend-global-women-in-data-science-conference/#146417c96d9a)
 
 +   [将女性排除在科技之外的危险](https://www.wired.com/story/dangers-keeping-women-out-of-tech/amp?utm_content=bufferc52c7)，Maria Klawe，哈维穆德学院
 
-+   [Deborah Hanus推文](https://twitter.com/deborahhanus/status/969672442196013057)
++   [Deborah Hanus 推文](https://twitter.com/deborahhanus/status/969672442196013057)
 
-+   [不再找借口 – 470位杰出的分析女性](https://www.kdnuggets.com/2017/12/470-outstanding-women-analytics.html)，Meta Brown
++   [不再找借口 – 470 位杰出的分析女性](https://www.kdnuggets.com/2017/12/470-outstanding-women-analytics.html)，Meta Brown
 
 +   [NumFocus DISC 目录以增加多样性和包容性](https://www.numfocus.org/blog/directory-increase-diversity-inclusion-notes-disc-unconference)
 
@@ -371,13 +371,13 @@ Girls Who Code的使命是缩小科技领域的性别差距。
 
 +   照片来源: [我们从全球最大女性技术大会上学到的东西](https://actionsprout.com/inside-actionsprout/learned-largest-women-technology-conference-world/)
 
-**简介: [Reshama Shaikh](https://www.linkedin.com/in/reshamas/)** 是一位自由职业的数据科学家/统计学家及MBA，具备Python、R和SAS的技能。她在制药行业担任生物统计学家超过10年。她还是NYC Women in Machine Learning & Data Science和PyLadies的聚会组织者。她在罗格斯大学获得统计学硕士学位，并在纽约大学斯特恩商学院获得MBA学位。
+**简介: [Reshama Shaikh](https://www.linkedin.com/in/reshamas/)** 是一位自由职业的数据科学家/统计学家及 MBA，具备 Python、R 和 SAS 的技能。她在制药行业担任生物统计学家超过 10 年。她还是 NYC Women in Machine Learning & Data Science 和 PyLadies 的聚会组织者。她在罗格斯大学获得统计学硕士学位，并在纽约大学斯特恩商学院获得 MBA 学位。
 
 [原文](https://reshamas.github.io/resources-for-women-in-data-science/)。经许可转载。
 
 **相关：**
 
-+   [18位激励人心的女性在人工智能、大数据、数据科学和机器学习领域](https://www.kdnuggets.com/2018/03/inspiring-women-ai-big-data-science.html)
++   [18 位激励人心的女性在人工智能、大数据、数据科学和机器学习领域](https://www.kdnuggets.com/2018/03/inspiring-women-ai-big-data-science.html)
 
 +   [人工智能、分析、大数据、数据科学、深度学习、机器学习的即将举行的会议：四月及以后](https://www.kdnuggets.com/2018/04/upcoming-meetings-ai-analytics-big-data-science-machine-learning.html)
 
@@ -385,14 +385,14 @@ Girls Who Code的使命是缩小科技领域的性别差距。
 
 ### 更多相关话题
 
-+   [数据科学（WiDS）Datathon的女性故事](https://www.kdnuggets.com/2022/01/story-women-data-science-wids-datathon.html)
++   [数据科学（WiDS）Datathon 的女性故事](https://www.kdnuggets.com/2022/01/story-women-data-science-wids-datathon.html)
 
 +   [数据世界中的女性](https://www.kdnuggets.com/2022/03/women-world-data.html)
 
-+   [8位努力让世界更人性化的女性人工智能专家](https://www.kdnuggets.com/2021/03/8-women-ai-striving-humanize-world.html)
++   [8 位努力让世界更人性化的女性人工智能专家](https://www.kdnuggets.com/2021/03/8-women-ai-striving-humanize-world.html)
 
 +   [庆祝技术行业领导角色中的女性](https://www.kdnuggets.com/2022/07/celebrating-women-leadership-roles-tech-industry.html)
 
 +   [最佳数据科学资源、训练营和课程来学习……](https://www.kdnuggets.com/2023/12/springboard-best-data-science-resources-bootcamp-courses-learn-data-science-new-year)
 
-+   [学习机器学习的线性代数的顶级3个免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
++   [学习机器学习的线性代数的顶级 3 个免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)

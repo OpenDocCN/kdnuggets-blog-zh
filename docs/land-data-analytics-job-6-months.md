@@ -1,10 +1,10 @@
 # 如何在 6 个月内获得数据分析职位
 
-> 原文：[https://www.kdnuggets.com/2021/06/land-data-analytics-job-6-months.html](https://www.kdnuggets.com/2021/06/land-data-analytics-job-6-months.html)
+> 原文：[`www.kdnuggets.com/2021/06/land-data-analytics-job-6-months.html`](https://www.kdnuggets.com/2021/06/land-data-analytics-job-6-months.html)
 
-[评论](#comments)
+评论
 
-![](../Images/84bc4dceffa8c0d9f2d2ca93a5d84789.png)
+![](img/84bc4dceffa8c0d9f2d2ca93a5d84789.png)
 
 图片由 [Kaleidico](https://unsplash.com/@kaleidico?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，刊登在 [Unsplash](https://towardsdatascience.com/s/photos/analysis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -32,13 +32,13 @@
 
 ### 步骤 1：学习 Python
 
-![](../Images/6175383f7c6a46bbc7eea7c7469179ad.png)
+![](img/6175383f7c6a46bbc7eea7c7469179ad.png)
 
 图片由 [Christopher Gower](https://unsplash.com/@cgower?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，刊登在 [Unsplash](https://towardsdatascience.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 要进入分析领域，你首先需要学习一门编程语言。Python 和 R 是该领域最常用的两种语言。
 
-如果你刚刚起步，我强烈建议学习Python。它比R更友好，更容易上手。Python还有大量的库，使得数据预处理等任务变得更加简单。
+如果你刚刚起步，我强烈建议学习 Python。它比 R 更友好，更容易上手。Python 还有大量的库，使得数据预处理等任务变得更加简单。
 
 Python 的使用也比 R 更广泛。如果你未来转到如网页开发或机器学习等领域，你将不需要学习新的语言。
 
@@ -64,7 +64,7 @@ b) [学习 Python 进行数据分析和可视化](https://www.udemy.com/course/l
 
 ### 步骤 2：学习 SQL
 
-![](../Images/f51c76512958303734bff4d93e013c00.png)
+![](img/f51c76512958303734bff4d93e013c00.png)
 
 图片由 [David Pupaza](https://unsplash.com/@willy420?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://towardsdatascience.com/s/photos/database?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -78,25 +78,25 @@ SQL 可以在像 Python、Scala 和 Hadoop 等语言中使用。这将根据你�
 
 ### 步骤 3：数据分析与可视化
 
-![](../Images/2117c971e32a0e9613c17ff950be1e36.png)
+![](img/2117c971e32a0e9613c17ff950be1e36.png)
 
 图片由 [Clay Banks](https://unsplash.com/@claybanks?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://towardsdatascience.com/s/photos/visualization?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供
 
 你需要知道如何分析数据并从中得出洞察。仅仅知道如何编程或查询数据是不够的。你需要能够用这些数据回答问题和解决问题。
 
-要学习Python中的数据分析，你可以参加 [这个](https://www.udemy.com/course/learning-python-for-data-analysis-and-visualization/) Udemy课程，或者可以在DataCamp上追求 [数据分析师职业轨迹](https://www.datacamp.com/tracks/data-analyst-with-python)。
+要学习 Python 中的数据分析，你可以参加 [这个](https://www.udemy.com/course/learning-python-for-data-analysis-and-visualization/) Udemy 课程，或者可以在 DataCamp 上追求 [数据分析师职业轨迹](https://www.datacamp.com/tracks/data-analyst-with-python)。
 
 在从数据中得出洞察后，你应该能够 **展示这些洞察**。利益相关者需要根据你展示的洞察做出商业决策，因此你需要确保你的展示清晰而简洁。
 
-这些洞察通常借助数据可视化工具进行展示。可以使用Excel、Python库或像Tableau这样的商业智能工具来创建可视化。
+这些洞察通常借助数据可视化工具进行展示。可以使用 Excel、Python 库或像 Tableau 这样的商业智能工具来创建可视化。
 
-如果你想成为数据分析师，我建议学习Tableau。它是最常用的报告工具之一，并且受到大多数雇主的青睐。
+如果你想成为数据分析师，我建议学习 Tableau。它是最常用的报告工具之一，并且受到大多数雇主的青睐。
 
-[这个](https://public.tableau.com/profile/kirill.eremenko#!/)由Kirill Eremenko提供的Udemy课程是学习Tableau的最佳资源之一。
+[这个](https://public.tableau.com/profile/kirill.eremenko#!/)由 Kirill Eremenko 提供的 Udemy 课程是学习 Tableau 的最佳资源之一。
 
-### 第4步：数据讲故事和展示
+### 第 4 步：数据讲故事和展示
 
-![](../Images/1b9b3569a71abb4d1907fcdf6a7367ff.png)
+![](img/1b9b3569a71abb4d1907fcdf6a7367ff.png)
 
 图片由 [Dariusz Sankowski](https://unsplash.com/@dariuszsankowski?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://towardsdatascience.com/s/photos/story?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供
 
@@ -104,17 +104,17 @@ SQL 可以在像 Python、Scala 和 Hadoop 等语言中使用。这将根据你�
 
 现在，你需要向潜在雇主展示这些技能。如果你没有技术背景，你需要向招聘人员展示你具备成为分析师的必要技能。
 
-为此，我强烈建议你建立一个数据分析作品集。在Tableau中构建仪表板，使用Python分析Kaggle数据集，并撰写关于你新掌握技能的文章。
+为此，我强烈建议你建立一个数据分析作品集。在 Tableau 中构建仪表板，使用 Python 分析 Kaggle 数据集，并撰写关于你新掌握技能的文章。
 
 你可以在 [这里](https://natassha.github.io/natasshaselvaraj/) 查看我的作品集网站。
 
 这里有一些你可以在作品集中展示的数据分析项目的例子：
 
-+   创建一个Covid-19全球地图仪表板
++   创建一个 Covid-19 全球地图仪表板
 
-+   从Spotify抓取音乐数据以识别表现最佳的艺术家
++   从 Spotify 抓取音乐数据以识别表现最佳的艺术家
 
-+   使用LinkedIn数据识别薪资最高的地区
++   使用 LinkedIn 数据识别薪资最高的地区
 
 在简历中展示这样的项目会使你在潜在雇主面前脱颖而出。
 
@@ -132,7 +132,7 @@ SQL 可以在像 Python、Scala 和 Hadoop 等语言中使用。这将根据你�
 
 本文仅针对那些试图获得数据分析入门级工作的人员。
 
-我通过遵循上述步骤在大约6个月内找到了分析方面的工作。即使你没有之前的数据经验，每天投入大约5-6小时，你也能做到这一点。
+我通过遵循上述步骤在大约 6 个月内找到了分析方面的工作。即使你没有之前的数据经验，每天投入大约 5-6 小时，你也能做到这一点。
 
 > 教育是你用来改变世界的最强有力的武器
 > 
@@ -144,11 +144,11 @@ SQL 可以在像 Python、Scala 和 Hadoop 等语言中使用。这将根据你�
 
 **相关：**
 
-+   [初学者的十大数据科学项目](/2021/06/top-10-data-science-projects-beginners.html)
++   初学者的十大数据科学项目
 
-+   [如何成为数据科学家的指南（逐步方法）](/2021/05/guide-become-data-scientist.html)
++   如何成为数据科学家的指南（逐步方法）
 
-+   [数据科学家将在10年内灭绝](/2021/06/data-scientists-extinct-10-years.html)
++   数据科学家将在 10 年内灭绝
 
 ### 更多相关话题
 
@@ -156,10 +156,10 @@ SQL 可以在像 Python、Scala 和 Hadoop 等语言中使用。这将根据你�
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败，剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [是什么使得 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

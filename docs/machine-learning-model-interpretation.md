@@ -1,12 +1,12 @@
 # 机器学习模型解释
 
-> 原文：[https://www.kdnuggets.com/2021/06/machine-learning-model-interpretation.html](https://www.kdnuggets.com/2021/06/machine-learning-model-interpretation.html)
+> 原文：[`www.kdnuggets.com/2021/06/machine-learning-model-interpretation.html`](https://www.kdnuggets.com/2021/06/machine-learning-model-interpretation.html)
 
-[评论](#comments)
+评论
 
 **[Himanshu Sharma](https://www.linkedin.com/in/himanshusharmads/)，生物信息学数据分析师**
 
-![](../Images/cf85f5e0997eb498f872743b0c8ef468.png)
+![](img/cf85f5e0997eb498f872743b0c8ef468.png)
 
 树（来源： [作者](https://www.linkedin.com/in/himanshusharmads/)）
 
@@ -14,27 +14,27 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-解释机器学习模型是一项困难的任务，因为我们需要了解模型在后台如何工作、模型使用了哪些参数以及模型是如何生成预测的。有不同的Python库可以用来创建机器学习模型的可视化并分析模型的工作情况。
+解释机器学习模型是一项困难的任务，因为我们需要了解模型在后台如何工作、模型使用了哪些参数以及模型是如何生成预测的。有不同的 Python 库可以用来创建机器学习模型的可视化并分析模型的工作情况。
 
 [**机器学习模型仪表板**](https://towardsdatascience.com/machine-learning-model-dashboard-4544daa50848)
 
 创建仪表板以解释机器学习模型
 
-Skater是一个开源Python库，能够对不同类型的黑箱模型进行机器学习模型解释。它帮助我们创建不同类型的可视化，使我们更容易理解模型的工作原理。
+Skater 是一个开源 Python 库，能够对不同类型的黑箱模型进行机器学习模型解释。它帮助我们创建不同类型的可视化，使我们更容易理解模型的工作原理。
 
-在这篇文章中，我们将探索Skater及其不同的功能。让我们开始吧……
+在这篇文章中，我们将探索 Skater 及其不同的功能。让我们开始吧……
 
 ### 安装所需的库
 
-我们将开始使用pip安装Skater。以下命令将使用pip安装Skater。
+我们将开始使用 pip 安装 Skater。以下命令将使用 pip 安装 Skater。
 
 ```py
 !pip install -U skater
@@ -42,7 +42,7 @@ Skater是一个开源Python库，能够对不同类型的黑箱模型进行机�
 
 ### 导入所需库
 
-下一步将是导入所需的库。要使用Skater解释模型，我们首先需要创建一个模型。
+下一步将是导入所需的库。要使用 Skater 解释模型，我们首先需要创建一个模型。
 
 ```py
 %matplotlib inline 
@@ -63,7 +63,7 @@ from skater.util.dataops import show_in_notebook
 
 ### 创建模型
 
-我们将创建一个随机森林分类器并使用IRIS数据集。
+我们将创建一个随机森林分类器并使用 IRIS 数据集。
 
 ```py
 iris = datasets.load_iris()
@@ -110,9 +110,9 @@ interpreter.partial_dependence.plot_partial_dependence(
 )
 ```
 
-![](../Images/5ecc7cc339a7ab2966f02c6ff2a84dd7.png)
+![](img/5ecc7cc339a7ab2966f02c6ff2a84dd7.png)
 
-PDP图（来源： [作者](https://www.linkedin.com/in/himanshusharmads/)）
+PDP 图（来源： [作者](https://www.linkedin.com/in/himanshusharmads/)）
 
 **2. 特征重要性**
 
@@ -123,7 +123,7 @@ plots = interpreter.feature_importance.plot_feature_importance(pyint_model, asce
                                 n_jobs=-1)
 ```
 
-![](../Images/2ee12b974c65a18a4217be624c2e99e2.png)
+![](img/2ee12b974c65a18a4217be624c2e99e2.png)
 
 特征重要性（来源：[作者](https://www.linkedin.com/in/himanshusharmads/)）
 
@@ -137,7 +137,7 @@ surrogate_explainer.fit(xtrain, ytrain)
 surrogate_explainer.plot_global_decisions(show_img=True)
 ```
 
-![](../Images/f90b452f360a65d906d0a64b4122bc67.png)
+![](img/f90b452f360a65d906d0a64b4122bc67.png)
 
 替代树（来源：[ 作者](https://www.linkedin.com/in/himanshusharmads/)）
 
@@ -155,11 +155,11 @@ surrogate_explainer.plot_global_decisions(show_img=True)
 
 **相关:**
 
-+   [自动化机器学习模型优化](/2021/03/automating-machine-learning-model-optimization.html)
++   自动化机器学习模型优化
 
-+   [可解释增强机器](/2021/05/explainable-boosting-machine.html)
++   可解释增强机器
 
-+   [可解释性、解释性与机器学习——数据科学家需要了解的内容](/2020/11/interpretability-explainability-machine-learning.html)
++   可解释性、解释性与机器学习——数据科学家需要了解的内容
 
 ### 更多相关话题
 

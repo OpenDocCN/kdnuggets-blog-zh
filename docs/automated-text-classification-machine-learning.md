@@ -1,12 +1,12 @@
 # 使用机器学习的自动化文本分类
 
-> 原文：[https://www.kdnuggets.com/2018/01/automated-text-classification-machine-learning.html](https://www.kdnuggets.com/2018/01/automated-text-classification-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/01/automated-text-classification-machine-learning.html`](https://www.kdnuggets.com/2018/01/automated-text-classification-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 Shashank Gupta 和 [ParallelDots](https://paralleldots.xyz/)**。
 
-![](../Images/f929f6efa5417b9d83e866dbcc38ac11.png)
+![](img/f929f6efa5417b9d83e866dbcc38ac11.png)
 
 数字化改变了我们处理和分析信息的方式。在线信息的可用性呈指数级增长。从网页到电子邮件、科学期刊、电子书、学习内容、新闻和社交媒体都充满了文本数据。目标是快速创建、分析和报告信息。这时，自动化文本分类发挥了作用。
 
@@ -26,21 +26,21 @@
 
 电子邮件的垃圾邮件过滤是监督分类的一个例子。来信根据其内容自动分类。语言检测、意图、情感和情绪分析都基于监督系统。它可以用于特殊情况，例如通过分析数百万条在线信息来识别紧急情况。这是一个“针在大海捞针”的问题。我们提出了一个智能公共交通[系统](https://blog.paralleldots.com/technology/artificial-intelligence-can-make-public-transportation-safer/)来识别这种情况。为了在数百万条在线对话中识别紧急情况，分类器必须以高准确率进行训练。它需要特殊的损失函数、训练时的采样以及像构建多个分类器的堆栈这样的解决方法，每个分类器都细化前一个分类器的结果。
 
-![](../Images/22c33d5d209d4076cb24063eafa8d3b0.png)
+![](img/22c33d5d209d4076cb24063eafa8d3b0.png)
 
-监督分类基本上是让计算机模仿人类。算法接受一组标记/分类文本（也称为训练集），基于这些文本生成AI模型，这些模型在进一步接收到新的未标记文本时，可以自动对其进行分类。我们的多个[API](https://www.paralleldots.com/text-analysis-apis)是基于监督系统开发的。[文本分类器](https://www.paralleldots.com/text-analysis-apis#text-classification)目前针对150个通用类别进行了训练。
+监督分类基本上是让计算机模仿人类。算法接受一组标记/分类文本（也称为训练集），基于这些文本生成 AI 模型，这些模型在进一步接收到新的未标记文本时，可以自动对其进行分类。我们的多个[API](https://www.paralleldots.com/text-analysis-apis)是基于监督系统开发的。[文本分类器](https://www.paralleldots.com/text-analysis-apis#text-classification)目前针对 150 个通用类别进行了训练。
 
 **无监督文本分类**
 
 无监督分类是在不提供外部信息的情况下进行的。在这种情况下，算法尝试发现数据中的自然结构。请注意，自然结构可能不完全是人类认为的逻辑分割。算法在数据点中寻找相似的模式和结构，并将其分组为集群。数据的分类是基于形成的集群。以网页搜索为例。算法根据搜索词进行集群，并将其作为结果呈现给用户。
 
-每个数据点被嵌入到超空间中，您可以在TensorBoard上可视化它们。下面的图像基于我们对印度电信公司Reliance Jio的Twitter研究。
+每个数据点被嵌入到超空间中，您可以在 TensorBoard 上可视化它们。下面的图像基于我们对印度电信公司 Reliance Jio 的 Twitter 研究。
 
-![](../Images/a7434a2b5c15a9592501fab655d96138.png)
+![](img/a7434a2b5c15a9592501fab655d96138.png)
 
 数据探索的目的是基于文本相似性找到相似的数据点。这些相似的数据点形成一个最近邻的簇。下图展示了推文“*reliance jio prime membership at rs 99 : here’s how to get rs 100 cashback…*”的最近邻。
 
-![](../Images/fcd0b79def51c6b525e3272d24efebf4.png)
+![](img/fcd0b79def51c6b525e3272d24efebf4.png)
 
 如你所见，附带的推文与标记的推文类似。这个簇是类似推文的一类。无监督分类在从文本数据中生成洞察时非常有用。由于不需要标记，它具有很高的可定制性。它可以在任何文本数据上运行，无需训练和标记。因此，无监督分类具有语言无关性。
 
@@ -56,7 +56,7 @@
 
 你可以通过点击仪表板中的‘+’图标来创建你的第一个分类器。接下来，定义一些你希望将数据分类到的类别。请注意，为了获得最佳结果，请确保你的类别是相互排斥的。
 
-![](../Images/25903b4cff5895456703dcd038e1b7a0.png)
+![](img/25903b4cff5895456703dcd038e1b7a0.png)
 
 你可以通过分析你的文本样本来检查分类的准确性，并在发布之前根据需要调整你的类别列表。一旦类别发布，你将获得一个应用程序 ID，这将允许你使用自定义分类器 API。
 
@@ -64,7 +64,7 @@
 
 作为一个 AI 研究小组，我们不断开发前沿技术，以使过程更简单、更快捷。文本分类就是这样一种技术，在未来具有巨大的潜力。随着越来越多的信息被倾倒在互联网中，智能机器算法将负责使这些信息的分析和表示变得更容易。机器智能的未来无疑令人兴奋，订阅我们的新闻通讯，以便将更多这样的信息送到你的邮箱。
 
-[ParallelDots AI APIs](https://www.paralleldots.com/)，是由[ParallelDots Inc](https://paralleldots.xyz/)提供的深度学习驱动的网络服务，能够理解大量非结构化的文本和视觉内容，从而增强你的产品。你可以查看我们的一些文本分析[API](https://www.paralleldots.com/text-analysis-apis)，通过填写此表单[这里](https://www.paralleldots.com/contact-us)联系我们，或者通过apis@paralleldots.com给我们写邮件。
+[ParallelDots AI APIs](https://www.paralleldots.com/)，是由[ParallelDots Inc](https://paralleldots.xyz/)提供的深度学习驱动的网络服务，能够理解大量非结构化的文本和视觉内容，从而增强你的产品。你可以查看我们的一些文本分析[API](https://www.paralleldots.com/text-analysis-apis)，通过填写此表单[这里](https://www.paralleldots.com/contact-us)联系我们，或者通过 apis@paralleldots.com 给我们写邮件。
 
 [原文](https://blog.paralleldots.com/product/automated-text-classification-using-machine-learning/)。经许可转载。
 
@@ -74,17 +74,17 @@
 
 +   [**Plot2txt 进行定量图像分析**](https://www.kdnuggets.com/2018/01/plot2txt-quantitative-image-analysis.html)
 
-+   [**错误分析来救援——来自 Andrew Ng 的经验教训，第 3 部分**](https://www.kdnuggets.com/2018/01/error-analysis-your-rescue.html)
++   [**错误分析来救援——来自 Andrew Ng 的经验教训，第三部分**](https://www.kdnuggets.com/2018/01/error-analysis-your-rescue.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

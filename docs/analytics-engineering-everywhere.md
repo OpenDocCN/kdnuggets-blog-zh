@@ -1,22 +1,22 @@
 # 分析工程学无处不在
 
-> 原文：[https://www.kdnuggets.com/2021/06/analytics-engineering-everywhere.html](https://www.kdnuggets.com/2021/06/analytics-engineering-everywhere.html)
+> 原文：[`www.kdnuggets.com/2021/06/analytics-engineering-everywhere.html`](https://www.kdnuggets.com/2021/06/analytics-engineering-everywhere.html)
 
-[评论](#comments)
+评论
 
 **作者：[Jason Ganz](https://twitter.com/jasnonaz)，数据进步特别顾问**。
 
-![](../Images/d6a1b737c9bf044bc70dc03c45304f61.png)
+![](img/d6a1b737c9bf044bc70dc03c45304f61.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -66,17 +66,17 @@
 
 +   [为什么你应该考虑成为数据工程师而不是数据科学家](https://www.kdnuggets.com/2021/04/consider-being-data-engineer-instead-data-scientist.html)
 
-+   [你需要的9项成为数据工程师的技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [你需要的 9 项成为数据工程师的技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
 
 +   [数据工程——数据科学的表亲，令人烦恼](https://www.kdnuggets.com/2021/01/data-engineering-troublesome.html)
 
 ### 更多相关主题
 
-+   [成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标以……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

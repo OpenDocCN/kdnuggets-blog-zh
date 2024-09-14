@@ -1,8 +1,8 @@
 # 深度学习库简介：PyTorch 和 Lightning AI
 
-> 原文：[https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)
+> 原文：[`www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai`](https://www.kdnuggets.com/introduction-to-deep-learning-libraries-pytorch-and-lightning-ai)
 
-![深度学习库简介：PyTorch 和 Lightning AI](../Images/291f913d791d2fd9fc8513dccfb9ebc0.png)
+![深度学习库简介：PyTorch 和 Lightning AI](img/291f913d791d2fd9fc8513dccfb9ebc0.png)
 
 照片由谷歌 [DeepMind](https://www.pexels.com/photo/an-artist-s-illustration-of-artificial-intelligence-ai-this-image-depicts-the-potential-of-ai-for-society-through-3d-visualisations-it-was-created-by-novoto-studio-as-part-of-the-visua-18069496/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -74,7 +74,7 @@ for i, (img, label) in enumerate(list(train)[:10]):
 plt.show()
 ```
 
-![介绍深度学习库：PyTorch 和 Lightning AI](../Images/5beec8ab85fb6221d4f0f8c808e9fe79.png)
+![介绍深度学习库：PyTorch 和 Lightning AI](img/5beec8ab85fb6221d4f0f8c808e9fe79.png)
 
 每个图像是一个介于零到九之间的单数字，意味着我们有十个标签。接下来，让我们基于这个数据集开发一个图像分类器。
 
@@ -161,7 +161,7 @@ NNModel(
 ) 
 ```
 
-在上述对象中，我们创建了一个具有少量层结构的神经模型。为了开发神经模型对象，我们使用 nn.module 函数的子类方法，并在__init__中创建神经网络层。
+在上述对象中，我们创建了一个具有少量层结构的神经模型。为了开发神经模型对象，我们使用 nn.module 函数的子类方法，并在 __init__ 中创建神经网络层。
 
 我们首先使用 flatten 函数将 2D 图像数据转换为层内的像素值。然后，我们使用 sequential 函数将我们的层包裹成一系列层。在 sequential 函数内部，我们有我们的模型层：
 
@@ -177,13 +177,13 @@ nn.Linear(128, 10)
 
 1.  首先，数据输入（28*28 特征）通过线性层中的线性函数转换，并输出 128 个特征。
 
-1.  ReLU是一个非线性激活函数，位于模型的输入和输出之间，以引入非线性。
+1.  ReLU 是一个非线性激活函数，位于模型的输入和输出之间，以引入非线性。
 
-1.  128个特征输入到线性层，输出128个特征。
+1.  128 个特征输入到线性层，输出 128 个特征。
 
-1.  另一个ReLU激活函数
+1.  另一个 ReLU 激活函数
 
-1.  线性层的输入为128个特征，输出为10个特征（我们的数据集标签只有10个标签）。
+1.  线性层的输入为 128 个特征，输出为 10 个特征（我们的数据集标签只有 10 个标签）。
 
 最后，前向函数用于模型的实际输入过程。接下来，模型还需要一个损失函数和优化函数。
 
@@ -230,7 +230,7 @@ def test(dataloader, model, loss_fn):
     print(f"Test Error: \n Accuracy: {(100*correct):>0.1f}%, Avg loss: {test_loss:>2f} \n")
 ```
 
-现在我们准备好运行模型训练了。我们需要决定模型要运行多少个epoch（迭代次数）。在这个示例中，我们设定为运行五次。
+现在我们准备好运行模型训练了。我们需要决定模型要运行多少个 epoch（迭代次数）。在这个示例中，我们设定为运行五次。
 
 ```py
 epoch = 5
@@ -241,31 +241,31 @@ for i in range(epoch):
 print("Done!")
 ```
 
-![深度学习库简介：PyTorch和Lighting AI](../Images/a2376135f7b6ed629ed26dea0ac08e4f.png)
+![深度学习库简介：PyTorch 和 Lighting AI](img/a2376135f7b6ed629ed26dea0ac08e4f.png)
 
 现在模型已经完成训练，可以用于任何图像预测活动。结果可能会有所不同，因此请期待与上述图片不同的结果。
 
-这只是PyTorch可以做的一些事情，但你可以看到，使用PyTorch构建模型很简单。如果你对预训练模型感兴趣，PyTorch有一个你可以访问的[hub](https://pytorch.org/hub/)。
+这只是 PyTorch 可以做的一些事情，但你可以看到，使用 PyTorch 构建模型很简单。如果你对预训练模型感兴趣，PyTorch 有一个你可以访问的[hub](https://pytorch.org/hub/)。
 
 # Lighting AI
 
-[Lighting AI](https://lightning.ai/)是一家提供各种产品的公司，旨在缩短训练PyTorch深度学习模型的时间并简化过程。他们的一个开源产品是[PyTorch Lighting](https://lightning.ai/pytorch-lightning)，这是一个提供训练和部署PyTorch模型框架的库。
+[Lighting AI](https://lightning.ai/)是一家提供各种产品的公司，旨在缩短训练 PyTorch 深度学习模型的时间并简化过程。他们的一个开源产品是[PyTorch Lighting](https://lightning.ai/pytorch-lightning)，这是一个提供训练和部署 PyTorch 模型框架的库。
 
-Lighting提供了一些功能，包括代码灵活性、无需样板代码、最小化API以及改进的团队协作。Lighting还提供了多GPU利用和快速、低精度训练等功能。这使得Lighting成为开发我们PyTorch模型的一个很好的替代选择。
+Lighting 提供了一些功能，包括代码灵活性、无需样板代码、最小化 API 以及改进的团队协作。Lighting 还提供了多 GPU 利用和快速、低精度训练等功能。这使得 Lighting 成为开发我们 PyTorch 模型的一个很好的替代选择。
 
-让我们试试用Lighting进行模型开发。首先，我们需要安装这个包。
+让我们试试用 Lighting 进行模型开发。首先，我们需要安装这个包。
 
 ```py
 pip install lightning
 ```
 
-安装了Lighting后，我们还将安装另一个Lighting AI产品，名为[TorchMetrics](https://lightning.ai/torchmetrics)，以简化指标选择。
+安装了 Lighting 后，我们还将安装另一个 Lighting AI 产品，名为[TorchMetrics](https://lightning.ai/torchmetrics)，以简化指标选择。
 
 ```py
 pip install torchmetrics
 ```
 
-所有库都安装完成后，我们将尝试使用Lighting封装器开发与之前示例相同的模型。下面是开发模型的完整代码。
+所有库都安装完成后，我们将尝试使用 Lighting 封装器开发与之前示例相同的模型。下面是开发模型的完整代码。
 
 ```py
 import torch
@@ -324,9 +324,9 @@ class NNModel(pl.LightningModule):
         return loss
 ```
 
-让我们分析一下上面的代码。与我们之前开发的PyTorch模型的不同之处在于，NNModel类现在使用了LightingModule的子类。此外，我们使用TorchMetrics分配了准确性指标进行评估。然后，我们在类中添加了训练和测试步骤，并设置了优化函数。
+让我们分析一下上面的代码。与我们之前开发的 PyTorch 模型的不同之处在于，NNModel 类现在使用了 LightingModule 的子类。此外，我们使用 TorchMetrics 分配了准确性指标进行评估。然后，我们在类中添加了训练和测试步骤，并设置了优化函数。
 
-在所有模型设置完成后，我们将使用转换后的DataLoader对象运行模型训练。
+在所有模型设置完成后，我们将使用转换后的 DataLoader 对象运行模型训练。
 
 ```py
 # Create a PyTorch Lightning trainer
@@ -344,26 +344,26 @@ trainer.test(model, test_dl)
 print("Training Finish")
 ```
 
-![深度学习库简介：PyTorch和Lighting AI](../Images/87749cd3f95ff12d202df318f44ab167.png)
+![深度学习库简介：PyTorch 和 Lighting AI](img/87749cd3f95ff12d202df318f44ab167.png)
 
-使用Lighting库，我们可以轻松调整所需的结构。有关进一步阅读，你可以查看他们的[文档](https://lightning.ai/docs/pytorch/latest/)。
+使用 Lighting 库，我们可以轻松调整所需的结构。有关进一步阅读，你可以查看他们的[文档](https://lightning.ai/docs/pytorch/latest/)。
 
 # 结论
 
-PyTorch是一个用于开发深度学习模型的库，它为我们提供了一个简单的框架，以便访问许多高级API。Lightning AI 也支持这个库，提供了一个简化模型开发并增强开发灵活性的框架。本文介绍了这个库的功能以及简单的代码实现。
+PyTorch 是一个用于开发深度学习模型的库，它为我们提供了一个简单的框架，以便访问许多高级 API。Lightning AI 也支持这个库，提供了一个简化模型开发并增强开发灵活性的框架。本文介绍了这个库的功能以及简单的代码实现。
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**是一名数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 期间，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。
 
 ### 更多相关话题
 
-+   [入门PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
++   [入门 PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
 
-+   [免费使用Lightning AI Studio](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)
++   [免费使用 Lightning AI Studio](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)
 
-+   [Python数据清洗库简介](https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html)
++   [Python 数据清洗库简介](https://www.kdnuggets.com/2023/03/introduction-python-libraries-data-cleaning.html)
 
-+   [完全免费的PyTorch深度学习课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)
++   [完全免费的 PyTorch 深度学习课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)
 
-+   [使用PyTorch进行迁移学习的实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
++   [使用 PyTorch 进行迁移学习的实用指南](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
 
-+   [PyTorch还是TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)
++   [PyTorch 还是 TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)

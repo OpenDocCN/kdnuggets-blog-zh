@@ -1,8 +1,8 @@
-# AI和机器学习的数据结构入门指南
+# AI 和机器学习的数据结构入门指南
 
-> 原文：[https://www.kdnuggets.com/guide-data-structures-ai-and-machine-learning](https://www.kdnuggets.com/guide-data-structures-ai-and-machine-learning)
+> 原文：[`www.kdnuggets.com/guide-data-structures-ai-and-machine-learning`](https://www.kdnuggets.com/guide-data-structures-ai-and-machine-learning)
 
-![AI和机器学习的数据结构指南](../Images/54546439d60a71686a2119c44b07541a.png)
+![AI 和机器学习的数据结构指南](img/54546439d60a71686a2119c44b07541a.png)
 
 图片由作者创建
 
@@ -12,31 +12,31 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-数据结构在某种意义上是算法的构建块，对于任何AI或ML算法的有效运行至关重要。这些结构，虽然常被视为数据的简单容器，但实际上它们是非常丰富的工具，并且对算法的性能、效率和总体计算复杂度的影响远比人们所认为的要大。因此，选择数据结构是一个需要深思熟虑的任务，它可以决定数据处理的速度、ML模型的操作规模，甚至是特定计算问题的可行性。
+数据结构在某种意义上是算法的构建块，对于任何 AI 或 ML 算法的有效运行至关重要。这些结构，虽然常被视为数据的简单容器，但实际上它们是非常丰富的工具，并且对算法的性能、效率和总体计算复杂度的影响远比人们所认为的要大。因此，选择数据结构是一个需要深思熟虑的任务，它可以决定数据处理的速度、ML 模型的操作规模，甚至是特定计算问题的可行性。
 
-本文将介绍一些在AI和ML领域中重要的数据结构，旨在服务于从业者、学生以及AI和ML爱好者。我们希望通过撰写这篇文章，提供关于AI和ML领域中重要数据结构的一些知识，并提供如何有效使用这些结构以发挥最佳优势的指南。
+本文将介绍一些在 AI 和 ML 领域中重要的数据结构，旨在服务于从业者、学生以及 AI 和 ML 爱好者。我们希望通过撰写这篇文章，提供关于 AI 和 ML 领域中重要数据结构的一些知识，并提供如何有效使用这些结构以发挥最佳优势的指南。
 
-在逐一介绍这些数据结构时，将举例说明它们在AI和ML场景中的应用，每种结构都有其独特的优缺点。任何实现都会用Python给出，这是一种在数据科学领域中极受欢迎的语言，适用于AI和ML中的各种任务。掌握这些核心构建块对于数据科学家可能面临的各种任务至关重要：排序大型数据集、创建既快速又节省内存的高性能算法，以及以逻辑和高效的方式维护数据结构，仅举几例。
+在逐一介绍这些数据结构时，将举例说明它们在 AI 和 ML 场景中的应用，每种结构都有其独特的优缺点。任何实现都会用 Python 给出，这是一种在数据科学领域中极受欢迎的语言，适用于 AI 和 ML 中的各种任务。掌握这些核心构建块对于数据科学家可能面临的各种任务至关重要：排序大型数据集、创建既快速又节省内存的高性能算法，以及以逻辑和高效的方式维护数据结构，仅举几例。
 
-在从简单数组和动态数组的基础开始后，我们将继续讨论更高级的数据结构，如链表和二叉搜索树，最后介绍哈希表，这是一种非常有用的结构，并且学习投入的回报极高。我们将涵盖这些结构的机械生产，以及它们在AI和ML应用中的实际使用，这种理论与实践的结合为读者提供了决定哪种结构最适合特定问题的理解，并在强健的AI系统中实施这些结构。
+在从简单数组和动态数组的基础开始后，我们将继续讨论更高级的数据结构，如链表和二叉搜索树，最后介绍哈希表，这是一种非常有用的结构，并且学习投入的回报极高。我们将涵盖这些结构的机械生产，以及它们在 AI 和 ML 应用中的实际使用，这种理论与实践的结合为读者提供了决定哪种结构最适合特定问题的理解，并在强健的 AI 系统中实施这些结构。
 
-在本文中，我们将深入探讨对AI和机器学习至关重要的各种数据结构，从数组和动态数组开始。通过了解每种数据结构的特点、优点和局限性，实践者可以做出明智的选择，从而提升其AI系统的效率和可扩展性。
+在本文中，我们将深入探讨对 AI 和机器学习至关重要的各种数据结构，从数组和动态数组开始。通过了解每种数据结构的特点、优点和局限性，实践者可以做出明智的选择，从而提升其 AI 系统的效率和可扩展性。
 
 ## 1\. 数组与动态数组
 
-数组可能是计算机科学中最基本的数据结构，它是存储在相邻内存位置的同一类型元素的集合，允许直接随机访问每个元素。动态数组，如Python中的列表，基于简单数组，但添加了自动调整大小的功能，当元素添加或删除时会分配额外的内存。这种自动内存分配能力是动态数组的核心。数组最佳使用的一些基本建议可能包括数据的线性遍历问题或元素数量完全不波动的情况，例如机器学习算法可能处理的不可变数据集。
+数组可能是计算机科学中最基本的数据结构，它是存储在相邻内存位置的同一类型元素的集合，允许直接随机访问每个元素。动态数组，如 Python 中的列表，基于简单数组，但添加了自动调整大小的功能，当元素添加或删除时会分配额外的内存。这种自动内存分配能力是动态数组的核心。数组最佳使用的一些基本建议可能包括数据的线性遍历问题或元素数量完全不波动的情况，例如机器学习算法可能处理的不可变数据集。
 
 让我们首先讨论优点：
 
-+   通过索引轻松访问元素：快速检索操作，这在许多AI和ML场景中至关重要，因为时间效率是关键。
++   通过索引轻松访问元素：快速检索操作，这在许多 AI 和 ML 场景中至关重要，因为时间效率是关键。
 
 +   适用于已知或固定大小的问题：当元素数量是预先确定的或变化不频繁时效果最佳。
 
@@ -46,7 +46,7 @@
 
 +   插入和删除成本高（对于静态数组）：每次插入或删除可能需要移动元素，这在计算上是昂贵的。
 
-数组，可能因为它们易于理解和实用性，几乎无处不在计算机科学教育中；它们是自然的课堂主题。由于在从计算机内存位置访问随机元素时具有O(1)的时间复杂度，使得它们在运行时效率至上的系统中受到青睐。
+数组，可能因为它们易于理解和实用性，几乎无处不在计算机科学教育中；它们是自然的课堂主题。由于在从计算机内存位置访问随机元素时具有 O(1)的时间复杂度，使得它们在运行时效率至上的系统中受到青睐。
 
 在 ML 的世界里，数组和动态数组对于处理数据集以及通常安排特征向量和矩阵至关重要。像 NumPy 这样的高性能数值库使用数组与高效执行跨数据集任务的例程相结合，允许快速处理和转换训练模型所需的数值数据并进行预测。
 
@@ -317,11 +317,11 @@ else:
 
 哈希表通常在需要快速查找、插入和删除操作时使用，而不需要有序的数据。当通过键快速访问项是必要的，以使操作更加迅速时，它们特别有用。哈希表在基本操作上的常数时间复杂度特性使它们在需要高性能操作时非常有用，尤其是在时间至关重要的情况下。
 
-它们非常适合处理大量数据，因为它们提供了一种高速的数据查找方式，数据量增加时不会出现性能退化。AI通常需要处理大量数据，在这种情况下，哈希表用于检索和查找非常有意义。
+它们非常适合处理大量数据，因为它们提供了一种高速的数据查找方式，数据量增加时不会出现性能退化。AI 通常需要处理大量数据，在这种情况下，哈希表用于检索和查找非常有意义。
 
-在机器学习中，哈希表帮助对大型数据集合进行特征索引——在预处理和模型训练中，通过哈希表促进了快速访问和数据操作。它们还可以使某些算法更高效——在某些情况下，在k最近邻计算中，它们可以存储已经计算的距离，并从哈希表中调用这些距离，以加快大数据集计算的速度。
+在机器学习中，哈希表帮助对大型数据集合进行特征索引——在预处理和模型训练中，通过哈希表促进了快速访问和数据操作。它们还可以使某些算法更高效——在某些情况下，在 k 最近邻计算中，它们可以存储已经计算的距离，并从哈希表中调用这些距离，以加快大数据集计算的速度。
 
-在Python中，字典类型是哈希表的一种实现。如何使用Python字典以及处理冲突的策略将在下文中解释：
+在 Python 中，字典类型是哈希表的一种实现。如何使用 Python 字典以及处理冲突的策略将在下文中解释：
 
 ```py
 # Creating a hash table using a dictionary
@@ -351,22 +351,22 @@ del hash_table['key2']
 
 ## 结论
 
-对支撑AI和机器学习模型的一些数据结构进行调查，可以让我们了解这些相对简单的基础技术块的能力。数组的固有线性、链表的适应性、树的层次组织以及哈希表的O(1)查找时间各自提供了不同的好处。这种理解可以帮助工程师更好地利用这些结构——不仅在他们组建的机器学习模型和训练集里，而且在他们选择和实施的推理过程中。
+对支撑 AI 和机器学习模型的一些数据结构进行调查，可以让我们了解这些相对简单的基础技术块的能力。数组的固有线性、链表的适应性、树的层次组织以及哈希表的 O(1)查找时间各自提供了不同的好处。这种理解可以帮助工程师更好地利用这些结构——不仅在他们组建的机器学习模型和训练集里，而且在他们选择和实施的推理过程中。
 
-精通与机器学习和AI相关的基本数据结构是一项具有实际意义的技能。有很多地方可以学习这一技能，从大学到研讨会再到在线课程。即使是开源代码也可以是熟悉学科工具和最佳实践的重要资产。处理数据结构的实际能力不容忽视。因此，对今天、明天以及未来的数据科学家和AI工程师们：实践、实验，并从可用的数据结构材料中学习。
+精通与机器学习和 AI 相关的基本数据结构是一项具有实际意义的技能。有很多地方可以学习这一技能，从大学到研讨会再到在线课程。即使是开源代码也可以是熟悉学科工具和最佳实践的重要资产。处理数据结构的实际能力不容忽视。因此，对今天、明天以及未来的数据科学家和 AI 工程师们：实践、实验，并从可用的数据结构材料中学习。
 
-[](https://www.linkedin.com/in/mattmayo13/)****[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的贡献编辑，Matthew致力于使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法和探索新兴AI。他的使命是使数据科学社区的知识民主化。Matthew从6岁起就开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)****[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的贡献编辑，Matthew 致力于使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法和探索新兴 AI。他的使命是使数据科学社区的知识民主化。Matthew 从 6 岁起就开始编程。
 
 ### 更多相关话题
 
-+   [OpenAI API初学者指南：你的易于跟随的入门指南](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)
++   [OpenAI API 初学者指南：你的易于跟随的入门指南](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)
 
 +   [超级学习指南：免费的算法与数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)
 
-+   [Python基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
++   [Python 基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
 
-+   [5步开始学习Python数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
++   [5 步开始学习 Python 数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
 
-+   [AI和机器学习职业入门指南](https://www.kdnuggets.com/beginners-guide-to-careers-in-ai-and-machine-learning)
++   [AI 和机器学习职业入门指南](https://www.kdnuggets.com/beginners-guide-to-careers-in-ai-and-machine-learning)
 
-+   [如何像老板一样进行MLOps：无泪机器学习指南](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)
++   [如何像老板一样进行 MLOps：无泪机器学习指南](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)

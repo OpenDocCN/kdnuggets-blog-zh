@@ -1,8 +1,8 @@
 # 如何将 JSON 数据转换为 Pandas DataFrame
 
-> 原文：[https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas`](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)
 
-![如何将 JSON 数据转换为 Pandas DataFrame](../Images/fa74b95a9eefac11201e50b260ab9d9f.png)
+![如何将 JSON 数据转换为 Pandas DataFrame](img/fa74b95a9eefac11201e50b260ab9d9f.png)
 
 图片由作者提供 | DALLE-3 和 Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -87,7 +87,7 @@ df
 
 **输出：**
 
-![json.load() 输出](../Images/d6a0bc76237fccb0517b96e06c256f35.png)
+![json.load() 输出](img/d6a0bc76237fccb0517b96e06c256f35.png)
 
 在评论列中，你可以看到整个字典。因此，如果你希望输出显示正确，你必须手动处理嵌套结构。这可以通过以下方法完成：
 
@@ -110,17 +110,17 @@ for review in book['reviews']
 
 **更新后的输出：**
 
-![json.load() 输出](../Images/71a41ceca3f53ee5d93f7cb39d2a0373.png)
+![json.load() 输出](img/71a41ceca3f53ee5d93f7cb39d2a0373.png)
 
 在这里，我们使用列表推导式创建一个平坦的字典列表，其中每个字典包含书籍信息和相应的评论。然后，我们使用此数据创建 Pandas DataFrame。
 
-但这种方法的问题在于，它需要更多的手动工作来管理JSON数据的嵌套结构。那么，现在怎么办？我们还有其他选项吗？
+但这种方法的问题在于，它需要更多的手动工作来管理 JSON 数据的嵌套结构。那么，现在怎么办？我们还有其他选项吗？
 
-完全正确！我的意思是，来吧。考虑到我们已经进入21世纪，面对没有解决方案的问题似乎不切实际。让我们看看另一种方法。
+完全正确！我的意思是，来吧。考虑到我们已经进入 21 世纪，面对没有解决方案的问题似乎不切实际。让我们看看另一种方法。
 
-## 方法2（推荐）：使用`json_normalize()`函数
+## 方法 2（推荐）：使用`json_normalize()`函数
 
-Pandas库中的`json_normalize()`函数是管理嵌套JSON数据的更好方法。它会自动将JSON数据的嵌套结构展平，从而创建一个DataFrame。让我们看一下代码：
+Pandas 库中的`json_normalize()`函数是管理嵌套 JSON 数据的更好方法。它会自动将 JSON 数据的嵌套结构展平，从而创建一个 DataFrame。让我们看一下代码：
 
 ```py
 import pandas as pd
@@ -145,23 +145,23 @@ df
 
 **输出：**
 
-![json.load() 输出](../Images/635999752d1f4cf50ebdfcd910803e24.png)
+![json.load() 输出](img/635999752d1f4cf50ebdfcd910803e24.png)
 
 `json_normalize()`函数接受以下参数：
 
-+   **数据：** 输入数据，可以是字典的列表或单个字典。在这种情况下，它是从JSON文件加载的数据字典。
++   **数据：** 输入数据，可以是字典的列表或单个字典。在这种情况下，它是从 JSON 文件加载的数据字典。
 
-+   **record_path：** JSON数据中要规范化的记录路径。在这种情况下，它是'reviews'键。
++   **record_path：** JSON 数据中要规范化的记录路径。在这种情况下，它是'reviews'键。
 
-+   **元数据：** 需要包括在从JSON文档规范化输出中的附加字段。在这种情况下，我们使用了'title'和'author'字段。请注意，元数据中的列通常出现在最后。这就是该函数的工作方式。就分析而言，这并不重要，但出于某种神奇的原因，你希望这些列出现在前面。抱歉，你得手动处理它们。
++   **元数据：** 需要包括在从 JSON 文档规范化输出中的附加字段。在这种情况下，我们使用了'title'和'author'字段。请注意，元数据中的列通常出现在最后。这就是该函数的工作方式。就分析而言，这并不重要，但出于某种神奇的原因，你希望这些列出现在前面。抱歉，你得手动处理它们。
 
 +   **错误：** 错误处理策略，可以是'ignore'、'raise'或'warn'。我们将其设置为'res'，因此如果在规范化过程中出现任何错误，它将引发异常。
 
 ## 总结
 
-这两种方法各有优缺点，选择哪种方法取决于JSON数据的结构和复杂性。如果JSON数据有非常嵌套的结构，`json_normalize()`函数可能是最合适的选择，因为它可以自动处理嵌套数据。如果JSON数据相对简单和扁平，`pd.read_json()`函数可能是最简单直接的方法。
+这两种方法各有优缺点，选择哪种方法取决于 JSON 数据的结构和复杂性。如果 JSON 数据有非常嵌套的结构，`json_normalize()`函数可能是最合适的选择，因为它可以自动处理嵌套数据。如果 JSON 数据相对简单和扁平，`pd.read_json()`函数可能是最简单直接的方法。
 
-处理大型JSON文件时，考虑内存使用和性能至关重要，因为将整个文件加载到内存中可能行不通。因此，你可能需要考虑其他选项，如流式传输数据、延迟加载或使用更节省内存的格式，如Parquet。
+处理大型 JSON 文件时，考虑内存使用和性能至关重要，因为将整个文件加载到内存中可能行不通。因此，你可能需要考虑其他选项，如流式传输数据、延迟加载或使用更节省内存的格式，如 Parquet。
 
 **[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal 是一位机器学习工程师和技术作家，对数据科学以及人工智能与医学的交叉领域充满深厚的热情。她共同编写了电子书《利用 ChatGPT 提高生产力》。作为 2022 年亚太地区 Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为 Teradata 技术多样性学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 是变革的热心倡导者，她创办了 FEMCodes，以赋能女性进入 STEM 领域。
 

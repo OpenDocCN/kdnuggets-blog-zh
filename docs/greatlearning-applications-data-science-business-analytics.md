@@ -1,10 +1,10 @@
 # 数据科学和商业分析的应用
 
-> 原文：[https://www.kdnuggets.com/2020/12/greatlearning-applications-data-science-business-analytics.html](https://www.kdnuggets.com/2020/12/greatlearning-applications-data-science-business-analytics.html)
+> 原文：[`www.kdnuggets.com/2020/12/greatlearning-applications-data-science-business-analytics.html`](https://www.kdnuggets.com/2020/12/greatlearning-applications-data-science-business-analytics.html)
 
 赞助文章。
 
-[![图片](../Images/8b878beaa6080cb3fb87408ac1b8c278.png)](https://bit.ly/2IOJJOO-great-P01215)
+![图片](https://bit.ly/2IOJJOO-great-P01215)
 
 最近，大量企业开始意识到数据科学的潜力。他们正在利用与数据相关的最新技术解决各种问题并获得战略优势。可以预期，数据科学家将塑造未来商业运作的方式。物联网、大数据、算法经济学、云计算已经获得了广泛关注，因为全球的企业使用它们来保持竞争优势。在这一过渡中，自动化和分析发挥了关键作用，并继续塑造商业实践。商业分析和数据科学应用广泛存在。所以让我们详细了解它们。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -32,7 +32,7 @@
 
 **3\. 虚拟助理：**
 
-随着技术的发展，未来患者可以通过虚拟方式咨询医生将成为可能。通过优化临床流程并将所有内容整合到移动应用中，患者可以获得更有效的解决方案。在人工智能的帮助下，移动应用可以通过聊天机器人协助患者。像Ada和Your. MD这样的热门应用已经在做这件事。用户只需提出关于症状的问题，即可收到关于原因和治疗的答案。这还可以通过提醒患者按时服药来帮助他们。总的来说，它为希望过上健康生活的患者提供了极好的支持。
+随着技术的发展，未来患者可以通过虚拟方式咨询医生将成为可能。通过优化临床流程并将所有内容整合到移动应用中，患者可以获得更有效的解决方案。在人工智能的帮助下，移动应用可以通过聊天机器人协助患者。像 Ada 和 Your. MD 这样的热门应用已经在做这件事。用户只需提出关于症状的问题，即可收到关于原因和治疗的答案。这还可以通过提醒患者按时服药来帮助他们。总的来说，它为希望过上健康生活的患者提供了极好的支持。
 
 **4\. 定向广告：**
 
@@ -58,9 +58,9 @@
 
 ### **薪资水平和数据科学与商业分析专业人员的需求**
 
-[![图片](../Images/57ec982d10676a810fa6b0c3c8643385.png)](https://bit.ly/2IOJJOO-great-P01215)
+![图片](https://bit.ly/2IOJJOO-great-P01215)
 
-随着技术的发展，企业变得越来越具有技术敏锐性。大数据、人工智能、机器学习等已经在行业中掀起了波澜。近年来，IT领域经历了显著的增长。随着更多的数据科学公司利用不同的技术来获得更好的利润，这种增长将会继续。 [**数据科学和商业分析**](https://www.mygreatlearning.com/us/data-science/courses/pg-program-data-science-business-analytics-course)领域也不甘落后。在未来几年，对熟练专业人员的需求只会增加。目前，需求与供应之间的差距巨大，导致企业无法充分利用这些技术。
+随着技术的发展，企业变得越来越具有技术敏锐性。大数据、人工智能、机器学习等已经在行业中掀起了波澜。近年来，IT 领域经历了显著的增长。随着更多的数据科学公司利用不同的技术来获得更好的利润，这种增长将会继续。 [**数据科学和商业分析**](https://www.mygreatlearning.com/us/data-science/courses/pg-program-data-science-business-analytics-course)领域也不甘落后。在未来几年，对熟练专业人员的需求只会增加。目前，需求与供应之间的差距巨大，导致企业无法充分利用这些技术。
 
 根据 payscale.com 的数据，印度数据科学家职位的中位薪资为 7 万印尼卢比。入门级专业人员的薪资预计为 5.5 万印尼卢比，而经验丰富的专业人员的年薪大约为 18 万印尼卢比。对于商业分析师来说，情况略有不同。payscale.com 的数据显示，入门级商业分析师的薪资约为 3.5 万印尼卢比。中级专业人员的年薪约为 8.5 万印尼卢比，而经验丰富的分析师年薪约为 12 万印尼卢比。这些数据仅供参考，因为薪资取决于多种因素，包括地点、公司类型等。
 

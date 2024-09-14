@@ -1,8 +1,8 @@
 # 6 本每个数据科学家都应随时备齐的书籍
 
-> 原文：[https://www.kdnuggets.com/2017/10/6-books-every-data-scientist-should-keep-nearby.html](https://www.kdnuggets.com/2017/10/6-books-every-data-scientist-should-keep-nearby.html)
+> 原文：[`www.kdnuggets.com/2017/10/6-books-every-data-scientist-should-keep-nearby.html`](https://www.kdnuggets.com/2017/10/6-books-every-data-scientist-should-keep-nearby.html)
 
-![书籍！](../Images/d3e70d53e3a6910d71c510081332c99a.png)
+![书籍！](img/d3e70d53e3a6910d71c510081332c99a.png)
 
 机器学习和数据科学是一组复杂且相互关联的概念。为了跟上，你需要准备花时间进行研究和更新知识。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 组织中的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 组织中的工作
 
 * * *
 
@@ -72,7 +72,7 @@ Apache Hadoop 是用于处理和管理大量数据的主要框架。任何从事
 
 [*拐点：云计算、移动性、应用程序和数据的融合将如何塑造商业未来*](https://www.scottstawski.com/publications)| $40+
 
-**6\.** ***统计学习导论：R语言应用，*** **由加雷斯·詹姆斯等人著**
+**6\.** ***统计学习导论：R 语言应用，*** **由加雷斯·詹姆斯等人著**
 
 统计学习及相关方法在数据科学工作中是必不可少的。这本教科书旨在帮助任何人，从本科生到博士生，都能理解这些概念。
 
@@ -86,11 +86,11 @@ Apache Hadoop 是用于处理和管理大量数据的主要框架。任何从事
 
 **相关：**
 
-+   [进入机器学习职业前需阅读的 5 本电子书](/2016/10/5-free-ebooks-machine-learning-career.html)
++   进入机器学习职业前需阅读的 5 本电子书
 
-+   [Python 突然超级受欢迎的 6 个原因](/2017/07/6-reasons-python-suddenly-super-popular.html)
++   Python 突然超级受欢迎的 6 个原因
 
-+   [4 个被机器学习和机器人技术改变的行业](/2017/08/4-industries-transformed-machine-learning-robotics.html)
++   4 个被机器学习和机器人技术改变的行业
 
 ### 更多相关主题
 

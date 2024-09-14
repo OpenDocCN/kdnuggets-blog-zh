@@ -1,10 +1,10 @@
-# 机器学习和机器人技术正在改变的4个行业
+# 机器学习和机器人技术正在改变的 4 个行业
 
-> 原文：[https://www.kdnuggets.com/2017/08/4-industries-transformed-machine-learning-robotics.html](https://www.kdnuggets.com/2017/08/4-industries-transformed-machine-learning-robotics.html)
+> 原文：[`www.kdnuggets.com/2017/08/4-industries-transformed-machine-learning-robotics.html`](https://www.kdnuggets.com/2017/08/4-industries-transformed-machine-learning-robotics.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) comments
 
-![4 industries](../Images/4080be1051a90b41f6a9aa2feaba2084.png)
+![4 industries](img/4080be1051a90b41f6a9aa2feaba2084.png)
 
 机器人技术、人工智能、机器学习和大数据平台密不可分。尤其在现代社会，这些技术共同工作的情况非常普遍。每项技术也在多方面改进并彻底改变了世界。
 
@@ -20,15 +20,15 @@
 
 最后，自动化系统的增长速度不如其他技术，但它仍然变得越来越可行。这包括扫描硬件和系统以发现疾病或不健康的身体部位，以及用于进行手术的机器人。一些工具被设计用于执行精确的操作，而不需要人工操作，因为它们更为精准。
 
-外科医生[接受](https://idataresearch.com/product/global-market-report-for-surgical-robotics-systems-2017-medcore/)新技术的速度较慢，但市场在不断增长。过去几年，FDA批准了几种新系统，这表明新技术的出现。
+外科医生[接受](https://idataresearch.com/product/global-market-report-for-surgical-robotics-systems-2017-medcore/)新技术的速度较慢，但市场在不断增长。过去几年，FDA 批准了几种新系统，这表明新技术的出现。
 
 **2\. 制造行业**
 
-现代和工业制造业是最早利用机器人和自动化系统的行业之一，[早在1960年代就开始了](https://www.robotics.org/joseph-engelberger/unimate.cfm)。可以想见，自那时以来，这项技术已经取得了显著的进步。
+现代和工业制造业是最早利用机器人和自动化系统的行业之一，[早在 1960 年代就开始了](https://www.robotics.org/joseph-engelberger/unimate.cfm)。可以想见，自那时以来，这项技术已经取得了显著的进步。
 
 当机器人首次出现时，它们被用于自动化简单、枯燥的任务，这些任务对人类来说既无聊又危险。许多系统与人类协作工作，并且仍需不断监督以确保其有效运作。然而，今天，制造业中使用的机器人和自动化系统往往比[新工人或未熟练工人更高效](https://techcrunch.com/2016/10/09/industrial-robots-will-replace-manufacturing-jobs-and-thats-a-good-thing/)。
 
-当与人工智能和机器学习平台结合使用时，机器人技术可以变得更加先进，甚至智能。它们还显著降低了成本。每1,000名工人中，[一个机器人](https://www.sciencealert.com/new-statistics-reveal-the-scale-of-robots-replacing-human-workers)可以取代四分之一到一半的工资。
+当与人工智能和机器学习平台结合使用时，机器人技术可以变得更加先进，甚至智能。它们还显著降低了成本。每 1,000 名工人中，[一个机器人](https://www.sciencealert.com/new-statistics-reveal-the-scale-of-robots-replacing-human-workers)可以取代四分之一到一半的工资。
 
 **3\. 金融行业**
 
@@ -42,9 +42,9 @@
 
 人工智能和机器学习在零售和消费品行业的进步中责无旁贷。特别是在营销领域，它们可以帮助分析和预测客户行为，以确定可行的促销活动、广告甚至产品渠道。
 
-当然，人工智能和机器学习是行业中最大的进步之一的幕后推手，这一进步目前正经历着巨大的增长：聊天机器人。聊天机器人是一种现代沟通方式，为客户提供24/7的支持。它们可以通过一对一的消息平台进行联系，机器人可以回答问题，处理个人账户详情，提供推荐，甚至像真正的人一样聊天。
+当然，人工智能和机器学习是行业中最大的进步之一的幕后推手，这一进步目前正经历着巨大的增长：聊天机器人。聊天机器人是一种现代沟通方式，为客户提供 24/7 的支持。它们可以通过一对一的消息平台进行联系，机器人可以回答问题，处理个人账户详情，提供推荐，甚至像真正的人一样聊天。
 
-一些优秀的聊天机器人或AI平台包括苹果的Siri和亚马逊的Alexa，但这些平台都是专门为消费者家庭使用设计的。你会在零售网站上遇到提供聊天服务的客户服务聊天机器人。
+一些优秀的聊天机器人或 AI 平台包括苹果的 Siri 和亚马逊的 Alexa，但这些平台都是专门为消费者家庭使用设计的。你会在零售网站上遇到提供聊天服务的客户服务聊天机器人。
 
 **更先进的技术即将到来**
 
@@ -56,21 +56,21 @@
 
 **相关**:
 
-+   [6个原因说明为什么Python突然变得如此受欢迎](/2017/07/6-reasons-python-suddenly-super-popular.html)
++   6 个原因说明为什么 Python 突然变得如此受欢迎
 
-+   [AI的真正“恐惧”是自动化泛滥](/2017/06/real-fear-ai-automation-inundation.html)
++   AI 的真正“恐惧”是自动化泛滥
 
-+   [人工智能和机器学习能做什么——以及不能做什么](/2017/08/rapidminer-ai-machine-learning-can-do.html)
++   人工智能和机器学习能做什么——以及不能做什么
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -80,10 +80,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [90亿美元的AI失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

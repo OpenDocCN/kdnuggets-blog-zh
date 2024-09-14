@@ -1,8 +1,8 @@
 # 数据科学家简明易懂的面向对象编程解释
 
-> 原文：[https://www.kdnuggets.com/2020/12/object-oriented-programming-explained-simply-data-scientists.html](https://www.kdnuggets.com/2020/12/object-oriented-programming-explained-simply-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/12/object-oriented-programming-explained-simply-data-scientists.html`](https://www.kdnuggets.com/2020/12/object-oriented-programming-explained-simply-data-scientists.html)
 
-[评论](#comments)![图示](../Images/96e2f31dc1eaa9686d222cb562061d96.png)
+评论![图示](img/96e2f31dc1eaa9686d222cb562061d96.png)
 
 图片由[Jelleke Vanooteghem](https://unsplash.com/@ilumire?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上提供
 
@@ -10,41 +10,41 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
-面向对象编程（OOP）对于初学者来说可能是一个难以理解的概念。这主要是因为很多地方并没有以正确的方式解释它。通常，很多书籍从讲解OOP的三个重要术语开始——**封装、继承和多态**。但当书本能够解释这些主题时，任何刚开始学习的人可能已经感到迷茫了。
+面向对象编程（OOP）对于初学者来说可能是一个难以理解的概念。这主要是因为很多地方并没有以正确的方式解释它。通常，很多书籍从讲解 OOP 的三个重要术语开始——**封装、继承和多态**。但当书本能够解释这些主题时，任何刚开始学习的人可能已经感到迷茫了。
 
-因此，我考虑了让这个概念对其他程序员、数据科学家和Python爱好者更容易理解的方法。我打算通过去掉所有术语，并通过一些例子来实现。我会从解释类和对象开始。然后我会解释在各种情况下类为什么重要以及它们如何解决一些基本问题。这样，读者也能在文章结束时理解这三个重要术语。
+因此，我考虑了让这个概念对其他程序员、数据科学家和 Python 爱好者更容易理解的方法。我打算通过去掉所有术语，并通过一些例子来实现。我会从解释类和对象开始。然后我会解释在各种情况下类为什么重要以及它们如何解决一些基本问题。这样，读者也能在文章结束时理解这三个重要术语。
 
-在这个名为[**Python Shorts**](https://towardsdatascience.com/tagged/python-shorts)的系列帖子中，我将解释一些由Python提供的简单但非常有用的构造、一些必备技巧以及我在数据科学工作中经常想到的一些使用案例。
+在这个名为[**Python Shorts**](https://towardsdatascience.com/tagged/python-shorts)的系列帖子中，我将解释一些由 Python 提供的简单但非常有用的构造、一些必备技巧以及我在数据科学工作中经常想到的一些使用案例。
 
 ***这篇文章是以通俗的方式解释面向对象编程。***
 
 ### 什么是对象和类？
 
-简单来说，Python中的一切都是对象，而类是对象的蓝图。所以当我们写：
+简单来说，Python 中的一切都是对象，而类是对象的蓝图。所以当我们写：
 
 ```py
 a = 2
 b = "Hello!"
 ```
 
-我们创建了一个值为2的`int`类对象`a`，和一个值为“Hello！”的`str`类对象`b`。在某种程度上，当我们使用数字或字符串时，这两个特定的类是默认提供给我们的。
+我们创建了一个值为 2 的`int`类对象`a`，和一个值为“Hello！”的`str`类对象`b`。在某种程度上，当我们使用数字或字符串时，这两个特定的类是默认提供给我们的。
 
-除此之外，我们中的许多人实际上在使用类和对象时甚至没有意识到这一点。例如，当你使用任何Scikit-Learn模型时，你实际上是在使用一个类。
+除此之外，我们中的许多人实际上在使用类和对象时甚至没有意识到这一点。例如，当你使用任何 Scikit-Learn 模型时，你实际上是在使用一个类。
 
 ```py
 clf = RandomForestClassifier()
 clf.fit(X,y)
 ```
 
-在这里，你的分类器`clf`是一个对象，而fit是定义在类`RandomForestClassifier`中的一个方法。
+在这里，你的分类器`clf`是一个对象，而 fit 是定义在类`RandomForestClassifier`中的一个方法。
 
 ### 但是为什么要使用类？
 
@@ -52,7 +52,7 @@ clf.fit(X,y)
 
 是的，你可以。但是，与函数相比，类确实为你提供了很多强大的功能。举个例子，`str` 类为对象定义了很多函数，我们可以通过按下 tab 键直接访问这些函数。虽然也可以编写所有这些函数，但那样的话，它们就不会通过按下 tab 键直接使用。
 
-![Image for post](../Images/f2e2a1c598d8cac648f0e27713f03d01.png)
+![Image for post](img/f2e2a1c598d8cac648f0e27713f03d01.png)
 
 类的这一特性被称为**封装**。从 [维基百科](https://en.wikipedia.org/wiki/Encapsulation_(computer_programming)) —— ***封装*** 指的是将数据与操作这些数据的方法捆绑在一起，或者限制对某些对象组件的直接访问。
 
@@ -111,25 +111,25 @@ myAccount = Account("Rahul",100)
 
 我们可以通过以下方式访问这个账户的数据：
 
-![Image for post](../Images/ab17d66ae51505be847d46b6329a25ef.png)
+![Image for post](img/ab17d66ae51505be847d46b6329a25ef.png)
 
 但是，这些属性 `balance` 和 `account_name` 是如何已经分别设置为 100 和 “Rahul” 的？我们从未调用 `__init__` 方法，那么为什么对象会获得这些属性？答案是 `__init__` 是一个**魔法方法**（还有许多其他魔法方法，我会在下一个关于魔法方法的帖子中扩展），每当我们创建对象时它都会运行。所以当我们创建 `myAccount` 时，它会自动运行函数 `__init__`。
 
 现在我们了解了`__init__`，让我们尝试向账户中存入一些钱。我们可以通过以下方式实现：
 
-![帖子图片](../Images/7d8f316ef9630bcc6180621607155e23.png)
+![帖子图片](img/7d8f316ef9630bcc6180621607155e23.png)
 
 我们的余额上升到 200。但是你有没有注意到，我们的函数 `deposit` 需要两个参数，即 `self` 和 `amount`，但我们只提供了一个，仍然能正常工作。
 
 **那么，`**self**`** 是什么？** 我喜欢通过以不同的方式调用相同的函数来解释 self。下面，我调用了属于 `account` 类的同一个函数 deposit，并为其提供了 `myAccount` 对象和 `amount`。现在，函数接受两个参数，这是它应该有的。
 
-![帖子图片](../Images/e6fc0a58d32132bee7048b4e8e53d64d.png)
+![帖子图片](img/e6fc0a58d32132bee7048b4e8e53d64d.png)
 
 我们的 `myAccount` 余额如预期增加了 100。所以我们调用的是同一个函数。现在，这只有在 `self` 和 `myAccount` 完全相同的对象时才会发生。当我调用 `myAccount.deposit(100)` 时，Python 将相同的对象 `myAccount` 作为参数 `self` 提供给函数调用。这就是为什么函数定义中的 `self.balance` 实际上指代 `myAccount.balance`。
 
 ### 但仍然存在一些问题
 
-![图示](../Images/cf04bc78e16f04728298a8bdfeb0e9d0.png)
+![图示](img/cf04bc78e16f04728298a8bdfeb0e9d0.png)
 
 图片由[Volodymyr Hryshchenko](https://unsplash.com/@lunarts?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -201,39 +201,39 @@ class myNeuralNet(nn.Module):    def __init__(self):
 
 多态在 Python 中的另一种实现方式是使用`isinstance`方法。使用上面的类，如果我们这样做：
 
-![帖子图片](../Images/38955b28a6cae5d8f7f03bb8724618cf.png)
+![帖子图片](img/38955b28a6cae5d8f7f03bb8724618cf.png)
 
 因此，对象`mySquare`的实例类型是`Square`，
 
 `Rectangle` 和 `Shape`。因此对象是多态的。这具有许多优良的属性。例如，我们可以创建一个与`Shape`对象一起工作的函数，它将完全适用于任何派生类（`Square`、`Circle`、`Rectangle`等），通过利用多态。
 
-![帖子图片](../Images/479a55964aa987ef1806f878a927ac55.png)
+![帖子图片](img/479a55964aa987ef1806f878a927ac55.png)
 
 ### 更多信息：
 
-为什么我们会看到以**单下划线和双下划线**开头的函数名或属性名？有时我们想让类中的属性和函数保持私有，不让用户看到它们。这是**封装**的一部分，我们希望“*限制对对象某些组件的直接访问*”。例如，假设我们不想让用户在创建后看到我们iPhone的内存（RAM）。在这种情况下，我们通过在变量名中使用下划线来创建属性。
+为什么我们会看到以**单下划线和双下划线**开头的函数名或属性名？有时我们想让类中的属性和函数保持私有，不让用户看到它们。这是**封装**的一部分，我们希望“*限制对对象某些组件的直接访问*”。例如，假设我们不想让用户在创建后看到我们 iPhone 的内存（RAM）。在这种情况下，我们通过在变量名中使用下划线来创建属性。
 
-所以当我们以以下方式创建`iPhone`类时，你将无法在你的ipython笔记本中使用Tab访问你的`memory`或`privatefunc`，因为该属性现在被用_标记为私有。
+所以当我们以以下方式创建`iPhone`类时，你将无法在你的 ipython 笔记本中使用 Tab 访问你的`memory`或`privatefunc`，因为该属性现在被用 _ 标记为私有。
 
-![帖子图片](../Images/d1853feefd419827342a8318a29d0cd4.png)
+![帖子图片](img/d1853feefd419827342a8318a29d0cd4.png)
 
 但你仍然可以通过（虽然不推荐）更改变量值。
 
-![帖子图片](../Images/5bee417978dd83037a2eddd0405ddaef.png)
+![帖子图片](img/5bee417978dd83037a2eddd0405ddaef.png)
 
-你也可以使用方法_privatefunc，通过`myphone._privatefunc()`。如果你想避免这种情况，可以在变量名前使用双下划线。例如，`print(myphone.__memory)`的调用会引发错误。此外，你不能通过`myphone.__memory = 1`来更改对象的内部数据。
+你也可以使用方法 _privatefunc，通过`myphone._privatefunc()`。如果你想避免这种情况，可以在变量名前使用双下划线。例如，`print(myphone.__memory)`的调用会引发错误。此外，你不能通过`myphone.__memory = 1`来更改对象的内部数据。
 
-![帖子图片](../Images/c05f87c2f2ddd2dbfdb981150c7c9762.png)
+![帖子图片](img/c05f87c2f2ddd2dbfdb981150c7c9762.png)
 
 但如你所见，你可以在你的类定义中通过`setMemory`函数访问和修改这些`self.__memory`值。
 
 ### 结论
 
-![图示](../Images/7a29c9ef2303425720d307e8d75a9347.png)
+![图示](img/7a29c9ef2303425720d307e8d75a9347.png)
 
 照片由[Jeshoots.com](https://unsplash.com/@jeshoots?utm_source=medium&utm_medium=referral)拍摄，发布在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上
 
-我希望这对你理解类有所帮助。关于类的内容还有很多，我将在下一篇关于魔术方法的帖子中讨论。敬请关注。此外，总结一下，这篇文章中我们学习了OOP和创建类以及OOP的各种基础知识：
+我希望这对你理解类有所帮助。关于类的内容还有很多，我将在下一篇关于魔术方法的帖子中讨论。敬请关注。此外，总结一下，这篇文章中我们学习了 OOP 和创建类以及 OOP 的各种基础知识：
 
 +   **封装**：对象包含所有属于自己的数据。
 
@@ -265,33 +265,33 @@ class Sphere():
 
 我会把***答案放在这篇文章的评论中。***
 
-如果你想了解更多关于[Python](https://amzn.to/2XPSiiG)的知识，我推荐你查看来自密歇根大学的[**中级Python课程**](https://bit.ly/2XshreA)。千万不要错过。
+如果你想了解更多关于[Python](https://amzn.to/2XPSiiG)的知识，我推荐你查看来自密歇根大学的[**中级 Python 课程**](https://bit.ly/2XshreA)。千万不要错过。
 
-我将来也会写更多这样的文章。请告诉我你对这个系列的看法。关注我在[**Medium**](https://medium.com/@rahul_agarwal)上的动态，或订阅我的[**博客**](http://eepurl.com/dbQnuX)以获取相关信息。正如往常一样，我欢迎反馈和建设性的批评，可以通过Twitter联系我[@mlwhiz](https://twitter.com/MLWhiz)。
+我将来也会写更多这样的文章。请告诉我你对这个系列的看法。关注我在[**Medium**](https://medium.com/@rahul_agarwal)上的动态，或订阅我的[**博客**](http://eepurl.com/dbQnuX)以获取相关信息。正如往常一样，我欢迎反馈和建设性的批评，可以通过 Twitter 联系我[@mlwhiz](https://twitter.com/MLWhiz)。
 
 此外，小免责声明——这篇文章中可能包含一些关联链接到相关资源，因为分享知识从来不是一件坏事。
 
-**简介：[Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是WalmartLabs的高级统计分析师。关注他在Twitter上的动态[@mlwhiz](https://twitter.com/MLWhiz)。
+**简介：[Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是 WalmartLabs 的高级统计分析师。关注他在 Twitter 上的动态[@mlwhiz](https://twitter.com/MLWhiz)。
 
 [原文](https://towardsdatascience.com/object-oriented-programming-explained-simply-for-data-scientists-ce2c7b5db1d)。经授权转载。
 
 **相关：**
 
-+   [10个被低估的Python技能](/2020/10/10-underrated-python-skills.html)
++   10 个被低估的 Python 技能
 
-+   [数据科学家需要注意的6条建议](/2019/09/advice-data-scientists.html)
++   数据科学家需要注意的 6 条建议
 
-+   [每个数据科学家都必须知道的5种分类评估指标](/2019/10/5-classification-evaluation-metrics-every-data-scientist-must-know.html)
++   每个数据科学家都必须知道的 5 种分类评估指标
 
 ### 更多相关主题
 
-+   [成为一名出色的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名出色的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标后...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

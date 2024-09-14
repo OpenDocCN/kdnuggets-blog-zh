@@ -1,46 +1,46 @@
-# 利用Pandas AI进行数据分析
+# 利用 Pandas AI 进行数据分析
 
-> 原文：[https://www.kdnuggets.com/utilizing-pandas-ai-for-data-analysis](https://www.kdnuggets.com/utilizing-pandas-ai-for-data-analysis)
+> 原文：[`www.kdnuggets.com/utilizing-pandas-ai-for-data-analysis`](https://www.kdnuggets.com/utilizing-pandas-ai-for-data-analysis)
 
-你在使用Python的数据领域中是否很熟练？如果是的话，我敢打赌你们大多数人都使用Pandas进行数据处理。
+你在使用 Python 的数据领域中是否很熟练？如果是的话，我敢打赌你们大多数人都使用 Pandas 进行数据处理。
 
-如果你不知道，[Pandas](https://pandas.pydata.org/)是一个专门为数据分析和处理开发的开源Python软件包。它是使用最广泛的软件包之一，也是你在开始Python数据科学之旅时通常会学习的一个。
+如果你不知道，[Pandas](https://pandas.pydata.org/)是一个专门为数据分析和处理开发的开源 Python 软件包。它是使用最广泛的软件包之一，也是你在开始 Python 数据科学之旅时通常会学习的一个。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
-那么，Pandas AI是什么？我想你读这篇文章是因为你想了解它。
+那么，Pandas AI 是什么？我想你读这篇文章是因为你想了解它。
 
-好吧，正如你所知，我们正处在一个生成AI无处不在的时代。想象一下，如果你可以使用生成AI对你的数据进行数据分析，那将会容易很多。
+好吧，正如你所知，我们正处在一个生成 AI 无处不在的时代。想象一下，如果你可以使用生成 AI 对你的数据进行数据分析，那将会容易很多。
 
-这就是Pandas AI带来的效果。通过简单的提示，我们可以快速分析和处理数据集，而无需将数据发送到其他地方。
+这就是 Pandas AI 带来的效果。通过简单的提示，我们可以快速分析和处理数据集，而无需将数据发送到其他地方。
 
-本文将探讨如何利用Pandas AI进行数据分析任务。在文章中，我们将学习以下内容：
+本文将探讨如何利用 Pandas AI 进行数据分析任务。在文章中，我们将学习以下内容：
 
-+   Pandas AI设置
++   Pandas AI 设置
 
-+   使用Pandas AI进行数据探索
++   使用 Pandas AI 进行数据探索
 
-+   使用Pandas AI进行数据可视化
++   使用 Pandas AI 进行数据可视化
 
-+   Pandas AI高级用法
++   Pandas AI 高级用法
 
 如果你准备好了，就让我们开始吧！
 
-# Pandas AI设置
+# Pandas AI 设置
 
-[Pandas AI](https://github.com/Sinaptik-AI/pandas-ai)是一个Python软件包，它将大型语言模型（LLM）功能实现到Pandas API中。我们可以使用标准的Pandas API和生成AI增强功能，使Pandas成为一个对话工具。
+[Pandas AI](https://github.com/Sinaptik-AI/pandas-ai)是一个 Python 软件包，它将大型语言模型（LLM）功能实现到 Pandas API 中。我们可以使用标准的 Pandas API 和生成 AI 增强功能，使 Pandas 成为一个对话工具。
 
-我们主要想使用Pandas AI是因为该软件包提供的简单过程。该软件包可以使用简单的提示自动分析数据，而无需复杂的代码。
+我们主要想使用 Pandas AI 是因为该软件包提供的简单过程。该软件包可以使用简单的提示自动分析数据，而无需复杂的代码。
 
 介绍够了，让我们动手实践吧。
 
@@ -50,11 +50,11 @@
 pip install pandasai
 ```
 
-接下来，我们必须设置我们想用于Pandas AI的LLM。有几种选择，例如OpenAI GPT和HuggingFace。然而，本教程中我们将使用OpenAI GPT。
+接下来，我们必须设置我们想用于 Pandas AI 的 LLM。有几种选择，例如 OpenAI GPT 和 HuggingFace。然而，本教程中我们将使用 OpenAI GPT。
 
-将OpenAI模型设置到Pandas AI中是直接的，但你需要OpenAI API密钥。如果你没有，可以在他们的[网站](https://platform.openai.com/api-keys)上获取。
+将 OpenAI 模型设置到 Pandas AI 中是直接的，但你需要 OpenAI API 密钥。如果你没有，可以在他们的[网站](https://platform.openai.com/api-keys)上获取。
 
-如果一切准备就绪，让我们使用下面的代码设置Pandas AI LLM。
+如果一切准备就绪，让我们使用下面的代码设置 Pandas AI LLM。
 
 ```py
 from pandasai.llm import OpenAI
@@ -62,9 +62,9 @@ from pandasai.llm import OpenAI
 llm = OpenAI(api_token="Your OpenAI API Key")
 ```
 
-你现在准备好使用Pandas AI进行数据分析了。
+你现在准备好使用 Pandas AI 进行数据分析了。
 
-## 使用Pandas AI进行数据探索
+## 使用 Pandas AI 进行数据探索
 
 让我们从一个示例数据集开始，尝试使用 Pandas AI 进行数据探索。我将在这个示例中使用 Seaborn 包中的 Titanic 数据。
 
@@ -107,7 +107,7 @@ outlier_fare_data = response = df.chat("""Please provide me the data rows that
 contains outlier data based on fare column""")
 ```
 
-![利用 Pandas AI 进行数据分析](../Images/4815bf99ac81c749efd50cf50fdf1bb3.png)
+![利用 Pandas AI 进行数据分析](img/4815bf99ac81c749efd50cf50fdf1bb3.png)
 
 图片由作者提供
 
@@ -127,7 +127,7 @@ response = df.chat('Please provide me the fare data distribution visualization')
 response
 ```
 
-![利用 Pandas AI 进行数据分析](../Images/88a5d604e9a244c6d9f2767e7590602d.png)
+![利用 Pandas AI 进行数据分析](img/88a5d604e9a244c6d9f2767e7590602d.png)
 
 图片由作者提供
 
@@ -147,7 +147,7 @@ heat_map = df.chat("""Give me heat map plot to visualize the numerical columns c
 count_plot = df.chat("""Visualize the categorical column sex and survived""")
 ```
 
-![利用 Pandas AI 进行数据分析](../Images/a547f56bf72e130dc6ebb2878e2d5272.png)
+![利用 Pandas AI 进行数据分析](img/a547f56bf72e130dc6ebb2878e2d5272.png)
 
 图片由作者提供
 
@@ -197,7 +197,7 @@ df = SmartDataframe(data, config={
 
 ### Pandas AI 技能与代理
 
-Pandas AI允许用户传递示例函数，并通过Agent决策执行它。例如，下面的函数将两个不同的DataFrame合并，我们传递一个样本绘图函数给Pandas AI代理执行。
+Pandas AI 允许用户传递示例函数，并通过 Agent 决策执行它。例如，下面的函数将两个不同的 DataFrame 合并，我们传递一个样本绘图函数给 Pandas AI 代理执行。
 
 ```py
 import pandas as pd
@@ -247,28 +247,28 @@ agent.add_skills(plot_salaries)
 response = agent.chat("Plot the employee salaries against names")
 ```
 
-Agent会决定是否使用我们分配给Pandas AI的函数。
+Agent 会决定是否使用我们分配给 Pandas AI 的函数。
 
-结合技能和Agent可以为你的DataFrame分析提供更可控的结果。
+结合技能和 Agent 可以为你的 DataFrame 分析提供更可控的结果。
 
 # 结论
 
-我们已经了解到使用Pandas AI来帮助数据分析工作是多么简单。利用LLM的力量，我们可以将数据分析工作中的编码部分限制到最小，而专注于关键工作。
+我们已经了解到使用 Pandas AI 来帮助数据分析工作是多么简单。利用 LLM 的力量，我们可以将数据分析工作中的编码部分限制到最小，而专注于关键工作。
 
-在这篇文章中，我们了解了如何设置Pandas AI，如何使用Pandas AI进行数据探索和可视化，以及进阶用法。你可以用这个包做更多的事情，访问他们的[文档](https://docs.pandas-ai.com/en/latest/)以获取更多信息。
+在这篇文章中，我们了解了如何设置 Pandas AI，如何使用 Pandas AI 进行数据探索和可视化，以及进阶用法。你可以用这个包做更多的事情，访问他们的[文档](https://docs.pandas-ai.com/en/latest/)以获取更多信息。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一名数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius涉猎了各种AI和机器学习主题。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 期间，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 涉猎了各种 AI 和机器学习主题。
 
 ### 更多相关话题
 
-+   [解锁数据洞察：有效分析的关键Pandas函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
++   [解锁数据洞察：有效分析的关键 Pandas 函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
 
-+   [NumPy与Pandas结合进行更高效的数据分析](https://www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis)
++   [NumPy 与 Pandas 结合进行更高效的数据分析](https://www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis)
 
-+   [Pandas与Polars：Python数据框库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
++   [Pandas 与 Polars：Python 数据框库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
 
-+   [10个Pandas一行代码实现数据访问、操作和管理](https://www.kdnuggets.com/2023/01/pandas-one-liners-data-access-manipulation-management.html)
++   [10 个 Pandas 一行代码实现数据访问、操作和管理](https://www.kdnuggets.com/2023/01/pandas-one-liners-data-access-manipulation-management.html)
 
-+   [使用Pandas fillna()输入缺失数据的最佳方法](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)
++   [使用 Pandas fillna()输入缺失数据的最佳方法](https://www.kdnuggets.com/2023/02/optimal-way-input-missing-data-pandas-fillna.html)
 
-+   [Pandas：如何对数据进行One-Hot编码](https://www.kdnuggets.com/2023/07/pandas-onehot-encode-data.html)
++   [Pandas：如何对数据进行 One-Hot 编码](https://www.kdnuggets.com/2023/07/pandas-onehot-encode-data.html)

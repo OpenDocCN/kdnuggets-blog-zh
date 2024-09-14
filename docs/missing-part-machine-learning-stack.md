@@ -1,12 +1,12 @@
 # 机器学习栈中缺失的关键部分
 
-> 原文：[https://www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html](https://www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html)
+> 原文：[`www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html`](https://www.kdnuggets.com/2020/04/missing-part-machine-learning-stack.html)
 
-[评论](#comments)
+评论
 
 **作者：[Malo Marrec](https://www.linkedin.com/in/malo-marrec/)，cloudnative.fr 独立从业者**。
 
-![](../Images/eddab375a6fe2bcdb19f51b4eb2cea5d.png)
+![](img/eddab375a6fe2bcdb19f51b4eb2cea5d.png)
 
 几年前，大多数机器学习（ML）和数据科学平台的计划集中在解决*计算编排*问题上。许多公司认为，管理和共享 GPU 是一个重大问题，Kubernetes 将成为基石，围绕它构建工具是正确的选择。因此，像 Rise ML、我共同创办的公司 Clusterone，或者像 Kubeflow 这样的开源项目应运而生。一些项目失败了，一些成功了，大多数仍处于早期阶段（[Kubeflow 最近宣布了 1.0 版本候选](https://medium.com/kubeflow/kubeflow-1-0-cloud-native-ml-for-everyone-a3950202751)）。
 
@@ -44,35 +44,35 @@
 
 特性存储是一个集中管理数据特性的地方，特性在这里被定义、整理、一致提供和共享。它提供了从数据源到模型的追溯性。
 
-从架构上讲，Logical Clocks的首席执行官Dr. Jim Dowling表示，“这是一个双数据库。”他说：“你有一个低延迟数据库，用于在在线应用中快速访问特征数据。然后，你有一个可扩展的数据库，可以存储大量的特征数据，用于训练更大更好的模型。”
+从架构上讲，Logical Clocks 的首席执行官 Dr. Jim Dowling 表示，“这是一个双数据库。”他说：“你有一个低延迟数据库，用于在在线应用中快速访问特征数据。然后，你有一个可扩展的数据库，可以存储大量的特征数据，用于训练更大更好的模型。”
 
 此外，特征存储重新定义了团队的工作方式，位于数据科学工作流的核心，这可能就是它们市场出现花费了一段时间的原因：它们是复杂的产品。
 
 ### 获得势头
 
-项目构建特征存储正在获得势头。一切始于2017年，当时Uber工程部门推出了其内部的[Michelangelo平台](https://eng.uber.com/michelangelo-machine-learning-platform/)。从那时起，我们看到了一些开源项目获得了势头，例如[Feast](https://feast.dev/)，这是一个由Gojek维护的开源特征存储，Gojek是一款南亚地区的按需预订应用。
+项目构建特征存储正在获得势头。一切始于 2017 年，当时 Uber 工程部门推出了其内部的[Michelangelo 平台](https://eng.uber.com/michelangelo-machine-learning-platform/)。从那时起，我们看到了一些开源项目获得了势头，例如[Feast](https://feast.dev/)，这是一个由 Gojek 维护的开源特征存储，Gojek 是一款南亚地区的按需预订应用。
 
 与任何技术一样，一些公司更倾向于采用开源技术，这通常需要将多个组件集成到一个平台中。一些公司则倾向于选择商业产品。
 
-首批向市场宣布其产品的两家公司是Logical Clocks和Kaskada。Logical Clocks在2019年1月发布了一个[开源](https://www.logicalclocks.com/news/introducing-the-feature-store-the-data-warehouse-for-machine-learning)特征存储及其商业支持版本。根据公司网站，Kaskada目前处于[Beta](https://kaskada.com/)阶段。这两家公司的想法是提供一个端到端的、集成的平台，突出显示特征存储。
+首批向市场宣布其产品的两家公司是 Logical Clocks 和 Kaskada。Logical Clocks 在 2019 年 1 月发布了一个[开源](https://www.logicalclocks.com/news/introducing-the-feature-store-the-data-warehouse-for-machine-learning)特征存储及其商业支持版本。根据公司网站，Kaskada 目前处于[Beta](https://kaskada.com/)阶段。这两家公司的想法是提供一个端到端的、集成的平台，突出显示特征存储。
 
-“我们在2018年底发布了第一个开源特征存储，现在我们在AWS云上发布了第一个托管特征存储。当我们在2018年开始构建特征存储时，我几乎觉得已经太晚了。2017年底，Uber曾写过关于特征存储的文章。但由于从头到尾都需要相当多的工程工作，直到现在，实施它们的人并不多。” Logical Clocks的Dr. Dowling如是说。
+“我们在 2018 年底发布了第一个开源特征存储，现在我们在 AWS 云上发布了第一个托管特征存储。当我们在 2018 年开始构建特征存储时，我几乎觉得已经太晚了。2017 年底，Uber 曾写过关于特征存储的文章。但由于从头到尾都需要相当多的工程工作，直到现在，实施它们的人并不多。” Logical Clocks 的 Dr. Dowling 如是说。
 
-我从总部位于西雅图的初创公司Kaskada那里听到了类似的观点，[该公司最近筹集了800万美元](https://www.google.com/search?q=kaskada+raises+8M&oq=kaskada+raises+8M&aqs=chrome..69i57j33.3481j0j7&sourceid=chrome&ie=UTF-8)。Kaskada的首席执行官Davor Bonaci表示：“我们正在构建一个端到端的特征工程平台。我们不仅仅是一个特征存储。我们使你能够构建和可视化特征。然后，所有这些都可以生产并监控生产中的数据。我怀疑这将是最大的差异点，特别是与开源软件相比。”
+我从总部位于西雅图的初创公司 Kaskada 那里听到了类似的观点，[该公司最近筹集了 800 万美元](https://www.google.com/search?q=kaskada+raises+8M&oq=kaskada+raises+8M&aqs=chrome..69i57j33.3481j0j7&sourceid=chrome&ie=UTF-8)。Kaskada 的首席执行官 Davor Bonaci 表示：“我们正在构建一个端到端的特征工程平台。我们不仅仅是一个特征存储。我们使你能够构建和可视化特征。然后，所有这些都可以生产并监控生产中的数据。我怀疑这将是最大的差异点，特别是与开源软件相比。”
 
 ### 采纳触发因素
 
-我总是想知道是什么触发了平台软件的采用。确实，它会提供下一层次的能力，或者像Davor Bonaci所说的“使公司具备类似亚马逊、谷歌的数据基础设施”。但另一方面，它会要求流程和思维方式的改变。数据科学家将需要更多地考虑定义特征和计算问题的最佳实践。数据工程师将更早地参与到过程中，而不仅仅是接手模型。
+我总是想知道是什么触发了平台软件的采用。确实，它会提供下一层次的能力，或者像 Davor Bonaci 所说的“使公司具备类似亚马逊、谷歌的数据基础设施”。但另一方面，它会要求流程和思维方式的改变。数据科学家将需要更多地考虑定义特征和计算问题的最佳实践。数据工程师将更早地参与到过程中，而不仅仅是接手模型。
 
-似乎特征存储现在获得采用的原因是，经过几年的实验，公司现在开始在生产中运行模型。他们看到这样做的复杂性，并感到需要更稳健的工程（这让我很想起DevOps：一旦你达到一定规模，你就会重新架构、自动化，并确保你不依赖于那个知道如何运行事情的团队成员）。
+似乎特征存储现在获得采用的原因是，经过几年的实验，公司现在开始在生产中运行模型。他们看到这样做的复杂性，并感到需要更稳健的工程（这让我很想起 DevOps：一旦你达到一定规模，你就会重新架构、自动化，并确保你不依赖于那个知道如何运行事情的团队成员）。
 
 我询问了什么样的特征存储是好的，以及何时是采用的最佳时机。
 
-Swedebank的Davit Bzhalava表示，采用的触发因素是看到团队成员进出并感到需要将DevOps原则应用于ML。“*你需要达到部署点才会意识到这是一个问题。然后你有生产中的模型，人员进出，你意识到需要让事情更稳健。我们经历了这一点，然后运行了特征存储的POC来解决这个问题。我们现在正在考虑如何在组织层面推广它*。” 我在听这个特征存储真实案例的集合时，也听到了类似的想法。
+Swedebank 的 Davit Bzhalava 表示，采用的触发因素是看到团队成员进出并感到需要将 DevOps 原则应用于 ML。“*你需要达到部署点才会意识到这是一个问题。然后你有生产中的模型，人员进出，你意识到需要让事情更稳健。我们经历了这一点，然后运行了特征存储的 POC 来解决这个问题。我们现在正在考虑如何在组织层面推广它*。” 我在听这个特征存储真实案例的集合时，也听到了类似的想法。
 
-Kaskada公司的首席执行官Davor Bonaci同意这个观点。“如果我们回顾几年前的市场，只有少数几家公司拥有有意义的ML用例。今天，我们看到公司正在过渡到生产中的实际工作负载。他们开始意识到，通过松散的特征定义实践，他们浪费了多少时间。” 他还给出了选择特征存储的看法。“有些特征存储是实际的引擎，存储公式并按需计算。有些只是数据库。那么，它是数据库，还是有表达和计算特征的方法的存储？”
+Kaskada 公司的首席执行官 Davor Bonaci 同意这个观点。“如果我们回顾几年前的市场，只有少数几家公司拥有有意义的 ML 用例。今天，我们看到公司正在过渡到生产中的实际工作负载。他们开始意识到，通过松散的特征定义实践，他们浪费了多少时间。” 他还给出了选择特征存储的看法。“有些特征存储是实际的引擎，存储公式并按需计算。有些只是数据库。那么，它是数据库，还是有表达和计算特征的方法的存储？”
 
-逻辑时钟公司的首席执行官Dr. Dowling总结道：“特征存储可以通过整合公司范围内的特征工程工作，减少开发成本和市场推出时间，并改善数据工程和数据科学团队之间的协作。尽管特征存储的能力可能有所不同——我们的特征存储版本特征和特征数据，但总体来说，声称特征存储将通过将单一的端到端ML管道分解为更可管理和可测试的特征工程和模型训练管道来帮助改善ML模型工程，这并不不合理。”
+逻辑时钟公司的首席执行官 Dr. Dowling 总结道：“特征存储可以通过整合公司范围内的特征工程工作，减少开发成本和市场推出时间，并改善数据工程和数据科学团队之间的协作。尽管特征存储的能力可能有所不同——我们的特征存储版本特征和特征数据，但总体来说，声称特征存储将通过将单一的端到端 ML 管道分解为更可管理和可测试的特征工程和模型训练管道来帮助改善 ML 模型工程，这并不不合理。”
 
 近年来，许多公司将机器学习从实验阶段发展到生产阶段。这催生了对更强大、高效的模型开发方法的需求，特别是在被大多数人忽视的特征计算和管理领域。特征库的兴起引发了新一波的机器学习平台。虽然采用仍处于初期阶段，但我们可能会在未来几年看到大玩家的崛起和重大举措。
 
@@ -88,11 +88,11 @@ Kaskada公司的首席执行官Davor Bonaci同意这个观点。“如果我们�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

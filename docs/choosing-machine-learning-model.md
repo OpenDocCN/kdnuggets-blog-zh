@@ -1,22 +1,22 @@
 # 选择机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2019/10/choosing-machine-learning-model.html](https://www.kdnuggets.com/2019/10/choosing-machine-learning-model.html)
+> 原文：[`www.kdnuggets.com/2019/10/choosing-machine-learning-model.html`](https://www.kdnuggets.com/2019/10/choosing-machine-learning-model.html)
 
-[评论](#comments)
+评论
 
 **作者 [Lavanya Shukla](https://twitter.com/lavanyaai)，Weights and Biases**。
 
-![](../Images/2f34b86fccda019425f10c4b239275d8.png)
+![](img/2f34b86fccda019425f10c4b239275d8.png)
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -38,19 +38,19 @@
 
 与《魔戒》不同，在机器学习中，没有一个模型能够统治所有其他模型。不同类别的模型擅长于建模不同类型数据集的底层模式。例如，决策树在数据具有复杂形状的情况下表现良好。
 
-![](../Images/0a6cea4d3d6d1b8f01090976bd1277c3.png)
+![](img/0a6cea4d3d6d1b8f01090976bd1277c3.png)
 
 线性模型在数据集线性可分的情况下效果最佳：
 
-![](../Images/fd11384d1bd101b95d1394b1c5dd5469.png)
+![](img/fd11384d1bd101b95d1394b1c5dd5469.png)
 
 在我们开始之前，让我们更深入地探讨现实世界中的模型选择与竞争数据科学中的模型选择之间的差异。
 
 ### 竞争数据科学与现实世界中的模型选择
 
-正如 William Vorhies 在他的[博客文章](https://www.datasciencecentral.com/profiles/blogs/want-to-win-at-kaggle-pay-attention-to-your-ensembles)中所说，“Kaggle 竞赛就像数据科学的方程式赛车。获胜者在第四位小数点上超越对手，就像方程式1赛车一样，我们中的大多数人不会把它们误认为是日常驾驶的汽车。投入的时间和有时极端的技术在数据科学生产环境中并不合适。”
+正如 William Vorhies 在他的[博客文章](https://www.datasciencecentral.com/profiles/blogs/want-to-win-at-kaggle-pay-attention-to-your-ensembles)中所说，“Kaggle 竞赛就像数据科学的方程式赛车。获胜者在第四位小数点上超越对手，就像方程式 1 赛车一样，我们中的大多数人不会把它们误认为是日常驾驶的汽车。投入的时间和有时极端的技术在数据科学生产环境中并不合适。”
 
-Kaggle模型确实像赛车一样，因为它们并不是为日常使用而构建的。现实世界的生产模型更像是雷克萨斯——可靠但不炫目。
+Kaggle 模型确实像赛车一样，因为它们并不是为日常使用而构建的。现实世界的生产模型更像是雷克萨斯——可靠但不炫目。
 
 Kaggle 竞赛和现实世界优化的内容截然不同，其中一些关键区别包括：
 
@@ -108,15 +108,15 @@ Kaggle 竞赛和现实世界优化的内容截然不同，其中一些关键区�
 
 ### 最终选择 — 现实世界
 
-**资源限制。** 不同的模型会消耗不同类型的资源，了解你是否将模型部署在具有小硬盘和处理器的IoT/移动设备上，还是在云中，对选择合适的模型至关重要。
+**资源限制。** 不同的模型会消耗不同类型的资源，了解你是否将模型部署在具有小硬盘和处理器的 IoT/移动设备上，还是在云中，对选择合适的模型至关重要。
 
-**训练时间 vs. 预测时间 vs. 准确率。** 了解你优化的指标是选择正确模型的关键。例如，自动驾驶汽车需要极快的预测时间，而欺诈检测系统需要快速更新模型，以应对最新的钓鱼攻击。对于像医疗诊断这样的情况，我们更关心准确率（或ROC曲线下面积），而不是训练时间。
+**训练时间 vs. 预测时间 vs. 准确率。** 了解你优化的指标是选择正确模型的关键。例如，自动驾驶汽车需要极快的预测时间，而欺诈检测系统需要快速更新模型，以应对最新的钓鱼攻击。对于像医疗诊断这样的情况，我们更关心准确率（或 ROC 曲线下面积），而不是训练时间。
 
 **复杂性 vs. 可解释性的权衡。** 更复杂的模型可以使用数量级更多的特征进行训练和预测，但如果训练得当，可以捕捉数据集中非常有趣的模式。然而，这也使得模型变得复杂，更难以解释。了解向利益相关者清晰解释模型的重要性与捕捉一些有趣趋势而放弃可解释性之间的平衡是选择模型的关键。
 
 **可扩展性。** 了解你的模型需要多快、多大地扩展可以帮助你适当地缩小选择范围。
 
-**训练数据的大小。** 对于非常大的数据集或具有许多特征的数据集，神经网络或提升树可能是一个很好的选择，而较小的数据集可能更适合使用逻辑回归、朴素贝叶斯或KNN。
+**训练数据的大小。** 对于非常大的数据集或具有许多特征的数据集，神经网络或提升树可能是一个很好的选择，而较小的数据集可能更适合使用逻辑回归、朴素贝叶斯或 KNN。
 
 **参数数量。** 拥有大量参数的模型可以提供很大的灵活性，从而获得非常好的性能。然而，可能有些情况下你没有时间从头开始训练神经网络的参数。在这种情况下，一个开箱即用的模型会是更好的选择！
 
@@ -126,7 +126,7 @@ Kaggle 竞赛和现实世界优化的内容截然不同，其中一些关键区�
 
 一旦你选择了想尝试的模型，训练它们，并简单地添加*wandb.log({‘score’: cv_score})*来记录你的模型状态。训练完成后，你可以在一个简单的仪表板中比较你的模型性能！
 
-你可以在[这里](https://www.kaggle.com/lavanyashukla01/picking-the-best-model-a-whirlwind-tour-of-model)找到高效完成此任务的代码。我鼓励你分叉[这个kernel](https://www.kaggle.com/lavanyashukla01/picking-the-best-model-a-whirlwind-tour-of-model)并尝试代码！
+你可以在[这里](https://www.kaggle.com/lavanyashukla01/picking-the-best-model-a-whirlwind-tour-of-model)找到高效完成此任务的代码。我鼓励你分叉[这个 kernel](https://www.kaggle.com/lavanyashukla01/picking-the-best-model-a-whirlwind-tour-of-model)并尝试代码！
 
 就是这样，现在你拥有了选择适合你问题的模型所需的所有工具！
 
@@ -138,9 +138,9 @@ Kaggle 竞赛和现实世界优化的内容截然不同，其中一些关键区�
 
 **相关：**
 
-+   [通过Kaggle Kernels展示你的数据科学技能](https://www.kdnuggets.com/2019/06/data-science-kaggle-kernels.html)
++   [通过 Kaggle Kernels 展示你的数据科学技能](https://www.kdnuggets.com/2019/06/data-science-kaggle-kernels.html)
 
-+   [适用于Kaggle的优秀特征构建技巧和窍门](https://www.kdnuggets.com/2018/12/feature-building-techniques-tricks-kaggle.html)
++   [适用于 Kaggle 的优秀特征构建技巧和窍门](https://www.kdnuggets.com/2018/12/feature-building-techniques-tricks-kaggle.html)
 
 +   [从基准测试快速机器学习算法中学到的经验教训](https://www.kdnuggets.com/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)
 
@@ -154,6 +154,6 @@ Kaggle 竞赛和现实世界优化的内容截然不同，其中一些关键区�
 
 +   [如何利用合成数据克服机器学习模型训练中的数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)
 
-+   [SHAP：用Python解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
++   [SHAP：用 Python 解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
 
 +   [数据质量在成功机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)

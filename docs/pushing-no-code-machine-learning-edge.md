@@ -1,18 +1,18 @@
 # 将无代码机器学习推向边缘
 
-> 原文：[https://www.kdnuggets.com/2021/07/pushing-no-code-machine-learning-edge.html](https://www.kdnuggets.com/2021/07/pushing-no-code-machine-learning-edge.html)
+> 原文：[`www.kdnuggets.com/2021/07/pushing-no-code-machine-learning-edge.html`](https://www.kdnuggets.com/2021/07/pushing-no-code-machine-learning-edge.html)
 
-[评论](#comments)![图示](../Images/10e5481fc24857de79e5ddb77b663d7b.png)
+评论![图示](img/10e5481fc24857de79e5ddb77b663d7b.png)
 
 图片由[Markus Winkler](https://unsplash.com/@markuswinkler?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来源于[Unsplash](https://unsplash.com/s/photos/machine-learning?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 ### **将无代码机器学习推向边缘**
 
-无代码或低代码平台近年来获得了广泛关注，因为那些编程和开发经验有限的人对相关技术产生了兴趣。这些平台允许缺乏经验的人做一些事情，比如构建移动应用程序、在网站和工作环境中部署Web应用程序，甚至利用人工智能和机器学习。
+无代码或低代码平台近年来获得了广泛关注，因为那些编程和开发经验有限的人对相关技术产生了兴趣。这些平台允许缺乏经验的人做一些事情，比如构建移动应用程序、在网站和工作环境中部署 Web 应用程序，甚至利用人工智能和机器学习。
 
-传统上，一个人需要在各种开发和编程学科中拥有扎实的背景才能真正利用机器学习，但现在已经不再是这样。当然，对于那些具备适当背景的人，部署可以更加复杂，但TinyML和无代码机器学习解决方案正在使这些技术对所有人更具可及性。
+传统上，一个人需要在各种开发和编程学科中拥有扎实的背景才能真正利用机器学习，但现在已经不再是这样。当然，对于那些具备适当背景的人，部署可以更加复杂，但 TinyML 和无代码机器学习解决方案正在使这些技术对所有人更具可及性。
 
-实际上，这是一种[无代码人工智能](https://analyticsindiamag.com/top-12-no-code-machine-learning-platforms-in-2021/)的形式，其目标不仅仅是“使人工智能普及”，还在于在商业环境中大幅扩展其能力。无代码机器学习或自动机器学习（autoML）虽然不如它们的人工智能同行那样流行，但它们确实是一个新兴领域。TinyML虽然略有不同，但由于逻辑嵌入在设备本身中，也提供了相同的好处。
+实际上，这是一种[无代码人工智能](https://analyticsindiamag.com/top-12-no-code-machine-learning-platforms-in-2021/)的形式，其目标不仅仅是“使人工智能普及”，还在于在商业环境中大幅扩展其能力。无代码机器学习或自动机器学习（autoML）虽然不如它们的人工智能同行那样流行，但它们确实是一个新兴领域。TinyML 虽然略有不同，但由于逻辑嵌入在设备本身中，也提供了相同的好处。
 
 ### **将计算推向边缘**
 
@@ -24,7 +24,7 @@
 
 本地处理事件意味着为设备提供足够的能力来完成工作，但这并不总是可能、方便或具有成本效益。相比之下，远程处理提供了更多的能力，但通常以速度和性能为代价。边缘计算解决方案提供了两者的最佳结合，改善了可扩展性、可靠性和定制性。
 
-还可以优化“边缘”的位置，以减少延迟、降低运营和服务成本、提高可见性、加速部署等等。一家物联网初创公司在顾问的帮助下利用了AWS计算优化器，实施了计算节省计划——将整体账单[降低了37.5%每月](https://www.trek10.com/blog/10-lessons-learned-from-start-ups-on-their-aws-journey)。这突显了云和边缘计算解决方案的潜在灵活性和动态特性。
+还可以优化“边缘”的位置，以减少延迟、降低运营和服务成本、提高可见性、加速部署等等。一家物联网初创公司在顾问的帮助下利用了 AWS 计算优化器，实施了计算节省计划——将整体账单[降低了 37.5%每月](https://www.trek10.com/blog/10-lessons-learned-from-start-ups-on-their-aws-journey)。这突显了云和边缘计算解决方案的潜在灵活性和动态特性。
 
 ### **与无代码机器学习的关系是什么？**
 
@@ -40,7 +40,7 @@
 
 另一个因素是无代码机器学习应用的支持方式。将无代码平台本身推向网络边缘具有相同的效率、性能和成本效益。
 
-当你使用开发平台，如IDE时，你希望获得几乎即时的反馈。如果Web应用程序充分利用了边缘处理，那么这会改善整个体验，并使快速反馈成为可能。
+当你使用开发平台，如 IDE 时，你希望获得几乎即时的反馈。如果 Web 应用程序充分利用了边缘处理，那么这会改善整个体验，并使快速反馈成为可能。
 
 另一方面，*TinyML* [不需要边缘计算](https://www.forbes.com/sites/janakirammsv/2020/11/03/how-tinyml-makes-artificial-intelligence-ubiquitous/?sh=140f79317622) 或互联网连接的硬件。一切都在设备或微控制器上本地进行。它已成为工业物联网 (IIoT) 的首选实践，其中嵌入式计算提供了无与伦比的性能和速度。
 
@@ -60,34 +60,34 @@
 
 **相关：**
 
-+   [在边缘设备上实施 MLOps](/2020/08/implementing-mlops-edge-device.html)
++   在边缘设备上实施 MLOps
 
-+   [高性能深度学习：如何训练更小、更快、更好的模型 – 第4部分](/2021/07/high-performance-deep-learning-part4.html)
++   高性能深度学习：如何训练更小、更快、更好的模型 – 第四部分
 
-+   [MLOps 是一门工程学科：初学者概述](/2021/07/mlops-engineering-discipline.html)
++   MLOps 是一门工程学科：初学者概述
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
 ### 更多相关内容
 
-+   [MLOps：推动AI走向主流的关键](https://www.kdnuggets.com/2022/07/mlops-key-pushing-ai-mainstream.html)
++   [MLOps：推动 AI 走向主流的关键](https://www.kdnuggets.com/2022/07/mlops-key-pushing-ai-mainstream.html)
 
 +   [边缘计算中的机器学习](https://www.kdnuggets.com/2022/10/machine-learning-edge.html)
 
-+   [在边缘AI应用中最大化性能](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)
++   [在边缘 AI 应用中最大化性能](https://www.kdnuggets.com/maximize-performance-in-edge-ai-applications)
 
-+   [Windows on Snapdragon将混合AI带到边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)
++   [Windows on Snapdragon 将混合 AI 带到边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)
 
-+   [介绍TPU v4：谷歌用于大型语言模型的尖端超级计算机](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)
++   [介绍 TPU v4：谷歌用于大型语言模型的尖端超级计算机](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)
 
-+   [边缘AI的承诺及有效采纳的方法](https://www.kdnuggets.com/the-promise-of-edge-ai-and-approaches-for-effective-adoption)
++   [边缘 AI 的承诺及有效采纳的方法](https://www.kdnuggets.com/the-promise-of-edge-ai-and-approaches-for-effective-adoption)

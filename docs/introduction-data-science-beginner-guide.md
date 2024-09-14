@@ -1,8 +1,8 @@
 # 数据科学入门：初学者指南
 
-> 原文：[https://www.kdnuggets.com/2023/07/introduction-data-science-beginner-guide.html](https://www.kdnuggets.com/2023/07/introduction-data-science-beginner-guide.html)
+> 原文：[`www.kdnuggets.com/2023/07/introduction-data-science-beginner-guide.html`](https://www.kdnuggets.com/2023/07/introduction-data-science-beginner-guide.html)
 
-![数据科学入门：初学者指南](../Images/06e54c3093a60995faa5c4737889ad67.png)
+![数据科学入门：初学者指南](img/06e54c3093a60995faa5c4737889ad67.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -50,13 +50,13 @@
 
 因为很少有公司能准确掌握数据科学家的工作内容，所以你可能还会有其他责任。一些雇主希望数据科学家在角色中加入信息安全或网络安全的职责。其他人可能期望数据科学家具备云计算、数据库管理、数据工程或软件开发的专长。要准备好担任多个角色。
 
-这份工作之所以重要，不是因为《哈佛商业评论》称其为21世纪最性感的工作，而是因为数据量在不断增加，而很少有人知道如何将数据转化为洞察。作为数据科学家，你能看清全貌。
+这份工作之所以重要，不是因为《哈佛商业评论》称其为 21 世纪最性感的工作，而是因为数据量在不断增加，而很少有人知道如何将数据转化为洞察。作为数据科学家，你能看清全貌。
 
-**全球从2010年到2020年创建、捕捉、复制和消费的数据/信息量，以及2021年至2025年的预测**
+**全球从 2010 年到 2020 年创建、捕捉、复制和消费的数据/信息量，以及 2021 年至 2025 年的预测**
 
-![数据科学入门：初学者指南](../Images/b5c2fa704d30a57b76ef5174289728a4.png)
+![数据科学入门：初学者指南](img/b5c2fa704d30a57b76ef5174289728a4.png)
 
-来源：[https://www.statista.com/statistics/871513/worldwide-data-created/](https://www.statista.com/statistics/871513/worldwide-data-created/)
+来源：[`www.statista.com/statistics/871513/worldwide-data-created/`](https://www.statista.com/statistics/871513/worldwide-data-created/)
 
 # 数据科学中的关键概念
 
@@ -64,11 +64,11 @@
 
 ## 数据处理
 
-在流程的最开始，你得到的是一堆混合质量的数据。一个著名的（而且[不正确的](https://blog.ldodds.com/2020/01/31/do-data-scientists-spend-80-of-their-time-cleaning-data-turns-out-no/)）统计数据指出数据科学家花费80%的时间来清理数据。虽然这可能没有那么高，但建立数据处理流程和调整数据是工作中的重要部分。
+在流程的最开始，你得到的是一堆混合质量的数据。一个著名的（而且[不正确的](https://blog.ldodds.com/2020/01/31/do-data-scientists-spend-80-of-their-time-cleaning-data-turns-out-no/)）统计数据指出数据科学家花费 80%的时间来清理数据。虽然这可能没有那么高，但建立数据处理流程和调整数据是工作中的重要部分。
 
 想象一下你是一个电商公司的数据科学家。在那里，数据处理可能涉及清理和转换客户交易数据，合并和调和来自不同来源的数据，如网站分析和客户关系管理（CRM）系统，以及处理缺失或不一致的数据。
 
-你可能需要标准化格式，删除重复项或NaN，并处理离群值或错误条目。这个过程确保数据准确、一致，并准备好进行分析。
+你可能需要标准化格式，删除重复项或 NaN，并处理离群值或错误条目。这个过程确保数据准确、一致，并准备好进行分析。
 
 ## 数据探索和可视化
 
@@ -78,9 +78,9 @@
 
 由于大多数人对图片的意义解析要优于对表格的解析，因此数据可视化也被纳入数据探索中。例如，作为 GitHub 的数据科学家，你可能会使用折线图来展示随时间变化的提交次数。柱状图可以用来比较平台上不同编程语言的流行度。网络图可以用来展示用户或代码库之间的合作关系。
 
-![数据科学入门：初学者指南](../Images/b61e08f7e3a732e8470e9d16ab8bda25.png)
+![数据科学入门：初学者指南](img/b61e08f7e3a732e8470e9d16ab8bda25.png)
 
-来源：[https://www.reddit.com/r/DataScienceMemes/comments/nzoogr/i_dont_like_gravy/](https://www.reddit.com/r/DataScienceMemes/comments/nzoogr/i_dont_like_gravy/)
+来源：[`www.reddit.com/r/DataScienceMemes/comments/nzoogr/i_dont_like_gravy/`](https://www.reddit.com/r/DataScienceMemes/comments/nzoogr/i_dont_like_gravy/)
 
 ## 统计分析
 
@@ -230,19 +230,19 @@
 
 现在我们来看一下在哪里学习和实践数据科学。这可能会成为一篇独立的文章，所以我将链接到你可以开始的资源列表。
 
-1.  [最佳免费数据科学课程](/2023/03/top-free-data-science-online-courses-2023.html)
+1.  最佳免费数据科学课程
 
-1.  [数据科学的最佳学习资源](/2022/01/best-learning-resources-data-science-2022.html)（书籍、课程和教程）
+1.  数据科学的最佳学习资源（书籍、课程和教程）
 
-1.  [适合初学者的最佳Python数据科学项目](https://www.stratascratch.com/blog/python-data-science-projects-for-boosting-your-portfolio/)
+1.  [适合初学者的最佳 Python 数据科学项目](https://www.stratascratch.com/blog/python-data-science-projects-for-boosting-your-portfolio/)
 
 1.  [最佳计算机科学书籍](https://blog.boot.dev/computer-science/computer-science-books/)
 
-1.  [数据科学可视化最佳实践](/2023/04/data-visualization-best-practices-resources-effective-communication.html)
+1.  数据科学可视化最佳实践
 
-1.  [获取数据以进行数据科学项目的最佳网站](/2023/04/10-websites-get-amazing-data-data-science-projects.html)
+1.  获取数据以进行数据科学项目的最佳网站
 
-1.  [最佳平台以练习关键数据科学技能](/2023/03/9-top-platforms-practice-key-data-science-skills.html)
+1.  最佳平台以练习关键数据科学技能
 
 1.  [最佳数据科学社区](https://bootcamp.cvn.columbia.edu/blog/data-scientist-career-path/) 
 
@@ -254,23 +254,23 @@
 
 1.  建立项目和库的组合。
 
-1.  在像Kaggle和StrataScratch这样的平台上进行实践。
+1.  在像 Kaggle 和 StrataScratch 这样的平台上进行实践。
 
-1.  获得认证——一些平台如LinkedIn提供认证，以证明你具备相关技能。
+1.  获得认证——一些平台如 LinkedIn 提供认证，以证明你具备相关技能。
 
 1.  开始申请。
 
-1.  网络建设——加入社区、Slack群组和LinkedIn群组，参加活动。
+1.  网络建设——加入社区、Slack 群组和 LinkedIn 群组，参加活动。
 
 最终，你可以预期这个过程会需要一些时间。但最终是值得的。
 
 ## 职业机会和职业路径
 
-尽管[FAANG裁员](https://money.usnews.com/careers/best-jobs/rankings/the-100-best-jobs)的新闻不断，依据[US News and World Report 2022](https://money.usnews.com/careers/best-jobs/rankings/the-100-best-jobs)的排名，信息安全分析师、软件开发人员、数据科学家和统计学家仍位列前十名工作。
+尽管[FAANG 裁员](https://money.usnews.com/careers/best-jobs/rankings/the-100-best-jobs)的新闻不断，依据[US News and World Report 2022](https://money.usnews.com/careers/best-jobs/rankings/the-100-best-jobs)的排名，信息安全分析师、软件开发人员、数据科学家和统计学家仍位列前十名工作。
 
-![数据科学介绍：初学者指南](../Images/3bb4772126049cfe3c4c6cedbf78750e.png)
+![数据科学介绍：初学者指南](img/3bb4772126049cfe3c4c6cedbf78750e.png)
 
-来源: [https://bootcamp.cvn.columbia.edu/blog/data-scientist-career-path/](https://bootcamp.cvn.columbia.edu/blog/data-scientist-career-path/)
+来源: [`bootcamp.cvn.columbia.edu/blog/data-scientist-career-path/`](https://bootcamp.cvn.columbia.edu/blog/data-scientist-career-path/)
 
 求职市场依然火热。公司仍然需要数据科学家。如果你在找数据科学家的工作时遇到困难，请记住你不必从零开始。我建议你从更初级的岗位入手，随着时间的推移逐步过渡到这一角色。你可以从数据分析师、数据工程师或机器学习工程师做起。
 
@@ -282,7 +282,7 @@
 
 +   **数据科学是迭代的**。它非常依赖过程，但你可以期待在继续工作过程中反复优化和更新你的过程。成功且快乐的数据科学家拥抱实验。
 
-+   **软技能至关重要**。你不能仅仅成为一个Python高手；你需要用故事、数据和图表将发现和见解传达给非技术利益相关者。
++   **软技能至关重要**。你不能仅仅成为一个 Python 高手；你需要用故事、数据和图表将发现和见解传达给非技术利益相关者。
 
 希望这些能为你提供一个起点。数据科学是一个既有回报又具挑战性的职业道路。如果你学习这些技能并付诸实践，你将能够迅速进入这个领域。
 
@@ -294,10 +294,10 @@
 
 +   [初学者的数据工程指南](https://www.kdnuggets.com/2023/07/beginner-guide-data-engineering.html)
 
-+   [初学者的数据清理指南（使用Pyjanitor）](https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor)
++   [初学者的数据清理指南（使用 Pyjanitor）](https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor)
 
 +   [初学者的端到端机器学习指南](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)
 
 +   [基本机器学习算法：初学者指南](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)
 
-+   [初学者的Q学习指南](https://www.kdnuggets.com/2022/06/beginner-guide-q-learning.html)
++   [初学者的 Q 学习指南](https://www.kdnuggets.com/2022/06/beginner-guide-q-learning.html)

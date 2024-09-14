@@ -1,12 +1,12 @@
 # 6 个适合有志数据科学家的副业
 
-> 原文：[https://www.kdnuggets.com/2021/05/6-side-hustles-data-scientist.html](https://www.kdnuggets.com/2021/05/6-side-hustles-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/05/6-side-hustles-data-scientist.html`](https://www.kdnuggets.com/2021/05/6-side-hustles-data-scientist.html)
 
-[评论](#comments)
+评论
 
 **作者：[Ahmad Bin Shafiq](https://medium.com/@ahmadbinshafiq)，机器学习学生**。
 
-![](../Images/c1e115bf07d6a16508ec4034c7b32a02.png)
+![](img/c1e115bf07d6a16508ec4034c7b32a02.png)
 
 *图片由 [Sharon McCutcheon](https://unsplash.com/@sharonmccutcheon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/money?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -16,7 +16,7 @@
 
 ### 1\. 撰写文章
 
-![](../Images/b8a922feb7ecbb9207b835014a8920cf.png)
+![](img/b8a922feb7ecbb9207b835014a8920cf.png)
 
 *图片由 [Dan Counsell](https://unsplash.com/@dancounsell?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -24,13 +24,13 @@
 
 ### 2\. 参加 Kaggle 竞赛
 
-![](../Images/844bc815c70733773cc30105cd108016.png)
+![](img/844bc815c70733773cc30105cd108016.png)
 
 在 Kaggle 上有很多关于数据科学的竞赛。通过参加这些竞赛，你不仅可以学习新知识、提升技能，如果赢得竞赛，Kaggle 还会为获胜者提供现金奖励。此外，如果你有一个优秀的 Kaggle 个人资料，这肯定会引起招聘人员的广泛关注，有助于你找到工作！
 
 ### 3\. 做自由职业工作
 
-![](../Images/7f6d8f78bc73dedc00cef8e4882019a9.png)
+![](img/7f6d8f78bc73dedc00cef8e4882019a9.png)
 
 *图片由 [imtips.co](https://imtips.co/disadvantages-of-freelancing.html) 提供。*
 
@@ -44,7 +44,7 @@
 
 ### 4\. 教学
 
-![](../Images/ee265c94354a0e662ab32b00c506a98b.png)
+![](img/ee265c94354a0e662ab32b00c506a98b.png)
 
 *照片由 [NeONBRAND](https://unsplash.com/@neonbrand?utm_source=medium&utm_medium=referral) 提供，发布于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -56,7 +56,7 @@
 
 ### 5\. 开设 YouTube 频道
 
-![](../Images/65a72060fb257dc2a9ab5b2a8b7e22ef.png)
+![](img/65a72060fb257dc2a9ab5b2a8b7e22ef.png)
 
 *照片由 [Sara Kurfeß](https://unsplash.com/@stereophototyp?utm_source=medium&utm_medium=referral) 提供，发布于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -64,7 +64,7 @@
 
 ### 6\. 工作或实习
 
-![](../Images/a86880c8840dbd16b296e7cecb6fa4bb.png)
+![](img/a86880c8840dbd16b296e7cecb6fa4bb.png)
 
 *照片由 [Ant Rozetsky](https://unsplash.com/@rozetsky?utm_source=medium&utm_medium=referral) 提供，发布于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -80,7 +80,7 @@
 
 ### 结论
 
-在这篇文章中，我讨论了作为数据科学家我使用过或看到别人使用的6种额外收入方法。这些方法在难度、风险水平和可能赚取的金额上有所不同，但它们都有可能帮助你提升技能并赚取 $$$。
+在这篇文章中，我讨论了作为数据科学家我使用过或看到别人使用的 6 种额外收入方法。这些方法在难度、风险水平和可能赚取的金额上有所不同，但它们都有可能帮助你提升技能并赚取 $$$。
 
 **相关：**
 
@@ -94,9 +94,9 @@
 
 +   [数据科学家的高薪副业](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)
 
-+   [KDnuggets™ 新闻 22:n04, 1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
-+   [数据科学家的7个高薪副业](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
++   [数据科学家的 7 个高薪副业](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
 
 +   [CoRise 如何帮助 Ben Wilson 成为一名分析工程师的新工作…](https://www.kdnuggets.com/2022/08/corise-land-new-job-analytics-engineer.html)
 

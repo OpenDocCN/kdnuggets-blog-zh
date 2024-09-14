@@ -1,18 +1,18 @@
 # NLP 中不同词嵌入技术的终极指南
 
-> 原文：[https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
+> 原文：[`www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html`](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
 
-![](../Images/f2707b9df702dfb7da8ae07a7e6d5bdb.png)
+![](img/f2707b9df702dfb7da8ae07a7e6d5bdb.png)
 
 > * * *
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 > 
 > * * *
 > 
@@ -56,82 +56,82 @@ Word2Vec 提供了两种基于 [神经网络](https://www.ibm.com/cloud/learn/ne
 
 CBOW 速度较快，并为常见词语找到更好的数值表示，而 Skip Gram 能有效地表示稀有词语。Word2Vec 模型擅长捕捉词语之间的语义关系。例如，国家与其首都之间的关系，如巴黎是法国的首都，柏林是德国的首都。它最适合执行 [语义分析](https://www.expert.ai/blog/natural-language-process-semantic-analysis-definition/)，这在推荐系统和知识发现中有应用。
 
-![](../Images/9b27c49f170dd269f575b79015ec9c8b.png)
+![](img/9b27c49f170dd269f575b79015ec9c8b.png)
 
 CBOW & Skip-gram 架构。图片来源： [Word2Vec 论文](https://arxiv.org/abs/1301.3781)。
 
 # GloVe — 全局词向量表示
 
-由Jeffery Pennington及斯坦福大学的其他研究人员开发的，[GloVe](https://nlp.stanford.edu/pubs/glove.pdf)扩展了Word2Vec的工作，通过计算全球[词-词共现矩阵](https://medium.com/swlh/co-occurrence-matrix-9cacc5dd396e)来捕捉文本语料库中的全球上下文信息。
+由 Jeffery Pennington 及斯坦福大学的其他研究人员开发的，[GloVe](https://nlp.stanford.edu/pubs/glove.pdf)扩展了 Word2Vec 的工作，通过计算全球[词-词共现矩阵](https://medium.com/swlh/co-occurrence-matrix-9cacc5dd396e)来捕捉文本语料库中的全球上下文信息。
 
-Word2Vec仅捕捉词汇的局部上下文。在训练过程中，它仅考虑邻近的词来捕捉上下文。GloVe考虑整个语料库，并创建一个大矩阵，可以捕捉语料库中词汇的共现。
+Word2Vec 仅捕捉词汇的局部上下文。在训练过程中，它仅考虑邻近的词来捕捉上下文。GloVe 考虑整个语料库，并创建一个大矩阵，可以捕捉语料库中词汇的共现。
 
-GloVe结合了两种词向量学习方法的优点：矩阵分解方法，如[潜在语义分析](https://blog.marketmuse.com/glossary/latent-semantic-analysis-definition/)（LSA）和局部上下文窗口方法，如Skip-gram。GloVe技术具有更简单的[最小二乘](https://www.investopedia.com/terms/l/least-squares-method.asp)成本或误差函数，从而降低了模型训练的计算成本。生成的词嵌入在某些方面有所不同且有所改进。
+GloVe 结合了两种词向量学习方法的优点：矩阵分解方法，如[潜在语义分析](https://blog.marketmuse.com/glossary/latent-semantic-analysis-definition/)（LSA）和局部上下文窗口方法，如 Skip-gram。GloVe 技术具有更简单的[最小二乘](https://www.investopedia.com/terms/l/least-squares-method.asp)成本或误差函数，从而降低了模型训练的计算成本。生成的词嵌入在某些方面有所不同且有所改进。
 
-GloVe在词汇类比和[命名实体识别](https://www.expert.ai/blog/entity-extraction-work/)问题上表现显著更好。在某些任务中，它优于Word2Vec，并在其他任务中与之竞争。然而，两种技术在捕捉语料库中的语义信息方面都表现良好。
+GloVe 在词汇类比和[命名实体识别](https://www.expert.ai/blog/entity-extraction-work/)问题上表现显著更好。在某些任务中，它优于 Word2Vec，并在其他任务中与之竞争。然而，两种技术在捕捉语料库中的语义信息方面都表现良好。
 
-![](../Images/b23719ec023f20703fbec6be04b53e85.png)
+![](img/b23719ec023f20703fbec6be04b53e85.png)
 
-GloVe词向量捕捉到语义相似的词。图片来源：[斯坦福GloVe](https://nlp.stanford.edu/projects/glove/)。
+GloVe 词向量捕捉到语义相似的词。图片来源：[斯坦福 GloVe](https://nlp.stanford.edu/projects/glove/)。
 
-# BERT—来自transformers的双向编码器表示
+# BERT—来自 transformers 的双向编码器表示
 
-[由Google于2019年介绍](https://arxiv.org/abs/1810.04805)，[BERT](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)属于一种基于NLP的语言算法类别，称为[transformers](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)。BERT是一个大规模预训练的深度双向编码器基础的transformer模型，有两个变体。BERT-Base有1.1亿个参数，而BERT-Large有3.4亿个参数。
+[由 Google 于 2019 年介绍](https://arxiv.org/abs/1810.04805)，[BERT](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)属于一种基于 NLP 的语言算法类别，称为[transformers](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)。BERT 是一个大规模预训练的深度双向编码器基础的 transformer 模型，有两个变体。BERT-Base 有 1.1 亿个参数，而 BERT-Large 有 3.4 亿个参数。
 
-在生成词嵌入时，BERT依赖于[*注意机制*](https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/)。它生成高质量的上下文感知或上下文化的词嵌入。在训练过程中，嵌入通过每一层BERT编码器进行细化。对于每个词，注意机制根据左侧和右侧的词捕捉词汇关联。词嵌入也进行位置编码，以跟踪句子中每个词的模式或位置。
+在生成词嵌入时，BERT 依赖于[*注意机制*](https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/)。它生成高质量的上下文感知或上下文化的词嵌入。在训练过程中，嵌入通过每一层 BERT 编码器进行细化。对于每个词，注意机制根据左侧和右侧的词捕捉词汇关联。词嵌入也进行位置编码，以跟踪句子中每个词的模式或位置。
 
-BERT比上述讨论的任何技术都更先进。它通过在大规模词汇语料库和维基百科数据集上进行预训练，生成了更好的词嵌入。BERT可以通过在任务特定数据集上微调嵌入来进一步提升。
+BERT 比上述讨论的任何技术都更先进。它通过在大规模词汇语料库和维基百科数据集上进行预训练，生成了更好的词嵌入。BERT 可以通过在任务特定数据集上微调嵌入来进一步提升。
 
-然而，BERT最适合语言翻译任务。它已经针对许多其他应用和领域进行了优化。
+然而，BERT 最适合语言翻译任务。它已经针对许多其他应用和领域进行了优化。
 
-![](../Images/6a6c52e356c9b9737bb8e3651c4d79d8.png)
+![](img/6a6c52e356c9b9737bb8e3651c4d79d8.png)
 
-双向BERT架构。图片来源：[Google AI Blog](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)。
+双向 BERT 架构。图片来源：[Google AI Blog](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)。
 
 # 结论
 
-随着自然语言处理（NLP）的进步，词嵌入技术也在不断改进。有许多NLP任务并不需要高级的嵌入技术。许多任务使用简单的词嵌入技术同样可以表现良好。选择词嵌入技术必须基于细致的实验和任务特定的需求。微调词嵌入模型可以显著提高准确性。
+随着自然语言处理（NLP）的进步，词嵌入技术也在不断改进。有许多 NLP 任务并不需要高级的嵌入技术。许多任务使用简单的词嵌入技术同样可以表现良好。选择词嵌入技术必须基于细致的实验和任务特定的需求。微调词嵌入模型可以显著提高准确性。
 
 在本文中，我们对各种词嵌入算法进行了高层次的概述。让我们总结如下：
 
 | **词嵌入技术** | **主要特点** | **应用场景** |
 | --- | --- | --- |
 | TF-IDF | 统计方法用于捕捉词语相对于文本语料库的相关性。它不捕捉语义词语关联。 | 更适合信息检索和文档中的关键词提取。 |
-| Word2Vec | 基于神经网络的CBOW和Skip-gram架构，更擅长捕捉语义信息。 | 对语义分析任务有用。 |
-| GloVe | 基于全局词对共现的矩阵分解方法。它解决了Word2Vec的局部上下文限制。 | 在词语类比和命名实体识别任务中表现更好。在一些语义分析任务中与Word2Vec的结果相当，而在其他任务中则更优。 |
-| BERT | 基于Transformer的注意力机制，用于捕捉高质量的上下文信息。 | 语言翻译、问答系统。部署在Google搜索引擎中以理解搜索查询。 |
+| Word2Vec | 基于神经网络的 CBOW 和 Skip-gram 架构，更擅长捕捉语义信息。 | 对语义分析任务有用。 |
+| GloVe | 基于全局词对共现的矩阵分解方法。它解决了 Word2Vec 的局部上下文限制。 | 在词语类比和命名实体识别任务中表现更好。在一些语义分析任务中与 Word2Vec 的结果相当，而在其他任务中则更优。 |
+| BERT | 基于 Transformer 的注意力机制，用于捕捉高质量的上下文信息。 | 语言翻译、问答系统。部署在 Google 搜索引擎中以理解搜索查询。 |
 
 ## 参考文献
 
-1.  [https://www.ibm.com/cloud/learn/natural-language-processing](https://www.ibm.com/cloud/learn/natural-language-processing)
+1.  [`www.ibm.com/cloud/learn/natural-language-processing`](https://www.ibm.com/cloud/learn/natural-language-processing)
 
-1.  [https://www.techopedia.com/definition/33012/natural-language-generation-nlg](https://www.techopedia.com/definition/33012/natural-language-generation-nlg)
+1.  [`www.techopedia.com/definition/33012/natural-language-generation-nlg`](https://www.techopedia.com/definition/33012/natural-language-generation-nlg)
 
-1.  [https://arxiv.org/abs/1301.3781](https://arxiv.org/abs/1301.3781)
+1.  [`arxiv.org/abs/1301.3781`](https://arxiv.org/abs/1301.3781)
 
-1.  [https://www.machinelearningplus.com/nlp/cosine-similarity/](https://www.machinelearningplus.com/nlp/cosine-similarity/)
+1.  [`www.machinelearningplus.com/nlp/cosine-similarity/`](https://www.machinelearningplus.com/nlp/cosine-similarity/)
 
-1.  [https://www.ibm.com/cloud/learn/neural-networks](https://www.ibm.com/cloud/learn/neural-networks)
+1.  [`www.ibm.com/cloud/learn/neural-networks`](https://www.ibm.com/cloud/learn/neural-networks)
 
-1.  [https://www.expert.ai/blog/natural-language-process-semantic-analysis-definition/](https://www.expert.ai/blog/natural-language-process-semantic-analysis-definition/)
+1.  [`www.expert.ai/blog/natural-language-process-semantic-analysis-definition/`](https://www.expert.ai/blog/natural-language-process-semantic-analysis-definition/)
 
-1.  [https://nlp.stanford.edu/pubs/glove.pdf](https://nlp.stanford.edu/pubs/glove.pdf)
+1.  [`nlp.stanford.edu/pubs/glove.pdf`](https://nlp.stanford.edu/pubs/glove.pdf)
 
-1.  [https://medium.com/swlh/co-occurrence-matrix-9cacc5dd396e](https://medium.com/swlh/co-occurrence-matrix-9cacc5dd396e)
+1.  [`medium.com/swlh/co-occurrence-matrix-9cacc5dd396e`](https://medium.com/swlh/co-occurrence-matrix-9cacc5dd396e)
 
-1.  [https://blog.marketmuse.com/glossary/latent-semantic-analysis-definition/](https://blog.marketmuse.com/glossary/latent-semantic-analysis-definition/)
+1.  [`blog.marketmuse.com/glossary/latent-semantic-analysis-definition/`](https://blog.marketmuse.com/glossary/latent-semantic-analysis-definition/)
 
-1.  [https://www.investopedia.com/terms/l/least-squares-method.asp](https://www.investopedia.com/terms/l/least-squares-method.asp)
+1.  [`www.investopedia.com/terms/l/least-squares-method.asp`](https://www.investopedia.com/terms/l/least-squares-method.asp)
 
-1.  [https://www.expert.ai/blog/entity-extraction-work/](https://www.expert.ai/blog/entity-extraction-work/)
+1.  [`www.expert.ai/blog/entity-extraction-work/`](https://www.expert.ai/blog/entity-extraction-work/)
 
-1.  [https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
+1.  [`ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html`](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
 
-1.  [https://arxiv.org/abs/1810.04805](https://arxiv.org/abs/1810.04805)
+1.  [`arxiv.org/abs/1810.04805`](https://arxiv.org/abs/1810.04805)
 
-1.  [https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
+1.  [`ai.googleblog.com/2017/08/transformer-novel-neural-network.html`](https://ai.googleblog.com/2017/08/transformer-novel-neural-network.html)
 
-1.  [https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/](https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/)
+1.  [`www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/`](https://www.analyticsvidhya.com/blog/2019/11/comprehensive-guide-attention-mechanism-deep-learning/)
 
 **[Neeraj Agarwal](https://www.linkedin.com/in/neeagl/)** 是 Algoscale 的创始人，Algoscale 是一家数据咨询公司，涵盖数据工程、应用 AI、数据科学和产品工程。他在该领域拥有超过 9 年的经验，并帮助了从初创企业到财富 100 强公司等各种组织，处理和存储大量原始数据，以将其转化为可操作的见解，帮助做出更好的决策并加快业务价值的实现。
 

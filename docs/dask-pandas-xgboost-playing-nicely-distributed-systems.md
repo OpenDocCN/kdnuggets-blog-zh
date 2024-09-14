@@ -1,12 +1,12 @@
 # Dask 和 Pandas 和 XGBoost：在分布式系统之间良好配合
 
-> 原文：[https://www.kdnuggets.com/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html](https://www.kdnuggets.com/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)
+> 原文：[`www.kdnuggets.com/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html`](https://www.kdnuggets.com/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)
 
 **作者：Matthew Rocklin，Continuum Analytics。**
 
-*这项工作得到了[Continuum Analytics](http://continuum.io/)、[XDATA计划](https://www.darpa.mil/program/XDATA)和[摩尔基金会](https://www.moore.org/)的数据驱动发现计划的支持*
+*这项工作得到了[Continuum Analytics](http://continuum.io/)、[XDATA 计划](https://www.darpa.mil/program/XDATA)和[摩尔基金会](https://www.moore.org/)的数据驱动发现计划的支持*
 
-> **编辑注：** 如果你想了解 Dask 的介绍，可以阅读[《介绍 Dask 的并行编程：与项目首席开发者的访谈》](/2016/09/introducing-dask-parallel-programming.html)。要了解最新发布的更多信息，请参见[Dask 0.14.1 版本](http://matthewrocklin.com/blog/work/2017/03/23/dask-0.14.1)。
+> **编辑注：** 如果你想了解 Dask 的介绍，可以阅读《介绍 Dask 的并行编程：与项目首席开发者的访谈》。要了解最新发布的更多信息，请参见[Dask 0.14.1 版本](http://matthewrocklin.com/blog/work/2017/03/23/dask-0.14.1)。
 
 ### 总结
 
@@ -20,11 +20,11 @@
 
 +   [Github 问题](https://github.com/dmlc/xgboost/issues/2032)
 
-![Dask](../Images/0b8634648f8ce3dace49e6acf212ca23.png)
+![Dask](img/0b8634648f8ce3dace49e6acf212ca23.png)
 
 ### 引言
 
-XGBoost是一个深受喜爱的库，用于一种流行的机器学习算法类别——梯度提升树。它在商业中广泛使用，并且是Kaggle竞赛中最受欢迎的解决方案之一。对于更大的数据集或更快的训练，XGBoost还配备了自己的分布式计算系统，可以扩展到集群中的多个机器上。太棒了。分布式梯度提升树需求量很大。
+XGBoost 是一个深受喜爱的库，用于一种流行的机器学习算法类别——梯度提升树。它在商业中广泛使用，并且是 Kaggle 竞赛中最受欢迎的解决方案之一。对于更大的数据集或更快的训练，XGBoost 还配备了自己的分布式计算系统，可以扩展到集群中的多个机器上。太棒了。分布式梯度提升树需求量很大。
 
 然而，在我们能够使用分布式 XGBoost 之前，我们需要做三件事情：
 
@@ -52,7 +52,7 @@ XGBoost是一个深受喜爱的库，用于一种流行的机器学习算法类�
 
 熟悉 Pandas 的数据科学家可能会对上述代码感到熟悉。Dask.dataframe 与 Pandas *非常* 相似，但它在集群上运行。
 
-![DF head](../Images/bb4d687a932ec89c5649e823836e6425.png)
+![DF head](img/bb4d687a932ec89c5649e823836e6425.png)
 
 ### 分类和独热编码
 
@@ -76,7 +76,7 @@ XGBoost 不愿意处理像 destination=”LAX” 这样的文本数据。相反�
 
 我们可以将这些预测带到本地进程，并使用普通的 Scikit-learn 操作来评估结果。
 
-![](../Images/e57f05381a23402623b5ec9a7531cee7.png)
+![](img/e57f05381a23402623b5ec9a7531cee7.png)
 
 我们可能想要调整上述参数或尝试不同的数据来改进我们的解决方案。关键不是我们是否准确预测了航班延误，而是如果你是一个了解 Pandas 和 XGBoost 的数据科学家，上述的操作对你来说*相当熟悉*。在上述示例中没有太多新的材料。我们使用的工具和之前一样，只是规模更大。
 
@@ -112,21 +112,21 @@ XGBoost 不愿意处理像 destination=”LAX” 这样的文本数据。相反�
 
 **相关：**
 
-+   [介绍 Dask 并行编程：与项目首席开发者的访谈](/2016/09/introducing-dask-parallel-programming.html)
++   介绍 Dask 并行编程：与项目首席开发者的访谈
 
-+   [XGBoost：在 Spark 和 Flink 中实现最获胜的 Kaggle 算法](/2016/03/xgboost-implementing-winningest-kaggle-algorithm-spark-flink.html)
++   XGBoost：在 Spark 和 Flink 中实现最获胜的 Kaggle 算法
 
-+   [初学者 Pandas 推文分析指南](/2017/03/beginners-guide-tweet-analytics-pandas.html)
++   初学者 Pandas 推文分析指南
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -142,4 +142,4 @@ XGBoost 不愿意处理像 destination=”LAX” 这样的文本数据。相反�
 
 +   [利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)
 
-+   [KDnuggets™ 新闻 22:n07, 2月16日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07, 2 月 16 日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)

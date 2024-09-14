@@ -1,8 +1,8 @@
-# 入门LLMOps：无缝交互的秘密秘诀
+# 入门 LLMOps：无缝交互的秘密秘诀
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions](https://www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions)
+> 原文：[`www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions`](https://www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions)
 
-![入门LLMOps：无缝交互的秘密秘诀](../Images/41bbf21ab76e836297729c8240eceddc.png)
+![入门 LLMOps：无缝交互的秘密秘诀](img/41bbf21ab76e836297729c8240eceddc.png)
 
 作者提供的图片
 
@@ -10,21 +10,21 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 领域
 
 * * *
 
-我敢打赌你已经对像ChatGPT或Google Gemini这样的流行LLM解决方案有所了解。
+我敢打赌你已经对像 ChatGPT 或 Google Gemini 这样的流行 LLM 解决方案有所了解。
 
 但你有没有想过这些强大的模型是如何提供如此迅速的响应的？
 
-答案在一个名为LLMOps的专业领域中。
+答案在一个名为 LLMOps 的专业领域中。
 
 在深入了解之前，让我们先尝试可视化这个领域的重要性。
 
@@ -32,17 +32,17 @@
 
 对吧？
 
-这种流畅的交流是用户在与大型语言模型（LLMs）互动时所期望的。想象一下，如果与ChatGPT对话时，每次发送提示都要等几分钟，那几乎没人会使用它，至少我肯定不会。
+这种流畅的交流是用户在与大型语言模型（LLMs）互动时所期望的。想象一下，如果与 ChatGPT 对话时，每次发送提示都要等几分钟，那几乎没人会使用它，至少我肯定不会。
 
-这就是为什么LLMs旨在通过LLMOps领域在其数字解决方案中实现这种对话流畅性和有效性。本指南旨在成为你在这个全新领域的首步伴侣。
+这就是为什么 LLMs 旨在通过 LLMOps 领域在其数字解决方案中实现这种对话流畅性和有效性。本指南旨在成为你在这个全新领域的首步伴侣。
 
-# 什么是LLMOps？
+# 什么是 LLMOps？
 
-LLMOps，即大型语言模型操作，是确保大型语言模型（LLMs）高效和可靠运行的幕后魔力。它代表了一种对熟悉的MLOps的进步，专门设计用于解决LLMs所带来的独特挑战。
+LLMOps，即大型语言模型操作，是确保大型语言模型（LLMs）高效和可靠运行的幕后魔力。它代表了一种对熟悉的 MLOps 的进步，专门设计用于解决 LLMs 所带来的独特挑战。
 
-虽然MLOps专注于管理通用机器学习模型的生命周期，但LLMOps专门处理LLMs特有的需求。
+虽然 MLOps 专注于管理通用机器学习模型的生命周期，但 LLMOps 专门处理 LLMs 特有的需求。
 
-当通过网络接口或API使用来自OpenAI或Anthropic等实体的模型时，LLMOps在幕后工作，使这些模型作为服务可用。然而，当为特定应用部署模型时，LLMOps的责任就落在我们身上。
+当通过网络接口或 API 使用来自 OpenAI 或 Anthropic 等实体的模型时，LLMOps 在幕后工作，使这些模型作为服务可用。然而，当为特定应用部署模型时，LLMOps 的责任就落在我们身上。
 
 可以把它想象成一个主持人负责讨论的流程。就像主持人保持对话的流畅和与讨论主题的一致，始终确保没有不当言辞并尽量避免假新闻，LLMOps 确保 LLM 以最佳性能运行，提供无缝的用户体验并检查输出的安全性。
 
@@ -52,7 +52,7 @@ LLMOps，即大型语言模型操作，是确保大型语言模型（LLMs）高�
 
 这就是为什么 LLMOps 对任何 LLM 驱动的应用程序的成功至关重要：
 
-![入门 LLMOps：无缝交互的秘密配方](../Images/a915ad3f3626a748263b54f309695db9.png)
+![入门 LLMOps：无缝交互的秘密配方](img/a915ad3f3626a748263b54f309695db9.png)
 
 图片由作者提供
 
@@ -70,9 +70,9 @@ LLMOps，即大型语言模型操作，是确保大型语言模型（LLMs）高�
 
 LLMOps 确保你的提示准备好供 LLM 使用，并尽快返回响应。然而，这一点并不容易。
 
-这个过程包括几个步骤，主要是4步，可以在下面的图像中看到。
+这个过程包括几个步骤，主要是 4 步，可以在下面的图像中看到。
 
-![入门 LLMOps：无缝交互的秘密配方](../Images/3a40915e3381e3711eb36893a30b7a1d.png)
+![入门 LLMOps：无缝交互的秘密配方](img/3a40915e3381e3711eb36893a30b7a1d.png)
 
 图片由作者提供
 
@@ -140,10 +140,10 @@ LLMOps 确保你的提示准备好供 LLM 使用，并尽快返回响应。然�
 
 +   [语义向量搜索如何变革客户支持互动](https://www.kdnuggets.com/how-semantic-vector-search-transforms-customer-support-interactions)
 
-+   [GPT-4：一台机器中的8种模型；秘密已经揭晓](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)
++   [GPT-4：一台机器中的 8 种模型；秘密已经揭晓](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)
 
-+   [HuggingGPT：解决复杂AI任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
++   [HuggingGPT：解决复杂 AI 任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
 
-+   [ChatGPT的工作原理：聊天机器人的背后模型](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)
++   [ChatGPT 的工作原理：聊天机器人的背后模型](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)
 
-+   [稳定扩散：生成式AI的基本直觉](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)
++   [稳定扩散：生成式 AI 的基本直觉](https://www.kdnuggets.com/2023/06/stable-diffusion-basic-intuition-behind-generative-ai.html)

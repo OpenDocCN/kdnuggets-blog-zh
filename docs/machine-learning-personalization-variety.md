@@ -1,18 +1,18 @@
 # 通过多样性增强机器学习个性化
 
-> 原文：[https://www.kdnuggets.com/2021/08/machine-learning-personalization-variety.html](https://www.kdnuggets.com/2021/08/machine-learning-personalization-variety.html)
+> 原文：[`www.kdnuggets.com/2021/08/machine-learning-personalization-variety.html`](https://www.kdnuggets.com/2021/08/machine-learning-personalization-variety.html)
 
-[评论](#comments)
+评论
 
 **作者：[Raghavan Kirthivasan](https://www.linkedin.com/in/raghavankirthivasan/)，Epsilon India 数据科学总监，以及 [Anuj Chaturvedi](https://www.linkedin.com/in/a-chaturvedi/)，Epsilon India 领先数据科学家**。
 
-![个性化](../Images/e6e6592466ad22070e45364ee6a58f2e.png)*[来源](https://medium.com/fiverr-engineering/personalizing-fiverr-from-machine-learning-to-user-experience-2279ee777040)*
+![个性化](img/e6e6592466ad22070e45364ee6a58f2e.png)*[来源](https://medium.com/fiverr-engineering/personalizing-fiverr-from-machine-learning-to-user-experience-2279ee777040)*
 
-企业通常会运行持续8到10周的营销活动，每周向可达的客户群发送电子邮件。由于客户的购买模式取决于产品目录中的产品性质，到下一次购买的时间通常为一个月或更长，具体取决于类别。因此，对于大多数客户来说，每周活动中发送的内容通常是相同的，因为基于历史数据的模型推荐不会每周变化。因此，3到4周的推荐停滞可能导致糟糕的客户体验。
+企业通常会运行持续 8 到 10 周的营销活动，每周向可达的客户群发送电子邮件。由于客户的购买模式取决于产品目录中的产品性质，到下一次购买的时间通常为一个月或更长，具体取决于类别。因此，对于大多数客户来说，每周活动中发送的内容通常是相同的，因为基于历史数据的模型推荐不会每周变化。因此，3 到 4 周的推荐停滞可能导致糟糕的客户体验。
 
 另一方面，基于购买频率，发送内容类似的电子邮件也可以作为提醒，以防客户错过了之前的邮件。因此，发送重复的电子邮件并提供相同的推荐也可能导致收入增加。
 
-本文探讨了通过电子邮件发送的内容个性化，例如SKU、产品、类别等的优惠，并概述了如何利用多样性的概念。
+本文探讨了通过电子邮件发送的内容个性化，例如 SKU、产品、类别等的优惠，并概述了如何利用多样性的概念。
 
 ## 期望状态和限制
 
@@ -20,13 +20,13 @@
 
 这个想法是设计一种策略，在可能的情况下引入推荐的多样性，以便模型推荐不变，活动提升不会受到影响。
 
-如前所述，由于机器学习模型的推荐通常不会频繁变化，想法是识别出机器学习模型推荐的前3或4个类别之外的类别，这些类别客户最有可能购买，同时不牺牲投资回报率。
+如前所述，由于机器学习模型的推荐通常不会频繁变化，想法是识别出机器学习模型推荐的前 3 或 4 个类别之外的类别，这些类别客户最有可能购买，同时不牺牲投资回报率。
 
 ## 提议解决方案
 
-假设有50个类别被指定用于活动。这些类别是客户希望向他们的客户发送电子邮件并告知他们有关这些类别的折扣的类别。我们称这组类别为“***选择池***”。
+假设有 50 个类别被指定用于活动。这些类别是客户希望向他们的客户发送电子邮件并告知他们有关这些类别的折扣的类别。我们称这组类别为“***选择池***”。
 
-数据科学团队的期望是识别出客户最有可能在“***选择池***”中购买的前3或4个类别。在构建模型时，模型将对选择池中的所有类别进行排序，从中选择前3或4个类别，我们将通过电子邮件发送这些类别。
+数据科学团队的期望是识别出客户最有可能在“***选择池***”中购买的前 3 或 4 个类别。在构建模型时，模型将对选择池中的所有类别进行排序，从中选择前 3 或 4 个类别，我们将通过电子邮件发送这些类别。
 
 多样性不是针对客户即将购买的商品进行优化，而是建议客户可能购买的额外产品。
 
@@ -56,7 +56,7 @@
 
 下表结合了这两个方面，并尝试基于不同组合识别一系列行动：
 
-![](../Images/80d7f790900a66b109620d66e84f7cb2.png)
+![](img/80d7f790900a66b109620d66e84f7cb2.png)
 
 上述策略可以在模型投入生产前进行探索。但在此之后，我们需要关注模型上线后如何做出决策。
 
@@ -66,7 +66,7 @@
 
 可能有不同的方法来使用这些信息和做出决策。以下是一种利用客户实际购买行为识别可能从多样性推荐中受益的客户集的方法。
 
-![](../Images/3efe54ee6890c5937445323425950a1a.png)
+![](img/3efe54ee6890c5937445323425950a1a.png)
 
 ### 何时引入多样性？
 
@@ -74,9 +74,9 @@
 
 1.  **广告长度：** 在处理长时间的广告时，引入推荐的多样性似乎很合适，因为客户会多次接触广告，从而有机会在多个邮件中看到相同的推荐。
 
-1.  **广告运行时间在引入多样性之前：** 在引入推荐的多样性之前，需要给广告一些时间成熟，因为初始结果可能无法提供准确的反馈。大约2到3周的时间似乎是一个好的选择，这样可以让广告成熟后再引入多样性，并使我们能做出更明智的决策。
+1.  **广告运行时间在引入多样性之前：** 在引入推荐的多样性之前，需要给广告一些时间成熟，因为初始结果可能无法提供准确的反馈。大约 2 到 3 周的时间似乎是一个好的选择，这样可以让广告成熟后再引入多样性，并使我们能做出更明智的决策。
 
-1.  **选择池大小：** 选择池中的选择数量在多样性相关决策中扮演着重要角色。在选择池非常小的情况下，多样性的决策变得不重要，因为可以尝试的选项很少。选择池有20个选项似乎是一个不错的起点。我们也可以从剩余选项的百分比来考虑，例如，我们需要从20个选项池中推荐4个选项，这样在第一次推荐周期后，我们还剩下80%的选项。
+1.  **选择池大小：** 选择池中的选择数量在多样性相关决策中扮演着重要角色。在选择池非常小的情况下，多样性的决策变得不重要，因为可以尝试的选项很少。选择池有 20 个选项似乎是一个不错的起点。我们也可以从剩余选项的百分比来考虑，例如，我们需要从 20 个选项池中推荐 4 个选项，这样在第一次推荐周期后，我们还剩下 80%的选项。
 
 ### 如何引入多样性？
 
@@ -88,7 +88,7 @@
 
 通俗来说，市场篮子分析（MBA）识别通常一起购买的产品组合。
 
-一种方法是利用模型找到购买概率最高的选择，然后使用MBA识别与模型推荐选择关联度最高的产品组合，并将这些选择作为推荐选择。
+一种方法是利用模型找到购买概率最高的选择，然后使用 MBA 识别与模型推荐选择关联度最高的产品组合，并将这些选择作为推荐选择。
 
 我们现在将看一些基于启发式的方法来增加推荐的多样性。
 
@@ -130,19 +130,19 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 了解更多此话题
 
-+   [增强LLM推理：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
++   [增强 LLM 推理：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
 
-+   [通过Apache Gobblin扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)
++   [通过 Apache Gobblin 扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)
 
 +   [探索思维树提示：AI 如何通过搜索学习推理…](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
 
@@ -150,4 +150,4 @@
 
 +   [通过链式验证解锁可靠生成：一种…](https://www.kdnuggets.com/unlocking-reliable-generations-through-chain-of-verification)
 
-+   [每个机器学习工程师应具备的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应具备的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)

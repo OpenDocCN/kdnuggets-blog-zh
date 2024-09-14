@@ -1,12 +1,12 @@
 # 如何确定你的机器学习模型是否过拟合
 
-> 原文：[https://www.kdnuggets.com/2021/05/how-determine-machine-learning-model-overtrained.html](https://www.kdnuggets.com/2021/05/how-determine-machine-learning-model-overtrained.html)
+> 原文：[`www.kdnuggets.com/2021/05/how-determine-machine-learning-model-overtrained.html`](https://www.kdnuggets.com/2021/05/how-determine-machine-learning-model-overtrained.html)
 
-[评论](#comments)
+评论
 
 **作者 [Charles Martin](http://linkedin.com/in/charlesmartin14)，Calculation Consulting**
 
-![图片](../Images/1787251901052638395b820406593fd6.png)
+![图片](img/1787251901052638395b820406593fd6.png)
 
 你的模型是否过拟合？Weightwatcher 工具可以检测预训练或训练深度神经网络中特定层的过拟合特征。
 
@@ -49,13 +49,13 @@ plt.hist(evals, bin=100, density=True)
 
 通过指定随机化选项，WW 随机化权重矩阵**W**的元素，然后计算其 ESD。这个随机化的 ESD 会叠加在**X**的原始 ESD 上，并绘制在对数刻度上。
 
-这在上面展示了。原始层 ESD 为**绿色**；随机化的 ESD 为**红色**，**橙色线**表示随机化 ESD 的最大特征值 ![\lambda{max}](../Images/7c85a772530b2a81bcb7e3e51ad87fa9.png)。
+这在上面展示了。原始层 ESD 为**绿色**；随机化的 ESD 为**红色**，**橙色线**表示随机化 ESD 的最大特征值 ![\lambda{max}](img/7c85a772530b2a81bcb7e3e51ad87fa9.png)。
 
 如果层是良好训练的矩阵，那么当**W**被随机化时，其 ESD 会类似于正态分布的随机矩阵。这在上面的图 (a) 中有所展示。
 
 但如果该层已过拟合，则其权重矩阵**W**可能包含一些异常大的元素，其中相关性可能集中或*被困*。在这种情况下，ESD 可能会有一个或多个异常大的特征值。这在上面的图 (b) 中有所展示，其中**橙色线**延伸到**红色** ESD 的右侧。
 
-还要注意，在图 (a) 中，**绿色** 的 ESD 具有非常重尾的特性，直方图延伸到 log10=2，或最大特征值接近 100: ![\lambda\sim10^{2}](../Images/f94d58888a858e2da8fbc7a37dddd0ef.png)。但在图 (b) 中，绿色 ESD 的形状明显不同，规模比图 (a) 小。实际上，在 (b) 中，**绿色**（原始）和**红色**（随机化）的层 ESD 看起来几乎相同，除了一个较大的 **绿色** 特征值的小阶梯，延伸到并集中在 **橙色线** 附近。
+还要注意，在图 (a) 中，**绿色** 的 ESD 具有非常重尾的特性，直方图延伸到 log10=2，或最大特征值接近 100: ![\lambda\sim10^{2}](img/f94d58888a858e2da8fbc7a37dddd0ef.png)。但在图 (b) 中，绿色 ESD 的形状明显不同，规模比图 (a) 小。实际上，在 (b) 中，**绿色**（原始）和**红色**（随机化）的层 ESD 看起来几乎相同，除了一个较大的 **绿色** 特征值的小阶梯，延伸到并集中在 **橙色线** 附近。
 
 **在这种情况下，我们可以将 橙色线 识别为 *相关性陷阱*。**
 
@@ -63,31 +63,31 @@ plt.hist(evals, bin=100, density=True)
 
 ### 结论
 
-使用Weight Watcher工具，你可以在训练或微调深度神经网络时检测到此类及其他潜在问题。
+使用 Weight Watcher 工具，你可以在训练或微调深度神经网络时检测到此类及其他潜在问题。
 
 你可以在[WeightWatcher GitHub 网站](https://github.com/CalculatedContent/WeightWatcher)上了解更多信息。
 
-**简介: [查尔斯·马丁博士](http://linkedin.com/in/charlesmartin14)** 与加州大学伯克利分校共同开发了Weight Watcher项目。他在加利福尼亚州旧金山经营一家精品咨询公司，帮助客户开发人工智能解决方案。他曾与eBay、Blackrock、GoDaddy和沃尔玛等大型公司合作，也与Aardvark（被谷歌收购）和Demand Media（自谷歌以来的首个十亿美元IPO）等非常成功的初创公司合作。他还通过人类世研究所向Page家族办公室提供关于人工智能、核物理和量子力学/计算领域的建议。
+**简介: [查尔斯·马丁博士](http://linkedin.com/in/charlesmartin14)** 与加州大学伯克利分校共同开发了 Weight Watcher 项目。他在加利福尼亚州旧金山经营一家精品咨询公司，帮助客户开发人工智能解决方案。他曾与 eBay、Blackrock、GoDaddy 和沃尔玛等大型公司合作，也与 Aardvark（被谷歌收购）和 Demand Media（自谷歌以来的首个十亿美元 IPO）等非常成功的初创公司合作。他还通过人类世研究所向 Page 家族办公室提供关于人工智能、核物理和量子力学/计算领域的建议。
 
 [原文](https://calculatedcontent.com/2021/04/04/are-your-models-overtrained/)。经许可转载。
 
 **相关:**
 
-+   [微软使用变换器网络以最少的训练回答关于图像的问题](/2021/01/microsoft-transformer-networks-answer-questions-minimum-training.html)
++   微软使用变换器网络以最少的训练回答关于图像的问题
 
-+   [教 AI 像人类一样看待事物](/2021/03/teaching-ai-see-like-human.html)
++   教 AI 像人类一样看待事物
 
-+   [如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)
++   如何加速 Scikit-Learn 模型训练
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -97,10 +97,10 @@ plt.hist(evals, bin=100, density=True)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

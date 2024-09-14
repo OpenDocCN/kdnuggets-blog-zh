@@ -1,8 +1,8 @@
 # 从数据科学到机器学习工程
 
-> 原文：[https://www.kdnuggets.com/2020/11/moving-data-science-machine-learning-engineering.html](https://www.kdnuggets.com/2020/11/moving-data-science-machine-learning-engineering.html)
+> 原文：[`www.kdnuggets.com/2020/11/moving-data-science-machine-learning-engineering.html`](https://www.kdnuggets.com/2020/11/moving-data-science-machine-learning-engineering.html)
 
-[评论](#comments)
+评论
 
 **[Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)，Cortex Labs**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -46,7 +46,7 @@
 
 Glisten.ai 使用训练有素的模型集来创建一个 API，从产品图像中提取结构化信息：
 
-![图示](../Images/6ca61e8c409acbf26be082ab59e53552.png)
+![图示](img/6ca61e8c409acbf26be082ab59e53552.png)
 
 来源： [TechCrunch](https://techcrunch.com/2020/03/13/glisten-uses-computer-vision-to-break-down-fashion-photos-to-their-styles-and-parts/)
 
@@ -56,7 +56,7 @@ Glisten.ai 使用训练有素的模型集来创建一个 API，从产品图像�
 
 Wildlife Protection Solutions 是一个小型非营利组织，利用技术保护濒危物种。最近，他们升级了视频监控系统，纳入了一个经过训练的目标检测模型，以识别偷猎者。该模型的检测率已经**翻倍**：
 
-![图](../Images/974b9d305cd8e25824fdb5538e9f510d.png)
+![图](img/974b9d305cd8e25824fdb5538e9f510d.png)
 
 来源：[Silverpond](https://silverpond.com.au/case-studies/wildlife-protection-solutions/)
 
@@ -68,7 +68,7 @@ Wildlife Protection Solutions 是一个小型非营利组织，利用技术保�
 
 PostEra 是一个药物化学平台，利用机器翻译将化合物“翻译”为工程蓝图。目前，化学家们正在利用这个平台进行一个开源项目，寻找 COVID19 的治疗方法：
 
-![图](../Images/da91f979875c472ddfabed6adb359a85.png)
+![图](img/da91f979875c472ddfabed6adb359a85.png)
 
 来源：[PostEra](https://postera.ai/demo)
 
@@ -82,7 +82,7 @@ AI Dungeon 是一个经典的地下城探险游戏，带有一个小变化：它
 
 > Reddit 今日发现 ???? 有没有其他人有幸为你的龙车买保险？[pic.twitter.com/TGQh3Tju89](https://t.co/TGQh3Tju89)
 > 
-> — AI Dungeon (@AiDungeon) [2020年6月28日](https://twitter.com/AiDungeon/status/1277352539101356032?ref_src=twsrc%5Etfw)
+> — AI Dungeon (@AiDungeon) [2020 年 6 月 28 日](https://twitter.com/AiDungeon/status/1277352539101356032?ref_src=twsrc%5Etfw)
 
 训练 GPT-2 是一项历史性的 数据科学 成就。将其构建成地下城探险游戏则是机器学习工程的一项壮举。
 
@@ -96,7 +96,7 @@ AI Dungeon 是一个经典的地下城探险游戏，带有一个小变化：它
 
 从高层次来看，我们可以说机器学习工程指的是所有需要将训练好的模型转化为生产应用程序的任务：
 
-![Image for post](../Images/bc362fdecef72165f6e6f46d8e6aab46.png)
+![Image for post](img/bc362fdecef72165f6e6f46d8e6aab46.png)
 
 为了让这些更具体，我们可以用一个简单的例子。
 
@@ -104,7 +104,7 @@ AI Dungeon 是一个经典的地下城探险游戏，带有一个小变化：它
 
 理论上，这应该类似于部署任何其他 Web 服务。将模型封装在类似 FastAPI 的 API 中，用 Docker 容器化它，部署到 Kubernetes 集群中，并通过负载均衡器暴露它。
 
-![Figure](../Images/10fd1a75ebccb83175d1fc2cf0f09284.png)
+![Figure](img/10fd1a75ebccb83175d1fc2cf0f09284.png)
 
 来源：[Cortex 推理架构](https://github.com/cortexlabs/cortex)
 
@@ -136,7 +136,7 @@ AI Dungeon 是一个经典的地下城探险游戏，带有一个小变化：它
 
 所以，我们开始开发适用于机器学习工程的工具，这些工具应用了这些原则。[Cortex，我们的开源 API 平台](https://github.com/cortexlabs/cortex)使机器学习工程师尽可能容易地将模型部署为 API，使用的界面对任何软件工程师来说都很熟悉：
 
-![图](../Images/e47e923503717626044168af04548cc1.png)
+![图](img/e47e923503717626044168af04548cc1.png)
 
 来源：[Cortex repo](https://github.com/cortexlabs/cortex)
 
@@ -150,7 +150,7 @@ API 平台实际上是 AI Dungeon 以及上述所有其他机器学习初创公�
 
 可重复性，例如，不仅仅是机器学习中的挑战。这也是软件工程中的问题——但我们使用版本控制来解决它。而虽然传统的版本控制软件如 Git 不适用于机器学习，你仍然可以应用这些原则。DVC（数据版本控制），将类似 Git 的版本控制应用于训练数据、代码及其结果模型，就实现了这一点。
 
-![图](../Images/ae50340a7a007cc895992da133fa5159.png)
+![图](img/ae50340a7a007cc895992da133fa5159.png)
 
 来源：[DVC](https://dvc.org/doc/use-cases/versioning-data-and-model-files)
 
@@ -158,7 +158,7 @@ API 平台实际上是 AI Dungeon 以及上述所有其他机器学习初创公�
 
 最终，我们也看到这种情况发生在机器学习工程中。例如，Hugging Face 的 Transformers 库提供了大多数流行变换模型的简易接口：
 
-![图](../Images/f0aa7a217fc5ec0e12d3653ba153e737.png)
+![图](img/f0aa7a217fc5ec0e12d3653ba153e737.png)
 
 来源：[Hugging Face](https://huggingface.co/)
 
@@ -166,32 +166,32 @@ API 平台实际上是 AI Dungeon 以及上述所有其他机器学习初创公�
 
 我们对这个生态系统如此兴奋——不仅仅因为我们是其中的一部分——是因为它代表了机器学习几十年的研究与人们每天面临的问题之间的桥梁。每当这些项目消除了机器学习工程的障碍时，新团队就更容易用机器学习解决问题。
 
-在未来，机器学习将成为每位工程师工具栈的一部分。几乎没有问题是机器学习无法触及的。这一进程的速度完全取决于我们能够多快开发出像Cortex这样的平台，并加速机器学习工程的普及。
+在未来，机器学习将成为每位工程师工具栈的一部分。几乎没有问题是机器学习无法触及的。这一进程的速度完全取决于我们能够多快开发出像 Cortex 这样的平台，并加速机器学习工程的普及。
 
 如果这也让你兴奋，[我们随时欢迎新的贡献者](https://github.com/cortexlabs)。
 
-**个人简介：[Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)** ([@KaiserFrose](https://twitter.com/KaiserFrose)) 是Cortex Labs的创始团队成员，帮助维护Cortex。
+**个人简介：[Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)** ([@KaiserFrose](https://twitter.com/KaiserFrose)) 是 Cortex Labs 的创始团队成员，帮助维护 Cortex。
 
 [原文](https://towardsdatascience.com/moving-from-data-science-to-machine-learning-engineering-68916173eaf3)。经许可转载。
 
 **相关内容：**
 
-+   [如何将PyTorch Lightning模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)
++   如何将 PyTorch Lightning 模型部署到生产环境
 
-+   [机器学习工程师与数据科学家（数据科学结束了吗？）](/2020/06/machine-learning-engineer-vs-data-scientist.html)
++   机器学习工程师与数据科学家（数据科学结束了吗？）
 
-+   [你不必再使用Docker了](/2020/10/use-docker-anymore.html)
++   你不必再使用 Docker 了
 
 ### 更多相关话题
 
-+   [掌握数据科学、数据工程、机器学习的25门免费课程](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [掌握数据科学、数据工程、机器学习的 25 门免费课程](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
 +   [学习数据科学、数据工程等的免费课程合集](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)
 
 +   [机器学习中的特征工程实用方法](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)
 
-+   [KDnuggets新闻，7月13日：数据科学的线性代数；10种现代…](https://www.kdnuggets.com/2022/n28.html)
++   [KDnuggets 新闻，7 月 13 日：数据科学的线性代数；10 种现代…](https://www.kdnuggets.com/2022/n28.html)
 
-+   [10种现代数据工程工具](https://www.kdnuggets.com/2022/07/10-modern-data-engineering-tools.html)
++   [10 种现代数据工程工具](https://www.kdnuggets.com/2022/07/10-modern-data-engineering-tools.html)
 
 +   [完整的数据工程学习路线图](https://www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html)

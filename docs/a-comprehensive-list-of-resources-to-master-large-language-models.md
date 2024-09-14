@@ -1,28 +1,28 @@
 # 掌握大型语言模型的综合资源清单
 
-> 原文：[https://www.kdnuggets.com/a-comprehensive-list-of-resources-to-master-large-language-models](https://www.kdnuggets.com/a-comprehensive-list-of-resources-to-master-large-language-models)
+> 原文：[`www.kdnuggets.com/a-comprehensive-list-of-resources-to-master-large-language-models`](https://www.kdnuggets.com/a-comprehensive-list-of-resources-to-master-large-language-models)
 
-![掌握大型语言模型的综合资源清单](../Images/9a9ac1d31ad0b5bd1ab742d0c0d798a1.png)
+![掌握大型语言模型的综合资源清单](img/9a9ac1d31ad0b5bd1ab742d0c0d798a1.png)
 
 图片由 Leonardo.Ai 生成
 
-在广袤的人工智能领域中，出现了一股革命性的力量——大型语言模型（LLMs）。这不仅仅是一个流行词，而是我们的未来。它们理解和生成类似人类文本的能力使其成为焦点，现在已成为最热门的研究领域之一。想象一个聊天机器人可以像你和朋友对话那样回应你，或者设想一个内容生成系统，使人们难以区分是由人类还是人工智能撰写的。如果这些事物令你感兴趣，并且你想深入了解LLMs的核心，那么你来对地方了。我收集了一份全面的资源清单，从信息文章、课程到GitHub仓库以及相关研究论文，这些都可以帮助你更好地理解它们。事不宜迟，让我们开始在LLMs世界中的精彩旅程吧。
+在广袤的人工智能领域中，出现了一股革命性的力量——大型语言模型（LLMs）。这不仅仅是一个流行词，而是我们的未来。它们理解和生成类似人类文本的能力使其成为焦点，现在已成为最热门的研究领域之一。想象一个聊天机器人可以像你和朋友对话那样回应你，或者设想一个内容生成系统，使人们难以区分是由人类还是人工智能撰写的。如果这些事物令你感兴趣，并且你想深入了解 LLMs 的核心，那么你来对地方了。我收集了一份全面的资源清单，从信息文章、课程到 GitHub 仓库以及相关研究论文，这些都可以帮助你更好地理解它们。事不宜迟，让我们开始在 LLMs 世界中的精彩旅程吧。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 # 1. 基础课程
 
-![掌握大型语言模型的综合资源清单](../Images/91e6913c9b716a2da8684e7f1875d1d1.png)
+![掌握大型语言模型的综合资源清单](img/91e6913c9b716a2da8684e7f1875d1d1.png)
 
 图片由 [Polina Tankilevitch](https://www.pexels.com/photo/a-person-holding-a-digital-tablet-4443160/) 提供，来自 Pexels
 
@@ -30,7 +30,7 @@
 
 **链接:** [深度学习专业课程](https://www.coursera.org/specializations/deep-learning)
 
-**描述：** 深度学习是LLMs的基础。这门由 Andrew Ng 授课的全面课程涵盖了神经网络的基本主题、计算机视觉和自然语言处理的基础知识，以及如何构建你的机器学习项目。
+**描述：** 深度学习是 LLMs 的基础。这门由 Andrew Ng 授课的全面课程涵盖了神经网络的基本主题、计算机视觉和自然语言处理的基础知识，以及如何构建你的机器学习项目。
 
 ## 2. 斯坦福 CS224N：深度学习中的自然语言处理 - YouTube
 
@@ -60,7 +60,7 @@
 
 # 2\. 针对 LLM 的特定课程
 
-![全面的 LLM 资源列表](../Images/bbe015c0257058dfb49212a508206afe.png)
+![全面的 LLM 资源列表](img/bbe015c0257058dfb49212a508206afe.png)
 
 图像由 Leonardo.Ai 生成
 
@@ -102,7 +102,7 @@
 
 # 3\. 文章 / 书籍
 
-![掌握大型语言模型的全面资源列表](../Images/c9cd122674cbd370edeb28b04a6fa779.png)
+![掌握大型语言模型的全面资源列表](img/c9cd122674cbd370edeb28b04a6fa779.png)
 
 使用 Leonardo.Ai 生成的图像
 
@@ -124,15 +124,15 @@
 
 **描述：** Jay Alammar 的博客是学习大型语言模型（LLMs）和变压器的知识宝库。他的博客以独特的可视化、直观的解释和全面的主题覆盖而脱颖而出。
 
-## 4\. 为生产构建LLM应用 - Chip Huyen
+## 4\. 为生产构建 LLM 应用 - Chip Huyen
 
-**链接：** [为生产构建LLM应用](https://huyenchip.com/2023/04/11/llm-engineering.html)
+**链接：** [为生产构建 LLM 应用](https://huyenchip.com/2023/04/11/llm-engineering.html)
 
-**描述：** 本文讨论了生产化大型语言模型（LLMs）的挑战。它提供了任务可组合性的见解，并展示了有前景的使用案例。任何对实际应用的LLMs感兴趣的人都会发现它非常有价值。
+**描述：** 本文讨论了生产化大型语言模型（LLMs）的挑战。它提供了任务可组合性的见解，并展示了有前景的使用案例。任何对实际应用的 LLMs 感兴趣的人都会发现它非常有价值。
 
 # 4\. Github 仓库
 
-![掌握大型语言模型的全面资源列表](../Images/7e828d665ba6bb8264bfe6aa82cdc00c.png)
+![掌握大型语言模型的全面资源列表](img/7e828d665ba6bb8264bfe6aa82cdc00c.png)
 
 图片由 [RealToughCandy.com](https://www.pexels.com/search/github/) 提供，来自 Pexels
 
@@ -152,7 +152,7 @@
 
 **链接：** [LLMSurvey](https://github.com/RUCAIBox/LLMSurvey)
 
-**描述：** 这是一个基于论文《[大型语言模型调查](https://arxiv.org/abs/2303.18223)》的调查论文和资源的集合。它还包含了GPT系列模型的技术演变图解以及LLaMA研究工作的演变图。
+**描述：** 这是一个基于论文《[大型语言模型调查](https://arxiv.org/abs/2303.18223)》的调查论文和资源的集合。它还包含了 GPT 系列模型的技术演变图解以及 LLaMA 研究工作的演变图。
 
 ## 4\. Awesome Graph-LLM ( 637 ⭐ )
 

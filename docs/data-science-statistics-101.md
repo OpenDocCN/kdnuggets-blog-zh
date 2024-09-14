@@ -1,6 +1,6 @@
-# 数据科学统计学101
+# 数据科学统计学 101
 
-> 原文：[https://www.kdnuggets.com/2016/07/data-science-statistics-101.html](https://www.kdnuggets.com/2016/07/data-science-statistics-101.html)
+> 原文：[`www.kdnuggets.com/2016/07/data-science-statistics-101.html`](https://www.kdnuggets.com/2016/07/data-science-statistics-101.html)
 
 **作者：Jean-Nicholas Hould，JeanNicholasHould.com**。
 
@@ -10,15 +10,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-![统计学](../Images/bfade4e646590d1f5d79313393733231.png)
+![统计学](img/bfade4e646590d1f5d79313393733231.png)
 
 统计学是一个严肃的学科，有些人一生都在研究它。**作为一名有抱负的数据科学家，你应该如何学习统计学？你需要了解什么？学习统计学的最佳方法是什么？** 下面是你应该如何进行的。
 
@@ -58,7 +58,7 @@
 
 记住，学习这些概念的最佳方式是将你的知识应用于具体的例子。一旦你开始将这些概念融入到你的分析中，我建议你阅读一本统计学手册，比如 [《统计学全书》](https://www.amazon.com/All-Statistics-Statistical-Inference-Springer/dp/0387402721) 并加深你的知识。
 
-**简介：让-尼古拉斯·霍尔德** 是一位来自 [加拿大蒙特利尔的数据科学家](http://jeannicholashould.com/?utm_source=kdnugget)。JeanNicholasHould.com的作者。
+**简介：让-尼古拉斯·霍尔德** 是一位来自 [加拿大蒙特利尔的数据科学家](http://jeannicholashould.com/?utm_source=kdnugget)。JeanNicholasHould.com 的作者。
 
 [原始链接](http://www.jeannicholashould.com/getting-started-with-statistics-for-data-science.html)。已获转载许可。
 
@@ -68,18 +68,18 @@
 
 +   [大数据、圣经密码与邦费罗尼](https://www.kdnuggets.com/2016/07/big-data-bible-codes-bonferroni.html)
 
-+   [15个数据科学数学MOOC](https://www.kdnuggets.com/2015/09/15-math-mooc-data-science.html)
++   [15 个数据科学数学 MOOC](https://www.kdnuggets.com/2015/09/15-math-mooc-data-science.html)
 
 ### 更多相关主题
 
-+   [数据科学家的线性规划101](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)
++   [数据科学家的线性规划 101](https://www.kdnuggets.com/2023/02/linear-programming-101-data-scientists.html)
 
-+   [LangChain 101：构建你自己的GPT驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
++   [LangChain 101：构建你自己的 GPT 驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
 
-+   [提示工程101：掌握高效LLM沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
++   [提示工程 101：掌握高效 LLM 沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
 
-+   [KDnuggets新闻，7月6日：12个必备数据科学VSCode…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备数据科学 VSCode…](https://www.kdnuggets.com/2022/n27.html)
 
-+   [数据科学的8个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
++   [数据科学的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
 
 +   [数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)

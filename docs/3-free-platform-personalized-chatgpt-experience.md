@@ -1,8 +1,8 @@
 # 3 个免费平台，提供个性化的 ChatGPT 体验
 
-> 原文：[https://www.kdnuggets.com/2023/05/3-free-platform-personalized-chatgpt-experience.html](https://www.kdnuggets.com/2023/05/3-free-platform-personalized-chatgpt-experience.html)
+> 原文：[`www.kdnuggets.com/2023/05/3-free-platform-personalized-chatgpt-experience.html`](https://www.kdnuggets.com/2023/05/3-free-platform-personalized-chatgpt-experience.html)
 
-![3 个免费平台，提供个性化的 ChatGPT 体验](../Images/c0700926ecd0b113c7f21abe48079e17.png)
+![3 个免费平台，提供个性化的 ChatGPT 体验](img/c0700926ecd0b113c7f21abe48079e17.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的 3 个最佳课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -28,75 +28,75 @@
 
 使用 [Forefront Chat](https://chat.forefront.ai/)，你可以自由创建自己独特的角色或从一系列名人和历史人物中选择。这个免费平台甚至允许你选择 GPT-4 模型。此外，你可以轻松创建不同的分类，Forefront Chat 会根据你选择的主题自动生成聊天实例。
 
-![3 个免费平台，提供个性化的 ChatGPT 体验](../Images/27e28c673746fec1abc23d270b46c287.png)
+![3 个免费平台，提供个性化的 ChatGPT 体验](img/27e28c673746fec1abc23d270b46c287.png)
 
 图片来自 Forefront AI
 
 注册后，你会被提示选择一个角色开始聊天。我选择了尤达，并让聊天机器人生成一个清理表格数据的代码。这些聊天机器人由 GPT-3.5 和 GPT-4 提供支持，使它们能够生成各种内容，从文本和代码到诗歌、故事甚至书籍，所有内容都带有一点幽默。正如你所见，机器人回应了经典的尤达语录：“当然，年轻的帕达万。”
 
-![3 个免费平台，提供个性化的 ChatGPT 体验](../Images/19b71397d92645828d8a246d4e03e3ea.png)
+![3 个免费平台，提供个性化的 ChatGPT 体验](img/19b71397d92645828d8a246d4e03e3ea.png)
 
 图片来自 Forefront AI
 
 最棒的部分是，你可以在聊天过程中从 GPT-3.5 切换到 GPT-4，甚至随时更改角色。
 
-![3 个免费平台，提供个性化的 ChatGPT 体验](../Images/c8a8610c8cccd614cb1232b89de8858f.png)
+![3 个免费平台，提供个性化的 ChatGPT 体验](img/c8a8610c8cccd614cb1232b89de8858f.png)
 
 图片来自 Forefront AI
 
 # 2. Quora Poe
 
-[Quora Poe](https://poe.com/) 是一个你可以试验最先进聊天机器人甚至构建自己机器人的平台。它提供了对顶级AI模型的访问，如GPT-4、ChatGPT、Claude、Sage、NeevaAI和Dragonfly。像Dragonfly这样的某些模型具有互动功能，提供链接和后续问题，带来更具参与感的体验。
+[Quora Poe](https://poe.com/) 是一个你可以试验最先进聊天机器人甚至构建自己机器人的平台。它提供了对顶级 AI 模型的访问，如 GPT-4、ChatGPT、Claude、Sage、NeevaAI 和 Dragonfly。像 Dragonfly 这样的某些模型具有互动功能，提供链接和后续问题，带来更具参与感的体验。
 
-![3个免费的个性化ChatGPT体验平台](../Images/6a71745c34e16959feeb45654474fea5.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/6a71745c34e16959feeb45654474fea5.png)
 
-图片来自Poe
+图片来自 Poe
 
 要创建个性化聊天机器人，你需要点击“创建一个机器人”按钮并填写详细信息。系统会要求你添加一张图片、名称、机器人描述、提示和介绍信息。
 
-我创建了一个基于ChatGPT的KDnuggets机器人，用于提供有关数据科学和人工智能的新闻。
+我创建了一个基于 ChatGPT 的 KDnuggets 机器人，用于提供有关数据科学和人工智能的新闻。
 
-![3个免费的个性化ChatGPT体验平台](../Images/929806312be40e4ba6800a195f2d79a8.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/929806312be40e4ba6800a195f2d79a8.png)
 
-图片来自Poe
+图片来自 Poe
 
 添加必要信息后，你可以开始与机器人互动，坦白说，它非常棒。
 
-![3个免费的个性化ChatGPT体验平台](../Images/dcfa45f900977aa327c1beb8bf9bf289.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/dcfa45f900977aa327c1beb8bf9bf289.png)
 
-图片来自Poe
+图片来自 Poe
 
 # 3\. Ora.sh
 
-[Ora.sh](https://ora.sh/) 有些不同，除了提供个性化聊天体验外，它还允许你生成高质量图像。此外，你可以访问350k+个由Ora用户创建的机器人。
+[Ora.sh](https://ora.sh/) 有些不同，除了提供个性化聊天体验外，它还允许你生成高质量图像。此外，你可以访问 350k+个由 Ora 用户创建的机器人。
 
-![3个免费的个性化ChatGPT体验平台](../Images/df31a430fd9971b2cf71536b40f8d0b5.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/df31a430fd9971b2cf71536b40f8d0b5.png)
 
-图片来自Ora
+图片来自 Ora
 
 注册账户后，它会要求你创建一个自定义聊天机器人或从“探索”标签中选择推荐的聊天机器人。
 
-在我们的案例中，我们将创建一个DataGPT机器人来帮助我们学习数据科学。你可以通过提供初始提示来定制聊天机器人的行为。你可以让它充当数据科学导师，或者告诉它询问你有关数据科学的问题，或告诉你随机的事实。
+在我们的案例中，我们将创建一个 DataGPT 机器人来帮助我们学习数据科学。你可以通过提供初始提示来定制聊天机器人的行为。你可以让它充当数据科学导师，或者告诉它询问你有关数据科学的问题，或告诉你随机的事实。
 
-![3个免费的个性化ChatGPT体验平台](../Images/d883ca07349d0b8b8d9663584ebfda08.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/d883ca07349d0b8b8d9663584ebfda08.png)
 
-图片来自Ora
+图片来自 Ora
 
-就像任何ChatGPT机器人一样，Ora旨在为你提供连贯和信息丰富的回答。无论你是初学者还是有经验的程序员，你都可以学习到有价值的技能，比如在Python中编写函数。
+就像任何 ChatGPT 机器人一样，Ora 旨在为你提供连贯和信息丰富的回答。无论你是初学者还是有经验的程序员，你都可以学习到有价值的技能，比如在 Python 中编写函数。
 
-![3个免费的个性化ChatGPT体验平台](../Images/770494b9605712d3194cf4dae286a844.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/770494b9605712d3194cf4dae286a844.png)
 
-图片来自Ora
+图片来自 Ora
 
 你甚至可以通过点击图像按钮并编写提示来生成图像。
 
 在示例中，我让它生成了一张使用计算机绘制的熊猫图像。这张图像准确且高质量。
 
-![3个免费的个性化ChatGPT体验平台](../Images/6ed074d4cfed5f8aa218d982efa06192.png)
+![3 个免费的个性化 ChatGPT 体验平台](img/6ed074d4cfed5f8aa218d982efa06192.png)
 
-图片来自Ora
+图片来自 Ora
 
-Ora平台还允许你通过简单的步骤将机器人嵌入到你的网站中。
+Ora 平台还允许你通过简单的步骤将机器人嵌入到你的网站中。
 
 你还需要什么？
 

@@ -1,8 +1,8 @@
 # 数据科学难题，解释
 
-> 原文：[https://www.kdnuggets.com/2016/03/data-science-puzzle-explained.html/2](https://www.kdnuggets.com/2016/03/data-science-puzzle-explained.html/2)
+> 原文：[`www.kdnuggets.com/2016/03/data-science-puzzle-explained.html/2`](https://www.kdnuggets.com/2016/03/data-science-puzzle-explained.html/2)
 
-由**[Matthew Mayo](https://www.kdnuggets.com/author/matt-mayo "Posts by Matthew Mayo")**撰写，KDnuggets主编，2016年3月10日，发表于[人工智能](https://www.kdnuggets.com/tag/artificial-intelligence)、[数据挖掘](https://www.kdnuggets.com/tag/data-mining)、[数据科学](https://www.kdnuggets.com/tag/data-science)、[深度学习](https://www.kdnuggets.com/tag/deep-learning)、[解释](https://www.kdnuggets.com/tag/explained)、[机器学习](https://www.kdnuggets.com/tag/machine-learning)
+由**[Matthew Mayo](https://www.kdnuggets.com/author/matt-mayo "Posts by Matthew Mayo")**撰写，KDnuggets 主编，2016 年 3 月 10 日，发表于[人工智能](https://www.kdnuggets.com/tag/artificial-intelligence)、[数据挖掘](https://www.kdnuggets.com/tag/data-mining)、[数据科学](https://www.kdnuggets.com/tag/data-science)、[深度学习](https://www.kdnuggets.com/tag/deep-learning)、[解释](https://www.kdnuggets.com/tag/explained)、[机器学习](https://www.kdnuggets.com/tag/machine-learning)
 
 **数据挖掘**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 数据挖掘，作为机器学习的姊妹术语，也是数据科学的重要组成部分。在数据科学这个术语爆炸之前，实际上数据挖掘作为谷歌搜索术语享有更大的成功。查看比上述图形所示时间更久的谷歌趋势，数据挖掘曾经更加流行。然而，如今，数据挖掘似乎在机器学习和数据科学之间作为一个概念存在。如果接受上述解释，即数据挖掘是一个*过程*，那么将数据科学视为数据挖掘的超集以及继承术语是有意义的。
 
-![深度学习](../Images/8220d8c9ccde28a451410ffd1f40bf5d.png)
+![深度学习](img/8220d8c9ccde28a451410ffd1f40bf5d.png)
 
 **深度学习**
 
@@ -46,13 +46,13 @@
 
 在我看来，人工智能是一个标准，是一个不断变化的目标，是一个无法实现的理想。每当我们走向人工智能的成就时，这些成就似乎总是会被称作其他东西。
 
-我曾经读过类似这样的说法：如果你在1960年代问一位AI研究人员他们对人工智能的定义，他们可能会一致认为，一个可以放在口袋里的小设备，能够帮助预测我们的下一步动作和愿望，并且随时可以获得所有人类知识，这样的设备就是真正的人工智能。然而，我们今天都使用智能手机，极少有人会把它们称作人工智能。
+我曾经读过类似这样的说法：如果你在 1960 年代问一位 AI 研究人员他们对人工智能的定义，他们可能会一致认为，一个可以放在口袋里的小设备，能够帮助预测我们的下一步动作和愿望，并且随时可以获得所有人类知识，这样的设备就是真正的人工智能。然而，我们今天都使用智能手机，极少有人会把它们称作人工智能。
 
 人工智能在数据科学中适合什么位置？嗯，正如我所说的，我不认为人工智能是任何实际存在的东西，所以很难说它适合在哪里。但在与数据科学和机器学习相关的许多领域中，人工智能提供了**动机**，有时这种动机与实际的价值同等重要；计算机视觉和现代深度学习研究都受益于*人工智能精神*，即使不是无限期地。
 
 人工智能可能是一个最有资金投入但在其名字行业中却从未实际产生任何东西的研究与开发工具。虽然我认为从人工智能直接过渡到数据科学可能不是理解这两者关系的最佳方式，但在某种形式下，许多两者之间的中介步骤已经由人工智能开发和完善。
 
-[![我对数据科学的看法](../Images/d3fd6820ddc921a158c9483da8c8a213.png)](https://i.imgur.com/ml4wKRT.jpg)
+![我对数据科学的看法](https://i.imgur.com/ml4wKRT.jpg)
 
 **数据科学**
 
@@ -70,11 +70,11 @@
 
 **相关**：
 
-+   [真正的数据科学家请站出来](/2015/05/data-science-machine-learning-scientist-definition-jargon.html)
++   真正的数据科学家请站出来
 
-+   [十大数据挖掘算法解析](/2015/05/top-10-data-mining-algorithms-explained.html)
++   十大数据挖掘算法解析
 
-+   [商业领袖的数据分析解析](/2014/09/data-analytics-business-leaders-explained.html)
++   商业领袖的数据分析解析
 
 ### 相关主题
 

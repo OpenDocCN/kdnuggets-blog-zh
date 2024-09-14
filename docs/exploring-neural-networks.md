@@ -1,6 +1,6 @@
 # 探索神经网络
 
-> 原文：[https://www.kdnuggets.com/exploring-neural-networks](https://www.kdnuggets.com/exploring-neural-networks)
+> 原文：[`www.kdnuggets.com/exploring-neural-networks`](https://www.kdnuggets.com/exploring-neural-networks)
 
 想象一下，一台机器像人脑一样思考、学习和适应，并发现数据中的隐藏模式。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -22,7 +22,7 @@
 
 # 什么是神经网络？
 
-![探索神经网络](../Images/c0dbabd3ab1166eaf73a824cf47df77c.png)
+![探索神经网络](img/c0dbabd3ab1166eaf73a824cf47df77c.png)
 
 来源: [vitalflux.com](https://vitalflux.com/sklearn-neural-network-regression-example-mlpregressor/)
 
@@ -46,7 +46,7 @@
 
 让我们突显一些神经网络推动创新和改变日常体验的有趣例子，包括神经网络类型。
 
-![探索神经网络](../Images/cd21a2da38cd49b126c32bd7a64f0286.png)
+![探索神经网络](img/cd21a2da38cd49b126c32bd7a64f0286.png)
 
 作者提供的图片
 
@@ -110,29 +110,29 @@
 
 循环神经网络（RNNs）的不同之处在于它们具有内部循环或递归结构，使它们能够存储信息。这使得它们非常适合处理序列数据，因为每个神经元可以利用其内部状态记住序列中前一个时间步的信息。
 
-在处理数据时，网络会考虑当前和之前的输入，从而形成一种短期记忆。然而，RNNs可能会遇到梯度消失和爆炸等问题，这使得学习数据中的长期依赖关系变得困难。
+在处理数据时，网络会考虑当前和之前的输入，从而形成一种短期记忆。然而，RNNs 可能会遇到梯度消失和爆炸等问题，这使得学习数据中的长期依赖关系变得困难。
 
 为了解决这些问题，开发了更高级的版本，如长短期记忆（LSTM）和门控递归单元（GRU）网络。
 
-### RNN使用案例
+### RNN 使用案例
 
 **语音转文本**
 
-RNNs接受音频序列作为输入，产生文本序列作为输出，考虑到口语语言中的时间依赖关系。
+RNNs 接受音频序列作为输入，产生文本序列作为输出，考虑到口语语言中的时间依赖关系。
 
-RNNs的递归性质使其能够考虑音频输入的序列，使其擅长理解人类语音中的上下文和细微差别。
+RNNs 的递归性质使其能够考虑音频输入的序列，使其擅长理解人类语音中的上下文和细微差别。
 
 **机器翻译**
 
-RNNs将一个语言的序列转换为另一个语言的序列，考虑整个输入序列以产生准确的输出序列。
+RNNs 将一个语言的序列转换为另一个语言的序列，考虑整个输入序列以产生准确的输出序列。
 
 序列到序列学习能力保持语言之间的上下文，使翻译更准确且具有上下文相关性。
 
 **情感分析**
 
-RNNs分析文本序列以识别和提取观点和情感。
+RNNs 分析文本序列以识别和提取观点和情感。
 
-RNNs中的记忆特性有助于捕捉文本序列中的情感积累，使其适合用于情感分析任务。
+RNNs 中的记忆特性有助于捕捉文本序列中的情感积累，使其适合用于情感分析任务。
 
 # 结论
 
@@ -148,11 +148,11 @@ RNNs中的记忆特性有助于捕捉文本序列中的情感积累，使其适�
 
 ### 更多相关话题
 
-+   [在神经网络之前尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [在神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
 
-+   [使用PyTorch进行可解释的神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
++   [使用 PyTorch 进行可解释的神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
 
-+   [深度神经网络并未引导我们迈向AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
++   [深度神经网络并未引导我们迈向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
 
 +   [可解释的预测与现状预测：前沿深度学习方法](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)
 

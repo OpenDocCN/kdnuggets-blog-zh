@@ -1,8 +1,8 @@
 # 人工朋友还是虚拟敌人
 
-> 原文：[https://www.kdnuggets.com/2019/12/artificial-friend-virtual-foe.html](https://www.kdnuggets.com/2019/12/artificial-friend-virtual-foe.html)
+> 原文：[`www.kdnuggets.com/2019/12/artificial-friend-virtual-foe.html`](https://www.kdnuggets.com/2019/12/artificial-friend-virtual-foe.html)
 
-[评论](#comments)![图示](../Images/9e3670a3a7d5e66ca8b638810e77cd2c.png)
+评论![图示](img/9e3670a3a7d5e66ca8b638810e77cd2c.png)
 
 [图片来源](https://depositphotos.com/102386534/stock-illustration-swarm-intelligence-or-crowd-sourcing.html)
 
@@ -22,7 +22,7 @@
 
 ### **II. 发展中国家的机器学习**
 
-![图](../Images/4a7d5d0e93e60c0eea8367498b984870.png)
+![图](img/4a7d5d0e93e60c0eea8367498b984870.png)
 
 [图片来源](https://depositphotos.com/51325807/stock-photo-newtons-cradle-money-bag.html)
 
@@ -42,15 +42,15 @@
 
 ### **III. 可持续发展目标（SDGs）**
 
-![图](../Images/25c57bcca9e60b1411d2aa7b1a7ce316.png)
+![图](img/25c57bcca9e60b1411d2aa7b1a7ce316.png)
 
 [图片来源](https://www.imf.org/en/Topics/SDG)
 
 可持续发展目标（SDGs）是保护地球和确保我们繁荣的全球号召。因此，将人工智能应用与这些原则联系起来是自然的，但始终要记住，人工智能既可以作为**推动者**，也可以作为**抑制者**，对每一个可持续发展目标产生影响。
 
-因此，我在这里想要突出一些积极的例子，但也再次强调，AI对每个可持续发展目标的影响在程度和方向上都不同——换句话说，AI对*环境*的益处远多于其他领域，并且对*社会*的负面影响可能比*经济*或*环境*更强（Vinuesa et al., 2019）；
+因此，我在这里想要突出一些积极的例子，但也再次强调，AI 对每个可持续发展目标的影响在程度和方向上都不同——换句话说，AI 对*环境*的益处远多于其他领域，并且对*社会*的负面影响可能比*经济*或*环境*更强（Vinuesa et al., 2019）；
 
-那么我们如何将AI应用于发展目标呢？以下是一些小例子：
+那么我们如何将 AI 应用于发展目标呢？以下是一些小例子：
 
 1.  **消除贫困：**利用卫星在偏远地区进行资源分配（Efremova et al., 2019）；
 
@@ -62,35 +62,35 @@
 
 1.  **性别平等：**减少性别偏见，了解偏见最初存在的地方；
 
-1.  **清洁水源与卫生设施：**利用AI检测危险细菌；
+1.  **清洁水源与卫生设施：**利用 AI 检测危险细菌；
 
 1.  **可负担且清洁的能源：**通过创建数字风电场来优化风能；
 
 1.  **体面工作与经济增长：**提高生产力同时创造新就业机会（例如，数据标注员、模型训练师等）；
 
-1.  **产业创新和基础设施：**AI可以实时定义新的交通路线或重新配置软件定义的网络组件；
+1.  **产业创新和基础设施：**AI 可以实时定义新的交通路线或重新配置软件定义的网络组件；
 
-1.  **减少不平等：**AI可以提供“*智能增强*”或帮助视力受损者；
+1.  **减少不平等：**AI 可以提供“*智能增强*”或帮助视力受损者；
 
-1.  **可持续城市与社区：**利用AI进行更好的城市规划、交通管理或智能房地产；
+1.  **可持续城市与社区：**利用 AI 进行更好的城市规划、交通管理或智能房地产；
 
-1.  **负责任的消费和生产：**[AI驱动的智能回收设备](http://innovates.vpr.sfu.ca/story/artificial-intelligence-future-waste-management)；
+1.  **负责任的消费和生产：**[AI 驱动的智能回收设备](http://innovates.vpr.sfu.ca/story/artificial-intelligence-future-waste-management)；
 
-1.  **气候行动：**利用AI进行灾难恢复、地震预测或太阳能地球工程（Rolnick et al., 2019）；
+1.  **气候行动：**利用 AI 进行灾难恢复、地震预测或太阳能地球工程（Rolnick et al., 2019）；
 
 1.  **水下生命：**跟踪海洋生命迁徙并打击非法捕鱼；
 
 1.  **陆地生命：**打击非法偷猎并改善野生动物保护；
 
-1.  **和平、正义与强大机构：**利用AI打击犯罪和腐败；
+1.  **和平、正义与强大机构：**利用 AI 打击犯罪和腐败；
 
-1.  **目标伙伴关系：**AI可以促进传统上相距较远的参与者之间的互动；
+1.  **目标伙伴关系：**AI 可以促进传统上相距较远的参与者之间的互动；
 
-虽然以上列表包含了所有的可持续发展目标，但它当然没有涵盖所有AI如何用于实现这些目标（或McKinsey Global Institute, 2018分类的有意义问题）的应用和例子；
+虽然以上列表包含了所有的可持续发展目标，但它当然没有涵盖所有 AI 如何用于实现这些目标（或 McKinsey Global Institute, 2018 分类的有意义问题）的应用和例子；
 
 ### **结论**
 
-扩大AI在解决社会和发展问题方面的应用并非易事，它必须克服多个瓶颈，并降低风险，以避免这一基础技术的负面影响；
+扩大 AI 在解决社会和发展问题方面的应用并非易事，它必须克服多个瓶颈，并降低风险，以避免这一基础技术的负面影响；
 
 许多大公司正积极致力于利用人工智能造福社会，但需要明确的是，无论机构参与者和科技巨头采取何种行动，每个人都必须在个人层面上提供帮助。因此，我们也许应该开始思考我们在日常生活中能做些什么来促进这些努力。
 
@@ -100,9 +100,9 @@ Ali, A., Qadir, J., Rasool, R., Sathiaseelan, A., Zwitter, A., Crowcroft, J. (20
 
 Caicedo-Torres, W., Paternina, A., Pinzón, H. (2016). “早期登革热严重程度预测的机器学习模型”。《伊比利亚美洲人工智能会议》。施普林格：247–258。
 
-Chunara, R., Andrews, J. A., Brownstein, J. S. (2012). “社会和新闻媒体使我们能够早期估计2010年海地霍乱疫情的流行模式”。《美国热带医学与卫生杂志》 86 (1): 39–45。
+Chunara, R., Andrews, J. A., Brownstein, J. S. (2012). “社会和新闻媒体使我们能够早期估计 2010 年海地霍乱疫情的流行模式”。《美国热带医学与卫生杂志》 86 (1): 39–45。
 
-De-Arteaga, M., Herlands, W., Neill, D. B., Dubrawski, A. (2018). “发展中国家的机器学习”。《ACM管理信息系统交易》，9 (2): 1–14。
+De-Arteaga, M., Herlands, W., Neill, D. B., Dubrawski, A. (2018). “发展中国家的机器学习”。《ACM 管理信息系统交易》，9 (2): 1–14。
 
 Dias, M. B., Brewer, E. (2009). “计算机科学如何服务于发展中国家”。《计算机协会通讯》 52 (6): 74–80。
 
@@ -112,11 +112,11 @@ arXiv:1907.02813。
 
 Ferris, E. (2010). “自然灾害、冲突与人权：追踪其联系”。布鲁金斯学会。
 
-Floridi, L., Cowls, J., Beltrametti, M. 等 (2018). “AI4People——良好AI社会的伦理框架：机遇、风险、原则与建议”。《思想与机器》，28: 689。
+Floridi, L., Cowls, J., Beltrametti, M. 等 (2018). “AI4People——良好 AI 社会的伦理框架：机遇、风险、原则与建议”。《思想与机器》，28: 689。
 
 Hilbert, M. (2016). “发展中的大数据：承诺与挑战的回顾”。《发展政策评论》 34 (1): 135–174。
 
-Kapoor, A., Eagle, N., Horvitz, E. (2010). “人、地震和通信：从电话动态推断地震事件及其对人群的影响”。见于《AAAI春季研讨会论文集：发展中的人工智能》。
+Kapoor, A., Eagle, N., Horvitz, E. (2010). “人、地震和通信：从电话动态推断地震事件及其对人群的影响”。见于《AAAI 春季研讨会论文集：发展中的人工智能》。
 
 麦肯锡全球研究院 (2018). “应用人工智能以造福社会”。讨论文件。
 
@@ -124,7 +124,7 @@ Pathak, S., Kumar, B. (2016). “一种基于诊断意见的参数阈值的稳�
 
 Quinn, J., Frias-Martinez, V., Subramanian, L. (2014). “计算可持续性与发展中国家的人工智能”。《人工智能杂志》 35 (3): 36–47。
 
-Robertson, J., DeHart, D. (2010). “一种敏捷且可访问的贝叶斯推断医学诊断适应方法，适用于乡村健康扩展工作者”。见于《AAAI春季研讨会论文集：发展中的人工智能》。技术报告 SS-10–01。
+Robertson, J., DeHart, D. (2010). “一种敏捷且可访问的贝叶斯推断医学诊断适应方法，适用于乡村健康扩展工作者”。见于《AAAI 春季研讨会论文集：发展中的人工智能》。技术报告 SS-10–01。
 
 Rolnick, D., 等 (2019). “用机器学习应对气候变化”。arXiv:1906.05433。
 
@@ -144,21 +144,21 @@ Waidyanatha, N., Sampath, C., Dubrawski, A., Prashant, S., Ganesan, M., Gow, G. 
 
 **相关:**
 
-+   [AI 知识地图：如何分类 AI 技术](/2018/08/ai-knowledge-map-classify-ai-technologies.html)
++   AI 知识地图：如何分类 AI 技术
 
-+   [分布式人工智能：多智能体系统、基于代理的建模和群体智能的概述](/2019/04/distributed-artificial-intelligence-multi-agent-systems-agent-based-modeling-swarm-intelligence.html)
++   分布式人工智能：多智能体系统、基于代理的建模和群体智能的概述
 
-+   [人工智能简史](/2017/04/brief-history-artificial-intelligence.html)
++   人工智能简史
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

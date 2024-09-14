@@ -1,6 +1,6 @@
 # 使用 ChatGPT Canva 插件自动化图形设计活动
 
-> 原文：[https://www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin](https://www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin)
+> 原文：[`www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin`](https://www.kdnuggets.com/automate-graphic-design-activity-with-chatgpt-canva-plugin)
 
 我们中的大多数人可能已经听说过 [Canva](https://www.canva.com/) 公司。对于不知道的你，Canva 是一个提供免费和付费图形设计服务的平台。它主要针对社交媒体和演示设计，但该平台也可以用于任何图形设计。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT
 
 * * *
 
@@ -24,19 +24,19 @@
 
 要访问 ChatGPT Canva 插件，我们需要订阅 ChatGPT Plus，订阅费用约为每月 20 美元（截至本文撰写时）。订阅为 Plus 用户后，前往设置并在 Beta 功能中开启插件选项。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/a73cb08185834fc9ba8ff1c14109ff9d.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/a73cb08185834fc9ba8ff1c14109ff9d.png)
 
 作者提供的图片
 
 在 GPT-4 模型选择下访问插件商店，一切设置就绪。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/5dbc9a17a5338d22e2e9d6b59964593b.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/5dbc9a17a5338d22e2e9d6b59964593b.png)
 
 作者提供的图片
 
 在插件商店中，输入 Canva 并安装插件。只需一秒钟，现在我们就可以使用这个插件进行活动了。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/97fd064439709e145f6cec96bedc0a32.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/97fd064439709e145f6cec96bedc0a32.png)
 
 作者提供的图片
 
@@ -44,7 +44,7 @@
 
 Canva 非常适合任何社交媒体或演示活动，因此让我们尝试在这些活动中使用插件。首先，我们想创建一个关于 Python 入门的 Twitter 帖子。在这种情况下，我会使用以下提示：“帮我创建一个关于 Python 入门的 Twitter 帖子，并指导我制作一个吸引注意的漂亮帖子设计。”
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/f786c434d17625245f90b7aee0e44f00.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/f786c434d17625245f90b7aee0e44f00.png)
 
 作者提供的图片
 
@@ -52,19 +52,19 @@ Canva 非常适合任何社交媒体或演示活动，因此让我们尝试在�
 
 目前，该插件无法直接访问这个模板，因此我们需要自己设计。然而，我们仍然可以向 ChatGPT 请求指导。ChatGPT 在以下提示中要求我们选择模板，并且我选择了第三个。在过程中，ChatGPT 提供了内容建议，并询问我们是否需要帮助添加更多设计元素。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/3bf9df2f7eff42ba7caaf950cd3b8aae.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/3bf9df2f7eff42ba7caaf950cd3b8aae.png)
 
 图片来源：作者
 
 我们在创建社交媒体帖子设计时确实需要更多帮助。在这种情况下，我们可以请 ChatGPT 指导我们选择哪些元素最适合添加到设计中。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/f43ffb564f9eeb7000aa45b2e23b087f.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/f43ffb564f9eeb7000aa45b2e23b087f.png)
 
 图片来源：作者
 
 根据 ChatGPT 的建议，我们可以进一步请求它指导我们将这些元素添加到 Canva 中。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/33f94dee6f91e74e4a4a550161c7d3f0.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/33f94dee6f91e74e4a4a550161c7d3f0.png)
 
 图片来源：作者
 
@@ -72,13 +72,13 @@ Canva 非常适合任何社交媒体或演示活动，因此让我们尝试在�
 
 你仍然可以请求 ChatGPT 插件执行各种设计活动。例如，下面的示例是针对“帮助我为我的数据科学业务创建一个面向数据爱好者的 logo” 的提示。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/a346f87ae5605c3f8d961c531dca58e7.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/a346f87ae5605c3f8d961c531dca58e7.png)
 
 图片来源：作者
 
 ChatGPT 会再次提供一系列模板。这一次，所有的模板都是用于创建 logo 的。像之前的示例一样，我们可以进一步请求定制化指导。
 
-![使用 ChatGPT Canva 插件自动化图形设计活动](../Images/2a0bd1a4a904aa59f14cef2eab4024f3.png)
+![使用 ChatGPT Canva 插件自动化图形设计活动](img/2a0bd1a4a904aa59f14cef2eab4024f3.png)
 
 图片来源：作者
 

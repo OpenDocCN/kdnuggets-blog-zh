@@ -1,8 +1,8 @@
 # Essential MLOps：一本免费的电子书
 
-> 原文：[https://www.kdnuggets.com/2023/06/essential-mlops-free-ebook.html](https://www.kdnuggets.com/2023/06/essential-mlops-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2023/06/essential-mlops-free-ebook.html`](https://www.kdnuggets.com/2023/06/essential-mlops-free-ebook.html)
 
-[![Essential MLOps：一本免费的电子书](../Images/b84e97c24ceac4591036c5013edc161b.png)](https://datasciencehorizons.com/ebook-essential-mlops-successful-implementation/)
+![Essential MLOps：一本免费的电子书](https://datasciencehorizons.com/ebook-essential-mlops-successful-implementation/)
 
 MLOps，即机器学习操作，是一种促进数据科学家和运营专业人员之间协作和沟通的实践，旨在帮助管理生产环境中的 ML 生命周期。它结合了机器学习、DevOps 和数据工程，以标准化和简化 AI 模型在生产中的部署、测试和监控。
 
@@ -10,11 +10,11 @@ MLOps，即机器学习操作，是一种促进数据科学家和运营专业人
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
@@ -44,4 +44,4 @@ MLOps 是至关重要的，因为它解决了大规模部署 ML 模型的挑战�
 
 +   [超级学习指南：免费算法与数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)
 
-+   [免费电子书：10个实用的 Python 编程技巧](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)
++   [免费电子书：10 个实用的 Python 编程技巧](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)

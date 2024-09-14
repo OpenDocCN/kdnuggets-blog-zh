@@ -1,22 +1,22 @@
 # 9 种免费资源来掌握 Python
 
-> 原文：[https://www.kdnuggets.com/2022/11/9-free-resources-master-python.html](https://www.kdnuggets.com/2022/11/9-free-resources-master-python.html)
+> 原文：[`www.kdnuggets.com/2022/11/9-free-resources-master-python.html`](https://www.kdnuggets.com/2022/11/9-free-resources-master-python.html)
 
-![9 种免费资源来掌握 Python](../Images/026afb1e52422ff9764c3a341351b6ea.png)
+![9 种免费资源来掌握 Python](img/026afb1e52422ff9764c3a341351b6ea.png)
 
 编辑提供的图片
 
-Python 被认为是最容易学习的高级通用 [编程语言](/2021/05/top-programming-languages.html)，可以帮助你构建可移植的跨平台应用程序。这，加上它的动态垃圾回收和简洁的代码，使它在人工智能相关应用中极具优势。
+Python 被认为是最容易学习的高级通用 编程语言，可以帮助你构建可移植的跨平台应用程序。这，加上它的动态垃圾回收和简洁的代码，使它在人工智能相关应用中极具优势。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -44,7 +44,7 @@ Visual Studio 适合使用不同编程语言的多语言程序员。你只需下
 
 我们还没有讨论博客。博客内容包括机器学习、编码、数据科学，以及由经验丰富的行业专业人士撰写和编辑的 Python 内容。
 
-KDNuggets 适合各个级别的程序员和数据科学家。无论你是想要[加速你的 Python 代码](/2022/10/3-simple-ways-speed-python-code.html)、掌握 Python 机器学习，还是为面试做准备，KDNuggets 都提供了适合这些场景的内容。
+KDNuggets 适合各个级别的程序员和数据科学家。无论你是想要加速你的 Python 代码、掌握 Python 机器学习，还是为面试做准备，KDNuggets 都提供了适合这些场景的内容。
 
 # 4\. PyVideo
 
@@ -62,7 +62,7 @@ Awesome Python 是一个经过精心策划的 GitHub 上一些最佳 Python 框�
 
 # 6\. TheAlgorithms
 
-算法和数据结构推动数据科学的发展。即使作为一名[自学的开发者](/2020/05/designed-machine-learning-ai-degree.html)，你也必须了解基本的算法（以及一些数学知识）。与 Awesome Python 类似，TheAlgorithms 是一个 GitHub 开源库，包含你可以插入到项目中的算法。
+算法和数据结构推动数据科学的发展。即使作为一名自学的开发者，你也必须了解基本的算法（以及一些数学知识）。与 Awesome Python 类似，TheAlgorithms 是一个 GitHub 开源库，包含你可以插入到项目中的算法。
 
 你应该注意到 TheAlgorithms 不仅包含 Python 算法库，还有 Java、JavaScript、Julia、R 等语言的算法。
 
@@ -80,31 +80,31 @@ Programiz 非常适合那些寻找 Google Python 课程替代方案的人。它�
 
 # 9\. Python Podcasts
 
-音频媒体的最佳之处在于你可以在做其他事情时进行听取（即，锻炼、驾驶、做家务等）。有很多出色的编程和[数据科学相关的播客](/2022/06/top-data-science-podcasts-2022.html)对 Python 初学者非常有帮助。一些值得注意的包括：
+音频媒体的最佳之处在于你可以在做其他事情时进行听取（即，锻炼、驾驶、做家务等）。有很多出色的编程和数据科学相关的播客对 Python 初学者非常有帮助。一些值得注意的包括：
 
-+   **The Real Python Podcast**：这是一个每周播出的播客，由主持人Christopher Bialy于2012年创办。它涵盖了各种Python话题，包括职业和编程技巧。此外，播客还包括轻松的对话和采访，邀请了行业专家、有经验的程序员等。Real Python Podcast网站的一个最佳功能是它提供了额外的资源，帮助你学习或提升你的Python开发技能。
++   **The Real Python Podcast**：这是一个每周播出的播客，由主持人 Christopher Bialy 于 2012 年创办。它涵盖了各种 Python 话题，包括职业和编程技巧。此外，播客还包括轻松的对话和采访，邀请了行业专家、有经验的程序员等。Real Python Podcast 网站的一个最佳功能是它提供了额外的资源，帮助你学习或提升你的 Python 开发技能。
 
-+   **Talk Python to Me**：这是一个由Michael Kennedy主持的稍微休闲一点的每周播客。虽然节目多年来已经涵盖了许多Python话题，但它最初是一个采访行业专业人士关于Python编程现状的平台。收听Talk Python to Me是跟上Python所有最新发展的绝佳方式。该网站还包括有用的资源，如商品、课程和证书。
++   **Talk Python to Me**：这是一个由 Michael Kennedy 主持的稍微休闲一点的每周播客。虽然节目多年来已经涵盖了许多 Python 话题，但它最初是一个采访行业专业人士关于 Python 编程现状的平台。收听 Talk Python to Me 是跟上 Python 所有最新发展的绝佳方式。该网站还包括有用的资源，如商品、课程和证书。
 
-+   [**Python Bytes**](https://pythonbytes.fm)：如果你正在寻找一种更简洁的收听体验，你应该考虑这个播客。它由Michael Kennedy（也是《Talk Python To Me》的主持人）和Brian Okken主持。这个播客的目的是在每集不到一个小时的时间内，更新你关于Python的最新头条和新闻。
++   [**Python Bytes**](https://pythonbytes.fm)：如果你正在寻找一种更简洁的收听体验，你应该考虑这个播客。它由 Michael Kennedy（也是《Talk Python To Me》的主持人）和 Brian Okken 主持。这个播客的目的是在每集不到一个小时的时间内，更新你关于 Python 的最新头条和新闻。
 
 # 结论
 
-十年前，我们希望Java能带我们进入下一个层次。现在，Python已经超越了许多编程语言，成为全球最受欢迎的语言。
+十年前，我们希望 Java 能带我们进入下一个层次。现在，Python 已经超越了许多编程语言，成为全球最受欢迎的语言。
 
-Python 不是一种新语言；它自90年代初就存在，通过不断改进和获得开发者的支持而发展起来。但如果没有[Python开发者](/2022/09/7-tips-python-beginners.html)和爱好者的在线社区，Python不会有今天的成就。多亏了他们，我们拥有了学习和掌握Python的资源。一旦你也掌握了Python，不要忘记回馈社区。
+Python 不是一种新语言；它自 90 年代初就存在，通过不断改进和获得开发者的支持而发展起来。但如果没有 Python 开发者和爱好者的在线社区，Python 不会有今天的成就。多亏了他们，我们拥有了学习和掌握 Python 的资源。一旦你也掌握了 Python，不要忘记回馈社区。
 
-**[Nahla Davies](http://nahlawrites.com/)** 是一位软件开发人员和技术作家。在全职从事技术写作之前，她曾担任过许多令人兴奋的职位，其中包括在一家Inc. 5000的体验品牌机构担任首席程序员，该机构的客户包括三星、时代华纳、Netflix和索尼。
+**[Nahla Davies](http://nahlawrites.com/)** 是一位软件开发人员和技术作家。在全职从事技术写作之前，她曾担任过许多令人兴奋的职位，其中包括在一家 Inc. 5000 的体验品牌机构担任首席程序员，该机构的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 更多相关话题
 
-+   [掌握数据科学求职的5个免费资源](https://www.kdnuggets.com/5-free-resources-to-master-your-data-science-job-search)
++   [掌握数据科学求职的 5 个免费资源](https://www.kdnuggets.com/5-free-resources-to-master-your-data-science-job-search)
 
 +   [掌握大型语言模型的全面资源列表](https://www.kdnuggets.com/a-comprehensive-list-of-resources-to-master-large-language-models)
 
-+   [帮助你成为专业人士的免费Python资源](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
++   [帮助你成为专业人士的免费 Python 资源](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
 
-+   [学习机器学习线性代数的3个免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
++   [学习机器学习线性代数的 3 个免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
 
 +   [免费大学数据科学资源](https://www.kdnuggets.com/2022/05/free-university-data-science-resources.html)
 

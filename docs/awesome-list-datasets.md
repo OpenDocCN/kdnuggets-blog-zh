@@ -1,22 +1,22 @@
 # 超棒的 100+ 类别的数据集列表
 
-> 原文：[https://www.kdnuggets.com/2021/05/awesome-list-datasets.html](https://www.kdnuggets.com/2021/05/awesome-list-datasets.html)
+> 原文：[`www.kdnuggets.com/2021/05/awesome-list-datasets.html`](https://www.kdnuggets.com/2021/05/awesome-list-datasets.html)
 
-[评论](#comments)
+评论
 
 **由 [Etienne D. Noumen](https://www.linkedin.com/in/enoumen/)，高级软件工程师**。
 
-![](../Images/4947261e7be416fa9551ecf896eb9b89.png)
+![](img/4947261e7be416fa9551ecf896eb9b89.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
 
 * * *
 
@@ -26,253 +26,253 @@
 
 ### 目录
 
-1.  [最新完整的 Netflix 电影数据集](#Latest_complete_Netflix_movie_dataset "最新完整的 Netflix 电影数据集")
+1.  最新完整的 Netflix 电影数据集
 
-1.  [通用爬虫](#Common_Crawl "通用爬虫")
+1.  通用爬虫
 
-1.  [蛋白质价格数据集](#_Dataset_on_protein_prices "蛋白质价格数据集")
+1.  蛋白质价格数据集
 
-1.  [CPOST 数据集：四十年来的自杀攻击](#_CPOST_dataset_on_suicide_attacks_over_four_decades "CPOST 数据集：四十年来的自杀攻击")
+1.  CPOST 数据集：四十年来的自杀攻击
 
-1.  [信用卡数据集 – 消费者金融调查 (SCF) 综合提取数据 1989-2019](#Credit_Card_Dataset_-_Survey_of_Consumer_Finances_SCF_Combined_Extract_Data_1989-2019 "信用卡数据集 – 消费者金融调查 (SCF) 综合提取数据 1989-2019")
+1.  信用卡数据集 – 消费者金融调查 (SCF) 综合提取数据 1989-2019 综合提取数据 1989-2019")
 
-1.  [带注释的无人机图像用于小物体检测和跟踪数据集](#Drone_imagery_with_annotations_for_small_object_detection_and_tracking_dataset "带注释的无人机图像用于小物体检测和跟踪数据集")
+1.  带注释的无人机图像用于小物体检测和跟踪数据集
 
-1.  [NOAA 高分辨率快速刷新 (HRRR) 模型](#NOAA_High-Resolution_Rapid_Refresh_HRRR_Model "NOAA 高分辨率快速刷新 (HRRR) 模型")
+1.  NOAA 高分辨率快速刷新 (HRRR) 模型 模型")
 
-1.  [AWS 上的开放数据注册表](#Registry_of_Open_Data_on_AWS "AWS 上的开放数据注册表")
+1.  AWS 上的开放数据注册表
 
-1.  [教科书问答 (TQA)](#Textbook_Question_Answering_TQA "教科书问答 (TQA)")
+1.  教科书问答 (TQA)")
 
-1.  [协调癌症数据集：基因组数据公共门户](#Harmonized_Cancer_Datasets_Genomic_Data_Commons_Data_Portal "协调癌症数据集：基因组数据公共门户")
+1.  协调癌症数据集：基因组数据公共门户
 
-1.  [癌症基因组图谱](#The_Cancer_Genome_Atlas "癌症基因组图谱")
+1.  癌症基因组图谱
 
-1.  [治疗性应用研究以生成有效治疗方法 (TARGET)](#Therapeutically_Applicable_Research_to_Generate_Effective_Treatments_TARGET "Therapeutically Applicable Research to Generate Effective Treatments (TARGET)")
+1.  治疗性应用研究以生成有效治疗方法 (TARGET)")
 
-1.  [基因组聚合数据库 (gnomAD)](#Genome_Aggregation_Database_gnomAD "Genome Aggregation Database (gnomAD)")
+1.  基因组聚合数据库 (gnomAD)")
 
-1.  [SQuAD (斯坦福问答数据集)](#SQuAD_Stanford_Question_Answering_Dataset "SQuAD (Stanford Question Answering Dataset)")
+1.  SQuAD (斯坦福问答数据集)")
 
-1.  [PubMed糖尿病数据集](#PubMed_Diabetes_Dataset "PubMed Diabetes Dataset")
+1.  PubMed 糖尿病数据集
 
-1.  [药物-靶标互动数据集](#Drug-Target_Interaction_Dataset "Drug-Target Interaction Dataset")
+1.  药物-靶标互动数据集
 
-1.  [药物基因组数据集](#Pharmacogenomics_Datasets "Pharmacogenomics Datasets")
+1.  药物基因组数据集
 
-1.  [胰腺癌类器官分析](#Pancreatic_Cancer_Organoid_Profiling "Pancreatic Cancer Organoid Profiling")
+1.  胰腺癌类器官分析
 
-1.  [非洲土壤信息服务 (AfSIS) 土壤化学](#Africa_Soil_Information_Service_AfSIS_Soil_Chemistry "Africa Soil Information Service (AfSIS) Soil Chemistry")
+1.  非洲土壤信息服务 (AfSIS) 土壤化学 Soil Chemistry")
 
-1.  [E环境中的情感状态数据集](#Dataset_for_Affective_States_in_E-Environments "Dataset for Affective States in E-Environments")
+1.  E 环境中的情感状态数据集
 
-1.  [NatureServe Explorer 数据集](#NatureServe_Explorer_Dataset "NatureServe Explorer Dataset")
+1.  NatureServe Explorer 数据集
 
-1.  [美国航班记录](#Flight_Records_in_the_US "Flight Records in the US")
+1.  美国航班记录
 
-1.  [全球航班数据](#Worldwide_flight_data "Worldwide flight data")
+1.  全球航班数据
 
-1.  [2019年美国犯罪统计数据](#2019_Crime_statistics_in_the_USA "2019 Crime statistics in the USA")
+1.  2019 年美国犯罪统计数据
 
-1.  [雅虎问答数据集](#Yahoo_Answers_DataSets "Yahoo Answers DataSets")
+1.  雅虎问答数据集
 
-1.  [美洲历史 1400-2021](#History_of_America_1400-2021 "History of America 1400-2021")
+1.  美洲历史 1400-2021
 
-1.  [波斯语词汇发音数据集](#Persian_words_phonetics_dataset "Persian words phonetics dataset")
+1.  波斯语词汇发音数据集
 
-1.  [历史空气质量数据集](#Historical_Air_Quality_Dataset "Historical Air Quality Dataset")
+1.  历史空气质量数据集
 
-1.  [Stack Exchange 数据集](#Stack_Exchange_Dataset "Stack Exchange Dataset")
+1.  Stack Exchange 数据集
 
-1.  [精彩公共数据集](#Awesome_Public_Datasets "Awesome Public Datasets")
+1.  精彩公共数据集
 
-1.  [农业数据集](#Agriculture_Dataset "Agriculture Dataset")
+1.  农业数据集
 
-1.  [生物数据集](#Biology_Dataset "Biology Dataset")
+1.  生物数据集
 
-1.  [气候和天气数据集](#Climate_and_Weather_Dataset "Climate and Weather Dataset")
+1.  气候和天气数据集
 
-1.  [复杂网络数据集](#Complex_Network_Dataset "Complex Network Dataset ")
+1.  复杂网络数据集
 
-1.  [计算机网络数据集](#Computer_Network_Dataset "Computer Network Dataset")
+1.  计算机网络数据集
 
-1.  [网络安全数据集](#CyberSecurity_Dataset "CyberSecurity Dataset")
+1.  网络安全数据集
 
-1.  [数据挑战数据集](#Data_Challenges_Dataset "Data Challenges Dataset")
+1.  数据挑战数据集
 
-1.  [地球科学数据集](#Earth_Science_Dataset "Earth Science Dataset")
+1.  地球科学数据集
 
-1.  [经济数据集](#Economics_Dataset "Economics Dataset")
+1.  经济数据集
 
-1.  [教育数据集](#Education_Dataset "Education Dataset")
+1.  教育数据集
 
-1.  [能源数据集](#Energy_Dataset "Energy Dataset")
+1.  能源数据集
 
-1.  [娱乐数据集](#Entertainment_Dataset "Entertainment Dataset")
+1.  娱乐数据集
 
-1.  [金融数据集](#Finance_Dataset "Finance Dataset")
+1.  金融数据集
 
-1.  [地理信息系统数据集](#GIS_Dataset "GIS Dataset")
+1.  地理信息系统数据集
 
-1.  [政府数据集](#Government_Dataset "Government Dataset")
+1.  政府数据集
 
-1.  [医疗数据集](#Healthcare_Dataset "Healthcare Dataset")
+1.  医疗数据集
 
-1.  [图像处理数据集](#Image_Processing_Dataset "Image Processing Dataset")
+1.  图像处理数据集
 
-1.  [机器学习数据集](#Machine_Learning_Dataset "Machine Learning Dataset")
+1.  机器学习数据集
 
-1.  [博物馆数据集](#Museums_Dataset "Museums Dataset ")
+1.  博物馆数据集
 
-1.  [自然语言数据集](#Natural_Language_Dataset "Natural Language Dataset")
+1.  自然语言数据集
 
-1.  [神经科学数据集](#Neuroscience_Dataset "Neuroscience Dataset")
+1.  神经科学数据集
 
-1.  [物理数据集](#Physics_Dataset "Physics Dataset")
+1.  物理数据集
 
-1.  [前列腺癌数据集](#Prostate_Cancer_Dataset "Prostate Cancer Dataset")
+1.  前列腺癌数据集
 
-1.  [心理学和认知数据集](#Psychology_and_Cognition_Dataset "Psychology and Cognition Dataset")
+1.  心理学和认知数据集
 
-1.  [公共领域数据集](#Public_Domains_Dataset "Public Domains Dataset")
+1.  公共领域数据集
 
-1.  [搜索引擎数据集](#Search_Engines_Dataset "Search Engines Dataset")
+1.  搜索引擎数据集
 
-1.  [社交网络数据集](#Social_Networks_Dataset "Social Networks Dataset")
+1.  社交网络数据集
 
-1.  [社会科学数据集](#Social_Sciences_Dataset "Social Sciences Dataset")
+1.  社会科学数据集
 
-1.  [软件数据集](#Software_Dataset "Software Dataset")
+1.  软件数据集
 
-1.  [体育数据集](#Sports_Dataset "Sports Dataset")
+1.  体育数据集
 
-1.  [时间序列数据集](#Time_Series_Dataset "Time Series Dataset")
+1.  时间序列数据集
 
-1.  [交通数据集](#Transportation_Dataset "Transportation Dataset")
+1.  交通数据集
 
-1.  [电子竞技数据集](#eSports_Dataset "eSports Dataset")
+1.  电子竞技数据集
 
-1.  [补充集合](#Complementary_Collections "Complementary Collections")
+1.  补充集合
 
-1.  [分类公共数据集列表：Sindre Sorhus /awesome List](#Categorized_list_of_public_datasets_Sindre_Sorhus_awesome_List "Categorized list of public datasets: Sindre Sorhus /awesome List")
+1.  分类公共数据集列表：Sindre Sorhus /awesome List
 
-1.  [平台](#Platforms "Platforms")
+1.  平台
 
-1.  [编程语言](#Programming_Languages "Programming Languages")
+1.  编程语言
 
-1.  [前端开发](#Front-End_Development "Front-End Development")
+1.  前端开发
 
-1.  [后端开发](#Back-End_Development "Back-End Development")
+1.  后端开发
 
-1.  [计算机科学](#Computer_Science "Computer Science")
+1.  计算机科学
 
-1.  [大数据](#Big_Data "Big Data")
+1.  大数据
 
-1.  [理论](#Theory "Theory")
+1.  理论
 
-1.  [书籍](#Books "Books")
+1.  书籍
 
-1.  [编辑器](#Editors "Editors")
+1.  编辑器
 
-1.  [游戏](#Gaming "Gaming")
+1.  游戏
 
-1.  [开发环境](#Development_Environment "Development Environment")
+1.  开发环境
 
-1.  [娱乐](#Entertainment "Entertainment")
+1.  娱乐
 
-1.  [数据库](#Databases "Databases")
+1.  数据库
 
-1.  [媒体](#Media "Media")
+1.  媒体
 
-1.  [学习](#Learn "Learn")
+1.  学习
 
-1.  [安全](#Security "Security")
+1.  安全
 
-1.  [内容管理系统](#Content_Management_Systems "Content Management Systems")
+1.  内容管理系统
 
-1.  [硬件](#Hardware "Hardware")
+1.  硬件
 
-1.  [商业](#Business "Business")
+1.  商业
 
-1.  [工作](#Work "Work")
+1.  工作
 
-1.  [网络](#Networking "Networking")
+1.  网络
 
-1.  [去中心化系统](#Decentralized_Systems "Decentralized Systems")
+1.  去中心化系统
 
-1.  [高等教育](#Higher_Education "Higher Education")
+1.  高等教育
 
-1.  [事件](#Events "Events")
+1.  事件
 
-1.  [测试](#Testing "Testing")
+1.  测试
 
-1.  [其他](#Miscellaneous "Miscellaneous")
+1.  其他
 
-1.  [相关](#Related "Related")
+1.  相关
 
-1.  [美国教育部 CRDC 数据集](#US_Department_of_Education_CRDC_Dataset "US Department of Education CRDC Dataset")
+1.  美国教育部 CRDC 数据集
 
-1.  [NASA数据集：从细菌的空间前后测序数据](#Nasa_Dataset_sequencing_data_from_bacteria_before_and_after_being_taken_to_space "NASA数据集：从细菌的空间前后测序数据")
+1.  NASA 数据集：从细菌的空间前后测序数据
 
-1.  [2015年至2021年所有特朗普的推特侮辱记录CSV格式](#All_Trumps_twitter_insults_from_2015_to_2021_in_CSV "2015年至2021年所有特朗普的推特侮辱记录CSV格式")
+1.  2015 年至 2021 年所有特朗普的推特侮辱记录 CSV 格式
 
-1.  [数据是复数](#Data_is_plural "数据是复数")
+1.  数据是复数
 
-1.  [全球恐怖主义数据库](#Global_terrorism_database "全球恐怖主义数据库")
+1.  全球恐怖主义数据库
 
-1.  [海豚社交网络](#The_dolphin_social_network "海豚社交网络")
+1.  海豚社交网络
 
-1.  [20万笑话的数据集](#Dataset_of_200000_jokes "20万笑话的数据集")
+1.  20 万笑话的数据集
 
-1.  [百万歌曲数据集](#The_Million_Song_Dataset "百万歌曲数据集")
+1.  百万歌曲数据集
 
-1.  [康奈尔大学的eBird数据集](#Cornell_Universitys_eBird_dataset "康奈尔大学的eBird数据集")
+1.  康奈尔大学的 eBird 数据集
 
-1.  [UFO报告数据集](#UFO_Report_Dataset "UFO报告数据集")
+1.  UFO 报告数据集
 
-1.  [CDC的趋势药物数据](#CDCs_Trend_Drug_Data "CDC的趋势药物数据")
+1.  CDC 的趋势药物数据
 
-1.  [健康与退休研究：公众调查数据](#Health_and_Retirement_study_Public_Survey_data "健康与退休研究：公众调查数据")
+1.  健康与退休研究：公众调查数据
 
 这是一个庞大的列表，这里有[100+个更多的类别](https://enoumen.com/2021/04/23/data-sciences-datasets-data-visualization-data-analytics-big-data-data-lakes/)
 
-### **最新完整的Netflix电影数据集**
+### **最新完整的 Netflix 电影数据集**
 
-从4个API创建。包含11K+行和30+属性的Netflix数据（评级、收入、演员、语言、可用性、电影预告片等等）
+从 4 个 API 创建。包含 11K+行和 30+属性的 Netflix 数据（评级、收入、演员、语言、可用性、电影预告片等等）
 
-[Kaggle上的数据集](https://www.kaggle.com/ashishgup/netflix-rotten-tomatoes-metacritic-imdb)
+[Kaggle 上的数据集](https://www.kaggle.com/ashishgup/netflix-rotten-tomatoes-metacritic-imdb)
 
-使用[FlixGem.com](https://flixgem.com/)探索这个数据集（这个数据集驱动了这个web应用）
+使用[FlixGem.com](https://flixgem.com/)探索这个数据集（这个数据集驱动了这个 web 应用）
 
-[Google Sheets上的数据集](https://docs.google.com/spreadsheets/u/2/d/1JZJ0Ur57nBI_eN08DZioJ3CK1u1_Qt9woBo_6vYnN-c/)
+[Google Sheets 上的数据集](https://docs.google.com/spreadsheets/u/2/d/1JZJ0Ur57nBI_eN08DZioJ3CK1u1_Qt9woBo_6vYnN-c/)
 
 ### [**Common Crawl**](https://commoncrawl.org/the-data/get-started/)
 
-一个由超过500亿个网页组成的网络爬虫数据语料库。Common Crawl语料库包含自2008年以来收集的PB级数据。它包含原始网页数据、提取的元数据和文本提取。
+一个由超过 500 亿个网页组成的网络爬虫数据语料库。Common Crawl 语料库包含自 2008 年以来收集的 PB 级数据。它包含原始网页数据、提取的元数据和文本提取。
 
-[AWS CLI](https://aws.amazon.com/cli/) 访问（无需AWS账户）
+[AWS CLI](https://aws.amazon.com/cli/) 访问（无需 AWS 账户）
 
 `aws s3 ls s3://commoncrawl/ --no-sign-request`
 
-s3://commoncrawl/crawl-data/<wbr>CC-MAIN-2021-17 – [2021年4月](https://commoncrawl.org/2021/04/april-2021-crawl-archive-now-available/)
+s3://commoncrawl/crawl-data/<wbr>CC-MAIN-2021-17 – [2021 年 4 月](https://commoncrawl.org/2021/04/april-2021-crawl-archive-now-available/)
 
 ### **蛋白质价格数据集**
 
-关于主要商品价格的数据每月更新，基于IMF的主要商品价格系统。
+关于主要商品价格的数据每月更新，基于 IMF 的主要商品价格系统。
 
-[**Excel数据库**](https://www.imf.org/-/media/Files/Research/CommodityPrices/Monthly/external-dataAPR.ashx)
+[**Excel 数据库**](https://www.imf.org/-/media/Files/Research/CommodityPrices/Monthly/external-dataAPR.ashx)
 
-### [**CPOST数据集：四十年来的自杀攻击**](https://journals.sagepub.com/doi/abs/10.1177/0022343320978260?journalCode=jpra&)
+### [**CPOST 数据集：四十年来的自杀攻击**](https://journals.sagepub.com/doi/abs/10.1177/0022343320978260?journalCode=jpra&)
 
 芝加哥大学安全与威胁项目展示了更新和扩展后的自杀攻击数据库（DSAT），该数据库现在链接到乌普萨拉冲突数据计划的武装冲突数据，并包括一个新的数据集，用于衡量与自杀攻击组织相关的武装组织之间的联盟和对立关系。[**在这里访问**](https://journals.sagepub.com/doi/abs/10.1177/0022343320978260?journalCode=jpra)
 
-### [**信用卡数据集 – 消费者金融调查（SCF）1989-2019年合并提取数据**](https://sda.berkeley.edu/sdaweb/analysis/;jsessionid=3C4CA13FF65C522B2A7EDCB7AFC97F7C?dataset=scfcomb2019)
+### [**信用卡数据集 – 消费者金融调查（SCF）1989-2019 年合并提取数据**](https://sda.berkeley.edu/sdaweb/analysis/;jsessionid=3C4CA13FF65C522B2A7EDCB7AFC97F7C?dataset=scfcomb2019)
 
 你可以在这里以非常简单的方式进行大量汇总分析。
 
 ### [**附带小物体检测和跟踪的无人机图像数据集**](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge)
 
-[11 TB无人机图像数据集](https://www.reddit.com/r/datasets/comments/n1z013/11_tb_dataset_of_drone_imagery_with_annotations/)附带小物体检测和跟踪的注释
+[11 TB 无人机图像数据集](https://www.reddit.com/r/datasets/comments/n1z013/11_tb_dataset_of_drone_imagery_with_annotations/)附带小物体检测和跟踪的注释
 
 下载和更多信息请访问[**这里**](https://www.aicrowd.com/challenges/airborne-object-tracking-challenge)
 
@@ -282,31 +282,31 @@ s3://commoncrawl/crawl-data/<wbr>CC-MAIN-2021-17 – [2021年4月](https://commo
 
 数据集探索：[Colab](https://colab.research.google.com/drive/1B5Gevpg6GIlfMRRfiG79V8Foz13_ncUr)
 
-### [**NOAA高分辨率快速更新（HRRR）模型**](https://registry.opendata.aws/noaa-hrrr-pds/)
+### [**NOAA 高分辨率快速更新（HRRR）模型**](https://registry.opendata.aws/noaa-hrrr-pds/)
 
-HRRR是NOAA的实时3公里分辨率、每小时更新、云解析、允许对流的气象模型，由3公里网格和3公里雷达同化初始化。雷达数据每15分钟同化到HRRR中，持续1小时，进一步增加了由13公里雷达增强的快速刷新每小时数据同化提供的细节。
+HRRR 是 NOAA 的实时 3 公里分辨率、每小时更新、云解析、允许对流的气象模型，由 3 公里网格和 3 公里雷达同化初始化。雷达数据每 15 分钟同化到 HRRR 中，持续 1 小时，进一步增加了由 13 公里雷达增强的快速刷新每小时数据同化提供的细节。
 
-### **[AWS开放数据注册表](https://registry.opendata.aws/)**
+### **[AWS 开放数据注册表](https://registry.opendata.aws/)**
 
-本注册表旨在帮助人们发现和共享通过AWS资源提供的数据集。[了解更多关于在AWS上共享数据的信息](https://opendata.aws/)。
+本注册表旨在帮助人们发现和共享通过 AWS 资源提供的数据集。[了解更多关于在 AWS 上共享数据的信息](https://opendata.aws/)。
 
 查看[该注册表中列出的数据集的所有使用示例](https://registry.opendata.aws/usage-examples)。
 
-查看来自[数字地球非洲](https://registry.opendata.aws/collab/deafrica/)、[Facebook数据公益](https://registry.opendata.aws/collab/facebook/)、[NASA空间法案协议](https://registry.opendata.aws/collab/nasa/)、[NIH STRIDES](https://registry.opendata.aws/collab/nih/)、[NOAA大数据计划](https://registry.opendata.aws/collab/noaa/)、[空间望远镜科学研究所](https://registry.opendata.aws/collab/stsci/)和[亚马逊可持续数据计划](https://registry.opendata.aws/collab/asdi/)的数据集。
+查看来自[数字地球非洲](https://registry.opendata.aws/collab/deafrica/)、[Facebook 数据公益](https://registry.opendata.aws/collab/facebook/)、[NASA 空间法案协议](https://registry.opendata.aws/collab/nasa/)、[NIH STRIDES](https://registry.opendata.aws/collab/nih/)、[NOAA 大数据计划](https://registry.opendata.aws/collab/noaa/)、[空间望远镜科学研究所](https://registry.opendata.aws/collab/stsci/)和[亚马逊可持续数据计划](https://registry.opendata.aws/collab/asdi/)的数据集。
 
 ### [**教科书问答（TQA）**](https://registry.opendata.aws/allenai-tqa/)
 
-1,076节教科书课文，26,260个问题，6229张图片
+1,076 节教科书课文，26,260 个问题，6229 张图片
 
-文档：[https://allenai.org/data/tqa](https://allenai.org/data/tqa)
+文档：[`allenai.org/data/tqa`](https://allenai.org/data/tqa)
 
 [**下载**](https://allenai.org/data/tqa)
 
 ### [**协调癌症数据集：基因组数据公共门户**](https://portal.gdc.cancer.gov/)
 
-GDC数据门户是一个强大的数据驱动平台，允许癌症研究人员和生物信息学家搜索和下载癌症数据进行分析。
+GDC 数据门户是一个强大的数据驱动平台，允许癌症研究人员和生物信息学家搜索和下载癌症数据进行分析。
 
-![基因组数据公共门户](../Images/fdf1d1b1080ef47498c0ec3197380da0.png)
+![基因组数据公共门户](img/fdf1d1b1080ef47498c0ec3197380da0.png)
 
 *基因组数据公共门户*
 
@@ -314,13 +314,13 @@ GDC数据门户是一个强大的数据驱动平台，允许癌症研究人员�
 
 癌症基因组图谱（[**TCGA**](https://registry.opendata.aws/collab/nih)），是国家癌症研究所（NCI）和国家人类基因组研究所（NHGRI）之间的合作，旨在生成主要癌症类型和亚型中关键基因组变化的全面、多维度图谱。
 
-[AWS CLI](https://aws.amazon.com/cli/) 访问（无需AWS账户）
+[AWS CLI](https://aws.amazon.com/cli/) 访问（无需 AWS 账户）
 
 `aws s3 ls s3://tcga-2-open/ --no-sign-request`
 
 ### [**临床应用研究以生成有效治疗（TARGET）**](https://ocg.cancer.gov/programs/target/using-target-data)
 
-临床应用研究以生成有效治疗（TARGET）计划采用全面的基因组方法来确定驱动儿童癌症的分子变化。该计划的目标是利用数据指导开发有效且毒性较小的治疗方案。TARGET组织为一个疾病特定项目团队的协作网络。TARGET项目提供全面的分子表征，以确定驱动儿童癌症起始和进展的遗传变化。数据集包含来自基因组数据公共数据库（GDC）的开放临床补充、样本补充、RNA-Seq基因表达定量、miRNA-Seq亚型表达定量、miRNA-Seq miRNA表达定量数据以及来自GDC遗留档案的开放数据。[**点击这里访问**](https://ocg.cancer.gov/programs/target/using-target-data)。
+临床应用研究以生成有效治疗（TARGET）计划采用全面的基因组方法来确定驱动儿童癌症的分子变化。该计划的目标是利用数据指导开发有效且毒性较小的治疗方案。TARGET 组织为一个疾病特定项目团队的协作网络。TARGET 项目提供全面的分子表征，以确定驱动儿童癌症起始和进展的遗传变化。数据集包含来自基因组数据公共数据库（GDC）的开放临床补充、样本补充、RNA-Seq 基因表达定量、miRNA-Seq 亚型表达定量、miRNA-Seq miRNA 表达定量数据以及来自 GDC 遗留档案的开放数据。[**点击这里访问**](https://ocg.cancer.gov/programs/target/using-target-data)。
 
 ### [**基因组聚合数据库（gnomAD）**](https://registry.opendata.aws/broad-gnomad/)
 
@@ -330,31 +330,31 @@ GDC数据门户是一个强大的数据驱动平台，允许癌症研究人员�
 
 **斯坦福问答数据集**（SQuAD）是一个阅读理解数据集，由众包工作者在一组维基百科文章上提出问题，每个问题的答案都是来自相应阅读段落的文本片段或*范围*，或者问题可能没有答案。[**在这里访问**](https://rajpurkar.github.io/SQuAD-explorer/explore/v2.0/dev/)
 
-### [**PubMed糖尿病数据集**](https://linqs-data.soe.ucsc.edu/public/Pubmed-Diabetes.tgz)
+### [**PubMed 糖尿病数据集**](https://linqs-data.soe.ucsc.edu/public/Pubmed-Diabetes.tgz)
 
-Pubmed糖尿病数据集包含19717篇来自PubMed数据库的关于糖尿病的科学出版物，分类为三类之一。引用网络包含44338条链接。数据集中的每篇出版物由一个TF/IDF加权词向量描述，该词典由500个唯一单词组成。数据集中的README文件提供了更多细节。
+Pubmed 糖尿病数据集包含 19717 篇来自 PubMed 数据库的关于糖尿病的科学出版物，分类为三类之一。引用网络包含 44338 条链接。数据集中的每篇出版物由一个 TF/IDF 加权词向量描述，该词典由 500 个唯一单词组成。数据集中的 README 文件提供了更多细节。
 
 [**下载链接**](https://linqs-data.soe.ucsc.edu/public/Pubmed-Diabetes.tgz)
 
 ### [**药物-靶标互动数据集**](https://github.com/shobeir/fakhraei_tcbb2014)
 
-此数据集包含从DrugBank、KEGG Drug、DCDB和Matador收集的药物与靶标之间的互动。最初由[Perlman等](http://online.liebertpub.com/doi/abs/10.1089/cmb.2010.0213)收集。数据集包含315种药物、250个靶标、1306个药物-靶标互动、5种药物-药物相似性和3种靶标-靶标相似性。药物-药物相似性包括基于化学的、基于配体的、基于表达的、基于副作用的和基于注释的相似性。靶标-靶标相似性包括基于序列的、基于蛋白质-蛋白质相互作用网络的和基于基因本体论的相似性。数据集的原始任务是基于网络中的不同相似性预测药物和靶标之间的新互动。[**下载链接**](https://github.com/shobeir/fakhraei_tcbb2014)
+此数据集包含从 DrugBank、KEGG Drug、DCDB 和 Matador 收集的药物与靶标之间的互动。最初由[Perlman 等](http://online.liebertpub.com/doi/abs/10.1089/cmb.2010.0213)收集。数据集包含 315 种药物、250 个靶标、1306 个药物-靶标互动、5 种药物-药物相似性和 3 种靶标-靶标相似性。药物-药物相似性包括基于化学的、基于配体的、基于表达的、基于副作用的和基于注释的相似性。靶标-靶标相似性包括基于序列的、基于蛋白质-蛋白质相互作用网络的和基于基因本体论的相似性。数据集的原始任务是基于网络中的不同相似性预测药物和靶标之间的新互动。[**下载链接**](https://github.com/shobeir/fakhraei_tcbb2014)
 
 ### [**药物基因组学数据集**](https://www.pharmgkb.org/downloads)
 
-PharmGKB数据和知识可供下载。通常在使用这些数据进行大规模项目之前，检查与其策展人联系[feedback@pharmgkb.org](mailto:feedback@pharmgkb.org)是至关重要的，以确保所提供的文件和数据被正确解释。PharmGKB通常不需要成为这些分析的共同作者；他们只希望确保在投入大量资源之前对数据有正确的理解。
+PharmGKB 数据和知识可供下载。通常在使用这些数据进行大规模项目之前，检查与其策展人联系 feedback@pharmgkb.org 是至关重要的，以确保所提供的文件和数据被正确解释。PharmGKB 通常不需要成为这些分析的共同作者；他们只希望确保在投入大量资源之前对数据有正确的理解。
 
 ### **[胰腺癌类器官分析](https://registry.opendata.aws/organoid-pancreatic/)**
 
-[**数据集**](https://registry.opendata.aws/organoid-pancreatic/)包含开放的RNA-Seq基因表达定量数据以及受控的WGS/WXS/RNA-Seq对齐读取、WXS注释体突变、WXS原始体突变和RNA-Seq剪接位点定量。[**文档**](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001611.v1.p1)
+[**数据集**](https://registry.opendata.aws/organoid-pancreatic/)包含开放的 RNA-Seq 基因表达定量数据以及受控的 WGS/WXS/RNA-Seq 对齐读取、WXS 注释体突变、WXS 原始体突变和 RNA-Seq 剪接位点定量。[**文档**](https://www.ncbi.nlm.nih.gov/projects/gap/cgi-bin/study.cgi?study_id=phs001611.v1.p1)
 
-[AWS CLI](https://aws.amazon.com/cli/) 访问（无需AWS账户）
+[AWS CLI](https://aws.amazon.com/cli/) 访问（无需 AWS 账户）
 
 `aws s3 ls s3://gdc-organoid-pancreatic-phs001611-2-open/ --no-sign-request`
 
 ### **[非洲土壤信息服务（AfSIS）土壤化学](https://registry.opendata.aws/afsis/)**
 
-该数据集包含通过非洲土壤信息服务（AfSIS）项目收集的土壤红外光谱数据及配对的土壤性质参考测量，这些样本在2009年至2018年期间进行了地理参考。**文档**
+该数据集包含通过非洲土壤信息服务（AfSIS）项目收集的土壤红外光谱数据及配对的土壤性质参考测量，这些样本在 2009 年至 2018 年期间进行了地理参考。**文档**
 
 [AWS CLI](https://aws.amazon.com/cli/) 访问（无需 AWS 账户）
 
@@ -374,7 +374,7 @@ NatureServe Explorer 提供了超过 95,000 种植物和动物在美国和加拿
 
 航空公司准时表现及航班延误原因 – On_Time 数据。
 
-该数据库包含由认证的美国航空承运人报告的计划和实际出发及到达时间、延误原因，这些承运人占国内计划客运收入的至少1%。[数据由运输统计局（BTS）航空信息办公室收集。](https://catalog.data.gov/dataset/airline-on-time-performance-and-causes-of-flight-delays-on-time-data)
+该数据库包含由认证的美国航空承运人报告的计划和实际出发及到达时间、延误原因，这些承运人占国内计划客运收入的至少 1%。[数据由运输统计局（BTS）航空信息办公室收集。](https://catalog.data.gov/dataset/airline-on-time-performance-and-causes-of-flight-delays-on-time-data)
 
 [FlightAware.com](https://FlightAware.com) 有数据，但你需要付费才能获得完整的数据集。
 
@@ -384,7 +384,7 @@ NatureServe Explorer 提供了超过 95,000 种植物和动物在美国和加拿
 
 +   `weather`: 某年某月特定机场的每小时气象数据
 
-+   `airports`: 机场名称、FAA代码和位置
++   `airports`: 机场名称、FAA 代码和位置
 
 +   `airlines`: 两字母航空公司代码与名称的转换
 
@@ -392,13 +392,13 @@ NatureServe Explorer 提供了超过 95,000 种植物和动物在美国和加拿
 
 [**航空公司准时统计与延误原因**](https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp)
 
-美国交通部（DOT）的运输统计局（BTS）跟踪大型航空公司运营的国内航班的准时表现。关于准时、延误、取消和改道航班数量的汇总信息会出现在DOT的每月[航空旅行消费者报告](http://www.dot.gov/individuals/air-consumer/air-travel-consumer-reports)中，该报告在每月结束后约30天发布，并在该网站上发布汇总表。BTS从2003年6月开始收集航班延误原因的详细信息。汇总统计数据和原始数据在航空旅行消费者报告发布时公开。[**在此访问**](https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp)
+美国交通部（DOT）的运输统计局（BTS）跟踪大型航空公司运营的国内航班的准时表现。关于准时、延误、取消和改道航班数量的汇总信息会出现在 DOT 的每月[航空旅行消费者报告](http://www.dot.gov/individuals/air-consumer/air-travel-consumer-reports)中，该报告在每月结束后约 30 天发布，并在该网站上发布汇总表。BTS 从 2003 年 6 月开始收集航班延误原因的详细信息。汇总统计数据和原始数据在航空旅行消费者报告发布时公开。[**在此访问**](https://www.transtats.bts.gov/OT_Delay/OT_DelayCause1.asp)
 
 ### [**全球航班数据**](https://www.reddit.com/r/datasets/comments/jrmzz5/worldwide_flight_data/)
 
-[**开放航班：截至2017年1月，OpenFlights机场数据库包含**超过10,000**个机场、火车站和渡轮码头，遍布全球**](https://openflights.org/data.html)
+[**开放航班：截至 2017 年 1 月，OpenFlights 机场数据库包含**超过 10,000**个机场、火车站和渡轮码头，遍布全球**](https://openflights.org/data.html)
 
-![](../Images/14302a254aa20b61d4a677e081a1cbbb.png)
+![](img/14302a254aa20b61d4a677e081a1cbbb.png)
 
 下载: [airports.dat](https://raw.githubusercontent.com/jpatokal/openflights/master/data/airports.dat)（仅机场，高质量）
 
@@ -410,7 +410,7 @@ NatureServe Explorer 提供了超过 95,000 种植物和动物在美国和加拿
 
 **[flightradar24.com](https://flightradar24.com/)** 拥有大量数据，包括历史数据，他们可能会愿意帮助你以良好的格式获取这些数据。
 
-### [**2019年美国犯罪统计数据**](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-69)
+### [**2019 年美国犯罪统计数据**](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-69)
 
 包含按种族和各州分开的美国逮捕数据集。[**在这里下载 Excel**](https://ucr.fbi.gov/crime-in-the-u.s/2019/crime-in-the-u.s.-2019/tables/table-69/table-69.xls/output.xls)
 
@@ -420,19 +420,19 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 另一个选项**[在这里](https://wiki.archiveteam.org/index.php/Yahoo!_Answers)**：根据跟踪器，已完成 7700 万，还有 2000 万未完成（？），还有 4000 万待完成：
 
-[https://wiki.archiveteam.org/index.php/Yahoo!_Answers](https://wiki.archiveteam.org/index.php/Yahoo!_Answers)
+[`wiki.archiveteam.org/index.php/Yahoo!_Answers`](https://wiki.archiveteam.org/index.php/Yahoo!_Answers)
 
 ### [**美国历史 1400-2021**](https://www.reddit.com/r/dataisbeautiful/comments/n5cvjv/history_of_america_14002021_agario_style_oc/)
 
 **来源：**
 
-[https://os-connect.com/pop/p2an.asp](https://os-connect.com/pop/p2an.asp)
+[`os-connect.com/pop/p2an.asp`](https://os-connect.com/pop/p2an.asp)
 
-[https://ourworldindata.org/](https://ourworldindata.org/)
+[`ourworldindata.org/`](https://ourworldindata.org/)
 
-[http://www.ggdc.net/maddison/oriindex.htm](http://www.ggdc.net/maddison/oriindex.htm)
+[`www.ggdc.net/maddison/oriindex.htm`](http://www.ggdc.net/maddison/oriindex.htm)
 
-[https://www.globalfirepower.com/countries-comparison.asp](https://www.globalfirepower.com/countries-comparison.asp)
+[`www.globalfirepower.com/countries-comparison.asp`](https://www.globalfirepower.com/countries-comparison.asp)
 
 ### [**波斯词汇发音数据集**](https://github.com/kiasar/Persian_phonetics)
 
@@ -444,9 +444,9 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **Stack Exchange 数据集**
 
-[![](../Images/5edee4e5f7b7a4f72077a6c45a7d02c7.png)](https://enoumen.com/wp-content/uploads/2021/04/image-2.png)
+![](https://enoumen.com/wp-content/uploads/2021/04/image-2.png)
 
-*[https://data.stackexchange.com/](https://data.stackexchange.com/)*
+*[`data.stackexchange.com/`](https://data.stackexchange.com/)*
 
 ### **[精彩公共数据集](https://github.com/awesomedata/awesome-public-datasets)**
 
@@ -454,21 +454,21 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### [**农业**](https://github.com/awesomedata/awesome-public-datasets#id66)
 
-+   [主要作物1981–2016年的全球历史产量数据集 – 该[…]](https://doi.pangaea.de/10.1594/PANGAEA.909132)
++   [主要作物 1981–2016 年的全球历史产量数据集 – 该[…]](https://doi.pangaea.de/10.1594/PANGAEA.909132)
 
 +   [高光谱土壤湿度基准数据集 – 该数据集是[…]](https://doi.org/10.5281/zenodo.1227837)
 
 +   [柠檬质量控制数据集 – 柠檬数据集已经准备好[…]](https://github.com/softwaremill/lemon-dataset)
 
-+   [优化土壤调整植被指数 – IDB是一个用于工作[…]](https://www.indexdatabase.de/db/i-single.php?id=63)
++   [优化土壤调整植被指数 – IDB 是一个用于工作[…]](https://www.indexdatabase.de/db/i-single.php?id=63)
 
 +   [美国农业部营养数据库](https://www.ars.usda.gov/northeast-area/beltsville-md/beltsville-human-nutrition-research-center/nutrient-data-laboratory/docs/sr28-download-files/)
 
-+   [美国农业部植物数据库 – 完整的PLANTS[…]](http://www.plants.usda.gov/dl_all.html)
++   [美国农业部植物数据库 – 完整的 PLANTS[…]](http://www.plants.usda.gov/dl_all.html)
 
 ### **生物学**
 
-+   [1000基因组计划 – 1000基因组计划于2008年至2015年运行，[…]](http://www.1000genomes.org/data)
++   [1000 基因组计划 – 1000 基因组计划于 2008 年至 2015 年运行，[…]](http://www.1000genomes.org/data)
 
 +   [美国肠道（微生物组项目） – 美国肠道项目是[…]](https://github.com/biocore/American-Gut)
 
@@ -480,47 +480,47 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [完整基因组公共数据 – 一个多样化的人类全基因组数据集[…]](http://www.completegenomics.com/public-data/69-genomes/)
 
-+   [EBI ArrayExpress – ArrayExpress功能基因组数据档案[…]](http://www.ebi.ac.uk/arrayexpress/)
++   [EBI ArrayExpress – ArrayExpress 功能基因组数据档案[…]](http://www.ebi.ac.uk/arrayexpress/)
 
-+   [欧洲EBI蛋白质数据银行 – 电子显微镜数据银行[…]](http://www.ebi.ac.uk/pdbe/emdb/index.html/)
++   [欧洲 EBI 蛋白质数据银行 – 电子显微镜数据银行[…]](http://www.ebi.ac.uk/pdbe/emdb/index.html/)
 
-+   [ENCODE项目 – DNA元素百科全书（ENCODE）联盟是[…]](https://www.encodeproject.org/)
++   [ENCODE 项目 – DNA 元素百科全书（ENCODE）联盟是[…]](https://www.encodeproject.org/)
 
 +   [电子显微镜试点图像档案（EMPIAR） – EMPIAR，电子[…]](http://www.ebi.ac.uk/pdbe/emdb/empiar/)
 
-+   [Ensembl基因组](https://ensemblgenomes.org/)
++   [Ensembl 基因组](https://ensemblgenomes.org/)
 
-+   [基因表达综合数据库（GEO） – GEO是一个公共功能基因组数据[…]](http://www.ncbi.nlm.nih.gov/geo/)
++   [基因表达综合数据库（GEO） – GEO 是一个公共功能基因组数据[…]](http://www.ncbi.nlm.nih.gov/geo/)
 
-+   [基因本体论（GO） – GO注释文件](http://geneontology.org/docs/download-go-annotations/)
++   [基因本体论（GO） – GO 注释文件](http://geneontology.org/docs/download-go-annotations/)
 
 +   [全球生物互动（GloBI）](https://github.com/jhpoelen/eol-globi-data/wiki#accessing-species-interaction-data)
 
-+   [哈佛医学院（HMS）LINCS项目 – 哈佛医学院[…]](http://lincs.hms.harvard.edu/)
++   [哈佛医学院（HMS）LINCS 项目 – 哈佛医学院[…]](http://lincs.hms.harvard.edu/)
 
 +   [人类基因组多样性项目 – 斯坦福大学的一组科学家[…]](http://www.hagsc.org/hgdp/files.html)
 
-+   [人类微生物组项目（HMP） – HMP测序了2000多个参考基因组 […]](http://www.hmpdacc.org/reference_genomes/reference_genomes.php)
++   [人类微生物组项目（HMP） – HMP 测序了 2000 多个参考基因组 […]](http://www.hmpdacc.org/reference_genomes/reference_genomes.php)
 
-+   [ICOS PSP基准 – ICOS PSP基准库包含一个 […]](http://ico2s.org/datasets/psp_benchmark.html)
++   [ICOS PSP 基准 – ICOS PSP 基准库包含一个 […]](http://ico2s.org/datasets/psp_benchmark.html)
 
-+   [国际HapMap项目](http://hapmap.ncbi.nlm.nih.gov/downloads/index.html.en)
++   [国际 HapMap 项目](http://hapmap.ncbi.nlm.nih.gov/downloads/index.html.en)
 
 +   [细胞生物学杂志数据查看器](https://rupress.org/jcb/pages/jcb-dataviewer) [[修复](https://github.com/awesomedata/apd-core/tree/master/core//Biology/Journal-of-Cell-Biology-DataViewer.yml)]
 
-+   [KEGG – KEGG是一个用于理解高级功能的数据库资源 […]](http://www.genome.jp/kegg/)
++   [KEGG – KEGG 是一个用于理解高级功能的数据库资源 […]](http://www.genome.jp/kegg/)
 
-+   [MIT癌症基因组数据](https://www.broadinstitute.org/cgi-bin/cancer/datasets.cgi)
++   [MIT 癌症基因组数据](https://www.broadinstitute.org/cgi-bin/cancer/datasets.cgi)
 
-+   [NCBI蛋白质](http://www.ncbi.nlm.nih.gov/guide/proteins/#databases)
++   [NCBI 蛋白质](http://www.ncbi.nlm.nih.gov/guide/proteins/#databases)
 
-+   [NCBI分类法 – NCBI分类法数据库是一个策划过的名称和分类集合 […]](http://www.ncbi.nlm.nih.gov/taxonomy)
++   [NCBI 分类法 – NCBI 分类法数据库是一个策划过的名称和分类集合 […]](http://www.ncbi.nlm.nih.gov/taxonomy)
 
-+   [NCI基因组数据公共平台 – GDC数据门户是一个强大的数据驱动平台 […]](https://gdc.cancer.gov/access-data/gdc-data-portal)
++   [NCI 基因组数据公共平台 – GDC 数据门户是一个强大的数据驱动平台 […]](https://gdc.cancer.gov/access-data/gdc-data-portal)
 
-+   [OpenSNP基因型数据 – openSNP允许直客客户的 […]](https://opensnp.org/)
++   [OpenSNP 基因型数据 – openSNP 允许直客客户的 […]](https://opensnp.org/)
 
-+   [Palmer企鹅 – Palmer企鹅的目标是提供一个极好的 […]](https://allisonhorst.github.io/palmerpenguins/)
++   [Palmer 企鹅 – Palmer 企鹅的目标是提供一个极好的 […]](https://allisonhorst.github.io/palmerpenguins/)
 
 +   [Pathguide – 蛋白质-蛋白质相互作用目录](http://www.pathguide.org/)
 
@@ -528,29 +528,29 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [精神基因组联盟 – 精神基因组的目的 […]](https://www.med.unc.edu/pgc/downloads)
 
-+   [PubChem项目 – PubChem是全球最大的自由访问化学物质数据库 […]](https://pubchem.ncbi.nlm.nih.gov/)
++   [PubChem 项目 – PubChem 是全球最大的自由访问化学物质数据库 […]](https://pubchem.ncbi.nlm.nih.gov/)
 
-+   [PubGene（现为Coremine Medical） – COREMINE™ 是一系列开发的工具 […]](https://www.coremine.com/)
++   [PubGene（现为 Coremine Medical） – COREMINE™ 是一系列开发的工具 […]](https://www.coremine.com/)
 
-+   [Sanger癌症体细胞突变目录（COSMIC） – COSMIC，[…]](http://cancer.sanger.ac.uk/cosmic)
++   [Sanger 癌症体细胞突变目录（COSMIC） – COSMIC，[…]](http://cancer.sanger.ac.uk/cosmic)
 
-+   [Sanger癌症药物敏感性基因组学项目（GDSC）](http://www.cancerrxgene.org/)
++   [Sanger 癌症药物敏感性基因组学项目（GDSC）](http://www.cancerrxgene.org/)
 
 +   [序列读取档案（SRA） – 序列读取档案（SRA）存储原始数据 […]](http://www.ncbi.nlm.nih.gov/Traces/sra/)
 
 +   [斯坦福微阵列数据](http://smd.stanford.edu/)
 
-+   [Stowers研究所原始数据存储库](http://www.stowers.org/research/publications/odr)
++   [Stowers 研究所原始数据存储库](http://www.stowers.org/research/publications/odr)
 
 +   [生物动态学系统科学（SSBD）数据库 – 系统科学 […]](http://ssbd.qbic.riken.jp/)
 
-+   [癌症基因组图谱（TCGA），通过Broad GDAC获取](https://gdac.broadinstitute.org/)
++   [癌症基因组图谱（TCGA），通过 Broad GDAC 获取](https://gdac.broadinstitute.org/)
 
 +   [生命目录 – 生命目录是一个经过质量保证的 […]](http://www.catalogueoflife.org/content/annual-checklist-archive)
 
 +   [个人基因组项目 – 个人基因组项目，始于 […]](http://www.personalgenomes.org/)
 
-+   [UCSC公共数据](http://hgdownload.soe.ucsc.edu/downloads.html)
++   [UCSC 公共数据](http://hgdownload.soe.ucsc.edu/downloads.html)
 
 +   [UniGene](https://ftp.ncbi.nlm.nih.gov/repository/UniGene/)
 
@@ -678,7 +678,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **[网络安全](https://github.com/awesomedata/awesome-public-datasets#id71)**
 
-+   [CCCS-CIC-AndMal-2020 – 数据集包含200K个良性样本和200K个恶意样本 […]](https://www.unb.ca/cic/datasets/andmal2020.html)
++   [CCCS-CIC-AndMal-2020 – 数据集包含 200K 个良性样本和 200K 个恶意样本 […]](https://www.unb.ca/cic/datasets/andmal2020.html)
 
 +   [网络防御演习期间捕获的流量和日志数据 – 这些 […]](https://zenodo.org/record/3746129)
 
@@ -694,9 +694,9 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [DrivenData 社会公益竞赛](http://www.drivendata.org/)
 
-+   [ICWSM 数据挑战（自2009年起）](https://www.icwsm.org/2018/datasets/datasets/#obtaining)
++   [ICWSM 数据挑战（自 2009 年起）](https://www.icwsm.org/2018/datasets/datasets/#obtaining)
 
-+   [腾讯2012 KDD杯](http://www.kddcup2012.org/)
++   [腾讯 2012 KDD 杯](http://www.kddcup2012.org/)
 
 +   [Kaggle 竞赛数据](https://www.kaggle.com/)
 
@@ -716,13 +716,13 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **[地球科学数据集](https://github.com/awesomedata/awesome-public-datasets#id73)**
 
-+   [38-Cloud (云检测) – 包含38张Landsat 8场景图像及其 […]](https://github.com/SorourMo/38-Cloud-A-Cloud-Segmentation-Dataset)
++   [38-Cloud (云检测) – 包含 38 张 Landsat 8 场景图像及其 […]](https://github.com/SorourMo/38-Cloud-A-Cloud-Segmentation-Dataset)
 
 +   [AQUASTAT – 全球水资源与利用](http://www.fao.org/nr/water/aquastat/data/query/index.html?lang=en)
 
-+   [BODC – 约22K变量的海洋数据](https://www.bodc.ac.uk/data/)
++   [BODC – 约 22K 变量的海洋数据](https://www.bodc.ac.uk/data/)
 
-+   [EOSDIS – NASA的地球观测系统数据](http://sedac.ciesin.columbia.edu/data/sets/browse)
++   [EOSDIS – NASA 的地球观测系统数据](http://sedac.ciesin.columbia.edu/data/sets/browse)
 
 +   [地球模型](https://earthmodels.org/) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//EarthScience/Earth-Models.yml)]
 
@@ -802,7 +802,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [DEL – 南非（1994 – 2014）的家庭电力负荷研究数据集](https://www.datafirst.uct.ac.za/dataportal/index.php/catalog/DELS)
 
-+   [ECO – ECO数据集是一个全面的非侵入式负荷[…]数据集](http://www.vs.inf.ethz.ch/res/show.html?what=eco-data)
++   [ECO – ECO 数据集是一个全面的非侵入式负荷[…]数据集](http://www.vs.inf.ethz.ch/res/show.html?what=eco-data)
 
 +   [EIA](http://www.eia.gov/electricity/data/eia923/)
 
@@ -816,7 +816,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [PLAID – 插头负载电器识别数据集](http://plaidplug.com/) [[修复](https://github.com/awesomedata/apd-core/tree/master/core//Energy/PLAID.yml)]
 
-+   [公共设施数据解放项目（PUDL）– PUDL使美国能源[…]的公开](https://github.com/catalyst-cooperative/pudl)
++   [公共设施数据解放项目（PUDL）– PUDL 使美国能源[…]的公开](https://github.com/catalyst-cooperative/pudl)
 
 +   [REDD](http://redd.csail.mit.edu/)
 
@@ -836,17 +836,17 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **[娱乐数据集](https://github.com/awesomedata/awesome-public-datasets#id77)**
 
-+   [Twitch上的顶级流媒体 – 包含前1000名流媒体的数据[…]的](https://www.kaggle.com/aayushmishra1512/twitchdata)
++   [Twitch 上的顶级流媒体 – 包含前 1000 名流媒体的数据[…]的](https://www.kaggle.com/aayushmishra1512/twitchdata)
 
 ### **[金融数据集](https://github.com/awesomedata/awesome-public-datasets#id78)**
 
-+   [BIS 统计 – 与中央[…]合作编制的BIS统计数据](https://www.bis.org/statistics/full_data_sets.htm)
++   [BIS 统计 – 与中央[…]合作编制的 BIS 统计数据](https://www.bis.org/statistics/full_data_sets.htm)
 
-+   [Blockmodo Coin Registry – 一个包含JSON格式信息文件的注册表[…]的注册表](https://github.com/Blockmodo/coin_registry)
++   [Blockmodo Coin Registry – 一个包含 JSON 格式信息文件的注册表[…]的注册表](https://github.com/Blockmodo/coin_registry)
 
 +   [CBOE 期货交易所](http://cfe.cboe.com/market-data/)
 
-+   [完整的FAANG股票数据 – 此数据集包含所有[…]的股票数据](https://www.kaggle.com/aayushmishra1512/faang-complete-stock-data)
++   [完整的 FAANG 股票数据 – 此数据集包含所有[…]的股票数据](https://www.kaggle.com/aayushmishra1512/faang-complete-stock-data)
 
 +   [Google 财经](https://www.google.com/finance)
 
@@ -856,7 +856,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [OANDA](http://www.oanda.com/)
 
-+   [OSU财务数据](http://fisher.osu.edu/fin/fdf/osudata.htm) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//Finance/OSU-Financial-data.yml)]
++   [OSU 财务数据](http://fisher.osu.edu/fin/fdf/osudata.htm) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//Finance/OSU-Financial-data.yml)]
 
 +   [Quandl](https://www.quandl.com/)
 
@@ -864,39 +864,39 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [雅虎财经](http://finance.yahoo.com/)
 
-### **[GIS数据集](https://github.com/awesomedata/awesome-public-datasets#id79)**
+### **[GIS 数据集](https://github.com/awesomedata/awesome-public-datasets#id79)**
 
-+   [了不起的3D语义城市模型 – 开放的3D语义城市和[…]](https://github.com/OloOcki/awesome-citygml)
++   [了不起的 3D 语义城市模型 – 开放的 3D 语义城市和[…]](https://github.com/OloOcki/awesome-citygml)
 
-+   [ArcGIS开放数据门户](http://opendata.arcgis.com/)
++   [ArcGIS 开放数据门户](http://opendata.arcgis.com/)
 
-+   [剑桥，MA，美国，GitHub上的GIS数据](http://cambridgegis.github.io/gisdata.html)
++   [剑桥，MA，美国，GitHub 上的 GIS 数据](http://cambridgegis.github.io/gisdata.html)
 
 +   [所有大洲、国家、州/省份的数据库和[…]](https://www.back4app.com/database/back4app/list-of-all-continents-countries-cities)
 
-+   [Factual全球位置数据](https://places.factual.com/data/t/places)
++   [Factual 全球位置数据](https://places.factual.com/data/t/places)
 
-+   [IEEE地球科学与遥感学会DASE网站](http://dase.grss-ieee.org/)
++   [IEEE 地球科学与遥感学会 DASE 网站](http://dase.grss-ieee.org/)
 
-+   [地理地图 – 高质量的GeoJSON地图程序生成](https://github.com/simonepri/geo-maps)
++   [地理地图 – 高质量的 GeoJSON 地图程序生成](https://github.com/simonepri/geo-maps)
 
-+   [ASU的地理空间数据](http://geodacenter.asu.edu/datalist/)
++   [ASU 的地理空间数据](http://geodacenter.asu.edu/datalist/)
 
 +   [地理维基项目 – 公民驱动的环境监测](http://geo-wiki.org/)
 
-+   [GeoFabrik – OSM数据提取到各种格式和区域](http://download.geofabrik.de/)
++   [GeoFabrik – OSM 数据提取到各种格式和区域](http://download.geofabrik.de/)
 
-+   [GeoNames全球](http://www.geonames.org/)
++   [GeoNames 全球](http://www.geonames.org/)
 
 +   [全球行政区数据库 (GADM) – 组织的地理空间数据[…]](https://gadm.org/)
 
 +   [国土基础设施基金会级别数据](https://hifld-geoplatform.opendata.arcgis.com/)
 
-+   [Landsat 8在AWS上](https://aws.amazon.com/public-data-sets/landsat/)
++   [Landsat 8 在 AWS 上](https://aws.amazon.com/public-data-sets/landsat/)
 
 +   [所有语言的所有国家列表](https://github.com/umpirsky/country-list)
 
-+   [国家气象局GIS数据门户](http://www.nws.noaa.gov/gis/)
++   [国家气象局 GIS 数据门户](http://www.nws.noaa.gov/gis/)
 
 +   [自然地球 – 世界的矢量和栅格数据](https://www.naturalearthdata.com/downloads/) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//GIS/Natural-Earth.yml)]
 
@@ -906,15 +906,15 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Pleiades – 古代地点的地名和图谱](http://pleiades.stoa.org/)
 
-+   [使用OSM数据的反向地理编码器](https://github.com/kno10/reversegeocode)
++   [使用 OSM 数据的反向地理编码器](https://github.com/kno10/reversegeocode)
 
-+   [Robin Wilson – 免费GIS数据集](http://freegisdata.rtwilson.com/)
++   [Robin Wilson – 免费 GIS 数据集](http://freegisdata.rtwilson.com/)
 
 +   [TIGER/Line – 美国边界和道路](https://www.census.gov/geo/maps-data/data/tiger-line.html)
 
 +   [时区 shapefile](http://efele.net/maps/tz/world/)
 
-+   [TwoFishes – Foursquare的粗略地理编码器](https://github.com/foursquare/twofishes)
++   [TwoFishes – Foursquare 的粗略地理编码器](https://github.com/foursquare/twofishes)
 
 +   [联合国环境数据](http://geodata.grid.unep.ch/)
 
@@ -1162,7 +1162,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [美国开放政府](https://www.data.gov/open-gov/)
 
-+   [英国2011年人口普查开放地图项目](https://data.cdrc.ac.uk/product/cdrc-2011-census-open-atlas)
++   [英国 2011 年人口普查开放地图项目](https://data.cdrc.ac.uk/product/cdrc-2011-census-open-atlas)
 
 +   [美国县 – 这是一个各种数据的存储库，按美国[…]](https://github.com/evangambit/JsonOfCounties)
 
@@ -1190,27 +1190,27 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **[医疗数据集](https://github.com/awesomedata/awesome-public-datasets#id81)**
 
-+   [AWS COVID-19数据集 – 我们与组织合作，他们提供[…]](https://dj2taa9i652rf.cloudfront.net/)
++   [AWS COVID-19 数据集 – 我们与组织合作，他们提供[…]](https://dj2taa9i652rf.cloudfront.net/)
 
-+   [COVID-19病例监测公开使用数据 – COVID-19病例[…]](https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf)
++   [COVID-19 病例监测公开使用数据 – COVID-19 病例[…]](https://data.cdc.gov/Case-Surveillance/COVID-19-Case-Surveillance-Public-Use-Data/vbim-akqf)
 
-+   [约翰斯·霍普金斯大学CSSE 2019新型冠状病毒COVID-19数据存储库 – […]](https://github.com/CSSEGISandData/COVID-19)
++   [约翰斯·霍普金斯大学 CSSE 2019 新型冠状病毒 COVID-19 数据存储库 – […]](https://github.com/CSSEGISandData/COVID-19)
 
 +   [美国的冠状病毒（Covid-19）数据 – 《纽约时报》[…]](https://github.com/nytimes/covid-19-data)
 
-+   [COVID-19报告的患者影响和医院能力按设施划分 – […]](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility?SorourMo/38-Cloud-A-Cloud-Segmentation-Dataset)
++   [COVID-19 报告的患者影响和医院能力按设施划分 – […]](https://healthdata.gov/dataset/covid-19-reported-patient-impact-and-hospital-capacity-facility?SorourMo/38-Cloud-A-Cloud-Segmentation-Dataset)
 
-+   [食品成分原料、加工、准备 USDA国家营养数据库标准[…]](https://data.nal.usda.gov/dataset/composition-foods-raw-processed-prepared-usda-national-nutrient-database-standard-reference-release-27)
++   [食品成分原料、加工、准备 USDA 国家营养数据库标准[…]](https://data.nal.usda.gov/dataset/composition-foods-raw-processed-prepared-usda-national-nutrient-database-standard-reference-release-27)
 
-+   [COVID追踪项目 – COVID追踪项目收集了[…]](https://covidtracking.com/data)
++   [COVID 追踪项目 – COVID 追踪项目收集了[…]](https://covidtracking.com/data)
 
-+   [EHDP大型健康数据集](http://www.ehdp.com/vitalnet/datasets.htm)
++   [EHDP 大型健康数据集](http://www.ehdp.com/vitalnet/datasets.htm)
 
-+   [GDC – GDC支持CCG、TCGA、TARGET等多个癌症基因组项目](https://gdc.cancer.gov/)
++   [GDC – GDC 支持 CCG、TCGA、TARGET 等多个癌症基因组项目](https://gdc.cancer.gov/)
 
 +   [Gapminder 世界人口统计数据库](http://www.gapminder.org/data/)
 
-+   [MeSH，PubMed文章索引使用的词汇词典](https://www.nlm.nih.gov/mesh/filelist.html)
++   [MeSH，PubMed 文章索引使用的词汇词典](https://www.nlm.nih.gov/mesh/filelist.html)
 
 +   [MeDAL – 大型医学文本数据集，专门为缩写 […]](https://github.com/BruceWen120/medal)
 
@@ -1322,17 +1322,17 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [来自五个领域的上下文感知数据集](https://github.com/irecsys/CARSKit/tree/master/context-aware_data_sets)
 
-+   [Delve数据集用于分类和回归](http://www.cs.toronto.edu/~delve/data/datasets.html)
++   [Delve 数据集用于分类和回归](http://www.cs.toronto.edu/~delve/data/datasets.html)
 
-+   [Discogs每月数据](http://data.discogs.com/)
++   [Discogs 每月数据](http://data.discogs.com/)
 
 +   [自由音乐档案](https://github.com/mdeff/fma)
 
-+   [IMDb数据库](https://www.imdb.com/interfaces)
++   [IMDb 数据库](https://www.imdb.com/interfaces)
 
 +   [Iranis – 大规模波斯语/阿拉伯语车牌字符数据集](https://alitourani.github.io/Iranis-dataset/)
 
-+   [Keel分类、回归和时间序列数据集库](http://sci2s.ugr.es/keel/datasets.php)
++   [Keel 分类、回归和时间序列数据集库](http://sci2s.ugr.es/keel/datasets.php)
 
 +   [野外标记面孔数据集（LFW）](http://vis-www.cs.umass.edu/lfw/)
 
@@ -1344,27 +1344,27 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [更多歌曲数据集](http://labrosa.ee.columbia.edu/millionsong/pages/additional-datasets)
 
-+   [电影Lens数据集](http://grouplens.org/datasets/movielens/)
++   [电影 Lens 数据集](http://grouplens.org/datasets/movielens/)
 
 +   [《纽约客》字幕竞赛评分数据](https://github.com/nextml/caption-contest-data)
 
-+   [RDataMining – “R与数据挖掘”电子书数据](http://www.rdatamining.com/data)
++   [RDataMining – “R 与数据挖掘”电子书数据](http://www.rdatamining.com/data)
 
 +   [地球上已登记的陨石](http://publichealthintelligence.org/content/registered-meteorites-has-impacted-earth-visualized) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//MachineLearning/Registered-Meteorites-on-Earth.yml)]
 
 +   [旧金山餐馆健康评分数据](https://data.sfgov.org/Health-and-Social-Services/Restaurant-Scores-LIVES-Standard/pyih-qa8i?row_index=0)
 
-+   [TikTok数据集 – 包含300多个舞蹈视频，捕捉单个人的[…]](https://www.yasamin.page/hdnet_tiktok)
++   [TikTok 数据集 – 包含 300 多个舞蹈视频，捕捉单个人的[…]](https://www.yasamin.page/hdnet_tiktok)
 
-+   [UCI机器学习库](http://archive.ics.uci.edu/ml/)
++   [UCI 机器学习库](http://archive.ics.uci.edu/ml/)
 
 +   [Yahoo!评分与分类数据](http://webscope.sandbox.yahoo.com/catalog.php?datatype=r)
 
-+   [YouTube边界框](https://research.google.com/youtube-bb/)
++   [YouTube 边界框](https://research.google.com/youtube-bb/)
 
 +   [YouTube 8m](https://research.google.com/youtube8m/download.html)
 
-+   [eBay在线拍卖（2012）](http://www.modelingonlineauctions.com/datasets)
++   [eBay 在线拍卖（2012）](http://www.modelingonlineauctions.com/datasets)
 
 ### **[博物馆数据集](https://github.com/awesomedata/awesome-public-datasets#id84)**
 
@@ -1372,7 +1372,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [库珀-休伊特收藏数据库](https://github.com/cooperhewitt/collection)
 
-+   [大都会艺术博物馆收藏API](https://metmuseum.github.io/)
++   [大都会艺术博物馆收藏 API](https://metmuseum.github.io/)
 
 +   [明尼阿波利斯艺术学院元数据](https://github.com/artsmia/collection)
 
@@ -1436,9 +1436,9 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [多领域情感数据集（版本 2.0）](http://www.cs.jhu.edu/~mdredze/datasets/sentiment/)
 
-+   [用于训练语音增强算法和TTS的嘈杂语音数据库 […]](https://datashare.is.ed.ac.uk/handle/10283/2791) [[修复](https://github.com/awesomedata/apd-core/tree/master/core//NaturalLanguage/Noisy-Speech.yml)]
++   [用于训练语音增强算法和 TTS 的嘈杂语音数据库 […]](https://datashare.is.ed.ac.uk/handle/10283/2791) [[修复](https://github.com/awesomedata/apd-core/tree/master/core//NaturalLanguage/Noisy-Speech.yml)]
 
-+   [开放多语言Wordnet](http://compling.hss.ntu.edu.sg/omw/)
++   [开放多语言 Wordnet](http://compling.hss.ntu.edu.sg/omw/)
 
 +   [POS/NER/Chunk 注释数据](https://github.com/aritter/twitter_nlp/tree/master/data/annotated)
 
@@ -1446,11 +1446,11 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [英语短信垃圾邮件集合](http://www.dt.fee.unicamp.br/~tiago/smsspamcollection/)
 
-+   [SaudiNewsNet 沙特新闻文章合集（阿拉伯语，30K篇文章）](https://github.com/ParallelMazen/SaudiNewsNet)
++   [SaudiNewsNet 沙特新闻文章合集（阿拉伯语，30K 篇文章）](https://github.com/ParallelMazen/SaudiNewsNet)
 
 +   [斯坦福问答数据集 (SQuAD)](https://rajpurkar.github.io/SQuAD-explorer/)
 
-+   [2005~2011年USENET帖子语料库](http://www.psych.ualberta.ca/~westburylab/downloads/usenetcorpus.download.html)
++   [2005~2011 年 USENET 帖子语料库](http://www.psych.ualberta.ca/~westburylab/downloads/usenetcorpus.download.html)
 
 +   [通用依存关系](http://universaldependencies.org/)
 
@@ -1458,7 +1458,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Wikidata – 维基百科数据库](https://www.wikidata.org/wiki/Wikidata:Database_download)
 
-+   [维基百科链接数据 – 40百万实体上下文](https://code.google.com/p/wiki-links/downloads/list)
++   [维基百科链接数据 – 40 百万实体上下文](https://code.google.com/p/wiki-links/downloads/list)
 
 +   [WordNet 数据库和工具](http://wordnet.princeton.edu/download/)
 
@@ -1506,11 +1506,11 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [IceCube – 南极洲中微子观测站](http://icecube.wisc.edu/science/data)
 
-+   [Ligo 开放科学中心 (LOSC) – LIGO的引力波数据 […]](https://losc.ligo.org/)
++   [Ligo 开放科学中心 (LOSC) – LIGO 的引力波数据 […]](https://losc.ligo.org/)
 
 +   [NASA 系外行星档案](http://exoplanetarchive.ipac.caltech.edu/)
 
-+   [NSSDC (NASA) 550个太空航天器的数据](http://nssdc.gsfc.nasa.gov/nssdc/obtaining_data.html)
++   [NSSDC (NASA) 550 个太空航天器的数据](http://nssdc.gsfc.nasa.gov/nssdc/obtaining_data.html)
 
 +   [斯隆数字天空调查 (SDSS) – 宇宙映射](http://www.sdss.org/)
 
@@ -1524,17 +1524,17 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [MSK-IMPACT-临床测序队列-MSKCC-前列腺癌 – 靶向 […]](http://www.cbioportal.org/study?id=prad_mskcc_2017)
 
-+   [转移性前列腺腺癌-MCTP – 对61个样本的综合分析 […]](http://www.cbioportal.org/study?id=prad_mich)
++   [转移性前列腺腺癌-MCTP – 对 61 个样本的综合分析 […]](http://www.cbioportal.org/study?id=prad_mich)
 
 +   [转移性前列腺癌-SU2CPCF-梦想团队 – 对 […]](http://www.cbioportal.org/study?id=prad_su2c_2015)
 
-+   [NPCR-2001-2015 – CDC国家癌症计划的数据库 […]](https://www.cdc.gov/cancer/uscs/public-use)
++   [NPCR-2001-2015 – CDC 国家癌症计划的数据库 […]](https://www.cdc.gov/cancer/uscs/public-use)
 
-+   [NPCR-2005-2015 – CDC国家癌症计划的数据库 […]](https://www.cdc.gov/cancer/uscs/public-use)
++   [NPCR-2005-2015 – CDC 国家癌症计划的数据库 […]](https://www.cdc.gov/cancer/uscs/public-use)
 
-+   [NaF-前列腺 – NaF 前列腺是F-18 NaF正电子发射 […]](https://wiki.cancerimagingarchive.net/display/Public/NaF+Prostate)
++   [NaF-前列腺 – NaF 前列腺是 F-18 NaF 正电子发射 […]](https://wiki.cancerimagingarchive.net/display/Public/NaF+Prostate)
 
-+   [神经内分泌前列腺癌 – 全外显子组和RNA测序数据 […]](http://www.cbioportal.org/study?id=nepc_wcm_2016)
++   [神经内分泌前列腺癌 – 全外显子组和 RNA 测序数据 […]](http://www.cbioportal.org/study?id=nepc_wcm_2016)
 
 +   [PLCO-前列腺-诊断程序 – 前列腺诊断程序数据集 […]](https://biometry.nci.nih.gov/cdas/plco/)
 
@@ -1554,51 +1554,51 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [PRAD-UK-前列腺腺癌-英国 – 前列腺腺癌 […]](https://dcc.icgc.org/projects/PRAD-UK)
 
-+   [PROSTATEx-挑战 – 回顾性前列腺MR研究集。所有 […]](https://wiki.cancerimagingarchive.net/display/Public/SPIE-AAPM-NCI+PROSTATEx+Challenges)
++   [PROSTATEx-挑战 – 回顾性前列腺 MR 研究集。所有 […]](https://wiki.cancerimagingarchive.net/display/Public/SPIE-AAPM-NCI+PROSTATEx+Challenges)
 
-+   [前列腺-3T – 前列腺-3T项目向TCIA提供了成像数据 […]](https://wiki.cancerimagingarchive.net/display/Public/PROSTATE-3T)
++   [前列腺-3T – 前列腺-3T 项目向 TCIA 提供了成像数据 […]](https://wiki.cancerimagingarchive.net/display/Public/PROSTATE-3T)
 
 +   [前列腺-腺癌-布罗德-康奈尔-2012 – 综合分析……](http://www.cbioportal.org/study?id=prad_broad)
 
 +   [前列腺-腺癌-布罗德-康奈尔-2013 – 综合分析……](http://www.cbioportal.org/study?id=prad_broad_2013)
 
-+   [前列腺-腺癌-CNA研究-MSKCC – 103例的拷贝数分析……](http://www.cbioportal.org/study?id=prad_mskcc_2014)
++   [前列腺-腺癌-CNA 研究-MSKCC – 103 例的拷贝数分析……](http://www.cbioportal.org/study?id=prad_mskcc_2014)
 
 +   [前列腺-腺癌-弗雷德-哈钦森-CRC – 综合分析……](http://www.cbioportal.org/study?id=prad_fhcrc)
 
-+   [前列腺腺癌（MSKCC/DFCI） – 1013例的全外显子组测序……](http://www.cbioportal.org/study?id=prad_p1000)
++   [前列腺腺癌（MSKCC/DFCI） – 1013 例的全外显子组测序……](http://www.cbioportal.org/study?id=prad_p1000)
 
-+   [前列腺-腺癌-MSKCC – MSKCC前列腺癌基因组计划。181例……](http://www.cbioportal.org/study?id=prad_mskcc)
++   [前列腺-腺癌-MSKCC – MSKCC 前列腺癌基因组计划。181 例……](http://www.cbioportal.org/study?id=prad_mskcc)
 
 +   [前列腺-腺癌-类器官-MSKCC – 前列腺的外显子组分析……](http://www.cbioportal.org/study?id=prad_mskcc_cheny1_organoids_2014)
 
 +   [前列腺-腺癌-Sun-实验室 – 全基因组和转录组……](http://www.cbioportal.org/study?id=prad_eururol_2017)
 
-+   [前列腺-腺癌-TCGA-PanCancer-Atlas – 综合TCGA……](http://www.cbioportal.org/study?id=prad_tcga_pan_can_atlas_2018)
++   [前列腺-腺癌-TCGA-PanCancer-Atlas – 综合 TCGA……](http://www.cbioportal.org/study?id=prad_tcga_pan_can_atlas_2018)
 
-+   [前列腺-腺癌-TCGA – 333例原发性……](http://www.cbioportal.org/study?id=prad_tcga_pub)
++   [前列腺-腺癌-TCGA – 333 例原发性……](http://www.cbioportal.org/study?id=prad_tcga_pub)
 
-+   [前列腺-诊断 – PCa T1和T2加权磁共振图像……](https://wiki.cancerimagingarchive.net/display/Public/PROSTATE-DIAGNOSIS)
++   [前列腺-诊断 – PCa T1 和 T2 加权磁共振图像……](https://wiki.cancerimagingarchive.net/display/Public/PROSTATE-DIAGNOSIS)
 
 +   [前列腺-融合-MRI-病理 – 前列腺融合-MRI-病理……](https://wiki.cancerimagingarchive.net/display/Public/Prostate+Fused-MRI-Pathology)
 
-+   [前列腺-MRI – 前列腺-MRI的磁共振影像……](https://wiki.cancerimagingarchive.net/display/Public/Prostate-MRI)
++   [前列腺-MRI – 前列腺-MRI 的磁共振影像……](https://wiki.cancerimagingarchive.net/display/Public/Prostate-MRI)
 
-+   [前列腺-R – R包‘ElemStatLearn’包含前列腺癌的数据……](https://web.stanford.edu/~hastie/ElemStatLearn/datasets/prostate.data)
++   [前列腺-R – R 包‘ElemStatLearn’包含前列腺癌的数据……](https://web.stanford.edu/~hastie/ElemStatLearn/datasets/prostate.data)
 
 +   [QIN-前列腺-重复性 – QIN-前列腺-重复性数据集是……](https://wiki.cancerimagingarchive.net/display/Public/QIN-PROSTATE-Repeatability)
 
-+   [QIN-前列腺 – QIN前列腺的定量影像……](https://wiki.cancerimagingarchive.net/display/Public/QIN+PROSTATE)
++   [QIN-前列腺 – QIN 前列腺的定量影像……](https://wiki.cancerimagingarchive.net/display/Public/QIN+PROSTATE)
 
-+   [SEER-YR1973_2015.SEER9 – SEER 2017年11月研究数据文件……](https://seer.cancer.gov/data/seerstat/nov2017/)
++   [SEER-YR1973_2015.SEER9 – SEER 2017 年 11 月研究数据文件……](https://seer.cancer.gov/data/seerstat/nov2017/)
 
-+   [SEER-YR1992_2015.SJ_LA_RG_AK – SEER 2017年11月研究数据文件……](https://seer.cancer.gov/data/seerstat/nov2017/)
++   [SEER-YR1992_2015.SJ_LA_RG_AK – SEER 2017 年 11 月研究数据文件……](https://seer.cancer.gov/data/seerstat/nov2017/)
 
-+   [SEER-YR2000_2015.CA_KY_LO_NJ_GA – SEER 2017年11月研究数据……](https://seer.cancer.gov/data/seerstat/nov2017/)
++   [SEER-YR2000_2015.CA_KY_LO_NJ_GA – SEER 2017 年 11 月研究数据……](https://seer.cancer.gov/data/seerstat/nov2017/)
 
-+   [SEER-YR2000_2015.CA_KY_LO_NJ_GA – 2005年7月至12月的诊断……](https://seer.cancer.gov/data/seerstat/nov2017/)
++   [SEER-YR2000_2015.CA_KY_LO_NJ_GA – 2005 年 7 月至 12 月的诊断……](https://seer.cancer.gov/data/seerstat/nov2017/)
 
-+   [TCGA-PRAD-US – TCGA前列腺腺癌（499个样本）。](http://www.cbioportal.org/study?id=prad_tcga)
++   [TCGA-PRAD-US – TCGA 前列腺腺癌（499 个样本）。](http://www.cbioportal.org/study?id=prad_tcga)
 
 ### **[心理学与认知数据集](https://github.com/awesomedata/awesome-public-datasets#id89)**
 
@@ -1630,7 +1630,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Infochimps](http://www.infochimps.com/) [[修正](https://github.com/awesomedata/apd-core/tree/master/core//PublicDomains/Infochimps.yml)]
 
-+   [KDNuggets 数据集合](/datasets/index.html)
++   KDNuggets 数据集合
 
 +   [微软 Azure 数据市场免费数据集](https://azuremarketplace.microsoft.com/en-us/marketplace/apps?source=datamarket&filters=pricing-free&page=1) [[修正](https://github.com/awesomedata/apd-core/tree/master/core//PublicDomains/Microsoft-Azure-Data-Market-Free-DataSets.yml)]
 
@@ -1734,19 +1734,19 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [用于在线声誉管理的 Twitter 数据](http://nlp.uned.es/replab2013/)
 
-+   [用于情感分析的Twitter数据](http://help.sentiment140.com/for-students/)
++   [用于情感分析的 Twitter 数据](http://help.sentiment140.com/for-students/)
 
-+   [整个Twitter网站的图谱](http://an.kaist.ac.kr/traces/WWW2010.html)
++   [整个 Twitter 网站的图谱](http://an.kaist.ac.kr/traces/WWW2010.html)
 
-+   [Twitter抓取Calufa 2011年5月](http://archive.org/details/2011-05-calufa-twitter-sql) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//SocialNetworks/Twitter-Scrape-Calufa-May-2011.yml)]
++   [Twitter 抓取 Calufa 2011 年 5 月](http://archive.org/details/2011-05-calufa-twitter-sql) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//SocialNetworks/Twitter-Scrape-Calufa-May-2011.yml)]
 
-+   [UNIMI/LAW社会网络数据集](http://law.di.unimi.it/datasets.php)
++   [UNIMI/LAW 社会网络数据集](http://law.di.unimi.it/datasets.php)
 
-+   [美国国会Twitter数据 – 包含1100多条推文的每日数据集[…]](https://github.com/alexlitel/congresstweets)
++   [美国国会 Twitter 数据 – 包含 1100 多条推文的每日数据集[…]](https://github.com/alexlitel/congresstweets)
 
 +   [雅虎图谱和社会数据](http://webscope.sandbox.yahoo.com/catalog.php?datatype=g)
 
-+   [2007年、2008年YouTube视频社会图谱](http://netsg.cs.sfu.ca/youtubedata/)
++   [2007 年、2008 年 YouTube 视频社会图谱](http://netsg.cs.sfu.ca/youtubedata/)
 
 ### **[社会科学数据集](https://github.com/awesomedata/awesome-public-datasets#id93)**
 
@@ -1760,19 +1760,19 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [战争相关项目](http://www.correlatesofwar.org/)
 
-+   [Cryptome阴谋论项目](http://cryptome.org/)
++   [Cryptome 阴谋论项目](http://cryptome.org/)
 
 +   [数据卡片](https://www.datacards.org/login/) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//SocialSciences/Datacards.yml)]
 
 +   [欧洲社会调查](http://www.europeansocialsurvey.org/data/)
 
-+   [FBI仇恨犯罪2013 – 聚合数据](https://github.com/emorisse/FBI-Hate-Crime-Statistics/tree/master/2013)
++   [FBI 仇恨犯罪 2013 – 聚合数据](https://github.com/emorisse/FBI-Hate-Crime-Statistics/tree/master/2013)
 
 +   [脆弱国家指数](http://fundforpeace.org/fsi/) [[fixme](https://github.com/awesomedata/apd-core/tree/master/core//SocialSciences/Fragile-States-Index.yml)]
 
-+   [GDELT全球事件数据库](http://gdeltproject.org/data.html)
++   [GDELT 全球事件数据库](http://gdeltproject.org/data.html)
 
-+   [自1972年以来的综合社会调查（GSS）](http://gss.norc.org/)
++   [自 1972 年以来的综合社会调查（GSS）](http://gss.norc.org/)
 
 +   [德国社会调查](http://www.gesis.org/en/home/)
 
@@ -1782,13 +1782,13 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [人道主义数据交换](https://data.humdata.org/)
 
-+   [INFORM风险管理指数](http://www.inform-index.org/Results/Global)
++   [INFORM 风险管理指数](http://www.inform-index.org/Results/Global)
 
 +   [人口研究所](http://www.ined.fr/en/)
 
 +   [国际网络档案](http://www.princeton.edu/~ina/)
 
-+   [国际社会调查计划ISSP](http://www.issp.org/)
++   [国际社会调查计划 ISSP](http://www.issp.org/)
 
 +   [国际研究汇编项目](http://www.isacompendium.com/public/)
 
@@ -1796,7 +1796,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [麻省理工学院现实挖掘数据集](http://realitycommons.media.mit.edu/realitymining.html)
 
-+   [Norsk samfunnsvitenskapelig datatjeneste宏观数据指南](http://nsd.uib.no/)
++   [Norsk samfunnsvitenskapelig datatjeneste 宏观数据指南](http://nsd.uib.no/)
 
 +   [大规模动员数据项目 – 大规模动员（MM）数据是[…]](https://dataverse.harvard.edu/dataverse/MMdata)
 
@@ -1822,7 +1822,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [恐怖主义研究与分析联盟](http://www.trackingterrorism.org/)
 
-+   [自1984年起德克萨斯州死刑囚执行情况](http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html)
++   [自 1984 年起德克萨斯州死刑囚执行情况](http://www.tdcj.state.tx.us/death_row/dr_executed_offenders.html)
 
 +   [泰坦尼克号生还数据集](https://www.kaggle.com/c/titanic/data)
 
@@ -1852,59 +1852,59 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Libraries.io 开源库及依赖元数据](https://doi.org/10.5281/zenodo.1068916)
 
-+   [公共 Git 存档 – 面向所有的大型代码数据集 – 包含182,014个顶级[…]](https://github.com/src-d/datasets/tree/master/PublicGitArchive)
++   [公共 Git 存档 – 面向所有的大型代码数据集 – 包含 182,014 个顶级[…]](https://github.com/src-d/datasets/tree/master/PublicGitArchive)
 
 +   [代码重复 – 2k Java 文件和 600 对 Java 函数对标记为[…]](https://github.com/src-d/datasets/tree/master/Duplicates)
 
-+   [提交消息 – 截至2019年3月的13亿条GitHub提交消息](https://github.com/src-d/datasets/blob/master/CommitMessages)
++   [提交消息 – 截至 2019 年 3 月的 13 亿条 GitHub 提交消息](https://github.com/src-d/datasets/blob/master/CommitMessages)
 
-+   [拉取请求审查评论 – 2530万条GitHub PR审查评论 […]](https://github.com/src-d/datasets/blob/master/ReviewComments)
++   [拉取请求审查评论 – 2530 万条 GitHub PR 审查评论 […]](https://github.com/src-d/datasets/blob/master/ReviewComments)
 
-+   [源代码标识符 – 4170万条可拆分标识符 […]](https://github.com/src-d/datasets/tree/master/Identifiers)
++   [源代码标识符 – 4170 万条可拆分标识符 […]](https://github.com/src-d/datasets/tree/master/Identifiers)
 
 ### **[体育数据集](https://github.com/awesomedata/awesome-public-datasets#id95)**
 
 +   [美国忍者战士障碍物 – 包含历史上所有障碍物 […]](https://data.world/ninja/anw-obstacle-history)
 
-+   [Betfair历史交易数据](http://data.betfair.com/)
++   [Betfair 历史交易数据](http://data.betfair.com/)
 
-+   [Cricsheet比赛 (板球)](http://cricsheet.org/)
++   [Cricsheet 比赛 (板球)](http://cricsheet.org/)
 
 +   [体育公平性 – 体育公平性数据分析工具 […]](https://ope.ed.gov/athletics)
 
-+   [Ergast Formula 1，从1950年至今 (API)](http://ergast.com/mrd/db)
++   [Ergast Formula 1，从 1950 年至今 (API)](http://ergast.com/mrd/db)
 
-+   [足球/足球资源 (数据和API)](http://www.jokecamp.com/blog/guide-to-football-and-soccer-data-and-apis/)
++   [足球/足球资源 (数据和 API)](http://www.jokecamp.com/blog/guide-to-football-and-soccer-data-and-apis/)
 
-+   [Lahman的棒球数据库](http://www.seanlahman.com/baseball-archive/statistics/)
++   [Lahman 的棒球数据库](http://www.seanlahman.com/baseball-archive/statistics/)
 
-+   [NFL逐场数据 – NFL逐场数据来源于: […]](https://www.dolthub.com/repositories/Liquidata/nfl-play-by-play)
++   [NFL 逐场数据 – NFL 逐场数据来源于: […]](https://www.dolthub.com/repositories/Liquidata/nfl-play-by-play)
 
 +   [Pinhooker: 纯种马血统销售数据](https://github.com/phillc73/pinhooker)
 
-+   [职业Kabadi第1到第7季 – 职业Kabadi联赛是一个专业级别的 […]](https://github.com/ranganadhkodali/Pro-Kabadi-season-1-7-Stats)
++   [职业 Kabadi 第 1 到第 7 季 – 职业 Kabadi 联赛是一个专业级别的 […]](https://github.com/ranganadhkodali/Pro-Kabadi-season-1-7-Stats)
 
-+   [Retrosheet棒球统计数据](http://www.retrosheet.org/game.htm)
++   [Retrosheet 棒球统计数据](http://www.retrosheet.org/game.htm)
 
-+   [ATP的网球排名、结果和统计数据数据库](https://github.com/JeffSackmann/tennis_atp)
++   [ATP 的网球排名、结果和统计数据数据库](https://github.com/JeffSackmann/tennis_atp)
 
-+   [WTA的网球排名、结果和统计数据数据库](https://github.com/JeffSackmann/tennis_wta)
++   [WTA 的网球排名、结果和统计数据数据库](https://github.com/JeffSackmann/tennis_wta)
 
 +   [美国足球队及地点 – 美国足球队及地点。MLS， […]](https://github.com/gavinr/usa-soccer)
 
 ### **[时间序列](https://github.com/awesomedata/awesome-public-datasets#id96) [D](https://github.com/awesomedata/awesome-public-datasets#id96)****[a](https://github.com/awesomedata/awesome-public-datasets#id96)****[t](https://github.com/awesomedata/awesome-public-datasets#id96)****[a](https://github.com/awesomedata/awesome-public-datasets#id96)****[s](https://github.com/awesomedata/awesome-public-datasets#id96)****[e](https://github.com/awesomedata/awesome-public-datasets#id96)**[**ts**](https://github.com/awesomedata/awesome-public-datasets#id96)
 
-+   [3W数据集 – 根据作者的最佳知识，这是第一个 […]](https://github.com/ricardovvargas/3w_dataset)
++   [3W 数据集 – 根据作者的最佳知识，这是第一个 […]](https://github.com/ricardovvargas/3w_dataset)
 
-+   [Databanks国际跨国时间序列数据档案](http://www.cntsdata.com/)
++   [Databanks 国际跨国时间序列数据档案](http://www.cntsdata.com/)
 
 +   [硬盘故障率](https://www.backblaze.com/hard-drive-test-data.html)
 
-+   [MIT的心率时间序列](http://ecg.mit.edu/time-series/)
++   [MIT 的心率时间序列](http://ecg.mit.edu/time-series/)
 
-+   [MU的时间序列数据库 (TSDL)](https://pkg.yangzhuoranyang.com/tsdl/)
++   [MU 的时间序列数据库 (TSDL)](https://pkg.yangzhuoranyang.com/tsdl/)
 
-+   [图灵变点数据集 – 包含42个注释时间序列收集的 […]](https://github.com/alan-turing-institute/TCPD)
++   [图灵变点数据集 – 包含 42 个注释时间序列收集的 […]](https://github.com/alan-turing-institute/TCPD)
 
 +   [UC Riverside 时间序列数据集](http://www.cs.ucr.edu/~eamonn/time_series_data/)
 
@@ -2384,19 +2384,19 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Blazor](https://github.com/AdrienTorris/awesome-blazor#readme) – 使用 C#/Razor 和 HTML 的 .NET 网络框架，通过 WebAssembly 在浏览器中运行。
 
-+   [PageSpeed指标](https://github.com/csabapalfi/awesome-pagespeed-metrics#readme) – 帮助理解页面速度和用户体验的指标。
++   [PageSpeed 指标](https://github.com/csabapalfi/awesome-pagespeed-metrics#readme) – 帮助理解页面速度和用户体验的指标。
 
-+   [Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss#readme) – 以实用程序为先的CSS框架，用于快速UI开发。
++   [Tailwind CSS](https://github.com/aniftyco/awesome-tailwindcss#readme) – 以实用程序为先的 CSS 框架，用于快速 UI 开发。
 
-+   [Seed](https://github.com/seed-rs/awesome-seed-rs#readme) – 用于创建运行在WebAssembly中的网页应用的Rust框架。
++   [Seed](https://github.com/seed-rs/awesome-seed-rs#readme) – 用于创建运行在 WebAssembly 中的网页应用的 Rust 框架。
 
 +   [网页性能预算](https://github.com/pajaydev/awesome-web-performance-budget#readme) – 确保网站性能指标的技术。
 
-+   [网页动画](https://github.com/sergey-pimenov/awesome-web-animation#readme) – 浏览器中的动画，使用JavaScript、CSS、SVG等。
++   [网页动画](https://github.com/sergey-pimenov/awesome-web-animation#readme) – 浏览器中的动画，使用 JavaScript、CSS、SVG 等。
 
-+   [Yew](https://github.com/jetli/awesome-yew#readme) – 受Elm和React启发的Rust框架，用于创建多线程前端网页应用与WebAssembly。
++   [Yew](https://github.com/jetli/awesome-yew#readme) – 受 Elm 和 React 启发的 Rust 框架，用于创建多线程前端网页应用与 WebAssembly。
 
-+   [Material-UI](https://github.com/nadunindunil/awesome-material-ui#readme) – 用于更快更容易网页开发的Material Design React组件。
++   [Material-UI](https://github.com/nadunindunil/awesome-material-ui#readme) – 用于更快更容易网页开发的 Material Design React 组件。
 
 +   [构建网页应用的模块](https://github.com/componently-com/awesome-building-blocks-for-web-apps#readme) – 独立功能模块，可集成到网页应用中。
 
@@ -2406,63 +2406,63 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **后端开发**
 
-+   [Flask](https://github.com/mjhea0/awesome-flask#readme) – Python框架。
++   [Flask](https://github.com/mjhea0/awesome-flask#readme) – Python 框架。
 
 +   [Docker](https://github.com/veggiemonk/awesome-docker#readme)
 
 +   [Vagrant](https://github.com/iJackUA/awesome-vagrant#readme) – 自动化虚拟机环境。
 
-+   [Pyramid](https://github.com/uralbash/awesome-pyramid#readme) – Python框架。
++   [Pyramid](https://github.com/uralbash/awesome-pyramid#readme) – Python 框架。
 
-+   [Play1框架](https://github.com/PerfectCarl/awesome-play1#readme)
++   [Play1 框架](https://github.com/PerfectCarl/awesome-play1#readme)
 
-+   [CakePHP](https://github.com/friendsofcake/awesome-cakephp#readme) – PHP框架。
++   [CakePHP](https://github.com/friendsofcake/awesome-cakephp#readme) – PHP 框架。
 
-+   [Symfony](https://github.com/sitepoint-editors/awesome-symfony#readme) – PHP框架。
++   [Symfony](https://github.com/sitepoint-editors/awesome-symfony#readme) – PHP 框架。
 
     +   [教育](https://github.com/pehapkari/awesome-symfony-education#readme)
 
-+   [Laravel](https://github.com/chiraggude/awesome-laravel#readme) – PHP框架。
++   [Laravel](https://github.com/chiraggude/awesome-laravel#readme) – PHP 框架。
 
     +   [教育](https://github.com/fukuball/Awesome-Laravel-Education#readme)
 
-    +   [TALL Stack](https://github.com/blade-ui-kit/awesome-tall-stack#readme) – 全栈开发解决方案，包含Laravel社区构建的库。
+    +   [TALL Stack](https://github.com/blade-ui-kit/awesome-tall-stack#readme) – 全栈开发解决方案，包含 Laravel 社区构建的库。
 
-+   [Rails](https://github.com/gramantin/awesome-rails#readme) – Ruby的网页应用框架。
++   [Rails](https://github.com/gramantin/awesome-rails#readme) – Ruby 的网页应用框架。
 
     +   [Gems](https://github.com/hothero/awesome-rails-gem#readme) – 软件包。
 
-+   [Phalcon](https://github.com/phalcon/awesome-phalcon#readme) – PHP框架。
++   [Phalcon](https://github.com/phalcon/awesome-phalcon#readme) – PHP 框架。
 
 +   [有用的 `.htaccess` 代码片段](https://github.com/phanan/htaccess#readme)
 
 +   [nginx](https://github.com/fcambus/nginx-resources#readme) – 网络服务器。
 
-+   [Dropwizard](https://github.com/stve/awesome-dropwizard#readme) – Java框架。
++   [Dropwizard](https://github.com/stve/awesome-dropwizard#readme) – Java 框架。
 
-+   [Kubernetes](https://github.com/ramitsurana/awesome-kubernetes#readme) – 自动化Linux容器操作的开源平台。
++   [Kubernetes](https://github.com/ramitsurana/awesome-kubernetes#readme) – 自动化 Linux 容器操作的开源平台。
 
-+   [Lumen](https://github.com/unicodeveloper/awesome-lumen#readme) – PHP微框架。
++   [Lumen](https://github.com/unicodeveloper/awesome-lumen#readme) – PHP 微框架。
 
 +   [Serverless Framework](https://github.com/pmuens/awesome-serverless#readme) – 无服务器计算和无服务器架构。
 
-+   [Apache Wicket](https://github.com/PhantomYdn/awesome-wicket#readme) – Java web应用框架。
++   [Apache Wicket](https://github.com/PhantomYdn/awesome-wicket#readme) – Java web 应用框架。
 
-+   [Vert.x](https://github.com/vert-x3/vertx-awesome#readme) – 用于在JVM上构建响应式应用的工具包。
++   [Vert.x](https://github.com/vert-x3/vertx-awesome#readme) – 用于在 JVM 上构建响应式应用的工具包。
 
 +   [Terraform](https://github.com/shuaibiyy/awesome-terraform#readme) – 用于构建、修改和版本化基础设施的工具。
 
-+   [Vapor](https://github.com/Cellane/awesome-vapor#readme) – Swift中的服务器端开发。
++   [Vapor](https://github.com/Cellane/awesome-vapor#readme) – Swift 中的服务器端开发。
 
-+   [Dash](https://github.com/ucg8j/awesome-dash#readme) – Python web应用框架。
++   [Dash](https://github.com/ucg8j/awesome-dash#readme) – Python web 应用框架。
 
-+   [FastAPI](https://github.com/mjhea0/awesome-fastapi#readme) – Python web应用框架。
++   [FastAPI](https://github.com/mjhea0/awesome-fastapi#readme) – Python web 应用框架。
 
 +   [CDK](https://github.com/kolomied/awesome-cdk#readme) – 用于在代码中定义云基础设施的开源软件开发框架。
 
 +   [IAM](https://github.com/kdeldycke/awesome-iam#readme) – 用户帐户、身份验证和授权。
 
-+   [Chalice](https://github.com/chalice-dev/awesome-chalice#readme) – 用于在AWS Lambda上开发无服务器应用的Python框架。
++   [Chalice](https://github.com/chalice-dev/awesome-chalice#readme) – 用于在 AWS Lambda 上开发无服务器应用的 Python 框架。
 
 ### **计算机科学**
 
@@ -2476,17 +2476,17 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
     +   [Tutorials](https://github.com/ujjwalkarn/Machine-Learning-Tutorials#readme)
 
-    +   [ML with Ruby](https://github.com/arbox/machine-learning-with-ruby#readme) – 使用Ruby学习、实施和应用机器学习。
+    +   [ML with Ruby](https://github.com/arbox/machine-learning-with-ruby#readme) – 使用 Ruby 学习、实施和应用机器学习。
 
-    +   [Core ML Models](https://github.com/likedan/Awesome-CoreML-Models#readme) – Apple机器学习框架的模型。
+    +   [Core ML Models](https://github.com/likedan/Awesome-CoreML-Models#readme) – Apple 机器学习框架的模型。
 
-    +   [H3O](https://github.com/h3oai/awesome-h3o#readme) – 用Java编写的开源分布式机器学习平台，提供R、Python和Scala的API。
+    +   [H3O](https://github.com/h3oai/awesome-h3o#readme) – 用 Java 编写的开源分布式机器学习平台，提供 R、Python 和 Scala 的 API。
 
     +   [Software Engineering for Machine Learning](https://github.com/SE-ML/awesome-seml#readme) – 从实验到生产级机器学习。
 
     +   [AI in Finance](https://github.com/georgezouq/awesome-ai-in-finance#readme) – 使用机器学习解决金融中的问题。
 
-    +   [JAX](https://github.com/n2cholas/awesome-jax#readme) – 自动微分和XLA编译结合用于高性能机器学习研究。
+    +   [JAX](https://github.com/n2cholas/awesome-jax#readme) – 自动微分和 XLA 编译结合用于高性能机器学习研究。
 
 +   [Speech and Natural Language Processing](https://github.com/edobashira/speech-language-processing#readme)
 
@@ -2510,9 +2510,9 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
     +   [TensorFlow](https://github.com/jtoy/awesome-tensorflow#readme) – 机器智能库。
 
-    +   [TensorFlow.js](https://github.com/aaronhma/awesome-tensorflow-js#readme) – 用于训练和部署模型的WebGL加速机器学习JavaScript库。
+    +   [TensorFlow.js](https://github.com/aaronhma/awesome-tensorflow-js#readme) – 用于训练和部署模型的 WebGL 加速机器学习 JavaScript 库。
 
-    +   [TensorFlow Lite](https://github.com/margaretmz/awesome-tensorflow-lite#readme) – 优化TensorFlow模型以便在设备上进行机器学习的框架。
+    +   [TensorFlow Lite](https://github.com/margaretmz/awesome-tensorflow-lite#readme) – 优化 TensorFlow 模型以便在设备上进行机器学习的框架。
 
     +   [论文](https://github.com/terryum/awesome-deep-learning-papers#readme) – 被引用最多的深度学习论文。
 
@@ -2638,7 +2638,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Discord 社区](https://github.com/mhxion/awesome-discord-communities#readme) – 与朋友和社区聊天。
 
-+   [CHIP-8](https://github.com/tobiasvl/awesome-chip-8#readme) – 70年代的虚拟计算机游戏机。
++   [CHIP-8](https://github.com/tobiasvl/awesome-chip-8#readme) – 70 年代的虚拟计算机游戏机。
 
 +   [编程游戏](https://github.com/michelpereira/awesome-games-of-coding#readme) – 通过制作游戏来学习编程语言。
 
@@ -2712,7 +2712,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Neo4j](https://github.com/neueda/awesome-neo4j#readme)
 
-+   [MongoDB](https://github.com/ramnes/awesome-mongodb#readme) – NoSQL数据库。
++   [MongoDB](https://github.com/ramnes/awesome-mongodb#readme) – NoSQL 数据库。
 
 +   [RethinkDB](https://github.com/d3viant0ne/awesome-rethinkdb#readme)
 
@@ -2720,13 +2720,13 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [PostgreSQL](https://github.com/dhamaniasad/awesome-postgres#readme) – 对象关系型数据库。
 
-+   [CouchDB](https://github.com/quangv/awesome-couchdb#readme) – 面向文档的NoSQL数据库。
++   [CouchDB](https://github.com/quangv/awesome-couchdb#readme) – 面向文档的 NoSQL 数据库。
 
 +   [HBase](https://github.com/rayokota/awesome-hbase#readme) – 分布式、可扩展的大数据存储。
 
 +   [NoSQL Guides](https://github.com/erictleung/awesome-nosql-guides#readme) – 使用非关系型、分布式、开源和水平可扩展数据库的帮助。
 
-+   [Contexture](https://github.com/chrislatorres/awesome-contexture#readme) – 从不同的数据存储如ElasticSearch和MongoDB中抽象查询/过滤器和结果/聚合。
++   [Contexture](https://github.com/chrislatorres/awesome-contexture#readme) – 从不同的数据存储如 ElasticSearch 和 MongoDB 中抽象查询/过滤器和结果/聚合。
 
 +   [Database Tools](https://github.com/mgramin/awesome-db-tools#readme) – 使数据库操作更简便的工具。
 
@@ -2756,7 +2756,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [FFmpeg](https://github.com/transitive-bullshit/awesome-ffmpeg#readme) – 跨平台的音视频录制、转换和流媒体解决方案。
 
-+   [Icons](https://github.com/notlmn/awesome-icons#readme) – 可下载的SVG/PNG/字体图标项目。
++   [Icons](https://github.com/notlmn/awesome-icons#readme) – 可下载的 SVG/PNG/字体图标项目。
 
 +   [Audiovisual](https://github.com/stingalleman/awesome-audiovisual#readme) – 专业环境中的灯光、音频和视频。
 
@@ -2906,7 +2906,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [网络分析](https://github.com/briatte/awesome-network-analysis#readme)
 
-+   [PCAP工具](https://github.com/caesar0301/awesome-pcaptools#readme)
++   [PCAP 工具](https://github.com/caesar0301/awesome-pcaptools#readme)
 
 +   [实时通信](https://github.com/rtckit/awesome-rtc#readme) – 实时交换媒体和数据的网络协议。
 
@@ -2928,9 +2928,9 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Corda](https://github.com/chainstack/awesome-corda#readme) – 面向商业的开源区块链平台。
 
-+   [Waves](https://github.com/msmolyakov/awesome-waves#readme) – 开源区块链平台和用于Web 3.0应用及去中心化解决方案的开发工具包。
++   [Waves](https://github.com/msmolyakov/awesome-waves#readme) – 开源区块链平台和用于 Web 3.0 应用及去中心化解决方案的开发工具包。
 
-+   [Substrate](https://github.com/substrate-developer-hub/awesome-substrate#readme) – 用于用Rust编写可扩展、可升级区块链的框架。
++   [Substrate](https://github.com/substrate-developer-hub/awesome-substrate#readme) – 用于用 Rust 编写可扩展、可升级区块链的框架。
 
 ### **高等教育**
 
@@ -3008,7 +3008,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [自托管](https://github.com/awesome-selfhosted/awesome-selfhosted#readme)
 
-+   [FOSS生产应用](https://github.com/DataDaoDe/awesome-foss-apps#readme)
++   [FOSS 生产应用](https://github.com/DataDaoDe/awesome-foss-apps#readme)
 
 +   [Gulp](https://github.com/alferov/awesome-gulp#readme) – 任务运行器。
 
@@ -3078,7 +3078,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [用户脚本](https://github.com/bvolpato/awesome-userscripts#readme) – 提升浏览体验。
 
-+   [宝可梦](https://github.com/tobiasbueschel/awesome-pokemon#readme) – 宝可梦及宝可梦GO。
++   [宝可梦](https://github.com/tobiasbueschel/awesome-pokemon#readme) – 宝可梦及宝可梦 GO。
 
 +   [ChatOps](https://github.com/exAspArk/awesome-chatops#readme) – 通过聊天管理技术和业务操作。
 
@@ -3088,7 +3088,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [量化自我](https://github.com/woop/awesome-quantified-self#readme) – 通过技术进行自我追踪。
 
-+   [SaltStack](https://github.com/hbokh/awesome-saltstack#readme) – 基于Python的配置管理系统。
++   [SaltStack](https://github.com/hbokh/awesome-saltstack#readme) – 基于 Python 的配置管理系统。
 
 +   [网页设计](https://github.com/nicolesaidy/awesome-web-design#readme) – 针对数字设计师。
 
@@ -3106,9 +3106,9 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [医疗保健](https://github.com/kakoni/awesome-healthcare#readme) – 面向设施、提供者、开发者、政策专家和研究人员的开源医疗软件。
 
-+   [Magento 2](https://github.com/DavidLambauer/awesome-magento2#readme) – 基于PHP的开源电子商务。
++   [Magento 2](https://github.com/DavidLambauer/awesome-magento2#readme) – 基于 PHP 的开源电子商务。
 
-+   [TikZ](https://github.com/xiaohanyu/awesome-tikz#readme) – TeX/LaTeX/ConTeXt图形绘制包。
++   [TikZ](https://github.com/xiaohanyu/awesome-tikz#readme) – TeX/LaTeX/ConTeXt 图形绘制包。
 
 +   [神经科学](https://github.com/analyticalmonk/awesome-neuroscience#readme) – 研究神经系统和大脑。
 
@@ -3146,7 +3146,7 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 +   [Jupyter](https://github.com/markusschanta/awesome-jupyter#readme) – 创建和分享包含代码、方程、可视化和叙述文本的文档。
 
-+   [FIRST机器人竞赛](https://github.com/andrewda/awesome-frc#readme) – 国际高中机器人锦标赛。
++   [FIRST 机器人竞赛](https://github.com/andrewda/awesome-frc#readme) – 国际高中机器人锦标赛。
 
 +   [人文科技](https://github.com/humanetech-community/awesome-humane-tech#readme) – 改善社会的开源项目。
 
@@ -3224,13 +3224,13 @@ Yahoo 将于 2021 年关闭。这是来自 2015 年的 Yahoo Answers 数据集�
 
 ### **美国教育部 CRDC 数据集**
 
-美国教育部有一个叫做 CRDC 的数据集，收集了所有美国公立学校的数据，包括人口统计、学术、财务和各种其他有趣的数据点。他们还有使用相同标识符的附属数据集——可以视作扩展包。每2-3年更新一次。**[点击这里访问](https://www2.ed.gov/about/offices/list/ocr/data.html?src=rt).**
+美国教育部有一个叫做 CRDC 的数据集，收集了所有美国公立学校的数据，包括人口统计、学术、财务和各种其他有趣的数据点。他们还有使用相同标识符的附属数据集——可以视作扩展包。每 2-3 年更新一次。**[点击这里访问](https://www2.ed.gov/about/offices/list/ocr/data.html?src=rt).**
 
 ### **NASA 数据集：细菌在被送入太空前后的测序数据**
 
 NASA 拥有一些细菌的测序数据，这些细菌在被送入太空前后被采样，用于观察由于缺乏重力、辐射等因素造成的基因差异。如果你想尝试一些生物数据科学，这非常有趣。**[点击这里访问](https://genelab.nasa.gov/)**。
 
-### **[特朗普2015至2021年的所有推特侮辱记录（CSV格式）](https://srv-store2.gofile.io/download/YQ2g4j/f6aa50ef55ea70558a44f09eb034d03f/trump_insult_tweets_2014_to_2021.csv)**
+### **[特朗普 2015 至 2021 年的所有推特侮辱记录（CSV 格式）](https://srv-store2.gofile.io/download/YQ2g4j/f6aa50ef55ea70558a44f09eb034d03f/trump_insult_tweets_2014_to_2021.csv)**
 
 从 NYT 故事中提取：[这里](https://www.nytimes.com/interactive/2021/01/19/upshot/trump-complete-insult-list.html)
 
@@ -3242,17 +3242,17 @@ Data is Plural 是由 Jeremy Singer-Vine 出版的一个非常好的通讯。数
 
 大量来自美国及其他国家的恐怖事件列表。每个条目包含事件的日期和地点、动机、是否有人或财产损失、袭击规模、袭击类型等信息。**[点击这里访问](https://www.kaggle.com/START-UMD/gtd).**
 
-[恐怖袭击数据集](https://linqs-data.soe.ucsc.edu/public/lbc/TerrorAttack.tgz)：该数据集包含1293起恐怖袭击，每起袭击被分配一个6种标签中的一种，指示袭击类型。每次袭击通过一个0/1值的属性向量描述，该向量的条目表示特征的缺失/存在。共有106个不同的特征。数据集中的文件可用于创建两个不同的图表。数据集中的 README 文件提供了更多细节。**[下载链接](https://linqs-data.soe.ucsc.edu/public/lbc/TerrorAttack.tgz)**
+[恐怖袭击数据集](https://linqs-data.soe.ucsc.edu/public/lbc/TerrorAttack.tgz)：该数据集包含 1293 起恐怖袭击，每起袭击被分配一个 6 种标签中的一种，指示袭击类型。每次袭击通过一个 0/1 值的属性向量描述，该向量的条目表示特征的缺失/存在。共有 106 个不同的特征。数据集中的文件可用于创建两个不同的图表。数据集中的 README 文件提供了更多细节。**[下载链接](https://linqs-data.soe.ucsc.edu/public/lbc/TerrorAttack.tgz)**
 
-[**恐怖分子**：](Terrorists:) 该数据集包含有关恐怖分子及其关系的信息。此数据集旨在进行分类实验，目的是分类恐怖分子之间的关系。数据集包含851个关系，每个关系由一个0/1值向量描述，其中每个条目表示一个特征的缺失/存在。共有1224个不同的特征。每个关系可以被分配一个或多个标签，最多可达四个标签，使得该数据集适用于多标签分类任务。README文件提供了更多详细信息。**[下载链接](https://linqs-data.soe.ucsc.edu/public/lbc/TerroristRel.tgz)**
+**恐怖分子**： 该数据集包含有关恐怖分子及其关系的信息。此数据集旨在进行分类实验，目的是分类恐怖分子之间的关系。数据集包含 851 个关系，每个关系由一个 0/1 值向量描述，其中每个条目表示一个特征的缺失/存在。共有 1224 个不同的特征。每个关系可以被分配一个或多个标签，最多可达四个标签，使得该数据集适用于多标签分类任务。README 文件提供了更多详细信息。**[下载链接](https://linqs-data.soe.ucsc.edu/public/lbc/TerroristRel.tgz)**
 
 ### **海豚社交网络**
 
 该网络数据集属于社交网络类别。瓶鼻海豚的社交网络。数据集包含所有链接的列表，其中一个链接代表海豚之间的频繁关联。**[点击这里访问](http://networkrepository.com/soc-dolphins.php)**
 
-### **200,000条笑话数据集**
+### **200,000 条笑话数据集**
 
-该数据库中大约有208,000条笑话，来自三个来源。
+该数据库中大约有 208,000 条笑话，来自三个来源。
 
 **[点击这里访问](https://github.com/taivop/joke-dataset/find/master)**
 
@@ -3266,31 +3266,31 @@ Data is Plural 是由 Jeremy Singer-Vine 出版的一个非常好的通讯。数
 
 +   提供一个参考数据集以评估研究
 
-+   作为创建大型数据集的快捷替代方案（例如Echo Nest的）
++   作为创建大型数据集的快捷替代方案（例如 Echo Nest 的）
 
-+   帮助新研究人员入门MIR领域
++   帮助新研究人员入门 MIR 领域
 
 ### **康奈尔大学的[ eBird](https://ebird.org/science/use-ebird-data)数据集**
 
 通过对全球鸟类的几十年观察，真正是利用公民科学的一种令人印象深刻的方式。**[点击这里访问](https://ebird.org/science/use-ebird-data)**。
 
-### **UFO报告数据集**
+### **UFO 报告数据集**
 
-NUFORC的地理定位和时间标准化的UFO报告，数据覆盖近一个世纪。超过80,000份报告。**[点击这里访问](https://github.com/planetsig/ufo-reports)**
+NUFORC 的地理定位和时间标准化的 UFO 报告，数据覆盖近一个世纪。超过 80,000 份报告。**[点击这里访问](https://github.com/planetsig/ufo-reports)**
 
-### **CDC的趋势药物数据**
+### **CDC 的趋势药物数据**
 
-CDC拥有一个名为NAMCS/NHAMCS的公共数据库，允许你跟踪药物数据。它还有很多其他的数据点，因此可以用于各种其他用途。**[点击这里访问。](https://www.cdc.gov/nchs/ahcd/trend_analysis.htm)**
+CDC 拥有一个名为 NAMCS/NHAMCS 的公共数据库，允许你跟踪药物数据。它还有很多其他的数据点，因此可以用于各种其他用途。**[点击这里访问。](https://www.cdc.gov/nchs/ahcd/trend_analysis.htm)**
 
 ### **健康与退休研究：[公共调查数据](https://hrsdata.isr.umich.edu/data-products/public-survey-data?_ga=2.81209943.1526520306.1619201209-909413776.1619201209)**
 
 一份列出了公开可用的双年度、非年度和跨年度数据产品的清单。
 
-**示例：** **COVID-19数据**
+**示例：** **COVID-19 数据**
 
 | 年份 | 产品 |
 | --- | --- |
-| 2020 | **[2020 HRS COVID-19项目](https://hrsdata.isr.umich.edu/data-products/2020-hrs-covid-19-project)** |
+| 2020 | **[2020 HRS COVID-19 项目](https://hrsdata.isr.umich.edu/data-products/2020-hrs-covid-19-project)** |
 
 [原始内容](https://enoumen.com/2021/04/23/data-sciences-datasets-data-visualization-data-analytics-big-data-data-lakes/#Economics_Dataset)。经许可转载。
 

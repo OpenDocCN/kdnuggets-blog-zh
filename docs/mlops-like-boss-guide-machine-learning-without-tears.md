@@ -1,8 +1,8 @@
 # 如何像老板一样进行 MLOps: 无泪的机器学习指南
 
-> 原文：[https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)
+> 原文：[`www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html`](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)
 
-![如何像老板一样进行 MLOps: 无泪的机器学习指南](../Images/d4232da3dbf2c1cb05e6ed774a520a10.png)
+![如何像老板一样进行 MLOps: 无泪的机器学习指南](img/d4232da3dbf2c1cb05e6ed774a520a10.png)
 
 编辑图片
 
@@ -56,9 +56,9 @@ MLOps 根据询问对象的不同有多种形式。然而，有五个关键阶�
 
 **现在，你已经构建、部署并监控了一个强大的机器学习应用程序。但遗憾的是，进程不会停止，因为上述步骤需要不断迭代。**
 
-![如何像老板一样进行MLOps：无泪机器学习指南](../Images/48f52e699f5ac112289385d39d9392fc.png)
+![如何像老板一样进行 MLOps：无泪机器学习指南](img/48f52e699f5ac112289385d39d9392fc.png)
 
-成功数据科学项目的MLOps周期 | 图片由作者提供
+成功数据科学项目的 MLOps 周期 | 图片由作者提供
 
 # 金融科技案例研究
 
@@ -66,19 +66,19 @@ MLOps 根据询问对象的不同有多种形式。然而，有五个关键阶�
 
 在这种情况下，从深入了解你尝试检测的欺诈类型（第一方还是第三方？）开始。如何将交易识别为欺诈或非欺诈？它们是由最终用户报告的，还是你需要使用启发式方法来识别欺诈？谁会使用这个模型？它会被实时使用还是以批处理模式使用？上述问题的答案对于解决这个业务问题至关重要。
 
-接下来，考虑一下什么解决方案最能解决这个问题。你是否需要机器学习来处理这个问题，还是可以从一个简单的启发式方法开始解决欺诈？所有的欺诈行为是否都来自一小部分IP地址？
+接下来，考虑一下什么解决方案最能解决这个问题。你是否需要机器学习来处理这个问题，还是可以从一个简单的启发式方法开始解决欺诈？所有的欺诈行为是否都来自一小部分 IP 地址？
 
 如果你决定构建一个机器学习模型（假设为监督学习），你将需要标签和特征。你将如何处理缺失的变量？那异常值呢？欺诈标签的观察窗口是多久？即用户报告欺诈交易需要多长时间？是否有数据仓库可以用来构建特征？**确保在继续之前验证数据和特征。** 这也是与利益相关者讨论项目方向的好时机。
 
 一旦你拥有了所需的数据，构建模型并进行必要的分析。确保模型指标与业务使用对齐。（例如：这个用例可能是前十分位的召回率）。所选择的模型算法是否满足延迟要求？
 
-最后，与工程团队协调，部署和服务模型。由于欺诈检测是一个非常动态的环境，欺诈者努力超越系统，监控非常关键。对数据和模型有监控计划。像PSI（人口稳定性指数）这样的措施常用于跟踪数据漂移。你将多久重新训练一次模型？
+最后，与工程团队协调，部署和服务模型。由于欺诈检测是一个非常动态的环境，欺诈者努力超越系统，监控非常关键。对数据和模型有监控计划。像 PSI（人口稳定性指数）这样的措施常用于跟踪数据漂移。你将多久重新训练一次模型？
 
 *现在，你可以通过机器学习成功地减少欺诈交易，从而创造业务价值（如有需要！）。*
 
 # 结论
 
-希望在阅读完这篇文章后，你能看到在你的公司实施MLOps的好处。总结来说，MLOps确保数据科学团队：
+希望在阅读完这篇文章后，你能看到在你的公司实施 MLOps 的好处。总结来说，MLOps 确保数据科学团队：
 
 +   *解决*正确的业务问题
 
@@ -90,31 +90,31 @@ MLOps 根据询问对象的不同有多种形式。然而，有五个关键阶�
 
 +   最后，*部署和监控*模型以确保**持续**成功
 
-然而，要注意常见的陷阱，以确保你的数据科学项目不会成为数据科学墓地中的一块墓碑！ 应记住，数据科学应用是一个活的、呼吸的事物。 数据和模型需要持续监控。 AI治理应从一开始就考虑，而不是事后的想法。
+然而，要注意常见的陷阱，以确保你的数据科学项目不会成为数据科学墓地中的一块墓碑！ 应记住，数据科学应用是一个活的、呼吸的事物。 数据和模型需要持续监控。 AI 治理应从一开始就考虑，而不是事后的想法。
 
 牢记这些原则，我相信你可以利用机器学习真正创造商业价值（如果需要的话！）。
 
-## MLOps参考文献
+## MLOps 参考文献
 
 +   [面向生产的机器学习工程（MLOps）](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops)
 
-+   [MLOps的温和介绍](https://towardsdatascience.com/a-gentle-introduction-to-mlops-7d64a3e890ff)
++   [MLOps 的温和介绍](https://towardsdatascience.com/a-gentle-introduction-to-mlops-7d64a3e890ff)
 
-+   [数据科学家的MLOps实践](https://towardsdatascience.com/mlops-practices-for-data-scientists-dbb01be45dd8)
++   [数据科学家的 MLOps 实践](https://towardsdatascience.com/mlops-practices-for-data-scientists-dbb01be45dd8)
 
 +   [MLOps：即将崛起的明星](https://towardsdatascience.com/mlops-the-upcoming-shining-star-dcf9444c493)
 
-**[Natesh Babu Arunachalam](https://www.linkedin.com/in/nateshbabu/)** 是Mastercard的数据科学领导者，目前专注于使用开放银行数据构建创新的AI应用程序。
+**[Natesh Babu Arunachalam](https://www.linkedin.com/in/nateshbabu/)** 是 Mastercard 的数据科学领导者，目前专注于使用开放银行数据构建创新的 AI 应用程序。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
 
 * * *
 
@@ -124,9 +124,9 @@ MLOps 根据询问对象的不同有多种形式。然而，有五个关键阶�
 
 +   [在不标记的情况下在图像中找到图片](https://www.kdnuggets.com/2022/09/find-picture-image-without-marking.html)
 
-+   [不使用复杂正则表达式语法的Python字符串匹配](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
++   [不使用复杂正则表达式语法的 Python 字符串匹配](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
 
-+   [像专业人士一样测试：Python Mock库的逐步指南](https://www.kdnuggets.com/testing-like-a-pro-a-step-by-step-guide-to-pythons-mock-library)
++   [像专业人士一样测试：Python Mock 库的逐步指南](https://www.kdnuggets.com/testing-like-a-pro-a-step-by-step-guide-to-pythons-mock-library)
 
 +   [机器学习不像你的大脑 第一部分：神经元很慢，…](https://www.kdnuggets.com/2022/04/machine-learning-like-brain-part-one-neurons-slow-slow-slow.html)
 

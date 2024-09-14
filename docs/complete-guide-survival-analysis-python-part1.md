@@ -1,22 +1,22 @@
-# 完整指南：Python中的生存分析，第1部分
+# 完整指南：Python 中的生存分析，第一部分
 
-> 原文：[https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)
+> 原文：[`www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html`](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html)
 
-[评论](#comments)
+评论
 
 **由[Pratik Shukla](https://medium.com/@shuklapratik22)，有志的机器学习工程师**。
 
-![](../Images/31349bd6fcd2cbb4fc301d14602cad1f.png)
+![](img/31349bd6fcd2cbb4fc301d14602cad1f.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求。
 
 * * *
 
@@ -24,9 +24,9 @@
 
 **生存分析**是一组统计方法，用于找出某个事件发生所需的时间。生存分析用于研究**时间**直到某个**事件**（通常指**死亡**）发生。时间可以以年、月、周、天等为单位。事件可以是任何感兴趣的事物，如实际的死亡、出生、退休等。
 
-**如何分析持续的COVID-19疫情数据？**
+**如何分析持续的 COVID-19 疫情数据？**
 
-(1) 我们可以找出患者出现COVID-19症状的天数。
+(1) 我们可以找出患者出现 COVID-19 症状的天数。
 
 (2) 我们可以发现哪个年龄组的死亡率更高。
 
@@ -62,9 +62,9 @@
 
 (1) 某些临床特征对患者生存的影响是什么？例如，高血糖人群和非高血糖人群之间有何差异？
 
-(2) 个体在特定时间段（年、月、天）内幸存的概率是多少？例如，给定一组癌症患者，如果诊断癌症后的300（随机数字）天已过去，那么该人在那时仍然存活的概率为0.7（随机数字）。
+(2) 个体在特定时间段（年、月、天）内幸存的概率是多少？例如，给定一组癌症患者，如果诊断癌症后的 300（随机数字）天已过去，那么该人在那时仍然存活的概率为 0.7（随机数字）。
 
-(3) 不同患者组之间的生存是否存在差异？例如，假设有2组癌症患者，这2组接受了两种不同的治疗。现在我们的目标是找出这两组基于所接受治疗的生存时间是否存在显著差异。
+(3) 不同患者组之间的生存是否存在差异？例如，假设有 2 组癌症患者，这 2 组接受了两种不同的治疗。现在我们的目标是找出这两组基于所接受治疗的生存时间是否存在显著差异。
 
 ### 目标
 
@@ -142,7 +142,7 @@
 
 **数据描述**
 
-![](../Images/010e11ed7d28dab0b7bb154110c52bd0.png)
+![](img/010e11ed7d28dab0b7bb154110c52bd0.png)
 
 **Kaplan-Meier 估计器**
 
@@ -152,31 +152,31 @@ Kaplan-Meier 的公式如下：
 
 在时间 ti，S(ti) 的概率计算为
 
-![](../Images/ae70426452c647803c7ed859097684bb.png)
+![](img/ae70426452c647803c7ed859097684bb.png)
 
 我们也可以将其写成
 
-![](../Images/854946ffba5051c7f2c81319669bc7f1.png)
+![](img/854946ffba5051c7f2c81319669bc7f1.png)
 
 生存函数
 
 例如，
 
-![](../Images/e388e30963e21680a6bdc76a830363b8.png)
+![](img/e388e30963e21680a6bdc76a830363b8.png)
 
-![](../Images/d5ebaf4bf7136b37bfe7b6b37ce25f1c.png)
+![](img/d5ebaf4bf7136b37bfe7b6b37ce25f1c.png)
 
-![](../Images/38184031cb7e60634b8c214cee5ddb8d.png)
+![](img/38184031cb7e60634b8c214cee5ddb8d.png)
 
 更一般地，我们可以说，
 
-![](../Images/d3faa690662787d7f0a811fd9c1ae2c4.png)
+![](img/d3faa690662787d7f0a811fd9c1ae2c4.png)
 
 *生存函数简化版。*
 
 例如，我们可以说，
 
-![](../Images/7b17ea03014fb8b35ace095c340f8cb9.png)
+![](img/7b17ea03014fb8b35ace095c340f8cb9.png)
 
 在下一篇文章中，我们将使用 Python 实现 Kaplan-Meier 估计器和 Nelson-Aalen 估计器。
 
@@ -184,38 +184,38 @@ Kaplan-Meier 的公式如下：
 
 在这个三部分系列的最后，你将能够绘制这样的图表，从中我们可以推断患者的生存情况。**坚持住！**
 
-![](../Images/b50e84624c7516ce908860e4ee3be605.png)
+![](img/b50e84624c7516ce908860e4ee3be605.png)
 
 整个系列：
 
-+   [Python中生存分析的完整指南，第1部分](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html) 这三部分系列涵盖了逐步解释和代码的回顾，展示了如何进行统计生存分析，以调查某些事件发生所需的时间，例如COVID-19大流行期间的患者生存时间、工程产品的故障时间，甚至是首次客户接触后的销售关闭时间。
++   [Python 中生存分析的完整指南，第一部分](https://www.kdnuggets.com/2020/07/complete-guide-survival-analysis-python-part1.html) 这三部分系列涵盖了逐步解释和代码的回顾，展示了如何进行统计生存分析，以调查某些事件发生所需的时间，例如 COVID-19 大流行期间的患者生存时间、工程产品的故障时间，甚至是首次客户接触后的销售关闭时间。
 
-+   [Python中生存分析的完整指南，第2部分](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html) 我们详细查看了Kaplan-Meier适配器理论和Nelson-Aalen适配器理论的实现示例，包含实例和共享代码。
++   [Python 中生存分析的完整指南，第二部分](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-2.html) 我们详细查看了 Kaplan-Meier 适配器理论和 Nelson-Aalen 适配器理论的实现示例，包含实例和共享代码。
 
-+   [Python中生存分析的完整指南，第3部分](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-3.html) 我们详细查看了基于不同组的Kaplan-Meier适配器、Log-Rank检验和Cox回归的实现示例，包含实例和共享代码。
++   [Python 中生存分析的完整指南，第三部分](https://www.kdnuggets.com/2020/07/guide-survival-analysis-python-part-3.html) 我们详细查看了基于不同组的 Kaplan-Meier 适配器、Log-Rank 检验和 Cox 回归的实现示例，包含实例和共享代码。
 
 [原创](https://medium.com/@shuklapratik22/a-complete-guide-to-survival-analysis-in-python-956e6223c081)。经许可转载。
 
-**简介：**[Pratik Shukla](https://medium.com/@shuklapratik22)是一位有抱负的机器学习工程师，喜欢将复杂理论以简单方式呈现。Pratik在计算机科学领域完成了本科课程，并正在南加州大学攻读计算机科学硕士学位。 “瞄准月亮。即使错过了，你也会落在星星中。-- Les Brown”
+**简介：**[Pratik Shukla](https://medium.com/@shuklapratik22)是一位有抱负的机器学习工程师，喜欢将复杂理论以简单方式呈现。Pratik 在计算机科学领域完成了本科课程，并正在南加州大学攻读计算机科学硕士学位。 “瞄准月亮。即使错过了，你也会落在星星中。-- Les Brown”
 
 **相关：**
 
 +   [业务分析中的生存分析](https://www.kdnuggets.com/2017/11/survival-analysis-business-analytics.html)
 
-+   [数据科学的8个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
++   [数据科学的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
 
 +   [构建预测客户流失模型的挑战](https://www.kdnuggets.com/2017/03/datascience-building-predictive-churn-model.html)
 
 ### 更多主题
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [90亿美元的AI失败，详尽审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的 AI 失败，详尽审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

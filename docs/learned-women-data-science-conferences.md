@@ -1,8 +1,8 @@
 # 我从“女性数据科学”会议中学到了什么
 
-> 原文：[https://www.kdnuggets.com/2021/08/learned-women-data-science-conferences.html](https://www.kdnuggets.com/2021/08/learned-women-data-science-conferences.html)
+> 原文：[`www.kdnuggets.com/2021/08/learned-women-data-science-conferences.html`](https://www.kdnuggets.com/2021/08/learned-women-data-science-conferences.html)
 
-![图示](../Images/9b7dfa2c4a631bad025d51f89237c0fc.png)
+![图示](img/9b7dfa2c4a631bad025d51f89237c0fc.png)
 
 [来源](https://www.freepik.com/free-vector/business-team-discussing-ideas-startup_6974855.htm#page=1&query=Business&position=4)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 在脑海中思考了这些问题之后，我决定参加这些会议，亲自见证。
 
-我听到了来自双方的理由，有些我在这里分享给你。最后，我会总结我的观点以及参加过的3场以女性为中心的会议后的收获。
+我听到了来自双方的理由，有些我在这里分享给你。最后，我会总结我的观点以及参加过的 3 场以女性为中心的会议后的收获。
 
 ## **为什么会这样开始？支持的观点：**
 
@@ -44,9 +44,9 @@
 
 有时候，我会想这是否只限于特定领域或行业，但不幸的是，这种现象无处不在。最近，我看到一个帖子，讲述了一位高级管理人员不得不指出一个全是男性面板讨论的财经会议。
 
-这个现象有个Fancy的词叫做 manel，即男性面板。
+这个现象有个 Fancy 的词叫做 manel，即男性面板。
 
-![图片](../Images/82e3b56a22c47703984aff2cb668f76e.png)
+![图片](img/82e3b56a22c47703984aff2cb668f76e.png)
 
 来源于作者的 LinkedIn 网络
 
@@ -54,13 +54,13 @@
 
 LinkedIn 推出了帮助女性提升职业发展的课程。其中有一门课程尤为突出，名为“成为职场中的男性盟友”。该课程帮助“性别多数群体”更好地理解阻碍女性发展的刻板印象。
 
-## **参加了3个女性会议后我发现了什么？**
+## **参加了 3 个女性会议后我发现了什么？**
 
 虽然我可以继续谈论我们社会如何团结一致并将其推向正轨，但这对你来说可能听起来过于理论化。
 
 那么，让我们看看女性相互支持的力量能创造奇迹的真实例子。
 
-今年，我参加了3个这样的会议，其中女性在数据科学领域展示了卓越的工作。我发现这些网络中有一个一致的特点——来自行业的领导者分享他们的故事和处理困难局面的技巧。一些令我深有感触的建议：
+今年，我参加了 3 个这样的会议，其中女性在数据科学领域展示了卓越的工作。我发现这些网络中有一个一致的特点——来自行业的领导者分享他们的故事和处理困难局面的技巧。一些令我深有感触的建议：
 
 **做个“是人”**：界限仅仅存在于我们的思维中。一旦你超越这些自我设限的界限，机会的世界将为你打开。做一个“是人”的无畏态度在个人和职业两个方面都对我产生了奇迹般的效果。我变得更加自信，能够尽我所能去应对遇到的任何挑战。
 
@@ -80,7 +80,7 @@ LinkedIn 推出了帮助女性提升职业发展的课程。其中有一门课�
 
 直到那时，让我们践行“每人帮助一人”。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位屡获殊荣的AI/ML创新领袖和AI伦理学家。她在数据科学、产品和研究交叉点上工作，以提供商业价值和洞察力。她倡导以数据为中心的科学，是数据治理领域的领先专家，旨在构建可信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位屡获殊荣的 AI/ML 创新领袖和 AI 伦理学家。她在数据科学、产品和研究交叉点上工作，以提供商业价值和洞察力。她倡导以数据为中心的科学，是数据治理领域的领先专家，旨在构建可信赖的 AI 解决方案。
 
 ### 更多相关话题
 

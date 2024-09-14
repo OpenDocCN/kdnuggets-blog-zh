@@ -1,8 +1,8 @@
-# 优化数据存储：探索SQL中的数据类型和规范化
+# 优化数据存储：探索 SQL 中的数据类型和规范化
 
-> 原文：[https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
+> 原文：[`www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql`](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
 
-![优化数据存储：探索数据类型和规范化](../Images/08d332ab1a0acff45d43157373a84d57.png)
+![优化数据存储：探索数据类型和规范化](img/08d332ab1a0acff45d43157373a84d57.png)
 
 图片由作者提供
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 本文将研究最重要且常用的数据类型，并了解规范化过程。
 
-# SQL中的数据类型
+# SQL 中的数据类型
 
-SQL中主要有两种数据类型：字符串和数值。除此之外，还有布尔型、日期和时间、数组、区间、XML等额外的数据类型。
+SQL 中主要有两种数据类型：字符串和数值。除此之外，还有布尔型、日期和时间、数组、区间、XML 等额外的数据类型。
 
 ## 字符串数据类型
 
@@ -34,23 +34,23 @@ SQL中主要有两种数据类型：字符串和数值。除此之外，还有�
 
 这是一个固定长度的字符串，可以包含字符、数字和特殊字符。`n`表示它可以容纳的字符串的最大长度。
 
-它的最大范围是从0到255个字符，问题在于这种数据类型会占用指定的全部空间，即使字符串的实际长度少于指定长度。额外的字符串长度会用额外的内存空间填充。
+它的最大范围是从 0 到 255 个字符，问题在于这种数据类型会占用指定的全部空间，即使字符串的实际长度少于指定长度。额外的字符串长度会用额外的内存空间填充。
 
 1.  **VARCHAR(n):**
 
-Varchar类似于Char，但可以支持可变大小的字符串，没有填充。该数据类型的存储大小等于字符串的实际长度。
+Varchar 类似于 Char，但可以支持可变大小的字符串，没有填充。该数据类型的存储大小等于字符串的实际长度。
 
-它最多可以存储65535个字符。由于其可变长度特性，其性能不如CHAR数据类型。
+它最多可以存储 65535 个字符。由于其可变长度特性，其性能不如 CHAR 数据类型。
 
 1.  **BINARY(n):**
 
-它类似于CHAR数据类型，但只接受二进制字符串或二进制数据。它可以用于存储图像、文件或任何序列化对象。还有一种数据类型`VARBINARY(n)`，类似于VARCHAR数据类型，但也只接受二进制字符串或二进制数据。
+它类似于 CHAR 数据类型，但只接受二进制字符串或二进制数据。它可以用于存储图像、文件或任何序列化对象。还有一种数据类型`VARBINARY(n)`，类似于 VARCHAR 数据类型，但也只接受二进制字符串或二进制数据。
 
 1.  **TEXT(n):**
 
-这种数据类型也用于存储字符串，但其最大尺寸为65535字节。
+这种数据类型也用于存储字符串，但其最大尺寸为 65535 字节。
 
-1.  **BLOB(n):** 代表二进制大型对象，存储数据最多可达65535字节。
+1.  **BLOB(n):** 代表二进制大型对象，存储数据最多可达 65535 字节。
 
 除这些之外，还有其他数据类型，如 LONGTEXT 和 LONGBLOB，它们可以存储更多的字符。
 
@@ -132,7 +132,7 @@ XML 代表可扩展标记语言。此数据类型用于存储用于结构化数�
 
 当我们想更新某些行时，会发生这种异常，这会导致数据库中的不一致。
 
-规范化过程包含一系列准则，使数据库设计高效、优化且不含冗余和异常。存在多种类型的范式，如1NF、2NF、3NF、BCNF等。
+规范化过程包含一系列准则，使数据库设计高效、优化且不含冗余和异常。存在多种类型的范式，如 1NF、2NF、3NF、BCNF 等。
 
 ## 1\. 第一范式（1NF）
 
@@ -140,11 +140,11 @@ XML 代表可扩展标记语言。此数据类型用于存储用于结构化数�
 
 例如
 
-![优化数据存储：探索SQL中的数据类型和规范化](../Images/45bb998a8b9b422745c44f5b8e3f6fba.png)
+![优化数据存储：探索 SQL 中的数据类型和规范化](img/45bb998a8b9b422745c44f5b8e3f6fba.png)
 
 图片由[GeeksForGeeks](https://geeksforgeeks.org/normal-forms-in-dbms/)提供
 
-在表1中，属性`STUD_PHONE`包含多个电话号码。但是在表2中，该属性被分解为第一范式。
+在表 1 中，属性`STUD_PHONE`包含多个电话号码。但是在表 2 中，该属性被分解为第一范式。
 
 ## 2\. 第二范式
 
@@ -160,7 +160,7 @@ ProjectName
 HoursWorked
 ```
 
-在这里，EmployeeID和ProjectID一起构成主键。然而，你可以注意到EmployeeName和EmployeeID之间存在部分依赖。这意味着EmployeeName仅依赖于主键的一部分（即EmployeeID）。为了完全依赖，EmployeeName必须依赖于EmployeeID和ProjectID。因此，这违反了第二范式的原则。
+在这里，EmployeeID 和 ProjectID 一起构成主键。然而，你可以注意到 EmployeeName 和 EmployeeID 之间存在部分依赖。这意味着 EmployeeName 仅依赖于主键的一部分（即 EmployeeID）。为了完全依赖，EmployeeName 必须依赖于 EmployeeID 和 ProjectID。因此，这违反了第二范式的原则。
 
 要使该关系处于第二范式，我们必须将表拆分为两个独立的表。第一个表包含所有员工详细信息，第二个表包含所有项目详细信息。
 
@@ -199,7 +199,7 @@ Hours Worked
 
 考虑一个包含以下属性的员工表。
 
-1.  员工ID（主键）
+1.  员工 ID（主键）
 
 1.  员工姓名
 
@@ -207,13 +207,13 @@ Hours Worked
 
 1.  部门主管
 
-![优化数据存储：探索 SQL 中的数据类型和规范化](../Images/926dacca3258d85bb4d6ba9c37b626ad.png)
+![优化数据存储：探索 SQL 中的数据类型和规范化](img/926dacca3258d85bb4d6ba9c37b626ad.png)
 
-员工ID是唯一标识每一行的主键。部门属性表示特定员工的部门，部门主管属性表示该特定部门的主管员工的员工ID。
+员工 ID 是唯一标识每一行的主键。部门属性表示特定员工的部门，部门主管属性表示该特定部门的主管员工的员工 ID。
 
 现在我们将检查此表是否符合 BCNF。条件是函数依赖关系的左侧必须是超键。以下是该表的两个函数依赖关系。
 
-函数依赖 1: 员工ID → 员工姓名、部门、部门主管
+函数依赖 1: 员工 ID → 员工姓名、部门、部门主管
 
 函数依赖 2: 部门 → 部门主管
 
@@ -221,9 +221,9 @@ Hours Worked
 
 因此，这个表违反了 BCNF 的条件。为了满足 BCNF 的属性，我们需要将该表拆分为两个独立的表：`Employees` 和 `Departments`。Employees 表包含 EmployeeID、EmployeeName 和 Department，而 Department 表将包含 Department 和 Department Head。
 
-![优化数据存储：探索 SQL 中的数据类型和标准化](../Images/3bde6b5cb3aae4fd63f49059c4c82943.png)
+![优化数据存储：探索 SQL 中的数据类型和标准化](img/3bde6b5cb3aae4fd63f49059c4c82943.png)
 
-![优化数据存储：探索 SQL 中的数据类型和标准化](../Images/d4b437505fec1f31f07be3aa099329f6.png)
+![优化数据存储：探索 SQL 中的数据类型和标准化](img/d4b437505fec1f31f07be3aa099329f6.png)
 
 现在我们可以看到在两个表中，所有的功能依赖都依赖于主键，即没有非平凡的依赖。
 

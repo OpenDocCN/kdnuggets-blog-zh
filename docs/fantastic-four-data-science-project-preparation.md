@@ -1,22 +1,22 @@
 # 数据科学项目准备的神奇四侠
 
-> 原文：[https://www.kdnuggets.com/2019/07/fantastic-four-data-science-project-preparation.html](https://www.kdnuggets.com/2019/07/fantastic-four-data-science-project-preparation.html)
+> 原文：[`www.kdnuggets.com/2019/07/fantastic-four-data-science-project-preparation.html`](https://www.kdnuggets.com/2019/07/fantastic-four-data-science-project-preparation.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Fantastic](../Images/dcbf50d344595b772342952e5863bf4a.png)
+![Fantastic](img/dcbf50d344595b772342952e5863bf4a.png)
 
-经典漫画形式中，数据科学项目准备的神奇四侠最初通过在[数据复仇者...集合！](/2016/11/data-avengers-assemble.html)文章中的客串介绍。因此，如果你恰好有那篇文章，请保存好。它将来无疑会有一定的价值。
+经典漫画形式中，数据科学项目准备的神奇四侠最初通过在数据复仇者...集合！文章中的客串介绍。因此，如果你恰好有那篇文章，请保存好。它将来无疑会有一定的价值。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -44,7 +44,7 @@
 
 数据科学项目准备的第一件神奇的事是理解问题领域。拥有足够的领域知识对成功至关重要。
 
-来源于[数据科学的无限宝石](/2019/06/infinity-stones-data-science.html)：
+来源于数据科学的无限宝石：
 
 > **到底**什么构成了足够的领域知识？这是相对的。你是在进行某款普通约会应用的浅层描述性分析？还是在为一个专注于某些冷门证券投资策略的组织进行深入的金融预测分析项目？执行第一个任务所需的“约会”领域知识可能微不足道，但对第二个任务有用的洞察肯定需要扎实的金融理解。
 
@@ -62,11 +62,11 @@
 
 调查数据基本上归结为对给定项目的数据进行熟悉。[探索性数据分析](https://en.wikipedia.org/wiki/Exploratory_data_analysis)（EDA）是一种获取这种熟悉的方法，通常专注于从统计和视觉上总结数据集。
 
-来源于[探索性数据分析的价值](/2017/04/value-exploratory-data-analysis.html)：
+来源于探索性数据分析的价值：
 
-> 从高层次来看，EDA是使用视觉和定量方法来理解和总结数据集的实践，而不对其内容做出任何假设。在进入机器学习或统计建模之前，这是一个关键步骤，因为它提供了开发适当模型所需的背景，并正确解读其结果。
+> 从高层次来看，EDA 是使用视觉和定量方法来理解和总结数据集的实践，而不对其内容做出任何假设。在进入机器学习或统计建模之前，这是一个关键步骤，因为它提供了开发适当模型所需的背景，并正确解读其结果。
 > 
-> 随着能够轻松实现强大机器学习算法的工具的兴起，跳过EDA可能变得很诱人。虽然人们利用这些算法是可以理解的，但简单地将数据输入黑箱并不总是一个好主意——我们一再观察到EDA对所有类型的数据科学问题提供的关键价值。
+> 随着能够轻松实现强大机器学习算法的工具的兴起，跳过 EDA 可能变得很诱人。虽然人们利用这些算法是可以理解的，但简单地将数据输入黑箱并不总是一个好主意——我们一再观察到 EDA 对所有类型的数据科学问题提供的关键价值。
 
 **3\. 根据需要清理、准备和转换数据**
 
@@ -74,7 +74,7 @@
 
 现在是时候开始实际操作了，对吧？不那么快……首先，数据需要被整理、预处理、准备或以其他方式精细化，以便在预测建模或你希望进行的其他数据科学任务中有用。
 
-来源于 [7 Steps to Mastering Data Preparation for Machine Learning with Python](/2019/06/7-steps-mastering-data-preparation-python.html)：
+来源于 7 Steps to Mastering Data Preparation for Machine Learning with Python：
 
 > 我会说，在“将数据从一种‘原始’形式映射到另一种...”的背景下，“识别数据中不完整、不正确、不准确或无关的部分，然后替换、修改或删除脏数据或粗糙数据”，以及“训练统计模型”，是我认为数据准备应涵盖的，或者说是“从数据源获取到模型构建之前的一切”。
 
@@ -84,9 +84,9 @@
 
 在明确的框架内继续进行问题解决是最佳计划。
 
-这不仅仅是关于任何单一或特定的框架；而是要确保你心中有一个合理的程序化方法，该方法是标准化、可靠且可衡量的。广为人知的正式框架示例包括知识发现数据库（KDD）过程、跨行业数据挖掘标准过程（CRISP-DM），以及 Joe Blitzstein 和 Hanspeter Pfister 的数据科学过程。你可以在 [这里](/2016/03/data-science-process-rediscovered.html) 阅读更多关于这些方法的信息。
+这不仅仅是关于任何单一或特定的框架；而是要确保你心中有一个合理的程序化方法，该方法是标准化、可靠且可衡量的。广为人知的正式框架示例包括知识发现数据库（KDD）过程、跨行业数据挖掘标准过程（CRISP-DM），以及 Joe Blitzstein 和 Hanspeter Pfister 的数据科学过程。你可以在 这里 阅读更多关于这些方法的信息。
 
-一个不那么正式的方法是 Aurélien Géron 的 [机器学习项目检查表](/2018/12/machine-learning-project-checklist.html)，在他的书《使用 Scikit-Learn 和 TensorFlow 的动手机器学习》中进行了概述。还有两个方法是 Yufeng Guo 的 7 步机器学习和 Francois Chollet 的机器学习通用工作流，来自他的书《用 Python 深度学习》。你可以在 [这里](/2018/05/general-approaches-machine-learning-process.html) 阅读更多关于这两种方法的信息。
+一个不那么正式的方法是 Aurélien Géron 的 机器学习项目检查表，在他的书《使用 Scikit-Learn 和 TensorFlow 的动手机器学习》中进行了概述。还有两个方法是 Yufeng Guo 的 7 步机器学习和 Francois Chollet 的机器学习通用工作流，来自他的书《用 Python 深度学习》。你可以在 这里 阅读更多关于这两种方法的信息。
 
 我在上述帖子中还概述了机器学习的简化框架，即机器学习过程的 5 个主要领域：
 
@@ -110,11 +110,11 @@
 
 **相关**：
 
-+   [数据复仇者……集结！](/2016/11/data-avengers-assemble.html)
++   数据复仇者……集结！
 
-+   [数据科学的无限宝石](/2019/06/infinity-stones-data-science.html)
++   数据科学的无限宝石
 
-+   [机器学习难题，解析](/2019/06/machine-learning-puzzle-explained.html)
++   机器学习难题，解析
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # GPT-4 细节已泄露！
 
-> 原文：[https://www.kdnuggets.com/2023/07/gpt4-details-leaked.html](https://www.kdnuggets.com/2023/07/gpt4-details-leaked.html)
+> 原文：[`www.kdnuggets.com/2023/07/gpt4-details-leaked.html`](https://www.kdnuggets.com/2023/07/gpt4-details-leaked.html)
 
-![GPT-4 细节已泄露！](../Images/1067a83c47c992ecaed5b9b38e3cedd7.png)
+![GPT-4 细节已泄露！](img/1067a83c47c992ecaed5b9b38e3cedd7.png)
 
 编辑提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -72,18 +72,18 @@ OpenAI 大约花费了 2.1e25 次浮点操作（每秒浮点操作次数）来�
 
 这一泄漏更多地反映了高层架构的泄漏，而不是模型的泄漏——这也是许多人所期待的。尽管不同，这种信息仍然很有用，因为我们继续看到大语言模型的增长，以及创建像 GPT-4 这样的 AI 模型需要多大的成本。
 
-**[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作人以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程和理论知识。她还希望探索人工智能如何/可以促进人类寿命的不同方式。作为一名热心的学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作人以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程和理论知识。她还希望探索人工智能如何/可以促进人类寿命的不同方式。作为一名热心的学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关内容
 
 +   [如果你没有合适的学位，如何进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
 
-+   [非结构化数据：2022年分析的必备条件](https://www.kdnuggets.com/2022/01/unstructured-data-analytics-2022.html)
++   [非结构化数据：2022 年分析的必备条件](https://www.kdnuggets.com/2022/01/unstructured-data-analytics-2022.html)
 
-+   [每个数据科学家都应具备的13项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每个数据科学家都应具备的 13 项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
 
-+   [21份数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
++   [21 份数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
 
-+   [ETL与机器学习有什么关系？](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)
++   [ETL 与机器学习有什么关系？](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)
 
-+   [8篇创新的BERT知识蒸馏论文，它们改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
++   [8 篇创新的 BERT 知识蒸馏论文，它们改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)

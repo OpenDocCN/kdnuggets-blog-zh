@@ -1,22 +1,22 @@
 # 超越 Pandas 性能的 Rising Library
 
-> 原文：[https://www.kdnuggets.com/2020/12/rising-library-beating-pandas-performance.html](https://www.kdnuggets.com/2020/12/rising-library-beating-pandas-performance.html)
+> 原文：[`www.kdnuggets.com/2020/12/rising-library-beating-pandas-performance.html`](https://www.kdnuggets.com/2020/12/rising-library-beating-pandas-performance.html)
 
-[评论](#comments)
+评论
 
 **由 [Ezz El Din Abdullah](https://www.linkedin.com/in/ezzeddinabdullah/)，数据平台工程师**
 
-![Header image](../Images/69442ed2c7287d82e6fe40287b3f23b9.png)
+![Header image](img/69442ed2c7287d82e6fe40287b3f23b9.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 ### 下载 Reddit 用户名数据
 
-首先从 Kaggle 下载一个包含约 2600 万个 Reddit 用户名的 CSV 文件：[https://www.kaggle.com/colinmorris/reddit-usernames](https://www.kaggle.com/colinmorris/reddit-usernames)
+首先从 Kaggle 下载一个包含约 2600 万个 Reddit 用户名的 CSV 文件：[`www.kaggle.com/colinmorris/reddit-usernames`](https://www.kaggle.com/colinmorris/reddit-usernames)
 
 接下来，让我们创建另一个 CSV 文件，你可以使用你喜欢的文本编辑器或通过命令行创建它：
 
@@ -144,9 +144,9 @@ $ grep DC states.csv
 
 附言：如果你不清楚**csvcut**的用途，我们有一些关于 csvkit 的教程（csvkit 是一个命令行工具，包含 csvcut 及其他用于清理、处理和分析 CSV 的实用命令行工具）。
 
-+   [清理 CSV 数据的第 1 部分](https://www.ezzeddinabdullah.com/posts/how-to-clean-csv-data-at-the-command-line)
++   [清理 CSV 数据的第一部分](https://www.ezzeddinabdullah.com/posts/how-to-clean-csv-data-at-the-command-line)
 
-+   [清理 CSV 数据的第 2 部分](https://www.ezzeddinabdullah.com/posts/how-to-clean-csv-data-at-the-command-line-part-2) [‍](https://www.ezzeddinabdullah.com/posts/how-to-clean-text-data-at-the-command-line)
++   [清理 CSV 数据的第二部分](https://www.ezzeddinabdullah.com/posts/how-to-clean-csv-data-at-the-command-line-part-2) [‍](https://www.ezzeddinabdullah.com/posts/how-to-clean-text-data-at-the-command-line)
 
 **pypolars**
 
@@ -222,22 +222,22 @@ df_all_states_history.join(df_states, left_on=”state”, right_on=”Abbreviat
 
 **相关：**
 
-+   [在Python中合并Pandas数据框](/2020/12/merging-pandas-dataframes-python.html)
++   在 Python 中合并 Pandas 数据框
 
-+   [Pandas的强化版：使用Dask进行端到端的数据科学](/2020/11/pandas-steroids-dask-python-data-science.html)
++   Pandas 的强化版：使用 Dask 进行端到端的数据科学
 
-+   [每种复杂数据框操作的直观解释与可视化](/2020/11/dataframe-manipulation-explained-visualized.html)
++   每种复杂数据框操作的直观解释与可视化
 
 ### 更多相关话题
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学，找到目的，再找到目的...] (https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败，深入探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，深入探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个坚实的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)

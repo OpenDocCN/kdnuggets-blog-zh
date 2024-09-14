@@ -1,26 +1,26 @@
 # 企业的数据科学与机器学习平台
 
-> 原文：[https://www.kdnuggets.com/2017/05/data-science-machine-learning-platforms-enterprise.html](https://www.kdnuggets.com/2017/05/data-science-machine-learning-platforms-enterprise.html)
+> 原文：[`www.kdnuggets.com/2017/05/data-science-machine-learning-platforms-enterprise.html`](https://www.kdnuggets.com/2017/05/data-science-machine-learning-platforms-enterprise.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：Ahmad AlNaimi，Algorithmia。**
 
-![dataplatform](../Images/5bdabdb61bfd8ac3679ed76b9d02305c.png)
+![dataplatform](img/5bdabdb61bfd8ac3679ed76b9d02305c.png)
 
-**TL;DR** 一个具有弹性的 数据科学平台 对于大型公司中的集中式数据科学团队是必需的。它帮助他们在PB规模下集中、重用和生产化他们的模型。我们为此目的构建了[Algorithmia Enterprise](http://algorithmia.com/enterprise)。
+**TL;DR** 一个具有弹性的 数据科学平台 对于大型公司中的集中式数据科学团队是必需的。它帮助他们在 PB 规模下集中、重用和生产化他们的模型。我们为此目的构建了[Algorithmia Enterprise](http://algorithmia.com/enterprise)。
 
 * * *
 
-你已经构建了那个R/Python/Java模型。它运行良好。接下来呢？
+你已经构建了那个 R/Python/Java 模型。它运行良好。接下来呢？
 
-> “*一切始于你的CEO听说了机器学习和数据是新石油的说法。数据仓库团队有人刚刚提交了1PB Teradata系统的预算，而CIO听说Facebook使用便宜的Hadoop商品存储，超级便宜。一场完美的风暴爆发了，现在你被要求建立一个数据优先的创新团队。你雇佣了一组数据科学家，大家都很兴奋，开始找你寻求一些数字魔法来‘Googlify’他们的业务。你的数据科学家没有任何基础设施，花费所有时间为高管构建仪表板，但投资回报是负面的，大家都怪你没有在他们的盈亏表上倾注足够的独角兽血。*” – Vish Nandlall ([source](https://www.linkedin.com/in/vishnandlall/))
+> “*一切始于你的 CEO 听说了机器学习和数据是新石油的说法。数据仓库团队有人刚刚提交了 1PB Teradata 系统的预算，而 CIO 听说 Facebook 使用便宜的 Hadoop 商品存储，超级便宜。一场完美的风暴爆发了，现在你被要求建立一个数据优先的创新团队。你雇佣了一组数据科学家，大家都很兴奋，开始找你寻求一些数字魔法来‘Googlify’他们的业务。你的数据科学家没有任何基础设施，花费所有时间为高管构建仪表板，但投资回报是负面的，大家都怪你没有在他们的盈亏表上倾注足够的独角兽血。*” – Vish Nandlall ([source](https://www.linkedin.com/in/vishnandlall/))
 
-在PB规模上共享、重用和运行模型不是数据科学家的工作流程的一部分。这种低效在企业环境中被放大，因为数据科学家需要与IT协调每一步，持续部署是一团糟（如果不是不可能的话），重用性低，随着公司不同部门开始“Googlify”他们的业务，问题越来越严重。
+在 PB 规模上共享、重用和运行模型不是数据科学家的工作流程的一部分。这种低效在企业环境中被放大，因为数据科学家需要与 IT 协调每一步，持续部署是一团糟（如果不是不可能的话），重用性低，随着公司不同部门开始“Googlify”他们的业务，问题越来越严重。
 
-数据科学与机器学习平台旨在满足这种需求。它作为一个基础层，供三个内部利益相关者协作：产品数据科学家、中央数据科学家和IT基础设施。
+数据科学与机器学习平台旨在满足这种需求。它作为一个基础层，供三个内部利益相关者协作：产品数据科学家、中央数据科学家和 IT 基础设施。
 
-![](../Images/2c52a7ff07a31bcae9e88353e2efc8fa.png)
+![](img/2c52a7ff07a31bcae9e88353e2efc8fa.png)
 
 **图 1：一个数据科学平台服务于三个利益相关者：产品、中央和基础设施。它对于大型公司来说是必需的，这些公司对机器学习有复杂且不断增长的依赖。**
 
@@ -58,7 +58,7 @@
 
 这涉及到除训练之外的一切。数据科学与机器学习平台关注的是模型在训练阶段之后的生命周期。这包括：模型的注册，显示模型从一个版本到下一个版本的传承，将它们集中起来以便其他用户可以找到它们，并将它们作为自包含的工件提供，这些工件可以随时插入任何数据管道中。
 
-![](../Images/4f48c6df547abd43c44c5d75e4be4a7c.png)
+![](img/4f48c6df547abd43c44c5d75e4be4a7c.png)
 
 ### 库 vs. 注册表
 
@@ -66,11 +66,11 @@
 
 ### 训练与推理
 
-数据科学家会使用适合问题的工具。有时这些工具是scikit-learn和Keras的组合，是Cafe和Tensorflow模型的集成，或者是用R编写的H2O脚本。一个平台不会指定工具，但能够注册和操作这些模型，无论它们是如何训练或组合的。
+数据科学家会使用适合问题的工具。有时这些工具是 scikit-learn 和 Keras 的组合，是 Cafe 和 Tensorflow 模型的集成，或者是用 R 编写的 H2O 脚本。一个平台不会指定工具，但能够注册和操作这些模型，无论它们是如何训练或组合的。
 
 ### 手动与自动部署
 
-将模型部署到生产环境中有多种方式，最终结果大多是一个REST API。不同的方法引入了许多风险，包括不一致的API接口设计、不一致的认证和日志记录，以及消耗开发运维资源。一个平台应该能够通过最小的步骤自动化这些工作，通过一致的API和认证暴露模型，并减少对开发运维的操作负担。
+将模型部署到生产环境中有多种方式，最终结果大多是一个 REST API。不同的方法引入了许多风险，包括不一致的 API 接口设计、不一致的认证和日志记录，以及消耗开发运维资源。一个平台应该能够通过最小的步骤自动化这些工作，通过一致的 API 和认证暴露模型，并减少对开发运维的操作负担。
 
 ### **如何区分数据科学与机器学习平台？**
 
@@ -78,15 +78,15 @@
 
 ### 支持的语言
 
-R和Python是大多数数据科学和机器学习项目的必备语言。Java也很重要，因为像[deeplearning4j](https://deeplearning4j.org/)和[H2O的POJO](https://s3.amazonaws.com/h2o-release/h2o/rel-markov/1/docs-website/userguide/scorePOJO.html)模型提取器等库。C++在科学计算或[HPC](https://en.wikipedia.org/wiki/Supercomputer)中尤其相关。其他运行时是可选的，取决于你的使用场景和非数据科学同事使用的主要技术栈，如NodeJS/Ruby/.NET。
+R 和 Python 是大多数数据科学和机器学习项目的必备语言。Java 也很重要，因为像[deeplearning4j](https://deeplearning4j.org/)和[H2O 的 POJO](https://s3.amazonaws.com/h2o-release/h2o/rel-markov/1/docs-website/userguide/scorePOJO.html)模型提取器等库。C++在科学计算或[HPC](https://en.wikipedia.org/wiki/Supercomputer)中尤其相关。其他运行时是可选的，取决于你的使用场景和非数据科学同事使用的主要技术栈，如 NodeJS/Ruby/.NET。
 
-### CPU与GPU（深度学习）
+### CPU 与 GPU（深度学习）
 
-随着深度学习在数据科学和机器学习领域的日益突出，随着该领域的成熟和模型库的增长，这种趋势只会增加。尽管TensorFlow很受欢迎，但它并不总是向后兼容，Caffe可能需要特殊的编译标志，而cuDNN实际上是另一个需要管理的GPU集群复杂层。如果能够完全容器化和生产化异构模型（无论是代码、节点权重、框架还是底层驱动程序）并在GPU架构上运行，这将是平台的一个强大差异化因素，甚至是强制性要求。
+随着深度学习在数据科学和机器学习领域的日益突出，随着该领域的成熟和模型库的增长，这种趋势只会增加。尽管 TensorFlow 很受欢迎，但它并不总是向后兼容，Caffe 可能需要特殊的编译标志，而 cuDNN 实际上是另一个需要管理的 GPU 集群复杂层。如果能够完全容器化和生产化异构模型（无论是代码、节点权重、框架还是底层驱动程序）并在 GPU 架构上运行，这将是平台的一个强大差异化因素，甚至是强制性要求。
 
 ### 单版本与多版本控制
 
-版本控制是能够列出模型随时间变化的历史，并独立访问每个版本。当模型被版本化时，数据科学家可以衡量模型的漂移。单版本架构为该模型（当前*稳定*版本）暴露一个REST API端点，只有作者能够从其控制面板“切换”模型。多版本架构除了为*稳定*版本暴露一个REST API端点外，还暴露每个先前版本，使它们同时可用，这消除了向后兼容性挑战，并使后端工程师能够实施部分推出或实时A/B测试。
+版本控制是能够列出模型随时间变化的历史，并独立访问每个版本。当模型被版本化时，数据科学家可以衡量模型的漂移。单版本架构为该模型（当前*稳定*版本）暴露一个 REST API 端点，只有作者能够从其控制面板“切换”模型。多版本架构除了为*稳定*版本暴露一个 REST API 端点外，还暴露每个先前版本，使它们同时可用，这消除了向后兼容性挑战，并使后端工程师能够实施部分推出或实时 A/B 测试。
 
 ### 垂直与水平扩展
 
@@ -124,21 +124,21 @@ R和Python是大多数数据科学和机器学习项目的必备语言。Java也
 
 **相关：**
 
-+   [DataScience.com 新更新旨在成为行业领先的数据科学平台](/2017/05/datascience-new-enterprise-platform.html)
++   DataScience.com 新更新旨在成为行业领先的数据科学平台
 
-+   [Gartner 数据科学平台 – 深入分析](/2017/03/thomaswdinsmore-gartner-data-science-platforms.html)
++   Gartner 数据科学平台 – 深入分析
 
-+   [Forrester 与 Gartner 对数据科学平台和机器学习解决方案的比较](/2017/04/forrester-gartner-data-science-platforms-machine-learning.html)
++   Forrester 与 Gartner 对数据科学平台和机器学习解决方案的比较
 
 * * *
 
 ## 我们的 3 个推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 

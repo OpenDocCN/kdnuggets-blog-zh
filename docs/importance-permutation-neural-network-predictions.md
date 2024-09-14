@@ -1,8 +1,8 @@
 # 排列在神经网络预测中的重要性
 
-> 原文：[https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)
+> 原文：[`www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html`](https://www.kdnuggets.com/2022/12/importance-permutation-neural-network-predictions.html)
 
-![排列在神经网络预测中的重要性](../Images/3b16e4bd2b97c1a03dabf105575a303d.png)
+![排列在神经网络预测中的重要性](img/3b16e4bd2b97c1a03dabf105575a303d.png)
 
 图片由编辑提供
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
 # 排列可以确定统计学意义
 
-数据科学家经常发现自己需要更多地了解作为信息来源的总体。然而，他们仍然必须确定统计学意义。在处理时间序列数据时，运行排列检验是[一个实用的方法](/2021/12/use-permutation-tests.html)。
+数据科学家经常发现自己需要更多地了解作为信息来源的总体。然而，他们仍然必须确定统计学意义。在处理时间序列数据时，运行排列检验是一个实用的方法。
 
 排列检验估算了总体分布。在获取这些信息后，数据科学家可以确定观察值相对于总体的稀有程度。排列检验提供了所有可能排列的样本，而不替换任何值。
 
@@ -32,7 +32,7 @@
 
 # 排列可以展示哪些数据集特征影响有用的预测
 
-许多神经网络依赖于黑箱模型。它们在广泛的应用中非常准确。然而，通常[需要一定的工作来观察预测因素对最终预测的影响](/2021/06/from-scratch-permutation-feature-importance-ml-interpretability.html)。
+许多神经网络依赖于黑箱模型。它们在广泛的应用中非常准确。然而，通常需要一定的工作来观察预测因素对最终预测的影响。
 
 一种叫做排列特征重要性的选项提供了一种解决这一障碍的方法。它向数据科学家展示哪些数据集特征具有预测能力，无论使用什么模型。
 
@@ -44,7 +44,7 @@
 
 # 排列影响模型提供的知识
 
-一个优秀的数据科学家必须始终[探索模型提供的细节](https://www.successbydesign.com/blogs/news/stem-in-elementary-classrooms)并质疑相关结论。许多专业人士在小学的STEM课程中学会了这种思维方式。排列是神经网络预测的一个必要方面，因为它决定了模型提供或不提供什么信息。对排列的熟悉有助于数据科学家构建和调整他们的雇主或客户所希望和期望的模型。
+一个优秀的数据科学家必须始终[探索模型提供的细节](https://www.successbydesign.com/blogs/news/stem-in-elementary-classrooms)并质疑相关结论。许多专业人士在小学的 STEM 课程中学会了这种思维方式。排列是神经网络预测的一个必要方面，因为它决定了模型提供或不提供什么信息。对排列的熟悉有助于数据科学家构建和调整他们的雇主或客户所希望和期望的模型。
 
 考虑一个公司需要一个与客户点击网站相关的神经网络模型的情况。决策者可能希望了解有多少客户通过特定路径浏览网站。模型必须计算排列。
 
@@ -64,7 +64,7 @@
 
 +   [庆祝对数据隐私重要性的认识](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)
 
-+   [机器学习不像你的大脑 第6部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
 +   [数据科学中实验设计的重要性](https://www.kdnuggets.com/2022/08/importance-experiment-design-data-science.html)
 

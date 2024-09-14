@@ -1,8 +1,8 @@
 # 在 Python 中执行 T 检验
 
-> 原文：[https://www.kdnuggets.com/2023/01/performing-ttest-python.html](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)
+> 原文：[`www.kdnuggets.com/2023/01/performing-ttest-python.html`](https://www.kdnuggets.com/2023/01/performing-ttest-python.html)
 
-![在 Python 中执行 T 检验](../Images/3ca1e7b8c32364c694374acd4135372a.png)
+![在 Python 中执行 T 检验](img/3ca1e7b8c32364c694374acd4135372a.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -30,9 +30,9 @@ t 检验是一种统计检验方法，用于确定两个独立样本的均值是
 
 t 统计量或 t 值的计算方法如下：
 
-![在 Python 中执行 T 检验](../Images/53a3b06be1f03347b4d6b878ce8b63a2.png)
+![在 Python 中执行 T 检验](img/53a3b06be1f03347b4d6b878ce8b63a2.png)
 
-其中 ![公式](../Images/9251a7b9652929122a830d1907a8035c.png) 是样本 1 的均值，![公式](../Images/54cd35dc543894b32b5df03500b8fd4d.png) 是样本 2 的均值，![公式](../Images/fc383e1e73062945c8a8cedd1bfa8e44.png) 是样本 1 的方差，![公式](../Images/68dad44d35c824dbe0e908f31827721c.png) 是样本 2 的方差，![公式](../Images/4dc03704aac32bccf9cceffd86a41714.png) 是样本 1 的样本量，和 ![公式](../Images/19b4eaa769cb990a0a403cb856277b46.png) 是样本 2 的样本量。
+其中 ![公式](img/9251a7b9652929122a830d1907a8035c.png) 是样本 1 的均值，![公式](img/54cd35dc543894b32b5df03500b8fd4d.png) 是样本 2 的均值，![公式](img/fc383e1e73062945c8a8cedd1bfa8e44.png) 是样本 1 的方差，![公式](img/68dad44d35c824dbe0e908f31827721c.png) 是样本 2 的方差，![公式](img/4dc03704aac32bccf9cceffd86a41714.png) 是样本 1 的样本量，和 ![公式](img/19b4eaa769cb990a0a403cb856277b46.png) 是样本 2 的样本量。
 
 # 使用鸢尾花数据集的示例
 
@@ -158,7 +158,7 @@ stats.ttest_ind(a_1, b_1, equal_var = False)
 
 我们观察到使用不等大小的样本不会显著改变 t 统计量和 p 值。
 
-![在 Python 中执行 T 检验](../Images/d2312557b695d3ecd1b4b5a99cbbf967.png)
+![在 Python 中执行 T 检验](img/d2312557b695d3ecd1b4b5a99cbbf967.png)
 
 总结一下，我们展示了如何使用 Python 的 scipy 库实现一个简单的 t 检验。
 

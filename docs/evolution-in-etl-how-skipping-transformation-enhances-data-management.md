@@ -1,26 +1,26 @@
-# ETL演变：跳过转换如何增强数据管理
+# ETL 演变：跳过转换如何增强数据管理
 
-> 原文：[https://www.kdnuggets.com/evolution-in-etl-how-skipping-transformation-enhances-data-management](https://www.kdnuggets.com/evolution-in-etl-how-skipping-transformation-enhances-data-management)
+> 原文：[`www.kdnuggets.com/evolution-in-etl-how-skipping-transformation-enhances-data-management`](https://www.kdnuggets.com/evolution-in-etl-how-skipping-transformation-enhances-data-management)
 
-![ETL演变：跳过转换如何增强数据管理](../Images/473047592011bf33af747cdbc2a528c1.png)
+![ETL 演变：跳过转换如何增强数据管理](img/473047592011bf33af747cdbc2a528c1.png)
 
 编辑提供的图片
 
-几种数据概念比ETL（提取-转换-加载）更具争议，ETL是几十年来主导企业操作的准备技术。ETL于1970年代开发，在大型数据仓库和存储库的时代表现突出。企业数据团队集中数据，构建报告系统和数据科学模型，并提供自助服务的商业智能（BI）工具访问。然而，在云服务、数据模型和数字化流程的时代，ETL已显得有些陈旧。
+几种数据概念比 ETL（提取-转换-加载）更具争议，ETL 是几十年来主导企业操作的准备技术。ETL 于 1970 年代开发，在大型数据仓库和存储库的时代表现突出。企业数据团队集中数据，构建报告系统和数据科学模型，并提供自助服务的商业智能（BI）工具访问。然而，在云服务、数据模型和数字化流程的时代，ETL 已显得有些陈旧。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
-搜索如“ETL是否仍然相关/有需求/过时/已死？”在谷歌上结果层出不穷。原因在于企业数据团队在为员工角色和业务功能广泛使用数据做准备时感到吃力。ETL难以处理云中存储的大量历史数据，也无法提供快速决策所需的实时数据。此外，构建自定义API以向应用程序提供数据会造成显著的管理复杂性。现代企业常常有500到1000个管道，以寻求转换数据并为用户提供自助服务的BI工具访问。然而，这些API处于不断的演变状态，因为当拉取的数据发生变化时，它们必须重新编程。显然，这一过程对于许多现代数据需求，如边缘用例，过于脆弱。
+搜索如“ETL 是否仍然相关/有需求/过时/已死？”在谷歌上结果层出不穷。原因在于企业数据团队在为员工角色和业务功能广泛使用数据做准备时感到吃力。ETL 难以处理云中存储的大量历史数据，也无法提供快速决策所需的实时数据。此外，构建自定义 API 以向应用程序提供数据会造成显著的管理复杂性。现代企业常常有 500 到 1000 个管道，以寻求转换数据并为用户提供自助服务的 BI 工具访问。然而，这些 API 处于不断的演变状态，因为当拉取的数据发生变化时，它们必须重新编程。显然，这一过程对于许多现代数据需求，如边缘用例，过于脆弱。
 
 此外，应用程序能力也有所演变。源系统提供业务逻辑和工具以执行数据质量控制，而消费型应用程序则实现数据转换并提供强大的语义层。因此，团队不再有足够的动力去构建点对点接口以大规模移动数据、进行转换，并将数据加载到数据仓库中。
 
@@ -58,11 +58,11 @@ Zero ETL 的收益包括：
 
 使用反向 ETL 具有以下好处：
 
-+   **减少时间和精力：** 使用反向 ETL 处理关键用例将访问数据所需的时间和精力减少了20-25%。一家领先的邮轮公司利用反向 ETL 进行数字营销计划。
++   **减少时间和精力：** 使用反向 ETL 处理关键用例将访问数据所需的时间和精力减少了 20-25%。一家领先的邮轮公司利用反向 ETL 进行数字营销计划。
 
-+   **提高数据可用性：** 团队对关键计划所需数据的访问有更大的确定性，因为90-95%的目标数据按时交付。
++   **提高数据可用性：** 团队对关键计划所需数据的访问有更大的确定性，因为 90-95%的目标数据按时交付。
 
-+   **降低成本：** 反向 ETL 过程减少了对 API 的需求，而 API 需要专门的编程技能并增加管理复杂性。因此，团队将数据成本降低了20-25%。
++   **降低成本：** 反向 ETL 过程减少了对 API 的需求，而 API 需要专门的编程技能并增加管理复杂性。因此，团队将数据成本降低了 20-25%。
 
 要开始使用反向 ETL，数据团队应评估需要按需数据的用例。接下来，他们确定数据传递的频率和量，并选择适当的工具来处理这些数据量。然后，他们将数据仓库中的数据资产指向其目标消费系统。团队应使用一个数据加载进行原型测试，以测量效率并扩展流程。
 
@@ -74,13 +74,13 @@ Zero ETL 的收益包括：
 
 使用零 ETL 和反向 ETL，数据团队能够实现他们赋能用户和应用的目标，让数据在需要的时间和地点可用，同时推动成本和性能的提升，避免了转换的麻烦。
 
-**[Arnab Sen](https://www.linkedin.com/in/arnab-sen-60b92624/)**是一位拥有超过16年技术和决策科学行业经验的专业人士。他目前担任Tredence的数据工程副总裁，该公司是一家著名的数据分析公司，他帮助组织设计其AI-ML/云/大数据战略。凭借在数据货币化方面的专长，Arnab发掘数据的潜在价值，推动B2B和B2C客户的业务转型，涵盖各种行业。Arnab对团队建设的热情以及扩展人员、流程和技能的能力使他成功管理了多个百万美元的投资组合，涉及电信、零售和金融服务等多个领域。他曾在Mu Sigma和IGate任职，在解决客户问题方面发挥了关键作用，通过开发创新解决方案取得了显著成绩。Arnab卓越的领导才能和深厚的领域知识使他获得了《福布斯》技术委员会的席位。
+**[Arnab Sen](https://www.linkedin.com/in/arnab-sen-60b92624/)**是一位拥有超过 16 年技术和决策科学行业经验的专业人士。他目前担任 Tredence 的数据工程副总裁，该公司是一家著名的数据分析公司，他帮助组织设计其 AI-ML/云/大数据战略。凭借在数据货币化方面的专长，Arnab 发掘数据的潜在价值，推动 B2B 和 B2C 客户的业务转型，涵盖各种行业。Arnab 对团队建设的热情以及扩展人员、流程和技能的能力使他成功管理了多个百万美元的投资组合，涉及电信、零售和金融服务等多个领域。他曾在 Mu Sigma 和 IGate 任职，在解决客户问题方面发挥了关键作用，通过开发创新解决方案取得了显著成绩。Arnab 卓越的领导才能和深厚的领域知识使他获得了《福布斯》技术委员会的席位。
 
 ### 更多相关内容
 
 +   [云计算如何提升数据科学工作流程](https://www.kdnuggets.com/2023/08/cloud-computing-enhances-data-science-workflows.html)
 
-+   [从Oracle到AI数据库：数据存储的演变](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)
++   [从 Oracle 到 AI 数据库：数据存储的演变](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)
 
 +   [从人工智能到机器学习的演变及更多…](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)
 

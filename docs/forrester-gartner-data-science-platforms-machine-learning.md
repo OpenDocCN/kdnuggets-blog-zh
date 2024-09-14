@@ -1,16 +1,16 @@
 # Forrester 与 Gartner 关于数据科学平台和机器学习解决方案的对比
 
-> 原文：[https://www.kdnuggets.com/2017/04/forrester-gartner-data-science-platforms-machine-learning.html](https://www.kdnuggets.com/2017/04/forrester-gartner-data-science-platforms-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2017/04/forrester-gartner-data-science-platforms-machine-learning.html`](https://www.kdnuggets.com/2017/04/forrester-gartner-data-science-platforms-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments) 上个月，领先的分析公司 Forrester 发布了他们的“ Forrester Wave™”：2017年第一季度预测分析和机器学习解决方案报告，由 Mike Gualtieri 编写。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论 上个月，领先的分析公司 Forrester 发布了他们的“ Forrester Wave™”：2017 年第一季度预测分析和机器学习解决方案报告，由 Mike Gualtieri 编写。
 
 预测分析和机器学习是现在最重要的技术之一，正如 KDnuggets 读者所知，Forrester 预计 PAML 市场在 2021 年前将实现 15% 的复合年增长率（CAGR）。
 
 报告审查并评估了 14 家公司的战略、当前产品和市场表现。结果汇总在图 1 中。
 
-[![Forrester Wave 大数据预测分析 2017](../Images/35eba97f7945a69e0d18abe7bc7ea518.png)](https://www.forrester.com/report/The+Forrester+Wave+Predictive+Analytics+And+Machine+Learning+Solutions+Q1+2017/-/E-RES129452)
+![Forrester Wave 大数据预测分析 2017](https://www.forrester.com/report/The+Forrester+Wave+Predictive+Analytics+And+Machine+Learning+Solutions+Q1+2017/-/E-RES129452)
 
-**图 1: Forrester Wave™：预测分析和机器学习解决方案，2017年第一季度**
+**图 1: Forrester Wave™：预测分析和机器学习解决方案，2017 年第一季度**
 
 （来源：Forrester Research, Inc. 未经授权的复制、引用或分发均被禁止）
 
@@ -48,9 +48,9 @@
 
 +   **Salford Systems 强调准确性和自动化**，并因其实施特定方法（如 CART、MARS、Random Forests 和 TreeNet）而受到大大小小客户的喜爱。
 
-这些排名与[![2015 Forrester Wave(tm) Big Data Predictive Analytics](../Images/d8dfb01fec66e1ef7b0ddb032a60512b.png) 2015 Forrester Wave(tm) Big Data Predictive Analytics](/2015/04/forrester-wave-big-data-predictive-analytics-gainers-losers.html) 报告相比有何变化？
+这些排名与![2015 Forrester Wave(tm) Big Data Predictive Analytics 2015 Forrester Wave(tm) Big Data Predictive Analytics](img/forrester-wave-big-data-predictive-analytics-gainers-losers.html) 报告相比有何变化？
 
-我尝试了类似 [Gartner 报告](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html) 的重叠式比较，但结果图像过于拥挤，难以阅读。所以这里是一些亮点：
+我尝试了类似 Gartner 报告 的重叠式比较，但结果图像过于拥挤，难以阅读。所以这里是一些亮点：
 
 +   保持领导者地位：SAS、IBM、SAP
 
@@ -62,41 +62,41 @@
 
 +   2017 年下滑的公司：Alteryx、Predixion Software、Oracle
 
-Forrester 的评估与 [Gartner 2017 Magic Quadrant for Data Science Platforms](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html) 的比较如何？
+Forrester 的评估与 Gartner 2017 Magic Quadrant for Data Science Platforms 的比较如何？
 
 Gartner 和 Forrester 使用不同的方法论，但在两种情况下，代表公司距离图表左下角的圆圈越远，表现越好。我们测量了每家公司这一距离，将其标准化，使最大距离为 95，最小距离为 5，并在下图 Figure 2 中绘制。
 
-在Gartner或Forrester图表中都未出现的公司距离值为负（-1）。
+在 Gartner 或 Forrester 图表中都未出现的公司距离值为负（-1）。
 
-![Gartner与Forrester 2017数据科学分析](../Images/3e3a6c08cadbfaeabdf695d77bf4bf40.png)
+![Gartner 与 Forrester 2017 数据科学分析](img/3e3a6c08cadbfaeabdf695d77bf4bf40.png)
 
-**图2：2017年Q1 Gartner与Forrester对数据科学、预测分析和机器学习平台的评估**
+**图 2：2017 年 Q1 Gartner 与 Forrester 对数据科学、预测分析和机器学习平台的评估**
 
-圆圈的大小对应于估计的供应商规模，颜色为Forrester标签，形状（圆圈的填充程度）为Gartner标签。
+圆圈的大小对应于估计的供应商规模，颜色为 Forrester 标签，形状（圆圈的填充程度）为 Gartner 标签。
 
-总共涉及17家公司：13家同时出现在两个报告中，3家仅出现在Gartner（下文简称G）中，1家仅出现在Forrester（下文简称F）中。
+总共涉及 17 家公司：13 家同时出现在两个报告中，3 家仅出现在 Gartner（下文简称 G）中，1 家仅出现在 Forrester（下文简称 F）中。
 
 我们看到几个集群：
 
-+   强劲领导者：SAS、IBM、RapidMiner和KNIME被G和F都评为领导者。
++   强劲领导者：SAS、IBM、RapidMiner 和 KNIME 被 G 和 F 都评为领导者。
 
-+   领导者：Angoss、SAP和FICO在F中是领导者，但在G中仅为利基/远见者。
++   领导者：Angoss、SAP 和 FICO 在 F 中是领导者，但在 G 中仅为利基/远见者。
 
-+   强劲竞争者：H2O.ai、微软和Statistica/Quest在F中是强劲表现者，在G中是远见者/挑战者
++   强劲竞争者：H2O.ai、微软和 Statistica/Quest 在 F 中是强劲表现者，在 G 中是远见者/挑战者
 
-+   竞争者：Alpine Data、Domino、Dataiku：F中的强劲表现者/竞争者，G中的远见者
++   竞争者：Alpine Data、Domino、Dataiku：F 中的强劲表现者/竞争者，G 中的远见者
 
 +   玩家：Salford Systems、Teradata、Alteryx、MathWorks：只有一个排名
 
-如果您是客户，可以从[Forrester](https://www.forrester.com/report/The+Forrester+Wave+Predictive+Analytics+And+Machine+Learning+Solutions+Q1+2017/-/E-RES129452)获取Forrester Wave™: 预测分析与机器学习解决方案，Q1 2017，或从[SAP](https://assets.cdn.sap.com/sapcom/docs/2017/03/6cd842e0-ac7c-0010-82c7-eda71af511fa.pdf)、[RapidMiner](https://rapidminer.com/resource/forrester-wave-predictive-analytics-machine-learning/)或报告中好评提到的其他公司下载。
+如果您是客户，可以从[Forrester](https://www.forrester.com/report/The+Forrester+Wave+Predictive+Analytics+And+Machine+Learning+Solutions+Q1+2017/-/E-RES129452)获取 Forrester Wave™: 预测分析与机器学习解决方案，Q1 2017，或从[SAP](https://assets.cdn.sap.com/sapcom/docs/2017/03/6cd842e0-ac7c-0010-82c7-eda71af511fa.pdf)、[RapidMiner](https://rapidminer.com/resource/forrester-wave-predictive-analytics-machine-learning/)或报告中好评提到的其他公司下载。
 
 **相关：**
 
-+   [**Forrester Wave™ 大数据预测分析2015：赢家与输家**](/2015/04/forrester-wave-big-data-predictive-analytics-gainers-losers.html)
++   **Forrester Wave™ 大数据预测分析 2015：赢家与输家**
 
-+   [**Gartner数据科学平台 – 更深入的分析**](/2017/03/thomaswdinsmore-gartner-data-science-platforms.html)
++   **Gartner 数据科学平台 – 更深入的分析**
 
-+   [**Gartner 2017年数据科学平台魔力象限：赢家与输家**](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html)
++   **Gartner 2017 年数据科学平台魔力象限：赢家与输家**
 
 ### 更多相关话题
 
@@ -106,8 +106,8 @@ Gartner 和 Forrester 使用不同的方法论，但在两种情况下，代表�
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为伟大的数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

@@ -1,8 +1,8 @@
 # SQL 与对象关系映射（ORM）之间的区别是什么？
 
-> 原文：[https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
+> 原文：[`www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html`](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
 
-![SQL 与对象关系映射（ORM）之间的区别是什么？](../Images/fc801c8ee8708bf52aecc75679608d1b.png)
+![SQL 与对象关系映射（ORM）之间的区别是什么？](img/fc801c8ee8708bf52aecc75679608d1b.png)
 
 [由 freepik 创建的技术矢量图 - www.freepik.com](https://www.freepik.com/vectors/technology)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -74,11 +74,11 @@ ORM 在开发者与代码之间工作，因此不容易看到后台发生了什�
 
 许多开发者可能会在不同的时间使用 SQL 和 ORM。这是因为在某些情况下，其中一个明显是更合适的选择。然而，简单地说其中一个在所有情况下都是最佳选择是短视的。考虑到这一点，开发者在决定使用哪一个之前，应考虑项目的范围、组织的需求和他们的能力。
 
-**[香农·弗林](https://www.linkedin.com/in/shannon-flynn-8972a61b2/)** (**[@rehackmagazine](https://twitter.com/rehackmagazine)**) 是一位技术博主，专注于IT趋势、网络安全和商业技术新闻。她也是 MakeUseOf 的撰稿人，并且是 [**ReHack.com**](https://rehack.com/) 的执行编辑。关注 KDnuggets，了解更多来自香农以及其他数据科学更新的信息。有关更多信息，请参见香农的 [个人网站](https://shannonlflynn.com/)。
+**[香农·弗林](https://www.linkedin.com/in/shannon-flynn-8972a61b2/)** (**[@rehackmagazine](https://twitter.com/rehackmagazine)**) 是一位技术博主，专注于 IT 趋势、网络安全和商业技术新闻。她也是 MakeUseOf 的撰稿人，并且是 [**ReHack.com**](https://rehack.com/) 的执行编辑。关注 KDnuggets，了解更多来自香农以及其他数据科学更新的信息。有关更多信息，请参见香农的 [个人网站](https://shannonlflynn.com/)。
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n09，3月2日：讲述一个精彩的数据故事：一个…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09，3 月 2 日：讲述一个精彩的数据故事：一个…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [数据分析师和数据科学家的区别是什么？](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)
 

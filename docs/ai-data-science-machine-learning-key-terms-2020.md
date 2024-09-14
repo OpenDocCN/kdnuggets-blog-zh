@@ -1,30 +1,30 @@
-# 2020年你需要了解的20个AI、数据科学、机器学习术语（第1部分）
+# 2020 年你需要了解的 20 个 AI、数据科学、机器学习术语（第一部分）
 
-> 原文：[https://www.kdnuggets.com/2020/02/ai-data-science-machine-learning-key-terms-2020.html](https://www.kdnuggets.com/2020/02/ai-data-science-machine-learning-key-terms-2020.html)
+> 原文：[`www.kdnuggets.com/2020/02/ai-data-science-machine-learning-key-terms-2020.html`](https://www.kdnuggets.com/2020/02/ai-data-science-machine-learning-key-terms-2020.html)
 
-[评论](#comments)
+评论
 
-过去，KDnuggets 曾涵盖过[关键术语](/tag/key-terms)的集合，包括[机器学习](/2016/05/machine-learning-key-terms-explained.html)、[深度学习](/2016/10/deep-learning-key-terms-explained.html)、[大数据](/2016/08/big-data-key-terms-explained.html)、[自然语言处理](/2017/02/natural-language-processing-key-terms-explained.html)等。随着新的一年的到来，并且由于我们最近没有发布任何关键术语的集合，我们认为突显一些AI、数据科学和机器学习的术语是个好主意，这些术语是我们现在应该熟悉的，以适应不断发展的环境。
+过去，KDnuggets 曾涵盖过关键术语的集合，包括机器学习、深度学习、大数据、自然语言处理等。随着新的一年的到来，并且由于我们最近没有发布任何关键术语的集合，我们认为突显一些 AI、数据科学和机器学习的术语是个好主意，这些术语是我们现在应该熟悉的，以适应不断发展的环境。
 
-因此，这些术语结合了一些新兴的概念以及最近可能被认为更为重要的现有概念。这些定义是KDnuggets团队的共同努力，包括 [Gregory Piatetsky](/author/gregory-piatetsky)， [Asel Mendis](/author/asel-mendis)， [Matthew Dearing](/author/matthew-dearing) 和我自己，[Matthew Mayo](/author/matt-mayo)。
+因此，这些术语结合了一些新兴的概念以及最近可能被认为更为重要的现有概念。这些定义是 KDnuggets 团队的共同努力，包括 Gregory Piatetsky， Asel Mendis， Matthew Dearing 和我自己，Matthew Mayo。
 
 > * * *
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 > 
 > * * *
 > 
-> 另见 [**2020年你需要了解的20个AI、数据科学、机器学习术语（第2部分）**](https://www.kdnuggets.com/2020/03/ai-data-science-machine-learning-key-terms-part2.html)
+> 另见 [**2020 年你需要了解的 20 个 AI、数据科学、机器学习术语（第二部分）**](https://www.kdnuggets.com/2020/03/ai-data-science-machine-learning-key-terms-part2.html)
 
-所以不再赘述，以下是你需要了解的前10个术语，下周将公布第二批10个，总共20个术语，供2020年使用。
+所以不再赘述，以下是你需要了解的前 10 个术语，下周将公布第二批 10 个，总共 20 个术语，供 2020 年使用。
 
-![图](../Images/8b7e157b12f9f58f71312628e357550b.png)
+![图](img/8b7e157b12f9f58f71312628e357550b.png)
 
 **AutoML**
 
@@ -32,7 +32,7 @@
 
 一个 AutoML “解决方案”可能包括数据预处理、特征工程、算法选择、算法架构搜索和超参数调整等任务，或这些不同任务的某个子集或变体。因此，自动化机器学习现在可以被认为是从仅执行单一任务（如自动特征工程），一直到一个完全自动化的流程，包括数据预处理、特征工程、算法选择等。
 
-换句话说——说实话，我*最喜欢*的方式——如果如 [Sebastian Raschka 所描述的](/2016/05/explain-machine-learning-software-engineer.html)，计算机编程是关于自动化的，而机器学习是“全自动化自动化”，那么自动化机器学习就是“自动化自动化的自动化”。跟我来：编程通过管理机械任务来减轻我们的负担；机器学习使计算机能够学习如何最佳地执行这些机械任务；自动化机器学习使计算机能够学习如何优化学习执行这些机械任务的结果。
+换句话说——说实话，我*最喜欢*的方式——如果如 Sebastian Raschka 所描述的，计算机编程是关于自动化的，而机器学习是“全自动化自动化”，那么自动化机器学习就是“自动化自动化的自动化”。跟我来：编程通过管理机械任务来减轻我们的负担；机器学习使计算机能够学习如何最佳地执行这些机械任务；自动化机器学习使计算机能够学习如何优化学习执行这些机械任务的结果。
 
 这是一个非常强大的概念；虽然我们以前必须担心调整参数和超参数，手动工程特征，执行算法选择等，但自动化机器学习系统可以通过多种不同的方法学习如何调整这些过程以实现最佳结果。
 
@@ -58,35 +58,35 @@ Brandon Rohrer 的解释是关于贝叶斯方法如何工作的一个很好的�
 
 **CCPA**
 
-CCPA，即[加利福尼亚消费者隐私法](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)，于2020年1月1日生效，对收集个人数据的企业以及由此分析和处理这些数据的企业有重要影响。它的意图与[GDPR](/tag/gdpr)类似，但为加利福尼亚消费者提供了更强的保护。CCPA允许任何加利福尼亚消费者要求查看公司拥有的关于他们的信息，以及这些信息被共享的第三方的完整列表。加利福尼亚消费者还可以访问他们的个人数据，拒绝出售他们的个人数据，并要求公司删除公司所拥有的任何个人信息。
+CCPA，即[加利福尼亚消费者隐私法](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)，于 2020 年 1 月 1 日生效，对收集个人数据的企业以及由此分析和处理这些数据的企业有重要影响。它的意图与 GDPR 类似，但为加利福尼亚消费者提供了更强的保护。CCPA 允许任何加利福尼亚消费者要求查看公司拥有的关于他们的信息，以及这些信息被共享的第三方的完整列表。加利福尼亚消费者还可以访问他们的个人数据，拒绝出售他们的个人数据，并要求公司删除公司所拥有的任何个人信息。
 
 适用于任何收集消费者个人数据、在加利福尼亚州开展业务并符合以下至少一项条件的公司：
 
-+   年收入超过2500万美元；
++   年收入超过 2500 万美元；
 
-+   购买或出售50,000个或更多加利福尼亚消费者或家庭的个人信息。
++   购买或出售 50,000 个或更多加利福尼亚消费者或家庭的个人信息。
 
-+   从出售加利福尼亚消费者个人信息中赚取超过50%的年收入。
++   从出售加利福尼亚消费者个人信息中赚取超过 50%的年收入。
 
-欲了解更多信息，请参阅[维基百科上关于CCPA的条目](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)。
+欲了解更多信息，请参阅[维基百科上关于 CCPA 的条目](https://en.wikipedia.org/wiki/California_Consumer_Privacy_Act)。
 
 **数据工程师**
 
-数据工程师负责优化和管理组织数据的存储和检索。数据工程师会制定如何最佳获取数据和创建存储数据库的路线图。他们通常会处理云服务，以优化数据存储并创建算法来解读数据。数据工程师的角色高度技术化，需要在SQL、数据库设计和计算机科学方面的高级知识。
+数据工程师负责优化和管理组织数据的存储和检索。数据工程师会制定如何最佳获取数据和创建存储数据库的路线图。他们通常会处理云服务，以优化数据存储并创建算法来解读数据。数据工程师的角色高度技术化，需要在 SQL、数据库设计和计算机科学方面的高级知识。
 
 数据工程师在云端认证的趋势不断增加，以便在云环境中创建数据库并处理大型复杂数据集，以扩展和优化数据检索。
 
 **深度伪造**
 
-深度伪造是利用先进的[深度学习](/tag/deep-learning)和生成对抗网络[GANs](/tag/gans)技术创建的虚假图像、视频或音频。这项技术非常先进，以至于结果非常逼真，且很难识别为假。这是一个使用奥巴马图像和声音的深度伪造示例：
+深度伪造是利用先进的深度学习和生成对抗网络 GANs 技术创建的虚假图像、视频或音频。这项技术非常先进，以至于结果非常逼真，且很难识别为假。这是一个使用奥巴马图像和声音的深度伪造示例：
 
-深度伪造最初在色情内容中变得突出，热门名人的面孔被叠加到成人视频中，但最近，随着FakeApp等应用程序和更近期的开源替代品如FaceSwap和DeepFaceLab，技术已经取得了进展。
+深度伪造最初在色情内容中变得突出，热门名人的面孔被叠加到成人视频中，但最近，随着 FakeApp 等应用程序和更近期的开源替代品如 FaceSwap 和 DeepFaceLab，技术已经取得了进展。
 
-以前，语音模仿需要几分钟的语音，但最近技术可以仅用几秒钟的语音生成令人信服的语音模仿。在2019年9月，[一家公司的](https://medium.com/tebs-lab/the-first-known-deep-fake-crime-a-promisingly-habitable-planet-and-californias-gig-worker-bill-7923b81a18d0) CEO 的声音被骗子利用深度伪造技术模仿，从而欺骗公司支付了24.3万美元，成为首例此类网络犯罪。
+以前，语音模仿需要几分钟的语音，但最近技术可以仅用几秒钟的语音生成令人信服的语音模仿。在 2019 年 9 月，[一家公司的](https://medium.com/tebs-lab/the-first-known-deep-fake-crime-a-promisingly-habitable-planet-and-californias-gig-worker-bill-7923b81a18d0) CEO 的声音被骗子利用深度伪造技术模仿，从而欺骗公司支付了 24.3 万美元，成为首例此类网络犯罪。
 
-深度伪造技术已经被用于政治虚假信息活动中，用于为机器人档案创建虚假图像，但可能在2020年被用来传播有关候选人的虚假语音和图像的虚假信息。
+深度伪造技术已经被用于政治虚假信息活动中，用于为机器人档案创建虚假图像，但可能在 2020 年被用来传播有关候选人的虚假语音和图像的虚假信息。
 
-现在，深度伪造的创造者和试图识别它们的网络公司之间展开了军备竞赛。Facebook 和其他几家公司已经[宣布了一项1000万美元的竞赛](https://ai.facebook.com/blog/deepfake-detection-challenge/)以开发识别深度伪造技术的技术。请继续关注，不要自动相信你在网上看到的所有内容——检查其来源。
+现在，深度伪造的创造者和试图识别它们的网络公司之间展开了军备竞赛。Facebook 和其他几家公司已经[宣布了一项 1000 万美元的竞赛](https://ai.facebook.com/blog/deepfake-detection-challenge/)以开发识别深度伪造技术的技术。请继续关注，不要自动相信你在网上看到的所有内容——检查其来源。
 
 **模型部署/生产化**
 
@@ -100,15 +100,15 @@ CCPA，即[加利福尼亚消费者隐私法](https://en.wikipedia.org/wiki/Cali
 
 那些更加相互关联的数据怎么办？数据可以通过依赖关系彼此连接。用户之间的互动可能会影响电子商务平台上的购买决策。药物发现中的化学反应通过复杂的反应互连图谱进行映射。社交网络通过不断变化、不规则和无序的关系形成并发展。人脑则由相互通信的细胞组成，这些细胞通过缠绕的意大利面般的结构连接在一起。
 
-这些类型的数据关系可以建模为*图*，数据点被表示为节点，关系通过互连的链接进行编码。传统的机器学习方法，包括深度学习，需要进一步泛化，以便在非欧几里得的图空间中进行计算。尽管早期已有一些相关工作，但*图神经网络*（GNN）的概念由[Margo Gori 和团队](http://sailab.diism.unisi.it/people/marco-gori/)在2005年定义，随后进行了更多研究，扩展到了递归和卷积神经网络的图版本。深度学习研究目前正积极致力于将[图神经网络方法](/2019/08/neighbours-machine-learning-graphs.html)应用于数据即意大利面源，这也是2020年值得密切关注的研究领域。
+这些类型的数据关系可以建模为*图*，数据点被表示为节点，关系通过互连的链接进行编码。传统的机器学习方法，包括深度学习，需要进一步泛化，以便在非欧几里得的图空间中进行计算。尽管早期已有一些相关工作，但*图神经网络*（GNN）的概念由[Margo Gori 和团队](http://sailab.diism.unisi.it/people/marco-gori/)在 2005 年定义，随后进行了更多研究，扩展到了递归和卷积神经网络的图版本。深度学习研究目前正积极致力于将图神经网络方法应用于数据即意大利面源，这也是 2020 年值得密切关注的研究领域。
 
 **MLOps 和 AIOps**
 
-随着[DevOps](/tag/devops)在IT组织中成功融合了*软件开发人员*与IT服务交付的过程，这个术语已被提升为当代的流行词汇。在大多数流行词汇扎根后，新的背景或应用领域往往会迅速跟上这一热潮。
+随着 DevOps 在 IT 组织中成功融合了*软件开发人员*与 IT 服务交付的过程，这个术语已被提升为当代的流行词汇。在大多数流行词汇扎根后，新的背景或应用领域往往会迅速跟上这一热潮。
 
-MLOps这个术语用来代表最新的最佳实践，通过与*数据科学家*和IT专业人员的有效协作来开发和部署机器学习模型。在一个明确的开发生命周期中工作，对于许多数据科学家来说应该是[非常受欢迎的](/2020/02/machine-learning-projects-manage.html)，因为正式和自主学习的课程通常集中在人工智能和机器学习的基础上，对于生产部署的要求了解较少，[不够熟悉](/2020/02/deploy-machine-learning-model.html)。
+MLOps 这个术语用来代表最新的最佳实践，通过与*数据科学家*和 IT 专业人员的有效协作来开发和部署机器学习模型。在一个明确的开发生命周期中工作，对于许多数据科学家来说应该是非常受欢迎的，因为正式和自主学习的课程通常集中在人工智能和机器学习的基础上，对于生产部署的要求了解较少，不够熟悉。
 
-将人工智能应用于组织运营的广泛领域是AIOps，它汇集了所有机器学习技术，以从IT系统中提取有意义的见解。这种方法将人类的智能与AI算法的智能结合起来，以增强IT团队在做出更好、更快的决策、实时响应事件和开发优化的应用程序以促进更有效或自动化的业务流程方面的能力。根据[Gartner的预测](https://www.gartner.com/smarterwithgartner/how-to-get-started-with-aiops/)，到2023年只有30%的大型企业首席信息官将专门使用AIOps来改善运营，因此AIOps在IT组织中的演变还有很多值得关注的地方。
+将人工智能应用于组织运营的广泛领域是 AIOps，它汇集了所有机器学习技术，以从 IT 系统中提取有意义的见解。这种方法将人类的智能与 AI 算法的智能结合起来，以增强 IT 团队在做出更好、更快的决策、实时响应事件和开发优化的应用程序以促进更有效或自动化的业务流程方面的能力。根据[Gartner 的预测](https://www.gartner.com/smarterwithgartner/how-to-get-started-with-aiops/)，到 2023 年只有 30%的大型企业首席信息官将专门使用 AIOps 来改善运营，因此 AIOps 在 IT 组织中的演变还有很多值得关注的地方。
 
 **迁移学习**
 
@@ -120,25 +120,25 @@ MLOps这个术语用来代表最新的最佳实践，通过与*数据科学家*�
 
 考虑到时间和计算消耗，迁移学习使我们能够更好地最大化模型的使用价值。考虑到训练数据的不足，迁移学习允许我们利用在潜在大量数据上训练的预训练模型，并在较小的任务特定数据上进行调整。迁移学习是管理机器学习模型训练中两种不同潜在缺陷的有效方法，因此它越来越被广泛使用也就不足为奇了。
 
-*这个答案部分改编自我为书籍 [用Python进行迁移学习](https://www.amazon.ca/Hands-Transfer-Learning-Python-TensorFlow-ebook/dp/B07CB455BF) 撰写的前言，出版商为Packt Publishing。*
+*这个答案部分改编自我为书籍 [用 Python 进行迁移学习](https://www.amazon.ca/Hands-Transfer-Learning-Python-TensorFlow-ebook/dp/B07CB455BF) 撰写的前言，出版商为 Packt Publishing。*
 
 **相关**：
 
-+   [2020年必备的五项数据科学技能](/2020/01/top-5-data-science-skills-2020.html)
++   2020 年必备的五项数据科学技能
 
-+   [2020年数据科学的五大趋势](/2020/02/top-5-data-science-trends.html)
++   2020 年数据科学的五大趋势
 
-+   [2020年人工智能的五大趋势](/2020/01/top-5-ai-trends-2020.html)
++   2020 年人工智能的五大趋势
 
 ### 进一步了解此主题
 
-+   [成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [每个数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

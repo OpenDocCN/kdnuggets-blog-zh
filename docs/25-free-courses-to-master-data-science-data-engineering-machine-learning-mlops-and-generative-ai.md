@@ -1,8 +1,8 @@
 # 25 门免费课程，掌握数据科学、数据工程、机器学习、MLOps 和生成式 AI
 
-> 原文：[https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
+> 原文：[`www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai`](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
-![25 门免费课程，掌握数据科学、数据工程、机器学习、MLOps 和生成式 AI](../Images/c8dd473fe9f260885931dff34097fcaf.png)
+![25 门免费课程，掌握数据科学、数据工程、机器学习、MLOps 和生成式 AI](img/c8dd473fe9f260885931dff34097fcaf.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -32,7 +32,7 @@
 
 1.  [**机器学习 Zoomcamp**](https://github.com/DataTalksClub/machine-learning-zoomcamp) **由 DataTalks.Club 提供：** 一种实践性的（基于项目的）机器学习学习方法。
 
-通过阅读 [5 门免费课程，掌握数据科学](/5-free-courses-to-master-data-science) 了解更多关于单个课程的信息
+通过阅读 5 门免费课程，掌握数据科学 了解更多关于单个课程的信息
 
 # 数据工程
 
@@ -46,7 +46,7 @@
 
 1.  [**数据工程 Zoomcamp**](https://github.com/DataTalksClub/data-engineering-zoomcamp) **by DataTalks.Club:** 一个基于项目的动手数据工程课程。
 
-通过阅读 [5 免费课程掌握数据工程](/5-free-courses-to-master-data-engineering) 了解更多关于各个课程的信息。
+通过阅读 5 免费课程掌握数据工程 了解更多关于各个课程的信息。
 
 # 机器学习
 
@@ -60,7 +60,7 @@
 
 1.  [**CS229: 机器学习**](https://cs229.stanford.edu/) **by Stanford University:** 一个更高级的课程，适合那些希望深入了解的学习者。
 
-通过阅读 [5 免费课程掌握机器学习](/5-free-courses-to-master-machine-learning) 了解更多关于各个课程的信息。
+通过阅读 5 免费课程掌握机器学习 了解更多关于各个课程的信息。
 
 # MLOps
 
@@ -74,38 +74,38 @@
 
 1.  [**使用 ML 制作**](https://madewithml.com/) **by Goku Mohandas:** 一门将机器学习与实际应用相结合的独特课程。在 GitHub 上非常受欢迎。
 
-通过阅读 [5 免费课程掌握 MLOps](/5-free-courses-to-master-mlops) 了解更多关于各个课程的信息。
+通过阅读 5 免费课程掌握 MLOps 了解更多关于各个课程的信息。
 
 # 生成式 AI
 
 1.  [**生成式 AI 入门**](https://github.com/microsoft/generative-ai-for-beginners) **by Microsoft:** 12 节课程帮助构建生成式 AI 应用。
 
-1.  [**生成性AI基础**](https://www.databricks.com/resources/learn/training/generative-ai-fundamentals) **由DataBricks提供：** 探索生成性AI的基础知识。
+1.  [**生成性 AI 基础**](https://www.databricks.com/resources/learn/training/generative-ai-fundamentals) **由 DataBricks 提供：** 探索生成性 AI 的基础知识。
 
-1.  [**生成性AI学习路径简介**](https://www.cloudskillsboost.google/paths/118) **由Google提供：** 从学习大型语言模型的基础知识到理解负责任的AI原则。
+1.  [**生成性 AI 学习路径简介**](https://www.cloudskillsboost.google/paths/118) **由 Google 提供：** 从学习大型语言模型的基础知识到理解负责任的 AI 原则。
 
-1.  [**使用大型语言模型的生成性AI**](https://www.coursera.org/learn/generative-ai-with-llms) **由AWS和DeepLearning.AI提供：** 与AWS专家一起获得AI的实际经验，他们在商业用例中构建和部署AI。
+1.  [**使用大型语言模型的生成性 AI**](https://www.coursera.org/learn/generative-ai-with-llms) **由 AWS 和 DeepLearning.AI 提供：** 与 AWS 专家一起获得 AI 的实际经验，他们在商业用例中构建和部署 AI。
 
-1.  [**人人适用的生成性AI**](https://www.coursera.org/learn/generative-ai-for-everyone) **由DeepLearning.AI提供：** 介绍生成性AI的概念、工作原理、常见用例和局限性。
+1.  [**人人适用的生成性 AI**](https://www.coursera.org/learn/generative-ai-for-everyone) **由 DeepLearning.AI 提供：** 介绍生成性 AI 的概念、工作原理、常见用例和局限性。
 
-通过阅读 [掌握生成性AI的5门免费课程](/5-free-courses-to-master-generative-ai) 了解更多有关单独课程的信息
+通过阅读 掌握生成性 AI 的 5 门免费课程 了解更多有关单独课程的信息
 
 # 结论
 
-在这篇博客中，我们介绍了25门可以帮助你建立数据科学及其相关子领域坚实基础的免费在线课程。通过学习更多高级课程，如机器学习、MLOps和生成性AI，提升你的技能。无论你在数据科学学习旅程中的哪一阶段，这些免费课程都使优质教育变得对每个人都可及。它们提供灵活的学习方式，即使在最繁忙的日程中也能适应。祝学习愉快！
+在这篇博客中，我们介绍了 25 门可以帮助你建立数据科学及其相关子领域坚实基础的免费在线课程。通过学习更多高级课程，如机器学习、MLOps 和生成性 AI，提升你的技能。无论你在数据科学学习旅程中的哪一阶段，这些免费课程都使优质教育变得对每个人都可及。它们提供灵活的学习方式，即使在最繁忙的日程中也能适应。祝学习愉快！
 
-[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一名认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个AI产品，帮助那些在心理健康方面挣扎的学生。
+[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一名认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个 AI 产品，帮助那些在心理健康方面挣扎的学生。
 
 ### 相关主题
 
 +   [学习数据科学、数据工程等的免费课程集合](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)
 
-+   [掌握MLOps的5门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
++   [掌握 MLOps 的 5 门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
 
-+   [掌握生成性AI的5门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-generative-ai)
++   [掌握生成性 AI 的 5 门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-generative-ai)
 
-+   [掌握数据工程的5门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-data-engineering)
++   [掌握数据工程的 5 门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-data-engineering)
 
-+   [掌握生成性AI与提示工程：免费电子书](https://www.kdnuggets.com/2023/04/free-ebook-mastering-generative-ai-prompt-engineering.html)
++   [掌握生成性 AI 与提示工程：免费电子书](https://www.kdnuggets.com/2023/04/free-ebook-mastering-generative-ai-prompt-engineering.html)
 
-+   [掌握MLOps的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
++   [掌握 MLOps 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)

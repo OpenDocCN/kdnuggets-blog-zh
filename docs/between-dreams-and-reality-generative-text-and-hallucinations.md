@@ -1,10 +1,10 @@
 # 梦与现实之间：生成文本与幻觉
 
-> 原文：[https://www.kdnuggets.com/between-dreams-and-reality-generative-text-and-hallucinations](https://www.kdnuggets.com/between-dreams-and-reality-generative-text-and-hallucinations)
+> 原文：[`www.kdnuggets.com/between-dreams-and-reality-generative-text-and-hallucinations`](https://www.kdnuggets.com/between-dreams-and-reality-generative-text-and-hallucinations)
 
-![梦与现实之间：生成文本与幻觉](../Images/d011127f45ac4793b31892199f686d31.png)
+![梦与现实之间：生成文本与幻觉](img/d011127f45ac4793b31892199f686d31.png)
 
-由DALL-E生成的图像
+由 DALL-E 生成的图像
 
 在数字时代，人工智能的奇迹改变了我们互动、工作甚至思考的方式。
 
@@ -12,33 +12,33 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-从策划我们的播放列表的语音助手到预测市场趋势的算法，AI已经无缝地融入我们的日常生活。
+从策划我们的播放列表的语音助手到预测市场趋势的算法，AI 已经无缝地融入我们的日常生活。
 
 但和任何技术进步一样，它也不乏曲折。
 
-大型语言模型或LLM是一个训练过的机器学习模型，根据你提供的提示生成文本。为了生成好的回应，模型利用了训练阶段所保留的所有知识。
+大型语言模型或 LLM 是一个训练过的机器学习模型，根据你提供的提示生成文本。为了生成好的回应，模型利用了训练阶段所保留的所有知识。
 
 最近，大型语言模型（LLMs）展示了令人印象深刻且不断增长的能力，包括对任何类型用户提示生成令人信服的回应。
 
-然而，即使LLMs具有生成文本的惊人能力，仍然很难判断这些生成内容是否准确。
+然而，即使 LLMs 具有生成文本的惊人能力，仍然很难判断这些生成内容是否准确。
 
 这正是通常所说的幻觉。
 
-但这些幻觉是什么，它们如何影响AI的可靠性和实用性？
+但这些幻觉是什么，它们如何影响 AI 的可靠性和实用性？
 
 # 大型语言模型幻觉之谜
 
-在文本生成、翻译、创意内容等方面，LLMs都是高手。
+在文本生成、翻译、创意内容等方面，LLMs 都是高手。
 
-尽管是强大的工具，LLM确实存在一些显著的缺陷：
+尽管是强大的工具，LLM 确实存在一些显著的缺陷：
 
 1.  使用的解码技术可能会产生乏味、缺乏连贯性或容易陷入单调重复的输出。
 
@@ -46,13 +46,13 @@
 
 1.  一个常见问题是生成的文本要么是无意义的，要么是不准确的。
 
-最后一点被称为幻觉，这是一个从人类延伸到AI的概念。
+最后一点被称为幻觉，这是一个从人类延伸到 AI 的概念。
 
-对于人类而言，幻觉代表了尽管是虚构的却被感知为真实的体验。这一概念也扩展到AI模型中，其中幻觉文本看似准确，即使它是虚假的。
+对于人类而言，幻觉代表了尽管是虚构的却被感知为真实的体验。这一概念也扩展到 AI 模型中，其中幻觉文本看似准确，即使它是虚假的。
 
 在大型语言模型的背景下，“幻觉”指的是模型生成的文本不正确、无意义或不真实的现象。
 
-![在梦境与现实之间：生成文本与幻觉](../Images/5dea512a548361642bfd1d0dfd757848.png)
+![在梦境与现实之间：生成文本与幻觉](img/5dea512a548361642bfd1d0dfd757848.png)
 
 图片来源于 Dall-E
 
@@ -92,7 +92,7 @@ LLMs 的设计不同于数据库或搜索引擎，因此它们在回答时不参
 
 有趣的是，这些幻觉可以是一种伪装的福音。如果你寻求创造力，你会希望 LLMs 如 ChatGPT 能够幻觉。
 
-![在梦境与现实之间：生成文本与幻觉](../Images/d98eb6c897e67ca33027f0e53ff85b7c.png)
+![在梦境与现实之间：生成文本与幻觉](img/d98eb6c897e67ca33027f0e53ff85b7c.png)
 
 图片由 DALL-E 生成
 
@@ -114,25 +114,25 @@ LLMs 的设计不同于数据库或搜索引擎，因此它们在回答时不参
 
 最后一个，但并非最不重要的… 探索！
 
-这篇文章为LLM幻觉奠定了基础，但对你和你的应用程序的影响可能会大相径庭。
+这篇文章为 LLM 幻觉奠定了基础，但对你和你的应用程序的影响可能会大相径庭。
 
-此外，你对这些现象的解释可能与实际情况不完全一致。全面理解和评估LLM幻觉对你工作的影响的关键在于深入探讨LLM。
+此外，你对这些现象的解释可能与实际情况不完全一致。全面理解和评估 LLM 幻觉对你工作的影响的关键在于深入探讨 LLM。
 
 # 结论
 
-AI，特别是LLM的发展过程，就像是在未开发的水域航行。虽然广阔的可能性令人兴奋，但必须警惕那些可能使我们偏离方向的幻影。
+AI，特别是 LLM 的发展过程，就像是在未开发的水域航行。虽然广阔的可能性令人兴奋，但必须警惕那些可能使我们偏离方向的幻影。
 
-通过理解这些幻觉的本质并实施减轻它们的策略，我们可以继续利用AI的变革力量，确保其在不断演变的数字环境中的准确性和可靠性。
+通过理解这些幻觉的本质并实施减轻它们的策略，我们可以继续利用 AI 的变革力量，确保其在不断演变的数字环境中的准确性和可靠性。
 
-**[](https://www.linkedin.com/in/josep-ferrer-sanchez/)**[Josep Ferrer](https://www.linkedin.com/in/josep-ferrer-sanchez)**** 是来自巴塞罗那的分析工程师。他毕业于物理工程，目前在应用于人类移动的数据科学领域工作。他是一个兼职内容创作者，专注于数据科学和技术。Josep撰写关于AI的所有内容，涵盖了这一领域的持续爆炸性应用。
+**[](https://www.linkedin.com/in/josep-ferrer-sanchez/)**[Josep Ferrer](https://www.linkedin.com/in/josep-ferrer-sanchez)**** 是来自巴塞罗那的分析工程师。他毕业于物理工程，目前在应用于人类移动的数据科学领域工作。他是一个兼职内容创作者，专注于数据科学和技术。Josep 撰写关于 AI 的所有内容，涵盖了这一领域的持续爆炸性应用。
 
 ### 更多相关主题
 
-+   [数据编排：生成型AI成功与失败之间的分界线…](https://www.kdnuggets.com/2024/07/astronomer/data-orchestration-the-dividing-line-between-generative-ai-success-and-failure)
++   [数据编排：生成型 AI 成功与失败之间的分界线…](https://www.kdnuggets.com/2024/07/astronomer/data-orchestration-the-dividing-line-between-generative-ai-success-and-failure)
 
-+   [从虚构到现实：ChatGPT与真正AI的科幻梦…](https://www.kdnuggets.com/from-fiction-to-reality-chatgpt-and-the-sci-fi-dream-of-true-ai-conversation)
++   [从虚构到现实：ChatGPT 与真正 AI 的科幻梦…](https://www.kdnuggets.com/from-fiction-to-reality-chatgpt-and-the-sci-fi-dream-of-true-ai-conversation)
 
-+   [数据科学职业：7个期望与现实](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
++   [数据科学职业：7 个期望与现实](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
 
 +   [数据科学：现实与期望](https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html)
 

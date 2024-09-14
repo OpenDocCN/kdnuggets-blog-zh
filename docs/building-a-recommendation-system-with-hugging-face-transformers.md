@@ -1,8 +1,8 @@
 # 使用 Hugging Face Transformers 构建推荐系统
 
-> 原文：[https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)
+> 原文：[`www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers`](https://www.kdnuggets.com/building-a-recommendation-system-with-hugging-face-transformers)
 
-![使用 Hugging Face Transformers 构建推荐系统](../Images/a61a757863330ab6619d9dd0c0bdd909.png)
+![使用 Hugging Face Transformers 构建推荐系统](img/a61a757863330ab6619d9dd0c0bdd909.png)
 
 [图像由 jcomp 提供，来源于 Freepik](https://www.freepik.com/free-vector/man-who-thinks-idea-is-admired-by-thumbs-up_11879378.htm#fromView=search&page=1&position=31&uuid=f9d98eb0-c0b9-4681-a4df-3026685c1dea)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -49,15 +49,15 @@ df = df.dropna()
 df['description'] = df['name'] +' '+ df['genre'] + ' ' +df['type']+' episodes: '+ df['episodes']
 ```
 
-在上述代码中，我们使用Pandas读取数据集并删除了所有缺失的数据。然后，我们创建了一个名为“description”的特征，其中包含了可用数据中的所有信息，如名称、类型、类别和集数。这个新列将成为我们推荐系统的基础。如果能有更完整的信息，例如动漫情节和概要，会更好，但我们暂时就用这个吧。
+在上述代码中，我们使用 Pandas 读取数据集并删除了所有缺失的数据。然后，我们创建了一个名为“description”的特征，其中包含了可用数据中的所有信息，如名称、类型、类别和集数。这个新列将成为我们推荐系统的基础。如果能有更完整的信息，例如动漫情节和概要，会更好，但我们暂时就用这个吧。
 
-接下来，我们将使用Hugging Face Transformers加载嵌入模型并将文本转换为数值向量。具体来说，我们将使用句子嵌入来转换整个句子。
+接下来，我们将使用 Hugging Face Transformers 加载嵌入模型并将文本转换为数值向量。具体来说，我们将使用句子嵌入来转换整个句子。
 
 推荐系统将基于我们将要执行的所有动漫“描述”的嵌入。我们将使用余弦相似度方法，它衡量两个向量的相似度。通过测量动漫“描述”嵌入与用户查询输入嵌入之间的相似度，我们可以获得精准的推荐项目。
 
 嵌入相似度方法听起来简单，但与经典的推荐系统模型相比，它可能更为强大，因为它能够捕捉词语之间的语义关系，为推荐过程提供上下文意义。
 
-在本教程中，我们将使用Hugging Face的嵌入模型句子变换器。为了将句子转换为嵌入，我们将使用以下代码。
+在本教程中，我们将使用 Hugging Face 的嵌入模型句子变换器。为了将句子转换为嵌入，我们将使用以下代码。
 
 ```py
 from transformers import AutoTokenizer, AutoModel
@@ -94,7 +94,7 @@ print("Sentence embeddings:")
 print(result)
 ```
 
-为了简化操作，Hugging Face 维护了一个用于嵌入句子变换器的Python包，这将把整个转换过程缩减到3行代码。请使用以下代码安装必要的包。
+为了简化操作，Hugging Face 维护了一个用于嵌入句子变换器的 Python 包，这将把整个转换过程缩减到 3 行代码。请使用以下代码安装必要的包。
 
 ```py
 pip install -U sentence-transformers
@@ -150,7 +150,7 @@ Output>>
 
 ## 结论
 
-推荐系统是一种根据输入预测用户可能感兴趣内容的工具。使用Hugging Face Transformers，我们可以构建一个利用嵌入和余弦相似度方法的推荐系统。嵌入方法非常强大，因为它能够考虑文本的语义关系和上下文意义。
+推荐系统是一种根据输入预测用户可能感兴趣内容的工具。使用 Hugging Face Transformers，我们可以构建一个利用嵌入和余弦相似度方法的推荐系统。嵌入方法非常强大，因为它能够考虑文本的语义关系和上下文意义。
 
 **[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**** 是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据的技巧。Cornellius 在各种 AI 和机器学习主题上进行撰写。
 

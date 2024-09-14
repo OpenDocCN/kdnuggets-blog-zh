@@ -1,8 +1,8 @@
 # Dask DataFrame 不是 Pandas
 
-> 原文：[https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html](https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html)
+> 原文：[`www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html`](https://www.kdnuggets.com/2021/11/dask-dataframe-not-pandas.html)
 
-[评论](#comments)
+评论
 
 **由 [Hugo Shi](https://www.linkedin.com/in/hugo-shi/)，Saturn Cloud 创始人**
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -38,7 +38,7 @@ Pandas 是为单个 Python 进程设计的库。分布式算法和数据结构�
 
 ## 将你的大问题拆分成许多小问题
 
-![](../Images/79cba8868646230a4c12f31222c81a79.png)
+![](img/79cba8868646230a4c12f31222c81a79.png)
 
 Dask DataFrame 由许多 Pandas DataFrame 组成。它非常擅长在这些 Pandas DataFrame 之间移动行，以便你可以在自己的函数中使用它们。这里的一般方法是以拆分-应用-合并模式来表达你的问题。
 
@@ -72,13 +72,13 @@ Dask DataFrame 由许多 Pandas DataFrame 组成。它非常擅长在这些 Pand
 
 ### 使用分组聚合
 
-![simple-gb-split-every](../Images/41a6dc52d77c34b5260975aaac758b31.png)
+![simple-gb-split-every](img/41a6dc52d77c34b5260975aaac758b31.png)
 
 Dask 有一个出色的 Pandas [分组聚合算法](https://saturncloud.io/docs/reference/dask_groupby_aggregations/)。实际算法相当复杂，但我们在 [文档](https://saturncloud.io/docs/reference/dask_groupby_aggregations/) 中有详细的描述。如果你的问题符合这种模式，你就找对地方了。Dask 在分组聚合的实现中使用了树形化简。你可能需要调整两个参数，`split_out` 控制结果最终分成多少个分区，`split_every` 帮助 Dask 计算树中的层数。可以根据数据的大小调整这两个参数，以确保不会耗尽内存。
 
 ### 使用 Dask 作为其他算法的容器
 
-![容器](../Images/9aa4eac21b6dc0d007c35f68b7520b29.png)
+![容器](img/9aa4eac21b6dc0d007c35f68b7520b29.png)
 
 许多库都内置了 Dask 集成。`dask-ml` 与 `scikit-learn` 集成。`cuML` 有多节点多 GPU 实现的许多常见 ML 算法。`tsfresh` 用于时间序列。`scanpy` 用于单细胞分析。`xgboost` 和 `lightgbm` 都有 Dask 支持的并行算法。
 
@@ -94,7 +94,7 @@ Dask 是扩展 Pandas 代码的绝佳方式。简单地将 Pandas DataFrame 转�
 
 **相关内容:**
 
-+   [Pandas 不够？这里有几个处理更大、更快数据的好替代方案](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)*   [如果你会写函数，你就可以使用 Dask](/2021/09/write-functions-use-dask.html)*   [在 Python 中设置你的数据科学和机器学习能力](/2020/08/data-science-machine-learning-capability-python.html)
++   Pandas 不够？这里有几个处理更大、更快数据的好替代方案*   如果你会写函数，你就可以使用 Dask*   在 Python 中设置你的数据科学和机器学习能力
 
     ### 更多相关话题
 

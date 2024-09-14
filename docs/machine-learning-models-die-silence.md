@@ -1,6 +1,6 @@
 # 为什么机器学习模型在沉默中消亡？
 
-> 原文：[https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)
+> 原文：[`www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html`](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)
 > 
 > 生命的意义因人而异，因日而异，因时而异。
 > 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -26,11 +26,11 @@
 
 大多数公司尝试但未能在业务操作中使用机器学习而不了解这一差异。他们在未能从这项技术中获得价值之前就很快放弃了。
 
-![为什么机器学习模型在沉默中消亡？](../Images/b3e3d3592e45f2a0e1dc2dfed0237ed4.png)
+![为什么机器学习模型在沉默中消亡？](img/b3e3d3592e45f2a0e1dc2dfed0237ed4.png)
 
 使用机器学习和人工智能来推动业务操作的公司越来越少。— 图片由[作者](https://linkedin.com/in/thuwarakesh)提供。
 
-根据美国人口普查局对2018年583,000家美国公司的[调查](https://conference.nber.org/conf_papers/f138039.pdf)，只有2.8%使用机器学习来提升他们的业务操作。约有[8.9%的受访者使用某种形式的AI](https://www.wired.com/story/ai-why-not-more-businesses-use/)，例如语音识别。
+根据美国人口普查局对 2018 年 583,000 家美国公司的[调查](https://conference.nber.org/conf_papers/f138039.pdf)，只有 2.8%使用机器学习来提升他们的业务操作。约有[8.9%的受访者使用某种形式的 AI](https://www.wired.com/story/ai-why-not-more-businesses-use/)，例如语音识别。
 
 ## 为什么机器学习模型在生产中表现会下降？
 
@@ -116,18 +116,18 @@
 
 你必须在用户开始报告产品体验不佳之前解决机器学习漂移。如果发生这种情况，它将迅速导致信任丧失和后续修复成本的显著增加。要有前瞻性！
 
-**[Thuwarakesh Murallie](https://www.linkedin.com/in/thuwarakesh/)** (**[@Thuwarakesh](https://twitter.com/Thuwarakesh)**) 是Stax, Inc.的首席数据科学家，也是Medium上的分析领域顶尖作者。Murallie分享了他在数据科学领域每天的探索。
+**[Thuwarakesh Murallie](https://www.linkedin.com/in/thuwarakesh/)** (**[@Thuwarakesh](https://twitter.com/Thuwarakesh)**) 是 Stax, Inc.的首席数据科学家，也是 Medium 上的分析领域顶尖作者。Murallie 分享了他在数据科学领域每天的探索。
 
 ### 更多相关话题
 
-+   [3个理由说明你应该使用线性回归模型而不是……](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [3 个理由说明你应该使用线性回归模型而不是……](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
 +   [机器学习没有为我的业务带来价值。为什么？](https://www.kdnuggets.com/2021/12/machine-learning-produce-value-business.html)
 
-+   [4个理由说明你不应该使用机器学习](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [4 个理由说明你不应该使用机器学习](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
-+   [为什么越来越多的开发者在他们的机器学习项目中使用Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
++   [为什么越来越多的开发者在他们的机器学习项目中使用 Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
-+   [KDnuggets™新闻 22:n05, 2月2日: 掌握机器学习的7个步骤……](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™新闻 22:n05, 2 月 2 日: 掌握机器学习的 7 个步骤……](https://www.kdnuggets.com/2022/n05.html)
 
 +   [机器学习算法 - 什么，为什么以及如何？](https://www.kdnuggets.com/2022/09/machine-learning-algorithms.html)

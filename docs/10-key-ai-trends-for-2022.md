@@ -1,22 +1,22 @@
-# 2022年及以后10个关键AI与数据分析趋势
+# 2022 年及以后 10 个关键 AI 与数据分析趋势
 
-> 原文：[https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
+> 原文：[`www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html`](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
 
-[评论](#comments)
+评论
 
 **作者：[David Pool](https://www.smarter.ai/)，[Smarter.ai](https://www.smarter.ai/) 的联合创始人及 CAIO**
 
-![](../Images/91ff2f53f9a49256f2f23c87bf7cfbfd.png)
+![](img/91ff2f53f9a49256f2f23c87bf7cfbfd.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 **为什么趋势对模型创作者重要？**
 
-我们对2022年及以后数据分析趋势的总结应该能给创作者一个关于行业发展方向的良好概念。
+我们对 2022 年及以后数据分析趋势的总结应该能给创作者一个关于行业发展方向的良好概念。
 
 通过保持对数据科学趋势的关注，并调整他们的模型以符合当前标准，创作者可以使他们的工作真正变得不可或缺。无论这些数据分析趋势是否激励你构思新的模型，还是更新你工具箱中的现有模型，完全取决于你自己。
 
@@ -36,33 +36,33 @@
 
 这将很快被深度模型工件所取代，如卷积网络、GAN 和自编码器，这些模型经过调整并应用于解决商业问题。这些模型旨在由商业分析师而非数据科学家团队安全使用。
 
-数据科学家以咨询工作形式出售他们的技能和经验，或将模型上传到代码库，这并不新鲜。然而，2022年将通过双面市场实现这些技能的货币化，使得单个模型可以进入全球市场。
+数据科学家以咨询工作形式出售他们的技能和经验，或将模型上传到代码库，这并不新鲜。然而，2022 年将通过双面市场实现这些技能的货币化，使得单个模型可以进入全球市场。
 
-想象一下AI版的Airbnb。
+想象一下 AI 版的 Airbnb。
 
-### 环境AI成为关注焦点
+### 环境 AI 成为关注焦点
 
 尽管大多数研究无可厚非地集中在推动复杂性边界上，但现实是，训练和运行复杂模型对环境的影响可能很大。
 
-预测到2040年，数据中心将占全球CO2排放量的15%，而2019年的一项研究论文《深度学习的能源考虑》发现，训练一个自然语言翻译模型的CO2排放量相当于四辆家庭轿车在其生命周期内的排放量。显然，训练越多，CO2释放越多。
+预测到 2040 年，数据中心将占全球 CO2 排放量的 15%，而 2019 年的一项研究论文《深度学习的能源考虑》发现，训练一个自然语言翻译模型的 CO2 排放量相当于四辆家庭轿车在其生命周期内的排放量。显然，训练越多，CO2 释放越多。
 
-随着对环境影响理解的加深，组织们正在探索减少碳足迹的方法。虽然我们现在可以利用AI提高数据中心的效率，但世界应当期待看到更多对简单模型的关注，这些简单模型在解决特定问题时能与复杂模型一样表现出色。
+随着对环境影响理解的加深，组织们正在探索减少碳足迹的方法。虽然我们现在可以利用 AI 提高数据中心的效率，但世界应当期待看到更多对简单模型的关注，这些简单模型在解决特定问题时能与复杂模型一样表现出色。
 
-实际上，当一个简单的贝叶斯模型使用的数据、训练和计算能力远远少于10层卷积神经网络却表现同样良好时，我们为何还要使用复杂的10层卷积神经网络？“模型效率”将成为环境AI的代名词，因为创作者们专注于构建简单、高效且易用的模型，而这些模型不会对地球造成巨大负担。
+实际上，当一个简单的贝叶斯模型使用的数据、训练和计算能力远远少于 10 层卷积神经网络却表现同样良好时，我们为何还要使用复杂的 10 层卷积神经网络？“模型效率”将成为环境 AI 的代名词，因为创作者们专注于构建简单、高效且易用的模型，而这些模型不会对地球造成巨大负担。
 
 ### 超参数化模型成为大型科技公司的超级游艇
 
 不同于穆斯克和贝索斯的太空科技竞赛，大型科技公司也有他们自己令人兴奋的竞赛：**谁拥有最大的深度学习模型**？
 
-![](../Images/9389962a5dbd807a920523666397ce74.png)
+![](img/9389962a5dbd807a920523666397ce74.png)
 
-在过去3年中，最大模型的参数数量从2018年的9400万增长到了2021年的惊人1.6万亿，谷歌、Facebook、微软、OpenAI等公司不断推升复杂性边界。
+在过去 3 年中，最大模型的参数数量从 2018 年的 9400 万增长到了 2021 年的惊人 1.6 万亿，谷歌、Facebook、微软、OpenAI 等公司不断推升复杂性边界。
 
 如今，这些数万亿的参数是基于语言的，允许数据科学家构建能够详细理解语言的模型，使模型能够撰写人类水平的文章、报告和翻译。它们甚至能编写代码、开发食谱，并理解上下文中的讽刺和讽刺。
 
-从2021年开始，我们可以期待视觉模型在无需庞大数据集的情况下实现类似的人类水平表现。例如，你可以只给幼儿展示一次巧克力，他们每次看到巧克力时都会认识它，而无需重新训练！
+从 2021 年开始，我们可以期待视觉模型在无需庞大数据集的情况下实现类似的人类水平表现。例如，你可以只给幼儿展示一次巧克力，他们每次看到巧克力时都会认识它，而无需重新训练！
 
-创作者们已经开始将这些模型应用于具体的机会。其中一个最为显著的例子来自游戏开发者Dungeon.AI，他们基于1970年代的风靡游戏《龙与地下城》开发了一系列幻想游戏。这些逼真的世界基于1750亿参数的模型GPT-3。我们预计创作者们会在特定领域看到更多这种活动，比如理解法律文本、撰写广告文案或将图像或视频分类到特定组中。
+创作者们已经开始将这些模型应用于具体的机会。其中一个最为显著的例子来自游戏开发者 Dungeon.AI，他们基于 1970 年代的风靡游戏《龙与地下城》开发了一系列幻想游戏。这些逼真的世界基于 1750 亿参数的模型 GPT-3。我们预计创作者们会在特定领域看到更多这种活动，比如理解法律文本、撰写广告文案或将图像或视频分类到特定组中。
 
 ### 数字协作工人的增强型工作队伍
 
@@ -70,7 +70,7 @@
 
 取而代之的是，企业选择了一种增强型劳动力模型，使人类和机器人并肩工作。这一技术进步使工作具有可扩展性和优先级，赋予人类以消费者为首要任务的能力。
 
-尽管创建增强型劳动力无疑是创作者需要关注的数据分析趋势之一，但部署正确的人工智能并解决自动化带来的任何初期问题是一个重大挑战。此外，面对统计数据称到2025年每三份工作中就有一份将被机器人取代，员工们自然对这一趋势不太热衷。[1]
+尽管创建增强型劳动力无疑是创作者需要关注的数据分析趋势之一，但部署正确的人工智能并解决自动化带来的任何初期问题是一个重大挑战。此外，面对统计数据称到 2025 年每三份工作中就有一份将被机器人取代，员工们自然对这一趋势不太热衷。[1]
 
 这些担忧在某种程度上是有效的，但也有一种有根据的信念认为，机器学习和自动化将仅仅提升员工的生活，使他们能够更快、更无不确定性地做出关键决策。尽管存在潜在缺点，增强型劳动力使个人可以花更多时间进行质量保证和客户服务，同时在复杂的业务问题出现时解决它们。[2]
 
@@ -78,11 +78,11 @@
 
 ### 改善网络安全
 
-随着大多数企业在疫情期间被迫投资于增加在线存在感，提高网络安全已成为2021年最重要的数据分析趋势之一。
+随着大多数企业在疫情期间被迫投资于增加在线存在感，提高网络安全已成为 2021 年最重要的数据分析趋势之一。
 
 单次网络攻击可以完全扰乱一个企业，但企业如何在没有巨大的成本和时间投入的情况下追踪潜在的失败点？这个燃眉之急的答案在于优秀的建模和对风险的理解。人工智能快速且准确的数据分析能力意味着可以进行更深入的风险建模和威胁感知。
 
-与人类不同，机器学习模型能够以快速的速度处理数据，提供保持威胁控制的洞察而无需太多外部输入。根据IBM对网络安全的人工智能分析，这项技术可以收集从恶意文件到不利IP地址的所有信息，使企业能够比以前快多达60倍地应对威胁。[3] 由于遏制一次数据泄露的平均成本为11.2亿美元，投资优秀的网络安全建模是企业不应忽视的事情。[4]
+与人类不同，机器学习模型能够以快速的速度处理数据，提供保持威胁控制的洞察而无需太多外部输入。根据 IBM 对网络安全的人工智能分析，这项技术可以收集从恶意文件到不利 IP 地址的所有信息，使企业能够比以前快多达 60 倍地应对威胁。[3] 由于遏制一次数据泄露的平均成本为 11.2 亿美元，投资优秀的网络安全建模是企业不应忽视的事情。[4]
 
 总之，通过保持网络安全以应对这一数据分析趋势，企业可以更好地保护其底线。
 
@@ -92,9 +92,9 @@
 
 实质上，这种人工智能方法几乎不需要编程，允许任何人“使用简单的构建块来根据需求定制应用程序。”[5]
 
-最近的趋势表明，数据科学家和工程师的就业市场极为积极，LinkedIn的就业报告称，在未来5年内，大约[全球将创造1.5亿个技术职位](https://business.linkedin.com/talent-solutions/resources/talent-acquisition/jobs-on-the-rise-us#digital)。考虑到超过83%的企业现在将人工智能视为保持相关性的关键因素，这也就不足为奇了。
+最近的趋势表明，数据科学家和工程师的就业市场极为积极，LinkedIn 的就业报告称，在未来 5 年内，大约[全球将创造 1.5 亿个技术职位](https://business.linkedin.com/talent-solutions/resources/talent-acquisition/jobs-on-the-rise-us#digital)。考虑到超过 83%的企业现在将人工智能视为保持相关性的关键因素，这也就不足为奇了。
 
-然而，在当前的环境下，对人工智能相关服务的强烈需求根本无法得到满足。更重要的是，超过60%的人工智能顶尖人才被科技和金融行业抢走，导致其他行业几乎没有潜在的员工可供使用。[6]
+然而，在当前的环境下，对人工智能相关服务的强烈需求根本无法得到满足。更重要的是，超过 60%的人工智能顶尖人才被科技和金融行业抢走，导致其他行业几乎没有潜在的员工可供使用。[6]
 
 因此，创建低代码和无代码人工智能解决方案，使企业能够在没有数据专家的情况下进行竞争，是保持行业开放和具有竞争力的关键。
 
@@ -102,9 +102,9 @@
 
 疫情使得云计算的转型成为近年来出现的最不可避免的数据分析趋势之一。面对比以往更多的数据，通过云端共享和管理数字服务已经被全球的企业迅速采纳。
 
-![](../Images/5d6452311507fd22500606c58b1cacd8.png)
+![](img/5d6452311507fd22500606c58b1cacd8.png)
 
-机器学习平台将数据带宽需求提升到一个新水平，但云计算的崛起使得完成工作更快，并具有公司级别的可见性。鉴于94%的企业已经使用云服务，并且公共云基础设施预计到2021年底将增长35%，未能利用云计算的公司将会被甩在后面。[7]
+机器学习平台将数据带宽需求提升到一个新水平，但云计算的崛起使得完成工作更快，并具有公司级别的可见性。鉴于 94%的企业已经使用云服务，并且公共云基础设施预计到 2021 年底将增长 35%，未能利用云计算的公司将会被甩在后面。[7]
 
 云计算能够保持数据安全、保护企业免受网络攻击并提升可扩展性，其好处多于坏处，使其成为创作者在未来几年需要关注的关键数据分析趋势之一。
 
@@ -140,7 +140,7 @@ Python 通过其简单的语言和语法提供更用户友好的编码方式，�
 
 ### 实时数据
 
-![](../Images/457a15051e1edc261cf2f82f33bd7c82.png)
+![](img/457a15051e1edc261cf2f82f33bd7c82.png)
 
 能够实时评估数据是近年来最令人兴奋的数据分析趋势之一。[情感分析和实时自动化测试](https://www.smarter.ai/blog/sentiment_evaluation) 在 2021 年变得越来越受企业欢迎，公司利用数据进展实时评估消费者行为。实时分析允许在问题出现时立即进行调整和更改，使企业更加主动。
 
@@ -166,29 +166,29 @@ Python 通过其简单的语言和语法提供更用户友好的编码方式，�
 
 随着可访问性、民主化和自动化成为数据行业未来的关键优先事项，创作者应当致力于保持其模型易于理解，并且在可能的情况下做到未来-proof。
 
-[1]  Joshua Barajas，《Gartner称智能机器人将在2025年前占据三分之一的工作岗位》，PBS，最后修改于2014年10月7日，https://www.pbs.org/newshour/economy/smart-robots-will-take-third-jobs-2025-gartner-says
+[1]  Joshua Barajas，《Gartner 称智能机器人将在 2025 年前占据三分之一的工作岗位》，PBS，最后修改于 2014 年 10 月 7 日，https://www.pbs.org/newshour/economy/smart-robots-will-take-third-jobs-2025-gartner-says
 
 [2]  Bill Cline, Maureen Brady, David Montes, Chris Foster, Catia Davim, KPMG，《增强型劳动力》，https://home.kpmg/xx/en/home/insights/2018/06/augmented-workforce-fs.html
 
-[3]  IBM，《更智能的网络安全中的人工智能》，最后修改于2021年10月4日，https://www.ibm.com/uk-en/security/artificial-intelligence
+[3]  IBM，《更智能的网络安全中的人工智能》，最后修改于 2021 年 10 月 4 日，https://www.ibm.com/uk-en/security/artificial-intelligence
 
-[4]  IBM公司，《超越炒作：你SOC中的人工智能》，2020年7月，https://www.ibm.com/downloads/cas/9EDONM6M
+[4]  IBM 公司，《超越炒作：你 SOC 中的人工智能》，2020 年 7 月，https://www.ibm.com/downloads/cas/9EDONM6M
 
-[5]  Anton Vaisbud，《企业中的低代码人工智能》，最后修改于2021年2月26日，https://towardsdatascience.com/low-code-ai-in-enterprise-benefits-and-use-cases-b9692ee13168
+[5]  Anton Vaisbud，《企业中的低代码人工智能》，最后修改于 2021 年 2 月 26 日，https://towardsdatascience.com/low-code-ai-in-enterprise-benefits-and-use-cases-b9692ee13168
 
-[6]  David Kelnar，《人工智能现状：2019年的分歧》，MMC Ventures，最后修改于2019年3月5日， [https://www.stateofai2019.com/introduction](https://www.stateofai2019.com/introduction)
+[6]  David Kelnar，《人工智能现状：2019 年的分歧》，MMC Ventures，最后修改于 2019 年 3 月 5 日， [`www.stateofai2019.com/introduction`](https://www.stateofai2019.com/introduction)
 
-[7]  Nick Galov，《2021年云计算采纳统计数据》，最后修改于2021年8月1日，https://hostingtribunal.com/blog/cloud-adoption-statistics/
+[7]  Nick Galov，《2021 年云计算采纳统计数据》，最后修改于 2021 年 8 月 1 日，https://hostingtribunal.com/blog/cloud-adoption-statistics/
 
-[8]  Shane Hill，《忘记“大数据”吧：真正创造价值的是小数据》，最后修改于2020年10月13日，https://techmonitor.ai/ai/small-data-not-big-data
+[8]  Shane Hill，《忘记“大数据”吧：真正创造价值的是小数据》，最后修改于 2020 年 10 月 13 日，https://techmonitor.ai/ai/small-data-not-big-data
 
-[9]  Boris Glavic，《大数据溯源：挑战与基准测试的影响》，《指定大数据基准》，2014年，第8163卷，摘要
+[9]  Boris Glavic，《大数据溯源：挑战与基准测试的影响》，《指定大数据基准》，2014 年，第 8163 卷，摘要
 
-[10]  IBM云教育，《深度学习》，最后修改于2020年5月1日，https://www.ibm.com/cloud/learn/deep-learning
+[10]  IBM 云教育，《深度学习》，最后修改于 2020 年 5 月 1 日，https://www.ibm.com/cloud/learn/deep-learning
 
-[11]  Susan Moore，《2019年Gartner十大数据与分析趋势》，最后修改于2019年11月5日，https://www.gartner.com/smarterwithgartner/gartner-top-10-data-analytics-trends
+[11]  Susan Moore，《2019 年 Gartner 十大数据与分析趋势》，最后修改于 2019 年 11 月 5 日，https://www.gartner.com/smarterwithgartner/gartner-top-10-data-analytics-trends
 
-[12]  Rhett Glauser，《什么是XOps？》，最后修改于2020年5月6日，https://saltproject.io/what-is-xops/
+[12]  Rhett Glauser，《什么是 XOps？》，最后修改于 2020 年 5 月 6 日，https://saltproject.io/what-is-xops/
 
 [原文](https://www.smarter.ai/blog/key-data-analysis-trends-for-2022-and-beyond)。经许可转载。
 
@@ -196,22 +196,22 @@ Python 通过其简单的语言和语法提供更用户友好的编码方式，�
 
 **相关：**
 
-+   [云机器学习透视：2021年的惊喜与2022年的预测](https://www.kdnuggets.com/2021/12/cloud-ml-perspective-surprises-2021-projections-2022.html)
++   [云机器学习透视：2021 年的惊喜与 2022 年的预测](https://www.kdnuggets.com/2021/12/cloud-ml-perspective-surprises-2021-projections-2022.html)
 
-+   [数据科学与分析行业2021年主要发展及2022年关键趋势](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [数据科学与分析行业 2021 年主要发展及 2022 年关键趋势](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [2021年主要发展与2022年人工智能、数据科学、机器学习技术的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年主要发展与 2022 年人工智能、数据科学、机器学习技术的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
 ### 更多相关主题
 
 +   [人工智能、分析、机器学习、数据科学、深度学习……](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [2021年数据科学与分析行业主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [2021 年数据科学与分析行业主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [2021年主要发展及2022年人工智能、数据科学的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年主要发展及 2022 年人工智能、数据科学的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
-+   [5个关键数据科学趋势及分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
++   [5 个关键数据科学趋势及分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
 
-+   [2022年及以后顶尖的人工智能与数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶尖的人工智能与数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
-+   [2022年数据科学、机器学习、人工智能及分析领域的重要发展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)
++   [2022 年数据科学、机器学习、人工智能及分析领域的重要发展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)

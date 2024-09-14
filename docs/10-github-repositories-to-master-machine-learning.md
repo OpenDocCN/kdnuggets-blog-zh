@@ -1,8 +1,8 @@
 # 掌握机器学习
 
-> 原文：[https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
+> 原文：[`www.kdnuggets.com/10-github-repositories-to-master-machine-learning`](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
 
-![掌握机器学习的 10 个 GitHub 仓库](../Images/7e833e7a197747081dd4329a93924f24.png)
+![掌握机器学习的 10 个 GitHub 仓库](img/7e833e7a197747081dd4329a93924f24.png)
 
 图像由 DALLE-3 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
 
 * * *
 
@@ -48,7 +48,7 @@
 
 **仓库：** [janishar/mit-deep-learning-book-pdf](https://github.com/janishar/mit-deep-learning-book-pdf)
 
-深度学习教材是一个全面的资源，旨在帮助学生和从业者进入机器学习领域，特别是深度学习。该书于2016年出版，提供了在驱动人工智能最近进展的机器学习技术方面的理论和实践基础。
+深度学习教材是一个全面的资源，旨在帮助学生和从业者进入机器学习领域，特别是深度学习。该书于 2016 年出版，提供了在驱动人工智能最近进展的机器学习技术方面的理论和实践基础。
 
 MIT 深度学习书籍的在线版本现在已经完成，并将继续免费在线提供，为人工智能教育的普及做出宝贵贡献。
 
@@ -74,23 +74,23 @@ MIT 深度学习书籍的在线版本现在已经完成，并将继续免费在�
 
 **仓库：** [josephmisiti/awesome-machine-learning](https://github.com/josephmisiti/awesome-machine-learning)
 
-极好的机器学习资源是一个精心策划的机器学习框架、库和软件的列表，适合那些希望探索该领域各种工具和技术的人。它涵盖了从C++到Go等多种编程语言的工具，并进一步划分为包括计算机视觉、强化学习、神经网络和通用机器学习在内的不同机器学习类别。
+极好的机器学习资源是一个精心策划的机器学习框架、库和软件的列表，适合那些希望探索该领域各种工具和技术的人。它涵盖了从 C++到 Go 等多种编程语言的工具，并进一步划分为包括计算机视觉、强化学习、神经网络和通用机器学习在内的不同机器学习类别。
 
 极好的机器学习资源是一个全面的资源，面向机器学习从业者和爱好者，涵盖了从数据处理和建模到模型部署和生产化的所有内容。该平台便于比较不同选项，帮助用户找到最适合其特定项目和目标的方案。此外，得益于社区的贡献，仓库始终保持最新，涵盖了各种编程语言中的最新机器学习软件。
 
-# 8\. 斯坦福CS 229机器学习VIP备忘单
+# 8\. 斯坦福 CS 229 机器学习 VIP 备忘单
 
 **仓库：** [afshinea/stanford-cs-229-machine-learning](https://github.com/afshinea/stanford-cs-229-machine-learning)
 
-这个仓库提供了斯坦福CS 229课程中涵盖的机器学习概念的简明参考和复习资料。它旨在将所有重要概念整合成VIP备忘单，涵盖监督学习、无监督学习和深度学习等主要主题。该仓库还包含VIP复习资料，突出概率、统计学、代数和微积分的先决条件。此外，还有一个超级VIP备忘单，将所有这些概念汇总成一个终极参考，以供学习者随时查阅。
+这个仓库提供了斯坦福 CS 229 课程中涵盖的机器学习概念的简明参考和复习资料。它旨在将所有重要概念整合成 VIP 备忘单，涵盖监督学习、无监督学习和深度学习等主要主题。该仓库还包含 VIP 复习资料，突出概率、统计学、代数和微积分的先决条件。此外，还有一个超级 VIP 备忘单，将所有这些概念汇总成一个终极参考，以供学习者随时查阅。
 
-通过将这些关键点、定义和技术概念结合在一起，目标是帮助学习者全面掌握CS 229中的机器学习主题。这些备忘单能将讲座和教科书材料中的重要概念总结成简明的参考，以备技术面试之用。
+通过将这些关键点、定义和技术概念结合在一起，目标是帮助学习者全面掌握 CS 229 中的机器学习主题。这些备忘单能将讲座和教科书材料中的重要概念总结成简明的参考，以备技术面试之用。
 
 # 9\. 机器学习面试
 
 **仓库：** [khangich/machine-learning-interview](https://github.com/khangich/machine-learning-interview)
 
-它提供了一个全面的学习指南和资源，以帮助准备在Facebook、Amazon、Apple、Google、Microsoft等大型科技公司进行的机器学习工程和数据科学面试。
+它提供了一个全面的学习指南和资源，以帮助准备在 Facebook、Amazon、Apple、Google、Microsoft 等大型科技公司进行的机器学习工程和数据科学面试。
 
 **涵盖的关键主题：**
 
@@ -176,4 +176,4 @@ MIT 深度学习书籍的在线版本现在已经完成，并将继续免费在�
 
 +   [掌握 SQL 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-sql)
 
-+   [掌握数据科学的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-data-science)
++   [掌握数据科学的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-data-science)

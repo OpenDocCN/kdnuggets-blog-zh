@@ -1,30 +1,30 @@
-# 数据科学家解释的P值
+# 数据科学家解释的 P 值
 
-> 原文：[https://www.kdnuggets.com/2019/07/p-values-explained-data-scientist.html](https://www.kdnuggets.com/2019/07/p-values-explained-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2019/07/p-values-explained-data-scientist.html`](https://www.kdnuggets.com/2019/07/p-values-explained-data-scientist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Admond Lee](https://www.linkedin.com/in/admond1994/)，美光科技 / AI Time Journal / Tech in Asia**
 
-我记得在我[第一次在CERN的暑期实习](https://towardsdatascience.com/my-journey-from-physics-into-data-science-5d578d0f9aa6?source=post_page---------------------------)时，大多数人还在谈论[希格斯玻色子的发现](https://home.cern/science/physics/higgs-boson?source=post_page---------------------------)，确认它达到了[“五个西格玛”阈值](https://blogs.scientificamerican.com/observations/five-sigmawhats-that/?source=post_page---------------------------)**（即p值为0.0000003）。**
+我记得在我[第一次在 CERN 的暑期实习](https://towardsdatascience.com/my-journey-from-physics-into-data-science-5d578d0f9aa6?source=post_page---------------------------)时，大多数人还在谈论[希格斯玻色子的发现](https://home.cern/science/physics/higgs-boson?source=post_page---------------------------)，确认它达到了[“五个西格玛”阈值](https://blogs.scientificamerican.com/observations/five-sigmawhats-that/?source=post_page---------------------------)**（即 p 值为 0.0000003）。**
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
-当时我对p值、假设检验甚至统计显著性一无所知。
+当时我对 p 值、假设检验甚至统计显著性一无所知。
 
 你说得对。
 
-我去谷歌搜索了“p值”这个词，在[维基百科](https://en.wikipedia.org/wiki/P-value?source=post_page---------------------------)上的内容让我更加困惑了……
+我去谷歌搜索了“p 值”这个词，在[维基百科](https://en.wikipedia.org/wiki/P-value?source=post_page---------------------------)上的内容让我更加困惑了……
 
 > 在统计假设检验中，***p*-值** 或 **概率值** 是对于给定的统计模型，当零假设为真时，统计摘要（如两个比较组之间样本均值差的绝对值）大于或等于实际观察结果的概率。
 > 
@@ -32,21 +32,21 @@
 
 干得好，维基百科。
 
-好吧，我最终没能真正理解p值的含义。
+好吧，我最终没能真正理解 p 值的含义。
 
-直到现在，进入数据科学领域后，我才开始欣赏p值的意义以及它如何作为某些实验决策工具的一部分。
+直到现在，进入数据科学领域后，我才开始欣赏 p 值的意义以及它如何作为某些实验决策工具的一部分。
 
-因此，我决定**在本文中解释p值以及它们如何在假设检验中使用**，希望能给你对p值有更好的直观理解。
+因此，我决定**在本文中解释 p 值以及它们如何在假设检验中使用**，希望能给你对 p 值有更好的直观理解。
 
-虽然我们不能跳过其他概念的基础理解和p值的定义，但我保证我会以直观的方式解释，而不会用我所遇到的所有技术术语来轰炸你。
+虽然我们不能跳过其他概念的基础理解和 p 值的定义，但我保证我会以直观的方式解释，而不会用我所遇到的所有技术术语来轰炸你。
 
-本文共有四个部分，为你提供从构建假设检验到理解p值以及使用这些来指导决策的完整图景。我强烈建议你通读所有部分，以详细理解p值：
+本文共有四个部分，为你提供从构建假设检验到理解 p 值以及使用这些来指导决策的完整图景。我强烈建议你通读所有部分，以详细理解 p 值：
 
 1.  **假设检验**
 
 1.  **正态分布**
 
-1.  **什么是p值？**
+1.  **什么是 p 值？**
 
 1.  **统计显著性**
 
@@ -56,35 +56,35 @@
 
 ### 1. 假设检验
 
-![图](../Images/ae12ffbffaab7efb5f59fe5e0396ea4c.png)
+![图](img/ae12ffbffaab7efb5f59fe5e0396ea4c.png)
 
 假设检验
 
-在讨论p值的含义之前，让我们先了解**假设检验**，其中**p值**用于确定结果的**统计显著性**。
+在讨论 p 值的含义之前，让我们先了解**假设检验**，其中**p 值**用于确定结果的**统计显著性**。
 
 我们的终极目标是确定结果的统计显著性。
 
-统计显著性建立在这3个简单的概念上：
+统计显著性建立在这 3 个简单的概念上：
 
 +   假设检验
 
 +   正态分布
 
-+   p值
++   p 值
 
 [**假设检验**](https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/hypothesis-testing/?source=post_page---------------------------#HTMean)用于检验关于总体的声明的有效性（*零假设*）。如果零假设被认为不成立，那么***备择假设***就是你会相信的。
 
 换句话说，我们会提出一个声明（*零假设*），并使用样本数据来检验该声明是否有效。如果声明无效，我们将选择我们的*备择假设*。就是这么简单。
 
-为了判断声明是否有效，我们会使用p值来衡量证据的强度，以查看其是否具有统计学意义。如果证据支持*备择假设*，那么我们将拒绝*零假设*并接受*备择假设*。这将在后续部分进一步解释。
+为了判断声明是否有效，我们会使用 p 值来衡量证据的强度，以查看其是否具有统计学意义。如果证据支持*备择假设*，那么我们将拒绝*零假设*并接受*备择假设*。这将在后续部分进一步解释。
 
 让我们用一个例子来更清楚地说明这个概念，这个例子将在本文中用于其他概念。
 
-???? ???? [**示例**](https://www.dummies.com/education/math/statistics/what-a-p-value-tells-you-about-statistical-data/?source=post_page---------------------------)**：**假设一个披萨店声称他们的送餐时间平均为30分钟或更少，但你认为超过了这个时间。因此你进行假设检验，并随机抽取一些送餐时间来检验这一声明：
+???? ???? [**示例**](https://www.dummies.com/education/math/statistics/what-a-p-value-tells-you-about-statistical-data/?source=post_page---------------------------)**：**假设一个披萨店声称他们的送餐时间平均为 30 分钟或更少，但你认为超过了这个时间。因此你进行假设检验，并随机抽取一些送餐时间来检验这一声明：
 
-+   **零假设**——平均送餐时间为30分钟或更少
++   **零假设**——平均送餐时间为 30 分钟或更少
 
-+   **备择假设**——平均送餐时间超过30分钟
++   **备择假设**——平均送餐时间超过 30 分钟
 
 这里的目标是确定哪种声明——零假设还是备择假设——更有力地被样本数据支持。
 
@@ -94,7 +94,7 @@
 
 ### 2\. 正态分布
 
-![图示](../Images/bfb1c66e79a92cbe28a6a516a1034fc0.png)
+![图示](img/bfb1c66e79a92cbe28a6a516a1034fc0.png)
 
 [均值 μ 和标准差 σ 的正态分布](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2?source=post_page---------------------------)
 
@@ -116,37 +116,37 @@
 
 很好。现在你可能在想，“正态分布如何应用于我们之前的假设检验？”
 
-由于我们使用Z检验进行假设检验，我们需要计算[**Z分数**](https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/z-score/?source=post_page---------------------------)（用于我们的[**检验统计量**](https://www.statisticshowto.datasciencecentral.com/test-statistic/?source=post_page---------------------------)），它是数据点与均值的标准差数量。在我们的例子中，**每个数据点是我们收集的比萨配送时间。**
+由于我们使用 Z 检验进行假设检验，我们需要计算[**Z 分数**](https://www.statisticshowto.datasciencecentral.com/probability-and-statistics/z-score/?source=post_page---------------------------)（用于我们的[**检验统计量**](https://www.statisticshowto.datasciencecentral.com/test-statistic/?source=post_page---------------------------)），它是数据点与均值的标准差数量。在我们的例子中，**每个数据点是我们收集的比萨配送时间。**
 
-![图](../Images/aef160c7dd05964d17864e627f425875.png)
+![图](img/aef160c7dd05964d17864e627f425875.png)
 
-[计算Z分数的公式](https://www.thoughtco.com/z-scores-worksheet-3126534?source=post_page---------------------------)用于每个数据点
+[计算 Z 分数的公式](https://www.thoughtco.com/z-scores-worksheet-3126534?source=post_page---------------------------)用于每个数据点
 
-请注意，当我们计算了每个比萨配送时间的所有Z分数并绘制了如下的**标准正态分布**曲线时，X轴上的单位将从分钟变为标准差单位，因为我们已经**通过减去均值并除以标准差来标准化了变量**（见上面的公式）。
+请注意，当我们计算了每个比萨配送时间的所有 Z 分数并绘制了如下的**标准正态分布**曲线时，X 轴上的单位将从分钟变为标准差单位，因为我们已经**通过减去均值并除以标准差来标准化了变量**（见上面的公式）。
 
 查看标准正态分布曲线是有用的，因为我们可以将测试结果与标准化的标准差单位的“正常”人群进行比较，尤其是当我们有一个不同单位的变量时。
 
-![图](../Images/2aed10885b0d674fdb7567eefe748801.png)
+![图](img/2aed10885b0d674fdb7567eefe748801.png)
 
-[Z分数的标准正态分布](https://mathbitsnotebook.com/Algebra2/Statistics/STzScores.html?source=post_page---------------------------)
+[Z 分数的标准正态分布](https://mathbitsnotebook.com/Algebra2/Statistics/STzScores.html?source=post_page---------------------------)
 
-Z分数可以告诉我们总体数据相对于平均人群的位置。
+Z 分数可以告诉我们总体数据相对于平均人群的位置。
 
-我喜欢[Will Koehrsen](https://towardsdatascience.com/u/e2f299e30cb9?source=post_page---------------------------)这样描述——**Z分数越高或越低，结果发生的可能性越小，结果越有意义。**
+我喜欢[Will Koehrsen](https://towardsdatascience.com/u/e2f299e30cb9?source=post_page---------------------------)这样描述——**Z 分数越高或越低，结果发生的可能性越小，结果越有意义。**
 
 > 但是，什么程度的高（或低）被认为足够令人信服，以量化我们的结果有多么有意义？
 
 ### ????????**重点**
 
-这就是我们需要最后一块拼图来解决难题的地方——**p值**，并根据我们设定的[**显著性水平**（也称为*alpha*）](https://blog.minitab.com/blog/adventures-in-statistics-2/understanding-hypothesis-tests-significance-levels-alpha-and-p-values-in-statistics?source=post_page---------------------------)来检查我们的结果是否具有统计显著性，这些显著性水平是在*我们开始实验之前*设定的。
+这就是我们需要最后一块拼图来解决难题的地方——**p 值**，并根据我们设定的[**显著性水平**（也称为*alpha*）](https://blog.minitab.com/blog/adventures-in-statistics-2/understanding-hypothesis-tests-significance-levels-alpha-and-p-values-in-statistics?source=post_page---------------------------)来检查我们的结果是否具有统计显著性，这些显著性水平是在*我们开始实验之前*设定的。
 
-### 3. 什么是P值？
+### 3. 什么是 P 值？
 
-p值由[Cassie Kozyrkov](https://towardsdatascience.com/u/2fccb851bb5e?source=post_page---------------------------)精彩解释
+p 值由[Cassie Kozyrkov](https://towardsdatascience.com/u/2fccb851bb5e?source=post_page---------------------------)精彩解释
 
-最后……我们谈论的是p值！
+最后……我们谈论的是 p 值！
 
-所有前面的解释都是为了铺垫，引导我们到这个p值。我们需要这些前置的背景和步骤，以便理解这个神秘（实际上并不那么神秘的）p值以及它如何影响我们对假设检验的决策。
+所有前面的解释都是为了铺垫，引导我们到这个 p 值。我们需要这些前置的背景和步骤，以便理解这个神秘（实际上并不那么神秘的）p 值以及它如何影响我们对假设检验的决策。
 
 如果你已经读到这里，继续阅读。因为这一部分是所有部分中最激动人心的！
 
@@ -226,7 +226,7 @@ p 值越低，结果越有意义，因为它越不容易被噪声造成。
 
 1.  如果检验统计量的值低于 alpha 水平的 Z 分数（或 p 值低于 alpha 值），则拒绝零假设。否则，不拒绝零假设。
 
-![图示](../Images/67e822b367df37ef15d41a9f2ae905f7.png)
+![图示](img/67e822b367df37ef15d41a9f2ae905f7.png)
 
 计算第 5 步的检验统计量的公式
 
@@ -234,7 +234,7 @@ p 值越低，结果越有意义，因为它越不容易被噪声造成。
 
 ### 最后想法
 
-![图示](../Images/6bc92178e009d265ec545d2ff5e2384b.png)
+![图示](img/6bc92178e009d265ec545d2ff5e2384b.png)
 
 [(来源)](https://unsplash.com/photos/JfolIjRnveY?source=post_page---------------------------)
 
@@ -242,13 +242,13 @@ p 值越低，结果越有意义，因为它越不容易被噪声造成。
 
 这里有很多内容需要消化，不是吗？
 
-我不能否认，p值对于很多人来说本质上是令人困惑的，我花了相当长的时间才真正理解和欣赏p值的含义及其在我们作为数据科学家的决策过程中如何应用。
+我不能否认，p 值对于很多人来说本质上是令人困惑的，我花了相当长的时间才真正理解和欣赏 p 值的含义及其在我们作为数据科学家的决策过程中如何应用。
 
-但不要过于依赖p值，因为它们仅在整个决策过程中起到一小部分的辅助作用。
+但不要过于依赖 p 值，因为它们仅在整个决策过程中起到一小部分的辅助作用。
 
-我希望你觉得p值的解释直观且有助于理解p值的真正含义及其在假设检验中的应用。
+我希望你觉得 p 值的解释直观且有助于理解 p 值的真正含义及其在假设检验中的应用。
 
-归根结底，p值的计算是简单的。困难的部分在于我们想要解读假设检验中的p值。希望现在困难的部分对你来说至少稍微容易一点。
+归根结底，p 值的计算是简单的。困难的部分在于我们想要解读假设检验中的 p 值。希望现在困难的部分对你来说至少稍微容易一点。
 
 如果你想学习更多关于统计学的知识，我强烈推荐你阅读这本书（我现在正在读！）——[**数据科学家的实用统计学**](https://amzn.to/2l9vhF1?source=post_page---------------------------)，专门为数据科学家编写，以帮助理解统计学的基本概念。
 
@@ -260,11 +260,11 @@ p 值越低，结果越有意义，因为它越不容易被噪声造成。
 
 **相关内容：**
 
-+   [你应该关注的十大数据科学领袖](/2019/07/top-10-data-science-leaders.html)
++   你应该关注的十大数据科学领袖
 
-+   [如何进入数据科学领域：针对有志数据科学家的终极问答指南](/2019/04/data-science-ultimate-questions-answers-aspiring-data-scientists.html)
++   如何进入数据科学领域：针对有志数据科学家的终极问答指南
 
-+   [简单而实用的数据清理代码](/2019/02/simple-yet-practical-data-cleaning-codes.html)
++   简单而实用的数据清理代码
 
 ### 更多相关主题
 
@@ -272,7 +272,7 @@ p 值越低，结果越有意义，因为它越不容易被噪声造成。
 
 +   [使用 SHAP 值提高机器学习模型的可解释性](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)
 
-+   [机器学习与大脑不同 第4部分：神经元的…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)
++   [机器学习与大脑不同 第四部分：神经元的…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)
 
 +   [数据科学家、数据工程师及其他数据职业解析](https://www.kdnuggets.com/2021/05/data-scientist-data-engineer-data-careers-explained.html)
 

@@ -1,8 +1,8 @@
 # 使用 RNN 生成文本的 4 行代码
 
-> 原文：[https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html](https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html)
+> 原文：[`www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html`](https://www.kdnuggets.com/2018/06/generating-text-rnn-4-lines-code.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 生成文本是一个对机器学习和自然语言处理初学者来说似乎很有趣的项目，但它也相当令人畏惧。或者，至少对我来说是这样。
 
@@ -14,19 +14,19 @@
 
 textgenrnn 基于 Keras 和 TensorFlow，可以用于生成字符级和词级文本（字符级是默认的）。网络架构使用了注意力加权和跳跃嵌入来加速训练和提高质量，并允许调整多个超参数，如 RNN 大小、RNN 层数以及是否包含双向 RNN。你可以在其 [Github 仓库](https://github.com/minimaxir/textgenrnn) 或这篇 [介绍博客文章](http://minimaxir.com/2018/05/text-neural-networks/) 中阅读更多关于 textgenrnn 及其功能和架构的内容。
 
-![图片](../Images/17a900e37b077effb7be6c76c3d7527a.png)
+![图片](img/17a900e37b077effb7be6c76c3d7527a.png)
 
 由于文本生成的“Hello, World!”（至少在我看来）似乎是生成特朗普的推文，我们就用这个吧。textgenrnn 的默认预训练模型可以很容易地在新文本上进行训练——虽然你也可以使用 textgenrnn 训练一个新模型（只需将 new_model=True 添加到其任何训练函数中）——由于我们想要快速生成推文，我们就这样做吧。
 
 ### 获取数据
 
-我从[特朗普推特档案](http://www.trumptwitterarchive.com/archive)中获取了一些唐纳德·特朗普的推文——2014年1月1日至2018年6月11日（在撰写时的前一天），这明显包括了他作为美国总统就职前后的推文。这个网站可以轻松查询和下载总统的推文。我只提取了该日期范围内的推文文本，因为我不关心任何元数据，并将其保存到一个名为`trump-tweets.txt`的文本文件中。
+我从[特朗普推特档案](http://www.trumptwitterarchive.com/archive)中获取了一些唐纳德·特朗普的推文——2014 年 1 月 1 日至 2018 年 6 月 11 日（在撰写时的前一天），这明显包括了他作为美国总统就职前后的推文。这个网站可以轻松查询和下载总统的推文。我只提取了该日期范围内的推文文本，因为我不关心任何元数据，并将其保存到一个名为`trump-tweets.txt`的文本文件中。
 
-[![图片](../Images/05ded0f38c126d07de8ca31bff7f3f09.png)](https://image.ibb.co/mdzied/trump_tweets_archive.jpg)
+![图片](https://image.ibb.co/mdzied/trump_tweets_archive.jpg)
 
 ### 训练模型
 
-让我们看看使用 textgenrnn 生成文本有多简单。以下4行代码是我们需要的所有内容，用于导入库、创建文本生成对象、在`trump-tweets.txt`文件上训练模型10个周期，然后生成一些示例推文。
+让我们看看使用 textgenrnn 生成文本有多简单。以下 4 行代码是我们需要的所有内容，用于导入库、创建文本生成对象、在`trump-tweets.txt`文件上训练模型 10 个周期，然后生成一些示例推文。
 
 ```py
 from textgenrnn import textgenrnn
@@ -36,7 +36,7 @@ textgen.generate(5)
 
 ```
 
-大约30分钟后，以下是生成的内容（在第10个周期）：
+大约 30 分钟后，以下是生成的内容（在第 10 个周期）：
 
 ```py
 
@@ -51,7 +51,7 @@ New Hampshire Trump Int'l Hotel Leadership Barrier Lou Clinton is a forever pers
 Join me in Maryland at 7:00 A.M. and happened to the WALL and be true the longer of the same sign into the Fake News Media will be a great honor to serve that the Republican Party will be a great legal rate the media with the Best Republican Party and the American people that will be the bill by a
 ```
 
-撇开政治不谈，鉴于我们只使用了约12K条推文进行仅10个周期的训练，这些生成的推文并不……糟糕。想试试[温度](https://www.quora.com/What-is-Temperature-in-LSTM)（textgenrnn 的默认值为0.5）来生成一些更具创意的推文吗？我们来试试吧：
+撇开政治不谈，鉴于我们只使用了约 12K 条推文进行仅 10 个周期的训练，这些生成的推文并不……糟糕。想试试[温度](https://www.quora.com/What-is-Temperature-in-LSTM)（textgenrnn 的默认值为 0.5）来生成一些更具创意的推文吗？我们来试试吧：
 
 ```py
 textgen.generate(5, temperature=0.9)
@@ -108,21 +108,21 @@ Thank you @TheBrodyFile tonight at 8:00 A.M. Enjoy!
 
 **相关**：
 
-+   [5个你不应该忽视的机器学习项目，2018年6月](/2018/06/5-machine-learning-projects-overlook-jun-2018.html)
++   5 个你不应该忽视的机器学习项目，2018 年 6 月
 
-+   [使用 spaCy 进行自然语言处理入门](/2018/05/getting-started-spacy-natural-language-processing.html)
++   使用 spaCy 进行自然语言处理入门
 
-+   [了解名人最常发布什么内容](/2017/10/what-celebrities-tweet-about-most.html)
++   了解名人最常发布什么内容
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快你在网络安全领域的职业发展。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快你在网络安全领域的职业发展。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -130,12 +130,12 @@ Thank you @TheBrodyFile tonight at 8:00 A.M. Enjoy!
 
 +   [停止学习数据科学以寻找目标，并找到目标再……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [9亿美元的AI失败，深入剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元的 AI 失败，深入剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每位数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

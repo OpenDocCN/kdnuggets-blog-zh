@@ -1,12 +1,12 @@
 # 使用 PyTorch 和 Ray 开始分布式机器学习
 
-> 原文：[https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
+> 原文：[`www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html`](https://www.kdnuggets.com/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
 
-[评论](#comments)
+评论
 
 **由 [Michael Galarnyk](https://twitter.com/GalarnykMichael)、[Richard Liaw](https://twitter.com/richliaw) 和 [Robert Nishihara](https://twitter.com/robertnishihara) 编写**
 
-![文章图片](../Images/2e652136f9d14830daf0b1e7bcade4e5.png)
+![文章图片](img/2e652136f9d14830daf0b1e7bcade4e5.png)
 
 今天的机器学习 *需要* 分布式计算。无论你是在 [训练网络](https://www.youtube.com/watch?v=rEB3NPUoxMM)、[调整超参数](https://docs.ray.io/en/master/tune/)、[服务模型](https://docs.ray.io/en/master/serve/) 还是 [处理数据](https://medium.com/distributed-computing-with-ray/data-processing-support-in-ray-ae8da34dce7e)，机器学习计算密集型，且在没有集群的情况下可能会变得极其缓慢。 [Ray](https://ray.io/) 是一个流行的分布式 Python 框架，可以与 PyTorch 配合使用，迅速扩展机器学习应用程序。
 
@@ -14,7 +14,7 @@
 
 ### 什么是 Ray
 
-![文章图片](../Images/0c7d3372f00ec70dbc844670bec0f7e5.png)
+![文章图片](img/0c7d3372f00ec70dbc844670bec0f7e5.png)
 
 Ray 是一个开源的并行和分布式 Python 库。上图显示了从高层次来看，Ray 生态系统包括三个部分：核心 Ray 系统、用于机器学习的可扩展库（包括原生和第三方）以及 [在任何集群或云提供商上启动集群的工具](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208)。
 
@@ -34,43 +34,43 @@ Ray 是一个开源的并行和分布式 Python 库。上图显示了从高层�
 
 **RaySGD**
 
-![用于帖子图像](../Images/4f506a6863cbb7f15269e461d4ae661a.png)
+![用于帖子图像](img/4f506a6863cbb7f15269e461d4ae661a.png)
 
-在p3dn.24xlarge实例上比较PyTorch的DataParallel与Ray（Ray在底层使用PyTorch的Distributed DataParallel）。 [图片来源](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220)。
+在 p3dn.24xlarge 实例上比较 PyTorch 的 DataParallel 与 Ray（Ray 在底层使用 PyTorch 的 Distributed DataParallel）。 [图片来源](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220)。
 
-RaySGD是一个为数据并行训练提供分布式训练包装器的库。例如，[RaySGD TorchTrainer](https://docs.ray.io/en/master/raysgd/raysgd_pytorch.html) 是一个围绕torch.distributed.launch的包装器。它提供了一个Python API，以便轻松地将分布式训练集成到更大的Python应用程序中，而不是需要将训练代码包装在bash脚本中。
+RaySGD 是一个为数据并行训练提供分布式训练包装器的库。例如，[RaySGD TorchTrainer](https://docs.ray.io/en/master/raysgd/raysgd_pytorch.html) 是一个围绕 torch.distributed.launch 的包装器。它提供了一个 Python API，以便轻松地将分布式训练集成到更大的 Python 应用程序中，而不是需要将训练代码包装在 bash 脚本中。
 
 该库的一些其他优点包括：
 
-+   易于使用：您可以扩展PyTorch的原生DistributedDataParallel，而无需监控单独的节点。
++   易于使用：您可以扩展 PyTorch 的原生 DistributedDataParallel，而无需监控单独的节点。
 
-+   可扩展性：您可以向上或向下扩展。从单个CPU开始。通过更改2行代码，扩展到多节点、多CPU或多GPU集群。
++   可扩展性：您可以向上或向下扩展。从单个 CPU 开始。通过更改 2 行代码，扩展到多节点、多 CPU 或多 GPU 集群。
 
-+   加速训练：内置支持NVIDIA Apex的混合精度训练。
++   加速训练：内置支持 NVIDIA Apex 的混合精度训练。
 
 +   故障容错：支持在云机器被抢占时自动恢复。
 
 +   兼容性：与其他库如 [Ray Tune](https://docs.ray.io/en/master/tune/index.html) 和 [Ray Serve](https://docs.ray.io/en/master/serve/) 的无缝集成。
 
-您可以通过安装Ray（pip install -U ray torch）并运行下面的代码来开始使用TorchTrainer：
+您可以通过安装 Ray（pip install -U ray torch）并运行下面的代码来开始使用 TorchTrainer：
 
-该脚本将下载CIFAR10，并使用ResNet18模型进行图像分类。通过更改一个参数(num_workers=N)，可以利用多个GPU。
+该脚本将下载 CIFAR10，并使用 ResNet18 模型进行图像分类。通过更改一个参数(num_workers=N)，可以利用多个 GPU。
 
-如果您想了解更多关于RaySGD以及如何在集群中扩展PyTorch训练的信息，请查看这篇 [博客文章](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220)。
+如果您想了解更多关于 RaySGD 以及如何在集群中扩展 PyTorch 训练的信息，请查看这篇 [博客文章](https://medium.com/distributed-computing-with-ray/faster-and-cheaper-pytorch-with-raysgd-a5a44d4fd220)。
 
 **Ray Tune**
 
-![用于帖子图像](../Images/b430f66bf5d49d073a678c7a63666bb1.png)
+![用于帖子图像](img/b430f66bf5d49d073a678c7a63666bb1.png)
 
-Ray Tune对优化算法（如上所示的Population Based Training）的实现 [可以与PyTorch一起使用](https://docs.ray.io/en/master/tune/tutorials/tune-advanced-tutorial.html)，以获得更高性能的模型。图片来自 [Deepmind](https://deepmind.com/blog/article/population-based-training-neural-networks)。
+Ray Tune 对优化算法（如上所示的 Population Based Training）的实现 [可以与 PyTorch 一起使用](https://docs.ray.io/en/master/tune/tutorials/tune-advanced-tutorial.html)，以获得更高性能的模型。图片来自 [Deepmind](https://deepmind.com/blog/article/population-based-training-neural-networks)。
 
-[Ray Tune](https://docs.ray.io/en/master/tune/index.html) 是一个用于实验执行和超参数调优的Python库，适用于任何规模。一些库的优点包括：
+[Ray Tune](https://docs.ray.io/en/master/tune/index.html) 是一个用于实验执行和超参数调优的 Python 库，适用于任何规模。一些库的优点包括：
 
-+   在不到10行代码的情况下启动多节点 [分布式超参数搜索](https://docs.ray.io/en/master/tune/tutorials/tune-distributed.html#tune-distributed) 的能力。
++   在不到 10 行代码的情况下启动多节点 [分布式超参数搜索](https://docs.ray.io/en/master/tune/tutorials/tune-distributed.html#tune-distributed) 的能力。
 
-+   对每个主要机器学习框架的支持 [包括PyTorch](https://pytorch.org/tutorials/beginner/hyperparameter_tuning_tutorial.html)。
++   对每个主要机器学习框架的支持 [包括 PyTorch](https://pytorch.org/tutorials/beginner/hyperparameter_tuning_tutorial.html)。
 
-+   对GPU的一级支持。
++   对 GPU 的一级支持。
 
 +   自动管理检查点和日志记录到 [TensorBoard](https://docs.ray.io/en/master/tune/user-guide.html#tune-logging)。
 
@@ -82,7 +82,7 @@ Ray Tune对优化算法（如上所示的Population Based Training）的实现 [
 
 **Ray Serve**
 
-![Image for post](../Images/0b9b606dabee68b96e923ccb4b9d7d5a.png)
+![Image for post](img/0b9b606dabee68b96e923ccb4b9d7d5a.png)
 
 Ray Serve 不仅可以单独用于模型服务，还可以用于[ 扩展其他服务工具，如 FastAPI](https://medium.com/distributed-computing-with-ray/how-to-scale-up-your-fastapi-application-using-ray-serve-c9a7b69e786)。
 
@@ -98,7 +98,7 @@ Ray Serve 不仅可以单独用于模型服务，还可以用于[ 扩展其他�
 
 **RLlib**
 
-![Image for post](../Images/edfac255c7cffdb09e6501e2860a316c.png)
+![Image for post](img/edfac255c7cffdb09e6501e2860a316c.png)
 
 RLlib 提供了自定义训练几乎所有方面的方法，包括神经网络模型、动作分布、策略定义、环境以及样本收集过程。
 
@@ -114,7 +114,7 @@ RLlib 提供了自定义训练几乎所有方面的方法，包括神经网络�
 
 **Cluster Launcher**
 
-![Image for post](../Images/0bc773ad98d89810da54245138a3805e.png)
+![Image for post](img/0bc773ad98d89810da54245138a3805e.png)
 
 Ray 集群启动器简化了在任何集群或云提供商上启动和扩展的过程。
 
@@ -130,7 +130,7 @@ Ray 集群启动器简化了在任何集群或云提供商上启动和扩展的�
 
 ### 结论
 
-![Image for post](../Images/b84fa86cf0d0c2f8285a4409d1178478.png)
+![Image for post](img/b84fa86cf0d0c2f8285a4409d1178478.png)
 
 Ray 为 [Ant Group 的 Fusion Engine](https://youtu.be/Wwv9YNlXx0Q) 提供了分布式计算基础。
 
@@ -140,9 +140,9 @@ Ray 为 [Ant Group 的 Fusion Engine](https://youtu.be/Wwv9YNlXx0Q) 提供了分
 
 **相关：**
 
-+   [如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)
++   如何加速 Scikit-Learn 模型训练
 
-+   [训练 sklearn 快速 100 倍](/2019/09/train-sklearn-100x-faster.html)
++   训练 sklearn 快速 100 倍
 
 +   [使用 Dask 和 PyTorch 的计算机视觉](https://medium.com/distributed-computing-with-ray/how-to-scale-python-on-every-major-cloud-provider-12b3bde01208)
 
@@ -150,11 +150,11 @@ Ray 为 [Ant Group 的 Fusion Engine](https://youtu.be/Wwv9YNlXx0Q) 提供了分
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 

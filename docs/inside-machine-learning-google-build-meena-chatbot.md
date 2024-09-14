@@ -1,22 +1,22 @@
-# 了解谷歌用于构建Meena的机器学习：一个可以讨论任何话题的聊天机器人
+# 了解谷歌用于构建 Meena 的机器学习：一个可以讨论任何话题的聊天机器人
 
-> 原文：[https://www.kdnuggets.com/2020/02/inside-machine-learning-google-build-meena-chatbot.html](https://www.kdnuggets.com/2020/02/inside-machine-learning-google-build-meena-chatbot.html)
+> 原文：[`www.kdnuggets.com/2020/02/inside-machine-learning-google-build-meena-chatbot.html`](https://www.kdnuggets.com/2020/02/inside-machine-learning-google-build-meena-chatbot.html)
 
-[评论](#comments)
+评论
 
-![](../Images/f758dfb0abce243555721f3d4b1f1a9b.png)
+![](img/f758dfb0abce243555721f3d4b1f1a9b.png)
 
-看起来每年谷歌都会计划通过在自然语言理解（NLU）系统方面取得新的惊人进展来震撼人工智能（AI）界。去年，[BERT模型](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)无疑成为了NLU研究领域的头条新闻。2020年刚开始几周，谷歌研究 [发布了一篇新论文介绍了Meena，这是一种新的深度学习模型，可以支持与任何领域的对话的聊天机器人](https://arxiv.org/abs/2001.09977)。
+看起来每年谷歌都会计划通过在自然语言理解（NLU）系统方面取得新的惊人进展来震撼人工智能（AI）界。去年，[BERT 模型](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)无疑成为了 NLU 研究领域的头条新闻。2020 年刚开始几周，谷歌研究 [发布了一篇新论文介绍了 Meena，这是一种新的深度学习模型，可以支持与任何领域的对话的聊天机器人](https://arxiv.org/abs/2001.09977)。
 
-NLU是过去几年中最活跃的研究领域之一，迄今为止产生了一些最广泛采用的AI系统。然而，尽管取得了所有进展，大多数对话系统仍然高度限制于特定领域，这与我们作为人类能够自然地讨论不同话题的能力形成对比。在NLU理论中，这些专业化的对话代理被称为封闭域聊天机器人。另一种选择是一个新兴的研究领域，称为开放域聊天机器人，专注于构建可以讨论用户想聊的几乎任何话题的对话代理。如果有效，开放域聊天机器人可能是人性化计算机交互旅程中的一个关键部分。
+NLU 是过去几年中最活跃的研究领域之一，迄今为止产生了一些最广泛采用的 AI 系统。然而，尽管取得了所有进展，大多数对话系统仍然高度限制于特定领域，这与我们作为人类能够自然地讨论不同话题的能力形成对比。在 NLU 理论中，这些专业化的对话代理被称为封闭域聊天机器人。另一种选择是一个新兴的研究领域，称为开放域聊天机器人，专注于构建可以讨论用户想聊的几乎任何话题的对话代理。如果有效，开放域聊天机器人可能是人性化计算机交互旅程中的一个关键部分。
 
-尽管对开放域聊天机器人的兴奋不已，目前的实施尝试仍存在一些缺陷，这些缺陷阻碍了它们的普遍实用性：它们往往对开放式输入的回应不切实际，或给出模糊且通用的回答。通过Meena，谷歌尝试解决这些挑战，构建一个可以讨论几乎任何话题的开放域聊天机器人。
+尽管对开放域聊天机器人的兴奋不已，目前的实施尝试仍存在一些缺陷，这些缺陷阻碍了它们的普遍实用性：它们往往对开放式输入的回应不切实际，或给出模糊且通用的回答。通过 Meena，谷歌尝试解决这些挑战，构建一个可以讨论几乎任何话题的开放域聊天机器人。
 
-在构建Meena之前，谷歌必须解决一个在开放域聊天机器人系统中经常被忽视的非平凡挑战。评估开放域聊天机器人质量的一个关键标准是其对话是否对人类感觉自然。这个想法似乎直观但也极其主观。我们如何测量对话的人类相似性？为了解决这个挑战，谷歌首先引入了一个新的指标，作为Meena聊天机器人的基石。
+在构建 Meena 之前，谷歌必须解决一个在开放域聊天机器人系统中经常被忽视的非平凡挑战。评估开放域聊天机器人质量的一个关键标准是其对话是否对人类感觉自然。这个想法似乎直观但也极其主观。我们如何测量对话的人类相似性？为了解决这个挑战，谷歌首先引入了一个新的指标，作为 Meena 聊天机器人的基石。
 
 ### Sensibleness and Specificity Average
 
-Sensibleness and Specificity Average（SSA）是一种用于开放域聊天机器人的新指标，它捕捉了人类对话的一些基本但重要的属性。具体来说，SSA试图量化人类对话的两个关键方面：
+Sensibleness and Specificity Average（SSA）是一种用于开放域聊天机器人的新指标，它捕捉了人类对话的一些基本但重要的属性。具体来说，SSA 试图量化人类对话的两个关键方面：
 
 1.  讲得通。
 
@@ -40,7 +40,7 @@ Meena 是一个端到端的神经对话模型，能够学习对给定的对话�
 
 乍一看，ET 看起来与大多数 Transformer 神经网络架构相似。它有一个编码器，将输入序列编码为嵌入向量，还有一个解码器，使用这些嵌入向量来构建输出序列；在翻译的情况下，输入序列是待翻译的句子，输出序列是翻译结果。然而，ET 对 Transformer 模型做了一些有趣的改进。其中最有趣的是在编码器和解码器模块底部添加的卷积层，这些卷积层在两个地方以类似的分支模式添加。这种优化特别有趣，因为编码器和解码器架构在 NAS 过程中并不共享，因此这种架构被独立发现对编码器和解码器都有用，显示了这种设计的强大。原始 Transformer 完全依赖自注意力机制，而进化 Transformer 是一种混合架构，利用了自注意力和宽卷积的优点。
 
-![](../Images/8102b59881069cbee020734aa64c3710.png)
+![](img/8102b59881069cbee020734aa64c3710.png)
 
 ### Meena 和 ET
 
@@ -52,11 +52,11 @@ Meena 有多大？据报道，Meena 的第一个版本有 26 亿个参数，训�
 
 初步测试显示，Meena 能够在各种话题中进行对话，并达到了高水平的 SSA。
 
-![](../Images/afd53f854052b1b492d46918d9f3c536.png)
+![](img/afd53f854052b1b492d46918d9f3c536.png)
 
 在 Meena 研究中最令人惊讶的发现之一是 SSA 量度与知名的 [困惑度](https://en.wikipedia.org/wiki/Perplexity) 在 NLU 模型中的性能指标之间存在的相关性。概念上，困惑度衡量语言模型的不确定性。困惑度越低，模型生成下一个令牌（字符、子词或单词）的信心就越高。在测试中，SSA 量度及其各个因素（特异性和合理性）与开放域聊天机器人的困惑度表现出强相关性。
 
-![](../Images/01fbac0bdc3bfc33bb9c8948d90ede38.png)
+![](img/01fbac0bdc3bfc33bb9c8948d90ede38.png)
 
 鉴于其性能要求，Meena 对大多数组织来说都难以企及。然而，毫无疑问，Meena 代表了对话界面的一个重大里程碑。除了模型本身，Meena 还贡献了 SSA 量度，推动我们更接近评估聊天机器人互动的类人性。未来，我们应期待 SSA 量度中加入幽默或同理心等人类对话属性。同时，我们也应期待看到基于 Meena 一些原则的新开放域聊天机器人，推动下一代对话界面的发展。
 
@@ -64,21 +64,21 @@ Meena 有多大？据报道，Meena 的第一个版本有 26 亿个参数，训�
 
 **相关：**
 
-+   [让我们构建一个智能聊天机器人](/2019/12/build-intelligent-chatbot.html)
++   让我们构建一个智能聊天机器人
 
-+   [NLP 与 NLU：从语言理解到处理](//2019/07/nlp-vs-nlu-understanding-language-processing.html)
++   NLP 与 NLU：从语言理解到处理
 
-+   [亚马逊利用自我学习教 Alexa 自我纠错](/2020/02/amazon-uses-self-learning-teach-alexa-correct-mistakes.html)
++   亚马逊利用自我学习教 Alexa 自我纠错
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 

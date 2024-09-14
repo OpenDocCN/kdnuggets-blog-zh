@@ -1,8 +1,8 @@
 # LLM 世界末日：开源克隆的复仇
 
-> 原文：[https://www.kdnuggets.com/2023/05/llm-apocalypse-revenge-open-source-clones.html](https://www.kdnuggets.com/2023/05/llm-apocalypse-revenge-open-source-clones.html)
+> 原文：[`www.kdnuggets.com/2023/05/llm-apocalypse-revenge-open-source-clones.html`](https://www.kdnuggets.com/2023/05/llm-apocalypse-revenge-open-source-clones.html)
 
-![LLM 世界末日：开源克隆的复仇](../Images/6e9e6169102192f8a857dd80c46a18ea.png)
+![LLM 世界末日：开源克隆的复仇](img/6e9e6169102192f8a857dd80c46a18ea.png)
 
 图片来自 Adobe Firefly
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -40,7 +40,7 @@ Meta 可能会成为最重要的开源 AI 贡献者之一。它不仅拥有巨�
 
 最后，我们还发现了所谓的内部谷歌文件“我们没有护城河，OpenAI 也没有”，该文件对封闭模型与社区生产的远小于或接近于封闭源模型的创新持悲观态度。我之所以说“所谓”是因为无法验证该文章的来源是否为谷歌内部。然而，它确实包含了这张引人注目的图表：
 
-![LLM 末日：开源克隆的复仇](../Images/cc7926f23cb48e2f7c438c65328eacde.png)
+![LLM 末日：开源克隆的复仇](img/cc7926f23cb48e2f7c438c65328eacde.png)
 
 垂直轴是 GPT-4 对 LLM 输出的评分，需明确说明。
 

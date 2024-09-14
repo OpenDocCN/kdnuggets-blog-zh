@@ -1,10 +1,10 @@
-# 5项支持技能，助你获得数据科学职位
+# 5 项支持技能，助你获得数据科学职位
 
-> 原文：[https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
+> 原文：[`www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html`](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
 
-[评论](#comments)
+评论
 
-![图片](../Images/7fc896bf4462008cfaa716719f33b3fd.png)
+![图片](img/7fc896bf4462008cfaa716719f33b3fd.png)
 
 当你开始追求数据科学职位时，一些需要掌握的技能会很明显。你知道你需要具备编码、分析和数学经验，但你也应该培养一些软技能。虽然这些技能在你想到数据科学时可能不会立刻浮现，但它们将在你的职业生涯中发挥关键作用。
 
@@ -22,7 +22,7 @@
 
 你可能不会把数据科学当作一个沟通密集的领域，但事实远非如此。虽然分析可能是你工作的核心，但你必须沟通你的结果。数据科学涉及大量的协作和报告，因此你需要知道如何有效地进行沟通。
 
-研究表明，沟通不畅使大型公司每年平均损失[$62.4百万](https://www.shrm.org/resourcesandtools/hr-topics/behavioral-competencies/communication/pages/the-cost-of-poor-communications.aspx)。如果你不能向同事和管理层解释你的问题或想法，他们将无法看到你技术能力的全部。误沟通可能导致流程未优化、缺陷和损失。
+研究表明，沟通不畅使大型公司每年平均损失[$62.4 百万](https://www.shrm.org/resourcesandtools/hr-topics/behavioral-competencies/communication/pages/the-cost-of-poor-communications.aspx)。如果你不能向同事和管理层解释你的问题或想法，他们将无法看到你技术能力的全部。误沟通可能导致流程未优化、缺陷和损失。
 
 幸运的是，发展和展示沟通技能相对简单。你在工作和个人生活中，寻找团队项目。你在团队中工作的越多，你的沟通能力就会越强，并且你将拥有相关的证据。
 
@@ -46,7 +46,7 @@
 
 作为数据科学家，你应该具备可靠的时间管理技能。这个领域可能会很有挑战性，在今天快节奏的工作环境中，很容易感到不堪重负。如果你能够有效管理时间，你会更高效地工作，并避免倦怠。
 
-一项研究发现，[65% 的美国工人](https://www.stress.org/workplace-stress)报告称工作压力造成了困难，其中10%的人表示问题非常严重。时间管理技能可以帮助你减少这种压力。因此，你会感觉更好，工作也会有所改善。
+一项研究发现，[65% 的美国工人](https://www.stress.org/workplace-stress)报告称工作压力造成了困难，其中 10%的人表示问题非常严重。时间管理技能可以帮助你减少这种压力。因此，你会感觉更好，工作也会有所改善。
 
 你可以在当前职位或学业中开始应用时间管理技巧。测试不同的策略，比如设置定时器和优先处理重要任务，并找到最适合你的方法或组合。然后你可以向潜在的雇主解释你如何有效地管理时间。
 
@@ -58,22 +58,22 @@
 
 **相关：**
 
-+   [如何获得数据科学家的职位](/2021/01/get-job-data-scientist.html)
++   如何获得数据科学家的职位
 
-+   [7个最推荐的技能，助你成为数据科学家](/2021/02/7-most-recommended-skills-data-scientist.html)
++   7 个最推荐的技能，助你成为数据科学家
 
-+   [本文介绍了数据专业人士可以通过七种方式增加简历的多样性。](/2020/11/data-professionals-add-variation-resumes.html)
++   本文介绍了数据专业人士可以通过七种方式增加简历的多样性。
 
 ### 更多相关话题
 
-+   [5项稀有的数据科学技能，助你获得就业机会](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
++   [5 项稀有的数据科学技能，助你获得就业机会](https://www.kdnuggets.com/5-rare-data-science-skills-that-can-help-you-get-employed)
 
 +   [数据科学项目，帮助你解决现实世界的问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)
 
-+   [生成性AI如何帮助你改进数据可视化图表](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)
++   [生成性 AI 如何帮助你改进数据可视化图表](https://www.kdnuggets.com/how-generative-ai-can-help-you-improve-your-data-visualization-charts)
 
-+   [帮助你成为专业人士的免费Python资源](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
++   [帮助你成为专业人士的免费 Python 资源](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
 
-+   [数据科学家如何赢得CFO的青睐（以及为什么你需要这样做）](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
++   [数据科学家如何赢得 CFO 的青睐（以及为什么你需要这样做）](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
 
-+   [使用ChatGPT帮助找到数据科学工作](https://www.kdnuggets.com/using-chatgpt-to-help-land-a-data-science-job)
++   [使用 ChatGPT 帮助找到数据科学工作](https://www.kdnuggets.com/using-chatgpt-to-help-land-a-data-science-job)

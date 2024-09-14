@@ -1,14 +1,14 @@
 # 不再需要使用 Docker
 
-> 原文：[https://www.kdnuggets.com/2020/10/use-docker-anymore.html](https://www.kdnuggets.com/2020/10/use-docker-anymore.html)
+> 原文：[`www.kdnuggets.com/2020/10/use-docker-anymore.html`](https://www.kdnuggets.com/2020/10/use-docker-anymore.html)
 
-[评论](#comments)
+评论
 
 **由 [Martin Heinz](https://www.linkedin.com/in/heinz-martin/), IBM 的 DevOps 工程师**
 
 在容器的古老时代（实际上大约是 4 年前），*Docker* 是容器领域的唯一玩家。然而现在情况已不再如此，Docker 并不是 *唯一* 的容器引擎，而只是 *另一个* 容器引擎。Docker 允许我们构建、运行、拉取、推送或检查容器镜像，但对于每一项任务，还有其他替代工具，可能比 Docker 做得更好。所以，让我们深入了解一下这些工具，并且（*也许*）彻底卸载和忘记 Docker……
 
-![图示](../Images/f504eeb72a30558da7db944a64f471d0.png)
+![图示](img/f504eeb72a30558da7db944a64f471d0.png)
 
 [Nicole Chen](https://unsplash.com/@917sunny?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄于 [Unsplash](https://unsplash.com/@917sunny?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -74,31 +74,31 @@ Kaniko 旨在作为一个镜像运行，使用 `gcr.io/kaniko-project/executor`�
 
 最后一块大拼图是*容器运行时*，负责运行容器。容器运行时是整个容器生命周期/堆栈的一部分，你很可能不会去碰它，除非你有一些非常特定的速度、安全性等要求。所以，如果你已经厌倦了我，那么你可能想跳过这一部分。如果你只是想了解有哪些选项，那么接下来是：
 
-[runc](https://github.com/opencontainers/runc)是最流行的容器运行时，基于OCI容器运行时规范创建。它被Docker（通过*containerd*）、Podman和CRI-O使用，所以几乎涵盖了除LXD（使用LXC）以外的一切。我没什么其他可以补充的。它是（几乎）所有事物的默认运行时，所以即使你在读完这篇文章后放弃Docker，你很可能仍然会使用runc。
+[runc](https://github.com/opencontainers/runc)是最流行的容器运行时，基于 OCI 容器运行时规范创建。它被 Docker（通过*containerd*）、Podman 和 CRI-O 使用，所以几乎涵盖了除 LXD（使用 LXC）以外的一切。我没什么其他可以补充的。它是（几乎）所有事物的默认运行时，所以即使你在读完这篇文章后放弃 Docker，你很可能仍然会使用 runc。
 
-与`runc`类似且容易混淆的一个替代品是[crun](https://github.com/containers/crun)。这是由Red Hat开发的工具，完全用C语言编写（而runc是用Go语言编写的）。这使得它比runc更快且更节省内存。考虑到它也是OCI兼容的运行时，如果你想亲自检查一下，应该能轻松切换。尽管目前它还不太流行，但从RHEL 8.3版本起，它将作为OCI运行时的替代品进行技术预览，鉴于它是Red Hat的产品，我们最终可能会看到它成为Podman或CRI-O的默认运行时。
+与`runc`类似且容易混淆的一个替代品是[crun](https://github.com/containers/crun)。这是由 Red Hat 开发的工具，完全用 C 语言编写（而 runc 是用 Go 语言编写的）。这使得它比 runc 更快且更节省内存。考虑到它也是 OCI 兼容的运行时，如果你想亲自检查一下，应该能轻松切换。尽管目前它还不太流行，但从 RHEL 8.3 版本起，它将作为 OCI 运行时的替代品进行技术预览，鉴于它是 Red Hat 的产品，我们最终可能会看到它成为 Podman 或 CRI-O 的默认运行时。
 
-说到CRI-O，之前我提到CRI-O实际上不是一个容器引擎，而是一个容器运行时。这是因为CRI-O不包括推送镜像等功能，而这是你从容器引擎中期望的。CRI-O作为运行时内部使用runc来运行容器。这个运行时并不适合在你的机器上使用，因为它是为Kubernetes节点设计的运行时，你可以看到它被描述为*“Kubernetes所需的所有运行时功能而无其他”*。所以，除非你在设置Kubernetes集群（或OpenShift集群——CRI-O在这里已经是默认的），否则你可能不应该使用它。
+说到 CRI-O，之前我提到 CRI-O 实际上不是一个容器引擎，而是一个容器运行时。这是因为 CRI-O 不包括推送镜像等功能，而这是你从容器引擎中期望的。CRI-O 作为运行时内部使用 runc 来运行容器。这个运行时并不适合在你的机器上使用，因为它是为 Kubernetes 节点设计的运行时，你可以看到它被描述为*“Kubernetes 所需的所有运行时功能而无其他”*。所以，除非你在设置 Kubernetes 集群（或 OpenShift 集群——CRI-O 在这里已经是默认的），否则你可能不应该使用它。
 
-这一部分的最后一个工具是[containerd](https://containerd.io/)，它是CNCF的一个毕业项目。它是一个作为各种容器运行时和操作系统的API外观的守护进程。在后台，它依赖于runc，并且是Docker引擎的默认运行时。它也被Google Kubernetes Engine（GKE）和IBM Kubernetes Service（IKS）使用。它是Kubernetes容器运行时接口（与CRI-O相同）的实现，因此它是你的Kubernetes集群的一个很好的运行时候选。
+这一部分的最后一个工具是[containerd](https://containerd.io/)，它是 CNCF 的一个毕业项目。它是一个作为各种容器运行时和操作系统的 API 外观的守护进程。在后台，它依赖于 runc，并且是 Docker 引擎的默认运行时。它也被 Google Kubernetes Engine（GKE）和 IBM Kubernetes Service（IKS）使用。它是 Kubernetes 容器运行时接口（与 CRI-O 相同）的实现，因此它是你的 Kubernetes 集群的一个很好的运行时候选。
 
 ### 镜像检查和分发
 
 容器栈的最后一部分是镜像检查和分发。这有效地替代了`docker inspect`，并且（可选地）增加了在远程注册表之间复制/镜像镜像的能力。
 
-我将在这里提到的唯一可以完成这些任务的工具是[Skopeo](https://github.com/containers/skopeo)。它由Red Hat制作，是Buildah、Podman和CRI-O的配套工具。除了我们都熟悉的基本`skopeo inspect`，Skopeo还能够使用`skopeo copy`来复制镜像，这使得你可以在远程注册表之间镜像镜像，而不需要首先将它们拉取到本地注册表。如果你使用本地注册表，这个功能也可以作为拉取/推送使用。
+我将在这里提到的唯一可以完成这些任务的工具是[Skopeo](https://github.com/containers/skopeo)。它由 Red Hat 制作，是 Buildah、Podman 和 CRI-O 的配套工具。除了我们都熟悉的基本`skopeo inspect`，Skopeo 还能够使用`skopeo copy`来复制镜像，这使得你可以在远程注册表之间镜像镜像，而不需要首先将它们拉取到本地注册表。如果你使用本地注册表，这个功能也可以作为拉取/推送使用。
 
-作为一个小小的奖励，我还想提到 [。Dive](https://github.com/wagoodman/dive)，这是一个用于检查、探索和分析镜像的工具。它更具用户友好性，提供了更易读的输出，并可以深入挖掘（或*潜入*，我想）你的镜像，分析并测量其效率。它也适用于CI管道中，可以测量你的镜像是否*“足够高效”*，换句话说——是否浪费了过多空间。
+作为一个小小的奖励，我还想提到 [。Dive](https://github.com/wagoodman/dive)，这是一个用于检查、探索和分析镜像的工具。它更具用户友好性，提供了更易读的输出，并可以深入挖掘（或*潜入*，我想）你的镜像，分析并测量其效率。它也适用于 CI 管道中，可以测量你的镜像是否*“足够高效”*，换句话说——是否浪费了过多空间。
 
 ### 结论
 
-这篇文章并非旨在说服你完全放弃Docker，而是展示了构建、运行、管理和分发容器及其镜像的整个领域和所有选项。包括Docker在内的每种工具都有其优缺点，重要的是评估哪一组工具最适合你的工作流程和用例，希望这篇文章能帮助你做到这一点。
+这篇文章并非旨在说服你完全放弃 Docker，而是展示了构建、运行、管理和分发容器及其镜像的整个领域和所有选项。包括 Docker 在内的每种工具都有其优缺点，重要的是评估哪一组工具最适合你的工作流程和用例，希望这篇文章能帮助你做到这一点。
 
 ### 资源
 
-+   [让我们尝试所有可用的CRI运行时用于Kubernetes。真的！](https://www.youtube.com/watch?v=FKoVztEQHss&ab_channel=CNCF%5BCloudNativeComputingFoundation%5D)
++   [让我们尝试所有可用的 CRI 运行时用于 Kubernetes。真的！](https://www.youtube.com/watch?v=FKoVztEQHss&ab_channel=CNCF%5BCloudNativeComputingFoundation%5D)
 
-+   [容器运行时在Kubernetes中的重要性](https://events19.linuxfoundation.org/wp-content/uploads/2017/11/How-Container-Runtime-Matters-in-Kubernetes_-OSS-Kunal-Kushwaha.pdf)
++   [容器运行时在 Kubernetes 中的重要性](https://events19.linuxfoundation.org/wp-content/uploads/2017/11/How-Container-Runtime-Matters-in-Kubernetes_-OSS-Kunal-Kushwaha.pdf)
 
 +   [容器术语实用介绍](https://developers.redhat.com/blog/2018/02/22/container-terminology-practical-introduction)
 
@@ -106,27 +106,27 @@ Kaniko 旨在作为一个镜像运行，使用 `gcr.io/kaniko-project/executor`�
 
 +   [全面的容器运行时比较](https://www.capitalone.com/tech/cloud/container-runtime/)
 
-+   [没有Docker构建容器](https://blog.alexellis.io/building-containers-without-docker/)
++   [没有 Docker 构建容器](https://blog.alexellis.io/building-containers-without-docker/)
 
-**简介： [马丁·海因茨](https://www.linkedin.com/in/heinz-martin/)** 是IBM的一名DevOps工程师。作为一名软件开发者，马丁对计算机安全、隐私和密码学充满热情，专注于云计算和无服务器计算，并时刻准备接受新的挑战。
+**简介： [马丁·海因茨](https://www.linkedin.com/in/heinz-martin/)** 是 IBM 的一名 DevOps 工程师。作为一名软件开发者，马丁对计算机安全、隐私和密码学充满热情，专注于云计算和无服务器计算，并时刻准备接受新的挑战。
 
 [原文](https://martinheinz.dev/blog/35?utm_source=tds&utm_medium=referral&utm_campaign=blog_post_35)。经许可转载。
 
 **相关：**
 
-+   [Docker镜像优化策略](/2020/10/strategies-docker-images-optimization.html)
++   Docker 镜像优化策略
 
-+   [自动化你Python项目的各个方面](/2020/09/automating-every-aspect-python-project.html)
++   自动化你 Python 项目的各个方面
 
-+   [让Python程序运行得更快](/2020/09/making-python-programs-blazingly-fast.html)
++   让 Python 程序运行得更快
 
 ### 更多主题
 
 +   [如果没有相关学位如何进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
 
-+   [如何有效管理镜像版本的Docker标签](https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively)
++   [如何有效管理镜像版本的 Docker 标签](https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively)
 
-+   [如何使用Docker卷进行持久数据存储](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)
++   [如何使用 Docker 卷进行持久数据存储](https://www.kdnuggets.com/how-to-use-docker-volumes-for-persistent-data-storage)
 
 +   [我们不需要数据科学家，我们需要数据工程师](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)
 

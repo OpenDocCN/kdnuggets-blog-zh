@@ -1,8 +1,8 @@
 # 让我们构建一个智能聊天机器人
 
-> 原文：[https://www.kdnuggets.com/2019/12/build-intelligent-chatbot.html](https://www.kdnuggets.com/2019/12/build-intelligent-chatbot.html)
+> 原文：[`www.kdnuggets.com/2019/12/build-intelligent-chatbot.html`](https://www.kdnuggets.com/2019/12/build-intelligent-chatbot.html)
 
-[评论](#comments)
+评论
 
 在文章 [**使用 Python NLTK 构建你的第一个聊天机器人**](https://towardsdatascience.com/build-your-first-chatbot-using-python-nltk-5d07b027e727)中，我们编写了一个简单的 Python 代码并构建了一个聊天机器人。问题和答案被松散地硬编码，这意味着聊天机器人无法对代码中没有的问题给出令人满意的答案。因此，我们的聊天机器人被认为不是一个智能机器人。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -26,7 +26,7 @@
 
 聊天机器人在今天非常热门。谁不知道它们？聊天机器人被视为与客户、员工以及所有其他希望交流的人互动的未来方式。其精髓在于这种交流是一种对话。与仅仅发布信息不同，使用聊天机器人的人可以通过提问更直接地获取他们想要的信息。
 
-![图示](../Images/575f2055395fdc5754940de5ec5ced02.png)
+![图示](img/575f2055395fdc5754940de5ec5ced02.png)
 
 来源： [outgrow.co](https://outgrow.co/chatbots/)
 
@@ -36,13 +36,13 @@
 
 +   它们能在正确的时间、正确的地点提供给人们正确的信息，而且最重要的是，只在他们需要的时候。
 
-+   我们在移动设备上约90%的时间都花在电子邮件和消息平台上。因此，使用聊天机器人与客户互动比将他们引导到网站或移动应用程序更有意义。
++   我们在移动设备上约 90%的时间都花在电子邮件和消息平台上。因此，使用聊天机器人与客户互动比将他们引导到网站或移动应用程序更有意义。
 
 +   [人工智能](https://www.edureka.co/blog/what-is-artificial-intelligence)、[机器学习](https://www.edureka.co/blog/scikit-learn-machine-learning/)和[自然语言处理](https://www.youtube.com/watch?v=05ONoGfmKvA)的进步，使得机器人能够越来越像真实的人一样进行对话。
 
 借助聊天机器人，公司可以全天候提供服务。现在，销售和客服团队可以专注于更复杂的任务，而聊天机器人则引导用户完成流程。
 
-![图示](../Images/ad994e628df547cac960ba27181512b0.png)
+![图示](img/ad994e628df547cac960ba27181512b0.png)
 
 来源：[edureka.co](https://www.edureka.co/blog/how-to-develop-a-chat-bot-using-amazon-lex/)
 
@@ -62,13 +62,13 @@
 
 **例如：** 你们的营业时间是什么？
 
-**回答：** 下午9点到5点
+**回答：** 下午 9 点到 5 点
 
 这些系统还可以扩展以集成第三方系统。
 
 **例如：** 我的订单在哪里？
 
-**回答：** 它正在路上，应该会在10分钟内到达你那里。
+**回答：** 它正在路上，应该会在 10 分钟内到达你那里。
 
 检索型机器人是你今天看到的最常见的聊天机器人类型。它们允许机器人开发者和用户体验团队控制体验，并使其符合客户的期望。它们最适合用于**目标导向**的客户支持、潜在客户生成和反馈。我们可以决定机器人的语气，并设计体验，同时考虑到客户的品牌和声誉。
 
@@ -80,31 +80,31 @@
 
 ### 聊天机器人构建
 
-在继续之前，有几点需要了解。**使用NLTK进行自然语言处理(NLP)、TF-IDF和余弦相似度。**
+在继续之前，有几点需要了解。**使用 NLTK 进行自然语言处理(NLP)、TF-IDF 和余弦相似度。**
 
-**使用NLTK进行自然语言处理(NLP)**
+**使用 NLTK 进行自然语言处理(NLP)**
 
-自然语言处理（NLP）是计算机程序理解人类语言的能力。NLP是人工智能（AI）的一个组成部分。
+自然语言处理（NLP）是计算机程序理解人类语言的能力。NLP 是人工智能（AI）的一个组成部分。
 
-NLP应用的开发具有挑战性，因为计算机传统上需要人类用精确、明确和高度结构化的编程语言与其“对话”，或者通过有限数量的明确语音命令。然而，人类语言往往是不精确的，通常是模糊的，语言结构可能取决于许多复杂的变量，包括俚语、地方方言和社会背景。
+NLP 应用的开发具有挑战性，因为计算机传统上需要人类用精确、明确和高度结构化的编程语言与其“对话”，或者通过有限数量的明确语音命令。然而，人类语言往往是不精确的，通常是模糊的，语言结构可能取决于许多复杂的变量，包括俚语、地方方言和社会背景。
 
 **自然语言工具包(NLTK)**
 
-NLTK是一个领先的平台，用于构建Python程序以处理人类语言数据。它提供了超过50种语料库和词汇资源（如WordNet）的易用接口，以及一套用于分类、分词、词干提取、标注、解析和语义推理的文本处理库、工业级NLP库的封装和一个活跃的讨论论坛。
+NLTK 是一个领先的平台，用于构建 Python 程序以处理人类语言数据。它提供了超过 50 种语料库和词汇资源（如 WordNet）的易用接口，以及一套用于分类、分词、词干提取、标注、解析和语义推理的文本处理库、工业级 NLP 库的封装和一个活跃的讨论论坛。
 
 **TF-IDF**
 
 我们将计算每个文档的词频-逆文档频率（TF-IDF）向量。这将给你一个矩阵，其中每一列代表概述词汇表中的一个词（所有至少在一个文档中出现的词）。
 
-TF-IDF是一种统计方法，用于评估一个词在给定文档中的重要性。
+TF-IDF 是一种统计方法，用于评估一个词在给定文档中的重要性。
 
 TF — 词频(tf)指的是一个术语在文档中出现的次数。
 
 IDF — 逆文档频率(idf)衡量词在文档中的权重，即该词在整个文档中是常见的还是稀有的。
 
-TF-IDF的直觉是，频繁出现的术语在文档中的重要性低于那些很少出现的术语。
+TF-IDF 的直觉是，频繁出现的术语在文档中的重要性低于那些很少出现的术语。
 
-幸运的是，scikit-learn提供了一个内置的`[TfIdfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)`类，可以很容易地生成TF-IDF矩阵。
+幸运的是，scikit-learn 提供了一个内置的`[TfIdfVectorizer](https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.TfidfVectorizer.html)`类，可以很容易地生成 TF-IDF 矩阵。
 
 **余弦相似度**
 
@@ -112,7 +112,7 @@ TF-IDF的直觉是，频繁出现的术语在文档中的重要性低于那些�
 
 我们将使用余弦相似度来计算表示两个单词相似度的数值量。使用余弦相似度评分因为它独立于大小，并且相对容易和快速计算（特别是与 TF-IDF 评分结合使用时）。从数学上讲，它定义如下：
 
-![图示](../Images/f2f2e800b977ee176ba1ffcda923f821.png)
+![图示](img/f2f2e800b977ee176ba1ffcda923f821.png)
 
 [来源](https://en.wikipedia.org/wiki/Cosine_similarity): 余弦相似度
 
@@ -276,17 +276,17 @@ while(flag==True):
 
 现在，让我们测试一下聊天机器人，看看它的反应如何。
 
-***与Chatterbot对话的截图:***
+***与 Chatterbot 对话的截图:***
 
-![](../Images/039bfa568ce26fceff9c10a388abda78.png)
+![](img/039bfa568ce26fceff9c10a388abda78.png)
 
-![](../Images/60ca4e35337ee6c164b893bf12fa8c2a.png)
+![](img/60ca4e35337ee6c164b893bf12fa8c2a.png)
 
 如果你希望你的聊天机器人搜索维基百科，只需输入
 
 **“tell me about ****”**
 
-![](../Images/662fa32af01a3a31564384a6b9448862.png)
+![](img/662fa32af01a3a31564384a6b9448862.png)
 
 这真是太酷了，不是吗？尽管结果不够准确，但至少我们达成了一个里程碑 :)
 
@@ -296,42 +296,42 @@ while(flag==True):
 
 未来的聊天机器人不仅仅是一个客户支持代理，它将成为一个为企业和消费者提供高级帮助的助手。
 
-我们人类不喜欢做重复的乏味任务。因此，在未来，公司将雇佣AI聊天机器人来处理那些重复且不需要创造力的任务。通过让AI聊天机器人接管这些重复的乏味任务，公司将利用人力资源从事更具创造性的工作。这样，我们可以期待未来会有更多惊人的事物出现。
+我们人类不喜欢做重复的乏味任务。因此，在未来，公司将雇佣 AI 聊天机器人来处理那些重复且不需要创造力的任务。通过让 AI 聊天机器人接管这些重复的乏味任务，公司将利用人力资源从事更具创造性的工作。这样，我们可以期待未来会有更多惊人的事物出现。
 
-此外，人类不喜欢将内容（死记硬背）储存在脑海中。如今，借助互联网，他们可以利用这一点。因此，需要储存信息（数据）的任务可以转移到AI聊天机器人上。
+此外，人类不喜欢将内容（死记硬背）储存在脑海中。如今，借助互联网，他们可以利用这一点。因此，需要储存信息（数据）的任务可以转移到 AI 聊天机器人上。
 
 好了，这篇文章就到这里，希望大家喜欢阅读，欢迎在评论区分享你的评论/想法/反馈。
 
 如有任何疑问，请通过[LinkedIn](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)与我联系。
 
-![图示](../Images/2c40f521c450f33387afe7346ad47fb6.png)
+![图示](img/2c40f521c450f33387afe7346ad47fb6.png)
 
 来源：[gfycat.com](https://gfycat.com/gifs/search/edi+cortana)
 
 感谢阅读!!!
 
-**个人简介：[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是CirrusLabs的一个大数据开发者。他在电信、分析、销售、数据科学等多个领域拥有超过4年的工作经验，并在各种大数据组件方面具有专长。
+**个人简介：[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是 CirrusLabs 的一个大数据开发者。他在电信、分析、销售、数据科学等多个领域拥有超过 4 年的工作经验，并在各种大数据组件方面具有专长。
 
 [原文](https://towardsdatascience.com/lets-build-an-intelligent-chatbot-7ea7f215ada6)。经授权转载。
 
 **相关内容:**
 
-+   [用于NLP的深度学习：用Keras创建一个聊天机器人!](/2019/08/deep-learning-nlp-creating-chatbot-keras.html)
++   用于 NLP 的深度学习：用 Keras 创建一个聊天机器人!
 
-+   [BERT正在改变NLP格局](/2019/09/bert-changing-nlp-landscape.html)
++   BERT 正在改变 NLP 格局
 
-+   [自动化文本摘要入门](/2019/11/getting-started-automated-text-summarization.html)
++   自动化文本摘要入门
 
 ### 更多相关内容
 
-+   [使用这些课程构建类似ChatGPT的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
++   [使用这些课程构建类似 ChatGPT 的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
 
-+   [5分钟内使用Hugging Face和Gradio构建AI聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
++   [5 分钟内使用 Hugging Face 和 Gradio 构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
 
 +   [聊天机器人变革：从失败到未来](https://www.kdnuggets.com/2021/12/chatbot-transformation-failure-future.html)
 
 +   [开放助手：探索开放和协作的可能性…](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)
 
-+   [聊天机器人竞技场：LLM基准平台](https://www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html)
++   [聊天机器人竞技场：LLM 基准平台](https://www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html)
 
-+   [让智能文档处理更智能：第1部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
++   [让智能文档处理更智能：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)

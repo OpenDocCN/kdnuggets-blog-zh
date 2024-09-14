@@ -1,12 +1,12 @@
 # 如何构建令人印象深刻的数据科学简历
 
-> 原文：[https://www.kdnuggets.com/2021/04/build-impressive-data-science-resume.html](https://www.kdnuggets.com/2021/04/build-impressive-data-science-resume.html)
+> 原文：[`www.kdnuggets.com/2021/04/build-impressive-data-science-resume.html`](https://www.kdnuggets.com/2021/04/build-impressive-data-science-resume.html)
 
-[评论](#comments)
+评论
 
 **由 [Sharan Kumar Ravindran](http://rsharankumar.com)，数据科学专家及作者**
 
-![](../Images/b87d5dcbc039d4509a1651485bbec30a.png)
+![](img/b87d5dcbc039d4509a1651485bbec30a.png)
 
 照片由 [Glenn Carstens-Peters](https://unsplash.com/@glenncarstenspeters?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄，来源于 [Unsplash](https://unsplash.com/s/photos/writing?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -28,9 +28,9 @@
 
 数据科学职位变得非常竞争激烈，尽管机会的数量历史性地高，但申请这些职位的人数也极其庞大。
 
-***例如***，下面是来自LinkedIn的职位发布截图，该职位发布总共有1200+次查看，如果我们考虑大约十分之一的人申请这个职位，那么总共就是120+个申请，这只是申请该职位的一种方式，还有通过其他来源、推荐以及直接申请的人，因此总申请人数可能接近200+。同样的逻辑适用于任何数据科学职位，因此简历在筛选中起着关键作用。
+***例如***，下面是来自 LinkedIn 的职位发布截图，该职位发布总共有 1200+次查看，如果我们考虑大约十分之一的人申请这个职位，那么总共就是 120+个申请，这只是申请该职位的一种方式，还有通过其他来源、推荐以及直接申请的人，因此总申请人数可能接近 200+。同样的逻辑适用于任何数据科学职位，因此简历在筛选中起着关键作用。
 
-![](../Images/ca4ec840d9ef63688c1bb1f406d32ce2.png)
+![](img/ca4ec840d9ef63688c1bb1f406d32ce2.png)
 
 来自 [LinkedIn](https://www.linkedin.com/jobs/search/?currentJobId=2427824929&keywords=data%20science)的截图
 
@@ -40,7 +40,7 @@
 
 +   定制您的简历和求职信
 
-+   谷歌的X-Y-Z公式，用于撰写有影响力的陈述
++   谷歌的 X-Y-Z 公式，用于撰写有影响力的陈述
 
 +   帮助构建出色简历的工具
 
@@ -50,7 +50,7 @@
 
 ### 简历格式
 
-大多数职位申请接受pdf和word格式的简历。但我建议你坚持使用pdf版本，因为这可以确保格式的保留，即招聘人员看到的简历与你看到的是一样的。
+大多数职位申请接受 pdf 和 word 格式的简历。但我建议你坚持使用 pdf 版本，因为这可以确保格式的保留，即招聘人员看到的简历与你看到的是一样的。
 
 ### 个人简介
 
@@ -62,15 +62,15 @@
 
 确保简历中包含的细节以要点形式呈现，无论是个人简介还是专业/项目经验。长段落很难集中注意力，因此将其保持简洁并以要点形式展示可以提高可读性，正如以下截图所示。
 
-![](../Images/6b28d98c49a217735fca233966dae294.png)
+![](img/6b28d98c49a217735fca233966dae294.png)
 
 简历的个人简介应为一长段落。
 
-![](../Images/3595fa6f6252910cd2387e3193431903.png)
+![](img/3595fa6f6252910cd2387e3193431903.png)
 
 个人简介以要点形式呈现
 
-尝试将每个要点限制在2-3行，并将关键短语加粗，以帮助快速扫描。
+尝试将每个要点限制在 2-3 行，并将关键短语加粗，以帮助快速扫描。
 
 ### 格式一致性
 
@@ -100,7 +100,7 @@
 
 ### 包括你个人资料和作品集的链接。
 
-确保你的简历中有指向LinkedIn个人资料、git库以及其他你希望招聘人员注意的网页或个人资料的链接。
+确保你的简历中有指向 LinkedIn 个人资料、git 库以及其他你希望招聘人员注意的网页或个人资料的链接。
 
 ### 定制你的简历和求职信。
 
@@ -126,7 +126,7 @@
 
 ### 谷歌 X-Y-Z 公式来制作有影响力的陈述。
 
-这是一个出色的公式，有助于将你的成就转化为高影响力的陈述。这个公式最早由Laszlo Bock在他的文章中介绍，[点击这里](https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/)。这是一个非常有效的技术，可以用来撰写有影响力的简历。这个公式的意思是，
+这是一个出色的公式，有助于将你的成就转化为高影响力的陈述。这个公式最早由 Laszlo Bock 在他的文章中介绍，[点击这里](https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/)。这是一个非常有效的技术，可以用来撰写有影响力的简历。这个公式的意思是，
 
 > **以“X”作为“Y”的衡量标准，通过做“Z”实现的成就**
 
@@ -138,23 +138,23 @@
 
 这是一个简单的陈述，完全没有吸引力，因为它没有确切提到用例的影响。我们可以尝试通过使用以下陈述来改进它，
 
-*“建立了一个推荐系统，使收入增加了10%”*
+*“建立了一个推荐系统，使收入增加了 10%”*
 
-现在，这比之前的陈述要好得多，但可以通过使用Google X-Y-Z公式进一步改进，如下所示（公式中的X、Y和Z在下面突出显示）
+现在，这比之前的陈述要好得多，但可以通过使用 Google X-Y-Z 公式进一步改进，如下所示（公式中的 X、Y 和 Z 在下面突出显示）
 
-*“构建了一个****推荐系统 (X)****，通过使用****协同过滤算法 (Z)****，帮助平台****提高了10%的收入 (Y)****并改善了客户互动”*
+*“构建了一个****推荐系统 (X)****，通过使用****协同过滤算法 (Z)****，帮助平台****提高了 10%的收入 (Y)****并改善了客户互动”*
 
 **示例 2：**
 
-*“参与了一个Kaggle比赛”*
+*“参与了一个 Kaggle 比赛”*
 
-这又是一个简单的陈述，仅仅说你参与了一个Kaggle比赛，但没有提到你的表现，因此可以通过添加一些细节来改进，如下所示，
+这又是一个简单的陈述，仅仅说你参与了一个 Kaggle 比赛，但没有提到你的表现，因此可以通过添加一些细节来改进，如下所示，
 
-*“在Kaggle比赛中获得第20名”*
+*“在 Kaggle 比赛中获得第 20 名”*
 
-现在已经好多了，但我们可以通过使用Google X-Y-Z公式使其更有影响力，例如，
+现在已经好多了，但我们可以通过使用 Google X-Y-Z 公式使其更有影响力，例如，
 
-*“参与了一个****Kaggle比赛 (X)****并在****1250个团队中获得第20名 (Y)****，通过****与3位同事一起构建一个集成预测模型 (Z)****”*
+*“参与了一个****Kaggle 比赛 (X)****并在****1250 个团队中获得第 20 名 (Y)****，通过****与 3 位同事一起构建一个集成预测模型 (Z)****”*
 
 现在，使用这个公式将你的成就转化为更有力的陈述。
 
@@ -180,34 +180,34 @@
 
 ### 保持联系
 
-+   如果你喜欢这篇文章并对类似内容感兴趣，[请在Medium上关注我](https://medium.com/@rsharankumar)。
++   如果你喜欢这篇文章并对类似内容感兴趣，[请在 Medium 上关注我](https://medium.com/@rsharankumar)。
 
-+   我在我的YouTube频道上教授和讨论各种数据科学话题。[点击这里订阅我的频道](https://www.youtube.com/c/DataSciencewithSharan)。
++   我在我的 YouTube 频道上教授和讨论各种数据科学话题。[点击这里订阅我的频道](https://www.youtube.com/c/DataSciencewithSharan)。
 
 +   订阅我的[邮件列表](https://chipper-leader-6081.ck.page/50934fd077)，获取更多数据科学技巧并与我的工作保持联系。
 
-**个人简介：[Sharan Kumar Ravindran](http://rsharankumar.com)** ([LinkedIn](https://www.linkedin.com/in/rsharankumar/), [GitHub](https://github.com/rsharankumar)) 是一名拥有超过10年经验的数据科学专业人士，并且撰写了两本数据科学相关书籍。
+**个人简介：[Sharan Kumar Ravindran](http://rsharankumar.com)** ([LinkedIn](https://www.linkedin.com/in/rsharankumar/), [GitHub](https://github.com/rsharankumar)) 是一名拥有超过 10 年经验的数据科学专业人士，并且撰写了两本数据科学相关书籍。
 
 [原文](https://towardsdatascience.com/how-to-build-an-impressive-data-science-resume-7a9c71f761c5)。已获许可转载。
 
 **相关内容：**
 
-+   [数据职业并非一刀切！揭示你在数据领域理想角色的技巧](/2021/04/data-careers-not-one-size-fits-all.html)
++   数据职业并非一刀切！揭示你在数据领域理想角色的技巧
 
-+   [使用NLP提升你的简历](/2021/02/nlp-improve-resume.html)
++   使用 NLP 提升你的简历
 
-+   [数据专业人士如何为简历增添更多变化](/2020/11/data-professionals-add-variation-resumes.html)
++   数据专业人士如何为简历增添更多变化
 
 ### 更多相关内容
 
 +   [数据科学简历必备要素](https://www.kdnuggets.com/2022/06/musthaves-data-science-resume.html)
 
-+   [数据科学简历中学生们遗漏的7件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
++   [数据科学简历中学生们遗漏的 7 件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
 
-+   [7个机器学习项目提升简历](https://www.kdnuggets.com/2022/09/7-machine-learning-portfolio-projects-boost-resume.html)
++   [7 个机器学习项目提升简历](https://www.kdnuggets.com/2022/09/7-machine-learning-portfolio-projects-boost-resume.html)
 
-+   [7个AI项目提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
++   [7 个 AI 项目提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
 
-+   [KDnuggets新闻，9月21日：7个机器学习项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习项目…](https://www.kdnuggets.com/2022/n37.html)
 
 +   [提升技能的顶级数据科学项目](https://www.kdnuggets.com/2022/04/top-data-science-projects-build-skills.html)

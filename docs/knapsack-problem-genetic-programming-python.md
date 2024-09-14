@@ -1,8 +1,8 @@
 # Python 中的遗传编程：背包问题
 
-> 原文：[https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
+> 原文：[`www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html`](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
 
-![使用遗传编程解决背包问题：Python 实现](../Images/7b463d16bed21ff7a97ece2d230b0111.png)
+![使用遗传编程解决背包问题：Python 实现](img/7b463d16bed21ff7a97ece2d230b0111.png)
 
 使用 DALL•E 创建的图像
 
@@ -10,11 +10,11 @@
 > 
 > ## 我们的三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 > 
 > * * *
 > 
@@ -38,15 +38,15 @@
 
 # 解释代码
 
-现在我们已经了解了背包问题是什么，遗传编程是什么，以及为什么我们要使用后者来尝试解决前者，让我们来看一下上述描述的Python实现。
+现在我们已经了解了背包问题是什么，遗传编程是什么，以及为什么我们要使用后者来尝试解决前者，让我们来看一下上述描述的 Python 实现。
 
 我们将逐一了解重要函数，然后再查看整体程序。
 
-该程序使用Python实现，未使用任何第三方库。
+该程序使用 Python 实现，未使用任何第三方库。
 
 ## 生成随机种群
 
-此函数生成给定大小的随机种群。它使用for循环遍历给定的大小，并为每次迭代创建一个染色体。这个染色体是由0和1组成的列表，使用random.choice()函数生成。然后将染色体附加到种群列表中。最后，函数打印出一条消息并返回种群列表。此函数对于创建遗传算法的个体种群非常有用。
+此函数生成给定大小的随机种群。它使用 for 循环遍历给定的大小，并为每次迭代创建一个染色体。这个染色体是由 0 和 1 组成的列表，使用 random.choice()函数生成。然后将染色体附加到种群列表中。最后，函数打印出一条消息并返回种群列表。此函数对于创建遗传算法的个体种群非常有用。
 
 ```py
 def generate_population(size):
@@ -63,7 +63,7 @@ def generate_population(size):
 
 ## 计算染色体适应度
 
-此函数用于计算染色体的适应度。它以染色体作为参数，并对其进行迭代。如果染色体在给定索引处的值为1，它就将对应项的重量和值分别添加到总重量和总值中。如果总重量超过最大重量，则适应度设置为0\。否则，适应度设置为总值。该函数在遗传算法中用于确定给定染色体的适应度。
+此函数用于计算染色体的适应度。它以染色体作为参数，并对其进行迭代。如果染色体在给定索引处的值为 1，它就将对应项的重量和值分别添加到总重量和总值中。如果总重量超过最大重量，则适应度设置为 0\。否则，适应度设置为总值。该函数在遗传算法中用于确定给定染色体的适应度。
 
 ```py
 def calculate_fitness(chromosome):
@@ -370,4 +370,4 @@ Value: 14
 
 +   [梯度消失问题：原因、后果及解决方案](https://www.kdnuggets.com/2022/02/vanishing-gradient-problem.html)
 
-+   [今天90%的代码是为了防止失败，这就是问题所在](https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html)
++   [今天 90%的代码是为了防止失败，这就是问题所在](https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html)

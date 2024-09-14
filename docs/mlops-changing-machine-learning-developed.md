@@ -1,12 +1,12 @@
 # MLOps 正在改变机器学习模型的开发方式
 
-> 原文：[https://www.kdnuggets.com/2020/12/mlops-changing-machine-learning-developed.html](https://www.kdnuggets.com/2020/12/mlops-changing-machine-learning-developed.html)
+> 原文：[`www.kdnuggets.com/2020/12/mlops-changing-machine-learning-developed.html`](https://www.kdnuggets.com/2020/12/mlops-changing-machine-learning-developed.html)
 
-[评论](#comments)
+评论
 
 **由 [Henrik Skogstrom](https://www.linkedin.com/in/skogstrom/)，Valohai 增长负责人**。
 
-![](../Images/560244cba001fad2088b413d8033f5d9.png)
+![](img/560244cba001fad2088b413d8033f5d9.png)
 
 *照片由 [Kelly Sikkema](https://unsplash.com/@kellysikkema?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/idea?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -22,7 +22,7 @@ MLOps 的实际实施涉及采纳某些最佳实践，并建立支持这些最�
 
 机器学习版本控制应涵盖训练算法时使用的代码、底层数据和参数。这个过程对于确保可扩展性和 [再现性](https://www.wired.com/story/artificial-intelligence-confronts-reproducibility-crisis/) 至关重要。
 
-![](../Images/aa7725eafca83d8516c500154a006445.png)
+![](img/aa7725eafca83d8516c500154a006445.png)
 
 *机器学习的版本控制不仅限于传统软件中的代码。[再现性检查表](https://www.cs.mcgill.ca/~jpineau/ReproducibilityChecklist.pdf) 是 MLOps 设置应该能够记录的一个良好起点。*
 
@@ -48,7 +48,7 @@ MLOps 实践鼓励对上述所有组件进行版本控制作为标准实践，�
 
 例如，训练机器学习模型的方式很重要——非常重要。因此，模型训练中的任何小变化都可能导致预测结果中的问题和不一致。这种风险就是为什么将这些保护措施直接构建到代码中至关重要的原因。
 
-![](../Images/864e1daa7fb5dc4fd3625f60adc564dd.png)
+![](img/864e1daa7fb5dc4fd3625f60adc564dd.png)
 
 *数据测试通常以临时的方式进行，但它应该是程序化的。*
 
@@ -60,7 +60,7 @@ MLOps 实践鼓励对上述所有组件进行版本控制作为标准实践，�
 
 应该认识到的第三个 MLOps 概念是，机器学习管道是产品——而不是模型本身。这个认识通常由一个成熟度模型来表征，即组织从[手动过程过渡到自动化管道](https://cloud.google.com/solutions/machine-learning/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning)。
 
-![](../Images/a032a50ac5707d5637c06dce1dce9260.png)
+![](img/a032a50ac5707d5637c06dce1dce9260.png)
 
 *[机器学习管道](https://valohai.com/machine-learning-pipeline/)的最终目标是实现一个自愈的机器学习系统。*
 
@@ -82,15 +82,15 @@ MLOps 实践鼓励对上述所有组件进行版本控制作为标准实践，�
 
 +   应设置自动工作的保护措施——不要通过依赖手动或不一致的过程来冒险影响机器学习模型的结果。
 
-+   最后，管道是产品，而不是机器学习模型。一个成熟的管道是支持生产ML长期运行的唯一方式。
++   最后，管道是产品，而不是机器学习模型。一个成熟的管道是支持生产 ML 长期运行的唯一方式。
 
-**个人简介：**[亨里克·斯科格斯特罗姆](http://www.valohai.com) 领导[Valohai MLOps平台](https://valohai.com/mlops/)的采用，并广泛撰写有关生产中机器学习最佳实践的文章。在加入Valohai之前，亨里克曾在Quest Analytics担任产品经理，致力于改善美国的医疗保健可及性。Valohai于2017年推出，是MLOps的先驱，帮助Twitter、LEGO集团和JFrog等公司更快地将模型投入生产。
+**个人简介：**[亨里克·斯科格斯特罗姆](http://www.valohai.com) 领导[Valohai MLOps 平台](https://valohai.com/mlops/)的采用，并广泛撰写有关生产中机器学习最佳实践的文章。在加入 Valohai 之前，亨里克曾在 Quest Analytics 担任产品经理，致力于改善美国的医疗保健可及性。Valohai 于 2017 年推出，是 MLOps 的先驱，帮助 Twitter、LEGO 集团和 JFrog 等公司更快地将模型投入生产。
 
 **相关内容：**
 
 +   [MLOps – “为什么需要它？” 和 “它是什么”？](https://www.kdnuggets.com/2020/12/mlops-why-required-what-is.html)
 
-+   [数据科学与DevOps的交汇：MLOps与Jupyter、Git和Kubernetes](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
++   [数据科学与 DevOps 的交汇：MLOps 与 Jupyter、Git 和 Kubernetes](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
 
 +   [端到端机器学习平台的概览](https://www.kdnuggets.com/2020/07/tour-end-to-end-machine-learning-platforms.html)
 
@@ -98,11 +98,11 @@ MLOps 实践鼓励对上述所有组件进行版本控制作为标准实践，�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -110,12 +110,12 @@ MLOps 实践鼓励对上述所有组件进行版本控制作为标准实践，�
 
 +   [如何在不断变化的世界中成长为数据科学家](https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html)
 
-+   [Python f-Strings魔法：每个编码者需要知道的5个改变游戏规则的技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
++   [Python f-Strings 魔法：每个编码者需要知道的 5 个改变游戏规则的技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
 
-+   [ChatGPT如何改变编程的面貌](https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming)
++   [ChatGPT 如何改变编程的面貌](https://www.kdnuggets.com/how-chatgpt-is-changing-the-face-of-programming)
 
-+   [工作的未来：AI如何改变职业格局](https://www.kdnuggets.com/2023/04/future-work-ai-changing-job-landscape.html)
++   [工作的未来：AI 如何改变职业格局](https://www.kdnuggets.com/2023/04/future-work-ai-changing-job-landscape.html)
 
-+   [IT员工扩充：AI如何改变软件开发行业](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)
++   [IT 员工扩充：AI 如何改变软件开发行业](https://www.kdnuggets.com/2023/05/staff-augmentation-ai-changing-software-development-industry.html)
 
-+   [机器学习中的设计模式及其在MLOps中的应用](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
++   [机器学习中的设计模式及其在 MLOps 中的应用](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)

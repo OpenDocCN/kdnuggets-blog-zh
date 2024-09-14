@@ -1,8 +1,8 @@
 # 如何在生成型人工智能时代脱颖而出并保护你的工作
 
-> 原文：[https://www.kdnuggets.com/how-to-standout-and-safeguard-your-job-in-the-generative-ai-era](https://www.kdnuggets.com/how-to-standout-and-safeguard-your-job-in-the-generative-ai-era)
+> 原文：[`www.kdnuggets.com/how-to-standout-and-safeguard-your-job-in-the-generative-ai-era`](https://www.kdnuggets.com/how-to-standout-and-safeguard-your-job-in-the-generative-ai-era)
 
-![如何在生成型人工智能时代脱颖而出并保护你的工作](../Images/c31b373718d89e7868207ba482acf47b.png)
+![如何在生成型人工智能时代脱颖而出并保护你的工作](img/c31b373718d89e7868207ba482acf47b.png)
 
 作者提供的图片
 
@@ -24,7 +24,7 @@
 
 +   [可汗学院](https://www.khanacademy.org/)提供统计学和概率论的课程
 
-![如何在生成型人工智能时代脱颖而出并保护你的工作](../Images/887c34a40c12d842757da032ce3a09f1.png)
+![如何在生成型人工智能时代脱颖而出并保护你的工作](img/887c34a40c12d842757da032ce3a09f1.png)
 
 作者提供的图片
 
@@ -34,15 +34,15 @@
 
 除了发展算法背后的直觉外，学习诸如成本函数、正则化、优化算法和误差分析等概念也是重要的。
 
-现在，让我们开始掌握软件编程。学习编写代码并实现解决方案使你能够无缝地进行实践。4小时的Python视频课程（如路线图图片所示）涵盖了基础知识，让你从一开始就能够入门。现在，我们准备学习深度学习的基础概念，包括层、节点、激活函数、反向传播、超参数调整等。
+现在，让我们开始掌握软件编程。学习编写代码并实现解决方案使你能够无缝地进行实践。4 小时的 Python 视频课程（如路线图图片所示）涵盖了基础知识，让你从一开始就能够入门。现在，我们准备学习深度学习的基础概念，包括层、节点、激活函数、反向传播、超参数调整等。
 
-太好了，学习了足够的内容，我们已经达到了最终阶段，我通常称之为游乐场。这是你将所有知识付诸实践的地方。一种很好的方式是通过实践和参与Kaggle竞赛。还可以找到获胜的解决方案，并开发应对各种业务问题的方法。
+太好了，学习了足够的内容，我们已经达到了最终阶段，我通常称之为游乐场。这是你将所有知识付诸实践的地方。一种很好的方式是通过实践和参与 Kaggle 竞赛。还可以找到获胜的解决方案，并开发应对各种业务问题的方法。
 
-## AI工作流程
+## AI 工作流程
 
-这是学习AI的典型路径，在此过程中，学习者将内化AI工作流程，从数据探索开始，即解剖数据以理解其底层模式。在这个阶段，数据科学家了解数据转换，以准备建模用途。
+这是学习 AI 的典型路径，在此过程中，学习者将内化 AI 工作流程，从数据探索开始，即解剖数据以理解其底层模式。在这个阶段，数据科学家了解数据转换，以准备建模用途。
 
-![如何在生成性人工智能时代脱颖而出并保障你的工作](../Images/2de517562b74af2273b41b1cd0f72479.png)
+![如何在生成性人工智能时代脱颖而出并保障你的工作](img/2de517562b74af2273b41b1cd0f72479.png)
 
 作者图片
 
@@ -58,9 +58,9 @@
 
 学习者常有的一种观念是不断消费学习内容。虽然学习基础知识很重要，但同样重要的是开始实践和实验，以建立对所学概念的直观理解。
 
-此外，构建AI解决方案的关键组成部分是了解AI是否适合，包括将业务问题映射到正确技术解决方案的能力。如果起步阶段就做错了，那么期望实现的解决方案在有意义地满足业务目标上是无法实现的。
+此外，构建 AI 解决方案的关键组成部分是了解 AI 是否适合，包括将业务问题映射到正确技术解决方案的能力。如果起步阶段就做错了，那么期望实现的解决方案在有意义地满足业务目标上是无法实现的。
 
-![如何在生成性人工智能时代脱颖而出并保障你的工作](../Images/72df0a0a112e19c5e1a38fdac5b7b3aa.png)
+![如何在生成性人工智能时代脱颖而出并保障你的工作](img/72df0a0a112e19c5e1a38fdac5b7b3aa.png)
 
 作者图片
 
@@ -68,7 +68,7 @@
 
 即使模型显示出良好的结果，如果缺乏清晰度和将这些结果与业务成果联系起来的能力，模型仍可能未被采纳。这个差距可以通过有效的沟通技巧来弥补。
 
-最后，在你的人工智能方法中务必以数据为先。任何AI模型的成功都依赖于数据。此外，寻找那些相信AI能力和可能性，同时理解相关风险的AI倡导者。
+最后，在你的人工智能方法中务必以数据为先。任何 AI 模型的成功都依赖于数据。此外，寻找那些相信 AI 能力和可能性，同时理解相关风险的 AI 倡导者。
 
 拥有这些技能，我祝愿你在人工智能领域拥有一个卓越的职业生涯。
 
@@ -76,14 +76,14 @@
 
 ### 了解更多相关话题
 
-+   [如何在GPT-4时代成为数据科学家](https://www.kdnuggets.com/2023/04/get-hired-data-scientist-gpt4-era.html)
++   [如何在 GPT-4 时代成为数据科学家](https://www.kdnuggets.com/2023/04/get-hired-data-scientist-gpt4-era.html)
 
-+   [GenAI时代的AI转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
++   [GenAI 时代的 AI 转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
 
-+   [数据分析中的工作趋势：用于工作趋势分析的NLP](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
++   [数据分析中的工作趋势：用于工作趋势分析的 NLP](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
 +   [如何在没有任何工作经验的情况下获得第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
-+   [在选择下一份数据科学工作之前需要注意的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [在选择下一份数据科学工作之前需要注意的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [获得第一份数据科学工作的7个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
++   [获得第一份数据科学工作的 7 个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)

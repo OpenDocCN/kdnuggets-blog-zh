@@ -1,12 +1,12 @@
 # 如何失败于人工智能：9 种创意方式让你的 AI 创业公司走向失败
 
-> 原文：[https://www.kdnuggets.com/2017/05/fail-artificial-intelligence-creative-ways.html](https://www.kdnuggets.com/2017/05/fail-artificial-intelligence-creative-ways.html)
+> 原文：[`www.kdnuggets.com/2017/05/fail-artificial-intelligence-creative-ways.html`](https://www.kdnuggets.com/2017/05/fail-artificial-intelligence-creative-ways.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：弗朗切斯科·加达莱塔，Abe。**
 
-![失败](../Images/cea7ce0eb8189ce5a2e26266c8a76582.png)
+![失败](img/cea7ce0eb8189ce5a2e26266c8a76582.png)
 
 由 [startupcfos.in](http://startupcfos.in) 提供
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -52,7 +52,7 @@
 
 ### #4 缺乏清晰的愿景
 
-对于任何技术公司来说，快速建立明确的愿景至关重要。这对于AI公司尤其重要，因为技术在许多不同的行业（从金融到医疗）都有应用。
+对于任何技术公司来说，快速建立明确的愿景至关重要。这对于 AI 公司尤其重要，因为技术在许多不同的行业（从金融到医疗）都有应用。
 
 这个愿景应该尽早并经常地传达给员工，以确保每个人都对公司的使命和发展路线图有一致的理解。除了这个长期愿景之外，明确的短期目标和任务也是至关重要的。
 
@@ -60,11 +60,11 @@
 
 ### #5 在未解决商业需求的情况下进行开发
 
-AI公司也是软件公司。为了自身目的而编写的软件，如果不能满足任何商业需求，是不会卖出去的。
+AI 公司也是软件公司。为了自身目的而编写的软件，如果不能满足任何商业需求，是不会卖出去的。
 
 无用的软件，无论开发成本多么低廉，最终都会非常昂贵，因为没有回报。如果它对潜在客户没有任何价值，那么开发它就浪费时间和资源，最终对你的公司没有任何价值。
 
-为了AI而开发AI是一种……走向失败的好方法。
+为了 AI 而开发 AI 是一种……走向失败的好方法。
 
 ### #6 培养“我们是最好的”态度
 
@@ -76,7 +76,7 @@ AI公司也是软件公司。为了自身目的而编写的软件，如果不能
 
 ### #7 陷入无休止的开发循环
 
-这对软件公司（尤其是AI公司）尤为适用。
+这对软件公司（尤其是 AI 公司）尤为适用。
 
 在软件设计中，快速开发和更快发布是很重要的，即使产品不完美。为什么？因为在封闭环境中开发的软件没有任何好处；它需要在现实世界中，面对真实用户和真实问题。通过提前和频繁发布，你可以收集有用的数据，了解什么有效，什么无效，并迭代出最佳版本的产品。
 
@@ -96,7 +96,7 @@ AI公司也是软件公司。为了自身目的而编写的软件，如果不能
 
 ### #9 假设人工智能的炒作足以成功
 
-这不是人工智能第一次受到大量炒作。第一次是在80年代，当时教授们声称计算机很快会取代人类（显然这并没有发生）。但现在人工智能再次受到高度炒作，这次似乎有所不同。持续五年的炒作而没有减缓迹象，这不仅仅是炒作，而是稳定的趋势。
+这不是人工智能第一次受到大量炒作。第一次是在 80 年代，当时教授们声称计算机很快会取代人类（显然这并没有发生）。但现在人工智能再次受到高度炒作，这次似乎有所不同。持续五年的炒作而没有减缓迹象，这不仅仅是炒作，而是稳定的趋势。
 
 然而，单凭炒作是不足以让技术成功的。人工智能开发者必须付诸实践，构建真正能够兑现炒作的产品。
 
@@ -114,22 +114,22 @@ AI公司也是软件公司。为了自身目的而编写的软件，如果不能
 
 **相关：**
 
-+   [如何在数据初创公司完成工作](/2016/10/datafiniti-get-stuff-done-data-startup.html)
++   如何在数据初创公司完成工作
 
-+   [大数据、数据科学、分析项目失败的主要原因](/2016/12/top-reasons-big-data-science-analytics-fail.html)
++   大数据、数据科学、分析项目失败的主要原因
 
-+   [什么是人工智能？智能的成分](/2017/04/grakn-artificial-intelligence-ingredients-intelligence.html)
++   什么是人工智能？智能的成分
 
 ### 更多相关内容
 
-+   [如何使用GPT通过Hugging Face生成创意内容…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)
++   [如何使用 GPT 通过 Hugging Face 生成创意内容…](https://www.kdnuggets.com/how-to-use-gpt-for-generating-creative-content-with-hugging-face-transformers)
 
-+   [通过ChatGPT和AI赚钱的3种方法](https://www.kdnuggets.com/3-ways-to-make-money-with-chatgpt-and-ai)
++   [通过 ChatGPT 和 AI 赚钱的 3 种方法](https://www.kdnuggets.com/3-ways-to-make-money-with-chatgpt-and-ai)
 
-+   [12个建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
++   [12 个建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
 
-+   [在ChatGPT时代建立深科技创业公司的10个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
++   [在 ChatGPT 时代建立深科技创业公司的 10 个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
 
 +   [免费人工智能与深度学习速成课程](https://www.kdnuggets.com/2022/07/free-artificial-intelligence-deep-learning-crash-course.html)
 
-+   [2022年最热门的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最热门的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)

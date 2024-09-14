@@ -1,8 +1,8 @@
 # NoSQL 数据库及其应用场景
 
-> 原文：[https://www.kdnuggets.com/2023/03/nosql-databases-cases.html](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
+> 原文：[`www.kdnuggets.com/2023/03/nosql-databases-cases.html`](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
-![NoSQL 数据库及其应用场景](../Images/c095a58a19d6d49f2662ea97c476de5a.png)
+![NoSQL 数据库及其应用场景](img/c095a58a19d6d49f2662ea97c476de5a.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -48,7 +48,7 @@ NoSQL 数据库支持水平扩展，这意味着我们可以通过添加更多�
 
 它们被设计用于优化读写性能，使其适用于实时数据处理应用程序，其中每天生成数 TB 的数据。它们具有更快的查询响应时间，并支持数据库分片，从而提升整体性能。
 
-![NoSQL 数据库及其使用案例](../Images/c837a29e643428c1213ec57fb1a8d7d4.png)
+![NoSQL 数据库及其使用案例](img/c837a29e643428c1213ec57fb1a8d7d4.png)
 
 图片由作者提供
 
@@ -76,37 +76,37 @@ NoSQL 数据库支持水平扩展，这意味着我们可以通过添加更多�
 
 ## 图数据库
 
-这种类型的NoSQL数据库最适合存储彼此紧密相关的数据。它们以节点和边的形式存储数据，用于表示对象之间的复杂关系。最适合用于社交媒体应用和创建推荐引擎。著名的例子有Neo4J和InfoGrid。
+这种类型的 NoSQL 数据库最适合存储彼此紧密相关的数据。它们以节点和边的形式存储数据，用于表示对象之间的复杂关系。最适合用于社交媒体应用和创建推荐引擎。著名的例子有 Neo4J 和 InfoGrid。
 
 **使用案例：**
 
-它们最适合用于创建推荐引擎。例如，Youtube会根据用户的观看历史推荐视频。图数据库可以存储和处理互联的数据，并快速提供相关内容。
+它们最适合用于创建推荐引擎。例如，Youtube 会根据用户的观看历史推荐视频。图数据库可以存储和处理互联的数据，并快速提供相关内容。
 
 ## 列式数据库
 
-在这种类型的NoSQL数据库中，数据存储在列族中。类似类型的数据被分组到单元格中，并存储在数据列中而不是行中。一个列甚至可以包含多个行和列，这些行和列都有自己唯一的ID。
+在这种类型的 NoSQL 数据库中，数据存储在列族中。类似类型的数据被分组到单元格中，并存储在数据列中而不是行中。一个列甚至可以包含多个行和列，这些行和列都有自己唯一的 ID。
 
-在传统的SQL数据库中，查询是逐行执行的。但在列式数据库中，查询只针对我们想要的特定列执行。这节省了时间，并使其适合处理大规模数据集。它们可能看起来像SQL数据库，因为它们涉及某种形式的模式管理，并且与关系表的工作方式相同。但它们比SQL数据库更灵活和高效，因此被归类为NoSQL数据库。
+在传统的 SQL 数据库中，查询是逐行执行的。但在列式数据库中，查询只针对我们想要的特定列执行。这节省了时间，并使其适合处理大规模数据集。它们可能看起来像 SQL 数据库，因为它们涉及某种形式的模式管理，并且与关系表的工作方式相同。但它们比 SQL 数据库更灵活和高效，因此被归类为 NoSQL 数据库。
 
-列式数据库的流行例子包括Apache HBase和Apache Cassandra。你可以阅读[这篇](./2021/02/understanding-nosql-database-types-column-oriented-databases.html)由Alex Williams撰写的文章，以获取更多关于这个主题的信息。
+列式数据库的流行例子包括 Apache HBase 和 Apache Cassandra。你可以阅读这篇由 Alex Williams 撰写的文章，以获取更多关于这个主题的信息。
 
 **使用案例：**
 
 列族数据库最适合用于数据仓储应用。这些应用需要分析大量数据以获得商业智能，并且具有高写入吞吐量，而列族数据库完全可以承担这些任务。
 
-![NoSQL数据库及其应用场景](../Images/6326c07a5002974dd1fc868dd6c73314.png)
+![NoSQL 数据库及其应用场景](img/6326c07a5002974dd1fc868dd6c73314.png)
 
-不同类型的NoSQL数据库 | 作者图片
+不同类型的 NoSQL 数据库 | 作者图片
 
 # 结论
 
-在本文中，我们了解了什么是NoSQL数据库，并初步了解了SQL与NoSQL数据库之间的根本区别。接着，我们讨论了几种流行的NoSQL数据库类型及其使用场景。
+在本文中，我们了解了什么是 NoSQL 数据库，并初步了解了 SQL 与 NoSQL 数据库之间的根本区别。接着，我们讨论了几种流行的 NoSQL 数据库类型及其使用场景。
 
-在SQL和NoSQL数据库之间总是存在一个***选择什么？*** 的问题。要做出正确的选择，首先必须了解应用程序的使用案例、数据模型、可扩展性和性能，然后再决定。
+在 SQL 和 NoSQL 数据库之间总是存在一个***选择什么？*** 的问题。要做出正确的选择，首先必须了解应用程序的使用案例、数据模型、可扩展性和性能，然后再决定。
 
 希望你喜欢阅读这篇文章。如果你有任何评论或建议，请通过[Linkedin](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)与我联系。
 
-**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名B.Tech. 电气工程学生，目前在本科最后一年。他对Web开发和机器学习领域充满兴趣。他已经追求了这个兴趣，并渴望在这些方向上进一步工作。
+**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名 B.Tech. 电气工程学生，目前在本科最后一年。他对 Web 开发和机器学习领域充满兴趣。他已经追求了这个兴趣，并渴望在这些方向上进一步工作。
 
 ### 更多相关内容
 
@@ -120,4 +120,4 @@ NoSQL 数据库支持水平扩展，这意味着我们可以通过添加更多�
 
 +   [为什么 TinyML 用例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
 
-+   [KDnuggets™ 新闻 22:n04，1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04，1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)

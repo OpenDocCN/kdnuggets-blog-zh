@@ -1,22 +1,22 @@
-# 如何“极致学习”数据科学：去除干扰和找到专注，第2部分
+# 如何“极致学习”数据科学：去除干扰和找到专注，第二部分
 
-> 原文：[https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html](https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html)
+> 原文：[`www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html`](https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html)
 
-[评论](#comments)
+评论
 
 **由 [Ben thecoder](https://twitter.com/benthecoder1) 编写，开发者、作家、机器学习和人工智能爱好者。**
 
-![](../Images/6475cf9b6bf9a106e39246bdfa4d8c08.png)
+![](img/6475cf9b6bf9a106e39246bdfa4d8c08.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -30,13 +30,13 @@
 
 > “注意力是一种资源——一个人的注意力有限。” — 马修·克劳福德
 
-正如所说，本文将主要关注你猜到的主题，*专注*。现代生活充满了干扰，从手机上的不断通知到倾向于刷YouTube和Netflix，我们的注意力持续时间显著减少。
+正如所说，本文将主要关注你猜到的主题，*专注*。现代生活充满了干扰，从手机上的不断通知到倾向于刷 YouTube 和 Netflix，我们的注意力持续时间显著减少。
 
 这些干扰对一个人的健康和高效工作能力可能是有害的。在这个充满干扰和分散注意力的世界里找到你的专注，就像在大海捞针一样困难。
 
 然而，有一些简单的技巧可以帮助你克服这些寻找专注的障碍，实现你的极致学习目标！
 
-### 4种简单的心理策略来抵御干扰
+### 4 种简单的心理策略来抵御干扰
 
 **1\. 动力**
 
@@ -46,13 +46,13 @@
 
 一个例子是设置一个五分钟的计时器。首先，你承诺自己在这五分钟后可以停止工作。这个由承诺带来的短时间内停止的动力通常会让人继续工作下去。
 
-这种自我欺骗的策略与著名的*番茄钟技巧*类似：设置一个[timer](https://pomodoro-tracker.com/)为25分钟，并在没有任何干扰的情况下工作，不中断。当计时器响起时，休息五分钟。然后，再继续工作25分钟。
+这种自我欺骗的策略与著名的*番茄钟技巧*类似：设置一个[timer](https://pomodoro-tracker.com/)为 25 分钟，并在没有任何干扰的情况下工作，不中断。当计时器响起时，休息五分钟。然后，再继续工作 25 分钟。
 
-自创的紧迫感和在专注工作间隙奖励自己休息是特别有效的，且被证明非常高效。随着专注工作的时间增加，休息的时长也会成比例增加（从五分钟到10/15分钟）。
+自创的紧迫感和在专注工作间隙奖励自己休息是特别有效的，且被证明非常高效。随着专注工作的时间增加，休息的时长也会成比例增加（从五分钟到 10/15 分钟）。
 
-相反，有些人更愿意在25分钟的专注工作后继续工作，因为它已经给了你继续工作的动力，然后在一个小时后再休息。
+相反，有些人更愿意在 25 分钟的专注工作后继续工作，因为它已经给了你继续工作的动力，然后在一个小时后再休息。
 
-这种替代方案叫做*52/17技巧*。它最近变得非常流行，甚至被称为理想的生产力计划。因此，根据你的喜好和能力，你可以调整这种番茄钟技巧，开始获得专注。
+这种替代方案叫做*52/17 技巧*。它最近变得非常流行，甚至被称为理想的生产力计划。因此，根据你的喜好和能力，你可以调整这种番茄钟技巧，开始获得专注。
 
 **2. 维持专注**
 
@@ -64,7 +64,7 @@
 
 1.  将手机设置为飞行模式。
 
-1.  关闭你的Wi-Fi。
+1.  关闭你的 Wi-Fi。
 
 1.  开启“勿扰”模式。
 
@@ -88,13 +88,13 @@
 
 你可能会认为挑战已经结束，你已经征服了专注的高峰。但试炼并没有就此结束。
 
-虽然你可能已经按照YouTube上的逐步教程从零开始构建了一个逻辑回归预测模型，并且认为自己学到了很多，但可能你已经进入了自动驾驶模式。
+虽然你可能已经按照 YouTube 上的逐步教程从零开始构建了一个逻辑回归预测模型，并且认为自己学到了很多，但可能你已经进入了自动驾驶模式。
 
 尝试在没有任何视频教程的情况下构建另一个模型，你能做到吗？如果不能，你并没有完全投入到学习过程中，你只是输入了新材料，却没有保留它。
 
 为了对抗自动驾驶模式，应用*交替学习*——故意在材料和学习模式之间进行交替。
 
-理想情况下，为了确保新概念的记忆，你必须通过在*短时间、规律间隔的学习*中进行交替学习。例如，如果你每周有10小时用来学习 Python，目标应是每周五次两小时的学习，而不是一天十小时的学习。
+理想情况下，为了确保新概念的记忆，你必须通过在*短时间、规律间隔的学习*中进行交替学习。例如，如果你每周有 10 小时用来学习 Python，目标应是每周五次两小时的学习，而不是一天十小时的学习。
 
 在每个学习阶段，提前计划你将学习的内容，例如周一的数据可视化，周二的数据清理，周三的统计和概率等等。
 
@@ -106,7 +106,7 @@
 
 例如，你在为项目调试 Python 代码时遇到困难，你已经在 Stack Overflow、Reddit、YouTube 和 Discord 上花费了几个小时，但仍未解决问题。
 
-最终，你整天所做的只是调试，而且完全忽视了其他计划。为了应对这种情况（编程中常见），给调试代码大约15-20分钟的时间。
+最终，你整天所做的只是调试，而且完全忽视了其他计划。为了应对这种情况（编程中常见），给调试代码大约 15-20 分钟的时间。
 
 这样，你可以继续做其他事情，而不是整天都在修复你的代码。
 
@@ -124,7 +124,7 @@
 
 有了这些，你可以根据你的唤起水平分配任务。
 
-*高兴奋度* 产生强烈但狭窄的专注——适合重复性任务，如寻找数据科学学习资源并将其整理到Notion、Trello、GitHub等应用程序中，或为公司研究解决业务问题。
+*高兴奋度* 产生强烈但狭窄的专注——适合重复性任务，如寻找数据科学学习资源并将其整理到 Notion、Trello、GitHub 等应用程序中，或为公司研究解决业务问题。
 
 *低兴奋度* 产生放松但较宽泛的专注，适合横向思维和形成新的联系，如头脑风暴有趣的数据科学项目或在解决问题时提出正确的问题。
 
@@ -136,7 +136,7 @@
 
 按照这四个步骤进行：
 
-1.  使用时间追踪应用和如Pomodoro技术等技巧来获得动力。
+1.  使用时间追踪应用和如 Pomodoro 技术等技巧来获得动力。
 
 1.  通过控制环境来维持你的专注力。
 
@@ -148,22 +148,22 @@
 
 **相关内容：**
 
-+   [如何“极限学习”数据科学，第1部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)
++   [如何“极限学习”数据科学，第一部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)
 
 +   [对新手和初级数据科学家的建议](https://www.kdnuggets.com/2019/11/advice-new-junior-data-scientists.html)
 
-+   [5个适合初学者的步骤，通过Python学习机器学习和数据科学](https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html)
++   [5 个适合初学者的步骤，通过 Python 学习机器学习和数据科学](https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html)
 
 ### 相关话题
 
-+   [使用标准差在Python中去除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
++   [使用标准差在 Python 中去除异常值](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
 
-+   [寻找最佳IDE软件](https://www.kdnuggets.com/2022/05/finding-best-ide-software.html)
++   [寻找最佳 IDE 软件](https://www.kdnuggets.com/2022/05/finding-best-ide-software.html)
 
-+   [KDnuggets新闻，4月6日：8门免费MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)

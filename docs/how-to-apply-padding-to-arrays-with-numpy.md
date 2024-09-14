@@ -1,8 +1,8 @@
 # 如何使用 NumPy 对数组进行填充
 
-> 原文：[https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy](https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy)
+> 原文：[`www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy`](https://www.kdnuggets.com/how-to-apply-padding-to-arrays-with-numpy)
 
-![如何使用 NumPy 对数组进行填充](../Images/82adb7c73e63d66b5db719b315874990.png)
+![如何使用 NumPy 对数组进行填充](img/82adb7c73e63d66b5db719b315874990.png)
 
 图片来自 [freepik](https://www.freepik.com/free-vector/futuristic-code-zoom-background_29807378.htm#fromView=search&page=1&position=2&uuid=4a381e3b-a6c2-49c7-bfff-d0a4415fead3)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -240,4 +240,4 @@ print(padded_array)
 
 +   [什么是切比雪夫定理，它如何应用于数据科学？](https://www.kdnuggets.com/2022/11/chebychev-theorem-apply-data-science.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理，它如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理，它如何…](https://www.kdnuggets.com/2022/n46.html)

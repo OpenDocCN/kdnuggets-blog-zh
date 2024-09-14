@@ -1,12 +1,12 @@
 # Keras 超参数调整在 Google Colab 中使用 Hyperas
 
-> 原文：[https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html](https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
+> 原文：[`www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html`](https://www.kdnuggets.com/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Nils Schlüter](https://www.nilsschlueter.de/) 提供，软件工程师**
 
-![Figure](../Images/74dd91f3826239a8e41b79238d097c74.png)
+![Figure](img/74dd91f3826239a8e41b79238d097c74.png)
 
 为你的神经网络调整超参数可能会很棘手（照片由 [Anthony Roberts](https://unsplash.com/@aroberts1228) 提供，来自 [Unsplash](https://unsplash.com/)）
 
@@ -14,7 +14,7 @@
 
 **创建一个新的笔记本并启用 GPU 运行时**
 
-![](../Images/0c1e8c2d44298030433f11f92ebf900a.png)
+![](img/0c1e8c2d44298030433f11f92ebf900a.png)
 
 更改运行时为 GPU 的对话框
 
@@ -57,7 +57,7 @@
 
 运行此单元格后，你将被提示在浏览器中打开一个网站并将代码复制并粘贴回笔记本中：
 
-![](../Images/a63e8b80c734ae22092fabe6bdbe1844.png)
+![](img/a63e8b80c734ae22092fabe6bdbe1844.png)
 
 你运行上面单元格后的输出
 
@@ -91,21 +91,21 @@
 
 **相关：**
 
-+   [自动化机器学习的当前状态](/2017/01/current-state-automated-machine-learning.html)
++   自动化机器学习的当前状态
 
-+   [Auto-Keras，或如何用 4 行代码创建深度学习模型](/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)
++   Auto-Keras，或如何用 4 行代码创建深度学习模型
 
-+   [自动化机器学习与自动化数据科学](/2018/07/automated-machine-learning-vs-automated-data-science.html)
++   自动化机器学习与自动化数据科学
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

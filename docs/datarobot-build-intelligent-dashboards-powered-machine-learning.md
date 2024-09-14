@@ -1,6 +1,6 @@
 # 如何构建由机器学习驱动的智能仪表板
 
-> 原文：[https://www.kdnuggets.com/2018/06/datarobot-build-intelligent-dashboards-powered-machine-learning.html](https://www.kdnuggets.com/2018/06/datarobot-build-intelligent-dashboards-powered-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/06/datarobot-build-intelligent-dashboards-powered-machine-learning.html`](https://www.kdnuggets.com/2018/06/datarobot-build-intelligent-dashboards-powered-machine-learning.html)
 
 |
 
@@ -8,7 +8,7 @@
 
 &#124;   &#124;
 
-&#124; ![](../Images/49e021d7047936874ee46200111ba9f0.png) &#124;
+&#124; ![](img/49e021d7047936874ee46200111ba9f0.png) &#124;
 
 &#124;   &#124;
 
@@ -20,11 +20,11 @@
 
 &#124;   &#124;
 
-&#124; [![如何构建由机器学习驱动的智能仪表板](../Images/a00bc620237cd452fca3cf11c5d55c9b.png)](https://www.datarobot.com/webinar/intelligent-dashboards/?utm_source=KDNuggets&utm_medium=email&utm_campaign=DASHBOARDSae) &#124;
+&#124; ![如何构建由机器学习驱动的智能仪表板](https://www.datarobot.com/webinar/intelligent-dashboards/?utm_source=KDNuggets&utm_medium=email&utm_campaign=DASHBOARDSae) &#124;
 
 &#124;   &#124;
 
-&#124; **网络研讨会 - 2018年6月5日星期二 1:00 pm ET/ 10:00 am PT - 45分钟问答环节** &#124;
+&#124; **网络研讨会 - 2018 年 6 月 5 日星期二 1:00 pm ET/ 10:00 am PT - 45 分钟问答环节** &#124;
 
 &#124;   &#124;
 
@@ -66,11 +66,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
@@ -110,7 +110,7 @@
 
 &#124;   &#124;
 
-&#124; DataRobot公司，国际广场5楼，波士顿，MA 02110 &#124;
+&#124; DataRobot 公司，国际广场 5 楼，波士顿，MA 02110 &#124;
 
 &#124; © 2018   [联系我们](https://www.datarobot.com/contact-us/)   [隐私政策](https://www.datarobot.com/privacy) &#124;
 
@@ -120,14 +120,14 @@
 
 ### 相关话题
 
-+   [LangChain 101：构建你自己的GPT驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
++   [LangChain 101：构建你自己的 GPT 驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
 
-+   [让智能文档处理变得更智能：第1部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
++   [让智能文档处理变得更智能：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
 
 +   [人工智能的伦理：导航智能机器的未来](https://www.kdnuggets.com/2023/04/ethics-ai-navigating-future-intelligent-machines.html)
 
 +   [数据成熟度金字塔：从报告到主动…](https://www.kdnuggets.com/the-data-maturity-pyramid-from-reporting-to-a-proactive-intelligent-data-platform)
 
-+   [为有效的Tableau和Power BI仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
++   [为有效的 Tableau 和 Power BI 仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
 
-+   [AI驱动的RPA和IA对企业意味着什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)
++   [AI 驱动的 RPA 和 IA 对企业意味着什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)

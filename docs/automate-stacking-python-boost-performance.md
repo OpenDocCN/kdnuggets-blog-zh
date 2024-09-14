@@ -1,8 +1,8 @@
 # 在 Python 中自动化堆叠：如何在节省时间的同时提升性能
 
-> 原文：[https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html](https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html)
+> 原文：[`www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html`](https://www.kdnuggets.com/2019/08/automate-stacking-python-boost-performance.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Lukas Frei](https://www.linkedin.com/in/lukas-k-frei/)，PwC**
 
@@ -12,23 +12,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
-使用堆叠（堆叠泛化）在提升机器学习算法到新高度时是一个非常热门的话题。例如，如今大多数甚至所有获奖的 Kaggle 提交都使用某种形式的堆叠或其变体。堆叠泛化首次在 1992 年的论文*Stacked Generalization*中由**David Wolpert**提出，*其主要目的是减少泛化误差*。根据 Wolpert 的说法，它们可以被理解为“交叉验证的更复杂版本”*。虽然Wolpert 自己当时指出堆叠泛化的许多部分是“黑艺”，但似乎构建越来越大的堆叠泛化模型比小的堆叠泛化模型更有优势。然而，随着这些模型规模的不断扩大，它们的复杂性也在增加。自动化构建不同架构的过程将显著简化这一过程。本文的其余部分将讨论我最近遇到的一个包***vecstack***，它正试图实现这一点***。
+使用堆叠（堆叠泛化）在提升机器学习算法到新高度时是一个非常热门的话题。例如，如今大多数甚至所有获奖的 Kaggle 提交都使用某种形式的堆叠或其变体。堆叠泛化首次在 1992 年的论文*Stacked Generalization*中由**David Wolpert**提出，*其主要目的是减少泛化误差*。根据 Wolpert 的说法，它们可以被理解为“交叉验证的更复杂版本”*。虽然 Wolpert 自己当时指出堆叠泛化的许多部分是“黑艺”，但似乎构建越来越大的堆叠泛化模型比小的堆叠泛化模型更有优势。然而，随着这些模型规模的不断扩大，它们的复杂性也在增加。自动化构建不同架构的过程将显著简化这一过程。本文的其余部分将讨论我最近遇到的一个包***vecstack***，它正试图实现这一点***。
 
-![figure-name](../Images/6a9a0a6d18107156947e2b316d8415e7.png)来源：[https://giphy.com/gifs/funny-food-hRsayJrDAx8WY](https://giphy.com/gifs/funny-food-hRsayJrDAx8WY)
+![figure-name](img/6a9a0a6d18107156947e2b316d8415e7.png)来源：[`giphy.com/gifs/funny-food-hRsayJrDAx8WY`](https://giphy.com/gifs/funny-food-hRsayJrDAx8WY)
 
 ### 堆叠泛化是什么样的？
 
 堆叠泛化结构的主要思想是使用一个或多个第一层模型，通过这些模型进行预测，然后使用这些预测作为特征来拟合一个或多个第二层模型。为了避免过拟合，通常使用交叉验证来预测训练集的 OOF（折外）部分。这个包中有两种不同的变体，但我将在这一段中描述“变体 A”。在这种变体中，我们通过计算所有预测值的均值或众数来得到最终预测。整个过程可以使用以下来自 vecstack 文档的 GIF 进行可视化：
 
-![figure-name](../Images/b67acfb1d333e7cee31dbb4f3056a430.png)
+![figure-name](img/b67acfb1d333e7cee31dbb4f3056a430.png)
 
 ### 用例: 为分类构建堆叠泛化
 
@@ -60,7 +60,7 @@ df.sample(5)
 
 运行上述代码块，我们得到：
 
-![figure-name](../Images/6c4f3cb721feca132d0a79ac81fab88d.png)
+![figure-name](img/6c4f3cb721feca132d0a79ac81fab88d.png)
 
 请注意，我使用了**.sample()**而不是**.head()**，以避免由于假设整个数据集具有前五行的结构而可能被误导。幸运的是，这个数据集没有任何缺失值，因此我们可以直接使用它来测试我们的包，而无需进行通常需要的数据清理和准备。
 
@@ -71,7 +71,7 @@ y = df[['Class']]
 X = df.iloc[:,1:]X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
 
-我们离有趣的部分越来越近了。还记得之前的GIF吗？现在是定义几个第一层模型进行堆叠泛化的时候了。这一步绝对值得单独写一篇文章，但为了简单起见，我们将使用三个模型：KNN 分类器、随机森林分类器和 XGBoost 分类器。
+我们离有趣的部分越来越近了。还记得之前的 GIF 吗？现在是定义几个第一层模型进行堆叠泛化的时候了。这一步绝对值得单独写一篇文章，但为了简单起见，我们将使用三个模型：KNN 分类器、随机森林分类器和 XGBoost 分类器。
 
 ```py
 models = [
@@ -207,11 +207,11 @@ model = model.fit(S_train, y_train)y_pred = model.predict(S_test)print('Final pr
 
 **相关：**
 
-+   [这里是你如何加速你的数据科学工作在 GPU 上](/2019/07/accelerate-data-science-on-gpu.html)
++   这里是你如何加速你的数据科学工作在 GPU 上
 
-+   [用 Numpy 加速你的 Python 代码的一个简单技巧](/2019/06/speeding-up-python-code-numpy.html)
++   用 Numpy 加速你的 Python 代码的一个简单技巧
 
-+   [GPU 加速的数据分析与机器学习](/2019/08/gpu-accelerated-data-analytics-machine-learning.html)
++   GPU 加速的数据分析与机器学习
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # 机器学习算法选择路线图
 
-> 原文：[https://www.kdnuggets.com/roadmap-to-machine-learning-algorithm-selection](https://www.kdnuggets.com/roadmap-to-machine-learning-algorithm-selection)
+> 原文：[`www.kdnuggets.com/roadmap-to-machine-learning-algorithm-selection`](https://www.kdnuggets.com/roadmap-to-machine-learning-algorithm-selection)
 
-![机器学习算法选择路线图](../Images/a767c77b1728dde047f860a86251aa94.png)
+![机器学习算法选择路线图](img/a767c77b1728dde047f860a86251aa94.png)
 
 图片由作者创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -38,7 +38,7 @@
 
 ### 问题类型
 
-你要解决的问题类型，无论是分类、回归、聚类还是其他类型，显然会影响算法的选择。每类问题都有适合的特定算法，而许多算法根本无法处理其他问题类型。例如，如果你在处理分类问题，你可能会在逻辑回归和支持向量机之间进行选择，而一个聚类问题可能会使你使用k-means。你可能不会在试图解决回归问题时从决策树分类算法开始。
+你要解决的问题类型，无论是分类、回归、聚类还是其他类型，显然会影响算法的选择。每类问题都有适合的特定算法，而许多算法根本无法处理其他问题类型。例如，如果你在处理分类问题，你可能会在逻辑回归和支持向量机之间进行选择，而一个聚类问题可能会使你使用 k-means。你可能不会在试图解决回归问题时从决策树分类算法开始。
 
 ### 性能指标
 
@@ -68,7 +68,7 @@
 
 [](https://www.kdnuggets.com/wp-content/uploads/machine-learning-algo-selection-flowchart.png)
 
-[![算法选择流程图](../Images/3efb77212311855ad775deeca6c6f12c.png)](https://www.kdnuggets.com/wp-content/uploads/machine-learning-algo-selection-flowchart.png)
+![算法选择流程图](https://www.kdnuggets.com/wp-content/uploads/machine-learning-algo-selection-flowchart.png)
 
 流程图可视化由作者创建（点击放大）
 
@@ -80,19 +80,19 @@
 
 选择算法的基础在于对问题的精确定义：你想要建模什么以及你要克服哪些挑战。同时，评估数据的特性，如数据的类型（结构化/非结构化）、数量、质量（噪声和缺失值的缺乏）和多样性。这些因素共同影响你能够应用的模型复杂性水平和你必须使用的模型类型。
 
-### 第2步：根据数据和问题类型选择合适的算法
+### 第 2 步：根据数据和问题类型选择合适的算法
 
-在问题和数据特征被揭示之后，下一步是选择最适合你的数据和问题类型的算法或算法组。例如，像逻辑回归、决策树和SVM这样的算法可能对结构化数据的二分类有用。回归可能会提示使用线性回归或集成方法。非结构化数据的聚类分析可能需要使用K-Means、DBSCAN或其他类型的算法。你选择的算法必须能够有效处理你的数据，同时满足项目的要求。
+在问题和数据特征被揭示之后，下一步是选择最适合你的数据和问题类型的算法或算法组。例如，像逻辑回归、决策树和 SVM 这样的算法可能对结构化数据的二分类有用。回归可能会提示使用线性回归或集成方法。非结构化数据的聚类分析可能需要使用 K-Means、DBSCAN 或其他类型的算法。你选择的算法必须能够有效处理你的数据，同时满足项目的要求。
 
-### 第3步：考虑模型性能要求
+### 第 3 步：考虑模型性能要求
 
 不同项目的性能要求需要不同的策略。这一轮涉及识别对你的企业最重要的性能指标：准确性、精度、召回率、执行速度、可解释性等。例如，在理解模型内部工作机制至关重要的领域，如金融或医学中，可解释性变得非常关键。必须将关于项目中重要特征的数据与各种算法的已知优势相匹配，以确保这些需求得到满足。*最终*，这种对齐确保了数据和业务的需求得到满足。
 
-### 第4步：构建基线模型
+### 第 4 步：构建基线模型
 
 与其追求算法复杂性的最前沿，不如从一个简单的初始模型开始建模。该模型应该易于安装并运行快速，这是基于对更复杂模型性能的估计。这一步对建立早期模型性能估计非常重要，并可能指出数据准备中的大规模问题，或初始时做出的天真假设。
 
-### 第5步：根据模型评估进行精细化和迭代
+### 第 5 步：根据模型评估进行精细化和迭代
 
 一旦达到基线水平，依据性能标准对模型进行精细化。这包括调整模型的超参数和特征工程，或者如果前一个模型不符合项目指定的性能指标，则考虑不同的基线。通过这些精细化过程的迭代可能会发生多次，每次模型的调整都可能带来更深入的理解和更好的性能。以这种方式精细化和评估模型是优化其性能以符合设定标准的关键。
 
@@ -116,25 +116,25 @@
 
 +   线性回归：最基础的回归模型，当处理数据可以通过最小的多重共线性线性分离时最有效。
 
-+   Ridge回归：在线性回归中添加正则化，旨在减少复杂性并防止在处理高度相关的数据时过拟合。
++   Ridge 回归：在线性回归中添加正则化，旨在减少复杂性并防止在处理高度相关的数据时过拟合。
 
-+   Lasso回归：类似于Ridge，也包括正则化，但通过将不太重要变量的系数归零来强制模型简单化。
++   Lasso 回归：类似于 Ridge，也包括正则化，但通过将不太重要变量的系数归零来强制模型简单化。
 
 ### 常见聚类算法
 
-+   k-means聚类：当簇的数量和它们明显的非层次分离明显时，使用这个简单的聚类算法。
++   k-means 聚类：当簇的数量和它们明显的非层次分离明显时，使用这个简单的聚类算法。
 
 +   层次聚类：如果您的模型需要层次结构，让层次聚类促进发现和访问更深层次的簇。
 
-+   DBSCAN：如果目标是找到形状变化的簇，标记数据集中明显和远离的簇，或者处理高度噪声的数据，一般来说可以考虑在数据集上实现DBSCAN。
++   DBSCAN：如果目标是找到形状变化的簇，标记数据集中明显和远离的簇，或者处理高度噪声的数据，一般来说可以考虑在数据集上实现 DBSCAN。
 
 牢记性能目标，您的算法选择可以根据数据集的特征和目标进行调整，如下所述：
 
 +   在数据较小且类别地理位置明确且容易区分的情况下，实施简单模型——如用于分类的逻辑回归和用于回归的线性回归——是一个好主意。
 
-+   要处理大型数据集或防止数据建模中的过拟合，您可能需要考虑使用更复杂的模型，例如用于回归问题的Ridge回归和Lasso回归，以及用于分类任务的SVM。
++   要处理大型数据集或防止数据建模中的过拟合，您可能需要考虑使用更复杂的模型，例如用于回归问题的 Ridge 回归和 Lasso 回归，以及用于分类任务的 SVM。
 
-+   对于聚类目的，如果你面临各种问题，比如恢复基本的鼠标点击聚类、识别更复杂的自上而下或自下而上的层次结构，或处理特别嘈杂的数据，那么应该考虑k-means、层次聚类和DBSCAN，这取决于数据集的具体情况。
++   对于聚类目的，如果你面临各种问题，比如恢复基本的鼠标点击聚类、识别更复杂的自上而下或自下而上的层次结构，或处理特别嘈杂的数据，那么应该考虑 k-means、层次聚类和 DBSCAN，这取决于数据集的具体情况。
 
 ## 总结
 
@@ -144,11 +144,11 @@
 
 请记住，亲手尝试各种算法并测试它们可以是一个有趣且有回报的经历。通过遵循本讨论中介绍的指南，你可以理解这里涵盖的机器学习和数据分析的各个方面，并为将来出现的问题做好准备。机器学习和数据科学无疑会带来许多挑战，但这些挑战最终会成为帮助你取得成功的经验点。
 
-[](https://www.linkedin.com/in/mattmayo13/)**[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的主编，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的特约编辑，Matthew致力于使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他的使命是使数据科学社区的知识普及化。Matthew自6岁起便开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)**[Matthew Mayo](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的主编，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的特约编辑，Matthew 致力于使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他的使命是使数据科学社区的知识普及化。Matthew 自 6 岁起便开始编程。
 
 ### 进一步阅读
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
 +   [机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
 

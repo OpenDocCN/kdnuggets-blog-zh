@@ -1,6 +1,6 @@
 # 比较机器学习即服务：Amazon、Microsoft Azure、Google Cloud AI
 
-> 原文：[https://www.kdnuggets.com/2018/01/mlaas-amazon-microsoft-azure-google-cloud-ai.html/2](https://www.kdnuggets.com/2018/01/mlaas-amazon-microsoft-azure-google-cloud-ai.html/2)
+> 原文：[`www.kdnuggets.com/2018/01/mlaas-amazon-microsoft-azure-google-cloud-ai.html/2`](https://www.kdnuggets.com/2018/01/mlaas-amazon-microsoft-azure-google-cloud-ai.html/2)
 
 *语音和文本处理 API: Google Cloud Services*
 
@@ -30,11 +30,11 @@
 
 除了文本和语音，Amazon、Microsoft 和 Google 还提供了相当多功能的图像和视频分析 API。
 
-![](../Images/d7f2c8e9c932de7467cae8be9dd39431.png)
+![](img/d7f2c8e9c932de7467cae8be9dd39431.png)
 
 尽管图像分析与视频 API 密切交集，但许多视频分析工具仍在开发或测试版本中。例如，Google 提供对各种图像处理任务的丰富支持，但在视频分析功能上明显落后于 Microsoft 和 Amazon。
 
-![](../Images/964271c1d552cd6223f041fd004f9a8e.png)
+![](img/964271c1d552cd6223f041fd004f9a8e.png)
 
 *图像和视频处理 API: Amazon Rekognition*
 
@@ -156,7 +156,7 @@
 
 那么，IBM Watson Analytics 呢？
 
-IBM Watson Analytics 目前还不是一个完全成熟的用于商业预测的机器学习平台。目前，Watson 的优势在于数据可视化和描述数据中不同值之间的交互。它还提供了类似于[Google提供的](https://cloud.google.com/vision/) [视觉识别服务](https://console.ng.bluemix.net/docs/services/VisualRecognition/VisualRecognition.html) 和一 [系列其他认知服务](https://www.ibm.com/watson/developercloud/services-catalog.html)（APIs）。当前 Watson 的问题在于该系统执行的是狭窄且相对简单的任务，非专业人员易于操作。在涉及定制机器学习或预测任务时，IBM Watson 的发展还不够成熟。
+IBM Watson Analytics 目前还不是一个完全成熟的用于商业预测的机器学习平台。目前，Watson 的优势在于数据可视化和描述数据中不同值之间的交互。它还提供了类似于[Google 提供的](https://cloud.google.com/vision/) [视觉识别服务](https://console.ng.bluemix.net/docs/services/VisualRecognition/VisualRecognition.html) 和一 [系列其他认知服务](https://www.ibm.com/watson/developercloud/services-catalog.html)（APIs）。当前 Watson 的问题在于该系统执行的是狭窄且相对简单的任务，非专业人员易于操作。在涉及定制机器学习或预测任务时，IBM Watson 的发展还不够成熟。
 
 **数据存储**
 
@@ -182,7 +182,7 @@ IBM Watson Analytics 目前还不是一个完全成熟的用于商业预测的�
 
 正确的做法是尽早明确你打算通过机器学习实现的目标。这并不容易。如果你缺乏数据科学或领域专长，在数据科学与商业价值之间架起一座桥梁是很棘手的。我们在 AltexSoft 经常遇到这个问题，尤其是在与客户讨论机器学习应用时。通常，这涉及将一般问题简化为单一属性。不论是价格预测还是其他数值、对象的类别或将对象划分为多个组，一旦你找到这个属性，决定供应商并选择所提议的方案将变得更简单。
 
-Bradford Cross，DCVC的创始合伙人，认为[机器学习即服务并非一个可行的商业模式](https://www.bradfordcross.com/blog/2017/3/3/five-ai-startup-predictions-for-2017)。他认为，它处于那些使用开源产品的数据科学家和那些购买解决高层次任务工具的高管之间的空白地带。然而，似乎行业目前正在克服初期问题，最终我们将看到更多公司转向机器学习即服务，以避免昂贵的人才招募，同时仍然拥有多功能的数据工具。
+Bradford Cross，DCVC 的创始合伙人，认为[机器学习即服务并非一个可行的商业模式](https://www.bradfordcross.com/blog/2017/3/3/five-ai-startup-predictions-for-2017)。他认为，它处于那些使用开源产品的数据科学家和那些购买解决高层次任务工具的高管之间的空白地带。然而，似乎行业目前正在克服初期问题，最终我们将看到更多公司转向机器学习即服务，以避免昂贵的人才招募，同时仍然拥有多功能的数据工具。
 
 [原文](https://www.altexsoft.com/blog/datascience/comparing-machine-learning-as-a-service-amazon-microsoft-azure-google-cloud-ai/)。经许可转载。
 
@@ -192,30 +192,30 @@ Bradford Cross，DCVC的创始合伙人，认为[机器学习即服务并非一�
 
 +   [**通过深度认知简化深度学习**](https://www.kdnuggets.com/2017/12/deep-learning-made-easy-deep-cognition.html)
 
-+   [**视觉美学：使用AI技术评估照片质量**](https://www.kdnuggets.com/2018/01/visual-aesthetics-photo-quality-ai.html)
++   [**视觉美学：使用 AI 技术评估照片质量**](https://www.kdnuggets.com/2018/01/visual-aesthetics-photo-quality-ai.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

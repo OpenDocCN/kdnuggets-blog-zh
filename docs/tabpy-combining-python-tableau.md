@@ -1,12 +1,12 @@
 # TabPy：结合 Python 和 Tableau
 
-> 原文：[https://www.kdnuggets.com/2020/11/tabpy-combining-python-tableau.html](https://www.kdnuggets.com/2020/11/tabpy-combining-python-tableau.html)
+> 原文：[`www.kdnuggets.com/2020/11/tabpy-combining-python-tableau.html`](https://www.kdnuggets.com/2020/11/tabpy-combining-python-tableau.html)
 
-[评论](#comments)
+评论
 
 **由 [Bima Putra Pratama](https://www.linkedin.com/in/bpratama/), 数据科学家**
 
-![图像](../Images/dc2de77e9bef8f0d902832064d474061.png)
+![图像](img/dc2de77e9bef8f0d902832064d474061.png)
 
 图片来源：[Paweł Czerwiński](https://unsplash.com/@pawel_czerwinski?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -42,7 +42,7 @@ TabPy 是 Tableau 的一个分析扩展，它使用户能够使用 Tableau 执�
 
 ### 安装 TabPy
 
-我假设你的系统中已经安装了 Python。如果没有，你可以先访问 [https://www.python.org/](https://www.python.org/) 下载 Python 安装程序，然后安装到系统中。
+我假设你的系统中已经安装了 Python。如果没有，你可以先访问 [`www.python.org/`](https://www.python.org/) 下载 Python 安装程序，然后安装到系统中。
 
 接下来，我们可以使用 `pip` 安装 TabPy 作为一个 Python 包：
 
@@ -60,13 +60,13 @@ tabpy
 
 如果一切顺利，你应该看到这个：
 
-![图像](../Images/ab8b34bfcdb8426fa555d8ec9a19546f.png)
+![图像](img/ab8b34bfcdb8426fa555d8ec9a19546f.png)
 
 运行 TabPy。图片来源：作者
 
-默认情况下，该服务将在本地主机的9004端口运行。你也可以通过在网页浏览器中打开它来验证。
+默认情况下，该服务将在本地主机的 9004 端口运行。你也可以通过在网页浏览器中打开它来验证。
 
-![图像](../Images/3be3c2059c86951c7ae6642b4234620c.png)
+![图像](img/3be3c2059c86951c7ae6642b4234620c.png)
 
 TabPy 服务器信息。图片来源：作者
 
@@ -76,17 +76,17 @@ TabPy 服务器信息。图片来源：作者
 
 首先，转到帮助，然后选择设置和性能，并选择管理分析扩展连接。
 
-![图示](../Images/9cfd78eab5453144b0730e961abb52ff.png)
+![图示](img/9cfd78eab5453144b0730e961abb52ff.png)
 
 Analytics Extension Connection Location. 图片由作者提供
 
 然后，您可以设置服务器和端口。您可以将用户名和密码留空，因为我们没有在 TabPy 服务中设置凭据。
 
-![图示](../Images/bb84074d1b51461854ca44226823c119.png)
+![图示](img/bb84074d1b51461854ca44226823c119.png)
 
 完成后，点击测试连接。如果成功，您将看到以下消息：
 
-![图示](../Images/b19f3e6607f69db6d5134978280a4c92.png)
+![图示](img/b19f3e6607f69db6d5134978280a4c92.png)
 
 恭喜！！现在，我们的 Tableau 已经连接到 TabPy 并准备使用。
 
@@ -106,7 +106,7 @@ Analytics Extension Connection Location. 图片由作者提供
 
 在第一步中，让我们将数据集导入 Tableau。该数据集有 13 列。
 
-![图示](../Images/b1d4251b482aba8e86c76f41f4f6848a.png)
+![图示](img/b1d4251b482aba8e86c76f41f4f6848a.png)
 
 由于我们的主要目标是查看如何使用 TabPy，我们不会专注于制作最佳模型。因此，我们将只使用数据集中的以下变量进行聚类：
 
@@ -124,11 +124,11 @@ Analytics Extension Connection Location. 图片由作者提供
 
 +   聚类算法
 
-![图示](../Images/6e54542429fba748663c77aabc5efa70.png)
+![图示](img/6e54542429fba748663c77aabc5efa70.png)
 
-创建一个参数。图片由作者提供！[图示](../Images/676700ef0efa7175f9f820d5a85ee722.png)
+创建一个参数。图片由作者提供！图示
 
-聚类数量参数。图片由作者提供！[图示](../Images/33b18767e8e05e275e8e801d8e0858ec.png)
+聚类数量参数。图片由作者提供！图示
 
 聚类算法参数。图片由作者提供
 
@@ -136,7 +136,7 @@ Analytics Extension Connection Location. 图片由作者提供
 
 我们将创建一个 Python 脚本作为 Tableau 中的计算字段。
 
-![图示](../Images/06437ed4d6fa8b419f050ca6259b0be3.png)
+![图示](img/06437ed4d6fa8b419f050ca6259b0be3.png)
 
 创建一个计算字段。图片由作者提供
 
@@ -156,57 +156,57 @@ Analytics Extension Connection Location. 图片由作者提供
 
 然后，我们将结果转换为字符串数据类型，以便将其作为分类数据。
 
-还有一点需要注意的是，我们需要在Zipcode中进行表计算。因此，我们需要将默认的表计算更改为Zipcode，以使此代码生效。
+还有一点需要注意的是，我们需要在 Zipcode 中进行表计算。因此，我们需要将默认的表计算更改为 Zipcode，以使此代码生效。
 
-![图示](../Images/c425d8e4b0e2673168c7fc1d3a58abad.png)
+![图示](img/c425d8e4b0e2673168c7fc1d3a58abad.png)
 
 更改默认表计算。图像由作者提供。
 
-### 第4步 可视化结果
+### 第 4 步 可视化结果
 
-现在，是时候可视化结果了。我使用Zipcode创建了一个地图来可视化聚类结果。我们可以使用参数来改变聚类的数量。
+现在，是时候可视化结果了。我使用 Zipcode 创建了一个地图来可视化聚类结果。我们可以使用参数来改变聚类的数量。
 
-![帖子图片](../Images/2b19b10cee99f14a36d9f090ccf2e3ab.png)
+![帖子图片](img/2b19b10cee99f14a36d9f090ccf2e3ab.png)
 
 ### 总结
 
-![图示](../Images/5a6978eefe828154ada5036eacca7d95.png)
+![图示](img/5a6978eefe828154ada5036eacca7d95.png)
 
 图片由[Elisha Terada](https://unsplash.com/@elishaterada?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)提供
 
-让我们为这一阶段的完成而庆祝吧！如果你按照步骤操作，你已经成功地将Python与Tableau集成。这一集成是使用Tableau和Python的更高级用例的起点。
+让我们为这一阶段的完成而庆祝吧！如果你按照步骤操作，你已经成功地将 Python 与 Tableau 集成。这一集成是使用 Tableau 和 Python 的更高级用例的起点。
 
 我期待看到你用这个集成创建的东西！
 
 ### 作者介绍
 
-**[Bima Putra Pratama](https://www.linkedin.com/in/bpratama/)** 是一名拥有Tableau Desktop Specialist认证的数据科学家，他总是渴望扩展自己的知识和技能。他毕业于矿业工程专业，并通过HardvardX、IBM、Udacity等多个在线项目开始了他的数据科学之旅。目前，他正与DANA Indonesia一起为印尼建设无现金社会做出贡献。
+**[Bima Putra Pratama](https://www.linkedin.com/in/bpratama/)** 是一名拥有 Tableau Desktop Specialist 认证的数据科学家，他总是渴望扩展自己的知识和技能。他毕业于矿业工程专业，并通过 HardvardX、IBM、Udacity 等多个在线项目开始了他的数据科学之旅。目前，他正与 DANA Indonesia 一起为印尼建设无现金社会做出贡献。
 
-如果你有任何反馈或讨论的话题，请通过[LinkedIn](https://www.linkedin.com/in/bpratama/)联系Bima。我很高兴与您建立联系！
+如果你有任何反馈或讨论的话题，请通过[LinkedIn](https://www.linkedin.com/in/bpratama/)联系 Bima。我很高兴与您建立联系！
 
 ### 参考文献
 
-+   [https://tableaumagic.com/tableau-and-python-an-introduction/](https://tableaumagic.com/tableau-and-python-an-introduction/)
++   [`tableaumagic.com/tableau-and-python-an-introduction/`](https://tableaumagic.com/tableau-and-python-an-introduction/)
 
-+   [https://github.com/tableau/TabPy](https://github.com/tableau/TabPy)
++   [`github.com/tableau/TabPy`](https://github.com/tableau/TabPy)
 
-+   [https://public.tableau.com/en-us/s/resources](https://public.tableau.com/en-us/s/resources)
++   [`public.tableau.com/en-us/s/resources`](https://public.tableau.com/en-us/s/resources)
 
-+   [https://www.tableau.com/about/blog/2017/1/building-advanced-analytics-applications-tabpy-64916](https://www.tableau.com/about/blog/2017/1/building-advanced-analytics-applications-tabpy-64916)
++   [`www.tableau.com/about/blog/2017/1/building-advanced-analytics-applications-tabpy-64916`](https://www.tableau.com/about/blog/2017/1/building-advanced-analytics-applications-tabpy-64916)
 
-+   [https://www.tableau.com/about/blog/2016/11/leverage-power-python-tableau-tabpy-62077](https://www.tableau.com/about/blog/2016/11/leverage-power-python-tableau-tabpy-62077)
++   [`www.tableau.com/about/blog/2016/11/leverage-power-python-tableau-tabpy-62077`](https://www.tableau.com/about/blog/2016/11/leverage-power-python-tableau-tabpy-62077)
 
-+   [https://towardsdatascience.com/tableau-python-tabpy-and-geographical-clustering-219b0583ded3](https://towardsdatascience.com/tableau-python-tabpy-and-geographical-clustering-219b0583ded3)
++   [`towardsdatascience.com/tableau-python-tabpy-and-geographical-clustering-219b0583ded3`](https://towardsdatascience.com/tableau-python-tabpy-and-geographical-clustering-219b0583ded3)
 
 [原始文章](https://towardsdatascience.com/tabpy-combining-python-and-tableau-511b10da8175)。经许可转载。
 
 **相关：**
 
-+   [在 Tableau 中创建强大的动画可视化](/2020/09/creating-powerful-animated-visualizations-tableau.html)
++   在 Tableau 中创建强大的动画可视化
 
-+   [比较顶级商业智能工具：Power BI vs Tableau vs Qlik vs Domo](/2020/10/comparing-top-business-intelligence-tools.html)
++   比较顶级商业智能工具：Power BI vs Tableau vs Qlik vs Domo
 
-+   [使用 R、SQL 和 Tableau 进行地理时间序列预测简介](/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
++   使用 R、SQL 和 Tableau 进行地理时间序列预测简介
 
 ### 相关主题
 

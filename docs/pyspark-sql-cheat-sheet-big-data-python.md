@@ -1,6 +1,6 @@
 # PySpark SQL 备忘单：Python 中的大数据
 
-> 原文：[https://www.kdnuggets.com/2017/11/pyspark-sql-cheat-sheet-big-data-python.html](https://www.kdnuggets.com/2017/11/pyspark-sql-cheat-sheet-big-data-python.html)
+> 原文：[`www.kdnuggets.com/2017/11/pyspark-sql-cheat-sheet-big-data-python.html`](https://www.kdnuggets.com/2017/11/pyspark-sql-cheat-sheet-big-data-python.html)
 
 **由 Karlijn Willems， [DataCamp](https://www.datacamp.com/)。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spark SQL 是 PySpark 的一个模块，允许你以 DataFrames 的形式处理结构化数据。这与通常用于处理非结构化数据的 RDDs 相对。
 
-![PySpark 备忘单](../Images/f31b5ce6452a08f76098ca13c56b14cb.png)
+![PySpark 备忘单](img/f31b5ce6452a08f76098ca13c56b14cb.png)
 
 **提示：** 如果你想了解更多关于 RDD 和 DataFrame 之间的差异，以及 Spark DataFrames 与 pandas DataFrames 的不同之处，你一定要查看 [Apache Spark in Python: 初学者指南](https://www.datacamp.com/community/tutorials/apache-spark-python)。
 
@@ -42,7 +42,7 @@ PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spar
 
 很酷，不是吗？
 
-![PySpark Cheat Sheet](../Images/3c86b85673b094ab3ed9a4afa5142260.png)
+![PySpark Cheat Sheet](img/3c86b85673b094ab3ed9a4afa5142260.png)
 
 ### 检查数据
 
@@ -50,7 +50,7 @@ PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spar
 
 现在，你可能已经从使用 pandas DataFrames 或 NumPy 的经验中了解了本节中提到的大多数方法和属性，例如 dtypes、head()、describe()、count()，等等。还有一些可能对你来说是新的方法，例如 take() 或 printSchema() 方法，或 schema 属性。
 
-![PySpark Cheat Sheet](../Images/2b87b5681e4fc864b638d73298521c50.png)
+![PySpark Cheat Sheet](img/2b87b5681e4fc864b638d73298521c50.png)
 
 尽管如此，你会发现提升过程相当温和，因为你可以最大限度地利用你在数据科学包方面的前期知识。
 
@@ -62,7 +62,7 @@ PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spar
 
 你可能还记得，使用 Spark DataFrames 的主要原因之一是你有一种更结构化的数据处理方式——查询就是处理数据的一种更结构化的方式，无论你是在关系型数据库中使用 SQL、在 No-SQL 数据库中使用类似 SQL 的语言、还是在 Pandas DataFrames 中使用 [query()](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.query.html?highlight=query#pandas.DataFrame.query) 方法，等等。
 
-![PySpark Cheat Sheet](../Images/8a57af6b8937cff2c56c8dfbf857efe5.png)
+![PySpark Cheat Sheet](img/8a57af6b8937cff2c56c8dfbf857efe5.png)
 
 现在我们在讨论 Pandas DataFrames 时，你会注意到 Spark DataFrames 遵循类似的原则：你使用方法来更好地了解你的数据。然而，在这种情况下，你不会使用 query()。相反，你需要利用其他方法来获取你想要的结果：在第一次使用时，select() 和 show() 将是你获取 DataFrames 信息的好帮手。
 
@@ -72,7 +72,7 @@ PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spar
 
 除了 select() 外，你还可以利用 PySpark SQL 的 functions 模块来指定查询中的 when 子句，例如，如下表所示：
 
-![PySpark 备忘单](../Images/d5234f75f8ad26d04f778d4b0bbf5d52.png)
+![PySpark 备忘单](img/d5234f75f8ad26d04f778d4b0bbf5d52.png)
 
 总的来说，你可以看到，使用 select()、help() 和 functions 模块的功能，有很多可能性可以帮助你更大程度地处理和了解你的数据。
 
@@ -80,13 +80,13 @@ PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spar
 
 你可能还希望查看如何向 Spark DataFrame 添加、更新或删除某些列。你可以使用 withColumn()、withColumnRenamed() 和 drop() 方法轻松完成。你现在可能已经知道，当你使用 Pandas DataFrames 时，你也可以使用 drop() 方法。你可以在[这里](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.drop.html?highlight=drop#pandas.DataFrame.drop)阅读更多信息。
 
-![PySpark 备忘单](../Images/751902d5d047e7357ce04767eb6020aa.png)
+![PySpark 备忘单](img/751902d5d047e7357ce04767eb6020aa.png)
 
 ### 按组
 
 同样，就像 Pandas DataFrames 一样，你可能希望按某些值分组并聚合一些值 - 下面的示例展示了如何使用 groupBy() 方法，并结合 count() 和 show() 来检索和显示你的数据，以年龄为分组，并显示具有该年龄的人数。
 
-![PySpark 备忘单](../Images/283cb11c84f4170ae04c5534ce466532.png)
+![PySpark 备忘单](img/283cb11c84f4170ae04c5534ce466532.png)
 
 ### 相关主题
 
@@ -100,4 +100,4 @@ PySpark 是 Spark 的 Python API，将 Spark 编程模型暴露给 Python。Spar
 
 +   [Python 控制流备忘单](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)
 
-+   [KDnuggets 新闻，7月5日：一个糟糕的数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)

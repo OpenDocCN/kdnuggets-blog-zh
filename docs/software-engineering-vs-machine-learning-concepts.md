@@ -1,12 +1,12 @@
 # 软件工程与机器学习概念
 
-> 原文：[https://www.kdnuggets.com/2017/03/software-engineering-vs-machine-learning-concepts.html](https://www.kdnuggets.com/2017/03/software-engineering-vs-machine-learning-concepts.html)
+> 原文：[`www.kdnuggets.com/2017/03/software-engineering-vs-machine-learning-concepts.html`](https://www.kdnuggets.com/2017/03/software-engineering-vs-machine-learning-concepts.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：保罗·米内罗，微软首席研究软件开发人员。**
 
-![](../Images/b25d0f0f34246cdd832d4c5a6af86fc7.png)
+![](img/b25d0f0f34246cdd832d4c5a6af86fc7.png)
 
 **分而治之** - 软件工程中的一个关键技术是将问题分解为更简单的子问题，解决这些子问题，然后将它们组合成对原始问题的解决方案。可以说，这就是整个工作，递归地应用，直到解决方案可以用所使用的任何编程语言的一行代码表示。经典的教学示例是[汉诺塔](https://en.wikipedia.org/wiki/Tower_of_Hanoi)。
 
@@ -14,13 +14,13 @@
 
 这是否意味着我们注定要整体考虑（这对大型问题来说似乎不可扩展）？不是，但这意味着你必须对子问题分解持防御态度。最佳策略是（当可行时）端到端地训练系统，即优化所有组件（以及组合策略），而不是孤立地进行。通常这并不可行，因此另一种替代方案（受贝叶斯思想启发）是让每个组件在输出时报告某种置信度或方差，以促进下游处理和集成。
 
-在实践中，当系统达到一定规模时，需要进行分解，以便将工作分配给多人。机器学习中这一点现在不能正常工作是一个问题，正如Leon Bottou在他的[ICML 2015特邀讲座](http://icml.cc/2015/invited/LeonBottouICML2015.pdf)中优雅地描述的那样。
+在实践中，当系统达到一定规模时，需要进行分解，以便将工作分配给多人。机器学习中这一点现在不能正常工作是一个问题，正如 Leon Bottou 在他的[ICML 2015 特邀讲座](http://icml.cc/2015/invited/LeonBottouICML2015.pdf)中优雅地描述的那样。
 
-说到Leon讨论的另一个概念……
+说到 Leon 讨论的另一个概念……
 
 **正确性** - 在软件工程中，可以证明算法的正确性，即在给定对输入的特定假设时，算法终止时某些属性将为真。在（监督）机器学习中，我们唯一真正拥有的保证是，如果训练集是来自特定分布的独立同分布样本，那么在另一个相同分布的独立同分布样本上的表现将接近于训练集上的表现，并且不会离最优太远。
 
-因此，任何以机器学习为职业的人都具有实验性思维。我经常被问到选项A还是选项B更好，大多数时候我的回答是“我不知道，我们试试两个选项看看会发生什么。”也许机器学习领域最重要的事情是知道如何评估一个模型，以预测其泛化能力。即便如此，这也是一种“感觉”：识别和防止训练和验证集之间的泄漏（例如，通过分层和时间采样）是通过犯错学会的；反事实循环也是如此。Kaggle对于学习前者很棒，但后者似乎需要在闭环系统中犯错误才能真正理解。
+因此，任何以机器学习为职业的人都具有实验性思维。我经常被问到选项 A 还是选项 B 更好，大多数时候我的回答是“我不知道，我们试试两个选项看看会发生什么。”也许机器学习领域最重要的事情是知道如何评估一个模型，以预测其泛化能力。即便如此，这也是一种“感觉”：识别和防止训练和验证集之间的泄漏（例如，通过分层和时间采样）是通过犯错学会的；反事实循环也是如此。Kaggle 对于学习前者很棒，但后者似乎需要在闭环系统中犯错误才能真正理解。
 
 实验性的“正确性”比其他软件的保证要弱得多，并且有许多方法可能导致问题。例如，在我的经验中，这种情况总是暂时的：模型会变得陈旧，这似乎总是发生。因此，你需要计划不断（因此自动）重新训练模型。
 
@@ -46,21 +46,21 @@
 
 **相关:**
 
-+   [如何向软件工程师解释机器学习](/2016/05/explain-machine-learning-software-engineer.html)
++   如何向软件工程师解释机器学习
 
 +   [顶级数据科学家丹尼尔·图克兰关于数据科学项目范围……及其缩减](https://example.org/2016/10/tunkelang-reduce-scope.html)
 
-+   [深度学习与“常规”机器学习的区别是什么？](/2016/06/difference-between-deep-learning-regular-machine-learning.html)
++   深度学习与“常规”机器学习的区别是什么？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -68,12 +68,12 @@
 
 +   [软件开发者与软件工程师的区别](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)
 
-+   [ChatGPT作为学习数据科学概念的个性化辅导老师](https://www.kdnuggets.com/2023/05/chatgpt-personalized-tutor-learning-data-science-concepts.html)
++   [ChatGPT 作为学习数据科学概念的个性化辅导老师](https://www.kdnuggets.com/2023/05/chatgpt-personalized-tutor-learning-data-science-concepts.html)
 
-+   [你应该了解的关于梯度下降和成本函数的5个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
++   [你应该了解的关于梯度下降和成本函数的 5 个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
 
-+   [数据科学的8个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
++   [数据科学的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
 
 +   [在进入变压器之前你应该了解的概念](https://www.kdnuggets.com/2023/01/concepts-know-getting-transformer.html)
 
-+   [让你脱颖而出的不那么性感的SQL概念](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)
++   [让你脱颖而出的不那么性感的 SQL 概念](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)

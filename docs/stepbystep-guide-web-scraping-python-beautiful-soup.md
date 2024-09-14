@@ -1,22 +1,22 @@
-# Python和Beautiful Soup的网页抓取逐步指南
+# Python 和 Beautiful Soup 的网页抓取逐步指南
 
-> 原文：[https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)
+> 原文：[`www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html`](https://www.kdnuggets.com/2023/04/stepbystep-guide-web-scraping-python-beautiful-soup.html)
 
-![Python和Beautiful Soup的网页抓取逐步指南](../Images/c0ade46d6957288b62f2fea3cb11f979.png)
+![Python 和 Beautiful Soup 的网页抓取逐步指南](img/c0ade46d6957288b62f2fea3cb11f979.png)
 
 作者提供的图片
 
-网页抓取是一种用于从不同网站提取HTML内容的技术。这些网页抓取器主要是计算机机器人，可以通过HTTP协议直接访问万维网，并在各种应用程序中使用这些信息。数据以非结构化格式获得，然后经过多次预处理步骤后转换为结构化格式。用户可以将这些数据保存在电子表格中或通过API导出。
+网页抓取是一种用于从不同网站提取 HTML 内容的技术。这些网页抓取器主要是计算机机器人，可以通过 HTTP 协议直接访问万维网，并在各种应用程序中使用这些信息。数据以非结构化格式获得，然后经过多次预处理步骤后转换为结构化格式。用户可以将这些数据保存在电子表格中或通过 API 导出。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -40,7 +40,7 @@
 
 我们的实现分为以下四个步骤。
 
-![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](../Images/ee055c249c099366e51422f4d41c386d.png)
+![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](img/ee055c249c099366e51422f4d41c386d.png)
 
 图 1 教程步骤 | 图片来源：作者
 
@@ -72,11 +72,11 @@ print(htmlData)
 
 输出：
 
-![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](../Images/cb9efafed6f9268457f47bd5cee9177b.png)
+![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](img/cb9efafed6f9268457f47bd5cee9177b.png)
 
 图片来源：作者
 
-此脚本将从 URL `[/](/)` 提取所有原始 HTML 内容。这些原始数据包含所有文本、段落、锚标签、div 等。我们的下一个任务是解析这些数据，分别提取所有文本和标签。
+此脚本将从 URL `/` 提取所有原始 HTML 内容。这些原始数据包含所有文本、段落、锚标签、div 等。我们的下一个任务是解析这些数据，分别提取所有文本和标签。
 
 # 解析 HTML
 
@@ -95,27 +95,27 @@ print(parsedData.prettify())
 
 输出：
 
-![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](../Images/dc89bb4185c31370c2270965337289cf.png)
+![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](img/dc89bb4185c31370c2270965337289cf.png)
 
 图片来源：作者
 
 你可以看到在上述输出中，Beautiful Soup 将内容以更结构化的格式呈现，并进行了适当的缩进。`BeautifulSoup()` 函数接受两个参数，一个是输入 HTML，另一个是解析器。我们当前使用的是 `html.parser`，但还有其他解析器，如 `lxml` 或 `html5lib`。它们各有优缺点，有些更宽容，有些则非常快速。解析器的选择完全取决于用户的选择。下面是解析器的列表及其优缺点，你可以查看。
 
-![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](../Images/fd6d610d81a75334c4cc84b2825f7ee7.png)
+![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](img/fd6d610d81a75334c4cc84b2825f7ee7.png)
 
 图 2 解析器列表 | 图片来源：[crummy](https://www.crummy.com/software/BeautifulSoup/bs4/doc/#installing-a-parser)
 
 # HTML 树遍历
 
-在本节中，我们将了解HTML的树结构，然后使用Beautiful Soup从解析后的内容中提取标题、不同标签、类、列表等。
+在本节中，我们将了解 HTML 的树结构，然后使用 Beautiful Soup 从解析后的内容中提取标题、不同标签、类、列表等。
 
-![使用Python和Beautiful Soup进行网页抓取的逐步指南](../Images/a9ebc016312d61b4c2ba615c2294282b.png)
+![使用 Python 和 Beautiful Soup 进行网页抓取的逐步指南](img/a9ebc016312d61b4c2ba615c2294282b.png)
 
-图 3 HTML树结构 | 图片来源 [w3schools](https://www.w3schools.com/js/js_htmldom_navigation.asp)
+图 3 HTML 树结构 | 图片来源 [w3schools](https://www.w3schools.com/js/js_htmldom_navigation.asp)
 
-HTML树表示了层级信息视图。根节点是<html>标签，它可以有父节点、子节点和兄弟节点。head标签和body标签紧随HTML标签。head标签包含元数据和标题，而body标签包含div、段落、标题等。
+HTML 树表示了层级信息视图。根节点是<html>标签，它可以有父节点、子节点和兄弟节点。head 标签和 body 标签紧随 HTML 标签。head 标签包含元数据和标题，而 body 标签包含 div、段落、标题等。
 
-当HTML文档通过Beautiful Soup传递时，它将复杂的HTML内容转换为四种主要的Python对象；这些对象是
+当 HTML 文档通过 Beautiful Soup 传递时，它将复杂的 HTML 内容转换为四种主要的 Python 对象；这些对象是
 
 1.  **BeautifulSoup:**
 
@@ -132,11 +132,11 @@ print(type(soup))
 <class 'bs4.BeautifulSoup'>
 ```
 
-你可以看到整个html内容是一个Beautiful Soup类型的对象。
+你可以看到整个 html 内容是一个 Beautiful Soup 类型的对象。
 
 1.  **标签:**
 
-标签对象对应于HTML文档中的特定标签。它可以从整个文档中提取一个标签，并在DOM中存在多个相同名称的标签时返回找到的第一个标签。
+标签对象对应于 HTML 文档中的特定标签。它可以从整个文档中提取一个标签，并在 DOM 中存在多个相同名称的标签时返回找到的第一个标签。
 
 ```py
 soup = BeautifulSoup("<h1> Welcome to KDnuggets! </h1>", 'html.parser')
@@ -151,7 +151,7 @@ print(type(soup.h1))
 
 1.  **NavigableString:**
 
-它包含标签内的文本，以字符串格式存储。Beautiful Soup使用NavigableString对象来存储标签的文本。
+它包含标签内的文本，以字符串格式存储。Beautiful Soup 使用 NavigableString 对象来存储标签的文本。
 
 ```py
 soup = BeautifulSoup("<h1> Welcome to KDnuggets! </h1>", "html.parser")
@@ -168,7 +168,7 @@ Welcome to KDnuggets!
 
 1.  **评论:**
 
-它读取标签内存在的HTML评论。这是一种特殊类型的NavigableString。
+它读取标签内存在的 HTML 评论。这是一种特殊类型的 NavigableString。
 
 ```py
 soup = BeautifulSoup("<h1><!-- This is a comment --></h1>", "html.parser")
@@ -183,11 +183,11 @@ print(type(soup.h1.string))
 <class 'bs4.element.Comment'>
 ```
 
-现在，我们将从解析后的HTML内容中提取标题、不同标签、类、列表等。
+现在，我们将从解析后的 HTML 内容中提取标题、不同标签、类、列表等。
 
 ## 1\. 标题
 
-获取HTML页面的标题。
+获取 HTML 页面的标题。
 
 ```py
 print(parsedData.title)
@@ -213,7 +213,7 @@ Data Science, Machine Learning, AI & Analytics - KDnuggets
 
 ## 2\. 查找和查找所有
 
-这些函数在你想要在HTML内容中搜索特定标签时很有用。find()将只返回该标签的第一次出现，而find_all()将返回所有出现的该标签。你也可以遍历它们。让我们看看下面的示例。
+这些函数在你想要在 HTML 内容中搜索特定标签时很有用。find()将只返回该标签的第一次出现，而 find_all()将返回所有出现的该标签。你也可以遍历它们。让我们看看下面的示例。
 
 find():
 
@@ -253,7 +253,7 @@ h2 = parsedData.find('h2').text
 print(h2)
 ```
 
-我们还可以获取特定标签的类、id、类型、href等。例如，获取所有锚标签的链接。
+我们还可以获取特定标签的类、id、类型、href 等。例如，获取所有锚标签的链接。
 
 ```py
 anchors = parsedData.find_all("a")
@@ -263,11 +263,11 @@ for a in anchors:
 
 输出：
 
-![使用Python和Beautiful Soup进行网页抓取的逐步指南](../Images/8e7d3d3443adeb546e4e2dc0fd35d2e5.png)
+![使用 Python 和 Beautiful Soup 进行网页抓取的逐步指南](img/8e7d3d3443adeb546e4e2dc0fd35d2e5.png)
 
 图片来源：作者
 
-你还可以获取每个div的类。
+你还可以获取每个 div 的类。
 
 ```py
 divs = parsedData.find_all("div")
@@ -275,9 +275,9 @@ for div in divs:
     print(div["class"])
 ```
 
-## 3\. 使用Id和类名查找元素
+## 3\. 使用 Id 和类名查找元素
 
-我们还可以通过给定特定的id或类名来查找特定元素。
+我们还可以通过给定特定的 id 或类名来查找特定元素。
 
 ```py
 tags = parsedData.find_all("li", class_="li-has-thumb")
@@ -294,9 +294,9 @@ print(tags)
 
 它将获取所有具有此类名的标签。
 
-现在，我们将讨论Beautiful Soup的一些更有趣的方法
+现在，我们将讨论 Beautiful Soup 的一些更有趣的方法
 
-# Beautiful Soup的更多方法
+# Beautiful Soup 的更多方法
 
 在本节中，我们将讨论更多 Beautiful Soup 的功能，这些功能将使你的工作更轻松、更快捷。
 
@@ -313,7 +313,7 @@ print(data)
 
 输出：
 
-![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](../Images/ed2800650550ce550abb7270aa9a2243.png)
+![逐步指南：使用 Python 和 Beautiful Soup 进行网页抓取](img/ed2800650550ce550abb7270aa9a2243.png)
 
 1.  `parent`
 

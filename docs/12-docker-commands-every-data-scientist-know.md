@@ -1,8 +1,8 @@
 # 每个数据科学家应知道的 12 个 Docker 命令
 
-> 原文：[https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)
+> 原文：[`www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html`](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)
 
-![每个数据科学家应知道的 12 个 Docker 命令](../Images/e346bd1486a4f74e575375cb7ebddacf.png)
+![每个数据科学家应知道的 12 个 Docker 命令](img/e346bd1486a4f74e575375cb7ebddacf.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全领域的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全领域的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@ docker pull <name-of-the-image>
 docker pull python
 ```
 
-![每个数据科学家应知道的 12 个 Docker 命令](../Images/34e7c97e5edabc29da75c888a3b9befe.png)
+![每个数据科学家应知道的 12 个 Docker 命令](img/34e7c97e5edabc29da75c888a3b9befe.png)
 
 默认情况下，此命令拉取可用的 *最新* 版本的镜像。你可以 *选择性地* 添加标签以拉取特定版本的镜像。
 
@@ -52,7 +52,7 @@ docker pull python
 docker images
 ```
 
-![每个数据科学家应知道的 12 个 Docker 命令](../Images/2c0234a7a6767d6dce9bc0389c96e2d4.png)
+![每个数据科学家应知道的 12 个 Docker 命令](img/2c0234a7a6767d6dce9bc0389c96e2d4.png)
 
 # 3\. docker run
 
@@ -65,11 +65,11 @@ docker run [options] <name-of-the-image>
 
 例如，你可以使用 -i 选项在启动容器时启动一个交互式 Python REPL，而 -t 选项分配一个伪终端，如下所示：
 
-![12 Docker Commands Every Data Scientist Should Know](../Images/7baf6b74b34c36c7f859df5a01f25cda.png)
+![12 Docker Commands Every Data Scientist Should Know](img/7baf6b74b34c36c7f859df5a01f25cda.png)
 
 镜像是一个可移植的工件，容器是该镜像的运行实例。这意味着你可以从单个 Docker 镜像运行多个容器。
 
-![12 Docker Commands Every Data Scientist Should Know](../Images/a640a18ff7397b92ed31916cd71e9ffa.png)
+![12 Docker Commands Every Data Scientist Should Know](img/a640a18ff7397b92ed31916cd71e9ffa.png)
 
 图片作者
 
@@ -81,7 +81,7 @@ docker run [options] <name-of-the-image>
 docker ps
 ```
 
-![12 Docker Commands Every Data Scientist Should Know](../Images/9bba5e921e73f949cb50daad4db825d2.png)
+![12 Docker Commands Every Data Scientist Should Know](img/9bba5e921e73f949cb50daad4db825d2.png)
 
 请注意，每个 Docker 容器都有一个 `CONTAINER ID`。在接下来的几分钟内，我们将学习 Docker 命令来停止和重启容器、检查日志等。我们将在这些命令中使用特定容器的 `CONTAINER ID`。
 
@@ -133,7 +133,7 @@ docker rm <CONTAINER ID>
 docker logs <CONTAINER ID>
 ```
 
-![12 Docker Commands Every Data Scientist Should Know](../Images/6d8afbc8cd76bee3aed7626fe3bc81ca.png)
+![12 Docker Commands Every Data Scientist Should Know](img/6d8afbc8cd76bee3aed7626fe3bc81ca.png)
 
 # 10\. docker exec
 
@@ -153,36 +153,36 @@ docker exec <CONTAINER ID> <COMMAND> <ARGS>
 docker version
 ```
 
-![12 Docker Commands Every Data Scientist Should Know](../Images/ce3c19af81f81817ef1bdd81ae887d37.png)
+![12 Docker Commands Every Data Scientist Should Know](img/ce3c19af81f81817ef1bdd81ae887d37.png)
 
 # 12\. docker info
 
-`docker info` 命令提供了有关系统范围内Docker安装的更详细信息。
+`docker info` 命令提供了有关系统范围内 Docker 安装的更详细信息。
 
 ```py
 docker info
 ```
 
-![每个数据科学家都应该知道的12个Docker命令](../Images/8963e50a7b615b55bbac24a6e3f7385f.png)
+![每个数据科学家都应该知道的 12 个 Docker 命令](img/8963e50a7b615b55bbac24a6e3f7385f.png)
 
-docker info的输出（截断）
+docker info 的输出（截断）
 
 # 结论
 
-希望你觉得这个关于必备Docker命令的教程对你有帮助。一旦你熟悉了Docker，你可以尝试将你的Python和数据科学应用程序Docker化。然后，你可以将应用程序的镜像推送到DockerHub。其他开发者将能够拉取你的镜像并在他们的工作环境中启动容器——这一切只需一个命令。
+希望你觉得这个关于必备 Docker 命令的教程对你有帮助。一旦你熟悉了 Docker，你可以尝试将你的 Python 和数据科学应用程序 Docker 化。然后，你可以将应用程序的镜像推送到 DockerHub。其他开发者将能够拉取你的镜像并在他们的工作环境中启动容器——这一切只需一个命令。
 
 **[Bala Priya C](https://twitter.com/balawc27)** 是一位技术作家，喜欢创建长篇内容。她的兴趣领域包括数学、编程和数据科学。她通过编写教程、操作指南等，向开发者社区分享她的学习经验。
 
 ### 更多相关话题
 
-+   [KDnuggets新闻，6月29日：数据科学的20个基础Linux命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基础 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)
 
-+   [数据科学家的14个必备Git命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
++   [数据科学家的 14 个必备 Git 命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
 
-+   [数据科学初学者的20个基础Linux命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
++   [数据科学初学者的 20 个基础 Linux 命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
 
-+   [数据科学的16个必备DVC命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
++   [数据科学的 16 个必备 DVC 命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
 
-+   [数据科学的10个必备SQL命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
++   [数据科学的 10 个必备 SQL 命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
 
-+   [Streamlit的12个必备命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
++   [Streamlit 的 12 个必备命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)

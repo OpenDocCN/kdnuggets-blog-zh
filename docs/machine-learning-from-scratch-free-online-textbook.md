@@ -1,16 +1,16 @@
 # 《从头开始的机器学习：免费在线教材》
 
-> 原文：[https://www.kdnuggets.com/2020/09/machine-learning-from-scratch-free-online-textbook.html](https://www.kdnuggets.com/2020/09/machine-learning-from-scratch-free-online-textbook.html)
+> 原文：[`www.kdnuggets.com/2020/09/machine-learning-from-scratch-free-online-textbook.html`](https://www.kdnuggets.com/2020/09/machine-learning-from-scratch-free-online-textbook.html)
 
-[评论](#comments)
+评论
 
-**由[丹尼尔·弗里德曼](https://github.com/dafriedman97)编写，他是哈佛大学统计学的高级学生。**![](../Images/af62a165474ae8729b4c78d193653ba2.png)
+**由[丹尼尔·弗里德曼](https://github.com/dafriedman97)编写，他是哈佛大学统计学的高级学生。**![](img/af62a165474ae8729b4c78d193653ba2.png)
 
 ### 本书涵盖的内容
 
-本书涵盖了机器学习中最常见方法的基础知识。这套方法就像是机器学习工程师的工具箱。那些进入机器学习领域的人应该对这个工具箱感到熟悉，这样他们才能在各种任务中使用合适的工具。本书的每一章都对应一个单独的机器学习方法或方法组。换句话说，每一章都集中于ML工具箱中的一个单独工具。
+本书涵盖了机器学习中最常见方法的基础知识。这套方法就像是机器学习工程师的工具箱。那些进入机器学习领域的人应该对这个工具箱感到熟悉，这样他们才能在各种任务中使用合适的工具。本书的每一章都对应一个单独的机器学习方法或方法组。换句话说，每一章都集中于 ML 工具箱中的一个单独工具。
 
-根据我的经验，熟悉这些方法的最佳方式是从头开始理解它们，无论是理论上还是代码实现上。本书的目的是提供这些推导。每章分为三个部分。*概念* 部分从概念上介绍这些方法，并在数学上推导其结果。*构建* 部分展示了如何使用Python从头构建这些方法。*实现* 部分演示了如何使用Python中的包，如scikit-learn、statsmodels和tensorflow来应用这些方法。
+根据我的经验，熟悉这些方法的最佳方式是从头开始理解它们，无论是理论上还是代码实现上。本书的目的是提供这些推导。每章分为三个部分。*概念* 部分从概念上介绍这些方法，并在数学上推导其结果。*构建* 部分展示了如何使用 Python 从头构建这些方法。*实现* 部分演示了如何使用 Python 中的包，如 scikit-learn、statsmodels 和 tensorflow 来应用这些方法。
 
 ### 为什么选择这本书
 
@@ -66,11 +66,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持。
 
 * * *
 

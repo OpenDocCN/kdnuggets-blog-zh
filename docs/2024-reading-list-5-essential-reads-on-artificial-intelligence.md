@@ -1,8 +1,8 @@
 # 2024 阅读清单：5 本关于人工智能的重要书籍
 
-> 原文：[https://www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence](https://www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence)
+> 原文：[`www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence`](https://www.kdnuggets.com/2024-reading-list-5-essential-reads-on-artificial-intelligence)
 
-![2024 阅读清单：5 本关于人工智能的重要书籍](../Images/9001efd39f52eb7ccdbeb497d2f1be93.png)
+![2024 阅读清单：5 本关于人工智能的重要书籍](img/9001efd39f52eb7ccdbeb497d2f1be93.png)
 
 作者图片
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 了解人工智能当前状态以及未来状态对任何人的学习都是重要的。了解你所生活的世界总比在人工智能系统和其他工具被实施后不知道真实原因和结果而感到困惑要好。
 
-在这篇文章中，我将介绍2024年推荐的5本关于人工智能的书籍。
+在这篇文章中，我将介绍 2024 年推荐的 5 本关于人工智能的书籍。
 
 # 生命 3.0
 
@@ -32,7 +32,7 @@
 
 作者马克斯·泰格马克是一位物理学家和机器学习研究员，他深入探讨了生命的三个不同层级：从无法改变其软件的简单生物种类，到能够改变其软件设计的物种，再到能够设计其软件和硬件的技术物种。
 
-了解你属于哪个类别：是那些认为通用人工智能（AGI）在未来100年内不会有效实现的技术怀疑论者，还是认为本世纪内有可能实现人类AGI的有益AI运动阵营。
+了解你属于哪个类别：是那些认为通用人工智能（AGI）在未来 100 年内不会有效实现的技术怀疑论者，还是认为本世纪内有可能实现人类 AGI 的有益 AI 运动阵营。
 
 # 超智能
 
@@ -40,9 +40,9 @@
 
 作者：Nick Bostrom
 
-作者Nick Bostrom为我们带来了这本经典著作，他详细阐述了由于AI智能可能超越人类智能的两个尺度，村里的傻子和爱因斯坦之间的距离可能非常小。
+作者 Nick Bostrom 为我们带来了这本经典著作，他详细阐述了由于 AI 智能可能超越人类智能的两个尺度，村里的傻子和爱因斯坦之间的距离可能非常小。
 
-理解AI系统如何在某些方面变得更加智能，并**深入探讨**作者对超级智能能够快速和爆炸性发展的看法。本书提到了设计超级智能机器的两种形式：一种是当前教计算机模仿人类智能的方法，另一种是全脑模拟，其中计算机模拟人类大脑。
+理解 AI 系统如何在某些方面变得更加智能，并**深入探讨**作者对超级智能能够快速和爆炸性发展的看法。本书提到了设计超级智能机器的两种形式：一种是当前教计算机模仿人类智能的方法，另一种是全脑模拟，其中计算机模拟人类大脑。
 
 # 即将到来的浪潮
 
@@ -50,7 +50,7 @@
 
 作者：Mustafa Suleyman
 
-DeepMind的联合创始人Mustafa Suleyman带来了关于AI的最新书籍，并提到了最近的突破，例如机器人和大型语言模型。该书分为四部分：Homo Technologicus、The Next Wave、State of Failure和Through the Wave。这些章节讨论了人类历史上技术的加速和发展，其中每一次技术浪潮的出现和消退，都在不断改进。
+DeepMind 的联合创始人 Mustafa Suleyman 带来了关于 AI 的最新书籍，并提到了最近的突破，例如机器人和大型语言模型。该书分为四部分：Homo Technologicus、The Next Wave、State of Failure 和 Through the Wave。这些章节讨论了人类历史上技术的加速和发展，其中每一次技术浪潮的出现和消退，都在不断改进。
 
 **深入**探讨推动技术进步的不同方面和动机，如财务、政治、人类自我、好奇心、改变世界以及谁最终赢得竞赛。
 
@@ -86,14 +86,14 @@ DeepMind的联合创始人Mustafa Suleyman带来了关于AI的最新书籍，并
 
 ### 更多相关话题
 
-+   [学习系统设计：5本必读书单](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)
++   [学习系统设计：5 本必读书单](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)
 
 +   [免费人工智能与深度学习速成课程](https://www.kdnuggets.com/2022/07/free-artificial-intelligence-deep-learning-crash-course.html)
 
-+   [2022年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
 
 +   [从人工智能到机器学习再到……的演变](https://www.kdnuggets.com/2022/08/evolution-artificial-intelligence-machine-learning-data-science.html)
 
-+   [AI指数报告概览：衡量人工智能趋势](https://www.kdnuggets.com/2023/04/overview-ai-index-report-measuring-trends-artificial-intelligence.html)
++   [AI 指数报告概览：衡量人工智能趋势](https://www.kdnuggets.com/2023/04/overview-ai-index-report-measuring-trends-artificial-intelligence.html)
 
-+   [6个被揭穿的人工智能神话：分辨事实与虚构](https://www.kdnuggets.com/6-artificial-intelligence-myths-debunked-separating-fact-from-fiction)
++   [6 个被揭穿的人工智能神话：分辨事实与虚构](https://www.kdnuggets.com/6-artificial-intelligence-myths-debunked-separating-fact-from-fiction)

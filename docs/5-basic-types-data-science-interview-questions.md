@@ -1,8 +1,8 @@
 # 数据科学面试的 5 种基本问题类型
 
-> 原文：[https://www.kdnuggets.com/2016/12/5-basic-types-data-science-interview-questions.html](https://www.kdnuggets.com/2016/12/5-basic-types-data-science-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2016/12/5-basic-types-data-science-interview-questions.html`](https://www.kdnuggets.com/2016/12/5-basic-types-data-science-interview-questions.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Roger Huang，Springboard**。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-![Laptop header](../Images/4a01d14e4e58f043dedd56142a0cd0ff.png)
+![Laptop header](img/4a01d14e4e58f043dedd56142a0cd0ff.png)
 
 ### “总是解释你选择背后的思考过程以及指导这些选择的假设。”
 
@@ -58,7 +58,7 @@
 
 大多数数据科学角色的重要部分是编程以规模化实现算法。这些问题类似于候选人在软件工程面试中遇到的问题；它们旨在测试你对公司使用的技术工具的经验以及你对编程理论的整体知识。
 
-> 示例：从头开始开发一个K近邻算法。
+> 示例：从头开始开发一个 K 近邻算法。
 
 展示你能够清晰地写出算法背后的思路，并在时间限制下高效地部署它，是展示你工程技能的绝佳方式。这通常对那些既懂算法又了解技术实现的数据科学家，或对算法有所背景的数据工程师提出。
 
@@ -84,11 +84,11 @@
 
 **相关内容：**
 
-+   [21 个必须了解的数据科学面试问题及答案](/2016/02/21-data-science-interview-questions-answers.html)
++   21 个必须了解的数据科学面试问题及答案
 
-+   [提高数据科学面试表现的 10 个技巧](/2016/11/tips-improve-your-data-science-interview.html)
++   提高数据科学面试表现的 10 个技巧
 
-+   [完美数据科学面试的秘密](/2016/04/cartoon-interview-data-scientist.html)
++   完美数据科学面试的秘密
 
 ### 更多相关主题
 

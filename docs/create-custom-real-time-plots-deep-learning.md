@@ -1,8 +1,8 @@
 # 如何在深度学习中创建自定义实时图表
 
-> 原文：[https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html](https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html`](https://www.kdnuggets.com/2020/12/create-custom-real-time-plots-deep-learning.html)
 
-[评论](#comments)![图像](../Images/09f302a5f8f4d5b2f8b8eda6d0830a4f.png)
+评论![图像](img/09f302a5f8f4d5b2f8b8eda6d0830a4f.png)
 
 图像来源：[**Pixabay**](https://pixabay.com/photos/garage-floors-parking-construction-1149542/)
 
@@ -24,11 +24,11 @@
 
 **不是这个。**
 
-![文章图像](../Images/a09377ffebfe8e2b0f095871e98d674f.png)
+![文章图像](img/a09377ffebfe8e2b0f095871e98d674f.png)
 
 **我们要这个。**
 
-![文章图像](../Images/97fbf52e2cd7ee6dd47da8a45468611f.png)
+![文章图像](img/97fbf52e2cd7ee6dd47da8a45468611f.png)
 
 让我们看看如何实现这个目标。
 
@@ -46,7 +46,7 @@
 
 在机器学习中，要改进某些东西，你通常需要能够衡量它。TensorBoard 是一个提供...
 
-![图像](../Images/3d58a74739c05eb95f99ced75497b5ee.png)
+![图像](img/3d58a74739c05eb95f99ced75497b5ee.png)
 
 图像来源：[**Tensorboard**](https://www.tensorflow.org/tensorboard)
 
@@ -87,7 +87,7 @@ model.compile(
 
 所以，我们可以将这些度量（尽管它们是在训练数据集上计算的）作为训练日志的一部分。一旦得到这些度量，我们可以根据原理定义计算我们想要的任何自定义指标。例如，这里展示了一些非标准指标的公式，
 
-![图](../Images/8de41f4b30ce8573040d305b52603e3e.png)
+![图](img/8de41f4b30ce8573040d305b52603e3e.png)
 
 图片来源: [维基百科](https://en.wikipedia.org/wiki/Precision_and_recall)
 
@@ -113,7 +113,7 @@ model.compile(
 
 ### 一个不平衡的数据集
 
-![图](../Images/47bc59c70b76f2bef4725c3d7edbd46f.png)
+![图](img/47bc59c70b76f2bef4725c3d7edbd46f.png)
 
 图片来源: [**Pixabay**](https://pixabay.com/illustrations/balance-swing-equality-measurement-2108024/)
 
@@ -135,7 +135,7 @@ n_informative = n_featuresd = make_classification(n_samples=10000,
 
 下图显示了两个类别的样本数据分布。注意核密度图的失衡。
 
-![图像](../Images/b9d660279e2cc9116455c123a2a1f065.png)
+![图像](img/b9d660279e2cc9116455c123a2a1f065.png)
 
 **合成数据集按类别分布**
 
@@ -157,19 +157,19 @@ n_informative = n_featuresd = make_classification(n_samples=10000,
 
 这里是**初始化**，
 
-![帖子图像](../Images/3856b6e836edad3d0db2e702a284186f.png)
+![帖子图像](img/3856b6e836edad3d0db2e702a284186f.png)
 
 这里是**提取**，
 
-![帖子图像](../Images/e99f274458bc9262b27380369b1ba64c.png)
+![帖子图像](img/e99f274458bc9262b27380369b1ba64c.png)
 
 这里是**计算**，
 
-![帖子图像](../Images/c2458e1c6d89203ed6bb98ee11c5d469.png)
+![帖子图像](img/c2458e1c6d89203ed6bb98ee11c5d469.png)
 
 这里是**存储**，
 
-![帖子图像](../Images/b7d4cec14b79606613bb18250242275f.png)
+![帖子图像](img/b7d4cec14b79606613bb18250242275f.png)
 
 此外，我不会用标准的 Matplotlib 绘图代码来让你觉得枯燥，除了以下这部分，它**在每次迭代时刷新你的 Jupyter notebook 图表**。
 
@@ -191,7 +191,7 @@ from IPython.display import clear_output# Clear the previous plot
 
 这里是一个典型的结果，显示了损失和精度/召回率/F1 分数的简单仪表板风格。注意，召回率开始时较高，但精度和 F1 分数对于这个不平衡的数据集较低。这些是你可以通过这种回调实时计算和监控的指标！
 
-![帖子图像](../Images/a30fe77c85543471d9015055dbbd5a71.png)
+![帖子图像](img/a30fe77c85543471d9015055dbbd5a71.png)
 
 ### 更多结果 — 概率分布！
 
@@ -207,7 +207,7 @@ def on_epoch_end(self, epoch, logs={}):
 
 注意，开始时只有少数样本获得高概率，随着时间的推移，模型开始学习数据的真实分布。
 
-![帖子图像](../Images/c56c2ff6cae1a1770cdaac86d7f82ec8.png)
+![帖子图像](img/c56c2ff6cae1a1770cdaac86d7f82ec8.png)
 
 ### 摘要
 
@@ -247,21 +247,21 @@ def on_epoch_end(self, epoch, logs={}):
 
 **相关内容：**
 
-+   [用于比较、绘图和评估回归模型的简单 Python 包](/2020/11/simple-python-package-comparing-plotting-evaluating-regression-models.html)
++   用于比较、绘图和评估回归模型的简单 Python 包
 
-+   [初学者的 20 个核心数据科学概念](/2020/12/20-core-data-science-concepts-beginners.html)
++   初学者的 20 个核心数据科学概念
 
-+   [通过 Yann LeCun 的免费课程学习深度学习](/2020/11/learn-deep-learning-free-course-yann-lecun.html)
++   通过 Yann LeCun 的免费课程学习深度学习
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 

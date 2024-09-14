@@ -1,8 +1,8 @@
-# 10个免费的顶级机器学习课程
+# 10 个免费的顶级机器学习课程
 
-> 原文：[https://www.kdnuggets.com/2019/12/10-free-top-notch-courses-machine-learning.html](https://www.kdnuggets.com/2019/12/10-free-top-notch-courses-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/12/10-free-top-notch-courses-machine-learning.html`](https://www.kdnuggets.com/2019/12/10-free-top-notch-courses-machine-learning.html)
 
-[评论](#comments)
+评论
 
 假期将至，如果你在家人、朋友和同事之间的活动中找不到消遣时间，何不利用这些优质的免费在线课程呢？
 
@@ -10,11 +10,11 @@
 
 别忘了查看底部的相关帖子，获取更多免费的机器学习课程。
 
-![图像](../Images/8dfad3f9ae6e1ffd076a5b0c8ebc35be.png)
+![图像](img/8dfad3f9ae6e1ffd076a5b0c8ebc35be.png)
 
 来源: [机器学习简介（布法罗大学）](https://cedar.buffalo.edu/~srihari/CSE574/)
 
-**1\. [Python中的机器学习](https://www.springboard.com/resources/learning-paths/machine-learning-python/)**
+**1\. [Python 中的机器学习](https://www.springboard.com/resources/learning-paths/machine-learning-python/)**
 
 Springboard
 
@@ -28,15 +28,15 @@ Springboard
 
 > 机器学习是一个关于设计可以从示例中学习的机器的激动人心的话题。课程涵盖了机器学习所需的理论、原则和算法。这些方法基于统计学和概率学——这些已经成为设计展现人工智能的系统的核心。
 > 
-> 参考教材包括Chris Bishop的《模式识别与机器学习》（Springer 2006）、Daphne Koller和Nir Friedman的《概率图模型》（MIT Press 2009）以及Goodfellow、Bengio和Courville的《深度学习》（MIT Press 2016）。
+> 参考教材包括 Chris Bishop 的《模式识别与机器学习》（Springer 2006）、Daphne Koller 和 Nir Friedman 的《概率图模型》（MIT Press 2009）以及 Goodfellow、Bengio 和 Courville 的《深度学习》（MIT Press 2016）。
 
-**3\. [实用AI: 机器学习的实用方法](https://practicalai.me/)**
+**3\. [实用 AI: 机器学习的实用方法](https://practicalai.me/)**
 
 practicalAI
 
-> ![图像](../Images/7bd1e88d7ae3b9a459c5afe79b136e8c.png)
+> ![图像](img/7bd1e88d7ae3b9a459c5afe79b136e8c.png)
 
-**4\. [一个Python的机器学习课程](https://github.com/machinelearningmindset/machine-learning-course)**
+**4\. [一个 Python 的机器学习课程](https://github.com/machinelearningmindset/machine-learning-course)**
 
 机器学习思维模式
 
@@ -46,7 +46,7 @@ practicalAI
 
 康奈尔大学
 
-> 机器学习领域关注的问题是如何构建能够随着经验自动改进的计算机程序。近年来，许多成功的机器学习应用已经开发出来，从学习检测欺诈信用卡交易的数据挖掘程序，到学习用户阅读偏好的信息过滤系统，再到学习驾驶的自主车辆。此外，该领域的理论和算法也取得了重要进展。本课程将提供对机器学习领域的广泛介绍。先决条件：CSE 241 及足够的数学基础（矩阵代数、概率论/统计学、多变量微积分）。讲师将举行一场家庭考试（关于基本数学知识），考试截止日期为1月30日。
+> 机器学习领域关注的问题是如何构建能够随着经验自动改进的计算机程序。近年来，许多成功的机器学习应用已经开发出来，从学习检测欺诈信用卡交易的数据挖掘程序，到学习用户阅读偏好的信息过滤系统，再到学习驾驶的自主车辆。此外，该领域的理论和算法也取得了重要进展。本课程将提供对机器学习领域的广泛介绍。先决条件：CSE 241 及足够的数学基础（矩阵代数、概率论/统计学、多变量微积分）。讲师将举行一场家庭考试（关于基本数学知识），考试截止日期为 1 月 30 日。
 
 **6\. [深度学习](https://cedar.buffalo.edu/~srihari/CSE676/index.html)**
 
@@ -84,19 +84,19 @@ practicalAI
 
 **相关**：
 
-+   [10门必看的免费机器学习和数据科学课程](/2018/11/10-free-must-see-courses-machine-learning-data-science.html)
++   10 门必看的免费机器学习和数据科学课程
 
-+   [另10门必看的免费机器学习和数据科学课程](/2018/12/10-more-free-must-see-courses-machine-learning-data-science.html)
++   另 10 门必看的免费机器学习和数据科学课程
 
-+   [另10门必看的免费机器学习和数据科学课程](/2019/04/another-10-free-must-see-courses-machine-learning-data-science.html)
++   另 10 门必看的免费机器学习和数据科学课程
 
 ### 更多相关内容
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

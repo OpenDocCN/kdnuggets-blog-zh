@@ -1,26 +1,26 @@
 # 每个人都应该阅读的前 5 本免费机器学习和深度学习电子书
 
-> 原文：[https://www.kdnuggets.com/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html](https://www.kdnuggets.com/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html)
+> 原文：[`www.kdnuggets.com/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html`](https://www.kdnuggets.com/2020/11/top-5-free-machine-learning-deep-learning-ebooks.html)
 
-[评论](#comments)
+评论
 
 ### 1\. [深度学习书籍](https://www.deeplearningbook.org/)
 
-![](../Images/e45274af87b8a7fce5114cebbee8908b.png)
+![](img/e45274af87b8a7fce5114cebbee8908b.png)
 
 这本深度学习书籍由业界顶级专家 Ian Goodfellow、Yoshua Bengio 和 Aaron Courville 编写。这本书是学习所有重要机器学习和深度学习算法背后数学和理论的最佳书籍之一。从前馈网络到自编码器，它涵盖了你所需的一切。
 
 ### 2\. [深入深度学习](http://d2l.ai/)
 
-![](../Images/b14134a005f75b7fb12348f7b4f492b3.png)
+![](img/b14134a005f75b7fb12348f7b4f492b3.png)
 
 这是一本互动电子书，涵盖了代码、数学、练习和讨论。它提供了 Numpy/MXNet、PyTorch 和 Tensorflow 的实现。
 
 这本书是一个完整的套件，涵盖了从理论到实际示例的所有内容。
 
-### 3\. [Fast.ai的Fastbook](https://github.com/fastai/fastbook)
+### 3\. [Fast.ai 的 Fastbook](https://github.com/fastai/fastbook)
 
-![](../Images/ad58fbf02613666efbc2e6ded74111bd.png)
+![](img/ad58fbf02613666efbc2e6ded74111bd.png)
 
 这是一本独特的书，以 Jupyter notebooks 的形式发布，免费提供在 Github 上。这些笔记本涵盖了深度学习的介绍，[Fastai](https://docs.fast.ai/) 和 [PyTorch](https://pytorch.org/)。Fastai 是一个用于深度学习的分层 API。
 
@@ -28,9 +28,9 @@
 
 这本书也可以在 [Amazon](https://www.amazon.com/Deep-Learning-Coders-fastai-PyTorch/dp/1492045527) 以纸质版购买。
 
-### 4\. [R语言中的统计学习简介](http://faculty.marshall.usc.edu/gareth-james/ISL/)
+### 4\. [R 语言中的统计学习简介](http://faculty.marshall.usc.edu/gareth-james/ISL/)
 
-![](../Images/b664b3297548b390c14dcd6bda6f7969.png)
+![](img/b664b3297548b390c14dcd6bda6f7969.png)
 
 这是学习机器学习和统计方法基础理论的最佳书籍之一。它针对的是高年级本科生、硕士生和非数学科学领域的博士生。
 
@@ -38,7 +38,7 @@
 
 ### 5\. [可解释的机器学习](https://christophm.github.io/interpretable-ml-book/)
 
-![](../Images/e78e502a4d26cd5a67e323d0011fcd11.png)
+![](img/e78e502a4d26cd5a67e323d0011fcd11.png)
 
 这是我推荐大家阅读的最佳机器学习书籍之一。这本书也是关于如何解释机器学习模型及其预测的最佳指南之一。
 
@@ -62,11 +62,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

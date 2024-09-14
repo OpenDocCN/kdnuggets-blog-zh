@@ -1,12 +1,12 @@
 # 机器学习部署的软件接口
 
-> 原文：[https://www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html](https://www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html)
+> 原文：[`www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html`](https://www.kdnuggets.com/2020/03/software-interfaces-machine-learning-deployment.html)
 
-[评论](#comments)
+评论
 
 **由 [Luigi Patruno](https://mlinproduction.com/about/) 提供，数据科学家及 ML in Production 的创始人**。
 
-![](../Images/741c813aec2c11d4c0beb00d70c39134.png)
+![](img/741c813aec2c11d4c0beb00d70c39134.png)
 
 在我们 [上一篇文章](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html) 关于机器学习部署的文章中，我们介绍了什么是部署机器学习模型。我们了解到，为了使训练好的模型的预测结果可供用户和其他软件系统使用，我们需要考虑许多因素，包括预测生成的频率以及是否一次生成单个样本的预测或批量样本的预测。在这篇文章中，我们将开始研究 **如何实现** 部署过程。
 
@@ -61,7 +61,7 @@ def predict(model, input_features):
 
 ### 机器学习模型的多个接口
 
-我们定义的*predict()*方法接受一个特征向量并返回一个预测。我们怎么知道这一点？文档说明*input_features*是一个形状为*(1, n)*的numpy数组，其中*n*是特征向量的维度。如果你的模型期望一次预测一个实例，这很好，但如果模型还需要对样本批次进行预测，就不太理想了。你可以通过编写for循环来解决这个问题，但循环的效率可能不高。相反，我们应该定义另一个直接处理批量情况的方法。我们称之为*predict_batch*：
+我们定义的*predict()*方法接受一个特征向量并返回一个预测。我们怎么知道这一点？文档说明*input_features*是一个形状为*(1, n)*的 numpy 数组，其中*n*是特征向量的维度。如果你的模型期望一次预测一个实例，这很好，但如果模型还需要对样本批次进行预测，就不太理想了。你可以通过编写 for 循环来解决这个问题，但循环的效率可能不高。相反，我们应该定义另一个直接处理批量情况的方法。我们称之为*predict_batch*：
 
 ```py
 def predict_batch(model, batch_input_features):
@@ -88,7 +88,7 @@ def predict_batch(model, batch_input_features):
 
 到目前为止，我们忽略了*model*参数，这对于*predict*和*predict_batch*方法都是必需的。让我来解释一下这对机器学习来说为什么是个问题。
 
-目前，大多数开发机器学习模型的工程师都希望使用最佳工具。如果工程师正在构建经典模型，如逻辑回归或随机森林，工程师可能会选择使用[scikit-learn](https://scikit-learn.org/stable/)。但对于深度学习，该工程师可能会选择使用[Tensorflow](https://www.tensorflow.org/)或[PyTorch](https://pytorch.org/)。即使在经典机器学习中，工程师也可能选择[xgboost](https://xgboost.readthedocs.io/en/latest/)的梯度提升树实现。每个库中的模型对象具有略微不同的API。我们无法预测未来的ML库将实现哪些API。这将使我们接口的实现变得非常混乱。例如，我们不希望我们的实现看起来像这样：
+目前，大多数开发机器学习模型的工程师都希望使用最佳工具。如果工程师正在构建经典模型，如逻辑回归或随机森林，工程师可能会选择使用[scikit-learn](https://scikit-learn.org/stable/)。但对于深度学习，该工程师可能会选择使用[Tensorflow](https://www.tensorflow.org/)或[PyTorch](https://pytorch.org/)。即使在经典机器学习中，工程师也可能选择[xgboost](https://xgboost.readthedocs.io/en/latest/)的梯度提升树实现。每个库中的模型对象具有略微不同的 API。我们无法预测未来的 ML 库将实现哪些 API。这将使我们接口的实现变得非常混乱。例如，我们不希望我们的实现看起来像这样：
 
 ```py
 def predict(model, input_features):
@@ -105,7 +105,7 @@ def predict(model, input_features):
 
 ```
 
-这种实现方式将很难维护，也会使调试运行时错误变得困难。此外，想象一下，如果我们希望在使用一个模型时传递额外的参数而不是另一个模型会发生什么。例如，如果我们希望仅在预测sklearn模型时传递额外的参数。函数的参数数量将会增加，但这些参数对于非sklearn模型是无用的。我们将如何在文档中描述这一点？这些只是为什么面向对象编程、创建类和对象是更受欢迎的几个原因。
+这种实现方式将很难维护，也会使调试运行时错误变得困难。此外，想象一下，如果我们希望在使用一个模型时传递额外的参数而不是另一个模型会发生什么。例如，如果我们希望仅在预测 sklearn 模型时传递额外的参数。函数的参数数量将会增加，但这些参数对于非 sklearn 模型是无用的。我们将如何在文档中描述这一点？这些只是为什么面向对象编程、创建类和对象是更受欢迎的几个原因。
 
 我们的接口由两个方法组成：*predict*和*predict_batch*。让我们定义一个包含这两个方法的基类：
 
@@ -147,7 +147,7 @@ class Model:
 
 ```
 
-这个基类充当了我们数据科学团队的*模板*。如果数据科学家想使用scikit-learn模型，他只需要继承Model类并实现必要的方法。如果另一个数据科学家想使用Tensorflow，没问题，只需创建一个Tensorflow子类！为了说明这一点，让我们创建一个sklearn子类：
+这个基类充当了我们数据科学团队的*模板*。如果数据科学家想使用 scikit-learn 模型，他只需要继承 Model 类并实现必要的方法。如果另一个数据科学家想使用 Tensorflow，没问题，只需创建一个 Tensorflow 子类！为了说明这一点，让我们创建一个 sklearn 子类：
 
 ```py
 class SklearnModel(Model):
@@ -164,7 +164,7 @@ class SklearnModel(Model):
 
 ```
 
-由于sklearn Predictors期望2D输入，我们在predict方法中重新调整了input_features参数。这是面向对象方法的一个关键好处。我们可以定义适用于我们解决的问题类型的接口*并且*利用[优秀的第三方机器学习库！](https://github.com/EthicalML/awesome-production-machine-learning)
+由于 sklearn Predictors 期望 2D 输入，我们在 predict 方法中重新调整了 input_features 参数。这是面向对象方法的一个关键好处。我们可以定义适用于我们解决的问题类型的接口*并且*利用[优秀的第三方机器学习库！](https://github.com/EthicalML/awesome-production-machine-learning)
 
 好处不仅仅于此。我们可以添加更多简化 ML 工作流的方法。例如，一旦模型被训练，我们通常需要一种方式来序列化模型，然后在推理时进行反序列化。因此，我们可以在接口中添加两个方法，`serialize()` 和 `deserialize()`。我们甚至可以在基类 `Model` 中提供这些方法的默认实现，并在子类中创建库特定的实现。
 
@@ -180,7 +180,7 @@ class SklearnModel(Model):
 
 +   [部署机器学习模型是什么意思？](https://www.kdnuggets.com/2020/02/deploy-machine-learning-model.html)
 
-+   [用于生产级机器学习的MLOps](https://www.kdnuggets.com/2019/11/cnvrg-mlops-production-machine-learning.html)
++   [用于生产级机器学习的 MLOps](https://www.kdnuggets.com/2019/11/cnvrg-mlops-production-machine-learning.html)
 
 +   [使用 Flask 部署机器学习模型](https://www.kdnuggets.com/2019/12/excelr-deployment-machine-learning-flask.html)
 
@@ -188,11 +188,11 @@ class SklearnModel(Model):
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -202,10 +202,10 @@ class SklearnModel(Model):
 
 +   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
 
-+   [回归基础第4周：高级话题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回归基础第 4 周：高级话题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
-+   [顶级7款模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
++   [顶级 7 款模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [软件开发人员与软件工程师](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)
 
-+   [软件错误与权衡：Tomasz Lelek的新书](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
++   [软件错误与权衡：Tomasz Lelek 的新书](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)

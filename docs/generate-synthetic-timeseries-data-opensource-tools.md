@@ -1,8 +1,8 @@
 # 使用开源工具生成合成时间序列数据
 
-> 原文：[https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
+> 原文：[`www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html`](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
 
-![使用开源工具生成合成时间序列数据](../Images/a38f7eb18adf87ff57a1f54d4e214cf3.png)
+![使用开源工具生成合成时间序列数据](img/a38f7eb18adf87ff57a1f54d4e214cf3.png)
 
 # 介绍
 
@@ -10,21 +10,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
 时间序列数据，即在多个时间点对相同变量的测量序列，在现代数据世界中无处不在。就像表格数据一样，我们经常希望生成合成时间序列数据以保护敏感信息或在真实数据稀缺时创建更多训练数据。一些合成时间序列数据的应用包括传感器读数、时间戳日志消息、金融市场价格和医疗记录。时间维度的额外要求，其中趋势和时间间的相关性与变量之间的相关性同样重要，为合成数据带来了额外的挑战。
 
-在Gretel，我们之前发布了关于合成时间序列数据的博客（[金融数据](https://gretel.ai/blog/creating-synthetic-time-series-data-for-global-financial-institutions-a-poc-deep-diveQ)、[时间序列基础](https://gretel.ai/blog/creating-synthetic-time-series-data)），但我们始终在寻找可以改进合成数据生成的新模型。我们非常喜欢DoppelGANger模型及其相关论文（[使用GAN共享网络时间序列数据：挑战、初步承诺和开放问题](https://arxiv.org/abs/1909.13403) 由Lin等人撰写），并正在将该模型集成到我们的[API](https://gretel.ai/products)和[控制台](https://console.gretel.cloud/)中。作为这项工作的一个部分，我们在PyTorch中重新实现了DoppelGANger模型，并非常高兴将其作为我们开源[gretel-synthetics](https://github.com/gretelai/gretel-synthetics)库的一部分发布。
+在 Gretel，我们之前发布了关于合成时间序列数据的博客（[金融数据](https://gretel.ai/blog/creating-synthetic-time-series-data-for-global-financial-institutions-a-poc-deep-diveQ)、[时间序列基础](https://gretel.ai/blog/creating-synthetic-time-series-data)），但我们始终在寻找可以改进合成数据生成的新模型。我们非常喜欢 DoppelGANger 模型及其相关论文（[使用 GAN 共享网络时间序列数据：挑战、初步承诺和开放问题](https://arxiv.org/abs/1909.13403) 由 Lin 等人撰写），并正在将该模型集成到我们的[API](https://gretel.ai/products)和[控制台](https://console.gretel.cloud/)中。作为这项工作的一个部分，我们在 PyTorch 中重新实现了 DoppelGANger 模型，并非常高兴将其作为我们开源[gretel-synthetics](https://github.com/gretelai/gretel-synthetics)库的一部分发布。
 
-在本文中，我们简要概述了DoppelGANger模型，提供了我们PyTorch实现的示例用法，并展示了在合成每日维基百科网页流量任务中的优异合成数据质量，与TensorFlow 1实现相比，运行速度提升了约40倍。
+在本文中，我们简要概述了 DoppelGANger 模型，提供了我们 PyTorch 实现的示例用法，并展示了在合成每日维基百科网页流量任务中的优异合成数据质量，与 TensorFlow 1 实现相比，运行速度提升了约 40 倍。
 
-# DoppelGANger模型
+# DoppelGANger 模型
 
 DoppelGANger 基于生成对抗网络 ([GAN](https://developers.google.com/machine-learning/gan))，并进行了些许修改以更好地适应时间序列生成任务。作为 GAN，该模型使用对抗训练方案，通过比较合成数据和真实数据，来同时优化鉴别器（或评论员）和生成器网络。一旦训练完成，可以通过将输入噪声传递给生成器网络来生成任意数量的合成时间序列数据。
 
@@ -46,7 +46,7 @@ DoppelGANger 基于生成对抗网络 ([GAN](https://developers.google.com/machi
 
 # 示例用法
 
-我们的 PyTorch 实现支持两种输入风格（numpy 数组或 pandas DataFrame）以及模型的多种配置选项。有关完整的参考文档，请参见[https://synthetics.docs.gretel.ai/](https://synthetics.docs.gretel.ai/en/latest/models/timeseries_dgan.html)
+我们的 PyTorch 实现支持两种输入风格（numpy 数组或 pandas DataFrame）以及模型的多种配置选项。有关完整的参考文档，请参见[`synthetics.docs.gretel.ai/`](https://synthetics.docs.gretel.ai/en/latest/models/timeseries_dgan.html)
 
 使用我们的模型的最简单方法是将训练数据放在 pandas DataFrame 中。对于这种设置，数据必须是“宽格式”，其中每行是一个示例，一些列可能是属性，其余列是时间序列值。以下代码片段演示了如何从 DataFrame 进行训练和生成数据。
 
@@ -130,7 +130,7 @@ synthetic_attributes, synthetic_features = model.generate_numpy(1000)
 
 WWT 数据集由 Lin 等人使用，最初来自[Kaggle](https://www.kaggle.com/competitions/web-traffic-time-series-forecasting/)，包含各种维基百科页面的每日流量测量。每个页面有 3 个离散属性（域名、访问类型和代理），以及一个持续 1.5 年（550 天）的每日页面浏览量时间序列特征。请参见图 1 了解 WWT 数据集中的一些示例时间序列。
 
-![3 个维基百科页面的缩放每日页面浏览量，页面属性列在右侧](../Images/aab1b50cadd29990b12994b432f3907c.png)
+![3 个维基百科页面的缩放每日页面浏览量，页面属性列在右侧](img/aab1b50cadd29990b12994b432f3907c.png)
 
 图 1：3 个维基百科页面的缩放每日页面浏览量，页面属性列在右侧。
 
@@ -138,19 +138,19 @@ WWT 数据集由 Lin 等人使用，最初来自[Kaggle](https://www.kaggle.com/
 
 我们展示了 3 张图像，展示了合成数据的不同方面的保真度。在每张图像中，我们将真实数据与 3 个合成版本进行比较：1) 使用更大批量和更小学习率的快速 PyTorch 实现，2) 使用原始参数的 PyTorch 实现，3) TensorFlow 1 实现。在图像 2 中，我们查看了属性分布，其中合成数据与真实分布的匹配度较高（参考 [Lin et. al.](https://arxiv.org/abs/1909.13403) 的附录中的图 19）。
 
-![v](../Images/04f392d189a052b1c1c3f9032de32662.png)
+![v](img/04f392d189a052b1c1c3f9032de32662.png)
 
 图像 2：实际和合成的 WWT 数据的属性分布。
 
 WWT 数据的挑战之一是不同的时间序列具有非常不同的页面视图范围。有些维基百科页面始终接收大量流量，而其他页面则不那么受欢迎，但偶尔由于一些相关的时事，例如与页面相关的突发新闻，会出现流量激增。Lin 等人发现 DoppelGANger 在生成不同规模的时间序列方面非常有效（原始论文的图 6）。在图像 3 中，我们提供了类似的图表，显示时间序列中点的分布。每个示例中的中点是 550 天内获得的最小和最大页面视图之间的一半。我们的 PyTorch 实现显示了类似的中点保真度。
 
-![实际和合成的 WWT 数据的时间序列中点分布](../Images/e8eac3e5b9a89c12f1dab7838c0a33ed.png)
+![实际和合成的 WWT 数据的时间序列中点分布](img/e8eac3e5b9a89c12f1dab7838c0a33ed.png)
 
 图像 3：实际和合成的 WWT 数据的时间序列中点分布。
 
 最后，大多数维基百科页面的流量展示了每周和每年的模式。为了评估这些模式，我们使用自相关，即不同时间滞后的页面视图的皮尔逊相关性（1 天、2 天等）。3 个合成版本的自相关图显示在图像 4 中（类似于原始论文的图 1）。
 
-![实际和合成的 WWT 数据的自相关](../Images/7ea0c5cc1f63ff8151ab4e409ceb6968.png)
+![实际和合成的 WWT 数据的自相关](img/7ea0c5cc1f63ff8151ab4e409ceb6968.png)
 
 图像 4：实际和合成的 WWT 数据的自相关。
 

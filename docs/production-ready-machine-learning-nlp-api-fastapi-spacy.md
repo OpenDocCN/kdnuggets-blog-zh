@@ -1,12 +1,12 @@
 # 生产就绪的机器学习 NLP API，使用 FastAPI 和 spaCy
 
-> 原文：[https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html](https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
+> 原文：[`www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html`](https://www.kdnuggets.com/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
 
-[评论](#comments)
+评论
 
 **作者：[Julien Salinas](https://www.linkedin.com/in/julien-salinas-673b3811/)，全栈开发者，[NLPCloud.io](https://nlpcloud.io) 的创始人兼首席技术官**
 
-![FastAPI 和 spaCy](../Images/da0fac2c080db8d7cb5d9d06d8f799b8.png)
+![FastAPI 和 spaCy](img/da0fac2c080db8d7cb5d9d06d8f799b8.png)
 
 [FastAPI](https://fastapi.tiangolo.com/) 是一个新的 Python API 框架，今天越来越多地被用于生产环境中。我们在 [NLP Cloud](https://nlpcloud.io/) 的底层使用 FastAPI。NLP Cloud 是一个基于 spaCy 和 HuggingFace transformers 的 API，提供命名实体识别（NER）、情感分析、文本分类、摘要等服务。FastAPI 帮助我们快速构建了一个快速且稳健的机器学习 API，服务于 NLP 模型。
 
@@ -50,15 +50,15 @@ uvicorn main:app
 
 如果你按照镜像文档正确操作，应用程序应该会自动通过 `docker run` 启动。
 
-这些图像是可定制的。例如，你可以调整Gunicorn创建的并行进程数量。根据你的API需求调整这些参数非常重要。如果你的API服务一个需要几个GB内存的机器学习模型，你可能想要减少Gunicorn的默认并发，否则你的应用程序将快速消耗过多内存。
+这些图像是可定制的。例如，你可以调整 Gunicorn 创建的并行进程数量。根据你的 API 需求调整这些参数非常重要。如果你的 API 服务一个需要几个 GB 内存的机器学习模型，你可能想要减少 Gunicorn 的默认并发，否则你的应用程序将快速消耗过多内存。
 
-### 简单的FastAPI + spaCy NER API
+### 简单的 FastAPI + spaCy NER API
 
-假设你想创建一个使用[spaCy](https://spacy.io/)进行命名实体识别（NER）的API端点。基本上，NER是从句子中提取实体如名字、公司、职位等。[有关NER的更多细节](https://nlpcloud.io/nlp-named-entity-recognition-ner-api.html)，如果需要的话。
+假设你想创建一个使用[spaCy](https://spacy.io/)进行命名实体识别（NER）的 API 端点。基本上，NER 是从句子中提取实体如名字、公司、职位等。[有关 NER 的更多细节](https://nlpcloud.io/nlp-named-entity-recognition-ner-api.html)，如果需要的话。
 
 这个端点将接受一个句子作为输入，并返回一个实体列表。每个实体由实体第一个字符的位置、实体的最后位置、实体的类型以及实体文本本身组成。
 
-端点将以POST请求的方式进行查询：
+端点将以 POST 请求的方式进行查询：
 
 ```py
 curl "http://127.0.0.1/entities" \
@@ -131,13 +131,13 @@ def read_entities(user_request_in: UserRequestIn):
     } 
 ```
 
-首要的是我们正在加载spaCy模型。对于我们的示例，我们使用了一个大型的spaCy预训练英文模型。大型模型占用更多内存和磁盘空间，但由于在更大的数据集上进行训练，因此提供了更好的准确性。
+首要的是我们正在加载 spaCy 模型。对于我们的示例，我们使用了一个大型的 spaCy 预训练英文模型。大型模型占用更多内存和磁盘空间，但由于在更大的数据集上进行训练，因此提供了更好的准确性。
 
 ```py
 model = spacy.load("en_core_web_lg") 
 ```
 
-稍后，我们将通过以下方式使用这个spaCy模型进行NER：
+稍后，我们将通过以下方式使用这个 spaCy 模型进行 NER：
 
 ```py
 doc = model(user_request_in.text)
@@ -145,7 +145,7 @@ doc = model(user_request_in.text)
 doc.ents 
 ```
 
-第二个令人惊叹的FastAPI特性是使用Pydantic强制数据验证的能力。基本上，你需要提前声明用户输入的格式和API响应的格式。如果你是Go开发者，你会发现这与使用结构体进行JSON解组非常相似。例如，我们这样声明返回实体的格式：
+第二个令人惊叹的 FastAPI 特性是使用 Pydantic 强制数据验证的能力。基本上，你需要提前声明用户输入的格式和 API 响应的格式。如果你是 Go 开发者，你会发现这与使用结构体进行 JSON 解组非常相似。例如，我们这样声明返回实体的格式：
 
 ```py
 class EntityOut(BaseModel):
@@ -155,7 +155,7 @@ class EntityOut(BaseModel):
     text: str 
 ```
 
-请注意，`start`和`end`是句子中的位置，因此它们是整数，而`type`和`text`是字符串。如果API尝试返回一个未实现此格式的实体（例如，如果`start`不是整数），FastAPI将抛出错误。
+请注意，`start`和`end`是句子中的位置，因此它们是整数，而`type`和`text`是字符串。如果 API 尝试返回一个未实现此格式的实体（例如，如果`start`不是整数），FastAPI 将抛出错误。
 
 如你所见，将一个验证类嵌套到另一个类中是可能的。这里我们返回的是一个实体列表，因此我们需要声明以下内容：
 
@@ -174,7 +174,7 @@ class EntitiesOut(BaseModel):
 
 ### 更高级的数据验证
 
-使用FastAPI和Pydantic可以做许多更高级的验证。例如，如果你需要用户输入的最小长度为10个字符，你可以这样做：
+使用 FastAPI 和 Pydantic 可以做许多更高级的验证。例如，如果你需要用户输入的最小长度为 10 个字符，你可以这样做：
 
 ```py
 from pydantic import BaseModel, constr
@@ -183,7 +183,7 @@ class UserRequestIn(BaseModel):
     text: constr(min_length=10) 
 ```
 
-现在，如果Pydantic验证通过，但你后来发现数据有问题，因此想要返回HTTP 400代码，该怎么办？
+现在，如果 Pydantic 验证通过，但你后来发现数据有问题，因此想要返回 HTTP 400 代码，该怎么办？
 
 只需引发一个`HTTPException`：
 
@@ -230,21 +230,21 @@ FastAPI 提供了出色的性能，并且可以直接使用 asyncio 进行异步
 
 **相关：**
 
-+   [如何将 Transformers 应用于任何长度的文本](/2021/04/apply-transformers-any-length-text.html)
++   如何将 Transformers 应用于任何长度的文本
 
-+   [如何在 Kubernetes 中部署 Flask API 并与其他微服务连接](/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)
++   如何在 Kubernetes 中部署 Flask API 并与其他微服务连接
 
-+   [机器学习项目为何会失败？](/2021/02/why-machine-learning-projects-fail.html)
++   机器学习项目为何会失败？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

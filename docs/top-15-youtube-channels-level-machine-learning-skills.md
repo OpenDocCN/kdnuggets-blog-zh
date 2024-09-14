@@ -1,8 +1,8 @@
 # 提升机器学习技能的前 15 个 YouTube 频道
 
-> 原文：[https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
+> 原文：[`www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html`](https://www.kdnuggets.com/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
 
-![提升机器学习技能的前 15 个 YouTube 频道](../Images/2f6947921f2adcd8871bbfd3767bc43a.png)
+![提升机器学习技能的前 15 个 YouTube 频道](img/2f6947921f2adcd8871bbfd3767bc43a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -44,7 +44,7 @@ DeepLearningAI 由著名 AI 研究员安德鲁·吴（Andrew Ng）创立，他�
 
 订阅者：155 K，视频：525，观看次数：17 M，链接：[Artificial Intelligence - All in One](https://www.youtube.com/@ArtificialIntelligenceAllinOne)
 
-这是一个全面的资源，为人工智能的所有内容提供一站式服务。它包括关于AI基础、机器学习、深度学习、计算机视觉、自然语言处理等的教程、视频及其他资源。内容旨在让各种背景和技能水平的人都能轻松访问，从初学者到专家。
+这是一个全面的资源，为人工智能的所有内容提供一站式服务。它包括关于 AI 基础、机器学习、深度学习、计算机视觉、自然语言处理等的教程、视频及其他资源。内容旨在让各种背景和技能水平的人都能轻松访问，从初学者到专家。
 
 ## 4. **Two Minute Papers**
 
@@ -56,31 +56,31 @@ DeepLearningAI 由著名 AI 研究员安德鲁·吴（Andrew Ng）创立，他�
 
 订阅者：120 K，视频：349，观看次数：3 M，链接：[Kaggle](https://www.youtube.com/@kaggle)
 
-Kaggle是数据科学家和机器学习从业者磨练技能的最著名平台之一。这个YouTube频道不仅涵盖了初学者和中级观众的各种教程，还 featured 行业内专家的访谈。他们还分享了Kaggle竞赛的获胜解决方案，帮助观众向专家学习。
+Kaggle 是数据科学家和机器学习从业者磨练技能的最著名平台之一。这个 YouTube 频道不仅涵盖了初学者和中级观众的各种教程，还 featured 行业内专家的访谈。他们还分享了 Kaggle 竞赛的获胜解决方案，帮助观众向专家学习。
 
 ## 6. **Siraj Raval**
 
 订阅者：722 K，视频：446，观看次数：46 M，链接：[Siraj Raval](https://www.youtube.com/@SirajRaval)
 
-**Siraj Raval**是机器学习领域的知名人物。他的YouTube频道涵盖了与机器学习、深度学习、计算机视觉、自然语言处理等相关的主题。他有趣且引人入胜的教学方法使他的内容独特且更易于理解。
+**Siraj Raval**是机器学习领域的知名人物。他的 YouTube 频道涵盖了与机器学习、深度学习、计算机视觉、自然语言处理等相关的主题。他有趣且引人入胜的教学方法使他的内容独特且更易于理解。
 
 ## 7. **Jeremy Howard**
 
 订阅者：71.3 K，视频：163，观看次数：6 M，链接：[Jeremy Howard](https://www.youtube.com/@howardjeremyp)
 
-**Jeremy Howard**是[fast.ai](https://www.fast.ai/)的联合创始人，以其在深度学习领域的贡献而闻名。他的频道旨在让所有人都能接触到AI，无论其背景如何。因此，他的视频讲座易于理解和跟随。
+**Jeremy Howard**是[fast.ai](https://www.fast.ai/)的联合创始人，以其在深度学习领域的贡献而闻名。他的频道旨在让所有人都能接触到 AI，无论其背景如何。因此，他的视频讲座易于理解和跟随。
 
 ## 8. **Applied AI Course**
 
 订阅者：82.8 K，视频：519，观看次数：13 M，链接：[Applied AI Course](https://www.youtube.com/@AppliedAICourse)
 
-顾名思义，这个频道更注重实用知识而非理论严谨。它讲解了机器学习的核心思想，并通过实际案例研究帮助个人解决现实世界的商业问题并构建他们的AI解决方案。
+顾名思义，这个频道更注重实用知识而非理论严谨。它讲解了机器学习的核心思想，并通过实际案例研究帮助个人解决现实世界的商业问题并构建他们的 AI 解决方案。
 
 ## 9. **Krish Naik**
 
 订阅者：711 K，视频：1610，观看次数：69 M，链接：[Krish Naik](https://www.youtube.com/@krishnaik06)
 
-Krish Naik 是[iNeuron](https://ineuron.ai/)的联合创始人，也是一个拥有超过10年工业经验的受欢迎教育者。他通过许多实际问题场景讲解机器学习、深度学习和人工智能的各种话题。他的主要目标是让每个人熟悉机器学习和人工智能。
+Krish Naik 是[iNeuron](https://ineuron.ai/)的联合创始人，也是一个拥有超过 10 年工业经验的受欢迎教育者。他通过许多实际问题场景讲解机器学习、深度学习和人工智能的各种话题。他的主要目标是让每个人熟悉机器学习和人工智能。
 
 ## 10\. **StatQuest with Josh Starmer**
 
@@ -92,7 +92,7 @@ Krish Naik 是[iNeuron](https://ineuron.ai/)的联合创始人，也是一个拥
 
 订阅者：139K，视频：296，观看次数：6 M，链接：[Daniel Bourke](https://www.youtube.com/@mrdbourke)
 
-Daniel Bourke 是 Udemy 上一门畅销课程的讲师，[2023年深度学习的 PyTorch：从零到精通](https://www.udemy.com/course/pytorch-for-deep-learning/)。他是一位自学成才的机器学习工程师，曾在多个行业中工作。Daniel 带你一步步从绝对初学者成长为机器学习领域的高手。
+Daniel Bourke 是 Udemy 上一门畅销课程的讲师，[2023 年深度学习的 PyTorch：从零到精通](https://www.udemy.com/course/pytorch-for-deep-learning/)。他是一位自学成才的机器学习工程师，曾在多个行业中工作。Daniel 带你一步步从绝对初学者成长为机器学习领域的高手。
 
 ## 12\. **Data School**
 
@@ -116,24 +116,24 @@ Jeff Heaton 是几本受欢迎的书籍的作者之一，这些书籍可以在[�
 
 订阅者：41.3 K，视频：97，观看次数：1.8 M，链接：[Machine Learning Street Talk](https://www.youtube.com/@MachineLearningStreetTalk)
 
-该频道由Tim Scarfe管理。频道中经常出现Keith Duggar和Yannic Kilcher。这个频道涵盖了人工智能和机器学习领域的最新发展。他们提供高质量的内容，并邀请AI领域的领先思想者对AI时事进行深入分析。
+该频道由 Tim Scarfe 管理。频道中经常出现 Keith Duggar 和 Yannic Kilcher。这个频道涵盖了人工智能和机器学习领域的最新发展。他们提供高质量的内容，并邀请 AI 领域的领先思想者对 AI 时事进行深入分析。
 
 # 结论
 
-总之，我们编制了一份学习的顶级YouTube频道的绝佳列表。然而，重要的是要记住，实践与理论同样重要。我们鼓励读者不仅要观看视频和从这些频道中学习，还要通过构建自己的项目和尝试不同的技术来将知识付诸实践。我们也希望听到你在评论区分享你在机器学习旅程中发现的有用资源以及其他推荐的YouTube频道。
+总之，我们编制了一份学习的顶级 YouTube 频道的绝佳列表。然而，重要的是要记住，实践与理论同样重要。我们鼓励读者不仅要观看视频和从这些频道中学习，还要通过构建自己的项目和尝试不同的技术来将知识付诸实践。我们也希望听到你在评论区分享你在机器学习旅程中发现的有用资源以及其他推荐的 YouTube 频道。
 
-**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发者，对数据科学以及人工智能在医学中的应用充满热情。Kanwal 于2022年被选为APAC地区的Google Generation Scholar。Kanwal 喜欢通过撰写关于热门话题的文章分享技术知识，并且热衷于改善女性在科技行业中的代表性。
+**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发者，对数据科学以及人工智能在医学中的应用充满热情。Kanwal 于 2022 年被选为 APAC 地区的 Google Generation Scholar。Kanwal 喜欢通过撰写关于热门话题的文章分享技术知识，并且热衷于改善女性在科技行业中的代表性。
 
 ### 更多相关主题
 
-+   [学习数据科学的顶级YouTube频道](https://www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html)
++   [学习数据科学的顶级 YouTube 频道](https://www.kdnuggets.com/2022/04/top-youtube-channels-learning-data-science.html)
 
-+   [KDnuggets新闻 22:n16, 4月20日: 学习的顶级YouTube频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20 日: 学习的顶级 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
 
-+   [6个学习人工智能的YouTube频道](https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai)
++   [6 个学习人工智能的 YouTube 频道](https://www.kdnuggets.com/6-youtube-channels-to-learn-about-ai)
 
-+   [提升技能的5个免费机器学习课程](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
++   [提升技能的 5 个免费机器学习课程](https://www.kdnuggets.com/top-5-free-machine-learning-courses-to-level-up-your-skills)
 
-+   [数据分析的7个顶级YouTube课程](https://www.kdnuggets.com/2022/02/top-7-youtube-courses-data-analytics.html)
++   [数据分析的 7 个顶级 YouTube 课程](https://www.kdnuggets.com/2022/02/top-7-youtube-courses-data-analytics.html)
 
-+   [适合数据科学初学者的6个顶级YouTube系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)
++   [适合数据科学初学者的 6 个顶级 YouTube 系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)

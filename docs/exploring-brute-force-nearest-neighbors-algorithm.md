@@ -1,22 +1,22 @@
 # 探索蛮力 K-最近邻算法
 
-> 原文：[https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html](https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)
+> 原文：[`www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html`](https://www.kdnuggets.com/2020/10/exploring-brute-force-nearest-neighbors-algorithm.html)
 
-[评论](#comments)
+评论
 
 **[Murugan Yuvaraaj](https://www.linkedin.com/in/murugan-yuvaraaj-m-p-a369019a/)，Praxis 商学院**
 
-![标题图像](../Images/97ae97e55099f6b9421805e97dcccecb.png)
+![标题图像](img/97ae97e55099f6b9421805e97dcccecb.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
@@ -28,7 +28,7 @@
 
 在回答那个问题之前，让我带你浏览一下 KNN 算法的伪代码。
 
-希望大家都对 k 最近邻算法有所了解。如果没有，你可以在 [https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/) 阅读其基础知识。
+希望大家都对 k 最近邻算法有所了解。如果没有，你可以在 [`www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/`](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/) 阅读其基础知识。
 
 我们可以通过以下步骤实现 KNN 模型：
 
@@ -74,7 +74,7 @@ KNN 算法也可以为数据集提供高准确率，即使对于偶数 k 邻居�
 
 **暴力搜索算法：**
 
-![图片](../Images/e2ffb131bc18c7520ff8bad8817223fd.png)
+![图片](img/e2ffb131bc18c7520ff8bad8817223fd.png)
 
 在这里我们设置了 k = 4。
 
@@ -84,7 +84,7 @@ KNN 算法也可以为数据集提供高准确率，即使对于偶数 k 邻居�
 
 **我们的模型：**
 
-![图片](../Images/811e79aeb0610d3b53c518090d21cdef.png)
+![图片](img/811e79aeb0610d3b53c518090d21cdef.png)
 
 我们的模型能够在偶数邻居情况下提高准确性。
 
@@ -107,7 +107,7 @@ KNN 算法也可以为数据集提供高准确率，即使对于偶数 k 邻居�
 
 我还比较了结果与**kd 树和球树算法**，结果相似。
 
-GitHub 链接: [https://github.com/myuvarajmp/Exploring_KNN_Algorithm](https://github.com/myuvarajmp/Exploring_KNN_Algorithm)
+GitHub 链接: [`github.com/myuvarajmp/Exploring_KNN_Algorithm`](https://github.com/myuvarajmp/Exploring_KNN_Algorithm)
 
 感谢您的时间，并且请对我的反馈宽容，因为这是我的第一篇文章。
 
@@ -115,11 +115,11 @@ GitHub 链接: [https://github.com/myuvarajmp/Exploring_KNN_Algorithm](https://g
 
 **相关内容：**
 
-+   [初学者指南：R 中的 K-最近邻算法，从零到英雄](/2020/01/beginners-guide-nearest-neighbors-r.html)
++   初学者指南：R 中的 K-最近邻算法，从零到英雄
 
-+   [K 最近邻算法的介绍及示例](/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html)
++   K 最近邻算法的介绍及示例
 
-+   [使用 K-最近邻算法分类心脏病](/2019/07/classifying-heart-disease-using-k-nearest-neighbors.html)
++   使用 K-最近邻算法分类心脏病
 
 ### 更多相关内容
 

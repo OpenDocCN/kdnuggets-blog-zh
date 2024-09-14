@@ -1,10 +1,10 @@
 # Pandas 的 5 个高级功能及其使用方法
 
-> 原文：[https://www.kdnuggets.com/2019/10/5-advanced-features-pandas.html](https://www.kdnuggets.com/2019/10/5-advanced-features-pandas.html)
+> 原文：[`www.kdnuggets.com/2019/10/5-advanced-features-pandas.html`](https://www.kdnuggets.com/2019/10/5-advanced-features-pandas.html)
 
-[评论](#comments)
+评论
 
-![](../Images/fe9f215c9ed6ef36135e0104a0d1c0ae.png)
+![](img/fe9f215c9ed6ef36135e0104a0d1c0ae.png)
 
 Pandas 是处理数据的黄金标准库。具备加载、过滤、操作和探索数据的功能，难怪它是 [数据科学家们的最爱](https://www.kdnuggets.com/2018/06/top-20-python-libraries-data-science-2018.html)。
 
@@ -117,11 +117,11 @@ Pandas 方便地提供了一个名为 *to_datetime()* 的函数，可以将多�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -133,7 +133,7 @@ Pandas 方便地提供了一个名为 *to_datetime()* 的函数，可以将多�
 
 +   [数据分析：四种数据分析方法及其应用…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [将 JSON 转换为 Pandas DataFrames：正确解析的方式](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)
 

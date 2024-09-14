@@ -1,10 +1,10 @@
-# 关于图形驱动机器学习、图形数据库、搜索深度学习的书籍——享受50%折扣
+# 关于图形驱动机器学习、图形数据库、搜索深度学习的书籍——享受 50%折扣
 
-> 原文：[https://www.kdnuggets.com/2019/05/manning-books-graph-machine-learning-databases.html](https://www.kdnuggets.com/2019/05/manning-books-graph-machine-learning-databases.html)
+> 原文：[`www.kdnuggets.com/2019/05/manning-books-graph-machine-learning-databases.html`](https://www.kdnuggets.com/2019/05/manning-books-graph-machine-learning-databases.html)
 
 **由 Manning 出版社出版。** 赞助文章。
 
-![Manning 机器学习书籍50%折扣](../Images/ca6bd0d38a37f1052d54bc4c65771f00.png)
+![Manning 机器学习书籍 50%折扣](img/ca6bd0d38a37f1052d54bc4c65771f00.png)
 
 在现实世界中，数据很少像行和列那样简单。数据模式更像是一个网络，存在着大量的链接、连接和不同数据点之间的关系。作为机器学习工程师，我们如何建模这种复杂的互联性，以改善我们的机器学习应用？这正是基于图形的机器学习的优势所在。
 
@@ -20,17 +20,17 @@ Manning 出版社有三本书能帮助你充分利用图形驱动的数据库。
 
 无论你是希望帮助客户找到更好的搜索结果，还是希望在你的工具包中增加更多技能，这三本书都是实现目标的完美选择。
 
-今天**任何一本书都可以享受50%折扣！** 只需在manning.com结账时使用代码**kdngraph**。此优惠适用于电子书和印刷版。
+今天**任何一本书都可以享受 50%折扣！** 只需在 manning.com 结账时使用代码**kdngraph**。此优惠适用于电子书和印刷版。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
@@ -42,7 +42,7 @@ Manning 出版社有三本书能帮助你充分利用图形驱动的数据库。
 
 +   [使用网格搜索和随机搜索在 Python 中调整超参数](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 
-+   [构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [通过 Uplimit 的机器学习搜索课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
 

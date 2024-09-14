@@ -1,8 +1,8 @@
 # 如何调试运行中的 Docker 容器
 
-> 原文：[https://www.kdnuggets.com/how-to-debug-running-docker-containers](https://www.kdnuggets.com/how-to-debug-running-docker-containers)
+> 原文：[`www.kdnuggets.com/how-to-debug-running-docker-containers`](https://www.kdnuggets.com/how-to-debug-running-docker-containers)
 
-![如何调试运行中的 Docker 容器](../Images/90166179230c4d4f907116b80914e6fd.png)
+![如何调试运行中的 Docker 容器](img/90166179230c4d4f907116b80914e6fd.png)
 
 图片由编辑 | Midjourney & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -65,7 +65,7 @@ $ docker inspect my_postgres
 
 该命令输出一个包含容器所有详细信息的 JSON 对象。你可以使用像 [jq](https://jqlang.github.io/jq/) 这样的工具来解析和提取这个输出中的特定信息。
 
-![docker-inspect](../Images/0c6609a7af6cc59f37ca7961ce4f3047.png)
+![docker-inspect](img/0c6609a7af6cc59f37ca7961ce4f3047.png)
 
 docker inspect my_postgres 的截断输出
 
@@ -77,7 +77,7 @@ docker inspect my_postgres 的截断输出
 $ docker logs my_postgres
 ```
 
-![docker-logs](../Images/5dbf5ed3e0b8d65903dc203449de77a4.png)
+![docker-logs](img/5dbf5ed3e0b8d65903dc203449de77a4.png)
 
 docker logs my_postgres 的截断输出
 

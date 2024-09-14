@@ -1,8 +1,8 @@
 # 今年值得学习的 5 种高薪语言
 
-> 原文：[https://www.kdnuggets.com/2023/07/5-highestpaid-languages-learn-year.html](https://www.kdnuggets.com/2023/07/5-highestpaid-languages-learn-year.html)
+> 原文：[`www.kdnuggets.com/2023/07/5-highestpaid-languages-learn-year.html`](https://www.kdnuggets.com/2023/07/5-highestpaid-languages-learn-year.html)
 
-![今年值得学习的 5 种高薪语言](../Images/6aadbccb6c02d55a2fb75a2bf494ecb9.png)
+![今年值得学习的 5 种高薪语言](img/6aadbccb6c02d55a2fb75a2bf494ecb9.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -200,19 +200,19 @@ nil
 
 # 结论
 
-总之，Stack Overflow开发者调查显示，对小众编程语言的需求在上升，这体现在它们的高薪水平上。尽管JavaScript和Python依然流行，但公司愿意在专注于不那么主流语言的开发者上投入更多。因此，值得考虑扩展你的技能，学习今年的五种最高薪资编程语言，包括Zig、Erlang、F#、Clojure和Ruby。
+总之，Stack Overflow 开发者调查显示，对小众编程语言的需求在上升，这体现在它们的高薪水平上。尽管 JavaScript 和 Python 依然流行，但公司愿意在专注于不那么主流语言的开发者上投入更多。因此，值得考虑扩展你的技能，学习今年的五种最高薪资编程语言，包括 Zig、Erlang、F#、Clojure 和 Ruby。
 
-此外，你可能想要探索在2022年到2023年之间薪资有所上升的四种顶级编程语言。
+此外，你可能想要探索在 2022 年到 2023 年之间薪资有所上升的四种顶级编程语言。
 
-![今年学习的5种最高薪资编程语言](../Images/f0d97fc4bb54c9e11fc686d62e1a517b.png)
+![今年学习的 5 种最高薪资编程语言](img/f0d97fc4bb54c9e11fc686d62e1a517b.png)
 
-图片来源于[Stack Overflow开发者调查2023](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies)
+图片来源于[Stack Overflow 开发者调查 2023](https://survey.stackoverflow.co/2023/#technology-top-paying-technologies)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))是一位认证的数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款帮助精神疾病学生的AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan))是一位认证的数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款帮助精神疾病学生的 AI 产品。
 
 ### 更多相关内容
 
-+   [2023年数据科学需要学习的8种编程语言](https://www.kdnuggets.com/2023/07/8-programming-languages-data-science-learn-2023.html)
++   [2023 年数据科学需要学习的 8 种编程语言](https://www.kdnuggets.com/2023/07/8-programming-languages-data-science-learn-2023.html)
 
 +   [最佳数据科学资源、训练营和课程…](https://www.kdnuggets.com/2023/12/springboard-best-data-science-resources-bootcamp-courses-learn-data-science-new-year)
 
@@ -220,6 +220,6 @@ nil
 
 +   [数据科学编程语言及其使用时机](https://www.kdnuggets.com/2022/02/data-science-programming-languages.html)
 
-+   [KDnuggets™新闻 22:n04，1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™新闻 22:n04，1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
 +   [特定数据角色的编程语言](https://www.kdnuggets.com/2023/06/programming-languages-specific-data-roles.html)

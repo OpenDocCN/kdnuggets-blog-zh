@@ -1,8 +1,8 @@
 # 5 个 Python 数据科学最佳实践
 
-> 原文：[https://www.kdnuggets.com/5-python-best-practices-for-data-science](https://www.kdnuggets.com/5-python-best-practices-for-data-science)
+> 原文：[`www.kdnuggets.com/5-python-best-practices-for-data-science`](https://www.kdnuggets.com/5-python-best-practices-for-data-science)
 
-![python-ds](../Images/56d49a7b443b03f2fd445ce4015a4194.png)
+![python-ds](img/56d49a7b443b03f2fd445ce4015a4194.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -56,7 +56,7 @@
 
 ## 2\. 添加类型提示以提高可维护性
 
-由于Python是动态类型语言，你不需要为你创建的变量指定数据类型。然而，你可以添加类型提示——指明期望的数据类型——以使你的代码更易维护。
+由于 Python 是动态类型语言，你不需要为你创建的变量指定数据类型。然而，你可以添加类型提示——指明期望的数据类型——以使你的代码更易维护。
 
 让我们以一个计算数据集中数值特征均值的函数为例，并进行适当的类型注释：
 
@@ -75,7 +75,7 @@ def calculate_mean(feature: List[float]) -> float:
 
 ## 3\. 使用 Pydantic 建模你的数据
 
-之前我们讨论了添加类型提示以使代码更易维护。这对于Python函数非常有效。但是在处理来自外部来源的数据时，通常通过定义具有预期数据类型的类和字段来建模数据会更有帮助。
+之前我们讨论了添加类型提示以使代码更易维护。这对于 Python 函数非常有效。但是在处理来自外部来源的数据时，通常通过定义具有预期数据类型的类和字段来建模数据会更有帮助。
 
 你可以使用 Python 内置的数据类，但没有开箱即用的数据验证支持。使用 Pydantic，你可以建模你的数据，还可以利用其内置的数据验证功能。要使用 Pydantic，你可以通过 pip 安装它及其邮件验证器：
 
@@ -136,13 +136,13 @@ cProfile.run('preprocess_data(data)')
 
 当你运行脚本时，你应该会看到类似的输出：
 
-![profiling-output](../Images/994c219538d44ae7c12dcae4d799c8dd.png)
+![profiling-output](img/994c219538d44ae7c12dcae4d799c8dd.png)
 
-在这个例子中，我们正在对`preprocess_data()`函数进行性能分析，该函数用于预处理样本数据。性能分析通常有助于识别潜在的瓶颈——指导优化以提高性能。以下是一些关于Python性能分析的教程，你可能会觉得有用：
+在这个例子中，我们正在对`preprocess_data()`函数进行性能分析，该函数用于预处理样本数据。性能分析通常有助于识别潜在的瓶颈——指导优化以提高性能。以下是一些关于 Python 性能分析的教程，你可能会觉得有用：
 
 +   [使用 timeit 和 cProfile 进行 Python 代码性能分析](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)
 
-+   [Python内存性能分析介绍](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)
++   [Python 内存性能分析介绍](https://www.kdnuggets.com/introduction-to-memory-profiling-in-python)
 
 ## 5\. 使用 NumPy 的向量化操作
 
@@ -205,7 +205,7 @@ Python Execution Time: 0.216055 seconds
 
 在本教程中，我们探讨了几种数据科学的 Python 编码最佳实践。希望你觉得这些实践对你有帮助。
 
-如果你对学习用于数据科学的 Python 感兴趣，请查看[5个免费课程掌握 Python 数据科学](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)。祝学习愉快！
+如果你对学习用于数据科学的 Python 感兴趣，请查看[5 个免费课程掌握 Python 数据科学](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)。祝学习愉快！
 
 **[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过编写教程、操作指南、评论文章等与开发者社区分享她的知识。Bala 还制作了引人入胜的资源概述和编码教程。**
 
@@ -213,9 +213,9 @@ Python Execution Time: 0.216055 seconds
 
 +   [将 ChatGPT 集成到数据科学工作流程中：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [数据科学团队协作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队协作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
 
-+   [迁移到 AWS 云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
 +   [数据可视化最佳实践与有效沟通的资源](https://www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html)
 

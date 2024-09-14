@@ -1,6 +1,6 @@
 # 自助分析和运营化——为什么你需要两者
 
-> 原文：[https://www.kdnuggets.com/2018/11/dataiku-self-service-analytics-operationalization.html](https://www.kdnuggets.com/2018/11/dataiku-self-service-analytics-operationalization.html)
+> 原文：[`www.kdnuggets.com/2018/11/dataiku-self-service-analytics-operationalization.html`](https://www.kdnuggets.com/2018/11/dataiku-self-service-analytics-operationalization.html)
 
 赞助文章。
 
@@ -14,7 +14,7 @@
 
 &#124;
 
-&#124; [![O16N](../Images/21eb66f23117f6d8b5d324a1302d09e0.png)](https://pages.dataiku.com/operationalization-ssa?utm_campaign=CONTENT%20Operationalization%20Self-Service%20Analytics%20o16n%20SSA%20WP%20October%202018&utm_source=PAID-Kdnuggets&utm_medium=o16n-Guidebook) &#124;
+&#124; ![O16N](https://pages.dataiku.com/operationalization-ssa?utm_campaign=CONTENT%20Operationalization%20Self-Service%20Analytics%20o16n%20SSA%20WP%20October%202018&utm_source=PAID-Kdnuggets&utm_medium=o16n-Guidebook) &#124;
 
 &#124;
 
@@ -22,7 +22,7 @@
 
 &#124;
 
-### 通过运营化 + 自助分析启用AI服务
+### 通过运营化 + 自助分析启用 AI 服务
 
 &#124;
 
@@ -48,7 +48,7 @@
 
 &#124;
 
-&#124; [![获取你的指南](../Images/cf50222658070c3ef18d153abecc57d6.png)](https://pages.dataiku.com/operationalization-ssa?utm_campaign=CONTENT%20Operationalization%20Self-Service%20Analytics%20o16n%20SSA%20WP%20October%202018&utm_source=PAID-Kdnuggets&utm_medium=o16n-Guidebook) &#124;
+&#124; ![获取你的指南](https://pages.dataiku.com/operationalization-ssa?utm_campaign=CONTENT%20Operationalization%20Self-Service%20Analytics%20o16n%20SSA%20WP%20October%202018&utm_source=PAID-Kdnuggets&utm_medium=o16n-Guidebook) &#124;
 
 &#124;
 
@@ -64,12 +64,12 @@
 
 +   [利用基本和现代算法解决计算机科学问题…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)
 
-+   [数据管理及其重要性：你需要了解的6件事…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [数据管理及其重要性：你需要了解的 6 件事…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [为什么你需要在2022年学习Python](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
++   [为什么你需要在 2022 年学习 Python](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
 
 +   [为什么你需要学习多于一种编程语言！](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
-+   [你需要合成数据的5个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [你需要合成数据的 5 个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [为什么你需要了解自主AI代理](https://www.kdnuggets.com/2023/06/need-know-autonomous-ai-agents.html)
++   [为什么你需要了解自主 AI 代理](https://www.kdnuggets.com/2023/06/need-know-autonomous-ai-agents.html)

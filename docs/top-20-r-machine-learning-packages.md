@@ -1,10 +1,10 @@
 # 前 20 名 R 机器学习和数据科学包
 
-> 原文：[https://www.kdnuggets.com/2015/06/top-20-r-machine-learning-packages.html](https://www.kdnuggets.com/2015/06/top-20-r-machine-learning-packages.html)
+> 原文：[`www.kdnuggets.com/2015/06/top-20-r-machine-learning-packages.html`](https://www.kdnuggets.com/2015/06/top-20-r-machine-learning-packages.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments) [CRAN 包仓库](http://cran.r-project.org/web/packages/) 特色 6778 个活跃包。你应该了解哪些呢？这里是分析结果。请参阅文章底部的原始数据链接。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论 [CRAN 包仓库](http://cran.r-project.org/web/packages/) 特色 6778 个活跃包。你应该了解哪些呢？这里是分析结果。请参阅文章底部的原始数据链接。
 
-![top-20-r-packages-machine-learning-downloads](../Images/4367e16b17436b886dfc4b4ab160935f.png) 这些 R 包大多数是 Kagglers 的最爱，得到许多作者的认可，并根据一个包对其他包的依赖进行评级。它们也由用户在 [Crantastic.org](http://crantastic.org/) 上评分和评论。然而，这些用户评分过少，不足以用于分析。
+![top-20-r-packages-machine-learning-downloads](img/4367e16b17436b886dfc4b4ab160935f.png) 这些 R 包大多数是 Kagglers 的最爱，得到许多作者的认可，并根据一个包对其他包的依赖进行评级。它们也由用户在 [Crantastic.org](http://crantastic.org/) 上评分和评论。然而，这些用户评分过少，不足以用于分析。
 
 让我们通过分析 CRAN 每日下载量来探索从 1 月到 5 月的机器学习包下载量。
 
@@ -52,19 +52,19 @@
 
 我们是否遗漏了你的最爱？点亮这个空间并通过告诉我们你使用的 R 包来为社区做出贡献！！
 
-为了完整性，这里是 [2015 年 1 月至 5 月的 135 个 R 包下载数据](/aps/r-package-downloads-2015-jan-may.csv)。
+为了完整性，这里是 2015 年 1 月至 5 月的 135 个 R 包下载数据。
 
-[![IMG_9213](../Images/243878af657dfc37ea12b61cbc98602c.png)](https://www.linkedin.com/in/bhavyageethikawin)
+![IMG_9213](https://www.linkedin.com/in/bhavyageethikawin)
 
 **简介：** [**Bhavya Geethika**](https://www.linkedin.com/in/bhavyageethikawin) 正在伊利诺伊大学芝加哥分校攻读管理信息系统硕士学位。她的兴趣领域包括商业统计与数据挖掘、机器学习和数据驱动的营销。
 
 **相关：**
 
-+   [成为 Kaggle 冠军的十大 R 包](/2015/04/top-10-r-packages-kaggle.html)
++   成为 Kaggle 冠军的十大 R 包
 
-+   [机器学习 201：平衡类别是否提高分类器性能？](/2015/04/balancing-classes-classifier-performance.html)
++   机器学习 201：平衡类别是否提高分类器性能？
 
-+   [KDnuggets 最佳推文，3 月 14-16 日：Apache Spark 是下一个大事吗？R 元书 – 汇集的最佳 CRAN 帖子](/2014/03/top-tweets-mar14-16.html)
++   KDnuggets 最佳推文，3 月 14-16 日：Apache Spark 是下一个大事吗？R 元书 – 汇集的最佳 CRAN 帖子
 
 ### 更多相关主题
 

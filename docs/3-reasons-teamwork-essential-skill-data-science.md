@@ -1,8 +1,8 @@
 # 团队合作为何是数据科学中至关重要的技能
 
-> 原文：[https://www.kdnuggets.com/2022/05/3-reasons-teamwork-essential-skill-data-science.html](https://www.kdnuggets.com/2022/05/3-reasons-teamwork-essential-skill-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/05/3-reasons-teamwork-essential-skill-data-science.html`](https://www.kdnuggets.com/2022/05/3-reasons-teamwork-essential-skill-data-science.html)
 
-![团队合作为何是数据科学中至关重要的技能](../Images/e33dab61e0a8a2a7fb502f306aaca6c9.png)
+![团队合作为何是数据科学中至关重要的技能](img/e33dab61e0a8a2a7fb502f306aaca6c9.png)
 
 图片来源：Pexels
 
@@ -14,23 +14,23 @@
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作。
 
 * * *
 
 > **安德鲁·卡内基曾说过：** “*团队合作是朝着共同愿景一起工作的能力。将个人成就引导到组织目标上的能力。这是让普通人实现非凡成果的燃料。*”
 
-团队合作是成功进行数据科学实践所需的最重要技能之一。本文将探讨团队合作在现实世界的数据科学项目中为何如此重要的3个原因。
+团队合作是成功进行数据科学实践所需的最重要技能之一。本文将探讨团队合作在现实世界的数据科学项目中为何如此重要的 3 个原因。
 
 # 1\. 缺乏领域知识
 
-数据科学家可能对感兴趣的系统没有领域知识。例如，具体取决于你工作的组织，你可能需要与工程师（工业数据集）、医生（医疗数据集）等团队合作，以确定模型中使用的预测特征和目标特征。例如，某个工业系统可能具有实时生成数据的传感器，在这种情况下，作为数据科学家，你可能对该系统没有技术知识。因此，你需要与工程师和技术人员合作，以便他们指导你决定哪些特征是有趣的，哪些是预测变量，哪些是目标变量。因此，团队合作对于将项目的不同方面拼凑在一起至关重要。从我个人在工业数据科学项目中的经验来看，我的团队花了3个月的时间与系统工程师、电气工程师、机械工程师、现场工程师和技术人员合作，仅仅是为了了解如何用现有数据构建正确的问题。这种多学科的方法在现实世界的数据科学项目中是必不可少的。
+数据科学家可能对感兴趣的系统没有领域知识。例如，具体取决于你工作的组织，你可能需要与工程师（工业数据集）、医生（医疗数据集）等团队合作，以确定模型中使用的预测特征和目标特征。例如，某个工业系统可能具有实时生成数据的传感器，在这种情况下，作为数据科学家，你可能对该系统没有技术知识。因此，你需要与工程师和技术人员合作，以便他们指导你决定哪些特征是有趣的，哪些是预测变量，哪些是目标变量。因此，团队合作对于将项目的不同方面拼凑在一起至关重要。从我个人在工业数据科学项目中的经验来看，我的团队花了 3 个月的时间与系统工程师、电气工程师、机械工程师、现场工程师和技术人员合作，仅仅是为了了解如何用现有数据构建正确的问题。这种多学科的方法在现实世界的数据科学项目中是必不可少的。
 
 # 2\. 项目的范围
 
@@ -44,18 +44,18 @@
 
 总结来说，我们讨论了团队合作在现实世界数据科学项目中的三个重要原因。如果没有团队合作，现实世界的数据科学问题将难以解决。因此，学术培训项目应设计具有工业意义的顶点项目。如果可能，学术项目可以邀请当地公司来建议和推荐顶点项目。参与项目的学生需要全面参与从问题框定到数据分析、模型构建、测试、评估和实施的所有方面。在项目期间，与行业官员的合作必须被优先考虑。这样，学生将有机会参与跨学科和多样化的团队。这种多学科的问题解决方法将使他们能够发展在现实世界中成功所需的关键团队合作、沟通、领导和商业敏锐度技能。
 
-**[本杰明·O·塔约](https://www.linkedin.com/in/benjamin-o-tayo-ph-d-a2717511/)** 是一位物理学家、数据科学教育者和作家，同时也是DataScienceHub的所有者。之前，本杰明曾在中央俄克拉荷马大学、大峡谷大学和匹兹堡州立大学教授工程学和物理学。
+**[本杰明·O·塔约](https://www.linkedin.com/in/benjamin-o-tayo-ph-d-a2717511/)** 是一位物理学家、数据科学教育者和作家，同时也是 DataScienceHub 的所有者。之前，本杰明曾在中央俄克拉荷马大学、大峡谷大学和匹兹堡州立大学教授工程学和物理学。
 
 ### 主题更多内容
 
-+   [你应避免从事数据科学职业的5个主要原因](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [你应避免从事数据科学职业的 5 个主要原因](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [你为何难以获得数据科学工作的7个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [你为何难以获得数据科学工作的 7 个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
-+   [数据科学家应使用LightGBM的3个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
++   [数据科学家应使用 LightGBM 的 3 个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
 
-+   [你需要合成数据的5个原因](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [你需要合成数据的 5 个原因](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [你不应该成为数据科学家的7个理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
++   [你不应该成为数据科学家的 7 个理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
 
-+   [通用语义层对你的数据堆栈的6个好处](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
++   [通用语义层对你的数据堆栈的 6 个好处](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)

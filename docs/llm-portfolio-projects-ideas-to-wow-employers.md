@@ -1,32 +1,32 @@
-# LLM投资组合项目创意，令雇主惊叹
+# LLM 投资组合项目创意，令雇主惊叹
 
-> 原文：[https://www.kdnuggets.com/llm-portfolio-projects-ideas-to-wow-employers](https://www.kdnuggets.com/llm-portfolio-projects-ideas-to-wow-employers)
+> 原文：[`www.kdnuggets.com/llm-portfolio-projects-ideas-to-wow-employers`](https://www.kdnuggets.com/llm-portfolio-projects-ideas-to-wow-employers)
 
-![LLM投资组合项目创意令雇主惊叹特色图像](../Images/8b31d6e3ef5a62ffb34f244e4bc45ab8.png)
+![LLM 投资组合项目创意令雇主惊叹特色图像](img/8b31d6e3ef5a62ffb34f244e4bc45ab8.png)
 
 作者提供的图像
 
-大多数缺乏技术知识的人可能会认为，与AI或LLM（大语言模型）打交道是具有挑战性的，并且仅限于专家和工程师。然而，如果我告诉你，只需精通Python，你就可以构建各种LLM项目，从问答系统到YouTube总结器，你会怎么看？你甚至可以使用多个开源模型和组件创建你自己的GPT-4o应用程序。
+大多数缺乏技术知识的人可能会认为，与 AI 或 LLM（大语言模型）打交道是具有挑战性的，并且仅限于专家和工程师。然而，如果我告诉你，只需精通 Python，你就可以构建各种 LLM 项目，从问答系统到 YouTube 总结器，你会怎么看？你甚至可以使用多个开源模型和组件创建你自己的 GPT-4o 应用程序。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-在这个项目中，我们将探索有趣且容易实现的LLM项目创意，你可以使用免费或负担得起的资源进行构建。此外，每个项目创意都有一个示例项目链接，你可以查看以更好地理解它的工作原理。
+在这个项目中，我们将探索有趣且容易实现的 LLM 项目创意，你可以使用免费或负担得起的资源进行构建。此外，每个项目创意都有一个示例项目链接，你可以查看以更好地理解它的工作原理。
 
-## 1\. 微调Llama 3及其本地使用
+## 1\. 微调 Llama 3 及其本地使用
 
-[微调Llama 3及其本地使用](https://www.datacamp.com/tutorial/llama3-fine-tuning-locally)是一个包含多个步骤和文件的完整项目。目标是使用Kaggle提供的免费资源在患者-医生对话的数据集上微调模型。一旦模型成功微调，它可以以高度专业的方式回答医学相关的问题。
+[微调 Llama 3 及其本地使用](https://www.datacamp.com/tutorial/llama3-fine-tuning-locally)是一个包含多个步骤和文件的完整项目。目标是使用 Kaggle 提供的免费资源在患者-医生对话的数据集上微调模型。一旦模型成功微调，它可以以高度专业的方式回答医学相关的问题。
 
-![微调Llama 3及其本地使用项目图像](../Images/cd122c2cecfceff1292d822f90584095.png)
+![微调 Llama 3 及其本地使用项目图像](img/cd122c2cecfceff1292d822f90584095.png)
 
 项目图像
 
@@ -34,19 +34,19 @@
 
 1.  将适配层合并到基础模型中。
 
-1.  将模型转换为Llama.cpp格式，这被称为GGUF。
+1.  将模型转换为 Llama.cpp 格式，这被称为 GGUF。
 
 1.  使用量化方法减小模型的大小。
 
-1.  最后，使用Windows Jan应用程序在你的笔记本电脑上使用模型。
+1.  最后，使用 Windows Jan 应用程序在你的笔记本电脑上使用模型。
 
 保持医学对话在医生和患者之间的隐私非常重要，因此有必要在本地使用并确保隐私。
 
 ## 2\. 问答检索系统
 
-如果你不想微调模型，你仍然可以使用LangChain、Chroma DB和Ollama等工具在本地创建上下文感知的AI应用程序。这个应用程序将利用你的数据集作为上下文，然后生成响应。
+如果你不想微调模型，你仍然可以使用 LangChain、Chroma DB 和 Ollama 等工具在本地创建上下文感知的 AI 应用程序。这个应用程序将利用你的数据集作为上下文，然后生成响应。
 
-要构建RAG（检索增强生成）应用程序，你可以按照以下步骤进行：
+要构建 RAG（检索增强生成）应用程序，你可以按照以下步骤进行：
 
 1.  **加载 PDF 文件：** 首先从指定文件夹中加载所有 PDF 文件。
 
@@ -58,7 +58,7 @@
 
 1.  **开发 Python 应用程序：** 创建一个合适的 Python 应用程序，以确保流畅的聊天体验。
 
-![Q&A 检索系统项目图片](../Images/52e8841a48ea822135993ce6b4c0002c.png)
+![Q&A 检索系统项目图片](img/52e8841a48ea822135993ce6b4c0002c.png)
 
 项目图片
 
@@ -70,7 +70,7 @@ LangChain 通过提供高级 API 和易于使用的命令简化了这一过程�
 
 如果你熟悉 FastAPI，你可以在 30 分钟内构建一个更好的 LLM 应用程序，作为 API 端点服务。
 
-![使用 FastAPI 在 Python 项目中将 LLM 应用程序作为 API 端点服务的图片](../Images/cd8863c4f1bfd8c532358dda95fac38b.png)
+![使用 FastAPI 在 Python 项目中将 LLM 应用程序作为 API 端点服务的图片](img/cd8863c4f1bfd8c532358dda95fac38b.png)
 
 项目图片
 
@@ -82,17 +82,17 @@ LangChain 通过提供高级 API 和易于使用的命令简化了这一过程�
 
 在此项目中，你将构建一个 Web 应用程序，该应用程序接受用户关于旅行计划的指示，并提供行程建议，并在地图上显示这些建议。
 
-![假期规划助手项目图片](../Images/1af650c7a5a668755992fbcdec6a3716.png)
+![假期规划助手项目图片](img/1af650c7a5a668755992fbcdec6a3716.png)
 
 项目图片
 
-该项目要求你在深入项目之前学习一些关于 Gradio、启动和 Google Maps API 的基础知识。你可以通过以下教程 "[使用 LangChain、Google Maps API 和 Gradio 构建智能旅行行程建议器（第 1 部分）](https://towardsdatascience.com/building-a-smart-travel-itinerary-suggester-with-langchain-google-maps-api-and-gradio-part-1-4175ff480b74)" 开始，但如果你想构建假期规划助手，可能需要向你的应用程序中添加更多组件，使其更加强大。
+该项目要求你在深入项目之前学习一些关于 Gradio、启动和 Google Maps API 的基础知识。你可以通过以下教程 "[使用 LangChain、Google Maps API 和 Gradio 构建智能旅行行程建议器（第一部分）](https://towardsdatascience.com/building-a-smart-travel-itinerary-suggester-with-langchain-google-maps-api-and-gradio-part-1-4175ff480b74)" 开始，但如果你想构建假期规划助手，可能需要向你的应用程序中添加更多组件，使其更加强大。
 
 ## 5\. YouTube 摘要器
 
 YouTube 摘要器是一个适合初学者的项目，非常适合学生和新手学习 API 和自然语言处理。该项目涉及使用 YouTube API 从视频中提取字幕，并使用 OpenAI API 对这些字幕进行总结。鉴于一些视频可能很长，而像 ChatGPT 这样的模型的上下文窗口可能有限，该项目需要将字幕拆分成可管理的部分。每部分单独总结，然后将总结后的部分组合成整个视频的连贯摘要。
 
-![YouTube 摘要器项目图像](../Images/eb7fa37a01ae74e2d25a78a60c357ae4.png)
+![YouTube 摘要器项目图像](img/eb7fa37a01ae74e2d25a78a60c357ae4.png)
 
 图片来自项目
 
@@ -104,7 +104,7 @@ YouTube 摘要器是一个适合初学者的项目，非常适合学生和新手
 
 网络爬虫可能是一个有利可图的业务，通过运行一个简单的脚本，个人每天可以赚取高达 $200。它被认为有利可图，因为绕过某些网站结构可能会具有挑战性。在这种情况下，使用 Scrapy 和 Ollama 构建一个 LLM 驱动的网络爬虫可以帮助自动化或增强网页解析。
 
-![使用 LLM 的网络爬虫项目图像](../Images/a86d6bee02b7f7c57375acf736adca84.png)
+![使用 LLM 的网络爬虫项目图像](img/a86d6bee02b7f7c57375acf736adca84.png)
 
 图片来自 books.toscrape.com
 
@@ -118,7 +118,7 @@ YouTube 摘要器是一个适合初学者的项目，非常适合学生和新手
 
 请注意，该项目没有指南或教程，因此你需要通过理解源代码来学习一切：[app.py · KingNish/OpenGPT-4o at main (huggingface.co)](https://huggingface.co/spaces/KingNish/OpenGPT-4o/blob/main/app.py)
 
-![使用开源模型构建 GPT4o 项目图像](../Images/0ca5fc4668b9c80d3af5d32fe2c57208.png)
+![使用开源模型构建 GPT4o 项目图像](img/0ca5fc4668b9c80d3af5d32fe2c57208.png)
 
 图片来自 [OpenGPT 4o](https://huggingface.co/spaces/KingNish/OpenGPT-4o)
 

@@ -1,8 +1,8 @@
 # AI 如何改变零售行业
 
-> 原文：[https://www.kdnuggets.com/how-ai-is-transforming-the-retail-industry](https://www.kdnuggets.com/how-ai-is-transforming-the-retail-industry)
+> 原文：[`www.kdnuggets.com/how-ai-is-transforming-the-retail-industry`](https://www.kdnuggets.com/how-ai-is-transforming-the-retail-industry)
 
-![零售行业转型](../Images/5c0002b662560be64eafd2aeffe013bf.png)
+![零售行业转型](img/5c0002b662560be64eafd2aeffe013bf.png)
 
 来源：Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 作为销售漏斗结构的一部分，点击次数的增加通常会流向更高的转化率，即销售。进一步扩展，零售商可以进行假设测试并尝试不同的图像质量，确定哪些图像属性，如高分辨率像素和适当的照明，能够推动转化。
 
-![计算机视觉技术用于零售商](../Images/f0b5a3013b67caff2395e4a0c700ad80.png)
+![计算机视觉技术用于零售商](img/f0b5a3013b67caff2395e4a0c700ad80.png)
 
 来源：Canva
 
@@ -60,7 +60,7 @@ AI 可以从过去的卖家行为、客户反馈和交易记录等因素中学�
 
 通常，欺诈检测被认为是银行的责任，这在一定程度上是正确的。但是，试想一个在零售平台上成为欺诈交易受害者的客户，并试图与零售商联系以撤销交易。
 
-![欺诈检测](../Images/d7d3d021a6dba4db7d87bb09568fa8b5.png)
+![欺诈检测](img/d7d3d021a6dba4db7d87bb09568fa8b5.png)
 
 来源：Canva
 
@@ -80,7 +80,7 @@ AI 可以从过去的卖家行为、客户反馈和交易记录等因素中学�
 
 ## 摘要
 
-从优化产品图片和生成引人注目的产品描述，到管理卖家风险和检测欺诈，人工智能有潜力彻底改变零售行业的各个方面。随着更多AI产品和预训练模型的开源，免费AI时代对各行各业而言将持续存在。
+从优化产品图片和生成引人注目的产品描述，到管理卖家风险和检测欺诈，人工智能有潜力彻底改变零售行业的各个方面。随着更多 AI 产品和预训练模型的开源，免费 AI 时代对各行各业而言将持续存在。
 
 **[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)**是人工智能策略师和数字化转型领袖，致力于在产品、科学和工程交汇点上构建可扩展的机器学习系统。她是一位屡获殊荣的创新领袖、作者和国际演讲者。她的使命是普及机器学习，打破术语，让每个人都能参与这场转型。**
 
@@ -88,12 +88,12 @@ AI 可以从过去的卖家行为、客户反馈和交易记录等因素中学�
 
 +   [打破数据障碍：零样本、单样本和少样本学习如何…](https://www.kdnuggets.com/2023/08/breaking-data-barrier-zeroshot-oneshot-fewshot-learning-transforming-machine-learning.html)
 
-+   [AIoT革命：AI和IoT如何改变我们的世界](https://www.kdnuggets.com/2022/07/aiot-revolution-ai-iot-transforming-world.html)
++   [AIoT 革命：AI 和 IoT 如何改变我们的世界](https://www.kdnuggets.com/2022/07/aiot-revolution-ai-iot-transforming-world.html)
 
-+   [用LangChain转型人工智能：文本数据的游戏规则改变者](https://www.kdnuggets.com/2023/08/transforming-ai-langchain-text-data-game-changer.html)
++   [用 LangChain 转型人工智能：文本数据的游戏规则改变者](https://www.kdnuggets.com/2023/08/transforming-ai-langchain-text-data-game-changer.html)
 
-+   [KDnuggets新闻，7月27日：AIoT革命：AI和IoT如何…](https://www.kdnuggets.com/2022/n30.html)
++   [KDnuggets 新闻，7 月 27 日：AIoT 革命：AI 和 IoT 如何…](https://www.kdnuggets.com/2022/n30.html)
 
-+   [数据科学与分析行业在2021年的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [数据科学与分析行业在 2021 年的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
 +   [模型罕见部署：机器学习领域的行业失败…](https://www.kdnuggets.com/2022/01/models-rarely-deployed-industrywide-failure-machine-learning-leadership.html)

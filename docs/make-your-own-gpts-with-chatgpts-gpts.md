@@ -1,44 +1,44 @@
-# 使用ChatGPT的GPTs创建你自己的GPTs！
+# 使用 ChatGPT 的 GPTs 创建你自己的 GPTs！
 
-> 原文：[https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)
+> 原文：[`www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts`](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)
 
-![使用ChatGPT的GPTs创建你自己的GPTs！](../Images/61123495e8f70615218ef83225293121.png)
+![使用 ChatGPT 的 GPTs 创建你自己的 GPTs！](img/61123495e8f70615218ef83225293121.png)
 
-Sam Altman抓住机会[推特](https://twitter.com/sama/status/1722766374588830101)推广GPTs，同时批评Elon的Grok
+Sam Altman 抓住机会[推特](https://twitter.com/sama/status/1722766374588830101)推广 GPTs，同时批评 Elon 的 Grok
 
-# GPTs概述
+# GPTs 概述
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 它们来了！
 
-上周刚刚[宣布](https://openai.com/blog/introducing-gpts)的OpenAI，现在推出了其雄心勃勃的新ChatGPT附加功能：恰如其分命名的GPTs。
+上周刚刚[宣布](https://openai.com/blog/introducing-gpts)的 OpenAI，现在推出了其雄心勃勃的新 ChatGPT 附加功能：恰如其分命名的 GPTs。
 
-> 任何人都可以轻松构建自己的GPT——无需编码。你可以为自己、仅供公司内部使用或为所有人创建它们。创建一个就像开始对话一样简单，给它指令和额外知识，并选择它可以做的事情，比如搜索网络、制作图像或分析数据。
+> 任何人都可以轻松构建自己的 GPT——无需编码。你可以为自己、仅供公司内部使用或为所有人创建它们。创建一个就像开始对话一样简单，给它指令和额外知识，并选择它可以做的事情，比如搜索网络、制作图像或分析数据。
 
 这一举措背后的理由是什么？
 
-> 自从ChatGPT推出以来，人们一直在寻求定制ChatGPT以适应他们使用方式的方法。我们在7月推出了自定义指令，允许你设置一些偏好，但对更多控制的请求不断增加。许多高级用户维护一份精心制作的提示和指令集，手动将它们复制到ChatGPT中。GPTs现在为你完成所有这些工作。
+> 自从 ChatGPT 推出以来，人们一直在寻求定制 ChatGPT 以适应他们使用方式的方法。我们在 7 月推出了自定义指令，允许你设置一些偏好，但对更多控制的请求不断增加。许多高级用户维护一份精心制作的提示和指令集，手动将它们复制到 ChatGPT 中。GPTs 现在为你完成所有这些工作。
 
-这是否可以替代经过微调的语言模型，如GPT-3.5 Turbo或开源替代品？嗯，不能。这更像是结合了上述的自定义指令、自定义提示词以及对你上传文档的检索增强生成。GPTs类似于使用一个普通的LLM与[LangChain](https://www.langchain.com/)、一系列提示模板、像[文本生成Web UI](https://github.com/oobabooga/text-generation-webui)这样的用户界面，以及一个[RAG](https://arxiv.org/abs/2005.11401)实施方案用于知识检索。
+这是否可以替代经过微调的语言模型，如 GPT-3.5 Turbo 或开源替代品？嗯，不能。这更像是结合了上述的自定义指令、自定义提示词以及对你上传文档的检索增强生成。GPTs 类似于使用一个普通的 LLM 与[LangChain](https://www.langchain.com/)、一系列提示模板、像[文本生成 Web UI](https://github.com/oobabooga/text-generation-webui)这样的用户界面，以及一个[RAG](https://arxiv.org/abs/2005.11401)实施方案用于知识检索。
 
-GPT的目标是使这些操作的组合和配置快速且简单，不过，我们可以试一试。
+GPT 的目标是使这些操作的组合和配置快速且简单，不过，我们可以试一试。
 
-# 在5分钟内创建一个GPT
+# 在 5 分钟内创建一个 GPT
 
 我想看看创建我自己的 GPT 是否像 [Sam Altman 的 Open AI Dev Days 演示](https://www.youtube.com/watch?v=U9mJuUkhUzk) 那样快捷无痛，因此我进行了这个过程。注意，这是一时兴起的决定，一旦我发现可以使用 GPT Builder，所以并未经过精心策划。让我们看看我们能多快且顺利地完成这项工作。
 
-[![用 ChatGPT 的 GPTs 创建你自己的 GPT！](../Images/0444a4f565bf2dc493662beadf5e8f2b.png)](https://chat.openai.com/g/g-d4hBUujBP-agent-george)
+![用 ChatGPT 的 GPTs 创建你自己的 GPT！](https://chat.openai.com/g/g-d4hBUujBP-agent-george)
 
 我的 5 分钟 GPT 创建：[乔治代理](https://chat.openai.com/g/g-d4hBUujBP-agent-george)
 

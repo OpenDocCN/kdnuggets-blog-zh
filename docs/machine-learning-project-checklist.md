@@ -1,22 +1,22 @@
 # 机器学习项目检查清单
 
-> 原文：[https://www.kdnuggets.com/2018/12/machine-learning-project-checklist.html](https://www.kdnuggets.com/2018/12/machine-learning-project-checklist.html)
+> 原文：[`www.kdnuggets.com/2018/12/machine-learning-project-checklist.html`](https://www.kdnuggets.com/2018/12/machine-learning-project-checklist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-我认为将各种对特定过程的解释进行编纂和比较，以加强自己对该过程的解释是一项值得的活动。我以前曾对我们可以称之为机器学习过程的替代解释进行过类似的操作（这些过程可以在一定程度上与数据科学或数据挖掘过程密切相关），你可以在[这里](/2016/03/data-science-process-rediscovered.html)、[这里](/2018/05/general-approaches-machine-learning-process.html) 和[这里](/2018/06/keras-4-step-workflow.html)找到例子。
+我认为将各种对特定过程的解释进行编纂和比较，以加强自己对该过程的解释是一项值得的活动。我以前曾对我们可以称之为机器学习过程的替代解释进行过类似的操作（这些过程可以在一定程度上与数据科学或数据挖掘过程密切相关），你可以在这里、这里 和这里找到例子。
 
-![标题图片](../Images/241749b139403fcc60ab087c3f53a711.png)
+![标题图片](img/241749b139403fcc60ab087c3f53a711.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
@@ -42,7 +42,7 @@
 
 **5. 建模数据**
 
-是时候对数据建模，并将初始模型集缩减到看似最有前景的那一批。（这类似于Chollet过程中的第一个建模步骤：好的模型→“过于优秀”的模型，你可以在这里[阅读更多](/2018/05/general-approaches-machine-learning-process.html)）这些尝试可能涉及使用完整数据集的样本来促进初步模型的训练，这些模型应涵盖广泛的类别（树模型、神经网络、线性模型等）。应构建、测量和比较模型，调查每个模型所犯的错误类型，以及每种算法使用的最重要特征。应将表现最佳的模型入围，然后可以进行进一步微调。
+是时候对数据建模，并将初始模型集缩减到看似最有前景的那一批。（这类似于 Chollet 过程中的第一个建模步骤：好的模型→“过于优秀”的模型，你可以在这里阅读更多）这些尝试可能涉及使用完整数据集的样本来促进初步模型的训练，这些模型应涵盖广泛的类别（树模型、神经网络、线性模型等）。应构建、测量和比较模型，调查每个模型所犯的错误类型，以及每种算法使用的最重要特征。应将表现最佳的模型入围，然后可以进行进一步微调。
 
 **6\. 微调模型**
 
@@ -58,22 +58,22 @@
 
 **相关**：
 
-+   [接近机器学习过程的框架](/2018/05/general-approaches-machine-learning-process.html)
++   接近机器学习过程的框架
 
-+   [Keras四步工作流程](/2018/06/keras-4-step-workflow.html)
++   Keras 四步工作流程
 
-+   [数据科学过程的重新发现](/2016/03/data-science-process-rediscovered.html)
++   数据科学过程的重新发现
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，然后找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

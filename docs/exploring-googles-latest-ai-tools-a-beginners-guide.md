@@ -1,8 +1,8 @@
-# 探索Google最新AI工具：初学者指南
+# 探索 Google 最新 AI 工具：初学者指南
 
-> 原文：[https://www.kdnuggets.com/exploring-googles-latest-ai-tools-a-beginners-guide](https://www.kdnuggets.com/exploring-googles-latest-ai-tools-a-beginners-guide)
+> 原文：[`www.kdnuggets.com/exploring-googles-latest-ai-tools-a-beginners-guide`](https://www.kdnuggets.com/exploring-googles-latest-ai-tools-a-beginners-guide)
 
-![探索Google最新AI工具：初学者指南](../Images/a0fb237ea53b3591524e3cc6d8454eb1.png)
+![探索 Google 最新 AI 工具：初学者指南](img/a0fb237ea53b3591524e3cc6d8454eb1.png)
 
 图片来源：作者
 
@@ -12,31 +12,31 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 拥抱人工智能来优化我们的工作流程，或完全忽视它。
 
-如果你正在阅读这篇文章，我很确定你属于第一类：你想利用AI来提升日常任务。
+如果你正在阅读这篇文章，我很确定你属于第一类：你想利用 AI 来提升日常任务。
 
 然而，存在一个重大问题。主要公司正努力通过向市场推出各种不同的应用来区分自己。这使得了解所有现有的选项变得困难。
 
-本文旨在介绍Google的顶级AI应用，并指导你如何开始使用它们。
+本文旨在介绍 Google 的顶级 AI 应用，并指导你如何开始使用它们。
 
 ## Google Gemini
 
-Gemini是一个先进的大型语言模型（LLM），是OpenAI的GPT模型的直接竞争对手，免费供所有人使用！
+Gemini 是一个先进的大型语言模型（LLM），是 OpenAI 的 GPT 模型的直接竞争对手，免费供所有人使用！
 
-![探索Google最新AI工具：初学者指南](../Images/9d3c275d0504e69f425312775aff4ddf.png)
+![探索 Google 最新 AI 工具：初学者指南](img/9d3c275d0504e69f425312775aff4ddf.png)
 
-Gemini主界面的截图
+Gemini 主界面的截图
 
-它集成了Google在AI领域的广泛研究，提供更准确、上下文感知的回应，使其在聊天机器人、虚拟助手和其他语言基础的AI解决方案中极为有效。使Gemini成为市场上最佳LLM之一的几个关键特征包括：
+它集成了 Google 在 AI 领域的广泛研究，提供更准确、上下文感知的回应，使其在聊天机器人、虚拟助手和其他语言基础的 AI 解决方案中极为有效。使 Gemini 成为市场上最佳 LLM 之一的几个关键特征包括：
 
 +   免费使用：无需支付。
 
@@ -46,15 +46,15 @@ Gemini主界面的截图
 
 ### 开始使用
 
-要开始使用Google的Gemini，你只需要一个Google账户。你可以直接前往Gemini的主界面，今天就开始与其聊天吧。
+要开始使用 Google 的 Gemini，你只需要一个 Google 账户。你可以直接前往 Gemini 的主界面，今天就开始与其聊天吧。
 
-## Google云
+## Google 云
 
-一组在Google基础设施上运行的云计算服务。它提供多种服务，包括计算、存储、分析和机器学习。可用于构建、训练和部署AI模型及解决方案。
+一组在 Google 基础设施上运行的云计算服务。它提供多种服务，包括计算、存储、分析和机器学习。可用于构建、训练和部署 AI 模型及解决方案。
 
-其主要AI服务包括：
+其主要 AI 服务包括：
 
-+   AutoML：为具备基础机器学习知识的用户设计，配备即用型API。其主要工具包括AutoML Vision或AutoML Natural Language等。
++   AutoML：为具备基础机器学习知识的用户设计，配备即用型 API。其主要工具包括 AutoML Vision 或 AutoML Natural Language 等。
 
 +   Vertex AI：一个管理平台，简化了 ML 生命周期，从数据准备到模型部署和监控。
 

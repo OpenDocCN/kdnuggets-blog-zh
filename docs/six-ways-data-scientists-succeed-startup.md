@@ -1,22 +1,22 @@
 # 数据科学家在初创公司成功的六种方式
 
-> 原文：[https://www.kdnuggets.com/2020/05/six-ways-data-scientists-succeed-startup.html](https://www.kdnuggets.com/2020/05/six-ways-data-scientists-succeed-startup.html)
+> 原文：[`www.kdnuggets.com/2020/05/six-ways-data-scientists-succeed-startup.html`](https://www.kdnuggets.com/2020/05/six-ways-data-scientists-succeed-startup.html)
 
-[comments](#comments)
+comments
 
 **作者：Amit Attias，[Bigabid](https://www.bigabid.com/)首席技术官兼联合创始人**
 
-![Figure](../Images/5e36d320bb71e2e9b97d241170033b5c.png)
+![Figure](img/5e36d320bb71e2e9b97d241170033b5c.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你们组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你们组织的 IT
 
 * * *
 
@@ -46,7 +46,7 @@
 
 +   熟悉新的工具、方法和解决问题的方法。
 
-### **3\. 拥抱DIY精神**
+### **3\. 拥抱 DIY 精神**
 
 拥抱初创公司的“自己动手”精神，使数据科学家有机会开发出在大型公司中由独立工程团队开发的软件工具。这不仅可以提升个人技能，还可以使人更具自给自足的能力，能够独立解决和修复问题。
 
@@ -54,7 +54,7 @@
 
 在一个较小的初创公司，每个团队成员都是更大生态系统中的重要组成部分，大家和谐地合作以创造产品或服务。这意味着有机会参与并理解公司使命的各个方面的原因。
 
-### **5\. 从用户的视角看UI**
+### **5\. 从用户的视角看 UI**
 
 理解用户界面和理解流程以及系统的利益相关者一样重要。在处理假设时，无论是构建内部工具、训练模型，数据科学家都必须考虑：
 
@@ -64,7 +64,7 @@
 
 +   这个智能任务的影响是什么？
 
-数据科学家可以通过寻求用户反馈来更好地理解UI的有效性，如果她所在的初创公司提供反馈的话。有时候用户可能已经知道什么有效，什么无效，因此通过倾听他们的意见，可以帮助她决定要集中开发哪些功能。还要从团队成员那里获取关于可能盲点的反馈，因为他们的视角不同，他们的观点会揭示出忽视的地方。
+数据科学家可以通过寻求用户反馈来更好地理解 UI 的有效性，如果她所在的初创公司提供反馈的话。有时候用户可能已经知道什么有效，什么无效，因此通过倾听他们的意见，可以帮助她决定要集中开发哪些功能。还要从团队成员那里获取关于可能盲点的反馈，因为他们的视角不同，他们的观点会揭示出忽视的地方。
 
 通过对数据科学家所创造的成果负全责，她可以将用户和团队其他成员提供的宝贵见解加以利用。
 
@@ -78,11 +78,11 @@
 
 **相关内容：**
 
-+   [找到你的完美匹配：数据世界职位角色的快速指南](/2020/04/find-perfect-fit-data-job-roles-guide.html)
++   找到你的完美匹配：数据世界职位角色的快速指南
 
-+   [数据科学家的四种现实职业选择](/2020/04/4-career-options-data-scientists.html)
++   数据科学家的四种现实职业选择
 
-+   [为你的数据科学初创公司打造电梯演讲](/2019/08/elevator-pitch-data-science-startup.html)
++   为你的数据科学初创公司打造电梯演讲
 
 ### 更多相关内容
 

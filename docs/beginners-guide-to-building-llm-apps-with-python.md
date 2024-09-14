@@ -1,8 +1,8 @@
 # 初学者构建 LLM 应用的指南
 
-> 原文：[https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python](https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python)
+> 原文：[`www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python`](https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python)
 
-![初学者构建 LLM 应用的指南](../Images/c380ff86d656d015ad72ec4198aa6f28.png)
+![初学者构建 LLM 应用的指南](img/c380ff86d656d015ad72ec4198aa6f28.png)
 
 图片来源：编辑 | Midjourney & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png)1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png)2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png)2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png)3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png)3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 你将在本文中构建什么？你将创建一个简单的 AI 个人助手，根据用户的提示生成回应，并将其部署以便全球访问。下面的图片展示了完成后的应用程序的样子。
 
-![这张图片展示了本文将构建的 AI 个人助手的用户界面](../Images/239aaa46b34aa7ac7d9ae2214c9f7a63.png)
+![这张图片展示了本文将构建的 AI 个人助手的用户界面](img/239aaa46b34aa7ac7d9ae2214c9f7a63.png)
 
 这张图片展示了本文将构建的 AI 个人助手的用户界面
 
@@ -210,26 +210,26 @@ streamlit run app.py
 
 +   点击**部署**按钮，你的 LLM 应用程序将被部署到 Streamlit Community Cloud，并可以全球访问。
 
-![使用 Python 构建 LLM 应用程序的初学者指南](../Images/6f640f2e2be2647ae054b649a22f3ced.png)
+![使用 Python 构建 LLM 应用程序的初学者指南](img/6f640f2e2be2647ae054b649a22f3ced.png)
 
 ## 结论
 
 恭喜！你已迈出构建和部署 Python LLM 应用程序的第一步。从了解前提条件、安装必要的库到编写核心应用程序代码，你现在已经创建了一个功能齐全的 AI 个人助手。通过使用 Streamlit，你使应用程序具有交互性和易用性，并通过将其部署到 Streamlit Community Cloud，你使其对全球用户可访问。
 
-利用你在本指南中学到的技能，你可以进一步深入探讨LLMs和AI，探索更高级的功能，并构建更复杂的应用。不断实验、学习，并与社区分享你的知识。LLMs的可能性巨大，你的旅程才刚刚开始。编码愉快！
+利用你在本指南中学到的技能，你可以进一步深入探讨 LLMs 和 AI，探索更高级的功能，并构建更复杂的应用。不断实验、学习，并与社区分享你的知识。LLMs 的可能性巨大，你的旅程才刚刚开始。编码愉快！
 
-[Shittu Olumide](https://www.linkedin.com/in/olumide-shittu/)是一位软件工程师和技术作家，热衷于利用前沿技术编写引人入胜的叙述，具有敏锐的细节观察力和简化复杂概念的能力。你还可以在[Twitter](https://twitter.com/Shittu_Olumide_)上找到Shittu。
+[Shittu Olumide](https://www.linkedin.com/in/olumide-shittu/)是一位软件工程师和技术作家，热衷于利用前沿技术编写引人入胜的叙述，具有敏锐的细节观察力和简化复杂概念的能力。你还可以在[Twitter](https://twitter.com/Shittu_Olumide_)上找到 Shittu。
 
 ### 相关话题
 
-+   [Python向量数据库和向量索引：构建LLM应用的架构](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
++   [Python 向量数据库和向量索引：构建 LLM 应用的架构](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
 
-+   [帮助构建你的LLM应用的5个工具](https://www.kdnuggets.com/5-tools-to-help-build-your-llm-apps)
++   [帮助构建你的 LLM 应用的 5 个工具](https://www.kdnuggets.com/5-tools-to-help-build-your-llm-apps)
 
 +   [构建数据管道以创建大型语言模型应用](https://www.kdnuggets.com/building-data-pipelines-to-create-apps-with-large-language-models)
 
-+   [Web LLM：将LLM聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
++   [Web LLM：将 LLM 聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
 
-+   [用于构建LLM流程的拖放UI：Flowise AI](https://www.kdnuggets.com/2023/07/draganddrop-ui-building-llm-flows-flowise-ai.html)
++   [用于构建 LLM 流程的拖放 UI：Flowise AI](https://www.kdnuggets.com/2023/07/draganddrop-ui-building-llm-flows-flowise-ai.html)
 
-+   [构建LLM应用时需要知道的5件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
++   [构建 LLM 应用时需要知道的 5 件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)

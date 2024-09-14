@@ -1,22 +1,22 @@
 # 最佳机器学习播客
 
-> 原文：[https://www.kdnuggets.com/2021/04/best-podcasts-machine-learning.html](https://www.kdnuggets.com/2021/04/best-podcasts-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/04/best-podcasts-machine-learning.html`](https://www.kdnuggets.com/2021/04/best-podcasts-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由[理托布拉塔·戈什](https://ghosh-r.github.io/)，深度学习顾问和大四物理本科生**。
 
-![](../Images/e2c32c8662e2d7c09a6e7e9d4c300419.png)
+![](img/e2c32c8662e2d7c09a6e7e9d4c300419.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -24,7 +24,7 @@
 
 播客是了解新领域和工具的绝佳方式，同时也能让你保持对自己关心领域的更新。
 
-我也相信，主要围绕访谈的播客是了解AI领域明星和超级英雄的绝佳方式。你可以一窥他们的思维方式、正在做什么以及如何解决特定问题。
+我也相信，主要围绕访谈的播客是了解 AI 领域明星和超级英雄的绝佳方式。你可以一窥他们的思维方式、正在做什么以及如何解决特定问题。
 
 我还认为，通过收听播客你能获得独特的内容，其他地方无法获取这些内容。
 
@@ -38,9 +38,9 @@
 
 这是一个机器学习播客，专注于“来自解决现实世界问题的机器学习专家的故事。”
 
-Lukas以他自己的风格主持播客。他提出了非常有意义的问题，并对主题了解颇深。播客节目非常信息丰富、简洁明了且引人入胜。
+Lukas 以他自己的风格主持播客。他提出了非常有意义的问题，并对主题了解颇深。播客节目非常信息丰富、简洁明了且引人入胜。
 
-+   每集长度：通常为30-60分钟
++   每集长度：通常为 30-60 分钟
 
 +   目前为止最喜欢的一集：[Peter Norvig，谷歌研究总监——奇点在观察者的眼中](https://www.youtube.com/watch?v=hVW1mwLtDcI)
 
@@ -52,7 +52,7 @@ Lukas以他自己的风格主持播客。他提出了非常有意义的问题，
 
 这个播客关注 DeepMind 的工作，并邀请那些在 DeepMind 内部处理这些问题的人。问题和解决方案用简单的语言描述。充满激情的主持人还会给你一个关于问题的大致概况以及未来的发展方向。这个播客结构非常好，设计精良，且非常信息丰富和启发性强。
 
-+   每集时长：30分钟
++   每集时长：30 分钟
 
 +   目前最喜欢的集数：[Episode 2: Go to Zero](https://www.youtube.com/watch?v=OkAwsrHMTgM)
 
@@ -64,7 +64,7 @@ Lukas以他自己的风格主持播客。他提出了非常有意义的问题，
 
 他播客中的话题超越了 AI 的领域。他曾邀请过 Roger Penrose、Richard Dawkins 和 Noam Chomsky 等嘉宾。他的访谈中有很大一部分关于 AI。他的访谈通常很长，因此有更多的时间深入详细地讨论话题。我非常喜欢这一点。
 
-+   每集时长：60–180分钟
++   每集时长：60–180 分钟
 
 +   目前最喜欢的集数：[David Silver: AlphaGo, AlphaZero, and Deep Reinforcement Learning | Lex Fridman Podcast #86](https://www.youtube.com/watch?v=uPUEq8d73JI)
 
@@ -98,7 +98,7 @@ Lukas以他自己的风格主持播客。他提出了非常有意义的问题，
 
 如果你访问微软研究院的 YouTube 页面，你会看到许多会激发你兴趣的播放列表。例如，[AI 杰出讲座系列](https://www.youtube.com/playlist?list=PLD7HFcN7LXRdF6EcEFmrXGo4pngaR4Z_p) 包含了许多引人深思的 AI 演讲。Talks at Google 也是如此。
 
-TED 上有很多关于数据科学、人工智能及其影响的演讲。而且 TED 在这些领域爆发之前的几年就已经在涵盖数据分析、人工智能等话题。我记得曾经听过一场演讲，[通过讲故事使数据更有意义 | Ben Wellington](https://www.youtube.com/watch?v=6xsvGYIxJok)，这是在2015年发表的，强调了数据分析如何既有创意又简单地揭示许多重要见解，并且通过影响政府政策来改善生活。还有另一场我想提到的演讲是：[Daphne Koller：我们从在线教育中学到了什么](https://www.youtube.com/watch?v=U6FvJ6jMGHU)。Coursera的联合创始人给我们提供了关于在线教育的许多深刻见解，以及数据在其中的核心作用。这是数据如何改变像教育这样根本的事物并积极影响数百万生活的又一例证。
+TED 上有很多关于数据科学、人工智能及其影响的演讲。而且 TED 在这些领域爆发之前的几年就已经在涵盖数据分析、人工智能等话题。我记得曾经听过一场演讲，[通过讲故事使数据更有意义 | Ben Wellington](https://www.youtube.com/watch?v=6xsvGYIxJok)，这是在 2015 年发表的，强调了数据分析如何既有创意又简单地揭示许多重要见解，并且通过影响政府政策来改善生活。还有另一场我想提到的演讲是：[Daphne Koller：我们从在线教育中学到了什么](https://www.youtube.com/watch?v=U6FvJ6jMGHU)。Coursera 的联合创始人给我们提供了关于在线教育的许多深刻见解，以及数据在其中的核心作用。这是数据如何改变像教育这样根本的事物并积极影响数百万生活的又一例证。
 
 +   每集时长：混合
 
@@ -112,7 +112,7 @@ TED 上有很多关于数据科学、人工智能及其影响的演讲。而且 
 
 **相关：**
 
-+   [2019年十大最佳人工智能、分析、数据科学、机器学习播客](https://www.kdnuggets.com/2019/07/best-podcasts-ai-analytics-data-science-machine-learning.html) (2019)
++   [2019 年十大最佳人工智能、分析、数据科学、机器学习播客](https://www.kdnuggets.com/2019/07/best-podcasts-ai-analytics-data-science-machine-learning.html) (2019)
 
 +   [值得关注的人工智能频道](https://www.kdnuggets.com/2020/05/ai-channels-follow.html)
 
@@ -120,14 +120,14 @@ TED 上有很多关于数据科学、人工智能及其影响的演讲。而且 
 
 ### 更多相关主题
 
-+   [每位机器学习爱好者都应关注的5个播客](https://www.kdnuggets.com/5-podcasts-every-machine-learning-enthusiast-should-follow)
++   [每位机器学习爱好者都应关注的 5 个播客](https://www.kdnuggets.com/5-podcasts-every-machine-learning-enthusiast-should-follow)
 
-+   [2022年顶级数据科学播客](https://www.kdnuggets.com/2022/06/top-data-science-podcasts-2022.html)
++   [2022 年顶级数据科学播客](https://www.kdnuggets.com/2022/06/top-data-science-podcasts-2022.html)
 
-+   [2024年你不能错过的5大人工智能播客](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
++   [2024 年你不能错过的 5 大人工智能播客](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
 
-+   [24本最佳（免费）书籍以理解机器学习](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
++   [24 本最佳（免费）书籍以理解机器学习](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
 
-+   [7个最佳机器学习库详解](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
++   [7 个最佳机器学习库详解](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
 
-+   [7个最佳机器学习实验跟踪工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
++   [7 个最佳机器学习实验跟踪工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)

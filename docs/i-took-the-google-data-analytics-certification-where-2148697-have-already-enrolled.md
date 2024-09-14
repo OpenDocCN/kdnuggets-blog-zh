@@ -1,8 +1,8 @@
-# 我参加了谷歌数据分析认证课程，目前已有2,148,697人注册
+# 我参加了谷歌数据分析认证课程，目前已有 2,148,697 人注册
 
-> 原文：[https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
+> 原文：[`www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled`](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
 
-![谷歌数据分析](../Images/1bf4a34d7be34e6353a7ce034104046f.png)
+![谷歌数据分析](img/1bf4a34d7be34e6353a7ce034104046f.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
@@ -34,7 +34,7 @@
 
 到课程结束时，你将学习如何在仪表板、演示文稿和常用可视化平台中可视化和展示数据发现。
 
-该课程面向初学者，如果你每周投入10小时，通常可以在6个月内完成。课程安排灵活——你可以按照自己的节奏学习！
+该课程面向初学者，如果你每周投入 10 小时，通常可以在 6 个月内完成。课程安排灵活——你可以按照自己的节奏学习！
 
 ## 我对认证的看法
 
@@ -62,18 +62,18 @@
 
 KDnuggets 的团队希望每个人都能成功，我们希望我们能帮助你的学习之旅！
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[尼莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术写作员，以及KDnuggets的编辑和社区经理。她特别关注提供数据科学职业建议、教程以及基于理论的数据科学知识。尼莎涵盖了广泛的主题，并希望探索人工智能如何有利于人类寿命的延续。作为一名热衷学习者，尼莎致力于拓宽她的技术知识和写作技能，同时帮助指导他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[尼莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术写作员，以及 KDnuggets 的编辑和社区经理。她特别关注提供数据科学职业建议、教程以及基于理论的数据科学知识。尼莎涵盖了广泛的主题，并希望探索人工智能如何有利于人类寿命的延续。作为一名热衷学习者，尼莎致力于拓宽她的技术知识和写作技能，同时帮助指导他人。
 
 ### 相关主题
 
-+   [2023年Google数据分析认证评审](https://www.kdnuggets.com/2023/01/google-data-analytics-certification-review-2023.html)
++   [2023 年 Google 数据分析认证评审](https://www.kdnuggets.com/2023/01/google-data-analytics-certification-review-2023.html)
 
-+   [科技行业所有领域的热门Google认证](https://www.kdnuggets.com/popular-google-certification-for-all-areas-in-the-tech-industry)
++   [科技行业所有领域的热门 Google 认证](https://www.kdnuggets.com/popular-google-certification-for-all-areas-in-the-tech-industry)
 
-+   [Google刚刚推出了新课程：AI基础](https://www.kdnuggets.com/google-have-just-dropped-a-new-course-ai-essentials)
++   [Google 刚刚推出了新课程：AI 基础](https://www.kdnuggets.com/google-have-just-dropped-a-new-course-ai-essentials)
 
-+   [2022年顶级数据分析师认证课程](https://www.kdnuggets.com/2022/11/top-data-analyst-certification-courses-2022.html)
++   [2022 年顶级数据分析师认证课程](https://www.kdnuggets.com/2022/11/top-data-analyst-certification-courses-2022.html)
 
-+   [Meta的新数据分析师专业认证已发布！](https://www.kdnuggets.com/metas-new-data-analyst-professional-certification-has-dropped)
++   [Meta 的新数据分析师专业认证已发布！](https://www.kdnuggets.com/metas-new-data-analyst-professional-certification-has-dropped)
 
-+   [你在2022年添加了什么认证到你的工具包中？](https://www.kdnuggets.com/2022/03/sas-certification-adding-toolkit-2022.html)
++   [你在 2022 年添加了什么认证到你的工具包中？](https://www.kdnuggets.com/2022/03/sas-certification-adding-toolkit-2022.html)

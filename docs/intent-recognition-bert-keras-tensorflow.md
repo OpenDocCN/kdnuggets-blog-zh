@@ -1,8 +1,8 @@
 # 使用 Keras 和 TensorFlow 2 的 BERT 意图识别
 
-> 原文：[https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html](https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html)
+> 原文：[`www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html`](https://www.kdnuggets.com/2020/02/intent-recognition-bert-keras-tensorflow.html)
 
-[评论](#comments)
+评论
 
 **由 [Venelin Valkov](https://www.linkedin.com/in/venelin-valkov/)，机器学习工程师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -68,25 +68,25 @@ train = train.append(valid).reset_index(drop=True)
 
 我们有`13,784`个训练样本和两列 - `text`和`intent`。我们来看看每个意图下的文本数量：
 
-![](../Images/a7450a08fc0d97efd88b1912b26faed7.png)
+![](img/a7450a08fc0d97efd88b1912b26faed7.png)
 
 每个意图的文本量相当平衡，因此我们不需要任何不平衡建模技术。
 
 ### BERT
 
-BERT（Bidirectional Encoder Representations from Transformers）模型，介绍于 [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805) 论文中，使得普通机器学习从业者能够在各种NLP任务中取得最先进的成果。你可以在没有大量数据集的情况下实现这一点！但这如何可能呢？
+BERT（Bidirectional Encoder Representations from Transformers）模型，介绍于 [BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding](https://arxiv.org/abs/1810.04805) 论文中，使得普通机器学习从业者能够在各种 NLP 任务中取得最先进的成果。你可以在没有大量数据集的情况下实现这一点！但这如何可能呢？
 
-BERT是一个预训练的Transformer编码器堆栈。它在维基百科和[Book Corpus](https://arxiv.org/pdf/1506.06724.pdf)数据集上进行训练。它有两个版本 - Base（12个编码器）和Large（24个编码器）。
+BERT 是一个预训练的 Transformer 编码器堆栈。它在维基百科和[Book Corpus](https://arxiv.org/pdf/1506.06724.pdf)数据集上进行训练。它有两个版本 - Base（12 个编码器）和 Large（24 个编码器）。
 
-BERT建立在NLP社区多个巧妙想法的基础上。一些例子包括 [ELMo](https://arxiv.org/abs/1802.05365)、 [The Transformer](https://arxiv.org/abs/1706.03762)和 [OpenAI Transformer](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)。
+BERT 建立在 NLP 社区多个巧妙想法的基础上。一些例子包括 [ELMo](https://arxiv.org/abs/1802.05365)、 [The Transformer](https://arxiv.org/abs/1706.03762)和 [OpenAI Transformer](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)。
 
-ELMo引入了上下文词嵌入（一个词根据周围的词可以有不同的含义）。Transformer使用注意力机制来理解词语的使用上下文。然后，这个上下文被编码成一个向量表示。实际上，它在处理长期依赖性方面表现更好。
+ELMo 引入了上下文词嵌入（一个词根据周围的词可以有不同的含义）。Transformer 使用注意力机制来理解词语的使用上下文。然后，这个上下文被编码成一个向量表示。实际上，它在处理长期依赖性方面表现更好。
 
-BERT是一个双向模型（同时向前和向后查看）。最棒的是，BERT可以轻松用作特征提取器或在少量数据上进行微调。它在从文本中识别意图方面有多强？
+BERT 是一个双向模型（同时向前和向后查看）。最棒的是，BERT 可以轻松用作特征提取器或在少量数据上进行微调。它在从文本中识别意图方面有多强？
 
-### 使用BERT进行意图识别
+### 使用 BERT 进行意图识别
 
-幸运的是，BERT论文的作者 [开源了他们的工作](https://github.com/google-research/bert) 以及多个预训练模型。原始实现是用TensorFlow编写的，但也有[非常好的PyTorch实现](https://github.com/huggingface/transformers)！
+幸运的是，BERT 论文的作者 [开源了他们的工作](https://github.com/google-research/bert) 以及多个预训练模型。原始实现是用 TensorFlow 编写的，但也有[非常好的 PyTorch 实现](https://github.com/huggingface/transformers)！
 
 让我们从下载其中一个较简单的预训练模型开始，并解压它：
 
@@ -97,7 +97,7 @@ BERT是一个双向模型（同时向前和向后查看）。最棒的是，BERT
 
 这将解压检查点、配置和词汇表，以及其他文件。
 
-不幸的是，原始实现与TensorFlow 2不兼容。 [bert-for-tf2](https://github.com/kpe/bert-for-tf2) 包解决了这个问题。
+不幸的是，原始实现与 TensorFlow 2 不兼容。 [bert-for-tf2](https://github.com/kpe/bert-for-tf2) 包解决了这个问题。
 
 ### 预处理
 
@@ -109,7 +109,7 @@ BERT是一个双向模型（同时向前和向后查看）。最棒的是，BERT
 
 +   对序列进行填充，使每个序列具有相同的长度
 
-让我们开始创建BERT分词器：
+让我们开始创建 BERT 分词器：
 
 ```py
 tokenizer = FullTokenizer(
@@ -138,7 +138,7 @@ tokenizer.convert_tokens_to_ids(tokens)
 [1045, 2064, 1005, 1056, 3524, 2000, 3942, 8063, 2153, 999]
 ```
 
-我们将自己处理填充部分。你也可以使用Keras填充工具来完成这部分。
+我们将自己处理填充部分。你也可以使用 Keras 填充工具来完成这部分。
 
 我们将预处理打包成一个类，这个类主要基于[这个笔记本](https://github.com/kpe/bert-for-tf2/blob/master/examples/gpu_movie_reviews.ipynb)：
 
@@ -198,7 +198,7 @@ class IntentDetectionData:
 
 ### 微调
 
-让我们让BERT用于文本分类吧！我们将加载模型并在其上附加几个层：
+让我们让 BERT 用于文本分类吧！我们将加载模型并在其上附加几个层：
 
 ```py
 def create_model(max_seq_len, bert_ckpt_file):
@@ -235,9 +235,9 @@ def create_model(max_seq_len, bert_ckpt_file):
   return model
 ```
 
-我们使用我们的输入（文本和意图）微调预训练的BERT模型。我们还将输出展平，并添加两个全连接层和Dropout。最后一层具有softmax激活函数。输出数量等于我们拥有的意图数量——七个。
+我们使用我们的输入（文本和意图）微调预训练的 BERT 模型。我们还将输出展平，并添加两个全连接层和 Dropout。最后一层具有 softmax 激活函数。输出数量等于我们拥有的意图数量——七个。
 
-现在你可以使用BERT来识别意图了！
+现在你可以使用 BERT 来识别意图了！
 
 ### 训练
 
@@ -267,9 +267,9 @@ model = create_model(data.max_seq_len, bert_ckpt_file)
 model.summar()
 ```
 
-你会注意到，即使是这个“精简版”的BERT也有近1.1亿个参数。确实，你的模型非常庞大（她是这么说的）。
+你会注意到，即使是这个“精简版”的 BERT 也有近 1.1 亿个参数。确实，你的模型非常庞大（她是这么说的）。
 
-微调像BERT这样的模型既是一门艺术，也涉及大量的失败实验。幸运的是，作者提出了一些建议：
+微调像 BERT 这样的模型既是一门艺术，也涉及大量的失败实验。幸运的是，作者提出了一些建议：
 
 +   批量大小：16，32
 
@@ -285,7 +285,7 @@ model.compile(
 )
 ```
 
-我们将使用Adam，并使用略微不同的学习率（因为我们很牛逼），并使用稀疏分类交叉熵，因此我们不必对标签进行独热编码。
+我们将使用 Adam，并使用略微不同的学习率（因为我们很牛逼），并使用稀疏分类交叉熵，因此我们不必对标签进行独热编码。
 
 让我们拟合模型：
 
@@ -307,11 +307,11 @@ model.fit(
 
 我们存储训练日志，以便你可以在[Tensorboard](https://www.tensorflow.org/tensorboard)中查看训练过程。让我们来看一下：
 
-![](../Images/880f4ce53de05f06386b7e08afbde3db.png)![](../Images/b1e36a67c88c06cd6e88ac96ad8b327f.png)
+![](img/880f4ce53de05f06386b7e08afbde3db.png)![](img/b1e36a67c88c06cd6e88ac96ad8b327f.png)
 
 ### 评估
 
-我必须对你诚实。我对结果感到惊讶。仅使用12.5k样本进行训练，我们得到了：
+我必须对你诚实。我对结果感到惊讶。仅使用 12.5k 样本进行训练，我们得到了：
 
 ```py
 _, train_acc = model.evaluate(data.train_x, data.train_y)
@@ -328,7 +328,7 @@ test acc 0.9771429
 
 很了不起，对吧？让我们看看混淆矩阵：
 
-![](../Images/a37bea84a0725c75db91a07cf296851c.png)
+![](img/a37bea84a0725c75db91a07cf296851c.png)
 
 最后，让我们使用模型从一些自定义句子中检测意图：
 
@@ -367,25 +367,25 @@ intent: RateBook
 
 ### 结论
 
-现在你知道如何对BERT模型进行微调以进行文本分类。你可能已经知道，它还可以用于各种其他任务！你只需要调整层即可。简单！
+现在你知道如何对 BERT 模型进行微调以进行文本分类。你可能已经知道，它还可以用于各种其他任务！你只需要调整层即可。简单！
 
 [**在浏览器中运行完整笔记本**](https://colab.research.google.com/drive/1WQY_XxdiCVFzjMXnDdNfUjDFi0CN5hkT)
 
-[**GitHub上的完整项目**](https://github.com/curiousily/Deep-Learning-For-Hackers)
+[**GitHub 上的完整项目**](https://github.com/curiousily/Deep-Learning-For-Hackers)
 
-做AI/ML感觉就像拥有超能力，对吧？感谢美妙的NLP社区，你也可以拥有超能力！你会用它们做什么呢？
+做 AI/ML 感觉就像拥有超能力，对吧？感谢美妙的 NLP 社区，你也可以拥有超能力！你会用它们做什么呢？
 
 ### 参考资料
 
-+   [BERT微调教程与PyTorch](https://mccormickml.com/2019/07/22/BERT-fine-tuning/)
++   [BERT 微调教程与 PyTorch](https://mccormickml.com/2019/07/22/BERT-fine-tuning/)
 
-+   [SNIPS数据集](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines)
++   [SNIPS 数据集](https://github.com/snipsco/nlu-benchmark/tree/master/2017-06-custom-intent-engines)
 
-+   [插图版BERT、ELMo等](https://jalammar.github.io/illustrated-bert/)
++   [插图版 BERT、ELMo 等](https://jalammar.github.io/illustrated-bert/)
 
-+   [BERT傻瓜教程——逐步指南](https://towardsdatascience.com/bert-for-dummies-step-by-step-tutorial-fb90890ffe03)
++   [BERT 傻瓜教程——逐步指南](https://towardsdatascience.com/bert-for-dummies-step-by-step-tutorial-fb90890ffe03)
 
-+   [使用BERT的多标签文本分类——强大的变换器](https://medium.com/huggingface/multi-label-text-classification-using-bert-the-mighty-transformer-69714fa3fb3d)
++   [使用 BERT 的多标签文本分类——强大的变换器](https://medium.com/huggingface/multi-label-text-classification-using-bert-the-mighty-transformer-69714fa3fb3d)
 
 +   [深度学习](https://www.curiousily.com/tag/deep-learning/)
 
@@ -399,27 +399,27 @@ intent: RateBook
 
 ### 继续你的机器学习之旅：
 
-[![](../Images/c7f0e800e0a4fe82a04944c026cdf6bd.png)](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)
+![](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)
 
-***Python黑客机器学习指南***
+***Python 黑客机器学习指南***
 
-通过使用Scikit-Learn、TensorFlow 2和Keras解决实际机器学习问题的实践指南
+通过使用 Scikit-Learn、TensorFlow 2 和 Keras 解决实际机器学习问题的实践指南
 
 [购买此书](http://bit.ly/Hackers-Guide-to-Machine-Learning-with-Python)
 
-[![](../Images/c5323a2dc7769caab61657e19077dc2f.png)](http://bit.ly/hands-on-machine-learning-from-scratch)
+![](http://bit.ly/hands-on-machine-learning-from-scratch)
 
 ***从零开始的实用机器学习***
 
-通过从头开始使用Python构建机器学习模型、工具和概念，深入理解它们
+通过从头开始使用 Python 构建机器学习模型、工具和概念，深入理解它们
 
 [购买此书](http://bit.ly/hands-on-machine-learning-from-scratch)
 
-[![](../Images/ad6654296ab3297e4e122de002cc6519.png)](http://bit.ly/deep-learning-for-javascript-hackers)
+![](http://bit.ly/deep-learning-for-javascript-hackers)
 
-***JavaScript黑客深度学习***
+***JavaScript 黑客深度学习***
 
-初学者在浏览器中使用TensorFlow.js理解机器学习的指南
+初学者在浏览器中使用 TensorFlow.js 理解机器学习的指南
 
 [购买此书](http://bit.ly/deep-learning-for-javascript-hackers)
 
@@ -429,22 +429,22 @@ intent: RateBook
 
 **相关：**
 
-+   [BERT正在改变NLP领域](/2019/09/bert-changing-nlp-landscape.html)
++   BERT 正在改变 NLP 领域
 
-+   [Lit BERT：3步完成NLP迁移学习](/2019/11/lit-bert-nlp-transfer-learning-3-steps.html)
++   Lit BERT：3 步完成 NLP 迁移学习
 
-+   [BERT、RoBERTa、DistilBERT、XLNet：选择哪个？](/2019/09/bert-roberta-distilbert-xlnet-one-use.html)
++   BERT、RoBERTa、DistilBERT、XLNet：选择哪个？
 
 ### 更多相关内容
 
-+   [使用TensorFlow和Keras构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
++   [使用 TensorFlow 和 Keras 构建和训练第一个神经网络](https://www.kdnuggets.com/2023/05/building-training-first-neural-network-tensorflow-keras.html)
 
-+   [使用BERT分类长文本文档](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
++   [使用 BERT 分类长文本文档](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
 
-+   [使用BERT的抽取式总结](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)
++   [使用 BERT 的抽取式总结](https://www.kdnuggets.com/extractive-summarization-with-llm-using-bert)
 
 +   [图像识别和自然语言处理中的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 
 +   [语音识别指标的发展](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)
 
-+   [5个需求高但不被重视的IT职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
++   [5 个需求高但不被重视的 IT 职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)

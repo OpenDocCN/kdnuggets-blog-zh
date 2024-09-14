@@ -1,22 +1,22 @@
-# 300位数据科学领导者分享了阻碍他们团队的因素
+# 300 位数据科学领导者分享了阻碍他们团队的因素
 
-> 原文：[https://www.kdnuggets.com/2021/09/domino-300-data-science-leaders.html](https://www.kdnuggets.com/2021/09/domino-300-data-science-leaders.html)
+> 原文：[`www.kdnuggets.com/2021/09/domino-300-data-science-leaders.html`](https://www.kdnuggets.com/2021/09/domino-300-data-science-leaders.html)
 
 赞助帖子。
 
-[![Domino 报告 数据科学团队](../Images/e0c6d8d2920ac24b09a47285b2bafc56.png)](https://www.dominodatalab.com/resources/data-science-needs-to-grow-up/?utm_campaign=Q32021_Aug_MLOps_Survey_Results&utm_source=kdnuggets&utm_medium=paidsocial)
+![Domino 报告 数据科学团队](https://www.dominodatalab.com/resources/data-science-needs-to-grow-up/?utm_campaign=Q32021_Aug_MLOps_Survey_Results&utm_source=kdnuggets&utm_medium=paidsocial)
 
-世界上最先进的公司在长期成功的关键驱动因素中，绝大多数依赖数据科学。但根据[**对300位数据科学高管的新调查**](https://www.dominodatalab.com/resources/data-science-needs-to-grow-up/?utm_campaign=Q32021_Aug_MLOps_Survey_Results&utm_source=kdnuggets&utm_medium=paidsocial)（这些公司年收入超过10亿美元），人力、流程和工具方面的投资缺陷导致了数据科学的扩展失败。
+世界上最先进的公司在长期成功的关键驱动因素中，绝大多数依赖数据科学。但根据[**对 300 位数据科学高管的新调查**](https://www.dominodatalab.com/resources/data-science-needs-to-grow-up/?utm_campaign=Q32021_Aug_MLOps_Survey_Results&utm_source=kdnuggets&utm_medium=paidsocial)（这些公司年收入超过 10 亿美元），人力、流程和工具方面的投资缺陷导致了数据科学的扩展失败。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,13 +34,13 @@
 
 1.  团队必须清除障碍以实现目标
 
-一份新报告，[**数据科学需要成长：2021年Domino Data Lab成熟度指数**](https://www.dominodatalab.com/resources/data-science-needs-to-grow-up/?utm_campaign=Q32021_Aug_MLOps_Survey_Results&utm_source=kdnuggets&utm_medium=paidsocial)，揭示了一系列发现，展示了公司在努力扩展数据科学时的困难和原因。
+一份新报告，[**数据科学需要成长：2021 年 Domino Data Lab 成熟度指数**](https://www.dominodatalab.com/resources/data-science-needs-to-grow-up/?utm_campaign=Q32021_Aug_MLOps_Survey_Results&utm_source=kdnuggets&utm_medium=paidsocial)，揭示了一系列发现，展示了公司在努力扩展数据科学时的困难和原因。
 
 这是调查结果的预览。
 
 ### 预期超出了投资，短期“华丽”的投资数量超过了持续的承诺
 
-虽然71%的数据高管表示他们的公司领导期望从数据科学投资中获得收入增长，但令人震惊的是48%的人表示他们的公司投资不足以满足这些期望。
+虽然 71%的数据高管表示他们的公司领导期望从数据科学投资中获得收入增长，但令人震惊的是 48%的人表示他们的公司投资不足以满足这些期望。
 
 他们表示，组织似乎专注于短期利益。事实上，超过四分之三（82%）的受访者表示，他们的雇主在“引人注目的”投资上毫不吝啬，这些投资只带来短期效果。
 
@@ -64,7 +64,7 @@
 
 +   由于错误决策导致收入损失（46%）
 
-+   用于人员配置或薪酬决策的内部KPI不准确（45%）
++   用于人员配置或薪酬决策的内部 KPI 不准确（45%）
 
 +   安全性和薪酬风险（43%）
 
@@ -74,14 +74,14 @@
 
 ### 相关话题
 
-+   [管理数据科学团队的5个技巧](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
++   [管理数据科学团队的 5 个技巧](https://www.kdnuggets.com/5-tips-for-managing-data-science-teams)
 
-+   [人工智能的人才管理：建立高效率的AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
++   [人工智能的人才管理：建立高效率的 AI 团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
 
-+   [KDnuggets™新闻 22:n03, 1月19日：深入探讨13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™新闻 22:n03, 1 月 19 日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [谷歌建议你在参加他们的机器学习…课程前做什么](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
 
-+   [深入探讨13个数据科学家的角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
++   [深入探讨 13 个数据科学家的角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
 
 +   [为什么这么多数据科学家辞职？](https://www.kdnuggets.com/2022/03/many-data-scientists-quitting-jobs.html)

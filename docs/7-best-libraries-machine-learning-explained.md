@@ -1,10 +1,10 @@
-# 7种最佳机器学习库解析
+# 7 种最佳机器学习库解析
 
-> 原文：[https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
+> 原文：[`www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html`](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
 
-![7种最佳机器学习库解析](../Images/f5c7920da06d0ca5a874e5557e0ed223.png)
+![7 种最佳机器学习库解析](img/f5c7920da06d0ca5a874e5557e0ed223.png)
 
-图片由 [rawpixel.com](https://www.freepik.com/free-photo/ai-technology-brain-background-digital-transformation-concept_17164388.htm#query=machine%20learning&position=4&from_view=search&track=sph) 提供，来源于Freepik
+图片由 [rawpixel.com](https://www.freepik.com/free-photo/ai-technology-brain-background-digital-transformation-concept_17164388.htm#query=machine%20learning&position=4&from_view=search&track=sph) 提供，来源于 Freepik
 
 ## 主要要点
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -30,11 +30,11 @@
 
 # 介绍
 
-机器学习的概念可以追溯到1950年代，当时早期的人工智能（AI）系统和用于从数据中训练模型的算法开始出现。然而，第一批现代机器学习库，即提供用于实现和训练机器学习模型的工具和框架的库，直到1980年代和1990年代才出现。
+机器学习的概念可以追溯到 1950 年代，当时早期的人工智能（AI）系统和用于从数据中训练模型的算法开始出现。然而，第一批现代机器学习库，即提供用于实现和训练机器学习模型的工具和框架的库，直到 1980 年代和 1990 年代才出现。
 
-最早的机器学习库之一是1980年代在卡内基梅隆大学开发的***Statlib*** ***库***。该库提供了用于统计分析和机器学习的工具，包括对决策树和神经网络的支持。
+最早的机器学习库之一是 1980 年代在卡内基梅隆大学开发的***Statlib*** ***库***。该库提供了用于统计分析和机器学习的工具，包括对决策树和神经网络的支持。
 
-其他早期的机器学习库包括1990年代在新西兰怀卡托大学开发的***Weka*** ***库***，以及1990年代末在台湾大学开发的LIBSVM库。这些库提供了用于各种机器学习任务的工具，包括分类、回归和聚类。
+其他早期的机器学习库包括 1990 年代在新西兰怀卡托大学开发的***Weka*** ***库***，以及 1990 年代末在台湾大学开发的 LIBSVM 库。这些库提供了用于各种机器学习任务的工具，包括分类、回归和聚类。
 
 随着时间的推移，机器学习领域不断发展壮大，如今有许多机器学习库可供选择，每个库都有其独特的功能和特点。
 
@@ -117,7 +117,7 @@ from tensorflow import keras
 
 使用 Python 库实现多元回归机器学习模型，用于预测邮轮的船员数量。
 
-![7 Best Libraries for Machine Learning Explained](../Images/844ec33b9b7e4dba2af762db8241e359.png)
+![7 Best Libraries for Machine Learning Explained](img/844ec33b9b7e4dba2af762db8241e359.png)
 
 图片来源：Unsplash
 
@@ -133,7 +133,7 @@ from tensorflow import keras
 
 本项目的数据集和代码可以从这里下载：
 
-[https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size)
+[`github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size`](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size)
 
 总之，机器学习库是构建和部署机器学习模型的重要工具。它们提供了一系列功能和算法，可用于训练和测试模型，以及根据数据进行预测和决策。现有许多不同的机器学习库，每种库都有其独特的优势和能力，因此选择适合你项目的库非常重要。机器学习库是机器学习生态系统的核心部分，被全球的开发者和数据科学家广泛使用。
 
@@ -141,14 +141,14 @@ from tensorflow import keras
 
 ### 更多相关话题
 
-+   [数据科学、数据可视化及…的前38大 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [数据科学、数据可视化及…的前 38 大 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
 +   [机器学习关键术语解释](https://www.kdnuggets.com/2016/05/machine-learning-key-terms-explained.html)
 
-+   [KDnuggets 新闻，11月16日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
-+   [5种机器学习模型解释，5分钟](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
++   [5 种机器学习模型解释，5 分钟](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
 
 +   [一分钟内解释的机器学习算法](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)

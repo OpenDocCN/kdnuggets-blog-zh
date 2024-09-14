@@ -1,6 +1,6 @@
-# 让智能文档处理更智能：第1部分
+# 让智能文档处理更智能：第一部分
 
-> 原文：[https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
+> 原文：[`www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html`](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
 
 **作者：阿克谢·库马尔与维坚德拉·贾因**
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -40,7 +40,7 @@
 
 +   特殊字体
 
-![让智能文档处理更智能：第1部分](../Images/08e25b80de2ba9b74032535a2299cee7.png)
+![让智能文档处理更智能：第一部分](img/08e25b80de2ba9b74032535a2299cee7.png)
 
 图 2.1 由于文档质量引起的噪声
 
@@ -52,7 +52,7 @@
 
 1.  光照条件 - 低光（曝光不足）、强光（曝光过度）、部分阴影
 
-![让智能文档处理更智能：第1部分](../Images/ceee2bd9acea9720bea3b1add192fdf3.png)
+![让智能文档处理更智能：第一部分](img/ceee2bd9acea9720bea3b1add192fdf3.png)
 
 图 2.2 与图像捕捉过程相关的噪声
 
@@ -78,7 +78,7 @@
 
 我们探索了一些文献中提供的标准数据集，并且还创建了一些使用真实发票和虚拟发票的自定义数据集。在探索了约 5900 个文档，包括发票、账单、收据、文本文档和在各种噪声条件下扫描的虚拟发票后，这些噪声包括咖啡渍、折叠、皱纹、小字体、倾斜、模糊、水印等。
 
-![让智能文档处理更智能：第 1 部分](../Images/6d417f907ce78af31e76c85c3759b44e.png)
+![让智能文档处理更智能：第一部分](img/6d417f907ce78af31e76c85c3759b44e.png)
 
 图 4.1 – 来自各种数据集的示例图像。左侧框：嘈杂办公室；中间框：智能文档问答；右上框：SROIE 数据集；右下框：自定义数据集。
 
@@ -122,11 +122,11 @@
 
 下面是一些示例：
 
-![使智能文档处理更智能：第 1 部分](../Images/31235543d0ec3ba6f8f2b4537db86b2e.png)
+![使智能文档处理更智能：第一部分](img/31235543d0ec3ba6f8f2b4537db86b2e.png)
 
-图 5.2 (a): SmartDocQA - 焦点模糊：Vision 和 Textract 文本输出比较。左侧图像是输入，中间图像是 Vision 输出，黄色框为单词级别的边界框，右侧图像是 Textract 输出，蓝色框为单词级别的边界框。红框表示没有边界框的单词，即 API 没有检测到的单词。![使智能文档处理更智能：第 1 部分](../Images/b6a328e5f74b8e03e50a51fd5dbe6ea5.png)
+图 5.2 (a): SmartDocQA - 焦点模糊：Vision 和 Textract 文本输出比较。左侧图像是输入，中间图像是 Vision 输出，黄色框为单词级别的边界框，右侧图像是 Textract 输出，蓝色框为单词级别的边界框。红框表示没有边界框的单词，即 API 没有检测到的单词。![使智能文档处理更智能：第一部分](img/b6a328e5f74b8e03e50a51fd5dbe6ea5.png)
 
-图 5.2 (b): SmartDocQA - 2D 运动模糊：Vision 和 Textract 文本输出比较。红框表示 API 未识别的文本。![使智能文档处理更智能：第 1 部分](../Images/f4726d868fd339a5b47279b9573b2a3d.png)
+图 5.2 (b): SmartDocQA - 2D 运动模糊：Vision 和 Textract 文本输出比较。红框表示 API 未识别的文本。![使智能文档处理更智能：第一部分](img/f4726d868fd339a5b47279b9573b2a3d.png)
 
 图 5.2 (c): SmartDocQA - 垂直文本：Vision 和 Textract 文本输出比较。红圈表示 Textract API 无法检测图像中的垂直文本。
 
@@ -140,45 +140,45 @@
 | --- | --- | --- | --- | --- |
 | **视觉** | **Textract** |
 | 1 | 模糊（焦点外） | 内核锐化 | 1 | 退化 | 无效 |
-| 自定义预处理 | 3 | 1: 改进1: 稍微改进1: 稍微退化 | 1: 改进2: 无效 |
-| 2 | 模糊（2D运动模糊） | 模糊（平均/中位数） | 2 | 2: 改进 | 1: 稍微退化1: 改进 |
-| 内核锐化 | 2 | 1: 无效1: 退化 | 1: 退化1: 改进 |
+| 自定义预处理 | 3 | 1: 改进 1: 稍微改进 1: 稍微退化 | 1: 改进 2: 无效 |
+| 2 | 模糊（2D 运动模糊） | 模糊（平均/中位数） | 2 | 2: 改进 | 1: 稍微退化 1: 改进 |
+| 内核锐化 | 2 | 1: 无效 1: 退化 | 1: 退化 1: 改进 |
 | 自定义预处理 | 1 | 无效 | 1: 无效 |
-| 3 | 水平运动模糊 | 模糊（平均/中位数） | 2 | 1: 退化1: 改进 | 1: 稍微改进1: 退化 |
+| 3 | 水平运动模糊 | 模糊（平均/中位数） | 2 | 1: 退化 1: 改进 | 1: 稍微改进 1: 退化 |
 | 自定义预处理 | 1 | 稍微改进 | 无效 |
-| 4 | 水印 | 形态学过滤 | 2 | 1: 改进1: 退化 | 1: 改进1: 退化 |
+| 4 | 水印 | 形态学过滤 | 2 | 1: 改进 1: 退化 | 1: 改进 1: 退化 |
 
 从表中可以看出，这些清理方法并不适用于所有图像，实际上，应用这些清理方法后，API 的性能有时会下降。因此，需要一种统一的解决方案，能够应对各种噪声。
 
 # 结论
 
-在测试了包括 Noisy Office、Smart Doc QA、SROIE 和自定义数据集在内的各种数据集，以比较和评估 Tesseract、Vision 和 Textract 的性能后，我们可以得出结论：OCR 输出受文档中噪声的影响。内置去噪器或预处理器不足以处理大多数噪声，包括运动模糊、水印等。如果对文档图像进行去噪，OCR 输出可以显著改善。文档中的噪声种类繁多，我们尝试了各种非模型方法来清理图像。不同的方法对不同种类的噪声有效。目前，还没有一种统一的选项能够处理所有种类的噪声，或者至少是主要噪声。因此，有必要使智能文档处理更加智能。需要一种统一的（“一个模型适用所有”）解决方案，在输入 OCR API 之前对文档进行去噪，以提高性能。在本博客系列的第2部分中，我们将探讨去噪方法以提升 API 的性能。
+在测试了包括 Noisy Office、Smart Doc QA、SROIE 和自定义数据集在内的各种数据集，以比较和评估 Tesseract、Vision 和 Textract 的性能后，我们可以得出结论：OCR 输出受文档中噪声的影响。内置去噪器或预处理器不足以处理大多数噪声，包括运动模糊、水印等。如果对文档图像进行去噪，OCR 输出可以显著改善。文档中的噪声种类繁多，我们尝试了各种非模型方法来清理图像。不同的方法对不同种类的噪声有效。目前，还没有一种统一的选项能够处理所有种类的噪声，或者至少是主要噪声。因此，有必要使智能文档处理更加智能。需要一种统一的（“一个模型适用所有”）解决方案，在输入 OCR API 之前对文档进行去噪，以提高性能。在本博客系列的第二部分中，我们将探讨去噪方法以提升 API 的性能。
 
 ## 参考文献
 
-1.  F. Zamora-Martinez, S. España-Boquera 和 M. J. Castro-Bleda，基于行为的神经网络聚类应用于文档增强，见：计算与环境智能，第144-151页，Springer，2007年。
+1.  F. Zamora-Martinez, S. España-Boquera 和 M. J. Castro-Bleda，基于行为的神经网络聚类应用于文档增强，见：计算与环境智能，第 144-151 页，Springer，2007 年。
 
     UCI 机器学习库 [https://archive.ics.uci.edu/ml/datasets/NoisyOffice]
 
 1.  Castro-Bleda, MJ.; España Boquera, S.; Pastor Pellicer, J.; Zamora Martínez, FJ. (2020). The NoisyOffice 数据库：用于训练监督式机器学习滤镜的语料库。计算机杂志。63(11):1658-1667。 https://doi.org/10.1093/comjnl/bxz098
 
-1.  尼巴尔·纳耶夫、穆罕默德·穆扎米尔·卢克曼、索菲亚·普鲁姆、塞巴斯蒂安·埃斯克纳齐、约瑟夫·查扎隆、让-马克·奥吉耶：“SmartDoc-QA：用于智能手机捕获文档图像的质量评估数据集——单一和多重失真”，第六届基于相机的文档分析与识别国际研讨会（CBDAR）论文集，2015年。
+1.  尼巴尔·纳耶夫、穆罕默德·穆扎米尔·卢克曼、索菲亚·普鲁姆、塞巴斯蒂安·埃斯克纳齐、约瑟夫·查扎隆、让-马克·奥吉耶：“SmartDoc-QA：用于智能手机捕获文档图像的质量评估数据集——单一和多重失真”，第六届基于相机的文档分析与识别国际研讨会（CBDAR）论文集，2015 年。
 
 1.  郑黄、凯陈、简华赫、项白、迪莫斯特尼斯·卡拉察斯、舒简·卢、C.V.贾瓦哈尔，《ICDAR2019 扫描收据 OCR 和信息提取竞赛（SROIE）》，2021 [arXiv:2103.10213v1]
 
-1.  [https://cloud.google.com/vision](https://cloud.google.com/vision)
+1.  [`cloud.google.com/vision`](https://cloud.google.com/vision)
 
-1.  [https://aws.amazon.com/textract/](https://aws.amazon.com/textract/)
+1.  [`aws.amazon.com/textract/`](https://aws.amazon.com/textract/)
 
-1.  [https://docs.opencv.org/3.4/d4/d13/tutorial_py_filtering.html](https://docs.opencv.org/3.4/d4/d13/tutorial_py_filtering.html)
+1.  [`docs.opencv.org/3.4/d4/d13/tutorial_py_filtering.html`](https://docs.opencv.org/3.4/d4/d13/tutorial_py_filtering.html)
 
-1.  [https://scikit-image.org/docs/stable/auto_examples/applications/plot_morphology.html](https://scikit-image.org/docs/stable/auto_examples/applications/plot_morphology.html)
+1.  [`scikit-image.org/docs/stable/auto_examples/applications/plot_morphology.html`](https://scikit-image.org/docs/stable/auto_examples/applications/plot_morphology.html)
 
-1.  [https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/](https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/)
+1.  [`pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/`](https://pyimagesearch.com/2014/09/01/build-kick-ass-mobile-document-scanner-just-5-minutes/)
 
-**[阿克谢·库马尔](https://www.linkedin.com/in/akshay-kumar-datascience/)** 是 [Sigmoid](http://www.sigmoid.com/) 的首席数据科学家，拥有12年数据科学经验，专长于市场分析、推荐系统、时间序列预测、欺诈风险建模、图像处理和自然语言处理。他构建可扩展的数据科学解决方案和系统，以解决复杂的业务问题，同时以用户体验为核心。
+**[阿克谢·库马尔](https://www.linkedin.com/in/akshay-kumar-datascience/)** 是 [Sigmoid](http://www.sigmoid.com/) 的首席数据科学家，拥有 12 年数据科学经验，专长于市场分析、推荐系统、时间序列预测、欺诈风险建模、图像处理和自然语言处理。他构建可扩展的数据科学解决方案和系统，以解决复杂的业务问题，同时以用户体验为核心。
 
-**[维坚德拉·贾恩](https://www.linkedin.com/in/jainvijendra/)** 目前在 [Sigmoid](http://www.sigmoid.com/) 担任副首席数据科学家。拥有7年以上的数据科学经验，他主要从事市场混合建模、图像分类和分割以及推荐系统等领域的工作。
+**[维坚德拉·贾恩](https://www.linkedin.com/in/jainvijendra/)** 目前在 [Sigmoid](http://www.sigmoid.com/) 担任副首席数据科学家。拥有 7 年以上的数据科学经验，他主要从事市场混合建模、图像分类和分割以及推荐系统等领域的工作。
 
 ### 更多相关主题
 

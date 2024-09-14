@@ -1,14 +1,14 @@
 # 特征工程如何帮助你在 Kaggle 竞赛中表现出色 – 第一部分
 
-> 原文：[https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html](https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html)
+> 原文：[`www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html`](https://www.kdnuggets.com/2017/06/feature-engineering-help-kaggle-competition-1.html)
 
 **作者：Gabriel Moreira, CI&T.**
 
-![标题](../Images/958dca69141a213fb3f1a688fa29066b.png)
+![标题](img/958dca69141a213fb3f1a688fa29066b.png)
 
 现在是 2017 年 1 月 18 日午夜，[Outbrain 点击预测机器学习竞赛](https://www.kaggle.com/c/outbrain-click-prediction)刚刚结束。这是三个月半的加班工作。当我滚动浏览排行榜页面时，我发现我的名字排在第 19 位，这在近 1000 名参赛者中位于前 2%。对于我决定认真投入的第一场 Kaggle 竞赛来说，这已经很不错了！
 
-![](../Images/889ea6594cecd18b937a52bf46ccf7f0.png)
+![](img/889ea6594cecd18b937a52bf46ccf7f0.png)
 
 我能够取得好成绩的原因之一是因为 Google Cloud Platform (GCP) 让我的工作变得更轻松，让我可以专注于数据。现在，我将带你走过我的旅程！
 
@@ -18,7 +18,7 @@ Kaggle 竞赛由 [Outbrain](http://www.outbrain.com/) 赞助，Outbrain 每月�
 
 Outbrain 维护着一个出版商和广告商的网络。例如，在下图中，付费内容（广告）展示在 CNN（出版商）的新闻页面上。
 
-![](../Images/2017d974e38726964e37718f82b41e7a.png)
+![](img/2017d974e38726964e37718f82b41e7a.png)
 
 来自 [Outbrain 点击预测竞赛](https://www.kaggle.com/c/outbrain-click-prediction/data)。
 
@@ -54,21 +54,21 @@ Dataproc Spark 集群使用 [Google Cloud Storage](https://cloud.google.com/stor
 
 计算广告的平均 CTR。
 
-为了提高CTR的置信度，我们可以只考虑浏览次数超过五次的广告。使用*collectAsMap()*操作，将分布式集合转换为内存中的查找字典，其中键是ad_id，值是相应的平均CTR。
+为了提高 CTR 的置信度，我们可以只考虑浏览次数超过五次的广告。使用*collectAsMap()*操作，将分布式集合转换为内存中的查找字典，其中键是 ad_id，值是相应的平均 CTR。
 
-这是大多数竞争者提交的基线，即使没有任何机器学习算法，也能给你MAP@12的**0.637**。作为参考，官方基线竞赛基于按广告ID排名（类似随机方法），MAP@12为**0.485**。因此，这种初步方法在点击预测中实际上做得很好。
+这是大多数竞争者提交的基线，即使没有任何机器学习算法，也能给你 MAP@12 的**0.637**。作为参考，官方基线竞赛基于按广告 ID 排名（类似随机方法），MAP@12 为**0.485**。因此，这种初步方法在点击预测中实际上做得很好。
 
 ### 数据分析
 
-像往常一样，在应用任何机器学习技术之前，分析数据并制定关于哪些特征和算法对于解决问题有用的假设是非常重要的。我实现了一个EDA（探索性数据分析），使用PySpark揭示了最大的 数据集（page_views.csv ~ 100 GB）。
+像往常一样，在应用任何机器学习技术之前，分析数据并制定关于哪些特征和算法对于解决问题有用的假设是非常重要的。我实现了一个 EDA（探索性数据分析），使用 PySpark 揭示了最大的 数据集（page_views.csv ~ 100 GB）。
 
-我的[EDA Kernel](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark)，展示了如何使用Python、Spark SQL和Jupyter notebooks在Dataproc中分析竞争中最大的 数据集，已与其他竞争者分享，并成为第二个最受投票的贡献（金牌）。根据我的Kernel [评论](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark)，看来许多Kagglers正在考虑尝试Google Dataproc和Spark用于机器学习竞赛。
+我的[EDA Kernel](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark)，展示了如何使用 Python、Spark SQL 和 Jupyter notebooks 在 Dataproc 中分析竞争中最大的 数据集，已与其他竞争者分享，并成为第二个最受投票的贡献（金牌）。根据我的 Kernel [评论](https://www.kaggle.com/gspmoreira/outbrain-click-prediction/unveiling-page-views-csv-with-pyspark)，看来许多 Kagglers 正在考虑尝试 Google Dataproc 和 Spark 用于机器学习竞赛。
 
-我的分析帮助我弄清楚了如何从数据集中提取价值，通过将其与训练数据和测试数据（events.csv）结合。例如，在下图所示的累积图中，我们可以看到65%的用户只有一次页面浏览，77%的用户最多有两次浏览，89%的用户最多有五次浏览。
+我的分析帮助我弄清楚了如何从数据集中提取价值，通过将其与训练数据和测试数据（events.csv）结合。例如，在下图所示的累积图中，我们可以看到 65%的用户只有一次页面浏览，77%的用户最多有两次浏览，89%的用户最多有五次浏览。
 
-![](../Images/b821f026d86c4d98ddde68f3b835a9dd.png)
+![](img/b821f026d86c4d98ddde68f3b835a9dd.png)
 
-用户最多拥有N次页面浏览的累积百分比。
+用户最多拥有 N 次页面浏览的累积百分比。
 
 这是一个典型的“冷启动”场景，我们对大多数用户几乎一无所知，需要预测他们会点击哪些推荐内容。
 
@@ -76,27 +76,27 @@ Dataproc Spark 集群使用 [Google Cloud Storage](https://cloud.google.com/stor
 
 ### 特征工程
 
-特征工程指的是选择或创建适用于机器学习模型的正确特征的关键步骤。通常，根据数据的复杂性，这可能占总工作量的80%。
+特征工程指的是选择或创建适用于机器学习模型的正确特征的关键步骤。通常，根据数据的复杂性，这可能占总工作量的 80%。
 
 在下图中，我展示了竞争的原始数据模型，按数据类型对特征进行着色。
 
-![](../Images/e54a298f669725bc5b88d1209febaeab.png)
+![](img/e54a298f669725bc5b88d1209febaeab.png)
 
-Outbrain点击预测大型关系型数据库。
+Outbrain 点击预测大型关系型数据库。
 
-所有的分类字段最初都被表示为整数。根据机器学习算法的不同，作为序数值表示的id可能会让模型认为某个类别比另一个类别更重要。例如，如果阿根廷的id是1，巴西的id是2，算法可能会推断出巴西的代表性是阿根廷的两倍。为了解决这个问题，常用的方法是像[独热编码](https://en.wikipedia.org/wiki/One-hot)（OHE）这样的技术，其中每个分类字段都被转换为一个稀疏向量。在稀疏向量中，所有位置的值均为零，只有对应于id值的位置有非零值。
+所有的分类字段最初都被表示为整数。根据机器学习算法的不同，作为序数值表示的 id 可能会让模型认为某个类别比另一个类别更重要。例如，如果阿根廷的 id 是 1，巴西的 id 是 2，算法可能会推断出巴西的代表性是阿根廷的两倍。为了解决这个问题，常用的方法是像[独热编码](https://en.wikipedia.org/wiki/One-hot)（OHE）这样的技术，其中每个分类字段都被转换为一个稀疏向量。在稀疏向量中，所有位置的值均为零，只有对应于 id 值的位置有非零值。
 
-另一种处理具有大量唯一值的分类特征的流行技术是[特征哈希](https://en.wikipedia.org/wiki/Feature_hashing)，它使用哈希函数将类别映射到固定长度的向量。与OHE相比，这种方法提供了更低的稀疏度和更高的压缩率，并且对新出现和稀有的分类值（例如之前未见过的用户代理）处理得很好。它也可能在将多个特征映射到相同的向量位置时导致一些冲突，但机器学习算法通常足够健壮，能够处理这些冲突。我在我的方法中使用了这两种技术。
+另一种处理具有大量唯一值的分类特征的流行技术是[特征哈希](https://en.wikipedia.org/wiki/Feature_hashing)，它使用哈希函数将类别映射到固定长度的向量。与 OHE 相比，这种方法提供了更低的稀疏度和更高的压缩率，并且对新出现和稀有的分类值（例如之前未见过的用户代理）处理得很好。它也可能在将多个特征映射到相同的向量位置时导致一些冲突，但机器学习算法通常足够健壮，能够处理这些冲突。我在我的方法中使用了这两种技术。
 
-我还对数值标量特征使用了‘[分箱](https://en.wikipedia.org/wiki/Data_binning)’。一些特征非常嘈杂，我们最好通过这种转换减少次要观测误差或差异的影响。例如，我将事件‘小时’分箱为早晨、中午、下午、晚上等，因为我的假设是，如果在上午10点或11点观察，用户行为不会有太大不同。
+我还对数值标量特征使用了‘[分箱](https://en.wikipedia.org/wiki/Data_binning)’。一些特征非常嘈杂，我们最好通过这种转换减少次要观测误差或差异的影响。例如，我将事件‘小时’分箱为早晨、中午、下午、晚上等，因为我的假设是，如果在上午 10 点或 11 点观察，用户行为不会有太大不同。
 
-对于长尾分布的变量，比如*user_views_count*，大多数用户只有一个页面浏览记录，而很少有高浏览量的用户。应用诸如log(1 + #views)这样的转换对平滑分布是有用的。一个有1,000次页面浏览的用户可能与一个有500次浏览的用户差异不大，他们在这个上下文中都是相似的离群点。
+对于长尾分布的变量，比如*user_views_count*，大多数用户只有一个页面浏览记录，而很少有高浏览量的用户。应用诸如 log(1 + #views)这样的转换对平滑分布是有用的。一个有 1,000 次页面浏览的用户可能与一个有 500 次浏览的用户差异不大，他们在这个上下文中都是相似的离群点。
 
 [标准化和归一化](http://sebastianraschka.com/Articles/2014_about_feature_scaling.html)对于大多数使用优化技术如梯度下降的机器学习算法也很重要。一般来说，只有基于决策树的模型能够处理不同尺度和方差的原始数值特征。
 
 我使用的主要特征工程技术的更详细介绍可以在这份[幻灯片](https://www.slideshare.net/gabrielspmoreira/feature-engineering-getting-most-out-of-data-for-predictive-models)中找到。
 
-根据我从EDA中获得的见解和假设，我成功地为我的机器学习模型创建和转换了特征，除了原始的[竞赛数据](https://www.kaggle.com/c/outbrain-click-prediction/data)中提供的特征。以下是其中的一些特征。
+根据我从 EDA 中获得的见解和假设，我成功地为我的机器学习模型创建和转换了特征，除了原始的[竞赛数据](https://www.kaggle.com/c/outbrain-click-prediction/data)中提供的特征。以下是其中的一些特征。
 
 ***用户画像***
 
@@ -104,7 +104,7 @@ Outbrain点击预测大型关系型数据库。
 
 +   **user_views_count -** 热衷阅读的用户与其他用户行为有何不同？让我们添加这个特征，让机器学习模型来猜测。
 
-+   **user_views_categories, user_views_topics, user_views_entities -** 基于用户之前查看过的文档的类别、主题和实体的用户画像向量（按置信度和TF-IDF加权），用于在基于内容的过滤方法中建模用户偏好。
++   **user_views_categories, user_views_topics, user_views_entities -** 基于用户之前查看过的文档的类别、主题和实体的用户画像向量（按置信度和 TF-IDF 加权），用于在基于内容的过滤方法中建模用户偏好。
 
 +   **user_avg_views_of_distinct_docs -** 比率*(#user_distinct_docs_views / #user_views)*，表示用户重新阅读之前访问过的页面的频率。
 
@@ -118,15 +118,15 @@ Outbrain点击预测大型关系型数据库。
 
 ***事件***
 
-+   **event_local_hour (binned), event_weekend** — 事件时间戳为UTC-4，因此我处理了事件地理位置以获取时区并调整用户的本地时间。时间段被分为早晨、下午、正午、傍晚、夜晚。还包含了一个指示是否为周末的标志。假设时间会影响用户阅读的内容类型。
++   **event_local_hour (binned), event_weekend** — 事件时间戳为 UTC-4，因此我处理了事件地理位置以获取时区并调整用户的本地时间。时间段被分为早晨、下午、正午、傍晚、夜晚。还包含了一个指示是否为周末的标志。假设时间会影响用户阅读的内容类型。
 
 +   **event_country, event_country_state -** 字段*event_geolocation*被解析以提取用户在页面访问中的国家和州。
 
-+   **ad_id, doc_event_id, doc_ad_id, ad_advertiser, …** — 所有原始类别字段都进行了独热编码以供模型使用，生成了大约126,000个特征。
++   **ad_id, doc_event_id, doc_ad_id, ad_advertiser, …** — 所有原始类别字段都进行了独热编码以供模型使用，生成了大约 126,000 个特征。
 
 ***平均点击率***
 
-+   **avg_ctr_ad_id, avg_ctr_publisher_id, avg_ctr_advertiser_id, avg_ctr_campain_id, avg_ctr_entity_id_country … -** 给定某些类别组合和CTR置信度的平均点击率*(#clicks / #views)*（详细信息请参见[Part II](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)帖子）。例如：P(click | category01, category02)。
++   **avg_ctr_ad_id, avg_ctr_publisher_id, avg_ctr_advertiser_id, avg_ctr_campain_id, avg_ctr_entity_id_country … -** 给定某些类别组合和 CTR 置信度的平均点击率*(#clicks / #views)*（详细信息请参见[Part II](https://medium.com/unstructured/how-feature-engineering-can-help-you-do-well-in-a-kaggle-competition-part-ii-3645d92282b8)帖子）。例如：P(click | category01, category02)。
 
 ***基于内容的相似性***
 
@@ -150,21 +150,21 @@ Outbrain点击预测大型关系型数据库。
 
 **相关：**
 
-+   [如何在你的第一次 Kaggle 比赛中排名前 10%](/2016/11/rank-ten-precent-first-kaggle-competition.html)
++   如何在你的第一次 Kaggle 比赛中排名前 10%
 
-+   [在深度学习中，架构工程是新的特征工程](/2016/07/deep-learning-architecture-engineering-feature-engineering.html)
++   在深度学习中，架构工程是新的特征工程
 
-+   [机器学习速成课程：第一部分](/2017/05/machine-learning-crash-course-part-1.html)
++   机器学习速成课程：第一部分
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 

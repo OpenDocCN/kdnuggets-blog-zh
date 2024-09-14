@@ -1,22 +1,22 @@
 # 监督学习：从过去到现在的模型流行度
 
-> 原文：[https://www.kdnuggets.com/2018/12/supervised-learning-model-popularity-from-past-present.html](https://www.kdnuggets.com/2018/12/supervised-learning-model-popularity-from-past-present.html)
+> 原文：[`www.kdnuggets.com/2018/12/supervised-learning-model-popularity-from-past-present.html`](https://www.kdnuggets.com/2018/12/supervised-learning-model-popularity-from-past-present.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Matthias Döring](https://linkedin.com/in/matthias-doering)**
 
-在过去几十年中，机器学习领域经历了巨大的变化。诚然，一些方法已经存在了很长时间，并且仍然是该领域的主流。例如，最小二乘法的概念早在19世纪初就已由[勒让德](https://archive.org/details/nouvellesmthode00legegoog/)和[高斯](https://www.e-rara.ch/zut/content/titleinfo/142787)提出。其他方法如神经网络，[其最基本的形式在1958年被引入](http://psycnet.apa.org/record/1959-09865-001)，在过去几十年中得到了显著的进展，而像[支持向量机（SVMs）](https://link.springer.com/article/10.1007/BF00994018)这样的方法则更为近期。
+在过去几十年中，机器学习领域经历了巨大的变化。诚然，一些方法已经存在了很长时间，并且仍然是该领域的主流。例如，最小二乘法的概念早在 19 世纪初就已由[勒让德](https://archive.org/details/nouvellesmthode00legegoog/)和[高斯](https://www.e-rara.ch/zut/content/titleinfo/142787)提出。其他方法如神经网络，[其最基本的形式在 1958 年被引入](http://psycnet.apa.org/record/1959-09865-001)，在过去几十年中得到了显著的进展，而像[支持向量机（SVMs）](https://link.springer.com/article/10.1007/BF00994018)这样的方法则更为近期。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,39 +34,39 @@
 
 对于这部分内容，我进行了两项分析。第一次分析是对出版频率的纵向分析，而第二次分析则比较了不同领域与机器学习模型相关的整体出版数量。
 
-对于第一次分析，我通过从Google Scholar抓取数据来确定出版物的数量，该数据考虑了科学出版物的标题和摘要。为了识别与单个监督学习方法相关的出版物数量，我确定了1950年至2017年间Google Scholar的搜索结果数量。由于从Google Scholar抓取数据非常困难，我依靠了[ScrapeHero的有用建议](https://www.scrapehero.com/how-to-fake-and-rotate-user-agents-using-python-3/)来收集数据。
+对于第一次分析，我通过从 Google Scholar 抓取数据来确定出版物的数量，该数据考虑了科学出版物的标题和摘要。为了识别与单个监督学习方法相关的出版物数量，我确定了 1950 年至 2017 年间 Google Scholar 的搜索结果数量。由于从 Google Scholar 抓取数据非常困难，我依靠了[ScrapeHero 的有用建议](https://www.scrapehero.com/how-to-fake-and-rotate-user-agents-using-python-3/)来收集数据。
 
-我在分析中包括了以下13种监督学习方法：神经网络、深度学习、支持向量机、随机森林、决策树、线性回归、逻辑回归、泊松回归、岭回归、套索回归、k-最近邻、线性判别分析和对数线性模型。请注意，对于套索回归，考虑了*套索回归*和*套索模型*这两个术语。对于最近邻，考虑了*k-最近邻*和*k-最近邻*这两个术语。结果数据集显示了[从1950年至今与每种监督模型相关的出版数量](https://www.datascienceblog.net/data-sets/ml_models_timeline.csv)。
+我在分析中包括了以下 13 种监督学习方法：神经网络、深度学习、支持向量机、随机森林、决策树、线性回归、逻辑回归、泊松回归、岭回归、套索回归、k-最近邻、线性判别分析和对数线性模型。请注意，对于套索回归，考虑了*套索回归*和*套索模型*这两个术语。对于最近邻，考虑了*k-最近邻*和*k-最近邻*这两个术语。结果数据集显示了[从 1950 年至今与每种监督模型相关的出版数量](https://www.datascienceblog.net/data-sets/ml_models_timeline.csv)。
 
-### 从1950年至今使用监督学习模型
+### 从 1950 年至今使用监督学习模型
 
-为了分析纵向数据，我将区分两个时期：机器学习的早期（1950年至1980年），在此期间模型较少，以及形成时期（1980年至今），在此期间机器学习的兴趣激增，许多新模型得到开发。请注意，在以下可视化中仅显示最相关的方法。
+为了分析纵向数据，我将区分两个时期：机器学习的早期（1950 年至 1980 年），在此期间模型较少，以及形成时期（1980 年至今），在此期间机器学习的兴趣激增，许多新模型得到开发。请注意，在以下可视化中仅显示最相关的方法。
 
 ### 早期：线性回归的主导地位
 
-![图1 早期机器学习](../Images/4d1a3a46952e4104de58a9c392897a9b.png)
+![图 1 早期机器学习](img/4d1a3a46952e4104de58a9c392897a9b.png)
 
-从图1中可以看出，线性回归在1950年至1980年间是主导方法。相比之下，其他机器学习模型在科学文献中极少被提及。然而，从1960年代开始，我们可以看到神经网络和决策树的受欢迎程度开始增长。我们还可以看到逻辑回归尚未广泛应用，1970年代末期提及数量仅有轻微增加。
+从图 1 中可以看出，线性回归在 1950 年至 1980 年间是主导方法。相比之下，其他机器学习模型在科学文献中极少被提及。然而，从 1960 年代开始，我们可以看到神经网络和决策树的受欢迎程度开始增长。我们还可以看到逻辑回归尚未广泛应用，1970 年代末期提及数量仅有轻微增加。
 
-![图2 形成性机器学习](../Images/bc11262bb83312c653fb630b9ff4969c.png)
+![图 2 形成性机器学习](img/bc11262bb83312c653fb630b9ff4969c.png)
 
 ### 成长岁月：神经网络的多样化与兴起
 
-图2表明，从1980年代末期开始，在科学出版物中提及的监督模型变得显著多样化。重要的是，机器学习模型在科学文献中的提及率一直稳步增加，直到2013年。图中特别显示了线性回归、逻辑回归和神经网络的受欢迎程度。正如我们之前看到的，线性回归在1980年之前已经非常流行。然而，从1980年开始，神经网络和逻辑回归的受欢迎程度迅速增长。虽然逻辑回归在2010年达到了顶峰，与线性回归几乎持平，但神经网络和深度学习（图2中的*神经网络/深度学习*曲线）的整体受欢迎程度在2015年甚至超过了线性回归的受欢迎程度。
+图 2 表明，从 1980 年代末期开始，在科学出版物中提及的监督模型变得显著多样化。重要的是，机器学习模型在科学文献中的提及率一直稳步增加，直到 2013 年。图中特别显示了线性回归、逻辑回归和神经网络的受欢迎程度。正如我们之前看到的，线性回归在 1980 年之前已经非常流行。然而，从 1980 年开始，神经网络和逻辑回归的受欢迎程度迅速增长。虽然逻辑回归在 2010 年达到了顶峰，与线性回归几乎持平，但神经网络和深度学习（图 2 中的*神经网络/深度学习*曲线）的整体受欢迎程度在 2015 年甚至超过了线性回归的受欢迎程度。
 
-神经网络变得极为流行，因为它们在图像识别（[ImageNet](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)，2012年）、面部识别（[DeepFace](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)，2014年）和游戏（[AlphaGo](https://ai.googleblog.com/2016/01/alphago-mastering-ancient-game-of-go.html)，2016年）等机器学习应用中取得了突破。Google Scholar的数据表明，近几年神经网络在科学文章中的提及频率略有下降（图2中未显示）。这可能是因为*深度学习*（多层神经网络）在某种程度上取代了*神经网络*这一术语。使用[Google Trends](https://trends.google.com/trends/explore?date=all&q=deep%20learning,neural%20network)也可以得到相同的发现。
+神经网络变得极为流行，因为它们在图像识别（[ImageNet](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networks)，2012 年）、面部识别（[DeepFace](https://www.cv-foundation.org/openaccess/content_cvpr_2014/html/Taigman_DeepFace_Closing_the_2014_CVPR_paper.html)，2014 年）和游戏（[AlphaGo](https://ai.googleblog.com/2016/01/alphago-mastering-ancient-game-of-go.html)，2016 年）等机器学习应用中取得了突破。Google Scholar 的数据表明，近几年神经网络在科学文章中的提及频率略有下降（图 2 中未显示）。这可能是因为*深度学习*（多层神经网络）在某种程度上取代了*神经网络*这一术语。使用[Google Trends](https://trends.google.com/trends/explore?date=all&q=deep%20learning,neural%20network)也可以得到相同的发现。
 
-剩下的稍微不那么受欢迎的监督方法是决策树和支持向量机。与前三种方法相比，这些方法的提及率明显较低。另一方面，这些方法在文献中的提及频率似乎也波动较小。值得注意的是，决策树和支持向量机的受欢迎程度尚未下降。这与其他方法如线性回归和逻辑回归形成对比，后者的提及数量在近年来显著减少。在决策树和支持向量机之间，支持向量机的提及量似乎展现了更有利的增长趋势，因为支持向量机在其发明仅15年后就超越了决策树。
+剩下的稍微不那么受欢迎的监督方法是决策树和支持向量机。与前三种方法相比，这些方法的提及率明显较低。另一方面，这些方法在文献中的提及频率似乎也波动较小。值得注意的是，决策树和支持向量机的受欢迎程度尚未下降。这与其他方法如线性回归和逻辑回归形成对比，后者的提及数量在近年来显著减少。在决策树和支持向量机之间，支持向量机的提及量似乎展现了更有利的增长趋势，因为支持向量机在其发明仅 15 年后就超越了决策树。
 
-所考虑的机器学习模型的提及数量在2013年达到了峰值（589,803篇出版物），此后略有下降（2017年为462,045篇出版物）。
+所考虑的机器学习模型的提及数量在 2013 年达到了峰值（589,803 篇出版物），此后略有下降（2017 年为 462,045 篇出版物）。
 
 ### 不同领域的监督学习模型的受欢迎程度
 
-在第二次分析中，我想调查不同社区是否依赖不同的机器学习技术。为此，我依赖了三个科学出版物的数据库：[Google Scholar](https://scholar.google.com) 用于一般出版物，[dblp](https://dblp.uni-trier.de/) 用于计算机科学出版物，以及 [PubMed](https://www.ncbi.nlm.nih.gov/pubmed/) 用于生物医学科学的出版物。在这三个数据库中，我确定了 [13种机器学习模型出现的频率](https://www.datascienceblog.net/data-sets/ml_models_overall.csv)。结果显示在图3中。
+在第二次分析中，我想调查不同社区是否依赖不同的机器学习技术。为此，我依赖了三个科学出版物的数据库：[Google Scholar](https://scholar.google.com) 用于一般出版物，[dblp](https://dblp.uni-trier.de/) 用于计算机科学出版物，以及 [PubMed](https://www.ncbi.nlm.nih.gov/pubmed/) 用于生物医学科学的出版物。在这三个数据库中，我确定了 [13 种机器学习模型出现的频率](https://www.datascienceblog.net/data-sets/ml_models_overall.csv)。结果显示在图 3 中。
 
-![Figure3 Machine Learning Fields](../Images/f5b6570bb0f2fcf2e1d6e7839efb0acd.png)
+![Figure3 Machine Learning Fields](img/f5b6570bb0f2fcf2e1d6e7839efb0acd.png)
 
-图3展示了许多方法对于个别领域是非常特定的。接下来，让我们分析每个领域中最受欢迎的模型。
+图 3 展示了许多方法对于个别领域是非常特定的。接下来，让我们分析每个领域中最受欢迎的模型。
 
 ### 监督学习模型的总体使用情况
 
@@ -82,7 +82,7 @@
 
 1.  **支持向量机：** 684,000 (6.6%) 篇论文
 
-总体而言，线性模型明显占据主导地位，占监督模型的超过50%的提及。非线性方法虽然不远远落后：神经网络以16.8%的论文量排第三，紧随其后的是决策树（8.4% 的论文）和支持向量机（6.6% 的论文）。
+总体而言，线性模型明显占据主导地位，占监督模型的超过 50%的提及。非线性方法虽然不远远落后：神经网络以 16.8%的论文量排第三，紧随其后的是决策树（8.4% 的论文）和支持向量机（6.6% 的论文）。
 
 ### 生物医学科学中的模型使用
 
@@ -120,7 +120,7 @@ PubMed 数据中逻辑回归的流行可能与大量展示临床研究的出版�
 
 ### 社区之间的分裂
 
-![图4 不同领域中的机器学习模型类型](../Images/be44399c2228e9e9cee01ba99effe8cf.png)
+![图 4 不同领域中的机器学习模型类型](img/be44399c2228e9e9cee01ba99effe8cf.png)
 
 图 4 总结了文献中提到的参数模型（包括半参数模型）和非参数模型的百分比。条形图显示，机器学习研究中探讨的模型（计算机科学出版物的证据）与实际应用的模型类型（生物医学和总体出版物的证据）之间存在很大差异。尽管超过 90% 的计算机科学出版物涉及非参数模型，但大约 90% 的生物医学出版物涉及参数模型。这表明机器学习研究高度集中于最先进的方法，如深度神经网络，而机器学习的用户往往依赖于更具可解释性的参数模型。
 
@@ -140,9 +140,9 @@ PubMed 数据中逻辑回归的流行可能与大量展示临床研究的出版�
 
 +   [使用 Doc2Vec 和逻辑回归进行多分类文本分类](https://www.kdnuggets.com/2018/11/multi-class-text-classification-doc2vec-logistic-regression.html)
 
-+   [成为数据科学家时学习逻辑回归的5个理由](https://www.kdnuggets.com/2018/05/5-reasons-logistic-regression-first-data-scientist.html)
++   [成为数据科学家时学习逻辑回归的 5 个理由](https://www.kdnuggets.com/2018/05/5-reasons-logistic-regression-first-data-scientist.html)
 
-+   [新手机器学习的前10大算法巡礼](https://www.kdnuggets.com/2018/02/tour-top-10-algorithms-machine-learning-newbies.html)
++   [新手机器学习的前 10 大算法巡礼](https://www.kdnuggets.com/2018/02/tour-top-10-algorithms-machine-learning-newbies.html)
 
 ### 更多相关内容
 
@@ -150,7 +150,7 @@ PubMed 数据中逻辑回归的流行可能与大量展示临床研究的出版�
 
 +   [机器学习中使用的主要监督学习算法](https://www.kdnuggets.com/2022/06/primary-supervised-learning-algorithms-used-machine-learning.html)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
 +   [实践监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)
 

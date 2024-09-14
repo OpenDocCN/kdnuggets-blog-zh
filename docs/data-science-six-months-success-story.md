@@ -1,6 +1,6 @@
 # 我的数据科学六个月成功故事
 
-> 原文：[https://www.kdnuggets.com/2023/04/data-science-six-months-success-story.html](https://www.kdnuggets.com/2023/04/data-science-six-months-success-story.html)
+> 原文：[`www.kdnuggets.com/2023/04/data-science-six-months-success-story.html`](https://www.kdnuggets.com/2023/04/data-science-six-months-success-story.html)
 
 几天前，我庆祝了学习数据科学六个月，我可以告诉你这是我今年做出的最佳决定。
 
@@ -10,101 +10,101 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-如果有人在一年前告诉我，我会知道如何从Twitter上抓取和分析推文，并构建可以讲述数据故事的仪表板，我可能会怀疑，但我对自己在过去六个月中学到的许多东西和取得的里程碑感到惊讶。
+如果有人在一年前告诉我，我会知道如何从 Twitter 上抓取和分析推文，并构建可以讲述数据故事的仪表板，我可能会怀疑，但我对自己在过去六个月中学到的许多东西和取得的里程碑感到惊讶。
 
 我将在本文中分享一些我在过去六个月中学到的东西和帮助我保持专注和忠于旅程的技巧。
 
 # 初期阶段
 
-当我决定追求数据科学职业时，我做的第一件事是观看了一些[YouTube视频](https://www.youtube.com/watch?v=Axu4tJl8gbM)并大量研究数据科学家的发展路线图及最佳学习方式。我列出了需要学习的工具清单，并寻找可以免费学习的平台。我最初开始时选修了[IBM数据科学课程](https://www.coursera.org/professional-certificates/ibm-data-science)但最终大部分时间都花在了[Datacamp](https://www.datacamp.com/)上，这得益于[Ingressive for good](https://ingressive.org/)提供的奖学金。
+当我决定追求数据科学职业时，我做的第一件事是观看了一些[YouTube 视频](https://www.youtube.com/watch?v=Axu4tJl8gbM)并大量研究数据科学家的发展路线图及最佳学习方式。我列出了需要学习的工具清单，并寻找可以免费学习的平台。我最初开始时选修了[IBM 数据科学课程](https://www.coursera.org/professional-certificates/ibm-data-science)但最终大部分时间都花在了[Datacamp](https://www.datacamp.com/)上，这得益于[Ingressive for good](https://ingressive.org/)提供的奖学金。
 
 另一件我做的事是为了责任感而让自己暴露在外。害怕吗？是的，我非常害怕，因为这个女孩尝试了很多事情并半途而废。但我决心将这件事进行到底，因此给自己设定了一个时间框架，在六个月内学会基础知识。我甚至没有考虑在六个月内找工作，目标是为了在这六个月内学到很多东西，以帮助我开始这条职业道路。
 
-我在Twitter上发表了一条[帖子](https://twitter.com/Rita_tyna/status/1508958691579604997?s=20&t=TMFfARsjLWCBc0L7BOjBOw)声明了我的意图，并将其固定在我的个人资料上，这样我每天上线查看个人资料时，它都会提醒我。
+我在 Twitter 上发表了一条[帖子](https://twitter.com/Rita_tyna/status/1508958691579604997?s=20&t=TMFfARsjLWCBc0L7BOjBOw)声明了我的意图，并将其固定在我的个人资料上，这样我每天上线查看个人资料时，它都会提醒我。
 
 另一件事是祈求神的恩典和指导。是的，我为此祈祷，并且我开始了这段与神同行的旅程。我非常重视神因素，并相信这是我成功的秘密成分。
 
-此外，我制定了一个适合我的计划，早晨的时间是我阅读的最佳时机，这对我来说很容易，因为这时我没有电脑，只能在手机上学习。手机是我早晨起来后第一个拿起的东西，感谢耶稣，然后直接进入Datacamp，直接进入Python学习。
+此外，我制定了一个适合我的计划，早晨的时间是我阅读的最佳时机，这对我来说很容易，因为这时我没有电脑，只能在手机上学习。手机是我早晨起来后第一个拿起的东西，感谢耶稣，然后直接进入 Datacamp，直接进入 Python 学习。
 
-在一个月内，我在Datacamp完成了四门Python课程，我非常兴奋并期待更多。
+在一个月内，我在 Datacamp 完成了四门 Python 课程，我非常兴奋并期待更多。
 
-![我的数据科学六个月成功故事](../Images/cfa73773b281b1141e14bf9297887001.png)![我的数据科学六个月成功故事](../Images/8c3fab6bd505b31e5e27629ae5c65c34.png)![我的数据科学六个月成功故事](../Images/7bbdcaa6cb2847bcd7be4296c89f7a54.png)![我的数据科学六个月成功故事](../Images/586ca561762d87670b230aa5e601563a.png)
+![我的数据科学六个月成功故事](img/cfa73773b281b1141e14bf9297887001.png)![我的数据科学六个月成功故事](img/8c3fab6bd505b31e5e27629ae5c65c34.png)![我的数据科学六个月成功故事](img/7bbdcaa6cb2847bcd7be4296c89f7a54.png)![我的数据科学六个月成功故事](img/586ca561762d87670b230aa5e601563a.png)
 
 我在旅程的第一个月完成的四门课程的成就声明。
 
 # 五月
 
-我在五月制定了计划，希望完成更多课程，我努力工作，以至于那个月我在Datacamp上完成了16门Python课程。
+我在五月制定了计划，希望完成更多课程，我努力工作，以至于那个月我在 Datacamp 上完成了 16 门 Python 课程。
 
-![我的数据科学六个月成功故事](../Images/6969ac912996eefb4d720c19ab941e98.png)
+![我的数据科学六个月成功故事](img/6969ac912996eefb4d720c19ab941e98.png)
 
-![我的数据科学六个月成功故事](../Images/a136d0a1c90e52f57c5a6fb2d290de27.png)
+![我的数据科学六个月成功故事](img/a136d0a1c90e52f57c5a6fb2d290de27.png)
 
-我还加入了[20数据分析项目](https://www.linkedin.com/posts/octave-tech-hub_dataanalytics-analytics-data-activity-6928316437287571456-Kxer?utm_source=share&utm_medium=member_desktop)与Octave合作，虽然我还没有学到足够的知识来构建项目，但我冒险加入并向其他人学习。
+我还加入了[20 数据分析项目](https://www.linkedin.com/posts/octave-tech-hub_dataanalytics-analytics-data-activity-6928316437287571456-Kxer?utm_source=share&utm_medium=member_desktop)与 Octave 合作，虽然我还没有学到足够的知识来构建项目，但我冒险加入并向其他人学习。
 
-![我的数据科学六个月成功故事](../Images/300bc89c0dbdb122ae41cc5e76c6b58c.png)
+![我的数据科学六个月成功故事](img/300bc89c0dbdb122ae41cc5e76c6b58c.png)
 
-20数据分析项目
+20 数据分析项目
 
 到了五月底，我完成了第一个项目——超市销售仪表盘。虽然不是特别出色，但这是我学习的垫脚石，开启了成长的世界。
 
-![我的数据科学六个月成功故事](../Images/84bfd963e49e53f067a1ab27ef074be4.png)
+![我的数据科学六个月成功故事](img/84bfd963e49e53f067a1ab27ef074be4.png)
 
 超市销售仪表盘
 
-到了六月初，我完成了Datacamp上的数据科学家Python路径，并立即开始学习SQL。
+到了六月初，我完成了 Datacamp 上的数据科学家 Python 路径，并立即开始学习 SQL。
 
 我参与了另一个项目，对过去诺贝尔奖获奖者的分析，这次做得更好。我在学习上保持了一致性，并且成长也很稳定。
 
-![我的数据科学六个月成功故事](../Images/359fd34661082834742070ce218257de.png)
+![我的数据科学六个月成功故事](img/359fd34661082834742070ce218257de.png)
 
 过去诺贝尔奖获奖者的分析
 
-我还加入了Stanbic IBTC培训项目学习Azure，这对我来说是一次艰难却令人兴奋的旅程。
+我还加入了 Stanbic IBTC 培训项目学习 Azure，这对我来说是一次艰难却令人兴奋的旅程。
 
-![我的数据科学六个月成功故事](../Images/7eee6fe0483fb18d3c121eb4d14e43f7.png)
+![我的数据科学六个月成功故事](img/7eee6fe0483fb18d3c121eb4d14e43f7.png)
 
-到了六月底，我在Datacamp上获得了超过1,000,000的学习经验值。
+到了六月底，我在 Datacamp 上获得了超过 1,000,000 的学习经验值。
 
-![我的数据科学六个月成功故事](../Images/18f2261751a0fb982b7d405a2e641c36.png)
+![我的数据科学六个月成功故事](img/18f2261751a0fb982b7d405a2e641c36.png)
 
 # 七月
 
 在七月，我完成了一个实际改变了我学习旅程的项目——[拉各斯真实主妇情感分析项目](https://medium.com/@ritatynaokonkwo/real-housewives-of-lagos-an-analysis-of-twitters-perception-of-the-reality-tv-show-efda379ab1d5?source=post_internal_links---------5----------------------------)。这个项目让很多人对我的旅程产生了兴趣，我收到了许多招聘人员的私信，他们希望与我合作。
 
-![我的数据科学六个月成功故事](../Images/d626b3ec488c08fa426edfa3772f32b1.png)
+![我的数据科学六个月成功故事](img/d626b3ec488c08fa426edfa3772f32b1.png)
 
 到七月底，我获得了我的[第一个职位](https://twitter.com/rita_tyna/status/1552637441420529664?s=46&t=XLDVjlCHZPCzmVMCZkUYAw)，成为一家尼日利亚初创公司的数据分析师。
 
 # 八月
 
-在八月，我获得了Datacamp认证。
+在八月，我获得了 Datacamp 认证。
 
-![我的数据科学六个月成功故事](../Images/03d96c8208c8624339ee4a6cf1a598fa.png)
+![我的数据科学六个月成功故事](img/03d96c8208c8624339ee4a6cf1a598fa.png)
 
-我还参加了两门微软考试：DP 900-Azure数据基础和DP 300-Azure数据库管理员，并且都通过了。
+我还参加了两门微软考试：DP 900-Azure 数据基础和 DP 300-Azure 数据库管理员，并且都通过了。
 
-![我的数据科学六个月成功故事](../Images/f63965b08273f3e1bf31d77b1661fe06.png)
+![我的数据科学六个月成功故事](img/f63965b08273f3e1bf31d77b1661fe06.png)
 
-![我的数据科学六个月成功故事](../Images/9b5f646a60e790f147880964829464d2.png)
+![我的数据科学六个月成功故事](img/9b5f646a60e790f147880964829464d2.png)
 
-我还赢得了Datacamp每日XP学习者挑战赛，以及Ingressive for good组织的#55daysof数据挑战。
+我还赢得了 Datacamp 每日 XP 学习者挑战赛，以及 Ingressive for good 组织的#55daysof 数据挑战。
 
-![我的数据科学六个月成功故事](../Images/704e205def72472bf55b2a7e46fb4da6.png)![我的数据科学六个月成功故事](../Images/991dc716ae067ab2f3e43da54e9ed7e8.png)
+![我的数据科学六个月成功故事](img/704e205def72472bf55b2a7e46fb4da6.png)![我的数据科学六个月成功故事](img/991dc716ae067ab2f3e43da54e9ed7e8.png)
 
 # 九月
 
-到九月时，我在Datacamp上连续学习了150天。我在10天后失去了这个连续记录??。这是一个艰难的时刻。
+到九月时，我在 Datacamp 上连续学习了 150 天。我在 10 天后失去了这个连续记录??。这是一个艰难的时刻。
 
-![我的数据科学六个月成功故事](../Images/3e0ab6de3e32cdc2261d3944d81e973d.png)
+![我的数据科学六个月成功故事](img/3e0ab6de3e32cdc2261d3944d81e973d.png)
 
 从那时起，学习、重学和成长就像过山车一样，我对未来充满了期待。现在是时候重新评估我所处的状态以及下一步的计划了。
 
@@ -114,7 +114,7 @@
 
 另一件我学到的事是，每天坚持会有回报，**一致性**在我的旅程中是一个重要的因素。我在过去的六个月里每天都坚持……虽然有些天我可能没怎么学习，但在其他日子我会非常努力，但我始终坚持。
 
-此外，**努力工作**是我六个月成功故事中的另一个决定性因素。我全力以赴。当我开始这段旅程时，我每天学习11小时。我会在白天花费至少四小时，虽然是间歇性的，而不是一次性完成，通过手机学习概念。然后，我会花费整夜时间在借来的笔记本电脑上练习我所学到的内容。
+此外，**努力工作**是我六个月成功故事中的另一个决定性因素。我全力以赴。当我开始这段旅程时，我每天学习 11 小时。我会在白天花费至少四小时，虽然是间歇性的，而不是一次性完成，通过手机学习概念。然后，我会花费整夜时间在借来的笔记本电脑上练习我所学到的内容。
 
 另一个真正帮助我的建议是分享我的旅程，每天上线谈论我的经历是我成长的关键因素。
 

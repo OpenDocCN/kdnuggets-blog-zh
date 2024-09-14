@@ -1,12 +1,12 @@
 # 机器与深度学习汇编开源书
 
-> 原文：[https://www.kdnuggets.com/2021/09/machine-deep-learning-open-book.html](https://www.kdnuggets.com/2021/09/machine-deep-learning-open-book.html)
+> 原文：[`www.kdnuggets.com/2021/09/machine-deep-learning-open-book.html`](https://www.kdnuggets.com/2021/09/machine-deep-learning-open-book.html)
 
-[评论](#comments)
+评论
 
 **作者：[Ori Cohen](https://www.linkedin.com/in/cohenori/)，AI/ML/DL 专家、研究员、数据科学家**。
 
-![](../Images/ad5604af004a17c65241a03acf29ef46.png)
+![](img/ad5604af004a17c65241a03acf29ef46.png)
 
 *机器与深度学习汇编的部分主题列表。*
 
@@ -26,23 +26,23 @@ ML Compendium 是一个 GitBook 上的项目，这意味着你可以作为 GitBo
 
 你可以访问[mlcompendium.com](https://mlcompendium.com/) 网站或直接访问[汇编“书”](https://book.mlcompendium.com/)。如图 1 所示，左侧是主要主题，右侧是每个主要主题中的子主题，更不用说搜索功能比以前使用 CTRL-F 在原始文档中的方法更为先进。
 
-![](../Images/6928d9cb1d0dd727b069938920b0aef4.png)
+![](img/6928d9cb1d0dd727b069938920b0aef4.png)
 
-*图1：机器与深度学习汇编与 GitBook 界面。*
+*图 1：机器与深度学习汇编与 GitBook 界面。*
 
-以下是两个可能引起你兴趣的话题，*图2* 所示的自然语言处理（NLP）页面，以及 *图3* 所示的深度神经网络（DNN）页面。
+以下是两个可能引起你兴趣的话题，*图 2* 所示的自然语言处理（NLP）页面，以及 *图 3* 所示的深度神经网络（DNN）页面。
 
-![](../Images/d8951bdd353e4da2f3994d3205ccbdb3.png)
+![](img/d8951bdd353e4da2f3994d3205ccbdb3.png)
 
-*图2：自然语言处理。*
+*图 2：自然语言处理。*
 
-![](../Images/b410e11581cf2ac302d541361a9a113d.png)
+![](img/b410e11581cf2ac302d541361a9a113d.png)
 
-*图3：深度神经网络。*
+*图 3：深度神经网络。*
 
 ## GitHub
 
-如果你想贡献内容，你也可以使用 GitHub（*图4*），请将内容放置在适当的主题下，然后创建一个新的分支并发起拉取请求。最后，如果你喜欢这个项目，别忘了给它‘Star’。
+如果你想贡献内容，你也可以使用 GitHub（*图 4*），请将内容放置在适当的主题下，然后创建一个新的分支并发起拉取请求。最后，如果你喜欢这个项目，别忘了给它‘Star’。
 
 以下是使用 GitHub 贡献的简单说明：
 
@@ -60,11 +60,11 @@ ML Compendium 是一个 GitBook 上的项目，这意味着你可以作为 GitBo
 
 1.  git push
 
-1.  通过访问此链接创建拉取请求：[https://github.com/orico/stateofmlops/pull/new/***mybranch***](https://github.com/orico/stateofmlops/pull/new/mybranch)
+1.  通过访问此链接创建拉取请求：[`github.com/orico/stateofmlops/pull/new/***mybranch***`](https://github.com/orico/stateofmlops/pull/new/mybranch)
 
-![](../Images/2d726445cac14b2e79dc087f01c0f13d.png)
+![](img/2d726445cac14b2e79dc087f01c0f13d.png)
 
-*图4： [mlcompendium.com](http://www.mlcompendium.com/) [GitHub 项目](https://github.com/orico/www.mlcompendium.com)。*
+*图 4： [mlcompendium.com](http://www.mlcompendium.com/) [GitHub 项目](https://github.com/orico/www.mlcompendium.com)。*
 
 .
 
@@ -84,24 +84,24 @@ ML Compendium 是一个 GitBook 上的项目，这意味着你可以作为 GitBo
 
 ## 我们推荐的三大课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关主题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

@@ -1,12 +1,12 @@
 # PyCaret 101: 初学者入门指南
 
-> 原文：[https://www.kdnuggets.com/2021/06/pycaret-101-introduction-beginners.html](https://www.kdnuggets.com/2021/06/pycaret-101-introduction-beginners.html)
+> 原文：[`www.kdnuggets.com/2021/06/pycaret-101-introduction-beginners.html`](https://www.kdnuggets.com/2021/06/pycaret-101-introduction-beginners.html)
 
-[评论](#comments)
+评论
 
 **由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 的创始人兼作者**
 
-![](../Images/2b4e095038b7e40091fb46813a4c773b.png)
+![](img/2b4e095038b7e40091fb46813a4c773b.png)
 
 PyCaret — 一个开源的低代码 Python 机器学习库
 
@@ -14,11 +14,11 @@ PyCaret — 一个开源的低代码 Python 机器学习库
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@ PyCaret — 一个开源的低代码 Python 机器学习库
 
 ### PyCaret 的特点
 
-![](../Images/eadab4d647dcf4f77f48fa4df54f1c5a.png)
+![](img/eadab4d647dcf4f77f48fa4df54f1c5a.png)
 
 作者提供的图像
 
@@ -42,7 +42,7 @@ PyCaret — 一个开源的低代码 Python 机器学习库
 
 PyCaret 是一个模块化库，按模块排列，每个模块代表一个机器学习用例。截止到本文撰写时，支持以下模块：
 
-![](../Images/25cf0f7d01befb77986c3b39587cd96e.png)
+![](img/25cf0f7d01befb77986c3b39587cd96e.png)
 
 作者提供的图像 — PyCaret 支持的机器学习用例
 
@@ -61,7 +61,7 @@ pip install pycaret[full]
 
 当你安装 PyCaret 的完整版时，所有的可选依赖项也会被安装，详细信息见 [这里](https://github.com/pycaret/pycaret/blob/master/requirements-optional.txt)。
 
-![](../Images/61927545f7f850ddb656ad96326dd159.png)
+![](img/61927545f7f850ddb656ad96326dd159.png)
 
 PyCaret 数字化 — 作者提供的图片
 
@@ -69,7 +69,7 @@ PyCaret 数字化 — 作者提供的图片
 
 在我向你展示如何用 PyCaret 轻松做机器学习之前，让我们先从高层次上谈谈机器学习生命周期：
 
-![](../Images/a9a1254f49bf8637e4b40ea779055c7a.png)
+![](img/a9a1254f49bf8637e4b40ea779055c7a.png)
 
 机器学习生命周期 — 作者提供的图片（从左到右阅读）
 
@@ -89,18 +89,18 @@ PyCaret 数字化 — 作者提供的图片
 
 ### ???? 业务问题
 
-在本教程中，我将使用达顿商学院的一个非常流行的案例研究，该案例研究发表在[哈佛商业评论](https://hbsp.harvard.edu/product/UV0869-PDF-ENG)上。案例涉及两个未来要结婚的人。名叫*Greg*的男子想买一个戒指向名叫*Sarah*的女孩求婚。问题是找到Sarah会喜欢的戒指，但在朋友的建议下，Greg决定买一个钻石石头，以便Sarah可以决定她的选择。Greg随后收集了6000颗钻石的数据，包括价格和切工、颜色、形状等属性。
+在本教程中，我将使用达顿商学院的一个非常流行的案例研究，该案例研究发表在[哈佛商业评论](https://hbsp.harvard.edu/product/UV0869-PDF-ENG)上。案例涉及两个未来要结婚的人。名叫*Greg*的男子想买一个戒指向名叫*Sarah*的女孩求婚。问题是找到 Sarah 会喜欢的戒指，但在朋友的建议下，Greg 决定买一个钻石石头，以便 Sarah 可以决定她的选择。Greg 随后收集了 6000 颗钻石的数据，包括价格和切工、颜色、形状等属性。
 
 ### ???? 数据
 
-在本教程中，我将使用达顿商学院的一个非常流行的案例研究的数据集，该案例研究发表在[哈佛商业评论](https://hbsp.harvard.edu/product/UV0869-PDF-ENG)上。本教程的目标是根据钻石的属性（如克拉重量、切工、颜色等）预测钻石价格。你可以从[PyCaret的仓库](https://github.com/pycaret/pycaret/tree/master/datasets)下载数据集。
+在本教程中，我将使用达顿商学院的一个非常流行的案例研究的数据集，该案例研究发表在[哈佛商业评论](https://hbsp.harvard.edu/product/UV0869-PDF-ENG)上。本教程的目标是根据钻石的属性（如克拉重量、切工、颜色等）预测钻石价格。你可以从[PyCaret 的仓库](https://github.com/pycaret/pycaret/tree/master/datasets)下载数据集。
 
 ```py
 **# load the dataset from pycaret** from pycaret.datasets import get_data
 data = get_data('diamond')
 ```
 
-![](../Images/fb95a6b487372fcc0798bf241f463754.png)
+![](img/fb95a6b487372fcc0798bf241f463754.png)
 
 数据的样本行
 
@@ -117,7 +117,7 @@ fig = px.scatter(x=data['Carat Weight'], y=data['Price'],
 fig.show()
 ```
 
-![](../Images/5e3fa68a8d11c0a17130264aa4d9f53d.png)
+![](img/5e3fa68a8d11c0a17130264aa4d9f53d.png)
 
 让我们检查目标变量的分布。
 
@@ -127,7 +127,7 @@ fig = px.histogram(data, x=["Price"], template = 'plotly_dark', title = 'Histogr
 fig.show()
 ```
 
-![](../Images/06f59e9b6448c861aa90716081884715.png)
+![](img/06f59e9b6448c861aa90716081884715.png)
 
 注意到`Price`的分布是右偏的，我们可以快速检查对数变换是否能使`Price`大致正态分布，从而给假设正态分布的算法提供机会。
 
@@ -139,13 +139,13 @@ fig = px.histogram(data_copy, x=["Log_Price"], title = 'Histgram of Log Price', 
 fig.show()
 ```
 
-![](../Images/a4bba39265f978622d2702ae97bf7620.png)
+![](img/a4bba39265f978622d2702ae97bf7620.png)
 
 这确认了我们的假设。变换将帮助我们摆脱偏斜，使目标变量大致符合正态分布。基于此，我们将在训练模型之前对`Price`变量进行变换。
 
 ### ???? 数据准备
 
-在PyCaret的所有模块中，`setup`是任何使用PyCaret的机器学习实验中的第一个也是唯一的强制步骤。该函数负责在训练模型之前所需的所有数据准备工作。除了执行一些基本的默认处理任务外，PyCaret还提供了广泛的预处理功能。要了解PyCaret中所有预处理功能的更多信息，请参见这个[链接](https://pycaret.org/preprocessing/)。
+在 PyCaret 的所有模块中，`setup`是任何使用 PyCaret 的机器学习实验中的第一个也是唯一的强制步骤。该函数负责在训练模型之前所需的所有数据准备工作。除了执行一些基本的默认处理任务外，PyCaret 还提供了广泛的预处理功能。要了解 PyCaret 中所有预处理功能的更多信息，请参见这个[链接](https://pycaret.org/preprocessing/)。
 
 ```py
 **# initialize setup**
@@ -153,32 +153,32 @@ from pycaret.regression import *
 s = setup(data, target = 'Price', transform_target = True, log_experiment = True, experiment_name = 'diamond')
 ```
 
-![](../Images/f92622b3666c7bc68fe61fb6b46ddf5c.png)
+![](img/f92622b3666c7bc68fe61fb6b46ddf5c.png)
 
-pycaret.regression模块中的setup函数
+pycaret.regression 模块中的 setup 函数
 
-当你初始化PyCaret中的`setup`函数时，它会分析数据集并推断所有输入特征的数据类型。如果所有数据类型都被正确推断，你可以按回车继续。
+当你初始化 PyCaret 中的`setup`函数时，它会分析数据集并推断所有输入特征的数据类型。如果所有数据类型都被正确推断，你可以按回车继续。
 
 注意：
 
-+   我已传递`log_experiment = True`和`experiment_name = 'diamond'`，这将告诉PyCaret自动记录所有的指标、超参数和模型工件，在建模阶段进行时，这一切都在后台进行。这是由于与[MLflow](https://www.mlflow.org/)的集成实现的。
++   我已传递`log_experiment = True`和`experiment_name = 'diamond'`，这将告诉 PyCaret 自动记录所有的指标、超参数和模型工件，在建模阶段进行时，这一切都在后台进行。这是由于与[MLflow](https://www.mlflow.org/)的集成实现的。
 
-+   此外，我在`setup`中使用了`transform_target = True`。PyCaret将使用box-cox变换在后台转换`Price`变量。这影响了数据的分布，类似于对数变换（*技术上有所不同*）。如果你想了解更多关于box-cox变换的信息，你可以参考这个[链接](https://onlinestatbook.com/2/transformations/box-cox.html)。
++   此外，我在`setup`中使用了`transform_target = True`。PyCaret 将使用 box-cox 变换在后台转换`Price`变量。这影响了数据的分布，类似于对数变换（*技术上有所不同*）。如果你想了解更多关于 box-cox 变换的信息，你可以参考这个[链接](https://onlinestatbook.com/2/transformations/box-cox.html)。
 
-![](../Images/ac6d418cca0eb62de9b2bf43575dc318.png)
+![](img/ac6d418cca0eb62de9b2bf43575dc318.png)
 
 设置输出 — 为显示目的已截断
 
 ### ???? 模型训练与选择
 
-现在数据已经准备好进行建模，让我们使用`compare_models`函数开始训练过程。它将训练模型库中的所有算法，并使用k折交叉验证评估多个性能指标。
+现在数据已经准备好进行建模，让我们使用`compare_models`函数开始训练过程。它将训练模型库中的所有算法，并使用 k 折交叉验证评估多个性能指标。
 
 ```py
 **# compare all models**
 best = compare_models()
 ```
 
-![](../Images/07fecb193d63f93d20f3fea859771fe5.png)
+![](img/07fecb193d63f93d20f3fea859771fe5.png)
 
 `compare_models`的输出
 
@@ -187,27 +187,27 @@ best = compare_models()
 plot_model(best, plot = 'residuals_interactive')
 ```
 
-![](../Images/eb43d501d3b721c528f968ef18076086.png)
+![](img/eb43d501d3b721c528f968ef18076086.png)
 
-最佳模型的残差和QQ图
+最佳模型的残差和 QQ 图
 
 ```py
 **# check feature importance**
 plot_model(best, plot = 'feature')
 ```
 
-![](../Images/0317c1fe59b3d80b2e167e051eab4208.png)
+![](img/0317c1fe59b3d80b2e167e051eab4208.png)
 
-### 完成并保存Pipeline
+### 完成并保存 Pipeline
 
-现在让我们最终确定最佳模型，即在整个数据集（包括测试集）上训练最佳模型，然后将Pipeline保存为pickle文件。
+现在让我们最终确定最佳模型，即在整个数据集（包括测试集）上训练最佳模型，然后将 Pipeline 保存为 pickle 文件。
 
 ```py
 **# finalize the model**
 final_best = finalize_model(best)**# save model to disk** save_model(final_best, 'diamond-pipeline')
 ```
 
-`save_model`函数将把整个Pipeline（包括模型）保存为本地磁盘上的pickle文件。默认情况下，它将把文件保存到与Notebook或脚本所在的文件夹相同的位置，但如果需要，您也可以传递完整路径：
+`save_model`函数将把整个 Pipeline（包括模型）保存为本地磁盘上的 pickle 文件。默认情况下，它将把文件保存到与 Notebook 或脚本所在的文件夹相同的位置，但如果需要，您也可以传递完整路径：
 
 ```py
 save_model(final_best, 'c:/users/moez/models/diamond-pipeline'
@@ -215,7 +215,7 @@ save_model(final_best, 'c:/users/moez/models/diamond-pipeline'
 
 ### ???? 部署
 
-记住我们在设置函数中传递了`log_experiment = True`以及`experiment_name = 'diamond'`。让我们看看PyCaret在MLflow的帮助下在后台做了什么神奇的事情。要查看这些魔法，让我们启动MLflow服务器：
+记住我们在设置函数中传递了`log_experiment = True`以及`experiment_name = 'diamond'`。让我们看看 PyCaret 在 MLflow 的帮助下在后台做了什么神奇的事情。要查看这些魔法，让我们启动 MLflow 服务器：
 
 ```py
 **# within notebook (notice ! sign infront)** !mlflow ui**# on command line in the same folder** mlflow ui
@@ -223,25 +223,25 @@ save_model(final_best, 'c:/users/moez/models/diamond-pipeline'
 
 现在打开你的浏览器，输入“https://localhost:5000”。它将打开一个类似这样的用户界面：
 
-![](../Images/b6170680042f3b2a36cc3b3356deb876.png)
+![](img/b6170680042f3b2a36cc3b3356deb876.png)
 
-[https://localhost:5000](https://localhost:5000/)
+[`localhost:5000`](https://localhost:5000/)
 
-上表中的每一项代表一个训练运行，产生一个训练好的Pipeline和一堆元数据，如运行的日期时间、性能指标、模型超参数、标签等。让我们点击其中一个模型：
+上表中的每一项代表一个训练运行，产生一个训练好的 Pipeline 和一堆元数据，如运行的日期时间、性能指标、模型超参数、标签等。让我们点击其中一个模型：
 
-![](../Images/99991e20fe48b1af29c79fe0a5967e7a.png)
+![](img/99991e20fe48b1af29c79fe0a5967e7a.png)
 
 第一部分 — CatBoost 回归器
 
-![](../Images/d48bae6d168a6898337ee1394c12df66.png)
+![](img/d48bae6d168a6898337ee1394c12df66.png)
 
 第二部分 — CatBoost 回归器（续）
 
-![](../Images/901c1286a5f3784d006ef3fc25b7f9d2.png)
+![](img/901c1286a5f3784d006ef3fc25b7f9d2.png)
 
 第三部分 — CatBoost 回归器
 
-注意你有一个`logged_model`的地址路径。这是使用Catboost回归器训练的Pipeline。你可以使用`load_model`函数读取这个Pipeline。
+注意你有一个`logged_model`的地址路径。这是使用 Catboost 回归器训练的 Pipeline。你可以使用`load_model`函数读取这个 Pipeline。
 
 ```py
 **# load model**
@@ -249,11 +249,11 @@ from pycaret.regression import load_model
 pipeline = load_model('C:/Users/moezs/mlruns/1/b8c10d259b294b28a3e233a9d2c209c0/artifacts/model/model')**# print pipeline** print(pipeline)
 ```
 
-![](../Images/bc9604047be618af559db94d8a86c428.png)
+![](img/bc9604047be618af559db94d8a86c428.png)
 
 print(pipeline)的输出
 
-现在让我们使用这个Pipeline对新数据进行预测
+现在让我们使用这个 Pipeline 对新数据进行预测
 
 ```py
 **# create a copy of data and drop Price** data2 = data.copy()
@@ -262,17 +262,17 @@ predictions = predict_model(pipeline, data=data2)
 predictions.head()
 ```
 
-![](../Images/1c1bee5b356af4b2b77b4227a490bd60.png)
+![](img/1c1bee5b356af4b2b77b4227a490bd60.png)
 
 从管道生成的预测
 
 哇哦！我们现在从训练好的管道中获得了推断。如果这是你的第一次，恭喜你。请注意，所有的转换，如目标转换、独热编码、缺失值填充等，都是在后台自动完成的。你将得到一个包含实际规模预测的数据框，这才是你关心的。
 
-![](../Images/83f3b7bb83ff24f6897be4a9f2a07d9b.png)
+![](img/83f3b7bb83ff24f6897be4a9f2a07d9b.png)
 
 作者提供的图像
 
-![](../Images/b36b63110de0ece1dd0a6283b02637a3.png)
+![](img/b36b63110de0ece1dd0a6283b02637a3.png)
 
 作者提供的图像
 
@@ -332,11 +332,11 @@ predictions.head()
 
 **相关内容：**
 
-+   [使用 PyCaret 和 MLflow 的简单 MLOps](/2021/05/easy-mlops-pycaret-mlflow.html)
++   使用 PyCaret 和 MLflow 的简单 MLOps
 
-+   [使用 PyCaret 编写和训练自定义机器学习模型](/2021/05/pycaret-write-train-custom-machine-learning-models.html)
++   使用 PyCaret 编写和训练自定义机器学习模型
 
-+   [你不知道的 PyCaret 的 5 件事](/2020/07/5-things-pycaret.html)
++   你不知道的 PyCaret 的 5 件事
 
 ### 更多相关内容
 

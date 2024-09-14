@@ -1,22 +1,22 @@
 # Google 提供的免费生成式人工智能课程
 
-> 原文：[https://www.kdnuggets.com/2023/07/free-generative-ai-courses-google.html](https://www.kdnuggets.com/2023/07/free-generative-ai-courses-google.html)
+> 原文：[`www.kdnuggets.com/2023/07/free-generative-ai-courses-google.html`](https://www.kdnuggets.com/2023/07/free-generative-ai-courses-google.html)
 
-![Google 提供的免费生成式人工智能课程](../Images/0b97913eb99474f76bce655c1fd3d575.png)
+![Google 提供的免费生成式人工智能课程](img/0b97913eb99474f76bce655c1fd3d575.png)
 
 作者图片
 
-在我们深入探讨免费课程之前，让我简要介绍一下生成式人工智能的定义。[生成式人工智能](/2023/05/future-ai-exploring-next-generation-generative-models.html)可以根据用户的提示生成文本、图像或其他形式的媒体。它可以生成新的内容，替代重复的任务，处理定制的数据等。例如，[PandasAI](/2023/05/pandas-ai-generative-ai-python-library.html) 最近发布了——一个将生成式人工智能能力集成到 Pandas 中的生成式人工智能 Python 库，以简化数据分析。
+在我们深入探讨免费课程之前，让我简要介绍一下生成式人工智能的定义。生成式人工智能可以根据用户的提示生成文本、图像或其他形式的媒体。它可以生成新的内容，替代重复的任务，处理定制的数据等。例如，PandasAI 最近发布了——一个将生成式人工智能能力集成到 Pandas 中的生成式人工智能 Python 库，以简化数据分析。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -44,13 +44,13 @@ Google 创建了[生成式人工智能学习路径](https://www.cloudskillsboost
 
 ## 3\. 负责任人工智能简介
 
-链接：[负责任的AI介绍](https://www.cloudskillsboost.google/course_templates/554)
+链接：[负责任的 AI 介绍](https://www.cloudskillsboost.google/course_templates/554)
 
-最近对负责任的人工智能（AI）引发了一些愤慨。这个课程将介绍如何将负责任的AI实施到Google的产品中。你将学习Google的7个AI原则，深入了解社会责任、问责制和隐私设计原则。
+最近对负责任的人工智能（AI）引发了一些愤慨。这个课程将介绍如何将负责任的 AI 实施到 Google 的产品中。你将学习 Google 的 7 个 AI 原则，深入了解社会责任、问责制和隐私设计原则。
 
-## 4\. 生成式AI基础
+## 4\. 生成式 AI 基础
 
-链接：[生成式AI基础](https://www.cloudskillsboost.google/course_templates/556)
+链接：[生成式 AI 基础](https://www.cloudskillsboost.google/course_templates/556)
 
 完成前三门课程后，你将会在第四门课程中接受这三门课程的测验。你们中的一些人可能已有背景知识，能很快完成。然而，这对初学者和希望填补知识空白的人来说是有益的。
 
@@ -58,7 +58,7 @@ Google 创建了[生成式人工智能学习路径](https://www.cloudskillsboost
 
 链接：[图像生成简介](https://www.cloudskillsboost.google/course_templates/541)
 
-生成式AI的重要部分是能够使用稳定扩散生成图像。在这个课程中，你将进一步了解扩散模型，并深入研究机器学习、深度学习和卷积神经网络。
+生成式 AI 的重要部分是能够使用稳定扩散生成图像。在这个课程中，你将进一步了解扩散模型，并深入研究机器学习、深度学习和卷积神经网络。
 
 ## 6\. 编码器-解码器架构
 
@@ -72,15 +72,15 @@ Google 创建了[生成式人工智能学习路径](https://www.cloudskillsboost
 
 链接：[注意机制](https://www.cloudskillsboost.google/course_templates/537)
 
-我听到很多人谈论想要更多地了解这个主题。注意机制是一种技术，允许神经网络集中注意力于输入序列的特定部分。为了在课程中取得成功，你需要对机器学习、深度学习、自然语言处理和/或Python编程有良好的理解。
+我听到很多人谈论想要更多地了解这个主题。注意机制是一种技术，允许神经网络集中注意力于输入序列的特定部分。为了在课程中取得成功，你需要对机器学习、深度学习、自然语言处理和/或 Python 编程有良好的理解。
 
-## 8\. 变换器模型和BERT模型
+## 8\. 变换器模型和 BERT 模型
 
-链接：[变换器模型和BERT模型](https://www.cloudskillsboost.google/course_templates/538)
+链接：[变换器模型和 BERT 模型](https://www.cloudskillsboost.google/course_templates/538)
 
 随着术语的复杂化，此时你需要有更多经验。在课程中，你将学习变换器模型的主要组件以及双向编码器表示模型（BERT）。
 
-比如，你将能够更深入地了解自注意机制，以及它如何用于构建BERT模型，还可以了解其他任务如文本分类。
+比如，你将能够更深入地了解自注意机制，以及它如何用于构建 BERT 模型，还可以了解其他任务如文本分类。
 
 ## 9\. 创建图像字幕模型
 

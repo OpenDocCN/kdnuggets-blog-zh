@@ -1,16 +1,16 @@
 # 使用卷积自编码器重建指纹
 
-> 原文：[https://www.kdnuggets.com/2020/03/recreating-fingerprints-using-convolutional-autoencoders.html](https://www.kdnuggets.com/2020/03/recreating-fingerprints-using-convolutional-autoencoders.html)
+> 原文：[`www.kdnuggets.com/2020/03/recreating-fingerprints-using-convolutional-autoencoders.html`](https://www.kdnuggets.com/2020/03/recreating-fingerprints-using-convolutional-autoencoders.html)
 
-[评论](#comments)![图](../Images/ad6146b9d7ada2b0c5689c5886abcfbd.png)
+评论![图](img/ad6146b9d7ada2b0c5689c5886abcfbd.png)
 
 [来源](https://www.pinterest.com/pin/151152131219099327/)
 
 > **生物识别技术** 是身体测量和计算的技术术语。它指的是与人类特征相关的度量。生物识别认证（或现实认证）在计算机科学中用作身份识别和访问控制的一种形式。它也用于识别处于监控中的个人。
 
-生物识别认证系统被分为两种类型：生理生物识别和行为生物识别。生理生物识别主要包括面部识别、指纹、手部几何、虹膜识别和DNA。而行为生物识别包括击键、签名和语音识别。
+生物识别认证系统被分为两种类型：生理生物识别和行为生物识别。生理生物识别主要包括面部识别、指纹、手部几何、虹膜识别和 DNA。而行为生物识别包括击键、签名和语音识别。
 
-![图](../Images/ba1145d548e1bb164b5b028bf5e83358.png)
+![图](img/ba1145d548e1bb164b5b028bf5e83358.png)
 
 [生物识别类型](https://www.researchgate.net/figure/Various-types-of-biometric-modalities_fig1_321082969)
 
@@ -36,25 +36,25 @@
 
 ### 拱形纹路
 
-![](../Images/72c6d8bb1c4095745b1a049319323184.png)
+![](img/72c6d8bb1c4095745b1a049319323184.png)
 
-在这种图案类型中，脊线从一侧进入，从另一侧退出。相信全球5%的人口在指纹中有拱形纹路。
+在这种图案类型中，脊线从一侧进入，从另一侧退出。相信全球 5%的人口在指纹中有拱形纹路。
 
 ### 环形纹路
 
-![](../Images/83378601656fb880fe89e6fc480f7f4f.png)
+![](img/83378601656fb880fe89e6fc480f7f4f.png)
 
-这种图案类型的脊线从一侧进入，从同一侧退出。相信全球60%–65%的人口在指纹中有环形纹路。
+这种图案类型的脊线从一侧进入，从同一侧退出。相信全球 60%–65%的人口在指纹中有环形纹路。
 
 ### 涡纹/核心
 
-![](../Images/7236dd1728cc38e53814c3a7d255cca8.png)
+![](img/7236dd1728cc38e53814c3a7d255cca8.png)
 
-包含圆圈、多个环形或图案类型的混合。相信全球30%–35%的人口在指纹中有涡纹。
+包含圆圈、多个环形或图案类型的混合。相信全球 30%–35%的人口在指纹中有涡纹。
 
 **指纹的独特性**完全由局部脊线特征及其关系决定。指纹中的脊线和沟壑交替，沿局部恒定方向流动。最显著的局部脊线特征有：1) **脊线终点** 和 2) **脊线分叉**。脊线终点定义为脊线突然结束的点。脊线分叉定义为脊线分叉或分裂成支脊的点。这些特征统称为 ***细节点***。
 
-![图示](../Images/5f87e23f9fbee2f9f369d212006a26ef.png)  ![图示](../Images/35324c16f4f1afeae027911f624f9376.png)
+![图示](img/5f87e23f9fbee2f9f369d212006a26ef.png)  ![图示](img/35324c16f4f1afeae027911f624f9376.png)
 
 细节点
 
@@ -80,13 +80,13 @@
 
 卷积运算符允许对输入信号进行滤波，以提取其内容的一部分。传统形式的自编码器没有考虑到信号可以视为其他信号的总和这一事实。而卷积自编码器则使用卷积运算符来利用这一观察结果。它们学习将输入编码成一组简单的信号，然后尝试从这些信号中重建输入。更多信息请 [查看这里](https://pgaleone.eu/neural-networks/2016/11/24/convolutional-autoencoders/)。
 
-![图](../Images/7fb5d9d2f85dcbb24378add7221a21d8.png)
+![图](img/7fb5d9d2f85dcbb24378add7221a21d8.png)
 
-一个4x4x1输入与一个3x3x1卷积滤波器的卷积操作。
+一个 4x4x1 输入与一个 3x3x1 卷积滤波器的卷积操作。
 
-结果是一个2x2x1的激活图。 [来源](https://github.com/vdumoulin/conv_arithmetic)
+结果是一个 2x2x1 的激活图。 [来源](https://github.com/vdumoulin/conv_arithmetic)
 
-我使用的数据集是FVC2002指纹数据集。它由4种不同的传感器指纹组成，即低成本光学传感器、低成本电容传感器、光学传感器和合成生成器，每种传感器具有不同的图像尺寸。数据集中有320张图片，每种传感器80张图片。
+我使用的数据集是 FVC2002 指纹数据集。它由 4 种不同的传感器指纹组成，即低成本光学传感器、低成本电容传感器、光学传感器和合成生成器，每种传感器具有不同的图像尺寸。数据集中有 320 张图片，每种传感器 80 张图片。
 
 [下载数据集](http://bias.csr.unibo.it/fvc2002/databases.asp)。
 
@@ -126,7 +126,7 @@ def readImages(data):
     return imagesimages = readImages(data)
 ```
 
-现在将这些图像转换为float32数组。
+现在将这些图像转换为 float32 数组。
 
 ```py
 images_arr = np.asarray(images)
@@ -142,9 +142,9 @@ images_arr.shape
 print("Dataset (images) shape: {shape}".format(shape=images_arr.shape))##Dataset (images) shape: (320, 224, 224)
 ```
 
-从上述输出中，你可以看到数据的形状为320 x 224 x 224，因为有320个样本，每个样本是224 x 224维的矩阵。
+从上述输出中，你可以看到数据的形状为 320 x 224 x 224，因为有 320 个样本，每个样本是 224 x 224 维的矩阵。
 
-查看数据集中前5张图片：
+查看数据集中前 5 张图片：
 
 ```py
 # Display the first 5 images in training data
@@ -155,20 +155,20 @@ for i in range(5):
     plt.show()
 ```
 
-![图](../Images/edb065cc813b0e104904e0f25f59daec.png)  ![图](../Images/4b1dfc787b85ba397749d714cd249533.png)  ![图](../Images/dc06d851be4a2a3468f881616a894705.png)![图](../Images/8c6146f550eff0a83de7e76e4e4a32b8.png)  ![图](../Images/046f442c10ea86db8dc9a3fe1140b5ff.png)
+![图](img/edb065cc813b0e104904e0f25f59daec.png)  ![图](img/4b1dfc787b85ba397749d714cd249533.png)  ![图](img/dc06d851be4a2a3468f881616a894705.png)![图](img/8c6146f550eff0a83de7e76e4e4a32b8.png)  ![图](img/046f442c10ea86db8dc9a3fe1140b5ff.png)
 
 数据集
 
 由于我们可以看到指纹并不是很清晰，因此观察卷积自编码器是否能够学习特征并正确重建这些图像将会很有趣。
 
-数据集中的图像是灰度图像，像素值范围从0到255，尺寸为224 x 224，因此在将数据输入模型之前，预处理非常重要。我们将首先把每个224 x 224的图像转换为224 x 224 x 1的矩阵，这样我们就可以将其输入神经网络：
+数据集中的图像是灰度图像，像素值范围从 0 到 255，尺寸为 224 x 224，因此在将数据输入模型之前，预处理非常重要。我们将首先把每个 224 x 224 的图像转换为 224 x 224 x 1 的矩阵，这样我们就可以将其输入神经网络：
 
 ```py
 images_arr = images_arr.reshape(-1, 224,224, 1)
 images_arr.shape##(320, 224, 224, 1)
 ```
 
-接下来，我们需要确保检查NumPy数组的数据类型；它应该是**float32**格式，如果不是，你需要将其转换为这种格式，你还需要将像素值重新缩放到0–1的范围内。
+接下来，我们需要确保检查 NumPy 数组的数据类型；它应该是**float32**格式，如果不是，你需要将其转换为这种格式，你还需要将像素值重新缩放到 0–1 的范围内。
 
 ```py
 images_arr.dtype
@@ -183,7 +183,7 @@ np.max(images_arr)
 images_arr = images_arr / np.max(images_arr)
 ```
 
-让我们验证数据的最大值和最小值，重新缩放后应该是0.0和1.0！
+让我们验证数据的最大值和最小值，重新缩放后应该是 0.0 和 1.0！
 
 ```py
 np.max(images_arr), np.min(images_arr)
@@ -191,7 +191,7 @@ np.max(images_arr), np.min(images_arr)
 
 如果我们验证，应该得到`(1.0, 0.0)`
 
-为了使你的模型能够很好地泛化，你将数据分为两部分：训练集和验证集。你将在80%的数据上训练模型，并在剩余训练数据的20%上验证它。
+为了使你的模型能够很好地泛化，你将数据分为两部分：训练集和验证集。你将在 80%的数据上训练模型，并在剩余训练数据的 20%上验证它。
 
 这也有助于减少过拟合的可能性，因为你将在训练阶段未见过的数据上验证你的模型。
 
@@ -206,9 +206,9 @@ train_X,valid_X,train_ground,valid_ground = train_test_split(images_arr,images_a
 
 **卷积自编码器**
 
-图像的大小为224 x 224 x 1或50,176维的向量。我们将图像矩阵转换为数组，将其重新缩放到0和1之间，调整形状使其为224 x 224 x 1，然后将其作为输入提供给网络。
+图像的大小为 224 x 224 x 1 或 50,176 维的向量。我们将图像矩阵转换为数组，将其重新缩放到 0 和 1 之间，调整形状使其为 224 x 224 x 1，然后将其作为输入提供给网络。
 
-此外，我们将使用128的批量大小，使用256或512的较大批量大小也是可取的，这完全取决于你训练模型的系统。这对确定学习参数和影响预测准确性有很大作用。我们将训练你的网络300个epochs。
+此外，我们将使用 128 的批量大小，使用 256 或 512 的较大批量大小也是可取的，这完全取决于你训练模型的系统。这对确定学习参数和影响预测准确性有很大作用。我们将训练你的网络 300 个 epochs。
 
 ```py
 batch_size = 128
@@ -221,19 +221,19 @@ input_img = Input(shape = (x, y, 1))
 
 **编码器**
 
-+   第一层将具有32个3 x 3的滤波器，随后是一个下采样（最大池化）层，
++   第一层将具有 32 个 3 x 3 的滤波器，随后是一个下采样（最大池化）层，
 
-+   第二层将具有64个3 x 3的滤波器，随后是另一个下采样层，
++   第二层将具有 64 个 3 x 3 的滤波器，随后是另一个下采样层，
 
-+   编码器的最终层将具有128个3 x 3的滤波器。
++   编码器的最终层将具有 128 个 3 x 3 的滤波器。
 
 **解码器**
 
-+   第一层将具有128个3 x 3的滤波器，随后是一个上采样层，
++   第一层将具有 128 个 3 x 3 的滤波器，随后是一个上采样层，
 
-+   第二层将具有64个3 x 3的滤波器，随后是另一个上采样层，
++   第二层将具有 64 个 3 x 3 的滤波器，随后是另一个上采样层，
 
-+   编码器的最终层将具有一个3 x 3的滤波器。
++   编码器的最终层将具有一个 3 x 3 的滤波器。
 
 最大池化层每次使用时将输入下采样两倍，而上采样层每次使用时将输入上采样两倍。
 
@@ -256,24 +256,24 @@ def autoencoder(input_img):
     return decodedautoencoder = Model(input_img, autoencoder(input_img))
 ```
 
-注意，你还必须通过参数loss指定损失类型。在这种情况下，是均方误差，因为每个批次后的损失将通过逐像素均方误差计算预测输出批次和真实值之间的差距：
+注意，你还必须通过参数 loss 指定损失类型。在这种情况下，是均方误差，因为每个批次后的损失将通过逐像素均方误差计算预测输出批次和真实值之间的差距：
 
 ```py
 autoencoder.compile(loss='mean_squared_error', optimizer = RMSprop())
 ```
 
-让我们通过使用summary函数来可视化你在上述步骤中创建的层；这将显示每一层中的参数（权重和偏差）数量，以及模型中的总参数。
+让我们通过使用 summary 函数来可视化你在上述步骤中创建的层；这将显示每一层中的参数（权重和偏差）数量，以及模型中的总参数。
 
-![](../Images/1b5aea710a7485aa3e01d758d7d777c6.png)
+![](img/1b5aea710a7485aa3e01d758d7d777c6.png)
 
-终于到了用Keras的fit()函数训练模型的时候了！模型训练了300个周期。
+终于到了用 Keras 的 fit()函数训练模型的时候了！模型训练了 300 个周期。
 
 ```py
 #Training
 autoencoder_train = autoencoder.fit(train_X, train_ground, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_ground))
 ```
 
-最终！你在指纹数据集上训练了300个周期的模型，现在，让我们绘制训练和验证数据之间的损失图，以可视化模型性能。
+最终！你在指纹数据集上训练了 300 个周期的模型，现在，让我们绘制训练和验证数据之间的损失图，以可视化模型性能。
 
 ```py
 loss = autoencoder_train.history['loss']
@@ -287,13 +287,13 @@ plt.legend()
 plt.show()
 ```
 
-![](../Images/785eb6e6086e93f40ab081ef92e782ff.png)
+![](img/785eb6e6086e93f40ab081ef92e782ff.png)
 
 最后，你可以看到验证损失和训练损失都保持同步。这表明你的模型没有过拟合：验证损失在减少而不是增加，
 
 因此，你可以说你的模型的泛化能力很好。
 
-最后，是时候使用Keras的predict()函数来重建测试图像，看看你的模型能多好地重建测试数据。
+最后，是时候使用 Keras 的 predict()函数来重建测试图像，看看你的模型能多好地重建测试数据。
 
 ```py
 #Prediction
@@ -314,15 +314,15 @@ plt.show()
 
 测试图像：
 
-![](../Images/d8dd22170276dd5a39cc63f16fc55298.png)
+![](img/d8dd22170276dd5a39cc63f16fc55298.png)
 
 重建图像：
 
-![](../Images/d6500cc0bee861a3749f5130f9121ec6.png)
+![](img/d6500cc0bee861a3749f5130f9121ec6.png)
 
 从上述图像中，你可以观察到你的模型在重建你用模型预测的测试图像时表现非常出色。至少在视觉上，测试图像和重建图像看起来几乎相似。
 
-你还可以在我的Github中找到代码。
+你还可以在我的 Github 中找到代码。
 
 **[nageshsinghc4/Recreating-Fingerprints-using-Convolutional-Autoencoders](https://github.com/nageshsinghc4/Recreating-Fingerprints-using-Convolutional-Autoencoders)**
 
@@ -342,21 +342,21 @@ plt.show()
 
 **相关：**
 
-+   [神经网络 201：关于自编码器的一切](/2019/11/all-about-autoencoders.html)
++   神经网络 201：关于自编码器的一切
 
-+   [使用时间序列分析进行股票市场预测](/2020/01/stock-market-forecasting-time-series-analysis.html)
++   使用时间序列分析进行股票市场预测
 
-+   [使用机器学习进行系外行星猎寻](/2020/01/exoplanet-hunting-machine-learning.html)
++   使用机器学习进行系外行星猎寻
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 

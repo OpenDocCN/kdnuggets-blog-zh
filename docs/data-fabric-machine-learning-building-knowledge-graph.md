@@ -1,32 +1,32 @@
-# 机器学习的数据结构 – 第2部分：构建知识图谱
+# 机器学习的数据结构 – 第二部分：构建知识图谱
 
-> 原文：[https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html](https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html)
+> 原文：[`www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html`](https://www.kdnuggets.com/2019/06/data-fabric-machine-learning-building-knowledge-graph.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Header image](../Images/308bd52c9fbd57d3079f3d5c7449feb1.png)
+![Header image](img/308bd52c9fbd57d3079f3d5c7449feb1.png)
 
 ### 介绍
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 在系列文章的最后：
 
-[**机器学习的数据结构。第1部分。**
+[**机器学习的数据结构。第一部分。**
 
 *如何利用语义的新进展提高我们在机器学习中的表现。* [towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-2c558b7035d7)
 
-[**机器学习的数据结构。第1-b部分：图上的深度学习。**
+[**机器学习的数据结构。第 1-b 部分：图上的深度学习。**
 
 *图上的深度学习日益重要。在这里，我将展示思考机器学习的基础...* [towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-b-deep-learning-on-graphs-309316774fe7)
 
@@ -54,11 +54,11 @@
 
 数据结构中的**数据结构**是通过知识图谱构建的，要创建知识图谱，你需要语义和本体来寻找有效的方式将数据链接起来，以独特地识别和连接具有共同业务术语的数据。
 
-### 第1部分。什么是知识图谱？
+### 第一部分。什么是知识图谱？
 
-![Figure](../Images/f516d6eb035014dab710bcce7ef5aa5a.png)
+![Figure](img/f516d6eb035014dab710bcce7ef5aa5a.png)
 
-[https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214](https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214)
+[`medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214`](https://medium.com/@sderymail/challenges-of-knowledge-graph-part-1-d9ffe9e35214)
 
 > 知识图谱由整合的数据和信息集合组成，并且还包含大量不同数据之间的链接。
 
@@ -76,7 +76,7 @@
 
 记得这个图像吗？
 
-![](../Images/63cc73deaadd6274524d992f1650360d.png)
+![](img/63cc73deaadd6274524d992f1650360d.png)
 
 我之前提出过，数据结构中的洞察力可以被看作是其中的一个**缺口**。发现这种洞察力的自动化过程就是机器学习。
 
@@ -84,11 +84,11 @@
 
 构建知识图谱需要链接数据。链接数据的目标是以一种可以轻松消费并与其他链接数据结合的方式发布结构化数据，本体则是我们连接实体并理解它们关系的方式。
 
-### 第2节：创建成功的企业知识图谱
+### 第二部分：创建成功的企业知识图谱
 
-![图](../Images/2a11b3a96705c8935a7715c2ff1ee097.png)
+![图](img/2a11b3a96705c8935a7715c2ff1ee097.png)
 
-[https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm](https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm)
+[`www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm`](https://www.freepik.com/free-vector/real-estate-development-flat-icon_4167283.htm)
 
 不久前，[**Sébastien Dery**](https://medium.com/@sderymail) 撰写了一篇关于知识图谱挑战的有趣文章。你可以查看一下：
 
@@ -114,25 +114,25 @@ RDF 是三种基础语义网技术之一，另外两种是 SPARQL 和 OWL。RDF 
 
 我们将从字符串“geoffrey hinton”开始。
 
-![](../Images/d567a103a11f2381d44dd3c009bbaea4.png)
+![](img/d567a103a11f2381d44dd3c009bbaea4.png)
 
 这里我们有一个简单的字符串，它表示第一个边界，即我想了解更多的内容。
 
 现在开始构建知识图谱，系统首先会识别到该字符串实际上指的是**Geoffrey Hinton**。然后，它会识别与此人相关的实体。
 
-![](../Images/01aba6e26e24ce07cfb242646406fd6a.png)
+![](img/01aba6e26e24ce07cfb242646406fd6a.png)
 
 然后我们有一些与 Geoffrey 相关的实体，但我们还不知道它们是什么。
 
 顺便提一下，如果你不认识这是**Geoffrey Hinton**：
 
-![图示](../Images/b33108e0370c8acbf02dd59c080edfc7.png)
+![图示](img/b33108e0370c8acbf02dd59c080edfc7.png)
 
-[https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html](https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html)
+[`www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html`](https://www.thestar.com/news/world/2015/04/17/how-a-toronto-professors-research-revolutionized-artificial-intelligence.html)
 
 然后系统会开始给关系命名：
 
-![](../Images/6ea856b2d35fdee6ecdd6a9f044b83ef.png)
+![](img/6ea856b2d35fdee6ecdd6a9f044b83ef.png)
 
 现在我们有了命名的关系，我们知道我们的主要实体的连接类型。
 
@@ -140,7 +140,7 @@ RDF 是三种基础语义网技术之一，另外两种是 SPARQL 和 OWL。RDF 
 
 为此，知识图谱使用三元组。像这样：
 
-![](../Images/e412593903a7bf86f11406b3b25fbb8b.png)
+![](img/e412593903a7bf86f11406b3b25fbb8b.png)
 
 要获得一个三元组，我们需要一个主题和对象，以及一个连接这两者的谓词。
 
@@ -168,11 +168,11 @@ RDF 是三种基础语义网技术之一，另外两种是 SPARQL 和 OWL。RDF 
 
 *企业知识图谱帮助公司连接复杂的数据源。通过 Anzo®，你可以设计、构建……* [info.cambridgesemantics.com](https://info.cambridgesemantics.com/build-your-enterprise-knowledge-graph)
 
-### 第 3 节 知识图谱示例
+### 第三部分 知识图谱示例
 
 **Google：**
 
-![](../Images/b769d2371fa4c9e47ff88c9b33262f8e.png)
+![](img/b769d2371fa4c9e47ff88c9b33262f8e.png)
 
 Google 基本上是一个庞大的知识（不断扩展）图谱，他们基于此创建了也许是最大的数据结构。Google 拥有数十亿个事实，包括有关数百万个对象的信息及其之间的关系。它允许我们在其系统中进行搜索，以发现其中的见解。
 
@@ -180,15 +180,15 @@ Google 基本上是一个庞大的知识（不断扩展）图谱，他们基于�
 
 **LinkedIn：**
 
-![](../Images/d0f7a497a6f0c47a1a6fd52beff7757c.png)
+![](img/d0f7a497a6f0c47a1a6fd52beff7757c.png)
 
 我最喜欢的社交网络 LinkedIn 拥有一个庞大的知识图谱基础，建立在 LinkedIn 上的“实体”之上，如成员、职位、头衔、技能、公司、地理位置、学校等。这些实体及其之间的关系构成了职业世界的本体论。
 
-洞察帮助领导者和销售人员做出业务决策，并提升LinkedIn的会员参与度：
+洞察帮助领导者和销售人员做出业务决策，并提升 LinkedIn 的会员参与度：
 
-![图](../Images/70723f2f8624f325fc671226aeffdd66.png)
+![图](img/70723f2f8624f325fc671226aeffdd66.png)
 
-[https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)
+[`engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph`](https://engineering.linkedin.com/blog/2016/10/building-the-linkedin-knowledge-graph)
 
 记住，LinkedIn（以及几乎所有）知识图谱需要随着新成员注册、新职位发布、新公司、技能和职位在成员资料和职位描述中出现等情况进行扩展。
 
@@ -200,7 +200,7 @@ Google 基本上是一个庞大的知识（不断扩展）图谱，他们基于�
 
 ****金融机构的知识图谱：****
 
-![图](../Images/6cc9084d0ab9a4aba87aad15195ed526.png)
+![图](img/6cc9084d0ab9a4aba87aad15195ed526.png)
 
 概念模型用于协调来自不同来源的数据，并创建受管控的数据集以供业务使用。
 
@@ -224,7 +224,7 @@ Google 基本上是一个庞大的知识（不断扩展）图谱，他们基于�
 
 ### 结论
 
-![](../Images/445f6767c2a9a344124e4802b7c06eae.png)
+![](img/445f6767c2a9a344124e4802b7c06eae.png)
 
 要创建知识图谱，你需要语义学和本体来找到一种有效的方式将数据链接起来，这样可以唯一标识并连接具有共同业务术语的数据，从而建立数据结构的基础。
 
@@ -232,23 +232,23 @@ Google 基本上是一个庞大的知识（不断扩展）图谱，他们基于�
 
 我们周围有许多我们甚至不知道的知识图谱。世界上最成功的公司正在实施和迁移他们的系统，以构建数据结构，并且当然包括其中的所有内容。
 
-**个人简介：[Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)** 是一名物理学家和计算机工程师，专注于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是西班牙语数据科学出版物Ciencia y Datos的创作者。他喜欢新挑战，和优秀团队合作，以及解决有趣的问题。他是Apache Spark合作项目的一部分，帮助开发MLlib、Core和文档。他热衷于运用自己的知识和专长于科学、数据分析、可视化和自动学习，助力世界变得更美好。
+**个人简介：[Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)** 是一名物理学家和计算机工程师，专注于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是西班牙语数据科学出版物 Ciencia y Datos 的创作者。他喜欢新挑战，和优秀团队合作，以及解决有趣的问题。他是 Apache Spark 合作项目的一部分，帮助开发 MLlib、Core 和文档。他热衷于运用自己的知识和专长于科学、数据分析、可视化和自动学习，助力世界变得更美好。
 
 [原文](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-2-building-a-knowledge-graph-2fdd1370bb0a)。经许可转载。
 
 **相关链接：**
 
-+   [我在敏捷数据科学研究中的最佳技巧](/2019/03/best-tips-agile-data-science-research.html)
++   我在敏捷数据科学研究中的最佳技巧
 
-+   [如何实时监控机器学习模型](/2019/01/monitor-machine-learning-real-time.html)
++   如何实时监控机器学习模型
 
-+   [2018年AI/机器学习进展：Xavier Amatriain总结](/2019/01/xamat-ai-machine-learning-roundup.html)
++   2018 年 AI/机器学习进展：Xavier Amatriain 总结
 
 ### 更多相关主题
 
-+   [构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [微积分：机器学习的隐藏基石](https://www.kdnuggets.com/2022/02/mlm-hidden-building-block-machine-learning.html)
 

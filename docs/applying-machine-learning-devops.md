@@ -1,14 +1,14 @@
 # 将机器学习应用于 DevOps
 
-> 原文：[https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)
+> 原文：[`www.kdnuggets.com/2018/02/applying-machine-learning-devops.html`](https://www.kdnuggets.com/2018/02/applying-machine-learning-devops.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Prasanthi Korada](https://www.linkedin.com/in/devi-prasanthi-a761b280/)，安得拉大学**
 
 使用静态工具进行打包、配置、部署和监控、APM 和日志管理的时代将结束。随着 Docker 的采用、云计算和 API 驱动的方法以及大规模部署应用的微服务，确保高可靠性需要出色的应对。因此，除了每次都重新发明轮子外，包含创新的云管理工具变得至关重要。随着机器学习和人工智能的兴起，越来越多的 DevOps 工具供应商将智能集成到他们的产品中，以进一步简化工程师的任务。
 
-![标题图像](../Images/b571805ffdb9706c8b1bf049e5ce6a37.png)
+![标题图像](img/b571805ffdb9706c8b1bf049e5ce6a37.png)
 
 机器学习（ML）和 DevOps 之间的协同效应非常强大，它们的相关能力包括：
 
@@ -28,17 +28,17 @@
 
 同样，机器学习可以以多种方式存在于下一代自动化中。[DevOps](https://en.wikipedia.org/wiki/DevOps)通过自动化实现了快速的软件开发生命周期（SDLC），但这种生命周期过于分散、动态、不透明和短暂，难以被人类理解。类似于自动化，机器学习独特地处理使用新交付流程和下一代原子化、可组合和扩展的应用程序生成的数据的量、速度和多样性。
 
-![机器学习](../Images/842ee46e1c91e7d662a1281cc6534b3c.png)
+![机器学习](img/842ee46e1c91e7d662a1281cc6534b3c.png)
 
 ### 将机器学习应用于 DevOps 的一些关键示例包括：
 
 **跟踪应用交付**
 
-来自‘DevOps工具’如Git、SonarQube、Jira、Ansible等的活动数据提供了交付过程的可见性。对这些工具应用机器学习可以揭示数据中的异常——大量代码、长时间构建、晚期代码提交、缓慢发布速度，以识别许多软件开发浪费，包括过度任务切换、过度装饰、资源效率低、部分工作或过程慢等。
+来自‘DevOps 工具’如 Git、SonarQube、Jira、Ansible 等的活动数据提供了交付过程的可见性。对这些工具应用机器学习可以揭示数据中的异常——大量代码、长时间构建、晚期代码提交、缓慢发布速度，以识别许多软件开发浪费，包括过度任务切换、过度装饰、资源效率低、部分工作或过程慢等。
 
 **确保应用程序质量**
 
-机器学习通过分析测试工具的输出，可以智能地审查QA结果，基于发现高效地构建测试模式库。对‘已知良好版本’的理解有助于确保每次发布都进行全面测试，即使是新型缺陷，也提高了交付应用程序的质量。
+机器学习通过分析测试工具的输出，可以智能地审查 QA 结果，基于发现高效地构建测试模式库。对‘已知良好版本’的理解有助于确保每次发布都进行全面测试，即使是新型缺陷，也提高了交付应用程序的质量。
 
 **确保应用程序交付**
 
@@ -46,7 +46,7 @@
 
 **管理生产**
 
-机器学习通过分析生产中的应用程序发挥其作用，因为与开发或测试相比，生产环境中的数据量、事务等更大。DevOps团队使用机器学习来分析包括资源利用率、用户量等的一般模式，最终检测异常模式，如内存泄漏、DDOS攻击和竞争条件。
+机器学习通过分析生产中的应用程序发挥其作用，因为与开发或测试相比，生产环境中的数据量、事务等更大。DevOps 团队使用机器学习来分析包括资源利用率、用户量等的一般模式，最终检测异常模式，如内存泄漏、DDOS 攻击和竞争条件。
 
 **管理警报风暴**
 
@@ -62,48 +62,48 @@
 
 **分析业务影响**
 
-在DevOps中，要取得成功，了解代码发布对业务目标的影响至关重要。机器学习系统通过分析用户指标可以检测到良好和不良模式，从而在应用程序出现问题时生成对业务团队和编码人员的早期警告系统。
+在 DevOps 中，要取得成功，了解代码发布对业务目标的影响至关重要。机器学习系统通过分析用户指标可以检测到良好和不良模式，从而在应用程序出现问题时生成对业务团队和编码人员的早期警告系统。
 
 **结论**
 
 尽管机器学习没有快捷的解决办法，也没有智能、创造力、经验和努力的替代品。但今天我们已经看到许多应用，随着我们不断推动边界，前景无限。
 
-**简介: [Prasanthi Korada](https://www.linkedin.com/in/devi-prasanthi-a761b280/)** 是安得拉大学计算机科学研究生，出生并成长于卡金达。她目前在 [Mindmajix.com](http://Mindmajix.com) 担任内容贡献者。她的职业经历包括在Vinutnaa IT的内容写作。
+**简介: [Prasanthi Korada](https://www.linkedin.com/in/devi-prasanthi-a761b280/)** 是安得拉大学计算机科学研究生，出生并成长于卡金达。她目前在 [Mindmajix.com](http://Mindmajix.com) 担任内容贡献者。她的职业经历包括在 Vinutnaa IT 的内容写作。
 
-Prominere软件解决方案的服务和数字营销。她可以联系
+Prominere 软件解决方案的服务和数字营销。她可以联系
 
-通过 [deviprasanthi7@gmail.com](mailto:deviprasanthi7@gmail.com) 联系她。也可以在 [LinkedIn](https://www.linkedin.com/in/devi-prasanthi-a761b280/) 和 [Twitter](https://twitter.com/deviprasanthi1) 上与她联系。
+通过 deviprasanthi7@gmail.com 联系她。也可以在 [LinkedIn](https://www.linkedin.com/in/devi-prasanthi-a761b280/) 和 [Twitter](https://twitter.com/deviprasanthi1) 上与她联系。
 
 **相关内容:**
 
-+   [分析DevOps范式中的数据版本控制](/2017/08/data-version-control-analytics-devops-paradigm.html)
++   分析 DevOps 范式中的数据版本控制
 
-+   [连接数据系统和DevOps](/2016/06/connecting-data-systems-devops.html)
++   连接数据系统和 DevOps
 
-+   [大数据科学: 期望与现实](/2016/10/big-data-science-expectation-reality.html)
++   大数据科学: 期望与现实
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快进入网络安全职业的步伐。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快进入网络安全职业的步伐。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多关于此主题
 
-+   [通过这个免费的DevOps速成课程解锁你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
++   [通过这个免费的 DevOps 速成课程解锁你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
 
-+   [10个每个初学者都应学习的关键DevOps工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)
++   [10 个每个初学者都应学习的关键 DevOps 工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)
 
-+   [在Python中应用描述性和推断性统计](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)
++   [在 Python 中应用描述性和推断性统计](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)
 
-+   [每个机器学习工程师都应该掌握的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)

@@ -1,16 +1,16 @@
 # 自然语言界面到数据表
 
-> 原文：[https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html](https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html)
+> 原文：[`www.kdnuggets.com/2019/06/natural-language-interface-datatable.html`](https://www.kdnuggets.com/2019/06/natural-language-interface-datatable.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Yogesh Kulkarni](https://www.linkedin.com/in/yogeshkulkarni), Yati.io**
 
 大量结构化数据以关系数据库中的表格形式存储。以一个表格作为简化的例子，即使要访问各个单元格中的值，也需要编写逻辑或在电子表格软件中打开并手动查找。如果可以仅通过自然语言（如英语）查询字段，岂不是更好吗？
 
-例如，如果你有一个像**图 1**中那样的表格，那么在聊天机器人中发送一个“2008年哪个城市举办了奥运会？”的查询会更好，你会得到“北京”这样的答案。这比编写程序或手动搜索一个庞大的表格要用户友好得多。
+例如，如果你有一个像**图 1**中那样的表格，那么在聊天机器人中发送一个“2008 年哪个城市举办了奥运会？”的查询会更好，你会得到“北京”这样的答案。这比编写程序或手动搜索一个庞大的表格要用户友好得多。
 
-![olympics](../Images/fbe88c33f89149d6d59bfafe75a81dca.png)
+![olympics](img/fbe88c33f89149d6d59bfafe75a81dca.png)
 
 图 1：维基表格问题（来源：斯坦福 NLP 组研究博客）
 
@@ -22,21 +22,21 @@
 
 比如，你希望构建一个通用知识聊天机器人，用于查询世界各国的信息。查询如“中华人民共和国的总人口是多少？”，“印度的面积是多少？”等。
 
-[世界概况手册](https://www.cia.gov/library/publications/the-world-factbook/) 是一个关于各国数据的极好来源。信息以国家网页的形式排列，包含“地理”、“经济”等部分。要查找中国的人口，首先需要在下拉列表中滚动到中国，找到“人民与社会”部分，然后你会看到中国的人口为“1,384,688,986（2018年7月估计）”。在这种情况下，聊天机器人会更有效。
+[世界概况手册](https://www.cia.gov/library/publications/the-world-factbook/) 是一个关于各国数据的极好来源。信息以国家网页的形式排列，包含“地理”、“经济”等部分。要查找中国的人口，首先需要在下拉列表中滚动到中国，找到“人民与社会”部分，然后你会看到中国的人口为“1,384,688,986（2018 年 7 月估计）”。在这种情况下，聊天机器人会更有效。
 
 ### 数据收集
 
 首要步骤是将分散在各种网页上的数据整合到一个表格中。这个[文章](https://github.com/yogeshhk/DataFrameChatbot)很好地解释了网络抓取的过程。输出是一个以国家为行、以各个字段为列的表格。
 
-现在我们需要构建一个自然语言接口来访问这个表的字段或单元格。对于像“China的总人口是多少？”这样的查询，我们需要获取位于“Country==China”行和名为“Population”的列交叉处的单元格中的值。简单来说，从自然语言查询中，我们需要提取两个实体，“Population作为列”和“China作为行”（在“Country”列中）。这里使用Rasa NLU进行实体提取。
+现在我们需要构建一个自然语言接口来访问这个表的字段或单元格。对于像“China 的总人口是多少？”这样的查询，我们需要获取位于“Country==China”行和名为“Population”的列交叉处的单元格中的值。简单来说，从自然语言查询中，我们需要提取两个实体，“Population 作为列”和“China 作为行”（在“Country”列中）。这里使用 Rasa NLU 进行实体提取。
 
 ### 实体提取
 
 实体提取是一个在句子中找到映射到预定义实体类型的单词/标记的过程。命名实体识别（NER）是提取实体的监督方法，使用如条件随机场（CRF）等算法。
 
-要训练RASA NLU的NER，我们需要提供带有注释实体的样本句子的训练数据。**图2**中展示了样本训练文件。
+要训练 RASA NLU 的 NER，我们需要提供带有注释实体的样本句子的训练数据。**图 2**中展示了样本训练文件。
 
-![RASA NLU](../Images/8c43ea0be0a268b33fffbf3a3566b153.png)
+![RASA NLU](img/8c43ea0be0a268b33fffbf3a3566b153.png)
 
 这里“savings”和“yen”分别是“source account”和“currency”实体类型的实际值。
 
@@ -51,35 +51,35 @@
         sample_sentences = []
         for c in self.primary_key_values_list[:n_sample_countries]:
             for col in self.all_columns[:n_sample_columns]:
-                sentenceformat1 = "What is [" + col + "](column) for [" + c + "](row) ?"
-                sentenceformat2 = "For  [" + c + "](row), what is the [" + col + "](column) ?"
+                sentenceformat1 = "What is " + col + " for " + c + " ?"
+                sentenceformat2 = "For  " + c + ", what is the " + col + " ?"
                 sample_sentences.append(sentenceformat1)
                 sample_sentences.append(sentenceformat2)
 
 ```
 
-尽管上述仅显示了两种句子格式，但可以添加更多变体。自动生成的NLU训练文件如下：
+尽管上述仅显示了两种句子格式，但可以添加更多变体。自动生成的 NLU 训练文件如下：
 
 ```py
 ## intent:query
-- What is [Area](column) for [Afghanistan](row) ?
-- For  [Afghanistan](row), what is the [Area](column) ?
-- What is [Background](column) for [Akrotiri](row) ?
-- For  [Akrotiri](row), what is the [Background](column) ?
-- What is [Location](column) for [Akrotiri](row) ?
-- For  [Akrotiri](row), what is the [Location](column) ?
-- What is [Map references](column) for [Akrotiri](row) ?
-- For  [Akrotiri](row), what is the [Map references](column) ?
+- What is Area for Afghanistan ?
+- For  Afghanistan, what is the Area ?
+- What is Background for Akrotiri ?
+- For  Akrotiri, what is the Background ?
+- What is Location for Akrotiri ?
+- For  Akrotiri, what is the Location ?
+- What is Map references for Akrotiri ?
+- For  Akrotiri, what is the Map references ?
 :
 :
 
 ```
 
-使用训练数据训练NER模型。当用户查询出现时，模型能够提取“行”和“列”名称。有了这两个信息，就可以在给定的表中定位值。值返回给用户。
+使用训练数据训练 NER 模型。当用户查询出现时，模型能够提取“行”和“列”名称。有了这两个信息，就可以在给定的表中定位值。值返回给用户。
 
 以下是样本对话工作流：
 
-![聊天机器人对话](../Images/352c7696999f11ca4d0b8612156fe833.png)聊天机器人的源代码可以在“[DataFrame Chatbot](https://github.com/yogeshhk/DataFrameChatbot)”找到。
+![聊天机器人对话](img/352c7696999f11ca4d0b8612156fe833.png)聊天机器人的源代码可以在“[DataFrame Chatbot](https://github.com/yogeshhk/DataFrameChatbot)”找到。
 
 ### 限制与未来展望
 
@@ -87,9 +87,9 @@
 
 +   跨多个表的查询。
 
-+   查询带有聚合和关系的，例如“哪些国家人口超过1亿且人均GDP低于$1000？”。
++   查询带有聚合和关系的，例如“哪些国家人口超过 1 亿且人均 GDP 低于$1000？”。
 
-+   部分/完整SQL支持，即将自然语言查询转换为等效的SQL查询。
++   部分/完整 SQL 支持，即将自然语言查询转换为等效的 SQL 查询。
 
 ### 结论
 
@@ -99,21 +99,21 @@
 
 **相关内容：**
 
-+   [使用 Python 和 NLTK 构建你的第一个聊天机器人](/2019/05/build-chatbot-python-nltk.html)
++   使用 Python 和 NLTK 构建你的第一个聊天机器人
 
-+   [TNLP –  构建一个问答模型](/2018/04/nlp-question-answering-model.html)
++   TNLP –  构建一个问答模型
 
-+   [使用深度学习从职位描述中提取知识](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)
++   使用深度学习从职位描述中提取知识
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

@@ -1,22 +1,22 @@
 # 旅游行业的七大数据科学应用案例
 
-> 原文：[https://www.kdnuggets.com/2019/02/top-7-data-science-use-cases-travel.html](https://www.kdnuggets.com/2019/02/top-7-data-science-use-cases-travel.html)
+> 原文：[`www.kdnuggets.com/2019/02/top-7-data-science-use-cases-travel.html`](https://www.kdnuggets.com/2019/02/top-7-data-science-use-cases-travel.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [ActiveWizards](https://activewizards.com/) 提供**
 
-![Image](../Images/9baa1239e817a3fafc522c81ef51e183.png)
+![Image](img/9baa1239e817a3fafc522c81ef51e183.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 部门
 
 * * *
 
@@ -30,7 +30,7 @@
 
 人们在某种程度上倾向于欣赏旅行体验的个性化。客户细分意味着根据客户的偏好将所有客户分开，并调整服务堆栈以满足每个群体的需求。因此，关键思想是找到一种适用于所有情况的解决方案。个性化则是一个能够为特定人提供具体服务的技巧。因而，个性化使这一过程更加深入。
 
-![Image](../Images/7fd82ac0c60e1232f0ff98d49523678a.png)
+![Image](img/7fd82ac0c60e1232f0ff98d49523678a.png)
 
 个性化营销和客户细分涉及收集用户行为和元数据、CRM 数据、地理位置数据、社交媒体数据，以统一、处理并预测用户未来的偏好。对于旅游行业而言，这些知识至关重要。
 
@@ -46,7 +46,7 @@
 
 ### 路线优化
 
-![图片](../Images/1160ab40f3728fa204558d0dbe892797.png)
+![图片](img/1160ab40f3728fa204558d0dbe892797.png)
 
 路线优化在旅行和旅游行业中扮演着重要角色。考虑到不同的目的地、时间表、工作时间和距离，旅行规划可能非常具有挑战性。这就是旅行路线优化的意义所在。
 
@@ -62,9 +62,9 @@
 
 ### 旅行支持机器人
 
-如今，旅行机器人正在真正改变旅行行业，通过提供卓越的旅行安排协助和客户支持。一个AI驱动的旅行机器人可以回答问题，节省用户的时间和金钱，组织旅行并建议新的访问地点。24/7的可访问模式和多语言支持使得旅行机器人成为客户支持的最佳解决方案。
+如今，旅行机器人正在真正改变旅行行业，通过提供卓越的旅行安排协助和客户支持。一个 AI 驱动的旅行机器人可以回答问题，节省用户的时间和金钱，组织旅行并建议新的访问地点。24/7 的可访问模式和多语言支持使得旅行机器人成为客户支持的最佳解决方案。
 
-这里最重要的一点是，这些机器人不断学习，因此它们每天都变得更聪明，更有帮助。因此，聊天机器人能够解决主要的旅行和旅游任务。将机器人集成到您的网站中将非常有利。像JetBlue、Marriott、Ryanair、Hyatt、Hipmunk、Kayak、Booking等许多公司对此深信不疑。
+这里最重要的一点是，这些机器人不断学习，因此它们每天都变得更聪明，更有帮助。因此，聊天机器人能够解决主要的旅行和旅游任务。将机器人集成到您的网站中将非常有利。像 JetBlue、Marriott、Ryanair、Hyatt、Hipmunk、Kayak、Booking 等许多公司对此深信不疑。
 
 ### 分析
 
@@ -74,7 +74,7 @@
 
 实时分析在旅游业中最生动的应用之一是旅游分析。旅游预测模型可以预测特定时期和客户群体的旅行活动。它们的主要任务是识别长期和短期的新交易机会。通过分析以往客户的活动、偏好和购买，企业可以预测未来的商业扩展机会。
 
-![图片](../Images/1f17110f4c5b1452ead5aa420e638389.png)
+![图片](img/1f17110f4c5b1452ead5aa420e638389.png)
 
 ### 预测分析
 
@@ -100,22 +100,22 @@
 
 **相关：**
 
-+   [实用的 Apache Spark 10 分钟]( /2019/01/practical-apache-spark-10-minutes.html)
++   实用的 Apache Spark 10 分钟
 
-+   [2018年数据科学的前20个Python库](/2018/06/top-20-python-libraries-data-science-2018.html)
++   2018 年数据科学的前 20 个 Python 库
 
-+   [经理的基础数据科学简介](/2018/11/intro-data-science-managers.html)
++   经理的基础数据科学简介
 
 ### 更多相关内容
 
 +   [企业中的机器学习：使用案例与挑战](https://www.kdnuggets.com/2022/08/dss-machine-learning-enterprise-cases-challenges.html)
 
-+   [NoSQL数据库及其使用案例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
++   [NoSQL 数据库及其使用案例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
-+   [DALLE-3的5个使用案例](https://www.kdnuggets.com/5-use-cases-of-dalle-3)
++   [DALLE-3 的 5 个使用案例](https://www.kdnuggets.com/5-use-cases-of-dalle-3)
 
-+   [AI和LLM使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
++   [AI 和 LLM 使用案例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 
-+   [为什么TinyML案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
++   [为什么 TinyML 案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

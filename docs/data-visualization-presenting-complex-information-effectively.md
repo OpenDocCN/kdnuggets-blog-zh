@@ -1,6 +1,6 @@
 # 数据可视化：有效展示复杂信息
 
-> 原文：[https://www.kdnuggets.com/data-visualization-presenting-complex-information-effectively](https://www.kdnuggets.com/data-visualization-presenting-complex-information-effectively)
+> 原文：[`www.kdnuggets.com/data-visualization-presenting-complex-information-effectively`](https://www.kdnuggets.com/data-visualization-presenting-complex-information-effectively)
 
 数据可视化的目的是以一种清晰易懂的方式展示复杂数据，并吸引观众。可视化使传达整体信息变得简单，突出关键洞察，并且在引导观众得出结论方面非常具有说服力。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -22,7 +22,7 @@
 
 数据可视化以[图形方式](https://www.kdnuggets.com/data-visualization-presenting-complex-information-effectively)表示数据和信息，使其易于理解。可视化可以包括图表、地图、图形、信息图表和其他帮助简化数据的元素。这使得识别模式和趋势、发现不一致性和异常值变得简单，并帮助观众得出所展示的数据结论。
 
-![数据可视化：有效展示复杂信息](../Images/a26b0f14148cef51533cc9850e57a7da.png)
+![数据可视化：有效展示复杂信息](img/a26b0f14148cef51533cc9850e57a7da.png)
 
 图片来源：[infogram](https://infogram.com/page/data-visualization)
 
@@ -44,7 +44,7 @@
 
 # 数据可视化的挑战
 
-要完全[理解数据可视化](/2022/12/introduction-data-visualization-matplotlib.html)，我们不能只关注其优点，还需要了解其局限性，以确定何时以及何地可以使用。
+要完全理解数据可视化，我们不能只关注其优点，还需要了解其局限性，以确定何时以及何地可以使用。
 
 一个缺点是用户错误多于技术故障，即在数据点数量众多时可能会做出不准确的假设。没有经验的用户也可能选择不良或不正确的设计，以一种混淆观众或实现过多偏见的方式可视化数据。
 
@@ -80,7 +80,7 @@
 
 ## 3\. 使用相关图表
 
-![数据可视化：有效展示复杂信息](../Images/d66687695e132408342594cc46749bc0.png)
+![数据可视化：有效展示复杂信息](img/d66687695e132408342594cc46749bc0.png)
 
 图片来源于[polymersearch](https://www.polymersearch.com/blog/data-visualization)
 

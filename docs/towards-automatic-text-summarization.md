@@ -1,8 +1,8 @@
 # 自动文本摘要：提取方法
 
-> 原文：[https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html](https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html)
+> 原文：[`www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html`](https://www.kdnuggets.com/2019/03/towards-automatic-text-summarization.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Sciforce](https://sciforce.solutions/)**。
 
@@ -12,9 +12,9 @@
 
 我们期望计算机能够做得更好。人类不完美的地方，情感和意见缺失的人工智能将能够完成这项工作。
 
-故事始于1950年代。那时的一项重要研究介绍了一种从文本中提取显著句子的办法，使用[*单词和短语频率*](http://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf)等特征。在这项工作中，Luhl提议根据高频词的函数加权文档中的句子，忽略非常高频的常见词——这一方法成为了NLP的基石之一。
+故事始于 1950 年代。那时的一项重要研究介绍了一种从文本中提取显著句子的办法，使用[*单词和短语频率*](http://courses.ischool.berkeley.edu/i256/f06/papers/luhn58.pdf)等特征。在这项工作中，Luhl 提议根据高频词的函数加权文档中的句子，忽略非常高频的常见词——这一方法成为了 NLP 的基石之一。
 
-![](../Images/49a513eb683ab527ed04b52a4610cb0e.png)
+![](img/49a513eb683ab527ed04b52a4610cb0e.png)
 
 **词频图。横坐标表示按频率排序的单个单词**
 
@@ -44,7 +44,7 @@
 
 +   历史（重要事件的年表）。
 
-![](../Images/fbfbba1f1927c357a54cf80b33969f4f.png)
+![](img/fbfbba1f1927c357a54cf80b33969f4f.png)
 
 文本摘要的方法因输入文档的数量（单个或多个）、目的（通用、特定领域或基于查询）和输出（提取式或抽象式）而异。
 
@@ -78,7 +78,7 @@
 
 ### 基于频率的方法
 
-这种方法使用词频作为重要性的指标。这一类别中最常见的两种技术是：词概率和TF-IDF（词频逆文档频率）。词 w 的概率是通过将词的出现次数 f (w) 除以输入中所有词的总数来确定的（输入可以是单个文档或多个文档）。概率最高的词被认为代表了文档的主题，并被包含在摘要中。TF-IDF 是一种更复杂的技术，它评估词的重要性，并通过给出现于大多数文档中的词以低权重来识别非常常见的词（这些词应被排除在考虑之外）。TF-IDF 让位于[基于质心的方法](https://dl.acm.org/citation.cfm?id=1036121)，这种方法通过计算一组特征的显著性来对句子进行排序。在创建文档的 TF-IDF 向量表示后，描述相同主题的文档被聚类在一起，并计算质心——这些伪文档由 TF-IDF 分数高于某个阈值的词组成，并形成聚类。之后，质心被用来识别每个聚类中与主题相关的句子。
+这种方法使用词频作为重要性的指标。这一类别中最常见的两种技术是：词概率和 TF-IDF（词频逆文档频率）。词 w 的概率是通过将词的出现次数 f (w) 除以输入中所有词的总数来确定的（输入可以是单个文档或多个文档）。概率最高的词被认为代表了文档的主题，并被包含在摘要中。TF-IDF 是一种更复杂的技术，它评估词的重要性，并通过给出现于大多数文档中的词以低权重来识别非常常见的词（这些词应被排除在考虑之外）。TF-IDF 让位于[基于质心的方法](https://dl.acm.org/citation.cfm?id=1036121)，这种方法通过计算一组特征的显著性来对句子进行排序。在创建文档的 TF-IDF 向量表示后，描述相同主题的文档被聚类在一起，并计算质心——这些伪文档由 TF-IDF 分数高于某个阈值的词组成，并形成聚类。之后，质心被用来识别每个聚类中与主题相关的句子。
 
 ### 潜在语义分析
 
@@ -104,11 +104,11 @@
 
 目前广泛使用的机器学习方法将摘要视为分类问题，尝试应用朴素贝叶斯、决策树、支持向量机、隐马尔可夫模型和条件随机场来获得真实的摘要。事实证明，明确假设句子之间依赖关系的方法（[隐马尔可夫模型](https://pdfs.semanticscholar.org/1213/3cfc6688cc2cdea57595b045a28b94d98f1d.pdf) 和 [条件随机场](https://pdfs.semanticscholar.org/8ddf/5baeeab2e2fd401c0959a2d70e4c2ba68a33.pdf)）通常优于其他技术。
 
-![](../Images/e143f2ae387b7c545a074fac77433e11.png)
+![](img/e143f2ae387b7c545a074fac77433e11.png)
 
 **图 1：摘要提取马尔可夫模型以提取 2 个主要句子和额外支持句子**
 
-![](../Images/eedd2f6fa8d655cbb8b5b2979ca90860.png)
+![](img/eedd2f6fa8d655cbb8b5b2979ca90860.png)
 
 **图 2：摘要提取马尔可夫模型以提取 3 个句子**
 
@@ -140,11 +140,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作。
 
 * * *
 

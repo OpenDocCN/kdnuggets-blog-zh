@@ -1,8 +1,8 @@
 # 如何在几秒钟内处理数百万行的 DataFrame
 
-> 原文：[https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)
+> 原文：[`www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html`](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)
 
-![如何在几秒钟内处理数百万行的 DataFrame？](../Images/2de067561faae5b8eb4d567583434cd1.png)
+![如何在几秒钟内处理数百万行的 DataFrame？](img/2de067561faae5b8eb4d567583434cd1.png)
 
 图片由 [Jason Blackeye](https://unsplash.com/@jeisblack?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
@@ -32,7 +32,7 @@
 
 ## 认识 Terality
 
-![如何在几秒钟内处理数百万行的 DataFrame？](../Images/b5eb8dba8279c6a93aa0d3ff1bffb3b3.png)
+![如何在几秒钟内处理数百万行的 DataFrame？](img/b5eb8dba8279c6a93aa0d3ff1bffb3b3.png)
 
 图片由 [Frank McKenna](https://unsplash.com/@frankiefoto?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -40,7 +40,7 @@
 
 我与 Terality 团队交换了几封电子邮件，因为我对他们开发的工具感兴趣。他们迅速回复了。这些是我向团队提出的问题：
 
-![如何在几秒钟内处理包含百万行的 DataFrame？](../Images/e2d665667a01d44cb4b0515081c0cb5c.png)
+![如何在几秒钟内处理包含百万行的 DataFrame？](img/e2d665667a01d44cb4b0515081c0cb5c.png)
 
 我给 Terality 团队发的第 n 封邮件（作者截图）
 
@@ -102,7 +102,7 @@ Terality 处理目前发生在 AWS 的法兰克福区域。
 
 ## 让我们试驾一下
 
-![如何在几秒钟内处理包含数百万行的 DataFrame？](../Images/5049cb89fc1e3da7e44cdff7875f87a1.png)
+![如何在几秒钟内处理包含数百万行的 DataFrame？](img/5049cb89fc1e3da7e44cdff7875f87a1.png)
 
 由 [尤金·赫斯季亚科夫](https://unsplash.com/@eugenechystiakov?utm_source=medium&utm_medium=referral) 拍摄的照片，发布在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 上
 
@@ -122,7 +122,7 @@ pip install --upgrade terality
 
 然后你在 [Terality](https://app.terality.com/) 上创建一个免费账户，并生成一个 API 密钥：
 
-![如何在几秒钟内处理包含数百万行的 DataFrame？](../Images/0e12eac837f2e08e697cc1a50885c409.png)
+![如何在几秒钟内处理包含数百万行的 DataFrame？](img/0e12eac837f2e08e697cc1a50885c409.png)
 
 在 [Terality](https://app.terality.com/) 上生成新的 API 密钥（截图由作者提供）
 
@@ -182,7 +182,7 @@ pd.testing.assert_frame_equal(df_pd, df_pd_roundtrip)
 
 ## 结论
 
-![如何在几秒钟内处理包含数百万行的 DataFrame？](../Images/008b2b1520e546c7af167ea70812c0aa.png)
+![如何在几秒钟内处理包含数百万行的 DataFrame？](img/008b2b1520e546c7af167ea70812c0aa.png)
 
 照片由 [Sven Scheuermeier](https://unsplash.com/@sveninho?utm_source=medium&utm_medium=referral) 拍摄，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 

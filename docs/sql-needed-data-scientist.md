@@ -1,28 +1,28 @@
 # SQL 是否需要成为数据科学家？
 
-> 原文：[https://www.kdnuggets.com/2019/07/sql-needed-data-scientist.html](https://www.kdnuggets.com/2019/07/sql-needed-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2019/07/sql-needed-data-scientist.html`](https://www.kdnuggets.com/2019/07/sql-needed-data-scientist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Saurabh Hooda](https://www.linkedin.com/in/hoodasaurabh/)，Hackr.io**
 
-![SQL header](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)
+![SQL header](img/7b90faf67d8c5a9b93c5838add6004a0.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
 **SQL 是否需要成为数据科学家？**
 
-简短的回答是“是的”。只要数据科学家这个称谓里包含“数据”，结构化查询语言（或者我们称之为 see-quel）就会继续是其中的重要部分。在这篇博客中，让我们深入探讨数据科学及其与 SQL 的关系，包括5W1H——如何、为什么、哪里、何时、谁和什么。我们还将学习数据库管理系统（DBMS）的基础知识，并了解成为数据科学家可能是你职业生涯的最佳选择。
+简短的回答是“是的”。只要数据科学家这个称谓里包含“数据”，结构化查询语言（或者我们称之为 see-quel）就会继续是其中的重要部分。在这篇博客中，让我们深入探讨数据科学及其与 SQL 的关系，包括 5W1H——如何、为什么、哪里、何时、谁和什么。我们还将学习数据库管理系统（DBMS）的基础知识，并了解成为数据科学家可能是你职业生涯的最佳选择。
 
 **什么是数据科学？**
 
@@ -52,7 +52,7 @@
 
 SQL 是整个数据科学宇宙的重要组成部分。但它到底适合什么位置？如果你想成为数据分析师、数据工程师或数据架构师，你需要 [学习 SQL](https://techsherlock.com/sql-full-form/) 以及编程语言如 C、R 和 Python。以下是一个简单的图示，展示了 SQL 使用的阶段：
 
-![图示](../Images/847e336e537f1bff42c053d0b3765322.png)
+![图示](img/847e336e537f1bff42c053d0b3765322.png)
 
 要查看原始图片来源，请点击 [这里](https://dimensionless.in/understanding-different-components-roles-in-data-science/)。
 
@@ -126,11 +126,11 @@ SQL 可以执行以下类型的语句：
 
 **相关内容：**
 
-+   [掌握 SQL 的 7 个步骤 — 2019 版](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)
++   掌握 SQL 的 7 个步骤 — 2019 版
 
-+   [Python 数据科学入门](/2019/02/python-data-science-beginners.html)
++   Python 数据科学入门
 
-+   [SQL 备忘单](/2018/07/sql-cheat-sheet.html)
++   SQL 备忘单
 
 ### 更多相关话题
 
@@ -140,7 +140,7 @@ SQL 可以执行以下类型的语句：
 
 +   [低代码：开发者还需要吗？](https://www.kdnuggets.com/2022/04/low-code-developers-still-needed.html)
 
-+   [KDnuggets™ 新闻 22:n03, 1月 19: 深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19: 深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [为什么 SQL 将继续成为数据科学家的最佳伙伴](https://www.kdnuggets.com/2022/07/sql-remain-data-scientist-best-friend.html)
 

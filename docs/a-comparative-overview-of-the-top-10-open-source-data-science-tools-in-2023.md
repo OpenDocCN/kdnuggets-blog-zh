@@ -1,8 +1,8 @@
-# 2023年十大开源数据科学工具的比较概述
+# 2023 年十大开源数据科学工具的比较概述
 
-> 原文：[https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
+> 原文：[`www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023`](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
 
-![2023年十大开源数据科学工具的比较概述](../Images/190e0ded0c9cfd9aacfb6183a426a918.png)
+![2023 年十大开源数据科学工具的比较概述](img/190e0ded0c9cfd9aacfb6183a426a918.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
@@ -24,27 +24,27 @@
 
 # 1\. KNIME：简约与强大的桥梁
 
-[KNIME](https://www.knime.com/) 是一个免费且开源的工具，能为数据科学新手和经验丰富的专业人士提供便利的数据分析、可视化和部署。它是一个将数据转化为可操作见解的画布，几乎不需要编程。它是简单与强大的灯塔。您应该考虑使用Knime，原因如下：
+[KNIME](https://www.knime.com/) 是一个免费且开源的工具，能为数据科学新手和经验丰富的专业人士提供便利的数据分析、可视化和部署。它是一个将数据转化为可操作见解的画布，几乎不需要编程。它是简单与强大的灯塔。您应该考虑使用 Knime，原因如下：
 
-+   **基于GUI的数据预处理和管道化**使各种技术背景的用户能够轻松执行复杂任务
++   **基于 GUI 的数据预处理和管道化**使各种技术背景的用户能够轻松执行复杂任务
 
 +   允许**无缝集成**到您当前的工作流程和系统中
 
-+   KNIME的模块化方法使用户能够**根据需求自定义工作流程**
++   KNIME 的模块化方法使用户能够**根据需求自定义工作流程**
 
 # 2\. Weka：传统与现代的结合
 
-[Weka](https://www.weka.io/)是一个经典的开源工具，允许数据科学家预处理数据、构建和测试机器学习模型，并使用GUI界面可视化数据。尽管它已经相当古老，但由于其适应模型挑战的能力，它在2023年仍然相关。它支持多种语言，包括R、Python、Spark、scikit-learn等。它非常方便和可靠。以下是一些Weka的突出特性：
+[Weka](https://www.weka.io/)是一个经典的开源工具，允许数据科学家预处理数据、构建和测试机器学习模型，并使用 GUI 界面可视化数据。尽管它已经相当古老，但由于其适应模型挑战的能力，它在 2023 年仍然相关。它支持多种语言，包括 R、Python、Spark、scikit-learn 等。它非常方便和可靠。以下是一些 Weka 的突出特性：
 
 +   它不仅适合数据科学从业者，而且是教授机器学习概念的极好平台，从而**提供教育价值**。
 
 +   通过减少数据管道空闲时间，从而减少碳排放，帮助你**轻松实现可持续性**。
 
-+   提供**令人惊叹的性能**，支持高I/O、低延迟、小文件和混合工作负载，无需调优。
++   提供**令人惊叹的性能**，支持高 I/O、低延迟、小文件和混合工作负载，无需调优。
 
 # 3\. Apache Spark：点燃数据处理
 
-[Apache Spark](https://spark.apache.org/)是一个著名的数据科学工具，提供实时数据分析。它是最广泛使用的可扩展计算引擎。我提到它是因为它闪电般的数据处理能力。你可以轻松地连接到不同的数据源，而不必担心数据存放的位置。虽然它很出色，但并非没有缺点。由于其速度，它需要相当大的内存。以下是你应该选择Spark的原因：
+[Apache Spark](https://spark.apache.org/)是一个著名的数据科学工具，提供实时数据分析。它是最广泛使用的可扩展计算引擎。我提到它是因为它闪电般的数据处理能力。你可以轻松地连接到不同的数据源，而不必担心数据存放的位置。虽然它很出色，但并非没有缺点。由于其速度，它需要相当大的内存。以下是你应该选择 Spark 的原因：
 
 +   它**易于使用**，提供了一个简单的编程模型，使你能够使用你已经熟悉的语言创建应用程序。
 
@@ -54,11 +54,11 @@
 
 # 4\. RapidMiner：完整的数据科学生命周期
 
-[RapidMiner](https://rapidminer.com/)因其全面性而脱颖而出。它是你在整个数据科学生命周期中的真正伙伴。从数据建模和分析到数据部署和监控，这个工具涵盖了所有内容。它提供了可视化工作流程设计，省去了复杂编码的需要。这个工具还可以用来从零开始构建自定义数据科学工作流程和算法。RapidMiner的广泛数据准备功能使你能够提供最精炼的数据版本用于建模。以下是一些关键特性：
+[RapidMiner](https://rapidminer.com/)因其全面性而脱颖而出。它是你在整个数据科学生命周期中的真正伙伴。从数据建模和分析到数据部署和监控，这个工具涵盖了所有内容。它提供了可视化工作流程设计，省去了复杂编码的需要。这个工具还可以用来从零开始构建自定义数据科学工作流程和算法。RapidMiner 的广泛数据准备功能使你能够提供最精炼的数据版本用于建模。以下是一些关键特性：
 
 +   它通过提供一个**可视化和直观的界面**来简化数据科学过程。
 
-+   RapidMiner的连接器使**数据集成变得轻而易举**，无论数据的大小或格式。
++   RapidMiner 的连接器使**数据集成变得轻而易举**，无论数据的大小或格式。
 
 # 5\. Neo4j Graph Data Science：揭示隐藏的连接
 
@@ -124,7 +124,7 @@
 
 我想提到的一点是，随着我们在数据科学领域的进步，这些工具不仅仅是选择，它们已经成为指导您做出明智决策的催化剂。因此，请不要犹豫，深入了解这些工具并尽可能多地进行实验。最后，我很好奇，您有没有遇到或使用过任何您想添加到此列表中的工具？请随时在下面的评论中分享您的想法和建议。
 
-**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发人员，对数据科学和人工智能在医学中的应用有浓厚的兴趣。Kanwal被选为2022年亚太地区Google Generation Scholar。Kanwal喜欢通过撰写有关热门话题的文章来分享技术知识，并且热衷于提升女性在科技行业中的代表性。
+**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发人员，对数据科学和人工智能在医学中的应用有浓厚的兴趣。Kanwal 被选为 2022 年亚太地区 Google Generation Scholar。Kanwal 喜欢通过撰写有关热门话题的文章来分享技术知识，并且热衷于提升女性在科技行业中的代表性。
 
 ### 更多相关内容
 
@@ -134,8 +134,8 @@
 
 +   [使用开源工具生成合成时间序列数据](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)
 
-+   [5款最佳端到端开源MLOps工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
++   [5 款最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
 
-+   [OLAP与OLTP：数据处理系统的比较分析](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)
++   [OLAP 与 OLTP：数据处理系统的比较分析](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)
 
-+   [Pandas与Polars：Python数据框架库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
++   [Pandas 与 Polars：Python 数据框架库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)

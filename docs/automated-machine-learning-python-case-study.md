@@ -1,8 +1,8 @@
 # 使用 Python 的自动化机器学习：案例研究
 
-> 原文：[https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
+> 原文：[`www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html`](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
 
-![使用 Python 的自动化机器学习：案例研究](../Images/6d3f21315220c4798d2ee7c8fa9c9166.png)
+![使用 Python 的自动化机器学习：案例研究](img/6d3f21315220c4798d2ee7c8fa9c9166.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 我们在这个案例研究中遵循的完整模型管道如下所示。
 
-![使用 Python 的自动化机器学习：案例研究](../Images/cbb0046270fdc9888bc554a0554e2f2f.png)
+![使用 Python 的自动化机器学习：案例研究](img/cbb0046270fdc9888bc554a0554e2f2f.png)
 
 图 1 AutoML 模型管道 | 作者提供的图像
 
@@ -44,7 +44,7 @@ import h2o
 from h2o.automl import H2OAutoML
 ```
 
-**步骤2：** 在以上步骤中导入所有必需的库之后，我们现在将尝试加载我们的数据集，同时利用Pandas数据框以优化的方式存储数据，因为它们在空间和时间复杂度方面比其他数据结构（如链表、数组、树等）更高效。
+**步骤 2：** 在以上步骤中导入所有必需的库之后，我们现在将尝试加载我们的数据集，同时利用 Pandas 数据框以优化的方式存储数据，因为它们在空间和时间复杂度方面比其他数据结构（如链表、数组、树等）更高效。
 
 此外，我们可以执行数据预处理，以准备数据进行进一步建模和泛化。要下载我们在这里使用的数据集，你可以轻松访问[链接](https://www.kaggle.com/datasets/volodymyrgavrysh/heart-disease)。
 
@@ -59,15 +59,15 @@ data = pd.read_csv("heart_disease.csv")
 hf = h2o.H2OFrame(data)
 ```
 
-**步骤3：** 在准备好机器学习模型的数据后，我们将使用一个著名的自动化机器学习库H2O.ai，它帮助我们创建和训练模型。
+**步骤 3：** 在准备好机器学习模型的数据后，我们将使用一个著名的自动化机器学习库 H2O.ai，它帮助我们创建和训练模型。
 
-![Python自动化机器学习案例研究](../Images/120916b142400305c5051318395aeb56.png)
+![Python 自动化机器学习案例研究](img/120916b142400305c5051318395aeb56.png)
 
 图片由[H2O.ai](https://www.google.com/imgres?imgurl=https%3A%2F%2Fdocs.h2o.ai%2Fh2o%2Flatest-stable%2Fh2o-docs%2F_images%2Fh2o-automl-logo.jpg&imgrefurl=https%3A%2F%2Fdocs.h2o.ai%2Fh2o%2Flatest-stable%2Fh2o-docs%2Fautoml.html&tbnid=mgiBQv6I-GgcqM&vet=12ahUKEwixg-CS4d79AhWOA7cAHeu1BsQQMygBegUIARDMAQ..i&docid=NCAbmuegOrnzoM&w=835&h=900&q=h2o%20automated%20learning&ved=2ahUKEwixg-CS4d79AhWOA7cAHeu1BsQQMygBegUIARDMAQ)提供
 
-这个平台的主要好处是它提供了高级API，我们可以轻松自动化管道的许多方面，包括特征工程、模型选择、数据清理、超参数调整等，这大大减少了训练机器学习模型所需的时间，适用于任何数据科学项目。
+这个平台的主要好处是它提供了高级 API，我们可以轻松自动化管道的许多方面，包括特征工程、模型选择、数据清理、超参数调整等，这大大减少了训练机器学习模型所需的时间，适用于任何数据科学项目。
 
-**步骤4：** 现在，为了构建模型，我们将使用H2O.ai库的API，为此，我们必须指定问题的类型，无论是回归问题还是分类问题，或其他类型，并注明目标变量。然后，该库会自动为给定问题选择最佳模型，包括如支持向量机、决策树、深度神经网络等算法。
+**步骤 4：** 现在，为了构建模型，我们将使用 H2O.ai 库的 API，为此，我们必须指定问题的类型，无论是回归问题还是分类问题，或其他类型，并注明目标变量。然后，该库会自动为给定问题选择最佳模型，包括如支持向量机、决策树、深度神经网络等算法。
 
 ```py
 # Split the data into training and testing sets
@@ -78,7 +78,7 @@ y = "target"
 problem_type = "binary"
 ```
 
-**步骤5：** 在从一组算法中最终确定最佳模型后，最关键的任务是根据涉及的超参数对模型进行微调。这个调整过程涉及许多技术，如网格搜索交叉验证等，这有助于找到给定问题的最佳超参数集。
+**步骤 5：** 在从一组算法中最终确定最佳模型后，最关键的任务是根据涉及的超参数对模型进行微调。这个调整过程涉及许多技术，如网格搜索交叉验证等，这有助于找到给定问题的最佳超参数集。
 
 ```py
 # Run AutoML
@@ -93,7 +93,7 @@ print(lb)
 best_model = aml.leader
 ```
 
-**步骤6：** 现在，最后的任务是检查模型的性能，使用评估指标，如分类问题的混淆矩阵、精确度、召回率等，以及回归模型的均方误差（MSE）、平均绝对误差（MAE）、均方根误差（RMSE）和R平方值，以便我们可以找到一些关于模型在生产环境中表现的推论。
+**步骤 6：** 现在，最后的任务是检查模型的性能，使用评估指标，如分类问题的混淆矩阵、精确度、召回率等，以及回归模型的均方误差（MSE）、平均绝对误差（MAE）、均方根误差（RMSE）和 R 平方值，以便我们可以找到一些关于模型在生产环境中表现的推论。
 
 ```py
 # Make predictions on the test data
@@ -114,7 +114,7 @@ print("Recall:", recall)
 print("F1-score:", f1)
 ```
 
-**步骤-7**：最后，我们将绘制ROC曲线，该曲线展示了假阳性率（即模型预测结果与实际结果不符，并且模型预测为正类，而实际属于负类）和假阴性率（即模型预测结果与实际结果不符，并且模型预测为负类，而实际属于正类）之间的关系，同时打印混淆矩阵，最终完成对测试数据的模型预测和评估。然后我们将关闭我们的H2O。
+**步骤-7**：最后，我们将绘制 ROC 曲线，该曲线展示了假阳性率（即模型预测结果与实际结果不符，并且模型预测为正类，而实际属于负类）和假阴性率（即模型预测结果与实际结果不符，并且模型预测为负类，而实际属于正类）之间的关系，同时打印混淆矩阵，最终完成对测试数据的模型预测和评估。然后我们将关闭我们的 H2O。
 
 ```py
 # Plot the ROC curve
@@ -135,17 +135,17 @@ h2o.shutdown()
 
 # 结论
 
-总结这篇文章，我们探讨了自动化整个机器学习或数据科学任务过程的一个最受欢迎的平台的不同方面，通过这个平台，我们可以轻松地使用Python编程语言创建和训练机器学习模型，同时我们还涵盖了一个著名的心脏病预测案例研究，这有助于加深对如何有效使用这些平台的理解。使用这些平台，机器学习管道可以轻松优化，从而节省工程师在组织中的时间，减少系统延迟和资源利用，如GPU和CPU核心，这些对广大用户来说都非常可及。
+总结这篇文章，我们探讨了自动化整个机器学习或数据科学任务过程的一个最受欢迎的平台的不同方面，通过这个平台，我们可以轻松地使用 Python 编程语言创建和训练机器学习模型，同时我们还涵盖了一个著名的心脏病预测案例研究，这有助于加深对如何有效使用这些平台的理解。使用这些平台，机器学习管道可以轻松优化，从而节省工程师在组织中的时间，减少系统延迟和资源利用，如 GPU 和 CPU 核心，这些对广大用户来说都非常可及。
 
-**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名电气工程学士学位学生，目前在本科最后一年。他对Web开发和机器学习领域充满兴趣，并在这些方向上追求自己的兴趣，渴望进一步工作。
+**[Aryan Garg](https://www.linkedin.com/in/aryan-garg-1bbb791a3/)** 是一名电气工程学士学位学生，目前在本科最后一年。他对 Web 开发和机器学习领域充满兴趣，并在这些方向上追求自己的兴趣，渴望进一步工作。
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
 +   [完整的机器学习学习路线图](https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html)
 
-+   [使用Python的自动化机器学习：不同方法的比较……](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
++   [使用 Python 的自动化机器学习：不同方法的比较……](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
 
 +   [超级学习指南：免费的算法和数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)
 

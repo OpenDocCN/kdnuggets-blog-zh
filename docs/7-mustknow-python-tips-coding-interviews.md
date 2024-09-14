@@ -1,8 +1,8 @@
 # 7 个编程面试必知的 Python 技巧
 
-> 原文：[https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html](https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html)
+> 原文：[`www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html`](https://www.kdnuggets.com/2023/03/7-mustknow-python-tips-coding-interviews.html)
 
-![7 个编程面试必知的 Python 技巧](../Images/2e1736bec8cafa934e833c784efe7d3f.png)
+![7 个编程面试必知的 Python 技巧](img/2e1736bec8cafa934e833c784efe7d3f.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -83,7 +83,7 @@ Output >> [113, 94, 78, 67, 47, 23, 12]
 
 有时候，你需要的排序方式不仅仅是简单的升序或降序。你可以通过将`key`参数设置为一个可调用对象来自定义`sort()`方法。
 
-作为一个示例，让我们根据除以7的余数对`nums`列表进行排序。
+作为一个示例，让我们根据除以 7 的余数对`nums`列表进行排序。
 
 ```py
 nums.sort(key=lambda num:num%7)
@@ -105,11 +105,11 @@ print(rem_list)
 Output >> [1, 1, 2, 3, 4, 5, 5]
 ```
 
-我们看到`rem_list`中1和5出现了两次。让我们解析一下这意味着什么：
+我们看到`rem_list`中 1 和 5 出现了两次。让我们解析一下这意味着什么：
 
-+   13和78在除以7时都留下一个余数。但13在排序列表中排在78之前，因为在原始`nums`列表中它也排在78之前。
++   13 和 78 在除以 7 时都留下一个余数。但 13 在排序列表中排在 78 之前，因为在原始`nums`列表中它也排在 78 之前。
 
-+   同样，47%7和12%7的结果都是5。47在排序列表中排在12之前，因为在原始列表中它也排在12之前。
++   同样，47%7 和 12%7 的结果都是 5。47 在排序列表中排在 12 之前，因为在原始列表中它也排在 12 之前。
 
 +   因此，`sort()`方法执行稳定排序，即在原始列表中，如果两个或更多元素在给定排序标准下相等，它们的顺序会被保留。在此情况下，标准是`num%7`。
 
@@ -127,11 +127,11 @@ Output >> ['reset', 'trumpet', 'carpet', 'puppet']
 
 # 3\. 列表和字典推导式
 
-推导式是Python的一项强大功能，允许你编写更具惯用性的代码。它们允许你从现有的可迭代对象创建新的可迭代对象，通常是*一种简洁的替代方案*来代替for循环。
+推导式是 Python 的一项强大功能，允许你编写更具惯用性的代码。它们允许你从现有的可迭代对象创建新的可迭代对象，通常是*一种简洁的替代方案*来代替 for 循环。
 
 ## 列表推导示例
 
-假设我们有`nums`列表。我们现在想要获取`nums`中所有能被3整除的数字列表。为此，我们可以使用形式为`[output for item in iterable if condition]`的列表推导表达式。
+假设我们有`nums`列表。我们现在想要获取`nums`中所有能被 3 整除的数字列表。为此，我们可以使用形式为`[output for item in iterable if condition]`的列表推导表达式。
 
 在这里，我们根据条件`num%3==0`过滤`nums`列表，以获得`div_by_3`列表：
 
@@ -147,11 +147,11 @@ Output >> [15, 12, 90, 27]
 
 ## 字典推导示例
 
-字典推导式在你需要从现有的可迭代对象创建新的字典时非常有用，而不是使用for循环。
+字典推导式在你需要从现有的可迭代对象创建新的字典时非常有用，而不是使用 for 循环。
 
 这些表达式通常是这样的形式：`{key:value for key in some_iterable}`。这意味着我们可以在遍历过程中访问键并创建值（从键开始）！
 
-假设我们想创建一个包含1到10的数字作为键以及这些数字的平方作为值的Python字典。我们可以使用字典推导式来做到这一点：
+假设我们想创建一个包含 1 到 10 的数字作为键以及这些数字的平方作为值的 Python 字典。我们可以使用字典推导式来做到这一点：
 
 ```py
 squares_dict = {i:i**2 for i in range(1,11)}
@@ -179,7 +179,7 @@ Output >> {'hello': 5, 'coding': 6, 'blue': 4, 'work': 4}
 
 # 4\. 解包可迭代对象
 
-在Python中，你可以将可迭代对象解包到一个或多个变量中，具体取决于你想如何使用它们。这在你只需要使用元素的一个子集进行进一步处理时特别有用。
+在 Python 中，你可以将可迭代对象解包到一个或多个变量中，具体取决于你想如何使用它们。这在你只需要使用元素的一个子集进行进一步处理时特别有用。
 
 让我们创建一个列表`list1`：
 
@@ -222,7 +222,7 @@ print(num2)
 Output >> [2, 4, 6]
 ```
 
-同样，如果你想要列表中的第一个和最后一个元素，你可以像下面这样解包。元素2和4被包含在变量`num2`中：
+同样，如果你想要列表中的第一个和最后一个元素，你可以像下面这样解包。元素 2 和 4 被包含在变量`num2`中：
 
 ```py
 num1, *num2, num3 = list1
@@ -287,7 +287,7 @@ for idx,fruit in enumerate(fruits):
     print(f"At index {idx}: {fruit}")
 ```
 
-我们看到我们得到了索引0到4，以及那些索引的元素：
+我们看到我们得到了索引 0 到 4，以及那些索引的元素：
 
 ```py
 Output >>
@@ -305,7 +305,7 @@ for idx,fruit in enumerate(fruits,1):
     print(f"At index {idx}: {fruit}")
 ```
 
-现在索引从1开始，而不是从零开始：
+现在索引从 1 开始，而不是从零开始：
 
 ```py
 Output >>
@@ -341,11 +341,11 @@ Python 内置的 math 模块提供了对常见数学操作的开箱即用支持�
 
 这里是一个示例：
 
-![7 个必知的 Python 编程面试技巧](../Images/3c1ad7374ba4967b3093d11508a86469.png)
+![7 个必知的 Python 编程面试技巧](img/3c1ad7374ba4967b3093d11508a86469.png)
 
 图片来源：作者
 
-因为3是大于2.47的最小整数，所以`ceil(2.47)`的结果是3：
+因为 3 是大于 2.47 的最小整数，所以`ceil(2.47)`的结果是 3：
 
 ```py
 import math
@@ -354,7 +354,7 @@ print(math.ceil(num1))
 Output >> 3
 ```
 
-因为3是小于3.97的最大整数，所以`floor(3.97)`的结果也是3：
+因为 3 是小于 3.97 的最大整数，所以`floor(3.97)`的结果也是 3：
 
 ```py
 num2 = 3.97
@@ -388,7 +388,7 @@ Output >> [1.0, 1.41, 1.73, 2.0, 2.24, 2.45, 2.65, 2.83, 3.0, 3.16]
 
 到此为止！希望你找到了一些有用的技巧来丰富你的 Python 工具箱。
 
-如果你想学习和练习 Python，并且有兴趣将 ChatGPT 集成到你的学习工作流程中，请查看这个关于如何使用[ChatGPT 作为 Python 编程助手](/2023/01/chatgpt-python-programming-assistant.html)的指南。
+如果你想学习和练习 Python，并且有兴趣将 ChatGPT 集成到你的学习工作流程中，请查看这个关于如何使用 ChatGPT 作为 Python 编程助手的指南。
 
 **[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位技术作家，喜欢创作长篇内容。她的兴趣领域包括数学、编程和数据科学。她通过编写教程、操作指南等，分享她的学习经验与开发者社区。
 

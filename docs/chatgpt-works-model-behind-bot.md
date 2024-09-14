@@ -1,8 +1,8 @@
 # 如何 ChatGPT 工作：机器人背后的模型
 
-> 原文：[https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)
+> 原文：[`www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html`](https://www.kdnuggets.com/2023/04/chatgpt-works-model-behind-bot.html)
 
-![如何 ChatGPT 工作：机器人背后的模型](../Images/7730ae959e57c4829d752c0f1ac5995f.png)
+![如何 ChatGPT 工作：机器人背后的模型](img/7730ae959e57c4829d752c0f1ac5995f.png)
 
 图片由 [Matheus Bertelli](https://www.pexels.com/photo/man-people-woman-laptop-16094042/) 提供
 
@@ -14,7 +14,7 @@ ChatGPT 是一种大型语言模型（LLM）的外推。LLM 消化大量的文�
 
 语言模型的最基本训练涉及预测单词序列中的一个单词。最常见的是下一个标记预测和掩码语言建模。
 
-![如何 ChatGPT 工作：机器人背后的模型](../Images/c1743d07d25017656ab2f6719ae42fc8.png)
+![如何 ChatGPT 工作：机器人背后的模型](img/c1743d07d25017656ab2f6719ae42fc8.png)
 
 由作者生成的下一个标记预测和掩码语言建模的任意示例。
 
@@ -30,7 +30,7 @@ ChatGPT 是一种大型语言模型（LLM）的外推。LLM 消化大量的文�
 
 生成预训练变压器（GPT）模型首次于 2018 年由 openAI 推出，名为 GPT-1。模型在 2019 年通过 GPT-2、2020 年通过 GPT-3 继续发展，并且在 2022 年通过 InstructGPT 和 ChatGPT 取得了最新进展。在将人类反馈整合到系统之前，GPT 模型进化的最大进步是计算效率的提升，这使得 GPT-3 能够在比 GPT-2 更多的数据上进行训练，拥有更广泛的知识基础和执行更广泛任务的能力。
 
-![ChatGPT 工作原理：模型背后的机器人](../Images/65ed6096b51d104fbb3f50920add94da.png)
+![ChatGPT 工作原理：模型背后的机器人](img/65ed6096b51d104fbb3f50920add94da.png)
 
 GPT-2（左）和 GPT-3（右）的对比。由作者生成。
 
@@ -48,7 +48,7 @@ GPT-2（左）和 GPT-3（右）的对比。由作者生成。
 
 GPT 使用的“多头”注意力机制是自注意力的演变。模型不是一次性执行步骤 1-4，而是并行迭代多次，每次生成查询、键和值向量的新线性投影。通过这种方式扩展自注意力，模型能够掌握输入数据中的子含义和更复杂的关系。
 
-![ChatGPT 工作原理：模型背后的机器人](../Images/21c8fab1e4493df62fc661834f3c6699.png)
+![ChatGPT 工作原理：模型背后的机器人](img/21c8fab1e4493df62fc661834f3c6699.png)
 
 作者生成的 ChatGPT 截图。
 
@@ -62,25 +62,25 @@ GPT 使用的“多头”注意力机制是自注意力的演变。模型不是�
 
 +   **包含有毒或偏见内容** 的提示，这些内容有害或令人反感，并传播虚假信息。
 
-在ChatGPT中引入了创新的训练方法，以解决标准LLM的一些固有问题。
+在 ChatGPT 中引入了创新的训练方法，以解决标准 LLM 的一些固有问题。
 
 # ChatGPT
 
-ChatGPT是InstructGPT的衍生产品，它引入了一种新颖的方法，将人类反馈融入训练过程中，以更好地使模型输出符合用户意图。人类反馈的强化学习（RLHF）在[OpenAI 2022](https://arxiv.org/pdf/2203.02155.pdf)的论文《用人类反馈训练语言模型以遵循指令》中进行了深入描述，下面进行了简化。
+ChatGPT 是 InstructGPT 的衍生产品，它引入了一种新颖的方法，将人类反馈融入训练过程中，以更好地使模型输出符合用户意图。人类反馈的强化学习（RLHF）在[OpenAI 2022](https://arxiv.org/pdf/2203.02155.pdf)的论文《用人类反馈训练语言模型以遵循指令》中进行了深入描述，下面进行了简化。
 
-## 步骤1: 监督微调（SFT）模型
+## 步骤 1: 监督微调（SFT）模型
 
-第一步开发涉及通过雇佣40名承包商来创建一个监督训练数据集，对GPT-3模型进行微调，在该数据集中，输入有已知的输出供模型学习。输入或提示是从实际用户输入的Open API中收集的。标注者随后为每个提示编写了适当的回应，从而为每个输入创建了已知的输出。然后使用这个新的监督数据集对GPT-3模型进行微调，创建了GPT-3.5，也称为SFT模型。
+第一步开发涉及通过雇佣 40 名承包商来创建一个监督训练数据集，对 GPT-3 模型进行微调，在该数据集中，输入有已知的输出供模型学习。输入或提示是从实际用户输入的 Open API 中收集的。标注者随后为每个提示编写了适当的回应，从而为每个输入创建了已知的输出。然后使用这个新的监督数据集对 GPT-3 模型进行微调，创建了 GPT-3.5，也称为 SFT 模型。
 
-为了最大化提示数据集的多样性，每个用户ID只能有200个提示，并且去除了共享长公共前缀的提示。最后，所有包含个人身份信息（PII）的提示都被移除。
+为了最大化提示数据集的多样性，每个用户 ID 只能有 200 个提示，并且去除了共享长公共前缀的提示。最后，所有包含个人身份信息（PII）的提示都被移除。
 
-在汇总OpenAI API的提示后，标注者还被要求创建样本提示，以填补只有最少真实样本数据的类别。感兴趣的类别包括
+在汇总 OpenAI API 的提示后，标注者还被要求创建样本提示，以填补只有最少真实样本数据的类别。感兴趣的类别包括
 
 +   **普通提示:** 任何任意的要求。
 
 +   **少量示例提示:** 包含多个查询/回应对的指令。
 
-+   **基于用户的提示:** 对应于为OpenAI API请求的特定使用案例。
++   **基于用户的提示:** 对应于为 OpenAI API 请求的特定使用案例。
 
 在生成回复时，标注者被要求尽力推测用户的指令是什么。本文描述了提示请求信息的三种主要方式。
 
@@ -90,81 +90,81 @@ ChatGPT是InstructGPT的衍生产品，它引入了一种新颖的方法，将�
 
 1.  **续写:** 给定故事的开头，完成它。
 
-从OpenAI API和标注者手工编写的提示中编制出的样本达到了13,000个输入/输出样本，用于监督模型。
+从 OpenAI API 和标注者手工编写的提示中编制出的样本达到了 13,000 个输入/输出样本，用于监督模型。
 
-![ChatGPT的工作原理：模型背后的机器人](../Images/b5d8c40da94f348fb00cdf51640d82b0.png)
+![ChatGPT 的工作原理：模型背后的机器人](img/b5d8c40da94f348fb00cdf51640d82b0.png)
 
-图像（左）插入自**《用人类反馈训练语言模型以遵循指令》** *OpenAI等，2022* [https://arxiv.org/pdf/2203.02155.pdf](https://arxiv.org/pdf/2203.02155.pdf)。作者在右侧以红色添加了额外的背景信息。
+图像（左）插入自**《用人类反馈训练语言模型以遵循指令》** *OpenAI 等，2022* [`arxiv.org/pdf/2203.02155.pdf`](https://arxiv.org/pdf/2203.02155.pdf)。作者在右侧以红色添加了额外的背景信息。
 
-## 步骤2: 奖励模型
+## 步骤 2: 奖励模型
 
-在步骤1中训练了SFT模型之后，模型能够生成更符合用户提示的响应。下一步的改进形式是训练奖励模型，其中模型输入是一系列提示和响应，而输出是一个标量值，称为奖励。奖励模型是为了利用强化学习，在这种学习中，模型学习生成输出以最大化其奖励（见步骤3）。
+在步骤 1 中训练了 SFT 模型之后，模型能够生成更符合用户提示的响应。下一步的改进形式是训练奖励模型，其中模型输入是一系列提示和响应，而输出是一个标量值，称为奖励。奖励模型是为了利用强化学习，在这种学习中，模型学习生成输出以最大化其奖励（见步骤 3）。
 
-为了训练奖励模型，标注员会看到4到9个SFT模型输出，针对单一输入提示。他们需要对这些输出进行从最好到最差的排名，生成以下输出排名组合。
+为了训练奖励模型，标注员会看到 4 到 9 个 SFT 模型输出，针对单一输入提示。他们需要对这些输出进行从最好到最差的排名，生成以下输出排名组合。
 
-![ChatGPT工作原理：模型背后的秘密](../Images/7549965d3e66d9211c90a69dffe31139.png)
+![ChatGPT 工作原理：模型背后的秘密](img/7549965d3e66d9211c90a69dffe31139.png)
 
 响应排名组合的示例。由作者生成。
 
 将模型中的每个组合作为一个单独的数据点会导致过拟合（未能推断超出见过的数据）。为了解决这个问题，模型被构建为将每组排名作为一个单独的批量数据点。
 
-![ChatGPT工作原理：模型背后的秘密](../Images/166558b26a91ebce9ed1a778bb50a2d5.png)
+![ChatGPT 工作原理：模型背后的秘密](img/166558b26a91ebce9ed1a778bb50a2d5.png)
 
-图片（左）来源于** 训练语言模型以遵循人类反馈的指令 ***OpenAI 等人，2022 *[https://arxiv.org/pdf/2203.02155.pdf](https://arxiv.org/pdf/2203.02155.pdf)。作者在右侧添加了红色的附加上下文。
+图片（左）来源于** 训练语言模型以遵循人类反馈的指令 ***OpenAI 等人，2022 *[`arxiv.org/pdf/2203.02155.pdf`](https://arxiv.org/pdf/2203.02155.pdf)。作者在右侧添加了红色的附加上下文。
 
-## 第3步：强化学习模型
+## 第 3 步：强化学习模型
 
-在最后阶段，模型接收到一个随机提示并返回响应。该响应使用模型在步骤2中学到的“策略”生成。策略代表了机器为实现其目标而学到的策略；在这种情况下，就是最大化其奖励。基于在步骤2中开发的奖励模型，为提示和响应对确定一个标量奖励值。然后，奖励反馈到模型中以演变策略。
+在最后阶段，模型接收到一个随机提示并返回响应。该响应使用模型在步骤 2 中学到的“策略”生成。策略代表了机器为实现其目标而学到的策略；在这种情况下，就是最大化其奖励。基于在步骤 2 中开发的奖励模型，为提示和响应对确定一个标量奖励值。然后，奖励反馈到模型中以演变策略。
 
-在2017年，Schulman *等人* 介绍了[近端策略优化（PPO）](https://towardsdatascience.com/proximal-policy-optimization-ppo-explained-abed1952457b)，这一方法用于在每次生成响应时更新模型的策略。PPO结合了来自SFT模型的每个令牌Kullback–Leibler（KL）惩罚。KL散度衡量两个分布函数的相似性，并惩罚极端距离。在这种情况下，使用KL惩罚可以减少响应与步骤1中SFT模型输出之间的距离，以避免过度优化奖励模型并过于偏离人类意图数据集。
+在 2017 年，Schulman *等人* 介绍了[近端策略优化（PPO）](https://towardsdatascience.com/proximal-policy-optimization-ppo-explained-abed1952457b)，这一方法用于在每次生成响应时更新模型的策略。PPO 结合了来自 SFT 模型的每个令牌 Kullback–Leibler（KL）惩罚。KL 散度衡量两个分布函数的相似性，并惩罚极端距离。在这种情况下，使用 KL 惩罚可以减少响应与步骤 1 中 SFT 模型输出之间的距离，以避免过度优化奖励模型并过于偏离人类意图数据集。
 
-![ChatGPT工作原理：模型背后的秘密](../Images/12ed0915e61e1b70b0fe389a2e59db86.png)
+![ChatGPT 工作原理：模型背后的秘密](img/12ed0915e61e1b70b0fe389a2e59db86.png)
 
-图片（左）来源于** 训练语言模型以遵循人类反馈的指令 ***OpenAI 等人，2022 *[https://arxiv.org/pdf/2203.02155.pdf](https://arxiv.org/pdf/2203.02155.pdf)。作者在右侧添加了红色的附加上下文。
+图片（左）来源于** 训练语言模型以遵循人类反馈的指令 ***OpenAI 等人，2022 *[`arxiv.org/pdf/2203.02155.pdf`](https://arxiv.org/pdf/2203.02155.pdf)。作者在右侧添加了红色的附加上下文。
 
-过程的第2步和第3步可以重复迭代，尽管在实践中这并未广泛进行。
+过程的第 2 步和第 3 步可以重复迭代，尽管在实践中这并未广泛进行。
 
-![ChatGPT 的工作原理：模型背后的秘密](../Images/33d187f66497693d2bfb8c34a85c95f0.png)
+![ChatGPT 的工作原理：模型背后的秘密](img/33d187f66497693d2bfb8c34a85c95f0.png)
 
-截图由作者生成的ChatGPT。
+截图由作者生成的 ChatGPT。
 
 ## 模型评估
 
-模型的评估是通过在训练过程中留出未见过的测试集来进行的。在测试集上，进行一系列评估以确定模型是否比其前身GPT-3更对齐。
+模型的评估是通过在训练过程中留出未见过的测试集来进行的。在测试集上，进行一系列评估以确定模型是否比其前身 GPT-3 更对齐。
 
-**有用性：** 模型推断和遵循用户指令的能力。标注者85 ± 3%的时间偏好InstructGPT的输出而非GPT-3。
+**有用性：** 模型推断和遵循用户指令的能力。标注者 85 ± 3%的时间偏好 InstructGPT 的输出而非 GPT-3。
 
-**真实性：** 模型的幻觉倾向。PPO模型在使用[TruthfulQA](https://arxiv.org/abs/2109.07958)数据集评估时，表现出真实性和信息性的小幅增加。
+**真实性：** 模型的幻觉倾向。PPO 模型在使用[TruthfulQA](https://arxiv.org/abs/2109.07958)数据集评估时，表现出真实性和信息性的小幅增加。
 
-**无害性：** 模型避免不当、贬低和侮辱内容的能力。使用RealToxicityPrompts数据集测试了无害性。该测试在三种条件下进行。
+**无害性：** 模型避免不当、贬低和侮辱内容的能力。使用 RealToxicityPrompts 数据集测试了无害性。该测试在三种条件下进行。
 
 1.  指示提供尊重的回应：导致有害回应显著减少。
 
 1.  指示提供回应，而不设置尊重性：有害性没有显著变化。
 
-1.  指示提供有害回应：回应实际上比GPT-3模型更有害。
+1.  指示提供有害回应：回应实际上比 GPT-3 模型更有害。
 
-欲了解有关创建ChatGPT和InstructGPT的方法更多信息，请阅读OpenAI发布的原始论文**《训练语言模型以遵循带有人类反馈的指令》**，*2022年* [https://arxiv.org/pdf/2203.02155.pdf](https://arxiv.org/pdf/2203.02155.pdf)。
+欲了解有关创建 ChatGPT 和 InstructGPT 的方法更多信息，请阅读 OpenAI 发布的原始论文**《训练语言模型以遵循带有人类反馈的指令》**，*2022 年* [`arxiv.org/pdf/2203.02155.pdf`](https://arxiv.org/pdf/2203.02155.pdf)。
 
-![ChatGPT 的工作原理：模型背后的秘密](../Images/a40fd301b5beb50c84b39d01b82bc662.png)
+![ChatGPT 的工作原理：模型背后的秘密](img/a40fd301b5beb50c84b39d01b82bc662.png)
 
-截图由作者生成的ChatGPT。
+截图由作者生成的 ChatGPT。
 
 祝学习愉快！
 
 # 来源
 
-1.  [https://openai.com/blog/chatgpt/](https://openai.com/blog/chatgpt/)
+1.  [`openai.com/blog/chatgpt/`](https://openai.com/blog/chatgpt/)
 
-1.  [https://arxiv.org/pdf/2203.02155.pdf](https://arxiv.org/pdf/2203.02155.pdf)
+1.  [`arxiv.org/pdf/2203.02155.pdf`](https://arxiv.org/pdf/2203.02155.pdf)
 
-1.  [https://medium.com/r/?url=https%3A%2F%2Fdeepai.org%2Fmachine-learning-glossary-and-terms%2Fsoftmax-layer](https://deepai.org/machine-learning-glossary-and-terms/softmax-layer)
+1.  [`medium.com/r/?url=https%3A%2F%2Fdeepai.org%2Fmachine-learning-glossary-and-terms%2Fsoftmax-layer`](https://deepai.org/machine-learning-glossary-and-terms/softmax-layer)
 
-1.  [https://www.assemblyai.com/blog/how-chatgpt-actually-works/](https://www.assemblyai.com/blog/how-chatgpt-actually-works/)
+1.  [`www.assemblyai.com/blog/how-chatgpt-actually-works/`](https://www.assemblyai.com/blog/how-chatgpt-actually-works/)
 
-1.  [https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fproximal-policy-optimization-ppo-explained-abed1952457b](https://towardsdatascience.com/proximal-policy-optimization-ppo-explained-abed1952457b)
+1.  [`medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fproximal-policy-optimization-ppo-explained-abed1952457b`](https://towardsdatascience.com/proximal-policy-optimization-ppo-explained-abed1952457b)
 
-**[莫莉·鲁比](https://www.linkedin.com/in/mollyliebeskind/)** 是Mars的一名数据科学家和内容作者。
+**[莫莉·鲁比](https://www.linkedin.com/in/mollyliebeskind/)** 是 Mars 的一名数据科学家和内容作者。
 
 [原文](https://towardsdatascience.com/how-chatgpt-works-the-models-behind-the-bot-1ce5fca96286)。经许可转载。
 
@@ -172,11 +172,11 @@ ChatGPT是InstructGPT的衍生产品，它引入了一种新颖的方法，将�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

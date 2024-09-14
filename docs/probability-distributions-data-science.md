@@ -1,8 +1,8 @@
 # 数据科学中的概率分布
 
-> 原文：[https://www.kdnuggets.com/2020/02/probability-distributions-data-science.html](https://www.kdnuggets.com/2020/02/probability-distributions-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/02/probability-distributions-data-science.html`](https://www.kdnuggets.com/2020/02/probability-distributions-data-science.html)
 
-[评论](#comments)
+评论
 
 ### 介绍
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -36,7 +36,7 @@
 
 自然界中存在许多不同的概率分布（图 1），在本文中，我将介绍数据科学中最常用的分布。
 
-![图](../Images/fe7c6e932a6e6f77c13ab047f1f4a8d4.png)
+![图](img/fe7c6e932a6e6f77c13ab047f1f4a8d4.png)
 
 图 1: 概率分布流程图 [1]
 
@@ -54,7 +54,7 @@
 
 在图 2 中，我提供了一个关于偏向硬币的伯努利分布的例子。
 
-![图](../Images/8a9ba339377f5579a044c6e4e6af289f.png)
+![图](img/8a9ba339377f5579a044c6e4e6af289f.png)
 
 图 2: 偏向硬币的伯努利分布
 
@@ -64,7 +64,7 @@
 
 例如，假设掷一个公平的骰子。在这种情况下，有多个可能的事件，每个事件发生的概率相同。
 
-![图](../Images/f5d993f7eb6cb1f2e4d3215922151a77.png)
+![图](img/f5d993f7eb6cb1f2e4d3215922151a77.png)
 
 图 3: 公平骰子的掷骰分布
 
@@ -76,7 +76,7 @@
 
 改变偏向的量会改变分布的外观（图 4）。
 
-![图](../Images/da0b0595e13a41a3c367268729543b67.png)
+![图](img/da0b0595e13a41a3c367268729543b67.png)
 
 图 4: 二项分布变化的事件发生概率
 
@@ -88,7 +88,7 @@
 
 如果给定成功的概率（**p**）和试验次数（**n**），我们可以使用以下公式（见图 5）计算这些 n 次试验中成功的概率（**x**）。
 
-![图](../Images/4e714478a15c924dd182c281a7072c7e.png)
+![图](img/4e714478a15c924dd182c281a7072c7e.png)
 
 图 5：二项分布公式 [2]
 
@@ -100,7 +100,7 @@
 > 
 > — [维基百科](https://en.wikipedia.org/wiki/Central_limit_theorem)
 
-![图](../Images/09a9d86207a0d8de254e724b20eeb357.png)
+![图](img/09a9d86207a0d8de254e724b20eeb357.png)
 
 图 6：高斯分布
 
@@ -112,13 +112,13 @@
 
 可以使用以下公式推导出正态分布（见图 7）。
 
-![图](../Images/ebc30e157e40939f2ce941a71efd8831.png)
+![图](img/ebc30e157e40939f2ce941a71efd8831.png)
 
 图 7：正态分布公式 [3]
 
 在使用正态分布时，分布的均值和标准差起着非常重要的作用。如果我们知道它们的值，就可以通过检查概率分布（见图 8）轻松找出预测确切值的概率。实际上，得益于分布的特性，68%的数据位于均值的一个标准差内，95%位于均值的两个标准差内，99.7%位于均值的三个标准差内。
 
-![图](../Images/585e97d6b08c911552f61ca8ad2e68a0.png)
+![图](img/585e97d6b08c911552f61ca8ad2e68a0.png)
 
 图 8：正态分布 68–95–99.7 规则 [4]
 
@@ -142,11 +142,11 @@
 
 在处理泊松分布时，我们可以对不同事件发生的平均时间有信心，但事件发生的确切时刻在时间上是随机分布的。
 
-泊松分布可以使用以下公式进行建模（图9），其中**λ**代表在一个时间段内可以发生的预期事件数量。
+泊松分布可以使用以下公式进行建模（图 9），其中**λ**代表在一个时间段内可以发生的预期事件数量。
 
-![图](../Images/2000417edd99ce1cb31d9bb528803cfc.png)
+![图](img/2000417edd99ce1cb31d9bb528803cfc.png)
 
-图9：泊松分布公式 [5]
+图 9：泊松分布公式 [5]
 
 描述泊松过程的主要特征是：
 
@@ -158,11 +158,11 @@
 
 1.  事件发生的平均速率是恒定的。
 
-在图10中，展示了在一个时间段内预期事件数量（λ）变化如何改变泊松分布。
+在图 10 中，展示了在一个时间段内预期事件数量（λ）变化如何改变泊松分布。
 
-![图](../Images/6a65fcc4d6dc3e97a065261ff159e26c.png)
+![图](img/6a65fcc4d6dc3e97a065261ff159e26c.png)
 
-图10：泊松分布变化λ
+图 10：泊松分布变化λ
 
 ### 指数分布
 
@@ -172,17 +172,17 @@
 
 指数分布的另一个常见应用是生存分析（例如，设备/机器的预期寿命）。
 
-指数分布由一个参数λ控制。λ值越大，指数曲线衰减得越快（图11）。
+指数分布由一个参数λ控制。λ值越大，指数曲线衰减得越快（图 11）。
 
-![图](../Images/4151d8eef7049d4996ee0e196c024aa4.png)
+![图](img/4151d8eef7049d4996ee0e196c024aa4.png)
 
-图11：指数分布
+图 11：指数分布
 
-指数分布使用以下公式进行建模（图12）。
+指数分布使用以下公式进行建模（图 12）。
 
-![图](../Images/06495187827069f256d708300a99cf2a.png)
+![图](img/06495187827069f256d708300a99cf2a.png)
 
-图12：指数分布公式 [6]
+图 12：指数分布公式 [6]
 
 如果你有兴趣调查概率分布如何用来解密随机过程，你可以在[这里](https://towardsdatascience.com/stochastic-processes-analysis-f0a116999e4)找到更多信息。
 
@@ -206,19 +206,19 @@
 
 [1] 数据科学统计学简介。
 
-Diogo Menezes Borges，《数据科学家的成长历程》。访问网址：[https://medium.com/diogo-menezes-borges/introduction-to-statistics-for-data-science-7bf596237ac6](https://medium.com/diogo-menezes-borges/introduction-to-statistics-for-data-science-7bf596237ac6)
+Diogo Menezes Borges，《数据科学家的成长历程》。访问网址：[`medium.com/diogo-menezes-borges/introduction-to-statistics-for-data-science-7bf596237ac6`](https://medium.com/diogo-menezes-borges/introduction-to-statistics-for-data-science-7bf596237ac6)
 
-[2] 二项随机变量，UF生物统计学开放学习教科书。访问网址：[https://bolt.mph.ufl.edu/6050-6052/unit-3b/binomial-random-variables/](https://bolt.mph.ufl.edu/6050-6052/unit-3b/binomial-random-variables/)
+[2] 二项随机变量，UF 生物统计学开放学习教科书。访问网址：[`bolt.mph.ufl.edu/6050-6052/unit-3b/binomial-random-variables/`](https://bolt.mph.ufl.edu/6050-6052/unit-3b/binomial-random-variables/)
 
-[3] 正态分布或钟形曲线公式。ThoughtCo，Courtney Taylor**。 **访问网址：[https://www.thoughtco.com/normal-distribution-bell-curve-formula-3126278](https://www.thoughtco.com/normal-distribution-bell-curve-formula-3126278)
+[3] 正态分布或钟形曲线公式。ThoughtCo，Courtney Taylor**。 **访问网址：[`www.thoughtco.com/normal-distribution-bell-curve-formula-3126278`](https://www.thoughtco.com/normal-distribution-bell-curve-formula-3126278)
 
-[4] 解释正态分布的68–95–99.7规则。
+[4] 解释正态分布的 68–95–99.7 规则。
 
-Michael Galarnyk，Medium。访问网址：[https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2)
+Michael Galarnyk，Medium。访问网址：[`towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2`](https://towardsdatascience.com/understanding-the-68-95-99-7-rule-for-a-normal-distribution-b7b7cbf760c2)
 
-[5] 正态分布、二项分布与泊松分布，Make Me Analyst。访问网址：[http://makemeanalyst.com/wp-content/uploads/2017/05/Poisson-Distribution-Formula.png](http://makemeanalyst.com/wp-content/uploads/2017/05/Poisson-Distribution-Formula.png)
+[5] 正态分布、二项分布与泊松分布，Make Me Analyst。访问网址：[`makemeanalyst.com/wp-content/uploads/2017/05/Poisson-Distribution-Formula.png`](http://makemeanalyst.com/wp-content/uploads/2017/05/Poisson-Distribution-Formula.png)
 
-[6] 指数函数公式，&learning。访问网址：[https://www.andlearning.org/exponential-formula/](https://www.andlearning.org/exponential-formula/)
+[6] 指数函数公式，&learning。访问网址：[`www.andlearning.org/exponential-formula/`](https://www.andlearning.org/exponential-formula/)
 
 **简介： [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是一名数据科学家，拥有南安普顿大学人工智能硕士学位。他对人工智能进展和机器学习应用（如金融和医学）有浓厚的兴趣。可以在 [Linkedin](https://www.linkedin.com/in/pierpaolo28/) 上与他联系。
 
@@ -226,11 +226,11 @@ Michael Galarnyk，Medium。访问网址：[https://towardsdatascience.com/under
 
 **相关：**
 
-+   [什么是泊松分布？](/2019/08/poisson-distribution.html)
++   什么是泊松分布？
 
-+   [如何优化你的 Jupyter Notebook]( /2020/01/optimize-jupyter-notebook.html)
++   如何优化你的 Jupyter Notebook
 
-+   [入门 R 编程]( /2020/02/getting-started-r-programming.html)
++   入门 R 编程
 
 ### 更多相关主题
 
@@ -238,10 +238,10 @@ Michael Galarnyk，Medium。访问网址：[https://towardsdatascience.com/under
 
 +   [数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [每位数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败，详细分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，详细分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

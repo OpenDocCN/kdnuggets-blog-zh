@@ -1,12 +1,12 @@
 # 如何对机器学习代码进行单元测试
 
-> 原文：[https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html](https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html)
+> 原文：[`www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html`](https://www.kdnuggets.com/2017/11/unit-test-machine-learning-code.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Chase Roberts，机器学习工程师**
 
-![AI](../Images/7c1f9253aaea96785bcd1cea1033e67f.png)
+![AI](img/7c1f9253aaea96785bcd1cea1033e67f.png)
 
 资料来源：[provalisresearch.com/blog/machine-learning](https://provalisresearch.com/blog/machine-learning/)
 
@@ -36,19 +36,19 @@
 
 这个测试非常简单且非常有用。假设我们解决了之前的问题，现在我们想开始添加一些批量归一化。看看你能否发现错误。
 
-你看到了吗？这个问题非常微妙。你看，在tensorflow中，batch_norm的`is_training`默认值是*False*，所以添加这一行代码实际上不会在训练期间对输入进行归一化！值得庆幸的是，我们写的最后一个单元测试将立即捕捉到这个问题！（我知道，因为这发生在我三天前。）
+你看到了吗？这个问题非常微妙。你看，在 tensorflow 中，batch_norm 的`is_training`默认值是*False*，所以添加这一行代码实际上不会在训练期间对输入进行归一化！值得庆幸的是，我们写的最后一个单元测试将立即捕捉到这个问题！（我知道，因为这发生在我三天前。）
 
-让我们再做一个例子。这实际上来自于我一天看到的一个[reddit帖子](https://www.reddit.com/r/MachineLearning/comments/6qyvvg/p_tensorflow_response_is_making_no_sense/)。我不会深入细节，但基本上这个人想创建一个在(0, 1)范围内输出的分类器。看看你是否能找到问题所在。
+让我们再做一个例子。这实际上来自于我一天看到的一个[reddit 帖子](https://www.reddit.com/r/MachineLearning/comments/6qyvvg/p_tensorflow_response_is_making_no_sense/)。我不会深入细节，但基本上这个人想创建一个在(0, 1)范围内输出的分类器。看看你是否能找到问题所在。
 
-发现了错误吗？这个问题在事前很难发现，而且可能导致非常混淆的结果。基本上，发生的情况是预测只有一个输出，当你对其应用[softmax交叉熵](https://en.wikipedia.org/wiki/Softmax_function)时，会导致损失总是为0。
+发现了错误吗？这个问题在事前很难发现，而且可能导致非常混淆的结果。基本上，发生的情况是预测只有一个输出，当你对其应用[softmax 交叉熵](https://en.wikipedia.org/wiki/Softmax_function)时，会导致损失总是为 0。
 
-测试这一点的一个简单方法是，嗯……确保损失从不为0。
+测试这一点的一个简单方法是，嗯……确保损失从不为 0。
 
-另一个好的测试是类似于我们的第一个测试，但反向的。你可以确保只有你想训练的变量实际上被训练。以GAN为例。一个常见的错误是意外忘记设置在何种优化期间训练哪些变量。这种代码时常发生。
+另一个好的测试是类似于我们的第一个测试，但反向的。你可以确保只有你想训练的变量实际上被训练。以 GAN 为例。一个常见的错误是意外忘记设置在何种优化期间训练哪些变量。这种代码时常发生。
 
-最大的问题是优化器的默认设置是优化所有变量。在像GAN这样的高级架构中，这对你所有的训练时间来说是致命的。然而，你可以通过编写像这样的测试轻松检测到这些错误：
+最大的问题是优化器的默认设置是优化所有变量。在像 GAN 这样的高级架构中，这对你所有的训练时间来说是致命的。然而，你可以通过编写像这样的测试轻松检测到这些错误：
 
-一个非常类似的测试可以写在判别器上。而且这个相同的测试也可以用于很多强化学习算法。许多actor-critic模型有需要通过不同损失优化的独立网络。
+一个非常类似的测试可以写在判别器上。而且这个相同的测试也可以用于很多强化学习算法。许多 actor-critic 模型有需要通过不同损失优化的独立网络。
 
 这里是我建议你在测试中遵循的一些模式。
 
@@ -70,21 +70,21 @@
 
 **相关：**
 
-+   [TensorFlow: 需要优化哪些参数？](/2017/11/tensorflow-parameters-optimize.html)
++   TensorFlow: 需要优化哪些参数？
 
-+   [软件工程与机器学习概念](/2017/03/software-engineering-vs-machine-learning-concepts.html)
++   软件工程与机器学习概念
 
-+   [使用 TensorFlow 进行线性回归的预测分析](/2017/11/tensorflow-predictive-analytics-linear-regression.html)
++   使用 TensorFlow 进行线性回归的预测分析
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -100,4 +100,4 @@
 
 +   [宣布 PyCaret 3.0：开源、低代码 Python 机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
 
-+   [KDnuggets 新闻，4月27日：关于 Papers With Code 的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：关于 Papers With Code 的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)

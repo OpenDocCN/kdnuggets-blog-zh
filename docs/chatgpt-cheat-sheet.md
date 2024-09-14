@@ -1,6 +1,6 @@
 # ChatGPT 备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/01/chatgpt-cheat-sheet.html](https://www.kdnuggets.com/2023/01/chatgpt-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/01/chatgpt-cheat-sheet.html`](https://www.kdnuggets.com/2023/01/chatgpt-cheat-sheet.html)
 
 你已经尝试过 ChatGPT。你已经玩过它，看到它所具备的潜在能力。你甚至可能在使用过程中发现了一些技巧或窍门。
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-[![ChatGPT 备忘单](../Images/4a907e3609179959e470232c9a1e85d3.png)](https://www.kdnuggets.com/publications/sheets/ChatGPT_Cheatsheet_Costa.pdf)
+![ChatGPT 备忘单](https://www.kdnuggets.com/publications/sheets/ChatGPT_Cheatsheet_Costa.pdf)
 
 Ricky Costa 的 ChatGPT 备忘单
 
@@ -58,14 +58,14 @@ Ricky Costa 的 ChatGPT 备忘单
 
 ### 更多相关内容
 
-+   [ChatGPT数据科学备忘单](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
++   [ChatGPT 数据科学备忘单](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
 
-+   [使用ChatGPT进行机器学习备忘单](https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html)
++   [使用 ChatGPT 进行机器学习备忘单](https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html)
 
-+   [ChatGPT数据科学面试备忘单](https://www.kdnuggets.com/2023/06/chatgpt-data-science-interviews-cheat-sheet.html)
++   [ChatGPT 数据科学面试备忘单](https://www.kdnuggets.com/2023/06/chatgpt-data-science-interviews-cheat-sheet.html)
 
-+   [10个ChatGPT插件数据科学备忘单](https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html)
++   [10 个 ChatGPT 插件数据科学备忘单](https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html)
 
-+   [10个ChatGPT项目备忘单](https://www.kdnuggets.com/10-chatgpt-projects-cheat-sheet)
++   [10 个 ChatGPT 项目备忘单](https://www.kdnuggets.com/10-chatgpt-projects-cheat-sheet)
 
-+   [KDnuggets 2023年备忘单合集](https://www.kdnuggets.com/the-kdnuggets-2023-cheat-sheet-collection)
++   [KDnuggets 2023 年备忘单合集](https://www.kdnuggets.com/the-kdnuggets-2023-cheat-sheet-collection)

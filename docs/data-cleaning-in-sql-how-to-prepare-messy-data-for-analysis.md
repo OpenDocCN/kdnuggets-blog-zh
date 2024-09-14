@@ -1,18 +1,18 @@
-# SQL中的数据清理：如何为分析准备混乱的数据
+# SQL 中的数据清理：如何为分析准备混乱的数据
 
-> 原文：[https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
+> 原文：[`www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis`](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
 
-![SQL中的数据清理：如何为分析准备混乱的数据](../Images/cefee85bcf1824dbe72931f73db523ea.png)
+![SQL 中的数据清理：如何为分析准备混乱的数据](img/cefee85bcf1824dbe72931f73db523ea.png)
 
-使用Segmind SSD-1B模型生成的图像
+使用 Segmind SSD-1B 模型生成的图像
 
-想要开始使用SQL分析数据吗？那么，你可能需要稍等片刻。但为什么呢？
+想要开始使用 SQL 分析数据吗？那么，你可能需要稍等片刻。但为什么呢？
 
-数据库表中的数据往往很混乱。你的数据可能包含缺失值、重复记录、异常值、不一致的数据条目等。因此，在使用SQL分析数据之前清理数据是非常重要的。
+数据库表中的数据往往很混乱。你的数据可能包含缺失值、重复记录、异常值、不一致的数据条目等。因此，在使用 SQL 分析数据之前清理数据是非常重要的。
 
-当你学习SQL时，你可以创建数据库表，修改它们，更新和删除记录。但在实际操作中，几乎不会出现这种情况。你可能没有权限修改表格、更新和删除记录。但你会有读取数据库的权限，并能够运行一系列SELECT查询。
+当你学习 SQL 时，你可以创建数据库表，修改它们，更新和删除记录。但在实际操作中，几乎不会出现这种情况。你可能没有权限修改表格、更新和删除记录。但你会有读取数据库的权限，并能够运行一系列 SELECT 查询。
 
-在本教程中，我们将创建一个数据库表，填充记录，并查看如何使用SQL清理数据。让我们开始编码吧！
+在本教程中，我们将创建一个数据库表，填充记录，并查看如何使用 SQL 清理数据。让我们开始编码吧！
 
 # 创建带有记录的数据库表
 
@@ -58,7 +58,7 @@ INSERT INTO employees (employee_id, employee_name, salary, hire_date, department
 
 如果你能看出来，我使用了一小组名字来从中采样并构建记录的名字字段。不过，你可以在记录中更具创意。
 
-**注意**：本教程中的所有查询都适用于[MySQL](https://www.mysql.com/)。但你可以自由使用你选择的RDBMS。
+**注意**：本教程中的所有查询都适用于[MySQL](https://www.mysql.com/)。但你可以自由使用你选择的 RDBMS。
 
 # 1\. 缺失值
 
@@ -66,15 +66,15 @@ INSERT INTO employees (employee_id, employee_name, salary, hire_date, department
 
 一种幼稚的方法是删除所有包含一个或多个字段缺失值的记录。然而，除非你确定没有其他更好的处理缺失值的方法，否则不应该这样做。
 
-在`employees`表中，我们看到‘department’列中有一个NULL值（见employee_id 13的那一行），这表示该字段缺失：
+在`employees`表中，我们看到‘department’列中有一个 NULL 值（见 employee_id 13 的那一行），这表示该字段缺失：
 
 ```py
 SELECT * FROM employees;
 ```
 
-![SQL中的数据清理：如何为分析准备混乱的数据](../Images/182a6d2a11cfa7a62989c7966dae25e5.png)
+![SQL 中的数据清理：如何为分析准备混乱的数据](img/182a6d2a11cfa7a62989c7966dae25e5.png)
 
-你可以使用[COALESCE()函数](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)将‘Unknown’字符串用于NULL值：
+你可以使用[COALESCE()函数](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html#function_coalesce)将‘Unknown’字符串用于 NULL 值：
 
 ```py
 SELECT
@@ -88,25 +88,25 @@ FROM employees;
 
 运行上述查询应给你以下结果：
 
-![SQL中的数据清理：如何为分析准备混乱的数据](../Images/0c9890c3c0762ab25515a03e3561d51e.png)
+![SQL 中的数据清理：如何为分析准备混乱的数据](img/0c9890c3c0762ab25515a03e3561d51e.png)
 
 # 2\. 重复记录
 
-数据库表中的重复记录可能会扭曲分析结果。我们选择了employee_id作为数据库表中的主键。因此，`employee_data`表中不会有重复的员工记录。
+数据库表中的重复记录可能会扭曲分析结果。我们选择了 employee_id 作为数据库表中的主键。因此，`employee_data`表中不会有重复的员工记录。
 
-你仍然可以使用SELECT DISTINCT语句：
+你仍然可以使用 SELECT DISTINCT 语句：
 
 ```py
 SELECT DISTINCT * FROM employees;
 ```
 
-如预期的那样，结果集包含了所有20条记录：
+如预期的那样，结果集包含了所有 20 条记录：
 
-![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/e5d4d878576c2bc007f8781ef7f5a7ac.png)
+![SQL 中的数据清洗：如何准备混乱的数据进行分析](img/e5d4d878576c2bc007f8781ef7f5a7ac.png)
 
 # 3\. 数据类型转换
 
-如果你注意到，‘hire_date’ 列当前是VARCHAR而不是日期类型。为了在处理日期时更方便，使用 [STR_TO_DATE()](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date) 函数会很有帮助，如下所示：
+如果你注意到，‘hire_date’ 列当前是 VARCHAR 而不是日期类型。为了在处理日期时更方便，使用 [STR_TO_DATE()](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_str-to-date) 函数会很有帮助，如下所示：
 
 ```py
 SELECT
@@ -128,7 +128,7 @@ FROM employees;
 
 但决定哪些值构成异常值需要领域知识和数据使用领域及历史数据的知识。
 
-在我们的例子中，假设我们 *知道* ‘salary’ 列的上限为100000。因此，‘salary’ 列中的任何条目最多为100000。超过此值的条目为异常值。
+在我们的例子中，假设我们 *知道* ‘salary’ 列的上限为 100000。因此，‘salary’ 列中的任何条目最多为 100000。超过此值的条目为异常值。
 
 我们可以通过运行以下查询来检查这些记录：
 
@@ -140,7 +140,7 @@ WHERE salary > 100000;
 
 如上所示，‘salary’ 列中的所有条目都是有效的。因此结果集为空：
 
-![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/0c5dd3614ce2ebe99e7e9742d9e30e4e.png)
+![SQL 中的数据清洗：如何准备混乱的数据进行分析](img/0c5dd3614ce2ebe99e7e9742d9e30e4e.png)
 
 # 5\. 数据条目不一致
 
@@ -166,13 +166,13 @@ SELECT
 FROM employees;
 ```
 
-![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/f20a9e444f3ac9c7ff43f46a632d57a9.png)
+![SQL 中的数据清洗：如何准备混乱的数据进行分析](img/f20a9e444f3ac9c7ff43f46a632d57a9.png)
 
 # 6\. 验证范围
 
-在讨论异常值时，我们提到希望将‘salary’列的上限设为100000，并将任何超过100000的工资条目视为异常值。
+在讨论异常值时，我们提到希望将‘salary’列的上限设为 100000，并将任何超过 100000 的工资条目视为异常值。
 
-但同样重要的是，你不希望‘salary’列中出现任何负值。因此，你可以运行以下查询来验证所有员工记录的值是否在0到100000之间：
+但同样重要的是，你不希望‘salary’列中出现任何负值。因此，你可以运行以下查询来验证所有员工记录的值是否在 0 到 100000 之间：
 
 ```py
 SELECT
@@ -187,7 +187,7 @@ WHERE salary < 0 OR salary > 100000;
 
 如上所示，结果集为空：
 
-![SQL中的数据清洗：如何准备混乱的数据进行分析](../Images/b58b8b318272b4a2d110c21337adb4fc.png)
+![SQL 中的数据清洗：如何准备混乱的数据进行分析](img/b58b8b318272b4a2d110c21337adb4fc.png)
 
 # 7\. 派生新列
 
@@ -210,7 +210,7 @@ FROM employees;
 
 你应该看到以下输出：
 
-![SQL 数据清理：如何为分析准备混乱数据](../Images/dcf584bdbc66099479f9feeac668d13f.png)
+![SQL 数据清理：如何为分析准备混乱数据](img/dcf584bdbc66099479f9feeac668d13f.png)
 
 与我们运行的其他查询一样，这不会修改原始表。要向原始表中添加新列，你需要具有 ALTER 数据库表的权限。
 
@@ -226,11 +226,11 @@ FROM employees;
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

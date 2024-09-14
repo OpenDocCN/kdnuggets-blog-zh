@@ -1,8 +1,8 @@
 # 使用 HuggingFace Pipelines 和 Streamlit 回答问题
 
-> 原文：[https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
+> 原文：[`www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html`](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 
-![Figure](../Images/0aefc4543f04744a7aa115275535d83d.png)
+![Figure](img/0aefc4543f04744a7aa115275535d83d.png)
 
 图片由 [Arek Socha](https://pixabay.com/users/qimono-1962238/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2492009) 提供，来源于 [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2492009)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,13 +24,13 @@ HuggingFace 的 [Transformers](https://huggingface.co/transformers/) 库充满�
 
 > 这些管道是使用模型进行推理的绝佳简便方式。这些管道是抽象了库中大部分复杂代码的对象，提供了一个简单的 API，专注于多个任务，包括命名实体识别、掩码语言建模、情感分析、特征提取和问答。
 
-我们在这里不会进一步解释 Transformer 管道，但你可以阅读 [这篇文章](/2021/06/create-deploy-sentiment-analysis-app-api.html)，了解如何创建一个简单的情感分析 API 应用，利用 HuggingFace 的库来实现。
+我们在这里不会进一步解释 Transformer 管道，但你可以阅读 这篇文章，了解如何创建一个简单的情感分析 API 应用，利用 HuggingFace 的库来实现。
 
 如果你还不了解 [Streamlit](https://streamlit.io/)，这是一个 30,000 英尺的概述：
 
 > Streamlit 可以将数据脚本转化为可共享的网页应用，仅需几分钟。全部使用 Python，完全免费，无需前端经验。
 
-你可以在 [这里](/2021/09/automl-pipeline-optimization-sandbox.html) 阅读更深入的介绍，了解如何使用 Streamlit 实现一个项目。
+你可以在 这里 阅读更深入的介绍，了解如何使用 Streamlit 实现一个项目。
 
 Streamlit 和 Transformer 库的管道可以帮助简化数据科学项目的实施。将两者结合，这种实施的便捷性更为显著。
 
@@ -84,9 +84,9 @@ if __name__ == "__main__":
 streamlit run nlp_question_answering.py
 ```
 
-这应该会打开你的浏览器和网络应用程序。为了演示，我将点击“浏览文件”按钮并选择一篇最近的热门 KDnuggets 文章，“[避免这些让你看起来像数据新手的五种行为](/2021/10/avoid-five-behaviors-data-novice.html)”，这篇文章我已经复制并清除了所有非必要的文本。一旦完成，Transformer 问答管道将会建立，因此应用程序将运行几秒钟。
+这应该会打开你的浏览器和网络应用程序。为了演示，我将点击“浏览文件”按钮并选择一篇最近的热门 KDnuggets 文章，“避免这些让你看起来像数据新手的五种行为”，这篇文章我已经复制并清除了所有非必要的文本。一旦完成，Transformer 问答管道将会建立，因此应用程序将运行几秒钟。
 
-![图片](../Images/7dbadb422b767642d07361fb8166af87.png)
+![图片](img/7dbadb422b767642d07361fb8166af87.png)
 
 如果你对这个话题感兴趣，可以阅读整篇文章（非常好）；否则，以下是相关摘录：
 

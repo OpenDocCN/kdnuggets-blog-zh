@@ -1,8 +1,8 @@
 # 入门数据清理
 
-> 原文：[https://www.kdnuggets.com/2022/01/getting-started-cleaning-data.html](https://www.kdnuggets.com/2022/01/getting-started-cleaning-data.html)
+> 原文：[`www.kdnuggets.com/2022/01/getting-started-cleaning-data.html`](https://www.kdnuggets.com/2022/01/getting-started-cleaning-data.html)
 
-![入门数据清理](../Images/bf22c25a9e02159fbae5d81eeaccc6a5.png)
+![入门数据清理](img/bf22c25a9e02159fbae5d81eeaccc6a5.png)
 
 [背景矢量图由 rawpixel.com 创建 - www.freepik.com](https://www.freepik.com/vectors/background)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -120,7 +120,7 @@ dataframe['Gender:'].map({'Man': 'Male', 'Fem': 'Female', ... }]
 
 规范化是重新组织数据的过程，以确保没有重复的数据，并且数据存储在一个地方。规范化的目的是改变你的观察结果，以便它们可以被描述为正态分布。
 
-许多人将数据标准化和数据归一化混淆，然而，它们并不相同。归一化通常将值缩放到[0,1]的范围内，而标准化通常将数据缩放为均值为0、标准差为1。
+许多人将数据标准化和数据归一化混淆，然而，它们并不相同。归一化通常将值缩放到[0,1]的范围内，而标准化通常将数据缩放为均值为 0、标准差为 1。
 
 ### 4. NaN / 缺失值
 
@@ -154,14 +154,14 @@ dataframe['Gender:'].map({'Man': 'Male', 'Fem': 'Female', ... }]
 
 ### 更多相关内容
 
-+   [5步入门Python数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
++   [5 步入门 Python 数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
 
-+   [入门Python数据科学](https://www.kdnuggets.com/getting-started-with-python-for-data-science)
++   [入门 Python 数据科学](https://www.kdnuggets.com/getting-started-with-python-for-data-science)
 
-+   [入门Go编程数据科学](https://www.kdnuggets.com/getting-started-with-go-programing-for-data-science)
++   [入门 Go 编程数据科学](https://www.kdnuggets.com/getting-started-with-go-programing-for-data-science)
 
 +   [入门自动化文本摘要](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
 
-+   [入门SQL备忘单](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)
++   [入门 SQL 备忘单](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)
 
-+   [入门spaCy进行自然语言处理](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
++   [入门 spaCy 进行自然语言处理](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)

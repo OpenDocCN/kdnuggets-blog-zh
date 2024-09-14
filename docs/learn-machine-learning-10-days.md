@@ -1,10 +1,10 @@
 # 如何在 10 天内学习机器学习
 
-> 原文：[https://www.kdnuggets.com/2017/05/learn-machine-learning-10-days.html](https://www.kdnuggets.com/2017/05/learn-machine-learning-10-days.html)
+> 原文：[`www.kdnuggets.com/2017/05/learn-machine-learning-10-days.html`](https://www.kdnuggets.com/2017/05/learn-machine-learning-10-days.html)
 > 
 > **编辑注：** 这个突出的回答来自于作者 Sebastian Raschka 在 [2016 年 10 月的 Quora 会话](https://www.quora.com/session/Sebastian-Raschka-1/1) 中提出的问题。如果你还没有完整查看这个会话，我建议你考虑去看看。
 
-![10 天内学习机器学习？！?](../Images/1f76547d793187f715a3a628c27f8291.png)
+![10 天内学习机器学习？！?](img/1f76547d793187f715a3a628c27f8291.png)
 
 10 天？嗯，这确实是一个具有挑战性的任务 :)。不过，我认为 10 天也是一个可以对机器学习领域有一个相当不错的概览的时间框架，也许可以开始将一些技术应用到你的问题中。
 
@@ -18,21 +18,21 @@
 
 **相关内容：**
 
-+   [应对初学者机器学习/数据科学家压力的技巧](/2016/11/tips-data-scientist-overwhelmed.html)
++   应对初学者机器学习/数据科学家压力的技巧
 
-+   [掌握 Python 机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
-+   [掌握 Python 机器学习的 7 个步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 

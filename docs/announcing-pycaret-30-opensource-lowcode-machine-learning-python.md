@@ -1,8 +1,8 @@
 # 宣布 PyCaret 3.0：开源、低代码的 Python 机器学习
 
-> 原文：[https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
+> 原文：[`www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html`](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/57070b418de77d6a0c875dcd4dc8cfd0.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/57070b418de77d6a0c875dcd4dc8cfd0.png)
 
 由[Moez Ali](https://medium.com/@moez-62905)使用 Midjourney 生成
 
@@ -34,11 +34,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@ PyCaret 是一个开源的、低代码的 Python 机器学习库，自动化机�
 
 PyCaret 的设计和简洁性灵感来源于公民数据科学家的新兴角色，这是 Gartner 首次使用的术语。公民数据科学家是可以执行简单和中等复杂分析任务的高级用户，这些任务以前需要更多的技术专长。
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/e1572d430322c40c2797a97d8afb92f7.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/e1572d430322c40c2797a97d8afb92f7.png)
 
 想了解更多关于 PyCaret 的信息，请查看我们的[GitHub](https://www.github.com/pycaret/pycaret)或[官方文档](http://pycaret.gitbook.io/)。
 
@@ -73,7 +73,7 @@ s = setup(data, fh = 12, session_id = 123)
 best = compare_models()
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/e581e621d533a54952a565eff5302902.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/e581e621d533a54952a565eff5302902.png)
 
 ```py
 # forecast plot
@@ -81,7 +81,7 @@ best = compare_models()
 plot_model(best, plot = 'forecast')
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/36b865ba95f4e975dd7fb4874d56389f.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/36b865ba95f4e975dd7fb4874d56389f.png)
 
 ```py
 # forecast plot 36 days out in future
@@ -89,7 +89,7 @@ plot_model(best, plot = 'forecast')
 plot_model(best, plot = 'forecast', data_kwargs = {'fh' : 36})
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/59ecbb3b0f364c077d87580088f813b6.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/59ecbb3b0f364c077d87580088f813b6.png)
 
 # 面向对象的 API
 
@@ -110,7 +110,7 @@ s = setup(data, target = 'Purchase', session_id = 123)
 best = compare_models()
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/6f6d7be08eb8d8866f6ab8f23252696d.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/6f6d7be08eb8d8866f6ab8f23252696d.png)
 
 在同一个笔记本中进行实验很棒，但如果你想用不同的设置函数参数运行不同的实验，这可能会成为问题。尽管可以做到，但之前实验的设置将会被替换。
 
@@ -138,11 +138,11 @@ exp2.setup(data, target = 'Purchase', normalize = True, session_id = 123)
 best2 = exp2.compare_models()
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/027d8ac5bb25f6bd433eed577b60e1aa.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/027d8ac5bb25f6bd433eed577b60e1aa.png)
 
 exp1.compare_models
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/064f4860e5275d94a02ffdff0c513f71.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/064f4860e5275d94a02ffdff0c513f71.png)
 
 exp2.compare_models
 
@@ -157,7 +157,7 @@ leaderboard_exp2 = exp2.get_leaderboard()
 lb = pd.concat([leaderboard_exp1, leaderboard_exp2])
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/754973a783c843c8872492dd2e5cc021.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/754973a783c843c8872492dd2e5cc021.png)
 
 输出被截断
 
@@ -167,7 +167,7 @@ print(exp1.pipeline.steps)
 print(exp2.pipeline.steps)
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/853f3da03cb2411005e7ce6cd2b9637e.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/853f3da03cb2411005e7ce6cd2b9637e.png)
 
 # 实验记录的更多选项
 
@@ -175,7 +175,7 @@ PyCaret 2 可以自动使用`MLflow`记录实验。虽然它仍然是默认选�
 
 要将日志记录器从默认的 MLflow 更改为其他可用选项，只需在`log_experiment`参数中传递以下之一：‘mlflow’，‘wandb’，‘cometml’，‘dagshub’。
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/cfceee83801507e40dd29b7d9d5eea20.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/cfceee83801507e40dd29b7d9d5eea20.png)
 
 # 重构的预处理模块
 
@@ -227,7 +227,7 @@ from pycaret.parallel import FugueBackend
 best = compare_models(parallel = FugueBackend(spark))
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/b023b3e0b8e88c1b9c14cacdf8601e01.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/b023b3e0b8e88c1b9c14cacdf8601e01.png)
 
 # 在 CPU 上加速模型训练
 
@@ -259,7 +259,7 @@ s = setup(data, target = 'deposit', session_id = 123)
 lr = create_model('lr')
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/7f6add516ec9cc8c3a21544fd0826826.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/7f6add516ec9cc8c3a21544fd0826826.png)
 
 使用智能加速的模型训练：
 
@@ -268,7 +268,7 @@ lr = create_model('lr')
 lr2 = create_model('lr', engine = 'sklearnex')
 ```
 
-![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](../Images/593f2d29ec74c2893ba77270d255adbb.png)
+![宣布 PyCaret 3.0：开源、低代码的 Python 机器学习](img/593f2d29ec74c2893ba77270d255adbb.png)
 
 模型性能存在一些差异（在大多数情况下不重要），但在 30K 行数据集上的时间改进约为 ~60%。处理更大数据集时，这一好处更为显著。
 
@@ -290,11 +290,11 @@ NLP 变化迅速，许多专门的库和公司致力于解决端到端的 NLP �
 
 [视频](https://pycaret.gitbook.io/docs/learn-pycaret/videos) 视频教程和活动
 
-[YouTube](https://www.youtube.com/@pycaret7041) 订阅我们的YouTube频道
+[YouTube](https://www.youtube.com/@pycaret7041) 订阅我们的 YouTube 频道
 
-[Slack](https://join.slack.com/t/pycaret/shared_invite/zt-row9phbm-BoJdEVPYnGf7_NxNBP307w) 加入我们的Slack社区
+[Slack](https://join.slack.com/t/pycaret/shared_invite/zt-row9phbm-BoJdEVPYnGf7_NxNBP307w) 加入我们的 Slack 社区
 
-[LinkedIn](https://www.linkedin.com/company/pycaret/) 关注我们的LinkedIn页面
+[LinkedIn](https://www.linkedin.com/company/pycaret/) 关注我们的 LinkedIn 页面
 
 [讨论](https://github.com/pycaret/pycaret/discussions) 与社区和贡献者互动
 
@@ -406,6 +406,6 @@ NLP 变化迅速，许多专门的库和公司致力于解决端到端的 NLP �
 
 +   [开始使用 PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)
 
-+   [每个机器学习工程师应掌握的5项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应掌握的 5 项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)

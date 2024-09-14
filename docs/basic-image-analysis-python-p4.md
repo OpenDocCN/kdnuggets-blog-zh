@@ -1,10 +1,10 @@
-# 使用 Python 的基础图像数据分析 – 第 4 部分
+# 使用 Python 的基础图像数据分析 – 第四部分
 
-> 原文：[https://www.kdnuggets.com/2018/10/basic-image-analysis-python-p4.html](https://www.kdnuggets.com/2018/10/basic-image-analysis-python-p4.html)
+> 原文：[`www.kdnuggets.com/2018/10/basic-image-analysis-python-p4.html`](https://www.kdnuggets.com/2018/10/basic-image-analysis-python-p4.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Image data analysis Python fig 1](../Images/d57ffadf2576d47ee22925b301e894d4.png)
+![Image data analysis Python fig 1](img/d57ffadf2576d47ee22925b301e894d4.png)
 
 之前，我们已经看到了一些 Python 中非常基础的图像分析操作。在这最后一部分基础图像分析中，我们将探讨以下内容。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 我原本计划将这个系列分成两部分，但由于内容的吸引力及其各种结果，我不得不将其分为四部分。你可以在这里找到前三部分：
 
-[第 1 部分](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html) | [第 2 部分](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html) | [第 3 部分](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
+[第一部分](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html) | [第二部分](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html) | [第三部分](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
 
 现在，让我们开始吧！
 
@@ -34,7 +34,7 @@
 
 阈值处理是图像处理中的一种非常基础的操作。将灰度图像转换为单色图像是常见的图像处理任务。而且，一个好的算法总是以良好的基础开始！
 
-大津阈值处理是一种简单而有效的全局自动阈值方法，用于将灰度图像（如前景和背景）二值化。在图像处理领域，大津阈值处理方法（1979年）用于基于**直方图**的形状进行自动**二值化**水平决策。它完全基于对图像直方图的计算。
+大津阈值处理是一种简单而有效的全局自动阈值方法，用于将灰度图像（如前景和背景）二值化。在图像处理领域，大津阈值处理方法（1979 年）用于基于**直方图**的形状进行自动**二值化**水平决策。它完全基于对图像直方图的计算。
 
 该算法假设图像由两类基本类别组成：**前景**和**背景**。然后计算一个最佳阈值，以最小化这两类的加权类内方差。
 
@@ -71,7 +71,7 @@ plt.imshow(pic);
 
 ```
 
-![图像数据分析 Python 图 2](../Images/ea7b345bb043849dbd160e1398ef47ac.png)
+![图像数据分析 Python 图 2](img/ea7b345bb043849dbd160e1398ef47ac.png)
 
 ```py
 
@@ -110,7 +110,7 @@ plt.axis('off');
 
 ```
 
-![图像数据分析 Python 图 3](../Images/16c258ad0b5c430e2605845ba24097a9.png)
+![图像数据分析 Python 图 3](img/16c258ad0b5c430e2605845ba24097a9.png)
 
 好，但不完美。如果直方图可以假设具有**双峰分布**并假设在两个峰之间具有深且尖锐的谷，则 Otsu 方法表现相对较好。
 
@@ -138,7 +138,7 @@ plt.axis('off');
 
 ```
 
-![图像数据分析 Python 图 4](../Images/e0c6906b53ae59c7e7ccfea9d4ef17b6.png)
+![图像数据分析 Python 图 4](img/e0c6906b53ae59c7e7ccfea9d4ef17b6.png)
 
 为了对图像进行聚类，我们需要将其转换为二维数组。
 
@@ -150,7 +150,7 @@ pic_2d = pic.reshape(x*y, z)
 
 接下来，我们使用 [scikit-learn 的 cluster](http://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) 方法来创建聚类。我们将 **n_clusters** 设为 5 以形成五个聚类。结果图像中会出现这些聚类，将其分成五个具有不同颜色的部分。
 
-聚类数5是通过启发式选择的用于演示。可以更改簇的数量，以视觉验证不同颜色的图像，并确定最接近所需簇数的设置。
+聚类数 5 是通过启发式选择的用于演示。可以更改簇的数量，以视觉验证不同颜色的图像，并确定最接近所需簇数的设置。
 
 ```py
 
@@ -175,7 +175,7 @@ plt.axis('off');
 
 ```
 
-![图像数据分析 Python 图 5](../Images/eb3e583500ef6bd783f1481e716410b2.png)
+![图像数据分析 Python 图 5](img/eb3e583500ef6bd783f1481e716410b2.png)
 
 ### 线检测
 
@@ -185,7 +185,7 @@ plt.axis('off');
 
 [霍夫变换的数学公式](https://iphton.github.io/iphton.github.io/Image-Processing-in-Python-Part-2/#7-bullet)。这将会重定向到我的主页，在那里我们解释了霍夫变换方法背后的数学。
 
-![图像数据分析 Python 图 6](../Images/268cf721de42490cda25029da2520da4.png)
+![图像数据分析 Python 图 6](img/268cf721de42490cda25029da2520da4.png)
 
 ```py
 
@@ -282,30 +282,30 @@ def hough_line(img):
 
 让我们直观地理解其中的每一个。有关更全面的概述，请查看本文末尾提供的链接。然而，本文已经变得很长，因此我们决定不在此处提供完整的代码实现，而是给出该代码算法的直观概述。但可以跳到[代码库](https://github.com/iphton/Image-Data-Analysis-Using-Pythons/tree/gh-pages/Segmentation/Object%20Detection/Canny%20Edge%20Detector)查看代码 :)
 
-[Canny边缘检测的过程](https://iphton.github.io/iphton.github.io/Image-Processing-in-Python-Part-2/#8-bullet)。这将重定向到我的主页，我们在其中解释了Canny边缘检测方法背后的数学原理。
+[Canny 边缘检测的过程](https://iphton.github.io/iphton.github.io/Image-Processing-in-Python-Part-2/#8-bullet)。这将重定向到我的主页，我们在其中解释了 Canny 边缘检测方法背后的数学原理。
 
-这标志着Python中基础图像处理的4部分系列的结束。我希望大家能够跟上，如果你觉得我犯了重要错误，请在评论中告诉我！
+这标志着 Python 中基础图像处理的 4 部分系列的结束。我希望大家能够跟上，如果你觉得我犯了重要错误，请在评论中告诉我！
 
 完整的源代码可以在：[GitHub.](https://github.com/iphton/Image-Data-Analysis-Using-Pythons)
 
 **相关内容：**
 
-+   [使用Numpy和OpenCV进行基础图像数据分析 – 第1部分](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
++   [使用 Numpy 和 OpenCV 进行基础图像数据分析 – 第一部分](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
 
-+   [Python中的基础图像处理 – 第二部分](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html)
++   [Python 中的基础图像处理 – 第二部分](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html)
 
-+   [使用Python进行基础图像数据分析 – 第3部分](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
++   [使用 Python 进行基础图像数据分析 – 第三部分](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
 
 ### 更多相关主题
 
-+   [KDnuggets新闻，6月29日：数据科学的20个基本Linux命令……](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基本 Linux 命令……](https://www.kdnuggets.com/2022/n26.html)
 
-+   [它活过来了！用Python和一些便宜的组件构建你的第一个机器人……](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
++   [它活过来了！用 Python 和一些便宜的组件构建你的第一个机器人……](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
 
-+   [使用Tensorflow训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
++   [使用 Tensorflow 训练图像分类模型指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
 
-+   [我如何使用Grounding DINO进行自动图像标注](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
++   [我如何使用 Grounding DINO 进行自动图像标注](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
 
-+   [如何使用LangChain实现Agentic RAG：第1部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)
++   [如何使用 LangChain 实现 Agentic RAG：第一部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)
 
-+   [数据科学的8个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
++   [数据科学的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)

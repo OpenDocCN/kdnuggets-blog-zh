@@ -1,8 +1,8 @@
 # 处理 CSV 文件的 3 种方法
 
-> 原文：[https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
+> 原文：[`www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html`](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
 
-![处理 CSV 文件的 3 种方法](../Images/65088be912a6714072433a6b1fde07ec.png)
+![处理 CSV 文件的 3 种方法](img/65088be912a6714072433a6b1fde07ec.png)
 
 来源：[flaticon](https://www.flaticon.com/free-icon/csv-file_4911248)
 
@@ -12,11 +12,11 @@
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -28,7 +28,7 @@ CSV 代表逗号分隔值，是一种包含数据的纯文本文件。它被认�
 
 这是一个示例结构：
 
-![处理 CSV 文件的 3 种方法](../Images/c03fef7cd61c4b21d67f828fe9327ffa.png)
+![处理 CSV 文件的 3 种方法](img/c03fef7cd61c4b21d67f828fe9327ffa.png)
 
 我从 Kaggle 获取了这个数据集，你可以在这里找到它：[电动汽车价格](https://www.kaggle.com/datasets/iannjuguna/electric-car-prices?resource=download)
 
@@ -62,7 +62,7 @@ df.head(5)
 
 示例：
 
-![处理 CSV 文件的 3 种方法](../Images/ca60695c7e901d2a1743963399fcf360.png)
+![处理 CSV 文件的 3 种方法](img/ca60695c7e901d2a1743963399fcf360.png)
 
 ## 使用 csv.reader
 
@@ -86,7 +86,7 @@ for one_line in r:
 
 示例：
 
-![处理 CSV 文件的 3 种方法](../Images/a8e007976c12d7b9f9b55d74341a4caa.png)
+![处理 CSV 文件的 3 种方法](img/a8e007976c12d7b9f9b55d74341a4caa.png)
 
 ## 分割方法
 
@@ -107,7 +107,7 @@ with open('format1.csv', 'w') as outfile:
 
 示例：
 
-![处理 CSV 文件的 3 种方法](../Images/fe01435f12ad724a1894587ac91484b6.png)
+![处理 CSV 文件的 3 种方法](img/fe01435f12ad724a1894587ac91484b6.png)
 
 # 总结
 

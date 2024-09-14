@@ -1,28 +1,28 @@
 # 数据科学家 vs 数据分析师 vs 数据工程师
 
-> 原文：[https://www.kdnuggets.com/2022/01/data-scientist-data-analyst-data-engineer.html](https://www.kdnuggets.com/2022/01/data-scientist-data-analyst-data-engineer.html)
+> 原文：[`www.kdnuggets.com/2022/01/data-scientist-data-analyst-data-engineer.html`](https://www.kdnuggets.com/2022/01/data-scientist-data-analyst-data-engineer.html)
 
-![数据科学家 vs 数据分析师 vs 数据工程师](../Images/2b70d7273dadcb865e909453e0b80d20.png)
+![数据科学家 vs 数据分析师 vs 数据工程师](img/2b70d7273dadcb865e909453e0b80d20.png)
 
 [信息图向量由 stories 创建 - www.freepik.com](https://www.freepik.com/vectors/infographic)
 
-## 2022年最受欢迎的数据相关职业解析
+## 2022 年最受欢迎的数据相关职业解析
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
 三年多前，我面临一个将伴随我一生的决定——“*我将来要做什么工作？*”我刚刚完成了高等教育，刚从高中毕业。
 
-在与朋友和家人进行长时间讨论后，我决定追求被称为“21世纪最性感的工作”的职位。我决定攻读数据科学本科专业。
+在与朋友和家人进行长时间讨论后，我决定追求被称为“21 世纪最性感的工作”的职位。我决定攻读数据科学本科专业。
 
 当时，我选择了数据科学，因为我对自己的选择并不清楚。我听说了一个流行的领域，它承诺灵活的工作时间和丰厚的薪水，于是决定专注于此。
 
@@ -42,7 +42,7 @@
 
 数据工程师是这个列表中三种角色中最具技术性的。他们设计数据库模式，管理系统中的数据流，并执行质量检查以确保数据的一致性。
 
-要成为数据工程师，你需要具备软件设计、数据库架构、DevOps和数据建模方面的技能。你还需要对SQL有很强的掌握。数据工程职位描述中通常要求了解Python和Bash等脚本语言。
+要成为数据工程师，你需要具备软件设计、数据库架构、DevOps 和数据建模方面的技能。你还需要对 SQL 有很强的掌握。数据工程职位描述中通常要求了解 Python 和 Bash 等脚本语言。
 
 ## **数据分析师**
 
@@ -52,15 +52,15 @@
 
 **以下是数据分析师工作流程的一个简单例子**：
 
-+   ABC商店希望更好地了解他们的客户基础。
++   ABC 商店希望更好地了解他们的客户基础。
 
 +   他们希望根据品牌忠诚度和每次购买的金额等因素将客户细分为不同的群体。然后，他们将通过不同的促销活动吸引每个客户群体。
 
 +   数据分析师可以根据客户购买行为识别趋势并执行这种细分。
 
-+   例如，有一组客户曾经每月光顾ABC商店（第一组）。然而，在过去的几个月里，他们突然停止了购买。这意味着他们可能决定转向竞争品牌购物，或者他们根本不再需要这个产品。
++   例如，有一组客户曾经每月光顾 ABC 商店（第一组）。然而，在过去的几个月里，他们突然停止了购买。这意味着他们可能决定转向竞争品牌购物，或者他们根本不再需要这个产品。
 
-+   第二组客户只有在特定产品打折时才光顾ABC商店（第二组）。他们不是常客，仅对某个产品的促销活动做出反应。
++   第二组客户只有在特定产品打折时才光顾 ABC 商店（第二组）。他们不是常客，仅对某个产品的促销活动做出反应。
 
 +   这两组客户需要不同的接触方式。第一组客户表现出品牌忠诚度，这需要通过个性化信息和礼品卡等策略来重新获得。
 
@@ -84,7 +84,7 @@
 
 **以下是数据科学家工作流程的一个例子**：
 
-+   ABC商店希望了解他们客户的终身价值。数据科学家将执行上述所有分析。
++   ABC 商店希望了解他们客户的终身价值。数据科学家将执行上述所有分析。
 
 +   然后，他们将进一步构建一个聚类模型，将这些客户细分为不同的群体。
 
@@ -108,6 +108,6 @@
 
 +   [从数据分析师到数据战略师：实现影响力的职业路径](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)
 
-+   [12条建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
++   [12 条建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
 
-+   [每个数据分析师都应该拥有的前5个书签](https://www.kdnuggets.com/2022/09/top-5-bookmarks-every-data-analyst.html)
++   [每个数据分析师都应该拥有的前 5 个书签](https://www.kdnuggets.com/2022/09/top-5-bookmarks-every-data-analyst.html)

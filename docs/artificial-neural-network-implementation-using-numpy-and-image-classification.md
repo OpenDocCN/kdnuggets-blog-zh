@@ -1,20 +1,20 @@
 # 使用 NumPy 和图像分类的人工神经网络实现
 
-> 原文：[https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html/2](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html/2)
+> 原文：[`www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html/2`](https://www.kdnuggets.com/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### ANN 实现
 
-下一图展示了目标ANN结构。输入层有102个输入，2个隐藏层分别有150和60个神经元，输出层有4个输出（每个水果类别一个）。
+下一图展示了目标 ANN 结构。输入层有 102 个输入，2 个隐藏层分别有 150 和 60 个神经元，输出层有 4 个输出（每个水果类别一个）。
 
-![](../Images/713689ba5ab8a28eaf6a6aad078bdfe1.png)
+![](img/713689ba5ab8a28eaf6a6aad078bdfe1.png)
 
 在任何层中，输入向量通过与下一层连接的权重矩阵（矩阵乘法）进行乘法操作，产生一个输出向量。这个输出向量再次通过与下一层连接的权重矩阵进行乘法操作。该过程持续到达输出层。矩阵乘法的总结见下图。
 
-![](../Images/5877059b505795d9234a289831d0fbb4.png)
+![](img/5877059b505795d9234a289831d0fbb4.png)
 
-输入向量的大小为1x102，需与第一隐藏层的权重矩阵（大小为102x150）相乘。记住这是矩阵乘法。因此，输出数组的形状为1x150。该输出用作第二隐藏层的输入，再与大小为150x60的权重矩阵相乘。结果大小为1x60。最后，这样的输出与第二隐藏层和输出层之间的权重（大小为60x4）相乘。最终结果大小为1x4。每个结果向量中的元素表示一个输出类别。根据最高分的类别对输入样本进行标记。
+输入向量的大小为 1x102，需与第一隐藏层的权重矩阵（大小为 102x150）相乘。记住这是矩阵乘法。因此，输出数组的形状为 1x150。该输出用作第二隐藏层的输入，再与大小为 150x60 的权重矩阵相乘。结果大小为 1x60。最后，这样的输出与第二隐藏层和输出层之间的权重（大小为 60x4）相乘。最终结果大小为 1x4。每个结果向量中的元素表示一个输出类别。根据最高分的类别对输入样本进行标记。
 
 实现这些乘法的 Python 代码如下所示。
 
@@ -60,7 +60,7 @@ print("Predicted class : ", predicted_label)
 
 ```
 
-在读取之前保存的特征及其输出标签并过滤特征后，定义层的权重矩阵。它们被随机赋值在-0.1到0.1之间。例如，变量**"input_HL1_weights"**保存了输入层和第一隐藏层之间的权重矩阵。该矩阵的大小根据特征元素的数量和隐藏层中神经元的数量定义。
+在读取之前保存的特征及其输出标签并过滤特征后，定义层的权重矩阵。它们被随机赋值在-0.1 到 0.1 之间。例如，变量**"input_HL1_weights"**保存了输入层和第一隐藏层之间的权重矩阵。该矩阵的大小根据特征元素的数量和隐藏层中神经元的数量定义。
 
 创建权重矩阵后，接下来是应用矩阵乘法。例如，变量**"H1_outputs"**保存了将给定样本的特征向量与输入层和第一隐藏层之间的权重矩阵相乘后的输出。
 
@@ -170,39 +170,39 @@ print("num_flase ", num_flase.size)
 
 ### 遗传算法优化介绍
 
-+   [https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
++   [`www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/`](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
 
-+   [https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)
++   `www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html`
 
-+   [https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
++   [`towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b`](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
 
-+   [https://www.springer.com/us/book/9781484241660](https://www.springer.com/us/book/9781484241660)
++   [`www.springer.com/us/book/9781484241660`](https://www.springer.com/us/book/9781484241660)
 
 ### 遗传算法（GA）优化 - 步骤示例
 
-+   [https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)
++   [`www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example`](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)
 
 ### 遗传算法在 Python 中的实现
 
-+   [https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)
++   [`www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/`](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)
 
-+   [https://www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html](/2018/07/genetic-algorithm-implementation-python.html)
++   `www.kdnuggets.com/2018/07/genetic-algorithm-implementation-python.html`
 
-+   [https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)
++   [`towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6`](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)
 
-+   [https://github.com/ahmedfgad/GeneticAlgorithmPython](https://github.com/ahmedfgad/GeneticAlgorithmPython)
++   [`github.com/ahmedfgad/GeneticAlgorithmPython`](https://github.com/ahmedfgad/GeneticAlgorithmPython)
 
 ### 联系作者
 
-+   领英：[https://www.linkedin.com/in/ahmedfgad](https://www.linkedin.com/in/ahmedfgad)
++   领英：[`www.linkedin.com/in/ahmedfgad`](https://www.linkedin.com/in/ahmedfgad)
 
-+   脸书：[https://www.facebook.com/ahmed.f.gadd](https://www.facebook.com/ahmed.f.gadd)
++   脸书：[`www.facebook.com/ahmed.f.gadd`](https://www.facebook.com/ahmed.f.gadd)
 
-+   推特：[https://twitter.com/ahmedfgad](https://twitter.com/ahmedfgad)
++   推特：[`twitter.com/ahmedfgad`](https://twitter.com/ahmedfgad)
 
-+   Towards Data Science：[https://towardsdatascience.com/@ahmedfgad](https://towardsdatascience.com/@ahmedfgad)
++   Towards Data Science：[`towardsdatascience.com/@ahmedfgad`](https://towardsdatascience.com/@ahmedfgad)
 
-+   KDnuggets：[https://www.kdnuggets.com/author/ahmed-gad](/author/ahmed-gad)
++   KDnuggets：`www.kdnuggets.com/author/ahmed-gad`
 
 +   电子邮件：ahmed.f.gad@gmail.com
 
@@ -220,11 +220,11 @@ print("num_flase ", num_flase.size)
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

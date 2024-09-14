@@ -1,8 +1,8 @@
 # 如何在不断变化的世界中成长为数据科学家
 
-> 原文：[https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html](https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html)
+> 原文：[`www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html`](https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html)
 
-![如何在不断变化的世界中成长为数据科学家](../Images/fa10300a76ecea95859dcb78b028aab4.png)
+![如何在不断变化的世界中成长为数据科学家](img/fa10300a76ecea95859dcb78b028aab4.png)
 
 图片来源：[Ian Schneider](https://unsplash.com/@goian?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 因此，数据科学家是负责收集、分析和发布数据集结果的专家。虽然数据科学在未来不太可能减少其重要性，但随着关键指标或数据分析方法随时间变化，它无疑会作为一个行业发生转变。
 
-如果你是一名数据科学家，你必须 [与行业同步发展](/2020/10/level-up-data-science-skills-8-months.html)，而不是停滞不前。如果你随着行业的发展而成长，你将会：
+如果你是一名数据科学家，你必须 与行业同步发展，而不是停滞不前。如果你随着行业的发展而成长，你将会：
 
 +   拥有更好的就业和晋升机会
 
@@ -58,15 +58,15 @@
 
 说到申请更高薪职位，所有数据科学家都应该随时关注职业和薪资水平的晋升机会。
 
-我们早已过了员工在同一家公司工作20年或更长时间的经济环境。现在，是时候成为一名数据科学“雇佣兵”，将你的专业技能出售给出价最高的雇主。
+我们早已过了员工在同一家公司工作 20 年或更长时间的经济环境。现在，是时候成为一名数据科学“雇佣兵”，将你的专业技能出售给出价最高的雇主。
 
 这对你的职业发展当然有好处，对你的钱包也是如此。但同样重要的是确保你始终处于数据科学领域的前沿。如果你申请并被聘用到高薪职位，你将有更多机会接触到新的数据科学技术和方法。
 
-结果如何？你会成为一个更优秀、更全面的数据科学家，晋升或[获得更高薪的职位](/2021/10/tripled-my-income-data-science-18-months.html)将变得更容易。在许多方面，积极追求新职位或晋升是一种滚雪球效应，申请新工作变得更容易，追求这一策略的时间越长，你的成功也会越多。
+结果如何？你会成为一个更优秀、更全面的数据科学家，晋升或获得更高薪的职位将变得更容易。在许多方面，积极追求新职位或晋升是一种滚雪球效应，申请新工作变得更容易，追求这一策略的时间越长，你的成功也会越多。
 
 ## 从事副项目
 
-虽然拥有主要职业目标很重要，但制定一个可以在闲暇时间进行的[副项目](/2022/01/15-neural-network-projects-build-2022.html)清单同样重要。
+虽然拥有主要职业目标很重要，但制定一个可以在闲暇时间进行的副项目清单同样重要。
 
 说实话：大多数数据科学工作其实并不那么有趣，尤其是当你只是为了薪水而做的时候。但许多数据科学家最初进入这一领域是因为对数据科学的热情。
 
@@ -90,7 +90,7 @@
 
 +   以及更多
 
-更棒的是，一些在线挑战 [附带证书](/2021/02/6-data-science-certificates.html)，你可以将其放在简历或 LinkedIn 个人资料中。完成这些挑战并获得相关证书，可能会让你在梦想职位开放时成为更具吸引力的候选人。
+更棒的是，一些在线挑战 附带证书，你可以将其放在简历或 LinkedIn 个人资料中。完成这些挑战并获得相关证书，可能会让你在梦想职位开放时成为更具吸引力的候选人。
 
 总的来说，作为数据科学家不断成长比以往任何时候都更加重要，特别是当新专业人士进入职场并成为你的竞争对手时。通过遵循上述建议，你将保持敏锐的眼光和前瞻性思维，全面了解你领域的新技术和发展。
 
@@ -108,4 +108,4 @@
 
 +   [克服现实世界场景中的不平衡数据挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
 
-+   [8位致力于使世界更人性化的女性](https://www.kdnuggets.com/2021/03/8-women-ai-striving-humanize-world.html)
++   [8 位致力于使世界更人性化的女性](https://www.kdnuggets.com/2021/03/8-women-ai-striving-humanize-world.html)

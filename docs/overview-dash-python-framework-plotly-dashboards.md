@@ -1,12 +1,12 @@
 # Plotly 的 Dash Python 框架概述用于构建仪表板
 
-> 原文：[https://www.kdnuggets.com/2018/05/overview-dash-python-framework-plotly-dashboards.html](https://www.kdnuggets.com/2018/05/overview-dash-python-framework-plotly-dashboards.html)
+> 原文：[`www.kdnuggets.com/2018/05/overview-dash-python-framework-plotly-dashboards.html`](https://www.kdnuggets.com/2018/05/overview-dash-python-framework-plotly-dashboards.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Damian Rodziewicz](https://appsilondatascience.com/blog)，Appsilon。**
 
-![Dash Python Plotly](../Images/aeca29c2f5f5eeea4b4e8be99251c696.png)
+![Dash Python Plotly](img/aeca29c2f5f5eeea4b4e8be99251c696.png)
 
 > Appsilon 技术讲座 - 每周三我们举行内部会议，讨论技术。通过与社区分享我们的技术讲座并贡献开源，我们激发了讨论和成长，让其他人从我们的成就中学习并与我们分享。
 
@@ -48,7 +48,7 @@ Python 社区正在赶上，我们很高兴探索这些机会。值得比较这�
 
 ### 4\. Dash 核心组件是什么？如何构建自定义组件？
 
-你可以在 Dash 中实现自己的组件。有关如何做到这一点的信息，请访问 [https://dash.plot.ly/plugins](https://dash.plot.ly/plugins)
+你可以在 Dash 中实现自己的组件。有关如何做到这一点的信息，请访问 [`dash.plot.ly/plugins`](https://dash.plot.ly/plugins)
 
 我们已经开始实施自己的组件和助手：
 
@@ -102,13 +102,13 @@ Python 社区正在赶上，我们很高兴探索这些机会。值得比较这�
 
 #### 资源：
 
-+   [https://github.com/DamianRodziewicz/dash_example](https://github.com/DamianRodziewicz/dash_example)
++   [`github.com/DamianRodziewicz/dash_example`](https://github.com/DamianRodziewicz/dash_example)
 
 +   [Slideshare](https://www.slideshare.net/secret/nnwCIXI6iBDOmG)
 
 简介: [Damian](https://preview.appsilondatascience.com/blog) 喜欢称自己为技术狂热者，这一点很贴切，因为他是我们的联合创始人和首席数据科学家。他拥有计算机科学硕士学位和管理法律研究生学位。在创办 Appsilon 之前，他曾在 Accenture、UBS、Microsoft 和 Domino Data Lab 工作。他是一名热衷于游泳和心理学的爱好者。
 
-![](../Images/7a5a84bee7701ded3ebc338a1c8b6859.png)
+![](img/7a5a84bee7701ded3ebc338a1c8b6859.png)
 
 [原文](https://appsilondatascience.com/blog/rstats/2018/05/08/dash.html)。经许可转载。
 
@@ -118,30 +118,30 @@ Python 社区正在赶上，我们很高兴探索这些机会。值得比较这�
 
 +   [数据可视化最佳实践](https://www.kdnuggets.com/2018/05/jmp-best-practices-data-visualization.html)
 
-+   [适用于任何学科的10个有用的 Python 数据可视化库](https://www.kdnuggets.com/2016/06/python-data-visualization-libraries.html)
++   [适用于任何学科的 10 个有用的 Python 数据可视化库](https://www.kdnuggets.com/2016/06/python-data-visualization-libraries.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
 ### 更多相关主题
 
-+   [Plotly Express数据可视化备忘单](https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html)
++   [Plotly Express 数据可视化备忘单](https://www.kdnuggets.com/2023/03/plotly-express-data-visualization-cheat-sheet.html)
 
-+   [使用Python和Dash创建仪表板](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)
++   [使用 Python 和 Dash 创建仪表板](https://www.kdnuggets.com/2023/08/create-dashboard-python-dash.html)
 
-+   [为有效的Tableau和Power BI仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
++   [为有效的 Tableau 和 Power BI 仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)
 
 +   [人工智能/机器学习模型的风险管理框架](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)
 
-+   [Django框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)
++   [Django 框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)
 
 +   [适用于所有用途的唯一提示框架](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)

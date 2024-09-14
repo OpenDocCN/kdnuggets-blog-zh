@@ -1,8 +1,8 @@
 # 使用 Pandas 管道函数进行更清晰的数据分析
 
-> 原文：[https://www.kdnuggets.com/2021/01/cleaner-data-analysis-pandas-pipes.html](https://www.kdnuggets.com/2021/01/cleaner-data-analysis-pandas-pipes.html)
+> 原文：[`www.kdnuggets.com/2021/01/cleaner-data-analysis-pandas-pipes.html`](https://www.kdnuggets.com/2021/01/cleaner-data-analysis-pandas-pipes.html)
 
-[comments](#comments)![Figure](../Images/dae67c23202b0f5e3c5ee224a97d389d.png)
+comments![Figure](img/dae67c23202b0f5e3c5ee224a97d389d.png)
 
 由 [Candid](https://unsplash.com/@candid?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供的照片，来源于 [Unsplash](https://unsplash.com/s/photos/clean?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@ marketing = pd.read_csv("/content/DirectMarketing.csv")
 marketing.head()
 ```
 
-![Figure](../Images/61b038414c75427fc36344ea1c72a710.png)
+![Figure](img/61b038414c75427fc36344ea1c72a710.png)
 
 （图片由作者提供）
 
@@ -186,11 +186,11 @@ AmountSpent       int64
 
 **相关内容：**
 
-+   [数据清理：任何数据科学项目成功的秘密成分](/2020/07/data-cleaning-secret-ingredient-success-data-science-project.html)
++   数据清理：任何数据科学项目成功的秘密成分
 
-+   [SQL 数据清理与整理](/2021/01/data-cleaning-wrangling-sql.html)
++   SQL 数据清理与整理
 
-+   [在 Python 中合并 Pandas 数据框](/2020/12/merging-pandas-dataframes-python.html)
++   在 Python 中合并 Pandas 数据框
 
 ### 更多相关内容
 

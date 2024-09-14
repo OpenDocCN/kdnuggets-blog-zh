@@ -1,8 +1,8 @@
 # OpenAI API 初学者指南：您的易于跟随的入门指南
 
-> 原文：[https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)
+> 原文：[`www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide`](https://www.kdnuggets.com/openai-api-for-beginners-your-easy-to-follow-starter-guide)
 
-![OpenAI API 初学者指南：您的易于跟随的入门指南](../Images/021a5da7a465edbf5875ee405087c7a4.png)
+![OpenAI API 初学者指南：您的易于跟随的入门指南](img/021a5da7a465edbf5875ee405087c7a4.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -30,21 +30,21 @@
 
 要购买信用，请转到“Settings”，然后是“Billing”，最后点击“Add Payment Details”。输入您的借记卡或信用卡信息，并确保禁用自动充值。充值 10 美元后，您可以使用它一年。
 
-![OpenAI API 初学者指南：您的易于跟随的入门指南](../Images/ea264965f22c6490108bef701130530f.png)
+![OpenAI API 初学者指南：您的易于跟随的入门指南](img/ea264965f22c6490108bef701130530f.png)
 
 通过导航到“API keys”并选择“Create new secret key”来创建 API 密钥。给它命名，然后点击“Create secret key”。
 
-![OpenAI API 初学者指南：您的易于跟随的入门指南](../Images/50d633090807549f244b93d4049f87ab.png)
+![OpenAI API 初学者指南：您的易于跟随的入门指南](img/50d633090807549f244b93d4049f87ab.png)
 
 复制 API 并在本地机器上创建一个环境变量。
 
-![OpenAI API 初学者指南：您的易于跟随的入门指南](../Images/c730df59442728c580c8c89e93bbd8e7.png)
+![OpenAI API 初学者指南：您的易于跟随的入门指南](img/c730df59442728c580c8c89e93bbd8e7.png)
 
-我使用Deepnote作为我的IDE。创建环境变量很简单。只需转到“集成”，选择“创建环境变量”，为密钥提供名称和值，然后创建集成。
+我使用 Deepnote 作为我的 IDE。创建环境变量很简单。只需转到“集成”，选择“创建环境变量”，为密钥提供名称和值，然后创建集成。
 
-![OpenAI API 入门指南：你的简单易懂的启动指南](../Images/a05f1b4871e59a0117b519c91f79479c.png)
+![OpenAI API 入门指南：你的简单易懂的启动指南](img/a05f1b4871e59a0117b519c91f79479c.png)
 
-接下来，我们将使用pip安装OpenAI Python包。
+接下来，我们将使用 pip 安装 OpenAI Python 包。
 
 ```py
 %pip install --upgrade openai
@@ -52,7 +52,7 @@
 
 我们现在将创建一个可以全球访问各种模型的客户端。
 
-如果你已经设置了名为"OPENAI_API_KEY"的环境变量，你就不需要向OpenAI客户端提供API密钥。
+如果你已经设置了名为"OPENAI_API_KEY"的环境变量，你就不需要向 OpenAI 客户端提供 API 密钥。
 
 ```py
 from openai import OpenAI
@@ -60,7 +60,7 @@ from openai import OpenAI
 client = OpenAI()
 ```
 
-请注意，只有当你的环境变量名称不同于默认名称时，才应提供API密钥。
+请注意，只有当你的环境变量名称不同于默认名称时，才应提供 API 密钥。
 
 ```py
 import os
@@ -85,9 +85,9 @@ completion = client.completions.create(
 print(completion.choices[0].text)
 ```
 
-GPT3.5模型生成了关于埃隆·马斯克的惊人故事。
+GPT3.5 模型生成了关于埃隆·马斯克的惊人故事。
 
-![OpenAI API 入门指南：你的简单易懂的启动指南](../Images/b2d256b1e9d6e85121adba06d323ae2a.png)
+![OpenAI API 入门指南：你的简单易懂的启动指南](img/b2d256b1e9d6e85121adba06d323ae2a.png)
 
 我们还可以通过提供额外的参数`stream`来流式传输我们的响应。
 
@@ -105,11 +105,11 @@ for chunk in stream:
         print(chunk.choices[0].text, end="")
 ```
 
-![OpenAI API 入门指南：你的简单易懂的启动指南](../Images/bc02fedc69d47a0fa9f1bfa413f6ff3d.png)
+![OpenAI API 入门指南：你的简单易懂的启动指南](img/bc02fedc69d47a0fa9f1bfa413f6ff3d.png)
 
 # 聊天
 
-该模型使用了API聊天完成。在生成响应之前，让我们探索可用模型。
+该模型使用了 API 聊天完成。在生成响应之前，让我们探索可用模型。
 
 你可以查看所有可用模型的列表，或阅读官方文档中的[模型](https://platform.openai.com/docs/models/models)页面。
 
@@ -117,9 +117,9 @@ for chunk in stream:
 print(client.models.list())
 ```
 
-![OpenAI API 入门指南：你的简单易懂的启动指南](../Images/0a76d73eba063f0bb6a9a124118e8ba9.png)
+![OpenAI API 入门指南：你的简单易懂的启动指南](img/0a76d73eba063f0bb6a9a124118e8ba9.png)
 
-我们将使用最新版本的GPT-3.5，并提供系统提示和用户消息的字典列表。确保遵循相同的消息模式。
+我们将使用最新版本的 GPT-3.5，并提供系统提示和用户消息的字典列表。确保遵循相同的消息模式。
 
 ```py
 completion = client.chat.completions.create(
@@ -139,7 +139,7 @@ completion = client.chat.completions.create(
 print(completion.choices[0].message.content) 
 ```
 
-如我们所见，我们生成了与传统API相似的结果。那么，为什么要使用这个API？接下来，我们将学习为什么聊天完成API更灵活且更易于使用。
+如我们所见，我们生成了与传统 API 相似的结果。那么，为什么要使用这个 API？接下来，我们将学习为什么聊天完成 API 更灵活且更易于使用。
 
 ```py
 Feature engineering is the process of selecting, creating, or transforming features (variables) in a dataset to improve the performance of machine learning models. It involves identifying the most relevant and informative features and preparing them for model training. Effective feature engineering can significantly enhance the predictive power of a model and its ability to generalize to new data.
@@ -153,7 +153,7 @@ Some common methods of feature engineering include:
 3\. Normalization/Standardization: Scaling numerical features to bring t.........
 ```
 
-我们现在将学习如何与AI模型进行多轮对话。为此，我们将把助手的回应添加到先前的对话中，并在相同的消息格式中包含新的提示。之后，我们将向聊天完成函数提供字典列表。
+我们现在将学习如何与 AI 模型进行多轮对话。为此，我们将把助手的回应添加到先前的对话中，并在相同的消息格式中包含新的提示。之后，我们将向聊天完成函数提供字典列表。
 
 ```py
 chat=[
@@ -179,7 +179,7 @@ Feature engineering involves selecting, creating, or transforming features in a 
 
 # 嵌入
 
-要开发高级应用程序，我们需要将文本转换为嵌入。这些嵌入用于相似性搜索、语义搜索和推荐引擎。我们可以通过提供API文本和模型名称来生成嵌入。就是这么简单。
+要开发高级应用程序，我们需要将文本转换为嵌入。这些嵌入用于相似性搜索、语义搜索和推荐引擎。我们可以通过提供 API 文本和模型名称来生成嵌入。就是这么简单。
 
 ```py
 text = "Data Engineering is a rapidly growing field that focuses on the collection, storage, processing, and analysis of large volumes of structured and unstructured data. It involves various tasks such as data extraction, transformation, loading (ETL), data modeling, database design, and optimization to ensure that data is accessible, accurate, and relevant for decision-making purposes."
@@ -194,11 +194,11 @@ print(chat_embeddings.data[0].embedding)
 
 # 音频
 
-现在，我们可以将文本转换为语音，将语音转换为文本，并通过音频API进行翻译。
+现在，我们可以将文本转换为语音，将语音转换为文本，并通过音频 API 进行翻译。
 
 ## 文字转录
 
-我们将使用[Wi-Fi 7 Will Change Everything](https://www.youtube.com/watch?v=JqQAFodjYBk) YouTube视频，并将其转换为mp3格式。之后，我们将打开文件，并将其提供给音频转录API。
+我们将使用[Wi-Fi 7 Will Change Everything](https://www.youtube.com/watch?v=JqQAFodjYBk) YouTube 视频，并将其转换为 mp3 格式。之后，我们将打开文件，并将其提供给音频转录 API。
 
 ```py
 audio_file= open("Data/techlinked.mp3", "rb")
@@ -209,7 +209,7 @@ transcript = client.audio.transcriptions.create(
 print(transcript.text)
 ```
 
-Whisper模型非常出色。它可以完美地转录音频内容。
+Whisper 模型非常出色。它可以完美地转录音频内容。
 
 ```py
 The Consumer Electronics Show has officially begun in Las Vegas and we'll be bringing you all the highlights from right here in our regular studio where it's safe and clean and not a desert. I hate sand. The Wi-Fi Alliance announced that they have officially confirmed the Wi-Fi 7 standard and they've already started to certify devices to ensure they work together. Unlike me and Selena, that was never gonna last. The new standard will have twice the channel bandwidth of Wi-Fi 5, 6, and 6E, making it better for, surprise,......
@@ -217,7 +217,7 @@ The Consumer Electronics Show has officially begun in Las Vegas and we'll be bri
 
 ## 翻译
 
-我们还可以将英文音频转录成另一种语言。在我们的例子中，我们将其转换为乌尔都语。我们只需添加一个名为`language`的参数，并提供ISO语言代码“ur”。
+我们还可以将英文音频转录成另一种语言。在我们的例子中，我们将其转换为乌尔都语。我们只需添加一个名为`language`的参数，并提供 ISO 语言代码“ur”。
 
 ```py
 translations = client.audio.transcriptions.create(
@@ -238,7 +238,7 @@ print(translations)
 
 ## 文本转语音
 
-为了将文本转换为自然的语音，我们将使用语音API，并提供模型名称、配音演员名称和输入文本。接下来，我们将把音频文件保存到我们的“Data”文件夹中。
+为了将文本转换为自然的语音，我们将使用语音 API，并提供模型名称、配音演员名称和输入文本。接下来，我们将把音频文件保存到我们的“Data”文件夹中。
 
 ```py
 response = client.audio.speech.create(
@@ -254,20 +254,20 @@ response = client.audio.speech.create(
 response.stream_to_file("Data/song.mp3")
 ```
 
-要在Deepnote Notebook中收听音频文件，我们将使用IPython Audio函数。
+要在 Deepnote Notebook 中收听音频文件，我们将使用 IPython Audio 函数。
 
 ```py
 from IPython.display import Audio
 Audio("Data/song.mp3")
 ```
 
-![OpenAI API for Beginners: Your Easy-to-Follow Starter Guide](../Images/e65d6c6451c0e36e20a91c8273cbc54b.png)
+![OpenAI API for Beginners: Your Easy-to-Follow Starter Guide](img/e65d6c6451c0e36e20a91c8273cbc54b.png)
 
 # 视觉
 
-OpenAI API通过聊天完成函数为用户提供了对多模态模型的访问。为了理解图像，我们可以使用最新的GPT-4视觉模型。
+OpenAI API 通过聊天完成函数为用户提供了对多模态模型的访问。为了理解图像，我们可以使用最新的 GPT-4 视觉模型。
 
-在消息参数中，我们提供了一个关于图像和图像URL提问的提示。图像来源于[Pixabay](https://www.pexels.com/photo/man-carrying-yoke-with-rice-grains-235731/)。请确保遵循相同的消息格式，以避免任何错误。
+在消息参数中，我们提供了一个关于图像和图像 URL 提问的提示。图像来源于[Pixabay](https://www.pexels.com/photo/man-carrying-yoke-with-rice-grains-235731/)。请确保遵循相同的消息格式，以避免任何错误。
 
 ```py
 response = client.chat.completions.create(
@@ -303,13 +303,13 @@ This is an image of a person carrying a large number of rice seedlings on a carr
 It's difficult to determine the exact location from the image alone, but this type of scene is typically found in rural areas of Southeast Asian countries like Vietnam, Thailand, Cambodia, or the Philippines, where rice farming is a crucial part of the agricultural industry and landscape.
 ```
 
-我们也可以加载本地图像文件，并将其提供给聊天完成API。为此，我们首先需要从pexels.com下载图像，下载地址为[Manjeet Singh Yadav](https://www.pexels.com/photo/woman-in-white-and-yellow-dress-with-scarf-1162983/)。
+我们也可以加载本地图像文件，并将其提供给聊天完成 API。为此，我们首先需要从 pexels.com 下载图像，下载地址为[Manjeet Singh Yadav](https://www.pexels.com/photo/woman-in-white-and-yellow-dress-with-scarf-1162983/)。
 
 ```py
 !curl -o /work/Data/indian.jpg "https://images.pexels.com/photos/1162983/pexels-photo-1162983.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 ```
 
-然后，我们将加载图像并将其编码为base64格式。
+然后，我们将加载图像并将其编码为 base64 格式。
 
 ```py
 import base64
@@ -324,7 +324,7 @@ image_path = "Data/indian.jpg"
 base64_image = encode_image(image_path)
 ```
 
-我们将提供元数据和图像的base64字符串，而不是提供图像URL。
+我们将提供元数据和图像的 base64 字符串，而不是提供图像 URL。
 
 ```py
 response = client.chat.completions.create(
@@ -362,7 +362,7 @@ The woman's hairstyle features jasmine flowers arranged in
 
 # 图像生成
 
-我们还可以使用DALLE-3模型生成图像。我们只需提供模型名称、提示、尺寸、质量和图像数量给图像API。
+我们还可以使用 DALLE-3 模型生成图像。我们只需提供模型名称、提示、尺寸、质量和图像数量给图像 API。
 
 ```py
 response = client.images.generate(
@@ -376,7 +376,7 @@ response = client.images.generate(
 image_url = response.data[0].url
 ```
 
-生成的图像保存在网上，你可以下载以便本地查看。为此，我们将使用`request`函数下载图像，提供图像URL和你想保存的本地目录。之后，我们将使用Pillow库的Image函数打开并显示图像。
+生成的图像保存在网上，你可以下载以便本地查看。为此，我们将使用`request`函数下载图像，提供图像 URL 和你想保存的本地目录。之后，我们将使用 Pillow 库的 Image 函数打开并显示图像。
 
 ```py
 import urllib.request
@@ -392,7 +392,7 @@ img.show()
 
 我们获得了一张高质量的生成图像。简直太惊艳了！
 
-![OpenAI API for Beginners: Your Easy-to-Follow Starter Guide](../Images/1be884980ebdab56db6670e67b1a2b41.png)
+![OpenAI API for Beginners: Your Easy-to-Follow Starter Guide](img/1be884980ebdab56db6670e67b1a2b41.png)
 
 如果你在运行任何 OpenAI Python API 时遇到困难，欢迎查看我在 [Deepnote](https://deepnote.com/workspace/abid-5efa63e7-7029-4c3e-996f-40e8f1acba6f/project/OpenAI-API-for-Beginners-Your-Easy-to-Follow-Starter-Guide-9cef53b4-f44b-4d76-a6db-ace4702d282f/notebook/Notebook%201-e4ce532b1e97425ba1e69a4d3de695c2) 上的项目。
 
@@ -400,7 +400,7 @@ img.show()
 
 我已经尝试使用 OpenAPI 一段时间了，我们最终只用了 0.22 美元的信用额度，这让我觉得非常实惠。通过我的指南，即使是初学者也可以开始构建自己的 AI 应用程序。这是一个简单的过程——你无需训练自己的模型或部署它。你可以通过 API 访问最先进的模型，且每次新版本发布时都在不断改进。
 
-![OpenAI API 初学者指南：简单易懂的入门指南](../Images/7fc211d6a7e26296e2db2236a81d6a26.png)
+![OpenAI API 初学者指南：简单易懂的入门指南](img/7fc211d6a7e26296e2db2236a81d6a26.png)
 
 在本指南中，我们介绍了如何设置 OpenAI Python API 并生成简单的文本响应。我们还学习了多轮对话、嵌入、转录、翻译、文本转语音、视觉和图像生成 API。
 

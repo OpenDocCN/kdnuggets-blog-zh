@@ -1,28 +1,28 @@
-# R中你可能不知道的十个随机有用的东西
+# R 中你可能不知道的十个随机有用的东西
 
-> 原文：[https://www.kdnuggets.com/2019/06/ten-useful-things-r.html](https://www.kdnuggets.com/2019/06/ten-useful-things-r.html)
+> 原文：[`www.kdnuggets.com/2019/06/ten-useful-things-r.html`](https://www.kdnuggets.com/2019/06/ten-useful-things-r.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Keith McNulty](https://www.linkedin.com/in/keith-mcnulty/)，麦肯锡公司**
 
-我经常发现自己向同事和其他程序员介绍一些我在R中使用的简单方法，这些方法真的对我完成任务有很大帮助。这些方法从微不足道的快捷键，到鲜为人知的函数，再到实用的小技巧。
+我经常发现自己向同事和其他程序员介绍一些我在 R 中使用的简单方法，这些方法真的对我完成任务有很大帮助。这些方法从微不足道的快捷键，到鲜为人知的函数，再到实用的小技巧。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
-因为R生态系统如此丰富且不断发展，人们常常会错过一些真正能帮助他们完成任务的东西。所以我经常从观众那里得到类似“我从未知道过这个！”的惊讶反应。
+因为 R 生态系统如此丰富且不断发展，人们常常会错过一些真正能帮助他们完成任务的东西。所以我经常从观众那里得到类似“我从未知道过这个！”的惊讶反应。
 
-这里有十个让我在R工作时生活更轻松的东西。如果你已经知道这些内容，抱歉浪费了你的阅读时间，并请考虑添加一个评论，分享你认为对其他读者有用的东西。
+这里有十个让我在 R 工作时生活更轻松的东西。如果你已经知道这些内容，抱歉浪费了你的阅读时间，并请考虑添加一个评论，分享你认为对其他读者有用的东西。
 
 ### 1\. `switch`函数
 
@@ -39,13 +39,13 @@ data <- read.csv(
 
 ```
 
-这在Shiny应用中特别有用，你可能希望根据一个或多个输入菜单选择来加载不同的数据集甚至环境文件。
+这在 Shiny 应用中特别有用，你可能希望根据一个或多个输入菜单选择来加载不同的数据集甚至环境文件。
 
-### 2\. RStudio快捷键
+### 2\. RStudio 快捷键
 
-这不仅仅是一个R的技巧，更关于RStudio IDE，但常用命令的快捷键非常有用，可以节省很多输入时间。我最喜欢的两个是Ctrl+Shift+M用于管道操作符`%>%`和Alt+-用于赋值操作符`<-`。如果你想查看这些绝妙的快捷键的完整列表，只需在RStudio中输入Alt+Shift+K。
+这不仅仅是一个 R 的技巧，更关于 RStudio IDE，但常用命令的快捷键非常有用，可以节省很多输入时间。我最喜欢的两个是 Ctrl+Shift+M 用于管道操作符`%>%`和 Alt+-用于赋值操作符`<-`。如果你想查看这些绝妙的快捷键的完整列表，只需在 RStudio 中输入 Alt+Shift+K。
 
-### 3\. flexdashboard包
+### 3\. flexdashboard 包
 
 如果你想快速创建一个简洁的 Shiny 仪表盘，`flexdashboard` 包含了你所需的一切。它提供了简单的 HTML 快捷方式，使得侧边栏的构建和显示的行列组织变得容易。它还有一个超级灵活的标题栏，你可以将应用程序组织成不同的页面，并插入图标和指向 Github 代码或电子邮件地址等的链接。作为一个在 `RMarkdown` 中运行的包，它也允许你将所有应用程序保存在一个 `Rmd` 文件中，而无需像 `shinydashboard` 那样将其拆分为单独的服务器和 UI 文件。我在需要创建一个简单的仪表盘原型版本时总是使用 `flexdashboard`，然后再将其移到更高级的设计中。我通常可以在一个小时内使用 `flexdashboard` 搭建好仪表盘。
 
@@ -164,7 +164,7 @@ params:
 
 现在你可以在文档中的 R 代码里写入这些变量，如 `params$animal_name` 和 `params$years_of_study`。如果你像平常一样编织文档，它将使用这些参数的默认值进行编织。然而，如果你在 RStudio 的 Knit 下拉菜单中选择参数编织（或使用 `knit_with_parameters()`），一个漂亮的菜单选项会出现，让你在编织文档前选择你的参数。太棒了！
 
-![figure-name](../Images/f38e3447a7255a86c388f21bc976d70c.png)使用参数进行编织
+![figure-name](img/f38e3447a7255a86c388f21bc976d70c.png)使用参数进行编织
 
 ### 8. revealjs
 
@@ -196,7 +196,7 @@ resource_files:
 
 这是一个示例页面。你可以在 [这里](https://github.com/keithmcnulty/hr_meetup_london/blob/master/presentation.Rmd) 找到代码，在 [这里](http://rpubs.com/keithmcnulty/hr_meetup_london) 找到演示文稿。
 
-![figure-name](../Images/a712d903c5655a3bf4e13ba3f5e3184a.png)使用 revealjs 进行轻松的在线演示
+![figure-name](img/a712d903c5655a3bf4e13ba3f5e3184a.png)使用 revealjs 进行轻松的在线演示
 
 ### 9. R Shiny 中的 HTML 标签（例如，在你的 Shiny 应用中播放音频）
 
@@ -206,11 +206,11 @@ resource_files:
 
 极其简单却又很棒，`praise` 包向用户提供赞美。虽然这看起来像是无用的自我赞赏，但它实际上在编写 R 包时非常有用，比如当某个过程成功完成时，你可以给予赞美或鼓励。你也可以把它放在复杂脚本的末尾，以便在脚本成功运行时获得额外的幸福感。
 
-![figure-name](../Images/d801e873d262298b6823aa52dca097ad.png)The praise package
+![figure-name](img/d801e873d262298b6823aa52dca097ad.png)The praise package
 
 *最初我是一名纯数学家，然后我成为了心理测量学家和数据科学家。我对将这些学科的严谨性应用于复杂的人际问题充满热情。我还是一个编码爱好者以及日本 RPG 的超级粉丝。可以在*[*LinkedIn*](https://www.linkedin.com/in/keith-mcnulty/)*或*[*Twitter*](https://twitter.com/dr_keithmcnulty)*上找到我。*
 
-![figure-name](../Images/d0dd8df4c324cc9b838ee47baf90f354.png)
+![figure-name](img/d0dd8df4c324cc9b838ee47baf90f354.png)
 
 **个人简介: [Keith McNulty](https://www.linkedin.com/in/keith-mcnulty/)** 是麦肯锡公司的数据科学家。
 
@@ -218,11 +218,11 @@ resource_files:
 
 **相关:**
 
-+   [数据清理的顶级 R 包](/2019/03/top-r-packages-data-cleaning.html)
++   数据清理的顶级 R 包
 
-+   [2018 年数据科学和 AI 的 7 大 R 包](/2019/01/vazquez-2018-top-7-r-packages.html)
++   2018 年数据科学和 AI 的 7 大 R 包
 
-+   [R 语言中的自动化网页抓取](/2018/12/automated-web-scraping-r.html)
++   R 语言中的自动化网页抓取
 
 ### 更多相关内容
 

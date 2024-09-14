@@ -1,10 +1,10 @@
 # 如何使用 Grounding DINO 进行自动图像标注
 
-> 原文：[https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
+> 原文：[`www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html`](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
 
-作为一名机器学习开发者，我个人认为图像标注是乏味、耗时且昂贵的任务。但幸运的是，随着计算机视觉领域的最新进展，特别是像**Grounding DINO**这样强大的零样本目标检测器的出现，我们实际上可以自动化大部分图像标注过程，适用于大多数使用案例。我们可以编写一个 Python 脚本，完成95%的工作。我们的唯一任务是在最后审核这些标注，并可能添加或删除一些边界框。
+作为一名机器学习开发者，我个人认为图像标注是乏味、耗时且昂贵的任务。但幸运的是，随着计算机视觉领域的最新进展，特别是像**Grounding DINO**这样强大的零样本目标检测器的出现，我们实际上可以自动化大部分图像标注过程，适用于大多数使用案例。我们可以编写一个 Python 脚本，完成 95%的工作。我们的唯一任务是在最后审核这些标注，并可能添加或删除一些边界框。
 
-![如何使用 Grounding DINO 进行自动图像标注](../Images/ffad343eeb8ea2486f378e11fd6c4dd0.png)
+![如何使用 Grounding DINO 进行自动图像标注](img/ffad343eeb8ea2486f378e11fd6c4dd0.png)
 
 图片来源于作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的工作
 
 * * *
 
@@ -150,7 +150,7 @@ annotated_frame = box_annotator.annotate(scene=image.copy(), detections=detectio
 svn.plot_image(annotated_frame, (16, 16))
 ```
 
-![XXXXX](../Images/df7c2c4d3992db0607ce63ed07c568bc.png)
+![XXXXX](img/df7c2c4d3992db0607ce63ed07c568bc.png)
 
 # 全数据集掩膜自动标注
 
@@ -229,7 +229,7 @@ svn.plot_images_grid(
    size=(2 * 4, len(annotations) * 4) 
 ```
 
-![XXXXX](../Images/f1fe739133f9fb0f92645477361e5364.png)
+![XXXXX](img/f1fe739133f9fb0f92645477361e5364.png)
 
 # 以 Pascal VOC XML 格式保存标签
 
@@ -255,21 +255,21 @@ svn.Dataset(
 
 感谢阅读 !!!
 
-这里是一个 [完整colab文件](https://colab.research.google.com/drive/17yOBr8kVfbJPfEl3pZVbfJBEqlqqsHtM?usp=sharing) 的链接。
+这里是一个 [完整 colab 文件](https://colab.research.google.com/drive/17yOBr8kVfbJPfEl3pZVbfJBEqlqqsHtM?usp=sharing) 的链接。
 
-参考资料：[https://arxiv.org/abs/2303.05499](https://arxiv.org/abs/2303.05499) 和 [https://github.com/IDEA-Research/GroundingDINO](https://github.com/IDEA-Research/GroundingDINO)
+参考资料：[`arxiv.org/abs/2303.05499`](https://arxiv.org/abs/2303.05499) 和 [`github.com/IDEA-Research/GroundingDINO`](https://github.com/IDEA-Research/GroundingDINO)
 
-**[Parthiban M](https://www.linkedin.com/in/parthibanma/)** 目前居住在印度钦奈，并在 [SeeWise](https://www.seewise.ai/) 工作。他是一名机器学习开发者，具有广泛的经验，能够通过使用计算机视觉、TensorFlow和深度学习来理解问题并提供解决方案。
+**[Parthiban M](https://www.linkedin.com/in/parthibanma/)** 目前居住在印度钦奈，并在 [SeeWise](https://www.seewise.ai/) 工作。他是一名机器学习开发者，具有广泛的经验，能够通过使用计算机视觉、TensorFlow 和深度学习来理解问题并提供解决方案。
 
 ### 更多相关内容
 
-+   [如何通过使用自动EDA工具在数据科学评估测试中取得优异成绩](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)
++   [如何通过使用自动 EDA 工具在数据科学评估测试中取得优异成绩](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)
 
 +   [机器学习的数据标注：市场概况、方法和工具](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)
 
-+   [使用Tensorflow训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
++   [使用 Tensorflow 训练图像分类模型的指南](https://www.kdnuggets.com/2022/12/guide-train-image-classification-model-tensorflow.html)
 
-+   [如何将RGB图像转换为灰度图像](https://www.kdnuggets.com/2019/12/convert-rgb-image-grayscale.html)
++   [如何将 RGB 图像转换为灰度图像](https://www.kdnuggets.com/2019/12/convert-rgb-image-grayscale.html)
 
 +   [图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 

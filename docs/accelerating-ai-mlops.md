@@ -1,12 +1,12 @@
 # 加速人工智能与 MLOps
 
-> 原文：[https://www.kdnuggets.com/2021/11/accelerating-ai-mlops.html](https://www.kdnuggets.com/2021/11/accelerating-ai-mlops.html)
+> 原文：[`www.kdnuggets.com/2021/11/accelerating-ai-mlops.html`](https://www.kdnuggets.com/2021/11/accelerating-ai-mlops.html)
 
-[评论](#comments)
+评论
 
 **作者：[Yochay Ettun](https://www.linkedin.com/in/yochayettun/)，cnvrg.io 的首席执行官兼联合创始人**。
 
-![](../Images/48afb2bff1fb2e3e30045c24f69e1f4c.png)
+![](img/48afb2bff1fb2e3e30045c24f69e1f4c.png)
 
 尽管人工智能（AI）拥有巨大的潜力，但它在大多数行业中仍未广泛应用。大多数 AI 项目陷入困境。埃森哲估计，[80% 到 85% 的公司](https://www.accenture.com/us-en/insights/artificial-intelligence/ai-investments) 的 AI 项目仍处于概念验证阶段，而近乎 [80% 的企业未能在整个组织中扩大 AI 部署](https://cnvrg.io/wp-content/uploads/2021/01/fundamentals-of-mlops.pdf)。
 
@@ -24,37 +24,37 @@
 
 这就是 MLOps（机器学习操作）可以发挥作用的地方，帮助数据科学家解决操作问题。MLOps 是一套用于数据科学家和运维专业人员之间协作与沟通的实践，以自动化大规模生产环境中机器学习和深度学习模型的部署。它使模型与业务需求对齐、实施标准且一致的开发流程、扩展和管理多样化的数据管道变得更容易。
 
-大多数公司正在使用MLOps来自动化机器学习管道、监控、生命周期管理和治理。通过使用MLOps，可以监控模型的性能下降或检测结果的漂移，表明模型需要使用更完整或更新的数据进行重新训练。MLOps还用于不断实验新方法，以利用新技术，如最新的语言处理和文本与图像分析。
+大多数公司正在使用 MLOps 来自动化机器学习管道、监控、生命周期管理和治理。通过使用 MLOps，可以监控模型的性能下降或检测结果的漂移，表明模型需要使用更完整或更新的数据进行重新训练。MLOps 还用于不断实验新方法，以利用新技术，如最新的语言处理和文本与图像分析。
 
-对MLOps解决方案的需求巨大。一个由社区主导的努力，收集了所有不同的工具，包括开源工具，结果列出了超过330种不同的MLOps工具。[Cognilytica](https://www.devopsonline.co.uk/mlops-and-automl-tools-to-increase-in-the-next-few-years/) 的报告预测，MLOps工具将呈指数增长，到2025年市场规模将达到1250亿美元，这将代表33%的年增长率。
+对 MLOps 解决方案的需求巨大。一个由社区主导的努力，收集了所有不同的工具，包括开源工具，结果列出了超过 330 种不同的 MLOps 工具。[Cognilytica](https://www.devopsonline.co.uk/mlops-and-automl-tools-to-increase-in-the-next-few-years/) 的报告预测，MLOps 工具将呈指数增长，到 2025 年市场规模将达到 1250 亿美元，这将代表 33%的年增长率。
 
-有大量证据表明，实施MLOps的公司更有可能成功。以下是两个例子。
+有大量证据表明，实施 MLOps 的公司更有可能成功。以下是两个例子。
 
-[ST Unitas](http://www.stunitas.com/front/main/en) 是一家领先的全球教育科技公司，同时也是《普林斯顿评论》的拥有者——美国顶尖的教育服务。该公司需要扩大其电子学习系统的部署，包括CONECTS，这是一个处理数学问题图像并提供个性化测试的平台，旨在提高三百万学生的分数。实施MLOps平台后，ST Unitas在短短几个月内将人工智能活动扩大了10倍，而无需招聘额外的工程师，提升了性能和处理量。
+[ST Unitas](http://www.stunitas.com/front/main/en) 是一家领先的全球教育科技公司，同时也是《普林斯顿评论》的拥有者——美国顶尖的教育服务。该公司需要扩大其电子学习系统的部署，包括 CONECTS，这是一个处理数学问题图像并提供个性化测试的平台，旨在提高三百万学生的分数。实施 MLOps 平台后，ST Unitas 在短短几个月内将人工智能活动扩大了 10 倍，而无需招聘额外的工程师，提升了性能和处理量。
 
-[Playtika](https://www.playtika.com/) 是一家领先的游戏娱乐公司，拥有超过1000万的日活跃用户（DAU），他们利用大量数据通过基于游戏内动作的用户体验（UX）定制来重塑游戏格局。Playtika的大规模机器学习（ML）处理每分钟收集了数百万用户和数千个特征，使用批处理和网络服务，但这些解决方案都无法足够快速地处理数据以实时生成预测。通过实施MLOps平台，他们将性能提高了40%，成功处理量增加了最高50%。现在，Playtika能够每天处理9TB的数据，为其科学家提供所需的数据，创建一个不断变化和自适应的游戏环境，继续推出收入最高的游戏。
+[Playtika](https://www.playtika.com/) 是一家领先的游戏娱乐公司，拥有超过 1000 万的日活跃用户（DAU），他们利用大量数据通过基于游戏内动作的用户体验（UX）定制来重塑游戏格局。Playtika 的大规模机器学习（ML）处理每分钟收集了数百万用户和数千个特征，使用批处理和网络服务，但这些解决方案都无法足够快速地处理数据以实时生成预测。通过实施 MLOps 平台，他们将性能提高了 40%，成功处理量增加了最高 50%。现在，Playtika 能够每天处理 9TB 的数据，为其科学家提供所需的数据，创建一个不断变化和自适应的游戏环境，继续推出收入最高的游戏。
 
-在新的在线经济下，公司们竞相利用人工智能洞察力，真正实现数据驱动。但即便机器学习模型是基于可靠的算法构建，并且在完整的清洁数据集上成功训练，如果模型不能在现有的IT基础设施上运行，人工智能永远无法发挥其真正潜力。提前审查和寻找解决操作问题的方案可以帮助人工智能项目成功完成。
+在新的在线经济下，公司们竞相利用人工智能洞察力，真正实现数据驱动。但即便机器学习模型是基于可靠的算法构建，并且在完整的清洁数据集上成功训练，如果模型不能在现有的 IT 基础设施上运行，人工智能永远无法发挥其真正潜力。提前审查和寻找解决操作问题的方案可以帮助人工智能项目成功完成。
 
-**简介：** [约查伊·埃顿](https://www.linkedin.com/in/yochayettun/)是一位经验丰富的技术领导者，他因在AI进步方面的成就以及建立cnvrg.io而入选2020年《福布斯》30位30岁以下精英榜。约查伊从7岁开始编写代码。他在以色列国防军（IDF）情报单位服役了4年，并在耶路撒冷希伯来大学（HUJI）获得计算机科学学士学位，期间创立了HUJI创新实验室。约查伊曾担任Webbing Labs的首席技术官，并为AI和机器学习公司担任顾问。在3年的咨询工作之后，约查伊与联合创始人利亚·科尔本决定创建一个工具，帮助数据科学家和公司通过cnvrg.io扩展他们的AI和机器学习。该公司继续帮助财富500强公司的数据科学团队管理、构建和自动化从研究到生产的机器学习。
+**简介：** [约查伊·埃顿](https://www.linkedin.com/in/yochayettun/)是一位经验丰富的技术领导者，他因在 AI 进步方面的成就以及建立 cnvrg.io 而入选 2020 年《福布斯》30 位 30 岁以下精英榜。约查伊从 7 岁开始编写代码。他在以色列国防军（IDF）情报单位服役了 4 年，并在耶路撒冷希伯来大学（HUJI）获得计算机科学学士学位，期间创立了 HUJI 创新实验室。约查伊曾担任 Webbing Labs 的首席技术官，并为 AI 和机器学习公司担任顾问。在 3 年的咨询工作之后，约查伊与联合创始人利亚·科尔本决定创建一个工具，帮助数据科学家和公司通过 cnvrg.io 扩展他们的 AI 和机器学习。该公司继续帮助财富 500 强公司的数据科学团队管理、构建和自动化从研究到生产的机器学习。
 
 **相关内容：**
 
 +   [机器学习模型开发与模型操作：原则与实践](https://www.kdnuggets.com/2021/10/machine-learning-model-development-operations-principles-practice.html)
 
-+   [通过ModelOps扩展和管理AI计划](https://www.kdnuggets.com/2021/09/scale-govern-ai-modelops.html)
++   [通过 ModelOps 扩展和管理 AI 计划](https://www.kdnuggets.com/2021/09/scale-govern-ai-modelops.html)
 
-+   [MLOps与ModelOps：差异及其重要性](https://www.kdnuggets.com/2021/09/mlops-modelops-difference.html)
++   [MLOps 与 ModelOps：差异及其重要性](https://www.kdnuggets.com/2021/09/mlops-modelops-difference.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
@@ -62,12 +62,12 @@
 
 +   [开源工具在加速数据科学进步中的作用](https://www.kdnuggets.com/2023/05/role-open-source-tools-accelerating-data-science-progress.html)
 
-+   [MLOps中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
++   [MLOps 中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
 
-+   [MLOps一团糟，但这在意料之中](https://www.kdnuggets.com/2022/03/mlops-mess-expected.html)
++   [MLOps 一团糟，但这在意料之中](https://www.kdnuggets.com/2022/03/mlops-mess-expected.html)
 
 +   [全面指南：MLOps](https://www.kdnuggets.com/2023/08/comprehensive-guide-mlops.html)
 
-+   [Ploomber与Kubeflow：简化MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
++   [Ploomber 与 Kubeflow：简化 MLOps](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
 
-+   [在纽约市Rev 3活动中与数据科学社区联系，第1…](https://www.kdnuggets.com/2022/03/domino-connect-data-science-community-nyc-mlops-conference.html)
++   [在纽约市 Rev 3 活动中与数据科学社区联系，第 1…](https://www.kdnuggets.com/2022/03/domino-connect-data-science-community-nyc-mlops-conference.html)

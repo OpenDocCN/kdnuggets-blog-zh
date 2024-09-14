@@ -1,8 +1,8 @@
 # 向量数据库在 AI 和 LLM 使用案例中的应用
 
-> 原文：[https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
+> 原文：[`www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases`](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 
-![向量数据库在 AI 和 LLM 使用案例中的应用](../Images/819ba66755bbc22a8231bc910f0f7852.png)
+![向量数据库在 AI 和 LLM 使用案例中的应用](img/819ba66755bbc22a8231bc910f0f7852.png)
 
 使用 [Ideogram.ai](http://ideogram.ai) 生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -62,7 +62,7 @@ pip install weaviate-client
 
 进入 WCS 平台后，选择创建集群并输入您的 Sandbox 名称。用户界面应如下图所示。
 
-![AI和LLM用例中的向量数据库](../Images/4f9a0cb53ba4630631309397f523f2d8.png)
+![AI 和 LLM 用例中的向量数据库](img/4f9a0cb53ba4630631309397f523f2d8.png)
 
 图片来源：作者
 
@@ -120,7 +120,7 @@ sent_to_vdb = data.to_dict(orient='records')
 book_collection.data.insert_many(sent_to_vdb)
 ```
 
-![AI和LLM用例中的向量数据库](../Images/405ed56bdc827843c29d85199652e61d.png)
+![AI 和 LLM 用例中的向量数据库](img/405ed56bdc827843c29d85199652e61d.png)
 
 图片来源：作者
 
@@ -136,9 +136,9 @@ book_collection.data.insert_many(sent_to_vdb)
 
 语义搜索是通过使用查询的含义来搜索数据，以检索相关结果，而不是仅依赖传统的基于关键字的搜索。
 
-这个过程涉及利用查询的LLM模型嵌入，并在我们的矢量数据库中进行嵌入相似性搜索。
+这个过程涉及利用查询的 LLM 模型嵌入，并在我们的矢量数据库中进行嵌入相似性搜索。
 
-让我们尝试使用Weaviate根据特定查询执行语义搜索。
+让我们尝试使用 Weaviate 根据特定查询执行语义搜索。
 
 ```py
 book_collection = client.collections.get("BookCollection")
@@ -150,7 +150,7 @@ response = book_collection.query.near_text(
   )
 ```
 
-在上述代码中，我们尝试使用Weaviate进行语义搜索，以查找与查询童年故事密切相关的前两本书。语义搜索使用我们之前设置的OpenAI嵌入模型。结果可以在下面看到。
+在上述代码中，我们尝试使用 Weaviate 进行语义搜索，以查找与查询童年故事密切相关的前两本书。语义搜索使用我们之前设置的 OpenAI 嵌入模型。结果可以在下面看到。
 
 ```py
 {'title': 'Act Your Age', 'description': 'A young girl is told over and over again to act her age.', 'intro': 'Colleen Archer has written for \nHighlights\n. In this short story, a young girl is told over and over again to act her age.\nAs you read, take notes on what Frances is doing when she is told to act her age. '}
@@ -162,9 +162,9 @@ response = book_collection.query.near_text(
 
 ## 生成搜索
 
-生成搜索可以定义为语义搜索的扩展应用。生成搜索，或称为检索增强生成（RAG），利用LLM提示与从矢量数据库中检索的数据进行语义搜索。
+生成搜索可以定义为语义搜索的扩展应用。生成搜索，或称为检索增强生成（RAG），利用 LLM 提示与从矢量数据库中检索的数据进行语义搜索。
 
-使用RAG，查询搜索的结果被处理到LLM中，因此我们可以以我们想要的形式获得结果，而不是原始数据。让我们尝试使用矢量数据库进行RAG的简单实现。
+使用 RAG，查询搜索的结果被处理到 LLM 中，因此我们可以以我们想要的形式获得结果，而不是原始数据。让我们尝试使用矢量数据库进行 RAG 的简单实现。
 
 ```py
 response = book_collection.generate.near_text(
@@ -182,13 +182,13 @@ print(response.generated)
 Excited to share two captivating short stories that explore themes of age and mistreatment. "Act Your Age" by Colleen Archer follows a young girl who is constantly told to act her age, while "The Anklet" by Neil Philip delves into the unkind treatment faced by a young woman from her older sisters. These thought-provoking tales will leave you reflecting on societal expectations and family dynamics. #ShortStories #Literature #BookRecommendations 📚
 ```
 
-如你所见，数据内容与之前相同，但现在已经用OpenAI LLM处理，以提供一个简短的LinkedIn帖子。这样，当我们希望从数据中获得特定形式的输出时，RAG非常有用。
+如你所见，数据内容与之前相同，但现在已经用 OpenAI LLM 处理，以提供一个简短的 LinkedIn 帖子。这样，当我们希望从数据中获得特定形式的输出时，RAG 非常有用。
 
-## RAG问答
+## RAG 问答
 
-在我们之前的示例中，我们使用查询获取了所需的数据，RAG将这些数据处理成预期的输出。
+在我们之前的示例中，我们使用查询获取了所需的数据，RAG 将这些数据处理成预期的输出。
 
-然而，我们可以将RAG功能转变为一个问答工具。我们可以通过将它们与LangChain框架结合来实现这一点。
+然而，我们可以将 RAG 功能转变为一个问答工具。我们可以通过将它们与 LangChain 框架结合来实现这一点。
 
 首先，让我们安装必要的包。
 
@@ -198,7 +198,7 @@ pip install langchain_community
 pip install langchain_openai 
 ```
 
-然后，让我们尝试导入所需的包并初始化变量，以使RAG问答工作。
+然后，让我们尝试导入所需的包并初始化变量，以使 RAG 问答工作。
 
 ```py
 from langchain.chains import RetrievalQA
@@ -216,18 +216,18 @@ client = weaviate.Client(
 )
 ```
 
-在上述代码中，我们设置了LLM用于文本生成、嵌入模型和Weaviate客户端连接。
+在上述代码中，我们设置了 LLM 用于文本生成、嵌入模型和 Weaviate 客户端连接。
 
-接下来，我们将Weaviate连接设置为矢量数据库。
+接下来，我们将 Weaviate 连接设置为矢量数据库。
 
 ```py
 weaviate_vectorstore = Weaviate(client=client, index_name='BookCollection', text_key='intro',by_text = False, embedding=embeddings)
 retriever = weaviate_vectorstore.as_retriever()
 ```
 
-在上述代码中，将Weaviate数据库BookCollection设置为RAG工具，以便在提示时搜索‘intro’特性。
+在上述代码中，将 Weaviate 数据库 BookCollection 设置为 RAG 工具，以便在提示时搜索‘intro’特性。
 
-然后，我们将使用下面的代码从LangChain创建问答链。
+然后，我们将使用下面的代码从 LangChain 创建问答链。
 
 ```py
 qa_chain = RetrievalQA.from_chain_type(
@@ -235,7 +235,7 @@ qa_chain = RetrievalQA.from_chain_type(
 )
 ```
 
-一切现在都准备好了。让我们尝试使用下面的代码示例进行RAG问答。
+一切现在都准备好了。让我们尝试使用下面的代码示例进行 RAG 问答。
 
 ```py
 response = qa_chain.invoke(
@@ -249,7 +249,7 @@ print(response)
 {'query': 'Who is the writer who write about love between two goldfish?', 'result': ' The writer is Grace Chua.'}
 ```
 
-使用矢量数据库作为存储所有文本数据的地方，我们可以实现RAG与LangChain一起执行问答。这有多棒？
+使用矢量数据库作为存储所有文本数据的地方，我们可以实现 RAG 与 LangChain 一起执行问答。这有多棒？
 
 # 结论
 

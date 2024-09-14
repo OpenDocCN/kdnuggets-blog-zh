@@ -1,22 +1,22 @@
-# 2023年成为数据科学家需要掌握的19项技能
+# 2023 年成为数据科学家需要掌握的 19 项技能
 
-> 原文：[https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html`](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
 
-![2023年成为数据科学家需要掌握的19项技能](../Images/aac6f92c77d71d8bec825dccfc82092e.png)
+![2023 年成为数据科学家需要掌握的 19 项技能](img/aac6f92c77d71d8bec825dccfc82092e.png)
 
 作者提供的图片
 
-时代在变化。如果你想在2023年成为数据科学家，有几个新的技能应该加入你的技能清单，以及你应该已经掌握的现有技能。
+时代在变化。如果你想在 2023 年成为数据科学家，有几个新的技能应该加入你的技能清单，以及你应该已经掌握的现有技能。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -24,11 +24,11 @@
 
 你需要了解如何清理、转换、统计分析、可视化、沟通和预测数据。不仅如此，新的技术（或最近才进入主流的技术）也可能会被纳入你的工作职责中。
 
-在这篇文章中，我将详细介绍2023年成为数据科学家需要掌握的19项技能。
+在这篇文章中，我将详细介绍 2023 年成为数据科学家需要掌握的 19 项技能。
 
 这里是最重要的十项技能概述。
 
-![2023年成为数据科学家需要掌握的19项技能](../Images/1d7edd7441d05ab86422c8669614efd2.png)
+![2023 年成为数据科学家需要掌握的 19 项技能](img/1d7edd7441d05ab86422c8669614efd2.png)
 
 作者提供的图片
 
@@ -36,7 +36,7 @@
 
 # 1. 数据清理和整理
 
-尽管数据科学家并非 [80%](https://blog.ldodds.com/2020/01/31/do-data-scientists-spend-80-of-their-time-cleaning-data-turns-out-no/#:~:text=variant%20of%20it%3A-,Data%20scientists%20spend%2080%25%20of%20their%20time,data%20rather%20than%20creating%20insights.&text=Data%20scientists%20only%20spend%2020,data%20quality%2C%20standards%2C%20access.) 的时间都在清理数据，但数据清理和整理仍然是2023年数据科学家需要掌握的最重要的技能之一。
+尽管数据科学家并非 [80%](https://blog.ldodds.com/2020/01/31/do-data-scientists-spend-80-of-their-time-cleaning-data-turns-out-no/#:~:text=variant%20of%20it%3A-,Data%20scientists%20spend%2080%25%20of%20their%20time,data%20rather%20than%20creating%20insights.&text=Data%20scientists%20only%20spend%2020,data%20quality%2C%20standards%2C%20access.) 的时间都在清理数据，但数据清理和整理仍然是 2023 年数据科学家需要掌握的最重要的技能之一。
 
 ## 数据清理和整理是什么？
 
@@ -78,7 +78,7 @@
 
 # 3\. 数据可视化
 
-![2023 年成为数据科学家所需了解的 19 种技能](../Images/0c6023b66118868d7c7ebecdbfb13af3.png)
+![2023 年成为数据科学家所需了解的 19 种技能](img/0c6023b66118868d7c7ebecdbfb13af3.png)
 
 图片由作者提供
 
@@ -116,25 +116,25 @@ Coursera [提供了很多](https://www.coursera.org/courses?query=database%20man
 
 # 5\. 大数据处理
 
-大数据是一个流行词汇，但它也是一个真实的概念——Oracle [定义](https://www.oracle.com/big-data/what-is-big-data/)它为“包含更大种类的数据，随着时间的推移增加的体量和更高的速度”，即拥有三个V的数据。
+大数据是一个流行词汇，但它也是一个真实的概念——Oracle [定义](https://www.oracle.com/big-data/what-is-big-data/)它为“包含更大种类的数据，随着时间的推移增加的体量和更高的速度”，即拥有三个 V 的数据。
 
 ## 什么是大数据处理？
 
-大数据处理是指使用像Hadoop和Spark这样的技术来处理、存储和分析大量数据的能力。
+大数据处理是指使用像 Hadoop 和 Spark 这样的技术来处理、存储和分析大量数据的能力。
 
-## 为什么在2023年成为数据科学家时这很重要？
+## 为什么在 2023 年成为数据科学家时这很重要？
 
-在2023年，处理大数据的能力对数据科学家至关重要。生成的数据量持续以指数级增长，能够有效地处理和分析这些数据对于做出明智的决策和获得有价值的见解至关重要。那些对大数据处理技术有深刻理解的数据科学家将能够轻松处理大数据集，并最大限度地利用其中的信息。
+在 2023 年，处理大数据的能力对数据科学家至关重要。生成的数据量持续以指数级增长，能够有效地处理和分析这些数据对于做出明智的决策和获得有价值的见解至关重要。那些对大数据处理技术有深刻理解的数据科学家将能够轻松处理大数据集，并最大限度地利用其中的信息。
 
 此外，由于其流行性，将“大数据”加到你的简历上永远不会有坏处。
 
 ## 你可以在哪里学习它？
 
-我喜欢Simplilearn的 [YouTube教程系列](https://www.youtube.com/watch?v=KCEPoPJ8sWw)。
+我喜欢 Simplilearn 的 [YouTube 教程系列](https://www.youtube.com/watch?v=KCEPoPJ8sWw)。
 
 # 6\. 云计算
 
-![2023年成为数据科学家需要了解的19项技能](../Images/c5d4feb51357e41515ab8714672a8ee3.png)
+![2023 年成为数据科学家需要了解的 19 项技能](img/c5d4feb51357e41515ab8714672a8ee3.png)
 
 作者图片
 
@@ -142,9 +142,9 @@ Coursera [提供了很多](https://www.coursera.org/courses?query=database%20man
 
 ## 什么是云计算？
 
-云计算是使用像AWS、Azure或Google Cloud这样的云基础设施和平台来存储和处理数据。这有点像拥有一个可以随时随地访问的虚拟储藏室。与将数据和计算资源存储在本地计算机或服务器上不同，云计算允许组织和数据科学家通过互联网访问这些资源。
+云计算是使用像 AWS、Azure 或 Google Cloud 这样的云基础设施和平台来存储和处理数据。这有点像拥有一个可以随时随地访问的虚拟储藏室。与将数据和计算资源存储在本地计算机或服务器上不同，云计算允许组织和数据科学家通过互联网访问这些资源。
 
-## 为什么在2023年成为数据科学家时这很重要？
+## 为什么在 2023 年成为数据科学家时这很重要？
 
 正如我一直强调的，作为数据科学家，你需要处理的数据量在不断增加。越来越多的公司将数据存储在云端，而不是在本地处理。具备以可扩展和高效的方式存储和处理这些数据的能力变得越来越重要。
 
@@ -192,7 +192,7 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 这有助于确保数据以一致且有效的方式存储和使用。
 
-## 为什么在2023年成为数据科学家时这很重要？
+## 为什么在 2023 年成为数据科学家时这很重要？
 
 作为数据科学家，你将负责确保数据以可访问的方式组织和结构化。数据建模和管理帮助你处理数据、分享数据、确保数据准确，并根据数据做出决策。
 
@@ -202,7 +202,7 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 # 9\. 数据挖掘
 
-![2023年成为数据科学家需要掌握的19项技能](../Images/ac44914c50425de3dffddf53a5704d1b.png)
+![2023 年成为数据科学家需要掌握的 19 项技能](img/ac44914c50425de3dffddf53a5704d1b.png)
 
 图片由作者提供
 
@@ -212,9 +212,9 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 数据挖掘是通过诸如聚类、分类和关联规则等技术从数据中提取有用信息的过程。你是在从数据的汪洋中筛选出有用的金矿。（也许“数据淘金”会是这个技能更好的名字！）
 
-## 为什么在2023年成为数据科学家时这很重要？
+## 为什么在 2023 年成为数据科学家时这很重要？
 
-想象一下：你是2023年的数据科学家。你有来自万千不同来源的数据。你使用什么技能来识别这些数据源中的模式？
+想象一下：你是 2023 年的数据科学家。你有来自万千不同来源的数据。你使用什么技能来识别这些数据源中的模式？
 
 这就是数据挖掘。
 
@@ -230,17 +230,17 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 深度学习是机器学习的一个方面，专注于创建可以通过多个层次的人工神经网络学习数据模式的算法。（人工神经网络，顺便提一下，是一种模拟人脑结构和功能的机器学习算法。）
 
-## 为什么在2023年成为数据科学家时这很重要？
+## 为什么在 2023 年成为数据科学家时这很重要？
 
-人工智能在2023年变得越来越复杂。了解AI和ML的基础知识是不够的——你还应该了解前沿技术，因为它们明天就不再是前沿了。深度学习几年前还是新鲜事物，而现在已经成为必需。
+人工智能在 2023 年变得越来越复杂。了解 AI 和 ML 的基础知识是不够的——你还应该了解前沿技术，因为它们明天就不再是前沿了。深度学习几年前还是新鲜事物，而现在已经成为必需。
 
 数据科学家将被期望在公司拥有大量数据时使用深度学习。它用于图像和视频处理或计算机视觉应用。
 
 ## 你可以在哪里学习这些技能？
 
-我喜欢[Simplilearn的教程](https://www.simplilearn.com/tutorials/deep-learning-tutorial/what-is-deep-learning)作为起点。
+我喜欢[Simplilearn 的教程](https://www.simplilearn.com/tutorials/deep-learning-tutorial/what-is-deep-learning)作为起点。
 
-# 成为2023年数据科学家还需要了解哪些其他技能？
+# 成为 2023 年数据科学家还需要了解哪些其他技能？
 
 有许多新兴的技术和方法是值得了解的。这些技术可能更加先进，如生成对抗网络，或更注重软技能，如数据讲述，或专门用于某个领域，如时间序列预测。我会在这里简要总结这些内容：
 
@@ -248,7 +248,7 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 +   **时间序列分析与预测**：研究时间数据并使用统计模型对未来事件进行预测。你可能会用这个技能进行销售或收入分析。
 
-+   **实验设计与A/B测试**：设计和进行受控实验以测试假设，并根据数据做出决策的过程。
++   **实验设计与 A/B 测试**：设计和进行受控实验以测试假设，并根据数据做出决策的过程。
 
 +   **数据讲述**：有效地将数据洞察和发现传达给非技术利益相关者的能力。越来越多的利益相关者对数据驱动决策背后的*原因*感兴趣，因此这至关重要。
 
@@ -262,7 +262,7 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 +   **可解释人工智能（XAI）**：一个专注于创建透明和可解释算法和模型的人工智能分支，以便人类能够理解其决策过程。同样，这有助于利益相关者理解发生了什么。
 
-如果你想在2023年成为数据科学家，这19项技能是绝对关键的。真正的好消息是，许多这些技能可以自学，而其他的你可以在像[数据或业务分析师](https://www.stratascratch.com/blog/data-analyst-vs-business-analyst-roles-and-career-paths?utm_source=blog&utm_medium=click&utm_campaign=kdn+19+data+scientist+skills)这样的初级职位中获得。
+如果你想在 2023 年成为数据科学家，这 19 项技能是绝对关键的。真正的好消息是，许多这些技能可以自学，而其他的你可以在像[数据或业务分析师](https://www.stratascratch.com/blog/data-analyst-vs-business-analyst-roles-and-career-paths?utm_source=blog&utm_medium=click&utm_campaign=kdn+19+data+scientist+skills)这样的初级职位中获得。
 
 学习的一些方法：
 
@@ -288,4 +288,4 @@ ETL 是一个涉及数据仓库的过程，ETL 的缩写是提取、转换和加
 
 +   [未来-proof 你的数据技能：2023 年每个数据科学家需要掌握的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应掌握的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应掌握的 Python 库…](https://www.kdnuggets.com/2022/n15.html)

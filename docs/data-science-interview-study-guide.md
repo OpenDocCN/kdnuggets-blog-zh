@@ -1,22 +1,22 @@
 # 数据科学面试学习指南
 
-> 原文：[https://www.kdnuggets.com/2020/01/data-science-interview-study-guide.html](https://www.kdnuggets.com/2020/01/data-science-interview-study-guide.html)
+> 原文：[`www.kdnuggets.com/2020/01/data-science-interview-study-guide.html`](https://www.kdnuggets.com/2020/01/data-science-interview-study-guide.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ben Rogojan](https://twitter.com/seattledataguy?lang=en)，SeattleDataGuy**。
 
-![](../Images/b77a3e4be3ade4b77d714853b7ab7962.png)
+![](img/b77a3e4be3ade4b77d714853b7ab7962.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,19 +26,19 @@
 
 我注意到公司进行的数据科学面试有几种类型。
 
-一些数据科学面试非常以产品和指标为导向。这些面试更多关注像你会使用什么指标来展示你应该改进产品的地方等产品问题。这些问题通常与SQL和一些Python问题搭配出现。
+一些数据科学面试非常以产品和指标为导向。这些面试更多关注像你会使用什么指标来展示你应该改进产品的地方等产品问题。这些问题通常与 SQL 和一些 Python 问题搭配出现。
 
 另一种数据科学面试往往混合了编程和机器学习。
 
 如果你不确定将面对哪种类型的面试，我们建议询问招聘人员。有些公司非常擅长保持面试的一致性，但即便如此，团队也可能会根据他们的需求有所不同。以下是我们注意到的一些公司数据科学面试的例子。
 
-**Airbnb —** 产品导向，指标诊断，指标创建，A/B测试，大量行为问题，以及家庭作业材料。
+**Airbnb —** 产品导向，指标诊断，指标创建，A/B 测试，大量行为问题，以及家庭作业材料。
 
-**Netflix —** 产品感觉问题，A/B测试，实验设计，指标设计
+**Netflix —** 产品感觉问题，A/B 测试，实验设计，指标设计
 
 **Microsoft —** 编程为主，二叉树遍历，SQL，机器学习
 
-**Expedia** — 产品、编程、SQL、产品感觉、关于SVM、回归和决策树的机器学习问题
+**Expedia** — 产品、编程、SQL、产品感觉、关于 SVM、回归和决策树的机器学习问题
 
 由于这种差异，我们创建了一个清单，以跟踪你学习过的主题领域以及你仍需覆盖的内容。
 
@@ -48,7 +48,7 @@
 
 ### 机器学习算法
 
-![](../Images/2ecdf0134aa083023e85d9e21950813d.png)
+![](img/2ecdf0134aa083023e85d9e21950813d.png)
 
 1.  [逻辑回归](https://www.youtube.com/watch?v=zAULhNrnuL4&t=26s) — 视频
 
@@ -70,7 +70,7 @@
 
 1.  [机器学习中的梯度提升算法的温和介绍](https://machinelearningmastery.com/gentle-introduction-gradient-boosting-algorithm-machine-learning/) — 博客
 
-1.  [梯度提升第 1 部分：回归主要思想](https://www.youtube.com/watch?v=3CC4N4z3GJc) — 视频
+1.  [梯度提升第一部分：回归主要思想](https://www.youtube.com/watch?v=3CC4N4z3GJc) — 视频
 
 1.  [K-Means 聚类 — 智能数学](https://www.youtube.com/watch?v=9991JlKnFmk) — 视频
 
@@ -86,7 +86,7 @@
 
 在大型科技公司，偶尔会收到概率或[统计学](https://www.theseattledataguy.com/statistics-data-scientist-review/)的问题。虽然这些问题不一定需要复杂的数学，如果你有一段时间没有考虑独立和依赖概率，那么复习基础公式是很有帮助的。
 
-![](../Images/5293cca32f51e6ae0b3ddeb7879e8961.png)
+![](img/5293cca32f51e6ae0b3ddeb7879e8961.png)
 
 **概率视频**
 
@@ -112,17 +112,17 @@
 
 这些问题大多数都与我们被问过的问题相似，或者直接取自于[glassdoor.com](http://glassdoor.com/)。
 
-1.  一个骰子被掷了两次。第一次掷出3和第二次掷出奇数的概率是多少？
+1.  一个骰子被掷了两次。第一次掷出 3 和第二次掷出奇数的概率是多少？
 
-1.  在任何15分钟的时间间隔内，有20%的概率能看到至少一颗流星。在一个小时的时间段内看到至少一颗流星的概率是多少？
+1.  在任何 15 分钟的时间间隔内，有 20%的概率能看到至少一颗流星。在一个小时的时间段内看到至少一颗流星的概率是多少？
 
 1.  爱丽丝有两个孩子，其中一个是女孩。另一个孩子也是女孩的概率是多少？你可以假设世界上男性和女性的数量相等。
 
-1.  你可以将12个人分成3个4人团队的方式有多少种？
+1.  你可以将 12 个人分成 3 个 4 人团队的方式有多少种？
 
 **统计学预测**
 
-1.  [数据科学概率统计14](https://interview-questions-247.appspot.com/data-science-probability-statistics-14)
+1.  [数据科学概率统计 14](https://interview-questions-247.appspot.com/data-science-probability-statistics-14)
 
 **统计学概念**
 
@@ -132,27 +132,27 @@
 
 1.  [混淆矩阵](https://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/)
 
-1.  [ROC曲线](https://www.dataschool.io/roc-curves-and-auc-explained/)
+1.  [ROC 曲线](https://www.dataschool.io/roc-curves-and-auc-explained/)
 
 1.  [正态分布](https://www.youtube.com/watch?v=iYiOVISWXS4)
 
-1.  [P值](https://www.khanacademy.org/math/ap-statistics/tests-significance-ap/idea-significance-tests/v/p-values-and-significance-tests)
+1.  [P 值](https://www.khanacademy.org/math/ap-statistics/tests-significance-ap/idea-significance-tests/v/p-values-and-significance-tests)
 
 1.  [Pearson](https://www.spss-tutorials.com/pearson-correlation-coefficient/)[Spearman](http://www.statstutor.ac.uk/resources/uploaded/spearmans.pdf)
 
-1.  [正态分布问题：z分数（来自 ck12.org）](https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data/z-scores/v/ck12-org-normal-distribution-problems-z-score?modal=1)
+1.  [正态分布问题：z 分数（来自 ck12.org）](https://www.khanacademy.org/math/statistics-probability/modeling-distributions-of-data/z-scores/v/ck12-org-normal-distribution-problems-z-score?modal=1)
 
 1.  [连续概率分布](https://www.youtube.com/watch?v=OWSOhpS00_s)
 
 1.  [标准化正态分布随机变量（快速版）](https://www.youtube.com/watch?v=BN-2XOMnoCs&list=PLvxOuBpazmsPDZGwqhhjE3KkLWnTD34R0&index=6)
 
-1.  [统计学101：简单线性回归，基础知识](https://www.youtube.com/watch?v=ZkjP5RJLQF4)
+1.  [统计学 101：简单线性回归，基础知识](https://www.youtube.com/watch?v=ZkjP5RJLQF4)
 
-1.  [统计学101：线性回归、异常值和有影响的观察](https://www.youtube.com/watch?v=fJSXS4oVf88)
+1.  [统计学 101：线性回归、异常值和有影响的观察](https://www.youtube.com/watch?v=fJSXS4oVf88)
 
-1.  [统计学101：ANOVA，视觉导览](https://www.youtube.com/watch?v=0Vj2V2qRU10)
+1.  [统计学 101：ANOVA，视觉导览](https://www.youtube.com/watch?v=0Vj2V2qRU10)
 
-1.  [统计学101：多重回归，基础知识](https://www.youtube.com/watch?v=dQNpSa-bq4M)
+1.  [统计学 101：多重回归，基础知识](https://www.youtube.com/watch?v=dQNpSa-bq4M)
 
 1.  [统计学：总体方差 | 概率与统计 | Khan Academy](https://www.youtube.com/watch?v=6JFzI1DDyyk&list=PL1328115D3D8A2566&index=3)
 
@@ -166,7 +166,7 @@
 
 1.  [误差范围 2 | 推论统计 | 概率与统计 | 可汗学院](https://www.youtube.com/watch?v=YclQE2XtaLw&list=PL1328115D3D8A2566&index=34)
 
-1.  [假设检验与p值 | 推论统计 | 概率与统计 | 可汗学院](https://www.youtube.com/watch?v=-FtlH4svqx4&list=PL1328115D3D8A2566&index=37)
+1.  [假设检验与 p 值 | 推论统计 | 概率与统计 | 可汗学院](https://www.youtube.com/watch?v=-FtlH4svqx4&list=PL1328115D3D8A2566&index=37)
 
 1.  [单尾检验与双尾检验 | 推论统计 | 概率与统计 | 可汗学院](https://www.youtube.com/watch?v=mvye6X_0upA&list=PL1328115D3D8A2566&index=38)
 
@@ -182,7 +182,7 @@
 
 ### 产品与实验设计
 
-![](../Images/f1d390e867991ebadae3862f4cd54df8.png)
+![](img/f1d390e867991ebadae3862f4cd54df8.png)
 
 产品意识是数据科学家必备的重要技能。了解在新产品上应该测量什么及其原因，有助于确定产品是否表现良好。有趣的是，有时候某些指标朝着你期望的方向发展，可能并不总是好事。人们在你的网站上花费更多时间，可能是因为网页加载时间更长或其他类似的用户面临问题。这就是为什么指标很棘手，以及你测量什么是重要的。
 
@@ -192,17 +192,17 @@
 
 1.  [数据科学家的工具箱：实验设计](https://www.youtube.com/watch?v=vSXOJnGNtM4) - 视频
 
-1.  [A/B测试指南](https://conversionxl.com/AB-Testing-Guide-ConversionXL.pdf)
+1.  [A/B 测试指南](https://conversionxl.com/AB-Testing-Guide-ConversionXL.pdf)
 
 1.  [多变量测试](https://www.youtube.com/watch?v=dYdTqoamI3Q)
 
-1.  [6种指标主题](https://www.productschool.com/blog/product-management-2/interview/answering-metrics-interview-question-product-management/)
+1.  [6 种指标主题](https://www.productschool.com/blog/product-management-2/interview/answering-metrics-interview-question-product-management/)
 
 **产品与指标问题**
 
 1.  一个重要指标下降，你会如何深入分析原因？
 
-1.  你会使用什么指标来量化YouTube广告的成功（这也可以扩展到其他产品，如Snapchat滤镜、Twitter直播、Fortnite新功能等）
+1.  你会使用什么指标来量化 YouTube 广告的成功（这也可以扩展到其他产品，如 Snapchat 滤镜、Twitter 直播、Fortnite 新功能等）
 
 1.  你如何衡量一个产品/产品功能的成功或失败
 
@@ -230,7 +230,7 @@
 
 ### 算法与数据结构
 
-![](../Images/9e4c27a8d66b1e2f4e7c4ffdf0b891be.png)
+![](img/9e4c27a8d66b1e2f4e7c4ffdf0b891be.png)
 
 **视频前问题**
 
@@ -348,7 +348,7 @@
 
 1.  [分析函数高级实现](https://www.youtube.com/watch?v=G3kYPzLWtpo&t=4s)
 
-1.  [分析函数高级实现 第2部分](https://www.youtube.com/watch?v=XecU6Ieyu-4&t=54s)
+1.  [分析函数高级实现 第二部分](https://www.youtube.com/watch?v=XecU6Ieyu-4&t=54s)
 
 1.  [Wise Owl SQL 视频](https://www.youtube.com/watch?v=2-1XQHAgDsM&list=PL6EDEB03D20332309)
 
@@ -366,7 +366,7 @@
 
 1.  [交换座位](https://leetcode.com/problems/exchange-seats/)
 
-1.  [SQL 面试问题：3个技术筛选练习（针对数据分析师）](https://data36.com/sql-interview-questions-tech-screening-data-analysts/)
+1.  [SQL 面试问题：3 个技术筛选练习（针对数据分析师）](https://data36.com/sql-interview-questions-tech-screening-data-analysts/)
 
 ### 结论
 
@@ -376,7 +376,7 @@
 
 [原文](https://medium.com/better-programming/the-data-science-interview-study-guide-c3824cb76c2e)。经许可转载。
 
-**简介：**[Ben Rogojan](https://twitter.com/seattledataguy?lang=en)是位于西雅图的数据科学家兼工程师，拥有丰富的经验，设计了ETL管道、数据库、网站以及其他初创公司和成熟公司的软件产品。Ben 目前在一家健康分析公司担任数据工程师。
+**简介：**[Ben Rogojan](https://twitter.com/seattledataguy?lang=en)是位于西雅图的数据科学家兼工程师，拥有丰富的经验，设计了 ETL 管道、数据库、网站以及其他初创公司和成熟公司的软件产品。Ben 目前在一家健康分析公司担任数据工程师。
 
 **相关：**
 
@@ -384,17 +384,17 @@
 
 +   [数据科学家面试揭秘](https://www.kdnuggets.com/2018/08/data-scientist-interviews-demystified.html)
 
-+   [7个步骤打造成功的数据科学简历](https://www.kdnuggets.com/2020/01/7-steps-job-winning-data-science-resume.html)
++   [7 个步骤打造成功的数据科学简历](https://www.kdnuggets.com/2020/01/7-steps-job-winning-data-science-resume.html)
 
 ### 更多相关内容
 
 +   [超级学习指南：免费的算法和数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [完整的数据科学学习路线图](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
 +   [完整的数据工程学习路线图](https://www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html)
 

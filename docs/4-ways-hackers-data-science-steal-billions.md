@@ -1,22 +1,22 @@
 # 黑客如何利用数据科学盗取数十亿
 
-> 原文：[https://www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html](https://www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html)
+> 原文：[`www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html`](https://www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html)
 
-![黑客如何利用数据科学盗取数十亿](../Images/bfa878720c0d688a8ff13704d83a1d36.png)
+![黑客如何利用数据科学盗取数十亿](img/bfa878720c0d688a8ff13704d83a1d36.png)
 
 [技术照片由 pressfoto 创建 - www.freepik.com](https://www.freepik.com/photos/technology)
 
-你所认识的大多数数据科学家都站在数据科学的“好”一边。他们在顶尖科技公司工作。他们利用他们的能力做好事，构建产品，发现趋势，甚至积极工作以阻止黑客。例如，一个新的数据科学领域叫做[Phishitycs](/2020/03/phishytics-machine-learning-detecting-phishing-websites.html)，利用机器学习来阻止钓鱼攻击。
+你所认识的大多数数据科学家都站在数据科学的“好”一边。他们在顶尖科技公司工作。他们利用他们的能力做好事，构建产品，发现趋势，甚至积极工作以阻止黑客。例如，一个新的数据科学领域叫做 Phishitycs，利用机器学习来阻止钓鱼攻击。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 最常见且最成功的黑客类型之一是模仿公司中的其他人，以获得对电子邮件、安全服务器等的访问。这种黑客包括欺骗、钓鱼、针对性钓鱼和冒充。
 
-黑客们已经开始使用机器学习来更好地模仿人类的言语和文本模式。正如机器学习可以用来[帮助自然语言处理进步](/2019/05/guide-natural-language-processing-nlp.html)一样，这些技能也可以用来让黑客的声音听起来更逼真。
+黑客们已经开始使用机器学习来更好地模仿人类的言语和文本模式。正如机器学习可以用来帮助自然语言处理进步一样，这些技能也可以用来让黑客的声音听起来更逼真。
 
 黑客可能会利用机器学习分析你的首席技术官（CTO）的说话和写作风格，通过社交网络进行分析。然后她可能成功冒充你的 CTO，诱使你点击恶意链接。
 
@@ -58,7 +58,7 @@ DoS（拒绝服务）或 DDoS（分布式拒绝服务）攻击是近年来新闻
 
 最大的一次攻击发生在 [2017 年的 Google](https://cloud.google.com/blog/products/identity-security/identifying-and-protecting-against-the-largest-ddos-attacks)——尽管他们直到 2020 年才披露了这次攻击。
 
-虽然DoS攻击可以使用单一设备，但更强大的DDoS攻击依赖于一个“僵尸”网络，这些设备被感染了特定的恶意软件，允许黑客远程控制它们的活动。这些DDoS攻击依赖算法来协调这些攻击。随着物联网的普及，黑客在感染几乎任何设备方面变得更加高效，从公司服务器到支持Wi-Fi的冰箱。
+虽然 DoS 攻击可以使用单一设备，但更强大的 DDoS 攻击依赖于一个“僵尸”网络，这些设备被感染了特定的恶意软件，允许黑客远程控制它们的活动。这些 DDoS 攻击依赖算法来协调这些攻击。随着物联网的普及，黑客在感染几乎任何设备方面变得更加高效，从公司服务器到支持 Wi-Fi 的冰箱。
 
 ## 公司如何克服这些问题？
 
@@ -86,12 +86,12 @@ DoS（拒绝服务）或 DDoS（分布式拒绝服务）攻击是近年来新闻
 
 +   [利用 ChatGPT 生成被动收入的 4 种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
 
-+   [使用稳定扩散生成超现实面孔的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
++   [使用稳定扩散生成超现实面孔的 3 种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
 
-+   [使用GPT-4o构建Python项目的3种方法](https://www.kdnuggets.com/3-ways-of-building-python-projects-using-gpt-4o)
++   [使用 GPT-4o 构建 Python 项目的 3 种方法](https://www.kdnuggets.com/3-ways-of-building-python-projects-using-gpt-4o)
 
-+   [理解贝叶斯定理将提升数据科学能力的3种方式](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
++   [理解贝叶斯定理将提升数据科学能力的 3 种方式](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
 
-+   [进入数据科学领域的3种可能途径](https://www.kdnuggets.com/2022/03/3-possible-ways-get-data-science.html)
++   [进入数据科学领域的 3 种可能途径](https://www.kdnuggets.com/2022/03/3-possible-ways-get-data-science.html)
 
-+   [利用数据科学将收入翻倍的5种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
++   [利用数据科学将收入翻倍的 5 种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)

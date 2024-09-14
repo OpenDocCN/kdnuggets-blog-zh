@@ -1,10 +1,10 @@
-# 《软件错误与权衡》：托马什·莱莱克和StackOverflow大师乔恩·斯基特的新书
+# 《软件错误与权衡》：托马什·莱莱克和 StackOverflow 大师乔恩·斯基特的新书
 
-> 原文：[https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
+> 原文：[`www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html`](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
 
 赞助文章。
 
-[![图片](../Images/42b216cdb948dd2273b08793ed85066e.png)](http://mng.bz/y49G)
+![图片](http://mng.bz/y49G)
 
 性能与简洁的权衡。交付速度与重复的权衡。灵活性与可维护性的权衡——软件工程中的每个决策都涉及权衡。
 
@@ -16,25 +16,25 @@
 > 
 > —内尔森·冈萨雷斯
 
-你会发现代码重复在分布式架构中并不总是坏事，如何在API灵活性和减少维护量之间取得平衡，甚至如何决定何时将代码更新到新的趋势和范式。发现如何根据80/20帕累托原则有效地缩小优化范围，并确保分布式系统的一致性。你将能够将作者的宝贵经验应用到自己的项目中，预防错误并采取更深思熟虑的决策方法。
+你会发现代码重复在分布式架构中并不总是坏事，如何在 API 灵活性和减少维护量之间取得平衡，甚至如何决定何时将代码更新到新的趋势和范式。发现如何根据 80/20 帕累托原则有效地缩小优化范围，并确保分布式系统的一致性。你将能够将作者的宝贵经验应用到自己的项目中，预防错误并采取更深思熟虑的决策方法。
 
-《软件错误与权衡》[在其出版商Manning处可提前访问](https://www.manning.com/books/software-mistakes-and-tradeoffs)。现在预购并立即开始阅读，作为Manning早期访问计划（MEAP）的部分内容。
+《软件错误与权衡》[在其出版商 Manning 处可提前访问](https://www.manning.com/books/software-mistakes-and-tradeoffs)。现在预购并立即开始阅读，作为 Manning 早期访问计划（MEAP）的部分内容。
 
-**查看这些额外的Manning促销码，专为KDnuggets读者准备：**
+**查看这些额外的 Manning 促销码，专为 KDnuggets 读者准备：**
 
 **[《软件错误与权衡》的一个免费电子书代码：softkd-AEC0](http://mng.bz/y49G)**
 
-[我们35%的折扣码（适用于所有格式的所有产品）：nlkdnuggets21](http://mng.bz/nY2g)
+[我们 35%的折扣码（适用于所有格式的所有产品）：nlkdnuggets21](http://mng.bz/nY2g)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

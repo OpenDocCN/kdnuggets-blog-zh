@@ -1,8 +1,8 @@
-# 用SQL分析多样性与包容性
+# 用 SQL 分析多样性与包容性
 
-> 原文：[https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)
+> 原文：[`www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html`](https://www.kdnuggets.com/2022/11/analyzing-diversity-inclusion-sql.html)
 
-![用SQL分析多样性与包容性](../Images/e1f05e5d564df44e964521d749145439.png)
+![用 SQL 分析多样性与包容性](img/e1f05e5d564df44e964521d749145439.png)
 
 图片来源：编辑
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-在过去3-5年中，与多样性、公平性和包容性相关的职位急剧增加已得到充分记录。DEI分析师可能会花时间追踪、分析并回答诸如以下问题，
+在过去 3-5 年中，与多样性、公平性和包容性相关的职位急剧增加已得到充分记录。DEI 分析师可能会花时间追踪、分析并回答诸如以下问题，
 
 +   薪资在性别之间有何差异？
 
@@ -28,7 +28,7 @@
 
 +   哪些职位和头衔最不具多样性？
 
-虽然DEI分析师关注的问答类型与业务分析师不同，但他们仍然使用相同的技术技能和方法。
+虽然 DEI 分析师关注的问答类型与业务分析师不同，但他们仍然使用相同的技术技能和方法。
 
 受保护的类别通常是**分类**的：性别、种族、民族和年龄（通常年龄被分为几个类别）
 
@@ -42,7 +42,7 @@
 
 +   最大值
 
-当你分析**分类**变量与**数值**变量的组合时，SQL使其变得相当简单：
+当你分析**分类**变量与**数值**变量的组合时，SQL 使其变得相当简单：
 
 ```py
 SELECT 
@@ -88,9 +88,9 @@ GROUP BY
 
 +   销售部门有**99**名男性员工和**1**名女性员工
 
-+   IT部门有**51**名男性员工和**49**名女性员工。
++   IT 部门有**51**名男性员工和**49**名女性员工。
 
-我们肯定会认为后者更加多样化，但如何使用SQL快速得知这一点呢？
+我们肯定会认为后者更加多样化，但如何使用 SQL 快速得知这一点呢？
 
 我在这里教你一种被低估的聚合函数，叫做**熵**，它将帮助我们准确量化每个部门的多样性。
 
@@ -146,17 +146,17 @@ ORDER BY 2 DESC
 
 因此，Entropy 在 50/50 时达到最大值 1。以下是 Entropy 随着弹珠蓝色百分比变化的常见图示：
 
-![使用 SQL 分析多样性与包容性](../Images/4c41822a4863f67541e052d634ae1b0b.png)
+![使用 SQL 分析多样性与包容性](img/4c41822a4863f67541e052d634ae1b0b.png)
 
-版权： [https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png](https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png)
+版权： [`commons.wikimedia.org/wiki/File:Binary_entropy_plot.png`](https://commons.wikimedia.org/wiki/File:Binary_entropy_plot.png)
 
 要计算 Entropy，我们需要计算每种颜色的百分比，并记住公式：
 
-![使用 SQL 分析多样性与包容性](../Images/843de5c849e8054a964644e5d0983fae.png)
+![使用 SQL 分析多样性与包容性](img/843de5c849e8054a964644e5d0983fae.png)
 
 然后，对于一个 70% 是蓝色弹珠的袋子，我们构造公式如下：
 
-![使用 SQL 分析多样性与包容性](../Images/58698d3d7717a45869408e32423b1245.png)
+![使用 SQL 分析多样性与包容性](img/58698d3d7717a45869408e32423b1245.png)
 
 当你将其扩展到超过 2 种选择时，你只需将对数的底数更改为匹配可能性数量即可。
 
@@ -168,17 +168,17 @@ ORDER BY 2 DESC
 
 我们可以通过将其绘制在图表上来直观地确认这一点。
 
-![用SQL分析多样性和包容性](../Images/29c45e1f0eda26a2e616d2346e89b202.png)
+![用 SQL 分析多样性和包容性](img/29c45e1f0eda26a2e616d2346e89b202.png)
 
 # 结论
 
-熵是一种描述多样性的有用方法。它允许你通过将这些类别与受保护的类别（如种族或性别）结合，来对部门、职位或公司进行排序或排名。尽管这种函数在大多数RDMBS中并不存在，我们可以轻松构建SQL来计算它。我认为，对于从事多样性、公平性和包容性工作的人来说，在审视其组织的劳动力时，使用这些计算是很重要的。此外，作为在数据领域工作了大部分职业生涯的人，看到SQL的力量在所有数据驱动的团队中都有效，从传统的数据分析师到DEI分析师，真的很棒。
+熵是一种描述多样性的有用方法。它允许你通过将这些类别与受保护的类别（如种族或性别）结合，来对部门、职位或公司进行排序或排名。尽管这种函数在大多数 RDMBS 中并不存在，我们可以轻松构建 SQL 来计算它。我认为，对于从事多样性、公平性和包容性工作的人来说，在审视其组织的劳动力时，使用这些计算是很重要的。此外，作为在数据领域工作了大部分职业生涯的人，看到 SQL 的力量在所有数据驱动的团队中都有效，从传统的数据分析师到 DEI 分析师，真的很棒。
 
-**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee)) 负责Rasgo的面向客户的数据科学工作，自2008年起从事数据和分析行业。Josh在Comcast工作了10年，期间建立了数据科学团队，并且是内部开发的Comcast特性库的关键负责人之一——这是市场上首批特性库之一。在离开Comcast后，Josh在DataRobot领导了面向客户的数据科学团队。在闲暇时间，Josh会对一些有趣的主题进行复杂分析，比如棒球、F1赛车、住房市场预测等。
+**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee)) 负责 Rasgo 的面向客户的数据科学工作，自 2008 年起从事数据和分析行业。Josh 在 Comcast 工作了 10 年，期间建立了数据科学团队，并且是内部开发的 Comcast 特性库的关键负责人之一——这是市场上首批特性库之一。在离开 Comcast 后，Josh 在 DataRobot 领导了面向客户的数据科学团队。在闲暇时间，Josh 会对一些有趣的主题进行复杂分析，比如棒球、F1 赛车、住房市场预测等。
 
 ### 更多相关内容
 
-+   [用微调的SciBERT NER模型和Neo4j分析科学文章](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
++   [用微调的 SciBERT NER 模型和 Neo4j 分析科学文章](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
 
 +   [利用智能分析未来成功的概率…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)
 
@@ -186,6 +186,6 @@ ORDER BY 2 DESC
 
 +   [数据分析：四种有效的数据分析方法及其应用…](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)
 
-+   [用SQL查询你的Pandas数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
++   [用 SQL 查询你的 Pandas 数据框](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
 
-+   [SQL数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)

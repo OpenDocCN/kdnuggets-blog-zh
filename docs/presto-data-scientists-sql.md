@@ -1,8 +1,8 @@
 # Presto 为数据科学家 – SQL 适用于任何数据
 
-> 原文：[https://www.kdnuggets.com/2018/04/presto-data-scientists-sql.html](https://www.kdnuggets.com/2018/04/presto-data-scientists-sql.html)
+> 原文：[`www.kdnuggets.com/2018/04/presto-data-scientists-sql.html`](https://www.kdnuggets.com/2018/04/presto-data-scientists-sql.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Kamil Bajda-Pawlikowski](https://www.starburstdata.com/leadership/)，Starburst Data 的 CTO 提供**。
 
@@ -14,7 +14,7 @@ Presto 被从零开始设计和构建，目的是成为一个快速的 SQL 查�
 
 例如，想象一下将来自 RDBMS 的客户数据与 Kafka 中的最新事件关联，并回到 Hadoop 或 S3 查看这些数据如何与过去的趋势相关。这确实是“SQL-on-Anything”。
 
-![Presto 为数据科学家](../Images/ab7358b013de47eb1329fd135863a543.png)
+![Presto 为数据科学家](img/ab7358b013de47eb1329fd135863a543.png)
 
 *Presto 将许多最流行的大数据源与各种分析、商业智能、仪表板和可视化应用程序连接起来。*
 
@@ -42,11 +42,11 @@ Presto 被从零开始设计和构建，目的是成为一个快速的 SQL 查�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
 
 * * *
 

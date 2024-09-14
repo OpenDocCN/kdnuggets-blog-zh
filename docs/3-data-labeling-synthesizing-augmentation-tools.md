@@ -1,8 +1,8 @@
 # 3 个数据获取、注释和增强工具
 
-> 原文：[https://www.kdnuggets.com/2021/08/3-data-labeling-synthesizing-augmentation-tools.html](https://www.kdnuggets.com/2021/08/3-data-labeling-synthesizing-augmentation-tools.html)
+> 原文：[`www.kdnuggets.com/2021/08/3-data-labeling-synthesizing-augmentation-tools.html`](https://www.kdnuggets.com/2021/08/3-data-labeling-synthesizing-augmentation-tools.html)
 
-[评论](#comments)
+评论
 
 快速获取用于测试算法和构建模型的数据集已成为现代数据科学家和机器学习工程师的重要技能。将一个半完整的数据集转变为完全注释、充实了额外增强数据并准备好进行模型构建的完全数据集同样重要。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您在 IT 领域的组织
 
 * * *
 
@@ -28,7 +28,7 @@
 
 将您的需求输入命令行中或从 Python 脚本中调用，Google Images Download 将... 下载 Google 图像。阅读文档 [这里](https://google-images-download.readthedocs.io/en/latest/index.html) 进行优秀的抓取，但请记住在 Google 使用条款和版权法的范围内进行。
 
-![Image](../Images/9f071a86f804212100be53e69e7116c4.png)
+![Image](img/9f071a86f804212100be53e69e7116c4.png)
 
 ### 2\. LabelImg
 
@@ -38,7 +38,7 @@
 
 使用 Python 和 Qt 构建的 LabelImg 是一个独立的应用程序，具有图形用户界面，旨在对图像进行注释。
 
-![LabelImg](../Images/3e663d2eb5a66f52d8452a619ecb9e85.png)
+![LabelImg](img/3e663d2eb5a66f52d8452a619ecb9e85.png)
 
 > 注释以 XML 文件形式保存，采用 PASCAL VOC 格式，这种格式被 [ImageNet](http://www.image-net.org/) 使用。此外，它还支持 YOLO 和 CreateML 格式。
 
@@ -62,17 +62,17 @@ TextAttack 提供了多种[内置配方](https://github.com/QData/TextAttack#aug
 > +   
 > +   **仅使用单个命令训练 NLP 模型**（所有下载已包含！）
 
-![TextAttack](../Images/f507b72590781ab46bf5d0104f448f77.png)
+![TextAttack](img/f507b72590781ab46bf5d0104f448f77.png)
 
 要开始扩充你的 NLP 数据集，或利用 TextAttack 的其他功能，请查看完整文档，你可以在[这里](https://textattack.readthedocs.io/)找到。
 
 **相关**：
 
-+   [敏捷数据标注：它是什么以及为何需要它](/2021/08/agile-data-labeling.html)
++   敏捷数据标注：它是什么以及为何需要它
 
-+   [热门深度学习 GitHub 仓库](/2019/02/trending-top-deep-learning-github-repositories.html)
++   热门深度学习 GitHub 仓库
 
-+   [GitHub Copilot 开源替代方案](/2021/07/github-copilot-open-source-alternatives-code-generation.html)
++   GitHub Copilot 开源替代方案
 
 ### 更多相关话题
 

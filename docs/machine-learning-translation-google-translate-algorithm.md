@@ -1,10 +1,10 @@
 # 机器学习翻译与谷歌翻译算法
 
-> 原文：[https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html](https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html)
+> 原文：[`www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html`](https://www.kdnuggets.com/2017/09/machine-learning-translation-google-translate-algorithm.html)
 
 **作者：达尼尔·科尔布特，[Statsbot](https://statsbot.co/)。**
 
-![](../Images/ad62fc7c2ba75d845ae4835dea932f43.png)
+![](img/ad62fc7c2ba75d845ae4835dea932f43.png)
 
 [谷歌机器翻译](https://research.googleblog.com/2016/11/zero-shot-translation-with-googles.html)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -42,35 +42,35 @@
 
 这时，长短期记忆网络（LSTMs）发挥作用，帮助我们处理长度无法先验确定的序列。
 
-LSTMs是一种特殊的递归神经网络（RNN），能够学习长期依赖关系。所有RNN看起来像是一个重复模块的链条。
+LSTMs 是一种特殊的递归神经网络（RNN），能够学习长期依赖关系。所有 RNN 看起来像是一个重复模块的链条。
 
-![](../Images/6de3d1247fc0c6dd19b6126f28c69ff1.png)
+![](img/6de3d1247fc0c6dd19b6126f28c69ff1.png)
 
 [展开的递归神经网络](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 
-因此，LSTM将数据从一个模块传递到另一个模块，例如，为了生成Ht，我们不仅使用Xt，还使用所有之前的输入值X。要了解有关LSTM结构和数学模型的更多信息，可以阅读这篇精彩的文章“[理解LSTM网络](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)”。
+因此，LSTM 将数据从一个模块传递到另一个模块，例如，为了生成 Ht，我们不仅使用 Xt，还使用所有之前的输入值 X。要了解有关 LSTM 结构和数学模型的更多信息，可以阅读这篇精彩的文章“[理解 LSTM 网络](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)”。
 
-### **双向RNNs**
+### **双向 RNNs**
 
-我们的下一步是双向递归神经网络（BRNNs）。BRNN的作用是将常规RNN的神经元分为两个方向。一个方向用于正时间，或前向状态。另一个方向用于负时间，或后向状态。这两个状态的输出与相反方向状态的输入不相连。
+我们的下一步是双向递归神经网络（BRNNs）。BRNN 的作用是将常规 RNN 的神经元分为两个方向。一个方向用于正时间，或前向状态。另一个方向用于负时间，或后向状态。这两个状态的输出与相反方向状态的输入不相连。
 
-![](../Images/c632cea579cb40f348be6066dbe1e821.png)
+![](img/c632cea579cb40f348be6066dbe1e821.png)
 
 [双向递归神经网络](https://www.semanticscholar.org/paper/Hybrid-speech-recognition-with-Deep-Bidirectional-Graves-Jaitly/5807664af8e63d5207f59fb263c9e7bd3673be79)
 
-为了理解为什么BRNNs比简单RNN效果更好，想象一下我们有一个9个单词的句子，我们想预测第5个单词。我们可以让它知道前4个单词，或者前4个单词和最后4个单词。当然，第二种情况的质量会更好。
+为了理解为什么 BRNNs 比简单 RNN 效果更好，想象一下我们有一个 9 个单词的句子，我们想预测第 5 个单词。我们可以让它知道前 4 个单词，或者前 4 个单词和最后 4 个单词。当然，第二种情况的质量会更好。
 
 ### **序列到序列**
 
-现在我们准备转向序列到序列模型（也称为seq2seq）。基本的seq2seq模型由两个RNN组成：一个编码器网络处理输入，一个解码器网络生成输出。
+现在我们准备转向序列到序列模型（也称为 seq2seq）。基本的 seq2seq 模型由两个 RNN 组成：一个编码器网络处理输入，一个解码器网络生成输出。
 
-![](../Images/4a829f9839b0211cdd633e5c69373cec.png)
+![](img/4a829f9839b0211cdd633e5c69373cec.png)
 
 [序列到序列模型](https://research.googleblog.com/2016/09/a-neural-network-for-machine.html)
 
 最终，我们可以制作我们的第一个机器翻译器！
 
-不过，让我们考虑一个技巧。Google翻译[目前支持103种语言](https://www.newscientist.com/article/2114748-google-translate-ai-invents-its-own-language-to-translate-with/)，因此我们应该有103x102个不同的模型来处理每对语言。显然，这些模型的质量会根据语言的流行程度和训练网络所需的文档量而有所不同。我们能做的最好的是制作一个神经网络，接受任何语言作为输入并翻译成任何语言。
+不过，让我们考虑一个技巧。Google 翻译[目前支持 103 种语言](https://www.newscientist.com/article/2114748-google-translate-ai-invents-its-own-language-to-translate-with/)，因此我们应该有 103x102 个不同的模型来处理每对语言。显然，这些模型的质量会根据语言的流行程度和训练网络所需的文档量而有所不同。我们能做的最好的是制作一个神经网络，接受任何语言作为输入并翻译成任何语言。
 
 ### **Google 翻译**
 
@@ -96,7 +96,7 @@ LSTMs是一种特殊的递归神经网络（RNN），能够学习长期依赖关
 > 
 > 候选 2：Statsbot 使用自然语言准确分析来自不同分析平台的业务指标。
 
-![](../Images/a812122e97cb432b115267962b8ead35.png)
+![](img/a812122e97cb432b115267962b8ead35.png)
 
 尽管它们具有相同的含义，但在质量和结构上存在差异。
 
@@ -108,7 +108,7 @@ LSTMs是一种特殊的递归神经网络（RNN），能够学习长期依赖关
 
 显然，候选 1 更好，相比候选 2 分享了更多的单词和短语。这是简单 BLEU 方法的关键思想。我们可以比较候选翻译与参考翻译的[n-grams](https://en.wikipedia.org/wiki/N-gram)，并计算匹配的数量（与它们的位置无关）。我们只使用 n-gram 精确度，因为计算召回率在有多个参考的情况下很困难，结果是 n-gram 分数的几何平均值。
 
-现在你可以评估复杂的机器学习翻译引擎。下次当你用Google翻译翻译某些内容时，想象一下它分析了多少百万份文档才为你提供了最佳的语言版本。
+现在你可以评估复杂的机器学习翻译引擎。下次当你用 Google 翻译翻译某些内容时，想象一下它分析了多少百万份文档才为你提供了最佳的语言版本。
 
 **简介：[丹尼尔·科尔布特](https://medium.com/@daniilkorbut)** 是[Statsbot](https://statsbot.co/)的初级数据科学家。
 
@@ -116,22 +116,22 @@ LSTMs是一种特殊的递归神经网络（RNN），能够学习长期依赖关
 
 **相关：**
 
-+   [深度学习和NLP中的注意力与记忆](/2016/01/attention-memory-deep-learning-nlp.html)
++   深度学习和 NLP 中的注意力与记忆
 
-+   [Top /r/MachineLearning帖子，5月：深度图像类比；风格化面部动画；Google开源Sketch-RNN](/2017/06/top-reddit-machine-learning-posts-may.html)
++   Top /r/MachineLearning 帖子，5 月：深度图像类比；风格化面部动画；Google 开源 Sketch-RNN
 
-+   [5个免费的自然语言处理深度学习入门资源](/2017/07/5-free-resources-getting-started-deep-learning-nlp.html)
++   5 个免费的自然语言处理深度学习入门资源
 
 ### 更多相关主题
 
-+   [OpenAI的Whisper API用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)
++   [OpenAI 的 Whisper API 用于转录和翻译](https://www.kdnuggets.com/2023/06/openai-whisper-api-transcription-translation.html)
 
-+   [如何使用MarianMT和Hugging Face Transformers翻译语言](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)
++   [如何使用 MarianMT 和 Hugging Face Transformers 翻译语言](https://www.kdnuggets.com/how-to-translate-languages-with-marianmt-and-hugging-face-transformers)
 
-+   [用AI阅读思想：研究人员将脑电波转换为图像](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)
++   [用 AI 阅读思想：研究人员将脑电波转换为图像](https://www.kdnuggets.com/2023/03/reading-minds-ai-researchers-translate-brain-waves-images.html)
 
 +   [将机器学习算法完整部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
 +   [揭开选择完美机器学习算法的秘密！](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)
 
-+   [机器学习中的DBSCAN聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)
++   [机器学习中的 DBSCAN 聚类算法](https://www.kdnuggets.com/2020/04/dbscan-clustering-algorithm-machine-learning.html)

@@ -1,10 +1,10 @@
 # 增强现实中的高维数据可视化
 
-> 原文：[https://www.kdnuggets.com/2017/09/ibm-visualizing-high-dimensional-data-augmented-reality.html](https://www.kdnuggets.com/2017/09/ibm-visualizing-high-dimensional-data-augmented-reality.html)
+> 原文：[`www.kdnuggets.com/2017/09/ibm-visualizing-high-dimensional-data-augmented-reality.html`](https://www.kdnuggets.com/2017/09/ibm-visualizing-high-dimensional-data-augmented-reality.html)
 
 **作者：本杰明·雷斯尼克**。赞助帖子。
 
-![标题图片](../Images/9561671810464c7674c988637a8f5dc7.png)
+![标题图片](img/9561671810464c7674c988637a8f5dc7.png)
 
 创意共享许可证
 
@@ -12,11 +12,11 @@
 > 
 > ## 我们的三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平。
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平。
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
 > 
 > * * *
 > 
@@ -42,7 +42,7 @@
 
 通常，当数据科学家首次获得数据集时，他们会使用 2D 散点图矩阵来快速概览内容。2D 散点图显示了属性对之间的关系。但对于具有大量属性的数据，这种分析方法的规模就显得不够。
 
-![](../Images/ea5675d5edf41a2163b9acd36596f307.png)
+![](img/ea5675d5edf41a2163b9acd36596f307.png)
 
 2D 散点图矩阵，与 Immersive Insights 并置
 
@@ -88,34 +88,34 @@ R notebook 根据可能影响潜在空间用户分布的各种标准对用户进
 
 本文介绍了一种使用增强现实分析大数据的技术。这种技术最适用于准备创建机器学习模型的数据科学家。
 
-大数据、增强现实和机器学习正成为三种颠覆性技术，它们将塑造未来的商业和社会。如前所述，这些颠覆性技术可以以创造性、有用的方式相互融合。你可以在这里阅读有关这些结合的颠覆性技术的潜在影响：[https://www.weforum.org/agenda/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/](https://www.weforum.org/agenda/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/)
+大数据、增强现实和机器学习正成为三种颠覆性技术，它们将塑造未来的商业和社会。如前所述，这些颠覆性技术可以以创造性、有用的方式相互融合。你可以在这里阅读有关这些结合的颠覆性技术的潜在影响：[`www.weforum.org/agenda/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/`](https://www.weforum.org/agenda/2016/01/the-fourth-industrial-revolution-what-it-means-and-how-to-respond/)
 
-本文描述的技术范围有限。但Immersive Insight的愿景范围巨大。Immersive Insights团队很高兴继续构想数据可视化和分析的未来。我们的目标：让数据变得简单。
+本文描述的技术范围有限。但 Immersive Insight 的愿景范围巨大。Immersive Insights 团队很高兴继续构想数据可视化和分析的未来。我们的目标：让数据变得简单。
 
 ### 有用的链接
 
 [*在进行主成分分析（PCA）之前，缩放参数的最佳方法是什么？*](https://www.researchgate.net/post/What_is_the_best_way_to_scale_parameters_before_running_a_Principal_Component_Analysis_PCA)
 
-本文有助于理解如何为PCA准备数据
+本文有助于理解如何为 PCA 准备数据
 
 [*http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/*](http://machinelearningmastery.com/discover-feature-engineering-how-to-engineer-features-and-how-to-get-good-at-it/)
 
 本文帮助展示了为什么高维数据的探索性技术对机器学习从业者如此有用
 
-> 尝试[**IBM Watson机器学习服务 - 点击这里**](https://developer.ibm.com/clouddataservices/docs/ibm-watson-machine-learning/get-started/)
+> 尝试[**IBM Watson 机器学习服务 - 点击这里**](https://developer.ibm.com/clouddataservices/docs/ibm-watson-machine-learning/get-started/)
 > 
 > 尝试[**数据科学体验 - 订阅免费试用**](https://datascience.ibm.com/registration/stepone)
 
 ### 更多相关话题
 
-+   [认识Gorilla：UC Berkeley和微软的API增强LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
++   [认识 Gorilla：UC Berkeley 和微软的 API 增强 LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
 
 +   [检索增强生成：信息检索与文本生成的结合…](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)
 
-+   [数据可视化：Statology入门](https://www.kdnuggets.com/visualizing-data-statology-primer)
++   [数据可视化：Statology 入门](https://www.kdnuggets.com/visualizing-data-statology-primer)
 
-+   [在Scikit-learn中可视化混淆矩阵](https://www.kdnuggets.com/2022/09/visualizing-confusion-matrix-scikitlearn.html)
++   [在 Scikit-learn 中可视化混淆矩阵](https://www.kdnuggets.com/2022/09/visualizing-confusion-matrix-scikitlearn.html)
 
-+   [数据科学职业：7个期望与现实](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
++   [数据科学职业：7 个期望与现实](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
 
 +   [数据科学：现实与期望](https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html)

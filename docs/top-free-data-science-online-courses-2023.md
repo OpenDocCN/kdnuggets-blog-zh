@@ -1,8 +1,8 @@
-# 2023年顶级免费数据科学在线课程
+# 2023 年顶级免费数据科学在线课程
 
-> 原文：[https://www.kdnuggets.com/2023/03/top-free-data-science-online-courses-2023.html](https://www.kdnuggets.com/2023/03/top-free-data-science-online-courses-2023.html)
+> 原文：[`www.kdnuggets.com/2023/03/top-free-data-science-online-courses-2023.html`](https://www.kdnuggets.com/2023/03/top-free-data-science-online-courses-2023.html)
 
-![2023年顶级免费数据科学在线课程](../Images/f73c76dfc0b167dd729c70e806e0a745.png)
+![2023 年顶级免费数据科学在线课程](img/f73c76dfc0b167dd729c70e806e0a745.png)
 
 图片来源: 作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 如果你想进入数据科学领域，但不确定选择哪些课程、书籍或培训营。继续阅读这篇文章，你将找到一份免费的在线数据科学课程列表，帮助你掌握这项新技能。
 
-# 2023年优秀免费课程
+# 2023 年优秀免费课程
 
 所有这些课程都是免费的，并且已经获得了数百名学生的高度信任和高评价。
 
@@ -44,31 +44,31 @@
 
 链接: [Python 编程入门](https://www.edx.org/course/cs50s-introduction-to-programming-with-python)
 
-## 数据科学：R基础，由哈佛大学提供
+## 数据科学：R 基础，由哈佛大学提供
 
-如果你选择了R作为你的编程语言，从基础开始总是好的。哈佛大学提供了一个数据科学：R基础课程，帮助你通过学习和使用R编程语言来整理、分析和可视化数据，从而建立一个坚实的基础。
+如果你选择了 R 作为你的编程语言，从基础开始总是好的。哈佛大学提供了一个数据科学：R 基础课程，帮助你通过学习和使用 R 编程语言来整理、分析和可视化数据，从而建立一个坚实的基础。
 
-该课程是免费的；但是，你可以支付149美元获得认证证书。
+该课程是免费的；但是，你可以支付 149 美元获得认证证书。
 
-链接：[数据科学：R基础](https://pll.harvard.edu/course/data-science-r-basics)
+链接：[数据科学：R 基础](https://pll.harvard.edu/course/data-science-r-basics)
 
-## 统计学习，由edX提供
+## 统计学习，由 edX 提供
 
-统计学是数据科学的重要组成部分，你必须掌握它。这门由edX提供的统计学习课程将为你提供统计建模和数据科学中使用的主要工具。
+统计学是数据科学的重要组成部分，你必须掌握它。这门由 edX 提供的统计学习课程将为你提供统计建模和数据科学中使用的主要工具。
 
 它涵盖以下主题：统计学习概述、线性回归、分类、重采样方法、线性模型选择与正则化、超越线性、树基方法、支持向量机、深度学习、生存建模、无监督学习和多重测试。
 
 链接：[统计学习](https://www.edx.org/course/statistical-learning)
 
-## 统计基础，由Josh Starmer提供
+## 统计基础，由 Josh Starmer 提供
 
-如果你更喜欢观看视频，我强烈推荐Josh Starmer的YouTube页面，帮助你更好地掌握统计学和概率论的基础知识。你将涵盖与数据科学相关的各种主题，并提供清晰的解释和示例。
+如果你更喜欢观看视频，我强烈推荐 Josh Starmer 的 YouTube 页面，帮助你更好地掌握统计学和概率论的基础知识。你将涵盖与数据科学相关的各种主题，并提供清晰的解释和示例。
 
 链接：[统计基础](https://www.youtube.com/playlist?list=PLblh5JKOoLUK0FLuzwntyYI10UQFUhsY9)
 
-## 机器学习专业化，由Coursera提供
+## 机器学习专业化，由 Coursera 提供
 
-这门课程由Landing AI的创始人兼首席执行官**Andrew Ng**、deeplearning.ai的创始人，以及Coursera的联席主席和共同创始人**Andrew Ng**组织。他构建了一个由3门课程组成的机器学习专业化系列：
+这门课程由 Landing AI 的创始人兼首席执行官**Andrew Ng**、deeplearning.ai 的创始人，以及 Coursera 的联席主席和共同创始人**Andrew Ng**组织。他构建了一个由 3 门课程组成的机器学习专业化系列：
 
 1.  [监督学习：回归与分类](https://gb.coursera.org/learn/machine-learning)
 
@@ -80,19 +80,19 @@
 
 链接：[机器学习专业化](https://www.coursera.org/specializations/machine-learning-introduction)
 
-## 应用机器学习，由Andreas Mueller提供
+## 应用机器学习，由 Andreas Mueller 提供
 
-一旦你理解了机器学习的基础，下一步就是学习如何应用它。Andreas Mueller有一个YouTube频道，包含22个关于应用机器学习的视频。
+一旦你理解了机器学习的基础，下一步就是学习如何应用它。Andreas Mueller 有一个 YouTube 频道，包含 22 个关于应用机器学习的视频。
 
-你将涵盖的主题包括可视化和matplotlib、回归的线性模型、梯度提升、模型检查、特征选择等。
+你将涵盖的主题包括可视化和 matplotlib、回归的线性模型、梯度提升、模型检查、特征选择等。
 
 链接：[应用机器学习](https://www.youtube.com/watch?v=d79mzijMAw0&list=PL_pVmAaAnxIRnSw6wiCpSvshFyCREZmlM)
 
-## 特征工程，由Kaggle提供
+## 特征工程，由 Kaggle 提供
 
 一旦你知道如何构建模型，你就会想学习如何通过特征工程改进你的模型。Kaggle 提供的这个特征工程课程帮助你学习如何利用特征来提升模型的效果。
 
-课程内容包括：什么是特征工程、互信息、创建特征、使用k-means进行聚类、主成分分析和目标编码。
+课程内容包括：什么是特征工程、互信息、创建特征、使用 k-means 进行聚类、主成分分析和目标编码。
 
 链接: [特征工程](https://www.kaggle.com/learn/feature-engineering)
 
@@ -108,7 +108,7 @@
 
 如果你对数据管理特别感兴趣，威斯康星大学麦迪逊分校提供的课程就是为你准备的。
 
-课程分为6个部分：数据科学简介、关系数据库与关系代数、MapReduce模型与No SQL系统、预测分析、信息提取与数据整合、以及沟通洞察。
+课程分为 6 个部分：数据科学简介、关系数据库与关系代数、MapReduce 模型与 No SQL 系统、预测分析、信息提取与数据整合、以及沟通洞察。
 
 链接: [数据管理与数据科学](https://thodrek.github.io/cs639_spring19/)
 
@@ -116,20 +116,20 @@
 
 有很多现成的资源可以帮助你学习数据科学。总是从免费的资源开始，打下坚实的基础，然后再转向付费或认证课程来帮助你找到工作。然而，许多人在没有付费课程的情况下也找到了工作。
 
-如果你需要更多关于数据科学路径的指导，请阅读：[完整的数据科学学习路线图](/2022/08/complete-data-science-study-roadmap.html)。
+如果你需要更多关于数据科学路径的指导，请阅读：完整的数据科学学习路线图。
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术作家。她特别感兴趣于提供数据科学职业建议或教程以及数据科学理论知识。她还希望探索人工智能如何或能如何有益于人类寿命。作为一名热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 了解更多相关内容
 
-+   [不要错过！2023年结束前报名免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！2023 年结束前报名免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
 
-+   [2024年顶级免费数据科学在线课程](https://www.kdnuggets.com/top-free-data-science-online-courses-for-2024)
++   [2024 年顶级免费数据科学在线课程](https://www.kdnuggets.com/top-free-data-science-online-courses-for-2024)
 
-+   [KDnuggets 新闻，4月6日：8门免费MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [5门免费在线课程学习数据科学基础](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-science-fundamentals)
++   [5 门免费在线课程学习数据科学基础](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-science-fundamentals)
 
-+   [8门免费MIT课程在线学习数据科学](https://www.kdnuggets.com/2022/03/8-free-mit-courses-learn-data-science-online.html)
++   [8 门免费 MIT 课程在线学习数据科学](https://www.kdnuggets.com/2022/03/8-free-mit-courses-learn-data-science-online.html)
 
-+   [5门免费在线课程学习数据工程基础](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-engineering-fundamentals)
++   [5 门免费在线课程学习数据工程基础](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-engineering-fundamentals)

@@ -1,8 +1,8 @@
 # 将机器学习算法完整端到端地部署到实时生产环境中
 
-> 原文：[https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
+> 原文：[`www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html`](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-![](../Images/128d7ad5f8e3664b5782ae9a622a497e.png)
+![](img/128d7ad5f8e3664b5782ae9a622a497e.png)
 
 图片来源：[Fotis Fotopoulos](https://unsplash.com/@ffstop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 于 [Unsplash](https://unsplash.com/s/photos/python?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-在2021年10月，我撰写了一篇关于“将机器学习和数据科学项目部署为公开网络应用”的文章（见 [https://towardsdatascience.com/deploying-machine-learning-and-data-science-projects-as-public-web-applications-3abc91088c11](https://towardsdatascience.com/deploying-machine-learning-and-data-science-projects-as-public-web-applications-3abc91088c11)）。
+在 2021 年 10 月，我撰写了一篇关于“将机器学习和数据科学项目部署为公开网络应用”的文章（见 [`towardsdatascience.com/deploying-machine-learning-and-data-science-projects-as-public-web-applications-3abc91088c11`](https://towardsdatascience.com/deploying-machine-learning-and-data-science-projects-as-public-web-applications-3abc91088c11)）。
 
-在这篇文章中，我探讨了如何使用Voila、GitHub和mybinder将Jupyter Notebooks 部署为公开的网络应用。
+在这篇文章中，我探讨了如何使用 Voila、GitHub 和 mybinder 将 Jupyter Notebooks 部署为公开的网络应用。
 
 文章发布后，我收到读者反馈，他们对如何进一步推动生产部署感兴趣，希望探索如何将机器学习算法完全部署到实时生产环境中，以便能够以平台无关的方式“消费”它，这也促成了这篇文章的产生……
 
@@ -30,7 +30,7 @@
 
 第一步是开发我们想要部署的机器学习算法。在实际应用中，这可能涉及数周或数月的开发时间以及在数据科学管道各个步骤中进行大量的迭代，但在这个例子中，我将开发一个基本的机器学习算法，因为这篇文章的主要目的是找到一种可以供“消费者”使用的算法部署方式。
 
-我从kaggle选择了一个数据集 ([https://www.kaggle.com/prathamtripathi/drug-classification](https://www.kaggle.com/prathamtripathi/drug-classification))，该数据集由作者创建，并具有“CC0: 公共领域”许可，这意味着它没有版权，可以在其他作品中自由使用（详情请见 [https://creativecommons.org/publicdomain/zero/1.0/](https://creativecommons.org/publicdomain/zero/1.0/)）。
+我从 kaggle 选择了一个数据集 ([`www.kaggle.com/prathamtripathi/drug-classification`](https://www.kaggle.com/prathamtripathi/drug-classification))，该数据集由作者创建，并具有“CC0: 公共领域”许可，这意味着它没有版权，可以在其他作品中自由使用（详情请见 [`creativecommons.org/publicdomain/zero/1.0/`](https://creativecommons.org/publicdomain/zero/1.0/)）。
 
 开发一个预测性机器学习算法以根据一系列患者标准分类药物处方的 Python 代码如下 -
 
@@ -94,7 +94,7 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 在 Python 世界中，有几种不同的方法可供选择，但我选择的方式是使用 `flask` 构建我们的 Web 服务封装器。
 
-代码本身并不复杂，但配置 VS Code 以使开发者能够调试 Flask 应用可能会有挑战。如果你需要这个步骤的教程，请查看我的文章《如何在 VS Code 中调试 Flask 应用》，可以在这里找到——[https://towardsdatascience.com/how-to-debug-flask-applications-in-vs-code-c65c9bdbef21](https://towardsdatascience.com/how-to-debug-flask-applications-in-vs-code-c65c9bdbef21)。
+代码本身并不复杂，但配置 VS Code 以使开发者能够调试 Flask 应用可能会有挑战。如果你需要这个步骤的教程，请查看我的文章《如何在 VS Code 中调试 Flask 应用》，可以在这里找到——[`towardsdatascience.com/how-to-debug-flask-applications-in-vs-code-c65c9bdbef21`](https://towardsdatascience.com/how-to-debug-flask-applications-in-vs-code-c65c9bdbef21)。
 
 这是 Web 服务的封装器代码 …
 
@@ -102,7 +102,7 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 可以通过在 VS Code 中点击“运行和调试”然后选择“Flask 启动和调试 Flask Web 应用”来启动 Web 服务 -
 
-![](../Images/996b565b247c8c94255815795a53f8be.png)
+![](img/996b565b247c8c94255815795a53f8be.png)
 
 图片由作者提供
 
@@ -110,19 +110,19 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 现在你应该使用以下方法之一来测试你的 Web 服务 -
 
-1.  打开一个网页浏览器并输入：[http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20](http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20)
+1.  打开一个网页浏览器并输入：[`127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20`](http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20)
 
 1.  打开 Anaconda 命令提示符并输入：`curl -X GET "http://127.0.0.1:5000/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20"`
 
-![](../Images/cd1f7c0d6b463172e182083c84035586.png)
+![](img/cd1f7c0d6b463172e182083c84035586.png)
 
 图片由作者提供
 
 如果你想了解更多关于开发 `flask` 应用和 Web 服务的信息，这些文章是一个很好的起点 -
 
-+   [https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
++   [`programminghistorian.org/en/lessons/creating-apis-with-python-and-flask`](https://programminghistorian.org/en/lessons/creating-apis-with-python-and-flask)
 
-+   [https://code.visualstudio.com/docs/python/tutorial-flask](https://code.visualstudio.com/docs/python/tutorial-flask)
++   [`code.visualstudio.com/docs/python/tutorial-flask`](https://code.visualstudio.com/docs/python/tutorial-flask)
 
 ## 第 4 步：将 Web 服务部署到 Microsoft Azure
 
@@ -132,11 +132,11 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 有许多不同的公共服务可用于 Web 应用程序的部署，包括 -
 
-+   谷歌 — [https://cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service](https://cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service)
++   谷歌 — [`cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service`](https://cloud.google.com/appengine/docs/standard/python3/building-app/writing-web-service)
 
-+   亚马逊 Web 服务 — [https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80](https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80)
++   亚马逊 Web 服务 — [`medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80`](https://medium.com/@rodkey/deploying-a-flask-application-on-aws-a72daba6bb80)
 
-+   Microsoft Azure — [https://medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e](https://medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e)
++   Microsoft Azure — [`medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e`](https://medium.com/@nikovrdoljak/deploy-your-flask-app-on-azure-in-3-easy-steps-b2fe388a589e)
 
 我选择了 Azure，因为它是免费的（对于入门级账户），易于使用，快速，并且与我最喜欢的开发环境 VS Code 完全集成。
 
@@ -144,7 +144,7 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 切换到 VS Code，转到“扩展”（Ctrl+Shft_X），然后添加“Azure App Service”扩展。添加扩展后，您将在活动栏中看到一个新的 Azure 图标 -
 
-![](../Images/80c2bd9c142d71a0e2634af868fc9abd.png)
+![](img/80c2bd9c142d71a0e2634af868fc9abd.png)
 
 作者提供的图片
 
@@ -152,9 +152,9 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 您必须拥有一个账户才能开始在 Azure 云中进行部署，并且在注册过程中必须提供信用卡信息。然而，除非您特别选择离开免费许可证，否则不会收费。
 
-您可以按照此页面上的说明 — [https://azure.microsoft.com/en-gb/free/](https://azure.microsoft.com/en-gb/free/) 通过浏览器创建您的免费 Azure 账户，但最简单的方法是点击活动栏中的新 Azure 图标，然后选择“创建免费 Azure 账户”（或者如果您已经有账户，则选择“登录 Azure”） -
+您可以按照此页面上的说明 — [`azure.microsoft.com/en-gb/free/`](https://azure.microsoft.com/en-gb/free/) 通过浏览器创建您的免费 Azure 账户，但最简单的方法是点击活动栏中的新 Azure 图标，然后选择“创建免费 Azure 账户”（或者如果您已经有账户，则选择“登录 Azure”） -
 
-![](../Images/71950cb1d3f6718a7cf4561c2010929e.png)
+![](img/71950cb1d3f6718a7cf4561c2010929e.png)
 
 作者提供的图片
 
@@ -164,7 +164,7 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 当系统提示您选择许可证类型时，选择“免费试用” — 您的 Web 应用程序现在将被创建，您可以开始部署。
 
-![](../Images/c8c58d7388e1b88c86365cbe7f260215.png)
+![](img/c8c58d7388e1b88c86365cbe7f260215.png)
 
 作者提供的图片
 
@@ -174,7 +174,7 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 我们应用程序的 `requirements.txt` 文件内容如下 -
 
-![](../Images/ee9a13c2ca197fb9eb3b68c16a259110.png)
+![](img/ee9a13c2ca197fb9eb3b68c16a259110.png)
 
 作者提供的图片
 
@@ -216,7 +216,7 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 现在坐下来喝杯咖啡，同时应用程序正在部署中 -
 
-![](../Images/86b70d20bccef4ca382a22b42c5a429c.png)
+![](img/86b70d20bccef4ca382a22b42c5a429c.png)
 
 作者提供的图片
 
@@ -224,47 +224,47 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 只需添加我们用于测试本地部署的相同 URL 参数，你将看到完全部署的网页应用的输出！ -
 
-[https://graham-harrison68-web03.azurewebsites.net/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20](https://graham-harrison68-web03.azurewebsites.net/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20)
+[`graham-harrison68-web03.azurewebsites.net/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20`](https://graham-harrison68-web03.azurewebsites.net/drug?Age=60&Sex=F&BP=LOW&Cholesterol=HIGH&Na_to_K=20)
 
-![](../Images/055a1d456700ef8e3a689fca1b51a690.png)
+![](img/055a1d456700ef8e3a689fca1b51a690.png)
 
 作者提供的图片
 
 一点需要注意的是：过一段时间，azure 应用会进入睡眠状态，第一次调用后需要很长时间。
 
-如果你选择升级到付费的Azure订阅，有一个选项可以保持应用程序刷新和“唤醒”，但在免费订阅中，睡眠相关的延迟无法避免，因为此订阅仅用于测试目的，因此有一些限制。
+如果你选择升级到付费的 Azure 订阅，有一个选项可以保持应用程序刷新和“唤醒”，但在免费订阅中，睡眠相关的延迟无法避免，因为此订阅仅用于测试目的，因此有一些限制。
 
-## 步骤5：构建一个客户端应用程序以使用Azure部署的网络服务
+## 步骤 5：构建一个客户端应用程序以使用 Azure 部署的网络服务
 
 目前，任何能够发起网络请求的编程语言或环境都可以用几行代码调用部署的网络服务。
 
-我们一开始确实说过可以使用非Python环境如C#、JavaScript等，但我将通过写一些代码来演示如何使用`ipywidgets`从Python客户端调用部署的应用程序——
+我们一开始确实说过可以使用非 Python 环境如 C#、JavaScript 等，但我将通过写一些代码来演示如何使用`ipywidgets`从 Python 客户端调用部署的应用程序——
 
-![](../Images/adc1b12ee500aa695ebed31699d08f88.png)
+![](img/adc1b12ee500aa695ebed31699d08f88.png)
 
 图片来源：作者
 
 如果你点击“Prescribe”并保持默认值，推荐的应该是“drugC”。
 
-将年龄更改为60，Na更改为K为20，应该开具“DrugY”。将年龄改回47，Na改回K为14，并将BP更改为“HIGH”，应该开具drugA。
+将年龄更改为 60，Na 更改为 K 为 20，应该开具“DrugY”。将年龄改回 47，Na 改回 K 为 14，并将 BP 更改为“HIGH”，应该开具 drugA。
 
-这些简单的测试证明，使用决策树预测机器学习算法的Azure托管网络服务已经完全部署到公共云中，任何能够执行`http GET`命令的开发环境都可以调用，并且从端到端完全工作。
+这些简单的测试证明，使用决策树预测机器学习算法的 Azure 托管网络服务已经完全部署到公共云中，任何能够执行`http GET`命令的开发环境都可以调用，并且从端到端完全工作。
 
 ## 结论
 
-这涉及到相当多的步骤，但通过使用现成的库和免费工具，包括scikit-learn、pickle、flask、Microsoft Azure和ipywidgets，我们构建了一个功能完全的、公开可用的机器学习算法云部署，以及一个功能完备的客户端来调用和使用该网络服务并显示结果。
+这涉及到相当多的步骤，但通过使用现成的库和免费工具，包括 scikit-learn、pickle、flask、Microsoft Azure 和 ipywidgets，我们构建了一个功能完全的、公开可用的机器学习算法云部署，以及一个功能完备的客户端来调用和使用该网络服务并显示结果。
 
 ### 感谢阅读！
 
-如果你喜欢阅读这篇文章，不妨查看我其他的文章：[https://grahamharrison-86487.medium.com/](https://grahamharrison-86487.medium.com/)
+如果你喜欢阅读这篇文章，不妨查看我其他的文章：[`grahamharrison-86487.medium.com/`](https://grahamharrison-86487.medium.com/)
 
 此外，我很乐意听取你对这篇文章、我其他的文章或任何与数据科学和数据分析相关的内容的看法。
 
-如果你希望讨论这些主题，请在LinkedIn上查找我 —— [https://www.linkedin.com/in/grahamharrison1](https://www.linkedin.com/in/grahamharrison1) 或随时通过电子邮件联系我：[GHarrison@lincolncollege.ac.uk](mailto:GHarrison@lincolncollege.ac.uk)。
+如果你希望讨论这些主题，请在 LinkedIn 上查找我 —— [`www.linkedin.com/in/grahamharrison1`](https://www.linkedin.com/in/grahamharrison1) 或随时通过电子邮件联系我：GHarrison@lincolncollege.ac.uk。
 
-如果你希望支持作者和全球数千名为文章撰写做出贡献的人，请使用这个链接订阅 —— [https://grahamharrison-86487.medium.com/membership](https://grahamharrison-86487.medium.com/membership)。注意：如果你使用此链接注册，作者将从费用中获得一部分。
+如果你希望支持作者和全球数千名为文章撰写做出贡献的人，请使用这个链接订阅 —— [`grahamharrison-86487.medium.com/membership`](https://grahamharrison-86487.medium.com/membership)。注意：如果你使用此链接注册，作者将从费用中获得一部分。
 
-**[格雷厄姆·哈里森](https://www.linkedin.com/in/grahamharrison1/?originalSubdomain=uk)** 是林肯学院集团的信息技术、信息管理及项目组的总监，负责英国、沙特阿拉伯和中国的数据和技术能力。格雷厄姆还是数据科学咨询公司The Knowledge Ladder的董事总经理和创始人，林肯郡网络安全论坛的委员会成员，以及大林肯郡和拉特兰分支的董事学会数字大使。格雷厄姆最近完成了关于数据科学民主化的学术研究，并热衷于为所有组织提供可访问、负担得起且灵活的数据科学服务，无论其规模、行业或以前的经验如何。详情请访问 [https://www.theknowledgeladder.co.uk/](https://www.theknowledgeladder.co.uk/) 和 [https://www.youtube.com/watch?v=cFt03rny07Y](https://www.youtube.com/watch?v=cFt03rny07Y)。
+**[格雷厄姆·哈里森](https://www.linkedin.com/in/grahamharrison1/?originalSubdomain=uk)** 是林肯学院集团的信息技术、信息管理及项目组的总监，负责英国、沙特阿拉伯和中国的数据和技术能力。格雷厄姆还是数据科学咨询公司 The Knowledge Ladder 的董事总经理和创始人，林肯郡网络安全论坛的委员会成员，以及大林肯郡和拉特兰分支的董事学会数字大使。格雷厄姆最近完成了关于数据科学民主化的学术研究，并热衷于为所有组织提供可访问、负担得起且灵活的数据科学服务，无论其规模、行业或以前的经验如何。详情请访问 [`www.theknowledgeladder.co.uk/`](https://www.theknowledgeladder.co.uk/) 和 [`www.youtube.com/watch?v=cFt03rny07Y`](https://www.youtube.com/watch?v=cFt03rny07Y)。
 
 [原文](https://towardsdatascience.com/a-full-end-to-end-deployment-of-a-machine-learning-algorithm-into-a-live-production-environment-3d9971ade188)。转载已获许可。
 
@@ -272,12 +272,12 @@ Drug ['DrugY', 'drugC', 'drugX', 'drugA', 'drugB'] [0, 3, 4, 1, 2]
 
 +   [初学者的端到端机器学习指南](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)
 
-+   [理解AI中的代理环境](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
++   [理解 AI 中的代理环境](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
 
-+   [5个最佳端到端开源MLOps工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
++   [5 个最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
 
-+   [使用HuggingFace实施的简单端到端项目](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)
++   [使用 HuggingFace 实施的简单端到端项目](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)
 
-+   [2024年必须尝试的7个端到端MLOps平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
++   [2024 年必须尝试的 7 个端到端 MLOps 平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段…](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)

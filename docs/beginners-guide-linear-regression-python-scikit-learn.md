@@ -1,8 +1,8 @@
-# Python中的线性回归初学者指南，使用Scikit-Learn
+# Python 中的线性回归初学者指南，使用 Scikit-Learn
 
-> 原文：[https://www.kdnuggets.com/2019/03/beginners-guide-linear-regression-python-scikit-learn.html](https://www.kdnuggets.com/2019/03/beginners-guide-linear-regression-python-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2019/03/beginners-guide-linear-regression-python-scikit-learn.html`](https://www.kdnuggets.com/2019/03/beginners-guide-linear-regression-python-scikit-learn.html)
 
-[评论](/2019/03/beginners-guide-linear-regression-python-scikit-learn.html?page=2#comments)![图示](../Images/356303905f8bf03d1984d3975e42033d.png)
+评论![图示](img/356303905f8bf03d1984d3975e42033d.png)
 
 [来源](https://www.disruptordaily.com/category/digital-transformation/)
 
@@ -12,25 +12,25 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-在本文中，我们将简要研究什么是线性回归，以及如何使用**Scikit-Learn**（这是Python中最受欢迎的机器学习库之一）来实现两个变量和多个变量的线性回归。
+在本文中，我们将简要研究什么是线性回归，以及如何使用**Scikit-Learn**（这是 Python 中最受欢迎的机器学习库之一）来实现两个变量和多个变量的线性回归。
 
 ### **线性回归理论**
 
 在代数中，“线性”一词指的是两个或更多变量之间的线性关系。如果我们在二维空间（两个变量之间）绘制这种关系，我们会得到一条直线。
 
-线性回归的任务是基于给定的自变量（x）预测因变量（y）的值。因此，这种回归技术找出x（输入）和y（输出）之间的线性关系。因此，称之为线性回归。如果我们将自变量（x）绘制在x轴上，将因变量（y）绘制在y轴上，线性回归将给我们一条最佳拟合数据点的直线，如下图所示。
+线性回归的任务是基于给定的自变量（x）预测因变量（y）的值。因此，这种回归技术找出 x（输入）和 y（输出）之间的线性关系。因此，称之为线性回归。如果我们将自变量（x）绘制在 x 轴上，将因变量（y）绘制在 y 轴上，线性回归将给我们一条最佳拟合数据点的直线，如下图所示。
 
 我们知道直线的方程基本上是：
 
-![图示](../Images/841ab07c32a291e11b30076660e2d9e7.png)
+![图示](img/841ab07c32a291e11b30076660e2d9e7.png)
 
 [来源](https://pythonprogramming.net/regression-introduction-machine-learning-tutorial/)
 
@@ -50,7 +50,7 @@
 
 ### **简单线性回归**
 
-![图示](../Images/613e8158b697fafba5ecfb203ea7df14.png)
+![图示](img/613e8158b697fafba5ecfb203ea7df14.png)
 
 线性回归
 
@@ -97,7 +97,7 @@ dataset.shape
 dataset.describe()
 ```
 
-![图示](../Images/95dd67f2c1cfc57f012b1cacb85b4921.png)
+![图示](img/95dd67f2c1cfc57f012b1cacb85b4921.png)
 
 数据集的统计视图
 
@@ -111,11 +111,11 @@ plt.ylabel('MaxTemp')
 plt.show()
 ```
 
-我们选择了MinTemp和MaxTemp进行分析。以下是MinTemp和MaxTemp之间的二维图。
+我们选择了 MinTemp 和 MaxTemp 进行分析。以下是 MinTemp 和 MaxTemp 之间的二维图。
 
-![](../Images/4f691610ca26b042c2037848bb977a42.png)
+![](img/4f691610ca26b042c2037848bb977a42.png)
 
-我们来查看一下平均最高温度，一旦我们绘制出来，就可以观察到平均最高温度介于25到35之间。
+我们来查看一下平均最高温度，一旦我们绘制出来，就可以观察到平均最高温度介于 25 到 35 之间。
 
 ```py
 plt.figure(figsize=(15,10))
@@ -123,28 +123,28 @@ plt.tight_layout()
 seabornInstance.distplot(dataset['MaxTemp'])
 ```
 
-![图示](../Images/4d2a30c5da6ae5bf33274839cf4367a2.png)
+![图示](img/4d2a30c5da6ae5bf33274839cf4367a2.png)
 
-平均最高温度介于25到35之间。
+平均最高温度介于 25 到 35 之间。
 
 我们的下一步是将数据分为“属性”和“标签”。
 
-属性是独立变量，而标签是依赖变量，其值需要预测。在我们的数据集中，我们只有两列。我们希望根据记录的最低温度（MinTemp）预测最高温度（MaxTemp）。因此，我们的属性集将包括存储在X变量中的“MinTemp”列，标签将是存储在y变量中的“MaxTemp”列。
+属性是独立变量，而标签是依赖变量，其值需要预测。在我们的数据集中，我们只有两列。我们希望根据记录的最低温度（MinTemp）预测最高温度（MaxTemp）。因此，我们的属性集将包括存储在 X 变量中的“MinTemp”列，标签将是存储在 y 变量中的“MaxTemp”列。
 
 ```py
 X = dataset['MinTemp'].values.reshape(-1,1)
 y = dataset['MaxTemp'].values.reshape(-1,1)
 ```
 
-接下来，我们使用以下代码将80%的数据分配给训练集，将20%的数据分配给测试集。
+接下来，我们使用以下代码将 80%的数据分配给训练集，将 20%的数据分配给测试集。
 
-test_size变量是我们实际指定测试集比例的地方。
+test_size 变量是我们实际指定测试集比例的地方。
 
 ```py
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 ```
 
-在将数据分为训练集和测试集之后，最后是训练我们的算法。为此，我们需要导入LinearRegression类，实例化它，并调用`fit()`方法，使用我们的训练数据。
+在将数据分为训练集和测试集之后，最后是训练我们的算法。为此，我们需要导入 LinearRegression 类，实例化它，并调用`fit()`方法，使用我们的训练数据。
 
 ```py
 regressor = LinearRegression()  
@@ -161,9 +161,9 @@ print(regressor.intercept_)
 print(regressor.coef_)
 ```
 
-结果应分别为约10.66185201和0.92033997。
+结果应分别为约 10.66185201 和 0.92033997。
 
-这意味着最低温度每变化一个单位，最高温度的变化约为0.92%。
+这意味着最低温度每变化一个单位，最高温度的变化约为 0.92%。
 
 现在我们已经训练了我们的算法，是时候做一些预测了。为此，我们将使用我们的测试数据，看看算法预测的百分比分数有多准确。要对测试数据进行预测，请执行以下脚本：
 
@@ -178,13 +178,13 @@ df = pd.DataFrame({'Actual': y_test.flatten(), 'Predicted': y_pred.flatten()})
 df
 ```
 
-![图示](../Images/696c3cda82e3d3e4ba71b48ae9e8ecea.png)
+![图示](img/696c3cda82e3d3e4ba71b48ae9e8ecea.png)
 
 实际值与预测值的比较
 
 我们还可以使用以下脚本将比较结果可视化为条形图：
 
-注意：由于记录数量庞大，为了表示目的，我只取了25条记录。
+注意：由于记录数量庞大，为了表示目的，我只取了 25 条记录。
 
 ```py
 df1 = df.head(25)
@@ -194,7 +194,7 @@ plt.grid(which='minor', linestyle=':', linewidth='0.5', color='black')
 plt.show()
 ```
 
-![图示](../Images/7b628b084f3c68daaf6554a4977a3dad.png)
+![图示](img/7b628b084f3c68daaf6554a4977a3dad.png)
 
 显示实际值与预测值比较的条形图。
 
@@ -208,7 +208,7 @@ plt.plot(X_test, y_pred, color='red', linewidth=2)
 plt.show()
 ```
 
-![图示](../Images/c923a92e331e7fbae77751d4f607d7a7.png)
+![图示](img/c923a92e331e7fbae77751d4f607d7a7.png)
 
 预测与测试数据
 
@@ -218,15 +218,15 @@ plt.show()
 
 **1\. 平均绝对误差**（MAE）是绝对误差的均值。计算公式为：
 
-![](../Images/cedb5bff739e459b15fe7db3b7512a94.png)
+![](img/cedb5bff739e459b15fe7db3b7512a94.png)
 
 **2\. 均方误差**（MSE）是平方误差的均值，计算公式为：
 
-![](../Images/0f81969d38f5691f4279106f9bbee73f.png)
+![](img/0f81969d38f5691f4279106f9bbee73f.png)
 
 **3\. 均方根误差**（RMSE）是平方误差均值的平方根：
 
-![](../Images/3203e40e4845fb4cc39c83007d1d37e5.png)
+![](img/3203e40e4845fb4cc39c83007d1d37e5.png)
 
 幸运的是，我们不需要手动执行这些计算。Scikit-Learn 库提供了预先构建的函数，可以用来为我们找出这些值。
 
@@ -254,10 +254,10 @@ print('Root Mean Squared Error:', np.sqrt(metrics.mean_squared_error(y_test, y_p
 
 +   [比较线性回归与逻辑回归](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 
-+   [使用线性回归模型的3个理由，而不是…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [使用线性回归模型的 3 个理由，而不是…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
 
 +   [数据科学中的线性回归](https://www.kdnuggets.com/2022/07/linear-regression-data-science.html)

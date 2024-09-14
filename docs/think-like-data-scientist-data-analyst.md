@@ -1,12 +1,12 @@
 # 如何像数据科学家一样思考
 
-> 原文：[https://www.kdnuggets.com/2020/05/think-like-data-scientist-data-analyst.html](https://www.kdnuggets.com/2020/05/think-like-data-scientist-data-analyst.html)
+> 原文：[`www.kdnuggets.com/2020/05/think-like-data-scientist-data-analyst.html`](https://www.kdnuggets.com/2020/05/think-like-data-scientist-data-analyst.html)
 
-[评论](#comments)
+评论
 
 **由 [Jo Stichbury](https://www.linkedin.com/in/jostichbury/)，自由技术写作人**
 
-![](../Images/447f13e4bf330d0f0563fbeacbc379c4.png)
+![](img/447f13e4bf330d0f0563fbeacbc379c4.png)
 
 数据科学是一个新兴且不断成熟的领域，各种工作职能不断出现，从数据工程和数据分析到机器学习和深度学习。数据科学家必须结合科学、创造性和调查思维，从各种数据集中提取意义，并解决客户面临的根本挑战。
 
@@ -18,7 +18,7 @@
 
 ### 像数据科学家一样思考
 
-![图](../Images/274abf936fa0aeaf525101da31fd4221.png)
+![图](img/274abf936fa0aeaf525101da31fd4221.png)
 
 *图片来自 svgsilh.com*[*CC0 1.0*](https://creativecommons.org/licenses/cc0/1.0/?ref=ccsearch)
 
@@ -64,7 +64,7 @@ Chu 强调了记录不仅要涵盖他当前的调查，还要包括所有先前�
 
 ### 学会编码
 
-![图示](../Images/16e84c0eb882acd5007442d8188c62ef.png)
+![图示](img/16e84c0eb882acd5007442d8188c62ef.png)
 
 *图片来源于*[*svgsilh.com*](https://svgsilh.com/?ref=hackernoon.com)
 
@@ -120,11 +120,11 @@ Ben Chu 的团队依赖开源机器学习包，如 Tensorflow、Pytorch 和 BERT
 
 **相关内容：**
 
-+   [用 NLP 发现争议](/2020/05/spotting-controversy-nlp.html)
++   用 NLP 发现争议
 
-+   [数据科学家的 4 种现实职业选择](/2020/04/4-career-options-data-scientists.html)
++   数据科学家的 4 种现实职业选择
 
-+   [如何在理想公司获得数据科学家职位](/2020/01/data-scientist-job-dream-company.html)
++   如何在理想公司获得数据科学家职位
 
 ### 相关主题
 

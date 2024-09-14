@@ -1,8 +1,8 @@
 # 来自大学的最佳 AI 课程与 YouTube 播放列表
 
-> 原文：[https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html](https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html)
+> 原文：[`www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html`](https://www.kdnuggets.com/2023/08/best-courses-ai-universities-youtube-playlists.html)
 
-![来自大学的最佳 AI 课程与 YouTube 播放列表](../Images/a41068ab8806af1d36f14e66777f4024.png)
+![来自大学的最佳 AI 课程与 YouTube 播放列表](img/a41068ab8806af1d36f14e66777f4024.png)
 
 由作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -52,7 +52,7 @@
 
 # 卡内基梅隆大学课程
 
-卡内基梅隆大学致力于培养解决问题的能力、创新驱动者以及技术和艺术的先驱。他们提供了良好的课程，以帮助你启动和提升人工智能职业生涯。随着大语言模型（LLMs）和自然语言处理（NLP）作用的发展，以下是帮助你更好理解LLMs理论和构建的课程列表。
+卡内基梅隆大学致力于培养解决问题的能力、创新驱动者以及技术和艺术的先驱。他们提供了良好的课程，以帮助你启动和提升人工智能职业生涯。随着大语言模型（LLMs）和自然语言处理（NLP）作用的发展，以下是帮助你更好理解 LLMs 理论和构建的课程列表。
 
 +   CS 10-708: 概率图模型 - [YouTube 播放列表](https://www.youtube.com/playlist?list=PLoZgVqqHOumTqxIhcdcpOAJOOimrRCGZn)
 

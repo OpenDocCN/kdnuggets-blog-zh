@@ -1,12 +1,12 @@
 # 学习自然语言处理的免费资源
 
-> 原文：[https://www.kdnuggets.com/2018/09/free-resources-natural-language-processing.html](https://www.kdnuggets.com/2018/09/free-resources-natural-language-processing.html)
+> 原文：[`www.kdnuggets.com/2018/09/free-resources-natural-language-processing.html`](https://www.kdnuggets.com/2018/09/free-resources-natural-language-processing.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Muktabh Mayank](https://twitter.com/muktabh), [ParallelDots](https://www.paralleldots.com/)** 提供。
 
-![](../Images/fb0dc19ad05061fdc63ed485a5b17f2a.png)
+![](img/fb0dc19ad05061fdc63ed485a5b17f2a.png)
 
 自然语言处理（NLP）是计算机系统理解人类语言的能力。自然语言处理是人工智能（AI）的一个子集。在线有许多资源可以帮助你在自然语言处理方面发展专长。
 
@@ -14,7 +14,7 @@
 
 ### **初学者的自然语言资源**
 
-![](../Images/d873ca29f1691333fbfa3d861d733b30.png)
+![](img/d873ca29f1691333fbfa3d861d733b30.png)
 
 初学者可以选择两种方法，即传统机器学习和深度学习，以开始自然语言处理。这两种方法有很大的不同。对于好奇者，[这里](https://towardsdatascience.com/why-deep-learning-is-needed-over-traditional-machine-learning-1b6a99177063)是这两者之间的差异。
 
@@ -38,7 +38,7 @@
 
 ### **自然语言资源供从业者使用**
 
-![](../Images/0509064d98e73366d835bb6b6c84c51e.png)
+![](img/0509064d98e73366d835bb6b6c84c51e.png)
 
 如果你是一名数据科学家，你将需要三种类型的资源：
 
@@ -50,23 +50,23 @@
 
 ### 快速入门指南 / 了解最新热点
 
-+   可以从Otter等人的《自然语言处理的深度学习》综述开始。你可以在 [这里](https://arxiv.org/abs/1807.10854) 访问这篇综述。
++   可以从 Otter 等人的《自然语言处理的深度学习》综述开始。你可以在 [这里](https://arxiv.org/abs/1807.10854) 访问这篇综述。
 
-+   Young等人的综述论文尝试总结深度学习自然语言处理中的所有前沿技术，推荐给实践者作为自然语言处理的入门读物。你可以在 [这里](https://arxiv.org/abs/1708.02709) 访问这篇论文。
++   Young 等人的综述论文尝试总结深度学习自然语言处理中的所有前沿技术，推荐给实践者作为自然语言处理的入门读物。你可以在 [这里](https://arxiv.org/abs/1708.02709) 访问这篇论文。
 
-+   你可以参考 [这篇](https://arxiv.org/abs/1808.03314)文章，以理解LSTM和RNN的基础知识，这些技术在自然语言处理（NLP）中被广泛使用。另一篇更常被引用（且声誉极高）的LSTM综述可以在 [这里](https://arxiv.org/abs/1503.04069)找到。这是一篇有趣的论文，可以帮助理解RNN的隐藏状态如何工作。阅读起来很愉快，可以在 [这里](https://github.com/locuslab/TCN) 访问。我总是推荐以下两个博客文章给任何还没有读过的人：
++   你可以参考 [这篇](https://arxiv.org/abs/1808.03314)文章，以理解 LSTM 和 RNN 的基础知识，这些技术在自然语言处理（NLP）中被广泛使用。另一篇更常被引用（且声誉极高）的 LSTM 综述可以在 [这里](https://arxiv.org/abs/1503.04069)找到。这是一篇有趣的论文，可以帮助理解 RNN 的隐藏状态如何工作。阅读起来很愉快，可以在 [这里](https://github.com/locuslab/TCN) 访问。我总是推荐以下两个博客文章给任何还没有读过的人：
 
 1.  http://colah.github.io/posts/2015-08-Understanding-LSTMs
 
 1.  https://distill.pub/2016/augmented-rnns/
 
-+   卷积神经网络（Convnets）可以用于理解自然语言。你可以通过阅读这篇论文 [这里](https://arxiv.org/abs/1801.06287) 来可视化Convnets在NLP中的工作原理。
++   卷积神经网络（Convnets）可以用于理解自然语言。你可以通过阅读这篇论文 [这里](https://arxiv.org/abs/1801.06287) 来可视化 Convnets 在 NLP 中的工作原理。
 
-+   Convnets和RNN的比较在 [这篇](https://arxiv.org/abs/1803.01271) 由Bai等人撰写的论文中得到了强调。所有的pytorch代码（我已经停止或大幅减少阅读非pytorch编写的深度学习代码）在 [这里](https://github.com/locuslab/TCN) 开源，并且让你感受到哥斯拉对战金刚或福特野马对比雪佛兰Camaro（如果你喜欢那种东西）。谁将赢得胜利！
++   Convnets 和 RNN 的比较在 [这篇](https://arxiv.org/abs/1803.01271) 由 Bai 等人撰写的论文中得到了强调。所有的 pytorch 代码（我已经停止或大幅减少阅读非 pytorch 编写的深度学习代码）在 [这里](https://github.com/locuslab/TCN) 开源，并且让你感受到哥斯拉对战金刚或福特野马对比雪佛兰 Camaro（如果你喜欢那种东西）。谁将赢得胜利！
 
 ### 针对特定问题的方法综述
 
-实践者需要的另一类资源是对以下类型问题的解答：“我需要训练一个算法来做X，我可以应用什么最酷（且易于访问）的东西？”。
+实践者需要的另一类资源是对以下类型问题的解答：“我需要训练一个算法来做 X，我可以应用什么最酷（且易于访问）的东西？”。
 
 你需要以下内容：
 
@@ -74,7 +74,7 @@
 
 人们首先解决的问题是什么？主要是文本分类。文本分类可以是将文本分类到不同的类别中，或检测文本中的情感/情绪。
 
-我想强调一个关于不同情感分析综述的简单阅读，描述在这个ParallelDots [博客](https://blog.paralleldots.com/data-science/breakthrough-research-papers-and-models-for-sentiment-analysis/) 中。尽管这篇综述是关于情感分析技术的，但它可以扩展到大多数文本分类问题。
+我想强调一个关于不同情感分析综述的简单阅读，描述在这个 ParallelDots [博客](https://blog.paralleldots.com/data-science/breakthrough-research-papers-and-models-for-sentiment-analysis/) 中。尽管这篇综述是关于情感分析技术的，但它可以扩展到大多数文本分类问题。
 
 我们（ParallelDots）的调查问卷技术性稍弱，旨在引导您到有趣的资源以理解一个概念。我推荐给您的 Arxiv 调查论文将非常技术性，需要您阅读其他重要论文以深入理解一个主题。我们建议的方式是通过我们的链接来熟悉并乐在其中，但要确保阅读我们推荐的详细指南。（奥克利博士的[课程](https://www.coursera.org/learn/learning-how-to-learn)讲解了块化学习，即您首先尝试从各处获取小块信息，然后再深入学习）。记住，虽然有趣很重要，但除非详细理解技术，否则在新情况中应用概念将会很困难。
 
@@ -82,9 +82,9 @@
 
 迁移学习革命已经影响了深度学习。就像在图像中，一个在 ImageNet 分类上训练的模型可以针对任何分类任务进行微调一样，针对维基百科的语言建模训练的 NLP 模型现在可以在相对较少的数据上进行文本分类。这里有两篇来自 OpenAI 和 Ruder 及 Howard 的论文，处理了这些技术。
 
-1.  [https://arxiv.org/abs/1801.06146](https://arxiv.org/abs/1801.06146)
+1.  [`arxiv.org/abs/1801.06146`](https://arxiv.org/abs/1801.06146)
 
-1.  [https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
+1.  [`s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf`](https://s3-us-west-2.amazonaws.com/openai-assets/research-covers/language-unsupervised/language_understanding_paper.pdf)
 
 Fast.ai 提供了更友好的文档来应用这些方法，详见[这里](http://nlp.fast.ai/classification/2018/05/15/introducting-ulmfit.html)。
 
@@ -98,47 +98,47 @@ Fast.ai 提供了更友好的文档来应用这些方法，详见[这里](http:/
 
 我们对类似任务的方法进行了有趣的回顾，详见[这里](https://blog.paralleldots.com/data-science/named-entity-recognition-milestone-models-papers-and-technologies/)。
 
-针对这些问题的一个优秀资源是今年COLING的研究论文，它提供了训练序列标注算法的最佳指南。你可以在[这里](https://arxiv.org/abs/1806.04470)获取。
+针对这些问题的一个优秀资源是今年 COLING 的研究论文，它提供了训练序列标注算法的最佳指南。你可以在[这里](https://arxiv.org/abs/1806.04470)获取。
 
 #### 机器翻译
 
-+   最近自然语言处理领域最大的进展之一是发现了能够将文本从一种语言翻译到另一种语言的算法。Google的系统是一个令人惊叹的16层LSTM（因为他们有大量的数据进行训练，所以不需要丢弃）并且提供了最先进的翻译结果。
++   最近自然语言处理领域最大的进展之一是发现了能够将文本从一种语言翻译到另一种语言的算法。Google 的系统是一个令人惊叹的 16 层 LSTM（因为他们有大量的数据进行训练，所以不需要丢弃）并且提供了最先进的翻译结果。
 
-媒体专家夸大了这一炒作，发布了虚假报道声称“Facebook不得不关闭发明了自己语言的AI”。以下是一些相关报道。
+媒体专家夸大了这一炒作，发布了虚假报道声称“Facebook 不得不关闭发明了自己语言的 AI”。以下是一些相关报道。
 
-1.  [https://gadgets.ndtv.com/social-networking/news/facebook-shuts-ai-system-after-bots-create-own-language-1731309](https://gadgets.ndtv.com/social-networking/news/facebook-shuts-ai-system-after-bots-create-own-language-1731309)
+1.  [`gadgets.ndtv.com/social-networking/news/facebook-shuts-ai-system-after-bots-create-own-language-1731309`](https://gadgets.ndtv.com/social-networking/news/facebook-shuts-ai-system-after-bots-create-own-language-1731309)
 
-1.  [https://www.forbes.com/sites/tonybradley/2017/07/31/facebook-ai-creates-its-own-language-in-creepy-preview-of-our-potential-future/#1d1ca041292c](https://www.forbes.com/sites/tonybradley/2017/07/31/facebook-ai-creates-its-own-language-in-creepy-preview-of-our-potential-future/#1d1ca041292c)
+1.  [`www.forbes.com/sites/tonybradley/2017/07/31/facebook-ai-creates-its-own-language-in-creepy-preview-of-our-potential-future/#1d1ca041292c`](https://www.forbes.com/sites/tonybradley/2017/07/31/facebook-ai-creates-its-own-language-in-creepy-preview-of-our-potential-future/#1d1ca041292c)
 
-+   关于机器翻译的详细教程，请参考Philip Koehn的研究论文[在这里](https://arxiv.org/abs/1709.07809)。使用深度学习进行机器翻译（我们称之为NMT或神经机器翻译）的具体综述在[这里](https://arxiv.org/abs/1707.07631)。
++   关于机器翻译的详细教程，请参考 Philip Koehn 的研究论文[在这里](https://arxiv.org/abs/1709.07809)。使用深度学习进行机器翻译（我们称之为 NMT 或神经机器翻译）的具体综述在[这里](https://arxiv.org/abs/1707.07631)。
 
 我的一些最喜欢的论文在这里—
 
-+   这篇[Google的论文](https://arxiv.org/abs/1609.08144)告诉你当你有大量的钱和数据时，如何解决一个问题。
++   这篇[Google 的论文](https://arxiv.org/abs/1609.08144)告诉你当你有大量的钱和数据时，如何解决一个问题。
 
-+   Facebook的[卷积神经机器翻译系统](https://arxiv.org/abs/1705.03122)（仅仅因为其酷炫的卷积方法）及其代码作为库被发布[在这里](https://github.com/facebookresearch/fairseq)。
++   Facebook 的[卷积神经机器翻译系统](https://arxiv.org/abs/1705.03122)（仅仅因为其酷炫的卷积方法）及其代码作为库被发布[在这里](https://github.com/facebookresearch/fairseq)。
 
-+   [https://marian-nmt.github.io/](https://marian-nmt.github.io/)是一个用于快速翻译的C++框架[http://www.aclweb.org/anthology/P18-4020](http://www.aclweb.org/anthology/P18-4020)
++   [`marian-nmt.github.io/`](https://marian-nmt.github.io/)是一个用于快速翻译的 C++框架[`www.aclweb.org/anthology/P18-4020`](http://www.aclweb.org/anthology/P18-4020)
 
-+   [http://opennmt.net/](http://opennmt.net/)使每个人都能训练他们的NMT系统。
++   [`opennmt.net/`](http://opennmt.net/)使每个人都能训练他们的 NMT 系统。
 
 #### 问答系统
 
 在我看来，这将是下一个“机器翻译”。问答任务有很多不同的类型。从选项中选择，基于段落或知识图谱选择答案，或基于图像回答问题（也称为视觉问答），有不同的数据集可以了解最前沿的方法。
 
-+   [SQuAD数据集](https://rajpurkar.github.io/SQuAD-explorer/)是一个测试算法阅读理解和回答问题能力的问答数据集。微软今年早些时候发布了一篇论文，声称他们已达到该[任务](https://blogs.microsoft.com/ai/microsoft-creates-ai-can-read-document-answer-questions-well-person/)的人类水平准确性。论文可以在[这里](https://www.ailab.microsoft.com/experiments/ef90706b-e822-4686-bbc4-94fd0bca5fc5)找到。另一个重要的算法（我觉得非常酷）是Allen AI的[BIDAF](https://allenai.github.io/bi-att-flow/)及其改进。
++   [SQuAD 数据集](https://rajpurkar.github.io/SQuAD-explorer/)是一个测试算法阅读理解和回答问题能力的问答数据集。微软今年早些时候发布了一篇论文，声称他们已达到该[任务](https://blogs.microsoft.com/ai/microsoft-creates-ai-can-read-document-answer-questions-well-person/)的人类水平准确性。论文可以在[这里](https://www.ailab.microsoft.com/experiments/ef90706b-e822-4686-bbc4-94fd0bca5fc5)找到。另一个重要的算法（我觉得非常酷）是 Allen AI 的[BIDAF](https://allenai.github.io/bi-att-flow/)及其改进。
 
-+   另一个重要的算法集是视觉问答，它回答关于图像的问题。Teney等人的[论文](https://allenai.github.io/bi-att-flow/)来自VQA 2017挑战赛，是一个很好的入门资源。你还可以在Github上找到它的实现[这里](https://github.com/markdtw/vqa-winner-cvprw-2017)。
++   另一个重要的算法集是视觉问答，它回答关于图像的问题。Teney 等人的[论文](https://allenai.github.io/bi-att-flow/)来自 VQA 2017 挑战赛，是一个很好的入门资源。你还可以在 Github 上找到它的实现[这里](https://github.com/markdtw/vqa-winner-cvprw-2017)。
 
-+   对大文档进行抽取式问答（类似于谷歌如何在前几条结果中突出显示对查询的回答）在现实生活中可以使用迁移学习（因此只需少量标注），如这篇ETH论文中所示[这里](https://arxiv.org/abs/1804.07097)。一篇非常好的论文批评了问答算法的“理解”，请参阅[这里](https://arxiv.org/abs/1808.04926)。如果你在这个领域工作，必须阅读。
++   对大文档进行抽取式问答（类似于谷歌如何在前几条结果中突出显示对查询的回答）在现实生活中可以使用迁移学习（因此只需少量标注），如这篇 ETH 论文中所示[这里](https://arxiv.org/abs/1804.07097)。一篇非常好的论文批评了问答算法的“理解”，请参阅[这里](https://arxiv.org/abs/1808.04926)。如果你在这个领域工作，必须阅读。
 
 #### 同义句生成、句子相似性或推理
 
-句子比较任务。NLP有三个不同的任务：句子相似性、同义句检测和自然语言推理（NLI），每个任务对语义理解的要求逐渐提高。[MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)及其子集斯坦福NLI是最知名的NLI基准数据集，最近成为了研究的重点。还有MS同义句语料库和Quora语料库用于同义句检测，以及SemEval数据集用于STS（语义文本相似性）。有关该领域高级模型的良好调查可以在[这里](https://arxiv.org/abs/1806.04330)找到。在临床领域应用NLI非常重要。（查找正确的医疗程序、药物的副作用及交叉效应等）。如果你希望将技术应用于特定领域，[这篇教程](https://arxiv.org/abs/1808.06752)是一个不错的阅读选择。
+句子比较任务。NLP 有三个不同的任务：句子相似性、同义句检测和自然语言推理（NLI），每个任务对语义理解的要求逐渐提高。[MultiNLI](https://www.nyu.edu/projects/bowman/multinli/)及其子集斯坦福 NLI 是最知名的 NLI 基准数据集，最近成为了研究的重点。还有 MS 同义句语料库和 Quora 语料库用于同义句检测，以及 SemEval 数据集用于 STS（语义文本相似性）。有关该领域高级模型的良好调查可以在[这里](https://arxiv.org/abs/1806.04330)找到。在临床领域应用 NLI 非常重要。（查找正确的医疗程序、药物的副作用及交叉效应等）。如果你希望将技术应用于特定领域，[这篇教程](https://arxiv.org/abs/1808.06752)是一个不错的阅读选择。
 
 这里是我在这个领域中最喜欢的论文列表
 
-+   自然语言推理在交互空间中的应用 – 它展示了一种非常巧妙的方法，将DenseNet（用于句子表示的卷积神经网络）应用于此。这个成果还是一个实习项目的结果，这让它更加酷炫！你可以在[这里](https://arxiv.org/pdf/1709.04348.pdf)阅读这篇论文。
++   自然语言推理在交互空间中的应用 – 它展示了一种非常巧妙的方法，将 DenseNet（用于句子表示的卷积神经网络）应用于此。这个成果还是一个实习项目的结果，这让它更加酷炫！你可以在[这里](https://arxiv.org/pdf/1709.04348.pdf)阅读这篇论文。
 
 +   Omar Levy 小组的这篇研究[论文](https://homes.cs.washington.edu/~roysch/papers/artifacts/artifacts_poster.pdf)表明，即使是简单的算法也能完成任务。这是因为算法仍然没有学习“推理”。
 
@@ -166,13 +166,13 @@ Fast.ai 提供了更友好的文档来应用这些方法，详见[这里](http:/
 
 Einstein AI – [ https://einstein.ai/research](https://einstein.ai/research)
 
-Google AI 博客 – [https://ai.googleblog.com/](https://ai.googleblog.com/)
+Google AI 博客 – [`ai.googleblog.com/`](https://ai.googleblog.com/)
 
-WildML – [http://www.wildml.com/](http://www.wildml.com/)
+WildML – [`www.wildml.com/`](http://www.wildml.com/)
 
-DistillPub – [https://distill.pub/](https://distill.pub/) (distillpub 是独特的，既是博客也是出版物)
+DistillPub – [`distill.pub/`](https://distill.pub/) (distillpub 是独特的，既是博客也是出版物)
 
-Sebastian Ruder – [http://ruder.io/](http://ruder.io/)
+Sebastian Ruder – [`ruder.io/`](http://ruder.io/)
 
 如果你喜欢这篇文章，必须关注我们的博客。我们经常在这里提供资源列表。
 
@@ -198,24 +198,24 @@ Sebastian Ruder – [http://ruder.io/](http://ruder.io/)
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 相关主题
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
-+   [2023年值得阅读的5本自然语言处理免费书籍](https://www.kdnuggets.com/2023/06/5-free-books-natural-language-processing-read-2023.html)
++   [2023 年值得阅读的 5 本自然语言处理免费书籍](https://www.kdnuggets.com/2023/06/5-free-books-natural-language-processing-read-2023.html)
 
-+   [掌握SQL、Python、数据科学、机器学习和自然语言处理的25本免费书籍](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [掌握 SQL、Python、数据科学、机器学习和自然语言处理的 25 本免费书籍](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [掌握自然语言处理的5门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-natural-language-processing)
++   [掌握自然语言处理的 5 门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-natural-language-processing)
 
 +   [图像识别和自然语言处理的迁移学习](https://www.kdnuggets.com/2022/01/transfer-learning-image-recognition-natural-language-processing.html)
 
-+   [如何使用PyTorch开始自然语言处理](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)
++   [如何使用 PyTorch 开始自然语言处理](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)

@@ -1,22 +1,22 @@
 # 顶级公司询问的问题：100+数据科学面试问题
 
-> 原文：[https://www.kdnuggets.com/2017/03/top-firms-100-data-science-interview-questions.html](https://www.kdnuggets.com/2017/03/top-firms-100-data-science-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2017/03/top-firms-100-data-science-interview-questions.html`](https://www.kdnuggets.com/2017/03/top-firms-100-data-science-interview-questions.html)
 
-![评论](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![评论](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **布伦丹·马丁**。
 
-![面试问题](../Images/d031d84822243a9e1a43bcca816c9395.png)来自Glassdoor的新数据让我们对一些顶级公司在数据科学家面试中常见的问题有了很好的了解。不幸的是，几乎每家公司都要求面试者签署保密协议。由于Glassdoor允许匿名，一些勇敢的灵魂给我们提供了一些出色的例子，展示了他们在Facebook、Google和微软等顶级公司面试过程中被问到的问题。
+![面试问题](img/d031d84822243a9e1a43bcca816c9395.png)来自 Glassdoor 的新数据让我们对一些顶级公司在数据科学家面试中常见的问题有了很好的了解。不幸的是，几乎每家公司都要求面试者签署保密协议。由于 Glassdoor 允许匿名，一些勇敢的灵魂给我们提供了一些出色的例子，展示了他们在 Facebook、Google 和微软等顶级公司面试过程中被问到的问题。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -38,7 +38,7 @@
 
 1.  你会如何处理具有高基数的分类特征？
 
-1.  你会如何总结一个Twitter动态？
+1.  你会如何总结一个 Twitter 动态？
 
 1.  在应用机器学习算法之前，数据清理和处理的步骤是什么？
 
@@ -48,7 +48,7 @@
 
 1.  描述箱线图和直方图的区别以及它们的使用场景。
 
-![推特](../Images/73e99544ab46a8efcfbd04a812e301d7.png)
+![推特](img/73e99544ab46a8efcfbd04a812e301d7.png)
 
 ### 推特
 
@@ -62,13 +62,13 @@
 
 1.  你会如何调查某个分布中的趋势是否由于异常情况造成的？
 
-1.  你如何估计Uber对交通和驾驶条件的影响？
+1.  你如何估计 Uber 对交通和驾驶条件的影响？
 
-1.  你会考虑使用哪些指标来跟踪Uber的付费广告策略是否有效？你会如何确定理想的客户获取成本？
+1.  你会考虑使用哪些指标来跟踪 Uber 的付费广告策略是否有效？你会如何确定理想的客户获取成本？
 
 ### LinkedIn
 
-1.  大数据工程师 你能解释一下什么是REST吗？
+1.  大数据工程师 你能解释一下什么是 REST 吗？
 
 ### 机器学习问题：
 
@@ -78,9 +78,9 @@
 
 1.  如果两个预测变量高度相关，逻辑回归的系数会有什么影响？系数的置信区间是多少？
 
-1.  高斯混合模型和K-Means有什么区别？
+1.  高斯混合模型和 K-Means 有什么区别？
 
-1.  你如何选择K-Means中的k值？
+1.  你如何选择 K-Means 中的 k 值？
 
 1.  你怎么知道高斯混合模型是否适用？
 
@@ -102,11 +102,11 @@
 
 1.  你如何处理不平衡的二分类问题？
 
-1.  L1正则化和L2正则化有什么区别？
+1.  L1 正则化和 L2 正则化有什么区别？
 
 ### Uber
 
-1.  你会给Uber司机哪些特征来预测他们是否会接受乘车请求？你会使用什么监督学习算法来解决这个问题？你会如何比较算法的结果？
+1.  你会给 Uber 司机哪些特征来预测他们是否会接受乘车请求？你会使用什么监督学习算法来解决这个问题？你会如何比较算法的结果？
 
 ### LinkedIn
 
@@ -260,7 +260,7 @@
 
 ### Facebook
 
-1.  假设你有两个二进制字符串，编写一个函数将它们相加，而不使用任何内建的字符串转整数转换或解析工具。例如，如果你给你的函数二进制字符串100和111，它应返回1011。你的解决方案的空间和时间复杂度是什么？
+1.  假设你有两个二进制字符串，编写一个函数将它们相加，而不使用任何内建的字符串转整数转换或解析工具。例如，如果你给你的函数二进制字符串 100 和 111，它应返回 1011。你的解决方案的空间和时间复杂度是什么？
 
 1.  编写一个函数，接受两个已排序的列表，并返回它们的并集，结果为排序后的列表。
 
@@ -274,31 +274,31 @@
 
 1.  如果你有一个不断流入的数字流，你会如何实时找到最频繁的数字？
 
-1.  编写一个将一个数字提升到另一个数字的函数，即pow()函数。
+1.  编写一个将一个数字提升到另一个数字的函数，即 pow()函数。
 
-1.  将一个大字符串拆分成有效的单词，并将它们存储在字典中。如果字符串无法拆分，返回false。你的解决方案的复杂度是什么？
+1.  将一个大字符串拆分成有效的单词，并将它们存储在字典中。如果字符串无法拆分，返回 false。你的解决方案的复杂度是什么？
 
 ### Salesforce
 
 1.  查找文档中最常用单词的计算复杂度是多少？
 
-1.  如果你有10TB的非结构化客户数据，你会如何提取有价值的信息？
+1.  如果你有 10TB 的非结构化客户数据，你会如何提取有价值的信息？
 
 ### Capital One
 
-1.  数据工程师 你会如何“拆分”两个数组（类似于SQL中的JOIN，但相反）？
+1.  数据工程师 你会如何“拆分”两个数组（类似于 SQL 中的 JOIN，但相反）？
 
 1.  创建一个执行加法的函数，其中数字由两个链表表示。
 
 1.  创建一个计算矩阵和的函数。
 
-1.  你会如何使用Python读取一个非常大的制表符分隔的数字文件，以统计每个数字的频率？
+1.  你会如何使用 Python 读取一个非常大的制表符分隔的数字文件，以统计每个数字的频率？
 
 ### PayPal
 
-1.  编写一个函数，接受一个句子，并打印出每个单词反向的相同句子，时间复杂度为O(n)。
+1.  编写一个函数，接受一个句子，并打印出每个单词反向的相同句子，时间复杂度为 O(n)。
 
-1.  编写一个函数，接受一个数组，将数组拆分成所有可能的两个数组集合，并打印两个数组最小值之间的最大差异，时间复杂度为O(n)。
+1.  编写一个函数，接受一个数组，将数组拆分成所有可能的两个数组集合，并打印两个数组最小值之间的最大差异，时间复杂度为 O(n)。
 
 1.  编写一个进行归并排序的程序。
 
@@ -312,13 +312,13 @@
 
 ### Facebook
 
-1.  数据工程师 如果你有一个原始数据表，你如何使用SQL进行ETL（提取、转换、加载），以获得所需格式的数据？
+1.  数据工程师 如果你有一个原始数据表，你如何使用 SQL 进行 ETL（提取、转换、加载），以获得所需格式的数据？
 
-1.  如何编写SQL查询来计算涉及两个连接的某个属性的频率表？如果你想对某个属性进行ORDER BY或GROUP BY，你需要做哪些更改？你会如何处理NULL值？
+1.  如何编写 SQL 查询来计算涉及两个连接的某个属性的频率表？如果你想对某个属性进行 ORDER BY 或 GROUP BY，你需要做哪些更改？你会如何处理 NULL 值？
 
 ### LinkedIn
 
-1.  数据工程师 你会如何提高ETL（提取、转换、加载）的吞吐量？
+1.  数据工程师 你会如何提高 ETL（提取、转换、加载）的吞吐量？
 
 ### 思维游戏与问题：
 
@@ -338,13 +338,13 @@
 
 ### Facebook
 
-1.  想象一下在一个等边三角形的每个角落都有三只蚂蚁，每只蚂蚁随机选择一个方向并开始沿着三角形的边缘移动。所有蚂蚁不发生碰撞的概率是多少？如果在一个等边多边形的N个角落有N只蚂蚁呢？
+1.  想象一下在一个等边三角形的每个角落都有三只蚂蚁，每只蚂蚁随机选择一个方向并开始沿着三角形的边缘移动。所有蚂蚁不发生碰撞的概率是多少？如果在一个等边多边形的 N 个角落有 N 只蚂蚁呢？
 
-1.  100的阶乘（即100!）中有多少个末尾零？
+1.  100 的阶乘（即 100!）中有多少个末尾零？
 
 ### LinkedIn
 
-1.  想象一下你正在爬一个包含n阶梯的楼梯，你可以一步迈任何数量的k步。你可以用多少种不同的方式到达楼梯的顶部？（这是对原始楼梯问题的修改）
+1.  想象一下你正在爬一个包含 n 阶梯的楼梯，你可以一步迈任何数量的 k 步。你可以用多少种不同的方式到达楼梯的顶部？（这是对原始楼梯问题的修改）
 
 问题来源于[Glassdoor](https://www.glassdoor.com/)
 
@@ -352,22 +352,22 @@
 
 **相关：**
 
-+   [7个更多必须知道的数据科学面试问题和答案](/2017/02/17-data-science-interview-questions-answers.html)
++   7 个更多必须知道的数据科学面试问题和答案
 
-+   [17个更多必须知道的数据科学面试问题和答案，第2部分](/2017/02/17-data-science-interview-questions-answers-part-2.html)
++   17 个更多必须知道的数据科学面试问题和答案，第二部分
 
-+   [17个更多必须知道的数据科学面试问题和答案，第3部分](/2017/03/17-data-science-interview-questions-answers-part-3.html)
++   17 个更多必须知道的数据科学面试问题和答案，第三部分
 
 ### 更多相关话题
 
-+   [你必须知道的前10个高级数据科学SQL面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的前 10 个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
-+   [KDnuggets新闻，5月4日：9门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [如何回答数据科学编码面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [15个你必须知道的Python编码面试问题，用于数据科学](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个你必须知道的 Python 编码面试问题，用于数据科学](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [12个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
++   [12 个最具挑战性的数据科学面试问题](https://www.kdnuggets.com/2022/07/12-challenging-data-science-interview-questions.html)
 
-+   [数据科学面试中的24个A/B测试面试问题及其破解指南](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)
++   [数据科学面试中的 24 个 A/B 测试面试问题及其破解指南](https://www.kdnuggets.com/2022/09/24-ab-testing-interview-questions-data-science-interviews-crack.html)

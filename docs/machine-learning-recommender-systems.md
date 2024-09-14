@@ -1,22 +1,22 @@
 # 机器学习推荐系统的简单介绍
 
-> 原文：[https://www.kdnuggets.com/2019/09/machine-learning-recommender-systems.html](https://www.kdnuggets.com/2019/09/machine-learning-recommender-systems.html)
+> 原文：[`www.kdnuggets.com/2019/09/machine-learning-recommender-systems.html`](https://www.kdnuggets.com/2019/09/machine-learning-recommender-systems.html)
 
-[评论](#comments)
+评论
 
-![](../Images/f1251bac1ee184b2f4af978545ceb7e2.png)
+![](img/f1251bac1ee184b2f4af978545ceb7e2.png)
 
 YouTube 如何知道你会观看哪些视频？Google 如何总是能知道你会阅读哪些新闻？它们使用一种叫做[*推荐系统*](https://en.wikipedia.org/wiki/Recommender_system)的[机器学习](https://en.wikipedia.org/wiki/Machine_learning)技术。
 
-实际上，推荐系统包括一类能够向用户建议“相关”项目的技术和算法。理想情况下，建议的项目对用户越相关越好，以便用户能够参与这些项目：YouTube视频、新闻文章、在线产品等等。
+实际上，推荐系统包括一类能够向用户建议“相关”项目的技术和算法。理想情况下，建议的项目对用户越相关越好，以便用户能够参与这些项目：YouTube 视频、新闻文章、在线产品等等。
 
-项目根据其相关性进行排名，最相关的项目会显示给用户。相关性是推荐系统必须确定的，主要基于历史数据。如果你最近观看了很多关于大象的YouTube视频，那么YouTube会开始向你推荐许多标题和主题相似的大象视频！
+项目根据其相关性进行排名，最相关的项目会显示给用户。相关性是推荐系统必须确定的，主要基于历史数据。如果你最近观看了很多关于大象的 YouTube 视频，那么 YouTube 会开始向你推荐许多标题和主题相似的大象视频！
 
 推荐系统一般分为两大类：协同过滤和基于内容的系统。
 
-![](../Images/32b65731739133f542ef8ec8e22ceda5.png)
+![](img/32b65731739133f542ef8ec8e22ceda5.png)
 
-图1：不同类型推荐系统的分类树。
+图 1：不同类型推荐系统的分类树。
 
 ### 协同过滤系统
 
@@ -24,9 +24,9 @@ YouTube 如何知道你会观看哪些视频？Google 如何总是能知道你�
 
 这种系统的核心思想是用户的历史数据应该足以做出预测。即我们不需要比这些历史数据更多的东西，不需要额外的用户推动，也不需要当前的趋势信息等。
 
-![](../Images/53d50abbb2536681f18d2fbdf4297ffc.png)
+![](img/53d50abbb2536681f18d2fbdf4297ffc.png)
 
-图2：展示了协同过滤如何预测用户对四个事物的评分：一张图片、一册书、一段视频和一个视频游戏。根据用户的历史数据，每个项目的喜欢和不喜欢，系统试图预测用户对一个他们还没有评分的新项目的评分。预测本身基于其他用户的过去评分，这些用户的评分和因此假设的偏好与当前用户相似。在这种情况下，系统做出了预测/推荐，即当前用户可能不会喜欢这个视频。[来源](https://en.wikipedia.org/wiki/Collaborative_filtering)由[Moshanin](https://commons.wikimedia.org/w/index.php?title=User:Moshanin&action=edit&redlink=1)
+图 2：展示了协同过滤如何预测用户对四个事物的评分：一张图片、一册书、一段视频和一个视频游戏。根据用户的历史数据，每个项目的喜欢和不喜欢，系统试图预测用户对一个他们还没有评分的新项目的评分。预测本身基于其他用户的过去评分，这些用户的评分和因此假设的偏好与当前用户相似。在这种情况下，系统做出了预测/推荐，即当前用户可能不会喜欢这个视频。[来源](https://en.wikipedia.org/wiki/Collaborative_filtering)由[Moshanin](https://commons.wikimedia.org/w/index.php?title=User:Moshanin&action=edit&redlink=1)
 
 除此之外，协同过滤方法进一步分为两个子组：基于记忆的方法和基于模型的方法。
 
@@ -80,9 +80,9 @@ item_recomendation = collab_filter_model.recommend(users=which_user_ids,
 
 与协同过滤相比，基于内容的方法会使用关于用户和/或项目的额外信息来进行预测。
 
-例如，在上面的动图中，基于内容的系统在进行预测时可能会考虑年龄、性别、职业和其他个人用户因素。如果我们知道视频是关于滑板的，但用户的年龄是87岁，那么预测这个人不会喜欢这个视频会容易得多！
+例如，在上面的动图中，基于内容的系统在进行预测时可能会考虑年龄、性别、职业和其他个人用户因素。如果我们知道视频是关于滑板的，但用户的年龄是 87 岁，那么预测这个人不会喜欢这个视频会容易得多！
 
-![](../Images/7a5a78a3c94dd8282b8511c5ec59bd9e.png)
+![](img/7a5a78a3c94dd8282b8511c5ec59bd9e.png)
 
 这就是为什么当你注册许多在线网站和服务时，它们会要求你（可选）提供你的出生日期、性别和种族！这只是为他们的系统提供更多数据，以便进行更好的预测。
 
@@ -143,11 +143,11 @@ item_recomendation = cotent_filter_model.recommend(users=which_user_ids,
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 

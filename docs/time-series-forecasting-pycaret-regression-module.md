@@ -1,12 +1,12 @@
 # 使用 PyCaret 回归模块进行时间序列预测
 
-> 原文：[https://www.kdnuggets.com/2021/04/time-series-forecasting-pycaret-regression-module.html](https://www.kdnuggets.com/2021/04/time-series-forecasting-pycaret-regression-module.html)
+> 原文：[`www.kdnuggets.com/2021/04/time-series-forecasting-pycaret-regression-module.html`](https://www.kdnuggets.com/2021/04/time-series-forecasting-pycaret-regression-module.html)
 
-[评论](#comments)
+评论
 
 **由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 的创始人和作者**
 
-![](../Images/a6cdf841abae5640ac801eefa26bb36f.png)
+![](img/a6cdf841abae5640ac801eefa26bb36f.png)
 
 由[Lukas Blazek](https://unsplash.com/@goumbik?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)提供的照片
 
@@ -78,7 +78,7 @@ data['Date'] = pd.to_datetime(data['Date'])
 data.head()
 ```
 
-![](../Images/bff8971948d09ca06d2bb13f82d49f0a.png)
+![](img/bff8971948d09ca06d2bb13f82d49f0a.png)
 
 示例行
 
@@ -88,7 +88,7 @@ fig = px.line(data, x="Date", y=["Passengers", "MA12"], template = 'plotly_dark'
 fig.show()
 ```
 
-![](../Images/500c1623248cc70c070c429bf959d673.png)
+![](img/500c1623248cc70c070c429bf959d673.png)
 
 美国航空乘客数据集的时间序列图（移动平均 = 12）
 
@@ -102,7 +102,7 @@ data = data[['Series', 'Year', 'Month', 'Passengers']] **# check the head of the
 data.head()
 ```
 
-![](../Images/626a01d41c208d90c7927c7aa9fba070.png)
+![](img/626a01d41c208d90c7927c7aa9fba070.png)
 
 提取特征后的示例行
 
@@ -130,21 +130,21 @@ s = setup(data = train, test_data = test, target = 'Passengers', fold_strategy =
 best = compare_models(sort = 'MAE')
 ```
 
-![](../Images/136857b2f9293dd6a7fba035c903266e.png)
+![](img/136857b2f9293dd6a7fba035c903266e.png)
 
 来自 compare_models 的结果
 
-基于交叉验证MAE的最佳模型是**最小角回归**（MAE: 22.3）。让我们检查测试集上的得分。
+基于交叉验证 MAE 的最佳模型是**最小角回归**（MAE: 22.3）。让我们检查测试集上的得分。
 
 ```py
 prediction_holdout = predict_model(best);
 ```
 
-![](../Images/dafd830ef21a6dc14c1c98221ba18d03.png)
+![](img/dafd830ef21a6dc14c1c98221ba18d03.png)
 
 来自 predict_model(best) 函数的结果
 
-测试集上的MAE比交叉验证的MAE高12%。虽然效果不佳，但我们将继续使用它。让我们绘制实际与预测的线条，以可视化拟合情况。
+测试集上的 MAE 比交叉验证的 MAE 高 12%。虽然效果不佳，但我们将继续使用它。让我们绘制实际与预测的线条，以可视化拟合情况。
 
 ```py
 **# generate predictions on the original dataset**
@@ -154,11 +154,11 @@ fig = px.line(predictions, x='Date', y=["Passengers", "Label"], template = 'plot
 fig.add_vrect(x0="1960-01-01", x1="1960-12-01", fillcolor="grey", opacity=0.25, line_width=0)fig.show()
 ```
 
-![](../Images/e8ad08b37882bfa2695d5ae59b04070c.png)
+![](img/e8ad08b37882bfa2695d5ae59b04070c.png)
 
 实际与预测的美国航空乘客数（1949–1960）
 
-在最后的灰色背景区域是测试期（即1960年）。现在让我们完成模型，即在整个数据集上训练最佳模型，即*最小角回归*（这次包括测试集）。
+在最后的灰色背景区域是测试期（即 1960 年）。现在让我们完成模型，即在整个数据集上训练最佳模型，即*最小角回归*（这次包括测试集）。
 
 ```py
 final_best = finalize_model(best)
@@ -166,7 +166,7 @@ final_best = finalize_model(best)
 
 ### ???? 创建一个未来评分数据集
 
-现在我们已经在整个数据集（1949到1960年）上训练了模型，让我们预测未来五年，直到1964年。为了使用我们的最终模型生成未来的预测，我们首先需要创建一个包含未来日期的月份、年份、系列列的数据集。
+现在我们已经在整个数据集（1949 到 1960 年）上训练了模型，让我们预测未来五年，直到 1964 年。为了使用我们的最终模型生成未来的预测，我们首先需要创建一个包含未来日期的月份、年份、系列列的数据集。
 
 ```py
 future_dates = pd.date_range(start = '1961-01-01', end = '1965-01-01', freq = 'MS')future_df = pd.DataFrame()future_df['Month'] = [i.month for i in future_dates]
@@ -174,7 +174,7 @@ future_df['Year'] = [i.year for i in future_dates]
 future_df['Series'] = np.arange(145,(145+len(future_dates)))future_df.head()
 ```
 
-![](../Images/800ac186d10003a1706f0c7524d37c30.png)
+![](img/800ac186d10003a1706f0c7524d37c30.png)
 
 从 future_df 中抽取的样本行
 
@@ -185,7 +185,7 @@ predictions_future = predict_model(final_best, data=future_df)
 predictions_future.head()
 ```
 
-![](../Images/63b6571d92576786419df63d7b29506e.png)
+![](img/63b6571d92576786419df63d7b29506e.png)
 
 从 predictions_future 中抽取的样本行
 
@@ -198,31 +198,31 @@ concat_df.set_index(concat_df_i, inplace=True)fig = px.line(concat_df, x=concat_
 fig.show()
 ```
 
-![](../Images/fde746a874f0f85f086fb18718ce69d3.png)
+![](img/fde746a874f0f85f086fb18718ce69d3.png)
 
-实际（1949–1960年）与预测（1961–1964年）的美国航空乘客数
+实际（1949–1960 年）与预测（1961–1964 年）的美国航空乘客数
 
 这不是很简单吗？
 
-使用这个轻量级工作流自动化库，你可以实现无限的可能。如果你觉得有用，请不要忘记在我们的GitHub仓库上给我们⭐️。
+使用这个轻量级工作流自动化库，你可以实现无限的可能。如果你觉得有用，请不要忘记在我们的 GitHub 仓库上给我们⭐️。
 
-想了解更多关于PyCaret的内容，请关注我们的[LinkedIn](https://www.linkedin.com/company/pycaret/)和[Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)。
+想了解更多关于 PyCaret 的内容，请关注我们的[LinkedIn](https://www.linkedin.com/company/pycaret/)和[Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)。
 
-加入我们的Slack频道。邀请链接[这里](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg)。
+加入我们的 Slack 频道。邀请链接[这里](https://join.slack.com/t/pycaret/shared_invite/zt-p7aaexnl-EqdTfZ9U~mF0CwNcltffHg)。
 
 ### 你可能也对以下内容感兴趣：
 
-[使用PyCaret 2.0在Power BI中构建自己的AutoML](https://towardsdatascience.com/build-your-own-automl-in-power-bi-using-pycaret-8291b64181d)
+[使用 PyCaret 2.0 在 Power BI 中构建自己的 AutoML](https://towardsdatascience.com/build-your-own-automl-in-power-bi-using-pycaret-8291b64181d)
 
-[使用Docker在Azure上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)
+[使用 Docker 在 Azure 上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-cloud-using-docker-container-bec64458dc01)
 
-[在Google Kubernetes Engine上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)
+[在 Google Kubernetes Engine 上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-model-on-google-kubernetes-engine-94daac85108b)
 
-[在AWS Fargate上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507)
+[在 AWS Fargate 上部署机器学习管道](https://towardsdatascience.com/deploy-machine-learning-pipeline-on-aws-fargate-eb6e1c50507)
 
 [构建并部署你的第一个机器学习网页应用](https://towardsdatascience.com/build-and-deploy-your-first-machine-learning-web-app-e020db344a99)
 
-[使用AWS Fargate无服务器部署PyCaret和Streamlit应用](https://towardsdatascience.com/deploy-pycaret-and-streamlit-app-using-aws-fargate-serverless-infrastructure-8b7d7c0584c2)
+[使用 AWS Fargate 无服务器部署 PyCaret 和 Streamlit 应用](https://towardsdatascience.com/deploy-pycaret-and-streamlit-app-using-aws-fargate-serverless-infrastructure-8b7d7c0584c2)
 
 [使用 PyCaret 和 Streamlit 构建和部署机器学习网络应用](https://towardsdatascience.com/build-and-deploy-machine-learning-web-app-using-pycaret-and-streamlit-28883a569104)
 
@@ -258,21 +258,21 @@ fig.show()
 
 **相关内容：**
 
-+   [将机器学习管道部署到云端使用 Docker 容器](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
++   将机器学习管道部署到云端使用 Docker 容器
 
-+   [使用 PyCaret 进行自动化异常检测](/2021/04/automated-anomaly-detection-pycaret.html)
++   使用 PyCaret 进行自动化异常检测
 
-+   [GitHub 是你所需的最佳 AutoML 工具](/2020/08/github-best-automl-ever-need.html)
++   GitHub 是你所需的最佳 AutoML 工具
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

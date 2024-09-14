@@ -1,22 +1,22 @@
 # 5 个最佳端到端开源 MLOps 工具
 
-> 原文：[https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
+> 原文：[`www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools`](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
 
-![5 个最佳端到端开源 MLOps 工具封面图](../Images/ce3df6adb8e60f010f764bba4cb7a4e3.png)
+![5 个最佳端到端开源 MLOps 工具封面图](img/ce3df6adb8e60f010f764bba4cb7a4e3.png)
 
 图片作者
 
-由于 [2024年你必须尝试的 7 个端到端 MLOps 平台](/7-end-to-end-mlops-platforms-you-must-try-in-2024) 博客的受欢迎程度，我正在编写另一份开源端到端 MLOPs 工具的列表。
+由于 2024 年你必须尝试的 7 个端到端 MLOps 平台 博客的受欢迎程度，我正在编写另一份开源端到端 MLOPs 工具的列表。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 [kubeflow/kubeflow](https://github.com/kubeflow/kubeflow) 使所有机器学习操作在 Kubernetes 上变得简单、可移植和可扩展。它是一个云原生框架，允许你创建机器学习管道，并在生产环境中训练和部署模型。
 
-![Kubeflow 仪表板 UI](../Images/b928c9d22dc772ae9adcd65bae4e3a1c.png)
+![Kubeflow 仪表板 UI](img/b928c9d22dc772ae9adcd65bae4e3a1c.png)
 
 图片来自 [Kubeflow](https://www.kubeflow.org/docs/components/central-dash/overview/)
 
@@ -40,7 +40,7 @@ Kubeflow 兼容于云服务（AWS、GCP、Azure）和自托管服务。它允许
 
 [mlflow/mlflow](https://github.com/mlflow/mlflow) 通常用于实验跟踪和日志记录。然而，随着时间的推移，它已成为一个端到端的 MLOps 工具，适用于各种机器学习模型，包括 LLMs（大型语言模型）。
 
-![MLflow 工作流图](../Images/5e9806e11f25fe5366467281e6ab93c6.png)
+![MLflow 工作流图](img/5e9806e11f25fe5366467281e6ab93c6.png)
 
 图片来自 [MLflow](https://mlflow.org/docs/latest/introduction/index.html)
 
@@ -66,7 +66,7 @@ MLFlow 有 6 个核心组件：
 
 Metaflow 最初在 Netflix 开发，以提高数据科学家的生产力。它现在已经开源，所有人都可以受益。
 
-![Metaflow Python 代码](../Images/6267bda44d033aca088d158f1c4f0fec.png)
+![Metaflow Python 代码](img/6267bda44d033aca088d158f1c4f0fec.png)
 
 图像来自 [Metaflow Docs](https://docs.metaflow.org/introduction/what-is-metaflow)
 
@@ -76,7 +76,7 @@ Metaflow 提供了一个统一的 API，用于数据管理、版本控制、编�
 
 [SeldonIO/seldon-core](https://github.com/SeldonIO/seldon-core) 是另一个流行的端到端 MLOps 工具，它让你打包、训练、部署和监控生产中的数千个机器学习模型。
 
-![Seldon Core 工作流图](../Images/958a564e5334c773dbf5fc1f203824dd.png)
+![Seldon Core 工作流图](img/958a564e5334c773dbf5fc1f203824dd.png)
 
 图像来自 [seldon-core](https://github.com/SeldonIO/seldon-core/)
 
@@ -102,7 +102,7 @@ Seldon Core 将你的机器学习模型转换为 REST/GRPC 微服务。我可以
 
 [mlrun/mlrun](https://github.com/mlrun/mlrun) 框架允许轻松构建和管理生产中的机器学习应用程序。它简化了生产数据摄取、机器学习管道和在线应用程序，显著减少了工程工作量、生产时间和计算资源。
 
-![MLRun 工作流程图](../Images/3ccfce9087762755c216820ea4df9121.png)
+![MLRun 工作流程图](img/3ccfce9087762755c216820ea4df9121.png)
 
 图片来源于 [MLRun](https://www.mlrun.org/)
 

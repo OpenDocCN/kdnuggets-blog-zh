@@ -1,8 +1,8 @@
-# 使用Python中的标准差移除离群值
+# 使用 Python 中的标准差移除离群值
 
-> 原文：[https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
+> 原文：[`www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html`](https://www.kdnuggets.com/2017/02/removing-outliers-standard-deviation-python.html)
 
-![使用Python中的标准差移除离群值](../Images/27013f68fb6c36b6adf4edfa9d066c9f.png)
+![使用 Python 中的标准差移除离群值](img/27013f68fb6c36b6adf4edfa9d066c9f.png)
 
 编辑器提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -34,11 +34,11 @@
 12 31 31 16 28 47 9 5 40 47
 ```
 
-两者的均值都是25。然而，第一个数据集的值更接近均值，而第二个数据集的值则更分散。
+两者的均值都是 25。然而，第一个数据集的值更接近均值，而第二个数据集的值则更分散。
 
-更准确地说，第一个数据集的标准差为3.13，而第二个数据集的标准差为14.67。
+更准确地说，第一个数据集的标准差为 3.13，而第二个数据集的标准差为 14.67。
 
-然而，要理解像3.13或14.67这样的数字并不容易。现在，我们只知道第二组数据的“分散程度”比第一组更高。
+然而，要理解像 3.13 或 14.67 这样的数字并不容易。现在，我们只知道第二组数据的“分散程度”比第一组更高。
 
 让我们将其应用于更实际的使用。
 
@@ -54,17 +54,17 @@
 
 这样的值遵循正态分布。
 
-根据 [维基百科关于正态分布的文章](https://en.wikipedia.org/wiki/Normal_distribution)，大约68%的从正态分布中抽取的值在均值的一个标准差σ内；大约95%的值在两个标准差内；大约99.7%的值在三个标准差内。
+根据 [维基百科关于正态分布的文章](https://en.wikipedia.org/wiki/Normal_distribution)，大约 68%的从正态分布中抽取的值在均值的一个标准差σ内；大约 95%的值在两个标准差内；大约 99.7%的值在三个标准差内。
 
-这一事实被称为68-95-99.7（经验）规则，或3-sigma规则。
+这一事实被称为 68-95-99.7（经验）规则，或 3-sigma 规则。
 
 # 使用正态分布和标准差移除离群值
 
-当我需要清理来自数百万个生成取暖设备数据的IoT设备的数据时，我成功应用了这一规则。每个数据点包含某一时刻的电力使用情况。
+当我需要清理来自数百万个生成取暖设备数据的 IoT 设备的数据时，我成功应用了这一规则。每个数据点包含某一时刻的电力使用情况。
 
-然而，有时候设备的准确性不是100%，可能会给出非常高或非常低的值。
+然而，有时候设备的准确性不是 100%，可能会给出非常高或非常低的值。
 
-我们需要移除这些离群值，因为它们使我们图表上的刻度不切实际。挑战在于这些离群值的数量从未固定。有时我们会获得所有有效的值，有时这些错误读数会占据多达10%的数据点。
+我们需要移除这些离群值，因为它们使我们图表上的刻度不切实际。挑战在于这些离群值的数量从未固定。有时我们会获得所有有效的值，有时这些错误读数会占据多达 10%的数据点。
 
 我们的方法是通过消除任何高于（均值 + 2*标准差）和低于（均值 - 2*标准差）的点来去除异常值，然后再绘制频率图。
 

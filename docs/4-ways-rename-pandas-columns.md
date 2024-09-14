@@ -1,8 +1,8 @@
 # 4 种重命名 Pandas 列的方法
 
-> 原文：[https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html](https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html)
+> 原文：[`www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html`](https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html)
 
-![4 种重命名 Pandas 列的方法](../Images/519d378f8fcac370c0bd52bdb2897606.png)
+![4 种重命名 Pandas 列的方法](img/519d378f8fcac370c0bd52bdb2897606.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@ Pandas DataFrame 现在已经成为主流。每个人都在使用它进行数据
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -56,7 +56,7 @@ student_df_1.rename(columns={"id": "ID"}, inplace=True)
 student_df_1
 ```
 
-![4 种重命名 Pandas 列的方法](../Images/ac9f75094db66255a84adcde5048420b.png)
+![4 种重命名 Pandas 列的方法](img/ac9f75094db66255a84adcde5048420b.png)
 
 > **注意：** `inplace = True` 意味着我们正在对 DataFrame 应用更改。这类似于 `df = df.rename()`
 
@@ -75,7 +75,7 @@ student_df_1.rename(
 student_df_1
 ```
 
-![4 种重命名 Pandas 列的方法](../Images/ab79b1d3206726bdc163f5c561ceba51.png)
+![4 种重命名 Pandas 列的方法](img/ab79b1d3206726bdc163f5c561ceba51.png)
 
 # 方法 2
 
@@ -90,7 +90,7 @@ student_df_2.columns = ["Student_ID", "First_Name", "Average_Grade"]
 student_df_2
 ```
 
-![重命名 Pandas 列的 4 种方法](../Images/2de14c257b734139b58d732bd0b88d9a.png)
+![重命名 Pandas 列的 4 种方法](img/2de14c257b734139b58d732bd0b88d9a.png)
 
 # 方法 3
 
@@ -110,7 +110,7 @@ student_df_3.columns = student_df_3.columns.str.replace("grade", "Grades")
 student_df_3
 ```
 
-![重命名 Pandas 列的 4 种方法](../Images/940f1cbef5e0255c5b64774f268b79ff.png)
+![重命名 Pandas 列的 4 种方法](img/940f1cbef5e0255c5b64774f268b79ff.png)
 
 # 方法 4
 
@@ -123,7 +123,7 @@ student_df_4.set_axis(["A", "B", "C"], axis="columns", inplace=True)
 student_df_4
 ```
 
-![重命名 Pandas 列的 4 种方法](../Images/186608f880b6ae105d9dbcd751809edc.png)
+![重命名 Pandas 列的 4 种方法](img/186608f880b6ae105d9dbcd751809edc.png)
 
 **[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热爱构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为心理健康问题困扰的学生开发一个 AI 产品。
 

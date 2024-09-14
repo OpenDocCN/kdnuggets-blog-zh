@@ -1,8 +1,8 @@
 # 数据科学领域受欢迎的分布式计算包排名
 
-> 原文：[https://www.kdnuggets.com/2018/03/top-distributed-computing-packages-data-science.html](https://www.kdnuggets.com/2018/03/top-distributed-computing-packages-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/03/top-distributed-computing-packages-data-science.html`](https://www.kdnuggets.com/2018/03/top-distributed-computing-packages-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Rachel Allen](https://github.com/raykallen/) 和 [Michael Li](https://github.com/tianhuil/)**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 **结果与讨论**
 
-[![排名受欢迎的分布式计算包数据科学](../Images/ed41a380b85d40efe98c8a6160ef8069.png)](http://blog.thedataincubator.com/wp-content/uploads/2018/02/Ranking-Distributed-Computing-Packages.png)
+![排名受欢迎的分布式计算包数据科学](http://blog.thedataincubator.com/wp-content/uploads/2018/02/Ranking-Distributed-Computing-Packages.png)
 
 包排名是基于等权重的三个组件：GitHub（stars 和 forks）、Stack Overflow（标签和问题）以及 Google 搜索结果数量。这些数据是通过可用的 API 获取的。制定一个全面的分布式计算包列表是棘手的——最终，我们抓取了我们认为具有代表性的三个不同列表。我们选择专注于 140 个框架和分布式编程包（详见下文方法）。计算每个指标的标准化分数使我们能够查看哪些包在每个类别中脱颖而出。[完整排名在这里](https://github.com/thedataincubator/data-science-blogs/blob/master/output/DL_libraries_final_Rankings.csv)，而[原始数据在这里](https://github.com/thedataincubator/data-science-blogs/blob/master/output/distributed_computing_data.csv)。
 
@@ -40,39 +40,39 @@ Apache Storm (4)，最初被誉为实时的 Apache Hadoop，是一个仅用于�
 
 **Stratio Crossdata 是排名最高的数据中心和增长最快的包**
 
-Stratio Crossdata (6)通过提供统一的方式访问多个数据存储，扩展了Apache Spark的功能。
+Stratio Crossdata (6)通过提供统一的方式访问多个数据存储，扩展了 Apache Spark 的功能。
 
-Stratio Crossdata使用类似SQL的语言和一个API来访问多个具有不同性质的数据存储，如Apache Cassandra、ElasticSearch、Arvo或MongoDB。Stratio Crossdata的Google搜索结果数量较上个季度增长了400%，这是我们列表中140个包中增长率最大的。
+Stratio Crossdata 使用类似 SQL 的语言和一个 API 来访问多个具有不同性质的数据存储，如 Apache Cassandra、ElasticSearch、Arvo 或 MongoDB。Stratio Crossdata 的 Google 搜索结果数量较上个季度增长了 400%，这是我们列表中 140 个包中增长率最大的。
 
-**前10名中的两个由Twitter开发**
+**前 10 名中的两个由 Twitter 开发**
 
-在我们列表中的两个Twitter项目中，最受欢迎的是Apache Storm (4)，它于2011年由Twitter捐赠给Apache软件基金会。Twitter Heron (9)是Apache Storm的直接继任者，于2016年6月发布。Twitter Heron提供了改进的实时、容错流处理，其吞吐量高于Storm。Twitter Heron的季度增长率达到了180%，是第五高的。我们将有兴趣看到Twitter Heron是否能随着时间的推移进一步攀升。
+在我们列表中的两个 Twitter 项目中，最受欢迎的是 Apache Storm (4)，它于 2011 年由 Twitter 捐赠给 Apache 软件基金会。Twitter Heron (9)是 Apache Storm 的直接继任者，于 2016 年 6 月发布。Twitter Heron 提供了改进的实时、容错流处理，其吞吐量高于 Storm。Twitter Heron 的季度增长率达到了 180%，是第五高的。我们将有兴趣看到 Twitter Heron 是否能随着时间的推移进一步攀升。
 
-**Hadoop生态系统主导**
+**Hadoop 生态系统主导**
 
-Hadoop生态系统项目是最普遍和广泛采用的分布式计算框架和接口。我们排名前20的包中有17个是Hadoop生态系统的一部分或设计用于与Apache Spark或Apache Hadoop（包括HDFS）集成的。在Hadoop生态系统之外，Hazelcast (10)（一个内存数据网格）、Google BigQuery (12)（一个基于云的大数据分析Web服务，使用类似SQL的语法）和Metamarkets Druid (15)（一个实时分析大数据集的框架）在我们的指标中表现良好。
+Hadoop 生态系统项目是最普遍和广泛采用的分布式计算框架和接口。我们排名前 20 的包中有 17 个是 Hadoop 生态系统的一部分或设计用于与 Apache Spark 或 Apache Hadoop（包括 HDFS）集成的。在 Hadoop 生态系统之外，Hazelcast (10)（一个内存数据网格）、Google BigQuery (12)（一个基于云的大数据分析 Web 服务，使用类似 SQL 的语法）和 Metamarkets Druid (15)（一个实时分析大数据集的框架）在我们的指标中表现良好。
 
 **限制**
 
-与[任何分析](https://twitter.com/benhamner/status/732392995610198016)一样，在过程中做出了决定。所有源代码和数据都在[我们的Github页面](https://github.com/thedataincubator/data-science-blogs)上。分布式计算包的完整列表来源于几个渠道。
+与[任何分析](https://twitter.com/benhamner/status/732392995610198016)一样，在过程中做出了决定。所有源代码和数据都在[我们的 Github 页面](https://github.com/thedataincubator/data-science-blogs)上。分布式计算包的完整列表来源于几个渠道。
 
-自然，一些存在较长时间的库将有更高的指标，因此排名也更高。唯一考虑这一点的指标是Google搜索季度增长率。
+自然，一些存在较长时间的库将有更高的指标，因此排名也更高。唯一考虑这一点的指标是 Google 搜索季度增长率。
 
 数据展示了一些困难：
 
-+   一些库的名称是常见词（onyx、drools、disco），因此确定Google搜索结果数量的搜索词包括了额外的描述性词汇（“onyx平台”，“kiegroup drools”）或别名（“discoproject”）。所有搜索词可以在[这里](https://github.com/thedataincubator/data-science-blogs/blob/master/data/DC_packages_results_google.csv)找到。
++   一些库的名称是常见词（onyx、drools、disco），因此确定 Google 搜索结果数量的搜索词包括了额外的描述性词汇（“onyx 平台”，“kiegroup drools”）或别名（“discoproject”）。所有搜索词可以在[这里](https://github.com/thedataincubator/data-science-blogs/blob/master/data/DC_packages_results_google.csv)找到。
 
-+   手动检查确认了Stack Overflow标签和Github仓库位置。
++   手动检查确认了 Stack Overflow 标签和 Github 仓库位置。
 
-+   Stack Overflow标签可以在[这里](https://github.com/thedataincubator/data-science-blogs/blob/master/data/DC_packages_results_stackoverflow.csv)找到。
++   Stack Overflow 标签可以在[这里](https://github.com/thedataincubator/data-science-blogs/blob/master/data/DC_packages_results_stackoverflow.csv)找到。
 
-+   Github仓库名称可以在[这里](https://github.com/thedataincubator/data-science-blogs/blob/master/data/DC_packages_results_github.csv)找到。
++   Github 仓库名称可以在[这里](https://github.com/thedataincubator/data-science-blogs/blob/master/data/DC_packages_results_github.csv)找到。
 
 **方法**
 
 所有源代码和数据在 [我们的 GitHub 页面](https://github.com/thedataincubator/data-science-blogs) 上。
 
-我们首先从 [这些](https://github.com/onurakpolat/awesome-bigdata) [四个](https://projects.apache.org/projects.html?category) [来源](http://analyticsindiamag.com/10-hadoop-alternatives-consider-big-data/) [中](http://bigdata.andreamostosi.name/) 生成了一个140个分布式计算包的列表，然后收集了所有的指标，得出了一个用于排名的索引值。“Github”索引分数基于stars 和 forks，“Stack Overflow”索引分数基于包含包名的标签和问题，“搜索结果”基于过去五年的谷歌搜索总结果数以及过去三个月相对于前三个月计算的季度增长率。选择谷歌搜索结果数据作为指标而非谷歌趋势数据，因为某一关键词的索引网站数量比搜索该关键词的人数更能可靠地指示该包的使用流行度。此索引排名的计算可以在源代码中找到。
+我们首先从 [这些](https://github.com/onurakpolat/awesome-bigdata) [四个](https://projects.apache.org/projects.html?category) [来源](http://analyticsindiamag.com/10-hadoop-alternatives-consider-big-data/) [中](http://bigdata.andreamostosi.name/) 生成了一个 140 个分布式计算包的列表，然后收集了所有的指标，得出了一个用于排名的索引值。“Github”索引分数基于 stars 和 forks，“Stack Overflow”索引分数基于包含包名的标签和问题，“搜索结果”基于过去五年的谷歌搜索总结果数以及过去三个月相对于前三个月计算的季度增长率。选择谷歌搜索结果数据作为指标而非谷歌趋势数据，因为某一关键词的索引网站数量比搜索该关键词的人数更能可靠地指示该包的使用流行度。此索引排名的计算可以在源代码中找到。
 
 其他一些说明：
 
@@ -80,9 +80,9 @@ Hadoop生态系统项目是最普遍和广泛采用的分布式计算框架和�
 
 +   如果不存在 GitHub 存储库，forks 和 stars 记录为零。
 
-+   计数被标准化为均值0和偏差1，然后计算出“Github”和“Stack Overflow”索引分数，再与“搜索结果”结合得出总体索引分数。
++   计数被标准化为均值 0 和偏差 1，然后计算出“Github”和“Stack Overflow”索引分数，再与“搜索结果”结合得出总体索引分数。
 
-所有数据已于2017年9月19日下载。
+所有数据已于 2017 年 9 月 19 日下载。
 
 **资源**
 
@@ -114,15 +114,15 @@ Hadoop生态系统项目是最普遍和广泛采用的分布式计算框架和�
 
 **相关：**
 
-+   [2018年数据科学领域的15个顶级 Scala 库](https://www.kdnuggets.com/2018/02/top-15-scala-libraries-data-science-2018.html)
++   [2018 年数据科学领域的 15 个顶级 Scala 库](https://www.kdnuggets.com/2018/02/top-15-scala-libraries-data-science-2018.html)
 
 +   [使用 Optimus 在 Apache Spark 上进行机器学习](https://www.kdnuggets.com/2017/11/machine-learning-with-optimus.html)
 
-+   [在数据科学领域开局前需要了解的5件事](https://www.kdnuggets.com/2018/03/5-things-before-rushing-data-science.html)
++   [在数据科学领域开局前需要了解的 5 件事](https://www.kdnuggets.com/2018/03/5-things-before-rushing-data-science.html)
 
 ### 更多主题
 
-+   [2023年值得了解的顶级数据 Python 包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
++   [2023 年值得了解的顶级数据 Python 包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
 
 +   [3 个 Julia 包用于数据可视化](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
 
@@ -130,6 +130,6 @@ Hadoop生态系统项目是最普遍和广泛采用的分布式计算框架和�
 
 +   [数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 
-+   [KDnuggets™ 新闻 22:n07, 2月16日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07, 2 月 16 日：如何学习机器数学…](https://www.kdnuggets.com/2022/n07.html)
 
 +   [如何通过云计算高效扩展数据科学项目](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)

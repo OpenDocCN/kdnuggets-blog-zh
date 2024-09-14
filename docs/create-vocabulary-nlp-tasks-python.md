@@ -1,20 +1,20 @@
 # 如何在 Python 中为 NLP 任务创建词汇表
 
-> 原文：[https://www.kdnuggets.com/2019/11/create-vocabulary-nlp-tasks-python.html](https://www.kdnuggets.com/2019/11/create-vocabulary-nlp-tasks-python.html)
+> 原文：[`www.kdnuggets.com/2019/11/create-vocabulary-nlp-tasks-python.html`](https://www.kdnuggets.com/2019/11/create-vocabulary-nlp-tasks-python.html)
 
-[评论](#comments)![图示](../Images/38cd18ae0fa365efd5e4fa3ce7d05c1c.png)
+评论![图示](img/38cd18ae0fa365efd5e4fa3ce7d05c1c.png)
 
-在执行一个 [自然语言处理任务](/2017/11/framework-approaching-textual-data-tasks.html) 时，我们的文本数据转换大致按照以下方式进行：
+在执行一个 自然语言处理任务 时，我们的文本数据转换大致按照以下方式进行：
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -22,7 +22,7 @@
 
 请记住，这一切都发生在实际的 NLP 任务开始之前。
 
-语料库词汇表是处理文本的储存区域，在其被转化为某种 [表示形式](/2018/11/data-representation-natural-language-processing.html) 用于 [即将到来的任务](/2018/10/main-approaches-natural-language-processing-tasks.html) 之前，无论是分类，语言建模，还是其他任务。
+语料库词汇表是处理文本的储存区域，在其被转化为某种 表示形式 用于 即将到来的任务 之前，无论是分类，语言建模，还是其他任务。
 
 词汇表有几个主要目的：
 
@@ -96,7 +96,7 @@ def add_word(self, word):
     self.word2count[word] += 1
 ```
 
-如你所见，在尝试将一个单词标记添加到词汇表时，我们可能会遇到2种情况：要么该单词在词汇表中不存在（`if word not in self.word2index:`），要么存在（`else:`）。如果单词在词汇表中不存在，我们要将其添加到`word2index`字典中，将该单词的计数初始化为1，将单词的索引（计数器中的下一个可用数字）添加到`index2word`字典中，并将总单词计数增加1。另一方面，如果单词已经存在于词汇表中，则只需将该单词的计数器增加1。
+如你所见，在尝试将一个单词标记添加到词汇表时，我们可能会遇到 2 种情况：要么该单词在词汇表中不存在（`if word not in self.word2index:`），要么存在（`else:`）。如果单词在词汇表中不存在，我们要将其添加到`word2index`字典中，将该单词的计数初始化为 1，将单词的索引（计数器中的下一个可用数字）添加到`index2word`字典中，并将总单词计数增加 1。另一方面，如果单词已经存在于词汇表中，则只需将该单词的计数器增加 1。
 
 我们将如何将单词添加到词汇表中？我们将通过输入句子并进行分词处理来完成这项工作，逐一处理生成的标记。请再次注意，这些不一定是句子，命名这两个函数为`add_token`和`add_chunk`可能比`add_word`和`add_sentence`更为合适。我们将把重命名的工作留到另一天。
 
@@ -113,9 +113,9 @@ def add_sentence(self, sentence):
   self.num_sentences += 1
 ```
 
-这个函数接收一段文本，一个单一的字符串，并通过空白字符进行分割，以实现分词。这不是一种稳健的分词方法，也不是最佳实践，但目前足以满足我们的需求。我们将在后续文章中重新审视这个问题，并在我们的词汇类中构建更好的分词方法。在此期间，你可以在[这里](/2017/12/general-approach-preprocessing-text-data.html)和[这里](/2018/03/text-data-preprocessing-walkthrough-python.html)了解更多关于文本数据预处理的内容。
+这个函数接收一段文本，一个单一的字符串，并通过空白字符进行分割，以实现分词。这不是一种稳健的分词方法，也不是最佳实践，但目前足以满足我们的需求。我们将在后续文章中重新审视这个问题，并在我们的词汇类中构建更好的分词方法。在此期间，你可以在这里和这里了解更多关于文本数据预处理的内容。
 
-在通过空白字符分割句子后，我们将句子长度计数器为每个传递给`add_word`函数处理并添加到词汇表中的单词增加1（见上文）。然后我们检查该句子是否比我们处理过的其他句子更长；如果是，我们做个记录。我们还增加了到目前为止我们已经添加到词汇表中的语料库句子的计数。
+在通过空白字符分割句子后，我们将句子长度计数器为每个传递给`add_word`函数处理并添加到词汇表中的单词增加 1（见上文）。然后我们检查该句子是否比我们处理过的其他句子更长；如果是，我们做个记录。我们还增加了到目前为止我们已经添加到词汇表中的语料库句子的计数。
 
 然后我们将添加一对辅助函数，以便更容易访问我们两个最重要的查找表：
 
@@ -243,11 +243,11 @@ print(sent_idxs)
 
 **相关**：
 
-+   [自然语言处理任务的数据表示](/2018/11/data-representation-natural-language-processing.html)
++   自然语言处理任务的数据表示
 
-+   [自然语言处理任务的主要方法](/2018/10/main-approaches-natural-language-processing-tasks.html)
++   自然语言处理任务的主要方法
 
-+   [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   处理文本数据科学任务的框架
 
 ### 更多相关内容
 

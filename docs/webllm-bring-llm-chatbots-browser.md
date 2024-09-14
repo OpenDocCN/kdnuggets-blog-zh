@@ -1,8 +1,8 @@
 # Web LLM：将 LLM 聊天机器人带到浏览器
 
-> 原文：[https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
+> 原文：[`www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html`](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
 
-![Web LLM：将 LLM 聊天机器人带到浏览器](../Images/1d53a0269ef099c94062bdcebf457895.png)
+![Web LLM：将 LLM 聊天机器人带到浏览器](img/1d53a0269ef099c94062bdcebf457895.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -46,7 +46,7 @@ Web LLM 是一个使用 WebGPU 和 WebAssembly 等技术，使 LLM 和 LLM 应�
 
 Web LLM 项目利用底层系统的 GPU 和硬件能力在浏览器中运行大型语言模型。**机器学习编译** 的过程通过利用 [TVM Unity](https://discuss.tvm.apache.org/t/establish-tvm-unity-connection-a-technical-strategy/13344) 和一系列优化，将 LLM 的功能集成到浏览器端。
 
-![Web LLM: 将 LLM 聊天机器人带到浏览器](../Images/359f43c767f9eda2517ba92138545f41.png)
+![Web LLM: 将 LLM 聊天机器人带到浏览器](img/359f43c767f9eda2517ba92138545f41.png)
 
 Web LLM 的工作原理 | [图片来源](https://github.com/mlc-ai/web-llm)
 
@@ -54,7 +54,7 @@ Web LLM 的工作原理 | [图片来源](https://github.com/mlc-ai/web-llm)
 
 LLM 的功能首先被集成到 TVM 中的 IRModule 中。在 IRModule 中对函数进行多个转换，以获取优化后的可运行代码。[TensorIR](https://arxiv.org/abs/2207.04296) 是一种用于优化张量计算程序的编译器抽象。此外，INT-4 量化用于压缩模型的权重。TVM 运行时则通过 TypeScript 和 [emscripten](https://emscripten.org/) 实现，后者是一个将 C 和 C++ 代码转换为 WebAssembly 的 LLVM 编译器。
 
-![Web LLM: 将 LLM 聊天机器人带到浏览器](../Images/e6653174ffee8e836c1f39f4fc734339.png)
+![Web LLM: 将 LLM 聊天机器人带到浏览器](img/e6653174ffee8e836c1f39f4fc734339.png)
 
 作者提供的图片
 
@@ -62,7 +62,7 @@ LLM 的功能首先被集成到 TVM 中的 IRModule 中。在 IRModule 中对函
 
 第一次运行模型时需要一些时间来加载模型。因为第一次运行后缓存完成，后续运行速度会明显加快，并且开销最小。
 
-![Web LLM: 将 LLM 聊天机器人带到浏览器](../Images/584e9cfbfff3498667913a97fe4a1a14.png)
+![Web LLM: 将 LLM 聊天机器人带到浏览器](img/584e9cfbfff3498667913a97fe4a1a14.png)
 
 # Web LLM 的优缺点
 

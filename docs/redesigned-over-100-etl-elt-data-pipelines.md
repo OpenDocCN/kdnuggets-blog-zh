@@ -1,12 +1,12 @@
-# 我如何将100多个ETL重新设计为ELT数据管道
+# 我如何将 100 多个 ETL 重新设计为 ELT 数据管道
 
-> 原文：[https://www.kdnuggets.com/2021/11/redesigned-over-100-etl-elt-data-pipelines.html](https://www.kdnuggets.com/2021/11/redesigned-over-100-etl-elt-data-pipelines.html)
+> 原文：[`www.kdnuggets.com/2021/11/redesigned-over-100-etl-elt-data-pipelines.html`](https://www.kdnuggets.com/2021/11/redesigned-over-100-etl-elt-data-pipelines.html)
 
-[评论](#comments)
+评论
 
 **作者 [Nicholas Leong](https://www.linkedin.com/in/nickefy/)，数据工程师，作家**
 
-![](../Images/5a64ce73f49a562a81fa5893ec7d42df.png)
+![](img/5a64ce73f49a562a81fa5893ec7d42df.png)
 
 作者提供的图片
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -34,13 +34,13 @@
 
 他们几乎不知道，没有数据工程师，模型甚至不会存在。不会有任何数据可以传递。数据工程师构建仓库和管道，使数据能够在组织内流动。我们连接这些点。
 
-[**你应该在2021年成为数据工程师吗？**](https://towardsdatascience.com/should-you-become-a-data-engineer-in-2021-4db57b6cce35)
+[**你应该在 2021 年成为数据工程师吗？**](https://towardsdatascience.com/should-you-become-a-data-engineer-in-2021-4db57b6cce35)
 
-数据工程师是2019年增长最快的工作，**年增长率为50%**，高于数据科学家**32%的年增长率**。
+数据工程师是 2019 年增长最快的工作，**年增长率为 50%**，高于数据科学家**32%的年增长率**。
 
 因此，我在这里为大家介绍一些数据工程师的日常任务。数据管道只是其中之一。
 
-## ETL/ELT管道
+## ETL/ELT 管道
 
 > ETL — 提取、转换、加载
 > 
@@ -76,7 +76,7 @@
 
 +   构建连接
 
-![](../Images/97fc8c807073933c0797cd585086ef7c.png)
+![](img/97fc8c807073933c0797cd585086ef7c.png)
 
 图片由作者提供
 
@@ -90,7 +90,7 @@ Airflow 最初是由**Airbnb**的团队开发的，并开放源代码。它还�
 
 在解决这个问题后，我们必须改变提取数据的方式。团队建议**将我们的 ETL 管道重新设计为 ELT 管道**。稍后会详细讲解我们这样做的原因。
 
-![](../Images/15658012ec0844894f7de86408543162.png)
+![](img/15658012ec0844894f7de86408543162.png)
 
 图片由作者提供
 
@@ -112,7 +112,7 @@ a.user_id = b.user_id
 
 这是一个 ETL 管道的简单示例。它按预期工作，但团队意识到将其重新设计为 ELT 管道的**好处**。稍后会详细介绍。
 
-![](../Images/36c7974a56ab4e7173aec07e1358e3b6.png)
+![](img/36c7974a56ab4e7173aec07e1358e3b6.png)
 
 图片由作者提供
 
@@ -138,7 +138,7 @@ from users
 
 ## 为什么我这么做
 
-![](../Images/29a9cdb5ff4f6a2b66b1819e49f13a39.png)
+![](img/29a9cdb5ff4f6a2b66b1819e49f13a39.png)
 
 图片由 [Markus Winkler](https://unsplash.com/@markuswinkler?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -148,7 +148,7 @@ from users
 
 使用我们旧的数据管道花费了团队**资源**，特别是时间、精力和金钱。
 
-为了理解成本方面的情况，你需要知道我们的源数据库（Postgres）是2008年设置的古老机器。它托管在本地，也运行着旧版本的 Postgres，这使事情变得更加复杂。
+为了理解成本方面的情况，你需要知道我们的源数据库（Postgres）是 2008 年设置的古老机器。它托管在本地，也运行着旧版本的 Postgres，这使事情变得更加复杂。
 
 直到最近几年，组织才意识到对数据科学家和分析师来说需要一个集中的数据仓库。于是他们开始将旧的管道迁移到定时任务上。随着任务数量的增加，这消耗了机器上的资源。
 
@@ -156,7 +156,7 @@ from users
 
 对于那些不知道的人来说，SQL 联接是**最耗费资源的命令之一**。随着联接数量的增加，它将使查询的运行时间呈指数级增长。
 
-![](../Images/31cd342fe86942f3c1f3a7daedfdc14b.png)
+![](img/31cd342fe86942f3c1f3a7daedfdc14b.png)
 
 作者提供的图片
 
@@ -170,7 +170,7 @@ from users
 
 ## 可扩展性
 
-![](../Images/995369f87b81e5cf6bb9e7439b0b2a3e.png)
+![](img/995369f87b81e5cf6bb9e7439b0b2a3e.png)
 
 由 [Quinten de Graaf](https://unsplash.com/@quinten149?utm_source=medium&utm_medium=referral) 提供的照片，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -196,7 +196,7 @@ Google Cloud 利用**Cloud Monitoring**，这是一个收集 Google Cloud 技术
 
 ## 结论
 
-![](../Images/7d220a315695610328a8d88fc84123d7.png)
+![](img/7d220a315695610328a8d88fc84123d7.png)
 
 由 [Fernando Brasil](https://unsplash.com/@nandovish?utm_source=medium&utm_medium=referral) 提供的照片，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -234,22 +234,22 @@ Google Cloud 利用**Cloud Monitoring**，这是一个收集 Google Cloud 技术
 
 **相关：**
 
-+   [Prefect：如何使用Python编写和调度你的第一个ETL管道](/2021/08/prefect-write-schedule-etl-pipeline-python.html)
++   Prefect：如何使用 Python 编写和调度你的第一个 ETL 管道
 
-+   [机器学习管道的设计模式](/2021/11/design-patterns-machine-learning-pipelines.html)
++   机器学习管道的设计模式
 
-+   [ETL与ELT：指南与市场分析](/2021/10/etl-elt-guide-market-analysis.html)
++   ETL 与 ELT：指南与市场分析
 
 ### 更多相关话题
 
-+   [ETL与ELT：哪种更适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
++   [ETL 与 ELT：哪种更适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [ETL与ELT：数据集成对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)
++   [ETL 与 ELT：数据集成对决](https://www.kdnuggets.com/2022/08/etl-elt-data-integration-showdown.html)
 
-+   [SQL与数据集成：ETL和ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
++   [SQL 与数据集成：ETL 和 ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

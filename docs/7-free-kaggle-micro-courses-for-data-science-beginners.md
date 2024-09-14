@@ -1,8 +1,8 @@
 # 7 个免费 Kaggle 微课程
 
-> 原文：[https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)
+> 原文：[`www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners`](https://www.kdnuggets.com/7-free-kaggle-micro-courses-for-data-science-beginners)
 
-![7 个免费 Kaggle 微课程](../Images/7637a9f6f50e9bd81e9e58e15e4898fe.png)
+![7 个免费 Kaggle 微课程](img/7637a9f6f50e9bd81e9e58e15e4898fe.png)
 
 编辑器提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -48,7 +48,7 @@ Python 是数据科学中最广泛使用的语言之一。除了帮助你在数�
 
 # 2\. Pandas
 
-一旦你熟悉了基础 Python，你可以 [学习 pandas](/7-steps-to-mastering-data-wrangling-with-pandas-and-python)，这是一个强大的数据分析和处理库。
+一旦你熟悉了基础 Python，你可以 学习 pandas，这是一个强大的数据分析和处理库。
 
 通过一系列简短的课程和动手编码练习，[pandas](https://www.kaggle.com/learn/pandas)将帮助你学习在 pandas 数据框上执行以下操作：
 
@@ -88,7 +88,7 @@ Python 是数据科学中最广泛使用的语言之一。除了帮助你在数�
 
 # 4. SQL 入门
 
-SQL 是你可以学习的单一最重要的数据科学技能。要了解为什么 SQL 对数据科学如此重要，请阅读 KDnuggets 撰稿人 Nate Rosidi 的 ["为什么 SQL 是数据科学必学语言"](/why-sql-is-the-language-to-learn-for-data-science)。
+SQL 是你可以学习的单一最重要的数据科学技能。要了解为什么 SQL 对数据科学如此重要，请阅读 KDnuggets 撰稿人 Nate Rosidi 的 "为什么 SQL 是数据科学必学语言"。
 
 [SQL 入门](https://www.kaggle.com/learn/intro-to-sql)课程将教你如何使用 BigQuery Python 客户端查询数据集，并涵盖 SQL 基础知识、过滤和编写可读的 SQL 查询：
 

@@ -1,8 +1,8 @@
 # 成为数据科学专业人士的五个步骤
 
-> 原文：[https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
+> 原文：[`www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html`](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-![成为数据科学专业人士的五个步骤](../Images/1c72370a0356f71b0522ffc10a31437d.png)
+![成为数据科学专业人士的五个步骤](img/1c72370a0356f71b0522ffc10a31437d.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -36,7 +36,7 @@
 
 学习数据科学基础是你旅程中最重要的部分，因为它将为你迎接学习挑战做好准备。大多数初学者会在不知道自己想要什么的情况下开始课程。最终，90%的人甚至未能完成课程，因为随着时间的推移，课程变得越来越难。因此，如果你正在跟随趋势，请了解数据科学和职业道路。
 
-![成为数据科学专业人士的五个步骤](../Images/f5fcde97ab0299d7607c5c9cedaa2c37.png)
+![成为数据科学专业人士的五个步骤](img/f5fcde97ab0299d7607c5c9cedaa2c37.png)
 
 图片由 [Karolina Grabowska](https://www.pexels.com/@karolina-grabowska) 提供，来自 [pexels](https://www.pexels.com)
 
@@ -46,49 +46,49 @@
 
 +   [数据科学入门 - 初学者速成课程](https://www.youtube.com/watch?v=N6BghzuFLIg)
 
-+   [5分钟了解数据科学](https://www.youtube.com/watch?v=X3paOmcrTjQ)
++   [5 分钟了解数据科学](https://www.youtube.com/watch?v=X3paOmcrTjQ)
 
-+   [11个塑造未来的数据科学职业](https://www.northeastern.edu/graduate/blog/data-science-careers-shaping-our-future/)
++   [11 个塑造未来的数据科学职业](https://www.northeastern.edu/graduate/blog/data-science-careers-shaping-our-future/)
 
-+   [前9大数据科学工具](https://www.upgrad.com/blog/top-data-science-tools/)
++   [前 9 大数据科学工具](https://www.upgrad.com/blog/top-data-science-tools/)
 
-+   [数据分析师和数据科学家学习统计的7天计划](https://www.youtube.com/watch?v=TUn-prncFfU)
++   [数据分析师和数据科学家学习统计的 7 天计划](https://www.youtube.com/watch?v=TUn-prncFfU)
 
 # 2\. 学习编程
 
-学习基础知识后，是时候掌握**Python**了，因为你在工作中大部分时间都会编写代码。你也可以从**R**或**Julia**开始，因为它们本身就是为了统计和科学研究而开发的。掌握Python将帮助你进行研究、数据可视化、设计最先进的应用程序以及通过技术面试。
+学习基础知识后，是时候掌握**Python**了，因为你在工作中大部分时间都会编写代码。你也可以从**R**或**Julia**开始，因为它们本身就是为了统计和科学研究而开发的。掌握 Python 将帮助你进行研究、数据可视化、设计最先进的应用程序以及通过技术面试。
 
-![成为数据科学专业人士的五个步骤](../Images/029dbeddd49d2e4476dc01032fa113b3.png)
+![成为数据科学专业人士的五个步骤](img/029dbeddd49d2e4476dc01032fa113b3.png)
 
 图片由作者提供
 
-我开始我的旅程时学习了R和Python。这帮助我更快地掌握了数据分析的核心概念。之后，我开始学习**SQL**，它是数据摄取和分析最重要的工具。几乎所有的数据科学面试都会包括SQL问题，因此，最好在早期阶段就学习它，以提高被聘用的机会。
+我开始我的旅程时学习了 R 和 Python。这帮助我更快地掌握了数据分析的核心概念。之后，我开始学习**SQL**，它是数据摄取和分析最重要的工具。几乎所有的数据科学面试都会包括 SQL 问题，因此，最好在早期阶段就学习它，以提高被聘用的机会。
 
 **学习资源：**
 
-+   Codecademy: [Python课程与教程](https://www.codecademy.com/catalog/language/python)
++   Codecademy: [Python 课程与教程](https://www.codecademy.com/catalog/language/python)
 
-+   Youtube: [1小时学会Python](https://www.youtube.com/watch?v=kqtD5dpn9C8)
++   Youtube: [1 小时学会 Python](https://www.youtube.com/watch?v=kqtD5dpn9C8)
 
-+   Udemy: [Python训练营](https://www.udemy.com/course/complete-python-bootcamp/)
++   Udemy: [Python 训练营](https://www.udemy.com/course/complete-python-bootcamp/)
 
-+   Udacity: [免费Python入门课程](https://www.udacity.com/course/introduction-to-python--ud1110)
++   Udacity: [免费 Python 入门课程](https://www.udacity.com/course/introduction-to-python--ud1110)
 
 +   书籍: [Python Crash Course, 2nd Edition](https://www.amazon.com/Python-Crash-Course-2nd-Edition/dp/1593279280?ref_=Oct_d_obs_d_285856&pd_rd_w=TioGL&pf_rd_p=8000bc8c-c3b0-4816-9f00-5038ff54385c&pf_rd_r=1WE8EYRBJQ347XC5EGJB&pd_rd_r=d8b24d37-6744-483d-9721-a2898862d9f1&pd_rd_wg=cmea6&pd_rd_i=1593279280)
 
 **额外内容：**
 
-+   对于Julia: [Julia科学编程](https://www.coursera.org/learn/julia-programming)
++   对于 Julia: [Julia 科学编程](https://www.coursera.org/learn/julia-programming)
 
-+   对于R: [统计学与R](https://www.edx.org/course/statistics-and-r)
++   对于 R: [统计学与 R](https://www.edx.org/course/statistics-and-r)
 
-+   对于SQL: [学习SQL](https://www.codecademy.com/learn/learn-sql)
++   对于 SQL: [学习 SQL](https://www.codecademy.com/learn/learn-sql)
 
 # 3\. 应用数据科学轨道
 
 数据科学轨道包含你需要掌握的所有必要课程；数据管理、探索性分析、统计实验、模型开发、编程和报告。职业轨道还为你提供了一个结构和互动编程练习。这些课程将帮助你理解统计学、机器学习和自然语言处理的核心概念。
 
-![成为数据科学专业人士的五个步骤](../Images/c1346c6e4a798aea32372674c7abfde7.png)
+![成为数据科学专业人士的五个步骤](img/c1346c6e4a798aea32372674c7abfde7.png)
 
 图片由作者提供
 
@@ -114,7 +114,7 @@
 
 是时候将你的技能应用到现实世界中，但如果没有一定的经验，找到工作会很困难。如何获得经验？通过参加数据科学竞赛、在 NGO 项目中志愿服务或申请实习来获得经验。
 
-![成为数据科学专业人士的五个步骤](../Images/04af2894aee64384d6b7ad547199adbb.png)
+![成为数据科学专业人士的五个步骤](img/04af2894aee64384d6b7ad547199adbb.png)
 
 图片由作者提供
 
@@ -134,31 +134,31 @@
 
 ## 进行项目实践
 
-你也可以为NGO项目做志愿者，这些项目的入门门槛较低。如果你在寻找合作经验，我建议你查看[Omdena](https://omdena.com/projects/)项目。为了提升你的数据科学作品集，尝试寻找适合初学者的项目。不要仅仅局限于工作机会，你也可以通过参与开源项目来获得经验。
+你也可以为 NGO 项目做志愿者，这些项目的入门门槛较低。如果你在寻找合作经验，我建议你查看[Omdena](https://omdena.com/projects/)项目。为了提升你的数据科学作品集，尝试寻找适合初学者的项目。不要仅仅局限于工作机会，你也可以通过参与开源项目来获得经验。
 
 ## 实习
 
-最后但同样重要的是实习选项。你可以在LinkedIn或本地招聘网站上找到学徒岗位、夏令营邀请或实习机会。实习是你进入职业世界的第一步，也是获得全职工作的快捷方式。如果你在寻找实习机会时遇到困难，可以询问朋友或在LinkedIn上发布信息。获得专业经验对你在该领域的成功至关重要。
+最后但同样重要的是实习选项。你可以在 LinkedIn 或本地招聘网站上找到学徒岗位、夏令营邀请或实习机会。实习是你进入职业世界的第一步，也是获得全职工作的快捷方式。如果你在寻找实习机会时遇到困难，可以询问朋友或在 LinkedIn 上发布信息。获得专业经验对你在该领域的成功至关重要。
 
 # 5\. 认证
 
 获得数据科学认证会让你在就业市场中占据优势。认证考试难度较大，会考察你的编程、数据管理、建模和报告知识。最好在参加认证考试前，先积累一些数据科学项目的初级经验。
 
-![五步成为数据科学专家](../Images/4917b47660fdc2bdbc66a8aa869276c4.png)
+![五步成为数据科学专家](img/4917b47660fdc2bdbc66a8aa869276c4.png)
 
 作者提供的图片
 
-我花了两周时间完成所有挑战。第一个挑战是**定时评估**，测试了我对SQL、Python和统计学的知识。随后，我进入了**编码挑战**，这花费了我整整一天的时间。最后部分是**案例研究**，包括撰写技术报告和非技术演示。在获得认证后，我从[DataCamp](https://app.datacamp.com/certification/career-services)免费获得了**职业服务**，这帮助我通过了多次求职面试。如果你想了解更多关于我的经历，请查看我的博客：[如何获得数据科学认证](/2021/12/get-certified-data-science.html)。
+我花了两周时间完成所有挑战。第一个挑战是**定时评估**，测试了我对 SQL、Python 和统计学的知识。随后，我进入了**编码挑战**，这花费了我整整一天的时间。最后部分是**案例研究**，包括撰写技术报告和非技术演示。在获得认证后，我从[DataCamp](https://app.datacamp.com/certification/career-services)免费获得了**职业服务**，这帮助我通过了多次求职面试。如果你想了解更多关于我的经历，请查看我的博客：如何获得数据科学认证。
 
 **顶级数据科学认证列表：**
 
-+   [DataCamp认证](https://app.datacamp.com/certification/data-scientist-professional)
++   [DataCamp 认证](https://app.datacamp.com/certification/data-scientist-professional)
 
-+   [Databricks认证数据科学家](https://academy.databricks.com/exam/databricks-certified-professional-data-scientist)
++   [Databricks 认证数据科学家](https://academy.databricks.com/exam/databricks-certified-professional-data-scientist)
 
-+   [哈佛X数据科学专业证书 | edX](https://www.edx.org/professional-certificate/harvardx-data-science)
++   [哈佛 X 数据科学专业证书 | edX](https://www.edx.org/professional-certificate/harvardx-data-science)
 
-+   [IBM数据科学专业证书](https://www.coursera.org/professional-certificates/ibm-data-science)
++   [IBM 数据科学专业证书](https://www.coursera.org/professional-certificates/ibm-data-science)
 
 # 下一步是什么
 
@@ -174,7 +174,7 @@
 
 +   [成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日: 深入探讨 13 个数据...](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日: 深入探讨 13 个数据...](https://www.kdnuggets.com/2022/n03.html)
 
 +   [数据科学面试中你应该知道的五个 SQL 窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
 

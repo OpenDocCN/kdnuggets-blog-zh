@@ -1,14 +1,14 @@
-# 用Python挖掘Twitter数据 第四部分：橄榄球和术语共现
+# 用 Python 挖掘 Twitter 数据 第四部分：橄榄球和术语共现
 
-> 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html)
+> 原文：[`www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html`](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-4.html)
 
 **作者：Marco Bonzanini，独立数据科学顾问**。
 
-上周六（*编者注：已经过去一段时间*）是[六国锦标赛](https://en.wikipedia.org/wiki/Six_Nations_Championship)的闭幕日，这是一个年度国际[橄榄球](https://en.wikipedia.org/wiki/Rugby_union)比赛。在打开电视观看意大利被威尔士击败之前，我决定利用这个事件从Twitter收集一些数据，并对比我的小列表的推文进行一些更有趣的探索性文本分析。
+上周六（*编者注：已经过去一段时间*）是[六国锦标赛](https://en.wikipedia.org/wiki/Six_Nations_Championship)的闭幕日，这是一个年度国际[橄榄球](https://en.wikipedia.org/wiki/Rugby_union)比赛。在打开电视观看意大利被威尔士击败之前，我决定利用这个事件从 Twitter 收集一些数据，并对比我的小列表的推文进行一些更有趣的探索性文本分析。
 
-本文继续Twitter数据挖掘教程，重用我们在之前文章中讨论的内容，并引入更具现实的数据。它还通过引入术语共现的概念来扩展分析。
+本文继续 Twitter 数据挖掘教程，重用我们在之前文章中讨论的内容，并引入更具现实的数据。它还通过引入术语共现的概念来扩展分析。
 
-![Twitter](../Images/3da5b4dea824ea453ca3ae25f3548634.png)
+![Twitter](img/3da5b4dea824ea453ca3ae25f3548634.png)
 
 ### 应用领域
 
@@ -16,15 +16,15 @@
 
 ### 设置
 
-我使用了[流式API](/2016/06/mining-twitter-data-python-part-1.html)下载了当天包含字符串`#rbs6nations`的所有推文。显然，并非所有关于此事件的推文都包含该标签，但这是一个很好的基准。下载时间范围是从大约12:15PM到7:15PM GMT，即从第一场比赛前大约15分钟，到最后一场比赛结束后大约15分钟。最后，下载了超过18,000条推文，JSON格式，总数据约为75Mb。这应该足够小以便在内存中快速处理，同时又足够大以观察到一些可能有趣的内容。
+我使用了流式 API 下载了当天包含字符串`#rbs6nations`的所有推文。显然，并非所有关于此事件的推文都包含该标签，但这是一个很好的基准。下载时间范围是从大约 12:15PM 到 7:15PM GMT，即从第一场比赛前大约 15 分钟，到最后一场比赛结束后大约 15 分钟。最后，下载了超过 18,000 条推文，JSON 格式，总数据约为 75Mb。这应该足够小以便在内存中快速处理，同时又足够大以观察到一些可能有趣的内容。
 
-推文的文本内容已经通过使用教程第二部分中介绍的`preprocess()`函数进行了[分词和小写处理](/2016/06/mining-twitter-data-python-part-2.html)。
+推文的文本内容已经通过使用教程第二部分中介绍的`preprocess()`函数进行了分词和小写处理。
 
 ### 有趣的术语和标签
 
-根据我们在[第3部分（术语频率）](/2016/06/mining-twitter-data-python-part-3.html)中讨论的内容，我们希望观察一天中使用的最常见的术语和标签。如果你已经跟随了关于创建不同词项列表的讨论，以捕捉没有标签的术语、仅标签、去除停用词等，你可以在不同列表中进行实验。
+根据我们在第三部分（术语频率）中讨论的内容，我们希望观察一天中使用的最常见的术语和标签。如果你已经跟随了关于创建不同词项列表的讨论，以捕捉没有标签的术语、仅标签、去除停用词等，你可以在不同列表中进行实验。
 
-这是数据集中最常见的前10个术语（`terms_only`在第3部分）列表，这一点并不令人惊讶。
+这是数据集中最常见的前 10 个术语（`terms_only`在第三部分）列表，这一点并不令人惊讶。
 
 ```py
 [('ireland', 3163), ('england', 2584), ('wales', 2271), 
@@ -33,7 +33,7 @@
 
 ```
 
-前三个术语对应于争夺冠军的球队。频率也尊重最终表中的顺序。第四个术语则是一个我们遗漏的标点符号，未包含在停用词列表中。这是因为`string.punctuation`只包含ASCII符号，而这里涉及的是一个unicode字符。如果我们深入数据，将会有更多类似的例子，但目前我们不需要担心这个问题。
+前三个术语对应于争夺冠军的球队。频率也尊重最终表中的顺序。第四个术语则是一个我们遗漏的标点符号，未包含在停用词列表中。这是因为`string.punctuation`只包含 ASCII 符号，而这里涉及的是一个 unicode 字符。如果我们深入数据，将会有更多类似的例子，但目前我们不需要担心这个问题。
 
 在将省略号符号添加到停用词列表后，我们在列表末尾有了一个新的条目：
 
@@ -60,9 +60,9 @@
 
 ### 术语共现
 
-有时我们对同时出现的术语感兴趣。这主要是因为*上下文*能让我们更好地理解术语的含义，支持诸如词义消歧或语义相似性等应用。我们讨论了使用*bigrams*的选项[在上一篇文章中](/2016/06/mining-twitter-data-python-part-3.html)，但我们想将术语的上下文扩展到整个推文中。
+有时我们对同时出现的术语感兴趣。这主要是因为*上下文*能让我们更好地理解术语的含义，支持诸如词义消歧或语义相似性等应用。我们讨论了使用*bigrams*的选项在上一篇文章中，但我们想将术语的上下文扩展到整个推文中。
 
-我们可以重构来自[上一篇文章](/2016/06/mining-twitter-data-python-part-3.html)的代码，以捕捉共现情况。我们构建了一个共现矩阵`com`，使得`com[x][y]`包含术语`x`在同一推文中出现与术语`y`的次数：
+我们可以重构来自上一篇文章的代码，以捕捉共现情况。我们构建了一个共现矩阵`com`，使得`com[x][y]`包含术语`x`在同一推文中出现与术语`y`的次数：
 
 ```py
 from collections import defaultdict
@@ -163,34 +163,34 @@ print(count_search.most_common(20))
 
 **相关**：
 
-+   [用 Python 挖掘 Twitter 数据 第 1 部分：数据收集](/2016/06/mining-twitter-data-python-part-1.html)
++   用 Python 挖掘 Twitter 数据 第一部分：数据收集
 
-+   [用 Python 挖掘 Twitter 数据 第 2 部分：文本预处理](/2016/06/mining-twitter-data-python-part-2.html)
++   用 Python 挖掘 Twitter 数据 第二部分：文本预处理
 
-+   [用 Python 挖掘 Twitter 数据 第 3 部分：术语频率](/2016/06/mining-twitter-data-python-part-3.html)
++   用 Python 挖掘 Twitter 数据 第三部分：术语频率
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 ### 更多相关话题
 
-+   [机器学习不像你的大脑 第6部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：精确突触权重的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
-+   [KDnuggets 新闻，4月6日：8门免费MIT课程学习数据科学](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学备忘单完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
-+   [数据科学备忘单完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [数据仓库完整合集 - 第1部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)
++   [数据仓库完整合集 - 第一部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)

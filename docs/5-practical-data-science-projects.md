@@ -1,10 +1,10 @@
-# 2022年5个实用的数据科学项目，帮助你解决实际业务问题
+# 2022 年 5 个实用的数据科学项目，帮助你解决实际业务问题
 
-> 原文：[https://www.kdnuggets.com/2021/12/5-practical-data-science-projects.html](https://www.kdnuggets.com/2021/12/5-practical-data-science-projects.html)
+> 原文：[`www.kdnuggets.com/2021/12/5-practical-data-science-projects.html`](https://www.kdnuggets.com/2021/12/5-practical-data-science-projects.html)
 
-[评论](#comments)
+评论
 
-![](../Images/7f6cb49deda58c60b79433484e84f76a.png)
+![](img/7f6cb49deda58c60b79433484e84f76a.png)
 
 *照片由 [XPS](https://unsplash.com/@xps?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/project?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 事务
 
 * * *
 
 > “告别无用的副项目。”
 
-自从我开始写文章以来已经快两年了——这相当于写了175篇文章！我之前的一些文章的一个缺点是，我建议了一些有趣的数据科学项目，但**不够实际**。
+自从我开始写文章以来已经快两年了——这相当于写了 175 篇文章！我之前的一些文章的一个缺点是，我建议了一些有趣的数据科学项目，但**不够实际**。
 
 成为数据科学家的最简单方法之一是展示你已经完成了类似的项目，并且这些项目与职位描述相符。因此，我想与您分享一些我在职业生涯中亲自完成的**实用**数据科学项目，这些项目将增强你的经验和作品集。
 
@@ -42,7 +42,7 @@
 
 **为什么？**
 
-倾向建模使你可以更明智地分配资源，从而提高效率，同时获得更好的结果。举个例子：与其发送一个用户点击的概率为0%-100%的电子邮件广告，不如通过倾向建模，针对那些有50%以上点击概率的用户。减少邮件数量，增加转化率！
+倾向建模使你可以更明智地分配资源，从而提高效率，同时获得更好的结果。举个例子：与其发送一个用户点击的概率为 0%-100%的电子邮件广告，不如通过倾向建模，针对那些有 50%以上点击概率的用户。减少邮件数量，增加转化率！
 
 **如何：**
 
@@ -50,7 +50,7 @@
 
 +   [客户购买倾向](https://www.kaggle.com/benpowis/customer-propensity-to-purchase)
 
-+   [营销分析、分类和EDA](https://www.kaggle.com/jalenguzman/marketing-analytics-classification-and-eda#Classification-Algorithms)
++   [营销分析、分类和 EDA](https://www.kaggle.com/jalenguzman/marketing-analytics-classification-and-eda#Classification-Algorithms)
 
 这里有两个数据集，你可以用来构建一个倾向模型。请注意每个数据集中提供的特征类型：
 
@@ -76,25 +76,25 @@
 
 +   [时间序列预测模型概述](https://towardsdatascience.com/an-overview-of-time-series-forecasting-models-a2fa7a358fcb)
 
-第二个资源提供了使用Prophet创建时间序列模型的逐步指南，Prophet是Facebook专为时间序列建模开发的Python库：
+第二个资源提供了使用 Prophet 创建时间序列模型的逐步指南，Prophet 是 Facebook 专为时间序列建模开发的 Python 库：
 
-+   [使用Prophet进行时间序列分析和预测](https://www.kaggle.com/elenapetrova/time-series-analysis-and-forecasts-with-prophet)
++   [使用 Prophet 进行时间序列分析和预测](https://www.kaggle.com/elenapetrova/time-series-analysis-and-forecasts-with-prophet)
 
 ### 3\. 推荐系统
 
 **什么？**
 
-推荐系统是旨在向用户建议最相关信息的算法，无论是亚马逊上的类似产品，Netflix上的类似电视节目，还是Spotify上的类似歌曲。
+推荐系统是旨在向用户建议最相关信息的算法，无论是亚马逊上的类似产品，Netflix 上的类似电视节目，还是 Spotify 上的类似歌曲。
 
 推荐系统主要有两种类型：协同过滤和基于内容的过滤。
 
 +   *基于内容的*推荐系统根据之前选择的项目特征推荐特定项目。例如，如果我之前看了很多动作片，它会将其他动作片排名更高。
 
-+   *协同过滤*则是根据类似用户的反应来筛选用户可能喜欢的项目。例如，如果我喜欢歌曲A，而其他人喜欢歌曲A *以及*歌曲C，那么我会被推荐歌曲C。
++   *协同过滤*则是根据类似用户的反应来筛选用户可能喜欢的项目。例如，如果我喜欢歌曲 A，而其他人喜欢歌曲 A *以及*歌曲 C，那么我会被推荐歌曲 C。
 
 **为什么？**
 
-推荐系统是最广泛使用且最实用的数据科学应用之一。不仅如此，它在数据产品中的投资回报率也最高之一。[据估计，亚马逊在2019年由于其推荐系统销售额增加了29%。](https://rejoiner.com/resources/amazon-recommendations-secret-selling-online/#:~:text=%E2%80%9CJudging%20by%20Amazon's%20success,%20the,the%20same%20time%20last%20year.) 同样，[Netflix 宣称其推荐系统在2016年价值高达10亿美元](https://www.businessinsider.com/netflix-recommendation-engine-worth-1-billion-per-year-2016-6)!
+推荐系统是最广泛使用且最实用的数据科学应用之一。不仅如此，它在数据产品中的投资回报率也最高之一。[据估计，亚马逊在 2019 年由于其推荐系统销售额增加了 29%。](https://rejoiner.com/resources/amazon-recommendations-secret-selling-online/#:~:text=%E2%80%9CJudging%20by%20Amazon's%20success,%20the,the%20same%20time%20last%20year.) 同样，[Netflix 宣称其推荐系统在 2016 年价值高达 10 亿美元](https://www.businessinsider.com/netflix-recommendation-engine-worth-1-billion-per-year-2016-6)!
 
 但是什么让它如此有利可图？正如我之前提到的，关键在于一个词：**相关性**。通过向用户提供更多**相关**的产品、节目或歌曲，你最终会增加他们购买更多产品和/或保持更长时间的可能性。
 
@@ -166,22 +166,22 @@
 
 **相关**：
 
-+   [19个适合初学者的数据科学项目创意](/2021/11/19-data-science-project-ideas-beginners.html)
++   19 个适合初学者的数据科学项目创意
 
-+   [数据科学家：如何推销你的项目和自己](/2021/11/data-scientists-sell-project.html)
++   数据科学家：如何推销你的项目和自己
 
-+   [计算机视觉中的10个AI项目创意](/2021/11/10-ai-project-ideas-computer-vision.html)
++   计算机视觉中的 10 个 AI 项目创意
 
 ### 相关主题
 
 +   [数据科学项目，帮助你解决现实世界问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [想用你的数据技能解决全球问题？这里有一些建议…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

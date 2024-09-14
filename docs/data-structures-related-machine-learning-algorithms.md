@@ -1,14 +1,14 @@
 # 与机器学习算法相关的数据结构
 
-> 原文：[https://www.kdnuggets.com/2018/01/data-structures-related-machine-learning-algorithms.html/2](https://www.kdnuggets.com/2018/01/data-structures-related-machine-learning-algorithms.html/2)
+> 原文：[`www.kdnuggets.com/2018/01/data-structures-related-machine-learning-algorithms.html/2`](https://www.kdnuggets.com/2018/01/data-structures-related-machine-learning-algorithms.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/01/data-structures-related-machine-learning-algorithms.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### **堆**
 
 堆是另一种分层、有序的数据结构，类似于树，但与水平排序不同，它具有垂直排序。这种排序适用于层级结构，但不适用于跨层级：父节点总是比它的两个子节点都要大，但高等级的节点不一定比直接在其下方的低等级节点要大。
 
-![](../Images/a8e8244886a065cc7cd6b56c0bb56db8.png)
+![](img/a8e8244886a065cc7cd6b56c0bb56db8.png)
 
 插入和检索都是通过提升来完成的。一个元素首先被插入到最高可用的位置。然后它与其父节点进行比较，并提升直到达到正确的等级。要从堆中取出一个元素，两个子节点中较大的一个被提升到缺失的位置，然后那两个子节点中较大的一个被提升，以此类推，直到所有元素都被提升到相应的等级。
 
@@ -40,7 +40,7 @@
 
 > *关联数组适合用于构建字典。*
 
-假设你正在构建一个DSL，想要存储一个函数和变量的列表，并需要区分它们。
+假设你正在构建一个 DSL，想要存储一个函数和变量的列表，并需要区分它们。
 
 > “sin” → function
 > 
@@ -68,15 +68,15 @@
 
 更复杂的数据结构也可以由基本结构组成。考虑一个稀疏矩阵类。在稀疏矩阵中，大多数元素为零，仅存储非零元素。我们可以将每个元素的位置和值作为一个三元组存储，并将它们放在一个**可扩展数组**中。
 
-考虑3乘3的单位矩阵：
+考虑 3 乘 3 的单位矩阵：
 
-![](../Images/a10fed70977baeb14c21b7a2fabd8b91.png)
+![](img/a10fed70977baeb14c21b7a2fabd8b91.png)
 
 ### **结论**
 
 数据结构本身有时并不那么有趣。真正让它们有趣的是你可以用它们解决的各种问题。
 
-对于我做的大部分工作，我使用了许多基本的固定长度数组。我主要使用更复杂的数据结构使程序运行得更顺畅，与外界的接口更友好，用户体验也更佳。与过去的Fortran程序相比，后者在改变网格大小时需要忍受近半小时的编译周期（我实际上参与过这样的程序！）。
+对于我做的大部分工作，我使用了许多基本的固定长度数组。我主要使用更复杂的数据结构使程序运行得更顺畅，与外界的接口更友好，用户体验也更佳。与过去的 Fortran 程序相比，后者在改变网格大小时需要忍受近半小时的编译周期（我实际上参与过这样的程序！）。
 
 即使你一时无法想到应用场景，我仍然认为了解像栈和队列这样的数据结构是有益的。你永远不知道它们何时会派上用场。
 
@@ -88,13 +88,13 @@
 
 1.  将矩阵-向量乘法代码片段封装成一个名为**matrix_times_vector**的子程序。设计该子程序的调用语法。
 
-1.  使用**struct, typedef**或**class**，将向量和矩阵封装成一对抽象类型，分别称为**vect**和**matrix**。为这些类型设计一个API。
+1.  使用**struct, typedef**或**class**，将向量和矩阵封装成一对抽象类型，分别称为**vect**和**matrix**。为这些类型设计一个 API。
 
 1.  在线找到至少三个做上述工作的库。
 
-1.  下载并安装LIBSVM库。考虑“svm.cpp”中第316行的**Kernel::k_function**方法。用于存储向量的数据结构的优缺点是什么？
+1.  下载并安装 LIBSVM 库。考虑“svm.cpp”中第 316 行的**Kernel::k_function**方法。用于存储向量的数据结构的优缺点是什么？
 
-1.  你会如何重构LIBSVM库中的核函数计算？
+1.  你会如何重构 LIBSVM 库中的核函数计算？
 
 1.  文本中描述的哪些数据结构是抽象类型？
 
@@ -102,7 +102,7 @@
 
 1.  使用二叉树设计一个关联数组。
 
-1.  考虑LIBSVM中的向量类型。如何用它来表示稀疏矩阵？与上面描述的稀疏矩阵类相比，这有什么优缺点？查看[完整类型](https://github.com/peteysoft/libmsci/sparse/sparse.h)。每种表示方法的优缺点是什么？
+1.  考虑 LIBSVM 中的向量类型。如何用它来表示稀疏矩阵？与上面描述的稀疏矩阵类相比，这有什么优缺点？查看[完整类型](https://github.com/peteysoft/libmsci/sparse/sparse.h)。每种表示方法的优缺点是什么？
 
 1.  实现一个树排序和一个堆排序。现在使用相同的数据结构找出前*k*个元素。这对哪个常见的机器学习算法有用？
 
@@ -114,21 +114,21 @@
 
 **相关:**
 
-+   [初学者的前10种机器学习算法](/2017/10/top-10-machine-learning-algorithms-beginners.html)
++   初学者的前 10 种机器学习算法
 
-+   [IT 工程师需要学习多少数学才能进入数据科学领域？](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)
++   IT 工程师需要学习多少数学才能进入数据科学领域？
 
-+   [数据科学家主要只做算术，这其实是好事](/2016/05/data-scientists-mostly-arithmetic-good-thing.html)
++   数据科学家主要只做算术，这其实是好事
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 

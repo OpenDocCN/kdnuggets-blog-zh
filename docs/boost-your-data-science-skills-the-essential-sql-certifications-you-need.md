@@ -1,8 +1,8 @@
 # 提升你的数据科学技能：必备的 SQL 认证
 
-> 原文：[https://www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need](https://www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need)
+> 原文：[`www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need`](https://www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need)
 
-![提升你的数据科学技能：必备的 SQL 认证](../Images/28b353ebd5b0a14a43576618c4627fd0.png)
+![提升你的数据科学技能：必备的 SQL 认证](img/28b353ebd5b0a14a43576618c4627fd0.png)
 
 编辑者图片
 
@@ -12,11 +12,11 @@ SQL，即结构化查询语言，通常发音为 s-q-l 或 sequel，是一种用
 
 ## 我们的 3 个最佳课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -140,15 +140,15 @@ IBM 数据仓库工程师认证由 8 门课程组成，您将学习数据仓库�
 
 # 总结
 
-虽然知识和经验比认证更为重要，但招聘经理确实倾向于优先考虑有认证的申请者。在选择合适的SQL认证时，确保考虑到你所希望的工作的特定供应商或平台。
+虽然知识和经验比认证更为重要，但招聘经理确实倾向于优先考虑有认证的申请者。在选择合适的 SQL 认证时，确保考虑到你所希望的工作的特定供应商或平台。
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一名数据科学家、自由技术作家、KDnuggets的编辑及社区经理。她特别关注提供数据科学职业建议、教程和理论知识。Nisha涉及广泛的话题，并希望探索人工智能如何有益于人类寿命的不同方式。作为一个热衷学习的人，Nisha寻求扩展她的技术知识和写作技能，同时帮助指导他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一名数据科学家、自由技术作家、KDnuggets 的编辑及社区经理。她特别关注提供数据科学职业建议、教程和理论知识。Nisha 涉及广泛的话题，并希望探索人工智能如何有益于人类寿命的不同方式。作为一个热衷学习的人，Nisha 寻求扩展她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
-+   [数据科学入门：你需要掌握的10项基础技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学入门：你需要掌握的 10 项基础技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [2024年能提升你数据科学职业的认证](https://www.kdnuggets.com/certifications-that-can-boost-your-data-science-career-in-2024)
++   [2024 年能提升你数据科学职业的认证](https://www.kdnuggets.com/certifications-that-can-boost-your-data-science-career-in-2024)
 
 +   [数据科学家分析：技能、认证和薪资](https://www.kdnuggets.com/data-scientist-breakdown-skills-certifications-and-salary)
 
@@ -156,4 +156,4 @@ IBM 数据仓库工程师认证由 8 门课程组成，您将学习数据仓库�
 
 +   [想利用你的数据技能解决全球问题？这儿有些建议……](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [在NVIDIA会议上免费提升你的AI和ML技能](https://www.kdnuggets.com/2022/03/nvidia-fourday-conference-offers-hundreds-learning-development-opportunities.html)
++   [在 NVIDIA 会议上免费提升你的 AI 和 ML 技能](https://www.kdnuggets.com/2022/03/nvidia-fourday-conference-offers-hundreds-learning-development-opportunities.html)

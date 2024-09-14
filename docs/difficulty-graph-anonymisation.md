@@ -1,28 +1,28 @@
 # 图形匿名化的难度
 
-> 原文：[https://www.kdnuggets.com/2021/02/difficulty-graph-anonymisation.html](https://www.kdnuggets.com/2021/02/difficulty-graph-anonymisation.html)
+> 原文：[`www.kdnuggets.com/2021/02/difficulty-graph-anonymisation.html`](https://www.kdnuggets.com/2021/02/difficulty-graph-anonymisation.html)
 
-[评论](#comments)
+评论
 
 **由 [Timothy Lin](https://www.timlrx.com/)，数据科学家、开发者、经济学家及 [Cylynx](https://www.cylynx.io/) 的联合创始人**
 
-![标题图片](../Images/42cca56205e0a63a7264e0a6b1f9877b.png)
+![标题图片](img/42cca56205e0a63a7264e0a6b1f9877b.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 这篇文章是对近期 TraceTogether 隐私事件的回应。对于非新加坡人，[TraceTogether](https://www.tracetogether.gov.sg/) 是新加坡应对 COVID-19 大流行的接触追踪计划。该计划的目标是迅速识别可能与任何测试呈阳性的人有过密切接触的人。它包括一个应用程序或物理代币，利用蓝牙信号来存储接触记录。截至 2020 年 12 月底，[70% 的新加坡居民据说已经参与了该计划。](https://www.channelnewsasia.com/news/singapore/covid-19-tracetogether-adoption-singapore-crosses-70-percent-13829042)
 
-2021年1月4日，曝光了 [TraceTogether 数据可能被警方用于刑事调查](https://www.channelnewsasia.com/news/singapore/singapore-police-force-can-obtain-tracetogether-data-covid-19-13889914)。这引发了负责部长们的一些澄清，以及围绕该项目隐私问题的更大辩论。内政部长澄清，根据《刑事诉讼法典》（CPC），警方可以并且已经使用 TraceTogether 数据调查“严重犯罪，如谋杀或恐怖事件”。[TraceTogether 网站上的隐私声明](https://www.tracetogether.gov.sg/common/privacystatement/index.html) 随后被修改以澄清这一点。
+2021 年 1 月 4 日，曝光了 [TraceTogether 数据可能被警方用于刑事调查](https://www.channelnewsasia.com/news/singapore/singapore-police-force-can-obtain-tracetogether-data-covid-19-13889914)。这引发了负责部长们的一些澄清，以及围绕该项目隐私问题的更大辩论。内政部长澄清，根据《刑事诉讼法典》（CPC），警方可以并且已经使用 TraceTogether 数据调查“严重犯罪，如谋杀或恐怖事件”。[TraceTogether 网站上的隐私声明](https://www.tracetogether.gov.sg/common/privacystatement/index.html) 随后被修改以澄清这一点。
 
 随后，通过了一项法案，以限制对 TraceTogether 数据在严重犯罪中的使用。它阐明了疫情后的数据使用情况，并提到为了“加强我们的公共卫生响应”，可能会保留匿名数据用于流行病学研究：¹
 
@@ -30,7 +30,7 @@
 
 > 但我相信，一旦疫情过去，这些数据——特别是具体的、个性化的数据——这些字段应被删除。为了研究目的，我相信 MOH 可能仍希望拥有流行病学数据，但它应该被匿名化。它不应个性化，也不应个体化。
 > 
-> *来源: [https://sprs.parl.gov.sg/search/sprs3topic?reportid=clarification-1547](https://sprs.parl.gov.sg/search/sprs3topic?reportid=clarification-1547)*
+> *来源: [`sprs.parl.gov.sg/search/sprs3topic?reportid=clarification-1547`](https://sprs.parl.gov.sg/search/sprs3topic?reportid=clarification-1547)*
 
 尽管匿名化的流行病学数据可能对未来研究非常有用，但有两个原因说明应该重新考虑这种决定。
 
@@ -64,29 +64,29 @@
 | xx | xx | 123 | F |
 | xx | xx | 123 | M |
 
-我们如何找出每条记录的身份？假设我们有一个包含地址、性别和姓名信息的外部普查数据集，并且每个地址、性别和姓名的组合都是唯一的。这样，我们可以使用`address`和`sex`字段在我们的“掩码”数据集上进行连接，以解密`name`字段。在这里，我们依赖于`address`和`sex`与`name`字段之间的1对1映射关系。
+我们如何找出每条记录的身份？假设我们有一个包含地址、性别和姓名信息的外部普查数据集，并且每个地址、性别和姓名的组合都是唯一的。这样，我们可以使用`address`和`sex`字段在我们的“掩码”数据集上进行连接，以解密`name`字段。在这里，我们依赖于`address`和`sex`与`name`字段之间的 1 对 1 映射关系。
 
-![Figure](../Images/5c7884ea844d2774c2367e8ce743ce19.png)
+![Figure](img/5c7884ea844d2774c2367e8ce743ce19.png)
 
 *来源： [Garrick Aden-Buie 的 Tidy Explain](https://github.com/gadenbuie/tidyexplain)*
 
-数据集的稀疏性影响了对手进行“连接攻击”的难易程度和准确性。如果我们数据集中只有一个字段，例如`address`，我们将无法唯一识别每个人，因为有两个人的`address`都是123。现实世界数据集的“问题”在于，找到可以唯一标识个人的变量组合相对容易。
+数据集的稀疏性影响了对手进行“连接攻击”的难易程度和准确性。如果我们数据集中只有一个字段，例如`address`，我们将无法唯一识别每个人，因为有两个人的`address`都是 123。现实世界数据集的“问题”在于，找到可以唯一标识个人的变量组合相对容易。
 
 ### 解密身份 - 2 个示例
 
 ### GIC
 
-在1990年代，马萨诸塞州的一个政府机构，即集团保险委员会（GIC），决定向任何请求的研究人员公开总结每位州员工的医院就诊记录。虽然诸如姓名、地址和社会保障号码等显性标识符被删除，但诸如邮政编码、出生日期和性别等医院就诊信息仍被保留。
+在 1990 年代，马萨诸塞州的一个政府机构，即集团保险委员会（GIC），决定向任何请求的研究人员公开总结每位州员工的医院就诊记录。虽然诸如姓名、地址和社会保障号码等显性标识符被删除，但诸如邮政编码、出生日期和性别等医院就诊信息仍被保留。
 
-![](../Images/2aa3cd7f39bc41a57bf3645c9bb47fc6.png)
+![](img/2aa3cd7f39bc41a57bf3645c9bb47fc6.png)
 
-Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation#ref-Sweeney) 证明了GIC数据可以与选民名册结合，以揭示隐藏的个人身份信息。故事的一个有趣转折是，Sweeney博士将其发现告知了当时的马萨诸塞州州长William Weld，后者向公众保证GIC通过删除标识符来保护患者隐私。根据1990年代的普查数据，他发现87%的美国公民可以通过邮政编码、出生日期和性别唯一识别。更多近期研究表明，虽然比例较低，但仍为63%（Golle [2006](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation#ref-Golle)）。
+Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation#ref-Sweeney) 证明了 GIC 数据可以与选民名册结合，以揭示隐藏的个人身份信息。故事的一个有趣转折是，Sweeney 博士将其发现告知了当时的马萨诸塞州州长 William Weld，后者向公众保证 GIC 通过删除标识符来保护患者隐私。根据 1990 年代的普查数据，他发现 87%的美国公民可以通过邮政编码、出生日期和性别唯一识别。更多近期研究表明，虽然比例较低，但仍为 63%（Golle [2006](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation#ref-Golle)）。
 
 ### Netflix 数据
 
-最近，Netflix 作为一个[公开竞赛](https://en.wikipedia.org/wiki/Netflix_Prize)的一部分发布的电影评分数据被Narayanan和Shmatikov [2008](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation#ref-Narayanan-Shmatikov-1) 证明没有最初想象的那样匿名。一个对手需要知道多少关于Netflix订阅者的信息才能识别她的记录（如果它在数据集中存在），从而得知她的完整电影观看历史？事实证明，不需要太多。
+最近，Netflix 作为一个[公开竞赛](https://en.wikipedia.org/wiki/Netflix_Prize)的一部分发布的电影评分数据被 Narayanan 和 Shmatikov [2008](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation#ref-Narayanan-Shmatikov-1) 证明没有最初想象的那样匿名。一个对手需要知道多少关于 Netflix 订阅者的信息才能识别她的记录（如果它在数据集中存在），从而得知她的完整电影观看历史？事实证明，不需要太多。
 
-数据集中84%的订阅者可以被唯一识别，如果知道6个不太受欢迎的电影评分（不在前500名之内）。通过使用从IMDb抓取的个人电影评分的辅助数据集，他们表明可以高概率地对一些用户进行去匿名化处理。
+数据集中 84%的订阅者可以被唯一识别，如果知道 6 个不太受欢迎的电影评分（不在前 500 名之内）。通过使用从 IMDb 抓取的个人电影评分的辅助数据集，他们表明可以高概率地对一些用户进行去匿名化处理。
 
 ### 绑定的联系
 
@@ -94,7 +94,7 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 
 是的，关于社交媒体数据的研究和实验表明，连接信息可以揭示隐藏的用户联系。为了说明这一点，我们将接近度数据转换为图形形式。图（也称为网络）是一种数据结构，由节点/顶点通过边/链接连接在一起。图结构在日常生活中随处可见，从道路连接到社交网络到...接近度数据。
 
-接近度数据可以被视为边列表。对于个体A，如果A和B在同一接近窗口中被记录，则我们构建一个与个体B的链接。
+接近度数据可以被视为边列表。对于个体 A，如果 A 和 B 在同一接近窗口中被记录，则我们构建一个与个体 B 的链接。
 
 我们忽略问题的时间因素，并假设我们掌握了以下连接数据集，该数据集表示两个个体之间的联系，掩盖了一个索引号。³
 
@@ -114,21 +114,21 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 | 11 | 9 |
 | 11 | 10 |
 
-例如，在我们的表格中，个体2和1是连接的。数据可以通过以下图形进行可视化表示：
+例如，在我们的表格中，个体 2 和 1 是连接的。数据可以通过以下图形进行可视化表示：
 
-![Image](../Images/098d503d66f49df58145133ac8308f28.png)
+![Image](img/098d503d66f49df58145133ac8308f28.png)
 
-我们可以从图中推断出哪些特征或属性？我们可以计算每个个体的连接数量（也称为度）。例如，个体1有10个邻居，而个体10有3个邻居。假设我们有一个完整连接数据集的泄露，这可以绘制如下：
+我们可以从图中推断出哪些特征或属性？我们可以计算每个个体的连接数量（也称为度）。例如，个体 1 有 10 个邻居，而个体 10 有 3 个邻居。假设我们有一个完整连接数据集的泄露，这可以绘制如下：
 
-![](../Images/c0f30745e703b1fbd658063d1dac9bf5.png)
+![](img/c0f30745e703b1fbd658063d1dac9bf5.png)
 
 去匿名化的挑战在于尝试找到一个与我们的子图“匹配”的完整图的片段（更正式地称为子图匹配或子图同构问题）。你能找到它吗？
 
 让我通过为聚类上色来帮助你，这应该很明显。点击脚注以揭示答案。⁴
 
-![](../Images/8d898cea45891b8da85b530f98aaddff.png)
+![](img/8d898cea45891b8da85b530f98aaddff.png)
 
-上述网络是经常使用的[悲惨世界网络数据集](http://networkrepository.com/lesmis.php)的图形表示。我们的子图是Myriel的自我网络（Myriel及其所有连接）。事实证明，图中只有5个个体有10个连接。这有助于显著缩小候选匹配的范围。列出连接最多的个体按降序排列如下：
+上述网络是经常使用的[悲惨世界网络数据集](http://networkrepository.com/lesmis.php)的图形表示。我们的子图是 Myriel 的自我网络（Myriel 及其所有连接）。事实证明，图中只有 5 个个体有 10 个连接。这有助于显著缩小候选匹配的范围。列出连接最多的个体按降序排列如下：
 
 | 名称 | 连接数（度） |
 | --- | --- |
@@ -158,7 +158,7 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 
 令人惊讶的是，这些匿名化方法并不能完全消除再识别的风险。到目前为止，我们只考虑了在数据中模糊度分布，但还可以从图数据集中构造其他度量指标。我们可以计算两跳远的连接数（邻居的邻居），或通过图中每个节点的三角形数量，或类似 PageRank 分数的中心性度量。有很多度量可以捕捉网络的不同方面以及节点在网络中的位置。模糊一个度量并不意味着其他度量也同样被匿名化。
 
-![图](../Images/2e313c36ccf91834e77fa0d985814b69.png)
+![图](img/2e313c36ccf91834e77fa0d985814b69.png)
 
 *来源： [朱尔·莱斯科维奇的 cs224w 讲义](https://snap-stanford.github.io/cs224w-notes/machine-learning-with-networks/node-representation-learning)*
 
@@ -166,7 +166,7 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 
 在嵌入空间中距离更近的节点在原始网络中更相似。⁵ 给定一个匿名化的网络数据集，我们可以计算每个节点的嵌入，并推导每个节点实际上与给定节点在真实数据集中连接的可能性。我们遮蔽和混淆的特征越多，去匿名化率的准确性就越低。
 
-![图示](../Images/87b68972b97be6cd9747800c2f4d236a.png)
+![图示](img/87b68972b97be6cd9747800c2f4d236a.png)
 
 *来源：张等，2017*
 
@@ -174,7 +174,7 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 
 ### 连接点滴
 
-![](../Images/d33d62bcf8c6e3aa719d47597fc996de.png)
+![](img/d33d62bcf8c6e3aa719d47597fc996de.png)
 
 进行这种隐私攻击所需的条件是什么？
 
@@ -194,7 +194,7 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 
 ### 摘要
 
-在本文中，我研究了图匿名化的难点。我展示了即使PII信息被掩盖，如何对表格数据进行重新识别，并将分析扩展到网络数据集。节点之间的连接包含大量信息，可以作为重新识别或图恢复尝试的基础。尝试扰动或掩盖边信息是困难的，平衡实用性和隐私性也很难。
+在本文中，我研究了图匿名化的难点。我展示了即使 PII 信息被掩盖，如何对表格数据进行重新识别，并将分析扩展到网络数据集。节点之间的连接包含大量信息，可以作为重新识别或图恢复尝试的基础。尝试扰动或掩盖边信息是困难的，平衡实用性和隐私性也很难。
 
 我还概述了一个对手如何利用从 BluePass 项目获得的数据对匿名化的 TraceTogether 数据执行图恢复攻击的可能性。
 
@@ -202,19 +202,19 @@ Sweeney [1997](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-g
 
 ### 参考文献
 
-Golle, P. "重新审视美国人口简单人口统计信息的唯一性。" *第5届ACM电子社会隐私研讨会论文集*，第77-80页。2006年。
+Golle, P. "重新审视美国人口简单人口统计信息的唯一性。" *第 5 届 ACM 电子社会隐私研讨会论文集*，第 77-80 页。2006 年。
 
-Grover, Aditya 和 Jure Leskovec. "node2vec：用于网络的可扩展特征学习。" *第22届ACM SIGKDD国际知识发现与数据挖掘大会论文集*，第855-864页。2016年。
+Grover, Aditya 和 Jure Leskovec. "node2vec：用于网络的可扩展特征学习。" *第 22 届 ACM SIGKDD 国际知识发现与数据挖掘大会论文集*，第 855-864 页。2016 年。
 
-Narayanan, Arvind 和 Vitaly Shmatikov. "大规模稀疏数据集的强健去匿名化。" *2008 IEEE安全与隐私研讨会 (sp 2008)*，第111-125页。IEEE，2008年。
+Narayanan, Arvind 和 Vitaly Shmatikov. "大规模稀疏数据集的强健去匿名化。" *2008 IEEE 安全与隐私研讨会 (sp 2008)*，第 111-125 页。IEEE，2008 年。
 
-Narayanan, Arvind 和 Vitaly Shmatikov. "去匿名化社交网络。" *2009年第30届IEEE安全与隐私研讨会*，第173-187页。IEEE，2009年。
+Narayanan, Arvind 和 Vitaly Shmatikov. "去匿名化社交网络。" *2009 年第 30 届 IEEE 安全与隐私研讨会*，第 173-187 页。IEEE，2009 年。
 
 Sweeney, L. "将技术和政策结合起来以保持机密性。" *法律、医学与伦理学杂志* 25, no. 2-3 (1997): 98-110。
 
-Zhang, Yang, Mathias Humbert, Bartlomiej Surma, Praveen Manoharan, Jilles Vreeken 和 Michael Backes. "朝着可信的图匿名化方向前进。" *arXiv预印本 arXiv:1711.05441* (2017)。
+Zhang, Yang, Mathias Humbert, Bartlomiej Surma, Praveen Manoharan, Jilles Vreeken 和 Michael Backes. "朝着可信的图匿名化方向前进。" *arXiv 预印本 arXiv:1711.05441* (2017)。
 
-1.  [https://www.straitstimes.com/singapore/proposed-restrictions-to-safeguard-personal-contact-tracing-data-will-override-all-other](https://www.straitstimes.com/singapore/proposed-restrictions-to-safeguard-personal-contact-tracing-data-will-override-all-other)
+1.  [`www.straitstimes.com/singapore/proposed-restrictions-to-safeguard-personal-contact-tracing-data-will-override-all-other`](https://www.straitstimes.com/singapore/proposed-restrictions-to-safeguard-personal-contact-tracing-data-will-override-all-other)
 
 1.  可以说，研究人员只需要获取接近数据，而不是个体标识符，以研究传播和安全距离措施的有效性。
 
@@ -224,19 +224,19 @@ Zhang, Yang, Mathias Humbert, Bartlomiej Surma, Praveen Manoharan, Jilles Vreeke
 
 1.  相似性可以通过各种方式定义，例如邻接或路径。
 
-1.  [https://www.straitstimes.com/tech/tech-news/special-contact-tracing-devices-for-singapore-workers-in-sectors-with-flammable-gas](https://www.straitstimes.com/tech/tech-news/special-contact-tracing-devices-for-singapore-workers-in-sectors-with-flammable-gas)
+1.  [`www.straitstimes.com/tech/tech-news/special-contact-tracing-devices-for-singapore-workers-in-sectors-with-flammable-gas`](https://www.straitstimes.com/tech/tech-news/special-contact-tracing-devices-for-singapore-workers-in-sectors-with-flammable-gas)
 
-**简介： [Timothy Lin](https://www.timlrx.com/)** ([@timlrxx](https://twitter.com/timlrxx)) 是数据科学家、开发者、经济学家及 [Cylynx](https://www.cylynx.io/) 的联合创始人。Timothy目前的兴趣领域包括网络分析、全栈开发、技术和劳动经济学，未来将会有更多相关内容出现！
+**简介： [Timothy Lin](https://www.timlrx.com/)** ([@timlrxx](https://twitter.com/timlrxx)) 是数据科学家、开发者、经济学家及 [Cylynx](https://www.cylynx.io/) 的联合创始人。Timothy 目前的兴趣领域包括网络分析、全栈开发、技术和劳动经济学，未来将会有更多相关内容出现！
 
 [原文](https://www.timlrx.com/blog/tracetogether-and-the-difficulty-of-graph-anonymisation)。已获授权转载。
 
 **相关：**
 
-+   [使用NumPy和Pandas在更大的图谱上进行更快的机器学习](/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)
++   使用 NumPy 和 Pandas 在更大的图谱上进行更快的机器学习
 
-+   [图机器学习在基因组预测中的应用](/2020/06/graph-machine-learning-genomic-prediction.html)
++   图机器学习在基因组预测中的应用
 
-+   [机器学习的数据结构 - 第2部分：构建知识图谱](/2019/06/data-fabric-machine-learning-building-knowledge-graph.html)
++   机器学习的数据结构 - 第二部分：构建知识图谱
 
 ### 更多相关内容
 
@@ -246,7 +246,7 @@ Zhang, Yang, Mathias Humbert, Bartlomiej Surma, Praveen Manoharan, Jilles Vreeke
 
 +   [关于可信赖图神经网络的综合调查：…](https://www.kdnuggets.com/2022/05/comprehensive-survey-trustworthy-graph-neural-networks-privacy-robustness-fairness-explainability.html)
 
-+   [用Python图形画廊制作惊人的可视化](/2022/12/make-amazing-visualizations-python-graph-gallery.html)
++   用 Python 图形画廊制作惊人的可视化
 
 +   [如何使用图论来考察足球运动员](https://www.kdnuggets.com/2022/11/graph-theory-scout-soccer.html)
 

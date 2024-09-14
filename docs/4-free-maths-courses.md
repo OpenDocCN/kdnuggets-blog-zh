@@ -1,16 +1,16 @@
-# 提升数据科学技能的4门免费数学课程
+# 提升数据科学技能的 4 门免费数学课程
 
-> 原文：[https://www.kdnuggets.com/2020/06/4-free-maths-courses.html](https://www.kdnuggets.com/2020/06/4-free-maths-courses.html)
+> 原文：[`www.kdnuggets.com/2020/06/4-free-maths-courses.html`](https://www.kdnuggets.com/2020/06/4-free-maths-courses.html)
 
-[评论](#comments)
+评论
 
-![](../Images/cabf24e3541a599b34a0090ef460be7d.png)
+![](img/cabf24e3541a599b34a0090ef460be7d.png)
 
-当我进入数据科学和机器学习领域时，任何与数学和统计相关的内容都是我大约10年前最后一次接触的，我想这可能也是我一开始觉得很困难的原因。花了很多小时阅读和观看视频，我才对我们在行业中日常使用的许多工具有了初步的理解。然而，我到了一个阶段，感到需要对所有那些在 Jupyter Notebook 中进行的“导入”和“拟合”操作背后的内容有一个坚实的理解。所以我决定是时候重新审视我的数学知识了。
+当我进入数据科学和机器学习领域时，任何与数学和统计相关的内容都是我大约 10 年前最后一次接触的，我想这可能也是我一开始觉得很困难的原因。花了很多小时阅读和观看视频，我才对我们在行业中日常使用的许多工具有了初步的理解。然而，我到了一个阶段，感到需要对所有那些在 Jupyter Notebook 中进行的“导入”和“拟合”操作背后的内容有一个坚实的理解。所以我决定是时候重新审视我的数学知识了。
 
 如今，我仍在学习，我认为这永远不会够。此外，作为一个来自商业领域且处于一个充满工程、统计、物理学及其他精确科学领域的专业人士的行业，我知道数据科学领域有很多东西需要学习。但你知道吗？技术和语言可能会出现和消失，但该领域的数学基础将会保持不变。
 
-这就是为什么今天我整理了一个4门课程的列表，以提升你的数学知识，并利用我们因这次不幸事件而获得的一些闲暇时间。因为，你知道，你这些天应该待在家里。
+这就是为什么今天我整理了一个 4 门课程的列表，以提升你的数学知识，并利用我们因这次不幸事件而获得的一些闲暇时间。因为，你知道，你这些天应该待在家里。
 
 ### 1. [机器学习数学](https://www.coursera.org/specializations/mathematics-machine-learning)
 
@@ -18,7 +18,7 @@
 
 相关机构：帝国理工学院
 
-所需时间：104小时（实际上可能至少需要+50%）
+所需时间：104 小时（实际上可能至少需要+50%）
 
 先决条件：无
 
@@ -36,13 +36,13 @@
 
 **提示**：大多数 Coursera 的课程和专业都有审核选项。你不会获得证书，但可以访问课程的大部分资源——我个人认为这已经足够了。在注册时，只需选择审核课程的选项即可。
 
-### 2. [机器学习必备数学：Python版](https://www.edx.org/es/course/essential-math-for-machine-learning-python-editi-2)
+### 2. [机器学习必备数学：Python 版](https://www.edx.org/es/course/essential-math-for-machine-learning-python-editi-2)
 
 位置：edX
 
 相关机构：微软
 
-所需时间：50小时
+所需时间：50 小时
 
 前置要求：Python 和一些数学基础知识。
 
@@ -128,11 +128,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

@@ -1,8 +1,8 @@
 # Pandas Profiling：用于 EDA 的一行神奇代码
 
-> 原文：[https://www.kdnuggets.com/2021/02/pandas-profiling-one-line-magical-code-eda.html](https://www.kdnuggets.com/2021/02/pandas-profiling-one-line-magical-code-eda.html)
+> 原文：[`www.kdnuggets.com/2021/02/pandas-profiling-one-line-magical-code-eda.html`](https://www.kdnuggets.com/2021/02/pandas-profiling-one-line-magical-code-eda.html)
 
-[评论](#comments)
+评论
 
 **由 [Juhi Sharma](https://www.linkedin.com/in/juhi-sharma-ds/<code>) 提供，产品分析师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -54,7 +54,7 @@ df=pd.read_csv(“titanic2.csv”)
 df.head()
 ```
 
-![图示](../Images/5115c4b1991b906747da9dcdcf1595f0.png)
+![图示](img/5115c4b1991b906747da9dcdcf1595f0.png)
 
 Titanic 数据集
 
@@ -90,7 +90,7 @@ import pandas_profiling as pp
 pp.ProfileReport(df) #to display the report
 ```
 
-![图示](../Images/b71d33597ca9157865603c4e078f22aa.png)
+![图示](img/b71d33597ca9157865603c4e078f22aa.png)
 
 Pandas Profiling 报告
 
@@ -112,7 +112,7 @@ Pandas Profiling 报告
 
 ### 1\. 概述部分：
 
-![图示](../Images/e879c8fd3b7fb7f31e59733b5ab6d2f0.png)
+![图示](img/e879c8fd3b7fb7f31e59733b5ab6d2f0.png)
 
 报告的概述部分
 
@@ -124,17 +124,17 @@ Pandas Profiling 报告
 
 ### 2.变量部分
 
-![图像](../Images/43cf59d6a29074827f753ab27c3c500f.png)
+![图像](img/43cf59d6a29074827f753ab27c3c500f.png)
 
 本部分详细提供了每个特征的信息。当我们点击上图所示的 **切换详细信息** 选项时，新部分会显示出来。
 
-![文章图像](../Images/b26987198ef7b738a678dcffd676d717.png)
+![文章图像](img/b26987198ef7b738a678dcffd676d717.png)
 
 本部分展示了特征的统计信息、直方图、常见值和极端值。
 
 ### 3.相关性部分
 
-![图](../Images/68edb46743d415b00d47f9be36b887dd.png)
+![图](img/68edb46743d415b00d47f9be36b887dd.png)
 
 相关性部分
 
@@ -142,23 +142,23 @@ Pandas Profiling 报告
 
 ### 4.缺失值部分
 
-![图](../Images/187969224797fe9d5418a584e608205a.png)
+![图](img/187969224797fe9d5418a584e608205a.png)
 
 缺失值部分
 
-![文章图像](../Images/ce9d6c717dc27a6356fbba9c84849501.png)
+![文章图像](img/ce9d6c717dc27a6356fbba9c84849501.png)
 
 我们可以从上述的计数和矩阵图中看到“年龄”和“船舱”列的缺失值。
 
 ### 5.样本部分
 
-![图](../Images/6ab3259406e5675b1998f28fc14b1445.png)
+![图](img/6ab3259406e5675b1998f28fc14b1445.png)
 
-前10行 ![图](../Images/46bb3e1a1170f08f4ef19697ebebea4a.png)
+前 10 行 ![图](img/46bb3e1a1170f08f4ef19697ebebea4a.png)
 
-最后10行
+最后 10 行
 
-本部分展示了数据集的前10行和最后10行。
+本部分展示了数据集的前 10 行和最后 10 行。
 
 我希望“Pandas Profiling”库能帮助更快、更轻松地分析数据。那么你对这个美丽的库有什么看法？试试看，并在回复部分提到你的经验。
 
@@ -172,11 +172,11 @@ Pandas Profiling 报告
 
 **相关:**
 
-+   [仅用两行代码进行强大的探索性数据分析](/2021/02/powerful-exploratory-data-analysis-sweetviz.html)
++   仅用两行代码进行强大的探索性数据分析
 
-+   [在 Python 中合并 Pandas 数据框](/2020/12/merging-pandas-dataframes-python.html)
++   在 Python 中合并 Pandas 数据框
 
-+   [使用管道进行更清洁的数据分析](/2021/01/cleaner-data-analysis-pandas-pipes.html)
++   使用管道进行更清洁的数据分析
 
 ### 更多相关话题
 

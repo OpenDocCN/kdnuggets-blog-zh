@@ -1,14 +1,14 @@
-# 300百万个工作岗位真的会被AI替代或丧失吗？
+# 300 百万个工作岗位真的会被 AI 替代或丧失吗？
 
-> 原文：[https://www.kdnuggets.com/2023/07/300-million-jobs-really-exposed-lost-ai-replacement.html](https://www.kdnuggets.com/2023/07/300-million-jobs-really-exposed-lost-ai-replacement.html)
+> 原文：[`www.kdnuggets.com/2023/07/300-million-jobs-really-exposed-lost-ai-replacement.html`](https://www.kdnuggets.com/2023/07/300-million-jobs-really-exposed-lost-ai-replacement.html)
 
-![300百万个工作岗位真的会被AI替代或丧失吗？](../Images/7c24bf400677b3dcb10f7d5333e2d5e1.png)
+![300 百万个工作岗位真的会被 AI 替代或丧失吗？](img/7c24bf400677b3dcb10f7d5333e2d5e1.png)
 
 图片来源：[Pavel Danilyuk](https://www.pexels.com/photo/a-robot-holding-a-cup-8439093/)
 
-AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT等工具的广泛流行。自然地，随着这些工具的快速普及以及关于[AI能治愈癌症](https://nypost.com/2023/03/20/ai-develops-cancer-treatment-in-30-days-predicts-survival-rate/)、[通过律师资格考试](https://www.courthousenews.com/an-ai-bot-has-passed-the-bar-exam-what-happens-next/#:~:text=CHICAGO%20(CN)%20%E2%80%94%20This%20past,GPT%2D4%20was%20no%20different.)、[在AP考试中得高分](https://www.businessinsider.com/gpt-4-openai-model-api-details-2023-3)、[编写游戏](https://www.polygon.com/ai-artificial-intelligence/23650693/chatgpt-generative-ai-video-game-development#:~:text=An%20AI%20so%20advanced%20that,Pong%2C%20Tetris%2C%20and%20Snake.)、和[取代记者](https://yr.media/tech/gee-code-ai-artificial-intelligence-chatgpt-miranda-perez-journalism-reporters-editors/)的惊人文章，人们感觉他们的生计受到了威胁。
+AI 技术在过去六个月里迅速进入主流，得益于 Midjourney 和 ChatGPT 等工具的广泛流行。自然地，随着这些工具的快速普及以及关于[AI 能治愈癌症](https://nypost.com/2023/03/20/ai-develops-cancer-treatment-in-30-days-predicts-survival-rate/)、[通过律师资格考试](https://www.courthousenews.com/an-ai-bot-has-passed-the-bar-exam-what-happens-next/#:~:text=CHICAGO%20(CN)%20%E2%80%94%20This%20past,GPT%2D4%20was%20no%20different.)、[在 AP 考试中得高分](https://www.businessinsider.com/gpt-4-openai-model-api-details-2023-3)、[编写游戏](https://www.polygon.com/ai-artificial-intelligence/23650693/chatgpt-generative-ai-video-game-development#:~:text=An%20AI%20so%20advanced%20that,Pong%2C%20Tetris%2C%20and%20Snake.)、和[取代记者](https://yr.media/tech/gee-code-ai-artificial-intelligence-chatgpt-miranda-perez-journalism-reporters-editors/)的惊人文章，人们感觉他们的生计受到了威胁。
 
-然后高盛发布了一份[报告](https://www.key4biz.it/wp-content/uploads/2023/03/Global-Economics-Analyst_-The-Potentially-Large-Effects-of-Artificial-Intelligence-on-Economic-Growth-Briggs_Kodnani.pdf)，指出AI可能导致美国和欧洲市场的3亿个工作岗位被降级或丧失。引发了恐慌的头条新闻。
+然后高盛发布了一份[报告](https://www.key4biz.it/wp-content/uploads/2023/03/Global-Economics-Analyst_-The-Potentially-Large-Effects-of-Artificial-Intelligence-on-Economic-Growth-Briggs_Kodnani.pdf)，指出 AI 可能导致美国和欧洲市场的 3 亿个工作岗位被降级或丧失。引发了恐慌的头条新闻。
 
 我认为值得深入探讨一下报告的真正含义，我们可以预期哪些类型的工作会丧失，涉及哪些领域，以及那些面临最大风险的人可以采取哪些措施来抵消这些危险。
 
@@ -16,11 +16,11 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 报告基本上有三点内容：
 
-1.  几乎每个行业都有任务被AI取代的风险。他们指出法律和行政行业最有可能被AI取代，而制造业和建筑业则风险最小。
+1.  几乎每个行业都有任务被 AI 取代的风险。他们指出法律和行政行业最有可能被 AI 取代，而制造业和建筑业则风险最小。
 
-1.  作者预测，美国当前最多有7%的就业岗位会被AI完全取代。大约63%将会得到补充。约30%将不会受到影响。
+1.  作者预测，美国当前最多有 7%的就业岗位会被 AI 完全取代。大约 63%将会得到补充。约 30%将不会受到影响。
 
-1.  其累积效应将是生产力的提高，从而导致全球年GDP最终增长7%
+1.  其累积效应将是生产力的提高，从而导致全球年 GDP 最终增长 7%
 
 尽管有悲观的标题，作者最后却给出了一个充满希望的结论。“显著的劳动成本节省、新职位的创造以及非被取代工人的更高生产力提升了生产力大爆发的可能性，从而大幅提高经济增长。”
 
@@ -30,7 +30,7 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 例如，虽然 Forbes 作者 Jack Kelly [说](https://www.forbes.com/sites/jackkelly/2023/03/31/goldman-sachs-predicts-300-million-jobs-will-be-lost-or-degraded-by-artificial-intelligence/?sh=4a2cef20782b) 报告暗示 AI 将“减少”职位，但原报告的作者明确表示，他们期望 AI 补充这些工作，而不是减少它们。作者还明确表示，他们期望只有少数员工会被 AI 完全替代。
 
-想象一下报告所提到的行政行业的员工，这是最容易受到 AI 影响的职业之一，46% 的任务可以被 AI 替代。即使你可以替代一个员工90%的工作，也极不可能让 AI 做到那个员工所做的*所有*事情。
+想象一下报告所提到的行政行业的员工，这是最容易受到 AI 影响的职业之一，46% 的任务可以被 AI 替代。即使你可以替代一个员工 90%的工作，也极不可能让 AI 做到那个员工所做的*所有*事情。
 
 行政工作人员不仅仅做基本任务；他们还与员工沟通，协作安排会议，并处理意外问题——这些都是只有人类才能做的。如果自动化可以替代行政助理，Calendly 早就会做到这一点了。
 
@@ -44,7 +44,7 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 “他写道，当我给 ChatGPT 提供了完美的信息，且病人有典型的症状时，ChatGPT 作为诊断工具表现得相当好，”他详细描述了 ChatGPT 如何误诊了一些病人，同时未能提出人类医生会问的明显问题。“医疗接触中的绝大多数工作是确定正确的病人叙述。”而这一点是无法替代的。
 
-![300百万个工作岗位真的会因 AI 替代而暴露或丢失吗？](../Images/895b0bde419aaab8806c7fa5fc5851ef.png)
+![300 百万个工作岗位真的会因 AI 替代而暴露或丢失吗？](img/895b0bde419aaab8806c7fa5fc5851ef.png)
 
 图片来源于[Youtube](https://www.youtube.com/watch?v=tTOpJvJ04c4)
 
@@ -62,7 +62,7 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 ## 间接竞争
 
-在任何一个快速生成优于质量的领域，人工智能都会导致工作岗位流失。例如，我的一位同行最近告诉我，她丢掉了主编的职位——这不是因为她的老板将工作外包给了人工智能，而是因为整个网站由于被人工智能生成的内容在那些关键词上的竞争所致，导致利润减少了90%。
+在任何一个快速生成优于质量的领域，人工智能都会导致工作岗位流失。例如，我的一位同行最近告诉我，她丢掉了主编的职位——这不是因为她的老板将工作外包给了人工智能，而是因为整个网站由于被人工智能生成的内容在那些关键词上的竞争所致，导致利润减少了 90%。
 
 她的老板遗憾地裁掉了她以节省成本，并希望将来能重新雇用她。从长远来看，我预计内容会受到更多的处罚，但这对她现在来说没有安慰。
 
@@ -80,7 +80,7 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 防止与人工智能相关的工作流失的最简单最快的方法是学习将人工智能融入你的工作流程。作为一家公司的创始人，我几乎不可能在短期内解雇自己，但我已经学会了使用人工智能来草拟电子邮件、记录重要通话的转录、总结长文章以节省时间、获取项目的技术帮助，甚至帮助我编写代码。
 
-其他从业者已将人工智能加入他们的职位名称，例如人工智能提示专家或人工智能驱动的SEO专家。雇主也在[这样做](https://www.nbcnews.com/tech/tech-news/job-boards-show-employers-hiring-roles-linked-chatgpt-ai-tools-rcna74023)，在房地产经纪、市场营销领军人物以及技术知识工作者等各个领域雇佣人工智能辅助的工作人员。
+其他从业者已将人工智能加入他们的职位名称，例如人工智能提示专家或人工智能驱动的 SEO 专家。雇主也在[这样做](https://www.nbcnews.com/tech/tech-news/job-boards-show-employers-hiring-roles-linked-chatgpt-ai-tools-rcna74023)，在房地产经纪、市场营销领军人物以及技术知识工作者等各个领域雇佣人工智能辅助的工作人员。
 
 如果你是数据科学家或有志于成为数据科学家，[这是 ChatGPT 如何帮助你成为更好的数据科学家](https://www.stratascratch.com/blog/here-is-how-chatgpt-will-help-you-be-a-better-data-scientist/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ai+replacement)。
 
@@ -98,7 +98,7 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 +   Getty Images 已经因版权问题[禁止](https://www.theverge.com/2022/9/21/23364696/getty-images-ai-ban-generated-artwork-illustration-copyright)人工智能生成的艺术作品。
 
-![300百万工作岗位真的会因人工智能替代而暴露或丢失吗？](../Images/ca8a800694acd4361f370165878b28f6.png)
+![300 百万工作岗位真的会因人工智能替代而暴露或丢失吗？](img/ca8a800694acd4361f370165878b28f6.png)
 
 使用[lexica](https://lexica.art/prompt/d38438c4-8275-4492-9ef3-5b3bcff32bcd)生成图像
 
@@ -112,9 +112,9 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 我喜欢高盛报告总结他们对人工智能可能如何影响经济的立场：“有时替代，常常补充。”
 
-如前所述，预计人工智能技术将在未来几年内使GDP增长7%，与此同时，我知道它至少帮助我提高了整体工作生产力和乐趣。正如我想象今天的程序员很庆幸不再需要通过一系列打孔纸来编程一样，我怀疑明天的程序员将以一种让生活更轻松的方式整合人工智能生成技术，而不是让生活变得更困难或财务状况更不稳定。
+如前所述，预计人工智能技术将在未来几年内使 GDP 增长 7%，与此同时，我知道它至少帮助我提高了整体工作生产力和乐趣。正如我想象今天的程序员很庆幸不再需要通过一系列打孔纸来编程一样，我怀疑明天的程序员将以一种让生活更轻松的方式整合人工智能生成技术，而不是让生活变得更困难或财务状况更不稳定。
 
-![300百万个工作岗位是否真的会因为人工智能替代而受到影响？](../Images/f727414ae71aa9eb2c75ce4f1a97e147.png)
+![300 百万个工作岗位是否真的会因为人工智能替代而受到影响？](img/f727414ae71aa9eb2c75ce4f1a97e147.png)
 
 计算机科学家玛格丽特·汉密尔顿与她和团队在麻省理工学院开发的阿波罗导航软件合影。来源：[麻省理工学院博物馆提供](https://solarsystem.nasa.gov/people/320/margaret-hamilton/)。
 
@@ -130,14 +130,14 @@ AI技术在过去六个月里迅速进入主流，得益于Midjourney和ChatGPT�
 
 ### 相关话题
 
-+   [9个可以带你获得学位的专业证书... 如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个可以带你获得学位的专业证书... 如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
 +   [如何找到最佳的数据科学远程工作](https://www.kdnuggets.com/2022/12/find-best-data-science-remote-jobs.html)
 
 +   [为什么那么多数据科学家辞职？](https://www.kdnuggets.com/2022/03/many-data-scientists-quitting-jobs.html)
 
-+   [7个平台帮助你获得高薪数据科学职位](https://www.kdnuggets.com/7-platforms-for-getting-high-paying-data-science-jobs)
++   [7 个平台帮助你获得高薪数据科学职位](https://www.kdnuggets.com/7-platforms-for-getting-high-paying-data-science-jobs)
 
-+   [2022年数据科学领域的热门职位和薪资](https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html)
++   [2022 年数据科学领域的热门职位和薪资](https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html)
 
-+   [8门免费的谷歌课程助你获得高薪职位](https://www.kdnuggets.com/8-free-google-courses-to-land-top-paying-jobs)
++   [8 门免费的谷歌课程助你获得高薪职位](https://www.kdnuggets.com/8-free-google-courses-to-land-top-paying-jobs)

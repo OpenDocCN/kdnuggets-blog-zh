@@ -1,48 +1,48 @@
-# 初学者的前6名数据科学项目
+# 初学者的前 6 名数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2020/11/udacity-data-science-programs-beginners.html](https://www.kdnuggets.com/2020/11/udacity-data-science-programs-beginners.html)
+> 原文：[`www.kdnuggets.com/2020/11/udacity-data-science-programs-beginners.html`](https://www.kdnuggets.com/2020/11/udacity-data-science-programs-beginners.html)
 
 赞助文章。
 
-[![Udacity Level Up](../Images/9d73e80108edff901aa2e05890b95466.png)]
+![Udacity Level Up]
 
 **Udacity**](https://imp.i115008.net/c/2519466/827851/11298)是一个在线学习平台，致力于帮助你提升技术技能。我们的项目得到行业领导者的指导，并由在相关领域工作的专家教授。虽然所有课程都是自定进度和远程的，但学生仍能从真实世界的项目和实践讲师的评估中受益。我们的使命是培训未来职业的全球劳动力。
 
-> **黑色星期五促销活动从11月26日凌晨3点（太平洋时间）开始，到2020年12月3日凌晨2点（太平洋时间）结束**
+> **黑色星期五促销活动从 11 月 26 日凌晨 3 点（太平洋时间）开始，到 2020 年 12 月 3 日凌晨 2 点（太平洋时间）结束**
 > 
-> 全部课程75%折扣。使用代码：BLACKFRIDAY75**
+> 全部课程 75%折扣。使用代码：BLACKFRIDAY75**
 
-随着世界对大数据的关注越来越多，现在是进入数据科学领域的最佳时机。Udacity拥有行业领先的数据科学项目。我们列出了初学者的六大数据科学课程，以帮助你入门。
+随着世界对大数据的关注越来越多，现在是进入数据科学领域的最佳时机。Udacity 拥有行业领先的数据科学项目。我们列出了初学者的六大数据科学课程，以帮助你入门。
 
-### 1\. 学习SQL
+### 1\. 学习 SQL
 
 各位产品经理、开发人员、商业分析师和数据库管理员！我们有适合你们的完美课程。
 
-仅在两个月内，报名参加[学习SQL纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd072&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Flearn-sql--nd072&intsrc=CATF_5678)的学生将学习如何在大型数据库中创建和执行SQL和NoSQL查询，并分析结果以做出战略业务决策。
+仅在两个月内，报名参加[学习 SQL 纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd072&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Flearn-sql--nd072&intsrc=CATF_5678)的学生将学习如何在大型数据库中创建和执行 SQL 和 NoSQL 查询，并分析结果以做出战略业务决策。
 
-许多人认为理解SQL是任何处理数据的人必备的技能。如果这正是你，报名参加[学习SQL纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd072&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Flearn-sql--nd072&intsrc=CATF_5678)项目吧！
+许多人认为理解 SQL 是任何处理数据的人必备的技能。如果这正是你，报名参加[学习 SQL 纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd072&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Flearn-sql--nd072&intsrc=CATF_5678)项目吧！
 
-### 2\. 数据科学编程与Python
+### 2\. 数据科学编程与 Python
 
-你是商业分析师或开发人员，想了解更多关于数据科学的内容吗？查看[数据科学编程与Python纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd104&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree--nd104&intsrc=CATF_5678)项目，通过学习数据的基本编程工具，包括Python、SQL、命令行和git，来启动你的数据科学职业生涯。
+你是商业分析师或开发人员，想了解更多关于数据科学的内容吗？查看[数据科学编程与 Python 纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd104&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree--nd104&intsrc=CATF_5678)项目，通过学习数据的基本编程工具，包括 Python、SQL、命令行和 git，来启动你的数据科学职业生涯。
 
-仅用三个月时间，你将完成三门课程，专注于使用SQL解决复杂的商业问题，学习Python编程语言的基础知识，了解数据分析的顶级库，并理解如何使用版本控制管理和共享你的工作。
+仅用三个月时间，你将完成三门课程，专注于使用 SQL 解决复杂的商业问题，学习 Python 编程语言的基础知识，了解数据分析的顶级库，并理解如何使用版本控制管理和共享你的工作。
 
-从Python数据科学编程纳米学位课程毕业的学生将准备好开始数据科学或商业分析的职业生涯。[今天注册](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd104&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree--nd104&intsrc=CATF_5678) 开始你的学习之旅。
+从 Python 数据科学编程纳米学位课程毕业的学生将准备好开始数据科学或商业分析的职业生涯。[今天注册](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd104&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree--nd104&intsrc=CATF_5678) 开始你的学习之旅。
 
-### 3\. 使用R进行数据科学编程
+### 3\. 使用 R 进行数据科学编程
 
-[使用R进行数据科学编程的纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd118&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree-with-R--nd118&intsrc=CATF_5678) 课程与数据科学编程的Python课程类似，只不过重点是学习如何用R进行编程和数据可视化，而不是Python。和其他课程一样，这门课程也涵盖了SQL和版本控制（git）。
+[使用 R 进行数据科学编程的纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd118&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree-with-R--nd118&intsrc=CATF_5678) 课程与数据科学编程的 Python 课程类似，只不过重点是学习如何用 R 进行编程和数据可视化，而不是 Python。和其他课程一样，这门课程也涵盖了 SQL 和版本控制（git）。
 
-R和Python之间最大的区别在于，R更专门用于统计分析，而Python是一种更通用的编程语言。两者都是新兴数据科学家必须掌握的基础技能。
+R 和 Python 之间最大的区别在于，R 更专门用于统计分析，而 Python 是一种更通用的编程语言。两者都是新兴数据科学家必须掌握的基础技能。
 
-参加[使用R进行数据科学编程的纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd118&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree-with-R--nd118&intsrc=CATF_5678) 课程的学生适合担任统计学家、软件开发人员或数据科学家的职位。为何不立即开始你的新职业生涯？[今天注册](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd118&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree-with-R--nd118&intsrc=CATF_5678)。
+参加[使用 R 进行数据科学编程的纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd118&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree-with-R--nd118&intsrc=CATF_5678) 课程的学生适合担任统计学家、软件开发人员或数据科学家的职位。为何不立即开始你的新职业生涯？[今天注册](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd118&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fprogramming-for-data-science-nanodegree-with-R--nd118&intsrc=CATF_5678)。
 
 ### 4\. 数据可视化
 
 你是否有一些基础的数据分析经验，但希望更进一步？[数据可视化纳米学位](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd197&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fdata-visualization-nanodegree--nd197&intsrc=CATF_5678) 课程可以帮助你将职业生涯提升到一个新的水平。
 
-数据可视化课程的学生学习如何构建可视化和仪表板，围绕数据编写叙述，以帮助清晰地向受众传达信息。使用Tableau，学员学习如何理解用户需求，识别关键指标，定制仪表板，并彻底理解数据集。
+数据可视化课程的学生学习如何构建可视化和仪表板，围绕数据编写叙述，以帮助清晰地向受众传达信息。使用 Tableau，学员学习如何理解用户需求，识别关键指标，定制仪表板，并彻底理解数据集。
 
 仅仅四个月，数据分析师和业务领导者就能全面了解如何有效沟通数据。[今天注册](https://imp.i115008.net/c/2519466/788805/11298?prodsku=nd197&u=https%3A%2F%2Fwww.udacity.com%2Fcourse%2Fdata-visualization-nanodegree--nd197&intsrc=CATF_5678) 为你的数据职业生涯加油。
 
@@ -72,11 +72,11 @@ R和Python之间最大的区别在于，R更专门用于统计分析，而Python
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT 工作
 
 * * *
 
@@ -84,12 +84,12 @@ R和Python之间最大的区别在于，R更专门用于统计分析，而Python
 
 +   [托马斯·米勒博士探讨西北大学的在线…](https://www.kdnuggets.com/2024/05/nwu/thomas-miller-phd-explores-northwestern-universitys-online-graduate-programs-in-data-science)
 
-+   [数据科学初学者的6大YouTube系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)
++   [数据科学初学者的 6 大 YouTube 系列](https://www.kdnuggets.com/top-6-youtube-series-for-data-science-beginners)
 
-+   [KDnuggets 新闻，10月5日：初学者的5大免费Git GUI客户端•…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者的 5 大免费 Git GUI 客户端•…](https://www.kdnuggets.com/2022/n39.html)
 
-+   [初学者到专业人士的5大NLP备忘单](https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html)
++   [初学者到专业人士的 5 大 NLP 备忘单](https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html)
 
-+   [初学者的5大免费Git GUI客户端](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
++   [初学者的 5 大免费 Git GUI 客户端](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
 
-+   [KDnuggets 新闻，6月29日：数据科学的20个基础Linux命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基础 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)

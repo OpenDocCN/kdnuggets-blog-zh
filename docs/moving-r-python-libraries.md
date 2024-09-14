@@ -1,6 +1,6 @@
 # 从 R 迁移到 Python：你需要了解的库
 
-> 原文：[https://www.kdnuggets.com/2017/02/moving-r-python-libraries.html](https://www.kdnuggets.com/2017/02/moving-r-python-libraries.html)
+> 原文：[`www.kdnuggets.com/2017/02/moving-r-python-libraries.html`](https://www.kdnuggets.com/2017/02/moving-r-python-libraries.html)
 
 这篇文章最初出现在 [Yhat 博客](http://blog.yhat.com/) 上。[**Yhat**](https://www.yhat.com/) 是一家位于布鲁克林的公司，旨在让数据科学对开发者、数据科学家和企业都适用。Yhat 提供了一个用于部署和管理预测算法的 REST API 的软件平台，同时消除了与生产环境相关的痛苦的工程障碍，如测试、版本控制、扩展和安全。
 
@@ -10,7 +10,7 @@
 
 我在 Python 中最喜欢的机器学习部分之一是它受益于观察 R 社区，然后模仿其最佳部分。我坚信语言的有用性在于其库。因此，在这篇文章中，我将介绍一些我在使用 R 时几乎每次都会用到的重要包，以及它们在 Python 中的对应包。
 
-![R 和 Python](../Images/f572776fbe1859abeac7883ec931b77d.png)
+![R 和 Python](img/f572776fbe1859abeac7883ec931b77d.png)
 
 ### glm, knn, randomForest, e1071 -> scikit-learn
 
@@ -32,7 +32,7 @@ R 仍然在绘图方面做得比 Python 更好。毫无疑问，R 在几乎所�
 
 +   导入 [`stringr`](https://github.com/hadley/stringr)
 
-![stringr](../Images/502d9a7c007ce20bccf5bdabf0e1cba8.png)
+![stringr](img/502d9a7c007ce20bccf5bdabf0e1cba8.png)
 
 非常感谢，新西兰
 
@@ -60,33 +60,33 @@ R 仍然在绘图方面做得比 Python 更好。毫无疑问，R 在几乎所�
 
 **相关**：
 
-+   [R 用户在学习 Python 时会遇到的八大挫折](/2016/11/r-user-frustrating-learning-python.html)
++   R 用户在学习 Python 时会遇到的八大挫折
 
-+   [R 与 Python 在数据科学中的对决：赢家是...](/2015/05/r-vs-python-data-science.html)
++   R 与 Python 在数据科学中的对决：赢家是...
 
-+   [R 与 Python：面对面的数据分析](/2015/10/r-vs-python-data-analysis.html)
++   R 与 Python：面对面的数据分析
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
 ### 了解更多相关信息
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [2022年数据科学家必须了解的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
++   [2022 年数据科学家必须了解的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
 
-+   [50级数据科学家：必须了解的 Python 库](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)
++   [50 级数据科学家：必须了解的 Python 库](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)
 
 +   [每个数据工程师都应该知道的 7 个 Python 库](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
 

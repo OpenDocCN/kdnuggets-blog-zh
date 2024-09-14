@@ -1,12 +1,12 @@
-# 为什么你应该获得Google的新机器学习证书
+# 为什么你应该获得 Google 的新机器学习证书
 
-> 原文：[https://www.kdnuggets.com/2020/07/googles-new-machine-learning-certificate.html](https://www.kdnuggets.com/2020/07/googles-new-machine-learning-certificate.html)
+> 原文：[`www.kdnuggets.com/2020/07/googles-new-machine-learning-certificate.html`](https://www.kdnuggets.com/2020/07/googles-new-machine-learning-certificate.html)
 
-[评论](#comments)
+评论
 
-**作者 [Frederik Bussler](https://www.linkedin.com/in/frederikbussler/)，Apteo增长营销部**
+**作者 [Frederik Bussler](https://www.linkedin.com/in/frederikbussler/)，Apteo 增长营销部**
 
-![图片](../Images/a53c36d29d6a9e27f77ac00d73690529.png)
+![图片](img/a53c36d29d6a9e27f77ac00d73690529.png)
 
 图片来源：[Jessica Ruscello](https://unsplash.com/@jruscello?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,15 +14,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-Google刚刚推出了一个新的[ML工程师证书](https://cloud.google.com/certification/machine-learning-engineer)。在你决定参加之前，请注意，这个证书旨在面向那些希望展示自己在分布式模型训练和生产扩展等主题上的专业能力的从业人员。
+Google 刚刚推出了一个新的[ML 工程师证书](https://cloud.google.com/certification/machine-learning-engineer)。在你决定参加之前，请注意，这个证书旨在面向那些希望展示自己在分布式模型训练和生产扩展等主题上的专业能力的从业人员。
 
 没有实际工作经验的学生最好先做一些实际操作项目。
 
@@ -30,17 +30,17 @@ Google刚刚推出了一个新的[ML工程师证书](https://cloud.google.com/ce
 
 获得这个证书并不容易。实际上，查看[考试指南](https://cloud.google.com/certification/guides/machine-learning-engineer)你会发现，需要在六个领域具备非常深入的知识，包括权限问题、数据集来源和数据可行性等高度专业化的主题。
 
-这就是为什么Google建议你有3年以上的GCloud产品经验。如果你*确实*符合这个条件，那么这个证书极其宝贵，原因很简单。现在还没有人拥有它。
+这就是为什么 Google 建议你有 3 年以上的 GCloud 产品经验。如果你*确实*符合这个条件，那么这个证书极其宝贵，原因很简单。现在还没有人拥有它。
 
 以提醒你最基本的经济学教训：供应增加，需求减少。
 
-![图片](../Images/8783eace0f1b4036b50b481688c9c02c.png)
+![图片](img/8783eace0f1b4036b50b481688c9c02c.png)
 
 作者。
 
-从直觉上讲，如果有1,000个职位空缺和600个持证的ML工程师，他们比拥有6,000或60,000个证书持有者的情况更容易找到工作和获得高薪。
+从直觉上讲，如果有 1,000 个职位空缺和 600 个持证的 ML 工程师，他们比拥有 6,000 或 60,000 个证书持有者的情况更容易找到工作和获得高薪。
 
-由于测试版注册刚刚开放，目前还没有人获得这个证书。然而，作为AI和云计算领域的领导者以及全球最大科技公司之一的Google，过不了多久你就会看到这些新认证在各处出现。
+由于测试版注册刚刚开放，目前还没有人获得这个证书。然而，作为 AI 和云计算领域的领导者以及全球最大科技公司之一的 Google，过不了多久你就会看到这些新认证在各处出现。
 
 实际上，著名的 AI 研究员 Andrew Ng 在他的 Coursera 课程中拥有多达 [400 万](https://www.coursera.org/learn/machine-learning) 的学习者。同时，全球只有 [17,100](https://app.apteo.co/workspaces/2300510291097552329) 名机器学习工程师。
 
@@ -54,7 +54,7 @@ Google刚刚推出了一个新的[ML工程师证书](https://cloud.google.com/ce
 
 ### 替代方案
 
-![图像](../Images/d7bb462c4b8cf55a9c997d77f05e5857.png)
+![图像](img/d7bb462c4b8cf55a9c997d77f05e5857.png)
 
 统计数据来源于 [ScaleGrid](https://scalegrid.io/blog/2019-open-source-database-report-top-databases-public-cloud-vs-on-premise-polyglot-persistence/)。可视化由作者提供。
 
@@ -90,22 +90,22 @@ Google刚刚推出了一个新的[ML工程师证书](https://cloud.google.com/ce
 
 **相关：**
 
-+   [10 门顶尖的免费机器学习课程](/2019/12/10-free-top-notch-courses-machine-learning.html)
++   10 门顶尖的免费机器学习课程
 
-+   [免费的数据科学和机器学习数学课程](/2020/02/free-mathematics-courses-data-science-machine-learning.html)
++   免费的数据科学和机器学习数学课程
 
-+   [TensorFlow 开发者峰会 2020：TensorFlow 和 Google Colab 用户的10个最佳技巧](/2020/04/tensorflow-dev-summit-2020-top-10-tricks-tensorflow-colabs.html)
++   TensorFlow 开发者峰会 2020：TensorFlow 和 Google Colab 用户的 10 个最佳技巧
 
 ### 更多相关话题
 
-+   [你应该获得认证的5个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
++   [你应该获得认证的 5 个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
 
 +   [数据科学家如何赢得首席财务官的青睐（以及为什么你应该这样做）](https://www.kdnuggets.com/2021/12/data-scientists-get-ear-cfos-want.html)
 
-+   [你应该避免从事数据科学职业的5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [你应该避免从事数据科学职业的 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [在 Kaggle 上竞争的4个最佳技巧以及你为什么应该立即开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)
++   [在 Kaggle 上竞争的 4 个最佳技巧以及你为什么应该立即开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)
 
 +   [为什么不应该过度使用 Python 列表解析](https://www.kdnuggets.com/why-you-should-not-overuse-list-comprehensions-in-python)
 
-+   [你应该使用线性回归模型而不是…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [你应该使用线性回归模型而不是…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)

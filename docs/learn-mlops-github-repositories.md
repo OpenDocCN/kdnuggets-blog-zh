@@ -1,8 +1,8 @@
 # 从这些 GitHub 仓库学习 MLOps
 
-> 原文：[https://www.kdnuggets.com/2023/02/learn-mlops-github-repositories.html](https://www.kdnuggets.com/2023/02/learn-mlops-github-repositories.html)
+> 原文：[`www.kdnuggets.com/2023/02/learn-mlops-github-repositories.html`](https://www.kdnuggets.com/2023/02/learn-mlops-github-repositories.html)
 
-![从这些 GitHub 仓库学习 MLOps](../Images/ce05b137d9949f2ebd0c44f9ddede251.png)
+![从这些 GitHub 仓库学习 MLOps](img/ce05b137d9949f2ebd0c44f9ddede251.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -52,19 +52,19 @@ MLOps 过程包括这三个广泛的阶段：
 
 选项多永远没坏处。这个 GitHub 仓库为你提供了一份精心挑选的 MLOps 参考资料列表。不论你的学习方法是通过 YouTube 视频还是文章——这个仓库都有。
 
-你将获得一份资源清单，帮助你理解MLOps的核心内容，并可以加入相关社区。其他主题领域包括工作流管理、特征存储、数据工程、机器学习/人工智能的经济学等。
+你将获得一份资源清单，帮助你理解 MLOps 的核心内容，并可以加入相关社区。其他主题领域包括工作流管理、特征存储、数据工程、机器学习/人工智能的经济学等。
 
-# 超棒的MLOps工具
+# 超棒的 MLOps 工具
 
 仓库链接：[awesome-mlops](https://github.com/kelvins/awesome-mlops)
 
-另一个与上述相同名称的MLOps GitHub仓库，但这个仓库涉及你需要了解的MLOps工具。这将帮助你掌握各种技能，并为面试阶段或获得MLOps工作时的相关问题做好准备。
+另一个与上述相同名称的 MLOps GitHub 仓库，但这个仓库涉及你需要了解的 MLOps 工具。这将帮助你掌握各种技能，并为面试阶段或获得 MLOps 工作时的相关问题做好准备。
 
 它涵盖了如下工具主题：
 
 +   [AutoML](https://github.com/kelvins/awesome-mlops#automl)
 
-+   [机器学习的CI/CD](https://github.com/kelvins/awesome-mlops#cicd-for-machine-learning)
++   [机器学习的 CI/CD](https://github.com/kelvins/awesome-mlops#cicd-for-machine-learning)
 
 +   [数据探索](https://github.com/kelvins/awesome-mlops#data-exploration)
 
@@ -86,7 +86,7 @@ MLOps 过程包括这三个广泛的阶段：
 
 仓库链接：[dtu_mlops](https://github.com/SkafteNicki/dtu_mlops)
 
-这个GitHub仓库是由丹麦技术大学提供的机器学习运维课程。为了成功完成这个仓库，你需要具备以下先决条件： 
+这个 GitHub 仓库是由丹麦技术大学提供的机器学习运维课程。为了成功完成这个仓库，你需要具备以下先决条件： 
 
 +   机器学习的总体理解
 
@@ -96,23 +96,23 @@ MLOps 过程包括这三个广泛的阶段：
 
 你将获得不同类型的练习和有价值的材料，以提高你对机器学习运维的理解
 
-# MLOps课程
+# MLOps 课程
 
 仓库链接：[mlops-course](https://github.com/GokuMohandas/mlops-course)
 
-如果你对自己的MLOps知识和技能感到自信，那么下一步是进行实战测试。最好的方法是通过项目工作来完成。这份GitHub仓库为你提供了一个基于项目的MLOps基础课程，以便你负责任地开发、部署和维护机器学习模型。
+如果你对自己的 MLOps 知识和技能感到自信，那么下一步是进行实战测试。最好的方法是通过项目工作来完成。这份 GitHub 仓库为你提供了一个基于项目的 MLOps 基础课程，以便你负责任地开发、部署和维护机器学习模型。
 
 它是将机器学习与软件工程相结合，讲述如何构建生产级应用程序。这将帮助你建立一个坚实的作品集，并能够在面试阶段证明自己。
 
 # 结论
 
-网上有很多现成的资源可以帮助你在MLOps领域取得成功。关键在于你愿意投入多少努力，但这绝对是可能的。
+网上有很多现成的资源可以帮助你在 MLOps 领域取得成功。关键在于你愿意投入多少努力，但这绝对是可能的。
 
 如果你需要一些指导和结构来规划学习路线，可以查看以下内容：
 
-+   [完整的MLOps学习路线图](/2022/12/complete-mlops-study-roadmap.html)
++   完整的 MLOps 学习路线图
 
-+   [MLOps的绝对基础](/2022/09/absolute-basics-mlops.html)
++   MLOps 的绝对基础
 
 **[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由技术写作人。她特别感兴趣于提供数据科学职业建议或教程，并围绕数据科学提供理论知识。她还希望探索人工智能在延长人类寿命方面的不同方式。作为一个热衷于学习的人，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 

@@ -1,6 +1,6 @@
 # 理解 AI 中的代理环境
 
-> 原文：[https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
+> 原文：[`www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html`](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
 
 # AI 代理简要介绍
 
@@ -8,17 +8,17 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 在开始文章之前，理解 AI 中的代理（agent）是很重要的。代理基本上是一个帮助 AI、机器学习或深度强化学习做出决策或触发 AI 做出决策的实体。从软件的角度来看，它被定义为能够做出决策并根据环境变化或从外部环境获取输入后做出不同决策的实体。代理在这些领域中的作用非常重要，因为 AI 模型的所有参数主要依赖于代理的表现。简单来说，快速感知外部变化并对其做出反应的代理，模型得到的结果就越好。因此，代理在[人工智能](https://algoscale.com/artificial-intelligence-solution-providers/) 、机器学习和深度学习中的作用总是非常重要。AI 代理的最常见例子是 Alexa 和 Siri。因为它们都能够根据用户的请求行动，从互联网收集信息，提供解决方案，并做出相应的行动。这些代理非常智能，能够收集用户的完整信息，甚至建议与用户相关的广告和推荐。(*Intelligent Agents in Artificial Intelligence | Engineering Education (EngEd) Program | Section*, 2019)
 
-![一个闭环系统，其中系统从环境中获取一些输入，并向环境提供一些动作](../Images/d1d9433c1ad2357bc63b68e535bb1d34.png)
+![一个闭环系统，其中系统从环境中获取一些输入，并向环境提供一些动作](img/d1d9433c1ad2357bc63b68e535bb1d34.png)
 
 图 1\. 一个闭环系统，其中系统从环境中获取一些输入，并向环境提供一些动作 | 图片来源：编辑
 
@@ -46,15 +46,15 @@
 
 ## 参考文献
 
-+   *Intelligent Agents: Characteristics and Applications | AI*。（n.d.）。检索于2022年2月26日，网址为 https://www.engineeringenotes.com/artificial-intelligence-2/intelligent-agents/intelligent-agents-characteristics-and-applications-ai/35618
++   *Intelligent Agents: Characteristics and Applications | AI*。（n.d.）。检索于 2022 年 2 月 26 日，网址为 https://www.engineeringenotes.com/artificial-intelligence-2/intelligent-agents/intelligent-agents-characteristics-and-applications-ai/35618
 
-+   *人工智能中的智能代理 | 工程教育（EngEd）计划 | Section*。（n.d.）。检索于2022年2月26日，网址为 https://www.section.io/engineering-education/intelligent-agents-in-ai/
++   *人工智能中的智能代理 | 工程教育（EngEd）计划 | Section*。（n.d.）。检索于 2022 年 2 月 26 日，网址为 https://www.section.io/engineering-education/intelligent-agents-in-ai/
 
-+   *AI 代理的类型 - Javatpoint*。（n.d.）。检索于2022年2月26日，网址为 https://www.javatpoint.com/types-of-ai-agents
++   *AI 代理的类型 - Javatpoint*。（n.d.）。检索于 2022 年 2 月 26 日，网址为 https://www.javatpoint.com/types-of-ai-agents
 
-+   *什么是智能代理？ - Definition from WhatIs.com*。（n.d.）。检索于2022年2月26日，网址为 https://www.techtarget.com/searchenterpriseai/definition/agent-intelligent-agent
++   *什么是智能代理？ - Definition from WhatIs.com*。（n.d.）。检索于 2022 年 2 月 26 日，网址为 https://www.techtarget.com/searchenterpriseai/definition/agent-intelligent-agent
 
-**[Neeraj Agarwal](https://www.linkedin.com/in/neeagl/)** 是 [Algoscale](https://www.linkedin.com/company/algoscale) 的创始人，该公司是一家涵盖数据工程、应用AI、数据科学和产品工程的数据咨询公司。他在这一领域拥有超过9年的经验，帮助了从初创公司到财富100强的各种组织处理和存储大量原始数据，以将其转化为可操作的洞察，从而促进更好的决策和更快的业务价值。
+**[Neeraj Agarwal](https://www.linkedin.com/in/neeagl/)** 是 [Algoscale](https://www.linkedin.com/company/algoscale) 的创始人，该公司是一家涵盖数据工程、应用 AI、数据科学和产品工程的数据咨询公司。他在这一领域拥有超过 9 年的经验，帮助了从初创公司到财富 100 强的各种组织处理和存储大量原始数据，以将其转化为可操作的洞察，从而促进更好的决策和更快的业务价值。
 
 ### 更多相关主题
 
@@ -62,7 +62,7 @@
 
 +   [机器学习算法的完整端到端部署](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [在3分钟内理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
++   [在 3 分钟内理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
 
 +   [理解贝叶斯定理的三种方法将提升你的数据科学技能](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
 

@@ -1,12 +1,12 @@
-# Docker上的Apache Spark集群
+# Docker 上的 Apache Spark 集群
 
-> 原文：[https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html](https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html)
+> 原文：[`www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html`](https://www.kdnuggets.com/2020/07/apache-spark-cluster-docker.html)
 
-[评论](#comments)
+评论
 
-**作者 [André Perez](https://www.linkedin.com/in/andremarcosperez/)，Experian的数据工程师**
+**作者 [André Perez](https://www.linkedin.com/in/andremarcosperez/)，Experian 的数据工程师**
 
-![图示](../Images/6504ccaf02651d78847df87f699dffe1.png)
+![图示](img/6504ccaf02651d78847df87f699dffe1.png)
 
 由[Jez Timms](https://unsplash.com/@jeztimms)提供，来源于[Unsplash](https://unsplash.com/photos/r4lM2v9M84Q)的火花
 
@@ -14,35 +14,35 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-[Apache Spark](https://spark.apache.org/)可以说是最受欢迎的大数据处理引擎。它在[GitHub](https://github.com/apache/spark)上有超过25k的星标，这个框架是学习使用Python、Scala和R进行分布式系统并行计算的绝佳起点。
+[Apache Spark](https://spark.apache.org/)可以说是最受欢迎的大数据处理引擎。它在[GitHub](https://github.com/apache/spark)上有超过 25k 的星标，这个框架是学习使用 Python、Scala 和 R 进行分布式系统并行计算的绝佳起点。
 
-要开始使用，你可以通过使用众多优秀的Docker分发版之一在你的机器上运行Apache Spark。[Jupyter](https://github.com/jupyter/docker-stacks)提供了一个出色的*docker化* Apache Spark与JupyterLab界面，但由于在单个容器上运行，缺少了框架的分布式核心。一些GitHub [项目](https://github.com/big-data-europe/docker-spark)提供了分布式集群体验，但缺少JupyterLab界面，削弱了IDE提供的可用性。
+要开始使用，你可以通过使用众多优秀的 Docker 分发版之一在你的机器上运行 Apache Spark。[Jupyter](https://github.com/jupyter/docker-stacks)提供了一个出色的*docker 化* Apache Spark 与 JupyterLab 界面，但由于在单个容器上运行，缺少了框架的分布式核心。一些 GitHub [项目](https://github.com/big-data-europe/docker-spark)提供了分布式集群体验，但缺少 JupyterLab 界面，削弱了 IDE 提供的可用性。
 
-我相信，一个全面的环境来学习和实践Apache Spark代码必须保持其分布式特性，同时提供极佳的用户体验。
+我相信，一个全面的环境来学习和实践 Apache Spark 代码必须保持其分布式特性，同时提供极佳的用户体验。
 
 这篇文章完全基于这一信念。
 
-在接下来的部分中，我将向你展示如何构建自己的集群。到最后，你将拥有一个完整功能的Apache Spark集群，使用Docker构建，并配备一个Spark主节点、两个Spark工作节点和一个JupyterLab界面。它还将包括Apache Spark Python API（PySpark）和一个模拟的Hadoop分布式文件系统（HDFS）。
+在接下来的部分中，我将向你展示如何构建自己的集群。到最后，你将拥有一个完整功能的 Apache Spark 集群，使用 Docker 构建，并配备一个 Spark 主节点、两个 Spark 工作节点和一个 JupyterLab 界面。它还将包括 Apache Spark Python API（PySpark）和一个模拟的 Hadoop 分布式文件系统（HDFS）。
 
 **总结**
 
-本文展示了如何使用Docker作为基础设施层在[独立模式](http://spark.apache.org/docs/latest/spark-standalone.html)下构建Apache Spark集群。它配备了以下内容：
+本文展示了如何使用 Docker 作为基础设施层在[独立模式](http://spark.apache.org/docs/latest/spark-standalone.html)下构建 Apache Spark 集群。它配备了以下内容：
 
-+   Python 3.7，配有PySpark 3.0.0和Java 8；
++   Python 3.7，配有 PySpark 3.0.0 和 Java 8；
 
 +   Apache Spark 3.0.0，配有一个主节点和两个工作节点；
 
 +   JupyterLab IDE 2.1.5；
 
-+   模拟HDFS 2.7。
++   模拟 HDFS 2.7。
 
 为了构建集群，我们需要创建、构建和组合 JupyterLab 和 Spark 节点的 Docker 镜像。你可以跳过教程，使用在我[GitHub](https://github.com/andre-marcos-perez/spark-cluster-on-docker)上托管的**开箱即用的分发版**。
 
@@ -66,13 +66,13 @@
 
     集群由四个主要组件组成：JupyterLab IDE、Spark 主节点和两个 Spark 工作节点。用户通过 Jupyter 笔记本提供的优雅 GUI 连接到主节点并提交 Spark 命令。主节点处理输入并将计算工作负载分配给工作节点，将结果发送回 IDE。组件通过 localhost 网络连接，并通过模拟 HDFS 的共享挂载卷共享数据。
 
-    ![图示](../Images/37dc76fd9b4537e013b05fa07e2602ab.png)
+    ![图示](img/37dc76fd9b4537e013b05fa07e2602ab.png)
 
     Apache Spark 集群概述
 
     如前所述，我们需要创建、构建和组合 JupyterLab 和 Spark 节点的 Docker 镜像，以构建集群。我们将使用以下 Docker 镜像层次结构：
 
-    ![图示](../Images/fb19f5b9139a812de78f5788550224b4.png)
+    ![图示](img/fb19f5b9139a812de78f5788550224b4.png)
 
     Docker 镜像层次结构
 
@@ -182,17 +182,17 @@
 
     就这些了。我希望我能帮助你多了解一些 Apache Spark 内部工作原理和分布式应用程序的运作方式。祝学习愉快！
 
-    **个人简介： [André Perez](https://www.linkedin.com/in/andremarcosperez/)** （[**@dekoperez**](https://twitter.com/dekoperez)）是Experian的数据工程师，同时也是圣保罗大学的硕士数据科学学生。
+    **个人简介： [André Perez](https://www.linkedin.com/in/andremarcosperez/)** （[**@dekoperez**](https://twitter.com/dekoperez)）是 Experian 的数据工程师，同时也是圣保罗大学的硕士数据科学学生。
 
     [原文](https://towardsdatascience.com/apache-spark-cluster-on-docker-ft-a-juyterlab-interface-418383c95445)。已获转载许可。
 
     **相关：**
 
-    +   [使用 Apache Spark 和 PySpark 的好处与示例](/2020/04/benefits-apache-spark-pyspark.html)
+    +   使用 Apache Spark 和 PySpark 的好处与示例
 
-    +   [五个有趣的数据工程项目](/2020/03/data-engineering-projects.html)
+    +   五个有趣的数据工程项目
 
-    +   [数据工程需要培养的技能](/2020/06/skills-build-data-engineering.html)
+    +   数据工程需要培养的技能
 
     ### 更多相关内容
 

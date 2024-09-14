@@ -1,54 +1,54 @@
-# LLM手册：从业者的策略和技巧
+# LLM 手册：从业者的策略和技巧
 
-> 原文：[https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
+> 原文：[`www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners`](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
 
-![LLM手册：从业者的策略和技巧](../Images/1e4a06077aeb8f900a5373ac8098f9a2.png)
+![LLM 手册：从业者的策略和技巧](img/1e4a06077aeb8f900a5373ac8098f9a2.png)
 
 图片由作者提供
 
-大型语言模型（LLMs）彻底改变了机器与人类的互动方式。它们是生成性AI的一个子类别，专注于基于文本的应用，而生成性AI则更广泛，包括文本、音频、视频、图像，甚至代码！
+大型语言模型（LLMs）彻底改变了机器与人类的互动方式。它们是生成性 AI 的一个子类别，专注于基于文本的应用，而生成性 AI 则更广泛，包括文本、音频、视频、图像，甚至代码！
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-[AWS](https://aws.amazon.com/what-is/generative-ai/) 很好地总结了 – “生成性人工智能（生成性AI）是一种能够创建新内容和想法的AI，包括对话、故事、图像、视频和音乐。它重用训练数据来解决新问题。”
+[AWS](https://aws.amazon.com/what-is/generative-ai/) 很好地总结了 – “生成性人工智能（生成性 AI）是一种能够创建新内容和想法的 AI，包括对话、故事、图像、视频和音乐。它重用训练数据来解决新问题。”
 
-生成性AI开辟了AI领域的新前沿！
+生成性 AI 开辟了 AI 领域的新前沿！
 
-大型语言模型（LLMs）具有人类般的响应生成能力，但AI从业者应该如何使用它们呢？是否有指南或方法来帮助行业建立对这项前沿技术的信心？
+大型语言模型（LLMs）具有人类般的响应生成能力，但 AI 从业者应该如何使用它们呢？是否有指南或方法来帮助行业建立对这项前沿技术的信心？
 
 这正是我们将在本文中讨论的内容。那么，让我们开始吧。
 
 ## 一种开始的助手!!!
 
-LLMs本质上是生成器，因此建议将它们用于生成摘要、提供解释以及回答广泛的问题。通常，AI用于辅助人类专家。同样，LLMs可以增强你对复杂主题的理解。
+LLMs 本质上是生成器，因此建议将它们用于生成摘要、提供解释以及回答广泛的问题。通常，AI 用于辅助人类专家。同样，LLMs 可以增强你对复杂主题的理解。
 
-行业专家认为LLMs是很好的讨论平台 – 是的，它们适合用来验证问题、头脑风暴、创建草稿，甚至检查是否有更好的方式来表达现有内容。这些建议为开发者和AI爱好者提供了测试这项强大技术的舞台。
+行业专家认为 LLMs 是很好的讨论平台 – 是的，它们适合用来验证问题、头脑风暴、创建草稿，甚至检查是否有更好的方式来表达现有内容。这些建议为开发者和 AI 爱好者提供了测试这项强大技术的舞台。
 
-不仅仅是文本，LLMs还帮助生成和调试代码，以及以易于理解的方式解释复杂算法，突显了它们在解密术语方面的作用，为不同角色提供量身定制的概念理解。
+不仅仅是文本，LLMs 还帮助生成和调试代码，以及以易于理解的方式解释复杂算法，突显了它们在解密术语方面的作用，为不同角色提供量身定制的概念理解。
 
 ## 好处！！
 
-现在，让我们讨论一些突显LLMs在提高效率方面作用的案例。以下示例关注于生成报告和洞察，以及简化业务流程。
+现在，让我们讨论一些突显 LLMs 在提高效率方面作用的案例。以下示例关注于生成报告和洞察，以及简化业务流程。
 
-**协作工具：** 创建跨应用程序如Slack共享数据的总结报告是一种非常有效的方式，以便了解项目的进展。这些报告可以包括主题、当前状态、迄今为止的发展、参与者、行动项目、截止日期、瓶颈、下一步等详细信息。
+**协作工具：** 创建跨应用程序如 Slack 共享数据的总结报告是一种非常有效的方式，以便了解项目的进展。这些报告可以包括主题、当前状态、迄今为止的发展、参与者、行动项目、截止日期、瓶颈、下一步等详细信息。
 
-![LLMs在提升效率中的作用](../Images/f1891d7bfd9af4d73fac2681da265a4d.png)
+![LLMs 在提升效率中的作用](img/f1891d7bfd9af4d73fac2681da265a4d.png)
 
 图片由作者提供
 
 **供应链：** 供应链规划师通常处于应急状态以满足需求订单。虽然供应链规划帮助很大，但最后一公里的交付需要专家们在战情室内齐心协力，以保持供应链计划的完整。大量的信息，通常以文本形式交换，包括对未来有用的见解。此外，这些对话的总结让所有利益相关者了解实时状态。
 
-## 采用LLMs
+## 采用 LLMs
 
 在技术迅速发展的背景下，重要的是不要因为担心错过而产生焦虑，而应以业务优先的心态来应对。
 
@@ -56,9 +56,9 @@ LLMs本质上是生成器，因此建议将它们用于生成摘要、提供解�
 
 ## 分清事实与虚构
 
-在讨论了LLMs的好处后，现在是时候了解另一面了。我们都知道没有免费的午餐。那么，负责任地使用LLMs需要什么？有许多关注点，比如模型偏见、深度伪造等潜在误用及其影响，需要对LLMs的伦理影响有更多的认识。
+在讨论了 LLMs 的好处后，现在是时候了解另一面了。我们都知道没有免费的午餐。那么，负责任地使用 LLMs 需要什么？有许多关注点，比如模型偏见、深度伪造等潜在误用及其影响，需要对 LLMs 的伦理影响有更多的认识。
 
-![区分人工生成的回应与机器回应。](../Images/a8d7aaaac822d238624306b5881a014b.png)
+![区分人工生成的回应与机器回应。](img/a8d7aaaac822d238624306b5881a014b.png)
 
 图片由作者提供
 
@@ -76,19 +76,19 @@ LLMs本质上是生成器，因此建议将它们用于生成摘要、提供解�
 
 +   模型回应常常在推理上存在漏洞，要仔细阅读，质疑其相关性，并引导其得到适当的回应。
 
-## 设计LLMs时需考虑的提示
+## 设计 LLMs 时需考虑的提示
 
-让我们直接了解LLMs的实际应用，以了解它们的能力和局限性。首先，要做好多个实验和迭代周期的准备。始终保持对最新行业发展的了解，以充分利用模型的最大效益。
+让我们直接了解 LLMs 的实际应用，以了解它们的能力和局限性。首先，要做好多个实验和迭代周期的准备。始终保持对最新行业发展的了解，以充分利用模型的最大效益。
 
 黄金法则是从业务目标出发，设定明确的目标和指标。通常，性能指标不仅包括准确性，还包括速度、计算资源和成本效益。这些都是必须事先决定的不可谈判的因素。
 
-接下来的重要步骤是选择适合业务需求的LLM工具或平台，这也包括考虑闭源或开源模型。
+接下来的重要步骤是选择适合业务需求的 LLM 工具或平台，这也包括考虑闭源或开源模型。
 
-![充分利用LLMs能力的有用提示](../Images/c71ff3a16e6b1411d27336597108fa83.png)
+![充分利用 LLMs 能力的有用提示](img/c71ff3a16e6b1411d27336597108fa83.png)
 
 图片来源：作者
 
-LLM的规模是另一个关键决定因素。你的用例是否需要大型模型，还是较小的近似模型，它们对计算需求的要求较低，能够在提供的准确性上做出良好的折中？请注意，较大的模型提供更好的性能，但需要消耗更多的计算资源，从而增加预算。
+LLM 的规模是另一个关键决定因素。你的用例是否需要大型模型，还是较小的近似模型，它们对计算需求的要求较低，能够在提供的准确性上做出良好的折中？请注意，较大的模型提供更好的性能，但需要消耗更多的计算资源，从而增加预算。
 
 鉴于大型模型带来的安全和隐私风险，企业需要强大的保护措施来确保最终用户的数据安全。同样，了解提示技术以传达查询并从模型中获取信息也很重要。
 
@@ -96,20 +96,20 @@ LLM的规模是另一个关键决定因素。你的用例是否需要大型模�
 
 ## 摘要
 
-LLM确实是一个强大的工具，适用于多种任务，包括信息总结、复杂概念和数据解释。然而，成功的实施需要以业务为先的思维方式，以避免陷入人工智能的炒作中，并找到真正有效的最终用途。此外，了解伦理影响，例如验证信息、质疑响应的有效性，以及注意LLM生成内容可能存在的偏见和风险，有助于负责任地使用这些模型。
+LLM 确实是一个强大的工具，适用于多种任务，包括信息总结、复杂概念和数据解释。然而，成功的实施需要以业务为先的思维方式，以避免陷入人工智能的炒作中，并找到真正有效的最终用途。此外，了解伦理影响，例如验证信息、质疑响应的有效性，以及注意 LLM 生成内容可能存在的偏见和风险，有助于负责任地使用这些模型。
 
 **[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)**是人工智能战略家和数字化转型领导者，致力于在产品、科学和工程的交叉点上构建可扩展的机器学习系统。她是一位获奖的创新领导者、作者和国际演讲者。她的使命是使机器学习大众化，并打破术语，让每个人都能参与到这场变革中。
 
 ### 更多相关内容
 
-+   [3种基于研究的高级提示技术以提高LLM效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
++   [3 种基于研究的高级提示技术以提高 LLM 效率…](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
 
-+   [Web LLM：将LLM聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
++   [Web LLM：将 LLM 聊天机器人带到浏览器](https://www.kdnuggets.com/2023/05/webllm-bring-llm-chatbots-browser.html)
 
-+   [一些超棒的提示工程技巧来提升我们的LLM模型](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)
++   [一些超棒的提示工程技巧来提升我们的 LLM 模型](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)
 
-+   [SAS如何帮助提升从业者的职业生涯](https://www.kdnuggets.com/2023/07/sas-help-catapult-practitioners-careers.html)
++   [SAS 如何帮助提升从业者的职业生涯](https://www.kdnuggets.com/2023/07/sas-help-catapult-practitioners-careers.html)
 
-+   [适合NLP从业者的5门语言学课程](https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html)
++   [适合 NLP 从业者的 5 门语言学课程](https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html)
 
-+   [数据掩码：确保GDPR及其他法规合规的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
++   [数据掩码：确保 GDPR 及其他法规合规的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)

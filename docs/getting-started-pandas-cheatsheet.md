@@ -1,6 +1,6 @@
 # Pandas 入门速查表
 
-> 原文：[https://www.kdnuggets.com/2022/09/getting-started-pandas-cheatsheet.html](https://www.kdnuggets.com/2022/09/getting-started-pandas-cheatsheet.html)
+> 原文：[`www.kdnuggets.com/2022/09/getting-started-pandas-cheatsheet.html`](https://www.kdnuggets.com/2022/09/getting-started-pandas-cheatsheet.html)
 
 # Pandas 入门
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -30,7 +30,7 @@ KDnuggets 的 Abid Ali Awan 进一步 [描述了 Pandas](https://www.kdnuggets.c
 
 你可以 **[在这里下载速查表](https://www.kdnuggets.com/publications/sheets/Getting-Started-with-Pandas-Cheatsheet-KDnuggets.pdf)**。
 
-[![Pandas 入门速查表](../Images/b2fea2d659dabeb7c584965f83e2eda2.png)](https://www.kdnuggets.com/publications/sheets/Getting-Started-with-Pandas-Cheatsheet-KDnuggets.pdf)
+![Pandas 入门速查表](https://www.kdnuggets.com/publications/sheets/Getting-Started-with-Pandas-Cheatsheet-KDnuggets.pdf)
 
 # Pandas 入门速查表
 
@@ -46,7 +46,7 @@ KDnuggets 的 Abid Ali Awan 进一步 [描述了 Pandas](https://www.kdnuggets.c
 
 +   [数据科学的 Linux 备忘单](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [SQL 数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 

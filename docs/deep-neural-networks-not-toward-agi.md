@@ -1,22 +1,22 @@
 # 深度神经网络不会引导我们走向 AGI
 
-> 原文：[https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
+> 原文：[`www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html`](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
 
-[评论](#comments)
+评论
 
 **由 [Thuwarakesh Murallie](https://www.linkedin.com/in/thuwarakesh/)，Stax Inc. 的数据科学家**
 
-![](../Images/a445ad39209d0406a32a1079ca03f10c.png)
+![](img/a445ad39209d0406a32a1079ca03f10c.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -84,52 +84,52 @@
 
 谷歌知道深度神经网络或机器学习一般还无法实现人工通用智能。他们理解，经过训练的模型是对现实世界知识的一种薄弱表示。
 
-> *“机器学习系统常常在单一任务上过度专门化，而它们本可以在许多任务上表现出色。”——Jeff Dean，谷歌高级研究员及SVP*
+> *“机器学习系统常常在单一任务上过度专门化，而它们本可以在许多任务上表现出色。”——Jeff Dean，谷歌高级研究员及 SVP*
 
 谷歌的目标是通过他们称之为“Pathway”的方法来解决这个问题。
 
-关于Pathway如何工作的公开信息不多。但根据Jeff Dean的[博客文章](https://blog.google/technology/ai/introducing-pathways-next-generation-ai-architecture/)，谷歌Pathway即将解决通向AGI的三大常见挑战。
+关于 Pathway 如何工作的公开信息不多。但根据 Jeff Dean 的[博客文章](https://blog.google/technology/ai/introducing-pathways-next-generation-ai-architecture/)，谷歌 Pathway 即将解决通向 AGI 的三大常见挑战。
 
-Pathway使我们能够使用一个模型来解决数千个不同的问题。这与传统的机器学习模型不同，因为后者被训练来解决特定问题。
+Pathway 使我们能够使用一个模型来解决数千个不同的问题。这与传统的机器学习模型不同，因为后者被训练来解决特定问题。
 
-此外，Pathway使用了多种感官。传统模型使用来自单一感官的输入。例如，计算机视觉问题处理图像，语音识别处理音频信号。Pathway预计同时处理这些以及其他感官输入。
+此外，Pathway 使用了多种感官。传统模型使用来自单一感官的输入。例如，计算机视觉问题处理图像，语音识别处理音频信号。Pathway 预计同时处理这些以及其他感官输入。
 
-此外，Pathway承诺将模型执行从密集模式转移到稀疏模式。这意味着，为了解决一个问题，你不必激活整个神经网络，而是孤立地激活特定路径。
+此外，Pathway 承诺将模型执行从密集模式转移到稀疏模式。这意味着，为了解决一个问题，你不必激活整个神经网络，而是孤立地激活特定路径。
 
 ### 总结
 
 这并不是说机器学习在人工智能领域没有其作用。
 
-这仅仅意味着我们不应该将ML误认为AGI，也不要假设它能引导我们实现类似人类智能和通用问题解决能力的目标。
+这仅仅意味着我们不应该将 ML 误认为 AGI，也不要假设它能引导我们实现类似人类智能和通用问题解决能力的目标。
 
 深度神经网络（以及机器学习模型一般）适用于识别问题。但它们没有创建解决更一般问题所需的世界表示。
 
-目前尚不清楚谷歌如何通过Pathway解决这些朝向AGI的挑战。我们需要等到相关信息发布后才能进一步评论。
+目前尚不清楚谷歌如何通过 Pathway 解决这些朝向 AGI 的挑战。我们需要等到相关信息发布后才能进一步评论。
 
-你有什么想法？你认为机器学习会引导我们走向AGI吗？
+你有什么想法？你认为机器学习会引导我们走向 AGI 吗？
 
-你对Pathway模型及其在解决通用AI问题方面的承诺感到兴奋吗？分享你的想法、意见和观点。我很想听到你们的看法！
+你对 Pathway 模型及其在解决通用 AI 问题方面的承诺感到兴奋吗？分享你的想法、意见和观点。我很想听到你们的看法！
 
-**简介：** Thuwarakesh Murallie（[@Thuwarakesh](https://twitter.com/Thuwarakesh)）是Stax Inc.的数据科学家和Medium上的人工智能顶级作者。
+**简介：** Thuwarakesh Murallie（[@Thuwarakesh](https://twitter.com/Thuwarakesh)）是 Stax Inc.的数据科学家和 Medium 上的人工智能顶级作者。
 
 **相关：**
 
-+   [对AI系统难题进行人类监督的扩展——OpenAI方法](https://www.kdnuggets.com/2021/10/openai-scaling-human-oversight-ai-systems.html)
++   [对 AI 系统难题进行人类监督的扩展——OpenAI 方法](https://www.kdnuggets.com/2021/10/openai-scaling-human-oversight-ai-systems.html)
 
-+   [超越万亿参数和GPT-3的Switch Transformers——通向AGI的路径？](https://www.kdnuggets.com/2021/10/trillion-parameters-gpt-3-switch-transformers-path-agi.html)
++   [超越万亿参数和 GPT-3 的 Switch Transformers——通向 AGI 的路径？](https://www.kdnuggets.com/2021/10/trillion-parameters-gpt-3-switch-transformers-path-agi.html)
 
-+   [AGI与人类的未来](https://www.kdnuggets.com/2021/07/agi-future-humanity.html)
++   [AGI 与人类的未来](https://www.kdnuggets.com/2021/07/agi-future-humanity.html)
 
 ### 更多相关内容
 
-+   [规划你通向SAS认证的旅程](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
++   [规划你通向 SAS 认证的旅程](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
 
-+   [婴儿AGI：完全自主AI的诞生](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
++   [婴儿 AGI：完全自主 AI 的诞生](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
 
-+   [我们离AGI有多近？](https://www.kdnuggets.com/how-close-are-we-to-agi)
++   [我们离 AGI 有多近？](https://www.kdnuggets.com/how-close-are-we-to-agi)
 
 +   [使用最先进的深度学习进行可解释的预测与现在预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)
 
 +   [神经网络与深度学习：教科书（第二版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
 
-+   [使用PyTorch解释性神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
++   [使用 PyTorch 解释性神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)

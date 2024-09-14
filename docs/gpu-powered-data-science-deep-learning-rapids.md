@@ -1,24 +1,24 @@
-# GPU驱动的数据科学（非深度学习）与RAPIDS
+# GPU 驱动的数据科学（非深度学习）与 RAPIDS
 
-> 原文：[https://www.kdnuggets.com/2021/08/gpu-powered-data-science-deep-learning-rapids.html](https://www.kdnuggets.com/2021/08/gpu-powered-data-science-deep-learning-rapids.html)
+> 原文：[`www.kdnuggets.com/2021/08/gpu-powered-data-science-deep-learning-rapids.html`](https://www.kdnuggets.com/2021/08/gpu-powered-data-science-deep-learning-rapids.html)
 
-[评论](#comments)
+评论
 
-![头图](../Images/d3c4ef08dfa0e0885360d379295720aa.png)
+![头图](img/d3c4ef08dfa0e0885360d379295720aa.png)
 
 **图片来源**: [Pixabay](https://pixabay.com/photos/pc-hardware-geforce-radeon-6113265/) (免费图片)
 
-## 你在寻找“GPU驱动的数据科学”吗？
+## 你在寻找“GPU 驱动的数据科学”吗？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -28,15 +28,15 @@
 
 然而，鉴于你处理的数据集的性质（主要是表格和结构化数据），你不会过多涉足深度学习。你宁愿将所有的硬件资源投入到你日常实际工作的事务中，而不是花费在一些花哨的深度学习模型上。再说一次，熟悉吗？
 
-你听说过[GPU系统，如NVidia提供的各种工业和科学应用的系统](https://www.nvidia.com/en-us/deep-learning-ai/products/solutions/)的强大能力和飞快的计算能力。
+你听说过[GPU 系统，如 NVidia 提供的各种工业和科学应用的系统](https://www.nvidia.com/en-us/deep-learning-ai/products/solutions/)的强大能力和飞快的计算能力。
 
 然后，你不断思考——“***这对我来说有什么好处？我如何在特定的工作流程中利用这些强大的半导体组件***？”
 
-你在寻找GPU驱动的数据科学。
+你在寻找 GPU 驱动的数据科学。
 
 评估这种方法的最佳（且最快）选项之一是使用[**Saturn Cloud**](https://saturncloud.io/?utm_source=Tirtha&utm_medium=GPU-powered%20Data%20Science%20Article)** + **[**RAPIDS**](https://rapids.ai/)**。**让我详细解释一下…
 
-## 在AI/ML的传说中，GPU主要用于深度学习
+## 在 AI/ML 的传说中，GPU 主要用于深度学习
 
 尽管在学术界和商业界对核心 AI/ML 任务中（例如运行 [1000 层深度神经网络](https://towardsdatascience.com/an-overview-of-resnet-and-its-variants-5281e2f56035) 进行图像分类或 [十亿参数的 BERT](https://arxiv.org/abs/1909.08053) 语音合成模型）的 GPU 和分布式计算的使用有广泛讨论，但它们在常规数据科学和数据工程任务中的实用性却得到的关注较少。
 
@@ -46,7 +46,7 @@
 
 所以，重要的问题是：***我们能否利用 GPU 和分布式计算的力量来处理常规数据处理工作***？
 
-![](../Images/cfe568cb012bc33d8646f653e9cad210.png)
+![](img/cfe568cb012bc33d8646f653e9cad210.png)
 
 **图片来源**：作者从免费图片（[Pixabay](https://pixabay.com/vectors/squirrel-reading-books-surprise-304021/)）创建的拼贴
 
@@ -60,7 +60,7 @@
 
 **常见的数据准备和处理任务** 在 RAPIDS 生态系统中备受重视。它还提供了显著的 **对多节点、多 GPU 部署和分布式处理的支持**。在可能的情况下，它与其他库集成，使 **超大内存**（即数据集大小大于单个计算机 RAM）数据处理对个体数据科学家变得简单易用。
 
-![](../Images/0829816c3ae29c222246fdfa91aae184.png)
+![](img/0829816c3ae29c222246fdfa91aae184.png)
 
 **图片来源**：作者创建的拼贴
 
@@ -112,7 +112,7 @@
 
 [**GPU 计算是数据科学的未来。像 RAPIDS、TensorFlow 和 PyTorch 这样的包使计算变得迅速…**](https://www.saturncloud.io/blog/saturn-cloud-hosted-has-launched-gpu-data-science-for-everyone/)
 
-除了拥有[Tesla T4 GPU](https://www.nvidia.com/en-us/data-center/tesla-t4/)，它还是一台4核 Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz 机器，配有 16 GB RAM 和 10 GB 持久磁盘。因此，从硬件配置的角度来看，这是一个相当普通的设置（由于免费层，硬盘有限），即任何数据科学家都可能拥有这种硬件。唯一的区别在于 GPU 的存在，以及正确设置所有 CUDA 和 Python 库，以确保 RAPIDS 套件正常运行。
+除了拥有[Tesla T4 GPU](https://www.nvidia.com/en-us/data-center/tesla-t4/)，它还是一台 4 核 Intel(R) Xeon(R) Platinum 8259CL CPU @ 2.50GHz 机器，配有 16 GB RAM 和 10 GB 持久磁盘。因此，从硬件配置的角度来看，这是一个相当普通的设置（由于免费层，硬盘有限），即任何数据科学家都可能拥有这种硬件。唯一的区别在于 GPU 的存在，以及正确设置所有 CUDA 和 Python 库，以确保 RAPIDS 套件正常运行。
 
 > 大问题规模并不总意味着 Apache Spark 或 Hadoop 生态系统。大计算不等同于大数据。作为一个全面的数据科学家，你需要了解这两者，以解决各种问题。
 
@@ -120,23 +120,23 @@
 
 我们创建了不同大小的线性方程组，并使用 Numpy（和 CuPy）的`linalg.solve`例程通过以下代码解决它，
 
-![](../Images/da82dcb41575536341d1705d43609761.png)
+![](img/da82dcb41575536341d1705d43609761.png)
 
 并且，CuPy 实现的代码在多次调用中仅通过一个字母的变化就能完成！
 
-![](../Images/a1bac98a78faba8d375bbea8b9339f76.png)
+![](img/a1bac98a78faba8d375bbea8b9339f76.png)
 
 还请注意，我们如何从 Numpy 数组创建 CuPy 数组作为参数。
 
 结果却很显著。CuPy 开始时较慢或与 Numpy 的速度相似，但对于大规模问题（方程数量）表现得更为出色。
 
-![](../Images/3eef97e201daaefe710505532167abe3.png)
+![](img/3eef97e201daaefe710505532167abe3.png)
 
 ### 奇异值分解
 
 接下来，我们使用一个从正态分布中生成的随机方阵（具有不同大小）来解决奇异值分解问题。我们这里不重复代码块，仅展示结果以简洁起见。
 
-![](../Images/c9e56c1ab31bb1185a08a915d28e1175.png)
+![](img/c9e56c1ab31bb1185a08a915d28e1175.png)
 
 需要注意的是，CuPy 算法在此问题类别中并未显著优于 Numpy 算法。也许，这是 CuPy 开发者需要改进的地方。
 
@@ -144,7 +144,7 @@
 
 最后，我们回到基础，考虑矩阵求逆这一基本问题（几乎在所有机器学习算法中都有使用）。结果再次显示 CuPy 算法在性能上明显优于 Numpy 包。
 
-![](../Images/520e51bcb56b1e8fec32e0f8f078365b.png)
+![](img/520e51bcb56b1e8fec32e0f8f078365b.png)
 
 ### 处理 K-means 聚类问题
 
@@ -152,17 +152,17 @@
 
 仅供参考，这里是这两个估计器的 API 比较。
 
-![](../Images/facdccdbfe76522bafd1a3c7a968a4b3.png)
+![](img/facdccdbfe76522bafd1a3c7a968a4b3.png)
 
 **图片来源**： [Scikit-learn](https://scikit-learn.org/stable/modules/generated/sklearn.cluster.KMeans.html) 和 [CuML 网站](https://docs.rapids.ai/api/cuml/stable/api.html#k-means-clustering) （开源项目）
 
 这是一个具有 10 个特征/维度的数据集的结果。
 
-![](../Images/6e741bf16eb344f368b8968ea9a58538.png)
+![](img/6e741bf16eb344f368b8968ea9a58538.png)
 
 这是另一个具有 100 个特征的数据集的实验结果。
 
-![](../Images/c49a3e4ddf1e024f4f98159babf87482.png)
+![](img/c49a3e4ddf1e024f4f98159babf87482.png)
 
 显然，样本数量（行数）和维度（列数）在 GPU 加速的性能表现中都起着重要作用。
 
@@ -174,49 +174,49 @@
 
 再次强调，随着问题复杂性的增加（样本数量和维度），CuML 估计器的表现显著提升。
 
-![](../Images/6e95f098dc9fe9c215df7cef5e96d97f.png)
+![](img/6e95f098dc9fe9c215df7cef5e96d97f.png)
 
 ## 总结
 
 我们专注于 RAPIDS 框架的两个最基本组件，该框架旨在将 GPU 的强大计算能力带到数据分析和机器学习的日常任务中，即使数据科学家不进行任何深度学习任务。
 
-![](../Images/99e2cd77dfaf96b3a37ddccb0662cae7.png)
+![](img/99e2cd77dfaf96b3a37ddccb0662cae7.png)
 
-**图片来源**：由作者使用免费Pixabay图片制作（[链接-1](https://pixabay.com/photos/nvidia-graphic-card-bitcoin-gpu-5264921/), [链接-2](https://pixabay.com/vectors/cube-hexagon-stairs-152932/), [链接-3](https://pixabay.com/vectors/statistic-analytic-diagram-1564428/))
+**图片来源**：由作者使用免费 Pixabay 图片制作（[链接-1](https://pixabay.com/photos/nvidia-graphic-card-bitcoin-gpu-5264921/), [链接-2](https://pixabay.com/vectors/cube-hexagon-stairs-152932/), [链接-3](https://pixabay.com/vectors/statistic-analytic-diagram-1564428/))
 
-我们使用了一个 [**Saturn Cloud**](https://saturncloud.io/?utm_source=Tirtha&utm_medium=GPU-powered%20Data%20Science%20Article)** 基于Tesla T4的实例，进行 **[**简单、免费的快速设置**](https://www.saturncloud.io/s/freehosted/)**，并展示了一些CuPy和CuML库的功能以及广泛使用的算法性能比较。
+我们使用了一个 [**Saturn Cloud**](https://saturncloud.io/?utm_source=Tirtha&utm_medium=GPU-powered%20Data%20Science%20Article)** 基于 Tesla T4 的实例，进行 **[**简单、免费的快速设置**](https://www.saturncloud.io/s/freehosted/)**，并展示了一些 CuPy 和 CuML 库的功能以及广泛使用的算法性能比较。
 
-+   并非所有RAPIDS库中的算法都极为出色，但大多数都是。
++   并非所有 RAPIDS 库中的算法都极为出色，但大多数都是。
 
 +   一般来说，随着问题复杂性（样本大小和维度）的增加，性能提升迅速。
 
-+   如果你有GPU，始终尝试使用RAPIDS，比较和测试是否获得了性能提升，并使其成为你数据科学管道中值得信赖的工作马。
++   如果你有 GPU，始终尝试使用 RAPIDS，比较和测试是否获得了性能提升，并使其成为你数据科学管道中值得信赖的工作马。
 
 +   代码变更最小，几乎没有，切换过来几乎没有成本。
 
-**让GPU的力量启动你的分析和数据科学工作流程**。
+**让 GPU 的力量启动你的分析和数据科学工作流程**。
 
-你可以查看作者的 [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，获取机器学习和数据科学的代码、创意和资源。如果你像我一样，对AI/机器学习/数据科学充满热情，请随时 [在LinkedIn上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [关注我在Twitter上的账号](https://twitter.com/tirthajyotiS)。
+你可以查看作者的 [**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，获取机器学习和数据科学的代码、创意和资源。如果你像我一样，对 AI/机器学习/数据科学充满热情，请随时 [在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [关注我在 Twitter 上的账号](https://twitter.com/tirthajyotiS)。
 
-感谢Mel。
+感谢 Mel。
 
 [原文](https://medium.com/dataseries/gpu-powered-data-science-not-deep-learning-with-rapids-29f9ed8d51f3)。经许可转载。
 
 **相关：**
 
-+   [如何使用NVIDIA GPU加速库](/2021/07/nvidia-gpu-accelerated-libraries.html)
++   如何使用 NVIDIA GPU 加速库
 
-+   [你为什么以及如何学习“高效数据科学”？](/2021/07/learn-productive-data-science.html)
++   你为什么以及如何学习“高效数据科学”？
 
-+   [不仅仅是深度学习：GPU如何加速数据科学和数据分析](/2021/07/deep-learning-gpu-accelerate-data-science-data-analytics.html)
++   不仅仅是深度学习：GPU 如何加速数据科学和数据分析
 
 ### 更多相关内容
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目的，并通过目的来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

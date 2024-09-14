@@ -1,8 +1,8 @@
 # 数据可视化：理论与技巧
 
-> 原文：[https://www.kdnuggets.com/data-visualization-theory-and-techniques](https://www.kdnuggets.com/data-visualization-theory-and-techniques)
+> 原文：[`www.kdnuggets.com/data-visualization-theory-and-techniques`](https://www.kdnuggets.com/data-visualization-theory-and-techniques)
 
-![数据可视化：理论与技巧](../Images/dfb0f078ccd4a611e5aa363a2a4633d1.png)
+![数据可视化：理论与技巧](img/dfb0f078ccd4a611e5aa363a2a4633d1.png)
 
 图片由 [freepik](https://www.freepik.com/author/freepik) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -60,9 +60,9 @@
 
 因此，任何显示的数据总是可以描述为以下几类之一。
 
-![数据可视化：理论与技术](../Images/4267d9a3ee2a92bba4252f0860b3ed18.png)
+![数据可视化：理论与技术](img/4267d9a3ee2a92bba4252f0860b3ed18.png)
 
-图片作者提供。分类摘自《数据可视化基础》，O’Reilly出版社。
+图片作者提供。分类摘自《数据可视化基础》，O’Reilly 出版社。
 
 一旦我们清楚了数据的类型，我们需要理解如何将这些数据编码成最终的图表。
 
@@ -80,17 +80,17 @@
 
 1.  **视网膜编码：** 从形状、大小、颜色和强度来看，这些都是我们眼睛瞬间捕捉到的元素。*它们是元素固有的。*
 
-![数据可视化：理论与技术](../Images/13df62ed71085800b56f56ce3ba75bff.png)
+![数据可视化：理论与技术](img/13df62ed71085800b56f56ce3ba75bff.png)
 
 图片作者提供
 
 1.  **空间编码：** 它们利用我们大脑皮层的空间意识来编码信息。这种编码可以通过在尺度中的位置、定义的顺序或使用相对大小来实现。
 
-![数据可视化：理论与技术](../Images/9235405759d2621a41f67022ab9cbb97.png)
+![数据可视化：理论与技术](img/9235405759d2621a41f67022ab9cbb97.png)
 
 图片作者提供
 
-使用之前解释的所有编码方法，我们可以在一张图表中使用它们，但这样读者很难快速掌握所有信息。图表中过度使用多种编码可能会让人困惑，因此每张图表中使用1到2种视网膜编码是最佳的。
+使用之前解释的所有编码方法，我们可以在一张图表中使用它们，但这样读者很难快速掌握所有信息。图表中过度使用多种编码可能会让人困惑，因此每张图表中使用 1 到 2 种视网膜编码是最佳的。
 
 记住，少即是多，所以总是尽量创建简约且易于理解的图表。
 
@@ -122,25 +122,25 @@
 
 1.  **相似性：** 格式塔相似性意味着我们的脑袋会将看起来相似的事物归为一组。这可能是由于它们的位置、形状、颜色或大小。*这在热图或散点图中被广泛使用。*
 
-![数据可视化：理论与技巧](../Images/7085e1654fb355944bff5ca1ac503d3e.png)
+![数据可视化：理论与技巧](img/7085e1654fb355944bff5ca1ac503d3e.png)
 
 图片由作者提供
 
 1.  **封闭性：** 边框内的物体，如线条或共享颜色，看起来像是属于同一组。这使它们从我们看到的其他事物中突出。*我们常常在表格和图表中使用边框或颜色来分组数据。*
 
-![数据可视化：理论与技巧](../Images/b187586c61582693ee601697d57dd3b0.png)
+![数据可视化：理论与技巧](img/b187586c61582693ee601697d57dd3b0.png)
 
 图片由作者提供
 
 1.  **连续性：** 当个体元素相连时，我们的眼睛会认为它们属于同一组。即使它们看起来不同，线条也会让我们将它们视为一组。*这在折线图中被广泛使用。*
 
-![数据可视化：理论与技巧](../Images/7b96ff9a5f7d3903ef34d59d694aaed7.png)
+![数据可视化：理论与技巧](img/7b96ff9a5f7d3903ef34d59d694aaed7.png)
 
 图片由作者提供
 
 1.  **邻近性：** 如果事物彼此靠近，我们会认为它们在同一组中。为了显示事物属于同一组，将它们放在一起。使用少量空间可以帮助分隔不同的组。*这在散点图或节点链接图中很常见。*
 
-![数据可视化：理论与技巧](../Images/6f8f1fd471e135f071182b8d8a0251a0.png)
+![数据可视化：理论与技巧](img/6f8f1fd471e135f071182b8d8a0251a0.png)
 
 图片由作者提供
 
@@ -152,11 +152,11 @@
 
 通常，**墨水**一词用来指代视觉化中任何与背景色不同的部分。*这包括线条、条形图、点、共享区域和文本。*
 
-例如，在条形图中，我们绘制的条形从0开始，到表示的数据值结束。在这种情况下，数据值不仅通过条形的终点进行编码，还通过条形的高度或长度进行编码。
+例如，在条形图中，我们绘制的条形从 0 开始，到表示的数据值结束。在这种情况下，数据值不仅通过条形的终点进行编码，还通过条形的高度或长度进行编码。
 
 如果我们绘制一个从非零值开始的条形图，那么条形图的长度和条形图的终点将传达矛盾的信息。
 
-![数据可视化：理论与技巧](../Images/3d3ffd2f7fac8166fbef54584caa597f.png)
+![数据可视化：理论与技巧](img/3d3ffd2f7fac8166fbef54584caa597f.png)
 
 图片由作者提供
 
@@ -190,8 +190,8 @@
 
 +   [机器学习评估指标：理论与概述](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)
 
-+   [从理论到实践：构建k-近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
++   [从理论到实践：构建 k-近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 
 +   [如何利用图论来侦察足球](https://www.kdnuggets.com/2022/11/graph-theory-scout-soccer.html)
 
-+   [2022年及以后顶尖 AI 和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶尖 AI 和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)

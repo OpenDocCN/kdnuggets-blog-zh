@@ -1,10 +1,10 @@
 # 14 种不同数据科学职位的指南
 
-> 原文：[https://www.kdnuggets.com/2021/10/guide-14-different-data-science-jobs.html](https://www.kdnuggets.com/2021/10/guide-14-different-data-science-jobs.html)
+> 原文：[`www.kdnuggets.com/2021/10/guide-14-different-data-science-jobs.html`](https://www.kdnuggets.com/2021/10/guide-14-different-data-science-jobs.html)
 
-[评论](#comments)
+评论
 
-![](../Images/68fd2cf6126dd68ba368d5ffb3111107.png)
+![](img/68fd2cf6126dd68ba368d5ffb3111107.png)
 
 市场上有大量的职位要求你具备数据科学背景，这有时可能会令人困惑。这使得你很难判断自己是否过度或不足够资格。有时，公司有重叠的职位描述，甚至他们自己对工作任务的理解（和名称）也没有帮助。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -36,7 +36,7 @@
 
 这取决于许多因素，当然，不同的数据科学职位之间存在差异。然而，对于几乎所有需要数据科学背景的工作来说，有一些技能是必须具备的。唯一的区别在于你在工作中使用这些技能的程度。
 
-![](../Images/701d494ae9185856a7c63381ee2d9eb0.png)
+![](img/701d494ae9185856a7c63381ee2d9eb0.png)
 
 +   处理数据——收集、组织、清理和操控数据
 
@@ -60,7 +60,7 @@
 
 所有这些路径都可以使你成为数据科学家。你可以朝多个方向发展；这完全取决于你的公司、职业规划、兴趣等。
 
-![](../Images/e6c200c1b24bedb717679af82002ca2f.png)
+![](img/e6c200c1b24bedb717679af82002ca2f.png)
 
 ### 我能赚多少钱？
 
@@ -259,11 +259,11 @@
 
 *编程语言*
 
-+   与数据科学家相同，但主要是使用SQL进行数据查询，以及使用Python/R进行统计和计量经济建模
++   与数据科学家相同，但主要是使用 SQL 进行数据查询，以及使用 Python/R 进行统计和计量经济建模
 
 *平台工具*
 
-+   与数据科学家相同，但更多关注市场数据，使用如Google Analytics或Heap Analytics等市场分析工具
++   与数据科学家相同，但更多关注市场数据，使用如 Google Analytics 或 Heap Analytics 等市场分析工具
 
 *技术技能*
 
@@ -277,17 +277,17 @@
 
 **职位描述**
 
-BI开发人员是精通数据的工程师，他们开发和维护BI接口，并在BI工具中工作。这些工具允许查询和可视化数据，创建仪表板、常规和临时报告。从某种程度上说，这结合了数据工程师（ETL）、数据分析师（分析和报告）和软件工程师（软件开发）的职能。
+BI 开发人员是精通数据的工程师，他们开发和维护 BI 接口，并在 BI 工具中工作。这些工具允许查询和可视化数据，创建仪表板、常规和临时报告。从某种程度上说，这结合了数据工程师（ETL）、数据分析师（分析和报告）和软件工程师（软件开发）的职能。
 
 **相比数据科学家所需的额外技能**
 
 *编程语言*
 
-+   与数据科学家相同，但侧重于数据查询，因此SQL是主要语言，Python和R用于更复杂的应用和统计建模
++   与数据科学家相同，但侧重于数据查询，因此 SQL 是主要语言，Python 和 R 用于更复杂的应用和统计建模
 
 *平台工具*
 
-+   与数据科学家相同，但更偏向于BI（如仪表板工具如Tableau）
++   与数据科学家相同，但更偏向于 BI（如仪表板工具如 Tableau）
 
 *技术技能*
 
@@ -313,11 +313,11 @@ BI开发人员是精通数据的工程师，他们开发和维护BI接口，并�
 
 *编程语言*
 
-+   通常只使用SQL
++   通常只使用 SQL
 
 *平台工具*
 
-+   业务分析工具（例如Modern Requirements, Axure, Enterprise Architecture等）
++   业务分析工具（例如 Modern Requirements, Axure, Enterprise Architecture 等）
 
 *技术技能*
 
@@ -467,11 +467,11 @@ BI开发人员是精通数据的工程师，他们开发和维护BI接口，并�
 
 编程语言
 
-+   与数据科学家相同，但更偏重于统计和数据分析（这个领域R用户更多，但Python也很受欢迎）
++   与数据科学家相同，但更偏重于统计和数据分析（这个领域 R 用户更多，但 Python 也很受欢迎）
 
 平台工具
 
-+   与数据科学家相同，但更多使用统计分析工具（例如SPSS、MATLAB、SAS）
++   与数据科学家相同，但更多使用统计分析工具（例如 SPSS、MATLAB、SAS）
 
 技术技能
 
@@ -491,11 +491,11 @@ BI开发人员是精通数据的工程师，他们开发和维护BI接口，并�
 
 *编程语言*
 
-+   与数据科学家相同，但专注于Python/R用于量化模型原型制作
++   与数据科学家相同，但专注于 Python/R 用于量化模型原型制作
 
 *平台工具*
 
-+   自动化交易平台（MetaTrader4、eToro等）
++   自动化交易平台（MetaTrader4、eToro 等）
 
 *技术技能*
 
@@ -505,13 +505,13 @@ BI开发人员是精通数据的工程师，他们开发和维护BI接口，并�
 
 ## 摘要
 
-数据科学是一个广泛且不断发展的领域。我们提供的这14种不同的数据科学职位名称并不是**终极**列表，因为新的数据科学职位类型几乎每天都在创造。它还取决于公司的组织结构和规模，他们如何称呼某个职位。这可能意味着将几种职位合并成一个，或将一个职位细分为几个子类型和专业，由多人完成。
+数据科学是一个广泛且不断发展的领域。我们提供的这 14 种不同的数据科学职位名称并不是**终极**列表，因为新的数据科学职位类型几乎每天都在创造。它还取决于公司的组织结构和规模，他们如何称呼某个职位。这可能意味着将几种职位合并成一个，或将一个职位细分为几个子类型和专业，由多人完成。
 
 然而，这些数据科学职位名称涵盖了你可能用数据科学背景做的大多数工作。每个职位描述都是具体的，但我们相信你会在我们的网站上找到所有职位的合适面试问题。你可以选择各种[coding](https://platform.stratascratch.com/coding?questionType=2&company=&curated_filter=&is_correct_solution=&is_bookmarked=&is_freemium=&in_depth_solution=&difficulty=3&python=1&filters=&page=1&page_size=undefined)和[非编码问题](https://platform.stratascratch.com/technical)，随意选择。
 
 **相关：**
 
-+   [数据科学适合我吗？14个自我检查问题](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
++   [数据科学适合我吗？14 个自我检查问题](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
 
 +   [不常见的数据科学职位指南](https://www.kdnuggets.com/2020/08/data-science-job-guide.html)
 
@@ -523,10 +523,10 @@ BI开发人员是精通数据的工程师，他们开发和维护BI接口，并�
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一场价值90亿美元的AI失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一场价值 90 亿美元的 AI 失败，分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

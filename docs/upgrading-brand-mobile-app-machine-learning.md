@@ -1,12 +1,12 @@
 # 使用机器学习升级品牌移动应用
 
-> 原文：[https://www.kdnuggets.com/2020/06/upgrading-brand-mobile-app-machine-learning.html](https://www.kdnuggets.com/2020/06/upgrading-brand-mobile-app-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/06/upgrading-brand-mobile-app-machine-learning.html`](https://www.kdnuggets.com/2020/06/upgrading-brand-mobile-app-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [Joanna Baretto](https://twitter.com/BarettoJoanna) 提供，来自 [Tatvasoft Australia](https://www.tatvasoft.com.au/)**
 
-![图](../Images/c13ad255ddec74b95a9f05d08e576a0c.png)
+![图](img/c13ad255ddec74b95a9f05d08e576a0c.png)
 
 版权：123rf.com
 
@@ -34,7 +34,7 @@
 
 这些是一些示例：
 
-![图](../Images/dbf4b888d5f0a8e73eb81f8b4aeb7315.png)
+![图](img/dbf4b888d5f0a8e73eb81f8b4aeb7315.png)
 
 版权：Rubygarage.org
 
@@ -56,13 +56,13 @@
 
 一些机器学习应用的示例
 
-![图](../Images/33889d867624886d09296b1ec67d82b8.png)
+![图](img/33889d867624886d09296b1ec67d82b8.png)
 
 版权：Rubygarage.org
 
 **3\. 高级搜索：** 带有机器学习的解决方案允许优化应用程序中的搜索，提供更多更好的上下文结果。此外，它使客户的搜索更直观、少受阻碍。机器学习算法从客户查询中学习，并优先考虑对某个人真正重要的结果。
 
-认知技术有助于将文章、脚本、DIY视频、常见问题解答以及文档分类到知识图谱中，以提供即时回答和更智能的自助服务。现代应用程序允许你收集所有关于客户的数据，包括搜索历史和典型行为。这些数据可以与搜索请求和行为数据一起用于排名产品和服务，并展示最佳匹配结果。
+认知技术有助于将文章、脚本、DIY 视频、常见问题解答以及文档分类到知识图谱中，以提供即时回答和更智能的自助服务。现代应用程序允许你收集所有关于客户的数据，包括搜索历史和典型行为。这些数据可以与搜索请求和行为数据一起用于排名产品和服务，并展示最佳匹配结果。
 
 **4\. 增强的安全性：** 机器学习除了是一个有效的营销工具外，还能保护和简化应用程序身份验证。客户可以使用生物识别数据，如面部或指纹进行音频、视频和语音识别认证。此外，机器学习有助于确定客户的访问权限。
 
@@ -94,25 +94,25 @@
 
 机器学习技术可以赋能任何移动应用，提供前沿的搜索机制、高效的个性化引擎、欺诈保护以及安全快速的认证。
 
-**个人简介：[Joanna Baretto](https://twitter.com/BarettoJoanna)** 是 [Tatvasoft Australia](https://www.tatvasoft.com.au/) 的技术分析师，这是一家领先的移动应用开发公司。她在技术领域工作了五年，她在多个学科中的工作广泛涉及技术体验的叙事。你可以在Twitter上找到她，[ @BarettoJoanna](https://twitter.com/BarettoJoanna)。
+**个人简介：[Joanna Baretto](https://twitter.com/BarettoJoanna)** 是 [Tatvasoft Australia](https://www.tatvasoft.com.au/) 的技术分析师，这是一家领先的移动应用开发公司。她在技术领域工作了五年，她在多个学科中的工作广泛涉及技术体验的叙事。你可以在 Twitter 上找到她，[ @BarettoJoanna](https://twitter.com/BarettoJoanna)。
 
 **相关：**
 
-+   [学习和实践数据科学的前 9 款移动应用](/2020/01/top-9-mobile-apps-learning-practicing-data-science.html)
++   学习和实践数据科学的前 9 款移动应用
 
-+   [12 小时机器学习挑战：使用 Streamlit 和 DevOps 工具构建和部署应用](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)
++   12 小时机器学习挑战：使用 Streamlit 和 DevOps 工具构建和部署应用
 
-+   [每位数据科学家必备的前 10 款数据可视化工具](/2020/05/top-10-data-visualization-tools-every-data-scientist.html)
++   每位数据科学家必备的前 10 款数据可视化工具
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -128,4 +128,4 @@
 
 +   [人工智能将如何改变移动应用](https://www.kdnuggets.com/2022/12/artificial-intelligence-change-mobile-apps.html)
 
-+   [用Python在7个简单步骤中构建命令行应用](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
++   [用 Python 在 7 个简单步骤中构建命令行应用](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)

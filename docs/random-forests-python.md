@@ -1,6 +1,6 @@
 # 随机森林® 在 Python 中
 
-> 原文：[https://www.kdnuggets.com/2016/12/random-forests-python.html](https://www.kdnuggets.com/2016/12/random-forests-python.html)
+> 原文：[`www.kdnuggets.com/2016/12/random-forests-python.html`](https://www.kdnuggets.com/2016/12/random-forests-python.html)
 
 这篇文章最初发表于 [Yhat 博客](http://blog.yhat.com/)。[**Yhat**](https://www.yhat.com/) 是一家位于布鲁克林的公司，旨在使数据科学适用于开发人员、数据科学家和企业。Yhat 提供一个软件平台，用于将预测算法部署和管理为 REST API，同时消除与生产环境相关的痛苦工程障碍，如测试、版本控制、扩展和安全。
 
@@ -28,11 +28,11 @@
 
 ***随机* 森林**
 
-用于生成随机森林的算法会自动创建一堆随机决策树。由于这些树是随机生成的，大多数树对你的分类/回归问题并没有什么有意义的帮助（可能有99.9%的树）。
+用于生成随机森林的算法会自动创建一堆随机决策树。由于这些树是随机生成的，大多数树对你的分类/回归问题并没有什么有意义的帮助（可能有 99.9%的树）。
 
-![](../Images/8b2ffa2eb8e26a731d7ca9f9fbd27da6.png)
+![](img/8b2ffa2eb8e26a731d7ca9f9fbd27da6.png)
 
-如果一个观测值的长度为45，蓝色眼睛，2 条腿，它将被分类为 **红色**。
+如果一个观测值的长度为 45，蓝色眼睛，2 条腿，它将被分类为 **红色**。
 
 **树木投票**
 
@@ -40,9 +40,9 @@
 
 当你做出预测时，新的观测值会被推入每棵决策树，并被分配一个预测值/标签。一旦森林中的每棵树都报告了其预测值/标签，预测结果将被汇总，并以所有树的模式投票作为最终预测。
 
-简单来说，那99.9% 的无关树做出的预测到处都是，并相互抵消。而少数几棵好的树的预测超越了这些噪音，得出了好的预测结果。
+简单来说，那 99.9% 的无关树做出的预测到处都是，并相互抵消。而少数几棵好的树的预测超越了这些噪音，得出了好的预测结果。
 
-![](../Images/1089e8b31317d5481c2c9f906914a3d4.png)
+![](img/1089e8b31317d5481c2c9f906914a3d4.png)
 
 ### 为什么你应该使用它？
 
@@ -80,13 +80,13 @@ pl.show()
 
 在 Rodeo 中跟随？这是你应该看到的内容。
 
-[![](../Images/60c88f42a3be91a24868ac8a456551d6.png)](http://blog.yhat.com/static/img/random-forest-1.png)
+![](http://blog.yhat.com/static/img/random-forest-1.png)
 
 让我们更详细地查看一下那个图表。
 
-![](../Images/229d178dff3a906a4900b8e77bfff9a3.png)
+![](img/229d178dff3a906a4900b8e77bfff9a3.png)
 
-如果我们尝试建立一个基本的线性模型来预测`y`，使用`x`的话，我们最终会得到一条直线，这条直线大致上是将`log(x)`函数分开。相比之下，如果我们使用随机森林，它在近似`log(x)`曲线方面表现得更好，我们得到的结果看起来更像真实函数。![](../Images/ba71b34f9c50bf4ec9f6ab94eef89633.png)![](../Images/e0f2fd97697a9bdf57bfc60630e0d7aa.png)
+如果我们尝试建立一个基本的线性模型来预测`y`，使用`x`的话，我们最终会得到一条直线，这条直线大致上是将`log(x)`函数分开。相比之下，如果我们使用随机森林，它在近似`log(x)`曲线方面表现得更好，我们得到的结果看起来更像真实函数。![](img/ba71b34f9c50bf4ec9f6ab94eef89633.png)![](img/e0f2fd97697a9bdf57bfc60630e0d7aa.png)
 
 你可以说随机森林对`log(x)`函数进行了些许过拟合。无论如何，我认为这很好地说明了随机森林不受线性约束的限制。
 
@@ -100,9 +100,9 @@ pl.show()
 
 在接下来的例子中，我们试图找出哪些变量对于将酒分类为红酒或白酒最为重要。
 
-![](../Images/35593bee262ea31d7ff57b2424fa7bfd.png)
+![](img/35593bee262ea31d7ff57b2424fa7bfd.png)
 
-![](../Images/1dc88ad49fcdbdee484b7eeba6868983.png)
+![](img/1dc88ad49fcdbdee484b7eeba6868983.png)
 
 **分类**
 
@@ -110,7 +110,7 @@ pl.show()
 
 避免过拟合的一种方法是只在模型中使用真正相关的特征。虽然这并不总是简单明了，但使用特征选择技术（如前面提到的那种）可以使这变得容易得多。
 
-![](../Images/51000c974461f8fb2e93691cf81fc5f4.png)
+![](img/51000c974461f8fb2e93691cf81fc5f4.png)
 
 **回归**
 
@@ -122,7 +122,7 @@ pl.show()
 
 Scikit-Learn 是入门随机森林的绝佳选择。scikit-learn API 在各种算法中非常一致，因此你可以非常容易地进行模型比较和切换。很多时候我从简单的模型开始，然后转向随机森林。
 
-scikit-learn中随机森林实现的最佳特性之一是`n_jobs`参数。这将根据你希望使用的核心数量自动并行化随机森林的拟合。[这是一个很棒的演示](https://vimeo.com/63269736 "Vimeo - Scaling Machine Learning in Python")，由scikit-learn贡献者Olivier Grisel介绍，他讲述了如何在20节点EC2集群上训练随机森林。
+scikit-learn 中随机森林实现的最佳特性之一是`n_jobs`参数。这将根据你希望使用的核心数量自动并行化随机森林的拟合。[这是一个很棒的演示](https://vimeo.com/63269736 "Vimeo - Scaling Machine Learning in Python")，由 scikit-learn 贡献者 Olivier Grisel 介绍，他讲述了如何在 20 节点 EC2 集群上训练随机森林。
 
 ```py
 from sklearn.datasets import load_iris
@@ -156,7 +156,7 @@ pd.crosstab(test['species'], preds, rownames=['actual'], colnames=['preds'])
 | versicolor | 0 | 16 | 1 |
 | virginica | 0 | 0 | 12 |
 
-[![](../Images/2a2215f7c85231cf599969e6d2a4400d.png)](http://blog.yhat.com/static/img/random-forest-3.png)
+![](http://blog.yhat.com/static/img/random-forest-3.png)
 
 ### 最终思考
 
@@ -164,41 +164,41 @@ pd.crosstab(test['species'], preds, rownames=['actual'], colnames=['preds'])
 
 +   [伯克利资源](http://www.stat.berkeley.edu/~breiman/RandomForests/cc_home.htm "random forests - UC Berkley Resources")
 
-+   [Kaggle博客文章](https://www.kaggle.com/wiki/RandomForests "Random Forests Blog Post from Kaggle")
++   [Kaggle 博客文章](https://www.kaggle.com/wiki/RandomForests "Random Forests Blog Post from Kaggle")
 
-+   [Andy Mueller的博客（scikit-learn贡献者）](http://peekaboo-vision.blogspot.de/ "Andy Mueller's blog")
++   [Andy Mueller 的博客（scikit-learn 贡献者）](http://peekaboo-vision.blogspot.de/ "Andy Mueller's blog")
 
 +   [随机森林指南](http://www.stanford.edu/~stephsus/R-randomforest-guide.pdf "Random Forests for Classification - Stephanie Shih")
 
-+   [Olivier Grisel的网站](http://ogrisel.com/ ">Olivier Grisel")
++   [Olivier Grisel 的网站](http://ogrisel.com/ ">Olivier Grisel")
 
 [原文](http://blog.yhat.com/posts/python-random-forest.html)。经许可转载。
 
-RANDOM FORESTS和RANDOMFORESTS是Minitab, LLC的注册商标。
+RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
 **相关：**
 
-+   [随机森林：犯罪教程](/2016/09/reandom-forest-criminal-tutorial.html)
++   随机森林：犯罪教程
 
-+   [深度学习何时优于SVM或随机森林？](/2016/04/deep-learning-vs-svm-random-forest.html)
++   深度学习何时优于 SVM 或随机森林？
 
-+   [伟大的算法教程汇总](/2016/09/great-algorithm-tutorial-roundup.html)
++   伟大的算法教程汇总
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [集成学习技术：Python中的随机森林实战](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
++   [集成学习技术：Python 中的随机森林实战](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 
 +   [决策树与随机森林，解析](https://www.kdnuggets.com/2022/08/decision-trees-random-forests-explained.html)
 

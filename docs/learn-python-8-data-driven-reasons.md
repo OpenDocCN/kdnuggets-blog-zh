@@ -1,8 +1,8 @@
 # 为什么要学习 Python？这里有 8 个数据驱动的理由
 
-> 原文：[https://www.kdnuggets.com/2020/07/learn-python-8-data-driven-reasons.html](https://www.kdnuggets.com/2020/07/learn-python-8-data-driven-reasons.html)
+> 原文：[`www.kdnuggets.com/2020/07/learn-python-8-data-driven-reasons.html`](https://www.kdnuggets.com/2020/07/learn-python-8-data-driven-reasons.html)
 
-[评论](#comments)
+评论
 
 **作者：[Sharafudheen Mangalad](https://www.linkedin.com/in/sharaftk/)，Edoxi 培训学院董事总经理**
 
@@ -12,7 +12,7 @@
 
 Python 被认为是世界上需求最旺盛和最受欢迎的编程语言之一。在最近的一项 Stack Overflow 调查中，Python 超越了 C、C++、Java，跻身榜首。这是许多程序员和新手开发者倾向于学习 Python 并将 Python 认证视为最受欢迎的编程认证之一的主要原因之一。通过这篇博客，我将列出你应该学习 Python 的主要原因以及学习它的 8 个数据驱动理由。
 
-![Python](../Images/48653af31024defdcd657420253f346a.png)
+![Python](img/48653af31024defdcd657420253f346a.png)
 
 **为什么你应该学习 Python？**
 
@@ -150,11 +150,11 @@ Python 作为编程语言将继续扩展到计算的新领域。它将成为主�
 
 **相关：**
 
-+   [为什么 Python 是数据科学中最受欢迎的语言之一？](/2020/01/python-preferred-languages-data-science.html)
++   为什么 Python 是数据科学中最受欢迎的语言之一？
 
-+   [Java 可以用于机器学习和数据科学吗？](/2020/04/java-used-machine-learning-data-science.html)
++   Java 可以用于机器学习和数据科学吗？
 
-+   [数据科学中的 Pandas 入门](/2020/06/introduction-pandas-data-science.html)
++   数据科学中的 Pandas 入门
 
 ### 更多相关主题
 

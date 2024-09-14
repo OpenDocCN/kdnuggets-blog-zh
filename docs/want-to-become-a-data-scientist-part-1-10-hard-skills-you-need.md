@@ -1,8 +1,8 @@
-# 想成为数据科学家？第 1 部分：你需要的 10 项硬技能
+# 想成为数据科学家？第一部分：你需要的 10 项硬技能
 
-> 原文：[https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
+> 原文：[`www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need`](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
 
-![想成为数据科学家？第 1 部分：你需要的 10 项硬技能](../Images/f7a80add47c4334a68f3d8b671511619.png)
+![想成为数据科学家？第一部分：你需要的 10 项硬技能](img/f7a80add47c4334a68f3d8b671511619.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 数据科学需要的数学领域包括线性代数、线性回归、概率和统计。学习数据科学背后的数学将对你的数据科学职业生涯大有裨益，并会被雇主注意到。
 
-学习数学可能会让人感到紧张，因此我完全理解你的犹豫。阅读一下 [如何克服数学恐惧并学习数据科学数学](/2021/03/overcome-fear-learn-math-data-science.html) 来放松心情。
+学习数学可能会让人感到紧张，因此我完全理解你的犹豫。阅读一下 如何克服数学恐惧并学习数据科学数学 来放松心情。
 
 # 集成开发环境（IDE）
 
@@ -88,13 +88,13 @@
 
 你需要学习关于标准化、归一化、缩放、特征工程等内容。
 
-你可以阅读的文章：[数据转换：标准化与归一化](/2020/04/data-transformation-standardization-normalization.html)
+你可以阅读的文章：数据转换：标准化与归一化
 
 # 数据可视化
 
 数据可视化是数据科学中的一个重要方面，因为你需要能够用多种方式传达你的发现，而不仅仅是编码。团队中的每个人可能都没有技术背景，因此以可视化的形式展示你的发现将有助于此，并且也有助于决策过程。
 
-可以阅读：[数据可视化最佳实践与有效沟通资源](/2023/04/data-visualization-best-practices-resources-effective-communication.html)
+可以阅读：数据可视化最佳实践与有效沟通资源
 
 # 机器学习
 
@@ -132,7 +132,7 @@
 
 正如我所说，这个领域有很多东西要学，所以建议你花时间练习！
 
-这里有一篇文章可以帮助你：[提升机器学习技能的15个顶级YouTube频道](/2023/03/top-15-youtube-channels-level-machine-learning-skills.html)
+这里有一篇文章可以帮助你：提升机器学习技能的 15 个顶级 YouTube 频道
 
 # 大数据工具
 
@@ -150,9 +150,9 @@
 
 阅读一下：
 
-+   [云计算初学者指南](/2023/01/beginner-guide-cloud-computing.html)
++   云计算初学者指南
 
-+   [如何利用云计算高效扩展数据科学项目](/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)
++   如何利用云计算高效扩展数据科学项目
 
 # 项目
 
@@ -162,28 +162,28 @@
 
 请阅读：
 
-+   [初学者的5个数据分析项目](/2023/02/5-data-analysis-projects-beginners.html)
++   初学者的 5 个数据分析项目
 
-+   [数据科学作品集中的5个高级项目](/2023/03/5-advance-projects-data-science-portfolio.html)
++   数据科学作品集中的 5 个高级项目
 
 # 总结一下
 
 我尽量将这篇文章精简到不让你感到过于负担。希望我已经成功地提供了足够的细节和资源，让你能够启动你的数据科学之旅！
 
-请关注第2部分，了解成为数据科学家所需的软技能。
+请关注第二部分，了解成为数据科学家所需的软技能。
 
-**[妮莎·阿娅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作人以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程，以及数据科学相关的理论知识。她还希望探索人工智能如何有助于人类寿命的延续。作为一个热衷学习者，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
+**[妮莎·阿娅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作人以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程，以及数据科学相关的理论知识。她还希望探索人工智能如何有助于人类寿命的延续。作为一个热衷学习者，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 相关主题
 
-+   [想成为数据科学家？第2部分：你需要的10项软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
++   [想成为数据科学家？第二部分：你需要的 10 项软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
 
 +   [想用你的数据技能解决全球问题？这儿有一些…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [如果你想成为数据分析师，你应该考虑的3门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，你应该考虑的 3 门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
 +   [如果你想进入技术领域：成为一名软件开发人员](https://www.kdnuggets.com/if-you-want-to-get-in-the-tech-space-become-a-software-developer)
 
-+   [成为数据工程师需要的9项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [成为数据工程师需要的 9 项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
 
-+   [9个可以带你获得学位的职业证书...如果...](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个可以带你获得学位的职业证书...如果...](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)

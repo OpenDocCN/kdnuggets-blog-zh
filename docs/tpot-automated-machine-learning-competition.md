@@ -1,14 +1,14 @@
 # TPOT 自动化机器学习竞赛：AutoML 能否击败 Kaggle 上的人类？
 
-> 原文：[https://www.kdnuggets.com/2017/06/tpot-automated-machine-learning-competition.html](https://www.kdnuggets.com/2017/06/tpot-automated-machine-learning-competition.html)
+> 原文：[`www.kdnuggets.com/2017/06/tpot-automated-machine-learning-competition.html`](https://www.kdnuggets.com/2017/06/tpot-automated-machine-learning-competition.html)
 
 **作者：兰迪·奥尔森，宾夕法尼亚大学**。
 
-[自动化机器学习（AutoML)](/2017/01/current-state-automated-machine-learning.html)预计将在 2017 年对数据科学产生深远的影响。在宾夕法尼亚大学，我们一直在努力开发 [TPOT](https://github.com/rhiever/tpot)，这是一个最先进的开源 AutoML 工具，可以优化监督学习问题的机器学习管道。
+自动化机器学习（AutoML)预计将在 2017 年对数据科学产生深远的影响。在宾夕法尼亚大学，我们一直在努力开发 [TPOT](https://github.com/rhiever/tpot)，这是一个最先进的开源 AutoML 工具，可以优化监督学习问题的机器学习管道。
 
 现在我们想看看你能用 TPOT 做些什么。
 
-![TPOT](../Images/40cac51d39530f5abf52161ff929709f.png)
+![TPOT](img/40cac51d39530f5abf52161ff929709f.png)
 
 在接下来的几个月里，我们将挑战你将 TPOT 应用到你在 [Kaggle](https://www.kaggle.com/) 上找到的任何有趣的数据科学问题。如果你的作品在 Kaggle 问题的排行榜中排名前 25%，我们希望看到 TPOT 如何帮助你实现这一点。
 
@@ -16,9 +16,9 @@
 
 参赛作品将根据在 Kaggle 问题上的排名以及提供的技术说明进行评判。
 
-将你的作品通过电子邮件发送到 [olsonran@upenn.edu](mailto:olsonran@upenn.edu)
+将你的作品通过电子邮件发送到 olsonran@upenn.edu
 
-参赛作品提交截止日期为**2017年8月7日**，获奖者将在接下来的一周内公布。
+参赛作品提交截止日期为**2017 年 8 月 7 日**，获奖者将在接下来的一周内公布。
 
 ### 入门 TPOT
 
@@ -52,21 +52,21 @@
 
 **相关：**
 
-+   [自动化机器学习：与 Randy Olson 的采访，TPOT 主要开发者](/2016/11/autoamted-machine-learning-interview-randy-olson-tpot.html)
++   自动化机器学习：与 Randy Olson 的采访，TPOT 主要开发者
 
-+   [TPOT：一个用于自动化数据科学的 Python 工具](/2016/05/tpot-python-automating-data-science.html)
++   TPOT：一个用于自动化数据科学的 Python 工具
 
-+   [自动化机器学习的现状](/2017/01/current-state-automated-machine-learning.html)
++   自动化机器学习的现状
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

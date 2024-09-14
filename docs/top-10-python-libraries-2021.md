@@ -1,10 +1,10 @@
-# 2021年数据科学家应该了解的前10个Python库
+# 2021 年数据科学家应该了解的前 10 个 Python 库
 
-> 原文：[https://www.kdnuggets.com/2021/03/top-10-python-libraries-2021.html](https://www.kdnuggets.com/2021/03/top-10-python-libraries-2021.html)
+> 原文：[`www.kdnuggets.com/2021/03/top-10-python-libraries-2021.html`](https://www.kdnuggets.com/2021/03/top-10-python-libraries-2021.html)
 
-[评论](#comments)
+评论
 
-![](../Images/13a1379e9eef9056b3f18319d295f816.png)
+![](img/13a1379e9eef9056b3f18319d295f816.png)
 
 *照片来自[David Clode](https://unsplash.com/@davidclode?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)在[Unsplash](https://unsplash.com/s/photos/python?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)上。*
 
@@ -12,37 +12,37 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT 工作
 
 * * *
 
 学习数据科学可能会让人感到不知所措。这里有数百种工具和资源，而且并不总是很明显你应该关注哪些工具或学习什么。
 
-简单来说，你应该学习你喜欢的内容，因为数据科学提供了广泛的技能和工具。话虽如此，我想与大家分享我认为数据科学中最常用的前10个[Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)。
+简单来说，你应该学习你喜欢的内容，因为数据科学提供了广泛的技能和工具。话虽如此，我想与大家分享我认为数据科学中最常用的前 10 个[Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)。
 
-话虽如此，以下是数据科学领域的前10个Python库。
+话虽如此，以下是数据科学领域的前 10 个 Python 库。
 
 ### 1\. Pandas
 
-你一定听过这样一句话。数据科学家的70%到80%的工作是理解和清理数据，也就是数据探索和数据处理。
+你一定听过这样一句话。数据科学家的 70%到 80%的工作是理解和清理数据，也就是数据探索和数据处理。
 
-Pandas主要用于数据分析，它是最常用的Python库之一。它提供了一些最有用的工具来探索、清理和分析数据。使用Pandas，你可以加载、准备、操作和分析各种结构化数据。机器学习库也围绕Pandas DataFrames作为输入。
+Pandas 主要用于数据分析，它是最常用的 Python 库之一。它提供了一些最有用的工具来探索、清理和分析数据。使用 Pandas，你可以加载、准备、操作和分析各种结构化数据。机器学习库也围绕 Pandas DataFrames 作为输入。
 
-**学习Pandas的地方**
+**学习 Pandas 的地方**
 
-+   [Kaggle教程](https://www.kaggle.com/learn/pandas)
++   [Kaggle 教程](https://www.kaggle.com/learn/pandas)
 
-+   [75个Pandas练习及解答](https://www.kaggle.com/python10pm/pandas-75-exercises-with-solutions)
++   [75 个 Pandas 练习及解答](https://www.kaggle.com/python10pm/pandas-75-exercises-with-solutions)
 
-+   [Pandas实践问题](https://github.com/guipsamora/pandas_exercises)
++   [Pandas 实践问题](https://github.com/guipsamora/pandas_exercises)
 
 ### 2\. NumPy
 
-NumPy主要用于支持N维数组。这些多维数组相比于Python列表要强大50倍，使得NumPy成为数据科学家的最爱。
+NumPy 主要用于支持 N 维数组。这些多维数组相比于 Python 列表要强大 50 倍，使得 NumPy 成为数据科学家的最爱。
 
 NumPy 也被像 TensorFlow 这样的其他库用于其内部张量计算。NumPy 还提供了快速的预编译函数用于数值例程，这些例程可能难以手动解决。为了提高效率，NumPy 使用面向数组的计算，因此处理多个类变得容易。
 
@@ -66,7 +66,7 @@ Scikit-learn 可以说是 Python 中最重要的机器学习库。使用 Pandas 
 
 ### 4\. Gradio
 
-![](../Images/a4d1e951804b698ca662602175e5501d.png)
+![](img/a4d1e951804b698ca662602175e5501d.png)
 
 *[由 Gradio 拍摄的图片（经许可）](https://www.gradio.app/hub/aliabid94/hub-titanic)*
 
@@ -92,7 +92,7 @@ TensorFlow 是 Python 中用于实现神经网络的最流行的库之一。它�
 
 **在哪里学习 TensorFlow**
 
-+   [TensorFlow的官方网站](https://www.tensorflow.org/learn)
++   [TensorFlow 的官方网站](https://www.tensorflow.org/learn)
 
 +   [Kaggle 的深度学习简介](https://www.kaggle.com/learn/intro-to-deep-learning)
 
@@ -166,7 +166,7 @@ Seaborn 最重要的功能之一是创建放大数据可视化的能力。一些
 
 +   [你还在使用 Pandas 处理 2021 年的大数据吗？这里有两个更好的选择](https://www.kdnuggets.com/2021/03/pandas-big-data-better-options.html)
 
-+   [2021年数据科学学习路线图](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)
++   [2021 年数据科学学习路线图](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)
 
 ### 更多相关主题
 
@@ -176,8 +176,8 @@ Seaborn 最重要的功能之一是创建放大数据可视化的能力。一些
 
 +   [每个数据科学家应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [2021年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该知道的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该知道的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

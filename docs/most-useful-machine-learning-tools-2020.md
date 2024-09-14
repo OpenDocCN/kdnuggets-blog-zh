@@ -1,12 +1,12 @@
-# 2020年最有用的机器学习工具
+# 2020 年最有用的机器学习工具
 
-> 原文：[https://www.kdnuggets.com/2020/03/most-useful-machine-learning-tools-2020.html](https://www.kdnuggets.com/2020/03/most-useful-machine-learning-tools-2020.html)
+> 原文：[`www.kdnuggets.com/2020/03/most-useful-machine-learning-tools-2020.html`](https://www.kdnuggets.com/2020/03/most-useful-machine-learning-tools-2020.html)
 
-[评论](#comments)
+评论
 
-**作者 [Ian Xiao](https://www.linkedin.com/in/ianxiao/)，Dessa的互动负责人**
+**作者 [Ian Xiao](https://www.linkedin.com/in/ianxiao/)，Dessa 的互动负责人**
 
-![图像](../Images/856d368859271128bf33d0e657fd71ed.png)
+![图像](img/856d368859271128bf33d0e657fd71ed.png)
 
 由 [Creatv Eight](https://unsplash.com/@creatveight?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供的照片，来自 [Unsplash](https://unsplash.com/collections/8641367/image-for-blogs/56c1d67cd0eb64f06855199bd065aa08?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -28,13 +28,13 @@
 
 所以，这篇文章带你了解我的 **厨房**。它突出展示了 **最有用的工具** 用于设计、开发和部署 **全栈机器学习** 应用程序——这些解决方案可以与系统集成或在生产环境中服务于用户。
 
-如果你想了解更多关于交付ML的其他方面，请查看我的文章 [这里](http://if%20you%20want%20to%20know%20more%20about%20other%20aspects/)。
+如果你想了解更多关于交付 ML 的其他方面，请查看我的文章 [这里](http://if%20you%20want%20to%20know%20more%20about%20other%20aspects/)。
 
 ### 令人眼花缭乱的可能性
 
-我们生活在一个黄金时代。如果你在谷歌中搜索“ML工具”或询问顾问，你可能会得到类似这样的内容：
+我们生活在一个黄金时代。如果你在谷歌中搜索“ML 工具”或询问顾问，你可能会得到类似这样的内容：
 
-![图像](../Images/c5b3760e4199aa44765fb36551bab1b1.png)
+![图像](img/c5b3760e4199aa44765fb36551bab1b1.png)
 
 数据与人工智能领域 2019，[图像来源](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmattturck.com%2Fdata2019%2F&psig=AOvVaw0oXq7zJf_Hz_RjdI-F70rq&ust=1583513401048000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCR2KPlg-gCFQAAAAAdAAAAABAJ)
 
@@ -64,7 +64,7 @@
 
 一个免费的开源关系数据库管理系统（RDBMS），强调可扩展性和技术标准遵循。它旨在处理从单台机器到数据仓库或具有多个并发用户的 Web 服务的一系列工作负载。
 
-![图像](../Images/e69ad619bb84e1fa727d8bd982470f2e.png)
+![图像](img/e69ad619bb84e1fa727d8bd982470f2e.png)
 
 [图像来源](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.aquafold.com%2Fdbspecific%2Fpostgresql_client&psig=AOvVaw2Q_9WB3s7LFAJq4NStNNm_&ust=1583516333356000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjw2Znwg-gCFQAAAAAdAAAAABAD)
 
@@ -72,11 +72,11 @@
 
 ### 2\. 台面：部署管道工具
 
-管道工具对于开发的速度和质量至关重要。我们应该能够以最少的人工处理快速迭代。这里有一个效果良好的设置，详情请参见我的 [12小时机器学习挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51) 文章。每个*懒惰的*数据科学家都应该在项目初期尝试这种方法。
+管道工具对于开发的速度和质量至关重要。我们应该能够以最少的人工处理快速迭代。这里有一个效果良好的设置，详情请参见我的 [12 小时机器学习挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51) 文章。每个*懒惰的*数据科学家都应该在项目初期尝试这种方法。
 
-![图像](../Images/215efcf79988e70931e2df5e2f947c15.png)
+![图像](img/215efcf79988e70931e2df5e2f947c15.png)
 
-作者的工作，[12小时机器学习挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)
+作者的工作，[12 小时机器学习挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)
 
 ### [**Github**](https://github.com/)
 
@@ -130,7 +130,7 @@ Jupyter *曾经是* 我探索数据、进行分析和试验不同数据和建�
 
 这很让人沮丧???????。所以，我使用 Streamlit 进行**早期探索**，并提供最终的前端——一箭双雕。以下是我的典型屏幕设置。左侧是 PyCharm IDE，右侧是结果可视化。试试看吧。
 
-![Figure](../Images/45305fb492c4a5ef9f42d171860f7c01.png)
+![Figure](img/45305fb492c4a5ef9f42d171860f7c01.png)
 
 IDE（左侧）+ Streamlit 实时更新（右侧），作者作品来自 [被遗忘的算法](https://towardsdatascience.com/how-to-design-monte-carlo-simulation-138e9214910a)
 
@@ -146,7 +146,7 @@ IDE（左侧）+ Streamlit 实时更新（右侧），作者作品来自 [被遗
 
 在 Python 中进行一般机器学习的首选框架。无需多言。
 
-![Figure](../Images/73e54bc34291cf4258e869409a3f476f.png)
+![Figure](img/73e54bc34291cf4258e869409a3f476f.png)
 
 Sklearn 的使用案例，[来源](https://scikit-learn.org/stable/)
 
@@ -170,11 +170,11 @@ Sklearn 的使用案例，[来源](https://scikit-learn.org/stable/)
 
 一个免费工具，允许数据科学家通过几个代码片段设置实验，并将结果显示在基于网页的仪表板上。
 
-![Figure](../Images/4e3fa51661c725e7e5c237af03ffc20a.png)
+![Figure](img/4e3fa51661c725e7e5c237af03ffc20a.png)
 
 Atlas 过程，[来源](https://www.atlas.dessa.com/)
 
-**免责声明**：我曾在Dessa工作，该公司创建了Altas。
+**免责声明**：我曾在 Dessa 工作，该公司创建了 Altas。
 
 *替代方案：*[*ML Flow*](https://mlflow.org/)*、*[*SageMaker*](https://aws.amazon.com/sagemaker/)*、*[*Comet*](https://www.comet.ml/site/)*、*[*Weights & Biases*](https://www.wandb.com/)*、*[*Data Robot*](https://www.datarobot.com/)*、*[*Domino*](https://www.dominodatalab.com/)
 
@@ -186,13 +186,13 @@ Atlas 过程，[来源](https://www.atlas.dessa.com/)
 
 正如我提到的，没有完美的设置。这一切都取决于你的需求和限制。这里是另一个视角，展示了有哪些工具以及它们如何协同工作。
 
-![图](../Images/ea28f7970afd18c238d140f40ccb2684.png)
+![图](img/ea28f7970afd18c238d140f40ccb2684.png)
 
-[Sergey Karayev](https://www.linkedin.com/in/ACoAABqncBAB7JVSkewnHs3jvPfOOm-U23LAlTo/)在[全栈深度学习](https://full-stack-deep-learning.aerobaticapp.com/b172_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_4_infra_tooling.pdf)上的演讲，2019年
+[Sergey Karayev](https://www.linkedin.com/in/ACoAABqncBAB7JVSkewnHs3jvPfOOm-U23LAlTo/)在[全栈深度学习](https://full-stack-deep-learning.aerobaticapp.com/b172_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_4_infra_tooling.pdf)上的演讲，2019 年
 
 ### 一个迷你挑战
 
-如果你想了解更多关于如何使用这些工具，最好的方法是找到一个项目来实践。你可以将这些工具融入到当前的项目中，或进行一个**12小时机器学习挑战**。不确定怎么做？查看[我如何用讨论过的工具和流程创建用户赋能推荐应用](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)。
+如果你想了解更多关于如何使用这些工具，最好的方法是找到一个项目来实践。你可以将这些工具融入到当前的项目中，或进行一个**12 小时机器学习挑战**。不确定怎么做？查看[我如何用讨论过的工具和流程创建用户赋能推荐应用](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)。
 
 我期待看到你能创造出的成果。请与社区分享，并在[Twitter](https://twitter.com/ian_xxiao)上标记我????。
 
@@ -202,15 +202,15 @@ Atlas 过程，[来源](https://www.atlas.dessa.com/)
 
 [**被遗忘的算法**](https://towardsdatascience.com/how-to-design-monte-carlo-simulation-138e9214910a)
 
-使用Streamlit探索蒙特卡罗模拟
+使用 Streamlit 探索蒙特卡罗模拟
 
 [**数据科学很无聊**](https://towardsdatascience.com/data-science-is-boring-1d43473e353e)
 
 我如何应对机器学习部署中的枯燥日子
 
-[**12小时机器学习挑战**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)
+[**12 小时机器学习挑战**](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)
 
-如何用Streamlit和DevOps工具构建和部署机器学习应用
+如何用 Streamlit 和 DevOps 工具构建和部署机器学习应用
 
 [**机器学习与敏捷的注定失败的结合**](https://towardsdatascience.com/a-doomed-marriage-of-ml-and-agile-b91b95b37e35)
 
@@ -220,44 +220,44 @@ Atlas 过程，[来源](https://www.atlas.dessa.com/)
 
 如何促进人类与人工智能之间的信任
 
-[**另一个AI寒冬？**](https://towardsdatascience.com/the-last-defense-against-another-ai-winter-c589b48c561)
+[**另一个 AI 寒冬？**](https://towardsdatascience.com/the-last-defense-against-another-ai-winter-c589b48c561)
 
 如何部署更多的机器学习解决方案 — 五种策略
 
-**简介：[Ian Xiao](https://www.linkedin.com/in/ianxiao/)** 是Dessa的参与主管，负责在企业中部署机器学习。他领导商业和技术团队部署机器学习解决方案，并改善F100企业的营销和销售。
+**简介：[Ian Xiao](https://www.linkedin.com/in/ianxiao/)** 是 Dessa 的参与主管，负责在企业中部署机器学习。他领导商业和技术团队部署机器学习解决方案，并改善 F100 企业的营销和销售。
 
 [原文](https://towardsdatascience.com/the-most-useful-ml-tools-2020-e41b54061c58)。经许可转载。
 
 **相关：**
 
-+   [12小时机器学习挑战：使用Streamlit和DevOps工具构建和部署应用](/2020/02/machine-learning-challenge-build-deploy-app-streamlit-devops.html)
++   12 小时机器学习挑战：使用 Streamlit 和 DevOps 工具构建和部署应用
 
-+   [数据科学无聊（第一部分）](/2019/09/data-science-boring-part-1.html)
++   数据科学无聊（第一部分）
 
-+   [抵御另一场AI寒冬的最后防线](/2019/11/last-defense-another-ai-winter.html)
++   抵御另一场 AI 寒冬的最后防线
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关内容
 
-+   [数据科学中的4个有用的中级SQL查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
++   [数据科学中的 4 个有用的中级 SQL 查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 
-+   [3个有用的Python自动化脚本](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
++   [3 个有用的 Python 自动化脚本](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
 
-+   [KDnuggets新闻，12月7日：揭穿数据科学的十大神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭穿数据科学的十大神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
 
-+   [5个真正有用的数据科学Bash脚本](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
++   [5 个真正有用的数据科学 Bash 脚本](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
 
-+   [Kaggle竞赛对解决实际问题有用吗？](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)
++   [Kaggle 竞赛对解决实际问题有用吗？](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)
 
-+   [KDnuggets新闻，8月3日：10个最常用的Tableau函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)

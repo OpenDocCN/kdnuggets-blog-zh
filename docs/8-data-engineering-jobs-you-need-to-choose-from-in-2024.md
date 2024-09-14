@@ -1,8 +1,8 @@
-# 2024年你需要选择的8个数据工程职位
+# 2024 年你需要选择的 8 个数据工程职位
 
-> 原文：[https://www.kdnuggets.com/8-data-engineering-jobs-you-need-to-choose-from-in-2024](https://www.kdnuggets.com/8-data-engineering-jobs-you-need-to-choose-from-in-2024)
+> 原文：[`www.kdnuggets.com/8-data-engineering-jobs-you-need-to-choose-from-in-2024`](https://www.kdnuggets.com/8-data-engineering-jobs-you-need-to-choose-from-in-2024)
 
-![数据工程职位2024](../Images/9110fe5868542202efa0a887f67865ef.png)
+![数据工程职位 2024](img/9110fe5868542202efa0a887f67865ef.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -48,7 +48,7 @@
 
 +   云数据工程师
 
-+   ETL开发者
++   ETL 开发者
 
 +   数据操作工程师（DataOps）
 
@@ -82,15 +82,15 @@
 
 我特别推荐[DataCamp 数据工程证书](https://datacamp.pxf.io/bannL6)。这是一个业内认可的认证，像 HSBC、微软和谷歌等公司都对其评价很高，许多员工已经获得了认证。
 
-疯狂的是，你可以在30天内获得认证！
+疯狂的是，你可以在 30 天内获得认证！
 
-一旦你注册了课程，你将有30天的时间来完成定时考试和实践考试。对于[数据工程证书](https://datacamp.pxf.io/bannL6)，你将有两个定时考试，这将考验你的技能。你将有两小时来完成考试，并且有两次尝试机会。
+一旦你注册了课程，你将有 30 天的时间来完成定时考试和实践考试。对于[数据工程证书](https://datacamp.pxf.io/bannL6)，你将有两个定时考试，这将考验你的技能。你将有两小时来完成考试，并且有两次尝试机会。
 
 一旦你完成了定时考试，你就可以进入实践考试，在那里你可以展示你的能力。对于实践考试，你将有四小时的时间来完成，并且有两次尝试机会。你的考试将会自动评分，你会立即获得结果！
 
 但这还不是全部。你已经完成了定时和实践考试，感到自信并准备好了。下一个挑战是找到你的理想工作，DataCamp 通过提供对其认证社区的独家访问，使这变得更容易。在这个社区中，你将能够与其他专业人士联系，了解行业专家活动、独家内容和资源，以便在求职过程中脱颖而出！
 
-如果你担心自己太早获得认证并在30天内完成，不用担心。DataCamp 提供了多个级别的认证，这些认证已经设计得完美地与你的职业目标对齐。你还可以参加准备测验以找到适合你的课程。
+如果你担心自己太早获得认证并在 30 天内完成，不用担心。DataCamp 提供了多个级别的认证，这些认证已经设计得完美地与你的职业目标对齐。你还可以参加准备测验以找到适合你的课程。
 
 例如，你可以选择：
 
@@ -112,10 +112,10 @@
 
 +   [我们不需要数据科学家，我们需要数据工程师](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)
 
-+   [数据科学最低要求：你需要知道的10项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学最低要求：你需要知道的 10 项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
 +   [你在数据科学中需要多少数学知识？](https://www.kdnuggets.com/2020/06/math-data-science.html)
 
-+   [成为数据工程师所需的9项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [成为数据工程师所需的 9 项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
 
-+   [你需要的6种数据科学技术，以构建你的供应链管道](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
++   [你需要的 6 种数据科学技术，以构建你的供应链管道](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)

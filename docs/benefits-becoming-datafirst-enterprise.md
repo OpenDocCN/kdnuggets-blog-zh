@@ -1,6 +1,6 @@
 # 成为数据优先企业的好处
 
-> 原文：[https://www.kdnuggets.com/2022/07/benefits-becoming-datafirst-enterprise.html](https://www.kdnuggets.com/2022/07/benefits-becoming-datafirst-enterprise.html)
+> 原文：[`www.kdnuggets.com/2022/07/benefits-becoming-datafirst-enterprise.html`](https://www.kdnuggets.com/2022/07/benefits-becoming-datafirst-enterprise.html)
 
 # 介绍
 
@@ -8,17 +8,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
 数据是新的石油，但如今并不是区分竞争力的因素。许多组织拥有大量的数据，需要了解如何组织、访问和管理这些数据。因此，速度，即访问数据的敏捷性和处理优质数据，已成为使组织领先于竞争对手的关键因素。
 
-![成为数据优先企业的好处](../Images/099f7472c8262b1985b3086ad638c6dc.png)
+![成为数据优先企业的好处](img/099f7472c8262b1985b3086ad638c6dc.png)
 
 [商业统计向量由 freepik 创建](https://www.freepik.com/free-vector/people-analyzing-growth-charts_12643938.htm?query=data)
 
@@ -36,17 +36,17 @@
 
 现代智能解决方案的采用正在增加。这为商业用户提供了一种更无缝的方式来可视化数据并回答他们的问题。
 
-传统的BI解决方案更倾向于自上而下，即静态报告回答业务的某些问题。如果出现后续问题，则需要重复这一过程，并经过多个令人不满的迭代步骤，从分析师那里获取回应后再反馈给业务领导者。这种缓慢的迭代报告周期阻碍并削弱了业务做出及时决策的能力。正如我们在本文开头强调的速度重要性，这些排队的后续查询请求导致数据陈旧，并给企业带来竞争劣势。
+传统的 BI 解决方案更倾向于自上而下，即静态报告回答业务的某些问题。如果出现后续问题，则需要重复这一过程，并经过多个令人不满的迭代步骤，从分析师那里获取回应后再反馈给业务领导者。这种缓慢的迭代报告周期阻碍并削弱了业务做出及时决策的能力。正如我们在本文开头强调的速度重要性，这些排队的后续查询请求导致数据陈旧，并给企业带来竞争劣势。
 
-因此，数据民主化是实现快速访问数据、新数据发现与探索以及有效信息共享的首选解决方案。现代智能使企业能够使用分析工具应对不断变化的期望，快速定制仪表盘和生成报告。虽然IT团队继续管理和保护数据访问，但业务用户与IT团队之间的无缝协作将推动关键业务决策的速度，实现双赢。
+因此，数据民主化是实现快速访问数据、新数据发现与探索以及有效信息共享的首选解决方案。现代智能使企业能够使用分析工具应对不断变化的期望，快速定制仪表盘和生成报告。虽然 IT 团队继续管理和保护数据访问，但业务用户与 IT 团队之间的无缝协作将推动关键业务决策的速度，实现双赢。
 
-# BI与AI的区别
+# BI 与 AI 的区别
 
 BI（商业智能）由一系列流程、工具和技术组成，这些流程、工具和技术将原始数据转化为有意义的信息，并支持有效的决策制定。
 
-目前，许多组织拥有数据分析和数据科学团队来推动与数据相关的项目，因此理解BI和AI解决方案的好处非常重要。
+目前，许多组织拥有数据分析和数据科学团队来推动与数据相关的项目，因此理解 BI 和 AI 解决方案的好处非常重要。
 
-广义上，数据分析分为4类：
+广义上，数据分析分为 4 类：
 
 +   描述性：它专注于回答有关发生了什么的具体问题。
 
@@ -56,9 +56,9 @@ BI（商业智能）由一系列流程、工具和技术组成，这些流程、
 
 +   处方性：根据对可能未来事件的预测，处方分析为组织提供最佳行动方案或对该事件的回应。
 
-尽管BI主要处理结构化数据并生成报告和分析，但AI解决方案还可以将非结构化数据作为输入，并将其转化为机器可理解的数据格式。
+尽管 BI 主要处理结构化数据并生成报告和分析，但 AI 解决方案还可以将非结构化数据作为输入，并将其转化为机器可理解的数据格式。
 
-BI大多是回顾性的，即帮助回答有关已经发生的事情和原因的高层问题。AI则超越过去，具有前瞻性，即回答未来可能发生的事情以及企业下一步应该怎么做。
+BI 大多是回顾性的，即帮助回答有关已经发生的事情和原因的高层问题。AI 则超越过去，具有前瞻性，即回答未来可能发生的事情以及企业下一步应该怎么做。
 
 # 数据的好处持续增加
 
@@ -78,7 +78,7 @@ BI大多是回顾性的，即帮助回答有关已经发生的事情和原因的
 
 许多组织正在致力于开发一种洞察工具，[《福布斯》](https://www.majesteye.com/why-is-data-important-for-your-business/#:~:text=In%20fact%2C%20according%20to%20Forbes%2C%20companies%20that%20use%20the%20insights%20from%20big%20data%20experience%20an%20average%20increase%20in%20revenue%20of%20around%2044%25.)也引用了它的好处。
 
-*“根据* [*福布斯*](https://www.forbes.com/sites/louiscolumbus/2018/07/08/how-to-improve-customer-experiences-with-real-time-analytics/?sh=3521fc426e82)*，利用大数据洞察的公司平均收入增长约为44%。*“
+*“根据* [*福布斯*](https://www.forbes.com/sites/louiscolumbus/2018/07/08/how-to-improve-customer-experiences-with-real-time-analytics/?sh=3521fc426e82)*，利用大数据洞察的公司平均收入增长约为 44%。*“
 
 让我们了解投资建立这种工具的其他有机理由：
 
@@ -96,13 +96,13 @@ BI大多是回顾性的，即帮助回答有关已经发生的事情和原因的
 
 ## 参考资料
 
-+   [https://www.majesteye.com/why-is-data-important-for-your-business/](https://www.majesteye.com/why-is-data-important-for-your-business/)
++   [`www.majesteye.com/why-is-data-important-for-your-business/`](https://www.majesteye.com/why-is-data-important-for-your-business/)
 
-+   [https://careerfoundry.com/en/blog/data-analytics/business-intelligence-vs-data-analytics/](https://careerfoundry.com/en/blog/data-analytics/business-intelligence-vs-data-analytics/)
++   [`careerfoundry.com/en/blog/data-analytics/business-intelligence-vs-data-analytics/`](https://careerfoundry.com/en/blog/data-analytics/business-intelligence-vs-data-analytics/)
 
-+   [https://www.tableau.com/learn/articles/business-intelligence](https://www.tableau.com/learn/articles/business-intelligence)
++   [`www.tableau.com/learn/articles/business-intelligence`](https://www.tableau.com/learn/articles/business-intelligence)
 
-+   [https://www.tableau.com/learn/articles/business-intelligence/enterprise-business-intelligence/benefits](https://www.tableau.com/learn/articles/business-intelligence/enterprise-business-intelligence/benefits)
++   [`www.tableau.com/learn/articles/business-intelligence/enterprise-business-intelligence/benefits`](https://www.tableau.com/learn/articles/business-intelligence/enterprise-business-intelligence/benefits)
 
 **[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的人工智能/机器学习创新领袖和人工智能伦理学家。她在数据科学、产品和研究的交叉点工作，以提供商业价值和洞察。她提倡以数据为中心的科学，是数据治理领域的领先专家，致力于构建可信赖的人工智能解决方案。
 

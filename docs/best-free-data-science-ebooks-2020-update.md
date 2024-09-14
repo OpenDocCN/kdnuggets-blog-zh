@@ -1,12 +1,12 @@
 # 最佳免费数据科学电子书：2020 年更新
 
-> 原文：[https://www.kdnuggets.com/2020/09/best-free-data-science-ebooks-2020-update.html](https://www.kdnuggets.com/2020/09/best-free-data-science-ebooks-2020-update.html)
+> 原文：[`www.kdnuggets.com/2020/09/best-free-data-science-ebooks-2020-update.html`](https://www.kdnuggets.com/2020/09/best-free-data-science-ebooks-2020-update.html)
 
-[评论](#comments)
+评论
 
 **由[布伦达·哈利](https://twitter.com/brendahali)，营销数据专家**
 
-![图示](../Images/5dea23e2ccde34e4f31787609181a1aa.png)
+![图示](img/5dea23e2ccde34e4f31787609181a1aa.png)
 
 图片来源：作者（布伦达·哈利）
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 当我花时间深入学习时，我发现了一些之前未推荐的新书，[或找到所有我推荐书籍的更新](https://towardsdatascience.com/the-best-free-data-science-ebooks-b671691e5231)。所有电子书都合法免费或采用‘你愿意支付多少就付多少’的概念，最低为 $0。
 
-如果你喜欢一本书，并且有条件的话，我建议你寻找支持作者的方式，例如购买纸质版、在Patreon上支持他们，或是请他们喝杯咖啡。
+如果你喜欢一本书，并且有条件的话，我建议你寻找支持作者的方式，例如购买纸质版、在 Patreon 上支持他们，或是请他们喝杯咖啡。
 
 **让我们让优质教育内容为大众所用。**
 
@@ -40,7 +40,7 @@
 
 描述：一个完整的统计学基础，也为数据科学打下基础。OpenIntro Statistics 提供了大学水平的传统统计学介绍。这本教科书在大学水平广泛使用，为从社区学院到常春藤联盟的学生提供了卓越且易于接触的入门教材。
 
-**[概率论导论](http://www.probabilitybook.net/)** — 2019年哈佛大学 Stats 110 官方书籍，Joseph K. Blitzstein 和 Jessica Hwang 著
+**[概率论导论](http://www.probabilitybook.net/)** — 2019 年哈佛大学 Stats 110 官方书籍，Joseph K. Blitzstein 和 Jessica Hwang 著
 
 描述：这本书提供了理解统计学、随机性和不确定性的基本语言和工具。书中探讨了各种应用和示例，从巧合和悖论到 Google PageRank 和马尔可夫链蒙特卡洛（MCMC）。其他探讨的应用领域还包括遗传学、医学、计算机科学和信息理论。
 
@@ -60,7 +60,7 @@
 
 ### **编程**
 
-**[R编程与数据科学](https://leanpub.com/rprogramming)** 由 Roger d. Peng 著
+**[R 编程与数据科学](https://leanpub.com/rprogramming)** 由 Roger d. Peng 著
 
 描述：这本书向你介绍了 R 编程的基础，使用的是作为行业领先的 Johns Hopkins 数据科学专业化课程的一部分开发的相同材料。这本书所教授的技能将为你开始学习数据科学的旅程奠定基础。
 
@@ -94,7 +94,7 @@
 
 **[大规模数据集挖掘 (2019)](https://drive.google.com/viewerng/viewer?url=http://infolab.stanford.edu/~ullman/mmds/book0n.pdf)** 由 Jure Leskovec（斯坦福大学）、Anand Rajaraman（Rocketship Ventures）和 Jeffrey D. Ullman（斯坦福大学）编著
 
-描述：这本书专注于处理非常大量的数据，即数据大到无法放入主内存中。由于强调数据规模，许多例子涉及Web或从Web中派生的数据。此外，本书采取算法视角：数据挖掘是关于将算法应用于数据，而不是使用数据来“训练”某种机器学习引擎。
+描述：这本书专注于处理非常大量的数据，即数据大到无法放入主内存中。由于强调数据规模，许多例子涉及 Web 或从 Web 中派生的数据。此外，本书采取算法视角：数据挖掘是关于将算法应用于数据，而不是使用数据来“训练”某种机器学习引擎。
 
 **[机器学习的渴望（2016）](https://www.deeplearning.ai/machine-learning-yearning/)** 由 Andrew Ng 编著
 
@@ -102,7 +102,7 @@
 
 本书的重点不是教你机器学习算法，而是如何使机器学习算法有效。阅读《机器学习的渴望》后，你将能够：
 
-+   优先考虑AI项目中最有前景的方向
++   优先考虑 AI 项目中最有前景的方向
 
 +   诊断机器学习系统中的错误
 
@@ -118,19 +118,19 @@
 
 描述：这本书教你如何组建和领导数据科学企业，以便你的组织能够从大数据中提取信息。
 
-有其他必须列入清单的电子书吗？请在评论中告诉我或发推文给我 [https://twitter.com/brendahali](https://twitter.com/brendahali)
+有其他必须列入清单的电子书吗？请在评论中告诉我或发推文给我 [`twitter.com/brendahali`](https://twitter.com/brendahali)
 
-**简介：[布伦达·哈利](https://twitter.com/brendahali)** (**[LinkedIn](https://www.linkedin.com/in/brenda-hali/)**) 是一位驻华盛顿D.C.的市场数据专家。她热衷于女性在技术和数据领域的参与。
+**简介：[布伦达·哈利](https://twitter.com/brendahali)** (**[LinkedIn](https://www.linkedin.com/in/brenda-hali/)**) 是一位驻华盛顿 D.C.的市场数据专家。她热衷于女性在技术和数据领域的参与。
 
 [原始文档](https://towardsdatascience.com/the-best-free-data-science-ebooks-2020-update-dac5e170a478)。经许可转载。
 
 **相关：**
 
-+   [统计学习的要素：免费电子书](/2020/05/elements-statistical-learning-free-ebook.html)
++   统计学习的要素：免费电子书
 
-+   [理解机器学习：免费电子书](/2020/06/understanding-machine-learning-free-ebook.html)
++   理解机器学习：免费电子书
 
-+   [人人皆学Python：免费电子书](/2020/05/python-everybody-free-ebook.html)
++   人人皆学 Python：免费电子书
 
 ### 更多相关内容
 
@@ -138,10 +138,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败，详解](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，详解](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [为什么 Python 是初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

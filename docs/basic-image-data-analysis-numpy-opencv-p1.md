@@ -1,10 +1,10 @@
 # 使用 Numpy 和 OpenCV 的基础图像数据分析 – 第一部分
 
-> 原文：[https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
+> 原文：[`www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html`](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![图像数据分析](../Images/127e44de481e6450fcc1ee887c8f133c.png)
+![图像数据分析](img/127e44de481e6450fcc1ee887c8f133c.png)
 
 **简介：关于像素的一点点信息**
 
@@ -14,29 +14,29 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 矢量图形是一种不同的图像存储方法，旨在避免像素相关问题。但即便是矢量图像，最终也是作为像素的马赛克显示。像素这个词意味着**图像元素**。描述每个像素的一种简单方法是使用三种颜色，即**红色、绿色、蓝色**。这就是我们所称的**RGB**图像。
 
-在 RGB 图像中，每个像素由三个**8位**数字表示，分别对应**红色、绿色、蓝色**的值。最终，通过放大镜查看，如果我们放大一张图片，我们会看到这张图片由微小的光点组成，或者更具体地说，就是这些像素，而更有趣的是看到这些微小的光点实际上是不同颜色的小光点，这些颜色无非就是**红色、绿色、蓝色**通道。
+在 RGB 图像中，每个像素由三个**8 位**数字表示，分别对应**红色、绿色、蓝色**的值。最终，通过放大镜查看，如果我们放大一张图片，我们会看到这张图片由微小的光点组成，或者更具体地说，就是这些像素，而更有趣的是看到这些微小的光点实际上是不同颜色的小光点，这些颜色无非就是**红色、绿色、蓝色**通道。
 
 像素从远处来看，组成一幅图像，而近看它们只是**开和关**的小光点。这些光点的组合创建了图像，基本上就是我们每天在屏幕上看到的。
 
 每一张数字照片都由像素组成。它们是构成图像的最小信息单元。通常是圆形或方形，通常排列在二维网格中。
 
-现在，如果所有三个值都是最大强度，即255，它们显示为白色；如果所有三个颜色都被抑制，或值为0，颜色则显示为黑色。这三者的组合将产生特定的像素颜色的阴影。由于每个数字是一个**8位**数字，其值范围从0到255。
+现在，如果所有三个值都是最大强度，即 255，它们显示为白色；如果所有三个颜色都被抑制，或值为 0，颜色则显示为黑色。这三者的组合将产生特定的像素颜色的阴影。由于每个数字是一个**8 位**数字，其值范围从 0 到 255。
 
-![绿色RGB值](../Images/5495121edd0709f182bd817a0875f02a.png)
+![绿色 RGB 值](img/5495121edd0709f182bd817a0875f02a.png)
 
-这三种颜色的组合将趋向于它们之间的最高值。由于每个值可以有256种不同的强度或亮度值，因此总共形成了**1680**万种色调。
+这三种颜色的组合将趋向于它们之间的最高值。由于每个值可以有 256 种不同的强度或亮度值，因此总共形成了**1680**万种色调。
 
-在这里，我们将观察一些基本的图像数据分析内容，使用Numpy和一些相关的Python包，如`imageio`、`matplotlib`等。
+在这里，我们将观察一些基本的图像数据分析内容，使用 Numpy 和一些相关的 Python 包，如`imageio`、`matplotlib`等。
 
 +   **导入图像并观察其属性**
 
@@ -68,7 +68,7 @@ plt.imshow(pic)
 
 ```
 
-![图片 图1](../Images/e149c127896ae68cfb96020745d71da7.png)
+![图片 图 1](img/e149c127896ae68cfb96020745d71da7.png)
 
 **观察图像的基本属性**
 
@@ -91,7 +91,7 @@ Dimension of Image 3
 
 ```
 
-ndarray的形状是一个三层矩阵。这里的前两个数字是长度和宽度，第三个数字（即3）代表三层：**红色、绿色、蓝色**。因此，如果我们计算RGB图像的大小，总大小将被计算为**高度 x 宽度 x 3**
+ndarray 的形状是一个三层矩阵。这里的前两个数字是长度和宽度，第三个数字（即 3）代表三层：**红色、绿色、蓝色**。因此，如果我们计算 RGB 图像的大小，总大小将被计算为**高度 x 宽度 x 3**
 
 ```py
 
@@ -109,7 +109,7 @@ Minimum RGB value in this image 0
 
 ```
 
-这些值很重要，因为八位色彩强度不能超出0到255的范围。
+这些值很重要，因为八位色彩强度不能超出 0 到 255 的范围。
 
 现在，使用分配给图片的变量，我们还可以访问图像中的任何特定像素值，并进一步分别访问每个**RGB**通道。
 
@@ -137,7 +137,7 @@ Image([109, 143,  46], dtype=uint8)
 
 +   **2**索引值对应于**蓝色**通道
 
-但值得注意的是，在OpenCV中，图像采用的是BGR而不是RGB。**imageio.imread**加载图像为RGB（或RGBA），但OpenCV假设图像为[BGR或BGRA](https://docs.opencv.org/trunk/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce)（BGR是OpenCV的默认颜色格式）。
+但值得注意的是，在 OpenCV 中，图像采用的是 BGR 而不是 RGB。**imageio.imread**加载图像为 RGB（或 RGBA），但 OpenCV 假设图像为[BGR 或 BGRA](https://docs.opencv.org/trunk/d4/da8/group__imgcodecs.html#gabbc7ef1aa2edfaa87772f1202d67e0ce)（BGR 是 OpenCV 的默认颜色格式）。
 
 ```py
 
@@ -175,7 +175,7 @@ plt.show()
 
 ```
 
-![图片 图2](../Images/c3c792d1b09ae6817ec777205dfe4160.png)
+![图片 图 2](img/c3c792d1b09ae6817ec777205dfe4160.png)
 
 ```py
 
@@ -191,7 +191,7 @@ plt.show()
 
 ```
 
-![图片 图3](../Images/bb7721ebe0b2d2c41528a9e1373f32c9.png)
+![图片 图 3](img/bb7721ebe0b2d2c41528a9e1373f32c9.png)
 
 ```py
 
@@ -207,15 +207,15 @@ plt.show()
 
 ```
 
-![图片 图4](../Images/c288831fa64474147057f24bc963d2e5.png)
+![图片 图 4](img/c288831fa64474147057f24bc963d2e5.png)
 
-现在，我们还可以更改RGB值的数量。例如，让我们将以下行的红色、绿色、蓝色层设置为完全强度。
+现在，我们还可以更改 RGB 值的数量。例如，让我们将以下行的红色、绿色、蓝色层设置为完全强度。
 
-+   R通道：行- 100 到 110
++   R 通道：行- 100 到 110
 
-+   G通道：行- 200 到 210
++   G 通道：行- 200 到 210
 
-+   B通道：行- 300 到 310
++   B 通道：行- 300 到 310
 
 我们将加载图像一次，以便我们可以同时可视化每个变化。
 
@@ -233,7 +233,7 @@ plt.show()
 
 ```
 
-![图片 图5](../Images/a94e6429f1f8d7934a41a99977a101cf.png)
+![图片 图 5](img/a94e6429f1f8d7934a41a99977a101cf.png)
 
 ```py
 
@@ -247,7 +247,7 @@ plt.show()
 
 ```
 
-![图片 图6](../Images/fad38515e49e778ae04cfbeb906febf0.png)
+![图片 图 6](img/fad38515e49e778ae04cfbeb906febf0.png)
 
 ```py
 
@@ -261,9 +261,9 @@ plt.show()
 
 ```
 
-![图片 图7](../Images/a4aae040b8720f289720f51659b527e5.png)
+![图片 图 7](img/a4aae040b8720f289720f51659b527e5.png)
 
-为了更清楚，我们还会更改列部分，这次我们将同时更改RGB通道。
+为了更清楚，我们还会更改列部分，这次我们将同时更改 RGB 通道。
 
 ```py
 *# set value 200 of all channels to those pixels which turns them to white*
@@ -277,7 +277,7 @@ plt.imshow(pic)
 plt.show() 
 ```
 
-![图像图例 8](../Images/d7b5fa4a32e786a613144bb96f79f818.png)
+![图像图例 8](img/d7b5fa4a32e786a613144bb96f79f818.png)
 
 **分离层**
 
@@ -301,7 +301,7 @@ split_img=np.zeros(pic.shape,dtype="uint8")*# 'dtype' by default: 'numpy.float64
 *# display each channel*ax.imshow(split_img)
 ```
 
-![图像图例 9](../Images/368694b99a95b272d3c34e785aa9ba94.png)
+![图像图例 9](img/368694b99a95b272d3c34e785aa9ba94.png)
 
 **灰度**
 
@@ -325,7 +325,7 @@ plt.imshow(gray,cmap=plt.get_cmap(name='gray'))
 plt.show()
 ```
 
-![图像图例 10](../Images/5736a928c4b75d5ed525a79e22bfbb00.png)
+![图像图例 10](img/5736a928c4b75d5ed525a79e22bfbb00.png)
 
 不过，[GIMP](https://docs.gimp.org/2.6/en/gimp-tool-desaturate.html) 将颜色转换为灰度图像的软件有三种算法来完成这个任务。
 
@@ -387,7 +387,7 @@ print('Maximum RGB value in this image {}'.format(gray.max()))
 print('Minimum RGB value in this image {}'.format(gray.min()))
 
 print('Random indexes [X,Y] : {}'.format(gray[100,50]))
-![Image figure 11](../Images/28f9c9f3b4ebbcd70ca810e455816a86.png)
+![Image figure 11](img/28f9c9f3b4ebbcd70ca810e455816a86.png)
 Type of the image :<class 'imageio.core.util.Image'> 
 Shape of the image : (562,960)
 Image Height 562

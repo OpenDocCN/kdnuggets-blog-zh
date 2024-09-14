@@ -1,6 +1,6 @@
 # 数据科学的 GitHub CLI 备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/03/github-cli-data-science-cheat-sheet.html](https://www.kdnuggets.com/2023/03/github-cli-data-science-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/03/github-cli-data-science-cheat-sheet.html`](https://www.kdnuggets.com/2023/03/github-cli-data-science-cheat-sheet.html)
 
 # 终端速度
 
@@ -14,7 +14,7 @@ GitHub CLI，顾名思义，是一个允许通过命令行接口与 GitHub 平�
 
 [](https://www.kdnuggets.com/publications/sheets/GitHub_CLI_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
-[![数据科学的 GitHub CLI 备忘单](../Images/c736f791b6db72e5a5f65e33b9b5072c.png)](https://www.kdnuggets.com/publications/sheets/GitHub_CLI_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
+![数据科学的 GitHub CLI 备忘单](https://www.kdnuggets.com/publications/sheets/GitHub_CLI_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
 > GitHub CLI 是一个开源命令行工具，将 GitHub 带到你的终端。你可以检查状态、拉取请求、问题、文件、片段和其他 GitHub 概念。
 
@@ -50,7 +50,7 @@ GitHub CLI 不仅限于 git 工作流命令；它还允许你执行各种 GitHub
 
 +   [ChatGPT CLI：将你的命令行接口转换为 ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)
 
-+   [KDnuggets 新闻，7月5日：一个烂数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个烂数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)
 
 +   [数据科学的 Docker 备忘单](https://www.kdnuggets.com/2023/02/docker-data-science-cheat-sheet.html)
 

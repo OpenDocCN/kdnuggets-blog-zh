@@ -1,32 +1,32 @@
 # 庆祝数据隐私重要性的意识
 
-> 原文：[https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)
+> 原文：[`www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html`](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)
 
-![庆祝数据隐私重要性的意识](../Images/a9f2e99e61ed83790b4965d06660b50c.png)
+![庆祝数据隐私重要性的意识](img/a9f2e99e61ed83790b4965d06660b50c.png)
 
 [Dayne Topkin](https://unsplash.com/@dtopkin1) 通过 Unsplash
 
 ## 什么是数据隐私日？
 
-每天，人们将个人信息公开到互联网上，却完全不知这些信息如何被使用、共享或滥用。数据隐私日是每年1月28日举行的国际活动，旨在提高意识，促使公司和个人采纳数据保护的最佳实践。
+每天，人们将个人信息公开到互联网上，却完全不知这些信息如何被使用、共享或滥用。数据隐私日是每年 1 月 28 日举行的国际活动，旨在提高意识，促使公司和个人采纳数据保护的最佳实践。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 数据隐私日有助于提高对在线数据滥用及其隐私重要性的认识，并教育社会如何管理个人信息。各国政府、议会、国家数据保护机构等会举办研讨会，提供信息并指导公众关于个人数据保护和隐私的权利。它还鼓励现有企业尊重数据，并在数据收集协议和消费者数据使用上更加明确和简洁。
 
-数据隐私日始于2008年1月的美国和加拿大，源自欧洲委员会决定于2006年4月26日启动数据保护日，并定于1月28日庆祝。数据保护日纪念1981年1月28日签署的《公约108》，这是第一部具有法律约束力的国际隐私和数据保护条约。
+数据隐私日始于 2008 年 1 月的美国和加拿大，源自欧洲委员会决定于 2006 年 4 月 26 日启动数据保护日，并定于 1 月 28 日庆祝。数据保护日纪念 1981 年 1 月 28 日签署的《公约 108》，这是第一部具有法律约束力的国际隐私和数据保护条约。
 
-公约108包含了数据保护的基本基础和原则，22年后仍然执行这些相同的规则和条例。公约108用于建立第一个欧盟数据保护指令的支柱，该指令于1995年通过，并在2018年由《通用数据保护条例》（GDPR）取代。GDPR是全球最严密的隐私和安全法律之一。尽管它是由欧盟制定和通过的，但它对任何组织都建立和执行义务，只要这些组织的目标是或收集与欧盟人员相关的数据。
+公约 108 包含了数据保护的基本基础和原则，22 年后仍然执行这些相同的规则和条例。公约 108 用于建立第一个欧盟数据保护指令的支柱，该指令于 1995 年通过，并在 2018 年由《通用数据保护条例》（GDPR）取代。GDPR 是全球最严密的隐私和安全法律之一。尽管它是由欧盟制定和通过的，但它对任何组织都建立和执行义务，只要这些组织的目标是或收集与欧盟人员相关的数据。
 
 欧洲委员会为互联网用户创建了一个详细的[指南](https://www.coe.int/en/web/internet-users-rights/guide)，帮助他们更好地理解他们在网上的人权，以及当这些权利受到挑战或侵犯时应该采取的措施。
 
@@ -50,7 +50,7 @@
 
 ## 如何保护自己
 
-![庆祝数据隐私重要性的意识](../Images/4b0c40c05ba2a80351223ed443e8b8e2.png)
+![庆祝数据隐私重要性的意识](img/4b0c40c05ba2a80351223ed443e8b8e2.png)
 
 [Dan Nelson](https://unsplash.com/@danny144) via Unsplash
 
@@ -72,7 +72,7 @@
 
 ### 3\. 保护你的数据
 
-为每个账户使用相同的密码是一个巨大的错误。一旦有人入侵了一个账户，他们就能访问你所有的其他账户。创建长且唯一的密码，并使用YubiKey等安全存储密码，是确保数据安全和隐私的正确措施。
+为每个账户使用相同的密码是一个巨大的错误。一旦有人入侵了一个账户，他们就能访问你所有的其他账户。创建长且唯一的密码，并使用 YubiKey 等安全存储密码，是确保数据安全和隐私的正确措施。
 
 你还可以使用多重身份验证（MFA），这是一种电子认证方法，用户提供额外的身份验证，如扫描指纹或输入通过电话收到的代码。
 
@@ -94,7 +94,7 @@
 
 ### 3\. 教育
 
-在员工入职过程中，作为组织，你有责任教育新员工和现有员工有关公司的隐私政策。如果你指导员工采取正确的措施来保护他们在家里的安全，他们也会在工作中实践这些相同的安全和隐私措施。定期要求全公司更改密码，并为员工提供YubiKey等措施，是在组织中建立隐私和安全文化的例子。
+在员工入职过程中，作为组织，你有责任教育新员工和现有员工有关公司的隐私政策。如果你指导员工采取正确的措施来保护他们在家里的安全，他们也会在工作中实践这些相同的安全和隐私措施。定期要求全公司更改密码，并为员工提供 YubiKey 等措施，是在组织中建立隐私和安全文化的例子。
 
 我们使用和交换数据的频率比以往任何时候都要高。技术在不断进步。人们在网上自由地输入个人信息。外界存在越来越多的对手，等待下一次滥用个人信息的机会。作为个人和组织，你的责任是保护和保卫个人数据。
 
@@ -102,7 +102,7 @@
 
 ### 更多相关话题
 
-+   [庆祝Devart的26周年生日，享受独家20%折扣……](https://www.kdnuggets.com/2023/08/devart-celebrating-26th-birthday-exclusive-discount-data-connectivity-tools.html)
++   [庆祝 Devart 的 26 周年生日，享受独家 20%折扣……](https://www.kdnuggets.com/2023/08/devart-celebrating-26th-birthday-exclusive-discount-data-connectivity-tools.html)
 
 +   [庆祝女性在科技行业中的领导角色](https://www.kdnuggets.com/2022/07/celebrating-women-leadership-roles-tech-industry.html)
 

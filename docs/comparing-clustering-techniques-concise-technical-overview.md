@@ -1,20 +1,20 @@
 # 比较聚类技术：简明技术概述
 
-> 原文：[https://www.kdnuggets.com/2016/09/comparing-clustering-techniques-concise-technical-overview.html](https://www.kdnuggets.com/2016/09/comparing-clustering-techniques-concise-technical-overview.html)
+> 原文：[`www.kdnuggets.com/2016/09/comparing-clustering-techniques-concise-technical-overview.html`](https://www.kdnuggets.com/2016/09/comparing-clustering-techniques-concise-technical-overview.html)
 
 聚类用于分析未标记类别的数据。数据实例被分组在一起，使用最大化类内相似度和最小化不同类别之间相似度的概念。这意味着聚类算法识别并分组非常相似的实例，而不是那些彼此相似度较低的未分组实例。由于聚类不需要预先标记类别，它是一种无监督学习。
 
-![Clustering](../Images/42a053780bfea2e58ce12ff265cb28cb.png)
+![Clustering](img/42a053780bfea2e58ce12ff265cb28cb.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,13 +28,13 @@
 
 此时，所有的簇成员资格被重置，所有训练集中的实例被重新绘制并-添加到其最近的、可能重新中心化的簇中。这个迭代过程会持续进行，直到质心或其成员资格没有变化，簇被认为是稳定的。
 
-![k-means Algorithm](../Images/826561ae313b869f1d4d0b7041d2d089.png)
+![k-means Algorithm](img/826561ae313b869f1d4d0b7041d2d089.png)
 
 **图 1: *k*-均值聚类算法。**
 
-收敛是在重新计算的中心点与上一次迭代的中心点匹配，或在某个预设的范围内时实现的。在*k*-均值算法中，距离度量通常是欧几里得的，对于形式为*(x, y)*的2个点，可以表示为：
+收敛是在重新计算的中心点与上一次迭代的中心点匹配，或在某个预设的范围内时实现的。在*k*-均值算法中，距离度量通常是欧几里得的，对于形式为*(x, y)*的 2 个点，可以表示为：
 
-![公式](../Images/5496763be70b3ffcee728278cd3945e7.png)
+![公式](img/5496763be70b3ffcee728278cd3945e7.png)
 
 技术上特别要注意的是，特别是在并行计算时代，*k*-均值中的迭代聚类本质上是串行的；然而，迭代中的距离计算不必是串行的。因此，对于大规模数据集，距离计算是*k*-均值聚类算法中值得并行化的目标。
 
@@ -46,11 +46,11 @@
 
 参数估计方程表达了每个聚类的概率是已知的，而不是聚类本身。聚类的均值计算为
 
-![公式](../Images/e5eedf278af22418280caf14e82c84ee.png)
+![公式](img/e5eedf278af22418280caf14e82c84ee.png)
 
 聚类的标准差由以下公式确定
 
-![公式](../Images/c95f31494efd75e7934b9cde5f7e0af3.png)
+![公式](img/c95f31494efd75e7934b9cde5f7e0af3.png)
 
 其中 *w[i]* 是实例 *i* 属于聚类 *C* 的概率，而 *x[i]* 是数据集中的所有实例。
 
@@ -58,19 +58,19 @@
 
 需要注意的是，EM 也可以用于模糊聚类，而不是概率聚类。
 
-虽然* k *均值和期望最大化采用了不同的方法，但它们都是聚类技术。这种差异应该是对广泛存在的各种聚类技术之间差异的良好提示，[这些技术在今天仍在使用](/2016/09/poll-algorithms-used-data-scientists.html)。
+虽然* k *均值和期望最大化采用了不同的方法，但它们都是聚类技术。这种差异应该是对广泛存在的各种聚类技术之间差异的良好提示，这些技术在今天仍在使用。
 
 **相关**：
 
-+   [MDL聚类：无监督属性排序、离散化和聚类](/2016/08/mdl-clustering-unsupervised-attribute-ranking-discretization-clustering.html)
++   MDL 聚类：无监督属性排序、离散化和聚类
 
-+   [期望最大化（EM）算法教程](/2016/08/tutorial-expectation-maximization-algorithm.html)
++   期望最大化（EM）算法教程
 
-+   [支持向量机：简明技术概述](/2016/09/support-vector-machines-concise-technical-overview.html)
++   支持向量机：简明技术概述
 
 ### 更多相关内容
 
-+   [解锁聚类：理解K均值聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
++   [解锁聚类：理解 K 均值聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
 
 +   [比较自然语言处理技术：RNN、Transformers、BERT](https://www.kdnuggets.com/comparing-natural-language-processing-techniques-rnns-transformers-bert)
 
@@ -78,6 +78,6 @@
 
 +   [在数据隐私中学习实施技术隐私解决方案…](https://www.kdnuggets.com/2022/04/manning-data-privacy-learn-implement-technical-privacy-solutions-tools-scale.html)
 
-+   [每位AI从业者应了解的隐性技术债务](https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html)
++   [每位 AI 从业者应了解的隐性技术债务](https://www.kdnuggets.com/2022/07/hidden-technical-debts-every-ai-practitioner-aware.html)
 
-+   [ChatGPT与Google Bard：技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
++   [ChatGPT 与 Google Bard：技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)

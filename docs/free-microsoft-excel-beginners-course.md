@@ -1,22 +1,22 @@
 # 免费的 Microsoft Excel 初学者课程
 
-> 原文：[https://www.kdnuggets.com/2022/09/free-microsoft-excel-beginners-course.html](https://www.kdnuggets.com/2022/09/free-microsoft-excel-beginners-course.html)
+> 原文：[`www.kdnuggets.com/2022/09/free-microsoft-excel-beginners-course.html`](https://www.kdnuggets.com/2022/09/free-microsoft-excel-beginners-course.html)
 
-![免费 Microsoft Excel 初学者课程](../Images/7bc47f45f9c735d90476c54b7a14ea0d.png)
+![免费 Microsoft Excel 初学者课程](img/7bc47f45f9c735d90476c54b7a14ea0d.png)
 
 图片来源：freeCodeCamp | 作者编辑
 
-Excel 是每个数据分析师必备的工具。即使你不是数据专业人士，你也可能在学校项目、分析调查、研究论文、数据库或开票中使用过此软件。微软生态系统让我们很容易将Excel表格集成到日常任务中。
+Excel 是每个数据分析师必备的工具。即使你不是数据专业人士，你也可能在学校项目、分析调查、研究论文、数据库或开票中使用过此软件。微软生态系统让我们很容易将 Excel 表格集成到日常任务中。
 
-那么，为什么我们需要学习，即使我们已经在使用它？答案很简单，有许多Excel功能可以帮助我们改善日常任务。我们可以利用Excel的内置功能创建交互式图表，而不是使用第三方工具来创建数据可视化。
+那么，为什么我们需要学习，即使我们已经在使用它？答案很简单，有许多 Excel 功能可以帮助我们改善日常任务。我们可以利用 Excel 的内置功能创建交互式图表，而不是使用第三方工具来创建数据可视化。
 
-对于完全初学者来说，这将是进入数据科学世界的门户。在简历上拥有Excel技能是一个加分项。公司更喜欢能够使用Excel执行各种任务并提供良好展示的候选人。
+对于完全初学者来说，这将是进入数据科学世界的门户。在简历上拥有 Excel 技能是一个加分项。公司更喜欢能够使用 Excel 执行各种任务并提供良好展示的候选人。
 
-[freeCodeCamp.org](https://www.youtube.com/c/Freecodecamp) 和 [Programming Professor](https://www.youtube.com/channel/UCUSqKFDbRaaWQTaMN3r4Pbg) 联手推出了一个基于项目的 [Microsoft Excel 课程](https://www.youtube.com/watch?v=Vl0H-qTclOg)。该课程共7部分，总时长2.5小时。
+[freeCodeCamp.org](https://www.youtube.com/c/Freecodecamp) 和 [Programming Professor](https://www.youtube.com/channel/UCUSqKFDbRaaWQTaMN3r4Pbg) 联手推出了一个基于项目的 [Microsoft Excel 课程](https://www.youtube.com/watch?v=Vl0H-qTclOg)。该课程共 7 部分，总时长 2.5 小时。
 
 > Microsoft Excel 课程将从基础开始教你所有内容。你将学习数据输入、电子表格快捷键、Excel 公式、数据可视化、数据导入和导出、数据透视表等更多内容……
 
-该课程旨在教你Excel的基础知识。你将通过创建五个实际应用来学习基本功能。
+该课程旨在教你 Excel 的基础知识。你将通过创建五个实际应用来学习基本功能。
 
 1.  工资单
 
@@ -50,7 +50,7 @@ Excel 是每个数据分析师必备的工具。即使你不是数据专业人�
 
 如果你感兴趣，请按下方的播放按钮，或前往 [freeCodeCamp 的 YouTube 频道](https://www.youtube.com/watch?v=Vl0H-qTclOg) 开始学习。
 
-基于项目的课程是快速学习技能的最佳方式。在Excel课程中，你将有充足的时间跟随并自行练习。前五个项目更多的是教程，而在课程结束时，你将获得指导性作业。你将运用你的创造力和新学到的知识来完成这些作业。
+基于项目的课程是快速学习技能的最佳方式。在 Excel 课程中，你将有充足的时间跟随并自行练习。前五个项目更多的是教程，而在课程结束时，你将获得指导性作业。你将运用你的创造力和新学到的知识来完成这些作业。
 
 我总是建议我的读者进行实践和探索。对于认真学习者而言，Microsoft Excel 只是一个开始，你需要学习其他数据分析工具和数学概念，以确保能找到数据分析师的工作。
 

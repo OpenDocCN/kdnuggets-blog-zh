@@ -1,12 +1,12 @@
 # 数据目录已经死了；数据发现万岁
 
-> 原文：[https://www.kdnuggets.com/2020/12/data-catalogs-dead-long-live-data-discovery.html](https://www.kdnuggets.com/2020/12/data-catalogs-dead-long-live-data-discovery.html)
+> 原文：[`www.kdnuggets.com/2020/12/data-catalogs-dead-long-live-data-discovery.html`](https://www.kdnuggets.com/2020/12/data-catalogs-dead-long-live-data-discovery.html)
 
-[评论](#comments)
+评论
 
 **由 Debashis Saha & Barr Moses 提供**
 
-![图示](../Images/f00b83f39667b7cb334ee9d770bef0b9.png)
+![图示](img/f00b83f39667b7cb334ee9d770bef0b9.png)
 
 图片由 [Andrey_Kuzmin](https://www.shutterstock.com/g/akz) 提供，来源于 [Shutterstock](http://www.shutterstock.com/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -64,7 +64,7 @@
 
 我会省略详细的描述，但它可能看起来是这样的：
 
-![图示](../Images/f4ad709b9580d751ac55b76f7928ba87.png)
+![图示](img/f4ad709b9580d751ac55b76f7928ba87.png)
 
 *你的数据血缘图看起来像是一场线条和箭头的风暴吗？我们也一样。图片由*[EgudinKa](https://www.shutterstock.com/g/EgudinKa)提供，来自[*Shutterstock*](http://www.shutterstock.com/)*。*
 
@@ -72,23 +72,23 @@
 
 ### 随数据变化而扩展的能力
 
-当数据是结构化的时，数据目录效果很好，但在2020年，这种情况并不总是如此。随着机器生成的数据增加，公司在机器学习项目上的投资不断增加，非结构化数据变得越来越普遍，占所有新数据的[90%以上](https://www.cio.com/article/3406806/ai-unleashes-the-power-of-unstructured-data.html)。
+当数据是结构化的时，数据目录效果很好，但在 2020 年，这种情况并不总是如此。随着机器生成的数据增加，公司在机器学习项目上的投资不断增加，非结构化数据变得越来越普遍，占所有新数据的[90%以上](https://www.cio.com/article/3406806/ai-unleashes-the-power-of-unstructured-data.html)。
 
 [通常存储在数据湖中](https://towardsdatascience.com/how-to-build-your-data-platform-choosing-a-cloud-data-warehouse-3de66862f41c)，非结构化数据没有预定义的模型，必须经过多次转化才能可用和有用。非结构化数据非常动态，其形状、来源和意义在经过各种处理阶段（包括转化、建模和聚合）时不断变化。我们对这些非结构化数据所做的事情（即转化、建模、聚合和可视化），使得在其“理想状态”下进行目录记录变得更加困难。
 
 除此之外，不仅仅是*描述*消费者访问和使用的数据，还需要基于数据的意图和目的来*理解*这些数据。数据生产者如何描述资产与数据消费者如何理解其功能将非常不同，即使是不同的数据消费者之间，对数据赋予的意义也可能存在巨大的差异。
 
-例如，从Salesforce提取的数据集对数据工程师来说意义完全不同于对销售团队成员的意义。虽然工程师能理解“DW_7_V3”的含义，但销售团队可能会困惑，试图确定该数据集是否与他们在Salesforce中的“2021年收入预测”仪表盘相关。情况还有很多类似的例子。
+例如，从 Salesforce 提取的数据集对数据工程师来说意义完全不同于对销售团队成员的意义。虽然工程师能理解“DW_7_V3”的含义，但销售团队可能会困惑，试图确定该数据集是否与他们在 Salesforce 中的“2021 年收入预测”仪表盘相关。情况还有很多类似的例子。
 
-静态的数据描述本质上有限。到2021年，我们必须接受并适应这些新的和不断演变的动态，以真正理解数据。
+静态的数据描述本质上有限。到 2021 年，我们必须接受并适应这些新的和不断演变的动态，以真正理解数据。
 
 ### 数据是分布式的；目录则不是
 
 尽管现代数据架构的分布（参见：[数据网格](https://towardsdatascience.com/what-is-a-data-mesh-and-how-not-to-mesh-it-up-210710bb41e0)）以及转向接受半结构化和非结构化数据作为常态，但大多数数据目录仍然将数据视为一维实体。随着数据的聚合和转化，它流经数据栈的不同元素，几乎无法进行文档记录。
 
-![图示](../Images/57690c59f9bd39ab68fff0deed226ee0.png)
+![图示](img/57690c59f9bd39ab68fff0deed226ee0.png)
 
-*传统的数据目录在数据摄取阶段管理元数据（有关数据的数据），但数据在不断变化，这使得随着数据在管道中演变，难以了解数据的健康状况。图像由Barr Moses提供。*
+*传统的数据目录在数据摄取阶段管理元数据（有关数据的数据），但数据在不断变化，这使得随着数据在管道中演变，难以了解数据的健康状况。图像由 Barr Moses 提供。*
 
 如今，数据往往是[**自描述的**](https://www.gartner.com/en/information-technology/glossary/self-describing-messages#:~:text=A%20message%20that%20contains%20data,consists%20of%20tag%2Fvalue%20pairs.)，包含了描述数据格式和意义的元数据与数据本身。
 
@@ -104,7 +104,7 @@
 
 我们相信，下一代目录将具备学习、理解和推断数据的能力，使用户能够以自助服务的方式利用其洞察。但我们该如何实现这一目标？
 
-![图像](../Images/14319ae5849e5da6618a3bbd39f631c3.png)
+![图像](img/14319ae5849e5da6618a3bbd39f631c3.png)
 
 *数据发现可以通过提供分布式、实时的数据洞察，取代现代数据目录，同时遵守一套中央治理标准。图片由 Barr Moses 提供。*
 
@@ -168,22 +168,22 @@
 
 **相关：**
 
-+   [数据科学和机器学习：免费电子书](/2020/12/data-science-machine-learning-free-ebook.html)
++   数据科学和机器学习：免费电子书
 
-+   [数据专业人士寻找数据集的8个地方](/2020/12/8-places-data-professionals-find-datasets.html)
++   数据专业人士寻找数据集的 8 个地方
 
-+   [全面了解端到端的机器学习平台](/2020/07/tour-end-to-end-machine-learning-platforms.html)
++   全面了解端到端的机器学习平台
 
 ### 更多相关内容
 
-+   [OLAP还活着吗？](https://www.kdnuggets.com/2022/10/olap-dead.html)
++   [OLAP 还活着吗？](https://www.kdnuggets.com/2022/10/olap-dead.html)
 
 +   [学习数据科学基础需要多长时间？](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)
 
-+   [使用BERT对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
++   [使用 BERT 对长文本进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
 
 +   [完整的机器学习算法从开发到部署的过程](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [最后呼吁：Stefan Krawcyzk的‘Mastering MLOps’直播班](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)
++   [最后呼吁：Stefan Krawcyzk 的‘Mastering MLOps’直播班](https://www.kdnuggets.com/2022/08/sphere-last-call-stefan-krawcyzk-mastering-mlops.html)
 
-+   [通过DataOps.live解锁DataOps成功——在Gartner市场指南中 featured](https://www.kdnuggets.com/2023/07/dataopslive-unlock-dataops-success-featured-gartner-market-guide.html)
++   [通过 DataOps.live 解锁 DataOps 成功——在 Gartner 市场指南中 featured](https://www.kdnuggets.com/2023/07/dataopslive-unlock-dataops-success-featured-gartner-market-guide.html)

@@ -1,6 +1,6 @@
 # 生成性人工智能的新伦理影响
 
-> 原文：[https://www.kdnuggets.com/the-new-ethical-implications-of-generative-artificial-intelligence](https://www.kdnuggets.com/the-new-ethical-implications-of-generative-artificial-intelligence)
+> 原文：[`www.kdnuggets.com/the-new-ethical-implications-of-generative-artificial-intelligence`](https://www.kdnuggets.com/the-new-ethical-implications-of-generative-artificial-intelligence)
 
 高级人工智能领域的进展速度非常快，但伴随而来的风险也同样迅猛。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -22,7 +22,7 @@
 
 [马克·苏兹曼](https://www.gatesfoundation.org/ideas/articles/artificial-intelligence-ai-development-principles)，比尔及梅琳达·盖茨基金会的首席执行官，认为“虽然这项技术可以带来加速科学进步和提升学习成果的突破，但机遇并非没有风险。”
 
-![生成性人工智能的新伦理影响](../Images/baa75863e0f91853437cd51a0d6dcfcc.png)
+![生成性人工智能的新伦理影响](img/baa75863e0f91853437cd51a0d6dcfcc.png)
 
 图片由作者提供
 
@@ -42,7 +42,7 @@
 
 最近，有公司因通过抓取互联网自拍照来构建面部识别工具而被罚款，这导致了隐私泄露和高额罚款。
 
-![生成式人工智能的新伦理影响](../Images/170e907c2acf9028544db30a4cff9910.png)
+![生成式人工智能的新伦理影响](img/170e907c2acf9028544db30a4cff9910.png)
 
 来源：[TechCrunch](https://techcrunch.com/2023/05/10/clearview-ai-another-cnil-gspr-fine/)
 
@@ -68,7 +68,7 @@
 
 最重要的是，组织需要建立道德、透明和负责任的生成式 AI 开发和使用方式。
 
-如果你对了解谁负责确保生成式 AI 正确使用感兴趣，可以考虑阅读[这篇文章](/2023/08/whose-responsibility-get-generative-ai-right.html)，文章描述了我们如何作为一个社区共同努力，使其发挥作用。
+如果你对了解谁负责确保生成式 AI 正确使用感兴趣，可以考虑阅读这篇文章，文章描述了我们如何作为一个社区共同努力，使其发挥作用。
 
 ## 版权侵权
 
@@ -76,7 +76,7 @@
 
 如果未经必要的[许可、署名或补偿](https://www.searchenginejournal.com/chatgpt-creator-faces-multiple-lawsuits-over-copyright-privacy-violations/490686/)使用版权数据来训练人工智能模型，则会导致版权侵权，并可能使开发者面临严重的法律问题。
 
-![生成性人工智能的新伦理影响](../Images/eac1fb8ef1d3663e7abbef4fe2a2e56d.png)
+![生成性人工智能的新伦理影响](img/eac1fb8ef1d3663e7abbef4fe2a2e56d.png)
 
 图片来源于[搜索引擎期刊](https://www.searchenginejournal.com/chatgpt-creator-faces-multiple-lawsuits-over-copyright-privacy-violations/490686/)
 
@@ -116,7 +116,7 @@
 
 # 有所进展
 
-[微软](https://www.msn.com/en-ca/money/other/microsoft-says-it-will-protect-customers-from-ai-copyright-lawsuits/ar-AA1go5ha?ocid=msedgntp&cvid=d677c68aad4e4ed680aa1c12658ff514&ei=15)最近宣布，只要遵守安全措施和内容过滤器，它将保护其AI产品的购买者免受版权侵权的影响。这是一个重大缓解，并展示了对使用其产品后果负责的正确意图——这是伦理框架的核心原则之一。
+[微软](https://www.msn.com/en-ca/money/other/microsoft-says-it-will-protect-customers-from-ai-copyright-lawsuits/ar-AA1go5ha?ocid=msedgntp&cvid=d677c68aad4e4ed680aa1c12658ff514&ei=15)最近宣布，只要遵守安全措施和内容过滤器，它将保护其 AI 产品的购买者免受版权侵权的影响。这是一个重大缓解，并展示了对使用其产品后果负责的正确意图——这是伦理框架的核心原则之一。
 
 这将确保作者保留他们的权利并为他们的创作获得公平的报酬。
 
@@ -128,9 +128,9 @@
 
 有一种情绪引发了对人工智能会取代我们大部分工作的恐惧。麦肯锡最近分享了一份关于未来工作形态的报告。
 
-这个话题需要我们对工作的思维方式进行结构性改变，并值得单独讨论。因此，请关注下一篇文章，其中将讨论工作的未来以及如何在GenAI时代生存并蓬勃发展所需的技能！
+这个话题需要我们对工作的思维方式进行结构性改变，并值得单独讨论。因此，请关注下一篇文章，其中将讨论工作的未来以及如何在 GenAI 时代生存并蓬勃发展所需的技能！
 
-**[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)****是一位AI策略师和数字化转型领导者，致力于在产品、科学和工程的交汇点上构建可扩展的机器学习系统。她是一位屡获殊荣的创新领导者、作者和国际演讲者。她的使命是普及机器学习，并打破术语，让每个人都能参与这场变革。
+**[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)****是一位 AI 策略师和数字化转型领导者，致力于在产品、科学和工程的交汇点上构建可扩展的机器学习系统。她是一位屡获殊荣的创新领导者、作者和国际演讲者。她的使命是普及机器学习，并打破术语，让每个人都能参与这场变革。
 
 ### 更多相关内容
 
@@ -142,6 +142,6 @@
 
 +   [你应该成为一名自由职业的人工智能工程师吗？](https://www.kdnuggets.com/2021/12/ucsd-become-freelance-artificial-intelligence-engineer.html)
 
-+   [2022年的人工智能项目创意](https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html)
++   [2022 年的人工智能项目创意](https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html)
 
 +   [人工智能与元宇宙](https://www.kdnuggets.com/2022/02/artificial-intelligence-metaverse.html)

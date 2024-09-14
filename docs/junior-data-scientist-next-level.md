@@ -1,10 +1,10 @@
 # 初级数据科学家：下一阶段
 
-> 原文：[https://www.kdnuggets.com/2022/02/junior-data-scientist-next-level.html](https://www.kdnuggets.com/2022/02/junior-data-scientist-next-level.html)
+> 原文：[`www.kdnuggets.com/2022/02/junior-data-scientist-next-level.html`](https://www.kdnuggets.com/2022/02/junior-data-scientist-next-level.html)
 
 当你在线搜索时，大多数人建议你在考虑转职或换其他角色之前，先在初级阶段待几年。与初级、中级和高级数据科学家相比，经验水平存在差异。本文将探讨所有职位的期望及晋升的要求。
 
-![初级数据科学家：下一阶段](../Images/ffb5d0250388ce660a4ac7219eaebe1e.png)
+![初级数据科学家：下一阶段](img/ffb5d0250388ce660a4ac7219eaebe1e.png)
 
 [sol](https://unsplash.com/@solimonster) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -36,7 +36,7 @@
 
 如果你正在寻找高级职位，问问自己“有多长时间可以让我独自完成/处理任务而无需检查”。你必须对自己完全诚实，否则你会为自己设定失败的局面。我不是说你不能设定目标并努力成为最好的自己。我是说，要对自己当前的经验水平保持现实，以帮助你找到合适的角色，并在此基础上不断提升。
 
-![初级数据科学家：下一个级别](../Images/ae3f9e8db356d0f8b2233634932dc18f.png)
+![初级数据科学家：下一个级别](img/ae3f9e8db356d0f8b2233634932dc18f.png)
 
 [Scott Graham](https://unsplash.com/@homajob) 通过 Unsplash
 
@@ -86,12 +86,12 @@
 
 +   [将你的数据科学职业提升到下一个层次](https://www.kdnuggets.com/2021/12/sas-advance-data-science-career-next-level.html)
 
-+   [下一层次的AI编程：提示设计与AI产品构建](https://www.kdnuggets.com/2023/03/corise-prompt-design-building-ai-products.html)
++   [下一层次的 AI 编程：提示设计与 AI 产品构建](https://www.kdnuggets.com/2023/03/corise-prompt-design-building-ai-products.html)
 
 +   [以几乎免费的价格获得大学级认证](https://www.kdnuggets.com/get-university-level-certified-for-next-to-nothing)
 
 +   [初级与高级数据科学家的薪资差异：有什么不同？](https://www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html)
 
-+   [初级ML工程师实际需要了解什么才能获得聘用？](https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired)
++   [初级 ML 工程师实际需要了解什么才能获得聘用？](https://www.kdnuggets.com/what-junior-ml-engineers-actually-need-to-know-to-get-hired)
 
-+   [50级数据科学家：需要了解的Python库](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)
++   [50 级数据科学家：需要了解的 Python 库](https://www.kdnuggets.com/level-50-data-scientist-python-libraries-to-know)

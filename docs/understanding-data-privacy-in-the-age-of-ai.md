@@ -1,8 +1,8 @@
 # 理解 AI 时代的数据隐私
 
-> 原文：[https://www.kdnuggets.com/understanding-data-privacy-in-the-age-of-ai](https://www.kdnuggets.com/understanding-data-privacy-in-the-age-of-ai)
+> 原文：[`www.kdnuggets.com/understanding-data-privacy-in-the-age-of-ai`](https://www.kdnuggets.com/understanding-data-privacy-in-the-age-of-ai)
 
-![理解 AI 时代的数据隐私](../Images/7aee0668db8bfdef97a07a1fa19208e8.png)
+![理解 AI 时代的数据隐私](img/7aee0668db8bfdef97a07a1fa19208e8.png)
 
 图片作者 | Midjourney & Canva
 
@@ -66,7 +66,7 @@
 
 本质上，如果我们自己向这些模型提供这样的数据，隐私就不能成为问题。
 
-![用户在隐私中的角色](../Images/7a265d49334ff02ccc11af0a1195daa2.png)
+![用户在隐私中的角色](img/7a265d49334ff02ccc11af0a1195daa2.png)
 
 作者提供的图片
 

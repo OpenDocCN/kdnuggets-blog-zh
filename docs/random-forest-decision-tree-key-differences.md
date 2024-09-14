@@ -1,8 +1,8 @@
 # 随机森林与决策树：关键区别
 
-> 原文：[https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
+> 原文：[`www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html`](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
 
-![随机森林与决策树：关键区别](../Images/fb0736396512b8d298df0d3379945f3c.png)
+![随机森林与决策树：关键区别](img/fb0736396512b8d298df0d3379945f3c.png)
 
 图片由 [Todd Quackenbush](https://unsplash.com/@toddquackenbush?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -34,13 +34,13 @@
 
 相反，由于随机森林仅使用少量预测变量来构建每棵决策树，最终的决策树往往会去相关，这意味着随机森林算法模型不太可能超越数据集。如前所述，决策树通常会覆盖训练数据——这意味着它们更容易匹配数据集中的“噪声”而不是实际的基础模型。
 
-![随机森林与决策树：关键差异](../Images/cab328b1a2a8e01fd97f0936f0a99c6b.png)
+![随机森林与决策树：关键差异](img/cab328b1a2a8e01fd97f0936f0a99c6b.png)
 
 图片由 [Arnaud Mesureur](https://unsplash.com/@tbzr?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 # 随机森林与决策树的区别
 
-随机森林算法与决策树的关键区别在于，决策树是图形，用于通过分支方法展示决策的所有可能结果。相比之下，随机森林算法的输出是一组 [决策树](/2020/02/decision-tree-intuition.html)，这些决策树根据输出进行工作。
+随机森林算法与决策树的关键区别在于，决策树是图形，用于通过分支方法展示决策的所有可能结果。相比之下，随机森林算法的输出是一组 决策树，这些决策树根据输出进行工作。
 
 在现实世界中，机器学习工程师和数据科学家通常使用随机森林算法，因为它们非常准确，而且现代计算机和系统通常能够处理以前无法处理的大型数据集。
 
@@ -88,7 +88,7 @@
 
 +   [调整随机森林超参数](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)
 
-+   [使用Python和Scikit-learn简化决策树解释](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
++   [使用 Python 和 Scikit-learn 简化决策树解释](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
 
 +   [决策树算法解释](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)
 

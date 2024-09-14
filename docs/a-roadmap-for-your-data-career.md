@@ -1,6 +1,6 @@
 # 你的数据职业道路图
 
-> 原文：[https://www.kdnuggets.com/a-roadmap-for-your-data-career](https://www.kdnuggets.com/a-roadmap-for-your-data-career)
+> 原文：[`www.kdnuggets.com/a-roadmap-for-your-data-career`](https://www.kdnuggets.com/a-roadmap-for-your-data-career)
 
 数据职业并非适合所有人——你需要耐心来应对不断发展的业务、安全和基础设施要求，同时需要较强的心理耐力来处理无尽的数据问题和变化。但这些职位也可以是世界上最有趣的工作。每个月都有一个新的难题需要以新的方式解决，新技术和创新不断使这个领域保持新鲜。随着 AI 对更大、更复杂的训练数据集的需求，数据职业也将变得更加重要。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 [](https://www.kdnuggets.com/wp-content/uploads/data_career_roadmap_v9_large.png)
 
-[![你的数据职业道路图](../Images/d50e22af76a47764f655045316d98609.png)](https://www.kdnuggets.com/wp-content/uploads/data_career_roadmap_v9_large.png)
+![你的数据职业道路图](https://www.kdnuggets.com/wp-content/uploads/data_career_roadmap_v9_large.png)
 
 数据职业道路图（点击放大）
 
@@ -40,7 +40,7 @@
 
 我们可以将这些关注点分为以下职业阶段：
 
-![你的数据职业道路图](../Images/8eefef73f619e13109c913f94a802ca4.png)
+![你的数据职业道路图](img/8eefef73f619e13109c913f94a802ca4.png)
 
 数据专业人士的关注点按职业阶段分类。
 
@@ -60,13 +60,13 @@
 
 +   理论与应用的兴趣 — 你是否倾向于立刻可以使用的实际技术技能？还是更愿意深入研究计算机科学算法或统计理论？
 
-基于这些因素，你可能会决定花3个月和几百美元获得一些实际技术领域的认证，如[Microsoft Entra ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-verified-id)是适合你的。另一方面，你可能会决定花8年时间获得统计学本科和博士学位符合你的抱负。虽然有很多路径组合，但主要问题是你是否愿意付出努力建立一个广泛且坚实的基础，还是你觉得时间和资金有限，需要尽快找到工作。
+基于这些因素，你可能会决定花 3 个月和几百美元获得一些实际技术领域的认证，如[Microsoft Entra ID](https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-verified-id)是适合你的。另一方面，你可能会决定花 8 年时间获得统计学本科和博士学位符合你的抱负。虽然有很多路径组合，但主要问题是你是否愿意付出努力建立一个广泛且坚实的基础，还是你觉得时间和资金有限，需要尽快找到工作。
 
 在启动阶段，重要的是研究你感兴趣的未来职位，然后学习这些职位的职位描述。根据职位描述，你可以逆向工程出你需要采取的步骤。那些角色需要什么技能、编程语言和经验？考虑到这些项目，你可以制定目标，以在这些特定领域提升技能。
 
 不论你的路径如何，最大的挑战之一是在你目标领域的公司中获得第一份工作。上过一些随机的在线课程对此无济于事。你需要找到一种方式，为你的简历添加一些明确的资质、正式的学位或在像[Kaggle](https://www.kaggle.com/)这样被认可的项目经验论坛中的记录成就。在选择选项时，仔细查看各种项目的完成率，并确保你能完全承诺完成课程，然后再做付款或负债决定。
 
-最后，在扩展你的网络时要有创意。加入学校的科技俱乐部；参加本地科技团体的聚会；寻找即将举办的有网络活动的行业会议。如果你曾在有职业中心的学校就读，和办公室里的每个人建立最好的关系，并请他们帮助你找到那些其他人可能忽视的空缺职位。你可能会找到一个小众职位、内部机会或未公开的职位，这些职位不会有500个在线申请者。
+最后，在扩展你的网络时要有创意。加入学校的科技俱乐部；参加本地科技团体的聚会；寻找即将举办的有网络活动的行业会议。如果你曾在有职业中心的学校就读，和办公室里的每个人建立最好的关系，并请他们帮助你找到那些其他人可能忽视的空缺职位。你可能会找到一个小众职位、内部机会或未公开的职位，这些职位不会有 500 个在线申请者。
 
 # 职业转型
 
@@ -74,7 +74,7 @@
 
 如果这些步骤需要你使用新技术或学习与当前技能集相关的技能，那么在线课程是帮助应对转变的绝佳方式。
 
-在线课程，例如由 [DataCamp](https://www.datacamp.com/) 或 [Pluralsight](https://www.pluralsight.com/browse/machine-learning) 提供的课程，具有实际性、针对性和成本效益，并且可以组成各种认证。然而，这些课程面临的一个大挑战是它们的完成率极低（[通常低于10%](https://www.linkedin.com/pulse/why-completion-rate-online-courses-so-low-matthew-mason/)）。如果你的公司提供培训资金，或者你可以争取到资金，确保明智地使用这些资金并完成你的课程。
+在线课程，例如由 [DataCamp](https://www.datacamp.com/) 或 [Pluralsight](https://www.pluralsight.com/browse/machine-learning) 提供的课程，具有实际性、针对性和成本效益，并且可以组成各种认证。然而，这些课程面临的一个大挑战是它们的完成率极低（[通常低于 10%](https://www.linkedin.com/pulse/why-completion-rate-online-courses-so-low-matthew-mason/)）。如果你的公司提供培训资金，或者你可以争取到资金，确保明智地使用这些资金并完成你的课程。
 
 # 职业进展
 
@@ -88,24 +88,24 @@
 
 正规的大学硕士学位是解决所有这三个问题的好方法。新的硕士项目旨在更短、更有针对性，并且更加灵活，以适应全职工作人士的时间限制。虽然在线学位在建立关系网络方面不如传统学位有效，但你可能会认为灵活性值得这种权衡。
 
-# NULL路径 — 什么都不做
+# NULL 路径 — 什么都不做
 
 路线图的中心是标记为“null”的舒适区。不幸的是，这就是我们中的许多人最终所处的地方。我们让经理决定我们被分配去开发哪些技能或项目。我们让公司裁员决定我们下一次职业转型的时机。或者我们查看升级职业的选项，但决定它们过于令人畏惧或昂贵。
 
-你的职业将持续40到45年；难道我们不应该主动规划我们想要走的道路吗？
+你的职业将持续 40 到 45 年；难道我们不应该主动规划我们想要走的道路吗？
 
-[](https://www.linkedin.com/in/spugsley/)****[Stan Pugsley](https://www.linkedin.com/in/spugsley/)**** 是一位驻盐湖城，犹他州的自由数据工程和分析顾问。他还是犹他大学埃克尔斯商学院的讲师。你可以通过 [电子邮件](mailto:S.pugsley@utah.edu) 联系作者。
+[](https://www.linkedin.com/in/spugsley/)****[Stan Pugsley](https://www.linkedin.com/in/spugsley/)**** 是一位驻盐湖城，犹他州的自由数据工程和分析顾问。他还是犹他大学埃克尔斯商学院的讲师。你可以通过 电子邮件 联系作者。
 
 ### 更多关于这个话题
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图……](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图……](https://www.kdnuggets.com/2022/n35.html)
 
 +   [完整的数据科学学习路线图](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)
 
 +   [完整的数据工程学习路线图](https://www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html)
 
-+   [免费的数据科学学习路线图：适用于所有水平，来自IBM](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
++   [免费的数据科学学习路线图：适用于所有水平，来自 IBM](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
 
-+   [四周学会Python：一份路线图](https://www.kdnuggets.com/2023/02/learning-python-four-weeks-roadmap.html)
++   [四周学会 Python：一份路线图](https://www.kdnuggets.com/2023/02/learning-python-four-weeks-roadmap.html)
 
 +   [完整的机器学习学习路线图](https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html)

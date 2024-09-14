@@ -1,8 +1,8 @@
 # 掌握 Python 数据清理的艺术
 
-> 原文：[https://www.kdnuggets.com/mastering-the-art-of-data-cleaning-in-python](https://www.kdnuggets.com/mastering-the-art-of-data-cleaning-in-python)
+> 原文：[`www.kdnuggets.com/mastering-the-art-of-data-cleaning-in-python`](https://www.kdnuggets.com/mastering-the-art-of-data-cleaning-in-python)
 
-![掌握 Python 数据清理的艺术](../Images/8962cd78b382626bafaea7ad8d538500.png)
+![掌握 Python 数据清理的艺术](img/8962cd78b382626bafaea7ad8d538500.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
 
 * * *
 
@@ -28,7 +28,7 @@
 
 我们将涵盖以下数据清理任务。
 
-![掌握 Python 数据清理的艺术](../Images/9705a754315fcc1b9d070e034988a2f3.png)
+![掌握 Python 数据清理的艺术](img/9705a754315fcc1b9d070e034988a2f3.png)
 
 作者提供的图片
 
@@ -63,7 +63,7 @@ display(df)
 
 数据集的样子如下。
 
-![掌握 Python 数据清理的艺术](../Images/14b819ad4461b06f0037afbd0fb31cc0.png)
+![掌握 Python 数据清理的艺术](img/14b819ad4461b06f0037afbd0fb31cc0.png)
 
 你可以立即看到有一些缺失值。此外，日期格式不一致。
 
@@ -76,7 +76,7 @@ print(df.info())
 
 这是代码输出。
 
-![掌握 Python 数据清理的艺术](../Images/e02bf810733535c1ba1e9252f7922309.png)
+![掌握 Python 数据清理的艺术](img/e02bf810733535c1ba1e9252f7922309.png)
 
 我们可以看到，只有列 square_feet 没有任何 NULL 值，因此我们需要处理这一点。此外，列 advertisement_date 和 sale_date 的数据类型是对象类型，尽管它们应该是日期。
 
@@ -112,7 +112,7 @@ df = df.drop(['buyer', 'location'], axis=1)
 
 这两种方法都返回了以下数据框。
 
-![掌握 Python 数据清理的艺术](../Images/d4b19f806cfe3564dd619a9df95ffe74.png)
+![掌握 Python 数据清理的艺术](img/d4b19f806cfe3564dd619a9df95ffe74.png)
 
 # 处理重复数据
 
@@ -130,7 +130,7 @@ duplicates
 
 这是输出结果。
 
-![掌握 Python 数据清理的艺术](../Images/d4fe70038e3767a4460653a2ef241088.png)
+![掌握 Python 数据清理的艺术](img/d4fe70038e3767a4460653a2ef241088.png)
 
 索引为 3 的行被标记为重复，因为值相同的第 2 行是它的第一次出现。
 
@@ -144,7 +144,7 @@ duplicates
 
 **drop_duplicates()** 函数在识别重复项时会考虑所有列。如果你只想考虑某些列，可以将它们作为列表传递给此函数，例如：df.drop_duplicates(subset=['column1', 'column2'])。
 
-![掌握 Python 数据清理的艺术](../Images/0c802373e36ec7124b65ee9e9cb0cc8b.png)
+![掌握 Python 数据清理的艺术](img/0c802373e36ec7124b65ee9e9cb0cc8b.png)
 
 如你所见，重复的行已经被删除。然而，索引保持不变，索引 3 丢失了。我们将通过重置索引来整理这一点。
 
@@ -152,9 +152,9 @@ duplicates
 df = df.reset_index(drop=True)
 ```
 
-这个任务是通过使用**reset_index()**函数来完成的。`drop=True`参数用于丢弃原始索引。如果不包括此参数，旧索引将作为新列添加到你的DataFrame中。通过设置`drop=True`，你告诉pandas忘记旧索引并将其重置为默认的整数索引。
+这个任务是通过使用**reset_index()**函数来完成的。`drop=True`参数用于丢弃原始索引。如果不包括此参数，旧索引将作为新列添加到你的 DataFrame 中。通过设置`drop=True`，你告诉 pandas 忘记旧索引并将其重置为默认的整数索引。
 
-练习一下，尝试从这个[Microsoft数据集中删除重复项](https://platform.stratascratch.com/coding/9849-find-the-duplicate-records-in-the-dataset?code_type=2&utm_source=blog&utm_medium=click&utm_campaign=kdn+data+cleaning)。
+练习一下，尝试从这个[Microsoft 数据集中删除重复项](https://platform.stratascratch.com/coding/9849-find-the-duplicate-records-in-the-dataset?code_type=2&utm_source=blog&utm_medium=click&utm_campaign=kdn+data+cleaning)。
 
 # 数据类型转换
 
@@ -164,7 +164,7 @@ df = df.reset_index(drop=True)
 
 最简单的方法是使用**to_datetime()**方法。你可以像下面所示，一列一列地进行转换。
 
-在这样做时，我们将`dayfirst`参数设置为True，因为某些日期以天为首。
+在这样做时，我们将`dayfirst`参数设置为 True，因为某些日期以天为首。
 
 ```py
 # Converting advertisement_date column to datetime
@@ -183,9 +183,9 @@ df[['advertisement_date', 'sale_date']] = df[['advertisement_date', 'sale_date']
 
 两种方法都会给你相同的结果。
 
-![掌握Python数据清洗的艺术](../Images/19dc91cbaf4dbb488a3593d95ad7a444.png)
+![掌握 Python 数据清洗的艺术](img/19dc91cbaf4dbb488a3593d95ad7a444.png)
 
-现在日期格式一致了。我们看到并非所有数据都已转换。`advertisement_date`中有一个NaT值，`sale_date`中有两个。这意味着日期缺失了。
+现在日期格式一致了。我们看到并非所有数据都已转换。`advertisement_date`中有一个 NaT 值，`sale_date`中有两个。这意味着日期缺失了。
 
 让我们使用**info()**方法检查列是否已转换为日期。
 
@@ -194,11 +194,11 @@ df[['advertisement_date', 'sale_date']] = df[['advertisement_date', 'sale_date']
 print(df.info())
 ```
 
-![掌握Python数据清洗的艺术](../Images/e6ec0eb9378e4f56d55550dcb47a8a4d.png)
+![掌握 Python 数据清洗的艺术](img/e6ec0eb9378e4f56d55550dcb47a8a4d.png)
 
-正如你所见，两列都不是datetime64[ns]格式。
+正如你所见，两列都不是 datetime64[ns]格式。
 
-现在，尝试在这个[Airbnb数据集中将数据从文本转换为数字](https://platform.stratascratch.com/coding/9634-host-response-rates-with-cleaning-fees?code_type=2&utm_source=blog&utm_medium=click&utm_campaign=kdn+data+cleaning)。
+现在，尝试在这个[Airbnb 数据集中将数据从文本转换为数字](https://platform.stratascratch.com/coding/9634-host-response-rates-with-cleaning-fees?code_type=2&utm_source=blog&utm_medium=click&utm_campaign=kdn+data+cleaning)。
 
 # 处理缺失数据
 
@@ -218,17 +218,17 @@ print(df.info())
 df = df.drop(8)
 ```
 
-DataFrame现在看起来是这样的。
+DataFrame 现在看起来是这样的。
 
-![掌握Python数据清洗的艺术](../Images/9f2a0e5598824db43db0c0347be9f221.png)
+![掌握 Python 数据清洗的艺术](img/9f2a0e5598824db43db0c0347be9f221.png)
 
-最后一行已经被删除，我们的DataFrame现在看起来更好了。不过，仍然有一些缺失的数据，我们将使用另一种方法处理这些数据。
+最后一行已经被删除，我们的 DataFrame 现在看起来更好了。不过，仍然有一些缺失的数据，我们将使用另一种方法处理这些数据。
 
 ## 插补缺失值
 
 如果你有显著缺失的数据，除了删除，另一种更好的策略是插补。这个过程涉及根据其他数据填充缺失值。对于数值数据，常见的插补方法包括使用集中趋势的度量（均值、中位数、众数）。
 
-在我们已经更改的DataFrame中，advertisement_date和sale_date列中有NaT（非时间）值。我们将使用**mean()**方法插补这些缺失值。
+在我们已经更改的 DataFrame 中，advertisement_date 和 sale_date 列中有 NaT（非时间）值。我们将使用**mean()**方法插补这些缺失值。
 
 代码使用**fillna()**方法查找并用均值填充空值。
 
@@ -247,9 +247,9 @@ df[['advertisement_date', 'sale_date']] = df[['advertisement_date', 'sale_date']
 
 两种情况下的输出如下所示。
 
-![掌握 Python 中的数据清理艺术](../Images/96cc85a9edbd5b5dc67ab39ab9774fab.png)
+![掌握 Python 中的数据清理艺术](img/96cc85a9edbd5b5dc67ab39ab9774fab.png)
 
-我们的sale_date列现在有一些我们不需要的时间。让我们把它们移除。
+我们的 sale_date 列现在有一些我们不需要的时间。让我们把它们移除。
 
 我们将使用**strftime()**方法，它将日期转换为其字符串表示形式和特定格式。
 
@@ -257,7 +257,7 @@ df[['advertisement_date', 'sale_date']] = df[['advertisement_date', 'sale_date']
 df['sale_date'] = df['sale_date'].dt.strftime('%Y-%m-%d')
 ```
 
-![掌握 Python 中的数据清理艺术](../Images/e2b413dcdf2794b2dfce981d3964e274.png)
+![掌握 Python 中的数据清理艺术](img/e2b413dcdf2794b2dfce981d3964e274.png)
 
 现在日期看起来都很整齐了。
 
@@ -275,9 +275,9 @@ df[['date1_formatted', 'date2_formatted']] = df[['date1', 'date2']].apply(lambda
 
 1.  **名义数据：** 这是指类别仅仅被标记，不能按特定顺序排列。例如性别（男、女）、血型（A、B、AB、O）或颜色（红、绿、蓝）。
 
-1.  **顺序数据：** 这是指类别可以被排序或排名。虽然类别之间的间隔不均等，但类别的顺序具有意义。例如评分尺度（电影的1到5评分）、教育水平（高中、本科、研究生）或癌症阶段（I期、II期、III期）。
+1.  **顺序数据：** 这是指类别可以被排序或排名。虽然类别之间的间隔不均等，但类别的顺序具有意义。例如评分尺度（电影的 1 到 5 评分）、教育水平（高中、本科、研究生）或癌症阶段（I 期、II 期、III 期）。
 
-对于插补缺失的分类数据，通常使用众数。在我们的例子中，property_category列是分类（名义）数据，并且有两个行数据缺失。
+对于插补缺失的分类数据，通常使用众数。在我们的例子中，property_category 列是分类（名义）数据，并且有两个行数据缺失。
 
 我们将用众数替换缺失值。
 
@@ -286,13 +286,13 @@ df[['date1_formatted', 'date2_formatted']] = df[['date1', 'date2']].apply(lambda
 df['property_category'] = df['property_category'].fillna(df['property_category'].mode()[0])
 ```
 
-这段代码使用**fillna()**函数来替换property_category列中的所有NaN值。它用众数替代这些值。
+这段代码使用**fillna()**函数来替换 property_category 列中的所有 NaN 值。它用众数替代这些值。
 
 此外，[0] 部分用于从此系列中提取第一个值。如果存在多个众数，它将选择第一个。如果只有一个众数，它也会正常工作。
 
 这是输出结果。
 
-![掌握 Python 中的数据清洗艺术](../Images/d5a4dc6cfbcae664ee2ba044bfc1cf82.png)
+![掌握 Python 中的数据清洗艺术](img/d5a4dc6cfbcae664ee2ba044bfc1cf82.png)
 
 现在数据看起来相当不错。剩下的唯一任务是检查是否有异常值。
 
@@ -325,7 +325,7 @@ sns.boxplot(data=df[['advertised_price', 'sale_price']])
 
 然后我们为广告价格和销售价格列创建箱线图，如下所示。
 
-![掌握 Python 中的数据清洗艺术](../Images/eab301802d2a19402b4de84b5a41005f.png)
+![掌握 Python 中的数据清洗艺术](img/eab301802d2a19402b4de84b5a41005f.png)
 
 可以通过将此添加到上述代码来改进图表，以便更容易使用。
 
@@ -343,25 +343,25 @@ plt.gca().yaxis.set_major_formatter(formatter)
 
 现在输出结果如下。
 
-![掌握 Python 中的数据清洗艺术](../Images/484a574270a0fdf86aa68c9650010659.png)
+![掌握 Python 中的数据清洗艺术](img/484a574270a0fdf86aa68c9650010659.png)
 
 那么，我们如何识别和去除异常值呢？
 
 其中一种方法是使用 IQR 方法。
 
-IQR，即四分位距，是一种统计方法，用于通过将数据集划分为四分位数来测量变异性。四分位数将按顺序排列的数据集分为四个相等的部分，第一个四分位数（25百分位数）和第三个四分位数（75百分位数）之间的值构成了四分位距。
+IQR，即四分位距，是一种统计方法，用于通过将数据集划分为四分位数来测量变异性。四分位数将按顺序排列的数据集分为四个相等的部分，第一个四分位数（25 百分位数）和第三个四分位数（75 百分位数）之间的值构成了四分位距。
 
 四分位距用于识别数据中的异常值。其工作原理如下：
 
-1.  首先，计算第一个四分位数（Q1），第三个四分位数（Q3），然后确定IQR。IQR的计算公式是Q3 - Q1。
+1.  首先，计算第一个四分位数（Q1），第三个四分位数（Q3），然后确定 IQR。IQR 的计算公式是 Q3 - Q1。
 
-1.  任何低于Q1 - 1.5IQR或高于Q3 + 1.5IQR的值都被视为异常值。
+1.  任何低于 Q1 - 1.5IQR 或高于 Q3 + 1.5IQR 的值都被视为异常值。
 
-在我们的箱线图上，箱体实际上代表了IQR。箱体内的线是中位数（或第二四分位数）。箱线图的“胡须”表示距离Q1和Q3的1.5*IQR范围内的范围。
+在我们的箱线图上，箱体实际上代表了 IQR。箱体内的线是中位数（或第二四分位数）。箱线图的“胡须”表示距离 Q1 和 Q3 的 1.5*IQR 范围内的范围。
 
-任何超出这些“胡须”的数据点都可以被视为异常值。在我们的案例中，就是$12,000,000的值。如果你查看箱线图，你会清楚地看到这一点，这显示了数据可视化在检测异常值中的重要性。
+任何超出这些“胡须”的数据点都可以被视为异常值。在我们的案例中，就是$12,000,000 的值。如果你查看箱线图，你会清楚地看到这一点，这显示了数据可视化在检测异常值中的重要性。
 
-现在，让我们通过使用Python代码中的IQR方法来去除异常值。首先，我们将去除advertised price的异常值。
+现在，让我们通过使用 Python 代码中的 IQR 方法来去除异常值。首先，我们将去除 advertised price 的异常值。
 
 ```py
 Q1 = df['advertised_price'].quantile(0.25)
@@ -370,17 +370,17 @@ IQR = Q3 - Q1
 df = df[~((df['advertised_price'] < (Q1 - 1.5 * IQR)) |(df['advertised_price'] > (Q3 + 1.5 * IQR)))]
 ```
 
-我们首先使用**quantile()**函数计算第一个四分位数（即第25百分位数）。对第三个四分位数或第75百分位数也进行相同操作。
+我们首先使用**quantile()**函数计算第一个四分位数（即第 25 百分位数）。对第三个四分位数或第 75 百分位数也进行相同操作。
 
-它们显示了25%和75%的数据分别落在的值。
+它们显示了 25%和 75%的数据分别落在的值。
 
-然后我们计算四分位数之间的差异。到目前为止，一切都是将IQR步骤转化为Python代码。
+然后我们计算四分位数之间的差异。到目前为止，一切都是将 IQR 步骤转化为 Python 代码。
 
-最后一步，我们去除异常值。换句话说，去除所有小于Q1 - 1.5 * IQR或大于Q3 + 1.5 * IQR的数据。
+最后一步，我们去除异常值。换句话说，去除所有小于 Q1 - 1.5 * IQR 或大于 Q3 + 1.5 * IQR 的数据。
 
 '~'运算符否定条件，因此我们只保留不是异常值的数据。
 
-然后我们可以对sale price做同样的处理。
+然后我们可以对 sale price 做同样的处理。
 
 ```py
 Q1 = df['sale_price'].quantile(0.25)
@@ -399,9 +399,9 @@ for column in ['advertised_price', 'sale_price']:
     df = df[~((df[column] < (Q1 - 1.5 * IQR)) |(df[column] > (Q3 + 1.5 * IQR)))]
 ```
 
-循环遍历两列。对于每一列，它计算IQR，然后从数据框中删除相应的行。
+循环遍历两列。对于每一列，它计算 IQR，然后从数据框中删除相应的行。
 
-请注意，这一操作是顺序进行的，首先处理advertised_price，然后处理sale_price。因此，数据框在每一列中都会就地修改，行可能会因为在任一列中是异常值而被删除。因此，这一操作可能导致行数少于分别去除advertised_price和sale_price中的异常值后再合并结果的行数。
+请注意，这一操作是顺序进行的，首先处理 advertised_price，然后处理 sale_price。因此，数据框在每一列中都会就地修改，行可能会因为在任一列中是异常值而被删除。因此，这一操作可能导致行数少于分别去除 advertised_price 和 sale_price 中的异常值后再合并结果的行数。
 
 在我们的例子中，两种情况的输出将是相同的。要查看箱线图的变化，我们需要使用之前相同的代码再次绘制。
 
@@ -417,9 +417,9 @@ plt.gca().yaxis.set_major_formatter(formatter)
 
 这是输出结果。
 
-![掌握 Python 数据清理的艺术](../Images/02a67feb20614804d7f213806b8ba6c4.png)
+![掌握 Python 数据清理的艺术](img/02a67feb20614804d7f213806b8ba6c4.png)
 
-你可以通过解决[General Assembly 面试题](https://platform.stratascratch.com/coding/9611-find-the-80th-percentile-of-hours-studied?code_type=2&utm_source=blog&utm_medium=click&utm_campaign=kdn+data+cleaning)来练习在Python中计算百分位数。
+你可以通过解决[General Assembly 面试题](https://platform.stratascratch.com/coding/9611-find-the-80th-percentile-of-hours-studied?code_type=2&utm_source=blog&utm_medium=click&utm_campaign=kdn+data+cleaning)来练习在 Python 中计算百分位数。
 
 # 结论
 
@@ -445,4 +445,4 @@ plt.gca().yaxis.set_major_formatter(formatter)
 
 +   [数据讲述 - 通过数据讲故事的艺术](https://www.kdnuggets.com/2023/07/manning-data-storytelling-the-art-telling-stories-data.html)
 
-+   [掌握数据故事讲述艺术的7个步骤](https://www.kdnuggets.com/7-steps-to-master-the-art-of-data-storytelling)
++   [掌握数据故事讲述艺术的 7 个步骤](https://www.kdnuggets.com/7-steps-to-master-the-art-of-data-storytelling)

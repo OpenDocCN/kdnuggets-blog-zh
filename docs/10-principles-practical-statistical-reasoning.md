@@ -1,12 +1,12 @@
-# 实用统计推理的10个原则
+# 实用统计推理的 10 个原则
 
-> 原文：[https://www.kdnuggets.com/2020/11/10-principles-practical-statistical-reasoning.html](https://www.kdnuggets.com/2020/11/10-principles-practical-statistical-reasoning.html)
+> 原文：[`www.kdnuggets.com/2020/11/10-principles-practical-statistical-reasoning.html`](https://www.kdnuggets.com/2020/11/10-principles-practical-statistical-reasoning.html)
 
-[评论](#comments)
+评论
 
 **[Neil Chandarana](https://www.linkedin.com/in/neil-chandarana-369b3957/)，机器学习**
 
-![图](../Images/5afa0789466c7c2ba17970d60068d365.png)
+![图](img/5afa0789466c7c2ba17970d60068d365.png)
 
 [Andreas Brücker](https://unsplash.com/@andreasbruecker?utm_source=medium&utm_medium=referral)拍摄的照片，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
@@ -34,7 +34,7 @@
 
 1.  详细的统计方法，其中得出的结论仅在特定领域内有用。
 
-在自己做数据科学项目的3年和在交易所操作数据的3.5年后，还有一个额外的学习类别。它与上述同样有用，我将其融入到**每一个**项目/副业/咨询工作中…
+在自己做数据科学项目的 3 年和在交易所操作数据的 3.5 年后，还有一个额外的学习类别。它与上述同样有用，我将其融入到**每一个**项目/副业/咨询工作中…
 
 **实用统计推理**
 
@@ -98,7 +98,7 @@
 
 注意：小数据集可以轻松检查数据结构，而大数据集可能只能对结构的少部分进行分析。将这一点纳入你的分析中，并根据需要花费时间。
 
-### **5 — 统计分析的4个阶段**
+### **5 — 统计分析的 4 个阶段**
 
 1.  **初步数据处理。**意图 = 检查数据质量、结构和数量，并将数据汇总为详细分析的形式。
 
@@ -112,9 +112,9 @@
 
 +   阶段的划分是有用的，但不是严格的。初步分析可能得出明确结论，而最终分析可能揭示意外的差异，需要重新考虑分析的整体基础。
 
-+   在给定清理过的数据集时跳过1。
++   在给定清理过的数据集时跳过 1。
 
-+   在已有大量现有分析的领域中跳过2。
++   在已有大量现有分析的领域中跳过 2。
 
 ### **6 — 输出是什么？**
 
@@ -198,7 +198,7 @@
 
 实用统计推理涉及到“系统”。系统的某些部分无法脱离上下文来确定。有些部分可以。实用统计推理实际上只是能够轻松且熟练地定义你的“系统”的能力。这种能力绝对不仅限于这些原则。
 
-*如果你想看到编程/数据科学方面的副业展示在你面前，请查看我的*[*YouTube频道*](https://www.youtube.com/watch?v=s4cQMryKwqA&t=324s)*，我在其中发布了完整的Python构建过程。*
+*如果你想看到编程/数据科学方面的副业展示在你面前，请查看我的*[*YouTube 频道*](https://www.youtube.com/watch?v=s4cQMryKwqA&t=324s)*，我在其中发布了完整的 Python 构建过程。*
 
 *目标是激励和合作，所以请与我联系！*
 
@@ -208,19 +208,19 @@
 
 **相关：**
 
-+   [联合分析：入门](/2017/11/conjoint-analysis-primer.html)
++   联合分析：入门
 
-+   [使用Python进行探索性数据分析](/2019/08/activestate-exploratory-data-analysis-python.html)
++   使用 Python 进行探索性数据分析
 
-+   [类固醇中的探索性数据分析](/2020/07/exploratory-data-analysis-steroids.html)
++   类固醇中的探索性数据分析
 
 ### 更多相关话题
 
-+   [Orca LLM：模拟ChatGPT的推理过程](https://www.kdnuggets.com/2023/06/orca-llm-reasoning-processes-chatgpt.html)
++   [Orca LLM：模拟 ChatGPT 的推理过程](https://www.kdnuggets.com/2023/06/orca-llm-reasoning-processes-chatgpt.html)
 
-+   [ReAct，推理与行动通过工具增强了LLMs！](https://www.kdnuggets.com/react-reasoning-and-acting-augments-llms-with-tools)
++   [ReAct，推理与行动通过工具增强了 LLMs！](https://www.kdnuggets.com/react-reasoning-and-acting-augments-llms-with-tools)
 
-+   [增强LLM推理：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
++   [增强 LLM 推理：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
 
 +   [思想传播：复杂推理的类比方法…](https://www.kdnuggets.com/thought-propagation-an-analogical-approach-to-complex-reasoning-with-large-language-models)
 

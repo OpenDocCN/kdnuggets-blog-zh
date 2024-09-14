@@ -1,12 +1,12 @@
 # 用可视化调试器容器化 Jupyter
 
-> 原文：[https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html](https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html)
+> 原文：[`www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html`](https://www.kdnuggets.com/2020/04/dockerize-jupyter-visual-debugger.html)
 
-[评论](#comments)
+评论
 
 **作者：[Manish Tiwari](https://www.linkedin.com/in/manish-kumar-tiwari/)，数据爱好者**
 
-![图示](../Images/b9e0fd2862820e4423939d8b443837c6.png)
+![图示](img/b9e0fd2862820e4423939d8b443837c6.png)
 
 图片来源：[Nilantha Ilangamuwa](https://unsplash.com/@ilangamuwa?utm_source=medium&utm_medium=referral) 来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -18,7 +18,7 @@ Jupyter 最近宣布了期待已久的可视化调试器的首次公开发布。
 
 如需简要了解可视化调试器的实际效果，请参考下面的视频演示：
 
-![图示](../Images/94d10f5444d449de1cebb00591f968a3.png)
+![图示](img/94d10f5444d449de1cebb00591f968a3.png)
 
 视频演示：[Jeremy](https://github.com/jtpio) 提供，见 [Github](https://github.com/jupyterlab/debugger/blob/master/screencast.gif)
 
@@ -80,7 +80,7 @@ FROM continuumio/miniconda3
 定义 Docker 文件和工作目录的元数据：
 
 ```py
-LABEL maintainer=”Manish Tiwari <m***[@gmail.com](mailto:mtiwari5@gmail.com)>”
+LABEL maintainer=”Manish Tiwari <m***@gmail.com>”
 LABEL version=”0.1"
 LABEL description=”Debugging Jupyter Notebook”WORKDIR /jup
 ```
@@ -135,7 +135,7 @@ docker image ls
 
 输出应如下所示：
 
-![](../Images/4d9348c00df9a889ea45e8f5a9d13fed.png)
+![](img/4d9348c00df9a889ea45e8f5a9d13fed.png)
 
 现在在新容器中运行 Docker 镜像，如下所示：
 
@@ -147,7 +147,7 @@ docker container run -p 8888:8888 visualdebugger-jupyter
 
 运行上述命令后，你应该看到如下输出（前提是端口未被其他进程占用）：
 
-![](../Images/52ee4e3c29d5a884d81fa56bd5e5c92f.png)
+![](img/52ee4e3c29d5a884d81fa56bd5e5c92f.png)
 
 这意味着我们的 docker 容器正在运行。你现在可以打开上面指定的 URL，并使用 Jupyter 和可视化调试器，而不需要意识到它并未在主机上运行。
 
@@ -159,11 +159,11 @@ docker container ls
 
 上面的命令应该会列出容器及其元数据，如下所示：
 
-![](../Images/23094ef9780246a9158aed1a0794f675.png)
+![](img/23094ef9780246a9158aed1a0794f675.png)
 
 一旦你打开上面输出的 URL，你应该能看到 JupyterLab 在主机的 localhost 和 8888 端口上运行。
 
-![图](../Images/109e93190201264d560fd95d2bad0e59.png)
+![图](img/109e93190201264d560fd95d2bad0e59.png)
 
 在容器中运行的带有可视化调试器的 JupyterLab
 
@@ -191,22 +191,22 @@ docker pull beingmanish/visualdebugger-jupyter
 
 **相关:**
 
-+   [4 个最佳 Jupyter Notebook 深度学习环境](/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)
++   4 个最佳 Jupyter Notebook 深度学习环境
 
-+   [5 个 Google Colaboratory 小贴士](/2020/03/5-google-colaboratory-tips.html)
++   5 个 Google Colaboratory 小贴士
 
-+   [GitHub Python 数据科学焦点：高级机器学习与 NLP，集成方法，命令行可视化与 Docker 简化](/2018/10/github-python-data-science-spotlight.html)
++   GitHub Python 数据科学焦点：高级机器学习与 NLP，集成方法，命令行可视化与 Docker 简化
 
 ### 更多相关内容
 
 +   [数据科学的基础数学：奇异值分解的可视化介绍](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)
 
-+   [构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
 +   [Visual ChatGPT: 微软结合 ChatGPT 和 VFMs](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
 
 +   [人工智能：大规模语言模型与视觉模型](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)
 
-+   [构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [通过集成 Jupyter 和 KNIME 缩短实施时间](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)

@@ -1,22 +1,22 @@
 # 了解机器学习算法：深度概述
 
-> 原文：[https://www.kdnuggets.com/understanding-machine-learning-algorithms-an-indepth-overview](https://www.kdnuggets.com/understanding-machine-learning-algorithms-an-indepth-overview)
+> 原文：[`www.kdnuggets.com/understanding-machine-learning-algorithms-an-indepth-overview`](https://www.kdnuggets.com/understanding-machine-learning-algorithms-an-indepth-overview)
 
-![了解机器学习算法：深度概述](../Images/93b28c38bd10198f3e9fa90064a89e23.png)
+![了解机器学习算法：深度概述](img/93b28c38bd10198f3e9fa90064a89e23.png)
 
 图片由作者提供
 
-机器学习。相当令人印象深刻的词汇，对吧？由于AI及其工具，如`ChatGPT`和Bard，目前正在蓬勃发展，是时候深入学习基础知识了。
+机器学习。相当令人印象深刻的词汇，对吧？由于 AI 及其工具，如`ChatGPT`和 Bard，目前正在蓬勃发展，是时候深入学习基础知识了。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求。
 
 * * *
 
@@ -88,7 +88,7 @@
 
 ## A. 决策树
 
-![理解机器学习算法：深入概述](../Images/7a0a8de231182d770ea62d183dc809e8.png)
+![理解机器学习算法：深入概述](img/7a0a8de231182d770ea62d183dc809e8.png)
 
 图片来源：作者
 
@@ -100,7 +100,7 @@
 
 ## B. 支持向量机（SVM）
 
-![理解机器学习算法：深入概述](../Images/70ad11a9f1f2e9fb0d4d7dba771a634d.png)
+![理解机器学习算法：深入概述](img/70ad11a9f1f2e9fb0d4d7dba771a634d.png)
 
 图片来源：作者
 
@@ -110,27 +110,27 @@
 
 它们找出最有效的“超平面”或边界，将数据分成不同的簇，同时保持与最近的数据点的最大距离。
 
-[这里](https://www.stratascratch.com/blog/machine-learning-algorithms-explained-support-vector-machine/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+algorithms)你可以找到更多关于SVM的信息。
+[这里](https://www.stratascratch.com/blog/machine-learning-algorithms-explained-support-vector-machine/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+algorithms)你可以找到更多关于 SVM 的信息。
 
 ## C. K-最近邻（KNN）
 
-![理解机器学习算法：深入概述](../Images/ab260b6a39b0901ae2759d94ece7ebf8.png)
+![理解机器学习算法：深入概述](img/ab260b6a39b0901ae2759d94ece7ebf8.png)
 
 图片来源：作者
 
-接下来是K-最近邻（KNN），一个友好且社交的算法。
+接下来是 K-最近邻（KNN），一个友好且社交的算法。
 
 想象一下搬到一个新城市，并尝试弄清楚它是安静的还是忙碌的。
 
 监控你最近的邻居以获取理解似乎是合乎逻辑的行动。
 
-类似地，KNN根据数据集中其近邻的参数（如k）对新数据进行分类。
+类似地，KNN 根据数据集中其近邻的参数（如 k）对新数据进行分类。
 
-[这里](https://www.stratascratch.com/blog/machine-learning-algorithms-you-should-know-for-data-science/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+algorithms)你可以了解更多关于KNN的信息。
+[这里](https://www.stratascratch.com/blog/machine-learning-algorithms-you-should-know-for-data-science/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+algorithms)你可以了解更多关于 KNN 的信息。
 
 ## D. 线性回归
 
-![理解机器学习算法：深入概述](../Images/6af3433504cb43553efe773c44cc7879.png)
+![理解机器学习算法：深入概述](img/6af3433504cb43553efe773c44cc7879.png)
 
 图片来源：作者
 
@@ -170,7 +170,7 @@
 
 理想的算法有时在实际应用中可能表现不如理论中的表现。你拥有的数据量、可用的计算资源和对结果的需求都起着重要作用。
 
-记住某些算法，如KNN，在处理大数据集时可能表现不佳，而其他算法，如朴素贝叶斯，可能在复杂数据上表现良好。
+记住某些算法，如 KNN，在处理大数据集时可能表现不佳，而其他算法，如朴素贝叶斯，可能在复杂数据上表现良好。
 
 ## D. 切勿低估评估
 
@@ -204,7 +204,7 @@
 
 +   [理解监督学习：理论与概述](https://www.kdnuggets.com/understanding-supervised-learning-theory-and-overview)
 
-+   [Pythia：16个大型语言模型的套件用于深入研究](https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html)
++   [Pythia：16 个大型语言模型的套件用于深入研究](https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html)
 
 +   [功能数据中异常检测的密度核深度](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)
 

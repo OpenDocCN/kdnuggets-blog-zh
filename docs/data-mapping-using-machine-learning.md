@@ -1,22 +1,22 @@
 # 使用机器学习进行数据映射
 
-> 原文：[https://www.kdnuggets.com/2019/09/data-mapping-using-machine-learning.html](https://www.kdnuggets.com/2019/09/data-mapping-using-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/09/data-mapping-using-machine-learning.html`](https://www.kdnuggets.com/2019/09/data-mapping-using-machine-learning.html)
 
-[评论](#comments)![图](../Images/b2c80e116ced5411e7df06c7140efcf8.png)
+评论![图](img/b2c80e116ced5411e7df06c7140efcf8.png)
 
 ### 使用机器学习进行数据映射
 
-从小型到大型企业，几乎每家公司都在争夺获得受众注意的机会。20年前的常规营销活动现在已经不再奏效。为了走在前沿并超越竞争对手，你通常需要直接面向源头进行市场营销，尤其是当你的目标群体是千禧一代时。
+从小型到大型企业，几乎每家公司都在争夺获得受众注意的机会。20 年前的常规营销活动现在已经不再奏效。为了走在前沿并超越竞争对手，你通常需要直接面向源头进行市场营销，尤其是当你的目标群体是千禧一代时。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -66,15 +66,15 @@
 
 **相关：**
 
-+   [6 个逐渐重视预测分析和预测的行业](/2019/05/6-industries-warming-up-predictive-analytics-forecasting.html)
++   6 个逐渐重视预测分析和预测的行业
 
-+   [如何说服你的老板数据分析的必要性](/2019/08/sell-boss-need-data-analytics.html)
++   如何说服你的老板数据分析的必要性
 
-+   [如何展示你的数据科学工作的影响](/2019/07/showcase-impact-data-science-work.html)
++   如何展示你的数据科学工作的影响
 
 ### 相关阅读
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日：讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [SQL 和面向对象的关系映射（ORM）之间的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
 

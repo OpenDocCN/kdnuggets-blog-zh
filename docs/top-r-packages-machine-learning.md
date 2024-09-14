@@ -1,6 +1,6 @@
 # 机器学习的顶级 R 包
 
-> 原文：[https://www.kdnuggets.com/2017/02/top-r-packages-machine-learning.html](https://www.kdnuggets.com/2017/02/top-r-packages-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2017/02/top-r-packages-machine-learning.html`](https://www.kdnuggets.com/2017/02/top-r-packages-machine-learning.html)
 
 **由 [Michael Li](https://github.com/tianhuil/) 和 [Paul Paczuski](https://github.com/pavopax/)，The Data Incubator。**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 最受欢迎的机器学习包有哪些？让我们来看看基于包下载和社交网站活动的排名。
 
-[![](../Images/0e48367a690c9753364992b3ea8e1eb3.png)](https://github.com/thedataincubator/data-science-blogs/blob/master/img/rank.png)
+![](https://github.com/thedataincubator/data-science-blogs/blob/master/img/rank.png)
 
 *值得注意的：OneR: 1 (SO); mlr: 2 (Github); ranger: 4 (Github); SuperLearner: 5 (Github)*
 
@@ -60,7 +60,7 @@
 
 询问周围的人有所帮助。一位朋友向我们推荐了 ["CRAN 任务视图：机器学习与统计学习"](https://cran.r-project.org/web/views/MachineLearning.html)，它在底部有一个很好的列表，并且易于抓取。
 
-它的优点在于，软件包列表来自权威来源（CRAN 是“官方” R 包存储库），并且定期更新（最后更新时间：2017年1月6日）。感谢作者，[托斯滕·霍瑟恩](http://user.math.uzh.ch/hothorn/)，他通过电子邮件也非常响应。
+它的优点在于，软件包列表来自权威来源（CRAN 是“官方” R 包存储库），并且定期更新（最后更新时间：2017 年 1 月 6 日）。感谢作者，[托斯滕·霍瑟恩](http://user.math.uzh.ch/hothorn/)，他通过电子邮件也非常响应。
 
 之前的想法是使用 Google 查找“顶级 R 机器学习包”的列表，然后尝试抓取所有包名称，进行合并，并将该列表作为起点。但抛开工程任务，我们还发现当前可用的列表相对于我们的需求质量较差。它们过时，没有明确指定方法，且往往非常主观。
 
@@ -104,13 +104,13 @@
 
 所有数据于 2017 年 1 月 19 日下载。CRAN 下载量数据来自过去 365 天：2016 年 1 月 19 日至 2017 年 1 月 19 日。
 
-### 数据科学的顶级R包？
+### 数据科学的顶级 R 包？
 
 这个项目起初是对“数据科学”顶级包的排名，但我们很快发现范围太广。
 
-数据科学家做许多不同的工作，你几乎可以将任何R包归类为帮助数据科学家的工具。我们是否应该包括字符串处理包？数据库读取包怎么样？
+数据科学家做许多不同的工作，你几乎可以将任何 R 包归类为帮助数据科学家的工具。我们是否应该包括字符串处理包？数据库读取包怎么样？
 
-另一个更长的项目可以是使用更多的“数据科学”来制定一个关于“数据科学”顶级R包的排名。
+另一个更长的项目可以是使用更多的“数据科学”来制定一个关于“数据科学”顶级 R 包的排名。
 
 ### 资源
 
@@ -124,22 +124,22 @@
 
 **相关：**
 
-+   [按受欢迎程度排列的前20个R包](/2015/06/top-20-r-packages.html)
++   按受欢迎程度排列的前 20 个 R 包
 
-+   [R中的ARIMA预测介绍](/2017/01/datascience-introduction-forecasting-arima-r.html)
++   R 中的 ARIMA 预测介绍
 
-+   [利用Anaconda轻松构建和分享R包](/2015/09/continuum-r-packages-made-easy-anaconda.html)
++   利用 Anaconda 轻松构建和分享 R 包
 
 ### 更多相关话题
 
-+   [2023年需要了解的顶级数据Python包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
++   [2023 年需要了解的顶级数据 Python 包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
 
-+   [3个用于数据可视化的Julia包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
++   [3 个用于数据可视化的 Julia 包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
 
-+   [5个用于地理空间数据分析的Python包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
++   [5 个用于地理空间数据分析的 Python 包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
-+   [每个机器学习工程师都应该掌握的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该掌握的 5 项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)

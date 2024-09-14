@@ -1,16 +1,16 @@
 # 令人惊叹的低代码机器学习功能与新的 Ludwig 更新
 
-> 原文：[https://www.kdnuggets.com/2021/06/ludwig-update-includes-low-code-machine-learning-capabilities.html](https://www.kdnuggets.com/2021/06/ludwig-update-includes-low-code-machine-learning-capabilities.html)
+> 原文：[`www.kdnuggets.com/2021/06/ludwig-update-includes-low-code-machine-learning-capabilities.html`](https://www.kdnuggets.com/2021/06/ludwig-update-includes-low-code-machine-learning-capabilities.html)
 
-[评论](#comments)
+评论
 
-![](../Images/6f2248f00bd3292b0311bb20c4c81a80.png)
+![](img/6f2248f00bd3292b0311bb20c4c81a80.png)
 
 **图片来源：Ludwig**
 
 > 我最近启动了一个新的新闻通讯，专注于 AI 教育，**已经有超过 50,000 名订阅者**。TheSequence 是一个不含废话（即没有炒作，没有新闻等）的 AI 专注型新闻通讯，阅读时间为 5 分钟。目标是让你了解最新的机器学习项目、研究论文和概念。请通过下面的订阅试试看：
 
-[![图片](../Images/f2aed90f956dea213be7c9bbf9cd7072.png)](https://thesequence.substack.com/)
+![图片](https://thesequence.substack.com/)
 
 如果你关注这个博客，你会知道我非常喜欢 Ludwig 开源项目。最初由 Uber 孵化，现在成为 Linux AI Foundation 的一部分，Ludwig 提供了当前市场上最好的低代码机器学习(ML)堆栈之一。上周，Ludwig 的 0.4 版本已开源，并包含一组酷炫的功能，这些功能可能使其在实际机器学习解决方案中更具优势。
 
@@ -32,7 +32,7 @@
 
 Ludwig 的发展轨迹专注于使基于配置的声明性模型能够与当前市场上的顶级机器学习堆栈互动。从这个角度来看，Ludwig 为希望在解决方案中利用最佳机器学习框架的数据科学团队提供了一个简单且一致的体验。
 
-![](../Images/bae0d11b0a17a7239ebcfeb4bb5d746d.png)
+![](img/bae0d11b0a17a7239ebcfeb4bb5d746d.png)
 
 图片来源：Ludwig
 
@@ -60,34 +60,34 @@ MLflow 正迅速成为最受欢迎的机器学习实验跟踪和模型服务平�
 
 **相关内容：**
 
-+   [DeepMind 想要重新构想机器学习中最重要的算法之一](/2021/05/deepmind-reimagine-important-algorithms-machine-learning.html)
++   DeepMind 想要重新构想机器学习中最重要的算法之一
 
-+   [用于解释和比较机器学习模型的仪表板](/2021/06/dashboards-interpreting-comparing-machine-learning-models.html)
++   用于解释和比较机器学习模型的仪表板
 
-+   [机器学习数据集选择的九大致命错误](/2021/06/9-deadly-sins-ml-dataset-selection.html)
++   机器学习数据集选择的九大致命错误
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 ### 相关话题
 
-+   [预测未来事件：AI和ML的能力与局限](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)
++   [预测未来事件：AI 和 ML 的能力与局限](https://www.kdnuggets.com/2023/06/forecasting-future-events-capabilities-limitations-ai-ml.html)
 
-+   [2023年你应该了解的10个惊人机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
++   [2023 年你应该了解的 10 个惊人机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
 
-+   [通过Python图形库制作惊人的可视化](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)
++   [通过 Python 图形库制作惊人的可视化](https://www.kdnuggets.com/2022/12/make-amazing-visualizations-python-graph-gallery.html)
 
-+   [获取数据科学项目的10个惊人网站](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)
++   [获取数据科学项目的 10 个惊人网站](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)
 
-+   [2023年你需要尝试的5个惊人且免费的LLM游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
++   [2023 年你需要尝试的 5 个惊人且免费的 LLM 游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
 
-+   [如何更新Python字典](https://www.kdnuggets.com/2023/02/update-python-dictionary.html)
++   [如何更新 Python 字典](https://www.kdnuggets.com/2023/02/update-python-dictionary.html)

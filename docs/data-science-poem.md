@@ -1,12 +1,12 @@
 # 数据科学诗
 
-> 原文：[https://www.kdnuggets.com/2019/05/data-science-poem.html](https://www.kdnuggets.com/2019/05/data-science-poem.html)
+> 原文：[`www.kdnuggets.com/2019/05/data-science-poem.html`](https://www.kdnuggets.com/2019/05/data-science-poem.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Igor Korolev, DO, PhD](https://www.linkedin.com/in/igor2k/)，Brainformatika**
 
-![数据科学家](../Images/03e8a1c2e86e6b267f15b13af7c0c490.png)
+![数据科学家](img/03e8a1c2e86e6b267f15b13af7c0c490.png)
 
 [图片来源](https://www.kdnuggets.com/2014/12/data-scientist-owning-up-title.html)。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -52,7 +52,7 @@ Tableau、SAS 和 SQL。
 
 找到最有效的参数
 
-使用AUC、召回率和精度进行评估
+使用 AUC、召回率和精度进行评估
 
 提供有助于决策的见解
 
@@ -64,12 +64,12 @@ Tableau、SAS 和 SQL。
 
 +   [停止学习数据科学以寻找目的，并找到目的以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学基础：你需要知道的10项必备技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：你需要知道的 10 项必备技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：一组独特的名言…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目以学习5项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目以学习 5 项关键数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets新闻，11月30日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)

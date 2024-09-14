@@ -1,6 +1,6 @@
 # SQL 中最被低估的函数
 
-> 原文：[https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html](https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html)
+> 原文：[`www.kdnuggets.com/2017/03/most-underutilized-function-sql.html`](https://www.kdnuggets.com/2017/03/most-underutilized-function-sql.html)
 
 **Tristan Handy, Fishtown Analytics 的创始人和总裁。**
 
@@ -10,15 +10,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)
+![SQL](img/7b90faf67d8c5a9b93c5838add6004a0.png)
 
 这是什么？ **md5()**。如果你不熟悉，这里有一个来自 Redshift 文档的示例代码片段：
 
@@ -98,11 +98,11 @@ insight_id
 
 **相关内容：**
 
-+   [掌握数据科学 SQL 的 7 个步骤](/2016/06/seven-steps-mastering-sql-data-science.html)
++   掌握数据科学 SQL 的 7 个步骤
 
-+   [让 Python 用 pandasql 说 SQL](/2017/02/python-speak-sql-pandasql.html)
++   让 Python 用 pandasql 说 SQL
 
-+   [用 SQL 做统计](/2016/08/doing-statistics-sql.html)
++   用 SQL 做统计
 
 ### 更多相关主题
 

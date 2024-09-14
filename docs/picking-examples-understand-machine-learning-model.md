@@ -1,8 +1,8 @@
 # 挑选示例以理解机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)
+> 原文：[`www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html`](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)
 
-![挑选示例以理解你的机器学习模型](../Images/9ac344170867fbb2fefa67b5f52b56fa.png)
+![挑选示例以理解你的机器学习模型](img/9ac344170867fbb2fefa67b5f52b56fa.png)
 
 照片由 [Skylar Zilka](https://unsplash.com/@skylarjaybird?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/picking?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -36,21 +36,21 @@
 
 通过分解机器学习模型中每个特征的权重来解释给定样本的预测。
 
-![挑选示例以理解你的机器学习模型](../Images/7ac71f008c044c21aa6ab35f4bbd0753.png)
+![挑选示例以理解你的机器学习模型](img/7ac71f008c044c21aa6ab35f4bbd0753.png)
 
 图片由作者提供
 
 全局可解释性包括测量特征对模型预测的重要性。这种可解释性通常如下所示：
 
-![挑选示例以理解你的机器学习模型](../Images/5c013b36f38266d22ce85b211f6b7172.png)
+![挑选示例以理解你的机器学习模型](img/5c013b36f38266d22ce85b211f6b7172.png)
 
 图片由作者提供
 
 现在我们已经快速介绍了可解释性的概念，让我们回到关于挑选的疑问。
 
-为了说明这一点，我们使用了[**Shapash**](https://github.com/MAIF/shapash)，这是一个关于可解释性的开源Python库。你可以在这篇[**文章**](https://pub.towardsai.net/shapash-making-ml-models-understandable-by-everyone-8f96ad469eb3)中找到Shapash的一般介绍。
+为了说明这一点，我们使用了[**Shapash**](https://github.com/MAIF/shapash)，这是一个关于可解释性的开源 Python 库。你可以在这篇[**文章**](https://pub.towardsai.net/shapash-making-ml-models-understandable-by-everyone-8f96ad469eb3)中找到 Shapash 的一般介绍。
 
-下面的插图基于著名的Kaggle数据集：**“**[**泰坦尼克号**](https://www.kaggle.com/competitions/titanic/overview)**”**（用于分类）和**“**[**房价**](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)**”**（用于回归）。
+下面的插图基于著名的 Kaggle 数据集：**“**[**泰坦尼克号**](https://www.kaggle.com/competitions/titanic/overview)**”**（用于分类）和**“**[**房价**](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)**”**（用于回归）。
 
 # 为什么选择样本？
 
@@ -100,7 +100,7 @@
 
 自[**Shapash 版本 2.2.0**](https://github.com/MAIF/shapash/)以来，你可以通过绘制每个样本的模型概率，以其真实标签为函数来识别这些样本，例如：
 
-![选择示例以理解你的机器学习模型](../Images/6bad0c3b5a805b2bee57ceb3fcfa7164.png)
+![选择示例以理解你的机器学习模型](img/6bad0c3b5a805b2bee57ceb3fcfa7164.png)
 
 图 1 作者提供的图像
 
@@ -110,7 +110,7 @@
 
 对于回归分析，将预测值与真实值绘制在一起有助于直接识别和研究模型返回的最佳或最差预测。
 
-![选择示例以理解你的机器学习模型](../Images/9ace29b46e7b3b6efaa221f743587202.png)
+![选择示例以理解你的机器学习模型](img/9ace29b46e7b3b6efaa221f743587202.png)
 
 图 2 作者提供的图像
 
@@ -118,7 +118,7 @@
 
 对于二分类问题，子集可以集中在所有被预测为类别 1 但实际上是类别 0 的点（即“假阴性”子群体）。
 
-![选择示例以理解你的机器学习模型](../Images/6ec013c78c1d5a280ed2f2c4238e04e7.png)
+![选择示例以理解你的机器学习模型](img/6ec013c78c1d5a280ed2f2c4238e04e7.png)
 
 作者提供的图像
 
@@ -134,7 +134,7 @@
 
 例如，使用 shapash webapp，你可以在本地图中选择一个你想分析的样本：
 
-![选择示例以理解你的机器学习模型](../Images/a109acd243e86a69d219afca0a89acaa.png)
+![选择示例以理解你的机器学习模型](img/a109acd243e86a69d219afca0a89acaa.png)
 
 作者提供的图像
 
@@ -150,13 +150,13 @@
 
 例如，如果你想在这个应用中放大“假阴性”：
 
-![选择示例以理解你的机器学习模型](../Images/463edd404a548534d9b97e7ef3d8cf4c.png)
+![选择示例以理解你的机器学习模型](img/463edd404a548534d9b97e7ef3d8cf4c.png)
 
 作者提供的图片
 
 你可以查看子集的特征重要性是否与整体人口相似。
 
-对于“假阴性”子群体，“性别”特征对预测的影响（灰色 vs 黄色条形图）有所下降。这可能是由于女性在这个子集中代表性不足。由于“性别”特征的影响减小，其他特征开始发挥作用。我们可以看到许多错误预测依赖于“年龄”变量，对于20至30岁之间的个体。
+对于“假阴性”子群体，“性别”特征对预测的影响（灰色 vs 黄色条形图）有所下降。这可能是由于女性在这个子集中代表性不足。由于“性别”特征的影响减小，其他特征开始发挥作用。我们可以看到许多错误预测依赖于“年龄”变量，对于 20 至 30 岁之间的个体。
 
 选择子集而非单一样本的优点在于，我们可以**推广**错误或正确的预测，特别是查看它们在整个群体中的全局可解释性。
 

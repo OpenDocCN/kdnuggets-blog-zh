@@ -1,8 +1,8 @@
 # 数据科学是否是一个即将消亡的职业？
 
-> 原文：[https://www.kdnuggets.com/2022/01/data-science-dying-career.html](https://www.kdnuggets.com/2022/01/data-science-dying-career.html)
+> 原文：[`www.kdnuggets.com/2022/01/data-science-dying-career.html`](https://www.kdnuggets.com/2022/01/data-science-dying-career.html)
 
-![数据科学是否是一个即将消亡的职业？](../Images/76884f689ca8432b7194e77f03ac9c76.png)
+![数据科学是否是一个即将消亡的职业？](img/76884f689ca8432b7194e77f03ac9c76.png)
 
 图片由[cottonbro studio](https://www.pexels.com/photo/yellow-and-black-wooden-cabinet-4835429)提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -28,7 +28,7 @@
 
 我在过去一年里阅读了许多类似的文章。
 
-一些人表示，数据科学家的角色将被如AutoML之类的工具取代，而另一些人则将数据科学称为一个“即将消亡的领域”，将很快被数据工程和机器学习操作等角色取代。
+一些人表示，数据科学家的角色将被如 AutoML 之类的工具取代，而另一些人则将数据科学称为一个“即将消亡的领域”，将很快被数据工程和机器学习操作等角色取代。
 
 作为与数据行业不同领域紧密合作的人，我希望就这个话题提供我的意见，并回答以下问题：
 
@@ -46,9 +46,9 @@
 
 你在这些组织中解决数据驱动问题时采用的大多数方法可能已经被使用过，你可以从网上丰富的资源中借鉴灵感。
 
-此外，像AutoML和DataRobot这样的自动化工具的兴起使得预测建模变得更加容易。
+此外，像 AutoML 和 DataRobot 这样的自动化工具的兴起使得预测建模变得更加容易。
 
-我在一些商业用例中使用DataRobot，它是一个很棒的工具。它会遍历许多值，并为你的模型选择最佳参数，以确保你获得最准确的模型。
+我在一些商业用例中使用 DataRobot，它是一个很棒的工具。它会遍历许多值，并为你的模型选择最佳参数，以确保你获得最准确的模型。
 
 如果预测建模随着时间的推移变得更简单，那么为什么公司仍然需要数据科学家呢？为什么不使用自动化工具和机器学习工程师的组合来管理整个数据科学工作流程呢？
 
@@ -60,11 +60,11 @@
 
 其次，总会有一些问题是自动化工具无法解决的。这些工具有一套固定的算法供你选择，如果你发现一个需要多种方法组合来解决的问题，你将需要手动解决。
 
-尽管这种情况并不常见，但仍然会发生——作为一个组织，你需要雇用足够熟练的人来处理这些问题。此外，像DataRobot这样的工具不能进行数据预处理或模型构建前的繁重工作。
+尽管这种情况并不常见，但仍然会发生——作为一个组织，你需要雇用足够熟练的人来处理这些问题。此外，像 DataRobot 这样的工具不能进行数据预处理或模型构建前的繁重工作。
 
 # 人情味
 
-作为一个曾为初创公司和大型公司创建数据驱动解决方案的人，情况与处理Kaggle数据集的体验非常不同。
+作为一个曾为初创公司和大型公司创建数据驱动解决方案的人，情况与处理 Kaggle 数据集的体验非常不同。
 
 没有固定的问题。通常，你会有一个数据集，并且会给你一个商业问题。你需要找出如何利用客户数据来最大化公司的销售额。
 
@@ -90,8 +90,8 @@
 
 +   [通过西北大学的数据科学学位开启您的职业生涯](https://www.kdnuggets.com/2022/04/nwu-launch-career-northwestern-data-science-degree.html)
 
-+   [2022年8个最佳数据科学课程，助力职业快速提升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
++   [2022 年 8 个最佳数据科学课程，助力职业快速提升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
 
 +   [避免数据科学职业的五大理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [2022年最佳数据科学职业路径](https://www.kdnuggets.com/2022/04/best-data-science-career-tracks-2022.html)
++   [2022 年最佳数据科学职业路径](https://www.kdnuggets.com/2022/04/best-data-science-career-tracks-2022.html)

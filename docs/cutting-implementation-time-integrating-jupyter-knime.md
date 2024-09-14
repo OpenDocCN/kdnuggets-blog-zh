@@ -1,42 +1,42 @@
-# 通过集成Jupyter和KNIME来缩短实施时间
+# 通过集成 Jupyter 和 KNIME 来缩短实施时间
 
-> 原文：[https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)
+> 原文：[`www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html`](https://www.kdnuggets.com/2021/12/cutting-implementation-time-integrating-jupyter-knime.html)
 
-**由 [Mahantesh Pattadkal](https://medium.com/@mpattadkal)，KNIME的数据科学家**
+**由 [Mahantesh Pattadkal](https://medium.com/@mpattadkal)，KNIME 的数据科学家**
 
-数据科学家以在3I结构中创建自己的泡沫而闻名——实施、集成和创新。我个人倾向于最后两个I：集成新技术以进行持续实验和创新以获得显著成果。
+数据科学家以在 3I 结构中创建自己的泡沫而闻名——实施、集成和创新。我个人倾向于最后两个 I：集成新技术以进行持续实验和创新以获得显著成果。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
-我已经使用Jupyter Notebook工作了4-5年，并且对它非常熟悉。另一方面，我与我的队友Paolo分享了很多工作项目，他是构建KNIME工作流的专家。你可能会认为这会是个问题……其实不是！
+我已经使用 Jupyter Notebook 工作了 4-5 年，并且对它非常熟悉。另一方面，我与我的队友 Paolo 分享了很多工作项目，他是构建 KNIME 工作流的专家。你可能会认为这会是个问题……其实不是！
 
-[KNIME Analytics平台](https://www.knime.com/knime-analytics-platform) 和 [Jupyter Notebook](https://jupyter.org/) 都以其解决数据分析问题的视觉吸引力而著称（图1）。Jupyter Notebook通过网页浏览器提供了一个简化的脚本接口，支持40多种编程语言，但它最终仍然是一个主要受Python用户欢迎的编码平台。KNIME Analytics平台完全在图形用户界面上运行，通过拖放操作和[可视化编程](https://en.wikipedia.org/wiki/Visual_programming_language)进行控制。它通过以可视化和透明的工作流表示复杂的数据分析，提供了对逻辑和结构的快速理解。您还可以在KNIME Analytics平台中编写Python代码片段；Jupyter Notebook用户体验简化了代码的输入和执行，结果是一个优化的编码人员UI。现在，想象一下这两个平台的协同作用可以构建出无数可能的应用。
+[KNIME Analytics 平台](https://www.knime.com/knime-analytics-platform) 和 [Jupyter Notebook](https://jupyter.org/) 都以其解决数据分析问题的视觉吸引力而著称（图 1）。Jupyter Notebook 通过网页浏览器提供了一个简化的脚本接口，支持 40 多种编程语言，但它最终仍然是一个主要受 Python 用户欢迎的编码平台。KNIME Analytics 平台完全在图形用户界面上运行，通过拖放操作和[可视化编程](https://en.wikipedia.org/wiki/Visual_programming_language)进行控制。它通过以可视化和透明的工作流表示复杂的数据分析，提供了对逻辑和结构的快速理解。您还可以在 KNIME Analytics 平台中编写 Python 代码片段；Jupyter Notebook 用户体验简化了代码的输入和执行，结果是一个优化的编码人员 UI。现在，想象一下这两个平台的协同作用可以构建出无数可能的应用。
 
-在这篇文章中，我们讨论了两个常见的生活场景，这些场景需要Jupyter Notebook与KNIME Analytics平台的协作，并展示了这种协作的简单性。
+在这篇文章中，我们讨论了两个常见的生活场景，这些场景需要 Jupyter Notebook 与 KNIME Analytics 平台的协作，并展示了这种协作的简单性。
 
-## Jupyter Notebook与KNIME Analytics平台的协作
+## Jupyter Notebook 与 KNIME Analytics 平台的协作
 
 在本节中，我们描述了两个场景以及如何：
 
-+   在KNIME工作流中集成Jupyter Notebook（场景1）
++   在 KNIME 工作流中集成 Jupyter Notebook（场景 1）
 
-+   将KNIME工作流集成到Jupyter代码中（场景2）
++   将 KNIME 工作流集成到 Jupyter 代码中（场景 2）
 
 在**场景 1**中，我的队友[Paolo](https://www.linkedin.com/in/paolo-tamagnini/)负责项目，并在时间压力下请求我帮助实施自定义数据转换，我在 Jupyter Notebook 中完成了这项工作。在这里，我将展示 Paolo 如何将我的 Jupyter 脚本集成到他的 KNIME 工作流中。
 
 在**场景 2**中，我负责项目，仍然受到时间压力的影响，向 Paolo 请求帮助构建一个训练分类模型的工作流，他在 KNIME Analytics Platform 中提供了这个工作流。这里我将展示我如何将 Paolo 的工作流集成到我的 Jupyter Notebook 的 Python 脚本中。
 
-![通过集成 Jupyter 和 KNIME 来缩短实施时间](../Images/f06e875b4d228bd629ea66a6794ebec7.png)
+![通过集成 Jupyter 和 KNIME 来缩短实施时间](img/f06e875b4d228bd629ea66a6794ebec7.png)
 
 图 1：这里展示了两个数据科学工具的用户界面：左侧是[KNIME Analytics Platform](https://www.knime.com/knime-analytics-platform)，右侧是[Jupyter Notebook](https://jupyter.org/)。
 
@@ -48,7 +48,7 @@ Paolo 被要求根据起飞延误对航班进行分类，数据集为[Airline da
 
 构建一个训练和评估机器学习模型的工作流的步骤通常是相同的：导入数据，转换和清洗数据，将其分为训练集和测试集，在训练集上训练选择的机器学习 (ML) 模型，将训练好的模型应用于测试集，并使用选择的评分指标对其性能进行评分。 [Run Jupyter in KNIME](https://kni.me/w/6rzm1Wn3Zsr4NO7-) 工作流将会大致类似于图 2（你可以从[KNIME Hub](https://hub.knime.com/)下载）。
 
-![通过集成 Jupyter 和 KNIME 来缩短实施时间](../Images/8057510e37b7ae02035dcf51139adb69.png)
+![通过集成 Jupyter 和 KNIME 来缩短实施时间](img/8057510e37b7ae02035dcf51139adb69.png)
 
 图 2\. [Run Jupyter in KNIME](https://kni.me/w/6rzm1Wn3Zsr4NO7-) 训练工作流，用于训练和评估 ML 模型以预测航班的起飞延误。
 
@@ -66,7 +66,7 @@ Paolo 被要求根据起飞延误对航班进行分类，数据集为[Airline da
 
 我在 Jupyter Notebook（图 3）中创建了一个名为 *Custom_Transformation* 的 Python 函数。该函数实现了一些基本的特征工程，并返回了包括转换特征在内的原始特征集。
 
-![通过集成 Jupyter 和 KNIME 来缩短实现时间](../Images/37f87414c3a959dfd7703d8965455f51.png)
+![通过集成 Jupyter 和 KNIME 来缩短实现时间](img/37f87414c3a959dfd7703d8965455f51.png)
 
 图 3. 用于特征转换的 Python 函数。
 
@@ -88,11 +88,11 @@ Paolo 被要求根据起飞延误对航班进行分类，数据集为[Airline da
 
 +   环境创建后，在偏好设置页面（图 4a）中点击 *应用* 和 *关闭*。
 
-![通过集成 Jupyter 和 KNIME 来缩短实现时间](../Images/e86b6a0a85643049cadcd794df6728ed.png)
+![通过集成 Jupyter 和 KNIME 来缩短实现时间](img/e86b6a0a85643049cadcd794df6728ed.png)
 
 图 4a. Python 偏好设置窗口。
 
-![通过集成 Jupyter 和 KNIME 来缩短实现时间](../Images/9c1460028d7762c16c7c778e0a2c3e98.png)
+![通过集成 Jupyter 和 KNIME 来缩短实现时间](img/9c1460028d7762c16c7c778e0a2c3e98.png)
 
 图 4b. 创建新 Conda 环境的对话框。
 
@@ -130,7 +130,7 @@ output_table
 
 > ***注意。*** Jupyter Notebook 中的代码应始终提供 pandas DataFrame 类型的输出。
 
-![通过集成 Jupyter 和 KNIME 来缩短实现时间](../Images/141ca6e68e6ea6d4a1e290849b7670d5.png)
+![通过集成 Jupyter 和 KNIME 来缩短实现时间](img/141ca6e68e6ea6d4a1e290849b7670d5.png)
 
 图 5. [Python Script](https://kni.me/n/6L0w9_dCmFzbn-rx) 节点的配置对话框。
 
@@ -202,11 +202,11 @@ pip install knime
 
 > ***注意。*** 确保从 Jupyter 执行的工作流在 KNIME 中没有同时打开。这会导致执行暂停，因为工作流已经在 KNIME 中打开进行编辑。*
 
-![通过集成 Jupyter 和 KNIME 缩短实现时间](../Images/4259f6d5a8851d244e2f7eec6e15e2d6.png)
+![通过集成 Jupyter 和 KNIME 缩短实现时间](img/4259f6d5a8851d244e2f7eec6e15e2d6.png)
 
 图 6。在 Jupyter Notebook 中设置工作区并显示选定的 KNIME 工作流 [在 Jupyter 中运行 KNIME](https://kni.me/w/WwfJYzXiTB-VpNql)。
 
-![通过集成 Jupyter 和 KNIME 缩短实现时间](../Images/af724824b112b3ec8c0b2e66a0530ba5.png)
+![通过集成 Jupyter 和 KNIME 缩短实现时间](img/af724824b112b3ec8c0b2e66a0530ba5.png)
 
 图 7。执行工作流的代码。
 
@@ -220,7 +220,7 @@ pip install knime
 
 对于之前的脚本唯一的更改是 KNIME 服务器上 KNIME 工作流的路径以及访问所需的用户名和密码，如图 8 所示。此脚本也可以在 [GitHub](https://github.com/knime/knimepy) 仓库中找到。此外，此案例中不再需要像之前那样指定 knime 执行器路径。
 
-![通过整合 Jupyter 和 KNIME 缩短实施时间](../Images/67f87d1096d4cac7565157e694e1f815.png)
+![通过整合 Jupyter 和 KNIME 缩短实施时间](img/67f87d1096d4cac7565157e694e1f815.png)
 
 图 8\. 从 Jupyter Notebook 执行工作流的代码片段。
 

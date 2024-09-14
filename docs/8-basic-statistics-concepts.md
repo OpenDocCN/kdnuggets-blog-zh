@@ -1,8 +1,8 @@
 # 数据科学的 8 个基础统计概念
 
-> 原文：[https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
+> 原文：[`www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html`](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)
 
-![数据科学的 8 个基础统计概念](../Images/23d4c631963e78f44768bcab40fd6143.png)
+![数据科学的 8 个基础统计概念](img/23d4c631963e78f44768bcab40fd6143.png)
 
 统计学是一种数学分析形式，利用量化模型和表示法处理给定的实验数据或现实生活研究。统计学的主要优点在于信息的呈现方式简单明了。最近，我回顾了所有统计材料，并整理了成为数据科学家的 8 个基本统计概念！
 
@@ -26,11 +26,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -54,7 +54,7 @@
 
 **并集**：P(A∪B) = P(A) + P(B) − P(A∩B)
 
-![数据科学的 8 个基础统计概念](../Images/c53ccf43e5cbee31698ddf9819292918.png)
+![数据科学的 8 个基础统计概念](img/c53ccf43e5cbee31698ddf9819292918.png)
 
 交集与并集。
 
@@ -66,7 +66,7 @@
 
 **贝叶斯定理**描述了基于可能与事件相关的条件的先验知识来计算事件发生的概率。
 
-![数据科学的8个基本统计概念](../Images/e409e3b6ee9389555040d58367266131.png)
+![数据科学的 8 个基本统计概念](img/e409e3b6ee9389555040d58367266131.png)
 
 贝叶斯定理。
 
@@ -82,11 +82,11 @@
 
 **峰度**：衡量数据相对于正态分布是否具有重尾或轻尾的度量。
 
-![数据科学的8个基本统计概念](../Images/879d3ce05a404f88fd18978f0d91adca.png)
+![数据科学的 8 个基本统计概念](img/879d3ce05a404f88fd18978f0d91adca.png)
 
 [偏度](https://codeburst.io/2-important-statistics-terms-you-need-to-know-in-data-science-skewness-and-kurtosis-388fef94eeaa)。
 
-![数据科学的8个基本统计概念](../Images/c8828d00859593f31f15c030ca76cb3d.png)
+![数据科学的 8 个基本统计概念](img/c8828d00859593f31f15c030ca76cb3d.png)
 
 [峰度](https://www.researchgate.net/figure/Illustration-of-the-skewness-and-kurtosis-values-and-how-they-correlate-with-the-shape-of_fig1_298415862)。
 
@@ -102,7 +102,7 @@
 
 +   **四分位距（IQR）**— 基于将数据集划分为四分位数的统计离散性和变异性的度量。IQR = Q3 − Q1
 
-![数据科学的8个基本统计概念](../Images/2eb1fba1487d46a67ff4d0a5ed872497.png)
+![数据科学的 8 个基本统计概念](img/2eb1fba1487d46a67ff4d0a5ed872497.png)
 
 百分位数、四分位数和四分位距（IQR）。
 
@@ -110,13 +110,13 @@
 
 **标准差**：每个数据点与均值之间的标准差，以及方差的平方根。
 
-![数据科学的8个基本统计概念](../Images/351a7ca662506c9876acbd617796fe86.png)
+![数据科学的 8 个基本统计概念](img/351a7ca662506c9876acbd617796fe86.png)
 
 总体和样本方差及标准差。
 
 **标准误差**（**SE**）：对抽样分布标准差的估计。
 
-![数据科学的8个基本统计概念](../Images/5c99a432f1d8054c5dd1271b5353552c.png)
+![数据科学的 8 个基本统计概念](img/5c99a432f1d8054c5dd1271b5353552c.png)
 
 总体和样本标准误差。
 
@@ -128,9 +128,9 @@
 
 **相关性**：衡量两个变量之间的关系，其范围从 *-1 到 1*，是协方差的归一化版本。
 
-![数据科学的8个基本统计概念](../Images/9277cb1d41cf7027cd8d0c09a0259b9d.png)
+![数据科学的 8 个基本统计概念](img/9277cb1d41cf7027cd8d0c09a0259b9d.png)
 
-![数据科学的8个基本统计概念](../Images/7724d0166ac699d7834685e88c74cc60.png)
+![数据科学的 8 个基本统计概念](img/7724d0166ac699d7834685e88c74cc60.png)
 
 [协方差与相关性](https://acadgild.com/blog/covariance-and-correlation)。
 
@@ -144,9 +144,9 @@
 
 **累积分布函数 (CDF)**：一个函数，给出随机变量小于或等于某个值的概率。
 
-![数据科学的8个基本统计概念](../Images/17ced51b8174c2b716539bb33d1d63c8.png)
+![数据科学的 8 个基本统计概念](img/17ced51b8174c2b716539bb33d1d63c8.png)
 
-PMF、PDF和CDF的比较。
+PMF、PDF 和 CDF 的比较。
 
 ## 连续概率分布
 
@@ -154,23 +154,23 @@ PMF、PDF和CDF的比较。
 
 **正态/高斯分布**：分布的曲线呈钟形且对称，与**中心极限定理**有关，即样本均值的抽样分布随着样本量的增大趋近于正态分布。
 
-![数据科学的8个基本统计概念](../Images/2636a9aada0aea3128fd7a22357bc9c4.png)
+![数据科学的 8 个基本统计概念](img/2636a9aada0aea3128fd7a22357bc9c4.png)
 
 **指数分布**：描述*泊松*点过程中的事件之间时间的概率分布。
 
 **卡方分布**：标准正态偏差平方和的分布。
 
-![数据科学的8个基本统计概念](../Images/42c89fd1f1a784a3f6ff85d0c597f6ab.png)
+![数据科学的 8 个基本统计概念](img/42c89fd1f1a784a3f6ff85d0c597f6ab.png)
 
 ## 离散概率分布
 
-**伯努利分布**：一个随机变量的分布，它涉及单次试验且只有2个可能结果，即1（成功）概率为p，0（失败）概率为（1-p）。
+**伯努利分布**：一个随机变量的分布，它涉及单次试验且只有 2 个可能结果，即 1（成功）概率为 p，0（失败）概率为（1-p）。
 
-**二项分布**：在一系列*n*独立实验中的成功次数的分布，每次实验只有2个可能结果，即1（成功）概率为p，0（失败）概率为（1-p）。
+**二项分布**：在一系列*n*独立实验中的成功次数的分布，每次实验只有 2 个可能结果，即 1（成功）概率为 p，0（失败）概率为（1-p）。
 
-**泊松分布**：表示在固定时间间隔内事件数为k的概率的分布，如果这些事件以已知的常数平均速率λ发生，并且与时间独立。
+**泊松分布**：表示在固定时间间隔内事件数为 k 的概率的分布，如果这些事件以已知的常数平均速率λ发生，并且与时间独立。
 
-![数据科学的8个基本统计概念](../Images/ce67487531afc2577e35d865dee020a9.png)
+![数据科学的 8 个基本统计概念](img/ce67487531afc2577e35d865dee020a9.png)
 
 # 假设检验与统计显著性
 
@@ -178,9 +178,9 @@ PMF、PDF和CDF的比较。
 
 **零假设**：一个通用的陈述，表示两个测量现象之间没有关系或组之间没有关联。**备择假设**：与零假设相对立。
 
-在统计假设检验中，**I型错误**是拒绝真实的零假设，而**II型错误**是未拒绝虚假的零假设。
+在统计假设检验中，**I 型错误**是拒绝真实的零假设，而**II 型错误**是未拒绝虚假的零假设。
 
-![数据科学中的 8 个基本统计概念](../Images/bb20cc478468a3c6c3d7792dd8a941df.png)
+![数据科学中的 8 个基本统计概念](img/bb20cc478468a3c6c3d7792dd8a941df.png)
 
 ## 解释
 
@@ -194,7 +194,7 @@ PMF、PDF和CDF的比较。
 
 *Z* 检验是任何统计检验，其检验统计量在原假设下的分布可以用正态分布来近似，并且检验的是我们已经知道总体方差的分布的均值。因此，如果*样本量很大*或*总体方差已知*，许多统计检验可以方便地作为近似 *Z* 检验来进行。
 
-![数据科学中的 8 个基本统计概念](../Images/93e9fdf6b1ca2f18a073d7f4ca49b50e.png)
+![数据科学中的 8 个基本统计概念](img/93e9fdf6b1ca2f18a073d7f4ca49b50e.png)
 
 ## t 检验
 
@@ -202,19 +202,19 @@ t 检验是当*总体方差未知*且*样本量不大*（n < 30）时使用的�
 
 **配对样本** 意味着我们从同一组、个人、物品或事物中收集两次数据。**独立样本** 意味着两个样本必须来自两个完全不同的总体。
 
-![数据科学中的 8 个基本统计概念](../Images/27bafb78ad73de9db53f67db86733955.png)
+![数据科学中的 8 个基本统计概念](img/27bafb78ad73de9db53f67db86733955.png)
 
 ## 方差分析（ANOVA）
 
 方差分析是用来确定实验结果是否显著的方法。**单因素方差分析** 比较两个独立组的均值，使用一个自变量。**双因素方差分析** 是单因素方差分析的扩展，使用两个自变量来计算主效应和交互效应。
 
-![数据科学中的 8 个基本统计概念](../Images/4bcf891d39a842a23d6739e732837567.png)
+![数据科学中的 8 个基本统计概念](img/4bcf891d39a842a23d6739e732837567.png)
 
 方差分析表。
 
 ## 卡方检验
 
-![数据科学中的 8 个基本统计概念](../Images/87e65f8f80260bb72edc77cc86c5d467.png)
+![数据科学中的 8 个基本统计概念](img/87e65f8f80260bb72edc77cc86c5d467.png)
 
 卡方检验公式。
 
@@ -238,13 +238,13 @@ t 检验是当*总体方差未知*且*样本量不大*（n < 30）时使用的�
 
 **线性回归** 是一种线性方法，用于建模一个因变量与一个自变量之间的关系。**自变量** 是在科学实验中控制的变量，用于测试对因变量的影响。**因变量** 是在科学实验中被测量的变量。
 
-![数据科学的8个基础统计概念](../Images/aefb6e6d4ed89a1d05dd26c4bde7e2d6.png)
+![数据科学的 8 个基础统计概念](img/aefb6e6d4ed89a1d05dd26c4bde7e2d6.png)
 
 线性回归公式。
 
 **多元线性回归** 是一种线性方法，用于建模一个因变量与两个或更多自变量之间的关系。
 
-![数据科学的8个基础统计概念](../Images/c61705a8141557c627c3f67f2a35ac5b.png)
+![数据科学的 8 个基础统计概念](img/c61705a8141557c627c3f67f2a35ac5b.png)
 
 多元线性回归公式。
 
@@ -256,7 +256,7 @@ t 检验是当*总体方差未知*且*样本量不大*（n < 30）时使用的�
 
 +   **异常值** 是指显著不同于其他观察值的数据点。我们可以使用标准差方法和四分位距 (IQR) 方法。
 
-+   **虚拟变量** 仅取值为0或1，以指示分类变量的效应。
++   **虚拟变量** 仅取值为 0 或 1，以指示分类变量的效应。
 
 **步骤 3**：简单分析 — 检查因变量与自变量之间、自变量与自变量之间的影响比较
 
@@ -278,7 +278,7 @@ t 检验是当*总体方差未知*且*样本量不大*（n < 30）时使用的�
 
 +   **R-平方** 是一种统计拟合度量，表示因变量的变异程度由自变量解释的比例。较高的 R-平方 值表示观察数据与拟合值之间的差异较小。
 
-+   **P值**
++   **P 值**
 
 +   **回归方程**
 
@@ -288,14 +288,14 @@ t 检验是当*总体方差未知*且*样本量不大*（n < 30）时使用的�
 
 ### 更多相关话题
 
-+   [10个基础统计概念的通俗解释](https://www.kdnuggets.com/10-basic-statistical-concepts-in-plain-english)
++   [10 个基础统计概念的通俗解释](https://www.kdnuggets.com/10-basic-statistical-concepts-in-plain-english)
 
-+   [数据科学中你应该知道的7个SQL概念](https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html)
++   [数据科学中你应该知道的 7 个 SQL 概念](https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html)
 
-+   [ChatGPT作为学习数据科学概念的个性化辅导员](https://www.kdnuggets.com/2023/05/chatgpt-personalized-tutor-learning-data-science-concepts.html)
++   [ChatGPT 作为学习数据科学概念的个性化辅导员](https://www.kdnuggets.com/2023/05/chatgpt-personalized-tutor-learning-data-science-concepts.html)
 
-+   [基础回顾第2周：数据库、SQL、数据管理及……](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [基础回顾第 2 周：数据库、SQL、数据管理及……](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
 
-+   [你应该了解的关于梯度下降和成本函数的5个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
++   [你应该了解的关于梯度下降和成本函数的 5 个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
 
-+   [那些不太吸引人的SQL概念，让你脱颖而出](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)
++   [那些不太吸引人的 SQL 概念，让你脱颖而出](https://www.kdnuggets.com/2022/02/not-so-sexy-sql-concepts-stand-out.html)

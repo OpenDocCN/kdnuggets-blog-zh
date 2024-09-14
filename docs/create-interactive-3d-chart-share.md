@@ -1,8 +1,8 @@
 # 如何创建一个交互式 3D 图表并轻松与任何人分享
 
-> 原文：[https://www.kdnuggets.com/2021/06/create-interactive-3d-chart-share.html](https://www.kdnuggets.com/2021/06/create-interactive-3d-chart-share.html)
+> 原文：[`www.kdnuggets.com/2021/06/create-interactive-3d-chart-share.html`](https://www.kdnuggets.com/2021/06/create-interactive-3d-chart-share.html)
 
-[评论](#comments)
+评论
 
 **由 [Olga Chernytska](https://www.linkedin.com/in/olga-chernytska-122700102/)，高级机器学习工程师**
 
@@ -41,7 +41,7 @@ fig.write_html("file.html")
 
 结果如下所示。这个 HTML 文件可以在任何浏览器中打开、嵌入到网站上，并通过消息传递工具发送。最好的地方是打开这个文件时，不需要 Jupyter Notebook 或 `plotly` 库。
 
-![](../Images/8b6418d0a0ad9d583e1f1029fa26d77a.png)图像 1\. 在浏览器中打开时 HTML 文件的样子。
+![](img/8b6418d0a0ad9d583e1f1029fa26d77a.png)图像 1\. 在浏览器中打开时 HTML 文件的样子。
 
 [下载这个 HTML 文件并自己试试](https://notrocketscience.blog/wp-content/uploads/2021/06/file-1.html)。
 
@@ -49,7 +49,7 @@ fig.write_html("file.html")
 
 我记得 `plotly` 曾是一个过于复杂且功能非常有限的库，但在最近几年它变得非常酷。例如，现在有 13 种 3D 图表类型可用，还有数十种地图、统计、科学和金融的 2D 图表。
 
-![](../Images/ffdd9eeef1333d7f3d0bb7e245b93a02.png)图像 2\. plotly 中可用的 3D 图表示例。 [来源](https://plotly.com/python/3d-charts/)
+![](img/ffdd9eeef1333d7f3d0bb7e245b93a02.png)图像 2\. plotly 中可用的 3D 图表示例。 [来源](https://plotly.com/python/3d-charts/)
 
 如果您感兴趣并想尝试 `plotly`，这里有 [文档](https://plotly.com/python/getting-started/) 介绍如何安装它并构建您的第一个图表。绝对值得尝试！
 
@@ -59,21 +59,21 @@ fig.write_html("file.html")
 
 **相关：**
 
-+   [唯一真正需要的 Jupyter Notebook 扩展](/2021/06/only-jupyter-notebooks-extension-truly-need.html)
++   唯一真正需要的 Jupyter Notebook 扩展
 
-+   [直接使用 Pandas 获取交互式图表](/2021/06/interactive-plots-directly-pandas.html)
++   直接使用 Pandas 获取交互式图表
 
-+   [数据讲述：大脑擅长视觉，但心灵被故事打动](/2021/06/data-storytelling.html)
++   数据讲述：大脑擅长视觉，但心灵被故事打动
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

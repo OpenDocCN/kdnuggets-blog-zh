@@ -1,8 +1,8 @@
 # TensorFlow 中的梯度提升与 XGBoost
 
-> 原文：[https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html](https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)
+> 原文：[`www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html`](https://www.kdnuggets.com/2018/01/gradient-boosting-tensorflow-vs-xgboost.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Nicolò Valigi](https://www.linkedin.com/in/nicolovaligi/)，AI Academy 创始人**
 
@@ -18,7 +18,7 @@ TensorFlow 1.4 最近几周发布了，带有梯度提升的实现，称为 **Te
 
 我从 2006 年抽取了 10 万个航班作为训练集，从 2007 年抽取了 10 万个航班作为测试集。遗憾的是，大约 20% 的航班延迟超过了 15 分钟，这一事实对航空公司行业并不好 :D。很容易看出，全天的起飞时间与延迟的可能性之间的相关性有多强：
 
-![](../Images/5441b90ecfb58bced314c9b7eb110c9a.png)
+![](img/5441b90ecfb58bced314c9b7eb110c9a.png)
 
 我没有进行任何特征工程，因此特征列表非常基础：
 
@@ -41,9 +41,9 @@ Dest
 
 尽管我在两个模型中都保持了 `num_trees=50` 和 `learning_rate=0.1`，但最终我不得不使用持出集来调整 TF Boosted Trees 的 `examples_per_layer` 旋钮。这可能与 TFBT 论文中提出的新颖 *逐层* 学习算法有关，但我还没有深入研究。作为比较的起点，我选择了两个值（1k 和 5k），它们的训练时间和准确率与 XGBoost 相似。以下是结果：
 
-![](../Images/edf8da04192ca1cbff995991242c0161.png)
+![](img/edf8da04192ca1cbff995991242c0161.png)
 
-![](../Images/7acb4573030b1a09dddcca330f037844.png)
+![](img/7acb4573030b1a09dddcca330f037844.png)
 
 准确率数据：
 
@@ -86,21 +86,21 @@ TensorFlow Boosted Trees 可能在已经大量投资于 TensorFlow 工具的基�
 
 **相关：**
 
-+   [XGBoost：简明技术概述](/2017/10/xgboost-concise-technical-overview.html)
++   XGBoost：简明技术概述
 
-+   [从基准测试快速机器学习算法中获得的经验教训](/2017/08/lessons-benchmarking-fast-machine-learning-algorithms.html)
++   从基准测试快速机器学习算法中获得的经验教训
 
-+   [一个简单的使用 Iris 数据集的 XGBoost 教程](/2017/03/simple-xgboost-tutorial-iris-dataset.html)
++   一个简单的使用 Iris 数据集的 XGBoost 教程
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

@@ -1,24 +1,24 @@
 # 《百页机器学习书》
 
-> 原文：[https://www.kdnuggets.com/2019/01/hundred-page-machine-learning-book.html](https://www.kdnuggets.com/2019/01/hundred-page-machine-learning-book.html)
+> 原文：[`www.kdnuggets.com/2019/01/hundred-page-machine-learning-book.html`](https://www.kdnuggets.com/2019/01/hundred-page-machine-learning-book.html)
 
 赞助广告。
 
 **作者：安德烈·布尔科夫，《[百页机器学习书](http://themlbook.com/)》**
 
-[![布尔科夫100页机器学习书](../Images/8cf50beb054c92f281f31567021fffd5.png)](http://themlbook.com/)
+![布尔科夫 100 页机器学习书](http://themlbook.com/)
 
 期待已久的日子终于到来，我感到自豪和高兴地宣布，《**百页机器学习书**》现已可以在亚马逊上订购，提供[高质量彩色平装本](https://www.amazon.com/dp/199957950X/)和[Kindle](https://www.amazon.com/Hundred-Page-Machine-Learning-Book-ebook/dp/B07MGCNKXB/)版本。
 
 在过去三个月里，我努力写了一本能带来改变的书。我坚信我成功了。我之所以如此确信，是因为我收到了来自[读者的积极反馈](https://www.goodreads.com/book/show/43190851-the-hundred-page-machine-learning-book)，这些读者包括刚刚开始人工智能学习的新人和受人尊敬的行业领导者。
 
-我非常自豪，像**彼得·诺维格**和**奥雷利安·热龙**这样的畅销AI书籍作者和杰出科学家对我的书给予了赞誉，并为其封底撰写了文字，同时**加雷斯·詹姆斯**也写了前言。
+我非常自豪，像**彼得·诺维格**和**奥雷利安·热龙**这样的畅销 AI 书籍作者和杰出科学家对我的书给予了赞誉，并为其封底撰写了文字，同时**加雷斯·詹姆斯**也写了前言。
 
 这里有几个推荐词：
 
-**彼得·诺维格**，**谷歌**的研究主任，《**AIMA**》的合著者：“布尔科夫承担了一个非常有用但几乎不可能完成的任务，将所有机器学习的内容浓缩为100页。他在选择对从业者有用的主题——包括理论和实践——方面做得很好，对于读者来说，这本书的前100页（实际上是150页）提供了一个扎实的领域介绍，而不是最后的部分。”
+**彼得·诺维格**，**谷歌**的研究主任，《**AIMA**》的合著者：“布尔科夫承担了一个非常有用但几乎不可能完成的任务，将所有机器学习的内容浓缩为 100 页。他在选择对从业者有用的主题——包括理论和实践——方面做得很好，对于读者来说，这本书的前 100 页（实际上是 150 页）提供了一个扎实的领域介绍，而不是最后的部分。”
 
-**奥雷利安·热龙**，高级AI工程师，《**使用Scikit-Learn和TensorFlow的实战机器学习**》的畅销书作者：“这本书在仅有的100页（加上一些额外页面）中覆盖的主题广度令人惊叹。布尔科夫不犹豫地深入数学方程，这通常是短书籍会省略的一部分。我非常喜欢作者用简短的语言解释核心概念。这本书对于领域的新手以及可以从广泛视角中受益的老手来说，都非常有用。”
+**奥雷利安·热龙**，高级 AI 工程师，《**使用 Scikit-Learn 和 TensorFlow 的实战机器学习**》的畅销书作者：“这本书在仅有的 100 页（加上一些额外页面）中覆盖的主题广度令人惊叹。布尔科夫不犹豫地深入数学方程，这通常是短书籍会省略的一部分。我非常喜欢作者用简短的语言解释核心概念。这本书对于领域的新手以及可以从广泛视角中受益的老手来说，都非常有用。”
 
 **卡罗利斯·乌尔博纳斯**，**亚马逊**的数据科学主管：“来自世界级从业者的机器学习极佳入门书。”
 
@@ -34,11 +34,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 

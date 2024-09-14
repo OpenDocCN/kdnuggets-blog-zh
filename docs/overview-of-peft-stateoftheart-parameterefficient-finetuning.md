@@ -1,8 +1,8 @@
 # PEFT 概述：最先进的参数高效微调
 
-> 原文：[https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)
+> 原文：[`www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning`](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)
 
-![PEFT 概述：最先进的参数高效微调](../Images/aff0878bf10b35d37fe07ff658443928.png)
+![PEFT 概述：最先进的参数高效微调](img/aff0878bf10b35d37fe07ff658443928.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -149,7 +149,7 @@ model.push_to_hub("llama-2-7b-chat-guanaco")
 
 如我们所见，模型适配器仅为 134MB，而基础的 LLaMA 2 7B 模型约为 13GB。
 
-![PEFT 概述：最先进的参数高效微调](../Images/980ded1e7c785ce7884c611929a51e7e.png)
+![PEFT 概述：最先进的参数高效微调](img/980ded1e7c785ce7884c611929a51e7e.png)
 
 ## 加载模型
 
@@ -216,7 +216,7 @@ During Hacktoberfest, participants are encouraged to contribute to open-source
 
 +   [数据科学职业的当前状态](https://www.kdnuggets.com/2022/10/current-state-data-science-careers.html)
 
-+   [KDnuggets 新闻，11月2日：数据科学的当前状态…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的当前状态…](https://www.kdnuggets.com/2022/n43.html)
 
 +   [特征选择：科学与艺术的交汇点](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
 

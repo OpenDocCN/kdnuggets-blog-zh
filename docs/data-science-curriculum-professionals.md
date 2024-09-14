@@ -1,28 +1,28 @@
 # 专业数据科学课程
 
-> 原文：[https://www.kdnuggets.com/2021/03/data-science-curriculum-professionals.html](https://www.kdnuggets.com/2021/03/data-science-curriculum-professionals.html)
+> 原文：[`www.kdnuggets.com/2021/03/data-science-curriculum-professionals.html`](https://www.kdnuggets.com/2021/03/data-science-curriculum-professionals.html)
 
-[评论](#comments)
+评论
 
-**由 [布洛克·陶特](https://www.linkedin.com/in/brock-taute-578402b7/)，Odyssey Energy Solutions的数据与系统专家**。
+**由 [布洛克·陶特](https://www.linkedin.com/in/brock-taute-578402b7/)，Odyssey Energy Solutions 的数据与系统专家**。
 
-![](../Images/2d0c41e589252110396d8b4bfc04c322.png)
+![](img/2d0c41e589252110396d8b4bfc04c322.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
 *作者提供的图示。*
 
-如果你终于决定从Excel的复制粘贴转向可重复的数据科学，那么你需要知道最佳的路线。好消息是，有大量免费的资源可以帮助你，还有很棒的在线社区可以帮助你。坏消息是，选择哪些资源可能会让人感到不知所措。这里有一个直截了当的指南，你可以毫无遗憾地跟随，这样你就可以花更少的时间担心路径，更多的时间在上面跋涉。它基于我从一个从未上过统计课的可再生能源项目工程师到主要数据平台负责人的经历中学到的教训。
+如果你终于决定从 Excel 的复制粘贴转向可重复的数据科学，那么你需要知道最佳的路线。好消息是，有大量免费的资源可以帮助你，还有很棒的在线社区可以帮助你。坏消息是，选择哪些资源可能会让人感到不知所措。这里有一个直截了当的指南，你可以毫无遗憾地跟随，这样你就可以花更少的时间担心路径，更多的时间在上面跋涉。它基于我从一个从未上过统计课的可再生能源项目工程师到主要数据平台负责人的经历中学到的教训。
 
 ### 你在这里
 
@@ -58,7 +58,7 @@
 
 **第三站：仪表板**
 
-查看 Shiny R 画廊 ([https://shiny.rstudio.com/gallery/](https://shiny.rstudio.com/gallery/))。或者，如果你是 Python 爱好者，可以看看 Dash Enterprise 应用画廊 ([https://dash-gallery.plotly.host/Portal/](https://dash-gallery.plotly.host/Portal/))。这些是仪表板，你可以将所有数据分析结果汇集在一个地方，让你的商业领导者惊叹于你的工作，并做出数据驱动的明智决策。（不错的口号，对吧？）进一步说，仪表板可以是 Web 应用，允许你的团队其他成员通过 GUI（图形用户界面）运行你的代码。你的团队当前使用的软件是否让你抓狂？你可以重新创建它，但量身定制以完全符合你的需求，真正减少点击次数。该程序的输出可能是一个漂亮的 PDF 报告。
+查看 Shiny R 画廊 ([`shiny.rstudio.com/gallery/`](https://shiny.rstudio.com/gallery/))。或者，如果你是 Python 爱好者，可以看看 Dash Enterprise 应用画廊 ([`dash-gallery.plotly.host/Portal/`](https://dash-gallery.plotly.host/Portal/))。这些是仪表板，你可以将所有数据分析结果汇集在一个地方，让你的商业领导者惊叹于你的工作，并做出数据驱动的明智决策。（不错的口号，对吧？）进一步说，仪表板可以是 Web 应用，允许你的团队其他成员通过 GUI（图形用户界面）运行你的代码。你的团队当前使用的软件是否让你抓狂？你可以重新创建它，但量身定制以完全符合你的需求，真正减少点击次数。该程序的输出可能是一个漂亮的 PDF 报告。
 
 简而言之，仪表盘很棒。你想要掌握制作这些仪表盘的技能。从将你的一个分析结果转化为仪表盘开始，然后逐步建立。使用 R 的 Shiny 包和 Python 的 Dash 包。还有大量文档可以帮助你，包括 Hadley Wickham 的《Mastering Shiny》一书，但与基础数据科学书籍不同，我不一定推荐完全读完这些书。只需开始编码，并在不确定如何做时使用它们。再说一次，学习社区是你的朋友。
 
@@ -66,7 +66,7 @@
 
 现在你的同事对你的仪表盘赞不绝口，羡慕你的自动化脚本，你将需要开始协作。一开始，你可能会通过电子邮件或文件共享与他人分享你的代码。类似地，每当你开始一个新的分析时，你很可能会复制上一个分析，然后在不同地方做些修改以适应新的数据。这是每个人的起点，但很快就会变得混乱。此外，你希望有更好的方法来跟踪代码的变化并允许其他人共同编辑。为了解决这些问题，你需要将代码转换为一个包，并将其托管在 GitHub 上。这样，每个人都可以访问代码，甚至可以将其开源，允许你与全球合作。
 
-学习如何做到这一点的最佳资源是 Hadley Wickham 的《R Packages》和官方 Python Packaging 文档（[https://packaging.python.org/overview/](https://packaging.python.org/overview/)）。GitHub 的指南也是学习如何使用其平台的极好资源（[https://guides.github.com/](https://guides.github.com/)）。
+学习如何做到这一点的最佳资源是 Hadley Wickham 的《R Packages》和官方 Python Packaging 文档（[`packaging.python.org/overview/`](https://packaging.python.org/overview/)）。GitHub 的指南也是学习如何使用其平台的极好资源（[`guides.github.com/`](https://guides.github.com/)）。
 
 当你第一次为团队构建应用程序时，管理本地环境会让你感到非常沮丧。我指的是，每个人的计算机上安装了不同的文件和操作系统中的细微差别，导致在他们的“环境”中运行的代码与在你的环境中行为不同。这是一件非常混乱的事情，涉及到计算机科学而非基础数据科学。我尽可能避免学习环境管理，但一旦我开始学习，它确实让我的生活变得容易多了。不管是主动学习还是出于必要，你都需要自己掌握这一技能。我从未找到过学习这方面的优秀资源，所以我在[这里](https://towardsdatascience.com/data-science-environments-adfeb5dadd7a)做了一个推荐你阅读的资源。
 
@@ -78,13 +78,13 @@
 
 如果你想真正为公司带来价值，你需要超越简单的线性回归和计算平均值。你需要开始深入研究高级统计和（提醒词！）机器学习。这一步是比较陡峭的。盲目尝试开源机器学习模型是可能的，但这有点像玩火。你真的需要理解你在做什么，否则计算机可能会将你的动机转化为一些疯狂的东西。我不是说你必须理解每个模型中所有的数学，但你应该对这些数学试图实现的目标感到舒适。你还应该开始从数据中提取更大的推论，识别出你未受过训练的眼睛所遗漏的模式。你应该学习更多统计的细微差别，以确保你得出的结论是负责任的。这部分确实是关于大权力需要大责任的。好好学习这些工具，你就可以做得更好。
 
-最好的机器学习资源是Coursera上的机器学习课程，由斯坦福大学教授、机器学习名人Andrew Ng教授讲授。你可以在GitHub上找到Python和R的作业，而不是他在课程中使用的Octave（编程语言）。紧接着这个课程的另一个极好的课程是MIT的深度学习入门（6.S191）课程。它是MIT课程，每年在课程结束后公开。该课程使用Python和一个叫TensorFlow的包。（注意，深度学习是一种机器学习，机器学习是一种人工智能。你说的内容部分取决于你想给谁留下深刻印象。）
+最好的机器学习资源是 Coursera 上的机器学习课程，由斯坦福大学教授、机器学习名人 Andrew Ng 教授讲授。你可以在 GitHub 上找到 Python 和 R 的作业，而不是他在课程中使用的 Octave（编程语言）。紧接着这个课程的另一个极好的课程是 MIT 的深度学习入门（6.S191）课程。它是 MIT 课程，每年在课程结束后公开。该课程使用 Python 和一个叫 TensorFlow 的包。（注意，深度学习是一种机器学习，机器学习是一种人工智能。你说的内容部分取决于你想给谁留下深刻印象。）
 
-在Coursera上有一门很好的高级统计课程，约翰斯·霍普金斯大学的“统计推断”（使用R），或者密歇根大学的“用Python进行推断统计分析”。
+在 Coursera 上有一门很好的高级统计课程，约翰斯·霍普金斯大学的“统计推断”（使用 R），或者密歇根大学的“用 Python 进行推断统计分析”。
 
 **第六步：云计算，数据管道**
 
-在某些时候，本地托管所有的处理过程将不再有意义。这可能是由于所需的计算能力、需要将来自多个来源的数据汇总到一个位置，或需要一个持续运行的应用程序而不是一次性分析。在这种情况下，你将转向云计算，这意味着你还必须找到将数据导入云中的方法。此时，你可能会从数据分析师/科学家过渡到数据工程师。这涉及到很多内容，其中大部分是特定于云托管提供商的。为了避免这种情况，你可以使用类似RStudio Cloud的工具，它会为你处理所有麻烦的工作。否则，你需要重新学习许多计算机科学概念，如分区、复制和网络。
+在某些时候，本地托管所有的处理过程将不再有意义。这可能是由于所需的计算能力、需要将来自多个来源的数据汇总到一个位置，或需要一个持续运行的应用程序而不是一次性分析。在这种情况下，你将转向云计算，这意味着你还必须找到将数据导入云中的方法。此时，你可能会从数据分析师/科学家过渡到数据工程师。这涉及到很多内容，其中大部分是特定于云托管提供商的。为了避免这种情况，你可以使用类似 RStudio Cloud 的工具，它会为你处理所有麻烦的工作。否则，你需要重新学习许多计算机科学概念，如分区、复制和网络。
 
 要深入了解云服务，我写了 [这篇文章](https://towardsdatascience.com/data-science-in-the-cloud-bcdee3c519e7)。其他一些有用的资源包括 Google Cloud Labs（或类似的 Amazon、Microsoft 等材料）以及 Martin Kleppmann 的书《设计数据密集型应用》。
 
@@ -112,7 +112,7 @@
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，5月11日：SQL 职业人士笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
++   [KDnuggets 新闻，5 月 11 日：SQL 职业人士笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
 
 +   [Burtch Works 2023 数据科学与 AI 职业薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
 
@@ -122,4 +122,4 @@
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学入门：你需要掌握的10项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学入门：你需要掌握的 10 项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)

@@ -1,8 +1,8 @@
 # 缩小人类理解与机器学习之间的差距：可解释人工智能作为解决方案
 
-> 原文：[https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)
+> 原文：[`www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html`](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)
 
-![缩小人类理解与机器学习之间的差距：可解释人工智能作为解决方案](../Images/f61a1b91d9d13f774674910b3eac2305.png)
+![缩小人类理解与机器学习之间的差距：可解释人工智能作为解决方案](img/f61a1b91d9d13f774674910b3eac2305.png)
 
 图片由 Bing 图像创作者提供
 
@@ -34,33 +34,33 @@ XAI 在 AI 做出高风险决策的领域尤为重要。例如，算法交易和
 
 # 实施 XAI 的产品指南
 
-赋予用户更多理解AI模型决策原因的能力，有助于促进对模型的信任和透明度。这可以导致人机之间改进的、互利的合作，其中AI模型帮助人类做出透明的决策，而人类则帮助调整AI模型以消除偏差、不准确和错误。
+赋予用户更多理解 AI 模型决策原因的能力，有助于促进对模型的信任和透明度。这可以导致人机之间改进的、互利的合作，其中 AI 模型帮助人类做出透明的决策，而人类则帮助调整 AI 模型以消除偏差、不准确和错误。
 
-以下是公司和个人可以在其产品中实施XAI的一些方式：
+以下是公司和个人可以在其产品中实施 XAI 的一些方式：
 
-1.  **选择可解释的模型** – 在可解释的AI模型能满足需求且表现良好的情况下，应优先选择这些模型。例如，在医疗保健领域，像决策树这样的简单模型可以帮助医生理解AI模型推荐某种诊断的原因，这有助于建立医生与AI模型之间的信任。应使用提高可解释性的特征工程技术，如独热编码或特征缩放。
+1.  **选择可解释的模型** – 在可解释的 AI 模型能满足需求且表现良好的情况下，应优先选择这些模型。例如，在医疗保健领域，像决策树这样的简单模型可以帮助医生理解 AI 模型推荐某种诊断的原因，这有助于建立医生与 AI 模型之间的信任。应使用提高可解释性的特征工程技术，如独热编码或特征缩放。
 
-1.  **使用事后解释** – 使用像特征重要性和注意力机制这样的技术生成事后解释。例如，LIME（局部可解释模型无关解释）是一种解释模型预测的技术。它生成特征重要性分数，以突出每个特征对模型决策的贡献。例如，如果你最终“喜欢”某个播放列表推荐，LIME方法会尝试添加和移除播放列表中的某些歌曲，并预测你喜欢该播放列表的可能性，从而得出播放列表中歌曲的艺术家在你喜欢或不喜欢该播放列表中扮演了重要角色。
+1.  **使用事后解释** – 使用像特征重要性和注意力机制这样的技术生成事后解释。例如，LIME（局部可解释模型无关解释）是一种解释模型预测的技术。它生成特征重要性分数，以突出每个特征对模型决策的贡献。例如，如果你最终“喜欢”某个播放列表推荐，LIME 方法会尝试添加和移除播放列表中的某些歌曲，并预测你喜欢该播放列表的可能性，从而得出播放列表中歌曲的艺术家在你喜欢或不喜欢该播放列表中扮演了重要角色。
 
-1.  **与用户的沟通** – 可以使用像LIME或SHAP（SHapley Additive exPlanations）这样的技术，提供关于具体局部决策或预测的有用解释，而不必解释模型的所有复杂性。还可以利用激活图或注意力图等视觉提示，突出输入与模型生成的输出之间的相关性。像Chat GPT这样的新技术可以用来简化复杂的解释，以用户可以理解的简单语言表达。最后，给予用户一定的控制权，以便他们与模型互动，这有助于建立信任。例如，用户可以尝试以不同的方式调整输入，以查看输出的变化。
+1.  **与用户的沟通** – 可以使用像 LIME 或 SHAP（SHapley Additive exPlanations）这样的技术，提供关于具体局部决策或预测的有用解释，而不必解释模型的所有复杂性。还可以利用激活图或注意力图等视觉提示，突出输入与模型生成的输出之间的相关性。像 Chat GPT 这样的新技术可以用来简化复杂的解释，以用户可以理解的简单语言表达。最后，给予用户一定的控制权，以便他们与模型互动，这有助于建立信任。例如，用户可以尝试以不同的方式调整输入，以查看输出的变化。
 
 1.  **持续监测** – 公司应实施机制来监控模型的性能，并在检测到偏差或漂移时自动发出警报。应定期更新和微调模型，并进行审计和评估，以确保模型符合监管法律并满足伦理标准。最后，即使很少，也应有人参与提供反馈和必要的修正。
 
 # 结论
 
-总结来说，随着人工智能的不断发展，构建可解释的人工智能（XAI）变得至关重要，以维持用户对人工智能的信任。通过采用上述指导方针，公司和个人可以构建更透明、易于理解和简单的人工智能。公司越多地采用XAI，用户与人工智能系统之间的沟通就会越好，用户也会越有信心让人工智能改善他们的生活。
+总结来说，随着人工智能的不断发展，构建可解释的人工智能（XAI）变得至关重要，以维持用户对人工智能的信任。通过采用上述指导方针，公司和个人可以构建更透明、易于理解和简单的人工智能。公司越多地采用 XAI，用户与人工智能系统之间的沟通就会越好，用户也会越有信心让人工智能改善他们的生活。
 
-**[Ashlesha Kadam](https://www.linkedin.com/in/ashleshakadam/)** 领导着亚马逊音乐的全球产品团队，为来自45多个国家的数百万客户在Alexa和亚马逊音乐应用（网页、iOS、Android）上打造音乐体验。她还是女性科技领域的热情倡导者，担任Grace Hopper Celebration（全球最大的女性科技会议，参会者超过3万人，来自115个国家）的计算机与人类交互（HCI）分会的联合主席。在空闲时间，Ashlesha喜欢阅读小说、听商业科技播客（当前最爱 - Acquired），在美丽的太平洋西北地区徒步旅行，以及和丈夫、儿子及5岁的金毛猎犬共度时光。
+**[Ashlesha Kadam](https://www.linkedin.com/in/ashleshakadam/)** 领导着亚马逊音乐的全球产品团队，为来自 45 多个国家的数百万客户在 Alexa 和亚马逊音乐应用（网页、iOS、Android）上打造音乐体验。她还是女性科技领域的热情倡导者，担任 Grace Hopper Celebration（全球最大的女性科技会议，参会者超过 3 万人，来自 115 个国家）的计算机与人类交互（HCI）分会的联合主席。在空闲时间，Ashlesha 喜欢阅读小说、听商业科技播客（当前最爱 - Acquired），在美丽的太平洋西北地区徒步旅行，以及和丈夫、儿子及 5 岁的金毛猎犬共度时光。
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -70,9 +70,9 @@ XAI 在 AI 做出高风险决策的领域尤为重要。例如，算法交易和
 
 +   [人工智能教育差距及如何弥补](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
 
-+   [有没有办法弥补MLOps工具的差距？](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)
++   [有没有办法弥补 MLOps 工具的差距？](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)
 
-+   [现实世界中NLP应用的范围：不同的解决方案](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
++   [现实世界中 NLP 应用的范围：不同的解决方案](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
 
 +   [机器学习中训练数据与测试数据的区别](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)
 

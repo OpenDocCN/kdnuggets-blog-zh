@@ -1,8 +1,8 @@
-# 可解释性对于信任AI和机器学习至关重要
+# 可解释性对于信任 AI 和机器学习至关重要
 
-> 原文：[https://www.kdnuggets.com/2018/11/interpretability-trust-ai-machine-learning.html](https://www.kdnuggets.com/2018/11/interpretability-trust-ai-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/11/interpretability-trust-ai-machine-learning.html`](https://www.kdnuggets.com/2018/11/interpretability-trust-ai-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Ilknur Kaynar Kabul](https://blogs.sas.com/content/author/ilknurkaynarkabul/)，SAS**。
 
@@ -26,7 +26,7 @@
 
 不幸的是，使黑箱模型具备卓越预测能力的复杂性也使它们非常难以理解和信任。黑箱模型内部的算法不会透露其秘密。它们通常不会提供明确的解释说明为何做出某个预测。它们只是给出一个概率，而且这些模型不透明且难以解释。有时模型参数多达数千（甚至数百万），输入特征与参数之间没有一一对应的关系，多个模型的组合以及许多参数常常影响预测结果。有些模型也对数据需求量大，需要大量数据才能达到高准确度。很难弄清楚它们从这些数据集中学到了什么，以及哪些数据点对结果的影响大于其他数据点。
 
-![](../Images/27cac00146774e160aab7f1e91db0585.png)
+![](img/27cac00146774e160aab7f1e91db0585.png)
 
 由于这些原因，很难理解这些技术的过程和结果。弄清楚我们是否可以信任这些模型以及在使用它们时是否能够做出公平的决策也很困难。
 
@@ -60,7 +60,7 @@
 
 解释性对不同的人有不同的重要性：
 
-![](../Images/9d4d150f43117f3b6601f2a86b4bc243.png)**数据科学家**希望建立具有高准确性的模型。他们希望了解细节，以找出如何选择最佳模型并改进该模型。他们还希望从模型中获得见解，以便将他们的发现传达给目标受众。
+![](img/9d4d150f43117f3b6601f2a86b4bc243.png)**数据科学家**希望建立具有高准确性的模型。他们希望了解细节，以找出如何选择最佳模型并改进该模型。他们还希望从模型中获得见解，以便将他们的发现传达给目标受众。
 
 **最终用户**想知道模型为什么给出某个预测。他们想了解这些决策将如何影响他们。他们想知道自己是否被公平对待，以及是否需要对任何决策提出异议。他们希望在网上购物或点击网页广告时有一定程度的信任。
 
@@ -92,7 +92,7 @@
 
 敬请关注关于这个话题的更多帖子。[在这系列博客中](https://blogs.sas.com/content/tag/interpretability/)，我们将详细介绍一些可解释性技术。我们将解释如何使用模型无关的可解释性技术来理解黑箱模型。我们还会涵盖一些最新的可解释性进展。
 
-**简介**：[Ilknur Kaynar Kabul](https://blogs.sas.com/content/author/ilknurkaynarkabul/) 是SAS高级分析部门的高级经理，她领导着SAS研发团队，专注于机器学习算法和应用。
+**简介**：[Ilknur Kaynar Kabul](https://blogs.sas.com/content/author/ilknurkaynarkabul/) 是 SAS 高级分析部门的高级经理，她领导着 SAS 研发团队，专注于机器学习算法和应用。
 
 [原文](https://blogs.sas.com/content/subconsciousmusings/2017/12/18/interpretability-crucial-trusting-ai-machine-learning/)。经许可转载。
 
@@ -106,7 +106,7 @@
 
 +   [利用不确定性来解释你的模型](https://www.kdnuggets.com/2018/11/using-uncertainty-interpret-model.html)
 
-+   [5 个你不应忽视的机器学习项目，2018年6月](https://www.kdnuggets.com/2018/06/5-machine-learning-projects-overlook-jun-2018.html)
++   [5 个你不应忽视的机器学习项目，2018 年 6 月](https://www.kdnuggets.com/2018/06/5-machine-learning-projects-overlook-jun-2018.html)
 
 +   [机器学习模型的解释：概述](https://www.kdnuggets.com/2017/11/interpreting-machine-learning-models-overview.html)
 
@@ -114,11 +114,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 

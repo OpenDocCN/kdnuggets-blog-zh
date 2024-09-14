@@ -1,8 +1,8 @@
 # 掌握数据分析的力量：分析数据的四种方法
 
-> 原文：[https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)
+> 原文：[`www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html`](https://www.kdnuggets.com/2023/03/master-power-data-analytics-four-approaches-analyzing-data.html)
 
-![掌握数据分析的力量：分析数据的四种方法](../Images/81af523bb62c64300087b35b6772b057.png)
+![掌握数据分析的力量：分析数据的四种方法](img/81af523bb62c64300087b35b6772b057.png)
 
 图片来源：[Leeloo Thefirst](https://www.pexels.com/photo/printouts-under-a-laptop-7887824/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -24,13 +24,13 @@
 
 作为一家企业，你需要能够理解数据并以能够做出更好决策的方式利用它。这就是数据分析的作用。数据分析指的是检查数据以提取见解并做出明智决策的过程。
 
-根据统计数据，数据分析市场正在快速增长，预计到2029年将超过[6500亿美元](https://www.statista.com/statistics/1336002/big-data-analytics-market-size/)。这显示了数据分析在企业和全球经济中的日益重要性。
+根据统计数据，数据分析市场正在快速增长，预计到 2029 年将超过[6500 亿美元](https://www.statista.com/statistics/1336002/big-data-analytics-market-size/)。这显示了数据分析在企业和全球经济中的日益重要性。
 
 未来是由数据驱动的。从预测客户行为到识别优化领域，数据分析可以帮助企业揭示数据中隐藏的秘密，并推动更好的结果。然而，面对众多工具和技术，确定从哪里开始可能会让人感到不知所措。
 
-本文将带你了解[数据分析](/2020/07/5-big-trends-data-analytics.html)，并探讨分析数据的四种方法。阅读完这篇文章后，你将掌握利用数据的力量所需的知识，做出明智的决策，从而将业务提升到新高度。
+本文将带你了解数据分析，并探讨分析数据的四种方法。阅读完这篇文章后，你将掌握利用数据的力量所需的知识，做出明智的决策，从而将业务提升到新高度。
 
-![掌握数据分析的力量：分析数据的四种方法](../Images/3fcc3a36b12409e480b350cbc69c5c13.png)
+![掌握数据分析的力量：分析数据的四种方法](img/3fcc3a36b12409e480b350cbc69c5c13.png)
 
 图片来源：[hbs](https://online.hbs.edu/blog/post/predictive-analytics)
 
@@ -58,7 +58,7 @@
 
 以下是一些预测性分析实际应用的例子：
 
-+   银行可能会使用预测性分析来评估信用风险，并决定是否向客户提供贷款。在开放银行业务中，预测性分析可以帮助建立高度个性化的行为模型，特定于每个客户，并以新的方式评估他们的信用worthiness。对客户而言，[这可能意味着更好且更便宜的访问](https://www.comparebanks.co.uk/banking/open-banking/)银行账户、信用卡和抵押贷款。
++   银行可能会使用预测性分析来评估信用风险，并决定是否向客户提供贷款。在开放银行业务中，预测性分析可以帮助建立高度个性化的行为模型，特定于每个客户，并以新的方式评估他们的信用 worthiness。对客户而言，[这可能意味着更好且更便宜的访问](https://www.comparebanks.co.uk/banking/open-banking/)银行账户、信用卡和抵押贷款。
 
 +   在营销中，预测性分析可以帮助识别哪些客户最可能响应特定的优惠。
 
@@ -78,17 +78,17 @@
 
 处方分析可以帮助你解决各种问题，包括产品组合、劳动力规划、市场营销组合、资本预算和产能管理。
 
-![掌握数据分析的力量：四种数据分析方法](../Images/f8c0de04cea7c268e00cca26e81aa498.png)
+![掌握数据分析的力量：四种数据分析方法](img/f8c0de04cea7c268e00cca26e81aa498.png)
 
 图片由[Pixabay](https://www.pexels.com/photo/smartphone-car-technology-phone-33488/)提供
 
-处方分析的最佳例子是高峰时段使用谷歌地图获取方向。该软件考虑了所有交通工具和交通状况，以计算出最佳路线。交通公司可能会以这种方式使用处方分析来优化配送路线和最小化燃料成本。特别是当你考虑到燃料成本上升时，这一点尤为重要。例如，在加拿大，普通人[每年在燃料上的支出约为2,000加元](https://www.mychoice.ca/blog/most-reliable-cars-canada/)，而在美国，家庭在燃料上的支出占[总年收入的近2.24%](https://www.jdpower.com/cars/shopping-guides/how-much-do-people-spend-on-gas-each-month)。
+处方分析的最佳例子是高峰时段使用谷歌地图获取方向。该软件考虑了所有交通工具和交通状况，以计算出最佳路线。交通公司可能会以这种方式使用处方分析来优化配送路线和最小化燃料成本。特别是当你考虑到燃料成本上升时，这一点尤为重要。例如，在加拿大，普通人[每年在燃料上的支出约为 2,000 加元](https://www.mychoice.ca/blog/most-reliable-cars-canada/)，而在美国，家庭在燃料上的支出占[总年收入的近 2.24%](https://www.jdpower.com/cars/shopping-guides/how-much-do-people-spend-on-gas-each-month)。
 
-然而，与预测分析一样，有效使用处方分析也面临一些挑战。第一个挑战是[高质量数据的可用性](/2022/11/10-common-data-quality-issues-fix.html)，这是进行准确分析和优化所必需的。另一个挑战是所使用的优化算法的复杂性，这可能需要专业的技能和知识来有效实施。
+然而，与预测分析一样，有效使用处方分析也面临一些挑战。第一个挑战是高质量数据的可用性，这是进行准确分析和优化所必需的。另一个挑战是所使用的优化算法的复杂性，这可能需要专业的技能和知识来有效实施。
 
 # 诊断分析
 
-诊断分析是一种数据分析类型，超越了描述性分析，[以识别问题的根本原因](https://www.analyticssteps.com/blogs/all-about-diagnostic-analytics)。它回答诸如“为什么会发生？”和“是什么造成的？”的问题。例如，你可以使用诊断分析来确定为什么你的1月销售额下降了50%。
+诊断分析是一种数据分析类型，超越了描述性分析，[以识别问题的根本原因](https://www.analyticssteps.com/blogs/all-about-diagnostic-analytics)。它回答诸如“为什么会发生？”和“是什么造成的？”的问题。例如，你可以使用诊断分析来确定为什么你的 1 月销售额下降了 50%。
 
 诊断分析涉及探索和分析数据，以识别能够帮助解释问题或难题的关系和相关性。这可以通过回归分析、假设检验和因果分析等技术来完成。
 
@@ -155,7 +155,7 @@
 
 **可用数据的类型和质量**。确保数据准确、完整且相关也很重要。这可能涉及清理、转换或以其他方式准备数据，以确保其适合所选的方法。在许多情况下，数据准备可能是一个耗时且迭代的过程，可能需要专门的工具或专业知识。
 
-**分析所需的资源和技能是可用的**。要进行有效的数据分析，还需要掌握正确的技能和工具。这可能包括统计分析软件、编程语言和可视化工具。一些常见的技能 [可能对数据分析师有用](/2021/02/7-most-recommended-skills-data-scientist.html)，包括数据整理、数据可视化、机器学习和统计推断。
+**分析所需的资源和技能是可用的**。要进行有效的数据分析，还需要掌握正确的技能和工具。这可能包括统计分析软件、编程语言和可视化工具。一些常见的技能 可能对数据分析师有用，包括数据整理、数据可视化、机器学习和统计推断。
 
 # 结论
 

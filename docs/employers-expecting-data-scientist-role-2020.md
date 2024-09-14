@@ -1,12 +1,12 @@
 # 了解雇主对 2020 年数据科学家角色的期望
 
-> 原文：[https://www.kdnuggets.com/2020/08/employers-expecting-data-scientist-role-2020.html](https://www.kdnuggets.com/2020/08/employers-expecting-data-scientist-role-2020.html)
+> 原文：[`www.kdnuggets.com/2020/08/employers-expecting-data-scientist-role-2020.html`](https://www.kdnuggets.com/2020/08/employers-expecting-data-scientist-role-2020.html)
 
-[评论](#comments)
+评论
 
 **作者：[Shareef Shaik](https://www.linkedin.com/in/shareef-shaik-22738310b)，有抱负的数据科学家**
 
-![图像](../Images/d22c44bbd1a960605cbd65b3e9919ac8.png)
+![图像](img/d22c44bbd1a960605cbd65b3e9919ac8.png)
 
 最近，我主动开始寻找数据科学领域的工作机会，我没有任何如硕士或博士等正式的 AI/机器学习教育背景。我完全出于个人兴趣开始学习（而不仅仅是因为炒作）。这是一个挑战性很大的领域，特别是如果你同时从事其他技术工作。我开始了我的学习之旅，通过报名参加许多 MOOCs（大规模在线课程）和阅读多个博客。一开始这些内容并没有太大意义，但在阅读了其他人的代码并亲自处理实时数据集后，它慢慢开始变得有意义。
 
@@ -36,11 +36,11 @@
 
 ### 1\. 网络抓取：
 
-我从印度顶级招聘网站**Naukri.com**上收集了所有相关的职位信息，这个网站几乎是每个求职者和招聘者现在都在使用的。我使用了selenium-python进行网络抓取，因为传统的BeautifulSoup方法在这个网站上效果不好。
+我从印度顶级招聘网站**Naukri.com**上收集了所有相关的职位信息，这个网站几乎是每个求职者和招聘者现在都在使用的。我使用了 selenium-python 进行网络抓取，因为传统的 BeautifulSoup 方法在这个网站上效果不好。
 
-![图示](../Images/a7b5e16fc945f5eec9e2efdaf5eaf719.png)
+![图示](img/a7b5e16fc945f5eec9e2efdaf5eaf719.png)
 
-来自Naukri.com的一个职位样本
+来自 Naukri.com 的一个职位样本
 
 > **免责声明：网络抓取仅用于教育目的。**
 
@@ -56,7 +56,7 @@
 
 进行了基本的清理，找出了缺失值并将其删除。
 
-![文章图片](../Images/1bc5121c85ade1660b1bb68e16584226.png)
+![文章图片](img/1bc5121c85ade1660b1bb68e16584226.png)
 
 ### 2.2\. 处理重复数据：
 
@@ -68,7 +68,7 @@
 
 这是预处理后的样子。
 
-![文章图片](../Images/371ff92d443522d9bc0e0579781e571e.png)
+![文章图片](img/371ff92d443522d9bc0e0579781e571e.png)
 
 ### 3\. 分析：
 
@@ -78,17 +78,17 @@
 
 > **注意**：如果你不来自印度，可以跳过这部分位置。
 
-![文章图片](../Images/86447e9d0d5bb39b76d72eba63669b58.png)
+![文章图片](img/86447e9d0d5bb39b76d72eba63669b58.png)
 
 1.  如果我们观察上面的图表，可以看到近**38%**的职位位于**班加罗尔**。
 
-1.  前四个城市，即**班加罗尔、孟买、海得拉巴**和**浦那**，占据了全国数据科学职位的近72**%**。
+1.  前四个城市，即**班加罗尔、孟买、海得拉巴**和**浦那**，占据了全国数据科学职位的近 72**%**。
 
 1.  如果你来自这些城市中的任何一个，那么你获得数据科学职位的机会可能比其他城市要高。
 
 ### 3.2\. 哪些公司正在积极招聘？：
 
-![文章图片](../Images/db41a2e689921d69c7f4079d86e13ca0.png)
+![文章图片](img/db41a2e689921d69c7f4079d86e13ca0.png)
 
 1.  **Analytics Vidhya** **educon** 以几乎**21%**的职位列表占据了榜首。
 
@@ -98,21 +98,21 @@
 
 ### 3.3. 最受欢迎的经验是什么?：
 
-![Figure](../Images/73867bf029cf124b5a8c071f5259d5e0.png)
+![Figure](img/73867bf029cf124b5a8c071f5259d5e0.png)
 
 不同经验水平的职位机会。
 
-1.  我们可以观察到，公司显然在寻找**有经验的候选人**。似乎对于**拥有5–10年经验的候选人**的职位空缺更多。这是有道理的，因为数据科学家的工作涉及到的关键决策技能是随着经验积累而来的。
+1.  我们可以观察到，公司显然在寻找**有经验的候选人**。似乎对于**拥有 5–10 年经验的候选人**的职位空缺更多。这是有道理的，因为数据科学家的工作涉及到的关键决策技能是随着经验积累而来的。
 
-1.  具有至少**2年**经验的候选人有相当好的机会。
+1.  具有至少**2 年**经验的候选人有相当好的机会。
 
 1.  这并不意味着应届生不能进入，只是有更多的职位空缺面向经验丰富的候选人，而不是应届生。公司通常不会通过这些招聘门户招聘应届生，他们会直接通过校园招聘来招募应届生。应届生可以选择去初创公司工作，以获得必要的经验。
 
 ### 3.4. 需求角色是什么：
 
-这是一个重要的步骤，因为在获取一些结果后，招聘门户通常会开始显示一些与我们搜索的职位无关的其他职位。为了确保我们查看的是正确的职位，让我们检查一下最常提到的前10个职位。
+这是一个重要的步骤，因为在获取一些结果后，招聘门户通常会开始显示一些与我们搜索的职位无关的其他职位。为了确保我们查看的是正确的职位，让我们检查一下最常提到的前 10 个职位。
 
-![Image for post](../Images/6dd0e4895f98a00f3e018c7def7d5ded.png)
+![Image for post](img/6dd0e4895f98a00f3e018c7def7d5ded.png)
 
 1.  如果我们观察上一部分，会发现经验更丰富的人才的职位空缺更多，这引出了基于角色的职位空缺问题。
 
@@ -122,7 +122,7 @@
 
 最终，我们来到了这里。你可能正在阅读这篇文章的主要原因。
 
-![Image for post](../Images/332d04840cb809eacc0fade9e69a913f.png)
+![Image for post](img/332d04840cb809eacc0fade9e69a913f.png)
 
 1.  看起来非常复杂，对吧？别担心，我会在后面的部分详细说明。我在图中包含了许多技能，是因为数据科学涉及的领域广泛。
 
@@ -136,7 +136,7 @@
 
 1.  **数据挖掘** 和 **数据分析** 是每个数据科学家必须经历的关键活动。
 
-![Image for post](../Images/53960e5e1bd61f0417218a145b43713c.png)
+![Image for post](img/53960e5e1bd61f0417218a145b43713c.png)
 
 1.  **强大的统计建模** 是成为更好数据科学家所必需的。
 
@@ -146,41 +146,41 @@
 
 ### 3.5.2\. 哪种编程语言在需求中？
 
-1.  如果你刚开始学习数据科学，一开始你肯定会发现选择合适的编程语言很困难。虽然有很多语言，但竞争始终在Python和R之间。让我们看看数据告诉我们什么。
+1.  如果你刚开始学习数据科学，一开始你肯定会发现选择合适的编程语言很困难。虽然有很多语言，但竞争始终在 Python 和 R 之间。让我们看看数据告诉我们什么。
 
-![Image for post](../Images/4e74b939eb51e09da28a1b234a32ec80.png)
+![Image for post](img/4e74b939eb51e09da28a1b234a32ec80.png)
 
 1.  该行业仍然偏爱**Python**，由于其丰富的库，紧随其后的是**R**语言。
 
 1.  **SQL**是每个数据科学家必备的。虽然它不适合被视为编程语言，但我还是冒险将其包括在内 :).
 
-1.  在Python和R之后，**SAS**和**C++**语言似乎也有很好的需求。
+1.  在 Python 和 R 之后，**SAS**和**C++**语言似乎也有很好的需求。
 
 ### 3.5.3. **选择哪个深度学习框架？**
 
-1.  由于深度学习的突然崛起，许多深度学习框架从Google和Facebook等巨头进入市场。
+1.  由于深度学习的突然崛起，许多深度学习框架从 Google 和 Facebook 等巨头进入市场。
 
-![Image for post](../Images/bb41cfc03509f65dd2b26f8bdf90b03e.png)
+![Image for post](img/bb41cfc03509f65dd2b26f8bdf90b03e.png)
 
 1.  该行业更倾向于**TensorFlow**而不是**PyTorch**。
 
 1.  **Keras**在市场上占有一席之地，人们喜欢它因为其简单易用的特性。
 
-1.  尽管还有许多其他框架，如Caffe、Maxnet，但似乎并没有很多职位空缺。如果不是在全球范围内，至少在印度如此。
+1.  尽管还有许多其他框架，如 Caffe、Maxnet，但似乎并没有很多职位空缺。如果不是在全球范围内，至少在印度如此。
 
 ### 3.5.4\. 哪种大数据技术具有优势？
 
-![Image for post](../Images/58762753c7be4334c0eeaa07a7121d7a.png)
+![Image for post](img/58762753c7be4334c0eeaa07a7121d7a.png)
 
-1.  **Spark**排名第一。可以选择Python版本的Spark - Pyspark。
+1.  **Spark**排名第一。可以选择 Python 版本的 Spark - Pyspark。
 
-1.  **Hadoop**与Spark几乎有相同的机会，只有细微的差别。
+1.  **Hadoop**与 Spark 几乎有相同的机会，只有细微的差别。
 
 1.  **Hive**也有相当多的职位空缺。
 
-### **3.5.5\. 哪个云服务提供商在ML中需求量大？**
+### **3.5.5\. 哪个云服务提供商在 ML 中需求量大？**
 
-![Image for post](../Images/f62d31f195ab95999179ade484447a19.png)
+![Image for post](img/f62d31f195ab95999179ade484447a19.png)
 
 1.  训练模型涉及大量计算，这可能会变得非常昂贵。公司正在寻找更便宜的方式来完成工作，这也是这些云平台进入视野的原因。
 
@@ -190,7 +190,7 @@
 
 ### **3.5.6\. 数据可视化工具的需求？**
 
-![Image for post](../Images/77465b019158839dee40b6c847125390.png)
+![Image for post](img/77465b019158839dee40b6c847125390.png)
 
 1.  雇主对**Tableau**在数据可视化方面表现出更多兴趣。
 
@@ -212,11 +212,11 @@
 
 ### **参考文献：**
 
-1.  [https://medium.com/@krishnakummar/donut-chart-with-python-matplotlib-d411033c960b](https://medium.com/@krishnakummar/donut-chart-with-python-matplotlib-d411033c960b)
+1.  [`medium.com/@krishnakummar/donut-chart-with-python-matplotlib-d411033c960b`](https://medium.com/@krishnakummar/donut-chart-with-python-matplotlib-d411033c960b)
 
-1.  [https://stackoverflow.com/questions/51389377/unfolding-bag-of-words-in-pandas-column-python](https://stackoverflow.com/questions/51389377/unfolding-bag-of-words-in-pandas-column-python)
+1.  [`stackoverflow.com/questions/51389377/unfolding-bag-of-words-in-pandas-column-python`](https://stackoverflow.com/questions/51389377/unfolding-bag-of-words-in-pandas-column-python)
 
-1.  [https://www.naukri.com](https://www.naukri.com/)
+1.  [`www.naukri.com`](https://www.naukri.com/)
 
 **简介： [Shareef Shaik](https://www.linkedin.com/in/shareef-shaik-22738310b?lipi=urn%3Ali%3Apage%3Amessaging_thread%3Baa9EdXg7SzOQFeTKwXAnYw%3D%3D)** (**[Medium](https://medium.com/@shareefshaik1375)**) 是一名有抱负的数据科学家，热衷于利用 AI 解决实际问题。
 
@@ -224,11 +224,11 @@
 
 **相关：**
 
-+   [探索数据科学的真实世界](/2020/06/exploring-real-world-data-science.html)
++   探索数据科学的真实世界
 
-+   [数据工程需要掌握的技能](/2020/06/skills-build-data-engineering.html)
++   数据工程需要掌握的技能
 
-+   [如何像数据科学家一样思考](/2020/05/think-like-data-scientist-data-analyst.html)
++   如何像数据科学家一样思考
 
 ### 更多相关话题
 

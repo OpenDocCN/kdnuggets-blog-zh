@@ -1,22 +1,22 @@
 # 数据科学已经改变，而非消亡！
 
-> 原文：[https://www.kdnuggets.com/2023/08/data-science-changed-died.html](https://www.kdnuggets.com/2023/08/data-science-changed-died.html)
+> 原文：[`www.kdnuggets.com/2023/08/data-science-changed-died.html`](https://www.kdnuggets.com/2023/08/data-science-changed-died.html)
 
-![数据科学已经改变，而非消亡！](../Images/2cc8dc4fd660087bd64de0c1c4dbc231.png)
+![数据科学已经改变，而非消亡！](img/2cc8dc4fd660087bd64de0c1c4dbc231.png)
 
 作者提供的图像
 
-随着技术的不断发展和人工智能在我们日常生活中的应用，许多人担心工作岗位的流失。甚至有人说数据科学在消亡。许多人表示，机器学习正在取代数据科学，并称数据科学是一个饱和的领域。随着ChatGPT等工具的广泛使用以及它们在编码任务等方面的应用，我们在质疑数据科学是否在消亡。
+随着技术的不断发展和人工智能在我们日常生活中的应用，许多人担心工作岗位的流失。甚至有人说数据科学在消亡。许多人表示，机器学习正在取代数据科学，并称数据科学是一个饱和的领域。随着 ChatGPT 等工具的广泛使用以及它们在编码任务等方面的应用，我们在质疑数据科学是否在消亡。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -28,13 +28,13 @@
 
 # 数据科学的变化
 
-由于生成式AI的发展以及每个人都想进入科技行业的热潮，数据科学中的各种元素正在发生变化。让我们回顾一下数据科学中的一些变化。
+由于生成式 AI 的发展以及每个人都想进入科技行业的热潮，数据科学中的各种元素正在发生变化。让我们回顾一下数据科学中的一些变化。
 
 ## 技能
 
-诸如探索性数据分析这样的任务曾经提供了重要的洞察，现在发生了巨大的变化。它通常需要数据科学家和数据分析师的帮助。然而，现在有了像ChatGPT这样的工具以及快速的数据科学课程——每个人都相信自己能编码，并且在Python中技术熟练。
+诸如探索性数据分析这样的任务曾经提供了重要的洞察，现在发生了巨大的变化。它通常需要数据科学家和数据分析师的帮助。然而，现在有了像 ChatGPT 这样的工具以及快速的数据科学课程——每个人都相信自己能编码，并且在 Python 中技术熟练。
 
-然而，这并不是真的。如果你具备正确的技能组合，并且在如Python等编程语言中非常熟练，你将会脱颖而出。组织仍会寻找高素质的数据科学家来完成任务，而不是ChatGPT的回答或那些只参加过快速数据科学课程的人。
+然而，这并不是真的。如果你具备正确的技能组合，并且在如 Python 等编程语言中非常熟练，你将会脱颖而出。组织仍会寻找高素质的数据科学家来完成任务，而不是 ChatGPT 的回答或那些只参加过快速数据科学课程的人。
 
 作为一名数据科学家，你的工作将是适应当前的市场。不断学习和提升技能是你保持竞争力并被真正重视的方式。
 

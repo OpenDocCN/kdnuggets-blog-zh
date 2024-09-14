@@ -1,8 +1,8 @@
 # 检索增强生成：信息检索与文本生成的结合
 
-> 原文：[https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)
+> 原文：[`www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation`](https://www.kdnuggets.com/retrieval-augmented-generation-where-information-retrieval-meets-text-generation)
 
-![检索增强生成：信息检索与文本生成的结合](../Images/2006084f9420ad1b6dee198f8f65d3dd.png)
+![检索增强生成：信息检索与文本生成的结合](img/2006084f9420ad1b6dee198f8f65d3dd.png)
 
 图片由作者创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -58,7 +58,7 @@ RAG 相较于模型微调提供了这些优势：
 
 **5\. 评估**：评估性能与其他可能的生成步骤相比是有用的，无论是在改变现有流程还是在测试这类系统的固有延迟和准确性时。
 
-![检索增强生成过程](../Images/5f9c60a41d92f050626a2631f83413d0.png)
+![检索增强生成过程](img/5f9c60a41d92f050626a2631f83413d0.png)
 
 图片由作者创建
 
@@ -74,25 +74,25 @@ RAG 相较于模型微调提供了这些优势：
 
 **4\. 查询**：当客户查询到达时，将根据问题文本在向量存储数据库中进行查找，然后使用语言模型生成响应，利用这些前体数据的来源作为上下文。
 
-**5\. 评估**：系统性能将通过将其与其他选项（如传统语言模型检索）进行比较来评估，衡量指标包括回答正确性、响应延迟和整体用户满意度，以确保RAG系统可以进行调整和优化，以提供更优异的结果。
+**5\. 评估**：系统性能将通过将其与其他选项（如传统语言模型检索）进行比较来评估，衡量指标包括回答正确性、响应延迟和整体用户满意度，以确保 RAG 系统可以进行调整和优化，以提供更优异的结果。
 
-这个示例演练应该让你对RAG背后的方法论及其在传达信息检索能力方面的应用有一定了解。
+这个示例演练应该让你对 RAG 背后的方法论及其在传达信息检索能力方面的应用有一定了解。
 
 ## 结论
 
-引入检索增强生成（RAG），即结合文本生成和信息检索以提高语言模型输出的准确性和上下文一致性，是本文的主题。该方法允许将存储在索引来源中的数据提取并增强，融入到语言模型生成的输出中。这种RAG系统可以比仅仅微调语言模型提供更好的价值。
+引入检索增强生成（RAG），即结合文本生成和信息检索以提高语言模型输出的准确性和上下文一致性，是本文的主题。该方法允许将存储在索引来源中的数据提取并增强，融入到语言模型生成的输出中。这种 RAG 系统可以比仅仅微调语言模型提供更好的价值。
 
-我们RAG之旅的下一步将是学习行业工具，以便实现我们自己的RAG系统。我们将首先专注于利用来自LlamaIndex的工具，如数据连接器、引擎和应用连接器，以简化RAG的集成和扩展。但我们将把这留到下一篇文章。
+我们 RAG 之旅的下一步将是学习行业工具，以便实现我们自己的 RAG 系统。我们将首先专注于利用来自 LlamaIndex 的工具，如数据连接器、引擎和应用连接器，以简化 RAG 的集成和扩展。但我们将把这留到下一篇文章。
 
-在即将到来的项目中，我们将构建复杂的RAG系统，并考察RAG技术的潜在用途和改进。希望在人工智能领域揭示许多新的可能性，并利用这些多样的数据源构建更智能和具备上下文的系统。
+在即将到来的项目中，我们将构建复杂的 RAG 系统，并考察 RAG 技术的潜在用途和改进。希望在人工智能领域揭示许多新的可能性，并利用这些多样的数据源构建更智能和具备上下文的系统。
 
-[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[机器学习大师](https://machinelearningmastery.com/)的特约编辑，马修致力于让复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法和探索新兴的人工智能。他的使命是使数据科学社区的知识普及化。马修从6岁开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[机器学习大师](https://machinelearningmastery.com/)的特约编辑，马修致力于让复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法和探索新兴的人工智能。他的使命是使数据科学社区的知识普及化。马修从 6 岁开始编程。
 
 ### 更多相关主题
 
-+   [检索增强生成如何使LLMs更智能](https://www.kdnuggets.com/how-retrieval-augment-generation-makes-llms-smarter)
++   [检索增强生成如何使 LLMs 更智能](https://www.kdnuggets.com/how-retrieval-augment-generation-makes-llms-smarter)
 
-+   [认识Gorilla：加州大学伯克利分校和微软的API增强LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
++   [认识 Gorilla：加州大学伯克利分校和微软的 API 增强 LLM…](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
 
 +   [特征选择：科学与艺术的交汇点](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
 

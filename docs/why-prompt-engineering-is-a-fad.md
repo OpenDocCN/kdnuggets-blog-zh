@@ -1,22 +1,22 @@
 # 为什么提示工程是个时尚
 
-> 原文：[https://www.kdnuggets.com/why-prompt-engineering-is-a-fad](https://www.kdnuggets.com/why-prompt-engineering-is-a-fad)
+> 原文：[`www.kdnuggets.com/why-prompt-engineering-is-a-fad`](https://www.kdnuggets.com/why-prompt-engineering-is-a-fad)
 
-![为什么提示工程是个时尚](../Images/b303f3d06bf590f09f33fec7505b27c2.png)
+![为什么提示工程是个时尚](img/b303f3d06bf590f09f33fec7505b27c2.png)
 
-图片由编辑使用DALL•E 3创建
+图片由编辑使用 DALL•E 3 创建
 
-在不断扩展的AI和ML宇宙中，一颗新星已经出现：[提示工程](/2023/06/art-prompt-engineering-decoding-chatgpt.html)。这一新兴领域围绕着战略性地设计输入，以引导AI模型生成特定的、期望的输出。
+在不断扩展的 AI 和 ML 宇宙中，一颗新星已经出现：提示工程。这一新兴领域围绕着战略性地设计输入，以引导 AI 模型生成特定的、期望的输出。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,11 +26,11 @@
 
 # 提示工程的兴起
 
-我们都看到了这些数据——全球AI市场到2030年将[价值1.6万亿美元](https://youngandtheinvested.com/artificial-intelligence-statistics/)，OpenAI正[提供90万美元的薪资](https://medium.com/tech-pulse/openai-900k-total-compensation-for-senior-engineers-821fe03ed0fe)，这还没有提及GPT-4、Claude以及各种其他LLMs生成的数十亿，甚至数万亿的词汇。当然，数据科学家、机器学习专家和其他高层专业人士处于最前沿。
+我们都看到了这些数据——全球 AI 市场到 2030 年将[价值 1.6 万亿美元](https://youngandtheinvested.com/artificial-intelligence-statistics/)，OpenAI 正[提供 90 万美元的薪资](https://medium.com/tech-pulse/openai-900k-total-compensation-for-senior-engineers-821fe03ed0fe)，这还没有提及 GPT-4、Claude 以及各种其他 LLMs 生成的数十亿，甚至数万亿的词汇。当然，数据科学家、机器学习专家和其他高层专业人士处于最前沿。
 
-然而，2022年改变了一切，因为GPT-3一经公开发布就迅速普及。突然间，普通人意识到提示的重要性以及GIGO——垃圾进，垃圾出。 如果你写了一个没有任何细节的马虎提示，LLM将对输出结果拥有完全的控制权。一开始很简单，但用户很快意识到了模型的真正能力。
+然而，2022 年改变了一切，因为 GPT-3 一经公开发布就迅速普及。突然间，普通人意识到提示的重要性以及 GIGO——垃圾进，垃圾出。 如果你写了一个没有任何细节的马虎提示，LLM 将对输出结果拥有完全的控制权。一开始很简单，但用户很快意识到了模型的真正能力。
 
-然而，人们很快开始尝试更复杂的工作流程和更长的提示，这进一步强调了巧妙编织语言的价值。[自定义指令](/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html) 只扩大了可能性，加速了提示工程师的崛起——这种专业人士可以运用逻辑、推理和对 LLM 行为的知识来随心所欲地产生所需的输出。
+然而，人们很快开始尝试更复杂的工作流程和更长的提示，这进一步强调了巧妙编织语言的价值。自定义指令 只扩大了可能性，加速了提示工程师的崛起——这种专业人士可以运用逻辑、推理和对 LLM 行为的知识来随心所欲地产生所需的输出。
 
 # 说机器的语言？
 
@@ -50,7 +50,7 @@
 
 +   即使是最优秀的提示工程师，也不算真正的“工程师”。例如，SEO 专家可以使用 GPT 插件或甚至本地运行的 LLM [来寻找反向链接机会](https://bluetree.ai/backlink-importance-and-benefits/)，或者软件工程师可能知道如何 [使用 Copilot 进行编写、测试和部署代码](https://docs.github.com/en/copilot/getting-started-with-github-copilot?tool=vimneovim)。但归根结底，他们就是这样——单一任务，在大多数情况下依赖于之前在某一领域的专长。
 
-+   除了 [硅谷偶尔出现的提示工程职位](https://jobs.lever.co/Anthropic/e3cde481-d446-460f-b576-93cab67bd1ed)，几乎没有人对提示工程有所了解，更不用说其他方面了。公司正在缓慢而谨慎地采纳LLMs，这与每项创新一样。但我们都知道这并不能阻止炒作的浪潮。
++   除了 [硅谷偶尔出现的提示工程职位](https://jobs.lever.co/Anthropic/e3cde481-d446-460f-b576-93cab67bd1ed)，几乎没有人对提示工程有所了解，更不用说其他方面了。公司正在缓慢而谨慎地采纳 LLMs，这与每项创新一样。但我们都知道这并不能阻止炒作的浪潮。
 
 # 关于提示工程的炒作
 
@@ -60,40 +60,40 @@
 
 # 现实与炒作背后的真相
 
-剥去炒作的层层外衣，揭示了一个更为复杂的现实。从提示工程在不同应用中的可扩展性到对可重复性和标准化的担忧，技术和伦理挑战无处不在。与 [传统且成熟的AI职业](/2021/12/ucsd-become-freelance-artificial-intelligence-engineer.html)（例如与数据科学相关的职业）相比，提示工程的光环开始黯淡，暴露出虽然强大但仍存在重大局限性的工具。
+剥去炒作的层层外衣，揭示了一个更为复杂的现实。从提示工程在不同应用中的可扩展性到对可重复性和标准化的担忧，技术和伦理挑战无处不在。与 传统且成熟的 AI 职业（例如与数据科学相关的职业）相比，提示工程的光环开始黯淡，暴露出虽然强大但仍存在重大局限性的工具。
 
-这就是为什么提示工程如果是一种潮流——每天与ChatGPT对话并找到一份中六位数薪资的工作的想法不过是一个神话。确实，一些过于热衷的硅谷初创公司可能在寻找提示工程师，但这并不是一个可行的职业。至少目前还不是。
+这就是为什么提示工程如果是一种潮流——每天与 ChatGPT 对话并找到一份中六位数薪资的工作的想法不过是一个神话。确实，一些过于热衷的硅谷初创公司可能在寻找提示工程师，但这并不是一个可行的职业。至少目前还不是。
 
 与此同时，作为一个概念的提示工程将继续保持相关性，并且肯定会变得更加重要。编写优质提示的技能、有效利用令牌、以及知道如何触发某些输出，将在数据科学、LLM 和人工智能整体领域之外同样有用。
 
-我们已经看到ChatGPT [改变了人们学习、工作、沟通甚至组织生活的方式](https://www.sfchronicle.com/bayarea/article/ai-chatgpt-education-work-17846358.php)，因此，提示技能将变得更加相关。实际上，谁不兴奋于用可靠的AI助手来自动化那些无聊的工作呢？
+我们已经看到 ChatGPT [改变了人们学习、工作、沟通甚至组织生活的方式](https://www.sfchronicle.com/bayarea/article/ai-chatgpt-education-work-17846358.php)，因此，提示技能将变得更加相关。实际上，谁不兴奋于用可靠的 AI 助手来自动化那些无聊的工作呢？
 
 # 提示工程及其未来：它会超越一时的潮流吗？
 
 探索提示工程的复杂领域需要一种平衡的方法，这种方法承认其潜力，同时保持对其局限性的现实认知。此外，我们还必须意识到提示工程的双关含义：
 
-1.  促使LLM按照个人意愿行事，尽可能少的努力或步骤
+1.  促使 LLM 按照个人意愿行事，尽可能少的努力或步骤
 
 1.  一项围绕上述行为的职业
 
-因此，在未来，随着输入窗口的增加和LLM在创建比简单线框图和机器人般的社交媒体文案更复杂的内容时变得更加娴熟，提示工程将成为一项必备技能。可以把它看作是如今知道如何使用Word的等价物。
+因此，在未来，随着输入窗口的增加和 LLM 在创建比简单线框图和机器人般的社交媒体文案更复杂的内容时变得更加娴熟，提示工程将成为一项必备技能。可以把它看作是如今知道如何使用 Word 的等价物。
 
 # 结论
 
-总之，提示工程正处于一个十字路口，它的命运由炒作、希望和严酷现实的交汇所决定。它是会巩固自己在AI领域的地位，还是会消退成为科技流行趋势的历史一部分，尚未可知。然而，可以肯定的是，无论好坏，它的旅程，充满争议，短时间内不会结束。
+总之，提示工程正处于一个十字路口，它的命运由炒作、希望和严酷现实的交汇所决定。它是会巩固自己在 AI 领域的地位，还是会消退成为科技流行趋势的历史一部分，尚未可知。然而，可以肯定的是，无论好坏，它的旅程，充满争议，短时间内不会结束。
 
-[](http://nahlawrites.com/)****[娜拉·戴维斯](http://nahlawrites.com/)**** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她曾在一家Inc. 5,000的体验品牌组织担任首席程序员，该组织的客户包括三星、时代华纳、Netflix和索尼，除了其他令人兴奋的工作之外。
+[](http://nahlawrites.com/)****[娜拉·戴维斯](http://nahlawrites.com/)**** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她曾在一家 Inc. 5,000 的体验品牌组织担任首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼，除了其他令人兴奋的工作之外。
 
 ### 更多相关话题
 
 +   [提示工程的兴衰：流行还是未来？](https://www.kdnuggets.com/the-rise-and-fall-of-prompt-engineering-fad-or-future)
 
-+   [提示工程的艺术：解码ChatGPT](https://www.kdnuggets.com/2023/06/art-prompt-engineering-decoding-chatgpt.html)
++   [提示工程的艺术：解码 ChatGPT](https://www.kdnuggets.com/2023/06/art-prompt-engineering-decoding-chatgpt.html)
 
-+   [提示工程101：掌握有效的LLM沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
++   [提示工程 101：掌握有效的 LLM 沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
 
 +   [提示工程：一个综合梦想](https://www.kdnuggets.com/prompt-engineering-an-integrated-dream)
 
 +   [有效提示工程的艺术：免费课程和…](https://www.kdnuggets.com/the-art-of-effective-prompt-engineering-with-free-courses-and-certifications)
 
-+   [3个新的提示工程资源值得查看](https://www.kdnuggets.com/3-new-prompt-engineering-resources)
++   [3 个新的提示工程资源值得查看](https://www.kdnuggets.com/3-new-prompt-engineering-resources)

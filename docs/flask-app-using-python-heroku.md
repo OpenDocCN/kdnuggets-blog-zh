@@ -1,22 +1,22 @@
 # 使用 Python 和 Heroku 创建并部署你的第一个 Flask 应用程序
 
-> 原文：[https://www.kdnuggets.com/2020/09/flask-app-using-python-heroku.html](https://www.kdnuggets.com/2020/09/flask-app-using-python-heroku.html)
+> 原文：[`www.kdnuggets.com/2020/09/flask-app-using-python-heroku.html`](https://www.kdnuggets.com/2020/09/flask-app-using-python-heroku.html)
 
-[评论](#comments)
+评论
 
 **由 [Divy Shah](https://www.linkedin.com/in/shahdivy/)，数据科学家**。
 
-![](../Images/a5ccb022ebe6f89aa4d938bcecd28598.png)
+![](img/a5ccb022ebe6f89aa4d938bcecd28598.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -70,7 +70,7 @@ pip install waitress
 
 ```
 
-![](../Images/3f9487b64988aa7f716a0c17b97b57a5.png)
+![](img/3f9487b64988aa7f716a0c17b97b57a5.png)
 
 *app.py*
 
@@ -122,7 +122,7 @@ from trending import get_trending
 
 下面是我的 trending.py 文件的样子：
 
-![](../Images/f2e8acd7ba4821456f678a8b129f6d51.png)
+![](img/f2e8acd7ba4821456f678a8b129f6d51.png)
 
 *trending.py*
 
@@ -136,7 +136,7 @@ from trending import get_trending
 
 下面是我的 display.html 文件的样子：
 
-![](../Images/a88652b5452f9330530db7e9f82ca8f6.png)
+![](img/a88652b5452f9330530db7e9f82ca8f6.png)
 
 *display.html*
 
@@ -226,7 +226,7 @@ git push heroku master
 
 你的应用现在已经上线，你可以使用生成的 URL 查看你的网页应用。
 
-*请查看我的演示网页应用：*[https://trending-shows.herokuapp.com/](https://trending-shows.herokuapp.com/)
+*请查看我的演示网页应用：*[`trending-shows.herokuapp.com/`](https://trending-shows.herokuapp.com/)
 
 [原文](https://medium.com/towards-artificial-intelligence/create-and-deploy-your-first-flask-app-using-python-and-heroku-aee04eaddc71)。经许可转载。
 

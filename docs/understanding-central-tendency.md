@@ -1,8 +1,8 @@
 # 理解集中趋势
 
-> 原文：[https://www.kdnuggets.com/2023/05/understanding-central-tendency.html](https://www.kdnuggets.com/2023/05/understanding-central-tendency.html)
+> 原文：[`www.kdnuggets.com/2023/05/understanding-central-tendency.html`](https://www.kdnuggets.com/2023/05/understanding-central-tendency.html)
 
-![理解集中趋势](../Images/1438fe1a1be0d1472d333fbb2bb3d5a1.png)
+![理解集中趋势](img/1438fe1a1be0d1472d333fbb2bb3d5a1.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 # 中位数
 
-中位数是一个重要的集中趋势度量，不容易受到离群值的影响。数据集的中位数可以通过对数据集进行排序，然后确定中间值来确定，使得数据集的50%值小于中位数，50%值大于中位数。
+中位数是一个重要的集中趋势度量，不容易受到离群值的影响。数据集的中位数可以通过对数据集进行排序，然后确定中间值来确定，使得数据集的 50%值小于中位数，50%值大于中位数。
 
 # 计算数据集的均值和中位数
 
@@ -57,7 +57,7 @@ ax.yaxis.grid(True)
 plt.show() 
 ```
 
-![理解集中趋势](../Images/4512783ea60e2a6d9462ab060a0411ab.png)
+![理解集中趋势](img/4512783ea60e2a6d9462ab060a0411ab.png)
 
 箱线图显示了有和没有离群值的样本数据。小的空心圆点表示离群值。图片由作者提供。
 
@@ -81,7 +81,7 @@ np.median(data2)
 >>> 5.565300519330409
 ```
 
-我们观察到，第二个数据集中离群值的存在导致均值从5.006增加到20.45，而中位数从5.075到5.565的变化相对较小。这表明中位数是一个稳健的集中趋势度量，因为它不容易受到数据集中离群值的影响。
+我们观察到，第二个数据集中离群值的存在导致均值从 5.006 增加到 20.45，而中位数从 5.075 到 5.565 的变化相对较小。这表明中位数是一个稳健的集中趋势度量，因为它不容易受到数据集中离群值的影响。
 
 # 总结
 
@@ -93,7 +93,7 @@ np.median(data2)
 
 +   [免费麻省理工学院微积分课程：理解深度学习的关键](https://www.kdnuggets.com/2020/07/free-mit-courses-calculus-key-deep-learning.html)
 
-+   [3分钟理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
++   [3 分钟理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
 
 +   [理解贝叶斯定理的三种方法将提升你的数据科学水平](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
 

@@ -1,26 +1,26 @@
 # 如何编写更好的 SQL 查询：权威指南 – 第二部分
 
-> 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-2.html](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-2.html)
+> 原文：[`www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-2.html`](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-2.html)
 
 **作者：卡尔琳·威廉姆斯，数据科学记者及[DataCamp](https://www.datacamp.com/)贡献者**。
 
-> **编辑注释：** 本文是第一部分的续篇，[第一部分已于昨日发布，可在此处找到](/2017/08/write-better-sql-queries-definitive-guide-part-1.html)。虽然本文内容可以被视为独立于第一部分，但在继续之前阅读第一部分将极有帮助。
+> **编辑注释：** 本文是第一部分的续篇，第一部分已于昨日发布，可在此处找到。虽然本文内容可以被视为独立于第一部分，但在继续之前阅读第一部分将极有帮助。
 > 
 > * * *
 > 
 > ## 我们的前三名课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 > 
 > * * *
 > 
 > 首篇文章的引言段落如下，以设置教程的总体氛围。
 
-结构化查询语言（SQL）是数据科学行业中必不可少的技能，通常来说，学习这项技能相对容易。然而，大多数人忘记了SQL不仅仅是编写查询，这只是走向成功的第一步。确保查询性能良好或符合你所处的上下文是另一回事。
+结构化查询语言（SQL）是数据科学行业中必不可少的技能，通常来说，学习这项技能相对容易。然而，大多数人忘记了 SQL 不仅仅是编写查询，这只是走向成功的第一步。确保查询性能良好或符合你所处的上下文是另一回事。
 
 ### 基于集合的方法与过程方法的查询
 
@@ -34,7 +34,7 @@
 
 另一种方法是基于集合的方法，你只需指定要做的事情。你的角色是指定你希望从查询中获得的结果集的条件或要求。数据如何检索，则留给内部机制来确定查询的实现方式：你让数据库引擎确定执行查询的最佳算法或处理逻辑。
 
-由于SQL是基于集合的，这种方法显然比过程式方法更有效，这也解释了为什么在某些情况下，SQL可能比代码运行得更快。
+由于 SQL 是基于集合的，这种方法显然比过程式方法更有效，这也解释了为什么在某些情况下，SQL 可能比代码运行得更快。
 
 **提示** 集合方法的查询也是数据科学行业中大多数顶级雇主要求你掌握的方法！你经常需要在这两种方法之间切换。
 
@@ -42,7 +42,7 @@
 
 ### 从查询到执行计划
 
-了解反模式并非静态且会随着你作为SQL开发人员的成长而演变，并且考虑替代方案时有很多因素，也意味着避免查询反模式和重写查询可能是一个相当困难的任务。任何帮助都可能派上用场，这就是为什么使用一些工具来优化查询的结构化方法可能是一个好选择。
+了解反模式并非静态且会随着你作为 SQL 开发人员的成长而演变，并且考虑替代方案时有很多因素，也意味着避免查询反模式和重写查询可能是一个相当困难的任务。任何帮助都可能派上用场，这就是为什么使用一些工具来优化查询的结构化方法可能是一个好选择。
 
 **注意** 此外，上一节提到的一些反模式根源于性能问题，例如`AND`、`OR`和`NOT`运算符及其缺乏索引的使用。考虑性能不仅需要更结构化的方法，还需要更深入的方法。
 
@@ -56,11 +56,11 @@
 
 +   一些软件包提供了生成查询计划图形表示的工具。看看这个例子：
 
-![](../Images/a67bb6d903a9f081ed2d79f225552560.png)
+![](img/a67bb6d903a9f081ed2d79f225552560.png)
 
-+   其他工具将能为你提供查询计划的文本描述。例如，Oracle中的`EXPLAIN PLAN`语句，但根据你使用的RDBMS，指令的名称会有所不同。在其他地方，你可能会找到`EXPLAIN`（MySQL、PostgreSQL）或`EXPLAIN QUERY PLAN`（SQLite）。
++   其他工具将能为你提供查询计划的文本描述。例如，Oracle 中的`EXPLAIN PLAN`语句，但根据你使用的 RDBMS，指令的名称会有所不同。在其他地方，你可能会找到`EXPLAIN`（MySQL、PostgreSQL）或`EXPLAIN QUERY PLAN`（SQLite）。
 
-**注意**，如果你在使用PostgreSQL，`EXPLAIN`和`EXPLAIN ANALYZE`的区别在于，`EXPLAIN`只会提供一个描述，说明规划者打算如何执行查询，而不实际运行查询，而`EXPLAIN ANALYZE`则会实际执行查询并返回期望的与实际的查询计划的分析。一般来说，实际执行计划是你实际运行查询的结果，而估算执行计划是预测它会做什么，而不执行查询。虽然在逻辑上等效，但实际执行计划要有用得多，因为它包含了关于实际执行查询时发生的额外细节和统计信息。
+**注意**，如果你在使用 PostgreSQL，`EXPLAIN`和`EXPLAIN ANALYZE`的区别在于，`EXPLAIN`只会提供一个描述，说明规划者打算如何执行查询，而不实际运行查询，而`EXPLAIN ANALYZE`则会实际执行查询并返回期望的与实际的查询计划的分析。一般来说，实际执行计划是你实际运行查询的结果，而估算执行计划是预测它会做什么，而不执行查询。虽然在逻辑上等效，但实际执行计划要有用得多，因为它包含了关于实际执行查询时发生的额外细节和统计信息。
 
 在本节的剩余部分，你将学习更多关于`EXPLAIN`和`ANALYZE`的内容，以及如何使用这两个工具来深入了解查询计划和查询的可能性能。为此，你将从一些示例开始，在这些示例中，你将处理两个表：`one_million`和`half_million`。
 
@@ -186,4 +186,4 @@ Total runtime: 3833.310 ms
 
 +   [如何在原生 Python 中编写 SQL](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)
 
-+   [KDnuggets 新闻，12月7日：破解数据科学十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：破解数据科学十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)

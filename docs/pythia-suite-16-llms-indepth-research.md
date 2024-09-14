@@ -1,8 +1,8 @@
 # Pythia: 一套用于深入研究的 16 个 LLM
 
-> 原文：[https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html](https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html)
+> 原文：[`www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html`](https://www.kdnuggets.com/2023/08/pythia-suite-16-llms-indepth-research.html)
 
-![Pythia: 一套用于深入研究的 16 个 LLM](../Images/c61095fd3fa8a2c8268d5fed9d416497.png)
+![Pythia: 一套用于深入研究的 16 个 LLM](img/c61095fd3fa8a2c8268d5fed9d416497.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -48,7 +48,7 @@ Pythia LLM 套件是在以下数据集上训练的：
 
 这些模型中的每一个都在 Pile 和去重的 Pile 数据集上进行训练，形成了总共 16 个模型。下表展示了模型的大小和部分超参数。
 
-![Pythia: 一套用于深入研究的 16 个 LLM](../Images/4c7cde031787d773503da571915b54d9.png)
+![Pythia: 一套用于深入研究的 16 个 LLM](img/4c7cde031787d773503da571915b54d9.png)
 
 模型和超参数 | [图像来源](https://arxiv.org/pdf/2304.01373.pdf)
 
@@ -70,7 +70,7 @@ Pythia LLM 套件是在以下数据集上训练的：
 
 ## 模型检查点
 
-每个模型有154个检查点。每1000次迭代设置一个检查点。此外，在训练过程的早期阶段，还有按对数间隔设置的检查点：1、2、4、8、16、32、64、128、256 和 512。
+每个模型有 154 个检查点。每 1000 次迭代设置一个检查点。此外，在训练过程的早期阶段，还有按对数间隔设置的检查点：1、2、4、8、16、32、64、128、256 和 512。
 
 ## Pythia 与其他语言模型的比较
 
@@ -78,7 +78,7 @@ Pythia LLM 套件与现有语言建模基准进行评估，包括 [OpenAI 的 LA
 
 # 优势和局限性
 
-Pythia LLM 套件的主要优势是可重复性。数据集是公开的，预标记的数据加载器和154个模型检查点也都是公开的。超参数的完整列表也已发布。这使得模型训练和分析的复制变得更简单。
+Pythia LLM 套件的主要优势是可重复性。数据集是公开的，预标记的数据加载器和 154 个模型检查点也都是公开的。超参数的完整列表也已发布。这使得模型训练和分析的复制变得更简单。
 
 在 [1] 中，作者解释了他们为何选择英文数据集而非多语言文本语料库的理由。但拥有可重复的多语言大型语言模型训练流程是有帮助的，特别是在鼓励更多的研究和多语言大型语言模型动态的研究方面。
 
@@ -100,7 +100,7 @@ Pythia LLM 套件的主要优势是可重复性。数据集是公开的，预标
 
 模型的规模与在更复杂任务（如算术和数学推理）上的表现之间也存在相关性。
 
-![Pythia：一个用于深入研究的 16 个 LLM 套件](../Images/972d18fbdb29c398a48f15661db1b227.png)
+![Pythia：一个用于深入研究的 16 个 LLM 套件](img/972d18fbdb29c398a48f15661db1b227.png)
 
 算术加法任务表现 | [图片来源](https://arxiv.org/pdf/2304.01373.pdf)
 

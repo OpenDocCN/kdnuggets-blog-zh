@@ -1,6 +1,6 @@
 # 5 个你不能再忽视的机器学习项目
 
-> 原文：[https://www.kdnuggets.com/2016/05/five-machine-learning-projects-cant-overlook.html](https://www.kdnuggets.com/2016/05/five-machine-learning-projects-cant-overlook.html)
+> 原文：[`www.kdnuggets.com/2016/05/five-machine-learning-projects-cant-overlook.html`](https://www.kdnuggets.com/2016/05/five-machine-learning-projects-cant-overlook.html)
 
 一般来说，**流行的**机器学习项目之所以流行，是因为它们提供了广泛的所需服务，或者它们是第一个（或可能是最好的）为用户提供某个特定专业服务的项目。这些流行的项目包括 Scikit-learn、TensorFlow、Theano、MXNet（也许？）、Weka（以前）等等。根据你所工作的特定生态系统和你的机器学习目标，你认为流行的项目可能会有所不同；然而，它们都有一个共同点，那就是它们为大量用户提供服务。
 
@@ -48,7 +48,7 @@ trainer.run(mnist, controllers=[annealer])
 
 [Sebastian Raschka](https://twitter.com/rasbt) 汇集了 MLxtend，他迅速指出这是一项正在进行中的工作，但也试图覆盖许多不同的功能。MLxtend 是一个用于机器学习任务的有用工具和扩展的集合。
 
-![MLxtend](../Images/a1803f039bb3a49863e5f0c86669d426.png)Sebastian 共享了以下内容，关于项目的起源及其目标：
+![MLxtend](img/a1803f039bb3a49863e5f0c86669d426.png)Sebastian 共享了以下内容，关于项目的起源及其目标：
 
 > 本质上，这只是与机器学习和数据科学相关的有用工具和参考实现的集合。我为什么会想到这个？有几个原因：
 > 
@@ -64,35 +64,35 @@ trainer.run(mnist, controllers=[annealer])
 
 **3\. [datacleaner](https://github.com/rhiever/datacleaner)**
 
-datacleaner是研究员[Randal Olson](http://www.randalolson.com/blog/)的作品，他还负责了出色的[TPOT机器学习管道](/2016/05/tpot-python-automating-data-science.html)项目。Olson将Data Cleaner称为“一个自动清理数据集并为分析做好准备的Python工具。”他迅速声明这不是魔法，但也指出了它*能*做的事情：
+datacleaner 是研究员[Randal Olson](http://www.randalolson.com/blog/)的作品，他还负责了出色的 TPOT 机器学习管道项目。Olson 将 Data Cleaner 称为“一个自动清理数据集并为分析做好准备的 Python 工具。”他迅速声明这不是魔法，但也指出了它*能*做的事情：
 
-> datacleaner的功能是节省你在数据已经以pandas DataFrames能够处理的格式中进行编码和清理的时间。
+> datacleaner 的功能是节省你在数据已经以 pandas DataFrames 能够处理的格式中进行编码和清理的时间。
 
-datacleaner仍在开发中，但目前能够处理以下常规（且耗时的）数据清理操作：可选地删除具有缺失值的行；按列将缺失值替换为众数或中位数；用数值等效物编码非数值变量。Randal告诉我们他正在寻找贡献者，特别是那些对datacleaner可以以自动化方式执行的数据清理操作有更多想法的人。
+datacleaner 仍在开发中，但目前能够处理以下常规（且耗时的）数据清理操作：可选地删除具有缺失值的行；按列将缺失值替换为众数或中位数；用数值等效物编码非数值变量。Randal 告诉我们他正在寻找贡献者，特别是那些对 datacleaner 可以以自动化方式执行的数据清理操作有更多想法的人。
 
-Randal对细节的关注是任何阅读过他的博客或Github仓库的人都知道的，这个项目的简明文档也不例外。我最近一直在使用datacleaner，到目前为止它兑现了承诺。
+Randal 对细节的关注是任何阅读过他的博客或 Github 仓库的人都知道的，这个项目的简明文档也不例外。我最近一直在使用 datacleaner，到目前为止它兑现了承诺。
 
 **4\. [auto-sklearn](https://github.com/automl/auto-sklearn)**
 
-auto-sklearn是为Scikit-learn环境提供的自动化机器学习工具。
+auto-sklearn 是为 Scikit-learn 环境提供的自动化机器学习工具。
 
-> auto-sklearn使机器学习用户无需选择算法和调整超参数。它利用了贝叶斯优化、元学习和集成构建的最新优势。通过阅读这篇在[NIPS 2015](http://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf)上发布的论文，了解更多关于auto-sklearn背后的技术。
+> auto-sklearn 使机器学习用户无需选择算法和调整超参数。它利用了贝叶斯优化、元学习和集成构建的最新优势。通过阅读这篇在[NIPS 2015](http://papers.nips.cc/paper/5872-efficient-and-robust-automated-machine-learning.pdf)上发布的论文，了解更多关于 auto-sklearn 背后的技术。
 
-![auto-sklearn](../Images/4aafb75cd73f71f8b37f7d7bc31f4e70.png)
+![auto-sklearn](img/4aafb75cd73f71f8b37f7d7bc31f4e70.png)
 
-其[文档](http://automl.github.io/auto-sklearn/stable/)相当详尽，并且该仓库包含了[几个简洁的示例](https://github.com/automl/auto-sklearn/tree/master/example)。我承认我还没有使用过，但许多人已经使用过；它在Github上收获了近400个星标。鉴于我对Scikit-learn的偏爱，我想我将在不久的将来尝试这个。
+其[文档](http://automl.github.io/auto-sklearn/stable/)相当详尽，并且该仓库包含了[几个简洁的示例](https://github.com/automl/auto-sklearn/tree/master/example)。我承认我还没有使用过，但许多人已经使用过；它在 Github 上收获了近 400 个星标。鉴于我对 Scikit-learn 的偏爱，我想我将在不久的将来尝试这个。
 
-auto-sklearn主要由[弗莱堡大学的自动化算法设计机器学习](http://aad.informatik.uni-freiburg.de/)小组开发。
+auto-sklearn 主要由[弗莱堡大学的自动化算法设计机器学习](http://aad.informatik.uni-freiburg.de/)小组开发。
 
 **5\. [深度挖掘](https://github.com/HDI-Project/DeepMining)**
 
-Deep Mining是一个机器学习管道自动调整器，由MIT CSAIL实验室的[Sebastien Dubois](http://sds-dubois.github.io/)带来。来自仓库的说明：
+Deep Mining 是一个机器学习管道自动调整器，由 MIT CSAIL 实验室的[Sebastien Dubois](http://sds-dubois.github.io/)带来。来自仓库的说明：
 
 > 这个软件会迭代而智能地测试一些超参数集，以尽可能快地找到最佳的超参数组合，从而实现管道能提供的最佳分类准确性。
 
-![深度挖掘](../Images/320d6937c084938979886b791a91e8dd.png)
+![深度挖掘](img/320d6937c084938979886b791a91e8dd.png)
 
-深度挖掘（Deep Mining）似乎不是一个广为人知的项目，鉴于其相对少量的仓库星标；然而，鉴于它源于CSAIL，并且在过去一个月内有开发活动，值得将其与其他类似的自动化管道工具进行基准测试。它提供了[一些示例](https://github.com/HDI-Project/DeepMining/tree/master/gcp_hpo/examples)，使用起来似乎也很直接。
+深度挖掘（Deep Mining）似乎不是一个广为人知的项目，鉴于其相对少量的仓库星标；然而，鉴于它源于 CSAIL，并且在过去一个月内有开发活动，值得将其与其他类似的自动化管道工具进行基准测试。它提供了[一些示例](https://github.com/HDI-Project/DeepMining/tree/master/gcp_hpo/examples)，使用起来似乎也很直接。
 
 关于使用的方法：
 
@@ -102,21 +102,21 @@ Deep Mining是一个机器学习管道自动调整器，由MIT CSAIL实验室的
 
 **相关**：
 
-+   [GitHub 上的十大机器学习项目](/2015/12/top-10-machine-learning-github.html)
++   GitHub 上的十大机器学习项目
 
-+   [TPOT：一个用于自动化数据科学的 Python 工具](/2016/05/tpot-python-automating-data-science.html)
++   TPOT：一个用于自动化数据科学的 Python 工具
 
-+   [十大 IPython Notebook 数据科学和机器学习教程](/2016/04/top-10-ipython-nb-tutorials.html)
++   十大 IPython Notebook 数据科学和机器学习教程
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

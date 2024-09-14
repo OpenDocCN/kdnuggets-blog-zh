@@ -1,10 +1,10 @@
 # 数据科学家 Docker 入门指南
 
-> 原文：[https://www.kdnuggets.com/2018/08/data-scientist-guide-getting-started-docker.html](https://www.kdnuggets.com/2018/08/data-scientist-guide-getting-started-docker.html)
+> 原文：[`www.kdnuggets.com/2018/08/data-scientist-guide-getting-started-docker.html`](https://www.kdnuggets.com/2018/08/data-scientist-guide-getting-started-docker.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/697b3b027b367f7b51f2490ec6639d33.png)
+![](img/697b3b027b367f7b51f2490ec6639d33.png)
 
 ### **介绍**
 
@@ -18,11 +18,11 @@ Docker 是一个日益流行的工具，旨在简化在容器中创建、部署�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -54,7 +54,7 @@ Docker 生态系统——docker compose 和 docker machine——使其对任何�
 
 为了确保它已正确安装，打开命令行并输入 **docker version**。这应该显示如下内容：
 
-![Docker version](../Images/a77e5616411390a804a47a508c476a3c.png)
+![Docker version](img/a77e5616411390a804a47a508c476a3c.png)
 
 现在我们已经安装了 Docker，让我们研究一个相对简单、常见的示例：
 
@@ -72,9 +72,9 @@ docker run -p 8000:8000 jupyter/notebook
 
 **jupyter/notebook**——要加载的镜像。除了 Jupyter notebook，你还可以浏览官方的[Docker 库](https://hub.docker.com/)，查找数千种最受欢迎的软件工具。
 
-一旦你运行了这个命令并导航到 [http://localhost:8000/](http://localhost:8000/)，你应该会看到以下内容：
+一旦你运行了这个命令并导航到 [`localhost:8000/`](http://localhost:8000/)，你应该会看到以下内容：
 
-![Jupyter notebook](../Images/a641a67e7cf791bbc2fe6eb218553b82.png)
+![Jupyter notebook](img/a641a67e7cf791bbc2fe6eb218553b82.png)
 
 非常简单，对吧？考虑到你通常需要下载 Python、运行时库和 Jupyter 包，通过 Docker 运行这些是极其高效的。
 
@@ -98,7 +98,7 @@ docker run -p 8000 :8000 -v ~/jupyter-notebooks:/home/joyvan jupyter/notebook
 
 现在简单地启动本地主机服务器，创建一个新的笔记本，并将其从“未命名”重命名为“示例笔记本”。最后，检查你本地机器上的 **~/jupyter-notebooks** 目录，你应该会看到：Example Notebook.ipynb。瞧！
 
-![New Jupyter notebook](../Images/7879acdacbf4c5b8100657c124e2b449.png)
+![New Jupyter notebook](img/7879acdacbf4c5b8100657c124e2b449.png)
 
 ### **Dockerfile**
 

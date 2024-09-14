@@ -1,22 +1,22 @@
 # 如何知道神经网络是否适合您的机器学习计划
 
-> 原文：[https://www.kdnuggets.com/2020/11/neural-network-right-machine-learning-initiative.html](https://www.kdnuggets.com/2020/11/neural-network-right-machine-learning-initiative.html)
+> 原文：[`www.kdnuggets.com/2020/11/neural-network-right-machine-learning-initiative.html`](https://www.kdnuggets.com/2020/11/neural-network-right-machine-learning-initiative.html)
 
-[评论](#comments)
+评论
 
 **作者：Frank Fineis，Avatria 的首席数据科学家 [Avatria](http://www.avatria.com/)**
 
-![Image](../Images/144a940379294e3e3f816ae0f54df5a4.png)
+![Image](img/144a940379294e3e3f816ae0f54df5a4.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -36,9 +36,9 @@
 
 神经网络通常更容易学习所谓的“稀疏特征”，这也是任何考虑涉足深度学习的组织在此之前可能想要考虑的建议：
 
-1.  尽量坚持使用预构建的即插即用解决方案（至少在开始时），例如已经与[TensorFlow](https://www.tensorflow.org/)预组装好的模型。尽管追求令人兴奋的新论文并尝试追求绝对的SOTA很有诱惑力，但如果模型不是来自具有一定常规用户的包（例如GitHub/GitLab上的用户），它可能无法直接适应你的数据集。
+1.  尽量坚持使用预构建的即插即用解决方案（至少在开始时），例如已经与[TensorFlow](https://www.tensorflow.org/)预组装好的模型。尽管追求令人兴奋的新论文并尝试追求绝对的 SOTA 很有诱惑力，但如果模型不是来自具有一定常规用户的包（例如 GitHub/GitLab 上的用户），它可能无法直接适应你的数据集。
 
-1.  避免实现任何没有附带代码的算法。[Paperswithcode.com](https://paperswithcode.com/) 跟踪深度学习/AI领域的SOTA，并方便地链接描述神经网络架构及其在GitHub上的实现的论文。如果你的团队考虑基于一篇没有相应开源实现的论文（例如谷歌的[seq2slate](https://paperswithcode.com/paper/seq2slate-re-ranking-and-slate-optimization)神经网络架构论文）进行建模，那就不要尝试。这将非常困难且耗时，并且可能意味着很少有人实际使用论文所提议的内容。
+1.  避免实现任何没有附带代码的算法。[Paperswithcode.com](https://paperswithcode.com/) 跟踪深度学习/AI 领域的 SOTA，并方便地链接描述神经网络架构及其在 GitHub 上的实现的论文。如果你的团队考虑基于一篇没有相应开源实现的论文（例如谷歌的[seq2slate](https://paperswithcode.com/paper/seq2slate-re-ranking-and-slate-optimization)神经网络架构论文）进行建模，那就不要尝试。这将非常困难且耗时，并且可能意味着很少有人实际使用论文所提议的内容。
 
 1.  如果你没有看到立竿见影的结果，千万不要放弃！我们无法过分强调保持配置和结果精确记录的价值。可能需要调整数十个超参数，其中一些对结果的影响很小，但一些会极大地改变结果。仔细关注你选择的优化器和学习率——这组合能决定训练是否会取得零进展、少量进展或大量进展。一个好的经验法则是从非常小的学习率开始，检查训练期间的损失是否下降。
 
@@ -50,11 +50,11 @@
 
 **相关：**
 
-+   [神经网络能展现想象力吗？DeepMind 认为可以](/2020/09/deepmind-neural-networks-show-imagination.html)
++   神经网络能展现想象力吗？DeepMind 认为可以
 
-+   [黑箱内部观察：如何欺骗神经网络](/2020/09/inside-blackbox-trick-neural-network.html)
++   黑箱内部观察：如何欺骗神经网络
 
-+   [深度学习、自然语言处理和计算机视觉的顶级 Python 库](/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)
++   深度学习、自然语言处理和计算机视觉的顶级 Python 库
 
 ### 相关话题
 

@@ -1,12 +1,12 @@
-# 支持向量机用于手写字母识别（R语言）
+# 支持向量机用于手写字母识别（R 语言）
 
-> 原文：[https://www.kdnuggets.com/2021/01/support-vector-machine-hand-written-alphabet-r.html](https://www.kdnuggets.com/2021/01/support-vector-machine-hand-written-alphabet-r.html)
+> 原文：[`www.kdnuggets.com/2021/01/support-vector-machine-hand-written-alphabet-r.html`](https://www.kdnuggets.com/2021/01/support-vector-machine-hand-written-alphabet-r.html)
 
-[评论](#comments)
+评论
 
-**作者：[Mohan Rai](https://www.linkedin.com/in/mohan-rai-83499924/)，Simple & Real Analytics的主任**
+**作者：[Mohan Rai](https://www.linkedin.com/in/mohan-rai-83499924/)，Simple & Real Analytics 的主任**
 
-撰写这篇文章的目的是使用一种非常粗略的方法进行图像分类，这里指的是手写文本的图像。虽然我们可以从头开始使用卷积神经网络模型或使用在MNIST数据集上训练好的模型，但它们更适合这个工作。我们使用迁移学习，在这个过程中，作为学生的我错过了非常基础的内容。这就像我在驾驶一辆自动挡汽车，我知道动力传动系统、离合器、加速器和刹车的作用，但不知道这些之外的东西。我们尝试将手写字母图像识别的问题分解成一个简单的过程，而不是使用复杂的软件包。这是一个创建数据并使用支持向量机进行分类的尝试。
+撰写这篇文章的目的是使用一种非常粗略的方法进行图像分类，这里指的是手写文本的图像。虽然我们可以从头开始使用卷积神经网络模型或使用在 MNIST 数据集上训练好的模型，但它们更适合这个工作。我们使用迁移学习，在这个过程中，作为学生的我错过了非常基础的内容。这就像我在驾驶一辆自动挡汽车，我知道动力传动系统、离合器、加速器和刹车的作用，但不知道这些之外的东西。我们尝试将手写字母图像识别的问题分解成一个简单的过程，而不是使用复杂的软件包。这是一个创建数据并使用支持向量机进行分类的尝试。
 
 ### 数据准备
 
@@ -14,9 +14,9 @@
 
 ### 数据存储结构
 
-我们可以在白纸上写字母，然后用手机相机提取，或者直接使用像Paint这样的图形工具，用笔工具书写。我创建了两个文件夹：train和test。在train文件夹中，我们可以保存按字母命名的子文件夹，而在test文件夹中，我们可以放入要最终分类的图像。训练子文件夹的命名旨在作为训练标签。测试文件夹没有保持相同的形式，因为我们打算进行分类。
+我们可以在白纸上写字母，然后用手机相机提取，或者直接使用像 Paint 这样的图形工具，用笔工具书写。我创建了两个文件夹：train 和 test。在 train 文件夹中，我们可以保存按字母命名的子文件夹，而在 test 文件夹中，我们可以放入要最终分类的图像。训练子文件夹的命名旨在作为训练标签。测试文件夹没有保持相同的形式，因为我们打算进行分类。
 
-[![](../Images/d62488d42fefce1dbbc5833562a889ee.png)](/wp-content/uploads/svm-hand-written-r-data-strucutre.jpg)
+![](img/svm-hand-written-r-data-strucutre.jpg)
 
 如果你想下载我使用的数据，右击这个 [下载数据](http://www.imurgence.com//uploads/thumbnails/sample_data/alphabet_folder.zip) 链接，在新标签页或窗口中打开。然后解压文件夹，你应该能在下载文件夹中看到与上述相同的结构和数据。
 
@@ -133,21 +133,21 @@
 
 **相关：**
 
-+   [顶级机器学习算法解析：支持向量机 (SVM)](/2020/03/machine-learning-algorithm-svm-explained.html)
++   顶级机器学习算法解析：支持向量机 (SVM)
 
-+   [R 中简单直观的集成学习](/2020/12/simple-intuitive-meta-learning-r.html)
++   R 中简单直观的集成学习
 
-+   [支持向量机的友好介绍](/2019/09/friendly-introduction-support-vector-machines.html)
++   支持向量机的友好介绍
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 管理
 
 * * *
 

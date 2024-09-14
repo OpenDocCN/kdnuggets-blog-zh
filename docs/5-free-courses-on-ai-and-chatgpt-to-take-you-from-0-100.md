@@ -1,8 +1,8 @@
 # 5 免费的 AI 和 ChatGPT 课程，从 0 到 100
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-on-ai-and-chatgpt-to-take-you-from-0-100](https://www.kdnuggets.com/5-free-courses-on-ai-and-chatgpt-to-take-you-from-0-100)
+> 原文：[`www.kdnuggets.com/5-free-courses-on-ai-and-chatgpt-to-take-you-from-0-100`](https://www.kdnuggets.com/5-free-courses-on-ai-and-chatgpt-to-take-you-from-0-100)
 
-![5 免费的 AI 和 ChatGPT 课程，从 0 到 100](../Images/00c9f67f90205f59355a804504082e2d.png)
+![5 免费的 AI 和 ChatGPT 课程，从 0 到 100](img/00c9f67f90205f59355a804504082e2d.png)
 
 图片来源：DALLE 3
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 工作
 
 * * *
 
@@ -74,18 +74,18 @@ Linux 是一种操作系统，通过他们提供的课程，你将学习人工�
 
 这个博客针对的是人工智能领域的新手，但不限于初学者。如果你想提升现有技能或适应现有技能，这些免费课程可以帮助你快速入门，而无需花费一分钱！
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术写作人，以及KDnuggets的编辑和社区经理。她特别感兴趣于提供数据科学职业建议或教程，并围绕数据科学的理论知识展开讨论。Nisha涉及广泛的主题，并希望探索人工智能如何有益于人类生命的长寿。作为一个热衷学习者，Nisha寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)****是一位数据科学家、自由技术写作人，以及 KDnuggets 的编辑和社区经理。她特别感兴趣于提供数据科学职业建议或教程，并围绕数据科学的理论知识展开讨论。Nisha 涉及广泛的主题，并希望探索人工智能如何有益于人类生命的长寿。作为一个热衷学习者，Nisha 寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关内容
 
-+   [2024年你可以参加的5个顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
++   [2024 年你可以参加的 5 个顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
 
-+   [9个可以帮助你获得学位的专业证书……如果……](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个可以帮助你获得学位的专业证书……如果……](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
-+   [10个免费的必修数据科学课程，助你入门](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
++   [10 个免费的必修数据科学课程，助你入门](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
 
 +   [在参加任何免费数据科学课程之前阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
 
-+   [现在可以参加的8个AWS GenAI课程](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)
++   [现在可以参加的 8 个 AWS GenAI 课程](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)
 
 +   [学习数据科学基础需要多长时间？](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)

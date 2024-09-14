@@ -1,8 +1,8 @@
 # 使用 Google MusicLM 从文本生成音乐
 
-> 原文：[https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)
+> 原文：[`www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html`](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)
 
-![使用 Google MusicLM 从文本生成音乐](../Images/2b81acd0d8e64abebbd99827c62ad992.png)
+![使用 Google MusicLM 从文本生成音乐](img/2b81acd0d8e64abebbd99827c62ad992.png)
 
 图片来源于 [Freepik](https://www.freepik.com/free-photo/hearing-issues-collage-design_33535939.htm#page=2&query=artificial%20intelligence%20music&position=4&from_view=search&track=ais)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -34,31 +34,31 @@ MusicLM 首次在[Agostinelli 等人 (2023)](https://arxiv.org/pdf/2301.11325.pd
 
 如果你想深入了解 MusicLM 的结果样本，Google 研究小组提供了一个简单的[网站](https://google-research.github.io/seanet/musiclm/examples/)来展示 MusicLM 的能力。例如，你可以在网站上探索从文本标题生成的音频样本。
 
-![使用 Google MusicLM 从文本生成音乐](../Images/6fc6a122a08f95a529aa6eeea9a991fa.png)
+![使用 Google MusicLM 从文本生成音乐](img/6fc6a122a08f95a529aa6eeea9a991fa.png)
 
 图片由作者提供（改编自 [google-research.github.io](https://google-research.github.io/seanet/musiclm/examples/)）
 
 另一个例子是我最喜欢的样本，故事模式音乐生成，通过使用多个文本提示将不同风格的音乐整合成一个整体。
 
-![使用 Google MusicLM 从文本生成音乐](../Images/95140ddb3fc180684542f8172da5b9c1.png)
+![使用 Google MusicLM 从文本生成音乐](img/95140ddb3fc180684542f8172da5b9c1.png)
 
 图片由作者提供（改编自 [google-research.github.io](https://google-research.github.io/seanet/musiclm/examples/)）
 
 也可以根据绘画标题生成音乐，可能会捕捉到图像的情绪。
 
-![使用 Google MusicLM 从文本生成音乐](../Images/65d28e977fec776b86934f4fb6ffa075.png)
+![使用 Google MusicLM 从文本生成音乐](img/65d28e977fec776b86934f4fb6ffa075.png)
 
 图片由作者提供（改编自 [google-research.github.io](https://google-research.github.io/seanet/musiclm/examples/)）
 
 结果听起来很棒，但我们如何尝试这个模型？幸运的是，自 2023 年 5 月以来，Google 已经接受了在 [AI Test Kitchen](https://g.co/aitestkitchen) 测试 MusicLM 的注册。前往网站，使用你的 Google 帐号进行注册。
 
-![使用 Google MusicLM 从文本生成音乐](../Images/64efc580849c6d5cfb07c4f0e65e5644.png)
+![使用 Google MusicLM 从文本生成音乐](img/64efc580849c6d5cfb07c4f0e65e5644.png)
 
 图片由作者提供（改编自 [aitestkitchen](https://aitestkitchen.withgoogle.com/experiments/music-lm)）
 
 注册后，我们需要等待轮到我们试用 MusicLM 的机会。因此，请留意你的电子邮件。
 
-![使用 Google MusicLM 从文本生成音乐](../Images/f7426baa88b40b0a05e8e822299caf3d.png)
+![使用 Google MusicLM 从文本生成音乐](img/f7426baa88b40b0a05e8e822299caf3d.png)
 
 图片由作者提供（改编自 [aitestkitchen](https://aitestkitchen.withgoogle.com/experiments/music-lm)）
 
@@ -74,7 +74,7 @@ MusicLM 是 Google 研究小组开发的一种模型，用于从文本生成音�
 
 +   [使用 ChatGPT 生成被动收入的 4 种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
 
-+   [使用稳定扩散生成超逼真的人脸的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
++   [使用稳定扩散生成超逼真的人脸的 3 种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
 
 +   [如何生成合成表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
 
@@ -82,4 +82,4 @@ MusicLM 是 Google 研究小组开发的一种模型，用于从文本生成音�
 
 +   [结合数据管理与数据讲述生成价值](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)
 
-+   [使用BERT对长文本文档进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
++   [使用 BERT 对长文本文档进行分类](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)

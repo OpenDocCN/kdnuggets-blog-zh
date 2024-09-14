@@ -1,20 +1,20 @@
 # 数据科学家的 GPU 计算基础
 
-> 原文：[https://www.kdnuggets.com/2016/04/basics-gpu-computing-data-scientists.html](https://www.kdnuggets.com/2016/04/basics-gpu-computing-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2016/04/basics-gpu-computing-data-scientists.html`](https://www.kdnuggets.com/2016/04/basics-gpu-computing-data-scientists.html)
 
 **作者：[Taposh Dutta-Roy](https://medium.com/@taposhdr)**。
 
-![](../Images/50250a05d64b60f2c505f24cf7712949.png)
+![](img/50250a05d64b60f2c505f24cf7712949.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
 
 * * *
 
@@ -40,9 +40,9 @@ GPU 编程有两个主要框架——[OpenCL](https://www.khronos.org/opencl/) �
 
 [Erik Smistad 等](http://www.sciencedirect.com/science/article/pii/S1361841514001819) 讨论了定义算法适用于 GPU 实现的 5 个因素。这些因素包括——数据并行性、线程数量、分支分歧、内存使用和同步。我创建了这个映射表以便于参考。
 
-![](../Images/59f662fb10c5857aa5d74465ae745a88.png)
+![](img/59f662fb10c5857aa5d74465ae745a88.png)
 
-<canvas class="progressiveMedia-canvas js-progressiveMedia-canvas" width="75" height="22">![](../Images/ca1b3c0ea2d5ceb10e1cdda3e84c6cc1.png)
+<canvas class="progressiveMedia-canvas js-progressiveMedia-canvas" width="75" height="22">![](img/ca1b3c0ea2d5ceb10e1cdda3e84c6cc1.png)
 
 GPU 适用性决定您的算法
 
@@ -54,11 +54,11 @@ GPU 适用性决定您的算法
 
 **相关内容：**
 
-+   [流行的深度学习工具 – 评测](/2015/06/popular-deep-learning-tools.html)
++   流行的深度学习工具 – 评测
 
-+   [在哪里学习深度学习 – 课程、教程、软件](/2014/05/learn-deep-learning-courses-tutorials-overviews.html)
++   在哪里学习深度学习 – 课程、教程、软件
 
-+   [CuDNN – 一个新的深度学习库](/2014/09/cudnn-new-library-deep-learning.html)
++   CuDNN – 一个新的深度学习库
 
 ### 更多相关话题
 

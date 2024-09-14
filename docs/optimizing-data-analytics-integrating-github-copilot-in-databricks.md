@@ -1,6 +1,6 @@
 # 优化数据分析：在 Databricks 中集成 GitHub Copilot
 
-> 原文：[https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)
+> 原文：[`www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks`](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)
 
 # 介绍
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -34,7 +34,7 @@ Databricks 账户 [设置](https://www.databricks.com/try-databricks#account)。
 
 在 Visual Studio Code 市场中安装 Databricks 插件。
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/d31ea6fc9358f1bb689892a2f2ac1864.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/d31ea6fc9358f1bb689892a2f2ac1864.png)
 
 在 Visual Studio Code 中配置 Databricks 插件。如果你之前使用过 Databricks CLI，那么它已经在 databrickscfg 文件中为你本地配置好。如果没有，请在 ~/.databrickscfg 文件中创建以下内容。
 
@@ -47,17 +47,17 @@ jobs-api-version = 2.0
 
 点击“配置 Databricks”选项，然后从下拉菜单中选择第一个选项，该选项显示在上述步骤中配置的主机名，并继续使用“DEFAULT”配置文件。
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/912f16d4e2d9549ec9c8dec4690477fa.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/912f16d4e2d9549ec9c8dec4690477fa.png)
 
 配置完成后，Databricks 连接会与 Visual Studio Code 建立。点击 Databricks 插件时，可以查看工作区和集群配置详细信息。
 
 用户完成 GitHub Copilot 账户设置后，确保您可以访问 GitHub Copilot。通过 Marketplace 在 VSCode 中安装 GitHub Copilot 和 GitHub Copilot Chat 插件。
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/436a913cf1a7742d6fd029d54d0b753d.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/436a913cf1a7742d6fd029d54d0b753d.png)
 
 一旦用户安装了 GitHub Copilot 和 Copilot Chat 插件，将提示通过 Visual Studio IDE 登录 GitHub Copilot。如果没有提示进行授权，请点击 Visual Studio 代码 IDE 底部面板中的铃铛图标。
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/c21cc7b4faf53a62797778fa84c2fb33.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/c21cc7b4faf53a62797778fa84c2fb33.png)
 
 现在，是时候使用 GitHub Copilot 开发了
 
@@ -67,15 +67,15 @@ jobs-api-version = 2.0
 
 使用 Python 和 Spark 框架从 S3 存储桶中读取文件。
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/ab6bbdc52bee8e3d3fa4dcc83d9f5bc2.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/ab6bbdc52bee8e3d3fa4dcc83d9f5bc2.png)
 
 使用 Python 和 Spark 框架将数据框写入 S3 存储桶
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/a91adbe7a4b8609248e6c8c36e6b27fb.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/a91adbe7a4b8609248e6c8c36e6b27fb.png)
 
 通过主方法执行函数：在提示中表示相同，并通过代码执行步骤得到结果
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/3608acb375dc7c3c5cf19667e51563a9.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/3608acb375dc7c3c5cf19667e51563a9.png)
 
 # 在 Databricks 中使用 GitHub Copilot 进行数据工程和机器学习的好处
 
@@ -91,7 +91,7 @@ jobs-api-version = 2.0
 
 # 备忘单
 
-+   打开一个 Co-pilot 文本/搜索栏，您可以在其中输入您的提示。![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/4c8d39ce04bdf3644241067870538c9d.png)
++   打开一个 Co-pilot 文本/搜索栏，您可以在其中输入您的提示。![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/4c8d39ce04bdf3644241067870538c9d.png)
 
     Windows: [Cltr] + [I]
 
@@ -103,7 +103,7 @@ jobs-api-version = 2.0
 
     Mac: [control] + [return]
 
-![优化数据分析：在 Databricks 中集成 GitHub Copilot](../Images/3c36000105f16c30f4ae467360e42a1f.png)
+![优化数据分析：在 Databricks 中集成 GitHub Copilot](img/3c36000105f16c30f4ae467360e42a1f.png)
 
 +   在左侧打开一个单独的 Copilot 聊天窗口。
 
@@ -137,9 +137,9 @@ jobs-api-version = 2.0
 
 ## 进一步资源
 
-+   [https://app.pluralsight.com/library/courses/getting-started-prompt-engineering-generative-ai/table-of-contents](https://app.pluralsight.com/library/courses/getting-started-prompt-engineering-generative-ai/table-of-contents)
++   [`app.pluralsight.com/library/courses/getting-started-prompt-engineering-generative-ai/table-of-contents`](https://app.pluralsight.com/library/courses/getting-started-prompt-engineering-generative-ai/table-of-contents)
 
-+   [https://docs.github.com/en/copilot/quickstart](https://docs.github.com/en/copilot/quickstart)
++   [`docs.github.com/en/copilot/quickstart`](https://docs.github.com/en/copilot/quickstart)
 
 **[](http://www.linkedin.com/in/naresh-vurukonda-a23861124)**[Naresh Vurukonda](http://www.linkedin.com/in/naresh-vurukonda-a23861124)** 是一位首席架构师，在医疗保健、生命科学和媒体网络组织中拥有超过 10 年的数据工程和机器学习项目经验。
 

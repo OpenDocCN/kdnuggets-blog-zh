@@ -1,8 +1,8 @@
 # Jupyter Notebooks: 数据科学报告
 
-> 原文：[https://www.kdnuggets.com/2019/06/jupyter-notebooks-data-science-reporting.html](https://www.kdnuggets.com/2019/06/jupyter-notebooks-data-science-reporting.html)
+> 原文：[`www.kdnuggets.com/2019/06/jupyter-notebooks-data-science-reporting.html`](https://www.kdnuggets.com/2019/06/jupyter-notebooks-data-science-reporting.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 由于其简单的设计、交互性好和跨语言支持，Jupyter 已成为我们中的许多人默认的平台。虽然还有其他方式可以使用笔记本环境，但目前为止我还没有看到比 Jupyter 提供更多好处的工具。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -47,7 +47,7 @@ jupyter nbextensions_configurator enable --user
 
 一旦你完成了 nbextensions 的安装，你可以启动你的 Jupyter notebook 环境并导航到选项卡。
 
-![figure-name](../Images/7040b14911c1e33dabf5bc44514adb94.png)
+![figure-name](img/7040b14911c1e33dabf5bc44514adb94.png)
 
 一旦你有了这个，只需启用你想要的扩展，并进行实验，以查看哪些扩展可以帮助你提高工作效率。
 
@@ -57,7 +57,7 @@ jupyter nbextensions_configurator enable --user
 
 你可以启用一个交互式目录，这个目录会出现在你的笔记本顶部。默认情况下，交互式版本会出现在屏幕的左侧，但如果你愿意，可以将其移动到笔记本的其他部分。
 
-![figure-name](../Images/509606bc7732f877cfcc6d3f8e064f93.png)
+![figure-name](img/509606bc7732f877cfcc6d3f8e064f93.png)
 
 ### 3\. 使用 Markdown
 
@@ -69,7 +69,7 @@ jupyter nbextensions_configurator enable --user
 
 +   **Esc + m** 再次按下如果你想编辑 Markdown 块
 
-这里是一般 Markdown 命令的列表：[https://www.markdownguide.org/basic-syntax/](https://www.markdownguide.org/basic-syntax/)
+这里是一般 Markdown 命令的列表：[`www.markdownguide.org/basic-syntax/`](https://www.markdownguide.org/basic-syntax/)
 
 **使用标题**
 
@@ -85,7 +85,7 @@ jupyter nbextensions_configurator enable --user
 
 使用此扩展可以减少笔记本中不必要的代码。如果你需要验证以前的输出，可以直接在 Scratchpad 中输入，它不会出现在笔记本中。
 
-![figure-name](../Images/9edd6b5a6284be77e4acbc29dcd5d9f4.png)
+![figure-name](img/9edd6b5a6284be77e4acbc29dcd5d9f4.png)
 
 了解更多信息请访问：[Jupyter Notebooks 的 Scratchpad](https://github.com/minrk/nbextension-scratchpad)
 
@@ -95,13 +95,13 @@ jupyter nbextensions_configurator enable --user
 
 如果你只想隐藏某些代码/输入单元格而保留一些可见，请使用以下扩展：
 
-![figure-name](../Images/77ebf083f94e2c672c182005ffe5a940.png)
+![figure-name](img/77ebf083f94e2c672c182005ffe5a940.png)
 
 **隐藏所有代码 / 输入单元格**
 
 如果你希望隐藏所有代码，只显示输出，可以使用以下扩展：
 
-![figure-name](../Images/a956f7770ffeb6420f323fae8e2032ff.png)
+![figure-name](img/a956f7770ffeb6420f323fae8e2032ff.png)
 
 ### 6\. 渲染/转换笔记本为 PDF/HTML 等
 
@@ -166,7 +166,7 @@ Jupyter Notebook 使我们能够将笔记本渲染成多种格式。以下是可
 
 Will 创建了这个出色的扩展，为任何想要组织笔记本以获得更轻松工作流程的人提供了极好的设置。
 
-![figure-name](../Images/ba1bd5e73f54dbf3c805a0784e9aed1c.png)
+![figure-name](img/ba1bd5e73f54dbf3c805a0784e9aed1c.png)
 
 还有一些实用的技巧：
 
@@ -180,11 +180,11 @@ Will 创建了这个出色的扩展，为任何想要组织笔记本以获得更
 
 **相关**：
 
-+   [数据科学笔记本最佳实践](/2018/11/best-practices-notebooks-data-science.html)
++   数据科学笔记本最佳实践
 
-+   [Jupyter Notebook 初学者教程](/2018/05/jupyter-notebook-beginners-tutorial.html)
++   Jupyter Notebook 初学者教程
 
-+   [在 Jupyter 中运行 R 和 Python](/2019/02/running-r-and-python-in-jupyter.html)
++   在 Jupyter 中运行 R 和 Python
 
 ### 更多相关主题
 
@@ -192,10 +192,10 @@ Will 创建了这个出色的扩展，为任何想要组织笔记本以获得更
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该了解的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [为什么Python是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [为什么 Python 是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

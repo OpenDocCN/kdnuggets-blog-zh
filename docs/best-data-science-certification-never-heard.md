@@ -1,8 +1,8 @@
 # 你从未听说过的最佳数据科学认证
 
-> 原文：[https://www.kdnuggets.com/2020/11/best-data-science-certification-never-heard.html](https://www.kdnuggets.com/2020/11/best-data-science-certification-never-heard.html)
+> 原文：[`www.kdnuggets.com/2020/11/best-data-science-certification-never-heard.html`](https://www.kdnuggets.com/2020/11/best-data-science-certification-never-heard.html)
 
-[评论](#comments)![图像](../Images/c4c938a2a62e15a08f9c2147f66d90a3.png)
+评论![图像](img/c4c938a2a62e15a08f9c2147f66d90a3.png)
 
 逆流而上以解决数据质量问题。照片由 [alleksana](https://www.pexels.com/photo/man-swimming-in-an-infinity-pool-4239547/) 提供，来源于 [Pexels](https://www.pexels.com/photo/man-swimming-in-an-infinity-pool-4239547/)。
 
@@ -10,7 +10,7 @@
 
 *******更新 8/15****：我最近了解到，认证考试是*[***开放书籍***](https://amzn.to/2F0MGcM)*，这非常令人兴奋，因为这意味着减少了记忆时间，更多时间可以在现实世界环境中处理数据。此外，我还开设了一个*[***Facebook 学习小组***](https://www.facebook.com/groups/346145433213551/)*——加入以获得考试准备帮助。***
 
-八年前，数据科学被誉为“21世纪最性感的职业”。然而，经过数小时的数据清洗，依然感觉**确实**是**不性感**的。事实上，数据科学职业的传奇崛起展示了大多数组织在数据管理方面做得有多么糟糕。
+八年前，数据科学被誉为“21 世纪最性感的职业”。然而，经过数小时的数据清洗，依然感觉**确实**是**不性感**的。事实上，数据科学职业的传奇崛起展示了大多数组织在数据管理方面做得有多么糟糕。
 
 进入**认证数据管理专业人士（**[**CDMP**](https://cdmp.info/)**）**，由数据管理协会国际（[DAMA](https://dama.org/)）颁发。CDMP 是你从未听说过的最佳数据战略认证。（说实话，当你考虑到你现在可能从事的工作是十年前不存在的，这个认证还不普及也就不足为奇了。）
 
@@ -32,19 +32,19 @@
 
 ***免责声明***：此帖并未得到 DAMA 国际的赞助——所表达的观点仅代表我个人。我在亚马逊上提供了一个*[*DMBOK*](https://amzn.to/2F0MGcM)* 的附属链接，这是考试所需的参考书，因为这是一本开放书籍考试。通过此链接购买考试有助于支持我关于数据科学和数据战略的写作——提前感谢支持。
 
-### 关于CDMP考试
+### 关于 CDMP 考试
 
-CDMP培训涵盖了14个与数据战略相关的领域（我将在后面详细介绍）。考试为**开卷考试**，但**100道题目**必须在**90分钟**内完成——没有太多时间查找资料。因此，熟悉[参考材料](https://amzn.to/310MGSB)是非常重要的。
+CDMP 培训涵盖了 14 个与数据战略相关的领域（我将在后面详细介绍）。考试为**开卷考试**，但**100 道题目**必须在**90 分钟**内完成——没有太多时间查找资料。因此，熟悉[参考材料](https://amzn.to/310MGSB)是非常重要的。
 
-当你安排考试（$300）时，DAMA会提供40个模拟题，这些题目很能反映实际考试的难度。作为进一步的资源，[查看这篇关于认证学习过程的文章](https://medium.com/@nicolejaneway/how-to-ace-the-aws-cloud-practitioner-certification-with-minimal-effort-39f10f43146#9066)。
+当你安排考试（$300）时，DAMA 会提供 40 个模拟题，这些题目很能反映实际考试的难度。作为进一步的资源，[查看这篇关于认证学习过程的文章](https://medium.com/@nicolejaneway/how-to-ace-the-aws-cloud-practitioner-certification-with-minimal-effort-39f10f43146#9066)。
 
-可以通过网络考试并通过摄像头监控（$11监考费）。考试形式为选择题——从五个选项中选择唯一正确答案。你可以标记问题并回过头来再做。考试结束时，你会立即得到你的成绩反馈。
+可以通过网络考试并通过摄像头监控（$11 监考费）。考试形式为选择题——从五个选项中选择唯一正确答案。你可以标记问题并回过头来再做。考试结束时，你会立即得到你的成绩反馈。
 
-**超过60%被视为及格**。如果你对获得CDMP助理认证并继续前进感兴趣，这就足够了。如果你对CDMP认证的高级层级感兴趣，你需要在CDMP实践者考试中达到70%或在CDMP大师考试中达到80%。要获得最高级别的CDMP Fellow认证，你需要获得大师认证，并且还需要展示行业经验和对领域的贡献。这些**高级认证还需要通过两个专家考试**。
+**超过 60%被视为及格**。如果你对获得 CDMP 助理认证并继续前进感兴趣，这就足够了。如果你对 CDMP 认证的高级层级感兴趣，你需要在 CDMP 实践者考试中达到 70%或在 CDMP 大师考试中达到 80%。要获得最高级别的 CDMP Fellow 认证，你需要获得大师认证，并且还需要展示行业经验和对领域的贡献。这些**高级认证还需要通过两个专家考试**。
 
-这让我提到最后一点，即为什么——纯粹从**职业发展**的角度来看——你应该选择通过CDMP的学习和考试过程：DAMA认证与**高端职位**的领导力、管理和数据架构相关联。（把CDMP视为加入一个半秘密的数据高手社团。）越来越多的企业角色和联邦合同与数据管理相关的都要求CDMP认证。[阅读更多](https://jonshaulis.com/index.php/2019/11/26/hurray-i-earned-my-cdmp/)。
+这让我提到最后一点，即为什么——纯粹从**职业发展**的角度来看——你应该选择通过 CDMP 的学习和考试过程：DAMA 认证与**高端职位**的领导力、管理和数据架构相关联。（把 CDMP 视为加入一个半秘密的数据高手社团。）越来越多的企业角色和联邦合同与数据管理相关的都要求 CDMP 认证。[阅读更多](https://jonshaulis.com/index.php/2019/11/26/hurray-i-earned-my-cdmp/)。
 
-![图片](../Images/861bae11ee3748c2c4ae8f129a663a32.png)
+![图片](img/861bae11ee3748c2c4ae8f129a663a32.png)
 
 通过[CDMP](https://cdmp.info/about/)。
 
@@ -56,41 +56,41 @@ CDMP培训涵盖了14个与数据战略相关的领域（我将在后面详细�
 
 +   为不同级别的数据管理专业人士提供四个层级。
 
-+   通过最低级别认证的成绩要求为60%。
++   通过最低级别认证的成绩要求为 60%。
 
 +   与精英角色相关。
 
-+   提供3年的DAMA国际会员资格。
++   提供 3 年的 DAMA 国际会员资格。
 
-+   $311的考试费用比微软和开放集团的其他数据相关认证便宜。
++   $311 的考试费用比微软和开放集团的其他数据相关认证便宜。
 
 **缺点**：
 
-+   DAMA没有大型科技公司（如亚马逊、谷歌、微软）的支持，这些公司积极推进市场营销并提升CDMP认证的品牌认知度——这意味着CDMP主要在已经熟悉数据管理的个人中被认可。
++   DAMA 没有大型科技公司（如亚马逊、谷歌、微软）的支持，这些公司积极推进市场营销并提升 CDMP 认证的品牌认知度——这意味着 CDMP 主要在已经熟悉数据管理的个人中被认可。
 
-+   $311的考试费用相对较高，相比之下，[AWS云从业者认证](https://medium.com/@nicolejaneway/how-to-ace-the-aws-cloud-practitioner-certification-with-minimal-effort-39f10f43146)（$100）或[GPC认证](https://cloud.google.com/certification)（$200）要便宜得多。
++   $311 的考试费用相对较高，相比之下，[AWS 云从业者认证](https://medium.com/@nicolejaneway/how-to-ace-the-aws-cloud-practitioner-certification-with-minimal-effort-39f10f43146)（$100）或[GPC 认证](https://cloud.google.com/certification)（$200）要便宜得多。
 
 **替代方案**：
 
 +   *微软认证解决方案助理*（[MCSA](https://www.microsoft.com/en-us/learning/mcsa-certification.aspx)）——专注于各种微软产品的模块化认证（$330+）
 
-+   *微软认证解决方案专家*（[MCSE](https://www.microsoft.com/en-us/learning/mcse-certification.aspx)）——基于MCSA，包含关于[核心基础设施](https://www.microsoft.com/en-us/learning/mcse-core-infrastructure.aspx)、[数据管理与分析](https://www.microsoft.com/en-us/learning/mcse-data-management-analytics.aspx)和[生产力](https://www.microsoft.com/en-us/learning/mcse-productivity-certification.aspx)的集成认证（$495+）
++   *微软认证解决方案专家*（[MCSE](https://www.microsoft.com/en-us/learning/mcse-certification.aspx)）——基于 MCSA，包含关于[核心基础设施](https://www.microsoft.com/en-us/learning/mcse-core-infrastructure.aspx)、[数据管理与分析](https://www.microsoft.com/en-us/learning/mcse-data-management-analytics.aspx)和[生产力](https://www.microsoft.com/en-us/learning/mcse-productivity-certification.aspx)的集成认证（$495+）
 
 +   *开放组架构框架*（[TOGAF](https://www.opengroup.org/certifications/togaf-individual-certification)）——针对软件开发和企业架构方法论的高层框架的各种认证级别（$550+）
 
 +   *缩放敏捷框架*（[SAFe](https://www.scaledagile.com/certification-basics/)）——针对软件工程团队的角色认证（$995）
 
-### 如何准备CDMP
+### 如何准备 CDMP
 
-由于CDMP是开放书籍考试，备考所需的只是DAMA知识体系书籍（[*DMBOK*](https://amzn.to/2F0MGcM) $55）。它大约**600页**，但如果你主要把学习时间集中在第1章（数据管理）、图表和图示、角色与职责以及定义上，那么这应该能让你在通过考试的路上走80%。
+由于 CDMP 是开放书籍考试，备考所需的只是 DAMA 知识体系书籍（[*DMBOK*](https://amzn.to/2F0MGcM) $55）。它大约**600 页**，但如果你主要把学习时间集中在第一章（数据管理）、图表和图示、角色与职责以及定义上，那么这应该能让你在通过考试的路上走 80%。
 
-关于如何使用*DMBOK*，一位考生建议每周末花费4到6小时，持续8到10周。另一种方法是每天早晚各读几页。不论你采用哪种方式，确保将[间隔重复](https://medium.com/@pruthvikumar.123/using-spaced-repetition-to-supercharge-your-programming-skills-a1b355934f61)纳入你的学习方法中。
+关于如何使用*DMBOK*，一位考生建议每周末花费 4 到 6 小时，持续 8 到 10 周。另一种方法是每天早晚各读几页。不论你采用哪种方式，确保将[间隔重复](https://medium.com/@pruthvikumar.123/using-spaced-repetition-to-supercharge-your-programming-skills-a1b355934f61)纳入你的学习方法中。
 
 除了作为考试的学习指南外，*DMBOK*当然也可作为参考书，你可以把它放在同事的桌子上，如果他们需要学习数据策略或在网络研讨会中打瞌睡的话。
 
-### CDMP考试内容
+### CDMP 考试内容
 
-CDMP涵盖14个主题——我按它们在考试中出现的频率排序，并为每个主题提供了简要定义。
+CDMP 涵盖 14 个主题——我按它们在考试中出现的频率排序，并为每个主题提供了简要定义。
 
 **数据治理**（11%）— 确保数据资产正式管理的实践和流程。 [阅读更多](https://www.dataversity.net/what-is-data-governance/).
 
@@ -120,13 +120,13 @@ CDMP涵盖14个主题——我按它们在考试中出现的频率排序，并�
 
 **数据伦理** (2%) — 包括数据处理、算法及其他实践的行为准则，以确保数据在道德背景下得到适当使用。[了解更多](https://www.dataversity.net/what-are-data-ethics/)。
 
-### 为什么数据科学家应该获得CDMP认证
+### 为什么数据科学家应该获得 CDMP 认证
 
 仍然不相信数据战略的重要性？让我们从一个希望提升知识和收入潜力的数据科学家的角度来看看。
 
-![图像](../Images/9d72c59c8d0f7528b99889425c3e0b6d.png)
+![图像](img/9d72c59c8d0f7528b99889425c3e0b6d.png)
 
-图片由 [Franki Chamaki](https://unsplash.com/photos/1K6IQsQbizI) 提供，来源于 [Unsplash](https://unsplash.com/photos/1K6IQsQbizI)。该标识是 [Hivery](https://www.hivery.com/) 的商标，该公司利用AI为零售行业提供解决方案。
+图片由 [Franki Chamaki](https://unsplash.com/photos/1K6IQsQbizI) 提供，来源于 [Unsplash](https://unsplash.com/photos/1K6IQsQbizI)。该标识是 [Hivery](https://www.hivery.com/) 的商标，该公司利用 AI 为零售行业提供解决方案。
 
 [有人说过](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram) 数据科学家处于统计学、计算机科学和领域知识的交汇点。你为什么还想在你的盘子上再加一件事？
 
@@ -134,7 +134,7 @@ CDMP涵盖14个主题——我按它们在考试中出现的频率排序，并�
 
 [斯科特·亚当斯](https://www.scottadamssays.com/)，《迪尔伯特》漫画的作者和创作者，提出了一个 [观点](https://www.politics-prose.com/book/9781591847748)：“你获得的每一项技能都会将成功的几率加倍。” 他承认这可能有些过于简化 — “显然，有些技能比其他技能更有价值，第十二项技能的价值可能低于前十一项” — 但重点是，有时**广度****比深度更好**。
 
-抛开利益的相对大小（因为我严重怀疑它是否每项技能增加2倍……谢谢，边际效益递减法则），显然，拓宽技能集相较于专注于学习一项具体技能可以带来更显著的收益。简而言之，这就是我认为数据科学家学习数据战略的重要原因。
+抛开利益的相对大小（因为我严重怀疑它是否每项技能增加 2 倍……谢谢，边际效益递减法则），显然，拓宽技能集相较于专注于学习一项具体技能可以带来更显著的收益。简而言之，这就是我认为数据科学家学习数据战略的重要原因。
 
 一般来说，**拥有多样化的技能集可以让你：**
 
@@ -148,7 +148,7 @@ CDMP涵盖14个主题——我按它们在考试中出现的频率排序，并�
 
 ### 其他文章以丰富你的技能
 
-[**使用Java解决你的数据科学问题**](https://towardsdatascience.com/java-for-data-science-f64631fdda12)
+[**使用 Java 解决你的数据科学问题**](https://towardsdatascience.com/java-for-data-science-f64631fdda12)
 
 通过了解这门广泛使用的编程语言的基础知识，快速获取优质数据。
 
@@ -156,11 +156,11 @@ CDMP涵盖14个主题——我按它们在考试中出现的频率排序，并�
 
 了解数据仓库作为分析准备数据集的主存储的作用。
 
-[**如何在最小的努力下掌握AWS Cloud Practitioner认证**](https://medium.com/@nicolejaneway/how-to-ace-the-aws-cloud-practitioner-certification-with-minimal-effort-39f10f43146)
+[**如何在最小的努力下掌握 AWS Cloud Practitioner 认证**](https://medium.com/@nicolejaneway/how-to-ace-the-aws-cloud-practitioner-certification-with-minimal-effort-39f10f43146)
 
-预测：多云，第一次尝试就能通过的机会为100%。
+预测：多云，第一次尝试就能通过的机会为 100%。
 
-**如果你喜欢阅读这篇文章**，请在[Medium](https://medium.com/@nicolejaneway)、[LinkedIn](http://www.linkedin.com/in/nicole-janeway-bills)和[Twitter](https://twitter.com/Nicole_Janeway)上关注我，以获取更多提升数据科学技能的想法。[加入CDMP考试学习小组](https://www.facebook.com/groups/346145433213551/)。[购买DMBOK](https://amzn.to/2F0MGcM)。
+**如果你喜欢阅读这篇文章**，请在[Medium](https://medium.com/@nicolejaneway)、[LinkedIn](http://www.linkedin.com/in/nicole-janeway-bills)和[Twitter](https://twitter.com/Nicole_Janeway)上关注我，以获取更多提升数据科学技能的想法。[加入 CDMP 考试学习小组](https://www.facebook.com/groups/346145433213551/)。[购买 DMBOK](https://amzn.to/2F0MGcM)。
 
 **简介: [Nicole Janeway Bills](https://www.linkedin.com/in/nicole-janeway-bills/)** 是一名数据科学家，拥有商业和联邦咨询经验。她帮助组织利用他们的核心资产：简单而强大的数据策略。[**注册获取她更多的文章**](https://page.co/ahje9p)。
 
@@ -168,22 +168,22 @@ CDMP涵盖14个主题——我按它们在考试中出现的频率排序，并�
 
 **相关内容：**
 
-+   [10个被低估的Python技能](/2020/10/10-underrated-python-skills.html)
++   10 个被低估的 Python 技能
 
-+   [作为数据科学家六个月的六个教训](/2020/10/6-lessons-6-months-data-scientist.html)
++   作为数据科学家六个月的六个教训
 
-+   [5篇必读的数据科学论文（及其使用方法）](/2020/10/5-must-read-data-science-papers.html)
++   5 篇必读的数据科学论文（及其使用方法）
 
 ### 更多相关话题
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

@@ -1,8 +1,8 @@
 # 如何用 Python 过滤数据
 
-> 原文：[https://www.kdnuggets.com/2022/02/filter-data-python.html](https://www.kdnuggets.com/2022/02/filter-data-python.html)
+> 原文：[`www.kdnuggets.com/2022/02/filter-data-python.html`](https://www.kdnuggets.com/2022/02/filter-data-python.html)
 
-![如何用 Python 过滤数据](../Images/2f796a4aaf9eb4ff7a2018725b22b59a.png)
+![如何用 Python 过滤数据](img/2f796a4aaf9eb4ff7a2018725b22b59a.png)
 
 图片由 [Sid Balachandran](https://unsplash.com/@itookthose?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/pandas?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -50,7 +50,7 @@ df_more_than_20 = df[df['column_1'] > 20]
 df[(df['column_1'] >= -100) & (df['column_1'] <= 1000)]
 ```
 
-上述内容表示，给我值在负100到正100之间的数据。
+上述内容表示，给我值在负 100 到正 100 之间的数据。
 
 下一步是使用 OR 操作，找到所有负值的行：
 
@@ -114,11 +114,11 @@ df[(df['column_3'] != 'red' ) | (df['column_200'] <= 8.60)]
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -134,4 +134,4 @@ df[(df['column_3'] != 'red' ) | (df['column_200'] <= 8.60)]
 
 +   [掌握 SQL、Python、数据清理、数据… 的指南合集](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
 
-+   [2020年数据科学、数据可视化与机器学习的38个顶级Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [2020 年数据科学、数据可视化与机器学习的 38 个顶级 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)

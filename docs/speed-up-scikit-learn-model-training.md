@@ -1,16 +1,16 @@
-# 如何加速Scikit-Learn模型训练
+# 如何加速 Scikit-Learn 模型训练
 
-> 原文：[https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html](https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html)
+> 原文：[`www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html`](https://www.kdnuggets.com/2021/02/speed-up-scikit-learn-model-training.html)
 
-[评论](#comments)
+评论
 
-**作者：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，Anyscale的开发者关系**
+**作者：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，Anyscale 的开发者关系**
 
-![图示](../Images/eda130a8ac5452ae7b9f9619e330a799.png)
+![图示](img/eda130a8ac5452ae7b9f9619e330a799.png)
 
-scikit-learn可以利用的资源（深蓝色），用于单核（A），多核（B）和多节点训练（C）
+scikit-learn 可以利用的资源（深蓝色），用于单核（A），多核（B）和多节点训练（C）
 
-Scikit-Learn是一个易于使用的Python机器学习库。然而，有时候scikit-learn模型的训练可能需要很长时间。问题是，如何在最短时间内创建最佳的scikit-learn模型？解决这个问题的方法有很多，比如：
+Scikit-Learn 是一个易于使用的 Python 机器学习库。然而，有时候 scikit-learn 模型的训练可能需要很长时间。问题是，如何在最短时间内创建最佳的 scikit-learn 模型？解决这个问题的方法有很多，比如：
 
 +   更换你的优化函数（求解器）
 
@@ -22,15 +22,15 @@ Scikit-Learn是一个易于使用的Python机器学习库。然而，有时候sc
 
 ### 更换你的优化算法（求解器）
 
-![图示](../Images/ca8011fc425afd71a24944fa837ca982.png)
+![图示](img/ca8011fc425afd71a24944fa837ca982.png)
 
-一些求解器可能需要更长的时间来收敛。图片来源于[Gaël Varoquaux的演讲](https://youtu.be/1s8RzWwMdqg?t=671)。
+一些求解器可能需要更长的时间来收敛。图片来源于[Gaël Varoquaux 的演讲](https://youtu.be/1s8RzWwMdqg?t=671)。
 
-更好的算法让你能更好地利用相同的硬件。通过更高效的算法，你可以更快地产生最优模型。一种方法是更换你的优化算法（求解器）。例如，[scikit-learn的逻辑回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)允许你选择‘newton-cg’，‘lbfgs’，‘liblinear’，‘sag’，和‘saga’等求解器。
+更好的算法让你能更好地利用相同的硬件。通过更高效的算法，你可以更快地产生最优模型。一种方法是更换你的优化算法（求解器）。例如，[scikit-learn 的逻辑回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)允许你选择‘newton-cg’，‘lbfgs’，‘liblinear’，‘sag’，和‘saga’等求解器。
 
-为了理解不同求解器的工作原理，我建议你观看由scikit-learn核心贡献者[Gaël Varoquaux](https://youtu.be/1s8RzWwMdqg?t=671)的演讲。用他的话来说，一个完整的梯度算法（liblinear）收敛速度快，但每次迭代（以白色+表示）可能非常昂贵，因为它需要使用所有的数据。在一个子采样的方法中，每次迭代计算便宜，但收敛速度可能会慢得多。一些算法如‘saga’实现了两者的最佳结合。每次迭代计算便宜，而且由于方差减少技术，算法收敛迅速。重要的是要注意，[快速收敛在实践中并不总是重要](https://leon.bottou.org/publications/pdf/nips-2007.pdf)，不同的求解器适用于不同的问题。
+为了理解不同求解器的工作原理，我建议你观看由 scikit-learn 核心贡献者[Gaël Varoquaux](https://youtu.be/1s8RzWwMdqg?t=671)的演讲。用他的话来说，一个完整的梯度算法（liblinear）收敛速度快，但每次迭代（以白色+表示）可能非常昂贵，因为它需要使用所有的数据。在一个子采样的方法中，每次迭代计算便宜，但收敛速度可能会慢得多。一些算法如‘saga’实现了两者的最佳结合。每次迭代计算便宜，而且由于方差减少技术，算法收敛迅速。重要的是要注意，[快速收敛在实践中并不总是重要](https://leon.bottou.org/publications/pdf/nips-2007.pdf)，不同的求解器适用于不同的问题。
 
-![图示](../Images/b7bf81e13a71f36ef73e6608bde755e4.png)
+![图示](img/b7bf81e13a71f36ef73e6608bde755e4.png)
 
 为问题选择合适的求解器可以节省大量时间（[代码示例](https://gist.github.com/mGalarnyk/f42f434fc162be108a3bb5bc36464a59)）。
 
@@ -40,15 +40,15 @@ Scikit-Learn是一个易于使用的Python机器学习库。然而，有时候sc
 
 为了实现大多数 scikit-learn 算法的高性能，你需要调整模型的超参数。超参数是模型的参数，在训练过程中不会更新。它们可以用于配置模型或训练函数。Scikit-Learn 本身包含了一些 [超参数调整技术](https://scikit-learn.org/stable/modules/grid_search.html)，如网格搜索（[GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV)），它详尽地考虑了所有参数组合，以及 [随机搜索](https://www.jmlr.org/papers/volume13/bergstra12a/bergstra12a.pdf)（[RandomizedSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV)），它从具有指定分布的参数空间中抽取给定数量的候选。最近，scikit-learn 增加了实验性的超参数搜索估计器：缩减网格搜索（[HalvingGridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingGridSearchCV.html#sklearn.model_selection.HalvingGridSearchCV)）和缩减随机搜索（[HalvingRandomSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.HalvingRandomSearchCV.html#sklearn.model_selection.HalvingRandomSearchCV)）。
 
-![图](../Images/760eb1242540966e6674ba4f4eda7b09.png)
+![图](img/760eb1242540966e6674ba4f4eda7b09.png)
 
-逐步缩减是 scikit-learn 版本 0.24.1（2021年1月）中的一个实验性新功能。图像来自 [文档](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving)。
+逐步缩减是 scikit-learn 版本 0.24.1（2021 年 1 月）中的一个实验性新功能。图像来自 [文档](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving)。
 
 这些技术可以用于通过 [逐步缩减](https://scikit-learn.org/stable/modules/grid_search.html#searching-for-optimal-parameters-with-successive-halving) 来搜索参数空间。上面的图像显示了所有超参数候选在第一次迭代时用少量资源进行评估，之后更有前景的候选被选择，并在每次迭代中分配更多资源。
 
 虽然这些新技术很令人兴奋，但有一个名为 [Tune-sklearn](https://github.com/ray-project/tune-sklearn) 的库提供了前沿的超参数调整技术（贝叶斯优化、早停和分布式执行），这些技术相比网格搜索和随机搜索能够显著提高速度。
 
-![图](../Images/b3c3f2cce2bbe237fd6efd4f9a7fc427.png)
+![图](img/b3c3f2cce2bbe237fd6efd4f9a7fc427.png)
 
 早停法的实际应用。超参数集 2 是一组不太有前景的超参数，它们会被 Tune-sklearn 的早停机制检测到，并提前停止以避免浪费时间和资源。图片来自 [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf)。
 
@@ -64,7 +64,7 @@ Scikit-Learn是一个易于使用的Python机器学习库。然而，有时候sc
 
 也许最重要的是，`tune-sklearn` 的速度如下面的图片所示。
 
-![Figure](../Images/94b36e7d23d42c2eabe56065eef4c15d.png)
+![Figure](img/94b36e7d23d42c2eabe56065eef4c15d.png)
 
 你可以在普通笔记本电脑上看到使用 tune-sklearn 的显著性能差异。图片来自 [GridSearchCV 2.0](https://medium.com/distributed-computing-with-ray/gridsearchcv-2-0-new-and-improved-ee56644cbabf)。
 
@@ -72,19 +72,19 @@ Scikit-Learn是一个易于使用的Python机器学习库。然而，有时候sc
 
 ### 使用 `joblib` 和 `Ray` 进行训练的并行化或分布式处理
 
-![Figure](../Images/634e09a182470626719b71f2df805753.png)
+![Figure](img/634e09a182470626719b71f2df805753.png)
 
 scikit-learn 可以利用的资源（深蓝色）用于单核心（A）、多核心（B）和多节点训练（C）
 
 另一种提高模型构建速度的方法是通过 [joblib](https://joblib.readthedocs.io/en/latest/) 和 [Ray](https://docs.ray.io/en/master/index.html) 实现训练的并行化或分布式处理。默认情况下，scikit-learn 使用单个核心训练模型。需要注意的是，今天几乎所有的计算机都有多个核心。
 
-![Figure](../Images/10429781abb5d12826d18e083d9cc71c.png)
+![Figure](img/10429781abb5d12826d18e083d9cc71c.png)
 
 就本博客而言，你可以将上面的 MacBook 视为一个具有 4 个核心的单节点。
 
 因此，通过利用计算机上的所有核心，你可以大大加速模型的训练。如果你的模型具有较高的并行度，如随机森林®，这尤其适用。
 
-![图像](../Images/f0c12d04f8fec41e2ec3e30d8f0d3c61.png)
+![图像](img/f0c12d04f8fec41e2ec3e30d8f0d3c61.png)
 
 随机森林® 是一个容易并行化的模型，因为每棵决策树相互独立。
 
@@ -96,11 +96,11 @@ Scikit-Learn 可以通过[joblib，默认使用‘loky’后端](https://joblib.
 
 +   从机器故障中恢复
 
-幸运的是，[‘ray’后端](https://docs.ray.io/en/master/joblib.html)可以为你处理这些细节，保持简单，并提供更好的性能。下图显示了Ray、Multiprocessing和Dask相对于默认‘loky’后端的规范化加速。
+幸运的是，[‘ray’后端](https://docs.ray.io/en/master/joblib.html)可以为你处理这些细节，保持简单，并提供更好的性能。下图显示了 Ray、Multiprocessing 和 Dask 相对于默认‘loky’后端的规范化加速。
 
-![图像](../Images/85873a44503158f15ad8af003c192d63.png)
+![图像](img/85873a44503158f15ad8af003c192d63.png)
 
-性能在每个32核心的一个、五个和十个m5.8xlarge节点上进行测量。Loky 和 Multiprocessing 的性能不依赖于机器数量，因为它们在单台机器上运行。[图片来源](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33)。
+性能在每个 32 核心的一个、五个和十个 m5.8xlarge 节点上进行测量。Loky 和 Multiprocessing 的性能不依赖于机器数量，因为它们在单台机器上运行。[图片来源](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33)。
 
 如果你想了解如何快速并行化或分布式你的 scikit-learn 训练，你可以查看这篇[博客文章](https://medium.com/distributed-computing-with-ray/easy-distributed-scikit-learn-training-with-ray-54ff8b643b33)。
 
@@ -114,21 +114,21 @@ Scikit-Learn 可以通过[joblib，默认使用‘loky’后端](https://joblib.
 
 **相关内容：**
 
-+   [终极 Scikit-Learn 机器学习备忘单](/2021/01/ultimate-scikit-learn-machine-learning-cheatsheet.html)
++   终极 Scikit-Learn 机器学习备忘单
 
-+   [Python 列表和列表操作](/2019/11/python-lists-list-manipulation.html)
++   Python 列表和列表操作
 
-+   [K-Means 比 Scikit-learn 快 8 倍，误差低 27 倍，仅需 25 行代码](/2021/01/k-means-faster-lower-error-scikit-learn.html)
++   K-Means 比 Scikit-learn 快 8 倍，误差低 27 倍，仅需 25 行代码
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

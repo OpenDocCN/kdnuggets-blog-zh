@@ -1,6 +1,6 @@
 # 将数据管理与数据讲述结合起来以创造价值
 
-> 原文：[https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)
+> 原文：[`www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value`](https://www.kdnuggets.com/combining-data-management-and-data-storytelling-to-generate-value)
 
 最近，我专注于数据讲述及其在有效传达数据分析结果以创造价值方面的重要性。然而，我的技术背景非常接近数据管理及其问题，这促使我思考数据管理需要满足哪些条件，以确保你能够迅速构建以数据为驱动的故事。我得出一个常常被视为理所当然的结论，但始终值得牢记。你不能仅仅依靠数据来构建数据驱动的故事。数据管理系统还必须考虑至少两个方面。你想知道是哪两个方面吗？让我们在本文中尝试找出答案。
 
@@ -18,11 +18,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
@@ -54,7 +54,7 @@
 
 数据仓库只能处理结构化数据，经过提取、转换和加载（ETL）过程后。一旦加工，数据可以用于报告、仪表板或挖掘。下图总结了数据仓库的结构。
 
-![数据仓库的架构](../Images/b8aaece36f65b63d532958b5260f793a.png)
+![数据仓库的架构](img/b8aaece36f65b63d532958b5260f793a.png)
 
 图 1：数据仓库的架构
 
@@ -72,7 +72,7 @@
 
 数据湖增加了元数据和治理层，如下图所示，使数据可以被上层（报告、仪表板和数据挖掘）消费。下图显示了数据湖的架构。
 
-![数据湖的架构](../Images/65a03511de49a412407d88a3cb18dc66.png)
+![数据湖的架构](img/65a03511de49a412407d88a3cb18dc66.png)
 
 图 2：数据湖的架构
 
@@ -82,7 +82,7 @@
 
 随着时间的推移，数据湖的概念演变为数据湖仓，即一个增强的数据湖，支持其顶部的事务。在实际应用中，数据湖仓根据数据仓库的语义修改数据湖中的现有数据，如下图所示。
 
-![数据湖仓的架构](../Images/bcea28e8230512d638e3ab9a170e6103.png)
+![数据湖仓的架构](img/bcea28e8230512d638e3ab9a170e6103.png)
 
 图 3：数据湖仓的架构
 
@@ -102,7 +102,7 @@
 
 下图概述了数据管理系统的架构。
 
-![数据管理系统的一般架构](../Images/20fead281589359cb1fddaf37f086a0a.png)
+![数据管理系统的一般架构](img/20fead281589359cb1fddaf37f086a0a.png)
 
 图 4\. 数据管理系统的一般架构
 
@@ -128,7 +128,7 @@
 
 如果我们接受价值作为金钱数量的定义，决策者可以为他们工作的公司生成价值，并间接为公司内的人员以及使用公司服务或产品的人员生成价值。如果我们接受价值作为事物重要性的定义，那么价值对生成数据的人员以及其他外部人员至关重要，如下图所示。
 
-![生成价值的过程](../Images/8d6535317a4abee318f40d71282d80f3.png)
+![生成价值的过程](img/8d6535317a4abee318f40d71282d80f3.png)
 
 图 5：生成价值的过程
 
@@ -168,7 +168,7 @@
 
 让我们从数据讲故事的角度重新审视数据管理管道，它包括数据和元数据（背景）
 
-![从数据讲故事的角度看数据管理管道](../Images/0b01f28667b325a286af264b2abbc5ae.png)
+![从数据讲故事的角度看数据管理管道](img/0b01f28667b325a286af264b2abbc5ae.png)
 
 图 6：从数据讲故事的角度看数据管理管道
 

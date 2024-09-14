@@ -1,12 +1,12 @@
 # Python 序列的 5 个高级技巧
 
-> 原文：[https://www.kdnuggets.com/2021/11/5-advanced-tips-python-sequences.html](https://www.kdnuggets.com/2021/11/5-advanced-tips-python-sequences.html)
+> 原文：[`www.kdnuggets.com/2021/11/5-advanced-tips-python-sequences.html`](https://www.kdnuggets.com/2021/11/5-advanced-tips-python-sequences.html)
 
-[评论](#comments)
+评论
 
 **作者 [Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/)，Tubi 的数据科学家**
 
-![](../Images/a192e1567eb76d4791fcee7218864b73.png)
+![](img/a192e1567eb76d4791fcee7218864b73.png)
 
 图片来源：[NASA](https://unsplash.com/@nasa?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 > “66%的数据科学家每天都在使用 Python。” — [src](https://www.dasca.org/world-of-big-data/article/top-6-programming-languages-for-data-science-in-2021)
 
-如果你是那66%中的一员，这篇文章就是为你准备的。
+如果你是那 66%中的一员，这篇文章就是为你准备的。
 
 我们将涵盖[Luciano Ramalho 的《流畅的 Python》](https://www.amazon.com/Fluent-Python-Concise-Effective-Programming/dp/1491946008)第二章中的主要内容，该章节涉及**序列**，例如列表、元组等。
 
@@ -161,7 +161,7 @@ all_but_last = x[:-1:]   # [1,2,3]
 reversed = x[::-1]       # [4,3,2,1]
 ```
 
-就这样！来自《流畅的 Python》第二章的5个主要技巧。还有一个部分……
+就这样！来自《流畅的 Python》第二章的 5 个主要技巧。还有一个部分……
 
 ## 数据科学家的有用笔记
 
@@ -169,34 +169,34 @@ reversed = x[::-1]       # [4,3,2,1]
 
 1.  **列表推导几乎总是应该替代循环。** 如果循环体很复杂，你可以创建一个执行这些操作的函数。通过将用户定义的函数与列表推导语法结合起来，你可以编写出既可读又高效的代码。如果你需要迭代多个变量，可以使用`[enumerate()](https://realpython.com/python-enumerate/)`或`[zip()](https://www.w3schools.com/python/ref_func_zip.asp)`。
 
-1.  **在 Python 中“优化”并不重要。** 如果你在编写生产级代码，情况可能会有所不同。但实际上，使用元组与列表相比，你不会看到显著的性能提升。确保你的数据处理步骤逻辑清晰且高效是工作中的99%。如果1%很重要，那么你可以开始担心元组与列表的问题。此外，如果你真的关注高效代码，你可能不会使用 Python。
+1.  **在 Python 中“优化”并不重要。** 如果你在编写生产级代码，情况可能会有所不同。但实际上，使用元组与列表相比，你不会看到显著的性能提升。确保你的数据处理步骤逻辑清晰且高效是工作中的 99%。如果 1%很重要，那么你可以开始担心元组与列表的问题。此外，如果你真的关注高效代码，你可能不会使用 Python。
 
 1.  **最后，切片非常酷。** 我一直知道`x[::-1]`可以反转列表，但直到阅读《流畅的 Python》这一章节才明白原因。它同样适用于 numpy 和 pandas！
 
 *感谢阅读！我将再写 35 篇文章，将学术研究带入数据科学行业。查看我的评论以获取此文章的主要来源和一些有用资源的链接。*
 
-**个人简介：[Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[https://michaeldberk.com/](https://michaeldberk.com/)**) 是 Tubi 的数据科学家。
+**个人简介：[Michael Berk](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[`michaeldberk.com/`](https://michaeldberk.com/)**) 是 Tubi 的数据科学家。
 
 [原文](https://towardsdatascience.com/5-advanced-tips-on-python-sequences-5b0e09a21a83)。已获授权转载。
 
 **相关：**
 
-+   [如何发现你的机器学习模型中的弱点](/2021/09/weaknesses-machine-learning-models.html)
++   如何发现你的机器学习模型中的弱点
 
-+   [使用这个Python库进行简单的文本抓取、解析和处理](/2021/10/simple-text-scraping-parsing-processing-python-library.html)
++   使用这个 Python 库进行简单的文本抓取、解析和处理
 
-+   [使用Faker在Python中生成简单的合成数据](/2021/11/easy-synthetic-data-python-faker.html)
++   使用 Faker 在 Python 中生成简单的合成数据
 
 ### 更多相关主题
 
-+   [5门免费的高级Python编程课程](https://www.kdnuggets.com/5-free-advanced-python-programming-courses)
++   [5 门免费的高级 Python 编程课程](https://www.kdnuggets.com/5-free-advanced-python-programming-courses)
 
-+   [25个针对数据科学家的高级SQL面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
++   [25 个针对数据科学家的高级 SQL 面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
 
-+   [你必须知道的10个高级数据科学SQL面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的 10 个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)
 
-+   [回到基础第4周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础第 4 周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
-+   [16个顶级技术数据来源，用于高级数据科学项目](https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects)
++   [16 个顶级技术数据来源，用于高级数据科学项目](https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects)

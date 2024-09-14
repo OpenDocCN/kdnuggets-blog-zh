@@ -1,28 +1,28 @@
 # 没有人谈论的数据科学核心技能
 
-> 原文：[https://www.kdnuggets.com/2020/11/essential-data-science-skills-no-one-talks-about.html](https://www.kdnuggets.com/2020/11/essential-data-science-skills-no-one-talks-about.html)
+> 原文：[`www.kdnuggets.com/2020/11/essential-data-science-skills-no-one-talks-about.html`](https://www.kdnuggets.com/2020/11/essential-data-science-skills-no-one-talks-about.html)
 
-[评论](#comments)
+评论
 
-**由 [Michael Kolomenkin](https://www.linkedin.com/in/michael-kolomenkin-5284942/)，AI研究员**
+**由 [Michael Kolomenkin](https://www.linkedin.com/in/michael-kolomenkin-5284942/)，AI 研究员**
 
-在谷歌上搜索“数据科学家的核心技能”。前几名结果是长长的技术术语列表，被称为*硬技能*。Python、代数、统计学和SQL是一些最受欢迎的技能。之后，是*软技能*——沟通能力、商业洞察力、团队合作等。
+在谷歌上搜索“数据科学家的核心技能”。前几名结果是长长的技术术语列表，被称为*硬技能*。Python、代数、统计学和 SQL 是一些最受欢迎的技能。之后，是*软技能*——沟通能力、商业洞察力、团队合作等。
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
-假设你是一个拥有上述所有能力的超级人类。你从五岁开始编码，是Kaggle的特级大师，你的会议论文肯定会获得最佳论文奖。你知道吗？即便如此，你的项目仍然很有可能难以成熟，成为完全成熟的商业产品。
+假设你是一个拥有上述所有能力的超级人类。你从五岁开始编码，是 Kaggle 的特级大师，你的会议论文肯定会获得最佳论文奖。你知道吗？即便如此，你的项目仍然很有可能难以成熟，成为完全成熟的商业产品。
 
-最近的研究估计超过85%的数据科学项目未能达到生产阶段。研究提供了许多失败的原因。我没有看到所谓的*核心技能*被提及作为潜在原因。
+最近的研究估计超过 85%的数据科学项目未能达到生产阶段。研究提供了许多失败的原因。我没有看到所谓的*核心技能*被提及作为潜在原因。
 
 我是否在说上述技能不重要？当然不是。硬技能和软技能都是至关重要的。关键在于它们是必要的，但不够充分。此外，它们很流行，出现在每次谷歌搜索中。所以你很可能已经知道你是否需要提高数学能力或团队合作。
 
@@ -44,7 +44,7 @@
 
 ### 简洁性
 
-![图示](../Images/9cbc87b1003e1badd5e4e9876b30dc63.png)
+![图示](img/9cbc87b1003e1badd5e4e9876b30dc63.png)
 
 图片来源：shutterstock
 
@@ -52,7 +52,7 @@
 
 我本可以用关于简洁的引文填满整页。研究人员、设计师、工程师、哲学家和作者都赞扬了简洁，并表示简洁本身具有价值。他们的理由有所变化，但结论始终如一。你达到完美不是当没有东西可以添加时，而是当没有东西可以去除时。
 
-软件工程师完全意识到简洁的重要性。关于如何使软件更简单的书籍和文章不计其数。我记得KISS原则——Keep It Simple, Stupid——甚至在我的本科课程中也有教授。简单的软件更便于维护、更容易更改，并且更不容易出错。这一点有广泛的共识。
+软件工程师完全意识到简洁的重要性。关于如何使软件更简单的书籍和文章不计其数。我记得 KISS 原则——Keep It Simple, Stupid——甚至在我的本科课程中也有教授。简单的软件更便于维护、更容易更改，并且更不容易出错。这一点有广泛的共识。
 
 在数据科学中，情况非常不同。例如，有一些文章，如 “[The virtue of simplicity: on ML models in algorithmic trading](https://journals.sagepub.com/doi/full/10.1177/2053951720926558)” 由 [Kristian Bondo Hansen](https://journals.sagepub.com/action/doSearch?target=default&ContribAuthorStored=Hansen%2C+Kristian+Bondo) 撰写，或 “[The role of simplicity in data science revolution](https://www.linkedin.com/pulse/role-simplicity-data-science-revolution-alfredo-gemma/)” 由 Alfredo Gemma 撰写。但这些只是例外，而非常态。大多数数据科学家最好的情况下不在意，最坏的情况下更倾向于复杂的解决方案。
 
@@ -70,7 +70,7 @@
 
 ### **鲁棒性**
 
-![图](../Images/0721ebf7e415be6307c1feb144d5e19f.png)
+![图](img/0721ebf7e415be6307c1feb144d5e19f.png)
 
 图片来源：shutterstock
 
@@ -92,23 +92,23 @@
 
 我想介绍三种通用的做法。遵循这些做法不能保证模型的鲁棒性，但它大大减少了脆弱解决方案的可能性。
 
-**性能安全边际**。安全边际是任何工程的基础。常见的做法是将要求增加20–30%以确保安全。一个能够承受1000kg的电梯可以轻松承受1300kg。此外，它经过测试能承受1300kg而不是1000kg。工程师为意外条件做好准备。
+**性能安全边际**。安全边际是任何工程的基础。常见的做法是将要求增加 20–30%以确保安全。一个能够承受 1000kg 的电梯可以轻松承受 1300kg。此外，它经过测试能承受 1300kg 而不是 1000kg。工程师为意外条件做好准备。
 
-数据科学中的安全边际是什么呢？我认为是KPI或成功标准。即使发生了意外情况，你仍然会高于阈值。
+数据科学中的安全边际是什么呢？我认为是 KPI 或成功标准。即使发生了意外情况，你仍然会高于阈值。
 
-这一做法的重要后果是你将停止追求渐进改进。如果你的模型只提高了1%的KPI，你无法做到鲁棒。即使经过所有统计显著性检验，环境中的任何小变化都会破坏你的努力。
+这一做法的重要后果是你将停止追求渐进改进。如果你的模型只提高了 1%的 KPI，你无法做到鲁棒。即使经过所有统计显著性检验，环境中的任何小变化都会破坏你的努力。
 
-**过度测试**。忘记单一的测试/训练/验证划分。你必须在所有可能的组合上进行交叉验证。你有不同的用户吗？按用户ID进行划分，并进行数十次。你的数据随时间变化吗？按时间戳进行划分，确保每一天在验证组中出现一次。用随机值“垃圾”你的数据，或在数据点之间交换某些特征的值。然后在脏数据上测试。
+**过度测试**。忘记单一的测试/训练/验证划分。你必须在所有可能的组合上进行交叉验证。你有不同的用户吗？按用户 ID 进行划分，并进行数十次。你的数据随时间变化吗？按时间戳进行划分，确保每一天在验证组中出现一次。用随机值“垃圾”你的数据，或在数据点之间交换某些特征的值。然后在脏数据上测试。
 
 我发现假设我的模型有缺陷直到证明其无误是非常有用的。
 
-关于数据科学和机器学习测试的两个有趣来源——[Alex Gude的博客](https://alexgude.com/blog/software-testing-for-data-science/)和“[用Python进行机器学习，测试驱动的方法](https://www.amazon.com/Thoughtful-Machine-Learning-Python-Test-Driven/dp/1491924136)”。
+关于数据科学和机器学习测试的两个有趣来源——[Alex Gude 的博客](https://alexgude.com/blog/software-testing-for-data-science/)和“[用 Python 进行机器学习，测试驱动的方法](https://www.amazon.com/Thoughtful-Machine-Learning-Python-Test-Driven/dp/1491924136)”。
 
 **不要在沙滩上建造城堡**。减少对其他未经测试组件的依赖。绝不要在另一个高风险且未经验证的组件上建立你的模型。即使那个组件的开发者发誓不会出现任何问题。
 
 ### 模块化
 
-![图像](../Images/bc40c43aa30cd2dc2dfb04424da06026.png)
+![图像](img/bc40c43aa30cd2dc2dfb04424da06026.png)
 
 图片来源：shutterstock
 
@@ -116,19 +116,19 @@
 
 问题越小越好。在这里，“更好”不是锦上添花，而是必需。这将节省大量的时间、精力和金钱。当问题小、定义明确且没有大量假设时，解决方案既准确又易于测试。
 
-大多数数据科学家在软件设计的背景下对模块化有所了解。但即便是最优秀的程序员，他们的Python代码清晰明了，往往也未能将模块化应用于数据科学本身。
+大多数数据科学家在软件设计的背景下对模块化有所了解。但即便是最优秀的程序员，他们的 Python 代码清晰明了，往往也未能将模块化应用于数据科学本身。
 
 失败很容易解释。模块化设计需要一种将几个较小模型合并为一个大模型的方法。机器学习中不存在这样的办法。
 
 但有一些我认为有用的实用指南：
 
-+   **迁移学习**。迁移学习简化了现有解决方案的使用。你可以将其视为将你的问题分为两个部分。第一部分创建一个低维特征表示。第二部分直接优化相关的KPI。
++   **迁移学习**。迁移学习简化了现有解决方案的使用。你可以将其视为将你的问题分为两个部分。第一部分创建一个低维特征表示。第二部分直接优化相关的 KPI。
 
 +   **开源**。尽可能使用现成的开源解决方案。这使得你的代码在定义上就是模块化的。
 
 +   **忘记最优**。从头开始构建一个针对你需求优化的系统是很诱人的，而不是适应现有解决方案。但是，只有在你能够证明你的系统显著优于现有系统时，这才是合理的。
 
-+   **模型集成**。不要害怕采取几种不同的方法并将它们放在一起。这就是大多数Kaggle比赛获胜的方式。
++   **模型集成**。不要害怕采取几种不同的方法并将它们放在一起。这就是大多数 Kaggle 比赛获胜的方式。
 
 +   **划分你的数据**。不要试图创建“一个伟大的模型”，虽然从理论上讲，这可能是可能的。例如，如果你要预测客户行为，不要为完全新客户和已经使用你服务一年的人建立相同的模型。
 
@@ -136,7 +136,7 @@
 
 ### 采摘水果
 
-![图示](../Images/f28d9809656b6c822376e47ccfed2811.png)
+![图示](img/f28d9809656b6c822376e47ccfed2811.png)
 
 图片来源：shutterstock
 
@@ -160,19 +160,19 @@
 
 **相关：**
 
-+   [初级和高级数据科学家的无声区别](/2020/10/unspoken-difference-junior-senior-data-scientists.html)
++   初级和高级数据科学家的无声区别
 
-+   [获取数据科学职位比以往任何时候都难——如何将这一点转为你的优势](/2020/10/getting-data-science-job-harder.html)
++   获取数据科学职位比以往任何时候都难——如何将这一点转为你的优势
 
-+   [有志数据科学家的建议](/2020/10/advice-aspiring-data-scientists.html)
++   有志数据科学家的建议
 
 ### 该主题的更多内容
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学去寻找目标，并通过目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

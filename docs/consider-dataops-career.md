@@ -1,40 +1,40 @@
-# 你应该考虑DataOps职业吗？
+# 你应该考虑 DataOps 职业吗？
 
-> 原文：[https://www.kdnuggets.com/2023/05/consider-dataops-career.html](https://www.kdnuggets.com/2023/05/consider-dataops-career.html)
+> 原文：[`www.kdnuggets.com/2023/05/consider-dataops-career.html`](https://www.kdnuggets.com/2023/05/consider-dataops-career.html)
 
-![你应该考虑DataOps职业吗？](../Images/5ed05f86582e956fa626990ab4100d38.png)
+![你应该考虑 DataOps 职业吗？](img/5ed05f86582e956fa626990ab4100d38.png)
 
-图片来自Bing Image Creator
+图片来自 Bing Image Creator
 
-DataOps结合了数据科学与[软件工程](/2022/05/software-developer-software-engineer.html)，创造了强大的技术知识、数据分析和过程优化的结合。随着自动化和机器学习机会的增加，DataOps职业可以非常有回报，面临令人兴奋的挑战和成长潜力。
+DataOps 结合了数据科学与软件工程，创造了强大的技术知识、数据分析和过程优化的结合。随着自动化和机器学习机会的增加，DataOps 职业可以非常有回报，面临令人兴奋的挑战和成长潜力。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT 工作
 
 * * *
 
-让我们深入了解进入这个充满活力的行业所需的条件——包括DataOps工程师的工作内容、职位福利以及所需技能——以便你可以决定这是否是你未来的正确选择！
+让我们深入了解进入这个充满活力的行业所需的条件——包括 DataOps 工程师的工作内容、职位福利以及所需技能——以便你可以决定这是否是你未来的正确选择！
 
-# 什么是DataOps？
+# 什么是 DataOps？
 
-[DataOps（数据操作）](/2021/05/dataops-5-things-need-know.html) 是一种将[DevOps](/2018/07/devops-data-scientists-taming-unicorn.html)的敏捷性与数据分析能力相结合的方法论。旨在提高IT和数据相关团队之间的协作，通过优化构建和利用企业数据资产的端到端生命周期，使业务更加敏捷。
+DataOps（数据操作） 是一种将 DevOps 的敏捷性与数据分析能力相结合的方法论。旨在提高 IT 和数据相关团队之间的协作，通过优化构建和利用企业数据资产的端到端生命周期，使业务更加敏捷。
 
-作为一种实践，DataOps通过自动化和优化各种流程来简化数据管道过程，从数据采集到数据分析。这使得组织能够实时分析数据，并迅速响应不断变化的业务需求。
+作为一种实践，DataOps 通过自动化和优化各种流程来简化数据管道过程，从数据采集到数据分析。这使得组织能够实时分析数据，并迅速响应不断变化的业务需求。
 
-## DataOps与DevOps
+## DataOps 与 DevOps
 
-DataOps和DevOps是两个不同的过程，但它们通过提供对软件开发操作的增强可见性和控制来协同工作，从而帮助更快、更高效地实现目标。
+DataOps 和 DevOps 是两个不同的过程，但它们通过提供对软件开发操作的增强可见性和控制来协同工作，从而帮助更快、更高效地实现目标。
 
-DataOps与DevOps的区别在于关注点：前者关注如何快速通过给定系统移动数据——无论是实时流动大量非结构化数据还是管理组织系统中的现有资产——而后者关注如何在不牺牲服务质量或多个服务器/应用堆栈稳定性的情况下快速部署更改。
+DataOps 与 DevOps 的区别在于关注点：前者关注如何快速通过给定系统移动数据——无论是实时流动大量非结构化数据还是管理组织系统中的现有资产——而后者关注如何在不牺牲服务质量或多个服务器/应用堆栈稳定性的情况下快速部署更改。
 
-# 为什么DataOps是一个好的职业选择？
+# 为什么 DataOps 是一个好的职业选择？
 
 DataOps 提供了与前沿技术合作的绝佳机会，并且处于数据管理解决方案的最前沿。这个领域的专业人员需求量很大，随着越来越多的公司认识到有效数据管理的价值，这种需求只会增加。
 
@@ -48,7 +48,7 @@ DataOps 作为职业选择的主要吸引力集中在：
 
 ## 薪资
 
-根据 [Talent.com](https://www.talent.com/salary?job=data+ops+engineer)，2023年美国 DataOps 工程师的平均基本工资为每年 $130,350，入门级工资起薪为每年 $87,653。薪资根据地点、经验和目标公司而异，但越来越明显的是，对经验丰富的 DataOps 工程师的需求日益增加，从而推动了行业薪资的上涨。
+根据 [Talent.com](https://www.talent.com/salary?job=data+ops+engineer)，2023 年美国 DataOps 工程师的平均基本工资为每年 $130,350，入门级工资起薪为每年 $87,653。薪资根据地点、经验和目标公司而异，但越来越明显的是，对经验丰富的 DataOps 工程师的需求日益增加，从而推动了行业薪资的上涨。
 
 ## 职业机会
 

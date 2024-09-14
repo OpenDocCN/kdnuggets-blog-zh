@@ -1,12 +1,12 @@
 # 关于 PyCaret 的 5 件你不知道的事
 
-> 原文：[https://www.kdnuggets.com/2020/07/5-things-pycaret.html](https://www.kdnuggets.com/2020/07/5-things-pycaret.html)
+> 原文：[`www.kdnuggets.com/2020/07/5-things-pycaret.html`](https://www.kdnuggets.com/2020/07/5-things-pycaret.html)
 
-[评论](#comments)
+评论
 
 **作者：[Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 创始人及作者**
 
-![Figure](../Images/ebe1d00ab7e647b9fac4941e0624ce7e.png)
+![Figure](img/ebe1d00ab7e647b9fac4941e0624ce7e.png)
 
 来自 PyCaret 的作者
 
@@ -30,7 +30,7 @@ PyCaret 是一个开源的 Python 机器学习库，用于在**低代码**环境
 
 为了理解这一点，让我们使用“[Kiva](https://raw.githubusercontent.com/pycaret/pycaret/master/datasets/kiva.csv)”数据集来看一个例子。
 
-![Image for post](../Images/cf2fbf90f653d414d4542d4ce365277a.png)
+![Image for post](img/cf2fbf90f653d414d4542d4ce365277a.png)
 
 这是一个微型银行贷款数据集，每一行代表一个借款人及其相关信息。‘en’列捕获每个借款人的贷款申请文本，‘status’列表示借款人是否违约（违约 = 1，未违约 = 0）。
 
@@ -40,11 +40,11 @@ PyCaret 是一个开源的 Python 机器学习库，用于在**低代码**环境
 tuned_lda = tune_model(model='lda', supervised_target='status', estimator='xgboost')
 ```
 
-![Image for post](../Images/0dcd5a48ab6ba3673f3517d1476aaec8.png)
+![Image for post](img/0dcd5a48ab6ba3673f3517d1476aaec8.png)
 
 ### 通过增加“n_iter”可以改善超参数调整的结果。
 
-**pycaret.classification**模块和**pycaret.regression**模块中的**tune_model**函数使用随机网格搜索而非预定义网格搜索进行超参数调优。这里默认的迭代次数设置为10。
+**pycaret.classification**模块和**pycaret.regression**模块中的**tune_model**函数使用随机网格搜索而非预定义网格搜索进行超参数调优。这里默认的迭代次数设置为 10。
 
 **tune_model**的结果不一定会优于使用**create_model**创建的基础模型的结果。由于网格搜索是随机的，你可以增加**n_iter**参数来提高性能。参见下面的示例：
 
@@ -56,15 +56,15 @@ tuned_dt1 = tune_model('dt')
 tuned_dt2 = tune_model('dt', n_iter = 50)
 ```
 
-![Image for post](../Images/419349ba2fe64b47b4ebbf2ad7a4482a.png)
+![Image for post](img/419349ba2fe64b47b4ebbf2ad7a4482a.png)
 
 ### ????你可以以编程方式定义数据类型
 
-当你初始化**setup**函数时，**你将被要求通过用户输入确认数据类型**。当你作为工作流的一部分运行脚本或将其作为远程内核（例如Kaggle Notebooks）执行时，这种情况下需要以编程方式提供数据类型，而不是通过用户输入框。
+当你初始化**setup**函数时，**你将被要求通过用户输入确认数据类型**。当你作为工作流的一部分运行脚本或将其作为远程内核（例如 Kaggle Notebooks）执行时，这种情况下需要以编程方式提供数据类型，而不是通过用户输入框。
 
 参见下面使用 “[insurance](https://raw.githubusercontent.com/pycaret/pycaret/master/datasets/insurance.csv)” 数据集的示例。
 
-![Image for post](../Images/96153d70772bd9c1964a099dfd293feb.png)
+![Image for post](img/96153d70772bd9c1964a099dfd293feb.png)
 
 ```py
 # import regression module
@@ -76,7 +76,7 @@ reg1 = setup(data, target = 'charges', silent=True,
             numeric_features=['age', 'bmi'])
 ```
 
-**silent** 参数设置为True以避免输入，**categorical_features** 参数以字符串形式接收分类列的名称，**numeric_features** 参数以字符串形式接收数值列的名称。
+**silent** 参数设置为 True 以避免输入，**categorical_features** 参数以字符串形式接收分类列的名称，**numeric_features** 参数以字符串形式接收数值列的名称。
 
 ### ????你可以忽略某些列进行模型构建
 
@@ -84,7 +84,7 @@ reg1 = setup(data, target = 'charges', silent=True,
 
 在下面的示例中，我们将进行一个聚类实验，并希望忽略**‘Country Name’**和**‘Indicator Name’**。
 
-![Image for post](../Images/1508bbeca2aa1782cfef2c432a60d20c.png)
+![Image for post](img/1508bbeca2aa1782cfef2c432a60d20c.png)
 
 ```py
 from pycaret.clustering import *
@@ -93,7 +93,7 @@ clu1 = setup(data, ignore_features = ['Country Name', 'Indicator Name'])
 
 ### ????你可以在二分类中优化概率阈值%
 
-在分类问题中，**假阳性**的成本几乎从来不与**假阴性**的成本相同。因此，如果你正在优化一个商业问题的解决方案，其中**类型1**和**类型2**错误的影响不同，你可以通过分别定义真正例、真负例、假阳性和假阴性的成本来优化分类器的概率阈值，以优化自定义损失函数。默认情况下，所有分类器的阈值为0.5。
+在分类问题中，**假阳性**的成本几乎从来不与**假阴性**的成本相同。因此，如果你正在优化一个商业问题的解决方案，其中**类型 1**和**类型 2**错误的影响不同，你可以通过分别定义真正例、真负例、假阳性和假阴性的成本来优化分类器的概率阈值，以优化自定义损失函数。默认情况下，所有分类器的阈值为 0.5。
 
 参见下面使用 “[credit](https://raw.githubusercontent.com/pycaret/pycaret/master/datasets/credit.csv)” 数据集的示例。
 
@@ -113,7 +113,7 @@ xgboost = create_model('xgboost')
 optimize_threshold(xgboost, true_negative = 1500, false_negative = -5000)
 ```
 
-![Image for post](../Images/5c0584b9974d758c1fcd8d123dc8f8f9.png)
+![Image for post](img/5c0584b9974d758c1fcd8d123dc8f8f9.png)
 
 然后您可以将 **0.2** 作为 **probability_threshold** 参数传递到 **predict_model** 函数中，以使用 0.2 作为分类正类的阈值。请参见下面的示例：
 
@@ -165,11 +165,11 @@ PyCaret 是一个开源项目。欢迎大家贡献。如果您想贡献，请随
 
 如果你喜欢 PyCaret，请在我们的 [GitHub repo](https://www.github.com/pycaret/pycaret) 上给我们 ⭐️。
 
-Medium: [https://medium.com/@moez_62905/](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
+Medium: [`medium.com/@moez_62905/`](https://medium.com/@moez_62905/machine-learning-in-power-bi-using-pycaret-34307f09394a)
 
-LinkedIn: [https://www.linkedin.com/in/profile-moez/](https://www.linkedin.com/in/profile-moez/)
+LinkedIn: [`www.linkedin.com/in/profile-moez/`](https://www.linkedin.com/in/profile-moez/)
 
-Twitter: [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretorg1)
+Twitter: [`twitter.com/moezpycaretorg1`](https://twitter.com/moezpycaretorg1)
 
 **个人简介: [Moez Ali](https://www.linkedin.com/in/profile-moez/)** 是数据科学家，同时也是 PyCaret 的创始人和作者。
 
@@ -177,34 +177,34 @@ Twitter: [https://twitter.com/moezpycaretorg1](https://twitter.com/moezpycaretor
 
 **相关：**
 
-+   [宣布 PyCaret 1.0.0](/2020/04/announcing-pycaret.html)
++   宣布 PyCaret 1.0.0
 
-+   [在 Power BI 中使用 PyCaret 进行机器学习](/2020/05/machine-learning-power-bi-pycaret.html)
++   在 Power BI 中使用 PyCaret 进行机器学习
 
-+   [在 AWS Fargate 上部署机器学习管道](/2020/07/deploy-machine-learning-pipeline-aws-fargate.html)
++   在 AWS Fargate 上部署机器学习管道
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 ### 更多相关话题
 
-+   [你不知道的7个低代码工具使用方式](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [你不知道的 7 个低代码工具使用方式](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
-+   [关于数据管理及其重要性的6个事项…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理及其重要性的 6 个事项…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [你不知道的关于SAS数据科学学院的3件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [你不知道的关于 SAS 数据科学学院的 3 件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
 
 +   [扩展您的网页数据驱动产品时需要知道的事项](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
 
-+   [构建LLM应用程序时需要知道的5件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
++   [构建 LLM 应用程序时需要知道的 5 件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
 
 +   [如何在没有相关学位的情况下进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)

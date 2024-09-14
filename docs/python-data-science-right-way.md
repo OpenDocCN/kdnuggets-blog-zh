@@ -1,10 +1,10 @@
 # 如何以正确的方式学习 Python 数据科学
 
-> 原文：[https://www.kdnuggets.com/2019/06/python-data-science-right-way.html](https://www.kdnuggets.com/2019/06/python-data-science-right-way.html)
+> 原文：[`www.kdnuggets.com/2019/06/python-data-science-right-way.html`](https://www.kdnuggets.com/2019/06/python-data-science-right-way.html)
 
-[评论](#comments)
+评论
 
-![以正确的方式学习 Python 数据科学](../Images/18c0e58bae945bdca9fc162f7028a450.png)
+![以正确的方式学习 Python 数据科学](img/18c0e58bae945bdca9fc162f7028a450.png)
 
 大多数有志于成为数据科学家的新人通过参加为开发人员准备的编程课程开始学习 Python。他们还开始在像[LeetCode](https://leetcode.com/)这样的网站上解决 Python 编程谜题，假设在开始使用 Python 分析数据之前，他们必须掌握编程概念。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -76,15 +76,15 @@ Matplotlib 是创建基本可视化的基础 Python 包。你必须学习如何�
 
 在组织中，数据存储在数据库中。因此，你需要知道如何使用 SQL 检索数据，并使用 Python 在 Jupyter Notebook 中进行分析。
 
-数据科学家使用SQL和Pandas操作数据。因为有些数据操作任务使用SQL更为简单，而有些任务使用Pandas更高效。我个人喜欢用SQL来检索数据，然后在Pandas中进行操作。
+数据科学家使用 SQL 和 Pandas 操作数据。因为有些数据操作任务使用 SQL 更为简单，而有些任务使用 Pandas 更高效。我个人喜欢用 SQL 来检索数据，然后在 Pandas 中进行操作。
 
-今天，公司使用像[Mode Analytics](https://mode.com/)和[Databricks](https://databricks.com/)这样的分析平台来轻松处理Python和SQL。
+今天，公司使用像[Mode Analytics](https://mode.com/)和[Databricks](https://databricks.com/)这样的分析平台来轻松处理 Python 和 SQL。
 
-因此，你应该知道如何高效地结合使用SQL和Python。要学习这一点，你可以在计算机上安装SQLite数据库，存储一个CSV文件，并使用Python和SQL进行分析。这里有一篇很棒的博客文章展示了如何做到这一点：[使用SQLite在Python中编程数据库](https://medium.com/analytics-vidhya/programming-with-databases-in-python-using-sqlite-4cecbef51ab9)。
+因此，你应该知道如何高效地结合使用 SQL 和 Python。要学习这一点，你可以在计算机上安装 SQLite 数据库，存储一个 CSV 文件，并使用 Python 和 SQL 进行分析。这里有一篇很棒的博客文章展示了如何做到这一点：[使用 SQLite 在 Python 中编程数据库](https://medium.com/analytics-vidhya/programming-with-databases-in-python-using-sqlite-4cecbef51ab9)。
 
-在阅读上述博客文章之前，你应该了解SQL的基础。Mode Analytics有一个很好的SQL教程：[SQL简介](https://mode.com/sql-tutorial/introduction-to-sql/)。阅读他们的BASIC SQL部分，以真正掌握SQL的基础，因为每个数据科学家都应该知道如何高效地使用SQL检索数据。
+在阅读上述博客文章之前，你应该了解 SQL 的基础。Mode Analytics 有一个很好的 SQL 教程：[SQL 简介](https://mode.com/sql-tutorial/introduction-to-sql/)。阅读他们的 BASIC SQL 部分，以真正掌握 SQL 的基础，因为每个数据科学家都应该知道如何高效地使用 SQL 检索数据。
 
-### **用Python学习基础统计学**
+### **用 Python 学习基础统计学**
 
 大多数有志的数据科学家直接跳到学习机器学习，而没有学习统计学的基础。
 
@@ -94,45 +94,45 @@ Matplotlib 是创建基本可视化的基础 Python 包。你必须学习如何�
 
 这里是你应该了解的一些基础统计概念：
 
-采样、频率分布、均值、中位数、众数、变异度量、概率基础、显著性检验、标准差、z分数、置信区间和假设检验（包括A/B测试）。
+采样、频率分布、均值、中位数、众数、变异度量、概率基础、显著性检验、标准差、z 分数、置信区间和假设检验（包括 A/B 测试）。
 
-一本很好的实用统计学书籍是《[数据科学家的实用统计学：50个基本概念](https://www.amazon.com/Practical-Statistics-Data-Scientists-Essential/dp/9352135652)》。不幸的是，对于像我这样的Python爱好者来说，书中的代码示例是用R语言编写的。我建议你阅读书中的前四章。阅读前四章以理解我之前提到的基础统计概念，忽略代码示例，仅理解概念。书中的其余章节主要集中在机器学习上。我将在下一节讨论如何学习机器学习。
+一本很好的实用统计学书籍是《[数据科学家的实用统计学：50 个基本概念](https://www.amazon.com/Practical-Statistics-Data-Scientists-Essential/dp/9352135652)》。不幸的是，对于像我这样的 Python 爱好者来说，书中的代码示例是用 R 语言编写的。我建议你阅读书中的前四章。阅读前四章以理解我之前提到的基础统计概念，忽略代码示例，仅理解概念。书中的其余章节主要集中在机器学习上。我将在下一节讨论如何学习机器学习。
 
-大多数人推荐 [Think Stats](https://www.amazon.com/Think-Stats-Allen-B-Downey/dp/1449307116) 来学习用Python进行统计分析，但作者教授的是他自己定制的函数，而不是使用像Statsmodels这样的标准Python库来进行统计。这就是我没有推荐这本书的原因。
+大多数人推荐 [Think Stats](https://www.amazon.com/Think-Stats-Allen-B-Downey/dp/1449307116) 来学习用 Python 进行统计分析，但作者教授的是他自己定制的函数，而不是使用像 Statsmodels 这样的标准 Python 库来进行统计。这就是我没有推荐这本书的原因。
 
-完成后，你的目标是用Python实现你学到的基本概念。StatsModels是一个流行的Python库，用于在Python中构建统计模型。StatsModels网站上有 [很好的教程](https://www.statsmodels.org/stable/index.html) 介绍如何使用Python实现统计概念。
+完成后，你的目标是用 Python 实现你学到的基本概念。StatsModels 是一个流行的 Python 库，用于在 Python 中构建统计模型。StatsModels 网站上有 [很好的教程](https://www.statsmodels.org/stable/index.html) 介绍如何使用 Python 实现统计概念。
 
-或者，你也可以观看Gaël Varoquaux的视频。他展示了如何使用Pandas和Stats Models进行推论统计和探索性统计。
+或者，你也可以观看 Gaël Varoquaux 的视频。他展示了如何使用 Pandas 和 Stats Models 进行推论统计和探索性统计。
 
-### **使用Scikit-Learn进行机器学习**
+### **使用 Scikit-Learn 进行机器学习**
 
-Scikit-Learn是Python中最受欢迎的机器学习库之一。你的目标是学习如何使用Scikit-Learn实现一些最常见的机器学习算法。
+Scikit-Learn 是 Python 中最受欢迎的机器学习库之一。你的目标是学习如何使用 Scikit-Learn 实现一些最常见的机器学习算法。
 
 以下是如何操作的。
 
-首先，观看Andrew Ng在Coursera上的 [机器学习](https://www.coursera.org/learn/machine-learning) 课程的第1、2、3、6、7和8周的视频。我跳过了神经网络部分，因为作为起点，你需要集中精力学习最广泛使用的机器学习技术。
+首先，观看 Andrew Ng 在 Coursera 上的 [机器学习](https://www.coursera.org/learn/machine-learning) 课程的第 1、2、3、6、7 和 8 周的视频。我跳过了神经网络部分，因为作为起点，你需要集中精力学习最广泛使用的机器学习技术。
 
-完成后，阅读 “[动手机器学习：使用Scikit-Learn和TensorFlow](https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1491962291)” 一书。只需阅读书的前一部分（大约300页）。这是一本非常实用的机器学习书籍。
+完成后，阅读 “[动手机器学习：使用 Scikit-Learn 和 TensorFlow](https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1491962291)” 一书。只需阅读书的前一部分（大约 300 页）。这是一本非常实用的机器学习书籍。
 
-通过完成本书中的编码练习，你将学习如何使用Python实现你在Andrew Ng课程中学到的理论概念。
+通过完成本书中的编码练习，你将学习如何使用 Python 实现你在 Andrew Ng 课程中学到的理论概念。
 
 ### **结论**
 
-最后的步骤是做一个数据科学项目，涵盖以上所有步骤。你可以找到一个你喜欢的数据集，然后提出一些通过分析它来回答的有趣商业问题。但是，不要选择像Titanic [机器学习](https://www.kaggle.com/c/titanic) 这样通用的数据集。你可以阅读 "[寻找免费数据集的19个地方](https://www.dataquest.io/blog/free-datasets-for-projects/)" 来寻找数据集。
+最后的步骤是做一个数据科学项目，涵盖以上所有步骤。你可以找到一个你喜欢的数据集，然后提出一些通过分析它来回答的有趣商业问题。但是，不要选择像 Titanic [机器学习](https://www.kaggle.com/c/titanic) 这样通用的数据集。你可以阅读 "[寻找免费数据集的 19 个地方](https://www.dataquest.io/blog/free-datasets-for-projects/)" 来寻找数据集。
 
-另一种方法是将数据科学应用于你感兴趣的领域。例如，如果你想预测股票市场价格，你可以从 [Yahoo Finance](https://www.scrapehero.com/scrape-yahoo-finance-stock-market-data/) 抓取实时数据并存储在SQL数据库中，然后使用机器学习来预测股票价格。
+另一种方法是将数据科学应用于你感兴趣的领域。例如，如果你想预测股票市场价格，你可以从 [Yahoo Finance](https://www.scrapehero.com/scrape-yahoo-finance-stock-market-data/) 抓取实时数据并存储在 SQL 数据库中，然后使用机器学习来预测股票价格。
 
-如果你想从其他行业转行到数据科学，我建议你从一个利用你领域专业知识的项目开始。我在之前的博客文章中对这种方法进行了深入的解释，分别是 "[将职业转向数据科学的分步指南 – 第 1 部分](https://www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html)" 和 "[将职业转向数据科学的分步指南 – 第 2 部分](https://www.kdnuggets.com/2019/06/guide-transitioning-career-data-science-part-2.html)"。
+如果你想从其他行业转行到数据科学，我建议你从一个利用你领域专业知识的项目开始。我在之前的博客文章中对这种方法进行了深入的解释，分别是 "[将职业转向数据科学的分步指南 – 第一部分](https://www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html)" 和 "[将职业转向数据科学的分步指南 – 第二部分](https://www.kdnuggets.com/2019/06/guide-transitioning-career-data-science-part-2.html)"。
 
 如果你有任何问题，请在评论中告诉我！
 
 **相关：**
 
-+   [初学者的数据科学 Python](/2019/02/python-data-science-beginners.html)
++   初学者的数据科学 Python
 
-+   [全面学习 Python 数据分析和数据科学指南](/2016/04/datacamp-learning-python-data-analysis-data-science.html)
++   全面学习 Python 数据分析和数据科学指南
 
-+   [动手实践：数据分析的 Python 入门](/2018/05/tdwi-intro-python-data-analysis.html)
++   动手实践：数据分析的 Python 入门
 
 ### 更多相关内容
 

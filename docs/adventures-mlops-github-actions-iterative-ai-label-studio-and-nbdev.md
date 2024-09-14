@@ -1,46 +1,46 @@
-# 在MLOps中探索Github Actions、Iterative.ai、Label Studio和NBDEV
+# 在 MLOps 中探索 Github Actions、Iterative.ai、Label Studio 和 NBDEV
 
-> 原文：[https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html](https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)
+> 原文：[`www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html`](https://www.kdnuggets.com/2021/09/adventures-mlops-github-actions-iterative-ai-label-studio-and-nbdev.html)
 
-[评论](#comments)
+评论
 
 **由 [Aaron Soellinger](https://www.linkedin.com/in/aaronsoellinger/) 和 [Will Kunz](https://www.linkedin.com/in/willkunz/)**
 
-在为我们的项目设计MLOps堆栈时，我们需要一个解决方案，允许高度的定制和灵活性，以便随着实验的需要而演变。我们考虑了包含许多功能的大型平台，但在一些关键领域感到受限。最终，我们决定采用一种方法，分别实现专用工具用于标注、数据版本控制和持续集成。本文记录了我们构建这种自定义MLOps方法的经验。
+在为我们的项目设计 MLOps 堆栈时，我们需要一个解决方案，允许高度的定制和灵活性，以便随着实验的需要而演变。我们考虑了包含许多功能的大型平台，但在一些关键领域感到受限。最终，我们决定采用一种方法，分别实现专用工具用于标注、数据版本控制和持续集成。本文记录了我们构建这种自定义 MLOps 方法的经验。
 
-![](../Images/1de6ffdf729c70393d5fa10dec24c761.png)
+![](img/1de6ffdf729c70393d5fa10dec24c761.png)
 
 图片由 [Finding Dan | Dan Grinwis](https://unsplash.com/@finding_dan?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/unknown?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
 ## NBDEV
 
-![](../Images/c7067d28a0d19f6b72674420ae109bc3.png)
+![](img/c7067d28a0d19f6b72674420ae109bc3.png)
 
-（摘自 [https://github.com/fastai/nbdev](https://github.com/fastai/nbdev)）
+（摘自 [`github.com/fastai/nbdev`](https://github.com/fastai/nbdev)）
 
-使用Jupyter进行开发的经典问题是，从原型到生产需要将代码从笔记本复制/粘贴到python模块中。NBDEV自动化了笔记本和模块之间的过渡，从而使Jupyter笔记本成为生产管道的官方部分。NBDEV允许开发者指定笔记本应创建哪个模块，哪些笔记本单元格应推送到模块中，以及哪些笔记本单元格是测试。NBDEV的一个关键功能是其在笔记本内测试的方法，NBDEV模板甚至提供了一个基础的Github Action，用于在CI/CD框架中实现测试。生成的Python模块不需要开发者编辑，可以使用内置的python导入功能轻松集成到其他笔记本或项目中。
+使用 Jupyter 进行开发的经典问题是，从原型到生产需要将代码从笔记本复制/粘贴到 python 模块中。NBDEV 自动化了笔记本和模块之间的过渡，从而使 Jupyter 笔记本成为生产管道的官方部分。NBDEV 允许开发者指定笔记本应创建哪个模块，哪些笔记本单元格应推送到模块中，以及哪些笔记本单元格是测试。NBDEV 的一个关键功能是其在笔记本内测试的方法，NBDEV 模板甚至提供了一个基础的 Github Action，用于在 CI/CD 框架中实现测试。生成的 Python 模块不需要开发者编辑，可以使用内置的 python 导入功能轻松集成到其他笔记本或项目中。
 
 ## Iterative.ai: DVC/CML
 
-![](../Images/8ddbc52ba48451e1af2a6aa73e4bd4eb.png)
+![](img/8ddbc52ba48451e1af2a6aa73e4bd4eb.png)
 
-（摘自 [https://iterative.ai/](https://iterative.ai/)）
+（摘自 [`iterative.ai/`](https://iterative.ai/)）
 
 机器学习管道中使用的文件通常是大型二进制/压缩文件的归档，这些文件对现有的版本控制解决方案如 git 来说不可访问或成本过高。DVC 通过将大型数据集表示为文件内容的哈希来解决数据版本控制问题，这使得 DVC 能够跟踪变化。它的工作原理类似于 git（例如 `dvc add`，`dvc push`）。当你在数据集上运行 `dvc add` 时，它会被添加到 `.gitignore` 并由 `dvc` 跟踪变化。CML 是一个项目，提供了从 Github Actions 工作流发布模型工件到 Github Issues、拉取请求等评论中的功能。这很重要，因为它帮助我们开始填补拉取请求中对训练数据变化以及模型准确性和有效性的记录缺口。
 
 ## Github Actions
 
-![](../Images/986a4058fc9c06b2bca4e15d272a9a31.png)
+![](img/986a4058fc9c06b2bca4e15d272a9a31.png)
 
-（摘自 [https://github.com/features/actions](https://github.com/features/actions)）
+（摘自 [`github.com/features/actions`](https://github.com/features/actions)）
 
 我们希望进行自动化代码测试，包括在自动化测试管道中构建模型。Github Actions 与 CircleCI、Travis、Jenkins 竞争，旨在自动化代码推送、提交、拉取请求等的测试。由于我们已经使用 Github 托管我们的代码库，因此通过使用 Actions 避免了使用其他第三方应用。在这个项目中，我们需要使用 Github 自托管的运行器在本地 GPU 集群上运行任务。
 
 ## Label Studio
 
-![](../Images/6fc4d94e308f6e66b77a6e2c52de00ec.png)
+![](img/6fc4d94e308f6e66b77a6e2c52de00ec.png)
 
-（摘自 [https://labelstud.io/](https://labelstud.io/)）
+（摘自 [`labelstud.io/`](https://labelstud.io/)）
 
 我们深入研究了如何使用 Label Studio，详细信息见 [这里](https://towardsdatascience.com/development-of-a-benchmark-dataset-with-an-interface-to-the-fastai-dataloader-using-label-studio-d3aa3c26661f)。Label Studio 是一个数据标注解决方案。它运行良好，并且灵活，适用于各种环境。
 
@@ -66,7 +66,7 @@
 
 该管道实施了对每个拉取请求的自动化测试反馈，包括语法、单元、回归和集成测试的评估。这个过程的结果是一个功能上经过测试的 Docker 镜像被放入我们的私有存储库中。这个过程最大化了最新的最佳代码在存储库中作为完全测试的镜像用于下游任务的可能性。以下是新特性的开发生命周期在这种背景下的工作方式：
 
-![](../Images/a4761dfdadbb159032a87bf8245781ca.png)
+![](img/a4761dfdadbb159032a87bf8245781ca.png)
 
 这里展示了编辑代码时工作流的功能。使用 NBDEV 使我们可以直接从 Jupyter notebooks 中工作，包括在 notebook 中直接编写测试。NBDEV 要求 notebooks 中的所有单元格都必须无例外地运行（除非单元格标记为不运行）。 (图片来源：作者)
 
@@ -74,7 +74,7 @@
 
 Label Studio 目前缺乏事件钩子来启用对存储的标签数据的更改更新。因此，我们采取了 `cron` 触发的方法，每小时更新一次数据集。此外，当标签数据集足够小时，这些更新也可以作为训练管道的一部分进行。我们可以通过 Github Actions 接口按需触发数据管道刷新。
 
-![](../Images/576cc3526614e7f27fd041cfba29247a.png)
+![](img/576cc3526614e7f27fd041cfba29247a.png)
 
 数据管道从 Label Studio 读取数据，并将数据集的每个版本及相关输入持久化到存储在 AWS S3 中的 DVC 缓存。 (图片来源：作者)
 
@@ -82,7 +82,7 @@ Label Studio 目前缺乏事件钩子来启用对存储的标签数据的更改�
 
 模型管道将模型训练集成到存储库的 CI/CD 管道中。这使得每个拉取请求不仅能评估代码库中配置的语法、单元、集成和回归测试，还能提供评估新生成模型的反馈。
 
-![](../Images/2a951bf045884ee15bffc2627b7c0e24.png)
+![](img/2a951bf045884ee15bffc2627b7c0e24.png)
 
 在这种情况下，工作流运行配置文件（model_params.yaml）中指定的模型训练实验，并更新模型工件（best-model.pth）。 (图片来源：作者)
 
@@ -90,7 +90,7 @@ Label Studio 目前缺乏事件钩子来启用对存储的标签数据的更改�
 
 基准评估管道形成了一个“官方提交”过程，以确保所有建模活动都按照项目的度量标准进行衡量。
 
-![](../Images/6efd84d0d1769b4a465bcff6626bcd4f.png)
+![](img/6efd84d0d1769b4a465bcff6626bcd4f.png)
 
 新训练的模型在 best-model.pth 中与基准数据集进行评估，结果会用最新的提交哈希标记并持久化到 AWS S3 中。 (图片来源：作者)
 
@@ -202,21 +202,21 @@ stages:
 
 **相关：**
 
-+   [MLOps 最佳实践](/2021/07/mlops-best-practices.html)
++   MLOps 最佳实践
 
-+   [MLOps 是一种工程学科：初学者概述](/2021/07/mlops-engineering-discipline.html)
++   MLOps 是一种工程学科：初学者概述
 
-+   [MLOps 和机器学习路线图](/2021/08/mlops-machine-learning-roadmap.html)
++   MLOps 和机器学习路线图
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

@@ -1,8 +1,8 @@
 # fast.ai 的实用深度学习课程回归了！
 
-> 原文：[https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)
+> 原文：[`www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html`](https://www.kdnuggets.com/2022/07/practical-deep-learning-fastai-2022.html)
 
-![fast.ai 的实用深度学习课程回归！](../Images/7e5c960581ed91ebe0c41f2fe1dac621.png)
+![fast.ai 的实用深度学习课程回归！](img/7e5c960581ed91ebe0c41f2fe1dac621.png)
 
 尽管从未离开，[fast.ai](https://www.fast.ai/) 带来了他们最新版本的（**免费！**）旗舰课程，[《面向编码者的实用深度学习》](https://course.fast.ai/)。
 
@@ -42,17 +42,17 @@
 
 前往[实践深度学习课程网站](https://course.fast.ai/)现在开始吧！
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家，也是KDnuggets的主编，这是一项开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络和机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过editor1 at kdnuggets[dot]com联系他。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家，也是 KDnuggets 的主编，这是一项开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络和机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过 editor1 at kdnuggets[dot]com 联系他。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -62,10 +62,10 @@
 
 +   [机器学习项目中的简单快速数据流处理](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)
 
-+   [BERT在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
++   [BERT 在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
 
 +   [快速有效地审计机器学习的公平性](https://www.kdnuggets.com/2023/01/fast-effective-way-audit-ml-fairness.html)
 
-+   [如何让Python代码运行得极其快速](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)
++   [如何让 Python 代码运行得极其快速](https://www.kdnuggets.com/2021/06/make-python-code-run-incredibly-fast.html)
 
-+   [通过《快速Python数据科学》提升你的Python技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
++   [通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)

@@ -1,14 +1,14 @@
 # Uber 开源了 Ludwig 第三版，它的无代码机器学习平台
 
-> 原文：[https://www.kdnuggets.com/2020/10/uber-open-source-ludwig-code-free-machine-learning-platform.html](https://www.kdnuggets.com/2020/10/uber-open-source-ludwig-code-free-machine-learning-platform.html)
+> 原文：[`www.kdnuggets.com/2020/10/uber-open-source-ludwig-code-free-machine-learning-platform.html`](https://www.kdnuggets.com/2020/10/uber-open-source-ludwig-code-free-machine-learning-platform.html)
 
-[评论](#comments)![图示](../Images/3e24b513497ba2ac9572540aeebebce2.png)
+评论![图示](img/3e24b513497ba2ac9572540aeebebce2.png)
 
-来源：[https://eng.uber.com/ludwig-v0-3/](https://eng.uber.com/ludwig-v0-3/)
+来源：[`eng.uber.com/ludwig-v0-3/`](https://eng.uber.com/ludwig-v0-3/)
 
 > 我最近开始了一份关注 AI 教育的新通讯。TheSequence 是一份无废话（即没有炒作，没有新闻等）的 AI 专注通讯，阅读时间为 5 分钟。目标是让你及时了解机器学习项目、研究论文和概念。请通过下面的订阅链接试试看：
 
-[![图片](../Images/f2aed90f956dea213be7c9bbf9cd7072.png)](https://thesequence.substack.com/)
+![图片](https://thesequence.substack.com/)
 
 Uber 继续对开源机器学习技术做出创新贡献。上周，这家交通巨头 [开源了 Ludwig 0.3](https://ludwig-ai.github.io/ludwig-docs/?from=%40)，这是其无代码机器学习平台的第三次更新。在过去几个月中，Ludwig 社区已经超越了 Uber，并包括了斯坦福大学等贡献者。这个新版本扩展了前版本的 AutoML 功能。让我们回顾一下 Ludwig 的先前版本，并探索这个新版本。
 
@@ -28,37 +28,37 @@ Uber 继续对开源机器学习技术做出创新贡献。上周，这家交通
 
 使用 Ludwig，数据科学家只需提供包含训练数据的 CSV 文件和包含模型输入输出的 YAML 文件，即可训练深度学习模型。利用这两个数据点，Ludwig 执行多任务学习例程，同时预测所有输出并评估结果。在幕后，Ludwig 提供了一系列不断评估的深度学习模型，并可以组合成最终架构。Ludwig 的主要创新基于数据类型特定的编码器和解码器。Ludwig 使用针对支持的任何数据类型的特定编码器和解码器。与其他深度学习架构一样，编码器负责将原始数据映射到张量，而解码器则将张量映射到输出。Ludwig 的架构还包括一个组合器概念，这是一个将所有输入编码器的张量组合、处理并返回给输出解码器的组件。
 
-![图](../Images/0f6094159d3515377b602acf27be7000.png)
+![图](img/0f6094159d3515377b602acf27be7000.png)
 
-来源：[https://eng.uber.com/introducing-ludwig/](https://eng.uber.com/introducing-ludwig/)
+来源：[`eng.uber.com/introducing-ludwig/`](https://eng.uber.com/introducing-ludwig/)
 
 ### Ludwig 0.3
 
-Ludwig 0.3 通过一致的无代码接口集成了在机器学习应用中广泛使用的新特性。让我们回顾一下Ludwig新版本的一些基本贡献。
+Ludwig 0.3 通过一致的无代码接口集成了在机器学习应用中广泛使用的新特性。让我们回顾一下 Ludwig 新版本的一些基本贡献。
 
 ### 1) 超参数优化
 
 为特定机器学习问题找到最佳超参数组合可能会很费力。Ludwig 0.3 引入了一个新命令，[hyperopt](http://ludwig.ai/user_guide/#hyperopt)，它执行自动化的超参数搜索并返回可能的配置。Hyperopt 可以使用简单的语法调用：
 
-![图](../Images/3326a2d4b66caadcadafcd3902c16bc1.png)
+![图](img/3326a2d4b66caadcadafcd3902c16bc1.png)
 
-来源：[https://eng.uber.com/ludwig-v0-3/](https://eng.uber.com/ludwig-v0-3/)
+来源：[`eng.uber.com/ludwig-v0-3/`](https://eng.uber.com/ludwig-v0-3/)
 
 输出展示了超参数的不同值和尺度。
 
-![图](../Images/0a56da3b6da0ae1c4c2a7153c88ec9e3.png)
+![图](img/0a56da3b6da0ae1c4c2a7153c88ec9e3.png)
 
-来源：[https://eng.uber.com/ludwig-v0-3/](https://eng.uber.com/ludwig-v0-3/)
+来源：[`eng.uber.com/ludwig-v0-3/`](https://eng.uber.com/ludwig-v0-3/)
 
 ### 2) 与 Weights and Biases 的集成
 
 补充前一点，Ludwig 0.3 与 [Weights and Biases](https://www.wandb.com/)（W&B）平台集成。W&B 提供了一个非常直观的界面，用于快速实验和机器学习模型的超参数调优。要使用 W&B，Ludwig 用户可以简单地将 -wandb 参数附加到他们的命令中。
 
-![图](../Images/88ac84d866d000df06746989fa2c5fbf.png)
+![图](img/88ac84d866d000df06746989fa2c5fbf.png)
 
-来源：[https://eng.uber.com/ludwig-v0-3/](https://eng.uber.com/ludwig-v0-3/)![图](../Images/aba4b4fe77692e64bc9b80a34853d960.png)
+来源：[`eng.uber.com/ludwig-v0-3/`](https://eng.uber.com/ludwig-v0-3/)![图](img/aba4b4fe77692e64bc9b80a34853d960.png)
 
-来源：[https://eng.uber.com/ludwig-v0-3/](https://eng.uber.com/ludwig-v0-3/)
+来源：[`eng.uber.com/ludwig-v0-3/`](https://eng.uber.com/ludwig-v0-3/)
 
 ### 3) 无代码变换器
 
@@ -80,21 +80,21 @@ Ludwig 0.3 引入了其他功能，例如支持弱监督的嘈杂标签的新向
 
 **相关：**
 
-+   [Uber 的 Ludwig 是一个低代码机器学习的开源框架](/2020/06/uber-ludwig-open-source-framework-machine-learning.html)
++   Uber 的 Ludwig 是一个低代码机器学习的开源框架
 
-+   [LinkedIn 的 Pro-ML 架构总结了构建大规模机器学习的最佳实践](/2020/09/linkedin-pro-ml-architecture-best-practices-building-machine-learning-scale.html)
++   LinkedIn 的 Pro-ML 架构总结了构建大规模机器学习的最佳实践
 
-+   [LinkedIn 如何在其招聘推荐系统中使用机器学习](/2020/10/linkedin-machine-learning-recruiter-recommendation-systems.html)
++   LinkedIn 如何在其招聘推荐系统中使用机器学习
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -104,10 +104,10 @@ Ludwig 0.3 引入了其他功能，例如支持弱监督的嘈杂标签的新向
 
 +   [使用 Tableau 创建高效的综合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
 
-+   [适用于高级数据科学项目的16个顶级技术数据源](https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects)
++   [适用于高级数据科学项目的 16 个顶级技术数据源](https://www.kdnuggets.com/top-16-technical-data-sources-for-advanced-data-science-projects)
 
 +   [Qdrant: 开源向量搜索引擎与托管云平台](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)
 
-+   [KDnuggets™ 新闻 22:n07, 2月16日: 如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07, 2 月 16 日: 如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
 
-+   [停止在 ChatGPT 上这样做，超越99%的用户](https://www.kdnuggets.com/2023/05/stop-chatgpt-get-ahead-99-users.html)
++   [停止在 ChatGPT 上这样做，超越 99%的用户](https://www.kdnuggets.com/2023/05/stop-chatgpt-get-ahead-99-users.html)

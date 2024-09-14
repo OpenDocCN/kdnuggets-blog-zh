@@ -1,8 +1,8 @@
-# 数据科学家应该知道的5种图算法
+# 数据科学家应该知道的 5 种图算法
 
-> 原文：[https://www.kdnuggets.com/2019/09/5-graph-algorithms-data-scientists-know.html](https://www.kdnuggets.com/2019/09/5-graph-algorithms-data-scientists-know.html)
+> 原文：[`www.kdnuggets.com/2019/09/5-graph-algorithms-data-scientists-know.html`](https://www.kdnuggets.com/2019/09/5-graph-algorithms-data-scientists-know.html)
 
-[评论](#comments)![图](../Images/4b410eb2ecdf09cf1fc254d5fdae2a0d.png)
+评论![图](img/4b410eb2ecdf09cf1fc254d5fdae2a0d.png)
 
 作为数据科学家，我们对 Pandas、SQL 或任何其他关系型数据库都已经相当熟悉。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
@@ -26,13 +26,13 @@
 
 ***在这篇文章中，我将讨论一些你应该了解的重要图算法以及如何使用 Python 实现它们。***
 
-此外，这里有一个 [由加州大学圣地亚哥分校提供的Coursera上的图分析课程](https://www.coursera.org/learn/big-data-graph-analytics?ranMID=40328&ranEAID=lVarvwc5BD0&ranSiteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&siteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)，我强烈推荐学习图论基础。
+此外，这里有一个 [由加州大学圣地亚哥分校提供的 Coursera 上的图分析课程](https://www.coursera.org/learn/big-data-graph-analytics?ranMID=40328&ranEAID=lVarvwc5BD0&ranSiteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&siteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)，我强烈推荐学习图论基础。
 
 ### 1\. 连通分量
 
-![图](../Images/f227f7e9ec2a5381e321bfe86830c792.png)
+![图](img/f227f7e9ec2a5381e321bfe86830c792.png)
 
-一个包含3个连通分量的图
+一个包含 3 个连通分量的图
 
 我们都知道聚类是如何工作的？
 
@@ -48,21 +48,21 @@
 
 从**零售角度**看：假设我们有很多客户使用很多账户。我们可以使用连通组件算法的一种方式是找出数据集中不同的家庭。
 
-我们可以根据相同的信用卡使用、相同的地址或相同的手机号码等，假设在CustomerID之间有边（道路）。一旦有了这些连接，我们可以在其上运行连通组件算法，以创建独立的簇，然后可以为每个簇分配一个家庭ID。
+我们可以根据相同的信用卡使用、相同的地址或相同的手机号码等，假设在 CustomerID 之间有边（道路）。一旦有了这些连接，我们可以在其上运行连通组件算法，以创建独立的簇，然后可以为每个簇分配一个家庭 ID。
 
-我们可以利用这些家庭ID提供基于家庭需求的个性化推荐。我们还可以使用这些家庭ID通过基于家庭创建分组特征来推动分类算法。
+我们可以利用这些家庭 ID 提供基于家庭需求的个性化推荐。我们还可以使用这些家庭 ID 通过基于家庭创建分组特征来推动分类算法。
 
-从**金融角度**看：另一个用例是使用这些家庭ID捕捉欺诈行为。如果一个账户过去曾发生过欺诈，那么与之连接的账户也很可能会受到欺诈的影响。
+从**金融角度**看：另一个用例是使用这些家庭 ID 捕捉欺诈行为。如果一个账户过去曾发生过欺诈，那么与之连接的账户也很可能会受到欺诈的影响。
 
 可能性只受限于你的想象力。
 
 ### 代码
 
-我们将使用`Networkx`模块在Python中创建和分析我们的图。
+我们将使用`Networkx`模块在 Python 中创建和分析我们的图。
 
 让我们从一个示例图开始，该图用于我们的目的。包含城市及其之间的距离信息。
 
-![图](../Images/0f9a5ab2c75434fd56b2f1054431e5dc.png)
+![图](img/0f9a5ab2c75434fd56b2f1054431e5dc.png)
 
 图带有一些随机距离
 
@@ -97,15 +97,15 @@ cc2: {'ALB', 'NY', 'TX'}
 
 ### 2. 最短路径
 
-![](../Images/fb28cd8bcd9912a10eeca6e986a6a1a7.png)
+![](img/fb28cd8bcd9912a10eeca6e986a6a1a7.png)
 
 继续以上示例，我们得到一个包含德国城市及其间距离的图。
 
 **你想找出如何从法兰克福（起始节点）到慕尼黑，以覆盖最短距离**。
 
-我们用来解决这个问题的算法叫做**Dijkstra**。用Dijkstra的话来说：
+我们用来解决这个问题的算法叫做**Dijkstra**。用 Dijkstra 的话来说：
 
-> 从[鹿特丹](https://en.wikipedia.org/wiki/Rotterdam)到[格罗宁根](https://en.wikipedia.org/wiki/Groningen)的最短路径是什么？一般来说，从给定城市到给定城市的最短路径。[这是最短路径算法](https://en.wikipedia.org/wiki/Shortest_path_problem)，我在大约二十分钟内设计了这个算法。一天早晨，我和我的年轻未婚妻在[阿姆斯特丹](https://en.wikipedia.org/wiki/Amsterdam)购物，累了，我们坐在咖啡馆的露台上喝咖啡，我在想是否能做到这一点，然后我设计了最短路径算法。正如我所说，这是一个二十分钟的发明。实际上，它是在1959年发布的，比设计时晚了三年。这个出版物仍然可以阅读，实际上，相当不错。它之所以这么好，其中一个原因是我没有使用铅笔和纸进行设计。我后来了解到，无铅笔和纸的设计方式的一个优点是，你几乎被迫避免所有可避免的复杂性。最终，这个算法成为了我声誉的一个基石，令我感到非常惊讶。
+> 从[鹿特丹](https://en.wikipedia.org/wiki/Rotterdam)到[格罗宁根](https://en.wikipedia.org/wiki/Groningen)的最短路径是什么？一般来说，从给定城市到给定城市的最短路径。[这是最短路径算法](https://en.wikipedia.org/wiki/Shortest_path_problem)，我在大约二十分钟内设计了这个算法。一天早晨，我和我的年轻未婚妻在[阿姆斯特丹](https://en.wikipedia.org/wiki/Amsterdam)购物，累了，我们坐在咖啡馆的露台上喝咖啡，我在想是否能做到这一点，然后我设计了最短路径算法。正如我所说，这是一个二十分钟的发明。实际上，它是在 1959 年发布的，比设计时晚了三年。这个出版物仍然可以阅读，实际上，相当不错。它之所以这么好，其中一个原因是我没有使用铅笔和纸进行设计。我后来了解到，无铅笔和纸的设计方式的一个优点是，你几乎被迫避免所有可避免的复杂性。最终，这个算法成为了我声誉的一个基石，令我感到非常惊讶。
 > 
 > — 埃德斯格·迪克斯特拉，在与菲利普·L·弗拉纳的访谈中，《ACM 通讯》，2001[[3]](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm#cite_note-Dijkstra_Interview-3)
 
@@ -115,11 +115,11 @@ cc2: {'ALB', 'NY', 'TX'}
 
 +   你在沃尔玛商店里。你有不同的过道以及所有过道之间的距离。你想为顾客提供从过道 A 到过道 D 的最短路径。
 
-![](../Images/0c5ad8c169957881384dc7569124e8ea.png)
+![](img/0c5ad8c169957881384dc7569124e8ea.png)
 
 +   你已经看到 LinkedIn 如何显示一级连接、二级连接。幕后发生了什么？
 
-![](../Images/091b0f441ab50491d95c8dbb8a60c49d.png)
+![](img/091b0f441ab50491d95c8dbb8a60c49d.png)
 
 ### 代码
 
@@ -142,11 +142,11 @@ for x in nx.all_pairs_dijkstra_path(g,weight='weight'):
 
 ### 3. 最小生成树
 
-![](../Images/b1c0422c0bda13b46391bdfefab29c8b.png)
+![](img/b1c0422c0bda13b46391bdfefab29c8b.png)
 
 现在我们遇到了另一个问题。我们为一家铺设水管或互联网光纤的公司工作。***我们需要使用最少量的电线/管道连接图中的所有城市。***我们该如何做到这一点？
 
-![图](../Images/677a92f263dd0a398551eac6d666666a.png)
+![图](img/677a92f263dd0a398551eac6d666666a.png)
 
 一个无向图及其右侧的最小生成树。
 
@@ -167,7 +167,7 @@ for x in nx.all_pairs_dijkstra_path(g,weight='weight'):
 nx.draw_networkx(nx.minimum_spanning_tree(g))
 ```
 
-![图示](../Images/63f765d13c6868568be507c058a2a57f.png)
+![图示](img/63f765d13c6868568be507c058a2a57f.png)
 
 我们图的最小生成树。
 
@@ -175,7 +175,7 @@ nx.draw_networkx(nx.minimum_spanning_tree(g))
 
 ### 4. PageRank
 
-![](../Images/59eaabe2b166f762b0b574d3739a17c3.png)
+![](img/59eaabe2b166f762b0b574d3739a17c3.png)
 
 这是长期以来驱动谷歌的页面排序算法。它根据传入和传出链接的数量和质量为页面分配分数。
 
@@ -210,7 +210,7 @@ nx.draw_networkx(fb, pos, with_labels = False, node_size = 35)
 plt.show()
 ```
 
-![图示](../Images/a66ef34f848ca9e7a05d55f67fde7989.png)
+![图示](img/a66ef34f848ca9e7a05d55f67fde7989.png)
 
 FB 用户图
 
@@ -258,7 +258,7 @@ plt.axis('off')nx.draw_networkx(subgraph_3437, pos, with_labels = False, node_co
 plt.show()
 ```
 
-![图示](../Images/65588b2ba8f7f2fbfdf7deadaa850856.png)
+![图示](img/65588b2ba8f7f2fbfdf7deadaa850856.png)
 
 我们最具影响力的用户（黄色）
 
@@ -287,7 +287,7 @@ nx.draw_networkx(subgraph_3437, pos=pos, with_labels=False,
 plt.axis('off')
 ```
 
-![](../Images/f099b9fa5e8842ff2778748973ef73a7.png)
+![](img/f099b9fa5e8842ff2778748973ef73a7.png)
 
 你可以在这里看到按其中介中心性值大小显示的节点。它们可以被认为是信息传递者。打破任何一个具有高中介中心性的节点将会把图分割成许多部分。
 
@@ -305,9 +305,9 @@ plt.axis('off')
 
 这里是包含完整代码的 [Kaggle Kernel](https://www.kaggle.com/mlwhiz/top-graph-algorithms)。
 
-如果你想深入了解图算法，这里有一个由UCSanDiego提供的[大数据图分析课程](https://www.coursera.org/learn/big-data-graph-analytics?ranMID=40328&ranEAID=lVarvwc5BD0&ranSiteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&siteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)，我强烈推荐学习图论基础。
+如果你想深入了解图算法，这里有一个由 UCSanDiego 提供的[大数据图分析课程](https://www.coursera.org/learn/big-data-graph-analytics?ranMID=40328&ranEAID=lVarvwc5BD0&ranSiteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&siteID=lVarvwc5BD0-uD3tAFL0mCUdzcfwDd6FTQ&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)，我强烈推荐学习图论基础。
 
-感谢阅读。我将来还会写更多适合初学者的文章。关注我在 [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) 或订阅我的 [**博客**](http://eepurl.com/dbQnuX?source=post_page---------------------------) 以获取相关信息。像往常一样，我欢迎反馈和建设性的批评，可以通过Twitter联系我 [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------)。
+感谢阅读。我将来还会写更多适合初学者的文章。关注我在 [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) 或订阅我的 [**博客**](http://eepurl.com/dbQnuX?source=post_page---------------------------) 以获取相关信息。像往常一样，我欢迎反馈和建设性的批评，可以通过 Twitter 联系我 [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------)。
 
 **个人简介: [Rahul Agarwal](https://www.linkedin.com/in/rahulagwl/)** 是沃尔玛实验室的数据科学家。
 
@@ -315,22 +315,22 @@ plt.axis('off')
 
 **相关:**
 
-+   [10个适合有抱负的数据科学家的Python资源](/2019/09/10-great-python-resources-aspiring-data-scientists.html)
++   10 个适合有抱负的数据科学家的 Python 资源
 
-+   [用100行代码编写随机森林*](/2019/08/coding-random-forests.html)
++   用 100 行代码编写随机森林*
 
-+   [用世界填充GRAKN.AI知识图谱](/2017/07/populating-grakn-ai-knowledge-graph.html)
++   用世界填充 GRAKN.AI 知识图谱
 
 ### 更多相关内容
 
-+   [每个数据科学家都应该知道的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并通过找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [一个90亿美元的AI失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

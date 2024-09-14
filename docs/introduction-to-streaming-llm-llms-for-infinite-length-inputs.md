@@ -1,8 +1,8 @@
-# 介绍 Streaming-LLM：无限长度输入的LLMs
+# 介绍 Streaming-LLM：无限长度输入的 LLMs
 
-> 原文：[https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)
+> 原文：[`www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs`](https://www.kdnuggets.com/introduction-to-streaming-llm-llms-for-infinite-length-inputs)
 
-大型语言模型（LLM）改变了人们的工作方式。像GPT家族这样广泛使用的模型，每个人都习惯于这些模型。利用LLM的力量，我们可以快速解答问题，调试代码等。这使得模型在许多应用中非常有用。
+大型语言模型（LLM）改变了人们的工作方式。像 GPT 家族这样广泛使用的模型，每个人都习惯于这些模型。利用 LLM 的力量，我们可以快速解答问题，调试代码等。这使得模型在许多应用中非常有用。
 
 LLM 的挑战之一是模型不适用于流应用，因为其无法处理超过预定义训练序列长度的长对话。此外，内存消耗也是一个问题。
 
@@ -10,11 +10,11 @@ LLM 的挑战之一是模型不适用于流应用，因为其无法处理超过�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 走上网络安全职业快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 走上网络安全职业快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
@@ -26,7 +26,7 @@ StreamingLLM 是由 [Xiao 等人 (2023)](https://arxiv.org/pdf/2309.17453.pdf) �
 
 注意窗口技术可能是有效的，但在处理超过其缓存大小的文本时存在问题。这就是为什么研究人员尝试使用几个初始标记的键和值状态（关注沉降）与最近标记。StreamingLLM 与其他技术的比较可以在下图中看到。
 
-![介绍 Streaming-LLM：无限长度输入的LLMs](../Images/81538ada1aa8d1aa3f4a6c4af0152c6b.png)
+![介绍 Streaming-LLM：无限长度输入的 LLMs](img/81538ada1aa8d1aa3f4a6c4af0152c6b.png)
 
 StreamingLLM vs 现有方法（[Xiao 等人 (2023)](https://arxiv.org/pdf/2309.17453.pdf))
 
@@ -36,7 +36,7 @@ StreamingLLM vs 现有方法（[Xiao 等人 (2023)](https://arxiv.org/pdf/2309.1
 
 从性能方面来看，StreamingLLM 提供了优于现有方法的准确度，如下表所示。
 
-![引入 Streaming-LLM：适用于无限长度输入的 LLM](../Images/ce77ac4fa07427e249d2be0758ba66d5.png)
+![引入 Streaming-LLM：适用于无限长度输入的 LLM](img/ce77ac4fa07427e249d2be0758ba66d5.png)
 
 StreamingLLM 准确度 ([Xiao *et al*. (2023)](https://arxiv.org/pdf/2309.17453.pdf))
 
@@ -62,7 +62,7 @@ CUDA_VISIBLE_DEVICES=0 python examples/run_streaming_llama.py  --enable_streamin
 
 总体的样本比较可以在下面的图片中看到。
 
-![引入 Streaming-LLM：适用于无限长度输入的 LLM](../Images/76e7b64ada489af40bed5d29e4af83dc.png)
+![引入 Streaming-LLM：适用于无限长度输入的 LLM](img/76e7b64ada489af40bed5d29e4af83dc.png)
 
 StreamingLLM 在更长对话中表现出色 ([Streaming-llm](https://github.com/mit-han-lab/streaming-llm))
 
@@ -76,7 +76,7 @@ StreamingLLM 在更长对话中表现出色 ([Streaming-llm](https://github.com/
 
 ### 更多相关话题
 
-+   [机器学习不像你的大脑 第 5 部分：生物神经元……](https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html)
++   [机器学习不像你的大脑 第五部分：生物神经元……](https://www.kdnuggets.com/2022/07/machine-learning-like-brain-part-5-biological-neurons-cant-summation-inputs.html)
 
 +   [RedPajama 项目：一个开源倡议，旨在民主化 LLM](https://www.kdnuggets.com/2023/06/redpajama-project-opensource-initiative-democratizing-llms.html)
 
@@ -86,4 +86,4 @@ StreamingLLM 在更长对话中表现出色 ([Streaming-llm](https://github.com/
 
 +   [水印如何帮助缓解 LLM 的潜在风险？](https://www.kdnuggets.com/2023/03/watermarking-help-mitigate-potential-risks-llms.html)
 
-+   [在您的笔记本上轻松探索LLMs，使用openplayground](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)
++   [在您的笔记本上轻松探索 LLMs，使用 openplayground](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)

@@ -1,8 +1,8 @@
 # RAPIDS cuDF 加速你的下一次数据科学工作流
 
-> 原文：[https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)
+> 原文：[`www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html`](https://www.kdnuggets.com/2023/04/rapids-cudf-speed-next-data-science-workflow.html)
 
-![RAPIDS cuDF 加速你的下一次数据科学工作流](../Images/b88294e71410d4aefd9f2f088d7ed771.png)
+![RAPIDS cuDF 加速你的下一次数据科学工作流](img/b88294e71410d4aefd9f2f088d7ed771.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -30,7 +30,7 @@ RAPIDS 是一个 GPU 数据科学隔离平台，你可以在 GPU 上完成端到
 
 从下图中，你可以看到在数据分析阶段使用 CPU 和 GPU 的工作流时间差异。
 
-![RAPIDS cuDF 加速你的下一次数据科学工作流](../Images/3b13a4dfa3218b7b2c5da8107102d669.png)
+![RAPIDS cuDF 加速你的下一次数据科学工作流](img/3b13a4dfa3218b7b2c5da8107102d669.png)
 
 图片来源：Nvidia
 
@@ -44,27 +44,27 @@ RAPIDS 是一个 GPU 数据科学隔离平台，你可以在 GPU 上完成端到
 
 +   通过一行代码更改加速熟悉的数据科学库
 
-+   简化了在NVIDIA GPU上的数据科学工作
++   简化了在 NVIDIA GPU 上的数据科学工作
 
-+   提高现有Python用户的生产力
++   提高现有 Python 用户的生产力
 
-+   用于内存中数据准备的GPU加速计算
++   用于内存中数据准备的 GPU 加速计算
 
 +   针对大数据集的分析进行了优化
 
 +   从大型数据集中提供实时洞察
 
-在下面的图像中，你可以看到使用CPU和GPU的典型数据科学工作流之间的区别：
+在下面的图像中，你可以看到使用 CPU 和 GPU 的典型数据科学工作流之间的区别：
 
-![RAPIDS cuDF 提速你的下一个数据科学工作流](../Images/8a431169daa77559ffb3c0ecc7b6e147.png)
+![RAPIDS cuDF 提速你的下一个数据科学工作流](img/8a431169daa77559ffb3c0ecc7b6e147.png)
 
-图片来源于Nvidia
+图片来源于 Nvidia
 
 # RAPIDS cuDF
 
-RAPIDS cuDF是一个Python中的GPU数据框架库，具有类似Pandas的API，集成在PyData生态系统中。用户可以从文件、NumPy数组和Pandas数据框架创建GPU数据框架，并利用RAPIDS的其他GPU加速库轻松创建机器学习管道。
+RAPIDS cuDF 是一个 Python 中的 GPU 数据框架库，具有类似 Pandas 的 API，集成在 PyData 生态系统中。用户可以从文件、NumPy 数组和 Pandas 数据框架创建 GPU 数据框架，并利用 RAPIDS 的其他 GPU 加速库轻松创建机器学习管道。
 
-cuDF与Pandas API非常接近，但并不完全替代Pandas。cuDF和Pandas之间有一些相似之处和不同之处。例如，cuDF支持类似于Pandas的数据结构和操作，如索引、筛选、连接、联接、分组等。要检查cuDF是否支持特定的Pandas API，可以查看[API文档](https://docs.rapids.ai/api/cudf/stable/api_docs/index.html)。
+cuDF 与 Pandas API 非常接近，但并不完全替代 Pandas。cuDF 和 Pandas 之间有一些相似之处和不同之处。例如，cuDF 支持类似于 Pandas 的数据结构和操作，如索引、筛选、连接、联接、分组等。要检查 cuDF 是否支持特定的 Pandas API，可以查看[API 文档](https://docs.rapids.ai/api/cudf/stable/api_docs/index.html)。
 
 ### 探索性数据分析
 
@@ -84,9 +84,9 @@ cuDF与Pandas API非常接近，但并不完全替代Pandas。cuDF和Pandas之�
 
 +   ，以及更多。
 
-你可以自然地提高探索数据的时间，通过使用类似Pandas的操作，但运行速度显著更快。
+你可以自然地提高探索数据的时间，通过使用类似 Pandas 的操作，但运行速度显著更快。
 
-![RAPIDS cuDF 提速你的下一个数据科学工作流](../Images/f7e156417edbfd4da29e25b667a8659f.png)
+![RAPIDS cuDF 提速你的下一个数据科学工作流](img/f7e156417edbfd4da29e25b667a8659f.png)
 
 ### 时间序列数据处理
 
@@ -108,38 +108,38 @@ cuDF与Pandas API非常接近，但并不完全替代Pandas。cuDF和Pandas之�
 
 +   ，以及更多。
 
-再次，cuDF通过几乎相同的pandas端点支持复杂的数据操作。
+再次，cuDF 通过几乎相同的 pandas 端点支持复杂的数据操作。
 
-![RAPIDS cuDF加速你的下一次数据科学工作流程](../Images/c61091ccc22c98ae308487fa80f08a3c.png)
+![RAPIDS cuDF 加速你的下一次数据科学工作流程](img/c61091ccc22c98ae308487fa80f08a3c.png)
 
-如你所见，Pandas和cuDF在代码方面差异不大。然而，速度上有显著差异。
+如你所见，Pandas 和 cuDF 在代码方面差异不大。然而，速度上有显著差异。
 
 # 结论
 
-每位数据科学家都希望减少数据科学流程中的几天或几周的时间浪费。为何不通过升级到RAPIDS cuDF来改变这段时间的浪费呢？
+每位数据科学家都希望减少数据科学流程中的几天或几周的时间浪费。为何不通过升级到 RAPIDS cuDF 来改变这段时间的浪费呢？
 
-此外，RAPIDS cuDF现在已在Google Colab上推出。请查看这里：[RAPIDS cuDF Google Colab](https://colab.research.google.com/github/rapidsai-community/showcase/blob/main/getting_started_tutorials/cudf_pandas_colab_demo.ipynb?ncid=ref-inor-594904)
+此外，RAPIDS cuDF 现在已在 Google Colab 上推出。请查看这里：[RAPIDS cuDF Google Colab](https://colab.research.google.com/github/rapidsai-community/showcase/blob/main/getting_started_tutorials/cudf_pandas_colab_demo.ipynb?ncid=ref-inor-594904)
 
-如果你想了解更多关于cuDF和Pandas之间的差异，或想了解更多关于cuDF的信息以及如何将其用于你的下一次数据科学流程，请阅读：
+如果你想了解更多关于 cuDF 和 Pandas 之间的差异，或想了解更多关于 cuDF 的信息以及如何将其用于你的下一次数据科学流程，请阅读：
 
-+   [cuDF与Pandas的比较](https://docs.rapids.ai/api/cudf/stable/user_guide/pandas-comparison.html)。
++   [cuDF 与 Pandas 的比较](https://docs.rapids.ai/api/cudf/stable/user_guide/pandas-comparison.html)。
 
-+   [10分钟了解cuDF和Dask-cuDF](https://docs.rapids.ai/api/cudf/stable/user_guide/10min.html)
++   [10 分钟了解 cuDF 和 Dask-cuDF](https://docs.rapids.ai/api/cudf/stable/user_guide/10min.html)
 
-+   [开始使用RAPIDS的方法](https://developer.nvidia.com/rapids)
++   [开始使用 RAPIDS 的方法](https://developer.nvidia.com/rapids)
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一位数据科学家、自由技术作家及KDnuggets的社区经理。她特别感兴趣于提供数据科学职业建议或教程以及数据科学相关的理论知识。她还希望探索人工智能如何在提升人类生命长度方面发挥作用。作为一个热衷学习的人，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一位数据科学家、自由技术作家及 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程以及数据科学相关的理论知识。她还希望探索人工智能如何在提升人类生命长度方面发挥作用。作为一个热衷学习的人，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
-+   [RAPIDS cuDF在Google Colab上的加速数据科学](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)
++   [RAPIDS cuDF 在 Google Colab 上的加速数据科学](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)
 
-+   [RAPIDS cuDF速查表](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)
++   [RAPIDS cuDF 速查表](https://www.kdnuggets.com/2023/05/cudf-data-science-cheat-sheet.html)
 
-+   [使用RAPIDS cuDF利用GPU进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
++   [使用 RAPIDS cuDF 利用 GPU 进行特征工程](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
 
-+   [那里与回来… RAPIDS的故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
++   [那里与回来… RAPIDS 的故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
 
-+   [7种GPT帮助改进数据科学工作流程](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)
++   [7 种 GPT 帮助改进数据科学工作流程](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)
 
-+   [通过Scikit-learn管道简化你的机器学习工作流程](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)
++   [通过 Scikit-learn 管道简化你的机器学习工作流程](https://www.kdnuggets.com/streamline-your-machine-learning-workflow-with-scikit-learn-pipelines)

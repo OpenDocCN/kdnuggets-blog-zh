@@ -1,8 +1,8 @@
 # 10 个 Python 统计函数
 
-> 原文：[https://www.kdnuggets.com/10-python-statistical-functions](https://www.kdnuggets.com/10-python-statistical-functions)
+> 原文：[`www.kdnuggets.com/10-python-statistical-functions`](https://www.kdnuggets.com/10-python-statistical-functions)
 
-![10 Python 统计函数](../Images/dbee76aec2f97bf997f9faf6e6be977d.png)
+![10 Python 统计函数](img/dbee76aec2f97bf997f9faf6e6be977d.png)
 
 图片由 [freepik](https://www.freepik.com/free-photo/top-view-office-desk-with-growth-chart-glasses_11383330.htm#fromView=search&page=1&position=24&uuid=a78a7cd4-2cc8-4097-878b-62664fe9c5e1) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -73,9 +73,9 @@ std_pandas = pd.Series(data).std()
 
 ## 4\. 百分位数
 
-百分位数表示值在数据集中相对的排名，当所有数据按顺序排列时。例如，第25百分位数是低于25%数据的值。中位数从技术上定义为第50百分位数。
+百分位数表示值在数据集中相对的排名，当所有数据按顺序排列时。例如，第 25 百分位数是低于 25%数据的值。中位数从技术上定义为第 50 百分位数。
 
-百分位数是使用NumPy库计算的，必须在函数中包含感兴趣的具体百分位数。在示例中计算了第25、第50和第75百分位数，但从0到100的任何百分位数值都是有效的。
+百分位数是使用 NumPy 库计算的，必须在函数中包含感兴趣的具体百分位数。在示例中计算了第 25、第 50 和第 75 百分位数，但从 0 到 100 的任何百分位数值都是有效的。
 
 ```py
 percentiles = np.percentile(data, [25, 50, 75])
@@ -83,7 +83,7 @@ percentiles = np.percentile(data, [25, 50, 75])
 
 ## 5\. 相关性
 
-两个变量之间的相关性描述了它们关系的强度和方向。这是指一个变量在另一个变量变化时发生变化的程度。相关系数的范围是-1到1，其中-1表示完全负相关，1表示完全正相关，0表示变量之间没有线性关系。
+两个变量之间的相关性描述了它们关系的强度和方向。这是指一个变量在另一个变量变化时发生变化的程度。相关系数的范围是-1 到 1，其中-1 表示完全负相关，1 表示完全正相关，0 表示变量之间没有线性关系。
 
 ```py
 corr_numpy = np.corrcoef(x, y) 
@@ -117,11 +117,11 @@ kurt_scipy = stats.kurtosis(data)
 kurt_pandas = pd.Series(data).kurt()
 ```
 
-## 9\. T检验
+## 9\. T 检验
 
-t检验是一种统计检验，用于确定两组均值之间是否存在显著差异。或者，在单样本t检验的情况下，它可以用来确定样本的均值是否显著不同于预定的总体均值。
+t 检验是一种统计检验，用于确定两组均值之间是否存在显著差异。或者，在单样本 t 检验的情况下，它可以用来确定样本的均值是否显著不同于预定的总体均值。
 
-该测试使用SciPy库中的stats模块运行。测试提供了两个输出，t统计量和p值。通常，如果p值小于0.05，则结果被认为在统计上显著，表明两个均值彼此不同。
+该测试使用 SciPy 库中的 stats 模块运行。测试提供了两个输出，t 统计量和 p 值。通常，如果 p 值小于 0.05，则结果被认为在统计上显著，表明两个均值彼此不同。
 
 ```py
 t_test, p_value = stats.ttest_ind(data1, data2)
@@ -130,7 +130,7 @@ onesamp_t_test, p_value = stats.ttest_1samp(data, popmean = 0)
 
 ## 10. 卡方检验
 
-卡方检验用于确定两个分类变量之间是否存在显著的关联，例如职位和性别。该检验同样使用SciPy库中的stats模块，并需要输入观察数据和期望数据。与t检验类似，输出提供了卡方检验统计量和p值，可以与0.05进行比较。
+卡方检验用于确定两个分类变量之间是否存在显著的关联，例如职位和性别。该检验同样使用 SciPy 库中的 stats 模块，并需要输入观察数据和期望数据。与 t 检验类似，输出提供了卡方检验统计量和 p 值，可以与 0.05 进行比较。
 
 ```py
 chi_square_test, p_value = stats.chisquare(f_obs=observed, f_exp=expected)
@@ -138,20 +138,20 @@ chi_square_test, p_value = stats.chisquare(f_obs=observed, f_exp=expected)
 
 ## 总结
 
-本文重点介绍了Python中的10个关键统计函数，但在各种包中还有许多其他函数可用于更具体的应用。利用这些统计和数据分析工具，可以从数据中获得强大的洞察力。
+本文重点介绍了 Python 中的 10 个关键统计函数，但在各种包中还有许多其他函数可用于更具体的应用。利用这些统计和数据分析工具，可以从数据中获得强大的洞察力。
 
-[](https://www.linkedin.com/in/mehrnazsiavoshi/)**[Mehrnaz Siavoshi](https://www.linkedin.com/in/mehrnazsiavoshi/)**拥有数据分析硕士学位，是一名全职生物统计学家，专注于复杂的机器学习开发和医疗保健统计分析。她有AI经验，并在People大学教授生物统计学和机器学习课程。
+[](https://www.linkedin.com/in/mehrnazsiavoshi/)**[Mehrnaz Siavoshi](https://www.linkedin.com/in/mehrnazsiavoshi/)**拥有数据分析硕士学位，是一名全职生物统计学家，专注于复杂的机器学习开发和医疗保健统计分析。她有 AI 经验，并在 People 大学教授生物统计学和机器学习课程。
 
 ### 更多相关主题
 
-+   [Python中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
++   [Python 中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
 
-+   [Python Lambda函数解释](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
++   [Python Lambda 函数解释](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
 
-+   [你可能不知道的4个Python Itertools筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
++   [你可能不知道的 4 个 Python Itertools 筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
 
-+   [提高Python函数编写质量的5个技巧](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
++   [提高 Python 函数编写质量的 5 个技巧](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
 
-+   [统计学习导论，Python版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
++   [统计学习导论，Python 版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 
 +   [什么是矩生成函数？](https://www.kdnuggets.com/2022/12/momentgenerating-functions.html)

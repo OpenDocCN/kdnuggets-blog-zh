@@ -1,8 +1,8 @@
 # 一系列机器学习模型的决策边界
 
-> 原文：[https://www.kdnuggets.com/2020/03/decision-boundary-series-machine-learning-models.html](https://www.kdnuggets.com/2020/03/decision-boundary-series-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2020/03/decision-boundary-series-machine-learning-models.html`](https://www.kdnuggets.com/2020/03/decision-boundary-series-machine-learning-models.html)
 
-[评论](#comments)
+评论
 
 **由[马修·史密斯](https://www.linkedin.com/in/msmithsm14/)，马德里康普顿斯大学**
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理。
 
 * * *
 
@@ -53,7 +53,7 @@ logit2prob <- function(logit){
 
 ### 数据：
 
-我使用了`iris`数据集，该数据集包含由英国统计学家罗纳德·费舍尔在1936年收集的3种不同植物变量的信息。数据集由44种植物特征组成，这些特征应该能唯一地区分33种不同的植物种类（*Setosa*、*Virginica*和*Versicolor*）。然而，我的问题需要的是二分类问题而非多分类问题。在接下来的代码中，我导入了`iris`数据，并去除了一个植物种类`virginica`，将其从多分类问题转换为二分类问题。
+我使用了`iris`数据集，该数据集包含由英国统计学家罗纳德·费舍尔在 1936 年收集的 3 种不同植物变量的信息。数据集由 44 种植物特征组成，这些特征应该能唯一地区分 33 种不同的植物种类（*Setosa*、*Virginica*和*Versicolor*）。然而，我的问题需要的是二分类问题而非多分类问题。在接下来的代码中，我导入了`iris`数据，并去除了一个植物种类`virginica`，将其从多分类问题转换为二分类问题。
 
 ```py
 ###################################################################################
@@ -126,14 +126,14 @@ plt6 <- df %>%
   theme(legend.position = "none")
 ```
 
-我还想使用新的`patchwork`包，这使得显示`ggplot`图非常容易。即下面的代码将我们的图形绘制出来（1个顶部图延展整个网格空间，2个中间图，另一个单独的图，以及底部的另外2个图）。
+我还想使用新的`patchwork`包，这使得显示`ggplot`图非常容易。即下面的代码将我们的图形绘制出来（1 个顶部图延展整个网格空间，2 个中间图，另一个单独的图，以及底部的另外 2 个图）。
 
 ```py
  (plt1)    /
   (plt2 + plt3)
 ```
 
-![](../Images/1b8077e556fd77387eefecc1d37dfdb5.png)
+![](img/1b8077e556fd77387eefecc1d37dfdb5.png)
 
 另外，我们可以根据需要重新排列这些图，并以以下方式绘制它们。
 
@@ -142,7 +142,7 @@ plt6 <- df %>%
   (plt5 + plt6)
 ```
 
-![](../Images/21bf1cf183f88129d3cac813ff18747a.png)
+![](img/21bf1cf183f88129d3cac813ff18747a.png)
 
 我认为这看起来很棒。
 
@@ -171,9 +171,9 @@ var_combos %>%
   scroll_box(width = "100%", height = "200px")
 ```
 
-表1：变量组合
+表 1：变量组合
 
-| 变量1 | 变量2 |
+| 变量 1 | 变量 2 |
 | --- | --- |
 | 花萼宽度 | 花萼长度 |
 | 花瓣长度 | 花萼长度 |
@@ -284,21 +284,21 @@ boundary_lists %>%
 
 +   带径向核的支持向量机
 
-+   带sigmoid核的支持向量机
++   带 sigmoid 核的支持向量机
 
 +   随机森林
 
 +   具有默认参数的极端梯度提升（XGBoost）模型
 
-+   单层Keras神经网络（含线性组件）
++   单层 Keras 神经网络（含线性组件）
 
-+   更深层的Keras神经网络（含线性组件）
++   更深层的 Keras 神经网络（含线性组件）
 
-+   更深层的Keras神经网络（含线性组件）
++   更深层的 Keras 神经网络（含线性组件）
 
 +   具有默认参数的轻量级梯度提升模型（LightGBM）
 
-附注：我不是深度学习/Keras/Tensorflow的专家，所以我相信更好的模型会产生更好的决策边界，但将不同的机器学习模型适配到`purrr`、`map`调用中是一个有趣的任务。
+附注：我不是深度学习/Keras/Tensorflow 的专家，所以我相信更好的模型会产生更好的决策边界，但将不同的机器学习模型适配到`purrr`、`map`调用中是一个有趣的任务。
 
 ```py
 ###################################################################################
@@ -715,7 +715,7 @@ plot_data_sampled %>%
 ## This warning is displayed once per session.
 ```
 
-![](../Images/f0fcc6e0ae7a8ae8efa079465e409ee9.png)
+![](img/f0fcc6e0ae7a8ae8efa079465e409ee9.png)
 
 一些其他随机模型：
 
@@ -723,25 +723,25 @@ plot_data_sampled %>%
 ## $Sepal.Width_and_Sepal.Length
 ```
 
-![](../Images/a28b0c6d73afaef699016b5019757ae5.png)
+![](img/a28b0c6d73afaef699016b5019757ae5.png)
 
 ```py
 ## $Sepal.Width_and_Sepal.Length
 ```
 
-![](../Images/0b740f0c10626aa86bb96289baed5b95.png)
+![](img/0b740f0c10626aa86bb96289baed5b95.png)
 
 ```py
 ## $Petal.Length_and_Sepal.Length
 ```
 
-![](../Images/f326ef09871b151259e191ae8e8530ed.png)
+![](img/f326ef09871b151259e191ae8e8530ed.png)
 
 ```py
 ## $Petal.Width_and_Petal.Length
 ```
 
-![](../Images/2fddfb7ddadda0f1f9a329327673d3d8.png)
+![](img/2fddfb7ddadda0f1f9a329327673d3d8.png)
 
 ```py
 ## $Petal.Length_and_Petal.Width
@@ -756,9 +756,9 @@ plot_data_sampled %>%
 ## Warning: Not possible to generate contour data
 ```
 
-![](../Images/fe78f389f3683f2e013bc223a3c7b6ab.png)
+![](img/fe78f389f3683f2e013bc223a3c7b6ab.png)
 
-自然地，线性模型形成了线性决策边界。看起来随机森林模型在数据上稍微过拟合了，而XGBoost和LightGBM模型能够形成更好、更具泛化能力的决策边界。Keras神经网络表现不佳，因为它们需要更好的训练。
+自然地，线性模型形成了线性决策边界。看起来随机森林模型在数据上稍微过拟合了，而 XGBoost 和 LightGBM 模型能够形成更好、更具泛化能力的决策边界。Keras 神经网络表现不佳，因为它们需要更好的训练。
 
 +   `glm` = 逻辑回归模型
 
@@ -772,7 +772,7 @@ plot_data_sampled %>%
 
 +   `randomForest.formula Prediction` = 随机森林模型
 
-+   `svm.formula Prediction...10` = 带有Sigmoid核的支持向量机
++   `svm.formula Prediction...10` = 带有 Sigmoid 核的支持向量机
 
 +   `svm.formula Prediction...12` = 带有径向核的支持向量机
 
@@ -782,9 +782,9 @@ plot_data_sampled %>%
 
 +   `xgb.Booster Prediction` = 极端梯度提升模型
 
-在许多组合中，Keras神经网络模型只是将所有观测值预测为特定类别（这再次是由于我对模型的调整不佳以及神经网络只有100个观测值用于学习和40,000个观测值用于预测）。也就是说，它将整个背景涂成了蓝色或红色，并且做出了许多误分类。在一些图表中，神经网络成功进行了完美分类，而在其他图表中，它做出了奇怪的决策边界。- 神经网络很有趣。
+在许多组合中，Keras 神经网络模型只是将所有观测值预测为特定类别（这再次是由于我对模型的调整不佳以及神经网络只有 100 个观测值用于学习和 40,000 个观测值用于预测）。也就是说，它将整个背景涂成了蓝色或红色，并且做出了许多误分类。在一些图表中，神经网络成功进行了完美分类，而在其他图表中，它做出了奇怪的决策边界。- 神经网络很有趣。
 
-从图表的简要分析来看，简单的逻辑回归模型几乎完美地进行了分类。考虑到每个变量之间的关系都是线性可分的，这并不令人惊讶。然而，我更偏爱XGBoost和LightGBM模型，因为它们可以通过在目标函数中引入正则化来处理非线性关系，从而做出更稳健的决策边界。随机森林模型在这里失败了，因此它们的决策边界看起来虽然做得很好，但也略显不稳定和尖锐。
+从图表的简要分析来看，简单的逻辑回归模型几乎完美地进行了分类。考虑到每个变量之间的关系都是线性可分的，这并不令人惊讶。然而，我更偏爱 XGBoost 和 LightGBM 模型，因为它们可以通过在目标函数中引入正则化来处理非线性关系，从而做出更稳健的决策边界。随机森林模型在这里失败了，因此它们的决策边界看起来虽然做得很好，但也略显不稳定和尖锐。
 
 当然，随着更多变量和更高维度的引入，这些决策边界可能会变得显著更复杂和非线性。
 
@@ -859,11 +859,11 @@ sessionInfo()
 
 **相关：**
 
-+   [R 编程入门](/2020/02/getting-started-r-programming.html)
++   R 编程入门
 
-+   [R 在 Cloud Run 上的无服务器机器学习](/2020/02/serverless-machine-learning-r-cloud-run.html)
++   R 在 Cloud Run 上的无服务器机器学习
 
-+   [R 中音频文件处理的基础](/2020/02/basics-audio-file-processing-r.html)
++   R 中音频文件处理的基础
 
 ### 更多相关话题
 

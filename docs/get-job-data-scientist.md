@@ -1,8 +1,8 @@
 # 如何成为数据科学家
 
-> 原文：[https://www.kdnuggets.com/2021/01/get-job-data-scientist.html](https://www.kdnuggets.com/2021/01/get-job-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/01/get-job-data-scientist.html`](https://www.kdnuggets.com/2021/01/get-job-data-scientist.html)
 
-[评论](#comments)![图像](../Images/6022dcd977bc6041d21239d254319eb8.png)
+评论![图像](img/6022dcd977bc6041d21239d254319eb8.png)
 
 图片由 [Burst](https://www.pexels.com/@burst) 提供，来自 Pexels
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 ### **建立你的作品集**
 
-仅有教育背景还不足以获得数据科学家的职位。大多数公司还会寻找你技能的具体证据。前Apple高级数据科学家Mohammad Shokoohi-Yekta表示，你[应该熟悉代码](https://www.zdnet.com/article/want-to-be-a-data-scientist-five-ways-to-get-that-job-in-data-science/)并将数据科学应用于实际，而不仅仅是理论。
+仅有教育背景还不足以获得数据科学家的职位。大多数公司还会寻找你技能的具体证据。前 Apple 高级数据科学家 Mohammad Shokoohi-Yekta 表示，你[应该熟悉代码](https://www.zdnet.com/article/want-to-be-a-data-scientist-five-ways-to-get-that-job-in-data-science/)并将数据科学应用于实际，而不仅仅是理论。
 
 展示你在这一领域的舒适度和知识的最佳方式是通过你的作品集。尽早开始参与实际的数据科学项目，并将其汇编成作品集。你可以通过自由职业的数据工作和你感兴趣领域的宠物项目来做到这一点。
 
@@ -44,9 +44,9 @@
 
 一旦你拥有相关的教育背景和丰富的作品集，就该开始寻找职位了。
 
-虽然多样性总是有帮助的，但你可能会在针对具有特定资格和认证的细分行业时更有好运。例如，所有国防部承包商[都需要符合CMMC标准](https://www.neosystemscorp.com/solutions-services/hosting-security/cmmc/)，所以你可以获得这个认证，提高获得国防部工作的机会。
+虽然多样性总是有帮助的，但你可能会在针对具有特定资格和认证的细分行业时更有好运。例如，所有国防部承包商[都需要符合 CMMC 标准](https://www.neosystemscorp.com/solutions-services/hosting-security/cmmc/)，所以你可以获得这个认证，提高获得国防部工作的机会。
 
-记得根据每个潜在雇主调整你的简历和求职信。强调与你所申请的行业和职位最相关的技能和经验。除了通过像Indeed这样的网站申请职位外，拓展你的LinkedIn网络，并尝试建立一个受雇主关注的良好在线形象。
+记得根据每个潜在雇主调整你的简历和求职信。强调与你所申请的行业和职位最相关的技能和经验。除了通过像 Indeed 这样的网站申请职位外，拓展你的 LinkedIn 网络，并尝试建立一个受雇主关注的良好在线形象。
 
 你可能一开始无法获得数据科学家的职位，这也是可以的。实际上，首先申请一个相关但更基础的职位如数据分析可能更好。从那里你可以发展你的职业。
 
@@ -54,7 +54,7 @@
 
 在职经验是推动你职业发展的最佳资源。因此，尽量不要对接受的第一个职位过于挑剔。如果你收到了一份稳定的数据相关领域工作的邀请，尽管这不是你理想的职位，你也可能还是要考虑接受它。把你的第一个数据职位看作是一个启动点。
 
-拥有50到500名员工的公司是你在数据科学领域的[理想首份工作](https://tomimester.medium.com/how-to-break-into-the-data-science-market-f0e0b79b42f7)的规模。在这些中型企业中，你将能够从资深数据科学家那里学习，并且有很多机会晋升。一旦你开始了你的第一个职位，就要主动尽可能多地参与项目，避免让自己过于分散。
+拥有 50 到 500 名员工的公司是你在数据科学领域的[理想首份工作](https://tomimester.medium.com/how-to-break-into-the-data-science-market-f0e0b79b42f7)的规模。在这些中型企业中，你将能够从资深数据科学家那里学习，并且有很多机会晋升。一旦你开始了你的第一个职位，就要主动尽可能多地参与项目，避免让自己过于分散。
 
 你在公司内部寻求新机会的越多，你获得的相关经验就会越多。在工作时，寻找在当前公司和其他公司向上发展的机会。如果你表现出主动性和卓越的工作伦理，你很快就会在数据科学领域取得进步。
 
@@ -66,11 +66,11 @@
 
 **相关：**
 
-+   [我如何在被裁员后的两个月内获得 4 个数据科学职位，并使收入翻倍](/2021/01/data-science-offers-doubled-income-2-months.html)
++   我如何在被裁员后的两个月内获得 4 个数据科学职位，并使收入翻倍
 
-+   [数据专业人士如何在简历中添加更多变化](/2020/11/data-professionals-add-variation-resumes.html)
++   数据专业人士如何在简历中添加更多变化
 
-+   [自动化如何改善数据科学家的角色](/2020/10/automation-improving-data-scientists.html)
++   自动化如何改善数据科学家的角色
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # Python 向量数据库和向量索引：LLM 应用的架构设计
 
-> 原文：[https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
+> 原文：[`www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html`](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
 
-![Python 向量数据库和向量索引：LLM 应用的架构设计](../Images/98929da7efaaff613b06428c080125f9.png)
+![Python 向量数据库和向量索引：LLM 应用的架构设计](img/98929da7efaaff613b06428c080125f9.png)
 
 图片由 [Christina Morillo](https://www.pexels.com/photo/man-standing-infront-of-white-board-1181345/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -66,27 +66,27 @@
 
 +   药物发现 - 按属性向量关联分子
 
-# 什么是Python向量数据库？
+# 什么是 Python 向量数据库？
 
-一个包含支持向量数据库完整生命周期的Python库的向量数据库就是一个Python向量数据库。 数据库本身不需要用Python构建。
+一个包含支持向量数据库完整生命周期的 Python 库的向量数据库就是一个 Python 向量数据库。 数据库本身不需要用 Python 构建。
 
-# 这些Python向量数据库库应该支持什么？
+# 这些 Python 向量数据库库应该支持什么？
 
 对向量数据库的调用可以分为两类 - **数据相关**和**管理相关**。 好消息是它们遵循与传统数据库类似的模式。
 
 **数据相关功能库应支持的内容**
 
-![Python向量数据库和向量索引：架构LLM应用](../Images/ba01fe739413d52def0874e7ec45b89f.png)
+![Python 向量数据库和向量索引：架构 LLM 应用](img/ba01fe739413d52def0874e7ec45b89f.png)
 
 标准管理相关功能库应支持的内容
 
-![Python向量数据库和向量索引：架构LLM应用](../Images/f6af30a16edc73f25c8958765157f192.png)
+![Python 向量数据库和向量索引：架构 LLM 应用](img/f6af30a16edc73f25c8958765157f192.png)
 
-现在让我们进入一个稍微复杂的概念，即在这些数据库之上构建LLM应用
+现在让我们进入一个稍微复杂的概念，即在这些数据库之上构建 LLM 应用
 
-# 架构LLM应用
+# 架构 LLM 应用
 
-在深入了解由向量搜索驱动的LLM应用架构之前，让我们从工作流的角度理解涉及的内容。
+在深入了解由向量搜索驱动的 LLM 应用架构之前，让我们从工作流的角度理解涉及的内容。
 
 一个典型的***工作流***包括：
 
@@ -96,7 +96,7 @@
 
 1.  将向量插入向量数据库或向量索引（稍后会解释）
 
-1.  通过Python API暴露搜索
+1.  通过 Python API 暴露搜索
 
 1.  文档协调工作流
 
@@ -104,13 +104,13 @@
 
 现在让我们看看如何使用不同的架构组件来启用这个工作流的不同部分。
 
-对于1)，你可能需要开始从其他源系统（包括关系型数据库或内容管理系统）获取元数据。
+对于 1)，你可能需要开始从其他源系统（包括关系型数据库或内容管理系统）获取元数据。
 
-预训练模型几乎总是优选用于上面的步骤2）。 OpenAI模型是通过托管服务提供的最受欢迎的模型。 出于隐私和安全原因，你也可以托管本地模型。
+预训练模型几乎总是优选用于上面的步骤 2）。 OpenAI 模型是通过托管服务提供的最受欢迎的模型。 出于隐私和安全原因，你也可以托管本地模型。
 
-对于3)，如果需要进行大规模相似性搜索（例如数据集超过十亿条记录），你需要一个向量数据库或向量索引。从企业的角度来看，通常在进行“搜索”之前会有更多背景信息。
+对于 3)，如果需要进行大规模相似性搜索（例如数据集超过十亿条记录），你需要一个向量数据库或向量索引。从企业的角度来看，通常在进行“搜索”之前会有更多背景信息。
 
-关于4)上面的内容，好消息是，暴露的搜索通常遵循类似的模式。类似于以下代码：
+关于 4)上面的内容，好消息是，暴露的搜索通常遵循类似的模式。类似于以下代码：
 
 来自 [Pinecone](https://docs.pinecone.io/docs/metadata-filtering#:~:text=eq%22%3A%20%5B%22comedy%22%2C%20%22documentary%22%5D%7D%7D-,Inserting%20metadata%20into%20an%20index,-Metadata%20can%20be)。
 
@@ -190,15 +190,15 @@ filter={
 
 +   你不想信任新技术来进行数据存储。
 
-+   你现有的存储可以从Python中轻松访问。
++   你现有的存储可以从 Python 中轻松访问。
 
-+   你的相似性搜索只是其他更大企业BI和数据库需求中的一种能力。
++   你的相似性搜索只是其他更大企业 BI 和数据库需求中的一种能力。
 
 +   你需要将向量附加到现有的标量记录中。
 
 +   你需要一种统一的方法来处理数据工程团队的管道。
 
-+   你需要在数据上使用索引和图结构，以帮助你的[LLM应用程序](https://github.com/pathwaycom/llm-app)或任务。
++   你需要在数据上使用索引和图结构，以帮助你的[LLM 应用程序](https://github.com/pathwaycom/llm-app)或任务。
 
 +   你需要来自其他来源的增强输出或增强上下文。
 
@@ -208,20 +208,20 @@ filter={
 
 向量搜索为开发者解锁了颠覆性的能力。随着模型和技术的进步，预计向量数据库或向量索引将成为应用程序堆栈的核心部分。
 
-我希望这个概述为你探索Python中的向量数据库和向量索引提供一个坚实的起点。如果你对最近开发的向量索引感兴趣，请查看这个[开源项目](https://github.com/pathwaycom/llm-app)。
+我希望这个概述为你探索 Python 中的向量数据库和向量索引提供一个坚实的起点。如果你对最近开发的向量索引感兴趣，请查看这个[开源项目](https://github.com/pathwaycom/llm-app)。
 
-**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)** 是一位产品和产品营销副总裁，专注于将AI产品推向市场。他曾与两家成功退出（被SAP和Kroll收购）的初创公司合作，并喜欢教授其他人如何利用AI产品提高组织的生产力。
+**[Anup Surendran](https://www.linkedin.com/in/anupsurendran/)** 是一位产品和产品营销副总裁，专注于将 AI 产品推向市场。他曾与两家成功退出（被 SAP 和 Kroll 收购）的初创公司合作，并喜欢教授其他人如何利用 AI 产品提高组织的生产力。
 
 ### 更多相关主题
 
-+   [AI和LLM用例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
++   [AI 和 LLM 用例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 
-+   [如何使用索引加速SQL查询【Python版】](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
++   [如何使用索引加速 SQL 查询【Python 版】](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
 
-+   [数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
++   [数据库优化：探索 SQL 中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
 
-+   [Python构建LLM应用程序的初学者指南](https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python)
++   [Python 构建 LLM 应用程序的初学者指南](https://www.kdnuggets.com/beginners-guide-to-building-llm-apps-with-python)
 
-+   [什么是向量数据库，它们为什么对LLM如此重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
++   [什么是向量数据库，它们为什么对 LLM 如此重要？](https://www.kdnuggets.com/2023/06/vector-databases-important-llms.html)
 
 +   [开源向量数据库的诚实比较](https://www.kdnuggets.com/an-honest-comparison-of-open-source-vector-databases)

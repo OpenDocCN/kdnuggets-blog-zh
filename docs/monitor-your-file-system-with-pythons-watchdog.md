@@ -1,8 +1,8 @@
 # 使用 Python 的监控程序监控你的文件系统
 
-> 原文：[https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)
+> 原文：[`www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog`](https://www.kdnuggets.com/monitor-your-file-system-with-pythons-watchdog)
 
-![使用 Python 的监控程序监控你的文件系统](../Images/659033c9f0e281fee72294fc54fb68bb.png)
+![使用 Python 的监控程序监控你的文件系统](img/659033c9f0e281fee72294fc54fb68bb.png)
 
 图片由作者提供 | DALLE-3 & Canva
 
@@ -12,11 +12,11 @@ Python 的监控程序库使得监控你的文件系统并自动响应这些变�
 
 ## 我们的 top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -247,7 +247,7 @@ Tests passed successfully.
 
 Python 的 watchdog 库是监控文件系统的强大工具。无论你是在自动化任务、同步文件，还是构建更响应的应用程序，watchdog 使实时响应文件系统更改变得容易。只需几行代码，你就可以开始监控目录和处理事件，从而简化工作流程。
 
-**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal 是一名机器学习工程师和技术作家，对数据科学以及 AI 与医学的交集有深厚的热情。她共同撰写了电子书《利用 ChatGPT 最大化生产力》。作为2022年APAC地区的 Google Generation 学者，她倡导多样性和学术卓越。她还被认定为 Teradata 多样性技术学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 是变革的热心倡导者，创立了 FEMCodes，旨在赋能 STEM 领域的女性。
+**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal 是一名机器学习工程师和技术作家，对数据科学以及 AI 与医学的交集有深厚的热情。她共同撰写了电子书《利用 ChatGPT 最大化生产力》。作为 2022 年 APAC 地区的 Google Generation 学者，她倡导多样性和学术卓越。她还被认定为 Teradata 多样性技术学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 是变革的热心倡导者，创立了 FEMCodes，旨在赋能 STEM 领域的女性。
 
 ### 更多内容
 
@@ -255,7 +255,7 @@ Python 的 watchdog 库是监控文件系统的强大工具。无论你是在自
 
 +   [Python 中的并行处理大文件](https://www.kdnuggets.com/2022/07/parallel-processing-large-file-python.html)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
 
 +   [使用 Python 为 Amazon 产品构建推荐系统](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)
 

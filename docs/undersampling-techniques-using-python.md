@@ -1,6 +1,6 @@
 # 使用 Python 的欠采样技术
 
-> 原文：[https://www.kdnuggets.com/undersampling-techniques-using-python](https://www.kdnuggets.com/undersampling-techniques-using-python)
+> 原文：[`www.kdnuggets.com/undersampling-techniques-using-python`](https://www.kdnuggets.com/undersampling-techniques-using-python)
 
 随着数字化环境的不断发展，来自多种来源的大量数据正在生成和捕获。虽然这些信息极具价值，但这个庞大的信息宇宙通常反映了现实世界现象的不平衡分布。不平衡数据的问题不仅仅是一个统计挑战，它对数据驱动模型的准确性和可靠性有深远的影响。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -82,9 +82,9 @@ for ax, weights in zip(ax_arr, weights_arr):
     ax.set_title("Linear SVC with y={}".format(Counter(y))) 
 ```
 
-上面的代码生成了四种不同分布的图，从一个高度不平衡的数据集开始，其中一个类主导了97%的实例。第二个和第三个图分别有93%和69%的实例来自单个类，而最后一个图具有完全平衡的分布，即所有三个类各占三分之一的实例。以下是从最不平衡到最平衡的数据集的图。将SVM拟合到这些数据上时，第一幅图（高度不平衡）的超平面被推到图表的一侧，主要是因为算法对每个实例一视同仁，无论其类别如何，并尝试以最大边界分隔类。因此，靠近中心的多数黄色群体将超平面推到角落，使算法误分类少数类。
+上面的代码生成了四种不同分布的图，从一个高度不平衡的数据集开始，其中一个类主导了 97%的实例。第二个和第三个图分别有 93%和 69%的实例来自单个类，而最后一个图具有完全平衡的分布，即所有三个类各占三分之一的实例。以下是从最不平衡到最平衡的数据集的图。将 SVM 拟合到这些数据上时，第一幅图（高度不平衡）的超平面被推到图表的一侧，主要是因为算法对每个实例一视同仁，无论其类别如何，并尝试以最大边界分隔类。因此，靠近中心的多数黄色群体将超平面推到角落，使算法误分类少数类。
 
-![使用Python的欠采样技术](../Images/bec1e1e84da0b88c706b1ca6945c2ec3.png)
+![使用 Python 的欠采样技术](img/bec1e1e84da0b88c706b1ca6945c2ec3.png)
 
 随着我们向更均衡的分布移动，算法成功地对所有感兴趣的类进行了分类。
 
@@ -92,9 +92,9 @@ for ax, weights in zip(ax_arr, weights_arr):
 
 在这种情况下，对黄色点进行欠采样是解决由稀有类问题引起的模型错误的最简单方法。值得注意的是，并非所有数据集都遇到这个问题，但对于遇到这个问题的数据集来说，纠正这种不平衡是建模数据的关键初步步骤。
 
-# Imbalanced-Learn库
+# Imbalanced-Learn 库
 
-我们将使用Imbalanced-Learn Python库（imbalanced-learn或imblearn）。我们可以通过pip安装它：
+我们将使用 Imbalanced-Learn Python 库（imbalanced-learn 或 imblearn）。我们可以通过 pip 安装它：
 
 ```py
 pip install -U imbalanced-learn
@@ -104,9 +104,9 @@ pip install -U imbalanced-learn
 
 让我们讨论并实验一些最受欢迎的欠采样技术。假设你有一个二分类数据集，其中类'0'的数量远多于类'1'。
 
-## NearMiss欠采样
+## NearMiss 欠采样
 
-NearMiss是一种欠采样技术，通过减少接近少数类的多数类样本的数量来实现。这将通过任何使用空间分离或在两个类之间分割维度空间的算法来促进干净的分类。NearMiss有三个版本：
+NearMiss 是一种欠采样技术，通过减少接近少数类的多数类样本的数量来实现。这将通过任何使用空间分离或在两个类之间分割维度空间的算法来促进干净的分类。NearMiss 有三个版本：
 
 **NearMiss-1**：与三个最近的少数类样本之间的最小平均距离的多数类样本。
 
@@ -166,11 +166,11 @@ plt.legend()
 plt.show()
 ```
 
-![使用 Python 的欠采样技术](../Images/9a4af1e161350ba9bc196e2540919101.png)
+![使用 Python 的欠采样技术](img/9a4af1e161350ba9bc196e2540919101.png)
 
 将 NearMiss() 类中的 version=1 更改为 version=2 或 version=3，以使用 NearMiss-2 或 NearMiss-3 欠采样算法。
 
-![使用 Python 的欠采样技术](../Images/f8c8917c39a65cace83b0d697f67d9b2.png)![使用 Python 的欠采样技术](../Images/b90b8b6b5c296ec65b4a1c384e6bae09.png)
+![使用 Python 的欠采样技术](img/f8c8917c39a65cace83b0d697f67d9b2.png)![使用 Python 的欠采样技术](img/b90b8b6b5c296ec65b4a1c384e6bae09.png)
 
 NearMiss-2 选择位于两个类别之间重叠区域核心的实例。使用 NeverMiss-3 算法时，我们观察到每个与多数类区域重叠的少数类实例最多有三个来自多数类的邻居。代码示例中的属性 n_neighbors 定义了这一点。
 

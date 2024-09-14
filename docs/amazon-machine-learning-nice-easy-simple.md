@@ -1,20 +1,20 @@
 # Amazon Machine Learning：实用还是过于简单？
 
-> 原文：[https://www.kdnuggets.com/2016/02/amazon-machine-learning-nice-easy-simple.html](https://www.kdnuggets.com/2016/02/amazon-machine-learning-nice-easy-simple.html)
+> 原文：[`www.kdnuggets.com/2016/02/amazon-machine-learning-nice-easy-simple.html`](https://www.kdnuggets.com/2016/02/amazon-machine-learning-nice-easy-simple.html)
 
-**作者：Alex Perrier，[@alexip](https://twitter.com/alexip)**，（最初发布于[Open Data Science博客](http://www.opendatascience.com/blog/amazon-machine-learning-nice-and-easy-or-overly-simple/)）
+**作者：Alex Perrier，[@alexip](https://twitter.com/alexip)**，（最初发布于[Open Data Science 博客](http://www.opendatascience.com/blog/amazon-machine-learning-nice-and-easy-or-overly-simple/)）
 
-**机器学习即服务（MLaaS）承诺将数据科学带入公司可及的范围。在这种背景下，Amazon Machine Learning是一种具有二分类/多分类和线性回归特性的预测分析服务。该服务提供了简单的工作流程，但缺乏模型选择功能，执行时间较慢。预测性能令人满意。**
+**机器学习即服务（MLaaS）承诺将数据科学带入公司可及的范围。在这种背景下，Amazon Machine Learning 是一种具有二分类/多分类和线性回归特性的预测分析服务。该服务提供了简单的工作流程，但缺乏模型选择功能，执行时间较慢。预测性能令人满意。**
 
-![AmazonWebservices_Logo.svg](../Images/76dc4722bfa89125a95988a8f65108c7.png)
+![AmazonWebservices_Logo.svg](img/76dc4722bfa89125a95988a8f65108c7.png)
 
-数据科学很热门且具有吸引力，但它也很复杂。构建和维护数据科学基础设施可能很昂贵。经验丰富的数据科学家稀缺，内部开发算法、构建预测分析应用程序和创建生产就绪的API需要特定的专业知识和资源。尽管公司可能预计数据科学服务的好处，但在进行必要投资之前，他们可能不愿意先行测试。
+数据科学很热门且具有吸引力，但它也很复杂。构建和维护数据科学基础设施可能很昂贵。经验丰富的数据科学家稀缺，内部开发算法、构建预测分析应用程序和创建生产就绪的 API 需要特定的专业知识和资源。尽管公司可能预计数据科学服务的好处，但在进行必要投资之前，他们可能不愿意先行测试。
 
 这就是机器学习即服务（Machine Learning-as-a-Service）介入的地方，它承诺简化和普及机器学习：在短时间内享受机器学习的好处，同时保持低成本。
 
 一些关键参与者已经进入了这个领域：[Google Predictive Analytics](https://cloud.google.com/prediction/)、[Microsoft Azure Machine Learning](https://azure.microsoft.com/en-us/services/machine-learning/)、[IBM Watson](http://www.ibm.com/analytics/watson-analytics/)、[Big ML](https://bigml.com/)和[许多其他](http://www.butleranalytics.com/10-machine-learning-as-a-service-platforms/)。有些提供简化的预测分析服务，而有些则提供更专业的界面和超越预测的数据科学服务。
 
-相对较新的参与者是AWS的[Amazon Machine Learning](https://aws.amazon.com/machine-learning/)服务。该服务于2015年4月在AWS 2015峰会上推出，距今不足一年。Amazon Machine Learning旨在通过关注数据工作流并将更复杂的技术细节隐藏在后台，简化预测分析。通过将技术细节的重要部分从用户视野中移除，Amazon Machine Learning将数据科学带给更广泛的受众。它显著降低了公司尝试预测分析的门槛，使强大的机器学习工具能够在很短的时间内可用和运作。
+相对较新的参与者是 AWS 的[Amazon Machine Learning](https://aws.amazon.com/machine-learning/)服务。该服务于 2015 年 4 月在 AWS 2015 峰会上推出，距今不足一年。Amazon Machine Learning 旨在通过关注数据工作流并将更复杂的技术细节隐藏在后台，简化预测分析。通过将技术细节的重要部分从用户视野中移除，Amazon Machine Learning 将数据科学带给更广泛的受众。它显著降低了公司尝试预测分析的门槛，使强大的机器学习工具能够在很短的时间内可用和运作。
 
 互联网的大部分已经在运行 AWS 的许多服务。AWS 将机器学习服务添加到其中将允许工程师将预测分析能力纳入现有应用程序。
 
@@ -159,9 +159,9 @@ SGDClassifier 的设置与 Amazon Machine Learning 的 SGD 参数类似：
 
 我们将简化数据集，仅考虑由性别、年龄、附属、浏览器、注册日期等特征组成的用户训练数据。数据集在竞赛页面上免费提供，只需注册 Kaggle 即可。
 
-在这个数据集中，大约40%的用户没有进行任何预订。我们将尝试预测用户是否进行了预订，而不是预测目的地国家（如果有的话），从而解决一个二分类问题。
+在这个数据集中，大约 40%的用户没有进行任何预订。我们将尝试预测用户是否进行了预订，而不是预测目的地国家（如果有的话），从而解决一个二分类问题。
 
-使用10万行数据作为训练数据集，根据AUC分数，我们在训练数据集上获得了以下性能结果：
+使用 10 万行数据作为训练数据集，根据 AUC 分数，我们在训练数据集上获得了以下性能结果：
 
 +   Amazon Machine Learning SGD : 0.71
 
@@ -173,7 +173,7 @@ SGDClassifier 的设置与 Amazon Machine Learning 的 SGD 参数类似：
 
 *注意：这绝不是一个基准测试。以上结果仅用于说明。*
 
-我们尝试了多种 SGD 设置，但未能更接近 Amazon Machine Learning 的分数。分数是基于 Amazon Machine Learning 创建的初始验证30k样本和另一组50k样本进行平均的。
+我们尝试了多种 SGD 设置，但未能更接近 Amazon Machine Learning 的分数。分数是基于 Amazon Machine Learning 创建的初始验证 30k 样本和另一组 50k 样本进行平均的。
 
 XGBoost 分类器的随机森林没有使用网格搜索。我们在可能的情况下使用了默认设置。
 
@@ -191,27 +191,27 @@ Amazon Machine Learning 的简化方法使工程师能够快速实现预测分�
 
 通过正则化可以调整模型以解决欠拟合和过拟合问题。然而，没有简单的方法来检测过拟合或欠拟合的存在。添加经典的可视化，如学习曲线，将极大地促进模型选择。
 
-简介：[亚历克斯·佩里埃博士](https://twitter.com/alexip)，是数据科学家、Berklee Online的软件工程师以及ODSC的贡献者。你可以在他的[机器学习博客](http://alexperrier.github.io)上阅读更多内容。
+简介：[亚历克斯·佩里埃博士](https://twitter.com/alexip)，是数据科学家、Berklee Online 的软件工程师以及 ODSC 的贡献者。你可以在他的[机器学习博客](http://alexperrier.github.io)上阅读更多内容。
 
 [原文](http://www.opendatascience.com/blog/amazon-machine-learning-nice-and-easy-or-overly-simple/)。
 
 **相关：**
 
-+   [数据科学中5个最佳机器学习API](/2015/11/machine-learning-apis-data-science.html)
++   数据科学中 5 个最佳机器学习 API
 
-+   [标准化机器学习网络服务API的世界](/2015/07/psi-machine-learning-web-service-apis.html)
++   标准化机器学习网络服务 API 的世界
 
-+   [云机器学习战争：亚马逊 vs IBM Watson vs 微软Azure](/2015/04/cloud-machine-learning-amazon-ibm-watson-microsoft-azure.html)
++   云机器学习战争：亚马逊 vs IBM Watson vs 微软 Azure
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -221,10 +221,10 @@ Amazon Machine Learning 的简化方法使工程师能够快速实现预测分�
 
 +   [选择合适的机器学习算法的简单指南](https://www.kdnuggets.com/2020/05/guide-choose-right-machine-learning-algorithm.html)
 
-+   [学习如何设计、测量和实施可信的A/B测试……](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
++   [学习如何设计、测量和实施可信的 A/B 测试……](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
 
-+   [使用Python为亚马逊产品构建推荐系统](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)
++   [使用 Python 为亚马逊产品构建推荐系统](https://www.kdnuggets.com/2023/02/building-recommender-system-amazon-products-python.html)
 
-+   [免费亚马逊课程学习生成式AI：适合所有级别](https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels)
++   [免费亚马逊课程学习生成式 AI：适合所有级别](https://www.kdnuggets.com/free-amazon-courses-to-learn-generative-ai-for-all-levels)
 
-+   [滴答：使用Pendulum进行Python中的日期和时间管理](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)
++   [滴答：使用 Pendulum 进行 Python 中的日期和时间管理](https://www.kdnuggets.com/tick-tock-using-pendulum-for-easy-date-and-time-management-in-python)

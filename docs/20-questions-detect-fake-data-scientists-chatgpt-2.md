@@ -1,22 +1,22 @@
-# 20个问题（及答案）以识别虚假数据科学家：ChatGPT 版，第2部分
+# 20 个问题（及答案）以识别虚假数据科学家：ChatGPT 版，第二部分
 
-> 原文：[https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
+> 原文：[`www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html`](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
-![20个问题（及答案）以识别虚假数据科学家：ChatGPT 版，第2部分](../Images/2db3ba2dd9be00c6de3085491239b52a.png)
+![20 个问题（及答案）以识别虚假数据科学家：ChatGPT 版，第二部分](img/2db3ba2dd9be00c6de3085491239b52a.png)
 
 图片由 Midjourney 创建
 
-7年前的这个月，KDnuggets 发布了一篇题为[识别虚假数据科学家的20个问题](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html)的文章，由 Andrew Fogg 撰写。下个月，KDnuggets 编辑们在随后的文章[21个必知的数据科学面试问题及答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html)中集体回答了这些问题。
+7 年前的这个月，KDnuggets 发布了一篇题为[识别虚假数据科学家的 20 个问题](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html)的文章，由 Andrew Fogg 撰写。下个月，KDnuggets 编辑们在随后的文章[21 个必知的数据科学面试问题及答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html)中集体回答了这些问题。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,9 +24,9 @@
 
 我将以明确声明开篇，本文中所有问题的答案均由 ChatGPT 提供。请自行处理这些信息。
 
-我鼓励读者将这些答案与[2016年 KDnuggets 编辑提供的答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html)进行比较，以查看哪些答案更为全面，哪些更准确，以及哪些更易于阅读。请随意在下方评论中批评具体的答案或整个项目。
+我鼓励读者将这些答案与[2016 年 KDnuggets 编辑提供的答案](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers.html)进行比较，以查看哪些答案更为全面，哪些更准确，以及哪些更易于阅读。请随意在下方评论中批评具体的答案或整个项目。
 
-现在，让我们来看看 ChatGPT 在回答以下10个问题方面的表现如何，我们仍然认为这些问题非常适合用于识别申请你们组织职位的虚假数据科学家。你可以在[这篇之前发布的文章](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)中找到另外10个问题，上半部分。
+现在，让我们来看看 ChatGPT 在回答以下 10 个问题方面的表现如何，我们仍然认为这些问题非常适合用于识别申请你们组织职位的虚假数据科学家。你可以在[这篇之前发布的文章](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)中找到另外 10 个问题，上半部分。
 
 **11\. 什么是选择偏差，它为什么重要，以及如何避免它？**
 
@@ -54,11 +54,11 @@
 
 **13\. “长格式”和“宽格式”数据有什么区别？**
 
-在“长格式”数据中，每一行代表一个单独的观察值，并且有几个列代表不同的变量，如主题ID、感兴趣的变量和该变量的值。这种格式也被称为“堆叠”或“熔化”数据。
+在“长格式”数据中，每一行代表一个单独的观察值，并且有几个列代表不同的变量，如主题 ID、感兴趣的变量和该变量的值。这种格式也被称为“堆叠”或“熔化”数据。
 
-例如，对10个个体的身高和体重的研究，在长格式中，数据会是这样：
+例如，对 10 个个体的身高和体重的研究，在长格式中，数据会是这样：
 
-主题ID 变量 值
+主题 ID 变量 值
 
 1 身高 180
 
@@ -74,7 +74,7 @@
 
 例如，上述相同的数据，在宽格式下会是这样：
 
-主题ID 身高 体重
+主题 ID 身高 体重
 
 1 180 75
 
@@ -104,13 +104,13 @@
 
 **15. 解释爱德华·塔夫提的“图表垃圾”概念。**
 
-**爱德华·塔夫提**是统计学家和信息设计师，他撰写了几本关于数据可视化的重要书籍。他的一个关键概念是“图表垃圾”，指的是在数据可视化中使用非信息性或冗余元素，这些元素会削弱传达的信息。这些元素包括网格线、装饰性边框、3D效果和不必要的文本。Tufte认为，图表垃圾会使观众更难理解所呈现的信息，可能导致数据的混淆和误解。
+**爱德华·塔夫提**是统计学家和信息设计师，他撰写了几本关于数据可视化的重要书籍。他的一个关键概念是“图表垃圾”，指的是在数据可视化中使用非信息性或冗余元素，这些元素会削弱传达的信息。这些元素包括网格线、装饰性边框、3D 效果和不必要的文本。Tufte 认为，图表垃圾会使观众更难理解所呈现的信息，可能导致数据的混淆和误解。
 
-Tufte的主要论点是数据可视化的主要目标是清晰准确地呈现信息，而图表垃圾可能会分散注意力。他认为，良好的数据可视化应优先考虑数据本身，使其易于阅读和理解，并且任何额外的元素应尽量少用，仅在其具有明确目的时使用。
+Tufte 的主要论点是数据可视化的主要目标是清晰准确地呈现信息，而图表垃圾可能会分散注意力。他认为，良好的数据可视化应优先考虑数据本身，使其易于阅读和理解，并且任何额外的元素应尽量少用，仅在其具有明确目的时使用。
 
 他还强调数据可视化应该简洁明了，专注于数据及其信息，而不是设计本身。在他看来，有效的数据可视化应该能够独立存在，而不需要额外的文本或注释。
 
-Tufte的思想对数据可视化领域产生了重大影响，并且在商业、数据科学和新闻等领域继续被广泛引用和应用。
+Tufte 的思想对数据可视化领域产生了重大影响，并且在商业、数据科学和新闻等领域继续被广泛引用和应用。
 
 **16. 你会如何筛选异常值，如果发现了异常值该怎么办？**
 
@@ -118,9 +118,9 @@ Tufte的思想对数据可视化领域产生了重大影响，并且在商业、
 
 1. 目视检查：使用图表，如箱线图或散点图来绘制数据，可以很容易地识别异常值。异常值通常会远离其他数据点。
 
-2. Z分数方法：这种方法计算数据的标准差和均值，然后为每个数据点分配一个分数（z分数）。z分数大于某个阈值（通常为3或-3）的数据点被认为是异常值。
+2. Z 分数方法：这种方法计算数据的标准差和均值，然后为每个数据点分配一个分数（z 分数）。z 分数大于某个阈值（通常为 3 或-3）的数据点被认为是异常值。
 
-3. 四分位距（IQR）方法：这种方法计算四分位距（即第75百分位和第25百分位之间的差），并为数据分配一个下限和上限。任何落在这些界限之外的数据点被认为是异常值。
+3. 四分位距（IQR）方法：这种方法计算四分位距（即第 75 百分位和第 25 百分位之间的差），并为数据分配一个下限和上限。任何落在这些界限之外的数据点被认为是异常值。
 
 4\. 马哈拉诺比斯距离方法：该方法计算每个数据点与数据均值的马哈拉诺比斯距离。马哈拉诺比斯距离是衡量数据点与均值之间的标准差距离的指标。马哈拉诺比斯距离大于某个阈值的数据点被认为是离群值。
 
@@ -138,7 +138,7 @@ Tufte的思想对数据可视化领域产生了重大影响，并且在商业、
 
 **17\. 你如何使用极值理论、蒙特卡罗模拟或数学统计（或其他任何方法）来正确估计极为稀有事件的概率？**
 
-极值理论（EVT）可以通过对概率分布的极端尾部分进行建模来估计稀有事件的概率。这可以通过将如Gumbel分布或广义帕累托分布等分布拟合到数据集的极端值来完成。
+极值理论（EVT）可以通过对概率分布的极端尾部分进行建模来估计稀有事件的概率。这可以通过将如 Gumbel 分布或广义帕累托分布等分布拟合到数据集的极端值来完成。
 
 蒙特卡罗模拟也可以用来估计稀有事件的概率，通过从概率分布中生成许多随机样本并计算目标事件发生的次数。这在底层分布复杂或未知时尤其有用。
 
@@ -158,7 +158,7 @@ Tufte的思想对数据可视化领域产生了重大影响，并且在商业、
 
 协同过滤（Collaborative filtering）则利用用户的行为来推荐项目。它查看用户与项目的互动，例如评分或购买历史，然后找到类似的用户，以推荐他们喜欢的项目。协同过滤有两种类型：基于用户的和基于项目的。基于用户的协同过滤根据用户与其他用户的相似性来推荐项目，而基于项目的协同过滤则根据项目与用户之前互动过的项目的相似性来推荐项目。
 
-这两种推荐引擎都使用机器学习算法，如k-NN、SVD和矩阵分解，来分析数据并做出推荐。它们还使用正则化和交叉验证等技术，以避免模型过拟合。
+这两种推荐引擎都使用机器学习算法，如 k-NN、SVD 和矩阵分解，来分析数据并做出推荐。它们还使用正则化和交叉验证等技术，以避免模型过拟合。
 
 总体而言，推荐引擎利用用户行为和项目特征的数据，为每个用户提供个性化的推荐。它们在不同的行业中被广泛使用，并帮助提高用户参与度和销售额。
 
@@ -192,24 +192,24 @@ Tufte的思想对数据可视化领域产生了重大影响，并且在商业、
 
 另一种选择是使用带有刷选和链接的平行坐标图，这允许通过突出观察结果并链接到其他视图来互动地探索数据。
 
-也可以在视频中表示5维数据，一种方法是使用动画展示数据随时间的变化，另一种方法是使用互动可视化，让用户通过与视觉元素互动来探索数据。
+也可以在视频中表示 5 维数据，一种方法是使用动画展示数据随时间的变化，另一种方法是使用互动可视化，让用户通过与视觉元素互动来探索数据。
 
-需要注意的是，在图表或视频中表示5维数据可能会很具挑战性，因为这需要仔细的设计选择来有效传达信息，并避免用过多数据让用户感到困惑。
+需要注意的是，在图表或视频中表示 5 维数据可能会很具挑战性，因为这需要仔细的设计选择来有效传达信息，并避免用过多数据让用户感到困惑。
 
-以上就是[原始出版物](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html)中的20个问题。希望我们从答案的内容或向ChatGPT提问的过程中学到了有趣的东西。
+以上就是[原始出版物](https://www.kdnuggets.com/2016/01/20-questions-to-detect-fake-data-scientists.html)中的 20 个问题。希望我们从答案的内容或向 ChatGPT 提问的过程中学到了有趣的东西。
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家及KDnuggets的总编辑，这是一家开创性的在线数据科学和机器学习资源网站。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。可以通过editor1 at kdnuggets[dot]com联系他。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家及 KDnuggets 的总编辑，这是一家开创性的在线数据科学和机器学习资源网站。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。可以通过 editor1 at kdnuggets[dot]com 联系他。
 
 ### 相关话题
 
-+   [20个问题（附答案）来识别虚假的数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
++   [20 个问题（附答案）来识别虚假的数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-+   [7个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
++   [7 个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
 
-+   [5个Python面试问题及答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
++   [5 个 Python 面试问题及答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
 
 +   [假装成功：生成真实的合成客户数据集](https://www.kdnuggets.com/2022/01/fake-realistic-synthetic-customer-datasets-projects.html)
 
-+   [25个针对数据科学家的高级SQL面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
++   [25 个针对数据科学家的高级 SQL 面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
 
-+   [Python深度学习：第二版，作者François Chollet](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)
++   [Python 深度学习：第二版，作者 François Chollet](https://www.kdnuggets.com/2022/01/manning-deep-learning-python-second-edition-francois-chollet.html)

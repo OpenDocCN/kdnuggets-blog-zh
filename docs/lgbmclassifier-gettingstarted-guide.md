@@ -1,8 +1,8 @@
 # LGBMClassifier: 入门指南
 
-> 原文：[https://www.kdnuggets.com/2023/07/lgbmclassifier-gettingstarted-guide.html](https://www.kdnuggets.com/2023/07/lgbmclassifier-gettingstarted-guide.html)
+> 原文：[`www.kdnuggets.com/2023/07/lgbmclassifier-gettingstarted-guide.html`](https://www.kdnuggets.com/2023/07/lgbmclassifier-gettingstarted-guide.html)
 
-![LGBMClassifier: 入门指南](../Images/9691d4e5776180b0d0451b093e2119c0.png)
+![LGBMClassifier: 入门指南](img/9691d4e5776180b0d0451b093e2119c0.png)
 
 编辑者提供的图片
 
@@ -12,41 +12,41 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
-集成模型的前提是通过结合不同模型的预测以减少其误差来提高模型性能。有两种流行的集成技术：bagging和boosting。
+集成模型的前提是通过结合不同模型的预测以减少其误差来提高模型性能。有两种流行的集成技术：bagging 和 boosting。
 
 Bagging，又称为自助聚合，在不同的随机子集上训练多个单独的模型，然后平均它们的预测结果以生成最终预测。而提升（Boosting）则涉及顺序训练单独的模型，每个模型试图纠正前一个模型的错误。
 
-既然我们了解了集成模型的背景，让我们深入探讨一下提升集成模型，特别是微软开发的Light GBM（LGBM）算法。
+既然我们了解了集成模型的背景，让我们深入探讨一下提升集成模型，特别是微软开发的 Light GBM（LGBM）算法。
 
-# 什么是LGBMClassifier？
+# 什么是 LGBMClassifier？
 
-LGBMClassifier代表Light Gradient Boosting Machine Classifier。它使用决策树算法进行排序、分类和其他机器学习任务。LGBMClassifier使用一种新颖的基于梯度的单边采样（GOSS）和独占特征捆绑（EFB）技术，能够准确地处理大规模数据，从而提高速度并减少内存使用。
+LGBMClassifier 代表 Light Gradient Boosting Machine Classifier。它使用决策树算法进行排序、分类和其他机器学习任务。LGBMClassifier 使用一种新颖的基于梯度的单边采样（GOSS）和独占特征捆绑（EFB）技术，能够准确地处理大规模数据，从而提高速度并减少内存使用。
 
 ## 什么是基于梯度的单边采样（GOSS）？
 
-传统的梯度提升算法使用所有数据进行训练，这在处理大型数据集时可能非常耗时。而LightGBM的GOSS则保留了所有大梯度的实例，并对小梯度的实例进行随机采样。其背后的直觉是，大梯度的实例更难拟合，因此包含更多信息。GOSS为小梯度的数据实例引入了一个常数乘数，以弥补采样过程中信息的丧失。
+传统的梯度提升算法使用所有数据进行训练，这在处理大型数据集时可能非常耗时。而 LightGBM 的 GOSS 则保留了所有大梯度的实例，并对小梯度的实例进行随机采样。其背后的直觉是，大梯度的实例更难拟合，因此包含更多信息。GOSS 为小梯度的数据实例引入了一个常数乘数，以弥补采样过程中信息的丧失。
 
 ## 什么是独占特征捆绑（EFB）？
 
-在稀疏数据集中，大多数特征为零。EFB是一种近乎无损的算法，它将相互排斥的特征（即不同时为非零的特征）进行捆绑/组合，以减少维度，从而加速训练过程。由于这些特征是“排斥”的，因此保留了原始特征空间，没有显著的信息损失。
+在稀疏数据集中，大多数特征为零。EFB 是一种近乎无损的算法，它将相互排斥的特征（即不同时为非零的特征）进行捆绑/组合，以减少维度，从而加速训练过程。由于这些特征是“排斥”的，因此保留了原始特征空间，没有显著的信息损失。
 
 # 安装
 
-可以直接使用pip——Python的包管理器来安装LightGBM。在终端或命令提示符中输入以下命令，以下载和安装LightGBM库到你的机器上：
+可以直接使用 pip——Python 的包管理器来安装 LightGBM。在终端或命令提示符中输入以下命令，以下载和安装 LightGBM 库到你的机器上：
 
 ```py
 pip install lightgbm
 ```
 
-Anaconda用户可以使用以下列出的“conda install”命令来安装它。
+Anaconda 用户可以使用以下列出的“conda install”命令来安装它。
 
 ```py
 conda install -c conda-forge lightgbm
@@ -56,7 +56,7 @@ conda install -c conda-forge lightgbm
 
 # 实践操作！
 
-现在，让我们导入LightGBM和其他必要的库：
+现在，让我们导入 LightGBM 和其他必要的库：
 
 ```py
 import numpy as np
@@ -69,7 +69,7 @@ from sklearn.model_selection import train_test_split
 
 ## 准备数据集
 
-我们使用流行的泰坦尼克号数据集，其中包含关于泰坦尼克号乘客的信息，目标变量表示他们是否幸存。你可以从[Kaggle](https://www.kaggle.com/competitions/titanic/data)下载数据集，或者使用以下代码直接从Seaborn加载，如下所示：
+我们使用流行的泰坦尼克号数据集，其中包含关于泰坦尼克号乘客的信息，目标变量表示他们是否幸存。你可以从[Kaggle](https://www.kaggle.com/competitions/titanic/data)下载数据集，或者使用以下代码直接从 Seaborn 加载，如下所示：
 
 ```py
 titanic = sns.load_dataset('titanic')
@@ -87,7 +87,7 @@ titanic['fare'] = titanic['fare'].fillna(titanic['fare'].mode()[0])
 titanic['embarked'] = titanic['embarked'].fillna(titanic['embarked'].mode()[0])
 ```
 
-最后，我们使用pandas的分类代码将分类变量转换为数字变量。现在，数据已准备好开始模型训练过程。
+最后，我们使用 pandas 的分类代码将分类变量转换为数字变量。现在，数据已准备好开始模型训练过程。
 
 ```py
 # Convert categorical variables to numerical variables
@@ -99,16 +99,16 @@ X = titanic.drop('survived', axis=1)
 y = titanic['survived']
 ```
 
-## 训练LGBMClassifier模型
+## 训练 LGBMClassifier 模型
 
-要开始训练LGBMClassifier模型，我们需要使用scikit-learn中的train_test_split函数将数据集拆分为输入特征和目标变量，以及训练集和测试集。
+要开始训练 LGBMClassifier 模型，我们需要使用 scikit-learn 中的 train_test_split 函数将数据集拆分为输入特征和目标变量，以及训练集和测试集。
 
 ```py
 # Split the dataset into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 ```
 
-让我们对分类数据（“who”）和序数数据（“class”）进行标签编码，以确保模型接收数字数据，因为LGBM不处理非数字数据。
+让我们对分类数据（“who”）和序数数据（“class”）进行标签编码，以确保模型接收数字数据，因为 LGBM 不处理非数字数据。
 
 ```py
 class_dict = {
@@ -127,9 +127,9 @@ X_test['class'] = X_test['class'].apply(lambda x: class_dict[x])
 X_test['who'] = X_test['who'].apply(lambda x: who_dict[x])
 ```
 
-接下来，我们将模型超参数指定为构造函数的参数，或者可以将它们作为字典传递给set_params方法。
+接下来，我们将模型超参数指定为构造函数的参数，或者可以将它们作为字典传递给 set_params 方法。
 
-启动模型训练的最后一步是通过创建LGBMClassifier类的实例并将其拟合到训练数据上来加载数据集。
+启动模型训练的最后一步是通过创建 LGBMClassifier 类的实例并将其拟合到训练数据上来加载数据集。
 
 ```py
 params = {
@@ -163,9 +163,9 @@ weighted avg       0.83      0.83      0.83       179
 
 ## 超参数调整
 
-LGBMClassifier通过超参数提供了很大的灵活性，你可以调整这些超参数以获得最佳性能。这里，我们将简要讨论一些关键的超参数：
+LGBMClassifier 通过超参数提供了很大的灵活性，你可以调整这些超参数以获得最佳性能。这里，我们将简要讨论一些关键的超参数：
 
-+   **num_leaves**：这是控制树模型复杂度的主要参数。理想情况下，num_leaves的值应该小于或等于2^(max_depth)。
++   **num_leaves**：这是控制树模型复杂度的主要参数。理想情况下，num_leaves 的值应该小于或等于 2^(max_depth)。
 
 +   **min_data_in_leaf**：这是防止叶子节点树过拟合的重要参数。其最佳值取决于训练样本的数量和 num_leaves。
 

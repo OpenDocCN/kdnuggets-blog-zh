@@ -1,12 +1,12 @@
 # 使用 SQL 处理时间序列
 
-> 原文：[https://www.kdnuggets.com/2021/04/time-series-using-sql.html](https://www.kdnuggets.com/2021/04/time-series-using-sql.html)
+> 原文：[`www.kdnuggets.com/2021/04/time-series-using-sql.html`](https://www.kdnuggets.com/2021/04/time-series-using-sql.html)
 
-[评论](#comments)
+评论
 
 **由 [Michael Grogan](http://michael-grogan.com/)，数据科学顾问**
 
-![](../Images/76d764c5f8e4cada72a9591a556d0b14.png)
+![](img/76d764c5f8e4cada72a9591a556d0b14.png)
 
 来源：[Tumisu](https://pixabay.com/users/tumisu-148124/) 提供的照片，来自 [Pixabay](https://pixabay.com/illustrations/database-data-computer-network-1954920/)
 
@@ -91,7 +91,7 @@ weather=# SELECT COLUMN_NAME, DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TA
 >>> select date, temp, avg(temp) OVER (ORDER BY date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), avg(temp) OVER (ORDER BY date ROWS BETWEEN 6 PRECEDING AND CURRENT ROW), avg(temp) OVER (ORDER BY date ROWS BETWEEN 29 PRECEDING AND CURRENT ROW), avg(temp) OVER (ORDER BY date ROWS BETWEEN 59 PRECEDING AND CURRENT ROW) FROM weatherdata where place='Place Name';
 ```
 
-![](../Images/5dda346183a359201c27afbbf9dc1896.png)
+![](img/5dda346183a359201c27afbbf9dc1896.png)
 
 来源：作者创建的输出
 
@@ -216,21 +216,21 @@ weather=# select date + interval '1h' * timezone from weatherdata;
 
 **相关：**
 
-+   [多维多传感器时间序列数据分析框架](/2021/02/multidimensional-multi-sensor-time-series-data-analysis-framework.html)
++   多维多传感器时间序列数据分析框架
 
-+   [使用 Python 进行拒绝采样](/2021/03/rejection-sampling-python.html)
++   使用 Python 进行拒绝采样
 
-+   [深度学习正变得过度使用](/2021/03/deep-learning-becoming-overused.html)
++   深度学习正变得过度使用
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
 
 * * *
 

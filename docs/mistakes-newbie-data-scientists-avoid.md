@@ -1,8 +1,8 @@
 # 新手数据科学家应避免的错误
 
-> 原文：[https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
+> 原文：[`www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html`](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-![新手数据科学家应避免的错误封面](../Images/138bb2e42d320daeb281f4939f672f28.png)
+![新手数据科学家应避免的错误封面](img/138bb2e42d320daeb281f4939f672f28.png)
 
 照片由 [Andrea Piacquadio](https://www.pexels.com/photo/adult-displeased-businesswoman-with-papers-in-light-modern-office-3808822/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,11 +24,11 @@
 
 # 不要低估正式教育
 
-如果你搜索数据科学学位，大多数学位都要求有一定的教育背景。虽然有很多补充简历的BootCamps和课程，但许多招聘人员还是在寻找拥有某种技术学位和/或硕士学位的候选人。
+如果你搜索数据科学学位，大多数学位都要求有一定的教育背景。虽然有很多补充简历的 BootCamps 和课程，但许多招聘人员还是在寻找拥有某种技术学位和/或硕士学位的候选人。
 
 好的一面是，越来越多的大学提供数据科学课程和在线课程，以使你掌握申请数据科学职位所需的知识水平。当然，也有可能自学，但这需要更多的独立努力和决心。这是一条更艰难的路，但它是可以实现的。
 
-如果你想查看一些免费的大学资源，可以看看这个：[免费大学数据科学资源](/2022/05/free-university-data-science-resources.html)
+如果你想查看一些免费的大学资源，可以看看这个：免费大学数据科学资源
 
 # 专注于理论而不是项目
 
@@ -38,7 +38,7 @@
 
 有这么多免费的数据集，你可以在其中玩耍和测试你的知识。你完全没有限制，只需要勇敢尝试。
 
-如果你想了解一些你可以参与的潜在项目，可以查看这个：[提升技能的顶级数据科学项目](/2022/04/top-data-science-projects-build-skills.html)
+如果你想了解一些你可以参与的潜在项目，可以查看这个：提升技能的顶级数据科学项目
 
 # 尝试跃升至顶尖职位
 
@@ -46,11 +46,11 @@
 
 这是一个不能急于求成的过程；因此，你不能自动进入你的兴趣领域，你需要为此努力。
 
-接受你可能需要做一两年的初级职位，然后在接下来的5年中从事机器学习项目的现实检查，这是你实现最终目标的一个很好的现实检查。
+接受你可能需要做一两年的初级职位，然后在接下来的 5 年中从事机器学习项目的现实检查，这是你实现最终目标的一个很好的现实检查。
 
 # 简历
 
-简历总是很难准备，因为你想推销自己，但有时这可能导致你的简历看起来过于混乱。在[Ladders](https://www.theladders.com/) 2018年眼动追踪研究中，他们揭示了招聘者平均在每份简历上扫描7.4秒。
+简历总是很难准备，因为你想推销自己，但有时这可能导致你的简历看起来过于混乱。在[Ladders](https://www.theladders.com/) 2018 年眼动追踪研究中，他们揭示了招聘者平均在每份简历上扫描 7.4 秒。
 
 你可以想象有多少人正在申请数据科学职位，以及招聘者在遇到充满大量信息的简历时可能会感到多么不知所措。与其这样，不如通过要点和良好的结构向招聘者展示一个清晰的画面。
 
@@ -66,9 +66,9 @@
 
 如果你想要更多的信息来帮助你，可以阅读这个：
 
-+   [数据科学面试指南 – 第1部分：结构](/2022/04/data-science-interview-guide-part-1-structure.html)
++   数据科学面试指南 – 第一部分：结构
 
-+   [数据科学面试指南 – 第2部分：面试资源](/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   数据科学面试指南 – 第二部分：面试资源
 
 # 有效地寻找工作
 
@@ -84,7 +84,7 @@
 
 # 结论
 
--   这些是帮助你有效进入数据科学领域的基础知识。这些是非常常见的错误，可以轻松解决。如果你想了解更多关于正在招聘的数据科学家的行业，可以阅读：[2022 年招聘数据科学家的顶级行业和雇主](/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
+-   这些是帮助你有效进入数据科学领域的基础知识。这些是非常常见的错误，可以轻松解决。如果你想了解更多关于正在招聘的数据科学家的行业，可以阅读：2022 年招聘数据科学家的顶级行业和雇主
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由技术作家。她特别感兴趣于提供数据科学职业建议或教程以及有关数据科学的理论知识。她还希望探索人工智能如何能有益于人类寿命的不同方式。作为一个积极学习者，她寻求拓宽技术知识和写作技能，同时帮助引导他人。
 

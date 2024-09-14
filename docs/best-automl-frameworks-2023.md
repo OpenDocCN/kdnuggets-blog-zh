@@ -1,8 +1,8 @@
-# 2023年你应该考虑的顶级 AutoML 框架
+# 2023 年你应该考虑的顶级 AutoML 框架
 
-> 原文：[https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
+> 原文：[`www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html`](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
-![2023年你应该考虑的顶级 AutoML 框架](../Images/e109be878603fba2ee80417d954ddeef.png)
+![2023 年你应该考虑的顶级 AutoML 框架](img/e109be878603fba2ee80417d954ddeef.png)
 
 图片来源于 Bing 图片创作工具
 
@@ -20,23 +20,23 @@ AutoML 框架通过处理常规序列和消除手动测试模型来消除数据�
 
 # 1\. TransmogrifAI
 
-使用Scala语言创建，并基于SparkML框架的TransmogrifAI自动化了机器学习的五个最重要功能。优化超参数、检查函数、选择模型、推导函数和变形（因此得名）都是该框架可以自动化的功能。这对于[数据清洗](https://www.tableau.com/learn/articles/what-is-data-cleaning)、模型选择和特征工程非常有用。
+使用 Scala 语言创建，并基于 SparkML 框架的 TransmogrifAI 自动化了机器学习的五个最重要功能。优化超参数、检查函数、选择模型、推导函数和变形（因此得名）都是该框架可以自动化的功能。这对于[数据清洗](https://www.tableau.com/learn/articles/what-is-data-cleaning)、模型选择和特征工程非常有用。
 
 # 2\. AutoGluon
 
-AutoGluon是AWS提供的一个开源库，主要面向机器学习应用开发人员。这是一个理想的AutoML框架，适合那些不是专家的人，因为它非常用户友好，同时提供强大的深度学习方法。可以迅速且高精度地实现预测。它也可以成为那些希望探索给定数据集所能实现的内容的良好起点。
+AutoGluon 是 AWS 提供的一个开源库，主要面向机器学习应用开发人员。这是一个理想的 AutoML 框架，适合那些不是专家的人，因为它非常用户友好，同时提供强大的深度学习方法。可以迅速且高精度地实现预测。它也可以成为那些希望探索给定数据集所能实现的内容的良好起点。
 
-AutoGluon在自动对象识别、表格预测以及以文本和图像形式组织数据方面表现出色。对于更专业的用户，[AutoGluon AutoML框架](/2020/01/amazon-automl-autogluon-architectures-know-about.html)通过其开源库提供了对模型参数编程的深入了解。
+AutoGluon 在自动对象识别、表格预测以及以文本和图像形式组织数据方面表现出色。对于更专业的用户，AutoGluon AutoML 框架通过其开源库提供了对模型参数编程的深入了解。
 
 # 3\. MLJAR
 
-MLJAR可以通过浏览器访问，并可用作快速创建和测试AutoML模型的平台。与NVIDIA的CUDA、Python和Tensorflow兼容，还提供了易于使用的Hyperfeit搜索功能。数据集可以轻松下载到网站，机器学习算法可以被尝试和测试以确定最佳算法。通过MLJAR AutoML框架，识别和部署最佳预测模型变得更加简单，甚至可以分享你的结果。
+MLJAR 可以通过浏览器访问，并可用作快速创建和测试 AutoML 模型的平台。与 NVIDIA 的 CUDA、Python 和 Tensorflow 兼容，还提供了易于使用的 Hyperfeit 搜索功能。数据集可以轻松下载到网站，机器学习算法可以被尝试和测试以确定最佳算法。通过 MLJAR AutoML 框架，识别和部署最佳预测模型变得更加简单，甚至可以分享你的结果。
 
-这显然是更好的AutoML框架之一，但它确实需要付费。用户必须支付订阅费用才能使用所有功能，或者只能使用免费的版本，数据限制为0.25 GB。
+这显然是更好的 AutoML 框架之一，但它确实需要付费。用户必须支付订阅费用才能使用所有功能，或者只能使用免费的版本，数据限制为 0.25 GB。
 
 # 4\. DataRobot
 
-也许是列表中最容易识别的名称，DataRobot是数据分析师使用的流行AutoML框架。预测分析可以用于没有编程、软件开发或机器学习知识的业务人员。在一个简单的过程中，组织可以创建[实时预测模型](/2020/02/h1o-trust-understand-predictive-models.html)，通过自动化机器学习提高准确性。
+也许是列表中最容易识别的名称，DataRobot 是数据分析师使用的流行 AutoML 框架。预测分析可以用于没有编程、软件开发或机器学习知识的业务人员。在一个简单的过程中，组织可以创建实时预测模型，通过自动化机器学习提高准确性。
 
 这个机器学习框架的工作流程可以被调整以满足用户的需求。商业专业人士可以轻松使用它根据输入的数据获得准确的预测，而经验丰富的数据科学家则可以调整参数以完善他们自己的预测模型。
 
@@ -58,11 +58,11 @@ Google AutoML 使得拥有较少机器学习知识的开发人员能够创建高
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

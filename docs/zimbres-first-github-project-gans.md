@@ -1,8 +1,8 @@
 # 使用命令行中的 TensorFlow 创建您的第一个 GitHub 项目中的 GAN
 
-> 原文：[https://www.kdnuggets.com/2018/05/zimbres-first-github-project-gans.html](https://www.kdnuggets.com/2018/05/zimbres-first-github-project-gans.html)
+> 原文：[`www.kdnuggets.com/2018/05/zimbres-first-github-project-gans.html`](https://www.kdnuggets.com/2018/05/zimbres-first-github-project-gans.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Rubens Zimbres](https://www.linkedin.com/in/rubens-zimbres/)，数据科学家**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 在本文中，我将介绍创建您的第一个 GitHub 项目的步骤。我将以生成对抗网络为例。如果您想了解更多关于 GAN 的信息，可以点击我的 PDF 演示文稿查看：
 
-**[https://github.com/RubensZimbres/Repo-2018/blob/master/Deep%20Learning%20Summer%20School/GANs_Summer_School_15_FINAL.pdf](https://github.com/RubensZimbres/Repo-2018/blob/master/Deep%20Learning%20Summer%20School/GANs_Summer_School_15_FINAL.pdf)**
+**[`github.com/RubensZimbres/Repo-2018/blob/master/Deep%20Learning%20Summer%20School/GANs_Summer_School_15_FINAL.pdf`](https://github.com/RubensZimbres/Repo-2018/blob/master/Deep%20Learning%20Summer%20School/GANs_Summer_School_15_FINAL.pdf)**
 
 正如您将在我的项目中看到的那样，有一个 main.py 文件，其中包含 GAN 代码，还有一个包含正确运行代码所需库的文件（requirements.txt）。
 
@@ -207,7 +207,7 @@ disc_hidden_dim = args['disc_hidden']
 
 这是你预计得到的输出：
 
-![输出图像](../Images/68253cb14b27c6359bdcaec614546170.png)
+![输出图像](img/68253cb14b27c6359bdcaec614546170.png)
 
 Tensorboard 将在你关闭弹出窗口后启动（GAN 输出与 MNIST 数字）
 
@@ -220,23 +220,23 @@ os.system('tensorboard –logdir='+logs_path)
 
 然后，你可以访问 Tensorboard 提供的 URL，在浏览器中查看训练细节，如标量（训练损失）、图形（GAN 结构）、图像（生成和分类）和直方图（权重）。请查看以下图片。
 
-要访问此项目的详细信息，请访问：**[https://github.com/RubensZimbres/GAN-Project-2018](https://github.com/RubensZimbres/GAN-Project-2018)**
+要访问此项目的详细信息，请访问：**[`github.com/RubensZimbres/GAN-Project-2018`](https://github.com/RubensZimbres/GAN-Project-2018)**
 
-![图片](../Images/e1be7b540d7d213fca0e6df6124dc514.png)
+![图片](img/e1be7b540d7d213fca0e6df6124dc514.png)
 
-![图片](../Images/e1d5d275a464ab0a978dfc1b7582c82b.png)
+![图片](img/e1d5d275a464ab0a978dfc1b7582c82b.png)
 
-![图片](../Images/27ed32f2a241752dfa73fd0ae4d4fd61.png)
+![图片](img/27ed32f2a241752dfa73fd0ae4d4fd61.png)
 
 **个人简介：[Rubens Zimbres](https://www.linkedin.com/today/author/rubens-zimbres)**，博士，是一位战略家和数据科学家，拥有超过 23 年的客户服务、管理和财务规划经验，曾在战略规划和重组、物理和数字营销、社交网络分析、人员管理、客户数据库分析等领域担任首席执行官和数据科学家。他拥有 13 年市场研究专长和 10 年数据分析经验。
 
 **相关：**
 
-+   [生成对抗网络概述](/2018/01/generative-adversarial-networks-overview.html)
++   生成对抗网络概述
 
-+   [前 20 名 Python AI 和机器学习开源项目](/2018/02/top-20-python-ai-machine-learning-open-source-projects.html)
++   前 20 名 Python AI 和机器学习开源项目
 
-+   [我如何不知不觉地为开源做出贡献](/2018/04/how-contributed-open-source.html)
++   我如何不知不觉地为开源做出贡献
 
 ### 更多相关话题
 

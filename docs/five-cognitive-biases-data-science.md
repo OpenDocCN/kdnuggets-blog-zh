@@ -1,10 +1,10 @@
 # 数据科学中的五种认知偏差（以及如何避免它们）
 
-> 原文：[https://www.kdnuggets.com/2020/06/five-cognitive-biases-data-science.html](https://www.kdnuggets.com/2020/06/five-cognitive-biases-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/06/five-cognitive-biases-data-science.html`](https://www.kdnuggets.com/2020/06/five-cognitive-biases-data-science.html)
 
-[评论](#comments)
+评论
 
-![](../Images/e6524a44ce6623d1891b35d5b8545f83.png)
+![](img/e6524a44ce6623d1891b35d5b8545f83.png)
 
 *重新训练你的思维。图片由 [John Hain](https://pixabay.com/users/johnhain-352999/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1000062) 提供，来源于 [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1000062)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 ### 1\. 幸存者偏差
 
-![](../Images/64c4662d54302b715f67d26e365edec3.png)
+![](img/64c4662d54302b715f67d26e365edec3.png)
 
 *[来源](https://xkcd.com/1827/)。*
 
@@ -44,13 +44,13 @@
 
 研究团队受到了幸存者偏差的影响：他们仅仅查看了可用的数据，而没有分析更大的情况。这是一种选择性偏差，我们根据一些任意的标准隐式地筛选数据，然后试图理解它，而没有意识到或承认我们正在处理的是不完整的数据。
 
-让我们思考一下这如何适用于我们的数据科学工作。假设你开始处理一个数据集。你已经创建了特征，并在建模任务中达到了不错的准确度。但也许你应该问自己，这是否是你能达到的最佳结果。你是否尝试过寻找更多的数据？也许将天气预报数据添加到你在ARIMA模型中使用的常规销售变量中，可以帮助你更好地预测销售。或者，也许一些关于节假日的特征可以告诉你的模型，为什么你的买家在感恩节或圣诞节期间会有特定的行为。
+让我们思考一下这如何适用于我们的数据科学工作。假设你开始处理一个数据集。你已经创建了特征，并在建模任务中达到了不错的准确度。但也许你应该问自己，这是否是你能达到的最佳结果。你是否尝试过寻找更多的数据？也许将天气预报数据添加到你在 ARIMA 模型中使用的常规销售变量中，可以帮助你更好地预测销售。或者，也许一些关于节假日的特征可以告诉你的模型，为什么你的买家在感恩节或圣诞节期间会有特定的行为。
 
 ***克服建议：*** 一种减轻这种偏见的方法是以严谨、科学的方式思考手头的问题，然后头脑风暴寻找任何可以帮助解决问题的数据（而不是仅仅从数据开始）。这些方法看起来可能类似，但第二种方法会限制你的视野，因为你不知道你的工作中缺少什么。通过使用第一种方法，你会知道哪些数据你没有获得，最终会把这些因素考虑进你的结论中。
 
 ### 2\. 沉没成本谬误
 
-![](../Images/eb30108fa4c8dd12312406703f5c656f.png)
+![](img/eb30108fa4c8dd12312406703f5c656f.png)
 
 *来源：[Pixabay](https://pixabay.com/photos/down-the-drain-money-waste-sink-4708734/)。*
 
@@ -66,7 +66,7 @@
 
 ### 3\. 虚假因果关系
 
-![](../Images/4a9b61de4ea18da37df638a3f94b2d66.png)
+![](img/4a9b61de4ea18da37df638a3f94b2d66.png)
 
 *[来源](https://xkcd.com/925/)。*
 
@@ -78,7 +78,7 @@
 
 +   通过查看消防部门的数据，你会发现，派遣更多的消防员去灭火，最终对财产造成的损害也会更多。因此，你可能会推断更多的消防员造成了更多的损害。
 
-+   在另一个著名的例子中，一位学者在调查1980年代纽约市犯罪原因时发现，严重犯罪的数量与街头小贩销售的冰淇淋数量之间存在强烈的相关性。但是，我们应该得出结论说吃冰淇淋会促使人们犯罪吗？既然这毫无意义，我们显然应该怀疑有一个未被观察到的变量同时影响了这两者。在夏天，犯罪率最高，这也是冰淇淋销量最多的时候。冰淇淋销售不会导致犯罪，犯罪也不会增加冰淇淋销售。
++   在另一个著名的例子中，一位学者在调查 1980 年代纽约市犯罪原因时发现，严重犯罪的数量与街头小贩销售的冰淇淋数量之间存在强烈的相关性。但是，我们应该得出结论说吃冰淇淋会促使人们犯罪吗？既然这毫无意义，我们显然应该怀疑有一个未被观察到的变量同时影响了这两者。在夏天，犯罪率最高，这也是冰淇淋销量最多的时候。冰淇淋销售不会导致犯罪，犯罪也不会增加冰淇淋销售。
 
 在这两种情况下，过于表面地查看数据会导致错误的假设。
 
@@ -120,9 +120,9 @@
 
 +   [你并不那么聪明：认知偏差正在确保这一点](https://www.kdnuggets.com/2018/09/practical-cognitive-biases.html)
 
-+   [数据科学家需要了解的4个认知偏差关键点](https://www.kdnuggets.com/2016/12/4-cognitive-bias-key-points-data-scientists-need-know.html)
++   [数据科学家需要了解的 4 个认知偏差关键点](https://www.kdnuggets.com/2016/12/4-cognitive-bias-key-points-data-scientists-need-know.html)
 
-+   [机器公平性：如何评估AI系统的公平性并缓解任何观察到的不公平问题](https://www.kdnuggets.com/2020/05/machine-fairness-assess-ai-system-mitigate.html)
++   [机器公平性：如何评估 AI 系统的公平性并缓解任何观察到的不公平问题](https://www.kdnuggets.com/2020/05/machine-fairness-assess-ai-system-mitigate.html)
 
 ### 更多相关主题
 
@@ -132,7 +132,7 @@
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [每位数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 

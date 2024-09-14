@@ -1,8 +1,8 @@
 # 数据管理：如何保持在客户心中的领先地位？
 
-> 原文：[https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)
+> 原文：[`www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html`](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)
 
-![数据管理：如何保持在客户心中的领先地位？](../Images/673a068dbdb82f4a08584b4888e62f78.png)
+![数据管理：如何保持在客户心中的领先地位？](img/673a068dbdb82f4a08584b4888e62f78.png)
 
 如果你拥有或计划创业，你可能已经多次收到诸如“有效管理数据”和“更多关注客户”的建议。然而，如果你认为围绕数据管理和客户关系的炒作过多，那么是时候了解数据管理和客户满意度之间的关系，以及你如何利用这些知识帮助你的业务成功了。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -26,17 +26,17 @@
 
 在今天的数字商业世界中，客户有很多选择来比较和购买产品。要成为客户的首选，你必须首先了解他们，知道他们对你的产品或服务有什么期望，并迅速解决他们的问题。如果客户认为你不听取他们的需求，即使你拥有卓越的品牌价值，他们也会瞬间切换品牌。
 
-根据 [德勤](https://www2.deloitte.com/content/dam/Deloitte/de/Documents/WM%20Digitalisierung.pdf) 的研究，采取以客户为中心的方法的组织比那些不专注于客户的公司要有60%的回报率。因此，什么是以客户为中心的战略？它就是将客户放在首位，了解他们的需求，并提供最佳解决方案。虽然采用以客户为中心的文化具有挑战性，但绝对值得付出努力。
+根据 [德勤](https://www2.deloitte.com/content/dam/Deloitte/de/Documents/WM%20Digitalisierung.pdf) 的研究，采取以客户为中心的方法的组织比那些不专注于客户的公司要有 60%的回报率。因此，什么是以客户为中心的战略？它就是将客户放在首位，了解他们的需求，并提供最佳解决方案。虽然采用以客户为中心的文化具有挑战性，但绝对值得付出努力。
 
 如果你有一个以客户为中心的商业文化，问问自己这些问题，以查看你是否在正确的轨道上。
 
-![你为什么需要以客户为中心的方法？](../Images/f936e2c9869dba6ce1ace21d9b6b4382.png)
+![你为什么需要以客户为中心的方法？](img/f936e2c9869dba6ce1ace21d9b6b4382.png)
 
 # 数据管理在以客户为中心的战略中的作用？
 
 你可能会想，如果以客户为中心能够增加利润和声誉，为什么公司不去实施它。简短的答案是，大多数企业尝试以客户为中心但未能实现。然而，挑战在于几乎所有的客户数据来自多个接触点，并且在部门之间缺乏一致性和治理。
 
-根据 [哈佛商业评论](https://hbr.org/2017/09/only-3-of-companies-data-meets-basic-quality-standards) 的一篇文章，组织中的数据中仅有3%是高质量数据。差的数据和过时的数据不过是一些数字。为了有效地提供以客户为中心的体验，组织应当从收集相关客户数据开始，接着丰富、标准化，并使其能够立即提供给组织中的所有人。
+根据 [哈佛商业评论](https://hbr.org/2017/09/only-3-of-companies-data-meets-basic-quality-standards) 的一篇文章，组织中的数据中仅有 3%是高质量数据。差的数据和过时的数据不过是一些数字。为了有效地提供以客户为中心的体验，组织应当从收集相关客户数据开始，接着丰富、标准化，并使其能够立即提供给组织中的所有人。
 
 在组织中手动完成所有这些工作需要时间和金钱，同时也容易出错。通过自动化的 [数据管理解决方案](https://www.xtract.io/solutions/data-management?) 
 
@@ -46,7 +46,7 @@
 
 数据管理已经从简单的数据收集发展到分析和存储数据，以便于跟踪和访问。以下是数据管理解决方案的一些功能。
 
-![数据管理解决方案如何有利于你的以客户为中心的战略？](../Images/2a7569148bd43dbe6ce88b6badc1a05c.png)
+![数据管理解决方案如何有利于你的以客户为中心的战略？](img/2a7569148bd43dbe6ce88b6badc1a05c.png)
 
 ## 跟踪和访问你的数据
 
@@ -56,9 +56,9 @@
 
 ## 检查并丰富数据质量
 
-以下步骤确保数据是干净且最新的。数据质量和丰富性确保信息干净、去重、无错误且经过增强。"数据质量"这个词已经成为一个流行词。每个人都在谈论数据质量，每个人都希望实现100%的数据质量。数据质量对于实现和维持以客户为中心的目标是否必要？是的，它至关重要！
+以下步骤确保数据是干净且最新的。数据质量和丰富性确保信息干净、去重、无错误且经过增强。"数据质量"这个词已经成为一个流行词。每个人都在谈论数据质量，每个人都希望实现 100%的数据质量。数据质量对于实现和维持以客户为中心的目标是否必要？是的，它至关重要！
 
-正确的客户方法始于准确的数据。凭借精确的客户数据，你可以快速识别市场趋势、客户模式，并将正确的信息发送给正确的人，从而减少不必要的营销活动费用并提高客户终生价值。根据[哈佛商业评论](https://hbr.org/2014/10/the-value-of-keeping-the-right-customers)，将客户保留率提高5%可以将利润提高25%至95%。一个由AI驱动的数据质量解决方案可以实时自动化数据分析、清理和丰富的过程，使你能够获得数据驱动的洞察，并有效地提高客户保留率。
+正确的客户方法始于准确的数据。凭借精确的客户数据，你可以快速识别市场趋势、客户模式，并将正确的信息发送给正确的人，从而减少不必要的营销活动费用并提高客户终生价值。根据[哈佛商业评论](https://hbr.org/2014/10/the-value-of-keeping-the-right-customers)，将客户保留率提高 5%可以将利润提高 25%至 95%。一个由 AI 驱动的数据质量解决方案可以实时自动化数据分析、清理和丰富的过程，使你能够获得数据驱动的洞察，并有效地提高客户保留率。
 
 ## 无缝集成和存储数据
 
@@ -74,18 +74,18 @@
 
 > 请在评论区分享你的想法，以便我们开始一些有趣的讨论！
 
-**[Abinaya Sundarraj](https://www.linkedin.com/in/abinaya-sundarraj/)** 在数据解决方案公司Xtract.io担任市场营销顾问。她是一位热衷于阅读的人，喜欢撰写有关数据在各个行业中作用的文章。她相信宇宙为那些真正渴望的人提供一切。
+**[Abinaya Sundarraj](https://www.linkedin.com/in/abinaya-sundarraj/)** 在数据解决方案公司 Xtract.io 担任市场营销顾问。她是一位热衷于阅读的人，喜欢撰写有关数据在各个行业中作用的文章。她相信宇宙为那些真正渴望的人提供一切。
 
 ### 更多相关主题
 
-+   [选择下一个数据科学工作前需牢记的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [选择下一个数据科学工作前需牢记的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [如何紧跟AI世界的最新动态](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)
++   [如何紧跟 AI 世界的最新动态](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)
 
-+   [6个令人惊叹的ChatGPT扩展，适用于任何地方](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)
++   [6 个令人惊叹的 ChatGPT 扩展，适用于任何地方](https://www.kdnuggets.com/2023/04/6-chatgpt-mindblowing-extensions-anywhere.html)
 
-+   [5个项目创意，让数据科学家保持最新](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
++   [5 个项目创意，让数据科学家保持最新](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
 
-+   [如何保持Python的最新状态](https://www.kdnuggets.com/2022/06/stay-current-python.html)
++   [如何保持 Python 的最新状态](https://www.kdnuggets.com/2022/06/stay-current-python.html)
 
-+   [适用于项目的前5大数据管理工具](https://www.kdnuggets.com/top-5-data-management-tools-for-your-projects)
++   [适用于项目的前 5 大数据管理工具](https://www.kdnuggets.com/top-5-data-management-tools-for-your-projects)

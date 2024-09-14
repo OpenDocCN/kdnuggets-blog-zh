@@ -1,12 +1,12 @@
 # 数据工程技术 2021
 
-> 原文：[https://www.kdnuggets.com/2021/09/data-engineering-technologies-2021.html](https://www.kdnuggets.com/2021/09/data-engineering-technologies-2021.html)
+> 原文：[`www.kdnuggets.com/2021/09/data-engineering-technologies-2021.html`](https://www.kdnuggets.com/2021/09/data-engineering-technologies-2021.html)
 
-[评论](#comments)
+评论
 
 **由 [Tech Ninja, @techninjathere](https://twitter.com/techninjahere) 提供，开源、分析和云计算爱好者**。
 
-![顶级数据工程技术](../Images/43b9c9e04c41ffcc5c542c5c5c43b24d.png)
+![顶级数据工程技术](img/43b9c9e04c41ffcc5c542c5c5c43b24d.png)
 
 *顶级工程技术的部分列表，图片由 KDnuggets 创建。*
 
@@ -106,11 +106,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

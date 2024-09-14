@@ -1,8 +1,8 @@
-# 8种最佳Python图像处理工具
+# 8 种最佳 Python 图像处理工具
 
-> 原文：[https://www.kdnuggets.com/2022/11/8-best-python-image-manipulation-tools.html](https://www.kdnuggets.com/2022/11/8-best-python-image-manipulation-tools.html)
+> 原文：[`www.kdnuggets.com/2022/11/8-best-python-image-manipulation-tools.html`](https://www.kdnuggets.com/2022/11/8-best-python-image-manipulation-tools.html)
 
-![8种最佳Python图像处理工具](../Images/372aee84ad468f4279f6ff8a321402b0.png)
+![8 种最佳 Python 图像处理工具](img/372aee84ad468f4279f6ff8a321402b0.png)
 
 编辑器提供的图像
 
@@ -12,35 +12,35 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您在IT方面的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您在 IT 方面的工作
 
 * * *
 
 图像处理对于揭示任何图像中的潜在数据非常有用。它帮助你从图像中提取、操作和过滤数据。图像处理的主要目标是从图像中揭示一些有价值的信息。
 
-图像处理有各种应用，如图像锐化、图像修复、模式识别、视频处理等。大多数图像处理应用归属于[数据分析和数据科学](/2022/03/difference-data-analysts-data-scientists.html)。
+图像处理有各种应用，如图像锐化、图像修复、模式识别、视频处理等。大多数图像处理应用归属于数据分析和数据科学。
 
-当谈到数据分析时，我们脑海中浮现出的唯一语言是Python。由于其广泛的库，它也是图像处理的首选语言，这使得开发人员可以用简单的代码行执行复杂的操作。
+当谈到数据分析时，我们脑海中浮现出的唯一语言是 Python。由于其广泛的库，它也是图像处理的首选语言，这使得开发人员可以用简单的代码行执行复杂的操作。
 
-让我们看看一些主要用于图像处理的Python库。
+让我们看看一些主要用于图像处理的 Python 库。
 
-# 8种最佳Python图像处理工具
+# 8 种最佳 Python 图像处理工具
 
-这里列出了帮助你轻松处理图像的最佳Python库。它们都易于使用，并允许你提取图像中的基本数据。
+这里列出了帮助你轻松处理图像的最佳 Python 库。它们都易于使用，并允许你提取图像中的基本数据。
 
 ## 1\. OpenCV
 
-[OpenCV](https://www.google.com/search?client=safari&rls=en&q=OpenCV&ie=UTF-8&oe=UTF-8)（开源计算机视觉库）是一个受欢迎的[Python数据可视化库](/2021/09/5-awesome-data-visualization-libraries-python.html)。这是一个开源库，适用于多种编程语言，包括C++、Java以及汇编语言。
+[OpenCV](https://www.google.com/search?client=safari&rls=en&q=OpenCV&ie=UTF-8&oe=UTF-8)（开源计算机视觉库）是一个受欢迎的 Python 数据可视化库。这是一个开源库，适用于多种编程语言，包括 C++、Java 以及汇编语言。
 
-这个库是由Intel使用[C++编程语言](https://www.techgeekbuzz.com/tutorial/c++/cpp-tutorial/)开发的，旨在实时计算机视觉。它非常适合执行计算密集型的计算机视觉程序。
+这个库是由 Intel 使用[C++编程语言](https://www.techgeekbuzz.com/tutorial/c++/cpp-tutorial/)开发的，旨在实时计算机视觉。它非常适合执行计算密集型的计算机视觉程序。
 
 **安装**
 
-由于OpenCV是一个第三方库，我们可以通过Python的pip包管理工具为我们的Python环境安装它。
+由于 OpenCV 是一个第三方库，我们可以通过 Python 的 pip 包管理工具为我们的 Python 环境安装它。
 
 ```py
 pip install opencv-python
@@ -67,17 +67,17 @@ cv2.destroyAllWindows()
 
 **输出**
 
-![8种最佳Python图像处理工具](../Images/73d9d95c94375239109d558a3bb7cd2d.png)
+![8 种最佳 Python 图像处理工具](img/73d9d95c94375239109d558a3bb7cd2d.png)
 
 ## 2. Pillow (PIL)
 
-[Pillow](https://pillow.readthedocs.io/en/stable/)是另一个流行的Python图像处理库。它是每个初学者可以入门的最基本的图像处理库。它也被称为PIL，即Python Imaging Library。
+[Pillow](https://pillow.readthedocs.io/en/stable/)是另一个流行的 Python 图像处理库。它是每个初学者可以入门的最基本的图像处理库。它也被称为 PIL，即 Python Imaging Library。
 
-PIL库附带不同的文件格式扩展，提供强大且复杂的功能以执行图像处理。如果我们将PIL与OpenCV进行比较，PIL是一个轻量级的库，功能较少，使得它对于刚刚进入图像处理领域的新Python开发者来说，学习和操作都比较容易。
+PIL 库附带不同的文件格式扩展，提供强大且复杂的功能以执行图像处理。如果我们将 PIL 与 OpenCV 进行比较，PIL 是一个轻量级的库，功能较少，使得它对于刚刚进入图像处理领域的新 Python 开发者来说，学习和操作都比较容易。
 
 **安装**
 
-PIL也是一个第三方开源库，可以使用**pip install**命令安装。
+PIL 也是一个第三方开源库，可以使用**pip install**命令安装。
 
 ```py
 pip install pillow 
@@ -85,7 +85,7 @@ pip install pillow
 
 **示例**
 
-使用Pillow在Python中将图像转换为灰度
+使用 Pillow 在 Python 中将图像转换为灰度
 
 ```py
 from PIL import Image
@@ -103,15 +103,15 @@ with Image.open("tesla.png") as im:
 
 **输出**
 
-![8种最佳Python图像处理工具](../Images/acc94708f34b5f569fb8274f39b066a4.png)
+![8 种最佳 Python 图像处理工具](img/acc94708f34b5f569fb8274f39b066a4.png)
 
 ## 3. Scikit Image
 
-[Scikit Images](https://scikit-image.org/)是一个以科学为导向的Python图像处理库。它设计用于使用Numpy和Scipy库处理图像。它包括各种科学算法，如分割、颜色空间操作、分析、形态学等。该库使用Python和C编程语言编写，适用于所有流行的操作系统，如Linux、macOS和Windows。
+[Scikit Images](https://scikit-image.org/)是一个以科学为导向的 Python 图像处理库。它设计用于使用 Numpy 和 Scipy 库处理图像。它包括各种科学算法，如分割、颜色空间操作、分析、形态学等。该库使用 Python 和 C 编程语言编写，适用于所有流行的操作系统，如 Linux、macOS 和 Windows。
 
 **安装**
 
-scikit-image是一个开源库，我们可以使用pip install命令进行安装。
+scikit-image 是一个开源库，我们可以使用 pip install 命令进行安装。
 
 ```py
 pip install scikit-image
@@ -119,7 +119,7 @@ pip install scikit-image
 
 **示例**
 
-使用scikit-image库将图像转换为灰度
+使用 scikit-image 库将图像转换为灰度
 
 ```py
 from skimage import io
@@ -142,15 +142,15 @@ io.show()
 
 **输出**
 
-![8种最佳Python图像处理工具](../Images/957734aa4d8b8ede75fd4ed137464bcd.png)
+![8 种最佳 Python 图像处理工具](img/957734aa4d8b8ede75fd4ed137464bcd.png)
 
 ## 4. NumPy
 
-[NumPy](https://numpy.org/)是最基本的Python科学计算库。它因引入多维数组或矩阵而闻名。它是一个专门的科学计算库。此外，它还附带广泛的数学功能，如数组、线性代数、基本统计操作、随机模拟、逻辑排序、搜索、形状操作等。
+[NumPy](https://numpy.org/)是最基本的 Python 科学计算库。它因引入多维数组或矩阵而闻名。它是一个专门的科学计算库。此外，它还附带广泛的数学功能，如数组、线性代数、基本统计操作、随机模拟、逻辑排序、搜索、形状操作等。
 
 **安装**
 
-再次安装NumPy时，我们可以使用pip install命令。
+再次安装 NumPy 时，我们可以使用 pip install 命令。
 
 ```py
 pip install numpy
@@ -158,7 +158,7 @@ pip install numpy
 
 **示例**
 
-使用numpy将图像转换为灰度
+使用 numpy 将图像转换为灰度
 
 ```py
 import numpy as np
@@ -182,13 +182,13 @@ plt.show()
 
 **输出**
 
-![8种最佳Python图像处理工具](../Images/b3747d949da9580420834eadb44255d8.png)
+![8 种最佳 Python 图像处理工具](img/b3747d949da9580420834eadb44255d8.png)
 
 ## 5. SciPy
 
-类似于Numpy，[SciPy](https://scipy.org/)也是一个科学计算库。由于它是作为NumPy库的扩展构建的，因此功能比Numpy更多。
+类似于 Numpy，[SciPy](https://scipy.org/)也是一个科学计算库。由于它是作为 NumPy 库的扩展构建的，因此功能比 Numpy 更多。
 
-Scipy提供了高级和复杂的命令和类用于[数据操作](/polls/2007/data_manipulation_tools.htm)和数据可视化。它涵盖了广泛的数据处理工具。此外，它还支持并行编程、从网络获取数据、数据驱动的子程序及其他数学功能。
+Scipy 提供了高级和复杂的命令和类用于数据操作和数据可视化。它涵盖了广泛的数据处理工具。此外，它还支持并行编程、从网络获取数据、数据驱动的子程序及其他数学功能。
 
 **安装**
 
@@ -222,7 +222,7 @@ plt.show()
 
 **输出**
 
-![8 款最佳 Python 图像处理工具](../Images/8cdbbe131684a72e8cc6c080016d3e49.png)
+![8 款最佳 Python 图像处理工具](img/8cdbbe131684a72e8cc6c080016d3e49.png)
 
 ## 6\. Mahotas
 
@@ -261,7 +261,7 @@ show()
 
 **输出**
 
-![8 款最佳 Python 图像处理工具](../Images/4947813649894ff55a28873608a48e92.png)
+![8 款最佳 Python 图像处理工具](img/4947813649894ff55a28873608a48e92.png)
 
 ## 7\. SimpleITK
 
@@ -292,7 +292,7 @@ plt.show()
 
 **输出**
 
-![8 款最佳 Python 图像处理工具](../Images/6ef5ff24e41b99439bacf1ee7adcb244.png)
+![8 款最佳 Python 图像处理工具](img/6ef5ff24e41b99439bacf1ee7adcb244.png)
 
 ## 8\. Matplotlib
 
@@ -326,7 +326,7 @@ plt.show()
 
 **输出**
 
-![8 款最佳 Python 图像处理工具](../Images/4908c98fbfa11d19d36786995f4eeded.png)
+![8 款最佳 Python 图像处理工具](img/4908c98fbfa11d19d36786995f4eeded.png)
 
 # 结论
 

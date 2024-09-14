@@ -1,8 +1,8 @@
 # 朴素贝叶斯算法：您需要了解的一切
 
-> 原文：[https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
+> 原文：[`www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html`](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
 
-![图示](../Images/15178d1596b6428dba58b29de1bb24dc.png)
+![图示](img/15178d1596b6428dba58b29de1bb24dc.png)
 
 [图片来源](https://blogs.oracle.com/datascience/introduction-to-bayesian-inference)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -34,9 +34,9 @@
 
 公式是：—
 
-![](../Images/38d8516f4eb2af2be4891493f2440dd7.png)
+![](img/38d8516f4eb2af2be4891493f2440dd7.png)
 
-这告诉我们：**P(A|B)**，即在**B发生**的情况下，**A发生的概率**，也称为后验概率。当我们知道**A发生**的情况下**B发生的概率**，写作**P(B|A)**，以及**A**单独发生的概率**P(A)**和**B**单独发生的概率**P(B)**。
+这告诉我们：**P(A|B)**，即在**B 发生**的情况下，**A 发生的概率**，也称为后验概率。当我们知道**A 发生**的情况下**B 发生的概率**，写作**P(B|A)**，以及**A**单独发生的概率**P(A)**和**B**单独发生的概率**P(B)**。
 
 > 简单来说，贝叶斯定理是一种在知道某些其他概率的情况下找出概率的方法。
 
@@ -56,7 +56,7 @@
 
 数据集表示如下。
 
-![](../Images/f61877acf2f7db8957d71371a5dab39e.png)
+![](img/f61877acf2f7db8957d71371a5dab39e.png)
 
 关于我们的数据集，算法所做的假设的概念可以理解为：
 
@@ -66,59 +66,59 @@
 
 **注意：** Naïve Bayes 进行的假设在实际情况中通常不正确。独立假设从未正确，但在实践中往往有效。**因此称为‘Naïve’。**
 
-在我们的数据集中，**我们需要根据汽车的特征来分类汽车是否被盗**。列表示这些特征，而行表示单独的条目。如果我们取数据集的第一行，可以观察到，如果颜色是红色，类型是运动型，来源是国内的，则汽车被盗。因此，我们要分类一个红色的国内SUV是否被盗。请注意，我们的数据集中没有红色国内SUV的示例。
+在我们的数据集中，**我们需要根据汽车的特征来分类汽车是否被盗**。列表示这些特征，而行表示单独的条目。如果我们取数据集的第一行，可以观察到，如果颜色是红色，类型是运动型，来源是国内的，则汽车被盗。因此，我们要分类一个红色的国内 SUV 是否被盗。请注意，我们的数据集中没有红色国内 SUV 的示例。
 
 根据此示例，贝叶斯定理可以重写为：
 
-![](../Images/491bf150482fb467a687e989d17a48e0.png)
+![](img/491bf150482fb467a687e989d17a48e0.png)
 
 变量 **y** 是类变量（被盗？），表示在给定条件下汽车是否被盗。变量 **X** 表示参数/特征。
 
 **X** 给出如下，
 
-![](../Images/5098e278c044fca5b820da7d14036542.png)
+![](img/5098e278c044fca5b820da7d14036542.png)
 
 这里 `x1, x2…, xn` 表示特征，即它们可以映射到颜色、类型和来源。通过替代 **X** 并使用链式法则展开，我们得到，
 
-![](../Images/05da7419b18bc6aaa32873d8bf82d70c.png)
+![](img/05da7419b18bc6aaa32873d8bf82d70c.png)
 
 现在，你可以通过查看数据集来获得每个值并将其代入方程中。对于数据集中的所有条目，分母不变，它保持静态。因此，可以去掉分母，并引入比例。
 
-![](../Images/aba56792a913b70e32e66da097911256.png)
+![](img/aba56792a913b70e32e66da097911256.png)
 
 在我们的案例中，类变量(**y**)只有两个结果，即是或否。可能有多变量分类的情况。因此，我们需要找到具有最大概率的类变量(**y**)。
 
-![](../Images/0dd539563839c7e2949953bac013f521.png)
+![](img/0dd539563839c7e2949953bac013f521.png)
 
 使用上述函数，我们可以在给定预测变量/特征的情况下获得类别。
 
 后验概率 **P(y|X)** 可以通过首先为每个属性创建一个**频率表**来计算。然后，将频率表转换为**可能性表**，最后使用 Naïve Bayesian 方程计算每个类别的后验概率。具有最高后验概率的类别是预测的结果。以下是所有三个预测变量的频率和可能性表。
 
-![](../Images/9c4a78458a94dff92bd51ac51e0a03b1.png)
+![](img/9c4a78458a94dff92bd51ac51e0a03b1.png)
 
 “颜色”的频率和可能性表
 
-![](../Images/0c047cfd6ed5737207bb0b6e33027e3b.png)
+![](img/0c047cfd6ed5737207bb0b6e33027e3b.png)
 
 ‘类型’的频率和可能性表
 
-![](../Images/7ab1a4288ebc8d118b5ef013dac9b024.png)
+![](img/7ab1a4288ebc8d118b5ef013dac9b024.png)
 
 ‘来源’的频率和可能性表
 
-所以在我们的例子中，我们有3个预测变量**X**。
+所以在我们的例子中，我们有 3 个预测变量**X**。
 
-![](../Images/9ed65c1aa22a95c968245d0c7cae56ee.png)
+![](img/9ed65c1aa22a95c968245d0c7cae56ee.png)
 
-根据上述讨论的方程，我们可以计算后验概率P(Yes | X)为：
+根据上述讨论的方程，我们可以计算后验概率 P(Yes | X)为：
 
-![](../Images/6a8c6366be8f30f46f0d21dce86937fa.png)
+![](img/6a8c6366be8f30f46f0d21dce86937fa.png)
 
 和，P( No | X ):
 
-![](../Images/b3ef76ae68f128b5a95d1a296e75d03f.png)
+![](img/b3ef76ae68f128b5a95d1a296e75d03f.png)
 
-由于0.144 > 0.048，这意味着给定特征RED SUV和Domestic，我们的例子被分类为“NO”，即车辆未被盗。
+由于 0.144 > 0.048，这意味着给定特征 RED SUV 和 Domestic，我们的例子被分类为“NO”，即车辆未被盗。
 
 # 零频率问题
 
@@ -128,7 +128,7 @@
 
 例如，假设你的训练数据如下：
 
-![](../Images/b3f20887326fed468dc3fb94785fc6a2.png)
+![](img/b3f20887326fed468dc3fb94785fc6a2.png)
 
 ????(TimeZone=????????|Spam=????????????)=10/10=1
 
@@ -136,7 +136,7 @@
 
 然后，在使用这个表计算概率时，你应该对每个值加一：
 
-![](../Images/8b3e31ab9e54ae8594d2327b289cf2be.png)
+![](img/8b3e31ab9e54ae8594d2327b289cf2be.png)
 
 ????(TimeZone=????????|Spam=????????????)=11/12
 
@@ -144,7 +144,7 @@
 
 这就是我们如何避免得到零概率的方法。
 
-![XXXXX](../Images/a99e5ff71310dc4c74783a85d0df96b2.png)
+![XXXXX](img/a99e5ff71310dc4c74783a85d0df96b2.png)
 
 [图片来源](https://medium.com/@sanjeethboddi/naive-bayes-algorithm-from-scratch-715d7cc0de53)
 
@@ -162,11 +162,11 @@
 
 在高斯朴素贝叶斯中，与每个特征相关的连续值假设符合**高斯分布 (**[正态分布](https://en.wikipedia.org/wiki/Normal_distribution)**)**。当绘制时，它给出一个钟形曲线，该曲线关于特征值的均值对称，如下所示：
 
-![](../Images/5ad7a683c8b444baa0bd2551070994ee.png)
+![](img/5ad7a683c8b444baa0bd2551070994ee.png)
 
 特征的可能性假设为高斯分布，因此，条件概率由下式给出：
 
-![](../Images/21e23e25b324679a49299d08c41b1973.png)
+![](img/21e23e25b324679a49299d08c41b1973.png)
 
 现在，如果某些特征包含数值而不是类别，即高斯分布，会怎样呢？
 
@@ -174,13 +174,13 @@
 
 正态分布的概率密度函数由两个参数（均值和标准差）定义。
 
-![图示](../Images/a8f7e607f21f5691c12f91cffe63eb4d.png)
+![图示](img/a8f7e607f21f5691c12f91cffe63eb4d.png)
 
 [图片来源](https://www.saedsayad.com/naive_bayesian.htm)
 
 考虑高尔夫球的问题，这里唯一的预测变量是`湿度`，`是否打高尔夫？`是目标。使用上述公式，如果我们知道均值和标准差，就可以计算后验概率。
 
-![](../Images/82b9ee1aa4c68b8e7060314dbe13bdb0.png)
+![](img/82b9ee1aa4c68b8e7060314dbe13bdb0.png)
 
 # 案例研究：从头开始使用 Python 构建朴素贝叶斯分类器
 
@@ -200,19 +200,19 @@ train **=** pd.read_csv('./drive/My Drive/train.csv')
 print(train.head())test **=** pd.read_csv('./drive/My Drive/test.csv')
 ```
 
-![图示](../Images/3122d0c3be8f767d27374ffbdf4e08ba.png)
+![图示](img/3122d0c3be8f767d27374ffbdf4e08ba.png)
 
 训练数据集
 
 让我们看看真实的问题是什么样的。
 
-![图示](../Images/9f480898c8936c834ae51541304a0480.png)
+![图示](img/9f480898c8936c834ae51541304a0480.png)
 
 真实问题
 
 我们来看看虚伪的问题是什么样的。
 
-![图示](../Images/c956e19bcba69b1c8709e12ab7ca9520.png)
+![图示](img/c956e19bcba69b1c8709e12ab7ca9520.png)
 
 虚伪问题
 
@@ -236,13 +236,13 @@ print(train.head())test **=** pd.read_csv('./drive/My Drive/test.csv')
 
 **感谢阅读！**
 
-**[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是CirrusLabs的一名大数据开发工程师。他在电信、分析、销售、数据科学等多个领域有超过4年的工作经验，专注于多个大数据组件。
+**[Nagesh Singh Chauhan](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是 CirrusLabs 的一名大数据开发工程师。他在电信、分析、销售、数据科学等多个领域有超过 4 年的工作经验，专注于多个大数据组件。
 
 [原文](https://levelup.gitconnected.com/na%C3%AFve-bayes-algorithm-everything-you-need-to-know-9bf3104b78e5)。经授权转载。
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该知道的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该知道的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [高斯朴素贝叶斯算法解释](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)
 

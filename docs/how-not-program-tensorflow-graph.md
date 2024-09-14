@@ -1,10 +1,10 @@
 # 如何不编程 TensorFlow 图
 
-> 原文：[https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html](https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html)
+> 原文：[`www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html`](https://www.kdnuggets.com/2017/05/how-not-program-tensorflow-graph.html)
 
 **作者：亚伦·舒马赫，深度学习分析专家。**
 
-使用 Python 操作 TensorFlow 就像用 Python 编程 [另一台计算机](http://planspace.org/20170328-tensorflow_as_a_distributed_virtual_machine/)。一些 Python 语句构建你的 TensorFlow 程序，一些 Python 语句执行该程序，当然，还有一些 Python 语句完全不涉及 TensorFlow。对你构建的图保持思考可以帮助你避免混淆和性能陷阱。这里有一些考虑因素。![](../Images/e09c1745abd025c932b954fd964eedfb.png)
+使用 Python 操作 TensorFlow 就像用 Python 编程 [另一台计算机](http://planspace.org/20170328-tensorflow_as_a_distributed_virtual_machine/)。一些 Python 语句构建你的 TensorFlow 程序，一些 Python 语句执行该程序，当然，还有一些 Python 语句完全不涉及 TensorFlow。对你构建的图保持思考可以帮助你避免混淆和性能陷阱。这里有一些考虑因素。![](img/e09c1745abd025c932b954fd964eedfb.png)
 
 ### 避免拥有多个相同的操作
 
@@ -14,11 +14,11 @@ TensorFlow 中的许多方法会在计算图中创建操作，但不会执行它
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -69,7 +69,7 @@ TensorFlow 是不同的。
 >>> y = x + 1.0
 ```
 
-现在只有`x`是一个TensorFlow变量；`y`是一个`add`操作，如果我们运行它，它可以返回该加法的结果。
+现在只有`x`是一个 TensorFlow 变量；`y`是一个`add`操作，如果我们运行它，它可以返回该加法的结果。
 
 再比较一下。
 
@@ -87,11 +87,11 @@ TensorFlow 是不同的。
 >>> y = x + 1.0
 ```
 
-在这种情况下，`y`指的是TensorFlow图中的一个`add`操作，然后`y`被重新分配指向图中的另一个`add`操作。由于`y`现在只指向第二个`add`，我们没有方便的方法来处理第一个。然而这两个`add`操作仍然存在于图中，并且会继续存在。
+在这种情况下，`y`指的是 TensorFlow 图中的一个`add`操作，然后`y`被重新分配指向图中的另一个`add`操作。由于`y`现在只指向第二个`add`，我们没有方便的方法来处理第一个。然而这两个`add`操作仍然存在于图中，并且会继续存在。
 
-（顺便提一下，Python用于定义类特定加法的机制[以及其他](http://www.python-course.eu/python3_magic_methods.php)，就是`+`如何用来创建TensorFlow操作的，这个机制很不错。）
+（顺便提一下，Python 用于定义类特定加法的机制[以及其他](http://www.python-course.eu/python3_magic_methods.php)，就是`+`如何用来创建 TensorFlow 操作的，这个机制很不错。）
 
-特别是如果你只是使用默认图并在常规REPL或笔记本中交互运行，你可能会在图中留下大量被遗弃的操作。每次重新运行定义任何图操作的笔记本单元时，你不仅仅是在重新定义操作——你是在创建新的操作。
+特别是如果你只是使用默认图并在常规 REPL 或笔记本中交互运行，你可能会在图中留下大量被遗弃的操作。每次重新运行定义任何图操作的笔记本单元时，你不仅仅是在重新定义操作——你是在创建新的操作。
 
 在实验时，拥有几个额外的操作通常是可以的。但事情可能会失控。
 
@@ -100,11 +100,11 @@ TensorFlow 是不同的。
     x = x + 1
 ```
 
-如果`x`是一个NumPy数组，或者只是一个普通的Python数字，这将以常量内存运行，并得出一个值。
+如果`x`是一个 NumPy 数组，或者只是一个普通的 Python 数字，这将以常量内存运行，并得出一个值。
 
-但如果`x`是一个TensorFlow变量，那么在你的TensorFlow图中将会有超过一百万个操作，仅仅是定义计算而已，甚至*没有执行*。
+但如果`x`是一个 TensorFlow 变量，那么在你的 TensorFlow 图中将会有超过一百万个操作，仅仅是定义计算而已，甚至*没有执行*。
 
-TensorFlow的一个直接修复方法是使用`tf.assign`操作，它提供了更符合你期望的行为。
+TensorFlow 的一个直接修复方法是使用`tf.assign`操作，它提供了更符合你期望的行为。
 
 ```py
 est
@@ -113,7 +113,7 @@ for _ in range(1e6):
     session.run(increment_x)
 ```
 
-这个修订版本在循环内部不创建任何操作，这通常是一个好建议。TensorFlow确实有[控制流构造](https://www.tensorflow.org/api_guides/python/control_flow_ops)，包括[while循环](https://www.tensorflow.org/api_docs/python/tf/while_loop)。但只有在真正需要时才使用这些。
+这个修订版本在循环内部不创建任何操作，这通常是一个好建议。TensorFlow 确实有[控制流构造](https://www.tensorflow.org/api_guides/python/control_flow_ops)，包括[while 循环](https://www.tensorflow.org/api_docs/python/tf/while_loop)。但只有在真正需要时才使用这些。
 
 在创建操作时要注意，只创建你需要的操作。尽量将操作创建与操作执行区分开来。在交互式实验之后，最终进入一个状态，可能是在脚本中，只创建你需要的操作。
 
@@ -125,14 +125,14 @@ for _ in range(1e6):
  >>> many_ones = np.ones((1000, 1000))
 ```
 
-在NumPy数组`many_ones`中有一百万个1。我们可以将它们加起来。
+在 NumPy 数组`many_ones`中有一百万个 1。我们可以将它们加起来。
 
 ```py
  >>> many_ones.sum()
 ## 1000000.0
 ```
 
-如果我们用TensorFlow将它们加起来呢？
+如果我们用 TensorFlow 将它们加起来呢？
 
 ```py
  >>> session.run(tf.reduce_sum(many_ones))
@@ -175,7 +175,7 @@ TensorFlow 操作类似于函数。这在操作具有一个或多个占位符输
 
 * * *
 
-在 [Twitter](https://twitter.com/planarrowspace) | [LinkedIn](https://www.linkedin.com/in/ajschumacher) | [Google+](https://plus.google.com/112658546306232777448/) | [GitHub](https://github.com/ajschumacher) | [email](mailto:ajschumacher@gmail.com) 上找到 [Aaron](http://planspace.org/aaron/)
+在 [Twitter](https://twitter.com/planarrowspace) | [LinkedIn](https://www.linkedin.com/in/ajschumacher) | [Google+](https://plus.google.com/112658546306232777448/) | [GitHub](https://github.com/ajschumacher) | email 上找到 [Aaron](http://planspace.org/aaron/)
 
 [原文](http://planspace.org/20170404-how_not_to_program_the_tensorflow_graph/)。经许可转载。
 
@@ -183,11 +183,11 @@ TensorFlow 操作类似于函数。这在操作具有一个或多个占位符输
 
 **相关:**
 
-+   [如何在 TensorFlow 中构建递归神经网络](/2017/04/build-recurrent-neural-network-tensorflow.html)
++   如何在 TensorFlow 中构建递归神经网络
 
-+   [最温和的 Tensorflow 入门介绍 – 第一部分](/2016/08/gentlest-introduction-tensorflow-part-1.html)
++   最温和的 Tensorflow 入门介绍 – 第一部分
 
-+   [Python 深度学习框架概述](/2017/02/python-deep-learning-frameworks-overview.html)
++   Python 深度学习框架概述
 
 ### 更多相关话题
 

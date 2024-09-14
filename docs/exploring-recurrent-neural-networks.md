@@ -1,14 +1,14 @@
 # 探索递归神经网络
 
-> 原文：[https://www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html](https://www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html)
+> 原文：[`www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html`](https://www.kdnuggets.com/2017/12/exploring-recurrent-neural-networks.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 Packtpub 提供。**
 
 **在本教程中，选自** [**《Theano 深度学习实战》**](https://www.packtpub.com/big-data-and-business-intelligence/hands-deep-learning-tensorflow?utm_source=kdnuggets&utm_medium=referral&utm_campaign=outreach) **由 Dan Van Boxel 编写，我们将探索递归神经网络。我们将从基础知识开始，然后通过一个激励性的天气建模问题来研究 RNNs。我们还将在 TensorFlow 中实现并训练一个 RNN。**
 
-![](../Images/84d853461087d54cfc8652330bb59d7b.png)
+![](img/84d853461087d54cfc8652330bb59d7b.png)
 
 在一个典型的模型中，你有一些 X 输入特征和一些 Y 输出你想要预测。我们通常认为不同的训练样本是独立的观测值。因此，数据点一的特征不应该影响数据点二的预测。但如果我们的数据点是相关的呢？最常见的例子是每个数据点，**Xt**，表示在时间**t**收集的特征。自然地，我们可以假设时间 t 和 t+1 的特征对时间 t+1 的预测都很重要。换句话说，历史是重要的。
 
@@ -236,7 +236,7 @@ for i in tqdm(range(epochs), ascii=True):
 
 由于这是一个虚拟问题，我们不必过于担心模型的准确性。这里的目标只是查看 RNN 的工作原理。你可以看到它的运行方式就像任何 TensorFlow 模型一样：
 
-![](../Images/e065c883fa632039fd0f6cae87a3439f.png)
+![](img/e065c883fa632039fd0f6cae87a3439f.png)
 
 如果你查看准确率，你会发现它做得很好；远远超过 25% 的随机猜测，但仍然有很多需要学习的地方。
 
@@ -254,11 +254,11 @@ for i in tqdm(range(epochs), ascii=True):
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

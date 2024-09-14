@@ -1,8 +1,8 @@
 # 使用 R 在 Cloud Run 上进行无服务器机器学习
 
-> 原文：[https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html](https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html)
+> 原文：[`www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html`](https://www.kdnuggets.com/2020/02/serverless-machine-learning-r-cloud-run.html)
 
-[评论](#comments)
+评论
 
 **作者 [Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/)，数据科学家，计量经济学家**
 
@@ -36,29 +36,29 @@ Cloud run 并不是万能的。查看 [需求规格说明](https://cloud.google
 
 ### Twitter 项目 ????
 
-![](../Images/42efd06b01197b8373875beb2914f7ee.png)
+![](img/42efd06b01197b8373875beb2914f7ee.png)
 
 这是我有趣的 serverless-ml 周末项目：一个分析 Twitter 领域的应用程序。我想生成两个图表：一个比较推文频率随时间变化的图表，以及另一个对推文进行情感分析的图表。作为额外奖励，我决定使其具有交互性——这意味着既提供静态图表，也提供交互式 plotly 结果。
 
-我使用的主要包有：rtweet, dplyr, ggplot2, tidytext, tidyr 和 stringr。如果你对 tidytext 不熟悉，可以查看我之前的一些帖子，例如2017年的这篇，分析了[食谱书](https://www.timlrx.com/2017/06/24/thesis-thursday-4-analysing-recipes/)。
+我使用的主要包有：rtweet, dplyr, ggplot2, tidytext, tidyr 和 stringr。如果你对 tidytext 不熟悉，可以查看我之前的一些帖子，例如 2017 年的这篇，分析了[食谱书](https://www.timlrx.com/2017/06/24/thesis-thursday-4-analysing-recipes/)。
 
-rtweet 提供了一个方便的 API 来收集用户时间线信息。你需要一个 Twitter API 账户才能开始使用。这是一个简单的过程，你可以在这里注册： [https://developer.twitter.com/en/apply-for-access](https://developer.twitter.com/en/apply-for-access)。
+rtweet 提供了一个方便的 API 来收集用户时间线信息。你需要一个 Twitter API 账户才能开始使用。这是一个简单的过程，你可以在这里注册： [`developer.twitter.com/en/apply-for-access`](https://developer.twitter.com/en/apply-for-access)。
 
 注意这四个密钥/令牌。它们应该作为环境变量保存在你的系统中。²这四个密钥对应于 tweet.R 文件中的 API_KEY、API_SECRET_KEY、ACCESS_TOKEN 和 ACCESS_SECRET，并将在需要时以编程方式检索。
 
-![](../Images/66daf56784262c7a5fe71ed865665954.png)
+![](img/66daf56784262c7a5fe71ed865665954.png)
 
 ### [Tweet.R](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/(https://github.com/timlrx/serverless-ml/blob/master/twitter-r/tweet.R))
 
 不会深入探讨数据科学代码，但你可以在 [这里](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/tweet.R)查看。重要的是，我们将每一部分封装成函数，然后在主 API 路由文件 (app.R) 中调用这些函数。
 
-对于情感分析，我们通过字典匹配来统计正面和负面词汇的数量。³ 词汇字典来自于[Bing Liu et al.](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)。这是否需要外部数据库？实际上不需要 - 外部依赖项或数据文件是可以的，只要它们是无状态的。我们可以将其与我们的docker文件一起打包，或者在这种情况下，它随tidytext包一起安装！
+对于情感分析，我们通过字典匹配来统计正面和负面词汇的数量。³ 词汇字典来自于[Bing Liu et al.](https://www.cs.uic.edu/~liub/FBS/sentiment-analysis.html)。这是否需要外部数据库？实际上不需要 - 外部依赖项或数据文件是可以的，只要它们是无状态的。我们可以将其与我们的 docker 文件一起打包，或者在这种情况下，它随 tidytext 包一起安装！
 
 ### [App.R](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/app.R)
 
-这个文件包含了服务逻辑。我们使用[plumber package](https://www.rplumber.io/)，它允许我们通过一些标记在R中创建REST API。你可以通过使用`#* @param`标记来指定查询参数，并指定返回的输出类型，如`#* @png`用于静态图像，或`#* @html`用于html。
+这个文件包含了服务逻辑。我们使用[plumber package](https://www.rplumber.io/)，它允许我们通过一些标记在 R 中创建 REST API。你可以通过使用`#* @param`标记来指定查询参数，并指定返回的输出类型，如`#* @png`用于静态图像，或`#* @html`用于 html。
 
-作为额外的好处，还有一个开箱即用的选项来使htmlwidgets工作（`#* @serializer htmlwidget`）。这使得我们的plotly结果展示变得非常简单。我决定为每个图创建两个路径，一个静态的和一个plotly交互式的。所以总共有四个路径：
+作为额外的好处，还有一个开箱即用的选项来使 htmlwidgets 工作（`#* @serializer htmlwidget`）。这使得我们的 plotly 结果展示变得非常简单。我决定为每个图创建两个路径，一个静态的和一个 plotly 交互式的。所以总共有四个路径：
 
 +   /frequency (ggplot)
 
@@ -68,19 +68,19 @@ rtweet 提供了一个方便的 API 来收集用户时间线信息。你需要�
 
 +   /html/sentiment (plotly)
 
-这些函数都接受两个参数：`n` - 推文数量，以及`users`，这可以是一个用逗号分隔的用户ID列表，我们将通过rtweet查询Twitter API获取相关信息。
+这些函数都接受两个参数：`n` - 推文数量，以及`users`，这可以是一个用逗号分隔的用户 ID 列表，我们将通过 rtweet 查询 Twitter API 获取相关信息。
 
 ### [Server.R](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/server.R)
 
-这段代码启动了我们的plumber服务器。我们通过环境变量（PORT）推断端口。
+这段代码启动了我们的 plumber 服务器。我们通过环境变量（PORT）推断端口。
 
-这就是R代码的全部内容。现在你应该有一个可以在本地计算机上运行的应用程序了。接下来，我们将深入探讨ML-ops的复杂细节 ????‍♀。这涉及到使用Docker打包我们的依赖项，并将其部署到云端。
+这就是 R 代码的全部内容。现在你应该有一个可以在本地计算机上运行的应用程序了。接下来，我们将深入探讨 ML-ops 的复杂细节 ????‍♀。这涉及到使用 Docker 打包我们的依赖项，并将其部署到云端。
 
 ### Docker
 
-Docker是一个将不同的软件、配置和环境打包成容器的平台，这些容器整洁地封装了你的应用程序。最终用户只需要列出安装步骤以构建镜像，然后可以在docker平台上运行????。
+Docker 是一个将不同的软件、配置和环境打包成容器的平台，这些容器整洁地封装了你的应用程序。最终用户只需要列出安装步骤以构建镜像，然后可以在 docker 平台上运行????。
 
-为了启动配置，我们在官方的[r-base image](https://hub.docker.com/_/r-base)上进行构建。这是一个Linux镜像，我们需要安装一些额外的依赖项以使应用程序正常工作，即rtweet的libssl-dev和处理htmlwidgets的pandoc。这是我们的[Dockerfile](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/Dockerfile)的开始：
+为了启动配置，我们在官方的[r-base image](https://hub.docker.com/_/r-base)上进行构建。这是一个 Linux 镜像，我们需要安装一些额外的依赖项以使应用程序正常工作，即 rtweet 的 libssl-dev 和处理 htmlwidgets 的 pandoc。这是我们的[Dockerfile](https://github.com/timlrx/serverless-ml/blob/master/twitter-r/Dockerfile)的开始：
 
 ```py
 FROM r-base
@@ -91,7 +91,7 @@ RUN apt-get update -qq && apt-get install -y \
   pandoc
 ```
 
-接下来，我们将目录中的脚本复制到容器中的应用程序目录，并使用Rscript函数安装必要的R库：
+接下来，我们将目录中的脚本复制到容器中的应用程序目录，并使用 Rscript 函数安装必要的 R 库：
 
 ```py
 WORKDIR /usr/src/app
@@ -104,7 +104,7 @@ RUN Rscript -e "install.packages('plumber')"
 RUN Rscript -e "install.packages(c('rtweet', 'dplyr', 'ggplot2', 'plotly', 'tidytext', 'tidyr', 'stringr'))"
 ```
 
-我们暴露端口8000（这主要用于文档），并在容器启动时运行服务器：
+我们暴露端口 8000（这主要用于文档），并在容器启动时运行服务器：
 
 ```py
 EXPOSE 8000
@@ -113,7 +113,7 @@ EXPOSE 8000
 CMD [ "Rscript", "server.R"]
 ```
 
-让我们构建docker镜像并运行它：
+让我们构建 docker 镜像并运行它：
 
 ```py
 docker build -t ${IMAGE} .
@@ -141,9 +141,9 @@ gcloud alpha run deploy \
     --allow-unauthenticated
 ```
 
-我们添加了`allow-unauthenticated`来允许公共流量，并增加了内存，因为默认内存太低。你可以先从默认的256MB开始，但如果遇到任何错误，请检查 cloud run 日志，这对调试任何错误非常有用。如果一切顺利，你应该会看到这样的图像：
+我们添加了`allow-unauthenticated`来允许公共流量，并增加了内存，因为默认内存太低。你可以先从默认的 256MB 开始，但如果遇到任何错误，请检查 cloud run 日志，这对调试任何错误非常有用。如果一切顺利，你应该会看到这样的图像：
 
-![](../Images/b85f4c428b7b6a3c3679eb5f06c07c18.png)
+![](img/b85f4c428b7b6a3c3679eb5f06c07c18.png)
 
 我们的推特项目现在成功托管在 Cloud Run 上！
 
@@ -151,33 +151,33 @@ gcloud alpha run deploy \
 
 有趣的部分来了 - 尝试一下，实时可视化和分析推特数据吧！
 
-你可以尝试我的托管 cloud run 服务，使用上面列出的4个端点之一：[https://twitter-r-cvdvxo3vga-uc.a.run.app/](https://twitter-r-cvdvxo3vga-uc.a.run.app/)
+你可以尝试我的托管 cloud run 服务，使用上面列出的 4 个端点之一：[`twitter-r-cvdvxo3vga-uc.a.run.app/`](https://twitter-r-cvdvxo3vga-uc.a.run.app/)
 
 一些有趣的例子！
 
 ### 奥巴马推文的频率
 
-在推特上拥有1.12亿粉丝的最受关注人物实际上并不常常发推 ????：
+在推特上拥有 1.12 亿粉丝的最受关注人物实际上并不常常发推 ????：
 
-[https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama](https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama)
+[`twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama`](https://twitter-r-cvdvxo3vga-uc.a.run.app/frequency?n=500&users=BarackObama)
 
-![](../Images/7f9e48e5df9219eff0f80ab9524e028d.png)
+![](img/7f9e48e5df9219eff0f80ab9524e028d.png)
 
-### BBCworld和realDonaldTrump的情感分析对比
+### BBCworld 和 realDonaldTrump 的情感分析对比
 
 伤心！⁵
 
-[https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump](https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump)
+[`twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump`](https://twitter-r-cvdvxo3vga-uc.a.run.app/sentiment?n=1000&users=BBCWorld,realDonaldTrump)
 
-![](../Images/42efd06b01197b8373875beb2914f7ee.png)
+![](img/42efd06b01197b8373875beb2914f7ee.png)
 
 ### 政治家和娱乐圈人士有什么共同之处？
 
 它们 overwhelmingly positive（在这里我们使用我们的 plotly html 端点）
 
-[https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow](https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow)
+[`twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow`](https://twitter-r-cvdvxo3vga-uc.a.run.app/html/sentiment?n=500&users=narendramodi,TheEllenShow)
 
-![](../Images/4a5195bfb62dc19b985472e8f761d1d8.png)
+![](img/4a5195bfb62dc19b985472e8f761d1d8.png)
 
 ### 结论
 
@@ -187,35 +187,35 @@ gcloud alpha run deploy \
 
 1.  如果你在 R 环境中，可以调用 `Sys.setenv()` 或者直接使用 CLI 导出。
 
-1.  [https://www.tidytextmining.com/sentiment.html](https://www.tidytextmining.com/sentiment.html)[↩](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/#fnref3)
+1.  [`www.tidytextmining.com/sentiment.html`](https://www.tidytextmining.com/sentiment.html)[↩](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/#fnref3)
 
 1.  我花了大约 15 分钟来构建这个镜像。这是 R 的一个缺点 - 它对于数据分析非常方便，但对生产环境不太友好。
 
-1.  从 realDonaldTrump 抓取数据存在一些问题 ([https://github.com/ropensci/rtweet/issues/382](https://github.com/ropensci/rtweet/issues/382))
+1.  从 realDonaldTrump 抓取数据存在一些问题 ([`github.com/ropensci/rtweet/issues/382`](https://github.com/ropensci/rtweet/issues/382))
 
 1.  只要使用量没有突然激增并超过免费套餐限制，我会尽可能保持它运行。
 
-**简介：[Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/)** 是一名数据科学家和计量经济学家。Timothy 有兴趣将数据科学技术应用于解决商业问题。他为多个公司提供咨询，涉及大数据分析、消费者研究和图论等项目。在工作之外，他常常思考如何在生产环境中更好地部署模型，并在 [https://www.timlrx.com](https://www.timlrx.com) 上博客分享他的最新发现。
+**简介：[Timothy Lin](https://www.linkedin.com/in/timothy-lin-0600ba141/)** 是一名数据科学家和计量经济学家。Timothy 有兴趣将数据科学技术应用于解决商业问题。他为多个公司提供咨询，涉及大数据分析、消费者研究和图论等项目。在工作之外，他常常思考如何在生产环境中更好地部署模型，并在 [`www.timlrx.com`](https://www.timlrx.com) 上博客分享他的最新发现。
 
 [原文](https://www.timlrx.com/2020/01/22/serverless-machine-learning-with-r-on-cloud-run/)。经许可转载。
 
 **相关：**
 
-+   [R 用户的客户细分](/2019/09/customer-segmentation-r-users.html)
++   R 用户的客户细分
 
-+   [R 中 K-最近邻的初学者指南：从零到英雄](/2020/01/beginners-guide-nearest-neighbors-r.html)
++   R 中 K-最近邻的初学者指南：从零到英雄
 
-+   [2019 年 Stackoverflow 调查中的 R 用户薪资](/2019/08/r-users-salaries-2019-stackoverflow-survey.html)
++   2019 年 Stackoverflow 调查中的 R 用户薪资
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 工作
 
 * * *
 

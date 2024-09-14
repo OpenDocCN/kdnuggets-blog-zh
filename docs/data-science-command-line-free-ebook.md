@@ -1,8 +1,8 @@
 # 《命令行中的数据科学：免费电子书》
 
-> 原文：[https://www.kdnuggets.com/2022/03/data-science-command-line-free-ebook.html](https://www.kdnuggets.com/2022/03/data-science-command-line-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2022/03/data-science-command-line-free-ebook.html`](https://www.kdnuggets.com/2022/03/data-science-command-line-free-ebook.html)
 
-![《命令行中的数据科学：免费电子书》](../Images/90ccb246904acc15de2fedfba66f9f03.png)
+![《命令行中的数据科学：免费电子书》](img/90ccb246904acc15de2fedfba66f9f03.png)
 
 图片由作者提供
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 # 关于本书
 
-![《命令行中的数据科学：免费电子书》](../Images/51ce6b69067f5143a738e9a34376e4e9.png)
+![《命令行中的数据科学：免费电子书》](img/51ce6b69067f5143a738e9a34376e4e9.png)
 
 [获取免费电子书](https://datascienceatthecommandline.com/) | [在 GitHub 上收藏](https://github.com/jeroenjanssens/data-science-at-the-command-line) | [在亚马逊上购买](https://www.amazon.com/Data-Science-Command-Line-Explore-dp-1492087912/dp/1492087912)
 
@@ -46,9 +46,9 @@
 
 1.  多语言数据科学
 
-在这本书中，你将学习如何使用API、数据集和电子表格来提取数据。接着，进行数据清理和操作。之后，你将学习如何使用**rush**进行数据分析和可视化。你还将学会管理数据科学工作流程、创建并行管道以及构建机器学习模型（回归、分类）。除了核心主题，你还会学到如何利用Unix的强大工具提升你进行快速数据分析的效率。
+在这本书中，你将学习如何使用 API、数据集和电子表格来提取数据。接着，进行数据清理和操作。之后，你将学习如何使用**rush**进行数据分析和可视化。你还将学会管理数据科学工作流程、创建并行管道以及构建机器学习模型（回归、分类）。除了核心主题，你还会学到如何利用 Unix 的强大工具提升你进行快速数据分析的效率。
 
-我喜欢如何使用**csvsql**对CSV文件运行SQL查询，以及如何使用**rush**绘制各种图表。我从未见过任何机器学习工程师使用命令行工具进行数据预处理、创建模型和评估结果。当我第一次读到建模部分时，我感到怀疑，我知道他们必须使用Python或R脚本进行训练，但令我惊讶的是，作者使用了**vw**进行训练和评估。
+我喜欢如何使用**csvsql**对 CSV 文件运行 SQL 查询，以及如何使用**rush**绘制各种图表。我从未见过任何机器学习工程师使用命令行工具进行数据预处理、创建模型和评估结果。当我第一次读到建模部分时，我感到怀疑，我知道他们必须使用 Python 或 R 脚本进行训练，但令我惊讶的是，作者使用了**vw**进行训练和评估。
 
 # 特殊功能
 
@@ -56,7 +56,7 @@
 
 ## 数据分析
 
-一行代码的数据分析结合强大工具和SQL查询是我从未想象过的。这本书解释了多种提取和分析数据的方法，如使用grep、header、trim和csvsql。
+一行代码的数据分析结合强大工具和 SQL 查询是我从未想象过的。这本书解释了多种提取和分析数据的方法，如使用 grep、header、trim 和 csvsql。
 
 ```py
 $ seq 5 | header -a val | csvsql --query "SELECT SUM(val) AS sum FROM stdin"
@@ -74,7 +74,7 @@ $ rush plot --x tip --fill time --geom density tips.csv > plot-density.png
 $ display plot-density.png
 ```
 
-![数据科学命令行：免费电子书](../Images/76980780b41a54ade9f4f22406b9a43a.png)
+![数据科学命令行：免费电子书](img/76980780b41a54ade9f4f22406b9a43a.png)
 
 ## 模型训练
 
@@ -84,7 +84,7 @@ $ display plot-density.png
 $ skll -l classify.cfg 2>/dev/null
 ```
 
-这些工具接受多个参数，并使用相同的算法训练模型。没有什么不同，只是我们用一行脚本完成所有这些。在Python中，我们需要写至少20-30行代码才能获得类似的结果。
+这些工具接受多个参数，并使用相同的算法训练模型。没有什么不同，只是我们用一行脚本完成所有这些。在 Python 中，我们需要写至少 20-30 行代码才能获得类似的结果。
 
 ```py
 $ < output/wine_summary.tsv csvsql --query "SELECT learner_name, accuracy FROM s
@@ -97,12 +97,12 @@ tdin ORDER BY accuracy DESC" | csvlook -I
 │ DecisionTreeClassifier │ 0.984375  │
 ```
 
-## GNU并行管道
+## GNU 并行管道
 
 如果你正在处理大型文件或下载大型数据集，**parallel**将减少运行任何计算过程的时间。它将允许你并行化和分配命令及管道。**parallel**的最佳之处在于，你不需要修改当前的工具就能运行并行任务。
 
 ```py
-$ seq 0 2 100 | parallel "echo {}^2 | bc" | trim
+$ seq 0 2 100 | parallel "echo {}² | bc" | trim
 0
 4
 16

@@ -1,54 +1,54 @@
-# 使用HuggingFace微调BERT进行推文分类
+# 使用 HuggingFace 微调 BERT 进行推文分类
 
-> 原文：[https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
+> 原文：[`www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html`](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
 
-![使用HuggingFace微调BERT进行推文分类](../Images/224338a7a594756eb34ef183d9c25857.png)
+![使用 HuggingFace 微调 BERT 进行推文分类](img/224338a7a594756eb34ef183d9c25857.png)
 
 双向编码器表示模型（BERT）是由谷歌开发的基于变换器的最先进模型。它可以进行预训练，然后针对特定任务进行微调。我们将在本文中看到微调的实际操作。
 
-我们将对BERT进行分类任务的微调。任务是对与COVID相关的推文进行情感分类。
+我们将对 BERT 进行分类任务的微调。任务是对与 COVID 相关的推文进行情感分类。
 
-在这里，我们使用HuggingFace库来微调模型。HuggingFace使整个过程从文本预处理到训练变得简单。
+在这里，我们使用 HuggingFace 库来微调模型。HuggingFace 使整个过程从文本预处理到训练变得简单。
 
 ## BERT
 
-BERT在BooksCorpus数据集和英文维基百科上进行了预训练。它在十一项自然语言处理任务上获得了最先进的结果。
+BERT 在 BooksCorpus 数据集和英文维基百科上进行了预训练。它在十一项自然语言处理任务上获得了最先进的结果。
 
-BERT在两个任务上同时进行训练
+BERT 在两个任务上同时进行训练
 
 +   掩蔽语言建模（MLM）——15%的标记被掩蔽，训练以预测掩蔽的单词
 
-+   下一句预测（NSP）——给定两个句子A和B，预测B是否跟在A后面
++   下一句预测（NSP）——给定两个句子 A 和 B，预测 B 是否跟在 A 后面
 
-BERT旨在通过在所有层中共同条件化左右上下文，从未标记的文本中预训练深度双向表示。
+BERT 旨在通过在所有层中共同条件化左右上下文，从未标记的文本中预训练深度双向表示。
 
-结果是，预训练的BERT模型只需通过一个额外的输出层就可以微调，创建适用于广泛任务的最先进模型，例如问答和语言推理，而无需对任务特定的架构进行 substantial modifications。
+结果是，预训练的 BERT 模型只需通过一个额外的输出层就可以微调，创建适用于广泛任务的最先进模型，例如问答和语言推理，而无需对任务特定的架构进行 substantial modifications。
 
 ## 数据集
 
-我们使用的是[**Kaggle**](https://www.kaggle.com/datatattle/covid-19-nlp-text-classification)上提供的Coronavirus推文NLP——文本分类数据集。
+我们使用的是[**Kaggle**](https://www.kaggle.com/datatattle/covid-19-nlp-text-classification)上提供的 Coronavirus 推文 NLP——文本分类数据集。
 
-数据集有两个文件：Corona_NLP_test.csv（4万条记录）和Corona_NLP_test.csv（4千条记录）。
+数据集有两个文件：Corona_NLP_test.csv（4 万条记录）和 Corona_NLP_test.csv（4 千条记录）。
 
 这些是训练数据的前五条记录：
 
-![使用HuggingFace微调BERT进行推文分类](../Images/b8b81d6ecd8191ec1fcf6b2468cfe7b2.png)
+![使用 HuggingFace 微调 BERT 进行推文分类](img/b8b81d6ecd8191ec1fcf6b2468cfe7b2.png)
 
-如你所见，我们的数据中有5个**特征**：UserName，ScreenName Location，TweetAt，OriginalTweet，Sentiment，但我们只对其中的2个感兴趣，即**OriginalTweet**包含实际推文，**Sentiment**是我们推文的标签。
+如你所见，我们的数据中有 5 个**特征**：UserName，ScreenName Location，TweetAt，OriginalTweet，Sentiment，但我们只对其中的 2 个感兴趣，即**OriginalTweet**包含实际推文，**Sentiment**是我们推文的标签。
 
-这些推文被分为5类——‘中性’，‘积极’，‘极端负面’，‘负面’，‘极端积极’。因此，**标签**的数量是5。
+这些推文被分为 5 类——‘中性’，‘积极’，‘极端负面’，‘负面’，‘极端积极’。因此，**标签**的数量是 5。
 
 ## 数据加载与预处理
 
-我们将使用HuggingFace库进行这个项目。我们需要安装两个模块：
+我们将使用 HuggingFace 库进行这个项目。我们需要安装两个模块：
 
 ```py
 pip install transformerspip install datasets
 ```
 
-+   变换器：HuggingFace对变换器的实现。我们可以下载各种预训练模型
++   变换器：HuggingFace 对变换器的实现。我们可以下载各种预训练模型
 
-+   数据集：加载数据集，同时也可以下载HuggingFace hub上提供的不同数据集
++   数据集：加载数据集，同时也可以下载 HuggingFace hub 上提供的不同数据集
 
 ```py
 from datasets import load_dataset
@@ -138,11 +138,11 @@ datasets 库提供了广泛的指标。我们在这里使用准确率。我们�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

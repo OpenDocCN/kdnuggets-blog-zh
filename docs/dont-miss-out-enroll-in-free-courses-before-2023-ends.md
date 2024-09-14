@@ -1,28 +1,28 @@
-# 不要错过！2023年结束前报名免费课程
+# 不要错过！2023 年结束前报名免费课程
 
-> 原文：[https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
+> 原文：[`www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends`](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
 
-![不要错过！2023年结束前报名免费课程](../Images/22a36f75a857306f1aefaa91c6e282ea.png)
+![不要错过！2023 年结束前报名免费课程](img/22a36f75a857306f1aefaa91c6e282ea.png)
 
 作者提供的图片
 
-年底是人们最为活跃的时候。您有最后的冲刺去实现年度目标，以便为2024年做准备。无论是开始新的技术行业职业还是提升当前技能，自我发展都很重要。
+年底是人们最为活跃的时候。您有最后的冲刺去实现年度目标，以便为 2024 年做准备。无论是开始新的技术行业职业还是提升当前技能，自我发展都很重要。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 
 * * *
 
 技术的持续进步导致了行业的激烈竞争。各行各业的人们都希望参与其中。该博客旨在为您提供一份优秀的免费课程列表，帮助您实现目标。我将按主题将其分解，便于您导航到您的关注领域。
 
-这些免费课程都可以在YouTube上找到，仿佛您报名了真正的课程。在YouTube上找到合适的内容很困难，因为信息量巨大！希望这篇文章能使您的搜索更加轻松，下面我们来详细了解一下。
+这些免费课程都可以在 YouTube 上找到，仿佛您报名了真正的课程。在 YouTube 上找到合适的内容很困难，因为信息量巨大！希望这篇文章能使您的搜索更加轻松，下面我们来详细了解一下。
 
 # 机器学习
 
@@ -36,7 +36,7 @@
 
 **3\. 康奈尔大学技术学院 CS 5787: 应用机器学习**
 
-链接：[应用机器学习（康奈尔大学技术学院 CS 5787，2020秋季）](https://www.youtube.com/playlist?list=PL2UML_KCiC0UlY7iCQDSiGDMovaupqc83)
+链接：[应用机器学习（康奈尔大学技术学院 CS 5787，2020 秋季）](https://www.youtube.com/playlist?list=PL2UML_KCiC0UlY7iCQDSiGDMovaupqc83)
 
 **4\. 与机器学习交朋友**
 
@@ -158,11 +158,11 @@
 
 祝学习愉快！
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家，兼职技术写作员以及KDnuggets的社区经理。她特别感兴趣于提供数据科学职业建议或教程，以及数据科学的理论知识。她也希望探索人工智能如何/能如何有利于人类生命的延续。作为一名热衷学习者，她希望拓宽自己的技术知识和写作技能，同时帮助引导他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家，兼职技术写作员以及 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程，以及数据科学的理论知识。她也希望探索人工智能如何/能如何有利于人类生命的延续。作为一名热衷学习者，她希望拓宽自己的技术知识和写作技能，同时帮助引导他人。
 
 ### 更多相关话题
 
-+   [2022年注册的8个最佳数据科学课程，助你职业晋升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
++   [2022 年注册的 8 个最佳数据科学课程，助你职业晋升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
 
 +   [免费注册四年计算机科学学位项目](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
 
@@ -170,6 +170,6 @@
 
 +   [在参加任何免费数据科学课程之前阅读此内容](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
 
-+   [2023年顶级免费数据科学在线课程](https://www.kdnuggets.com/2023/03/top-free-data-science-online-courses-2023.html)
++   [2023 年顶级免费数据科学在线课程](https://www.kdnuggets.com/2023/03/top-free-data-science-online-courses-2023.html)
 
-+   [在神经网络之前尝试的10件简单事](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [在神经网络之前尝试的 10 件简单事](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)

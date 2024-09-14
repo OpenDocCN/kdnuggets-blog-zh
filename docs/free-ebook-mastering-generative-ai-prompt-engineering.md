@@ -1,30 +1,30 @@
-# 掌握生成式AI和提示工程：免费电子书
+# 掌握生成式 AI 和提示工程：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2023/04/free-ebook-mastering-generative-ai-prompt-engineering.html](https://www.kdnuggets.com/2023/04/free-ebook-mastering-generative-ai-prompt-engineering.html)
+> 原文：[`www.kdnuggets.com/2023/04/free-ebook-mastering-generative-ai-prompt-engineering.html`](https://www.kdnuggets.com/2023/04/free-ebook-mastering-generative-ai-prompt-engineering.html)
 
-[![掌握生成式AI和提示工程：免费电子书](../Images/b35335ac21dca32e0968b5db259e8c5c.png)](https://bit.ly/Mastering_Generative_AI_Prompt_Engineering_Data_Science_Horizons)
+![掌握生成式 AI 和提示工程：免费电子书](https://bit.ly/Mastering_Generative_AI_Prompt_Engineering_Data_Science_Horizons)
 
-[掌握生成式AI和提示工程：数据科学家的实用指南](https://bit.ly/Mastering_Generative_AI_Prompt_Engineering_Data_Science_Horizons) 电子书封面
+[掌握生成式 AI 和提示工程：数据科学家的实用指南](https://bit.ly/Mastering_Generative_AI_Prompt_Engineering_Data_Science_Horizons) 电子书封面
 
-自2022年11月底发布以来，ChatGPT已经主导了个人、职业和公共讨论。每个人都在谈论它，它能做什么，我们如何利用它……以及为什么我们应该对它感到担忧。
+自 2022 年 11 月底发布以来，ChatGPT 已经主导了个人、职业和公共讨论。每个人都在谈论它，它能做什么，我们如何利用它……以及为什么我们应该对它感到担忧。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-GPT代表生成式预训练变换器，指的是一类在现有文本数据上进行训练的大型语言模型（LLMs），这些模型能够统计性地预测词序列中的下一个词或标记。这样描述起来确实没什么特别的。但GPT已经对我们的生活、工作和娱乐产生了深远的影响。我甚至不需要在这里引用任何例子，因为你已经熟悉了许多实例。
+GPT 代表生成式预训练变换器，指的是一类在现有文本数据上进行训练的大型语言模型（LLMs），这些模型能够统计性地预测词序列中的下一个词或标记。这样描述起来确实没什么特别的。但 GPT 已经对我们的生活、工作和娱乐产生了深远的影响。我甚至不需要在这里引用任何例子，因为你已经熟悉了许多实例。
 
-GPT（和其他LLMs）并不是唯一的生成式AI。在它们出现之前，已经有自然语言处理模型能够执行类似的任务，有些今天仍在使用。然而，在这种任务的最前沿现在完全是GPT的领域，它们在最近几个月迅速流行，尽管它们在ChatGPT爆发之前以较小的形式存在了多年。
+GPT（和其他 LLMs）并不是唯一的生成式 AI。在它们出现之前，已经有自然语言处理模型能够执行类似的任务，有些今天仍在使用。然而，在这种任务的最前沿现在完全是 GPT 的领域，它们在最近几个月迅速流行，尽管它们在 ChatGPT 爆发之前以较小的形式存在了多年。
 
-文本并不是唯一的生成模型。你可能听说过并使用过图像生成模型，如DALL-E、Stable Diffusion和Midjourney。它们同样依赖于精心设计的提示来进行有效的生成。
+文本并不是唯一的生成模型。你可能听说过并使用过图像生成模型，如 DALL-E、Stable Diffusion 和 Midjourney。它们同样依赖于精心设计的提示来进行有效的生成。
 
 简而言之，生成型 AI —— 以及驱动它们的提示 —— 无处不在。但除了基础知识外，你对这些了解多少？也许你会发现一本简明、聚焦的电子书在这些主题上很有用。如果是这样，**[掌握生成型 AI 和提示工程：数据科学家的实用指南](https://bit.ly/Mastering_Generative_AI_Prompt_Engineering_Data_Science_Horizons)** 来自 [Data Science Horizons](https://datasciencehorizons.com/) 是一个很好的起点。
 

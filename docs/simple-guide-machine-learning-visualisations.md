@@ -1,8 +1,8 @@
 # 机器学习可视化简易指南
 
-> 原文：[https://www.kdnuggets.com/2022/04/simple-guide-machine-learning-visualisations.html](https://www.kdnuggets.com/2022/04/simple-guide-machine-learning-visualisations.html)
+> 原文：[`www.kdnuggets.com/2022/04/simple-guide-machine-learning-visualisations.html`](https://www.kdnuggets.com/2022/04/simple-guide-machine-learning-visualisations.html)
 
-![机器学习可视化简易指南](../Images/ad2eca1e3eec3967c7ed1edf0895eed3.png)
+![机器学习可视化简易指南](img/ad2eca1e3eec3967c7ed1edf0895eed3.png)
 
 残差图。图像由作者提供。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -32,7 +32,7 @@
 
 混淆矩阵是一种简单的方式，用于直观地评估分类器的预测正确频率。
 
-为了说明混淆矩阵，我使用了一个称为“糖尿病”的数据集。该数据集包含患者的一些特征，如体重指数、2小时血清胰岛素测量值和年龄，并有一列指示患者是否被检测出糖尿病。目标是利用这些数据构建一个可以预测糖尿病阳性结果的模型。
+为了说明混淆矩阵，我使用了一个称为“糖尿病”的数据集。该数据集包含患者的一些特征，如体重指数、2 小时血清胰岛素测量值和年龄，并有一列指示患者是否被检测出糖尿病。目标是利用这些数据构建一个可以预测糖尿病阳性结果的模型。
 
 以下代码通过 Scikit-learn API 导入该数据集。
 
@@ -48,7 +48,7 @@
 
 混淆矩阵在网格中可视化了这些可能结果的计数。下面的代码使用 Yellowbrick ConfusionMatrix 可视化工具生成模型的混淆矩阵。
 
-![机器学习可视化简易指南](../Images/6a41109335f5e3a03d774ed006d491ce.png)
+![机器学习可视化简易指南](img/6a41109335f5e3a03d774ed006d491ce.png)
 
 混淆矩阵。图片由作者提供。
 
@@ -62,7 +62,7 @@
 
 下面的代码使用 Yellowbrick 构建 ROC 曲线。
 
-![机器学习可视化简易指南](../Images/0284deff5900162eddc40e2e3a1695a1.png)
+![机器学习可视化简易指南](img/0284deff5900162eddc40e2e3a1695a1.png)
 
 ROC 曲线。图片由作者提供。
 
@@ -86,7 +86,7 @@ ROC 曲线并不总是评估分类器的最佳方法。如果类别不平衡（�
 
 下面的代码使用 Yellowbrick 库生成糖尿病分类器的精确度-召回率曲线。
 
-![机器学习可视化简易指南](../Images/a563822c4ad11c893f50bfe4d2f3d6e7.png)
+![机器学习可视化简易指南](img/a563822c4ad11c893f50bfe4d2f3d6e7.png)
 
 精确率-召回率曲线。图像由作者提供。
 
@@ -100,7 +100,7 @@ Yellowbrick 库还包含了一组用于分析聚类算法的可视化工具。�
 
 在对数据进行聚类之前，我们可以使用流行的肘部法来找到最佳的集群数目。Yellowbrick 为此提供了方法。
 
-![机器学习可视化简易指南](../Images/3b42e140a3ce6ffb0803f67d3061f1bc.png)
+![机器学习可视化简易指南](img/3b42e140a3ce6ffb0803f67d3061f1bc.png)
 
 肘部法。图像由作者提供。
 
@@ -108,11 +108,11 @@ Yellowbrick 库还包含了一组用于分析聚类算法的可视化工具。�
 
 现在让我们为数据集绘制集群间图，选择两个集群。
 
-![机器学习可视化简易指南](../Images/80473aa0345a1b9fe6584bd96b466349.png)
+![机器学习可视化简易指南](img/80473aa0345a1b9fe6584bd96b466349.png)
 
 集群间距离图。图像由作者提供。
 
-从中我们可以看到两个集群之间有很大的分离。会员分布表明一个集群有165个观测值，而另一个有603个。这与糖尿病数据集中两个类别的平衡相近，分别为268和500个观测值。
+从中我们可以看到两个集群之间有很大的分离。会员分布表明一个集群有 165 个观测值，而另一个有 603 个。这与糖尿病数据集中两个类别的平衡相近，分别为 268 和 500 个观测值。
 
 # 残差图
 
@@ -124,7 +124,7 @@ Yellowbrick 库还包含了一组用于分析聚类算法的可视化工具。�
 
 下面的代码生成一个简单回归模型的残差图。
 
-![机器学习可视化简易指南](../Images/7784d09fedf565024201182e88143653.png)
+![机器学习可视化简易指南](img/7784d09fedf565024201182e88143653.png)
 
 残差图。图像由作者提供。
 
@@ -142,17 +142,17 @@ Yellowbrick Python 库提供了快速创建机器学习可视化的方法，适�
 
 如果你想了解更多关于单一评估指标的内容，我以前写过一篇文章涵盖了分类评估指标，还有一篇关于回归的文章。
 
-***   [衡量分类性能的8个指标](https://towardsdatascience.com/8-metrics-to-measure-classification-performance-984d9d7fd7aa)
+***   [衡量分类性能的 8 个指标](https://towardsdatascience.com/8-metrics-to-measure-classification-performance-984d9d7fd7aa)
 
-+   [回归的3个评估指标](https://towardsdatascience.com/3-evaluation-metrics-for-regression-80cb34cee0e8)
++   [回归的 3 个评估指标](https://towardsdatascience.com/3-evaluation-metrics-for-regression-80cb34cee0e8)
 
-**[丽贝卡·维克里](https://www.linkedin.com/in/rebecca-vickery/)** 是一位数据科学家，拥有丰富的数据分析、机器学习和数据工程经验。12年的 SQL 经验，4年以上的 Python、R、Apache Airflow 和 Google Analytics 经验。
+**[丽贝卡·维克里](https://www.linkedin.com/in/rebecca-vickery/)** 是一位数据科学家，拥有丰富的数据分析、机器学习和数据工程经验。12 年的 SQL 经验，4 年以上的 Python、R、Apache Airflow 和 Google Analytics 经验。
 
 [原文](https://towardsdatascience.com/a-simple-guide-to-machine-learning-visualisations-6c808ac925dd)。经许可转载。
 
 ### 更多相关内容
 
-+   [2022年技术专家薪资简易指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
++   [2022 年技术专家薪资简易指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
 
 +   [个性化 AI 简化指南：无需编码的 GPT 调整指南](https://www.kdnuggets.com/personalized-ai-made-simple-your-no-code-guide-to-adapting-gpts)
 
@@ -162,4 +162,4 @@ Yellowbrick Python 库提供了快速创建机器学习可视化的方法，适�
 
 +   [使用 BigQuery ML 简化数据分析师的机器学习](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)
 
-+   [神经网络前尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)**
++   [神经网络前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)**

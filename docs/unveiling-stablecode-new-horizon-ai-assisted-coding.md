@@ -1,8 +1,8 @@
 # 揭开 StableCode 的面纱：AI 辅助编码的新视野
 
-> 原文：[https://www.kdnuggets.com/2023/08/unveiling-stablecode-new-horizon-ai-assisted-coding](https://www.kdnuggets.com/2023/08/unveiling-stablecode-new-horizon-ai-assisted-coding)
+> 原文：[`www.kdnuggets.com/2023/08/unveiling-stablecode-new-horizon-ai-assisted-coding`](https://www.kdnuggets.com/2023/08/unveiling-stablecode-new-horizon-ai-assisted-coding)
 
-![揭开 StableCode 的面纱：AI 辅助编码的新视野](../Images/cc5e7417c80286067e2cebfb992edead.png)
+![揭开 StableCode 的面纱：AI 辅助编码的新视野](img/cc5e7417c80286067e2cebfb992edead.png)
 
 图片由作者使用 Midjourney 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -50,7 +50,7 @@ StableCode 的独特功能和技术承诺显著提升开发者的工作流程。
 
 通过提供一个智能且易于访问的平台，StableCode 有潜力降低新程序员的入门门槛，促进一个更具包容性和多样化的开发者社区。
 
-![揭示 StableCode：AI 辅助编码的新视野](../Images/bffacd44e5765ac81cc8bbea5b152142.png)
+![揭示 StableCode：AI 辅助编码的新视野](img/bffacd44e5765ac81cc8bbea5b152142.png)
 
 与相似规模（3B）的模型进行的 HumanEval 基准测试比较
 

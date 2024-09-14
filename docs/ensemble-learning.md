@@ -1,8 +1,8 @@
 # 多人智慧胜过单人：集成学习的案例
 
-> 原文：[https://www.kdnuggets.com/2019/09/ensemble-learning.html](https://www.kdnuggets.com/2019/09/ensemble-learning.html)
+> 原文：[`www.kdnuggets.com/2019/09/ensemble-learning.html`](https://www.kdnuggets.com/2019/09/ensemble-learning.html)
 
-[评论](#comments)
+评论
 
 **作者：[Jay Budzik](https://www.linkedin.com/in/jaybudzik/)，ZestFinance**。
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-银行和贷款机构越来越多地转向AI和机器学习，以自动化其核心功能，并在信贷承保和欺诈检测中做出更准确的预测。ML从业者可以利用越来越多的建模算法，例如简单决策树、随机森林、梯度提升机、深度神经网络和支持向量机。每种方法都有其优缺点，这也是为什么将ML算法结合起来往往能提供比任何单一ML方法更出色的预测性能。（这是我们在ZestFinance每个项目中的标准做法。）这种结合算法的方法被称为集成。
+银行和贷款机构越来越多地转向 AI 和机器学习，以自动化其核心功能，并在信贷承保和欺诈检测中做出更准确的预测。ML 从业者可以利用越来越多的建模算法，例如简单决策树、随机森林、梯度提升机、深度神经网络和支持向量机。每种方法都有其优缺点，这也是为什么将 ML 算法结合起来往往能提供比任何单一 ML 方法更出色的预测性能。（这是我们在 ZestFinance 每个项目中的标准做法。）这种结合算法的方法被称为集成。
 
-集成方法在许多场景下提高了泛化性能，包括分类、回归和类别概率估计。集成方法在具有挑战性的数据集上创造了众多世界纪录。一个集成模型赢得了[Netflix奖](https://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf)和[国际数据科学竞赛](https://mlwave.com/kaggle-ensembling-guide/)，几乎涵盖了所有领域，包括[信用风险预测](https://nycdatascience.com/blog/student-works/kaggle-predict-consumer-credit-default/)和[视频分类](https://www.kaggle.com/c/youtube8m-2018/discussion/62781)。虽然集成方法通常被认为比单一模型的预测功能表现更好，但它们 notoriously 难以设置、操作和解释。随着更好的建模、可解释性和监控工具的发明，这些挑战正在减少，我们将在这篇文章的最后讨论这些工具。
+集成方法在许多场景下提高了泛化性能，包括分类、回归和类别概率估计。集成方法在具有挑战性的数据集上创造了众多世界纪录。一个集成模型赢得了[Netflix 奖](https://www.netflixprize.com/assets/GrandPrize2009_BPC_BellKor.pdf)和[国际数据科学竞赛](https://mlwave.com/kaggle-ensembling-guide/)，几乎涵盖了所有领域，包括[信用风险预测](https://nycdatascience.com/blog/student-works/kaggle-predict-consumer-credit-default/)和[视频分类](https://www.kaggle.com/c/youtube8m-2018/discussion/62781)。虽然集成方法通常被认为比单一模型的预测功能表现更好，但它们 notoriously 难以设置、操作和解释。随着更好的建模、可解释性和监控工具的发明，这些挑战正在减少，我们将在这篇文章的最后讨论这些工具。
 
 ### 集成模型如何实现更好的性能
 
@@ -36,27 +36,27 @@
 
 +   在**装袋（bagging）**中，我们使用[自助采样](https://en.wikipedia.org/wiki/Bootstrapping_(statistics))来获取用于训练一组基础模型的数据子集。自助采样是使用逐渐增大的随机样本，直到预测准确性达到递减回报。每个样本用于训练一个单独的决策树，并对每个模型的结果进行聚合。对于分类任务，每个模型对结果进行投票。在回归任务中，模型结果取平均。具有低偏差但高方差的基础模型非常适合用于装袋。[随机森林](https://www.stat.berkeley.edu/~breiman/randomforest2001.pdf)，即装袋的决策树组合，是这一方法的经典例子。
 
-![](../Images/e9e7fadf6c3c4ac89ad29189f35eb079.png)
+![](img/e9e7fadf6c3c4ac89ad29189f35eb079.png)
 
 +   在**提升（boosting）**中，我们通过将建模努力集中于导致更多错误的数据（即关注困难的数据）来提高性能。我们训练一系列模型，对早期迭代中被错误分类的示例给予更多权重。与装袋（bagging）一样，分类任务通过加权多数投票来解决，回归任务则通过加权求和来得出最终预测。具有低方差但高偏差的基础模型非常适合用于提升。[梯度提升](https://www.kdd.org/kdd2016/papers/files/rfp0697-chenAemb.pdf)是这一方法的一个著名例子。
 
-![](../Images/095036a5951d8ca57b5d4fb86307e42e.png)
+![](img/095036a5951d8ca57b5d4fb86307e42e.png)
 
 +   在**堆叠**中，我们创建一个集成函数，将多个基础模型的输出组合成一个单一的分数。基础级模型基于完整的数据集进行训练，然后其输出作为输入特征来训练集成函数。通常，集成函数是基础模型分数的简单线性组合。
 
-![](../Images/db8f766123f78a6b59bb8d51927afefd.png)
+![](img/db8f766123f78a6b59bb8d51927afefd.png)
 
-+   在ZestFinance，我们更喜欢一种更强大的方法，称为**深度堆叠**，它使用堆叠集成与非线性集成函数，这些函数同时将模型分数和输入数据作为输入。这些方法有助于揭示子模型之间更深层次的关系，并通过根据每个子模型的优势来学习何时应用每个子模型，从而比简单的线性堆叠集成具有更高的准确性。深度堆叠允许模型根据特定的输入变量（如产品细分、收入带或营销渠道）选择正确的子模型权重，以进一步提高性能。
++   在 ZestFinance，我们更喜欢一种更强大的方法，称为**深度堆叠**，它使用堆叠集成与非线性集成函数，这些函数同时将模型分数和输入数据作为输入。这些方法有助于揭示子模型之间更深层次的关系，并通过根据每个子模型的优势来学习何时应用每个子模型，从而比简单的线性堆叠集成具有更高的准确性。深度堆叠允许模型根据特定的输入变量（如产品细分、收入带或营销渠道）选择正确的子模型权重，以进一步提高性能。
 
-![](../Images/346c03a047c218c3521c41cbdb0c29a1.png)
+![](img/346c03a047c218c3521c41cbdb0c29a1.png)
 
 ### 真实世界信用风险模型的结果
 
-为了展示集成学习的卓越表现，我们建立了一系列二元分类模型，以预测从过去三年内发放的汽车贷款数据库中的违约情况。贷款数据包括超过100,000名借款人和超过1,100个特征。
+为了展示集成学习的卓越表现，我们建立了一系列二元分类模型，以预测从过去三年内发放的汽车贷款数据库中的违约情况。贷款数据包括超过 100,000 名借款人和超过 1,100 个特征。
 
-竞争是在六个基础机器学习模型之间进行的：四个XGBoost模型和两个神经网络模型，这些模型使用来自不同信用局数据集的特征构建，并结合一个集成模型，该模型使用神经网络堆叠这六个基础模型。
+竞争是在六个基础机器学习模型之间进行的：四个 XGBoost 模型和两个神经网络模型，这些模型使用来自不同信用局数据集的特征构建，并结合一个集成模型，该模型使用神经网络堆叠这六个基础模型。
 
-为了评估模型的准确性，我们测量了它们在验证数据上的[AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)和[KS](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)分数。AUC（接收器工作特征曲线下面积）用于衡量模型的假阳性和假阴性率，而KS（Kolmogorov–Smirnov检验的简称）用于比较数据分布。较高的数值与更好的业务结果相关。
+为了评估模型的准确性，我们测量了它们在验证数据上的[AUC](https://en.wikipedia.org/wiki/Receiver_operating_characteristic#Area_under_the_curve)和[KS](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)分数。AUC（接收器工作特征曲线下面积）用于衡量模型的假阳性和假阴性率，而 KS（Kolmogorov–Smirnov 检验的简称）用于比较数据分布。较高的数值与更好的业务结果相关。
 
 以下是每个模型在预测准确性和通过减少损失节省的美元方面的表现，与[逻辑回归基准模型](https://www.celent.com/system/media_documents/documents/794/651/760/original/557191332.pdf)相比。
 
@@ -70,9 +70,9 @@
 | **ANN 1** | 0.750 (7%) | 0.376 (19%) | $16M (19%) |
 | **ANN 2** | 0.786 (2%) | 0.430 (4%) | $18M (13%) |
 
-我们的集成模型产生了最高的AUC（0.803），这意味着80%的情况下，我们的集成模型将随机的优质申请人排在随机的劣质申请人之上。集成模型的AUC比最佳的XGBoost和神经网络模型高出2%，这听起来可能不多，但AUC是对数刻度的，所以即使是小幅度的增加也比它们看起来的影响要大（类似于地震的里氏震中）。这个5亿美元的贷款业务通过使用集成模型相比于单一的XGBoost或神经网络模型每年将节省300万美元。
+我们的集成模型产生了最高的 AUC（0.803），这意味着 80%的情况下，我们的集成模型将随机的优质申请人排在随机的劣质申请人之上。集成模型的 AUC 比最佳的 XGBoost 和神经网络模型高出 2%，这听起来可能不多，但 AUC 是对数刻度的，所以即使是小幅度的增加也比它们看起来的影响要大（类似于地震的里氏震中）。这个 5 亿美元的贷款业务通过使用集成模型相比于单一的 XGBoost 或神经网络模型每年将节省 300 万美元。
 
-集成方法的优势不仅限于预测准确性。它们还通过随着时间的推移提高稳定性来惠及业务。为了验证这一点，我们使用验证集计算了集成模型和子模型在六个月期间的每日AUC分数。集成模型在这段时间内的AUC方差比表现最佳的神经网络模型低3%，比表现最佳的XGBoost模型低21%。更好的稳定性导致业务结果的可预测性更高。
+集成方法的优势不仅限于预测准确性。它们还通过随着时间的推移提高稳定性来惠及业务。为了验证这一点，我们使用验证集计算了集成模型和子模型在六个月期间的每日 AUC 分数。集成模型在这段时间内的 AUC 方差比表现最佳的神经网络模型低 3%，比表现最佳的 XGBoost 模型低 21%。更好的稳定性导致业务结果的可预测性更高。
 
 ### 集成方法的挑战
 
@@ -80,7 +80,7 @@
 
 ***工程复杂性***
 
-我们上面提到的那个？[即使是Netflix也无法投入生产。](https://www.wired.com/2012/04/netflix-prize-costs/) 技术依赖、运行时性能和模型验证都是在生产中使用这些模型的实际挑战。我们从头开始设计了ZAML软件工具来管理这些工程复杂性，我们很自豪地拥有许多世界级的集成模型在生产中运行。
+我们上面提到的那个？[即使是 Netflix 也无法投入生产。](https://www.wired.com/2012/04/netflix-prize-costs/) 技术依赖、运行时性能和模型验证都是在生产中使用这些模型的实际挑战。我们从头开始设计了 ZAML 软件工具来管理这些工程复杂性，我们很自豪地拥有许多世界级的集成模型在生产中运行。
 
 为集成模型结果提供准确解释尤其具有挑战性。许多可解释性方法依赖于模型，并且不[做出有问题的假设。](https://www.zestfinance.com/blog/part-deux-why-not-just-use-shap) 深度堆叠的集成模型使情况更加复杂，因为每个模型可能是连续的或离散的，这两种不同类型的函数的组合对于即使是最先进的分析技术也是一个挑战。
 

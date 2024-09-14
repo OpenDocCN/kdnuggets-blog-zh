@@ -1,8 +1,8 @@
 # 最佳 Instagram 账号推荐：数据科学、机器学习与人工智能
 
-> 原文：[https://www.kdnuggets.com/2022/08/best-instagram-accounts-follow-data-science-machine-learning-ai.html](https://www.kdnuggets.com/2022/08/best-instagram-accounts-follow-data-science-machine-learning-ai.html)
+> 原文：[`www.kdnuggets.com/2022/08/best-instagram-accounts-follow-data-science-machine-learning-ai.html`](https://www.kdnuggets.com/2022/08/best-instagram-accounts-follow-data-science-machine-learning-ai.html)
 
-![最佳 Instagram 账号推荐：数据科学、机器学习与人工智能](../Images/15e8178333f45acb0d4def9ca978e0ea.png)
+![最佳 Instagram 账号推荐：数据科学、机器学习与人工智能](img/15e8178333f45acb0d4def9ca978e0ea.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

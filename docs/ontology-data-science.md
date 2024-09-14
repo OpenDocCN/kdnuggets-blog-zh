@@ -1,8 +1,8 @@
 # 本体论与数据科学
 
-> 原文：[https://www.kdnuggets.com/2019/01/ontology-data-science.html](https://www.kdnuggets.com/2019/01/ontology-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/01/ontology-data-science.html`](https://www.kdnuggets.com/2019/01/ontology-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![图](../Images/5a92221cc81797c770df3745bb7dfa82.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![图](img/5a92221cc81797c770df3745bb7dfa82.png)
 
 照片来源：Valentin Antonucci，Pexels
 
@@ -12,37 +12,37 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 ### 本体论（哲学部分）
 
-![](../Images/0850c2e46d2d1569324d9babf6cabd5a.png)
+![](img/0850c2e46d2d1569324d9babf6cabd5a.png)
 
 简单来说，本体论可以说是对存在的事物的研究。但这个定义还有另一部分，这部分将在接下来的章节中对我们有所帮助，那就是本体论通常也包括有关**存在实体的最一般特征和关系**的问题。
 
 本体论为存在的事物打开了新门。让我给你一个例子。
 
-![](../Images/33d91bb7f61a5e0f559bcf0cd88dc1ec.png)
+![](img/33d91bb7f61a5e0f559bcf0cd88dc1ec.png)
 
-量子力学开辟了对现实和自然中“存在”的新视角。在20世纪的一些物理学家看来，量子形式主义中根本没有现实。在另一极端，有许多量子物理学家持相反观点：即单一演化的量子态完全描述了实际的现实，令人震惊的是，几乎所有的量子备选态必须始终继续共存（处于叠加态）。因此，这为“存在”在自然界中的“事物”打开了全新的视角和理解。
+量子力学开辟了对现实和自然中“存在”的新视角。在 20 世纪的一些物理学家看来，量子形式主义中根本没有现实。在另一极端，有许多量子物理学家持相反观点：即单一演化的量子态完全描述了实际的现实，令人震惊的是，几乎所有的量子备选态必须始终继续共存（处于叠加态）。因此，这为“存在”在自然界中的“事物”打开了全新的视角和理解。
 
 但让我们回到定义中的实体关系部分。有时，当我们谈论实体及其关系时，本体论被称为**形式本体论**。这些理论试图给出某些实体属性和关系的精确数学表述。这样的理论通常提出关于这些实体的公理，这些公理用某种基于形式逻辑系统的形式语言表达。
 
 这将使我们能够进行一个**量子跳跃**到文章的下一部分。
 
-![](../Images/26c5993caac461d69fe7e4e3182949b0.png)
+![](img/26c5993caac461d69fe7e4e3182949b0.png)
 
-[https://xkcd.com/1240/](https://xkcd.com/1240/)
+[`xkcd.com/1240/`](https://xkcd.com/1240/)
 
 ### 本体论（信息与计算部分）
 
-![](../Images/ca20e7f8d594465392d5671756bcf193.png)
+![](img/ca20e7f8d594465392d5671756bcf193.png)
 
 如果我们重新回顾上述形式本体论的定义，然后考虑数据和信息，我们可以建立一个框架来研究数据及其与其他数据的关系。在这个框架中，我们以特别有用的方式表示信息。以特定形式本体论表示的信息可以更容易地被自动化信息处理访问，如何做到这一点是计算机科学（如数据科学）中的一个活跃研究领域。这里形式本体论的使用是**代表性的**。它是一个表示信息的框架，因此无论所使用的形式理论是否真正描述了一个实体领域，它都可以在代表性上成功。
 
@@ -60,13 +60,13 @@
 
 这里是解释上述段落的图示方式：
 
-![](../Images/01e660f880ea4150e775e16ae913a626.png)
+![](img/01e660f880ea4150e775e16ae913a626.png)
 
-[https://www.ontotext.com/knowledgehub/fundamentals/what-are-ontologies/](https://www.ontotext.com/knowledgehub/fundamentals/what-are-ontologies/)
+[`www.ontotext.com/knowledgehub/fundamentals/what-are-ontologies/`](https://www.ontotext.com/knowledgehub/fundamentals/what-are-ontologies/)
 
 ### **数据库建模与本体论**
 
-![](../Images/5e2c748d903aa55c5ac40787da148515.png)
+![](img/5e2c748d903aa55c5ac40787da148515.png)
 
 目前，大多数采用数据建模语言（如 SQL）的技术都是使用“构建模型，然后使用模型”的僵化思维方式设计的。
 
@@ -76,11 +76,11 @@
 
 相比之下，本体论语言中的所有数据建模语句（以及其他一切）本质上是增量的。事后增强或修改数据模型可以通过修改概念轻松实现。
 
-### 从RDBS到知识图谱
+### 从 RDBS 到知识图谱
 
-![](../Images/8a3d5567734ae8de7050205516f865e5.png)
+![](img/8a3d5567734ae8de7050205516f865e5.png)
 
-到目前为止，我发现的将数据湖转变为智能数据湖的最简单框架是Anzo。通过这个，你可以迈出向完全连接的企业数据结构的第一步。
+到目前为止，我发现的将数据湖转变为智能数据湖的最简单框架是 Anzo。通过这个，你可以迈出向完全连接的企业数据结构的第一步。
 
 > *数据结构是支持公司所有数据的平台。它如何管理、描述、结合和普遍访问。这个平台由企业知识图谱构成，以创建一个统一且一致的数据环境。*
 
@@ -96,53 +96,53 @@
 
 因此，如果你将这些好处与基于本体论构建的语义层结合起来，你可以将数据从这种状态：
 
-![](../Images/59e5f6949c449a4155240f43a0977785.png)
+![](img/59e5f6949c449a4155240f43a0977785.png)
 
-[https://www.slideshare.net/camsemantics/the-year-of-the-graph](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
+[`www.slideshare.net/camsemantics/the-year-of-the-graph`](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
 
 转变为这种状态
 
-![](../Images/05a2362530afbe47cceeaf268e179b4c.png)
+![](img/05a2362530afbe47cceeaf268e179b4c.png)
 
-[https://www.slideshare.net/camsemantics/the-year-of-the-graph](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
+[`www.slideshare.net/camsemantics/the-year-of-the-graph`](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
 
 你会有一个人类可读的数据表示，它唯一标识并用通用业务术语连接数据。这一层帮助最终用户自主、安全且自信地访问数据。
 
 然后，你可以创建复杂的模型来发现不同数据库中的模式。
 
-![](../Images/6df2ba7dfa7d6c39247c2ba7e0f28a47.png)
+![](img/6df2ba7dfa7d6c39247c2ba7e0f28a47.png)
 
-[https://www.slideshare.net/camsemantics/the-year-of-the-graph](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
+[`www.slideshare.net/camsemantics/the-year-of-the-graph`](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
 
 在其中，你有表示实体之间关系的本体论。也许这里举个本体论的例子会更好。这个例子取自
 
 [**什么是本体论以及我为什么需要它？- 企业知识**](https://www.slideshare.net/camsemantics/the-year-of-the-graph)
 
-*本体论和语义技术再次变得流行。它们在2000年代初曾是热门话题，但...*enterprise-knowledge.com](https://enterprise-knowledge.com/what-is-an-ontology/)
+*本体论和语义技术再次变得流行。它们在 2000 年代初曾是热门话题，但...*enterprise-knowledge.com](https://enterprise-knowledge.com/what-is-an-ontology/)
 
 让我们创建一个关于你的员工和顾问的本体论：
 
-![](../Images/31aaf0d76b6651305301a2a444437b58.png)
+![](img/31aaf0d76b6651305301a2a444437b58.png)
 
 在这个例子中，Kat Thomas 是一位顾问，她正在与 Bob Jones 合作进行销售流程重设计项目。Kat 为 Consult, Inc 工作，而 Bob 向 Alice Reddy 汇报。通过这个本体论，我们可以推断出很多信息。由于销售流程重设计涉及销售，我们可以推断 Kat Thomas 和 Bob Jones 在销售方面具有专业知识。Consult, Inc 也必须在这一领域提供专业知识。我们还知道 Alice Reddy 可能负责 Widgets, Inc 的某些销售方面，因为她的直接下属正在进行销售流程重设计项目。
 
 当然，你可以在关系数据库中使用主键，并创建多个连接来获取相同的关系，但这种方法更直观，更易于理解。
 
-而令人惊叹的是，Anzo 将会连接到你的数据湖（意味着大量数据存储在HDFS或Oracle等中），并为你自动创建这个图表！然后你可以自行添加或更改本体论。
+而令人惊叹的是，Anzo 将会连接到你的数据湖（意味着大量数据存储在 HDFS 或 Oracle 等中），并为你自动创建这个图表！然后你可以自行添加或更改本体论。
 
 ### 数据科学的未来（仅指明年 lol）
 
 在这篇文章中：
 
-[**2018年人工智能、数据科学、分析的主要发展及2019年关键趋势**
+**2018 年人工智能、数据科学、分析的主要发展及 2019 年关键趋势**
 
-*和过去一样，我们为您带来专家的预测和分析汇总。我们询问了主要的...*www.kdnuggets.com](/2018/12/predictions-data-science-analytics-2019.html)
+*和过去一样，我们为您带来专家的预测和分析汇总。我们询问了主要的...*www.kdnuggets.com
 
 我讨论了未来几年（可能）的数据科学将会发生的事情。
 
-对我而言，2019年的关键趋势：
+对我而言，2019 年的关键趋势：
 
-+   AutoX：我们将看到更多公司开发并将自动化机器学习和深度学习技术及库纳入其技术栈。这里的X意味着这些自动化工具将扩展到数据摄取、数据整合、数据清洗、探索和部署。自动化将继续存在。
++   AutoX：我们将看到更多公司开发并将自动化机器学习和深度学习技术及库纳入其技术栈。这里的 X 意味着这些自动化工具将扩展到数据摄取、数据整合、数据清洗、探索和部署。自动化将继续存在。
 
 +   语义技术：今年对我来说最有趣的发现之一是数据科学与语义之间的联系。这不是数据领域的新领域，但我看到越来越多的人对语义、本体论、知识图谱及其与数据科学和机器学习的关系产生兴趣。
 
@@ -172,11 +172,11 @@
 
 **相关：**
 
-+   [本体是什么？你能找到的最简单定义…或退款*](/2017/05/ontology-simplest-definition.html)
++   本体是什么？你能找到的最简单定义…或退款*
 
-+   [2018年人工智能、数据科学、分析的主要发展以及2019年的关键趋势](/2018/12/predictions-data-science-analytics-2019.html)
++   2018 年人工智能、数据科学、分析的主要发展以及 2019 年的关键趋势
 
-+   [数据科学的核心](/2016/08/core-data-science.html)
++   数据科学的核心
 
 ### 更多相关话题
 
@@ -188,6 +188,6 @@
 
 +   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一项90亿美元的人工智能失败，经过检验](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一项 90 亿美元的人工智能失败，经过检验](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [为什么 Python 是初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

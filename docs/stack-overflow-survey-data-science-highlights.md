@@ -1,26 +1,26 @@
-# Stack Overflow调查数据科学亮点
+# Stack Overflow 调查数据科学亮点
 
-> 原文：[https://www.kdnuggets.com/2021/08/stack-overflow-survey-data-science-highlights.html](https://www.kdnuggets.com/2021/08/stack-overflow-survey-data-science-highlights.html)
+> 原文：[`www.kdnuggets.com/2021/08/stack-overflow-survey-data-science-highlights.html`](https://www.kdnuggets.com/2021/08/stack-overflow-survey-data-science-highlights.html)
 
-[评论](#comments)
+评论
 
-![2021年Stack Overflow调查](../Images/ff55357c2f795ba21061a1f4d837367b.png)
+![2021 年 Stack Overflow 调查](img/ff55357c2f795ba21061a1f4d837367b.png)
 
-每年，Stack Overflow都会对其用户进行调查，以帮助开发社区和平台的完善。今年，超过80,000名开发者分享了他们的学习方式、使用的工具和语言，并提供了对Stack Overflow方向有价值的反馈。结果还呈现了调查时开发者和开发情况的快照。
+每年，Stack Overflow 都会对其用户进行调查，以帮助开发社区和平台的完善。今年，超过 80,000 名开发者分享了他们的学习方式、使用的工具和语言，并提供了对 Stack Overflow 方向有价值的反馈。结果还呈现了调查时开发者和开发情况的快照。
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-**[2021年Stack Overflow调查](https://insights.stackoverflow.com/survey/2021)**的结果最近公开分享，并附上了Stack Overflow提供的评论和见解。我们将查看一些与数据科学、数据科学家及所有相关数据职位和专业人员相关的有趣数据点。
+**[2021 年 Stack Overflow 调查](https://insights.stackoverflow.com/survey/2021)**的结果最近公开分享，并附上了 Stack Overflow 提供的评论和见解。我们将查看一些与数据科学、数据科学家及所有相关数据职位和专业人员相关的有趣数据点。
 
 ## 开发者资料
 
@@ -28,11 +28,11 @@
 
 一些快速且有趣的引用，特别是与学习编程以及开发者就业相关的内容，直接来自于调查概述，并附上一些总结关键开发者资料问题的回应频率的图表。
 
-> 例如，今年我们观察到开发者教育方式的显著变化。对于18岁以下的新一代编码者来说，在线资源如视频和博客比书籍和学校更受欢迎，而这种统计数据在我们其他年龄段的编码者中并不成立。总体来看，行业中有很多新加入者，超过50%的人表示他们编程不到十年，超过35%的人编程经验不足五年。
+> 例如，今年我们观察到开发者教育方式的显著变化。对于 18 岁以下的新一代编码者来说，在线资源如视频和博客比书籍和学校更受欢迎，而这种统计数据在我们其他年龄段的编码者中并不成立。总体来看，行业中有很多新加入者，超过 50%的人表示他们编程不到十年，超过 35%的人编程经验不足五年。
 
-![图表](../Images/c03bda87abbeca0c89461781bfb93886.png)
+![图表](img/c03bda87abbeca0c89461781bfb93886.png)
 
-**图1**. 对2021年Stack Overflow调查问题“*你是如何学习编程的？*”的回答
+**图 1**. 对 2021 年 Stack Overflow 调查问题“*你是如何学习编程的？*”的回答
 
 > 几乎 60% 的受访者通过在线资源学习编程并不令人惊讶。年轻的受访者倾向于从在线课程、论坛和其他在线资源中学习。另一方面，年长的受访者则通过更传统的媒介如学校和书籍进行学习。
 > 
@@ -40,7 +40,7 @@
 
 现在我们暂时关注开发者的教育水平。
 
-![图](../Images/6bdd2794ed9cd1ce6e6eed9b9e679846.png)
+![图](img/6bdd2794ed9cd1ce6e6eed9b9e679846.png)
 
 **图 2**。2021 年 Stack Overflow 调查问题的回答“*以下哪项最能描述你已完成的最高正式教育水平？*”
 
@@ -58,7 +58,7 @@
 
 那么，受访者在过去一年中使用了哪些编程、脚本和标记语言进行开发？
 
-![图](../Images/65661396ca4e779c240c5b24062e95c9.png)
+![图](img/65661396ca4e779c240c5b24062e95c9.png)
 
 **图 3**。2021 年 Stack Overflow 调查问题的回答“*在过去一年中，你在哪些编程、脚本和标记语言中进行了大量开发工作？在未来一年中，你希望使用哪些语言？*”
 
@@ -68,7 +68,7 @@
 
 我们已经看到开发者正在使用哪些语言，但关于开发者*想要*使用的语言呢？有多少开发者虽然没有用某种语言或技术进行开发，但对其表达了兴趣。
 
-![图](../Images/6693290669d6884323dab5393fb6d1f8.png)
+![图](img/6693290669d6884323dab5393fb6d1f8.png)
 
 **图 4**。2021 年 Stack Overflow 调查问题的回答“*在过去一年中，你在哪些编程、脚本和标记语言中进行了大量开发工作？在未来一年中，你希望使用哪些语言？*”
 
@@ -76,59 +76,59 @@
 
 那么更具洞察力的"[工作过 vs 想要工作](https://insights.stackoverflow.com/survey/2021#worked-with-vs-want-to-work-with-language-worked-want)怎么样呢？"
 
-> 这里有很多要深入探讨的内容，但以下是我们发现的一些最显著的趋势。有超过10,000名Javascript开发者希望开始或继续使用Go或Rust开发。大多数希望使用Dart的开发者目前正在使用JavaScript。我们还看到，唯一想要使用PHP的开发者是SQL开发者。
+> 这里有很多要深入探讨的内容，但以下是我们发现的一些最显著的趋势。有超过 10,000 名 Javascript 开发者希望开始或继续使用 Go 或 Rust 开发。大多数希望使用 Dart 的开发者目前正在使用 JavaScript。我们还看到，唯一想要使用 PHP 的开发者是 SQL 开发者。
 
-这些信息存储在一个[互动可视化](https://insights.stackoverflow.com/survey/2021#worked-with-vs-want-to-work-with-language-worked-want)中，最佳使用方式是直接访问Stack Overflow开发者调查网站。
+这些信息存储在一个[互动可视化](https://insights.stackoverflow.com/survey/2021#worked-with-vs-want-to-work-with-language-worked-want)中，最佳使用方式是直接访问 Stack Overflow 开发者调查网站。
 
 ### 数据库
 
 继续讨论数据库... 这是对等问题的结果，旨在评估数据库产品的使用情况。
 
-![图](../Images/96121d05290ff56b03a2617bf6594d7d.png)
+![图](img/96121d05290ff56b03a2617bf6594d7d.png)
 
-**图 5**。回应2021年Stack Overflow调查问题"*你在过去一年中在哪些数据库环境中进行了大量开发工作？你希望在未来一年中在哪些环境中工作？*"
+**图 5**。回应 2021 年 Stack Overflow 调查问题"*你在过去一年中在哪些数据库环境中进行了大量开发工作？你希望在未来一年中在哪些环境中工作？*"
 
-这非常直接，但我们可以看到SQL数据库占据了前三名，前五名中有四个位置。这似乎是开发者对SQL数据库的持续认可。
+这非常直接，但我们可以看到 SQL 数据库占据了前三名，前五名中有四个位置。这似乎是开发者对 SQL 数据库的持续认可。
 
 ### 云平台
 
-在云平台方面，AWS似乎是霸主，Google Cloud和Microsoft Azure也占据了市场的相当份额。
+在云平台方面，AWS 似乎是霸主，Google Cloud 和 Microsoft Azure 也占据了市场的相当份额。
 
-![图](../Images/5818d427aee7fbe0a5aaa614f5484f54.png)
+![图](img/5818d427aee7fbe0a5aaa614f5484f54.png)
 
-**图 6**。回应2021年Stack Overflow调查问题"*你在过去一年中在哪些云平台上进行了大量开发工作？你希望在未来一年中在哪些平台上工作？*"
+**图 6**。回应 2021 年 Stack Overflow 调查问题"*你在过去一年中在哪些云平台上进行了大量开发工作？你希望在未来一年中在哪些平台上工作？*"
 
-有趣的是，开发者喜欢的云平台与他们害怕的云平台的对比与开发者实际使用的那些平台的回应非常接近。也不无道理地认为，IBM Cloud和Oracle Cloud的低采用率可能与开发者对再次使用它的恐惧相关。
+有趣的是，开发者喜欢的云平台与他们害怕的云平台的对比与开发者实际使用的那些平台的回应非常接近。也不无道理地认为，IBM Cloud 和 Oracle Cloud 的低采用率可能与开发者对再次使用它的恐惧相关。
 
-![图](../Images/a71cc3ec2907987e070b4462bbf602e5.png)
+![图](img/a71cc3ec2907987e070b4462bbf602e5.png)
 
-**图 7**。回应2021年Stack Overflow调查问题"*你在过去一年中在哪些云平台上进行了大量开发工作？你希望在未来一年中在哪些平台上工作？*"
+**图 7**。回应 2021 年 Stack Overflow 调查问题"*你在过去一年中在哪些云平台上进行了大量开发工作？你希望在未来一年中在哪些平台上工作？*"
 
 ### 其他框架和库
 
 查看最常用和最受欢迎的其他框架和库，你会发现许多专门针对数据科学家和/或机器学习工程师的，或者这些职业人士使用频繁的框架和库。
 
-> 虽然Tensorflow是最受欢迎的库，但Pytorch更受喜爱。作为Stack Overflow上的.NET Core用户，我们很高兴看到它位居榜首。
+> 虽然 Tensorflow 是最受欢迎的库，但 Pytorch 更受喜爱。作为 Stack Overflow 上的.NET Core 用户，我们很高兴看到它位居榜首。
 
-很容易争辩说，至少以下7个库和框架与从事数据工作的专业人士非常相关，更多的可能性甚至更大。
+很容易争辩说，至少以下 7 个库和框架与从事数据工作的专业人士非常相关，更多的可能性甚至更大。
 
-![图](../Images/48bf2c693c3cec12e98973e04943967e.png)
+![图](img/48bf2c693c3cec12e98973e04943967e.png)
 
-**图 8**. 2021年 Stack Overflow 调查问题的回应 "*在过去一年中，你在其他哪些框架和库上进行了大量开发工作？你希望在未来一年中使用哪些框架和库？*"
+**图 8**. 2021 年 Stack Overflow 调查问题的回应 "*在过去一年中，你在其他哪些框架和库上进行了大量开发工作？你希望在未来一年中使用哪些框架和库？*"
 
 转向开发者希望使用的框架和库时，许多与数据科学相关的工具也会出现在这里。
 
-![图](../Images/5ecb5bf37aff49eafb642bf7e147ef24.png)
+![图](img/5ecb5bf37aff49eafb642bf7e147ef24.png)
 
-**图 9**. 2021年 Stack Overflow 调查问题的回应 "*在过去一年中，你在其他哪些框架和库上进行了大量开发工作？你希望在未来一年中使用哪些框架和库？*"
+**图 9**. 2021 年 Stack Overflow 调查问题的回应 "*在过去一年中，你在其他哪些框架和库上进行了大量开发工作？你希望在未来一年中使用哪些框架和库？*"
 
 ### 学习与问题解决
 
 作为开发者，当你遇到困难时会怎么做？图 10 似乎表明 Google 确实是你的朋友。我们都这样做...
 
-![图](../Images/9f97694b6cf11dc1339351f718c7ac1e.png)
+![图](img/9f97694b6cf11dc1339351f718c7ac1e.png)
 
-**图 10**. 2021年 Stack Overflow 调查问题的回应 "*当你在解决问题时遇到困难时，你会怎么做？*"
+**图 10**. 2021 年 Stack Overflow 调查问题的回应 "*当你在解决问题时遇到困难时，你会怎么做？*"
 
 ## 薪资
 
@@ -136,38 +136,38 @@
 
 > 在各个领域，工程经理、SRE、DevOps 专家和数据工程师通常获得最高薪资。当我们关注美国时，薪资范围底部存在一些差异。在美国，与全球开发者人口相比，移动开发者和教育工作者的薪资通常更高。
 
-![图](../Images/6903fcffb8d0512a7ce84b82b3c529d7.png)
+![图](img/6903fcffb8d0512a7ce84b82b3c529d7.png)
 
-**图 11**. 2021年 Stack Overflow 调查问题的回应 "*你目前的总薪酬是多少（薪水、奖金和津贴，税前和扣除前）？*"
+**图 11**. 2021 年 Stack Overflow 调查问题的回应 "*你目前的总薪酬是多少（薪水、奖金和津贴，税前和扣除前）？*"
 
 工具和技术的使用对你赚取收入的能力有何影响？
 
 报告提供了多个变量来关联薪资；尽管这不是一个完美的方法，但我们来看看*其他框架和库*这一类别，它似乎是数据科学家进行调查的一个有趣数据点。看起来这个列表主要由我们可能日常使用的一些库和工具组成。
 
-![图](../Images/54d2fa8eb7b3a9cfbbd7a4d0f4208dc8.png)
+![图](img/54d2fa8eb7b3a9cfbbd7a4d0f4208dc8.png)
 
-**图 12**. 2021年 Stack Overflow 调查问题的回应 "*你目前的总薪酬是多少（薪水、奖金和津贴，税前和扣除前）？*"
+**图 12**. 2021 年 Stack Overflow 调查问题的回应 "*你目前的总薪酬是多少（薪水、奖金和津贴，税前和扣除前）？*"
 
 基于单一技术推测薪资是困难的，但仍然很有趣的是一起查看顶级技术。
 
 **相关**：
 
-+   [数据科学家的价值是多少？](/2019/12/data-scientist-worth.html)
++   数据科学家的价值是多少？
 
-+   [顶级编程语言及其用途](/2021/05/top-programming-languages.html)
++   顶级编程语言及其用途
 
-+   [数据科学家的高效 Python 编程指南](/2021/08/data-scientist-guide-efficient-coding-python.html)
++   数据科学家的高效 Python 编程指南
 
 ### 更多相关话题
 
-+   [本周 AI 资讯，8月7日：生成式 AI 进军 Jupyter & Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
++   [本周 AI 资讯，8 月 7 日：生成式 AI 进军 Jupyter & Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
 
 +   [如何在预算内建立你的数据科学栈](https://www.kdnuggets.com/2022/01/data-science-stack-budget.html)
 
 +   [全栈一切？数据科学、开发和技术之间的组织交集](https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html)
 
-+   [为什么通用语义层对你的数据栈有好处的6个原因](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
++   [为什么通用语义层对你的数据栈有好处的 6 个原因](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
 
 +   [弹性机器学习栈是模块化的](https://www.kdnuggets.com/2022/06/comet-resilient-ml-stack-modular.html)
 
-+   [免费全栈LLM训练营](https://www.kdnuggets.com/2023/06/free-full-stack-llm-bootcamp.html)
++   [免费全栈 LLM 训练营](https://www.kdnuggets.com/2023/06/free-full-stack-llm-bootcamp.html)

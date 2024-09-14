@@ -1,8 +1,8 @@
 # 使用 Tableau 创建高效的合并数据源
 
-> 原文：[https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
+> 原文：[`www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html`](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
 
-![使用 Tableau 创建高效的合并数据源](../Images/8c723f7edbb33c069ef7747b0bf90233.png)
+![使用 Tableau 创建高效的合并数据源](img/8c723f7edbb33c069ef7747b0bf90233.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,11 +34,11 @@ Tableau 是一套用于分析数据和实现商业目标的软件工具，通过
 
 图 1 展示了使用内部数据连接技术的 Tableau 数据连接方法。图 2 则表示 Tableau 中的数据混合方法。
 
-![Tableau 中的数据连接](../Images/4a56c879599cd9583df5f7a1366ed780.png)
+![Tableau 中的数据连接](img/4a56c879599cd9583df5f7a1366ed780.png)
 
 图 1 Tableau 中的数据连接（来源（tutorialspoint, n.d.））
 
-![Tableau 中的数据混合](../Images/0b6fecba119a6e2711de8fbc99382b33.png)
+![Tableau 中的数据混合](img/0b6fecba119a6e2711de8fbc99382b33.png)
 
 图 2 Tableau 中的数据混合（来源（Upasana, 2021, 12））
 
@@ -48,7 +48,7 @@ Tableau 是一套用于分析数据和实现商业目标的软件工具，通过
 
 Tableau 中的数据源将你的源数据连接到 Tableau。它仅仅是你的数据的总和（无论是作为实时连接还是提取），连接的元数据、包含数据的表或工作表的名称，以及你在 Tableau 中对数据所做的修改。这包括计算、重命名的特征和默认布局等元数据，以及数据的集成方式。
 
-![Tableau 中的数据源](../Images/8caa31b3d09a55cd1208b922dd340bb5.png)
+![Tableau 中的数据源](img/8caa31b3d09a55cd1208b922dd340bb5.png)
 
 图 3 Tableau 中的数据源（来源（Dmitry Anoshin, Teodora Matic, Slaven Bogdanovic, Tania Lincoln, 2019））
 
@@ -82,7 +82,7 @@ Tableau 允许你创建高效的合并数据源，这样你只需做一次工作
 
 在 Tableau 中处理多个表时，最佳方法是在数据连接窗口中定义联接。这样，你不是在定义一个特定的查询，而只是定义表之间的关联方式。
 
-![Tableau 中的联接](../Images/4166aced7d0386bbbcb785680b154590.png)
+![Tableau 中的联接](img/4166aced7d0386bbbcb785680b154590.png)
 
 图 4 Tableau 中的联接（来源（Dmitry Anoshin, Teodora Matic, Slaven Bogdanovic, Tania Lincoln, 2019））
 
@@ -102,7 +102,7 @@ Tableau 10 中提供了一项新功能——数据集成，允许你结合来自
 
 在开发精选的数据源时，考虑是否应该在特定的细节层级（LOD）进行汇总。如果是这样，考虑创建一个包含适当 LOD 的 LOD 表达式的新计算字段，以便于未来的开发者。
 
-![调整详细信息级别](../Images/7cef7be29cb97173d799b7df8dd97f55.png)
+![调整详细信息级别](img/7cef7be29cb97173d799b7df8dd97f55.png)
 
 图 5 Tableau 中的详细信息示例（来源 (Dobiasz, 2019)）
 
@@ -134,7 +134,7 @@ Tableau 10 中提供了一项新功能——数据集成，允许你结合来自
 
 +   [10 Most Used Tableau Functions](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)
 
-+   [KDnuggets 新闻，8月3日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
 
 +   [NumPy 与 Pandas 进行更高效的数据分析](https://www.kdnuggets.com/numpy-with-pandas-for-more-efficient-data-analysis)
 

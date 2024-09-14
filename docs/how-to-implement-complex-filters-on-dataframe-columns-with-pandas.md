@@ -1,8 +1,8 @@
 # 如何在 DataFrame 列上实现复杂过滤操作
 
-> 原文：[https://www.kdnuggets.com/how-to-implement-complex-filters-on-dataframe-columns-with-pandas](https://www.kdnuggets.com/how-to-implement-complex-filters-on-dataframe-columns-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-implement-complex-filters-on-dataframe-columns-with-pandas`](https://www.kdnuggets.com/how-to-implement-complex-filters-on-dataframe-columns-with-pandas)
 
-![如何在 DataFrame 列上实现复杂过滤操作](../Images/a721f50b2319dddafb503b4dc8c77e27.png)
+![如何在 DataFrame 列上实现复杂过滤操作](img/a721f50b2319dddafb503b4dc8c77e27.png)
 
 编辑者提供的图片 | Ideogram
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -169,18 +169,18 @@ df[(df['Age'] > 30) & (
 
 +   [过滤 Python 列表的 5 种方法](https://www.kdnuggets.com/2022/11/5-ways-filtering-python-lists.html)
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰写者。他在全职工作于Allianz Indonesia的同时，喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius撰写了各种人工智能和机器学习主题的文章。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰写者。他在全职工作于 Allianz Indonesia 的同时，喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 撰写了各种人工智能和机器学习主题的文章。
 
 ### 了解更多相关内容
 
-+   [如何使用[ ], .loc, iloc, .at等选择Pandas中的行和列](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)
++   [如何使用[ ], .loc, iloc, .at 等选择 Pandas 中的行和列](https://www.kdnuggets.com/2019/06/select-rows-columns-pandas.html)
 
-+   [重命名Pandas列的4种方法](https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html)
++   [重命名 Pandas 列的 4 种方法](https://www.kdnuggets.com/2022/11/4-ways-rename-pandas-columns.html)
 
 +   [卡尔曼滤波器简要介绍](https://www.kdnuggets.com/2022/12/brief-introduction-kalman-filters.html)
 
-+   [如何使用Pandas将JSON数据转换为DataFrame](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)
++   [如何使用 Pandas 将 JSON 数据转换为 DataFrame](https://www.kdnuggets.com/how-to-convert-json-data-into-a-dataframe-with-pandas)
 
-+   [Pandas与Polars：Python数据框库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
++   [Pandas 与 Polars：Python 数据框库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
 
-+   [如何在几秒钟内处理包含百万行的DataFrame](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)
++   [如何在几秒钟内处理包含百万行的 DataFrame](https://www.kdnuggets.com/2022/01/process-dataframe-millions-rows-seconds.html)

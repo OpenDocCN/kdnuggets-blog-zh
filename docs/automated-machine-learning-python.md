@@ -1,32 +1,32 @@
-# Python中的自动化机器学习
+# Python 中的自动化机器学习
 
-> 原文：[https://www.kdnuggets.com/2019/01/automated-machine-learning-python.html](https://www.kdnuggets.com/2019/01/automated-machine-learning-python.html)
+> 原文：[`www.kdnuggets.com/2019/01/automated-machine-learning-python.html`](https://www.kdnuggets.com/2019/01/automated-machine-learning-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/a06801a2d61f74023099372964a67cc4.png)
+![](img/a06801a2d61f74023099372964a67cc4.png)
 
 正如我们已经知道的，机器学习是一种自动化复杂问题解决的方法。但机器学习本身能否被自动化？这就是我们在本文中将要探讨的问题。到文章结束时，我们将回答这个问题，并展示如何实际实现它。
 
 ### 自动化机器学习（AutoML）
 
-在应用机器学习模型时，我们通常会进行[数据预处理](https://heartbeat.fritz.ai/data-preprocessing-and-visualization-implications-for-your-machine-learning-model-8dfbaaa51423)、[特征工程](https://heartbeat.fritz.ai/introduction-to-automated-feature-engineering-using-deep-feature-synthesis-dfs-3feb69a7c00b)、[特征提取](https://en.wikipedia.org/wiki/Feature_extraction)和[特征选择](https://en.wikipedia.org/wiki/Feature_selection)。之后，我们会选择最佳算法并[调整我们的参数](https://en.wikipedia.org/wiki/Hyperparameter_optimization)以获得最佳结果。AutoML是一系列用于自动化这些过程的概念和技术。
+在应用机器学习模型时，我们通常会进行[数据预处理](https://heartbeat.fritz.ai/data-preprocessing-and-visualization-implications-for-your-machine-learning-model-8dfbaaa51423)、[特征工程](https://heartbeat.fritz.ai/introduction-to-automated-feature-engineering-using-deep-feature-synthesis-dfs-3feb69a7c00b)、[特征提取](https://en.wikipedia.org/wiki/Feature_extraction)和[特征选择](https://en.wikipedia.org/wiki/Feature_selection)。之后，我们会选择最佳算法并[调整我们的参数](https://en.wikipedia.org/wiki/Hyperparameter_optimization)以获得最佳结果。AutoML 是一系列用于自动化这些过程的概念和技术。
 
-**AutoML的好处**
+**AutoML 的好处**
 
 将机器学习模型应用于我们的实际问题通常需要计算机科学技能、领域专业知识和数学专业知识。找到具备所有这些技能的专家并不总是一件容易的事。
 
-AutoML还减少了在设计机器学习模型时可能出现的偏差和错误。组织还可以通过在其数据管道中应用AutoML来降低雇佣多名专家的成本。AutoML还减少了开发和测试机器学习模型所需的时间。
+AutoML 还减少了在设计机器学习模型时可能出现的偏差和错误。组织还可以通过在其数据管道中应用 AutoML 来降低雇佣多名专家的成本。AutoML 还减少了开发和测试机器学习模型所需的时间。
 
-**AutoML的缺点**
+**AutoML 的缺点**
 
-AutoML在机器学习领域是一个相对较新的概念。因此，在应用一些当前的AutoML解决方案时，重要的是要谨慎。这是因为这些技术中的一些仍在开发中。
+AutoML 在机器学习领域是一个相对较新的概念。因此，在应用一些当前的 AutoML 解决方案时，重要的是要谨慎。这是因为这些技术中的一些仍在开发中。
 
-另一个主要挑战是运行AutoML模型所需的时间。这将真正取决于我们运行的机器的计算能力。正如我们很快将看到的，有些AutoML解决方案在我们的本地机器上运行良好，但有些则需要像[Google Colab](https://www.inc.com/jeff-haden/the-worlds-most-successful-people-dont-actually-start-work-at-4-am-they-wake-work-whenever-heck-they-decide.html)这样的加速解决方案。
+另一个主要挑战是运行 AutoML 模型所需的时间。这将真正取决于我们运行的机器的计算能力。正如我们很快将看到的，有些 AutoML 解决方案在我们的本地机器上运行良好，但有些则需要像[Google Colab](https://www.inc.com/jeff-haden/the-worlds-most-successful-people-dont-actually-start-work-at-4-am-they-wake-work-whenever-heck-they-decide.html)这样的加速解决方案。
 
-### AutoML概念
+### AutoML 概念
 
-关于AutoML，有两个主要概念需要掌握：神经架构搜索和迁移学习。
+关于 AutoML，有两个主要概念需要掌握：神经架构搜索和迁移学习。
 
 **神经架构搜索**
 
@@ -110,7 +110,7 @@ Google 的 AutoML 解决方案不是开源的。其定价可在 [这里](https:/
 !pip install autokeras
 ```
 
-![](../Images/da06b51df5fff22d7fa251bb92167fc2.png)
+![](img/da06b51df5fff22d7fa251bb92167fc2.png)
 
 我们将对 MNIST 数据集进行图像分类。第一步是导入该数据集和图像分类器。数据集从 Keras 导入，而图像分类器从 Auto-Keras 导入。由于我们正在构建一个基于预训练模型来识别手写数字的模型，因此我们将其归类为监督学习问题。然后，我们在未见过的数字图像上测试模型的准确性。
 
@@ -126,7 +126,7 @@ Google 的 AutoML 解决方案不是开源的。其定价可在 [这里](https:/
 
 1.  打印`y`将显示我们在测试集上评估模型后的准确度。
 
-![](../Images/2f3146b171f2586d4542ac79921d35b5.png)
+![](img/2f3146b171f2586d4542ac79921d35b5.png)
 
 这就是我们使用 Auto-Keras 进行图像分类所需的一切。代码行数很少，Auto-Keras 会为我们完成所有繁重的工作。
 
@@ -156,21 +156,21 @@ Auto-Sklearn 的实现与上述 Auto-Keras 实现非常相似。我们将使用�
 
 **相关：**
 
-+   [使用开源工具实现自动化机器学习系统](/2018/10/implementing-automated-machine-learning-open-source-path.html)
++   使用开源工具实现自动化机器学习系统
 
-+   [使用 Keras 深度学习介绍](/2018/10/introduction-deep-learning-keras.html)
++   使用 Keras 深度学习介绍
 
-+   [在 Google Colab 中使用 Hyperas 调整 Keras 超参数](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
++   在 Google Colab 中使用 Hyperas 调整 Keras 超参数
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 

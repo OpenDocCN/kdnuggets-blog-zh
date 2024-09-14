@@ -1,8 +1,8 @@
 # 5 个免费课程，掌握数据科学中的 SQL
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
+> 原文：[`www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science`](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
 
-![5 个免费课程，掌握数据科学中的 SQL ](../Images/f673af47f2cc42cbceed42c8000c5714.png)
+![5 个免费课程，掌握数据科学中的 SQL ](img/f673af47f2cc42cbceed42c8000c5714.png)
 
 编辑器提供的图片
 
@@ -12,11 +12,11 @@ SQL 是所有数据专业人员必备的技能。然而，掌握 SQL 是一个�
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -162,10 +162,10 @@ Coursera 上的数据科学 SQL 基础专业课程将教授你在数据科学职
 
 +   [5 本免费书籍掌握 SQL](https://www.kdnuggets.com/5-free-books-to-master-sql)
 
-+   [25门免费课程，掌握数据科学、数据工程、机器学习…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [25 门免费课程，掌握数据科学、数据工程、机器学习…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
-+   [5门免费课程，掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
++   [5 门免费课程，掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
 
-+   [5门免费课程，掌握数据科学](https://www.kdnuggets.com/5-free-courses-to-master-data-science)
++   [5 门免费课程，掌握数据科学](https://www.kdnuggets.com/5-free-courses-to-master-data-science)
 
-+   [5门免费课程，掌握数据科学中的Python](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)
++   [5 门免费课程，掌握数据科学中的 Python](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)

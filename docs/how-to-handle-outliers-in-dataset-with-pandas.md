@@ -1,8 +1,8 @@
-# 如何在数据集中使用Pandas处理异常值
+# 如何在数据集中使用 Pandas 处理异常值
 
-> 原文：[https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas`](https://www.kdnuggets.com/how-to-handle-outliers-in-dataset-with-pandas)
 
-![如何在数据集中使用Pandas处理异常值](../Images/6bd591dc6b7d3f45f9bd398b27035931.png)
+![如何在数据集中使用 Pandas 处理异常值](img/6bd591dc6b7d3f45f9bd398b27035931.png)
 
 图片作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -28,13 +28,13 @@
 
 1.  **基于可视化的方法：** 绘制散点图或箱线图，以查看数据分布并检查异常数据点。
 
-1.  **基于统计的方法：** 这些方法涉及z分数和IQR（四分位距），它们提供可靠性，但可能不够直观。
+1.  **基于统计的方法：** 这些方法涉及 z 分数和 IQR（四分位距），它们提供可靠性，但可能不够直观。
 
-我不会详细介绍这些方法，以保持主题的专注。然而，我会在最后提供一些参考资料以供探索。我们将在示例中使用IQR方法。方法如下：
+我不会详细介绍这些方法，以保持主题的专注。然而，我会在最后提供一些参考资料以供探索。我们将在示例中使用 IQR 方法。方法如下：
 
-*IQR（四分位距） = Q3（75百分位数） - Q1（25百分位数）*
+*IQR（四分位距） = Q3（75 百分位数） - Q1（25 百分位数）*
 
-IQR方法指出，任何低于**Q1 - 1.5 * IQR**或高于**Q3 + 1.5 * IQR**的数据点都被标记为异常值。让我们生成一些随机数据点，并使用此方法检测异常值。
+IQR 方法指出，任何低于**Q1 - 1.5 * IQR**或高于**Q3 + 1.5 * IQR**的数据点都被标记为异常值。让我们生成一些随机数据点，并使用此方法检测异常值。
 
 导入必要的库并使用`np.random`生成随机数据：
 
@@ -51,7 +51,7 @@ data = pd.DataFrame({
 })
 ```
 
-使用IQR方法从数据集中检测异常值：
+使用 IQR 方法从数据集中检测异常值：
 
 ```py
 # Function to detect outliers using IQR
@@ -92,7 +92,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![原始数据集](../Images/4f18796d0b43052494447fa3076c1afe.png)
+![原始数据集](img/4f18796d0b43052494447fa3076c1afe.png)
 
 原始数据集
 
@@ -128,7 +128,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![移除离群点](../Images/3e24516c50b914c495dc20d4588f5806.png)
+![移除离群点](img/3e24516c50b914c495dc20d4588f5806.png)
 
 移除离群点
 
@@ -136,7 +136,7 @@ plt.show()
 
 #### 2\. 截尾离群点
 
-当你不想丢弃数据点但保持这些极端值也会影响你的分析时，可以使用这种技术。因此，你设定一个最大值和最小值的阈值，然后将离群点调整到这个范围内。你可以将这种截尾应用于离群点或整个数据集。让我们将截尾策略应用于我们的完整数据集，使其在第5到第95百分位数的范围内。这是你可以执行的方法：
+当你不想丢弃数据点但保持这些极端值也会影响你的分析时，可以使用这种技术。因此，你设定一个最大值和最小值的阈值，然后将离群点调整到这个范围内。你可以将这种截尾应用于离群点或整个数据集。让我们将截尾策略应用于我们的完整数据集，使其在第 5 到第 95 百分位数的范围内。这是你可以执行的方法：
 
 ```py
 def cap_outliers(data, lower_percentile=5, upper_percentile=95):
@@ -163,7 +163,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![截尾离群点](../Images/e37acd91d38a3c64ca676c3afb13d6ba.png)
+![截尾离群点](img/e37acd91d38a3c64ca676c3afb13d6ba.png)
 
 截尾离群点
 
@@ -195,7 +195,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![填补离群点](../Images/1743fdb42e0d8bf5950eb9642a87bb47.png)
+![填补离群点](img/1743fdb42e0d8bf5950eb9642a87bb47.png)
 
 填补离群点
 
@@ -203,15 +203,15 @@ plt.show()
 
 #### 4\. 应用变换
 
-转换应用于你的完整数据集，而不是特定的异常值。你基本上是改变数据的表示方式，以减少异常值的影响。有几种转换技术，如对数转换、平方根转换、Box-Cox转换、Z缩放、Yeo-Johnson转换、最小-最大缩放等。选择适合你的情况的正确转换取决于数据的性质和分析的最终目标。以下是一些提示，帮助你选择正确的转换技术：
+转换应用于你的完整数据集，而不是特定的异常值。你基本上是改变数据的表示方式，以减少异常值的影响。有几种转换技术，如对数转换、平方根转换、Box-Cox 转换、Z 缩放、Yeo-Johnson 转换、最小-最大缩放等。选择适合你的情况的正确转换取决于数据的性质和分析的最终目标。以下是一些提示，帮助你选择正确的转换技术：
 
-+   **对于右偏数据：** 使用对数、平方根或Box-Cox转换。对数转换在你想要压缩在大范围内分布的小数值时效果更佳。平方根转换在你想要一种较少极端的转换并处理零值时更好，而Box-Cox还会对数据进行标准化，这是其他两种方法做不到的。
++   **对于右偏数据：** 使用对数、平方根或 Box-Cox 转换。对数转换在你想要压缩在大范围内分布的小数值时效果更佳。平方根转换在你想要一种较少极端的转换并处理零值时更好，而 Box-Cox 还会对数据进行标准化，这是其他两种方法做不到的。
 
 +   **对于左偏数据：** 先反射数据，然后应用针对右偏数据的技术。
 
-+   **为了稳定方差：** 使用Box-Cox或Yeo-Johnson（类似于Box-Cox，但也处理零和负值）。
++   **为了稳定方差：** 使用 Box-Cox 或 Yeo-Johnson（类似于 Box-Cox，但也处理零和负值）。
 
-+   **对于均值中心化和缩放：** 使用z-score标准化（标准差 = 1）。
++   **对于均值中心化和缩放：** 使用 z-score 标准化（标准差 = 1）。
 
 +   **对于范围缩放（固定范围即[2,5]）：** 使用最小-最大缩放。
 
@@ -259,7 +259,7 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![应用对数转换](../Images/c917598f2da447d949b0d68e87c141f7.png)
+![应用对数转换](img/c917598f2da447d949b0d68e87c141f7.png)
 
 应用对数转换
 
@@ -267,7 +267,7 @@ plt.show()
 
 ## 总结
 
-这使我们结束了关于异常值、不同检测方法以及如何处理异常值的讨论。本文是pandas系列的一部分，你可以在我的作者页面查看其他文章。如上所述，以下是一些额外的资源，供你深入研究异常值：
+这使我们结束了关于异常值、不同检测方法以及如何处理异常值的讨论。本文是 pandas 系列的一部分，你可以在我的作者页面查看其他文章。如上所述，以下是一些额外的资源，供你深入研究异常值：
 
 1.  [机器学习中的异常值检测方法](https://towardsdatascience.com/outlier-detection-methods-in-machine-learning-1c8b7cca6cb8)
 

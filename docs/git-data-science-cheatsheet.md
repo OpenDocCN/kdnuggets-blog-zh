@@ -1,6 +1,6 @@
 # Git 数据科学备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
+> 原文：[`www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html`](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
 
 # 我需要 Git 吗？
 
@@ -10,11 +10,11 @@ Git 是一个开源的分布式版本控制和协作工具，专为开发人员�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@ KDnuggets 汇总了这个实用的备忘单，帮助你确保了解 git 的语�
 
 [](https://www.kdnuggets.com/publications/sheets/Git_Cheatsheet_KDnuggets.pdf)
 
-[![Git 数据科学备忘单](../Images/546edec63e0a363f311c6fb3e481f3f3.png)](https://www.kdnuggets.com/publications/sheets/Git_Cheatsheet_KDnuggets.pdf)
+![Git 数据科学备忘单](https://www.kdnuggets.com/publications/sheets/Git_Cheatsheet_KDnuggets.pdf)
 
 这张表覆盖了一些最常用和必要的 git 操作，包括：
 
@@ -62,12 +62,12 @@ KDnuggets 汇总了这个实用的备忘单，帮助你确保了解 git 的语�
 
 +   [数据科学家必备的 14 个 Git 命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
 
-+   [KDnuggets 新闻，10月5日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
 
 +   [10 种高级 Git 技巧](https://www.kdnuggets.com/10-advanced-git-techniques)
 
 +   [初学者的顶级免费 Git GUI 客户端](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [数据科学的 Linux 备忘单](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)

@@ -1,8 +1,8 @@
 # 你需要成为数据工程师的基本书籍
 
-> 原文：[https://www.kdnuggets.com/2022/10/essential-books-need-become-data-engineer.html](https://www.kdnuggets.com/2022/10/essential-books-need-become-data-engineer.html)
+> 原文：[`www.kdnuggets.com/2022/10/essential-books-need-become-data-engineer.html`](https://www.kdnuggets.com/2022/10/essential-books-need-become-data-engineer.html)
 
-![你需要成为数据工程师的基本书籍](../Images/4293982d2573e5e5de446630453a248a.png)
+![你需要成为数据工程师的基本书籍](img/4293982d2573e5e5de446630453a248a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -48,13 +48,13 @@
 
 +   [数据工程基础：规划与构建稳健的数据系统](https://www.amazon.co.uk/Fundamentals-Data-Engineering-Robust-Systems/dp/1098108302/ref=asc_df_1098108302/?tag=googshopuk-21&linkCode=df0&hvadid=570436520144&hvpos=&hvnetw=g&hvrand=110988235206462544&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9044965&hvtargid=pla-1643937444435&psc=1&th=1&psc=1)
 
-+   [每个数据工程师都应该知道的97件事：专家的集体智慧](https://www.amazon.co.uk/Things-Every-Data-Engineer-Should/dp/1492062413)
++   [每个数据工程师都应该知道的 97 件事：专家的集体智慧](https://www.amazon.co.uk/Things-Every-Data-Engineer-Should/dp/1492062413)
 
 +   [数据仓库工具包：维度建模的权威指南](https://www.amazon.co.uk/Data-Warehouse-Toolkit-Definitive-Dimensional/dp/1118530802?&linkCode=sl1&tag=understandi00-21&linkId=50a288800f3324f8ac8fc28046b71815&language=en_GB&ref_=as_li_ss_tl)
 
 +   [数据管道袖珍参考：用于分析的数据移动与处理](https://amzn.to/39P2kaF)
 
-+   [用Python进行数据工程](https://amzn.to/37Cdtee)
++   [用 Python 进行数据工程](https://amzn.to/37Cdtee)
 
 ## 更加专业
 
@@ -66,7 +66,7 @@
 
 +   [Kafka - 权威指南：规模化实时数据和流处理](https://www.amazon.co.uk/Kafka-Definitive-Real-Time-Stream-Processing/dp/1492043087/ref=sr_1_1?crid=24UOL1S2552R6&keywords=kafka+guide&qid=1665396798&qu=eyJxc2MiOiIxLjk4IiwicXNhIjoiMC4wMCIsInFzcCI6IjAuMDAifQ%3D%3D&sprefix=kafka+guide%2Caps%2C54&sr=8-1)
 
-+   [Cassandra - 权威指南，第3版：Web规模分布式数据](https://www.amazon.co.uk/Cassandra-Definitive-Guide-Jeff-Carpenter/dp/1098115163/ref=sr_1_2?crid=1PQWIQDHI6IHT&keywords=cassandra+guide&qid=1665396845&sprefix=cassandra+guide%2Caps%2C44&sr=8-2)
++   [Cassandra - 权威指南，第 3 版：Web 规模分布式数据](https://www.amazon.co.uk/Cassandra-Definitive-Guide-Jeff-Carpenter/dp/1098115163/ref=sr_1_2?crid=1PQWIQDHI6IHT&keywords=cassandra+guide&qid=1665396845&sprefix=cassandra+guide%2Caps%2C44&sr=8-2)
 
 +   [大数据：可扩展实时数据系统的原则与最佳实践](https://amzn.to/2SoDoi9)
 
@@ -76,7 +76,7 @@
 
 +   [数据解决方案架构基础：管理成功的数据项目](https://www.amazon.co.uk/Foundations-Architecting-Data-Solutions-Successful/dp/1492038741/ref=d_pd_sim_sccl_3_10/261-1235052-2231453?pd_rd_w=zri79&content-id=amzn1.sym.b6c57670-da52-480c-9517-fd61033283cf&pf_rd_p=b6c57670-da52-480c-9517-fd61033283cf&pf_rd_r=HS0NZJF7VRFGAXT9A7W0&pd_rd_wg=K2CoQ&pd_rd_r=d1cba944-4df1-46dc-a687-65dab3b588ea&pd_rd_i=1492038741&psc=1)
 
-+   [现代数据平台架构：企业级Hadoop指南](https://www.amazon.co.uk/Architecting-Modern-Data-Platforms-Kunigk/dp/149196927X/ref=pd_bxgy_sccl_2/261-1235052-2231453?pd_rd_w=0JkuB&content-id=amzn1.sym.79b812bf-5c8b-4c0c-851c-784423adaff5&pf_rd_p=79b812bf-5c8b-4c0c-851c-784423adaff5&pf_rd_r=7KJS3E5RGGPKNJZS3XC6&pd_rd_wg=hEL2c&pd_rd_r=2fbb2288-8303-40ac-9568-17623c18a90c&pd_rd_i=149196927X&psc=1)
++   [现代数据平台架构：企业级 Hadoop 指南](https://www.amazon.co.uk/Architecting-Modern-Data-Platforms-Kunigk/dp/149196927X/ref=pd_bxgy_sccl_2/261-1235052-2231453?pd_rd_w=0JkuB&content-id=amzn1.sym.79b812bf-5c8b-4c0c-851c-784423adaff5&pf_rd_p=79b812bf-5c8b-4c0c-851c-784423adaff5&pf_rd_r=7KJS3E5RGGPKNJZS3XC6&pd_rd_wg=hEL2c&pd_rd_r=2fbb2288-8303-40ac-9568-17623c18a90c&pd_rd_i=149196927X&psc=1)
 
 +   [规模数据管理：企业架构的最佳实践](https://www.amazon.co.uk/Data-Management-Scale-Enterprise-Architecture/dp/149205478X/ref=d_pd_vtp_sccl_3_5/261-1235052-2231453?pd_rd_w=tpLta&content-id=amzn1.sym.2204c855-5dd7-4df3-b470-8459f4c43f4a&pf_rd_p=2204c855-5dd7-4df3-b470-8459f4c43f4a&pf_rd_r=SA7C9KCT41QBWYN519S6&pd_rd_wg=G3wku&pd_rd_r=71910296-4284-41bd-8647-d3585002caed&pd_rd_i=149205478X&psc=1)
 
@@ -92,9 +92,9 @@
 
 # 总结
 
-当谈到基础知识时，你希望能够涵盖所有这些方面和主题。这些将为你的数据工程职业提供基础，从此之后，你可以选择你更感兴趣的领域以及你期望在未来5-10年内的发展方向。
+当谈到基础知识时，你希望能够涵盖所有这些方面和主题。这些将为你的数据工程职业提供基础，从此之后，你可以选择你更感兴趣的领域以及你期望在未来 5-10 年内的发展方向。
 
-如果你有兴趣在学习时通过课程测试你的知识，可以阅读这篇文章：[免费数据工程课程](/2022/05/free-data-engineering-courses.html)
+如果你有兴趣在学习时通过课程测试你的知识，可以阅读这篇文章：免费数据工程课程
 
 祝好运！
 
@@ -102,14 +102,14 @@
 
 ### 更多相关主题
 
-+   [成为数据工程师所需的9项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [成为数据工程师所需的 9 项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
 
 +   [成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)
 
-+   [成为SAS认证机器学习工程师所需的一切](https://www.kdnuggets.com/2023/11/sas-everything-need-become-sas-certified-machine-learning-engineer)
++   [成为 SAS 认证机器学习工程师所需的一切](https://www.kdnuggets.com/2023/11/sas-everything-need-become-sas-certified-machine-learning-engineer)
 
-+   [成为MLOps工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
++   [成为 MLOps 工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
 
-+   [2022年你需要阅读的机器学习书籍](https://www.kdnuggets.com/2022/04/machine-learning-books-need-read-2022.html)
++   [2022 年你需要阅读的机器学习书籍](https://www.kdnuggets.com/2022/04/machine-learning-books-need-read-2022.html)
 
-+   [KDnuggets 新闻，4月27日：关于带代码论文的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：关于带代码论文的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)

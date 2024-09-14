@@ -1,8 +1,8 @@
 # 数据科学如何改变移动应用开发？
 
-> 原文：[https://www.kdnuggets.com/2023/03/data-science-transform-mobile-app-development.html](https://www.kdnuggets.com/2023/03/data-science-transform-mobile-app-development.html)
+> 原文：[`www.kdnuggets.com/2023/03/data-science-transform-mobile-app-development.html`](https://www.kdnuggets.com/2023/03/data-science-transform-mobile-app-development.html)
 
-![数据科学如何改变移动应用开发？](../Images/6baff64f354e6d9d41bbf9b1722b7bb9.png)
+![数据科学如何改变移动应用开发？](img/6baff64f354e6d9d41bbf9b1722b7bb9.png)
 
 图片由 [Mikael Blomkvist](https://www.pexels.com/photo/notebooks-arranged-on-blue-surface-6483622/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -34,11 +34,11 @@
 
 这些机器学习模型随后交给应用开发者，以集成到移动应用中。因此，数据科学在移动应用开发中主要关注数据摄取、人工智能与机器学习模型的开发以及将其部署到移动应用中。数据科学还帮助应用开发者转换和重新部署机器学习模型，以适应新标记的数据或任何其他模型输入的变化。
 
-然而，这里的移动应用开发人员负责创建和维护移动应用程序。数据科学主要作为集成自动化数据分析模型的组件。因此，数据科学家和应用开发人员在移动应用开发过程中携手合作。由于机器学习和[人工智能可以改变移动应用](/2022/12/artificial-intelligence-change-mobile-apps.html)，数据科学在应用开发中的使用具有巨大潜力。
+然而，这里的移动应用开发人员负责创建和维护移动应用程序。数据科学主要作为集成自动化数据分析模型的组件。因此，数据科学家和应用开发人员在移动应用开发过程中携手合作。由于机器学习和人工智能可以改变移动应用，数据科学在应用开发中的使用具有巨大潜力。
 
 # 数据科学如何改变移动应用开发？
 
-数据科学在移动应用开发中发挥了重要作用。移动应用通常会收集大量的数据和分析。特别是在电子商务、商业和企业规模的情况下，移动应用必须处理大量数据。然而，为了处理如此多的数据，移动应用通常集成了API或云服务。
+数据科学在移动应用开发中发挥了重要作用。移动应用通常会收集大量的数据和分析。特别是在电子商务、商业和企业规模的情况下，移动应用必须处理大量数据。然而，为了处理如此多的数据，移动应用通常集成了 API 或云服务。
 
 但是，这些技术仅用于收集信息。因此，迫切需要一种有效或智能的技术解决方案，不仅能够处理大数据，还能够协助提供业务驱动的洞察。以下是将数据科学整合到移动应用开发中的进一步好处：
 
@@ -72,18 +72,18 @@
 
 随着其使用的不断增加，其未来看起来十分光明。但是，由于这一阶段仍处于演变过程中，最好在专家的帮助下实施这项技术，参考[移动应用开发公司](https://ripenapps.com/)。他们将帮助你成功地将数据科学集成到你的应用项目中。
 
-**[Ishan Gupta](https://www.linkedin.com/in/ishan-gupta-98198343/)** 是RipenApps的首席执行官兼联合创始人，RipenApps是一家领先的网页和移动应用开发公司，专注于安卓和iOS应用开发。向全球中小企业提供功能丰富的移动和网页应用解决方案，改变了全球商业。
+**[Ishan Gupta](https://www.linkedin.com/in/ishan-gupta-98198343/)** 是 RipenApps 的首席执行官兼联合创始人，RipenApps 是一家领先的网页和移动应用开发公司，专注于安卓和 iOS 应用开发。向全球中小企业提供功能丰富的移动和网页应用解决方案，改变了全球商业。
 
 ### 更多相关话题
 
 +   [人工智能如何改变数据集成](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [ChatGPT CLI：将你的命令行界面转变为ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)
++   [ChatGPT CLI：将你的命令行界面转变为 ChatGPT](https://www.kdnuggets.com/2023/07/chatgpt-cli-transform-commandline-interface-chatgpt.html)
 
-+   [利用GPT模型将自然语言转换为SQL查询](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)
++   [利用 GPT 模型将自然语言转换为 SQL 查询](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)
 
 +   [人工智能将如何改变移动应用](https://www.kdnuggets.com/2022/12/artificial-intelligence-change-mobile-apps.html)
 
-+   [5分钟内构建机器学习Web应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
++   [5 分钟内构建机器学习 Web 应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在5分钟内构建一个机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建一个机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)

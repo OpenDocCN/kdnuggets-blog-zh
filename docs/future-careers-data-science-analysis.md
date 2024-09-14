@@ -1,22 +1,22 @@
 # 数据科学与分析职业的未来
 
-> 原文：[https://www.kdnuggets.com/2019/11/future-careers-data-science-analysis.html](https://www.kdnuggets.com/2019/11/future-careers-data-science-analysis.html)
+> 原文：[`www.kdnuggets.com/2019/11/future-careers-data-science-analysis.html`](https://www.kdnuggets.com/2019/11/future-careers-data-science-analysis.html)
 
-[评论](#comments)
+评论
 
 **作者：弗兰基·华莱士，博主**。
 
-![](../Images/5e36d320bb71e2e9b97d241170033b5c.png)
+![](img/5e36d320bb71e2e9b97d241170033b5c.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 ### 数据科学家 vs. 数据分析师
 
-尽管在许多行业中数据分析师和科学家都有大量的新职业，但对这些备受追捧职位感兴趣的人首先必须决定他们最感兴趣的工作。最基本的，[这两个职位之间的区别](https://online.maryville.edu/online-bachelors-degrees/data-science/careers/data-scientist-vs-analyst/)在于数据科学家理解数据的需求并进行挖掘，而分析师利用他们找到的数据来理解趋势。这两个职位都显示出[巨大潜力](https://www.kdnuggets.com/2019/09/future-analytics-data-science.html)，有些预测称对这些职位的需求[到2020年将提升28%](https://www.forbes.com/sites/louiscolumbus/2017/05/13/ibm-predicts-demand-for-data-scientists-will-soar-28-by-2020/#244bb3d17e3b)。
+尽管在许多行业中数据分析师和科学家都有大量的新职业，但对这些备受追捧职位感兴趣的人首先必须决定他们最感兴趣的工作。最基本的，[这两个职位之间的区别](https://online.maryville.edu/online-bachelors-degrees/data-science/careers/data-scientist-vs-analyst/)在于数据科学家理解数据的需求并进行挖掘，而分析师利用他们找到的数据来理解趋势。这两个职位都显示出[巨大潜力](https://www.kdnuggets.com/2019/09/future-analytics-data-science.html)，有些预测称对这些职位的需求[到 2020 年将提升 28%](https://www.forbes.com/sites/louiscolumbus/2017/05/13/ibm-predicts-demand-for-data-scientists-will-soar-28-by-2020/#244bb3d17e3b)。
 
 [对数据科学感兴趣的人](https://www.kdnuggets.com/2018/12/should-i-become-a-data-scientist.html)需要对数学有深入的理解，包括[统计学和概率论](https://elitedatascience.com/learn-math-for-data-science)，这些知识对于解释数据至关重要。此外，还需要掌握编程语言，包括[Python 和 C/C++](https://www.kdnuggets.com/2018/05/simplilearn-9-must-have-skills-data-scientist.html)，因为编程是挖掘和整理数据所必需的。
 
@@ -34,13 +34,13 @@
 
 另一方面，[数据分析师在数据产生后介入](https://taxandbusinessonline.villanova.edu/blog/demand-for-big-data-professionals-drives-job-openings/)，对科学家生成的数据进行分析。他们在各种行业中工作，解决问题或预测趋势，然后以易于理解的格式向管理层和利益相关者提供统计分析。数据分析师需要理解数字，具备批判性思维能力，透视细节得出合理结论，并在需要更多信息时，能够清晰地向数据科学家沟通需求。
 
-![](../Images/5b5a86c2bb367126c99112129b9ed6ed.png)
+![](img/5b5a86c2bb367126c99112129b9ed6ed.png)
 
 ### 每个企业都需要数据
 
 消费者所做的每一件事都会生成数据。无论是看医生、购买杂货还是在线观看视频，这些数据对公司产品的创建和发展至关重要。虽然许多商业专业人士都知道这一点，但管理者或首席执行官可能不理解如何获取和呈现这些信息，这也是数据分析师和数据科学家职业如此受欢迎的原因。
 
-任何拥有营销部门的公司都高度需求这两个职业。利用这些技能可以确定客户的购买行为及其未来的购买兴趣，从而制定更好的营销活动。在营销活动创建之后，数据可以衡量客户对营销的反应，以及他们是否购买了公司尝试销售的产品。一个例子是Netflix，它经常发送电子邮件推荐特定的电影或电视节目。他们通过分析数据了解订阅者的兴趣，目的是将用户吸引回他们的平台。
+任何拥有营销部门的公司都高度需求这两个职业。利用这些技能可以确定客户的购买行为及其未来的购买兴趣，从而制定更好的营销活动。在营销活动创建之后，数据可以衡量客户对营销的反应，以及他们是否购买了公司尝试销售的产品。一个例子是 Netflix，它经常发送电子邮件推荐特定的电影或电视节目。他们通过分析数据了解订阅者的兴趣，目的是将用户吸引回他们的平台。
 
 每个企业都需要制定一个风险管理计划，以分类潜在的产品或客户损害，并制定解决问题的行动计划。数据分析师和科学家也帮助解决这一问题。例如，[银行可以使用数据分析师评估提供高额贷款的风险](https://www.bizfilings.com/toolkit/research-topics/finance/business-finance/what-banks-look-for-when-reviewing-a-loan-application)，或者运输公司可以更好地了解潜在事故的风险，以及如何简化索赔流程，以便他们的车辆保持在路上，提高整体效率。
 
@@ -56,7 +56,7 @@
 
 **相关：**
 
-+   [关于大数据你需要知道的5件事](https://www.kdnuggets.com/2018/03/5-things-big-data.html)
++   [关于大数据你需要知道的 5 件事](https://www.kdnuggets.com/2018/03/5-things-big-data.html)
 
 +   [新手和初级数据科学家的建议](https://www.kdnuggets.com/2019/11/advice-new-junior-data-scientists.html)
 
@@ -68,10 +68,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应该知道的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该知道的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一场90亿美元的AI失败，详尽分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一场 90 亿美元的 AI 失败，详尽分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

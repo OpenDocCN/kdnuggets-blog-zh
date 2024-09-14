@@ -1,8 +1,8 @@
-# 女性数据科学家（WiDS）Datathon的故事
+# 女性数据科学家（WiDS）Datathon 的故事
 
-> 原文：[https://www.kdnuggets.com/2022/01/story-women-data-science-wids-datathon.html](https://www.kdnuggets.com/2022/01/story-women-data-science-wids-datathon.html)
+> 原文：[`www.kdnuggets.com/2022/01/story-women-data-science-wids-datathon.html`](https://www.kdnuggets.com/2022/01/story-women-data-science-wids-datathon.html)
 
-![女性数据科学家（WiDS）Datathon的故事](../Images/fe69e56104e3dff2e5a4115b39b0e68a.png)
+![女性数据科学家（WiDS）Datathon 的故事](img/fe69e56104e3dff2e5a4115b39b0e68a.png)
 
 图片由作者提供
 
@@ -12,23 +12,23 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-这一切开始于对做一些不同而有意义的事情的好奇。我听说了很多关于数据科学的事情，但从未完全理解其含义，于是有一天我的朋友给我发了一篇关于[**GPT3**](https://openai.com/blog/gpt-3-apps/)的文章，这就是开始。我决心学习这个神奇的数据科学世界，因此决定参加[Python 数据科学家课程 - DataCamp Learn](https://app.datacamp.com/learn/career-tracks/data-scientist-with-python?version=5)。学习路径教会了我Python编程和统计思维。
+这一切开始于对做一些不同而有意义的事情的好奇。我听说了很多关于数据科学的事情，但从未完全理解其含义，于是有一天我的朋友给我发了一篇关于[**GPT3**](https://openai.com/blog/gpt-3-apps/)的文章，这就是开始。我决心学习这个神奇的数据科学世界，因此决定参加[Python 数据科学家课程 - DataCamp Learn](https://app.datacamp.com/learn/career-tracks/data-scientist-with-python?version=5)。学习路径教会了我 Python 编程和统计思维。
 
-要完成数据科学课程，我们需要解决[案例研究：使用机器学习进行学校预算](https://app.datacamp.com/learn/courses/case-study-school-budgeting-with-machine-learning-in-python)并参加[DrivenData竞赛](https://www.drivendata.org/competitions/46/box-plots-for-education-reboot/)。这是我第一次构建分类模型，它彻底改变了我的思维方式。我日夜努力，试图登上[排行榜](https://www.drivendata.org/competitions/46/box-plots-for-education-reboot/leaderboard/)，最终获得了第8名。
+要完成数据科学课程，我们需要解决[案例研究：使用机器学习进行学校预算](https://app.datacamp.com/learn/courses/case-study-school-budgeting-with-machine-learning-in-python)并参加[DrivenData 竞赛](https://www.drivendata.org/competitions/46/box-plots-for-education-reboot/)。这是我第一次构建分类模型，它彻底改变了我的思维方式。我日夜努力，试图登上[排行榜](https://www.drivendata.org/competitions/46/box-plots-for-education-reboot/leaderboard/)，最终获得了第 8 名。
 
-![女性数据科学家（WiDS）Datathon的故事](../Images/ebb21c9ae4da2d57825dc90b08819a65.png)
+![女性数据科学家（WiDS）Datathon 的故事](img/ebb21c9ae4da2d57825dc90b08819a65.png)
 
 图片由作者提供
 
-进入前十名激励我参与其他竞赛，最终我发现了[Kaggle](https://www.kaggle.com/)。Kaggle 组织了最激动人心和具有挑战性的机器学习竞赛。我特别寻找初学者级别的竞赛，并找到了[WiDS Datathon 2021](https://www.kaggle.com/c/widsdatathon2021/overview)。这个竞赛有一个严格要求，即团队中至少要有50%的女性参与者，这也是我找到[**Penguin**](https://www.kaggle.com/qypeng12)的原因。
+进入前十名激励我参与其他竞赛，最终我发现了[Kaggle](https://www.kaggle.com/)。Kaggle 组织了最激动人心和具有挑战性的机器学习竞赛。我特别寻找初学者级别的竞赛，并找到了[WiDS Datathon 2021](https://www.kaggle.com/c/widsdatathon2021/overview)。这个竞赛有一个严格要求，即团队中至少要有 50%的女性参与者，这也是我找到[**Penguin**](https://www.kaggle.com/qypeng12)的原因。
 
 ## WiDS Datathon 2021
 
@@ -36,7 +36,7 @@
 
 [WiDS Datathon 2021](https://www.kaggle.com/c/widsdatathon2021) 专注于患者健康，通过提供 [MIT 的 GOSSIS](https://gossis.mit.edu/) 表格数据集。为了在排行榜上取得最高位置，我们将专注于模型指标 AUC：**接收者操作特征** (ROC) 曲线下的面积（预测与观察目标之间的糖尿病诊断）。
 
-![女性数据科学家故事（WiDS）Datathon](../Images/20e2b55764138ea2918aa978711d98a7.png)
+![女性数据科学家故事（WiDS）Datathon](img/20e2b55764138ea2918aa978711d98a7.png)
 
 [WiDS Datathon 2021](https://www.kaggle.com/c/widsdatathon2021)封面
 
@@ -44,7 +44,7 @@
 
 下图展示了我们构建高性能模型所采取的所有步骤。
 
-![女性数据科学家故事（WiDS）Datathon](../Images/a7c8ea0d73a63bcb59d66dc7125cb322.png)
+![女性数据科学家故事（WiDS）Datathon](img/a7c8ea0d73a63bcb59d66dc7125cb322.png)
 
 图片由作者提供
 
@@ -68,7 +68,7 @@
 
 > **“努力和专注是成功的关键。”**
 
-![女性数据科学家故事（WiDS）Datathon](../Images/f97af89620e65257bd792771dc83cda1.png)
+![女性数据科学家故事（WiDS）Datathon](img/f97af89620e65257bd792771dc83cda1.png)
 
 Kaggle 排行榜 — [WiDS Datathon 2021](https://www.kaggle.com/c/widsdatathon2021/leaderboard)
 
@@ -76,7 +76,7 @@ Kaggle 排行榜 — [WiDS Datathon 2021](https://www.kaggle.com/c/widsdatat
 
 在本节中，我们将深入了解**“对我们有效的东西”**，以及你如何运用这些技巧赢得下一个数据科学竞赛。
 
-![女性数据科学家故事（WiDS）Datathon](../Images/d613192b618223b27b21c665541ae404.png)
+![女性数据科学家故事（WiDS）Datathon](img/d613192b618223b27b21c665541ae404.png)
 
 图片由作者提供
 
@@ -112,37 +112,37 @@ Kaggle 排行榜 — [WiDS Datathon 2021](https://www.kaggle.com/c/widsdatat
 
 比赛旨在通过帮助女性获得必要的工具来开启数据科学职业生涯，从而推动女性的整体参与。在典型的 Kaggle 比赛中，由于缺乏鼓励和支持，女性参与有限，而在 WiDS 比赛中情况完全相反，女性参与者占主导地位。Datathon 还为初学者提供了处理实际项目的学习经验。了解更多信息请访问 [结果与影响](https://www.widsconference.org/blog_archive/wids-datathon-2021-results-and-impact)。
 
-![女性数据科学（WiDS）Datathon 的故事](../Images/960ba8d9402ca849ee597386af3189bf.png)
+![女性数据科学（WiDS）Datathon 的故事](img/960ba8d9402ca849ee597386af3189bf.png)
 
-[WiDS Datathon 2021结果和影响](https://www.widsconference.org/blog_archive/wids-datathon-2021-results-and-impact)
+[WiDS Datathon 2021 结果和影响](https://www.widsconference.org/blog_archive/wids-datathon-2021-results-and-impact)
 
-![Image](../Images/1b9b031c90676f95916d8abf59a01ae3.png)我与**Karen Ebert Matthys**进行了非常精彩的采访，她是Women in Data Science的联合创始人兼联合主任，同时也是斯坦福大学计算与数学工程研究所（ICME）的执行主任/外部合作伙伴。完成工程学学位后，她在一个男性主导的职业中工作，有时她是唯一一个参加技术相关活动的女性。这激励她启动WiDS会议，为女性提供平等的机会参与并为职场带来多样性。
+![Image](img/1b9b031c90676f95916d8abf59a01ae3.png)我与**Karen Ebert Matthys**进行了非常精彩的采访，她是 Women in Data Science 的联合创始人兼联合主任，同时也是斯坦福大学计算与数学工程研究所（ICME）的执行主任/外部合作伙伴。完成工程学学位后，她在一个男性主导的职业中工作，有时她是唯一一个参加技术相关活动的女性。这激励她启动 WiDS 会议，为女性提供平等的机会参与并为职场带来多样性。
 
-除了组织datathon，WiDS还包括年度技术会议和全球各地的WiDS区域活动。WiDS还通过在线专业研讨会提供职业支持。最近，他们主动向中学生普及数据科学。总之，他们在各个层面上工作，为全球的女性提供支持。
+除了组织 datathon，WiDS 还包括年度技术会议和全球各地的 WiDS 区域活动。WiDS 还通过在线专业研讨会提供职业支持。最近，他们主动向中学生普及数据科学。总之，他们在各个层面上工作，为全球的女性提供支持。
 
-> **“WiDS Datathon欢迎从初学者到经验丰富的Kagglers的所有人。 这是提升数据科学技能并结识全球WiDS社区其他成员的绝佳方式。 我们对WiDS datathon参与者的多样性感到非常高兴——包括来自各种学科（商业、科学、农业、工程、计算机科学等）的学生，以及行业、学术界、政府和非政府组织的专业人士。”**
+> **“WiDS Datathon 欢迎从初学者到经验丰富的 Kagglers 的所有人。 这是提升数据科学技能并结识全球 WiDS 社区其他成员的绝佳方式。 我们对 WiDS datathon 参与者的多样性感到非常高兴——包括来自各种学科（商业、科学、农业、工程、计算机科学等）的学生，以及行业、学术界、政府和非政府组织的专业人士。”**
 
-了解更多关于WiDS Datathon 2021的结果和影响[这里](https://www.widsconference.org/blog_archive/wids-datathon-2021-results-and-impact)。
+了解更多关于 WiDS Datathon 2021 的结果和影响[这里](https://www.widsconference.org/blog_archive/wids-datathon-2021-results-and-impact)。
 
-## WiDS下一次挑战
+## WiDS 下一次挑战
 
-[WiDS Datathon 2022](http://widsconference.org/datathon)将从2022年1月初持续到2月末在Kaggle上进行。注册链接在[这里](https://airtable.com/shrmG1SOK8lb4jNzZ)，要参与，你还需要创建一个Kaggle账户。我强烈建议你以团队形式参与而非个人，并加入所有的研讨会。下一个Datathon专注于气候变化，你将为全球事业做出贡献。
+[WiDS Datathon 2022](http://widsconference.org/datathon)将从 2022 年 1 月初持续到 2 月末在 Kaggle 上进行。注册链接在[这里](https://airtable.com/shrmG1SOK8lb4jNzZ)，要参与，你还需要创建一个 Kaggle 账户。我强烈建议你以团队形式参与而非个人，并加入所有的研讨会。下一个 Datathon 专注于气候变化，你将为全球事业做出贡献。
 
-![The Story of the Women in Data Science (WiDS) Datathon](../Images/cb1e3a6d5971b0aad0b4f62defc2ec03.png)
+![The Story of the Women in Data Science (WiDS) Datathon](img/cb1e3a6d5971b0aad0b4f62defc2ec03.png)
 
 由[Li-An Lim](https://unsplash.com/@li_anlim?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)
 
-参赛者将分析建筑能效的区域差异，并建立模型预测建筑能耗。此次竞赛将帮助政府或城市管理部门最大化能源效率。了解更多信息请访问[WiDS Datathon 2022挑战赛：利用数据科学缓解气候变化](https://www.widsconference.org/blog_archive/announcing-the-5th-annual-wids-datathon-2022-challenge-using-data-science-to-mitigate-climate-change)。
+参赛者将分析建筑能效的区域差异，并建立模型预测建筑能耗。此次竞赛将帮助政府或城市管理部门最大化能源效率。了解更多信息请访问[WiDS Datathon 2022 挑战赛：利用数据科学缓解气候变化](https://www.widsconference.org/blog_archive/announcing-the-5th-annual-wids-datathon-2022-challenge-using-data-science-to-mitigate-climate-change)。
 
-Karen Ebert Matthys的留言：
+Karen Ebert Matthys 的留言：
 
-> **“请[在这里注册](https://airtable.com/shrmG1SOK8lb4jNzZ)并加入我们1月7日的启动网络研讨会！同时，也请在1月期间查看[这里](https://www.widsconference.org/datathon-workshops-2022.html)，了解全球范围内提供的datathon工作坊，您可以获得指导并寻找团队成员。”**
+> **“请[在这里注册](https://airtable.com/shrmG1SOK8lb4jNzZ)并加入我们 1 月 7 日的启动网络研讨会！同时，也请在 1 月期间查看[这里](https://www.widsconference.org/datathon-workshops-2022.html)，了解全球范围内提供的 datathon 工作坊，您可以获得指导并寻找团队成员。”**
 
 ## 致谢
 
-我们感谢Kaggle和数据科学领域女性的支持性社区。我们特别感谢那些分享他们的解决方案和想法的人们。
+我们感谢 Kaggle 和数据科学领域女性的支持性社区。我们特别感谢那些分享他们的解决方案和想法的人们。
 
-**我们想在Kaggle上提到的一些名字：**
+**我们想在 Kaggle 上提到的一些名字：**
 
 +   [Siavash](https://www.kaggle.com/siavrez)
 
@@ -160,15 +160,15 @@ Karen Ebert Matthys的留言：
 
 +   [用于能源消耗预测和智能建筑调度的机器学习 | SpringerLink](https://link.springer.com/article/10.1007/s42452-020-2024-9)
 
-+   [Power-Laws-Forecasting：Power Laws预测比赛的获胜者 (github.com)](https://github.com/drivendataorg/power-laws-forecasting)
++   [Power-Laws-Forecasting：Power Laws 预测比赛的获胜者 (github.com)](https://github.com/drivendataorg/power-laws-forecasting)
 
 +   [初学者机器学习简介 | Ayush Pant | Towards Data Science](https://towardsdatascience.com/introduction-to-machine-learning-for-beginners-eed6024fdb08)
 
-+   [Python基础机器学习课程 — DataCamp Learn](https://app.datacamp.com/learn/skill-tracks/machine-learning-fundamentals-with-python)
++   [Python 基础机器学习课程 — DataCamp Learn](https://app.datacamp.com/learn/skill-tracks/machine-learning-fundamentals-with-python)
 
-+   [向WiDS Datathon 2021的获胜者学习，包括一位Kaggle大师 (widsconference.org)](https://www.widsconference.org/blog_archive/learn-from-wids-datathon-2021-winners-including-a-kaggle-grandmaster)
++   [向 WiDS Datathon 2021 的获胜者学习，包括一位 Kaggle 大师 (widsconference.org)](https://www.widsconference.org/blog_archive/learn-from-wids-datathon-2021-winners-including-a-kaggle-grandmaster)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro) ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证数据科学专业人员，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络为那些在精神健康方面挣扎的学生构建一个AI产品。**
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro) ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证数据科学专业人员，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络为那些在精神健康方面挣扎的学生构建一个 AI 产品。**
 
 ### 更多相关话题
 
@@ -176,10 +176,10 @@ Karen Ebert Matthys的留言：
 
 +   [讲述一个伟大的数据故事：可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)
 
-+   [KDnuggets™ 新闻 22:n09，3月2日：讲述一个伟大的数据故事：一个…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09，3 月 2 日：讲述一个伟大的数据故事：一个…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [数据世界中的女性](https://www.kdnuggets.com/2022/03/women-world-data.html)
 
-+   [8位在人工智能领域努力使世界更具人性化的女性](https://www.kdnuggets.com/2021/03/8-women-ai-striving-humanize-world.html)
++   [8 位在人工智能领域努力使世界更具人性化的女性](https://www.kdnuggets.com/2021/03/8-women-ai-striving-humanize-world.html)
 
 +   [庆祝女性在科技行业领导角色中的成就](https://www.kdnuggets.com/2022/07/celebrating-women-leadership-roles-tech-industry.html)

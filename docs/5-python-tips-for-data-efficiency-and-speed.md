@@ -1,8 +1,8 @@
 # 提升数据效率和速度的 5 个 Python 小技巧
 
-> 原文：[https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)
+> 原文：[`www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed`](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)
 
-![f-img](../Images/b9aace080bf31cb205834a05d2f462c2.png)
+![f-img](img/b9aace080bf31cb205834a05d2f462c2.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -250,22 +250,22 @@ Vectorized time: 0.047994 seconds
 
 本教程到此为止！
 
-我们回顾了以下技巧——使用列表推导代替循环、利用生成器进行高效处理、缓存昂贵的函数调用、使用上下文管理器管理资源以及利用NumPy进行向量化操作——这些都能帮助优化代码性能。
+我们回顾了以下技巧——使用列表推导代替循环、利用生成器进行高效处理、缓存昂贵的函数调用、使用上下文管理器管理资源以及利用 NumPy 进行向量化操作——这些都能帮助优化代码性能。
 
-如果你在寻找针对数据科学项目的技巧，请阅读 [5个Python数据科学最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)。
+如果你在寻找针对数据科学项目的技巧，请阅读 [5 个 Python 数据科学最佳实践](https://www.kdnuggets.com/5-python-best-practices-for-data-science)。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、意见文章等方式，学习并与开发者社区分享她的知识。Bala还制作了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、意见文章等方式，学习并与开发者社区分享她的知识。Bala 还制作了引人入胜的资源概述和编码教程。
 
 ### 相关话题
 
-+   [3种基于研究的高级提示技术提升LLM效率……](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
++   [3 种基于研究的高级提示技术提升 LLM 效率……](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
 
 +   [效率决定生物神经元与……的区别](https://www.kdnuggets.com/2022/11/efficiency-spells-difference-biological-neurons-artificial-counterparts.html)
 
 +   [计算深度学习模型的计算效率……](https://www.kdnuggets.com/2023/06/calculate-computational-efficiency-deep-learning-models-flops-macs.html)
 
-+   [利用ChatGPT最大化数据分析效率](https://www.kdnuggets.com/maximizing-efficiency-in-data-analysis-with-chatgpt)
++   [利用 ChatGPT 最大化数据分析效率](https://www.kdnuggets.com/maximizing-efficiency-in-data-analysis-with-chatgpt)
 
 +   [如何计算算法效率](https://www.kdnuggets.com/2022/09/calculate-algorithm-efficiency.html)
 
-+   [提升数学效率：驾驭Numpy数组操作](https://www.kdnuggets.com/elevate-math-efficiency-navigating-numpy-array-operations)
++   [提升数学效率：驾驭 Numpy 数组操作](https://www.kdnuggets.com/elevate-math-efficiency-navigating-numpy-array-operations)

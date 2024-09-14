@@ -1,6 +1,6 @@
 # AIG 和 Zurich 关于保险中的机器学习
 
-> 原文：[https://www.kdnuggets.com/2016/06/fcbi-aig-zurich-machine-learning-insurance.html](https://www.kdnuggets.com/2016/06/fcbi-aig-zurich-machine-learning-insurance.html)
+> 原文：[`www.kdnuggets.com/2016/06/fcbi-aig-zurich-machine-learning-insurance.html`](https://www.kdnuggets.com/2016/06/fcbi-aig-zurich-machine-learning-insurance.html)
 
 **作者：Emma Sheard，Insurance Nexus。**
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -22,7 +22,7 @@
 
 Insurance Nexus 最近与 AIG 和 Zurich Insurance 的保险高管进行了交谈，以了解这一点。
 
-现在查看完整白皮书，[![white paper](../Images/27f85b58a2ec37e4cc705ec43f714c28.png)**"你能做的任何事，AI 都能做得更好：保险中的机器学习应用" (1.fc-bi.com/LP=12421)**](http://1.fc-bi.com/LP=12421)！
+现在查看完整白皮书，![white paper**"你能做的任何事，AI 都能做得更好：保险中的机器学习应用" (1.fc-bi.com/LP=12421)**](http://1.fc-bi.com/LP=12421)！
 
 George Argesanu（AIG 全球分析主管）和 Monika Schulze（Zurich 全球营销主管）提供了独家的见解：
 
@@ -36,7 +36,7 @@ George Argesanu（AIG 全球分析主管）和 Monika Schulze（Zurich 全球营
 
 +   **未来日益增长的分析能力**将如何**影响整个行业**？
 
-在此处访问完整白皮书：[http://1.fc-bi.com/LP=12421](http://1.fc-bi.com/LP=12421)
+在此处访问完整白皮书：[`1.fc-bi.com/LP=12421`](http://1.fc-bi.com/LP=12421)
 
 Emma Sheard 是 Insurance Nexus（FC Business Intelligence 的一个部门）的战略主管。你可以通过 +44 (0) 207 422 4349 或 esheard@fc-bi.com 联系她。
 
@@ -44,9 +44,9 @@ Emma Sheard 是 Insurance Nexus（FC Business Intelligence 的一个部门）的
 
 ### 更多相关主题
 
-+   [KDnuggets新闻，12月14日：3门免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
 
-+   [每个机器学习工程师应该掌握的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应该掌握的 5 项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
 +   [学习数据科学、机器学习和深度学习的扎实计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 

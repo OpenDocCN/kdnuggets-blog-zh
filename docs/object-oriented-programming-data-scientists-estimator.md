@@ -1,10 +1,10 @@
-# 数据科学家的面向对象编程：构建你的ML估算器
+# 数据科学家的面向对象编程：构建你的 ML 估算器
 
-> 原文：[https://www.kdnuggets.com/2019/08/object-oriented-programming-data-scientists-estimator.html](https://www.kdnuggets.com/2019/08/object-oriented-programming-data-scientists-estimator.html)
+> 原文：[`www.kdnuggets.com/2019/08/object-oriented-programming-data-scientists-estimator.html`](https://www.kdnuggets.com/2019/08/object-oriented-programming-data-scientists-estimator.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-**更新**：你可以在[**这里**](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/OOP_in_ML/Class_MyLinearRegression.py)找到最新的Python脚本（包含线性回归类定义和方法）。利用它进一步构建或进行实验。
+**更新**：你可以在[**这里**](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/OOP_in_ML/Class_MyLinearRegression.py)找到最新的 Python 脚本（包含线性回归类定义和方法）。利用它进一步构建或进行实验。
 
 ### 问题是什么？
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
 数据科学家往往来自于与传统计算机科学/软件工程相去甚远的背景——物理学、生物学、统计学、经济学、电气工程等。
 
-![Figure](../Images/14047e07e857d9d8af0a64fd62947456.png)
+![Figure](img/14047e07e857d9d8af0a64fd62947456.png)
 
 **来源**：[“数据科学家来自哪里？”](https://medium.com/indeed-engineering/where-do-data-scientists-come-from-fc526023ace)
 
@@ -30,7 +30,7 @@
 
 **[成为数据科学家并不意味着你是软件工程师！](https://towardsdatascience.com/being-a-data-scientist-does-not-make-you-a-software-engineer-c64081526372?source=post_page-----7da416751f64----------------------)**
 
-如何构建可扩展的机器学习系统——第1部分/2部分
+如何构建可扩展的机器学习系统——第一部分/2 部分
 
 那么，大多数现代编程语言和软件工程范式的核心是什么？
 
@@ -38,13 +38,13 @@
 
 但[面向对象编程（OOP）](https://realpython.com/python3-object-oriented-programming/)的原理对初学者来说可能感觉陌生或甚至令人畏惧。因此，那些背景中没有计算机编程正式培训的数据科学家可能会发现面向对象编程的概念在日常工作中有些难以接受。
 
-受欢迎的数据科学/人工智能/机器学习的MOOC和训练营也无济于事。
+受欢迎的数据科学/人工智能/机器学习的 MOOC 和训练营也无济于事。
 
-他们尝试为新兴的数据科学家提供一种统计学、数值分析、科学编程、机器学习（ML）算法、可视化，甚至可能还有一点用于部署这些ML模型的网络框架的混合风味。
+他们尝试为新兴的数据科学家提供一种统计学、数值分析、科学编程、机器学习（ML）算法、可视化，甚至可能还有一点用于部署这些 ML 模型的网络框架的混合风味。
 
 几乎所有这些都可以学习和实践，即使不严格遵循面向对象编程的原则。事实上，渴望学习最新神经网络架构或最酷数据可视化技术的年轻数据科学家，如果被面向对象编程范式的细节淹没，可能会感到窒息。因此，MOOCs 通常不会在数据科学课程中混合或强调它。
 
-![](../Images/7fd218516dbca417bf02d9ed323659c7.png)
+![](img/7fd218516dbca417bf02d9ed323659c7.png)
 
 ### 一个简单的例子（还有一些…）
 
@@ -106,7 +106,7 @@ class Calc:
 
 或者，你还记得在 Jupyter notebook 中学会了这个酷技巧——在输入一个点（.）后按下 Tab 键，从而显示所有可以与一个*object*关联的函数吗？像这样，
 
-![](../Images/97c267ebc460ca2af1652a07ac458847.png)
+![](img/97c267ebc460ca2af1652a07ac458847.png)
 
 ### 这个例子展示了什么？
 
@@ -122,7 +122,7 @@ class Calc:
 
 > 数据、函数和参数共存于一个逻辑单元内。
 
-![](../Images/50eb96c8a9e886ec5e8981b520522367.png)
+![](img/50eb96c8a9e886ec5e8981b520522367.png)
 
 ### 这是怎么做到的？
 
@@ -136,7 +136,7 @@ class Calc:
 
 看，看起来多么合逻辑且可扩展？
 
-![](../Images/b574d609433e3dac521a60cf30c50316.png)
+![](img/b574d609433e3dac521a60cf30c50316.png)
 
 ### 创建你自己的 ML 估算器
 
@@ -150,7 +150,7 @@ class Calc:
 
 是的，它是那种古老的线性回归类。它具有与 Scikit-learn 的 `LinearRegression` 类相同的`fit`和`predict`方法。但它有更多功能。这里是一个简要预览……
 
-![](../Images/8c58fd137523c1bcd9c3dd1cd79a8707.png)
+![](img/8c58fd137523c1bcd9c3dd1cd79a8707.png)
 
 是的，这个估计器比 Scikit-learn 的估计器更丰富，因为它除了标准的`fit`、`predict`和 R² `score`函数外，还具有**一系列对线性回归建模任务至关重要的其他实用工具**。
 
@@ -174,43 +174,43 @@ class Calc:
 
 在这里，`self`表示对象本身，而`__init__`是一个[在创建类的实例时会调用的特殊函数](https://micropyramid.com/blog/understand-self-and-__init__-method-in-python-class/)。顾名思义，`__init__`可以用来用必要的参数（如果有的话）初始化类。
 
-![](../Images/70c02f5518e56cd53bb6ddc03a6d9c9a.png)
+![](img/70c02f5518e56cd53bb6ddc03a6d9c9a.png)
 
 我们可以添加一个简单的描述字符串以保持诚实 :-)
 
-![](../Images/6be0608e25d1f6584625e0e2da6593ef.png)
+![](img/6be0608e25d1f6584625e0e2da6593ef.png)
 
 接下来，我们添加核心的`fit`方法。请注意[**文档字符串**](https://www.geeksforgeeks.org/python-docstrings/)，它描述了方法的目的、功能以及期望的数据类型。[这些都是良好面向对象编程原则的一部分](https://towardsdatascience.com/how-a-simple-mix-of-object-oriented-programming-can-sharpen-your-deep-learning-prototype-19893bd969bd)。
 
-![](../Images/b0999e6f072e96e626a33d5bb4fee98f.png)
+![](img/b0999e6f072e96e626a33d5bb4fee98f.png)
 
 我们可以生成一些随机数据来测试到目前为止的代码。我们创建一个两个变量的线性函数。以下是数据的散点图。
 
-![](../Images/7f6ba261575fc70a25b26bb4a2b5df46.png)
+![](img/7f6ba261575fc70a25b26bb4a2b5df46.png)
 
 现在，我们可以创建一个名为`mlr`的`MyLinearRegression`类的实例。如果我们尝试打印回归参数，会发生什么呢？
 
-![](../Images/050574a0011945253ffa1324d61e849f.png)
+![](img/050574a0011945253ffa1324d61e849f.png)
 
 因为`self.coef_`被设置为`None`，所以在尝试打印`mlr.coef_`时得到的结果是一样的。注意，自创建`mlr`实例后，`self`变成了`mlr`的同义词。
 
 但是`fit`的定义包括在拟合完成后设置属性。因此，我们可以直接调用`mlr.fit()`并打印出拟合的回归参数。
 
-![](../Images/49eef3affe2909fca466bf5317cf6d43.png)
+![](img/49eef3affe2909fca466bf5317cf6d43.png)
 
 ### 最重要的`Predict`方法
 
 拟合之后就是预测。我们可以很容易地将该方法添加到我们的回归类中。
 
-![](../Images/adc25f937a8be3e2e63a7dbe181fc39e.png)
+![](img/adc25f937a8be3e2e63a7dbe181fc39e.png)
 
 ### 如果我们想添加一个（或几个）绘图工具函数怎么办？
 
 到目前为止，我们开始扩展我们的回归类，并**添加一些标准 scikit-learn 类中没有的东西！**例如，我们总是想查看拟合值与真实值的比较。为此创建一个函数很简单。我们将其命名为`plot_fitted`。
 
-请注意，[方法类似于普通函数](https://stackoverflow.com/questions/155609/whats-the-difference-between-a-method-and-a-function/29379748)。它可以接受额外的参数。在这里，我们有一个参数`reference_line`（默认设置为`False`），它在拟合与真实图中绘制了一条45度参考线。另外，注意文档字符串的描述。
+请注意，[方法类似于普通函数](https://stackoverflow.com/questions/155609/whats-the-difference-between-a-method-and-a-function/29379748)。它可以接受额外的参数。在这里，我们有一个参数`reference_line`（默认设置为`False`），它在拟合与真实图中绘制了一条 45 度参考线。另外，注意文档字符串的描述。
 
-![](../Images/aa3ddeee84b3de9e4bd2fcd2c3992387.png)
+![](img/aa3ddeee84b3de9e4bd2fcd2c3992387.png)
 
 我们可以通过简单地做以下操作来测试方法`plot_fitted`，
 
@@ -228,7 +228,7 @@ m.plot_fitted(reference_line=True)
 
 我们得到以下图！
 
-![](../Images/dc458160e528deab2021214f05391f73.png)
+![](img/dc458160e528deab2021214f05391f73.png)
 
 一旦我们明白可以将任何有用的方法添加到处理相同数据（训练集）且目的相同（线性回归）的类中，我们的想象力就没有界限了！如何将以下图添加到我们的类中？
 
@@ -246,7 +246,7 @@ m.plot_fitted(reference_line=True)
 
 继承是一个类从另一个类派生或继承属性的能力。其好处…
 
-我们进一步认识到**并非所有绘图类型相同**。Pairplots和拟合与真实数据的绘图性质相似，因为它们只能从数据中推导出。其他绘图与拟合优度和残差有关。
+我们进一步认识到**并非所有绘图类型相同**。Pairplots 和拟合与真实数据的绘图性质相似，因为它们只能从数据中推导出。其他绘图与拟合优度和残差有关。
 
 因此，我们可以创建两个独立的类来实现这些绘图功能——`Data_plots`和`Diagnostic_plots`。
 
@@ -254,13 +254,13 @@ m.plot_fitted(reference_line=True)
 
 **注意**：这可能与标准的父类-子类继承实践有所不同，但在这里使用了相同的语言特性，以保持主类的简洁和紧凑，同时从其他类似构建的类中继承有用的方法。
 
-![](../Images/dbf1bccc0045c88bdf44e7a8f63f493b.png)
+![](img/dbf1bccc0045c88bdf44e7a8f63f493b.png)
 
-注意以下代码片段仅供说明。请使用上面的Github链接查看实际代码。
+注意以下代码片段仅供说明。请使用上面的 Github 链接查看实际代码。
 
-![图](../Images/7e6d3e16ced328bdd829de63c91082f2.png)
+![图](img/7e6d3e16ced328bdd829de63c91082f2.png)
 
-`Data_plots`类！[图](../Images/e7df0082a7f0bcc4978c3d4321977433.png)
+`Data_plots`类！图
 
 `Diagnostics_plots`类
 
@@ -288,13 +288,13 @@ m.qqplot_resid() # Q-Q plot of the residuals
 
 我们得到，
 
-![](../Images/4c438910375e2697d073be9b2086c20b.png)
+![](img/4c438910375e2697d073be9b2086c20b.png)
 
 再次，代码的分离在这里发挥作用。你可以在不触及主类的情况下修改和改进核心绘图工具。高度灵活且减少错误的做法！
 
 ### 利用面向对象编程的强大功能做更多的事情
 
-我们不会进一步详细说明可以添加到`MyLinearRegression`的各种工具类和方法。你可以[**查看Github仓库**](https://github.com/tirthajyoti/Machine-Learning-with-Python/tree/master/OOP_in_ML)。
+我们不会进一步详细说明可以添加到`MyLinearRegression`的各种工具类和方法。你可以[**查看 Github 仓库**](https://github.com/tirthajyoti/Machine-Learning-with-Python/tree/master/OOP_in_ML)。
 
 ### 添加的额外类
 
@@ -302,23 +302,23 @@ m.qqplot_resid() # Q-Q plot of the residuals
 
 +   一个用于计算各种回归指标的类`Metrics`— SSE、SST、MSE、*R*²和调整后的*R*²。
 
-+   一个用于绘制Cook距离、杠杆和影响图的类`Outliers`
++   一个用于绘制 Cook 距离、杠杆和影响图的类`Outliers`
 
 +   一个用于计算方差膨胀因子（VIF）的类`Multicollinearity`
 
 总的来说，宏观计划如下，
 
-![](../Images/c7cd17cb8c128a37c79da2a641840506.png)
+![](img/c7cd17cb8c128a37c79da2a641840506.png)
 
-这个类是否比Scikit-learn的LinearRegression类更丰富？由你决定。
+这个类是否比 Scikit-learn 的 LinearRegression 类更丰富？由你决定。
 
 ### 通过创建分组工具来添加语法糖
 
-一旦你继承了其他类，它们的行为就像你熟悉的普通Python模块一样。因此，你可以向主类添加工具方法，以便同时执行子类中的多个方法。
+一旦你继承了其他类，它们的行为就像你熟悉的普通 Python 模块一样。因此，你可以向主类添加工具方法，以便同时执行子类中的多个方法。
 
-例如，下面的方法一次运行所有常见的诊断检查。注意我们是如何通过放置一个简单的**.DOT**，即`Diagnostics_plot.histogram_resid`来访问绘图方法的。就像从Pandas或NumPy库中访问函数一样！
+例如，下面的方法一次运行所有常见的诊断检查。注意我们是如何通过放置一个简单的**.DOT**，即`Diagnostics_plot.histogram_resid`来访问绘图方法的。就像从 Pandas 或 NumPy 库中访问函数一样！
 
-![图示](../Images/5d7eb84d02341a5bb80965d32df8a8bb.png)
+![图示](img/5d7eb84d02341a5bb80965d32df8a8bb.png)
 
 主类中的`run_diagnostics`方法
 
@@ -329,7 +329,7 @@ m = MyLinearRegression() # A brand new model instance
 m.fit(X,y) # Fit the model with some datam.run_diagnostics()
 ```
 
-![](../Images/84ee9de902da24ad8cfd0c739fc0275e.png)
+![](img/84ee9de902da24ad8cfd0c739fc0275e.png)
 
 同样，你可以将所有的异常值绘图功能添加到一个实用方法中。
 
@@ -343,7 +343,7 @@ m.fit(X,y) # Fit the model with some datam.run_diagnostics()
 
 一旦你这样做了，你可以从完全不同的笔记本中导入`MyLinearRegression`类。这通常是[**测试你的代码的首选方式**](https://atomicobject.com/resources/oo-programming/encapsulation-modularity)，因为这不会触及核心模型，而是仅用不同的数据样本和功能参数进行测试。
 
-![](../Images/8abefd0c466c96cfb71776b25f19d539.png)
+![](img/8abefd0c466c96cfb71776b25f19d539.png)
 
 此时，你可以考虑将这个 Python 脚本放到 Github 上，创建一个 Setup.py 文件，建立适当的目录结构，并将其[发布为一个独立的线性回归包](https://towardsdatascience.com/build-your-first-open-source-python-project-53471c9942a7)，该包可以进行拟合、预测、绘图、诊断等操作。
 
@@ -371,33 +371,33 @@ m.fit(X,y) # Fit the model with some datam.run_diagnostics()
 
 ### 课程？
 
-我尝试寻找相关课程，但如果你使用的是Python，发现很少有相关课程。大多数软件工程课程使用的是Java。以下是两个可能对你有帮助的课程，
+我尝试寻找相关课程，但如果你使用的是 Python，发现很少有相关课程。大多数软件工程课程使用的是 Java。以下是两个可能对你有帮助的课程，
 
-+   [面向数据科学家的Python软件工程](https://www.datacamp.com/courses/software-engineering-for-data-scientists-in-python)
++   [面向数据科学家的 Python 软件工程](https://www.datacamp.com/courses/software-engineering-for-data-scientists-in-python)
 
-+   [Python类与继承](https://www.coursera.org/learn/python-classes-inheritance/)
++   [Python 类与继承](https://www.coursera.org/learn/python-classes-inheritance/)
 
-如果你有任何问题或想法，请通过[**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)联系作者。此外，你可以查看作者的GitHub仓库，获取其他有趣的Python、R或MATLAB代码片段和机器学习资源。如果你像我一样对机器学习/数据科学充满热情，请随时[在LinkedIn上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[关注我在Twitter上的动态](https://twitter.com/tirthajyotiS)。
+如果你有任何问题或想法，请通过[**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)联系作者。此外，你可以查看作者的 GitHub 仓库，获取其他有趣的 Python、R 或 MATLAB 代码片段和机器学习资源。如果你像我一样对机器学习/数据科学充满热情，请随时[在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[关注我在 Twitter 上的动态](https://twitter.com/tirthajyotiS)。
 
 [原文](https://towardsdatascience.com/object-oriented-programming-for-data-scientists-build-your-ml-estimator-7da416751f64)。经许可转载。
 
 **相关：**
 
-+   [如何通过简单的面向对象编程提升你的深度学习原型](/2019/08/simple-mix-object-oriented-programming-sharpen-deep-learning-prototype.html)
++   如何通过简单的面向对象编程提升你的深度学习原型
 
-+   [数学编程 —  促进数据科学进步的关键习惯](/2019/05/mathematical-programming-key-habit-advancing-data-science.html)
++   数学编程 —  促进数据科学进步的关键习惯
 
-+   [使用Python优化：如何在最小风险下赚取最大金额？](/2019/06/optimization-python-money-risk.html)
++   使用 Python 优化：如何在最小风险下赚取最大金额？
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学，找到目标，再找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

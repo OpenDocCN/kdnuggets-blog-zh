@@ -1,26 +1,26 @@
 # 对抗性机器学习与生成对抗网络简介
 
-> 原文：[https://www.kdnuggets.com/2019/10/adversarial-machine-learning-generative-adversarial-networks.html](https://www.kdnuggets.com/2019/10/adversarial-machine-learning-generative-adversarial-networks.html)
+> 原文：[`www.kdnuggets.com/2019/10/adversarial-machine-learning-generative-adversarial-networks.html`](https://www.kdnuggets.com/2019/10/adversarial-machine-learning-generative-adversarial-networks.html)
 
-[评论](#comments)
+评论
 
-**作者：[Andrew Martin](https://www.linkedin.com/in/andrewbmart/)，Looka（前身为Logojoy）的数据主管**。
+**作者：[Andrew Martin](https://www.linkedin.com/in/andrewbmart/)，Looka（前身为 Logojoy）的数据主管**。
 
-机器学习是一个不断发展的领域，因此很容易觉得自己跟不上这个周世界变化的最新动态。最近获得大量关注的新兴领域之一是GANs——即生成对抗网络。
+机器学习是一个不断发展的领域，因此很容易觉得自己跟不上这个周世界变化的最新动态。最近获得大量关注的新兴领域之一是 GANs——即生成对抗网络。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-为了让你保持在机器学习的循环中，我们准备了一个简短的GANs速成课程：
+为了让你保持在机器学习的循环中，我们准备了一个简短的 GANs 速成课程：
 
 +   它们在生成模型的神圣殿堂中的位置
 
@@ -28,7 +28,7 @@
 
 +   它们的应用场景
 
-+   GANs面临的挑战
++   GANs 面临的挑战
 
 +   这个新兴的机器学习领域的未来发展
 
@@ -60,37 +60,37 @@
 
 **自回归模型：** 使用自回归模型，你通过生成每个像素，依据你已经生成的前一个像素来生成图像。也就是说，当你使用自回归模型生成图像时，你是逐像素生成图像的。这是一个[自回归模型](https://arxiv.org/pdf/1812.01608.pdf)的例子。
 
-**可逆模型：** 可逆模型的概念是将GAN的生成器过程变为可逆的。这意味着我们可以通过可逆模型双向传递图像和噪声——从噪声到图像，再从图像到噪声。这是一个[可逆模型](https://arxiv.org/pdf/1807.03039.pdf)的例子。
+**可逆模型：** 可逆模型的概念是将 GAN 的生成器过程变为可逆的。这意味着我们可以通过可逆模型双向传递图像和噪声——从噪声到图像，再从图像到噪声。这是一个[可逆模型](https://arxiv.org/pdf/1807.03039.pdf)的例子。
 
 **变分自编码器：** 自编码器由一对连接的网络组成：编码器和解码器。变分自编码器的特点是具有连续的潜在空间。这允许轻松的采样和插值，这在变分自编码器用于探索在指定方向上对现有数据的变化时特别有用。这是一个[变分自编码器](https://arxiv.org/pdf/1906.00446.pdf)的例子。
 
 ### 生成对抗网络
 
-现在，在经历了其他生成模型之后，我们来到了GAN——生成对抗网络。
+现在，在经历了其他生成模型之后，我们来到了 GAN——生成对抗网络。
 
-![](../Images/26fdce201e9ccd7301fb456f900e7f77.png)
+![](img/26fdce201e9ccd7301fb456f900e7f77.png)
 
 （图像来自[Brock 2018](https://arxiv.org/pdf/1809.11096.pdf)）
 
-首先，让我们查看一些由GAN生成的图像，以了解过去五年取得了多大进展。上述图像是无条件生成的ImageNet样本，来自2019年Andrew Brock在ICLR（国际学习表征会议）上展示的BigGAN模型。
+首先，让我们查看一些由 GAN 生成的图像，以了解过去五年取得了多大进展。上述图像是无条件生成的 ImageNet 样本，来自 2019 年 Andrew Brock 在 ICLR（国际学习表征会议）上展示的 BigGAN 模型。
 
 这些图像样本的显著之处在于两个主要原因：清晰度和类别的多样性。你有动物、蘑菇、食物、风景——所有这些都一起生成，所有图像都有清晰的分辨率。
 
 但情况并非一直如此。
 
-![](../Images/da76a4baf5f130aa2df1f47a20837515.png)
+![](img/da76a4baf5f130aa2df1f47a20837515.png)
 
 （图像示例来自[Goodfellow et al 2014](https://arxiv.org/pdf/1406.2661.pdf)）
 
-这是2014年Ian Goodfellow等人发表的原始GAN论文中的图像。当这篇论文发布时，这是当时最先进的图像生成技术。但与BigGAN生成的样本相比，它们相距甚远。仅从这些来自Toronto面部数据集的样本中，你可以看到这些图像的分辨率非常低，特征没有完全解析。
+这是 2014 年 Ian Goodfellow 等人发表的原始 GAN 论文中的图像。当这篇论文发布时，这是当时最先进的图像生成技术。但与 BigGAN 生成的样本相比，它们相距甚远。仅从这些来自 Toronto 面部数据集的样本中，你可以看到这些图像的分辨率非常低，特征没有完全解析。
 
-![](../Images/a808933bcdeca5851be72ac52f489fdc.png)
+![](img/a808933bcdeca5851be72ac52f489fdc.png)
 
 （图像示例来自[Karras et al. 2019](https://arxiv.org/pdf/1812.04948.pdf)）
 
-现在快进四年到Nvidia的StyleGAN论文，这些生成的人物看起来非常逼真。从2014年的模糊起点开始，GAN生成的面孔在短短4年内几乎无法与真实人物区分。
+现在快进四年到 Nvidia 的 StyleGAN 论文，这些生成的人物看起来非常逼真。从 2014 年的模糊起点开始，GAN 生成的面孔在短短 4 年内几乎无法与真实人物区分。
 
-**GAN概述**
+**GAN 概述**
 
 和我们讨论的其他模型一样，GANs 是一种生成模型。然而，与我们讨论的其他模型不同，GAN 是一种隐式生成模型。为了刷新记忆，这意味着如果我们想查看模型对分布的好坏，我们必须对其进行采样。
 
@@ -112,7 +112,7 @@
 
 起初，这些变换确实是完全无意义的。所以你将随机噪声传递给生成器，你得到的另一端看起来很像随机噪声。
 
-![](../Images/7c36a081dc365fa11bcefb9430f1e553.png)![](../Images/4c0b3d316e493ad5d5d0a9475187d301.png)
+![](img/7c36a081dc365fa11bcefb9430f1e553.png)![](img/4c0b3d316e493ad5d5d0a9475187d301.png)
 
 （噪声到图像变换过程的插图。噪声来自 Adobe Stock，面孔来自 [Karras et al. 2018](https://arxiv.org/pdf/1710.10196.pdf)）
 
@@ -130,7 +130,7 @@
 
 鉴别器的成本在于它希望正确识别真实样本为真实，并希望正确识别生成的样本为生成（公式 1）。
 
-![](../Images/60ab3d4045078f425e6f420a405c5f09.png)
+![](img/60ab3d4045078f425e6f420a405c5f09.png)
 
 （公式 1）
 
@@ -138,13 +138,13 @@
 
 这里有趣的是，生成器的成本只是该函数的负值（公式 2）。
 
-![](../Images/d63695d54e2a9407ef4498af65ea4c47.png)
+![](img/d63695d54e2a9407ef4498af65ea4c47.png)
 
 （公式 2）
 
 你会看到，这里我们有一个常量，用于表示方程中鉴别器识别真实样本为真实的部分——因为生成器与这个过程的这一部分没有直接关系。但人们发现，如果使用顶部方程中的生成器损失函数，损失会饱和。所以我们所做的是稍微改变一下公式（公式 3）。
 
-![](../Images/636514eeefc972c114b82894efa79e1b.png)
+![](img/636514eeefc972c114b82894efa79e1b.png)
 
 （公式 3）
 
@@ -156,7 +156,7 @@
 
 GANs 最早被识别的应用之一来自 Goodfellow 的原始论文，其中展示了 MNIST 中数字 1 和 5 之间的插值。这是一种表示学习，因为通过训练生成器和鉴别器，我们可以学习到原始数据集的潜在表示。
 
-![](../Images/97f60e0edde9f0d070be887394be2fb4.png)
+![](img/97f60e0edde9f0d070be887394be2fb4.png)
 
 （图像来自 [Karras et al. 2019](https://arxiv.org/pdf/1812.04948.pdf)）
 
@@ -164,9 +164,9 @@ GANs 最早被识别的应用之一来自 Goodfellow 的原始论文，其中展
 
 我们在这个特定示例中看到的是，我们将源 A 的风格应用到源 B 的结构上。在左上角，我们将眼镜应用到不同的图像上，或者让左侧的人看起来像年轻的孩子。
 
-![](../Images/85ba0787f200f79cdd0234cf0b40d42b.png)
+![](img/85ba0787f200f79cdd0234cf0b40d42b.png)
 
-![](../Images/dc487433cb81f5aa2e9218f6d59b3982.png)
+![](img/dc487433cb81f5aa2e9218f6d59b3982.png)
 
 （图像示例来自 [Zhu et al. 2017](https://arxiv.org/pdf/1703.10593.pdf) 和 [Isola et al. 2016](https://arxiv.org/pdf/1611.07004.pdf)）
 
@@ -194,7 +194,7 @@ GAN 的另一个应用是图像转换——在某些情况下，这是一种更�
 
 **模式崩溃**
 
-![](../Images/03afcd99e6555db9b03209a2685316a8.png)
+![](img/03afcd99e6555db9b03209a2685316a8.png)
 
 （模式崩溃的图像来自 [Goodfellow 2016](https://arxiv.org/pdf/1701.00160.pdf)）
 
@@ -246,4 +246,4 @@ GAN 还在音频生成（如语音模仿）、新药研发、建筑平面设计�
 
 +   [最先进的深度学习可解释预测和实时预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)
 
-+   [神经网络与深度学习：教科书（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
++   [神经网络与深度学习：教科书（第 2 版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)

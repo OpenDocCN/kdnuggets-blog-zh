@@ -1,24 +1,24 @@
 # GPT-4：你需要知道的一切
 
-> 原文：[https://www.kdnuggets.com/2023/03/gpt4-everything-need-know.html](https://www.kdnuggets.com/2023/03/gpt4-everything-need-know.html)
+> 原文：[`www.kdnuggets.com/2023/03/gpt4-everything-need-know.html`](https://www.kdnuggets.com/2023/03/gpt4-everything-need-know.html)
 
-![GPT-4：你需要知道的一切](../Images/0c208f285af94972c7fe6aae31d8dea1.png)
+![GPT-4：你需要知道的一切](img/0c208f285af94972c7fe6aae31d8dea1.png)
 
 编辑提供的图片
 
-# 什么是GPT？
+# 什么是 GPT？
 
-GPT代表生成预训练变换器。它是一个神经网络机器学习模型，通过使用互联网数据来训练以生成任何类型的文本。这种复杂的神经网络用于训练大型语言模型（LLMs）以模拟人类交流。
+GPT 代表生成预训练变换器。它是一个神经网络机器学习模型，通过使用互联网数据来训练以生成任何类型的文本。这种复杂的神经网络用于训练大型语言模型（LLMs）以模拟人类交流。
 
-该模型按照顺序跟踪单词，使其能够学习语言的上下文和含义。GPT模型专注于纯文本，使其能够利用人工智能分析用户的问题并有效生成文本。
+该模型按照顺序跟踪单词，使其能够学习语言的上下文和含义。GPT 模型专注于纯文本，使其能够利用人工智能分析用户的问题并有效生成文本。
 
 它凭借其对话能力、上下文信息等方面震撼了人工智能界。该模型能够处理诸如文本摘要、代码生成等任务，并在几秒钟内提供有价值的见解。
 
-# 关于GPT-3的一点信息
+# 关于 GPT-3 的一点信息
 
-GPT-3是一个自回归语言模型，通过预测下一个令牌进行训练。该模型需要一个初始提示文本，并可以继续生成文本，利用该初始提示。
+GPT-3 是一个自回归语言模型，通过预测下一个令牌进行训练。该模型需要一个初始提示文本，并可以继续生成文本，利用该初始提示。
 
-人类反馈强化学习（RLHF）用于帮助模型实现与用户的对话。GPT-3是一个1750亿参数的语言模型，具有以下使用场景：
+人类反馈强化学习（RLHF）用于帮助模型实现与用户的对话。GPT-3 是一个 1750 亿参数的语言模型，具有以下使用场景：
 
 +   文本摘要
 
@@ -30,19 +30,19 @@ GPT-3是一个自回归语言模型，通过预测下一个令牌进行训练。
 
 +   应用程序创建
 
-如果你想了解更多关于ChatGPT-3的信息，请阅读：[ChatGPT：你需要知道的一切](/2023/01/chatgpt-everything-need-know.html)
+如果你想了解更多关于 ChatGPT-3 的信息，请阅读：ChatGPT：你需要知道的一切
 
-# ChatGPT-4能做什么？
+# ChatGPT-4 能做什么？
 
-当微软德国首席技术官**Andreas Braun**宣布GPT-4计划在三月第三周发布时，产生了很多猜测。Andreas Braun博士在AI in Focus: Digital Kickoff中表示：
+当微软德国首席技术官**Andreas Braun**宣布 GPT-4 计划在三月第三周发布时，产生了很多猜测。Andreas Braun 博士在 AI in Focus: Digital Kickoff 中表示：
 
-*“我们将在下周介绍GPT-4，到时我们将拥有多模态模型，提供完全不同的可能性——例如视频”*
+*“我们将在下周介绍 GPT-4，到时我们将拥有多模态模型，提供完全不同的可能性——例如视频”*
 
-此时，OpenAI自己没有明确宣布，直到[昨天](https://openai.com/product/gpt-4)（2023年3月14日）。那么我们应该期待GPT-4带来什么？GPT-4是OpenAI的新技术，提供了最先进的系统，生成更安全、更有用的回应。
+此时，OpenAI 自己没有明确宣布，直到[昨天](https://openai.com/product/gpt-4)（2023 年 3 月 14 日）。那么我们应该期待 GPT-4 带来什么？GPT-4 是 OpenAI 的新技术，提供了最先进的系统，生成更安全、更有用的回应。
 
-OpenAI的总裁兼联合创始人**Greg Brockman**在GPT-4开发者直播中表示，自公司成立以来，OpenAI一直在构建GPT-4，过去2年专注于完善这项新技术。他们不得不重建整个训练堆栈，并训练模型以了解它的能力。
+OpenAI 的总裁兼联合创始人**Greg Brockman**在 GPT-4 开发者直播中表示，自公司成立以来，OpenAI 一直在构建 GPT-4，过去 2 年专注于完善这项新技术。他们不得不重建整个训练堆栈，并训练模型以了解它的能力。
 
-ChatGPT-4是多模态的，这意味着它可以使用各种数据类型，如图像、文本、语音和数值数据，以及多种智能处理算法来生成准确的高性能输出。它不再局限于语言模型。
+ChatGPT-4 是多模态的，这意味着它可以使用各种数据类型，如图像、文本、语音和数值数据，以及多种智能处理算法来生成准确的高性能输出。它不再局限于语言模型。
 
 ## 陈述 ChatGPT-4 的角色
 
@@ -124,17 +124,17 @@ Evals 允许你创建和运行评估：
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 ### 更多相关话题
 
-+   [KDnuggets新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
 
@@ -142,6 +142,6 @@ Evals 允许你创建和运行评估：
 
 +   [你需要知道的关于数据湖仓的一切](https://www.kdnuggets.com/2022/09/everything-need-know-data-lakehouses.html)
 
-+   [你需要知道的关于MLOps的一切：KDnuggets技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
++   [你需要知道的关于 MLOps 的一切：KDnuggets 技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
 
 +   [ChatGPT：你需要知道的一切](https://www.kdnuggets.com/2023/01/chatgpt-everything-need-know.html)

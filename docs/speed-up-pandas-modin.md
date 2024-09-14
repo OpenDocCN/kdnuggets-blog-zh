@@ -1,62 +1,62 @@
-# 如何使用Modin加速Pandas
+# 如何使用 Modin 加速 Pandas
 
-> 原文：[https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html](https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html)
+> 原文：[`www.kdnuggets.com/2021/03/speed-up-pandas-modin.html`](https://www.kdnuggets.com/2021/03/speed-up-pandas-modin.html)
 
-[评论](#comments)
+评论
 
-**由[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)提供，Anyscale的开发者关系**
+**由[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)提供，Anyscale 的开发者关系**
 
-![帖子图片](../Images/a2f02e7845fa9265b33d32c62787f1ad.png)
+![帖子图片](img/a2f02e7845fa9265b33d32c62787f1ad.png)
 
-Modin的一个目标是让数据科学家可以对小型（千字节）和大型数据集（泰字节）使用相同的代码。图片由[Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122)提供。
-
-* * *
-
-## 我们的前3个课程推荐
-
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
-
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
-
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+Modin 的一个目标是让数据科学家可以对小型（千字节）和大型数据集（泰字节）使用相同的代码。图片由[Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122)提供。
 
 * * *
 
-pandas库提供了易于使用的数据结构，如pandas DataFrames以及数据分析工具。pandas的一个问题是，它在处理大量数据时可能较慢。它[并非设计用于分析100 GB或1 TB的数据集](https://wesmckinney.com/blog/apache-arrow-pandas-internals/)。幸运的是，存在[Modin](https://github.com/modin-project/modin)库，它具备了通过更改一行代码来扩展pandas工作流程的能力，并与Python生态系统和[Ray](https://github.com/ray-project/ray)集群集成。此教程介绍了如何开始使用Modin以及它如何加速你的pandas工作流程。
+## 我们的前 3 个课程推荐
 
-### 如何开始使用Modin
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![帖子图片](../Images/1b52d1194af0e14293f4580370996975.png)
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-为了确定优先在Modin中实现哪些Pandas方法，Modin的开发者抓取了1800个最受欢迎的Python Kaggle Kernels（[代码](https://github.com/adgirish/kaggleScape)）。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
-Modin对pandas API的覆盖率超过90%，重点关注最常用的pandas方法，如pd.read_csv、pd.DataFrame、df.fillna和df.groupby。这意味着如果你有大量数据，你可以更快地执行大多数与pandas库相同的操作。本节重点介绍一些常用的操作。
+* * *
 
-要开始使用，你需要安装modin。
+pandas 库提供了易于使用的数据结构，如 pandas DataFrames 以及数据分析工具。pandas 的一个问题是，它在处理大量数据时可能较慢。它[并非设计用于分析 100 GB 或 1 TB 的数据集](https://wesmckinney.com/blog/apache-arrow-pandas-internals/)。幸运的是，存在[Modin](https://github.com/modin-project/modin)库，它具备了通过更改一行代码来扩展 pandas 工作流程的能力，并与 Python 生态系统和[Ray](https://github.com/ray-project/ray)集群集成。此教程介绍了如何开始使用 Modin 以及它如何加速你的 pandas 工作流程。
+
+### 如何开始使用 Modin
+
+![帖子图片](img/1b52d1194af0e14293f4580370996975.png)
+
+为了确定优先在 Modin 中实现哪些 Pandas 方法，Modin 的开发者抓取了 1800 个最受欢迎的 Python Kaggle Kernels（[代码](https://github.com/adgirish/kaggleScape)）。
+
+Modin 对 pandas API 的覆盖率超过 90%，重点关注最常用的 pandas 方法，如 pd.read_csv、pd.DataFrame、df.fillna 和 df.groupby。这意味着如果你有大量数据，你可以更快地执行大多数与 pandas 库相同的操作。本节重点介绍一些常用的操作。
+
+要开始使用，你需要安装 modin。
 
 ```py
 pip install “modin[all]” # Install Modin dependencies and modin’s execution engines
 ```
 
-![帖子图片](../Images/0078b35ddc8a136cef3436abad5562c3.png)
+![帖子图片](img/0078b35ddc8a136cef3436abad5562c3.png)
 
-pip安装时别忘了“”
+pip 安装时别忘了“”
 
-### 导入Modin
+### 导入 Modin
 
-Modin的一个主要优势是它不需要你学习新的API。你只需更改你的导入语句。
+Modin 的一个主要优势是它不需要你学习新的 API。你只需更改你的导入语句。
 
 ```py
 import modin.pandas as pd
 ```
 
-![帖子图片](../Images/68afbbcf93a4fb01f628dc05e56aa19d.png)
+![帖子图片](img/68afbbcf93a4fb01f628dc05e56aa19d.png)
 
-你只需更改你的导入语句以使用Modin。
+你只需更改你的导入语句以使用 Modin。
 
 ### 加载数据（read_csv）
 
-![帖子图片](../Images/04a7ef18ab5d3d7b96c45e74e16d2886.png)
+![帖子图片](img/04a7ef18ab5d3d7b96c45e74e16d2886.png)
 
 Modin 在处理较大的数据集时表现尤为出色 ([图像来源](https://github.com/devin-petersohn/presentations/tree/master/pydata_ny_2018))
 
@@ -66,7 +66,7 @@ Modin 在处理较大的数据集时表现尤为出色 ([图像来源](https://g
 modin_df = pd.read_csv("Rate.csv”)
 ```
 
-![图像来源](../Images/1063273d8350e825928a9b8fd93f9b7d.png)
+![图像来源](img/1063273d8350e825928a9b8fd93f9b7d.png)
 
 在这种情况下，由于 Modin 将工作转移到主线程之外以实现异步处理，因此速度更快。文件是并行读取的。性能提升的很大一部分来自于异步构建 DataFrame 组件。
 
@@ -79,7 +79,7 @@ modin_df = pd.read_csv("Rate.csv”)
 modin_df.head()
 ```
 
-![图像来源](../Images/aefc5be504a24020ceff65603ec068f6.png)
+![图像来源](img/aefc5be504a24020ceff65603ec068f6.png)
 
 在这种情况下，Modin 的速度较慢，因为它需要将数据汇总在一起。然而，用户在交互式工作流中不应能察觉到这种差异。
 
@@ -91,7 +91,7 @@ modin_df.head()
 df.groupby(['StateCode’]).count()
 ```
 
-![图像来源](../Images/baaae59fe33dc2478cff073794afdc8d.png)
+![图像来源](img/baaae59fe33dc2478cff073794afdc8d.png)
 
 请注意，计划进一步优化 Modin 中 groupby 操作的性能。
 
@@ -103,7 +103,7 @@ df.groupby(['StateCode’]).count()
 modin_df.fillna({‘IndividualTobaccoRate’: ‘Unknown’})
 ```
 
-![图像来源](../Images/cda4f0ac5fcba1228e3147466fc85ad0.png)
+![图像来源](img/cda4f0ac5fcba1228e3147466fc85ad0.png)
 
 ### 默认使用 Pandas 实现
 
@@ -113,13 +113,13 @@ modin_df.fillna({‘IndividualTobaccoRate’: ‘Unknown’})
 modin_df.corr(method = ‘kendall’)
 ```
 
-![图像来源](../Images/9e1fdc97bd1d098ab83c048e7a4c599f.png)
+![图像来源](img/9e1fdc97bd1d098ab83c048e7a4c599f.png)
 
 当 Modin 默认使用 Pandas 时，你会看到一个警告。
 
 尽管默认使用 Pandas 会有性能损失，但无论命令是否在 Modin 中实现，Modin 都会完成所有操作。
 
-![图像来源](../Images/32671e3a7bc2a5bfd91acf94014ecc25.png)
+![图像来源](img/32671e3a7bc2a5bfd91acf94014ecc25.png)
 
 如果某个方法未实现，它将默认使用 Pandas。
 
@@ -133,13 +133,13 @@ Modin 使 Pandas 工作流更快的三种主要方式是通过其多核/多节�
 
 ### 多核/多节点支持
 
-![图像来源](../Images/17ca356b32ac8f0b35354ed884c2a9ba.png)
+![图像来源](img/17ca356b32ac8f0b35354ed884c2a9ba.png)
 
 Pandas 只能利用单核，而 Modin 能够有效地利用所有可用的硬件。图像展示了 Modin 可以利用的资源（深蓝色），这些资源具有多个核心（B）和可用的多个节点（C）。
 
 pandas 库只能利用一个核心。由于今天几乎所有计算机都有多个核心，因此通过让 Modin 利用计算机上的所有核心，可以大大加快你的 pandas 工作流程。
 
-![帖子图片](../Images/4f2ba2500b54062ac386d089a631e1ac.png)
+![帖子图片](img/4f2ba2500b54062ac386d089a631e1ac.png)
 
 在本文中，你可以将上面的 MacBook 视为一个具有 4 个核心的单节点。
 
@@ -149,13 +149,13 @@ pandas 库只能利用一个核心。由于今天几乎所有计算机都有多�
 
 Modin 比 pandas 更快的另一个原因是 pandas 自身的实现方式。pandas 的创造者 Wes McKinney 发表了一个著名的演讲“[10 Things I Hate about Pandas](https://www.slideshare.net/wesm/practical-medium-data-analytics-with-python)”，讨论了 pandas 的一些灵活性和性能问题。
 
-![帖子图片](../Images/b921ff827b7e1df741e2bc98b8420abc.png)
+![帖子图片](img/b921ff827b7e1df741e2bc98b8420abc.png)
 
 Wes McKinney 对 pandas 的一些问题与性能有关。
 
 Modin 努力解决这些问题。要了解其方法，重要的是理解一些[系统架构](https://modin.readthedocs.io/en/latest/developer/architecture.html#query-compiler)。下图概述了 Modin 组件的一般分层视图及每个主要部分的简要描述。
 
-![帖子图片](../Images/b02c04ec0cb1a52b2fc81caa6561b7ce.png)
+![帖子图片](img/b02c04ec0cb1a52b2fc81caa6561b7ce.png)
 
 Modin 的系统架构
 
@@ -169,13 +169,13 @@ Modin 查询编译器：[除了其他职责](https://modin.readthedocs.io/en/lat
 
 ### 什么是 Ray
 
-![帖子图片](../Images/7290b3665b8bec7400c07b160e5cbae0.png)
+![帖子图片](img/7290b3665b8bec7400c07b160e5cbae0.png)
 
 Ray 使并行和分布式处理的工作更接近你的期望（[图片来源](https://www.reddit.com/r/aww/comments/2oagj8/multithreaded_programming_theory_and_practice/)）。
 
 Ray 是 Modin 的默认执行引擎。本节简要介绍了 Ray 是什么以及它如何作为不止是执行引擎来使用。
 
-![帖子图片](../Images/75ba50e30d970764e1d2547840720791.png)
+![帖子图片](img/75ba50e30d970764e1d2547840720791.png)
 
 上面的图表显示，从高层次来看，Ray 生态系统由核心 Ray 系统和用于数据科学的可扩展库组成，如 [Modin](https://github.com/modin-project/modin)。它是一个用于 [扩展 Python 应用程序](https://towardsdatascience.com/modern-parallel-and-distributed-python-a-quick-tutorial-on-ray-99f8d70369b8) 的库，能够在多个核心或机器上运行。它有几个主要优势，包括：
 
@@ -189,13 +189,13 @@ Ray 是 Modin 的默认执行引擎。本节简要介绍了 Ray 是什么以及�
 
 虽然你不需要学习如何使用 Ray 来使用 Modin，但下面的图像显示，通常只需添加几行代码就能将一个简单的 Python 程序转换为在计算集群上运行的分布式程序。
 
-![Image for post](../Images/3aa859324b01834c4aaba78c14b988f7.png)
+![Image for post](img/3aa859324b01834c4aaba78c14b988f7.png)
 
 如何使用 Ray 将一个简单的程序转换为分布式程序的示例（[代码说明](https://youtu.be/zRaWCFJcagI?t=754)）。
 
 ### 结论
 
-![Image for post](../Images/0b02ae3662f15cf8ec2a6ffb4d8c5948.png)
+![Image for post](img/0b02ae3662f15cf8ec2a6ffb4d8c5948.png)
 
 Modin 的一个目标是允许数据科学家使用相同的代码来处理小（千字节）和大（千兆字节）数据集。图片来自 [Devin Petersohn](https://towardsdatascience.com/the-modin-view-of-scaling-pandas-825215533122)。
 
@@ -207,11 +207,11 @@ Modin 允许你使用相同的 Pandas 脚本来处理笔记本电脑上的 10KB 
 
 **相关：**
 
-+   [使用 PyTorch 和 Ray 开始分布式机器学习](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
++   使用 PyTorch 和 Ray 开始分布式机器学习
 
-+   [将 sklearn 训练速度提高 100 倍](/2019/09/train-sklearn-100x-faster.html)
++   将 sklearn 训练速度提高 100 倍
 
-+   [如何加速 Scikit-Learn 模型训练](/2021/02/speed-up-scikit-learn-model-training.html)
++   如何加速 Scikit-Learn 模型训练
 
 ### 更多相关内容
 

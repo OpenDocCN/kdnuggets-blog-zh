@@ -1,8 +1,8 @@
 # 重新定义数据可视化：掌握 Pandas 中的时间基础重采样
 
-> 原文：[https://www.kdnuggets.com/revamping-data-visualization-mastering-timebased-resampling-in-pandas](https://www.kdnuggets.com/revamping-data-visualization-mastering-timebased-resampling-in-pandas)
+> 原文：[`www.kdnuggets.com/revamping-data-visualization-mastering-timebased-resampling-in-pandas`](https://www.kdnuggets.com/revamping-data-visualization-mastering-timebased-resampling-in-pandas)
 
-![重新定义数据可视化：掌握 Pandas 中的时间基础重采样](../Images/bd136345f15863c634d50578c1797adb.png)
+![重新定义数据可视化：掌握 Pandas 中的时间基础重采样](img/bd136345f15863c634d50578c1797adb.png)
 
 图片来源于 [Freepik](https://www.freepik.com/free-photo/data-analysis-marketing-business-report-concept_17123810.htm#query=analytics&position=46&from_view=keyword&track=sph)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 在处理基于时间的数据可视化时，数据重采样至关重要且非常有用。它允许你控制数据的粒度，从而提取有意义的见解并创建视觉上引人注目的表示，以更好地理解数据。在下面的图片中，你可以观察到，你可以根据需求对时间序列数据进行上采样或下采样。
 
-![重新定义数据可视化：掌握 Pandas 中的时间基础重采样](../Images/3daa2b2418638c6042fb44c9c1372f8c.png)
+![重新定义数据可视化：掌握 Pandas 中的时间基础重采样](img/3daa2b2418638c6042fb44c9c1372f8c.png)
 
 图片来源于 [SQLRelease](https://www.google.com/imgres?imgurl=https%3A%2F%2Fsqlrelease.com%2F%2Fwp-content%2Fuploads%2F2018%2F09%2FPython-use-case-Resampling-time-series-data-Upsampling-and-downsampling-SQL-Server-2017-Upsampling-and-downsampling.png&tbnid=mMi4gM1XYtqOxM&vet=12ahUKEwjWienfyr6BAxWKzaACHa8FCYsQMygNegQIARBv..i&imgrefurl=https%3A%2F%2Fsqlrelease.com%2Fpython-use-case-resampling-time-series-data-upsampling-and-downsampling-sql-server-2017&docid=Kr0kzdsRLm36DM&w=578&h=620&q=time%20based%20data%20resampling%20image&ved=2ahUKEwjWienfyr6BAxWKzaACHa8FCYsQMygNegQIARBv)
 
@@ -88,7 +88,7 @@ print(yearly_avg.head())
 
 在处理基于时间的数据时，了解各种聚合方法和技术至关重要。这些方法使你能够有效地总结和分析数据，揭示时间信息的不同方面。标准聚合方法包括计算总和和均值或应用自定义函数。
 
-![重塑数据可视化：掌握 pandas 中基于时间的重采样](../Images/8ec94c373aad9032523a121587800eff.png)
+![重塑数据可视化：掌握 pandas 中基于时间的重采样](img/8ec94c373aad9032523a121587800eff.png)
 
 图片来源于 [TowardsDataScience](https://towardsdatascience.com/time-series-analysis-resampling-shifting-and-rolling-f5664ddef77e)
 
@@ -148,11 +148,11 @@ plt.show()
 
 **输出：**
 
-![重塑数据可视化：掌握 pandas 中基于时间的重采样](../Images/b37bfe3a294355427476caad189dae28.png)
+![重塑数据可视化：掌握 pandas 中基于时间的重采样](img/b37bfe3a294355427476caad189dae28.png)
 
 图片由作者提供
 
-在上面的例子中，你可以看到首先，我们模拟了缺失的温度值（约占数据的20%），然后使用前向填充（ffill）方法来填补这些空白，这意味着缺失的值被替换为前一天的温度。
+在上面的例子中，你可以看到首先，我们模拟了缺失的温度值（约占数据的 20%），然后使用前向填充（ffill）方法来填补这些空白，这意味着缺失的值被替换为前一天的温度。
 
 因此，处理缺失数据可以确保你的可视化准确地代表时间序列中的潜在趋势和模式，防止空白扭曲你的洞察或误导你的受众。根据数据的性质和研究问题，可以采用各种策略，如插值或向后填充。
 
@@ -189,7 +189,7 @@ plt.show()
 
 **输出：**
 
-![重新定义数据可视化：掌握 Pandas 中的基于时间的重采样](../Images/f8b4387de8e58f87b2d640b22c633fb4.png)
+![重新定义数据可视化：掌握 Pandas 中的基于时间的重采样](img/f8b4387de8e58f87b2d640b22c633fb4.png)
 
 图片由作者提供
 
@@ -199,7 +199,7 @@ plt.show()
 
 # 总结
 
-**Colab Notebook 链接：** [https://colab.research.google.com/drive/19oM7NMdzRgQrEDfRsGhMavSvcHx79VDK#scrollTo=nHg3oSjPfS-Y](https://colab.research.google.com/drive/19oM7NMdzRgQrEDfRsGhMavSvcHx79VDK#scrollTo=nHg3oSjPfS-Y)
+**Colab Notebook 链接：** [`colab.research.google.com/drive/19oM7NMdzRgQrEDfRsGhMavSvcHx79VDK#scrollTo=nHg3oSjPfS-Y`](https://colab.research.google.com/drive/19oM7NMdzRgQrEDfRsGhMavSvcHx79VDK#scrollTo=nHg3oSjPfS-Y)
 
 在这篇文章中，我们讨论了 Python 中的数据的基于时间的重采样。因此，为了总结我们的讨论，让我们回顾一下文章中涵盖的重要点：
 

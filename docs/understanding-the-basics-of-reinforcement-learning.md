@@ -1,8 +1,8 @@
 # 理解强化学习的基础
 
-> 原文：[https://www.kdnuggets.com/understanding-the-basics-of-reinforcement-learning](https://www.kdnuggets.com/understanding-the-basics-of-reinforcement-learning)
+> 原文：[`www.kdnuggets.com/understanding-the-basics-of-reinforcement-learning`](https://www.kdnuggets.com/understanding-the-basics-of-reinforcement-learning)
 
-![理解强化学习的基础](../Images/ae95ebb172fd241073ad13c19e1f1377.png)
+![理解强化学习的基础](img/ae95ebb172fd241073ad13c19e1f1377.png)
 
 图片来源：编辑 | Ideogram
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -24,15 +24,15 @@
 
 强化学习（RL）是人工智能的一个分支，在这个领域中，代理——通常是软件程序——通过与环境的交互逐渐学会智能决策。
 
-为了更好地理解RL背后的原理，一个常见的比较是小孩子学习骑自行车。一开始，孩子会尝试不同的动作，通常会导致摔倒。每次孩子摔下自行车时，(s)he 会感受到疼痛（惩罚），而如果孩子能够骑行几米而不摔倒，(s)he 会感到满意（奖励）。孩子逐渐内化哪些动作——或动作序列——能够实现平稳骑行，应用这些动作并提高骑行技能。
+为了更好地理解 RL 背后的原理，一个常见的比较是小孩子学习骑自行车。一开始，孩子会尝试不同的动作，通常会导致摔倒。每次孩子摔下自行车时，(s)he 会感受到疼痛（惩罚），而如果孩子能够骑行几米而不摔倒，(s)he 会感到满意（奖励）。孩子逐渐内化哪些动作——或动作序列——能够实现平稳骑行，应用这些动作并提高骑行技能。
 
-同样，在RL中，代理执行动作以获得奖励或惩罚，并迭代地调整其行为以提高性能。
+同样，在 RL 中，代理执行动作以获得奖励或惩罚，并迭代地调整其行为以提高性能。
 
-## RL算法的元素
+## RL 算法的元素
 
-理解RL基础的第一步是介绍RL算法的关键元素。这些元素在下面的图示中展示。
+理解 RL 基础的第一步是介绍 RL 算法的关键元素。这些元素在下面的图示中展示。
 
-![RL算法的元素](../Images/392daabd31142d084e1bffe0470668d4.png)
+![RL 算法的元素](img/392daabd31142d084e1bffe0470668d4.png)
 
 +   **代理：** 在环境中做决策并采取行动以实现目标的软件实体。
 
@@ -78,14 +78,14 @@
 
 ### 更多相关主题
 
-+   [回到基础第3周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [回到基础第 3 周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
 
-+   [回到基础，第2部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
++   [回到基础，第二部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
 
 +   [通过这本免费电子书学习 MLOps 基础知识](https://www.kdnuggets.com/2023/08/learn-mlops-basics-free-ebook.html)
 
 +   [Python 基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
 
-+   [回到基础第1周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [回到基础第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
-+   [回到基础第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础第 4 周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)

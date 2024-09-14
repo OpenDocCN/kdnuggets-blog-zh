@@ -1,12 +1,12 @@
 # Python 数据准备案例文件：删除实例与基本插补
 
-> 原文：[https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html)
+> 原文：[`www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html`](https://www.kdnuggets.com/2017/09/python-data-preparation-case-files-basic-imputation.html)
 
-![基本插补](../Images/136f58512f2655eb9fcfe8fe229e5386.png)
+![基本插补](img/136f58512f2655eb9fcfe8fe229e5386.png)
 
 数据准备涵盖了许多潜在的内容：数据集成、数据转换、特征选择、特征工程等等。数据准备的一个最基本、也是最重要的方面是处理缺失值。
 
-从实际的角度来看，处理包含缺失值的数据实例有3种一般方法：
+从实际的角度来看，处理包含缺失值的数据实例有 3 种一般方法：
 
 1.  删除具有缺失值的数据实例
 
@@ -16,15 +16,15 @@
 
 请记住，这些方法仅从技术角度来看。它们并没有解决在特定情境下哪个方法或方法组合是合适的。这些决策取决于对数据、领域和期望结果的理解，不能在这样的文章中详细讨论。
 
-当然，删除具有缺失值的数据实例的第一种方法有多种实现方式：删除所有具有任何缺失值的实例；删除所有具有2个或更多缺失值的实例；删除所有仅缺少特定特征值的实例。同样，第二种方法，即填充缺失值——或称为插补——可以基于多种测量标准，包括均值、中位数、众数、回归或其他策略。第三种方法提到，一些机器学习算法，如随机森林，通常可以充分处理缺失值，而其他算法则无法处理。
+当然，删除具有缺失值的数据实例的第一种方法有多种实现方式：删除所有具有任何缺失值的实例；删除所有具有 2 个或更多缺失值的实例；删除所有仅缺少特定特征值的实例。同样，第二种方法，即填充缺失值——或称为插补——可以基于多种测量标准，包括均值、中位数、众数、回归或其他策略。第三种方法提到，一些机器学习算法，如随机森林，通常可以充分处理缺失值，而其他算法则无法处理。
 
-由于第#1点和第#3点相对简单（尽管选择它们的**推理**可能复杂，但决定采纳后的操作相当简单），第#2点，即插补，是我们将在本系列文章中主要讨论的内容。如你所见，插补的变种足够多，需要额外的关注。
+由于第#1 点和第#3 点相对简单（尽管选择它们的**推理**可能复杂，但决定采纳后的操作相当简单），第#2 点，即插补，是我们将在本系列文章中主要讨论的内容。如你所见，插补的变种足够多，需要额外的关注。
 
 我想再次提醒，这只是处理缺失数据值的几种方法的简要概述，并强调没有对任何特定情境下的某种方法表示认可，尤其是涉及到与领域相关的整体决策时。你应该注意在这些问题上需要寻求其他指导。
 
 ### 数据
 
-对于这些练习，我们将使用一个通过[Mockaroo](https://www.mockaroo.com/)构建的模拟银行信息数据集。该小数据集包括10个变量或特征（包括类别或目标变量）-- 对应于表格的列 -- 和1000个实例 -- 对应于表格的行（见图1）。我们的练习目的是模拟一个使用银行客户数据来决定（并预测）是否向客户提供特别优惠的过程，假设“更好”的客户会收到优惠。
+对于这些练习，我们将使用一个通过[Mockaroo](https://www.mockaroo.com/)构建的模拟银行信息数据集。该小数据集包括 10 个变量或特征（包括类别或目标变量）-- 对应于表格的列 -- 和 1000 个实例 -- 对应于表格的行（见图 1）。我们的练习目的是模拟一个使用银行客户数据来决定（并预测）是否向客户提供特别优惠的过程，假设“更好”的客户会收到优惠。
 
 什么才是“更好”的客户？我们将如何对数据建模？我们现在还不太关心这些。我们将在数据准备过程中进行一些业余猜测，但**终极目标**是为建模和预测过程准备好数据集，而不是执行该过程。在现实生活中，你不想凭空揣测领域知识，但在此过程中，我们会对数据的有用性做出一些合理的假设。
 
@@ -32,7 +32,7 @@
 
 让我们开始导入数据集并查看它。我们还将总结缺失值。首先，[在这里获取数据集](https://drive.google.com/file/d/0B6GhBwm5vaB2S3V6bXdBNE1jLUU/view?usp=sharing)。
 
-```py` ``` import pandas as pd  import numpy as np    # 导入数据集  dataset_filename = 'mock_bank_data_original.csv'  df = pd.read_csv(dataset_filename)    # 总结缺失值  print 'Null values by variable:'  print '------------------------'  df.isnull().sum() ```py ````  ```py` ``` Null values by variable:  ------------------------  customer_id         18  name                 0  email              158  sex                111  age                113  state               40  cheq_balance        23  savings_balance     96  credit_score         0  special_offer        0  dtype: int64 ```py ```` ![银行数据](../Images/b084dbd6d8e7cb9b84cc90d63eca151f.png)
+```py` ``` import pandas as pd  import numpy as np    # 导入数据集  dataset_filename = 'mock_bank_data_original.csv'  df = pd.read_csv(dataset_filename)    # 总结缺失值  print 'Null values by variable:'  print '------------------------'  df.isnull().sum() ```py ````  ```py` ``` Null values by variable:  ------------------------  customer_id         18  name                 0  email              158  sex                111  age                113  state               40  cheq_balance        23  savings_balance     96  credit_score         0  special_offer        0  dtype: int64 ```py ```` ![银行数据](img/b084dbd6d8e7cb9b84cc90d63eca151f.png)
 
 **图 1：** 我们练习的模拟银行数据集。
 
@@ -70,21 +70,21 @@
 
 **相关内容**：
 
-+   [用 Python 掌握数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   用 Python 掌握数据准备的 7 个步骤
 
-+   [从零开始的 Python 机器学习工作流 第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从零开始的 Python 机器学习工作流 第一部分：数据准备
 
-+   [数据准备技巧、窍门和工具：内部人士的访谈](/2016/10/data-preparation-tips-tricks-tools.html)
++   数据准备技巧、窍门和工具：内部人士的访谈
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

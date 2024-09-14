@@ -1,8 +1,8 @@
 # 7 个你需要掌握的超级备忘单以应对机器学习面试
 
-> 原文：[https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
+> 原文：[`www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html`](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
 
-![7 个你需要掌握的超级备忘单以应对机器学习面试](../Images/bebe0faf21b1bae6f3c5581b2e789261.png)
+![7 个你需要掌握的超级备忘单以应对机器学习面试](img/bebe0faf21b1bae6f3c5581b2e789261.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 [机器学习算法](https://www.datacamp.com/cheat-sheet/machine-learning-cheat-sheet) 备忘单涵盖了算法的描述、应用、优缺点。它是你进入监督和无监督机器学习模型世界的门户，在这里你将学习到线性模型和基于树的模型、聚类以及关联分析。
 
-![7 个你需要掌握的超级备忘单以应对机器学习面试](../Images/874891cd7a839942d7f4be198bb0118b.png)
+![7 个你需要掌握的超级备忘单以应对机器学习面试](img/874891cd7a839942d7f4be198bb0118b.png)
 
 图片来源于 [备忘单](https://www.datacamp.com/cheat-sheet/machine-learning-cheat-sheet)
 
@@ -60,13 +60,13 @@
 
 # Scikit-learn 机器学习备忘单
 
-[Scikit-learn 机器学习备忘单](/2022/12/scikit-learn-machine-learning-cheatsheet.html) 包含了 Scikit-learn 的数据加载、数据拆分、监督和无监督模型、预测、模型评估和模型调优的 API。
+Scikit-learn 机器学习备忘单 包含了 Scikit-learn 的数据加载、数据拆分、监督和无监督模型、预测、模型评估和模型调优的 API。
 
 你将学习数据处理、特征工程、应用各种模型以及使用 Grid Search 改善模型性能。
 
-![7 个你需要掌握的超级备忘单以应对机器学习面试](../Images/7e4fdea0adf8a8aaac43f3001054090c.png)
+![7 个你需要掌握的超级备忘单以应对机器学习面试](img/7e4fdea0adf8a8aaac43f3001054090c.png)
 
-图片来源于 [备忘单](/2022/12/scikit-learn-machine-learning-cheatsheet.html)
+图片来源于 备忘单
 
 备忘单包含：
 
@@ -94,7 +94,7 @@
 
 [机器学习技巧和窍门](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks) 备忘单主要涉及模型指标、模型选择和评估。这是一份由斯坦福大学提供的网络备忘单，您可以了解分类和回归、交叉验证和正则化，以及偏差与方差的权衡。
 
-![你需要掌握的 7 个超级备忘单](../Images/0d98a0ebd9ed7f1adbeb5f5668196a42.png)
+![你需要掌握的 7 个超级备忘单](img/0d98a0ebd9ed7f1adbeb5f5668196a42.png)
 
 来自 [备忘单](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks) 的图片
 
@@ -108,11 +108,11 @@
 
 1.  诊断
 
-# 深度学习超级VIP备忘单
+# 深度学习超级 VIP 备忘单
 
-[深度学习超级VIP](https://github.com/afshinea/stanford-cs-230-deep-learning/blob/master/en/super-cheatsheet-deep-learning.pdf) 备忘单解释了深度学习的各种组件，通过图表和数学讲解。您将学习卷积神经网络、递归神经网络、深度学习技巧和窍门，深入了解计算机视觉和自然语言处理模型。
+[深度学习超级 VIP](https://github.com/afshinea/stanford-cs-230-deep-learning/blob/master/en/super-cheatsheet-deep-learning.pdf) 备忘单解释了深度学习的各种组件，通过图表和数学讲解。您将学习卷积神经网络、递归神经网络、深度学习技巧和窍门，深入了解计算机视觉和自然语言处理模型。
 
-![你需要掌握的 7 个超级备忘单](../Images/0dad078c9cb7f14d88291c975cf6eabe.png)
+![你需要掌握的 7 个超级备忘单](img/0dad078c9cb7f14d88291c975cf6eabe.png)
 
 来自 [备忘单](https://github.com/afshinea/stanford-cs-230-deep-learning/blob/master/en/super-cheatsheet-deep-learning.pdf) 的图片
 
@@ -148,13 +148,13 @@
 
 1.  正则化
 
-# Keras中的神经网络备忘单
+# Keras 中的神经网络备忘单
 
-在 [Keras：Python中的神经网络](https://datacamp-community-prod.s3.amazonaws.com/af9bb467-170d-41c9-a0bd-26e675384c4e) 备忘单中，您将学习如何处理和准备神经网络模型的数据。此外，您将学习如何构建模型架构、编译、训练、调优以及执行模型评估。
+在 [Keras：Python 中的神经网络](https://datacamp-community-prod.s3.amazonaws.com/af9bb467-170d-41c9-a0bd-26e675384c4e) 备忘单中，您将学习如何处理和准备神经网络模型的数据。此外，您将学习如何构建模型架构、编译、训练、调优以及执行模型评估。
 
-这份备忘单是快速复习Keras命令和学习新知识的好方法。
+这份备忘单是快速复习 Keras 命令和学习新知识的好方法。
 
-![你需要掌握的 7 个超级备忘单](../Images/d2a44f6340c60118126ba7f09bfe811d.png)
+![你需要掌握的 7 个超级备忘单](img/d2a44f6340c60118126ba7f09bfe811d.png)
 
 来自 [备忘单](https://datacamp-community-prod.s3.amazonaws.com/af9bb467-170d-41c9-a0bd-26e675384c4e) 的图片
 
@@ -180,19 +180,19 @@
 
 1.  模型微调
 
-# 使用Pytorch的深度学习备忘单
+# 使用 Pytorch 的深度学习备忘单
 
-[PyTorch官方备考清单](https://pytorch.org/tutorials/beginner/ptcheat.html)包括处理数据和构建深度学习模型的命令和API。它是一个为有经验的PyTorch用户提供的简明API。
+[PyTorch 官方备考清单](https://pytorch.org/tutorials/beginner/ptcheat.html)包括处理数据和构建深度学习模型的命令和 API。它是一个为有经验的 PyTorch 用户提供的简明 API。
 
-![7个你需要的超级备考清单以征服机器学习面试](../Images/3bd7734525a7cbcb4b9f244891bfe79c.png)
+![7 个你需要的超级备考清单以征服机器学习面试](img/3bd7734525a7cbcb4b9f244891bfe79c.png)
 
 图片来源于[备考清单](https://pytorch.org/tutorials/beginner/ptcheat.html)
 
 备考清单包括：
 
-1.  **导入：** 神经网络API、Torchscript和JIT、ONNX、Vision以及分布式训练。
+1.  **导入：** 神经网络 API、Torchscript 和 JIT、ONNX、Vision 以及分布式训练。
 
-1.  **张量：** 创建、维度、代数以及GPU使用。
+1.  **张量：** 创建、维度、代数以及 GPU 使用。
 
 1.  **深度学习：** 损失函数、激活函数、优化器和学习率调度。
 
@@ -202,7 +202,7 @@
 
 在[机器学习面试备考清单](https://medium.com/swlh/cheat-sheets-for-machine-learning-interview-topics-51c2bc2bab4f)中，作者通过图形化表示解释了机器学习面试中最常见的问题。该备考清单将帮助你通过了解各种机器学习算法、问题、权衡、数据处理和模型调优来在面试中取得成功。
 
-![7个你需要的超级备考清单以征服机器学习面试](../Images/2446ab6df9e364257b46e6b42b8a69ec.png)
+![7 个你需要的超级备考清单以征服机器学习面试](img/2446ab6df9e364257b46e6b42b8a69ec.png)
 
 图片来源于[备考清单](https://medium.com/swlh/cheat-sheets-for-machine-learning-interview-topics-51c2bc2bab4f)
 
@@ -240,14 +240,14 @@
 
 ### 更多相关话题
 
-+   [10个你需要的速查表助你征服数据科学面试](https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html)
++   [10 个你需要的速查表助你征服数据科学面试](https://www.kdnuggets.com/2022/10/10-cheat-sheets-need-ace-data-science-interview.html)
 
-+   [7个必备速查表助你征服数据科学面试](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
++   [7 个必备速查表助你征服数据科学面试](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
 
-+   [5个超实用的SQL速查表你不能错过！](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
++   [5 个超实用的 SQL 速查表你不能错过！](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
 
-+   [5个超实用的速查表掌握数据科学](https://www.kdnuggets.com/5-super-cheat-sheets-to-master-data-science)
++   [5 个超实用的速查表掌握数据科学](https://www.kdnuggets.com/5-super-cheat-sheets-to-master-data-science)
 
-+   [10个统计学问题助你征服数据科学面试](https://www.kdnuggets.com/10-statistics-questions-to-ace-your-data-science-interview)
++   [10 个统计学问题助你征服数据科学面试](https://www.kdnuggets.com/10-statistics-questions-to-ace-your-data-science-interview)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

@@ -1,18 +1,18 @@
 # Auto-Keras，或如何用 4 行代码创建深度学习模型
 
-> 原文：[https://www.kdnuggets.com/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html](https://www.kdnuggets.com/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)
+> 原文：[`www.kdnuggets.com/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html`](https://www.kdnuggets.com/2018/08/auto-keras-create-deep-learning-model-4-lines-code.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 自动化机器学习是新兴的领域，并且它将继续存在。它帮助我们创建更好、更易用的模型。这里我将讨论 Auto-Keras，这是一个用于 AutoML 的新包。最后还有一个惊喜 ;）。
 
-![](../Images/f159822cf162ee2840e3f2a23949e44e.png)
+![](img/f159822cf162ee2840e3f2a23949e44e.png)
 
 在开始之前，引用一段 [Matthew Mayo](https://medium.com/@mattmayo13) 对于 AutoML 的定义：
 
 > AutoML 并不是自动化数据科学。虽然确实有重叠，但机器学习只是数据科学工具包中的众多工具之一，它的使用实际上并不涉及所有数据科学任务。例如，如果预测是某个数据科学任务的一部分，机器学习将是一个有用的组成部分；然而，机器学习可能与描述性分析任务完全无关。
 
-那么，什么是自动化机器学习呢？简单来说，就是自动化以下任务的方式 ([https://www.automl.org/automl/](https://www.automl.org/automl/))：
+那么，什么是自动化机器学习呢？简单来说，就是自动化以下任务的方式 ([`www.automl.org/automl/`](https://www.automl.org/automl/))：
 
 +   预处理和清洗数据。
 
@@ -28,7 +28,7 @@
 
 现在我们已经弄清楚了什么是 AutoML，那么 Keras 是什么呢？
 
-![](../Images/f22707ee9743cf46ab411f3379d6c3eb.png)
+![](img/f22707ee9743cf46ab411f3379d6c3eb.png)
 
 Keras 是一个高级神经网络 API，使用 Python 编写，可以运行在 [TensorFlow](https://github.com/tensorflow/tensorflow)、[CNTK](https://github.com/Microsoft/cntk) 或 [Theano](https://github.com/Theano/Theano) 之上。它的开发重点是实现快速实验。能够以尽可能少的延迟从想法到结果是做好研究的关键。
 
@@ -52,7 +52,7 @@ pip install autokeras
 
 MNIST 是一个简单的计算机视觉数据集。它由手写数字的图像组成，如下所示：
 
-![](../Images/f670d3b94b50fa70679d2829ff3cb185.png)
+![](img/f670d3b94b50fa70679d2829ff3cb185.png)
 
 它还包括每张图像的标签，告诉我们它是哪个数字。
 
@@ -94,11 +94,11 @@ MNIST 是一个简单的计算机视觉数据集。它由手写数字的图像�
 
 +   [**AutoML** - BOHB 结合了贝叶斯优化和 HyperBand 的优点，以实现两者的最佳效果…](https://www.automl.org/)  
 
-+   [**《自动化机器学习的现状》** - 自动化机器学习（AutoML）在过去一年里成为了相当感兴趣的话题...](/2017/01/current-state-automated-machine-learning.html)  
++   **《自动化机器学习的现状》** - 自动化机器学习（AutoML）在过去一年里成为了相当感兴趣的话题...  
 
-+   [**《使用 AutoML 生成带 TPOT 的机器学习管道》**  
++   **《使用 AutoML 生成带 TPOT 的机器学习管道》**  
 
-    - 到目前为止，在这一系列文章中我们已经：这篇文章将采取不同的方法来构建管道](/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-4.html)  
+    - 到目前为止，在这一系列文章中我们已经：这篇文章将采取不同的方法来构建管道  
 
 哦！如果你想找一种更简单的方式来进行 AutoML 和深度学习，而无需编码，可以查看 [Deep Cognition](https://medium.com/@deepcognition) 和我关于它的文章：  
 
@@ -110,7 +110,7 @@ MNIST 是一个简单的计算机视觉数据集。它由手写数字的图像�
 
     当你开始进入一个新领域时，最佳的方式是与优秀的公司、朋友或一个能…](https://towardsdatascience.com/deep-learning-with-a-little-help-from-my-friends-596ee10fd934)  
 
-![](../Images/afc90ec947d6bb771e0ead5bb10d8f11.png)  
+![](img/afc90ec947d6bb771e0ead5bb10d8f11.png)  
 
 现在是最终惊喜时刻！如果你看到这里，我认为你对学习新事物感兴趣。我和我的朋友 [马修·丹乔](https://medium.com/@mdancho) 一起进入了为想成为数据科学家的人员创建课程的精彩领域。目前我们有一门完整的 R 课程，所以如果你是 R 爱好者，这就是为你准备的。现在我正在创建 Python 版，如果你想了解更多，请 [**点击这里**](https://university.business-science.io/)。  
 
@@ -132,11 +132,11 @@ MNIST 是一个简单的计算机视觉数据集。它由手写数字的图像�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 

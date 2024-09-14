@@ -1,28 +1,28 @@
 # 构建一个基本的 Keras 神经网络 Sequential 模型
 
-> 原文：[https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html](https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html)
+> 原文：[`www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html`](https://www.kdnuggets.com/2018/06/basic-keras-neural-network-sequential-model.html)
 
-[评论](#comments)
+评论
 
 正如标题所示，本篇文章介绍了如何使用 Sequential 模型 API 构建一个基本的 Keras 神经网络。这里的具体任务是一个常见任务（在 MNIST 数据集上训练分类器），但这可以被视为处理任何类似任务的模板示例。
 
-这种方法基本上与 Chollet 的 [Keras 4 步工作流程](/2018/06/keras-4-step-workflow.html) 相符，他在他的书 "[Python 深度学习](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)" 中概述了这一流程，实际上无非就是在书的早期章节或官方 Keras 教程中可以找到的示例。
+这种方法基本上与 Chollet 的 Keras 4 步工作流程 相符，他在他的书 "[Python 深度学习](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)" 中概述了这一流程，实际上无非就是在书的早期章节或官方 Keras 教程中可以找到的示例。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 
 制作这样一篇文章的动机是将其作为一系列即将发布的文章的基础参考，这些文章将以不同的方式配置 Keras。这似乎比在每篇文章开头一遍又一遍地覆盖相同的内容要更好。对于那些没有在 Keras 中构建神经网络经验的人来说，内容应该本身就很有用。
 
-![标题图片](../Images/2f500fab517e06ac7164e13b054b02a1.png)
+![标题图片](img/2f500fab517e06ac7164e13b054b02a1.png)
 
 图片来自 [Keras 文档网站](https://keras.io/models/sequential/) 的截图
 
@@ -124,7 +124,7 @@ Test labels: [[0\. 0\. 0\. ... 1\. 0\. 0.]
  [0\. 0\. 0\. ... 0\. 0\. 0.]]
 ```
 
-所有所需的数据转换都已完成。现在是时候构建、编译和训练神经网络了。你可以在 [这篇文章](/2018/06/keras-4-step-workflow.html) 中查看更多关于此过程的内容。
+所有所需的数据转换都已完成。现在是时候构建、编译和训练神经网络了。你可以在 这篇文章 中查看更多关于此过程的内容。
 
 ```py
 # Build neural network
@@ -156,7 +156,7 @@ print('Test accuracy:', score[1])
 
 唯一的不传统步骤（就使用 Keras 库而言）是使用 [Live Loss Plot 回调](https://github.com/stared/livelossplot)，该回调在每个训练周期结束时输出逐周期的损失函数和准确率。确保在运行上述代码之前已安装 Live Loss Plot。我们还给出了测试数据集上的最终损失和准确率。
 
-![图片](../Images/a2adbfb18cdab3aa422284c8325f9b93.png)
+![图片](img/a2adbfb18cdab3aa422284c8325f9b93.png)
 
 ```py
 
@@ -200,7 +200,7 @@ SVG(model_to_dot(model).create(prog='dot', format='svg'))
 
 ```
 
-![图片](../Images/18b8a2587d440a56daa34f40129a7bfb.png)
+![图片](img/18b8a2587d440a56daa34f40129a7bfb.png)
 
 完整代码如下：
 
@@ -210,11 +210,11 @@ SVG(model_to_dot(model).create(prog='dot', format='svg'))
 
 **相关**：
 
-+   [Keras 4 步工作流](/2018/06/keras-4-step-workflow.html)
++   Keras 4 步工作流
 
-+   [掌握 Keras 深度学习的 7 个步骤](/2017/10/seven-steps-deep-learning-keras.html)
++   掌握 Keras 深度学习的 7 个步骤
 
-+   [今天我在午休时使用 Keras 构建了一个神经网络](/2017/12/today-built-neural-network-during-lunch-break-keras.html)
++   今天我在午休时使用 Keras 构建了一个神经网络
 
 ### 更多相关主题
 

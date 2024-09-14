@@ -1,8 +1,8 @@
 # 提高 Python 函数质量的 5 个技巧
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-writing-better-python-functions](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
+> 原文：[`www.kdnuggets.com/5-tips-for-writing-better-python-functions`](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
 
-![py-func](../Images/4c82c40e504bc6f9c18898c93ff31efd.png)
+![py-func](img/4c82c40e504bc6f9c18898c93ff31efd.png)
 
 图片来自作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@ Python 中的函数让你编写模块化代码。当你在多个地方需要执�
 
 根据*函数试图做什么*和任务的复杂程度，你可以解决子任务之间的关注点分离。然后确定一个合适的层次来将函数重构成多个函数——每个函数专注于一个特定的子任务。
 
-![refactor-func](../Images/c879e94509178e1df554d2b8d1ea3fbc.png)
+![refactor-func](img/c879e94509178e1df554d2b8d1ea3fbc.png)
 
 重构函数 | 图片来自作者
 
@@ -147,7 +147,7 @@ print(result)
 
 如果你发现自己在编写函数签名时参数数量不断增加，第一步是从签名中删除所有未使用的参数。如果即使在这一步之后参数仍然过多，请回到提示 #1：将任务分解为多个子任务，并将函数重构为多个较小的函数。这将有助于控制参数数量。
 
-![num-params](../Images/65cd0ac3b46ca1f757cb75818a81e063.png)
+![num-params](img/65cd0ac3b46ca1f757cb75818a81e063.png)
 
 保持 num_params 受控 | 作者提供的图片
 
@@ -314,20 +314,20 @@ for num in fibonacci_numbers_generator:
 
 +   不要从函数返回列表；使用生成器代替。
 
-希望你觉得这些技巧有帮助！如果你还没尝试过，写Python函数时可以尝试这些实践。祝编程愉快！
+希望你觉得这些技巧有帮助！如果你还没尝试过，写 Python 函数时可以尝试这些实践。祝编程愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专业领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在学习并通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala还创作引人入胜的资源概述和编码教程。**
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专业领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在学习并通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala 还创作引人入胜的资源概述和编码教程。**
 
 ### 相关主题
 
-+   [掌握Python：7种编写清晰、有组织且高效代码的策略](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
++   [掌握 Python：7 种编写清晰、有组织且高效代码的策略](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
 
-+   [宣布博客写作比赛，获胜者将获得NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)
++   [宣布博客写作比赛，获胜者将获得 NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)
 
-+   [Python中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
++   [Python 中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
 
-+   [Python Lambda函数解析](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
++   [Python Lambda 函数解析](https://www.kdnuggets.com/2023/01/python-lambda-functions-explained.html)
 
-+   [4个你可能不知道的Python itertools筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
++   [4 个你可能不知道的 Python itertools 筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
 
-+   [10个Python统计函数](https://www.kdnuggets.com/10-python-statistical-functions)
++   [10 个 Python 统计函数](https://www.kdnuggets.com/10-python-statistical-functions)

@@ -1,28 +1,28 @@
 # 数据科学过程生命周期
 
-> 原文：[https://www.kdnuggets.com/2021/09/data-science-process-lifecycle.html](https://www.kdnuggets.com/2021/09/data-science-process-lifecycle.html)
+> 原文：[`www.kdnuggets.com/2021/09/data-science-process-lifecycle.html`](https://www.kdnuggets.com/2021/09/data-science-process-lifecycle.html)
 
-[评论](#comments)
+评论
 
-**由[莉莉安·皮尔森（Lillian Pierson, P.E.）](https://www.linkedin.com/in/lillianpierson/)，世界级数据领导者和企业家的导师，Data-Mania首席执行官**
+**由[莉莉安·皮尔森（Lillian Pierson, P.E.）](https://www.linkedin.com/in/lillianpierson/)，世界级数据领导者和企业家的导师，Data-Mania 首席执行官**
 
-![图片](../Images/d1ba2fc8cb0d204316c093e5c5ab9cd3.png)
+![图片](img/d1ba2fc8cb0d204316c093e5c5ab9cd3.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
 如果你在执行数据项目，确保你的项目顺利进行并为公司带来利润可能会感受到很大的压力。
 
-目前行业的数据项目失败率高达80% [(根据Gartner的数据)](https://blogs.gartner.com/andrew_white/2019/01/03/our-top-data-and-analytics-predicts-for-2019/)，难怪数据专业人员感到压力山大。
+目前行业的数据项目失败率高达 80% [(根据 Gartner 的数据)](https://blogs.gartner.com/andrew_white/2019/01/03/our-top-data-and-analytics-predicts-for-2019/)，难怪数据专业人员感到压力山大。
 
 这就是我认为数据行业如此错误的地方。
 
@@ -40,7 +40,7 @@
 
 你是否总是知道你为什么要这样做？
 
-我曾经也是一名数据科学家。虽然现在我花时间在泰国苏梅岛发展我的数据创业公司Data-Mania，但你曾经可以在我的办公隔间里找到我忙于构建模型。
+我曾经也是一名数据科学家。虽然现在我花时间在泰国苏梅岛发展我的数据创业公司 Data-Mania，但你曾经可以在我的办公隔间里找到我忙于构建模型。
 
 *我知道陷入细节中的难处。*
 
@@ -48,7 +48,7 @@
 
 更不用说，在没有清晰了解自己在公司愿景中的位置和没有前进策略的情况下执行项目，可能会令人感到沮丧和低效。没有人喜欢在看不到成果的情况下连续工作数小时。
 
-数据专业人士感到迷茫并不意外。在我与一小组领导和企业主进行的[2020年数据调查](https://www.data-mania.com/blog/data-strategy-survey-2020/)中，87%的企业主报告说他们没有明确的、可重复的盈利数据项目的流程。
+数据专业人士感到迷茫并不意外。在我与一小组领导和企业主进行的[2020 年数据调查](https://www.data-mania.com/blog/data-strategy-survey-2020/)中，87%的企业主报告说他们没有明确的、可重复的盈利数据项目的流程。
 
 *数据专业人士如何在没有强有力的领导和指导框架的情况下出色地完成工作？*
 
@@ -62,7 +62,7 @@
 
 这使数据实施人员能够看到他们的角色首次进入项目整体图景的地方，并确保有一个连贯的管理结构。
 
-为了开始，我首先想与大家分享微软的Azure数据科学过程生命周期，然后分享我认为我们如何改进它。
+为了开始，我首先想与大家分享微软的 Azure 数据科学过程生命周期，然后分享我认为我们如何改进它。
 
 微软将他们的过程生命周期分为四个类别：
 
@@ -132,15 +132,15 @@
 
 *而整个数据行业将会繁荣发展！*
 
-**简介：[莉莲·皮尔森（Lillian Pierson, P.E.）](https://www.linkedin.com/in/lillianpierson/)** 是一位首席执行官及数据领导者，致力于支持数据专业人士发展成为世界级的领导者和企业家。迄今为止，她已经帮助教育了超过130万名数据专业人士，涵盖人工智能和数据科学。莉莲与Wiley & Sons出版社合作出版了6本数据书籍，并与LinkedIn Learning合作开设了5门数据课程。她为全球各类组织提供支持，从联合国和国家地理到爱立信和沙特阿美，涵盖了所有领域。她是一位注册工程师，保持良好信誉。自2007年以来，她一直担任技术顾问，自2018年起成为数据业务导师。她偶尔在全球峰会和数据隐私与伦理论坛中志愿提供专业知识。
+**简介：[莉莲·皮尔森（Lillian Pierson, P.E.）](https://www.linkedin.com/in/lillianpierson/)** 是一位首席执行官及数据领导者，致力于支持数据专业人士发展成为世界级的领导者和企业家。迄今为止，她已经帮助教育了超过 130 万名数据专业人士，涵盖人工智能和数据科学。莉莲与 Wiley & Sons 出版社合作出版了 6 本数据书籍，并与 LinkedIn Learning 合作开设了 5 门数据课程。她为全球各类组织提供支持，从联合国和国家地理到爱立信和沙特阿美，涵盖了所有领域。她是一位注册工程师，保持良好信誉。自 2007 年以来，她一直担任技术顾问，自 2018 年起成为数据业务导师。她偶尔在全球峰会和数据隐私与伦理论坛中志愿提供专业知识。
 
 **相关：**
 
-+   [如何几乎在一夜之间从数据自由职业者转型为数据企业家](/2021/07/transition-data-freelancer-data-entrepreneur-overnight.html)
++   如何几乎在一夜之间从数据自由职业者转型为数据企业家
 
-+   [数据职业不是一刀切的！揭示你在数据领域理想角色的技巧](/2021/04/data-careers-not-one-size-fits-all.html)
++   数据职业不是一刀切的！揭示你在数据领域理想角色的技巧
 
-+   [数据分析师与数据科学家的 7 大区别](/2021/09/7-differences-between-data-analyst-data-scientist.html)
++   数据分析师与数据科学家的 7 大区别
 
 ### 更多相关话题
 
@@ -154,4 +154,4 @@
 
 +   [在 Python 中处理 CSV 文件的 3 种方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

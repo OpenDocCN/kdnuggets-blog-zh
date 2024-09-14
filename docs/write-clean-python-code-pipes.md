@@ -1,32 +1,32 @@
-# 使用管道编写干净的Python代码
+# 使用管道编写干净的 Python 代码
 
-> 原文：[https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
+> 原文：[`www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html`](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 **由 [Khuyen Tran](https://www.linkedin.com/in/khuyen-tran-1401/)，数据科学实习生**
 
 ## 动机
 
-`map` 和 `filter` 是两个高效的Python方法，用于处理可迭代对象。然而，如果同时使用 `map` 和 `filter`，代码可能会显得凌乱。
+`map` 和 `filter` 是两个高效的 Python 方法，用于处理可迭代对象。然而，如果同时使用 `map` 和 `filter`，代码可能会显得凌乱。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-![](../Images/26fad68726a5d69256b7604825d66940.png)
+![](img/26fad68726a5d69256b7604825d66940.png)
 
 作者提供的图片
 
 如果你可以像下面这样使用管道 `|` 来对可迭代对象应用多个方法，那不是很好吗？
 
-![](../Images/34e15612a6a99cfaa62ac5afd6c1c6e7.png)
+![](img/34e15612a6a99cfaa62ac5afd6c1c6e7.png)
 
 作者提供的图片
 
@@ -34,9 +34,9 @@ Pipe 库允许你做到这一点。
 
 ## 什么是 Pipe？
 
-[Pipe](https://github.com/JulienPalard/Pipe) 是一个Python库，允许你在Python中使用管道。一个管道 (`|`) 将一个方法的结果传递给另一个方法。
+[Pipe](https://github.com/JulienPalard/Pipe) 是一个 Python 库，允许你在 Python 中使用管道。一个管道 (`|`) 将一个方法的结果传递给另一个方法。
 
-我喜欢使用管道，因为当对Python可迭代对象应用多个方法时，它使我的代码看起来更简洁。由于管道只提供少量的方法，它也非常容易学习。在这篇文章中，我将展示一些我认为最有用的方法。
+我喜欢使用管道，因为当对 Python 可迭代对象应用多个方法时，它使我的代码看起来更简洁。由于管道只提供少量的方法，它也非常容易学习。在这篇文章中，我将展示一些我认为最有用的方法。
 
 要安装 Pipe，请输入：
 
@@ -46,9 +46,9 @@ pip install pipe
 
 ## Where — 过滤可迭代对象中的元素
 
-类似于SQL，Pipe的 `where` 方法也可以用来过滤可迭代对象中的元素。
+类似于 SQL，Pipe 的 `where` 方法也可以用来过滤可迭代对象中的元素。
 
-![](../Images/7a15fc6474f7fac98aeb234d46f3d22b.png)
+![](img/7a15fc6474f7fac98aeb234d46f3d22b.png)
 
 作者提供的图片
 
@@ -56,9 +56,9 @@ pip install pipe
 
 `select` 方法类似于 `map` 方法。`select` 将一个方法应用到可迭代对象的每个元素上。
 
-在下面的代码中，我使用 `select` 将列表中的每个元素乘以2。
+在下面的代码中，我使用 `select` 将列表中的每个元素乘以 2。
 
-![](../Images/9bf7eaee1a9bb411f55f8cc09cd5c5ff.png)
+![](img/9bf7eaee1a9bb411f55f8cc09cd5c5ff.png)
 
 作者提供的图片
 
@@ -66,7 +66,7 @@ pip install pipe
 
 因为你可以使用管道将一个方法接在另一个方法后面。因此，使用管道可以去除嵌套的括号，使代码更具可读性。
 
-![](../Images/34e15612a6a99cfaa62ac5afd6c1c6e7.png)
+![](img/34e15612a6a99cfaa62ac5afd6c1c6e7.png)
 
 作者提供的图片
 
@@ -76,7 +76,7 @@ pip install pipe
 
 处理嵌套的可迭代对象可能很麻烦。幸运的是，你可以使用 `chain` 来连接一系列可迭代对象。
 
-![](../Images/92f59c0e36e157f3297cb328782be4a5.png)
+![](img/92f59c0e36e157f3297cb328782be4a5.png)
 
 作者提供的图片
 
@@ -86,13 +86,13 @@ pip install pipe
 
 `traverse`方法可以用来递归展开可迭代对象。因此，你可以使用这种方法将深度嵌套的列表转化为平坦的列表。
 
-![](../Images/1a5143597587aa2eac2c804ceeef9ffa.png)
+![](img/1a5143597587aa2eac2c804ceeef9ffa.png)
 
 图片由作者提供
 
 让我们将这种方法与`select`方法结合，获取字典的值并展平列表。
 
-![](../Images/83a8a0af5bb38e72e6646b3f42fbe7f0.png)
+![](img/83a8a0af5bb38e72e6646b3f42fbe7f0.png)
 
 图片由作者提供
 
@@ -104,7 +104,7 @@ pip install pipe
 
 为了查看这种方法的工作原理，让我们将一个数字列表转化为一个字典，该字典根据数字是偶数还是奇数进行分组。
 
-![](../Images/637fc5ccf9f573625b2d94a0af8b06d7.png)
+![](img/637fc5ccf9f573625b2d94a0af8b06d7.png)
 
 图片由作者提供
 
@@ -121,9 +121,9 @@ pip install pipe
 [{'Even': [2, 4, 6, 8]}, {'Odd': [1, 3, 5, 7, 9]}]
 ```
 
-很酷！为了仅获取大于2的值，我们可以在`select`方法中添加`where`方法：
+很酷！为了仅获取大于 2 的值，我们可以在`select`方法中添加`where`方法：
 
-![](../Images/c8bfc0300e765749d13dc3cad84b019c.png)
+![](img/c8bfc0300e765749d13dc3cad84b019c.png)
 
 图片由作者提供
 
@@ -133,21 +133,21 @@ pip install pipe
 
 `dedup`方法用于移除列表中的重复项。
 
-![](../Images/9df41f88fc23e61fc0e7513ca3eebcc2.png)
+![](img/9df41f88fc23e61fc0e7513ca3eebcc2.png)
 
 图片由作者提供
 
 这可能听起来不那么有趣，因为`set`方法也能实现相同的功能。然而，这种方法更为灵活，因为它允许你通过键来获取唯一元素。
 
-例如，你可以使用这种方法获取一个小于5的唯一元素，以及一个大于或等于5的唯一元素。
+例如，你可以使用这种方法获取一个小于 5 的唯一元素，以及一个大于或等于 5 的唯一元素。
 
-![](../Images/d19d7abd317883a464deeacdd0018073.png)
+![](img/d19d7abd317883a464deeacdd0018073.png)
 
 图片由作者提供
 
 现在，让我们将这种方法与`select`和`where`结合，以获取具有重复键和`None`值的字典的值。
 
-![](../Images/4c4ec094c3fefc8c0e362a8c7b61eafa.png)
+![](img/4c4ec094c3fefc8c0e362a8c7b61eafa.png)
 
 图片由作者提供
 
@@ -163,7 +163,7 @@ pip install pipe
 
 ## 结论
 
-恭喜！你刚刚学会了如何使用pipe保持代码的整洁和简短。希望这篇文章能让你掌握将复杂的迭代操作转化为一行简单代码的知识。
+恭喜！你刚刚学会了如何使用 pipe 保持代码的整洁和简短。希望这篇文章能让你掌握将复杂的迭代操作转化为一行简单代码的知识。
 
 欢迎在此处玩转并分叉本文的源代码：
 
@@ -187,11 +187,11 @@ pip install pipe
 
 **相关:**
 
-+   [Python 序列的 5 个高级技巧](/2021/11/5-advanced-tips-python-sequences.html)
++   Python 序列的 5 个高级技巧
 
-+   [初学者的端到端机器学习指南](/2021/12/beginner-guide-end-end-machine-learning.html)
++   初学者的端到端机器学习指南
 
-+   [生成 Python 的电子表格: Mito JupyterLab 扩展](/2021/11/spreadsheet-generates-python-mito-jupyterlab-extension.html)
++   生成 Python 的电子表格: Mito JupyterLab 扩展
 
 ### 更多相关话题
 
@@ -205,4 +205,4 @@ pip install pipe
 
 +   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

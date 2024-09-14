@@ -1,8 +1,8 @@
 # 5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2
 
-> 原文：[https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)
+> 原文：[`www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html`](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)
 
-![5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2](../Images/be03db8b560f9e18801ff60215608ad9.png)
+![5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2](img/be03db8b560f9e18801ff60215608ad9.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,13 +30,13 @@
 
 [GPTZero](https://gptzero.me/) 是由普林斯顿大学的高年级生爱德华·田设计的，用于检测 ChatGPT 生成的写作。创造者发现这项技术被学生用来作弊，因此提出了这个保护措施。
 
-![5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2](../Images/19a2087be477bf95ada77dba79facda3.png)
+![5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2](img/19a2087be477bf95ada77dba79facda3.png)
 
 图片来自 GPTZero
 
 这个基于网络的应用程序相当简单。你可以粘贴文本或加载 pdf、docx 和 txt 文件。只需点击一次“获取结果”按钮，你就能找到摘要、平均困惑度和突发性评分。此外，它还会突出显示可能由 AI 撰写的文本。
 
-![5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2](../Images/b377a31dc66e9e4f455926c5b1d7ee0c.png)
+![5 个免费工具，用于检测 ChatGPT、GPT3 和 GPT2](img/b377a31dc66e9e4f455926c5b1d7ee0c.png)
 
 图片来自 GPTZero
 
@@ -48,7 +48,7 @@
 
 [OpenAI GPT2 输出检测器](https://openai-openai-detector.hf.space/) 是由 OpenAI 开发，并托管在 HuggingFace 上供用户自由检查内容有效性。它可以检测由 ChatGPT、GPT3 和 GPT2 生成的文本。该应用程序使用基于 [Transformers](https://github.com/huggingface/transformers/commit/1c542df7e554a2014051dd09becf60f157fed524) 的 [GPT-2 输出检测器](https://github.com/openai/gpt-2-output-dataset/tree/master/detector) 模型。
 
-![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](../Images/524dec9fa4623aade53d61b79fdb2455.png)
+![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](img/524dec9fa4623aade53d61b79fdb2455.png)
 
 来自 OpenAI GPT2 输出检测器的图像
 
@@ -66,7 +66,7 @@
 
 1.  [语言学版本](https://huggingface.co/spaces/Hello-SimpleAI/chatgpt-detector-ling)：根据语言特征检测 ChatGPT。
 
-![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](../Images/2fc3a835a2c6959f9b91655cbe42a881.png)
+![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](img/2fc3a835a2c6959f9b91655cbe42a881.png)
 
 来自 Hello-SimpleAI 的图像
 
@@ -76,7 +76,7 @@
 
 [Contentatscale AI 内容检测器](https://contentatscale.ai/ai-content-detector/) 是我经常用于质量评估的工具。它快速、简单且准确。AI 内容检测器允许用户通过粘贴文本来获取**人工内容**分数。
 
-![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](../Images/f5ce9640e6a28449ebb23c35f6a0f218.png)
+![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](img/f5ce9640e6a28449ebb23c35f6a0f218.png)
 
 来自 Contentatscale 的图像
 
@@ -86,7 +86,7 @@
 
 [Writers AI 内容检测器](https://writer.com/ai-content-detector/) 类似于 Contentatscale。它需要页面的 URL 或文本来计算“人工生成内容”分数。它快速且相当准确。
 
-![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](../Images/7ef19e0b7a4ba48a064406529b42c7a3.png)
+![5 个免费工具检测 ChatGPT、GPT3 和 GPT2](img/7ef19e0b7a4ba48a064406529b42c7a3.png)
 
 来自 Writers AI 内容检测器的图像
 

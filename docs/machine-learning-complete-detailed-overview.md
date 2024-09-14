@@ -1,12 +1,12 @@
 # 机器学习：完整且详细的概述
 
-> 原文：[https://www.kdnuggets.com/2016/10/machine-learning-complete-detailed-overview.html](https://www.kdnuggets.com/2016/10/machine-learning-complete-detailed-overview.html)
+> 原文：[`www.kdnuggets.com/2016/10/machine-learning-complete-detailed-overview.html`](https://www.kdnuggets.com/2016/10/machine-learning-complete-detailed-overview.html)
 
 **机器学习**因多种关键原因而成为一个非常热门的话题，它能够自动获取深入的见解、识别未知模式，并从数据中创建高性能的预测模型，而无需明确的编程指令。
 
 这是一个包含链接的总结，指向一系列[文章](http://www.innoarchitech.com/machine-learning-an-in-depth-non-technical-guide/?utm_source=kdnuggets&utm_medium=post&utm_content=originallink&utm_campaign=guest)，旨在成为机器学习的全面、深入指南，对从商业高管到机器学习从业者的每个人都应该有用。它涵盖了机器学习（以及许多相关领域）的几乎所有方面，并且应该能作为该领域术语、概念、工具、注意事项和技术的充分介绍或参考。
 
-![](../Images/644ceb438f2cd93ac367e466d60facc0.png)
+![](img/644ceb438f2cd93ac367e466d60facc0.png)
 
 [系列的第一章](http://www.innoarchitech.com/machine-learning-an-in-depth-non-technical-guide/?utm_source=kdnuggets&utm_medium=post&utm_content=originallink&utm_campaign=guest)首先给出了机器学习的正式和非正式定义。接着讨论了机器学习过程的端到端、不同类型的机器学习、潜在的目标和输出，以及最常用的机器学习**算法**的分类概述。
 
@@ -22,25 +22,25 @@
 
 干杯，希望你享受你的机器学习之旅！
 
-[亚历克斯·卡斯特鲁尼斯](https://www.whyofai.com/alex-castrounis)是[Why of AI](https://www.whyofai.com/)的创始人兼CEO，以及[《AI for People and Business》](https://www.whyofai.com/ai-book)的作者。他还是西北大学凯洛格/麦考密克MBAi项目的兼职讲师。
+[亚历克斯·卡斯特鲁尼斯](https://www.whyofai.com/alex-castrounis)是[Why of AI](https://www.whyofai.com/)的创始人兼 CEO，以及[《AI for People and Business》](https://www.whyofai.com/ai-book)的作者。他还是西北大学凯洛格/麦考密克 MBAi 项目的兼职讲师。
 
 **相关：**
 
-+   [进入机器学习职业前要阅读的5本电子书](/2016/10/5-free-ebooks-machine-learning-career.html)
++   进入机器学习职业前要阅读的 5 本电子书
 
-+   [掌握Python机器学习的7个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
-+   [机器学习工程师需要了解的10种算法](/2016/08/10-algorithms-machine-learning-engineers.html)
++   机器学习工程师需要了解的 10 种算法
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

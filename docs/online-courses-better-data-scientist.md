@@ -1,32 +1,32 @@
 # 成为更好的数据科学家必须参加的在线课程
 
-> 原文：[https://www.kdnuggets.com/2020/09/online-courses-better-data-scientist.html](https://www.kdnuggets.com/2020/09/online-courses-better-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2020/09/online-courses-better-data-scientist.html`](https://www.kdnuggets.com/2020/09/online-courses-better-data-scientist.html)
 
-[评论](#comments)
+评论
 
 **由[David Adrián Cañones](https://davidadrian.cc/)，数据科学家与机器学习工程师**
 
-![Image for post](../Images/fb8198736a7a48cba20eabd335c2556f.png)
+![Image for post](img/fb8198736a7a48cba20eabd335c2556f.png)
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 ### 一些背景，曾经有一段时间…
 
-我在2015年开始了数据科学的学习。这并不是一个有意的决定，而是对我雇主需求的回应。我在一家为西班牙公司提供自动化服务的公司工作，我们需要利用数据来**自动化那些规则不能轻易硬编码的复杂任务**。我刚刚从工程专业毕业，正值经济危机严重时期，具有一定的统计建模知识，并且熟练使用MATLAB。
+我在 2015 年开始了数据科学的学习。这并不是一个有意的决定，而是对我雇主需求的回应。我在一家为西班牙公司提供自动化服务的公司工作，我们需要利用数据来**自动化那些规则不能轻易硬编码的复杂任务**。我刚刚从工程专业毕业，正值经济危机严重时期，具有一定的统计建模知识，并且熟练使用 MATLAB。
 
-在2015年，还没有专门的数据科学学位或[训练营](https://www.ironhack.com/en/data-analytics)来快速进入该领域（至少在西班牙是这样），你能获得的最接近的学科是：数学（在西班牙，主要是为了成为公共教育系统中的教师/教授）或软件工程（大多数人更感兴趣于应用开发或创建新的“X”的Uber，而不是当时乏味的数据科学工作）。
+在 2015 年，还没有专门的数据科学学位或[训练营](https://www.ironhack.com/en/data-analytics)来快速进入该领域（至少在西班牙是这样），你能获得的最接近的学科是：数学（在西班牙，主要是为了成为公共教育系统中的教师/教授）或软件工程（大多数人更感兴趣于应用开发或创建新的“X”的 Uber，而不是当时乏味的数据科学工作）。
 
-在这种背景下，大多数数据科学从业者都是刚刚从定量学科（大量来自不同领域的工程师，以及经济学和类似学科的人）毕业的新人。在这个背景下，我发现了一些珍贵的在线资源，它们在当时帮助了我，并且长期来看，让我今天（2020年）成为了更好的数据科学家。
+在这种背景下，大多数数据科学从业者都是刚刚从定量学科（大量来自不同领域的工程师，以及经济学和类似学科的人）毕业的新人。在这个背景下，我发现了一些珍贵的在线资源，它们在当时帮助了我，并且长期来看，让我今天（2020 年）成为了更好的数据科学家。
 
 ### 免责声明：在线课程不会让你成为数据科学家
 
@@ -44,7 +44,7 @@
 
 这一最后要点是本文的重点。我将在此介绍的在线课程专注于数据科学的理论基础。这些课程有一些共同特点：
 
-+   这些课程**不是**那种你可以在通勤时一小时内完成的典型DataCamp纳米课程。这些是需要你投入时间的长期而艰难的课程。
++   这些课程**不是**那种你可以在通勤时一小时内完成的典型 DataCamp 纳米课程。这些是需要你投入时间的长期而艰难的课程。
 
 +   由**顶级大学的优秀教授**教授。
 
@@ -64,13 +64,13 @@
 
 让我们按时间顺序开始吧...
 
-### [1. 使用Python的计算机科学与编程导论](https://www.edx.org/course/introduction-to-computer-science-and-programming-7)
+### [1. 使用 Python 的计算机科学与编程导论](https://www.edx.org/course/introduction-to-computer-science-and-programming-7)
 
-![图示](../Images/933e085915f0b7f94952513a52e6c5c3.png)
+![图示](img/933e085915f0b7f94952513a52e6c5c3.png)
 
 Eric Grimson
 
-这是MIT的Eric Grimson教授开设的**真正优秀**的课程。由于我有一些MATLAB经验，我作为数据科学家的第一个目标之一是学习Python。当我参加这门课程时，内容是为Python 2准备的，但最近已更新为Python 3。
+这是 MIT 的 Eric Grimson 教授开设的**真正优秀**的课程。由于我有一些 MATLAB 经验，我作为数据科学家的第一个目标之一是学习 Python。当我参加这门课程时，内容是为 Python 2 准备的，但最近已更新为 Python 3。
 
 这门课程有趣的地方在于，它介绍了计算机科学中一些重要的概念，这些概念通常被许多数据科学家忽略，例如：
 
@@ -84,7 +84,7 @@ Eric Grimson
 
 +   递归
 
-如果你是一名有经验的数据科学家但没有Python知识，应该考虑参加这门课程，因为它现在是标准课程。
+如果你是一名有经验的数据科学家但没有 Python 知识，应该考虑参加这门课程，因为它现在是标准课程。
 
 [我的完成证书](https://courses.edx.org/certificates/b2cdc2a2bc8f4774a4d1cdca61a5a81b)。
 
@@ -96,7 +96,7 @@ Eric Grimson
 
 ### [3. 分析边缘](https://www.edx.org/course/the-analytics-edge)
 
-这是教授Dimitris Bertsimas开设的一个好课程。它聚焦于**机器学习**和优化**算法**的混合，并结合一些使用`ggplot`的**可视化**。课程内容包括：
+这是教授 Dimitris Bertsimas 开设的一个好课程。它聚焦于**机器学习**和优化**算法**的混合，并结合一些使用`ggplot`的**可视化**。课程内容包括：
 
 +   线性模型
 
@@ -110,35 +110,35 @@ Eric Grimson
 
 +   一些自然语言处理（如今有点过时）
 
-所有内容都用R语言教授。
+所有内容都用 R 语言教授。
 
 [我的结业证书](https://courses.edx.org/certificates/35bb4da1cf61463abb62a6ef67f83472)。
 
 ### [4. 机器学习](https://www.coursera.org/learn/machine-learning)
 
-![图](../Images/08f8f7934962d5a1d2ce18d24d474dc8.png)
+![图](img/08f8f7934962d5a1d2ce18d24d474dc8.png)
 
 Andrew Ng
 
 这个课程不需要介绍。这可能是**关于机器学习最著名的课程**，也是近年来机器学习热潮的重要推动者。
 
-这门课程由**著名教授兼AI倡导者Andrew Ng（斯坦福大学）**教授。课程**优秀**，重点讲解了最流行的机器学习算法，包括其**数学基础**。
+这门课程由**著名教授兼 AI 倡导者 Andrew Ng（斯坦福大学）**教授。课程**优秀**，重点讲解了最流行的机器学习算法，包括其**数学基础**。
 
 这是该领域最受重视的课程之一。
 
-在2016年，这门课程是用MATLAB/Octave教授的。我最近看到他们正在将MATLAB更新为Python，但这个更新尚未发布。
+在 2016 年，这门课程是用 MATLAB/Octave 教授的。我最近看到他们正在将 MATLAB 更新为 Python，但这个更新尚未发布。
 
 [我的结业证书](https://www.coursera.org/account/accomplishments/verify/8Y4PSZDQJ939)。
 
 ### [5. 数据学习](https://www.edx.org/course/learning-from-data-introductory-machine-learning)
 
-这门由加州理工学院的教授Yaser S. Abu-Mostafa开设的**有趣**课程深入探讨了**什么**是统计学习，**为什么**它是可行的，以及**如何**正确进行，详细涵盖了如偏差-方差权衡、过拟合、正则化、验证、泛化理论等方面。
+这门由加州理工学院的教授 Yaser S. Abu-Mostafa 开设的**有趣**课程深入探讨了**什么**是统计学习，**为什么**它是可行的，以及**如何**正确进行，详细涵盖了如偏差-方差权衡、过拟合、正则化、验证、泛化理论等方面。
 
 它以理论和严格的方式解释了机器学习的基础，不推荐没有数学背景的人学习。
 
 其内容基于同名的[书籍](https://www.amazon.com/Learning-Data-Yaser-S-Abu-Mostafa/dp/1600490069)：
 
-![图](../Images/a856ac628c7dc2d2cd359fabb783b72f.png)
+![图](img/a856ac628c7dc2d2cd359fabb783b72f.png)
 
 数据学习（书籍）
 
@@ -146,13 +146,13 @@ Andrew Ng
 
 ### [6. 深度学习专业化](https://www.coursera.org/specializations/deep-learning)
 
-![图](../Images/b2c580831ef7b15b9dd18b744ad6384c.png)
+![图](img/b2c580831ef7b15b9dd18b744ad6384c.png)
 
 deeplearning.ai
 
-这是**著名**的深度学习专业化课程，由Andrew Ng教授及其新的教育项目[**deeplearning.ai**](https://www.deeplearning.ai/)开设，是当前该领域最受重视的证书之一。
+这是**著名**的深度学习专业化课程，由 Andrew Ng 教授及其新的教育项目[**deeplearning.ai**](https://www.deeplearning.ai/)开设，是当前该领域最受重视的证书之一。
 
-这是一个**长**期的5门课程专门化课程，专注于神经网络，这是当今最重要的算法之一，也是处理非结构化数据（图像、声音、文本、视频等）的最佳算法。
+这是一个**长**期的 5 门课程专门化课程，专注于神经网络，这是当今最重要的算法之一，也是处理非结构化数据（图像、声音、文本、视频等）的最佳算法。
 
 从第一门课程中的**基础**和**数学**知识开始，讲解神经网络，接着是**超参数调优**、**项目规划与策略**、**卷积架构**，最后是**序列模型**架构。
 
@@ -236,7 +236,7 @@ Pie & AI（医学 AI 启动活动）
 
 +   强调生存分析。
 
-如果你 **希望在10年后仍然是一名数据科学家**，在一个数据科学普遍化的竞争环境中，你应该选择这个专业。
+如果你 **希望在 10 年后仍然是一名数据科学家**，在一个数据科学普遍化的竞争环境中，你应该选择这个专业。
 
 +   [我的完成证书](https://www.coursera.org/account/accomplishments/specialization/3EXEQYHMJMWU)。
 
@@ -246,28 +246,28 @@ PS：感谢 [Miriam Cañones](https://www.linkedin.com/in/miriamcc/) 在撰写
 
 > 本文 **最初发布** 在我的 [个人网站和博客](https://davidadrian.cc/)。
 
-**简介：[David Adrián Cañones](https://davidadrian.cc/)** （[**LinkedIn**](https://www.linkedin.com/in/davidadrian/?originalSubdomain=es)）是一名数据科学家和机器学习工程师。David拥有超过五年的经验，帮助公司和机构利用数据解决复杂问题。
+**简介：[David Adrián Cañones](https://davidadrian.cc/)** （[**LinkedIn**](https://www.linkedin.com/in/davidadrian/?originalSubdomain=es)）是一名数据科学家和机器学习工程师。David 拥有超过五年的经验，帮助公司和机构利用数据解决复杂问题。
 
 [原始文献](https://davidadrian.cc/top-courses-data-science/)。经许可转载。
 
 **相关：**
 
-+   [超越表面：有实质内容的数据科学MOOC](/2020/08/beyond-superficial-data-science-moocs-substance.html)
++   超越表面：有实质内容的数据科学 MOOC
 
-+   [MIT免费课程：Python计算机科学与编程入门](/2020/09/free-mit-intro-computer-science-programming-python.html)
++   MIT 免费课程：Python 计算机科学与编程入门
 
-+   [超棒的机器学习和AI课程](/2020/07/awesome-machine-learning-ai-courses.html)
++   超棒的机器学习和 AI 课程
 
 ### 相关主题
 
-+   [10门免费必修数据科学课程，帮助你入门](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
++   [10 门免费必修数据科学课程，帮助你入门](https://www.kdnuggets.com/10-free-must-take-data-science-courses-to-get-started)
 
-+   [5门免费的AI和ChatGPT课程，助你从0到100](https://www.kdnuggets.com/5-free-courses-on-ai-and-chatgpt-to-take-you-from-0-100)
++   [5 门免费的 AI 和 ChatGPT 课程，助你从 0 到 100](https://www.kdnuggets.com/5-free-courses-on-ai-and-chatgpt-to-take-you-from-0-100)
 
-+   [2024年你可以选修的5门顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
++   [2024 年你可以选修的 5 门顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
 
-+   [9个可以让你获得学位的专业证书...如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个可以让你获得学位的专业证书...如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
-+   [现在可以选修的AWS顶级8个GenAI课程](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)
++   [现在可以选修的 AWS 顶级 8 个 GenAI 课程](https://www.kdnuggets.com/top-8-genai-courses-for-aws-to-take-now)
 
 +   [在选修任何免费数据科学课程之前请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)

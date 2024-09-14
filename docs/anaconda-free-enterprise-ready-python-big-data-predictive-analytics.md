@@ -1,8 +1,8 @@
 # Anaconda：为大数据和预测分析提供的免费企业级 Python
 
-> 原文：[https://www.kdnuggets.com/2014/02/anaconda-free-enterprise-ready-python-big-data-predictive-analytics.html](https://www.kdnuggets.com/2014/02/anaconda-free-enterprise-ready-python-big-data-predictive-analytics.html)
+> 原文：[`www.kdnuggets.com/2014/02/anaconda-free-enterprise-ready-python-big-data-predictive-analytics.html`](https://www.kdnuggets.com/2014/02/anaconda-free-enterprise-ready-python-big-data-predictive-analytics.html)
 
-[![Anaconda](../Images/70ea9c7b6a586cf17509393439cb04de.png)](https://store.continuum.io/cshop/anaconda/)
+![Anaconda](https://store.continuum.io/cshop/anaconda/)
 
 **完全免费的企业级 Python 发行版，适用于大规模数据处理、预测分析和科学计算**。
 
@@ -28,7 +28,7 @@
 
 **但所有这些都需要艰苦的工作和资源！**
 
-帮助我们 -- 查看我们的[产品](https://store.continuum.io/cshop/products/)、注册我们的[虚拟和现场课程](https://store.continuum.io/cshop/training/)，并[联系我们](mailto:sales@continuum.io)进行数据科学或 SciPy/NumPy 的[咨询项目](http://continuum.io/consulting.html)！
+帮助我们 -- 查看我们的[产品](https://store.continuum.io/cshop/products/)、注册我们的[虚拟和现场课程](https://store.continuum.io/cshop/training/)，并联系我们进行数据科学或 SciPy/NumPy 的[咨询项目](http://continuum.io/consulting.html)！
 
 **在专业环境中使用 Anaconda？**
 
@@ -44,23 +44,23 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 ### 更多相关话题
 
-+   [Anaconda的新动态！数据科学培训与云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
++   [Anaconda 的新动态！数据科学培训与云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
 
-+   [掌握数据科学与Anaconda](https://www.kdnuggets.com/2023/01/anaconda-master-data-science-anaconda.html)
++   [掌握数据科学与 Anaconda](https://www.kdnuggets.com/2023/01/anaconda-master-data-science-anaconda.html)
 
-+   [KDnuggets™新闻 22:n01，1月5日：追踪和可视化的3个工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™新闻 22:n01，1 月 5 日：追踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [构建预测模型：Python中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
++   [构建预测模型：Python 中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
 
 +   [预测分析如何革新技术中的决策制定](https://www.kdnuggets.com/how-predictive-analytics-is-revolutionizing-decisionmaking-in-tech)
 

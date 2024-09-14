@@ -1,26 +1,26 @@
 # 数据科学面试问题 – 三个案例面试示例
 
-> 原文：[https://www.kdnuggets.com/2019/04/interview-questions-data-science.html](https://www.kdnuggets.com/2019/04/interview-questions-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/04/interview-questions-data-science.html`](https://www.kdnuggets.com/2019/04/interview-questions-data-science.html)
 
-[评论](#comments)
+评论
 
 **凯瑟·丰，创始人，[首席分析准备](https://www.principalanalyticsprep.com/)**
 
-在[第1部分](https://www.kdnuggets.com/2019/04/most-desired-skill-data-science.html)中，我描述了“批判性思维”的两个方面，许多数据科学招聘经理认为这是他们最期望的技能。为了测试批判性思维，招聘经理使用案例面试。案例面试在管理咨询公司中长期受到欢迎；它们涉及求职者与招聘经理之间关于商业问题的自由对话——在数据科学面试的情况下，商业问题预计将通过数据驱动的见解来解决。
+在[第一部分](https://www.kdnuggets.com/2019/04/most-desired-skill-data-science.html)中，我描述了“批判性思维”的两个方面，许多数据科学招聘经理认为这是他们最期望的技能。为了测试批判性思维，招聘经理使用案例面试。案例面试在管理咨询公司中长期受到欢迎；它们涉及求职者与招聘经理之间关于商业问题的自由对话——在数据科学面试的情况下，商业问题预计将通过数据驱动的见解来解决。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-![数据科学工作](../Images/5b380ff779146a5c47b199a24993cd24.png)
+![数据科学工作](img/5b380ff779146a5c47b199a24993cd24.png)
 
 案例面试让许多从未见过没有答案的测试的毕业生感到害怕。在行业中，任何值得解决的问题都没有答案。批判性思维是公式化思维的对立面。掌握案例面试的最佳方法是练习、练习、再练习。
 
@@ -28,7 +28,7 @@
 
 1.  **大学招生丑闻**
 
-    +   想象你是一名数据科学家，被招募来帮助检测大学招生过程中的欺诈行为。在本次对话中，我们将重点讨论大学申请表中提交的虚假信息，无论是夸大的GPA、虚构的体育成就、伪造的社区服务成就，还是其他类型的伪造。
+    +   想象你是一名数据科学家，被招募来帮助检测大学招生过程中的欺诈行为。在本次对话中，我们将重点讨论大学申请表中提交的虚假信息，无论是夸大的 GPA、虚构的体育成就、伪造的社区服务成就，还是其他类型的伪造。
 
     +   你将建立一套欺诈检测模型。告诉我你的第一个模型将做什么，以及你为什么选择它作为第一个模型。
 
@@ -40,7 +40,7 @@
 
     +   你正在建议一个朋友，他正在考虑 (a) 为 Lyft 开车还是 (b) 开黄色出租车。解释一下你如何比较这两种选择的盈利性。
 
-1.  **Blue Apron IPO后**
+1.  **Blue Apron IPO 后**
 
     +   在 2018 年第二季度，餐食包送货公司 Blue Apron 报告称，约有 70 万名客户，同比下降 24%，而每位客户的收入为 250 美元，同比略降 1 美元。 https://investors.blueapron.com/press-releases/2018/08-02-2018-120246005
 
@@ -66,7 +66,7 @@
 
 这正是每个现实世界的数据问题的情况。你永远没有足够的数据或所有正确的数据，这意味着你需要做出合理的假设，并继续前进。一个好的案例面试是一个对话——你通过向面试官提问来收集更多信息。
 
-**简介**: Kaiser Fung 是 Principal Analytics Prep 的创始人，该公司是领先的数据分析训练营；《Numbers Rule Your World》的畅销书作者；以及 Junk Charts ([https://www.junkcharts.com](https://www.junkcharts.com/)) 的作者，该博客专注于数据可视化。
+**简介**: Kaiser Fung 是 Principal Analytics Prep 的创始人，该公司是领先的数据分析训练营；《Numbers Rule Your World》的畅销书作者；以及 Junk Charts ([`www.junkcharts.com`](https://www.junkcharts.com/)) 的作者，该博客专注于数据可视化。
 
 Twitter: [@junkcharts](https://twitter.com/@junkcharts)
 
@@ -96,6 +96,6 @@ Youtube: [bitly.com/fungwithdata-1](http://bitly.com/fungwithdata-1)
 
 +   [选择示例以理解机器学习模型](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)
 
-+   [KDnuggets 新闻，5月4日：9 门免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费的哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [Chip Huyen 分享了实施机器学习系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)

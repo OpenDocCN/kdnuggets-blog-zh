@@ -1,22 +1,22 @@
 # 数据科学家常犯的前 10 个统计错误
 
-> 原文：[https://www.kdnuggets.com/2019/06/statistics-mistakes-data-scientists.html](https://www.kdnuggets.com/2019/06/statistics-mistakes-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/06/statistics-mistakes-data-scientists.html`](https://www.kdnuggets.com/2019/06/statistics-mistakes-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Norman Niemer](https://www.linkedin.com/in/normanniemer/)，首席数据科学家**
 
-数据科学家是一个“在统计学上比任何软件工程师都要出色，而在软件工程上又比任何统计学家都要优秀”的人。在 [数据科学家常犯的前 10 个编程错误](/2019/04/top-10-coding-mistakes-data-scientists.html) 中，我们讨论了统计学家如何成为更好的编码者。在这里，我们讨论了编码者如何成为更好的统计学家。
+数据科学家是一个“在统计学上比任何软件工程师都要出色，而在软件工程上又比任何统计学家都要优秀”的人。在 数据科学家常犯的前 10 个编程错误 中，我们讨论了统计学家如何成为更好的编码者。在这里，我们讨论了编码者如何成为更好的统计学家。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -41,7 +41,7 @@ f1 0.571 accuracy 0.4
 
 **解决方案**：查看数据！了解数据的特征，并形成一个假设，哪个模型可能最能捕捉这些特征。
 
-**示例**：在没有运行任何模型的情况下，仅通过绘制这个样本数据，你可以清楚地看到 x1 与 y 之间是线性相关的，而 x2 与 y 的关系不大。 [![示例2](../Images/4772ae8f46652bc6cc97546ab86c7b98.png)](https://github.com/d6t/d6t-python/blob/master/blogs/images/top10-stats-example2.png?raw=true)
+**示例**：在没有运行任何模型的情况下，仅通过绘制这个样本数据，你可以清楚地看到 x1 与 y 之间是线性相关的，而 x2 与 y 的关系不大。 ![示例 2](https://github.com/d6t/d6t-python/blob/master/blogs/images/top10-stats-example2.png?raw=true)
 
 ### 3\. 在解释结果之前没有查看数据
 
@@ -49,7 +49,7 @@ f1 0.571 accuracy 0.4
 
 **解决方案**：非常重要，以至于值得重复：查看数据！了解数据的性质如何影响模型结果。
 
-**示例**：在存在离群值的情况下，x1 的斜率从 0.906 改变为 -0.375！ [![示例3](../Images/752bcb7220bcfeb65d1de112c8a96043.png)](https://github.com/d6t/d6t-python/blob/master/blogs/images/top10-stats-example3.png?raw=true)
+**示例**：在存在离群值的情况下，x1 的斜率从 0.906 改变为 -0.375！ ![示例 3](https://github.com/d6t/d6t-python/blob/master/blogs/images/top10-stats-example3.png?raw=true)
 
 ### 4\. 没有天真的基准模型
 
@@ -71,7 +71,7 @@ last out-sample mse 0.003
 
 **解决方案**：确保你在现实的外样本条件下运行模型，并理解它何时表现良好，何时表现不佳。
 
-**示例**：在样本内，随机森林的表现远优于线性回归，均方误差为0.048 vs 0.183，但在样本外表现却远差，均方误差为0.259 vs 0.187。随机森林过度训练，不能在生产环境中表现良好！
+**示例**：在样本内，随机森林的表现远优于线性回归，均方误差为 0.048 vs 0.183，但在样本外表现却远差，均方误差为 0.259 vs 0.187。随机森林过度训练，不能在生产环境中表现良好！
 
 ```py
 in-sample
@@ -98,7 +98,7 @@ mixed out-sample CV mse 0.187 true out-sample CV mse 0.181
 
 **解决方案**：生成测试数据，使其准确反映你在实时生产使用中进行预测时的数据。尤其是在时间序列和面板数据中，你可能需要生成自定义的交叉验证数据或进行滚动测试。
 
-**示例**：这里你有两个不同实体（如公司）的面板数据，这些数据在横截面上高度相关。如果你随机拆分数据，你会使用实际测试中没有的数据做出准确的预测，从而夸大模型性能。你认为通过使用交叉验证避免了第5个错误，并发现随机森林在交叉验证中表现远优于线性回归。但进行滚动前向测试以防止未来数据泄漏到测试中，结果表现反而更差！（随机森林的均方误差从0.047升高到0.211，高于线性回归！）
+**示例**：这里你有两个不同实体（如公司）的面板数据，这些数据在横截面上高度相关。如果你随机拆分数据，你会使用实际测试中没有的数据做出准确的预测，从而夸大模型性能。你认为通过使用交叉验证避免了第 5 个错误，并发现随机森林在交叉验证中表现远优于线性回归。但进行滚动前向测试以防止未来数据泄漏到测试中，结果表现反而更差！（随机森林的均方误差从 0.047 升高到 0.211，高于线性回归！）
 
 ```py
 normal CV
@@ -109,7 +109,7 @@ ols 0.166 rf 0.229
 
 ### 8\. 未考虑决策时可用的数据
 
-当你在生产中运行一个模型时，它会接收到在你运行模型时可用的数据。这些数据可能与训练时假设的数据不同。例如，数据可能会有延迟发布，因此当你运行模型时，其他输入已发生变化，你可能正在使用错误的数据进行预测，或者你的真实y变量是不正确的。
+当你在生产中运行一个模型时，它会接收到在你运行模型时可用的数据。这些数据可能与训练时假设的数据不同。例如，数据可能会有延迟发布，因此当你运行模型时，其他输入已发生变化，你可能正在使用错误的数据进行预测，或者你的真实 y 变量是不正确的。
 
 **解决方案**：进行滚动的外部样本前向测试。如果我在生产中使用了这个模型，我的训练数据会是什么样的，即你有什么数据来进行预测？这就是你用来进行真实外部样本生产测试的训练数据。此外，考虑一下如果你根据预测采取了行动，这将在决策时产生什么结果？
 
@@ -119,7 +119,7 @@ ols 0.166 rf 0.229
 
 **解决方案**：在你完成模型构建后，尝试寻找另一种“版本”的数据集，这可以作为真正的外部样本数据集的替代。如果你是经理，有意地保留一些数据，使其不用于训练。
 
-**例子**：将训练于数据集1的模型应用于数据集2显示MSE（均方误差）翻了一倍多。它们仍然可以接受吗...? 这是一个判断问题，但你在#4中的结果可能会帮助你决定。
+**例子**：将训练于数据集 1 的模型应用于数据集 2 显示 MSE（均方误差）翻了一倍多。它们仍然可以接受吗...? 这是一个判断问题，但你在#4 中的结果可能会帮助你决定。
 
 ```py
 first dataset
@@ -134,17 +134,17 @@ rf mse 0.681 ols mse 0.495
 
 **解决方案**：从一个小的代表性样本开始工作，看看你能从中获得什么有用的东西。将其交还给最终用户，他们能使用它吗？它解决了真正的痛点吗？如果没有，问题可能不在于你数据太少，而在于你的方法。
 
-**简历：[Norman Niemer](https://www.linkedin.com/in/normanniemer/)** 是一家大型资产管理公司的首席数据科学家，他提供数据驱动的投资见解。他拥有哥伦比亚大学的金融工程硕士学位和伦敦Cass商学院的银行与金融学士学位。
+**简历：[Norman Niemer](https://www.linkedin.com/in/normanniemer/)** 是一家大型资产管理公司的首席数据科学家，他提供数据驱动的投资见解。他拥有哥伦比亚大学的金融工程硕士学位和伦敦 Cass 商学院的银行与金融学士学位。
 
 [原文](https://github.com/d6t/d6t-python/blob/master/blogs/top10-mistakes-statistics.md)。已获许可转载。
 
 **相关：**
 
-+   [数据科学家犯的十大编码错误](/2019/04/top-10-coding-mistakes-data-scientists.html)
++   数据科学家犯的十大编码错误
 
-+   [即使是科学家也会犯的统计错误](/2017/10/statistical-mistakes-even-scientists-make.html)
++   即使是科学家也会犯的统计错误
 
-+   [你从未学过的关键统计数据……因为它们从未被教授](/2017/08/vital-statistics-never-learned-never-taught.html)
++   你从未学过的关键统计数据……因为它们从未被教授
 
 ### 更多相关主题
 
@@ -154,8 +154,8 @@ rf mse 0.681 ols mse 0.495
 
 +   [成功数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

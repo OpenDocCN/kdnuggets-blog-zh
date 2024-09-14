@@ -1,8 +1,8 @@
 # 50+ 数据科学和机器学习备忘单
 
-> 原文：[https://www.kdnuggets.com/2015/07/good-data-science-machine-learning-cheat-sheets.html](https://www.kdnuggets.com/2015/07/good-data-science-machine-learning-cheat-sheets.html)
+> 原文：[`www.kdnuggets.com/2015/07/good-data-science-machine-learning-cheat-sheets.html`](https://www.kdnuggets.com/2015/07/good-data-science-machine-learning-cheat-sheets.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)[![数据科学 机器学习 Python R hadoop 备忘单](../Images/092946514b98927beab02e0f346531d3.png)](/wp-content/uploads/cheatsheets-data-science-machine-learning-Python-R-hadoop.jpg)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![数据科学 机器学习 Python R hadoop 备忘单](img/cheatsheets-data-science-machine-learning-Python-R-hadoop.jpg)
 
 关于 Python、R 以及 Numpy、Scipy、Pandas 的备忘单
 
@@ -52,7 +52,7 @@ R 的生态系统扩展得如此之快，以至于需要大量的参考。R 参�
 
 +   [R 备忘单](https://s3.amazonaws.com/quandl-static-content/Documents/Quandl+-+R+Cheat+Sheet.pdf)
 
-+   [数据分析的 data.table 方法]( https://s3.amazonaws.com/assets.datacamp.com/img/blog/data+table+cheat+sheet.pdf)
++   数据分析的 data.table 方法
 
 +   [R studio 的互动网页应用备忘单](http://shiny.rstudio.com/images/shiny-cheatsheet.pdf)
 
@@ -90,35 +90,35 @@ R 的生态系统扩展得如此之快，以至于需要大量的参考。R 参�
 
 Apache Spark 是一个大规模数据处理引擎。对于某些应用程序，例如迭代机器学习，Spark 比 Hadoop（使用 MapReduce）快多达 100 倍。Apache Spark 备忘单解释了它在大数据生态系统中的位置，介绍了设置和创建基本 Spark 应用程序的过程，并解释了常用的操作和动作。
 
-+   [https://dzone.com/refcardz/apache-spark](https://dzone.com/refcardz/apache-spark)
++   [`dzone.com/refcardz/apache-spark`](https://dzone.com/refcardz/apache-spark)
 
 +   [Scala 备忘单 1](http://docs.scala-lang.org/cheatsheets/)
 
-+   [Scala备忘单2](http://www.cheat-sheets.org/saved-copy/Scala_Cheatsheet.pdf)
++   [Scala 备忘单 2](http://www.cheat-sheets.org/saved-copy/Scala_Cheatsheet.pdf)
 
-+   [DZone参考卡上的Scala](https://dzone.com/refcardz/scala)
++   [DZone 参考卡上的 Scala](https://dzone.com/refcardz/scala)
 
-+   [GitHub上的Spark备忘单](https://github.com/KjellSchubert/cheatsheets/blob/master/spark.md)
++   [GitHub 上的 Spark 备忘单](https://github.com/KjellSchubert/cheatsheets/blob/master/spark.md)
 
-+   [Scala在Spark上的备忘单](http://www.openkb.info/2015/01/scala-on-spark-cheatsheet.html)
++   [Scala 在 Spark 上的备忘单](http://www.openkb.info/2015/01/scala-on-spark-cheatsheet.html)
 
-+   [MapR提供的Essential Apache Spark备忘单](https://www.mapr.com/apache-spark-dzone-ref-card)
++   [MapR 提供的 Essential Apache Spark 备忘单](https://www.mapr.com/apache-spark-dzone-ref-card)
 
-**Hadoop与Hive备忘单：**
+**Hadoop 与 Hive 备忘单：**
 
-Hadoop作为一种非传统工具出现，解决了被认为无法解决的问题，通过提供一个开源软件框架来并行处理海量数据。探索Hadoop备忘单，找出在命令行中使用Hadoop时的有用命令。SQL与Hive函数的结合也是一个值得查看的内容。
+Hadoop 作为一种非传统工具出现，解决了被认为无法解决的问题，通过提供一个开源软件框架来并行处理海量数据。探索 Hadoop 备忘单，找出在命令行中使用 Hadoop 时的有用命令。SQL 与 Hive 函数的结合也是一个值得查看的内容。
 
-+   [傻瓜版Hadoop备忘单](http://www.dummies.com/how-to/content/hadoop-for-dummies-cheat-sheet.html)
++   [傻瓜版 Hadoop 备忘单](http://www.dummies.com/how-to/content/hadoop-for-dummies-cheat-sheet.html)
 
-+   [入门Apache Hadoop参考卡](https://dzone.com/refcardz/getting-started-apache-hadoop)
++   [入门 Apache Hadoop 参考卡](https://dzone.com/refcardz/getting-started-apache-hadoop)
 
-+   [Hadoop命令行备忘单](http://danielnee.com/2015/02/hadoop-command-line-cheatsheet/)
++   [Hadoop 命令行备忘单](http://danielnee.com/2015/02/hadoop-command-line-cheatsheet/)
 
-+   [从命令行操作HDFS - Hadoop备忘单](https://github.com/michiard/CLOUDS-LAB/blob/master/C-S.md)
++   [从命令行操作 HDFS - Hadoop 备忘单](https://github.com/michiard/CLOUDS-LAB/blob/master/C-S.md)
 
-+   [Hive函数备忘单](http://www.qubole.com/resources/cheatsheet/hive-function-cheat-sheet/)
++   [Hive 函数备忘单](http://www.qubole.com/resources/cheatsheet/hive-function-cheat-sheet/)
 
-+   [SQL到Hive备忘单](http://hortonworks.com/wp-content/uploads/downloads/2013/08/Hortonworks.CheatSheet.SQLtoHive.pdf)
++   [SQL 到 Hive 备忘单](http://hortonworks.com/wp-content/uploads/downloads/2013/08/Hortonworks.CheatSheet.SQLtoHive.pdf)
 
 **机器学习备忘单：**
 
@@ -128,21 +128,21 @@ Hadoop作为一种非传统工具出现，解决了被认为无法解决的问�
 
 +   [预测学习模式备忘单](https://dzone.com/refcardz/machine-learning-predictive)
 
-+   [微软Azure的机器学习算法备忘单](https://azure.microsoft.com/en-in/documentation/articles/machine-learning-algorithm-cheat-sheet/)
++   [微软 Azure 的机器学习算法备忘单](https://azure.microsoft.com/en-in/documentation/articles/machine-learning-algorithm-cheat-sheet/)
 
-+   [机器学习备忘单GitHub 1](https://github.com/soulmachine/machine-learning-cheat-sheet)
++   [机器学习备忘单 GitHub 1](https://github.com/soulmachine/machine-learning-cheat-sheet)
 
-+   [机器学习备忘单GitHub 2](https://github.com/rcompton/ml_cheat_sheet)
++   [机器学习备忘单 GitHub 2](https://github.com/rcompton/ml_cheat_sheet)
 
 +   [机器学习哪种算法表现最佳？](http://www.lauradhamilton.com/machine-learning-algorithm-cheat-sheet)
 
-+   [10种机器学习算法R命令备忘单](http://vitalflux.com/cheat-sheet-10-machine-learning-algorithms-r-commands/)
++   [10 种机器学习算法 R 命令备忘单](http://vitalflux.com/cheat-sheet-10-machine-learning-algorithms-r-commands/)
 
 +   [预测分析模式](https://dzone.com/refcardz/machine-learning-predictive)
 
-**Django备忘单：**
+**Django 备忘单：**
 
-Django是一个免费的开源Web应用框架，使用Python编写。如果你对Django不熟悉，可以查看这些备忘单，快速了解概念，并深入每一个概念。
+Django 是一个免费的开源 Web 应用框架，使用 Python 编写。如果你对 Django 不熟悉，可以查看这些备忘单，快速了解概念，并深入每一个概念。
 
 +   [Django 备忘单 v.1](http://www.mercurytide.co.uk/media/resources/Django/django10-cheat-sheet.pdf)
 
@@ -164,22 +164,22 @@ Django是一个免费的开源Web应用框架，使用Python编写。如果你�
 
 **相关：**
 
-+   [数据科学备忘单指南](/2014/05/guide-to-data-science-cheat-sheets.html)
++   数据科学备忘单指南
 
-+   [按受欢迎程度排名的 20 个 R 包](/2015/06/top-20-r-packages.html "按受欢迎程度排名的 20 个 R 包")
++   按受欢迎程度排名的 20 个 R 包
 
-+   [大数据与 Hadoop 中的 150 位最具影响力人物](/2015/05/greycampus-150-most-influential-people-big-data-hadoop.html)
++   大数据与 Hadoop 中的 150 位最具影响力人物
 
 ### 更多相关内容
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [7 个超级备忘单，助你在机器学习面试中脱颖而出](https://www.kdnuggets.com/2022/12/7-super-cheat-sheets-need-ace-machine-learning-interview.html)
 
-+   [KDnuggets 新闻, 6月 8: 21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻, 6 月 8: 21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
-+   [数据科学备忘单完整合集 - 第 1 部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学备忘单完整合集 - 第 2 部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
 +   [21 个数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)

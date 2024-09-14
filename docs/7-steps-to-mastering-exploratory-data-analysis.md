@@ -1,8 +1,8 @@
 # 掌握探索性数据分析的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-mastering-exploratory-data-analysis](https://www.kdnuggets.com/7-steps-to-mastering-exploratory-data-analysis)
+> 原文：[`www.kdnuggets.com/7-steps-to-mastering-exploratory-data-analysis`](https://www.kdnuggets.com/7-steps-to-mastering-exploratory-data-analysis)
 
-![掌握探索性数据分析的 7 个步骤](../Images/f9a4492b00d35acbae18f3f02c67dafb.png)
+![掌握探索性数据分析的 7 个步骤](img/f9a4492b00d35acbae18f3f02c67dafb.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -52,7 +52,7 @@
 
 这些方法提供了数据集分布和模式的简要概述，通过均值、中位数、众数、方差、标准差、范围、百分位数和四分位数等指标来概括。
 
-![掌握探索性数据分析的7个步骤](../Images/e54d8f1dac0260193b498db6790e7f3c.png)
+![掌握探索性数据分析的 7 个步骤](img/e54d8f1dac0260193b498db6790e7f3c.png)
 
 作者图片
 
@@ -72,7 +72,7 @@
 
 使用合适的图表可以帮助我们识别大型数据集中的趋势，发现隐藏的模式或异常值。Python 提供了不同的数据可视化库，包括 Matplotlib 和 Seaborn 等。
 
-![掌握探索性数据分析的7个步骤](../Images/b8ab4adc4d299b8786d0386f162046e9.png)
+![掌握探索性数据分析的 7 个步骤](img/b8ab4adc4d299b8786d0386f162046e9.png)
 
 作者图片
 
@@ -134,6 +134,6 @@ EDA 不仅提升了数据集的清晰度，还使数据专业人士能够通过�
 
 +   [掌握数据宇宙：迈向成功数据科学职业的关键步骤](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的七步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的七步骤…](https://www.kdnuggets.com/2022/n05.html)
 
 +   [掌握数据科学的 SQL 七步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)

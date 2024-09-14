@@ -1,10 +1,10 @@
 # 如何在数据科学编码挑战中表现出色
 
-> 原文：[https://www.kdnuggets.com/2020/10/ace-data-science-coding-challenge.html](https://www.kdnuggets.com/2020/10/ace-data-science-coding-challenge.html)
+> 原文：[`www.kdnuggets.com/2020/10/ace-data-science-coding-challenge.html`](https://www.kdnuggets.com/2020/10/ace-data-science-coding-challenge.html)
 
-[评论](#comments)
+评论
 
-![](../Images/da4d6d647261f13723ce58c3264622df.png)
+![](img/da4d6d647261f13723ce58c3264622df.png)
 
 *图片来源：Pexels。*
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -68,7 +68,7 @@
 
 由于项目涉及建立机器学习模型，第一步是确保我们理解机器学习过程：
 
-**![](../Images/2717c0b65838dd646f1ed152f939f261.png)**
+**![](img/2717c0b65838dd646f1ed152f939f261.png)**
 
 ***图 1**. 说明机器学习过程。图像来源：本杰明·O·泰约*。
 
@@ -91,7 +91,7 @@ df.head()
 
 ```
 
-![](../Images/febb6bf0dd0f1c21e51caf27f84dc824.png)
+![](img/febb6bf0dd0f1c21e51caf27f84dc824.png)
 
 ***表 1**：显示数据集的前 5 行。*
 
@@ -103,7 +103,7 @@ df.head()
 
 协方差矩阵图可以用于特征选择和量化特征之间的相关性（多重共线性）。我们从图 2 中观察到特征之间存在强相关性。
 
-![](../Images/3e8d5d274bc7047c40006ce2c499e9e9.png)
+![](img/3e8d5d274bc7047c40006ce2c499e9e9.png)
 
 ***图 2**. 协方差矩阵图。*
 
@@ -117,13 +117,13 @@ df.head()
 
 **3.1 模型构建与评估**
 
-由于我们的目标是使用回归，可以实现不同的回归算法，例如**线性回归 (LR)**、**K邻近回归 (KNR)**和**支持向量回归 (SVR)**。数据集必须被划分为训练集、验证集和测试集。必须使用超参数调优来微调模型，以防止过拟合。交叉验证对于确保模型在验证集上的表现良好是至关重要的。调整完模型参数后，模型必须应用于测试数据集。模型在测试数据集上的表现大致等于在使用未见数据进行预测时的期望值。
+由于我们的目标是使用回归，可以实现不同的回归算法，例如**线性回归 (LR)**、**K 邻近回归 (KNR)**和**支持向量回归 (SVR)**。数据集必须被划分为训练集、验证集和测试集。必须使用超参数调优来微调模型，以防止过拟合。交叉验证对于确保模型在验证集上的表现良好是至关重要的。调整完模型参数后，模型必须应用于测试数据集。模型在测试数据集上的表现大致等于在使用未见数据进行预测时的期望值。
 
 **3.2 不确定性量化**
 
 这可以通过使用训练数据集的不同随机划分来训练模型，然后对每个随机状态参数的交叉验证分数进行平均来完成。
 
-![](../Images/3792fcddbdd903c9efbedc75f829fbd3.png)
+![](img/3792fcddbdd903c9efbedc75f829fbd3.png)
 
 ***图 3**. 各种回归模型的平均交叉验证结果。*
 
@@ -133,7 +133,7 @@ df.head()
 
 在此阶段，最终的机器学习模型被选定并投入生产。模型在生产环境中进行评估以评估其性能。将实验模型转化为实际生产线性能过程中遇到的任何错误都必须进行分析。这可以用于微调原始模型。
 
-根据**图3**中的均值交叉验证分数，我们观察到线性回归和支持向量回归的表现几乎相同，并且优于K邻近回归。因此，最终选择的模型可以是线性回归或支持向量回归。
+根据**图 3**中的均值交叉验证分数，我们观察到线性回归和支持向量回归的表现几乎相同，并且优于 K 邻近回归。因此，最终选择的模型可以是线性回归或支持向量回归。
 
 **有关示例 1 编码练习的完整解决方案，请参见以下链接：**
 
@@ -143,45 +143,45 @@ df.head()
 
 **示例 1 编码练习备注**
 
-有时编码练习会要求你只提交一个Jupyter笔记本，或者可能要求提供完整的项目报告。确保你的Jupyter笔记本组织良好，以反映机器学习过程的每个阶段。一个示例Jupyter笔记本可以在这里找到： [ML_Model_for_Predicting_Ships_Crew_Size](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size)。
+有时编码练习会要求你只提交一个 Jupyter 笔记本，或者可能要求提供完整的项目报告。确保你的 Jupyter 笔记本组织良好，以反映机器学习过程的每个阶段。一个示例 Jupyter 笔记本可以在这里找到： [ML_Model_for_Predicting_Ships_Crew_Size](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size)。
 
 ### 示例 2 编码练习：贷款状态预测模型
 
 > ***说明***
 > 
-> *在这个问题中，你将预测一个贷款组合的结果。每笔贷款计划在3年内偿还，结构如下：*
+> *在这个问题中，你将预测一个贷款组合的结果。每笔贷款计划在 3 年内偿还，结构如下：*
 > 
 > +   *首先，借款人获得资金。这一事件称为起始。*
 > +   
 > +   *然后，借款人会继续定期还款，直到发生以下情况之一：*
 > +   
-> *(i) 借款人通常因经济困难而停止还款，通常发生在3年期限结束之前。这种情况称为损失，贷款因此被认为已损失。*
+> *(i) 借款人通常因经济困难而停止还款，通常发生在 3 年期限结束之前。这种情况称为损失，贷款因此被认为已损失。*
 > 
-> *(ii) 借款人继续还款，直到起始日期后的3年。这时，债务已完全偿还。*
+> *(ii) 借款人继续还款，直到起始日期后的 3 年。这时，债务已完全偿还。*
 > 
-> *在附带的CSV文件中，每一行对应一个贷款，列的定义如下：*
+> *在附带的 CSV 文件中，每一行对应一个贷款，列的定义如下：*
 > 
 > +   *带有“自起始日期以来的天数”标题的列表示从起始日期到数据收集日期之间经过的天数。*
 > +   
 > +   *对于在数据收集前已经损失的贷款，带有“从起始到损失的天数”标题的列表示从起始到损失之间经过的天数。对于所有其他贷款，此列为空。*
 > +   
-> ***目标****：我们希望你估计这些贷款在其所有3年期满时将有多少比例会被注销。请包括你如何得出答案的详细解释，并包括你使用的任何代码。你可以做出简化假设，但请明确说明这些假设。你可以以任何你喜欢的格式呈现你的答案；特别是，PDF和Jupyter Notebook都是可以的。同时，我们预计这个项目不会花费你超过3-6小时的时间。*
+> ***目标****：我们希望你估计这些贷款在其所有 3 年期满时将有多少比例会被注销。请包括你如何得出答案的详细解释，并包括你使用的任何代码。你可以做出简化假设，但请明确说明这些假设。你可以以任何你喜欢的格式呈现你的答案；特别是，PDF 和 Jupyter Notebook 都是可以的。同时，我们预计这个项目不会花费你超过 3-6 小时的时间。*
 
-这里的数据集很复杂（有50,000行和2列，以及大量缺失值），问题也不是很直接。你必须批判性地检查数据集，然后决定使用哪个模型。这个问题需要在一周内解决。还要求提交正式的项目报告和一个R脚本或Jupyter笔记本文件。
+这里的数据集很复杂（有 50,000 行和 2 列，以及大量缺失值），问题也不是很直接。你必须批判性地检查数据集，然后决定使用哪个模型。这个问题需要在一周内解决。还要求提交正式的项目报告和一个 R 脚本或 Jupyter 笔记本文件。
 
-### 通过样本2编码练习的技巧
+### 通过样本 2 编码练习的技巧
 
-和样本1编码练习一样，在解决这个问题时你需要遵循机器学习步骤。这个粒子问题没有唯一解决方案。我尝试了基于蒙特卡罗模拟的概率建模解决方案。
+和样本 1 编码练习一样，在解决这个问题时你需要遵循机器学习步骤。这个粒子问题没有唯一解决方案。我尝试了基于蒙特卡罗模拟的概率建模解决方案。
 
-要查看完整的样本1编码练习解决方案，请参见以下链接：
+要查看完整的样本 1 编码练习解决方案，请参见以下链接：
 
-[*样本2推荐解决方案*](https://github.com/bot13956/Monte_Carlo_Simulation_Loan_Status)
+[*样本 2 推荐解决方案*](https://github.com/bot13956/Monte_Carlo_Simulation_Loan_Status)
 
-[*数据科学编码练习R脚本*](https://medium.com/towards-artificial-intelligence/r-script-for-data-science-coding-exercise-633800dd63ec)
+[*数据科学编码练习 R 脚本*](https://medium.com/towards-artificial-intelligence/r-script-for-data-science-coding-exercise-633800dd63ec)
 
 [*数据科学编码练习项目报告*](https://towardsdatascience.com/project-report-for-data-science-coding-exercise-9a9c76a09be8)
 
-**样本2编码练习的备注**
+**样本 2 编码练习的备注**
 
 上述解决方案仅为推荐解决方案。请记住，数据科学或机器学习项目的解决方案不是唯一的。我鼓励你在查看样本解决方案之前尝试解决这些问题。
 
@@ -203,10 +203,10 @@ df.head()
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [是什么使得 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

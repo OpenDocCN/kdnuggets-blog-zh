@@ -1,22 +1,22 @@
 # 如何优化你的简历以适应数据科学家职业
 
-> 原文：[https://www.kdnuggets.com/2020/08/optimize-cv-data-scientist-career.html](https://www.kdnuggets.com/2020/08/optimize-cv-data-scientist-career.html)
+> 原文：[`www.kdnuggets.com/2020/08/optimize-cv-data-scientist-career.html`](https://www.kdnuggets.com/2020/08/optimize-cv-data-scientist-career.html)
 
-[评论](#comments)
+评论
 
 **由 [Dorian Martin](https://www.essaysupply.com/research-papers)，技术作家**。
 
-![](../Images/ed9e04fa03b5fdefc7feaa25782f4422.png)
+![](img/ed9e04fa03b5fdefc7feaa25782f4422.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -66,7 +66,7 @@
 
 另一种更有创意的方式是像 Upwork 那样通过视觉上区分每项技能，Upwork 在其用户资料中这样做。
 
-![](../Images/67d7f1c6995d757008a2140a6db2e6a6.png)
+![](img/67d7f1c6995d757008a2140a6db2e6a6.png)
 
 你应该按什么顺序列出技能？最佳的做法是首先列出那些需求量大的技能，然后再列出“较不显著”的技能。此外，不要忘记提供对技能水平的评估，例如，“初学者”，“中级”或“专家”。
 
@@ -111,7 +111,7 @@
 | **非技术技能** | **出色描述** |
 | --- | --- |
 | 口头沟通 | 管理每周与客户的会议，以更新项目进展并收集反馈 |
-| 书面沟通与团队合作 | 与10多个营销团队成员合作，应用数据分析模型来识别客户数据中的模式 |
+| 书面沟通与团队合作 | 与 10 多个营销团队成员合作，应用数据分析模型来识别客户数据中的模式 |
 | 讲故事 | 创建数据可视化演示文稿，并向客户展示以解释数据分析结果 |
 | 适应能力 | 同时进行机器学习和数据可视化项目，以帮助识别意外问题并将结果转换为可视化 |
 
@@ -121,9 +121,9 @@
 
 沟通和团队合作是最重要的软技能之一，需要以这种方式呈现。
 
-为什么？因为大多数数据科学专业人士——约60%——在五人或更多人的团队中工作，正如[2019年数据科学现状报告](https://www.kaggle.com/kaggle-survey-2019)所说。
+为什么？因为大多数数据科学专业人士——约 60%——在五人或更多人的团队中工作，正如[2019 年数据科学现状报告](https://www.kaggle.com/kaggle-survey-2019)所说。
 
-![](../Images/cd2b3310474d46c0c10886f015ebe4fd.png)
+![](img/cd2b3310474d46c0c10886f015ebe4fd.png)
 
 *来源：[数据科学现状 2019](https://www.kaggle.com/kaggle-survey-2019)*
 
@@ -133,11 +133,11 @@
 
 不秘密的是，招聘经理在职位描述中使用关键词。在数据科学行业，他们包括*技能、资格、认证和技术的名称*。
 
-让我们看一下这份来自LinkedIn的数据科学家职位发布。虽然有点长，但请耐心点，这就是你很快也要做的事情。
+让我们看一下这份来自 LinkedIn 的数据科学家职位发布。虽然有点长，但请耐心点，这就是你很快也要做的事情。
 
 职位发布中大多数关键词已为你下划线，以便你快速找到。
 
-![](../Images/8b483f39b510d64d86b60d2b86099eae.png)
+![](img/8b483f39b510d64d86b60d2b86099eae.png)
 
 你能找到多少个呢？
 
@@ -167,20 +167,20 @@
 
 +   [如何在理想公司获得数据科学家职位](https://www.kdnuggets.com/2020/01/data-scientist-job-dream-company.html)
 
-+   [成为数据科学家时避免的4种最快方式](https://www.kdnuggets.com/2019/12/4-ways-not-hired-data-scientist.html)
++   [成为数据科学家时避免的 4 种最快方式](https://www.kdnuggets.com/2019/12/4-ways-not-hired-data-scientist.html)
 
 +   [应对日益增长的数据科学技能需求](https://www.kdnuggets.com/2019/10/growing-need-skills-data-science.html)
 
 ### 更多相关内容
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，寻找目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [9亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

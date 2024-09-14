@@ -1,18 +1,18 @@
-# 分词的演变 - NLP中的字节对编码
+# 分词的演变 - NLP 中的字节对编码
 
-> 原文：[https://www.kdnuggets.com/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html](https://www.kdnuggets.com/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html)
+> 原文：[`www.kdnuggets.com/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html`](https://www.kdnuggets.com/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html)
 
-[评论](#comments)
+评论
 
 **由 [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/), 数据科学讲师 | 导师 | YouTuber**
 
-![图片](../Images/7d609b3bd5f5effc62c7f83b74dbf6a6.png)
+![图片](img/7d609b3bd5f5effc62c7f83b74dbf6a6.png)
 
-虽然NLP在AI的启示上可能有些晚，但它在Google、OpenAI等组织中表现卓越，推出了如BERT和GPT-2/3等最先进的（SOTA）语言模型。
+虽然 NLP 在 AI 的启示上可能有些晚，但它在 Google、OpenAI 等组织中表现卓越，推出了如 BERT 和 GPT-2/3 等最先进的（SOTA）语言模型。
 
-GitHub Copilot 和 OpenAI Codex 是当前新闻中的一些非常受欢迎的应用程序。作为一个对NLP了解有限的人，我决定将NLP作为研究领域，接下来的几篇博客/视频将是我分享在分析NLP的一些重要组件后所学到的内容。
+GitHub Copilot 和 OpenAI Codex 是当前新闻中的一些非常受欢迎的应用程序。作为一个对 NLP 了解有限的人，我决定将 NLP 作为研究领域，接下来的几篇博客/视频将是我分享在分析 NLP 的一些重要组件后所学到的内容。
 
-NLP系统有三个主要组件，帮助机器理解自然语言：
+NLP 系统有三个主要组件，帮助机器理解自然语言：
 
 1.  分词
 
@@ -20,9 +20,9 @@ NLP系统有三个主要组件，帮助机器理解自然语言：
 
 1.  模型架构
 
-顶级深度学习模型如BERT、GPT-2或GPT-3都共享相同的组件，但具有不同的架构，使每个模型有所区别。
+顶级深度学习模型如 BERT、GPT-2 或 GPT-3 都共享相同的组件，但具有不同的架构，使每个模型有所区别。
 
-在本期通讯中（以及 [笔记本](https://colab.research.google.com/drive/1QLlQx_EjlZzBPsuj_ClrEDC0l8G-JuTn?usp=sharing)），我们将专注于NLP管道中第一个组件的基础知识，即**分词**。这是一个经常被忽视的概念，但它本身就是一个研究领域。我们已经远远超越了传统的NLTK分词过程。
+在本期通讯中（以及 [笔记本](https://colab.research.google.com/drive/1QLlQx_EjlZzBPsuj_ClrEDC0l8G-JuTn?usp=sharing)），我们将专注于 NLP 管道中第一个组件的基础知识，即**分词**。这是一个经常被忽视的概念，但它本身就是一个研究领域。我们已经远远超越了传统的 NLTK 分词过程。
 
 尽管我们有最先进的分词算法，但了解其演变过程并学习我们如何达到现在的状态始终是一个好习惯。
 
@@ -34,19 +34,19 @@ NLP系统有三个主要组件，帮助机器理解自然语言：
 
 +   分词的类型 - 词级、字符级和子词级。
 
-+   字节对编码算法 - 现在大多数NLP模型都使用的一个版本。
++   字节对编码算法 - 现在大多数 NLP 模型都使用的一个版本。
 
-本教程的下一部分将深入探讨更先进（或增强版BPE）的算法：
+本教程的下一部分将深入探讨更先进（或增强版 BPE）的算法：
 
-+   **Unigram算法**
++   **Unigram 算法**
 
-+   **WordPiece - BERT变压器**
++   **WordPiece - BERT 变压器**
 
 +   **SentencePiece - 端到端分词器系统**
 
 ## 什么是分词？
 
-分词是将原始文本表示为称为“tokens”的较小单位的过程。这些tokens可以被映射为数字，以便进一步输入到NLP模型中。
+分词是将原始文本表示为称为“tokens”的较小单位的过程。这些 tokens 可以被映射为数字，以便进一步输入到 NLP 模型中。
 
 这是一个过于简化的分词器功能示例：
 
@@ -59,9 +59,9 @@ words = text.split(" ") # split the text on spaces
 tokens = {v: k for k, v in enumerate(words)} # generate a word to index mapping
 ```
 
-[![](../Images/f7f26c06b602d353f1881e141d340e98.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaa2e479-181a-4703-afb6-9796d0f74d09_229x327.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fcaa2e479-181a-4703-afb6-9796d0f74d09_229x327.png)
 
-在这里，我们只是简单地将文本中的每个词映射到一个数字索引。显然，这是一个非常简单的示例，我们没有考虑语法、标点符号、复合词（如test, test-ify, test-ing等）。
+在这里，我们只是简单地将文本中的每个词映射到一个数字索引。显然，这是一个非常简单的示例，我们没有考虑语法、标点符号、复合词（如 test, test-ify, test-ing 等）。
 
 因此，我们需要一个更技术化且准确的令牌化定义。为了考虑每一个标点符号和相关词汇，我们需要从字符级别开始工作。
 
@@ -89,7 +89,7 @@ tokens = {v: k for k, v in enumerate(words)} # generate a word to index mapping
 
 为了让深度学习模型从文本中学习，我们需要一个两步过程：
 
-[![](../Images/3a952105e1bfa4e42c255f0dd40324af.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fff7fafb7-a127-4e41-a050-cb02951f3112_1391x821.jpeg)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fff7fafb7-a127-4e41-a050-cb02951f3112_1391x821.jpeg)
 
 1.  令牌化 - 决定使用什么算法来生成令牌。
 
@@ -119,7 +119,7 @@ tokens = {v: k for k, v in enumerate(words)} # generate a word to index mapping
 
 ### 基于字符的模型的缺点
 
-+   **计算需求更多：** 基于字符的模型将每个字符视为词元，更多的词元意味着更多的输入计算以处理每个词元，从而需要更多的计算资源。对于一个5词长的句子，你可能需要处理30个词元，而不是5个基于词的词元。
++   **计算需求更多：** 基于字符的模型将每个字符视为词元，更多的词元意味着更多的输入计算以处理每个词元，从而需要更多的计算资源。对于一个 5 词长的句子，你可能需要处理 30 个词元，而不是 5 个基于词的词元。
 
 +   **缩小 NLP 任务和应用的数量：** 对于长字符序列，只有某种类型的神经网络架构可以使用。这限制了我们可以执行的 NLP 任务类型。对于像实体识别或文本分类这样的应用，基于字符的编码可能会变得低效。
 
@@ -159,7 +159,7 @@ tokens = {v: k for k, v in enumerate(words)} # generate a word to index mapping
 
 ## 字节对编码（BPE）
 
-BPE最初是一种数据压缩算法，用于通过识别常见字节对找到表示数据的最佳方式。现在它被用于自然语言处理（NLP），以使用最少的标记找到文本的最佳表示。
+BPE 最初是一种数据压缩算法，用于通过识别常见字节对找到表示数据的最佳方式。现在它被用于自然语言处理（NLP），以使用最少的标记找到文本的最佳表示。
 
 工作原理如下：
 
@@ -171,7 +171,7 @@ BPE最初是一种数据压缩算法，用于通过识别常见字节对找到�
 
 1.  持续迭代，直到你达到迭代限制（由你设置）或达到标记限制。
 
-让我们逐步（在代码中）处理一个示例文本。为此编写代码，我借鉴了[Lei Mao的BPE极简博客](https://leimao.github.io/blog/Byte-Pair-Encoding/)。我鼓励你去看看！
+让我们逐步（在代码中）处理一个示例文本。为此编写代码，我借鉴了[Lei Mao 的 BPE 极简博客](https://leimao.github.io/blog/Byte-Pair-Encoding/)。我鼓励你去看看！
 
 这是我们的示例文本：
 
@@ -187,7 +187,7 @@ words = text.strip().split(" ")
 print(f"Vocabulary size: {len(words)}")
 ```
 
-[![](../Images/b12c502f08d3d40df13b3a665ddeb325.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fb90e5882-9f1f-4b05-be48-3e9336cf1854_283x392.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fb90e5882-9f1f-4b05-be48-3e9336cf1854_283x392.png)
 
 ## 第二步：将单词拆分为字符，然后计算字符频率。
 
@@ -201,7 +201,7 @@ for word, freq in word_freq_dict.items():
 char_freq_dict
 ```
 
-[![](../Images/c1e660153c7aec3e03f4430fc9301f49.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fecbf93c5-7fd6-4a40-a63d-e504be1bf157_396x536.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fecbf93c5-7fd6-4a40-a63d-e504be1bf157_396x536.png)
 
 ## 第三步：合并最频繁出现的连续字节对。
 
@@ -216,7 +216,7 @@ for word, freq in word_freq_dict.items():
         pairs[chars[i], chars[i+1]] += freq
 ```
 
-[![](../Images/abcae8d892a8f69406e06c3c0bf6f78a.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fdaf21979-946b-4dfb-b090-64e591c13907_400x590.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fdaf21979-946b-4dfb-b090-64e591c13907_400x590.png)
 
 ## 第四步 - 迭代多次以找到最佳（就频率而言）对进行编码，然后将它们连接以查找子词。
 
@@ -234,7 +234,7 @@ for word, freq in word_freq_dict.items():
 
 这是这四个步骤的精简输出：
 
-[![](../Images/db0e450fa66790cc0afbb9effa4ede62.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F4cb7b992-1986-4dbc-a444-da817255f80f_1295x637.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F4cb7b992-1986-4dbc-a444-da817255f80f_1295x637.png)
 
 当我们迭代每个最佳对时，我们合并（连接）该对，你可以看到，当我们重新计算频率时，原始字符标记频率减少，新配对的标记频率在标记字典中出现。
 
@@ -252,11 +252,11 @@ BPE 算法是一种贪婪算法，即它在每次迭代中尝试寻找最佳对�
 
 为了解决这个问题，提出了多种解决方案，但最突出的是一种添加了[subword regularization（子词正则化，一种新的子词分割方法）](https://arxiv.org/pdf/1804.10959.pdf)训练的单语语言模型，该模型通过使用损失函数计算每个子词令牌的概率，以选择最佳选项。更多内容将在即将到来的博客中介绍。
 
-## 他们在BERTs或GPTs中使用BPE吗？
+## 他们在 BERTs 或 GPTs 中使用 BPE 吗？
 
-像BERT或GPT-2这样的模型使用某种版本的BPE或单语模型来对输入文本进行标记化。
+像 BERT 或 GPT-2 这样的模型使用某种版本的 BPE 或单语模型来对输入文本进行标记化。
 
-BERT包含了一种新的算法，叫做WordPiece，这与BPE类似，但增加了一个概率计算层，以决定合并的令牌是否会被最终采纳。
+BERT 包含了一种新的算法，叫做 WordPiece，这与 BPE 类似，但增加了一个概率计算层，以决定合并的令牌是否会被最终采纳。
 
 ## 总结
 
@@ -268,47 +268,47 @@ BERT包含了一种新的算法，叫做WordPiece，这与BPE类似，但增加�
 
 使用字符的问题在于令牌的语义特征丧失，可能导致创建不正确的词汇表示或嵌入。
 
-为了兼顾两全，推出了更有前景的子词标记化方法，然后我们研究了BPE算法来实现子词标记化。
+为了兼顾两全，推出了更有前景的子词标记化方法，然后我们研究了 BPE 算法来实现子词标记化。
 
-下一周将详细介绍WordPiece、SentencePiece等高级标记化器的下一步，以及如何使用HuggingFace标记化器。
+下一周将详细介绍 WordPiece、SentencePiece 等高级标记化器的下一步，以及如何使用 HuggingFace 标记化器。
 
 ## 参考文献和注释
 
 我的文章实际上是以下论文和博客的汇总，我鼓励你阅读：
 
-1.  [稀有词汇的神经机器翻译与子词单元](https://arxiv.org/pdf/1508.07909.pdf) - 讨论基于BPE压缩算法的不同分割技术的研究论文。
+1.  [稀有词汇的神经机器翻译与子词单元](https://arxiv.org/pdf/1508.07909.pdf) - 讨论基于 BPE 压缩算法的不同分割技术的研究论文。
 
-1.  [关于子词NMT（神经机器翻译）的GitHub代码库](https://github.com/rsennrich/subword-nmt) - 支持上述论文的代码。
+1.  [关于子词 NMT（神经机器翻译）的 GitHub 代码库](https://github.com/rsennrich/subword-nmt) - 支持上述论文的代码。
 
-1.  [Lei Mao的Byte Pair Encoding博客](https://leimao.github.io/blog/Byte-Pair-Encoding/) - 我使用了他博客中的代码来实现和理解BPE。
+1.  [Lei Mao 的 Byte Pair Encoding 博客](https://leimao.github.io/blog/Byte-Pair-Encoding/) - 我使用了他博客中的代码来实现和理解 BPE。
 
-1.  [机器如何阅读](https://blog.floydhub.com/tokenization-nlp/) - Cathal Horan的博客。
+1.  [机器如何阅读](https://blog.floydhub.com/tokenization-nlp/) - Cathal Horan 的博客。
 
 如果你想开始学习数据科学或机器学习领域，可以查看我的课程 [数据科学与机器学习基础](https://www.wiplane.com/p/foundations-for-data-science-ml)。
 
 如果你想看到更多类似内容而你还不是订阅者，可以考虑使用下面的按钮订阅我的新闻通讯。
 
-**简介: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一位在网页技术和数据科学（即全栈数据科学）方面拥有丰富经验的工程师。他已经辅导了超过1000名人工智能/网页/数据科学的求职者，并正在设计数据科学和机器学习工程学习路径。此前，Harshit 与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发了数据处理算法。
+**简介: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一位在网页技术和数据科学（即全栈数据科学）方面拥有丰富经验的工程师。他已经辅导了超过 1000 名人工智能/网页/数据科学的求职者，并正在设计数据科学和机器学习工程学习路径。此前，Harshit 与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发了数据处理算法。
 
 [原文](https://dswharshit.substack.com/p/the-evolution-of-tokenization-byte)。经授权转载。
 
 **相关：**
 
-+   [深度学习的文本预处理方法](/2021/09/text-preprocessing-methods-deep-learning.html)
++   深度学习的文本预处理方法
 
-+   [15 个必须了解的 Python 字符串方法](/2021/09/15-must-know-python-string-methods.html)
++   15 个必须了解的 Python 字符串方法
 
-+   [学习数据科学和机器学习：路线图后的第一步](/2021/08/learn-data-science-machine-learning.html)
++   学习数据科学和机器学习：路线图后的第一步
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

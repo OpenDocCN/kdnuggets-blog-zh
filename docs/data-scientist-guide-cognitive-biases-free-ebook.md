@@ -1,8 +1,8 @@
 # 数据科学家的认知偏见指南：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2023/05/data-scientist-guide-cognitive-biases-free-ebook.html](https://www.kdnuggets.com/2023/05/data-scientist-guide-cognitive-biases-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2023/05/data-scientist-guide-cognitive-biases-free-ebook.html`](https://www.kdnuggets.com/2023/05/data-scientist-guide-cognitive-biases-free-ebook.html)
 
-[![数据科学家的认知偏见指南：免费电子书](../Images/a9fceea0d84f2567c2a499cb85da636c.png)](https://datasciencehorizons.com/thinking-clearly-data-scientist-guide-understanding-cognitive-biases/)
+![数据科学家的认知偏见指南：免费电子书](https://datasciencehorizons.com/thinking-clearly-data-scientist-guide-understanding-cognitive-biases/)
 
 如果你有兴趣探讨认知偏见的主题，并深入了解这些偏见如何影响你的日常生活以及作为数据科学家的实践，那么免费的电子书《**清晰思考：数据科学家理解认知偏见的指南**](https://datasciencehorizons.com/thinking-clearly-data-scientist-guide-understanding-cognitive-biases/)可能是一个很好的资源。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

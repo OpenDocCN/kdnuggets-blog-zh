@@ -1,38 +1,38 @@
-# 如何使用spaCy 3微调BERT Transformer
+# 如何使用 spaCy 3 微调 BERT Transformer
 
-> 原文：[https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html](https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html)
+> 原文：[`www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html`](https://www.kdnuggets.com/2021/06/fine-tune-bert-transformer-spacy.html)
 
-[评论](#comments)
+评论
 
-**作者：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI创始人**
+**作者：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)，UBIAI 创始人**
 
-![](../Images/b94c536c815124975b86c678b96e4590.png)
+![](img/b94c536c815124975b86c678b96e4590.png)
 
 图片由[Alina Grubnyak](https://unsplash.com/@alinnnaaaa)提供，拍摄于[Unsplash](https://unsplash.com/photos/ASKeuOZqhYU)
 
-自从Vaswani等人发表了开创性论文“[Attention is all you need](https://arxiv.org/abs/1706.03762)”之后，Transformer模型已成为目前NLP技术中的领先技术。其应用范围从命名实体识别（NER）、文本分类、问答系统到文本生成，这项惊人的技术的应用几乎是无限的。
+自从 Vaswani 等人发表了开创性论文“[Attention is all you need](https://arxiv.org/abs/1706.03762)”之后，Transformer 模型已成为目前 NLP 技术中的领先技术。其应用范围从命名实体识别（NER）、文本分类、问答系统到文本生成，这项惊人的技术的应用几乎是无限的。
 
-更具体来说，BERT（Bidirectional Encoder Representations from Transformers）以一种新颖的方式利用了transformer架构。例如，BERT通过随机掩蔽的词分析句子的两侧来进行预测。除了预测掩蔽的词外，BERT通过在第一个句子开头添加分类标记[CLS]来预测句子序列，并尝试通过在两个句子之间添加分隔标记[SEP]来预测第二个句子是否跟随第一个句子。
+更具体来说，BERT（Bidirectional Encoder Representations from Transformers）以一种新颖的方式利用了 transformer 架构。例如，BERT 通过随机掩蔽的词分析句子的两侧来进行预测。除了预测掩蔽的词外，BERT 通过在第一个句子开头添加分类标记[CLS]来预测句子序列，并尝试通过在两个句子之间添加分隔标记[SEP]来预测第二个句子是否跟随第一个句子。
 
-![](../Images/cecc0d84e605d6d0448b80f784f925c2.png)
+![](img/cecc0d84e605d6d0448b80f784f925c2.png)
 
-BERT架构
+BERT 架构
 
-在本教程中，我将向你展示如何微调BERT模型以预测软件职位描述中的技能、学历、学历专业和经验等实体。如果你有兴趣进一步提取实体之间的关系，请阅读我们的[文章](https://walidamamou.medium.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)了解如何使用transformers进行联合实体和关系提取。
+在本教程中，我将向你展示如何微调 BERT 模型以预测软件职位描述中的技能、学历、学历专业和经验等实体。如果你有兴趣进一步提取实体之间的关系，请阅读我们的[文章](https://walidamamou.medium.com/how-to-train-a-joint-entities-and-relation-extraction-classifier-using-bert-transformer-with-spacy-49eb08d91b5c)了解如何使用 transformers 进行联合实体和关系提取。
 
-微调transformers需要强大的GPU和并行处理能力。为此我们使用Google Colab，因为它提供了免费的带GPU的服务器。
+微调 transformers 需要强大的 GPU 和并行处理能力。为此我们使用 Google Colab，因为它提供了免费的带 GPU 的服务器。
 
-在本教程中，我们将使用新发布的[spaCy 3库](https://spacy.io/usage/v3)来微调我们的transformer。以下是如何在spaCy 3上微调BERT模型的逐步指南。
+在本教程中，我们将使用新发布的[spaCy 3 库](https://spacy.io/usage/v3)来微调我们的 transformer。以下是如何在 spaCy 3 上微调 BERT 模型的逐步指南。
 
 ### 数据标注：
 
-要使用spaCy 3微调BERT，我们需要提供符合spaCy 3 JSON格式的训练和开发数据（[请见这里](https://spacy.io/api/data-formats)），这些数据将被转换为.spacy二进制文件。我们将提供以IOB格式保存的TSV文件中的数据，然后转换为spaCy JSON格式。
+要使用 spaCy 3 微调 BERT，我们需要提供符合 spaCy 3 JSON 格式的训练和开发数据（[请见这里](https://spacy.io/api/data-formats)），这些数据将被转换为.spacy 二进制文件。我们将提供以 IOB 格式保存的 TSV 文件中的数据，然后转换为 spaCy JSON 格式。
 
-我仅为训练数据集标注了120份职位描述，标注了如*技能*、*学历*、*学历专业*和*经验*等实体，开发数据集则标注了约70份职位描述。
+我仅为训练数据集标注了 120 份职位描述，标注了如*技能*、*学历*、*学历专业*和*经验*等实体，开发数据集则标注了约 70 份职位描述。
 
 在本教程中，我使用了[UBIAI](https://ubiai.tools/)注释工具，因为它具备诸如以下的广泛功能：
 
-+   ML自动注释
++   ML 自动注释
 
 +   字典、正则表达式和规则基础的自动注释
 
@@ -42,7 +42,7 @@ BERT架构
 
 使用 UBIAI 中的正则表达式功能，我已经预注释了所有符合模式“\d.*\+.*”的经验提及，例如“5 + years of experience in C++”。然后我上传了一个包含所有软件语言的 csv 字典并分配了实体技能。预注释节省了大量时间，并将帮助你减少手动注释。
 
-![](../Images/51ecdfeb05d752adb7430e36c06b3f02.png)
+![](img/51ecdfeb05d752adb7430e36c06b3f02.png)
 
 UBIAI 注释界面
 
@@ -94,7 +94,7 @@ HDD B-SKILLS
 +   为了加快训练过程，我们需要在 GPU 上运行并行处理。为此，我们安装 NVIDIA 9.2 cuda 库：
 
 ```py
-!wget [https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda-repo-ubuntu1604-9-2-local_9.2.88-1_amd64](https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda-repo-ubuntu1604-9-2-local_9.2.88-1_amd64) -O cuda-repo-ubuntu1604–9–2-local_9.2.88–1_amd64.deb!dpkg -i cuda-repo-ubuntu1604–9–2-local_9.2.88–1_amd64.deb!apt-key add /var/cuda-repo-9–2-local/7fa2af80.pub!apt-get update!apt-get install cuda-9.2
+!wget [`developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda-repo-ubuntu1604-9-2-local_9.2.88-1_amd64`](https://developer.nvidia.com/compute/cuda/9.2/Prod/local_installers/cuda-repo-ubuntu1604-9-2-local_9.2.88-1_amd64) -O cuda-repo-ubuntu1604–9–2-local_9.2.88–1_amd64.deb!dpkg -i cuda-repo-ubuntu1604–9–2-local_9.2.88–1_amd64.deb!apt-key add /var/cuda-repo-9–2-local/7fa2af80.pub!apt-get update!apt-get install cuda-9.2
 ```
 
 要检查是否安装了正确的 cuda 编译器，请运行：`!nvcc --version`
@@ -123,7 +123,7 @@ pip install torch==1.7.1+cu92 torchvision==0.8.2+cu92 torchaudio==0.7.2 -f https
 
 +   SpaCy 3 使用一个包含所有模型训练组件的配置文件 config.cfg 来训练模型。在 [spaCy 训练页面](https://spacy.io/usage/training)上，你可以选择模型的语言（本教程中的英语）、组件（NER）和硬件（GPU），并下载配置文件模板。
 
-![](../Images/9fb53accb51c2ad8c13a1350ec3f8b62.png)
+![](img/9fb53accb51c2ad8c13a1350ec3f8b62.png)
 
 用于训练的 Spacy 3 配置文件。 [来源](https://spacy.io/usage/training)
 
@@ -147,15 +147,15 @@ pip install torch==1.7.1+cu92 torchvision==0.8.2+cu92 torchaudio==0.7.2 -f https
 !python -m spacy train -g 0 drive/MyDrive/config.cfg — output ./
 ```
 
-附注：如果遇到错误 cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_INVALID_PTX: PTX JIT编译失败，只需卸载cupy并重新安装即可解决问题。
+附注：如果遇到错误 cupy_backends.cuda.api.driver.CUDADriverError: CUDA_ERROR_INVALID_PTX: PTX JIT 编译失败，只需卸载 cupy 并重新安装即可解决问题。
 
 如果一切正常，你应该开始看到模型的评分和损失正在更新：
 
-![](../Images/dcdd504db38bb7cecb9372d09b82e76c.png)
+![](img/dcdd504db38bb7cecb9372d09b82e76c.png)
 
-在google colab上进行BERT训练
+在 google colab 上进行 BERT 训练
 
-在训练结束时，模型将保存在model-best文件夹下。模型评分位于model-best文件夹内的meta.json文件中：
+在训练结束时，模型将保存在 model-best 文件夹下。模型评分位于 model-best 文件夹内的 meta.json 文件中：
 
 ```py
 “performance”:{
@@ -240,37 +240,37 @@ for doc in nlp.pipe(text, disable=["tagger", "parser"]):
 ]
 ```
 
-仅使用120个训练文档就已经非常令人印象深刻！我们能够正确提取大部分技能、文凭、文凭专业和经验。
+仅使用 120 个训练文档就已经非常令人印象深刻！我们能够正确提取大部分技能、文凭、文凭专业和经验。
 
 通过更多的训练数据，模型肯定会进一步提高并产生更高的评分。
 
 ### 结论：
 
-只需几行代码，我们就成功地训练了一个功能齐全的NER变换器模型，感谢出色的spaCy 3库。请尝试在你的用例中使用，并分享你的结果。注意，你可以使用 [UBIAI](https://ubiai.tools/) 注释工具来标记数据，我们提供免费14天试用。
+只需几行代码，我们就成功地训练了一个功能齐全的 NER 变换器模型，感谢出色的 spaCy 3 库。请尝试在你的用例中使用，并分享你的结果。注意，你可以使用 [UBIAI](https://ubiai.tools/) 注释工具来标记数据，我们提供免费 14 天试用。
 
 一如既往，如果你有任何意见，请在下面留言或发送邮件至 admin@ubiai.tools！
 
-**简历：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是UBIAI的创始人，UBIAI是一个用于NLP应用的注释工具，他拥有物理学博士学位。
+**简历：[Walid Amamou](https://www.linkedin.com/in/walid-amamou-b65105b9/)** 是 UBIAI 的创始人，UBIAI 是一个用于 NLP 应用的注释工具，他拥有物理学博士学位。
 
 [原文](https://towardsdatascience.com/how-to-fine-tune-bert-transformer-with-spacy-3-6a90bfe57647)。经授权转载。
 
 **相关：**
 
-+   [如何通过API创建和部署简单的情感分析应用](/2021/06/create-deploy-sentiment-analysis-app-api.html)
++   如何通过 API 创建和部署简单的情感分析应用
 
-+   [如何将变换器应用于任何长度的文本](/2021/04/apply-transformers-any-length-text.html)
++   如何将变换器应用于任何长度的文本
 
-+   [自然语言处理研究和应用的新资源](/2021/05/great-new-resource-natural-language-processing-research-applications.html)
++   自然语言处理研究和应用的新资源
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

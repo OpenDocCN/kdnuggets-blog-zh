@@ -1,12 +1,12 @@
 # 优化数据科学管道的 15 个 Python 代码片段
 
-> 原文：[https://www.kdnuggets.com/2021/08/15-python-snippets-optimize-data-science-pipeline.html](https://www.kdnuggets.com/2021/08/15-python-snippets-optimize-data-science-pipeline.html)
+> 原文：[`www.kdnuggets.com/2021/08/15-python-snippets-optimize-data-science-pipeline.html`](https://www.kdnuggets.com/2021/08/15-python-snippets-optimize-data-science-pipeline.html)
 
-[评论](#comments)
+评论
 
 **由 [Lucas Soares](https://www.linkedin.com/in/lucas-soares-969044167/)，K1 Digital 的机器学习工程师**
 
-![](../Images/e51a5bd3e4287b167f92867009d98031.png)
+![](img/e51a5bd3e4287b167f92867009d98031.png)
 
 由 [Carlos Muza](https://unsplash.com/@kmuza?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 上提供的照片
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -66,7 +66,7 @@ display_side_by_side(df1.head(),df2.head(), titles=['Sales','Advertising'])
 ### Output
 ```
 
-![](../Images/dbd00f12505b061ce4e0fdcbb0b11166.png)
+![](img/dbd00f12505b061ce4e0fdcbb0b11166.png)
 
 作者提供的图片
 
@@ -79,7 +79,7 @@ df.dropna(inplace=True)
 df
 ```
 
-![png](../Images/39ff5d14a8c8cc3779c7fda74b44fe56.png)
+![png](img/39ff5d14a8c8cc3779c7fda74b44fe56.png)
 
 ## 5. 显示 DataFrame 列中的 NaN 条目数量
 
@@ -105,7 +105,7 @@ df["a"]=df["a"].apply(square)
 df
 ```
 
-![png](../Images/e7e9cff0947ba5d89e8123dcdc2b2952.png)
+![png](img/e7e9cff0947ba5d89e8123dcdc2b2952.png)
 
 ## 7. 将两个 DataFrame 列转换为字典
 
@@ -135,7 +135,7 @@ plt.legend()
 plt.show()
 ```
 
-![png](../Images/4fb0453b4bffbbe6a721a3ea25f96b91.png)
+![png](img/4fb0453b4bffbbe6a721a3ea25f96b91.png)
 
 作者提供的图片
 
@@ -160,7 +160,7 @@ df_merged = df1.merge(df2, on='col_to_merge')
 df_merged
 ```
 
-![png](../Images/aa8aa6ef5210e1c616dd4e7251e188af.png)
+![png](img/aa8aa6ef5210e1c616dd4e7251e188af.png)
 
 ## 11. 使用 sklearn 标准化 pandas 列中的值
 
@@ -185,7 +185,7 @@ df_pass = df[pass_index]
 df_pass
 ```
 
-![png](../Images/f2ba0db2c5b472fe7912e8b0f4ed634d.png)
+![png](img/f2ba0db2c5b472fe7912e8b0f4ed634d.png)
 
 ## 14. 基础饼图
 
@@ -200,7 +200,7 @@ plt.axis('equal')
 plt.show()
 ```
 
-![png](../Images/b5897954023b3e9b8bb31a329a0518dd.png)
+![png](img/b5897954023b3e9b8bb31a329a0518dd.png)
 
 ## 15. 使用 `.apply()` 将百分比字符串转换为数值
 
@@ -217,7 +217,7 @@ df["col_with_percentage"] = df["col_with_percentage"].apply(change_to_numerical)
 df
 ```
 
-![png](../Images/50e0a893dfa8764044d97c286e68c61f.png)
+![png](img/50e0a893dfa8764044d97c286e68c61f.png)
 
 ## 结论
 
@@ -227,28 +227,28 @@ df
 
 *更多内容请访问*[***plainenglish.io***](http://plainenglish.io/)
 
-**个人简介：[卢卡斯·索亚雷斯](https://www.linkedin.com/in/lucas-soares-969044167/)** 是一位AI工程师，专注于深度学习应用于各种问题。
+**个人简介：[卢卡斯·索亚雷斯](https://www.linkedin.com/in/lucas-soares-969044167/)** 是一位 AI 工程师，专注于深度学习应用于各种问题。
 
 [原文](https://python.plainenglish.io/15-data-science-snippets-to-optimize-your-coding-pipeline-93a5625d48cd)。已获许可转载。
 
 **相关内容：**
 
-+   [如何在Python中工程化日期特征](/2021/08/engineer-date-features-python.html)
++   如何在 Python 中工程化日期特征
 
-+   [在本地开发和测试AWS的ETL管道](/2021/08/development-testing-etl-pipelines-aws-locally.html)
++   在本地开发和测试 AWS 的 ETL 管道
 
-+   [Prefect：如何用Python编写和调度你的第一个ETL管道](/2021/08/prefect-write-schedule-etl-pipeline-python.html)
++   Prefect：如何用 Python 编写和调度你的第一个 ETL 管道
 
 ### 更多相关内容
 
-+   [如何优化SQL查询以加快数据检索速度](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)
++   [如何优化 SQL 查询以加快数据检索速度](https://www.kdnuggets.com/2023/06/optimize-sql-queries-faster-data-retrieval.html)
 
-+   [优化和管理机器学习生命周期的10大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化和管理机器学习生命周期的 10 大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
 
-+   [如何优化Dockerfile指令以加快构建时间](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)
++   [如何优化 Dockerfile 指令以加快构建时间](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)
 
-+   [构建供应链管道所需的6种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
++   [构建供应链管道所需的 6 种数据科学技术](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
 
-+   [ETL与ELT：哪个更适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
++   [ETL 与 ELT：哪个更适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
 
-+   [使用Bash构建你的第一个ETL管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
++   [使用 Bash 构建你的第一个 ETL 管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)

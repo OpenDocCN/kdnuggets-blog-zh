@@ -1,80 +1,80 @@
 # 回到基础路径
 
-> 原文：[https://www.kdnuggets.com/back-to-basics-pathway](https://www.kdnuggets.com/back-to-basics-pathway)
+> 原文：[`www.kdnuggets.com/back-to-basics-pathway`](https://www.kdnuggets.com/back-to-basics-pathway)
 
-![回到基础路径](../Images/3bd2f53ee520e7aa4f8cf1c169fb2d5a.png)
+![回到基础路径](img/3bd2f53ee520e7aa4f8cf1c169fb2d5a.png)
 
 图片由作者提供
 
-2023年发生了很多事情，你们中的一些人可能正在考虑转行进入数据科学职业。你可能会想从哪里开始？我应该选择哪个课程？我需要提前了解什么吗？
+2023 年发生了很多事情，你们中的一些人可能正在考虑转行进入数据科学职业。你可能会想从哪里开始？我应该选择哪个课程？我需要提前了解什么吗？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-这是KDnuggets帮助解答所有这些问题的地方！
+这是 KDnuggets 帮助解答所有这些问题的地方！
 
-KDnuggets团队为所有读者创建了一个数据科学路径，无论他们的生活背景如何，都可以受益。
+KDnuggets 团队为所有读者创建了一个数据科学路径，无论他们的生活背景如何，都可以受益。
 
 想了解更多？
 
-# 第1周：Python编程与数据科学基础
+# 第 1 周：Python 编程与数据科学基础
 
-链接: [Python编程与数据科学基础](/back-to-basics-week-1-python-programming-data-science-foundations)
+链接: Python 编程与数据科学基础
 
-在第一周，我们将学习Python、数据处理和可视化。
+在第一周，我们将学习 Python、数据处理和可视化。
 
-第1天到第3天：数据科学新手的Python基础
+第 1 天到第 3 天：数据科学新手的 Python 基础
 
-+   介绍Python在数据科学中的作用。
++   介绍 Python 在数据科学中的作用。
 
-+   针对初学者的Python语法、数据类型和控制结构指南。
++   针对初学者的 Python 语法、数据类型和控制结构指南。
 
 +   互动编码练习以巩固你的理解。
 
-第4天：揭开Python数据结构的神秘面纱
+第 4 天：揭开 Python 数据结构的神秘面纱
 
-+   通过我们的逐步指南了解Python的核心数据结构。你将学习列表、元组、字典和集合，每种都有实际的例子及其在数据处理中的重要性。
++   通过我们的逐步指南了解 Python 的核心数据结构。你将学习列表、元组、字典和集合，每种都有实际的例子及其在数据处理中的重要性。
 
-第5天到第6天：使用NumPy和Pandas进行实用的数值计算
+第 5 天到第 6 天：使用 NumPy 和 Pandas 进行实用的数值计算
 
-+   探索NumPy和Pandas在数值分析和数据处理中的强大功能，包括实际应用和动手练习。
++   探索 NumPy 和 Pandas 在数值分析和数据处理中的强大功能，包括实际应用和动手练习。
 
-第7天：使用Pandas的数据清理技巧
+第 7 天：使用 Pandas 的数据清理技巧
 
-+   使用Pandas掌握基本的数据清理技能。
++   使用 Pandas 掌握基本的数据清理技能。
 
-# 第2周：数据库、SQL、数据管理和统计概念
+# 第 2 周：数据库、SQL、数据管理和统计概念
 
-链接: [数据库、SQL、数据管理和统计概念](/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
+链接: 数据库、SQL、数据管理和统计概念
 
 进入第二周，我们将学习数据库、SQL、数据管理和统计概念。
 
-+   第1天：数据科学中的数据库简介
++   第 1 天：数据科学中的数据库简介
 
-+   第2天：5步入门SQL
++   第 2 天：5 步入门 SQL
 
-+   第3天：数据科学的数据管理原则
++   第 3 天：数据科学的数据管理原则
 
-+   第4天：处理大数据：工具和技术
++   第 4 天：处理大数据：工具和技术
 
-+   第5天：数据科学中的统计学：理论与概述
++   第 5 天：数据科学中的统计学：理论与概述
 
-+   第6天：在Python中应用描述性和推断性统计
++   第 6 天：在 Python 中应用描述性和推断性统计
 
 +   第 7 天: 假设检验与 A/B 测试
 
 # 第 3 周: 机器学习简介
 
-链接: [机器学习简介](/back-to-basics-week-3-introduction-to-machine-learning)
+链接: 机器学习简介
 
 进入第三周，我们将深入探讨机器学习。
 
@@ -94,7 +94,7 @@ KDnuggets团队为所有读者创建了一个数据科学路径，无论他们�
 
 # 第 4 周: 高级话题与部署
 
-链接: [高级话题与部署](/back-to-basics-week-4-advanced-topics-and-deployment)
+链接: 高级话题与部署
 
 进入第三周，我们将深入探讨高级话题与部署。
 
@@ -114,7 +114,7 @@ KDnuggets团队为所有读者创建了一个数据科学路径，无论他们�
 
 # 奖励周: 部署到云端
 
-链接: [部署到云端](/back-to-basics-bonus-week-deploying-to-the-cloud)
+链接: 部署到云端
 
 进入奖励周:
 
@@ -142,4 +142,4 @@ KDnuggets团队为所有读者创建了一个数据科学路径，无论他们�
 
 +   [回到基础 加时周：部署到云端](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)
 
-+   [回到基础 第2周：数据库、SQL、数据管理及…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [回到基础 第 2 周：数据库、SQL、数据管理及…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)

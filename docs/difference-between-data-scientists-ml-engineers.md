@@ -1,10 +1,10 @@
 # 数据科学家与机器学习工程师的区别
 
-> 原文：[https://www.kdnuggets.com/2021/08/difference-between-data-scientists-ml-engineers.html](https://www.kdnuggets.com/2021/08/difference-between-data-scientists-ml-engineers.html)
+> 原文：[`www.kdnuggets.com/2021/08/difference-between-data-scientists-ml-engineers.html`](https://www.kdnuggets.com/2021/08/difference-between-data-scientists-ml-engineers.html)
 
-[评论](#comments)
+评论
 
-![](../Images/9ddbb1857634cf4086e626b9bfdcd256.png)
+![](img/9ddbb1857634cf4086e626b9bfdcd256.png)
 
 图片由 [Stillness InMotion](https://unsplash.com/@stillnes_in_motion?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -70,7 +70,7 @@
 
 尽管如此，机器学习工程师通常也能很好地掌握其他编程语言，如 Java、C++ 或 Julia。
 
-+   [**2021年学习数据科学的课程**](https://medium.com/analytics-vidhya/courses-to-learn-data-science-in-2021-a52e64344e5c)
++   [**2021 年学习数据科学的课程**](https://medium.com/analytics-vidhya/courses-to-learn-data-science-in-2021-a52e64344e5c)
 
 +   [**如何成为一名机器学习工程师**](https://towardsdatascience.com/how-to-become-a-machine-learning-engineer-e420e134c0a3)
 
@@ -118,11 +118,11 @@
 
 **相关：**
 
-+   [我如何在 8 个月内提升我的数据科学技能](/2020/10/level-up-data-science-skills-8-months.html)
++   我如何在 8 个月内提升我的数据科学技能
 
-+   [最重要的数据科学项目](/2020/09/most-important-data-science-project.html)
++   最重要的数据科学项目
 
-+   [我希望在数据科学职业生涯中避免的 5 个错误](/2021/07/5-mistakes-data-science-career.html)
++   我希望在数据科学职业生涯中避免的 5 个错误
 
 ### 更多相关话题
 

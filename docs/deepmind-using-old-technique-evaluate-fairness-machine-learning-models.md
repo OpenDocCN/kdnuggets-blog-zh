@@ -1,8 +1,8 @@
 # DeepMind 正在使用这种旧技术来评估机器学习模型的公平性
 
-> 原文：[https://www.kdnuggets.com/2019/10/deepmind-using-old-technique-evaluate-fairness-machine-learning-models.html](https://www.kdnuggets.com/2019/10/deepmind-using-old-technique-evaluate-fairness-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2019/10/deepmind-using-old-technique-evaluate-fairness-machine-learning-models.html`](https://www.kdnuggets.com/2019/10/deepmind-using-old-technique-evaluate-fairness-machine-learning-models.html)
 
-[评论](#comments)![图](../Images/09293a7813510fd0c0f8ad29659a6c90.png)
+评论![图](img/09293a7813510fd0c0f8ad29659a6c90.png)
 
 支持机器学习系统的一个常见论点是，它们能够在不受人为主观性影响的情况下做出决策。然而，这个论点只是部分正确。虽然机器学习系统不会基于情感或感觉做出决策，但它们确实通过训练数据集继承了很多人类偏见。偏见之所以重要，是因为它会导致不公平。在过去几年里，开发能够减轻偏见影响并提高机器学习系统公平性的技术取得了很大进展。最近，[DeepMind 发布了一篇研究论文，提出使用一种叫做因果贝叶斯网络（CBN）的旧统计技术来构建更公平的机器学习系统](https://arxiv.org/abs/1907.06430)。
 
@@ -18,7 +18,7 @@ CBN 的一个更正式的数学定义是一个由节点组成的图，这些节�
 
 让我们在一个著名的统计案例研究的背景下说明 CBNs。1975 年，伯克利大学的一组研究人员发表了有关统计中的偏见和不公平性的一项著名研究。该研究基于一个大学录取场景，其中申请者根据资格 Q、部门选择 D 和性别 G 被录取；女性申请者更常申请某些部门（为了简单起见，我们将性别视为二元的，但这并不是框架强加的必要限制）。将该场景建模为 CBN，我们得到以下结构。在该图中，路径 G→D→A 是因果的，而路径 G→D→A←Q 是非因果的。
 
-![](../Images/82339756cc1d3143d59d3518fc7e3be0.png)
+![](img/82339756cc1d3143d59d3518fc7e3be0.png)
 
 ### CBNs 和不公平性
 
@@ -26,21 +26,21 @@ CBNs 如何帮助确定数据集中不公平性的因果表示？我们的大学
 
 第一个示例说明了一个情景，其中女性申请者自愿申请接受率低的部门，因此路径 G→D 被认为是公平的。
 
-![](../Images/f564e3045b608fb200dc8d598bfd3a7d.png)
+![](img/f564e3045b608fb200dc8d598bfd3a7d.png)
 
 现在，考虑前一个例子的一个变体，其中女性申请者由于系统性历史或文化压力申请接受率较低的部门，因此路径 G→D 被认为是不公平的（因此，路径 D→A 成为部分不公平）。
 
-![](../Images/23e8ed2f4a7618cbc667d3a6495bce89.png)
+![](img/23e8ed2f4a7618cbc667d3a6495bce89.png)
 
 继续在上下文游戏中，如果我们的学院自愿降低女性选择更多的部门的录取率，会发生什么呢？好吧，路径 G→D 被认为是公平的，但路径 D→A 部分是不公平的。
 
-![](../Images/ab3a8186bdd64fd6c0aa3ee69a934140.png)
+![](img/ab3a8186bdd64fd6c0aa3ee69a934140.png)
 
 在这三个例子中，CBNs 提供了一个描述可能不公平情境的可视化框架。然而，对不公平关系影响的解释往往依赖于 CBN 之外的上下文因素。
 
 到目前为止，我们已经使用 CBNs 来识别数据集中不公平的关系，但如果我们能量化这些关系会怎么样呢？事实证明，我们的技术的一个小变种可以用来量化数据集中的不公平性，并探索缓解不公平性的方法。量化不公平性的主要思想在于引入反事实情境，使我们能够询问模型的特定输入是否受到不公平对待。在我们的场景中，一个反事实模型将允许我们询问是否被拒绝的女性申请者（G=1, Q=q, D=d, A=0）在一个性别为男性的反事实世界中是否会得到相同的决定。在这个简单的例子中，假设录取决定是作为 G、Q 和 D 的确定性函数 f 得到的，即 A = f(G, Q, D)，这就相当于在询问 f(G=0, Q=q, D=d) = 0，即是否一个具有相同部门选择和资格的男性申请者也会被拒绝。
 
-![](../Images/078005d7b5ba99fbd807ed9b36e41922.png)
+![](img/078005d7b5ba99fbd807ed9b36e41922.png)
 
 随着机器学习在软件应用中变得越来越重要，创建公平模型的意义也将变得更加相关。DeepMind 的论文表明，CBNs 可以提供一个可视化框架，用于检测机器学习模型中的不公平性以及量化其影响的模型。这种技术可能帮助我们设计出代表人类最佳价值观并缓解一些偏见的机器学习模型。
 
@@ -48,21 +48,21 @@ CBNs 如何帮助确定数据集中不公平性的因果表示？我们的大学
 
 **相关：**
 
-+   [DeepMind 和 Waymo 如何利用进化竞争训练自动驾驶车辆](/2019/09/deepmind-waymo-evolutionary-competition-self-driving-vehicles.html)
++   DeepMind 和 Waymo 如何利用进化竞争训练自动驾驶车辆
 
-+   [重塑想象力：DeepMind 构建能够自发重放过去经历的神经网络](/2019/10/recreating-imagination-deepmind-builds-neural-networks-spontaneously-replay-past-experiences.html)
++   重塑想象力：DeepMind 构建能够自发重放过去经历的神经网络
 
-+   [DeepMind 静悄悄地开源了三种新型强化学习框架](/2019/09/deepmind-three-new-impressive-reinforcement-learning-frameworks.html)
++   DeepMind 静悄悄地开源了三种新型强化学习框架
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

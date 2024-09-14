@@ -1,12 +1,12 @@
 # 使用 PyCaret 进行多时间序列预测
 
-> 原文：[https://www.kdnuggets.com/2021/04/multiple-time-series-forecasting-pycaret.html](https://www.kdnuggets.com/2021/04/multiple-time-series-forecasting-pycaret.html)
+> 原文：[`www.kdnuggets.com/2021/04/multiple-time-series-forecasting-pycaret.html`](https://www.kdnuggets.com/2021/04/multiple-time-series-forecasting-pycaret.html)
 
-[评论](#comments)
+评论
 
 **由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 创始人及作者**
 
-![](../Images/c05ecb6b401ed3f08fb023e361b80252.png)
+![](img/c05ecb6b401ed3f08fb023e361b80252.png)
 
 PyCaret — 一个开源、低代码的 Python 机器学习库
 
@@ -55,7 +55,7 @@ PyCaret **回归模块** 是一个监督机器学习模块，用于估计**因�
 
 我使用了来自 Kaggle 的[商店商品需求预测挑战](https://www.kaggle.com/c/demand-forecasting-kernels-only)数据集。该数据集包含 10 个不同的商店，每个商店有 50 个项目，即总共有 500 个日常时间序列数据，跨度为五年（2013–2017）。
 
-![](../Images/df759b487e1be619cd86c59ff474a925.png)
+![](img/df759b487e1be619cd86c59ff474a925.png)
 
 示例数据集
 
@@ -75,7 +75,7 @@ data['day_of_week'] = [i.dayofweek for i in data['date']]
 data['day_of_year'] = [i.dayofyear for i in data['date']]data.head()
 ```
 
-![](../Images/cee173d1e1b85ba3bf47c84c1805d384.png)
+![](img/cee173d1e1b85ba3bf47c84c1805d384.png)
 
 从数据中采样行
 
@@ -95,11 +95,11 @@ data['time_series'].nunique()
     fig.show()
 ```
 
-![](../Images/9d91598b4177e08e4a34837cc6145ecf.png)
+![](img/9d91598b4177e08e4a34837cc6145ecf.png)
 
 store_1_item_1 时间序列和 30 天移动平均
 
-![](../Images/af2b1fa012292c287ca1c33f2da7257d.png)
+![](img/af2b1fa012292c287ca1c33f2da7257d.png)
 
 store_2_item_1 时间序列和 30 天移动平均
 
@@ -111,7 +111,7 @@ store_2_item_1 时间序列和 30 天移动平均
 
 下方第 10 行是对`time_series`变量进行数据过滤。循环的第一部分初始化了`setup`函数，然后使用`compare_models`查找最佳模型。第 24–26 行捕获结果，并将最佳模型的性能指标附加到名为`all_results`的列表中。代码的最后部分使用`finalize_model`函数在整个数据集上重新训练最佳模型，包括测试集中剩余的 5%，并将整个管道（包括模型）保存为一个 pickle 文件。
 
-[https://gist.github.com/moezali1/f258195ba1c677654abffb0d1acb2cc0](https://gist.github.com/moezali1/f258195ba1c677654abffb0d1acb2cc0)
+[`gist.github.com/moezali1/f258195ba1c677654abffb0d1acb2cc0`](https://gist.github.com/moezali1/f258195ba1c677654abffb0d1acb2cc0)
 
 我们现在可以从`all_results`列表创建一个数据框。它将显示每个时间序列选择的最佳模型。
 
@@ -120,13 +120,13 @@ concat_results = pd.concat(all_results,axis=0)
 concat_results.head()
 ```
 
-![](../Images/fb374f6e8afef94f8a2aef439173c3dd.png)
+![](img/fb374f6e8afef94f8a2aef439173c3dd.png)
 
 从 concat_results 中采样行
 
 ### 训练过程 ????
 
-![图示](../Images/425b2d2a63ec2c98390fbf8da89b63ad.png)
+![图示](img/425b2d2a63ec2c98390fbf8da89b63ad.png)
 
 训练过程
 
@@ -145,7 +145,7 @@ score_df['day_of_week'] = [i.dayofweek for i in score_df['date']]
 score_df['day_of_year'] = [i.dayofyear for i in score_df['date']]score_df.head()
 ```
 
-![](../Images/19a1fa56fa27d09a4afb8919582a888b.png)
+![](img/19a1fa56fa27d09a4afb8919582a888b.png)
 
 从 score_df 数据集提取样本行
 
@@ -160,7 +160,7 @@ from pycaret.regression import load_model, predict_modelall_score_df = []for i i
 concat_df.head()
 ```
 
-![](../Images/e4eba32882da3ce5ace399f07c02ec61.png)
+![](img/e4eba32882da3ce5ace399f07c02ec61.png)
 
 从 concat_df 中提取样本行
 
@@ -171,7 +171,7 @@ final_df = pd.merge(concat_df, data, how = 'left', left_on=['date', 'time_series
 final_df.head()
 ```
 
-![](../Images/68ab2e1ee3847753490af9aed8f84f82.png)
+![](img/68ab2e1ee3847753490af9aed8f84f82.png)
 
 从 final_df 中提取样本行
 
@@ -186,11 +186,11 @@ for i in final_df['time_series'].unique()[:5]:
     fig.show()
 ```
 
-![](../Images/6bad75640eafb65d8759b7a89ee53ebf.png)
+![](img/6bad75640eafb65d8759b7a89ee53ebf.png)
 
 store_1_item_1 实际销售和预测标签
 
-![](../Images/741088670e001a6d1420457e739fc2d4.png)
+![](img/741088670e001a6d1420457e739fc2d4.png)
 
 store_2_item_1 实际销售和预测标签
 
@@ -254,21 +254,21 @@ store_2_item_1 实际销售和预测标签
 
 **相关：**
 
-+   [使用 PyCaret 回归模块进行时间序列预测](/2021/04/time-series-forecasting-pycaret-regression-module.html)
++   使用 PyCaret 回归模块进行时间序列预测
 
-+   [使用 PyCaret 进行自动化异常检测](/2021/04/automated-anomaly-detection-pycaret.html)
++   使用 PyCaret 进行自动化异常检测
 
-+   [使用 Docker 容器将机器学习管道部署到云端](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
++   使用 Docker 容器将机器学习管道部署到云端
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

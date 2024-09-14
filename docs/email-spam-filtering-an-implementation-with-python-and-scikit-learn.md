@@ -1,20 +1,20 @@
 # 电子邮件垃圾邮件过滤：使用 Python 和 Scikit-learn 的实现
 
-> 原文：[https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html](https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html`](https://www.kdnuggets.com/2017/03/email-spam-filtering-an-implementation-with-python-and-scikit-learn.html)
 
 **由 [Machine Learning in Action](https://appliedmachinelearning.wordpress.com/).**
 
-![垃圾邮件过滤器](../Images/b8a1b609f29a3b8d8f5000f853ad551f.png)
+![垃圾邮件过滤器](img/b8a1b609f29a3b8d8f5000f853ad551f.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 事务
 
 * * *
 
@@ -56,7 +56,7 @@ Subject: posting
 hi , ' m work phonetics project modern irish ' m hard source . anyone recommend book article english ? ' , specifically interest palatal ( slender ) consonant , work helpful too . thank ! laurel sutton ( sutton @ garnet . berkeley . edu
 ```
 
-可以看到，邮件的第一行是主题，第`3`行包含邮件正文。我们将仅对内容进行文本分析，以检测垃圾邮件。作为第一步，我们需要创建一个单词及其频率的字典。为此任务，使用了`700`封邮件的训练集。这个Python函数会为你创建字典。
+可以看到，邮件的第一行是主题，第`3`行包含邮件正文。我们将仅对内容进行文本分析，以检测垃圾邮件。作为第一步，我们需要创建一个单词及其频率的字典。为此任务，使用了`700`封邮件的训练集。这个 Python 函数会为你创建字典。
 
 ```py
 def make_Dictionary(train_dir):
@@ -74,7 +74,7 @@ def make_Dictionary(train_dir):
     return dictionary
 ```
 
-一旦字典创建完成，我们可以在上述函数中添加几行代码，以删除我们在第1步中讨论的非单词。我还删除了字典中那些无关的荒谬单字符。不要忘记将下面的代码插入到`def make_Dictionary(train_dir)`函数中。
+一旦字典创建完成，我们可以在上述函数中添加几行代码，以删除我们在第 1 步中讨论的非单词。我还删除了字典中那些无关的荒谬单字符。不要忘记将下面的代码插入到`def make_Dictionary(train_dir)`函数中。
 
 ```py
 list_to_remove = dictionary.keys()
@@ -96,7 +96,7 @@ dictionary = dictionary.most_common(3000)
 
 一旦字典准备好，我们可以为训练集中的每封邮件提取`3000`维的词频向量（我们的特征）。每个**词频向量**包含训练文件中`3000`个单词的频率。当然你现在可能已经猜到，大多数词频会是零。让我们举个例子。假设我们的字典中有`500`个单词。每个词频向量包含训练文件中`500`个字典单词的频率。假设训练文件中的文本是“Get the work done, work done”，那么它将被编码为[0,0,0,0,0,…….0,0,2,0,0,0,……,0,0,1,0,0,…0,0,1,0,0,……2,0,0,0,0,0]。在这里，所有词频都放在`500`长度词频向量的第`296`、`359`、`415`、`495`个索引处，其余为零。
 
-以下的python代码将生成一个特征向量矩阵，其中行表示700个训练集文件，列表示3000个词典中的单词。索引‘*ij*’的值将是词典中第j^(th)个单词在第i^(th)个文件中出现的次数。
+以下的 python 代码将生成一个特征向量矩阵，其中行表示 700 个训练集文件，列表示 3000 个词典中的单词。索引‘*ij*’的值将是词典中第 j^(th)个单词在第 i^(th)个文件中出现的次数。
 
 ```py
 def extract_features(mail_dir): 
@@ -120,11 +120,11 @@ def extract_features(mail_dir):
 
 ### 4\. 训练分类器。
 
-在这里，我将使用[scikit-learn ML库](http://scikit-learn.org/stable/)来训练分类器。它是一个开源的python ML库，可以在第三方分发包[anaconda](https://www.continuum.io/downloads)中找到，也可以通过[这个](http://scikit-learn.org/stable/install.html)单独安装。安装完成后，我们只需在程序中导入即可。
+在这里，我将使用[scikit-learn ML 库](http://scikit-learn.org/stable/)来训练分类器。它是一个开源的 python ML 库，可以在第三方分发包[anaconda](https://www.continuum.io/downloads)中找到，也可以通过[这个](http://scikit-learn.org/stable/install.html)单独安装。安装完成后，我们只需在程序中导入即可。
 
-我在这里训练了两个模型，即朴素贝叶斯分类器和支持向量机（SVM）。朴素贝叶斯分类器是一种传统且非常流行的文档分类方法。它是一种基于贝叶斯定理的有监督概率分类器，假设每对特征之间相互独立。SVM是一种有监督的二元分类器，当特征数量较多时非常有效。SVM的目标是将训练数据的某个子集与其他数据分开，这些数据被称为支持向量（分隔超平面的边界）。SVM模型的决策函数基于支持向量，并利用了核技巧来预测测试数据的类别。
+我在这里训练了两个模型，即朴素贝叶斯分类器和支持向量机（SVM）。朴素贝叶斯分类器是一种传统且非常流行的文档分类方法。它是一种基于贝叶斯定理的有监督概率分类器，假设每对特征之间相互独立。SVM 是一种有监督的二元分类器，当特征数量较多时非常有效。SVM 的目标是将训练数据的某个子集与其他数据分开，这些数据被称为支持向量（分隔超平面的边界）。SVM 模型的决策函数基于支持向量，并利用了核技巧来预测测试数据的类别。
 
-一旦分类器训练完成，我们可以检查模型在测试集上的表现。我们提取测试集中每封邮件的词频向量，并用训练好的NB分类器和SVM模型预测其类别（ham或spam）。下面是完整的垃圾邮件过滤应用代码。你需要在第2步和第3步中包含我们定义的两个函数。
+一旦分类器训练完成，我们可以检查模型在测试集上的表现。我们提取测试集中每封邮件的词频向量，并用训练好的 NB 分类器和 SVM 模型预测其类别（ham 或 spam）。下面是完整的垃圾邮件过滤应用代码。你需要在第 2 步和第 3 步中包含我们定义的两个函数。
 
 ```py
 import os
@@ -164,7 +164,7 @@ print confusion_matrix(test_labels,result2)
 
 ### 性能检查
 
-测试集包含130封垃圾邮件和130封非垃圾邮件。如果你读到这里，你会看到下面的结果。我展示了两个模型的测试集混淆矩阵。对角线元素表示正确识别（即真实识别）的邮件，而非对角线元素表示错误分类（虚假识别）的邮件。
+测试集包含 130 封垃圾邮件和 130 封非垃圾邮件。如果你读到这里，你会看到下面的结果。我展示了两个模型的测试集混淆矩阵。对角线元素表示正确识别（即真实识别）的邮件，而非对角线元素表示错误分类（虚假识别）的邮件。
 
 | Multinomial NB | Ham | Spam |
 | --- | --- | --- |
@@ -174,17 +174,17 @@ print confusion_matrix(test_labels,result2)
 | Ham | 126 | 4 |
 | Spam | 6 | 124 |
 
-两个模型在测试集上的表现类似，只是SVM在错误识别方面稍微平衡了一些。我必须提醒你，测试数据既没有用于创建词典，也没有用于训练集。
+两个模型在测试集上的表现类似，只是 SVM 在错误识别方面稍微平衡了一些。我必须提醒你，测试数据既没有用于创建词典，也没有用于训练集。
 
 ### 任务
 
-下载[Euron-spam](http://www.aueb.gr/users/ion/data/enron-spam/)语料库的预处理版本。该语料库包含33716封电子邮件，分布在6个目录中。每个目录包含‘ham’和‘spam’文件夹。非垃圾邮件和垃圾邮件的总数分别为16545封和17171封。
+下载[Euron-spam](http://www.aueb.gr/users/ion/data/enron-spam/)语料库的预处理版本。该语料库包含 33716 封电子邮件，分布在 6 个目录中。每个目录包含‘ham’和‘spam’文件夹。非垃圾邮件和垃圾邮件的总数分别为 16545 封和 17171 封。
 
-按照本博客文章中描述的步骤操作，检查使用支持向量机和多项式朴素贝叶斯模型的表现。由于这个语料库的目录结构与博客文章中使用的ling-spam子集的目录结构不同，你可能需要重新组织它或修改`def make_Dictionary(dir)`和`def extract_features(dir)`函数。
+按照本博客文章中描述的步骤操作，检查使用支持向量机和多项式朴素贝叶斯模型的表现。由于这个语料库的目录结构与博客文章中使用的 ling-spam 子集的目录结构不同，你可能需要重新组织它或修改`def make_Dictionary(dir)`和`def extract_features(dir)`函数。
 
-我将Euron-spam语料库划分为60:40的训练集和测试集。在执行了本博客中的相同步骤后，我在13487个测试集邮件上得到了以下结果。我们可以看到，SVM在正确检测垃圾邮件方面的表现略优于朴素贝叶斯分类器。
+我将 Euron-spam 语料库划分为 60:40 的训练集和测试集。在执行了本博客中的相同步骤后，我在 13487 个测试集邮件上得到了以下结果。我们可以看到，SVM 在正确检测垃圾邮件方面的表现略优于朴素贝叶斯分类器。
 
-| 多项式NB | Ham | Spam |
+| 多项式 NB | Ham | Spam |
 | --- | --- | --- |
 | Ham | 6445 | 225 |
 | Spam | 137 | 6680 |
@@ -196,7 +196,7 @@ print confusion_matrix(test_labels,result2)
 
 希望你觉得这个教程易于理解，因为我尽量保持简洁明了。对文本分析感兴趣的初学者可以从这个应用开始。
 
-你可能在考虑使用的模型（如朴素贝叶斯和SVM）背后的数学技术。SVM是一个数学上复杂的模型，而朴素贝叶斯相对容易理解。建议你从在线资源中学习这些模型。此外，还可以进行很多实验，以找出不同参数的效果，比如
+你可能在考虑使用的模型（如朴素贝叶斯和 SVM）背后的数学技术。SVM 是一个数学上复杂的模型，而朴素贝叶斯相对容易理解。建议你从在线资源中学习这些模型。此外，还可以进行很多实验，以找出不同参数的效果，比如
 
 a) 训练数据量
 
@@ -204,15 +204,15 @@ b) 字典大小
 
 c) 使用的机器学习技术的变体（GaussianNB, BernoulliNB, SVC）
 
-d) 对SVM模型参数的微调
+d) 对 SVM 模型参数的微调
 
 e) 通过去除无关词汇来改进字典（可能需要手动进行）
 
-f) 其他特征（查找td-idf）
+f) 其他特征（查找 td-idf）
 
 我将会在一些其他的博客文章中撰写关于这些模型的数学解释。
 
-你可以从GitHub链接[这里](https://github.com/abhijeet3922/Mail-Spam-Filtering)获取这两个语料库的完整Python实现。
+你可以从 GitHub 链接[这里](https://github.com/abhijeet3922/Mail-Spam-Filtering)获取这两个语料库的完整 Python 实现。
 
 如果你喜欢这篇文章，关注本博客以获取即将发布的文章更新。同时，分享它，让更多读者看到。请随时讨论任何与这篇文章相关的内容。我很乐意听取你的反馈。
 
@@ -224,11 +224,11 @@ f) 其他特征（查找td-idf）
 
 **相关：**
 
-+   [与Numpy矩阵的操作：一个实用的初步参考](/2017/03/working-numpy-matrices.html)
++   与 Numpy 矩阵的操作：一个实用的初步参考
 
-+   [使用鸢尾花数据集的简单XGBoost教程](/2017/03/simple-xgboost-tutorial-iris-dataset.html)
++   使用鸢尾花数据集的简单 XGBoost 教程
 
-+   [K-Means与其他聚类算法：Python快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)
++   K-Means 与其他聚类算法：Python 快速入门
 
 ### 更多相关主题
 

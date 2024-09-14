@@ -1,8 +1,8 @@
 # 多模态模型解释
 
-> 原文：[https://www.kdnuggets.com/2023/03/multimodal-models-explained.html](https://www.kdnuggets.com/2023/03/multimodal-models-explained.html)
+> 原文：[`www.kdnuggets.com/2023/03/multimodal-models-explained.html`](https://www.kdnuggets.com/2023/03/multimodal-models-explained.html)
 
-![多模态模型解释](../Images/f61a619c4285c475d4798e805c871a5f.png)
+![多模态模型解释](img/f61a619c4285c475d4798e805c871a5f.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -32,7 +32,7 @@
 
 # 什么是多模态学习？
 
-![多模态模型解释](../Images/dac0d519e923f158fca3021294a95ad9.png)
+![多模态模型解释](img/dac0d519e923f158fca3021294a95ad9.png)
 
 图片来源：作者
 
@@ -54,13 +54,13 @@
 
 组合模型的理念在于，一个模型的优势可以弥补另一个模型的不足，从而产生更准确和更稳健的预测。集成模型、堆叠和装袋是用于组合模型的技术。
 
-![多模态模型解释](../Images/005efd5895d339d294e7f3594d2c552b.png)
+![多模态模型解释](img/005efd5895d339d294e7f3594d2c552b.png)
 
 作者提供的图片
 
 ## 集成模型
 
-![多模态模型解释](../Images/1d74bdadb6f025c9cce32e2ad0ef09e9.png)
+![多模态模型解释](img/1d74bdadb6f025c9cce32e2ad0ef09e9.png)
 
 作者提供的图片
 
@@ -72,7 +72,7 @@
 
 ## 堆叠
 
-![多模态模型解释](../Images/fea9196c2057a9d8e2e7d4b1f458cdcf.png)
+![多模态模型解释](img/fea9196c2057a9d8e2e7d4b1f458cdcf.png)
 
 作者提供的图片
 
@@ -88,7 +88,7 @@
 
 ## 装袋
 
-![多模态模型解释](../Images/4e5bf44d5da242bace04cbb436b418ca.png)
+![多模态模型解释](img/4e5bf44d5da242bace04cbb436b418ca.png)
 
 作者提供的图片
 
@@ -96,7 +96,7 @@
 
 集成学习的一个例子是自助聚合方法，其中多个模型在训练数据的不同子集上进行训练。最终预测通过对所有模型的预测结果进行平均得出。
 
-现实生活中的一个集成学习示例是金融领域。[S&P 500 数据集](https://www.kaggle.com/datasets/camnugent/sandp500)包含2012年至2018年间美国500家最大上市公司的股票价格历史数据。
+现实生活中的一个集成学习示例是金融领域。[S&P 500 数据集](https://www.kaggle.com/datasets/camnugent/sandp500)包含 2012 年至 2018 年间美国 500 家最大上市公司的股票价格历史数据。
 
 可以通过在 scikit-learn 中训练多个模型（如 [随机森林](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html) 和 [梯度提升](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)）来使用集成学习预测公司的股票价格。
 
@@ -118,7 +118,7 @@
 
 # 多模态学习技术
 
-![多模态模型解释](../Images/9053201e86bae0e9a62bdc0cc842e625.png)
+![多模态模型解释](img/9053201e86bae0e9a62bdc0cc842e625.png)
 
 作者提供的图片
 
@@ -140,13 +140,13 @@
 
 这个最终表示可以用来为图像生成标题。
 
-一个可以用于图像和文本标题生成的开源数据集是[Flickr30k数据集](http://shannon.cs.illinois.edu/DenotationGraph/)，该数据集包含31,000张图像，每张图像配有五个标题。该数据集包含各种日常场景的图像，每张图像由多个标注者注释，以提供多样化的标题。
+一个可以用于图像和文本标题生成的开源数据集是[Flickr30k 数据集](http://shannon.cs.illinois.edu/DenotationGraph/)，该数据集包含 31,000 张图像，每张图像配有五个标题。该数据集包含各种日常场景的图像，每张图像由多个标注者注释，以提供多样化的标题。
 
-![多模态模型解释](../Images/a4a2a1e298391d5c4ab98511d20012bc.png)
+![多模态模型解释](img/a4a2a1e298391d5c4ab98511d20012bc.png)
 
-来源: [https://paperswithcode.com/dataset/flickr30k-cna](https://paperswithcode.com/dataset/flickr30k-cna)
+来源: [`paperswithcode.com/dataset/flickr30k-cna`](https://paperswithcode.com/dataset/flickr30k-cna)
 
-Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用诸如词嵌入或词袋表示等技术来应用基于融合的方法进行图像和文本标题生成。生成的融合表示可以用来生成更准确和信息量更大的标题。
+Flickr30k 数据集可以通过从预训练 CNN 中提取视觉特征，并使用诸如词嵌入或词袋表示等技术来应用基于融合的方法进行图像和文本标题生成。生成的融合表示可以用来生成更准确和信息量更大的标题。
 
 ## 基于对齐的方法
 
@@ -156,7 +156,7 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 ### 手语识别
 
-![多模态模型解释](../Images/d91defa682a24eb9c19af0a0bc720d99.png)
+![多模态模型解释](img/d91defa682a24eb9c19af0a0bc720d99.png)
 
 作者提供的图像
 
@@ -174,7 +174,7 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 ### 情感识别
 
-![多模态模型解释](../Images/d49bee101c25b6e6ef1b83f047d0a57f.png)
+![多模态模型解释](img/d49bee101c25b6e6ef1b83f047d0a57f.png)
 
 图片来源：作者
 
@@ -186,15 +186,15 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 音频特征可以使用梅尔频率倒谱系数（MFCCs）等技术提取，而歌词可以使用词袋模型或词嵌入技术进行编码。可以在每种模态上分别训练模型，然后通过晚期融合将预测结果结合起来生成最终预测。
 
-[DEAM 数据集](https://cvml.unige.ch/databases/DEAM/)旨在支持音乐情感识别和分析的研究，它包括了超过2000首歌曲的音频特征和歌词。音频特征包括MFCCs、谱对比度和节奏特征等各种描述符，而歌词则使用词袋模型和词嵌入技术表示。
+[DEAM 数据集](https://cvml.unige.ch/databases/DEAM/)旨在支持音乐情感识别和分析的研究，它包括了超过 2000 首歌曲的音频特征和歌词。音频特征包括 MFCCs、谱对比度和节奏特征等各种描述符，而歌词则使用词袋模型和词嵌入技术表示。
 
-通过将分别在每种模态（音频和歌词）上训练的模型的预测结果结合起来，可以将晚期融合方法应用于DEAM数据集。
+通过将分别在每种模态（音频和歌词）上训练的模型的预测结果结合起来，可以将晚期融合方法应用于 DEAM 数据集。
 
-![多模态模型解释](../Images/6b26f00321e980307d5ea0b278667f29.png)
+![多模态模型解释](img/6b26f00321e980307d5ea0b278667f29.png)
 
 来源：[DEAM 数据集 - 音乐中的情感分析](https://www.kaggle.com/datasets/imsparsh/deam-mediaeval-dataset-emotional-analysis-in-music)
 
-例如，你可以训练一个单独的机器学习模型，使用音频特征，如MFCCs和谱对比度，来预测每首歌的情感内容。
+例如，你可以训练一个单独的机器学习模型，使用音频特征，如 MFCCs 和谱对比度，来预测每首歌的情感内容。
 
 另一个模型可以使用歌词来预测每首歌的情感内容，歌词通过词袋模型或词嵌入等技术表示。
 
@@ -202,7 +202,7 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 # 多模态学习挑战
 
-![多模态模型解释](../Images/68dc06f828f13da31418301422805d88.png)
+![多模态模型解释](img/68dc06f828f13da31418301422805d88.png)
 
 图片由作者提供
 
@@ -220,15 +220,15 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 ### 图像-标题对
 
-[MS COCO数据集](https://cocodataset.org/)在计算机视觉和自然语言处理研究中被广泛使用，包含了许多具有各种背景的对象图像，以及描述图像内容的多个文本标题。
+[MS COCO 数据集](https://cocodataset.org/)在计算机视觉和自然语言处理研究中被广泛使用，包含了许多具有各种背景的对象图像，以及描述图像内容的多个文本标题。
 
-在处理MS COCO数据集时，处理表示挑战的两种主要策略是联合表示和协调表示。
+在处理 MS COCO 数据集时，处理表示挑战的两种主要策略是联合表示和协调表示。
 
 **联合表示**：通过结合两个模态的信息，模型可以理解它们的综合意义。例如，你可以使用一个深度学习模型，设计处理和合并图像和文本数据特征的层。这会产生一个捕捉图像和标题之间关系的联合表示。
 
 **协调表示**：在这种方法中，图像和标题是分开编码的，但它们的表示是相关的，并传达相同的意义。模型不直接融合模态，而是保持每个模态的独立编码，同时确保它们在意义上的关联。
 
-在处理MS COCO数据集时，可以使用联合表示和协调表示策略，以有效应对多模态学习的挑战，并创建能够处理和理解视觉与文本信息之间关系的模型。
+在处理 MS COCO 数据集时，可以使用联合表示和协调表示策略，以有效应对多模态学习的挑战，并创建能够处理和理解视觉与文本信息之间关系的模型。
 
 ## 融合
 
@@ -238,7 +238,7 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 ### 电影评分
 
-![多模态模型解释](../Images/2d7dd04a65b17c61467699ec45528ee1.png)
+![多模态模型解释](img/2d7dd04a65b17c61467699ec45528ee1.png)
 
 作者提供的图片
 
@@ -274,13 +274,13 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 ### 视听语音识别
 
-![多模态模型解释](../Images/53c5cb2279932797b612cbc62616ca88.png)
+![多模态模型解释](img/53c5cb2279932797b612cbc62616ca88.png)
 
 图片来源：作者
 
-通过对齐GRID Corpus数据集中的音频和视觉数据，研究人员可以创建协调的表示，这些表示捕捉了模态之间的关系，然后使用这些表示来准确地使用这两种模态识别语音。
+通过对齐 GRID Corpus 数据集中的音频和视觉数据，研究人员可以创建协调的表示，这些表示捕捉了模态之间的关系，然后使用这些表示来准确地使用这两种模态识别语音。
 
-[GRID Corpus数据集](https://spandh.dcs.shef.ac.uk//gridcorpus/)包含了讲英语的说话者发音句子的视听录音。每个录音包括音频波形和说话者面部的视频，这些视频捕捉了嘴唇和其他面部特征的运动。该数据集在视听语音识别研究中被广泛使用，其目标是利用音频和视觉模态准确识别语音。
+[GRID Corpus 数据集](https://spandh.dcs.shef.ac.uk//gridcorpus/)包含了讲英语的说话者发音句子的视听录音。每个录音包括音频波形和说话者面部的视频，这些视频捕捉了嘴唇和其他面部特征的运动。该数据集在视听语音识别研究中被广泛使用，其目标是利用音频和视觉模态准确识别语音。
 
 ## 翻译
 
@@ -294,13 +294,13 @@ Flickr30k数据集可以通过从预训练CNN中提取视觉特征，并使用�
 
 一幅油画，画中熊猫在西藏冥想
 
-![一幅油画，画中熊猫在西藏冥想](../Images/bc8776aab47f0167b68d753d2e30f564.png)
+![一幅油画，画中熊猫在西藏冥想](img/bc8776aab47f0167b68d753d2e30f564.png)
 
 参考：Dall-E
 
-最近的一个多模态翻译模型的例子是DALL-E2。DALL-E2是由OpenAI开发的神经网络模型，它可以根据文本描述生成高质量的图像。它也可以根据图像生成文本描述，从而有效地在视觉和文本模态之间进行翻译。
+最近的一个多模态翻译模型的例子是 DALL-E2。DALL-E2 是由 OpenAI 开发的神经网络模型，它可以根据文本描述生成高质量的图像。它也可以根据图像生成文本描述，从而有效地在视觉和文本模态之间进行翻译。
 
-DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉了视觉模态和文本模态之间的关系。
+DALL-E2 通过学习一个联合表示空间来实现这一点，该空间捕捉了视觉模态和文本模态之间的关系。
 
 模型在一个大规模的图像-标题对数据集上进行训练，学习将图像与其对应的标题关联。然后，它可以通过从学习的表示空间中采样来生成图像，也可以通过解码学习的表示从图像生成文本描述。
 
@@ -318,9 +318,9 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 ### 多模态肿瘤分割
 
-![多模态模型解析](../Images/fad94eee408277eec7ae72db7f10211f.png)
+![多模态模型解析](img/fad94eee408277eec7ae72db7f10211f.png)
 
-来源：[https://www.med.upenn.edu/sbia/brats2018.html](https://www.med.upenn.edu/sbia/brats2018.html)
+来源：[`www.med.upenn.edu/sbia/brats2018.html`](https://www.med.upenn.edu/sbia/brats2018.html)
 
 例如，在脑肿瘤的情况下，MRI 扫描提供了高分辨率的软组织图像，而 CT 扫描提供了骨结构的详细图像。结合这些模态可以提供患者病情的完整图像，并指导治疗决策。
 
@@ -334,7 +334,7 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 ## 语音识别
 
-![多模态模型解析](../Images/b3656f1c5b5fdff71bc8d79d9c6c6f5a.png)
+![多模态模型解析](img/b3656f1c5b5fdff71bc8d79d9c6c6f5a.png)
 
 图片来源：作者
 
@@ -342,11 +342,11 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 例如，多模态模型可以同时分析语音的音频信号和对应的唇部运动，以提高语音识别的准确性。通过结合音频和视觉模态，多模态模型可以减少噪音和语音信号变异的影响，从而提高语音识别性能。
 
-![多模态模型解释](../Images/2dbc1ebed16337fffc221e842f71b485.png)
+![多模态模型解释](img/2dbc1ebed16337fffc221e842f71b485.png)
 
-来源: [CMU-MOSEI数据集](http://multicomp.cs.cmu.edu/resources/cmu-mosei-dataset/)
+来源: [CMU-MOSEI 数据集](http://multicomp.cs.cmu.edu/resources/cmu-mosei-dataset/)
 
-一个可以用于语音识别的多模态数据集例子是[CMU-MOSEI数据集](http://multicomp.cs.cmu.edu/resources/cmu-mosei-dataset/)。这个数据集包含了1,000名YouTube讲者发音的23,500个句子，并包括讲者的音频和视觉数据。
+一个可以用于语音识别的多模态数据集例子是[CMU-MOSEI 数据集](http://multicomp.cs.cmu.edu/resources/cmu-mosei-dataset/)。这个数据集包含了 1,000 名 YouTube 讲者发音的 23,500 个句子，并包括讲者的音频和视觉数据。
 
 该数据集可以用于开发用于情感识别、情绪分析和说话人识别的多模态模型。
 
@@ -354,7 +354,7 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 ## 自动驾驶汽车
 
-![多模态模型解释](../Images/4ebc80d86e52ceb02b7f7169f982cb75.png)
+![多模态模型解释](img/4ebc80d86e52ceb02b7f7169f982cb75.png)
 
 来源: [Waymo; Business Insider](https://www.businessinsider.in/transportation/heres-how-waymos-brand-new-self-driving-cars-see-the-world/articleshow/56648715.cms)
 
@@ -364,17 +364,17 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 多模态学习可以帮助整合这些传感器的信息，使汽车能够更准确、高效地感知和反应环境。
 
-一个自动驾驶汽车数据集的例子是[Waymo开放数据集](https://waymo.com/open/)，它包括Waymo自动驾驶汽车的高分辨率传感器数据，以及车辆、行人和骑自行车者等物体的标签。Waymo是谷歌的自动驾驶汽车公司。
+一个自动驾驶汽车数据集的例子是[Waymo 开放数据集](https://waymo.com/open/)，它包括 Waymo 自动驾驶汽车的高分辨率传感器数据，以及车辆、行人和骑自行车者等物体的标签。Waymo 是谷歌的自动驾驶汽车公司。
 
 该数据集可以用于开发和评估用于自动驾驶汽车相关任务的多模态模型，如物体检测、跟踪和预测。
 
 ## 语音录音分析
 
-![多模态模型解释](../Images/0004f1ba42c9905680540a9424c7d7ed.png)
+![多模态模型解释](img/0004f1ba42c9905680540a9424c7d7ed.png)
 
 作者提供的图片
 
-[语音录音分析项目](https://platform.stratascratch.com/data-projects/voice-recordings-analysis?utm_source=blog&utm_medium=click&utm_campaign=kdn+multimodal+models)是在Sandvik的数据科学职位面试过程中提出的。它是多模态学习应用的一个优秀例子，因为它试图基于音频数据中的语音特征预测一个人的性别。
+[语音录音分析项目](https://platform.stratascratch.com/data-projects/voice-recordings-analysis?utm_source=blog&utm_medium=click&utm_campaign=kdn+multimodal+models)是在 Sandvik 的数据科学职位面试过程中提出的。它是多模态学习应用的一个优秀例子，因为它试图基于音频数据中的语音特征预测一个人的性别。
 
 在这种情况下，问题涉及分析和处理来自两个不同模态的信息：音频信号和文本特征。这些模态提供了宝贵的信息，可以提高预测模型的准确性和有效性。
 
@@ -382,7 +382,7 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 ### 音频信号
 
-![多模态模型解释](../Images/eed8b5091a98e39f7ebd8d79e398a0fa.png)
+![多模态模型解释](img/eed8b5091a98e39f7ebd8d79e398a0fa.png)
 
 作者提供的图像
 
@@ -390,7 +390,7 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 ### 文本特征
 
-![多模态模型解释](../Images/e01ddcdf37c2f571a7368e4f8a47bc98.png)
+![多模态模型解释](img/e01ddcdf37c2f571a7368e4f8a47bc98.png)
 
 作者提供的图像
 
@@ -414,11 +414,11 @@ DALL-E2通过学习一个联合表示空间来实现这一点，该空间捕捉�
 
 +   [基于视觉和语言的多模态基础学习](https://www.kdnuggets.com/2022/11/multimodal-grounded-learning-vision-language.html)
 
-+   [NExT-GPT介绍：任意到任意的多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
++   [NExT-GPT 介绍：任意到任意的多模态大型语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
 
 +   [三种难度等级解释的大型语言模型](https://www.kdnuggets.com/large-language-models-explained-in-3-levels-of-difficulty)
 
-+   [5分钟解释5种机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
++   [5 分钟解释 5 种机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
 
 +   [决策树算法解释](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)
 

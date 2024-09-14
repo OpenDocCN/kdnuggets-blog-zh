@@ -1,8 +1,8 @@
 # 深度学习的四个最佳 Jupyter Notebook 环境
 
-> 原文：[https://www.kdnuggets.com/2020/03/4-best-jupyter-notebook-environments-deep-learning.html](https://www.kdnuggets.com/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2020/03/4-best-jupyter-notebook-environments-deep-learning.html`](https://www.kdnuggets.com/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)
 
-[评论](#comments)
+评论
 
 Notebooks 正在成为数据科学家进行原型设计和分析的事实标准。许多云服务提供商以 Jupyter notebooks 的形式提供机器学习和深度学习服务。其他公司现在也开始提供类似存储、计算和定价结构的云托管 Jupyter 环境。主要的区别之一可能是多语言支持和版本控制选项，这允许数据科学家在一个地方分享他们的工作。
 
@@ -12,23 +12,23 @@ Notebooks 正在成为数据科学家进行原型设计和分析的事实标准�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 Jupyter notebook 环境现在成为了将你的数据科学项目产品化的首选平台。Notebook 环境允许我们跟踪错误并保持代码整洁。尽管简单，但其中一个最佳特性是如果发现错误，Notebook 会停止编译你的代码。常规 IDE 即使检测到错误也不会停止编译，且根据代码量的不同，返回并手动检测错误位置可能会浪费时间。
 
-![最佳 Jupyter Notebook 深度学习环境 | Macbook 计算机与 Jupyter 环境代码示例](../Images/5a3949da668c9b8ccfa096fda3b98c18.png)
+![最佳 Jupyter Notebook 深度学习环境 | Macbook 计算机与 Jupyter 环境代码示例](img/5a3949da668c9b8ccfa096fda3b98c18.png)
 
 许多云服务提供商和其他第三方服务看到了 Jupyter notebook 环境的价值，这就是为什么许多公司现在提供托管在云上的笔记本，且可供数百万用户访问。许多数据科学家没有进行大规模深度学习所需的硬件，但通过云托管环境，硬件和后台配置大多由系统处理，用户只需配置所需的参数，如 CPU/GPU/TPU、RAM、核心等。
 
 ### **[1\. MatrixDS](https://matrixds.com/)**
 
-[![最佳 Jupyter Notebook 深度学习环境 | Matrixds](../Images/82b6c34c187113318abb87e6ea444857.png)](https://matrixds.com/)
+![最佳 Jupyter Notebook 深度学习环境 | Matrixds](https://matrixds.com/)
 
 +   MatrixDS 是一个云平台，提供了一种结合了社交网络和 GitHub 的体验，专为与同事分享数据科学项目而设计。它提供了一些最常用的技术，如 R、Python、Shiny、MongoDB、NGINX、Julia、MySQL 和 PostgreSQL。
 
@@ -48,7 +48,7 @@ Jupyter notebook 环境现在成为了将你的数据科学项目产品化的首
 
 ### **[2\. Google Colaboratory](https://colab.research.google.com/notebooks/welcome.ipynb#recent=true)**
 
-[![最佳深度学习 Jupyter Notebook 环境 | Google Colab](../Images/764a4191a5c1f36abd88995a7f87868c.png)](https://colab.research.google.com/notebooks/welcome.ipynb#recent=true)
+![最佳深度学习 Jupyter Notebook 环境 | Google Colab](https://colab.research.google.com/notebooks/welcome.ipynb#recent=true)
 
 +   Google Colab 是一个由 Google 提供的免费 Jupyter Notebook 环境，专为深度学习任务设计。它完全运行在云端，使您能够分享您的工作，直接保存到 Google Drive，并提供计算资源。
 
@@ -62,33 +62,33 @@ Jupyter notebook 环境现在成为了将你的数据科学项目产品化的首
 
 在代码单元中运行上述代码，以验证其确实有效，并开始你的图像和视频处理任务。
 
-### **[3\. Google Cloud的AI Platform Jupyter Notebooks](https://cloud.google.com/ai-platform-notebooks/)**
+### **[3\. Google Cloud 的 AI Platform Jupyter Notebooks](https://cloud.google.com/ai-platform-notebooks/)**
 
-[![最佳深度学习Jupyter Notebook环境 | Google Cloud AI Platform](../Images/8f7a98500f9016cb2a3f3b3e89e87256.png)](https://cloud.google.com/ai-platform-notebooks/)
+![最佳深度学习 Jupyter Notebook 环境 | Google Cloud AI Platform](https://cloud.google.com/ai-platform-notebooks/)
 
-+   Google Cloud提供了集成的JupyterLab管理实例，预装了最新的机器学习和深度学习库，如TensorFlow、PyTorch、scikit-learn、pandas、NumPy、SciPy和Matplotlib。
++   Google Cloud 提供了集成的 JupyterLab 管理实例，预装了最新的机器学习和深度学习库，如 TensorFlow、PyTorch、scikit-learn、pandas、NumPy、SciPy 和 Matplotlib。
 
-+   该Notebook实例与BigQuery、Cloud Dataproc和Cloud Dataflow集成，以提供从数据摄取、预处理、探索、训练到部署的无缝体验。
++   该 Notebook 实例与 BigQuery、Cloud Dataproc 和 Cloud Dataflow 集成，以提供从数据摄取、预处理、探索、训练到部署的无缝体验。
 
 +   集成服务使用户能够通过几次点击轻松扩展计算和存储容量。
 
-**要在GCP上开始使用你的JupyterLab实例，请按照以下步骤操作：**
+**要在 GCP 上开始使用你的 JupyterLab 实例，请按照以下步骤操作：**
 
 +   [在开始之前](https://cloud.google.com/ai-platform/notebooks/docs/before-you-begin)，然后，
 
-+   [创建一个新的JupyterLab实例](https://cloud.google.com/ai-platform/notebooks/docs/create-new)
++   [创建一个新的 JupyterLab 实例](https://cloud.google.com/ai-platform/notebooks/docs/create-new)
 
-使用Keras运行以下代码，查看云环境和[GPU](https://blog.exxactcorp.com/whats-the-best-gpu-for-deep-learning-rtx-2080-ti-vs-titan-rtx-vs-rtx-8000-vs-rtx-6000/)支持如何加速你的分析：
+使用 Keras 运行以下代码，查看云环境和[GPU](https://blog.exxactcorp.com/whats-the-best-gpu-for-deep-learning-rtx-2080-ti-vs-titan-rtx-vs-rtx-8000-vs-rtx-6000/)支持如何加速你的分析：
 
-数据集的链接是：[数据集CSV文件（pima-indians-diabetes.csv）](https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv)。为了简便，数据集应与您的python文件位于同一工作目录下。
+数据集的链接是：[数据集 CSV 文件（pima-indians-diabetes.csv）](https://raw.githubusercontent.com/jbrownlee/Datasets/master/pima-indians-diabetes.data.csv)。为了简便，数据集应与您的 python 文件位于同一工作目录下。
 
 将其保存为文件名：*pima-diabetes.csv*
 
-```py` ``` 从 numpy 导入 loadtxt 从 keras.models 导入 Sequential 从 keras.layers 导入 Dense # 加载数据集 dataset = loadtxt('pima-diabetes.csv', delimiter=',') X = dataset[:,0:8] y = dataset[:,8] # 定义keras模型 model = Sequential() model.add(Dense(12, input_dim=8, activation='relu')) model.add(Dense(8, activation='relu')) model.add(Dense(1, activation='sigmoid')) # 由于这是一个二分类问题，选择Sigmoid model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']) # 编译keras模型 model.fit(X, y, epochs=150, batch_size=10) # 训练keras模型 _, accuracy = model.evaluate(X, y) # 评估keras模型 print('Accuracy: %.2f' % (accuracy*100) ```py ````
+```py` ``` 从 numpy 导入 loadtxt 从 keras.models 导入 Sequential 从 keras.layers 导入 Dense # 加载数据集 dataset = loadtxt('pima-diabetes.csv', delimiter=',') X = dataset[:,0:8] y = dataset[:,8] # 定义 keras 模型 model = Sequential() model.add(Dense(12, input_dim=8, activation='relu')) model.add(Dense(8, activation='relu')) model.add(Dense(1, activation='sigmoid')) # 由于这是一个二分类问题，选择 Sigmoid model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy']) # 编译 keras 模型 model.fit(X, y, epochs=150, batch_size=10) # 训练 keras 模型 _, accuracy = model.evaluate(X, y) # 评估 keras 模型 print('Accuracy: %.2f' % (accuracy*100) ```py ````
 
 ### **[4\. Saturn Cloud](https://www.saturncloud.io/)**
 
-[![最佳深度学习Jupyter Notebook环境 | Saturn Cloud](../Images/cae52462c59df045a1972bd112a0d874.png)](https://www.saturncloud.io/)
+![最佳深度学习 Jupyter Notebook 环境 | Saturn Cloud](https://www.saturncloud.io/)
 
 +   Saturn Cloud 是一个新的云服务，提供一键式托管在云端的 Jupyter 笔记本，可以根据你的计算和存储需求进行扩展，使用 AWS 作为后端。这里有一个教程来帮助你入门：[如何轻松创建、发布，甚至分享云托管的 Jupyter 笔记本，使用 Saturn Cloud](https://towardsdatascience.com/getting-started-with-saturn-cloud-jupyter-notebooks-b3f509a500ef)
 
@@ -124,7 +124,7 @@ Jupyter notebook 环境现在成为了将你的数据科学项目产品化的首
 
 ### **什么是最佳的 Jupyter Notebook 环境？**
 
-![4 个最佳 Jupyter 环境用于深度学习 | Jupyter 环境的排名从最佳到最差](../Images/e7af69ea33839b73861206f200433c1e.png)
+![4 个最佳 Jupyter 环境用于深度学习 | Jupyter 环境的排名从最佳到最差](img/e7af69ea33839b73861206f200433c1e.png)
 
 我们根据分析、可视化能力、数据存储和数据库功能等多个因素，将 Jupyter Notebook 环境从最佳到最差进行排名。每个平台都有其最佳和最差的用例及其独特的卖点。
 
@@ -150,11 +150,11 @@ Jupyter notebook 环境现在成为了将你的数据科学项目产品化的首
 
 **相关内容：**
 
-+   [5 个 Google Colaboratory 提示](/2020/03/5-google-colaboratory-tips.html)
++   5 个 Google Colaboratory 提示
 
-+   [替代的云托管数据科学环境](/2019/12/alternative-cloud-data-science-environments.html)
++   替代的云托管数据科学环境
 
-+   [如何优化你的 Jupyter Notebook](/2020/01/optimize-jupyter-notebook.html)
++   如何优化你的 Jupyter Notebook
 
 ### 更多相关主题
 
@@ -164,7 +164,7 @@ Jupyter notebook 环境现在成为了将你的数据科学项目产品化的首
 
 +   [Jupyter Notebook 魔法方法速查表](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)
 
-+   [Python在金融中的应用：Jupyter Notebook中的实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)
++   [Python 在金融中的应用：Jupyter Notebook 中的实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)
 
 +   [5 个免费的数据科学项目模板用于 Jupyter Notebook](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)
 

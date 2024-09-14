@@ -1,8 +1,8 @@
 # 使用迁移学习来提升模型性能
 
-> 原文：[https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)
+> 原文：[`www.kdnuggets.com/using-transfer-learning-to-boost-model-performance`](https://www.kdnuggets.com/using-transfer-learning-to-boost-model-performance)
 
-![使用迁移学习提升模型性能](../Images/bc3b0d8135629b0cddbd48a07929a790.png)
+![使用迁移学习提升模型性能](img/bc3b0d8135629b0cddbd48a07929a790.png)
 
 你是否考虑过如何在不开发新模型的情况下提升机器学习模型的性能？这就是迁移学习发挥作用的地方。在本文中，我们将概述迁移学习及其优点和挑战。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -22,7 +22,7 @@
 
 迁移学习意味着一个为一个任务训练的模型可以用于另一个类似的任务。然后你可以使用一个预训练模型，并根据所需任务对其进行修改。让我们讨论迁移学习的各个阶段。
 
-![迁移学习的阶段](../Images/97b9b89eaa8576db606828d35e818a60.png)图片来源：作者
+![迁移学习的阶段](img/97b9b89eaa8576db606828d35e818a60.png)图片来源：作者
 
 1.  **选择预训练模型**：选择一个在类似任务上用大型数据集训练过的模型。
 
@@ -48,7 +48,7 @@
 
 ### 特征提取
 
-特征提取意味着使用模型在新数据上学到的特征。例如，在图像分类中，我们可以利用预定义卷积神经网络中的特征来搜索图像中的重要特征。以下是一个使用Keras中的预训练VGG16模型进行图像特征提取的示例：
+特征提取意味着使用模型在新数据上学到的特征。例如，在图像分类中，我们可以利用预定义卷积神经网络中的特征来搜索图像中的重要特征。以下是一个使用 Keras 中的预训练 VGG16 模型进行图像特征提取的示例：
 
 ```py
 import numpy as np
@@ -76,7 +76,7 @@ print(f"Extracted features shape: {image_features.shape}")
 
 ### 微调
 
-微调涉及调整特征提取步骤以及新模型的某些方面，以匹配特定任务。这种方法在中等规模的数据集上最为有效，并且当你希望提升模型在特定任务上的能力时非常有用。例如，在自然语言处理（NLP）中，一个标准的BERT模型可能会被调整或在少量医学文本上进一步训练，以更好地完成医学实体识别。以下是一个使用BERT进行情感分析的示例，其中在自定义数据集上进行了微调：
+微调涉及调整特征提取步骤以及新模型的某些方面，以匹配特定任务。这种方法在中等规模的数据集上最为有效，并且当你希望提升模型在特定任务上的能力时非常有用。例如，在自然语言处理（NLP）中，一个标准的 BERT 模型可能会被调整或在少量医学文本上进一步训练，以更好地完成医学实体识别。以下是一个使用 BERT 进行情感分析的示例，其中在自定义数据集上进行了微调：
 
 ```py
 from transformers import BertTokenizer, BertForSequenceClassification, AdamW
@@ -138,21 +138,21 @@ print(f"Adapted text: {adapted_text}")
 
 ### VGG（视觉几何组）
 
-VGG的架构包括多个3×3的卷积滤波器层和池化层。它能够识别图像中的边缘和形状等详细特征。通过在大规模数据集上训练，VGG学会了识别图像中的不同物体。它可以用于目标检测和图像分割。
+VGG 的架构包括多个 3×3 的卷积滤波器层和池化层。它能够识别图像中的边缘和形状等详细特征。通过在大规模数据集上训练，VGG 学会了识别图像中的不同物体。它可以用于目标检测和图像分割。
 
-![VGG架构](../Images/e3db0a722f10834176f2a7757fcdb9d1.png) VGG-16 | CNN模型（来源：[GeeksforGeeks](https://www.geeksforgeeks.org/vgg-16-cnn-model/)）
+![VGG 架构](img/e3db0a722f10834176f2a7757fcdb9d1.png) VGG-16 | CNN 模型（来源：[GeeksforGeeks](https://www.geeksforgeeks.org/vgg-16-cnn-model/)）
 
 ### ResNet（残差网络）
 
-ResNet使用残差连接来训练模型。这些连接使梯度更容易在网络中流动。这可以防止梯度消失问题，帮助网络有效训练。ResNet能够成功训练具有数百层的模型。ResNet在图像分类和人脸识别等任务中表现优异。
+ResNet 使用残差连接来训练模型。这些连接使梯度更容易在网络中流动。这可以防止梯度消失问题，帮助网络有效训练。ResNet 能够成功训练具有数百层的模型。ResNet 在图像分类和人脸识别等任务中表现优异。
 
-![ResNet架构](../Images/4dab0f47c662b0fa5217df2c1c99755a.png) ResNet-50架构（来源：[研究论文](https://www.researchgate.net/figure/An-illustration-of-ResNet-50-layers-architecture_fig1_350421671)）
+![ResNet 架构](img/4dab0f47c662b0fa5217df2c1c99755a.png) ResNet-50 架构（来源：[研究论文](https://www.researchgate.net/figure/An-illustration-of-ResNet-50-layers-architecture_fig1_350421671)）
 
 ### BERT（双向编码器表示模型）
 
-BERT用于自然语言处理应用。它使用基于变换器的模型来理解句子中词汇的上下文。它学习猜测缺失的词汇并理解句子意义。BERT可用于情感分析、问答和命名实体识别。
+BERT 用于自然语言处理应用。它使用基于变换器的模型来理解句子中词汇的上下文。它学习猜测缺失的词汇并理解句子意义。BERT 可用于情感分析、问答和命名实体识别。
 
-![BERT架构](../Images/ffac8f197082ab0d997a44c8c92161d0.png) BERT架构的高层次视图（来源：[研究论文](https://www.researchgate.net/figure/Simplified-high-level-view-of-the-BERT-architecture-7-8-The-word-tokens-are_fig2_355938108)）
+![BERT 架构](img/ffac8f197082ab0d997a44c8c92161d0.png) BERT 架构的高层次视图（来源：[研究论文](https://www.researchgate.net/figure/Simplified-high-level-view-of-the-BERT-architecture-7-8-The-word-tokens-are_fig2_355938108)）
 
 ## 微调技术
 
@@ -172,7 +172,7 @@ BERT用于自然语言处理应用。它使用基于变换器的模型来理解�
 
 1.  **超参数调整**：在使用预训练模型时，调整超参数非常重要。这些参数相互依赖，决定了模型的表现如何。可以使用网格搜索等技术或自动化工具来寻找最优的超参数设置，从而在验证数据上获得高性能。
 
-1.  **计算资源**：深度神经网络的微调计算上要求很高，因为这些模型可能拥有数百万个参数。训练和预测输出需要强大的加速器，如GPU或TPU。这些需求通常由云计算平台来解决。
+1.  **计算资源**：深度神经网络的微调计算上要求很高，因为这些模型可能拥有数百万个参数。训练和预测输出需要强大的加速器，如 GPU 或 TPU。这些需求通常由云计算平台来解决。
 
 ## 总结
 

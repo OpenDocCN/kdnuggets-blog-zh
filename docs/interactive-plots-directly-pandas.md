@@ -1,22 +1,22 @@
 # 直接使用 Pandas 获取交互式图表
 
-> 原文：[https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html](https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html)
+> 原文：[`www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html`](https://www.kdnuggets.com/2021/06/interactive-plots-directly-pandas.html)
 
-[评论](#comments)
+评论
 
 **由 [Parul Pandey](https://pandeyparul.medium.com/) 撰写，H2O.ai 数据科学家 | @wicds 编辑**。
 
-![](../Images/968a61e7731ce2f257dea78119cb80ae.png)
+![](img/968a61e7731ce2f257dea78119cb80ae.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -47,7 +47,7 @@ nifty_data.head()
 
 ```
 
-![](../Images/5757588301ba14734a8189a4e9271c47.png)
+![](img/5757588301ba14734a8189a4e9271c47.png)
 
 *包含银行、制药、IT 和快速消费品部门的 NIFTY 指数的合并数据框。*
 
@@ -59,7 +59,7 @@ nifty_data_resample
 
 ```
 
-![](../Images/38aa1885b05d487b5e89f909a74b4b61.png)
+![](img/38aa1885b05d487b5e89f909a74b4b61.png)
 
 现在我们已经准备好了数据框，是时候通过不同的图表来可视化它们了。
 
@@ -112,7 +112,7 @@ nifty_data.plot(title='Nifty Index values in 2020',
 
 ```
 
-![](../Images/4cb5475c62f79164170c11b619b3472f.png)
+![](img/4cb5475c62f79164170c11b619b3472f.png)
 
 *使用 pandas 绘制的折线图。*
 
@@ -127,7 +127,7 @@ nifty_data.plot(kind='scatter',
 
 ```
 
-![](../Images/55094fa001774b0a62c9a08624f9a470.png)
+![](img/55094fa001774b0a62c9a08624f9a470.png)
 
 *使用 pandas 绘制的散点图。*
 
@@ -138,7 +138,7 @@ nifty_data[['NIFTY FMCG index','NIFTY Bank index']].plot(kind='hist',figsize=(9,
 
 ```
 
-![](../Images/dcbf63b106a61115bdaf62702c863fcc.png)
+![](img/dcbf63b106a61115bdaf62702c863fcc.png)
 
 *使用 pandas 绘制的直方图。*
 
@@ -149,7 +149,7 @@ nifty_data_resample.plot(kind='bar',figsize=(10,6));
 
 ```
 
-![](../Images/39a8f04e95478d1d6e90ec049924bfc8.png)
+![](img/39a8f04e95478d1d6e90ec049924bfc8.png)
 
 *使用 pandas 绘制的柱状图。*
 
@@ -160,7 +160,7 @@ nifty_data_resample.plot(kind='barh',figsize=(10,6));
 
 ```
 
-![](../Images/f8ae46c325dd38fb9ae64fe870a613c7.png)
+![](img/f8ae46c325dd38fb9ae64fe870a613c7.png)
 
 *使用 pandas 绘制的堆叠柱状图。*
 
@@ -172,7 +172,7 @@ nifty_data_resample['NIFTY Bank index'].plot.pie(legend=False, figsize=(10,6),au
 
 ```
 
-![](../Images/7a494b9bcdeec1fd6f68f54ef3d8447e.png)
+![](img/7a494b9bcdeec1fd6f68f54ef3d8447e.png)
 
 *使用 pandas 绘制的饼图。*
 
@@ -180,7 +180,7 @@ nifty_data_resample['NIFTY Bank index'].plot.pie(legend=False, figsize=(10,6),au
 
 ### Pandas 的 Bokeh 后端 — 使用 Pandas-Bokeh 绘图。
 
-![](../Images/85dd71f67809047542c956a3ae667922.png)
+![](img/85dd71f67809047542c956a3ae667922.png)
 
 *作者提供的图片。*
 
@@ -230,7 +230,7 @@ pandas_bokeh.output_notebook()
 
 ```
 
-![](../Images/4bcc6e22d687af83f3a7f0b1e76b60df.png)
+![](img/4bcc6e22d687af83f3a7f0b1e76b60df.png)
 
 1.  **折线图**
 
@@ -239,7 +239,7 @@ nifty_data.plot_bokeh(kind='line') #equivalent to nifty_data.plot_bokeh.line()
 
 ```
 
-![](../Images/8325f213afe3184739b6db992da01636.png)
+![](img/8325f213afe3184739b6db992da01636.png)
 
 *使用 pandas_bokeh 绘制的折线图。*
 
@@ -250,7 +250,7 @@ nifty_data.plot_bokeh.scatter(x='NIFTY FMCG index', y='NIFTY Bank index');
 
 ```
 
-![](../Images/a210dfcaa36cfae21c28ee53e94baf76.png)
+![](img/a210dfcaa36cfae21c28ee53e94baf76.png)
 
 *使用 pandas_bokeh 绘制的散点图。*
 
@@ -261,7 +261,7 @@ nifty_data[['NIFTY FMCG index','NIFTY Bank index']].plot_bokeh(kind='hist', bins
 
 ```
 
-![](../Images/900cde9b590c4092369825c14a12c526.png)
+![](img/900cde9b590c4092369825c14a12c526.png)
 
 *使用 pandas_bokeh 绘制的直方图。*
 
@@ -272,7 +272,7 @@ nifty_data_resample.plot_bokeh(kind='bar',figsize=(10,6));
 
 ```
 
-![](../Images/506b06965bcd30dcb74a888e659653e6.png)
+![](img/506b06965bcd30dcb74a888e659653e6.png)
 
 *使用 pandas_bokeh 绘制的条形图。*
 
@@ -283,7 +283,7 @@ nifty_data_resample.plot_bokeh(kind='barh',stacked=True);
 
 ```
 
-![](../Images/a4677e8551b90690b55f6d94d916112f.png)
+![](img/a4677e8551b90690b55f6d94d916112f.png)
 
 *使用 pandas_bokeh 绘制的堆叠条形图。*
 
@@ -295,7 +295,7 @@ nifty_data_resample.plot_bokeh.pie(y ='NIFTY Bank index')
 
 ```
 
-![](../Images/d06da34bb0163c4b5b9ebf1753c6aceb.png)
+![](img/d06da34bb0163c4b5b9ebf1753c6aceb.png)
 
 *使用 pandas_bokeh 绘制的饼图。*
 
@@ -306,7 +306,7 @@ nifty_data_resample.plot_bokeh.pie()
 
 ```
 
-![](../Images/439ee72f9cb86f3698b3227a343ae6d5.png)
+![](img/439ee72f9cb86f3698b3227a343ae6d5.png)
 
 *使用 pandas_bokeh 绘制的嵌套饼图。*
 
@@ -314,7 +314,7 @@ nifty_data_resample.plot_bokeh.pie()
 
 ### Plotly 后端用于 Pandas — 使用 Cufflinks 绘图。
 
-![](../Images/50ca2394513e21c8fab1a5cb37006404.png)
+![](img/50ca2394513e21c8fab1a5cb37006404.png)
 
 *作者提供的图片。*
 
@@ -353,7 +353,7 @@ nifty_data.iplot(kind='line')
 
 ```
 
-![](../Images/521251ca2f2a1ebf69ee391119286827.png)
+![](img/521251ca2f2a1ebf69ee391119286827.png)
 
 *带有 cufflinks 的折线图。*
 
@@ -366,7 +366,7 @@ nifty_data.iplot(kind='scatter',x='NIFTY FMCG index', y='NIFTY Bank index',mode=
 
 ```
 
-![](../Images/b8abd1e76d29c5055309eb68f37e66ef.png)
+![](img/b8abd1e76d29c5055309eb68f37e66ef.png)
 
 *带有 cufflinks 的散点图。*
 
@@ -377,7 +377,7 @@ nifty_data[['NIFTY FMCG index','NIFTY Bank index']].iplot(kind='hist', bins=30);
 
 ```
 
-![](../Images/46214cdbb9c319d9a843d050aeda0efd.png)
+![](img/46214cdbb9c319d9a843d050aeda0efd.png)
 
 *带有 cufflinks 的直方图。*
 
@@ -388,7 +388,7 @@ nifty_data_resample.iplot(kind='bar');
 
 ```
 
-![](../Images/f3df2db115caa94e2bc77745d9e95df9.png)
+![](img/f3df2db115caa94e2bc77745d9e95df9.png)
 
 *带有 cufflinks 的条形图。*
 
@@ -399,7 +399,7 @@ nifty_data_resample.iplot(kind='barh',barmode = 'stack');
 
 ```
 
-![](../Images/d20b4f330f7f63ffe043dbe00c0fe163.png)
+![](img/d20b4f330f7f63ffe043dbe00c0fe163.png)
 
 *带有 cufflinks 的堆叠条形图。*
 
@@ -411,7 +411,7 @@ nifty_data_resample.reset_index().iplot(kind='pie',labels='index',values='NIFTY 
 
 ```
 
-![](../Images/a478d6c6135e343a8b134e169135807d.png)
+![](img/a478d6c6135e343a8b134e169135807d.png)
 
 *带有 cufflinks 的饼图。*
 

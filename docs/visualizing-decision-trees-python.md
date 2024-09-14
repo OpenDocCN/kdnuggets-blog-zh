@@ -1,12 +1,12 @@
 # 使用 Python 可视化决策树（Scikit-learn，Graphviz，Matplotlib）
 
-> 原文：[https://www.kdnuggets.com/2020/04/visualizing-decision-trees-python.html](https://www.kdnuggets.com/2020/04/visualizing-decision-trees-python.html)
+> 原文：[`www.kdnuggets.com/2020/04/visualizing-decision-trees-python.html`](https://www.kdnuggets.com/2020/04/visualizing-decision-trees-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学家**
 
-![图像](../Images/fb382bbd316bf7f8b976fa63f307ca8c.png)
+![图像](img/fb382bbd316bf7f8b976fa63f307ca8c.png)
 
 图片来源于我的 [理解分类的决策树（Python）教程](https://towardsdatascience.com/understanding-decision-trees-for-classification-python-9663d683c952)。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -67,7 +67,7 @@ df = pd.DataFrame(data.data, columns=data.feature_names)
 df['target'] = data.target
 ```
 
-![图示](../Images/b0dad4c5d86a7accf90b27aa29f1cf59.png)
+![图示](img/b0dad4c5d86a7accf90b27aa29f1cf59.png)
 
 原始 Pandas df（特征 + 目标）
 
@@ -79,7 +79,7 @@ df['target'] = data.target
 X_train, X_test, Y_train, Y_test = train_test_split(df[data.feature_names], df['target'], random_state=0)
 ```
 
-![图示](../Images/9d5993aa8f78a54086dec8b135c7ee7b.png)
+![图示](img/9d5993aa8f78a54086dec8b135c7ee7b.png)
 
 图像中的颜色表示数据来自数据框 df 的哪个变量（X_train、X_test、Y_train、Y_test），以进行特定的训练测试分割。图片由 [Michael Galarnyk](https://twitter.com/GalarnykMichael) 提供。
 
@@ -106,7 +106,7 @@ clf.fit(X_train, Y_train)**# Step 4:** Predict labels of unseen (test) data
 tree.plot_tree(clf);
 ```
 
-![图示](../Images/b7e93c00e7ff79f78413d8a485d00751.png)
+![图示](img/b7e93c00e7ff79f78413d8a485d00751.png)
 
 这还不是最具可解释性的树。
 
@@ -120,17 +120,17 @@ cn=['setosa', 'versicolor', 'virginica']fig, axes = plt.subplots(nrows = 1,ncols
                filled = True);fig.savefig('imagename.png')
 ```
 
-![](../Images/0ce9a81306bca7e1509d042fd8999dc1.png)
+![](img/0ce9a81306bca7e1509d042fd8999dc1.png)
 
 ### 如何使用 Graphviz 可视化决策树
 
-![图示](../Images/31cfb0690b8025e8ab0056954eed2681.png)
+![图示](img/31cfb0690b8025e8ab0056954eed2681.png)
 
 通过 Graphviz 生成的决策树。请注意，我编辑了文件，使文本颜色与叶子/终端节点或决策节点相对应，使用了文本编辑器。
 
 `Graphviz` 是开源的图形可视化软件。图形可视化是一种将结构信息表示为抽象图和网络图的方式。在数据科学中，`Graphviz` 的一个用途是可视化决策树。我需要说明的是，我在讲解 Matplotlib 之后介绍 Graphviz 的原因是因为使其正常工作可能会很困难。这一过程的第一部分涉及创建 dot 文件。dot 文件是决策树的 Graphviz 表示。问题在于使用 Graphviz 将 dot 文件转换为图像文件（png、jpg 等）可能会很困难。有几种方法可以做到这一点，包括：通过 Anaconda 安装 `python-graphviz`，通过 Homebrew（Mac）安装 Graphviz，从官方站点（Windows）安装 Graphviz 可执行文件，或使用在线转换器将 dot 文件的内容转换为图像。
 
-![图示](../Images/ba1305b0404993219b0b3a4d38075251.png)
+![图示](img/ba1305b0404993219b0b3a4d38075251.png)
 
 创建 dot 文件通常不是问题。将 dot 文件转换为 png 文件可能会很困难。
 
@@ -150,7 +150,7 @@ tree.export_graphviz(clf,
 
 将 dot 文件转换为图像文件（png、jpg 等）通常需要安装 Graphviz，这取决于你的操作系统和其他一些因素。本节的目的是帮助人们尝试解决常见的错误，即`dot: command not found`。
 
-![Figure](../Images/9989054c402acde650472d475716dbeb.png)
+![Figure](img/9989054c402acde650472d475716dbeb.png)
 
 `dot: command not found`
 
@@ -160,7 +160,7 @@ tree.export_graphviz(clf,
 
 打开终端。你可以通过点击屏幕右上角的 Spotlight 放大镜，输入 terminal 然后点击终端图标来完成。
 
-![](../Images/74de505821de993e49ce79a3f4a3dbbd.png)
+![](img/74de505821de993e49ce79a3f4a3dbbd.png)
 
 输入下面的命令以安装 Graphviz。
 
@@ -194,7 +194,7 @@ conda install python-graphviz
 dot -Tpng tree.dot -o tree.png
 ```
 
-![Figure](../Images/18649899806d0dd0b1e8f157dbcdcf48.png)
+![Figure](img/18649899806d0dd0b1e8f157dbcdcf48.png)
 
 通过 conda 在 Windows 上安装 Graphviz。这应该可以解决‘dot’无法识别为内部或外部命令、可操作程序或批处理文件的问题。
 
@@ -202,7 +202,7 @@ dot -Tpng tree.dot -o tree.png
 
 如果你没有 Anaconda 或者只是想要另一种在 Windows 上安装 Graphviz 的方式，你可以使用以下链接[下载并安装](https://graphviz.gitlab.io/_pages/Download/Download_windows.html)。
 
-![Figure](../Images/c2a1388c18dbd5a6823bc0aca9fda749.png)
+![Figure](img/c2a1388c18dbd5a6823bc0aca9fda749.png)
 
 如果你不熟悉更改 PATH 变量，并且希望在命令行中使用 dot，我建议尝试其他方法。[有关此特定问题的许多 Stackoverflow 问题](https://datascience.stackexchange.com/questions/37428/graphviz-not-working-when-imported-inside-pydotplus-graphvizs-executables-not)。
 
@@ -212,13 +212,13 @@ dot -Tpng tree.dot -o tree.png
 
 在下图中，我用 Sublime Text 打开了文件（虽然有很多不同的程序可以打开/读取 dot 文件），并复制了文件的内容。
 
-![图示](../Images/1a95f1cbd651e9efc3575ea2b430b338.png)
+![图示](img/1a95f1cbd651e9efc3575ea2b430b338.png)
 
 复制 dot 文件的内容
 
 在下图中，我将 dot 文件的内容粘贴到在线转换器的左侧。然后你可以选择你想要的格式，并在屏幕右侧保存图像。
 
-![图示](../Images/b72e7e6e43ab7a013592d3e78bd70ebe.png)
+![图示](img/b72e7e6e43ab7a013592d3e78bd70ebe.png)
 
 将可视化保存到计算机
 
@@ -226,7 +226,7 @@ dot -Tpng tree.dot -o tree.png
 
 ### 如何从 Bagged Trees 或随机森林®中可视化单独的决策树
 
-![图示](../Images/15fab36e1c278586ce160b8d42ba9952.png)
+![图示](img/15fab36e1c278586ce160b8d42ba9952.png)
 
 本节教程的灵感来源于[Will Koehrsen](https://twitter.com/koehrsen_will)的[如何使用 Scikit-Learn 在 Python 中可视化随机森林算法中的决策树](https://towardsdatascience.com/how-to-visualize-a-decision-tree-from-a-random-forest-in-python-using-scikit-learn-38ad2d75f21c)。图片由[Michael Galarnyk](https://twitter.com/GalarnykMichael)提供。
 
@@ -259,7 +259,7 @@ rf.fit(X_train, Y_train)
 rf.estimators_
 ```
 
-![图示](../Images/480ebbb631ba1bc333c4e8100f218dc9.png)
+![图示](img/480ebbb631ba1bc333c4e8100f218dc9.png)
 
 在这个例子中，注意我们有 100 个估计器。
 
@@ -276,7 +276,7 @@ tree.plot_tree(rf.estimators_[0],
 fig.savefig('rf_individualtree.png')
 ```
 
-![图示](../Images/1acd00d63266403a70edb44da7223347.png)
+![图示](img/1acd00d63266403a70edb44da7223347.png)
 
 请注意，随机森林算法和袋装树中的个别树会生长得很深
 
@@ -295,7 +295,7 @@ fig, axes = plt.subplots(nrows = 1,ncols = 5,figsize = (10,2), dpi=3000)for inde
     axes[index].set_title('Estimator: ' + str(index), fontsize = 11)fig.savefig('rf_5trees.png')
 ```
 
-![](../Images/f41063731c52ec4a0528728376223cf0.png)
+![](img/f41063731c52ec4a0528728376223cf0.png)
 
 ### 为每个决策树（估计器）创建图像
 
@@ -305,7 +305,7 @@ fig, axes = plt.subplots(nrows = 1,ncols = 5,figsize = (10,2), dpi=3000)for inde
 
 本教程介绍了如何使用 Graphviz 和 Matplotlib 可视化决策树。请注意，使用 Matplotlib 可视化决策树是一种较新的方法，因此未来可能会有所更改或改进。Graphviz 目前更为灵活，因为你总是可以修改 dot 文件，使其更具视觉吸引力，如我所用的 [dot 语言](https://www.graphviz.org/pdf/dotguide.pdf)，甚至可以改变决策树的方向。我们没有涉及的是如何使用 [dtreeviz](https://github.com/parrt/dtreeviz)，这是另一种可视化决策树的库。有关该库的优秀文章可以在 [这里](https://explained.ai/decision-tree-viz/index.html) 查阅。
 
-![图示](../Images/41748ebd82ebd398ef25881f5d8f88b1.png)
+![图示](img/41748ebd82ebd398ef25881f5d8f88b1.png)
 
 图像由 [dtreeviz 库](https://github.com/parrt/dtreeviz) 生成。
 
@@ -313,17 +313,17 @@ fig, axes = plt.subplots(nrows = 1,ncols = 5,figsize = (10,2), dpi=3000)for inde
 
 RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
-**简介: [迈克尔·加拉尔尼克](https://www.linkedin.com/in/michaelgalarnyk/)** 是一位数据科学家和企业培训师。他目前在Scripps转化研究所工作。你可以在Twitter (https://twitter.com/GalarnykMichael)、Medium (https://medium.com/@GalarnykMichael) 和 GitHub (https://github.com/mGalarnyk) 找到他。
+**简介: [迈克尔·加拉尔尼克](https://www.linkedin.com/in/michaelgalarnyk/)** 是一位数据科学家和企业培训师。他目前在 Scripps 转化研究所工作。你可以在 Twitter (https://twitter.com/GalarnykMichael)、Medium (https://medium.com/@GalarnykMichael) 和 GitHub (https://github.com/mGalarnyk) 找到他。
 
 [原文](https://towardsdatascience.com/visualizing-decision-trees-with-python-scikit-learn-graphviz-matplotlib-1c50b4aa68dc)。已获许可转载。
 
 **相关:**
 
-+   [理解 Python 中的分类决策树](/2019/08/understanding-decision-trees-classification-python.html)
++   理解 Python 中的分类决策树
 
-+   [决策树算法解析](/2020/01/decision-tree-algorithm-explained.html)
++   决策树算法解析
 
-+   [决策树直观理解：从概念到应用](/2020/02/decision-tree-intuition.html)
++   决策树直观理解：从概念到应用
 
 ### 更多相关主题
 

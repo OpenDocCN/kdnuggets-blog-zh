@@ -1,8 +1,8 @@
 # 可视化框架类型
 
-> 原文：[https://www.kdnuggets.com/types-of-visualization-frameworks](https://www.kdnuggets.com/types-of-visualization-frameworks)
+> 原文：[`www.kdnuggets.com/types-of-visualization-frameworks`](https://www.kdnuggets.com/types-of-visualization-frameworks)
 
-![可视化框架类型](../Images/90ce8a4878531510be41f16face0b0f3.png)
+![可视化框架类型](img/90ce8a4878531510be41f16face0b0f3.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 可视化工具类型有广泛的范围。我将它们分为三大类，其中包含最受欢迎的可视化工具。
 
-![可视化框架类型](../Images/0b80784a8b9c4acee57c7cb3742b258a.png)
+![可视化框架类型](img/0b80784a8b9c4acee57c7cb3742b258a.png)
 
 我将为每种工具提供简短的描述。你可以在每种可视化框架类型的概述末尾找到每种工具的特性。
 
@@ -60,7 +60,7 @@
 
 ## 基于 JavaScript 的框架概述
 
-![可视化框架类型](../Images/f2f705a524162ad828db0faa97af168e.png)
+![可视化框架类型](img/f2f705a524162ad828db0faa97af168e.png)
 
 # Python/R/多语言库
 
@@ -104,7 +104,7 @@
 
 ## Python/R/多语言库概述
 
-![Types of Visualization Frameworks](../Images/d96116004da727a795aadc8feec69258.png)
+![Types of Visualization Frameworks](img/d96116004da727a795aadc8feec69258.png)
 
 # 企业解决方案
 
@@ -160,7 +160,7 @@
 
 ## 13\. Apache Superset
 
-[Apache Superset](https://superset.apache.org)是一个开源分析和商业智能Web应用程序，允许数据探索和可视化。它使用户能够创建和共享互动仪表板，这些仪表板通过拖放轻松组成，无需IT人员。
+[Apache Superset](https://superset.apache.org)是一个开源分析和商业智能 Web 应用程序，允许数据探索和可视化。它使用户能够创建和共享互动仪表板，这些仪表板通过拖放轻松组成，无需 IT 人员。
 
 ## 14\. Grafana
 
@@ -172,7 +172,7 @@
 
 ## 企业解决方案概述
 
-![可视化框架类型](../Images/12a78288adb272f3b666fba40df8aab6.png)
+![可视化框架类型](img/12a78288adb272f3b666fba40df8aab6.png)
 
 # 结论
 
@@ -180,17 +180,17 @@
 
 请注意，每个类别中的工具具有不同的功能，因此在决定使用的工具之前，请熟悉它们。
 
-[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)****是一位数据科学家和产品策略专家。他还是一名兼职教授，教授分析课程，是StrataScratch的创始人，该平台帮助数据科学家准备面试，提供来自顶级公司的真实面试问题。Nate撰写了职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有SQL相关内容。
+[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)****是一位数据科学家和产品策略专家。他还是一名兼职教授，教授分析课程，是 StrataScratch 的创始人，该平台帮助数据科学家准备面试，提供来自顶级公司的真实面试问题。Nate 撰写了职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有 SQL 相关内容。
 
 ### 更多相关话题
 
-+   [Python基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
++   [Python 基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
 
-+   [优化数据存储：探索SQL中的数据类型和规范化](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
++   [优化数据存储：探索 SQL 中的数据类型和规范化](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
 
 +   [处理机器学习过程的框架](https://www.kdnuggets.com/2018/05/general-approaches-machine-learning-process.html)
 
-+   [Chip Huyen分享了实施ML系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)
++   [Chip Huyen 分享了实施 ML 系统的框架和案例研究](https://www.kdnuggets.com/2023/02/sphere-chip-huyen-shares-frameworks-case-studies-implementing-ml-systems.html)
 
 +   [PyTorch 还是 TensorFlow？比较流行的机器学习框架](https://www.kdnuggets.com/2022/02/packt-pytorch-tensorflow-comparing-popular-machine-learning-frameworks.html)
 

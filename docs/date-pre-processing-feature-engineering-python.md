@@ -1,8 +1,8 @@
 # Python 中的日期处理和特征工程
 
-> 原文：[https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html](https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html)
+> 原文：[`www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html`](https://www.kdnuggets.com/2021/07/date-pre-processing-feature-engineering-python.html)
 
-![图](../Images/02425d80b59385202558ada22d460b29.png)
+![图](img/02425d80b59385202558ada22d460b29.png)
 
 由[Sonja Langford](https://unsplash.com/@sonjalangford?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄于[Unsplash](https://unsplash.com/s/photos/time?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -112,7 +112,7 @@ def process_date(input_str: str) -> {}:
 
 有几点需要注意：
 
-+   默认情况下，Python 将一周的天数视为从星期天（0）开始，到星期六（6）结束；对我而言，我的处理方式是一周从星期一开始，到星期天结束——我不需要第0天（与将一周从第1天开始相对）——所以这需要进行更改。
++   默认情况下，Python 将一周的天数视为从星期天（0）开始，到星期六（6）结束；对我而言，我的处理方式是一周从星期一开始，到星期天结束——我不需要第 0 天（与将一周从第 1 天开始相对）——所以这需要进行更改。
 
 +   创建一个工作日/周末特征很简单。
 
@@ -209,13 +209,13 @@ date
 
 **相关**：
 
-+   [5 个 Python 数据处理技巧与代码片段](/2021/07/python-tips-snippets-data-processing.html)
++   5 个 Python 数据处理技巧与代码片段
 
-+   [数据科学与机器学习中的日期时间变量特征工程](/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)
++   数据科学与机器学习中的日期时间变量特征工程
 
-+   [使用 SQL 处理时间序列](/2021/04/time-series-using-sql.html)
++   使用 SQL 处理时间序列
 
-[评论](#comments)
+评论
 
 ### 更多相关话题
 

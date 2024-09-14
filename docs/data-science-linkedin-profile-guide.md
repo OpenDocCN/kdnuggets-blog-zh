@@ -1,44 +1,44 @@
-# 完整的数据科学LinkedIn个人资料指南
+# 完整的数据科学 LinkedIn 个人资料指南
 
-> 原文：[https://www.kdnuggets.com/2019/11/data-science-linkedin-profile-guide.html](https://www.kdnuggets.com/2019/11/data-science-linkedin-profile-guide.html)
+> 原文：[`www.kdnuggets.com/2019/11/data-science-linkedin-profile-guide.html`](https://www.kdnuggets.com/2019/11/data-science-linkedin-profile-guide.html)
 
-[评论](#comments)
+评论
 
-**由 [Dan Lewins](https://www.linkedin.com/in/daniellewins/)，Big Cloud的社交媒体经理**。
+**由 [Dan Lewins](https://www.linkedin.com/in/daniellewins/)，Big Cloud 的社交媒体经理**。
 
-到目前为止，全球注册的数据科学LinkedIn个人资料已经超过了830,000个。尽管如此，在线上目前有如此多的数据科学家，但人才短缺依然是一个严重的问题。事实上，根据O'Reilly Media的报告，几乎一半的欧洲公司都在为填补数据科学职位而挣扎。Indeed的招聘实验室的研究显示，自2013年以来，数据科学职位空缺总体增加了256%，其中2018年12月以来年增长率达31%。数据科学是一个庞大而复杂的行业，涵盖了许多子领域。
+到目前为止，全球注册的数据科学 LinkedIn 个人资料已经超过了 830,000 个。尽管如此，在线上目前有如此多的数据科学家，但人才短缺依然是一个严重的问题。事实上，根据 O'Reilly Media 的报告，几乎一半的欧洲公司都在为填补数据科学职位而挣扎。Indeed 的招聘实验室的研究显示，自 2013 年以来，数据科学职位空缺总体增加了 256%，其中 2018 年 12 月以来年增长率达 31%。数据科学是一个庞大而复杂的行业，涵盖了许多子领域。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-职位的变动通常需要如此具体的技能集，以至于这些职位平均空缺时间长达45天。那么，这对你作为数据科学、工程或机器学习领域的专业人士意味着什么？你是一个抢手货。无论是初创公司、独角兽公司还是大企业，都会希望与您合作。我们可以保证这一点。对招聘专家来说，他们希望能够识别出能为组织提供独特技能的候选人。优化你在LinkedIn上的技能集是至关重要的，你应该立即开始！
+职位的变动通常需要如此具体的技能集，以至于这些职位平均空缺时间长达 45 天。那么，这对你作为数据科学、工程或机器学习领域的专业人士意味着什么？你是一个抢手货。无论是初创公司、独角兽公司还是大企业，都会希望与您合作。我们可以保证这一点。对招聘专家来说，他们希望能够识别出能为组织提供独特技能的候选人。优化你在 LinkedIn 上的技能集是至关重要的，你应该立即开始！
 
 ### 仍然不相信吗？
 
-LinkedIn拥有超过5.75亿的注册用户，其中每月活跃的用户超过2.6亿，毫无疑问，它是#1的职业社交平台。你有机会与行业中的影响者、决策者和领导者建立联系。
+LinkedIn 拥有超过 5.75 亿的注册用户，其中每月活跃的用户超过 2.6 亿，毫无疑问，它是#1 的职业社交平台。你有机会与行业中的影响者、决策者和领导者建立联系。
 
-这个社交网络平台缩短了候选人与客户之间的距离，这导致了超过75%的专业人士现在使用LinkedIn。这将影响他们在职业变动时的决策。
+这个社交网络平台缩短了候选人与客户之间的距离，这导致了超过 75%的专业人士现在使用 LinkedIn。这将影响他们在职业变动时的决策。
 
-当像LinkedIn这样的平台被大量同领域的专业人士填满时，你需要专注于使自己在竞争中脱颖而出。
+当像 LinkedIn 这样的平台被大量同领域的专业人士填满时，你需要专注于使自己在竞争中脱颖而出。
 
 > *“大数据就像青少年时期的性行为：每个人都在谈论它，没人**真的**知道怎么做，每个人都认为别人正在做，所以每个人都声称自己在做。”* – **Chris Lynch, Vertica Systems**
 
-随着LinkedIn活跃用户数量的不断增长，确保你充分利用这个平台比以往任何时候都更重要。正如Work It Daily的创始人兼首席执行官J.T. O'Donnell所说，“LinkedIn个人资料是‘我们管理的。它与Twitter、Instagram或Facebook没有什么不同。它直接代表了我们。’”
+随着 LinkedIn 活跃用户数量的不断增长，确保你充分利用这个平台比以往任何时候都更重要。正如 Work It Daily 的创始人兼首席执行官 J.T. O'Donnell 所说，“LinkedIn 个人资料是‘我们管理的。它与 Twitter、Instagram 或 Facebook 没有什么不同。它直接代表了我们。’”
 
-这份数据科学LinkedIn个人资料指南将帮助你创建一个优化且吸引人的个人资料，使猎头和招聘人员对你的专业技能感兴趣。
+这份数据科学 LinkedIn 个人资料指南将帮助你创建一个优化且吸引人的个人资料，使猎头和招聘人员对你的专业技能感兴趣。
 
-### 为什么你应该保持LinkedIn个人资料的最新状态
+### 为什么你应该保持 LinkedIn 个人资料的最新状态
 
-保持LinkedIn个人资料最新的好处是显而易见的。然而，你可能会想知道，如果你没有积极寻找新的机会，为什么还需要保持更新。你也可能会想知道，如果你已经在使用LinkedIn申请职位，为什么没有看到你期望的结果。
+保持 LinkedIn 个人资料最新的好处是显而易见的。然而，你可能会想知道，如果你没有积极寻找新的机会，为什么还需要保持更新。你也可能会想知道，如果你已经在使用 LinkedIn 申请职位，为什么没有看到你期望的结果。
 
 无论你属于哪个类别，你都应该考虑利用你的个人资料作为记录你的角色职责、项目和完成的活动的理想平台。为什么？因为这样做可以让他人完全了解你的技能和经验，这可能正是他们所寻找的。
 
@@ -46,9 +46,9 @@ LinkedIn拥有超过5.75亿的注册用户，其中每月活跃的用户超过2.
 
 假设你在个人资料描述中将自己描述为一个团队合作者。对大多数雇主而言，能够作为团队的一部分工作是一个强制性要求。
 
-[https://giphy.com/gifs/fresh-off-the-boat-jessica-huang-constance-wu-kt1smiAtPsh0c](https://giphy.com/gifs/fresh-off-the-boat-jessica-huang-constance-wu-kt1smiAtPsh0c)
+[`giphy.com/gifs/fresh-off-the-boat-jessica-huang-constance-wu-kt1smiAtPsh0c`](https://giphy.com/gifs/fresh-off-the-boat-jessica-huang-constance-wu-kt1smiAtPsh0c)
 
-利用LinkedIn记录你日常工作中的细节，给你机会证明你实际上非常适合团队合作。
+利用 LinkedIn 记录你日常工作中的细节，给你机会证明你实际上非常适合团队合作。
 
 假设你正在担任数据科学家的职位。你的标准角色要求可能看起来像这样：
 
@@ -74,7 +74,7 @@ LinkedIn拥有超过5.75亿的注册用户，其中每月活跃的用户超过2.
 
 那这在你的个人资料上是什么样的呢？这里有一个来自数据科学副总监的例子：
 
-![](../Images/09ac8cca11408d4908b014437fa9cba1.png)
+![](img/09ac8cca11408d4908b014437fa9cba1.png)
 
 当招聘人员能够清晰地了解你所从事的所有工作时，你的个人资料会立即变得更有吸引力。这包括你在个人资料中列出的角色中的成就。
 
@@ -104,7 +104,7 @@ LinkedIn拥有超过5.75亿的注册用户，其中每月活跃的用户超过2.
 
 Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha 专注于全球数据科学、机器学习和人工智能组织的招聘。Alyesha 寻找的理想候选人应具备语言技术、可解释人工智能和人力分析方面的专业技能。
 
-![](../Images/43f6bc70a4033c2f03d078282aa0e5ba.png)
+![](img/43f6bc70a4033c2f03d078282aa0e5ba.png)
 
 对于一个不认识 Alyesha 的人来说，这些信息可能很多，但当访问她的 LinkedIn 个人资料时，我们能够清楚地了解 Alyesha 的工作内容，因为她的个人资料被有效地优化，以传达她的工作角色和她所在的公司。
 
@@ -124,7 +124,7 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 这是你最近活动在个人资料中的呈现方式：
 
-![](../Images/7156cc9e5e03da2743ab2b2fe64ee801.png)
+![](img/7156cc9e5e03da2743ab2b2fe64ee801.png)
 
 ### 这对招聘人员有什么好处？
 
@@ -144,7 +144,7 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 记住，LinkedIn 上数据科学专业人士的数量已经饱和。会有那些与你拥有类似经验和技能的人，因此你需要有意识地保持你的个人资料清晰简洁。直截了当地陈述你的专长，避免在列出时混淆各个领域。 [Ryan Swanstrom](https://101.datascience.community/2016/11/28/data-scientists-data-engineers-software-engineers-the-difference-according-to-linkedin/) 的报告展示了 LinkedIn 个人资料中数据科学家、软件工程师和数据工程师技能的对比。
 
-![](../Images/5a8dfb61481b7091ad3e2e8b7f21dcb6.png)
+![](img/5a8dfb61481b7091ad3e2e8b7f21dcb6.png)
 
 *数据科学家、软件工程师和数据工程师在 LinkedIn 上列出的技能对比。*
 
@@ -164,11 +164,11 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 **示例 1：** 在这里我们可以看到这个人正在 Big Cloud 担任社交媒体经理。公司标志和品牌已包含在内，但没有分享这个特定角色的具体内容。这使得招聘人员需要做很多猜测来确定你的优势和专业领域。
 
-![](../Images/a334f18c15fdd495fa808db931be94de.png)
+![](img/a334f18c15fdd495fa808db931be94de.png)
 
 **示例 2：** 在这里，我们可以看到这个人担任 Big Cloud 的社交媒体经理。他们详细说明了这个角色的具体内容。额外的贡献在角色描述中有记录。这展示了项目的完成情况，进一步支持了这个角色。
 
-![](../Images/f5ba0deb50f9a61b9f261802b74ad92d.png)
+![](img/f5ba0deb50f9a61b9f261802b74ad92d.png)
 
 当然，根据你的职业，可能并不总是适合你披露角色的每一个细节。然而，你能提供的更多信息可能会对你长期有利。这将增加你在申请职位时成为成功候选人的机会——这才是最终目标，对吧？
 
@@ -214,7 +214,7 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 以下是你的推荐在个人资料上的显示方式：
 
-![](../Images/dae0d7a755d8bfe39e6312818c5f0bf4.png)
+![](img/dae0d7a755d8bfe39e6312818c5f0bf4.png)
 
 书面的推荐仅会来自你已连接的个人。只有在你批准后，它们才会在你的个人资料上可见。
 
@@ -224,7 +224,7 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 到现在为止，你应该对你在更新 LinkedIn 个人资料之前提交的许多职位申请的情况有了一个不错的了解。
 
-![](../Images/5233d85d177f943fa24074a1683fff26.png)
+![](img/5233d85d177f943fa24074a1683fff26.png)
 
 我们认为，你在个人资料上投入的努力越多，你将看到更多的机会。你已经完成了页面设置的这一步，但问题是，你还可以如何利用 LinkedIn？这就是兴趣的作用所在。
 
@@ -248,7 +248,7 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 这是你的联系设置应该如何显示：
 
-![](../Images/e11062bdcabf9b2e2863094f45a4cce6.png)
+![](img/e11062bdcabf9b2e2863094f45a4cce6.png)
 
 允许招聘人员通过 InMail 联系你是至关重要的，如果你希望收到新的职位信息。如果你没有启用这个功能，你可以确定不会有很多猎头联系你。
 
@@ -256,45 +256,45 @@ Alyesha Sayle 是 Big Cloud recruitment 的高级技术招聘顾问。Alyesha �
 
 如果你不告诉招聘人员你正在寻找新的机会，你将不会听到回应。
 
-你的LinkedIn求职偏好应该如下：
+你的 LinkedIn 求职偏好应该如下：
 
-![](../Images/1b5f2b7bc4f4a4a09540787daebe6eeb.png)
+![](img/1b5f2b7bc4f4a4a09540787daebe6eeb.png)
 
 ### 数据科学、机器学习和人工智能职位申请中重要的是什么？
 
-现在我们已经覆盖了如何最大限度地利用你的LinkedIn资料，让我们深入探讨数据科学招聘过程。Big Cloud招聘团队集体拥有超过20年的人才搜索经验。具体来说，专业人士在数据科学、机器学习和人工智能组织中工作。
+现在我们已经覆盖了如何最大限度地利用你的 LinkedIn 资料，让我们深入探讨数据科学招聘过程。Big Cloud 招聘团队集体拥有超过 20 年的人才搜索经验。具体来说，专业人士在数据科学、机器学习和人工智能组织中工作。
 
 我们与招聘团队坐下来，以深入了解如何避免在数据科学简历中常见的错误。从猎头的角度来看，我们审视了在审查职位申请时最吸引人的信息。
 
 **问：你在数据科学家简历中看到的最常见错误是什么？**
 
-问：流行词汇游戏。仅列出你能清楚展示有经验的技能。更好的是，在项目描述的背景下支持你的技能。如果没有证据表明你在某个项目中应用了你的经验，这意味着你不适合你申请的角色。你会惊讶于我收到的许多来自数据科学家的申请中没有提到他们参与的项目。– *[Alyesha Sayle – 高级技术招聘专员（语言技术、可解释AI和人员分析）](https://www.linkedin.com/in/alyeshasayle/)*
+问：流行词汇游戏。仅列出你能清楚展示有经验的技能。更好的是，在项目描述的背景下支持你的技能。如果没有证据表明你在某个项目中应用了你的经验，这意味着你不适合你申请的角色。你会惊讶于我收到的许多来自数据科学家的申请中没有提到他们参与的项目。– *[Alyesha Sayle – 高级技术招聘专员（语言技术、可解释 AI 和人员分析）](https://www.linkedin.com/in/alyeshasayle/)*
 
-个人简介中包含大量文字令人不悦且不必要。我更愿意看到一个对关键工作目标和经验有简洁概述的个人简介。此外，不接受InMails的候选人犯了一个大错。如果你对新机会持开放态度，但不接受InMails，你可能会错过新的、令人兴奋的角色。花时间检查你是否已优化设置，以便招聘人员可以联系到你。– *[Tom Harris – 首席顾问（数据科学、机器学习、深度学习、计算机视觉和人工智能）](https://www.linkedin.com/in/tombigcloud/)*
+个人简介中包含大量文字令人不悦且不必要。我更愿意看到一个对关键工作目标和经验有简洁概述的个人简介。此外，不接受 InMails 的候选人犯了一个大错。如果你对新机会持开放态度，但不接受 InMails，你可能会错过新的、令人兴奋的角色。花时间检查你是否已优化设置，以便招聘人员可以联系到你。– *[Tom Harris – 首席顾问（数据科学、机器学习、深度学习、计算机视觉和人工智能）](https://www.linkedin.com/in/tombigcloud/)*
 
 **问：你能多快判断一个数据科学候选人是否适合这个角色？**
 
-答：在浏览申请者的个人资料时，通常在前5至10秒内就会显而易见。一个优秀的候选人会花时间完善自己的个人资料，并清晰地传达他们的专业经验。当候选人明显地在个人资料中注入一些个性时，令人耳目一新。这几乎总是鼓励我继续阅读他们的信息。如果候选人列出了他们参与的项目的例子，那也是一个巨大的加分项。这意味着我可以将他们推荐到更相关、更有趣的职位，并且不会浪费任何人的时间。 – *[Nicholas Jackson – 数据科学招聘专家（机器学习、深度学习、计算机视觉与人工智能）](https://www.linkedin.com/in/nicholas-jackson-56770362/)*
+答：在浏览申请者的个人资料时，通常在前 5 至 10 秒内就会显而易见。一个优秀的候选人会花时间完善自己的个人资料，并清晰地传达他们的专业经验。当候选人明显地在个人资料中注入一些个性时，令人耳目一新。这几乎总是鼓励我继续阅读他们的信息。如果候选人列出了他们参与的项目的例子，那也是一个巨大的加分项。这意味着我可以将他们推荐到更相关、更有趣的职位，并且不会浪费任何人的时间。 – *[Nicholas Jackson – 数据科学招聘专家（机器学习、深度学习、计算机视觉与人工智能）](https://www.linkedin.com/in/nicholas-jackson-56770362/)*
 
-**问：你希望在LinkedIn个人资料中看到每个职位多少信息？**
+**问：你希望在 LinkedIn 个人资料中看到每个职位多少信息？**
 
-答：对我来说，我只需要每个职位用3至4句话描述，并列出他们所使用的技术，无论是在个人资料摘要中还是在关键词列表中。如果每个职位下没有列出相关信息，我很可能会转到下一个申请者。 – *[Chris Harrison – 高级顾问（数据科学、机器学习、人工智能、深度学习、NLP与大数据）](https://www.linkedin.com/in/chrishbigcloud/)*
+答：对我来说，我只需要每个职位用 3 至 4 句话描述，并列出他们所使用的技术，无论是在个人资料摘要中还是在关键词列表中。如果每个职位下没有列出相关信息，我很可能会转到下一个申请者。 – *[Chris Harrison – 高级顾问（数据科学、机器学习、人工智能、深度学习、NLP 与大数据）](https://www.linkedin.com/in/chrishbigcloud/)*
 
 申请者提供的信息越多越好。你的个人资料信息越少，你的账户被认为适合潜在新职位的机会就越小。这意味着你可能是一个优秀的候选人，但由于个人资料没有反映你的真实情况和能力，可能不会被联系到。 *[Chris Bradbury – (深度学习与计算机视觉招聘专家)](https://www.linkedin.com/in/chris-bradbury-80b5a884/)*
 
 **问：你在寻找哪些特定技能使候选人更有可能成功？**
 
-答：在数据科学领域，大多数组织都在寻找具备核心行业标准技能的候选人。有太多申请职位的候选人缺乏或没有提及关键技能，如Python、数据科学、机器学习和AWS。如果你在个人资料中包含这些内容，将会有很大不同。此外，阅读别人以第三人称谈论自己通常不太令人愉快。 – *[Dan Kettle – 高级技术招聘专家（数据科学、机器学习与人工智能）](https://www.linkedin.com/in/dankettle/)*
+答：在数据科学领域，大多数组织都在寻找具备核心行业标准技能的候选人。有太多申请职位的候选人缺乏或没有提及关键技能，如 Python、数据科学、机器学习和 AWS。如果你在个人资料中包含这些内容，将会有很大不同。此外，阅读别人以第三人称谈论自己通常不太令人愉快。 – *[Dan Kettle – 高级技术招聘专家（数据科学、机器学习与人工智能）](https://www.linkedin.com/in/dankettle/)*
 
-**问：你会推荐什么方法给希望在求职时脱颖而出的数据科学LinkedIn候选人？**
+**问：你会推荐什么方法给希望在求职时脱颖而出的数据科学 LinkedIn 候选人？**
 
-A. 有一点总是让我印象深刻，那就是候选人是否包含了自己网站或Github个人资料的链接。如果你有这两个链接，最好都包含上。当我审阅申请时，能够直接查看申请人的背景和能力总是让我印象深刻，我会更倾向于联系那些考虑加入这些信息的候选人 —— *[杰斯·伯金 – 高级技术候选人招聘专员（机器学习、自然语言处理与对话式人工智能）](https://www.linkedin.com/in/jessica-bergin-9055b6165/)*
+A. 有一点总是让我印象深刻，那就是候选人是否包含了自己网站或 Github 个人资料的链接。如果你有这两个链接，最好都包含上。当我审阅申请时，能够直接查看申请人的背景和能力总是让我印象深刻，我会更倾向于联系那些考虑加入这些信息的候选人 —— *[杰斯·伯金 – 高级技术候选人招聘专员（机器学习、自然语言处理与对话式人工智能）](https://www.linkedin.com/in/jessica-bergin-9055b6165/)*
 
-**问：当你审阅工作申请时，LinkedIn上的数据科学家发表的出版物对你重要吗？**
+**问：当你审阅工作申请时，LinkedIn 上的数据科学家发表的出版物对你重要吗？**
 
-A. 绝对是的。候选人常常在简历上包含他们的出版物详情，如果在审阅申请后我联系候选人，我通常会询问这些出版物的详细信息。我认为数据科学申请者利用LinkedIn的文章写作功能会非常有益，因为这有助于提高你是谁的认识，并在浏览个人资料时给招聘人员更多的经验洞察 —— *[卡斯滕·杨 – 人工智能专家招聘（机器学习/深度学习、计算机视觉、自然语言处理与机器人）](https://www.linkedin.com/in/aicarsten/)*
+A. 绝对是的。候选人常常在简历上包含他们的出版物详情，如果在审阅申请后我联系候选人，我通常会询问这些出版物的详细信息。我认为数据科学申请者利用 LinkedIn 的文章写作功能会非常有益，因为这有助于提高你是谁的认识，并在浏览个人资料时给招聘人员更多的经验洞察 —— *[卡斯滕·杨 – 人工智能专家招聘（机器学习/深度学习、计算机视觉、自然语言处理与机器人）](https://www.linkedin.com/in/aicarsten/)*
 
-### Big Cloud的顶级数据科学LinkedIn技巧
+### Big Cloud 的顶级数据科学 LinkedIn 技巧
 
 – 避免在个人资料写作中使用技术术语和流行词汇。尽量保持你的写作尽可能贴近人性。你的目标是传达你的专业知识和个性，同时保持对你的职业资料的清晰和简洁描述。
 
@@ -304,9 +304,9 @@ A. 绝对是的。候选人常常在简历上包含他们的出版物详情，�
 
 – 包括课外活动、志愿经历以及额外的口头/书面语言能力。
 
-– 创建你自己的内容 —— LinkedIn允许你上传文档。通过撰写围绕你专长领域的文章、对行业趋势的反应以及事件支持来展示你的专业知识，从而吸引行业内的关注。如果你已经发表了与机器学习、深度学习、人工智能和数据科学相关的文章，可以将这些文章重新利用并上传到你的LinkedIn个人资料中，以支持网络的增长。
+– 创建你自己的内容 —— LinkedIn 允许你上传文档。通过撰写围绕你专长领域的文章、对行业趋势的反应以及事件支持来展示你的专业知识，从而吸引行业内的关注。如果你已经发表了与机器学习、深度学习、人工智能和数据科学相关的文章，可以将这些文章重新利用并上传到你的 LinkedIn 个人资料中，以支持网络的增长。
 
-– 利用数据科学LinkedIn小组。使用小组将允许你加入社区并与其他相关领域的人建立联系。参与小组活动将带来新的方式，让你被发现并考虑新的就业机会。
+– 利用数据科学 LinkedIn 小组。使用小组将允许你加入社区并与其他相关领域的人建立联系。参与小组活动将带来新的方式，让你被发现并考虑新的就业机会。
 
 – 列出你的成就和你想联系的人。利用个人简介中的每一行来推销你所做的事情和你能提供的价值。
 
@@ -316,20 +316,20 @@ A. 绝对是的。候选人常常在简历上包含他们的出版物详情，�
 
 +   [我没有被聘为数据科学家。于是我寻求了相关数据](https://www.kdnuggets.com/2019/09/getting-hired-data-scientist-sought-data.html)
 
-+   [成为顶级数据科学家的13项技能](https://www.kdnuggets.com/2019/07/top-13-skills-become-rockstar-data-scientist.html)
++   [成为顶级数据科学家的 13 项技能](https://www.kdnuggets.com/2019/07/top-13-skills-become-rockstar-data-scientist.html)
 
 +   [数据科学作品集中的项目](https://www.kdnuggets.com/2019/04/projects-include-data-science-portfolio.html)
 
 ### 更多相关话题
 
-+   [通过LinkedIn个人资料提高你的回访率](https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile)
++   [通过 LinkedIn 个人资料提高你的回访率](https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile)
 
 +   [停止学习数据科学，寻找目标，然后寻找目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

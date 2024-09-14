@@ -1,8 +1,8 @@
 # 如何为您的数据项目创建采样计划
 
-> 原文：[https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)
+> 原文：[`www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html`](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)
 
-在[第1部分](http://bit.ly/quaesita_srstrees1)中，我们看到简单随机抽样（SRS）在实际操作中并不总是*简单*。
+在[第一部分](http://bit.ly/quaesita_srstrees1)中，我们看到简单随机抽样（SRS）在实际操作中并不总是*简单*。
 
 # 截至目前的故事
 
@@ -10,19 +10,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
 想象一下，你是一名[data scientist](http://bit.ly/quaesita_datascim)，被聘用来[估计](http://bit.ly/quaesita_vocab)下图中松树的平均高度，并描述其[分布](http://bit.ly/quaesita_distributions)。你负责规划和分析，因此你可以在舒适的巢穴中操控一切，而一位热心的登山者会按照你的指示在森林中测量树木。
 
-你绝对不会做的事情是指示登山者***“完全随机选择20棵树。”***（如果你有这个冲动，请回到[第1部分](http://bit.ly/quaesita_srstrees1)。）
+你绝对不会做的事情是指示登山者***“完全随机选择 20 棵树。”***（如果你有这个冲动，请回到[第一部分](http://bit.ly/quaesita_srstrees1)。）
 
-![如何为您的数据项目创建采样计划](../Images/4244951c88ebf6efbeec2414d61b86aa.png)
+![如何为您的数据项目创建采样计划](img/4244951c88ebf6efbeec2414d61b86aa.png)
 
 这片森林中的树木有多高？照片由[Dan Otis](https://unsplash.com/@danotis?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -38,7 +38,7 @@
 
 这已经更好了——至少不再包含“仅仅”这个词——但它仍然不是专业统计学家的级别答案。专业[统计学家](http://bit.ly/quaesita_statistics)经历了足够多的挫折，知道细节决定成败。
 
-![如何为您的数据项目创建采样计划](../Images/de57def84823e66a82596f5812ca0725.png)
+![如何为您的数据项目创建采样计划](img/de57def84823e66a82596f5812ca0725.png)
 
 照片由[Sebastian Herrmann](https://unsplash.com/@officestock?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -82,13 +82,13 @@
 
 啊，预算。随着你开始详细规划，你可能会发现你的理想方法不可行。在这种情况下，你有两个选择。
 
-1.  **选择不同的抽样程序。**[SRS](http://bit.ly/quaesita_srstrees1) 并不是你唯一的选择，它甚至不一定是对你的需求最优的统计方法。它的主要优势是允许你使用初学者技术，但如果你发现实施SRS在现实中比雇用一个懂得高级方法的人更昂贵，那么这就是一个很好的选择。只要记住，使用其他抽样程序意味着你***必须***以不同于STAT101教给你的标准方式来分析数据（除非你选择下面的选项2）。
+1.  **选择不同的抽样程序。**[SRS](http://bit.ly/quaesita_srstrees1) 并不是你唯一的选择，它甚至不一定是对你的需求最优的统计方法。它的主要优势是允许你使用初学者技术，但如果你发现实施 SRS 在现实中比雇用一个懂得高级方法的人更昂贵，那么这就是一个很好的选择。只要记住，使用其他抽样程序意味着你***必须***以不同于 STAT101 教给你的标准方式来分析数据（除非你选择下面的选项 2）。
 
 1.  [**假设**](http://bit.ly/quaesita_saddest)** 远离问题。** 这是经典的绝望中的权宜之计，你会在 [科学](http://bit.ly/quaesita_scientists)领域到处发现。这基本上就是说，你将进行分析，就好像某些事情是真的，即使你知道它们并非如此。这是哲学上不稳定的领域，只有决策者有权批准这样做，他可能会愿意接受一个低质量的决策程序来节省资源。如果你不是做 [数据驱动决策](http://bit.ly/quaesita_inspired)的负责人，你没有权利做出这个决定。
 
-但让我们设想一下，你的徒步旅行者非常渴望在森林里呆得越久越好（哇），以至于他们给你一个固定的项目费率。现在你可以负担得起让这个热爱户外的狂热者为你涂上*所有*的树木。是时候开始规划下一步：随机选择20棵树。
+但让我们设想一下，你的徒步旅行者非常渴望在森林里呆得越久越好（哇），以至于他们给你一个固定的项目费率。现在你可以负担得起让这个热爱户外的狂热者为你涂上*所有*的树木。是时候开始规划下一步：随机选择 20 棵树。
 
-我们如何“仅仅”选择20棵树？一种简单的方法是，等到所有的树都被涂上独特的ID，然后把所有的树木ID放入一个电子表格的列中，拖动=RAND()函数到相邻的列中，并按随机数列的顺序排序，然后选择顶部的前20个ID。
+我们如何“仅仅”选择 20 棵树？一种简单的方法是，等到所有的树都被涂上独特的 ID，然后把所有的树木 ID 放入一个电子表格的列中，拖动=RAND()函数到相邻的列中，并按随机数列的顺序排序，然后选择顶部的前 20 个 ID。
 
 现在我们对更多细节感到担忧：
 
@@ -102,17 +102,17 @@
 
 *我们计划带一台笔记本电脑去森林吗？哪一台？*（写下来！）
 
-*如果没有Wi-Fi，软件会正常工作吗？*（写下来！）
+*如果没有 Wi-Fi，软件会正常工作吗？*（写下来！）
 
 *笔记本电脑的电池能坚持多久？*（写下来！）
 
 *我们需要备用笔记本电脑吗？*（写下来！）
 
-一旦我们有了20个随机选择的树木ID——保存在哪里？（写下来！）——是时候向徒步旅行者道歉，可能需要再次在森林中徒步旅行。希望我们已经想出了一个高效的徒步策略来节省时间，因为可怜的徒步旅行者已经精疲力竭了。不过，还有更多的事情！
+一旦我们有了 20 个随机选择的树木 ID——保存在哪里？（写下来！）——是时候向徒步旅行者道歉，可能需要再次在森林中徒步旅行。希望我们已经想出了一个高效的徒步策略来节省时间，因为可怜的徒步旅行者已经精疲力竭了。不过，还有更多的事情！
 
-![如何为数据项目创建采样计划](../Images/0c1905d5226421a4411cbdaa8f478eea.png)
+![如何为数据项目创建采样计划](img/0c1905d5226421a4411cbdaa8f478eea.png)
 
-来自维基百科的高程测量高程计的插图：[https://en.wikipedia.org/wiki/Hypsometer](https://en.wikipedia.org/wiki/Hypsometer)
+来自维基百科的高程测量高程计的插图：[`en.wikipedia.org/wiki/Hypsometer`](https://en.wikipedia.org/wiki/Hypsometer)
 
 *徒步旅行者将如何进行测量？*（写下来！）
 
@@ -126,7 +126,7 @@
 
 *测量结果将记录在哪里？纸上？笔记本电脑上？手机上？我们是否计划好如何携带这些数据，以及如果出现故障该怎么办？*（写下来！）
 
-徒步旅行者是否明白测量结果应该记录在树木ID旁边？
+徒步旅行者是否明白测量结果应该记录在树木 ID 旁边？
 
 树高是徒步旅行者应该测量和记录的关于每棵树的唯一内容吗？当然，还有一些额外的信息可能有用且相对容易获取，包括时间、树木的物理特征、距离徒步旅行者起点的距离、在一个对阳光和土壤营养竞争相关的半径内的其他树木数量（那个半径是多少？）、树木的周长等等。（写下来！但如果你像我一样对树木了解甚少，请先咨询领域专家。）
 
@@ -148,7 +148,7 @@
 
 请答应我，你不会再指示别人“只”做简单的随机抽样。
 
-![如何为您的数据项目创建抽样计划](../Images/3256d486cd84ca1ef452a6ce6216b3aa.png)
+![如何为您的数据项目创建抽样计划](img/3256d486cd84ca1ef452a6ce6216b3aa.png)
 
 图片来源于 [Brett Jordan](https://unsplash.com/@brett_jordan?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 

@@ -1,12 +1,12 @@
-# 数据科学在10年内不会消失，但你的技能可能会
+# 数据科学在 10 年内不会消失，但你的技能可能会
 
-> 原文：[https://www.kdnuggets.com/2021/06/data-science-not-becoming-extinct-10-years.html](https://www.kdnuggets.com/2021/06/data-science-not-becoming-extinct-10-years.html)
+> 原文：[`www.kdnuggets.com/2021/06/data-science-not-becoming-extinct-10-years.html`](https://www.kdnuggets.com/2021/06/data-science-not-becoming-extinct-10-years.html)
 
-[评论](#comments)
+评论
 
-**[Ahmar Shah博士](https://www.linkedin.com/in/syed-ahmar-shah-47541510/)，科学家，学术（医疗保健中的数据科学）**
+**[Ahmar Shah 博士](https://www.linkedin.com/in/syed-ahmar-shah-47541510/)，科学家，学术（医疗保健中的数据科学）**
 
-![](../Images/36e57fb39f879f92930db8351ef3a876.png)
+![](img/36e57fb39f879f92930db8351ef3a876.png)
 
 图片由[michael podger](https://unsplash.com/@jammypodger7470?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,21 +14,21 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
-作为一名从事数据科学工作超过十年的专业人士，看到有人预言这个领域将在10年内消失，我感到非常沮丧。通常给出的理由是新兴的[AutoML](https://en.wikipedia.org/wiki/Automated_machine_learning)工具将消除从业者开发自己算法的需求。
+作为一名从事数据科学工作超过十年的专业人士，看到有人预言这个领域将在 10 年内消失，我感到非常沮丧。通常给出的理由是新兴的[AutoML](https://en.wikipedia.org/wiki/Automated_machine_learning)工具将消除从业者开发自己算法的需求。
 
 我发现这样的观点特别令人沮丧，因为它使初学者不认真对待数据科学，无法在其中取得成功。坦率地说，看到关于这个领域的预言是一种对数据科学社区的不公，因为需求只会进一步增加！
 
 > 为什么任何理智的人会投资他们有限的时间和精力去学习一些很快就会消失的东西呢？
 
-让我告诉你一件事。如果有一个领域让你有最好的机会真正退休，那就是数据科学。就这么简单。我将给你四个关键理由，说明为什么数据科学不会很快消失。我还会给你建议，以确保你在10年内仍然保持在数据科学的前沿。
+让我告诉你一件事。如果有一个领域让你有最好的机会真正退休，那就是数据科学。就这么简单。我将给你四个关键理由，说明为什么数据科学不会很快消失。我还会给你建议，以确保你在 10 年内仍然保持在数据科学的前沿。
 
 数据科学不会消失，但如果你不与时俱进，你的技能可能会。让我们深入探讨。
 
@@ -40,7 +40,7 @@
 
 然而，与以前相比，现在的不同之处在于数据的量和我们可用的计算能力。当我们只有几个数据点和少量维度时，手动将其记录在纸上并拟合一条直线（回归）或识别模式是可行的。现在，我们可以廉价地从多个来源（多特征）收集大量数据。拥有大量数据点和维度时，人力无法或不切实际地拟合一条直线（或聚类）。
 
-> 如果收集数据和开发模型以解释数据的实践已经存在了几个世纪，你认为为什么它会在未来10年内消失？
+> 如果收集数据和开发模型以解释数据的实践已经存在了几个世纪，你认为为什么它会在未来 10 年内消失？
 
 如果有什么不同的话，我们将收集更多种类的数据，并且需要新的方式来创造性地结合这些数据以解决问题。
 
@@ -50,13 +50,13 @@
 
 *但将干净的数据输入模型的能力绝非易事。*
 
-实际上，许多与数据科学相关的调查指出了数据科学家在数据收集和清理上花费的时间的不成比例。以Anaconda（数据科学家使用的领先分发工具之一）的[年度调查](https://www.anaconda.com/state-of-data-science-2020)为例，该调查显示数据科学家花费66%的时间在数据加载、清理和可视化上，仅有23%的时间用于模型训练、选择和评分。我的个人经验也是如此。
+实际上，许多与数据科学相关的调查指出了数据科学家在数据收集和清理上花费的时间的不成比例。以 Anaconda（数据科学家使用的领先分发工具之一）的[年度调查](https://www.anaconda.com/state-of-data-science-2020)为例，该调查显示数据科学家花费 66%的时间在数据加载、清理和可视化上，仅有 23%的时间用于模型训练、选择和评分。我的个人经验也是如此。
 
 了解算法如何在后台工作并理解其细微差别并非易事，许多在线课程正是花时间解释这些。然而，这种对算法的专注只会创造一种虚假的错觉，好像数据科学全是关于模型的。许多经验丰富的从业者开始看到过度强调模型，而忽视数据清理的问题。领域内的领先专家安德鲁·吴（Andrew Ng）鼓励数据科学界转向以数据为中心的方法，而不是我们目前在数据科学项目中普遍采用的以模型为中心的方法。在他的[深度学习新闻简报](https://www.deeplearning.ai/the-batch/issue-84/)中，他指出：
 
-> 有一个常见的笑话，说80%的机器学习实际上是数据清理，好像这是个较低级的任务。我的观点是，如果80%的工作是数据准备，那么确保数据质量是机器学习团队的重要工作。
+> 有一个常见的笑话，说 80%的机器学习实际上是数据清理，好像这是个较低级的任务。我的观点是，如果 80%的工作是数据准备，那么确保数据质量是机器学习团队的重要工作。
 
-这种情况因网站如[Kaggle](https://www.kaggle.com/)的存在而进一步恶化，那里参与者提供的是干净的数据，任务仅限于开发不同的模型，以最大化预先确定的性能指标。*(Kaggle对于它的功能来说确实很棒！)*
+这种情况因网站如[Kaggle](https://www.kaggle.com/)的存在而进一步恶化，那里参与者提供的是干净的数据，任务仅限于开发不同的模型，以最大化预先确定的性能指标。*(Kaggle 对于它的功能来说确实很棒！)*
 
 真实世界的项目涉及许多问题，这些问题并不都是从仔细清理的数据或定义明确的问题开始。在大多数项目中，我们事先不一定知道哪些特征会相关、数据需要多频繁地收集以及需要回答的正确问题是什么。**欢迎来到真实世界！**
 
@@ -72,9 +72,9 @@
 
 ### 伦敦大都会面部识别系统
 
-不久前，伦敦大都会警察测试了一个实时的[面部识别系统](https://www.nature.com/articles/d41586-020-03186-4#ref-CR1)。该系统配有摄像头，可以扫描购物中心和公共广场上的人，提取各种面部特征，然后与观察名单上的嫌疑人进行比对。系统随后会显示任何匹配结果，以供警官审查，并决定是否需要拦截（在某些情况下，还可能进行逮捕）。关于该系统操作的独立[报告](http://repository.essex.ac.uk/24946/1/London-Met-Police-Trial-of-Facial-Recognition-Tech-Report-2.pdf)引发了重大关注，并指出了几个局限性。在6次试验中识别出的42名嫌疑人中，只有8名（仅19%）是正确的匹配。
+不久前，伦敦大都会警察测试了一个实时的[面部识别系统](https://www.nature.com/articles/d41586-020-03186-4#ref-CR1)。该系统配有摄像头，可以扫描购物中心和公共广场上的人，提取各种面部特征，然后与观察名单上的嫌疑人进行比对。系统随后会显示任何匹配结果，以供警官审查，并决定是否需要拦截（在某些情况下，还可能进行逮捕）。关于该系统操作的独立[报告](http://repository.essex.ac.uk/24946/1/London-Met-Police-Trial-of-Facial-Recognition-Tech-Report-2.pdf)引发了重大关注，并指出了几个局限性。在 6 次试验中识别出的 42 名嫌疑人中，只有 8 名（仅 19%）是正确的匹配。
 
-有大量文献记录了[data science算法存在偏见](https://www.annualreviews.org/doi/abs/10.1146/annurev-biodatasci-092820-114757)，这使得它们不够完善，需要进一步发展。按照目前的情况，我们甚至还没有到模型被广泛部署和使用的阶段。因此，我们甚至没有足够的模型漂移或出现问题的案例来进一步自动化这些工具。到目前为止，我们能做的最好的事情是识别模型部署后的问题（例如，[银行业](https://onlinelibrary.wiley.com/doi/full/10.1002/jsc.2404)，[医疗保健](https://jamanetwork.com/journals/jama/article-abstract/2756196)，[警务](https://scholarlypublications.universiteitleiden.nl/access/item%3A2983928/view)）。
+有大量文献记录了[data science 算法存在偏见](https://www.annualreviews.org/doi/abs/10.1146/annurev-biodatasci-092820-114757)，这使得它们不够完善，需要进一步发展。按照目前的情况，我们甚至还没有到模型被广泛部署和使用的阶段。因此，我们甚至没有足够的模型漂移或出现问题的案例来进一步自动化这些工具。到目前为止，我们能做的最好的事情是识别模型部署后的问题（例如，[银行业](https://onlinelibrary.wiley.com/doi/full/10.1002/jsc.2404)，[医疗保健](https://jamanetwork.com/journals/jama/article-abstract/2756196)，[警务](https://scholarlypublications.universiteitleiden.nl/access/item%3A2983928/view)）。
 
 ***这是最先进的技术。** 我们开发和部署模型，但它们却证明是不够的，不适合目的。我们现在正处于只看到使用不适当模型的早期后果的阶段。是否有任何自动化的解决方案来应对这一问题？没有！
 
@@ -90,7 +90,7 @@
 
 ***让我展示一下实现当今最著名的机器学习算法有多么简单。***
 
-想象一下，你已经有了经过仔细清理的输入变量 (*X*) 和输出变量 (*Y*)，准备输入到模型中。使用 [Scikit-learn](https://scikit-learn.org/stable/)（一个知名的开源Python机器学习库），我们可以用以下两行代码实现决策树：
+想象一下，你已经有了经过仔细清理的输入变量 (*X*) 和输出变量 (*Y*)，准备输入到模型中。使用 [Scikit-learn](https://scikit-learn.org/stable/)（一个知名的开源 Python 机器学习库），我们可以用以下两行代码实现决策树：
 
 ```py
 **from** **sklearn** **import** tree
@@ -146,11 +146,11 @@ svm.SVC.fit(X,y)
 
 **相关:**
 
-+   [数据科学家，你需要学会编程](/2021/06/data-scientists-need-know-code.html)
++   数据科学家，你需要学会编程
 
-+   [数据科学家在 10 年内会灭绝吗？](/2021/06/data-scientists-extinct-10-years.html)
++   数据科学家在 10 年内会灭绝吗？
 
-+   [未来 5 年会出现数据科学工作短缺吗？](/2021/06/shortage-data-science-jobs-5-years.html)
++   未来 5 年会出现数据科学工作短缺吗？
 
 ### 更多相关话题
 

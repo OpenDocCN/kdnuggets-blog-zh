@@ -1,54 +1,54 @@
-# 使用RAPIDS cuDF在特征工程中利用GPU
+# 使用 RAPIDS cuDF 在特征工程中利用 GPU
 
-> 原文：[https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
+> 原文：[`www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html`](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
 > 
-> **编辑备注**：这是我们最近NVIDIA + KDnuggets GPU主题博客写作比赛的亚军。恭喜Hasan取得这一成就！
+> **编辑备注**：这是我们最近 NVIDIA + KDnuggets GPU 主题博客写作比赛的亚军。恭喜 Hasan 取得这一成就！
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 特定方法成功解决问题的事实可能不会在不同规模上产生相同的结果。当距离改变时，鞋子也需要改变。
 
-在机器学习中，数据及数据处理对模型的成功至关重要，而特征工程是其中的一部分。当数据量较小时，经典的Pandas库可以轻松处理CPU上的任何处理任务。然而，Pandas在处理大数据时可能过于缓慢。提高数据处理和特征工程速度和效率的一个解决方案是RAPIDS。
+在机器学习中，数据及数据处理对模型的成功至关重要，而特征工程是其中的一部分。当数据量较小时，经典的 Pandas 库可以轻松处理 CPU 上的任何处理任务。然而，Pandas 在处理大数据时可能过于缓慢。提高数据处理和特征工程速度和效率的一个解决方案是 RAPIDS。
 
-> “*RAPIDS是一套开源软件库，用于在图形处理单元（GPU）上执行端到端的数据科学和分析管道。RAPIDS加速了数据科学管道，以创建更高效的工作流程。*[1]”
+> “*RAPIDS 是一套开源软件库，用于在图形处理单元（GPU）上执行端到端的数据科学和分析管道。RAPIDS 加速了数据科学管道，以创建更高效的工作流程。*[1]”
 
-![使用RAPIDS cuDF在特征工程中利用GPU](../Images/c05d7dfe959c3948ba5fcfb9a9f0cc7d.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/c05d7dfe959c3948ba5fcfb9a9f0cc7d.png)
 
-图片由[brgfx](https://www.freepik.com/free-vector/opposite-adjectives-fast-slow_1172856.htm#query=running%20fast&position=6&from_view=search&track=ais)提供，来源于Freepik
+图片由[brgfx](https://www.freepik.com/free-vector/opposite-adjectives-fast-slow_1172856.htm#query=running%20fast&position=6&from_view=search&track=ais)提供，来源于 Freepik
 
-RAPIDS的一个工具，用于在特征工程和数据预处理中高效操作表格数据，是*cuDF*。RAPIDS *cuDF* 允许创建GPU数据框，并执行多个*Pandas*操作，如索引、分组、合并和字符串处理。正如RAPIDS网站定义的：
+RAPIDS 的一个工具，用于在特征工程和数据预处理中高效操作表格数据，是*cuDF*。RAPIDS *cuDF* 允许创建 GPU 数据框，并执行多个*Pandas*操作，如索引、分组、合并和字符串处理。正如 RAPIDS 网站定义的：
 
-> “*cuDF是一个Python GPU DataFrame库（基于Apache Arrow列式内存格式），用于加载、连接、聚合、过滤和以DataFrame风格的API处理表格数据，类似于pandas。*[2]”
+> “*cuDF 是一个 Python GPU DataFrame 库（基于 Apache Arrow 列式内存格式），用于加载、连接、聚合、过滤和以 DataFrame 风格的 API 处理表格数据，类似于 pandas。*[2]”
 
-本文尝试解释如何创建和操作数据框，并在GPU上使用*cuDF*应用特征工程，采用真实数据集。
+本文尝试解释如何创建和操作数据框，并在 GPU 上使用*cuDF*应用特征工程，采用真实数据集。
 
-我们的[数据集](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)属于Kaggle的Optiver实际波动预测。它包含与金融市场中实际交易执行相关的股票市场数据，包括订单簿快照和执行的交易[3]。
+我们的[数据集](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)属于 Kaggle 的 Optiver 实际波动预测。它包含与金融市场中实际交易执行相关的股票市场数据，包括订单簿快照和执行的交易[3]。
 
-我们将在下一节中深入了解数据。然后，我们将整合Google Colab与Kaggle和RAPIDS。在第三节中，我们将看到如何使用*Pandas*和*cuDF*对这个数据集进行特征工程。这将为我们提供两个库的比较性能评估。在最后一节中，我们将绘制并评估结果。
+我们将在下一节中深入了解数据。然后，我们将整合 Google Colab 与 Kaggle 和 RAPIDS。在第三节中，我们将看到如何使用*Pandas*和*cuDF*对这个数据集进行特征工程。这将为我们提供两个库的比较性能评估。在最后一节中，我们将绘制并评估结果。
 
 # 数据
 
 我们将要使用的数据包括两个文件集[3]：
 
-1.  book_[train/test].parquet：一个Parquet文件，按stock_id分区，提供市场中最具竞争力的买入和卖出订单的订单簿数据。此文件包含被动买入/卖出意图更新。
+1.  book_[train/test].parquet：一个 Parquet 文件，按 stock_id 分区，提供市场中最具竞争力的买入和卖出订单的订单簿数据。此文件包含被动买入/卖出意图更新。
 
-book_[train/test].parquet中的特征列：
+book_[train/test].parquet 中的特征列：
 
-+   stock_id - 股票的ID代码。Parquet在加载时将此列强制转换为分类数据类型。
++   stock_id - 股票的 ID 代码。Parquet 在加载时将此列强制转换为分类数据类型。
 
-+   time_id - 时间桶的ID代码。时间ID不一定是顺序的，但在所有股票中是一致的。
++   time_id - 时间桶的 ID 代码。时间 ID 不一定是顺序的，但在所有股票中是一致的。
 
-+   seconds_in_bucket - 从桶的开始时间起的秒数，总是从0开始。
++   seconds_in_bucket - 从桶的开始时间起的秒数，总是从 0 开始。
 
 +   bid_price[1/2] - 最具竞争力的买入价/第二具竞争力买入价的标准化价格。
 
@@ -58,21 +58,21 @@ book_[train/test].parquet中的特征列：
 
 +   ask_size[1/2] - 最具竞争力的卖出价/第二具竞争力卖出价的股份数量。
 
-![使用RAPIDS cuDF利用GPU进行特征工程](../Images/d5ea073b919da625e4421b8bce8c968b.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/d5ea073b919da625e4421b8bce8c968b.png)
 
-展示-1：book_[train/test].parquet的描述（作者提供的图像）
+展示-1：book_[train/test].parquet 的描述（作者提供的图像）
 
-此文件大小为5.6 GB，包含超过1.67亿条记录。有112只股票和3830个10分钟的时间窗口（time_id）。每个时间窗口（桶）最多有600秒。由于每个时间窗口中的每只股票每秒钟可能会发生一个交易意图，因此上述数字的乘积可以解释为什么我们有数百万条记录。需要注意的是，并非每秒钟都会发生交易意图，这意味着某些时间窗口中的某些秒数是缺失的。
+此文件大小为 5.6 GB，包含超过 1.67 亿条记录。有 112 只股票和 3830 个 10 分钟的时间窗口（time_id）。每个时间窗口（桶）最多有 600 秒。由于每个时间窗口中的每只股票每秒钟可能会发生一个交易意图，因此上述数字的乘积可以解释为什么我们有数百万条记录。需要注意的是，并非每秒钟都会发生交易意图，这意味着某些时间窗口中的某些秒数是缺失的。
 
-1.  trade_[train/test].parquet：一个Parquet文件，按stock_id分区，包含实际执行的交易数据。
+1.  trade_[train/test].parquet：一个 Parquet 文件，按 stock_id 分区，包含实际执行的交易数据。
 
-trade_[train/test].parquet中的特征列：
+trade_[train/test].parquet 中的特征列：
 
 +   stock_id - 同上。
 
 +   time_id - 同上。
 
-+   seconds_in_bucket - 同上。请注意，由于交易和订单数据来自相同的时间窗口，并且交易数据通常更稀疏，因此此字段不一定从0开始。
++   seconds_in_bucket - 同上。请注意，由于交易和订单数据来自相同的时间窗口，并且交易数据通常更稀疏，因此此字段不一定从 0 开始。
 
 +   price - 在一秒钟内执行交易的平均价格。价格已经过标准化，平均值按每笔交易中交易的股份数量加权。
 
@@ -80,7 +80,7 @@ trade_[train/test].parquet中的特征列：
 
 +   order_count - 交易订单的唯一数量。
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/86d85c6851c2d26fb8a88c06311ff4cd.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/86d85c6851c2d26fb8a88c06311ff4cd.png)
 
 展示-2：trade_[train/test].parquet 文件描述（作者提供的图片）
 
@@ -98,7 +98,7 @@ trade_[train/test].parquet 文件远小于 book_[train/test].parquet。前者为
 
 1.  在 Kaggle 账户上创建一个 API 令牌，以便用 Kaggle 服务进行身份验证。
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/80069e40e84a7975eea7b6d87cca5576.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/80069e40e84a7975eea7b6d87cca5576.png)
 
 展示-3：在 Kaggle 账户上创建 API 令牌（作者提供的图片）
 
@@ -106,7 +106,7 @@ trade_[train/test].parquet 文件远小于 book_[train/test].parquet。前者为
 
 1.  在 Google Colab 上启动一个新的笔记本并上传 kaggle.json 文件。
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/b6749068334098d8b6acfabc72c1a812.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/b6749068334098d8b6acfabc72c1a812.png)
 
 展示-4：在 Google Colab 中上传 kaggle.json 文件（作者提供的图片）
 
@@ -129,7 +129,7 @@ trade_[train/test].parquet 文件远小于 book_[train/test].parquet。前者为
 
 确保你的 Colab 实例在该单元格的输出中兼容 RAPIDS。
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/4209f98d2eb0124501d10babcd488dc8.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/4209f98d2eb0124501d10babcd488dc8.png)
 
 展示-5：检查 Colab 实例是否兼容 RAPIDS（作者提供的图片）
 
@@ -246,7 +246,7 @@ print(f"{len(stock_ids)} stocks: \n {stock_ids} \n")
 
 # 特征工程
 
-本节将讨论在*Pandas*数据框和*cuDF*上进行的13种典型工程操作。我们将查看这些操作所需的时间和使用的内存。让我们首先加载数据。
+本节将讨论在*Pandas*数据框和*cuDF*上进行的 13 种典型工程操作。我们将查看这些操作所需的时间和使用的内存。让我们首先加载数据。
 
 ## 1\. 加载数据
 
@@ -289,7 +289,7 @@ display(df_pd_order.head())
 
 这将返回订单簿（book_[train/test].parquet）的前五条记录：
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/e2fd9dc3ad2f24f45656359185d54d94.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/e2fd9dc3ad2f24f45656359185d54d94.png)
 
 展示-6：将数据加载为 Pandas 数据框（图片由作者提供）
 
@@ -303,7 +303,7 @@ display(df_cudf_order.head())
 
 输出：
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/9f3a498b7929dee8abe46c070a6195e6.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/9f3a498b7929dee8abe46c070a6195e6.png)
 
 展示-7：将数据加载为 cuDF（图片由作者提供）
 
@@ -316,21 +316,21 @@ display(df_pd_order.info())
 
 输出：
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/cd8ee13064a40ea54bdab9feec1cce94.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/cd8ee13064a40ea54bdab9feec1cce94.png)
 
 展示-8：有关第一个股票订单簿数据的信息（图片由作者提供）
 
-上面的图片告诉我们，第一个股票大约有140万条记录，占用47.8 MB的内存空间。为了减少空间并提高速度，我们应该将数据类型转换为较小的格式，我们将在稍后完成。
+上面的图片告诉我们，第一个股票大约有 140 万条记录，占用 47.8 MB 的内存空间。为了减少空间并提高速度，我们应该将数据类型转换为较小的格式，我们将在稍后完成。
 
 以类似的方式，我们将订单簿数据加载到两个数据框库中，也就是交易簿（trade_[train/test].parquet）数据。数据及其信息如下所示：
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/6f9405078f82d66ac8395c91488d52e5.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/6f9405078f82d66ac8395c91488d52e5.png)
 
 展示-9：第一个股票的交易簿数据及数据说明（图片由作者提供）
 
-第一个股票的交易数据为3.7 MB，记录超过276千条。
+第一个股票的交易数据为 3.7 MB，记录超过 276 千条。
 
-在订单簿和交易簿两个文件中，并非每个时间窗口都有600个秒点。换句话说，特定时间桶在10分钟间隔内可能只在某些秒钟有交易或出价。这使我们在两个文件中都面临着稀疏数据，其中一些秒钟缺失。我们应通过对缺失秒钟的所有列进行前向填充来解决此问题。虽然 *Pandas* 允许我们进行前向填充，但 *cuDF* 没有这个功能。因此，我们将在 *Pandas* 中进行前向填充，并从前向填充的 *Pandas* 数据框架重新创建 *cuDF*。对此我们感到遗憾，因为本博客的核心目标是展示 *cuDF* 如何胜过 *Pandas*。我曾多次查阅过此事，但据我所知，我无法找到 *cuDF* 中像 *Pandas* 中实现的方法。因此，我们可以按以下方式进行前向填充[4]：
+在订单簿和交易簿两个文件中，并非每个时间窗口都有 600 个秒点。换句话说，特定时间桶在 10 分钟间隔内可能只在某些秒钟有交易或出价。这使我们在两个文件中都面临着稀疏数据，其中一些秒钟缺失。我们应通过对缺失秒钟的所有列进行前向填充来解决此问题。虽然 *Pandas* 允许我们进行前向填充，但 *cuDF* 没有这个功能。因此，我们将在 *Pandas* 中进行前向填充，并从前向填充的 *Pandas* 数据框架重新创建 *cuDF*。对此我们感到遗憾，因为本博客的核心目标是展示 *cuDF* 如何胜过 *Pandas*。我曾多次查阅过此事，但据我所知，我无法找到 *cuDF* 中像 *Pandas* 中实现的方法。因此，我们可以按以下方式进行前向填充[4]：
 
 ```py
 # Forward fill data
@@ -363,11 +363,11 @@ expanded_df_pd_order, expanded_df_cudf_order = ffill(df_pd_order, df_name="order
 display(expanded_df_cudf_order.head())
 ```
 
-![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/31bd00bd59ce67d1132a29cc6dee8fba.png)
+![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](img/31bd00bd59ce67d1132a29cc6dee8fba.png)
 
 展览-10：前向填充订单数据（作者提供的图片）
 
-与展示7中的数据不同，展示10中的前向填充数据在时间桶“5”中有全部600秒，即从0到599，全包括。我们在交易数据上也执行同样的操作。
+与展示 7 中的数据不同，展示 10 中的前向填充数据在时间桶“5”中有全部 600 秒，即从 0 到 599，全包括。我们在交易数据上也执行同样的操作。
 
 ## 2\. 合并数据框架
 
@@ -404,13 +404,13 @@ display(df_cudf.head())
 
 expanded_df_cudf_trade 是前向填充的交易数据，与 expanded_df_pd_order 或 expanded_df_cudf_order 获取方式相同。合并操作将创建如下所示的组合数据框架：
 
-![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/7bcbf12ea281c2a9a75a86e8c331c52c.png)
+![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](img/7bcbf12ea281c2a9a75a86e8c331c52c.png)
 
 展览-11：合并数据框架（作者提供的图片）
 
 两个数据集的所有列被合并为一个。合并操作也对 *Pandas* 数据框架重复执行。
 
-![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/fc670d7abbb9527f1293059695db54bc.png)
+![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](img/fc670d7abbb9527f1293059695db54bc.png)
 
 图片由 [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-flat-design-gathering-data-business-concept_20547395.htm#page=3&query=data%20engineering&position=36&from_view=search&track=ais) 在 Freepik 上提供
 
@@ -449,11 +449,11 @@ display(df_cudf.info())
 
 我们得到以下输出：
 
-![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](../Images/53ea716fd59ad9e762b7eb77e0c9531d.png)
+![使用 RAPIDS cuDF 充分利用 GPU 进行特征工程](img/53ea716fd59ad9e762b7eb77e0c9531d.png)
 
 展览-12：改变数据类型（作者提供的图片）
 
-如果没有进行数据类型转换，展示12中的数据将使用更多内存空间。它仍然有78.9 MB，但在前向填充和合并操作之后，结果为13列和230万条记录。
+如果没有进行数据类型转换，展示 12 中的数据将使用更多内存空间。它仍然有 78.9 MB，但在前向填充和合并操作之后，结果为 13 列和 230 万条记录。
 
 我们为*Pandas* DF 和 *cuDF* 完成了每个特征工程任务。在这里，我们仅展示了一个*cuDF*的例子。
 
@@ -501,7 +501,7 @@ time_ids = get_unique_timeids(df_cudf_order, dframe=1)
 
 *cuDF* 的输出如下：
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/21f81b24a5d7a1430277af76a62755a6.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/21f81b24a5d7a1430277af76a62755a6.png)
 
 展示-13：获取唯一时间 ID（作者提供的图像）
 
@@ -531,7 +531,7 @@ df_cudf, _ = check_null_values(df_cudf, dframe=0)
 
 输出是：
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/e2324cc152e7c4f88bc9c0150ee3d2d7.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/e2324cc152e7c4f88bc9c0150ee3d2d7.png)
 
 展示-14：检查空值（作者提供的图像）
 
@@ -574,7 +574,7 @@ display(df_cudf.head())
 
 因此它将给我们：
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/770508f193efac43d90735758027aa50.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/770508f193efac43d90735758027aa50.png)
 
 展示-15：添加列和特征（作者提供的图像）
 
@@ -640,7 +640,7 @@ display(df_cudf_stats.head())
 
 作为回报，我们得到以下输出：
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/cbd5b9d523799fc2d5a0d64ff2fa07cf.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/cbd5b9d523799fc2d5a0d64ff2fa07cf.png)
 
 展示-16：计算统计数据（作者提供的图像）
 
@@ -690,7 +690,7 @@ _ = calc_corr(df_cudf)
 
 将返回以下输出：
 
-![使用 RAPIDS cuDF 利用 GPU 进行特征工程](../Images/fa6260b50af6b0c2a71dec56d16f1c88.png)
+![使用 RAPIDS cuDF 利用 GPU 进行特征工程](img/fa6260b50af6b0c2a71dec56d16f1c88.png)
 
 展示-17：计算两个特征之间的相关性（作者提供的图像）
 
@@ -740,7 +740,7 @@ display(df_cudf.head())
 
 我们将得到一个数据框作为输出，下面展示了它的一部分：
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/b66202f08a1609adfdee7e2e9712baf4.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/b66202f08a1609adfdee7e2e9712baf4.png)
 
 展示-18：对列进行分箱（作者图片）
 
@@ -1061,7 +1061,7 @@ def plot_avg_by_df(pd_summary, cudf_summary, labels, X_axis):
    plt.show()
 ```
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/ef0c8925e9ea614f7769b660b9cd396d.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/ef0c8925e9ea614f7769b660b9cd396d.png)
 
 展示-19：Pandas 数据框和 cuDF 的操作平均时长（作者图片）
 
@@ -1102,7 +1102,7 @@ def plot_diff_by_df(pd_summary, cudf_summary, labels):
    plt.show()
 ```
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/96c7fe7e93201c3be8e5fc378dbe7fad.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/96c7fe7e93201c3be8e5fc378dbe7fad.png)
 
 展示-20：Pandas 数据框和 cuDF 在 30 轮中的操作总时长（作者图片）
 
@@ -1137,27 +1137,27 @@ def plot_total_by_df(round_total):
    plt.show()
 ```
 
-![使用 RAPIDS cuDF 在特征工程中利用 GPU](../Images/c35eafa8531b6c370b7aea871744251c.png)
+![使用 RAPIDS cuDF 在特征工程中利用 GPU](img/c35eafa8531b6c370b7aea871744251c.png)
 
 展示-21：Pandas 数据框和 cuDF 每轮所有操作的总时长（作者图片）
 
-尽管我们没有涵盖数据集上每个特征工程任务，但它们与我们在这里展示的任务相同或类似。通过逐个解释14个操作，我们试图记录*Pandas* 数据框和*cuDF*的相对性能，并实现可重复性。
+尽管我们没有涵盖数据集上每个特征工程任务，但它们与我们在这里展示的任务相同或类似。通过逐个解释 14 个操作，我们试图记录*Pandas* 数据框和*cuDF*的相对性能，并实现可重复性。
 
-在所有情况下，除了相关性计算和数据框显示外，*cuDF* 都优于*Pandas*。这种性能优势在复杂任务如groupby、merge、agg和describe中尤为显著。另一个方面是，当更多轮次进行时，*Pandas* 数据框会变得疲惫，而*cuDF*则保持更稳定的模式。
+在所有情况下，除了相关性计算和数据框显示外，*cuDF* 都优于*Pandas*。这种性能优势在复杂任务如 groupby、merge、agg 和 describe 中尤为显著。另一个方面是，当更多轮次进行时，*Pandas* 数据框会变得疲惫，而*cuDF*则保持更稳定的模式。
 
-请记住，我们只以一个股票作为例子进行回顾。如果我们处理所有112只股票，我们可以预期*cuDF*会表现得更好。如果股票的数量增加到数百只，*cuDF*的性能甚至可能更为显著。在大数据的情况下，执行并行任务是可能的，像*Dask-cuDF*这样的分布式框架，可以将并行计算扩展到*cuDF* GPU 数据框，是合适的工具。
+请记住，我们只以一个股票作为例子进行回顾。如果我们处理所有 112 只股票，我们可以预期*cuDF*会表现得更好。如果股票的数量增加到数百只，*cuDF*的性能甚至可能更为显著。在大数据的情况下，执行并行任务是可能的，像*Dask-cuDF*这样的分布式框架，可以将并行计算扩展到*cuDF* GPU 数据框，是合适的工具。
 
 ## 参考文献
 
-[1] RAPIDS 定义，[https://www.heavy.ai/technical-glossary/rapids](https://www.heavy.ai/technical-glossary/rapids)
+[1] RAPIDS 定义，[`www.heavy.ai/technical-glossary/rapids`](https://www.heavy.ai/technical-glossary/rapids)
 
-[2] 10分钟了解cuDF和Dask-cuDF，[https://docs.rapids.ai/api/cudf/stable/user_guide/10min/](https://docs.rapids.ai/api/cudf/stable/user_guide/10min/)
+[2] 10 分钟了解 cuDF 和 Dask-cuDF，[`docs.rapids.ai/api/cudf/stable/user_guide/10min/`](https://docs.rapids.ai/api/cudf/stable/user_guide/10min/)
 
-[3] Optiver 实现的波动率预测，[https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)
+[3] Optiver 实现的波动率预测，[`www.kaggle.com/competitions/optiver-realized-volatility-prediction/data`](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/data)
 
-[4] 向前填充图书数据，[https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277)
+[4] 向前填充图书数据，[`www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277`](https://www.kaggle.com/competitions/optiver-realized-volatility-prediction/discussion/251277)
 
-**[Hasan Serdar Altan](https://twitter.com/HSerdarAltan)** 是数据科学家和AWS云架构师助理。
+**[Hasan Serdar Altan](https://twitter.com/HSerdarAltan)** 是数据科学家和 AWS 云架构师助理。
 
 ### 相关主题
 
@@ -1167,8 +1167,8 @@ def plot_total_by_df(round_total):
 
 +   [RAPIDS cuDF 在 Google Colab 上加速数据科学](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)
 
-+   [构建GPU机器与使用GPU云](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)
++   [构建 GPU 机器与使用 GPU 云](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)
 
-+   [2022特征存储峰会：一个关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [2022 特征存储峰会：一个关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
-+   [前往与归来……一个RAPIDS故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
++   [前往与归来……一个 RAPIDS 故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)

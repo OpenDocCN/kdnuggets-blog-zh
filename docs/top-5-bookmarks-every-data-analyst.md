@@ -1,22 +1,22 @@
 # 每个数据分析师应该拥有的前五个书签
 
-> 原文：[https://www.kdnuggets.com/2022/09/top-5-bookmarks-every-data-analyst.html](https://www.kdnuggets.com/2022/09/top-5-bookmarks-every-data-analyst.html)
+> 原文：[`www.kdnuggets.com/2022/09/top-5-bookmarks-every-data-analyst.html`](https://www.kdnuggets.com/2022/09/top-5-bookmarks-every-data-analyst.html)
 
-![每个数据分析师应该拥有的前五个书签](../Images/efee4971c8b26e0631788f4f2fbc4ad9.png)
+![每个数据分析师应该拥有的前五个书签](img/efee4971c8b26e0631788f4f2fbc4ad9.png)
 
 图片来源：[cottonbro](https://www.pexels.com/photo/person-holding-a-book-3832024/)
 
-作为一名高级数据分析师，我的工作通常包括一个或两个大型的基础数据研究项目，以及一些“时间紧迫”的小型项目，分配给不同的团队。在一个典型的工作周，我可能会制作5到7张图表，编写几个查询，调整一些其他查询，并帮助同事调试他们的工作。我可能会提交1到2个内部JIRA工单，并进行几次StackOverflow搜索。
+作为一名高级数据分析师，我的工作通常包括一个或两个大型的基础数据研究项目，以及一些“时间紧迫”的小型项目，分配给不同的团队。在一个典型的工作周，我可能会制作 5 到 7 张图表，编写几个查询，调整一些其他查询，并帮助同事调试他们的工作。我可能会提交 1 到 2 个内部 JIRA 工单，并进行几次 StackOverflow 搜索。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -30,9 +30,9 @@
 
 表格格式化工具可以将一块复制/粘贴的数据转换成更加高效且美观的格式。这在多种情况下都很有用。有时我通过 Slack 或电子邮件给同事发送一个快速表格；有时我将数据粘贴到 JIRA 工单中。此外，表格格式化工具在论坛中发布或回答问题（如 Stack Overflow）或在博客中发布数据时也非常有用。诀窍是选择像 Courier New 这样的等宽字体，以使其正确对齐。
 
-![每位数据分析师都应该拥有的前 5 个书签](../Images/4ab6ab213142a4f6846bca69a9435fa5.png)
+![每位数据分析师都应该拥有的前 5 个书签](img/4ab6ab213142a4f6846bca69a9435fa5.png)
 
-[https://ozh.github.io/ascii-tables/](https://ozh.github.io/ascii-tables/)
+[`ozh.github.io/ascii-tables/`](https://ozh.github.io/ascii-tables/)
 
 ```py
 //================\\
@@ -56,7 +56,7 @@
 \\================//
 ```
 
-选择很多，但我最喜欢的是 [https://ozh.github.io/ascii-tables/](https://ozh.github.io/ascii-tables/)。它快速、简单，并提供了很多不同的输出格式选择。此外，Ascii Table Formatter 会自动转换文本而无需点击任何东西；它是即时的！
+选择很多，但我最喜欢的是 [`ozh.github.io/ascii-tables/`](https://ozh.github.io/ascii-tables/)。它快速、简单，并提供了很多不同的输出格式选择。此外，Ascii Table Formatter 会自动转换文本而无需点击任何东西；它是即时的！
 
 这里有几个不同的例子：
 
@@ -68,23 +68,23 @@ SQL 编写器有两种类型——那些以查询的格式化为荣、让其更�
 
 使用 SQL 美化工具，可以立刻将其格式化成这样：
 
-有很多选项，包括可下载的程序、插件和在线版本。我更喜欢在线版本，可以在这里找到：[https://codebeautify.org/sqlformatter](https://codebeautify.org/sqlformatter)。
+有很多选项，包括可下载的程序、插件和在线版本。我更喜欢在线版本，可以在这里找到：[`codebeautify.org/sqlformatter`](https://codebeautify.org/sqlformatter)。
 
 # 3\. JSON 查看器和转换器
 
 我尽量避免处理 JSON 数据，但不幸的是，有时我别无选择。这就是为什么我在书签中保留了各种 JSON 相关的查看器和转换器。
 
-想要快速浏览 JSON 结构以查看有哪些元素？需要调试为什么你的解析脚本失败？那么我推荐查看 [https://www.convertcsv.com/json-to-csv.htm](https://www.convertcsv.com/json-to-csv.htm) 和 [https://www.convertcsv.com/csv-to-json.htm](https://www.convertcsv.com/csv-to-json.htm) 以在表格和 JSON 结构之间转换，以及 [http://jsonviewer.stack.hu/](http://jsonviewer.stack.hu/) 进行解析和查看。
+想要快速浏览 JSON 结构以查看有哪些元素？需要调试为什么你的解析脚本失败？那么我推荐查看 [`www.convertcsv.com/json-to-csv.htm`](https://www.convertcsv.com/json-to-csv.htm) 和 [`www.convertcsv.com/csv-to-json.htm`](https://www.convertcsv.com/csv-to-json.htm) 以在表格和 JSON 结构之间转换，以及 [`jsonviewer.stack.hu/`](http://jsonviewer.stack.hu/) 进行解析和查看。
 
 # 2\. 图表构建器
 
 构建可视化和仪表板是分析师工作的重要部分。不幸的是，我估计我制作的图表中约有 80% 实际上不是用于仪表板，而是用于回答快速的、临时的问题。对于许多这些任务，启动像 Tableau 这样的专用应用程序或玩弄 Excel 实在是过于繁琐。因此，我需要能够快速构建图表的工具。
 
-在线上有很多快速构建图表的资源，但[https://app.rawgraphs.io/](https://app.rawgraphs.io/)是我最喜欢的。我喜欢它因为它提供了许多鲜为人知的图表类型（如日历热图和圆形打包），这些图表在 Excel 中很难弄清楚。
+在线上有很多快速构建图表的资源，但[`app.rawgraphs.io/`](https://app.rawgraphs.io/)是我最喜欢的。我喜欢它因为它提供了许多鲜为人知的图表类型（如日历热图和圆形打包），这些图表在 Excel 中很难弄清楚。
 
-![每位数据分析师应具备的前5个书签](../Images/56035b631b6cf9bc0493338b2cac5ed4.png)
+![每位数据分析师应具备的前 5 个书签](img/56035b631b6cf9bc0493338b2cac5ed4.png)
 
-[https://app.rawgraphs.io/](https://app.rawgraphs.io/)
+[`app.rawgraphs.io/`](https://app.rawgraphs.io/)
 
 # 1. SQL 生成器
 
@@ -92,7 +92,7 @@ SQL 编写器有两种类型——那些以查询的格式化为荣、让其更�
 
 相反，给自己收藏一个好的 SQL 生成器。SQL 生成器基本上是一个 SQL 查询的模板，它允许你自定义列名和表结构，选择你想要执行的操作，然后为你构建各种不同“风味”的 SQL 语法。
 
-不要再为`DATEDIFF()`与`DATE_DIFF()`之间的细微差别感到困扰！我推荐这个：[https://app.rasgoml.com/sql](https://app.rasgoml.com/sql)
+不要再为`DATEDIFF()`与`DATE_DIFF()`之间的细微差别感到困扰！我推荐这个：[`app.rasgoml.com/sql`](https://app.rasgoml.com/sql)
 
 # 结论
 
@@ -104,20 +104,20 @@ SQL 编写器有两种类型——那些以查询的格式化为荣、让其更�
 
 +   RegEx Helper — [韦斯利·朗斯沃斯](https://www.linkedin.com/in/wesley-longsworth/) ([Regexr](https://regexr.com/), [Regex101](https://regex101.com/))
 
-**[乔什·贝瑞](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee)) 负责 Rasgo 的面向客户的数据科学，自2008年起从事数据和分析行业。乔什在康卡斯特工作了10年，建立了数据科学团队，并且是内部开发的康卡斯特功能存储的主要负责人之一——这是市场上最早出现的功能存储之一。在离开康卡斯特后，乔什在 DataRobot 负责构建面向客户的数据科学。在空闲时间，乔什会对有趣的主题进行复杂分析，如棒球、F1赛车、房地产市场预测等。
+**[乔什·贝瑞](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee)) 负责 Rasgo 的面向客户的数据科学，自 2008 年起从事数据和分析行业。乔什在康卡斯特工作了 10 年，建立了数据科学团队，并且是内部开发的康卡斯特功能存储的主要负责人之一——这是市场上最早出现的功能存储之一。在离开康卡斯特后，乔什在 DataRobot 负责构建面向客户的数据科学。在空闲时间，乔什会对有趣的主题进行复杂分析，如棒球、F1 赛车、房地产市场预测等。
 
 [原文](https://towardsdatascience.com/top-5-bookmarks-every-data-analyst-should-have-547a2c9ad1fe)。经授权转载。
 
 ### 相关主题
 
-+   [每位数据科学家应具备的前13项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每位数据科学家应具备的前 13 项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
 
-+   [KDnuggets 新闻，3月30日：最受欢迎的编程入门课程](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻，3 月 30 日：最受欢迎的编程入门课程](https://www.kdnuggets.com/2022/n13.html)
 
-+   [如果你想成为数据分析师，应该考虑的3个课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，应该考虑的 3 个课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-+   [KDnuggets 新闻，5月25日：每位数据科学家都应该了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每位数据科学家都应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)
 
-+   [每位初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [每位数据科学家都应该了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
++   [每位数据科学家都应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)

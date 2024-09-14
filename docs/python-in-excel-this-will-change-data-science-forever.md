@@ -1,8 +1,8 @@
 # Python 在 Excel 中：这将永远改变数据科学
 
-> 原文：[https://www.kdnuggets.com/python-in-excel-this-will-change-data-science-forever](https://www.kdnuggets.com/python-in-excel-this-will-change-data-science-forever)
+> 原文：[`www.kdnuggets.com/python-in-excel-this-will-change-data-science-forever`](https://www.kdnuggets.com/python-in-excel-this-will-change-data-science-forever)
 
-![Python 在 Excel 中：这将永远改变数据科学](../Images/956af61c7faec8620bc5e98205e435ed.png)
+![Python 在 Excel 中：这将永远改变数据科学](img/956af61c7faec8620bc5e98205e435ed.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -34,7 +34,7 @@
 
 实际上，我过去甚至创建过 Tableau 仪表板来向客户展示结果，但最终因为他们对 Excel 更为熟悉，所以不得不在 Excel 中重新构建图表。
 
-这并不是我所在组织的独特之处。[截至2023年](https://earthweb.com/excel-users/)，全球已有超过一百万家公司和15亿人使用 Excel。
+这并不是我所在组织的独特之处。[截至 2023 年](https://earthweb.com/excel-users/)，全球已有超过一百万家公司和 15 亿人使用 Excel。
 
 许多数据从业者，如我自己，发现自己常常在 Python IDE 和 Excel 电子表格之间切换。我们使用前者构建机器学习模型和分析数据，使用后者来展示我们的发现。
 
@@ -58,7 +58,7 @@ Python 和 Excel 的集成将帮助数据科学家和分析师简化工作流程
 
 这是一个展示如何在 Excel 中创建 Pandas dataframe 的示例：
 
-![Python in Excel: This Will Change Data Science Forever](../Images/a26f3b34e9f2e596ef992b3f9539e1d0.png)
+![Python in Excel: This Will Change Data Science Forever](img/a26f3b34e9f2e596ef992b3f9539e1d0.png)
 
 来源：[Microsoft](https://techcommunity.microsoft.com/t5/excel-blog/announcing-python-in-excel-combining-the-power-of-python-and-the/ba-p/3893439)
 
@@ -70,7 +70,7 @@ Python 和 Excel 的集成将帮助数据科学家和分析师简化工作流程
 
 这是一个展示如何使用 Python 在 Excel 中构建决策树分类器的图像：
 
-![Python in Excel: This Will Change Data Science Forever](../Images/b97e8a5a936851522db0e6e517d565cd.png)
+![Python in Excel: This Will Change Data Science Forever](img/b97e8a5a936851522db0e6e517d565cd.png)
 
 来源：[Microsoft](https://techcommunity.microsoft.com/t5/excel-blog/announcing-python-in-excel-combining-the-power-of-python-and-the/ba-p/3893439)
 
@@ -80,7 +80,7 @@ Python 和 Excel 的集成将帮助数据科学家和分析师简化工作流程
 
 例如，如果我有五个这样的每月销售数据工作表：
 
-![XXXXX](../Images/456f85e4ad35f785a15f673dfd0909f9.png)
+![XXXXX](img/456f85e4ad35f785a15f673dfd0909f9.png)
 
 如果我想找到一个月内销售量超过 100 个单位的产品，我首先需要手动将所有工作表的数据复制并粘贴到第一个工作表的数据下方。然后，我需要更改日期格式并创建数据透视表。
 
@@ -108,56 +108,56 @@ products_over_100 = grouped_data[grouped_data['Units Sold'] > 100]
 products_over_100
 ```
 
-每次有新数据进来时，我只需更改一行代码并重新运行程序，就能获得所需的结果。通过Python与Excel的集成，我可以在一个平台上监督整个数据分析流程，从而最大化效率。
+每次有新数据进来时，我只需更改一行代码并重新运行程序，就能获得所需的结果。通过 Python 与 Excel 的集成，我可以在一个平台上监督整个数据分析流程，从而最大化效率。
 
 ## 4. 数据可视化
 
-尽管Excel本身提供了大量的可视化选项，但该工具在构建图表类型方面仍然有些限制。像小提琴图、热图和对角图这样的图表在Excel中并不容易获得，这使得数据科学家难以表示复杂的统计关系。
+尽管 Excel 本身提供了大量的可视化选项，但该工具在构建图表类型方面仍然有些限制。像小提琴图、热图和对角图这样的图表在 Excel 中并不容易获得，这使得数据科学家难以表示复杂的统计关系。
 
-运行Python代码的能力将使Excel用户能够使用如Matplotlib和Seaborn等库来创建更复杂、更具自定义的图表。
+运行 Python 代码的能力将使 Excel 用户能够使用如 Matplotlib 和 Seaborn 等库来创建更复杂、更具自定义的图表。
 
-![Excel中的Python：这将永远改变数据科学](../Images/83dac9414630748c3d78b3f213c4f242.png)
+![Excel 中的 Python：这将永远改变数据科学](img/83dac9414630748c3d78b3f213c4f242.png)
 
 来源：[微软](https://techcommunity.microsoft.com/t5/excel-blog/announcing-python-in-excel-combining-the-power-of-python-and-the/ba-p/3893439)
 
-# 如何在Excel中使用Python？
+# 如何在 Excel 中使用 Python？
 
-在撰写本文时，Python与Excel的功能仅通过[Microsoft 365 Insider计划](https://insider.microsoft365.com/en-us/join/windows)提供。你需要注册并选择Beta Channel Insider级别才能访问此功能，因为它尚未公开推出。
+在撰写本文时，Python 与 Excel 的功能仅通过[Microsoft 365 Insider 计划](https://insider.microsoft365.com/en-us/join/windows)提供。你需要注册并选择 Beta Channel Insider 级别才能访问此功能，因为它尚未公开推出。
 
-一旦你加入了365 Insider计划，你会在“公式”选项卡中找到一个Python部分。你只需点击“插入Python”即可开始编写自己的Python代码。
+一旦你加入了 365 Insider 计划，你会在“公式”选项卡中找到一个 Python 部分。你只需点击“插入 Python”即可开始编写自己的 Python 代码。
 
 另外，你可以在任意单元格中输入`=PY`来开始使用。
 
-![Excel中的Python：这将永远改变数据科学](../Images/e6a3b3cdb4edc1ea2f2594135f72ec08.png)
+![Excel 中的 Python：这将永远改变数据科学](img/e6a3b3cdb4edc1ea2f2594135f72ec08.png)
 
 来源：Anaconda
 
-# Python与Excel的集成将使数据科学民主化
+# Python 与 Excel 的集成将使数据科学民主化
 
-随着ChatGPT的发布，以及诸如代码解释器和Notable等插件的出现，许多曾经需要强大技术专长的任务变得更容易执行。
+随着 ChatGPT 的发布，以及诸如代码解释器和 Notable 等插件的出现，许多曾经需要强大技术专长的任务变得更容易执行。
 
-对于数据科学家和分析师而言尤其如此——你现在可以将CSV文件上传到ChatGPT，它将清理、分析并构建你的数据集模型。
+对于数据科学家和分析师而言尤其如此——你现在可以将 CSV 文件上传到 ChatGPT，它将清理、分析并构建你的数据集模型。
 
-在我看来，Python与Excel的集成使我们离[数据科学和分析的民主化](/2023/06/chatgpt-replace-data-scientists.html)更近了一步。
+在我看来，Python 与 Excel 的集成使我们离数据科学和分析的民主化更近了一步。
 
-在市场营销和金融等领域，那些完全依赖Excel的行业专家现在将能够执行Python代码来分析他们的数据，而无需下载编程IDE。
+在市场营销和金融等领域，那些完全依赖 Excel 的行业专家现在将能够执行 Python 代码来分析他们的数据，而无需下载编程 IDE。
 
-在一个熟悉的界面中处理数据，加上ChatGPT在编写代码方面的熟练，将使非程序员能够执行数据科学工作流程，并使用Python代码解决问题。
+在一个熟悉的界面中处理数据，加上 ChatGPT 在编写代码方面的熟练，将使非程序员能够执行数据科学工作流程，并使用 Python 代码解决问题。
 
-如果你是一个不懂编码的Excel用户，这对于你来说是一个在你已经熟悉的界面中学习Python编程的绝佳机会。
+如果你是一个不懂编码的 Excel 用户，这对于你来说是一个在你已经熟悉的界面中学习 Python 编程的绝佳机会。
 
 **[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)** 是一位自学成才的数据科学家，对写作充满热情。你可以在[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)上与她联系。
 
 ### 更多相关话题
 
-+   [别再谈ChatGPT，这款新AI助手已遥遥领先，将彻底改变工作方式](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
++   [别再谈 ChatGPT，这款新 AI 助手已遥遥领先，将彻底改变工作方式](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
 
-+   [使用Python自动化微软Excel和Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)
++   [使用 Python 自动化微软 Excel 和 Word](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)
 
-+   [我使用了ChatGPT（每天）5个月。这里有一些隐藏的宝藏…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
++   [我使用了 ChatGPT（每天）5 个月。这里有一些隐藏的宝藏…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
 
 +   [人工智能将如何改变移动应用程序](https://www.kdnuggets.com/2022/12/artificial-intelligence-change-mobile-apps.html)
 
-+   [免费的微软Excel初学者课程](https://www.kdnuggets.com/2022/09/free-microsoft-excel-beginners-course.html)
++   [免费的微软 Excel 初学者课程](https://www.kdnuggets.com/2022/09/free-microsoft-excel-beginners-course.html)
 
-+   [通过《快速Python数据科学》提升你的Python技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
++   [通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)

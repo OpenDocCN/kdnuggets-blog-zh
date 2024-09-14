@@ -1,8 +1,8 @@
 # 使用人工智能识别塞伦盖蒂摄像陷阱图像中的野生动物
 
-> 原文：[https://www.kdnuggets.com/2020/02/using-ai-identify-wildlife-images-serengeti.html](https://www.kdnuggets.com/2020/02/using-ai-identify-wildlife-images-serengeti.html)
+> 原文：[`www.kdnuggets.com/2020/02/using-ai-identify-wildlife-images-serengeti.html`](https://www.kdnuggets.com/2020/02/using-ai-identify-wildlife-images-serengeti.html)
 
-[评论](#comments)
+评论
 
 **作者： [Marek Rogala](https://www.linkedin.com/in/marrogala/) 和 [Jędrzej Świeżewski, PhD,](https://www.linkedin.com/in/swiezew/) [Appsilon](https://appsilon.com/)**
 
@@ -12,85 +12,85 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 摄像陷阱成像（自动拍摄野生动物物种）正成为生物多样性保护工作的黄金标准。它能够以空前的规模准确监测大片土地。然而，这些设备生成的数据量庞大，使得人工分析变得非常困难。随着机器学习和计算机视觉的最新进展，我们获得了解决这一问题的工具，并为生物多样性社区提供了利用由热量和运动触发的系统自动生成的知识潜力的能力。
 
-![图像](../Images/03a373af4a8cc9ecf8e46e92aa13c817.png)
+![图像](img/03a373af4a8cc9ecf8e46e92aa13c817.png)
 
 相较于人类调查员，摄像陷阱虽然干扰较小，但仍然会引起注意
 
 ### …对机器学习社区的挑战
 
-我们最近参加了**Hakuna-ma Data**，这是由 [DrivenData](https://www.drivendata.org/competitions/59/camera-trap-serengeti/page/145/) 与 [微软地球人工智能](https://www.microsoft.com/en-us/ai/ai-for-earth) 合作组织的比赛，要求参与者构建一个能够跨时间和地点良好泛化的野生动物检测算法。这次比赛与之前的版本不同，研究人员、数据科学家和开发者无法直接访问测试图像集，而是需要提交他们的模型，由活动组织者在 Microsoft Azure 上运行。来自全球的811名参与者使用来自10个季节的公开数据训练他们的模型，并最终将解决方案提交以在第11季的私人数据集上进行测试。
+我们最近参加了**Hakuna-ma Data**，这是由 [DrivenData](https://www.drivendata.org/competitions/59/camera-trap-serengeti/page/145/) 与 [微软地球人工智能](https://www.microsoft.com/en-us/ai/ai-for-earth) 合作组织的比赛，要求参与者构建一个能够跨时间和地点良好泛化的野生动物检测算法。这次比赛与之前的版本不同，研究人员、数据科学家和开发者无法直接访问测试图像集，而是需要提交他们的模型，由活动组织者在 Microsoft Azure 上运行。来自全球的 811 名参与者使用来自 10 个季节的公开数据训练他们的模型，并最终将解决方案提交以在第 11 季的私人数据集上进行测试。
 
-我们祝贺所有的竞争者和*ValAn_picekl*团队赢得了$12,000的大奖。我们也很自豪地宣布，我们在最终排名中获得了第五名，并且我们希望分享我们如何实现这一成就。
+我们祝贺所有的竞争者和*ValAn_picekl*团队赢得了$12,000 的大奖。我们也很自豪地宣布，我们在最终排名中获得了第五名，并且我们希望分享我们如何实现这一成就。
 
-你可以在准备就绪的Google Colab笔记本中体验我们的最终模型，点击[这里](https://colab.research.google.com/github/Appsilon/serengeti_try_it_yourself/blob/master/classify_images_on_colab.ipynb)。
+你可以在准备就绪的 Google Colab 笔记本中体验我们的最终模型，点击[这里](https://colab.research.google.com/github/Appsilon/serengeti_try_it_yourself/blob/master/classify_images_on_colab.ipynb)。
 
 ### 我们的方法
 
-比赛涉及处理大量图像，因此使用一个快速的神经网络框架和强大的GPU是必须的。我们从Google Cloud Platform中提供了配备足够强大GPU的虚拟机（从Tesla K80到Tesla V100，用于最繁重的计算）。通常，我们会并行运行几台机器以加快实验进程。我们使用Python代码，协调GitHub存储库中的关键代码部分，并使用笔记本快速实验和视觉检查模型的性能。我们在Fast.ai中构建了模型（以PyTorch为后端），并使用了与[Weights & Biases](https://www.wandb.com/)的集成来跟踪我们的实验。
+比赛涉及处理大量图像，因此使用一个快速的神经网络框架和强大的 GPU 是必须的。我们从 Google Cloud Platform 中提供了配备足够强大 GPU 的虚拟机（从 Tesla K80 到 Tesla V100，用于最繁重的计算）。通常，我们会并行运行几台机器以加快实验进程。我们使用 Python 代码，协调 GitHub 存储库中的关键代码部分，并使用笔记本快速实验和视觉检查模型的性能。我们在 Fast.ai 中构建了模型（以 PyTorch 为后端），并使用了与[Weights & Biases](https://www.wandb.com/)的集成来跟踪我们的实验。
 
-基于之前对数据集的[研究](https://www.pnas.org/content/115/25/E5716)，我们决定使用ResNet 50，这是一个相对中等深度的架构。由于我们在比赛结束前不久才加入，因此选择不尝试其他（或更深）的架构，并在看到这个架构的初步结果令人满意后，决定专注于改进它。
+基于之前对数据集的[研究](https://www.pnas.org/content/115/25/E5716)，我们决定使用 ResNet 50，这是一个相对中等深度的架构。由于我们在比赛结束前不久才加入，因此选择不尝试其他（或更深）的架构，并在看到这个架构的初步结果令人满意后，决定专注于改进它。
 
 由于时间有限，我们不得不优化我们的策略。我们采用了敏捷方法：迅速创建了我们的基线“ MVP”（最小可行产品）解决方案，然后根据结果进行大量迭代。最初，提交每五天仅允许一次，这给了我们一种自然的冲刺节奏。
 
-数据集本身非常具有挑战性：660万张照片，分辨率相对较高——数据量达到几TB。我们使用了一个参与者提供的数据集版本，其中照片的分辨率已经显著缩小（每边缩小了4倍）。
+数据集本身非常具有挑战性：660 万张照片，分辨率相对较高——数据量达到几 TB。我们使用了一个参与者提供的数据集版本，其中照片的分辨率已经显著缩小（每边缩小了 4 倍）。
 
-![图像类别及出现百分比](../Images/317f4a3731b22e9118ed502993f0a611.png)
+![图像类别及出现百分比](img/317f4a3731b22e9118ed502993f0a611.png)
 
-数据集非常不平衡——大约75%的图像为空。最常见的动物是角马、斑马和汤姆森的瞪羚。在光谱的另一端，有像steenbok或蝙蝠这样的超稀有动物，仅在少数几张照片中可见。
+数据集非常不平衡——大约 75%的图像为空。最常见的动物是角马、斑马和汤姆森的瞪羚。在光谱的另一端，有像 steenbok 或蝙蝠这样的超稀有动物，仅在少数几张照片中可见。
 
-![图像](../Images/74b46d7bdee3dcddb6f66523f5aa0f2e.png)
+![图像](img/74b46d7bdee3dcddb6f66523f5aa0f2e.png)
 
 在自然界中也极为稀有——犀牛是数据集中最不常见的物种之一
 
-### 有效的前5个因素
+### 有效的前 5 个因素
 
-我们认为以下5个关键因素对我们模型的成功贡献最大：
+我们认为以下 5 个关键因素对我们模型的成功贡献最大：
 
 ### **1\. 大规模验证集**
 
-这对确保模型良好泛化至关重要，因为我们在最后一个赛季——一个私有的、未见过的数据集上进行了评估。每个赛季都来自不同的年份。我们决定将整个赛季（第8赛季）留作验证集——我们希望它包含许多图像（近百万张！），且相对较新——因为测试集由尚未公布的第11赛季组成。这个选择也得到了对不同物种在赛季间分布的研究支持。我们注意到只有最后三个赛季（第8、第9和第10赛季）包含了一些相对稀有物种的照片。
+这对确保模型良好泛化至关重要，因为我们在最后一个赛季——一个私有的、未见过的数据集上进行了评估。每个赛季都来自不同的年份。我们决定将整个赛季（第 8 赛季）留作验证集——我们希望它包含许多图像（近百万张！），且相对较新——因为测试集由尚未公布的第 11 赛季组成。这个选择也得到了对不同物种在赛季间分布的研究支持。我们注意到只有最后三个赛季（第 8、第 9 和第 10 赛季）包含了一些相对稀有物种的照片。
 
 ### **2. 使用逐渐增长的分辨率进行训练**
 
-我们将训练过程分为三个阶段。每个阶段都有一部分是仅训练网络的最终层，随后训练所有层。在每个阶段，我们在分辨率逐渐提高的图像上训练模型，使我们可以更长时间地训练而不会过拟合。我们使用的最大分辨率是512×384，这仍然是提供的每个维度的四分之一。
+我们将训练过程分为三个阶段。每个阶段都有一部分是仅训练网络的最终层，随后训练所有层。在每个阶段，我们在分辨率逐渐提高的图像上训练模型，使我们可以更长时间地训练而不会过拟合。我们使用的最大分辨率是 512×384，这仍然是提供的每个维度的四分之一。
 
 最终模型在以下阶段进行训练：
 
-1.  在128×96像素图像上对网络最终层进行5个周期的训练
+1.  在 128×96 像素图像上对网络最终层进行 5 个周期的训练
 
-1.  在128×96像素图像上对所有层进行5个周期的训练
+1.  在 128×96 像素图像上对所有层进行 5 个周期的训练
 
-1.  在256×192像素图像上对网络最终层进行5个周期的训练
+1.  在 256×192 像素图像上对网络最终层进行 5 个周期的训练
 
-1.  在256×192像素图像上对所有层进行5个周期的训练
+1.  在 256×192 像素图像上对所有层进行 5 个周期的训练
 
-1.  在512×384像素图像上对网络最终层进行5个周期的训练
+1.  在 512×384 像素图像上对网络最终层进行 5 个周期的训练
 
-1.  在512×384像素图像上对所有层进行5个周期的训练
+1.  在 512×384 像素图像上对所有层进行 5 个周期的训练
 
-这种方法显著加快了我们的训练速度——即使是操作在128×96图像上的模型也达到了良好的准确性，而且我们可以比512×384模型更快地训练它。此时我们要特别感谢Pavel Pleskov，这位竞赛参与者以健康竞争的精神，与社区分享了一个缩小版的数据集，节省了我们的下载时间，并允许更多参与者加入。
+这种方法显著加快了我们的训练速度——即使是操作在 128×96 图像上的模型也达到了良好的准确性，而且我们可以比 512×384 模型更快地训练它。此时我们要特别感谢 Pavel Pleskov，这位竞赛参与者以健康竞争的精神，与社区分享了一个缩小版的数据集，节省了我们的下载时间，并允许更多参与者加入。
 
 ### **3. 数据增强 / 一周期拟合**
 
-我们在训练过程中使用了标准的图像增强（水平翻转、小旋转、小缩放、小变形和光照调整），以防止模型在像素级别上过拟合并帮助其泛化。我们使用了[Leslie Smith的一个周期策略](https://arxiv.org/pdf/1803.09820.pdf)来加速训练。
+我们在训练过程中使用了标准的图像增强（水平翻转、小旋转、小缩放、小变形和光照调整），以防止模型在像素级别上过拟合并帮助其泛化。我们使用了[Leslie Smith 的一个周期策略](https://arxiv.org/pdf/1803.09820.pdf)来加速训练。
 
 ### **4. 激进的欠采样**
 
 我们从训练集中去除了大部分最常见的类别（例如，95%的空照片），以在训练中更多地关注来自较少见类别的示例。这使得我们可以显著加快训练速度，帮助模型集中于输入空间的挑战性部分。这里的一个警告是需要以智能的方式去除这些示例——保留包含多个动物的示例，因为这些对模型来说更难处理。
 
-![图示](../Images/b843ba700b8e735ff3b98deeceb8be35.png)
+![图示](img/b843ba700b8e735ff3b98deeceb8be35.png)
 
-一张图片中的多只动物——对ML模型的挑战
+一张图片中的多只动物——对 ML 模型的挑战
 
 ### **5. 损失检查 / 后处理**
 
@@ -102,7 +102,7 @@
 
 ### 回顾过去——我们希望做的事情
 
-我们还有一些其他的想法很想尝试，但由于我们在比赛结束前仅有3周时间才加入，所以没有尝试。最值得注意的是：
+我们还有一些其他的想法很想尝试，但由于我们在比赛结束前仅有 3 周时间才加入，所以没有尝试。最值得注意的是：
 
 ### **焦点损失**
 
@@ -146,22 +146,22 @@
 
 **相关：**
 
-+   [创建你自己的计算机视觉沙盒](/2020/02/computer-vision-sandbox.html)
++   创建你自己的计算机视觉沙盒
 
-+   [从NeurIPS 2019中窥探现代AI的全貌](/2020/01/modern-ai-from-neurips-2019.html)
++   从 NeurIPS 2019 中窥探现代 AI 的全貌
 
-+   [我们日常生活中的AI和机器学习](/2020/02/ai-machine-learning-everyday-life.html)
++   我们日常生活中的 AI 和机器学习
 
 ### 更多相关内容
 
-+   [识别机器学习可解决问题的4个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
++   [识别机器学习可解决问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
 
 +   [如何识别时间序列数据集中缺失的数据](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [停止学习数据科学以寻找目的，找到目的再…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

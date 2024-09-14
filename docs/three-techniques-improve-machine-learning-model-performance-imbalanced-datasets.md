@@ -1,12 +1,12 @@
 # 提升机器学习模型在不平衡数据集上的表现的三种技术
 
-> 原文：[https://www.kdnuggets.com/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html](https://www.kdnuggets.com/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html)
+> 原文：[`www.kdnuggets.com/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html`](https://www.kdnuggets.com/2018/06/three-techniques-improve-machine-learning-model-performance-imbalanced-datasets.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) comments
 
 **由 [Sabber Ahamed](https://www.linkedin.com/in/sabber-ahamed/)，计算地球物理学家和机器学习爱好者**
 
-![Image](../Images/d95931c8777822e1ce4b0bdff0d5f216.png)
+![Image](img/d95931c8777822e1ce4b0bdff0d5f216.png)
 
 这个项目是我最近的一次“机器学习工程师”职位面试技能测试的一部分。我需要在 48 小时内完成这个项目，其中包括用 LaTeX 撰写 10 页报告。数据集具有类别且高度不平衡。这个项目的主要目标是处理数据不平衡问题。在以下小节中，我将描述我用来克服数据不平衡问题的三种技术。
 
@@ -14,7 +14,7 @@
 
 **数据集：** 训练数据中有三个标签 [1, 2, 3]，这使得问题成为一个多类别问题。训练数据集有 17 个特征和 38829 个数据点。而在测试数据中，有 16 个特征没有标签，并且有 16641 个数据点。训练数据集非常不平衡。大多数数据属于类别 1（95%），而类别 2 和类别 3 分别有 3.0% 和 0.87% 的数据。由于数据集没有任何空值且已进行缩放，因此我没有进行进一步处理。由于一些内部原因，我不会分享数据集，但会分享详细的结果和技术。以下图展示了数据不平衡情况。
 
-![](../Images/0dd80c79593879c874f341bf5cc91ca6.png)
+![](img/0dd80c79593879c874f341bf5cc91ca6.png)
 
 图 1：该图展示了训练数据集中的数据不平衡情况。大多数数据属于类别 1（95%），而类别 2 和类别 3 分别有 3.0% 和 0.87% 的数据。
 
@@ -32,7 +32,7 @@
 
 **为了解决数据不平衡问题，我使用了以下三种技术：**
 
-**A. 使用集成交叉验证 (CV):** 在这个项目中，我使用交叉验证来验证模型的稳健性。整个数据集被分为五个子集。在每次交叉验证中，5个子集中有4个用于训练，剩下的一个用于验证模型。在每次交叉验证中，模型还会对测试数据进行预测（预测概率，而不是类别）。交叉验证结束时，我们得到了五组测试预测概率。最后，我对所有类别的预测概率取平均。模型的训练性能稳定，并且在每次交叉验证中几乎保持恒定的召回率和F1分数。这项技术帮助我在一次Kaggle竞赛中很好地预测了测试数据，我在5355名参赛者中排名第25位，属于前1%。以下部分代码片段展示了集成交叉验证的实现：
+**A. 使用集成交叉验证 (CV):** 在这个项目中，我使用交叉验证来验证模型的稳健性。整个数据集被分为五个子集。在每次交叉验证中，5 个子集中有 4 个用于训练，剩下的一个用于验证模型。在每次交叉验证中，模型还会对测试数据进行预测（预测概率，而不是类别）。交叉验证结束时，我们得到了五组测试预测概率。最后，我对所有类别的预测概率取平均。模型的训练性能稳定，并且在每次交叉验证中几乎保持恒定的召回率和 F1 分数。这项技术帮助我在一次 Kaggle 竞赛中很好地预测了测试数据，我在 5355 名参赛者中排名第 25 位，属于前 1%。以下部分代码片段展示了集成交叉验证的实现：
 
 ```py
 for j, (train_idx, valid_idx) in enumerate(folds):
@@ -63,7 +63,7 @@ for j, (train_idx, valid_idx) in enumerate(folds):
             test_proba /= self.n_splits
 ```
 
-**B. 设置类别权重/重要性:** 成本敏感学习是使随机森林更适合从高度不平衡数据中学习的众多方法之一。随机森林倾向于对多数类别有偏见。因此，对少数类别误分类施加高额惩罚可能会有帮助。由于这项技术已被证明能提高模型性能，我为少数类别分配了较高的权重（即，较高的误分类成本）。然后，将类别权重纳入随机森林算法中。我根据类别1和类别中的数据集数量之比来确定类别权重。例如，类别1和类别3的数据集数量之比约为110，类别1和类别2的比率约为26。之后，我稍微调整了这些数值，以在试验和错误的基础上提高模型性能。以下代码片段展示了不同类别权重的实现。
+**B. 设置类别权重/重要性:** 成本敏感学习是使随机森林更适合从高度不平衡数据中学习的众多方法之一。随机森林倾向于对多数类别有偏见。因此，对少数类别误分类施加高额惩罚可能会有帮助。由于这项技术已被证明能提高模型性能，我为少数类别分配了较高的权重（即，较高的误分类成本）。然后，将类别权重纳入随机森林算法中。我根据类别 1 和类别中的数据集数量之比来确定类别权重。例如，类别 1 和类别 3 的数据集数量之比约为 110，类别 1 和类别 2 的比率约为 26。之后，我稍微调整了这些数值，以在试验和错误的基础上提高模型性能。以下代码片段展示了不同类别权重的实现。
 
 ```py
 from sklearn.ensemble import RandomForestClassifier
@@ -81,9 +81,9 @@ rdf = RandomForestClassifier(bootstrap=True,
             verbose=0, warm_start=False)
 ```
 
-**C. 过度预测标签而非欠预测:** 这是一种可选的技术。我应用了这种技术，因为我被要求实现。对我来说，这种方法在提高少数类别的性能方面非常有效。简而言之，该技术是对模型的误分类类别3给予最大惩罚，对类别2给予较少的惩罚，对类别1给予最少的惩罚。
+**C. 过度预测标签而非欠预测:** 这是一种可选的技术。我应用了这种技术，因为我被要求实现。对我来说，这种方法在提高少数类别的性能方面非常有效。简而言之，该技术是对模型的误分类类别 3 给予最大惩罚，对类别 2 给予较少的惩罚，对类别 1 给予最少的惩罚。
 
-为了实现该方法，我为每个类别调整了概率阈值。为此，我按照递增顺序设置了类别3、类别2和类别1的概率（即，类别3 = 0.25，类别2 = 0.35，类别1 = 0.50），以迫使模型过度预测类别。该算法的详细实现可以在本项目的[Github页面](https://github.com/msahamed/handle_imabalnce_class)找到。
+为了实现该方法，我为每个类别调整了概率阈值。为此，我按照递增顺序设置了类别 3、类别 2 和类别 1 的概率（即，类别 3 = 0.25，类别 2 = 0.35，类别 1 = 0.50），以迫使模型过度预测类别。该算法的详细实现可以在本项目的[Github 页面](https://github.com/msahamed/handle_imabalnce_class)找到。
 
 ### 最终结果：
 
@@ -91,15 +91,15 @@ rdf = RandomForestClassifier(bootstrap=True,
 
 **1. 使用集成交叉验证的结果：**
 
-![](../Images/7e6e91a0261e4ccef8b4c66c382c4743.png)
+![](img/7e6e91a0261e4ccef8b4c66c382c4743.png)
 
 **2. 使用集成交叉验证 + 类别权重的结果：**
 
-![](../Images/f9b62acb4bcfb59d2baa192d99f976c6.png)
+![](img/f9b62acb4bcfb59d2baa192d99f976c6.png)
 
 **3\. 使用集成交叉验证 + 类别权重 + 过度预测标签的结果：**
 
-![](../Images/d1a9e45d40d5bfdb074b638f74d497e3.png)
+![](img/d1a9e45d40d5bfdb074b638f74d497e3.png)
 
 ### **结论**
 
@@ -113,21 +113,21 @@ rdf = RandomForestClassifier(bootstrap=True,
 
 **相关：**
 
-+   [处理不平衡数据的 7 种技术](/2017/06/7-techniques-handle-imbalanced-data.html)
++   处理不平衡数据的 7 种技术
 
-+   [从不平衡类别中学习](/2016/08/learning-from-imbalanced-classes.html)
++   从不平衡类别中学习
 
-+   [处理不平衡类别、支持向量机、随机森林和决策树的 Python 实现](/2016/04/unbalanced-classes-svm-random-forests-python.html)
++   处理不平衡类别、支持向量机、随机森林和决策树的 Python 实现
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -135,7 +135,7 @@ rdf = RandomForestClassifier(bootstrap=True,
 
 +   [处理不平衡数据的 7 种技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [无监督解缠表示学习在类别不平衡数据集中的应用…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
 

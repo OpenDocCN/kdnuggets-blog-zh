@@ -1,8 +1,8 @@
 # 数据科学家的虚拟演示技巧
 
-> 原文：[https://www.kdnuggets.com/2021/11/virtual-presentation-tips-data-scientists.html](https://www.kdnuggets.com/2021/11/virtual-presentation-tips-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2021/11/virtual-presentation-tips-data-scientists.html`](https://www.kdnuggets.com/2021/11/virtual-presentation-tips-data-scientists.html)
 
-[评论](#comments)
+评论
 
 **[迈克尔·伯克](https://www.linkedin.com/in/michael-berk-48783a146/)，Tubi 的数据科学家**
 
@@ -12,7 +12,7 @@
 
 有一句基于研究的老话说，93% 的沟通是非语言的。55% 的沟通是肢体语言，38% 是声音语调，7% 是口头表达。
 
-![数据科学演示职业推广沟通实习生实习工作数据科学技能数据科学软技能](../Images/f5c601ed1334af05e363d1ff1c08a9d7.png)
+![数据科学演示职业推广沟通实习生实习工作数据科学技能数据科学软技能](img/f5c601ed1334af05e363d1ff1c08a9d7.png)
 
 图 1：沟通故障。图像来源：作者。
 
@@ -24,7 +24,7 @@
 
 另一个有趣的想法是内容、设计和交付框架 — [源](https://data36.com/presentation-tips-for-data-professionals/)。
 
-![数据科学演示职业推广沟通实习生实习工作数据科学技能数据科学软技能](../Images/c99b7e5897753df6ffa6f605735a4b76.png)
+![数据科学演示职业推广沟通实习生实习工作数据科学技能数据科学软技能](img/c99b7e5897753df6ffa6f605735a4b76.png)
 
 图 2：内容、设计、交付框架。图像来源：作者。
 
@@ -70,9 +70,9 @@
 
 如果你旨在提前结束会议，你必须做到结构化、简明扼要和相关。
 
-### 3 — 一些80/20的小贴士
+### 3 — 一些 80/20 的小贴士
 
-上述两个部分可能需要付出较多劳动，因此这里有一些简单的小贴士，希望能让你在20%的时间内获得80%的结果。
+上述两个部分可能需要付出较多劳动，因此这里有一些简单的小贴士，希望能让你在 20%的时间内获得 80%的结果。
 
 +   **适应你的沟通风格。** 如果你是正式的演讲者，就要正式地讲话。如果你讲笑话，就讲笑话。通过利用你自然的谈话方式，你会变得更自信、更易于亲近，从而更有效。
 
@@ -84,17 +84,17 @@
 
 *感谢阅读！上述所有资源对我和我的职业生涯都产生了很大影响。请分享你自己的经验。*
 
-**简介：[迈克尔·伯克](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[https://michaeldberk.com/](https://michaeldberk.com/)**) 是 Tubi 的数据科学家。
+**简介：[迈克尔·伯克](https://www.linkedin.com/in/michael-berk-48783a146/)** (**[`michaeldberk.com/`](https://michaeldberk.com/)**) 是 Tubi 的数据科学家。
 
 [原文](https://towardsdatascience.com/virtual-presentation-tips-for-data-scientists-d6ef4659024). 已获授权转载。
 
 **相关：**
 
-+   [如何发现机器学习模型中的弱点](/2021/09/weaknesses-machine-learning-models.html)
++   如何发现机器学习模型中的弱点
 
-+   [不要浪费时间建立你的数据科学网络](/2021/11/waste-time-building-data-science-network.html)
++   不要浪费时间建立你的数据科学网络
 
-+   [5 个使数据科学家与其他职业区别开来的因素](/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   5 个使数据科学家与其他职业区别开来的因素
 
 ### 更多相关内容
 

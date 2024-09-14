@@ -1,8 +1,8 @@
 # 掌握数据科学所需的 SQL 的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html`](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
 
-![掌握数据科学所需的 SQL 的 7 个步骤](../Images/fc98e8330f52fbe4e098c359fec1932e.png)
+![掌握数据科学所需的 SQL 的 7 个步骤](img/fc98e8330f52fbe4e098c359fec1932e.png)
 
 # 为什么你应该学习 SQL 来成为一名数据科学家？
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -32,41 +32,41 @@
 
 即使是那些需要你构建复杂预测算法的任务，掌握 SQL 也是必须的。大多数组织中的数据管道以关系数据库的形式存储，你需要从这些数据库中提取数据并进行预处理，才能开始构建机器学习模型。
 
-如果你缺乏SQL知识，即使你在机器学习方面非常专业，你也会在数据准备和分析上花费比预期更多的时间。
+如果你缺乏 SQL 知识，即使你在机器学习方面非常专业，你也会在数据准备和分析上花费比预期更多的时间。
 
-在这篇文章中，我将带你了解掌握SQL所需的7个步骤，以适用于任何数据科学或分析角色。
+在这篇文章中，我将带你了解掌握 SQL 所需的 7 个步骤，以适用于任何数据科学或分析角色。
 
-# 如何学习数据科学的SQL
+# 如何学习数据科学的 SQL
 
-## 第1步：SQL基础
+## 第 1 步：SQL 基础
 
 作为一名数据科学家，你将从数据库中读取数据并进行分析以适应你的使用场景。通常，你不需要创建或操作现有的数据库 — 公司有专门的团队来完成这些任务。
 
-如果你完全没有SQL知识，先从这个教程开始，了解什么是RDBMS。
+如果你完全没有 SQL 知识，先从这个教程开始，了解什么是 RDBMS。
 
-然后，观看Lucidchart的[这个](https://www.youtube.com/watch?v=QpdhBUYk7Kk)YouTube视频，学习如何创建和读取ER图。ER图是一种结构化图表，用于可视化数据库中的表以及它们之间的关系。作为数据科学家，当从不同的表中提取数据时，你通常需要参考ER图以理解表之间的互动关系。
+然后，观看 Lucidchart 的[这个](https://www.youtube.com/watch?v=QpdhBUYk7Kk)YouTube 视频，学习如何创建和读取 ER 图。ER 图是一种结构化图表，用于可视化数据库中的表以及它们之间的关系。作为数据科学家，当从不同的表中提取数据时，你通常需要参考 ER 图以理解表之间的互动关系。
 
-之后，你可以立即开始学习如何在SQL中查询数据。我强烈推荐你按照W3Schools的这些教程来学习以下命令 — [SELECT](https://www.w3schools.com/sql/sql_select.asp)、[IN](https://www.w3schools.com/sql/sql_in.asp)、[WHERE](https://www.w3schools.com/sql/sql_where.asp)、[BETWEEN](https://www.w3schools.com/sql/sql_between.asp)、[AND](https://www.w3schools.com/sql/sql_and_or.asp)、[OR](https://www.w3schools.com/sql/sql_and_or.asp)、[NOT](https://www.w3schools.com/sql/sql_and_or.asp)、[LIKE](https://www.w3schools.com/sql/sql_like.asp)。
+之后，你可以立即开始学习如何在 SQL 中查询数据。我强烈推荐你按照 W3Schools 的这些教程来学习以下命令 — [SELECT](https://www.w3schools.com/sql/sql_select.asp)、[IN](https://www.w3schools.com/sql/sql_in.asp)、[WHERE](https://www.w3schools.com/sql/sql_where.asp)、[BETWEEN](https://www.w3schools.com/sql/sql_between.asp)、[AND](https://www.w3schools.com/sql/sql_and_or.asp)、[OR](https://www.w3schools.com/sql/sql_and_or.asp)、[NOT](https://www.w3schools.com/sql/sql_and_or.asp)、[LIKE](https://www.w3schools.com/sql/sql_like.asp)。
 
-这些是一些最简单的SQL命令，用于查询和筛选数据库表。一旦你熟悉了这些命令，就可以开始学习[CASE](https://www.w3schools.com/sql/sql_case.asp)语句。它们与任何编程语言中的if-else命令非常相似。
+这些是一些最简单的 SQL 命令，用于查询和筛选数据库表。一旦你熟悉了这些命令，就可以开始学习[CASE](https://www.w3schools.com/sql/sql_case.asp)语句。它们与任何编程语言中的 if-else 命令非常相似。
 
-## 第2步：聚合
+## 第 2 步：聚合
 
-SQL聚合函数用于对多个表值执行计算并返回单一结果。SQL有5个聚合函数 — [SUM](https://www.w3schools.com/mysql/mysql_count_avg_sum.asp)、[COUNT](https://www.w3schools.com/mysql/mysql_count_avg_sum.asp)、[AVG](https://www.w3schools.com/mysql/mysql_count_avg_sum.asp)、[MIN](https://www.w3schools.com/sql/sql_min_max.asp)、[MAX](https://www.w3schools.com/sql/sql_min_max.asp)。
+SQL 聚合函数用于对多个表值执行计算并返回单一结果。SQL 有 5 个聚合函数 — [SUM](https://www.w3schools.com/mysql/mysql_count_avg_sum.asp)、[COUNT](https://www.w3schools.com/mysql/mysql_count_avg_sum.asp)、[AVG](https://www.w3schools.com/mysql/mysql_count_avg_sum.asp)、[MIN](https://www.w3schools.com/sql/sql_min_max.asp)、[MAX](https://www.w3schools.com/sql/sql_min_max.asp)。
 
-## 第3步：分组和排序
+## 第 3 步：分组和排序
 
 接下来，了解[GROUPBY](https://www.w3schools.com/mysql/mysql_groupby.asp)和[ORDERBY](https://www.w3schools.com/mysql/mysql_orderby.asp)命令。这些命令在你需要以不同的分组查看数据或按特定顺序排序行时特别有用。
 
 学习[HAVING](https://www.w3schools.com/mysql/mysql_having.asp)子句也是很有用的，因为它在上述命令中经常使用。
 
-## 第4步：连接
+## 第 4 步：连接
 
-上述所有查询只能用于从单个表中提取数据。如果你想要结合多个表中的数据，你需要学习JOIN命令。
+上述所有查询只能用于从单个表中提取数据。如果你想要结合多个表中的数据，你需要学习 JOIN 命令。
 
 这里是 SQL 连接的可视化表示：
 
-![SQL 连接的可视化表示](../Images/af4aa524a89ff79b414441afaebcdb0f.png)
+![SQL 连接的可视化表示](img/af4aa524a89ff79b414441afaebcdb0f.png)
 
 图片来源：[CodeProject](https://www.codeproject.com/)
 

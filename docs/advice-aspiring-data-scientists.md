@@ -1,22 +1,22 @@
 # 对于有志数据科学家的建议
 
-> 原文：[https://www.kdnuggets.com/2020/10/advice-aspiring-data-scientists.html](https://www.kdnuggets.com/2020/10/advice-aspiring-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/10/advice-aspiring-data-scientists.html`](https://www.kdnuggets.com/2020/10/advice-aspiring-data-scientists.html)
 
-[评论](#comments)
+评论
 
-**由[Tyler Richards](https://tylerjrichards.medium.com/)，Facebook的数据科学家**
+**由[Tyler Richards](https://tylerjrichards.medium.com/)，Facebook 的数据科学家**
 
-![Image](../Images/aae170049f1bc304d02a9afd965fcd40.png)
+![Image](img/aae170049f1bc304d02a9afd965fcd40.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -32,7 +32,7 @@
 
 **2\. 将数据科学应用于你喜欢的事物**
 
-成为某个领域的高手是困难的（当然），将数据科学应用于你关心的领域可以帮助你保持动力并脱颖而出。我有几个例子：利用[UF（母校）的学生政府选举](https://towardsdatascience.com/two-decades-of-uf-student-government-elections-using-machine-learning-for-deeper-insights-c137c0586466)来学习机器学习方法，或通过[记录我们的乒乓球比赛](http://www.tylerjrichards.com/Ping_pong.html)来跟踪朋友的Elo评分。这些项目教会了我重要的技能，而不会让人觉得是在工作。
+成为某个领域的高手是困难的（当然），将数据科学应用于你关心的领域可以帮助你保持动力并脱颖而出。我有几个例子：利用[UF（母校）的学生政府选举](https://towardsdatascience.com/two-decades-of-uf-student-government-elections-using-machine-learning-for-deeper-insights-c137c0586466)来学习机器学习方法，或通过[记录我们的乒乓球比赛](http://www.tylerjrichards.com/Ping_pong.html)来跟踪朋友的 Elo 评分。这些项目教会了我重要的技能，而不会让人觉得是在工作。
 
 获得具有代表性的实践对未来工作至关重要，因为这种实践只能带来两种结果之一：
 
@@ -44,11 +44,11 @@ a. 认识到你其实不喜欢这种数据科学类型，在这种情况下你�
 
 **3\. 最小化‘证明能力的点击次数’**
 
-招聘人员会在你的简历上花15秒钟，潜在团队在你的简历 + 网站/Github上最多花1-5分钟（平均而言，访问 [我的作品集网站](http://tylerjrichards.com/) 的人会停留2分钟16秒后才离开）。这两组人通常使用GPA、学校质量或来自技术公司的数据经验等能力的替代指标（我称之为：状态证明）。因此，你应该仔细考虑向读者传达你能够胜任他们招聘的工作的时间。一个粗略的衡量标准是“证明能力的点击次数”。
+招聘人员会在你的简历上花 15 秒钟，潜在团队在你的简历 + 网站/Github 上最多花 1-5 分钟（平均而言，访问 [我的作品集网站](http://tylerjrichards.com/) 的人会停留 2 分钟 16 秒后才离开）。这两组人通常使用 GPA、学校质量或来自技术公司的数据经验等能力的替代指标（我称之为：状态证明）。因此，你应该仔细考虑向读者传达你能够胜任他们招聘的工作的时间。一个粗略的衡量标准是“证明能力的点击次数”。
 
-如果招聘人员需要点击你Github上的正确仓库，然后点击文件，直到找到Jupyter notebook中的不可读代码（更别提没有注释了），你已经输了。如果招聘人员在你的简历上看到机器学习，但需要5次点击才能看到你做的任何机器学习产品或代码，你已经输了。任何人都可以在简历上撒谎；要快速引导读者的注意力，你将处于显著更好的位置。
+如果招聘人员需要点击你 Github 上的正确仓库，然后点击文件，直到找到 Jupyter notebook 中的不可读代码（更别提没有注释了），你已经输了。如果招聘人员在你的简历上看到机器学习，但需要 5 次点击才能看到你做的任何机器学习产品或代码，你已经输了。任何人都可以在简历上撒谎；要快速引导读者的注意力，你将处于显著更好的位置。
 
-我对优化这一指标的思考方式在 [我的网站](http://tylerjrichards.com/) 上非常清晰。大约需要10秒钟来浏览文本（我敢打赌大多数人不会完全阅读），然后人们可以立即选择一个数据科学项目查看，这些项目按展示我能够完成的工作的效果排序。对于刚开始学习数据科学，我强烈建议制作一个网站（即使是一个bootstrap模板网站也可以），并将其托管在Github pages或heroku上，并使用你自己的域名。
+我对优化这一指标的思考方式在 [我的网站](http://tylerjrichards.com/) 上非常清晰。大约需要 10 秒钟来浏览文本（我敢打赌大多数人不会完全阅读），然后人们可以立即选择一个数据科学项目查看，这些项目按展示我能够完成的工作的效果排序。对于刚开始学习数据科学，我强烈建议制作一个网站（即使是一个 bootstrap 模板网站也可以），并将其托管在 Github pages 或 heroku 上，并使用你自己的域名。
 
 **4\. 通过研究或入门级工作学习**
 
@@ -100,11 +100,11 @@ a. 认识到你其实不喜欢这种数据科学类型，在这种情况下你�
 
 **相关：**
 
-+   [如何决定学习哪些数据技能](/2020/09/decide-data-skills-learn.html)
++   如何决定学习哪些数据技能
 
-+   [初级和高级数据科学家的无声差异](/2020/10/unspoken-difference-junior-senior-data-scientists.html)
++   初级和高级数据科学家的无声差异
 
-+   [作为数据科学家的 6 个月中学到的 6 个教训](/2020/10/6-lessons-6-months-data-scientist.html)
++   作为数据科学家的 6 个月中学到的 6 个教训
 
 ### 更多相关主题
 
@@ -114,7 +114,7 @@ a. 认识到你其实不喜欢这种数据科学类型，在这种情况下你�
 
 +   [为什么数据科学家期待 Google Bard 提供有缺陷的建议](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
 
-+   [如何获得机器学习职位：来自Meta、Google Brain和SAP工程师的建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
++   [如何获得机器学习职位：来自 Meta、Google Brain 和 SAP 工程师的建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
 
 +   [高保真合成数据适用于数据工程师和数据科学家](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)
 

@@ -1,8 +1,8 @@
 # 使用 llamafile 分发和运行 LLMs 的 5 个简单步骤
 
-> 原文：[https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps](https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps)
+> 原文：[`www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps`](https://www.kdnuggets.com/distribute-and-run-llms-with-llamafile-in-5-simple-steps)
 
-![使用 llamafile 分发和运行 LLMs 的 5 个简单步骤](../Images/f0ab7be9ca7fc383ce9e47655b07be97.png)
+![使用 llamafile 分发和运行 LLMs 的 5 个简单步骤](img/f0ab7be9ca7fc383ce9e47655b07be97.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -70,27 +70,27 @@ llava-v1.5-7b-q4.llamafile.exe -ngl 9999
 
 # 第 5 步：与用户界面互动
 
-运行 llamafile 后，它应该会自动打开你的默认浏览器并显示如下所示的用户界面。如果没有，打开浏览器并手动导航到 [http://localhost:8080](http://localhost:8080)。
+运行 llamafile 后，它应该会自动打开你的默认浏览器并显示如下所示的用户界面。如果没有，打开浏览器并手动导航到 [`localhost:8080`](http://localhost:8080)。
 
-![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](../Images/42d390371b6887443db5df99300b6657.png)
+![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](img/42d390371b6887443db5df99300b6657.png)
 
 图片由作者提供
 
 让我们通过一个简单的问题来与界面互动，以提供一些与 LLaVa 模型相关的信息。以下是模型生成的回复：
 
-![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](../Images/86d758132c338800202b92705f4f5437.png)
+![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](img/86d758132c338800202b92705f4f5437.png)
 
 图片由作者提供
 
 该回复强调了 LLaVa 模型的开发方法及其应用。生成的回复相当迅速。让我们尝试实施另一个任务。我们将上传以下带有详细信息的银行卡样本图像，并从中提取所需的信息。
 
-![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](../Images/f2154617727a40577296a6d51bdb1cd4.png)
+![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](img/f2154617727a40577296a6d51bdb1cd4.png)
 
 图片由 [Ruby Thompson](https://qph.cf2.quoracdn.net/main-qimg-664f0732755fc0ba072da4286668fef8-lq) 提供
 
 这是回复：
 
-![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](../Images/481ad10a447dea169aa9fba0fe91b01e.png)
+![分发和运行 LLMs 的 llamafile 的 5 个简单步骤](img/481ad10a447dea169aa9fba0fe91b01e.png)
 
 图片由作者提供
 

@@ -1,8 +1,8 @@
 # 决策树算法解析
 
-> 原文：[https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)
+> 原文：[`www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html`](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)
 
-![](../Images/3a3912c533fa3be38427762c11a17e10.png)
+![](img/3a3912c533fa3be38427762c11a17e10.png)
 
 ### 介绍
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -54,7 +54,7 @@
 
 1.  **父节点和子节点：** 一个被分割成子节点的节点称为子节点的父节点，而子节点是父节点的子节点。
 
-![](../Images/b8fac40aba9c2297b93f56d82a72a308.png)
+![](img/b8fac40aba9c2297b93f56d82a72a308.png)
 
 决策树通过从根节点将示例向下排序到某个叶节点/终端节点来进行分类，叶节点/终端节点提供了示例的分类。
 
@@ -134,21 +134,21 @@ ID3 算法通过自顶向下的[贪婪搜索](https://www.hackerearth.com/practi
 
 熵是处理信息中随机性的度量。熵越高，从信息中得出结论就越困难。掷硬币就是提供随机信息的一个例子。
 
-![](../Images/e47ddfca8b8db435c48ef441aa56a83f.png)
+![](img/e47ddfca8b8db435c48ef441aa56a83f.png)
 
 从上面的图表中可以明显看出，当概率为 0 或 1 时，熵 H(X) 为零。当概率为 0.5 时，熵最大，因为它在数据中投射了完美的随机性，并且无法准确确定结果。
 
 > **ID3 遵循规则 — 熵为零的分支是叶节点，熵大于零的分支需要进一步拆分。**
 
-数学上，1个属性的熵表示为：
+数学上，1 个属性的熵表示为：
 
-![](../Images/57204386d55659ed9b46775794a49db7.png)
+![](img/57204386d55659ed9b46775794a49db7.png)
 
 其中 **S → 当前状态，Pi → 状态 S 或类 *i* 的事件 *i* 的概率，或状态 S 节点中的类 *i* 的百分比。**
 
 数学上，多属性的熵表示为：
 
-![](../Images/a1944b5e9919dde88ddd097cdd6b44d6.png)
+![](img/a1944b5e9919dde88ddd097cdd6b44d6.png)
 
 其中 **T → 当前状态和 X → 选择的属性**
 
@@ -156,27 +156,27 @@ ID3 算法通过自顶向下的[贪婪搜索](https://www.hackerearth.com/practi
 
 信息增益或 **IG** 是一种统计属性，用于测量给定属性根据其目标分类分离训练样本的效果。构建决策树的核心是找到一个能返回最高信息增益和最小熵的属性。
 
-![图示](../Images/d88b86d888a94376d44650a42cbea64e.png)[信息增益](https://becominghuman.ai/decision-trees-in-machine-learning-f362b296594a?gi=a8ffb5170258)
+![图示](img/d88b86d888a94376d44650a42cbea64e.png)[信息增益](https://becominghuman.ai/decision-trees-in-machine-learning-f362b296594a?gi=a8ffb5170258)
 
 信息增益是熵的减少。它计算了基于给定属性值的分裂前后的熵差。ID3（迭代二分器）决策树算法使用信息增益。
 
 数学上，IG 表示为：
 
-![](../Images/4c38c19ad3a40772df5891ecee13348e.png)
+![](img/4c38c19ad3a40772df5891ecee13348e.png)
 
 更简单地说，我们可以得出结论：
 
-![](../Images/4be9c5fa0c7275f79eee4c7096462fb3.png)
+![](img/4be9c5fa0c7275f79eee4c7096462fb3.png)
 
 [信息增益](https://towardsdatascience.com/from-a-single-decision-tree-to-a-random-forest-b9523be65147)
 
-其中“before”是分裂前的数据集，K是分裂生成的子集数量，(j, after)是分裂后的子集 j。
+其中“before”是分裂前的数据集，K 是分裂生成的子集数量，(j, after)是分裂后的子集 j。
 
 ### 基尼指数
 
-你可以将基尼指数理解为用来评估数据集分裂的成本函数。它通过从1中减去每个类别的平方概率总和来计算。它偏向于较大的分区且易于实现，而信息增益则偏向于较小的具有不同值的分区。
+你可以将基尼指数理解为用来评估数据集分裂的成本函数。它通过从 1 中减去每个类别的平方概率总和来计算。它偏向于较大的分区且易于实现，而信息增益则偏向于较小的具有不同值的分区。
 
-![图示](../Images/6669e4c680091234497fb509d5101542.png)基尼指数
+![图示](img/6669e4c680091234497fb509d5101542.png)基尼指数
 
 基尼指数适用于类别目标变量“成功”或“失败”。它仅执行二分裂。
 
@@ -198,7 +198,7 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 > 假设我们有一个数据集，其中包含用户和他们的电影类型偏好，基于性别、年龄组、评分等变量。借助信息增益，你可以在‘性别’上进行拆分（假设它具有最高的信息增益），现在‘年龄组’和‘评分’变量可能同样重要，通过增益比的帮助，它会惩罚具有更多不同值的变量，这将帮助我们在下一个层次决定拆分。
 
-![图](../Images/a732854b47d32f5f3cdf5fed4b9fa605.png)[增益比](https://towardsdatascience.com/from-a-single-decision-tree-to-a-random-forest-b9523be65147)
+![图](img/a732854b47d32f5f3cdf5fed4b9fa605.png)[增益比](https://towardsdatascience.com/from-a-single-decision-tree-to-a-random-forest-b9523be65147)
 
 其中“before”是拆分前的数据集，K 是拆分生成的子集的数量，(j, after) 是拆分后子集 j。
 
@@ -206,7 +206,7 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 **方差减少** 是一种用于连续目标变量（回归问题）的算法。该算法使用方差的标准公式来选择最佳拆分。选择方差较低的拆分作为拆分总体的标准：
 
-![](../Images/bb8247ef89486499b2dbcc281977b898.png)
+![](img/bb8247ef89486499b2dbcc281977b898.png)
 
 上面的 X-bar 是值的均值，X 是实际值，n 是值的数量。
 
@@ -226,7 +226,7 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 从数学上讲，卡方被表示为：
 
-![](../Images/c6e29fe0d58d993aae89fa9762398c2f.png)
+![](img/c6e29fe0d58d993aae89fa9762398c2f.png)
 
 **计算拆分卡方的步骤：**
 
@@ -236,7 +236,7 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 ### **如何避免/对抗决策树中的过拟合？**
 
-决策树的常见问题，特别是当表中列很多时，它们的拟合程度很高。有时，看起来树似乎记住了训练数据集。如果决策树没有设置限制，它会在训练数据集上提供100%的准确率，因为在最坏的情况下，它会为每个观察值生成一个叶子节点。因此，这会影响对训练集之外样本的预测准确性。
+决策树的常见问题，特别是当表中列很多时，它们的拟合程度很高。有时，看起来树似乎记住了训练数据集。如果决策树没有设置限制，它会在训练数据集上提供 100%的准确率，因为在最坏的情况下，它会为每个观察值生成一个叶子节点。因此，这会影响对训练集之外样本的预测准确性。
 
 这里有两种去除过拟合的方法：
 
@@ -248,11 +248,11 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 分裂过程会生成完全生长的树，直到达到停止标准。但完全生长的树很可能会过拟合数据，从而在未见数据上的准确性较差。
 
-![图示](../Images/1c59703d8f644408230aa4c6ea5e4684.png)[剪枝的实际应用](https://gfycat.com/enchantedyellowishbarasinga)
+![图示](img/1c59703d8f644408230aa4c6ea5e4684.png)[剪枝的实际应用](https://gfycat.com/enchantedyellowishbarasinga)
 
-在**剪枝**中，你会修剪树的分支，即从叶子节点开始移除决策节点，以确保总体准确性不受影响。这是通过将实际训练集分成两个集合来完成的：训练数据集D和验证数据集V。使用分隔后的训练数据集D来准备决策树。然后继续修剪树，以优化验证数据集V的准确性。
+在**剪枝**中，你会修剪树的分支，即从叶子节点开始移除决策节点，以确保总体准确性不受影响。这是通过将实际训练集分成两个集合来完成的：训练数据集 D 和验证数据集 V。使用分隔后的训练数据集 D 来准备决策树。然后继续修剪树，以优化验证数据集 V 的准确性。
 
-![图示](../Images/7bb957cdb54435ba9af5e032a34af199.png)[剪枝](https://www.cs.cmu.edu/~bhiksha/courses/10-601/decisiontrees/)
+![图示](img/7bb957cdb54435ba9af5e032a34af199.png)[剪枝](https://www.cs.cmu.edu/~bhiksha/courses/10-601/decisiontrees/)
 
 在上述图示中，树的左侧的‘年龄’属性已被剪枝，因为它在树的右侧更重要，因此去除了过拟合。
 
@@ -272,7 +272,7 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 在自助法技术中，数据集被划分为**N**个样本，使用随机抽样。然后，使用单一学习算法在所有样本上建立模型。之后，通过投票或平均的方式将结果预测合并在一起。
 
-![图示](../Images/9a79dc5b0e44ede04284ddcb44888a0a.png)[随机森林的实际应用](https://towardsdatascience.com/why-random-forests-outperform-decision-trees-1b0f175a0b5)
+![图示](img/9a79dc5b0e44ede04284ddcb44888a0a.png)[随机森林的实际应用](https://towardsdatascience.com/why-random-forests-outperform-decision-trees-1b0f175a0b5)
 
 ### 线性模型还是基于树的模型哪个更好？
 
@@ -284,7 +284,7 @@ C4.5，作为 ID3 的改进，使用增益比，这是一种信息增益的修�
 
 1.  如果你需要建立一个容易向人们解释的模型，决策树模型总比线性模型更好。决策树模型甚至比线性回归更易于解释！
 
-### 使用Scikit-learn构建决策树分类器
+### 使用 Scikit-learn 构建决策树分类器
 
 我们拥有的数据集是超市数据，可以从[这里](https://drive.google.com/open?id=1x1KglkvJxNn8C8kzeV96YePFnCUzXhBS)下载。
 
@@ -296,14 +296,14 @@ import matplotlib.pyplot as plt
 import pandas as pd
 ```
 
-加载数据集。它包括5个特征：`UserID`、`Gender`、`Age`、`EstimatedSalary` 和 `Purchased`。
+加载数据集。它包括 5 个特征：`UserID`、`Gender`、`Age`、`EstimatedSalary` 和 `Purchased`。
 
 ```py
 data = pd.read_csv('/Users/ML/DecisionTree/Social.csv')
 data.head()
 ```
 
-![图](../Images/3b51f398bfcc049794918ba1ef132e40.png) 数据集
+![图](img/3b51f398bfcc049794918ba1ef132e40.png) 数据集
 
 我们将仅使用 `Age` 和 `EstimatedSalary` 作为我们的自变量 `X`，因为像 `Gender` 和 `User ID` 这样的其他特征与个人的购买能力无关且没有影响。Purchased 是我们的因变量 `y`。
 
@@ -345,7 +345,7 @@ y_pred = classifier.predict(X_test)#Accuracy
 from sklearn import metricsprint('Accuracy Score:', metrics.accuracy_score(y_test,y_pred))
 ```
 
-决策树分类器的准确率为91%。
+决策树分类器的准确率为 91%。
 
 混淆矩阵
 
@@ -356,7 +356,7 @@ array([[64,  4],
        [ 2, 30]])
 ```
 
-这意味着6个观察结果被归类为虚假。
+这意味着 6 个观察结果被归类为虚假。
 
 **让我们首先可视化模型预测结果。**
 
@@ -374,17 +374,17 @@ plt.legend()
 plt.show()
 ```
 
-![](../Images/ddd705134cdcc0f99c1814fe4b72041a.png)
+![](img/ddd705134cdcc0f99c1814fe4b72041a.png)
 
 **让我们也可视化一下这棵树：**
 
-你可以使用Scikit-learn的 *export_graphviz* 函数在Jupyter notebook中显示树。为了绘制树，你还需要安装Graphviz和pydotplus。
+你可以使用 Scikit-learn 的 *export_graphviz* 函数在 Jupyter notebook 中显示树。为了绘制树，你还需要安装 Graphviz 和 pydotplus。
 
 `conda install python-graphviz`
 
 `pip install pydotplus`
 
-*export_graphviz* 函数将决策树分类器转换为dot文件，pydotplus 将此dot文件转换为png或在Jupyter中可显示的形式。
+*export_graphviz* 函数将决策树分类器转换为 dot 文件，pydotplus 将此 dot 文件转换为 png 或在 Jupyter 中可显示的形式。
 
 ```py
 from sklearn.tree import export_graphviz
@@ -398,7 +398,7 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 Image(graph.create_png())
 ```
 
-![图](../Images/7f1f7d8aa6d9c4a09aa5e79ec82e76a1.png) 决策树。
+![图](img/7f1f7d8aa6d9c4a09aa5e79ec82e76a1.png) 决策树。
 
 在决策树图表中，每个内部节点都有一个决策规则来分割数据。基尼指数（Gini）被称为基尼比率，用来衡量节点的不纯度。可以说，当所有记录都属于同一类别时，节点是纯的，这种节点称为叶节点。
 
@@ -422,7 +422,7 @@ y_pred = classifier.predict(X_test)# Model Accuracy, how often is the classifier
 print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
 ```
 
-好的，分类率提高到了94%，比之前的模型准确度更高。
+好的，分类率提高到了 94%，比之前的模型准确度更高。
 
 现在，让我们在优化后再次可视化剪枝后的决策树。
 
@@ -435,7 +435,7 @@ graph = pydotplus.graph_from_dot_data(dot_data.getvalue())
 Image(graph.create_png())
 ```
 
-![图像](../Images/c76148e38059f19cd1326993c049ed16.png)剪枝后的决策树
+![图像](img/c76148e38059f19cd1326993c049ed16.png)剪枝后的决策树
 
 这个剪枝模型比之前的决策树模型图更简单、可解释且易于理解。
 
@@ -445,7 +445,7 @@ Image(graph.create_png())
 
 好了，这篇文章就到此为止，希望大家喜欢阅读，欢迎在评论区分享你的评论/想法/反馈。
 
-![图像](../Images/fe29fca4d34cf017cf70bdb1fde78042.png)[来源](https://www.ilikesticker.com/LineStickerAnimation/W433402-Movie-End-Credits-Style-[English-Ver]/en)
+![图像](img/fe29fca4d34cf017cf70bdb1fde78042.png)[来源](https://www.ilikesticker.com/LineStickerAnimation/W433402-Movie-End-Credits-Style-[English-Ver]/en)
 
 感谢阅读!!!
 

@@ -1,10 +1,10 @@
 # 亚马逊通过 AutoGluon 进入 AutoML 竞赛：一些你应该了解的 AutoML 架构
 
-> 原文：[https://www.kdnuggets.com/2020/01/amazon-automl-autogluon-architectures-know-about.html](https://www.kdnuggets.com/2020/01/amazon-automl-autogluon-architectures-know-about.html)
+> 原文：[`www.kdnuggets.com/2020/01/amazon-automl-autogluon-architectures-know-about.html`](https://www.kdnuggets.com/2020/01/amazon-automl-autogluon-architectures-know-about.html)
 
-[评论](#comments)
+评论
 
-![](../Images/466796caf75fa6aedf36c2f6388cdf4c.png)
+![](img/466796caf75fa6aedf36c2f6388cdf4c.png)
 
 几天前，[亚马逊宣布发布 AutoGloun](https://www.amazon.science/amazons-autogluon-helps-developers-get-up-and-running-with-state-of-the-art-deep-learning-models-with-just-a-few-lines-of-code)，一个新工具包，通过仅仅几行代码简化了深度学习模型的创建。这次发布标志着亚马逊进入了竞争激烈的自动化机器学习（AutoML）领域，而这一领域正成为企业机器学习平台的热门趋势。在 AutoML 生态系统的新闻如此之多的情况下，有时很难从中分辨出真正的重要信息。今天，我想探索一些市场上最具创新性的 AutoML 堆栈，这些堆栈并未获得太多的宣传。
 
@@ -16,7 +16,7 @@ AutoML 正成为现代数据科学应用中最热门的话题之一。人们常�
 
 毫不奇怪，选择和构建机器学习模型的过程是一个极其耗时的工作，且从未提供过确切的答案。矛盾的是，这正是机器学习擅长的领域，那么我们能否发挥创意，将选择机器学习架构的过程建模为一个机器学习问题呢？
 
-![](../Images/30250374f9d2e5369e35395cd2ea3f7d.png)
+![](img/30250374f9d2e5369e35395cd2ea3f7d.png)
 
 ### **AutoML 来拯救**
 
@@ -36,7 +36,7 @@ AutoML 正成为现代数据科学应用中最热门的话题之一。人们常�
 
 +   轻松改进现有的定制模型和数据管道，或根据你的使用场景定制 AutoGluon。
 
-![](../Images/3d6858c64ef74d69fcc7f711b6364bf4.png)
+![](img/3d6858c64ef74d69fcc7f711b6364bf4.png)
 
 ### Salesforce TransmogrifAI：Einstein 背后的大脑
 
@@ -54,7 +54,7 @@ Salesforce 的 Einstein 背后的魔力由一个名为 [TransmogrifAI](https://t
 
 +   **超参数优化：** 调整超参数配置。
 
-![](../Images/2cac4189f392b5b628a35fdb36b031c1.png)
+![](img/2cac4189f392b5b628a35fdb36b031c1.png)
 
 鉴于 Salesforce.com 的影响，[TransmogrifAI](https://transmogrif.ai/) 可能被认为是全球最大的 AutoML 应用之一。
 
@@ -64,7 +64,7 @@ Salesforce 的 Einstein 背后的魔力由一个名为 [TransmogrifAI](https://t
 
 Azure ML 的最新版本利用 AutoML 简化模型选择。该平台包括一个 AutoML 服务，定期推荐新的机器学习管道以解决特定问题。管道的执行在客户的 Azure ML 实例中进行，而 AutoML 服务仅查看结果并使用这些结果做出更好的推荐。
 
-![](../Images/9bca60b0bae5f46b1f60131690961040.png)
+![](img/9bca60b0bae5f46b1f60131690961040.png)
 
 Azure ML 堆栈中的 AutoML 实现是我见过的最完整的之一。当前版本支持对数值和文本数据进行分类和回归 ML 模型推荐，支持自动特征生成（包括缺失值填补、编码、归一化和基于启发式的方法的特征）、特征转换和选择。开发者可以通过 Python SDK 或 Jupyter Notebooks 使用 AutoML。
 
@@ -76,7 +76,7 @@ Azure ML 堆栈中的 AutoML 实现是我见过的最完整的之一。当前版
 
 在 Waymo，AutoML 被用于探索卷积网络架构（CNN）中的数百种不同 NAS 单元组合，训练和评估 Waymo 的 LiDAR 分割任务模型。实验已产生出具有 20%-30% 更低延迟和 8%-10% 更低错误率的 CNN 架构，相较于手工设计的模型。
 
-![](../Images/68c5466a545be6017694592546a929c6.png)
+![](img/68c5466a545be6017694592546a929c6.png)
 
 从这些例子中可以看出，AutoML 正在成为高度可扩展机器学习架构中的重要元素之一。亚马逊的进入无疑是推动 AutoML 成为机器学习架构关键组件的又一推动力。AutoGluon 是另一个例子，说明用于模型搜索的 AutoML 工具和框架正在不断改进，并逐渐向主流开发者开放。虽然 AutoML 有其他很好的使用案例，但在现实世界机器学习应用中，模型选择仍然是带来最大好处的驱动力。
 
@@ -84,21 +84,21 @@ Azure ML 堆栈中的 AutoML 实现是我见过的最完整的之一。当前版
 
 **相关：**
 
-+   [AutoML 调查结果：如果你尝试它，你会更喜欢它](/2020/01/poll-automl-results.html)
++   AutoML 调查结果：如果你尝试它，你会更喜欢它
 
-+   [自动化机器学习：团队如何在 AutoML 项目中协作？](/2020/01/teams-work-together-automl-project.html)
++   自动化机器学习：团队如何在 AutoML 项目中协作？
 
-+   [AutoML 对时序关系数据：一个新前沿](/2019/10/automl-temporal-relational-data.html)
++   AutoML 对时序关系数据：一个新前沿
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -108,10 +108,10 @@ Azure ML 堆栈中的 AutoML 实现是我见过的最完整的之一。当前版
 
 +   [在深入了解变压器之前你应该知道的概念](https://www.kdnuggets.com/2023/01/concepts-know-getting-transformer.html)
 
-+   [KDnuggets™新闻22:n03，1月19日：深入了解13种数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™新闻 22:n03，1 月 19 日：深入了解 13 种数据…](https://www.kdnuggets.com/2022/n03.html)
 
-+   [2023年你应该考虑的顶级AutoML框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
 
-+   [KDnuggets新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [它活了！使用Python和一些便宜的组件构建你的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
++   [它活了！使用 Python 和一些便宜的组件构建你的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)

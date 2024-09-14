@@ -1,8 +1,8 @@
-# 60+本关于大数据、数据科学、数据挖掘、机器学习、Python、R等方面的免费书籍
+# 60+本关于大数据、数据科学、数据挖掘、机器学习、Python、R 等方面的免费书籍
 
-> 原文：[https://www.kdnuggets.com/2015/09/free-data-science-books.html](https://www.kdnuggets.com/2015/09/free-data-science-books.html)
+> 原文：[`www.kdnuggets.com/2015/09/free-data-science-books.html`](https://www.kdnuggets.com/2015/09/free-data-science-books.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：布伦丹·马丁，** ([LearnDataSci](http://www.learndatasci.com/)).
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
-![免费数据科学书籍](../Images/9ea8dcd03f2401db44223a0699c575fd.png)
+![免费数据科学书籍](img/9ea8dcd03f2401db44223a0699c575fd.png)
 
 * * *
 
@@ -168,7 +168,7 @@
 
     *Reza Zafarani, Mohammad Ali Abbasi 和 Huan Liu,* 2014
 
-+   **[数据挖掘：实用机器学习工具与技术](ftp://ftp.ingv.it/pub/manuela.sbarra/Data%20Mining%20Practical%20Machine%20Learning%20Tools%20and%20Techniques%20-%20WEKA.pdf)**
++   **数据挖掘：实用机器学习工具与技术**
 
     [[在亚马逊购买](https://www.amazon.com/gp/product/0123748569/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0123748569&linkCode=as2&tag=ledasc-20&linkId=HVCR2HES3IEKZUFE)]
 
@@ -232,7 +232,7 @@
 
     *David J.C. MacKay,* 2005
 
-+   **[使用R进行数据挖掘与商业分析](http://www.nataraz.in/data/ebook/hadoop/Data_Mining_and_Business_Analytics_with_R__Johannes_Ledolter.pdf)**
++   **[使用 R 进行数据挖掘与商业分析](http://www.nataraz.in/data/ebook/hadoop/Data_Mining_and_Business_Analytics_with_R__Johannes_Ledolter.pdf)**
 
     [[在亚马逊上购买](https://www.amazon.com/gp/product/111844714X/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=111844714X&linkCode=as2&tag=ledasc-20&linkId=KPHXWNWW3L6XHH4D)]
 
@@ -366,7 +366,7 @@
 
     *Mike Barlow,* 2013
 
-+   **[大数据现状：2012年版](http://cdn.oreillystatic.com/oreilly/radarreport/0636920028307/Big_Data_Now_2012_Edition.pdf)**
++   **[大数据现状：2012 年版](http://cdn.oreillystatic.com/oreilly/radarreport/0636920028307/Big_Data_Now_2012_Edition.pdf)**
 
     [[在亚马逊购买](https://www.amazon.com/gp/product/B0097E4EBQ/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=B0097E4EBQ&linkCode=as2&tag=ledasc-20&linkId=T4NLML4A36M6NXIS)]
 
@@ -374,7 +374,7 @@
 
 #### 计算机科学话题
 
-+   **[用Python进行自然语言处理](http://www.nltk.org/book_1ed/)** [[在亚马逊购买](https://www.amazon.com/gp/product/0596516495/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596516495&linkCode=as2&tag=ledasc-20&linkId=UCYAEAU2FYZJZBS3)]
++   **[用 Python 进行自然语言处理](http://www.nltk.org/book_1ed/)** [[在亚马逊购买](https://www.amazon.com/gp/product/0596516495/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0596516495&linkCode=as2&tag=ledasc-20&linkId=UCYAEAU2FYZJZBS3)]
 
     *Steven Bird,* 2009
 
@@ -386,7 +386,7 @@
 
     *Reinhard Klette,* 2010
 
-+   **[人工智能：现代方法，第1版](http://www.cin.ufpe.br/~tfl2/artificial-intelligence-modern-approach.9780131038059.25368.pdf)**
++   **[人工智能：现代方法，第 1 版](http://www.cin.ufpe.br/~tfl2/artificial-intelligence-modern-approach.9780131038059.25368.pdf)**
 
     [[在亚马逊购买（第三版）](https://www.amazon.com/gp/product/0136042597/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0136042597&linkCode=as2&tag=ledasc-20&linkId=3FRORB7P56CEWSK5)]
 
@@ -400,24 +400,24 @@
 
 **相关：**
 
-+   [神经网络与深度学习，免费在线书籍（草稿）](/2014/09/neural-networks-deep-learning-free-online-book.html)
++   神经网络与深度学习，免费在线书籍（草稿）
 
-+   [9本免费的数据挖掘和数据分析学习书籍](/2014/04/9-free-books-learning-data-mining-data-analysis.html)
++   9 本免费的数据挖掘和数据分析学习书籍
 
-+   [更多免费的数据挖掘、数据科学书籍和资源](/2015/03/free-data-mining-data-science-books-resources.html)
++   更多免费的数据挖掘、数据科学书籍和资源
 
-+   [预测警务——免费书籍](/2015/07/predictive-policing-free-book.html)
++   预测警务——免费书籍
 
 ### 更多相关内容
 
-+   [15本更多免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
++   [15 本更多免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
 
-+   [25本免费书籍，掌握SQL、Python、数据科学、机器…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍，掌握 SQL、Python、数据科学、机器…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [KDnuggets新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
 
-+   [15本免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
++   [15 本免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
 
-+   [24本最佳（且免费的）机器学习入门书籍](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
++   [24 本最佳（且免费的）机器学习入门书籍](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
 
-+   [KDnuggets新闻，5月25日：每个人都需要的6种Python机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个人都需要的 6 种 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)

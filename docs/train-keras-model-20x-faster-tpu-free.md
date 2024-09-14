@@ -1,44 +1,44 @@
-# 如何利用TPU免费将Keras模型训练速度提高20倍
+# 如何利用 TPU 免费将 Keras 模型训练速度提高 20 倍
 
-> 原文：[https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html](https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html)
+> 原文：[`www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html`](https://www.kdnuggets.com/2019/03/train-keras-model-20x-faster-tpu-free.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Chengwei Zhang](https://www.dlology.com/)，上海工业技术研究院 / 程序员 / 创客**
 
-![figure-name](../Images/3f9d6ae1d0a78e13f27b40eb06055fb5.png)
+![figure-name](img/3f9d6ae1d0a78e13f27b40eb06055fb5.png)
 
-有段时间，我一直很满足于在一张GTX 1070显卡上训练我的模型，该显卡单精度约为8.18 TFlops，然后谷歌在Colab上开放了他们的免费Tesla K80 GPU，具有12GB RAM，速度略快，为8.73 TFlops。直到最近，Cloud TPU选项以180 TFlops出现在Colab的运行时类型选择器中。在这个快速教程中，你将学习如何将现有的Keras模型转换为TPU模型，并在Colab上以免费方式训练，速度比我的GTX1070快20倍。
+有段时间，我一直很满足于在一张 GTX 1070 显卡上训练我的模型，该显卡单精度约为 8.18 TFlops，然后谷歌在 Colab 上开放了他们的免费 Tesla K80 GPU，具有 12GB RAM，速度略快，为 8.73 TFlops。直到最近，Cloud TPU 选项以 180 TFlops 出现在 Colab 的运行时类型选择器中。在这个快速教程中，你将学习如何将现有的 Keras 模型转换为 TPU 模型，并在 Colab 上以免费方式训练，速度比我的 GTX1070 快 20 倍。
 
-我们将构建一个易于理解但足够复杂的Keras模型，以便稍微热身Cloud TPU。在IMDB情感分类任务上训练LSTM模型是一个很好的例子，因为LSTM的训练计算开销可能比Dense和卷积等其他层更大。
+我们将构建一个易于理解但足够复杂的 Keras 模型，以便稍微热身 Cloud TPU。在 IMDB 情感分类任务上训练 LSTM 模型是一个很好的例子，因为 LSTM 的训练计算开销可能比 Dense 和卷积等其他层更大。
 
 工作流程概述，
 
-+   构建一个用于训练的Keras模型，在功能性API中使用静态输入`batch_size`。
++   构建一个用于训练的 Keras 模型，在功能性 API 中使用静态输入`batch_size`。
 
-+   将Keras模型转换为TPU模型。
++   将 Keras 模型转换为 TPU 模型。
 
-+   使用静态`batch_size * 8`训练TPU模型，并将权重保存到文件中。
++   使用静态`batch_size * 8`训练 TPU 模型，并将权重保存到文件中。
 
-+   构建一个用于推断的Keras模型，保持相同的结构，但批量输入大小可变。
++   构建一个用于推断的 Keras 模型，保持相同的结构，但批量输入大小可变。
 
 +   加载模型权重。
 
 +   使用推断模型进行预测。
 
-**你可以在阅读的同时玩转Colab Jupyter笔记本——[Keras_LSTM_TPU.ipynb](https://colab.research.google.com/drive/1QZf1WeX3EQqBLeFeT4utFKBqq-ogG1FN)。**
+**你可以在阅读的同时玩转 Colab Jupyter 笔记本——[Keras_LSTM_TPU.ipynb](https://colab.research.google.com/drive/1QZf1WeX3EQqBLeFeT4utFKBqq-ogG1FN)。**
 
-首先，按照下图中的说明激活Colab运行时中的TPU。
+首先，按照下图中的说明激活 Colab 运行时中的 TPU。
 
-![activate-tpu](../Images/4637ff952b6b0dfeacd3d05378bd8036.png)激活TPU
+![activate-tpu](img/4637ff952b6b0dfeacd3d05378bd8036.png)激活 TPU
 
 ### 静态输入批量大小
 
-在CPU和GPU上运行的输入管道大多不受静态形状要求的限制，而在XLA/TPU环境中，静态形状和批量大小是强制要求的。
+在 CPU 和 GPU 上运行的输入管道大多不受静态形状要求的限制，而在 XLA/TPU 环境中，静态形状和批量大小是强制要求的。
 
-Cloud TPU包含8个TPU核心，这些核心作为独立的处理单元进行操作。除非使用所有八个核心，否则TPU不会被充分利用。为了通过矢量化完全加速训练，我们可以选择比在单个GPU上训练相同模型时更大的批量大小。总批量大小为1024（每核心128）通常是一个不错的起点。
+Cloud TPU 包含 8 个 TPU 核心，这些核心作为独立的处理单元进行操作。除非使用所有八个核心，否则 TPU 不会被充分利用。为了通过矢量化完全加速训练，我们可以选择比在单个 GPU 上训练相同模型时更大的批量大小。总批量大小为 1024（每核心 128）通常是一个不错的起点。
 
-如果你打算训练一个较大的模型，批量大小过大时，尝试逐渐减少批量大小，直到它适合TPU内存，同时确保总批量大小是64的倍数（每核心的批量大小应为8的倍数）。
+如果你打算训练一个较大的模型，批量大小过大时，尝试逐渐减少批量大小，直到它适合 TPU 内存，同时确保总批量大小是 64 的倍数（每核心的批量大小应为 8 的倍数）。
 
 还值得提到的是，当使用更大的批次大小进行训练时，通常可以安全地增加优化器的学习率，以实现更快的收敛。你可以在这篇论文中找到参考——“[准确的大规模小批量 SGD: 1 小时内训练 ImageNet](https://arxiv.org/pdf/1706.02677.pdf)”。
 
@@ -161,21 +161,21 @@ Output (Dense) (None, 1) 33
 
 **相关：**
 
-+   [在 Google Colab 中使用 Hyperas 调整 Keras 超参数](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
++   在 Google Colab 中使用 Hyperas 调整 Keras 超参数
 
-+   [使用 Keras 长短期记忆（LSTM）模型预测股票价格](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)
++   使用 Keras 长短期记忆（LSTM）模型预测股票价格
 
-+   [3 个必备的 Google Colaboratory 提示和技巧](/2018/02/essential-google-colaboratory-tips-tricks.html)
++   3 个必备的 Google Colaboratory 提示和技巧
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 

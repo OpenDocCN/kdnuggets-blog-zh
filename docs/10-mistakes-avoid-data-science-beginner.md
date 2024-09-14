@@ -1,12 +1,12 @@
-# 作为数据科学初学者，你应该避免的10个错误
+# 作为数据科学初学者，你应该避免的 10 个错误
 
-> 原文：[https://www.kdnuggets.com/2021/06/10-mistakes-avoid-data-science-beginner.html](https://www.kdnuggets.com/2021/06/10-mistakes-avoid-data-science-beginner.html)
+> 原文：[`www.kdnuggets.com/2021/06/10-mistakes-avoid-data-science-beginner.html`](https://www.kdnuggets.com/2021/06/10-mistakes-avoid-data-science-beginner.html)
 
-[评论](#comments)
+评论
 
 **由 [Isabelle Flückiger](https://www.linkedin.com/in/isabelleflueckiger/)，高级主管 | 国际顾问 | 演讲者 | 思想领袖 | 学习领导力 | 讲师 | 创业顾问**
 
-![](../Images/2169d4bfb6654f40f26ffa98c6e07a3e.png)
+![](img/2169d4bfb6654f40f26ffa98c6e07a3e.png)
 
 图片由 [Steve Buissinne](https://pixabay.com/users/stevepb-282134/) 提供，来自 [Pixabay](https://pixabay.com/photos/slip-up-danger-careless-slippery-709045/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 但所有数据科学家都反复犯一些共同的错误。即使知道这些错误，你也无法完全避免它们，但最终可以更早地停止这些错误，并更快地回到成功的道路上。
 
-基于我在数据科学领域超过20年的经验，领导最多150人的团队，并且仍在全球领先大学之一兼职讲授课程，我为你总结了避免常见错误的核心要点，以帮助你更快实现梦想。
+基于我在数据科学领域超过 20 年的经验，领导最多 150 人的团队，并且仍在全球领先大学之一兼职讲授课程，我为你总结了避免常见错误的核心要点，以帮助你更快实现梦想。
 
 错误按初学者数据科学家的学习进度排序。
 
@@ -54,7 +54,7 @@
 
 许多有志于数据科学的人员认为，简历上列出尽可能多的方法有助于更快找到工作。但事实正好相反。当申请工作时，如果你只开始学习数据科学六个月，对于每个招聘人员来说，很明显这只是空谈，没有实质内容。
 
-如果我们看回归模型，有很多书籍专门讲回归。回归类型超过50种，每种都有不同的前提条件。因此，简历上只写“回归”并不能说明问题。此外，回归模型仍然是应用中最重要的模型，并且为数据科学的一般理解奠定基础。
+如果我们看回归模型，有很多书籍专门讲回归。回归类型超过 50 种，每种都有不同的前提条件。因此，简历上只写“回归”并不能说明问题。此外，回归模型仍然是应用中最重要的模型，并且为数据科学的一般理解奠定基础。
 
 你必须理解一个方法解决了什么；假设是什么；参数是什么意思；有哪些陷阱；等等。
 
@@ -74,7 +74,7 @@
 
 一个事实是，代码越来越成为商品，甚至有无代码工具。差异将不再是能编码和不能编码之间，而是理解其架构和不理解之间。
 
-我给你另一个例子：我假设你已经使用过TensorFlow。但你了解它是什么吗？它做了什么？为什么它叫做“TensorFlow”？你知道什么是张量吗？不仅仅是张量积的机械计算，而是它在几何上的意义是什么？
+我给你另一个例子：我假设你已经使用过 TensorFlow。但你了解它是什么吗？它做了什么？为什么它叫做“TensorFlow”？你知道什么是张量吗？不仅仅是张量积的机械计算，而是它在几何上的意义是什么？
 
 ### **#4 通过学习理论，你认为自己知道了一切，但却缺乏足够的实践经验**
 
@@ -86,13 +86,13 @@
 
 所以，你必须从头开始，使用实际的例子。通常，你会觉得还没准备好进行实践工作：基础知识不够或编程经验不足。
 
-但我强烈建议：即使你觉得还没准备好做练习，也要从头开始。这不需要是一个全天或一周的项目。一个小的1-2小时项目就足够了。
+但我强烈建议：即使你觉得还没准备好做练习，也要从头开始。这不需要是一个全天或一周的项目。一个小的 1-2 小时项目就足够了。
 
-你可以从像RapidMiner或KNIME这样的无代码工具开始，或者使用别人的代码并进行应用。例如，使用一个简单的情感分析代码来分析推文或产品描述。然后，你可以开始修改代码以适用于其他例子并比较结果。
+你可以从像 RapidMiner 或 KNIME 这样的无代码工具开始，或者使用别人的代码并进行应用。例如，使用一个简单的情感分析代码来分析推文或产品描述。然后，你可以开始修改代码以适用于其他例子并比较结果。
 
 当你作为小孩学习说话时，你是从单个词或两三个词的表达开始的。一步一步地，你建立了对语言的感觉。数据科学中的实践经验也是如此。
 
-专家提示：学习是循环的。所以，保存你的工作。以后你可以回来，改进它，上传到GitHub，并使用Tableau添加可视化。
+专家提示：学习是循环的。所以，保存你的工作。以后你可以回来，改进它，上传到 GitHub，并使用 Tableau 添加可视化。
 
 ### **#5 你认为认证是获得数据科学工作的一种竞争优势**
 
@@ -114,7 +114,7 @@
 
 ### **#7 不关心业务和领域知识**
 
-许多数据科学家认为他们可以将方法应用于每一个问题和行业，但从超过20年的经验来看，我可以告诉你这是错误的。
+许多数据科学家认为他们可以将方法应用于每一个问题和行业，但从超过 20 年的经验来看，我可以告诉你这是错误的。
 
 我常常看到数据科学家向业务人员展示发现，而他们的反应是，“哦，我们已经知道这个了。我们需要的是‘为什么会这样’和‘如何解决’。或者在最坏的情况下，是‘这完全是胡说八道，因为这不是我们业务的运作方式。’哗啦！
 
@@ -124,11 +124,11 @@
 
 +   我从维基百科开始，了解了整体情况和相关公司。
 
-+   我查看了行业前10家公司年度报告和投资者关系信息。
++   我查看了行业前 10 家公司年度报告和投资者关系信息。
 
 +   我阅读了过去几年关于这个行业和公司的所有新闻文章。
 
-+   我联系了在这个行业工作的LinkedIn联系人。
++   我联系了在这个行业工作的 LinkedIn 联系人。
 
 只有到那时，我才开始与业务互动。
 
@@ -154,7 +154,7 @@
 
 你的工作是为业务创造价值，而不是仅仅为了应用而应用华丽的方法。
 
-我有一个朋友是全球一家银行的数据科学负责人。当他们招聘数据科学家时，他们会提前两周发送一个数据集，并要求做一个20分钟的演讲。没有进一步的指导。他们想看到讲故事的能力。他们不关心使用的方法——除非候选人对所用方法讲出绝对无稽之谈。他们想看到的是，首先是商业问题的框架及其解决的重要性。其次，应该解决什么，最后，如何解决以及在商业环境中的结果。“这是我们整天最重要的工作。候选人不必在这方面完美，但必须展示她/他理解我们工作的重点。”
+我有一个朋友是全球一家银行的数据科学负责人。当他们招聘数据科学家时，他们会提前两周发送一个数据集，并要求做一个 20 分钟的演讲。没有进一步的指导。他们想看到讲故事的能力。他们不关心使用的方法——除非候选人对所用方法讲出绝对无稽之谈。他们想看到的是，首先是商业问题的框架及其解决的重要性。其次，应该解决什么，最后，如何解决以及在商业环境中的结果。“这是我们整天最重要的工作。候选人不必在这方面完美，但必须展示她/他理解我们工作的重点。”
 
 所以，学习数据讲故事——甚至有免费的课程——并学习在商业背景下的数据可视化。
 
@@ -166,7 +166,7 @@
 
 任何有经验的招聘人员都知道在一两个问题之后，你是一个单打独斗的人，还是有一个活跃的网络帮助你获取知识。这对公司有益，并提高了你的市场价值和需求。
 
-因此，发展一个网络至关重要。这可以通过参加训练营、黑客马拉松和Meetup会议来实现。
+因此，发展一个网络至关重要。这可以通过参加训练营、黑客马拉松和 Meetup 会议来实现。
 
 现在，你理论上知道了应该避免什么。
 
@@ -178,9 +178,9 @@
 
 [**逐步指导以提升你的就业机会**](https://towardsdatascience.com/hands-on-step-by-step-guidance-to-grow-your-job-opportunities-fe0c757fb966)
 
-如何战略性地利用Meetup会议来获得你梦想的数据科学工作
+如何战略性地利用 Meetup 会议来获得你梦想的数据科学工作
 
-[**2021年edX数据科学微硕士项目终极指南**](https://towardsdatascience.com/the-ultimate-guide-on-the-data-science-micromasters-programs-on-edx-2020-2021-db7646381387)
+[**2021 年 edX 数据科学微硕士项目终极指南**](https://towardsdatascience.com/the-ultimate-guide-on-the-data-science-micromasters-programs-on-edx-2020-2021-db7646381387)
 
 你应该选择哪六个项目中的哪个？
 
@@ -188,28 +188,28 @@
 
 为你和你的职业制定的行动计划
 
-**个人简介：[Isabelle Flückiger](https://www.linkedin.com/in/isabelleflueckiger/)** 是一位高级执行官，具有国际C级顾问经验，专注于端到端数字、数据和新技术转型项目，具有银行、保险、化学品、公用事业和制药/生命科学等关键行业经验。
+**个人简介：[Isabelle Flückiger](https://www.linkedin.com/in/isabelleflueckiger/)** 是一位高级执行官，具有国际 C 级顾问经验，专注于端到端数字、数据和新技术转型项目，具有银行、保险、化学品、公用事业和制药/生命科学等关键行业经验。
 
 [原文](https://towardsdatascience.com/10-mistakes-you-should-avoid-as-a-data-science-beginner-ec1b14ea1bcd)。经许可转载。
 
 **相关：**
 
-+   [如何在6个月内找到数据分析工作](/2021/06/land-data-analytics-job-6-months.html)
++   如何在 6 个月内找到数据分析工作
 
-+   [初学者的十大数据科学项目](/2021/06/top-10-data-science-projects-beginners.html)
++   初学者的十大数据科学项目
 
-+   [数据科学在10年内不会灭绝，你的技能可能会](/2021/06/data-science-not-becoming-extinct-10-years.html)
++   数据科学在 10 年内不会灭绝，你的技能可能会
 
 ### 更多相关话题
 
 +   [新手数据科学家应该避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-+   [5个常见的数据科学错误及如何避免它们](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
++   [5 个常见的数据科学错误及如何避免它们](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
 
-+   [避免这5个每个AI初学者常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个每个 AI 初学者常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
 
-+   [避免数据科学职业的前5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [避免数据科学职业的前 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [如果你想成为数据分析师，应该考虑的3门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，应该考虑的 3 门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

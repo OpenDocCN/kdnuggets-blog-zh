@@ -1,8 +1,8 @@
 # 矩阵分解解读
 
-> 原文：[https://www.kdnuggets.com/2020/12/matrix-decomposition-decoded.html](https://www.kdnuggets.com/2020/12/matrix-decomposition-decoded.html)
+> 原文：[`www.kdnuggets.com/2020/12/matrix-decomposition-decoded.html`](https://www.kdnuggets.com/2020/12/matrix-decomposition-decoded.html)
 
-[评论](#comments)
+评论
 
 **由 [Tanveer Sayyed](https://www.linkedin.com/in/tanveer-sayyed-739105185/), 数据科学爱好者**
 
@@ -55,7 +55,7 @@ the corresponding eigenvector for that λ.
 
 重要的是了解和理解这些步骤，因此我们将*不会*手动执行这些操作，因为在*numpy*库中已经存在一个函数。（我们将使用[***这段代码***](https://gist.github.com/Vernal-Inertia/90b81a3bf6c5abb96c495c905749d072)来展示和重新缩放特征向量）。例如：
 
-![图示](../Images/3014ed7c401fe5275d1ac0ec09796845.png)
+![图示](img/3014ed7c401fe5275d1ac0ec09796845.png)
 
 特征向量 e1 = [-1, 0.5] 和 e2 = [-1, -1] 是*粉色*的，而输出向量是*绿色*的。
 
@@ -148,7 +148,7 @@ PCA 用于*特征提取*/*维度减少*，这指的是通过*投影*将数据的
 
 在这里，极其重要的一点是，上述两个陈述实际上是同一个事物的两个方面，因此最小化一个就*等同于*最大化另一个。
 
-![图示](../Images/40368ba4eb95d19b7b10363cc9c2c11d.png)
+![图示](img/40368ba4eb95d19b7b10363cc9c2c11d.png)
 
 [来源](http://alexhwilliams.info/itsneuronalblog/2016/03/27/pca/)
 
@@ -166,7 +166,7 @@ PCA 的作用是，它找到最接近当前问题的近似，以便保留初始�
 
 不。以下是原因：
 
-![图示](../Images/992839f308e22326683ab9a69b32e57c.png)
+![图示](img/992839f308e22326683ab9a69b32e57c.png)
 
 贡献者：Andrew Ng
 
@@ -184,13 +184,13 @@ PCA 的作用是，它找到最接近当前问题的近似，以便保留初始�
 
     特征值, 特征向量 = np.linalg.eig(V)
 
-1.  然后将特征值按降序排列。它们对应的特征向量现在代表了降维子空间的组件。在降维子空间中，这些组件（特征向量）现在已经成为我们的新坐标轴，我们知道坐标轴总是**正交**的。（这只有在PCA中的每个组件都是独立的特征向量时才会发生）。这些坐标轴的组合产生了投影数据。（点击[***这里***](https://www.joyofdata.de/public/pca-3d/)链接以获得更好的理解。让每个组件直接指向你。你会看到第一个组件捕获了最高的方差，其次是第二个，然后是第三个）
+1.  然后将特征值按降序排列。它们对应的特征向量现在代表了降维子空间的组件。在降维子空间中，这些组件（特征向量）现在已经成为我们的新坐标轴，我们知道坐标轴总是**正交**的。（这只有在 PCA 中的每个组件都是独立的特征向量时才会发生）。这些坐标轴的组合产生了投影数据。（点击[***这里***](https://www.joyofdata.de/public/pca-3d/)链接以获得更好的理解。让每个组件直接指向你。你会看到第一个组件捕获了最高的方差，其次是第二个，然后是第三个）
 
-1.  选择k个特征值以保留最大解释方差。k个特征值捕获的方差量称为*解释方差*。
+1.  选择 k 个特征值以保留最大解释方差。k 个特征值捕获的方差量称为*解释方差*。
 
 重要的是了解这些步骤，所以我们将*不会*手动执行这些操作，因为*sklearn*库中已经存在一个函数。为了简单起见，我们将把二维数据降到一维数据，同时观察噪声在过程中产生的效果。以下是代码：
 
-![图示](../Images/6238965ce4f89bf609d352458ff04222.png)
+![图示](img/6238965ce4f89bf609d352458ff04222.png)
 
 **注意投影与主成分完全平行。红点和绿点的接近度（相对于黑点和绿点）表明噪声已经在很大程度上减少。**
 
@@ -198,27 +198,27 @@ PCA 的作用是，它找到最接近当前问题的近似，以便保留初始�
 
 参考文献：
 
-[https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8(Prof.](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8(Prof.) 吉尔伯特·斯特朗，斯坦福大学。我的大部分内容都来自这里。)
+[`www.youtube.com/playlist?list=PLE7DDD91010BC51F8(Prof.`](https://www.youtube.com/playlist?list=PLE7DDD91010BC51F8(Prof.) 吉尔伯特·斯特朗，斯坦福大学。我的大部分内容都来自这里。)
 
 [对机器学习的奇异值分解（SVD）的温和介绍](https://machinelearningmastery.com/singular-value-decomposition-for-machine-learning/)
 
-[https://www.youtube.com/watch?v=vs2sRvSzA3o](https://www.youtube.com/watch?v=vs2sRvSzA3o)（可能是对特征值和特征向量的最佳可视化表示）
+[`www.youtube.com/watch?v=vs2sRvSzA3o`](https://www.youtube.com/watch?v=vs2sRvSzA3o)（可能是对特征值和特征向量的最佳可视化表示）
 
-[https://hadrienj.github.io/posts/Deep-Learning-Book-Series-Introduction/](https://hadrienj.github.io/posts/Deep-Learning-Book-Series-Introduction/)（可视化向量的代码）
+[`hadrienj.github.io/posts/Deep-Learning-Book-Series-Introduction/`](https://hadrienj.github.io/posts/Deep-Learning-Book-Series-Introduction/)（可视化向量的代码）
 
-[https://en.wikipedia.org/wiki/Singular_value_decomposition](https://en.wikipedia.org/wiki/Singular_value_decomposition)
+[`en.wikipedia.org/wiki/Singular_value_decomposition`](https://en.wikipedia.org/wiki/Singular_value_decomposition)
 
-[你对PCA了解的与不了解的一切 · Its Neuronal](http://alexhwilliams.info/itsneuronalblog/2016/03/27/pca/)
+[你对 PCA 了解的与不了解的一切 · Its Neuronal](http://alexhwilliams.info/itsneuronalblog/2016/03/27/pca/)
 
 [主成分分析（PCA）的示意图](https://www.joyofdata.de/blog/illustration-of-principal-component-analysis-pca/)
 
-[https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)（精彩讨论）
+[`stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues`](https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues)（精彩讨论）
 
 [R 和 Python 中的主成分分析（PCA）实用指南](https://www.analyticsvidhya.com/blog/2016/03/practical-guide-principal-component-analysis-python/)
 
 [深入解析：主成分分析](https://jakevdp.github.io/PythonDataScienceHandbook/05.09-principal-component-analysis.html)
 
-[https://medium.com/@zhang_yang/python-code-examples-of-pca-v-s-svd-4e9861db0a71](https://medium.com/@zhang_yang/python-code-examples-of-pca-v-s-svd-4e9861db0a71)
+[`medium.com/@zhang_yang/python-code-examples-of-pca-v-s-svd-4e9861db0a71`](https://medium.com/@zhang_yang/python-code-examples-of-pca-v-s-svd-4e9861db0a71)
 
 **个人简介：[Tanveer Sayyed](https://www.linkedin.com/in/tanveer-sayyed-739105185/)** 是数据科学爱好者。热情的读者。艺术爱好者。异议爱好者……其余时间则在土星的环上摇摆。
 
@@ -226,21 +226,21 @@ PCA 的作用是，它找到最接近当前问题的近似，以便保留初始�
 
 **相关：**
 
-+   [机器学习数学：免费电子书](/2020/04/mathematics-machine-learning-book.html)
++   机器学习数学：免费电子书
 
-+   [数据科学的基础数学：积分与曲线下的面积](/2020/11/essential-math-data-science-integrals-area-under-curve.html)
++   数据科学的基础数学：积分与曲线下的面积
 
-+   [数据科学和机器学习的免费数学课程](/2020/02/free-mathematics-courses-data-science-machine-learning.html)
++   数据科学和机器学习的免费数学课程
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 

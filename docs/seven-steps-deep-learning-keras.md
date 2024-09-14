@@ -1,8 +1,8 @@
 # 7 步掌握 Keras 深度学习
 
-> 原文：[https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html](https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html)
+> 原文：[`www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html`](https://www.kdnuggets.com/2017/10/seven-steps-deep-learning-keras.html)
 
-![](../Images/f1165172bd8032b6f95708226c89cc9c.png)
+![](img/f1165172bd8032b6f95708226c89cc9c.png)
 
 神经网络框架、库和 API 的选择并不缺乏，对于任何有兴趣开始深度学习的人来说都是如此。那么... **为什么选择 Keras？**
 
@@ -64,53 +64,53 @@ Valerio Maggio 在 2017 年 PyData 伦敦大会上做了一个精彩的教程演
 
 如果你在前一步中观看了 Valerio 的视频，那么你可能已经获得了所需的信息。如果没有，请参考他在讲座中的笔记本。理想情况下，你应阅读整篇内容，以获得 TensorFlow、Theano 和 Keras 的实现代码的优秀比较。然而，如果你只对 Keras 代码感兴趣，可以跳到大约中间部分。
 
-+   [多层全连接网络](https://github.com/leriomaggio/deep-learning-keras-tensorflow/blob/euroscipy2017/1%20Multi-layer%20Fully%20Connected%20Networks.ipynb)，由Valerio Maggio
++   [多层全连接网络](https://github.com/leriomaggio/deep-learning-keras-tensorflow/blob/euroscipy2017/1%20Multi-layer%20Fully%20Connected%20Networks.ipynb)，由 Valerio Maggio
 
-下面展示的Keras代码（直接取自Maggio的笔记本）完成任务的美感应该是显而易见的。注意，此时数据预处理已经完成。
+下面展示的 Keras 代码（直接取自 Maggio 的笔记本）完成任务的美感应该是显而易见的。注意，此时数据预处理已经完成。
 
 实现逻辑回归，如上所述，是一件事，但现在让我们尝试一些更值得称之为神经网络的东西，带有一个隐藏层。
 
-首先，确保你查看了以下Keras文档页面，描述了Sequenial模型（如上所述）和Layers。
+首先，确保你查看了以下 Keras 文档页面，描述了 Sequenial 模型（如上所述）和 Layers。
 
-+   [开始使用Keras Sequential模型](https://keras.io/getting-started/sequential-model-guide/)
++   [开始使用 Keras Sequential 模型](https://keras.io/getting-started/sequential-model-guide/)
 
-+   [关于Keras层](https://keras.io/layers/about-keras-layers/)
++   [关于 Keras 层](https://keras.io/layers/about-keras-layers/)
 
-+   [Keras核心层](https://keras.io/layers/core/)
++   [Keras 核心层](https://keras.io/layers/core/)
 
 现在，跟随这个基本的神经网络实现，它学习一些关于井字棋游戏结果的内容。
 
-+   [Keras教程：用神经网络识别井字棋赢家](/2017/09/neural-networks-tic-tac-toe-keras.html)，由Matthew Mayo
++   Keras 教程：用神经网络识别井字棋赢家，由 Matthew Mayo
 
 完成这些步骤后，你应该准备好实现一些更复杂的架构。
 
-### 第5步：实现卷积神经网络
+### 第 5 步：实现卷积神经网络
 
-要在Keras中实现卷积神经网络（CNN），首先阅读其卷积层的文档：
+要在 Keras 中实现卷积神经网络（CNN），首先阅读其卷积层的文档：
 
-+   [Keras卷积层](https://keras.io/layers/convolutional/)
++   [Keras 卷积层](https://keras.io/layers/convolutional/)
 
-之后，查看以下两个关于Keras中的CNN的教程。第一个教程速度较慢，涵盖了你现在应该知道的大部分内容，而第二个则涉及了一些额外的话题，如避免过拟合。这不一定是非此即彼的方法；你可能会在两个写作中找到有价值的内容：
+之后，查看以下两个关于 Keras 中的 CNN 的教程。第一个教程速度较慢，涵盖了你现在应该知道的大部分内容，而第二个则涉及了一些额外的话题，如避免过拟合。这不一定是非此即彼的方法；你可能会在两个写作中找到有价值的内容：
 
-+   [Keras教程：Python深度学习的终极初学者指南](https://elitedatascience.com/keras-tutorial-deep-learning-in-python)，由Elite Data Science
++   [Keras 教程：Python 深度学习的终极初学者指南](https://elitedatascience.com/keras-tutorial-deep-learning-in-python)，由 Elite Data Science
 
-+   [卷积神经网络简介](https://sempwn.github.io/blog/2017/04/06/conv_net_intro)，由Mike Irvine
++   [卷积神经网络简介](https://sempwn.github.io/blog/2017/04/06/conv_net_intro)，由 Mike Irvine
 
-要了解更多关于卷积神经网络的一般知识，可以尝试Brandon Rohrer的视频：
+要了解更多关于卷积神经网络的一般知识，可以尝试 Brandon Rohrer 的视频：
 
 阅读[配套博客文章](https://www.kdnuggets.com/2016/08/brohrer-convolutional-neural-networks-explanation.html)。
 
-### 第6步：实现递归神经网络
+### 第 6 步：实现递归神经网络
 
-要在Keras中实现递归神经网络（RNN），首先阅读其递归层的文档：
+要在 Keras 中实现递归神经网络（RNN），首先阅读其递归层的文档：
 
-+   [Keras递归层](https://keras.io/layers/recurrent/)
++   [Keras 递归层](https://keras.io/layers/recurrent/)
 
-之后，尝试Chris Albon的这个教程，实施长短期记忆（LSTM）网络——一种主流的RNN类型——用于文本分类：
+之后，尝试 Chris Albon 的这个教程，实施长短期记忆（LSTM）网络——一种主流的 RNN 类型——用于文本分类：
 
-+   [LSTM递归神经网络](https://chrisalbon.com/deep_learning/keras/lstm_recurrent_neural_network/)
++   [LSTM 递归神经网络](https://chrisalbon.com/deep_learning/keras/lstm_recurrent_neural_network/)
 
-要了解更多关于递归神经网络的一般知识，可以尝试Brandon Rohrer的视频：
+要了解更多关于递归神经网络的一般知识，可以尝试 Brandon Rohrer 的视频：
 
 阅读 [配套幻灯片](https://docs.google.com/presentation/d/1hqYB3LRwg_-ntptHxH18W1ax9kBwkaZ1Pa_s3L7R-2Y/edit)。
 
@@ -136,21 +136,21 @@ Valerio Maggio 在 2017 年 PyData 伦敦大会上做了一个精彩的教程演
 
 **相关：**
 
-+   [掌握数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握数据准备的 7 个步骤
 
-+   [掌握 Python 机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
-+   [掌握 Python 机器学习的更多 7 个步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握 Python 机器学习的更多 7 个步骤
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

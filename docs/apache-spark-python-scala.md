@@ -1,16 +1,16 @@
 # Apache Spark : Python 与 Scala
 
-> 原文：[https://www.kdnuggets.com/2018/05/apache-spark-python-scala.html](https://www.kdnuggets.com/2018/05/apache-spark-python-scala.html)
+> 原文：[`www.kdnuggets.com/2018/05/apache-spark-python-scala.html`](https://www.kdnuggets.com/2018/05/apache-spark-python-scala.html)
 
-[评论](#comments)
+评论
 
 **由 [Preet Gandhi](https://www.linkedin.com/in/preetgandhi/), NYU 数据科学中心**
 
-![Apache Spark: Python vs Scala](../Images/49d2f2526df2a55685cc8518299e0706.png)
+![Apache Spark: Python vs Scala](img/49d2f2526df2a55685cc8518299e0706.png)
 
 Apache Spark 是最流行的大数据分析框架之一。Spark 用 Scala 编写，因为它的静态类型和已知的编译方式使其速度较快。虽然 Spark 为 Scala、Python、Java 和 R 提供了 API，但最常用的语言是前两者。Java 不支持 Read-Evaluate-Print-Loop，而 R 不是通用语言。数据科学社区分为两个阵营；一个偏爱 Scala，而另一个则偏爱 Python。每种语言都有其优缺点，最终的选择应取决于应用的结果。
 
-![Apache Spark Python Scala](../Images/91ac3f646835cc64a1a8bae368d775a5.png)
+![Apache Spark Python Scala](img/91ac3f646835cc64a1a8bae368d775a5.png)
 
 ### 性能
 
@@ -36,11 +36,11 @@ Scala 是一种静态类型语言，可以帮助我们发现编译时错误，�
 
 Python 运行较慢但非常易于使用，而 Scala 速度最快且使用起来相对简单。Scala 提供了对 Spark 最新特性的访问，因为 Apache Spark 是用 Scala 编写的。编程语言的选择取决于最适合项目需求的特性，因为每种语言都有其优缺点。Python 更倾向于分析，而 Scala 更倾向于工程，但两者都是构建数据科学应用程序的优秀语言。总体而言，为了充分利用 Spark 的全部潜力，Scala 会更有利。如果你真的想在 Spark 上进行创新的机器学习，那么学习那种神秘的语法是值得的。
 
-**简历：[Preet Gandhi](https://www.linkedin.com/in/preetgandhi/)** 是纽约大学数据科学中心的数据科学硕士生。她是一个狂热的大数据和数据科学爱好者。你可以通过 [pg1690@nyu.edu](mailto:pg1690@nyu.edu) 联系她。
+**简历：[Preet Gandhi](https://www.linkedin.com/in/preetgandhi/)** 是纽约大学数据科学中心的数据科学硕士生。她是一个狂热的大数据和数据科学爱好者。你可以通过 pg1690@nyu.edu 联系她。
 
 **相关：**
 
-+   [使用 Apache Spark 的深度学习：第 1 部分](https://www.kdnuggets.com/2018/04/deep-learning-apache-spark-part-1.html)
++   [使用 Apache Spark 的深度学习：第一部分](https://www.kdnuggets.com/2018/04/deep-learning-apache-spark-part-1.html)
 
 +   [实践：Python 数据分析入门](https://www.kdnuggets.com/2018/05/tdwi-intro-python-data-analysis.html)
 
@@ -50,12 +50,12 @@ Python 运行较慢但非常易于使用，而 Scala 速度最快且使用起来
 
 +   [每个数据科学家都应该知道的三种 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

@@ -1,10 +1,10 @@
 # 机器学习技能 - 这个夏天更新你的技能
 
-> 原文：[https://www.kdnuggets.com/2021/07/update-your-machine-learning-skills.html](https://www.kdnuggets.com/2021/07/update-your-machine-learning-skills.html)
+> 原文：[`www.kdnuggets.com/2021/07/update-your-machine-learning-skills.html`](https://www.kdnuggets.com/2021/07/update-your-machine-learning-skills.html)
 
-[评论](#comments)
+评论
 
-![](../Images/6962d7d26a55ab37ffdcc23cd58fbda0.png)
+![](img/6962d7d26a55ab37ffdcc23cd58fbda0.png)
 
 *照片由 [Nick Morrison](https://unsplash.com/@nickmorrison?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -38,31 +38,31 @@
 
 ## 机器学习技能 第 2–3 周：机器学习和深度学习直觉
 
-我将跟随斯坦福大学**Andrew Ng**教授（CS229 2018年秋季学期）的最新讲解，深入了解机器学习算法背后的数学原理和工作机制。Andrew Ng教授是斯坦福大学的兼职教授，但他还有很多其他活动，因此他最好被描述为“领先的人工智能研究员及Deeplearning.ai、Coursera及其他初创公司的创始人。”
+我将跟随斯坦福大学**Andrew Ng**教授（CS229 2018 年秋季学期）的最新讲解，深入了解机器学习算法背后的数学原理和工作机制。Andrew Ng 教授是斯坦福大学的兼职教授，但他还有很多其他活动，因此他最好被描述为“领先的人工智能研究员及 Deeplearning.ai、Coursera 及其他初创公司的创始人。”
 
-对于深度学习算法，我将跟随**Andrej Karpathy**教授的CS231n课程，他在斯坦福大学完成了博士学位，并于2016年教授了著名的CS231n课程，这是一门最受欢迎的深度学习视觉系统课程之一。Andrej现在是特斯拉的AI高级总监。
+对于深度学习算法，我将跟随**Andrej Karpathy**教授的 CS231n 课程，他在斯坦福大学完成了博士学位，并于 2016 年教授了著名的 CS231n 课程，这是一门最受欢迎的深度学习视觉系统课程之一。Andrej 现在是特斯拉的 AI 高级总监。
 
-一些讲座也由**Fei Fei Li**教授讲授，她是斯坦福大学计算机科学系首任Sequoia教授及斯坦福人本人工智能研究所的共同主任。
+一些讲座也由**Fei Fei Li**教授讲授，她是斯坦福大学计算机科学系首任 Sequoia 教授及斯坦福人本人工智能研究所的共同主任。
 
-**第1天：线性回归**
+**第 1 天：线性回归**
 
-这是最常见的机器学习算法之一。Andrew Ng讲解得很透彻，你可以在[YouTube](https://www.youtube.com/watch?v=4b4MUYve_U8)找到讲座视频，并在斯坦福大学的[这里](https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf)找到课程笔记。
+这是最常见的机器学习算法之一。Andrew Ng 讲解得很透彻，你可以在[YouTube](https://www.youtube.com/watch?v=4b4MUYve_U8)找到讲座视频，并在斯坦福大学的[这里](https://see.stanford.edu/materials/aimlcs229/cs229-notes1.pdf)找到课程笔记。
 
-**第2天：逻辑回归**
+**第 2 天：逻辑回归**
 
-逻辑回归是最基础的分类算法，Andrew Ng讲解得非常清晰，完整的讲座可以在YouTube上找到[这里](https://www.youtube.com/watch?v=het9HFqo1TQ)。逻辑回归的课程笔记在线性回归部分共享的pdf中。
+逻辑回归是最基础的分类算法，Andrew Ng 讲解得非常清晰，完整的讲座可以在 YouTube 上找到[这里](https://www.youtube.com/watch?v=het9HFqo1TQ)。逻辑回归的课程笔记在线性回归部分共享的 pdf 中。
 
-**第3天：朴素贝叶斯**
+**第 3 天：朴素贝叶斯**
 
-朴素贝叶斯是一个著名的分类算法，完全基于概率背景。如果你没有学习过概率，这个算法会很难理解。幸运的是，Andrew Ng在他最新的课程（2019年）中讲解了这个算法，你可以在[这里](https://www.youtube.com/watch?v=nt63k3bfXS0&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5)找到视频。这个算法没有出现在他的Coursera课程中。
+朴素贝叶斯是一个著名的分类算法，完全基于概率背景。如果你没有学习过概率，这个算法会很难理解。幸运的是，Andrew Ng 在他最新的课程（2019 年）中讲解了这个算法，你可以在[这里](https://www.youtube.com/watch?v=nt63k3bfXS0&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=5)找到视频。这个算法没有出现在他的 Coursera 课程中。
 
 你可以在[这里](http://cs229.stanford.edu/notes-spring2019/cs229-notes2.pdf)找到课程笔记。
 
-视频和笔记还讲解了GDA，即高斯判别分析。
+视频和笔记还讲解了 GDA，即高斯判别分析。
 
-**第4–5天：支持向量机**
+**第 4–5 天：支持向量机**
 
-支持向量机（SVM）是初学者最难掌握的机器学习算法之一，尤其是在涉及到核函数时。Andrew Ng有专门的视频讲解。
+支持向量机（SVM）是初学者最难掌握的机器学习算法之一，尤其是在涉及到核函数时。Andrew Ng 有专门的视频讲解。
 
 +   [支持向量机](https://www.youtube.com/watch?v=jGwO_UgTS7I&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU)
 
@@ -70,27 +70,27 @@
 
 这将为你提供有关算法如何工作的良好数学直觉。
 
-**第6天：决策树与集成方法**
+**第 6 天：决策树与集成方法**
 
 决策树、随机森林以及其他集成方法如 XGBoost 都被广泛使用。CS229 讲解了决策树和集成方法，并以非常易于理解的方式解释了这些算法背后的数学原理。您可以在 [这里](https://www.youtube.com/watch?v=wr9gUr-eWdA&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=11) 找到讲座视频。
 
-**第7天：无监督学习**
+**第 7 天：无监督学习**
 
 无监督学习是机器学习的重要组成部分，并在许多应用中广泛使用。Andrew Ng 在这节讲座中讲解了无监督学习的重要算法，您可以在 [这里](https://www.youtube.com/watch?v=rVfZHWTwXSA&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=14) 找到。
 
-**第8天：数据划分、模型和交叉验证**
+**第 8 天：数据划分、模型和交叉验证**
 
 适当地划分数据集、选择正确的算法、拥有正确的交叉验证集都很重要。Andrew Ng 专注于这一重要方面，并在 [this](https://www.youtube.com/watch?v=rjbkWSTjHzM&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=9) 视频中进行了讲解。
 
-**第9天：调试机器学习模型和误差分析**
+**第 9 天：调试机器学习模型和误差分析**
 
 知道机器学习模型中存在什么问题以及如何改进这些问题既重要又困难。在 [this](https://www.youtube.com/watch?v=ORrStCArmP4&list=PLoROMvodv4rMiGQp3WXShtMGgzqpfVfbU&index=15) 讲座中，Andrew Ng 详细讨论了这一点。
 
-**第10至12天：神经网络简介**
+**第 10 至 12 天：神经网络简介**
 
 神经网络是人工智能中一个非常重要且广泛使用的方面。3Blue1Brown 是一个非常著名的 YouTube 频道，拥有一个 [短视频播放列表](https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi) ，可以帮助您了解神经网络的基础知识。
 
-然后，为了更深入理解，您可以观看这4节讲座：
+然后，为了更深入理解，您可以观看这 4 节讲座：
 
 1.  [Kian Ktanfrosh CS229 神经网络简介](https://www.youtube.com/watch?v=MfIjxPh6Pys)
 
@@ -100,37 +100,37 @@
 
 1.  [Andrej Karpathy 的神经网络 3，卷积神经网络简介](https://www.youtube.com/watch?v=gYpoJMlgyXA&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&index=5)
 
-**第13天：卷积神经网络**
+**第 13 天：卷积神经网络**
 
-CNN 在工业界中非常重要且广泛使用。您在第4节讲座中学到了其基础知识。在 [this lecture](https://www.youtube.com/watch?v=LxfUGhug-iQ&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&index=7) 中，Andrej Karpathy 更深入地讲解了 CNN，并对其进行了精彩的阐述。
+CNN 在工业界中非常重要且广泛使用。您在第四部分讲座中学到了其基础知识。在 [this lecture](https://www.youtube.com/watch?v=LxfUGhug-iQ&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&index=7) 中，Andrej Karpathy 更深入地讲解了 CNN，并对其进行了精彩的阐述。
 
-**第14天：递归神经网络**
+**第 14 天：递归神经网络**
 
 RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语言任务中的表现而闻名。在 [this](https://www.youtube.com/watch?v=yCC09vCHzF8) 讲座中，Andrej Karpathy 详细讲解了 RNN 和 LSTM，以及如何利用它们构建一些应用，例如图像标题生成。
 
-## 机器学习技能第4周：计算机视觉理论
+## 机器学习技能第 4 周：计算机视觉理论
 
-**第1天：ConvNets 实践**
+**第 1 天：ConvNets 实践**
 
 [这次讲座](https://www.youtube.com/watch?v=pA4BsUK3oP4&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&index=11) 涉及了使 ConvNets 非常强大的大多数细节，特别是在工业界。话题包括数据增强、迁移学习、卷积安排、瓶颈和分布式训练等。
 
-**第2天：定位和检测**
+**第 2 天：定位和检测**
 
 目标定位和检测是一个非常酷且重要的特性，在多个应用中被广泛使用。Andrej Karpathy 在这次 [讲座](https://www.youtube.com/watch?v=GxZrEKZfW2o&list=PLkt2uSq6rBVctENoVBg1TpCC7OQi31AlC&index=8) 中详细解释了它背后的数学原理。
 
-**第3天：在深度学习中处理视频和无监督学习**
+**第 3 天：在深度学习中处理视频和无监督学习**
 
 这次由 Andrej Karpathy 主讲的讲座将解释如何处理视频数据并使用无监督学习从中获得最大收益。
 
 *讲座链接：*
 
-**第4天：分割和注意力**
+**第 4 天：分割和注意力**
 
 分割是计算机视觉中一个非常核心的任务。这次讲座深入探讨了两种不同的分割方法。注意力也是一个非常有名的任务，我们希望我们的模型关注图像中相关的特定部分。
 
 *讲座链接：*
 
-**第5天：生成模型**
+**第 5 天：生成模型**
 
 能够生成新事物的模型真的很酷。现在，GANs 和 DeepFakes 非常有名。在这次讲座中，Fei-Fei Li 深入探讨了生成模型背后的数学和理论。
 
@@ -140,13 +140,13 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 *讲座链接：*
 
-**第6天：使用 AI 创建 3D 内容**
+**第 6 天：使用 AI 创建 3D 内容**
 
 这次 MIT 讲座探讨了如何使用 AI 和深度学习创建 3D 内容。
 
 *讲座链接：*
 
-**第7天：姿态估计**
+**第 7 天：姿态估计**
 
 姿态估计是一个非常有名的任务，在多个应用中被广泛使用。目前关于它如何工作的优秀解释不多，但我尝试收集了一些资源，可以帮助你了解姿态估计的工作原理。
 
@@ -156,13 +156,13 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [姿态估计指南](https://www.fritz.ai/pose-estimation)
 
-+   [2019年深度学习的人体姿态估计指南](https://nanonets.com/blog/human-pose-estimation-2d-guide/)
++   [2019 年深度学习的人体姿态估计指南](https://nanonets.com/blog/human-pose-estimation-2d-guide/)
 
 +   [深度学习中的人体姿态估计概述](https://medium.com/beyondminds/an-overview-of-human-pose-estimation-with-deep-learning-d49eb656739b)
 
-## 机器学习技能第5–6周：实际计算机视觉
+## 机器学习技能第 5–6 周：实际计算机视觉
 
-**第1天：使用 TensorFlow/PyTorch 进行图像分类**
+**第 1 天：使用 TensorFlow/PyTorch 进行图像分类**
 
 +   数据集：[iWildCam 2019](https://www.kaggle.com/c/iwildcam-2019-fgvc6/data)
 
@@ -170,7 +170,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [迁移学习](https://www.pyimagesearch.com/2019/05/20/transfer-learning-with-keras-and-deep-learning/)
 
-**第2–5天：使用 TensorFlow 进行目标检测**
+**第 2–5 天：使用 TensorFlow 进行目标检测**
 
 *教程：*
 
@@ -186,7 +186,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [用于物体检测的开源数据集](https://www.analyticsvidhya.com/blog/2021/05/top-10-open-source-datasets-for-object-detection-machine-learning-in-2021/)
 
-**第6–9天：物体分割**
+**第 6–9 天：物体分割**
 
 *教程：*
 
@@ -202,7 +202,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [Papers with Code 数据集](https://paperswithcode.com/datasets?q=segmentation&v=lst&o=match)
 
-**第10–12天：GANs**
+**第 10–12 天：GANs**
 
 *教程：*
 
@@ -210,7 +210,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [使用 TensorFlow 和 Keras 进行 GANs](https://www.pyimagesearch.com/2020/11/16/gans-with-keras-and-tensorflow/)
 
-**第13–14天：神经风格迁移**
+**第 13–14 天：神经风格迁移**
 
 *教程：*
 
@@ -218,9 +218,9 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [使用 OpenCV 进行神经风格迁移](https://www.pyimagesearch.com/2018/08/27/neural-style-transfer-with-opencv/)
 
-## 机器学习技能第7周：实用自然语言处理
+## 机器学习技能第 7 周：实用自然语言处理
 
-**第1天：情感分析**
+**第 1 天：情感分析**
 
 *教程：*
 
@@ -232,7 +232,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [10 个受欢迎的情感分析数据集](https://analyticsindiamag.com/10-popular-datasets-for-sentiment-analysis/)
 
-**第2天：文本生成**
+**第 2 天：文本生成**
 
 *教程：*
 
@@ -240,7 +240,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [通过微调 GPT2 进行文本生成](https://towardsdatascience.com/conditional-text-generation-by-fine-tuning-gpt-2-11c1a9fc639d?source=collection_tagged---------2----------------------------)
 
-**第3天：预训练词嵌入**
+**第 3 天：预训练词嵌入**
 
 *教程：*
 
@@ -248,7 +248,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [Word2Vec](https://www.tensorflow.org/tutorials/text/word2vec)
 
-**第4天：使用 BERT 进行文本分类**
+**第 4 天：使用 BERT 进行文本分类**
 
 *教程：*
 
@@ -256,7 +256,7 @@ RNN 是一种重要且广泛使用的深度学习算法，以其在序列和语�
 
 +   [文本相似度](https://www.tensorflow.org/text/tutorials/text_similarity)
 
-**第5天：文本翻译**
+**第 5 天：文本翻译**
 
 *教程：*
 

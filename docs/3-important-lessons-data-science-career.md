@@ -1,10 +1,10 @@
 # 我在数据科学职业中三年所学到的三大最重要的教训
 
-> 原文：[https://www.kdnuggets.com/2021/09/3-important-lessons-data-science-career.html](https://www.kdnuggets.com/2021/09/3-important-lessons-data-science-career.html)
+> 原文：[`www.kdnuggets.com/2021/09/3-important-lessons-data-science-career.html`](https://www.kdnuggets.com/2021/09/3-important-lessons-data-science-career.html)
 
-[评论](#comments)
+评论
 
-![](../Images/2145e86ef2c74cf1a7a26ad52551b011.png)
+![](img/2145e86ef2c74cf1a7a26ad52551b011.png)
 
 *照片由 [Mantas Hesthaven](https://unsplash.com/@mantashesthaven?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/journey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)上提供。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 ## 实际上，大部分时间是花费在你的项目之间（前后）的。
 
-![](../Images/3c59369067c283538ba9db5fa0771931.png)
+![](img/3c59369067c283538ba9db5fa0771931.png)
 
 *图像由作者创建。*
 
@@ -88,22 +88,22 @@ Python 主要用于执行 EDA 和特征工程。也就是说，这两个步骤�
 
 **相关：**
 
-+   [避免的5个数据科学职业错误](https://www.kdnuggets.com/2021/08/5-data-science-career-mistakes-avoid.html)
++   [避免的 5 个数据科学职业错误](https://www.kdnuggets.com/2021/08/5-data-science-career-mistakes-avoid.html)
 
 +   [成为数据科学家后，我的学习路径如何改变](https://www.kdnuggets.com/2021/08/learning-path-changed-becoming-data-scientist.html)
 
-+   [麦肯锡教给我的5个课程，让你成为更优秀的数据科学家](https://www.kdnuggets.com/2021/07/5-lessons-mckinsey-taught-better-data-scientist.html)
++   [麦肯锡教给我的 5 个课程，让你成为更优秀的数据科学家](https://www.kdnuggets.com/2021/07/5-lessons-mckinsey-taught-better-data-scientist.html)
 
 ### 更多相关内容
 
-+   [4个帮助我在困难的就业市场中导航的职业经验教训](https://www.kdnuggets.com/2023/05/4-lessons-made-difference-navigating-current-job-market.html)
++   [4 个帮助我在困难的就业市场中导航的职业经验教训](https://www.kdnuggets.com/2023/05/4-lessons-made-difference-navigating-current-job-market.html)
 
-+   [KDnuggets新闻，8月3日：10个最常用的Tableau函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
 
 +   [数据科学三十年：来自数据科学从业者的回顾](https://www.kdnuggets.com/30-years-of-data-science-a-review-from-a-data-science-practitioner)
 
 +   [将你的职业转换为数据科学的终极指南](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)
 
-+   [我从使用ChatGPT进行数据科学中学到的东西](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
++   [我从使用 ChatGPT 进行数据科学中学到的东西](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
 
-+   [我如何在14年内将薪水提升14倍作为数据分析/科学专业人士](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)
++   [我如何在 14 年内将薪水提升 14 倍作为数据分析/科学专业人士](https://www.kdnuggets.com/2021/12/14x-salary-in-14-years-data-professional.html)

@@ -1,40 +1,40 @@
 # 数据科学与冒名顶替综合症
 
-> 原文：[https://www.kdnuggets.com/2017/09/data-science-imposter-syndrome.html](https://www.kdnuggets.com/2017/09/data-science-imposter-syndrome.html)
+> 原文：[`www.kdnuggets.com/2017/09/data-science-imposter-syndrome.html`](https://www.kdnuggets.com/2017/09/data-science-imposter-syndrome.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **我不是一个真正的数据科学家。**
 
-我从未使用过深度学习框架，比如TensorFlow或Keras。
+我从未使用过深度学习框架，比如 TensorFlow 或 Keras。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
-我从未接触过GPU。
+我从未接触过 GPU。
 
 我没有计算机科学或统计学学位。我的学位是机械工程学，真是奇怪。
 
-我不知道R。
+我不知道 R。
 
-但我还没有放弃希望。阅读了一些职位发布后，我发现成为真正的数据科学家只需五个博士学位和87年的工作经验。
+但我还没有放弃希望。阅读了一些职位发布后，我发现成为真正的数据科学家只需五个博士学位和 87 年的工作经验。
 
 如果这听起来很熟悉，你要知道你并不孤单。你不是唯一一个担心自己还能伪装成数据科学家的时间有多长的人。你不是唯一一个对下一个面试被笑出来而做噩梦的人。
 
-冒名顶替综合症是一种感觉，认为你领域中的其他人都比你更有资格，你永远不会被雇佣，或者如果已经被雇佣，那你是招聘过程中的一个错误。尽管统计上看这种感觉不太可能，但我们中的大多数人感到低于平均水平。根据我与同事的交谈，我估计我们中有9成在某一时刻遭受过冒名顶替综合症。（如果这对你来说完全陌生，我建议你阅读Kruger和Dunning的“[无能而无意识](https://github.com/brohrer/public-hosting/raw/master/kruger_dunning.pdf)”一书。）
+冒名顶替综合症是一种感觉，认为你领域中的其他人都比你更有资格，你永远不会被雇佣，或者如果已经被雇佣，那你是招聘过程中的一个错误。尽管统计上看这种感觉不太可能，但我们中的大多数人感到低于平均水平。根据我与同事的交谈，我估计我们中有 9 成在某一时刻遭受过冒名顶替综合症。（如果这对你来说完全陌生，我建议你阅读 Kruger 和 Dunning 的“[无能而无意识](https://github.com/brohrer/public-hosting/raw/master/kruger_dunning.pdf)”一书。）
 
-![ewok](../Images/f662e4f74fb589c5dd400ca6dd91dcc5.png)
+![ewok](img/f662e4f74fb589c5dd400ca6dd91dcc5.png)
 
-即便是伊沃克有时也会感到像冒名顶替者。（图片由Diane Rohrer提供。）
+即便是伊沃克有时也会感到像冒名顶替者。（图片由 Diane Rohrer 提供。）
 
 **真正的数据科学家是什么样的**
 
@@ -64,9 +64,9 @@
 
 +   可以快速使用他们的工具来产生高质量的结果。
 
-一名通才不一定了解算法的细节和工具的使用技巧。他们会告诉你数据清洗很关键，但可能无法列举替代缺失值的方法之间的权衡。他们会告诉你Spark是加速计算的好方法，但可能无法建议你使用最佳设置。
+一名通才不一定了解算法的细节和工具的使用技巧。他们会告诉你数据清洗很关键，但可能无法列举替代缺失值的方法之间的权衡。他们会告诉你 Spark 是加速计算的好方法，但可能无法建议你使用最佳设置。
 
-一名专家不一定对自己领域之外的内容了解很多。他们会知道如何在5亿个数据点上运行线性回归的最佳架构，但可能无法解释朴素贝叶斯分类器。他们会敏锐地把握平方损失、铰链损失和逻辑损失之间的权衡，但可能无法从Hive表中查询数据。
+一名专家不一定对自己领域之外的内容了解很多。他们会知道如何在 5 亿个数据点上运行线性回归的最佳架构，但可能无法解释朴素贝叶斯分类器。他们会敏锐地把握平方损失、铰链损失和逻辑损失之间的权衡，但可能无法从 Hive 表中查询数据。
 
 另一种描述通才和专家的方法是“广度”与“深度”。他们都是技术精通的，但他们的专长分布不同。我们每个人都是部分通才和部分专家。随着职业的发展，你会找到最适合你的混合方式。
 
@@ -90,19 +90,19 @@
 
 **相关内容：**
 
-+   [KDnuggets顶级博主：与顶级数据科学家Brandon Rohrer的访谈](/2017/02/top-blogger-interview-brandon-rohrer-data-science.html)
++   KDnuggets 顶级博主：与顶级数据科学家 Brandon Rohrer 的访谈
 
-+   [数据科学口袋指南](/2016/04/pocket-guide-data-science.html)
++   数据科学口袋指南
 
-+   [如何获得数据科学工作：一个非常具体的指南](/2017/03/get-data-science-job-guide.html)
++   如何获得数据科学工作：一个非常具体的指南
 
 ### 更多相关话题
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学，寻找目标并找到目标……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

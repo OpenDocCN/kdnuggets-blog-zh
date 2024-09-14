@@ -1,28 +1,28 @@
 # 免费报名数据科学本科项目
 
-> 原文：[https://www.kdnuggets.com/enroll-in-a-data-science-undergraduate-program-for-free](https://www.kdnuggets.com/enroll-in-a-data-science-undergraduate-program-for-free)
+> 原文：[`www.kdnuggets.com/enroll-in-a-data-science-undergraduate-program-for-free`](https://www.kdnuggets.com/enroll-in-a-data-science-undergraduate-program-for-free)
 
-![免费报名数据科学本科项目](../Images/212879026789b36cfe32340b1d4b336d.png)
+![免费报名数据科学本科项目](img/212879026789b36cfe32340b1d4b336d.png)
 
 作者提供的图片
 
-我很高兴与大家分享另一个类似于我们之前讨论的[计算机科学学位项目](/enroll-in-a-4-year-computer-science-degree-program-for-free)的学位项目。该项目由开源社会大学提供，并且完全免费。
+我很高兴与大家分享另一个类似于我们之前讨论的计算机科学学位项目的学位项目。该项目由开源社会大学提供，并且完全免费。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 [ossu/data-science](https://github.com/ossu/data-science) 课程旨在为那些自我激励并希望以自己的节奏探索数据科学世界的学习者提供服务。该项目提供了一个综合的本科数据科学课程，使用来自世界顶级大学的课程。最重要的是，报名该项目的学习者无需承担经济负担。
 
-[![免费报名数据科学本科项目](../Images/fc4e8c6db9ab87fc201212c3f0465aa6.png)](https://github.com/ossu/data-science)
+![免费报名数据科学本科项目](https://github.com/ossu/data-science)
 
 # 课程设置
 
@@ -66,7 +66,7 @@
 
 你需要了解某些课程可以同时进行，而其他课程则需要依次完成。你可以查看提供的图表来理解主题和课程的顺序。
 
-![免费注册数据科学本科项目](../Images/d740457f2a34208ac9bbb60e33c2d5ca.png)
+![免费注册数据科学本科项目](img/d740457f2a34208ac9bbb60e33c2d5ca.png)
 
 图片来源于 [ossu/data-science](https://github.com/ossu/data-science)
 
@@ -92,11 +92,11 @@ Python、R 和 SQL 是数据科学社区中主要的编程语言。课程涵盖�
 
 ### 更多相关主题
 
-+   [报名参加免费的4年计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
++   [报名参加免费的 4 年计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
 
-+   [不要错过！在2023年结束前报名免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！在 2023 年结束前报名免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
 
-+   [2022年最值得报名的8个数据科学课程，助力职业迅猛发展](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
++   [2022 年最值得报名的 8 个数据科学课程，助力职业迅猛发展](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
 
 +   [利用第三最佳在线数据硕士课程最大化你的价值](https://www.kdnuggets.com/2023/05/bay-path-maximize-value-online-masters-data-science.html)
 

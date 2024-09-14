@@ -1,22 +1,22 @@
 # 可解释机器学习的 Python 库
 
-> 原文：[https://www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html](https://www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html`](https://www.kdnuggets.com/2019/09/python-libraries-interpretable-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **由 [Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/), 数据科学家**
 
-![图示](../Images/88057e875a422e75bf9b7cfdf270926e.png)
+![图示](img/88057e875a422e75bf9b7cfdf270926e.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -70,7 +70,7 @@ visualizer.poof()
 
 ```
 
-![](../Images/d37ba0497363637469e376ecf48e8877.png)
+![](img/d37ba0497363637469e376ecf48e8877.png)
 
 现在让我们拟合一个 RandomForestClassifier，并使用另一个可视化工具评估性能。
 
@@ -85,7 +85,7 @@ visualizer.poof()
 
 ```
 
-![](../Images/8483d4933ff1e90ad2d4bb9683e31cc0.png)
+![](img/8483d4933ff1e90ad2d4bb9683e31cc0.png)
 
 ### [ELI5](https://eli5.readthedocs.io/en/latest/)
 
@@ -99,7 +99,7 @@ eli5.show_weights(model, feature_names = X.columns.tolist())
 
 ```
 
-![](../Images/c59fc7f1c7e3b6e19c61d732b323df9f.png)
+![](img/c59fc7f1c7e3b6e19c61d732b323df9f.png)
 
 默认情况下，`show_weights` 方法使用 `gain` 计算权重，但你可以通过添加 `importance_type` 参数来指定其他类型。
 
@@ -112,7 +112,7 @@ show_prediction(model, X_train.iloc[1], feature_names = X.columns.tolist(),
 
 ```
 
-![](../Images/1a92558a0481df224e0f93d45a802e70.png)
+![](img/1a92558a0481df224e0f93d45a802e70.png)
 
 ### [LIME](https://github.com/marcotcr/lime)
 
@@ -150,7 +150,7 @@ exp.show_in_notebook(show_all=False)
 
 ```
 
-![](../Images/d6225427e86f7eca9ad058a4acc3012c.png)
+![](img/d6225427e86f7eca9ad058a4acc3012c.png)
 
 ### [MLxtend](http://rasbt.github.io/mlxtend/)
 
@@ -184,7 +184,7 @@ X_train_ml = X_train[['proline', 'color_intensity']].values
 y_train_ml = y_train.values
 ```
 
-接下来，我们创建分类器，将它们拟合到训练数据中，并使用MLxtend可视化决策边界。输出结果显示在代码下方。
+接下来，我们创建分类器，将它们拟合到训练数据中，并使用 MLxtend 可视化决策边界。输出结果显示在代码下方。
 
 ```py
 clf1 = LogisticRegression(random_state=1)
@@ -207,34 +207,34 @@ for clf, lab, grd in zip([clf1, clf2, clf3, eclf],
 
 ```
 
-![](../Images/88057e875a422e75bf9b7cfdf270926e.png)
+![](img/88057e875a422e75bf9b7cfdf270926e.png)
 
 这绝不是解释、可视化和说明机器学习模型的库的详尽列表。这个优秀的[帖子](https://skymind.ai/wiki/python-ai)包含了许多其他有用的库，可以尝试一下。
 
 感谢阅读！
 
-**个人简介：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)** 正在通过自学学习数据科学。Holiday Extras的数据科学家。alGo的联合创始人。
+**个人简介：[Rebecca Vickery](https://www.linkedin.com/in/rebecca-vickery-20b94133/)** 正在通过自学学习数据科学。Holiday Extras 的数据科学家。alGo 的联合创始人。
 
 [原文](https://towardsdatascience.com/python-libraries-for-interpretable-machine-learning-c476a08ed2c7)。经许可转载。
 
 **相关：**
 
-+   [揭开黑箱：如何利用可解释机器学习](/2019/08/open-black-boxes-explainable-machine-learning.html)
++   揭开黑箱：如何利用可解释机器学习
 
-+   [解释性机器学习/xAI的数据科学手册](/2019/07/domino-xai-data-science-explainable.html)
++   解释性机器学习/xAI 的数据科学手册
 
-+   [每个数据科学家都应该知道的命令行基础知识](/2019/08/command-line-basics-every-data-scientist.html)
++   每个数据科学家都应该知道的命令行基础知识
 
 ### 更多相关话题
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [为什么Python是初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [为什么 Python 是初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

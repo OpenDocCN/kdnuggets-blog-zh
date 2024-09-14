@@ -1,8 +1,8 @@
 # 数据科学的 4 个有用的中级 SQL 查询
 
-> 原文：[https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html`](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 
-![数据科学的 4 个有用的中级 SQL 查询](../Images/44aeb01bc678cfb6066fcc2941b03b98.png)
+![数据科学的 4 个有用的中级 SQL 查询](img/44aeb01bc678cfb6066fcc2941b03b98.png)
 
 图片由 [Shubham Dhage](https://unsplash.com/@theshubhamdhage?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/data-science?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -20,7 +20,7 @@
 
 # 1\. SQL 中的触发器
 
-![数据科学的 4 个有用的中级 SQL 查询](../Images/0fae18dd20bd6da1e32b8b1281f52e4a.png)
+![数据科学的 4 个有用的中级 SQL 查询](img/0fae18dd20bd6da1e32b8b1281f52e4a.png)
 
 SQL 中的触发器 | 来源：作者提供的图片
 
@@ -78,7 +78,7 @@ DELIMETER;
 
 # 2\. SQL 中的分区
 
-![4 Useful Intermediate SQL Queries for Data Science](../Images/26b5951da96782fef7329530dce67219.png)
+![4 Useful Intermediate SQL Queries for Data Science](img/26b5951da96782fef7329530dce67219.png)
 
 PARTITION BY in SQL | 来源: 作者插图
 
@@ -126,7 +126,7 @@ AS no_of_male_female FROM EMPLOYEE;
 
 # 3\. 限制查询
 
-![4 Useful Intermediate SQL Queries for Data Science](../Images/1b465a57842324bc9cc1f741dd091e87.png)
+![4 Useful Intermediate SQL Queries for Data Science](img/1b465a57842324bc9cc1f741dd091e87.png)
 
 LIMIT in SQL | 来源: 作者插图
 
@@ -174,7 +174,7 @@ SELECT * FROM EMPLOYEE LIMIT 2,3;
 
 # 4. COALESCE 函数
 
-![4 个有用的中级 SQL 查询用于数据科学](../Images/3a5f300f8b55ce8a616c85e3bb05afb2.png)
+![4 个有用的中级 SQL 查询用于数据科学](img/3a5f300f8b55ce8a616c85e3bb05afb2.png)
 
 COALESCE 函数在 SQL 中 | 来源: 作者提供的图片
 
@@ -188,7 +188,7 @@ COALESCE 函数在 SQL 中 | 来源: 作者提供的图片
 COALESCE(value_1,value_2,......, value_n)
 ```
 
-所以让我们了解一下；请参见上面的第4张图片。你会看到有一个 EMPLOYEE 表，其中包含一个名为 location 的列，在该列中有 3 个 NULL 值。那么如果我们想用有意义的词替换这些 NULL 值呢？所以如上图所示，我们想用词 Missing_value 替换所有 NULL 值。
+所以让我们了解一下；请参见上面的第 4 张图片。你会看到有一个 EMPLOYEE 表，其中包含一个名为 location 的列，在该列中有 3 个 NULL 值。那么如果我们想用有意义的词替换这些 NULL 值呢？所以如上图所示，我们想用词 Missing_value 替换所有 NULL 值。
 
 我们可以通过查看上面图片中的代码来实现这一点。COALESCE 函数将所有 NULL 值替换为 Missing_value。
 

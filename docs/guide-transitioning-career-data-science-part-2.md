@@ -1,10 +1,10 @@
 # 将职业转型为数据科学的逐步指南 – 第二部分
 
-> 原文：[https://www.kdnuggets.com/2019/06/guide-transitioning-career-data-science-part-2.html](https://www.kdnuggets.com/2019/06/guide-transitioning-career-data-science-part-2.html)
+> 原文：[`www.kdnuggets.com/2019/06/guide-transitioning-career-data-science-part-2.html`](https://www.kdnuggets.com/2019/06/guide-transitioning-career-data-science-part-2.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![逐步指南：如何在数据科学领域找到工作](../Images/70b9788cbe60c62a5c35457d43dfc24a.png)
+![逐步指南：如何在数据科学领域找到工作](img/70b9788cbe60c62a5c35457d43dfc24a.png)
 
 这是我关于同一主题的[上一篇博客文章](https://www.kdnuggets.com/2019/05/guide-transitioning-career-data-science-part-1.html)的延续。确保你在继续阅读这里之前先阅读了那篇文章。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -38,29 +38,29 @@
 
 对我而言，我必须分析 Google Analytics 数据，并在 Tableau 中开发一个仪表板来可视化我的分析见解。你的第一步是找到项目的数据源。你可以在 Kaggle 上找到有趣的数据集。你也可以通过“[19 个地方找到免费的数据集](https://www.dataquest.io/blog/free-datasets-for-projects/)”来寻找数据集。
 
-对于我的项目，我将使用[Kaggle上的Google Analytics Customer Revenue](https://www.kaggle.com/c/ga-customer-revenue-prediction)数据集。然后在我的笔记本电脑上安装Microsoft SQL服务器，并将数据集上传到SQL服务器。我这样做是因为根据我的了解，市场数据分析师使用SQL来提取数据。所以我想展示我掌握了SQL。
+对于我的项目，我将使用[Kaggle 上的 Google Analytics Customer Revenue](https://www.kaggle.com/c/ga-customer-revenue-prediction)数据集。然后在我的笔记本电脑上安装 Microsoft SQL 服务器，并将数据集上传到 SQL 服务器。我这样做是因为根据我的了解，市场数据分析师使用 SQL 来提取数据。所以我想展示我掌握了 SQL。
 
-项目的第一步是了解数据集，并提出2到3个你可以通过分析回答的有趣的业务问题。你还需要知道数据集中哪些列（或特征）是回答这些问题所需的。这时你的领域知识就派上用场了。
+项目的第一步是了解数据集，并提出 2 到 3 个你可以通过分析回答的有趣的业务问题。你还需要知道数据集中哪些列（或特征）是回答这些问题所需的。这时你的领域知识就派上用场了。
 
 不要试图让这个项目变得复杂，你的目标是构建一个能让你获得工作的项目。我称这个投资组合项目为“最小可行项目”。
 
-对于我的市场数据分析师角色，我必须学习SQL和Tableau。所以，首先我学习SQL和Tableau的基础知识。你不应该在学习基础知识上花费超过10小时。
+对于我的市场数据分析师角色，我必须学习 SQL 和 Tableau。所以，首先我学习 SQL 和 Tableau 的基础知识。你不应该在学习基础知识上花费超过 10 小时。
 
 一旦你学会了基础知识，你的下一步是找到一个导师，他可以帮助你制定一个详细的计划，按照步骤逐步推进你的项目。选择一个在数据科学领域有丰富经验的导师。你可以使用像[Clarity](https://clarity.fm/)或[Mentor Cruise](https://mentorcruise.com/)这样的服务来寻找经验丰富的数据科学家。安排与数据科学导师的电话会议，询问他们解决问题的最佳方法。详细说明你想解答的业务问题。
 
 在你收到如何回答业务问题的具体计划后，开始你的项目。
 
-如果在进行项目时遇到困境，或在像Stack Overflow这样的论坛上找不到技术问题的答案，你可以再次安排与导师的电话会议，寻求他们的帮助。你也可以在[CodeMentor](https://www.codementor.io/machine-learning-experts)上找到专家以获得技术帮助。
+如果在进行项目时遇到困境，或在像 Stack Overflow 这样的论坛上找不到技术问题的答案，你可以再次安排与导师的电话会议，寻求他们的帮助。你也可以在[CodeMentor](https://www.codementor.io/machine-learning-experts)上找到专家以获得技术帮助。
 
 完成项目后，再次与导师复审项目并获取反馈。
 
 在做这些事情的同时，你也应该与潜在客户保持联系。只需根据与你之前的对话发送一篇有趣的文章：
 
-> *在KDnuggets上看到这篇文章，想起了你说的市场科学相关的内容！无需回复，只是觉得你可能会觉得有趣。*
+> *在 KDnuggets 上看到这篇文章，想起了你说的市场科学相关的内容！无需回复，只是觉得你可能会觉得有趣。*
 
-**第6步：向招聘经理索取介绍**
+**第 6 步：向招聘经理索取介绍**
 
-一旦你的项目完成，将其托管到Github上。并撰写一篇深入的博客文章，介绍你是如何开展这个项目的。在写博客时，技术细节要尽量减少，因为你写这篇博客是为了吸引招聘团队中的业务经理。招聘团队将包括技术和业务人员。技术经理会查看你在Github上的代码，但业务经理更关心你通过分析想回答哪些业务问题。
+一旦你的项目完成，将其托管到 Github 上。并撰写一篇深入的博客文章，介绍你是如何开展这个项目的。在写博客时，技术细节要尽量减少，因为你写这篇博客是为了吸引招聘团队中的业务经理。招聘团队将包括技术和业务人员。技术经理会查看你在 Github 上的代码，但业务经理更关心你通过分析想回答哪些业务问题。
 
 将你的项目和博客文章的链接发送给你的前景并请求反馈。如果大多数前景给出某种反馈，那么在你的项目中实施这些建议。现在，你的前景也会说如果有工作机会他们会推荐你。
 
@@ -76,7 +76,7 @@
 
 如果你的前景同意，你就成功了——80-90%的情况下，你会收到招聘经理的会议或电话。你的前景很可能会做出介绍，因为你在根据他们的反馈采取行动，并且你视他们为导师。因此，这更像是一种导师-学员关系。
 
-通过适当的介绍，VIP几乎每次都会同意与你交谈。
+通过适当的介绍，VIP 几乎每次都会同意与你交谈。
 
 在实际会议中，把它当作一次非正式的会谈——不是推销，而是非正式的对话：提问，与自己的经历相关联，提出你的想法。在谈话中也可以谈论你的项目，但不要炫耀。
 
@@ -118,7 +118,7 @@
 
 +   你有一个针对他们需求的项目
 
-你80%的工作是在面试前完成的。现在是时候完成剩下的20%工作了。
+你 80%的工作是在面试前完成的。现在是时候完成剩下的 20%工作了。
 
 此时，你的潜在雇主对你充满好奇。你提交了一个令人印象深刻的申请，甚至还有共同联系人的介绍。现在，他们希望你来见见团队，回答一些问题，并聊一会儿。还有，他们也想回到工作中！他们希望你成功——如果你适合这个职位。所以，做好面试准备。
 
@@ -142,11 +142,11 @@
 
 **相关：**
 
-+   [将你的职业转型为数据科学的逐步指南 – 第一部分](/2019/05/guide-transitioning-career-data-science-part-1.html)
++   将你的职业转型为数据科学的逐步指南 – 第一部分
 
-+   [雇主希望看到的数据科学项目：如何展示业务影响](/2018/12/data-science-projects-business-impact.html)
++   雇主希望看到的数据科学项目：如何展示业务影响
 
-+   [数据科学作品集中的项目](/2019/04/projects-include-data-science-portfolio.html)
++   数据科学作品集中的项目
 
 ### 更多相关内容
 

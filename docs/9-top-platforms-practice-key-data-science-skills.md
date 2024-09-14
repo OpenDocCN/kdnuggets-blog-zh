@@ -1,8 +1,8 @@
-# 9个顶尖平台，练习关键的数据科学技能
+# 9 个顶尖平台，练习关键的数据科学技能
 
-> 原文：[https://www.kdnuggets.com/2023/03/9-top-platforms-practice-key-data-science-skills.html](https://www.kdnuggets.com/2023/03/9-top-platforms-practice-key-data-science-skills.html)
+> 原文：[`www.kdnuggets.com/2023/03/9-top-platforms-practice-key-data-science-skills.html`](https://www.kdnuggets.com/2023/03/9-top-platforms-practice-key-data-science-skills.html)
 
-![9个顶尖平台，练习关键的数据科学技能](../Images/56dd7f08e66cdc322c3424eb85ce8ea9.png)
+![9 个顶尖平台，练习关键的数据科学技能](img/56dd7f08e66cdc322c3424eb85ce8ea9.png)
 
 现在在线学习的好处在于，学习不再受限。你可以在自己家中舒适地阅读、练习、测验和编程，而无需支付学位费用。
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-由于数据科学被视为一种难以学习的技能，许多雇主并不关心你是在哪里学习Python或其他数据科学技能的，只要你能够胜任。
+由于数据科学被视为一种难以学习的技能，许多雇主并不关心你是在哪里学习 Python 或其他数据科学技能的，只要你能够胜任。
 
 在本文中，我将详细介绍九个数据科学学习平台，这些平台提供互动学习体验。它们配备了各种资源，包括视频教程、互动编码练习和测验，帮助你建立和巩固编程和数据库管理技能。
 
@@ -26,7 +26,7 @@
 
 这里是每个平台的概览，供快速参考。
 
-![9个顶尖平台，练习Python、SQL和编码](../Images/1766c56982fd1a1e6f87c66149525b58.png)
+![9 个顶尖平台，练习 Python、SQL 和编码](img/1766c56982fd1a1e6f87c66149525b58.png)
 
 # 1\. Codecademy
 
@@ -34,29 +34,29 @@
 
 ## 这是什么？
 
-Codecademy是一个在线学习平台，提供编程、数据科学和网页开发的课程和教程。它是初学者和希望提高编码技能的人的超级热门选择。
+Codecademy 是一个在线学习平台，提供编程、数据科学和网页开发的课程和教程。它是初学者和希望提高编码技能的人的超级热门选择。
 
 ## 你可以学到什么？
 
-在Codecademy，你可以学习多种编程语言，如Python、JavaScript、Ruby、HTML、CSS等。不论你喜欢什么，你都能找到相关的课程。Codecademy还提供数据科学主题的课程，如SQL和数据可视化，以及网页开发工具，如React和Git。
+在 Codecademy，你可以学习多种编程语言，如 Python、JavaScript、Ruby、HTML、CSS 等。不论你喜欢什么，你都能找到相关的课程。Codecademy 还提供数据科学主题的课程，如 SQL 和数据可视化，以及网页开发工具，如 React 和 Git。
 
-我个人喜欢Codecademy，因为它非常互动。这个平台提供课程和编码练习，帮助你构建真实项目并理解编程的基本概念。
+我个人喜欢 Codecademy，因为它非常互动。这个平台提供课程和编码练习，帮助你构建真实项目并理解编程的基本概念。
 
 ## 费用多少？
 
-在他们的网站上，他们的标语是“免费学习编码”。确实有一个免费层级，你可以免费获得像“[学习SQL](https://www.codecademy.com/learn/learn-sql)”和“[学习Java: 入门](https://www.codecademy.com/learn/java-introduction)”这样的课程。
+在他们的网站上，他们的标语是“免费学习编码”。确实有一个免费层级，你可以免费获得像“[学习 SQL](https://www.codecademy.com/learn/learn-sql)”和“[学习 Java: 入门](https://www.codecademy.com/learn/java-introduction)”这样的课程。
 
 然而，如果你想进一步提升知识并访问更高级的课程，你需要支付$34.99/月，或者如果你按年支付，则为$17.49/月。
 
 ## 主要优点？
 
-Codecademy之所以突出，是因为其易用性。它对初学者非常友好。许多编码平台自称对初学者友好，因为这是他们的目标受众，但Codecademy对那些从未输入过一行代码的人来说是完美的。
+Codecademy 之所以突出，是因为其易用性。它对初学者非常友好。许多编码平台自称对初学者友好，因为这是他们的目标受众，但 Codecademy 对那些从未输入过一行代码的人来说是完美的。
 
 有很多免费的课程可以尝试，以了解这些语言和它们的教学风格是否适合你。
 
 # 2\. Coursera
 
-![9个顶级平台来练习Python、SQL和编码](../Images/7e60fded73b0877c7123148b35b54bee.png)
+![9 个顶级平台来练习 Python、SQL 和编码](img/7e60fded73b0877c7123148b35b54bee.png)
 
 图片来自 [canva](https://canva.com/)
 
@@ -64,13 +64,13 @@ Codecademy之所以突出，是因为其易用性。它对初学者非常友好�
 
 ## 这是什么？
 
-Coursera是由大学运营的在线学习平台。他们提供在线课程、可以挂在你虚拟LinkedIn墙上的证书，甚至还有完整的学位项目。他们与密歇根大学、耶鲁大学、莱斯大学、伦敦帝国学院等大学合作，还与[更多](https://about.coursera.org/)大学合作。
+Coursera 是由大学运营的在线学习平台。他们提供在线课程、可以挂在你虚拟 LinkedIn 墙上的证书，甚至还有完整的学位项目。他们与密歇根大学、耶鲁大学、莱斯大学、伦敦帝国学院等大学合作，还与[更多](https://about.coursera.org/)大学合作。
 
 课程通常持续一到九个月。
 
 ## 你可以学到什么？
 
-在Coursera上，你可以学习几乎任何技能，包括课程如“[幸福科学](https://www.coursera.org/learn/the-science-of-well-being)”、“[心理学导论](https://www.coursera.org/learn/introduction-psychology)”和“[金融市场](https://www.coursera.org/learn/financial-markets-global)”。
+在 Coursera 上，你可以学习几乎任何技能，包括课程如“[幸福科学](https://www.coursera.org/learn/the-science-of-well-being)”、“[心理学导论](https://www.coursera.org/learn/introduction-psychology)”和“[金融市场](https://www.coursera.org/learn/financial-markets-global)”。
 
 他们还提供：
 
@@ -84,11 +84,11 @@ Coursera是由大学运营的在线学习平台。他们提供在线课程、可
 
 ## 费用多少？
 
-一些课程是免费的，例如我上面列出的前三门课程。一些指导项目，例如“[绝对初学者的Docker](https://www.coursera.org/projects/docker-for-absolute-beginners?action=enroll)”，起价为$9.99/月。如果你报名参加更有用的课程，如专业化或职业证书，这些课程的费用为$39.99/月。学位课程自然更贵——学位课程的起价为$9,000。
+一些课程是免费的，例如我上面列出的前三门课程。一些指导项目，例如“[绝对初学者的 Docker](https://www.coursera.org/projects/docker-for-absolute-beginners?action=enroll)”，起价为$9.99/月。如果你报名参加更有用的课程，如专业化或职业证书，这些课程的费用为$39.99/月。学位课程自然更贵——学位课程的起价为$9,000。
 
 ## 主要优点？
 
-Coursera提供了种类繁多的课程，价格相当合理，由耶鲁大学和IBM等顶级机构提供。你可以获得实用技能，对广泛主题有一个基础了解，或通过专业化深入学习。
+Coursera 提供了种类繁多的课程，价格相当合理，由耶鲁大学和 IBM 等顶级机构提供。你可以获得实用技能，对广泛主题有一个基础了解，或通过专业化深入学习。
 
 # 3\. StrataScratch
 
@@ -186,39 +186,39 @@ Udemy 的课程旨在提供可访问性和灵活性，配有视频课程、测�
 
 ## 主要好处是什么？
 
-Udemy的巨大广度是它的优势。你可以找到不仅仅是任何语言的课程，还可以找到任何目的的课程，如“[面向对象编程的Python](https://www.udemy.com/course/python-beyond-the-basics-object-oriented-programming/)”或“[React完全指南](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)”。
+Udemy 的巨大广度是它的优势。你可以找到不仅仅是任何语言的课程，还可以找到任何目的的课程，如“[面向对象编程的 Python](https://www.udemy.com/course/python-beyond-the-basics-object-oriented-programming/)”或“[React 完全指南](https://www.udemy.com/course/react-the-complete-guide-incl-redux/)”。
 
 由于任何人都可以上传课程，你肯定能找到一个与你契合的讲师。
 
 # 6\. edX
 
-![9 Top Platforms to Practice Python, SQL, and Coding](../Images/a7747069bc9c3b6bd321b80c4fc44f66.png)
+![9 Top Platforms to Practice Python, SQL, and Coding](img/a7747069bc9c3b6bd321b80c4fc44f66.png)
 
 图片来源于[canva](https://canva.com/)
 
-[edX](https://www.edx.org/)类似于Coursera的终极版。edX与多个著名大学合作，包括哈佛大学、麻省理工学院和加州大学伯克利分校。
+[edX](https://www.edx.org/)类似于 Coursera 的终极版。edX 与多个著名大学合作，包括哈佛大学、麻省理工学院和加州大学伯克利分校。
 
 ## 这是什么？
 
-与Coursera类似，edX提供来自顶级大学和机构的在线课程。然而，edX在合作伙伴和提供的技能方面稍有不同。例如，edX提供验证证书、专业证书和微硕士课程，而Coursera仅提供专业化、专业证书和学位。
+与 Coursera 类似，edX 提供来自顶级大学和机构的在线课程。然而，edX 在合作伙伴和提供的技能方面稍有不同。例如，edX 提供验证证书、专业证书和微硕士课程，而 Coursera 仅提供专业化、专业证书和学位。
 
-Coursera也更具自我节奏，而edX则有考试和作业的截止日期。
+Coursera 也更具自我节奏，而 edX 则有考试和作业的截止日期。
 
 ## 你能学到什么？
 
-在3,000多个课程中，你将能够找到一个好的数据科学技能来学习。该平台提供了“[分析建模入门](https://www.edx.org/course/introduction-to-analytics-modeling)”、“[使用Python进行机器学习](https://www.edx.org/course/machine-learning-with-python-a-practical-introduct)”和“[数据素养基础](https://www.edx.org/course/essentials-of-data-literacy)”等课程。
+在 3,000 多个课程中，你将能够找到一个好的数据科学技能来学习。该平台提供了“[分析建模入门](https://www.edx.org/course/introduction-to-analytics-modeling)”、“[使用 Python 进行机器学习](https://www.edx.org/course/machine-learning-with-python-a-practical-introduct)”和“[数据素养基础](https://www.edx.org/course/essentials-of-data-literacy)”等课程。
 
 ## 费用是多少？
 
-这因课程而异，但一般来说，edX比Coursera稍贵。你几乎可以免费访问任何课程进行审计，但这有一些限制——你只能访问一个月的材料，你不会获得证书，而且你的作业不会被评分。
+这因课程而异，但一般来说，edX 比 Coursera 稍贵。你几乎可以免费访问任何课程进行审计，但这有一些限制——你只能访问一个月的材料，你不会获得证书，而且你的作业不会被评分。
 
-如果你需要验证课程，价格从每门课程大约49美元到149美元不等。
+如果你需要验证课程，价格从每门课程大约 49 美元到 149 美元不等。
 
-他们还提供价格高达数千美元的训练营。例如，[加州大学伯克利分校](https://www.edx.org/course/berkeley-coding-boot-camp?source=edx&category=boot-camps&medium=referral&campaign=Coding+Boot+Camp&c=&lsrc=edx&placement_url=https%3A%2F%2Fwww.edx.org%2F&version=edx&eaid=1ffe2e46-ee0c-4072-aaa5-68c930174a79)的24周编码训练营费用为13,000美元。
+他们还提供价格高达数千美元的训练营。例如，[加州大学伯克利分校](https://www.edx.org/course/berkeley-coding-boot-camp?source=edx&category=boot-camps&medium=referral&campaign=Coding+Boot+Camp&c=&lsrc=edx&placement_url=https%3A%2F%2Fwww.edx.org%2F&version=edx&eaid=1ffe2e46-ee0c-4072-aaa5-68c930174a79)的 24 周编码训练营费用为 13,000 美元。
 
 ## 关键好处是什么？
 
-这个平台与Coursera相当。主要的好处是它比Coursera更具指导性，你可能还能通过他们的证书获得更多品牌认可。
+这个平台与 Coursera 相当。主要的好处是它比 Coursera 更具指导性，你可能还能通过他们的证书获得更多品牌认可。
 
 # 7\. Kaggle
 
@@ -226,7 +226,7 @@ Coursera也更具自我节奏，而edX则有考试和作业的截止日期。
 
 ## 这是什么？
 
-Kaggle是一个非常受欢迎且运作良好的数据科学竞赛平台，特别倾向于机器学习。它由Google拥有，拥有成千上万的数据集供你练习。
+Kaggle 是一个非常受欢迎且运作良好的数据科学竞赛平台，特别倾向于机器学习。它由 Google 拥有，拥有成千上万的数据集供你练习。
 
 你将获得：
 
@@ -258,7 +258,7 @@ Kaggle是一个非常受欢迎且运作良好的数据科学竞赛平台，特�
 
 # 8. HackerRank
 
-![9 个顶级平台来练习 Python、SQL 和编码](../Images/52f248a1bededb2154f094ea2bb718ab.png)
+![9 个顶级平台来练习 Python、SQL 和编码](img/52f248a1bededb2154f094ea2bb718ab.png)
 
 图片来自 [canva](https://canva.com/)
 
@@ -274,19 +274,19 @@ HackerRank 是一个为软件开发人员提供编码挑战和竞赛的网站，
 
 ## 你能学到什么？
 
-HackerRank的工作方式像是组合了一个作品集和Kaggle。你可以参与排名比赛，也可以获得Go、C#和Java等语言的认证。
+HackerRank 的工作方式像是组合了一个作品集和 Kaggle。你可以参与排名比赛，也可以获得 Go、C#和 Java 等语言的认证。
 
 他们有三个学习领域：
 
 +   [准备](https://www.hackerrank.com/dashboard)。这包括面试准备工具包、一些基础认证，以及学习算法、数据结构和数学等各种主题。
 
-+   [认证](https://www.hackerrank.com/skills-verification)。这个区域包含了你需要的所有认证，从R到SQL到JavaScript。
++   [认证](https://www.hackerrank.com/skills-verification)。这个区域包含了你需要的所有认证，从 R 到 SQL 到 JavaScript。
 
-+   [竞争](https://www.hackerrank.com/contests)。这是更类似于Kaggle的一部分，提供了比赛和竞赛来展示你的知识并赢得奖品或声誉。
++   [竞争](https://www.hackerrank.com/contests)。这是更类似于 Kaggle 的一部分，提供了比赛和竞赛来展示你的知识并赢得奖品或声誉。
 
 基本上，它是一个适合积极求职者以及任何想学习的人在具有挑战性和竞争力的环境中练习和测试编码技能的好地方。
 
-HackerRank还为你提供了资源、教程、文章和示例代码。
+HackerRank 还为你提供了资源、教程、文章和示例代码。
 
 ## 这要多少钱？
 
@@ -294,7 +294,7 @@ HackerRank还为你提供了资源、教程、文章和示例代码。
 
 ## 主要好处？
 
-HackerRank的独特之处在于它是为公司设计的，而不是个人。这使得个人可以非常有用地看到公司招聘所需的技能。你可以从面试的角度了解自己，从而知道应该集中精力提升哪些技能。
+HackerRank 的独特之处在于它是为公司设计的，而不是个人。这使得个人可以非常有用地看到公司招聘所需的技能。你可以从面试的角度了解自己，从而知道应该集中精力提升哪些技能。
 
 它非常适合那些希望从事数据科学工作的人。
 
@@ -304,21 +304,21 @@ HackerRank的独特之处在于它是为公司设计的，而不是个人。这�
 
 ## 这是什么？
 
-包括StackOverflow作为学习平台有点厚脸皮，因为这并不是它设计的目的。但它是我用来自然学习Python和R的最佳平台之一。而且最棒的是，它是免费的。
+包括 StackOverflow 作为学习平台有点厚脸皮，因为这并不是它设计的目的。但它是我用来自然学习 Python 和 R 的最佳平台之一。而且最棒的是，它是免费的。
 
-StackOverflow是一个程序员、开发者和软件工程师提问并获得众包答案的地方。答案可以根据其帮助性和准确性被投票提升或降低。
+StackOverflow 是一个程序员、开发者和软件工程师提问并获得众包答案的地方。答案可以根据其帮助性和准确性被投票提升或降低。
 
 这是一个包含多年编程问题和答案的大型资料库。
 
 ## 你可以学到什么？
 
-+   [Python编程](https://stackoverflow.com/search?q=python+programming)：许多与其语法、库和最佳实践相关的问题和答案。
++   [Python 编程](https://stackoverflow.com/search?q=python+programming)：许多与其语法、库和最佳实践相关的问题和答案。
 
 +   [SQL](https://stackoverflow.com/questions/tagged/sql)：包括查询、数据库设计和优化技术。
 
 +   [算法和数据结构](https://stackoverflow.com/search?q=algorithms+data+structures)：排序、搜索和图算法。
 
-+   [Web开发](https://stackoverflow.com/search?q=web+dev)：HTML、CSS、JavaScript以及如Django和Ruby on Rails等网页框架。
++   [Web 开发](https://stackoverflow.com/search?q=web+dev)：HTML、CSS、JavaScript 以及如 Django 和 Ruby on Rails 等网页框架。
 
 +   [调试](https://stackoverflow.com/search?q=debugging)：关于调试技术和最佳实践的问题和答案非常多。
 

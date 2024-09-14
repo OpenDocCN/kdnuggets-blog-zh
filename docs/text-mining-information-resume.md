@@ -1,10 +1,10 @@
 # 文本挖掘 101：从简历中挖掘信息
 
-> 原文：[https://www.kdnuggets.com/2017/05/text-mining-information-resume.html](https://www.kdnuggets.com/2017/05/text-mining-information-resume.html)
+> 原文：[`www.kdnuggets.com/2017/05/text-mining-information-resume.html`](https://www.kdnuggets.com/2017/05/text-mining-information-resume.html)
 
 **作者：Yogesh H. Kulkarni**
 
-![](../Images/1e46e710e41a4018807625084a80b8e8.png)
+![](img/1e46e710e41a4018807625084a80b8e8.png)
 
 ### 摘要
 
@@ -24,13 +24,13 @@
 
 ### 实体规范
 
-配置文件指定了要提取的实体及其模式和提取方法。它还指定了在其中查找给定实体的部分。下方文本框中显示的规范描述了元数据实体，如 Name、Phone、Email 等。提取它们的方法是“univalue_extractor”。这些实体要搜索的部分被命名为“”，这是一个非标记的部分，如简历的前几行。像 Email 或 Phone 这样的实体可以有多个正则表达式模式。如果第一个失败，则尝试第二个，依此类推。这里是所用模式的简要描述：![](../Images/937d2cfcc0a91f8d5f04f640d9c95e1b.png)
+配置文件指定了要提取的实体及其模式和提取方法。它还指定了在其中查找给定实体的部分。下方文本框中显示的规范描述了元数据实体，如 Name、Phone、Email 等。提取它们的方法是“univalue_extractor”。这些实体要搜索的部分被命名为“”，这是一个非标记的部分，如简历的前几行。像 Email 或 Phone 这样的实体可以有多个正则表达式模式。如果第一个失败，则尝试第二个，依此类推。这里是所用模式的简要描述：![](img/937d2cfcc0a91f8d5f04f640d9c95e1b.png)
 
 +   姓名：假定简历的第一行包含姓名，前面可有“Name:”前缀。
 
 +   邮箱：是一个单词（中间可有点），然后是“@”，接着是一个单词、点，再一个单词。
 
-+   电话：括号中的国际代码（可选），然后是3-3-4的数字模式，前3位数字可选用括号包围。对于印度号码，它可以硬编码为“+91”，如下一条所示。
++   电话：括号中的国际代码（可选），然后是 3-3-4 的数字模式，前 3 位数字可选用括号包围。对于印度号码，它可以硬编码为“+91”，如下一条所示。
 
 +   Python 的‘etree’ ElementTree 库用于将配置 xml 解析为内部字典。
 
@@ -38,7 +38,7 @@
 
 +   一旦匹配到实体，它会作为节点标签存储，如 Email、Phone 等。
 
-![](../Images/bc7b59b8a7aa1e02cce29b29f2e87b89.png)
+![](img/bc7b59b8a7aa1e02cce29b29f2e87b89.png)
 
 像上面描述的 Metadata，教育资格可以用下面的配置进行搜索：
 
@@ -60,15 +60,15 @@
 
 +   一旦新的标题匹配，下一节的新状态开始，如此继续。
 
-![](../Images/13d7c4500c3acdddd9d67d91bd747c0d.png)
+![](img/13d7c4500c3acdddd9d67d91bd747c0d.png)
 
 **结果**
 
 以下是一个样本简历：
 
-![](../Images/dee8d6e8b16ef536e15589413a0e257f.png)
+![](img/dee8d6e8b16ef536e15589413a0e257f.png)
 
-![](../Images/13c4cc7f89cc34b302f3c39ffbb8a36c.png)
+![](img/13c4cc7f89cc34b302f3c39ffbb8a36c.png)
 
 提取的实体如下所示：
 
@@ -78,25 +78,25 @@
 
 本文展示了如何从非结构化数据（如简历）中挖掘结构化信息。由于实施示例仅适用于一个样本，它可能不适用于其他格式。需要进行增强和定制，以适应其他类型的简历。除了简历，解析规范分离框架还可以用于不同领域的其他类型文档，通过指定特定领域的配置文件来实现。
 
-**![](../Images/9f10d69469cf984ba9ce95b6a4ab4ec7.png)简介：** [**Yogesh H. Kulkarni**](https://www.linkedin.com/in/yogeshkulkarni/)，在几何建模领域工作超过16年后，最近完成了博士学位。在进行博士研究期间，他进入了数据科学领域，并希望进一步从事这一领域的职业。他对文本挖掘、机器学习/深度学习充满兴趣，主要使用Python技术栈进行实现。他很乐意听到您对本文以及相关话题、项目、任务、机会等的看法。
+**![](img/9f10d69469cf984ba9ce95b6a4ab4ec7.png)简介：** [**Yogesh H. Kulkarni**](https://www.linkedin.com/in/yogeshkulkarni/)，在几何建模领域工作超过 16 年后，最近完成了博士学位。在进行博士研究期间，他进入了数据科学领域，并希望进一步从事这一领域的职业。他对文本挖掘、机器学习/深度学习充满兴趣，主要使用 Python 技术栈进行实现。他很乐意听到您对本文以及相关话题、项目、任务、机会等的看法。
 
 **相关：**
 
-+   [利用深度学习从职位描述中提取知识](/2017/05/deep-learning-extract-knowledge-job-descriptions.html)
++   利用深度学习从职位描述中提取知识
 
-+   [理解文本分析](/2017/02/sas-text-analytics-nyc.html)
++   理解文本分析
 
-+   [文本挖掘亚马逊手机评论：有趣的见解](/2017/01/data-mining-amazon-mobile-phone-reviews-interesting-insights.html)
++   文本挖掘亚马逊手机评论：有趣的见解
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -104,12 +104,12 @@
 
 +   [停止学习数据科学，寻找目的，再找到目的……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)

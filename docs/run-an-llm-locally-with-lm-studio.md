@@ -1,68 +1,68 @@
-# 在LM Studio中本地运行LLM
+# 在 LM Studio 中本地运行 LLM
 
-> 原文：[https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)
+> 原文：[`www.kdnuggets.com/run-an-llm-locally-with-lm-studio`](https://www.kdnuggets.com/run-an-llm-locally-with-lm-studio)
 
-![在本地运行LLM与LM Studio](../Images/8c0849d6562ce7f6f455a3fc37caad58.png)
+![在本地运行 LLM 与 LM Studio](img/8c0849d6562ce7f6f455a3fc37caad58.png)
 
 编辑器截图
 
-这已经是一个有趣的12个月。大型语言模型（LLMs）成为了所有技术相关事物的前沿。您可以拥有像[ChatGPT](/chatgpt-vs-bard)、[Gemini](/chatgpts-new-rival-googles-gemini)等LLMs。
+这已经是一个有趣的 12 个月。大型语言模型（LLMs）成为了所有技术相关事物的前沿。您可以拥有像 ChatGPT、Gemini 等 LLMs。
 
 * * *
 
-## 我们的Top 3课程推荐
+## 我们的 Top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈入网络安全职业快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈入网络安全职业快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
-这些LLMs目前在云端运行，这意味着它们在别人的计算机上运行。如果某物在别处运行，您可以想象它有多昂贵。因为如果便宜的话，为什么不在您自己的计算机上本地运行呢？
+这些 LLMs 目前在云端运行，这意味着它们在别人的计算机上运行。如果某物在别处运行，您可以想象它有多昂贵。因为如果便宜的话，为什么不在您自己的计算机上本地运行呢？
 
-但现在情况已经完全改变。您现在可以使用[LM Studio](https://lmstudio.ai/)运行不同的LLMs。
+但现在情况已经完全改变。您现在可以使用[LM Studio](https://lmstudio.ai/)运行不同的 LLMs。
 
-# LM Studio是什么？
+# LM Studio 是什么？
 
-LM Studio 是一个工具，您可以用来在本地和开源LLMs上进行实验。您可以在笔记本电脑上运行这些LLMs，完全脱机。有两种方式可以发现、下载和在本地运行这些LLMs：
+LM Studio 是一个工具，您可以用来在本地和开源 LLMs 上进行实验。您可以在笔记本电脑上运行这些 LLMs，完全脱机。有两种方式可以发现、下载和在本地运行这些 LLMs：
 
 +   通过应用内的聊天界面
 
-+   兼容OpenAI的本地服务器
++   兼容 OpenAI 的本地服务器
 
 您只需从[HuggingFace](https://huggingface.co/)仓库下载任何兼容的模型文件，一切搞定！
 
 那么我该如何开始呢？
 
-## LM Studio要求
+## LM Studio 要求
 
-在您开始深入了解本地发现所有LLMs之前，您需要满足以下最低硬件/软件要求：
+在您开始深入了解本地发现所有 LLMs 之前，您需要满足以下最低硬件/软件要求：
 
 +   M1/M2/M3 Mac
 
-+   Windows PC需要支持AVX2的处理器（Linux版本正在测试中）
++   Windows PC 需要支持 AVX2 的处理器（Linux 版本正在测试中）
 
-+   建议使用16GB以上的RAM
++   建议使用 16GB 以上的 RAM
 
-+   对于PC，建议使用6GB以上的VRAM
++   对于 PC，建议使用 6GB 以上的 VRAM
 
-+   支持NVIDIA/AMD GPU
++   支持 NVIDIA/AMD GPU
 
 如果您具备这些条件，您就可以开始了！
 
 那么，具体步骤是什么？
 
-# 如何使用LM Studio
+# 如何使用 LM Studio
 
-您的第一步是下载适用于Mac、Windows或Linux的LM Studio，您可以在[这里](https://lmstudio.ai/)进行下载。该下载大约有400MB，因此根据您的互联网连接速度，可能需要一段时间。
+您的第一步是下载适用于 Mac、Windows 或 Linux 的 LM Studio，您可以在[这里](https://lmstudio.ai/)进行下载。该下载大约有 400MB，因此根据您的互联网连接速度，可能需要一段时间。
 
-![在本地运行LLM与LM Studio](../Images/22074db02493431ddc8596bbba1f57a9.png)
+![在本地运行 LLM 与 LM Studio](img/22074db02493431ddc8596bbba1f57a9.png)
 
-您的下一步是选择要下载的模型。一旦LM Studio启动，点击放大镜以浏览可用模型选项。再次注意，这些模型可能很大，因此下载可能需要一些时间。
+您的下一步是选择要下载的模型。一旦 LM Studio 启动，点击放大镜以浏览可用模型选项。再次注意，这些模型可能很大，因此下载可能需要一些时间。
 
-![在 LM Studio 中本地运行 LLM](../Images/1da14982304961ef87470fd5a0439f56.png)
+![在 LM Studio 中本地运行 LLM](img/1da14982304961ef87470fd5a0439f56.png)
 
 下载模型后，点击左侧的气泡图标，选择你的模型以加载。
 
@@ -70,7 +70,7 @@ LM Studio 是一个工具，您可以用来在本地和开源LLMs上进行实验
 
 就是这样，本地设置 LLM 这么快且简单。如果你想加快响应时间，可以通过右侧启用 GPU 加速来实现。
 
-![在 LM Studio 中本地运行 LLM](../Images/8faa84c6aa48e24fcb5830d5f6886d23.png)
+![在 LM Studio 中本地运行 LLM](img/8faa84c6aa48e24fcb5830d5f6886d23.png)
 
 # 总结一下
 

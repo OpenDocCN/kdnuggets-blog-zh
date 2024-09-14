@@ -1,10 +1,10 @@
 # 斯坦福大学提供：图计算机器学习
 
-> 原文：[https://www.kdnuggets.com/2021/04/free-stanford-machine-learning-graphs.html](https://www.kdnuggets.com/2021/04/free-stanford-machine-learning-graphs.html)
+> 原文：[`www.kdnuggets.com/2021/04/free-stanford-machine-learning-graphs.html`](https://www.kdnuggets.com/2021/04/free-stanford-machine-learning-graphs.html)
 
-[评论](#comments)
+评论
 
-许多顶级大学将部分课程免费提供给非学生，这一趋势近年来逐渐增加。虽然这可能不是这种提供方式的首个例子，但我们可以感谢安德鲁·恩（当然还有其他人），使他的斯坦福机器学习课程在课堂之外得以提供，最初通过第三方手段，然后作为MOOC平台Coursera上的首批课程之一。自那时以来，通过这种平台提供的课程以及具有公开访问课程网站的课程数量迅速增加。如今，优质的免费大学级课程不乏其例，特别是在计算机科学、数据科学、机器学习以及其他技术学科领域。
+许多顶级大学将部分课程免费提供给非学生，这一趋势近年来逐渐增加。虽然这可能不是这种提供方式的首个例子，但我们可以感谢安德鲁·恩（当然还有其他人），使他的斯坦福机器学习课程在课堂之外得以提供，最初通过第三方手段，然后作为 MOOC 平台 Coursera 上的首批课程之一。自那时以来，通过这种平台提供的课程以及具有公开访问课程网站的课程数量迅速增加。如今，优质的免费大学级课程不乏其例，特别是在计算机科学、数据科学、机器学习以及其他技术学科领域。
 
 一开始，请注意我们说“免费”时指的是课程的大部分学习材料对大众开放，而无需费用。为了明确，你无法免费注册这门课程并获得结业证书。但来自顶级大学的高质量学习材料免费访问确实值得珍惜，尤其是这些材料由该领域的领先研究人员整理和教授。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -36,7 +36,7 @@
 
 当我们将图与机器学习的力量结合时，我们（希望）能够更好地揭示人眼可能看不到的洞察。鉴于许多网络的潜在复杂性，这种组合可能非常有价值。
 
-![图](../Images/98a15e1cdac75639368098384beb4f31.png)
+![图](img/98a15e1cdac75639368098384beb4f31.png)
 
 来自斯坦福大学的《图的机器学习》：[介绍幻灯片](http://web.stanford.edu/class/cs224w/slides/01-intro.pdf)
 
@@ -56,9 +56,9 @@
 
 1.  节点分类的标签传播
 
-1.  图神经网络1：GNN模型
+1.  图神经网络 1：GNN 模型
 
-1.  图神经网络2：设计空间
+1.  图神经网络 2：设计空间
 
 1.  图神经网络的应用
 
@@ -68,7 +68,7 @@
 
 1.  知识图谱推理
 
-1.  使用GNNs的频繁子图挖掘
+1.  使用 GNNs 的频繁子图挖掘
 
 1.  网络中的社区结构
 
@@ -76,23 +76,23 @@
 
 1.  图的深度生成模型
 
-1.  GNNs的高级主题
+1.  GNNs 的高级主题
 
-1.  扩展GNNs
+1.  扩展 GNNs
 
-1.  特邀讲座：GNNs在计算生物学中的应用
+1.  特邀讲座：GNNs 在计算生物学中的应用
 
-1.  特邀讲座：GNNs的工业应用
+1.  特邀讲座：GNNs 的工业应用
 
-1.  GNNs在科学中的应用
+1.  GNNs 在科学中的应用
 
-这门课程有哪些资源？最初，只打算提供幻灯片和其他非视频内容，但上周[Jure在互联网上宣布](https://www.linkedin.com/feed/update/urn:li:activity:6788509749274005504/)：
+这门课程有哪些资源？最初，只打算提供幻灯片和其他非视频内容，但上周[Jure 在互联网上宣布](https://www.linkedin.com/feed/update/urn:li:activity:6788509749274005504/)：
 
-> 应广大要求，我们发布了斯坦福CS224W《图的机器学习》的讲座视频，重点关注图表示学习。每周新增两节讲座。
+> 应广大要求，我们发布了斯坦福 CS224W《图的机器学习》的讲座视频，重点关注图表示学习。每周新增两节讲座。
 
-除了上述提到的[视频](https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn)，还提供了讲座幻灯片和一系列包含现成代码示例的Colab笔记本。此外，特别值得注意的是，作为课程用书的[图表示学习书籍](https://www.cs.mcgill.ca/~wlh/grl_book/)由麦吉尔大学的William L. Hamilton编写，可以免费获得[预出版PDF](https://www.cs.mcgill.ca/~wlh/grl_book/files/GRL_Book.pdf)。
+除了上述提到的[视频](https://www.youtube.com/playlist?list=PLoROMvodv4rPLKxIpqhjhPgdQy7imNkDn)，还提供了讲座幻灯片和一系列包含现成代码示例的 Colab 笔记本。此外，特别值得注意的是，作为课程用书的[图表示学习书籍](https://www.cs.mcgill.ca/~wlh/grl_book/)由麦吉尔大学的 William L. Hamilton 编写，可以免费获得[预出版 PDF](https://www.cs.mcgill.ca/~wlh/grl_book/files/GRL_Book.pdf)。
 
-![图](../Images/f99ed997d00518e0079be6f83db08cc5.png)
+![图](img/f99ed997d00518e0079be6f83db08cc5.png)
 
 来自斯坦福大学的《图的机器学习》：[介绍幻灯片](http://web.stanford.edu/class/cs224w/slides/01-intro.pdf)
 
@@ -100,11 +100,11 @@
 
 **相关**：
 
-+   [最佳 NLP 深度学习课程是免费的](/2020/05/best-nlp-deep-learning-course-free.html)
++   最佳 NLP 深度学习课程是免费的
 
-+   [免费 MIT 微积分课程：理解深度学习的关键](/2020/07/free-mit-courses-calculus-key-deep-learning.html)
++   免费 MIT 微积分课程：理解深度学习的关键
 
-+   [机器学习系统设计：一个免费的斯坦福课程](/2021/02/machine-learning-systems-design-free-stanford-course.html)
++   机器学习系统设计：一个免费的斯坦福课程
 
 ### 更多关于这个话题
 

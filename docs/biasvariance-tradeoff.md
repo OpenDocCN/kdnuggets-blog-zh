@@ -1,8 +1,8 @@
 # 偏差-方差权衡
 
-> 原文：[https://www.kdnuggets.com/2022/08/biasvariance-tradeoff.html](https://www.kdnuggets.com/2022/08/biasvariance-tradeoff.html)
+> 原文：[`www.kdnuggets.com/2022/08/biasvariance-tradeoff.html`](https://www.kdnuggets.com/2022/08/biasvariance-tradeoff.html)
 
-![偏差-方差权衡](../Images/efbb1801f0c994123c1505eb8219a022.png)
+![偏差-方差权衡](img/efbb1801f0c994123c1505eb8219a022.png)
 
 编辑图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -58,17 +58,17 @@
 
 让我们从一个简单的公式开始，假设我们要预测的是‘Y’，其他协变量是‘X’。两者之间的关系可以定义为：
 
-![偏差-方差权衡](../Images/b3b7002b5ad74837ef1198b62558bbdc.png)
+![偏差-方差权衡](img/b3b7002b5ad74837ef1198b62558bbdc.png)
 
 ‘e’ 代表误差项。
 
 在点 x 处的期望平方误差可以定义为：
 
-![偏差-方差权衡](../Images/ad937738f6da19fdad285f27b447f5e9.png)
+![偏差-方差权衡](img/ad937738f6da19fdad285f27b447f5e9.png)
 
 这将产生：
 
-![偏差-方差权衡](../Images/2d59f5ed4fc052efbdb91e1678f9961c.png)
+![偏差-方差权衡](img/2d59f5ed4fc052efbdb91e1678f9961c.png)
 
 这可以更好地定义为：
 
@@ -76,7 +76,7 @@
 
 不可减少的误差指的是建模中无法减少的“噪音”——减少它的一种方法是通过数据清理。
 
-![偏差-方差权衡](../Images/035158e2cfcf7de9b833f19b0c611bfc.png)
+![偏差-方差权衡](img/035158e2cfcf7de9b833f19b0c611bfc.png)
 
 来源: [维基百科](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff#/media/File:Bias_and_variance_contributing_to_total_error.svg)
 

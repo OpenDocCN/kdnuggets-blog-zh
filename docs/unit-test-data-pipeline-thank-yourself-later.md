@@ -1,8 +1,8 @@
 # 单元测试你的数据管道，你会感谢自己
 
-> 原文：[https://www.kdnuggets.com/2020/08/unit-test-data-pipeline-thank-yourself-later.html](https://www.kdnuggets.com/2020/08/unit-test-data-pipeline-thank-yourself-later.html)
+> 原文：[`www.kdnuggets.com/2020/08/unit-test-data-pipeline-thank-yourself-later.html`](https://www.kdnuggets.com/2020/08/unit-test-data-pipeline-thank-yourself-later.html)
 
-[评论](#comments)
+评论
 
 **由 [诺曼·尼默](https://www.linkedin.com/in/normanniemer/)，首席数据科学家**
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 与 [海景·李](https://www.linkedin.com/in/haijing-li-7b50a11b2/)，金融服务数据分析师，哥伦比亚大学 MS 商业分析，共著。
 
-![图示](../Images/874f7499ef95c1e69d6ec0f2d3c8e427.png)
+![图示](img/874f7499ef95c1e69d6ec0f2d3c8e427.png)
 
 图片来源：[Xenonstack](https://www.xenonstack.com/insights/what-is-unit-testing/)
 
@@ -99,22 +99,22 @@ assert preprocess_text("Do you Realize those are genetically modified food?" ) =
 
 **相关:**
 
-+   [Python中的模糊连接与d6tjoin](/2020/07/fuzzy-joins-python-d6tjoin.html)
++   Python 中的模糊连接与 d6tjoin
 
-+   [数据科学家常犯的10大编码错误](/2019/04/top-10-coding-mistakes-data-scientists.html)
++   数据科学家常犯的 10 大编码错误
 
-+   [解释“黑箱”机器学习模型：SHAP的实际应用](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)
++   解释“黑箱”机器学习模型：SHAP 的实际应用
 
 ### 更多相关话题
 
-+   [忘记PIP、Conda和requirements.txt！使用Poetry吧，感谢你以后…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
++   [忘记 PIP、Conda 和 requirements.txt！使用 Poetry 吧，感谢你以后…](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，找到目标再…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [一个90亿美元的AI失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

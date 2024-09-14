@@ -1,8 +1,8 @@
 # 部署机器学习模型：逐步教程
 
-> 原文：[https://www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial](https://www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial)
+> 原文：[`www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial`](https://www.kdnuggets.com/deploying-machine-learning-models-a-step-by-step-tutorial)
 
-![部署机器学习模型：逐步教程](../Images/75bdc52cd0a4f295a2d3cd35d8e3e6f5.png)
+![部署机器学习模型：逐步教程](img/75bdc52cd0a4f295a2d3cd35d8e3e6f5.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -100,9 +100,9 @@ print(f"Mean cross-validation score: {cv_scores.mean()}")
 
 ## 第 3 步：模型打包
 
-![部署机器学习模型：逐步教程](../Images/57afdfc59349144f86b5770cb373fc67.png)
+![部署机器学习模型：逐步教程](img/57afdfc59349144f86b5770cb373fc67.png)
 
-来源：[https://knowledge.dataiku.com/latest/mlops-o16n/architecture/concept-model-packaging.html](https://knowledge.dataiku.com/latest/mlops-o16n/architecture/concept-model-packaging.html)
+来源：[`knowledge.dataiku.com/latest/mlops-o16n/architecture/concept-model-packaging.html`](https://knowledge.dataiku.com/latest/mlops-o16n/architecture/concept-model-packaging.html)
 
 将代码序列化为更适合存储或分发到其他系统的格式。Pickle 是常见的格式之一，另外还有 joblib 和 ONNX 格式，具体取决于用户的需求。在定义和优化模型后，将其存储在文件或数据库中。像 Git 这样的平台也很有用，用于处理变更和修改。采取特定措施，如对存储和传输中的数据进行加密，以防止数据被他人轻易访问。
 
@@ -124,11 +124,11 @@ RUN pip install -r requirements.txt
 CMD ["python", "app.py"]
 ```
 
-## 第4步：部署环境设置
+## 第 4 步：部署环境设置
 
-为模型部署设置基础设施和资源，建议使用AWS、Azure或Google Cloud等云服务。修改托管模型所需的必要组件，如服务器、数据库以及所有可以在所选云平台的云基础设施服务上完成的事项。
+为模型部署设置基础设施和资源，建议使用 AWS、Azure 或 Google Cloud 等云服务。修改托管模型所需的必要组件，如服务器、数据库以及所有可以在所选云平台的云基础设施服务上完成的事项。
 
-**AWS**：使用AWS CLI设置EC2实例
+**AWS**：使用 AWS CLI 设置 EC2 实例
 
 ```py
 aws ec2 run-instances \
@@ -140,7 +140,7 @@ aws ec2 run-instances \
     --subnet-id subnet-0abcdef1234567890
 ```
 
-**Azure**：使用Azure CLI设置虚拟机
+**Azure**：使用 Azure CLI 设置虚拟机
 
 ```py
 az vm create \
@@ -151,7 +151,7 @@ az vm create \
   --generate-ssh-keys
 ```
 
-**Google Cloud**：使用Google Cloud CLI设置Compute Engine实例
+**Google Cloud**：使用 Google Cloud CLI 设置 Compute Engine 实例
 
 ```py
 gcloud compute instances create my-instance \
@@ -167,9 +167,9 @@ gcloud compute instances create my-instance \
   --boot-disk-device-name=my-instance
 ```
 
-## 第5步：构建部署管道
+## 第 5 步：构建部署管道
 
-使用Jenkins或GitLab CI/CD等工具来自动化模型部署步骤。设计一系列步骤，以提高部署过程的效率，并在GitHub Actions的上下文中使用Jenkinsfile或YAML配置。
+使用 Jenkins 或 GitLab CI/CD 等工具来自动化模型部署步骤。设计一系列步骤，以提高部署过程的效率，并在 GitHub Actions 的上下文中使用 Jenkinsfile 或 YAML 配置。
 
 ```py
 # Using Jenkins for CI/CD pipeline
@@ -196,7 +196,7 @@ pipeline {
 }
 ```
 
-## 第6步：模型测试
+## 第 6 步：模型测试
 
 进行测试以确保模型的所有功能得到适当实现。之后，将预测结果与模型应提供的结果进行比较。检查模型的泛化能力，以确定其在其他新数据上的表现。选择正确的评估标准——准确性、精确度、召回率来与样本数据进行比较。
 
@@ -224,9 +224,9 @@ print(f"Test Set Precision: {test_precision}")
 print(f"Test Set Recall: {test_recall}")
 ```
 
-## 第7步：监控和维护
+## 第 7 步：监控和维护
 
-借助AWS CloudWatch、Azure Monitor或Google Cloud Monitoring等工具，确保模型中没有错误。这将需要展示未来部署的模型应如何修改，以使其更好。
+借助 AWS CloudWatch、Azure Monitor 或 Google Cloud Monitoring 等工具，确保模型中没有错误。这将需要展示未来部署的模型应如何修改，以使其更好。
 
 **AWS CloudWatch**
 
@@ -237,7 +237,7 @@ aws cloudwatch put-metric-alarm --alarm-name CPUAlarm --metric-name CPUUtilizati
 --evaluation-periods 2 --alarm-actions arn:aws:sns:us-east-1:123456789012:my-sns-topic
 ```
 
-![部署机器学习模型：逐步教程](../Images/fcae81532de717a0ed4ebed9d66588d6.png)
+![部署机器学习模型：逐步教程](img/fcae81532de717a0ed4ebed9d66588d6.png)
 
 来源：https://blogs.vmware.com/management/2021/03/cloud-services-aws-cloudwatch-azure-monitor.html
 
@@ -249,7 +249,7 @@ az monitor metrics alert create --name 'CPU Alert' --resource-group myResourceGr
 --condition "avg Percentage CPU > 80" --description 'Alert if CPU usage exceeds 80%'
 ```
 
-![部署机器学习模型：逐步教程](../Images/b6dd2c6625e9ceae96b6fa8c3c916314.png)
+![部署机器学习模型：逐步教程](img/b6dd2c6625e9ceae96b6fa8c3c916314.png)
 
 来源：https://blogs.vmware.com/management/2021/03/cloud-services-aws-cloudwatch-azure-monitor.html
 

@@ -1,8 +1,8 @@
 # 介绍 OpenChat：一个快速且简单的自定义聊天机器人构建平台
 
-> 原文：[https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)
+> 原文：[`www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html`](https://www.kdnuggets.com/2023/06/introducing-openchat-free-simple-platform-building-custom-chatbots-minutes.html)
 
-![介绍 OpenChat：一个快速且简单的自定义聊天机器人构建平台](../Images/ac34626d3c87845fd55df5c76631be2f.png)
+![介绍 OpenChat：一个快速且简单的自定义聊天机器人构建平台](img/ac34626d3c87845fd55df5c76631be2f.png)
 
 作者提供的图片
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
 [OpenChat](https://openchat.so/) 是一个开源聊天机器人控制台，使用户能够轻松运行和创建类似于 ChatGPT 的自定义聊天机器人。它简化了利用大型语言模型（LLMs）的过程，使日常用户也能轻松使用。随着 AI 技术的快速发展，这些模型的安装和使用可能会让人感到望而生畏。然而，OpenChat 通过提供一个简单的两步设置过程，简化了创建全面聊天机器人控制台的过程。
 
-![介绍 OpenChat：一个快速且简单的自定义聊天机器人构建平台](../Images/4aa00ed8484f0a8350b4ec4da933c6c6.png)
+![介绍 OpenChat：一个快速且简单的自定义聊天机器人构建平台](img/4aa00ed8484f0a8350b4ec4da933c6c6.png)
 
 演示可以在 [OpenChat](https://openchat.so/) 网站上查看
 
@@ -60,7 +60,7 @@ OpenChat 还允许你将聊天机器人作为小部件嵌入到你的网站或�
 
 1.  还有更多…
 
-![介绍 OpenChat：免费的简单平台，几分钟内构建自定义聊天机器人](../Images/ebb34a9071a7672e1574ac65cb09e2b9.png)
+![介绍 OpenChat：免费的简单平台，几分钟内构建自定义聊天机器人](img/ebb34a9071a7672e1574ac65cb09e2b9.png)
 
 图片来自 [OpenChat](https://openchat.so/)
 
@@ -78,7 +78,7 @@ OpenChat 还允许你将聊天机器人作为小部件嵌入到你的网站或�
 
 需要注意的是，对于 OpenChat 的在线版本，扫描过程仅限于你网站的前 15 页。如果你希望扫描更多页面或对扫描过程有更大控制，可以使用自托管版本的 OpenChat。
 
-![介绍 OpenChat：免费的简单平台，几分钟内构建自定义聊天机器人](../Images/b28464f821c3b6aaf2e820861ccb8506.png)
+![介绍 OpenChat：免费的简单平台，几分钟内构建自定义聊天机器人](img/b28464f821c3b6aaf2e820861ccb8506.png)
 
 图片来自 [OpenChat - 仪表板](https://openchat.so/chat/D5LTmufJXbpSDa6U38su)
 

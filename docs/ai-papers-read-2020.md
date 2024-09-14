@@ -1,12 +1,12 @@
 # 2020 年的 AI 论文阅读推荐
 
-> 原文：[https://www.kdnuggets.com/2020/09/ai-papers-read-2020.html](https://www.kdnuggets.com/2020/09/ai-papers-read-2020.html)
+> 原文：[`www.kdnuggets.com/2020/09/ai-papers-read-2020.html`](https://www.kdnuggets.com/2020/09/ai-papers-read-2020.html)
 
-[评论](#comments)
+评论
 
 **由 [Ygor Rebouças Serpa](https://www.linkedin.com/in/ygorreboucas/) 提供，他正在为医疗保健行业开发可解释的人工智能工具**
 
-![Figure](../Images/bec677c37d3ca6f467317b670f40b37d.png)
+![Figure](img/bec677c37d3ca6f467317b670f40b37d.png)
 
 图片由 [Alfons Morales](https://unsplash.com/@alfonsmc10?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -32,37 +32,37 @@
 
 ### #1 AlexNet (2012)
 
-> Krizhevsky, Alex, Ilya Sutskever, 和 Geoffrey E. Hinton. [“用深度卷积神经网络进行图像分类。”](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networ) *神经信息处理系统的进展*。2012年。
+> Krizhevsky, Alex, Ilya Sutskever, 和 Geoffrey E. Hinton. [“用深度卷积神经网络进行图像分类。”](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networ) *神经信息处理系统的进展*。2012 年。
 
-在2012年，作者提出了使用 GPU 训练大型卷积神经网络（CNN）来应对 ImageNet 挑战。这是一个大胆的举措，因为 CNN 被认为过于庞大，无法在如此大规模的问题上进行训练。令所有人惊讶的是，他们赢得了第一名，Top-5 错误率约为 15%，相比之下第二名使用了最先进的图像处理技术，错误率约为 26%。
+在 2012 年，作者提出了使用 GPU 训练大型卷积神经网络（CNN）来应对 ImageNet 挑战。这是一个大胆的举措，因为 CNN 被认为过于庞大，无法在如此大规模的问题上进行训练。令所有人惊讶的是，他们赢得了第一名，Top-5 错误率约为 15%，相比之下第二名使用了最先进的图像处理技术，错误率约为 26%。
 
-**理由 #1：** 虽然我们大多数人知道AlexNet的历史重要性，但并非所有人都知道我们今天使用的技术中哪些在繁荣之前已经存在。你可能会惊讶于论文中介绍的许多概念，如dropout和ReLU，是多么熟悉。
+**理由 #1：** 虽然我们大多数人知道 AlexNet 的历史重要性，但并非所有人都知道我们今天使用的技术中哪些在繁荣之前已经存在。你可能会惊讶于论文中介绍的许多概念，如 dropout 和 ReLU，是多么熟悉。
 
-**理由 #2：** 提出的网络有6000万参数，对于2012年的标准来说完全是疯狂的。现在，我们看到的模型参数超过了十亿。阅读AlexNet论文为我们提供了大量关于自那时以来事情如何发展的见解。
+**理由 #2：** 提出的网络有 6000 万参数，对于 2012 年的标准来说完全是疯狂的。现在，我们看到的模型参数超过了十亿。阅读 AlexNet 论文为我们提供了大量关于自那时以来事情如何发展的见解。
 
-**进一步阅读：** 你可以参考图像Net冠军的历史，阅读[ZF Net](https://link.springer.com/chapter/10.1007/978-3-319-10590-1_53)、[VGG](https://arxiv.org/abs/1409.1556)、[Inception-v1](https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html)和[ResNet](http://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)论文。最后一篇取得了超越人类的表现，解决了挑战。之后，其他竞赛转移了研究者们的注意力。现在，ImageNet 主要用于迁移学习和验证低参数模型，例如：
+**进一步阅读：** 你可以参考图像 Net 冠军的历史，阅读[ZF Net](https://link.springer.com/chapter/10.1007/978-3-319-10590-1_53)、[VGG](https://arxiv.org/abs/1409.1556)、[Inception-v1](https://www.cv-foundation.org/openaccess/content_cvpr_2015/html/Szegedy_Going_Deeper_With_2015_CVPR_paper.html)和[ResNet](http://openaccess.thecvf.com/content_cvpr_2016/html/He_Deep_Residual_Learning_CVPR_2016_paper.html)论文。最后一篇取得了超越人类的表现，解决了挑战。之后，其他竞赛转移了研究者们的注意力。现在，ImageNet 主要用于迁移学习和验证低参数模型，例如：
 
-![图示](../Images/0c56de4690eaf23d4c7f29e008cec3e7.png)
+![图示](img/0c56de4690eaf23d4c7f29e008cec3e7.png)
 
-AlexNet结构的原始描述。顶部和底部部分分别由GPU 1和2处理。这是一种早期的模型并行形式。来源：[Alexnet论文](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networ)
+AlexNet 结构的原始描述。顶部和底部部分分别由 GPU 1 和 2 处理。这是一种早期的模型并行形式。来源：[Alexnet 论文](http://papers.nips.cc/paper/4824-imagenet-classification-with-deep-convolutional-neural-networ)
 
 ### #2 MobileNet (2017)
 
-> Howard, Andrew G., 等人。[“Mobilenets: Efficient convolutional neural networks for mobile vision applications.”](https://arxiv.org/abs/1704.04861) *arXiv预印本arXiv:1704.04861* (2017)。
+> Howard, Andrew G., 等人。[“Mobilenets: Efficient convolutional neural networks for mobile vision applications.”](https://arxiv.org/abs/1704.04861) *arXiv 预印本 arXiv:1704.04861* (2017)。
 
-MobileNet是最著名的“低参数”网络之一。这些模型非常适合低资源设备和加速实时应用，如手机上的对象识别。MobileNet和其他低参数模型的核心思想是将昂贵的操作分解为一组较小（且更快）的操作。这种复合操作通常快几个数量级，并使用了显著更少的参数。
+MobileNet 是最著名的“低参数”网络之一。这些模型非常适合低资源设备和加速实时应用，如手机上的对象识别。MobileNet 和其他低参数模型的核心思想是将昂贵的操作分解为一组较小（且更快）的操作。这种复合操作通常快几个数量级，并使用了显著更少的参数。
 
-**理由 #1：** 我们大多数人没有大科技公司拥有的资源。理解低参数网络对于使自己的模型更经济地训练和使用至关重要。在我的经验中，使用depth-wise卷积可以节省你数百美元的云推理费用，几乎不会损失精度。
+**理由 #1：** 我们大多数人没有大科技公司拥有的资源。理解低参数网络对于使自己的模型更经济地训练和使用至关重要。在我的经验中，使用 depth-wise 卷积可以节省你数百美元的云推理费用，几乎不会损失精度。
 
-**理由 #2：** 常识认为更大的模型更强大。像MobileNet这样的论文表明，模型的强大不仅仅是增加更多的滤波器。优雅很重要。
+**理由 #2：** 常识认为更大的模型更强大。像 MobileNet 这样的论文表明，模型的强大不仅仅是增加更多的滤波器。优雅很重要。
 
 **进一步阅读:** 目前，MobileNet [v2](https://arxiv.org/abs/1801.04381) 和 [v3](https://arxiv.org/abs/1905.02244) 已经发布，提供了新的准确性和尺寸增强。同时，其他作者也提出了许多技术来进一步缩小模型尺寸，例如 [SqueezeNet](https://arxiv.org/abs/1602.07360)，以及 [以最小的准确性损失缩小常规模型](https://arxiv.org/abs/1608.08710)。 [这篇论文](https://ieeexplore.ieee.org/abstract/document/8050276) 对多个模型的尺寸与准确性进行了全面总结。
 
 ### #3 注意力机制是你所需要的（2017）
 
-> Vaswani, Ashish, 等. [“注意力机制是你所需要的。”](http://papers.nips.cc/paper/7181-attention-is-all-you-need) *神经信息处理系统的进展*。2017年。
+> Vaswani, Ashish, 等. [“注意力机制是你所需要的。”](http://papers.nips.cc/paper/7181-attention-is-all-you-need) *神经信息处理系统的进展*。2017 年。
 
-介绍变压器模型的论文。在此之前，语言模型主要依赖递归神经网络（RNN）来执行序列到序列的任务。然而，RNN 的速度非常慢，因为它们在多GPU并行化时表现很差。相比之下，变压器模型完全基于注意力层，这些层是捕捉序列中任意元素彼此相关性的卷积神经网络（CNN）。提出的公式达到了显著更好的最先进结果，并且训练速度明显快于之前的 RNN 模型。
+介绍变压器模型的论文。在此之前，语言模型主要依赖递归神经网络（RNN）来执行序列到序列的任务。然而，RNN 的速度非常慢，因为它们在多 GPU 并行化时表现很差。相比之下，变压器模型完全基于注意力层，这些层是捕捉序列中任意元素彼此相关性的卷积神经网络（CNN）。提出的公式达到了显著更好的最先进结果，并且训练速度明显快于之前的 RNN 模型。
 
 **理由 #1:** 目前，大多数自然语言处理（NLP）文献中的新颖架构都源自变压器。像 [GPT-2](https://www.ceid.upatras.gr/webpages/faculty/zaro/teaching/alg-ds/PRESENTATIONS/PAPERS/2019-Radford-et-al_Language-Models-Are-Unsupervised-Multitask-%20Learners.pdf) 和 [BERT](https://arxiv.org/abs/1810.04805) 这样的模型处于创新的前沿。理解变压器是理解大多数后续 NLP 模型的关键。
 
@@ -76,7 +76,7 @@ MobileNet是最著名的“低参数”网络之一。这些模型非常适合�
 
 > Merity, Stephen. “[单头注意力 RNN: 不要再用你的脑袋思考](https://arxiv.org/abs/1911.11423).” *arXiv 预印本 arXiv:1911.11423* (2019)。
 > 
-> Kitaev, Nikita, Łukasz Kaiser, and Anselm Levskaya. “[Reformer: 高效的 Transformer。](https://arxiv.org/abs/2001.04451)” *arXiv 预印本 arXiv:2001.04451*（2020年）。
+> Kitaev, Nikita, Łukasz Kaiser, and Anselm Levskaya. “[Reformer: 高效的 Transformer。](https://arxiv.org/abs/2001.04451)” *arXiv 预印本 arXiv:2001.04451*（2020 年）。
 
 Transformer / Attention 模型吸引了大量关注。然而，这些模型往往资源消耗大，不适合普通消费者硬件。上述论文都批评了这种架构，提供了计算上更高效的替代方案。至于 MobileNet 的讨论，优雅性很重要。
 
@@ -84,11 +84,11 @@ Transformer / Attention 模型吸引了大量关注。然而，这些模型往�
 
 **理由 #2：** 大公司可以快速扩展他们的研究到数百个 GPU。而我们普通人不能。模型规模的扩大并不是唯一的改进途径。我无法过分强调这一点。了解效率是确保你有效利用当前资源的最佳方式。
 
-**进一步阅读：**由于这些论文是2019年底和2020年的，链接不多。考虑阅读[MobileNet 论文](https://arxiv.org/abs/1704.04861)（如果你还没有读的话），了解其他关于效率的看法。
+**进一步阅读：**由于这些论文是 2019 年底和 2020 年的，链接不多。考虑阅读[MobileNet 论文](https://arxiv.org/abs/1704.04861)（如果你还没有读的话），了解其他关于效率的看法。
 
-### #5 姿态估计的人类基线（2017年）
+### #5 姿态估计的人类基线（2017 年）
 
-> Xiao, Bin, Haiping Wu, and Yichen Wei. [“人类姿态估计与跟踪的简单基线。”](http://openaccess.thecvf.com/content_iccv_2017/html/Martinez_A_Simple_yet_ICCV_2017_paper.html)*欧洲计算机视觉会议论文集（ECCV）*。2018年。
+> Xiao, Bin, Haiping Wu, and Yichen Wei. [“人类姿态估计与跟踪的简单基线。”](http://openaccess.thecvf.com/content_iccv_2017/html/Martinez_A_Simple_yet_ICCV_2017_paper.html)*欧洲计算机视觉会议论文集（ECCV）*。2018 年。
 
 到目前为止，大多数论文提出了新技术以改善最先进技术。相反，本文主张使用当前最佳实践的简单模型可能会出奇地有效。总之，他们提出了一种仅基于骨干网络并经过三次反卷积操作的人体姿态估计网络。当时，他们的方法在处理 COCO 基准测试方面是最有效的，尽管其简单性。
 
@@ -100,7 +100,7 @@ Transformer / Attention 模型吸引了大量关注。然而，这些模型往�
 
 **进一步阅读：**如果你对姿态估计话题感兴趣，可以考虑阅读[这篇全面的最先进综述。](https://nanonets.com/blog/human-pose-estimation-2d-guide/)
 
-### #6 图像分类的技巧包（2019年）
+### #6 图像分类的技巧包（2019 年）
 
 > He, Tong 等. [“用于卷积神经网络的图像分类技巧包。”](https://arxiv.org/abs/1812.01187) *IEEE 计算机视觉与模式识别会议论文集*. 2019.
 
@@ -158,62 +158,62 @@ Transformer / Attention 模型吸引了大量关注。然而，这些模型往�
 
 [**解构彩票票据假说**](https://towardsdatascience.com/breaking-down-the-lottery-ticket-hypothesis-ca1c053b3e58)
 
-从MIT CSAIL的有趣论文中提炼出的观点：“彩票票据假说：寻找稀疏的、可训练的……”
+从 MIT CSAIL 的有趣论文中提炼出的观点：“彩票票据假说：寻找稀疏的、可训练的……”
 
-### #10 Pix2Pix和CycleGAN（2017年）
+### #10 Pix2Pix 和 CycleGAN（2017 年）
 
-> Isola, Phillip等人。“[基于条件对抗网络的图像到图像翻译](https://phillipi.github.io/pix2pix/)。” *IEEE计算机视觉与模式识别会议论文集*。2017年。
+> Isola, Phillip 等人。“[基于条件对抗网络的图像到图像翻译](https://phillipi.github.io/pix2pix/)。” *IEEE 计算机视觉与模式识别会议论文集*。2017 年。
 > 
-> Zhu, Jun-Yan等人。[“使用循环一致对抗网络进行非配对图像到图像翻译。”](http://openaccess.thecvf.com/content_iccv_2017/html/Zhu_Unpaired_Image-To-Image_Translation_ICCV_2017_paper.html) *IEEE国际计算机视觉会议论文集*。2017年。
+> Zhu, Jun-Yan 等人。[“使用循环一致对抗网络进行非配对图像到图像翻译。”](http://openaccess.thecvf.com/content_iccv_2017/html/Zhu_Unpaired_Image-To-Image_Translation_ICCV_2017_paper.html) *IEEE 国际计算机视觉会议论文集*。2017 年。
 
-这个列表如果没有一些GAN论文就不完整了。
+这个列表如果没有一些 GAN 论文就不完整了。
 
-Pix2Pix和CycleGAN是条件生成模型的两个开创性工作。两者都执行将图像从领域A转换到领域B的任务，但通过利用配对和非配对数据集有所不同。前者执行诸如将线条图转换为完全渲染的图像等任务，后者则擅长于替换实体，例如将马变成斑马或将苹果变成橙子。通过“条件化”，这些模型使用户可以通过调整输入来对生成的内容进行一定程度的控制。
+Pix2Pix 和 CycleGAN 是条件生成模型的两个开创性工作。两者都执行将图像从领域 A 转换到领域 B 的任务，但通过利用配对和非配对数据集有所不同。前者执行诸如将线条图转换为完全渲染的图像等任务，后者则擅长于替换实体，例如将马变成斑马或将苹果变成橙子。通过“条件化”，这些模型使用户可以通过调整输入来对生成的内容进行一定程度的控制。
 
-**理由 #1：**GAN论文通常集中于生成结果的质量，并且不强调艺术控制。这些条件模型为GAN在实际应用中提供了一个实际的途径。[例如，作为艺术家的虚拟助手。](https://www.sbgames.org/sbgames2019/files/papers/ComputacaoFull/197880.pdf)
+**理由 #1：**GAN 论文通常集中于生成结果的质量，并且不强调艺术控制。这些条件模型为 GAN 在实际应用中提供了一个实际的途径。[例如，作为艺术家的虚拟助手。](https://www.sbgames.org/sbgames2019/files/papers/ComputacaoFull/197880.pdf)
 
 **理由 #2：**对抗性方法是多网络模型的最佳示例。虽然生成可能不是你的强项，但阅读关于多网络设置的内容可能会对许多问题产生启发。
 
-**理由 #3：**《CycleGAN》论文尤其展示了一个有效的损失函数如何在解决一些困难问题时发挥奇效。一个类似的观点在Focal loss论文中也有提出，该论文通过用更好的损失函数替代传统的损失函数，显著改善了目标检测器的表现。
+**理由 #3：**《CycleGAN》论文尤其展示了一个有效的损失函数如何在解决一些困难问题时发挥奇效。一个类似的观点在 Focal loss 论文中也有提出，该论文通过用更好的损失函数替代传统的损失函数，显著改善了目标检测器的表现。
 
-**进一步阅读：**虽然AI在快速发展，但GAN的增长更为迅猛。如果你从未编码过GAN，我强烈推荐你尝试一下。[这是关于这一问题的官方Tensorflow 2文档](https://www.tensorflow.org/tutorials/generative/dcgan)。一个不太为人知晓的GAN应用是[半监督学习](https://arxiv.org/abs/1905.06484)，你应该了解一下。
+**进一步阅读：**虽然 AI 在快速发展，但 GAN 的增长更为迅猛。如果你从未编码过 GAN，我强烈推荐你尝试一下。[这是关于这一问题的官方 Tensorflow 2 文档](https://www.tensorflow.org/tutorials/generative/dcgan)。一个不太为人知晓的 GAN 应用是[半监督学习](https://arxiv.org/abs/1905.06484)，你应该了解一下。
 
 有了这十二篇论文及其后续阅读材料，我相信你已经有了丰富的阅读素材。这肯定不是一份详尽的好论文列表。然而，我尽力选择了我所见过和读过的最具洞察力和开创性的作品。如果你认为还有其他应该在此列表中的论文，请告诉我。
 
 祝阅读愉快 :)
 
-**编辑：在编写这份列表后，我又整理了第二份包含2020年阅读的十篇AI论文的列表，以及第三份关于GAN的列表。如果你喜欢阅读这份列表，你可能会喜欢它的续集：**
+**编辑：在编写这份列表后，我又整理了第二份包含 2020 年阅读的十篇 AI 论文的列表，以及第三份关于 GAN 的列表。如果你喜欢阅读这份列表，你可能会喜欢它的续集：**
 
-[**2020年还需阅读的十篇AI论文**](https://towardsdatascience.com/ten-more-ai-papers-to-read-in-2020-8c6fb4650a9b)
+[**2020 年还需阅读的十篇 AI 论文**](https://towardsdatascience.com/ten-more-ai-papers-to-read-in-2020-8c6fb4650a9b)
 
-额外的阅读建议，帮助你了解最新和经典的AI及数据科学突破
+额外的阅读建议，帮助你了解最新和经典的 AI 及数据科学突破
 
-[**2020年需阅读的GAN论文**](https://towardsdatascience.com/gan-papers-to-read-in-2020-2c708af5c0a4)
+[**2020 年需阅读的 GAN 论文**](https://towardsdatascience.com/gan-papers-to-read-in-2020-2c708af5c0a4)
 
 关于生成对抗网络的阅读建议。
 
-**简介：[Ygor Rebouças Serpa](https://www.linkedin.com/in/ygorreboucas/)** （[**@ReboucasYgor**](https://twitter.com/ReboucasYgor)）是来自大学城大学计算机科学硕士，目前从事研发，开发医疗行业的可解释AI工具。他的兴趣从音乐和游戏开发到理论计算机科学和AI。请查看他的**[Medium](https://medium.com/@ygorrebouasserpa)** 个人主页了解更多写作。
+**简介：[Ygor Rebouças Serpa](https://www.linkedin.com/in/ygorreboucas/)** （[**@ReboucasYgor**](https://twitter.com/ReboucasYgor)）是来自大学城大学计算机科学硕士，目前从事研发，开发医疗行业的可解释 AI 工具。他的兴趣从音乐和游戏开发到理论计算机科学和 AI。请查看他的**[Medium](https://medium.com/@ygorrebouasserpa)** 个人主页了解更多写作。
 
 [原文](https://towardsdatascience.com/ai-papers-to-read-in-2020-ac0e4e91d915)。经授权转载。
 
 **相关：**
 
-+   [13篇来自AI专家的必读论文](/2020/05/13-must-read-papers-ai-experts.html)
++   13 篇来自 AI 专家的必读论文
 
-+   [数据科学家必读的NLP和深度学习文章](/2020/08/must-read-nlp-deep-learning-articles.html)
++   数据科学家必读的 NLP 和深度学习文章
 
-+   [5篇情感分析的核心论文](/2020/06/5-essential-papers-sentiment-analysis.html)
++   5 篇情感分析的核心论文
 
 ### 更多相关主题
 
-+   [过去12个月必须阅读的NLP论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
++   [过去 12 个月必须阅读的 NLP 论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
 
-+   [KDnuggets新闻，4月27日：简要介绍带代码的论文；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：简要介绍带代码的论文；…](https://www.kdnuggets.com/2022/n17.html)
 
-+   [2023年必须阅读的顶级机器学习论文](https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html)
++   [2023 年必须阅读的顶级机器学习论文](https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html)
 
 +   [你应该阅读的生成代理研究论文](https://www.kdnuggets.com/generative-agent-research-papers-you-should-read)
 
-+   [2024年需阅读的5篇机器学习论文](https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024)
++   [2024 年需阅读的 5 篇机器学习论文](https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024)
 
 +   [简要介绍带代码的论文](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)

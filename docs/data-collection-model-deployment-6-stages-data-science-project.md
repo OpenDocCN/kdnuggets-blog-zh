@@ -1,8 +1,8 @@
-# 从数据收集到模型部署：数据科学项目的6个阶段
+# 从数据收集到模型部署：数据科学项目的 6 个阶段
 
-> 原文：[https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html`](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/a0184192af70dc1f4d12c12b7a923884.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/a0184192af70dc1f4d12c12b7a923884.png)
 
 图片由作者提供
 
@@ -12,25 +12,25 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-第一个研究来源于[Linkedin](https://www.linkedin.com/pulse/linkedin-jobs-rise-2022-25-us-roles-growing-demand-linkedin-news)，完成于2022年。该研究展示了过去5年中增长最快的职位名称。机器学习工程师的职位是第四个增长最快的职位。它是数据科学的一个分支。
+第一个研究来源于[Linkedin](https://www.linkedin.com/pulse/linkedin-jobs-rise-2022-25-us-roles-growing-demand-linkedin-news)，完成于 2022 年。该研究展示了过去 5 年中增长最快的职位名称。机器学习工程师的职位是第四个增长最快的职位。它是数据科学的一个分支。
 
 作为一名数据科学家，你必须构建自己的机器学习模型并将其投入生产。当然，你还应该了解网络爬虫，以及数据科学项目的所有其他阶段。你可以在文章的以下部分中找到这些内容。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/b32e62a3df98e1469088ff8d8d33ba29.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/b32e62a3df98e1469088ff8d8d33ba29.png)
 
 图片来源：[LinkedIn](https://www.linkedin.com/pulse/linkedin-jobs-rise-2022-25-us-roles-growing-demand-linkedin-news)
 
-第二项研究来自于[Glassdoor](https://www.glassdoor.com/List/Best-Jobs-in-America-LST_KQ0,20.htm)。它显示数据科学在美国50个最佳职位中排名前三。此外，这种情况在过去七年中一直保持不变。让我们看看这些统计数据。10,071个职位空缺和4.1/5的职位满意度可能是它成为最佳职位之一的原因。此外，中位数基本工资为每年$120,000。
+第二项研究来自于[Glassdoor](https://www.glassdoor.com/List/Best-Jobs-in-America-LST_KQ0,20.htm)。它显示数据科学在美国 50 个最佳职位中排名前三。此外，这种情况在过去七年中一直保持不变。让我们看看这些统计数据。10,071 个职位空缺和 4.1/5 的职位满意度可能是它成为最佳职位之一的原因。此外，中位数基本工资为每年$120,000。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/bfc5f014b7ac77e2b4f1ee42e5477ba8.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/bfc5f014b7ac77e2b4f1ee42e5477ba8.png)
 
 图片来源：[Glassdoor](https://www.glassdoor.com/List/Best-Jobs-in-America-LST_KQ0,20.htm)
 
@@ -46,9 +46,9 @@
 
 **为什么？**
 
-因为招聘人员查看你的简历的时间非常有限。这是另一项研究，应该让你更加意识到这一点。这是[ladders](https://www.theladders.com/static/images/basicSite/pdfs/TheLadders-EyeTracking-StudyC2.pdf)进行的眼动追踪研究。这一职业网站显示，招聘人员平均只看你的简历6秒钟。
+因为招聘人员查看你的简历的时间非常有限。这是另一项研究，应该让你更加意识到这一点。这是[ladders](https://www.theladders.com/static/images/basicSite/pdfs/TheLadders-EyeTracking-StudyC2.pdf)进行的眼动追踪研究。这一职业网站显示，招聘人员平均只看你的简历 6 秒钟。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/de1b841efdc773c50929eb8475788dd1.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/de1b841efdc773c50929eb8475788dd1.png)
 
 图片来自[theladders](https://www.theladders.com/static/images/basicSite/pdfs/TheLadders-EyeTracking-StudyC2.pdf)
 
@@ -58,7 +58,7 @@
 
 这是项目阶段的概述。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/93b76527956a350791aba0725f64ffd2.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/93b76527956a350791aba0725f64ffd2.png)
 
 图片由作者提供
 
@@ -66,17 +66,17 @@
 
 # 1\. 数据收集
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/e3d31457ed4bbc0f4536645ea801f26f.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/e3d31457ed4bbc0f4536645ea801f26f.png)
 
 图片由作者提供
 
-数据收集是从不同来源收集数据的过程。在过去的10年中，来自不同来源的数据量不断增长。
+数据收集是从不同来源收集数据的过程。在过去的 10 年中，来自不同来源的数据量不断增长。
 
-到2025年，收集的数据量将增加到今天的近三倍。
+到 2025 年，收集的数据量将增加到今天的近三倍。
 
-这是IDC进行的[研究](https://www.import.io/wp-content/uploads/2017/04/Seagate-WP-DataAge2025-March-2017.pdf)，展示了不同类型的数据创建变化。
+这是 IDC 进行的[研究](https://www.import.io/wp-content/uploads/2017/04/Seagate-WP-DataAge2025-March-2017.pdf)，展示了不同类型的数据创建变化。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/f2d3f94657ebdb4c72d6a8c3644a6692.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/f2d3f94657ebdb4c72d6a8c3644a6692.png)
 
 图片来自[import.io](https://www.import.io/wp-content/uploads/2017/04/Seagate-WP-DataAge2025-March-2017.pdf)
 
@@ -86,19 +86,19 @@
 
 数据收集后，最后阶段将是模型构建和部署到生产环境。因此，提高模型性能将非常重要。一个方法是通过收集更多数据来实现。在这里，主要关注的是如何随着数据量的增加来提升模型的性能。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/6ea2086bf12fd37c29574f5011c84c86.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/6ea2086bf12fd37c29574f5011c84c86.png)
 
 图片来源于[Deeplearning.AI](https://www.deeplearning.ai/)
 
-现在，已经有许多不同的技术来收集数据。在这里，我将解释其中的3种：从不同的文件源读取、网页爬取和API。
+现在，已经有许多不同的技术来收集数据。在这里，我将解释其中的 3 种：从不同的文件源读取、网页爬取和 API。
 
 ## 从不同文件源收集数据
 
 许多网站和公司会以良好的格式呈现数据。然而，在你的编码环境中读取这些数据需要几行代码。
 
-例如，[这个项目](https://platform.stratascratch.com/data-projects/marketing-campaign-results)旨在分析那些负债累累却难以偿还的人群的数据。正如你所看到的，这个项目也从使用[pandas中的read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)函数读取数据开始。
+例如，[这个项目](https://platform.stratascratch.com/data-projects/marketing-campaign-results)旨在分析那些负债累累却难以偿还的人群的数据。正如你所看到的，这个项目也从使用[pandas 中的 read_csv](https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html)函数读取数据开始。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/b348df1194a4153ae091e331b0f388f8.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/b348df1194a4153ae091e331b0f388f8.png)
 
 现在你有了数据，可以进行这个项目所要求的探索性数据分析。
 
@@ -106,7 +106,7 @@
 
 有许多不同的网站可以找到开源数据。
 
-这里有4种方法。
+这里有 4 种方法。
 
 +   [Kaggle](https://www.kaggle.com/)
 
@@ -116,15 +116,15 @@
 
 +   [AWS 数据集](https://registry.opendata.aws/)
 
-找到数据并使用Python函数读取它们，就像上面所做的那样。如果你的数据以其他格式（[HTML](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_html.html)、[JSON](https://pandas.pydata.org/docs/reference/api/pandas.read_json.html)、[excel](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html)）存在，你也可以使用[Pandas函数](https://pandas.pydata.org/pandas-docs/stable/reference/io.html)来读取它们。
+找到数据并使用 Python 函数读取它们，就像上面所做的那样。如果你的数据以其他格式（[HTML](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_html.html)、[JSON](https://pandas.pydata.org/docs/reference/api/pandas.read_json.html)、[excel](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_excel.html)）存在，你也可以使用[Pandas 函数](https://pandas.pydata.org/pandas-docs/stable/reference/io.html)来读取它们。
 
 ## 网页爬取
 
-网页爬取是使用自动化工具通过网络抓取数据的过程。这意味着使用爬虫和抓取器。它们映射网站HTML，然后按照给定的指令收集数据。
+网页爬取是使用自动化工具通过网络抓取数据的过程。这意味着使用爬虫和抓取器。它们映射网站 HTML，然后按照给定的指令收集数据。
 
 ### 爬虫工具
 
-网页爬虫会寻找可以从网站上获取的信息。它帮助你找到包含你想要抓取的信息的URL。
+网页爬虫会寻找可以从网站上获取的信息。它帮助你找到包含你想要抓取的信息的 URL。
 
 ### 爬虫
 
@@ -150,7 +150,7 @@
 
 ## API
 
-![从数据收集到模型部署：数据科学项目的 6 个阶段](../Images/79ec6c2f36ae9a72bea86bc5dab5251f.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/79ec6c2f36ae9a72bea86bc5dab5251f.png)
 
 作者提供的图片
 
@@ -168,13 +168,13 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 # 2\. 构建数据管道
 
-![从数据收集到模型部署：数据科学项目的 6 个阶段](../Images/03f453088c4517606431330bfebdcd1b.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/03f453088c4517606431330bfebdcd1b.png)
 
 作者提供的图片
 
 这是将你未结构化的数据转化为有意义版本的阶段。这里的管道术语侧重于转换。有时这个阶段也被称为数据清理，但可视化管道并将其分配到数据阶段是有意义的。
 
-抓取数据后，数据通常不会处于最佳状态。这就是为什么改变其格式是必要的。例如，如果你有少量数据但包含许多[NAs或缺失值](https://pandas.pydata.org/docs/user_guide/missing_data.html)，将这些值填充为列的平均值将帮助你使用这些数据。
+抓取数据后，数据通常不会处于最佳状态。这就是为什么改变其格式是必要的。例如，如果你有少量数据但包含许多[NAs 或缺失值](https://pandas.pydata.org/docs/user_guide/missing_data.html)，将这些值填充为列的平均值将帮助你使用这些数据。
 
 或者例如，如果你处理的是 [日期时间列](https://pandas.pydata.org/docs/user_guide/timeseries.html)，你列的数据类型可能是对象。这会阻止你对该列应用日期时间函数。因此，你应该将这一列的数据类型转换为日期时间型。
 
@@ -184,7 +184,7 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 # 3\. 数据探索
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/e72eb3447aa3447575ec2393c161ad39.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/e72eb3447aa3447575ec2393c161ad39.png)
 
 作者提供的图片
 
@@ -192,7 +192,7 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 下面是一些常用的 Pandas 函数，用于数据探索。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/0f932d75b42d474545a2858509ca0191.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/0f932d75b42d474545a2858509ca0191.png)
 
 作者提供的图片
 
@@ -210,7 +210,7 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 # 4\. 数据可视化
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/bff68f02cc3f6a827c05ad9ac9474c82.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/bff68f02cc3f6a827c05ad9ac9474c82.png)
 
 作者提供的图片
 
@@ -232,17 +232,17 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 异常值通常是由于异常情况发生的，它们不会帮助你的模型预测。检测异常值后需要将其从数据中移除。
 
-[这里](https://platform.stratascratch.com/data-projects/market-analysis-dublin?tabname=assignment)我们可以看到这个分布图，它显示了人们在都柏林的Airbnb上愿意为一个房间支付的最高价格。
+[这里](https://platform.stratascratch.com/data-projects/market-analysis-dublin?tabname=assignment)我们可以看到这个分布图，它显示了人们在都柏林的 Airbnb 上愿意为一个房间支付的最高价格。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/aafdcb3f9222610c61ec43fece37ddb1.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/aafdcb3f9222610c61ec43fece37ddb1.png)
 
-大多数人搜索每晚低于$200的房间，尤其是在$100左右每晚。然而，也有一些人搜索价格在500-600之间的房间。
+大多数人搜索每晚低于$200 的房间，尤其是在$100 左右每晚。然而，也有一些人搜索价格在 500-600 之间的房间。
 
 在构建模型时，在某个层级对其进行筛选将帮助你更准确地预测行为。
 
 ## 相关图
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/afabd605751f6ed1f8f61576b1794f56.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/afabd605751f6ed1f8f61576b1794f56.png)
 
 图片由作者提供
 
@@ -250,13 +250,13 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 # 5. 模型构建
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/397417ea5dc20d147f4be2b3fd8f4aa1.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/397417ea5dc20d147f4be2b3fd8f4aa1.png)
 
 图片由作者提供
 
 这里你可以看到模型构建的不同阶段。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/6f47be405f3ad42ddd5421500c8fdcea.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/6f47be405f3ad42ddd5421500c8fdcea.png)
 
 图片由作者提供
 
@@ -274,23 +274,23 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 在这个阶段，如果你已经知道将使用哪个模型，你可以跳过使用验证集。然而，如果你想尝试不同的模型以找出哪个最好，使用验证集是适合你的。
 
-## A/B测试
+## A/B 测试
 
-在选择算法并划分数据集后，是时候进行A/B测试了。
+在选择算法并划分数据集后，是时候进行 A/B 测试了。
 
-有不同的算法。你如何确定哪个算法最适合你的模型？一个检查的方法是称为A/B测试的技术。在机器学习中，A/B测试意味着你将尝试不同的模型，以找到最适合你的项目的那个。
+有不同的算法。你如何确定哪个算法最适合你的模型？一个检查的方法是称为 A/B 测试的技术。在机器学习中，A/B 测试意味着你将尝试不同的模型，以找到最适合你的项目的那个。
 
 尝试所有可能的算法，并找到表现最好的算法，然后继续使用它。
 
 ## 性能提升算法和技术
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/aab2252ce68e9e3bcc91e9ec51190cab.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/aab2252ce68e9e3bcc91e9ec51190cab.png)
 
 图片由作者提供
 
 你的模型的性能通常可以通过使用不同的技术来提升。让我们重点讨论其中的三种。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/e54b047af38c20ebf99eb8255522323b.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/e54b047af38c20ebf99eb8255522323b.png)
 
 图片由作者提供
 
@@ -298,17 +298,17 @@ API 代表应用程序编程接口，用于不同程序之间的通信。它帮�
 
 降维用于找到那些能比其他特征更好地表示数据的预测变量。这项技术使你的算法运行更快，模型预测效果更佳。
 
-[这里](https://scikit-learn.org/stable/modules/decomposition.html#decompositions)你可以看到在sci-kit learn库中应用降维技术的例子。
+[这里](https://scikit-learn.org/stable/modules/decomposition.html#decompositions)你可以看到在 sci-kit learn 库中应用降维技术的例子。
 
 **PCA**
 
-PCA代表主成分分析，它帮助你确定需要多少个预测变量来解释数据集的某一百分比。
+PCA 代表主成分分析，它帮助你确定需要多少个预测变量来解释数据集的某一百分比。
 
-让我通过一个[例子](https://platform.stratascratch.com/data-projects/delivery-duration-prediction?tabname=assignment)来解释一下，预计的交货时间是预测的。有100个预测变量，因此消除它们将有助于提升算法的速度，并使结果有更好的表现。这就是为什么应用PCA算法的原因。
+让我通过一个[例子](https://platform.stratascratch.com/data-projects/delivery-duration-prediction?tabname=assignment)来解释一下，预计的交货时间是预测的。有 100 个预测变量，因此消除它们将有助于提升算法的速度，并使结果有更好的表现。这就是为什么应用 PCA 算法的原因。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/e377b575feb4102569e5ea58b00718b5.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/e377b575feb4102569e5ea58b00718b5.png)
 
-PCA表明，至少需要60个代表性特征来解释80%的数据集。这是[代码](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)，在sci-kit learn库中提供了解释。
+PCA 表明，至少需要 60 个代表性特征来解释 80%的数据集。这是[代码](https://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)，在 sci-kit learn 库中提供了解释。
 
 ### **超参数调优**
 
@@ -318,7 +318,7 @@ PCA表明，至少需要60个代表性特征来解释80%的数据集。这是[�
 
 网格搜索帮助你找到最佳的参数值，以优化你的机器学习模型。
 
-[这里](https://scikit-learn.org/stable/modules/grid_search.html#grid-search)是sci-kit learn库中的代码，解释了什么是网格搜索，并提供了实现代码。
+[这里](https://scikit-learn.org/stable/modules/grid_search.html#grid-search)是 sci-kit learn 库中的代码，解释了什么是网格搜索，并提供了实现代码。
 
 ### 预处理
 
@@ -326,11 +326,11 @@ PCA表明，至少需要60个代表性特征来解释80%的数据集。这是[�
 
 **标准化器**
 
-主要思想是将预测变量的均值变为零，并将标准差调整为1。 [这里](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler) 是 sci-kit learn 库的代码，帮助你计算这一点。
+主要思想是将预测变量的均值变为零，并将标准差调整为 1。 [这里](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html#sklearn.preprocessing.StandardScaler) 是 sci-kit learn 库的代码，帮助你计算这一点。
 
 ## 模型评估指标
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/293329c5b4a3bc6fee9f6ec4c4721ed0.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/293329c5b4a3bc6fee9f6ec4c4721ed0.png)
 
 图片由作者提供
 
@@ -348,7 +348,7 @@ PCA表明，至少需要60个代表性特征来解释80%的数据集。这是[�
 
 这里是公式。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/9c56a7b3e3a014a03022d6978ac591ca.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/9c56a7b3e3a014a03022d6978ac591ca.png)
 
 [这里](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) 是 Python 中使用 sci-kit learn 实现 MSE 的代码。
 
@@ -358,7 +358,7 @@ RMSE 是 MSE 的平方根。
 
 这里是公式。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/6411a21ade39ae2f90f29e7dcf09d4e9.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/6411a21ade39ae2f90f29e7dcf09d4e9.png)
 
 [这里](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) 是 Python 中使用 sci-kit learn 实现 RMSE 的代码。
 
@@ -376,7 +376,7 @@ RMSE 是 MSE 的平方根。
 
 这里是公式。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/5981191f75ba79145efe15d1f690c682.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/5981191f75ba79145efe15d1f690c682.png)
 
 TP = 真正例
 
@@ -390,7 +390,7 @@ FP = 假正例
 
 这里是公式。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/58235f2d577653e47a155cb7710ff9e6.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/58235f2d577653e47a155cb7710ff9e6.png)
 
 FN: 假阴性
 
@@ -402,7 +402,7 @@ FN: 假阴性
 
 这是公式
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/2ea3e4abbe7d9f2ba32b485d00153dac.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/2ea3e4abbe7d9f2ba32b485d00153dac.png)
 
 ### 聚类
 
@@ -416,7 +416,7 @@ FN: 假阴性
 
 这是公式
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/4ba9ee953624299c5d91c329c0ce4fdf.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/4ba9ee953624299c5d91c329c0ce4fdf.png)
 
 要计算纯度，首先应计算 [混淆矩阵](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.confusion_matrix.html)。
 
@@ -424,7 +424,7 @@ FN: 假阴性
 
 它衡量两个簇之间的相似性。
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/16eacb4ecf9802d059bc338bb819e014.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/16eacb4ecf9802d059bc338bb819e014.png)
 
 TP = 真阳性
 
@@ -438,7 +438,7 @@ FN = 假阴性
 
 # 6. 生产中的模型
 
-![从数据收集到模型部署：数据科学项目的6个阶段](../Images/67876eb43df85e03c0ef78405042114b.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/67876eb43df85e03c0ef78405042114b.png)
 
 作者提供的图片
 
@@ -474,7 +474,7 @@ Flask 是一个 Python 库，允许你编写 Web 应用程序。欲了解更多�
 
 这里是他们定价系统的不同选项。
 
-![从数据收集到模型部署：数据科学项目的 6 个阶段](../Images/ccfcdeffa095c7ac842b6d3b8a2f6289.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/ccfcdeffa095c7ac842b6d3b8a2f6289.png)
 
 图片来自 [docsumo.com](https://www.docsumo.com/pricing)
 
@@ -486,7 +486,7 @@ Flask 是一个 Python 库，允许你编写 Web 应用程序。欲了解更多�
 
 这是一个面部识别 [api](https://rapidapi.com/eyerecognize/api/face-detection-and-facial-features/pricing)，它帮助你将文本转换为语音。这个 API 可能在后台使用 CNN 来识别面部。
 
-![从数据收集到模型部署：数据科学项目的 6 个阶段](../Images/95373768f894ea7dc690d3b063553f4a.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/95373768f894ea7dc690d3b063553f4a.png)
 
 图片来自 [RapidAPI](https://rapidapi.com/eyerecognize/api/face-detection-and-facial-features/pricing)
 
@@ -494,7 +494,7 @@ Flask 是一个 Python 库，允许你编写 Web 应用程序。欲了解更多�
 
 ## 模型维护
 
-![从数据收集到模型部署：数据科学项目的 6 个阶段](../Images/b1dd8f5e44325ef8e7211f35d8382368.png)
+![从数据收集到模型部署：数据科学项目的 6 个阶段](img/b1dd8f5e44325ef8e7211f35d8382368.png)
 
 图片由作者提供
 
@@ -530,14 +530,14 @@ Flask 是一个 Python 库，允许你编写 Web 应用程序。欲了解更多�
 
 ### 更多相关主题
 
-+   [前7名模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
++   [前 7 名模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [将机器学习算法完整端到端部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [基础知识回顾第4周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [基础知识回顾第 4 周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
 +   [数据科学定义幽默：一些古怪的名言…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets 新闻，4月6日：8门免费MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)

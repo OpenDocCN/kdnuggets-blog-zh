@@ -1,28 +1,28 @@
 # 多臂老虎机问题简介
 
-> 原文：[https://www.kdnuggets.com/2023/01/introduction-multiarmed-bandit-problems.html](https://www.kdnuggets.com/2023/01/introduction-multiarmed-bandit-problems.html)
+> 原文：[`www.kdnuggets.com/2023/01/introduction-multiarmed-bandit-problems.html`](https://www.kdnuggets.com/2023/01/introduction-multiarmed-bandit-problems.html)
 
-多臂老虎机（MAB）是一个机器学习框架，它使用复杂的算法在面对多个选择时动态分配资源。换句话说，它是一种高级的A/B测试形式，数据分析师、医学研究人员和营销专家最常使用它。
+多臂老虎机（MAB）是一个机器学习框架，它使用复杂的算法在面对多个选择时动态分配资源。换句话说，它是一种高级的 A/B 测试形式，数据分析师、医学研究人员和营销专家最常使用它。
 
 在我们深入探讨多臂老虎机的概念之前，我们需要讨论强化学习以及探索与利用的困境。然后，我们可以专注于各种老虎机解决方案和实际应用。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 # 什么是强化学习？
 
-除了监督学习和无监督学习之外，强化学习是[机器学习](/2022/12/complete-machine-learning-study-roadmap.html)的基本三大范式之一。与我们提到的前两种原型不同，强化学习关注的是在代理与环境互动时的奖励和惩罚。
+除了监督学习和无监督学习之外，强化学习是机器学习的基本三大范式之一。与我们提到的前两种原型不同，强化学习关注的是在代理与环境互动时的奖励和惩罚。
 
-![多臂老虎机问题简介](../Images/59e39e159c8b54a489e311cca166ad66.png)
+![多臂老虎机问题简介](img/59e39e159c8b54a489e311cca166ad66.png)
 
 强化学习的实际例子每天都在我们身边。例如，如果你的小狗咬断了你的电脑电缆，你可能会责骂它并表达你对其行为的不满。通过这样做，你将教会你的狗破坏家中电缆是不好的行为。这是负向强化。
 
@@ -36,7 +36,7 @@
 
 如果你选择**探索**，你的每日咖啡可能会变成一种不愉快的体验。然而，如果你选择**利用**你已经知道的东西，去访问熟悉的地方，你可能会错过你曾经品尝过的最美味的咖啡。
 
-![多臂老虎机问题简介](../Images/9f11fe6e4f1ccfc09a45c7facb3893f3.png)
+![多臂老虎机问题简介](img/9f11fe6e4f1ccfc09a45c7facb3893f3.png)
 
 多臂老虎机在各个领域解决这些问题，并帮助数据分析师确定正确的行动方案。
 
@@ -50,11 +50,11 @@
 
 假设你在每个地点购买了十次杂货，并且你最常对农贸市场的蔬菜感到满意。最终，你会有意识地决定将绿色蔬菜专门从该市场购买。
 
-![多臂老虎机问题介绍](../Images/2319b023e02c5bd71494d52a0aa394ef.png)
+![多臂老虎机问题介绍](img/2319b023e02c5bd71494d52a0aa394ef.png)
 
 当市场偶尔关闭时，你可能被迫再次尝试商店或超市，而结果可能会让你改变主意。最好的老虎机代理程序会做同样的事情，时不时地尝试回报较少的选项，并强化它们已经拥有的数据。
 
-老虎机在实时学习并相应调整其参数。与A/B测试相比，多臂老虎机允许你基于较长时间段收集高级信息，而不是在短暂测试后做出选择。
+老虎机在实时学习并相应调整其参数。与 A/B 测试相比，多臂老虎机允许你基于较长时间段收集高级信息，而不是在短暂测试后做出选择。
 
 # 多臂老虎机构建与解决方案
 
@@ -66,7 +66,7 @@
 
 ## Epsilon-贪婪
 
-Epsilon-贪婪多臂老虎机通过在公式中添加探索值（epsilon）来平衡探索和利用。如果epsilon等于0.3，则代理将在30%的时间内探索随机可能性，其余70%的时间专注于利用最佳平均结果。
+Epsilon-贪婪多臂老虎机通过在公式中添加探索值（epsilon）来平衡探索和利用。如果 epsilon 等于 0.3，则代理将在 30%的时间内探索随机可能性，其余 70%的时间专注于利用最佳平均结果。
 
 还包括一个衰减参数，它随着时间的推移减少 epsilon。当构建代理时，你可以决定在经过一定时间或采取一定行动后将 epsilon 从方程中移除。这将导致代理仅专注于利用已经收集的数据，并从方程中移除随机测试。
 
@@ -92,13 +92,13 @@ Thompson 赌博机能够根据过去选择的频率更多或更少地信任某�
 
 2018 年，[Netflix 在 Data Council 举办了一次演讲](https://www.youtube.com/watch?v=kY-BCNHd_dM&ab_channel=DataCouncil)，讨论了他们如何应用多臂赌博机来确定哪些标题应该更频繁地展示给观众。市场营销人员可能会觉得这个演示非常有趣，因为它解释了不同因素（如标题的重播频率或观众暂停的情况）如何影响多臂赌博机的解决方案。
 
-多臂赌博机对人类最重要的用途可能与医疗保健相关。至今，医学专家使用各种MAB构建来确定患者的最佳治疗方案。赌博机还在临床试验和新疗法探索中得到了各种应用。
+多臂赌博机对人类最重要的用途可能与医疗保健相关。至今，医学专家使用各种 MAB 构建来确定患者的最佳治疗方案。赌博机还在临床试验和新疗法探索中得到了各种应用。
 
 # 关键要点
 
 多臂赌博机在多个领域取得了成功应用，包括市场营销、金融，甚至是健康。然而，正如强化学习本身一样，它们也受到环境变化的严重限制。如果环境条件倾向于变化，多臂赌博机每次都不得不重新“学习”，从而成为一个不那么有用的工具。
 
-**[亚历克斯·波波维奇](https://www.linkedin.com/in/alex-popovic-24283a169/)**是一位工程经理和作家，拥有十年的技术和金融团队领导经验。他现在经营自己的咨询公司，同时探索他所热爱的主题，如数据科学、人工智能和高幻想。你可以通过hello@writeralex.com联系亚历克斯。
+**[亚历克斯·波波维奇](https://www.linkedin.com/in/alex-popovic-24283a169/)**是一位工程经理和作家，拥有十年的技术和金融团队领导经验。他现在经营自己的咨询公司，同时探索他所热爱的主题，如数据科学、人工智能和高幻想。你可以通过 hello@writeralex.com 联系亚历克斯。
 
 ### 更多相关话题
 
@@ -106,10 +106,10 @@ Thompson 赌博机能够根据过去选择的频率更多或更少地信任某�
 
 +   [常见数据问题（及解决方案）](https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html)
 
-+   [识别机器学习可解决问题的4个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
++   [识别机器学习可解决问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
 
 +   [想用你的数据技能解决全球问题？了解更多…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [解决5个复杂的SQL问题：难题查询解释](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
++   [解决 5 个复杂的 SQL 问题：难题查询解释](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
 
 +   [数据科学项目，帮助你解决现实世界问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)

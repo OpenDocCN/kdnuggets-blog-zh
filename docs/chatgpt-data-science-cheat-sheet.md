@@ -1,6 +1,6 @@
 # ChatGPT 数据科学备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html`](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
 
 # ChatOps 的兴起
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@ ChatGPT（以及最新和最强大的 GPT3 版本）旨在辅助（没错... *�
 
 [](https://www.kdnuggets.com/publications/sheets/ChatGPT_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
-[![ChatGPT 数据科学备忘单](../Images/0fe6b5093e8db83e06dd577ea4fbbc2a.png)](https://www.kdnuggets.com/publications/sheets/ChatGPT_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
+![ChatGPT 数据科学备忘单](https://www.kdnuggets.com/publications/sheets/ChatGPT_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
 > ChatGPT 是一个由 OpenAI 构建的大型语言对话 AI。它使用了与 InstructGPT 类似的人类反馈强化学习进行训练。ChatGPT 理解提示并提供详细的回复，可以帮助你进行研究、编码以及各种数据科学任务。
 
@@ -64,4 +64,4 @@ ChatGPT（以及最新和最强大的 GPT3 版本）旨在辅助（没错... *�
 
 +   [10 个 ChatGPT 项目备忘单](https://www.kdnuggets.com/10-chatgpt-projects-cheat-sheet)
 
-+   [KDnuggets 新闻，7月5日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)

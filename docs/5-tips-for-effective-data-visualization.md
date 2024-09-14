@@ -1,8 +1,8 @@
-# 5个有效数据可视化的技巧
+# 5 个有效数据可视化的技巧
 
-> 原文：[https://www.kdnuggets.com/5-tips-for-effective-data-visualization](https://www.kdnuggets.com/5-tips-for-effective-data-visualization)
+> 原文：[`www.kdnuggets.com/5-tips-for-effective-data-visualization`](https://www.kdnuggets.com/5-tips-for-effective-data-visualization)
 
-![5个有效数据可视化的技巧](../Images/1b8bab2354047c08335ce04325127478.png)
+![5 个有效数据可视化的技巧](img/1b8bab2354047c08335ce04325127478.png)
 
 图片来源：编辑 | Midjourney
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -30,15 +30,15 @@
 
 使用折线图来显示随时间变化的趋势。在提供的示例中，折线图用于绘制多年来的销售趋势。
 
-![折线图](../Images/6b642de97dda27d115c3846b55400606.png)
+![折线图](img/6b642de97dda27d115c3846b55400606.png)
 
 当比较不同组中的类别时，选择柱状图。例如，柱状图可以比较五种不同产品类别的销售表现。
 
-![柱状图](../Images/a01c103e7d09d21ab57f3435ca17a5a9.png)
+![柱状图](img/a01c103e7d09d21ab57f3435ca17a5a9.png)
 
 避免使用饼图来清晰地表示数据。饼图难以准确阅读和比较。切片之间的小差异难以辨别。如果类别过多，饼图会显得杂乱。下面的饼图展示了不同类别的销售比例。由于类别众多且每个类别的销售差异小，因此很难解读饼图。
 
-![饼图](../Images/0cd98b205af1b4c22286c664e85c962f.png)
+![饼图](img/0cd98b205af1b4c22286c664e85c962f.png)
 
 ## 3\. 避免误导性的可视化
 

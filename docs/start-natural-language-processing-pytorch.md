@@ -1,8 +1,8 @@
 # 如何开始使用 PyTorch 进行自然语言处理
 
-> 原文：[https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)
+> 原文：[`www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html`](https://www.kdnuggets.com/2022/04/start-natural-language-processing-pytorch.html)
 
-![如何开始使用 PyTorch 进行自然语言处理](../Images/066862a1fb6ff3bdba76bd0aa0c61f13.png)
+![如何开始使用 PyTorch 进行自然语言处理](img/066862a1fb6ff3bdba76bd0aa0c61f13.png)
 
 随着人工智能和深度学习程序在未来几年中不断增长和发展，自然语言处理 (NLP) 也在不断增长，变得越来越重要。使用 PyTorch 进行自然语言处理是实现这些程序的最佳选择。
 
@@ -10,11 +10,11 @@
 
 ## 我们的 3 个最佳课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -36,7 +36,7 @@
 
 要开始使用 PyTorch 进行 NLP，你需要熟悉 Python 编程。
 
-![如何开始使用 PyTorch 进行自然语言处理](../Images/dd8c3f7e350614195e1ef2fcaf69d250.png)
+![如何开始使用 PyTorch 进行自然语言处理](img/dd8c3f7e350614195e1ef2fcaf69d250.png)
 
 [图片来源](https://www.pexels.com/photo/woman-sitting-in-front-laptop-1181677/)
 
@@ -50,7 +50,7 @@
 
 我们将要查看的前三个 **类** 是 **多层类**，这意味着它们可以表示双向递归神经网络。简单来说，它允许深度学习程序从过去的状态中学习，同时在计算和处理继续进行时从新的/未来的状态中学习。这使得这些程序能够学习和处理自然语言输入，甚至理解更深层次的语言特征。
 
-![如何开始使用 PyTorch 进行自然语言处理](../Images/774f076f600ae02a346591e430b64d39.png)
+![如何开始使用 PyTorch 进行自然语言处理](img/774f076f600ae02a346591e430b64d39.png)
 
 torch.nn.RNN 多对多图示，[图片来源](https://discuss.pytorch.org/t/pytorch-rnn-many-to-many-learning-one-to-many-test/91874)
 
@@ -74,7 +74,7 @@ torch.nn.GRU 类程序是入门 NLP 的另一个很好的方式，因为它们�
 
 接下来的三个类是其前身的简化版本，因此它们都以不同的好处类似地运行。这些类都是**细胞级类**，基本上一次只运行一个操作，而不是同时处理多个数据集或序列。
 
-![如何开始使用 PyTorch 进行自然语言处理](../Images/2fb630b75b45de81688bad801f019773.png)
+![如何开始使用 PyTorch 进行自然语言处理](img/2fb630b75b45de81688bad801f019773.png)
 
 使用分配给相应图像的单词输出 PyTorch 的 NLP 结果，[图像来源](https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html)
 
@@ -110,7 +110,7 @@ torch.nn.LSTMCell 的功能类似于普通的 torch.nn.LSTM 类，能够处理�
 
 一旦你选择了 PyTorch 类和词嵌入方法，你就准备好开始在下一个深度学习项目中利用自然语言处理了！
 
-![如何开始使用 PyTorch 进行自然语言处理](../Images/c339c410c2c3d261b2043451392f9813.png)
+![如何开始使用 PyTorch 进行自然语言处理](img/c339c410c2c3d261b2043451392f9813.png)
 
 使用 PyTorch 进行自然语言处理来创建像 Siri 这样的最终结果，[图片来源](https://unsplash.com/photos/AGRtDoZlpYw)
 
@@ -138,4 +138,4 @@ torch.nn.LSTMCell 的功能类似于普通的 torch.nn.LSTM 类，能够处理�
 
 +   [自然语言处理的温和入门](https://www.kdnuggets.com/2022/06/gentle-introduction-natural-language-processing.html)
 
-+   [使用spaCy进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
++   [使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)

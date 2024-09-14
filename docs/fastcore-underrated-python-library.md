@@ -1,22 +1,22 @@
 # fastcore: 一款被低估的 Python 库
 
-> 原文：[https://www.kdnuggets.com/2020/10/fastcore-underrated-python-library.html](https://www.kdnuggets.com/2020/10/fastcore-underrated-python-library.html)
+> 原文：[`www.kdnuggets.com/2020/10/fastcore-underrated-python-library.html`](https://www.kdnuggets.com/2020/10/fastcore-underrated-python-library.html)
 
-[评论](#comments)
+评论
 
 **由 [Hamel Husain](https://hamel.dev/) 撰写，GitHub 的首席机器学习工程师**
 
-![带有代码的截图](../Images/bc8b7c0e278bb807e36cc708a9ab4dad.png)
+![带有代码的截图](img/bc8b7c0e278bb807e36cc708a9ab4dad.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -445,7 +445,7 @@ p.fun()
 
 ### 创建 lambda 的一种更简洁的方法
 
-*`Self`，用大写S，是创建调用对象方法的 lambda 的一种更简洁的方式。例如，让我们创建一个 lambda 来计算 Numpy 数组的和：*
+*`Self`，用大写 S，是创建调用对象方法的 lambda 的一种更简洁的方式。例如，让我们创建一个 lambda 来计算 Numpy 数组的和：*
 
 ```py
 arr=np.array([5,4,3,2,1])
@@ -546,7 +546,7 @@ p[2,4,6]
 
 ### 但等等 … 还有更多！
 
-*![](../Images/df633329da955c1492c3d331c612e2aa.png)*
+*![](img/df633329da955c1492c3d331c612e2aa.png)*
 
 我还想展示更多关于 fastcore 的内容，但这些内容不可能合理地适合一篇博客文章。以下是一些我在这篇博客中没有演示的最喜欢的东西：
 
@@ -612,11 +612,11 @@ p[2,4,6]
 
 **相关：**
 
-+   [数据科学遇上 Devops：使用 Jupyter、Git 和 Kubernetes 的 MLOps](/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
++   数据科学遇上 Devops：使用 Jupyter、Git 和 Kubernetes 的 MLOps
 
-+   [如何使用机器学习在 GitHub 上自动化任务以获取乐趣和利润](/2019/05/automate-tasks-github-machine-learning-fun-profit.html)
++   如何使用机器学习在 GitHub 上自动化任务以获取乐趣和利润
 
-+   [自动化机器学习——加速数据科学家生产力的范式转变](/2017/07/automated-machine-learning-paradigm-shift.html)
++   自动化机器学习——加速数据科学家生产力的范式转变
 
 ### 进一步阅读
 
@@ -630,4 +630,4 @@ p[2,4,6]
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的人工智能失败，进行了审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，进行了审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

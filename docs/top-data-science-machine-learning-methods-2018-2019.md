@@ -1,8 +1,8 @@
 # 2018 年、2019 年最常用的数据科学和机器学习方法
 
-> 原文：[https://www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html](https://www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html)
+> 原文：[`www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html`](https://www.kdnuggets.com/2019/04/top-data-science-machine-learning-methods-2018-2019.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 在最新的 KDnuggets 调查中，读者被问到：
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-基于 833 名投票者的结果显示，前 17 种方法与[2017 年的调查](/2017/12/top-data-science-machine-learning-methods.html)相同，尽管顺序稍有不同：
+基于 833 名投票者的结果显示，前 17 种方法与 2017 年的调查相同，尽管顺序稍有不同：
 
-![图](../Images/5fd506245fe2f349ced0a7f7b8864794.png)**图 1: 数据科学和机器学习方法的使用情况，2018/2019**
+![图](img/5fd506245fe2f349ced0a7f7b8864794.png)**图 1: 数据科学和机器学习方法的使用情况，2018/2019**
 
 今年受访者使用的前 17 种方法（第 16 位为并列）为：
 
@@ -66,7 +66,7 @@
 
 下面是今年调查中前几种方法和算法与 2017 年份额的比较。
 
-![图](../Images/3eff574c913233e0c029d9c53807407c.png)**图 2: 数据科学和机器学习方法的使用情况，2018/9 对比 2017**
+![图](img/3eff574c913233e0c029d9c53807407c.png)**图 2: 数据科学和机器学习方法的使用情况，2018/9 对比 2017**
 
 今年最显著的增加是在各种神经网络技术的使用上，包括 GANs、RNNs、CNNs、强化学习和原生深度神经网络。遗传算法和进化算法也有所增加，还有“其他方法”。
 
@@ -76,43 +76,43 @@
 
 +   **神经网络 - 循环神经网络（RNN）**，上升 56.5%，从 10.5% 上升到 16.5%
 
-+   **强化学习**，增长56.1%，从4.2%提升至6.6%
++   **强化学习**，增长 56.1%，从 4.2%提升至 6.6%
 
-+   **神经网络 - 卷积**，增长38.8%，从15.8%提升至22%
++   **神经网络 - 卷积**，增长 38.8%，从 15.8%提升至 22%
 
-+   **其他方法**，增长27.1%，从6.1%提升至7.8%
++   **其他方法**，增长 27.1%，从 6.1%提升至 7.8%
 
-+   **遗传/进化算法与方法**，增长25.7%，从4.8%提升至6.0%
++   **遗传/进化算法与方法**，增长 25.7%，从 4.8%提升至 6.0%
 
-+   **神经网络 - 深度学习**，增长23.5%，从20.6%提升至25%
++   **神经网络 - 深度学习**，增长 23.5%，从 20.6%提升至 25%
 
 今年的最大下降包括：
 
-+   **奇异值分解（SVD）**，下降25.4%，从2017年的8.1%降至2018/9年的6.0%
++   **奇异值分解（SVD）**，下降 25.4%，从 2017 年的 8.1%降至 2018/9 年的 6.0%
 
-+   **支持向量机（SVM）**，下降23.3%，从28.7%降至22%
++   **支持向量机（SVM）**，下降 23.3%，从 28.7%降至 22%
 
-+   **因子分析**，下降21.2%，从11.7%降至9.3%
++   **因子分析**，下降 21.2%，从 11.7%降至 9.3%
 
-+   **关联规则**，下降20.6%，从15.4%降至12.3%
++   **关联规则**，下降 20.6%，从 15.4%降至 12.3%
 
-+   **主成分分析（PCA）**，下降19.3%，从34.7%降至28%
++   **主成分分析（PCA）**，下降 19.3%，从 34.7%降至 28%
 
-+   **生存分析**，下降19.1%，从8.5%降至6.9%
++   **生存分析**，下降 19.1%，从 8.5%降至 6.9%
 
 ### 隶属
 
 按隶属参与情况：
 
-+   行业/自雇，64.9%（541份回应），平均使用7.8种工具
++   行业/自雇，64.9%（541 份回应），平均使用 7.8 种工具
 
-+   学生，15.8%（132份回应），平均使用6.1种工具
++   学生，15.8%（132 份回应），平均使用 6.1 种工具
 
-+   学术界，9.2%（77份回应），平均使用7.9种工具
++   学术界，9.2%（77 份回应），平均使用 7.9 种工具
 
-+   政府/非营利组织，7.3%（61份回应），平均使用5.8种工具
++   政府/非营利组织，7.3%（61 份回应），平均使用 5.8 种工具
 
-注意，只有22名受访者（<3%）选择了“其他”，平均使用7.5种工具。
+注意，只有 22 名受访者（<3%）选择了“其他”，平均使用 7.5 种工具。
 
 ### 区域参与
 
@@ -132,41 +132,41 @@
 
 其他，3.2%
 
-![图](../Images/e65fa302021e1ea97b467290ce891196.png)**图3: 区域参与，2018/2019**
+![图](img/e65fa302021e1ea97b467290ce891196.png)**图 3: 区域参与，2018/2019**
 
 感谢所有参与调查的人员，使得这一趋势汇编和分析成为可能。
 
 这是过去调查的结果：
 
-+   [分析、数据科学、机器学习应用的趋势与分析（2017）](/2018/04/poll-analytics-data-science-ml-applied-2017.html)
++   分析、数据科学、机器学习应用的趋势与分析（2017）
 
-+   [2016年分析、数据挖掘、数据科学的应用](/2016/12/poll-analytics-data-mining-data-science-applied-2016.html)
++   2016 年分析、数据挖掘、数据科学的应用
 
-+   [2015年分析、数据挖掘、数据科学的应用](/2016/01/poll-analytics-data-mining-data-science-applied-2015.html)
++   2015 年分析、数据挖掘、数据科学的应用
 
-+   [2014年分析、数据挖掘、数据科学的应用](/2014/12/where-analytics-data-mining-data-science-applied.html)
++   2014 年分析、数据挖掘、数据科学的应用
 
-+   [2012年您将分析/数据挖掘应用于哪里？](/polls/2012/where-applied-analytics-data-mining.html)
++   2012 年您将分析/数据挖掘应用于哪里？
 
-+   [应用分析/数据挖掘的行业/领域](/polls/2011/industries-applied-anaytics-data-mining.html)，2011年。
++   应用分析/数据挖掘的行业/领域，2011 年。
 
-+   [分析/数据挖掘的行业/领域](/polls/2010/analytics-data-mining-industries-applications.html)，2010年。
++   分析/数据挖掘的行业/领域，2010 年。
 
-+   [数据挖掘应用](/polls/2009/industries-data-mining-applications.htm)，2009年。
++   数据挖掘应用，2009 年。
 
-+   [数据挖掘应用](/polls/2008/data-mining-applications.htm)，2008年。
++   数据挖掘应用，2008 年。
 
-+   [按行业的数据挖掘应用](/polls/2007/data_mining_applications.htm)，2007年。
++   按行业的数据挖掘应用，2007 年。
 
-+   [您应用数据挖掘的行业/领域](/polls/2006/data_mining_applications_industries.htm)，2006年。
++   您应用数据挖掘的行业/领域，2006 年。
 
 ### 更多相关主题
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

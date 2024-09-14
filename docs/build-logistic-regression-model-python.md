@@ -1,8 +1,8 @@
 # 如何在 Python 中构建自己的逻辑回归模型
 
-> 原文：[https://www.kdnuggets.com/2019/10/build-logistic-regression-model-python.html](https://www.kdnuggets.com/2019/10/build-logistic-regression-model-python.html)
+> 原文：[`www.kdnuggets.com/2019/10/build-logistic-regression-model-python.html`](https://www.kdnuggets.com/2019/10/build-logistic-regression-model-python.html)
 
-[评论](#comments)
+评论
 
 这个算法的名称可能会有些混淆，因为逻辑回归机器学习算法用于分类任务而非回归问题。这里的“回归”名称意味着将线性模型拟合到特征空间中。该算法将逻辑函数应用于特征的线性组合，以预测基于预测变量的分类因变量的结果。逻辑回归算法有助于估计基于给定预测变量的分类因变量的特定水平的概率。
 
@@ -10,13 +10,13 @@
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 事务
 
 * * *
 
@@ -49,7 +49,7 @@ import matplotlib.pyplot as plt
 
 第一个函数用于定义 sigmoid 激活函数。sigmoid 函数的图像如下所示：
 
-![图](../Images/9052a633e687e3cf8857f3300053d52d.png)
+![图](img/9052a633e687e3cf8857f3300053d52d.png)
 
 sigmoid 函数
 
@@ -60,7 +60,7 @@ def sigmoid(scores):
 
 sigmoid 函数表示如下：
 
-![](../Images/b0ce537c506a545ebe03b193e995d5cc.png)
+![](img/b0ce537c506a545ebe03b193e995d5cc.png)
 
 Sigmoid 函数也称为逻辑函数，给出一个“S”形曲线，可以将任何实值数映射到 0 和 1 之间。如果曲线趋向于正无穷大，预测的 y 将变为 1，如果曲线趋向于负无穷大，预测的 y 将变为 0。如果 sigmoid 函数的输出大于 0.5，我们可以将结果分类为 1 或 yes；如果小于 0.5，我们可以将其分类为 0 或 no。
 
@@ -124,7 +124,7 @@ plt.show()
 
 ### 结果
 
-![图](../Images/1d6f43f3168a908d86c3d3c4483e9ec3.png)
+![图](img/1d6f43f3168a908d86c3d3c4483e9ec3.png)
 
 样本数据点的分类
 
@@ -176,19 +176,19 @@ plt.show()
 
 **相关内容：**
 
-+   [**逻辑回归：简明技术概述**](/2019/01/logistic-regression-concise-technical-overview.html)
++   **逻辑回归：简明技术概述**
 
-+   [用于乳腺癌分类的卷积神经网络](/2019/10/convolutional-neural-network-breast-cancer-classification.html)
++   用于乳腺癌分类的卷积神经网络
 
-+   [如何使用Flask轻松部署机器学习模型](/2019/10/easily-deploy-machine-learning-models-using-flask.html)
++   如何使用 Flask 轻松部署机器学习模型
 
 ### 相关主题
 
-+   [构建预测模型：Python中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
++   [构建预测模型：Python 中的逻辑回归](https://www.kdnuggets.com/building-predictive-models-logistic-regression-in-python)
 
-+   [LangChain 101：构建你自己的GPT驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
++   [LangChain 101：构建你自己的 GPT 驱动应用](https://www.kdnuggets.com/2023/04/langchain-101-build-gptpowered-applications.html)
 
-+   [使用LlamaIndex构建你自己的PandasAI](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)
++   [使用 LlamaIndex 构建你自己的 PandasAI](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)
 
 +   [线性回归与逻辑回归的比较](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 

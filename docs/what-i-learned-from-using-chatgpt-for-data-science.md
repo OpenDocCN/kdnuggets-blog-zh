@@ -1,8 +1,8 @@
 # 我从使用 ChatGPT 进行数据科学中学到的
 
-> 原文：[https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
+> 原文：[`www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science`](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
 
-![我从使用 ChatGPT 进行数据科学中学到的](../Images/e4236eaccd183f153e5808860e2bc87c.png)
+![我从使用 ChatGPT 进行数据科学中学到的](img/e4236eaccd183f153e5808860e2bc87c.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的 IT 组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的 IT 组织
 
 * * *
 
@@ -70,33 +70,33 @@ missing_values = aerofit_data.isnull().sum()
 
 它为关键变量创建了直方图和箱线图：年龄、收入和里程。它检测到收入和里程分布中的潜在异常值。
 
-![我从使用 ChatGPT 进行数据科学中学到的](../Images/5304934a2cc178f94dd4b4a7ab186457.png)
+![我从使用 ChatGPT 进行数据科学中学到的](img/5304934a2cc178f94dd4b4a7ab186457.png)
 
 创建者：作者/ChatGPT
 
-![我从使用 ChatGPT 进行数据科学中学到的](../Images/184d686d26a5d9da92f7ee8582fe0576.png)
+![我从使用 ChatGPT 进行数据科学中学到的](img/184d686d26a5d9da92f7ee8582fe0576.png)
 
 创建者：作者/ChatGPT
 
 它还解释了这些可视化。因此，它注意到收入分布是右偏的，这表明大多数客户的收入处于较低的范围，而较少的客户收入显著较高。箱形图显示高端有一些离群值。
 
-![我从使用ChatGPT进行数据科学中学到的东西](../Images/536b5aa0c977394ab655aceed1f8bdc9.png)
+![我从使用 ChatGPT 进行数据科学中学到的东西](img/536b5aa0c977394ab655aceed1f8bdc9.png)
 
-由作者/ChatGPT创建
+由作者/ChatGPT 创建
 
-![我从使用ChatGPT进行数据科学中学到的东西](../Images/f7ad92ed9ce76d5c375a79ecdbaabe3a.png)
+![我从使用 ChatGPT 进行数据科学中学到的东西](img/f7ad92ed9ce76d5c375a79ecdbaabe3a.png)
 
-由作者/ChatGPT创建
+由作者/ChatGPT 创建
 
-相同的解释适用于Miles分布：右偏和高端的离群值。
+相同的解释适用于 Miles 分布：右偏和高端的离群值。
 
 考虑到数据的性质，它建议这些离群值不一定是错误的，而是代表了特定的客户群体。对于偏斜的分布，它建议使用变换（例如，对数变换）来规范化数据。
 
-当然，你也可以让它为这些可视化创建Python代码。
+当然，你也可以让它为这些可视化创建 Python 代码。
 
 # 很好：验证数据是否适用于特定的统计测试
 
-我可以使用相同的数据，并询问ChatGPT它是否适用于[逻辑回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)。如果不适用，我该如何转换它以使其合适？
+我可以使用相同的数据，并询问 ChatGPT 它是否适用于[逻辑回归](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)。如果不适用，我该如何转换它以使其合适？
 
 它回复说我的数据主要适用于连续数据的描述性和推断性分析。
 
@@ -116,13 +116,13 @@ missing_values = aerofit_data.isnull().sum()
 
 # 好：自动化部分或整个数据科学项目
 
-ChatGPT实际上在数据科学项目的每个阶段都可以提供帮助。你可以提示它编写网页抓取代码。你可以指示它探索和准备数据，以便用于机器学习算法。它还可以为选择合适的算法、数据集拆分、A/B测试和性能提升算法提供代码。最后，你还可以让ChatGPT为模型部署编写代码。
+ChatGPT 实际上在数据科学项目的每个阶段都可以提供帮助。你可以提示它编写网页抓取代码。你可以指示它探索和准备数据，以便用于机器学习算法。它还可以为选择合适的算法、数据集拆分、A/B 测试和性能提升算法提供代码。最后，你还可以让 ChatGPT 为模型部署编写代码。
 
-尽管ChatGPT可以做到这些，但你可能不会立即得到一个完全符合你需求的代码。所以，你必须理解你想要实现什么，并检查代码。可能需要提示ChatGPT进行代码修正，并提供更多更改说明。
+尽管 ChatGPT 可以做到这些，但你可能不会立即得到一个完全符合你需求的代码。所以，你必须理解你想要实现什么，并检查代码。可能需要提示 ChatGPT 进行代码修正，并提供更多更改说明。
 
 # 好：代码转换和学习
 
-ChatGPT可以帮助那些仍在学习新编程语言的用户。假设你是一个SQL高手，解决 [这个面试问题](https://platform.stratascratch.com/coding/10354-most-profitable-companies?code_type=2) 对你来说没问题。然而，你希望将Python添加到你的技能中。ChatGPT可以帮助你。你可以复制SQL代码并要求ChatGPT将其转换为Python。
+ChatGPT 可以帮助那些仍在学习新编程语言的用户。假设你是一个 SQL 高手，解决 [这个面试问题](https://platform.stratascratch.com/coding/10354-most-profitable-companies?code_type=2) 对你来说没问题。然而，你希望将 Python 添加到你的技能中。ChatGPT 可以帮助你。你可以复制 SQL 代码并要求 ChatGPT 将其转换为 Python。
 
 所以，SQL 代码是这样的。
 
@@ -153,7 +153,7 @@ WHERE
   rank <= 3;
 ```
 
-ChatGPT根据上述SQL代码编写了Python代码，但它运行不正确。所以我对ChatGPT编写错误的代码进行批评。我要求它重试，因为输出与SQL代码不一样。它重试后返回了正确的结果。
+ChatGPT 根据上述 SQL 代码编写了 Python 代码，但它运行不正确。所以我对 ChatGPT 编写错误的代码进行批评。我要求它重试，因为输出与 SQL 代码不一样。它重试后返回了正确的结果。
 
 ```py
 import pandas as pd
@@ -182,15 +182,15 @@ result  # This will display the top 3 companies by profit
 
 当我说糟糕时，我是指真的很糟糕！它到了那种使用正确的公式并插入正确的值但却搞砸了不那么复杂的计算的程度。
 
-看这个。我让它解决这个问题：“假设你掷一个公平的六面骰子10次。掷出两个1、三个2、一个3、零个4、三个5和一个6的概率是多少？”
+看这个。我让它解决这个问题：“假设你掷一个公平的六面骰子 10 次。掷出两个 1、三个 2、一个 3、零个 4、三个 5 和一个 6 的概率是多少？”
 
 它以这种方式计算概率。
 
-![我从使用ChatGPT进行数据科学中学到的东西](../Images/c8f50439f6393bebbd28fe3b7f8e4cd7.png)
+![我从使用 ChatGPT 进行数据科学中学到的东西](img/c8f50439f6393bebbd28fe3b7f8e4cd7.png)
 
-它在计算阶乘时搞砸了。而且它很有风格地搞砸了！完全错误地说2! = 12。其实不对，2! = 2。怎么会搞砸这样一个简单的计算，例如2x1 = 2？这真的很可笑！
+它在计算阶乘时搞砸了。而且它很有风格地搞砸了！完全错误地说 2! = 12。其实不对，2! = 2。怎么会搞砸这样一个简单的计算，例如 2x1 = 2？这真的很可笑！
 
-更搞笑的是，有一次3! = 36，而第二次3! = 6。值得称赞的是，它至少有一次是正确的。
+更搞笑的是，有一次 3! = 36，而第二次 3! = 6。值得称赞的是，它至少有一次是正确的。
 
 当我要求它纠正计算而不做进一步解释时，它重新计算并得出了 0.0001389 的概率。我简直不敢相信自己的眼睛！它可以使用完全相同的公式和数值，却得出一个不同的且仍然错误的结果！
 

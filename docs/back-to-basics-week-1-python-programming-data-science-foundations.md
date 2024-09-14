@@ -1,52 +1,52 @@
-# 回到基础 第1周：Python编程与数据科学基础
+# 回到基础 第 1 周：Python 编程与数据科学基础
 
-> 原文：[https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
+> 原文：[`www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations`](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
-![回到基础 第1周：Python编程与数据科学基础](../Images/1f789747a4dc14df4f6206e6d8ee79e8.png)
+![回到基础 第 1 周：Python 编程与数据科学基础](img/1f789747a4dc14df4f6206e6d8ee79e8.png)
 
 图片由作者提供
 
-加入KDnuggets的回到基础路径，帮助你启动新职业或刷新数据科学技能。回到基础路径分为4周加1周附加内容。希望你能将这些博客作为课程指南。
+加入 KDnuggets 的回到基础路径，帮助你启动新职业或刷新数据科学技能。回到基础路径分为 4 周加 1 周附加内容。希望你能将这些博客作为课程指南。
 
-在第一周，我们将学习Python、数据处理和可视化的所有内容。
+在第一周，我们将学习 Python、数据处理和可视化的所有内容。
 
-+   **第1到3天**：有志数据科学家的Python必备知识
++   **第 1 到 3 天**：有志数据科学家的 Python 必备知识
 
-    +   介绍Python在数据科学中的角色。
+    +   介绍 Python 在数据科学中的角色。
 
-    +   适合初学者的Python语法、数据类型和控制结构指南。
+    +   适合初学者的 Python 语法、数据类型和控制结构指南。
 
     +   互动编码练习以巩固你的理解。
 
-+   **第4天**：Python数据结构揭秘
++   **第 4 天**：Python 数据结构揭秘
 
-    +   通过我们的逐步指南了解Python的核心数据结构。你将学习列表、元组、字典和集合——每种结构都有实际示例以及它们在数据处理中的重要性。
+    +   通过我们的逐步指南了解 Python 的核心数据结构。你将学习列表、元组、字典和集合——每种结构都有实际示例以及它们在数据处理中的重要性。
 
-+   **第5到6天**：使用NumPy和Pandas进行实际数值计算
++   **第 5 到 6 天**：使用 NumPy 和 Pandas 进行实际数值计算
 
-    +   探索NumPy和Pandas在数值分析和数据处理中的强大功能，包括实际应用和动手练习。
+    +   探索 NumPy 和 Pandas 在数值分析和数据处理中的强大功能，包括实际应用和动手练习。
 
-+   **第7天**：使用Pandas进行数据清洗技术
++   **第 7 天**：使用 Pandas 进行数据清洗技术
 
-    +   使用Pandas掌握必备的数据清洗技能。
+    +   使用 Pandas 掌握必备的数据清洗技能。
 
 让我们开始吧。
 
-# 从数据科学入门Python
+# 从数据科学入门 Python
 
-**第1周 - 第1部分**：[从数据科学入门Python](/getting-started-with-python-for-data-science)
+**第 1 周 - 第一部分**：从数据科学入门 Python
 
-初学者指南：设置Python并理解其在数据科学中的作用。
+初学者指南：设置 Python 并理解其在数据科学中的作用。
 
-生成式AI、ChatGPT、Google Bard——这些可能是你过去几个月听到的很多术语。随着这种轰动效应，许多人正在考虑进入技术领域，比如数据科学。
+生成式 AI、ChatGPT、Google Bard——这些可能是你过去几个月听到的很多术语。随着这种轰动效应，许多人正在考虑进入技术领域，比如数据科学。
 
 不同角色的人希望保住他们的工作，因此他们将致力于提升技能以适应当前的市场。这是一个竞争激烈的市场，我们看到越来越多的人对数据科学产生兴趣，那里有成千上万的在线课程、训练营和硕士（MSc）课程可供选择。
 
-# Python基础：语法、数据类型和控制结构
+# Python 基础：语法、数据类型和控制结构
 
-**第1周 - 第2部分**：[Python基础：语法、数据类型和控制结构](/python-basics-syntax-data-types-and-control-structures)
+**第 1 周 - 第二部分**：Python 基础：语法、数据类型和控制结构
 
-想学Python吗？今天就开始学习Python的语法、支持的数据类型和控制结构。
+想学 Python 吗？今天就开始学习 Python 的语法、支持的数据类型和控制结构。
 
 你是一个想要学习 Python 编程的初学者吗？如果是的话，这个适合初学者的教程将帮助你熟悉语言的基础。这个教程将介绍 Python 的—相对友好的—语法。你还将学习如何使用不同的数据类型、条件语句和循环。
 
@@ -54,7 +54,7 @@
 
 # 从 5 个步骤开始学习 Python 数据结构
 
-**第1周 - 第3部分：** [从 5 个步骤开始学习 Python 数据结构](/5-steps-getting-started-python-data-structures)
+**第 1 周 - 第三部分：** 从 5 个步骤开始学习 Python 数据结构
 
 本教程涵盖了 Python 的基础数据结构——列表、元组、字典和集合。了解它们的特征、使用案例和实际示例，全部在 5 个步骤中完成。
 
@@ -64,7 +64,7 @@
 
 # Numpy 和 Pandas 简介
 
-**第1周 - 第4部分：** [Numpy 和 Pandas 简介](/introduction-to-numpy-and-pandas)
+**第 1 周 - 第四部分：** Numpy 和 Pandas 简介
 
 使用 Numpy 和 Pandas 进行数值计算和数据处理的入门。
 
@@ -74,7 +74,7 @@
 
 # 使用 Pandas 进行数据清理
 
-**第1周 - 第5部分：** [使用 Pandas 进行数据清理](/data-cleaning-with-pandas)
+**第 1 周 - 第五部分：** 使用 Pandas 进行数据清理
 
 这个逐步教程适合初学者，旨在指导他们通过强大的 Pandas 库进行数据清理和预处理。
 
@@ -84,7 +84,7 @@
 
 # 数据可视化：理论与技术
 
-**第1周 - 第6部分：** [数据可视化：理论与技术](/data-visualization-theory-and-techniques)
+**第 1 周 - 第六部分：** 数据可视化：理论与技术
 
 解锁观察我们数据驱动世界的秘密。
 
@@ -96,7 +96,7 @@
 
 # 使用 Matplotlib 和 Seaborn 创建可视化
 
-**第 1 周 - 第 7 部分：** [使用 Matplotlib 和 Seaborn 创建可视化](/creating-visuals-with-matplotlib-and-seaborn)
+**第 1 周 - 第七部分：** 使用 Matplotlib 和 Seaborn 创建可视化
 
 学习用于工作中的基础 Python 包可视化。
 
@@ -120,21 +120,21 @@ KDnuggets 团队希望《基础回顾》路径为读者提供了一个全面且�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT 需求
 
 * * *
 
 ### 更多相关主题
 
-+   [基础回顾第2周：数据库、SQL、数据管理及…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [基础回顾第 2 周：数据库、SQL、数据管理及…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
 
-+   [基础回顾第3周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [基础回顾第 3 周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
 
-+   [基础回顾第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [基础回顾第 4 周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
 +   [基础回顾额外周：部署到云端](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)
 

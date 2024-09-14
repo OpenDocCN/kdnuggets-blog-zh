@@ -1,38 +1,38 @@
-# 数据科学家应该了解Java的6个主要理由
+# 数据科学家应该了解 Java 的 6 个主要理由
 
-> 原文：[https://www.kdnuggets.com/2020/06/top-6-reasons-data-scientists-know-java.html](https://www.kdnuggets.com/2020/06/top-6-reasons-data-scientists-know-java.html)
+> 原文：[`www.kdnuggets.com/2020/06/top-6-reasons-data-scientists-know-java.html`](https://www.kdnuggets.com/2020/06/top-6-reasons-data-scientists-know-java.html)
 
-[评论](#comments)
+评论
 
-**由Malcom Ridgers，[BairesDev](https://www.bairesdev.com/)**
+**由 Malcom Ridgers，[BairesDev](https://www.bairesdev.com/)**
 
-![Java](../Images/6e1133d9d492d720886fd61769eb6ff8.png)
+![Java](img/6e1133d9d492d720886fd61769eb6ff8.png)
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-[Java是当今最受需求的编程语言之一](https://towardsdatascience.com/top-10-in-demand-programming-languages-to-learn-in-2020-4462eb7d8d3e?)。它是一种跨平台、实用且强大的语言。全球的开发者使用Java构建应用程序、网络工具和软件开发平台。Java在机器学习和数据科学中也有重要用途。
+[Java 是当今最受需求的编程语言之一](https://towardsdatascience.com/top-10-in-demand-programming-languages-to-learn-in-2020-4462eb7d8d3e?)。它是一种跨平台、实用且强大的语言。全球的开发者使用 Java 构建应用程序、网络工具和软件开发平台。Java 在机器学习和数据科学中也有重要用途。
 
-如果你是数据科学家，你可能比起Java更常使用Python和R。根据最近的调查，[只有21%的人在数据科学中使用Java，](http://businessoverbroadway.com/wp-content/uploads/2019/01/programming_languages_used.png) 远低于Python（83%）或SQL（44%）。大多数人使用Python是因为它的REPL功能和快速的算法实验。同时，开发者使用R进行数据可视化和表示。
+如果你是数据科学家，你可能比起 Java 更常使用 Python 和 R。根据最近的调查，[只有 21%的人在数据科学中使用 Java，](http://businessoverbroadway.com/wp-content/uploads/2019/01/programming_languages_used.png) 远低于 Python（83%）或 SQL（44%）。大多数人使用 Python 是因为它的 REPL 功能和快速的算法实验。同时，开发者使用 R 进行数据可视化和表示。
 
-作为数据科学家，你应该知道如何使用Java，因为它提供了创建商业应用程序的各种服务。如上所述，Java在机器学习和人工智能领域有许多用途。许多大型公司如Uber、Spotify和Airbnb都是基于Java的。[像BairesDev这样的软件开发公司](https://www.bairesdev.com/technologies/java-development-services/?utm_source=kdnuggets&utm_medium=link&utm_campaign=content&utm_content=top) 使用Java构建和维护业务关键应用程序。
+作为数据科学家，你应该知道如何使用 Java，因为它提供了创建商业应用程序的各种服务。如上所述，Java 在机器学习和人工智能领域有许多用途。许多大型公司如 Uber、Spotify 和 Airbnb 都是基于 Java 的。[像 BairesDev 这样的软件开发公司](https://www.bairesdev.com/technologies/java-development-services/?utm_source=kdnuggets&utm_medium=link&utm_campaign=content&utm_content=top) 使用 Java 构建和维护业务关键应用程序。
 
-数据科学家应该学习Java的理由有很多。主要包括：
+数据科学家应该学习 Java 的理由有很多。主要包括：
 
-**1\. Java拥有许多出色的数据科学框架。** 这些框架为开发者提供了基本功能，并帮助他们节省时间和金钱。流行的机器学习框架包括：
+**1\. Java 拥有许多出色的数据科学框架。** 这些框架为开发者提供了基本功能，并帮助他们节省时间和金钱。流行的机器学习框架包括：
 
-+   Deeplearning4J - 这是一个开源的Java深度学习工具包，用于部署神经网络。它可以与Hadoop和Spark集成。
++   Deeplearning4J - 这是一个开源的 Java 深度学习工具包，用于部署神经网络。它可以与 Hadoop 和 Spark 集成。
 
-+   ND4J - 它代表N维数组对象用于Java。它是一个科学计算、信号处理和线性代数的工具包。它具有内置的库，如numpy和MATLAB。
++   ND4J - 它代表 N 维数组对象用于 Java。它是一个科学计算、信号处理和线性代数的工具包。它具有内置的库，如 numpy 和 MATLAB。
 
 +   Apache Mahout - 这是一个可扩展的分布式代数框架。它有助于分类、聚类和推荐。
 
@@ -72,11 +72,11 @@ Java 是一种面向对象的、功能多样且独特的语言，提供大量功
 
 **相关内容：**
 
-+   [Java 可以用于机器学习和数据科学吗？](/2020/04/java-used-machine-learning-data-science.html)
++   Java 可以用于机器学习和数据科学吗？
 
-+   [AI 如何帮助管理传染病](/2020/04/ai-manage-infectious-diseases.html)
++   AI 如何帮助管理传染病
 
-+   [如何将 Kubeflow 添加到您的 Kubernetes 部署中](/2020/02/kubeflow-ai-kubernetes-deployments.html)
++   如何将 Kubeflow 添加到您的 Kubernetes 部署中
 
 ### 更多相关话题
 

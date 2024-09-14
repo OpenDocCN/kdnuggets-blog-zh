@@ -1,8 +1,8 @@
 # 你安全的五种方式依赖于机器学习
 
-> 原文：[https://www.kdnuggets.com/2019/02/dr-data-five-ways-safety-depends-machine-learning.html](https://www.kdnuggets.com/2019/02/dr-data-five-ways-safety-depends-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/02/dr-data-five-ways-safety-depends-machine-learning.html`](https://www.kdnuggets.com/2019/02/dr-data-five-ways-safety-depends-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 *注意：本文基于* [*Dr. Data Show*](http://www.doctordatashow.com) *节目的文字稿，标题为* [*“你安全的五种方式依赖于机器学习”*](https://www.youtube.com/watch?v=1wJ6D7HpJnE) *(点击查看)。*
 
@@ -10,7 +10,7 @@
 
 这让你处于安全的手中。医院、公司和政府利用机器学习来应对风险，积极保护你免受各种危险和危害，包括火灾、爆炸、坍塌、事故、工作场所事故、餐厅中的大肠杆菌和犯罪。我本以为狮子、老虎和熊已经够糟糕了！
 
-![Image](../Images/d1877d691b19e070312da82f892c86d8.png)
+![Image](img/d1877d691b19e070312da82f892c86d8.png)
 
 这通过使用数据来预测这些危险最可能出现的时间和地点，并据此部署检查和预防措施。也就是说，标记出最危险的建筑物、桥梁、车辆和餐厅进行检查。这种预测性预防正越来越多地成为安全标准。
 
@@ -20,7 +20,7 @@
 
 执行这项工作的技术是机器学习，当计算机从数据中编码的经验中学习时。假设有关于许多桥梁的历史数据，以及哪些桥梁已经恶化到成为危险的程度，计算机可以学习预测哪些桥梁应该被标记为需要尽快检查。当用于安全目的以及其他商业和政府目的时，机器学习也被称为预测分析。
 
-![Image](../Images/aa305ce96caf0a00ab8a864cea8cfb7e.png)
+![Image](img/aa305ce96caf0a00ab8a864cea8cfb7e.png)
 
 这不是万灵药——不幸的是，这个世界上没有办法实现百分之百的安全保障——但机器学习提供了一种独特的改进。它作为一种独特的新方法，降低了风险，倾斜了更多安全的概率。由于预测性预防不同于其他风险管理方法，它总是能提供潜在的帮助，无论其他方法是否被采用。机器学习在一般情况下提高了各种流程的效率——当应用于保护程序时，这就转化为降低风险。
 
@@ -28,7 +28,7 @@
 
 说到飓风，沃尔玛的数据表明，草莓口味的波波饼在飓风来临前的销售量会增加约七倍。这被认为是人们囤积非易腐烂的安慰食品。
 
-![Image](../Images/ef83a0146fcf309814b4435ce94f06cb.png)
+![Image](img/ef83a0146fcf309814b4435ce94f06cb.png)
 
 根据保险公司，信用评级低的人更容易发生车祸。专家推测这是因为你的财务责任可能反映了你驾驶时的责任，尽管这并不确定。无论如何，这又是一个数据预测事故的例子。
 
@@ -46,7 +46,7 @@
 
 自动驾驶车辆的发展势不可挡，这一进展主要得益于相比于我们允许人类驾驶的最近一个世纪的实验，自动驾驶车辆承诺提供更好的安全记录。自动驾驶汽车依靠机器学习来识别周围的物体，预测它们的移动，并优化导航。
 
-![](../Images/88efccc56d3cd48037d45462374ac3f6.png)
+![](img/88efccc56d3cd48037d45462374ac3f6.png)
 
 铁路公司也在正确的轨道上。他们预测断轨——这是导致严重列车事故的主要原因——以及单个车轮的故障。
 
@@ -58,9 +58,9 @@
 
 ### **4) 加强医疗保健**
 
-第四点，加强医疗保健。预测医学是一个令人兴奋且快速发展的机器学习应用领域，它用于诊断疾病并预测临床结果。对于诊断，机器学习模型输入各种临床特征、检测结果，甚至整个MRI或其他医学图像，以评估各种疾病的概率——每种疾病一个模型——如糖尿病视网膜病变，它是导致失明的最快增长原因，还有各种癌症。通常，它的表现与医生一样好，甚至更好。至于预测结果，机器学习可以预测外科感染、脓毒症、HIV进展、早产、医院再入院率甚至死亡。事实上，《数据医生秀》有一集专门讨论预测死亡，你可以在TheDoctorDataShow.com找到。通过标记高风险病例，可以针对性地采取额外的预防措施。
+第四点，加强医疗保健。预测医学是一个令人兴奋且快速发展的机器学习应用领域，它用于诊断疾病并预测临床结果。对于诊断，机器学习模型输入各种临床特征、检测结果，甚至整个 MRI 或其他医学图像，以评估各种疾病的概率——每种疾病一个模型——如糖尿病视网膜病变，它是导致失明的最快增长原因，还有各种癌症。通常，它的表现与医生一样好，甚至更好。至于预测结果，机器学习可以预测外科感染、脓毒症、HIV 进展、早产、医院再入院率甚至死亡。事实上，《数据医生秀》有一集专门讨论预测死亡，你可以在 TheDoctorDataShow.com 找到。通过标记高风险病例，可以针对性地采取额外的预防措施。
 
-甚至在你完全不需要去医院之前，像波士顿和西雅图这样的城市政府通过预测哪些餐馆会有健康代码违规来预先保护你免受食物中毒，以优先进行检查。在某些情况下，他们通过输入Yelp!评论来改善这些预测——人们对餐馆的评论有时可以揭示餐馆在厨房中的卫生状况是否达标。
+甚至在你完全不需要去医院之前，像波士顿和西雅图这样的城市政府通过预测哪些餐馆会有健康代码违规来预先保护你免受食物中毒，以优先进行检查。在某些情况下，他们通过输入 Yelp!评论来改善这些预测——人们对餐馆的评论有时可以揭示餐馆在厨房中的卫生状况是否达标。
 
 ### **5) 加强打击犯罪**
 
@@ -70,38 +70,38 @@
 
 *本文基于* [*数据博士秀*](http://www.doctordatashow.com)*的文字稿。*
 
-[![](../Images/ceef641bf185f5170ddfffca802e8b96.png)](https://www.youtube.com/watch?v=1wJ6D7HpJnE)
+![](https://www.youtube.com/watch?v=1wJ6D7HpJnE)
 
 [**点击这里查看完整的节目**](https://www.youtube.com/watch?v=1wJ6D7HpJnE)
 
-![](../Images/93199e5f8070c32eaf30e5f447d3133a.png)
+![](img/93199e5f8070c32eaf30e5f447d3133a.png)
 
 **关于《数据博士秀》。** 这个全新的网络系列打破了数据科学娱乐资讯的常规，通过简短的网络剧集吸引了全球观众，涵盖了机器学习和预测分析的精华。[**点击这里查看更多剧集并报名获取未来的《数据博士秀》剧集**](http://www.thedoctordatashow.com)**。**
 
-![作者](../Images/1b0bfe97430823e0d980cd6e351f7293.png)埃里克·西格尔博士，**预测分析世界**（[**Predictive Analytics World**](http://www.predictiveanalyticsworld.com/)）和[**深度学习世界**](http://www.deeplearningworld.com)会议系列的创始人，以及[***预测分析时报***](http://www.predictiveanalyticstimes.com/)的执行编辑，使得预测分析（也称为机器学习）的“如何”和“为什么”变得易于理解且引人入胜。他是获奖著作[***预测分析：预测谁将点击、购买、撒谎或死亡***](http://www.thepredictionbook.com/)的作者，[***数据博士秀***](http://www.doctordatashow.com)网络系列的主持人，前哥伦比亚大学教授，以及知名的[**演讲者**](http://www.predictiveanalyticsspeaker.com/)、[**教育家**](http://www.businessprediction.com)和领域领袖。阅读他的[**数据与社会公正相关文章**](http://www.civilrightsdata.com)，并在[**@predictanalytic**](https://twitter.com/predictanalytic)上关注他。
+![作者](img/1b0bfe97430823e0d980cd6e351f7293.png)埃里克·西格尔博士，**预测分析世界**（[**Predictive Analytics World**](http://www.predictiveanalyticsworld.com/)）和[**深度学习世界**](http://www.deeplearningworld.com)会议系列的创始人，以及[***预测分析时报***](http://www.predictiveanalyticstimes.com/)的执行编辑，使得预测分析（也称为机器学习）的“如何”和“为什么”变得易于理解且引人入胜。他是获奖著作[***预测分析：预测谁将点击、购买、撒谎或死亡***](http://www.thepredictionbook.com/)的作者，[***数据博士秀***](http://www.doctordatashow.com)网络系列的主持人，前哥伦比亚大学教授，以及知名的[**演讲者**](http://www.predictiveanalyticsspeaker.com/)、[**教育家**](http://www.businessprediction.com)和领域领袖。阅读他的[**数据与社会公正相关文章**](http://www.civilrightsdata.com)，并在[**@predictanalytic**](https://twitter.com/predictanalytic)上关注他。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关内容
 
-+   [在Pandas中进行条件过滤的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)
++   [在 Pandas 中进行条件过滤的五种方法](https://www.kdnuggets.com/2022/12/five-ways-conditional-filtering-pandas.html)
 
-+   [OpenAI的AI安全方法](https://www.kdnuggets.com/2023/06/openai-approach-ai-safety.html)
++   [OpenAI 的 AI 安全方法](https://www.kdnuggets.com/2023/06/openai-approach-ai-safety.html)
 
 +   [通过五个步骤成为数据科学专业人士](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-+   [数据科学面试中你应该知道的五种SQL窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
++   [数据科学面试中你应该知道的五种 SQL 窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日：深入了解13种数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日：深入了解 13 种数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [有效的数据科学经理的五个标志](https://www.kdnuggets.com/2022/06/five-signs-effective-data-science-manager.html)

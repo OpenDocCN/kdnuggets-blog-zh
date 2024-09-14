@@ -1,8 +1,8 @@
 # 将生成性人工智能融入内容创作
 
-> 原文：[https://www.kdnuggets.com/integrating-generative-ai-in-content-creation](https://www.kdnuggets.com/integrating-generative-ai-in-content-creation)
+> 原文：[`www.kdnuggets.com/integrating-generative-ai-in-content-creation`](https://www.kdnuggets.com/integrating-generative-ai-in-content-creation)
 
-![将生成性人工智能融入内容创作](../Images/7ab7e4c4babe3db96e720caf994054c5.png)
+![将生成性人工智能融入内容创作](img/7ab7e4c4babe3db96e720caf994054c5.png)
 
 图像由 [Ideogram.ai](http://ideogram.ai) 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -52,7 +52,7 @@
 
 *“**我是一名数据科学内容创作者，我想发布关于数据科学对业务重要性的内容。**”*
 
-*给我生成3个可以发布的内容创意。*
+*给我生成 3 个可以发布的内容创意。*
 
 结果是一个内容创意列表，解释如何处理这些内容。列表示例如下：
 
@@ -74,23 +74,23 @@ ChatGPT 在这里促进创造性思维，因为我们并没有直接要求 ChatG
 
 例如，我请 ChatGPT 使用以下提示创建一个博客大纲：
 
-*“**写一个关于为什么数据科学家应该学习数据工程的300字博客草稿大纲。**”*
+*“**写一个关于为什么数据科学家应该学习数据工程的 300 字博客草稿大纲。**”*
 
 结果是一个草拟大纲，供我们填充。以下是我用上述提示得到的结果：
 
 *标题：弥合差距：数据工程对数据科学家的重要性*
 
-*介绍（50字）*
+*介绍（50 字）*
 
 *正文*
 
-+   *数据科学基础（60字）*
++   *数据科学基础（60 字）*
 
-+   *增强合作与沟通（60字）*
++   *增强合作与沟通（60 字）*
 
-+   *增加自主性和创新性（60字）*
++   *增加自主性和创新性（60 字）*
 
-+   *职业发展与多样性（60字）*
++   *职业发展与多样性（60 字）*
 
 结果还包含了我们应该写些什么以及如何写的更详细说明。
 
@@ -150,7 +150,7 @@ ChatGPT 在这里促进创造性思维，因为我们并没有直接要求 ChatG
 
 *“我想发布关于数据科学家的内容。你能生成一张适合我将要发布内容的简单图片吗？”*
 
-![将生成式 AI 融入内容创作](../Images/ba1aeb487f8836277da630a17e2f7503.png)
+![将生成式 AI 融入内容创作](img/ba1aeb487f8836277da630a17e2f7503.png)
 
 使用 DALL·E 3 生成的图片
 
@@ -166,7 +166,7 @@ ChatGPT 在这里促进创造性思维，因为我们并没有直接要求 ChatG
 
 *“排版 ‘生日快乐，Charlie’ 的背景是图书馆书籍和猫咪玩耍。”*
 
-![将生成性 AI 应用于内容创作](../Images/25a0431c37d260efe06fd95e6e9c4453.png)
+![将生成性 AI 应用于内容创作](img/25a0431c37d260efe06fd95e6e9c4453.png)
 
 图片生成自 [Ideogram.ai](http://ideogram.ai)
 

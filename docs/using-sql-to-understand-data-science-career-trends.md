@@ -1,8 +1,8 @@
 # 使用 SQL 理解数据科学职业趋势
 
-> 原文：[https://www.kdnuggets.com/using-sql-to-understand-data-science-career-trends](https://www.kdnuggets.com/using-sql-to-understand-data-science-career-trends)
+> 原文：[`www.kdnuggets.com/using-sql-to-understand-data-science-career-trends`](https://www.kdnuggets.com/using-sql-to-understand-data-science-career-trends)
 
-![使用 SQL 理解数据科学职业趋势](../Images/59d84f349bf20335e8c0383065fa6cdd.png)
+![使用 SQL 理解数据科学职业趋势](img/59d84f349bf20335e8c0383065fa6cdd.png)
 
 图片由作者提供
 
@@ -90,7 +90,7 @@ plt.show()
 
 这里是图表。
 
-![使用 SQL 理解数据科学职业趋势](../Images/73b1a20c082c738d306bf8434cd30719.png)
+![使用 SQL 理解数据科学职业趋势](img/73b1a20c082c738d306bf8434cd30719.png)
 
 现在让我们绘制中级和高级职位的图表。以下是代码。
 
@@ -106,7 +106,7 @@ graphs.append(plt.gcf())
 plt.show() 
 ```
 
-![使用 SQL 了解数据科学职业趋势](../Images/145ef6419a67eda2f127587566e81527.png)
+![使用 SQL 了解数据科学职业趋势](img/145ef6419a67eda2f127587566e81527.png)
 
 ## 2\. 数据科学领域最常见的职位名称是什么？
 
@@ -138,7 +138,7 @@ plt.show()
 
 让我们看看图表。
 
-![使用 SQL 了解数据科学职业趋势](../Images/bf067514e37a08532a3976d373852eba.png)
+![使用 SQL 了解数据科学职业趋势](img/bf067514e37a08532a3976d373852eba.png)
 
 ## 3\. 薪资分布如何随着公司规模的变化而变化？
 
@@ -169,7 +169,7 @@ plt.show()
 
 这是输出结果。
 
-![使用 SQL 了解数据科学职业趋势](../Images/76312374a8502ed42d5e46e899d82498.png)
+![使用 SQL 了解数据科学职业趋势](img/76312374a8502ed42d5e46e899d82498.png)
 
 ## 4\. 数据科学职位主要地理分布在哪里？
 
@@ -199,7 +199,7 @@ plt.show()
 
 让我们看看下面的图表。
 
-![使用 SQL 了解数据科学职业趋势](../Images/9d77fb3585b322256f4a6bc3f2228092.png)
+![使用 SQL 了解数据科学职业趋势](img/9d77fb3585b322256f4a6bc3f2228092.png)
 
 ## 5\. 哪些职位在数据科学领域提供最高薪资？
 
@@ -234,7 +234,7 @@ LIMIT 10;
 
 这次，让我们尝试自己创建一个图表。
 
-**提示**：你可以在ChatGPT中使用以下提示来生成这个图表的Python代码：
+**提示**：你可以在 ChatGPT 中使用以下提示来生成这个图表的 Python 代码：
 
 ```py
 <SQL Query here>
@@ -244,9 +244,9 @@ Create a Python graph to visualize the top 10 highest-paying job titles in Data 
 
 # 最后思考
 
-当我们结束对数据科学职业世界各种领域的探索时，希望SQL能成为一个值得信赖的向导，帮助你发掘支持职业决策的宝贵见解。
+当我们结束对数据科学职业世界各种领域的探索时，希望 SQL 能成为一个值得信赖的向导，帮助你发掘支持职业决策的宝贵见解。
 
-我希望你现在感到更加自信，不仅在规划你的职业道路方面，还在使用SQL将原始数据转化为强大叙事方面。祝愿你踏入充满机遇的未来，以数据为指南针，以SQL为引导力量！
+我希望你现在感到更加自信，不仅在规划你的职业道路方面，还在使用 SQL 将原始数据转化为强大叙事方面。祝愿你踏入充满机遇的未来，以数据为指南针，以 SQL 为引导力量！
 
 感谢阅读！
 
@@ -256,21 +256,21 @@ Create a Python graph to visualize the top 10 highest-paying job titles in Data 
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关话题
 
-+   [5个关键数据科学趋势与分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
++   [5 个关键数据科学趋势与分析趋势](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
 
 +   [图表：理解数据的自然方式](https://www.kdnuggets.com/2022/10/manning-graphs-natural-way-understand-data.html)
 
-+   [24本最佳（且免费的）书籍以理解机器学习](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
++   [24 本最佳（且免费的）书籍以理解机器学习](https://www.kdnuggets.com/2020/03/24-best-free-books-understand-machine-learning.html)
 
 +   [选择示例以理解机器学习模型](https://www.kdnuggets.com/2022/11/picking-examples-understand-machine-learning-model.html)
 

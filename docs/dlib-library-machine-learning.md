@@ -1,10 +1,10 @@
 # DLib：机器学习库
 
-> 原文：[https://www.kdnuggets.com/2014/06/dlib-library-machine-learning.html](https://www.kdnuggets.com/2014/06/dlib-library-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2014/06/dlib-library-machine-learning.html`](https://www.kdnuggets.com/2014/06/dlib-library-machine-learning.html)
 
-[![](../Images/349c46af4054c0ebda2d95d15bda19af.png)DLib](http://dlib.net/) 是一个开源的现代 C++ 库，实现了许多机器学习算法，并支持线程和网络等功能。
+![DLib](http://dlib.net/) 是一个开源的现代 C++ 库，实现了许多机器学习算法，并支持线程和网络等功能。
 
-[![](../Images/d9b4676c7e44b5636a266d9152264b1f.png)](http://dlib.net/ml_guide.svg)
+![](http://dlib.net/ml_guide.svg)
 
 [DLib-ml](http://dlib.net/ml.html) 实现了众多机器学习算法：
 
@@ -44,21 +44,21 @@ DLib 采用 Boost 软件许可证。
 
 **相关帖子：**
 
-+   [MLTK: Java 中的机器学习工具包 – 免费下载](/2014/04/mltk-machine-learning-toolkit-java.html)
++   MLTK: Java 中的机器学习工具包 – 免费下载
 
-+   [机器学习的数据工作流](/2014/04/data-workflows-machine-learning-paco-nathan.html)
++   机器学习的数据工作流
 
-+   [Prediction.io 开源机器学习服务器](/2014/04/prediction-io-open-source-machine-learning-server.html)
++   Prediction.io 开源机器学习服务器
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 

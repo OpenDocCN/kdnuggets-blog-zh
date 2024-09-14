@@ -1,10 +1,10 @@
 # 顶级数据科学职位的薪资分解
 
-> 原文：[https://www.kdnuggets.com/2021/11/salary-breakdown-top-data-science-jobs.html](https://www.kdnuggets.com/2021/11/salary-breakdown-top-data-science-jobs.html)
+> 原文：[`www.kdnuggets.com/2021/11/salary-breakdown-top-data-science-jobs.html`](https://www.kdnuggets.com/2021/11/salary-breakdown-top-data-science-jobs.html)
 
-[评论](#comments)
+评论
 
-![](../Images/f717010a26345618496d726c005c432b.png)
+![](img/f717010a26345618496d726c005c432b.png)
 
 由[Thought Catalog](https://unsplash.com/@thoughtcatalog?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄的照片，来源于[Unsplash](https://unsplash.com/s/photos/money?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [1]。
 
@@ -30,7 +30,7 @@
 
 ## 机器学习工程师
 
-![](../Images/a95e7eba3ae0a75e68687f4ed7ef3bae.png)
+![](img/a95e7eba3ae0a75e68687f4ed7ef3bae.png)
 
 由[Possessed Photography](https://unsplash.com/@possessedphotography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄的照片，来源于[Unsplash](https://unsplash.com/s/photos/robot?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [2]。
 
@@ -62,11 +62,11 @@
 
 ## 自然语言处理工程师
 
-![](../Images/84dda7fa6e240b4989d8fd54d21d9412.png)
+![](img/84dda7fa6e240b4989d8fd54d21d9412.png)
 
 图片来自 [Patrick Tomasso](https://unsplash.com/@impatrickt?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/books?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [4].
 
-通常被称为NLP工程师，这个角色通常专注于将数据科学模型或机器学习算法应用于文本数据。一些NLP工作的例子包括对大量文本进行主题建模、语义分析以及聊天机器人代理。虽然如此，你也可以预期有相当不错的薪资 — 然而，这个薪资水平可能会低于机器学习工程师，因为这个角色的包容性较差，更多地集中于数据科学中的某一特定主题。这个估算来源于 [glassdoor](https://www.glassdoor.com/Salaries/nlp-engineer-salary-SRCH_KO0,12.htm) [5]。
+通常被称为 NLP 工程师，这个角色通常专注于将数据科学模型或机器学习算法应用于文本数据。一些 NLP 工作的例子包括对大量文本进行主题建模、语义分析以及聊天机器人代理。虽然如此，你也可以预期有相当不错的薪资 — 然而，这个薪资水平可能会低于机器学习工程师，因为这个角色的包容性较差，更多地集中于数据科学中的某一特定主题。这个估算来源于 [glassdoor](https://www.glassdoor.com/Salaries/nlp-engineer-salary-SRCH_KO0,12.htm) [5]。
 
 > 基于大约 `*20*` 份提交的薪资，有一个广泛的范围如下：
 
@@ -92,13 +92,13 @@
 
 +   *语义分析* — 一个例子是分析客户的正面和负面评价
 
-+   *主题建模* — 一个例子是发现大量文本中的共同话题，比如客户评论的相同内容，但不仅仅是好的或坏的评论，而是可以分析以改进产品的评论主题：*“差质量”与90%的负面评论相关。*
++   *主题建模* — 一个例子是发现大量文本中的共同话题，比如客户评论的相同内容，但不仅仅是好的或坏的评论，而是可以分析以改进产品的评论主题：*“差质量”与 90%的负面评论相关。*
 
 +   *分类* — 使用像随机森林这样的算法，将传统的数值特征与描述等文本特征结合起来，创建一个将数据分组的模型 —— 比如客户细分
 
 ## 数据工程师
 
-![](../Images/9e07225b36d494df14addb7fa4f55abb.png)
+![](img/9e07225b36d494df14addb7fa4f55abb.png)
 
 照片由 [Caspar Camille Rubin](https://unsplash.com/@casparrubin?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄，来源于 [Unsplash](https://unsplash.com/s/photos/query?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [6]。
 
@@ -126,11 +126,11 @@
 
 ## 数据科学家
 
-![](../Images/f57f25421b1e2c952488150c4db4f520.png)
+![](img/f57f25421b1e2c952488150c4db4f520.png)
 
 照片由 [Daria Nepriakhina](https://unsplash.com/@epicantus?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄，来源于 [Unsplash](https://unsplash.com/s/photos/post-it?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [8]。
 
-最后但同样重要的是数据科学家的角色。虽然这个角色看似最为通用，但实际上也可以很具体，通常主要包括模型构建过程——有时还需具备数据工程师和机器学习工程师的操作要求，并且有时——但也不常见——可能涉及自然语言处理的专长（*通常如果重点是NLP，那么数据科学家会以此为职称——但并非总是如此*）。这个角色的变动性也更大，因此我们也可以预期较宽的范围。这个特定的估计也来源于[glassdoor](https://www.glassdoor.com/Salaries/data-scientist-salary-SRCH_KO0,14.htm)[9]。
+最后但同样重要的是数据科学家的角色。虽然这个角色看似最为通用，但实际上也可以很具体，通常主要包括模型构建过程——有时还需具备数据工程师和机器学习工程师的操作要求，并且有时——但也不常见——可能涉及自然语言处理的专长（*通常如果重点是 NLP，那么数据科学家会以此为职称——但并非总是如此*）。这个角色的变动性也更大，因此我们也可以预期较宽的范围。这个特定的估计也来源于[glassdoor](https://www.glassdoor.com/Salaries/data-scientist-salary-SRCH_KO0,14.htm)[9]。
 
 > 基于约 ~ `*16,200*` 提交的薪资数据，以下范围非常广泛：
 
@@ -148,11 +148,11 @@
 
 +   Jupyter Notebooks
 
-+   *可视化*——Tableau、库和包、Google Data Studio、Looker等……
++   *可视化*——Tableau、库和包、Google Data Studio、Looker 等……
 
 +   定义问题陈述、获取数据集、特征工程、模型比较、模型部署以及结果讨论
 
-+   *示例项目*——创建一个分类器，根据多个特征对公司产品进行分组，从各种来源获取数据，使用SQL和Python，部署模型并解释结果及其对公司的影响
++   *示例项目*——创建一个分类器，根据多个特征对公司产品进行分组，从各种来源获取数据，使用 SQL 和 Python，部署模型并解释结果及其对公司的影响
 
 ## 概述
 
@@ -199,11 +199,11 @@
 
 **相关内容：**
 
-+   [数据科学家与数据工程师薪资对比](/2021/10/data-scientist-data-engineer-salary.html)
++   数据科学家与数据工程师薪资对比
 
-+   [数据科学家与机器学习工程师 – 他们的技能有哪些？](/2021/04/data-scientist-machine-learning-engineer-skills.html)
++   数据科学家与机器学习工程师 – 他们的技能有哪些？
 
-+   [2021 年数据科学家最需要的技能](/2021/04/most-demand-skills-data-scientists.html)
++   2021 年数据科学家最需要的技能
 
 ### 更多相关内容
 

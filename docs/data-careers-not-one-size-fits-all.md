@@ -1,26 +1,26 @@
 # 数据职业并**不是**一成不变的！揭示你在数据领域理想角色的技巧
 
-> 原文：[https://www.kdnuggets.com/2021/04/data-careers-not-one-size-fits-all.html](https://www.kdnuggets.com/2021/04/data-careers-not-one-size-fits-all.html)
+> 原文：[`www.kdnuggets.com/2021/04/data-careers-not-one-size-fits-all.html`](https://www.kdnuggets.com/2021/04/data-careers-not-one-size-fits-all.html)
 
-[评论](#comments)
+评论
 
-**作者：[莉莉安·皮尔森](https://www.linkedin.com/in/lillianpierson/)，世界级数据领导者和企业家的导师，Data-Mania首席执行官**
+**作者：[莉莉安·皮尔森](https://www.linkedin.com/in/lillianpierson/)，世界级数据领导者和企业家的导师，Data-Mania 首席执行官**
 
-自从[哈佛商业评论](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)在2012年称数据科学家为“21世纪最性感的职业”以来，似乎每个人和他们的妈妈都在争先恐后地提升数据科学技能。
+自从[哈佛商业评论](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)在 2012 年称数据科学家为“21 世纪最性感的职业”以来，似乎每个人和他们的妈妈都在争先恐后地提升数据科学技能。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-理由很充分！数据科学家的需求不断增加，薪资远超美国国家平均水平，根据[2021年罗伯特·哈夫技术薪资指南](https://www.roberthalf.com/salary-guide/technology)，美国数据科学家的中位数年薪为129,000美元。
+理由很充分！数据科学家的需求不断增加，薪资远超美国国家平均水平，根据[2021 年罗伯特·哈夫技术薪资指南](https://www.roberthalf.com/salary-guide/technology)，美国数据科学家的中位数年薪为 129,000 美元。
 
 但透过网络上的炒作，你是否**真的**应该追求数据科学家的角色？
 
@@ -28,15 +28,15 @@
 
 *我知道，因为我曾经是这样的人。*
 
-我在2012年学习了数据科学技能，却意识到编码和构建数据解决方案**并**不能带给我我所寻找的满足感和幸福感。
+我在 2012 年学习了数据科学技能，却意识到编码和构建数据解决方案**并**不能带给我我所寻找的满足感和幸福感。
 
 到头来，数据科学的实施确实不适合我。我开始意识到，我需要做一些可以从工作中看到**真实的积极影响**的事情。
 
 *那我做了什么呢？*
 
-我从美国搬到泰国，创办了自己的数据业务Data-Mania。让我告诉你，这真是**非常有趣**！
+我从美国搬到泰国，创办了自己的数据业务 Data-Mania。让我告诉你，这真是**非常有趣**！
 
-![Image](../Images/ff7bf84aa491f31d0bf0f2f38979b37f.png)
+![Image](img/ff7bf84aa491f31d0bf0f2f38979b37f.png)
 
 在你花费多年时间和精力追求数据科学之前，让我们先探索一些不同的选择。在数据的美妙世界中，有着无数的职业机会。
 
@@ -66,11 +66,11 @@
 
 +   数据领导
 
-**如果你倾向于分析，** 你擅长数据可视化、数据讲故事、仪表板设计——也许你在Tableau或Power BI中构建仪表板和可视化。你还能够使用SQL进行查询和检索数据。
+**如果你倾向于分析，** 你擅长数据可视化、数据讲故事、仪表板设计——也许你在 Tableau 或 Power BI 中构建仪表板和可视化。你还能够使用 SQL 进行查询和检索数据。
 
-**如果你倾向于数据科学，** 那么你有编程经验，并且掌握Python和R。你对机器学习、预测建模、统计学和SQL有深刻的理解。
+**如果你倾向于数据科学，** 那么你有编程经验，并且掌握 Python 和 R。你对机器学习、预测建模、统计学和 SQL 有深刻的理解。
 
-**如果你倾向于数据工程，** 你将具备ETL脚本编写和数据仓库的技能。随着你变得更加高级，你将会在分布式计算环境中工作，构建数据管道，维护数据系统，并使用NoSQL。你还将懂得如何使用C、C++、C#、Java、Scala等语言进行编码，并设计利用NoSQL和SQL数据库的系统。
+**如果你倾向于数据工程，** 你将具备 ETL 脚本编写和数据仓库的技能。随着你变得更加高级，你将会在分布式计算环境中工作，构建数据管道，维护数据系统，并使用 NoSQL。你还将懂得如何使用 C、C++、C#、Java、Scala 等语言进行编码，并设计利用 NoSQL 和 SQL 数据库的系统。
 
 **如果你倾向于数据领导，** 那么你在领导项目和团队方面表现出色。你适合担任项目经理、产品经理或利益相关者管理等角色。你的超能力在于技术项目管理和数据战略领域！
 
@@ -102,7 +102,7 @@
 
 马斯洛需求层次理论指出，所有人都有自我实现的愿望，但为了优先满足内心的满足感，我们需要首先满足最基本的需求。
 
-![图示](../Images/af8791c2d5328457cd4842cc27592f81.png)
+![图示](img/af8791c2d5328457cd4842cc27592f81.png)
 
 来源：简单心理学 -- https://www.simplypsychology.org/maslow.html
 
@@ -158,11 +158,11 @@
 
 **相关：**
 
-+   [是什么让我花了这么长时间才找到数据科学家工作](/2021/03/land-data-scientist-job.html)
++   是什么让我花了这么长时间才找到数据科学家工作
 
-+   [数据科学简历中的 7 个必备要素](/2021/04/7-must-haves-data-science-cv.html)
++   数据科学简历中的 7 个必备要素
 
-+   [为何许多数据科学家辞去优秀公司中的好工作](/2021/03/why-data-scientists-quit-good-jobs.html)
++   为何许多数据科学家辞去优秀公司中的好工作
 
 ### 更多相关内容
 

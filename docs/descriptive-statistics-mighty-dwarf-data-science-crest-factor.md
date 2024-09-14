@@ -1,26 +1,26 @@
 # 描述性统计：数据科学中的强大小工具——波峰因子
 
-> 原文：[https://www.kdnuggets.com/2018/04/descriptive-statistics-mighty-dwarf-data-science-crest-factor.html](https://www.kdnuggets.com/2018/04/descriptive-statistics-mighty-dwarf-data-science-crest-factor.html)
+> 原文：[`www.kdnuggets.com/2018/04/descriptive-statistics-mighty-dwarf-data-science-crest-factor.html`](https://www.kdnuggets.com/2018/04/descriptive-statistics-mighty-dwarf-data-science-crest-factor.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Pawel Rzeszucinski](https://www.linkedin.com/in/pawelrzeszucinski/)，[Codewise.com](http://www.codewise.com/)**
 
-![Header image](../Images/e28385e91bce779e441913ab38421363.png)
+![Header image](img/e28385e91bce779e441913ab38421363.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-现如今，社区的相当一部分（通常受商业压力影响）似乎倾向于在应用中使用一些复杂且计算成本较高的算法，而这些应用过去本可以由更简单（因此更快）和更具可解释性（因此更具商业价值）的方法来处理。在这一系列文本中，我将介绍描述性统计的力量和美丽，作为一种定量描述数据性质的方法，并为任何后续的数据研究打下坚实的基础。在这篇文章中，我将介绍另一个强大的小工具，它与我[上一篇文章](/2018/03/descriptive-statistics-mighty-dwarf-data-science.html)中介绍的技术类似——峰度，但在统计破坏力上略有不同——“波峰因子”。你还将遇到令人恐惧的需求之龙。
+现如今，社区的相当一部分（通常受商业压力影响）似乎倾向于在应用中使用一些复杂且计算成本较高的算法，而这些应用过去本可以由更简单（因此更快）和更具可解释性（因此更具商业价值）的方法来处理。在这一系列文本中，我将介绍描述性统计的力量和美丽，作为一种定量描述数据性质的方法，并为任何后续的数据研究打下坚实的基础。在这篇文章中，我将介绍另一个强大的小工具，它与我上一篇文章中介绍的技术类似——峰度，但在统计破坏力上略有不同——“波峰因子”。你还将遇到令人恐惧的需求之龙。
 
 ### 引言
 
@@ -30,13 +30,13 @@
 
 让我们回顾一下案例研究的内容：一个商店记录了随时间变化的销售商品数量，并试图自动检测任何异常需求的存在。
 
-在去年（[之前的帖子](/2018/03/descriptive-statistics-mighty-dwarf-data-science.html)），峰度被成功用于检测冲击。图 1 显示了数据和相应的峰度值。该指标为 6.227——明显高于 3，这在高斯噪声中是默认值。检测到了冲击内容，成功了！因此，今年受到鼓励的管理层使用了相同的指标。经过分析，峰度值甚至更高：6.920。 “肯定是今年有更大的峰值。太棒了！”。但进一步调查揭示了一些不同的情况，如图 2 所示。结果显示，除了去年第 200 天的确切相同的冲击之外，今年第 400 天还发生了另一个幅度较小的冲击。两个信号之间的差异在直方图上由两支箭头指示（图 3）。
+在去年（之前的帖子），峰度被成功用于检测冲击。图 1 显示了数据和相应的峰度值。该指标为 6.227——明显高于 3，这在高斯噪声中是默认值。检测到了冲击内容，成功了！因此，今年受到鼓励的管理层使用了相同的指标。经过分析，峰度值甚至更高：6.920。 “肯定是今年有更大的峰值。太棒了！”。但进一步调查揭示了一些不同的情况，如图 2 所示。结果显示，除了去年第 200 天的确切相同的冲击之外，今年第 400 天还发生了另一个幅度较小的冲击。两个信号之间的差异在直方图上由两支箭头指示（图 3）。
 
-![图片](../Images/3c962d2ccb636a83c8003829d81c258b.png)
+![图片](img/3c962d2ccb636a83c8003829d81c258b.png)
 
-*图 1*![图片](../Images/617a3c35fb986f9a225e6c98cb0cfc28.png)
+*图 1*![图片](img/617a3c35fb986f9a225e6c98cb0cfc28.png)
 
-*图 2*![图片](../Images/c4f272d6fafb9c08c8bc48728ac7bd00.png)
+*图 2*![图片](img/c4f272d6fafb9c08c8bc48728ac7bd00.png)
 
 *图 3*
 
@@ -44,15 +44,15 @@
 
 这是商业需求的龙向强大的矮人请求替代方案的时候：“嘿，我不想让我的参数在数据中的最大值不变时上升。如果我只对以归一化的方式跟踪最大峰值的行为感兴趣，那我无论数据的绝对规模如何，都能得到大致相同的结果怎么办？”矮人可能会这样回答：“我不能完全解决你的问题，但我有些东西可能会有帮助。试试“波峰因子”的力量。”
 
-[![图片](../Images/38887d12c8b9eb9980ff51cb4030d095.png)](https://image.ibb.co/cinr9n/dragon_of_demand.png)
+![图片](https://image.ibb.co/cinr9n/dragon_of_demand.png)
 
 那么什么是波峰因子？从理论上讲，它是数据中峰值的绝对值与同一数据的均方根（RMS）值的比率 [1]：
 
-![公式 1](../Images/452fe32043f4d042ecb64b77f5aae813.png)
+![公式 1](img/452fe32043f4d042ecb64b77f5aae813.png)
 
 其中 |xpeak| 是数据中峰值（正值或负值）的绝对值，xRMS 是数据的均方根（RMS），进一步定义为 [2]：
 
-![公式 2](../Images/d2bff6cd377660d35a676ddc1e294a8b.png)
+![公式 2](img/d2bff6cd377660d35a676ddc1e294a8b.png)
 
 其中 n 是数据中的总样本数，xi 是数据中的第 i 个样本。
 
@@ -80,9 +80,9 @@ crest_factor(sales_two_spikes)
 1.693766572123957
 ```
 
-确实，这些变化似乎几乎不可察觉。下表比较了应用于两个数据集的峰度和峰值因子的值。此外，为了便于比较，还包括了百分比变化和基线、无冲击信号（*销售*来自我的 [上一篇文章](/2018/03/descriptive-statistics-mighty-dwarf-data-science.html)）。
+确实，这些变化似乎几乎不可察觉。下表比较了应用于两个数据集的峰度和峰值因子的值。此外，为了便于比较，还包括了百分比变化和基线、无冲击信号（*销售*来自我的 上一篇文章）。
 
-![Table](../Images/632a8f5305501f781d608a5ebe03cb33.png)
+![Table](img/632a8f5305501f781d608a5ebe03cb33.png)
 
 看起来“小矮人”是对的，CF 似乎更稳定地保持了其优势。
 
@@ -102,11 +102,11 @@ crest_factor(sales_two_spikes)
 
 **相关：**
 
-+   [描述性统计：数据科学中的强大侏儒](/2018/03/descriptive-statistics-mighty-dwarf-data-science.html)
++   描述性统计：数据科学中的强大侏儒
 
-+   [描述性统计的关键术语，解释](/2017/05/descriptive-statistics-key-terms-explained.html)
++   描述性统计的关键术语，解释
 
-+   [使用 Python 中的标准差移除异常值](/2017/02/removing-outliers-standard-deviation-python.html)
++   使用 Python 中的标准差移除异常值
 
 ### 更多相关话题
 
@@ -118,6 +118,6 @@ crest_factor(sales_two_spikes)
 
 +   [在 Python 中应用描述性和推断性统计]（https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python）
 
-+   [KDnuggets 新闻，7月6日：12 个必备的数据科学 VSCode 插件…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode 插件…](https://www.kdnuggets.com/2022/n27.html)
 
 +   [数据科学的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)

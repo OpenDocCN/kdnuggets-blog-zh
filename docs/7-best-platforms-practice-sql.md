@@ -1,8 +1,8 @@
 # 7 个最佳 SQL 练习平台
 
-> 原文：[https://www.kdnuggets.com/2023/01/7-best-platforms-practice-sql.html](https://www.kdnuggets.com/2023/01/7-best-platforms-practice-sql.html)
+> 原文：[`www.kdnuggets.com/2023/01/7-best-platforms-practice-sql.html`](https://www.kdnuggets.com/2023/01/7-best-platforms-practice-sql.html)
 
-![7 个最佳 SQL 练习平台](../Images/90a09a98d5893fd721273fb380dc4854.png)
+![7 个最佳 SQL 练习平台](img/90a09a98d5893fd721273fb380dc4854.png)
 
 图片由作者提供
 
@@ -82,7 +82,7 @@ Mode SQL 教程分为以下几个部分：
 
 希望你觉得这个 SQL 练习平台的列表对你有帮助。如果你刚刚开始，可以尝试一个或多个这些平台来找到合适的选项。
 
-选择合适的平台还需要考虑你已经掌握的知识量和你练习的时间。如果你正在积极面试，建议加倍关注面试问题，并刷新一些棘手的概念，比如窗口函数、子查询和公共表表达式。这里有一份[SQL备忘单](/publications/sheets/Getting-Started-with-SQL-Cheatsheet-KDnuggets.pdf)可以供你快速参考。继续编码！
+选择合适的平台还需要考虑你已经掌握的知识量和你练习的时间。如果你正在积极面试，建议加倍关注面试问题，并刷新一些棘手的概念，比如窗口函数、子查询和公共表表达式。这里有一份 SQL 备忘单可以供你快速参考。继续编码！
 
 **[Bala Priya](https://twitter.com/balawc27)** 是一位技术写作专家，喜欢创作长篇内容。她的兴趣领域包括数学、编程和数据科学。她通过撰写教程、操作指南等方式与开发者社区分享她的学习成果。
 
@@ -90,24 +90,24 @@ Mode SQL 教程分为以下几个部分：
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [7个最佳Python练习平台](https://www.kdnuggets.com/7-best-platforms-to-practice-python)
++   [7 个最佳 Python 练习平台](https://www.kdnuggets.com/7-best-platforms-to-practice-python)
 
-+   [9个顶尖平台来练习关键的数据科学技能](https://www.kdnuggets.com/2023/03/9-top-platforms-practice-key-data-science-skills.html)
++   [9 个顶尖平台来练习关键的数据科学技能](https://www.kdnuggets.com/2023/03/9-top-platforms-practice-key-data-science-skills.html)
 
-+   [7个最佳云数据库平台](https://www.kdnuggets.com/7-best-cloud-database-platforms)
++   [7 个最佳云数据库平台](https://www.kdnuggets.com/7-best-cloud-database-platforms)
 
-+   [从理论到实践：构建k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
++   [从理论到实践：构建 k-最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 
-+   [为什么SQL将继续是数据科学家的最佳伙伴](https://www.kdnuggets.com/2022/07/sql-remain-data-scientist-best-friend.html)
++   [为什么 SQL 将继续是数据科学家的最佳伙伴](https://www.kdnuggets.com/2022/07/sql-remain-data-scientist-best-friend.html)
 
-+   [6个最佳免费在线课程来启动你的SQL学习](https://www.kdnuggets.com/2022/10/corise-6-best-free-online-courses-jumpstart-learning-sql.html)
++   [6 个最佳免费在线课程来启动你的 SQL 学习](https://www.kdnuggets.com/2022/10/corise-6-best-free-online-courses-jumpstart-learning-sql.html)

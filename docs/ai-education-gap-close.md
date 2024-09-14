@@ -1,34 +1,34 @@
-# AI教育差距及其弥合方法
+# AI 教育差距及其弥合方法
 
-> 原文：[https://www.kdnuggets.com/2022/11/ai-education-gap-close.html](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
+> 原文：[`www.kdnuggets.com/2022/11/ai-education-gap-close.html`](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
 
-![AI教育差距及其弥合方法](../Images/c617fdbe3a5c5b0785efd62bdfc3ca1f.png)
+![AI 教育差距及其弥合方法](img/c617fdbe3a5c5b0785efd62bdfc3ca1f.png)
 
 图片来源于编辑
 
-现在是参与分析和AI的激动人心的时刻。就像90年代初的软件热潮一样，许多组织正在迎来新一代技术能力，赋能团队，并以仅在过去幻想的方式推动数字化转型。
+现在是参与分析和 AI 的激动人心的时刻。就像 90 年代初的软件热潮一样，许多组织正在迎来新一代技术能力，赋能团队，并以仅在过去幻想的方式推动数字化转型。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-尽管市场上有少数成熟的AI专注公司，但大多数组织似乎仍滞后于前沿。好消息是，正因为这个差距，带来了大量在线教育机会，帮助学习必要的技术技能来构建AI解决方案。选择范围从YouTube等视频平台上的免费教育内容到如Udemy或Coursera这样的需要月费的大规模开放在线课程（MOOCs）。甚至还有长期的在线训练营，旨在帮助个人换工作并提升数据和分析职业生涯。
+尽管市场上有少数成熟的 AI 专注公司，但大多数组织似乎仍滞后于前沿。好消息是，正因为这个差距，带来了大量在线教育机会，帮助学习必要的技术技能来构建 AI 解决方案。选择范围从 YouTube 等视频平台上的免费教育内容到如 Udemy 或 Coursera 这样的需要月费的大规模开放在线课程（MOOCs）。甚至还有长期的在线训练营，旨在帮助个人换工作并提升数据和分析职业生涯。
 
-尽管这些选项可能提升数据中心角色的个人的技术技能，但大多数在教授成功启用和扩展AI至更广泛组织所需的技能方面未能达到目标。
+尽管这些选项可能提升数据中心角色的个人的技术技能，但大多数在教授成功启用和扩展 AI 至更广泛组织所需的技能方面未能达到目标。
 
-# 针对当前AI教育和MOOCs的案例
+# 针对当前 AI 教育和 MOOCs 的案例
 
-AI教育体系存在问题。你可能会觉得这一说法很**大胆**，特别是考虑到在线上有成百上千种免费的数据、分析和AI教育资源。但仔细观察就会发现，提供的培训确实存在一些令人担忧的局限性。
+AI 教育体系存在问题。你可能会觉得这一说法很**大胆**，特别是考虑到在线上有成百上千种免费的数据、分析和 AI 教育资源。但仔细观察就会发现，提供的培训确实存在一些令人担忧的局限性。
 
-+   **许多AI教育工具在学习者参与度方面遇到困难。** 研究表明，MOOCs提供的在线分析和AI教育的平均完成率仅为3%。为什么这些课程如此枯燥？它们有一种单维度的风格。一人，一门课程，获取一个证书。有些人可以通过整天盯着屏幕和浏览各个部分来很好地学习，但其他人可能会觉得这很乏味或难以应用。
++   **许多 AI 教育工具在学习者参与度方面遇到困难。** 研究表明，MOOCs 提供的在线分析和 AI 教育的平均完成率仅为 3%。为什么这些课程如此枯燥？它们有一种单维度的风格。一人，一门课程，获取一个证书。有些人可以通过整天盯着屏幕和浏览各个部分来很好地学习，但其他人可能会觉得这很乏味或难以应用。
 
     更重要的是，如果没有完成课程并在特定时间内做出改变的动机，坐下来学习的优先级就会降低。当领导者期望他们的学生在工作之外找到时间时，培训最终会被降级，团队也不会看到他们对培训的投资产生影响。
 
@@ -48,7 +48,7 @@ AI教育体系存在问题。你可能会觉得这一说法很**大胆**，特�
 
 在今天众多的数据分析和人工智能培训选项中，不要忽视特定工具和代码行之外的必要技能。技术技能固然重要，但要在整个组织中成功启用和扩展人工智能，还需要更多的支持。
 
-**[Rehgan Avon](https://www.linkedin.com/in/rehganavon/)** 是**[AlignAI](http://www.getalignai.com/)**的联合创始人兼首席执行官，这是一家通过面向过程的教育帮助组织更快成熟其AI能力的AI采纳平台。Rehgan拥有集成系统工程背景，并强烈关注于构建支持分析和机器学习的技术，曾参与设计解决方案和产品，致力于在大企业中大规模运作机器学习模型。
+**[Rehgan Avon](https://www.linkedin.com/in/rehganavon/)** 是**[AlignAI](http://www.getalignai.com/)**的联合创始人兼首席执行官，这是一家通过面向过程的教育帮助组织更快成熟其 AI 能力的 AI 采纳平台。Rehgan 拥有集成系统工程背景，并强烈关注于构建支持分析和机器学习的技术，曾参与设计解决方案和产品，致力于在大企业中大规模运作机器学习模型。
 
 ### 更多相关话题
 
@@ -58,8 +58,8 @@ AI教育体系存在问题。你可能会觉得这一说法很**大胆**，特�
 
 +   [弥合人类理解与机器学习之间的差距：……](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)
 
-+   [是否有办法弥合MLOps工具的差距？](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)
++   [是否有办法弥合 MLOps 工具的差距？](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)
 
-+   [2023年AI对STEM教育的五种影响](https://www.kdnuggets.com/2023/04/5-ways-ai-impacting-stem-education-2023.html)
++   [2023 年 AI 对 STEM 教育的五种影响](https://www.kdnuggets.com/2023/04/5-ways-ai-impacting-stem-education-2023.html)
 
-+   [ChatGPT在教育中的作用：朋友还是敌人？](https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html)
++   [ChatGPT 在教育中的作用：朋友还是敌人？](https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html)

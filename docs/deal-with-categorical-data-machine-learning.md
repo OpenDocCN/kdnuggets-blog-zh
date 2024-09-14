@@ -1,18 +1,18 @@
 # 如何处理机器学习中的分类数据
 
-> 原文：[https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html`](https://www.kdnuggets.com/2021/05/deal-with-categorical-data-machine-learning.html)
 
-![如何处理机器学习中的分类数据](../Images/6322628f527456028b1a4b9a7ff78f6b.png)
+![如何处理机器学习中的分类数据](img/6322628f527456028b1a4b9a7ff78f6b.png)
 
 **在这篇博客中，我们将探索并实现：**
 
 +   使用独热编码：
 
-    +   Python的category_encoding库
+    +   Python 的 category_encoding 库
 
-    +   Scikit-learn预处理
+    +   Scikit-learn 预处理
 
-    +   Pandas的get_dummies
+    +   Pandas 的 get_dummies
 
 +   二进制编码
 
@@ -26,11 +26,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -54,11 +54,11 @@
 
 我们还会参考一张速查表，显示何时使用哪种类型的编码。
 
-# 方法1：使用Python的Category Encoder库
+# 方法 1：使用 Python 的 Category Encoder 库
 
-category_encoders是一个很棒的Python库，提供了15种不同的编码方案。
+category_encoders 是一个很棒的 Python 库，提供了 15 种不同的编码方案。
 
-**这是库支持的15种编码类型的列表：**
+**这是库支持的 15 种编码类型的列表：**
 
 +   独热编码
 
@@ -86,7 +86,7 @@ category_encoders是一个很棒的Python库，提供了15种不同的编码方�
 
 +   詹姆斯-斯坦编码
 
-+   M估计量编码
++   M 估计量编码
 
 +   温度计编码器
 
@@ -110,13 +110,13 @@ data = pd.DataFrame({ 'gender' : ['Male', 'Female', 'Male', 'Female', 'Female'],
 data.head()
 ```
 
-![图像](../Images/8cf59ccc89dbc94e8940e4ef6d8f1cec.png)
+![图像](img/8cf59ccc89dbc94e8940e4ef6d8f1cec.png)
 
 图片由作者提供
 
-**通过category_encoder实现独热编码**
+**通过 category_encoder 实现独热编码**
 
-在这种方法中，每个类别映射到一个包含1和0的向量，以表示特征的存在或不存在。向量的数量取决于特征的类别数量。
+在这种方法中，每个类别映射到一个包含 1 和 0 的向量，以表示特征的存在或不存在。向量的数量取决于特征的类别数量。
 
 创建一个独热编码对象：
 
@@ -127,7 +127,7 @@ data1 = ce_OHE.fit_transform(data)
 data1.head()
 ```
 
-![图像](../Images/7d4fa552c9a733a558105561be2314f6.png)
+![图像](img/7d4fa552c9a733a558105561be2314f6.png)
 
 图片由作者提供
 
@@ -135,7 +135,7 @@ data1.head()
 
 二进制编码将一个类别转换为二进制数字。每个二进制数字创建一个特征列。
 
-![图](../Images/8aa6cbf7c85b8903cf0fa35e9cfffa16.png)
+![图](img/8aa6cbf7c85b8903cf0fa35e9cfffa16.png)
 
 [图像参考](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)
 
@@ -147,19 +147,19 @@ data_binary = ce_be.fit_transform(data["class"]);
 data_binary
 ```
 
-![图](../Images/2d3d6da3ab40c5bcc269b64f18bf2792.png)
+![图](img/2d3d6da3ab40c5bcc269b64f18bf2792.png)
 
 作者提供的图像
 
-类似地，该库提供了另外14种编码方式。
+类似地，该库提供了另外 14 种编码方式。
 
-# 方法2：使用 Pandas 的 Get Dummies
+# 方法 2：使用 Pandas 的 Get Dummies
 
 ```py
 pd.get_dummies(data,columns=["gender","city"])
 ```
 
-![图](../Images/8487fc1978e7bc43233e90125815090e.png)
+![图](img/8487fc1978e7bc43233e90125815090e.png)
 
 作者提供的图像
 
@@ -169,13 +169,13 @@ pd.get_dummies(data,columns=["gender","city"])
 pd.get_dummies(data,prefix=["gen","city"],columns=["gender","city"])
 ```
 
-![图](../Images/b493f95a98e4568c9532722c2ccd6cc7.png)
+![图](img/b493f95a98e4568c9532722c2ccd6cc7.png)
 
 作者提供的图像
 
-# 方法3：使用 Scikit-learn
+# 方法 3：使用 Scikit-learn
 
-Scikit-learn 还提供了15种不同类型的内置编码器，可以从 sklearn.preprocessing 访问。
+Scikit-learn 还提供了 15 种不同类型的内置编码器，可以从 sklearn.preprocessing 访问。
 
 ## Scikit-learn 独热编码
 
@@ -198,7 +198,7 @@ data_gender = pd.DataFrame(ohe.fit_transform(data[["gender"]]))
 data_gender
 ```
 
-![图](../Images/b71fbfc60524485cda26dec1cf2cc2f3.png)
+![图](img/b71fbfc60524485cda26dec1cf2cc2f3.png)
 
 作者提供的图像
 
@@ -210,7 +210,7 @@ data_city = pd.DataFrame(ohe.fit_transform(data[["city"]]))
 data_city
 ```
 
-![图](../Images/89e995edc0d8ef8119ca95db1e464b96.png)
+![图](img/89e995edc0d8ef8119ca95db1e464b96.png)
 
 作者提供的图像
 
@@ -222,11 +222,11 @@ data_class = pd.DataFrame(ohe.fit_transform(data[["class"]]))
 data_class
 ```
 
-![图](../Images/2252a75c773a03c90cda6c45f9cefc70.png)
+![图](img/2252a75c773a03c90cda6c45f9cefc70.png)
 
 作者提供的图像
 
-这是因为类别列有4个唯一值。
+这是因为类别列有 4 个唯一值。
 
 应用于类别变量列表：
 
@@ -236,7 +236,7 @@ data_cols = pd.DataFrame(ohe.fit_transform(data[cols]))
 data_cols
 ```
 
-![图](../Images/245e25af4d01851981273dc3395c0944.png)
+![图](img/245e25af4d01851981273dc3395c0944.png)
 
 作者提供的图像
 
@@ -244,7 +244,7 @@ data_cols
 
 ## Scikit-learn 标签编码
 
-在标签编码中，每个类别被分配一个从1到N的值，其中N是该特征的类别数量。这些分配之间没有关系或顺序。
+在标签编码中，每个类别被分配一个从 1 到 N 的值，其中 N 是该特征的类别数量。这些分配之间没有关系或顺序。
 
 ```py
 from sklearn.preprocessing import LabelEncoder
@@ -260,7 +260,7 @@ le_class = le.fit_transform(data[["class"]])
 data_class
 ```
 
-![图](../Images/2252a75c773a03c90cda6c45f9cefc70.png)
+![图](img/2252a75c773a03c90cda6c45f9cefc70.png)
 
 作者提供的图像
 
@@ -279,7 +279,7 @@ temp_dict = {'very cold': 1,'cold': 2,'warm': 3,'hot': 4,"very hot":5}
 df
 ```
 
-![图](../Images/d39a870d7c717360bf6b97d521cb97b8.png)
+![图](img/d39a870d7c717360bf6b97d521cb97b8.png)
 
 作者提供的图像
 
@@ -290,7 +290,7 @@ df["temp_ordinal"] = df.temperature.map(temp_dict)
 df
 ```
 
-![图](../Images/9963853ad5088d787831007bef6cccba.png)
+![图](img/9963853ad5088d787831007bef6cccba.png)
 
 作者提供的图像
 
@@ -321,11 +321,11 @@ data_freq["data_fe"] = data_freq["class"].map(fe_).round(2)
 data_freq
 ```
 
-![图](../Images/28ddbb0f094ff1ed7b89bf61b7b08ae8.png)
+![图](img/28ddbb0f094ff1ed7b89bf61b7b08ae8.png)
 
 作者提供的图像
 
-在本文中，我们看到了5种编码方案。类似地，还有其他10种编码方式我们尚未探讨：
+在本文中，我们看到了 5 种编码方案。类似地，还有其他 10 种编码方式我们尚未探讨：
 
 +   赫尔梅特编码
 
@@ -355,17 +355,17 @@ data_freq
 
 这是一个有关何时使用何种编码类型的备忘单：
 
-![图像](../Images/be62853cce4ddd9c821bb5928030c26e.png)
+![图像](img/be62853cce4ddd9c821bb5928030c26e.png)
 
 [图片参考](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)
 
 ## 参考资料：
 
-1.  [https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)
+1.  [`towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02`](https://towardsdatascience.com/all-about-categorical-variable-encoding-305f3361fd02)
 
-1.  [https://pypi.org/project/category-encoders/](https://pypi.org/project/category-encoders/)
+1.  [`pypi.org/project/category-encoders/`](https://pypi.org/project/category-encoders/)
 
-1.  [https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html)
+1.  [`pandas.pydata.org/docs/reference/api/pandas.get_dummies.html`](https://pandas.pydata.org/docs/reference/api/pandas.get_dummies.html)
 
 **[Shelvi Garg](https://www.linkedin.com/in/shelvi-garg-3a7421108/)** 是 Spinny 的数据科学家
 

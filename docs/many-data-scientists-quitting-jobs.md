@@ -1,8 +1,8 @@
 # 为什么这么多数据科学家辞职？
 
-> 原文：[https://www.kdnuggets.com/2022/03/many-data-scientists-quitting-jobs.html](https://www.kdnuggets.com/2022/03/many-data-scientists-quitting-jobs.html)
+> 原文：[`www.kdnuggets.com/2022/03/many-data-scientists-quitting-jobs.html`](https://www.kdnuggets.com/2022/03/many-data-scientists-quitting-jobs.html)
 
-![为什么这么多数据科学家辞职？](../Images/0f2561a549294603d9e7c2c60f2a83f5.png)
+![为什么这么多数据科学家辞职？](img/0f2561a549294603d9e7c2c60f2a83f5.png)
 
 图片来源：Anete Lusina，来自 Pexels
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 
 * * *
 
@@ -102,12 +102,12 @@
 
 +   [为什么越来越多的开发者在机器学习项目中使用 Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
-+   [KDnuggets™ 新闻 22:n04，1月26日：高薪兼职……](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04，1 月 26 日：高薪兼职……](https://www.kdnuggets.com/2022/n04.html)
 
 +   [管理过多的 Python 版本？Pyenv 来救援](https://www.kdnuggets.com/too-many-python-versions-to-manage-pyenv-to-the-rescue)
 
-+   [KDnuggets™ 新闻 22:n03, 1月 19日: 深入探讨13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日: 深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [谷歌在你参加他们的机器学习课程之前建议你做什么](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
 
-+   [深入探讨13个数据科学家的角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
++   [深入探讨 13 个数据科学家的角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)

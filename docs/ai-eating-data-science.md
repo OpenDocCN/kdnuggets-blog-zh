@@ -1,32 +1,32 @@
-# AI正在吞噬数据科学
+# AI 正在吞噬数据科学
 
-> 原文：[https://www.kdnuggets.com/2023/05/ai-eating-data-science.html](https://www.kdnuggets.com/2023/05/ai-eating-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/05/ai-eating-data-science.html`](https://www.kdnuggets.com/2023/05/ai-eating-data-science.html)
 
-![AI正在吞噬数据科学](../Images/048706c119ff7c3a6b6a71ed99b7a16b.png)
+![AI 正在吞噬数据科学](img/048706c119ff7c3a6b6a71ed99b7a16b.png)
 
-作者使用Midjourney创作的图像
+作者使用 Midjourney 创作的图像
 
-作为21世纪技术革命的基石，数据科学被视为每个行业的未来。但仔细观察会发现，数据科学作为一个学科只有短暂的历史，它是从数据匮乏的过去过渡到智能系统主导的未来的一个阶段。
+作为 21 世纪技术革命的基石，数据科学被视为每个行业的未来。但仔细观察会发现，数据科学作为一个学科只有短暂的历史，它是从数据匮乏的过去过渡到智能系统主导的未来的一个阶段。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 不久前，我们面临稀疏的数据和高昂的数据存储成本。快进到今天。由于我们新兴的数字支柱，包括互联网、社交媒体、电子商务和物联网设备，我们持续被数据淹没。数据科学已经发展成为一种工具，在这个大数据时代的初期，帮助我们获得见解、预测趋势和做出决策，使我们能够理解这些庞大的数据集。大数据时代现在已经完全过去，我们已经牢牢地适应了这一时代。
 
-然而，随着处理大数据能力的提高，变化变得越来越明显。重点不再是我们不断生成的大量数据；我们已经将注意力转向了不断扩展的复杂数据驱动的AI系统。关键问题不再只是“我可以从这些数据中获得什么见解？”而是“我可以用这些数据运行什么AI系统？”过去十年专注于掌握大数据。接下来，我们承诺将转向设计和实现更强大的AI系统。
+然而，随着处理大数据能力的提高，变化变得越来越明显。重点不再是我们不断生成的大量数据；我们已经将注意力转向了不断扩展的复杂数据驱动的 AI 系统。关键问题不再只是“我可以从这些数据中获得什么见解？”而是“我可以用这些数据运行什么 AI 系统？”过去十年专注于掌握大数据。接下来，我们承诺将转向设计和实现更强大的 AI 系统。
 
-这一新兴趋势标志着数据科学与AI职业路径的融合：*另一个* AI驱动的奇点。现在不仅仅是分析数据的能力，还包括构建、训练和维护能够学习、适应并做出自主决策的AI系统。这种角色的整合代表了一个越来越以AI为中心的局面。
+这一新兴趋势标志着数据科学与 AI 职业路径的融合：*另一个* AI 驱动的奇点。现在不仅仅是分析数据的能力，还包括构建、训练和维护能够学习、适应并做出自主决策的 AI 系统。这种角色的整合代表了一个越来越以 AI 为中心的局面。
 
-要想看到这种变化的实际应用，只需看看OpenAI的ChatGPT项目。最初，该项目专注于收集和组织大量数据以训练模型。然而，重点很快转向尝试创建和改进能够生成有意义的、上下文相关的自然语言响应的大规模系统。数据与系统之间的互动将变得更加动态，人工智能将以越来越复杂和创新的方式使用数据。
+要想看到这种变化的实际应用，只需看看 OpenAI 的 ChatGPT 项目。最初，该项目专注于收集和组织大量数据以训练模型。然而，重点很快转向尝试创建和改进能够生成有意义的、上下文相关的自然语言响应的大规模系统。数据与系统之间的互动将变得更加动态，人工智能将以越来越复杂和创新的方式使用数据。
 
 想象一下一个未来，人工智能驱动的智能城市成为常态。传感器、设备、人类互动等产生的大量数据将被人工智能用于控制交通流量、能源消耗、公共安全等。这不仅仅是数据分析。它涉及到开发能够理解和管理复杂城市生态系统的庞大人工智能系统。
 
@@ -38,18 +38,18 @@
 
 *数据万岁！*
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家及KDnuggets的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过editor1 at kdnuggets[dot]com与他联系。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是数据科学家及 KDnuggets 的主编，这是一个开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。你可以通过 editor1 at kdnuggets[dot]com 与他联系。
 
 ### 更多相关话题
 
 +   [停止学习数据科学以寻找目标，并寻找目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学基础：入门所需的10项关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：入门所需的 10 项关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：奇特的名言集锦…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目以学习5项关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目以学习 5 项关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)

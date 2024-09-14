@@ -1,8 +1,8 @@
 # 直方图 202：更好的数据科学技巧与窍门
 
-> 原文：[https://www.kdnuggets.com/2018/02/histogram-tips-tricks.html](https://www.kdnuggets.com/2018/02/histogram-tips-tricks.html)
+> 原文：[`www.kdnuggets.com/2018/02/histogram-tips-tricks.html`](https://www.kdnuggets.com/2018/02/histogram-tips-tricks.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Norbert Obsuszt](https://www.linkedin.com/in/obsusztnorbert/)，AnswerMiner。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -58,27 +58,27 @@
 
 你使用的范围（分箱宽度）越宽，柱子（分箱）就会越少。
 
-过宽的区间可能隐藏有关分布的重要细节，而过窄的区间可能会产生大量噪声，并隐藏有关分布的重要信息。区间的宽度应该相等，并且你应该只使用诸如1、2、5、10、20、25、50、100等整数值，以便观众更容易解释数据。
+过宽的区间可能隐藏有关分布的重要细节，而过窄的区间可能会产生大量噪声，并隐藏有关分布的重要信息。区间的宽度应该相等，并且你应该只使用诸如 1、2、5、10、20、25、50、100 等整数值，以便观众更容易解释数据。
 
-这些直方图是从包含550个值的相同示例数据集中创建的，这些值在12到69之间。
+这些直方图是从包含 550 个值的相同示例数据集中创建的，这些值在 12 到 69 之间。
 
-![](../Images/77182f7065c181591d5412adadb32524.png)
+![](img/77182f7065c181591d5412adadb32524.png)
 
-**过宽**：区间过宽，无法检测到大约53处的异常峰值
+**过宽**：区间过宽，无法检测到大约 53 处的异常峰值
 
-![](../Images/3326e32b0d447c8f5b73a9f4eddd1abe.png)
+![](img/3326e32b0d447c8f5b73a9f4eddd1abe.png)
 
 **过窄**：区间过窄，巧合中出现很多峰值
 
-![](../Images/b9afd54619344ec9a4f9145d28249687.png)
+![](img/b9afd54619344ec9a4f9145d28249687.png)
 
-**不美观**：难以阅读，因为区间宽度为不美观的7
+**不美观**：难以阅读，因为区间宽度为不美观的 7
 
-![](../Images/b5580cfee645d322bd9e76397b815cd9.png)
+![](img/b5580cfee645d322bd9e76397b815cd9.png)
 
 **不均等**：难以阅读，因为区间宽度不相等
 
-![](../Images/5d75c677b63bb106e66eb620e3d3fc50.png)
+![](img/5d75c677b63bb106e66eb620e3d3fc50.png)
 
 **理想**：这个很不错。
 
@@ -88,9 +88,9 @@
 
 **可以使用的方法**
 
-**![](../Images/fef410b36858cdd127a0c438f9a04f28.png)**
+**![](img/fef410b36858cdd127a0c438f9a04f28.png)**
 
-对于上述数据集（包含550个值在12到69之间），我们得到以下结果：
+对于上述数据集（包含 550 个值在 12 到 69 之间），我们得到以下结果：
 
 |  | **平方根** | **斯特吉斯** | **赖斯** | **斯科特** | **弗里德曼-迪阿科尼斯** |
 | --- | --- | --- | --- | --- | --- |
@@ -99,7 +99,7 @@
 
 **开启或关闭**
 
-这并不容易决定。现在问题来了。如果你查看10-15-20-25…的分箱直方图，值“20”的出现是表示在第二列、第三列还是两者都有？显然，你需要将每个具体值放入一个精确的区间中。
+这并不容易决定。现在问题来了。如果你查看 10-15-20-25…的分箱直方图，值“20”的出现是表示在第二列、第三列还是两者都有？显然，你需要将每个具体值放入一个精确的区间中。
 
 有两个选项可以做到这一点：
 
@@ -121,28 +121,28 @@
 
 你可以自由选择这些选项中的任何一个，但要小心！使用这两个选项中的任何一个，都有一个值不会包含在直方图中。如果你选择选项#1，那么值“10”将不会包含在任何区间中。如果你选择选项#2，那么值“25”将不会包含在任何区间中。
 
-**解决方案**是强制直方图的第一个或最后一个箱子为完全闭合区间。我们建议在使用选项#2时选择最后一个箱子，因为均匀的箱子在左侧通常比右侧更重要。如果你有整数值，建议将箱子标记为“10-14”，“15-19”，和“20-25”，而不是写“10”，“15”，“20”，“25”。这样，直方图的观众会更容易理解。
+**解决方案**是强制直方图的第一个或最后一个箱子为完全闭合区间。我们建议在使用选项#2 时选择最后一个箱子，因为均匀的箱子在左侧通常比右侧更重要。如果你有整数值，建议将箱子标记为“10-14”，“15-19”，和“20-25”，而不是写“10”，“15”，“20”，“25”。这样，直方图的观众会更容易理解。
 
-**简历： [诺伯特·奥布苏茨特](https://www.linkedin.com/in/obsusztnorbert/)** 是AnswerMiner（www.answerminer.com）的创始人、数据科学家和程序员。他获得了数学和编程学位。诺伯特对数据分析、预测分析和数据科学充满热情。他可以通过norbert.obsuszt@answerminer.com或 [LinkedIn](https://www.linkedin.com/in/obsusztnorbert/) 联系到。
+**简历： [诺伯特·奥布苏茨特](https://www.linkedin.com/in/obsusztnorbert/)** 是 AnswerMiner（www.answerminer.com）的创始人、数据科学家和程序员。他获得了数学和编程学位。诺伯特对数据分析、预测分析和数据科学充满热情。他可以通过 norbert.obsuszt@answerminer.com 或 [LinkedIn](https://www.linkedin.com/in/obsusztnorbert/) 联系到。
 
 **相关**
 
 +   [**命令行中的数据科学：探索数据**](https://www.kdnuggets.com/2018/02/data-science-command-line-book-exploring-data.html)
 
-+   [**使用Excel与Pandas**](https://www.kdnuggets.com/2018/01/using-excel-pandas.html)
++   [**使用 Excel 与 Pandas**](https://www.kdnuggets.com/2018/01/using-excel-pandas.html)
 
-+   [**R中的倾向得分匹配**](https://www.kdnuggets.com/2018/01/propensity-score-matching-r.html)
++   [**R 中的倾向得分匹配**](https://www.kdnuggets.com/2018/01/propensity-score-matching-r.html)
 
 ### 更多相关主题
 
-+   [快速数据科学技巧和窍门学习SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)
++   [快速数据科学技巧和窍门学习 SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)
 
-+   [数据科学家的10个Jupyter Notebook技巧](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
++   [数据科学家的 10 个 Jupyter Notebook 技巧](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
 
-+   [12个VSCode Python开发技巧](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
++   [12 个 VSCode Python 开发技巧](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
 
-+   [在Heroku Cloud上部署深度学习Web应用的技巧与窍门](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)
++   [在 Heroku Cloud 上部署深度学习 Web 应用的技巧与窍门](https://www.kdnuggets.com/2021/12/tips-tricks-deploying-dl-webapps-heroku.html)
 
-+   [编写更好Python函数的5个技巧](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
++   [编写更好 Python 函数的 5 个技巧](https://www.kdnuggets.com/5-tips-for-writing-better-python-functions)
 
-+   [在Kaggle竞争的4个顶级技巧及为何应立即开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)
++   [在 Kaggle 竞争的 4 个顶级技巧及为何应立即开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)

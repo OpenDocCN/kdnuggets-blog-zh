@@ -1,22 +1,22 @@
 # PyTorch 1.2 简介
 
-> 原文：[https://www.kdnuggets.com/2019/09/gentle-introduction-pytorch-12.html](https://www.kdnuggets.com/2019/09/gentle-introduction-pytorch-12.html)
+> 原文：[`www.kdnuggets.com/2019/09/gentle-introduction-pytorch-12.html`](https://www.kdnuggets.com/2019/09/gentle-introduction-pytorch-12.html)
 
-[评论](#comments)
+评论
 
 **由 [Elvis Saravia](https://twitter.com/omarsar0)，情感计算与 NLP 研究员**
 
-![图](../Images/b4722fc331c461340adab4a229dc2d80.png)
+![图](img/b4722fc331c461340adab4a229dc2d80.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT
 
 * * *
 
@@ -40,11 +40,11 @@ print(torch.__version__)
 
 ### 加载数据
 
-让我们直接进入正题！与任何机器学习项目一样，你需要加载你的数据集。我们使用的是[MNIST数据集](http://yann.lecun.com/exdb/mnist/)，它是机器学习领域中的“Hello World”数据集。
+让我们直接进入正题！与任何机器学习项目一样，你需要加载你的数据集。我们使用的是[MNIST 数据集](http://yann.lecun.com/exdb/mnist/)，它是机器学习领域中的“Hello World”数据集。
 
 数据由一系列`28 X 28`大小的图像（包含手写数字）组成。我们将很快讨论这些图像，但我们的计划是将数据加载成`32`的批次，类似于下面的图示：
 
-![](../Images/9fe8202824dcd4afffb50905030f2530.png)
+![](img/9fe8202824dcd4afffb50905030f2530.png)
 
 以下是我们在导入数据时执行的完整步骤：
 
@@ -75,7 +75,7 @@ StandardTransform Transform: Compose(ToTensor())
 
 +   `transform`包含你将应用于数据的所有转换代码。下面我会展示一个示例，演示它的作用，以便更好地理解它的使用。
 
-+   `trainset`和`testset`包含实际的数据集对象。注意我使用`train=True`来指定这对应于训练数据集，我使用`train=False`来指定这是其余的数据集，我们称之为测试集。从上面打印的块中你可以看到，数据的划分是85%（60000）/15%（10000），分别对应于训练集和测试集的样本部分。
++   `trainset`和`testset`包含实际的数据集对象。注意我使用`train=True`来指定这对应于训练数据集，我使用`train=False`来指定这是其余的数据集，我们称之为测试集。从上面打印的块中你可以看到，数据的划分是 85%（60000）/15%（10000），分别对应于训练集和测试集的样本部分。
 
 +   `trainloader`是持有数据加载器对象的地方，它负责*打乱*数据并构建批次。
 
@@ -85,19 +85,19 @@ StandardTransform Transform: Compose(ToTensor())
 
 输出：
 
-![](../Images/19604cc32294528da514e4c3ac6d90eb.png)
+![](img/19604cc32294528da514e4c3ac6d90eb.png)
 
 好的，我们有了我们的图像样本，现在让我们对它应用一些虚拟转换。我们将把图像旋转`45`度。下面的转换处理了这一点：
 
 输出：
 
-![](../Images/79b8103af10513e590b0c2942f378530.png)
+![](img/79b8103af10513e590b0c2942f378530.png)
 
 请注意，你可以将任何转换放在 `transforms.Compose(...)` 中。你可以使用 PyTorch 提供的内置转换，也可以构建自己的转换并按需组合。事实上，你可以在函数中放入任意多的转换。让我们尝试另一种转换组合：*rotate* + *vertical flip*。
 
 输出：
 
-![](../Images/b43d65f8130b742734c15f34c5998d3a.png)
+![](img/b43d65f8130b742734c15f34c5998d3a.png)
 
 这很酷，对吧！继续尝试其他转换方法。在进一步探索我们的数据话题上，让我们更仔细地看看我们的图像数据集。
 
@@ -109,7 +109,7 @@ StandardTransform Transform: Compose(ToTensor())
 
 输出：
 
-![](../Images/8974f9884052ce437df9813fbdb8fdcc.png)
+![](img/8974f9884052ce437df9813fbdb8fdcc.png)
 
 我们的批次维度如下：
 
@@ -136,13 +136,13 @@ Image label dimensions: torch.Size([32])
 
 +   模型的入口点，即数据输入到神经网络模型的位置，放在 `forward(...)` 函数下。通常，我们还会将训练过程中对数据进行的其他转换放在此函数内。
 
-+   在`forward()` 函数中，我们对输入数据执行一系列计算：**1)** 我们首先将图像展平，将其从2D (`28 X 28`) 转换为1D (`1 X 784`); **2)** 然后将这些1D图像的批次输入到第一个隐藏层; **3)** 该隐藏层的输出应用了[非线性激活函数](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) 叫做`ReLU`。此时了解`F.relu()`的具体作用并不重要，但它的效果是允许神经网络架构在大数据集上更快、更有效地训练；**4)** 如上所述，dropout还通过避免对训练数据过拟合来帮助模型更有效地训练；**5)** 然后我们将dropout层的输出输入到输出层（`d2`）；**6)** 其结果接着传递到[softmax函数](https://en.wikipedia.org/wiki/Softmax_function)，它将输出转换或规范化为概率分布，有助于输出正确的预测值，这些值用于计算模型的准确率；**7)** 这将是模型的最终输出。
++   在`forward()` 函数中，我们对输入数据执行一系列计算：**1)** 我们首先将图像展平，将其从 2D (`28 X 28`) 转换为 1D (`1 X 784`); **2)** 然后将这些 1D 图像的批次输入到第一个隐藏层; **3)** 该隐藏层的输出应用了[非线性激活函数](https://en.wikipedia.org/wiki/Rectifier_(neural_networks)) 叫做`ReLU`。此时了解`F.relu()`的具体作用并不重要，但它的效果是允许神经网络架构在大数据集上更快、更有效地训练；**4)** 如上所述，dropout 还通过避免对训练数据过拟合来帮助模型更有效地训练；**5)** 然后我们将 dropout 层的输出输入到输出层（`d2`）；**6)** 其结果接着传递到[softmax 函数](https://en.wikipedia.org/wiki/Softmax_function)，它将输出转换或规范化为概率分布，有助于输出正确的预测值，这些值用于计算模型的准确率；**7)** 这将是模型的最终输出。
 
 从视觉上讲，以下是我们刚刚构建的模型的图示。请记住，隐藏层比图示中显示的要大，但由于空间限制，图示应视为实际模型的近似。
 
-![](../Images/8ef5afdfb7ea69c95543514a412424cb.png)
+![](img/8ef5afdfb7ea69c95543514a412424cb.png)
 
-正如我在之前的教程中所做的，我总是建议用一个批次测试模型，以确保输出的维度符合我们的期望。注意我们如何迭代数据加载器，它方便地存储了`images`和`labels`对。`out`包含模型的输出，这些输出是应用了`softmax`层的logits，有助于预测。
+正如我在之前的教程中所做的，我总是建议用一个批次测试模型，以确保输出的维度符合我们的期望。注意我们如何迭代数据加载器，它方便地存储了`images`和`labels`对。`out`包含模型的输出，这些输出是应用了`softmax`层的 logits，有助于预测。
 
 输出：
 
@@ -151,7 +151,7 @@ batch size: torch.Size([32, 1, 28, 28])
 torch.Size([32, 10])
 ```
 
-我们可以清楚地看到，我们得到的每个批次有10个输出值与批次中的每个图像相关联；这些值用于检查模型的性能。
+我们可以清楚地看到，我们得到的每个批次有 10 个输出值与批次中的每个图像相关联；这些值用于检查模型的性能。
 
 ### 训练模型
 
@@ -159,7 +159,7 @@ torch.Size([32, 10])
 
 +   `learning_rate` 是模型尝试优化其权重的速率，因此可以看作是模型的另一个参数。
 
-+   `num_epochs` 是训练步骤的数量……我们不需要训练这个模型太长时间，所以只用5个epoch。
++   `num_epochs` 是训练步骤的数量……我们不需要训练这个模型太长时间，所以只用 5 个 epoch。
 
 +   `device` 确定我们将使用什么硬件来训练模型。如果存在`gpu`，则会使用它，否则默认为`cpu`。
 
@@ -210,7 +210,7 @@ Epoch: 4 | Loss: 1.5003 | Train Accuracy: 95.98
 
 在所有训练步骤完成后，我们可以清楚地看到损失不断减少，而模型的训练准确性不断提高，这表明模型有效地学习了图像分类。
 
-我们可以通过在测试数据集上计算准确性来验证这一点，以查看模型在图像分类任务上的表现如何。如下面所示，我们的基本神经网络模型在MNIST分类任务上表现非常好。
+我们可以通过在测试数据集上计算准确性来验证这一点，以查看模型在图像分类任务上的表现如何。如下面所示，我们的基本神经网络模型在 MNIST 分类任务上表现非常好。
 
 输出：
 
@@ -244,11 +244,11 @@ Test Accuracy: 96.32
 
 **相关：**
 
-+   [XLNet 在多个 NLP 任务上超越 BERT](/2019/07/xlnet-outperforms-bert-several-nlp-tasks.html)
++   XLNet 在多个 NLP 任务上超越 BERT
 
-+   [适配器：一种紧凑且可扩展的 NLP 迁移学习方法](/2019/07/adapters-compact-extensible-transfer-learning-method-nlp.html)
++   适配器：一种紧凑且可扩展的 NLP 迁移学习方法
 
-+   [NLP 概述：现代深度学习技术在自然语言处理中的应用](/2019/01/nlp-overview-modern-deep-learning-techniques.html)
++   NLP 概述：现代深度学习技术在自然语言处理中的应用
 
 ### 相关主题
 

@@ -1,32 +1,32 @@
-# 人工智能、分析、数据科学、机器学习最佳播客前10名
+# 人工智能、分析、数据科学、机器学习最佳播客前 10 名
 
-> 原文：[https://www.kdnuggets.com/2019/07/best-podcasts-ai-analytics-data-science-machine-learning.html](https://www.kdnuggets.com/2019/07/best-podcasts-ai-analytics-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/07/best-podcasts-ai-analytics-data-science-machine-learning.html`](https://www.kdnuggets.com/2019/07/best-podcasts-ai-analytics-data-science-machine-learning.html)
 
-[评论](#comments)
+评论
 
 在日常通勤或休息时间收听播客是保持在数据科学领域最新并确保你不断学习的高效有效方式。
 
-以下的 *KDnuggets Top 10 列表* 突出了截至2019年最活跃和受欢迎的播客，这些播客包含数据科学和机器学习的对话。我们审查了更多的播客，因此此列表仅包括在 iTunes 上评分最高（4.5+）、评论最多且当前月份内至少有一集的新播客。所有节目描述均改编自播客列表。
+以下的 *KDnuggets Top 10 列表* 突出了截至 2019 年最活跃和受欢迎的播客，这些播客包含数据科学和机器学习的对话。我们审查了更多的播客，因此此列表仅包括在 iTunes 上评分最高（4.5+）、评论最多且当前月份内至少有一集的新播客。所有节目描述均改编自播客列表。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
-![](../Images/e6d1deee5fa2da9b9c4360b76e65c04f.png)
+![](img/e6d1deee5fa2da9b9c4360b76e65c04f.png)
 
 我们还分享了一些新的和引人注目的播客，这些播客要么太新，无法与大名单竞争，要么已经有一段时间没有发布，但仍然是绝佳的资源，或涵盖更广泛的话题。 你仍然应该考虑查看这些节目，因为它们可能会带来一些对你下一次大数据冒险至关重要的知识点！
 
 告诉我们你对我们精选内容的看法，并请分享你认为应考虑在未来最佳播客列表中的最爱播客。
 
-### **播客前10名**
+### **播客前 10 名**
 
 **#1\.** [数据怀疑者](http://dataskeptic.libsyn.com/) 由 Kyle Polich 主持 | 276 集，2014 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/data-skeptic/id890348705)
 
@@ -56,47 +56,47 @@
 
 *T*his *W*eek *i*n *M*achine *L*earning *& AI* 专为机器学习和人工智能爱好者的高度目标化受众量身定制。涵盖机器学习、人工智能、深度学习、自然语言处理、神经网络、分析和深度学习等技术。
 
-[最新一期](https://podcasts.apple.com/us/podcast/fairwashing-folly-ml-solutionism-zachary-lipton-twiml/id1116303051?i=1000445309733)：（75分钟）扎克里·利普顿，特普商学院助理教授，专注于机器学习在医疗保健中的应用，以帮助医生进行诊断和治疗。我们讨论了医疗领域的监督学习、分布变化下的鲁棒性、跨行业机器学习系统的伦理问题以及“公平洗白”的概念。
+[最新一期](https://podcasts.apple.com/us/podcast/fairwashing-folly-ml-solutionism-zachary-lipton-twiml/id1116303051?i=1000445309733)：（75 分钟）扎克里·利普顿，特普商学院助理教授，专注于机器学习在医疗保健中的应用，以帮助医生进行诊断和治疗。我们讨论了医疗领域的监督学习、分布变化下的鲁棒性、跨行业机器学习系统的伦理问题以及“公平洗白”的概念。
 
-**#6\.** [SuperDataScience](https://www.superdatascience.com/podcast) 来自 Kirill Eremenko | 250期，2017 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/superdatascience/id1163599059)
+**#6\.** [SuperDataScience](https://www.superdatascience.com/podcast) 来自 Kirill Eremenko | 250 期，2017 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/superdatascience/id1163599059)
 
 将全球最具启发性的数据科学家和分析师带给您，帮助您在数据科学领域建立成功的职业生涯。数据呈指数增长，从事分析工作的人薪资也在不断上升。这个播客可以帮助您学习如何迅速提升您的分析职业生涯。
 
-[最新一期](https://podcasts.apple.com/us/podcast/sds-281-futureproofing-your-digital-marketing-tactics/id1163599059?i=1000445255081)：（66分钟）与Webfor的数字战略创始人兼主任凯文·盖奇的聊天。您将了解数字助手是什么以及它们的未来发展方向，借助像谷歌的雷·库兹韦尔这样的专家。您将听到凯文对“可测量的东西会被管理”的哲学以及这对营销和数据科学的意义。您还将了解为什么网站变得越来越不重要，如何将细分市场逐渐过渡到个性化，创建令人惊叹的客户体验，磁盘配置文件、自然语言处理、计算机视觉及其在未来营销中的作用。
+[最新一期](https://podcasts.apple.com/us/podcast/sds-281-futureproofing-your-digital-marketing-tactics/id1163599059?i=1000445255081)：（66 分钟）与 Webfor 的数字战略创始人兼主任凯文·盖奇的聊天。您将了解数字助手是什么以及它们的未来发展方向，借助像谷歌的雷·库兹韦尔这样的专家。您将听到凯文对“可测量的东西会被管理”的哲学以及这对营销和数据科学的意义。您还将了解为什么网站变得越来越不重要，如何将细分市场逐渐过渡到个性化，创建令人惊叹的客户体验，磁盘配置文件、自然语言处理、计算机视觉及其在未来营销中的作用。
 
-**#7.** [Talking Machines](http://www.thetalkingmachines.com/) 来自 Tote Bag Productions | 84期，2015 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/talking-machines/id955198749)
+**#7.** [Talking Machines](http://www.thetalkingmachines.com/) 来自 Tote Bag Productions | 84 期，2015 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/talking-machines/id955198749)
 
 凯瑟琳·戈尔曼和尼尔·劳伦斯带来与领域专家的清晰对话、对行业新闻的深入讨论以及对您的问题的有用回答。机器学习正在改变我们可以向周围世界提出的问题，我们在这里探讨如何提出最佳问题以及如何利用这些答案。
 
-[最新一期](https://podcasts.apple.com/us/podcast/postersession-ai-and-deep-quaggles/id955198749?i=1000444805914)：（45分钟）我们讨论了边际似然性和交叉验证，凯瑟琳对PosterSession.ai*仍然*感到兴奋，我们发明了Deep Quaggles，并听取了波士顿大学伊莱恩·恩索西教授的对话。
+[最新一期](https://podcasts.apple.com/us/podcast/postersession-ai-and-deep-quaggles/id955198749?i=1000444805914)：（45 分钟）我们讨论了边际似然性和交叉验证，凯瑟琳对 PosterSession.ai*仍然*感到兴奋，我们发明了 Deep Quaggles，并听取了波士顿大学伊莱恩·恩索西教授的对话。
 
-**#8.** [AI播客](https://soundcloud.com/theaipodcast) 由NVIDIA提供 | 90集，2016年 – 2019年，[iTunes](https://podcasts.apple.com/us/podcast/the-ai-podcast/id1186480811)
+**#8.** [AI 播客](https://soundcloud.com/theaipodcast) 由 NVIDIA 提供 | 90 集，2016 年 – 2019 年，[iTunes](https://podcasts.apple.com/us/podcast/the-ai-podcast/id1186480811)
 
-我们与一些世界领先的AI专家联系，解释它是如何工作的，如何发展，以及它如何与人类所有领域交织在一起。AI计算公司NVIDIA制作了这个播客。
+我们与一些世界领先的 AI 专家联系，解释它是如何工作的，如何发展，以及它如何与人类所有领域交织在一起。AI 计算公司 NVIDIA 制作了这个播客。
 
-[最新一集](https://podcasts.apple.com/us/podcast/get-your-fashion-fix-stitch-fix-adds-ai-flair-to-your/id1186480811?i=1000444132468)：（24分钟）有人说风格永不褪色，而现在借助AI，找到个人的时尚感将变得更加容易。时尚电商初创公司Stitch Fix正在努力在AI驱动的决策与人类判断之间建立无缝平衡。我们与Stitch Fix首席算法官布拉德·克林根伯格聊了聊公司如何利用AI来帮助我们更好地穿着。
+[最新一集](https://podcasts.apple.com/us/podcast/get-your-fashion-fix-stitch-fix-adds-ai-flair-to-your/id1186480811?i=1000444132468)：（24 分钟）有人说风格永不褪色，而现在借助 AI，找到个人的时尚感将变得更加容易。时尚电商初创公司 Stitch Fix 正在努力在 AI 驱动的决策与人类判断之间建立无缝平衡。我们与 Stitch Fix 首席算法官布拉德·克林根伯格聊了聊公司如何利用 AI 来帮助我们更好地穿着。
 
-**#9.** [数字分析权威小时](http://www.analyticshour.io/) 由迈克尔·赫布林、蒂姆·威尔逊和莫·基斯主持 | 126集，2015年 – 2019年，[iTunes](https://podcasts.apple.com/us/podcast/the-digital-analytics-power-hour/id955228473)
+**#9.** [数字分析权威小时](http://www.analyticshour.io/) 由迈克尔·赫布林、蒂姆·威尔逊和莫·基斯主持 | 126 集，2015 年 – 2019 年，[iTunes](https://podcasts.apple.com/us/podcast/the-digital-analytics-power-hour/id955228473)
 
-参加任何会议，你都会听到人们说，最有价值的讨论是在展会后的酒吧里发生的。阅读任何商业杂志，你会发现有文章提到类似于“商业分析是目前最热门的职业类别，而且存在显著的人才、流程和最佳实践的缺乏。”在这种情况下，会议是eMetrics，酒吧是……多个，参会者包括迈克尔·赫布林、蒂姆·威尔逊和吉姆·凯恩（名誉主持人）。经过几杯啤酒和几个小时关于数字分析前沿的讨论，他们意识到他们可能有一些可以回馈社区的东西。这个播客就是其中的一项贡献。每一集都是一个封闭的话题和一个开放的论坛——目标是让听众享受迈克尔、蒂姆和莫分享他们的想法和经验，并希望能从中获得一些可以在第二天的工作中尝试的东西。
+参加任何会议，你都会听到人们说，最有价值的讨论是在展会后的酒吧里发生的。阅读任何商业杂志，你会发现有文章提到类似于“商业分析是目前最热门的职业类别，而且存在显著的人才、流程和最佳实践的缺乏。”在这种情况下，会议是 eMetrics，酒吧是……多个，参会者包括迈克尔·赫布林、蒂姆·威尔逊和吉姆·凯恩（名誉主持人）。经过几杯啤酒和几个小时关于数字分析前沿的讨论，他们意识到他们可能有一些可以回馈社区的东西。这个播客就是其中的一项贡献。每一集都是一个封闭的话题和一个开放的论坛——目标是让听众享受迈克尔、蒂姆和莫分享他们的想法和经验，并希望能从中获得一些可以在第二天的工作中尝试的东西。
 
-[最新一集](https://podcasts.apple.com/us/podcast/119-what-grinds-our-gears-mas-2019/id955228473?i=1000444571698)：（45分钟）你有没有想过，喝一两杯酒，拿起麦克风，在公共论坛上发表你的抱怨，会是个好主意？好吧，我们这样做了！这一集的录制是在拉斯维加斯的营销分析峰会（MAS）上，在现场观众面前进行的（没有笑声录音！没有 canned applause！）。莫、迈克尔和蒂姆使用了一个“什么让我们恼火？”的应用程序来讨论分析师面临的一系列挑战和挫折。他们（当然是莫和蒂姆）在其中几个问题上存在分歧，但他们也偶尔提出了一些应对挑战的方法。
+[最新一集](https://podcasts.apple.com/us/podcast/119-what-grinds-our-gears-mas-2019/id955228473?i=1000444571698)：（45 分钟）你有没有想过，喝一两杯酒，拿起麦克风，在公共论坛上发表你的抱怨，会是个好主意？好吧，我们这样做了！这一集的录制是在拉斯维加斯的营销分析峰会（MAS）上，在现场观众面前进行的（没有笑声录音！没有 canned applause！）。莫、迈克尔和蒂姆使用了一个“什么让我们恼火？”的应用程序来讨论分析师面临的一系列挑战和挫折。他们（当然是莫和蒂姆）在其中几个问题上存在分歧，但他们也偶尔提出了一些应对挑战的方法。
 
-**#10.** [工业中的人工智能](http://techemergence.libsyn.com/) 由丹尼尔·法吉拉（Daniel Faggella）主办 | 99集，2017 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/artificial-intelligence-in-industry-with-daniel-faggella/id670771965)
+**#10.** [工业中的人工智能](http://techemergence.libsyn.com/) 由丹尼尔·法吉拉（Daniel Faggella）主办 | 99 集，2017 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/artificial-intelligence-in-industry-with-daniel-faggella/id670771965)
 
 通过与药品、银行、零售和国防等领域的顶尖人工智能和机器学习专家及研究人员的访谈，了解在企业中人工智能的可能性及其应用现状。发现趋势，了解当前有效的做法，并学习如何在人工智能变革的时代适应和蓬勃发展。
 
-[最新一期](https://podcasts.apple.com/us/podcast/whats-difference-between-business-intelligence-artificial/id670771965?i=1000445320648)：（21分钟）当我们调查观众感兴趣的内容时，最常选择的答案是“商业智能”。作为后续，我们询问他们商业智能对他们的意义，他们的回答归结为了解企业已经收集的数据。这种广泛的定义触及了商业智能与人工智能之间区别的核心。界限开始变得模糊。我们本周的嘉宾是Qlik的高级总监Elif Tutuk。Tutuk谈论了商业智能如何演变，以及在许多商业智能功能转变为人工智能的背景下，我们现在如何定义它。Tutuk讨论了人工智能如何融入商业智能，以及这可能为企业带来什么。
+[最新一期](https://podcasts.apple.com/us/podcast/whats-difference-between-business-intelligence-artificial/id670771965?i=1000445320648)：（21 分钟）当我们调查观众感兴趣的内容时，最常选择的答案是“商业智能”。作为后续，我们询问他们商业智能对他们的意义，他们的回答归结为了解企业已经收集的数据。这种广泛的定义触及了商业智能与人工智能之间区别的核心。界限开始变得模糊。我们本周的嘉宾是 Qlik 的高级总监 Elif Tutuk。Tutuk 谈论了商业智能如何演变，以及在许多商业智能功能转变为人工智能的背景下，我们现在如何定义它。Tutuk 讨论了人工智能如何融入商业智能，以及这可能为企业带来什么。
 
 ### **新的与引人注目的提及**
 
-+   [WiDS（女性数据科学家）](https://www.widsconference.org/) 由斯坦福大学的玛戈特·盖里岑（Margot Gerritsen）教授主办 | 10集，2018 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/women-in-data-science/id1440076586)
++   [WiDS（女性数据科学家）](https://www.widsconference.org/) 由斯坦福大学的玛戈特·盖里岑（Margot Gerritsen）教授主办 | 10 集，2018 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/women-in-data-science/id1440076586)
 
 数据科学正在改善从医疗保健到地震学、到人权等多个领域的结果。听听数据科学领域的女性领导者分享她们的建议、职业亮点和沿途的经验教训。
 
-[最新一期](https://podcasts.apple.com/us/podcast/meltem-ballan-mission-impossible-fingerprint-recognition/id1440076586?i=1000444715464)：（33分钟）Meltem Ballan，一位在通用汽车从事联网汽车工作的数据科学家，解释了数据科学如何改变汽车行业。
+[最新一期](https://podcasts.apple.com/us/podcast/meltem-ballan-mission-impossible-fingerprint-recognition/id1440076586?i=1000444715464)：（33 分钟）Meltem Ballan，一位在通用汽车从事联网汽车工作的数据科学家，解释了数据科学如何改变汽车行业。
 
-+   [数据科学沙龙播客](https://data-science-salon-podcast.simplecast.com/) 由Formulatedby主办 | 1集，2019，[iTunes](https://podcasts.apple.com/us/podcast/data-science-salon-podcast/id1472749960)
++   [数据科学沙龙播客](https://data-science-salon-podcast.simplecast.com/) 由 Formulatedby 主办 | 1 集，2019，[iTunes](https://podcasts.apple.com/us/podcast/data-science-salon-podcast/id1472749960)
 
 采访数据科学、机器学习和人工智能领域的顶尖和新兴人物，讨论推动该领域发展的趋势和业务用例。
 
@@ -122,9 +122,9 @@
 
 +   [Talk Python To Me](https://talkpython.fm/) 由 Michael Kennedy 主持 | 222 集，2015 – 2019，[iTunes](https://podcasts.apple.com/us/podcast/talk-python-to-me-python-conversations-for-passionate/id979020229)
 
-我们涵盖广泛的Python及相关话题，我们的目标是带你了解你所熟知和喜爱的Python包和框架背后的故事。
+我们涵盖广泛的 Python 及相关话题，我们的目标是带你了解你所熟知和喜爱的 Python 包和框架背后的故事。
 
-[最新一期](https://podcasts.apple.com/us/podcast/221-empowering-developers-by-embedding-python/id979020229?i=1000444806390)：（67 min.）我们如何让孩子们对编程感兴趣？通过嵌入式设备使编程变得具体可感知。你知道吗，在孩子们学习了BBC micro:bit后，90%的孩子认为编程适合每个人，而86%的人表示这让计算机科学的话题更有趣？
+[最新一期](https://podcasts.apple.com/us/podcast/221-empowering-developers-by-embedding-python/id979020229?i=1000444806390)：（67 min.）我们如何让孩子们对编程感兴趣？通过嵌入式设备使编程变得具体可感知。你知道吗，在孩子们学习了 BBC micro:bit 后，90%的孩子认为编程适合每个人，而 86%的人表示这让计算机科学的话题更有趣？
 
 **相关内容：**
 
@@ -132,15 +132,15 @@
 
 +   [新的 KDnuggets 播客页面](https://www.kdnuggets.com/2016/01/new-kdnuggets-podcasts-page.html)
 
-+   [最佳大数据、数据科学、数据挖掘和机器学习播客](https://www.kdnuggets.com/2015/06/best-big-data-data-science-data-mining-machine-learning-podcasts.html)（2015年）
++   [最佳大数据、数据科学、数据挖掘和机器学习播客](https://www.kdnuggets.com/2015/06/best-big-data-data-science-data-mining-machine-learning-podcasts.html)（2015 年）
 
 ### 更多相关主题
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [数据科学统计学习的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

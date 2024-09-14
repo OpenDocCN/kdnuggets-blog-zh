@@ -1,22 +1,22 @@
 # 你真正需要的唯一 Jupyter Notebook 扩展
 
-> 原文：[https://www.kdnuggets.com/2021/06/only-jupyter-notebooks-extension-truly-need.html](https://www.kdnuggets.com/2021/06/only-jupyter-notebooks-extension-truly-need.html)
+> 原文：[`www.kdnuggets.com/2021/06/only-jupyter-notebooks-extension-truly-need.html`](https://www.kdnuggets.com/2021/06/only-jupyter-notebooks-extension-truly-need.html)
 
-[评论](#comments)
+评论
 
 **由 [Olga Chernytska](https://www.linkedin.com/in/olga-chernytska-122700102/)，高级机器学习工程师**
 
-![图片](../Images/3d4636049f6e255bc4a196c721339ce9.png)
+![图片](img/3d4636049f6e255bc4a196c721339ce9.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 这意味着现在你只需：在 .py 文件中修正函数，保存更改，返回笔记本并运行带有预处理的单元格。笔记本中的所有函数导入都会重新加载到最新版本，单元格中的代码会被执行 —— 你可以看到修正后的函数如何工作。
 
-![图片](../Images/a33c831c8f6fb7dfd0769dc6cf252931.png)
+![图片](img/a33c831c8f6fb7dfd0769dc6cf252931.png)
 
 ### 使用
 
@@ -65,11 +65,11 @@
 
 **相关：**
 
-+   [数据科学家在 Python 中常犯的 15 个错误（以及如何修复它们）](/2021/03/15-common-mistakes-python.html)
++   数据科学家在 Python 中常犯的 15 个错误（以及如何修复它们）
 
-+   [停止从命令行运行 Jupyter 笔记本](/2020/10/stop-running-jupyter-notebooks-command-line.html)
++   停止从命令行运行 Jupyter 笔记本
 
-+   [JupyterLab 3 到来了：立即升级的关键原因](/2021/01/jupyterlab-3-here-reasons-upgrade.html)
++   JupyterLab 3 到来了：立即升级的关键原因
 
 ### 更多相关话题
 

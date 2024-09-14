@@ -1,8 +1,8 @@
 # ChatGPT 可以作为教育资源被信任吗？
 
-> 原文：[https://www.kdnuggets.com/2023/05/chatgpt-trusted-educational-resource.html](https://www.kdnuggets.com/2023/05/chatgpt-trusted-educational-resource.html)
+> 原文：[`www.kdnuggets.com/2023/05/chatgpt-trusted-educational-resource.html`](https://www.kdnuggets.com/2023/05/chatgpt-trusted-educational-resource.html)
 
-![ChatGPT 可以作为教育资源被信任吗？](../Images/f07c20cdb48f53eccb24361cff2076ad.png)
+![ChatGPT 可以作为教育资源被信任吗？](img/f07c20cdb48f53eccb24361cff2076ad.png)
 
 图片来自 Bing 图像生成器
 
@@ -12,17 +12,17 @@ ChatGPT 已经风靡全球，人们越来越好奇如何利用它提高生产力
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
 # ChatGPT 并不总是准确的
 
-ChatGPT 提供快速的回答，但这些回答不一定可靠。例如，它可能会[提供完全或部分错误的信息](/2023/04/chatgpt-works-model-behind-bot.html)，这些信息看起来非常可信。人工智能研究领域的人将这个问题称为“幻觉”。
+ChatGPT 提供快速的回答，但这些回答不一定可靠。例如，它可能会提供完全或部分错误的信息，这些信息看起来非常可信。人工智能研究领域的人将这个问题称为“幻觉”。
 
 任何曾经教过课或当过学生的人几乎肯定遇到过那些自信地做出严重错误陈述的人，并将其呈现为绝对的事实。ChatGPT 在产生幻觉时也会这样，这对任何使用该工具学习或完成教育项目的人尤其有问题。
 
@@ -30,13 +30,13 @@ ChatGPT 提供快速的回答，但这些回答不一定可靠。例如，它可
 
 让人们最惊讶的是 ChatGPT 给出回复的速度。当学生在写论文时感到压力，并觉得遇到了思维障碍时，很容易理解他们如何可能会感到诱惑，不仅仅是把 ChatGPT 当作资源，而是直接从中复制内容。
 
-这使得大学和高中教育工作者考虑[重新定义剽窃以包括](/2023/03/downsides-ai-advancement.html)禁止复制人工智能提供的材料。怀疑剽窃的老师无法确定学生如何获取那些可能让他们从 ChatGPT 复制的内容。
+这使得大学和高中教育工作者考虑重新定义剽窃以包括禁止复制人工智能提供的材料。怀疑剽窃的老师无法确定学生如何获取那些可能让他们从 ChatGPT 复制的内容。
 
 这是因为没人能询问 ChatGPT 如何生成特定的回答。人们还发现[该工具经常生成虚假的引用](https://blogs.library.duke.edu/blog/2023/03/09/chatgpt-and-fake-citations/)，当用户询问其资源时。
 
 # ChatGPT 延续了有害的刻板印象
 
-许多人在被问及是什么激励他们从事特定职业时，会提到他们最喜欢的老师。早期获得启发非常重要，尤其是因为许多职业中仍存在性别不平衡。幸运的是，这种情况正在改善。在俄罗斯数学学校——该学校在北美服务50,000名学生——[78% 的教师和 48%](https://www.mathschool.com/blog/parent-resources/when-it-comes-to-girls-and-stem-learning-environment-matters) 的学生是女性。
+许多人在被问及是什么激励他们从事特定职业时，会提到他们最喜欢的老师。早期获得启发非常重要，尤其是因为许多职业中仍存在性别不平衡。幸运的是，这种情况正在改善。在俄罗斯数学学校——该学校在北美服务 50,000 名学生——[78% 的教师和 48%](https://www.mathschool.com/blog/parent-resources/when-it-comes-to-girls-and-stem-learning-environment-matters) 的学生是女性。
 
 然而，有证据表明，即使人们使用 ChatGPT 的原因与他们的职业或教育无关，该工具仍可能向他们传播有害的刻板印象。有一位用户让 ChatGPT 讲述一个关于男孩和女孩选择职业的故事。故事中的女孩怀疑自己能否“处理工程课程中的所有技术细节和数字”，而男孩则喜欢与机器和小玩意儿打交道。
 

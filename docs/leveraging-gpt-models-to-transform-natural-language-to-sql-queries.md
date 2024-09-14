@@ -1,32 +1,32 @@
-# 利用GPT模型将自然语言转化为SQL查询
+# 利用 GPT 模型将自然语言转化为 SQL 查询
 
-> 原文：[https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)
+> 原文：[`www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries`](https://www.kdnuggets.com/leveraging-gpt-models-to-transform-natural-language-to-sql-queries)
 
-![利用GPT模型将自然语言转化为SQL查询](../Images/3d2bce97a2479138e14bd6004194e384.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/3d2bce97a2479138e14bd6004194e384.png)
 
 图片来源：作者。基础图片来自 [pch-vector](https://www.freepik.com/author/pch-vector)。
 
-自然语言处理——或称NLP——已经发生了巨大的发展，而GPT模型正处于这场变革的最前沿。
+自然语言处理——或称 NLP——已经发生了巨大的发展，而 GPT 模型正处于这场变革的最前沿。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 目前，大型语言模型可以用于各种应用场景。
 
-为了避免不必要的任务并提高我的工作效率，我开始探索训练GPT为我生成SQL查询的可能性。
+为了避免不必要的任务并提高我的工作效率，我开始探索训练 GPT 为我生成 SQL 查询的可能性。
 
 就在这时，一个绝妙的主意出现了：
 
-*利用GPT模型的力量来解读自然语言并将其转化为结构化的SQL查询。*
+*利用 GPT 模型的力量来解读自然语言并将其转化为结构化的 SQL 查询。*
 
 *这可能吗？*
 
@@ -50,11 +50,11 @@
 
 *那我们就来举个例子吧！*
 
-*在本教程中，我将使用一个名为chatgpt_call()的预定义函数来提示GPT模型。如果你想进一步了解，可以查看* [*以下文章。*](https://medium.com/forcodesake/chatgpt-api-calls-introduction-chatgpt3-chatgpt4-ai-d19b79c49cc5)
+*在本教程中，我将使用一个名为 chatgpt_call()的预定义函数来提示 GPT 模型。如果你想进一步了解，可以查看* [*以下文章。*](https://medium.com/forcodesake/chatgpt-api-calls-introduction-chatgpt3-chatgpt4-ai-d19b79c49cc5)
 
-想象一下，我希望ChatGPT描述一下“乐观主义”这个术语。
+想象一下，我希望 ChatGPT 描述一下“乐观主义”这个术语。
 
-如果我只是简单地让GPT描述它，我会得到一个严肃而枯燥的描述。
+如果我只是简单地让 GPT 描述它，我会得到一个严肃而枯燥的描述。
 
 ```py
 ## Code Block
@@ -64,9 +64,9 @@ print(response)
 
 附带相应的输出：
 
-![利用GPT模型将自然语言转化为SQL查询](../Images/b5f888f6a77e5622cd7e80e04cf1b1a5.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/b5f888f6a77e5622cd7e80e04cf1b1a5.png)
 
-我的Jupyter Notebook截图。提示GPT。
+我的 Jupyter Notebook 截图。提示 GPT。
 
 不过，假设我希望得到一些更具诗意的东西。我可以在提示中添加更多细节，说明我想要一个诗意的定义。
 
@@ -78,7 +78,7 @@ print(response)
 
 但第二个输出看起来像一首诗，与我期望的输出无关。
 
-![利用 GPT 模型将自然语言转化为 SQL 查询](../Images/ac8f33d5b2042cb52501ff60584b2830.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/ac8f33d5b2042cb52501ff60584b2830.png)
 
 我的 Jupyter Notebook 截图。提示 GPT。
 
@@ -107,7 +107,7 @@ print(response)</user></system></user>
 
 而输出正是我所寻找的。
 
-![利用 GPT 模型将自然语言转化为 SQL 查询](../Images/29672dbc07d91ff7f5f66c798b19b211.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/29672dbc07d91ff7f5f66c798b19b211.png)
 
 我的 Jupyter Notebook 截图。提示 GPT。
 
@@ -134,7 +134,7 @@ print(response)
 
 不过，正如你已经知道的，**我们给模型提供的上下文越多，它生成的输出就会越好。**
 
-![利用 GPT 模型将自然语言转化为 SQL 查询](../Images/149e91207d54213c671bf38b7abf2e63.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/149e91207d54213c671bf38b7abf2e63.png)
 
 我的 Jupyter Notebook 截图。提示 GPT。
 
@@ -142,7 +142,7 @@ print(response)
 
 所以让我们假设我正在处理两个主要表格：PRODUCTS 和 ORDERS
 
-![利用 GPT 模型将自然语言转化为 SQL 查询](../Images/9ce66c11c34da2333af88ae08dc748cf.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/9ce66c11c34da2333af88ae08dc748cf.png)
 
 作者提供的图像。教程中将使用的表格。
 
@@ -169,7 +169,7 @@ print(response)
 
 *输出看起来如下！*
 
-![利用 GPT 模型将自然语言转化为 SQL 查询](../Images/2f03b4450ce6961b19f75de01e2a25bb.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/2f03b4450ce6961b19f75de01e2a25bb.png)
 
 我的 Jupyter Notebook 截图。提示 GPT。
 
@@ -241,7 +241,7 @@ print(response)
 
 以下是输出：
 
-![利用 GPT 模型将自然语言转换为 SQL 查询](../Images/95b34ebe16d55f97da0ebee9136b3f35.png)
+![利用 GPT 模型将自然语言转换为 SQL 查询](img/95b34ebe16d55f97da0ebee9136b3f35.png)
 
 我在 Jupyter Notebook 的截图。提示 GPT。
 
@@ -263,7 +263,7 @@ LIMIT 1;
 
 它工作得非常好！
 
-![利用 GPT 模型将自然语言转换为 SQL 查询](../Images/3c146136efdf18097b03452a54688139.png)
+![利用 GPT 模型将自然语言转换为 SQL 查询](img/3c146136efdf18097b03452a54688139.png)
 
 我在 Jupyter Notebook 的截图。提示 GPT。
 
@@ -340,7 +340,7 @@ print(response)
 
 正如你在下面的输出中观察到的那样，它有效！
 
-![利用 GPT 模型将自然语言转换为 SQL 查询](../Images/c6df74d0ef912029cb5660c768da2a5f.png)
+![利用 GPT 模型将自然语言转换为 SQL 查询](img/c6df74d0ef912029cb5660c768da2a5f.png)
 
 我在 Jupyter Notebook 的截图。提示 GPT。
 
@@ -371,7 +371,7 @@ print(response)
 
 然而，我们收到的回答远非正确。
 
-![利用 GPT 模型将自然语言转换为 SQL 查询](../Images/46ebbf792e1f3475fa4070e247639425.png)
+![利用 GPT 模型将自然语言转换为 SQL 查询](img/46ebbf792e1f3475fa4070e247639425.png)
 
 我在 Jupyter Notebook 的截图。提示 GPT。
 
@@ -435,7 +435,7 @@ response = chatgpt_call(prompt)
 print(response)
 ```
 
-![利用GPT模型将自然语言转化为SQL查询](../Images/d6158b05fc630dd555cb19d23a96b31b.png)
+![利用 GPT 模型将自然语言转化为 SQL 查询](img/d6158b05fc630dd555cb19d23a96b31b.png)
 
 我的 Jupyter Notebook 截图。提示 GPT。
 
@@ -453,7 +453,7 @@ print(response)
 
 **从未格式化的查询到完美定制的 SQL 查询，GPT 模型将个性化的魔力带到我们的指尖！**
 
-[你可以直接在我的GitHub上查看我的代码。](https://github.com/rfeers/How-to/blob/main/LLM%20%26%20SQL/Train_LLM_to_improve_SQL_queries.ipynb)
+[你可以直接在我的 GitHub 上查看我的代码。](https://github.com/rfeers/How-to/blob/main/LLM%20%26%20SQL/Train_LLM_to_improve_SQL_queries.ipynb)
 
 ```py
 ## SQL TABLES
@@ -507,11 +507,11 @@ VALUES
 
 ### 更多相关内容
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
-+   [了解Gorilla：UC Berkeley和微软的API增强LLM……](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
++   [了解 Gorilla：UC Berkeley 和微软的 API 增强 LLM……](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
 
-+   [25本免费书籍掌握SQL、Python、数据科学、机器学习……](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍掌握 SQL、Python、数据科学、机器学习……](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
 +   [数据库内分析：利用 SQL 的分析函数](https://www.kdnuggets.com/2023/07/indatabase-analytics-leveraging-sql-analytic-functions.html)
 

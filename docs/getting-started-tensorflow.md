@@ -1,6 +1,6 @@
 # TensorFlow 入门：机器学习教程
 
-> 原文：[https://www.kdnuggets.com/2017/12/getting-started-tensorflow.html/2](https://www.kdnuggets.com/2017/12/getting-started-tensorflow.html/2)
+> 原文：[`www.kdnuggets.com/2017/12/getting-started-tensorflow.html/2`](https://www.kdnuggets.com/2017/12/getting-started-tensorflow.html/2)
 
 **数据转换**
 
@@ -123,7 +123,7 @@ Reduce bool any with passed axis=1:  [ True  True  True]
 
 分割实际上是将元素按重复索引分组，例如，在我们的例子中，我们对张量 `tens1` 应用分段 ids `[0, 0, 1, 2, 2]`，这意味着第一个和第二个数组将按照分割操作（在我们的例子中是求和）进行变换，并得到一个新的数组，形式如 `(2, 8, 1, 0) = (2+0, 5+3, 3-2, -5+5)`。张量 `tens1` 中的第三个元素没有被分组，因为它没有重复的索引，最后两个数组以与第一个组相同的方式相加。除了求和，TensorFlow 还支持 [product](https://www.tensorflow.org/versions/master/api_docs/python/tf/segment_prod)、[mean](https://www.tensorflow.org/versions/master/api_docs/python/tf/segment_mean)、[max](https://www.tensorflow.org/versions/master/api_docs/python/tf/segment_max) 和 [min](https://www.tensorflow.org/versions/master/api_docs/python/tf/segment_min)。
 
-![](../Images/8626a778161812ae5f56cd7be77da7ed.png)
+![](img/8626a778161812ae5f56cd7be77da7ed.png)
 
 ```py
 import tensorflow as tf
@@ -165,9 +165,9 @@ Segmentation sum tens2: [3 3 9]
 
 +   [setdiff](https://www.tensorflow.org/versions/master/api_docs/python/tf/setdiff1d)，它计算两个数字或字符串列表之间的差异，
 
-+   [where](https://www.tensorflow.org/api_docs/python/tf/where)函数，它将根据传递的条件从两个传递的元素x或y中返回元素，或者
++   [where](https://www.tensorflow.org/api_docs/python/tf/where)函数，它将根据传递的条件从两个传递的元素 x 或 y 中返回元素，或者
 
-+   [unique](https://www.tensorflow.org/versions/master/api_docs/python/tf/unique)函数，它将返回1-D张量中的唯一元素。
++   [unique](https://www.tensorflow.org/versions/master/api_docs/python/tf/unique)函数，它将返回 1-D 张量中的唯一元素。
 
 我们下面演示了几个执行示例：
 
@@ -219,13 +219,13 @@ Setdiff_idx =  [2 3 4]
 
 ```
 
-**使用TensorFlow进行机器学习**
+**使用 TensorFlow 进行机器学习**
 
-在这一部分，我们将展示一个使用TensorFlow的机器学习用例。第一个示例将是一个使用[kNN](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)方法进行数据分类的算法，第二个示例将使用[线性回归算法](https://en.wikipedia.org/wiki/Linear_regression)。
+在这一部分，我们将展示一个使用 TensorFlow 的机器学习用例。第一个示例将是一个使用[kNN](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm)方法进行数据分类的算法，第二个示例将使用[线性回归算法](https://en.wikipedia.org/wiki/Linear_regression)。
 
 **kNN**
 
-第一个算法是k-最近邻（kNN）。这是一个监督学习算法，它使用距离度量（例如欧几里得距离）来将数据分类为训练数据。它是最简单的算法之一，但仍然非常强大，适合数据分类。该算法的优点：
+第一个算法是 k-最近邻（kNN）。这是一个监督学习算法，它使用距离度量（例如欧几里得距离）来将数据分类为训练数据。它是最简单的算法之一，但仍然非常强大，适合数据分类。该算法的优点：
 
 +   当训练模型足够大时，准确率很高，并且
 
@@ -237,11 +237,11 @@ Setdiff_idx =  [2 3 4]
 
 +   需要大量内存，其中新的分类数据需要添加到所有初始训练实例中。
 
-![](../Images/61b097d4eeb897b627e93adfa030aa28.png)
+![](img/61b097d4eeb897b627e93adfa030aa28.png)
 
 在这个代码示例中，我们将使用的距离是欧几里得距离，它定义了两个点之间的距离，如下所示：
 
-![](../Images/6379458d1999e254d668ef45cbb393d3.png)
+![](img/6379458d1999e254d668ef45cbb393d3.png)
 
 在这个公式中，`n`是空间的维度数量，`x`是训练数据的向量，`y`是我们想要分类的新数据点。
 
@@ -298,9 +298,9 @@ print "Missed: {} -- Total: {}".format(missed, len(test_dataset))
 
 ```
 
-我们在上述示例中使用的数据集可以在[Kaggle数据集](https://www.kaggle.com/datasets)部分找到。我们使用了[这个](https://www.kaggle.com/dalpozz/creditcardfraud)数据集，它包含了欧洲持卡人的信用卡交易数据。我们使用的数据没有进行任何清理或过滤，按照Kaggle对这个数据集的描述，它是高度不平衡的。数据集包含31个变量：Time、V1、…、V28、Amount和Class。在这个代码示例中，我们仅使用V1、…、V28和Class。Class用1标记欺诈交易，用0标记非欺诈交易。
+我们在上述示例中使用的数据集可以在[Kaggle 数据集](https://www.kaggle.com/datasets)部分找到。我们使用了[这个](https://www.kaggle.com/dalpozz/creditcardfraud)数据集，它包含了欧洲持卡人的信用卡交易数据。我们使用的数据没有进行任何清理或过滤，按照 Kaggle 对这个数据集的描述，它是高度不平衡的。数据集包含 31 个变量：Time、V1、…、V28、Amount 和 Class。在这个代码示例中，我们仅使用 V1、…、V28 和 Class。Class 用 1 标记欺诈交易，用 0 标记非欺诈交易。
 
-代码示例主要包含我们在之前部分描述的内容，唯一的例外是我们引入了一个用于加载数据集的函数。函数`load_data(filepath)`将以CSV文件作为参数，并返回一个包含数据和标签的元组，这些数据和标签在CSV中定义。
+代码示例主要包含我们在之前部分描述的内容，唯一的例外是我们引入了一个用于加载数据集的函数。函数`load_data(filepath)`将以 CSV 文件作为参数，并返回一个包含数据和标签的元组，这些数据和标签在 CSV 中定义。
 
 在那个函数下方，我们定义了测试和训练数据的占位符。训练数据用于预测模型，以解决需要分类的输入数据的标签。在我们的例子中，kNN 使用欧几里得距离来获取最近的标签。
 
@@ -409,11 +409,11 @@ b = [ 4.01742554]
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

@@ -1,22 +1,22 @@
-# 每位初学者数据科学家应掌握的6种预测模型
+# 每位初学者数据科学家应掌握的 6 种预测模型
 
-> 原文：[https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
+> 原文：[`www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html`](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 **作者 [Ivo Bernardo](https://www.linkedin.com/in/ivobernardo/)，数据科学家**
 
-![](../Images/f2fc2bdcb0837b8563fd6157e54b6565.png)
+![](img/f2fc2bdcb0837b8563fd6157e54b6565.png)
 
 图片由 [@barnimages](https://unsplash.com/@barnimages) 提供 — unsplash.com
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -24,11 +24,11 @@
 
 即使你使用更高级的模型解决问题，学习基础知识也会让你在大多数讨论中占得先机。特别是，了解更简单模型的优缺点将帮助你引导数据科学项目取得成功。事实是：高级模型能够做两件事——**放大或修正它们所基于的简单模型的一些缺陷**。
 
-话虽如此，**让我们跳入数据科学的世界，了解你在成为数据科学家时应该学习和掌握的6种模型**。
+话虽如此，**让我们跳入数据科学的世界，了解你在成为数据科学家时应该学习和掌握的 6 种模型**。
 
 ## 线性回归
 
-这是最古老的模型之一（例如，[弗朗西斯·高尔顿在19世纪使用了“回归”一词](https://en.wikipedia.org/wiki/Regression_analysis%C2%B4)），至今仍然是用数据表示线性关系的最有效方法之一。
+这是最古老的模型之一（例如，[弗朗西斯·高尔顿在 19 世纪使用了“回归”一词](https://en.wikipedia.org/wiki/Regression_analysis%C2%B4)），至今仍然是用数据表示线性关系的最有效方法之一。
 
 学习线性回归是全球经济计量学课程的基本内容——学习这个线性模型将使你对解决回归问题（机器学习中最常见的问题之一）有一个良好的直觉，并且了解如何利用数学构建简单的线来预测现象。
 
@@ -84,7 +84,7 @@
 
 第一个非线性算法应该学习的是决策树。决策树是一个基于 if-else 规则的相当简单且可解释的算法，它将帮助你深入了解非线性算法及其优缺点。
 
-决策树是所有树模型的基石——通过学习它们，你也将准备好学习其他技术，如XGBoost或LightGBM（更多信息见下文）。
+决策树是所有树模型的基石——通过学习它们，你也将准备好学习其他技术，如 XGBoost 或 LightGBM（更多信息见下文）。
 
 有趣的是，决策树既适用于回归问题，也适用于分类问题，两者之间的差异很小——选择影响结果的最佳变量的原理大致相同，你只是切换用于评估的标准——在这种情况下是误差度量。
 
@@ -92,9 +92,9 @@
 
 关于决策树的一些资源：
 
-+   [LucidChart决策树解释](https://www.lucidchart.com/pages/decision-tree)
++   [LucidChart 决策树解释](https://www.lucidchart.com/pages/decision-tree)
 
-+   [Sklearn的决策树解释](https://scikit-learn.org/stable/modules/tree.html)
++   [Sklearn 的决策树解释](https://scikit-learn.org/stable/modules/tree.html)
 
 +   [我关于分类决策树的博客文章](https://towardsdatascience.com/6-things-you-should-learn-to-kickstart-your-natural-language-processing-skills-4e10a1d3d2a?sk=a4231696321577dfcf563f532a69d542)
 
@@ -110,25 +110,25 @@
 
 学习随机森林算法的一些资源：
 
-+   [Tony Yiu关于随机森林的Medium文章](https://towardsdatascience.com/understanding-random-forest-58381e0602d2)
++   [Tony Yiu 关于随机森林的 Medium 文章](https://towardsdatascience.com/understanding-random-forest-58381e0602d2)
 
-+   [Sklearn的随机森林分类器实现](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
++   [Sklearn 的随机森林分类器实现](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
 
-+   [R For Data Science Udemy课程——基于树的模型部分](https://www.udemy.com/course/r-for-data-science-first-step-data-scientist/?couponCode=MEDIUMREADERS)
++   [R For Data Science Udemy 课程——基于树的模型部分](https://www.udemy.com/course/r-for-data-science-first-step-data-scientist/?couponCode=MEDIUMREADERS)
 
 ## XGBoost/LightGBM
 
-基于决策树的其他算法，如XGBoost或LightGBM，使其更加稳定。这些模型是提升算法，它们通过之前弱学习者所犯的错误来找到更稳健且更具泛化能力的模式。
+基于决策树的其他算法，如 XGBoost 或 LightGBM，使其更加稳定。这些模型是提升算法，它们通过之前弱学习者所犯的错误来找到更稳健且更具泛化能力的模式。
 
-关于机器学习模型的这一思路在[Michael Kearns关于弱学习者和假设检验的论文](https://www.cis.upenn.edu/~mkearns/papers/boostnote.pdf)后获得了关注，展示了提升模型可能是解决模型偏差/方差权衡的一个优秀方案。此外，这些模型也是[Kaggle竞赛中的一些热门选择。](https://towardsdatascience.com/xgboost-lightgbm-and-other-kaggle-competition-favorites-6212e8b0e835)
+关于机器学习模型的这一思路在[Michael Kearns 关于弱学习者和假设检验的论文](https://www.cis.upenn.edu/~mkearns/papers/boostnote.pdf)后获得了关注，展示了提升模型可能是解决模型偏差/方差权衡的一个优秀方案。此外，这些模型也是[Kaggle 竞赛中的一些热门选择。](https://towardsdatascience.com/xgboost-lightgbm-and-other-kaggle-competition-favorites-6212e8b0e835)
 
-XGBoost和LightGBM是两种著名的Boosting算法实现。学习它们的一些资源：
+XGBoost 和 LightGBM 是两种著名的 Boosting 算法实现。学习它们的一些资源：
 
-+   [微软的Lightgbm GitHub页面](https://github.com/microsoft/LightGBM)
++   [微软的 Lightgbm GitHub 页面](https://github.com/microsoft/LightGBM)
 
-+   [Pranjal Khandelwal](https://www.analyticsvidhya.com/blog/author/pranjalk7/)的关于XGBoost与LightGBM的文章
++   [Pranjal Khandelwal](https://www.analyticsvidhya.com/blog/author/pranjalk7/)的关于 XGBoost 与 LightGBM 的文章
 
-+   [Vishal Morde的关于XGBoost的Medium帖子](https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d)
++   [Vishal Morde 的关于 XGBoost 的 Medium 帖子](https://towardsdatascience.com/https-medium-com-vishalmorde-xgboost-algorithm-long-she-may-rein-edd9f99be63d)
 
 ## 人工神经网络
 
@@ -140,11 +140,11 @@ XGBoost和LightGBM是两种著名的Boosting算法实现。学习它们的一些
 
 学习它们的一些额外资源：
 
-+   [IBM关于“神经网络是什么”的文章](https://www.ibm.com/cloud/learn/neural-networks)
++   [IBM 关于“神经网络是什么”的文章](https://www.ibm.com/cloud/learn/neural-networks)
 
 +   [Keras（神经网络实现和抽象）文档](https://keras.io/)
 
-+   [Sanchit Tanwar关于构建第一个神经网络的文章](https://towardsdatascience.com/building-our-first-neural-network-in-keras-bdc8abbc17f5)
++   [Sanchit Tanwar 关于构建第一个神经网络的文章](https://towardsdatascience.com/building-our-first-neural-network-in-keras-bdc8abbc17f5)
 
 就这样！这些模型应该能为你在数据科学和机器学习方面提供一个良好的开端。通过学习它们，你将为学习更高级的模型做好准备，并且轻松掌握这些模型背后的数学原理。
 
@@ -162,7 +162,7 @@ XGBoost和LightGBM是两种著名的Boosting算法实现。学习它们的一些
 
 +   [每个数据科学家都应该知道的三种 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [KDnuggets™ 新闻 22:n01，1月5日：3 个跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01，1 月 5 日：3 个跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)
 
 +   [成为优秀数据科学家所需的 5 个关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 

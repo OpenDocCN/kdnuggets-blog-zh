@@ -1,8 +1,8 @@
 # 使用 Go 编程进行数据科学入门
 
-> 原文：[https://www.kdnuggets.com/getting-started-with-go-programing-for-data-science](https://www.kdnuggets.com/getting-started-with-go-programing-for-data-science)
+> 原文：[`www.kdnuggets.com/getting-started-with-go-programing-for-data-science`](https://www.kdnuggets.com/getting-started-with-go-programing-for-data-science)
 
-![开始使用 Go 编程进行数据科学](../Images/18ac8c215b3607dd99bfe7e421914eb2.png)
+![开始使用 Go 编程进行数据科学](img/18ac8c215b3607dd99bfe7e421914eb2.png)
 
 图片由作者提供
 
@@ -14,7 +14,7 @@ Go 编程语言在开发者中因其作为通用语言而迅速流行。它速�
 
 通过访问 [go.dev](https://go.dev/learn/) 下载并安装最新版本的 Go。就是这么简单。
 
-![开始使用 Go 编程进行数据科学](../Images/bf5db1c7462430a998fa9dcba949e281.png)
+![开始使用 Go 编程进行数据科学](img/bf5db1c7462430a998fa9dcba949e281.png)
 
 要检查是否成功安装，请运行以下命令：
 
@@ -67,7 +67,7 @@ Welcome to KDnuggets
 
 # 使用 Go 进行简单的数据分析
 
-在这个数据分析示例中，我们将从Kaggle下载并加载[成人人口收入](https://www.kaggle.com/datasets/uciml/adult-census-income/data)数据集。
+在这个数据分析示例中，我们将从 Kaggle 下载并加载[成人人口收入](https://www.kaggle.com/datasets/uciml/adult-census-income/data)数据集。
 
 首先，导入我们将用于分析的所有 Go 包。然后，使用 `os` 命令加载 CSV 文件。使用 `gota` 数据框包将原始数据转换为数据框。最后，我们将打印前两行。
 
@@ -304,7 +304,7 @@ $ go run simple-viz.go
 Histogram saved as age_distribution.png
 ```
 
-![开始使用 Go 进行数据科学编程](../Images/d1f5f7de57fc635d9c694dc3c3ad33f6.png)
+![开始使用 Go 进行数据科学编程](img/d1f5f7de57fc635d9c694dc3c3ad33f6.png)
 
 # 使用 Go 进行简单的模型训练
 
@@ -443,11 +443,11 @@ Go 语言中的数据科学包维护不善，也没有一个庞大的开发者�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

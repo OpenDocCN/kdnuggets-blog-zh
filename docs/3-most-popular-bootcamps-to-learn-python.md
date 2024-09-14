@@ -1,8 +1,8 @@
 # 3 个最受欢迎的 Python 学习训练营
 
-> 原文：[https://www.kdnuggets.com/3-most-popular-bootcamps-to-learn-python](https://www.kdnuggets.com/3-most-popular-bootcamps-to-learn-python)
+> 原文：[`www.kdnuggets.com/3-most-popular-bootcamps-to-learn-python`](https://www.kdnuggets.com/3-most-popular-bootcamps-to-learn-python)
 
-![Python 训练营](../Images/cc8da7bec15c64f032e7b32107b83e8d.png)
+![Python 训练营](img/cc8da7bec15c64f032e7b32107b83e8d.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -26,11 +26,11 @@
 
 链接: [从零到英雄的完整 Python 训练营](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919713738893564778912694&bids=1597309.3919713738893564778912694&bids=1597309.3919713738893564778912694&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2fcomplete-python-bootcamp%2f&)
 
-[![](../Images/730645d6a4cc81782df3d4376baf2f56.png)](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919713738893564778912694&bids=1597309.3919713738893564778912694&bids=1597309.3919713738893564778912694&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2fcomplete-python-bootcamp%2f&)![](../Images/29baaf79748612a3534111d9b923420f.png)
+![](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919713738893564778912694&bids=1597309.3919713738893564778912694&bids=1597309.3919713738893564778912694&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2fcomplete-python-bootcamp%2f&)![](img/29baaf79748612a3534111d9b923420f.png)
 
 这是针对绝对初学者的课程，适合对 Python 编程语言了解甚少的人。22 小时的 Python 学习，将从基础开始，逐步到创建自己的应用程序和游戏。这个课程应该是你学习 Python 的第一步，帮助你从基础知识开始，最终成为 Python 大师。
 
-目前已有1,931,562名学生注册（截至2024年7月14日），评分为4.6/5，本课程包括22小时的按需视频，19个编码练习，15篇文章，全天候访问权限以及完成后的证书。
+目前已有 1,931,562 名学生注册（截至 2024 年 7 月 14 日），评分为 4.6/5，本课程包括 22 小时的按需视频，19 个编码练习，15 篇文章，全天候访问权限以及完成后的证书。
 
 在本课程中，你将学习如何利用 Python 的强大功能解决任务，构建使用 Python 库的游戏和程序。学习如何将 Python 应用于工作问题或个人项目，同时创建一个可以分享的 Python 项目作品集。本课程将以实践的方式教授 Python，涵盖高级特性如集合模块和面向对象编程。
 
@@ -38,7 +38,7 @@
 
 链接: [100 天编程：完整 Python 专业训练营](https://www.udemy.com/course/100-days-of-code/?ranMID=39197&ranEAID=XUZwX0cABqY&ranSiteID=XUZwX0cABqY-hiXYFuxko1SSvJ1sayUU1g&LSNPUBID=XUZwX0cABqY&utm_source=aff-campaign&utm_medium=udemyads)
 
-[![](../Images/d0109d8962fa96c61ed2961308ac110d.png)](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919715219197173821843440&bids=1597309.3919715219197173821843440&bids=1597309.3919715219197173821843440&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2f100-days-of-code%2f&)![](../Images/85012bb91e8f5a88e359707c9c997092.png)
+![](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919715219197173821843440&bids=1597309.3919715219197173821843440&bids=1597309.3919715219197173821843440&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2f100-days-of-code%2f&)![](img/85012bb91e8f5a88e359707c9c997092.png)
 
 练习成就完美。要掌握一门编程语言，你需要通过多种方式进行测试。通过在 100 天内构建 100 个项目，学习如何掌握 Python。
 
@@ -50,7 +50,7 @@
 
 链接: [使用 Python 自动化无聊的工作](https://www.udemy.com/course/automate/?ranMID=39197&ranEAID=XUZwX0cABqY&ranSiteID=XUZwX0cABqY-sdReeuI5vJntGphitRBN3Q&utm_source=aff-campaign&LSNPUBID=XUZwX0cABqY&utm_medium=udemyads)
 
-[![](../Images/66af4de6f953b6f7d316e11eb39d8c1f.png)](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919714377191720316673633&bids=1597309.3919714377191720316673633&bids=1597309.3919714377191720316673633&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2fautomate%2f&)![](../Images/c893057fc63e78854781273621eac7c2.png)
+![](https://click.linksynergy.com/link?id=XUZwX0cABqY&offerid=1597309.3919714377191720316673633&bids=1597309.3919714377191720316673633&bids=1597309.3919714377191720316673633&type=2&murl=https%3a%2f%2fwww.udemy.com%2fcourse%2fautomate%2f&)![](img/c893057fc63e78854781273621eac7c2.png)
 
 你已经学会了 Python 的方方面面，从基础到高级。你已通过测试验证了你的技能，对自己的 Python 编程能力充满信心。但你知道 Python 还能做得更多，能让你的生活更轻松。你可以选择首先或最后学习这门课程——完全由你决定。你可能想先了解困难的方式，再找到更简单的途径。
 

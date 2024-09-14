@@ -1,22 +1,22 @@
-# 通过数据科学翻倍收入的5种方法
+# 通过数据科学翻倍收入的 5 种方法
 
-> 原文：[https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html`](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
 
-![通过数据科学翻倍收入的5种方法](../Images/2b7029d1571f16c8abfeb77408e4c797.png)
+![通过数据科学翻倍收入的 5 种方法](img/2b7029d1571f16c8abfeb77408e4c797.png)
 
 图片由 [Alexander Mils](https://unsplash.com/@alexandermils?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/income?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-传统的9到5工作并不是唯一的收入来源。目前对数据技能的需求非常高，如果你能从大量数据中提取价值，你可以在传统全职工作之外接很多高薪任务。
+传统的 9 到 5 工作并不是唯一的收入来源。目前对数据技能的需求非常高，如果你能从大量数据中提取价值，你可以在传统全职工作之外接很多高薪任务。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 从事自由职业的数据科学工作最棒的地方就是可以在家以自己的节奏工作。我可以挑选自己喜欢做的任务，拒绝那些我觉得无趣的工作。我还发现，由于需要与来自不同背景的人交流并传达我的发现，我的沟通技巧得到了显著提高。
 
-在这篇文章中，我将列出5种不同的方式，你可以利用你的数据技能来生成额外收入。我还会提供一些见解，帮助你在其他自由职业者中脱颖而出，并持续获得高薪项目。
+在这篇文章中，我将列出 5 种不同的方式，你可以利用你的数据技能来生成额外收入。我还会提供一些见解，帮助你在其他自由职业者中脱颖而出，并持续获得高薪项目。
 
 # 生成额外收入的任务
 
@@ -104,14 +104,14 @@
 
 ### 更多相关内容
 
-+   [使用ChatGPT生成被动收入的4种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
++   [使用 ChatGPT 生成被动收入的 4 种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
 
-+   [运用你的数据科学技能创造5种收入来源](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)
++   [运用你的数据科学技能创造 5 种收入来源](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)
 
-+   [我如何获得4份数据科学工作机会并在2个月内收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
++   [我如何获得 4 份数据科学工作机会并在 2 个月内收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
 
-+   [我如何在18个月内通过数据科学收入翻了三倍](https://www.kdnuggets.com/2021/10/tripled-my-income-data-science-18-months.html)
++   [我如何在 18 个月内通过数据科学收入翻了三倍](https://www.kdnuggets.com/2021/10/tripled-my-income-data-science-18-months.html)
 
-+   [3项有价值的技能使我的数据科学家收入翻倍](https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html)
++   [3 项有价值的技能使我的数据科学家收入翻倍](https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html)
 
-+   [理解贝叶斯定理将如何提升你的数据科学能力的3种方式](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
++   [理解贝叶斯定理将如何提升你的数据科学能力的 3 种方式](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)

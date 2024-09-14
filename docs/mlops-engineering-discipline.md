@@ -1,38 +1,38 @@
-# MLOps是一门工程学科：初学者概述
+# MLOps 是一门工程学科：初学者概述
 
-> 原文：[https://www.kdnuggets.com/2021/07/mlops-engineering-discipline.html](https://www.kdnuggets.com/2021/07/mlops-engineering-discipline.html)
+> 原文：[`www.kdnuggets.com/2021/07/mlops-engineering-discipline.html`](https://www.kdnuggets.com/2021/07/mlops-engineering-discipline.html)
 
-[评论](#comments)
+评论
 
-**由Angad Gupta提供，数据科学学生**
+**由 Angad Gupta 提供，数据科学学生**
 
 ### **介绍**
 
-MLOps是ML + DEV + OPS的结合。MLOps基本上通过增加自动化来提高生产可扩展性和生产模型的质量。
+MLOps 是 ML + DEV + OPS 的结合。MLOps 基本上通过增加自动化来提高生产可扩展性和生产模型的质量。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-MLOps是将长期存在的DevOps实践与新兴的机器学习领域结合起来的理念。它是创建一个自动化环境，集成模型开发、模型再训练、漂移监控、管道自动化、质量控制和模型治理于一个平台中。
+MLOps 是将长期存在的 DevOps 实践与新兴的机器学习领域结合起来的理念。它是创建一个自动化环境，集成模型开发、模型再训练、漂移监控、管道自动化、质量控制和模型治理于一个平台中。
 
-![Figure](../Images/964c90620355219a1884f7e61d1facb6.png)
+![Figure](img/964c90620355219a1884f7e61d1facb6.png)
 
 图片来源：techinnocens
 
-MLOps团队包括策划数据集和设计AI模型的数据科学家，以及以自动化方式运行这些模型和数据集的机器学习工程师。
+MLOps 团队包括策划数据集和设计 AI 模型的数据科学家，以及以自动化方式运行这些模型和数据集的机器学习工程师。
 
-### **为什么MLOps很重要**
+### **为什么 MLOps 很重要**
 
-MLOps团队将帮助你解决以下问题：
+MLOps 团队将帮助你解决以下问题：
 
 **部署问题：**
 
@@ -66,9 +66,9 @@ MLOps团队将帮助你解决以下问题：
 
 1.  模型升级审批工作流程
 
-### **MLOps的目标**
+### **MLOps 的目标**
 
-MLOps的目标包括：
+MLOps 的目标包括：
 
 +   部署和自动化
 
@@ -86,7 +86,7 @@ MLOps的目标包括：
 
 ### **主要好处**
 
-**创建可重复的工作流管道和ML模型：** 管道是机器学习工作流基础设施的骨干。管道帮助从源系统获取数据，处理和验证数据。它还跟踪所有活动，如模型版本、用于训练模型的数据集等。
+**创建可重复的工作流管道和 ML 模型：** 管道是机器学习工作流基础设施的骨干。管道帮助从源系统获取数据，处理和验证数据。它还跟踪所有活动，如模型版本、用于训练模型的数据集等。
 
 +   创建机器学习流水线以设计、部署和重现模型部署。
 
@@ -132,40 +132,40 @@ MLOps的目标包括：
 
 **监控：** 随着训练和部署模型占用越来越多的资源，通过可视化模型使用的各种资源矩阵来监控模型性能变得更加重要
 
-### **辅助MLOps的平台和工具**
+### **辅助 MLOps 的平台和工具**
 
-如上所述，以下类型的平台和工具可以辅助MLOps：
+如上所述，以下类型的平台和工具可以辅助 MLOps：
 
 +   专门用于模型跟踪、模型历史和模型注册信息的工具
 
 +   旨在进行模型版本控制以及版本控制模型的各种单独方面（代码、数据集等）的工具
 
-+   执行模型实验以及模型和ML管道部署的云服务平台
++   执行模型实验以及模型和 ML 管道部署的云服务平台
 
 ### **结论**
 
-MLOps是工程学科的一个新分支。它是由机器学习工程师、DevOps和数据科学家组成的混合团队，帮助检索数据、验证数据、部署机器学习模型，并用适当的数据集进行训练。MLOps还帮助监控模型输出，以优化模型，运行并无缝产生所需的输出。MLOps对于部署和训练模型以及跟踪模型和相关数据集非常有帮助。
+MLOps 是工程学科的一个新分支。它是由机器学习工程师、DevOps 和数据科学家组成的混合团队，帮助检索数据、验证数据、部署机器学习模型，并用适当的数据集进行训练。MLOps 还帮助监控模型输出，以优化模型，运行并无缝产生所需的输出。MLOps 对于部署和训练模型以及跟踪模型和相关数据集非常有帮助。
 
-**个人简介：[Angad Gupta](https://www.linkedin.com/in/angad-gupta-37007a37/)** 目前在AutoGrid India Pvt Ltd担任客户交付工程师，并在Bits Pilani攻读数据科学硕士学位。你可以在[LinkedIn](https://www.linkedin.com/in/angad-gupta-37007a37/)上关注他。
+**个人简介：[Angad Gupta](https://www.linkedin.com/in/angad-gupta-37007a37/)** 目前在 AutoGrid India Pvt Ltd 担任客户交付工程师，并在 Bits Pilani 攻读数据科学硕士学位。你可以在[LinkedIn](https://www.linkedin.com/in/angad-gupta-37007a37/)上关注他。
 
 **相关：**
 
-+   [释放MLOps和DataOps在数据科学中的力量](/2021/06/power-mlops-dataops-data-science.html)
++   释放 MLOps 和 DataOps 在数据科学中的力量
 
-+   [使用PyCaret + MLflow轻松实现MLOps](/05/easy-mlops-pycaret-mlflow.html)
++   使用 PyCaret + MLflow 轻松实现 MLOps
 
-+   [将Docker化的FastAPI应用部署到Google Cloud Platform](/2021/05/deploy-dockerized-fastapi-app-google-cloud-platform.html)
++   将 Docker 化的 FastAPI 应用部署到 Google Cloud Platform
 
 ### 更多相关主题
 
-+   [25门免费课程掌握数据科学、数据工程、机器学习等](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [25 门免费课程掌握数据科学、数据工程、机器学习等](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
 +   [免费课程集合：学习数据科学、数据工程等](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)
 
 +   [数据工程初学者指南](https://www.kdnuggets.com/2023/07/beginner-guide-data-engineering.html)
 
-+   [机器学习中的设计模式用于MLOps](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
++   [机器学习中的设计模式用于 MLOps](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
 
-+   [MLOps是个混乱的局面，但这在意料之中](https://www.kdnuggets.com/2022/03/mlops-mess-expected.html)
++   [MLOps 是个混乱的局面，但这在意料之中](https://www.kdnuggets.com/2022/03/mlops-mess-expected.html)
 
-+   [MLOps全面指南](https://www.kdnuggets.com/2023/08/comprehensive-guide-mlops.html)
++   [MLOps 全面指南](https://www.kdnuggets.com/2023/08/comprehensive-guide-mlops.html)

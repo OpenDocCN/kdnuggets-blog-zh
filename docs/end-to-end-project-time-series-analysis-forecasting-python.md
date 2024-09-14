@@ -1,12 +1,12 @@
-# 关于时间序列分析和预测的端到端项目与Python
+# 关于时间序列分析和预测的端到端项目与 Python
 
-> 原文：[https://www.kdnuggets.com/2018/09/end-to-end-project-time-series-analysis-forecasting-python.html](https://www.kdnuggets.com/2018/09/end-to-end-project-time-series-analysis-forecasting-python.html)
+> 原文：[`www.kdnuggets.com/2018/09/end-to-end-project-time-series-analysis-forecasting-python.html`](https://www.kdnuggets.com/2018/09/end-to-end-project-time-series-analysis-forecasting-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Susan Li](https://www.linkedin.com/in/susanli/)，高级数据科学家**
 
-![](../Images/007c34d3e49aa9227bd649c6ecfc3669.png)
+![](img/007c34d3e49aa9227bd649c6ecfc3669.png)
 
 图片来源：Pexels
 
@@ -44,7 +44,7 @@ df = pd.read_excel("Superstore.xls")
 furniture = df.loc[df['Category'] == 'Furniture']
 ```
 
-我们有一份很好的4年家具销售数据。
+我们有一份很好的 4 年家具销售数据。
 
 ```py
 furniture['Order Date'].min(), furniture['Order Date'].max()
@@ -64,9 +64,9 @@ furniture = furniture.sort_values('Order Date')
 furniture.isnull().sum()
 ```
 
-![](../Images/9e310252d00714d9cb566f295d4fe2eb.png)
+![](img/9e310252d00714d9cb566f295d4fe2eb.png)
 
-图1
+图 1
 
 ```py
 furniture = furniture.groupby('Order Date')['Sales'].sum().reset_index()
@@ -79,9 +79,9 @@ furniture = furniture.set_index('Order Date')
 furniture.index
 ```
 
-![](../Images/842b0c6fef27d6d9b2a5d18e6b1bf13b.png)
+![](img/842b0c6fef27d6d9b2a5d18e6b1bf13b.png)
 
-图2
+图 2
 
 我们当前的日期时间数据可能很难处理，因此我们将使用该月的平均每日销售值，并将每月的开始作为时间戳。
 
@@ -89,15 +89,15 @@ furniture.index
 y = furniture['Sales'].resample('MS').mean()
 ```
 
-快速浏览一下2017年的家具销售数据。
+快速浏览一下 2017 年的家具销售数据。
 
 ```py
 y['2017':]
 ```
 
-![](../Images/45b40d42d70d401742c3602562f34c8e.png)
+![](img/45b40d42d70d401742c3602562f34c8e.png)
 
-图3
+图 3
 
 ### **可视化家具销售时间序列数据**
 
@@ -106,9 +106,9 @@ y.plot(figsize=(15, 6))
 plt.show()
 ```
 
-![](../Images/2d52eb8283368801ce89aab557388683.png)
+![](img/2d52eb8283368801ce89aab557388683.png)
 
-图4
+图 4
 
 当我们绘制数据时，出现了一些明显的模式。时间序列具有季节性模式，例如销售在年初总是较低，而在年末较高。每年总是存在一个上升趋势，年中有几个月的销售较低。
 
@@ -123,9 +123,9 @@ fig = decomposition.plot()
 plt.show()
 ```
 
-![](../Images/64d2a6435da4b3e8a655f809fc650dba.png)
+![](img/64d2a6435da4b3e8a655f809fc650dba.png)
 
-图5
+图 5
 
 上面的图表清楚地显示了家具销售不稳定，并且有明显的季节性。
 
@@ -133,7 +133,7 @@ plt.show()
 
 我们将应用最常用的时间序列预测方法之一，即 ARIMA，代表自回归积分滑动平均模型。
 
-ARIMA模型用`ARIMA(p, d, q)`表示。这三个参数考虑了数据中的季节性、趋势和噪声：
+ARIMA 模型用`ARIMA(p, d, q)`表示。这三个参数考虑了数据中的季节性、趋势和噪声：
 
 ```py
 p = d = q = range(0, 2)
@@ -147,11 +147,11 @@ print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[3]))
 print('SARIMAX: {} x {}'.format(pdq[2], seasonal_pdq[4]))
 ```
 
-![](../Images/a13544bd6cdd9c9136c9e48e1380af9b.png)
+![](img/a13544bd6cdd9c9136c9e48e1380af9b.png)
 
-图6
+图 6
 
-这一步是我们家具销售ARIMA时间序列模型的参数选择。我们的目标是使用“网格搜索”来找到最佳的参数集，从而实现模型的最佳性能。
+这一步是我们家具销售 ARIMA 时间序列模型的参数选择。我们的目标是使用“网格搜索”来找到最佳的参数集，从而实现模型的最佳性能。
 
 ```py
 for param in pdq:
@@ -170,13 +170,13 @@ print('ARIMA{}x{}12 - AIC:{}'.format(param, param_seasonal, results.aic))
             continue
 ```
 
-![](../Images/d9ff24b37a1d7e23fbd7efbefec6c7de.png)
+![](img/d9ff24b37a1d7e23fbd7efbefec6c7de.png)
 
-图7
+图 7
 
-上述输出表明，`SARIMAX(1, 1, 1)x(1, 1, 0, 12)`产生了最低的`AIC`值297.78。因此，我们应考虑这是最优选项。
+上述输出表明，`SARIMAX(1, 1, 1)x(1, 1, 0, 12)`产生了最低的`AIC`值 297.78。因此，我们应考虑这是最优选项。
 
-### 拟合ARIMA模型
+### 拟合 ARIMA 模型
 
 ```py
 mod = sm.tsa.statespace.SARIMAX(y,
@@ -190,9 +190,9 @@ results = mod.fit()
 print(results.summary().tables[1])
 ```
 
-![](../Images/49a810b195dccb38acd233231f57fc16.png)
+![](img/49a810b195dccb38acd233231f57fc16.png)
 
-图8
+图 8
 
 我们应该始终运行模型诊断，以调查任何异常行为。
 
@@ -201,15 +201,15 @@ results.plot_diagnostics(figsize=(16, 8))
 plt.show()
 ```
 
-![](../Images/e819c05d127ab60904c32d74bd913c5f.png)
+![](img/e819c05d127ab60904c32d74bd913c5f.png)
 
-图9
+图 9
 
 尽管如此，我们的模型诊断表明，模型残差接近正态分布。
 
 ### **验证预测**
 
-为了帮助我们理解预测的准确性，我们将预测销售额与时间序列的实际销售额进行比较，并且我们将预测设定为从2017年1月1日开始到数据的结束。
+为了帮助我们理解预测的准确性，我们将预测销售额与时间序列的实际销售额进行比较，并且我们将预测设定为从 2017 年 1 月 1 日开始到数据的结束。
 
 ```py
 pred = results.get_prediction(start=pd.to_datetime('2017-01-01'), dynamic=False)
@@ -229,9 +229,9 @@ plt.legend()
 plt.show()
 ```
 
-![](../Images/97c784ee74a8c276cdd71d8b4d8ec512.png)
+![](img/97c784ee74a8c276cdd71d8b4d8ec512.png)
 
-图10
+图 10
 
 线图显示了观察值与滚动预测值的比较。总体而言，我们的预测与真实值非常吻合，显示了从年初开始的上升趋势，并在年底捕捉到季节性变化。
 
@@ -243,17 +243,17 @@ mse = ((y_forecasted - y_truth) ** 2).mean()
 print('The Mean Squared Error of our forecasts is {}'.format(round(mse, 2)))
 ```
 
-***我们预测的均方误差为22993.58***
+***我们预测的均方误差为 22993.58***
 
 ```py
 print('The Root Mean Squared Error of our forecasts is {}'.format(round(np.sqrt(mse), 2)))
 ```
 
-***我们预测的均方根误差为151.64***
+***我们预测的均方根误差为 151.64***
 
-在统计学中，[均方误差 (MSE)](https://en.wikipedia.org/wiki/Mean_squared_error)测量的是估计器的误差平方的平均值——即估计值与真实值之间的平均平方差。MSE是估计器质量的衡量标准——它总是非负的，MSE越小，我们找到最佳拟合线的可能性就越大。
+在统计学中，[均方误差 (MSE)](https://en.wikipedia.org/wiki/Mean_squared_error)测量的是估计器的误差平方的平均值——即估计值与真实值之间的平均平方差。MSE 是估计器质量的衡量标准——它总是非负的，MSE 越小，我们找到最佳拟合线的可能性就越大。
 
-[均方根误差 (RMSE)](https://en.wikipedia.org/wiki/Root-mean-square_deviation)告诉我们，我们的模型能够在测试集内预测日均家具销售额与实际销售额的误差为151.64。我们的家具日销售额范围从约400到超过1200。在我看来，这个模型目前表现相当不错。
+[均方根误差 (RMSE)](https://en.wikipedia.org/wiki/Root-mean-square_deviation)告诉我们，我们的模型能够在测试集内预测日均家具销售额与实际销售额的误差为 151.64。我们的家具日销售额范围从约 400 到超过 1200。在我看来，这个模型目前表现相当不错。
 
 ### **生成和可视化预测**
 
@@ -273,9 +273,9 @@ plt.legend()
 plt.show()
 ```
 
-![](../Images/591ccb115dc4f11b8f9b3faceb5e957b.png)
+![](img/591ccb115dc4f11b8f9b3faceb5e957b.png)
 
-图11
+图 11
 
 我们的模型明显捕捉到了家具销售的季节性。随着我们预测的时间越长，对预测值的信心自然会下降。这在模型生成的置信区间中体现出来，置信区间随着预测时间的延长而变大。
 
@@ -322,7 +322,7 @@ store.rename(columns={'Sales_x': 'furniture_sales', 'Sales_y': 'office_sales'}, 
 store.head()
 ```
 
-![](../Images/4a293076ddcd30b3db0acb02cff398af.png)
+![](img/4a293076ddcd30b3db0acb02cff398af.png)
 
 图 12
 
@@ -334,7 +334,7 @@ plt.xlabel('Date'); plt.ylabel('Sales'); plt.title('Sales of Furniture and Offic
 plt.legend();
 ```
 
-![](../Images/fda355c4a65152a5a18378da9e3b73d9.png)
+![](img/fda355c4a65152a5a18378da9e3b73d9.png)
 
 图 13
 
@@ -346,7 +346,7 @@ first_date = store.ix[np.min(list(np.where(store['office_sales'] > store['furnit
 print("Office supplies first time produced higher sales than furniture is {}.".format(first_date.date()))
 ```
 
-***办公室用品首次在2014年7月1日销售超过家具***。
+***办公室用品首次在 2014 年 7 月 1 日销售超过家具***。
 
 是 2014 年 7 月！
 
@@ -376,7 +376,7 @@ furniture_model.plot(furniture_forecast, xlabel = 'Date', ylabel = 'Sales')
 plt.title('Furniture Sales');
 ```
 
-![](../Images/318ec9e7ef49461c98e6c719690a2cd7.png)
+![](img/318ec9e7ef49461c98e6c719690a2cd7.png)
 
 图 14
 
@@ -386,7 +386,7 @@ office_model.plot(office_forecast, xlabel = 'Date', ylabel = 'Sales')
 plt.title('Office Supplies Sales');
 ```
 
-![](../Images/e3f597e718a5416383f9fd9e9b36e8ea.png)
+![](img/e3f597e718a5416383f9fd9e9b36e8ea.png)
 
 图 15
 
@@ -410,7 +410,7 @@ forecast = forecast.rename(columns={'furniture_ds': 'Date'}).drop('office_ds', a
 forecast.head()
 ```
 
-![](../Images/8a8d17cd95e50507ade70cd609bc969b.png)
+![](img/8a8d17cd95e50507ade70cd609bc969b.png)
 
 图 16
 
@@ -424,7 +424,7 @@ plt.legend(); plt.xlabel('Date'); plt.ylabel('Sales')
 plt.title('Furniture vs. Office Supplies Sales Trend');
 ```
 
-![](../Images/bd50280d9370f8f12f707ddff628c98d.png)
+![](img/bd50280d9370f8f12f707ddff628c98d.png)
 
 图 17
 
@@ -436,7 +436,7 @@ plt.legend(); plt.xlabel('Date'); plt.ylabel('Sales')
 plt.title('Furniture vs. Office Supplies Estimate');
 ```
 
-![](../Images/c670bfc666b9eb43f4d4b50d9bfff6d8.png)
+![](img/c670bfc666b9eb43f4d4b50d9bfff6d8.png)
 
 图 18
 
@@ -448,7 +448,7 @@ plt.title('Furniture vs. Office Supplies Estimate');
 furniture_model.plot_components(furniture_forecast);
 ```
 
-![](../Images/0344ec3d5939c21f56425794a5276538.png)
+![](img/0344ec3d5939c21f56425794a5276538.png)
 
 图 19
 
@@ -456,7 +456,7 @@ furniture_model.plot_components(furniture_forecast);
 office_model.plot_components(office_forecast);
 ```
 
-![](../Images/f26354770069146caf7c93fe56830bca.png)
+![](img/f26354770069146caf7c93fe56830bca.png)
 
 图 20
 
@@ -474,21 +474,21 @@ office_model.plot_components(office_forecast);
 
 **相关：**
 
-+   [使用 Scikit-Learn 进行多类文本分类](/2018/08/multi-class-text-classification-scikit-learn.html)
++   使用 Scikit-Learn 进行多类文本分类
 
-+   [使用 fast.ai 进行快速特征工程](/2018/03/feature-engineering-dates-fastai.html)
++   使用 fast.ai 进行快速特征工程
 
-+   [时间序列入门——三步流程](/2018/03/time-series-dummies-3-step-process.html)
++   时间序列入门——三步流程
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 

@@ -1,8 +1,8 @@
 # 3 个保证能让你找到工作的数据科学项目
 
-> 原文：[https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
+> 原文：[`www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job`](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-![3 个保证能让你找到工作的数据科学项目](../Images/9e65ea0ec05868ba343ad7f9244f2e4e.png)
+![3 个保证能让你找到工作的数据科学项目](img/9e65ea0ec05868ba343ad7f9244f2e4e.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
@@ -54,17 +54,17 @@
 
 这是这些技能涵盖内容的概述。
 
-![3个保证让你获得工作的数据科学项目](../Images/3ce023118c38cb611cf7710359a3b349.png)
+![3 个保证让你获得工作的数据科学项目](img/3ce023118c38cb611cf7710359a3b349.png)
 
-当然，数据科学技能远不止这些。它们还包括掌握SQL和R、大数据技术、深度学习、自然语言处理以及云计算。
+当然，数据科学技能远不止这些。它们还包括掌握 SQL 和 R、大数据技术、深度学习、自然语言处理以及云计算。
 
 然而，对这些技能的需求很大程度上取决于工作描述。但我提到的五项基本技能是你无法忽视的。
 
 现在让我们看看我选择的三个数据科学项目如何挑战这些技能。
 
-# 3个数据科学项目以练习基本数据科学技能
+# 3 个数据科学项目以练习基本数据科学技能
 
-其中一些项目可能对某些人来说有些过于高级。在这种情况下，可以尝试这些[19个数据科学初学者项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+projects+for+job)。
+其中一些项目可能对某些人来说有些过于高级。在这种情况下，可以尝试这些[19 个数据科学初学者项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+projects+for+job)。
 
 ## 1\. 理解城市供应与需求：商业分析
 
@@ -72,7 +72,7 @@
 
 **主题：** 商业分析
 
-**简要概述：** 城市是Uber需求和供应互动的中心。分析这些可以提供对公司业务和规划的洞察。Uber提供了一个包含行程详细信息的数据集。你需要回答十一道问题，以便对行程、时间、司机需求等提供商业洞察。
+**简要概述：** 城市是 Uber 需求和供应互动的中心。分析这些可以提供对公司业务和规划的洞察。Uber 提供了一个包含行程详细信息的数据集。你需要回答十一道问题，以便对行程、时间、司机需求等提供商业洞察。
 
 **项目执行：** 你将得到十一道需要按显示顺序回答的问题。回答这些问题将涉及如下任务：
 
@@ -100,7 +100,7 @@
 
 **主题：** 监督学习（分类）
 
-**简要概述：** 在这个数据科学项目中，Sony Research提供了一个电信公司客户的数据集。他们期望你进行探索性分析并提取洞察。然后，你需要建立一个流失预测模型，评估它并讨论将模型部署到生产中的问题。
+**简要概述：** 在这个数据科学项目中，Sony Research 提供了一个电信公司客户的数据集。他们期望你进行探索性分析并提取洞察。然后，你需要建立一个流失预测模型，评估它并讨论将模型部署到生产中的问题。
 
 **项目执行：** 项目应按这些主要阶段进行。
 
@@ -118,7 +118,7 @@
 
 ***   **训练/测试拆分**
 
-1.  +   使用**sklearn**按80%-20%的比例将数据集拆分为训练集和测试集
+1.  +   使用**sklearn**按 80%-20%的比例将数据集拆分为训练集和测试集
 
 ***   **预测模型**
 
@@ -126,7 +126,7 @@
 
 ***   **指标**
 
-1.  +   在比较不同算法的性能时使用准确性和F1分数
+1.  +   在比较不同算法的性能时使用准确性和 F1 分数
 
 ***   **模型结果**
 
@@ -142,7 +142,7 @@
 
 1.  +   监控模型性能以避免数据漂移和概念漂移
 
-**展示的技能：** 探索性数据分析（EDA）和数据整理，以检查空值、数据唯一性、获取数据分布的见解，以及正负相关性；在直方图和相关矩阵中进行数据可视化；使用sklearn库应用机器学习分类器，测量算法准确性和F1分数，比较算法，直观展示决策树；使用人工神经网络查看深度学习的表现；模型部署中需注意数据漂移和概念漂移问题，这些都在MLOps周期内。
+**展示的技能：** 探索性数据分析（EDA）和数据整理，以检查空值、数据唯一性、获取数据分布的见解，以及正负相关性；在直方图和相关矩阵中进行数据可视化；使用 sklearn 库应用机器学习分类器，测量算法准确性和 F1 分数，比较算法，直观展示决策树；使用人工神经网络查看深度学习的表现；模型部署中需注意数据漂移和概念漂移问题，这些都在 MLOps 周期内。
 
 ## 3\. 预测警务：检查影响
 
@@ -150,7 +150,7 @@
 
 **主题：** 监督学习（回归）
 
-**简要概述：** 这一预测警务利用算法和数据分析预测犯罪可能发生的地点。你选择的方法可能具有深远的伦理和社会影响。它使用2016年旧金山城市犯罪数据，这些数据来自其[开放数据计划](https://datasf.org/opendata/)。该项目将尝试预测在特定邮政编码、某一周的某一天及时间段内的犯罪事件数量。
+**简要概述：** 这一预测警务利用算法和数据分析预测犯罪可能发生的地点。你选择的方法可能具有深远的伦理和社会影响。它使用 2016 年旧金山城市犯罪数据，这些数据来自其[开放数据计划](https://datasf.org/opendata/)。该项目将尝试预测在特定邮政编码、某一周的某一天及时间段内的犯罪事件数量。
 
 **项目执行：** 这里是项目作者所采取的主要步骤。
 
@@ -170,9 +170,9 @@
 
     +   多层感知机
 
-**展示的技能：** 探索性数据分析（EDA）和数据整理，最终得到关于犯罪、时间、星期几和邮政编码的数据；机器学习（监督学习/回归），尝试线性回归、随机森林回归器、K-最近邻、XGBoost的表现；深度学习，使用多层感知机解释你得到的结果；获取犯罪预测的见解及其可能被滥用的可能性；将模型部署到交互式地图中。
+**展示的技能：** 探索性数据分析（EDA）和数据整理，最终得到关于犯罪、时间、星期几和邮政编码的数据；机器学习（监督学习/回归），尝试线性回归、随机森林回归器、K-最近邻、XGBoost 的表现；深度学习，使用多层感知机解释你得到的结果；获取犯罪预测的见解及其可能被滥用的可能性；将模型部署到交互式地图中。
 
-如果你想用类似的技能做更多项目，[这里有30+个机器学习项目创意](https://www.stratascratch.com/blog/30-project-ideas-to-showcase-your-machine-learning-skills/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+projects+for+job)。
+如果你想用类似的技能做更多项目，[这里有 30+个机器学习项目创意](https://www.stratascratch.com/blog/30-project-ideas-to-showcase-your-machine-learning-skills/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+projects+for+job)。
 
 # 结论
 
@@ -190,14 +190,14 @@
 
 ### 更多相关内容
 
-+   [2022年数据科学项目，让你获得工作的秘诀](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年数据科学项目，让你获得工作的秘诀](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [KDnuggets 新闻，6月1日：数据科学的完整合集…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日：数据科学的完整合集…](https://www.kdnuggets.com/2022/n22.html)
 
-+   [2024年5个数据分析师项目，助你获得工作](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
++   [2024 年 5 个数据分析师项目，助你获得工作](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
 
-+   [2022年数据科学作品集，让你获得工作的秘诀](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [2022 年数据科学作品集，让你获得工作的秘诀](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [你为何难以获得数据科学工作的7个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [你为何难以获得数据科学工作的 7 个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
 +   [无法获得数据科学工作？原因在这里](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)******************

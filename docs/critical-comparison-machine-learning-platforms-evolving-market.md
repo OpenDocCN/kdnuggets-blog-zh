@@ -1,16 +1,16 @@
 # 在不断发展的市场中对机器学习平台的关键比较
 
-> 原文：[https://www.kdnuggets.com/2021/02/critical-comparison-machine-learning-platforms-evolving-market.html](https://www.kdnuggets.com/2021/02/critical-comparison-machine-learning-platforms-evolving-market.html)
+> 原文：[`www.kdnuggets.com/2021/02/critical-comparison-machine-learning-platforms-evolving-market.html`](https://www.kdnuggets.com/2021/02/critical-comparison-machine-learning-platforms-evolving-market.html)
 
-[评论](#comments)
+评论
 
 **作者：Vivek Jain，[Sigmoid](https://www.sigmoid.com/)**
 
-![图片](../Images/2c4bf2001741dc2bee3f84fae4130776.png)
+![图片](img/2c4bf2001741dc2bee3f84fae4130776.png)
 
 ### MLaaS 市场的发展
 
-机器学习即服务（MLaaS）市场正蓬勃发展。预计到2025年将增长至[ 84.8亿美元](https://www.mordorintelligence.com/industry-reports/global-machine-learning-as-a-service-mlaas-market)，年复合增长率为43%。预计云计算的普及和更好地理解客户行为的需求将推动市场前进。鉴于公司今天可以从广泛的解决方案中选择以满足各种业务需求，MLaaS模型在各行业中有明显倾斜。此外，物联网、自动化和人工智能驱动系统在各行业的普及将进一步放大 MLaaS 作为所有这些技术基础的需求。
+机器学习即服务（MLaaS）市场正蓬勃发展。预计到 2025 年将增长至[ 84.8 亿美元](https://www.mordorintelligence.com/industry-reports/global-machine-learning-as-a-service-mlaas-market)，年复合增长率为 43%。预计云计算的普及和更好地理解客户行为的需求将推动市场前进。鉴于公司今天可以从广泛的解决方案中选择以满足各种业务需求，MLaaS 模型在各行业中有明显倾斜。此外，物联网、自动化和人工智能驱动系统在各行业的普及将进一步放大 MLaaS 作为所有这些技术基础的需求。
 
 ### **数据卓越的三大机器学习平台**
 
@@ -28,27 +28,27 @@ IBM Watson Studio 或 Watson Machine Learning 实质上是 IBM 云服务的融�
 
 **谷歌云 AI**
 
-Google Cloud AI是多个Google AI/ML项目（如Tensor Flow、Kuberflow和Cloud ML Engine）的融合。它包括一整套机器学习服务，如数据准备、数据调优和数据训练。数据科学家可以利用该平台部署和共享ML模型，并协作改进。
+Google Cloud AI 是多个 Google AI/ML 项目（如 Tensor Flow、Kuberflow 和 Cloud ML Engine）的融合。它包括一整套机器学习服务，如数据准备、数据调优和数据训练。数据科学家可以利用该平台部署和共享 ML 模型，并协作改进。
 
 ### 三大机器学习平台的详细比较
 
 | **功能** | **IBM Watson** | **Microsoft Azure** | **Google Cloud AI** |
 | --- | --- | --- | --- |
 | **支持的框架** | TensorFlow, Spark MLlib, scikit-learn, XGBoost, PyTorch, IBM SPSS, PMML | TensorFlow, scikit-learn, Microsoft Cognitive Toolkit, Spark ML | TensorFlow, scikit-learn, XGBoost, Keras |
-| **内置算法** | 支持。包括可以大规模部署的AutoAI和机器学习算法。 | 不支持。更灵活于开箱即用的算法。 | 通过[ 最新更新](https://cloud.google.com/ai-platform/training/docs/algorithms)支持。然而，实施仍处于测试阶段。 |
-| **语音和文本处理API** | 识别60多种语言，翻译21种语言 | 识别120种语言，翻译60多种语言 | 识别120多种语言，翻译100多种语言 |
-| **用户界面** | Watson UI主要面向专业用户。普通数据科学家和业务分析师可能会觉得用户体验繁琐。 | Azure GUI旨在可视化工作流程中的每一步。较少经验的ML团队可以探索UI以了解主要方法和模型。 | 易于使用的图形界面可以帮助经验较少的ML团队训练高质量模型。 |
-| **采纳难易度** | Watson ML平台可以轻松集成到现有的复杂分析和应用开发系统中。然而，该平台确实更面向专业ML团队。 | 完成项目的时间和精力投入有相当大的学习曲线。特别是对于经验较少的用户。 | Google ML引擎高度灵活，除了TensorFlow，还支持多种流行算法。此外，作为最受欢迎的数据可视化工具之一，Data Studio满足数据科学家和营销人员的需求。 |
+| **内置算法** | 支持。包括可以大规模部署的 AutoAI 和机器学习算法。 | 不支持。更灵活于开箱即用的算法。 | 通过[ 最新更新](https://cloud.google.com/ai-platform/training/docs/algorithms)支持。然而，实施仍处于测试阶段。 |
+| **语音和文本处理 API** | 识别 60 多种语言，翻译 21 种语言 | 识别 120 种语言，翻译 60 多种语言 | 识别 120 多种语言，翻译 100 多种语言 |
+| **用户界面** | Watson UI 主要面向专业用户。普通数据科学家和业务分析师可能会觉得用户体验繁琐。 | Azure GUI 旨在可视化工作流程中的每一步。较少经验的 ML 团队可以探索 UI 以了解主要方法和模型。 | 易于使用的图形界面可以帮助经验较少的 ML 团队训练高质量模型。 |
+| **采纳难易度** | Watson ML 平台可以轻松集成到现有的复杂分析和应用开发系统中。然而，该平台确实更面向专业 ML 团队。 | 完成项目的时间和精力投入有相当大的学习曲线。特别是对于经验较少的用户。 | Google ML 引擎高度灵活，除了 TensorFlow，还支持多种流行算法。此外，作为最受欢迎的数据可视化工具之一，Data Studio 满足数据科学家和营销人员的需求。 |
 
 | **成本** | 定价层级明确：
 
-+   精简版：按需付费 – 免费，5个模型 / 每月5,000次预测 / 50小时训练，批量部署
++   精简版：按需付费 – 免费，5 个模型 / 每月 5,000 次预测 / 50 小时训练，批量部署
 
-+   标准：按需付费 – 每月每1,000次预测$0.50 / 每容量单位小时$0.50
++   标准：按需付费 – 每月每 1,000 次预测$0.50 / 每容量单位小时$0.50
 
-+   专业版：每月$1,000 / 每月2,000,000次预测 / 1,000小时
++   专业版：每月$1,000 / 每月 2,000,000 次预测 / 1,000 小时
 
-| 带有10gb工作区存储的ML工作室对Microsoft账户用户免费。标准企业级工作区可按月$9.99或每小时$1的价格获取。 | AI Hub和笔记本免费。其余部分需订阅（可通过合同谈判）。定价计算器可在网站上使用，但确切数字需联系Google。 |
+| 带有 10gb 工作区存储的 ML 工作室对 Microsoft 账户用户免费。标准企业级工作区可按月$9.99 或每小时$1 的价格获取。 | AI Hub 和笔记本免费。其余部分需订阅（可通过合同谈判）。定价计算器可在网站上使用，但确切数字需联系 Google。 |
 | --- | --- |
 
 ### **总结**
@@ -61,21 +61,21 @@ Google Cloud AI是多个Google AI/ML项目（如Tensor Flow、Kuberflow和Cloud 
 
 **相关：**
 
-+   [2020–2022 年云计算、数据科学和 ML 趋势：巨头之争](/2021/01/cloud-computing-data-science-ml-trends-2020-2022-battle-giants.html)
++   2020–2022 年云计算、数据科学和 ML 趋势：巨头之争
 
-+   [2020 年数据科学与机器学习现状：3 个关键发现](/2020/12/kaggle-survey-2020-data-science-machine-learning.html)
++   2020 年数据科学与机器学习现状：3 个关键发现
 
-+   [顶级语音处理 API 比较](/2018/12/activewizards-comparison-speech-processing-apis.html)
++   顶级语音处理 API 比较
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT
 
 * * *
 

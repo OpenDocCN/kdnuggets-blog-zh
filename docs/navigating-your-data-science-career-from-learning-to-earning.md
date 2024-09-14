@@ -1,8 +1,8 @@
 # 探索你的数据科学职业生涯：从学习到收入
 
-> 原文：[https://www.kdnuggets.com/navigating-your-data-science-career-from-learning-to-earning](https://www.kdnuggets.com/navigating-your-data-science-career-from-learning-to-earning)
+> 原文：[`www.kdnuggets.com/navigating-your-data-science-career-from-learning-to-earning`](https://www.kdnuggets.com/navigating-your-data-science-career-from-learning-to-earning)
 
-![探索你的数据科学职业生涯](../Images/07664b2f8479e87846bf505bcb373bdb.png)
+![探索你的数据科学职业生涯](img/07664b2f8479e87846bf505bcb373bdb.png)
 
 *图片来源于作者*
 
@@ -10,25 +10,25 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 
-随着281家科技公司[裁员80,628人](https://techcrunch.com/2024/05/07/tech-layoffs-2023-list/)，你为什么会对开始一个[数据科学职业](https://www.stratascratch.com/blog/a-complete-guide-to-data-scientist-career-path/?utm_source=blog&utm_medium=click&utm_campaign=kdn+navigating+ds+career)感兴趣呢？
+随着 281 家科技公司[裁员 80,628 人](https://techcrunch.com/2024/05/07/tech-layoffs-2023-list/)，你为什么会对开始一个[数据科学职业](https://www.stratascratch.com/blog/a-complete-guide-to-data-scientist-career-path/?utm_source=blog&utm_medium=click&utm_campaign=kdn+navigating+ds+career)感兴趣呢？
 
-现在可能看起来不是一个好时机，尤其是在公司裁员的情况下。是的，有裁员，但下图显示最近的裁员与2022年底和2023年初相比并不算严重。所以，情况并没有那么糟糕！
+现在可能看起来不是一个好时机，尤其是在公司裁员的情况下。是的，有裁员，但下图显示最近的裁员与 2022 年底和 2023 年初相比并不算严重。所以，情况并没有那么糟糕！
 
-![探索你的数据科学职业生涯](../Images/7aca9a0fdf64c02a231d1cb40bf2e792.png)
+![探索你的数据科学职业生涯](img/7aca9a0fdf64c02a231d1cb40bf2e792.png)
 
 *来源:* [*layoffs.fyi*](https://layoffs.fyi)
 
-从另一个角度来看情况更为积极：公司仍在招聘数据科学家。实际上，在过去一个月内，美国在Glassdoor上几乎有[5,500个招聘广告](https://www.glassdoor.com/Job/united-states-data-science-jobs-SRCH_IL.0,13_IN1_KO14,26.htm?fromAge=30)。
+从另一个角度来看情况更为积极：公司仍在招聘数据科学家。实际上，在过去一个月内，美国在 Glassdoor 上几乎有[5,500 个招聘广告](https://www.glassdoor.com/Job/united-states-data-science-jobs-SRCH_IL.0,13_IN1_KO14,26.htm?fromAge=30)。
 
-数据科学家有一个相当活跃的就业市场。只是现在公司要求更高。他们更倾向于寻找数据科学专家而不是通才。此外，现在数据科学家需要掌握AI工具。以下是你如何应对这些挑战并在就业市场上脱颖而出的方式。
+数据科学家有一个相当活跃的就业市场。只是现在公司要求更高。他们更倾向于寻找数据科学专家而不是通才。此外，现在数据科学家需要掌握 AI 工具。以下是你如何应对这些挑战并在就业市场上脱颖而出的方式。
 
 ## **1\. 教育路径**
 
@@ -104,15 +104,15 @@
 
 下面是一个概述。
 
-![导航数据科学职业](../Images/979b9ea4184d494b08194517d2c87f30.png)
+![导航数据科学职业](img/979b9ea4184d494b08194517d2c87f30.png)
 
-这应该是你进一步专业化的起点。例如，你可以专注于BI工具或数据工程工具，如[Apache Kafka](https://kafka.apache.org)、[Apache Spark](https://spark.apache.org)、[Talend](https://www.talend.com)、[Airflow](https://airflow.apache.org)等。
+这应该是你进一步专业化的起点。例如，你可以专注于 BI 工具或数据工程工具，如[Apache Kafka](https://kafka.apache.org)、[Apache Spark](https://spark.apache.org)、[Talend](https://www.talend.com)、[Airflow](https://airflow.apache.org)等。
 
 ### **软技能**
 
 技术技能需要以下软技能的补充。
 
-![导航您的数据科学职业](../Images/bf097401332047a653ae3344d19c482d.png)
+![导航您的数据科学职业](img/bf097401332047a653ae3344d19c482d.png)
 
 #### **沟通技能**
 
@@ -148,11 +148,11 @@
 
 ## **3\. 职业路径和薪资**
 
-![导航您的数据科学职业](../Images/598656abc589ee05ffcb867254d06606.png)
+![导航您的数据科学职业](img/598656abc589ee05ffcb867254d06606.png)
 
 数据科学职业通常以获得**初级数据分析师或初级数据科学家**职位开始。
 
-从这里，我建议你进入**专业角色**之一。一些例子包括数据工程师、机器学习工程师、业务分析师、数据分析师或BI工程师。如今的数据科学家职位也越来越成为一个专业角色——更多关注于数据探索和初步模型开发中的统计应用，而不是做端到端的项目。
+从这里，我建议你进入**专业角色**之一。一些例子包括数据工程师、机器学习工程师、业务分析师、数据分析师或 BI 工程师。如今的数据科学家职位也越来越成为一个专业角色——更多关注于数据探索和初步模型开发中的统计应用，而不是做端到端的项目。
 
 根据你在特定专业职位上的年限和兴趣，你可以走两个不同的方向：**管理角色或高级专业角色**。
 
@@ -164,7 +164,7 @@
 
 数据科学仍然是一个薪资非常高的职业。在选择职业道路时，不应忽视这一点。以下是之前提到的角色的薪资概览。
 
-![导航你的数据科学职业](../Images/39b0d3f40f6aca999060dd4eff93577e.png)
+![导航你的数据科学职业](img/39b0d3f40f6aca999060dd4eff93577e.png)
 
 *作者提供的图像，薪资数据来源：* [*Glassdoor*](https://www.glassdoor.com/Salaries/index.htm)
 
@@ -194,7 +194,7 @@
 
 尽管经历了许多动荡，让我们记住数据科学仍然是最有吸引力的工作之一。
 
-[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一位数据科学家和产品策略专家。他还是一位兼职教授，教授分析学，并且是StrataScratch的创始人，该平台帮助数据科学家通过来自顶尖公司的真实面试题准备面试。内特撰写有关职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有关于SQL的内容。
+[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一位数据科学家和产品策略专家。他还是一位兼职教授，教授分析学，并且是 StrataScratch 的创始人，该平台帮助数据科学家通过来自顶尖公司的真实面试题准备面试。内特撰写有关职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有关于 SQL 的内容。
 
 ### 更多相关主题
 
@@ -206,6 +206,6 @@
 
 +   [更多成功应对初级数据科学职位面试的技巧](https://www.kdnuggets.com/more-tips-for-successfully-navigating-beginner-data-science-job-interviews)
 
-+   [应对当今数据和AI市场的不确定性](https://www.kdnuggets.com/2024/02/altair-navigating-todays-data-ai-market-uncertainty)
++   [应对当今数据和 AI 市场的不确定性](https://www.kdnuggets.com/2024/02/altair-navigating-todays-data-ai-market-uncertainty)
 
-+   [提升数学效率：导航Numpy数组操作](https://www.kdnuggets.com/elevate-math-efficiency-navigating-numpy-array-operations)
++   [提升数学效率：导航 Numpy 数组操作](https://www.kdnuggets.com/elevate-math-efficiency-navigating-numpy-array-operations)

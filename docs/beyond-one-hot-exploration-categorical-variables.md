@@ -1,8 +1,8 @@
 # 超越独热编码：类别变量的探索
 
-> 原文：[https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html](https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html)
+> 原文：[`www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html`](https://www.kdnuggets.com/2015/12/beyond-one-hot-exploration-categorical-variables.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：威尔·麦金尼斯**。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-![mushrooms-cars](../Images/56c0fdcb94cc15a810d93943d1ca52f4.png)
+![mushrooms-cars](img/56c0fdcb94cc15a810d93943d1ca52f4.png)
 
 类别变量 ([wiki](https://en.wikipedia.org/wiki/Categorical_variable)) 是那些表示固定数量可能值的变量，而不是连续数量的变量。每个值将测量分配到这些有限组或类别中的一个。这些变量与有序变量不同，有序变量之间的距离应相等，无论类别数量如何，而有序变量则具有某种固有的排序。例如：
 
@@ -36,17 +36,17 @@
 
 #### 方法论
 
-为了了解效果如何，我编写了一个简单的Python脚本来测试常见数据集上的不同编码方法。首先是过程概述：
+为了了解效果如何，我编写了一个简单的 Python 脚本来测试常见数据集上的不同编码方法。首先是过程概述：
 
 +   我们收集一个包含分类变量的分类问题的数据集
 
-+   我们使用某种编码方法将X数据集转换为数值
++   我们使用某种编码方法将 X 数据集转换为数值
 
-+   我们使用scikit-learn的交叉验证分数和BernoulliNB()分类器来生成数据集的分数。这在每个数据集上重复10次，使用所有分数的均值。
++   我们使用 scikit-learn 的交叉验证分数和 BernoulliNB()分类器来生成数据集的分数。这在每个数据集上重复 10 次，使用所有分数的均值。
 
 +   我们存储数据集的维度、均值分数以及编码数据和生成分数的时间。
 
-这在来自UCI数据集库的几个不同数据集上重复进行：
+这在来自 UCI 数据集库的几个不同数据集上重复进行：
 
 +   [汽车评估](https://archive.ics.uci.edu/ml/datasets/Car+Evaluation)
 
@@ -54,17 +54,17 @@
 
 +   [剪接位点](http://archive.ics.uci.edu/ml/machine-learning-databases/molecular-biology/splice-junction-gene-sequences/)
 
-我尝试了7种不同的编码方法（4-7的描述摘自[statsmodel的文档](http://statsmodels.sourceforge.net/devel/contrasts.html)）：
+我尝试了 7 种不同的编码方法（4-7 的描述摘自[statsmodel 的文档](http://statsmodels.sourceforge.net/devel/contrasts.html)）：
 
 1.  序数：如上所述
 
-1.  独热编码：每个类别一个列，每个单元格中填入1或0，表示该行是否包含该列的类别
+1.  独热编码：每个类别一个列，每个单元格中填入 1 或 0，表示该行是否包含该列的类别
 
 1.  二进制：首先将类别编码为序数，然后将这些整数转换为二进制代码，然后将该二进制字符串的数字分成单独的列。这种编码以比独热编码更少的维度编码数据，但会有一些距离扭曲。
 
-1.  总和：比较给定水平的因变量均值与所有水平因变量的总体均值。也就是说，它使用每一个前k-1水平和水平k之间的对比。在这个例子中，水平1与所有其他水平进行比较，水平2与所有其他水平进行比较，水平3与所有其他水平进行比较。
+1.  总和：比较给定水平的因变量均值与所有水平因变量的总体均值。也就是说，它使用每一个前 k-1 水平和水平 k 之间的对比。在这个例子中，水平 1 与所有其他水平进行比较，水平 2 与所有其他水平进行比较，水平 3 与所有其他水平进行比较。
 
-1.  多项式：对于k=4水平的多项式编码，系数包括线性、二次和三次趋势。这里的分类变量被假设为由一个基础的、等间距的数值变量表示。因此，这种编码仅用于具有相等间距的有序分类变量。
+1.  多项式：对于 k=4 水平的多项式编码，系数包括线性、二次和三次趋势。这里的分类变量被假设为由一个基础的、等间距的数值变量表示。因此，这种编码仅用于具有相等间距的有序分类变量。
 
 1.  后向差分：将一个水平的因变量均值与前一个水平的因变量均值进行比较。这种编码可能对名义变量或序数变量有用。
 
@@ -109,7 +109,7 @@
 
 这绝不是一项详尽的研究，但似乎二进制编码在保持合理一致性的情况下表现良好，没有显著的维度增加。正如预期，序数编码表现一直很差。
 
-如果你想查看源代码、添加或建议新的数据集或编码方法，我已经将所有内容（包括数据集）上传到 GitHub：[https://github.com/wdm0006/categorical_encoding](https://github.com/wdm0006/categorical_encoding)。
+如果你想查看源代码、添加或建议新的数据集或编码方法，我已经将所有内容（包括数据集）上传到 GitHub：[`github.com/wdm0006/categorical_encoding`](https://github.com/wdm0006/categorical_encoding)。
 
 可以直接在那儿贡献，或在这里评论提出建议。
 
@@ -117,11 +117,11 @@
 
 **相关：**
 
-+   [数据挖掘 Medicare 数据 – 我们能发现什么？](/2014/04/data-mining-medicare-data.html)
++   数据挖掘 Medicare 数据 – 我们能发现什么？
 
-+   [机器学习的 5 个部落 – 问题与答案](/2015/11/domingos-5-tribes-machine-learning-questions-answers.html)
++   机器学习的 5 个部落 – 问题与答案
 
-+   [欺诈检测解决方案](/solutions/fraud-detection.html)
++   欺诈检测解决方案
 
 ### 更多相关话题
 
@@ -129,7 +129,7 @@
 
 +   [使用 MultiLabelBinarizer 编码分类特征](https://www.kdnuggets.com/2023/01/encoding-categorical-features-multilabelbinarizer.html)
 
-+   [构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
 +   [ChatGPT 驱动的数据探索：解锁数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
 

@@ -1,22 +1,22 @@
 # 成功数据科学家的五大特征
 
-> 原文：[https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html`](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-[评论](#comments) ![图像](../Images/30cdfe0816ee4df241ef69515418c54c.png)
+评论 ![图像](img/30cdfe0816ee4df241ef69515418c54c.png)
 
-图片来源 [Tumisu](https://pixabay.com/users/tumisu-148124/) 于Pixabay
+图片来源 [Tumisu](https://pixabay.com/users/tumisu-148124/) 于 Pixabay
 
-我最近撰写了一篇题为[数据科学家、数据工程师与其他数据职业的解释](/2021/05/data-scientist-data-engineer-data-careers-explained.html)的文章，在其中我尽力简明扼要地定义和区分了五种流行的数据相关职业。每个职业在该文章中都得到了非常高水平的单句总结，作为参考，数据科学家被描述为：
+我最近撰写了一篇题为数据科学家、数据工程师与其他数据职业的解释的文章，在其中我尽力简明扼要地定义和区分了五种流行的数据相关职业。每个职业在该文章中都得到了非常高水平的单句总结，作为参考，数据科学家被描述为：
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -52,7 +52,7 @@
 
 +   “为什么*这*必须以*那样*的方式来做？”
 
-+   “如果我们对Y做X，会发生什么？”
++   “如果我们对 Y 做 X，会发生什么？”
 
 +   “X 是如何影响这里发生的事情的？”
 
@@ -86,7 +86,7 @@
 
 每个人都需要能够有效地与他人沟通，无论他们的社会地位如何。数据科学家也不例外。
 
-但即便如此，数据科学家在向其他可能并不完全沉浸于统计分析电影宇宙™的利益相关者解释工作时，通常也需要一些手把手的帮助。数据科学家必须能够将某人从A点叙述到B点，即使那个人对这两个点到底是什么没有太多了解。直白地说，讲故事就是能够从一些数据和你的分析过程编织出一个现实的叙述：我们是如何从*这个*到*那个*的。
+但即便如此，数据科学家在向其他可能并不完全沉浸于统计分析电影宇宙™的利益相关者解释工作时，通常也需要一些手把手的帮助。数据科学家必须能够将某人从 A 点叙述到 B 点，即使那个人对这两个点到底是什么没有太多了解。直白地说，讲故事就是能够从一些数据和你的分析过程编织出一个现实的叙述：我们是如何从*这个*到*那个*的。
 
 这不仅仅是陈述事实；数据科学家必须看到利益相关者在方程式中的位置，并使叙述过程相关——也许通过有用的视觉效果或其他道具来帮助完成比喻上的交易。
 
@@ -98,22 +98,22 @@
 
 **相关**：
 
-+   [数据科学家、数据工程师及其他数据职业解析](/2021/05/data-scientist-data-engineer-data-careers-explained.html)
++   数据科学家、数据工程师及其他数据职业解析
 
-+   [14种不同数据科学工作的指南](/2021/10/guide-14-different-data-science-jobs.html)
++   14 种不同数据科学工作的指南
 
-+   [能让你被录用的数据科学作品集项目创意（或未能录用）](/2021/10/data-science-portfolio-project-ideas.html)
++   能让你被录用的数据科学作品集项目创意（或未能录用）
 
 ### 更多相关话题
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学，寻找目标，再寻找目标……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [9亿美元人工智能失败的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元人工智能失败的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每位初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

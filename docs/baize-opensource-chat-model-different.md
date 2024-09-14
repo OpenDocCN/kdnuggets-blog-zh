@@ -1,78 +1,78 @@
 # Baize: 一个开源聊天模型（但有所不同？）
 
-> 原文：[https://www.kdnuggets.com/2023/04/baize-opensource-chat-model-different.html](https://www.kdnuggets.com/2023/04/baize-opensource-chat-model-different.html)
+> 原文：[`www.kdnuggets.com/2023/04/baize-opensource-chat-model-different.html`](https://www.kdnuggets.com/2023/04/baize-opensource-chat-model-different.html)
 
-![Baize: An Open-Source Chat Model (But Different?)](../Images/50548f8074b6acba37a44c61cd822558.png)
+![Baize: An Open-Source Chat Model (But Different?)](img/50548f8074b6acba37a44c61cd822558.png)
 
 图片由作者提供
 
-我认为可以说2023年是[大型语言模型（LLMs）](/2023/03/top-free-courses-large-language-models.html)的年份。从基于GPT-3家族的ChatGPT的广泛应用，到具备增强推理能力的[GPT-4](/2023/03/gpt4-everything-need-know.html)的发布，这一年在生成式AI领域取得了许多里程碑。而我们每天醒来时都会看到[新应用](/2023/04/langchain-101-build-gptpowered-applications.html)的发布，这些应用利用ChatGPT的能力来解决新问题。
+我认为可以说 2023 年是大型语言模型（LLMs）的年份。从基于 GPT-3 家族的 ChatGPT 的广泛应用，到具备增强推理能力的 GPT-4 的发布，这一年在生成式 AI 领域取得了许多里程碑。而我们每天醒来时都会看到新应用的发布，这些应用利用 ChatGPT 的能力来解决新问题。
 
 在这篇文章中，我们将了解**Baize**，一个最近发布的开源聊天模型。
 
-# 什么是Baize？
+# 什么是 Baize？
 
-**Baize是一个开源聊天模型。很酷。但为什么还需要另一个聊天模型？**
+**Baize 是一个开源聊天模型。很酷。但为什么还需要另一个聊天模型？**
 
 好吧，在与聊天机器人进行的典型会话中，你并不是只提出一个问题来寻求答案。相反，你会问一系列问题，聊天机器人会逐一回答。这种对话链会持续——直到你获得答案或问题的可接受解决方案——在这种多轮对话中。
 
-所以，如果你想开始构建自己的聊天模型，这种**多轮对话语料库**并不常见。Baize旨在利用ChatGPT生成这样的语料库，并用它来微调LLaMA模型。这有助于你构建更好的聊天机器人，并减少训练时间。
+所以，如果你想开始构建自己的聊天模型，这种**多轮对话语料库**并不常见。Baize 旨在利用 ChatGPT 生成这样的语料库，并用它来微调 LLaMA 模型。这有助于你构建更好的聊天机器人，并减少训练时间。
 
-[Project Baize](https://github.com/project-baize)由UC San Diego的McAuley实验室资助，并且是UC San Diego、孙中山大学和微软亚洲研究院研究人员合作的结果。
+[Project Baize](https://github.com/project-baize)由 UC San Diego 的 McAuley 实验室资助，并且是 UC San Diego、孙中山大学和微软亚洲研究院研究人员合作的结果。
 
-Baize的名字来源于中国神话中的白泽，白泽能够理解人类语言[1]。理解人类语言是我们都希望聊天模型具备的能力，对吧？Baize的研究论文首次上传至arxiv是在2023年4月3日。该模型的权重和代码已全部在GitHub上公开，仅供研究使用。所以现在是探索这个新开源聊天模型的好时机。
+Baize 的名字来源于中国神话中的白泽，白泽能够理解人类语言[1]。理解人类语言是我们都希望聊天模型具备的能力，对吧？Baize 的研究论文首次上传至 arxiv 是在 2023 年 4 月 3 日。该模型的权重和代码已全部在 GitHub 上公开，仅供研究使用。所以现在是探索这个新开源聊天模型的好时机。
 
-是的，让我们更多地了解Baize。
+是的，让我们更多地了解 Baize。
 
-# Baize是如何工作的？
+# Baize 是如何工作的？
 
-Baize的工作可以（几乎）总结为两个关键点：
+Baize 的工作可以（几乎）总结为两个关键点：
 
-+   通过利用ChatGPT生成大量的多轮对话数据
++   通过利用 ChatGPT 生成大量的多轮对话数据
 
-+   使用生成的语料库来微调LLaMA
++   使用生成的语料库来微调 LLaMA
 
-![Baize: An Open-Source Chat Model (But Different?)](../Images/8d6eabc389d5ff21e1ccc6acfb01aa06.png)
+![Baize: An Open-Source Chat Model (But Different?)](img/8d6eabc389d5ff21e1ccc6acfb01aa06.png)
 
-训练Baize的流程 | [图片来源](https://arxiv.org/abs/2304.01196v2)
+训练 Baize 的流程 | [图片来源](https://arxiv.org/abs/2304.01196v2)
 
-## 使用ChatGPT自我对话进行数据收集
+## 使用 ChatGPT 自我对话进行数据收集
 
-我们提到过，Baize使用ChatGPT来构建聊天语料库。它使用一种叫做**自我对话**的过程，其中*ChatGPT与自己对话*。
+我们提到过，Baize 使用 ChatGPT 来构建聊天语料库。它使用一种叫做**自我对话**的过程，其中*ChatGPT 与自己对话*。
 
-一个典型的聊天会话需要一个人类和一个AI。数据收集管道中的**自聊天**过程设计为ChatGPT与自己对话——以提供对话的双方。对于自聊天过程，提供了一个模板以及相关要求。
+一个典型的聊天会话需要一个人类和一个 AI。数据收集管道中的**自聊天**过程设计为 ChatGPT 与自己对话——以提供对话的双方。对于自聊天过程，提供了一个模板以及相关要求。
 
-ChatGPT生成的对话质量非常高（我们在社交媒体上看到的更多，而不是在我们自己的ChatGPT会话中）。因此，我们获得了高质量的对话语料库。
+ChatGPT 生成的对话质量非常高（我们在社交媒体上看到的更多，而不是在我们自己的 ChatGPT 会话中）。因此，我们获得了高质量的对话语料库。
 
-让我们来看看Baize使用的数据：
+让我们来看看 Baize 使用的数据：
 
-+   有一个**种子**，*设置话题*以进行聊天会话。它可以是一个问题或一个提供对话中心思想的短语。在Baize的训练中，来自StackOverflow和Quora的问题被用作种子。
++   有一个**种子**，*设置话题*以进行聊天会话。它可以是一个问题或一个提供对话中心思想的短语。在 Baize 的训练中，来自 StackOverflow 和 Quora 的问题被用作种子。
 
-+   在Baize的训练中，ChatGPT（gpt-turbo-3.5）模型用于自聊天数据收集管道。生成的语料库大约有**115K**个对话——其中约55K个对话来自上述每个来源。
++   在 Baize 的训练中，ChatGPT（gpt-turbo-3.5）模型用于自聊天数据收集管道。生成的语料库大约有**115K**个对话——其中约 55K 个对话来自上述每个来源。
 
-+   此外，还使用了来自斯坦福Alpaca的数据。
++   此外，还使用了来自斯坦福 Alpaca 的数据。
 
-+   目前已经发布了三个版本的模型：Baize-7B、Baize-13B和Baize-30B。（在Baize-XB中，XB表示X十亿参数。）
++   目前已经发布了三个版本的模型：Baize-7B、Baize-13B 和 Baize-30B。（在 Baize-XB 中，XB 表示 X 十亿参数。）
 
-+   种子也可以从特定领域进行抽样。这意味着我们可以运行数据收集过程以构建特定领域的聊天语料库。在这个方向上，Baize-Healthcare模型已经发布，基于公开的[MedQuAD数据集](https://paperswithcode.com/dataset/medquad)进行训练，创建了大约47K个对话的语料库。
++   种子也可以从特定领域进行抽样。这意味着我们可以运行数据收集过程以构建特定领域的聊天语料库。在这个方向上，Baize-Healthcare 模型已经发布，基于公开的[MedQuAD 数据集](https://paperswithcode.com/dataset/medquad)进行训练，创建了大约 47K 个对话的语料库。
 
 ## 低资源设置中的微调
 
-下一部分是对生成语料库的LLaMA模型进行微调。模型微调通常是一个资源密集型的任务。由于在资源限制下调整大型语言模型的所有参数不可行，**Baize**使用[低秩适应（LoRA）](https://arxiv.org/abs/2106.09685)来微调LLaMA模型。
+下一部分是对生成语料库的 LLaMA 模型进行微调。模型微调通常是一个资源密集型的任务。由于在资源限制下调整大型语言模型的所有参数不可行，**Baize**使用[低秩适应（LoRA）](https://arxiv.org/abs/2106.09685)来微调 LLaMA 模型。
 
-此外，在推理时，有一个提示指示Baize不要进行不道德和敏感的对话。这减少了对人工干预审查的需求。
+此外，在推理时，有一个提示指示 Baize 不要进行不道德和敏感的对话。这减少了对人工干预审查的需求。
 
-[功能应用](https://huggingface.co/spaces/project-baize/Baize-7B)从HuggingFace中心获取LLaMA模型和LoRA权重。
+[功能应用](https://huggingface.co/spaces/project-baize/Baize-7B)从 HuggingFace 中心获取 LLaMA 模型和 LoRA 权重。
 
-# Baize的优点和局限性
+# Baize 的优点和局限性
 
-接下来，让我们回顾一下Baize的一些优点和局限性。
+接下来，让我们回顾一下 Baize 的一些优点和局限性。
 
 ## 优点
 
-让我们开始列举一些Baize的优点：
+让我们开始列举一些 Baize 的优点：
 
-+   **高可用性**：你可以尝试[Baize-7B on HuggingFaces spaces](https://huggingface.co/spaces/project-baize/Baize-7B)或[本地运行](https://github.com/project-baize/baize-chatbot#how-to-run-locally)。Baize不受API调用次数的限制，缓解了高需求时期的可用性问题。
++   **高可用性**：你可以尝试[Baize-7B on HuggingFaces spaces](https://huggingface.co/spaces/project-baize/Baize-7B)或[本地运行](https://github.com/project-baize/baize-chatbot#how-to-run-locally)。Baize 不受 API 调用次数的限制，缓解了高需求时期的可用性问题。
 
 +   **内置的审核支持**：在推理时的提示可以防止对敏感和不道德话题的讨论，这有利于减少需要审查对话的工作量。
 
@@ -114,11 +114,11 @@ ChatGPT生成的对话质量非常高（我们在社交媒体上看到的更多�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

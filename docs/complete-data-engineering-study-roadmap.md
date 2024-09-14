@@ -1,22 +1,22 @@
 # 完整的数据工程学习路线图
 
-> 原文：[https://www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html](https://www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html)
+> 原文：[`www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html`](https://www.kdnuggets.com/2022/11/complete-data-engineering-study-roadmap.html)
 
-![完整的数据工程学习路线图](../Images/4b671fd46a3f3f555751679e6e53c7ed.png)
+![完整的数据工程学习路线图](img/4b671fd46a3f3f555751679e6e53c7ed.png)
 
 作者提供的图片
 
-[完整的数据科学学习路线图](/2022/08/complete-data-science-study-roadmap.html) 似乎很受欢迎，所以我觉得做一个版本是个好主意。在这篇文章中，我将介绍成为数据工程师所需的一切。
+完整的数据科学学习路线图 似乎很受欢迎，所以我觉得做一个版本是个好主意。在这篇文章中，我将介绍成为数据工程师所需的一切。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 
@@ -62,21 +62,21 @@
 
 +   [数据库管理原则](https://www.youtube.com/watch?v=o36Z_OqC2ac&list=PLdQddgMBv5zHcEN9RrhADq3CBColhY2hl) - YouTube
 
-+   [数据库管理系统（DBMS）与SQL：2022完整包](https://www.udemy.com/course/relational-database-management-systemrdbms-complete-pack/) - Udemy
++   [数据库管理系统（DBMS）与 SQL：2022 完整包](https://www.udemy.com/course/relational-database-management-systemrdbms-complete-pack/) - Udemy
 
-+   [DBMS简介](https://www.geeksforgeeks.org/introduction-of-dbms-database-management-system-set-1/) - 文章/文档
++   [DBMS 简介](https://www.geeksforgeeks.org/introduction-of-dbms-database-management-system-set-1/) - 文章/文档
 
-+   [前30名最受欢迎的数据库管理软件](https://www.softwaretestinghelp.com/database-management-software/) - 博客
++   [前 30 名最受欢迎的数据库管理软件](https://www.softwaretestinghelp.com/database-management-software/) - 博客
 
-如果你还想了解更多关于SQL和数据库的免费课程，可以查看这个：[免费SQL和数据库课程](/2022/09/free-sql-database-course.html)
+如果你还想了解更多关于 SQL 和数据库的免费课程，可以查看这个：免费 SQL 和数据库课程
 
 # 4\. 数据仓储与数据管道
 
-这一领域的重点是区分数据工程师和数据科学家的关键。两者都学习相同的基础知识并使用相同的编程语言、SQL等。但数据仓储和数据管道是使数据工程师与众不同的因素——使他们成为优秀的数据工程师。
+这一领域的重点是区分数据工程师和数据科学家的关键。两者都学习相同的基础知识并使用相同的编程语言、SQL 等。但数据仓储和数据管道是使数据工程师与众不同的因素——使他们成为优秀的数据工程师。
 
 我推荐的数据仓库资源有：
 
-+   [数据仓库工具包](https://aatinegar.com/wp-content/uploads/2016/05/Kimball_The-Data-Warehouse-Toolkit-3rd-Edition.pdf) - PDF书籍。这本书由建立数据仓库基础之一的Ralph Kimball所著。
++   [数据仓库工具包](https://aatinegar.com/wp-content/uploads/2016/05/Kimball_The-Data-Warehouse-Toolkit-3rd-Edition.pdf) - PDF 书籍。这本书由建立数据仓库基础之一的 Ralph Kimball 所著。
 
 +   [数据仓储教程](https://www.tutorialspoint.com/dwh/dwh_data_warehousing.htm) - 文章
 
@@ -86,15 +86,15 @@
 
 +   [数据管道解释](https://www.youtube.com/watch?v=6kEGUCrBEU0) - YouTube
 
-+   [ETL与ELT](https://blog.hubspot.com/website/etl-vs-elt) - 文章
++   [ETL 与 ELT](https://blog.hubspot.com/website/etl-vs-elt) - 文章
 
-+   [用Python构建数据工程管道](https://www.datacamp.com/courses/building-data-engineering-pipelines-in-python?hl=GB) - DataCamp
++   [用 Python 构建数据工程管道](https://www.datacamp.com/courses/building-data-engineering-pipelines-in-python?hl=GB) - DataCamp
 
 # 5\. 云计算
 
 最后但同样重要的是云计算。你不需要了解所有内容，但你应该对不同的服务提供商、他们的能力、局限性等有一个不错的了解。
 
-你需要了解云计算的基础知识，如IAAS、PAAS和SAAS，以及云计算的架构。
+你需要了解云计算的基础知识，如 IAAS、PAAS 和 SAAS，以及云计算的架构。
 
 这里是一些关于云计算的资源：
 
@@ -164,19 +164,19 @@
 
 这里有一些资源可以帮助你：
 
-+   [1001个数据工程师面试问题](https://github.com/andkret/Cookbook/blob/master/sections/08-InterviewQuestions.md)
++   [1001 个数据工程师面试问题](https://github.com/andkret/Cookbook/blob/master/sections/08-InterviewQuestions.md)
 
-+   [2022年60+数据工程师面试问题及答案](https://www.guru99.com/data-engineer-interview-questions.html)
++   [2022 年 60+数据工程师面试问题及答案](https://www.guru99.com/data-engineer-interview-questions.html)
 
-如果Python是你选择的编程语言，建议你熟悉一下[Google Python风格指南](https://google.github.io/styleguide/pyguide.html)
+如果 Python 是你选择的编程语言，建议你熟悉一下[Google Python 风格指南](https://google.github.io/styleguide/pyguide.html)
 
-不要忘记软技能：[面试时询问员工的73个问题](https://articles.bplans.com/hiring-employees-here-are-over-70-must-ask-interview-questions/)
+不要忘记软技能：[面试时询问员工的 73 个问题](https://articles.bplans.com/hiring-employees-here-are-over-70-must-ask-interview-questions/)
 
 # 进一步阅读
 
-如果你想继续学习（这是很多人建议的），这里有一本书单是[成为数据工程师的必备书籍](/2022/10/essential-books-need-become-data-engineer.html)。
+如果你想继续学习（这是很多人建议的），这里有一本书单是成为数据工程师的必备书籍。
 
-如果你在寻找最终的数据工程课程，我推荐这个：[Google Cloud认证准备：云数据工程师专业证书](https://gb.coursera.org/professional-certificates/gcp-data-engineering)
+如果你在寻找最终的数据工程课程，我推荐这个：[Google Cloud 认证准备：云数据工程师专业证书](https://gb.coursera.org/professional-certificates/gcp-data-engineering)
 
 成为数据工程师的旅程不会轻松。你需要付出努力，但我向你保证，一旦你付出，就会得到回报。
 
@@ -184,14 +184,14 @@
 
 ### 更多相关话题
 
-+   [KDnuggets新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [完整的数据科学学习路线图](https://www.kdnuggets.com/2022/08/complete-data-science-study-roadmap.html)
 
 +   [完整的机器学习学习路线图](https://www.kdnuggets.com/2022/12/complete-machine-learning-study-roadmap.html)
 
-+   [完整的MLOps学习路线图](https://www.kdnuggets.com/2022/12/complete-mlops-study-roadmap.html)
++   [完整的 MLOps 学习路线图](https://www.kdnuggets.com/2022/12/complete-mlops-study-roadmap.html)
 
-+   [KDnuggets新闻，12月14日：3个免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [超级学习指南：免费算法和数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)

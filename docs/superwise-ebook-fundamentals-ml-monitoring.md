@@ -1,16 +1,16 @@
 # 电子书：高效 ML 监控基础
 
-> 原文：[https://www.kdnuggets.com/2020/12/superwise-ebook-fundamentals-ml-monitoring.html](https://www.kdnuggets.com/2020/12/superwise-ebook-fundamentals-ml-monitoring.html)
+> 原文：[`www.kdnuggets.com/2020/12/superwise-ebook-fundamentals-ml-monitoring.html`](https://www.kdnuggets.com/2020/12/superwise-ebook-fundamentals-ml-monitoring.html)
 
 赞助帖子。
 
-[![Superwise 电子书 高效 ML 监控](../Images/a96ef65c10b5dc568a7ede4a45b7eaa2.png)](https://www.superwise.ai/ml-monitoring-ebook)
+![Superwise 电子书 高效 ML 监控](https://www.superwise.ai/ml-monitoring-ebook)
 
 现代企业依赖于机器学习驱动的预测来指导业务战略，例如通过预测需求和降低风险。对于越来越多的企业而言，机器学习（ML）预测支撑了他们的核心业务模型，如[使用 ML 模型的金融机构](https://uploads-ssl.webflow.com/5f3a4b1bd19bbb2dbf48b659/5fbfa9e940810b298c02b4b5_Credit%20Score%20Underwriting.pdf)来批准或拒绝贷款申请。
 
 由于机器学习与其他软件或传统 IT 大相径庭，模型在投入生产的瞬间就有退化的风险——在数据的超动态特性与模型的超敏感性碰撞的地方。这些数据结构中的“漂移”或其他导致模型退化的特性，往往是无声无息和不可观察的。
 
-在过去几个月里，由于 COVID-19 危机的影响，我们都见证了公司在修复关键业务模型方面的挣扎。其中一个最被记录的问题是 Instacart，其库存预测模型的准确率从[93%降至61%，](https://fortune.com/2020/06/09/instacart-coronavirus-artificial-intelligence/) 这让他们的客户和团队感到不满。
+在过去几个月里，由于 COVID-19 危机的影响，我们都见证了公司在修复关键业务模型方面的挣扎。其中一个最被记录的问题是 Instacart，其库存预测模型的准确率从[93%降至 61%，](https://fortune.com/2020/06/09/instacart-coronavirus-artificial-intelligence/) 这让他们的客户和团队感到不满。
 
 准备应对“第二天”的数据科学和工程团队非常少，那个他们的模型与现实世界碰面的日子；因为他们将大部分时间投入到研究、培训和评估模型中。尽管团队显然希望在问题出现之前解决任何潜在问题，但生产系统缺乏明确的流程、工具和要求。今天，行业仍然缺乏关于什么是最佳 ML 基础设施的指南。
 
@@ -48,11 +48,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

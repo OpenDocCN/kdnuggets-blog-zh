@@ -1,10 +1,10 @@
 # [白皮书] 使用 Python 解锁数据科学与机器学习的力量
 
-> 原文：[https://www.kdnuggets.com/2019/05/activestate-whitepaper-data-science-machine-learning-python.html](https://www.kdnuggets.com/2019/05/activestate-whitepaper-data-science-machine-learning-python.html)
+> 原文：[`www.kdnuggets.com/2019/05/activestate-whitepaper-data-science-machine-learning-python.html`](https://www.kdnuggets.com/2019/05/activestate-whitepaper-data-science-machine-learning-python.html)
 
 赞助文章。
 
-[![Activestate 解锁数据科学 Python](../Images/4336e0e13b51d27d2a971b2002048117.png)](https://www.activestate.com/resources/white-papers/unlocking-power-data-science-machine-learning-python/?utm_campaign=unlocking-power-data-science&utm_medium=referral&utm_source=kdnuggets&utm_content=2019-05-08-kdnuggets-article)
+![Activestate 解锁数据科学 Python](https://www.activestate.com/resources/white-papers/unlocking-power-data-science-machine-learning-python/?utm_campaign=unlocking-power-data-science&utm_medium=referral&utm_source=kdnuggets&utm_content=2019-05-08-kdnuggets-article)
 
 随着组织继续投资大数据，挑战不再在于数据本身，而在于将数据转化为业务价值的算法。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -34,7 +34,7 @@ Python 正在成为解锁大数据力量的通用语言，因为领先公司采�
 
 +   许可、安全、技术支持等
 
-[![](../Images/63fdb05153bce2f6d70d3294b4281175.png)](https://www.activestate.com/resources/white-papers/unlocking-power-data-science-machine-learning-python/?utm_campaign=unlocking-power-data-science&utm_medium=referral&utm_source=kdnuggets&utm_content=2019-05-08-kdnuggets-article)
+![](https://www.activestate.com/resources/white-papers/unlocking-power-data-science-machine-learning-python/?utm_campaign=unlocking-power-data-science&utm_medium=referral&utm_source=kdnuggets&utm_content=2019-05-08-kdnuggets-article)
 
 ### 更多相关主题
 

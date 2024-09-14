@@ -1,8 +1,8 @@
 # 3 门免费的数据科学统计学课程
 
-> 原文：[https://www.kdnuggets.com/2022/08/3-free-statistics-courses-data-science.html](https://www.kdnuggets.com/2022/08/3-free-statistics-courses-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/08/3-free-statistics-courses-data-science.html`](https://www.kdnuggets.com/2022/08/3-free-statistics-courses-data-science.html)
 
-![3 门免费的数据科学统计学课程](../Images/1049ff9c0f66da5c3ec2098771891f88.png)
+![3 门免费的数据科学统计学课程](img/1049ff9c0f66da5c3ec2098771891f88.png)
 
 图片来源：[Monstera](https://www.pexels.com/photo/serious-black-student-writing-mathematical-example-on-blackboard-6238037/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -100,8 +100,8 @@ Stat 110 涵盖了诸如概率、蒙提霍尔问题、随机变量、概率分�
 
 +   [真正免费的课程：人工智能与机器学习版](https://www.kdnuggets.com/free-courses-that-are-actually-free-ai-ml-edition)
 
-+   [KDnuggets 新闻，5月4日：9 门免费哈佛课程学习数据科学](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据科学](https://www.kdnuggets.com/2022/n18.html)
 
-+   [KDnuggets 新闻，7月6日：12 个必备的数据科学 VSCode 插件](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode 插件](https://www.kdnuggets.com/2022/n27.html)
 
 +   [25 门免费课程掌握数据科学、数据工程、机器学习](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)

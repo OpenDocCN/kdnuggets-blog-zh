@@ -1,8 +1,8 @@
-# NLP的ABC，从A到Z
+# NLP 的 ABC，从 A 到 Z
 
-> 原文：[https://www.kdnuggets.com/2022/10/abcs-nlp-a-to-z.html](https://www.kdnuggets.com/2022/10/abcs-nlp-a-to-z.html)
+> 原文：[`www.kdnuggets.com/2022/10/abcs-nlp-a-to-z.html`](https://www.kdnuggets.com/2022/10/abcs-nlp-a-to-z.html)
 
-![NLP的ABC](../Images/a95abd83df49823b923f73ff8556bcff.png)
+![NLP 的 ABC](img/a95abd83df49823b923f73ff8556bcff.png)
 
 图片由 [Towfiqu barbhuiya](https://unsplash.com/@towfiqu999999?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -30,7 +30,7 @@
 
 正如你从上述内容中可能能看出的，这两个概念的确切界限并不明确且达成共识，并且根据讨论这些问题的从业者和研究人员的不同程度有所重叠。我发现通过洞察的程度来区分最为容易。如果原始文本是数据，那么文本挖掘可以提取**信息**，而 NLP 提取的是*知识*（见下图的理解金字塔）。可以说是语法与语义的区别。
 
-![理解金字塔](../Images/fcba6856f9d93514b15b4a585e1fb548.png)
+![理解金字塔](img/fcba6856f9d93514b15b4a585e1fb548.png)
 
 理解金字塔：数据，信息，知识
 
@@ -50,13 +50,13 @@
 
 # 为什么处理文本很困难？
 
-![为什么处理文本很困难？](../Images/5a4c88a2115dd4c217aabde148806d05.png)
+![为什么处理文本很困难？](img/5a4c88a2115dd4c217aabde148806d05.png)
 
 来源：CS124 斯坦福大学 (https://web.stanford.edu/class/cs124/)
 
 你可能注意到上面提到的一个有趣的点：“非标准英语。”虽然这显然不是图表的意图——我们在这里完全脱离了上下文——但出于各种原因，很多 NLP 研究历史上都发生在英语语言的范围内。因此，我们可以在“为什么处理文本很困难？”的问题上增加额外的困难层面，这些困难是非英语语言，特别是说话人数较少的语言，甚至是[濒危语言](https://en.wikipedia.org/wiki/Endangered_language)在处理和提取洞见时必须经历的。
 
-![NLP的基础](../Images/4e246faf25596cb69da1df0fd63fba91.png)
+![NLP 的基础](img/4e246faf25596cb69da1df0fd63fba91.png)
 
 [由 rawpixel.com 提供的图片](https://www.freepik.com/free-vector/illustration-language-concept_2825850.htm#query=language&position=0&from_view=search&track=sph) 在 Freepik 上
 
@@ -104,11 +104,11 @@
 
 +   即使是思考聊天机器人（一个自然语言处理任务）或生成模型：也需要某种形式的评估
 
-![自然语言处理的ABC](../Images/15b55f9e2420ef63c99915f836f88aa9.png)
+![自然语言处理的 ABC](img/15b55f9e2420ef63c99915f836f88aa9.png)
 
 一个简单的文本数据任务框架
 
-显然，任何关注文本数据预处理的框架都必须与步骤2\. 同义。具体来说，我们对这个步骤可能涉及的内容有以下说明：
+显然，任何关注文本数据预处理的框架都必须与步骤 2\. 同义。具体来说，我们对这个步骤可能涉及的内容有以下说明：
 
 +   对原始文本语料库执行准备任务，以便进行文本挖掘或自然语言处理任务
 
@@ -116,7 +116,7 @@
 
 +   更一般来说，我们感兴趣的是对某些预定的文本进行基本的分析和转换，以便得到更加有用的成果，这些成果将有助于进行后续更有意义的分析任务。这个后续任务就是我们的核心文本挖掘或自然语言处理工作。
 
-所以，如上所述，文本预处理似乎有3个主要组件：
+所以，如上所述，文本预处理似乎有 3 个主要组件：
 
 +   分词
 
@@ -128,7 +128,7 @@
 
 # 文本预处理框架
 
-我们将从概念上介绍这个框架，独立于工具。接下来我们将跟进这些步骤的实际实施，以查看它们在Python生态系统中的执行方式。
+我们将从概念上介绍这个框架，独立于工具。接下来我们将跟进这些步骤的实际实施，以查看它们在 Python 生态系统中的执行方式。
 
 这些任务的顺序不一定是固定的，也可能会有一些迭代。
 
@@ -140,23 +140,23 @@
 
 **语料库**（拉丁语字面意思为“主体”）指的是文本的集合。这些集合可以是单一语言的文本，也可以跨越多种语言；多语言语料库（语料库的复数形式）有许多用途。语料库也可以包括主题文本（历史的、圣经的等）。语料库通常仅用于统计语言分析和假设检验。
 
-怎么样更具体一点？假设我们从万维网获得了一个语料库，并且它是以原始网页格式存放的。那么我们可以假设我们的文本很有可能被HTML或XML标签包裹。虽然这种处理元数据的工作可以作为文本收集或组装过程的一部分（我们文本数据任务框架的第1步），但这取决于数据的获取和组装方式。有时我们可以控制这些数据的收集和组装过程，因此我们的语料库可能在收集过程中已经去噪了。
+怎么样更具体一点？假设我们从万维网获得了一个语料库，并且它是以原始网页格式存放的。那么我们可以假设我们的文本很有可能被 HTML 或 XML 标签包裹。虽然这种处理元数据的工作可以作为文本收集或组装过程的一部分（我们文本数据任务框架的第 1 步），但这取决于数据的获取和组装方式。有时我们可以控制这些数据的收集和组装过程，因此我们的语料库可能在收集过程中已经去噪了。
 
-但情况并非总是如此。如果你所使用的语料库是嘈杂的，你必须处理这些问题。请记住，分析任务通常被认为有80%是数据准备！
+但情况并非总是如此。如果你所使用的语料库是嘈杂的，你必须处理这些问题。请记住，分析任务通常被认为有 80%是数据准备！
 
 好消息是，模式匹配可以在这里成为你的朋友，现有的软件工具也可以处理这种模式匹配任务。
 
 +   删除文本文件的头部和尾部
 
-+   删除HTML、XML等标记和元数据
++   删除 HTML、XML 等标记和元数据
 
-+   从其他格式（如JSON）或数据库中提取有价值的数据
++   从其他格式（如 JSON）或数据库中提取有价值的数据
 
 +   如果你对正则表达式感到恐惧，这可能会是你最担心的文本预处理部分。
 
 **正则表达式**，通常缩写为*regexp*或*regexp*，是一种简洁描述文本模式的可靠方法。正则表达式本身作为一个特殊的文本字符串，用于在文本选择上开发搜索模式。正则表达式可以被看作是超越**?**和*****通配符的扩展规则集。尽管学习起来常被认为令人沮丧，但正则表达式是非常强大的文本搜索工具。
 
-正如你所想，噪声去除和数据收集与组装之间的界限是模糊的，因此某些噪声去除必须在其他预处理步骤之前进行。例如，任何从JSON结构中提取的文本显然需要在分词之前去除。
+正如你所想，噪声去除和数据收集与组装之间的界限是模糊的，因此某些噪声去除必须在其他预处理步骤之前进行。例如，任何从 JSON 结构中提取的文本显然需要在分词之前去除。
 
 ## 2\. 标准化
 
@@ -204,7 +204,7 @@
 
 ## 3. 分词
 
-**分词**通常是NLP过程中的早期步骤，这一步将较长的文本字符串分割成更小的片段或标记。较大的文本块可以被分词为句子，句子可以被分词为单词，等等。通常在文本经过适当分词后，会进行进一步处理。
+**分词**通常是 NLP 过程中的早期步骤，这一步将较长的文本字符串分割成更小的片段或标记。较大的文本块可以被分词为句子，句子可以被分词为单词，等等。通常在文本经过适当分词后，会进行进一步处理。
 
 分词也称为文本分割或词汇分析。有时**分割**用于指将较大的文本块分解成比单词更大的片段（例如段落或句子），而分词专指分解过程仅产生单词的情况。
 
@@ -230,13 +230,13 @@
 
 **考虑**：当我们将文本块分割成句子时，我们是否应该保留句子结束的分隔符？我们是否有兴趣记住句子的结束位置？
 
-# 存在什么NLP任务？
+# 存在什么 NLP 任务？
 
-我们已经涵盖了一些对NLP任务有用的文本（预）处理步骤，但任务本身呢？
+我们已经涵盖了一些对 NLP 任务有用的文本（预）处理步骤，但任务本身呢？
 
-这些任务类型之间没有明确的界限；然而，目前许多任务相对较为明确。一个宏观的NLP任务可能包括多种子任务。
+这些任务类型之间没有明确的界限；然而，目前许多任务相对较为明确。一个宏观的 NLP 任务可能包括多种子任务。
 
-我们首先概述了主要的方法，因为这些技术通常是初学者关注的重点，但了解NLP任务的具体类型是很有帮助的。以下是NLP任务的主要类别。
+我们首先概述了主要的方法，因为这些技术通常是初学者关注的重点，但了解 NLP 任务的具体类型是很有帮助的。以下是 NLP 任务的主要类别。
 
 ## 1. 文本分类任务
 
@@ -275,7 +275,7 @@
       "said james there",
       "james there there",
    ] 
-``` 在神经网络在 NLP 中广泛使用之前——我们称之为“传统”NLP——文本的向量化通常通过 **one-hot 编码** 进行（请注意，这仍然是一种有用的编码实践，尽管神经网络的使用并没有使其过时）。对于 one-hot 编码，文本中的每个词或标记对应一个向量元素。![one-hot 编码](../Images/5ef1df6b072c42628ebebb1bed002594.png)
+``` 在神经网络在 NLP 中广泛使用之前——我们称之为“传统”NLP——文本的向量化通常通过 **one-hot 编码** 进行（请注意，这仍然是一种有用的编码实践，尽管神经网络的使用并没有使其过时）。对于 one-hot 编码，文本中的每个词或标记对应一个向量元素。![one-hot 编码](img/5ef1df6b072c42628ebebb1bed002594.png)
 
 来源：[Adrian Colyer](https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/)
 
@@ -299,23 +299,23 @@
 
 +   应用：查找相似单词（相似向量）、句子嵌入（与单词嵌入相对）、主题建模、搜索、问答
 
-**密集嵌入向量**也称为单词嵌入，将核心特征嵌入到大小为*d*维度的嵌入空间中。如果需要，我们可以将表示20,000个唯一单词所用的维度数压缩到可能的50或100维。在这种方法中，每个特征不再具有自己的维度，而是映射到一个向量中。![密集嵌入向量](../Images/8913c8af571d99ba5f4f14898a5f3a8e.png)
+**密集嵌入向量**也称为单词嵌入，将核心特征嵌入到大小为*d*维度的嵌入空间中。如果需要，我们可以将表示 20,000 个唯一单词所用的维度数压缩到可能的 50 或 100 维。在这种方法中，每个特征不再具有自己的维度，而是映射到一个向量中。![密集嵌入向量](img/8913c8af571d99ba5f4f14898a5f3a8e.png)
 
 来源：[Adrian Colyer](https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/)
 
 那么，这些特征究竟是什么呢？我们将其交给神经网络来确定单词之间关系的重要方面。尽管人类对这些特征的解释不可能非常精确，但上面的图像提供了对底层过程的洞察，涉及到著名的`King - Man + Woman = Queen` [例子](https://www.technologyreview.com/s/541356/king-man-woman-queen-the-marvelous-mathematics-of-computational-linguistics/)。
 
-**命名实体识别**是尝试识别文本数据中的[命名实体](https://en.wikipedia.org/wiki/Named_entity)，并对其进行适当分类。命名实体类别包括但不限于人名、地点、组织、货币值、日期和时间、数量等，并可以根据应用（医疗、科学、商业等）包括自定义类别。你可以将命名实体视为**专有名词++**。![NER](../Images/5b9fbdd9038ed540762215991c040a03.png)
+**命名实体识别**是尝试识别文本数据中的[命名实体](https://en.wikipedia.org/wiki/Named_entity)，并对其进行适当分类。命名实体类别包括但不限于人名、地点、组织、货币值、日期和时间、数量等，并可以根据应用（医疗、科学、商业等）包括自定义类别。你可以将命名实体视为**专有名词++**。![NER](img/5b9fbdd9038ed540762215991c040a03.png)
 
-使用spaCy进行命名实体识别（文本摘自[这里](https://www.nomadicmatt.com/travel-blogs/three-days-in-new-york-city/)）
+使用 spaCy 进行命名实体识别（文本摘自[这里](https://www.nomadicmatt.com/travel-blogs/three-days-in-new-york-city/)）
 
-**词性标注**包括将类别标签分配给句子的分词部分。最常见的词性标注是识别单词作为名词、动词、形容词等。![词性标注](../Images/a8df09740c1f85d2d5d57166eca3d9ae.png)
+**词性标注**包括将类别标签分配给句子的分词部分。最常见的词性标注是识别单词作为名词、动词、形容词等。![词性标注](img/a8df09740c1f85d2d5d57166eca3d9ae.png)
 
 词性标注
 
 ## 4\. 序列到序列任务
 
-+   许多NLP任务可以被框定为这样的任务
++   许多 NLP 任务可以被框定为这样的任务
 
 +   示例包括机器翻译、摘要生成、简化、问答系统
 
@@ -323,7 +323,7 @@
 
 ## 5\. 对话系统
 
-+   对话系统的2大主要类别，根据其使用范围进行分类
++   对话系统的 2 大主要类别，根据其使用范围进行分类
 
 +   目标导向对话系统专注于在特定、受限领域中的有用性；更精确，适用性较差
 
@@ -335,7 +335,7 @@
 
 虽然不是一成不变，但解决 NLP 任务的方法主要分为 3 个组。
 
-![使用 spaCy 的依存解析树](../Images/06df8524acd26c1d5673e7fcf1602ad5.png)
+![使用 spaCy 的依存解析树](img/06df8524acd26c1d5673e7fcf1602ad5.png)
 
 使用 spaCy 的依存解析树
 
@@ -389,11 +389,11 @@
 
 ## 为什么深度学习优于“传统”机器学习？
 
-+   在许多应用中处于SOTA（例如，机器翻译）
++   在许多应用中处于 SOTA（例如，机器翻译）
 
-+   现在这里有很多关于NLP的研究（大多数？）
++   现在这里有很多关于 NLP 的研究（大多数？）
 
-**重要的是**，神经网络和非神经网络方法在现代NLP中各有用处；它们也可以一起使用或研究，以获得最大的潜在收益
+**重要的是**，神经网络和非神经网络方法在现代 NLP 中各有用处；它们也可以一起使用或研究，以获得最大的潜在收益
 
 ## 参考文献
 
@@ -407,18 +407,18 @@
 
 1.  [词向量的惊人力量](https://blog.acolyer.org/2016/04/21/the-amazing-power-of-word-vectors/)，Adrian Colyer
 
-**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)**（[**@mattmayo13**](https://twitter.com/mattmayo13)）是数据科学家及KDnuggets的主编，该网站是开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1 at kdnuggets[dot]com与他联系。
+**[Matthew Mayo](https://www.linkedin.com/in/mattmayo13/)**（[**@mattmayo13**](https://twitter.com/mattmayo13)）是数据科学家及 KDnuggets 的主编，该网站是开创性的在线数据科学和机器学习资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。Matthew 拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 与他联系。
 
 ### 更多相关主题
 
-+   [用LIME解释NLP模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
++   [用 LIME 解释 NLP 模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
 
-+   [过去12个月必读的NLP论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
++   [过去 12 个月必读的 NLP 论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
 
-+   [NLP中不同词嵌入技术的终极指南](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
++   [NLP 中不同词嵌入技术的终极指南](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
 
-+   [现实世界中NLP应用的范围：一个不同的…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
++   [现实世界中 NLP 应用的范围：一个不同的…](https://www.kdnuggets.com/2022/03/different-solution-problem-range-nlp-applications-real-world.html)
 
-+   [机器学习的甜蜜点：NLP和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)
++   [机器学习的甜蜜点：NLP 和文档分析中的纯粹方法](https://www.kdnuggets.com/2022/05/machine-learning-sweet-spot-pure-approaches-nlp-document-analysis.html)
 
-+   [oBERT: 复合稀疏化提供更快的准确模型用于NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)
++   [oBERT: 复合稀疏化提供更快的准确模型用于 NLP](https://www.kdnuggets.com/2022/05/obert-compound-sparsification-delivers-faster-accurate-models-nlp.html)

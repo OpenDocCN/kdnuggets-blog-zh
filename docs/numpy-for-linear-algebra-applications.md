@@ -1,8 +1,8 @@
 # NumPy 在线性代数应用中的应用
 
-> 原文：[https://www.kdnuggets.com/numpy-for-linear-algebra-applications](https://www.kdnuggets.com/numpy-for-linear-algebra-applications)
+> 原文：[`www.kdnuggets.com/numpy-for-linear-algebra-applications`](https://www.kdnuggets.com/numpy-for-linear-algebra-applications)
 
-![NumPy 在线性代数应用中的应用](../Images/a5af47dcabba34b86db0b04b7b88de86.png)
+![NumPy 在线性代数应用中的应用](img/a5af47dcabba34b86db0b04b7b88de86.png)
 
 图片来源：编辑
 
@@ -12,11 +12,11 @@ NumPy 是一个高效的线性代数工具。它有助于矩阵操作和方程�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

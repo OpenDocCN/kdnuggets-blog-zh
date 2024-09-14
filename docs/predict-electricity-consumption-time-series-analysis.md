@@ -1,10 +1,10 @@
 # 使用时间序列分析预测电力消耗
 
-> 原文：[https://www.kdnuggets.com/2020/01/predict-electricity-consumption-time-series-analysis.html](https://www.kdnuggets.com/2020/01/predict-electricity-consumption-time-series-analysis.html)
+> 原文：[`www.kdnuggets.com/2020/01/predict-electricity-consumption-time-series-analysis.html`](https://www.kdnuggets.com/2020/01/predict-electricity-consumption-time-series-analysis.html)
 
-[评论](#comments)![图](../Images/c248c9e12ad62e45724654ee5e058261.png)
+评论![图](img/c248c9e12ad62e45724654ee5e058261.png)
 
-图片来源：[https://gfycat.com/frailofficialdegus](https://gfycat.com/frailofficialdegus)
+图片来源：[`gfycat.com/frailofficialdegus`](https://gfycat.com/frailofficialdegus)
 
 ### 介绍
 
@@ -54,7 +54,7 @@
 
 ### 时间序列预测的阶段
 
-解决时间序列问题与常规建模任务略有不同。解决时间序列问题的简单/基本过程可以通过以下步骤来演示。我们将了解每个阶段需要执行的任务。我们还将查看我们解决问题的每个阶段的Python实现。
+解决时间序列问题与常规建模任务略有不同。解决时间序列问题的简单/基本过程可以通过以下步骤来演示。我们将了解每个阶段需要执行的任务。我们还将查看我们解决问题的每个阶段的 Python 实现。
 
 步骤是—
 
@@ -68,11 +68,11 @@
 
 **3\. 为我们的模型寻找最佳参数**
 
-我们需要为预测模型找到最佳参数，当我们拥有一个平稳序列时。这些参数来自ACF和PACF图。因此，这个阶段更多的是关于绘制上述两个图形，并基于它们提取最佳模型参数。不要担心，我们将在下面的实现部分中介绍如何确定这些参数！
+我们需要为预测模型找到最佳参数，当我们拥有一个平稳序列时。这些参数来自 ACF 和 PACF 图。因此，这个阶段更多的是关于绘制上述两个图形，并基于它们提取最佳模型参数。不要担心，我们将在下面的实现部分中介绍如何确定这些参数！
 
 **4\. 拟合模型**
 
-一旦我们拥有了最佳模型参数，我们可以拟合一个ARIMA模型来学习序列的模式。始终记住，时间序列算法仅适用于平稳数据，因此使序列平稳是一个重要的方面。
+一旦我们拥有了最佳模型参数，我们可以拟合一个 ARIMA 模型来学习序列的模式。始终记住，时间序列算法仅适用于平稳数据，因此使序列平稳是一个重要的方面。
 
 **5\. 预测**
 
@@ -80,9 +80,9 @@
 
 ### 问题陈述
 
-数据集可以从[**这里**](https://drive.google.com/open?id=1051N7h_L7XUXJU1ztSvWTV2VMb6yZfnD)下载。数据集仅包含2列，一列是日期，另一列与消费百分比有关。
+数据集可以从[**这里**](https://drive.google.com/open?id=1051N7h_L7XUXJU1ztSvWTV2VMb6yZfnD)下载。数据集仅包含 2 列，一列是日期，另一列与消费百分比有关。
 
-它展示了1985年至2018年的电力消耗情况。目标是预测接下来6年的电力消耗，即直到2024年。
+它展示了 1985 年至 2018 年的电力消耗情况。目标是预测接下来 6 年的电力消耗，即直到 2024 年。
 
 加载数据集
 
@@ -98,7 +98,7 @@ from pylab import rcParams
 rcParams['figure.figsize'] = 10, 7df = pd.read_csv('/Users/.../.../.../Electric_consumption.csv')
 ```
 
-现在，定义列名，删除空值，将日期转换为DateTime格式，并将日期设置为索引列，因为没有索引就无法绘制图表。
+现在，定义列名，删除空值，将日期转换为 DateTime 格式，并将日期设置为索引列，因为没有索引就无法绘制图表。
 
 ```py
 df.columns=['Date', 'Consumption']
@@ -108,7 +108,7 @@ df.set_index('Date', inplace=True) #set date as index
 df.head()
 ```
 
-![图](../Images/c25cd4ba5e6409f69067c0f9244d3d0b.png)
+![图](img/c25cd4ba5e6409f69067c0f9244d3d0b.png)
 
 数据集
 
@@ -123,7 +123,7 @@ plt.title("production graph")
 plt.plot(df)
 ```
 
-![图](../Images/dfb3a46d2347daf5c5940c9d90fd36e8.png)
+![图](img/dfb3a46d2347daf5c5940c9d90fd36e8.png)
 
 原始时间序列数据点
 
@@ -140,13 +140,13 @@ df.plot(style='k.')
 plt.show()
 ```
 
-![图](../Images/d4c4d12bc48e1a6e4810b91ee0f7f97b.png)
+![图](img/d4c4d12bc48e1a6e4810b91ee0f7f97b.png)
 
 时间序列数据点的散点图
 
 我们还可以通过分布来可视化我们序列中的数据。
 
-![](../Images/b20e8147afe05a4d403c25853f451827.png)
+![](img/b20e8147afe05a4d403c25853f451827.png)
 
 我们可以观察到消费值近似正态分布（钟形曲线）。
 
@@ -173,7 +173,7 @@ result.plot()
 plt.show()
 ```
 
-![](../Images/5c0775018ed3c73952f4e52546c471fe.png)
+![](img/5c0775018ed3c73952f4e52546c471fe.png)
 
 这可以让我们更深入了解数据和现实世界的行为。显然，存在上升趋势和每年电力消费达到最高的重复事件。
 
@@ -181,11 +181,11 @@ plt.show()
 
 首先，我们需要检查序列是否平稳。
 
-**ADF（增强型Dickey-Fuller）检验**
+**ADF（增强型 Dickey-Fuller）检验**
 
-Dickey-Fuller检验是最受欢迎的统计检验之一。它可以用来确定序列中是否存在单位根，从而帮助我们理解序列是否平稳。该检验的原假设和备择假设如下：
+Dickey-Fuller 检验是最受欢迎的统计检验之一。它可以用来确定序列中是否存在单位根，从而帮助我们理解序列是否平稳。该检验的原假设和备择假设如下：
 
-**原假设：** 序列具有单位根（a=1的值）
+**原假设：** 序列具有单位根（a=1 的值）
 
 **备择假设：** 序列没有单位根。
 
@@ -222,11 +222,11 @@ def test_stationarity(timeseries):
 test_stationarity(df)
 ```
 
-![](../Images/c3d4b4193d0ec0e53b9286e5e72686b9.png)
+![](img/c3d4b4193d0ec0e53b9286e5e72686b9.png)
 
 通过上述图表，我们可以看到均值和标准差的增加，因此我们的序列不是平稳的。
 
-![图](../Images/6da2e750c73d55a1c29f436a5128f08a.png)
+![图](img/6da2e750c73d55a1c29f436a5128f08a.png)
 
 迪基-富勒检验的结果
 
@@ -246,7 +246,7 @@ plt.plot(std_dev, color ="black")
 plt.show()
 ```
 
-![](../Images/cd9d4fa9ba13711cc5cc4f614d4980a8.png)
+![](img/cd9d4fa9ba13711cc5cc4f614d4980a8.png)
 
 计算均值后，我们在序列中的每个点上取序列值与均值之间的差异。
 
@@ -263,7 +263,7 @@ df_log_moving_avg_diff.dropna(inplace=True)
 test_stationarity(df_log_moving_avg_diff)
 ```
 
-![](../Images/95388987e34b4711450e24fc01e5c434.png)
+![](img/95388987e34b4711450e24fc01e5c434.png)
 
 从上图中，我们观察到数据达到了平稳状态。
 
@@ -275,7 +275,7 @@ weighted_average = df_log.ewm(halflife=12, min_periods=0,adjust=True).mean()
 
 指数加权移动平均数（EMA）是最近 n 个价格的加权平均数，其中权重随着每个之前的价格/周期呈指数递减。换句话说，该公式赋予近期价格比过去价格更多的权重。
 
-![](../Images/962926beaef8ee29c67564bc8f4558c2.png)
+![](img/962926beaef8ee29c67564bc8f4558c2.png)
 
 之前我们用移动平均数减去了 df_log，现在用相同的 df_log 减去加权平均数，并再次执行迪基-富勒检验（ADFT）。
 
@@ -286,9 +286,9 @@ rcParams['figure.figsize'] = 10,6
 test_stationarity(logScale_weightedMean)
 ```
 
-![](../Images/e1539dc78ec0593da27f1b930de78526.png)
+![](img/e1539dc78ec0593da27f1b930de78526.png)
 
-![图](../Images/0746a0afbe809122f8d29d8c1da4b33b.png)
+![图](img/0746a0afbe809122f8d29d8c1da4b33b.png)
 
 迪基-富勒检验的结果
 
@@ -304,7 +304,7 @@ test_stationarity(logScale_weightedMean)
 
 差分是通过从当前观察值中减去前一个观察值来进行的。
 
-再次执行Dickey-Fuller测试（ADFT）。
+再次执行 Dickey-Fuller 测试（ADFT）。
 
 ```py
 df_log_diff = df_log - df_log.shift()
@@ -315,9 +315,9 @@ plt.plot(df_log_diff)#Let us test the stationarity of our resultant series
 df_log_diff.dropna(inplace=True)test_stationarity(df_log_diff)
 ```
 
-![](../Images/454f6ac4acd56560e46bc9552729d75b.png)
+![](img/454f6ac4acd56560e46bc9552729d75b.png)
 
-下一步是执行分解，这提供了一种结构化的思考时间序列预测问题的方法，既包括建模复杂性的一般性方面，也包括如何在给定模型中最好地捕捉每个组件的具体方面。最后，再次执行Dickey-Fuller测试（ADFT）。
+下一步是执行分解，这提供了一种结构化的思考时间序列预测问题的方法，既包括建模复杂性的一般性方面，也包括如何在给定模型中最好地捕捉每个组件的具体方面。最后，再次执行 Dickey-Fuller 测试（ADFT）。
 
 ```py
 from chart_studio.plotly import plot_mpl
@@ -330,15 +330,15 @@ seasonality.dropna(inplace=True)residual = result.resid
 residual.dropna(inplace=True)test_stationarity(residual)
 ```
 
-![](../Images/0eef215bcefd854dcad6dd894590f2cc.png)
+![](img/0eef215bcefd854dcad6dd894590f2cc.png)
 
 在分解之后，如果我们查看残差，那么均值和标准差都是平坦的。我们得到了我们的平稳序列，现在可以继续寻找模型的最佳参数。
 
 **3. 寻找我们模型的最佳参数**
 
-在我们构建预测模型之前，需要确定模型的最佳参数。为这些最佳参数，我们需要ACF和PACF图。
+在我们构建预测模型之前，需要确定模型的最佳参数。为这些最佳参数，我们需要 ACF 和 PACF 图。
 
-非季节性ARIMA模型被分类为“ARIMA(p,d,q)”模型，其中：
+非季节性 ARIMA 模型被分类为“ARIMA(p,d,q)”模型，其中：
 
 p → 自回归项的数量，
 
@@ -346,21 +346,21 @@ d → 实现平稳性所需的非季节性差分数量，以及
 
 q → 预测方程中滞后的预测误差数量。
 
-p和q的值通过ACF和PACF图得出。所以让我们理解ACF和PACF吧！
+p 和 q 的值通过 ACF 和 PACF 图得出。所以让我们理解 ACF 和 PACF 吧！
 
 ### 自相关函数（ACF）
 
-统计相关性总结了两个变量之间关系的强度。皮尔逊相关系数是一个介于-1和1之间的数字，分别描述负相关或正相关。零值表示没有相关性。
+统计相关性总结了两个变量之间关系的强度。皮尔逊相关系数是一个介于-1 和 1 之间的数字，分别描述负相关或正相关。零值表示没有相关性。
 
 我们可以计算时间序列观察值与前一个时间步的相关性，称为滞后。因为时间序列观察值的相关性是与前面时间的同一序列的值计算的，这被称为序列相关性，或自相关性。
 
-时间序列的自相关图按滞后显示，称为**自**相关**函**数，或缩写为ACF。该图有时也称为自相关图或自相关图。
+时间序列的自相关图按滞后显示，称为**自**相关**函**数，或缩写为 ACF。该图有时也称为自相关图或自相关图。
 
 ### 偏自相关函数（PACF）
 
 偏自相关是时间序列中某个观察值与前期观察值的关系的总结，剔除了中间观察值的关系。
 
-在滞后k的偏自相关是去除任何因较短滞后项而产生的相关性后的相关性。
+在滞后 k 的偏自相关是去除任何因较短滞后项而产生的相关性后的相关性。
 
 观测值和先前时间步的观测值之间的自相关包括直接相关和间接相关。部分自相关函数旨在去除这些间接相关。
 
@@ -387,7 +387,7 @@ plt.title('Partially auto corellation function')
 plt.tight_layout()
 ```
 
-![](../Images/afd326f6376a540cda25c22f8ed81149.png)
+![](img/afd326f6376a540cda25c22f8ed81149.png)
 
 **4\. 拟合模型**
 
@@ -403,7 +403,7 @@ plt.title("sum of squares of residuals")
 print('RSS : %f' %sum((result_AR.fittedvalues-df_log_diff["Consumption"])**2))
 ```
 
-![](../Images/b57540811435e9eea8464ac0c79423c9.png)
+![](img/b57540811435e9eea8464ac0c79423c9.png)
 
 RSS 值越小，模型越有效。你可以通过 (2,1,0)、(3,1,1) 等组合来寻找最小的 RSS 值。
 
@@ -416,7 +416,7 @@ result_AR.plot_predict(1,500)
 x=result_AR.forecast(steps=200)
 ```
 
-![](../Images/799347500c89c55c018c68653b1517b9.png)
+![](img/799347500c89c55c018c68653b1517b9.png)
 
 从上述图表中，我们计算了到 2024 年的未来预测，灰色区域是置信区间，这意味着预测不会越过该区域。
 
@@ -426,11 +426,11 @@ x=result_AR.forecast(steps=200)
 
 好了，文章到此为止，希望大家阅读愉快，欢迎在评论区分享你的意见/想法/反馈。
 
-![图](../Images/bb5866fe888ae1ac0fd95aaed064e11b.png)
+![图](img/bb5866fe888ae1ac0fd95aaed064e11b.png)
 
-图片来源: [http://mrwgifs.com/grainy-classic-the-end-gif/](http://mrwgifs.com/grainy-classic-the-end-gif/)
+图片来源: [`mrwgifs.com/grainy-classic-the-end-gif/`](http://mrwgifs.com/grainy-classic-the-end-gif/)
 
-你可以在这个 GitHub 链接中找到完整代码：[https://github.com/nageshsinghc4/Time-Series-Analysis](https://github.com/nageshsinghc4/Time-Series-Analysis)
+你可以在这个 GitHub 链接中找到完整代码：[`github.com/nageshsinghc4/Time-Series-Analysis`](https://github.com/nageshsinghc4/Time-Series-Analysis)
 
 快乐学习 !!!
 
@@ -440,21 +440,21 @@ x=result_AR.forecast(steps=200)
 
 **相关:**
 
-+   [结合不同方法创建高级时间序列预测](/2016/11/combining-different-methods-create-advanced-time-series-prediction.html)
++   结合不同方法创建高级时间序列预测
 
-+   [AutoML 在时序关系数据中的应用：新的前沿](/2019/10/automl-temporal-relational-data.html)
++   AutoML 在时序关系数据中的应用：新的前沿
 
-+   [时间序列分析：使用 KNIME 和 Spark 的简单示例](/2019/10/time-series-analysis-simple-example-knime-spark.html)
++   时间序列分析：使用 KNIME 和 Spark 的简单示例
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -462,12 +462,12 @@ x=result_AR.forecast(steps=200)
 
 +   [停止学习数据科学以寻找目标，并寻找目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [数据科学学习统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应了解的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应了解的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

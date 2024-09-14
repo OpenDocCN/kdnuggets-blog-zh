@@ -1,22 +1,22 @@
 # 使用平均精度均值评估对象检测模型
 
-> 原文：[https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html](https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)
+> 原文：[`www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html`](https://www.kdnuggets.com/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)
 
-[评论](#comments)
+评论
 
-为了评估像R-CNN和[YOLO](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/)这样的对象检测模型，使用**平均精度均值（mAP）**。mAP比较真实边界框和检测到的边界框，并返回一个分数。分数越高，模型的检测越准确。
+为了评估像 R-CNN 和[YOLO](https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/)这样的对象检测模型，使用**平均精度均值（mAP）**。mAP 比较真实边界框和检测到的边界框，并返回一个分数。分数越高，模型的检测越准确。
 
-在上一篇文章中，我们详细讨论了[混淆矩阵、模型准确性、精确度和召回率](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy)。我们还使用了Scikit-learn库来计算这些指标。现在我们将扩展讨论，看看精确度和召回率如何用于计算mAP。
+在上一篇文章中，我们详细讨论了[混淆矩阵、模型准确性、精确度和召回率](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy)。我们还使用了 Scikit-learn 库来计算这些指标。现在我们将扩展讨论，看看精确度和召回率如何用于计算 mAP。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@
 
 在本节中，我们将快速回顾如何从预测分数中推导出类别标签。
 
-给定有两个类别，*正类* 和 *负类*，以下是10个样本的真实标签。
+给定有两个类别，*正类* 和 *负类*，以下是 10 个样本的真实标签。
 
 ```py
 y_true = ["positive", "negative", "negative", "positive", "positive", "positive", "negative", "positive", "negative", "positive"]
@@ -96,7 +96,7 @@ print(recall)
 
 ### **精度-召回曲线**
 
-从[第1部分](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/)中给出的精度和召回的定义中记住，精度越高，模型在将样本分类为*正样本*时越自信。召回率越高，模型正确分类的正样本数量越多。
+从[第一部分](https://blog.paperspace.com/deep-learning-metrics-precision-recall-accuracy/)中给出的精度和召回的定义中记住，精度越高，模型在将样本分类为*正样本*时越自信。召回率越高，模型正确分类的正样本数量越多。
 
 > 当模型具有高召回率但低精度时，模型可以正确分类大多数正样本，但也有许多假阳性（即将许多*负样本*分类为*正样本*）。当模型具有高精度但低召回率时，模型在将样本分类为*正样本*时准确，但可能仅分类了一部分正样本。
 
@@ -122,7 +122,7 @@ pred_scores = [0.7, 0.3, 0.5, 0.6, 0.55, 0.9, 0.4, 0.2, 0.4, 0.3, 0.7, 0.5, 0.8,
 thresholds = numpy.arange(start=0.2, stop=0.7, step=0.05)
 ```
 
-这里是保存在`thresholds`列表中的阈值。由于有10个阈值，因此将创建10个精度和召回值。
+这里是保存在`thresholds`列表中的阈值。由于有 10 个阈值，因此将创建 10 个精度和召回值。
 
 ```py
 [0.2, 
@@ -208,17 +208,17 @@ matplotlib.pyplot.show()
 
 精度-召回曲线在下图中显示。请注意，随着召回率的增加，精度会下降。原因是，当正样本数量增加（高召回率）时，每个样本正确分类的准确性下降（低精度）。这是可以预期的，因为当样本数量较多时，模型更容易出现失败。
 
-![](../Images/485ef820cd31ff4ef7c85f2abce540ba.png)
+![](img/485ef820cd31ff4ef7c85f2abce540ba.png)
 
 精度-召回曲线使决定精度和召回率都高的点变得容易。根据之前的图表，最佳点是`(recall, precision)=(0.778, 0.875)`。
 
 在之前的图中，图形化决定精准率和召回率的最佳值可能是有效的，因为曲线不复杂。更好的方法是使用一种称为`f1`的指标，该指标根据下列公式计算。
 
-![](../Images/55be9dd9d291f369c35c1c9908412e0f.png)
+![](img/55be9dd9d291f369c35c1c9908412e0f.png)
 
 `f1`指标衡量精准率和召回率之间的平衡。当`f1`值较高时，意味着精准率和召回率都较高。较低的`f1`分数表示精准率和召回率之间的不平衡较大。
 
-根据前面的示例，`f1`的计算方法如下代码所示。根据`f1`列表中的值，最高分数是`0.82352941`。它是列表中的第6个元素（即索引5）。`recalls`和`precisions`列表中的第6个元素分别是`0.778`和`0.875`。相应的阈值是`0.45`。
+根据前面的示例，`f1`的计算方法如下代码所示。根据`f1`列表中的值，最高分数是`0.82352941`。它是列表中的第 6 个元素（即索引 5）。`recalls`和`precisions`列表中的第 6 个元素分别是`0.778`和`0.875`。相应的阈值是`0.45`。
 
 ```py
 f1 = 2 * ((numpy.array(precisions) * numpy.array(recalls)) / (numpy.array(precisions) + numpy.array(recalls)))
@@ -249,25 +249,25 @@ matplotlib.pyplot.title("Precision-Recall Curve", fontsize=15, fontweight="bold"
 matplotlib.pyplot.show()
 ```
 
-![](../Images/9d90ccf37d25964e2c5bb5fe5eb218d1.png)
+![](img/9d90ccf37d25964e2c5bb5fe5eb218d1.png)
 
 讨论了精准率-召回率曲线后，下一部分讨论如何计算**平均精准率**。
 
 ### **平均精准率 (AP)**
 
-**平均精准率 (AP)**是一种将精准率-召回率曲线汇总为一个值的方式，该值表示所有精准率的平均值。AP根据下列公式计算。通过循环遍历所有的精准率/召回率，计算当前和下一召回率之间的差异，然后乘以当前的精准率。换句话说，AP是每个阈值下精准率的加权总和，其中权重是召回率的增加。
+**平均精准率 (AP)**是一种将精准率-召回率曲线汇总为一个值的方式，该值表示所有精准率的平均值。AP 根据下列公式计算。通过循环遍历所有的精准率/召回率，计算当前和下一召回率之间的差异，然后乘以当前的精准率。换句话说，AP 是每个阈值下精准率的加权总和，其中权重是召回率的增加。
 
-![](../Images/b4fb8d00f4ebb4cfde3e78063126b80e.png)
+![](img/b4fb8d00f4ebb4cfde3e78063126b80e.png)
 
-重要的是将`recalls`和`precisions`列表分别用0和1进行扩展。例如，如果`recalls`列表为0.8,0.60.8,0.6，则应添加0，使其变为0.8,0.6,0.00.8,0.6,0.0。`precisions`列表也要这样做，但应添加1而不是0（例如0.8,0.2,1.00.8,0.2,1.0）。
+重要的是将`recalls`和`precisions`列表分别用 0 和 1 进行扩展。例如，如果`recalls`列表为 0.8,0.60.8,0.6，则应添加 0，使其变为 0.8,0.6,0.00.8,0.6,0.0。`precisions`列表也要这样做，但应添加 1 而不是 0（例如 0.8,0.2,1.00.8,0.2,1.0）。
 
-由于`recalls`和`precisions`都是NumPy数组，前面的公式可以通过以下Python代码建模。
+由于`recalls`和`precisions`都是 NumPy 数组，前面的公式可以通过以下 Python 代码建模。
 
 ```py
 AP = numpy.sum((recalls[:-1] - recalls[1:]) * precisions[:-1])
 ```
 
-这是计算AP的完整代码。
+这是计算 AP 的完整代码。
 
 ```py
 import numpy
@@ -306,7 +306,7 @@ AP = numpy.sum((recalls[:-1] - recalls[1:]) * precisions[:-1])
 print(AP)
 ```
 
-这就是关于平均精准率的所有内容。以下是计算AP的步骤总结：
+这就是关于平均精准率的所有内容。以下是计算 AP 的步骤总结：
 
 1.  使用模型生成**预测分数**。
 
@@ -332,37 +332,37 @@ print(AP)
 
 模型预测了检测到的物体的边界框。预计预测框不会完全匹配实际框。下图展示了一张猫的图像。物体的实际框为红色，而预测框为黄色。根据这两个框的可视化，模型是否做出了一个高匹配分数的良好预测？
 
-主观评估模型预测是困难的。例如，有人可能认为匹配度为50%，而其他人则认为匹配度为60%。
+主观评估模型预测是困难的。例如，有人可能认为匹配度为 50%，而其他人则认为匹配度为 60%。
 
-![](../Images/3db505280cbb6dd521581b900e6e1d7c.png)
+![](img/3db505280cbb6dd521581b900e6e1d7c.png)
 
 [Image](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) 来自 [Pixabay](https://pixabay.com/photos/cat-young-animal-curious-wildcat-2083492) ，由 [susannp4](https://pixabay.com/users/susannp4-1777190) 提供
 
-更好的替代方法是使用定量度量来评分实际框和预测框的匹配程度。这一度量是**交并比 (IoU)**。IoU有助于判断一个区域是否包含物体。
+更好的替代方法是使用定量度量来评分实际框和预测框的匹配程度。这一度量是**交并比 (IoU)**。IoU 有助于判断一个区域是否包含物体。
 
-IoU是通过将两个框之间的交集面积除以它们的并集面积来计算的。IoU越高，预测越好。
+IoU 是通过将两个框之间的交集面积除以它们的并集面积来计算的。IoU 越高，预测越好。
 
-![](../Images/65c006c1e81f14f0dffb941e8ddf7fcf.png)
+![](img/65c006c1e81f14f0dffb941e8ddf7fcf.png)
 
-下图展示了三个具有不同IoU的情况。请注意，每个案例顶部的IoU是客观测量的，可能与实际情况略有不同，但还是有意义的。
+下图展示了三个具有不同 IoU 的情况。请注意，每个案例顶部的 IoU 是客观测量的，可能与实际情况略有不同，但还是有意义的。
 
-对于案例A，黄色预测框与红色实际框相距较远，因此IoU分数为**0.2**（即两个框之间只有20%的重叠）。
+对于案例 A，黄色预测框与红色实际框相距较远，因此 IoU 分数为**0.2**（即两个框之间只有 20%的重叠）。
 
-对于案例B，两个框之间的交集面积较大，但两个框仍未对齐，因此IoU分数为**0.5**。
+对于案例 B，两个框之间的交集面积较大，但两个框仍未对齐，因此 IoU 分数为**0.5**。
 
-对于案例C，两个框的坐标非常接近，因此它们的IoU为**0.9**（即两个框之间有90%的重叠）。
+对于案例 C，两个框的坐标非常接近，因此它们的 IoU 为**0.9**（即两个框之间有 90%的重叠）。
 
-请注意，当预测框和实际框之间重叠度为0%时，IoU为0.0。当两个框完全重合时，IoU为**1.0**。
+请注意，当预测框和实际框之间重叠度为 0%时，IoU 为 0.0。当两个框完全重合时，IoU 为**1.0**。
 
-![](../Images/7bb321e12b722d04b585731116b71d26.png)
+![](img/7bb321e12b722d04b585731116b71d26.png)
 
-要计算图像的IoU，这里有一个名为`intersection_over_union()`的函数。它接受以下两个参数：
+要计算图像的 IoU，这里有一个名为`intersection_over_union()`的函数。它接受以下两个参数：
 
 1.  `gt_box`：实际边界框。
 
 1.  `pred_box`：预测边界框。
 
-它计算了`intersection`和`union`变量中两个框之间的交集和并集。此外，IoU在`iou`变量中计算。它返回这三个变量。
+它计算了`intersection`和`union`变量中两个框之间的交集和并集。此外，IoU 在`iou`变量中计算。它返回这三个变量。
 
 ```py
 def intersection_over_union(gt_box, pred_box):
@@ -380,11 +380,11 @@ def intersection_over_union(gt_box, pred_box):
     return iou, intersection, union
 ```
 
-传递给函数的边界框是一个包含4个元素的列表，其中包括：
+传递给函数的边界框是一个包含 4 个元素的列表，其中包括：
 
-1.  左上角的x轴。
+1.  左上角的 x 轴。
 
-1.  左上角的y轴。
+1.  左上角的 y 轴。
 
 1.  宽度。
 
@@ -448,9 +448,9 @@ ax.axes.get_yaxis().set_ticks([])
 
 下一个图示显示了带有边界框的图像。
 
-![](../Images/3081d86d1a81996b3a304c922d647b98.png)
+![](img/3081d86d1a81996b3a304c922d647b98.png)
 
-要计算IoU，只需调用`intersection_over_union()`函数。根据边界框，IoU分数为`0.54`。
+要计算 IoU，只需调用`intersection_over_union()`函数。根据边界框，IoU 分数为`0.54`。
 
 ```py
 iou, intersect, union = intersection_over_union(gt_box, pred_box)
@@ -461,17 +461,17 @@ print(iou, intersect, union)
 0.5409582689335394 350000 647000
 ```
 
-IoU分数**0.54**意味着真实框与预测框之间有54%的重叠。观察这些框，有人可能会直观地觉得模型检测到猫物体已经足够好。也有人可能觉得模型还不够准确，因为预测框与真实框的契合度不高。
+IoU 分数**0.54**意味着真实框与预测框之间有 54%的重叠。观察这些框，有人可能会直观地觉得模型检测到猫物体已经足够好。也有人可能觉得模型还不够准确，因为预测框与真实框的契合度不高。
 
-为了客观判断模型是否正确预测了框的位置，使用了一个**阈值**。如果模型预测的框的IoU分数大于或等于**阈值**，则预测框与真实框之一之间有很高的重叠。这意味着模型能够成功检测到物体。检测到的区域被分类为**Positive**（即包含物体）。
+为了客观判断模型是否正确预测了框的位置，使用了一个**阈值**。如果模型预测的框的 IoU 分数大于或等于**阈值**，则预测框与真实框之一之间有很高的重叠。这意味着模型能够成功检测到物体。检测到的区域被分类为**Positive**（即包含物体）。
 
-另一方面，当IoU分数小于阈值时，模型做出了错误的预测，因为预测框与真实框没有重叠。这意味着检测到的区域被分类为**Negative**（即不包含物体）。
+另一方面，当 IoU 分数小于阈值时，模型做出了错误的预测，因为预测框与真实框没有重叠。这意味着检测到的区域被分类为**Negative**（即不包含物体）。
 
-![](../Images/66f31d5e3d700c35d5db1fab90bd1ace.png)
+![](img/66f31d5e3d700c35d5db1fab90bd1ace.png)
 
-让我们通过一个例子来澄清IoU分数如何帮助将区域分类为物体或非物体。假设物体检测模型输入了下一张图像，其中有2个目标物体，真实框用红色标出，预测框用黄色标出。
+让我们通过一个例子来澄清 IoU 分数如何帮助将区域分类为物体或非物体。假设物体检测模型输入了下一张图像，其中有 2 个目标物体，真实框用红色标出，预测框用黄色标出。
 
-下一段代码读取图像（假设文件名为`pets.jpg`），绘制框，并计算每个物体的IoU。左侧物体的IoU为**0.76**，而另一个物体的IoU分数为**0.26**。
+下一段代码读取图像（假设文件名为`pets.jpg`），绘制框，并计算每个物体的 IoU。左侧物体的 IoU 为**0.76**，而另一个物体的 IoU 分数为**0.26**。
 
 ```py
 import matplotlib.pyplot
@@ -545,25 +545,25 @@ ax.axes.get_xaxis().set_ticks([])
 ax.axes.get_yaxis().set_ticks([])
 ```
 
-如果IoU阈值为0.6，则只有IoU分数大于或等于0.6的区域被分类为**Positive**（即有物体）。因此，IoU分数为0.76的框为Positive，而IoU为0.26的另一个框为**Negative**。
+如果 IoU 阈值为 0.6，则只有 IoU 分数大于或等于 0.6 的区域被分类为**Positive**（即有物体）。因此，IoU 分数为 0.76 的框为 Positive，而 IoU 为 0.26 的另一个框为**Negative**。
 
-![](../Images/d66ca57f3e5d41315a023aabd18ea039.png)
+![](img/d66ca57f3e5d41315a023aabd18ea039.png)
 
 无标签的图像来自[hindustantimes.com](https://www.hindustantimes.com/rf/image_size_960x540/HT/p2/2019/05/25/Pictures/_b336a8c4-7e7b-11e9-8a88-8b84fe2ad6da.png)
 
-如果阈值改为**0.2**而不是0.6，则两个预测都是**Positive**。如果阈值为**0.8**，则两个预测都是**Negative**。
+如果阈值改为**0.2**而不是 0.6，则两个预测都是**Positive**。如果阈值为**0.8**，则两个预测都是**Negative**。
 
-总结来说，IoU分数衡量的是预测框与真实框的接近程度。它的范围从0.0到1.0，其中1.0是最佳结果。当IoU大于阈值时，框被分类为**Positive**，因为它包围了一个物体。否则，分类为**Negative**。
+总结来说，IoU 分数衡量的是预测框与真实框的接近程度。它的范围从 0.0 到 1.0，其中 1.0 是最佳结果。当 IoU 大于阈值时，框被分类为**Positive**，因为它包围了一个物体。否则，分类为**Negative**。
 
-下一节展示了如何利用IoU来计算物体检测模型的平均精度均值（mAP）。
+下一节展示了如何利用 IoU 来计算物体检测模型的平均精度均值（mAP）。
 
 ### **物体检测的平均精度均值（mAP）**
 
-通常，目标检测模型会使用不同的IoU阈值进行评估，其中每个阈值可能会给出不同的预测。假设模型输入了一张包含10个物体、分布在2个类别中的图像。如何计算mAP？
+通常，目标检测模型会使用不同的 IoU 阈值进行评估，其中每个阈值可能会给出不同的预测。假设模型输入了一张包含 10 个物体、分布在 2 个类别中的图像。如何计算 mAP？
 
-要计算mAP，首先需要计算每个类别的AP。所有类别的AP的均值即为mAP。
+要计算 mAP，首先需要计算每个类别的 AP。所有类别的 AP 的均值即为 mAP。
 
-假设使用的数据集只有2个类别。对于第一类，以下是`y_true`和`pred_scores`变量中的真实标签和预测分数。
+假设使用的数据集只有 2 个类别。对于第一类，以下是`y_true`和`pred_scores`变量中的真实标签和预测分数。
 
 ```py
 y_true = ["positive", "negative", "positive", "negative", "positive", "positive", "positive", "negative", "positive", "negative"]
@@ -579,13 +579,13 @@ y_true = ["negative", "positive", "positive", "negative", "negative", "positive"
 pred_scores = [0.32, 0.9, 0.5, 0.1, 0.25, 0.9, 0.55, 0.3, 0.35, 0.85]
 ```
 
-IoU阈值列表从0.2到0.9，步长为0.25。
+IoU 阈值列表从 0.2 到 0.9，步长为 0.25。
 
 ```py
 thresholds = numpy.arange(start=0.2, stop=0.9, step=0.05)
 ```
 
-要计算一个类别的AP，只需将其`y_true`和`pred_scores`变量输入到下列代码中。
+要计算一个类别的 AP，只需将其`y_true`和`pred_scores`变量输入到下列代码中。
 
 ```py
 precisions, recalls = precision_recall_curve(y_true=y_true, 
@@ -609,19 +609,19 @@ AP = numpy.sum((recalls[:-1] - recalls[1:]) * precisions[:-1])
 print(AP)
 ```
 
-对于第一类，这里是其精确率-召回率曲线。根据这条曲线，AP为`0.949`。
+对于第一类，这里是其精确率-召回率曲线。根据这条曲线，AP 为`0.949`。
 
-![](../Images/e4291b5f650a2af303082cb38dbe712b.png)
+![](img/e4291b5f650a2af303082cb38dbe712b.png)
 
-第二类的精确率-召回率曲线如下所示。它的AP为`0.958`。
+第二类的精确率-召回率曲线如下所示。它的 AP 为`0.958`。
 
-![](../Images/7e8d11fad5d3e86f59a810c177fa82ae.png)
+![](img/7e8d11fad5d3e86f59a810c177fa82ae.png)
 
-根据这两个类别的AP（0.949和0.958），目标检测模型的mAP按照下列公式计算。
+根据这两个类别的 AP（0.949 和 0.958），目标检测模型的 mAP 按照下列公式计算。
 
-![](../Images/365f7ef8e3a3e4bbdb735aaad8aabed7.png)
+![](img/365f7ef8e3a3e4bbdb735aaad8aabed7.png)
 
-根据这个公式，mAP为`0.9535`。
+根据这个公式，mAP 为`0.9535`。
 
 ```py
 mAP = (0.949 + 0.958)/2 = 0.9535
@@ -631,19 +631,19 @@ mAP = (0.949 + 0.958)/2 = 0.9535
 
 本教程讨论了如何为目标检测模型计算均值平均精度（mAP）。我们首先讨论了如何将预测分数转换为类别标签。通过使用不同的阈值，创建了一个精确率-召回率曲线。从这条曲线中，测量出平均精度（AP）。
 
-对于目标检测模型，阈值是检测物体的交并比（IoU）。一旦计算出数据集中每个类别的AP，即可计算mAP。
+对于目标检测模型，阈值是检测物体的交并比（IoU）。一旦计算出数据集中每个类别的 AP，即可计算 mAP。
 
-**个人简介：[Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术学士学位，并荣获优秀学位。因在学院排名第一，他于2015年被推荐到埃及的一个学院担任教学助理，随后在2016年转为学院的教学助理及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
+**个人简介：[Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于 2015 年 7 月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术学士学位，并荣获优秀学位。因在学院排名第一，他于 2015 年被推荐到埃及的一个学院担任教学助理，随后在 2016 年转为学院的教学助理及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
 
 [原文](https://blog.paperspace.com/mean-average-precision/)。经授权转载。
 
 **相关内容：**
 
-+   [评估深度学习模型：混淆矩阵、准确率、精确率和召回率](/2021/02/evaluating-deep-learning-models-confusion-matrix-accuracy-precision-recall.html)
++   评估深度学习模型：混淆矩阵、准确率、精确率和召回率
 
-+   [在Keras中使用Lambda层](/2021/01/working-lambda-layer-keras.html)
++   在 Keras 中使用 Lambda 层
 
-+   [如何在深度学习中创建自定义实时图](/2020/12/create-custom-real-time-plots-deep-learning.html)
++   如何在深度学习中创建自定义实时图
 
 ### 更多相关内容
 
@@ -653,8 +653,8 @@ mAP = (0.949 + 0.958)/2 = 0.9535
 
 +   [混淆矩阵、精确率和召回率解释](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)
 
-+   [KDnuggets新闻，11月16日：LinkedIn如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
-+   [KDnuggets™新闻 22:n09，3月2日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™新闻 22:n09，3 月 2 日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
-+   [SQL与对象关系映射（ORM）的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
++   [SQL 与对象关系映射（ORM）的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)

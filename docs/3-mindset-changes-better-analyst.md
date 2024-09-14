@@ -1,22 +1,22 @@
 # 成为更好分析师的三种思维方式转变
 
-> 原文：[https://www.kdnuggets.com/2021/08/3-mindset-changes-better-analyst.html](https://www.kdnuggets.com/2021/08/3-mindset-changes-better-analyst.html)
+> 原文：[`www.kdnuggets.com/2021/08/3-mindset-changes-better-analyst.html`](https://www.kdnuggets.com/2021/08/3-mindset-changes-better-analyst.html)
 
-[comments](#comments)
+comments
 
 **由 [Bobby Pinero](https://www.linkedin.com/in/bobbypinero/)，Equals 的首席执行官兼联合创始人**。
 
-![](../Images/5617a18196cf69d257e92b4501131dff.png)
+![](img/5617a18196cf69d257e92b4501131dff.png)
 
 > * * *
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 > 
 > * * *
 > 

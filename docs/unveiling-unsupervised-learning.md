@@ -1,8 +1,8 @@
 # 揭示无监督学习
 
-> 原文：[https://www.kdnuggets.com/unveiling-unsupervised-learning](https://www.kdnuggets.com/unveiling-unsupervised-learning)
+> 原文：[`www.kdnuggets.com/unveiling-unsupervised-learning`](https://www.kdnuggets.com/unveiling-unsupervised-learning)
 
-![揭示无监督学习](../Images/ef0e31549bbc4dde78a53ff85e3a7fb5.png)
+![揭示无监督学习](img/ef0e31549bbc4dde78a53ff85e3a7fb5.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -56,7 +56,7 @@
 
 以下是差异的总结：
 
-![揭示无监督学习](../Images/ff5a48170413c9ac9e58712a4791acd8.png)
+![揭示无监督学习](img/ff5a48170413c9ac9e58712a4791acd8.png)
 
 有监督学习与无监督学习 | 图片由作者提供
 
@@ -140,7 +140,7 @@ DBSCAN 根据邻域中数据点的密度识别簇。它可以发现任意形状�
 
 ## 主成分分析（PCA）
 
-[主成分分析](/2023/05/principal-component-analysis-pca-scikitlearn.html)——或 PCA——将数据转换到新的坐标系统，以最大化主成分方向的方差。它在尽可能保留方差的同时减少数据维度。
+主成分分析——或 PCA——将数据转换到新的坐标系统，以最大化主成分方向的方差。它在尽可能保留方差的同时减少数据维度。
 
 这里是你如何进行 PCA 进行降维：
 
@@ -204,7 +204,7 @@ DBSCAN 根据邻域中数据点的密度识别簇。它可以发现任意形状�
 
 如果你正在处理具有高维特征的数据集，尝试在构建机器学习模型之前应用降维技术。继续学习！
 
-**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术写作专家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。
+**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术写作专家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。
 
 ### 更多相关主题
 
@@ -212,10 +212,10 @@ DBSCAN 根据邻域中数据点的密度识别簇。它可以发现任意形状�
 
 +   [探索无监督学习指标](https://www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html)
 
-+   [使用scikit-learn进行聚类：无监督学习教程](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)
++   [使用 scikit-learn 进行聚类：无监督学习教程](https://www.kdnuggets.com/2023/05/clustering-scikitlearn-tutorial-unsupervised-learning.html)
 
-+   [无监督学习实战：K-Means聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
++   [无监督学习实战：K-Means 聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
 
-+   [揭示CTGAN的潜力：利用生成式AI生成合成数据](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
++   [揭示 CTGAN 的潜力：利用生成式 AI 生成合成数据](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
 
-+   [揭示Midjourney 5.2：AI图像生成的飞跃](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)
++   [揭示 Midjourney 5.2：AI 图像生成的飞跃](https://www.kdnuggets.com/2023/06/unveiling-midjourney-52-leap-forward.html)

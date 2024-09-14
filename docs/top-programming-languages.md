@@ -1,18 +1,18 @@
 # 顶级编程语言及其用途
 
-> 原文：[https://www.kdnuggets.com/2021/05/top-programming-languages.html](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
+> 原文：[`www.kdnuggets.com/2021/05/top-programming-languages.html`](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 
-![](../Images/f61cee96efc7b8adafb630bb294739c6.png)
+![](img/f61cee96efc7b8adafb630bb294739c6.png)
 
 > * * *
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 > 
 > * * *
 > 
@@ -30,13 +30,13 @@
 
 不用担心。我们整理了这份清单，以尽可能顺利地帮助你做出选择，涵盖一些流行的编程语言及其常见用途。
 
-如果你计划在2021年学习一门编程语言，我们建议选择一种**现代、广泛使用且拥有大量包或库的语言**。
+如果你计划在 2021 年学习一门编程语言，我们建议选择一种**现代、广泛使用且拥有大量包或库的语言**。
 
 在这一部分，我们将介绍一些符合上述所有标准的广泛使用的编程语言，并分享它们的用途。
 
 ## 1. Python — 人工智能与机器学习
 
-![](../Images/ff066deb40d87861ba5ce8fa0d3448de.png)
+![](img/ff066deb40d87861ba5ce8fa0d3448de.png)
 
 *来源：[Python 官方网站](https://www.python.org/)*
 
@@ -46,35 +46,35 @@
 
 +   **平台：** Web，桌面
 
-+   **受欢迎程度：** [PYPL 人气指数 2021年3月榜单第#1](https://pypl.github.io/PYPL.html)，[Tiobe 指数 2021年3月榜单第#3](https://www.tiobe.com/tiobe-index/)，在2020年受到 [66.7%](https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved) StackExchange 开发者的喜爱，并且有30%的人希望使用，是所有语言中最多的。
++   **受欢迎程度：** [PYPL 人气指数 2021 年 3 月榜单第#1](https://pypl.github.io/PYPL.html)，[Tiobe 指数 2021 年 3 月榜单第#3](https://www.tiobe.com/tiobe-index/)，在 2020 年受到 [66.7%](https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved) StackExchange 开发者的喜爱，并且有 30%的人希望使用，是所有语言中最多的。
 
-**由Guido van Rossum在1990年代开发，** 多用途高级 [Python](https://datawider.com/python-programming-language-is-considered-better-than-other-languages/) 近年来增长非常迅速，成为今天最受欢迎的编程语言之一。
+**由 Guido van Rossum 在 1990 年代开发，** 多用途高级 [Python](https://datawider.com/python-programming-language-is-considered-better-than-other-languages/) 近年来增长非常迅速，成为今天最受欢迎的编程语言之一。
 
-Python受欢迎的主要原因是 **它的初学者友好性**，这使得任何人，即使是没有编程背景的人，也能快速上手Python并开始创建简单的程序。
+Python 受欢迎的主要原因是 **它的初学者友好性**，这使得任何人，即使是没有编程背景的人，也能快速上手 Python 并开始创建简单的程序。
 
-但这还不是全部。它还提供了一个异常 [丰富的包和库](https://towardsdatascience.com/best-python-libraries-for-every-python-developer-77daab4fa40e) 集合，这些包和库在缩短项目ETA方面发挥了关键作用，还有一个强大的志同道合的开发者社区，愿意提供帮助。
+但这还不是全部。它还提供了一个异常 [丰富的包和库](https://towardsdatascience.com/best-python-libraries-for-every-python-developer-77daab4fa40e) 集合，这些包和库在缩短项目 ETA 方面发挥了关键作用，还有一个强大的志同道合的开发者社区，愿意提供帮助。
 
 **这种语言的用途—**
 
-尽管Python可以用来构建几乎所有东西，但它在处理像人工智能、[机器学习](https://towardsdatascience.com/a-tour-of-machine-learning-algorithms-466b8bf75c0a)、数据分析等技术时表现尤为出色。Python也对网页开发、创建企业应用程序以及 [应用程序的GUI](https://towardsdatascience.com/top-10-python-gui-frameworks-for-developers-adca32fbe6fc?source=your_stories_page-------------------------------------) 非常有用。
+尽管 Python 可以用来构建几乎所有东西，但它在处理像人工智能、[机器学习](https://towardsdatascience.com/a-tour-of-machine-learning-algorithms-466b8bf75c0a)、数据分析等技术时表现尤为出色。Python 也对网页开发、创建企业应用程序以及 [应用程序的 GUI](https://towardsdatascience.com/top-10-python-gui-frameworks-for-developers-adca32fbe6fc?source=your_stories_page-------------------------------------) 非常有用。
 
-**Python被应用于许多领域。以下是一些示例—**
+**Python 被应用于许多领域。以下是一些示例—**
 
-[https://www.python.org/about/apps/](https://www.python.org/about/apps/)
+[`www.python.org/about/apps/`](https://www.python.org/about/apps/)
 
 **额外资源：**
 
-+   [学习Python](https://www.youtube.com/watch?v=rfscVS0vtbw) — *freecodecamp*
++   [学习 Python](https://www.youtube.com/watch?v=rfscVS0vtbw) — *freecodecamp*
 
-+   [Python教程—Python入门](https://www.youtube.com/watch?v=_uQrJ0TkZlc&t=6s) — 编程与Mosh
++   [Python 教程—Python 入门](https://www.youtube.com/watch?v=_uQrJ0TkZlc&t=6s) — 编程与 Mosh
 
-+   [Python教程](https://www.learnpython.org/) — Learnpython.org
++   [Python 教程](https://www.learnpython.org/) — Learnpython.org
 
 ## 2. JavaScript—丰富的互动网页开发
 
-![](../Images/942c84a9c18a2b9fe7da1c7a92d226f1.png)
+![](img/942c84a9c18a2b9fe7da1c7a92d226f1.png)
 
-*来源：* [官方JavaScript网站](https://www.javascript.com/)
+*来源：* [官方 JavaScript 网站](https://www.javascript.com/)
 
 +   **级别：** 初学者
 
@@ -82,29 +82,29 @@ Python受欢迎的主要原因是 **它的初学者友好性**，这使得任何
 
 +   **平台：** Web、桌面、前端脚本
 
-+   **受欢迎程度：** [#3](https://pypl.github.io/PYPL.html) 在2021年3月PYPL受欢迎度指数中，[#7](https://www.tiobe.com/tiobe-index/) 在2021年3月Tiobe指数中，2020年被 [58.3%](https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved) 的StackExchange开发者喜爱，18.5%的人希望使用，是所有语言中最多的。
++   **受欢迎程度：** [#3](https://pypl.github.io/PYPL.html) 在 2021 年 3 月 PYPL 受欢迎度指数中，[#7](https://www.tiobe.com/tiobe-index/) 在 2021 年 3 月 Tiobe 指数中，2020 年被 [58.3%](https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved) 的 StackExchange 开发者喜爱，18.5%的人希望使用，是所有语言中最多的。
 
-[JavaScript](https://www.javascript.com/) 是与HTML和CSS一起构建互联网的关键编程语言之一。JavaScript **由Netscape于1995年创建，** 该公司发布了著名的Netscape Navigator浏览器，旨在消除静态网页的粗糙感，并为其增添一点动态行为。
+[JavaScript](https://www.javascript.com/) 是与 HTML 和 CSS 一起构建互联网的关键编程语言之一。JavaScript **由 Netscape 于 1995 年创建，** 该公司发布了著名的 Netscape Navigator 浏览器，旨在消除静态网页的粗糙感，并为其增添一点动态行为。
 
 今天，JavaScript 已成为世界顶级的[高级多范式编程语言](https://javascript.plainenglish.io/what-are-javascript-programming-paradigms-3ef0f576dfdb)，作为网络的前端编程语言，处理网页提供的所有互动，如弹窗、警报、事件等。
 
 **这门语言的用途 — **
 
-如果你希望你的应用能够在各种设备上运行，例如智能手机、云端、容器、微控制器以及数百种浏览器，JavaScript是完美的选择。对于服务器端负载，有Node.js，一个被成千上万公司使用的经过验证的JavaScript运行时。
+如果你希望你的应用能够在各种设备上运行，例如智能手机、云端、容器、微控制器以及数百种浏览器，JavaScript 是完美的选择。对于服务器端负载，有 Node.js，一个被成千上万公司使用的经过验证的 JavaScript 运行时。
 
 **额外资源：**
 
-+   [学习JavaScript](https://www.youtube.com/watch?v=PkZNo7MFNFg) — *freecodecamp*
++   [学习 JavaScript](https://www.youtube.com/watch?v=PkZNo7MFNFg) — *freecodecamp*
 
-+   [初学者JavaScript教程：1小时学会JavaScript](https://www.youtube.com/watch?v=W6NZfCO5SIk) — *Programming with Mosh*
++   [初学者 JavaScript 教程：1 小时学会 JavaScript](https://www.youtube.com/watch?v=W6NZfCO5SIk) — *Programming with Mosh*
 
-+   [通过构建七个游戏学习JavaScript](https://www.freecodecamp.org/news/learn-javascript-by-building-7-games-video-course/) — *freecodecamp*
++   [通过构建七个游戏学习 JavaScript](https://www.freecodecamp.org/news/learn-javascript-by-building-7-games-video-course/) — *freecodecamp*
 
 ## 3\. Java — 企业应用开发
 
-![](../Images/d1a246d77994929a842d5353ef4ef6e9.png)
+![](img/d1a246d77994929a842d5353ef4ef6e9.png)
 
-*来源 :  [官方Java网站](https://www.java.com/en/)*
+*来源 :  [官方 Java 网站](https://www.java.com/en/)*
 
 +   **级别：** 中级
 
@@ -112,29 +112,29 @@ Python受欢迎的主要原因是 **它的初学者友好性**，这使得任何
 
 +   **平台：** Web, 移动, 桌面
 
-+   **受欢迎程度：** [#2](https://pypl.github.io/PYPL.html) 排名于2021年3月PYPL流行度指数，[#2](https://www.tiobe.com/tiobe-index/) 排名于2021年3月Tiobe指数，2020年被[44.1%](https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved)的StackExchange开发者喜爱。
++   **受欢迎程度：** [#2](https://pypl.github.io/PYPL.html) 排名于 2021 年 3 月 PYPL 流行度指数，[#2](https://www.tiobe.com/tiobe-index/) 排名于 2021 年 3 月 Tiobe 指数，2020 年被[44.1%](https://insights.stackoverflow.com/survey/2020#technology-most-loved-dreaded-and-wanted-languages-loved)的 StackExchange 开发者喜爱。
 
-[Java](https://www.java.com/en/)已经成为构建企业级应用程序的事实上的编程语言超过20年。
+[Java](https://www.java.com/en/)已经成为构建企业级应用程序的事实上的编程语言超过 20 年。
 
-**由Sun Microsystems的James Gosling于1995年创建**，面向对象编程语言Java自那时起一直作为一个安全、可靠且可扩展的工具服务于开发者。
+**由 Sun Microsystems 的 James Gosling 于 1995 年创建**，面向对象编程语言 Java 自那时起一直作为一个安全、可靠且可扩展的工具服务于开发者。
 
-Java提供的一些功能使其比其他编程语言更受欢迎，例如垃圾回收能力、向后兼容性、通过JVM实现的跨平台性、可移植性和高性能。
+Java 提供的一些功能使其比其他编程语言更受欢迎，例如垃圾回收能力、向后兼容性、通过 JVM 实现的跨平台性、可移植性和高性能。
 
-Java的受欢迎程度在《财富》500强成员中表现得尤为明显，90%的公司使用Java来高效管理业务。
+Java 的受欢迎程度在《财富》500 强成员中表现得尤为明显，90%的公司使用 Java 来高效管理业务。
 
 **这门语言的用途 — **
 
-除了用于开发强大的业务应用程序外，Java在Android中也被广泛使用，使其成为Android开发者的必备技能。Java还允许开发者为各种行业创建应用程序，如银行、电子交易、电子商务，以及分布式计算应用程序。
+除了用于开发强大的业务应用程序外，Java 在 Android 中也被广泛使用，使其成为 Android 开发者的必备技能。Java 还允许开发者为各种行业创建应用程序，如银行、电子交易、电子商务，以及分布式计算应用程序。
 
 **额外资源：**
 
-+   [学习Java](https://www.codecademy.com/learn/learn-java) — *Codecademy*
++   [学习 Java](https://www.codecademy.com/learn/learn-java) — *Codecademy*
 
-+   [学习Java编程](https://www.programiz.com/java-programming) — Programiz
++   [学习 Java 编程](https://www.programiz.com/java-programming) — Programiz
 
 ## 4\. R — 数据分析
 
-![](../Images/cee44c59d226028d6b08eb41e197140f.png)
+![](img/cee44c59d226028d6b08eb41e197140f.png)
 
 *来源： [ 官方 R 网站](https://www.r-project.org/about.html)*
 
@@ -144,9 +144,9 @@ Java的受欢迎程度在《财富》500强成员中表现得尤为明显，90%�
 
 +   **平台：** 主要为桌面
 
-+   **受欢迎程度：** [#7](https://pypl.github.io/PYPL.html) 在2021年3月的PYPL受欢迎指数上。
++   **受欢迎程度：** [#7](https://pypl.github.io/PYPL.html) 在 2021 年 3 月的 PYPL 受欢迎指数上。
 
-如果你从事任何形式的数据分析或机器学习项目，你很可能听说过 R。[R 编程语言](https://www.r-project.org/about.html)由其创造者 Ross Ihaka 和 Robert Gentleman **于1993年首次向公众发布**，作为 S 编程语言的实现，特别关注于 [统计计算](https://www.wiley.com/en-ag/Statistical+Computing%3A+An+Introduction+to+Data+Analysis+using+S+Plus+-p-9780471560401) 和 [图形建模](https://arxiv.org/pdf/1005.1036.pdf)。
+如果你从事任何形式的数据分析或机器学习项目，你很可能听说过 R。[R 编程语言](https://www.r-project.org/about.html)由其创造者 Ross Ihaka 和 Robert Gentleman **于 1993 年首次向公众发布**，作为 S 编程语言的实现，特别关注于 [统计计算](https://www.wiley.com/en-ag/Statistical+Computing%3A+An+Introduction+to+Data+Analysis+using+S+Plus+-p-9780471560401) 和 [图形建模](https://arxiv.org/pdf/1005.1036.pdf)。
 
 多年来，R 成为处理大量数据分析、图形数据建模、空间和时间序列分析项目的最佳编程语言之一。
 
@@ -166,7 +166,7 @@ R 还通过其功能和扩展提供了出色的可扩展性，给开发人员提
 
 ## 5\. C/C++ — 操作系统和系统工具
 
-![](../Images/49220fd4b10b18dc92edf2df5a9b2a53.png)
+![](img/49220fd4b10b18dc92edf2df5a9b2a53.png)
 
 *由作者整理。*
 
@@ -176,13 +176,13 @@ R 还通过其功能和扩展提供了出色的可扩展性，给开发人员提
 
 +   **平台：** 移动设备、桌面、嵌入式
 
-不管你信不信，C/C++ 编程语言在20世纪末期曾经非常流行。为什么？
+不管你信不信，C/C++ 编程语言在 20 世纪末期曾经非常流行。为什么？
 
 这是因为 C 和 [C++](https://www.cplusplus.com/) 都是非常低级的编程语言，提供了极快的性能，这也是它们曾经和现在仍被用于开发操作系统、文件系统和其他系统级应用程序的原因。
 
-**C 由 Dennis Ritchie 于70年代发布，** **C++** 作为 C 的扩展，增加了类和许多其他功能，如面向对象特性，**由 Bjarne Stroustrup 于80年代中期发布。**
+**C 由 Dennis Ritchie 于 70 年代发布，** **C++** 作为 C 的扩展，增加了类和许多其他功能，如面向对象特性，**由 Bjarne Stroustrup 于 80 年代中期发布。**
 
-即使经过近50年，这两种编程语言仍被用于创建非常稳固且最快的应用程序。
+即使经过近 50 年，这两种编程语言仍被用于创建非常稳固且最快的应用程序。
 
 **该语言的用途——**
 
@@ -200,7 +200,7 @@ R 还通过其功能和扩展提供了出色的可扩展性，给开发人员提
 
 ## 6. Golang — 服务器端编程
 
-![](../Images/ea3380757dfd6152b333f018864b62ae.png)
+![](img/ea3380757dfd6152b333f018864b62ae.png)
 
 *来源 — [官方 Golang 网站](https://golang.org/)*
 
@@ -232,7 +232,7 @@ Go 主要用于后端技术、云服务、分布式网络、物联网，但也�
 
 ## 7. C# — 使用 .NET 进行应用程序和 Web 开发
 
-![](../Images/03248e37312a94d898cb8a9de19b5a70.png)
+![](img/03248e37312a94d898cb8a9de19b5a70.png)
 
 *来源 — [Wikipedia C#](https://en.wikipedia.org/wiki/C_Sharp_%28programming_language%29)*
 
@@ -262,7 +262,7 @@ C# 的设计考虑到了 .NET 生态系统，这使得开发者可以访问 Micr
 
 ## 8\. PHP — 网页开发
 
-![](../Images/497099800a1cca1cfa8e5833e0f5b691.png)
+![](img/497099800a1cca1cfa8e5833e0f5b691.png)
 
 *来源 — [官方 PHP 网站](https://www.php.net/)*
 
@@ -314,7 +314,7 @@ SQL，全称结构化查询语言，可能是这个列表中最关键的编程�
 
 ## 10. Swift — 用于 iOS 上的移动应用开发
 
-![](../Images/b0dfd91d2c245949bde94279843405c7.png)
+![](img/b0dfd91d2c245949bde94279843405c7.png)
 
 *来源 — [官方 Swift 网站](https://swift.org/)*
 

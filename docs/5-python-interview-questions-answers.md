@@ -1,8 +1,8 @@
 # 5 个 Python 面试问题与答案
 
-> 原文：[https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
+> 原文：[`www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html`](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
 
-![5 个 Python 面试问题与答案](../Images/187fb33af80c3f5d46a3763f7fd398e9.png)
+![5 个 Python 面试问题与答案](img/187fb33af80c3f5d46a3763f7fd398e9.png)
 
 图片来源：[ThisIsEngineering](https://www.pexels.com/photo/person-using-gray-laptop-3861964/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 方面的需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 方面的需求
 
 * * *
 
@@ -70,11 +70,11 @@ def odd_or_even(n):
 
 # Q3: 什么是 Lambda 函数？为什么使用它们？
 
-Lambda函数通常称为匿名函数。它们没有名称。
+Lambda 函数通常称为匿名函数。它们没有名称。
 
-当表达式适合一行时，它可以作为常规函数的替代。Lambda函数非常简单且轻量。它们提高了代码质量。
+当表达式适合一行时，它可以作为常规函数的替代。Lambda 函数非常简单且轻量。它们提高了代码质量。
 
-要创建一个简单的函数，将20添加到输入参数中，我们将编写lambda并提供两个组件：参数和表达式。
+要创建一个简单的函数，将 20 添加到输入参数中，我们将编写 lambda 并提供两个组件：参数和表达式。
 
 ```py
 lambda arguments : expression
@@ -90,7 +90,7 @@ print(x(10))
 >>> 30
 ```
 
-我们还可以向函数提供多个输入参数。在我们的例子中，它将2和5相乘以输出10。
+我们还可以向函数提供多个输入参数。在我们的例子中，它将 2 和 5 相乘以输出 10。
 
 ```py
 x = lambda a, b : a * b
@@ -98,11 +98,11 @@ print(x(2, 5))
 >>> 10
 ```
 
-# Q4：最大69数字
+# Q4：最大 69 数字
 
-你得到一个正整数“num”。它仅由6和9数字组成。
+你得到一个正整数“num”。它仅由 6 和 9 数字组成。
 
-通过更改一个数字（6或9）来返回最大数字。
+通过更改一个数字（6 或 9）来返回最大数字。
 
 **示例：**
 
@@ -114,23 +114,23 @@ print(x(2, 5))
 
 **解决方案：**
 
-为了得到最大数字，我们必须始终将6改为9，并且应该是第一个数字（6）。
+为了得到最大数字，我们必须始终将 6 改为 9，并且应该是第一个数字（6）。
 
-假设我们有num = 9669
+假设我们有 num = 9669
 
-+   更改第一个数字将得到6669。
++   更改第一个数字将得到 6669。
 
-+   更改第二个数字将得到9969。
++   更改第二个数字将得到 9969。
 
-+   更改第三个数字将得到9699。
++   更改第三个数字将得到 9699。
 
-+   更改第四个数字将得到9666。
++   更改第四个数字将得到 9666。
 
 **9969** 是最高的数字。
 
-我们只需要创建一个简单的函数，在开始时将一个6转换为9。
+我们只需要创建一个简单的函数，在开始时将一个 6 转换为 9。
 
-为此，我们将数字转换为字符串，并使用`.replace`函数将“6”替换为“9”。第三个参数是“count”为1。它只会替换一个数字。替换后，我们将字符串转换为整数。
+为此，我们将数字转换为字符串，并使用`.replace`函数将“6”替换为“9”。第三个参数是“count”为 1。它只会替换一个数字。替换后，我们将字符串转换为整数。
 
 ```py
 def maximum69Number(num):
@@ -149,23 +149,23 @@ maximum69Number(num)
 
 在我们进入解决方案部分之前，我希望你再读一遍问题。这是一个模拟问题，我们将找到艾米获胜的概率。
 
-艾米总是先掷骰子，如果她第一次掷到6就赢了。否则，布拉德掷骰子，如果他掷到6就赢了。如果没有，则轮到艾米，直到其中一人获胜。
+艾米总是先掷骰子，如果她第一次掷到 6 就赢了。否则，布拉德掷骰子，如果他掷到 6 就赢了。如果没有，则轮到艾米，直到其中一人获胜。
 
 这个问题完全是关于迭代和逻辑的。
 
-1.  将A_count和B_count初始化为零。我们将使用它们来计算概率。
+1.  将 A_count 和 B_count 初始化为零。我们将使用它们来计算概率。
 
-1.  之后，我们将对“size”进行模拟。在我们的例子中，它是1000。
+1.  之后，我们将对“size”进行模拟。在我们的例子中，它是 1000。
 
-1.  利用Numpy的random randint函数，我们将生成一个从1到6的数字。randint函数需要低（包含）和高（不包含）数字。你甚至可以使用random库代替Numpy。
+1.  利用 Numpy 的 random randint 函数，我们将生成一个从 1 到 6 的数字。randint 函数需要低（包含）和高（不包含）数字。你甚至可以使用 random 库代替 Numpy。
 
-1.  如果随机数是6，则A_count（艾米）加一，否则布拉德再掷一次。
+1.  如果随机数是 6，则 A_count（艾米）加一，否则布拉德再掷一次。
 
-1.  如果B_role掷到6，则B_count（布拉德）加一。否则，转到艾米。
+1.  如果 B_role 掷到 6，则 B_count（布拉德）加一。否则，转到艾米。
 
 1.  这个循环将运行一千次，我们将收集艾米和布兰德的胜利来计算概率。
 
-1.  为了计算艾米获胜的概率，我们将把艾米掷出6的次数除以艾米和布拉德的总获胜次数。
+1.  为了计算艾米获胜的概率，我们将把艾米掷出 6 的次数除以艾米和布拉德的总获胜次数。
 
 ```py
 import numpy as np
@@ -187,7 +187,7 @@ def win_probability(size):
     return A_count/(A_count+B_count)
 ```
 
-为了确保结果的可重复性，我们将使用Numpy的种子。
+为了确保结果的可重复性，我们将使用 Numpy 的种子。
 
 ```py
 np.random.seed(125)
@@ -195,7 +195,7 @@ win_probability(1000)
 >>> 0.5746031746031746
 ```
 
-正如我们所见，艾米由于先开始，较布拉德更占优势。她在1000次迭代中的胜率为57.5%。
+正如我们所见，艾米由于先开始，较布拉德更占优势。她在 1000 次迭代中的胜率为 57.5%。
 
 ## 参考资料
 
@@ -203,24 +203,24 @@ win_probability(1000)
 
 1.  元组和列表有什么区别？ | [Codecademy](https://www.codecademy.com/resources/blog/python-interview-questions-practice/)
 
-1.  什么是lambda函数？它们为什么会被使用？| [Codecademy](https://www.codecademy.com/resources/blog/python-interview-questions-practice/)
+1.  什么是 lambda 函数？它们为什么会被使用？| [Codecademy](https://www.codecademy.com/resources/blog/python-interview-questions-practice/)
 
-1.  最大69数字 | [LeetCode](https://leetcode.com/problems/maximum-69-number/)
+1.  最大 69 数字 | [LeetCode](https://leetcode.com/problems/maximum-69-number/)
 
 1.  谁先赢得比赛？| [Leihua Ye, PhD](https://towardsdatascience.com/5-python-coding-questions-asked-at-faang-59e6cf5ba2a0)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些在心理健康方面挣扎的学生构建一个AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些在心理健康方面挣扎的学生构建一个 AI 产品。
 
 ### 进一步了解此主题
 
-+   [7个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
++   [7 个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
 
-+   [检测虚假数据科学家的20个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
++   [检测虚假数据科学家的 20 个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-+   [检测虚假数据科学家的20个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
++   [检测虚假数据科学家的 20 个问题（附答案）：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
-+   [数据科学中你必须知道的15个Python编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [数据科学中你必须知道的 15 个 Python 编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [数据分析师的SQL和Python面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)
++   [数据分析师的 SQL 和 Python 面试问题](https://www.kdnuggets.com/2023/02/sql-python-interview-questions-data-analysts.html)
 
-+   [数据科学中的3个难题Python编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
++   [数据科学中的 3 个难题 Python 编码面试问题](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)

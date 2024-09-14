@@ -1,8 +1,8 @@
 # 免费 TensorFlow 2.0 完整课程
 
-> 原文：[https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)
+> 原文：[`www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html`](https://www.kdnuggets.com/2023/02/free-tensorflow-20-complete-course.html)
 
-![免费 TensorFlow 2.0 完整课程](../Images/05505caf803e9a5d8a88d4f3fc54ae93.png)
+![免费 TensorFlow 2.0 完整课程](img/05505caf803e9a5d8a88d4f3fc54ae93.png)
 
 作者提供的图片
 
@@ -12,23 +12,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 AI 解决方案和机器学习系统已经彻底改变了我们的工作方式和学习方式。它已经达到一个转折点，并正在塑造人类的未来。全球顶级科技公司如 Google、Microsoft、Amazon、Apple、Meta、Tesla 等都在大量投资 AI 应用的升级和开发。此外，依据 [Precedence Research](https://www.precedenceresearch.com/artificial-intelligence-market) 的报告：
 
-> “全球人工智能（AI）市场规模在2022年估计为1197.8亿美元，预计到2030年将达到15971亿美元，2022至2030年的年均增长率为38.1%”
+> “全球人工智能（AI）市场规模在 2022 年估计为 1197.8 亿美元，预计到 2030 年将达到 15971 亿美元，2022 至 2030 年的年均增长率为 38.1%”
 
 当前市场上的这些趋势要求该领域的劳动力具备更高的技能，并成为最高薪资领域之一。也就是说，如果你是一个对机器学习和人工智能感兴趣的初学者 Python 程序员，那么这篇文章就是为你准备的，请继续阅读。
 
 # 课程详情
 
-FreeCodeCamp 已与 Tim Ruscica（也称为 [“Tech With Tim”](https://www.youtube.com/c/TechWithTim)）合作发布了 [免费 TensorFlow 2.0 完整课程 - 初学者 Python 神经网络教程](https://youtu.be/tPYj3fFJGjk)。这个 **7小时** 的课程讲解了机器学习和人工智能中的基本概念，如核心学习算法、使用神经网络的深度学习、使用卷积神经网络的计算机视觉、使用递归神经网络的自然语言处理以及强化学习。让我们深入了解课程内容：
+FreeCodeCamp 已与 Tim Ruscica（也称为 [“Tech With Tim”](https://www.youtube.com/c/TechWithTim)）合作发布了 [免费 TensorFlow 2.0 完整课程 - 初学者 Python 神经网络教程](https://youtu.be/tPYj3fFJGjk)。这个 **7 小时** 的课程讲解了机器学习和人工智能中的基本概念，如核心学习算法、使用神经网络的深度学习、使用卷积神经网络的计算机视觉、使用递归神经网络的自然语言处理以及强化学习。让我们深入了解课程内容：
 
 ## 先决条件
 
@@ -36,7 +36,7 @@ FreeCodeCamp 已与 Tim Ruscica（也称为 [“Tech With Tim”](https://www.yo
 
 ## 课程内容
 
-该课程分为以下8个模块：
+该课程分为以下 8 个模块：
 
 ## 模块 1：机器学习基础
 
@@ -126,14 +126,14 @@ FreeCodeCamp 已与 Tim Ruscica（也称为 [“Tech With Tim”](https://www.yo
 
 ### 相关主题
 
-+   [完全免费的PyTorch深度学习课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)
++   [完全免费的 PyTorch 深度学习课程](https://www.kdnuggets.com/2022/10/complete-free-pytorch-course-deep-learning.html)
 
-+   [数据科学免费课程的完整合集 - 第1部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-1.html)
++   [数据科学免费课程的完整合集 - 第一部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-1.html)
 
-+   [数据科学免费课程的完整合集 - 第2部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html)
++   [数据科学免费课程的完整合集 - 第二部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html)
 
-+   [KDnuggets 新闻，4月6日：8门免费的麻省理工学院数据科学课程……](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费的麻省理工学院数据科学课程……](https://www.kdnuggets.com/2022/n14.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
-+   [Python中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
++   [Python 中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)

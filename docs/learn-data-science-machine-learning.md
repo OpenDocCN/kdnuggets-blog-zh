@@ -1,22 +1,22 @@
 # 数据科学和机器学习的学习：路线图后的第一步
 
-> 原文：[https://www.kdnuggets.com/2021/08/learn-data-science-machine-learning.html](https://www.kdnuggets.com/2021/08/learn-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/08/learn-data-science-machine-learning.html`](https://www.kdnuggets.com/2021/08/learn-data-science-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/34948db8ba9fecd279e85b66843f6c6a.png)
+![](img/34948db8ba9fecd279e85b66843f6c6a.png)
 
-*来源: [https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)*
+*来源: [`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)*
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -34,25 +34,25 @@
 
 +   开始数据分析或数据科学时，有哪些关键的统计学主题？
 
-很多这些问题的答案可以在[《深度学习》](https://www.deeplearningbook.org/)一书中找到，作者是Ian Goodfellow和Yoshua Bengio。然而，对于许多人来说，这本书有点过于技术化和数学化。
+很多这些问题的答案可以在[《深度学习》](https://www.deeplearningbook.org/)一书中找到，作者是 Ian Goodfellow 和 Yoshua Bengio。然而，对于许多人来说，这本书有点过于技术化和数学化。
 
 这篇文章的精髓就是，学习数据科学或机器学习的第一步。
 
 ## 数据科学与机器学习的三大支柱
 
-![](../Images/9602476adad8eb0c3cc463538188a8a9.png)
+![](img/9602476adad8eb0c3cc463538188a8a9.png)
 
-*来源: [https://wiplane.com](https://www.wiplane.com/p/foundations-for-data-science-ml)*
+*来源: [`wiplane.com`](https://www.wiplane.com/p/foundations-for-data-science-ml)*
 
 如果你查看任何机器学习/数据科学课程的前提条件或预习内容，你会发现它们通常结合了编程、数学和统计学。
 
 先暂时不谈其他内容，这里是[谷歌推荐](https://developers.google.com/machine-learning/crash-course/prereqs-and-prework)的你在学习机器学习课程之前应该做的事：
 
-![](../Images/8809f9b1e1359abc56b67c036b79b967.png)
+![](img/8809f9b1e1359abc56b67c036b79b967.png)
 
-![](../Images/55476b07a47c573e4317495721e09ed0.png)
+![](img/55476b07a47c573e4317495721e09ed0.png)
 
-*[https://developers.google.com/machine-learning/crash-course/prereqs-and-prework](https://developers.google.com/machine-learning/crash-course/prereqs-and-prework) (CC BY 4.0)*
+*[`developers.google.com/machine-learning/crash-course/prereqs-and-prework`](https://developers.google.com/machine-learning/crash-course/prereqs-and-prework) (CC BY 4.0)*
 
 ### 1\. 基本编程
 
@@ -82,17 +82,17 @@
 
 **#1 线性代数用于表示数据**
 
-![](../Images/dee4393a04d79c6343d1bb9cc00d0fb5.png)
+![](img/dee4393a04d79c6343d1bb9cc00d0fb5.png)
 
-*来自课程中关于向量范数的讲座的图像： [https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)*
+*来自课程中关于向量范数的讲座的图像： [`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)*
 
 机器学习本质上是数据驱动的，因为数据是机器学习的核心。我们可以将数据视为**向量——**一个遵循算术规则的对象。这使我们能够理解线性代数的规则如何作用于数据数组。
 
 **#2 微积分用于训练机器学习模型**
 
-![](../Images/09558fa34014c0e84f1d1a31c2f40923.png)
+![](img/09558fa34014c0e84f1d1a31c2f40923.png)
 
-*来自课程中关于梯度下降的讲座的图像： [https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)*
+*来自课程中关于梯度下降的讲座的图像： [`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)*
 
 如果你以为模型训练是“自动进行”的，那么你就错了。微积分是推动大多数机器学习（ML）和深度学习（DL）算法学习的核心。
 
@@ -124,9 +124,9 @@
 
 这里是一些统计学的主要基础，构成了最低要求：
 
-![](../Images/7118ec5db26207eb78946d13c0f235a3.png)
+![](img/7118ec5db26207eb78946d13c0f235a3.png)
 
-*来自关于泊松分布讲座的图像 — [https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)*
+*来自关于泊松分布讲座的图像 — [`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)*
 
 +   位置的估计 — 均值、中位数以及这些的其他变体。
 
@@ -144,21 +144,21 @@
 
 +   重要定理 — 大数法则和中心极限定理。
 
-![](../Images/249c5db1fde76d03ea05079e0fd2abce.png)
+![](img/249c5db1fde76d03ea05079e0fd2abce.png)
 
-*来自关于泊松分布讲座的图像 — [https://www.wiplane.com/p/foundations-for-data-science-ml](https://www.wiplane.com/p/foundations-for-data-science-ml)*
+*来自关于泊松分布讲座的图像 — [`www.wiplane.com/p/foundations-for-data-science-ml`](https://www.wiplane.com/p/foundations-for-data-science-ml)*
 
 +   推断统计 **—** 一种更实际和高级的统计学分支，有助于设计假设检验实验，推动我们深入理解指标的含义，同时帮助我们量化结果的显著性。
 
-+   重要的测试 **—** 学生t检验、卡方检验、ANOVA检验等。
++   重要的测试 **—** 学生 t 检验、卡方检验、ANOVA 检验等。
 
 > **每个初学者级别的数据科学爱好者在深入任何核心数据科学或核心机器学习课程之前都应关注这三个支柱**
 
 ## 学习上述内容的资源 — 寻找一个紧凑、全面且价格实惠的课程
 
-![](../Images/af37cbeca68a32cd92c4085a34b60f2f.png)
+![](img/af37cbeca68a32cd92c4085a34b60f2f.png)
 
-*[https://www.freecodecamp.org/news/data-science-learning-roadmap/](https://www.freecodecamp.org/news/data-science-learning-roadmap/)*
+*[`www.freecodecamp.org/news/data-science-learning-roadmap/`](https://www.freecodecamp.org/news/data-science-learning-roadmap/)*
 
 [我的学习路线图](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)也告诉你该学习什么，并且也充满了可以注册的资源、课程和项目。
 
@@ -166,7 +166,7 @@
 
 ### 数据科学或机器学习课程的问题
 
-1.  我在这里列出的每个数据科学课程都要求学生对编程、数学或统计学有一定的理解。例如，[Andrew Ng最著名的机器学习课程](https://www.youtube.com/watch?v=PPLop4L2eGk&list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)也严重依赖于对向量代数和微积分的理解。
+1.  我在这里列出的每个数据科学课程都要求学生对编程、数学或统计学有一定的理解。例如，[Andrew Ng 最著名的机器学习课程](https://www.youtube.com/watch?v=PPLop4L2eGk&list=PLLssT5z_DsK-h9vYZkQkYNWcItqhlRJLN)也严重依赖于对向量代数和微积分的理解。
 
 1.  大多数涵盖数据科学的数学和统计学的课程，只是列出所需的概念清单，却没有解释这些概念如何应用及如何在机器中编程。
 
@@ -176,7 +176,7 @@
 
 ### Wiplane Academy — wiplane.com
 
-所以，我决定自己动手做所有的事情。我花了过去3个月的时间开发一个课程，以为你的职业生涯奠定坚实的基础……
+所以，我决定自己动手做所有的事情。我花了过去 3 个月的时间开发一个课程，以为你的职业生涯奠定坚实的基础……
 
 +   数据分析师
 
@@ -186,7 +186,7 @@
 
 在这里，我向你展示 [**数据科学或机器学习的基础**](https://www.wiplane.com/p/foundations-for-data-science-ml)** — **[**学习数据科学和机器学习的第一步**](https://www.wiplane.com/p/foundations-for-data-science-ml)
 
-![](../Images/fe19a72d7a785ff5b943fead5cdbbbaa.png)
+![](img/fe19a72d7a785ff5b943fead5cdbbbaa.png)
 
 *这就是我决定启动时的样子！*
 
@@ -196,19 +196,19 @@
 
 ***早鸟优惠！***
 
-我很兴奋地宣布这门课程的预售，因为我目前正在录制和编辑2-3个模块的最终部分，这些模块也将在九月的第一周上线。
+我很兴奋地宣布这门课程的预售，因为我目前正在录制和编辑 2-3 个模块的最终部分，这些模块也将在九月的第一周上线。
 
-抓住早鸟优惠，优惠仅有效至2021年8月30日。
+抓住早鸟优惠，优惠仅有效至 2021 年 8 月 30 日。
 
 [原文](https://towardsdatascience.com/first-steps-to-learning-data-science-or-ml-after-the-roadmap-50d4b46b93e9)。经许可转载。
 
-**简介：** [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/) 是一位具有融合经验的工程师，擅长网页技术和数据科学（即全栈数据科学），曾指导过1000多名AI/Web/数据科学志愿者，同时设计数据科学和机器学习工程学习路径。此前，Harshit与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发数据处理算法。
+**简介：** [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/) 是一位具有融合经验的工程师，擅长网页技术和数据科学（即全栈数据科学），曾指导过 1000 多名 AI/Web/数据科学志愿者，同时设计数据科学和机器学习工程学习路径。此前，Harshit 与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家一起开发数据处理算法。
 
 **相关：**
 
 +   [自然语言处理（NLP）的路线图](https://www.kdnuggets.com/2020/10/roadmap-natural-language-processing-nlp.html)
 
-+   [成为全栈AI开发者、数据科学家、机器学习工程师等的路线图](https://www.kdnuggets.com/2020/12/roadmaps-ai-developer-data-scientist-machine-learning-engineer.html)
++   [成为全栈 AI 开发者、数据科学家、机器学习工程师等的路线图](https://www.kdnuggets.com/2020/12/roadmaps-ai-developer-data-scientist-machine-learning-engineer.html)
 
 +   [专业人员的数据科学课程](https://www.kdnuggets.com/2021/03/data-science-curriculum-professionals.html)
 
@@ -218,10 +218,10 @@
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一笔90亿美元的AI失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一笔 90 亿美元的 AI 失败，解析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

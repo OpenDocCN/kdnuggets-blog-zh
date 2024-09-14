@@ -1,6 +1,6 @@
 # 人工智能会取代人类吗？
 
-> 原文：[https://www.kdnuggets.com/will-ai-replace-humanity](https://www.kdnuggets.com/will-ai-replace-humanity)
+> 原文：[`www.kdnuggets.com/will-ai-replace-humanity`](https://www.kdnuggets.com/will-ai-replace-humanity)
 
 我们生活在一个概率的世界中。几年前，当我开始谈论人工智能及其影响时，最常见的问题是——人工智能是否会来袭？
 
@@ -8,7 +8,7 @@
 
 当我们讨论复杂技术时，答案不会很简单。这取决于几个因素，比如什么才算智能，我们是否建议替代工作，预测人工通用智能（AGI）的时间表，或识别人工智能的能力和局限性。
 
-![人工智能会取代人类吗？](../Images/ad31643df9656370d51aea686cbb77ba.png)
+![人工智能会取代人类吗？](img/ad31643df9656370d51aea686cbb77ba.png)
 
 来源：Canva
 
@@ -22,7 +22,7 @@
 
 人工智能擅长学习模式，但仅仅识别模式并不足以称之为智能。这只是更广泛的多维人类智能谱系中的一个方面。
 
-![人工智能会取代人类吗？](../Images/5cd262d34dd859d10d5aac8bbc604de0.png)
+![人工智能会取代人类吗？](img/5cd262d34dd859d10d5aac8bbc604de0.png)
 
 来源：Canva
 
@@ -60,7 +60,7 @@
 
 目前，我们可以参考 DeepMind 首席执行官的日记，以了解其早期迹象。
 
-![人工智能会取代人类吗？](../Images/bd1ffd37f82cbac318f749e2a49ea497.png)
+![人工智能会取代人类吗？](img/bd1ffd37f82cbac318f749e2a49ea497.png)
 
 来源：[财富](https://fortune.com/2023/05/03/google-deepmind-ceo-agi-artificial-intelligence/)
 
@@ -92,7 +92,7 @@
 
 我经常参与较轻松的团队讨论，不是因为我必须，而是因为我更喜欢在一个与团队紧密相连的环境中工作，他们也很了解我。从一开始就只讨论工作或试图表现得很重要，这种方式太机械化了。
 
-![AI会取代人类吗？](../Images/0a5f581bb6a828240d9de0074f386eb2.png)
+![AI 会取代人类吗？](img/0a5f581bb6a828240d9de0074f386eb2.png)
 
 来源：Canva
 
@@ -112,15 +112,15 @@
 
 总结来说，机器可能会从数据中学习模式（以及随之而来的偏见），但没有智慧、动力或动机来进行根本性的改变，以解决困扰人类的问题。它们是以人类智慧为基础的，具有目标导向，但人类智慧则复杂得多。
 
-这个 [短语](https://www.gartner.com/peer-community/post/ai-totally-replacehuman-beings) 很好地总结了我的想法——AI可以取代人脑，但不能取代人类。
+这个 [短语](https://www.gartner.com/peer-community/post/ai-totally-replacehuman-beings) 很好地总结了我的想法——AI 可以取代人脑，但不能取代人类。
 
-**[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位AI战略家和数字化转型领袖，在产品、科学和工程的交汇点上工作，致力于构建可扩展的机器学习系统。她是一位获奖的创新领袖、作者和国际演讲者。她的使命是普及机器学习，并打破术语，使每个人都能参与这场转型。
+**[](https://vidhi-chugh.medium.com/)**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位 AI 战略家和数字化转型领袖，在产品、科学和工程的交汇点上工作，致力于构建可扩展的机器学习系统。她是一位获奖的创新领袖、作者和国际演讲者。她的使命是普及机器学习，并打破术语，使每个人都能参与这场转型。
 
 ### 更多相关主题
 
-+   [DeepMind的AlphaCode会取代程序员吗？](https://www.kdnuggets.com/2022/04/deepmind-alphacode-replace-programmers.html)
++   [DeepMind 的 AlphaCode 会取代程序员吗？](https://www.kdnuggets.com/2022/04/deepmind-alphacode-replace-programmers.html)
 
-+   [AI不会取代我们](https://www.kdnuggets.com/2023/02/ai-replace-us.html)
++   [AI 不会取代我们](https://www.kdnuggets.com/2023/02/ai-replace-us.html)
 
 +   [ChatGPT 会取代数据科学家吗？](https://www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html)
 

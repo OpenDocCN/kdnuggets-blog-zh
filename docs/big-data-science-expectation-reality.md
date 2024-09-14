@@ -1,10 +1,10 @@
 # 大数据科学：期望与现实
 
-> 原文：[https://www.kdnuggets.com/2016/10/big-data-science-expectation-reality.html](https://www.kdnuggets.com/2016/10/big-data-science-expectation-reality.html)
+> 原文：[`www.kdnuggets.com/2016/10/big-data-science-expectation-reality.html`](https://www.kdnuggets.com/2016/10/big-data-science-expectation-reality.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)
 
-[comments](#comments)
+comments
 
 **由 Stepan Pushkarev, Hydrosphere.io 的 CTO 提供。**
 
@@ -14,15 +14,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
-[![期望与现实](../Images/69d000ea290ac24ff8991b25108a5782.png)](/wp-content/uploads/expectation_vs_reality.png)
+![期望与现实](img/expectation_vs_reality.png)
 
 他们的期望并不总是实现。大数据工程师将大部分时间花在 ETL 上，为分析师准备数据集，并将数据科学家开发的模型编码成脚本。因此，他们在数据科学家和大数据之间成为了齿轮。
 
@@ -54,23 +54,23 @@ DevOps 工程师仅能使用基本工具并完成教程。他们对仅仅通过 
 
 这听起来可能像是一个乌托邦。但我相信这可以激励大数据团队改善他们现有的大数据平台和流程，额外的好处是让每个人都感到满意。
 
-**简介：** [Stepan Pushkarev](https://www.linkedin.com/in/stepanpushkarev) 是 [![Stepan Pushkarev](../Images/87d23f9919ffc864bf4a905a1f6cb836.png)Hydrosphere.io](http://hydrosphere.io) 的首席技术官。Stepan 共同创办并领导了电子商务、物联网和广告技术公司的工程团队。负责从数学模型、基础设施与运营到网络和移动应用程序的完整产品栈，同时负责招聘、建立工程文化和交付流程，他结合了强大的技术、管理和企业家背景。
+**简介：** [Stepan Pushkarev](https://www.linkedin.com/in/stepanpushkarev) 是 ![Stepan PushkarevHydrosphere.io](http://hydrosphere.io) 的首席技术官。Stepan 共同创办并领导了电子商务、物联网和广告技术公司的工程团队。负责从数学模型、基础设施与运营到网络和移动应用程序的完整产品栈，同时负责招聘、建立工程文化和交付流程，他结合了强大的技术、管理和企业家背景。
 
 **相关内容：**
 
-+   [连接数据系统和DevOps](/2016/06/connecting-data-systems-devops.html)
++   连接数据系统和 DevOps
 
-+   [成功的数据科学团队的三个基本组成部分](/2015/08/3-components-successful-data-science-team.html)
++   成功的数据科学团队的三个基本组成部分
 
-+   [健康综合：大数据 DevOps 工程师](/jobs/14/09-18-healthintegrated-big-data-devops-engineer.html)
++   健康综合：大数据 DevOps 工程师
 
 ### 更多相关内容
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

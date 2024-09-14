@@ -1,10 +1,10 @@
-# 21 个必须了解的数据科学面试问题及答案，第 2 部分
+# 21 个必须了解的数据科学面试问题及答案，第二部分
 
-> 原文：[https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers-part2.html](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers-part2.html)
+> 原文：[`www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers-part2.html`](https://www.kdnuggets.com/2016/02/21-data-science-interview-questions-answers-part2.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](2016/02/21-data-science-interview-questions-answers-part2.html/3#comments)KDnuggets 上的帖子 [20 个检测虚假数据科学家的问题](/2016/01/20-questions-to-detect-fake-data-scientists.html) 非常受欢迎，是本月最受关注的帖子。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论 KDnuggets 上的帖子 20 个检测虚假数据科学家的问题 非常受欢迎，是本月最受关注的帖子。
 
-然而，这些问题缺乏答案，因此 KDnuggets 编辑们聚在一起编写了 [答案](/2016/02/21-data-science-interview-questions-answers.html)。这是第 2 部分的答案，从一个“额外”问题开始。
+然而，这些问题缺乏答案，因此 KDnuggets 编辑们聚在一起编写了 答案。这是第二部分的答案，从一个“额外”问题开始。
 
 * * *
 
@@ -12,7 +12,7 @@
 
 这个问题不是原始的 20 个问题之一，但可能是区分真正的数据科学家与虚假的最重要的问题。
 
-**回答者 [Gregory Piatetsky](/author/gregory-piatetsky).**
+**回答者 Gregory Piatetsky.**
 
 过度拟合是发现由于偶然性产生的虚假结果，并且后续研究无法重复这些结果。
 
@@ -32,11 +32,11 @@ Ioannidis 指出，为了使研究结果可靠，它应该具备：
 
 +   最小化由于财务和其他因素（包括该科学领域的受欢迎程度）造成的偏差
 
-不幸的是，这些规则常常被违反，产生了不可重复的结果。例如，S&P 500 指数被发现与孟加拉国黄油生产（19891年至1993年）有强相关性（[这是 PDF](http://nerdsonwallstreet.typepad.com/my_weblog/files/dataminejune_2000.pdf)）
+不幸的是，这些规则常常被违反，产生了不可重复的结果。例如，S&P 500 指数被发现与孟加拉国黄油生产（19891 年至 1993 年）有强相关性（[这是 PDF](http://nerdsonwallstreet.typepad.com/my_weblog/files/dataminejune_2000.pdf)）
 
-![S&P 500 与孟加拉国黄油的相关性](../Images/9b3e97a5a2730530c90aea057bbe45f7.png)
+![S&P 500 与孟加拉国黄油的相关性](img/9b3e97a5a2730530c90aea057bbe45f7.png)
 
-查看更多有趣（且完全虚假的）发现，你可以使用[Google correlate](https://www.google.com/trends/correlate/)或[Spurious correlations](http://www.tylervigen.com/discover) by Tyler Vigen自己发现。
+查看更多有趣（且完全虚假的）发现，你可以使用[Google correlate](https://www.google.com/trends/correlate/)或[Spurious correlations](http://www.tylervigen.com/discover) by Tyler Vigen 自己发现。
 
 有几种方法可以用来避免“过拟合”数据
 
@@ -50,27 +50,27 @@ Ioannidis 指出，为了使研究结果可靠，它应该具备：
 
 +   调整[虚假发现率](https://en.wikipedia.org/wiki/False_discovery_rate)
 
-+   使用[可重复的保留集方法](/2015/08/feldman-avoid-overfitting-holdout-adaptive-data-analysis.html)——一种在2015年提出的突破性方法
++   使用可重复的保留集方法——一种在 2015 年提出的突破性方法
 
 良好的数据科学站在科学理解的前沿，数据科学家有责任避免过拟合数据，并教育公众和媒体关于糟糕数据分析的危险。
 
 另见
 
-+   [数据挖掘和数据科学的根本错误：过拟合](/2014/06/cardinal-sin-data-mining-data-science.html)
++   数据挖掘和数据科学的根本错误：过拟合
 
-+   [避免过拟合的关键理念：可重复的保留集以保持自适应数据分析中的有效性](/2015/08/feldman-avoid-overfitting-holdout-adaptive-data-analysis.html)
++   避免过拟合的关键理念：可重复的保留集以保持自适应数据分析中的有效性
 
-+   [通过可重复的保留集克服过拟合：在自适应数据分析中保持有效性](/2015/08/reusable-holdout-preserving-validity-adaptive-data-analysis.html)
++   通过可重复的保留集克服过拟合：在自适应数据分析中保持有效性
 
-+   [11种聪明的过拟合方法及如何避免它们](/2015/01/clever-methods-overfitting-avoid.html)
++   11 种聪明的过拟合方法及如何避免它们
 
-+   [标签：过拟合](/tag/overfitting)
++   标签：过拟合
 
 * * *
 
 ### Q12。举例说明你如何使用实验设计来回答关于用户行为的问题。
 
-答案由[**Bhavya Geethika**](/author/geethika)提供。
+答案由**Bhavya Geethika**提供。
 
 **步骤 1：制定研究问题：**
 
@@ -84,19 +84,19 @@ Ioannidis 指出，为了使研究结果可靠，它应该具备：
 
 降低页面下载时间将对网页的用户满意度评分产生更多影响。这里我们分析的因素是页面加载时间。
 
-![实验设计中的缺陷](../Images/25ad9ff6b6030b72983b2a7d7bba18bd.png)
+![实验设计中的缺陷](img/25ad9ff6b6030b72983b2a7d7bba18bd.png)
 
 图 12: 你的实验设计存在缺陷（漫画来自[这里](https://sites.psu.edu/academy/2014/10/29/a-lesson-on-experimental-design/)）
 
 **步骤 4: 确定实验设计。**
 
-我们考虑实验复杂性，即一次变化一个因素或一次变化多个因素，在这种情况下我们使用因子设计（2^k设计）。设计也基于目标类型（比较、筛选、响应面）和因素数量进行选择。
+我们考虑实验复杂性，即一次变化一个因素或一次变化多个因素，在这种情况下我们使用因子设计（2^k 设计）。设计也基于目标类型（比较、筛选、响应面）和因素数量进行选择。
 
 这里我们还识别了被试内设计、被试间设计和混合模型。例如：有两个版本的页面，一个版本的购买按钮（行动呼吁）在左侧，另一个版本的按钮在右侧。
 
 在被试内设计 - 两个用户组都会看到两个版本。
 
-在被试间设计 - 一组用户看到版本A，另一组用户看到版本B。
+在被试间设计 - 一组用户看到版本 A，另一组用户看到版本 B。
 
 **步骤 5: 开发实验任务和程序：**
 
@@ -122,30 +122,30 @@ Ioannidis 指出，为了使研究结果可靠，它应该具备：
 
 ### Q13\. “长”（“高”）和“宽”格式数据的区别是什么？
 
-**由[Gregory Piatetsky](/author/gregory-piatetsky)回答。**
+**由 Gregory Piatetsky 回答。**
 
 在大多数数据挖掘/数据科学应用中，记录（行）的数量通常远多于特征（列）的数量，这类数据有时被称为“长”（或“高”）数据。
 
-在一些应用中，如基因组学或生物信息学，你可能只有少量记录（患者），例如100个，但每个患者可能有20,000个观察值。适用于“长”数据的标准方法将导致过拟合，因此需要特殊的方法。
+在一些应用中，如基因组学或生物信息学，你可能只有少量记录（患者），例如 100 个，但每个患者可能有 20,000 个观察值。适用于“长”数据的标准方法将导致过拟合，因此需要特殊的方法。
 
-![宽数据 高数据](../Images/dce8c3fc8418ba05b251e8955b61d6ca.png)
+![宽数据 高数据](img/dce8c3fc8418ba05b251e8955b61d6ca.png)
 
 **图 13\. 高数据和宽数据的不同方法**，来自演示文稿[稀疏筛选以实现精确数据减少](http://www.slideshare.net/BigDataMining/screening-ye14)，作者 Jieping Ye。
 
-问题不仅仅是重塑数据（这里有[有用的R包](https://psychwire.wordpress.com/2011/05/16/reshape-package-in-r-long-data-format-to-wide-back-to-long-again/)），还要通过减少特征数量来避免假阳性，以找到最相关的特征。
+问题不仅仅是重塑数据（这里有[有用的 R 包](https://psychwire.wordpress.com/2011/05/16/reshape-package-in-r-long-data-format-to-wide-back-to-long-again/)），还要通过减少特征数量来避免假阳性，以找到最相关的特征。
 
-像Lasso这样的特征减少方法在[《具有稀疏性的统计学习：Lasso及其推广》](http://web.stanford.edu/~hastie/StatLearnSparsity/)中得到了很好的介绍，作者为Hastie、Tibshirani和Wainwright。（你可以下载这本书的免费PDF）
+像 Lasso 这样的特征减少方法在[《具有稀疏性的统计学习：Lasso 及其推广》](http://web.stanford.edu/~hastie/StatLearnSparsity/)中得到了很好的介绍，作者为 Hastie、Tibshirani 和 Wainwright。（你可以下载这本书的免费 PDF）
 
 ### 更多相关主题
 
-+   [20个问题（带答案）识别假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
++   [20 个问题（带答案）识别假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-+   [20个问题（带答案）识别假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
++   [20 个问题（带答案）识别假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
-+   [7个数据分析面试问题与答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
++   [7 个数据分析面试问题与答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
 
-+   [5个Python面试问题与答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
++   [5 个 Python 面试问题与答案](https://www.kdnuggets.com/2022/09/5-python-interview-questions-answers.html)
 
 +   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
-+   [KDnuggets 新闻，5月4日：9门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)

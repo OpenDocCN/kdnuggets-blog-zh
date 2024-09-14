@@ -1,8 +1,8 @@
 # 学习数据科学的三大错误
 
-> 原文：[https://www.kdnuggets.com/2019/05/biggest-mistakes-learning-data-science.html](https://www.kdnuggets.com/2019/05/biggest-mistakes-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2019/05/biggest-mistakes-learning-data-science.html`](https://www.kdnuggets.com/2019/05/biggest-mistakes-learning-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![figure-name](../Images/4917f451de8d7fb989e9f42c9bbdcea1.png)图片来源 [Héizel Vázquez](https://instagram.com/heizelvazquez)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![figure-name](img/4917f451de8d7fb989e9f42c9bbdcea1.png)图片来源 [Héizel Vázquez](https://instagram.com/heizelvazquez)
 
 你好！又是我。我在其他文章中讨论过一些我将在这里提到的内容，但现在我想给出一些关于什么不是数据科学以及如何不学习数据科学的方向。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -22,7 +22,7 @@
 
 ### 什么是数据科学？
 
-![figure-name](../Images/b6983be3e79f9db56d9796828a5ad4cc.png)由 [memes_and_science](https://www.instagram.com/memes_and_science/) 更新
+![figure-name](img/b6983be3e79f9db56d9796828a5ad4cc.png)由 [memes_and_science](https://www.instagram.com/memes_and_science/) 更新
 
 > 数据科学不仅仅是掌握一些编程语言、数学、统计学和“领域知识”。
 
@@ -40,7 +40,7 @@
 
 ### 数据科学是一门科学
 
-![figure-name](../Images/fc202bdfc6b47cd398a7e66714ce0ae7.png)[memes_and_science](https://www.instagram.com/memes_and_science/)
+![figure-name](img/fc202bdfc6b47cd398a7e66714ce0ae7.png)[memes_and_science](https://www.instagram.com/memes_and_science/)
 
 我知道这可能对一些人来说是有争议的，但请坚持听我说。我想表达的是，数据科学当然与商业相关，但它终究是一门科学，或者说是在成为一门科学的过程中。
 
@@ -64,13 +64,13 @@
 
 ### 如何避免错误学习数据科学。三大禁忌。
 
-![figure-name](../Images/5159591c84cdcb5cf9c8a4cca97cd543.png)memes_and_science
+![figure-name](img/5159591c84cdcb5cf9c8a4cca97cd543.png)memes_and_science
 
-如果你在这里，可能意味着你正在学习数据科学，或者你参加了一些MOOCs或相关课程。我不会在这里谈论平台或课程的好坏，我认为即使在最糟糕的课程中我们也能学到一些东西。
+如果你在这里，可能意味着你正在学习数据科学，或者你参加了一些 MOOCs 或相关课程。我不会在这里谈论平台或课程的好坏，我认为即使在最糟糕的课程中我们也能学到一些东西。
 
 ### **1\. 只看而不实践**
 
-![figure-name](../Images/1920dcdae33f632097425d12ef0307f7.png)[memes_and_science](https://www.instagram.com/memes_and_science/)
+![figure-name](img/1920dcdae33f632097425d12ef0307f7.png)[memes_and_science](https://www.instagram.com/memes_and_science/)
 
 如果你正在上与数据科学相关的课程，如数学、统计学、编程或类似课程，而你只是听课。
 
@@ -80,11 +80,11 @@
 
 ### **2. 以疯狂的方式创建模型**
 
-![figure-name](../Images/5ce8ba0063ff8b22d5d4edc9bc6589b8.png)[memes_and_science](https://www.instagram.com/memes_and_science/)
+![figure-name](img/5ce8ba0063ff8b22d5d4edc9bc6589b8.png)[memes_and_science](https://www.instagram.com/memes_and_science/)
 
 我们从“外部世界”获取数据，我们的身体和大脑分析我们得到的原始数据，然后我们“解释”这些信息。
 
-![figure-name](../Images/39ad7512220015a0284152fb04f298e1.png)[https://towardsdatascience.com/going-beyond-with-agile-data-science-fcff5aaa9f0c](https://towardsdatascience.com/going-beyond-with-agile-data-science-fcff5aaa9f0c)
+![figure-name](img/39ad7512220015a0284152fb04f298e1.png)[`towardsdatascience.com/going-beyond-with-agile-data-science-fcff5aaa9f0c`](https://towardsdatascience.com/going-beyond-with-agile-data-science-fcff5aaa9f0c)
 
 什么是“解释”？这就是我们从获得的信息中学到的如何反应、思考、感受和理解。当我们理解时，我们是在解码形成这个复杂事物的部分，并将我们一开始获得的原始数据转化为有用且简单的东西。
 
@@ -124,7 +124,7 @@ Tensorflow:
 
 ### **3. “是的，我是个孤狼。我可以自己学习和做一切”**
 
-![figure-name](../Images/9ea8414b82534bb53466009359ebf06a.png) [memes_and_science](https://www.instagram.com/memes_and_science/)
+![figure-name](img/9ea8414b82534bb53466009359ebf06a.png) [memes_and_science](https://www.instagram.com/memes_and_science/)
 
 记住我之前提出的一个特点是，数据科学是一个合作性领域。那么，学习它也应该如此！
 
@@ -152,7 +152,7 @@ Tensorflow:
 
 ### 系统化的数据科学与备忘单
 
-![figure-name](../Images/1739caca067ae4ddf03cfe7c93caba83.png) [https://medium.com/personal-growth/all-strength-comes-from-repetition-1a95157e2c7c](https://medium.com/personal-growth/all-strength-comes-from-repetition-1a95157e2c7c)
+![figure-name](img/1739caca067ae4ddf03cfe7c93caba83.png) [`medium.com/personal-growth/all-strength-comes-from-repetition-1a95157e2c7c`](https://medium.com/personal-growth/all-strength-comes-from-repetition-1a95157e2c7c)
 
 备忘单通过提供有关语言、概念或库的不同片段的知识来节省时间。有些备忘单还包含指向文档和 R、Python、Scala 等重要包的包级备忘单的超链接。
 
@@ -184,29 +184,29 @@ Tensorflow:
 
 +   [数据科学概述及其他](https://github.com/FavioVazquez/ds-cheatsheets#data-science-in-general-and-others)
 
-在那里你会找到每个备忘单的PDF和PNG版本。随意下载该存储库的zip文件以获取所有信息，如果你发现或创建了一个新的有用备忘单，请提交拉取请求。
+在那里你会找到每个备忘单的 PDF 和 PNG 版本。随意下载该存储库的 zip 文件以获取所有信息，如果你发现或创建了一个新的有用备忘单，请提交拉取请求。
 
 感谢阅读，希望这些内容能帮助你找到在数据世界中成为成功专业人士的路径。更多内容敬请期待 :)
 
-**简介： [Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)** 是一位物理学家和计算机工程师，专注于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是Ciencia y Datos的创始人，这是一份西班牙语的数据科学出版物。他热爱新挑战，喜欢与优秀团队合作，解决有趣的问题。他参与了Apache Spark的协作，帮助MLlib、Core和文档方面的工作。他喜欢运用自己的知识和专业技能在科学、数据分析、可视化和自动学习方面，帮助世界变得更美好。
+**简介： [Favio Vazquez](https://www.linkedin.com/in/faviovazquez/)** 是一位物理学家和计算机工程师，专注于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是 Ciencia y Datos 的创始人，这是一份西班牙语的数据科学出版物。他热爱新挑战，喜欢与优秀团队合作，解决有趣的问题。他参与了 Apache Spark 的协作，帮助 MLlib、Core 和文档方面的工作。他喜欢运用自己的知识和专业技能在科学、数据分析、可视化和自动学习方面，帮助世界变得更美好。
 
 [原文](https://medium.com/swlh/the-3-biggest-mistakes-on-learning-data-science-f782e1a8abec)。已获授权转载。
 
 **相关内容：**
 
-+   [学习数据科学硕士是否值得？](/2019/04/worth-studying-data-science-masters.html)
++   学习数据科学硕士是否值得？
 
-+   [数据科学中最受欢迎的技能](/2019/04/most-desired-skill-data-science.html)
++   数据科学中最受欢迎的技能
 
-+   [如何辨别好数据科学职位与差数据科学职位](/2019/04/recognize-good-data-scientist-job-from-bad.html)
++   如何辨别好数据科学职位与差数据科学职位
 
 ### 更多相关内容
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以找到目标，然后通过找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

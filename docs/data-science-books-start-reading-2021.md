@@ -1,8 +1,8 @@
 # 2021 年你应该开始阅读的数据科学书籍
 
-> 原文：[https://www.kdnuggets.com/2021/04/data-science-books-start-reading-2021.html](https://www.kdnuggets.com/2021/04/data-science-books-start-reading-2021.html)
+> 原文：[`www.kdnuggets.com/2021/04/data-science-books-start-reading-2021.html`](https://www.kdnuggets.com/2021/04/data-science-books-start-reading-2021.html)
 
-[评论](#comments)
+评论
 
 **作者 [Przemek Chojecki](https://pchojecki.medium.com/)，Contentyze CEO**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 本文讨论了适用于任何水平的数据科学热门书籍。
 
-![](../Images/75909da7b0327703a812eb70d3ec3f76.png)
+![](img/75909da7b0327703a812eb70d3ec3f76.png)
 
 2021 年你应该开始阅读的数据科学书籍
 
@@ -30,19 +30,19 @@
 
 如果你刚刚开始探索数据科学，可以查看以下这些书籍：
 
-![](../Images/5f0780f14c8153a3be112ffbb371cd7d.png)
+![](img/5f0780f14c8153a3be112ffbb371cd7d.png)
 
 从零开始的数据科学书籍
 
 在 [《从零开始的数据科学》](https://www.amazon.com/gp/product/149190142X/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=149190142X&linkCode=as2&tag=petacrunch-20&linkId=edf06af7b6694a8bc86289c37f4378e4) 这本书中，数据科学的概念是以易于理解的方式呈现给陌生的学习者的。你甚至不需要了解 Python 就可以开始。我强烈推荐你从这本书开始。
 
-![](../Images/8dd6c59e9a9ec546734bdd8ad680b5cc.png)
+![](img/8dd6c59e9a9ec546734bdd8ad680b5cc.png)
 
 《Python 机器学习简介》
 
 如果你愿意从初学者水平学习机器学习，并渴望了解更多内容，那么这本名为《[Python 机器学习简介](https://www.amazon.com/gp/product/1449369413/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1449369413&linkCode=as2&tag=petacrunch-20&linkId=8669cacfe298d25c2832d9062642dd44)》的书是一个绝佳选择。请记住，你不需要已经掌握 Python。
 
-![](../Images/631d4df67245dc642abd66515b2c6ace.png)
+![](img/631d4df67245dc642abd66515b2c6ace.png)
 
 数据科学职位
 
@@ -62,13 +62,13 @@
 
 如果你读过一两本数据科学书籍，并且自己做过一些数据科学任务，现在你习惯于处理数据，这里有一些书籍可以深化你对数据科学的理解。
 
-![](../Images/a280b61d8c580c731354e37e1fdb25b0.png)
+![](img/a280b61d8c580c731354e37e1fdb25b0.png)
 
 《Python 数据分析》
 
 [《Python 数据分析》](https://www.amazon.com/gp/product/1491957662/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1491957662&linkCode=as2&tag=petacrunch-20&linkId=7664d523f4c3d5195b201dc219efdd15) 建议使用 NumPy 和 pandas。此外，《Python 数据分析》是一个知识渊博的数据科学家可能会欣赏的绝妙资源。它也对 Python 语言的功能进行了适当的介绍。
 
-![](../Images/cdc6c2e97af9e0e3ce0e0716f01a7d55.png)
+![](img/cdc6c2e97af9e0e3ce0e0716f01a7d55.png)
 
 Python 数据科学手册
 
@@ -88,19 +88,19 @@ Python 数据科学手册
 
 +   **Scikit-learn:** 是一个流行的 Python 机器学习库，提供了复杂的机器学习算法和高效的实现。
 
-![](../Images/b71b949198bc1d7a8814ef5bc526b8e1.png)
+![](img/b71b949198bc1d7a8814ef5bc526b8e1.png)
 
 《Python 机器学习》书籍
 
 [Python 机器学习](https://www.amazon.com/gp/product/1789955750/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1789955750&linkCode=as2&tag=petacrunch-20&linkId=cc65892b0564ce32cee20536fb70b29c) 介于中级和高级机器学习阶段之间。它适合所有该领域的专家以及其他人。它从机器学习和深度学习的温和介绍开始，然后转向更高级的方法。一本了不起的书！
 
-![](../Images/fe02cb9a2ac231ef9443304d9cbe04aa.png)
+![](img/fe02cb9a2ac231ef9443304d9cbe04aa.png)
 
-[动手实践机器学习：Scikit-Learn 和 TensorFlow](https://amzn.to/3d3tpE7) (第2版)
+[动手实践机器学习：Scikit-Learn 和 TensorFlow](https://amzn.to/3d3tpE7) (第 2 版)
 
-[动手实践机器学习：Scikit-Learn 和 TensorFlow](https://amzn.to/3d3tpE7) (第2版) 是一本宝贵的资源，能够获得更多成果！这本书讨论了所有基础知识（分类过程、降维），甚至涉及神经网络和深度学习。
+[动手实践机器学习：Scikit-Learn 和 TensorFlow](https://amzn.to/3d3tpE7) (第 2 版) 是一本宝贵的资源，能够获得更多成果！这本书讨论了所有基础知识（分类过程、降维），甚至涉及神经网络和深度学习。
 
-![](../Images/5331b8074f7ad4035767c0d6ef3d9ab8.png)
+![](img/5331b8074f7ad4035767c0d6ef3d9ab8.png)
 
 Python for Finance 书籍
 
@@ -110,19 +110,19 @@ Python for Finance 书籍
 
 对于那些在数据科学方面有一定经验的人来说，阅读大量的科学研究文章比阅读书籍更为合适。这是因为这种方法更为现实，并且可以将深度学习融入到你的程序中，以超越传统统计学。
 
-![](../Images/98ea6b7938f750b4b4614292fcd56715.png)
+![](img/98ea6b7938f750b4b4614292fcd56715.png)
 
 深度学习与 Python
 
 [深度学习与 Python](https://www.amazon.com/gp/product/1617294438/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=1617294438&linkCode=as2&tag=petacrunch-20&linkId=fa7304c5324df649a4ba536bd74927d2) 这本书的作者是 Keras 库的开发者之一，Keras 是 Python 最著名的机器学习库之一。这本书以实用的方法开始，因为你可以立即学习几种有用的技巧。它通常非常实际，因为你可以在阅读后立即应用于活动中。这是深度学习的终极必读书籍。
 
-![](../Images/b4752718037f67014eb586d2f5c88ecc.png)
+![](img/b4752718037f67014eb586d2f5c88ecc.png)
 
 深度学习
 
 [深度学习](https://www.amazon.com/gp/product/0262035618/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0262035618&linkCode=as2&tag=petacrunch-20&linkId=00701393c949f16bfd3a89d9c3240b35) 是一本关于深度学习算法的绝佳参考书。它包含了有限的编码量，并且对如何解决机器学习问题有很好的见解。该书被该领域的专家频繁引用。
 
-![](../Images/b2befb563f637d0a51fdfec56059c308.png)
+![](img/b2befb563f637d0a51fdfec56059c308.png)
 
 [机器学习：概率视角](https://www.amazon.com/gp/product/0262018020/ref=as_li_tl?ie=UTF8&camp=1789&creative=9325&creativeASIN=0262018020&linkCode=as2&tag=petacrunch-20&linkId=a52c63d00ba9f01f29e1db95d6b4c171)
 
@@ -154,11 +154,11 @@ Python for Finance 书籍
 
 **相关：**
 
-+   [2021 年 15 本免费的数据科学、机器学习与统计学电子书](/2020/12/15-free-data-science-machine-learning-statistics-ebooks-2021.html)
++   2021 年 15 本免费的数据科学、机器学习与统计学电子书
 
-+   [另外 10 本免费必读机器学习与数据科学书籍](/2019/03/another-10-free-must-read-books-for-machine-learning-and-data-science.html)
++   另外 10 本免费必读机器学习与数据科学书籍
 
-+   [数据科学与机器学习：免费电子书](/2020/12/data-science-machine-learning-free-ebook.html)
++   数据科学与机器学习：免费电子书
 
 ### 更多相关内容
 

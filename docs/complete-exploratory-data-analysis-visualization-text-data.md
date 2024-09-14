@@ -1,22 +1,22 @@
 # 完整的探索性数据分析与文本数据可视化：结合可视化和 NLP 生成见解
 
-> 原文：[https://www.kdnuggets.com/2019/05/complete-exploratory-data-analysis-visualization-text-data.html](https://www.kdnuggets.com/2019/05/complete-exploratory-data-analysis-visualization-text-data.html)
+> 原文：[`www.kdnuggets.com/2019/05/complete-exploratory-data-analysis-visualization-text-data.html`](https://www.kdnuggets.com/2019/05/complete-exploratory-data-analysis-visualization-text-data.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/05/complete-exploratory-data-analysis-visualization-text-data.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Susan Li](https://www.linkedin.com/in/susanli/)，高级数据科学家**
 
-![figure-name](../Images/4a62a3fc892735b06e0efc7d596c61a8.png)照片来源：Pixabay
+![figure-name](img/4a62a3fc892735b06e0efc7d596c61a8.png)照片来源：Pixabay
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 
@@ -34,7 +34,7 @@ df = pd.read_csv('Womens Clothing E-Commerce Reviews.csv')
 
 ```
 
-![figure-name](../Images/658e7d69962823379dd8ded3b4fae862.png)表1
+![figure-name](img/658e7d69962823379dd8ded3b4fae862.png)表 1
 
 在对数据进行简要检查后，我们发现需要进行一系列的数据预处理工作。
 
@@ -44,7 +44,7 @@ df = pd.read_csv('Womens Clothing E-Commerce Reviews.csv')
 
 +   清理“评论文本”列。
 
-+   使用[**TextBlob**](https://textblob.readthedocs.io/en/dev/)计算情感极性，其范围在[-1,1]之间，1表示积极情感，-1表示消极情感。
++   使用[**TextBlob**](https://textblob.readthedocs.io/en/dev/)计算情感极性，其范围在[-1,1]之间，1 表示积极情感，-1 表示消极情感。
 
 +   创建评论长度的新特征。
 
@@ -75,7 +75,7 @@ df['word_count'] = df['Review Text'].apply(lambda x: len(str(x).split()))
 
 text_preprocessing.py
 
-为了预览情感极性分数是否有效，我们随机选择了5条情感极性分数最高的评论 (1)：
+为了预览情感极性分数是否有效，我们随机选择了 5 条情感极性分数最高的评论 (1)：
 
 ```py
 
@@ -86,9 +86,9 @@ for c in cl:
 
 ```
 
-![图名](../Images/4b4f8708f0124277a37d36eed1f9a384.png)图 1
+![图名](img/4b4f8708f0124277a37d36eed1f9a384.png)图 1
 
-然后随机选择5条情感极性分数最中性的评论（零）：
+然后随机选择 5 条情感极性分数最中性的评论（零）：
 
 ```py
 
@@ -99,9 +99,9 @@ for c in cl:
 
 ```
 
-![图名](../Images/ca869354ea07ff62a30e909b155abd55.png)图 2
+![图名](img/ca869354ea07ff62a30e909b155abd55.png)图 2
 
-只有2条评论的情感极性分数最为负面：
+只有 2 条评论的情感极性分数最为负面：
 
 ```py
 
@@ -112,7 +112,7 @@ for c in cl:
 
 ```
 
-![图名](../Images/598ed7719a4a75aaed1549ff987fb5b4.png)图 3
+![图名](img/598ed7719a4a75aaed1549ff987fb5b4.png)图 3
 
 成功了！
 
@@ -134,7 +134,7 @@ df['polarity'].iplot(
 
 ```
 
-[![图 91](../Images/79b43074a32804b7844c074bb79c52cc.png)](https://plot.ly/~susanli2005/91/ "图 91")图 4
+![图 91](https://plot.ly/~susanli2005/91/ "图 91")图 4
 
 绝大多数的情感极性分数都大于零，这意味着大多数评论都相当积极。
 
@@ -151,11 +151,11 @@ df['Rating'].iplot(
 
 ```
 
-[![图 93](../Images/a7131d2d0f9e716cd021063744567fba.png)](https://plot.ly/~susanli2005/93/ "图 93")
+![图 93](https://plot.ly/~susanli2005/93/ "图 93")
 
 图 5
 
-评分与极性分数一致，即大多数评分都很高，处于4或5的范围内。
+评分与极性分数一致，即大多数评分都很高，处于 4 或 5 的范围内。
 
 **评论者年龄的分布**
 
@@ -171,11 +171,11 @@ df['Age'].iplot(
 
 ```
 
-[![图 95](../Images/5cd8d14be42062913414fb11932f8f87.png)](https://plot.ly/~susanli2005/95/ "图 95")
+![图 95](https://plot.ly/~susanli2005/95/ "图 95")
 
 图 6
 
-大多数评论者年龄在30到40岁之间。
+大多数评论者年龄在 30 到 40 岁之间。
 
 **评论文本长度的分布**
 
@@ -191,7 +191,7 @@ df['review_len'].iplot(
 
 ```
 
-[![图 97](../Images/7d67a898ee4460b6de1571c934d10877.png)](https://plot.ly/~susanli2005/97/ "图 97")
+![图 97](https://plot.ly/~susanli2005/97/ "图 97")
 
 图 7
 
@@ -209,7 +209,7 @@ df['word_count'].iplot(
 
 ```
 
-[![图 99](../Images/07d4d8c2135b3e1b6bee6519d1c4337f.png)](https://plot.ly/~susanli2005/99/ "图 99")
+![图 99](https://plot.ly/~susanli2005/99/ "图 99")
 
 图 8
 
@@ -225,7 +225,7 @@ df.groupby('Division Name').count()['Clothing ID'].iplot(kind='bar', yTitle='Cou
 
 ```
 
-[![图 101](../Images/39124bd80a065fe5a9f446e9b6054e97.png)](https://plot.ly/~susanli2005/101/ "图 101")
+![图 101](https://plot.ly/~susanli2005/101/ "图 101")
 
 图 9
 
@@ -239,7 +239,7 @@ df.groupby('Department Name').count()['Clothing ID'].sort_values(ascending=False
 
 ```
 
-[![图 103](../Images/d3a874759047adf074a7e5853b1e317a.png)](https://plot.ly/~susanli2005/103/ "图 103")
+![图 103](https://plot.ly/~susanli2005/103/ "图 103")
 
 图 10
 
@@ -252,7 +252,7 @@ df.groupby('Department Name').count()['Clothing ID'].sort_values(ascending=False
 df.groupby('Class Name').count()['Clothing ID'].sort_values(ascending=False).iplot(kind='bar', yTitle='Count', linecolor='black', opacity=0.8, title='Bar chart of Class Name', xTitle='Class Name')
 ```
 
-[![图 105](../Images/7e479516a39edeb6bffc748d109fddb5.png)](https://plot.ly/~susanli2005/105/ "图 105")
+![图 105](https://plot.ly/~susanli2005/105/ "图 105")
 
 图 11
 
@@ -280,7 +280,7 @@ kind='bar', yTitle='Count', linecolor='black', title='Top 20 words in review bef
 
 ```
 
-top_unigram.py[![Plot 107](../Images/2af28e43e30450b8623df03b2e102e5a.png)](https://plot.ly/~susanli2005/107/ "Plot 107")
+top_unigram.py![Plot 107](https://plot.ly/~susanli2005/107/ "Plot 107")
 
 图 12
 
@@ -304,7 +304,7 @@ kind='bar', yTitle='Count', linecolor='black', title='Top 20 words in review aft
 
 ```
 
-top_unigram_no_stopwords.py[![Plot 109](../Images/84e43d31f159e703745d4b9cf3f1d7cb.png)](https://plot.ly/~susanli2005/109/ "Plot 109")
+top_unigram_no_stopwords.py![Plot 109](https://plot.ly/~susanli2005/109/ "Plot 109")
 
 图 13
 
@@ -330,7 +330,7 @@ kind='bar', yTitle='Count', linecolor='black', title='Top 20 bigrams in review b
 
 ```
 
-top_bigram.py![figure-name](../Images/09fe4e30b6c5aca3aeff7c42c0039f2c.png)图 14
+top_bigram.py![figure-name](img/09fe4e30b6c5aca3aeff7c42c0039f2c.png)图 14
 
 **去除停用词后的顶级二元组分布**
 
@@ -352,7 +352,7 @@ kind='bar', yTitle='Count', linecolor='black', title='Top 20 bigrams in review a
 
 ```
 
-top_bigram_no_stopwords.py[![Plot 113](../Images/984856f7f482ecbc6b86d1eb6d8bc1df.png)](https://plot.ly/~susanli2005/113/ "Plot 113")
+top_bigram_no_stopwords.py![Plot 113](https://plot.ly/~susanli2005/113/ "Plot 113")
 
 图 15
 
@@ -378,7 +378,7 @@ kind='bar', yTitle='Count', linecolor='black', title='Top 20 trigrams in review 
 
 ```
 
-top_trigram.py![figure-name](../Images/c74b935d26d9ff104ac3e0f561266746.png)图 16
+top_trigram.py![figure-name](img/c74b935d26d9ff104ac3e0f561266746.png)图 16
 
 **去除停用词后的顶级三元组分布**
 
@@ -400,7 +400,7 @@ kind='bar', yTitle='Count', linecolor='black', title='Top 20 trigrams in review 
 
 ```
 
-top_trigram_no_stopwords.py![figure-name](../Images/14c4779697c283dac2818c3edf61d178.png)图 17
+top_trigram_no_stopwords.py![figure-name](img/14c4779697c283dac2818c3edf61d178.png)图 17
 
 [***词性标注 (POS)***](https://en.wikipedia.org/wiki/Part-of-speech_tagging) 是一种将词语标注为不同词性的过程，例如名词、动词、形容词等。
 
@@ -421,7 +421,7 @@ title='Top 20 Part-of-speech tagging for review corpus')
 
 ```
 
-POS.py[![Plot 117](../Images/90de1850454d2b9e1eecec631976de50.png)](https://plot.ly/~susanli2005/117/ "Plot 117")
+POS.py![Plot 117](https://plot.ly/~susanli2005/117/ "Plot 117")
 
 图 18
 
@@ -490,7 +490,7 @@ iplot(fig, filename = "Sentiment Polarity Boxplot of Department Name")
 
 ```
 
-department_polarity.py[![Plot 125](../Images/07983bfae18a666fbc1c06431ec5386e.png)](https://plot.ly/~susanli2005/125/ "Plot 125")
+department_polarity.py![Plot 125](https://plot.ly/~susanli2005/125/ "Plot 125")
 
 图 19
 
@@ -559,7 +559,7 @@ iplot(fig, filename = "Rating Boxplot of Department Name")
 
 ```
 
-rating_division.py[![Plot 121](../Images/0c91da65650213f069bb50d060e84716.png)](https://plot.ly/~susanli2005/121/ "Plot 121")
+rating_division.py![Plot 121](https://plot.ly/~susanli2005/121/ "Plot 121")
 
 图 20
 
@@ -628,7 +628,7 @@ iplot(fig, filename = "Review Length Boxplot of Department Name")
 
 ```
 
-length_department.py[![Plot 123](../Images/1cfb818dbe46c23e397c3f16293e77a1.png)](https://plot.ly/~susanli2005/123/ "Plot 123")
+length_department.py![Plot 123](https://plot.ly/~susanli2005/123/ "Plot 123")
 
 图 21
 

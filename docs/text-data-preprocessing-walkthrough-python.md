@@ -1,12 +1,12 @@
 # 文本数据预处理：Python 实战指南
 
-> 原文：[https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html](https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html)
+> 原文：[`www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html`](https://www.kdnuggets.com/2018/03/text-data-preprocessing-walkthrough-python.html)
 
-[评论](#comments)
+评论
 
-在之前的一对帖子中，我们首先讨论了一个 [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)，接着讨论了 [文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)。这篇文章将作为使用一些常见 Python 工具进行文本数据预处理任务的实用指南。
+在之前的一对帖子中，我们首先讨论了一个 处理文本数据科学任务的框架，接着讨论了 文本数据预处理的一般方法。这篇文章将作为使用一些常见 Python 工具进行文本数据预处理任务的实用指南。
 
-![数据预处理](../Images/ba19ee311c44299a9d508a3af2321675.png)
+![数据预处理](img/ba19ee311c44299a9d508a3af2321675.png)
 
 在文本数据科学框架的背景下进行预处理。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
 
 * * *
 
@@ -42,7 +42,7 @@
 
 确实是一个玩具数据集，但不要误解；我们在这里进行的数据预处理步骤是完全可迁移的。
 
-![预处理框架](../Images/ea02e5c68f0307f085eecd2b417016f5.png)
+![预处理框架](img/ea02e5c68f0307f085eecd2b417016f5.png)
 
 文本数据预处理框架。
 
@@ -133,7 +133,7 @@ I have to go get 2 tutus from 2 different stores, too.
 
 标准化通常指一系列相关任务，旨在使所有文本处于同一水平：将所有文本转换为相同的大小写（大写或小写），去除标点符号，将数字转换为其单词等价形式，等等。标准化使所有单词处于平等地位，并允许处理以统一的方式进行。
 
-文本归一化可以包含多个任务，但对于我们的框架，我们将归一化分为三个不同的步骤：(1) 词干化，(2) 词形还原，以及 (3) 其他所有操作。有关这些不同步骤的具体信息，[请参阅这篇文章](/2017/12/general-approach-preprocessing-text-data.html)。
+文本归一化可以包含多个任务，但对于我们的框架，我们将归一化分为三个不同的步骤：(1) 词干化，(2) 词形还原，以及 (3) 其他所有操作。有关这些不同步骤的具体信息，请参阅这篇文章。
 
 请记住，在标记化之后，我们不再处理文本级别的数据，而是转向词级别。我们下面展示的归一化函数反映了这一点。函数名称和注释应提供每个函数的必要信息。
 
@@ -154,7 +154,7 @@ I have to go get 2 tutus from 2 different stores, too.
 
 调用词干化和词形还原函数如下所示：
 
-这会产生两个新的列表：一个是词干化的标记，另一个是与动词相关的词形还原标记。根据你即将进行的NLP任务或偏好，这其中一个可能比另一个更合适。有关词形还原与词干化的[讨论](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)，请参见此处。
+这会产生两个新的列表：一个是词干化的标记，另一个是与动词相关的词形还原标记。根据你即将进行的 NLP 任务或偏好，这其中一个可能比另一个更合适。有关词形还原与词干化的[讨论](https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html)，请参见此处。
 
 ```py
 Stemmed:
@@ -180,26 +180,26 @@ Lemmatized:
 
 ```
 
-这就是使用Python对一段文本进行简单数据预处理的过程。我建议你对一些额外的文本执行这些任务以验证结果。我们将使用相同的过程来清理下一任务的文本数据，在此任务中，我们将进行实际的NLP任务，而不是花时间准备数据以进行这样的实际任务。
+这就是使用 Python 对一段文本进行简单数据预处理的过程。我建议你对一些额外的文本执行这些任务以验证结果。我们将使用相同的过程来清理下一任务的文本数据，在此任务中，我们将进行实际的 NLP 任务，而不是花时间准备数据以进行这样的实际任务。
 
 **相关**：
 
-+   [文本数据预处理的通用方法](/2017/12/general-approach-preprocessing-text-data.html)
++   文本数据预处理的通用方法
 
-+   [处理文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   处理文本数据科学任务的框架
 
-+   [自然语言处理关键术语解释](/2017/02/natural-language-processing-key-terms-explained.html)
++   自然语言处理关键术语解释
 
 ### 更多相关内容
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

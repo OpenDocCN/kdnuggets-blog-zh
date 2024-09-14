@@ -1,8 +1,8 @@
 # 免费的 MLOps 初学者速成课程
 
-> 原文：[https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)
+> 原文：[`www.kdnuggets.com/2022/08/free-mlops-crash-course.html`](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)
 
-![免费 MLOps 初学者速成课程](../Images/9c9d539b6e48085618e89ede238f1230.png)
+![免费 MLOps 初学者速成课程](img/9c9d539b6e48085618e89ede238f1230.png)
 
 除非你过着隐居的生活，否则你一定听说过 MLOps，你可能至少对它有一个大致的了解。
 
@@ -16,7 +16,7 @@
 
 MLOps 不是一种流行的术语；它是一种哲学（**哲学**？），用于在现实世界中管理机器学习项目，从其起始到（希望！）随着时间的推移持续更新。不要被误导以为当代机器学习只是创建 Jupyter 笔记本中的模型；学习 MLOps 并在现实世界中发挥作用。这是开始学习之旅的一个不错的地方。
 
-但如果你想快速、简洁地了解 MLOps 是什么，以及它如何有用呢？由 [ZenML](https://www.zenml.io/) 的 Hamza Tahir 指导的免费CodeCamp课程 "[免费 MLOps 初学者速成课程](https://www.youtube.com/watch?v=AF1WZJM_YtY)"，在紧凑的一小时讨论中很好地回答了这些问题以及更多。
+但如果你想快速、简洁地了解 MLOps 是什么，以及它如何有用呢？由 [ZenML](https://www.zenml.io/) 的 Hamza Tahir 指导的免费 CodeCamp 课程 "[免费 MLOps 初学者速成课程](https://www.youtube.com/watch?v=AF1WZJM_YtY)"，在紧凑的一小时讨论中很好地回答了这些问题以及更多。
 
 该课程基于 [ZenML](https://github.com/zenml-io/zenml)，这是一个允许你“构建可移植的、生产就绪的 MLOps 管道”的框架。
 
@@ -60,11 +60,11 @@ MLOps 不是一种流行的术语；它是一种哲学（**哲学**？），用�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 

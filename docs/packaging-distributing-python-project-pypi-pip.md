@@ -1,8 +1,8 @@
 # 将你的 Python 项目打包并分发到 PyPI 以便通过 pip 安装
 
-> 原文：[https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html/2](https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html/2)
+> 原文：[`www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html/2`](https://www.kdnuggets.com/2018/06/packaging-distributing-python-project-pypi-pip.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/06/packaging-distributing-python-project-pypi-pip.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 5\. 准备包及其文件（__init__.py 和 setup.py）
 
@@ -10,7 +10,7 @@
 
 **图 7**
 
-![](../Images/3e79a16b2a55e626e64e60ccef3729e0.png)
+![](img/3e79a16b2a55e626e64e60ccef3729e0.png)
 
 目录的根目录包含了包的所有文件和目录。在根目录下，还有一个名为“**printmsg**”的目录，其中包含了实际的模块。该模块包含了我们的项目的 Python 代码，这些代码在安装后会被导入。
 
@@ -24,7 +24,7 @@
 
 **图 8**
 
-![](../Images/09de1c6684d0a3656ec1a6c3c7ee0ffd.png)
+![](img/09de1c6684d0a3656ec1a6c3c7ee0ffd.png)
 
 除了告诉 Python 目录是一个 Python 包之外，**__init__.py** 文件是模块导入时第一个被加载的文件，因此可以进行初始化。
 
@@ -56,7 +56,7 @@ setuptools.setup(  
 
 **Figure 9**
 
-![](../Images/82d567d217c3377c430e585379a82780.png)
+![](img/82d567d217c3377c430e585379a82780.png)
 
 然后我们可以通过运行**setup.py**文件来分发包，如图 10 所示。打开终端后，将包的根目录设置为当前目录，然后执行**setup.py**文件。
 
@@ -66,19 +66,19 @@ setuptools.setup(  
 
 **Figure 10**
 
-![](../Images/28b0d772ae72811552b8c7e342a1583d.png)
+![](img/28b0d772ae72811552b8c7e342a1583d.png)
 
 执行**setup.py**文件后，预期在包的根目录下会生成一些新目录。根目录中的文件和目录如图 11 所示。
 
 **Figure 11**
 
-![](../Images/d83914df550d91fff07408e0a3dcdd82.png)
+![](img/d83914df550d91fff07408e0a3dcdd82.png)
 
 最重要的文件夹是**dist**文件夹，因为它包含将上传到 PyPI 的发行文件。其内容如图 12 所示。它包含**.whl**文件，即构建分发文件，还有源代码分发**.tar.gz**文件。
 
 **Figure 12**
 
-![](../Images/997fe96ea11c4ffd0be1a1b6fa13562b.png)
+![](img/997fe96ea11c4ffd0be1a1b6fa13562b.png)
 
 准备好发行文件后，接下来是将它们上传到 PyPI。
 
@@ -86,7 +86,7 @@ setuptools.setup(  
 
 有两个 Python 包仓库可供使用。其中一个用于测试和实验，即 Test PyPI (**test.pypi.org**)，另一个用于真实索引，即 PyPI (**pypi.org**)。它们的使用类似，但我们可以先使用 Test PyPI。
 
-在上传到 Test PyPI 之前，你应该注册以获得用于上传包的用户名和密码。只需通过你的有效电子邮件地址注册，确认邮件将被发送以激活你的账户。注册链接是[https://test.pypi.org/account/register/](https://test.pypi.org/account/register/)。
+在上传到 Test PyPI 之前，你应该注册以获得用于上传包的用户名和密码。只需通过你的有效电子邮件地址注册，确认邮件将被发送以激活你的账户。注册链接是[`test.pypi.org/account/register/`](https://test.pypi.org/account/register/)。
 
 注册完成后，我们可以使用**twine**工具将包分发上传到 Test PyPI。你应该确保按照以下命令安装和升级：
 
@@ -100,13 +100,13 @@ setuptools.setup(  
 
 **图 13**
 
-![](../Images/ca438b42e923857b0d7a2cfcbc96212a.png)
+![](img/ca438b42e923857b0d7a2cfcbc96212a.png)
 
 成功上传文件后，你可以打开 Test PyPI 的个人资料查看你上传的项目。图 14 显示了**printmsg**项目成功上线。请注意，**setup.py**文件中的描述字段值现在已出现在仓库中。
 
 **图 14**
 
-![](../Images/ce3ef373268516ee3cb3b23eb00c9b42.png)
+![](img/ce3ef373268516ee3cb3b23eb00c9b42.png)
 
 ### 8. 从 Test PyPI 安装分发包
 
@@ -116,7 +116,7 @@ setuptools.setup(  
 
 **图 15**
 
-![](../Images/75bbac3dfdbeb91499cedca421c42ffd.png)
+![](img/75bbac3dfdbeb91499cedca421c42ffd.png)
 
 ### 9. 导入和使用已安装的包
 
@@ -131,7 +131,7 @@ printmsg.print_msg_file.print_msg_func() 
 
 ### 10. 使用 PyPI 代替 Test PyPI
 
-如果你决定将项目放入真实的 PyPI，你只需重复之前的步骤，稍作修改。首先，你需要在[https://pypi.org/](https://pypi.org/)注册并获取用户名和密码。我不想说你必须**再次**注册，因为 Test PyPI 的注册与 PyPI 的注册不同。
+如果你决定将项目放入真实的 PyPI，你只需重复之前的步骤，稍作修改。首先，你需要在[`pypi.org/`](https://pypi.org/)注册并获取用户名和密码。我不想说你必须**再次**注册，因为 Test PyPI 的注册与 PyPI 的注册不同。
 
 第一个变化是不使用**--repository-url**选项与**twine**，因为 PyPI 是上传包的默认仓库。因此，所需的命令如下：
 
@@ -147,21 +147,21 @@ printmsg.print_msg_file.print_msg_func() 
 
 **相关：**
 
-+   [构建基于 HTTP 的 ConvNet 应用程序的完整指南，使用 TensorFlow 和 Flask RESTful Python API](/2018/05/complete-guide-convnet-tensorflow-flask-restful-python-api.html)
++   构建基于 HTTP 的 ConvNet 应用程序的完整指南，使用 TensorFlow 和 Flask RESTful Python API
 
-+   [使用 NumPy 从零开始构建卷积神经网络](/2018/04/building-convolutional-neural-network-numpy-scratch.html)
++   使用 NumPy 从零开始构建卷积神经网络
 
-+   [遗传算法优化简介](/2018/03/introduction-optimization-with-genetic-algorithm.html)
++   遗传算法优化简介
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

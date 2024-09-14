@@ -1,8 +1,8 @@
-# ML模型服务：常见模式
+# ML 模型服务：常见模式
 
-> 原文：[https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html](https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html)
+> 原文：[`www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html`](https://www.kdnuggets.com/2021/10/serving-ml-models-production-common-patterns.html)
 
-[评论](#comments)
+评论
 
 **由 [Simon Mo](https://www.anyscale.com/blog?author=simon-mo)、[Edward Oakes](https://www.anyscale.com/blog?author=edward-oakes) 和 [Michael Galarnyk](https://www.anyscale.com/blog?author=michael-galarnyk) 撰写**
 
@@ -10,35 +10,35 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-本文基于Simon Mo在Ray Summit 2021上的“生产中的机器学习模式”[讲座](https://www.youtube.com/watch?v=mM4hJLelzSw)。
+本文基于 Simon Mo 在 Ray Summit 2021 上的“生产中的机器学习模式”[讲座](https://www.youtube.com/watch?v=mM4hJLelzSw)。
 
-在过去几年中，我们听取了来自多个不同行业的ML从业者的意见，以改进围绕ML生产用例的工具。通过这些反馈，我们发现了生产中机器学习的4种常见模式：管道、集成、业务逻辑和在线学习。在ML服务领域，实现这些模式通常涉及开发的便利性和生产准备性的权衡。[Ray Serve](https://docs.ray.io/en/latest/serve/index.html)旨在支持这些模式，既易于开发，又具备生产准备性。它是一个可扩展的可编程服务框架，建立在[Ray](https://www.ray.io/)之上，帮助你扩展微服务和生产中的ML模型。
+在过去几年中，我们听取了来自多个不同行业的 ML 从业者的意见，以改进围绕 ML 生产用例的工具。通过这些反馈，我们发现了生产中机器学习的 4 种常见模式：管道、集成、业务逻辑和在线学习。在 ML 服务领域，实现这些模式通常涉及开发的便利性和生产准备性的权衡。[Ray Serve](https://docs.ray.io/en/latest/serve/index.html)旨在支持这些模式，既易于开发，又具备生产准备性。它是一个可扩展的可编程服务框架，建立在[Ray](https://www.ray.io/)之上，帮助你扩展微服务和生产中的 ML 模型。
 
 本文涵盖：
 
-+   什么是Ray Serve
++   什么是 Ray Serve
 
-+   Ray Serve在ML服务领域的位置
++   Ray Serve 在 ML 服务领域的位置
 
-+   生产中ML的一些常见模式
++   生产中 ML 的一些常见模式
 
-+   如何使用Ray Serve实现这些模式
++   如何使用 Ray Serve 实现这些模式
 
-## 什么是Ray Serve?
+## 什么是 Ray Serve?
 
-![Ray生态系统中的ML模型服务：常见模式](../Images/4bf023c751a82dcc888c87fd498e4ab9.png)
+![Ray 生态系统中的 ML 模型服务：常见模式](img/4bf023c751a82dcc888c87fd498e4ab9.png)
 
-Ray Serve建立在Ray分布式计算平台之上，使其能够轻松扩展到多个机器，无论是在数据中心还是云中。
+Ray Serve 建立在 Ray 分布式计算平台之上，使其能够轻松扩展到多个机器，无论是在数据中心还是云中。
 
-Ray Serve是一个易于使用的可扩展模型服务库，建立在Ray之上。该库的一些优势包括：
+Ray Serve 是一个易于使用的可扩展模型服务库，建立在 Ray 之上。该库的一些优势包括：
 
 +   可扩展性：横向扩展到数百个进程或机器，同时保持开销在单数字毫秒内
 
@@ -54,7 +54,7 @@ Ray Serve是一个易于使用的可扩展模型服务库，建立在Ray之上�
 
 ## Ray Serve 在 ML 服务领域的适配
 
-![Ray Serve 在 ML 服务领域的适配](../Images/b4eed5d580a6125b7245a30168ed04ba.png)
+![Ray Serve 在 ML 服务领域的适配](img/b4eed5d580a6125b7245a30168ed04ba.png)
 
 上图显示，在 ML 服务领域，通常存在开发简易性与生产就绪性之间的权衡。
 
@@ -76,7 +76,7 @@ Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使�
 
 ### Ray Serve 有什么不同？
 
-![许多工具良好运行 1 个模型](../Images/4b40ac8b5d230e62b6a366aa3861b83a.png)
+![许多工具良好运行 1 个模型](img/4b40ac8b5d230e62b6a366aa3861b83a.png)
 
 有这么多工具用于训练和服务一个模型。这些工具帮助你很好地运行和部署一个模型。问题在于，现实中的机器学习通常没有那么简单。在生产环境中，你可能会遇到以下问题：
 
@@ -88,13 +88,13 @@ Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使�
 
 +   许多工具非常昂贵，且通常会导致资源的利用不足。
 
-扩展单个模型已经足够困难。对于许多生产中的机器学习用例，我们观察到复杂的工作负载需要将多个不同的模型组合在一起。Ray Serve天生适用于涉及多个节点的多个模型的这种用例。你可以查看[这部分讲座](https://youtu.be/mM4hJLelzSw?t=651)，我们深入探讨了Ray Serve的架构组件。
+扩展单个模型已经足够困难。对于许多生产中的机器学习用例，我们观察到复杂的工作负载需要将多个不同的模型组合在一起。Ray Serve 天生适用于涉及多个节点的多个模型的这种用例。你可以查看[这部分讲座](https://youtu.be/mM4hJLelzSw?t=651)，我们深入探讨了 Ray Serve 的架构组件。
 
 ## 生产中的机器学习模型模式
 
-![13PatternsMLProduction](../Images/5373302cc6c845b5e4c850313e950697.png)
+![13PatternsMLProduction](img/5373302cc6c845b5e4c850313e950697.png)
 
-生产中的大部分机器学习应用遵循4种模型模式：
+生产中的大部分机器学习应用遵循 4 种模型模式：
 
 +   管道
 
@@ -104,11 +104,11 @@ Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使�
 
 +   在线学习
 
-本节将描述这些模式中的每一种，展示它们的使用方式，讲解现有工具如何实现它们，并展示Ray Serve如何解决这些挑战。
+本节将描述这些模式中的每一种，展示它们的使用方式，讲解现有工具如何实现它们，并展示 Ray Serve 如何解决这些挑战。
 
 ### 管道模式
 
-![图示](../Images/54548db95bd65dc4919d3abfdede19df.png)
+![图示](img/54548db95bd65dc4919d3abfdede19df.png)
 
 一个典型的计算机视觉管道
 
@@ -120,15 +120,15 @@ Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使�
 
 3) 图像被传递到关键点检测模型中，以识别物体的姿势。对于猫的图像，模型可以识别像爪子、脖子和头部这样的关键点。
 
-4) 最后，一个NLP合成模型生成图像所展示的类别。在这个例子中，是一只站立的猫。
+4) 最后，一个 NLP 合成模型生成图像所展示的类别。在这个例子中，是一只站立的猫。
 
 典型的管道很少只包含一个模型。为了解决现实中的问题，机器学习应用通常使用多个不同的模型来执行即使是简单的任务。一般而言，管道将一个特定任务拆分为多个步骤，每个步骤由机器学习算法或某些过程解决。现在让我们来看看几个你可能已经熟悉的管道。
 
-**Scikit-Learn管道**
+**Scikit-Learn 管道**
 
 `Pipeline([(‘scaler’, StandardScaler()), (‘svc’, SVC())])`
 
-[scikit-learn的管道](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)可以用于将多个“模型”和“处理对象”结合在一起。
+[scikit-learn 的管道](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html)可以用于将多个“模型”和“处理对象”结合在一起。
 
 **推荐系统**
 
@@ -140,13 +140,13 @@ Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使�
 
 `[HeavyWeightMLMegaModel(), DecisionTree()/BoostingModel()]`
 
-一些非常常见的用例中，使用了大量的机器学习模型来处理文本或图像的常见处理。例如，在Facebook，FAIR的机器学习研究人员团队创建了用于视觉和文本的最先进的重量级模型。然后，不同的产品团队创建下游模型来解决他们的业务用例（例如，[自杀预防](https://ai.facebook.com/blog/under-the-hood-suicide-prevention-tools-powered-by-ai/)），通过使用随机森林实现较小的模型。共享的常见预处理步骤通常会被具体化为[特征存储管道](https://www.tecton.ai/blog/what-is-a-feature-store/)。
+一些非常常见的用例中，使用了大量的机器学习模型来处理文本或图像的常见处理。例如，在 Facebook，FAIR 的机器学习研究人员团队创建了用于视觉和文本的最先进的重量级模型。然后，不同的产品团队创建下游模型来解决他们的业务用例（例如，[自杀预防](https://ai.facebook.com/blog/under-the-hood-suicide-prevention-tools-powered-by-ai/)），通过使用随机森林实现较小的模型。共享的常见预处理步骤通常会被具体化为[特征存储管道](https://www.tecton.ai/blog/what-is-a-feature-store/)。
 
 ### 一般管道实施选项
 
-![17PipelineImplementation](../Images/79bbb459ea0883039df1a9aef463ae8a.png)
+![17PipelineImplementation](img/79bbb459ea0883039df1a9aef463ae8a.png)
 
-在Ray Serve之前，实现管道通常意味着你必须在将模型封装在网络服务器中或使用许多专门的微服务之间进行选择。
+在 Ray Serve 之前，实现管道通常意味着你必须在将模型封装在网络服务器中或使用许多专门的微服务之间进行选择。
 
 一般来说，实现管道有两种方法：将你的模型封装在一个网络服务器中，或者使用许多专门的微服务。
 
@@ -156,9 +156,9 @@ Ray Serve 是一个专注于 ML 模型服务的 web 框架。它旨在易于使�
 
 **许多专门的微服务**
 
-上图的右侧显示了许多专门的微服务，你基本上为每个模型构建和部署一个微服务。这些微服务可以是本地机器学习平台，[Kubeflow](https://www.kubeflow.org/)，甚至是像AWS [SageMaker](https://aws.amazon.com/sagemaker/)这样的托管服务。然而，随着模型数量的增加，复杂性和操作成本急剧上升。
+上图的右侧显示了许多专门的微服务，你基本上为每个模型构建和部署一个微服务。这些微服务可以是本地机器学习平台，[Kubeflow](https://www.kubeflow.org/)，甚至是像 AWS [SageMaker](https://aws.amazon.com/sagemaker/)这样的托管服务。然而，随着模型数量的增加，复杂性和操作成本急剧上升。
 
-### 在Ray Serve中实现管道
+### 在 Ray Serve 中实现管道
 
 ```py
 @serve.deployment
@@ -184,21 +184,21 @@ if __name__ == “__main__”:
     Orchestrator.deploy()
 ```
 
-伪代码展示了Ray Serve如何允许部署调用其他部署
+伪代码展示了 Ray Serve 如何允许部署调用其他部署
 
-在Ray Serve中，你可以在你的部署内直接调用其他部署。在上面的代码中，有三个部署。`Featurizer`和`Predictor`只是包含模型的常规部署。`Orchestrator`接收网络输入，通过featurizer handle将其传递给特征提取过程，然后将计算出的特征传递给预测过程。接口只是Python，你无需学习任何新的框架或领域特定语言。
+在 Ray Serve 中，你可以在你的部署内直接调用其他部署。在上面的代码中，有三个部署。`Featurizer`和`Predictor`只是包含模型的常规部署。`Orchestrator`接收网络输入，通过 featurizer handle 将其传递给特征提取过程，然后将计算出的特征传递给预测过程。接口只是 Python，你无需学习任何新的框架或领域特定语言。
 
-Ray Serve通过一种名为ServeHandle的机制实现这一点，它赋予你将所有内容嵌入到网络服务器中的类似灵活性，而不会牺牲性能或可扩展性。它允许你直接调用存在于其他节点上其他进程中的其他部署。这使你能够单独扩展每个部署，并在副本之间进行负载均衡。
+Ray Serve 通过一种名为 ServeHandle 的机制实现这一点，它赋予你将所有内容嵌入到网络服务器中的类似灵活性，而不会牺牲性能或可扩展性。它允许你直接调用存在于其他节点上其他进程中的其他部署。这使你能够单独扩展每个部署，并在副本之间进行负载均衡。
 
 如果你想深入了解它是如何工作的，[查看 Simon Mo 演讲的这一部分](https://youtu.be/mM4hJLelzSw?t=650) 以了解 Ray Serve 的架构。如果你想了解生产中的计算机视觉管道的示例，[查看 Robovision 如何使用 5 个 ML 模型进行车辆检测](https://www.anyscale.com/blog/the-third-generation-of-production-ml-architectures#:~:text=A%20Tool%20for%20High%20Performance%20ML%20Systems)。
 
 ## 集成模式
 
-![集成模式](../Images/16434d4cd2a985d8583f19809d92c256.png)
+![集成模式](img/16434d4cd2a985d8583f19809d92c256.png)
 
 在许多生产使用案例中，管道是合适的。然而，管道的一个限制是，给定的下游模型往往有许多上游模型。这时，集成就显得很有用。
 
-![图示](../Images/3322debd6651907f43438df2050ec8ac.png)
+![图示](img/3322debd6651907f43438df2050ec8ac.png)
 
 集成使用案例
 
@@ -218,13 +218,13 @@ Ray Serve通过一种名为ServeHandle的机制实现这一点，它赋予你将
 
 ### 通用集成实现选项
 
-![通用集成实现](../Images/1749b4e53b9e59fc2b20a77e30ca3589.png)
+![通用集成实现](img/1749b4e53b9e59fc2b20a77e30ca3589.png)
 
 在 Ray Serve 之前，实现集成通常意味着你必须在将模型封装在网络服务器中或使用许多专门的微服务之间做出选择。
 
 集成实现面临与管道相同的问题。虽然将模型封装在网络服务器中很简单，但性能却不足。当使用专门的微服务时，随着微服务数量的增加，你会面临大量的操作开销。
 
-![图](../Images/cef1f239a6ce6e2c866380f7578463f6.png)
+![图](img/cef1f239a6ce6e2c866380f7578463f6.png)
 
 [2020 Anyscale 演示](https://youtu.be/8GTd8Y_JGTQ)中的集成示例
 
@@ -246,7 +246,7 @@ Ray Serve通过一种名为ServeHandle的机制实现这一点，它赋予你将
 
 ### 一般业务逻辑实施选项
 
-![一般业务逻辑实施选项](../Images/0563870ba1f93676e64c2abf3153cea3.png)
+![一般业务逻辑实施选项](img/0563870ba1f93676e64c2abf3153cea3.png)
 
 上述 web 处理程序的伪代码执行以下操作：
 
@@ -258,7 +258,7 @@ Ray Serve通过一种名为ServeHandle的机制实现这一点，它赋予你将
 
 仅在 web 处理程序完成这些业务逻辑步骤后，输入才会传递给 ML 模型。问题在于模型推理和业务逻辑的要求导致服务器*既受网络限制又受计算限制*。这是因为模型加载步骤、数据库查询和特征存储查询是网络限制和 I/O 密集型的，而模型推理则受计算限制且内存需求大。这些因素的组合导致了资源利用效率低下。扩展将会很昂贵。
 
-![图](../Images/0f770ce2d44b93326cd3be5d2f05d86d.png)
+![图](img/0f770ce2d44b93326cd3be5d2f05d86d.png)
 
 Web 处理程序方法（左）和微服务方法（右）
 
@@ -274,7 +274,7 @@ Web 应用程序纯粹受网络限制，而模型服务器则受计算限制。�
 
 ### 在 Ray Serve 中实现业务逻辑
 
-![图示](../Images/d89c6e5d4fea7fa9ed2e67228e990351.png)
+![图示](img/d89c6e5d4fea7fa9ed2e67228e990351.png)
 
 Ray Serve 中的业务逻辑
 
@@ -284,7 +284,7 @@ Ray Serve 中的业务逻辑
 
 ### Ray Serve FastAPI 集成
 
-![图示](../Images/8595ad1b26ebf6e48945fe49e0c55bab.png)
+![图示](img/8595ad1b26ebf6e48945fe49e0c55bab.png)
 
 Ray Serve: 使用 FastAPI 的入口
 
@@ -300,11 +300,11 @@ Ray Serve: 使用 FastAPI 的入口
 
 有动态学习模型权重的使用案例。当用户与你的服务互动时，这些更新的模型权重可以有助于为每个用户或群体提供个性化的模型。
 
-![图](../Images/f7f04df0e61fb914656ea0ffd641fc7f.png)
+![图](img/f7f04df0e61fb914656ea0ffd641fc7f.png)
 
-[Ant Group的在线学习示例](https://www.anyscale.com/blog/online-resource-allocation-with-ray-at-ant-group)（图片由Ant Group提供）
+[Ant Group 的在线学习示例](https://www.anyscale.com/blog/online-resource-allocation-with-ray-at-ant-group)（图片由 Ant Group 提供）
 
-一个在线学习的案例研究包括Ant Group的在线资源分配业务解决方案。该模型从离线数据中训练，然后与实时流数据源结合，最后提供实时流量。值得注意的是，在线学习系统比静态服务系统复杂得多。在这种情况下，将模型放在Web服务器中，甚至拆分成多个微服务，都无法帮助实现。
+一个在线学习的案例研究包括 Ant Group 的在线资源分配业务解决方案。该模型从离线数据中训练，然后与实时流数据源结合，最后提供实时流量。值得注意的是，在线学习系统比静态服务系统复杂得多。在这种情况下，将模型放在 Web 服务器中，甚至拆分成多个微服务，都无法帮助实现。
 
 **动态学习参数以协调模型**
 
@@ -312,35 +312,35 @@ Ray Serve: 使用 FastAPI 的入口
 
 **强化学习**
 
-强化学习是机器学习的一个分支，训练智能体与环境进行互动。环境可以是物理世界或模拟环境。你可以在[这里](https://www.anyscale.com/blog/an-introduction-to-reinforcement-learning-with-openai-gym-rllib-and-google)了解强化学习，并查看如何使用Ray Serve部署RL模型[这里](https://docs.ray.io/en/latest/serve/tutorials/rllib.html#serve-rllib-tutorial)。
+强化学习是机器学习的一个分支，训练智能体与环境进行互动。环境可以是物理世界或模拟环境。你可以在[这里](https://www.anyscale.com/blog/an-introduction-to-reinforcement-learning-with-openai-gym-rllib-and-google)了解强化学习，并查看如何使用 Ray Serve 部署 RL 模型[这里](https://docs.ray.io/en/latest/serve/tutorials/rllib.html#serve-rllib-tutorial)。
 
 ## 结论
 
-![图](../Images/2f8011f22aa2376f8e75a951ce194e89.png)
+![图](img/2f8011f22aa2376f8e75a951ce194e89.png)
 
 Ray Serve 易于开发并准备投入生产。
 
-本文介绍了生产环境中机器学习的4种主要模式，Ray Serve如何帮助你原生扩展和处理复杂架构，以及生产中的机器学习通常意味着许多模型在生产。Ray Serve在分布式运行时Ray的基础上，考虑了所有这些因素。如果你对Ray感兴趣，可以查看[文档](https://ray.io/)，加入我们的[讨论区](https://discuss.ray.io/)，并查看[白皮书](https://tinyurl.com/ray-white-paper)！如果你有兴趣与我们合作，使Ray的使用变得更容易，我们正在[招聘](https://jobs.lever.co/anyscale)！
+本文介绍了生产环境中机器学习的 4 种主要模式，Ray Serve 如何帮助你原生扩展和处理复杂架构，以及生产中的机器学习通常意味着许多模型在生产。Ray Serve 在分布式运行时 Ray 的基础上，考虑了所有这些因素。如果你对 Ray 感兴趣，可以查看[文档](https://ray.io/)，加入我们的[讨论区](https://discuss.ray.io/)，并查看[白皮书](https://tinyurl.com/ray-white-paper)！如果你有兴趣与我们合作，使 Ray 的使用变得更容易，我们正在[招聘](https://jobs.lever.co/anyscale)！
 
 [原文](https://www.anyscale.com/blog/serving-ml-models-in-production-common-patterns)。转载授权。
 
 **相关：**
 
-+   [使用PyTorch和Ray入门分布式机器学习](/2021/03/getting-started-distributed-machine-learning-pytorch-ray.html)
++   使用 PyTorch 和 Ray 入门分布式机器学习
 
-+   [如何加速Scikit-Learn模型训练](/2021/02/speed-up-scikit-learn-model-training.html)
++   如何加速 Scikit-Learn 模型训练
 
-+   [如何构建数据科学投资组合](/2018/07/build-data-science-portfolio.html)
++   如何构建数据科学投资组合
 
 ### 关于这个话题的更多内容
 
-+   [前7名模型部署与服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
++   [前 7 名模型部署与服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [为生产环境优先排序数据科学模型](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)
 
-+   [Feature Store峰会2023：部署ML模型的实用策略](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)
++   [Feature Store 峰会 2023：部署 ML 模型的实用策略](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)
 
-+   [MLOps中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
++   [MLOps 中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
 
 +   [揭示隐藏模式：层次聚类介绍](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)
 

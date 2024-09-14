@@ -1,14 +1,14 @@
 # 使用合成数据训练 AI 进行时间序列模式分类
 
-> 原文：[https://www.kdnuggets.com/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html](https://www.kdnuggets.com/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)
+> 原文：[`www.kdnuggets.com/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html`](https://www.kdnuggets.com/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)
 
-[评论](#comments)
+评论
 
 ## 我们想要实现什么目标？
 
 我们想训练一个可以做类似事情的 AI 代理或模型，
 
-![使用合成数据训练 AI 进行时间序列模式分类](../Images/09a0bbf71a73d15eca77d3c0da527966.png)
+![使用合成数据训练 AI 进行时间序列模式分类](img/09a0bbf71a73d15eca77d3c0da527966.png)
 
 **图片来源**：作者使用[Pixabay 图片](https://pixabay.com/illustrations/alien-robot-android-antennae-blue-1905155/)（免费使用）准备的
 
@@ -38,7 +38,7 @@
 
 我们在美丽的库中找到了这样的功能 —— [**tslearn**](https://tslearn.readthedocs.io/en/stable/index.html)。简单来说，它是一个提供时间序列分析的机器学习工具的 Python 包。该包构建在（因此依赖于）`scikit-learn`、`numpy` 和 `scipy` 库之上。
 
-![](../Images/b38a62759752c6e95a2e978c6e14b4cb.png)
+![](img/b38a62759752c6e95a2e978c6e14b4cb.png)
 
 图片来源：[tslearn 文档](https://tslearn.readthedocs.io/en/stable/index.html)
 
@@ -50,17 +50,17 @@
 
 …然后扩展了本文中的论点——“*合成时间序列也不例外——它帮助数据科学家实验各种算法方法，并以仅用真实数据集无法实现的方式为实际部署做准备。*”
 
-[**用Python创建具有异常签名的合成时间序列**](https://towardsdatascience.com/create-synthetic-time-series-with-anomaly-signatures-in-python-c0b80a6c093c)
+[**用 Python 创建具有异常签名的合成时间序列**](https://towardsdatascience.com/create-synthetic-time-series-with-anomaly-signatures-in-python-c0b80a6c093c)
 
-基本上，我们想要**合成具有异常和其他模式的时间序列数据**，自动标记它们，并将它们输入到`tslearn`算法中，以便教会我们的AI代理这些模式。
+基本上，我们想要**合成具有异常和其他模式的时间序列数据**，自动标记它们，并将它们输入到`tslearn`算法中，以便教会我们的 AI 代理这些模式。
 
 特别是，如果我们想使用基于深度学习的分类器（如`tslearn`提供的），那么我们可能需要大量涵盖所有可能变异的数据，这在现实生活中可能不易获得。这时，合成数据就派上用场了。
 
 那就开始冒险吧！
 
-## 教授AI代理时间序列模式
+## 教授 AI 代理时间序列模式
 
-演示笔记本可以在[**我的Github仓库中找到**](https://github.com/tirthajyoti/Synthetic-data-gen/blob/master/Notebooks/Anomaly-training-tslearn.ipynb)。将时间序列数据转换为适合`tslearn`模型训练的格式是相当简单的，已在笔记本中说明。在这里，我们主要关注不同类型的分类结果作为说明。
+演示笔记本可以在[**我的 Github 仓库中找到**](https://github.com/tirthajyoti/Synthetic-data-gen/blob/master/Notebooks/Anomaly-training-tslearn.ipynb)。将时间序列数据转换为适合`tslearn`模型训练的格式是相当简单的，已在笔记本中说明。在这里，我们主要关注不同类型的分类结果作为说明。
 
 ## 数据中的高或低方差？
 
@@ -72,19 +72,19 @@
 
 +   使用`SyntheticTS`模块生成合成数据（在我的文章中讨论过，可以在这里找到）
 
-+   生成相应的类别标签以匹配这些Numpy/Pandas数据系列（注意**基于领域知识注入的自动标签生成**）
++   生成相应的类别标签以匹配这些 Numpy/Pandas 数据系列（注意**基于领域知识注入的自动标签生成**）
 
 +   将合成序列数据转换为`tslearn`时间序列对象（数组）
 
 +   将其存储在训练数据集中
 
-+   将训练数据输入到适合的时间序列分类器中，我们选择了`TimeSeriesMLPClassifier`方法，该方法建立在熟悉的Scikit-learn多层感知机方法之上，基本上实现了**全连接深度学习网络**。
++   将训练数据输入到适合的时间序列分类器中，我们选择了`TimeSeriesMLPClassifier`方法，该方法建立在熟悉的 Scikit-learn 多层感知机方法之上，基本上实现了**全连接深度学习网络**。
 
-![](../Images/554f86dbdfcd97576b41b75895ed3e4d.png)
+![](img/554f86dbdfcd97576b41b75895ed3e4d.png)
 
 使用合成数据的训练流程，**来源**：完全由作者准备
 
-`TimeSeriesMLPClassifier`具备标准Scikit-learn MLP分类器的所有功能，
+`TimeSeriesMLPClassifier`具备标准 Scikit-learn MLP 分类器的所有功能，
 
 +   隐藏层大小和神经元数量
 
@@ -102,21 +102,21 @@
 
 +   早停准则
 
-![](../Images/e34a112829b154665fdd83338d88fa35.png)
+![](img/e34a112829b154665fdd83338d88fa35.png)
 
-> 基本上，我们希望**合成具有异常和其他模式的时间序列数据**，自动标记它们，并将其输入`tslearn`算法，以便教我们的AI代理这些模式。
+> 基本上，我们希望**合成具有异常和其他模式的时间序列数据**，自动标记它们，并将其输入`tslearn`算法，以便教我们的 AI 代理这些模式。
 
 为了简洁起见，在笔记本中我没有显示训练/测试拆分，但这应该作为实际应用的数据科学工作流标准步骤。
 
 我们可以在训练后绘制标准损失曲线，并进行各种超参数调整，以使性能达到最佳。
 
-![](../Images/e9b9fd191f5200237f93a4559c46b4ec.png)
+![](img/e9b9fd191f5200237f93a4559c46b4ec.png)
 
 然而，展示深度学习分类器调整并不是本文的目标。我们更愿意关注最终的***结果，即它做出了什么样的分类决策***。
 
 以下是一些随机测试结果。
 
-![](../Images/18c8bee51733c8200e54b626cf8c14fc.png)
+![](img/18c8bee51733c8200e54b626cf8c14fc.png)
 
 ## 标签生成——手动还是自动？
 
@@ -126,7 +126,7 @@
 
 一旦你看到实际笔记本中的生成代码，这一点将会清楚。以下是方差训练的思路。
 
-![](../Images/db52def0fe9ae4de102b47b85135ac99.png)
+![](img/db52def0fe9ae4de102b47b85135ac99.png)
 
 ## 异常——数据的高比例还是低比例？
 
@@ -134,11 +134,11 @@
 
 这是因为工业数据分析系统通常负责在检测到数据流中的足够异常后生成警报。因此，为了决定是否发出警报，它们需要对异常计数是否代表正常数据的显著部分有一个清晰的认识。
 
-你不想引发太多虚假警报，对吧？这对AI驱动系统的声誉不好。
+你不想引发太多虚假警报，对吧？这对 AI 驱动系统的声誉不好。
 
-所以，我们进行了同样的过程来训练一个AI模型，以处理时间序列数据中的异常比例。以下是随机测试结果，
+所以，我们进行了同样的过程来训练一个 AI 模型，以处理时间序列数据中的异常比例。以下是随机测试结果，
 
-![](../Images/932b3681b4556146a930cd4681073738.png)
+![](img/932b3681b4556146a930cd4681073738.png)
 
 ## 异常——它们的幅度有多大？
 
@@ -146,7 +146,7 @@
 
 我们遵循了上述相同的训练过程并获得了这些结果，
 
-![](../Images/64dba33cf025f15193e48850717ee135.png)
+![](img/64dba33cf025f15193e48850717ee135.png)
 
 ## 数据漂移或偏移——在哪里，如何？
 
@@ -158,7 +158,7 @@
 
 +   小的子组件可能会随着时间的推移而退化。
 
-底线是，AI驱动的系统应该能够识别这些类别——至少在正向或负向转移及其发生点方面，即*漂移是否在过程生命周期中早期或晚期开始*。
+底线是，AI 驱动的系统应该能够识别这些类别——至少在正向或负向转移及其发生点方面，即*漂移是否在过程生命周期中早期或晚期开始*。
 
 > 识别异常是不够的。在大多数实际情况中，你还需要识别其频率和出现模式。这是因为工业数据分析系统通常负责在检测到数据流中的足够异常后生成警报。
 
@@ -174,39 +174,39 @@
 
 **由于这种复杂性增加，我们需要生成比之前实验更多的合成数据**。以下是结果，
 
-![](../Images/c877eb1b4d9a62e96d312bf6c24d0cdb.png)
+![](img/c877eb1b4d9a62e96d312bf6c24d0cdb.png)
 
 ## 摘要
 
-时间序列分类是许多精彩应用场景中一个非常有趣的话题。在本文中，我们展示了如何**使用合成数据来训练AI模型**（具有几个全连接层的深度学习网络）用于模拟工业过程或传感器流的单维**时间序列数据**。
+时间序列分类是许多精彩应用场景中一个非常有趣的话题。在本文中，我们展示了如何**使用合成数据来训练 AI 模型**（具有几个全连接层的深度学习网络）用于模拟工业过程或传感器流的单维**时间序列数据**。
 
-特别是，我们专注于**教会AI模型各种异常特征和数据漂移模式**，因为这些分类是机器降解的重要指标。简而言之，它们构成了所谓的[**预测分析**](https://www.industr.com/en/how-convergence-of-data-analytics-iot-drives-industry-2551064)在**工业4.0**或**智能制造**领域的基础。
+特别是，我们专注于**教会 AI 模型各种异常特征和数据漂移模式**，因为这些分类是机器降解的重要指标。简而言之，它们构成了所谓的[**预测分析**](https://www.industr.com/en/how-convergence-of-data-analytics-iot-drives-industry-2551064)在**工业 4.0**或**智能制造**领域的基础。
 
-我们希望未来AI驱动的预测分析中对合成数据的使用会显著增长。
+我们希望未来 AI 驱动的预测分析中对合成数据的使用会显著增长。
 
-你可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，获取有关机器学习和数据科学的代码、想法和资源。如果你像我一样，对AI/机器学习/数据科学充满热情，请随时[在LinkedIn上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[关注我在Twitter上的动态](https://twitter.com/tirthajyotiS)。
+你可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)** 代码库**，获取有关机器学习和数据科学的代码、想法和资源。如果你像我一样，对 AI/机器学习/数据科学充满热情，请随时[在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[关注我在 Twitter 上的动态](https://twitter.com/tirthajyotiS)。
 
-**简介：[Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**是Adapdix Corp.的数据科学/机器学习经理。他定期为KDnuggets和TDS等出版物贡献关于数据科学和机器学习的多样话题。他撰写了数据科学书籍，并参与开源软件的开发。Tirthajyoti拥有电气工程博士学位，并在攻读计算数据分析硕士学位。可以通过tirthajyoti at gmail[dot]com联系他。
+**简介：[Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)**是 Adapdix Corp.的数据科学/机器学习经理。他定期为 KDnuggets 和 TDS 等出版物贡献关于数据科学和机器学习的多样话题。他撰写了数据科学书籍，并参与开源软件的开发。Tirthajyoti 拥有电气工程博士学位，并在攻读计算数据分析硕士学位。可以通过 tirthajyoti at gmail[dot]com 联系他。
 
 [原文](https://towardsdatascience.com/teaching-ai-to-classify-time-series-patterns-with-synthetic-data-555d8e75ee8a)。经许可转载。
 
 **相关：**
 
-+   [GPU驱动的数据科学（非深度学习）与RAPIDS](/2021/08/gpu-powered-data-science-deep-learning-rapids.html)
++   GPU 驱动的数据科学（非深度学习）与 RAPIDS
 
-+   [为什么以及如何学习“高效数据科学”？](/2021/07/learn-productive-data-science.html)
++   为什么以及如何学习“高效数据科学”？
 
-+   [Python中的蒙特卡洛积分](/2020/12/monte-carlo-integration-python.html)
++   Python 中的蒙特卡洛积分
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -216,10 +216,10 @@
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

@@ -1,22 +1,22 @@
 # Kaggle Kernels 初学者指南：逐步教程
 
-> 原文：[https://www.kdnuggets.com/2019/07/kaggle-kernels-guide-beginners-tutorial.html](https://www.kdnuggets.com/2019/07/kaggle-kernels-guide-beginners-tutorial.html)
+> 原文：[`www.kdnuggets.com/2019/07/kaggle-kernels-guide-beginners-tutorial.html`](https://www.kdnuggets.com/2019/07/kaggle-kernels-guide-beginners-tutorial.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Abdul Majed Raja](https://www.linkedin.com/in/amrrs/)，思科分析师提供**
 
-![](../Images/ec1ca3209400fcee605ce57d486440c7.png)
+![](img/ec1ca3209400fcee605ce57d486440c7.png)
 
 不久前，我写了一篇标题为“[用 Kaggle Kernels 展示你的数据科学技能](https://towardsdatascience.com/show-off-your-data-science-skills-with-kaggle-kernels-762403618c5?source=post_page---------------------------)”的文章，后来意识到尽管这篇文章很好地阐述了 Kaggle Kernels 如何成为数据科学家的强大作品集，但它并没有解决完全初学者如何开始使用 Kaggle Kernels 的问题。
 
 这是一个试图引导完全初学者并带他们了解 Kaggle Kernels 世界的尝试——让他们能够开始使用。
 
-### 注册 Kaggle — [https://www.kaggle.com/](https://www.kaggle.com/?source=post_page---------------------------)
+### 注册 Kaggle — [`www.kaggle.com/`](https://www.kaggle.com/?source=post_page---------------------------)
 
 如果你没有 Kaggle 账户，第一步是注册 Kaggle。你可以使用 Google 账户或 Facebook 账户来创建新的 Kaggle 账户并登录。如果以上都不可行，你可以输入你的电子邮件地址和首选密码来创建新的账户。
 
-![图示](../Images/4bfe5a67d7383bcb283cd5b77b922f23.png)
+![图示](img/4bfe5a67d7383bcb283cd5b77b922f23.png)
 
 Kaggle 注册页面
 
@@ -24,7 +24,7 @@ Kaggle 注册页面
 
 如果你已经有账户或者刚刚创建了一个，请点击页面右上角的**登录**按钮来启动登录过程。同样，你将有一个选项使用 Google / Facebook / Yahoo 登录，或者使用你在创建账户时输入的用户名和密码。
 
-![图示](../Images/5fc9c62213e0a74edbd24fe1f9059842.png)
+![图示](img/5fc9c62213e0a74edbd24fe1f9059842.png)
 
 Kaggle 登录/注册界面
 
@@ -32,9 +32,9 @@ Kaggle 登录/注册界面
 
 登录后，你将进入 Kaggle 控制面板。（这只是欢迎页面，我不知道该怎么称呼，所以称之为控制面板）。
 
-![](../Images/e26f2e956251de2daa53870361336140.png)
+![](img/e26f2e956251de2daa53870361336140.png)
 
-这是你登录后立即看到的首页（如果你是从 [https://www.kaggle.com/](https://www.kaggle.com/?source=post_page---------------------------) 登录的）。它包含许多组件，其中一些如下：
+这是你登录后立即看到的首页（如果你是从 [`www.kaggle.com/`](https://www.kaggle.com/?source=post_page---------------------------) 登录的）。它包含许多组件，其中一些如下：
 
 +   最近更新或由 Kaggle 推荐的 Kaggle Kernels 的信息流
 
@@ -52,7 +52,7 @@ Kaggle 登录/注册界面
 
 一旦我们点击 Kaggle 旅程中任何位置的顶部 Kernels 按钮，我们将会看到这个屏幕。
 
-![](../Images/ec1ca3209400fcee605ce57d486440c7.png)
+![](img/ec1ca3209400fcee605ce57d486440c7.png)
 
 这是每个人都希望看到的界面，因为它像是 Kernels 的首页，这意味着你的 Kernel 更有可能获得更多的曝光。如果 Kernel 最终出现在这里，默认的排序方式是**热门度**，这是基于 Kaggle 秘密算法的，旨在展示相关的 Kernels，但它也提供了其他排序选项，如新建、最多票数等。Kaggle 也使用这个页面来宣传是否有 Kernel 比赛正在进行或即将进行。
 
@@ -74,15 +74,15 @@ Kaggle 登录/注册界面
 
 这是我用来创建新 Kernels 最常用的方法之一。你可以打开你感兴趣的数据集页面（如下面截图所示），然后点击其中的新建 Kernel 按钮。这个方法的好处是，与方法 #1 不同，方法 #2 创建的 Kernel 默认会附带 Kaggle 数据集，因此将数据集输入到你的 Kernel 的过程变得更简单、更快速、更直接。
 
-![图示](../Images/feb3c8c89c886374f55aeeebef15d5d7.png)
+![图示](img/feb3c8c89c886374f55aeeebef15d5d7.png)
 
-[https://www.kaggle.com/google/google-landmarks-dataset](https://www.kaggle.com/google/google-landmarks-dataset?source=post_page---------------------------)
+[`www.kaggle.com/google/google-landmarks-dataset`](https://www.kaggle.com/google/google-landmarks-dataset?source=post_page---------------------------)
 
 ### Kaggle Kernels — Kernel 类型：
 
 无论是方法 #1 还是方法 #2，一旦点击新建 Kernel，你将看到一个模态窗口，让你选择要创建的 Kaggle Kernel 类型。
 
-![](../Images/6e44346ba74c5ee83bb3f1421f96c772.png)
+![](img/6e44346ba74c5ee83bb3f1421f96c772.png)
 
 大致分为两类 — 1. 脚本 vs 2. 笔记本。
 
@@ -106,7 +106,7 @@ Kaggle 登录/注册界面
 
 这种第二层的 Kernel 语言选择仅在第一层 Kernel 类型选择之后发生。
 
-[![Kaggle GIF](../Images/dac2340054c09301983a11957a702b70.png)](https://miro.medium.com/max/700/1*jLJA3ONLFjFuLaZ_21ozug.gif)
+![Kaggle GIF](https://miro.medium.com/max/700/1*jLJA3ONLFjFuLaZ_21ozug.gif)
 
 如上面的 Kaggle Kernel 脚本类型 GIF 所示，通过进入设置并选择所需语言（R / Py / RMarkdown）可以更改 Kernel 的语言。相同的设置还提供了将 Kernel 分享设为公开的选项（默认情况下是私密的，除非设置为公开）。如果你正在进行大学作业或自学并且不希望公开代码，通常使用私密 Kernels。参与竞赛的 Kagglers 也会使用私密 Kernels 来利用 Kaggle 的计算能力，但不透露他们的代码/方法。
 
@@ -120,7 +120,7 @@ RMarkdown 通过结合 R 和 Markdown 生成包含交互式可视化的分析报
 
 幸运的是，Kaggle Kernel 脚本支持 Rmarkdown，这意味着它可以帮助创建交互式文档以及许多 Notebook 情境下无法实现的功能。这是一个在 Kaggle Kernel 上构建的[a full-fledged Interactive Dashboard](https://www.kaggle.com/tavoosi/suicide-data-full-interactive-dashboard?source=post_page---------------------------)，由[Saba Tavoosi,](https://www.kaggle.com/tavoosi/suicide-data-full-interactive-dashboard?source=post_page---------------------------)展示了 Kaggle Kernels 的潜力，不仅用于构建机器学习模型，还可以进行最佳形式的交互式讲故事。如果你有兴趣学习[如何使用 flexdashboard 构建仪表板](https://bit.ly/2S2LSGS?source=post_page---------------------------)，可以查看[这门课程](https://bit.ly/2S2LSGS?source=post_page---------------------------)。
 
-[![Figure](../Images/09795fd2acd60072afbdc49ec1404eb2.png)](https://miro.medium.com/max/700/1*u2lBm_oWelB7yWojaoeS4A.gif)
+![Figure](https://miro.medium.com/max/700/1*u2lBm_oWelB7yWojaoeS4A.gif)
 
 Kernel Courtesy: Saba Tavoosi
 
@@ -128,7 +128,7 @@ Kernel Courtesy: Saba Tavoosi
 
 类似于 Github 的 **Fork** 选项，如果你想使用现有的 Kaggle Kernel 并在自己的空间中进行修改或增添个人风格，你需要使用右上角的蓝色按钮 `复制并编辑`。事实上，在 Kaggle 竞争跟踪中的许多高分公共 Kernel 通常是 `forks of forks forks`，即一个 Kaggle 用户会在另一个 Kaggle 用户已经构建的模型上进行改进，并将其作为公共 Kernel 提供。
 
-![图示](../Images/cef79b8c9df61716908fc6da58b45410.png)
+![图示](img/cef79b8c9df61716908fc6da58b45410.png)
 
 标记的符号表示一个 Forked / 复制并编辑的 Kernel
 
@@ -136,7 +136,7 @@ Kernel Courtesy: Saba Tavoosi
 
 正如我们在另一部分看到的，Kaggle Kernel 的访问设置可以是公开或私有。公开 Kernel（显然名字就说明了）对所有人（包括 Kagglers 和非 Kagglers）可用并且可见。私有 Kernel 仅对所有者（创建者）和所有者分享 Kernel 的人可用。一个公开的 Kernel 也可以基于私有数据集。例如，如果这是一个机器学习竞赛，你用一些第三方数据进行了特征工程，并且不希望在竞赛期间泄露数据。这是 Kagglers 通常将数据集设为私有，而将 Kernel 设为公开的典型场景，以便其他人可以看到他们的方法并从中学习。
 
-![](../Images/14e29e8a1640ef18942b1183eb28c510.png)
+![](img/14e29e8a1640ef18942b1183eb28c510.png)
 
 上图展示了如何将现有 Kernel 的访问设置更改为私有或公开。所有新创建的 Kernel 默认都是私有的（截至本文撰写时），如果需要，所有者可以将其更改为公开。
 
@@ -144,7 +144,7 @@ Kernel Courtesy: Saba Tavoosi
 
 如果上述内容初看起来有些难以理解，这一部分将帮助你创建第一个 Kaggle Kernel。
 
-![](../Images/d761c65343f670e62e3237cd6f823180.png)
+![](img/d761c65343f670e62e3237cd6f823180.png)
 
 步骤：
 
@@ -180,21 +180,21 @@ Kernel Courtesy: Saba Tavoosi
 
 **相关：**
 
-+   [展示你的数据科学技能与 Kaggle Kernels](/2019/06/data-science-kaggle-kernels.html)
++   展示你的数据科学技能与 Kaggle Kernels
 
-+   [如何制作令人惊叹的 3D 图以提升讲故事效果](/2019/07/stunning-3d-plots-better-storytelling.html)
++   如何制作令人惊叹的 3D 图以提升讲故事效果
 
-+   [使用 Coindeskr 和 Shiny 在 R 中构建每日比特币价格追踪器](/2018/02/bitcoin-price-tracker-coindeskr-shiny-r.html)
++   使用 Coindeskr 和 Shiny 在 R 中构建每日比特币价格追踪器
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

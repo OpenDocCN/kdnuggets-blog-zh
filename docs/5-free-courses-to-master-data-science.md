@@ -1,8 +1,8 @@
 # 5 门免费课程掌握数据科学
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-to-master-data-science](https://www.kdnuggets.com/5-free-courses-to-master-data-science)
+> 原文：[`www.kdnuggets.com/5-free-courses-to-master-data-science`](https://www.kdnuggets.com/5-free-courses-to-master-data-science)
 
-![5 门免费课程掌握数据科学](../Images/4c3a005943416ad52312197189196729.png)
+![5 门免费课程掌握数据科学](img/4c3a005943416ad52312197189196729.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织中的 IT
 
 * * *
 
@@ -66,19 +66,19 @@
 
 +   课程项目：探索性数据分析
 
-课程链接：[Python数据分析](https://youtu.be/GPVsHOlRBBI?feature=shared)
+课程链接：[Python 数据分析](https://youtu.be/GPVsHOlRBBI?feature=shared)
 
-# 3. 数据库和SQL
+# 3. 数据库和 SQL
 
-[数据科学中的数据库介绍](/introduction-to-databases-in-data-science)概述了数据专业人员必备的数据库技能。
+数据科学中的数据库介绍概述了数据专业人员必备的数据库技能。
 
-从设计数据库到编写高效的SQL查询及更多，数据库和SQL是你数据职业生涯中必备的技能。这个[数据库和SQL](https://www.youtube.com/watch?v=HXV3zeQKqGY)课程来自freeCodeCamp，将教你以下内容：
+从设计数据库到编写高效的 SQL 查询及更多，数据库和 SQL 是你数据职业生涯中必备的技能。这个[数据库和 SQL](https://www.youtube.com/watch?v=HXV3zeQKqGY)课程来自 freeCodeCamp，将教你以下内容：
 
 +   数据库基础
 
-+   SQL基础
++   SQL 基础
 
-+   CRUD操作
++   CRUD 操作
 
 +   函数、连接和并集
 
@@ -86,19 +86,19 @@
 
 +   设计数据库模式
 
-课程链接：[数据库和SQL](https://www.youtube.com/watch?v=HXV3zeQKqGY)
+课程链接：[数据库和 SQL](https://www.youtube.com/watch?v=HXV3zeQKqGY)
 
 # 4. 推断统计学简介
 
 除了高中数学——微积分、概率和线性代数，你还需要在统计学方面有坚实的基础，才能在数据科学领域取得卓越成绩。
 
-[推断统计学简介](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)来自Udacity的免费课程库，将教你以下概念——同时包含编码练习以测试你的技能：
+[推断统计学简介](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)来自 Udacity 的免费课程库，将教你以下概念——同时包含编码练习以测试你的技能：
 
 +   估计
 
 +   假设检验
 
-+   t检验
++   t 检验
 
 +   方差分析
 
@@ -110,11 +110,11 @@
 
 课程链接：[推断统计学简介](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)
 
-# 5. 机器学习Zoomcamp
+# 5. 机器学习 Zoomcamp
 
-目前列出的课程应当帮助你掌握Python基础、数据分析和统计学基础。
+目前列出的课程应当帮助你掌握 Python 基础、数据分析和统计学基础。
 
-现在是时候开始构建和部署机器学习模型了。[机器学习Zoomcamp](https://github.com/DataTalksClub/machine-learning-zoomcamp)由DataTalks.Club提供，是学习机器学习基础的绝佳课程，通过以代码为主的方式进行。它还涵盖了包括模型部署和深度学习在内的广泛主题。
+现在是时候开始构建和部署机器学习模型了。[机器学习 Zoomcamp](https://github.com/DataTalksClub/machine-learning-zoomcamp)由 DataTalks.Club 提供，是学习机器学习基础的绝佳课程，通过以代码为主的方式进行。它还涵盖了包括模型部署和深度学习在内的广泛主题。
 
 课程大纲包括以下内容：
 
@@ -130,28 +130,28 @@
 
 +   神经网络和深度学习
 
-+   Kubernetes和TensorFlow Serving
++   Kubernetes 和 TensorFlow Serving
 
-课程链接：[机器学习Zoomcamp](https://github.com/DataTalksClub/machine-learning-zoomcamp)
+课程链接：[机器学习 Zoomcamp](https://github.com/DataTalksClub/machine-learning-zoomcamp)
 
 # 总结
 
 我希望你发现这些推荐课程有帮助。大多数课程要求你进行编码、构建、拆解和学习。因此，你将拥有一个良好的基础。
 
-即使你在学习这些课程时，也要在旁边构建你的作品集。你的目标应该是构建一些有趣的项目，以展示你的优势和技能。如果你需要一些灵感来开始，可以查看[3个数据科学项目保证让你获得工作](/3-data-science-projects-guaranteed-to-land-you-that-job)。祝学习愉快！
+即使你在学习这些课程时，也要在旁边构建你的作品集。你的目标应该是构建一些有趣的项目，以展示你的优势和技能。如果你需要一些灵感来开始，可以查看 3 个数据科学项目保证让你获得工作。祝学习愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她致力于通过撰写教程、操作指南、观点文章等，学习并与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编程教程。**
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她致力于通过撰写教程、操作指南、观点文章等，学习并与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编程教程。**
 
 ### 更多相关内容
 
-+   [25门免费课程掌握数据科学、数据工程、机器学习…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [25 门免费课程掌握数据科学、数据工程、机器学习…](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
-+   [5门免费课程掌握数据科学SQL](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
++   [5 门免费课程掌握数据科学 SQL](https://www.kdnuggets.com/5-free-courses-to-master-sql-for-data-science)
 
-+   [5门免费课程掌握数据科学数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
++   [5 门免费课程掌握数据科学数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
 
-+   [5门免费课程掌握数据科学Python](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)
++   [5 门免费课程掌握数据科学 Python](https://www.kdnuggets.com/5-free-courses-to-master-python-for-data-science)
 
-+   [5门免费课程掌握数据科学统计学](https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science)
++   [5 门免费课程掌握数据科学统计学](https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science)
 
-+   [5门免费课程掌握数据工程](https://www.kdnuggets.com/5-free-courses-to-master-data-engineering)
++   [5 门免费课程掌握数据工程](https://www.kdnuggets.com/5-free-courses-to-master-data-engineering)

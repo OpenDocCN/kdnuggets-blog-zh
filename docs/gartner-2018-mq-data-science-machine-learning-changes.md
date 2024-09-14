@@ -1,8 +1,8 @@
 # Gartner 2018 年数据科学和机器学习平台的魔力象限中的赢家与输家
 
-> 原文：[https://www.kdnuggets.com/2018/02/gartner-2018-mq-data-science-machine-learning-changes.html](https://www.kdnuggets.com/2018/02/gartner-2018-mq-data-science-machine-learning-changes.html)
+> 原文：[`www.kdnuggets.com/2018/02/gartner-2018-mq-data-science-machine-learning-changes.html`](https://www.kdnuggets.com/2018/02/gartner-2018-mq-data-science-machine-learning-changes.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)Gartner 不断更改此报告的名称（暗示市场细分）——最新的 2018 版本，发布于 2018 年 2 月 23 日，被称为“数据科学和机器学习平台的魔力象限”（Machine 和 Learning 之间用传统的连字符）。在 2017 年，它被称为“数据科学平台的 MQ”，在 2014-2016 年，它被称为“高级分析平台的 MQ”。这种变化反映了行业在内容和能力方面的快速变化，以及反映 AI 和机器学习增长的不断演变的品牌。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论 Gartner 不断更改此报告的名称（暗示市场细分）——最新的 2018 版本，发布于 2018 年 2 月 23 日，被称为“数据科学和机器学习平台的魔力象限”（Machine 和 Learning 之间用传统的连字符）。在 2017 年，它被称为“数据科学平台的 MQ”，在 2014-2016 年，它被称为“高级分析平台的 MQ”。这种变化反映了行业在内容和能力方面的快速变化，以及反映 AI 和机器学习增长的不断演变的品牌。
 
 Gartner 将数据科学和机器学习平台定义为：
 
@@ -14,7 +14,7 @@ Gartner 将数据科学和机器学习平台定义为：
 
 请注意，虽然像 Python 和 R 这样的开源平台在数据科学市场中扮演着越来越重要的角色，但 Gartner 的研究方法并未包括它们。
 
-![Gartner 2018 数据科学和机器学习平台的 MQ](../Images/b4661e86904547c9bcbd513499bf9713.png)
+![Gartner 2018 数据科学和机器学习平台的 MQ](img/b4661e86904547c9bcbd513499bf9713.png)
 
 **图 1: 2018 年 Gartner 数据科学和机器学习平台的魔力象限**
 
@@ -32,9 +32,9 @@ Gartner 将数据科学和机器学习平台定义为：
 
 2017 年 MQ 中的另外三家公司被淘汰：FICO，Quest 和 Alpine Data。我们注意到 Alpine Data 公司和 Quest 的 Statistica 资产被 TIBCO 收购，TIBCO 在 2017 年的 MQ 中的位置接近 Quest。
 
-与我们之前的帖子 [Gartner 2017 MQ 数据科学平台的赢家与输家](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html) 一样，我们比较了最新的 2018 年魔力象限与其前一版本。下面我们将审视这些变化、赢家和输家。
+与我们之前的帖子 Gartner 2017 MQ 数据科学平台的赢家与输家 一样，我们比较了最新的 2018 年魔力象限与其前一版本。下面我们将审视这些变化、赢家和输家。
 
-![Gartner 2018 与 2017 年数据科学和机器学习平台的 MQ](../Images/9e3e8923ba165edf0966e43dfd29bf7e.png)
+![Gartner 2018 与 2017 年数据科学和机器学习平台的 MQ](img/9e3e8923ba165edf0966e43dfd29bf7e.png)
 
 **图 2: 2018 年与 2017 年的数据科学和机器学习平台的 Gartner 魔力象限比较**
 
@@ -118,19 +118,19 @@ Gartner 写道：
 
 +   Teradata 提供了 Teradata Unified Data Architecture，这是一个企业级分析生态系统，结合了开源和商业技术以提供分析能力。由于其在数据科学开发方面缺乏一致性和易用性，它仍然是一个小众参与者。
 
-你可以从 [Domino](/2018/02/domino-gartner-mq-data-science-machine-learning.html)、H2O.ai、Alteryx、Dataiku 以及报告中可能提到的其他供应商下载 Gartner 2018 年数据科学和机器学习平台魔力象限报告。
+你可以从 Domino、H2O.ai、Alteryx、Dataiku 以及报告中可能提到的其他供应商下载 Gartner 2018 年数据科学和机器学习平台魔力象限报告。
 
 你还可以查看相关的 [2018 年 Gartner 分析和商业智能平台魔力象限](https://www.sisense.com/blog/gartners-2018-magic-quadrant-next-generation-bi/)。
 
 **相关：**
 
-+   [Gartner 2017 年数据科学平台魔力象限：赢家和输家](/2017/02/gartner-2017-mq-data-science-platforms-gainers-losers.html)
++   Gartner 2017 年数据科学平台魔力象限：赢家和输家
 
-+   [Gartner 2016 年高级分析平台魔力象限：赢家和输家](/2016/02/gartner-2016-mq-analytics-platforms-gainers-losers.html)
++   Gartner 2016 年高级分析平台魔力象限：赢家和输家
 
-+   [Gartner 2015 年高级分析平台魔力象限：谁赢了，谁输了](/2015/02/gartner-2015-magic-quadrant-advanced-analytics-platforms.html)。
++   Gartner 2015 年高级分析平台魔力象限：谁赢了，谁输了。
 
-+   [Gartner 2014 年高级分析平台魔力象限](/2014/03/rapidminer-leader-gartner-2014-magic-quadrant-advanced-analytics-platforms.html)。
++   Gartner 2014 年高级分析平台魔力象限。
 
 ### 更多相关内容
 

@@ -1,8 +1,8 @@
-# 2024年每个数据科学家都需要的5项关键技能
+# 2024 年每个数据科学家都需要的 5 项关键技能
 
-> 原文：[https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
+> 原文：[`www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024`](https://www.kdnuggets.com/5-essential-skills-every-data-scientist-needs-in-2024)
 
-![2024年每个数据科学家都需要的5项关键技能](../Images/eb69af7cec8f22bc9b0d3569caedbf2f.png)
+![2024 年每个数据科学家都需要的 5 项关键技能](img/eb69af7cec8f22bc9b0d3569caedbf2f.png)
 
 图片来源：[安娜·内克拉舍维奇](https://www.pexels.com/photo/businessman-man-person-desk-6801871/)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 数据科学家已经证明自己能够为公司提供巨大的价值。然而，是什么使数据科学家的技能与其他技能不同呢？这个问题不容易回答，因为数据科学家是一个大范围的职业，工作职责和所需技能因公司而异。尽管如此，如果数据科学家想要从其他人中脱颖而出，仍有一些必需的技能。
 
-这篇文章将讨论2024年数据科学家需要的五项关键技能。我不会讨论**编程语言**或**机器学习**，因为它们总是必要的技能。我也不会讨论生成式AI技能，因为这些是当前的趋势技能，但数据科学的范畴远不止于此。我只会讨论对2024年局势至关重要的新兴技能。
+这篇文章将讨论 2024 年数据科学家需要的五项关键技能。我不会讨论**编程语言**或**机器学习**，因为它们总是必要的技能。我也不会讨论生成式 AI 技能，因为这些是当前的趋势技能，但数据科学的范畴远不止于此。我只会讨论对 2024 年局势至关重要的新兴技能。
 
 这些技能有哪些呢？让我们深入了解一下。
 
@@ -34,7 +34,7 @@
 
 虽然有许多云计算服务，但你不需要学习所有内容，因为精通一个平台意味着可以更轻松地导航到其他平台。如果你在决定最初学习哪个时感到困难，可以从一个更大的平台开始，例如 AWS、GCP 或 Azure。
 
-你可以通过 [Aryan Garg 的初学者云计算指南](/2023/01/beginner-guide-cloud-computing.html) 了解更多关于云计算的内容。
+你可以通过 Aryan Garg 的初学者云计算指南 了解更多关于云计算的内容。
 
 # 2\. MLOps
 
@@ -42,7 +42,7 @@
 
 MLOps 已经成为数据科学家最受追捧的技能之一，你可以在招聘广告中看到 MLOps 需求的激增。以前，MLOps 的工作可以委派给机器学习工程师。然而，对数据科学家理解 MLOps 的要求比以往任何时候都要高。这是因为数据科学家必须确保他们的机器学习模型准备好与生产环境集成，而只有模型创建者最了解这一点。
 
-因此，如果你想提升你的数据科学职业生涯，学习 MLOps 在 2024 年是有益的。要了解更多关于 MLOps 的信息，请参考 [KDnuggets 的第一期技术简报](/tech-brief-everything-you-need-to-know-about-mlops)，其中讨论了关于 MLOps 的所有内容。
+因此，如果你想提升你的数据科学职业生涯，学习 MLOps 在 2024 年是有益的。要了解更多关于 MLOps 的信息，请参考 KDnuggets 的第一期技术简报，其中讨论了关于 MLOps 的所有内容。
 
 # 3\. 大数据技术
 
@@ -64,13 +64,13 @@ MLOps 已经成为数据科学家最受追捧的技能之一，你可以在招�
 
 -Rapidminer
 
-你不需要掌握所有可用的工具，但了解其中一些工具无疑会让你的职业生涯更上一层楼。要了解更多关于大数据技术的信息，这里有一篇名为 [与大数据合作：Nate Rosidi 的工具和技术](/working-with-big-data-tools-and-techniques) 的介绍性文章，可以启动你的大数据之旅。
+你不需要掌握所有可用的工具，但了解其中一些工具无疑会让你的职业生涯更上一层楼。要了解更多关于大数据技术的信息，这里有一篇名为 与大数据合作：Nate Rosidi 的工具和技术 的介绍性文章，可以启动你的大数据之旅。
 
 # 4\. 领域专业知识
 
 数据科学家需要技术技能和强大的领域专业知识才能推动他们的职业发展。初级数据科学家可能会想要建立机器学习模型以达到最高的技术指标，但高级数据科学家明白，我们的模型应当优先带来商业价值。
 
-领域专业知识意味着我们理解我们所从事行业的业务。通过理解业务，我们可以更好地与业务用户对齐，为模型选择更好的指标，并以影响业务的方式框定项目。在2024年，随着企业开始理解数据科学如何带来重大价值，这一点尤其变得重要。
+领域专业知识意味着我们理解我们所从事行业的业务。通过理解业务，我们可以更好地与业务用户对齐，为模型选择更好的指标，并以影响业务的方式框定项目。在 2024 年，随着企业开始理解数据科学如何带来重大价值，这一点尤其变得重要。
 
 获得领域专业知识的问题在于，只有在我们已经在该行业作为数据科学家工作时，才能有效地学习。因此，如果我们不在想要的行业工作，该如何获得这项技能呢？有几种方法，包括：
 
@@ -86,7 +86,7 @@ MLOps 已经成为数据科学家最受追捧的技能之一，你可以在招�
 
 - 实习
 
-这些是获取领域专业知识的建议方法，但你可以更具创造性地寻找经验。Vaishali Lambe 的文章 [《领域知识是数据职业的障碍吗？》](/2019/02/domain-knowledge-hurdle-career-data.html) 也可以帮助你获得领域专业知识。
+这些是获取领域专业知识的建议方法，但你可以更具创造性地寻找经验。Vaishali Lambe 的文章 《领域知识是数据职业的障碍吗？》 也可以帮助你获得领域专业知识。
 
 # 5\. 伦理和数据隐私
 
@@ -96,11 +96,11 @@ MLOps 已经成为数据科学家最受追捧的技能之一，你可以在招�
 
 另一方面，数据隐私是一个关注我们如何合法地收集、处理、管理和共享数据的领域。它旨在保护个人信息，并防止滥用。每个领域可能有不同的数据隐私框架；例如，欧洲的《通用数据保护条例》（GDPR）通常仅适用于欧洲的个人数据。
 
-伦理和数据隐私知识已成为数据科学家的基本技能，因为违反这些知识的后果非常严重。Nisha Arya 关于 [伦理](/2023/04/ethics-ai-navigating-future-intelligent-machines.html) 和 [数据隐私](/2022/01/celebrating-awareness-importance-data-privacy.html) 的文章可能会成为你进一步理解这些主题的起点。
+伦理和数据隐私知识已成为数据科学家的基本技能，因为违反这些知识的后果非常严重。Nisha Arya 关于 伦理 和 数据隐私 的文章可能会成为你进一步理解这些主题的起点。
 
 # 结论
 
-本文讨论了每个数据科学家在2024年需要的五项关键技能。这些技能包括：
+本文讨论了每个数据科学家在 2024 年需要的五项关键技能。这些技能包括：
 
 1.  云计算
 
@@ -114,18 +114,18 @@ MLOps 已经成为数据科学家最受追捧的技能之一，你可以在招�
 
 希望这对你有帮助！分享你对这里列出的技能的看法，并在下方添加你的评论。
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**是一位数据科学助理经理和数据撰稿人。在全职工作于印尼安联保险期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius涉及各种人工智能和机器学习话题。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**是一位数据科学助理经理和数据撰稿人。在全职工作于印尼安联保险期间，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 涉及各种人工智能和机器学习话题。
 
 ### 更多相关话题
 
-+   [让你的数据技能未来无忧：2023年每个数据科学家需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [让你的数据技能未来无忧：2023 年每个数据科学家需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
 +   [每个数据科学家都需要的软技能](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
 
-+   [2024年数据科学家工具箱中每个人都需要的5种工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
++   [2024 年数据科学家工具箱中每个人都需要的 5 种工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
 
-+   [Python f-Strings魔法：每个编码者都需要知道的5个颠覆性技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
++   [Python f-Strings 魔法：每个编码者都需要知道的 5 个颠覆性技巧](https://www.kdnuggets.com/python-fstrings-magic-5-gamechanging-tricks-every-coder-needs-to-know)
 
-+   [每个数据科学家都应该知道的10个基本Pandas函数](https://www.kdnuggets.com/10-essential-pandas-functions-every-data-scientist-should-know)
++   [每个数据科学家都应该知道的 10 个基本 Pandas 函数](https://www.kdnuggets.com/10-essential-pandas-functions-every-data-scientist-should-know)
 
-+   [每个数据科学家应该具备的13种技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每个数据科学家应该具备的 13 种技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)

@@ -1,8 +1,8 @@
 # DataLang：为数据科学家设计的新编程语言……由 ChatGPT 创建？
 
-> 原文：[https://www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html](https://www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html)
+> 原文：[`www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html`](https://www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html)
 
-![DataLang：为数据科学家设计的新编程语言……由 ChatGPT 创建？](../Images/56970ff2691729369b6c2c2db7a78d65.png)
+![DataLang：为数据科学家设计的新编程语言……由 ChatGPT 创建？](img/56970ff2691729369b6c2c2db7a78d65.png)
 
 图片由作者使用 Midjourney 创建
 

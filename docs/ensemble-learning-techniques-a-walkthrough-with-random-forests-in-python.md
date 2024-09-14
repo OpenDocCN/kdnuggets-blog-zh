@@ -1,6 +1,6 @@
 # 集成学习技术：在 Python 中使用随机森林的详细讲解
 
-> 原文：[https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
+> 原文：[`www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python`](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 
 机器学习模型已成为多个行业决策中的重要组成部分，但在处理嘈杂或多样化的数据集时，往往会遇到困难。这就是集成学习发挥作用的地方。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
@@ -96,7 +96,7 @@ model.score(X_test,y_test)
 
 堆叠是一种结合多个估计器的技术，以最小化它们的偏差并产生准确的预测。每个估计器的预测结果被结合在一起，然后输入到一个通过交叉验证训练的最终预测元模型中；堆叠可以应用于分类问题和回归问题。
 
-![集成学习技术：Python 中的随机森林演练](../Images/973ed1cfbb38a533bda3c0f44e520316.png)
+![集成学习技术：Python 中的随机森林演练](img/973ed1cfbb38a533bda3c0f44e520316.png)
 
 堆叠集成学习
 
@@ -210,7 +210,7 @@ model.score(X_test,y_test)
 
 LightGBM 是另一种基于树学习的梯度提升算法。然而，与其他基于树的算法不同，它使用叶子-wise 树增长，使其收敛更快。
 
-![集成学习技术：使用 Python 中的随机森林的演示](../Images/180766a57c79ba30658b281015966a98.png)
+![集成学习技术：使用 Python 中的随机森林的演示](img/180766a57c79ba30658b281015966a98.png)
 
 叶子-wise 树增长 / 图片来源于 [LightGBM](https://lightgbm.readthedocs.io/en/latest/Features.html#other-features)
 

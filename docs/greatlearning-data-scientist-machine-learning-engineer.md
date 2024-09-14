@@ -1,12 +1,12 @@
 # 数据科学家还是机器学习工程师？哪个职业选择更好？
 
-> 原文：[https://www.kdnuggets.com/2020/11/greatlearning-data-scientist-machine-learning-engineer.html](https://www.kdnuggets.com/2020/11/greatlearning-data-scientist-machine-learning-engineer.html)
+> 原文：[`www.kdnuggets.com/2020/11/greatlearning-data-scientist-machine-learning-engineer.html`](https://www.kdnuggets.com/2020/11/greatlearning-data-scientist-machine-learning-engineer.html)
 
 赞助帖子。
 
-在21世纪，世界围绕着数据运转，成百上千的数据。因此，处理这些数据变得非常自然，而为此目的而强大的设备已经成为必需品。这些机器应该是自动化的，或者这些系统应该设计成使这些设备能够自动成功地处理这些数据。因此，为了构建这些系统，我们需要像机器学习工程师和数据科学家这样的专业人员。这就是数据科学和机器学习重要性所在。关于数据科学与机器学习的比较以及数据科学家和机器学习工程师的角色和职责之间存在许多混淆，因为这两个术语在技术行业中相对较新。然而，如果你*深入探讨*这两者，你将发现数据科学和机器学习之间存在一些主要的差异。
+在 21 世纪，世界围绕着数据运转，成百上千的数据。因此，处理这些数据变得非常自然，而为此目的而强大的设备已经成为必需品。这些机器应该是自动化的，或者这些系统应该设计成使这些设备能够自动成功地处理这些数据。因此，为了构建这些系统，我们需要像机器学习工程师和数据科学家这样的专业人员。这就是数据科学和机器学习重要性所在。关于数据科学与机器学习的比较以及数据科学家和机器学习工程师的角色和职责之间存在许多混淆，因为这两个术语在技术行业中相对较新。然而，如果你*深入探讨*这两者，你将发现数据科学和机器学习之间存在一些主要的差异。
 
-[![图片](../Images/9477ddce9e705289572f0c847998a2f3.png)](https://www.mygreatlearning.com/blog/difference-data-science-machine-learning-ai/)
+![图片](https://www.mygreatlearning.com/blog/difference-data-science-machine-learning-ai/)
 
 ### **数据科学家及其重要性**
 
@@ -30,25 +30,25 @@
 
 数据科学家职位要求他们受过高等教育。申请数据科学家职位需要拥有数据科学硕士学位或博士学位。根据近期的研究，数据科学家通常拥有计算机科学、工程学、数学、统计学以及其他信息技术相关学科的高级学位。因此，让我们简要介绍所需的技能。
 
-1.  数据科学家申请工作时，至少需要拥有计算机科学、工程学、数学或统计学的硕士或博士学位。此外，R、Python、SQL等编程语言，以及许多新技术和趋势，也应由个人学习，以便获得数据科学职位。现在，这些编程语言可以通过数据科学课程进行学习，而这些课程在现在非常普遍。
+1.  数据科学家申请工作时，至少需要拥有计算机科学、工程学、数学或统计学的硕士或博士学位。此外，R、Python、SQL 等编程语言，以及许多新技术和趋势，也应由个人学习，以便获得数据科学职位。现在，这些编程语言可以通过数据科学课程进行学习，而这些课程在现在非常普遍。
 
 1.  个人应具备数学能力，或应具备非常强的数学技能，以及技术和分析技能，以成为数据科学家。
 
 1.  数据挖掘和统计技术是一个人应获得经验的领域。数据挖掘技术，如提升、广义线性模型或回归、网络分析，在数据科学家的职责中非常重要，因为他们必须处理这些内容。
 
-1.  使用诸如人工神经网络、聚类等机器学习技术可以帮助你获得经验，从而在申请数据科学职位时占据优势。至少有5到7年的统计模型构建和数据集操作经验是一个重要要求。
+1.  使用诸如人工神经网络、聚类等机器学习技术可以帮助你获得经验，从而在申请数据科学职位时占据优势。至少有 5 到 7 年的统计模型构建和数据集操作经验是一个重要要求。
 
-1.  为了学习数据科学，需要分布式数据和计算工具，如Hadoop、Spark、MySQL、Python，以及数据的可视化和展示，因此需要参加数据科学课程。因此，如果你想参加一个 [数据科学课程](https://www.mygreatlearning.com/us/data-science/courses/pg-program-data-science-business-analytics-course)，建议加入一个机构，而Great Learning是一个不错的选择。
+1.  为了学习数据科学，需要分布式数据和计算工具，如 Hadoop、Spark、MySQL、Python，以及数据的可视化和展示，因此需要参加数据科学课程。因此，如果你想参加一个 [数据科学课程](https://www.mygreatlearning.com/us/data-science/courses/pg-program-data-science-business-analytics-course)，建议加入一个机构，而 Great Learning 是一个不错的选择。
 
 ***2\. 机器学习工程师的要求：***
 
 就像数据科学家一样，大多数公司更倾向于拥有相关技术学科硕士学位的机器学习工程师。然而，由于这个领域相对较新，具备这些技能的人才略显短缺，因此招聘人员在聘用数据科学职位候选人时往往会考虑得更为宽松，并且通常愿意做出例外。但是，这并不意味着在其他参数方面的要求较低，因为机器学习工程师应该熟悉一些概念，比如机器学习算法，这些算法可以通过库、API、包等方式学习。此外，机器学习工程师还应该具备以下一些技能。
 
-1.  **具备视觉处理、深度神经网络和强化学习的经验是必须的。此外，还需要对编程语言如Python、Java、R、C++、C、JavaScript、Scala等有足够的知识。**
+1.  **具备视觉处理、深度神经网络和强化学习的经验是必须的。此外，还需要对编程语言如 Python、Java、R、C++、C、JavaScript、Scala 等有足够的知识。**
 
 1.  **在概率论和统计学方面有扎实的基础至关重要。同样，在数学方面也需要深入的知识，因为在解码复杂的机器学习算法时需要算法理论，以帮助机器学习和沟通。**
 
-1.  **在工程方面有高级知识、强大的分析技能以及使用编程工具如MATLAB的经验，以及使用分布式系统工具如etcd、Zookeeper的经验也极为重要。所有这些都可以通过在线和机构提供的数据科学课程轻松学习。**
+1.  **在工程方面有高级知识、强大的分析技能以及使用编程工具如 MATLAB 的经验，以及使用分布式系统工具如 etcd、Zookeeper 的经验也极为重要。所有这些都可以通过在线和机构提供的数据科学课程轻松学习。**
 
 1.  **此外，应具备灵活性，能够处理大量数据，并在高吞吐量环境中工作没有问题。此外，深入了解机器学习评估指标作为技能也非常重要。**
 
@@ -80,17 +80,17 @@
 
 如可以看到，数据科学和机器学习都是出色的职业选择，两者都有很好的机会。因此，与其找出数据科学和机器学习之间的区别并争论哪个更好，不如了解和学习数据科学，因为如果你掌握了数据科学，你将能够精通两者，并可以选择作为数据科学家或机器学习工程师的职业生涯。
 
-然而，要学习数据科学，必须参加数据科学课程，目前有许多[数据科学课程](https://www.mygreatlearning.com/us/data-science/courses/pg-program-data-science-business-analytics-course)可以选择。一个以其数据科学课程或所有数据科学课程而闻名的机构是Great Learning。Great Learning的数据科学课程确实在那些参加课程的人数据科学职业生涯中起到了很大的帮助。因此，建议选择一个[Great Learning](https://www.mygreatlearning.com/us/)的数据科学课程，因为这些课程非常出色。要拥有数据科学职业生涯，确实需要对数据科学技术有深入的了解，并且在该领域有实践经验。
+然而，要学习数据科学，必须参加数据科学课程，目前有许多[数据科学课程](https://www.mygreatlearning.com/us/data-science/courses/pg-program-data-science-business-analytics-course)可以选择。一个以其数据科学课程或所有数据科学课程而闻名的机构是 Great Learning。Great Learning 的数据科学课程确实在那些参加课程的人数据科学职业生涯中起到了很大的帮助。因此，建议选择一个[Great Learning](https://www.mygreatlearning.com/us/)的数据科学课程，因为这些课程非常出色。要拥有数据科学职业生涯，确实需要对数据科学技术有深入的了解，并且在该领域有实践经验。
 
 ### 相关话题
 
 +   [数据科学训练营、学位还是在线课程：哪一种最好？](https://www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html)
 
-+   [ETL与ELT：哪一种适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
++   [ETL 与 ELT：哪一种适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
 
-+   [我应该使用哪个指标？准确率与AUC](https://www.kdnuggets.com/2022/10/metric-accuracy-auc.html)
++   [我应该使用哪个指标？准确率与 AUC](https://www.kdnuggets.com/2022/10/metric-accuracy-auc.html)
 
-+   [RAG与细化调整：哪一种工具能更好地提升你的LLM应用？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
++   [RAG 与细化调整：哪一种工具能更好地提升你的 LLM 应用？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
 
 +   [学位还是证书？雇主更看重哪个资格认证？](https://www.kdnuggets.com/degree-or-certificate-which-credential-do-employers-value-more)
 

@@ -1,18 +1,18 @@
 # 从 CRISP-DM 的视角来看描述性分析、机器学习和深度学习
 
-> 原文：[https://www.kdnuggets.com/2018/05/descriptive-analytics-machine-learning-deep-learning-crisp-dm.html](https://www.kdnuggets.com/2018/05/descriptive-analytics-machine-learning-deep-learning-crisp-dm.html)
+> 原文：[`www.kdnuggets.com/2018/05/descriptive-analytics-machine-learning-deep-learning-crisp-dm.html`](https://www.kdnuggets.com/2018/05/descriptive-analytics-machine-learning-deep-learning-crisp-dm.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Stéphane Faure](http://www.linkedin.com/in/stéphane-faure-5748a153)，IBM。**
 
-作为一个组织的一部分，我经常需要解释“经典”机器学习的基础，我通常会介绍 CRISP-DM 方法论（见 [https://www.kdnuggets.com/2014/10/crisp-dm-top-methodology-analytics-data-mining-data-science-projects.html](https://www.kdnuggets.com/2014/10/crisp-dm-top-methodology-analytics-data-mining-data-science-projects.html)）。
+作为一个组织的一部分，我经常需要解释“经典”机器学习的基础，我通常会介绍 CRISP-DM 方法论（见 [`www.kdnuggets.com/2014/10/crisp-dm-top-methodology-analytics-data-mining-data-science-projects.html`](https://www.kdnuggets.com/2014/10/crisp-dm-top-methodology-analytics-data-mining-data-science-projects.html)）。
 
-![CRISP-DM](../Images/6afdc154d4acfbef0d55927ac39415d6.png)
+![CRISP-DM](img/6afdc154d4acfbef0d55927ac39415d6.png)
 
 这种方法论可能是最合适的，不同的阶段为从业者提供了强大的框架，但为了更具体地解释它如何应用于“经典”机器学习和深度学习，我需要用更具体的设计流程来补充 CRISP-DM：
 
-![Crisp DM 设计流程](../Images/3acfe9d2f059137fce26fcdf15bb1b90.png)
+![Crisp DM 设计流程](img/3acfe9d2f059137fce26fcdf15bb1b90.png)
 
 由于流程的目的是解释三种方法之间的区别，因此一些（很多……）没有纳入流程中，但我认为这对那些打算向非专业人士介绍机器学习和深度学习的人会有所帮助。
 
@@ -30,11 +30,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -50,4 +50,4 @@
 
 +   [15 本免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
 
-+   [KDnuggets 新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)

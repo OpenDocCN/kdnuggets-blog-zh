@@ -1,22 +1,22 @@
-# 掌握数据清理和预处理技术的7个步骤
+# 掌握数据清理和预处理技术的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
+> 原文：[`www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html`](https://www.kdnuggets.com/2023/08/7-steps-mastering-data-cleaning-preprocessing-techniques.html)
 
-![掌握数据清理和预处理技术的7个步骤](../Images/b1ac81474d1360b7d4a1b880bdd3551d.png)
+![掌握数据清理和预处理技术的 7 个步骤](img/b1ac81474d1360b7d4a1b880bdd3551d.png)
 
 插图作者。灵感来源于 Dr. Angshuman Ghosh 的 MEME
 
-掌握数据清理和预处理技术对解决许多数据科学项目至关重要。一个简单的演示可以在 [meme](https://www.quora.com/Why-are-the-career-expectations-vs-the-reality-of-being-data-scientists) 中找到，该meme展示了学生在进入数据科学领域之前对工作的期望与数据科学家的实际工作的对比。
+掌握数据清理和预处理技术对解决许多数据科学项目至关重要。一个简单的演示可以在 [meme](https://www.quora.com/Why-are-the-career-expectations-vs-the-reality-of-being-data-scientists) 中找到，该 meme 展示了学生在进入数据科学领域之前对工作的期望与数据科学家的实际工作的对比。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -112,9 +112,9 @@ for c in columns_with_outliers:
 
 非序数变量的例子包括性别、婚姻状况、工作类型。因此，如果变量没有遵循顺序，则为非序数变量，与序数特征不同。序数变量的一个例子可以是教育水平，如“童年”、“小学”、“中学”和“大学”，以及收入水平，如“低”、“中”等“高”。
 
-当我们处理非序数变量时，One-Hot编码是最常用的技术，用于将这些变量转换为数值型。
+当我们处理非序数变量时，One-Hot 编码是最常用的技术，用于将这些变量转换为数值型。
 
-在这种方法中，我们为每个类别特征的水平创建一个新的二进制变量。当水平名称与变量值相同时，该二进制变量的值为1，否则为0。
+在这种方法中，我们为每个类别特征的水平创建一个新的二进制变量。当水平名称与变量值相同时，该二进制变量的值为 1，否则为 0。
 
 ```py
 from sklearn.preprocessing import OneHotEncoder
@@ -128,7 +128,7 @@ encoded_df = pd.DataFrame(encoded_data.toarray(), columns=encoder.get_feature_na
 final_df = pd.concat([df.drop(cols_to_encode, axis=1), encoded_df], axis=1)
 ```
 
-当变量是序数时，最常用的技术是序数编码，它将类别变量的唯一值转换为遵循顺序的整数。例如，收入的水平“低”、“中”和“高”将分别编码为0、1和2。
+当变量是序数时，最常用的技术是序数编码，它将类别变量的唯一值转换为遵循顺序的整数。例如，收入的水平“低”、“中”和“高”将分别编码为 0、1 和 2。
 
 ```py
 from sklearn.preprocessing import OrdinalEncoder
@@ -145,11 +145,11 @@ final_df = pd.concat([df.drop(cols_to_encode, axis=1), encoded_df], axis=1)
 
 # 第五步：将数据集拆分为训练集和测试集
 
-现在是时候将数据集划分为三个固定的子集：最常见的选择是将60%用于训练，20%用于验证，20%用于测试。随着数据量的增长，训练集的比例增加，而验证集和测试集的比例减少。
+现在是时候将数据集划分为三个固定的子集：最常见的选择是将 60%用于训练，20%用于验证，20%用于测试。随着数据量的增长，训练集的比例增加，而验证集和测试集的比例减少。
 
 拥有三个子集很重要，因为训练集用于训练模型，而验证集和测试集可以用来了解模型在新数据上的表现。
 
-要拆分数据集，我们可以使用scikit-learn的train_test_split：
+要拆分数据集，我们可以使用 scikit-learn 的 train_test_split：
 
 ```py
 from sklearn.model_selection import train_test_split
@@ -214,7 +214,7 @@ df_val[numeric_features]=sc.transform(df_val[numeric_features])
 
 # 第 7 步：处理不平衡数据
 
-![掌握数据清洗和预处理技术的 7 个步骤](../Images/33d67baeb895e22926fa8545da187b47.png)
+![掌握数据清洗和预处理技术的 7 个步骤](img/33d67baeb895e22926fa8545da187b47.png)
 
 这一步骤仅在我们处理分类问题并发现类别不平衡时才包含。
 

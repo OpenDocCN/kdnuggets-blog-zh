@@ -1,8 +1,8 @@
 # AutoXGB 的简单 AutoML
 
-> 原文：[https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)
+> 原文：[`www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html`](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)
 
-![AutoXGB 的简单 AutoML](../Images/02ab161ce6b93042832d676525e34fed.png)
+![AutoXGB 的简单 AutoML](img/02ab161ce6b93042832d676525e34fed.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -169,7 +169,7 @@ autoxgb train \
 
 通过在终端运行**autoxgb serve**，我们可以在本地运行 FastAPI 服务器。
 
-![无需脑力的 AutoML 与 AutoXGB](../Images/24954fac438a81a6ff390025c0994129.png)
+![无需脑力的 AutoML 与 AutoXGB](img/24954fac438a81a6ff390025c0994129.png)
 
 ## AutoXGB 服务参数
 
@@ -187,7 +187,7 @@ autoxgb train \
 
 为了在云端运行服务器，[Deepnote](https://deepnote.com/) 使用 **ngrok** 创建公共 URL。我们只需开启该选项并使用端口 **8080**。如果你在本地运行，则无需遵循此步骤，直接使用 “http://0.0.0.0:8080” 访问 API 即可。
 
-![无脑 AutoML 与 AutoXGB](../Images/2aa8fd7dff333dd6014552e3db831a3f.png)
+![无脑 AutoML 与 AutoXGB](img/2aa8fd7dff333dd6014552e3db831a3f.png)
 
 我们提供了 **model path**、**host ip** 和 **port number** 来运行服务器。
 
@@ -246,13 +246,13 @@ INFO:     172.3.161.55:47018 - "GET /openapi.json HTTP/1.1" 200 OK
 
 +   **hours.per.week**: 40
 
-![无脑 AutoML 与 AutoXGB](../Images/b472bb19afa5e39dda93694edb062195.png)
+![无脑 AutoML 与 AutoXGB](img/b472bb19afa5e39dda93694edb062195.png)
 
 ### 结果
 
 结果为 **<50k**，置信度为 97.6%，**>50k** 的置信度为 2.3%。
 
-![无脑 AutoML 与 AutoXGB](../Images/310b95a9c11395c61f0d017f5303ba78.png)
+![无脑 AutoML 与 AutoXGB](img/310b95a9c11395c61f0d017f5303ba78.png)
 
 ## 使用请求进行测试
 
@@ -304,10 +304,10 @@ print(data_dict)
 
 在本教程中，我们了解了 AutoXGB 的各种功能。我们可以使用 AutoXGB 进行数据预处理，训练 XGboost 模型，使用 Optuna 优化模型，并使用 FastAPI 运行 Web 服务器。总之，AutoXGB 提供了一个端到端的解决方案来处理你的日常表格数据问题。如果你对实现或使用我提到的其他 AutoML 有疑问，请在评论区留言。我很乐意回答你的所有问题。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个AI产品，帮助那些在心理健康方面面临困扰的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一个 AI 产品，帮助那些在心理健康方面面临困扰的学生。
 
 ### 更多相关话题
 
-+   [Nota AI发布NetPresso模型搜索的测试版，...] (https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)
++   [Nota AI 发布 NetPresso 模型搜索的测试版，...] (https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)
 
-+   [2023年你应该考虑的顶级AutoML框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)
++   [2023 年你应该考虑的顶级 AutoML 框架](https://www.kdnuggets.com/2023/05/best-automl-frameworks-2023.html)

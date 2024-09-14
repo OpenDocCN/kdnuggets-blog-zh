@@ -1,44 +1,44 @@
 # AI：大型语言和视觉模型
 
-> 原文：[https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)
+> 原文：[`www.kdnuggets.com/2023/06/ai-large-language-visual-models.html`](https://www.kdnuggets.com/2023/06/ai-large-language-visual-models.html)
 
-![AI：大型语言和视觉模型](../Images/9884989770c6fd60657867877881c5af.png)
+![AI：大型语言和视觉模型](img/9884989770c6fd60657867877881c5af.png)
 
 编辑提供的图片
 
-大型模型，无论是语言模型还是视觉模型，都被设计用来处理海量数据，使用深度学习技术。这些模型在庞大的数据集上进行训练，能够以令人难以置信的准确度识别模式并做出预测。大型语言模型，如OpenAI的GPT-3和谷歌的BERT，能够生成自然语言文本、回答问题，甚至进行语言翻译。大型视觉模型，如OpenAI的CLIP和谷歌的Vision Transformer，可以以惊人的精度识别图像和视频中的物体和场景。通过结合这些语言和视觉模型，研究人员希望创建更先进的AI系统，以更像人类的方式理解世界。然而，这些模型也引发了数据偏见、计算资源和潜在误用的担忧，研究人员正积极解决这些问题。总体而言，大型模型处于AI领域的前沿，对发展更先进的智能机器充满希望。
+大型模型，无论是语言模型还是视觉模型，都被设计用来处理海量数据，使用深度学习技术。这些模型在庞大的数据集上进行训练，能够以令人难以置信的准确度识别模式并做出预测。大型语言模型，如 OpenAI 的 GPT-3 和谷歌的 BERT，能够生成自然语言文本、回答问题，甚至进行语言翻译。大型视觉模型，如 OpenAI 的 CLIP 和谷歌的 Vision Transformer，可以以惊人的精度识别图像和视频中的物体和场景。通过结合这些语言和视觉模型，研究人员希望创建更先进的 AI 系统，以更像人类的方式理解世界。然而，这些模型也引发了数据偏见、计算资源和潜在误用的担忧，研究人员正积极解决这些问题。总体而言，大型模型处于 AI 领域的前沿，对发展更先进的智能机器充满希望。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 # 数字时代
 
-21世纪的特点是数据生成和收集的量、速度和种类显著增加。随着数字技术和互联网的兴起，数据开始以空前的规模和速度生成，来源包括社交媒体、传感器和事务系统。让我们提醒你其中的一些：
+21 世纪的特点是数据生成和收集的量、速度和种类显著增加。随着数字技术和互联网的兴起，数据开始以空前的规模和速度生成，来源包括社交媒体、传感器和事务系统。让我们提醒你其中的一些：
 
-+   互联网的增长：1990年代，互联网迅速增长，产生了大量可用于分析洞察的数据。
++   互联网的增长：1990 年代，互联网迅速增长，产生了大量可用于分析洞察的数据。
 
 +   数字设备的普及：智能手机、平板电脑及其他连接设备的广泛使用，产生了大量来自传感器、位置追踪和用户互动的数据。
 
-+   社交媒体的增长：社交媒体平台如Facebook和Twitter通过用户生成的内容（如帖子、评论和点赞）产生了大量的数据。
++   社交媒体的增长：社交媒体平台如 Facebook 和 Twitter 通过用户生成的内容（如帖子、评论和点赞）产生了大量的数据。
 
 +   电子商务的兴起：在线购物和电子商务平台生成了大量有关消费者行为、偏好和交易的数据。
 
-这些趋势和其他因素导致了生成和收集的数据量显著增加，并创造了对新技术和方法的需求，以管理和分析这些数据。这促成了大数据技术的发展，如Hadoop、Spark和NoSQL数据库，以及数据处理和分析的新技术，包括*机器学习*和*深度学习*。实际上，大数据的兴起是深度学习技术发展的一个关键驱动因素，因为传统的机器学习方法常常无法有效分析和提取大型复杂数据集中的洞察。
+这些趋势和其他因素导致了生成和收集的数据量显著增加，并创造了对新技术和方法的需求，以管理和分析这些数据。这促成了大数据技术的发展，如 Hadoop、Spark 和 NoSQL 数据库，以及数据处理和分析的新技术，包括*机器学习*和*深度学习*。实际上，大数据的兴起是深度学习技术发展的一个关键驱动因素，因为传统的机器学习方法常常无法有效分析和提取大型复杂数据集中的洞察。
 
 深度学习算法通过使用具有多个层的人工神经网络，能够克服这些限制，通过学习大量数据并识别数据中的复杂模式和关系。这使得开发出能够处理各种数据类型的强大模型成为可能，包括文本、图像和音频。随着这些模型变得越来越复杂并能够处理更大、更复杂的数据集，它们催生了人工智能和机器学习的新纪元，在自然语言处理、计算机视觉和机器人技术等领域有了广泛应用。总体而言，深度学习的发展是人工智能领域的一次重大突破，它为数据分析、自动化和决策提供了新的可能性，涵盖了广泛的行业和应用。
 
 # 大数据、深度学习、大规模的协同效应
 
-大型语言和视觉模型，如GPT3/GTP4和CLIP，非常特别，因为它们能够处理和理解大量复杂数据，包括文本、图像和其他形式的信息。这些模型使用深度学习技术来分析和学习大量数据，使它们能够识别模式、做出预测和生成高质量的输出。**大型语言模型**的一个主要优势是它们能够生成接近人类写作的自然语言文本。这些模型可以生成连贯且令人信服的书面内容，涵盖广泛的话题，使其在语言翻译、内容创作和聊天机器人等应用中非常有用。同样，**大型视觉模型**能够以惊人的准确度识别和分类图像。它们可以识别图像中的物体、场景，甚至情感，并生成详细的描述。这些模型的独特能力在自然语言处理、计算机视觉和人工智能等领域有许多实际应用，并且它们有潜力彻底改变我们与技术的互动方式和信息处理方式。
+大型语言和视觉模型，如 GPT3/GTP4 和 CLIP，非常特别，因为它们能够处理和理解大量复杂数据，包括文本、图像和其他形式的信息。这些模型使用深度学习技术来分析和学习大量数据，使它们能够识别模式、做出预测和生成高质量的输出。**大型语言模型**的一个主要优势是它们能够生成接近人类写作的自然语言文本。这些模型可以生成连贯且令人信服的书面内容，涵盖广泛的话题，使其在语言翻译、内容创作和聊天机器人等应用中非常有用。同样，**大型视觉模型**能够以惊人的准确度识别和分类图像。它们可以识别图像中的物体、场景，甚至情感，并生成详细的描述。这些模型的独特能力在自然语言处理、计算机视觉和人工智能等领域有许多实际应用，并且它们有潜力彻底改变我们与技术的互动方式和信息处理方式。
 
 大型语言模型和大型视觉模型的结合可以提供多种协同效应，这些协同效应可以在各种应用中发挥作用。这些协同效应包括：
 
@@ -58,7 +58,7 @@
 
 # GAI 或非 GAI
 
-难以预测大模型的发展是否最终会导致通用人工智能（GAI）的创造，因为GAI是一个高度复杂和理论性的概念，目前在人工智能领域仍然是许多争论和猜测的主题。虽然大模型在自然语言处理、图像识别和机器人技术等领域取得了显著进展，但它们仍受限于训练数据和编程，尚不能实现真正的泛化或自主学习。此外，创建GAI还需要在多个AI研究领域取得突破，包括无监督学习、推理和决策。虽然大模型朝着更先进的人工智能形式迈出了重要的一步，但它们距离实现GAI所需的智能和适应能力还远远不够。总之，尽管大模型的发展是朝着更高级人工智能形式迈进的重要一步，但仍不确定它们是否最终会导致通用人工智能的创造。
+难以预测大模型的发展是否最终会导致通用人工智能（GAI）的创造，因为 GAI 是一个高度复杂和理论性的概念，目前在人工智能领域仍然是许多争论和猜测的主题。虽然大模型在自然语言处理、图像识别和机器人技术等领域取得了显著进展，但它们仍受限于训练数据和编程，尚不能实现真正的泛化或自主学习。此外，创建 GAI 还需要在多个 AI 研究领域取得突破，包括无监督学习、推理和决策。虽然大模型朝着更先进的人工智能形式迈出了重要的一步，但它们距离实现 GAI 所需的智能和适应能力还远远不够。总之，尽管大模型的发展是朝着更高级人工智能形式迈进的重要一步，但仍不确定它们是否最终会导致通用人工智能的创造。
 
 # 挑战
 
@@ -80,27 +80,27 @@ OpenAI 决定将其大型语言模型 GPT-3 的独占商业权利授予微软，
 
 +   GPT-Neo，一个由社区驱动的项目，旨在开发与 GPT-3 类似的大规模语言模型，但更具可访问性，并且可以在更广泛的硬件上进行训练
 
-值得注意的是，尽管这些基准测试的表现只是语言模型整体能力的一个方面，但ChatGPT和其他模型可能在其他任务或实际应用中超越这些模型。此外，人工智能领域不断发展，新模型的不断出现可能会推动可能性的边界。
+值得注意的是，尽管这些基准测试的表现只是语言模型整体能力的一个方面，但 ChatGPT 和其他模型可能在其他任务或实际应用中超越这些模型。此外，人工智能领域不断发展，新模型的不断出现可能会推动可能性的边界。
 
 ## 有用的链接
 
-1.  [ChatGPT在做什么……以及为什么它有效？](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
+1.  [ChatGPT 在做什么……以及为什么它有效？](https://writings.stephenwolfram.com/2023/02/what-is-chatgpt-doing-and-why-does-it-work/)
 
-1.  OpenAI的GPT-3: [https://openai.com/blog/gpt-3-unleashed/](https://openai.com/blog/gpt-3-unleashed/)
+1.  OpenAI 的 GPT-3: [`openai.com/blog/gpt-3-unleashed/`](https://openai.com/blog/gpt-3-unleashed/)
 
-1.  谷歌的BERT: [https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
+1.  谷歌的 BERT: [`ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html`](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)
 
-1.  Facebook的RoBERTa: [https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/)
+1.  Facebook 的 RoBERTa: [`ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/`](https://ai.facebook.com/blog/roberta-an-optimized-method-for-pretraining-self-supervised-nlp-systems/)
 
-1.  谷歌的T5: [https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html)
+1.  谷歌的 T5: [`ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html`](https://ai.googleblog.com/2020/02/exploring-transfer-learning-with-t5.html)
 
-1.  OpenAI的CLIP（对比语言-图像预训练）: [https://openai.com/blog/clip/](https://openai.com/blog/clip/)
+1.  OpenAI 的 CLIP（对比语言-图像预训练）: [`openai.com/blog/clip/`](https://openai.com/blog/clip/)
 
-1.  微软的Turing-NLG: [https://www.microsoft.com/en-us/research/blog/microsoft-announces-turing-nlg-state-of-the-art-model-for-natural-language-generation/](https://www.microsoft.com/en-us/research/blog/microsoft-announces-turing-nlg-state-of-the-art-model-for-natural-language-generation/)
+1.  微软的 Turing-NLG: [`www.microsoft.com/en-us/research/blog/microsoft-announces-turing-nlg-state-of-the-art-model-for-natural-language-generation/`](https://www.microsoft.com/en-us/research/blog/microsoft-announces-turing-nlg-state-of-the-art-model-for-natural-language-generation/)
 
-1.  Hugging Face的Transformer库: [https://huggingface.co/transformers/](https://huggingface.co/transformers/)
+1.  Hugging Face 的 Transformer 库: [`huggingface.co/transformers/`](https://huggingface.co/transformers/)
 
-**[Ihar Rubanau](https://www.linkedin.com/in/irubanau)** 是Sigma Software Group的高级数据科学家
+**[Ihar Rubanau](https://www.linkedin.com/in/irubanau)** 是 Sigma Software Group 的高级数据科学家
 
 ### 更多相关话题
 
@@ -108,10 +108,10 @@ OpenAI 决定将其大型语言模型 GPT-3 的独占商业权利授予微软，
 
 +   [了解大型语言模型](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)
 
-+   [介绍John Snow Labs的医疗保健特定大型语言模型](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)
++   [介绍 John Snow Labs 的医疗保健特定大型语言模型](https://www.kdnuggets.com/2023/04/john-snow-introducing-healthcare-specific-large-language-models-john-snow-labs.html)
 
 +   [大型语言模型是什么？它们如何工作？](https://www.kdnuggets.com/2023/05/large-language-models-work.html)
 
 +   [更多免费的语言模型课程](https://www.kdnuggets.com/2023/06/free-courses-large-language-models.html)
 
-+   [介绍TPU v4：谷歌前沿超级计算机用于大型…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)
++   [介绍 TPU v4：谷歌前沿超级计算机用于大型…](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)

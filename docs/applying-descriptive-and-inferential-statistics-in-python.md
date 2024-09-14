@@ -1,8 +1,8 @@
 # 在 Python 中应用描述性和推断统计
 
-> 原文：[https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)
+> 原文：[`www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python`](https://www.kdnuggets.com/applying-descriptive-and-inferential-statistics-in-python)
 
-![在 Python 中应用描述性和推断统计](../Images/5dbbc5b3f35fc10a8fb9a3d0615f630e.png)
+![在 Python 中应用描述性和推断统计](img/5dbbc5b3f35fc10a8fb9a3d0615f630e.png)
 
 照片由 [Mikael Blomkvist](https://www.pexels.com/photo/laptop-beside-a-ceramic-vase-6483626/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -39,7 +39,7 @@ tips = sns.load_dataset('tips')
 tips.head()
 ```
 
-![在 Python 中应用描述性和推断统计](../Images/9464bb9ca7899f5df169326c2448bb5e.png)
+![在 Python 中应用描述性和推断统计](img/9464bb9ca7899f5df169326c2448bb5e.png)
 
 有了这些数据，我们将探索描述性统计。在总结统计中，有两个最常用的：**集中趋势度量**和**分散度量**。
 
@@ -55,7 +55,7 @@ tips.head()
 
 我们可以通过将数据中现有值的总和除以值的数量来计算均值。我们可以用以下方程表示均值：
 
-![在 Python 中应用描述性和推论统计](../Images/16e5c9f80862d6c73e3aeb0f6219234f.png)
+![在 Python 中应用描述性和推论统计](img/16e5c9f80862d6c73e3aeb0f6219234f.png)
 
 作者提供的图片
 
@@ -101,7 +101,7 @@ tips['tip'].median()
 tips['day'].mode()
 ```
 
-![在 Python 中应用描述性和推论统计](../Images/2e030621be8043d0ac6ee24bcf3e1674.png)
+![在 Python 中应用描述性和推论统计](img/2e030621be8043d0ac6ee24bcf3e1674.png)
 
 结果是一个具有分类类型值的系列对象。‘Sat’值是唯一出现的，因为它是数据的众数。
 
@@ -131,7 +131,7 @@ tips['tip'].max() - tips['tip'].min()
 
 方差是一个衡量分布的指标，它基于数据均值来描述数据的分布情况。我们通过将每个值与数据均值的差异平方后，再除以数据值的数量来计算方差。由于我们通常处理的是数据样本而非总体，我们需要将数据值的数量减去一。样本方差的公式见下图。
 
-![在 Python 中应用描述性和推断性统计](../Images/bc37ed3dacbdccd76324ab7826e01d06.png)
+![在 Python 中应用描述性和推断性统计](img/bc37ed3dacbdccd76324ab7826e01d06.png)
 
 作者提供的图像
 
@@ -153,7 +153,7 @@ round(tips['tip'].var(),3)
 
 标准差是最常用的数据分布测量方法，它通过计算方差的平方根来得出。
 
-![在 Python 中应用描述性和推断性统计](../Images/8191d569da91522ccceefcb49eb123e6.png)
+![在 Python 中应用描述性和推断性统计](img/8191d569da91522ccceefcb49eb123e6.png)
 
 作者提供的图像
 
@@ -169,17 +169,17 @@ round(tips['tip'].std(),3)
 1.384
 ```
 
-标准差的一个常见应用是估计数据区间。我们可以使用经验规则或68-95-99.7规则来估计数据区间。经验规则指出，68%的数据估计在数据均值±一个标准差内，95%的数据在均值±两个标准差内，而99.7%的数据在均值±三个标准差内。超出此区间的数据可能被视为离群值。
+标准差的一个常见应用是估计数据区间。我们可以使用经验规则或 68-95-99.7 规则来估计数据区间。经验规则指出，68%的数据估计在数据均值±一个标准差内，95%的数据在均值±两个标准差内，而 99.7%的数据在均值±三个标准差内。超出此区间的数据可能被视为离群值。
 
 ### 4\. 四分位距
 
 四分位距（IQR）是通过计算第一和第三四分位数据之间的差异来衡量数据分布的。四分位数本身是一个将数据分成四个不同部分的值。为了更好地理解，让我们看一下下面的图像。
 
-![在 Python 中应用描述性和推断性统计](../Images/6830b05555f5b89216b9e8214809ad88.png)
+![在 Python 中应用描述性和推断性统计](img/6830b05555f5b89216b9e8214809ad88.png)
 
 作者提供的图像
 
-四分位数是划分数据的值，而不是除法结果。我们可以使用以下`code`来找到四分位数值和IQR。
+四分位数是划分数据的值，而不是除法结果。我们可以使用以下`code`来找到四分位数值和 IQR。
 
 ```py
 q1, q3= np.percentile(tips['tip'], [25 ,75])
@@ -196,17 +196,17 @@ Q3: 3.5625
 IQR: 1.5625
 ```
 
-使用numpy百分位函数，我们可以获得四分位数。通过减去第三四分位数和第一四分位数，我们得到IQR。
+使用 numpy 百分位函数，我们可以获得四分位数。通过减去第三四分位数和第一四分位数，我们得到 IQR。
 
-IQR可以通过获取IQR值并计算数据的上下限来识别数据离群值。上限公式是Q3 + 1.5 * IQR，而下限是Q1 - 1.5 * IQR。任何超过此限制的值都被认为是离群值。
+IQR 可以通过获取 IQR 值并计算数据的上下限来识别数据离群值。上限公式是 Q3 + 1.5 * IQR，而下限是 Q1 - 1.5 * IQR。任何超过此限制的值都被认为是离群值。
 
-为了更好地理解，我们可以使用箱线图来了解IQR离群值检测。
+为了更好地理解，我们可以使用箱线图来了解 IQR 离群值检测。
 
 ```py
 sns.boxplot(tips['tip'])
 ```
 
-![在Python中应用描述性和推断统计](../Images/bb38633068e958e7b69f528a1d449818.png)
+![在 Python 中应用描述性和推断统计](img/bb38633068e958e7b69f528a1d449818.png)
 
 上图展示了数据箱线图和数据位置。上限之后的黑点被视为离群值。
 
@@ -220,13 +220,13 @@ sns.boxplot(tips['tip'])
 
 标准误差是推断统计的一种度量，用于根据样本统计量估计真实总体参数。标准误差的信息是，如果我们用来自同一总体的数据样本重复实验，样本统计量会如何变化。
 
-均值的标准误差（SEM）是最常用的标准误差类型，因为它告诉我们均值在给定样本数据的情况下，能多好地代表总体。要计算SEM，我们将使用以下方程。
+均值的标准误差（SEM）是最常用的标准误差类型，因为它告诉我们均值在给定样本数据的情况下，能多好地代表总体。要计算 SEM，我们将使用以下方程。
 
-![在Python中应用描述性和推断统计](../Images/5bbc2dcd7b37fc3347a18644aec0869c.png)
+![在 Python 中应用描述性和推断统计](img/5bbc2dcd7b37fc3347a18644aec0869c.png)
 
 图片由作者提供
 
-均值的标准误差将使用标准差进行计算。样本数量越多，数据的标准误差就越小，较小的SE意味着我们的样本更好地代表数据总体。
+均值的标准误差将使用标准差进行计算。样本数量越多，数据的标准误差就越小，较小的 SE 意味着我们的样本更好地代表数据总体。
 
 要获得均值的标准误差，我们可以使用以下`code`。
 
@@ -240,7 +240,7 @@ round(sem(tips['tip']),3)
 0.089
 ```
 
-我们通常报告与数据均值一起的SEM，其中真实均值总体预计落在均值±SEM范围内。
+我们通常报告与数据均值一起的 SEM，其中真实均值总体预计落在均值±SEM 范围内。
 
 ```py
 data_mean = round(tips['tip'].mean(),3)
@@ -258,7 +258,7 @@ The true population mean is estimated to fall within the range of 3.087 to 2.909
 
 在统计学中，置信度可以被描述为一个概率。例如，90% 置信度的置信区间意味着真实的总体均值将在置信区间的上下值之间，100 次中有 90 次。CI 的计算使用以下公式。
 
-![在 Python 中应用描述性和推断统计](../Images/a101e44f61d4495ed9476af1067a9c47.png)
+![在 Python 中应用描述性和推断统计](img/a101e44f61d4495ed9476af1067a9c47.png)
 
 作者提供的图像
 
@@ -300,15 +300,15 @@ Ttest_indResult(statistic=1.387859705421269, pvalue=0.16645623503456755)
 
 在 t 检验中，我们比较两个组之间的均值（成对检验）。t 检验的原假设是两个组的均值没有差异，而备择假设是两个组的均值存在差异。
 
-t检验结果显示男性和女性之间的差异不显著，因为P值高于0.05的显著性水平。这意味着我们未能拒绝零假设，并得出结论，两组均值之间没有差异。
+t 检验结果显示男性和女性之间的差异不显著，因为 P 值高于 0.05 的显著性水平。这意味着我们未能拒绝零假设，并得出结论，两组均值之间没有差异。
 
 当然，上述测试只是简化了假设检验的示例。在进行假设检验时，我们需要了解许多假设，并且有许多测试可以满足我们的需求。
 
 # 结论
 
-我们需要了解统计学的两个主要分支：描述性统计和推断统计。描述性统计关注于数据的总结，而推断统计则处理数据的概括，以对总体进行推断。在这篇文章中，我们讨论了描述性统计和推断统计，并提供了使用Python代码的示例。
+我们需要了解统计学的两个主要分支：描述性统计和推断统计。描述性统计关注于数据的总结，而推断统计则处理数据的概括，以对总体进行推断。在这篇文章中，我们讨论了描述性统计和推断统计，并提供了使用 Python 代码的示例。
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于Allianz Indonesia的同时，他喜欢通过社交媒体和写作媒体分享Python和数据相关的技巧。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据相关的技巧。
 
 ### 更多相关主题
 
@@ -322,4 +322,4 @@ t检验结果显示男性和女性之间的差异不显著，因为P值高于0.0
 
 +   [数据科学中的统计与概率](https://www.kdnuggets.com/2022/06/statistics-probability-data-science.html)
 
-+   [KDnuggets新闻，7月6日：12个必备的数据科学VSCode扩展…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode 扩展…](https://www.kdnuggets.com/2022/n27.html)

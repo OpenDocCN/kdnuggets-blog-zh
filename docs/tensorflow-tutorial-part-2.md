@@ -1,10 +1,10 @@
-# TensorFlow 教程，第 2 部分 – 开始使用
+# TensorFlow 教程，第二部分 – 开始使用
 
-> 原文：[https://www.kdnuggets.com/2017/09/tensorflow-tutorial-part-2.html](https://www.kdnuggets.com/2017/09/tensorflow-tutorial-part-2.html)
+> 原文：[`www.kdnuggets.com/2017/09/tensorflow-tutorial-part-2.html`](https://www.kdnuggets.com/2017/09/tensorflow-tutorial-part-2.html)
 
 **作者：Vivek Kalyanarangan，[专业网络联盟](https://unp.education/)。**
 
-![](../Images/86cda183d7b242f18aab35d95c20b043.png)
+![](img/86cda183d7b242f18aab35d95c20b043.png)
 
 在这个多部分系列中，我们将探索如何开始使用 TensorFlow。本 TensorFlow 教程将为这个人人谈论的热门工具奠定坚实的基础。第二部分是一个关于开始使用、安装和构建小型用例的 TensorFlow 教程。
 
@@ -14,21 +14,21 @@
 
 本文是关于完整 TensorFlow 教程的多部分系列的第一部分 –
 
-+   [第 1 部分：介绍](https://machinelearningblogs.com/2017/09/07/tensorflow-tutorial-part-1-introduction/)
++   [第一部分：介绍](https://machinelearningblogs.com/2017/09/07/tensorflow-tutorial-part-1-introduction/)
 
-+   第 2 部分：开始使用
++   第二部分：开始使用
 
-+   第 3 部分：构建第一个模型
++   第三部分：构建第一个模型
 
 ### TensorFlow 教程：目标
 
-![](../Images/804f3d9251b44bdd6af74beac705af36.png)
+![](img/804f3d9251b44bdd6af74beac705af36.png)
 
-+   [安装 TensorFlow](#install_tensorflow)
++   安装 TensorFlow
 
-+   [验证 TensorFlow 安装](#verify_install)
++   验证 TensorFlow 安装
 
-+   [在构建第一个 TensorFlow 模型之前](#build_model)
++   在构建第一个 TensorFlow 模型之前
 
 ### 安装 TensorFlow
 
@@ -40,7 +40,7 @@
 
 +   点击安装选项卡
 
-![](../Images/de8219546295b9dfd9bbe15d0c93c04f.png)
+![](img/de8219546295b9dfd9bbe15d0c93c04f.png)
 
 以下指南解释了如何安装一个版本的 TensorFlow，使你能够用 Python 编写应用程序。
 
@@ -60,29 +60,29 @@
 
 可以使用 OpenCL 与 AMD 配合，但目前它不支持 TensorFlow。
 
-另外，并非所有NVIDIA设备都受支持。以下是[NVIDIA文档](https://developer.nvidia.com/cuda-gpus)中列出的受支持的GPU列表。
+另外，并非所有 NVIDIA 设备都受支持。以下是[NVIDIA 文档](https://developer.nvidia.com/cuda-gpus)中列出的受支持的 GPU 列表。
 
-![](../Images/000cd280b377c392476ff8db745db974.png)
+![](img/000cd280b377c392476ff8db745db974.png)
 
 #### 3\. 环境
 
-有三种环境可以用来设置tensorflow –
+有三种环境可以用来设置 tensorflow –
 
-1.  直接安装 – 这只是安装任何软件库的典型方式。它直接与已安装的操作系统交互，并像其他库一样安装tensorflow。`pip`是直接安装的首选方式。
+1.  直接安装 – 这只是安装任何软件库的典型方式。它直接与已安装的操作系统交互，并像其他库一样安装 tensorflow。`pip`是直接安装的首选方式。
 
-1.  虚拟环境 – 对于那些不知道python虚拟环境优势的人，`virtualenv`就像是一个与系统中已经安装的默认python平行的python安装。 在虚拟环境中安装库可以将库分开，你将不会与直接安装的其他库发生兼容性冲突。如果出现问题，你可以启动一个新的虚拟环境，重新开始。
+1.  虚拟环境 – 对于那些不知道 python 虚拟环境优势的人，`virtualenv`就像是一个与系统中已经安装的默认 python 平行的 python 安装。 在虚拟环境中安装库可以将库分开，你将不会与直接安装的其他库发生兼容性冲突。如果出现问题，你可以启动一个新的虚拟环境，重新开始。
 
-1.  Docker容器 – 这是一种安装tensorflow的方式。可以将典型的VMware镜像想象成是一个超级强大的docker容器。Docker可以用来启动具有不同操作系统环境的容器，从而允许你拥有一个与主机系统完全分开的环境。所有细节在tensorflow文档中都明确标出。
+1.  Docker 容器 – 这是一种安装 tensorflow 的方式。可以将典型的 VMware 镜像想象成是一个超级强大的 docker 容器。Docker 可以用来启动具有不同操作系统环境的容器，从而允许你拥有一个与主机系统完全分开的环境。所有细节在 tensorflow 文档中都明确标出。
 
-#### 4\. Python版本
+#### 4\. Python 版本
 
-支持Python 2的2.7版本和Python 3的3.3或更高版本。所有操作系统均适用。
+支持 Python 2 的 2.7 版本和 Python 3 的 3.3 或更高版本。所有操作系统均适用。
 
-> 目前，Windows仅支持3.5版本。Python 2与Windows的组合是不受支持的。
+> 目前，Windows 仅支持 3.5 版本。Python 2 与 Windows 的组合是不受支持的。
 
 ### 验证安装
 
-一旦tensorflow安装完成，无论操作系统、环境或python版本如何，你都应该运行以下脚本来验证tensorflow是否正常运行。
+一旦 tensorflow 安装完成，无论操作系统、环境或 python 版本如何，你都应该运行以下脚本来验证 tensorflow 是否正常运行。
 
 ```py
  # import TensorFlow
@@ -100,9 +100,9 @@ b = tf.constant(22)
 print('a + b = {0}'.format(sess.run(a + b))) 
 ```
 
-一旦这段代码成功运行并打印输出，恭喜你！你已经成功安装了tensorflow。接下来我们进入下一部分，构建我们的第一个应用程序。
+一旦这段代码成功运行并打印输出，恭喜你！你已经成功安装了 tensorflow。接下来我们进入下一部分，构建我们的第一个应用程序。
 
-### 在构建第一个tensorflow模型之前
+### 在构建第一个 tensorflow 模型之前
 
 #### 张量
 
@@ -114,17 +114,17 @@ print('a + b = {0}'.format(sess.run(a + b)))
 | 变量 | 在图中调整的值 |
 | 占位符 | 用于在图中传递数据 |
 
-在动手操作之前，我只想介绍几个tensorflow术语及其含义。
+在动手操作之前，我只想介绍几个 tensorflow 术语及其含义。
 
-![](../Images/0a104d3b06b34450c35480ed5b10b0ba.png)
+![](img/0a104d3b06b34450c35480ed5b10b0ba.png)
 
 1.  排名 – 张量的维度
 
 1.  形状 – 张量的形状。与排名相关
 
-上图应有助于理解。下面是Tensorflow支持的不同数据类型。
+上图应有助于理解。下面是 Tensorflow 支持的不同数据类型。
 
-![](../Images/f6b2489ed45aed366e0d963cda105989.png)
+![](img/f6b2489ed45aed366e0d963cda105989.png)
 
 **注意：**量化值[qint8、qint16 和 quint8]是 TensorFlow 的特殊值，有助于减少数据大小。事实上，Google 已经引入了 TensorFlow 处理单元（TPUs）来通过利用量化值加快计算速度*
 
@@ -159,7 +159,7 @@ plt.show()
 
 这将生成如下输出[这是生成的数据的图示]
 
-![](../Images/13efc08549f7833aae8f5cf050d6d3a0.png)
+![](img/13efc08549f7833aae8f5cf050d6d3a0.png)
 
 接下来，我们将对数据进行归一化。这有助于将数据调整到相同的尺度，从而可能导致更快的收敛。
 
@@ -191,7 +191,7 @@ test_house_price_norm = normalize(test_house_price)
 
 ### 结论
 
-我希望这能设定对接下来内容的期望。在下一篇文章中，我们将构建我们的第一个TensorFlow模型。
+我希望这能设定对接下来内容的期望。在下一篇文章中，我们将构建我们的第一个 TensorFlow 模型。
 
 请不要错过直播研讨会，在那里我会讨论我写的所有内容。注册我们的[即将到来的研讨会](https://machinelearningblogs.com/events/)以了解我们将讨论的主题。快乐编码！
 
@@ -205,21 +205,21 @@ test_house_price_norm = normalize(test_house_price)
 
 **相关：**
 
-+   [TensorFlow 教程：第 1 部分 – 介绍](/2017/09/tensorflow-tutorial-part-1.html)
++   TensorFlow 教程：第一部分 – 介绍
 
-+   [寻找最快的 Keras 深度学习后端](/2017/09/search-fastest-keras-deep-learning-backend.html)
++   寻找最快的 Keras 深度学习后端
 
-+   [PyTorch 还是 TensorFlow?](/2017/08/pytorch-tensorflow.html)
++   PyTorch 还是 TensorFlow?
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

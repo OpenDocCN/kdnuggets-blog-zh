@@ -1,6 +1,6 @@
 # 数据质量需求层级
 
-> 原文：[https://www.kdnuggets.com/2022/08/data-quality-hierarchy-needs.html](https://www.kdnuggets.com/2022/08/data-quality-hierarchy-needs.html)
+> 原文：[`www.kdnuggets.com/2022/08/data-quality-hierarchy-needs.html`](https://www.kdnuggets.com/2022/08/data-quality-hierarchy-needs.html)
 
 马斯洛确定了[人类需求的层级](https://en.wikipedia.org/wiki/Maslow's_hierarchy_of_needs)，从基础的生理需求如食物和住所开始，逐步上升到社会需求，最后到达创造力和自我实现。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT。
 
 * * *
 
 理想情况下，团队应具备工具来衡量这些层级中的数据质量。
 
-![数据质量需求层级](../Images/5cc602e2855c9c85b01fed1f35ddb740.png)
+![数据质量需求层级](img/5cc602e2855c9c85b01fed1f35ddb740.png)
 
 数据团队的需求层级。
 
@@ -42,21 +42,21 @@
 
 # 第 3 层：数据模式
 
-接下来是数据的布局：字段名称及其类型。在我与数据团队的工作中，我见过多种跟踪这些信息的方法，从使用存储在字符串字段中的JSON数据，到在支持的系统中使用子记录数据类型，例如BigQuery。在决定采用何种方法时，有许多因素需要考虑，但通常关键关注点集中在缺失的数据列或关键字段上。
+接下来是数据的布局：字段名称及其类型。在我与数据团队的工作中，我见过多种跟踪这些信息的方法，从使用存储在字符串字段中的 JSON 数据，到在支持的系统中使用子记录数据类型，例如 BigQuery。在决定采用何种方法时，有许多因素需要考虑，但通常关键关注点集中在缺失的数据列或关键字段上。
 
 对于类型检查，我的建议是谨慎进行。在开发和生产环境中，许多字符串实际上是日期或数字。你可能需要考虑将类型“提升”到它们的最佳表示。这意味着在混合类型字段中，如果适用，你将为数值和字符串构建不同的模型。
 
-# 第4层：数据值
+# 第 4 层：数据值
 
 最后，我们需要考虑数据值本身的内容。要评估数据质量，你需要推断类别，如果值的唯一性相对于总体大小较低。
 
-对于字符串，我们计算了多种潜在模型，以便区分和捕捉新类型的字符串，而不被简单问题如值是否为null或字符串长度困扰。
+对于字符串，我们计算了多种潜在模型，以便区分和捕捉新类型的字符串，而不被简单问题如值是否为 null 或字符串长度困扰。
 
-# 第5层：使用元数据进行血统标记
+# 第 5 层：使用元数据进行血统标记
 
 调试数据流常常会引出这样的问题：“为什么这个字段有这个值？”
 
-在过去构建数据管道的经历中，我一再遇到这个问题。我的解决方案是通过添加解释原因的字段来增强数据，在这些字段中我可以嵌入各种元数据：人类可读的解释、脚本文件名称和行号、其他变量，或我后来调试问题所需的任何信息。“我将其标记为缺货，因为两个数据源表示缺货，即使我们的第三个数据源说我们有1,000个”是检查单个记录时非常有用的信息。
+在过去构建数据管道的经历中，我一再遇到这个问题。我的解决方案是通过添加解释原因的字段来增强数据，在这些字段中我可以嵌入各种元数据：人类可读的解释、脚本文件名称和行号、其他变量，或我后来调试问题所需的任何信息。“我将其标记为缺货，因为两个数据源表示缺货，即使我们的第三个数据源说我们有 1,000 个”是检查单个记录时非常有用的信息。
 
 不是每个人都有机会附加大量元数据，但如果你能做到这一点，你应该这么做。如果你考虑使用可以自动发现数据字段问题的工具，请注意，这些工具也可以分析你的新元数据字段，从而生成元数据警报，提醒你背后新的行为（如果需要的话）。
 
@@ -68,18 +68,18 @@
 
 -   我建议数据团队确保他们为每个层次提供了工具，并能够单独跟踪这些层次。然后，当所有层次都报告出色的结果时，你就会知道你已经满足了层次结构中的所有需求。对于繁忙的数据团队而言，这本身是一种超越。即使是马斯洛也会感到满意。
 
-**[米奇·海尔](https://www.linkedin.com/in/haile/)**是Data Culpa, Inc.的首席技术官。他在零售数据、机器生成数据、计算机视觉和分析应用的数据管道工作中积累了超过十五年的经验。他还具有构建复杂数据中心环境解决方案的经验，并曾帮助开发数据领域、Pancetera（出售给量子公司）和Conjur（出售给CyberArk）的产品。米奇还是超过25项数据压缩、数据优化和数据安全发明的共同发明人。
+**[米奇·海尔](https://www.linkedin.com/in/haile/)**是 Data Culpa, Inc.的首席技术官。他在零售数据、机器生成数据、计算机视觉和分析应用的数据管道工作中积累了超过十五年的经验。他还具有构建复杂数据中心环境解决方案的经验，并曾帮助开发数据领域、Pancetera（出售给量子公司）和 Conjur（出售给 CyberArk）的产品。米奇还是超过 25 项数据压缩、数据优化和数据安全发明的共同发明人。
 
 ### 了解更多相关话题
 
-+   [数据质量维度：用Great Expectations保证您的数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
++   [数据质量维度：用 Great Expectations 保证您的数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [未来证明您的数据游戏：2023年每个数据科学家需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来证明您的数据游戏：2023 年每个数据科学家需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
-+   [免费4周数据科学课程：AI质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费 4 周数据科学课程：AI 质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
 
 +   [数据质量在成功构建机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [10个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)

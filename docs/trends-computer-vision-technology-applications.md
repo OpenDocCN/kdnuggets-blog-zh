@@ -1,12 +1,12 @@
 # 计算机视觉技术和应用的最新趋势
 
-> 原文：[https://www.kdnuggets.com/2018/11/trends-computer-vision-technology-applications.html](https://www.kdnuggets.com/2018/11/trends-computer-vision-technology-applications.html)
+> 原文：[`www.kdnuggets.com/2018/11/trends-computer-vision-technology-applications.html`](https://www.kdnuggets.com/2018/11/trends-computer-vision-technology-applications.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Valeryia Shchutskaya](https://www.linkedin.com/in/lersh/)、[InData Labs](https://indatalabs.com/)**。
 
-计算机视觉软件正在改变各个行业，使消费者的生活不仅变得更加轻松，还变得更加有趣。作为一个领域，计算机视觉得到了大量宣传和相当数量的投资。北美市场的计算机视觉软件总投资达到了1.2亿美元，而中国市场则猛增至39亿美元。让我们深入了解一下那些最有前景和最令人兴奋的技术，它们使计算机视觉软件开发市场增长如此迅速。
+计算机视觉软件正在改变各个行业，使消费者的生活不仅变得更加轻松，还变得更加有趣。作为一个领域，计算机视觉得到了大量宣传和相当数量的投资。北美市场的计算机视觉软件总投资达到了 1.2 亿美元，而中国市场则猛增至 39 亿美元。让我们深入了解一下那些最有前景和最令人兴奋的技术，它们使计算机视觉软件开发市场增长如此迅速。
 
 ### **深度学习的进展**
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -30,15 +30,15 @@
 
 深度学习算法在数据更多时表现更好，而这在机器学习算法中并不常见。
 
-![](../Images/bdd1f46f3b1d1f3c1c40f65ac876992b.png)
+![](img/bdd1f46f3b1d1f3c1c40f65ac876992b.png)
 
 **[来源](https://towardsdatascience.com/why-deep-learning-is-needed-over-traditional-machine-learning-1b6a99177063)**
 
 对于计算机视觉来说，这无疑是个好消息。它不仅使得训练深度学习算法时可以使用更多的图片和视频，还减轻了与数据标注和标签相关的工作量。
 
-零售行业在计算机视觉软件的应用上一直处于先锋地位。ASOS在2017年为其应用增加了按照片搜索选项，随后许多零售商也效仿。有些甚至更进一步，利用计算机视觉软件将在线和离线体验更紧密地结合在一起。
+零售行业在计算机视觉软件的应用上一直处于先锋地位。ASOS 在 2017 年为其应用增加了按照片搜索选项，随后许多零售商也效仿。有些甚至更进一步，利用计算机视觉软件将在线和离线体验更紧密地结合在一起。
 
-一家名为Lolli & Pops的美食糖果零售商使用面部识别技术来识别进店的常客。因此，店内员工能够通过提供个性化的产品推荐和偶尔的忠诚折扣来个性化购物体验。
+一家名为 Lolli & Pops 的美食糖果零售商使用面部识别技术来识别进店的常客。因此，店内员工能够通过提供个性化的产品推荐和偶尔的忠诚折扣来个性化购物体验。
 
 特殊待遇培养了品牌忠诚度，并将偶尔的顾客转变为常客，这对业务都是有益的。
 
@@ -46,7 +46,7 @@
 
 连接到互联网和云端的机器能够从网络收集的数据中学习并进行相应调整，从而优化系统性能。然而，连接互联网和云端并不总是有保障。这就是边缘计算发挥作用的地方。
 
-边缘计算指的是附加在物理机器上的技术，如燃气涡轮机、喷气发动机或MRI扫描仪。它允许数据在收集地点进行处理和分析，而不是在云端或数据中心完成。
+边缘计算指的是附加在物理机器上的技术，如燃气涡轮机、喷气发动机或 MRI 扫描仪。它允许数据在收集地点进行处理和分析，而不是在云端或数据中心完成。
 
 边缘计算并不会取代云计算。它只是让机器在需要时根据新的数据洞察单独行动。换句话说，边缘设备上的机器可以根据自身经验学习和调整，独立于更大的网络。
 
@@ -60,11 +60,11 @@
 
 最近在物体识别和跟踪中使用频率更高的技术是点云。简单来说，点云是定义在三维坐标系统中的数据点集合。
 
-这项技术通常用于一个空间内（例如一个房间或容器），其中每个物体的位置和形状由一组坐标（X、Y和Z）表示。这个坐标列表被称为“点云”。
+这项技术通常用于一个空间内（例如一个房间或容器），其中每个物体的位置和形状由一组坐标（X、Y 和 Z）表示。这个坐标列表被称为“点云”。
 
 此技术提供了物体在空间中的准确表示，并且任何运动都可以被准确跟踪。
 
-![](../Images/18884e21adc3b041ed2667a74ed37c40.png)
+![](img/18884e21adc3b041ed2667a74ed37c40.png)
 
 **[来源](https://www.hermary.com/learning/3d-vision-data-look-like/)**
 
@@ -102,7 +102,7 @@ Sephora 更新了他们的虚拟艺术家应用程序，提供实时 3D 面部�
 
 实例分割在像素级别识别物体轮廓，而语义分割则只是将像素分组到特定的物体组。让我们用气球的图像来说明这两种技术与其他技术的比较。
 
-![](../Images/3d73e4becb62d0f49d3d51f05a753849.png)
+![](img/3d73e4becb62d0f49d3d51f05a753849.png)
 
 **[来源](https://engineering.matterport.com/splash-of-color-instance-segmentation-with-mask-r-cnn-and-tensorflow-7c761e238b46)**
 
@@ -110,38 +110,38 @@ Sephora 更新了他们的虚拟艺术家应用程序，提供实时 3D 面部�
 
 +   语义分割：这些是所有的气球像素。
 
-+   物体检测：此图像中的这些位置有7个气球。我们开始考虑重叠的物体。
++   物体检测：此图像中的这些位置有 7 个气球。我们开始考虑重叠的物体。
 
-+   实例分割：这些位置有7个气球，这些是属于每个气球的像素。
++   实例分割：这些位置有 7 个气球，这些是属于每个气球的像素。
 
 将语义分割和实例分割方法结合起来，成为一种强大的工具。这不仅可以检测出图像中属于物体的所有像素，还可以确定这些像素属于哪个物体以及物体在图像中的位置。
 
 语义实例分割是用于土地覆盖分类的有用工具，具有多种应用。通过卫星图像进行土地映射可以帮助政府机构监测森林砍伐（特别是非法砍伐）、城市化、交通等。
 
-许多建筑公司也在使用这些数据进行城市规划和建筑开发。有些公司甚至更进一步，将其与AR设备结合，以了解他们的设计在现实生活中的样子。
+许多建筑公司也在使用这些数据进行城市规划和建筑开发。有些公司甚至更进一步，将其与 AR 设备结合，以了解他们的设计在现实生活中的样子。
 
-**简历**：[Valeryia Shchutskaya](https://www.linkedin.com/in/lersh/) 是[InData Labs](https://indatalabs.com/)的市场经理——一家提供AI驱动的软件和技术解决方案的专业服务公司，致力于帮助公司利用数据和机器学习算法创造业务价值。
+**简历**：[Valeryia Shchutskaya](https://www.linkedin.com/in/lersh/) 是[InData Labs](https://indatalabs.com/)的市场经理——一家提供 AI 驱动的软件和技术解决方案的专业服务公司，致力于帮助公司利用数据和机器学习算法创造业务价值。
 
 [原创](https://indatalabs.com/blog/data-science/trends-computer-vision-software-market?cli_action=1540045586.641)。经许可转载。
 
 **相关：**
 
-+   [使用USB摄像头和无线连接的树莓派构建监控系统](https://www.kdnuggets.com/2018/11/building-surveillance-system-usb-camera-wireless-connected-raspberry-pi.html)
++   [使用 USB 摄像头和无线连接的树莓派构建监控系统](https://www.kdnuggets.com/2018/11/building-surveillance-system-usb-camera-wireless-connected-raspberry-pi.html)
 
-+   [使用Python的基础图像数据分析 – 第4部分](https://www.kdnuggets.com/2018/10/basic-image-analysis-python-p4.html)
++   [使用 Python 的基础图像数据分析 – 第四部分](https://www.kdnuggets.com/2018/10/basic-image-analysis-python-p4.html)
 
-+   [如何在Kaggle比赛中获胜，如果你不是NLP专家](https://www.kdnuggets.com/2017/09/win-kaggle-nlp-not-expert.html)
++   [如何在 Kaggle 比赛中获胜，如果你不是 NLP 专家](https://www.kdnuggets.com/2017/09/win-kaggle-nlp-not-expert.html)
 
 ### 更多相关主题
 
-+   [探索计算机视觉的世界：介绍MLM的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
++   [探索计算机视觉的世界：介绍 MLM 的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
 
-+   [计算机视觉的5个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
++   [计算机视觉的 5 个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
 
-+   [KDnuggets新闻2022年3月9日：在5分钟内构建机器学习Web应用程序…](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习 Web 应用程序…](https://www.kdnuggets.com/2022/n10.html)
 
-+   [关于数据管理的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理的 6 件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [DINOv2：Meta AI的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
++   [DINOv2：Meta AI 的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
 
-+   [TensorFlow用于计算机视觉——简化迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 用于计算机视觉——简化迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)

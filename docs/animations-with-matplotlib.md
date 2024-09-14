@@ -1,36 +1,36 @@
-# 使用Matplotlib制作动画
+# 使用 Matplotlib 制作动画
 
-> 原文：[https://www.kdnuggets.com/2019/05/animations-with-matplotlib.html](https://www.kdnuggets.com/2019/05/animations-with-matplotlib.html)
+> 原文：[`www.kdnuggets.com/2019/05/animations-with-matplotlib.html`](https://www.kdnuggets.com/2019/05/animations-with-matplotlib.html)
 
-[评论](#comments)
+评论
 
 **由[Parul Pandey](https://www.linkedin.com/in/parul-pandey-a5498975/)，数据科学爱好者**
 
-![figure-name](../Images/5495a114c5b4b0da457f7b13a9ec48cd.png)[使用Matplotlib的雨滴模拟](https://matplotlib.org/gallery/animation/rain.htm)
+![figure-name](img/5495a114c5b4b0da457f7b13a9ec48cd.png)[使用 Matplotlib 的雨滴模拟](https://matplotlib.org/gallery/animation/rain.htm)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 动画是一种展示现象的有趣方式。我们作为人类总是对动画和互动图表充满兴趣，而不是静态图表。当描绘时间序列数据时，例如多年来的股票价格、过去十年的气候变化、季节性和趋势，动画显得更有意义，因为我们可以看到某一参数随时间的变化。
 
-上面的图像是一个[**雨滴模拟**](https://matplotlib.org/gallery/animation/rain.html)，它是使用Matplotlib库实现的，该库被亲切地称为**Python可视化包的祖父**。Matplotlib通过对50个散点的尺度和不透明度进行动画模拟雨滴落在表面上的效果。如今，Python拥有许多强大的可视化工具，如Plotly、Bokeh、Altair等。这些库能够实现最先进的动画效果和互动性。然而，本文的目的是突出介绍这个库中的一个不太被探讨的方面，即**动画**，我们将探讨一些实现动画的方法。
+上面的图像是一个[**雨滴模拟**](https://matplotlib.org/gallery/animation/rain.html)，它是使用 Matplotlib 库实现的，该库被亲切地称为**Python 可视化包的祖父**。Matplotlib 通过对 50 个散点的尺度和不透明度进行动画模拟雨滴落在表面上的效果。如今，Python 拥有许多强大的可视化工具，如 Plotly、Bokeh、Altair 等。这些库能够实现最先进的动画效果和互动性。然而，本文的目的是突出介绍这个库中的一个不太被探讨的方面，即**动画**，我们将探讨一些实现动画的方法。
 
 ### 概述
 
-[Matplotlib](http://matplotlib.org/)是一个Python 2D绘图库，也是最受欢迎的库之一。大多数人都以Matplotlib开始他们的数据可视化之旅。使用Matplotlib可以轻松生成图表、直方图、功率谱、条形图、误差图、散点图等。它还可以与Pandas和Seaborn等库无缝集成，以创建更复杂的可视化效果。
+[Matplotlib](http://matplotlib.org/)是一个 Python 2D 绘图库，也是最受欢迎的库之一。大多数人都以 Matplotlib 开始他们的数据可视化之旅。使用 Matplotlib 可以轻松生成图表、直方图、功率谱、条形图、误差图、散点图等。它还可以与 Pandas 和 Seaborn 等库无缝集成，以创建更复杂的可视化效果。
 
-Matplotlib的一些优秀特性包括：
+Matplotlib 的一些优秀特性包括：
 
-+   它的设计类似于MATLAB，因此在两者之间切换相当容易。
++   它的设计类似于 MATLAB，因此在两者之间切换相当容易。
 
 +   包含许多渲染后端。
 
@@ -38,7 +38,7 @@ Matplotlib的一些优秀特性包括：
 
 +   已经存在了十多年，因此拥有庞大的用户基础。
 
-然而，Matplotlib在某些领域并不那么突出，落后于其强大的对手。
+然而，Matplotlib 在某些领域并不那么突出，落后于其强大的对手。
 
 +   Matplotlib 有一个命令式 API，通常过于冗长。
 
@@ -50,7 +50,7 @@ Matplotlib的一些优秀特性包括：
 
 作为参考，这里有一份来自[**Datacamp**](https://s3.amazonaws.com/assets.datacamp.com/blog_assets/Python_Matplotlib_Cheat_Sheet.pdf)的 Matplotlib 备忘单，你可以通过它来巩固你的基础知识。
 
-![figure-name](../Images/426365c45208897271aec96766ddf50c.png)
+![figure-name](img/426365c45208897271aec96766ddf50c.png)
 
 ### 动画
 
@@ -70,7 +70,7 @@ Matplotlib 的 `animation` 基类处理动画部分。它提供了一个框架�
 
 一旦准备好，我们可以开始在 Jupyter Notebooks 中进行我们的第一个基础动画。本文的代码可以从相关的[**Github 仓库**](https://github.com/parulnith/Animations-with-Matplotlib)访问，或者你可以点击下面的图片在我的 binder 中查看它。
 
-![figure-name](../Images/dd4a24af5ff3e6272333553c003858a9.png)
+![figure-name](img/dd4a24af5ff3e6272333553c003858a9.png)
 
 ### **基础动画：移动的正弦波**
 
@@ -103,21 +103,21 @@ anim.save('sine_wave.gif', writer='imagemagick')
 
 ```
 
-![figure-name](../Images/9c0d243d924a97a321a807add52079fb.png)
+![figure-name](img/9c0d243d924a97a321a807add52079fb.png)
 
 +   在第 (7–9) 行，我们简单地创建了一个带有单个坐标轴的图形窗口。然后我们创建了一个空的线对象，该对象本质上是在动画中被修改的对象。线对象稍后将被填充数据。
 
 +   在第 (11–13) 行，我们创建了 `init` 函数来实现动画。`init` 函数初始化数据并设置坐标轴的限制。
 
-+   在第14到18行中，我们最终定义了动画函数，该函数以帧编号`i`作为参数，并创建一个正弦波（或其他动画），其偏移量取决于`i`的值。该函数返回一个包含已修改绘图对象的元组，这告诉动画框架哪些绘图部分应被动画化。
++   在第 14 到 18 行中，我们最终定义了动画函数，该函数以帧编号`i`作为参数，并创建一个正弦波（或其他动画），其偏移量取决于`i`的值。该函数返回一个包含已修改绘图对象的元组，这告诉动画框架哪些绘图部分应被动画化。
 
 +   在第**20**行中，我们创建实际的动画对象。`blit`参数确保只有那些已更改的绘图部分会被重新绘制。
 
-这就是在Matplotlib中创建动画的基本直觉。通过对代码进行一些调整，可以创建有趣的可视化效果。让我们来看看其中的一些。
+这就是在 Matplotlib 中创建动画的基本直觉。通过对代码进行一些调整，可以创建有趣的可视化效果。让我们来看看其中的一些。
 
 ### 一个增长的线圈
 
-同样，[GeeksforGeeks](https://www.geeksforgeeks.org/graph-plotting-python-set-3/) 上有一个很好的示例，演示如何创建形状。现在，让我们利用matplotlib的`animation`类创建一个缓慢展开的移动线圈。代码与正弦波图非常相似，只需进行少量调整。
+同样，[GeeksforGeeks](https://www.geeksforgeeks.org/graph-plotting-python-set-3/) 上有一个很好的示例，演示如何创建形状。现在，让我们利用 matplotlib 的`animation`类创建一个缓慢展开的移动线圈。代码与正弦波图非常相似，只需进行少量调整。
 
 ```py
 
@@ -168,7 +168,7 @@ anim.save('coil.gif',writer='imagemagick')
 
 ```
 
-![figure-name](../Images/66cc4f449043536a5a6598fd9f341f5c.png)
+![figure-name](img/66cc4f449043536a5a6598fd9f341f5c.png)
 
 ### 实时更新图表
 
@@ -207,15 +207,15 @@ plt.show()
 
 ```
 
-现在，打开终端并运行python文件。你将得到一个如下所示的图表，该图表会自动更新如下：
+现在，打开终端并运行 python 文件。你将得到一个如下所示的图表，该图表会自动更新如下：
 
-![figure-name](../Images/4a6e88e72608a817f55a9a29eafef265.png)
+![figure-name](img/4a6e88e72608a817f55a9a29eafef265.png)
 
-这里的间隔是1000毫秒，即一秒钟。
+这里的间隔是 1000 毫秒，即一秒钟。
 
-### 3D图形上的动画
+### 3D 图形上的动画
 
-创建3D图形是常见的，但如果我们能够对这些图形的视角进行动画处理呢？这个想法是改变相机视角，然后使用每个结果图像创建动画。在[The Python Graph Gallery](https://python-graph-gallery.com/342-animation-on-3d-plot/)中有一个很好的部分专门介绍了这一点。
+创建 3D 图形是常见的，但如果我们能够对这些图形的视角进行动画处理呢？这个想法是改变相机视角，然后使用每个结果图像创建动画。在[The Python Graph Gallery](https://python-graph-gallery.com/342-animation-on-3d-plot/)中有一个很好的部分专门介绍了这一点。
 
 在与笔记本相同的目录中创建一个名为**volcano**的文件夹。所有的图像将存储在这个文件夹中，然后在动画中使用。
 
@@ -255,7 +255,7 @@ plt.gca()
 
 ```
 
-这将会在Volcano文件夹中创建多个PNG文件。现在，使用ImageMagick将它们转换为动画。打开终端并导航到Volcano文件夹，然后输入以下命令：
+这将会在 Volcano 文件夹中创建多个 PNG 文件。现在，使用 ImageMagick 将它们转换为动画。打开终端并导航到 Volcano 文件夹，然后输入以下命令：
 
 ```py
 
@@ -263,11 +263,11 @@ convert -delay 10 Volcano*.png animated_volcano.gif
 
 ```
 
-![figure-name](../Images/eeb13aa85228fe4b855d296521488b23.png)
+![figure-name](img/eeb13aa85228fe4b855d296521488b23.png)
 
-### 使用Celluloid模块的动画
+### 使用 Celluloid 模块的动画
 
-[Celluloid](https://github.com/jwkvam/celluloid) 是一个简化在matplotlib中创建动画过程的Python模块。该库创建一个matplotlib图形，并从中创建一个`Camera`。然后重用图形，并在每帧创建后，通过相机拍摄快照。最后，用所有捕获的帧创建动画。
+[Celluloid](https://github.com/jwkvam/celluloid) 是一个简化在 matplotlib 中创建动画过程的 Python 模块。该库创建一个 matplotlib 图形，并从中创建一个`Camera`。然后重用图形，并在每帧创建后，通过相机拍摄快照。最后，用所有捕获的帧创建动画。
 
 **安装**
 
@@ -277,7 +277,7 @@ pip install celluloid
 
 ```
 
-这里是一些使用Celluloid模块的示例。
+这里是一些使用 Celluloid 模块的示例。
 
 **最小**
 
@@ -296,7 +296,7 @@ animation.save('celluloid_minimal.gif', writer = 'imagemagick')
 
 ```
 
-![figure-name](../Images/c63fd4dcb559b39fc765cb3434d68191.png)
+![figure-name](img/c63fd4dcb559b39fc765cb3434d68191.png)
 
 **子图**
 
@@ -319,7 +319,7 @@ animation.save('celluloid_subplots.gif', writer = 'imagemagick')
 
 ```
 
-![figure-name](../Images/0f3966016881025d1bc2d6e0c77b7ec9.png)
+![figure-name](img/0f3966016881025d1bc2d6e0c77b7ec9.png)
 
 **图例**
 
@@ -340,7 +340,7 @@ animation.save('celluloid_legends.gif', writer = 'imagemagick')
 
 ```
 
-![figure-name](../Images/70717418d39057c540045b6322003259.png)
+![figure-name](img/70717418d39057c540045b6322003259.png)
 
 ### 总结
 

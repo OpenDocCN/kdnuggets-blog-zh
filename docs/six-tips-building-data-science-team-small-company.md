@@ -1,22 +1,22 @@
 # 在小公司建立数据科学团队的六个建议
 
-> 原文：[https://www.kdnuggets.com/2021/01/six-tips-building-data-science-team-small-company.html](https://www.kdnuggets.com/2021/01/six-tips-building-data-science-team-small-company.html)
+> 原文：[`www.kdnuggets.com/2021/01/six-tips-building-data-science-team-small-company.html`](https://www.kdnuggets.com/2021/01/six-tips-building-data-science-team-small-company.html)
 
-[评论](#comments)
+评论
 
-**作者 [Zoe Zbar](https://www.linkedin.com/in/zoezbar/)，NYCDSA市场推广员 & [Raul Vallejo](https://www.linkedin.com/in/raul-vallejo/)，ION信用总监**
+**作者 [Zoe Zbar](https://www.linkedin.com/in/zoezbar/)，NYCDSA 市场推广员 & [Raul Vallejo](https://www.linkedin.com/in/raul-vallejo/)，ION 信用总监**
 
-![Image](../Images/9a547899fe6167a837181c6093e92c3e.png)
+![Image](img/9a547899fe6167a837181c6093e92c3e.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
@@ -30,9 +30,9 @@
 
 保持组织性是建立成功团队的最重要方面之一，但你不必重新发明轮子。有许多项目规划实践可以帮助为你的数据流程提供结构。例如，《数据科学需求层次结构》是一个很好的资源，有助于在规划过程中保持正轨和有序。
 
-![](../Images/bb5478df130de66fce6dc33bbb9c3313.png)
+![](img/bb5478df130de66fce6dc33bbb9c3313.png)
 
-立刻为公司提供AI解决方案是很好的，但在现实中，这之前需要建立许多基础。《数据科学需求层次结构》及其他类似的项目规划工具可以帮助你为公司的数据科学目标制定一个合理、可持续的路径。
+立刻为公司提供 AI 解决方案是很好的，但在现实中，这之前需要建立许多基础。《数据科学需求层次结构》及其他类似的项目规划工具可以帮助你为公司的数据科学目标制定一个合理、可持续的路径。
 
 ### **提示 #3: 及时报告成功**
 
@@ -58,7 +58,7 @@
 
 从那里开始，你可以进行调优和改进，一旦你有了一个可以工作的模型，这个过程会变得容易得多。
 
-你会发现，解决了80-90%的问题后，大部分解决方案就可以部署。花时间和资源来解决最后的10%问题将不再是数据科学问题，而是管理问题。
+你会发现，解决了 80-90%的问题后，大部分解决方案就可以部署。花时间和资源来解决最后的 10%问题将不再是数据科学问题，而是管理问题。
 
 ### **提示 #6: 像魔术师一样管理期望**
 
@@ -68,11 +68,11 @@
 
 创建数据科学部门是一项大任务，但虽然它很庞大，却也充满了回报和满足感。
 
-在最近的一次 [**网络研讨会**](https://www.youtube.com/watch?v=Kzi8oXyHMA0&feature=youtu.be)中，NYCDSA Bootcamp校友劳尔·巴列霍详细讲述了他如何在一家小公司建立数据科学部门。通过此讲座，他提供了来自第一手经验的洞见性建议并回答了观众的问题。
+在最近的一次 [**网络研讨会**](https://www.youtube.com/watch?v=Kzi8oXyHMA0&feature=youtu.be)中，NYCDSA Bootcamp 校友劳尔·巴列霍详细讲述了他如何在一家小公司建立数据科学部门。通过此讲座，他提供了来自第一手经验的洞见性建议并回答了观众的问题。
 
-**[佐伊·兹巴尔](https://www.linkedin.com/in/zoezbar/)** 是NYCDSA的市场营销研究员。
+**[佐伊·兹巴尔](https://www.linkedin.com/in/zoezbar/)** 是 NYCDSA 的市场营销研究员。
 
-**[劳尔·巴列霍](https://www.linkedin.com/in/raul-vallejo/)** 是ION的信贷总监。
+**[劳尔·巴列霍](https://www.linkedin.com/in/raul-vallejo/)** 是 ION 的信贷总监。
 
 [原文](https://nycdatascience.com/blog/student-works/six-tips-on-building-a-data-science-team-at-a-small-company/)。已获得许可转载。
 
@@ -82,7 +82,7 @@
 
 +   [你的数据科学团队所需的马斯洛需求层次](https://www.kdnuggets.com/2020/09/domino-leader-forrester-paml-data-science-team.html)
 
-+   [如何使远程工作对数据科学团队有效](2020/03/comet-remote-work-data-science-teams.html)
++   如何使远程工作对数据科学团队有效
 
 ### 更多相关话题
 
@@ -92,8 +92,8 @@
 
 +   [我作为数据科学家的前六个月](https://www.kdnuggets.com/2021/12/first-six-months-data-scientist.html)
 
-+   [为什么单独使用LLMs不能满足公司预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
++   [为什么单独使用 LLMs 不能满足公司预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
 
 +   [如何建立数据科学赋能团队：完整指南](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)
 
-+   [数据科学团队协作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队协作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)

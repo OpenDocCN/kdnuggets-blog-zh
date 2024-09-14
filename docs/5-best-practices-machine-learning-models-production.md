@@ -1,30 +1,30 @@
-# 将机器学习模型投入生产的5个最佳实践
+# 将机器学习模型投入生产的 5 个最佳实践
 
-> 原文：[https://www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html](https://www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html)
+> 原文：[`www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html`](https://www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html)
 
-[评论](#comments)
+评论
 
 **由 [Sigmoid Analytics](https://www.sigmoid.com/) 提供**
 
-![生产化ML模型](../Images/af39e966c63a0e29580f52ee9aa584e6.png)
+![生产化 ML 模型](img/af39e966c63a0e29580f52ee9aa584e6.png)
 
-在我们之前的文章中 – [在扩展ML模型时需要准备的5大挑战](https://www.sigmoid.com/blogs/5-challenges-to-be-prepared-for-before-scaling-machine-learning-models/)，我们讨论了生产化可扩展机器学习（ML）模型的五大挑战。本文的重点是建立使ML项目成功的最佳实践。
+在我们之前的文章中 – [在扩展 ML 模型时需要准备的 5 大挑战](https://www.sigmoid.com/blogs/5-challenges-to-be-prepared-for-before-scaling-machine-learning-models/)，我们讨论了生产化可扩展机器学习（ML）模型的五大挑战。本文的重点是建立使 ML 项目成功的最佳实践。
 
 当前的机器学习模型解决了各行各业中的各种具体业务挑战。选择机器学习模型的方法在很大程度上取决于我们试图解决的业务用例。但在进一步推进之前，我们应该确保选择的模型构建方法是可以投入生产的。
 
-**Sigmoid的前网络研讨会调查显示，43%的公司认为ML生产化和集成具有挑战性。**
+**Sigmoid 的前网络研讨会调查显示，43%的公司认为 ML 生产化和集成具有挑战性。**
 
 由于复杂性，必须在生产过程中尽早消除正确的风险。在模型选择和开发的早期阶段消除更多风险可以减少在生产化阶段的返工。
 
-机器学习生态系统中的各种考虑因素包括——数据集、技术栈、实施和集成这两者，以及部署ML模型的团队。然后是坚韧的测试框架，以确保业务结果的一致性。
+机器学习生态系统中的各种考虑因素包括——数据集、技术栈、实施和集成这两者，以及部署 ML 模型的团队。然后是坚韧的测试框架，以确保业务结果的一致性。
 
-通过使用以下最佳实践，Yum! Brands能够通过生产化他们的MAB模型进行个性化电子邮件营销，实现了8%的销售增长。**观看2分钟的视频，了解Yum的Scott Kasper解释最佳实践对生产化MAB模型的影响**
+通过使用以下最佳实践，Yum! Brands 能够通过生产化他们的 MAB 模型进行个性化电子邮件营销，实现了 8%的销售增长。**观看 2 分钟的视频，了解 Yum 的 Scott Kasper 解释最佳实践对生产化 MAB 模型的影响**
 
 **1\. 数据评估**
 
 首先，应检查数据的可行性——我们是否拥有足够的正确数据集来运行机器学习模型？我们是否能快速获得数据以进行预测？
 
-例如，拥有数百万注册客户数据的餐饮连锁（QSRs）。这一庞大的数据量足以让任何ML模型在其上运行。
+例如，拥有数百万注册客户数据的餐饮连锁（QSRs）。这一庞大的数据量足以让任何 ML 模型在其上运行。
 
 当上述数据风险得到缓解后，应该建立一个数据湖环境，以便轻松而强大地访问各种所需的数据源。数据湖（替代传统的数据仓库）可以节省团队大量的官僚和手动开销。
 
@@ -40,15 +40,15 @@
 
 在成功完成手动测试后，需要选择合适的技术。数据科学团队应该能够从多种技术栈中选择，以便他们可以实验并挑选出使机器学习生产化更容易的技术。
 
-选择的技术应根据稳定性、业务用例、未来场景和云准备情况进行基准测试。[Gartner](https://www.gartner.com/en/newsroom/press-releases/2019-11-13-gartner-forecasts-worldwide-public-cloud-revenue-to-grow-17-percent-in-2020) 统计数据表明，云IaaS预计将以24%的年增长率增长，直至2022年。
+选择的技术应根据稳定性、业务用例、未来场景和云准备情况进行基准测试。[Gartner](https://www.gartner.com/en/newsroom/press-releases/2019-11-13-gartner-forecasts-worldwide-public-cloud-revenue-to-grow-17-percent-in-2020) 统计数据表明，云 IaaS 预计将以 24%的年增长率增长，直至 2022 年。
 
-**观看1分钟的视频，Mayur Rustagi（CTO & 联合创始人 – Sigmoid）讲述了选择基础设施组件的有效方法**
+**观看 1 分钟的视频，Mayur Rustagi（CTO & 联合创始人 – Sigmoid）讲述了选择基础设施组件的有效方法**
 
 **3\. 强健的部署方法**
 
 标准化部署过程，使得在不同阶段的测试和集成变得顺畅，是强烈推荐的。
 
-数据工程师应专注于打磨代码库，集成模型（作为API端点或批量处理模型），并创建工作流自动化，以便团队可以轻松集成。
+数据工程师应专注于打磨代码库，集成模型（作为 API 端点或批量处理模型），并创建工作流自动化，以便团队可以轻松集成。
 
 拥有访问正确数据集和模型的完整环境对任何机器学习模型的成功至关重要。
 
@@ -56,7 +56,7 @@
 
 选择合适的框架用于日志记录、监控和报告结果，将使本来困难的测试过程变得可控。
 
-ML环境应进行实时测试并密切监控。在复杂的实验系统中，测试结果应反馈给数据工程团队，以便他们更新模型。
+ML 环境应进行实时测试并密切监控。在复杂的实验系统中，测试结果应反馈给数据工程团队，以便他们更新模型。
 
 例如，数据工程师可以决定在下一次迭代中加重表现出色的变体的权重，同时减少表现不佳的变体的权重。
 
@@ -82,21 +82,21 @@ ML环境应进行实时测试并密切监控。在复杂的实验系统中，测
 
 **相关：**
 
-+   [扩展机器学习模型的5大挑战](/2020/10/5-challenges-scaling-machine-learning-models.html)
++   扩展机器学习模型的 5 大挑战
 
-+   [机器学习模型部署](/2020/09/machine-learning-model-deployment.html)
++   机器学习模型部署
 
-+   [使用Python和Heroku创建并部署你的第一个Flask应用](/2020/09/flask-app-using-python-heroku.html)
++   使用 Python 和 Heroku 创建并部署你的第一个 Flask 应用
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
@@ -104,9 +104,9 @@ ML环境应进行实时测试并密切监控。在复杂的实验系统中，测
 
 +   [将机器学习算法完全部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [将ChatGPT集成到数据科学工作流程中的技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
++   [将 ChatGPT 集成到数据科学工作流程中的技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [创建领域特定AI模型的最佳实践](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)
++   [创建领域特定 AI 模型的最佳实践](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)
 
 +   [为生产优先考虑数据科学模型](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)
 

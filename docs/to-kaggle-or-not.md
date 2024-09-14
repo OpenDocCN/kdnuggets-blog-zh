@@ -1,8 +1,8 @@
 # 参加 Kaggle 还是不参加
 
-> 原文：[https://www.kdnuggets.com/2018/05/to-kaggle-or-not.html](https://www.kdnuggets.com/2018/05/to-kaggle-or-not.html)
+> 原文：[`www.kdnuggets.com/2018/05/to-kaggle-or-not.html`](https://www.kdnuggets.com/2018/05/to-kaggle-or-not.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 关于 Kaggle
 
@@ -14,11 +14,11 @@
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 方面
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 方面
 > 
 > * * *
 > 
@@ -50,37 +50,37 @@
 
 在多年的抗拒之后，我最近参加了第一次 Kaggle 比赛，[这是船还是冰山](https://www.kaggle.com/c/statoil-iceberg-classifier-challenge)。我写了一篇关于我的经历的文章 [我的第一次 Kaggle 比赛](https://reshamas.github.io/my-first-kaggle-competition/)。
 
-![](../Images/8da608af486826e69df075c0886a0cb5.png)
+![](img/8da608af486826e69df075c0886a0cb5.png)
 
-### Kaggle竞赛和纽约马拉松
+### Kaggle 竞赛和纽约马拉松
 
-我发现Kaggle竞赛很像纽约马拉松。**大多数人参加是为了过程，而不是为了赢得第一名。**
+我发现 Kaggle 竞赛很像纽约马拉松。**大多数人参加是为了过程，而不是为了赢得第一名。**
 
-### 结论：对Kaggle说“是”
+### 结论：对 Kaggle 说“是”
 
-我会说“是的”，参与Kaggle竞赛是有价值的，无论是对初学者还是有经验的数据科学家。以下是很多原因。
+我会说“是的”，参与 Kaggle 竞赛是有价值的，无论是对初学者还是有经验的数据科学家。以下是很多原因。
 
 **基准测试**
 
-虽然获取自己的数据集或抓取网络有学习上的好处，但缺点是没有基准，无法比较你的发现。可能会出现重大错误，而且没有人知道，因为没有进行验证。Kaggle竞赛提供了一个“检查工作”的平台。
+虽然获取自己的数据集或抓取网络有学习上的好处，但缺点是没有基准，无法比较你的发现。可能会出现重大错误，而且没有人知道，因为没有进行验证。Kaggle 竞赛提供了一个“检查工作”的平台。
 
 **适合所有级别的学习**
 
 对于初学者，有很多内容需要学习：
 
-+   熟悉Kaggle平台
++   熟悉 Kaggle 平台
 
-+   使用Kaggle [CLI](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/download_data_kaggle_cli.md) 或 [API](https://github.com/Kaggle/kaggle-api) 下载数据
++   使用 Kaggle [CLI](https://github.com/reshamas/fastai_deeplearn_part1/blob/master/tools/download_data_kaggle_cli.md) 或 [API](https://github.com/Kaggle/kaggle-api) 下载数据
 
 +   结构化的生态系统允许统计技能较少的人专注于此
 
 +   理解评估指标
 
-+   使用devops技能：Git，云计算
++   使用 devops 技能：Git，云计算
 
 +   练习
 
-+   Kaggle提供一些免费的互动 [教程](https://www.kaggle.com/learn/overview)
++   Kaggle 提供一些免费的互动 [教程](https://www.kaggle.com/learn/overview)
 
 对于有经验的从业者，总是有更多的学习内容：
 
@@ -92,9 +92,9 @@
 
 +   竞赛后分析获胜条目
 
-+   管理非常大的数据集（100万条记录或更多）
++   管理非常大的数据集（100 万条记录或更多）
 
-+   为深度学习设置支持GPU的机器
++   为深度学习设置支持 GPU 的机器
 
 +   使用深度学习并与传统算法比较结果
 
@@ -106,7 +106,7 @@
 
 **作品集部分**
 
-的确，做一次Kaggle竞赛并不能使你成为数据科学家。参加一节课程、一次会议教程、分析一个数据集或阅读一本数据科学书籍也不能。参与竞赛增加了你的经验并增强了你的作品集。这是你其他项目的补充，而不是衡量数据科学技能的唯一标准。
+的确，做一次 Kaggle 竞赛并不能使你成为数据科学家。参加一节课程、一次会议教程、分析一个数据集或阅读一本数据科学书籍也不能。参与竞赛增加了你的经验并增强了你的作品集。这是你其他项目的补充，而不是衡量数据科学技能的唯一标准。
 
 **乐趣**
 
@@ -128,7 +128,7 @@
 
 **Slack**
 
-Kaggle 有一个 Slack 团队：[KaggleNoobs slack channel](http://kagglenoobs.herokuapp.com)。这里有将近4000名成员，还有一个AMA（问我任何事）频道，他们定期采访 Kaggle 参与者和获胜者。
+Kaggle 有一个 Slack 团队：[KaggleNoobs slack channel](http://kagglenoobs.herokuapp.com)。这里有将近 4000 名成员，还有一个 AMA（问我任何事）频道，他们定期采访 Kaggle 参与者和获胜者。
 
 **选择**
 
@@ -160,9 +160,9 @@ Kaggle 有一个 Slack 团队：[KaggleNoobs slack channel](http://kagglenoobs.h
 
 ### 参考文献
 
-[Jeremy Howard 关于深度学习、Kaggle、数据科学等的采访](https://www.kdnuggets.com/2017/01/exclusive-interview-jeremy-howard-deep-learning-kaggle-data-science.html)，2017年
+[Jeremy Howard 关于深度学习、Kaggle、数据科学等的采访](https://www.kdnuggets.com/2017/01/exclusive-interview-jeremy-howard-deep-learning-kaggle-data-science.html)，2017 年
 
-[我的 Kaggle 经验与争夺名额的退休](https://blog.kaggle.com/2016/02/10/my-kaggle-experience-spot-chasing-retirement/)，Marios Michailidis，2016年
+[我的 Kaggle 经验与争夺名额的退休](https://blog.kaggle.com/2016/02/10/my-kaggle-experience-spot-chasing-retirement/)，Marios Michailidis，2016 年
 
 [机器学习不是 Kaggle 比赛](https://jvns.ca/blog/2014/06/19/machine-learning-isnt-kaggle-competitions/)，Julia Evans, 2014
 

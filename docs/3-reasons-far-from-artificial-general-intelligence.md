@@ -1,14 +1,14 @@
-# 我们距离实现通用人工智能的3个原因
+# 我们距离实现通用人工智能的 3 个原因
 
-> 原文：[https://www.kdnuggets.com/2020/04/3-reasons-far-from-artificial-general-intelligence.html](https://www.kdnuggets.com/2020/04/3-reasons-far-from-artificial-general-intelligence.html)
+> 原文：[`www.kdnuggets.com/2020/04/3-reasons-far-from-artificial-general-intelligence.html`](https://www.kdnuggets.com/2020/04/3-reasons-far-from-artificial-general-intelligence.html)
 
-[评论](#comments)
+评论
 
 **[Etienne Bennequin](https://www.linkedin.com/in/etienne-bennequin-55931a101)，数据科学家 @ Sicara**
 
 这又发生了。上周，当我向某人解释我的工作时，他们打断我说：“所以你是在建设天网。”我觉得我必须给他们展示这个表情包，我认为它很准确地描述了我当前的状况。
 
-<picture>![通用人工智能表情包](../Images/20f152da4c1feaef01e2b1df8fb82470.png)</picture>
+<picture>![通用人工智能表情包](img/20f152da4c1feaef01e2b1df8fb82470.png)</picture>
 
 ### 通用人工智能与实用思维
 
@@ -32,7 +32,7 @@
 
 有[成千上万的理论](https://www.britannica.com/science/human-intelligence-psychology/Cognitive-theories)旨在定义人类智力的性质，涵盖心理学、生物学、遗传学、社会学、认知科学、数学、神学等领域……我对这些领域几乎一无所知。好消息是：我们只需专注于人类智力的特征描述。
 
-如果我们想更接近人工通用智能，我们最好的办法不是试图复制人脑。AGI的定义是功能性的：一个能够做任何人类可以做的事情的AI。那么，人类智能能做什么呢？
+如果我们想更接近人工通用智能，我们最好的办法不是试图复制人脑。AGI 的定义是功能性的：一个能够做任何人类可以做的事情的 AI。那么，人类智能能做什么呢？
 
 当然，我们不能在这里列出一个详尽的清单。但我们可以想到很多特征：
 
@@ -72,17 +72,17 @@
 
 根据[结构性认知可塑性](https://www.thinkingconnections.org/theory/SCM.shtml)理论，智力被定义为“人类独特的倾向，即改变或修改其认知功能的结构以适应生活情况的变化需求”。不可否认的是，我们人类非常擅长适应重大变化。在最年轻的年龄阶段，我们的身体和环境变化非常快，但婴儿能够适应这些变化并继续学习。
 
-但在当前的机器学习状态下，没有办法让AI适应如此剧烈的变化。我认为我有一个完美的例子来展示我们目前的状况。
+但在当前的机器学习状态下，没有办法让 AI 适应如此剧烈的变化。我认为我有一个完美的例子来展示我们目前的状况。
 
-### ObjectNet的例子
+### ObjectNet 的例子
 
-几个月前，MIT的学生发布了[ObjectNet](http://news.mit.edu/2019/object-recognition-dataset-stumped-worlds-best-computer-vision-models-1210)。这是一个用于物体识别算法测试的数据集。它完全由来自奇怪角度或不寻常环境的物体图片组成。
+几个月前，MIT 的学生发布了[ObjectNet](http://news.mit.edu/2019/object-recognition-dataset-stumped-worlds-best-computer-vision-models-1210)。这是一个用于物体识别算法测试的数据集。它完全由来自奇怪角度或不寻常环境的物体图片组成。
 
-![图](../Images/2fbdd17085f973727050150cabef8869.png)
+![图](img/2fbdd17085f973727050150cabef8869.png)
 
-床上的烤箱手套或手上的锤子只是ObjectNet中幻想的两个例子
+床上的烤箱手套或手上的锤子只是 ObjectNet 中幻想的两个例子
 
-人类从来不会在识别这些物体时遇到任何问题。因此，人工通用智能也不会。然而，当在这个数据集上进行测试时，最先进算法的准确率相比于它们在ImageNet常规测试集上的表现下降了40-45%。即使这些算法已经训练过成千上万的锤子或烤箱手套，当它们在之前未见过的环境中出现时，它们也无法识别。
+人类从来不会在识别这些物体时遇到任何问题。因此，人工通用智能也不会。然而，当在这个数据集上进行测试时，最先进算法的准确率相比于它们在 ImageNet 常规测试集上的表现下降了 40-45%。即使这些算法已经训练过成千上万的锤子或烤箱手套，当它们在之前未见过的环境中出现时，它们也无法识别。
 
 其原因在于，最先进的机器学习算法在超出它们所训练的分布范围时，泛化能力较差。它们擅长的是在这个分布内部进行外推。这意味着，如果你展示给它们一张与它们已经经历过的图像相似的图像，只要这张图像在它们从已经展示给它们的图像中建立的世界观中具有很高的概率存在，它们就能很好地处理这张图像。但目前，人工智能的想象能力非常有限。这使得它们的世界观过于受限于已展示的例子。
 
@@ -104,7 +104,7 @@
 
 组成性的意义可能乍看不清楚。Chrome 甚至坚持说这不是一个词。所以我们从定义开始。组成性是从有限的组合集中学习关于更大组合集的知识。让我们看看这个典型社交网络垃圾的例子。
 
-<picture>![如果你是人工通用智能，请解决这个问题](../Images/3ca0cf9ebc7f60856e7f448848857e9d.png)</picture>
+<picture>![如果你是人工通用智能，请解决这个问题](img/3ca0cf9ebc7f60856e7f448848857e9d.png)</picture>
 
 ### 你是天才吗？
 
@@ -114,7 +114,7 @@
 
 更普遍地说，我们总是在组合元素。为了发明新概念、新对象，并理解它们。在 2015 年，Brenden Lake 和他的团队在他们的论文《通过概率程序归纳进行人类级别的概念学习》中选择了交通工具的例子。
 
-![图像](../Images/bfd3bddb7f96b74f8e3e0aab51ac8843.png)
+![图像](img/bfd3bddb7f96b74f8e3e0aab51ac8843.png)
 
 这个奇怪的独轮车是由其他交通工具的元素重组而成的。
 
@@ -122,7 +122,7 @@
 
 ### 数学插曲：零概率
 
-![图像](../Images/52046f8696c64c13758a7f609b74882e.png)
+![图像](img/52046f8696c64c13758a7f609b74882e.png)
 
 “概率为零”不同于“没有出现过”
 
@@ -142,9 +142,9 @@
 
 很难想象，当你不专注于呼吸（甚至当你在睡觉时），你的身体如何将呼吸处理为吸气和呼气的二元性。这一过程更可能被视为许多生物现象的组合（许多器官的收缩和放松、氧气从空气到血液的转移、二氧化碳从血液到空气的转移……）。
 
-这就是有意识推理的特性：它能够通过非常高层次的概念来处理现实。通常，这些概念可以用词语或句子来表达。为了理解这一点，我在[Yoshua Bengio在NeurIPS 2019的演讲](https://www.youtube.com/watch?v=T3sxeTgT4qc)中听到了最好的例子，这也恰好激发了这篇文章的灵感。
+这就是有意识推理的特性：它能够通过非常高层次的概念来处理现实。通常，这些概念可以用词语或句子来表达。为了理解这一点，我在[Yoshua Bengio 在 NeurIPS 2019 的演讲](https://www.youtube.com/watch?v=T3sxeTgT4qc)中听到了最好的例子，这也恰好激发了这篇文章的灵感。
 
-![Figure](../Images/1e6b097b08b324951d8f0b2e8930b39a.png)
+![Figure](img/1e6b097b08b324951d8f0b2e8930b39a.png)
 
 摄影师：[Jaromír Kavan](https://unsplash.com/@jerrykavan)
 
@@ -154,43 +154,43 @@
 
 ### 全球工作空间理论
 
-<picture>![](../Images/cd692db92e2c993c6e0e80e1d6ab16e0.png)</picture>
+<picture>![](img/cd692db92e2c993c6e0e80e1d6ab16e0.png)</picture>
 
 在认知科学中，[全球工作空间理论](https://en.wikipedia.org/wiki/Global_workspace_theory)建议存在信息瓶颈。在每一时刻，只有极少量的所有感知信息通过这个瓶颈进行过滤，并在整个大脑中广播。信息的连续流动概念已受到社区的广泛质疑。然而，这里有一个有趣的启示。我们在意识推理过程中操控的高级概念是基于低级的、高维度的信息。这些感知都进入了瓶颈。
 
-这为新兴的机器学习领域——注意力机制提供了灵感。它们在2015年由Dzmitry Bahdanau和蒙特利尔大学的研究人员[首次提出](https://arxiv.org/abs/1409.0473)。自那时以来，注意力机制在神经机器翻译和自然语言处理领域取得了巨大进展，以及其他技术改进。例如，它们提出了一种有效的解决梯度消失问题的方法，这是深度神经网络中的一个常见问题。
+这为新兴的机器学习领域——注意力机制提供了灵感。它们在 2015 年由 Dzmitry Bahdanau 和蒙特利尔大学的研究人员[首次提出](https://arxiv.org/abs/1409.0473)。自那时以来，注意力机制在神经机器翻译和自然语言处理领域取得了巨大进展，以及其他技术改进。例如，它们提出了一种有效的解决梯度消失问题的方法，这是深度神经网络中的一个常见问题。
 
 注意力机制背后的逻辑很简单：通过一次只关注少量输入元素来简化计算。这听起来熟悉吗？如果我们继续研究注意力机制，我们可能会更接近人类将成千上万的低级感知与少量可以意识操控的高级概念联系起来的能力。
 
 ### 好吧，但我们距离通用人工智能还有多远？
 
-我之前提到过：非常遥远。我们必须认识到，在这三个话题中，即使我们可以希望在不久的将来取得巨大进展，我们仍然离人类表现非常遥远。我们还必须记住，这三点是最有前景的改进方向，但解决这些问题不足以实现AGI。
+我之前提到过：非常遥远。我们必须认识到，在这三个话题中，即使我们可以希望在不久的将来取得巨大进展，我们仍然离人类表现非常遥远。我们还必须记住，这三点是最有前景的改进方向，但解决这些问题不足以实现 AGI。
 
-通用人工智能是一个令人兴奋的流行词，因为它要么是巨大的承诺，要么是可怕的威胁。像其他流行词一样，它必须小心处理。我必须承认，在这篇文章中，我把它当作引起你对意识推理、组合性和分布外泛化的注意的借口。因为与奇点或AGI不同，它们代表了改进机器学习算法的实际方法，并真正提升人工智能的表现。
+通用人工智能是一个令人兴奋的流行词，因为它要么是巨大的承诺，要么是可怕的威胁。像其他流行词一样，它必须小心处理。我必须承认，在这篇文章中，我把它当作引起你对意识推理、组合性和分布外泛化的注意的借口。因为与奇点或 AGI 不同，它们代表了改进机器学习算法的实际方法，并真正提升人工智能的表现。
 
-我希望你在阅读这篇文章时过得愉快。我也希望当你读到最后几段时，你对如何从人类智能中学习以改进我们的算法充满了渴望。如果是这样，我建议你花时间观看[这个由Yoshua Bengio主讲的会议](https://www.youtube.com/watch?v=T3sxeTgT4qc)，它启发了这篇文章。如果你会说法语，你还可以观看[这个视频](https://www.youtube.com/watch?v=58Dh6aoUJ_8&t=1s)，在其中我向Sicara团队解释了这些概念。
+我希望你在阅读这篇文章时过得愉快。我也希望当你读到最后几段时，你对如何从人类智能中学习以改进我们的算法充满了渴望。如果是这样，我建议你花时间观看[这个由 Yoshua Bengio 主讲的会议](https://www.youtube.com/watch?v=T3sxeTgT4qc)，它启发了这篇文章。如果你会说法语，你还可以观看[这个视频](https://www.youtube.com/watch?v=58Dh6aoUJ_8&t=1s)，在其中我向 Sicara 团队解释了这些概念。
 
-**简介: [Etienne Bennequin](https://www.linkedin.com/in/etienne-bennequin-55931a101)** (**[@bennequin](https://twitter.com/bennequin)**) 是Sicara的数据科学家。
+**简介: [Etienne Bennequin](https://www.linkedin.com/in/etienne-bennequin-55931a101)** (**[@bennequin](https://twitter.com/bennequin)**) 是 Sicara 的数据科学家。
 
 [原文](https://www.sicara.ai/blog/artificial-general-intelligence)。经许可转载。
 
 **相关：**
 
-+   [人工智能中的当前炒作周期](/2018/02/current-hype-cycle-artificial-intelligence.html)
++   人工智能中的当前炒作周期
 
-+   [人工智能/机器驱动的世界是否优于人类驱动的世界？](/2018/03/ai-machine-driven-world.html)
++   人工智能/机器驱动的世界是否优于人类驱动的世界？
 
-+   [AGI/深度学习的联系](/2018/02/agi-deep-learning-connection.html)
++   AGI/深度学习的联系
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 
 * * *
 
@@ -198,12 +198,12 @@
 
 +   [人工智能/机器学习技术整合将如何帮助企业实现……](https://www.kdnuggets.com/2021/12/aiml-technology-integration-help-business-achieving-goals-2022.html)
 
-+   [避免数据科学职业的前5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [避免数据科学职业的前 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [通用语义层对您的数据堆栈有益的6个原因](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
++   [通用语义层对您的数据堆栈有益的 6 个原因](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
 
 +   [为何应使用线性回归模型而非……](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [不应使用机器学习的4个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [不应使用机器学习的 4 个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
-+   [数据科学家应使用LightGBM的3个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
++   [数据科学家应使用 LightGBM 的 3 个理由](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)

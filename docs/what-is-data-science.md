@@ -1,10 +1,10 @@
 # 数据科学到底是什么？
 
-> 原文：[https://www.kdnuggets.com/2018/09/what-is-data-science.html](https://www.kdnuggets.com/2018/09/what-is-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/09/what-is-data-science.html`](https://www.kdnuggets.com/2018/09/what-is-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/56a195e2da2487d86cf0a146e6c5454d.png)
+![](img/56a195e2da2487d86cf0a146e6c5454d.png)
 
 请看我最简洁的尝试：
 
@@ -12,11 +12,11 @@
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT需求
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 > 
 > * * *
 > 
@@ -40,15 +40,15 @@
 
 就这样，数据科学诞生了。我第一次听到的工作定义是“**数据科学家**是一个**统计学家**，但能编码。”对此我有很多看法，[稍后](https://medium.com/@kozyrkov/is-data-science-a-bubble-c70ceac0f264)会详细讲述，但首先，我们不妨看看数据科学本身？
 
-![](../Images/39c4f3f1c5ac60ebf5ea4d81aad0ab33.png)
+![](img/39c4f3f1c5ac60ebf5ea4d81aad0ab33.png)
 
-[Twitter定义](https://twitter.com/cdixon/status/428914681911070720) 约2014年。
+[Twitter 定义](https://twitter.com/cdixon/status/428914681911070720) 约 2014 年。
 
-我喜欢2003年[*数据科学杂志*](http://www.jds-online.com/)的发布方式，它直接聚焦于最狭窄的范围：*“我们所说的‘数据科学’几乎指的是与数据有关的****所有****事物。”* 所以……一切都包括在内？很难想到什么是不涉及信息的。（我应该停止思考这个问题，以免我的脑袋爆炸。）
+我喜欢 2003 年[*数据科学杂志*](http://www.jds-online.com/)的发布方式，它直接聚焦于最狭窄的范围：*“我们所说的‘数据科学’几乎指的是与数据有关的****所有****事物。”* 所以……一切都包括在内？很难想到什么是不涉及信息的。（我应该停止思考这个问题，以免我的脑袋爆炸。）
 
 从那时起，我们见证了无数的意见，从康威广为流传的维恩图（*见下*）到梅森和威金斯的[经典帖子](http://www.dataists.com/2010/09/a-taxonomy-of-data-science/)。
 
-![](../Images/26afe4072e47bd4a98518363b249ce27.png)
+![](img/26afe4072e47bd4a98518363b249ce27.png)
 
 [Drew Conway](http://drewconway.com/) 对数据科学的定义。我的个人喜好更倾向于 [Wikipedia](https://en.wikipedia.org/wiki/Data_science) 上的定义。
 
@@ -64,7 +64,7 @@
 
 好吧，我们用图片来争论一下吧。
 
-![](../Images/30fe1ef2306fbfc708aa587e08b90383.png)
+![](img/30fe1ef2306fbfc708aa587e08b90383.png)
 
 这是为你准备的数据科学地图，完全忠于 [Wikipedia](https://en.wikipedia.org/wiki/Data_science) 的定义。
 
@@ -76,7 +76,7 @@
 
 剧情发展够多了！这是我提出的分类法：
 
-![](../Images/556dd420d35a68edfed151b38590d1be.png)
+![](img/556dd420d35a68edfed151b38590d1be.png)
 
 ### 无-一-多
 
@@ -88,7 +88,7 @@
 
 所以这是为你准备的新决策导向图，包含了三种主要的方法来使你的数据有用。
 
-![](../Images/e6477f4ef1939097b3bee62c29154a16.png)
+![](img/e6477f4ef1939097b3bee62c29154a16.png)
 
 ### 数据挖掘
 
@@ -110,17 +110,17 @@
 
 > *灵感便宜，但严谨却昂贵。*
 
-如果你打算做出高质量、风险控制的重大决策，这些决策依赖于对超出你可用数据的世界的结论，你将需要将统计技能带入你的团队。一个很好的例子是，当你的手指悬停在AI系统的启动按钮上时，你突然想到需要在发布之前检查它是否有效（始终是个好主意，认真说）。离开按钮，叫上统计学家。
+如果你打算做出高质量、风险控制的重大决策，这些决策依赖于对超出你可用数据的世界的结论，你将需要将统计技能带入你的团队。一个很好的例子是，当你的手指悬停在 AI 系统的启动按钮上时，你突然想到需要在发布之前检查它是否有效（始终是个好主意，认真说）。离开按钮，叫上统计学家。
 
 > *统计学是改变你思维的科学（在不确定性中）。*
 
-如果你想了解更多，我写了[这篇8分钟的统计学超级总结](https://towardsdatascience.com/statistics-for-people-in-a-hurry-a9613c0ed0b)供你欣赏。
+如果你想了解更多，我写了[这篇 8 分钟的统计学超级总结](https://towardsdatascience.com/statistics-for-people-in-a-hurry-a9613c0ed0b)供你欣赏。
 
 ### 机器学习
 
-机器学习本质上是[使用示例而不是说明制作事物标记的配方。](https://hackernoon.com/the-simplest-explanation-of-machine-learning-youll-ever-read-bebc0700047c) 我写了一些相关文章，包括它是否[不同于AI](https://medium.com/@kozyrkov/are-you-using-the-term-ai-incorrectly-911ac23ab4f5)，如何[入门](https://hackernoon.com/imagine-a-drunk-island-advice-for-finding-ai-use-cases-8d47495d4c3f)，[企业为何在此失败](https://hackernoon.com/why-businesses-fail-at-machine-learning-fbff41c4d5db)，以及一系列通俗语言解析术语细节的前几篇文章（[从这里开始](https://towardsdatascience.com/explaining-supervised-learning-to-a-kid-c2236f423e0f)）。哦，如果你想与不懂英语的朋友分享，其中一些文章已经翻译[在这里](https://medium.com/@kozyr_91350/)。
+机器学习本质上是[使用示例而不是说明制作事物标记的配方。](https://hackernoon.com/the-simplest-explanation-of-machine-learning-youll-ever-read-bebc0700047c) 我写了一些相关文章，包括它是否[不同于 AI](https://medium.com/@kozyrkov/are-you-using-the-term-ai-incorrectly-911ac23ab4f5)，如何[入门](https://hackernoon.com/imagine-a-drunk-island-advice-for-finding-ai-use-cases-8d47495d4c3f)，[企业为何在此失败](https://hackernoon.com/why-businesses-fail-at-machine-learning-fbff41c4d5db)，以及一系列通俗语言解析术语细节的前几篇文章（[从这里开始](https://towardsdatascience.com/explaining-supervised-learning-to-a-kid-c2236f423e0f)）。哦，如果你想与不懂英语的朋友分享，其中一些文章已经翻译[在这里](https://medium.com/@kozyr_91350/)。
 
-![](../Images/5003710b0bdbd4f51fb54c7ae43fc600.png)
+![](img/5003710b0bdbd4f51fb54c7ae43fc600.png)
 
 ### **数据工程**
 

@@ -1,32 +1,32 @@
 # 处理机器学习中的类别特征
 
-> 原文：[https://www.kdnuggets.com/2019/07/categorical-features-machine-learning.html](https://www.kdnuggets.com/2019/07/categorical-features-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/07/categorical-features-machine-learning.html`](https://www.kdnuggets.com/2019/07/categorical-features-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Hugo Ferreira](https://www.linkedin.com/in/hugo-ferreira8)，数据科学家 | 机器学习爱好者 | 物理学家**
 
-如何在Python中轻松实现独热编码
+如何在 Python 中轻松实现独热编码
 
-![figure-name](../Images/dc204dce3ab7ebd72a010b66b8188048.png)照片由[Max Nelson](https://unsplash.com/@maxcodes?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+![figure-name](img/dc204dce3ab7ebd72a010b66b8188048.png)照片由[Max Nelson](https://unsplash.com/@maxcodes?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
 类别数据在许多数据科学和机器学习问题中很常见，但通常比数值数据更具挑战性。特别是，许多机器学习算法要求其输入为数值，因此必须将类别特征转换为数值特征，才能使用这些算法。
 
-转换这些特征的最常见方法之一是**独热编码**类别特征，特别是当类别之间没有自然顺序时（例如，一个包含城市名称如‘伦敦’，‘里斯本’，‘柏林’等的特征‘City’）。对于特征的每一个唯一值（比如‘伦敦’），会创建一列（例如‘City_London’），当实例的原始特征取该值时，该列的值为1，否则为0。
+转换这些特征的最常见方法之一是**独热编码**类别特征，特别是当类别之间没有自然顺序时（例如，一个包含城市名称如‘伦敦’，‘里斯本’，‘柏林’等的特征‘City’）。对于特征的每一个唯一值（比如‘伦敦’），会创建一列（例如‘City_London’），当实例的原始特征取该值时，该列的值为 1，否则为 0。
 
-尽管这种编码方式非常常见，但在使用Python中的scikit-learn时实现起来可能会很令人沮丧，因为目前没有简单的转换器可用，特别是当你想将其作为机器学习管道的一部分使用时。在这篇文章中，我将描述如何仅使用scikit-learn和pandas来实现它（但需要一点努力）。但是，在那之后，我还会展示如何使用[类别编码库](http://contrib.scikit-learn.org/categorical-encoding/index.html)以更简单的方式实现相同的功能。
+尽管这种编码方式非常常见，但在使用 Python 中的 scikit-learn 时实现起来可能会很令人沮丧，因为目前没有简单的转换器可用，特别是当你想将其作为机器学习管道的一部分使用时。在这篇文章中，我将描述如何仅使用 scikit-learn 和 pandas 来实现它（但需要一点努力）。但是，在那之后，我还会展示如何使用[类别编码库](http://contrib.scikit-learn.org/categorical-encoding/index.html)以更简单的方式实现相同的功能。
 
 为了说明整个过程，我将使用[乳腺癌数据集](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer)来自[UCI 机器学习仓库](https://archive.ics.uci.edu/ml/index.html)，该数据集有许多分类特征，可以用来实现一热编码。
 
@@ -46,7 +46,7 @@ df = (pd.read_csv('breast-cancer.data',
         .replace({'?': 'unknown'}))  # NaN are represented by '?'
 ```
 
-该数据集有286个实例，包含9个特征和一个目标（‘Class’）。目标和特征在数据集描述中如下：
+该数据集有 286 个实例，包含 9 个特征和一个目标（‘Class’）。目标和特征在数据集描述中如下：
 
 ```py
  1\. Class: no-recurrence-events, recurrence-events.
@@ -107,7 +107,7 @@ from sklearn.preprocessing import OneHotEncoderohe = OneHotEncoder(sparse=False)
 X_train_ohe = ohe.fit_transform(X_train)
 ```
 
-如果我们尝试应用上述代码，会得到一个`ValueError`，因为`OneHotEncoder`要求所有值必须是整数，而不是我们所用的字符串。这意味着我们首先必须将所有可能的值编码为整数：对于一个特征，如果它有*n*个可能值（由*n*个不同的字符串给出），我们将它们编码为介于0和*n*-1之间的整数。幸运的是，scikit-learn中还有另一个[转换器](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html)，叫做`LabelEncoder`，正是用来做这件事的！
+如果我们尝试应用上述代码，会得到一个`ValueError`，因为`OneHotEncoder`要求所有值必须是整数，而不是我们所用的字符串。这意味着我们首先必须将所有可能的值编码为整数：对于一个特征，如果它有*n*个可能值（由*n*个不同的字符串给出），我们将它们编码为介于 0 和*n*-1 之间的整数。幸运的是，scikit-learn 中还有另一个[转换器](http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html)，叫做`LabelEncoder`，正是用来做这件事的！
 
 ```py
 from sklearn.preprocessing import LabelEncoderle = LabelEncoder()
@@ -235,11 +235,11 @@ import category_encoders as ce
 
 **相关:**
 
-+   [特征提取的外星人指南](/2019/06/hitchhikers-guide-feature-extraction.html)
++   特征提取的外星人指南
 
-+   [掌握机器学习数据准备的7个步骤（Python版）— 2019年版](/2019/06/7-steps-mastering-data-preparation-python.html)
++   掌握机器学习数据准备的 7 个步骤（Python 版）— 2019 年版
 
-+   [特征工程快速指南](/2019/02/quick-guide-feature-engineering.html)
++   特征工程快速指南
 
 ### 更多相关内容
 
@@ -247,10 +247,10 @@ import category_encoders as ce
 
 +   [数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，深入分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

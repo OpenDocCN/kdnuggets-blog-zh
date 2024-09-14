@@ -1,30 +1,30 @@
-# MLOps的绝对基础
+# MLOps 的绝对基础
 
-> 原文：[https://www.kdnuggets.com/2022/09/absolute-basics-mlops.html](https://www.kdnuggets.com/2022/09/absolute-basics-mlops.html)
+> 原文：[`www.kdnuggets.com/2022/09/absolute-basics-mlops.html`](https://www.kdnuggets.com/2022/09/absolute-basics-mlops.html)
 
-![MLOps的绝对基础](../Images/492da8189347b9d80c01bb2a8e9228fb.png)
+![MLOps 的绝对基础](img/492da8189347b9d80c01bb2a8e9228fb.png)
 
 图片来源：作者
 
-本文适合那些对MLOps一无所知或想刷新记忆的人。你可能在LinkedIn上浏览、阅读博客、参加AI会议等时听说过MLOps。
+本文适合那些对 MLOps 一无所知或想刷新记忆的人。你可能在 LinkedIn 上浏览、阅读博客、参加 AI 会议等时听说过 MLOps。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
 让我们开始吧。
 
-# 什么是MLOps？
+# 什么是 MLOps？
 
-MLOps代表机器学习操作，是机器学习、DevOps和数据工程的结合。本文将对每一项进行定义。
+MLOps 代表机器学习操作，是机器学习、DevOps 和数据工程的结合。本文将对每一项进行定义。
 
 **机器学习**使模型能够通过探索数据和识别模式，利用过去的经验进行学习和改进，几乎无需人工干预。
 
@@ -34,13 +34,13 @@ MLOps代表机器学习操作，是机器学习、DevOps和数据工程的结合
 
 这三者结合起来，以可靠和高效的方式部署和维护机器学习系统。
 
-# MLOps的目标是什么？
+# MLOps 的目标是什么？
 
 在处理模型时，可能会变得很混乱。运行可能会耗时，尝试联系团队其他成员时可能会出现问题，并可能导致通信中的重大问题。
 
 ## 将数据科学家纳入视野
 
-数据科学家有时不会与团队中的其他技术专家合作。他们的角色和责任不同，有时无需沟通。然而，随着模型的开发，数据科学家的合作变得至关重要，因为他们负责从数据集中提取、清理和收集洞察，这些洞察随后被用于构建AI模型。
+数据科学家有时不会与团队中的其他技术专家合作。他们的角色和责任不同，有时无需沟通。然而，随着模型的开发，数据科学家的合作变得至关重要，因为他们负责从数据集中提取、清理和收集洞察，这些洞察随后被用于构建 AI 模型。
 
 ## 合作
 

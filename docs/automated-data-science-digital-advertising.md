@@ -1,10 +1,10 @@
 # 竞赛第二名：数字广告中的自动化数据科学与机器学习
 
-> 原文：[https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html](https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html)
+> 原文：[`www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html`](https://www.kdnuggets.com/2016/08/automated-data-science-digital-advertising.html)
 
 **作者：Claudia Perlich 和 Dstillery 数据科学团队**。
 
-> **编辑注**：这篇博客文章是近期 KDnuggets 自动化数据科学与机器学习 [博客竞赛](/2016/06/kdnuggets-blog-contest-automated-data-science.html) 的参赛作品之一，获得了第二名。
+> **编辑注**：这篇博客文章是近期 KDnuggets 自动化数据科学与机器学习 博客竞赛 的参赛作品之一，获得了第二名。
 
 数字广告为机器学习提供了一个令人兴奋的玩乐场，尤其是自动预测建模。越来越多的数字广告通过实时竞标广告交换平台进行交付。广告交换连接广告位的卖方（通常是需要变现广告位的网站）和买方（通常是像 Dstillery 这样的技术公司，代表消费品牌和广告代理机构运营）。
 
@@ -20,19 +20,19 @@
 
 Dstillery 开发了一个强大的数据采样解决方案，可以根据事件的任何属性对实时事件流进行采样，并对每个接受的观察执行可定制的一组任务。
 
-在平均一天中，我们的系统处理超过500亿个事件。这些事件可以是竞标请求、展示次数、特定网站访问、移动应用使用或来自互联网连接设备的其他成千上万种行动。采样器根据我们定义的采样规则在事件中动态选择。这部分系统在图1中显示为粉色的可扩展规则引擎。
+在平均一天中，我们的系统处理超过 500 亿个事件。这些事件可以是竞标请求、展示次数、特定网站访问、移动应用使用或来自互联网连接设备的其他成千上万种行动。采样器根据我们定义的采样规则在事件中动态选择。这部分系统在图 1 中显示为粉色的可扩展规则引擎。
 
 **由采样器进行事件数据增强**
 
-对于每个采样观察，采样器执行一组任务，这些任务可能包括将事件记录到多个数据库或获取有关设备的额外数据。图1中的用户历史记录增强和评分系统包括各种任务。一个示例是选择通过GPS坐标在感兴趣地点（例如麦当劳或Pokemon-Go地点）识别的移动设备，并用设备出现的历史地点来增强这些事件。
+对于每个采样观察，采样器执行一组任务，这些任务可能包括将事件记录到多个数据库或获取有关设备的额外数据。图 1 中的用户历史记录增强和评分系统包括各种任务。一个示例是选择通过 GPS 坐标在感兴趣地点（例如麦当劳或 Pokemon-Go 地点）识别的移动设备，并用设备出现的历史地点来增强这些事件。
 
-[![Dstillery概览](../Images/2ff46d9c7eed8d7f5374e3338c664b65.png)](https://i.imgur.com/TLXVbUm.jpg)
+![Dstillery 概览](https://i.imgur.com/TLXVbUm.jpg)
 
-*图1\. Dstillery采样、增强和模型构建引擎。*
+*图 1\. Dstillery 采样、增强和模型构建引擎。*
 
-在仅包含数千个甚至数百万个观察数据的数据领域中，可以通过对数据进行全面扫描来从头重建历史记录。然而，对于数十亿个数据点，**全面扫描**在计算上是不可行的。这就是为什么系统在采样时（见图1中心）设计为通过访问多个基于Cassandra的键值存储来补充额外的历史数据。这使得可以基于用户过去行动的长期历史学习模型，而无需扫描数月的完整数据记录。
+在仅包含数千个甚至数百万个观察数据的数据领域中，可以通过对数据进行全面扫描来从头重建历史记录。然而，对于数十亿个数据点，**全面扫描**在计算上是不可行的。这就是为什么系统在采样时（见图 1 中心）设计为通过访问多个基于 Cassandra 的键值存储来补充额外的历史数据。这使得可以基于用户过去行动的长期历史学习模型，而无需扫描数月的完整数据记录。
 
-上述处理系统极其灵活，允许为特定的机器学习任务采样数据，如图1中的种子采样器所示。在增强过程中，历史记录或特征可以在采样时被提取。这些数据可以被机器学习系统消耗，该系统在图1中的品牌信号库中存储每天数千个模型的结果。可以启动另一种采样任务，以确定何时应为模型评分。最后，这些分数可以用于执行层中的竞标机会。
+上述处理系统极其灵活，允许为特定的机器学习任务采样数据，如图 1 中的种子采样器所示。在增强过程中，历史记录或特征可以在采样时被提取。这些数据可以被机器学习系统消耗，该系统在图 1 中的品牌信号库中存储每天数千个模型的结果。可以启动另一种采样任务，以确定何时应为模型评分。最后，这些分数可以用于执行层中的竞标机会。
 
 ### 自动学习稳健的排名模型
 
@@ -40,7 +40,7 @@ Dstillery 开发了一个强大的数据采样解决方案，可以根据事件�
 
 1.  **冷启动**。即使可能没有多少结果数据，目标也必须从活动开始时就表现良好。
 
-1.  **低基准率**。转化率可能轻易低于1/100,000。
+1.  **低基准率**。转化率可能轻易低于 1/100,000。
 
 1.  **非平稳性**。由于自然季节性和活动特定的外部因素，行为随时间发生变化。
 
@@ -60,58 +60,58 @@ Dstillery 开发了一个强大的数据采样解决方案，可以根据事件�
 
 在动态、高维环境中自动化模型训练和评分的关键挑战之一是提供一致的特征空间定义。我们的许多模型基于网页历史，随着新 URL 的出现和其他 URL 的流量减少，我们的事件流中的 URL 集合不断变化。通过将所有 URL 哈希到固定维度的空间中，我们允许我们的自动化模型构建者在一个静态、一致的特征空间中操作，即使特征的语义意义可能随着时间变化。
 
-![SGD模型](../Images/a7ac5f835be2103d105cb21e842ae29f.png)
+![SGD 模型](img/a7ac5f835be2103d105cb21e842ae29f.png)
 
-*图2显示了当前模型的更新，包含360K个特征（二进制指标，基于217个新的正面样本和2.1K个负面样本更新）。*
+*图 2 显示了当前模型的更新，包含 360K 个特征（二进制指标，基于 217 个新的正面样本和 2.1K 个负面样本更新）。*
 
 每当多条 URL 在一行时，哈希值会发生冲突，而当没有 URL 时，数据因隐私原因被预先哈希处理。
 
 ### 结论
 
-借鉴机器学习和数据工程中的多种技术，可以自动化完整的模型创建、评分和执行框架。所述技术由一个13人组成的数据科学团队支持，并能够同时高效执行数百个数字化营销活动。
+借鉴机器学习和数据工程中的多种技术，可以自动化完整的模型创建、评分和执行框架。所述技术由一个 13 人组成的数据科学团队支持，并能够同时高效执行数百个数字化营销活动。
 
 **参考文献**：
 
-¹ 关于系统的更详细描述以及用于大规模构建多个模型的过程，请参见：Raeder, Troy, 等. "大规模、强健预测系统的设计原则。" *第18届ACM SIGKDD国际知识发现与数据挖掘会议论文集*。ACM, 2012。
+¹ 关于系统的更详细描述以及用于大规模构建多个模型的过程，请参见：Raeder, Troy, 等. "大规模、强健预测系统的设计原则。" *第 18 届 ACM SIGKDD 国际知识发现与数据挖掘会议论文集*。ACM, 2012。
 
 ² 机器学习方法的详细信息描述在以下部分。
 
 ³ C. Perlich, B. Dalessandro, T. Raeder, O. Stitelman, 和 F. Provost. 机器学习在目标展示广告中的应用：转移学习实践。机器学习，页码 1–25, 2013。
 
-⁴ Brian Dalessandro, Daizhuo Chen, Troy Raeder, Claudia Perlich, Melinda Han Williams, 和 Foster Provost. 2014\. 可扩展的免提转移学习用于在线广告。见《第20届ACM SIGKDD国际知识发现与数据挖掘会议论文集》 (KDD '14)
+⁴ Brian Dalessandro, Daizhuo Chen, Troy Raeder, Claudia Perlich, Melinda Han Williams, 和 Foster Provost. 2014\. 可扩展的免提转移学习用于在线广告。见《第 20 届 ACM SIGKDD 国际知识发现与数据挖掘会议论文集》 (KDD '14)
 
-**关于：[Dstillery](http://dstillery.com/)** 是一家数据分析公司，利用机器学习和预测建模为品牌营销和其他业务挑战提供智能解决方案。通过对数字、物理和离线活动的360度独特视角，我们生成关于个人和特定人群行为的见解和预测。
+**关于：[Dstillery](http://dstillery.com/)** 是一家数据分析公司，利用机器学习和预测建模为品牌营销和其他业务挑战提供智能解决方案。通过对数字、物理和离线活动的 360 度独特视角，我们生成关于个人和特定人群行为的见解和预测。
 
 **相关：**
 
-+   [数据科学自动化：揭穿误解](/2016/08/data-science-automation-debunking-misconceptions.html)
++   数据科学自动化：揭穿误解
 
-+   [自动化数据科学](/2016/08/automating-data-science.html)
++   自动化数据科学
 
-+   [获奖者是…逐步回归](/2016/08/winner-stepwise-regression.html)
++   获奖者是…逐步回归
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关话题
 
-+   [神经网络与深度学习：教材（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
++   [神经网络与深度学习：教材（第 2 版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
 
-+   [宣布博客写作比赛，获胜者将获得NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)
++   [宣布博客写作比赛，获胜者将获得 NVIDIA GPU！](https://www.kdnuggets.com/2022/11/blog-writing-contest-nvidia-gpu.html)
 
-+   [使用Streamlit的DIY自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
++   [使用 Streamlit 的 DIY 自动化机器学习](https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html)
 
-+   [使用Python进行自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
++   [使用 Python 进行自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
 
-+   [使用Python进行自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
++   [使用 Python 进行自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
 
 +   [利用 ChatGPT 进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)

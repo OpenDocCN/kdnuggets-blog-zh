@@ -1,8 +1,8 @@
 # KDnuggets 应用数据科学调查
 
-> 原文：[https://www.kdnuggets.com/2022/09/applied-data-science-survey.html](https://www.kdnuggets.com/2022/09/applied-data-science-survey.html)
+> 原文：[`www.kdnuggets.com/2022/09/applied-data-science-survey.html`](https://www.kdnuggets.com/2022/09/applied-data-science-survey.html)
 
-![KDnuggets 应用数据科学调查](../Images/98abbf539e00eab5eab74afeefda7fbd.png)
+![KDnuggets 应用数据科学调查](img/98abbf539e00eab5eab74afeefda7fbd.png)
 
 [图片来源：rawpixel.com](https://www.freepik.com/free-photo/business-survey-research-concept_16459855.htm#query=survey&position=4&from_view=search) 来自 Freepik
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

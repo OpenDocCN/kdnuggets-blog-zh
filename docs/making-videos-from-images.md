@@ -1,8 +1,8 @@
 # 端到端机器学习：从图像制作视频
 
-> 原文：[https://www.kdnuggets.com/2019/05/making-videos-from-images.html](https://www.kdnuggets.com/2019/05/making-videos-from-images.html)
+> 原文：[`www.kdnuggets.com/2019/05/making-videos-from-images.html`](https://www.kdnuggets.com/2019/05/making-videos-from-images.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 你可以将图像拼接成电影
 
@@ -12,7 +12,7 @@
 
 `ffmpeg -i movie_name.mp4 img_%05d.png`
 
-![图](../Images/71eb3b1f208bb24195cdecc7198b7e3b.png)
+![图](img/71eb3b1f208bb24195cdecc7198b7e3b.png)
 
 视频是我们理解三维和时间变化信息的自然方式。这是我们导航世界的方式。将图像转换为视频是提升数据科学结果的好方法。它帮助你更清晰地沟通，并在过程中提供引人注目的 GIF。
 
@@ -40,21 +40,21 @@
 
 **相关：**
 
-+   [深度学习的预处理：从协方差矩阵到图像白化](/2018/10/preprocessing-deep-learning-covariance-matrix-image-whitening.html)
++   深度学习的预处理：从协方差矩阵到图像白化
 
-+   [使用 Numpy 和 OpenCV 进行基础图像数据分析 – 第 1 部分](/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
++   使用 Numpy 和 OpenCV 进行基础图像数据分析 – 第一部分
 
-+   [掌握 Python 数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握 Python 数据准备的 7 个步骤
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

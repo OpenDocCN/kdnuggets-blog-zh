@@ -1,22 +1,22 @@
 # 我是如何获得第一份数据科学家工作的
 
-> 原文：[https://www.kdnuggets.com/2023/02/got-first-job-data-scientist.html](https://www.kdnuggets.com/2023/02/got-first-job-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2023/02/got-first-job-data-scientist.html`](https://www.kdnuggets.com/2023/02/got-first-job-data-scientist.html)
 
-![](../Images/37dafde17370861bdf9f888d9013616a.png)
+![](img/37dafde17370861bdf9f888d9013616a.png)
 
 照片来自 [Pixabay](https://www.pexels.com/photo/silver-apple-macbook-on-brown-wooden-table-265072/)
 
-我在40岁时放弃了20年的高中数学教学事业，成为了一名数据科学家。我热衷于帮助其他专业人士，尤其是那些没有技术背景的人，将职业转向数据科学或其他数据分析领域。
+我在 40 岁时放弃了 20 年的高中数学教学事业，成为了一名数据科学家。我热衷于帮助其他专业人士，尤其是那些没有技术背景的人，将职业转向数据科学或其他数据分析领域。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 +   首先，不要让拒绝邮件打击你。你只需要一个“是！”继续申请，不要放弃。
 
-+   在你的求职过程中，保持学习。我没有让对BERT的初步知识缺乏阻碍我。相反，我主动学习它，并展示了我对这个领域的热情。
++   在你的求职过程中，保持学习。我没有让对 BERT 的初步知识缺乏阻碍我。相反，我主动学习它，并展示了我对这个领域的热情。
 
 +   完成一些来自[Coursera](https://www.coursera.org/)的指导项目，并将你获得的知识应用到你的项目中。项目是展示你技能的绝佳方式，也能向潜在雇主展示你的能力。
 
@@ -48,20 +48,20 @@
 
 > 继续前进，永不放弃你的梦想！
 
-**[Tiffany Teasley](https://www.linkedin.com/in/tiffany-teasley/)**，即[数据姐姐](http://www.datasistah.com/)，是一位数据科学家和职业教练，专为有志于数据科学的人员提供指导。Tiffany为追求数据科学或任何数据分析职业的人提供指导和辅导。此外，她还专注于通过分享她在数据科学领域的知识、网络和专业经验来指导非技术背景的个人。
+**[Tiffany Teasley](https://www.linkedin.com/in/tiffany-teasley/)**，即[数据姐姐](http://www.datasistah.com/)，是一位数据科学家和职业教练，专为有志于数据科学的人员提供指导。Tiffany 为追求数据科学或任何数据分析职业的人提供指导和辅导。此外，她还专注于通过分享她在数据科学领域的知识、网络和专业经验来指导非技术背景的个人。
 
 [原文](https://medium.com/the-modern-scientist/how-i-got-my-first-job-as-a-data-scientist-5ccc58f8d4ba)。经授权转载。
 
 ### 更多相关话题
 
-+   [我如何在2个月内获得4个数据科学职位邀请并将收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
++   [我如何在 2 个月内获得 4 个数据科学职位邀请并将收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
 
 +   [如何在没有任何工作经验的情况下获得你的首份数据科学职位](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
-+   [7步获得你的首份数据科学职位](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
++   [7 步获得你的首份数据科学职位](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
 
-+   [5个免费认证助你获得首份开发者职位](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
++   [5 个免费认证助你获得首份开发者职位](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
 
-+   [数据分析中的职位趋势：用于职位趋势分析的NLP](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
++   [数据分析中的职位趋势：用于职位趋势分析的 NLP](https://www.kdnuggets.com/job-trends-in-data-analytics-nlp-for-job-trend-analysis)
 
 +   [我作为数据科学家的前六个月](https://www.kdnuggets.com/2021/12/first-six-months-data-scientist.html)

@@ -1,34 +1,34 @@
 # 如何“超学习”数据科学：总结，适合急需了解的人
 
-> 原文：[https://www.kdnuggets.com/2019/12/ultralearn-data-science-summary.html](https://www.kdnuggets.com/2019/12/ultralearn-data-science-summary.html)
+> 原文：[`www.kdnuggets.com/2019/12/ultralearn-data-science-summary.html`](https://www.kdnuggets.com/2019/12/ultralearn-data-science-summary.html)
 
-[评论](#comments)
+评论
 
-**作者 [Benthecoder](https://twitter.com/benthecoder1)，开发者、作家、机器学习和AI爱好者。**
+**作者 [Benthecoder](https://twitter.com/benthecoder1)，开发者、作家、机器学习和 AI 爱好者。**
 
-![](../Images/703abd6c80aef81a464561effcda3915.png)
+![](img/703abd6c80aef81a464561effcda3915.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 参见
 
-+   [如何“超学习”数据科学，第1部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)，什么是“超学习”，你如何按照这一策略成为数据科学专家？
++   [如何“超学习”数据科学，第一部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)，什么是“超学习”，你如何按照这一策略成为数据科学专家？
 
-+   [如何“超学习”数据科学：去除干扰和找到专注，第2部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html)
++   [如何“超学习”数据科学：去除干扰和找到专注，第二部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html)
 
-+   [如何“超学习”数据科学：优化学习，第3部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-optimization-learning-part3.html)
++   [如何“超学习”数据科学：优化学习，第三部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-optimization-learning-part3.html)
 
-+   [如何“超学习”数据科学：深度理解与实验，第4部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-deep-understanding-experimentation-part4.html)
++   [如何“超学习”数据科学：深度理解与实验，第四部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-deep-understanding-experimentation-part4.html)
 
 ### 第一部分：金字塔学习
 
@@ -46,9 +46,9 @@
 
 1.  建立你的学习方法
 
-超学习数据科学从利用金字塔学习策略开始。第一步是创建一个适合你生活的学习图。不要制定一个不切实际的计划，要求你每天学习12小时，每周如此。这是不可行的，你会感到精疲力竭。规划你的学习旅程时要更务实：考虑你的个人责任、爱好、朋友和家庭等。
+超学习数据科学从利用金字塔学习策略开始。第一步是创建一个适合你生活的学习图。不要制定一个不切实际的计划，要求你每天学习 12 小时，每周如此。这是不可行的，你会感到精疲力竭。规划你的学习旅程时要更务实：考虑你的个人责任、爱好、朋友和家庭等。
 
-另一个关键点是找到你独特的学习方式。每个人都有自己的学习方法。不要试图模仿别人并复制他们的学习方式。如果你通过可视化和视频学习效果更好，就去参加MOOCs课程和观看YouTube视频。如果你更喜欢传统的教材学习方式，那就去做吧。没有什么能阻止你以自己的节奏学习。
+另一个关键点是找到你独特的学习方式。每个人都有自己的学习方法。不要试图模仿别人并复制他们的学习方式。如果你通过可视化和视频学习效果更好，就去参加 MOOCs 课程和观看 YouTube 视频。如果你更喜欢传统的教材学习方式，那就去做吧。没有什么能阻止你以自己的节奏学习。
 
 ### 第二部分：深度工作
 
@@ -124,15 +124,15 @@
 
 +   [我如何在机器学习方面变得更好](https://www.kdnuggets.com/2019/11/better-machine-learning.html)
 
-+   [数据科学家的6条建议](https://www.kdnuggets.com/2019/09/advice-data-scientists.html)
++   [数据科学家的 6 条建议](https://www.kdnuggets.com/2019/09/advice-data-scientists.html)
 
 ### 更多相关内容
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

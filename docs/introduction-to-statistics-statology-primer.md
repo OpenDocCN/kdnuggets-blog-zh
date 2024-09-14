@@ -1,8 +1,8 @@
 # 统计学入门：Statology 指南
 
-> 原文：[https://www.kdnuggets.com/introduction-to-statistics-statology-primer](https://www.kdnuggets.com/introduction-to-statistics-statology-primer)
+> 原文：[`www.kdnuggets.com/introduction-to-statistics-statology-primer`](https://www.kdnuggets.com/introduction-to-statistics-statology-primer)
 
-[![统计学入门：Statology 指南](../Images/75713fa857d8922d927d0929ec8c17a2.png)](https://www.statology.org/)
+![统计学入门：Statology 指南](https://www.statology.org/)
 
 作者提供的图片 | Midjourney & Canva
 
@@ -12,11 +12,11 @@ KDnuggets 的姊妹网站，[**Statology**](https://www.statology.org/)，拥有
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -90,9 +90,9 @@ KDnuggets 的姊妹网站，[**Statology**](https://www.statology.org/)，拥有
 
 在这篇文章中，我们定义了每种测量尺度，并提供了可以使用每种尺度的变量的示例。
 
-想要获取更多类似的内容，请持续关注Statology，并订阅他们的每周通讯，以确保不错过任何信息。
+想要获取更多类似的内容，请持续关注 Statology，并订阅他们的每周通讯，以确保不错过任何信息。
 
-[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅约](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的特约编辑，马修旨在使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他的使命是使数据科学社区中的知识民主化。马修从6岁开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅约](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的执行编辑，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的特约编辑，马修旨在使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他的使命是使数据科学社区中的知识民主化。马修从 6 岁开始编程。
 
 ### 更多相关主题
 

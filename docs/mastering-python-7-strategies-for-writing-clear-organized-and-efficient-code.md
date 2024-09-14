@@ -1,8 +1,8 @@
 # 掌握 Python：编写清晰、有组织和高效代码的 7 种策略
 
-> 原文：[https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
+> 原文：[`www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code`](https://www.kdnuggets.com/mastering-python-7-strategies-for-writing-clear-organized-and-efficient-code)
 
-![掌握 Python：编写清晰、有组织和高效代码的 7 种策略](../Images/3e0d360397d3de2ed95cd5185703e278.png) 作者提供的图片
+![掌握 Python：编写清晰、有组织和高效代码的 7 种策略](img/3e0d360397d3de2ed95cd5185703e278.png) 作者提供的图片
 
 您是否曾将自己的 Python 代码与经验丰富的开发者的代码进行比较，感到差异很大？尽管从在线资源中学习 Python，但初学者和专家级代码之间常常存在差距。这是因为经验丰富的开发者遵循了社区建立的最佳实践。这些实践在在线教程中经常被忽视，但对于大规模应用程序至关重要。在本文中，我将分享我在生产代码中使用的 7 个技巧，以编写更清晰、更有组织的代码。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -111,7 +111,7 @@ def calculate_interest(
 	return interest 
 ```
 
-注意，我们使用条件语句进行输入验证。Python还有断言语句，有时也用于此目的。然而，*用于输入验证的断言不是最佳实践*，因为它们可以很容易地被禁用，并且会导致生产环境中的意外行为。显式的Python条件表达式更适用于输入验证以及强制执行前置条件、后置条件和代码不变式。
+注意，我们使用条件语句进行输入验证。Python 还有断言语句，有时也用于此目的。然而，*用于输入验证的断言不是最佳实践*，因为它们可以很容易地被禁用，并且会导致生产环境中的意外行为。显式的 Python 条件表达式更适用于输入验证以及强制执行前置条件、后置条件和代码不变式。
 
 ## 3\. 使用生成器和`yield`语句进行延迟加载
 
@@ -119,7 +119,7 @@ def calculate_interest(
 
 一种可能的解决方案是仅在需要时将文档加载到内存中，并且一次只处理一个文档，这也被称为延迟加载。即使我们知道需要哪些文档，我们也不会在需要之前加载资源。当文档在代码中不处于活动使用状态时，无需将大量文档保留在内存中。这正是生成器和`yield`语句处理问题的方式。
 
-生成器允许延迟加载，从而提高了Python代码执行的内存效率。值在需要时动态生成，减少了内存占用并提高了执行速度。
+生成器允许延迟加载，从而提高了 Python 代码执行的内存效率。值在需要时动态生成，减少了内存占用并提高了执行速度。
 
 ```py
 import os
@@ -139,7 +139,7 @@ for doc in load_documents(directory):
 	preprocess_document(doc) 
 ```
 
-在上述函数中，`load_documents`函数使用了`yield`关键字。该方法返回一个类型为<class generator>的对象。当我们迭代这个对象时，它会从上一个`yield`语句的位置继续执行。因此，单个文档被加载和处理，提高了Python代码的效率。
+在上述函数中，`load_documents`函数使用了`yield`关键字。该方法返回一个类型为<class generator>的对象。当我们迭代这个对象时，它会从上一个`yield`语句的位置继续执行。因此，单个文档被加载和处理，提高了 Python 代码的效率。
 
 ## 4\. 使用上下文管理器防止内存泄漏
 

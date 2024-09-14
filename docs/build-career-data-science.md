@@ -1,8 +1,8 @@
 # 如何在数据科学领域建立职业生涯
 
-> 原文：[https://www.kdnuggets.com/2022/02/build-career-data-science.html](https://www.kdnuggets.com/2022/02/build-career-data-science.html)
+> 原文：[`www.kdnuggets.com/2022/02/build-career-data-science.html`](https://www.kdnuggets.com/2022/02/build-career-data-science.html)
 
-![如何在数据科学领域建立职业生涯](../Images/e0a5dabc2ba0700878d120b3421c7538.png)
+![如何在数据科学领域建立职业生涯](img/e0a5dabc2ba0700878d120b3421c7538.png)
 
 图片来源：[Lukas from Pexels](https://www.pexels.com/@goumbik)
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-如果你是一名数据科学家，并且将2022年的目标设定为提升和发展你的职业生涯，你来对地方了。
+如果你是一名数据科学家，并且将 2022 年的目标设定为提升和发展你的职业生涯，你来对地方了。
 
 ### 什么是数据科学家？
 
@@ -46,7 +46,7 @@
 
 高级数据科学家利用数据来指导和塑造公司，以便预测业务的未来需求。这可能包括指导、建议并雇佣初级员工，以将他们引导到公司目标的方向。除了管理数据团队，他们还分析数据以解决复杂的业务问题，并推动新标准的开发，从原型设计到生产。
 
-高级数据科学家所需的硬技能类似于数据科学家，但在每个方面，如机器学习、SQL和不同的编程语言上有更多的经验。他们还将具备卓越的人际交往和沟通技能，因为他们的角色涉及管理和指导高技能员工。对于依赖数据的公司来说，高级数据科学家就像船长一样。没有他们的专业知识、经验和知识，团队其他成员难以满足业务的当前和未来需求。
+高级数据科学家所需的硬技能类似于数据科学家，但在每个方面，如机器学习、SQL 和不同的编程语言上有更多的经验。他们还将具备卓越的人际交往和沟通技能，因为他们的角色涉及管理和指导高技能员工。对于依赖数据的公司来说，高级数据科学家就像船长一样。没有他们的专业知识、经验和知识，团队其他成员难以满足业务的当前和未来需求。
 
 ### 3\. 商业智能分析师
 
@@ -54,9 +54,9 @@
 
 ### 4\. 数据挖掘工程师
 
-数据挖掘是从大型数据集中提取、筛选和识别模式的过程，这些模式可以改善业务系统和操作。数据挖掘工程师建立和管理存储和分析数据的基础设施。他们的工作可能包括构建数据仓库和组织数据，使其对其他团队成员可访问。数据挖掘工程师任务的关键缩写是ETL：提取、转换和加载。
+数据挖掘是从大型数据集中提取、筛选和识别模式的过程，这些模式可以改善业务系统和操作。数据挖掘工程师建立和管理存储和分析数据的基础设施。他们的工作可能包括构建数据仓库和组织数据，使其对其他团队成员可访问。数据挖掘工程师任务的关键缩写是 ETL：提取、转换和加载。
 
-他们将具备硬技能，如机器学习、统计学、数据库系统，以及他们列表中的首要技能SQL，这在存储和访问数据方面被广泛使用。
+他们将具备硬技能，如机器学习、统计学、数据库系统，以及他们列表中的首要技能 SQL，这在存储和访问数据方面被广泛使用。
 
 ### 5\. 数据架构师
 
@@ -84,7 +84,7 @@
 
 +   [转换职业到数据科学的终极指南](https://www.kdnuggets.com/2022/05/definitive-guide-switching-career-data-science.html)
 
-+   [推进你的数据科学职业的5个社区](https://www.kdnuggets.com/5-data-science-communities-to-advance-your-career)
++   [推进你的数据科学职业的 5 个社区](https://www.kdnuggets.com/5-data-science-communities-to-advance-your-career)
 
 +   [导航你的数据科学职业生涯：从学习到赚钱](https://www.kdnuggets.com/navigating-your-data-science-career-from-learning-to-earning)
 

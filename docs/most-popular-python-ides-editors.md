@@ -1,18 +1,18 @@
 # 这里是最受欢迎的 Python IDE/编辑器
 
-> 原文：[https://www.kdnuggets.com/2020/10/most-popular-python-ides-editors.html](https://www.kdnuggets.com/2020/10/most-popular-python-ides-editors.html)
+> 原文：[`www.kdnuggets.com/2020/10/most-popular-python-ides-editors.html`](https://www.kdnuggets.com/2020/10/most-popular-python-ides-editors.html)
 
-[评论](#comments)最新的 KDnuggets 调查问道：
+评论最新的 KDnuggets 调查问道：
 
 > 你在 2020 年使用最多的 Python IDE / 编辑器是什么？
 
 这次调查收到了超过 2,500 个回应。我们允许最多选择 3 个选项，因此份额之和超过 100%。平均每位受访者使用 1.7 个 IDE。
 
-我们还将每个 IDE 的份额与类似的 2018 年调查 [最受欢迎的 Python IDE / 编辑器](/2018/12/most-popular-python-ide-editor.html) 进行比较（该调查获得了超过 1900 个回应）。
+我们还将每个 IDE 的份额与类似的 2018 年调查 最受欢迎的 Python IDE / 编辑器 进行比较（该调查获得了超过 1900 个回应）。
 
 这里列出了今年份额超过 2% 的前几名 IDE。由于 2018 年我们没有单独列出 JupyterLab 选项，因此为了进行准确比较，我们将 Jupyter Notebook（42%）和 JupyterLab（14%）的答案合并为一个条目 - Jupyter，其份额为 51%。不是 56%，因为 5% 的受访者同时使用了这两者。
 
-![2020 年最受欢迎 Python IDE](../Images/40dea7bc05659a496adb370c2946145a.png)
+![2020 年最受欢迎 Python IDE](img/40dea7bc05659a496adb370c2946145a.png)
 
 **图 1：最受欢迎的 Python IDE，2020 年使用份额与 2018 年比较**
 
@@ -50,7 +50,7 @@
 
 我们还查看了是否前三类中流行的 IDE 根据就业类型有所不同 - 请参见图 2。
 
-![2020 年最受欢迎 Python IDE 按就业类型](../Images/76bbe44ebcd15665ff72ff7e6209b721.png)
+![2020 年最受欢迎 Python IDE 按就业类型](img/76bbe44ebcd15665ff72ff7e6209b721.png)
 
 **图 2：按就业类型最受欢迎的 Python IDE**
 
@@ -70,7 +70,7 @@
 
 +   澳大利亚/新西兰，3.2%
 
-下图 Fig. 3 显示了前四个地区的最受欢迎 Python IDE 的地区分布。 ![KDnuggets 2020 年最受欢迎 Python IDE 按地区](../Images/d041c5acc7ca3a573b804593a24e48c4.png)
+下图 Fig. 3 显示了前四个地区的最受欢迎 Python IDE 的地区分布。 ![KDnuggets 2020 年最受欢迎 Python IDE 按地区](img/d041c5acc7ca3a573b804593a24e48c4.png)
 
 **图 3：按地区最受欢迎的 Python IDE**
 
@@ -88,11 +88,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

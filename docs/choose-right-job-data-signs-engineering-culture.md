@@ -1,24 +1,24 @@
-# 选择数据领域的正确工作：工程文化中的5个迹象
+# 选择数据领域的正确工作：工程文化中的 5 个迹象
 
-> 原文：[https://www.kdnuggets.com/2021/10/choose-right-job-data-signs-engineering-culture.html](https://www.kdnuggets.com/2021/10/choose-right-job-data-signs-engineering-culture.html)
+> 原文：[`www.kdnuggets.com/2021/10/choose-right-job-data-signs-engineering-culture.html`](https://www.kdnuggets.com/2021/10/choose-right-job-data-signs-engineering-culture.html)
 
-[comments](#comments)
+comments
 
-**作者：[Niv Sluzki](https://www.linkedin.com/in/niv-sluzki/)，Databand.ai的研发团队领导**
+**作者：[Niv Sluzki](https://www.linkedin.com/in/niv-sluzki/)，Databand.ai 的研发团队领导**
 
-![Figure](../Images/0f6d3244f61b6ef91756c76e6901c552.png)
+![Figure](img/0f6d3244f61b6ef91756c76e6901c552.png)
 
-由Ruslan Burlaka拍摄，来自Pexels
+由 Ruslan Burlaka 拍摄，来自 Pexels
 
 * * *
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -38,7 +38,7 @@
 
 简而言之，它们都很棒。
 
-本周我让我们出色的全栈开发者Ilan Techenak开发一个服务，该服务在我们的部署中运行，监控谷歌的BigQuery数据仓库，并允许用户从我们的[Databand](https://databand.ai/)应用程序中进行集成。
+本周我让我们出色的全栈开发者 Ilan Techenak 开发一个服务，该服务在我们的部署中运行，监控谷歌的 BigQuery 数据仓库，并允许用户从我们的[Databand](https://databand.ai/)应用程序中进行集成。
 
 让我们花一点时间来认识完成这一任务所需的知识和专业技能的广度：
 
@@ -66,9 +66,9 @@
 
 说实话，Barda 在我们的团队中是不可或缺的。他在我们进展过程中提供了保障，因为他确保我们的系统不会频繁崩溃或变得近乎无法维护。
 
-除了团队中的专家，我们还有一个基础设施团队，由公司范围内的人员组成，他们帮助我们导航。我们的架构师确保所有服务都处于良好状态，帮助工程师解决最大的设计问题，并领导基础设施团队。我们的前端技术负责人负责我们的UI架构，能够选择合适的技术栈，确保我们拥有适合测试和共享组件的基础设施。
+除了团队中的专家，我们还有一个基础设施团队，由公司范围内的人员组成，他们帮助我们导航。我们的架构师确保所有服务都处于良好状态，帮助工程师解决最大的设计问题，并领导基础设施团队。我们的前端技术负责人负责我们的 UI 架构，能够选择合适的技术栈，确保我们拥有适合测试和共享组件的基础设施。
 
-最后，我们有负责所有部署、监控和CI/CD的DevOps大师。
+最后，我们有负责所有部署、监控和 CI/CD 的 DevOps 大师。
 
 正如你所见，系统的任何部分都没有缺乏责任感。
 
@@ -84,9 +84,9 @@
 
 想象一下你有一个乐队——就像我们在[Databand](https://databand.ai/)一样——而你的乐队正在并行创作很多新歌曲。在制作过程中，灵感闪现，你需要添加更多的声音，比如一段小吉他旋律或几个低音鼓击打，以完善音效。全栈工程师就像那种能够即兴演奏的多乐器乐队成员。当你正在进行多个复杂的项目且涉及大量移动部件时，他们特别能证明自己的价值。我向你保证，伟大的音乐很大程度上依赖于即兴发挥，伟大的软件也是如此。
 
-如果我们按照职能专长组织团队——前端团队、后端团队等——那么一个全栈工程师所需的工作量现在将需要3到4个不同的团队来处理。
+如果我们按照职能专长组织团队——前端团队、后端团队等——那么一个全栈工程师所需的工作量现在将需要 3 到 4 个不同的团队来处理。
 
-在 [Databand](https://databand.ai/) ，我们确保我们的产品团队由70%的真正的全栈工程师和30%的专业人士组成。这使得每个团队能够完全专注于业务目标，并具备实现成功所需的所有能力。我们的基础设施团队致力于解决跨公司难题、改善我们内部的开发体验，并确保我们奠定正确的基础，以便有效且高效地成长。
+在 [Databand](https://databand.ai/) ，我们确保我们的产品团队由 70%的真正的全栈工程师和 30%的专业人士组成。这使得每个团队能够完全专注于业务目标，并具备实现成功所需的所有能力。我们的基础设施团队致力于解决跨公司难题、改善我们内部的开发体验，并确保我们奠定正确的基础，以便有效且高效地成长。
 
 工程团队的组成是衡量工程文化优先级的最简单方法之一。全栈工程师比例较高的团队能够持续灵活地执行任务。灵活性不被视为目标，而是一种自然的存在方式。
 
@@ -104,7 +104,7 @@
 
 +   吞吐量——总结上周\本月的所有情况。
 
-尽管如何衡量软件工程是一个高度争议的话题，但以上5个要点可以为我们提供一个合理的工具来衡量专家或基础设施导向的工程师。
+尽管如何衡量软件工程是一个高度争议的话题，但以上 5 个要点可以为我们提供一个合理的工具来衡量专家或基础设施导向的工程师。
 
 在衡量这类工程师时，你将关注他们的代码质量、他们创造和解决的技术债务数量、他们如何减少维护工作量、他们的测试覆盖率以及他们是否选择了最合适的工具来解决问题。
 
@@ -146,11 +146,11 @@
 
 **相关：**
 
-+   [数据分析师和数据科学家的 7 个区别](/2021/09/7-differences-between-data-analyst-data-scientist.html)
++   数据分析师和数据科学家的 7 个区别
 
-+   [如何作为初学者建立强大的数据科学投资组合](/2021/10/strong-data-science-portfolio-as-beginner.html)
++   如何作为初学者建立强大的数据科学投资组合
 
-+   [通向全栈数据科学的路径](/2021/09/path-full-stack-data-science.html)
++   通向全栈数据科学的路径
 
 ### 相关话题
 
@@ -160,7 +160,7 @@
 
 +   [选择正确的机器学习算法的简单指南](https://www.kdnuggets.com/2020/05/guide-choose-right-machine-learning-algorithm.html)
 
-+   [KDnuggets™ 新闻 22:n03, 1月 19: 深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19: 深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [深入了解 13 个数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
 

@@ -1,8 +1,8 @@
 # 学习 SQL 的艰难方式
 
-> 原文：[https://www.kdnuggets.com/2020/01/learning-sql-hard-way.html](https://www.kdnuggets.com/2020/01/learning-sql-hard-way.html)
+> 原文：[`www.kdnuggets.com/2020/01/learning-sql-hard-way.html`](https://www.kdnuggets.com/2020/01/learning-sql-hard-way.html)
 
-[comments](#comments) ![Figure](../Images/13db05514298ed074e5db11a883f6d74.png)
+comments ![Figure](img/13db05514298ed074e5db11a883f6d74.png)
 
 [Source](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1246836)
 
@@ -32,7 +32,7 @@
 
 +   你可以从 [Download MySQL Community Server](http://dev.mysql.com/downloads/mysql/) 下载适用于你系统的 MySQL（MACOSX、Linux、Windows）。在我的情况下，我下载了 DMG 压缩包。之后，双击并安装文件。***你可能需要设置一个密码。记住这个密码，因为稍后连接到 MySQL 实例时会用到。***
 
-![](../Images/3c4eed91fd996402626030cb61854b7d.png)
+![](img/3c4eed91fd996402626030cb61854b7d.png)
 
 +   创建一个名为 `my.cnf` 的文件，并在其中放入以下内容。这是为了给你的 SQL 数据库提供本地文件读取权限。
 
@@ -47,33 +47,33 @@ local-infile=1
 
 +   打开 `System Preferences>MySQL`。前往 `Configuration` 并使用选择按钮浏览到 `my.cnf` 文件。
 
-![](../Images/dbdba9b4617492492975cdbe43db35cd.png)
+![](img/dbdba9b4617492492975cdbe43db35cd.png)
 
 +   从 `Instances` 选项卡重新启动服务器，点击停止然后启动。
 
-![](../Images/5c14873af530f6d27fc8d40a7a750dd8.png)
+![](img/5c14873af530f6d27fc8d40a7a750dd8.png)
 
 +   一旦你让服务器运行起来，下载并安装 MySQL Workbench：[下载 MySQL Workbench](https://dev.mysql.com/downloads/workbench/)。Workbench 提供了一个编辑器，用于编写 SQL 查询并以结构化的方式获取结果。
 
-![](../Images/9e29b2c92b14ad7944239e656b8e742d.png)
+![](img/9e29b2c92b14ad7944239e656b8e742d.png)
 
 +   现在打开 MySQL Workbench 并连接到 SQL。你将看到如下界面。
 
-![](../Images/11ce893e1e9a7772636dabdffeada7ee.png)
+![](img/11ce893e1e9a7772636dabdffeada7ee.png)
 
 +   你可以看到本地实例连接已经为你设置好了。现在，只需点击该连接，使用我们之前为 MySQL 服务器设置的密码开始使用（如果你有地址、端口号、用户名和密码，你也可以创建连接到其他可能不在你机器上的现有 SQL 服务器）。
 
-![](../Images/d802212164a29bc8fb09306e11796c66.png)
+![](img/d802212164a29bc8fb09306e11796c66.png)
 
 +   这样你就可以在特定数据库上编写查询。
 
-![](../Images/663f54d0f39e89de06eeb028f11ba03d.png)
+![](img/663f54d0f39e89de06eeb028f11ba03d.png)
 
 +   检查左上角的 `Schemas` 选项卡，查看现有的表。这里只有一个 `sys` 模式，包含表 `sys_config`。这不是一个有趣的数据源来学习 SQL。所以，让我们安装一些数据进行练习。
 
 +   如果你有自己的数据进行操作，那很好。你可以创建一个新的模式（数据库）并使用以下命令将其上传到表中。（你可以通过使用 `Cmd+Enter` 或点击 ⚡️闪电按钮运行命令）
 
-![](../Images/8e1326c4743f556367d0b7fa53d7b255.png)
+![](img/8e1326c4743f556367d0b7fa53d7b255.png)
 
 在本教程中，我将使用 Sakila 电影数据库，你可以通过以下步骤进行安装：
 
@@ -87,7 +87,7 @@ local-infile=1
 
 一旦完成，你会看到 SCHEMA 列表中添加了一个新数据库。
 
-![](../Images/991e5cf0916018acdb5f0fdd212bc8e1.png)
+![](img/991e5cf0916018acdb5f0fdd212bc8e1.png)
 
 ### 数据操作
 
@@ -97,7 +97,7 @@ local-infile=1
 
 你可以尝试通过 [Sakila 示例数据库](https://dev.mysql.com/doc/sakila/en/sakila-structure.html) 文档详细了解 Sakila 数据库的模式。
 
-![图示](../Images/43d77ee6e78931b44af4b8cfcb57ca88.png)
+![图示](img/43d77ee6e78931b44af4b8cfcb57ca88.png)
 
 模式图
 
@@ -127,7 +127,7 @@ SELECT col1, SUM(col2) as col2sum, AVG(col3) as col3avg FROM table_name WHERE co
 SELECT rating, avg(length) as length_avg FROM sakila.film group by rating order by length_avg desc;
 ```
 
-![](../Images/b4d8c6f364a0761c7610379a26aee215.png)
+![](img/b4d8c6f364a0761c7610379a26aee215.png)
 
 ### 练习：提出一个问题
 
@@ -150,7 +150,7 @@ select * from sakila.film where length>50 and rating="PG";
 
 现在，连接是 MySQL 数据库中不可或缺且至关重要的部分，理解它们是必要的。下面的视觉图展示了 SQL 中存在的大多数连接。我通常只使用 LEFT JOIN 和 INNER JOIN，因此我将从 LEFT JOIN 开始。
 
-![](../Images/9f7d5a2f96baaabc9eb8c393ad920260.png)
+![](img/9f7d5a2f96baaabc9eb8c393ad920260.png)
 
 当你想保留左侧表（A）中的所有记录，并在匹配的记录上合并表 B 时，使用 LEFT JOIN。表 A 中未合并表 B 的记录在结果表中将显示为 NULL。MySQL 语法为：
 
@@ -170,7 +170,7 @@ INNER JOIN 用于当你想合并 A 和 B，并且仅保留 A 和 B 中的共同�
 SELECT film_id,count(film_id) as num_copies FROM sakila.inventory group by film_id order by num_copies desc;
 ```
 
-![](../Images/85fd177569d265e448ae8c633002fe7d.png)
+![](img/85fd177569d265e448ae8c633002fe7d.png)
 
 这个结果看起来有趣吗？不太有趣。ID 对我们人类来说没有意义，如果我们能得到电影的名称，我们将能更好地处理这些信息。所以我们查看 `film` 表，发现它有 `film_id` 以及电影的 `title`。
 
@@ -182,7 +182,7 @@ SELECT film_id,count(film_id) as num_copies FROM sakila.inventory group by film_
 SELECT A.*, B.title from sakila.inventory A left join sakila.film B on A.film_id = B.film_id
 ```
 
-![](../Images/d70bfc61f0adbfb45d1ffad053b0035c.png)
+![](img/d70bfc61f0adbfb45d1ffad053b0035c.png)
 
 这将为你的库存表信息添加另一列。正如你可能注意到的那样，一些电影存在于 `film` 表中，而我们在 `inventory` 表中没有。我们使用左连接，因为我们想保留库存表中的所有内容，并将其与 `film` 表中的相应内容连接，而不是 `film` 表中的所有内容。
 
@@ -204,7 +204,7 @@ create table sakila.temp_table as SELECT A.*, B.title from sakila.inventory A le
 select title, count(title) as num_copies from sakila.temp_table group by title order by num_copies desc;
 ```
 
-![](../Images/4cce562f2edff7c3641fe21d0e113b21.png)
+![](img/4cce562f2edff7c3641fe21d0e113b21.png)
 
 但这多了一步。我们必须创建一个临时表，这会占用系统空间。
 
@@ -214,7 +214,7 @@ SQL 为这些问题提供了内查询的概念。你可以用以下方式将所�
 select temp.title, count(temp.title) as num_copies from (SELECT A.*, B.title from sakila.inventory A left join sakila.film B on A.film_id = B.film_id) temp group by title order by num_copies desc;
 ```
 
-![](../Images/7363abc55e8eacc55ebd2e9bf786bdc8.png)
+![](img/7363abc55e8eacc55ebd2e9bf786bdc8.png)
 
 我们在这里做的是将第一个查询用括号括起来，并给这个表一个别名 `temp`。然后我们对 `temp` 执行了 GROUP BY 操作，就像对待任何表一样。正因为内查询的概念，我们才能编写有时跨越多页的 SQL 查询。
 
@@ -224,11 +224,11 @@ HAVING 是另一个有用的 SQL 结构。因此，我们已经得到了结果�
 
 我们可以通过使用内查询概念和 WHERE 子句来实现这一点。在这里，我们将一个内查询嵌套在另一个内查询中。相当不错。
 
-![](../Images/bb399d38acd4af4db2d8993f1118ffb5.png)
+![](img/bb399d38acd4af4db2d8993f1118ffb5.png)
 
 或者，我们可以使用 HAVING 子句。
 
-![](../Images/66954520e84bf07ab159b5dd7dbad670.png)
+![](img/66954520e84bf07ab159b5dd7dbad670.png)
 
 HAVING 子句用于过滤最终的聚合结果。它与 WHERE 不同，因为 WHERE 用于过滤 FROM 语句中使用的表。HAVING 在 GROUP BY 之后过滤最终结果。
 
@@ -260,21 +260,21 @@ HAVING 子句用于过滤最终的聚合结果。它与 WHERE 不同，因为 WH
 
 **相关内容：**
 
-+   [数据科学 SQL 精通的 7 个步骤 — 2019 年版](/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)
++   数据科学 SQL 精通的 7 个步骤 — 2019 年版
 
-+   [你将再也不需要的最后 SQL 数据分析指南](/2019/10/last-sql-guide-data-analysis-ever-need.html)
++   你将再也不需要的最后 SQL 数据分析指南
 
-+   [数据科学家的 6 条建议](/2019/09/advice-data-scientists.html)
++   数据科学家的 6 条建议
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 

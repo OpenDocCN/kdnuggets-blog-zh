@@ -1,12 +1,12 @@
-# 如何在3个简单步骤中对任何 Python 脚本进行超参数调优
+# 如何在 3 个简单步骤中对任何 Python 脚本进行超参数调优
 
-> 原文：[https://www.kdnuggets.com/2020/04/hyperparameter-tuning-python.html](https://www.kdnuggets.com/2020/04/hyperparameter-tuning-python.html)
+> 原文：[`www.kdnuggets.com/2020/04/hyperparameter-tuning-python.html`](https://www.kdnuggets.com/2020/04/hyperparameter-tuning-python.html)
 
-[评论](#comments)
+评论
 
 **作者：[Jakub Czakon](https://www.linkedin.com/in/jakub-czakon-2b797b69/?originalSubdomain=pl)，Neptune.ai**。
 
-![Python](../Images/48653af31024defdcd657420253f346a.png)
+![Python](img/48653af31024defdcd657420253f346a.png)
 
 你写了一个训练和评估机器学习模型的 Python 脚本。现在，你希望自动调整超参数以提高其性能吗？
 
@@ -14,9 +14,9 @@
 
 在这篇文章中，我将向你展示如何将你的脚本转换为一个目标函数，该函数可以使用任何超参数优化库进行优化。
 
-![](../Images/e0074c461140259d5cecec92bd0d7474.png)
+![](img/e0074c461140259d5cecec92bd0d7474.png)
 
-只需3个步骤，你就可以像没有明天一样调整模型参数。
+只需 3 个步骤，你就可以像没有明天一样调整模型参数。
 
 准备好了吗？
 
@@ -220,13 +220,13 @@ neptune.stop()
 
 现在，当你运行参数扫描时，你会看到以下内容：
 
-![](../Images/d3998fa6921a2e0309b148132c5981aa.png)
+![](img/d3998fa6921a2e0309b148132c5981aa.png)
 
 查看 [skopt 超参数扫描实验](https://ui.neptune.ai/jakub-czakon/blog-hpo/e/BLOG-369/charts) ，包含所有代码、图表和结果。
 
 ### 最后思考
 
-在这篇文章中，你已经学会了如何在仅仅3个步骤中优化几乎任何 Python 脚本的超参数。
+在这篇文章中，你已经学会了如何在仅仅 3 个步骤中优化几乎任何 Python 脚本的超参数。
 
 希望通过这些知识，您能以更少的努力构建更好的机器学习模型。
 
@@ -246,11 +246,11 @@ neptune.stop()
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 相关工作
 
 * * *
 

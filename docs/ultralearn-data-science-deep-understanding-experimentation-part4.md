@@ -1,22 +1,22 @@
-# 如何“超学习”数据科学：深刻理解与实验，第4部分
+# 如何“超学习”数据科学：深刻理解与实验，第四部分
 
-> 原文：[https://www.kdnuggets.com/2019/12/ultralearn-data-science-deep-understanding-experimentation-part4.html](https://www.kdnuggets.com/2019/12/ultralearn-data-science-deep-understanding-experimentation-part4.html)
+> 原文：[`www.kdnuggets.com/2019/12/ultralearn-data-science-deep-understanding-experimentation-part4.html`](https://www.kdnuggets.com/2019/12/ultralearn-data-science-deep-understanding-experimentation-part4.html)
 
-[评论](#comments)
+评论
 
 **由 [Benedict Neo](https://www.linkedin.com/in/benthecoder/)，数据科学爱好者和博主。**
 
-![](../Images/07d18488283f0b9431283af8de022899.png)
+![](img/07d18488283f0b9431283af8de022899.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,11 +24,11 @@
 
 另见
 
-+   [如何“超学习”数据科学，第1部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)，什么是“超学习”，你如何遵循这一策略成为数据科学专家？
++   [如何“超学习”数据科学，第一部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-part1.html)，什么是“超学习”，你如何遵循这一策略成为数据科学专家？
 
-+   [如何“超学习”数据科学：去除干扰和寻找焦点，第2部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html)
++   [如何“超学习”数据科学：去除干扰和寻找焦点，第二部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-distractions-focus-part2.html)
 
-+   [如何“超学习”数据科学：优化学习，第3部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-optimization-learning-part3.html)
++   [如何“超学习”数据科学：优化学习，第三部分](https://www.kdnuggets.com/2019/12/ultralearn-data-science-optimization-learning-part3.html)
 
 这是关于超学习数据科学系列的最后一部分。在这一部分，我将讨论深刻理解和实验。
 
@@ -78,7 +78,7 @@
 
 **(3) 在困难的障碍中坚持不懈**
 
-当遇到挑战时，尽量不要立即放弃。相反，实施一个*奋斗计时器*。强迫自己在寻找简单解决方案之前，先面对每个挑战或障碍至少10分钟。
+当遇到挑战时，尽量不要立即放弃。相反，实施一个*奋斗计时器*。强迫自己在寻找简单解决方案之前，先面对每个挑战或障碍至少 10 分钟。
 
 提出正确的问题可能非常困难，因为这需要创造力、分析、很多研究等。基本上，解决问题需要你坐下来，拿起纸笔开始头脑风暴，尽管这有点老派。
 
@@ -92,7 +92,7 @@
 
 要了解一位灵活的数据科学家的思路，你可以阅读他们的文章、作品或博客，这些内容能让你一窥他们的工作流程和过程。
 
-例如，你观看了一段关于如何使用 [TensorFlow](https://www.tensorflow.org/) 进行目标检测的YouTube视频。在认真观看后，你重复了整个过程，并将TensorFlow应用于你的模型，加入了你自己个性化的功能和使用案例。
+例如，你观看了一段关于如何使用 [TensorFlow](https://www.tensorflow.org/) 进行目标检测的 YouTube 视频。在认真观看后，你重复了整个过程，并将 TensorFlow 应用于你的模型，加入了你自己个性化的功能和使用案例。
 
 ### 实验
 
@@ -114,7 +114,7 @@
 
 > “数据科学的本质是实验性的。你不知道你所被问到的问题的答案——甚至不知道是否存在答案。你不知道需要多长时间才能得出结果，也不知道需要多少数据。最简单的方法就是想出一个想法并进行尝试，直到得到一些结果。”
 
-在题为 [*要成为更有效的数据科学家，请以实验为思维方式*](https://www.residentmar.io/2019/02/23/data-science-experiments.html) 的博客中，作者Aleksey Bilogur写道：
+在题为 [*要成为更有效的数据科学家，请以实验为思维方式*](https://www.residentmar.io/2019/02/23/data-science-experiments.html) 的博客中，作者 Aleksey Bilogur 写道：
 
 > “数据科学中的基本价值单位是实验。”
 
@@ -180,7 +180,7 @@
 
 ### 更多相关内容
 
-+   [了解如何设计、测量和实施可信的A/B测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
++   [了解如何设计、测量和实施可信的 A/B 测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
 
 +   [免费的 MIT 微积分课程：理解深度学习的关键](https://www.kdnuggets.com/2020/07/free-mit-courses-calculus-key-deep-learning.html)
 

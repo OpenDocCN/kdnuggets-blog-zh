@@ -1,16 +1,16 @@
 # 如何利用机器学习在 GitHub 上自动化任务，实现趣味和盈利
 
-> 原文：[https://www.kdnuggets.com/2019/05/automate-tasks-github-machine-learning-fun-profit.html](https://www.kdnuggets.com/2019/05/automate-tasks-github-machine-learning-fun-profit.html)
+> 原文：[`www.kdnuggets.com/2019/05/automate-tasks-github-machine-learning-fun-profit.html`](https://www.kdnuggets.com/2019/05/automate-tasks-github-machine-learning-fun-profit.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Hamel Husain](https://twitter.com/HamelHusain)、[Michal Jastrzębski](https://twitter.com/_inc0_) 和 [Jeremy Lewi](https://twitter.com/jeremylewi) 发表**
 
 ### 引言：构建一个标签问题的模型并将其作为产品发布！
 
-![图示](../Images/c02dc82f2b4a75b8573e5e5867ba5596.png)
+![图示](img/c02dc82f2b4a75b8573e5e5867ba5596.png)
 
-[链接](https://github.com/genuinetools/img/issues/224)到此问题。更多示例可以在 [这里](https://mlbot.net/) 查看。![图示](../Images/86411aa6eef5f6ee391cb84b4c9b8912.png)
+[链接](https://github.com/genuinetools/img/issues/224)到此问题。更多示例可以在 [这里](https://mlbot.net/) 查看。![图示](img/86411aa6eef5f6ee391cb84b4c9b8912.png)
 
 [链接](https://github.com/hamelsmu/Issue-Label-Bot-Examples/issues/114)到此问题。更多示例可以在 [这里](https://mlbot.net/) 查看
 
@@ -18,7 +18,7 @@
 
 ### 动机：难以捉摸的完美机器学习问题
 
-![图示](../Images/ddbb3122a83f9b3d1b05787c51474c54.png)
+![图示](img/ddbb3122a83f9b3d1b05787c51474c54.png)
 
 寻找理想的机器学习问题可能像寻宝或追逐龙一样。 [图片来源](https://polycount.com/discussion/179516/help-on-creating-a-wide-a-treasure-room-full-of-gold)。
 
@@ -46,7 +46,7 @@
 
 GH-Archive 通过从 [这些事件](https://developer.github.com/v3/activity/events/types/) 中摄取大部分数据，记录了 GitHub 上大量的数据，这些事件来自 [GitHub REST API](https://developer.github.com/v3/)。这些事件以 JSON 格式从 GitHub 发送到 GH-Archive，称为 [负载](https://developer.github.com/v3/activity/events/types/)。下面是编辑问题时收到的负载示例：
 
-![图示](../Images/5fc8c49f45fd2380001639d8f81fd43b.png)
+![图示](img/5fc8c49f45fd2380001639d8f81fd43b.png)
 
 [这个示例](https://developer.github.com/v3/activity/events/types/#webhook-payload-example-14)的一个截断版本。
 
@@ -54,7 +54,7 @@ GH-Archive 通过从 [这些事件](https://developer.github.com/v3/activity/eve
 
 由于数据是以 JSON 格式存在的，解析这些数据的语法可能有些不熟悉。我们可以使用*JSON_EXTRACT*函数来获取我们需要的数据。下面是一个从 issue 负载中提取数据的简单示例：
 
-![图示](../Images/5261c65e969a696028ccd91c7a671061.png)
+![图示](img/5261c65e969a696028ccd91c7a671061.png)
 
 你可能会用到的用于 BigQuery 中 GH-Archive 数据的示例查询语法。请特别注意所使用的语法。
 
@@ -70,7 +70,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 ### 一个端到端的示例：使用机器学习自动标记 GitHub Issues
 
-![图示](../Images/99cc6272c451a4752bd5b6b33af6c8ef.png)
+![图示](img/99cc6272c451a4752bd5b6b33af6c8ef.png)
 
 自动标记问题可以帮助组织和查找信息。照片由[Susan Yin](https://unsplash.com/@syinq?utm_source=medium&utm_medium=referral)提供
 
@@ -96,23 +96,23 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 以下是可以用来创建问题、发表评论和应用标签的代码。这段代码也可以在[这个笔记本](https://github.com/hamelsmu/MLapp/blob/master/notebooks/GitHub-api-example.ipynb)中找到。
 
-![图示](../Images/721ccf5149fd3ccda1f517bbdf206932.png)
+![图示](img/721ccf5149fd3ccda1f517bbdf206932.png)
 
 上述代码创建了[这个 GitHub 问题](https://github.com/hamelsmu/simple_flask_app/issues/1)。这段代码也可以在[这个笔记本](https://github.com/hamelsmu/MLapp/blob/master/notebooks/GitHub-api-example.ipynb)中找到。
 
 你可以在[这里](https://github.com/hamelsmu/simple_flask_app/issues/1)查看由此代码创建的问题。
 
-### 第3步：获取和准备数据。
+### 第 3 步：获取和准备数据。
 
 如前所述，我们可以使用[GH-Archive](https://www.gharchive.org/)托管在[BigQuery](https://www.gharchive.org/#bigquery)上的服务来检索问题示例。此外，我们还可以检索人们为每个问题手动应用的标签。以下是我们用来构建这些标签的帕累托图的查询：
 
-![图示](../Images/478edb5e20b05f3e38360d8349aae5b1.png)
+![图示](img/478edb5e20b05f3e38360d8349aae5b1.png)
 
-[链接](https://console.cloud.google.com/bigquery?sq=123474043329:b424d2bbd79844999b970a0bc8498efa)到这个查询。该查询生成的数据可在[此电子表格](https://docs.google.com/spreadsheets/d/1NPacnVsyZMBneeewvPGhCx512A1RPYf8ktDN_RpKeS4/edit?usp=sharing)中获得。![图示](../Images/ae2363d37f5b076c23a8a29f5e174466.png)
+[链接](https://console.cloud.google.com/bigquery?sq=123474043329:b424d2bbd79844999b970a0bc8498efa)到这个查询。该查询生成的数据可在[此电子表格](https://docs.google.com/spreadsheets/d/1NPacnVsyZMBneeewvPGhCx512A1RPYf8ktDN_RpKeS4/edit?usp=sharing)中获得。![图示](img/ae2363d37f5b076c23a8a29f5e174466.png)
 
 来自公共数据集的主要问题标签。这里展示的只是极长尾部的一部分（未显示）。
 
-[此电子表格](https://docs.google.com/spreadsheets/d/1NPacnVsyZMBneeewvPGhCx512A1RPYf8ktDN_RpKeS4/edit?usp=sharing)包含整个帕累托图的数据。存在一个长尾的问题标签，这些标签并非互斥。例如，*enhancement*和*feature*标签可以组合在一起。此外，标签的质量和含义可能因项目而异。尽管存在这些障碍，我们决定简化问题，并使用我们在手动查看前~200个标签后构建的启发式方法将尽可能多的标签归类为三个类别：*feature request*、*bug*和*question*。此外，我们还咨询了一个大型开源项目[Kubeflow](https://github.com/kubeflow)的维护者，作为我们的第一个客户来验证我们的直觉。
+[此电子表格](https://docs.google.com/spreadsheets/d/1NPacnVsyZMBneeewvPGhCx512A1RPYf8ktDN_RpKeS4/edit?usp=sharing)包含整个帕累托图的数据。存在一个长尾的问题标签，这些标签并非互斥。例如，*enhancement*和*feature*标签可以组合在一起。此外，标签的质量和含义可能因项目而异。尽管存在这些障碍，我们决定简化问题，并使用我们在手动查看前~200 个标签后构建的启发式方法将尽可能多的标签归类为三个类别：*feature request*、*bug*和*question*。此外，我们还咨询了一个大型开源项目[Kubeflow](https://github.com/kubeflow)的维护者，作为我们的第一个客户来验证我们的直觉。
 
 我们尝试创建一个名为*other*的第四类，以便有负样本，包含不在前三类中的项目。然而，我们发现这些“其他”类别的信息很混乱，因为其中有许多错误、功能请求和问题。因此，我们将训练集限制为我们可以归类为*功能请求*、*错误*或*问题*的问题。
 
@@ -132,7 +132,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 我们的模型接受两个输入：问题标题和正文，并将每个问题分类为*错误*、*功能请求*或*问题*。下面是我们使用 [tensorflow.Keras](https://www.tensorflow.org/guide/keras)定义的模型架构：
 
-![图示](../Images/3d87488fc066fe2f3a17321d8e0b7a9e.png)
+![图示](img/3d87488fc066fe2f3a17321d8e0b7a9e.png)
 
 代码可在 [这个笔记本](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb)中找到。
 
@@ -148,7 +148,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 下面是一个混淆矩阵，展示了我们模型在三个类别的测试集上的准确度。模型在分类问题时确实很挣扎，但在区分错误和功能方面表现相当不错。
 
-![](../Images/34a540567ba7e27423be5fe3ebf847c4.png)
+![](img/34a540567ba7e27423be5fe3ebf847c4.png)
 
 请注意，由于我们的测试集不能代表所有问题（因为我们将数据集过滤到只有我们可以分类的问题），因此上述准确度指标应该谨慎对待。我们通过从用户那里收集明确的反馈来在一定程度上缓解这个问题，这使我们能够非常快速地重新训练模型并调试问题。我们将在后面的部分讨论明确的反馈机制。
 
@@ -156,7 +156,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 以下是对玩具示例的模型预测。完整的代码可以在 [这个笔记本](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb)中找到。
 
-![图示](../Images/7ca095f3364391f7ece45cc0df8161a9.png)
+![图示](img/7ca095f3364391f7ece45cc0df8161a9.png)
 
 [链接](https://github.com/hamelsmu/MLapp/blob/master/notebooks/Issue_Labeling_Model.ipynb)到笔记本。
 
@@ -176,7 +176,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 一种很好的实现方式是使用像[Flask](http://flask.pocoo.org/)这样的框架和像[SQLAlchemy](http://flask-sqlalchemy.pocoo.org/2.3/)这样的数据库接口。如果你已经熟悉 Flask，以下是一个简化版本的代码，它在 GitHub 通知打开问题时应用预测标签：
 
-![图示](../Images/c00858b34325953a72aa8044c5f0a436.png)
+![图示](img/c00858b34325953a72aa8044c5f0a436.png)
 
 这段代码也可以在[这里](https://github.com/hamelsmu/MLapp/blob/master/flask_app/app.py)找到。
 
@@ -186,7 +186,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 ### 收集明确的用户反馈。
 
-![图示](../Images/a87519003233f2368ebd3a7d0ec25318.png)
+![图示](img/a87519003233f2368ebd3a7d0ec25318.png)
 
 这张截图取自[这个问题](https://github.com/genuinetools/img/issues/224)。
 
@@ -194,7 +194,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 你可以在[我们应用的主页](https://mlbot.net/)上看到更多预测和用户反馈的示例。例如，这是 kubeflow/kubeflow 仓库的页面：
 
-![图示](../Images/576402916a42df15439e68dbd32003b7.png)
+![图示](img/576402916a42df15439e68dbd32003b7.png)
 
 [链接](https://mlbot.net/data/kubeflow/kubeflow) 到此页面。
 
@@ -256,7 +256,7 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 +   我们的代码库和相关教程假设用户对 Docker 有一定了解。 [这篇博客](https://towardsdatascience.com/how-docker-can-help-you-become-a-more-effective-data-scientist-7fc048ef91d5) 为数据科学家提供了 Docker 的简明介绍。
 
-+   [Kubeflow 项目](https://www.kubeflow.org/) 包含我们将在本博客文章第二部分中使用的资源。此外，本文内容将成为 [即将到来的讲座](https://conferences.oreilly.com/artificial-intelligence/ai-ny/public/schedule/detail/73422) 的主题，讲座定于2019年4月17日。
++   [Kubeflow 项目](https://www.kubeflow.org/) 包含我们将在本博客文章第二部分中使用的资源。此外，本文内容将成为 [即将到来的讲座](https://conferences.oreilly.com/artificial-intelligence/ai-ny/public/schedule/detail/73422) 的主题，讲座定于 2019 年 4 月 17 日。
 
 ### 联系我们！
 
@@ -276,21 +276,21 @@ GitHub 平台允许你构建可以执行多种操作的应用程序，例如[与
 
 **相关：**
 
-+   [合成数据生成：新数据科学家的必备技能](/2018/12/synthetic-data-generation-must-have-skill.html)
++   合成数据生成：新数据科学家的必备技能
 
-+   [趋势深度学习 Github 仓库](/2019/02/trending-top-deep-learning-github-repositories.html)
++   趋势深度学习 Github 仓库
 
-+   [在 TensorFlow 中比较 MobileNet 模型](/2019/03/comparing-mobilenet-models-tensorflow.html)
++   在 TensorFlow 中比较 MobileNet 模型
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

@@ -1,12 +1,12 @@
-# 如何在Airflow上构建DAG工厂
+# 如何在 Airflow 上构建 DAG 工厂
 
-> 原文：[https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html](https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html)
+> 原文：[`www.kdnuggets.com/2021/03/build-dag-factory-airflow.html`](https://www.kdnuggets.com/2021/03/build-dag-factory-airflow.html)
 
-[评论](#comments)
+评论
 
 **由[Axel Furlan](https://www.linkedin.com/in/axelfurlan/)，数据工程师**
 
-![](../Images/a9f359d219ec76580f36b27ce2a8d4ae.png)
+![](img/a9f359d219ec76580f36b27ce2a8d4ae.png)
 
 图片由[Chris Ried](https://unsplash.com/@cdr6934?utm_source=medium&utm_medium=referral)提供，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,45 +14,45 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
-### 为什么选择DAG工厂？
+### 为什么选择 DAG 工厂？
 
-让我们看一个有2个任务的简单DAG……
+让我们看一个有 2 个任务的简单 DAG……
 
-在Airflow中执行2个简单的Python脚本需要这么多的样板代码，难道不奇怪吗？无论你编写多少DAG，你几乎都会发现自己在不同的DAG中编写几乎相同的变量，只是有细微的变化。
+在 Airflow 中执行 2 个简单的 Python 脚本需要这么多的样板代码，难道不奇怪吗？无论你编写多少 DAG，你几乎都会发现自己在不同的 DAG 中编写几乎相同的变量，只是有细微的变化。
 
 请记住，在编码中，通常**编写一段可以后续调用的代码，而不是每次需要该过程时都编写相同的代码**是更好的。这被称为[**DRY**](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself)。
 
-如果你许多DAG共享相似的值，例如*电子邮件地址*、*开始日期*、*调度间隔*、*重试次数*等，那么拥有一段代码来完成这些值可能更好。这就是我们尝试通过工厂类实现的目标。
+如果你许多 DAG 共享相似的值，例如*电子邮件地址*、*开始日期*、*调度间隔*、*重试次数*等，那么拥有一段代码来完成这些值可能更好。这就是我们尝试通过工厂类实现的目标。
 
-使用Airflow上的DAG工厂，我们可以**将创建DAG所需的行数减少一半**。
+使用 Airflow 上的 DAG 工厂，我们可以**将创建 DAG 所需的行数减少一半**。
 
 ### 让我们看一下以下示例
 
-在这里，我们需要一个简单的DAG，它会先打印今天的日期，然后打印“hi”。
+在这里，我们需要一个简单的 DAG，它会先打印今天的日期，然后打印“hi”。
 
-这就是它在Airflow上的样子：
+这就是它在 Airflow 上的样子：
 
-![DAG](../Images/28ce7700d8cfbc5cdf7afda622a439ab.png)
+![DAG](img/28ce7700d8cfbc5cdf7afda622a439ab.png)
 
-注意我们减少了多少冗余。我们没有指定使用了什么操作符、任务的ID、调度间隔、DAG的创建者或创建时间。
+注意我们减少了多少冗余。我们没有指定使用了什么操作符、任务的 ID、调度间隔、DAG 的创建者或创建时间。
 
 我们还可以看到，我们使用字典指定了任务和依赖关系，这最终转化为正确的任务依赖关系 ????
 
 让我们看一个稍微复杂的示例：
 
-在这个DAG中，我指定了2个我希望覆盖默认值的参数。它们是DAG的所有者及其重试次数。我还在`get_airflow_dag()`方法中指定了希望调度为每日执行。
+在这个 DAG 中，我指定了 2 个我希望覆盖默认值的参数。它们是 DAG 的所有者及其重试次数。我还在`get_airflow_dag()`方法中指定了希望调度为每日执行。
 
 这个 DAG 有 3 个任务。`say_bye()` 和 `print_date()` 都依赖于 `say_hi()`。让我们看看在 Airflow 中是如何表现的。
 
-![DAG](../Images/9a353147bdd205ed61664413027c2749.png)
+![DAG](img/9a353147bdd205ed61664413027c2749.png)
 
 现在，让我们来看看如何构建 DAG 工厂 ????
 
@@ -137,11 +137,11 @@ for func in tasks:
 
 **相关：**
 
-+   [2021 年数据科学学习路线图](/2021/02/data-science-learning-roadmap-2021.html)
++   2021 年数据科学学习路线图
 
-+   [成为数据工程师所需的 9 项技能](/2021/03/9-skills-become-data-engineer.html)
++   成为数据工程师所需的 9 项技能
 
-+   [使用 NumPy 和 Pandas 在更大的图上加速机器学习](/2020/05/faster-machine-learning-larger-graphs-numpy-pandas.html)
++   使用 NumPy 和 Pandas 在更大的图上加速机器学习
 
 ### 更多相关话题
 

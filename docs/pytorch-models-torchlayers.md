@@ -1,12 +1,12 @@
 # 使用 torchlayers 轻松构建 PyTorch 模型
 
-> 原文：[https://www.kdnuggets.com/2020/04/pytorch-models-torchlayers.html](https://www.kdnuggets.com/2020/04/pytorch-models-torchlayers.html)
+> 原文：[`www.kdnuggets.com/2020/04/pytorch-models-torchlayers.html`](https://www.kdnuggets.com/2020/04/pytorch-models-torchlayers.html)
 
-[评论](#comments)
+评论
 
-根据 [在线搜索](https://trends.google.com/trends/explore?date=today%205-y&geo=US&q=%2Fg%2F11gd3905v1) 和更重要的 [PyTorch 采用率的持续增长](/2020/01/openai-pytorch-adoption.html) 来看，PyTorch 继续受到广泛关注。PyTorch 被认为是强大而灵活的，这对研究人员来说是受欢迎的。然而，过去 PyTorch 因缺乏类似 TensorFlow 的 Keras 的简化高级 API 而受到批评。这个情况最近发生了变化。
+根据 [在线搜索](https://trends.google.com/trends/explore?date=today%205-y&geo=US&q=%2Fg%2F11gd3905v1) 和更重要的 PyTorch 采用率的持续增长 来看，PyTorch 继续受到广泛关注。PyTorch 被认为是强大而灵活的，这对研究人员来说是受欢迎的。然而，过去 PyTorch 因缺乏类似 TensorFlow 的 Keras 的简化高级 API 而受到批评。这个情况最近发生了变化。
 
-![图示](../Images/920a252480639f8131d0b2e4b22d5974.png)
+![图示](img/920a252480639f8131d0b2e4b22d5974.png)
 
 **[torchlayers](https://github.com/szymonmaszke/torchlayers)** 旨在为 PyTorch 做到 Keras 对 TensorFlow 所做的事情。简洁地由项目开发者定义：
 
@@ -78,21 +78,21 @@ class _MyModuleImpl(torch.nn.Linear):
 
 **相关**：
 
-+   [OpenAI 正在采用 PyTorch... 他们并不孤单](/2020/01/openai-pytorch-adoption.html)
++   OpenAI 正在采用 PyTorch... 他们并不孤单
 
-+   [PyTorch 1.2 的温和介绍](/2019/09/gentle-introduction-pytorch-12.html)
++   PyTorch 1.2 的温和介绍
 
-+   [使用 TensorFlow 和 Keras 进行标记化和文本数据准备](/2020/03/tensorflow-keras-tokenization-text-data-prep.html)
++   使用 TensorFlow 和 Keras 进行标记化和文本数据准备
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

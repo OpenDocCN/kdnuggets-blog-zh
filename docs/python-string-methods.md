@@ -1,8 +1,8 @@
 # Python 字符串方法
 
-> 原文：[https://www.kdnuggets.com/2022/12/python-string-methods.html](https://www.kdnuggets.com/2022/12/python-string-methods.html)
+> 原文：[`www.kdnuggets.com/2022/12/python-string-methods.html`](https://www.kdnuggets.com/2022/12/python-string-methods.html)
 
-![Python 字符串方法](../Images/0df275cd88b01bf0e9b21e4c93a5263e.png)
+![Python 字符串方法](img/0df275cd88b01bf0e9b21e4c93a5263e.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -204,10 +204,10 @@ Is the text numerical? False
 
 +   [Python 字符串匹配无复杂正则语法](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
 
-+   [在Python中将字节转换为字符串：初学者教程](https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners)
++   [在 Python 中将字节转换为字符串：初学者教程](https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners)
 
-+   [每位程序员都应该知道的11种Python魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
++   [每位程序员都应该知道的 11 种 Python 魔法方法](https://www.kdnuggets.com/11-python-magic-methods-every-programmer-should-know)
 
-+   [理解Python的迭代和成员资格：__contains__和__iter__魔法方法指南](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
++   [理解 Python 的迭代和成员资格：__contains__ 和 __iter__ 魔法方法指南](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
 
-+   [k-means聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)
++   [k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)

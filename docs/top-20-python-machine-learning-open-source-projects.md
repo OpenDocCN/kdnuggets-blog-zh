@@ -1,8 +1,8 @@
 # 前 20 大 Python 机器学习开源项目
 
-> 原文：[https://www.kdnuggets.com/2015/06/top-20-python-machine-learning-open-source-projects.html](https://www.kdnuggets.com/2015/06/top-20-python-machine-learning-open-source-projects.html)
+> 原文：[`www.kdnuggets.com/2015/06/top-20-python-machine-learning-open-source-projects.html`](https://www.kdnuggets.com/2015/06/top-20-python-machine-learning-open-source-projects.html)
 
-[评论](#comments) 我们分析了 GitHub 上排名前 20 的 Python [机器学习项目](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)，发现 scikit-Learn、PyLearn2 和 NuPic 是贡献最活跃的项目。探索这些受欢迎的项目吧！![top-python-machine-learning-projects](../Images/2944132867e766168e87f1f11c3f2d16.png) 图 1：GitHub 上的 Python 机器学习项目，颜色对应于提交/贡献者。Bob、Iepy、Nilearn 和 NuPIC 的数值最高。
+评论 我们分析了 GitHub 上排名前 20 的 Python [机器学习项目](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)，发现 scikit-Learn、PyLearn2 和 NuPic 是贡献最活跃的项目。探索这些受欢迎的项目吧！![top-python-machine-learning-projects](img/2944132867e766168e87f1f11c3f2d16.png) 图 1：GitHub 上的 Python 机器学习项目，颜色对应于提交/贡献者。Bob、Iepy、Nilearn 和 NuPIC 的数值最高。
 
 1.  **scikit-learn**，18845 次提交，404 位贡献者，[www.github.com/scikit-learn/scikit-learn](https://github.com/scikit-learn/scikit-learn) scikit-learn 是一个建立在 SciPy 之上的 Python 机器学习模块。它包含各种分类、回归和聚类算法，包括支持向量机、逻辑回归、朴素贝叶斯、随机森林、梯度提升、k-means 和 DBSCAN，并且设计为与 Python 数值和科学库 NumPy 和 SciPy 互操作。
 
@@ -14,19 +14,19 @@
 
 1.  PyBrain，969 次提交，27 位贡献者，[www.github.com/pybrain/pybrain](https://github.com/pybrain/pybrain) PyBrain 是 Python 基于强化学习、人工智能和神经网络库的缩写。其目标是提供灵活、易于使用且强大的机器学习任务算法和多种预定义环境，以测试和比较你的算法。
 
-1.  **Pattern**，943次提交，20名贡献者，[www.github.com/clips/pattern](https://github.com/clips/pattern) Pattern 是一个用于 Python 的网络挖掘模块。它拥有数据挖掘、自然语言处理、网络分析和机器学习的工具。它支持向量空间模型、聚类、使用 KNN、SVM、感知机的分类。
+1.  **Pattern**，943 次提交，20 名贡献者，[www.github.com/clips/pattern](https://github.com/clips/pattern) Pattern 是一个用于 Python 的网络挖掘模块。它拥有数据挖掘、自然语言处理、网络分析和机器学习的工具。它支持向量空间模型、聚类、使用 KNN、SVM、感知机的分类。
 
-1.  **Fuel**，497次提交，12名贡献者，[www.github.com/mila-udem/fuel](https://github.com/mila-udem/fuel) Fuel 为你的机器学习模型提供所需的数据。它具有对常见数据集的接口，如 MNIST、CIFAR-10（图像数据集）、Google 的 One Billion Words（文本数据）。它允许你以各种方式迭代数据，例如使用洗牌/顺序示例的小批量。
+1.  **Fuel**，497 次提交，12 名贡献者，[www.github.com/mila-udem/fuel](https://github.com/mila-udem/fuel) Fuel 为你的机器学习模型提供所需的数据。它具有对常见数据集的接口，如 MNIST、CIFAR-10（图像数据集）、Google 的 One Billion Words（文本数据）。它允许你以各种方式迭代数据，例如使用洗牌/顺序示例的小批量。
 
-1.  **Bob**，5080次提交，11名贡献者，[www.github.com/idiap/bob](https://github.com/idiap/bob) Bob 是一个免费的信号处理和机器学习工具箱。该工具箱由 Python 和 C++ 混合编写，旨在高效且减少开发时间。它由相当多的包组成，这些包实现了图像、音频和视频处理、机器学习和模式识别的工具。
+1.  **Bob**，5080 次提交，11 名贡献者，[www.github.com/idiap/bob](https://github.com/idiap/bob) Bob 是一个免费的信号处理和机器学习工具箱。该工具箱由 Python 和 C++ 混合编写，旨在高效且减少开发时间。它由相当多的包组成，这些包实现了图像、音频和视频处理、机器学习和模式识别的工具。
 
-1.  **skdata**，441次提交，10名贡献者，[www.github.com/jaberg/skdata](https://github.com/jaberg/skdata) Skdata 是一个用于机器学习和统计的数据集库。该模块提供了对玩具问题以及流行的计算机视觉和自然语言处理数据集的标准化 Python 访问。
+1.  **skdata**，441 次提交，10 名贡献者，[www.github.com/jaberg/skdata](https://github.com/jaberg/skdata) Skdata 是一个用于机器学习和统计的数据集库。该模块提供了对玩具问题以及流行的计算机视觉和自然语言处理数据集的标准化 Python 访问。
 
-1.  **MILK**，687次提交，9名贡献者，[www.github.com/luispedro/milk](https://github.com/luispedro/milk) Milk 是一个 Python 机器学习工具包。它专注于有监督的分类，提供了多种分类器：SVMs、k-NN、随机森林、决策树。它还执行特征选择。这些分类器可以以多种方式组合，形成不同的分类系统。对于无监督学习，`milk` 支持 k-means 聚类和亲和传播。
+1.  **MILK**，687 次提交，9 名贡献者，[www.github.com/luispedro/milk](https://github.com/luispedro/milk) Milk 是一个 Python 机器学习工具包。它专注于有监督的分类，提供了多种分类器：SVMs、k-NN、随机森林、决策树。它还执行特征选择。这些分类器可以以多种方式组合，形成不同的分类系统。对于无监督学习，`milk` 支持 k-means 聚类和亲和传播。
 
-1.  IEPY，1758次提交，9名贡献者，[www.github.com/machinalis/iepy](https://github.com/machinalis/iepy) IEPY 是一个开源的信息提取工具，专注于关系提取。它针对需要在大型数据集上进行信息提取的用户，尤其是那些希望实验新 IE 算法的科学家。
+1.  IEPY，1758 次提交，9 名贡献者，[www.github.com/machinalis/iepy](https://github.com/machinalis/iepy) IEPY 是一个开源的信息提取工具，专注于关系提取。它针对需要在大型数据集上进行信息提取的用户，尤其是那些希望实验新 IE 算法的科学家。
 
-1.  Quepy，131次提交，9名贡献者，[www.github.com/machinalis/quepy](https://github.com/machinalis/quepy) Quepy 是一个 Python 框架，用于将自然语言问题转换为数据库查询语言中的查询。它可以轻松地自定义不同类型的自然语言问题和数据库查询。因此，通过少量编码，你可以构建自己的系统，以自然语言访问你的数据库。目前，Quepy 支持 Sparql 和 MQL 查询语言，并计划扩展到其他数据库查询语言。
+1.  Quepy，131 次提交，9 名贡献者，[www.github.com/machinalis/quepy](https://github.com/machinalis/quepy) Quepy 是一个 Python 框架，用于将自然语言问题转换为数据库查询语言中的查询。它可以轻松地自定义不同类型的自然语言问题和数据库查询。因此，通过少量编码，你可以构建自己的系统，以自然语言访问你的数据库。目前，Quepy 支持 Sparql 和 MQL 查询语言，并计划扩展到其他数据库查询语言。
 
 1.  Hebel, 244 次提交, 5 名贡献者, [www.github.com/hannes-brt/hebel](https://github.com/hannes-brt/hebel) Hebel 是一个用于深度学习的库，使用 CUDA 通过 PyCUDA 在 Python 中加速神经网络。它实现了最重要的神经网络模型类型，并提供了各种激活函数和训练方法，如动量、Nesterov 动量、丢弃和提前停止。
 
@@ -46,11 +46,11 @@
 
 本文使用了一些内容来自 [**www.pansop.com/1039/**](http://pansop.com/1039/) **相关：**
 
-+   [**有趣的开源机器学习、数据挖掘、数据科学项目**](/2012/08/interesting-open-source-projects-in-ai-machine-learning.html)
++   **有趣的开源机器学习、数据挖掘、数据科学项目**
 
-+   [**开源机器学习工具**](/2014/12/open-source-tools-machine-learning.html)
++   **开源机器学习工具**
 
-+   [**真正的数据科学家请站出来！**](/2015/05/data-science-machine-learning-scientist-definition-jargon.html)
++   **真正的数据科学家请站出来！**
 
 ### 更多相关主题
 
@@ -62,6 +62,6 @@
 
 +   [顶级开源大型语言模型](https://www.kdnuggets.com/2022/09/john-snow-top-open-source-large-language-models.html)
 
-+   [2023年十大开源数据科学工具的比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
++   [2023 年十大开源数据科学工具的比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
 
 +   [使用开源工具生成合成时间序列数据](https://www.kdnuggets.com/2022/06/generate-synthetic-timeseries-data-opensource-tools.html)

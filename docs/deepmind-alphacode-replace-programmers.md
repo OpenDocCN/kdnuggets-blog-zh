@@ -1,8 +1,8 @@
 # DeepMind 的 AlphaCode 会替代程序员吗？
 
-> 原文：[https://www.kdnuggets.com/2022/04/deepmind-alphacode-replace-programmers.html](https://www.kdnuggets.com/2022/04/deepmind-alphacode-replace-programmers.html)
+> 原文：[`www.kdnuggets.com/2022/04/deepmind-alphacode-replace-programmers.html`](https://www.kdnuggets.com/2022/04/deepmind-alphacode-replace-programmers.html)
 
-![DeepMind 的 AlphaCode 会替代程序员吗？](../Images/eca2460ef01d71be4924a01be695d6e7.png)
+![DeepMind 的 AlphaCode 会替代程序员吗？](img/eca2460ef01d71be4924a01be695d6e7.png)
 
 图片由作者提供
 
@@ -22,7 +22,7 @@ AlphaCode 读取问题陈述并提出数千种潜在解决方案。这些解决�
 
 AlphaCode 解决了在 Codeforces 平台上已有 5,000 名用户尝试过的十个挑战。它被排在了过去六个月在该网站上参与竞争的用户中**28%**的前列。这对于初次发布而言是相当了不起的成就。DeepMind 团队表示，AlphaCode 目前仅限于竞争编程领域，他们正扩展这一领域以使其编程更加便捷和完全自动化 - [The Verge](https://www.theverge.com/2022/2/2/22914085/alphacode-ai-coding-program-automatic-deepmind-codeforce)。
 
-![alphacode deepmind](../Images/2bae6b4e48d9a9e275b89a4a853774d7.png)
+![alphacode deepmind](img/2bae6b4e48d9a9e275b89a4a853774d7.png)
 
 Gif 来源于 [AlphaCode](https://alphacode.deepmind.com/)
 
@@ -36,7 +36,7 @@ Gif 来源于 [AlphaCode](https://alphacode.deepmind.com/)
 
 即使我们能够解决我上面提到的所有问题，现实世界的软件开发与编码挑战有很大不同。在软件开发中，项目的需求往往模糊，你需要通过逐步迭代来改进初始想法。这是程序员与利益相关者之间的反复谈判。没有固定的输入和输出，你需要通过每次迭代来确定输出。很难将所有利益相关者的需求以结构化的形式编写，因此 AlphaCode 只是一个实验，而不是对人类的真正威胁。
 
-![编码挑战与软件开发](../Images/6fc70565da4a849462aaf328e9c7f364.png)
+![编码挑战与软件开发](img/6fc70565da4a849462aaf328e9c7f364.png)
 
 作者图像 | 编码挑战与软件开发 | 编码挑战来自 [DeepMind](https://www.deepmind.com/blog/competitive-programming-with-alphacode)
 
@@ -44,7 +44,7 @@ Gif 来源于 [AlphaCode](https://alphacode.deepmind.com/)
 
 让我们讨论一下 AlphaCode 和类似的 AI 应用程序的实用性。GitHub Copilot 通过自动补全代码来帮助开发者，有时它会根据你的编码实践学习并提供个性化解决方案，自动化大量软件开发。AlphaCode 的未来是帮助编码者和非编码者。主要任务是使重复任务自动化，使软件开发对程序员和非技术人员都变得轻松。最近，我们看到无代码或少代码软件开发的兴起，这只是一个开始。这些 AI 程序不会取代人类，但会使我们更好地创建软件解决方案。
 
-![OpenAI Codex | Python 自动补全](../Images/2c69ae73f6e0ba2aaa3440c8984ca86b.png)
+![OpenAI Codex | Python 自动补全](img/2c69ae73f6e0ba2aaa3440c8984ca86b.png)
 
 图像来自 [OpenAI Codex | Python 自动补全](https://openai.com/blog/openai-codex/)
 
@@ -54,7 +54,7 @@ Gif 来源于 [AlphaCode](https://alphacode.deepmind.com/)
 
 总结我们的讨论，我认为 AI 是来帮助我们的。它是一个先进的工具，将帮助我们解决复杂的问题并自动化重复的任务。
 
-![SalesForce CodeGen](../Images/365f9d400407b73880bb8987814c291f.png)
+![SalesForce CodeGen](img/365f9d400407b73880bb8987814c291f.png)
 
 图像来自 [SalesForce CodeGen | 对话式 AI 编程](https://blog.salesforceairesearch.com/codegen/)
 
@@ -64,24 +64,24 @@ Gif 来源于 [AlphaCode](https://alphacode.deepmind.com/)
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [程序员的10个数学概念](https://www.kdnuggets.com/10-math-concepts-for-programmers)
++   [程序员的 10 个数学概念](https://www.kdnuggets.com/10-math-concepts-for-programmers)
 
 +   [人工智能不是来取代我们的](https://www.kdnuggets.com/2023/02/ai-replace-us.html)
 
-+   [ChatGPT会取代数据科学家吗？](https://www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html)
++   [ChatGPT 会取代数据科学家吗？](https://www.kdnuggets.com/2023/06/chatgpt-replace-data-scientists.html)
 
 +   [人工智能会取代人类吗？](https://www.kdnuggets.com/will-ai-replace-humanity)
 
-+   [你应该用哪些AI搜索引擎替代谷歌](https://www.kdnuggets.com/top-8-ai-search-engine-that-you-should-replace-with-google)
++   [你应该用哪些 AI 搜索引擎替代谷歌](https://www.kdnuggets.com/top-8-ai-search-engine-that-you-should-replace-with-google)
 
-+   [深入了解DeepMind在利用深度学习推进数学方面的新努力](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)
++   [深入了解 DeepMind 在利用深度学习推进数学方面的新努力](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)

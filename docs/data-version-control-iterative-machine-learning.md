@@ -1,18 +1,18 @@
 # 数据版本控制：迭代机器学习
 
-> 原文：[https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html](https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html`](https://www.kdnuggets.com/2017/05/data-version-control-iterative-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：Dmitry Petrov，[Twitter](https://twitter.com/fullstackml)**
 
-在现实生活中，几乎不可能一次性开发出一个好的机器学习模型。ML建模是一个迭代过程，跟踪你的步骤、步骤之间的依赖关系、代码和数据文件之间的依赖关系以及所有代码运行参数极为重要。在团队环境中，这变得更加重要和复杂，因为数据科学家的协作占据了团队的大部分精力。
+在现实生活中，几乎不可能一次性开发出一个好的机器学习模型。ML 建模是一个迭代过程，跟踪你的步骤、步骤之间的依赖关系、代码和数据文件之间的依赖关系以及所有代码运行参数极为重要。在团队环境中，这变得更加重要和复杂，因为数据科学家的协作占据了团队的大部分精力。
 
-![data-version-control](../Images/d94170a17e22b183d6db453a8b004034.png)
+![data-version-control](img/d94170a17e22b183d6db453a8b004034.png)
 
-今天，我们很高兴地宣布新开源工具[data version control](https://dataversioncontrol.com/)或DVC的beta版本发布。DVC旨在帮助数据科学家跟踪他们的ML过程和文件依赖，形式类似于git命令：“**dvc run python train_model.py data/train_matrix.p data/model.p**”。无论使用哪种编程语言或工具，你现有的ML过程都可以轻松转化为可重现的DVC管道。
+今天，我们很高兴地宣布新开源工具[data version control](https://dataversioncontrol.com/)或 DVC 的 beta 版本发布。DVC 旨在帮助数据科学家跟踪他们的 ML 过程和文件依赖，形式类似于 git 命令：“**dvc run python train_model.py data/train_matrix.p data/model.p**”。无论使用哪种编程语言或工具，你现有的 ML 过程都可以轻松转化为可重现的 DVC 管道。
 
-这篇博客文章引导你通过一个迭代过程，使用DVC构建机器学习模型，数据集为[stackoverflow posts dataset](https://archive.org/details/stackexchange)。首先，你需要初始化一个Git仓库，并下载我们将用来展示DVC的建模源代码：
+这篇博客文章引导你通过一个迭代过程，使用 DVC 构建机器学习模型，数据集为[stackoverflow posts dataset](https://archive.org/details/stackexchange)。首先，你需要初始化一个 Git 仓库，并下载我们将用来展示 DVC 的建模源代码：
 
 *$ mkdir myrepo*
 
@@ -40,21 +40,21 @@
 
 *$ git commit -m ‘下载代码’*
 
-可以通过运行下面的bash代码来构建完整的管道。如果你使用的是Python 3，请将python替换为python3，将pip替换为pip3。
+可以通过运行下面的 bash 代码来构建完整的管道。如果你使用的是 Python 3，请将 python 替换为 python3，将 pip 替换为 pip3。
 
-*# 安装DVC*
+*# 安装 DVC*
 
 *$ pip install dvc*
 
-*# 初始化DVC仓库*
+*# 初始化 DVC 仓库*
 
 *$ dvc init*
 
-*# 下载文件并放入data/目录中。*
+*# 下载文件并放入 data/目录中。*
 
 *$ dvc import https://s3-us-west-2.amazonaws.com/dvc-share/so/25K/Posts.xml.tgz data/*
 
-*# 从归档中提取XML文件。*
+*# 从归档中提取 XML 文件。*
 
 *$ dvc run tar zxf data/Posts.xml.tgz -C data/*
 
@@ -64,7 +64,7 @@
 
 *# 切分训练和测试数据集。两个输出文件。*
 
-*# 0.33是测试数据集分割比例。20170426是随机化的种子。*
+*# 0.33 是测试数据集分割比例。20170426 是随机化的种子。*
 
 *$ dvc run python code/split_train_test.py data/Posts.tsv 0.33 20170426 data/Posts-train.tsv data/Posts-test.tsv*
 
@@ -150,7 +150,7 @@
 
 DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通过 Git 包含依赖项（DAG）轻松共享该环境——这是一个令人兴奋的协作功能，能够在不同的计算机上重现研究结果。此外，你可以通过像 AWS S3 或 GCP Storage 这样的云存储服务共享数据文件，因为 DVC 不会将数据文件推送到 Git 仓库中。
 
-![data-git](../Images/e992418268b6a645a274161e612fc858.png)
+![data-git](img/e992418268b6a645a274161e612fc858.png)
 
 以下代码展示了如何通过 Git 分享你的代码和 DAG，以及通过 S3 分享数据文件：
 
@@ -174,11 +174,11 @@ DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通�
 
 *$ dvc sync data/matrix-train.p data/matrix-test.p*
 
-*上传缓存文件“.cache/matrix-train.p_1fa3a9b”到S3“projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*
+*上传缓存文件“.cache/matrix-train.p_1fa3a9b”到 S3“projects/tag_classifier/.cache/matrix-train.p_1fa3a9b”*
 
 *上传完成*
 
-*上传缓存文件“.cache/matrix-test.p_1fa3a9b”到S3“projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*
+*上传缓存文件“.cache/matrix-test.p_1fa3a9b”到 S3“projects/tag_classifier/.cache/matrix-test.p_1fa3a9b”*
 
 *上传完成*
 
@@ -192,7 +192,7 @@ DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通�
 
 *$ dvc sync data/*
 
-*上传缓存文件“.cache/empty_0000000”到S3“projects/tag_classifier/.cache/empty_0000000”*
+*上传缓存文件“.cache/empty_0000000”到 S3“projects/tag_classifier/.cache/empty_0000000”*
 
 *上传完成*
 
@@ -240,7 +240,7 @@ DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通�
 
 已重现的步骤（红色）：
 
-![数据挖掘](../Images/6d2e0ad482fb831ad427aa29277f20e1.png)
+![数据挖掘](img/6d2e0ad482fb831ad427aa29277f20e1.png)
 
 ### 结论
 
@@ -256,21 +256,21 @@ DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通�
 
 **相关：**
 
-+   [修复 CRISP-DM 中的部署和迭代问题](/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)
++   修复 CRISP-DM 中的部署和迭代问题
 
-+   [数据科学自动化：揭穿误解](/2016/08/data-science-automation-debunking-misconceptions.html)
++   数据科学自动化：揭穿误解
 
-+   [RCloud – 数据科学的 DevOps](/2016/11/rcloud-devops-data-science.html)
++   RCloud – 数据科学的 DevOps
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -284,6 +284,6 @@ DVC 不仅可以将你的工作简化为一个可重复的环境，还可以通�
 
 +   [每个机器学习工程师都应该掌握的 5 种机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3 门免费机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费机器学习课程](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)

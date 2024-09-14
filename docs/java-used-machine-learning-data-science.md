@@ -1,22 +1,22 @@
 # Java 可以用于机器学习和数据科学吗？
 
-> 原文：[https://www.kdnuggets.com/2020/04/java-used-machine-learning-data-science.html](https://www.kdnuggets.com/2020/04/java-used-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/04/java-used-machine-learning-data-science.html`](https://www.kdnuggets.com/2020/04/java-used-machine-learning-data-science.html)
 
-[评论](#comments)
+评论
 
 **由 Malcom Ridgers, [BairesDev](https://www.bairesdev.com/)**
 
-![Figure](../Images/6e1133d9d492d720886fd61769eb6ff8.png)
+![Figure](img/6e1133d9d492d720886fd61769eb6ff8.png)
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 有许多不同的编程语言适用于开发机器学习和数据科学应用。虽然 Python 和 [R](https://www.r-project.org/about.html) 已成为构建这些程序的热门选择，但许多组织正在转向 [Java 应用开发](https://www.bairesdev.com/insights/java-development-services/?utm_source=kdnuggets&utm_medium=link&utm_campaign=content&utm_content=middle) 来满足他们的需求。从企业级业务解决方案和导航系统到手机和应用程序，Java 几乎适用于所有技术领域。
 
-在90年代初，一位名叫[詹姆斯·戈斯林及其团队](https://www.oracle.com/technetwork/java/javase/overview/javahistory-index-198355.html)的加拿大计算机科学家在太阳微系统公司（现为甲骨文公司所有）创建了 Java。二十多年后，Java 仍然是当今排名靠前且[最有利可图](https://blog.edx.org/the-4-most-lucrative-programming-skills-you-can-learn-online/)的编程语言之一。
+在 90 年代初，一位名叫[詹姆斯·戈斯林及其团队](https://www.oracle.com/technetwork/java/javase/overview/javahistory-index-198355.html)的加拿大计算机科学家在太阳微系统公司（现为甲骨文公司所有）创建了 Java。二十多年后，Java 仍然是当今排名靠前且[最有利可图](https://blog.edx.org/the-4-most-lucrative-programming-skills-you-can-learn-online/)的编程语言之一。
 
 ### 为什么选择 Java 用于数据科学和机器学习？
 
@@ -56,11 +56,11 @@ Java 是一种极其有用、快速且可靠的编程语言，帮助开发团队
 
 **相关：**
 
-+   [Kubeflow 如何为你的 Kubernetes 部署添加 AI](/2020/02/kubeflow-ai-kubernetes-deployments.html)
++   Kubeflow 如何为你的 Kubernetes 部署添加 AI
 
-+   [人工智能、机器学习、深度学习和 Java 的两年生活](/2019/11/life-ai-machine-learning-deep-learning-java.html)
++   人工智能、机器学习、深度学习和 Java 的两年生活
 
-+   [为什么 Python 是数据科学中最受欢迎的语言之一？](/2020/01/python-preferred-languages-data-science.html)
++   为什么 Python 是数据科学中最受欢迎的语言之一？
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # 解决线性回归应该使用哪些方法？
 
-> 原文：[https://www.kdnuggets.com/2020/09/solving-linear-regression.html](https://www.kdnuggets.com/2020/09/solving-linear-regression.html)
+> 原文：[`www.kdnuggets.com/2020/09/solving-linear-regression.html`](https://www.kdnuggets.com/2020/09/solving-linear-regression.html)
 
-[评论](#comments)
+评论
 
 **由 [Ahmad Bin Shafiq](https://medium.com/@ahmadbinshafiq)，机器学习学生**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -42,15 +42,15 @@
 
 现在，假设我们的数据以散点图的形式绘制出来，当我们对其应用一个成本函数时，我们的模型会做出预测。这个预测可能非常好，也可能与我们的理想预测相距甚远（即成本很高）。因此，为了最小化这个成本（错误），我们应用梯度下降。
 
-现在，梯度下降会逐渐使我们的假设收敛到全局最小值，在那里**成本**最低。在此过程中，我们必须手动设置**alpha**的值，且假设的斜率会根据alpha的值而变化。如果alpha的值很大，那么梯度下降将会采取大的步伐。否则，在小的alpha情况下，我们的假设将会慢慢收敛，通过小的步骤。
+现在，梯度下降会逐渐使我们的假设收敛到全局最小值，在那里**成本**最低。在此过程中，我们必须手动设置**alpha**的值，且假设的斜率会根据 alpha 的值而变化。如果 alpha 的值很大，那么梯度下降将会采取大的步伐。否则，在小的 alpha 情况下，我们的假设将会慢慢收敛，通过小的步骤。
 
-![](../Images/05c736b21cefb5041ec721443fcb0400.png)
+![](img/05c736b21cefb5041ec721443fcb0400.png)
 
 *假设收敛到全局最小值。图片来源于 [Medium](https://medium.com/@ahmadbinshafiq/linear-regression-simplified-for-beginners-dcd3afe0b23f)。*
 
 梯度下降的方程是
 
-![](../Images/c61371274f47e7d11e00674987d93d89.png)
+![](img/c61371274f47e7d11e00674987d93d89.png)
 
 *来源：[Ruder.io](https://ruder.io/optimizing-gradient-descent/index.html#batchgradientdescent)。*
 
@@ -87,7 +87,7 @@ pyplot.show()
 
 ```
 
-![](../Images/2134bd14e00ac4b5f024dfa631837691.png)
+![](img/2134bd14e00ac4b5f024dfa631837691.png)
 
 *梯度下降后的模型。*
 
@@ -97,9 +97,9 @@ pyplot.show()
 
 梯度下降法的重要优点包括
 
-+   相比于SVD或ADAM，计算成本较低
++   相比于 SVD 或 ADAM，计算成本较低
 
-+   运行时间为O(kn²)
++   运行时间为 O(kn²)
 
 +   在特征数量较多的情况下效果很好
 
@@ -121,17 +121,17 @@ pyplot.show()
 
 **最小二乘法的工作原理**
 
-在普通LSM中，我们直接求解系数的值。简而言之，通过一步，我们达到光学最小点，或者我们可以说仅一步我们将假设拟合到数据中，成本最低。
+在普通 LSM 中，我们直接求解系数的值。简而言之，通过一步，我们达到光学最小点，或者我们可以说仅一步我们将假设拟合到数据中，成本最低。
 
-![](../Images/de26c7903434f41e202cdfdc438bfa58.png)
+![](img/de26c7903434f41e202cdfdc438bfa58.png)
 
-*在应用LSM之前和之后的数据集。图片来自 [Medium](https://towardsdatascience.com/complete-guide-to-linear-regression-in-python-d95175447255)。*
+*在应用 LSM 之前和之后的数据集。图片来自 [Medium](https://towardsdatascience.com/complete-guide-to-linear-regression-in-python-d95175447255)。*
 
-LSM的方程是
+LSM 的方程是
 
-![](../Images/46f6be2f627273f634faebbbd21e17ee.png)
+![](img/46f6be2f627273f634faebbbd21e17ee.png)
 
-**在Python中实现LSM**
+**在 Python 中实现 LSM**
 
 ```py
 import numpy as np
@@ -153,7 +153,7 @@ pyplot.show()
 
 ```
 
-![](../Images/37cf628c5f022a6500bd42f2a2e07d28.png)
+![](img/37cf628c5f022a6500bd42f2a2e07d28.png)
 
 首先我们创建了我们的数据集，然后使用最小二乘法最小化我们的假设成本。
 
@@ -163,7 +163,7 @@ pyplot.show()
 
 **优点：**
 
-LSM的重要优点包括：
+LSM 的重要优点包括：
 
 +   无需学习率
 
@@ -181,37 +181,37 @@ LSM的重要优点包括：
 
 +   当特征数量较多时较慢
 
-+   运行时间为O(n³)
++   运行时间为 O(n³)
 
-+   有时你的X转置X是不可逆的，即没有逆的奇异矩阵。你可以使用*np.linalg.pinv*代替*np.linalg.inv*来克服这个问题。
++   有时你的 X 转置 X 是不可逆的，即没有逆的奇异矩阵。你可以使用*np.linalg.pinv*代替*np.linalg.inv*来克服这个问题。
 
-### Adam方法
+### Adam 方法
 
 ADAM，即自适应矩估计，是一种在深度学习中广泛使用的优化算法。
 
 这是一个迭代算法，对噪声数据效果很好。
 
-这是RMSProp和小批量梯度下降算法的结合。
+这是 RMSProp 和小批量梯度下降算法的结合。
 
-除了像Adadelta和RMSprop一样存储过去平方梯度的指数衰减平均值外，Adam还保留了过去梯度的指数衰减平均值，类似于动量。
+除了像 Adadelta 和 RMSprop 一样存储过去平方梯度的指数衰减平均值外，Adam 还保留了过去梯度的指数衰减平均值，类似于动量。
 
 我们计算过去和过去平方梯度的衰减平均值如下：
 
-![](../Images/d8d0ce73722f8ff946b44afce3bed82b.png)
+![](img/d8d0ce73722f8ff946b44afce3bed82b.png)
 
 *致谢： [Ruder.io](https://ruder.io/optimizing-gradient-descent/index.html#adam)。*
 
-由于*mt*和*vt*初始化为0向量，Adam的作者观察到它们在初始时间步骤特别偏向于零，尤其是当衰减率较小（即β1β1和β2β2接近1）时。
+由于*mt*和*vt*初始化为 0 向量，Adam 的作者观察到它们在初始时间步骤特别偏向于零，尤其是当衰减率较小（即β1β1 和β2β2 接近 1）时。
 
 他们通过计算经过偏差校正的第一和第二矩估计来抵消这些偏差：
 
-![](../Images/4b1d19391beb6059d447bedfd93aac64.png)
+![](img/4b1d19391beb6059d447bedfd93aac64.png)
 
 *致谢: [Ruder.io](https://ruder.io/optimizing-gradient-descent/#adam)。*
 
 然后他们用以下方法更新参数：
 
-![](../Images/72bdfcb71d105944ac3fc874029e46e4.png)
+![](img/72bdfcb71d105944ac3fc874029e46e4.png)
 
 *致谢: [Ruder.io](https://ruder.io/optimizing-gradient-descent/#adam)。*
 
@@ -219,7 +219,7 @@ ADAM，即自适应矩估计，是一种在深度学习中广泛使用的优化�
 
 **Adam 的伪代码** 是
 
-![](../Images/f7d9cefe677a4dec1b2411846d9b89eb.png)
+![](img/f7d9cefe677a4dec1b2411846d9b89eb.png)
 
 *来源: [Arxiv Adam](https://arxiv.org/pdf/1412.6980v9.pdf)。*
 
@@ -245,7 +245,7 @@ print("Slope is ", stats.mstats.linregress(x,y).slope)
 
 ```
 
-![](../Images/052dd2e3a15d0ee688af908dd00bfd1a.png)
+![](img/052dd2e3a15d0ee688af908dd00bfd1a.png)
 
 现在让我们使用 Seaborn 的 *regplot* 函数查看线性回归线。
 
@@ -256,7 +256,7 @@ pyplot.show()
 
 ```
 
-![](../Images/17b5a51be7715cb2d005f456aebaff9b.png)
+![](img/17b5a51be7715cb2d005f456aebaff9b.png)
 
 现在让我们用纯 Python 编写 Adam 优化器。
 
@@ -336,7 +336,7 @@ print ('\nFinal theta = {}'.format(theta))
 
 ```
 
-![](../Images/edf2910abbf73579207f6226f5774d44.png)
+![](img/edf2910abbf73579207f6226f5774d44.png)
 
 现在，如果我们将 *Final theta* 值与之前使用 *scipy.stats.mstat.linregress* 计算的斜率和截距值进行比较，它们几乎相等，经过调整超参数后可以完全相等。
 
@@ -352,7 +352,7 @@ pyplot.show()
 
 ```
 
-![](../Images/35e7578a0e22a853df15714a5103be67.png)
+![](img/35e7578a0e22a853df15714a5103be67.png)
 
 我们可以看到我们的图与使用 *sns.regplot* 获得的图类似。
 
@@ -384,7 +384,7 @@ pyplot.show()
 
 SVD 用于（其中之一）作为预处理步骤，以减少学习算法的维度。SVD 将矩阵分解为三个其他矩阵（U, S, V）的乘积。
 
-![](../Images/99d90e99fc9d0ec6c74a128cb72ae814.png)
+![](img/99d90e99fc9d0ec6c74a128cb72ae814.png)
 
 一旦我们的矩阵被分解，假设的系数可以通过计算输入矩阵 **X** 的伪逆并将其乘以输出向量 **y** 来找到。之后，我们将假设拟合到数据中，这将给我们最低的成本。
 
@@ -411,7 +411,7 @@ pyplot.show()
 
 ```
 
-![](../Images/0474bf1c816645c5a8f9d172b29df722.png)
+![](img/0474bf1c816645c5a8f9d172b29df722.png)
 
 尽管它没有很好地收敛，但仍然相当不错。
 

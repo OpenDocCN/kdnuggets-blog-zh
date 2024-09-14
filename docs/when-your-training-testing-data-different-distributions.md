@@ -1,24 +1,24 @@
 # 当你的训练数据和测试数据来自不同的分布时应该怎么办
 
-> 原文：[https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html](https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html)
+> 原文：[`www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html`](https://www.kdnuggets.com/2019/01/when-your-training-testing-data-different-distributions.html)
 
-[评论](#comments)
+评论
 
-**由[Nezar Assawiel](https://www.linkedin.com/in/assawiel/)，机器学习开发者，Clinical AI创始人**
+**由[Nezar Assawiel](https://www.linkedin.com/in/assawiel/)，机器学习开发者，Clinical AI 创始人**
 
-![图](../Images/7906a1dad8eea961af94ad613f47a801.png)
+![图](img/7906a1dad8eea961af94ad613f47a801.png)
 
-版权： [https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/](https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/)
+版权： [`www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/`](https://www.chessbazaar.com/blog/game-chess-can-make-child-genius-smarter/)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -46,25 +46,25 @@
 
 研究目标数据分布时——你发现这些图像大多模糊、分辨率低，并且类似于下图：
 
-![](../Images/dc5a1bfada6c5f213065ac99f836a8a2.png)
+![](img/dc5a1bfada6c5f213065ac99f836a8a2.png)
 
 左：狗（意大利小型梗犬品种），右：北极狐。
 
-你只能收集到8,000张这样的图像，这不足以构建训练/验证/测试集。假设你已经确定需要至少100,000张图像。
+你只能收集到 8,000 张这样的图像，这不足以构建训练/验证/测试集。假设你已经确定需要至少 100,000 张图像。
 
-你想知道是否可以使用来自另一个数据集的图像——除了你收集的8,000张图像——来构建训练/验证/测试集。
+你想知道是否可以使用来自另一个数据集的图像——除了你收集的 8,000 张图像——来构建训练/验证/测试集。
 
-你意识到你可以很容易地从网络上抓取数据，构建一个100,000张图像或更多的数据库，其图像中的狗和非狗的频率与所需的频率相似。
+你意识到你可以很容易地从网络上抓取数据，构建一个 100,000 张图像或更多的数据库，其图像中的狗和非狗的频率与所需的频率相似。
 
 但是，很明显，这个网络数据集来自不同的分布，具有高分辨率和清晰的图像，如下所示：
 
-![](../Images/b85bc6bc9858be3d6e4a30380895fae9.png)   ![](../Images/f3f393c4a8cefdb2a476debdbebee0ed.png)   ![](../Images/964ddc69d412a0d7fcfeed96c96fc163.png)
+![](img/b85bc6bc9858be3d6e4a30380895fae9.png)   ![](img/f3f393c4a8cefdb2a476debdbebee0ed.png)   ![](img/964ddc69d412a0d7fcfeed96c96fc163.png)
 
 狗的图像（左边和右边）和狐狸的图像（中间）。
 
 你将如何构建训练/验证/测试集？
 
-你不能仅仅使用你收集的8,000张原始图像来构建训练/验证/测试集，因为这些图像不足以构建一个表现良好的分类器。通常，计算机视觉和其他自然感知问题——语音识别或自然语言处理——需要大量的数据。
+你不能仅仅使用你收集的 8,000 张原始图像来构建训练/验证/测试集，因为这些图像不足以构建一个表现良好的分类器。通常，计算机视觉和其他自然感知问题——语音识别或自然语言处理——需要大量的数据。
 
 同样，你不能仅仅使用网络数据集。分类器在用户的模糊图像上的表现不好，而这些图像与用来训练模型的清晰、高分辨率的网络图像不同。
 
@@ -74,17 +74,17 @@
 
 你可以做的是将这两个数据集合并并进行随机打乱。然后，将结果数据集划分为训练/验证/测试集。
 
-假设你决定将数据划分为96:2:2%的训练/验证/测试集，这个过程将会是这样的：
+假设你决定将数据划分为 96:2:2%的训练/验证/测试集，这个过程将会是这样的：
 
-![](../Images/7d0d026dc1de4fd2c05d213cfbfd506b.png)
+![](img/7d0d026dc1de4fd2c05d213cfbfd506b.png)
 
 使用这种设置，训练/验证/测试集都来自相同的分布，如上图中的颜色所示，这样是理想的。
 
 但是，这里有一个很大的缺陷！
 
-如果你查看验证集，从2,000张图像中，平均只有148张来自目标分布。
+如果你查看验证集，从 2,000 张图像中，平均只有 148 张来自目标分布。
 
-这意味着在大多数情况下，你是在为网络图像分布（2,000张图像中的1,852张）优化分类器——这**不是**你想要的！
+这意味着在大多数情况下，你是在为网络图像分布（2,000 张图像中的 1,852 张）优化分类器——这**不是**你想要的！
 
 对于测试集也是如此，当评估分类器的性能时也是如此。因此，这不是一种好的训练/验证/测试集划分方式。
 
@@ -92,9 +92,9 @@
 
 另一种选择是使验证/测试集来自目标分布的数据集，而训练集来自网络数据集。
 
-假设你仍然使用96:2:2%的划分比例用于训练/开发/测试集。开发/测试集将各包含2,000张图像——来自目标分布——其余部分将用于训练集，如下图所示：
+假设你仍然使用 96:2:2%的划分比例用于训练/开发/测试集。开发/测试集将各包含 2,000 张图像——来自目标分布——其余部分将用于训练集，如下图所示：
 
-![](../Images/7c4de9a024e2aa831d65c0746ab9795a.png)
+![](img/7c4de9a024e2aa831d65c0746ab9795a.png)
 
 使用这种划分，你将优化分类器以在目标分布上表现良好，这正是你关心的。这是因为开发集的图像完全来自目标分布。
 
@@ -108,33 +108,33 @@
 
 考虑上面第二种选项的训练/开发/测试划分。假设人为错误为零，以简化计算。
 
-同样，假设你发现训练错误为2%，开发错误为10%。那么这8%错误中有多少是由于这两个集之间的数据不匹配——考虑到它们来自不同的分布？有多少是由于模型的方差（过拟合）？我们无法得知。
+同样，假设你发现训练错误为 2%，开发错误为 10%。那么这 8%错误中有多少是由于这两个集之间的数据不匹配——考虑到它们来自不同的分布？有多少是由于模型的方差（过拟合）？我们无法得知。
 
 让我们修改训练/开发/测试划分。拿出训练集的一小部分，称之为“桥接”集。桥接集将不用于训练分类器，而是作为独立集。现在的划分有四个集合，属于两个数据分布——如下所示：
 
-![](../Images/d141541582d501acf408fde6059cce54.png)
+![](img/d141541582d501acf408fde6059cce54.png)
 
 ### **方差错误**
 
-假设你发现训练错误和开发错误分别为2%和10%。你发现桥接错误为9%，如下所示：
+假设你发现训练错误和开发错误分别为 2%和 10%。你发现桥接错误为 9%，如下所示：
 
-![](../Images/e190aa06d9d7e4bacf2db74bd6b32b72.png)
+![](img/e190aa06d9d7e4bacf2db74bd6b32b72.png)
 
-那么，训练集和开发集之间的8%错误中，有多少是方差错误，有多少是数据不匹配错误？
+那么，训练集和开发集之间的 8%错误中，有多少是方差错误，有多少是数据不匹配错误？
 
-很简单！答案是7%是方差错误，1%是数据不匹配错误。但为什么呢？
+很简单！答案是 7%是方差错误，1%是数据不匹配错误。但为什么呢？
 
-因为桥接集来自与训练集相同的分布，且它们之间的错误差异为7%。这意味着分类器过度拟合了训练集。这告诉我们我们面临一个**高方差问题**。
+因为桥接集来自与训练集相同的分布，且它们之间的错误差异为 7%。这意味着分类器过度拟合了训练集。这告诉我们我们面临一个**高方差问题**。
 
 ### **数据不匹配错误**
 
-现在，让我们假设你发现桥接集的错误率为3%，其余的保持不变，如下所示：
+现在，让我们假设你发现桥接集的错误率为 3%，其余的保持不变，如下所示：
 
-![](../Images/2836527243d47d6500e6099f663527a4.png)
+![](img/2836527243d47d6500e6099f663527a4.png)
 
-训练集和开发集之间8%的错误中有多少是方差错误，有多少是数据不匹配错误？
+训练集和开发集之间 8%的错误中有多少是方差错误，有多少是数据不匹配错误？
 
-答案是1%是方差错误，7%是数据不匹配错误。为什么？
+答案是 1%是方差错误，7%是数据不匹配错误。为什么？
 
 这次，因为分类器在未见过的数据集上表现良好，如果它来自相同的分布，如桥接集。如果它来自不同的分布，如开发集，则表现较差。因此，我们遇到了**数据不匹配问题**。
 
@@ -160,7 +160,7 @@
 
 例如，我们之前提到，开发/测试集中的图像通常是模糊的，而我们训练集中的大部分图像来自网络，通常是清晰的。你可以人为地将模糊度添加到训练集的图像中，使其更类似于开发/测试集，如下图所示：
 
-![](../Images/9207d15c4581896bc9e9adee824018cf.png)
+![](img/9207d15c4581896bc9e9adee824018cf.png)
 
 图像展示了训练集在模糊前后的变化。
 
@@ -184,23 +184,23 @@
 
 在这种情况下，开发/测试集应来自目标分布，而来自其他分布的数据可以用于构建（大部分）训练集。数据不匹配技术可以用来减轻训练集与开发/测试集之间的数据分布差异。
 
-**简历: [Nezar Assawiel](https://www.linkedin.com/in/assawiel/)** 是一位机器学习开发者和Clinical AI的创始人。
+**简历: [Nezar Assawiel](https://www.linkedin.com/in/assawiel/)** 是一位机器学习开发者和 Clinical AI 的创始人。
 
 [原文](https://medium.freecodecamp.org/what-to-do-when-your-training-and-testing-data-come-from-different-distributions-d89674c6ecd8)。已获许可转载。
 
 **相关:**
 
-+   [我的训练数据和测试数据有多（不）相似？](/2018/06/how-dissimilar-train-test-data.html)
++   我的训练数据和测试数据有多（不）相似？
 
-+   [什么是正态分布？](/2018/07/what-is-normal.html)
++   什么是正态分布？
 
-+   [为什么数据科学家喜欢高斯分布](/2018/06/why-data-scientists-love-gaussian.html)
++   为什么数据科学家喜欢高斯分布
 
 ### 更多相关话题
 
 +   [数据来自哪里？](https://www.kdnuggets.com/2022/08/data-come.html)
 
-+   [假设检验和A/B测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
++   [假设检验和 A/B 测试](https://www.kdnuggets.com/hypothesis-testing-and-ab-testing)
 
 +   [通过直方图探索数据分布](https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html)
 
@@ -208,4 +208,4 @@
 
 +   [机器学习中训练数据和测试数据的区别](https://www.kdnuggets.com/2022/08/difference-training-testing-data-machine-learning.html)
 
-+   [在Python中加载数据的5种不同方法](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)
++   [在 Python 中加载数据的 5 种不同方法](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)

@@ -1,8 +1,8 @@
-# 使用d6tflow构建可扩展深度学习管道的5步指南
+# 使用 d6tflow 构建可扩展深度学习管道的 5 步指南
 
-> 原文：[https://www.kdnuggets.com/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html](https://www.kdnuggets.com/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html)
+> 原文：[`www.kdnuggets.com/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html`](https://www.kdnuggets.com/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html)
 
-[评论](#comments)
+评论
 
 **作者 [Norman Niemer](https://www.linkedin.com/in/normanniemer/)，首席数据科学家 & [Samuel Showalter](https://www.linkedin.com/in/samuelrshowalter/)，技术顾问**
 
@@ -10,17 +10,17 @@
 
 构建深度学习模型通常涉及复杂的数据管道，以及大量的试错过程、调整模型架构和参数，这些参数的性能需要进行比较。通常很难跟踪所有实验，这往往会导致困惑，最糟糕的情况则是得出错误结论。
 
-在 [4个原因说明为什么你的机器学习代码很糟糕](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html) 中，我们探讨了如何将机器学习代码组织为DAG工作流以解决这个问题。在本指南中，我们将通过一个实际案例研究，将现有的pytorch脚本转换为使用 [d6tflow](https://github.com/d6t/d6tflow) 的可扩展深度学习管道。起点是 [Facebook的pytorch深度推荐模型](https://github.com/facebookresearch/dlrm)，我们将经过将代码迁移到可扩展深度学习管道的5个步骤。下面的步骤以部分伪代码形式编写以说明概念，完整代码也可用，详见文章末尾的说明。
+在 [4 个原因说明为什么你的机器学习代码很糟糕](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html) 中，我们探讨了如何将机器学习代码组织为 DAG 工作流以解决这个问题。在本指南中，我们将通过一个实际案例研究，将现有的 pytorch 脚本转换为使用 [d6tflow](https://github.com/d6t/d6tflow) 的可扩展深度学习管道。起点是 [Facebook 的 pytorch 深度推荐模型](https://github.com/facebookresearch/dlrm)，我们将经过将代码迁移到可扩展深度学习管道的 5 个步骤。下面的步骤以部分伪代码形式编写以说明概念，完整代码也可用，详见文章末尾的说明。
 
 开始吧！
 
-### 步骤 1：规划你的DAG
+### 步骤 1：规划你的 DAG
 
 为了规划你的工作并帮助他人理解你的管道如何整合在一起，你需要首先考虑数据流、任务之间的依赖关系和任务参数。这有助于你将工作流组织成逻辑组件。你可能会想绘制一个类似这样的图示
 
-![图示](../Images/2189cbf5f8c337089b4f91bc52b9fc1a.png)
+![图示](img/2189cbf5f8c337089b4f91bc52b9fc1a.png)
 
-以下是FB DLRM的pytorch模型训练DAG。它展示了训练任务`TaskModelTrain`及其所有依赖项，以及这些依赖项之间的关系。如果你编写的是函数式代码，很难看到你的工作流如何像这样整合在一起。
+以下是 FB DLRM 的 pytorch 模型训练 DAG。它展示了训练任务`TaskModelTrain`及其所有依赖项，以及这些依赖项之间的关系。如果你编写的是函数式代码，很难看到你的工作流如何像这样整合在一起。
 
 ```py
 task = TaskModelTrain()
@@ -39,9 +39,9 @@ print(d6tflow.preview(task, clip_params=True))
 
 ### 步骤 2：编写任务而不是函数
 
-数据科学代码通常以函数的形式组织，这会导致很多问题，具体见 [4个原因说明为什么你的机器学习代码很糟糕](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)。相反，你应该编写d6tflow任务。这样做的好处包括：
+数据科学代码通常以函数的形式组织，这会导致很多问题，具体见 [4 个原因说明为什么你的机器学习代码很糟糕](https://www.kdnuggets.com/2019/02/4-reasons-machine-learning-code-probably-bad.html)。相反，你应该编写 d6tflow 任务。这样做的好处包括：
 
-+   将任务链入DAG，以便所需的依赖项自动运行
++   将任务链入 DAG，以便所需的依赖项自动运行
 
 +   轻松从依赖项中加载任务输入数据
 
@@ -217,7 +217,7 @@ d6tflow.run(task, forced=TaskGetTrainDataset())
 
 ### 完整源代码
 
-所有代码都提供在 [https://github.com/d6tdev/dlrm](https://github.com/d6tdev/dlrm)。它与 [https://github.com/facebook/dlrm](https://github.com/facebook/dlrm) 相同，只是添加了 d6tflow 文件：
+所有代码都提供在 [`github.com/d6tdev/dlrm`](https://github.com/d6tdev/dlrm)。它与 [`github.com/facebook/dlrm`](https://github.com/facebook/dlrm) 相同，只是添加了 d6tflow 文件：
 
 +   flow_run.py: 运行 flow => 运行此文件
 
@@ -235,7 +235,7 @@ d6tflow.run(task, forced=TaskGetTrainDataset())
 
 在本指南中，我们展示了如何构建可扩展的深度学习工作流。我们使用了现有的代码库，并展示了如何将线性深度学习代码转换为 d6tflow DAG 以及这样做的好处。
 
-对于新项目，您可以从 [https://github.com/d6t/d6tflow-template](https://github.com/d6t/d6tflow-template) 开始一个可扩展的项目模板。结构非常相似：
+对于新项目，您可以从 [`github.com/d6t/d6tflow-template`](https://github.com/d6t/d6tflow-template) 开始一个可扩展的项目模板。结构非常相似：
 
 +   run.py: 运行工作流
 
@@ -251,21 +251,21 @@ d6tflow.run(task, forced=TaskGetTrainDataset())
 
 **相关：**
 
-+   [数据科学家犯的 10 个编码错误](/2019/04/top-10-coding-mistakes-data-scientists.html)
++   数据科学家犯的 10 个编码错误
 
-+   [4 个原因说明你的机器学习代码可能不好](/2019/02/4-reasons-machine-learning-code-probably-bad.html)
++   4 个原因说明你的机器学习代码可能不好
 
-+   [数据管道、Luigi、Airflow：您需要知道的一切](/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
++   数据管道、Luigi、Airflow：您需要知道的一切
 
 * * *
 
 ## 我们的 Top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 

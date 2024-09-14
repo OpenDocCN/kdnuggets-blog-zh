@@ -1,22 +1,22 @@
 # 为什么更多开发者在他们的机器学习项目中使用 Python？
 
-> 原文：[https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
+> 原文：[`www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html`](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
-![为什么更多开发者在他们的机器学习项目中使用 Python？](../Images/922f4e113047966cb6a67e98b1da3ff4.png)
+![为什么更多开发者在他们的机器学习项目中使用 Python？](img/922f4e113047966cb6a67e98b1da3ff4.png)
 
 图片来源：[Artturi Jalli](https://unsplash.com/@artturijalli?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/python?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-当人类学习新事物时，通常通过经验和教育的结合来识别模式。机器 [也能够学习](/2021/05/essential-machine-learning-algorithms-beginners.html) 并以一种与人类决策方式相似的方式应用这些学习。
+当人类学习新事物时，通常通过经验和教育的结合来识别模式。机器 也能够学习 并以一种与人类决策方式相似的方式应用这些学习。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@ Python 是机器学习和人工智能开发者最常用的编程语言之一，�
 
 ## 机器学习解释
 
-让我们更详细地介绍 ML 的定义，以便更好地理解为什么 Python 是编程 ML 应用程序的有效语言。基本上，ML 指的是数学模型 - [我们称之为算法](/2016/08/10-algorithms-machine-learning-engineers.html) - 这些模型允许 ML 应用程序预测诸如类别或其他连续值等内容。它们调节其数据输入以进行这些预测，并使用从数据输入中得出的不同参数来实现这些预测。
+让我们更详细地介绍 ML 的定义，以便更好地理解为什么 Python 是编程 ML 应用程序的有效语言。基本上，ML 指的是数学模型 - 我们称之为算法 - 这些模型允许 ML 应用程序预测诸如类别或其他连续值等内容。它们调节其数据输入以进行这些预测，并使用从数据输入中得出的不同参数来实现这些预测。
 
 ML 模型依赖上述过程来持续和迭代地学习。它们接收输入并尽可能准确地预测所需的连续值。它们通过一个损失函数进一步优化预测能力，该函数告知模型其与期望数据输出的偏差。这个过程会重复多次，以逐步提高准确性。
 
@@ -48,17 +48,17 @@ Python 已成为编程 ML 应用的首选语言，这主要归功于其可读性
 
 有一些基本概念为探索 Python 中 ML 的开发者提供了有用的背景。其中最基础的概念之一就是监督学习和无监督学习算法。
 
-监督算法处理由开发者手动标记的数据，并且对每个数据点使用[目标变量](/2021/12/beginner-guide-end-end-machine-learning.html)。与处理未标记数据并自行辨别输入中潜在规律的无监督算法相比，监督算法相对昂贵。
+监督算法处理由开发者手动标记的数据，并且对每个数据点使用目标变量。与处理未标记数据并自行辨别输入中潜在规律的无监督算法相比，监督算法相对昂贵。
 
 监督学习和[无监督学习应用](https://pythonistaplanet.com/applications-of-unsupervised-learning/)对 ML 改进客户分析的方式有所贡献。这两种算法都可以提取数据来预测行为模式，并精确检测客户在购物时何时需要帮助。这确保了更多的客户能够顺利完成销售过程而不遇到问题。它甚至可以帮助组织在潜在客户主动联系之前识别和联系他们，从而提升销售成功率和整体客户体验。
 
-另一个概念是分类与回归，这适用于预测类别和连续值的 ML 应用。分类算法使用处理[二元问题](/2021/12/introduction-binary-classification-pycaret.html)（例如真假）或多类区分的分类器来预测类别（例如分类动物类型）。与此相对，回归模型预测的是如房价等连续值。
+另一个概念是分类与回归，这适用于预测类别和连续值的 ML 应用。分类算法使用处理二元问题（例如真假）或多类区分的分类器来预测类别（例如分类动物类型）。与此相对，回归模型预测的是如房价等连续值。
 
 这样的 ML 应用通常在网络安全环境中使用，比如识别欺诈行为或可疑的网络活动。黑客非常执着，一旦他们入侵或访问了一个网站，他们可能会利用该网站来感染其他人或供应商。机器学习支持基于 AI 的安全监控系统，帮助安全专家[检测和响应安全漏洞](https://bestwebhostingaustralia.org/website-hacking/)，减少攻击在网络中扩散的风险。
 
 ## 结论
 
-机器学习是一个涵盖广泛模型和应用的总称，它利用了许多重要概念，开发者可以通过 Python 探索这些概念。虽然这篇文章涵盖了一些最常见的 ML 概念，但开发者仍然需要通过选择自己或其组织感兴趣的问题来[获得更广泛的实践理解](/2021/10/20-python-packages.html)。在此基础上，开发者既可以开展自己的 ML 项目，也可以在工作中应用对 ML 模型的更深入理解。
+机器学习是一个涵盖广泛模型和应用的总称，它利用了许多重要概念，开发者可以通过 Python 探索这些概念。虽然这篇文章涵盖了一些最常见的 ML 概念，但开发者仍然需要通过选择自己或其组织感兴趣的问题来获得更广泛的实践理解。在此基础上，开发者既可以开展自己的 ML 项目，也可以在工作中应用对 ML 模型的更深入理解。
 
 **简介： [Nahla Davies](http://nahlawrites.com/)** 是一名软件开发者和技术作家。在全职从事技术写作之前，她曾在一家《Inc. 5000》排名的体验品牌组织中担任首席程序员，该公司客户包括三星、时代华纳、Netflix 和索尼。
 
@@ -72,6 +72,6 @@ Python 已成为编程 ML 应用的首选语言，这主要归功于其可读性
 
 +   [为什么你需要学习不止一种编程语言！](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
-+   [KDnuggets™ 新闻 22:n04, 1月 26: 高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26: 高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
 +   [NoSQL 数据库及其应用场景](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)

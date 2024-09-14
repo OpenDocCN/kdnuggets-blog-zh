@@ -1,8 +1,8 @@
 # 加速你的 Python 代码的三种简单方法
 
-> 原文：[https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
+> 原文：[`www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html`](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
 
-![加速你的 Python 代码的三种简单方法](../Images/604ed2396cc488ef771a705d9cdfb3f5.png)
+![加速你的 Python 代码的三种简单方法](img/604ed2396cc488ef771a705d9cdfb3f5.png)
 
 [来源](https://www.freepik.com/free-vector/flat-people-asking-questions_13561931.htm#query=thinking&position=28&from_view=search): 图片由 Freepik 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -30,7 +30,7 @@
 
 PySpark，顾名思义，是 Apache Spark 在 Python 中的接口。它允许用户使用 Python API 编写 Spark 程序，并提供 PySpark shell 进行分布式环境下的交互式数据分析。它支持几乎所有的 Spark 特性，如 Streaming、MLlib、Spark SQL、DataFrame 和 Spark Core，如下所示：
 
-![加速你的 Python 代码的三种简单方法](../Images/d6d5e4cd748fe13a7cd3df8e2e614d9a.png)
+![加速你的 Python 代码的三种简单方法](img/d6d5e4cd748fe13a7cd3df8e2e614d9a.png)
 
 [来源](https://spark.apache.org/docs/latest/api/python/_images/pyspark-components.png)
 
@@ -70,7 +70,7 @@ Dask 是一个多功能的开源分布式计算库，它提供了一个与 Panda
 
 Ray 是一个用于通用分布式 Python 以及 AIML 驱动应用程序的单一平台框架。它包含一个核心分布式运行时和一个库工具包（Ray AI Runtime），用于并行化 AIML 计算，如下图所示：
 
-![加速你的 Python 代码的 3 种简单方法](../Images/7ef99e205e7ba4c099ae92184bcb18a2.png)
+![加速你的 Python 代码的 3 种简单方法](img/7ef99e205e7ba4c099ae92184bcb18a2.png)
 
 [来源](https://docs.ray.io/en/latest/_images/ray-air.svg)
 

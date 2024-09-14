@@ -1,6 +1,6 @@
 # 10 ChatGPT 插件数据科学备忘单
 
-> 原文：[https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html](https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html`](https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html)
 
 # 数据科学插件
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -20,7 +20,7 @@ ChatGPT 正在帮助我们所有人，包括数据科学家，在更短的时间
 
 [](https://www.kdnuggets.com/publications/sheets/10_ChatGPT_Plugins_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
-[![10 ChatGPT 插件数据科学备忘单](../Images/71f62819896a0959e4d2aa058e0e8b1e.png)](https://www.kdnuggets.com/publications/sheets/10_ChatGPT_Plugins_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
+![10 ChatGPT 插件数据科学备忘单](https://www.kdnuggets.com/publications/sheets/10_ChatGPT_Plugins_for_Data_Science_Cheat_Sheet_KDnuggets.pdf)
 
 > ChatGPT 插件是有价值的第三方应用程序，可以轻松集成到 ChatGPT 平台中，以实现自动化和增强其功能。你可以简化工作流程、自动化任务并向平台添加新功能。
 

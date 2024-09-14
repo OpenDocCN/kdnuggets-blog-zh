@@ -1,16 +1,16 @@
 # 使用 Python API 进行数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2021/09/python-apis-data-science-project.html](https://www.kdnuggets.com/2021/09/python-apis-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2021/09/python-apis-data-science-project.html`](https://www.kdnuggets.com/2021/09/python-apis-data-science-project.html)
 
-[评论](#comments)<picture>![使用 Python API 进行数据科学项目](../Images/70890df2bdfc855812b2da3ffefaaaf6.png)</picture> * * *
+评论<picture>![使用 Python API 进行数据科学项目](img/70890df2bdfc855812b2da3ffefaaaf6.png)</picture> * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -18,7 +18,7 @@
 
 所以让我们深入了解如何使用 API 进行数据科学。我们将提取数据并查看 JSON 响应，然后将所有这些数据保存到 Pandas DataFrame 中。
 
-<picture>![如何使用 API 进行数据科学](../Images/84584c537b252fc875798a0a958762df.png)</picture> 我们将使用良好的软件工程技能以编程方式完成所有工作，以使你的代码看起来简洁清晰，而不是像某个 10 岁的小孩写的那样。本文并非关于如何使用 YouTube API，而是如何一般性地使用 API，因此我们会确保使用可适用于任何 API 服务的库和技术。
+<picture>![如何使用 API 进行数据科学](img/84584c537b252fc875798a0a958762df.png)</picture> 我们将使用良好的软件工程技能以编程方式完成所有工作，以使你的代码看起来简洁清晰，而不是像某个 10 岁的小孩写的那样。本文并非关于如何使用 YouTube API，而是如何一般性地使用 API，因此我们会确保使用可适用于任何 API 服务的库和技术。
 
 ## 为什么要从 API 收集数据？
 
@@ -45,7 +45,7 @@ import pandas as pd
 import time
 ```
 
-<picture>![导入 APIs](../Images/5d35319068d540d42e3a2e39ed8dc9f4.png)</picture> requests 库是一个允许我们进行 API 调用的库。你可以使用这个库向任何 API 发出请求，因此根据你想从哪个 API 获取数据，所覆盖的技术将是相同的。如果你想了解更多关于 requests 库的信息，下面是一个链接 - https://realpython.com/python-requests/。然后我们有 Pandas 库，因为我们将把数据保存到 Pandas DataFrame 中，还有一个时间库。
+<picture>![导入 APIs](img/5d35319068d540d42e3a2e39ed8dc9f4.png)</picture> requests 库是一个允许我们进行 API 调用的库。你可以使用这个库向任何 API 发出请求，因此根据你想从哪个 API 获取数据，所覆盖的技术将是相同的。如果你想了解更多关于 requests 库的信息，下面是一个链接 - https://realpython.com/python-requests/。然后我们有 Pandas 库，因为我们将把数据保存到 Pandas DataFrame 中，还有一个时间库。
 
 **API 密钥**
 
@@ -88,7 +88,7 @@ CHANNEL_ID = "UCW8Ews7tdKKkBT6GdtQaXvQ"
 response = requests.get('https://api.github.com').json()
 ```
 
-<picture>![使用 requests 库进行测试](../Images/da5cc43a29478a7fa00970e07ad9ec96.png)</picture> 要获取一些数据，我们使用 get() 方法。数据位于 api.github.com。我们将 URL 传递给 get() 方法，并添加 json() 方法，它将在响应中返回一个 JSON 对象。
+<picture>![使用 requests 库进行测试](img/da5cc43a29478a7fa00970e07ad9ec96.png)</picture> 要获取一些数据，我们使用 get() 方法。数据位于 api.github.com。我们将 URL 传递给 get() 方法，并添加 json() 方法，它将在响应中返回一个 JSON 对象。
 
 **什么是 JSON 文件？**
 
@@ -100,7 +100,7 @@ response = requests.get('https://api.github.com').json()
 response
 ```
 
-<picture>![使用 requests 库进行测试](../Images/5f42c9380dea80a3243c3e192fa6fc83.png)</picture> 正如你在输出中看到的，整个结果被括在大括号中，每一行都有一个属性或键，每个键都有一个值。这是一个你可以访问的特定信息的 URL 列表，来自 Github。
+<picture>![使用 requests 库进行测试](img/5f42c9380dea80a3243c3e192fa6fc83.png)</picture> 正如你在输出中看到的，整个结果被括在大括号中，每一行都有一个属性或键，每个键都有一个值。这是一个你可以访问的特定信息的 URL 列表，来自 Github。
 
 例如，如果你想查找用户的电子邮件，你可以在 get() 方法中使用 email_url。
 
@@ -124,7 +124,7 @@ url = "https://www.googleapis.com/youtube/v3/
 
 我们将进行一次“搜索”，并包含多个参数，如“part”、“channelID”和我的 API 密钥。在“parts”参数中，我们将添加 id 和 snippet 属性，以抓取包含 videoID 和有关视频本身的信息的 ID 数据，如你在列表中看到的。
 
-<picture>![与 YouTube API 的协作](../Images/ca0756b2d7890b238e54ad0319065ca8.png)</picture> 现在我们将编写包含参数的整个 URL，这将给我们提供我们想要收集的所有数据。再说一次，这篇文章并非专门关于 YouTube，所以我们不会深入讨论我们如何弄清楚使用哪些参数等等。很多都是试错的过程。但让我们指导你如何构建这个 URL。
+<picture>![与 YouTube API 的协作](img/ca0756b2d7890b238e54ad0319065ca8.png)</picture> 现在我们将编写包含参数的整个 URL，这将给我们提供我们想要收集的所有数据。再说一次，这篇文章并非专门关于 YouTube，所以我们不会深入讨论我们如何弄清楚使用哪些参数等等。很多都是试错的过程。但让我们指导你如何构建这个 URL。
 
 ```py
 url = "https://www.googleapis.com/youtube/v3/search?key="+API_KEY+"&
@@ -157,7 +157,7 @@ response = requests.get(url).json()
 
 这是 API 调用的输出。
 
-<picture>![API 调用的响应](../Images/1ded876e6225f683eb6564a7c923c1ee.png)</picture> 如你所见，我们在响应变量中保存了相同的 JSON 对象。你会看到所有 id 和 snippet 的属性。
+<picture>![API 调用的响应](img/1ded876e6225f683eb6564a7c923c1ee.png)</picture> 如你所见，我们在响应变量中保存了相同的 JSON 对象。你会看到所有 id 和 snippet 的属性。
 
 ### 数据解析
 
@@ -173,13 +173,13 @@ response = requests.get(url).json()
 response['items']
 ```
 
-<picture>![解析数据](../Images/533342403610eb0fb029f7312a1c7e93.png)</picture> 你会看到输出以方括号开始，并列出了我们频道上的所有视频。为了孤立一个视频，我们可以指定位置。
+<picture>![解析数据](img/533342403610eb0fb029f7312a1c7e93.png)</picture> 你会看到输出以方括号开始，并列出了我们频道上的所有视频。为了孤立一个视频，我们可以指定位置。
 
 ```py
 response['items'][0]
 ```
 
-<picture>![使用 Python API 进行数据科学的孤立视频](../Images/16f99992a89b0e2af2fb1ff5d8bd2e61.png)</picture> 所以，这是我们最新的视频。
+<picture>![使用 Python API 进行数据科学的孤立视频](img/16f99992a89b0e2af2fb1ff5d8bd2e61.png)</picture> 所以，这是我们最新的视频。
 
 ### 解析输出并将其保存到变量中
 
@@ -206,7 +206,7 @@ upload_date = response['items'][0]['snippet']['publishedAt']
 
 我们只想抓取日期，省略时间戳。
 
-<picture>![解析输出并将其保存到变量中](../Images/524aaef64e8fc910d9e5f5813a1f0056.png)</picture> 为了做到这一点，我们可以在 `T` 上拆分，并抓取输出的左侧部分。
+<picture>![解析输出并将其保存到变量中](img/524aaef64e8fc910d9e5f5813a1f0056.png)</picture> 为了做到这一点，我们可以在 `T` 上拆分，并抓取输出的左侧部分。
 
 ```py
 upload_date = str(upload_date).split("T")[0]
@@ -342,9 +342,9 @@ for video in response['items']:
                          'comment_count':comment_count},ignore_index=True)
 ```
 
-<picture>![Python API for data science output of a pandas dataframe](../Images/f9b80b8229a1758b4ae90efb2a56d39c.png)</picture> 现在我们在这个 Pandas DataFrame 中拥有了所有数据，输出应该是一个包含所有视频统计信息的 Pandas DataFrame。
+<picture>![Python API for data science output of a pandas dataframe](img/f9b80b8229a1758b4ae90efb2a56d39c.png)</picture> 现在我们在这个 Pandas DataFrame 中拥有了所有数据，输出应该是一个包含所有视频统计信息的 Pandas DataFrame。
 
-<picture>![Saving APIs to a Pandas DataFrame](../Images/aa980dab7b66f759a42ca8122dd6ba55.png)</picture> ### 创建函数
+<picture>![Saving APIs to a Pandas DataFrame](img/aa980dab7b66f759a42ca8122dd6ba55.png)</picture> ### 创建函数
 
 我们目前编写的代码运行得非常好，但仍有一些可以改进的地方。主要需要改进的是将抓取视频信息的 API 调用与主部分分开，因为第二次 API 调用的逻辑不需要与保存数据的逻辑混合。
 
@@ -418,7 +418,7 @@ print(df)
 
 让我们看看最终的输出，我们得到一个 Pandas DataFrame，其中包括 video_id、video_title、upload_date、view_count、like_count、dislike_count 和 comment_count。
 
-<picture>![Youtube Python APIs for Data Science final output](../Images/0052acefeb78e9123f9c90ce0cc6fc02.png)</picture> ### **结论**
+<picture>![Youtube Python APIs for Data Science final output](img/0052acefeb78e9123f9c90ce0cc6fc02.png)</picture> ### **结论**
 
 这就是你可以在数据科学项目中使用 Python API 的方法，从 API 中获取数据并将其保存到 Pandas DataFrame 中。作为数据科学家，你应该知道如何从 API 中抓取数据。让我们来分解一下我们所执行的步骤：
 
@@ -438,11 +438,11 @@ print(df)
 
 **相关内容：**
 
-+   [生产就绪的机器学习 NLP API 使用 FastAPI 和 spaCy](/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
++   生产就绪的机器学习 NLP API 使用 FastAPI 和 spaCy
 
-+   [使用 Flask 构建 RESTful API](/2021/05/building-restful-apis-flask.html)
++   使用 Flask 构建 RESTful API
 
-+   [构建你的第一个数据科学应用程序](/2021/02/build-first-data-science-application.html)
++   构建你的第一个数据科学应用程序
 
 ### 更多相关话题
 

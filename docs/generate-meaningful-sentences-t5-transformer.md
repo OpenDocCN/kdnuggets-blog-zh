@@ -1,12 +1,12 @@
 # 如何使用 T5 Transformer 生成有意义的句子
 
-> 原文：[https://www.kdnuggets.com/2021/05/generate-meaningful-sentences-t5-transformer.html](https://www.kdnuggets.com/2021/05/generate-meaningful-sentences-t5-transformer.html)
+> 原文：[`www.kdnuggets.com/2021/05/generate-meaningful-sentences-t5-transformer.html`](https://www.kdnuggets.com/2021/05/generate-meaningful-sentences-t5-transformer.html)
 
-[评论](#comments)
+评论
 
 **由 [Vatsal Saglani](https://www.linkedin.com/in/vatsalsaglani) 编写，Quinnox 的机器学习工程师**
 
-![](../Images/ebd7ecb3538f515a84f574de22bf1de9.png)
+![](img/ebd7ecb3538f515a84f574de22bf1de9.png)
 
 由 [Tech Daily](https://unsplash.com/@techdailyca?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/streaming?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 上拍摄（[Tech Daily](https://techdaily.ca/)）
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -162,7 +162,7 @@ if __name__ == "__main__":
     app.run(debug=True, port = 5000)
 ```
 
-*这个脚本还不能使用。你在执行脚本时可能会收到ImportError，因为我们还没有创建带有*`*PredictionModelObject*`*的*`*predict.py*`*脚本
+*这个脚本还不能使用。你在执行脚本时可能会收到 ImportError，因为我们还没有创建带有*`*PredictionModelObject*`*的*`*predict.py*`*脚本
 
 ### 创建`PredictionModelObject`
 
@@ -227,7 +227,7 @@ class PredictionModelObject(object):    def __init__(self):console.log("Model Lo
 python app.py
 ```
 
-### 测试你的API
+### 测试你的 API
 
 +   *创建一个*`*test_api.py*`*文件并执行*
 
@@ -270,27 +270,27 @@ gunicorn -k gthread -w 2 -t 40000 --threads 3 -b:5000 app:app
 
 ### 总结
 
-在这篇博客中，我们介绍了如何使用之前训练好的T5变换器生成故事情节，并使用`flask`和`gunicorn`进行部署。此博客旨在易于跟随，以免你浪费时间在不同平台上查找问题。希望你阅读和实施时感到愉快。
+在这篇博客中，我们介绍了如何使用之前训练好的 T5 变换器生成故事情节，并使用`flask`和`gunicorn`进行部署。此博客旨在易于跟随，以免你浪费时间在不同平台上查找问题。希望你阅读和实施时感到愉快。
 
-**简介: [Vatsal Saglani](https://www.linkedin.com/in/vatsalsaglani)** ([@saglanivatsal](https://twitter.com/saglanivatsal)) 是Quinnox的机器学习工程师。
+**简介: [Vatsal Saglani](https://www.linkedin.com/in/vatsalsaglani)** ([@saglanivatsal](https://twitter.com/saglanivatsal)) 是 Quinnox 的机器学习工程师。
 
 [原文](https://pub.towardsai.net/how-to-generate-meaningful-sentences-using-a-t5-transformer-b755bee64882)。转载已获许可。
 
 **相关:**
 
-+   [Hugging Face Transformers包 – 它是什么以及如何使用它](/2021/02/hugging-face-transformer-basics.html)
++   Hugging Face Transformers 包 – 它是什么以及如何使用它
 
-+   [使用Huggingface和PyTorch Lightning的多语言CLIP](/2021/03/multilingual-clip--huggingface-pytorch-lightning.html)
++   使用 Huggingface 和 PyTorch Lightning 的多语言 CLIP
 
-+   [GPT-2与GPT-3: OpenAI对决](/2021/02/gpt2-gpt3-openai-showdown.html)
++   GPT-2 与 GPT-3: OpenAI 对决
 
 ### 更多相关话题
 
-+   [使用ChatGPT生成被动收入的4种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
++   [使用 ChatGPT 生成被动收入的 4 种方法](https://www.kdnuggets.com/2023/03/4-ways-generate-passive-income-chatgpt.html)
 
-+   [使用Google MusicLM从文本生成音乐](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)
++   [使用 Google MusicLM 从文本生成音乐](https://www.kdnuggets.com/2023/06/generate-music-text-google-musiclm.html)
 
-+   [使用稳定扩散生成超现实面孔的3种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
++   [使用稳定扩散生成超现实面孔的 3 种方法](https://www.kdnuggets.com/3-ways-to-generate-hyper-realistic-faces-using-stable-diffusion)
 
 +   [如何生成合成表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
 

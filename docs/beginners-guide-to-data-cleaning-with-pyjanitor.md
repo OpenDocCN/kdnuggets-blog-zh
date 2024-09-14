@@ -1,8 +1,8 @@
 # Pyjanitor 数据清理初学者指南
 
-> 原文：[https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor](https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor)
+> 原文：[`www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor`](https://www.kdnuggets.com/beginners-guide-to-data-cleaning-with-pyjanitor)
 
-![使用 PyJanitor 进行数据清理](../Images/9fe5bbb5c146b54a62f4af26d2c242c8.png)
+![使用 PyJanitor 进行数据清理](img/9fe5bbb5c146b54a62f4af26d2c242c8.png)
 
 图片由作者提供 | DALLE-3 & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全职业的快速通道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -157,7 +157,7 @@ print(filtered_students_df)
 4           5   Sam  Biology     75     B 
 ```
 
-现在假设你还希望只输出特定的列，比如仅输出姓名和ID，而不是所有数据。Pyjanitor 也可以通过以下方式来实现这一点：
+现在假设你还希望只输出特定的列，比如仅输出姓名和 ID，而不是所有数据。Pyjanitor 也可以通过以下方式来实现这一点：
 
 ```py
 # Select specific columns

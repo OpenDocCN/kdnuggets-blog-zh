@@ -1,22 +1,22 @@
 # 数据科学的残酷真相
 
-> 原文：[https://www.kdnuggets.com/2021/07/brutal-truth-data-science.html](https://www.kdnuggets.com/2021/07/brutal-truth-data-science.html)
+> 原文：[`www.kdnuggets.com/2021/07/brutal-truth-data-science.html`](https://www.kdnuggets.com/2021/07/brutal-truth-data-science.html)
 
-[评论](#comments)
+评论
 
 **由 [Prad Upadrashta](https://blogs.mastechinfotrellis.com/author/prad-upadrashta)，首席数据科学家**
 
-![博客图片](../Images/86bf42ba84bfe291e509122ebf1a57e4.png)
+![博客图片](img/86bf42ba84bfe291e509122ebf1a57e4.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -32,25 +32,25 @@
 
 当你能将商业巫术转化为经过工程化的收入流时——那时你可以声称你已经做了真正的数据科学——这意味着你从根本上理解你的业务如何在非常细微的层面上运作。
 
-是的，“数据科学家的80%以上工作是清理数据”，这一说法常被重复——但这不仅仅是某种低级的无脑工作——智能清理需要你在迭代改进解决方案时，仔细关注以下几点：+ 重要的是什么 + 为什么重要 + 如何重要。应当用“策划”一词来取代“清理”。
+是的，“数据科学家的 80%以上工作是清理数据”，这一说法常被重复——但这不仅仅是某种低级的无脑工作——智能清理需要你在迭代改进解决方案时，仔细关注以下几点：+ 重要的是什么 + 为什么重要 + 如何重要。应当用“策划”一词来取代“清理”。
 
 如果你不理解最终目标，你将不可避免地搞砸起步阶段——然后疑惑为何你付出了那么多努力却看不到任何成果。你正在构建一个精心策划的数据集，以符合某种质量标准，以确保你的模型反映出你试图揭示、捕捉和/或复制的简单真理。这需要对你正在建模的内容及其固有的复杂、可能分层的结构有一些直觉。仅仅进行曲线拟合并声称“你有一个模型”几乎只是入门水平，当然也无法提供对竞争对手的可持续竞争优势。真正的问题是你是否理解你的业务科学。
 
-你需要知道何时在“去掉脏水”的同时“扔掉婴儿”。特征工程和数据清洗之间有一条微妙的界限——你可能只是清除了那些告诉你真正发生了什么的重要内容！所以，不，任何随机的新毕业生不太可能做对这一点——这并不简单。实际上，许多我采访的数据科学家不理解数据清洗在某种程度上也是建模——因为要识别噪音，你必须有一个信号的模型！这就是为什么公司仍然愿意为那0.1%的人才支付高价的原因。
+你需要知道何时在“去掉脏水”的同时“扔掉婴儿”。特征工程和数据清洗之间有一条微妙的界限——你可能只是清除了那些告诉你真正发生了什么的重要内容！所以，不，任何随机的新毕业生不太可能做对这一点——这并不简单。实际上，许多我采访的数据科学家不理解数据清洗在某种程度上也是建模——因为要识别噪音，你必须有一个信号的模型！这就是为什么公司仍然愿意为那 0.1%的人才支付高价的原因。
 
 要阅读博客的下一部分，[点击这里](https://blogs.mastechinfotrellis.com/the-brutal-truth-about-data-science-and-data-scientists-part-2)。
 
-**简介： [Prad Upadrashta](https://blogs.mastechinfotrellis.com/author/prad-upadrashta)** 是一位高级分析执行官和经验丰富的数据科学从业者，在企业规模的AI思想领导、战略和创新方面拥有卓越的业绩记录。他的关注领域包括人工智能、机器/深度学习、区块链、工业物联网/物联网以及工业4.0。
+**简介： [Prad Upadrashta](https://blogs.mastechinfotrellis.com/author/prad-upadrashta)** 是一位高级分析执行官和经验丰富的数据科学从业者，在企业规模的 AI 思想领导、战略和创新方面拥有卓越的业绩记录。他的关注领域包括人工智能、机器/深度学习、区块链、工业物联网/物联网以及工业 4.0。
 
 [原文](https://blogs.mastechinfotrellis.com/the-brutal-truth-about-data-science-and-data-scientists). 经许可转载。
 
 **相关内容：**
 
-+   [为什么以及如何学习“高效的数据科学”？](/2021/07/learn-productive-data-science.html)
++   为什么以及如何学习“高效的数据科学”？
 
-+   [顶级Python数据科学面试问题](/2021/07/top-python-data-science-interview-questions.html)
++   顶级 Python 数据科学面试问题
 
-+   [何时重新训练机器学习模型？进行这5项检查以决定计划](/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
++   何时重新训练机器学习模型？进行这 5 项检查以决定计划
 
 ### 更多相关内容
 
@@ -58,10 +58,10 @@
 
 +   [数据科学基础：你需要了解的 10 个关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：一系列古怪的名言](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
 +   [5 个数据科学项目来学习 5 个关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其应用](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其应用](https://www.kdnuggets.com/2022/n46.html)

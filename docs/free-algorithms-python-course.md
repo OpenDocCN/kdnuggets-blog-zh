@@ -1,10 +1,10 @@
-# 免费Python算法课程
+# 免费 Python 算法课程
 
-> 原文：[https://www.kdnuggets.com/2022/09/free-algorithms-python-course.html](https://www.kdnuggets.com/2022/09/free-algorithms-python-course.html)
+> 原文：[`www.kdnuggets.com/2022/09/free-algorithms-python-course.html`](https://www.kdnuggets.com/2022/09/free-algorithms-python-course.html)
 
-![免费Python算法课程](../Images/e1230e88ef90f6dd466f71e9df7972e4.png)
+![免费 Python 算法课程](img/e1230e88ef90f6dd466f71e9df7972e4.png)
 
-来自[Python中的算法](https://www.youtube.com/watch?v=fW_OS3LGB9Q)的截图
+来自[Python 中的算法](https://www.youtube.com/watch?v=fW_OS3LGB9Q)的截图
 
 随着“算法”这个词越来越深入公众的脑海和词汇中，它也越来越带有神秘的色彩。
 
@@ -16,9 +16,9 @@
 
 总的来说：如果你以某种方式学习了算法，恭喜你！做得好！如果没有，你真的应该学习。让我们看看是否能帮忙。
 
-freeCodeCamp刚刚发布了[Python中的算法](https://www.youtube.com/watch?v=fW_OS3LGB9Q)，这是一个免费学习算法的完整课程，使用的是现存的最流行的编程语言之一。该课程由[Joy Brock](https://www.youtube.com/c/PythonLearningChannel)与[realtoughcandy.io](https://realtoughcandy.com/)合作开发，因此一定要查看他们的其他课程。
+freeCodeCamp 刚刚发布了[Python 中的算法](https://www.youtube.com/watch?v=fW_OS3LGB9Q)，这是一个免费学习算法的完整课程，使用的是现存的最流行的编程语言之一。该课程由[Joy Brock](https://www.youtube.com/c/PythonLearningChannel)与[realtoughcandy.io](https://realtoughcandy.com/)合作开发，因此一定要查看他们的其他课程。
 
-Python不仅在作为通用编程语言方面享有广泛的受欢迎程度——意味着你可以用它完成各种编程任务，几乎是任何可以想象的任务（在合理范围内）——Python也是数据科学和机器学习领域需求最高的语言之一。作为额外的好处，Python是一个 notoriously 对初学者友好的语言，使得用它来理解算法和其他程序性及计算概念变得更容易。
+Python 不仅在作为通用编程语言方面享有广泛的受欢迎程度——意味着你可以用它完成各种编程任务，几乎是任何可以想象的任务（在合理范围内）——Python 也是数据科学和机器学习领域需求最高的语言之一。作为额外的好处，Python 是一个 notoriously 对初学者友好的语言，使得用它来理解算法和其他程序性及计算概念变得更容易。
 
 在这个视频课程中，你将学习算法基础知识，如阶乘、排列、*N* 皇后问题和旅行推销员问题。你将深入探讨程序算法的核心内容：排序！接着你将学习一些数据结构，并了解算法和结构如何通过如哈希表的概念协同工作。你还会学习动态编程、矩阵乘法等话题，以及什么是贪心算法。
 
@@ -30,21 +30,21 @@ Python 已成为数据科学新手和经验丰富的从业者的首选语言（�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，9月28日：免费 Python 算法课程 •…](https://www.kdnuggets.com/2022/n38.html)
++   [KDnuggets 新闻，9 月 28 日：免费 Python 算法课程 •…](https://www.kdnuggets.com/2022/n38.html)
 
 +   [免费 Python 短期课程](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)
 
-+   [KDnuggets 新闻，9月14日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
++   [KDnuggets 新闻，9 月 14 日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
 
 +   [免费 Python 自动化课程](https://www.kdnuggets.com/2022/07/free-automate-python-course.html)
 

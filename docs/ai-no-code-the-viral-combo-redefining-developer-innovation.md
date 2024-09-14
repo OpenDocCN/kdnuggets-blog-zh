@@ -1,8 +1,8 @@
 # AI + 无代码：重新定义开发者创新的病毒组合
 
-> 原文：[https://www.kdnuggets.com/ai-no-code-the-viral-combo-redefining-developer-innovation](https://www.kdnuggets.com/ai-no-code-the-viral-combo-redefining-developer-innovation)
+> 原文：[`www.kdnuggets.com/ai-no-code-the-viral-combo-redefining-developer-innovation`](https://www.kdnuggets.com/ai-no-code-the-viral-combo-redefining-developer-innovation)
 
-![AI + 无代码：重新定义开发者创新的病毒组合](../Images/1ba74beb1f54e198f8a2d5e5bbabeb99.png)
+![AI + 无代码：重新定义开发者创新的病毒组合](img/1ba74beb1f54e198f8a2d5e5bbabeb99.png)
 
 图片由 DALLE-3 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

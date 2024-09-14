@@ -1,22 +1,22 @@
 # 当相关性优于因果关系时
 
-> 原文：[https://www.kdnuggets.com/2021/08/correlation-better-causation.html](https://www.kdnuggets.com/2021/08/correlation-better-causation.html)
+> 原文：[`www.kdnuggets.com/2021/08/correlation-better-causation.html`](https://www.kdnuggets.com/2021/08/correlation-better-causation.html)
 
-[评论](#comments)
+评论
 
 **作者 [布列塔尼·戴维斯](https://www.linkedin.com/in/brittanymdavis/)，Narrator.ai 数据主管**
 
-![当相关性优于因果关系](../Images/a71b50e250881a59ee4e35ff723eb2b3.png)
+![当相关性优于因果关系](img/a71b50e250881a59ee4e35ff723eb2b3.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快进入网络安全职业的步伐。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快进入网络安全职业的步伐。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 当利益相关者说“是的……但相关性不等于因果关系”时，那就是“你的见解不够好，无法让我采取行动”的代名词。即**终结者**。
 
-![](../Images/27654a64d73899b07a8b6d0983f4ccbd.png)来源: https://xkcd.com/552/
+![](img/27654a64d73899b07a8b6d0983f4ccbd.png)来源: https://xkcd.com/552/
 
 这个流行的说法让决策者相信他们*需要*因果见解才能用数据做出决定。是的，在一个完美的世界里，我们只会依据因果见解行事。但实际上，这一要求并不合理。更多时候，当利益相关者要求“因果关系”来做决策时，往往需要过长时间，他们失去耐心，最终完全没有数据做决定。
 
@@ -36,7 +36,7 @@
 
 ## 因果关系的缺点
 
-现实是，证明因果关系是非常困难的。这不仅需要更高水平的统计严谨性，还需要大量精心收集的数据。这意味着你必须等待很长时间才能做出任何因果声明。这对其他因果推断方法也是如此，而不仅仅是A/B测试。
+现实是，证明因果关系是非常困难的。这不仅需要更高水平的统计严谨性，还需要大量精心收集的数据。这意味着你必须等待很长时间才能做出任何因果声明。这对其他因果推断方法也是如此，而不仅仅是 A/B 测试。
 
 最终，因果关系在用数据做决策时是一个不切实际的要求。所以让我们停止尝试，找到另一种方法。让我们回到使用相关性上来。
 
@@ -50,13 +50,13 @@
 
 不要关联随机的事物。搜索足够长的时间，你必定会找到一个真正“令人惊讶”的相关性，[就像这样](https://www.datasciencecentral.com/profiles/blogs/hilarious-graphs-and-pirates-prove-that-correlation-is-not)。这种关系很可能是偶然的，这样你就浪费了你的时间和其他人的时间。统计学家将这种方法称为“[p-hacking](https://en.wikipedia.org/wiki/Data_dredging)”。
 
-![](../Images/e34d8a731567ceef07c3e9cae9576ff8.png) 来源: https://www.tylervigen.com/spurious-correlations
+![](img/e34d8a731567ceef07c3e9cae9576ff8.png) 来源: https://www.tylervigen.com/spurious-correlations
 
 相反，要专注于已经存在关联的事物。一个很好的方法是关注客户的行动。如果你试图关联围绕客户行动的数据，你可以保证只探索那些*实际*以某种方式相关的行为。这听起来简单，但容易被忽视。例如，我们不应该看“我们推出课程的时间”如何影响客户报名的可能性，我们应该看“*客户看到课程的时间*”如何影响他们的报名可能性。因为我们从客户及其行动的角度来看所有行为，我们可以保证这些行动是相关的，增加了我们看到的相关关系也是因果关系的可能性。
 
 ### 2\. 关联转化率，而不是总量
 
-在大多数分析中，我们试图评估特定决策或变化将如何影响客户行为。客户行为最好用转化率来表示，而不是总量。如果我告诉你10人转化了，而30人转化了，这并不能告诉我客户的行为思维。如果我告诉你网站上10%的人转化了，而30%的人转化了，那么你就能更好地理解客户的转化意愿。
+在大多数分析中，我们试图评估特定决策或变化将如何影响客户行为。客户行为最好用转化率来表示，而不是总量。如果我告诉你 10 人转化了，而 30 人转化了，这并不能告诉我客户的行为思维。如果我告诉你网站上 10%的人转化了，而 30%的人转化了，那么你就能更好地理解客户的转化意愿。
 
 现在，设想一下将总电话咨询与总转化进行关联。我们可能会看到总电话咨询的增加与总转化的增加高度相关。显然是的，因为我们有更多的人在漏斗中，但我们直观地知道更多的电话咨询并不会*引起*更多的转化。它们只是因为受到另一因素（量）的影响而相关。通过查看转化率，我们可以更容易地挖掘出可以用来影响客户行为的见解。
 
@@ -66,11 +66,11 @@
 
 你的业务和客户总在变化，因此了解这一点很重要。我们通常会以聚合的方式查看相关性，将时间剥离出分析。然而，所有事物都在随时间变化，所以过去存在的相关性可能今天已经消失，如果不对数据进行时间上的分析，你将无法发现这一点。
 
-由于历史行为是预测未来行为的最佳指标，我们需要查看数据随时间的变化情况，特别是我们分析的特征也在变化时。如果拥有X的人一直有更高的指标Y，那么我们可以更容易地相信，当我们让更多人做X时，我们更有可能提高Y。只要这种影响在时间上保持一致，我们就可以更有信心这些趋势在未来也是可靠的。
+由于历史行为是预测未来行为的最佳指标，我们需要查看数据随时间的变化情况，特别是我们分析的特征也在变化时。如果拥有 X 的人一直有更高的指标 Y，那么我们可以更容易地相信，当我们让更多人做 X 时，我们更有可能提高 Y。只要这种影响在时间上保持一致，我们就可以更有信心这些趋势在未来也是可靠的。
 
-一个很好的例子是回顾你之前进行的A/B测试。当我们这样做时，我们发现其中一些测试在短时间内具有统计学意义，但随着时间推移并不一致。这是A/B测试中的 [常见风险](https://cxl.com/blog/12-ab-split-testing-mistakes-i-see-businesses-make-all-the-time/#weeks)，因此许多专家建议进行常绿测试。不过这涉及很多工程复杂性，大多数团队最终没有设立。
+一个很好的例子是回顾你之前进行的 A/B 测试。当我们这样做时，我们发现其中一些测试在短时间内具有统计学意义，但随着时间推移并不一致。这是 A/B 测试中的 [常见风险](https://cxl.com/blog/12-ab-split-testing-mistakes-i-see-businesses-make-all-the-time/#weeks)，因此许多专家建议进行常绿测试。不过这涉及很多工程复杂性，大多数团队最终没有设立。
 
-![](../Images/ce2d9c111e86a2d4cd04a2c61b627dec.png)A/B测试可以显示显著性，但对长期没有影响
+![](img/ce2d9c111e86a2d4cd04a2c61b627dec.png)A/B 测试可以显示显著性，但对长期没有影响
 
 ### 4\. 始终监测结果
 
@@ -78,7 +78,7 @@
 
 在监测结果时，跟踪你所做的改变如何影响你想要实现的结果是很重要的。假设你发现使用折扣码的顾客与平均订单价值之间存在正相关。一旦你发现了相关趋势，你会希望将更多顾客慢慢转移到表现更好的群体中。然后，我们可以使用下面的图表来监控结果。
 
-![](../Images/989016a3317d8ff14ccd0eccd809d8fd.png)
+![](img/989016a3317d8ff14ccd0eccd809d8fd.png)
 
 如果我们在做出更改时能跟踪这些数据，我们可以始终判断是否做出了正确的决策，并在未做对时快速纠正。
 
@@ -86,34 +86,34 @@
 
 我们可以自动化这种方法，分析结果将类似于下方的分析，使决策者能够更快地做出数据驱动的决策。
 
-![](../Images/dd5ddb98e41c3e8069c9afb7d0e6f604.png)示例自动生成的分析由 [叙述者](https://www.narrator.ai/) 的分析按钮创建
+![](img/dd5ddb98e41c3e8069c9afb7d0e6f604.png)示例自动生成的分析由 [叙述者](https://www.narrator.ai/) 的分析按钮创建
 
 ## 结论
 
-实践中，我们需要准确的洞察力，并且必须迅速行动。等待两个月的分析以确定因果关系或等待四周的A/B测试完成并不实际。但是，如果我们能够迅速基于相关性做出行动，尤其是在这些相关性经过上述技术严格评估之后，我们将能做出更好的决策，更快地行动。因此，让我们淘汰“相关性不等于因果关系”这一说法，对相关性本身多一些信任。
+实践中，我们需要准确的洞察力，并且必须迅速行动。等待两个月的分析以确定因果关系或等待四周的 A/B 测试完成并不实际。但是，如果我们能够迅速基于相关性做出行动，尤其是在这些相关性经过上述技术严格评估之后，我们将能做出更好的决策，更快地行动。因此，让我们淘汰“相关性不等于因果关系”这一说法，对相关性本身多一些信任。
 
-**简历: [布列塔尼·戴维斯](https://www.linkedin.com/in/brittanymdavis/)** 是Narrator.ai的数据主管。
+**简历: [布列塔尼·戴维斯](https://www.linkedin.com/in/brittanymdavis/)** 是 Narrator.ai 的数据主管。
 
 [原文](https://www.narrator.ai/blog/when-correlation-is-better-than-causation/)。转载授权。
 
 **相关：**
 
-+   [数据科学的8个基础统计概念](/2020/06/8-basic-statistics-concepts.html)
++   数据科学的 8 个基础统计概念
 
-+   [数据科学家必须了解的10个统计概念](/2021/04/10-statistical-concepts-data-scientists.html)
++   数据科学家必须了解的 10 个统计概念
 
-+   [你应该对预测变量的共线性有多担心？这要视情况而定…](/2019/08/predictor-collinearity.html)
++   你应该对预测变量的共线性有多担心？这要视情况而定…
 
 ### 更多相关话题
 
-+   [IMPACT：数据可观测性峰会将于11月8日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观测性峰会将于 11 月 8 日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
-+   [不到15行代码的多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
++   [不到 15 行代码的多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 
 +   [为什么你需要学习多于一种编程语言！](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
-+   [机器学习算法在不到1分钟内解释完](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
++   [机器学习算法在不到 1 分钟内解释完](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
 
-+   [在不到6个月内成为商业智能分析师](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)
++   [在不到 6 个月内成为商业智能分析师](https://www.kdnuggets.com/become-a-business-intelligence-analyst-in-less-than-6-months)

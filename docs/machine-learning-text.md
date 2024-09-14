@@ -1,20 +1,20 @@
 # 文本的机器学习
 
-> 原文：[https://www.kdnuggets.com/2018/04/machine-learning-text.html](https://www.kdnuggets.com/2018/04/machine-learning-text.html)
+> 原文：[`www.kdnuggets.com/2018/04/machine-learning-text.html`](https://www.kdnuggets.com/2018/04/machine-learning-text.html)
 
 赞助广告。
 
-![文本挖掘书籍](../Images/28ef1b62ee79b0e4b15132bfd35c7b4c.png)
+![文本挖掘书籍](img/28ef1b62ee79b0e4b15132bfd35c7b4c.png)
 
-文本的机器学习，Springer，2018年3月
+文本的机器学习，Springer，2018 年 3 月
 
 Charu C. Aggarwal。
 
 ### **关于文本的综合教材：** [** 目录**](http://www.charuaggarwal.net/Text-Learning.pdf)
 
-[PDF下载链接](https://rd.springer.com/book/10.1007/978-3-319-73531-3)  （仅对连接到订阅机构的计算机免费）
+[PDF 下载链接](https://rd.springer.com/book/10.1007/978-3-319-73531-3)  （仅对连接到订阅机构的计算机免费）
 
-[购买硬封面或PDF](http://www.springer.com/us/book/9783319735306)  （供普通读者使用）
+[购买硬封面或 PDF](http://www.springer.com/us/book/9783319735306)  （供普通读者使用）
 
 [使用右侧目的页链接购买低价平装本](https://rd.springer.com/book/10.1007/978-3-319-73531-3)  （链接仅对连接到订阅机构的计算机显示，平装本折扣价为$25）
 
@@ -36,11 +36,11 @@ Charu C. Aggarwal。
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的 IT 组织
 
 * * *
 

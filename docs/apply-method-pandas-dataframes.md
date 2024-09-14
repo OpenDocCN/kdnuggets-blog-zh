@@ -1,8 +1,8 @@
 # 使用 apply() 方法与 Pandas Dataframes
 
-> 原文：[https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)
+> 原文：[`www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html`](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)
 
-![使用 apply() 方法与 Pandas Dataframes](../Images/bdab73235e89186d9bf8ffdafc25d699.png)
+![使用 apply() 方法与 Pandas Dataframes](img/bdab73235e89186d9bf8ffdafc25d699.png)
 
 图片由 [Pakata Goh](https://unsplash.com/@pakata?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄，来源于 [Unsplash](https://unsplash.com/s/photos/python?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -57,7 +57,7 @@ planetinfo
 
 **输出：**
 
-![使用 apply() 方法与 Pandas Dataframes](../Images/9a7f2a827fa2cec4497baf13f9217b3f.png)
+![使用 apply() 方法与 Pandas Dataframes](img/9a7f2a827fa2cec4497baf13f9217b3f.png)
 
 上述代码返回一个 planetinfo 对象及其对应的数据类型。由于对象的数据类型是 series，让我们看看如何使用 apply() 方法将每个行星的直径从公里转换为英里
 
@@ -72,7 +72,7 @@ print(planetinfo.apply(km_to_miles))
 
 **输出：**
 
-![使用 apply() 方法与 Pandas Dataframes](../Images/ac2b104bbbf30948b526e42cb26ddf73.png)
+![使用 apply() 方法与 Pandas Dataframes](img/ac2b104bbbf30948b526e42cb26ddf73.png)
 
 上述代码返回了每个行星的直径从公里转换为英里。为了实现这一点，我们首先定义了一个名为 km_to_miles() 的函数，然后将该函数不带括号地传递给 apply() 方法。apply() 方法随后对 Series 中的每个数据点应用 km_to_miles() 函数。
 
@@ -93,7 +93,7 @@ studentinfo
 
 **输出：**
 
-![使用 Pandas 数据框的 apply() 方法](../Images/8c479cf71e5ab4ad02b2dcaae6d7e7ee.png)
+![使用 Pandas 数据框的 apply() 方法](img/8c479cf71e5ab4ad02b2dcaae6d7e7ee.png)
 
 我们现在已经创建了一个名为 studentinfo 的虚拟数据框，并将通过探索 4 个不同的用例来学习如何实现 apply() 方法。每个用例都是新的，并将通过使用 apply() 方法解决。
 
@@ -122,7 +122,7 @@ studentinfo
 
 **输出：**
 
-![使用 Pandas 数据框的 apply() 方法](../Images/d11c98b2baee53bdcb4d8e091c36b24d.png)
+![使用 Pandas 数据框的 apply() 方法](img/d11c98b2baee53bdcb4d8e091c36b24d.png)
 
 我们可以看到 datacheck() 函数如何应用于 STUDENT_NAME 列的每一行，返回的结果存储在一个名为 IS_ALPHABET 的新列中。
 
@@ -154,7 +154,7 @@ studentinfo
 
 **输出：**
 
-![使用 Pandas 数据框的 apply() 方法](../Images/07b348738f08149597017900019ad215.png)
+![使用 Pandas 数据框的 apply() 方法](img/07b348738f08149597017900019ad215.png)
 
 我们可以看到 reduce_cardinality() 函数如何应用于 ACADEMIC_STANDING 列的每一行，其中 ACADEMIC_STANDING 列中的原始值现在已被修改为两个不同的类别，即 ACADEMIC_STANDING_BAD 和 ACADEMIC_STANDING_GOOD，从而减少了数据的基数。
 
@@ -190,7 +190,7 @@ studentinfo
 
 **输出：**
 
-![使用 Pandas Dataframes 的 apply() 方法](../Images/5682a00e27fd4d72c0a62a4be3fed0fa.png)
+![使用 Pandas Dataframes 的 apply() 方法](img/5682a00e27fd4d72c0a62a4be3fed0fa.png)
 
 我们可以看到 reduce_cardinality_grade() 函数如何应用于 MID_TERM_GRADE 列的每一行，原始的 MID_TERM_GRADE 列中的值现在已被修改为两个不同的类别，即 Corhigher 和 Dorlower，从而减少了基数。
 
@@ -226,7 +226,7 @@ studentinfo
 
 **输出：**
 
-![使用 Pandas Dataframes 的 apply() 方法](../Images/cb0d6e3d60dd470186140dbeceb17282.png)
+![使用 Pandas Dataframes 的 apply() 方法](img/cb0d6e3d60dd470186140dbeceb17282.png)
 
 我们可以看到 check() 函数如何应用于 MID_TERM_GRADE 和 ATTENDANCE_PERCENTAGE 列的每一行，从而返回一个名为 FINAL_GRADE_STATUS 的新列，值为 Corhigher 和 Dorlower。
 

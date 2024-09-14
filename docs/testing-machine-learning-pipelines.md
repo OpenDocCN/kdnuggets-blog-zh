@@ -1,8 +1,8 @@
 # 测试你的机器学习管道
 
-> 原文：[https://www.kdnuggets.com/2019/11/testing-machine-learning-pipelines.html](https://www.kdnuggets.com/2019/11/testing-machine-learning-pipelines.html)
+> 原文：[`www.kdnuggets.com/2019/11/testing-machine-learning-pipelines.html`](https://www.kdnuggets.com/2019/11/testing-machine-learning-pipelines.html)
 
-[评论](#comments)
+评论
 
 **由 [Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)，高级数据科学家**
 
@@ -14,13 +14,13 @@
 
 你的标准简化测试金字塔如下所示：
 
-![测试金字塔](../Images/c91452a8dddea3d572e7c48be6b02998.png)
+![测试金字塔](img/c91452a8dddea3d572e7c48be6b02998.png)
 
-这个金字塔表示了你为应用程序编写的测试类型。我们从大量的单元测试开始，测试单一功能是否与其他功能隔离。然后我们编写集成测试，检查将隔离的组件结合在一起是否按预期工作。最后，我们编写UI或验收测试，检查应用程序从用户的角度是否按预期工作。
+这个金字塔表示了你为应用程序编写的测试类型。我们从大量的单元测试开始，测试单一功能是否与其他功能隔离。然后我们编写集成测试，检查将隔离的组件结合在一起是否按预期工作。最后，我们编写 UI 或验收测试，检查应用程序从用户的角度是否按预期工作。
 
 在数据产品方面，金字塔并没有太大区别。我们有大致相同的层级。
 
-![测试金字塔.png](../Images/73bc12f0b893c1efe5ad944fee1ddaa8.png)
+![测试金字塔.png](img/73bc12f0b893c1efe5ad944fee1ddaa8.png)
 
 请注意，UI 测试仍然会在产品中进行，但这篇博客文章关注的是与数据管道最相关的测试。
 
@@ -170,17 +170,17 @@ def test_regression_score():
 
 +   它确保模型实际帮助产品解决当前的问题
 
-    +   例如，一个将蛇咬伤分类为致命或非致命的模型，如果20%的错误导致患者未能得到所需治疗，那么这个模型并不好。
+    +   例如，一个将蛇咬伤分类为致命或非致命的模型，如果 20%的错误导致患者未能得到所需治疗，那么这个模型并不好。
 
 +   确保模型产生的值在行业中是合理的
 
-    +   例如，一个以70%准确率预测价格变化的模型，如果最终显示给用户的价格值在该行业/市场中过低或过高，则不是一个好的模型。
+    +   例如，一个以 70%准确率预测价格变化的模型，如果最终显示给用户的价格值在该行业/市场中过低或过高，则不是一个好的模型。
 
 +   它提供了决策记录的额外文档层次，帮助后来加入团队的工程师。
 
 +   它以一种客户、产品经理和工程师都能理解的共同语言提供了产品中机器学习组件的可见性。
 
-这种验证应定期进行（通过CI管道或cron作业），其结果应向组织公开。这确保数据科学组件的进展对组织可见，并确保由于更改或陈旧数据引起的问题能尽早被发现。
+这种验证应定期进行（通过 CI 管道或 cron 作业），其结果应向组织公开。这确保数据科学组件的进展对组织可见，并确保由于更改或陈旧数据引起的问题能尽早被发现。
 
 ### 结论
 
@@ -200,27 +200,27 @@ def test_regression_score():
 
 再见，谢谢你的所有测试！
 
-**个人简介：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)** 是BCG Digital Ventures的高级数据科学家。她曾在SoundCloud担任推荐团队的后端和数据工程师。她的以往经验包括顾问和研究员。她在过去曾担任过后端、网页和移动开发人员，涉及各种技术。
+**个人简介：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)** 是 BCG Digital Ventures 的高级数据科学家。她曾在 SoundCloud 担任推荐团队的后端和数据工程师。她的以往经验包括顾问和研究员。她在过去曾担任过后端、网页和移动开发人员，涉及各种技术。
 
 [原文](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/)。经许可转载。
 
 **相关：**
 
-+   [5步指南：使用d6tflow构建可扩展的深度学习管道](/2019/09/5-step-guide-scalable-deep-learning-pipelines-d6tflow.html)
++   5 步指南：使用 d6tflow 构建可扩展的深度学习管道
 
-+   [我如何在机器学习中变得更好](/2019/11/better-machine-learning.html)
++   我如何在机器学习中变得更好
 
-+   [数据管道、Luigi、Airflow：你需要知道的一切](/2019/03/data-pipelines-luigi-airflow-everything-need-know.html)
++   数据管道、Luigi、Airflow：你需要知道的一切
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

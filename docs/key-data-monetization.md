@@ -1,10 +1,10 @@
 # 数据货币化的关键
 
-> 原文：[https://www.kdnuggets.com/2017/07/key-data-monetization.html](https://www.kdnuggets.com/2017/07/key-data-monetization.html)
+> 原文：[`www.kdnuggets.com/2017/07/key-data-monetization.html`](https://www.kdnuggets.com/2017/07/key-data-monetization.html)
 
-[评论](#comments)
+评论
 
-许多组织将数据货币化与出售数据联系在一起。然而，出售数据不是一项简单的任务，特别是对于主要依赖数据的组织。新涉足数据销售的组织需要关注隐私和个人可识别信息（PII）、数据质量和准确性、数据传输可靠性、定价、包装、市场营销、销售、支持等。像Nielsen、Experian和Acxiom这样的公司在数据销售方面是专家，因为这是他们的业务；他们围绕收集、汇总、清洗、对齐、包装、销售和支持数据建立了业务。
+许多组织将数据货币化与出售数据联系在一起。然而，出售数据不是一项简单的任务，特别是对于主要依赖数据的组织。新涉足数据销售的组织需要关注隐私和个人可识别信息（PII）、数据质量和准确性、数据传输可靠性、定价、包装、市场营销、销售、支持等。像 Nielsen、Experian 和 Acxiom 这样的公司在数据销售方面是专家，因为这是他们的业务；他们围绕收集、汇总、清洗、对齐、包装、销售和支持数据建立了业务。
 
 所以，与其专注于尝试销售数据，不如专注于货币化从数据中获得的客户、产品和运营见解；这些见解可用于优化关键业务和运营流程，减少安全和合规风险，发现新的收入机会，并创造更具吸引力的客户和合作伙伴互动。
 
@@ -12,11 +12,11 @@
 
 ### 分析配置文件
 
-分析配置文件提供了一种存储模型（类似于键值存储）来捕捉组织的分析资产，以便于这些资产在多个业务用例中进行提炼和共享。分析配置文件由指标、预测指标、细分、评分和业务规则组成，这些规则对组织关键业务实体如客户、患者、学生、运动员、喷气发动机、汽车、机车、CAT扫描仪和风力涡轮机的行为、偏好、倾向、兴趣、关联和隶属关系进行编码（参见**图1**）。
+分析配置文件提供了一种存储模型（类似于键值存储）来捕捉组织的分析资产，以便于这些资产在多个业务用例中进行提炼和共享。分析配置文件由指标、预测指标、细分、评分和业务规则组成，这些规则对组织关键业务实体如客户、患者、学生、运动员、喷气发动机、汽车、机车、CAT 扫描仪和风力涡轮机的行为、偏好、倾向、兴趣、关联和隶属关系进行编码（参见**图 1**）。
 
-![图1：分析配置文件](../Images/59baff1d6ecb9e5d8eb42ebf10bfa0c3.png)
+![图 1：分析配置文件](img/59baff1d6ecb9e5d8eb42ebf10bfa0c3.png)
 
-**图1：** 分析配置文件
+**图 1：** 分析配置文件
 
 分析配置文件在捕捉和重用分析见解时强制执行一种规范，这些见解针对个别关键业务实体（例如，个别患者、个别学生、个别风力涡轮机）。缺乏捕捉、提炼和共享分析的操作框架可能导致：
 
@@ -54,7 +54,7 @@
 
 **图 2** 显示了来自“提高活动效果”用例的客户 WDS120356 的客户分析档案。
 
-![图 2：提高活动效果](../Images/29ab5ec9e396b94d1a97052c12c88c32.png)
+![图 2：提高活动效果](img/29ab5ec9e396b94d1a97052c12c88c32.png)
 
 **图 2：** 提高活动效果
 
@@ -76,7 +76,7 @@
 
 **图 3** 显示了“增加客户忠诚度”用例生成的客户 WDS120356 的更新分析档案。
 
-![图 3: 提升客户忠诚度用例](../Images/919ac3834c1f817a911289090969ea47.png)
+![图 3: 提升客户忠诚度用例](img/919ac3834c1f817a911289090969ea47.png)
 
 **图 3:** 提升客户忠诚度用例
 
@@ -92,7 +92,7 @@
 
 **图 4** 显示了客户 WDS120356 的更新后的客户分析档案，结果来自“增加客户店铺访问”用例。
 
-![图 4: 增加店铺访问用例](../Images/92b4147bc773ae69f97eafd267e94e5e.png)
+![图 4: 增加店铺访问用例](img/92b4147bc773ae69f97eafd267e94e5e.png)
 
 **图 4:** 增加店铺访问用例
 
@@ -102,7 +102,7 @@
 
 通过逐个用例推进，客户分析档案得到完善，并为数据货币化提供基础，改进业务和运营流程，减少安全和合规风险（见**图 5**）。
 
-![图 5: 完全功能的客户分析档案](../Images/e41350b8d276c9a61704498b3c1cec76.png)
+![图 5: 完全功能的客户分析档案](img/e41350b8d276c9a61704498b3c1cec76.png)
 
 图 5: 完全功能的客户分析档案
 
@@ -130,11 +130,11 @@
 
 **相关：**
 
-+   [确定数据的经济价值](/2016/06/determining-economic-value-data.html)
++   确定数据的经济价值
 
-+   [区块链是数据货币化的终极推动者吗？](/2017/04/blockchain-ultimate-enabler-data-monetization.html)
++   区块链是数据货币化的终极推动者吗？
 
-+   [识别可能是更好预测指标的变量](/2017/02/schmarzo-variables-better-predictors.html)
++   识别可能是更好预测指标的变量
 
 ### 更多相关内容
 
@@ -142,10 +142,10 @@
 
 +   [AI、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [数据科学与分析行业在2021年的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [数据科学与分析行业在 2021 年的主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年主要发展和2022年AI、数据科学、…的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年主要发展和 2022 年 AI、数据科学、…的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
-+   [2022年及以后10大AI与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
++   [2022 年及以后 10 大 AI 与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)

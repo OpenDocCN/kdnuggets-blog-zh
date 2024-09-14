@@ -1,26 +1,26 @@
 # 新时代的机器学习算法在零售贷款中的应用
 
-> 原文：[https://www.kdnuggets.com/2017/09/machine-learning-algorithms-lending.html](https://www.kdnuggets.com/2017/09/machine-learning-algorithms-lending.html)
+> 原文：[`www.kdnuggets.com/2017/09/machine-learning-algorithms-lending.html`](https://www.kdnuggets.com/2017/09/machine-learning-algorithms-lending.html)
 
-**由Jayesh Ametha撰写**
+**由 Jayesh Ametha 撰写**
 
-十多年前，当我加入一家大型美国信用卡公司时，发现预测分析仅限于多元回归和逻辑回归模型，这让我感到惊讶。这与之前在NASA/NIST资助的初创公司工作的经历形成了对比，在那些公司中，经常应用包括SVM、神经网络、随机森林或梯度提升树等更广泛的机器学习（ML）方法。
+十多年前，当我加入一家大型美国信用卡公司时，发现预测分析仅限于多元回归和逻辑回归模型，这让我感到惊讶。这与之前在 NASA/NIST 资助的初创公司工作的经历形成了对比，在那些公司中，经常应用包括 SVM、神经网络、随机森林或梯度提升树等更广泛的机器学习（ML）方法。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-![Credit](../Images/ce13f0629bb52dc2db0c33f2125c6de1.png)
+![Credit](img/ce13f0629bb52dc2db0c33f2125c6de1.png)
 
-在零售贷款中使用更简单模型的原因有很多。首先，决策框架已经到位，使得输入特征选择相对简单。例如，对于信用决策，可以从5Cs of Credit（信用的5个要素：Character、Capacity、Capital、Collateral、Conditions）的角度考虑，并寻找满足这些要素的数据变量。这不像使用深度学习从原始图像中创建特征那么困难。其次，目标变量与输入的关系并不复杂，例如，信用风险与收入之间有一个平滑的反向关系。实际上并不需要径向基函数将收入转换到更高维空间，就像SVM基于图像分类所需的那样。第三，与今天不同的是，训练和部署平台当时并不适合复杂方法。最后，一个常被提到的原因是模型可解释性（尽管经验丰富的高级机器学习模型用户可能会对此提出质疑）。
+在零售贷款中使用更简单模型的原因有很多。首先，决策框架已经到位，使得输入特征选择相对简单。例如，对于信用决策，可以从 5Cs of Credit（信用的 5 个要素：Character、Capacity、Capital、Collateral、Conditions）的角度考虑，并寻找满足这些要素的数据变量。这不像使用深度学习从原始图像中创建特征那么困难。其次，目标变量与输入的关系并不复杂，例如，信用风险与收入之间有一个平滑的反向关系。实际上并不需要径向基函数将收入转换到更高维空间，就像 SVM 基于图像分类所需的那样。第三，与今天不同的是，训练和部署平台当时并不适合复杂方法。最后，一个常被提到的原因是模型可解释性（尽管经验丰富的高级机器学习模型用户可能会对此提出质疑）。
 
 随着时间的推移，前述的机器学习方法开始被探索，因为开源软件包变得普遍，数据也以不同的形式出现。然而，业务的主要价值来自于识别新的强大数据，这些数据可以显著改善客户级别的决策。虽然替代数据源始终是一个重点领域，但有些特定的业务问题可以通过近年来普及的新机器学习算法更好地解决。在这里，我们讨论三种这样的算法，重点介绍它们在零售贷款中的应用。
 
@@ -64,11 +64,11 @@
 
 **相关:**
 
-+   [什么是优化及其如何使业务受益？](/2017/08/optimization-benefit-business.html)
++   什么是优化及其如何使业务受益？
 
-+   [深度学习如何改变金融和零售行业](/2017/05/rework-deep-learning-finance-retail.html)
++   深度学习如何改变金融和零售行业
 
-+   [数据科学如何推动金融科技革命的 7 种方式](/2016/09/7-ways-how-data-science-fuels-fintech-revolution.html)
++   数据科学如何推动金融科技革命的 7 种方式
 
 ### 更多相关内容
 

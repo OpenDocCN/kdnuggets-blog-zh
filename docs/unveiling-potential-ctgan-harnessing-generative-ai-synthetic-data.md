@@ -1,42 +1,42 @@
-# 揭示CTGAN的潜力：利用生成式AI生成合成数据
+# 揭示 CTGAN 的潜力：利用生成式 AI 生成合成数据
 
-> 原文：[https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
+> 原文：[`www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html`](https://www.kdnuggets.com/2023/04/unveiling-potential-ctgan-harnessing-generative-ai-synthetic-data.html)
 
-我们都知道，GANs（生成对抗网络）在生成非结构化合成数据方面正在获得关注，例如图像和文本。然而，使用GANs生成合成表格数据的工作非常少。合成数据具有许多好处，包括在机器学习应用、数据隐私、数据分析和数据增强中的应用。生成合成表格数据的模型很少，而CTGAN（条件表格生成对抗网络）就是其中之一。像其他GANs一样，它使用生成器和判别器神经网络创建具有类似统计特性的合成数据。CTGAN可以保留真实数据的基础结构，包括列之间的相关性。CTGAN的额外好处包括通过模式特定的归一化、少量架构更改以及通过使用条件生成器和训练采样来解决数据不平衡，从而增强训练过程。
+我们都知道，GANs（生成对抗网络）在生成非结构化合成数据方面正在获得关注，例如图像和文本。然而，使用 GANs 生成合成表格数据的工作非常少。合成数据具有许多好处，包括在机器学习应用、数据隐私、数据分析和数据增强中的应用。生成合成表格数据的模型很少，而 CTGAN（条件表格生成对抗网络）就是其中之一。像其他 GANs 一样，它使用生成器和判别器神经网络创建具有类似统计特性的合成数据。CTGAN 可以保留真实数据的基础结构，包括列之间的相关性。CTGAN 的额外好处包括通过模式特定的归一化、少量架构更改以及通过使用条件生成器和训练采样来解决数据不平衡，从而增强训练过程。
 
-在这篇博客文章中，我使用了CTGAN生成基于Kaggle收集的*信用分析*数据集的合成数据。
+在这篇博客文章中，我使用了 CTGAN 生成基于 Kaggle 收集的*信用分析*数据集的合成数据。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
-## CTGAN的优点
+## CTGAN 的优点
 
 +   生成具有类似统计特性的合成表格数据，包括不同列之间的相关性。
 
 +   保留真实数据的基础结构。
 
-+   CTGAN生成的合成数据可以用于各种应用，例如数据增强、数据隐私和数据分析。
++   CTGAN 生成的合成数据可以用于各种应用，例如数据增强、数据隐私和数据分析。
 
 +   可以处理连续、离散和分类数据。
 
-## CTGAN的缺点
+## CTGAN 的缺点
 
-+   CTGAN需要大量真实表格数据来训练模型，并生成具有类似统计特性的合成数据。
++   CTGAN 需要大量真实表格数据来训练模型，并生成具有类似统计特性的合成数据。
 
-+   CTGAN计算资源消耗大，可能需要大量计算资源。
++   CTGAN 计算资源消耗大，可能需要大量计算资源。
 
-+   CTGAN生成的合成数据的质量可能会根据用于训练模型的真实数据的质量而有所不同。
++   CTGAN 生成的合成数据的质量可能会根据用于训练模型的真实数据的质量而有所不同。
 
-## 调整CTGAN
+## 调整 CTGAN
 
 像所有其他机器学习模型一样，CTGAN 在调优时表现更好。在调优 CTGAN 时需要考虑多个参数。然而，为了此次演示，我使用了‘ctgan library’中所有默认参数：
 
@@ -90,65 +90,65 @@ AMT_ANNUITY
 AMT_GOODS_PRICE
 ```
 
-生成模型需要大量的清洁数据来进行训练以获得更好的结果。然而，由于计算能力的限制，我从超过30万行的真实数据中选择了仅10,000行（准确来说是9,993）进行演示。虽然这个数量可能被认为相对较少，但对于本次演示来说应该足够。
+生成模型需要大量的清洁数据来进行训练以获得更好的结果。然而，由于计算能力的限制，我从超过 30 万行的真实数据中选择了仅 10,000 行（准确来说是 9,993）进行演示。虽然这个数量可能被认为相对较少，但对于本次演示来说应该足够。
 
 **真实数据的位置：**
 
-[https://www.kaggle.com/datasets/kapoorshivam/credit-analysis](https://www.kaggle.com/datasets/kapoorshivam/credit-analysis)
+[`www.kaggle.com/datasets/kapoorshivam/credit-analysis`](https://www.kaggle.com/datasets/kapoorshivam/credit-analysis)
 
 **生成的合成数据的位置：**
 
-+   [由CTGAN生成的合成信用分析数据（Kaggle）](https://www.kaggle.com/datasets/drrayislam/synthetic-credit-analysis-data-by-ctgan)
++   [由 CTGAN 生成的合成信用分析数据（Kaggle）](https://www.kaggle.com/datasets/drrayislam/synthetic-credit-analysis-data-by-ctgan)
 
-+   [由CTGAN生成的合成表格数据集（Research Gate）](https://www.researchgate.net/publication/369826197_Synthetic_Tabular_Data_Set_Generated_by_CTGAN)
++   [由 CTGAN 生成的合成表格数据集（Research Gate）](https://www.researchgate.net/publication/369826197_Synthetic_Tabular_Data_Set_Generated_by_CTGAN)
 
 +   DOI: [10.13140/RG.2.2.23275.82728](https://dx.doi.org/10.13140/RG.2.2.23275.82728)
 
-![XXXXX](../Images/fdf11e6f132e3463fb533bc183f261da.png)
+![XXXXX](img/fdf11e6f132e3463fb533bc183f261da.png)
 
 信用分析数据 | 图片来源：作者
 
 # 结果
 
-我生成了10k（准确来说是9997）个合成数据点，并将其与真实数据进行了比较。结果看起来不错，尽管仍有改进的空间。在我的分析中，我使用了默认参数，以'relu'作为激活函数，并训练了3000轮。增加训练轮数应能生成更像真实的合成数据。生成器和判别器的损失也很好，较低的损失表明合成数据与真实数据的相似度较高：
+我生成了 10k（准确来说是 9997）个合成数据点，并将其与真实数据进行了比较。结果看起来不错，尽管仍有改进的空间。在我的分析中，我使用了默认参数，以'relu'作为激活函数，并训练了 3000 轮。增加训练轮数应能生成更像真实的合成数据。生成器和判别器的损失也很好，较低的损失表明合成数据与真实数据的相似度较高：
 
-![XXXXX](../Images/30e9337394c50196dca7aa21e051513f.png)
+![XXXXX](img/30e9337394c50196dca7aa21e051513f.png)
 
 生成器和判别器损失 | 图片来源：作者
 
 在绝对对数均值和标准差图中的对角线上的点表示生成的数据质量良好。
 
-![XXXXX](../Images/d78ae917b78e7848fb70785bd3e2aa52.png)
+![XXXXX](img/d78ae917b78e7848fb70785bd3e2aa52.png)
 
 数值数据的绝对对数均值和标准差 | 图片来源：作者
 
 以下图中的连续列的累积和虽然没有完全重叠，但接近，这表明合成数据生成良好且没有过拟合。分类/离散数据的重叠表明生成的合成数据接近真实数据。进一步的统计分析见以下图示：
 
-![XXXXX](../Images/190d689ae7e86a3e1a682c07013671d4.png)
+![XXXXX](img/190d689ae7e86a3e1a682c07013671d4.png)
 
-每个特征的累积和 | 图片来源：作者 ![XXXXX](../Images/777416ef5219c3b162900c0c5e9861b2.png)
+每个特征的累积和 | 图片来源：作者 ![XXXXX](img/777416ef5219c3b162900c0c5e9861b2.png)
 
 特征分布 | 图片来源：作者
 
-![XXXXX](../Images/947bd52a82a71333174503e8bc5edf2e.png)
+![XXXXX](img/947bd52a82a71333174503e8bc5edf2e.png)
 
-特征分布 | 图片来源：作者 ![XXXXX](../Images/0a3117c69dbc7114cb6ef198c4ae97a5.png)
+特征分布 | 图片来源：作者 ![XXXXX](img/0a3117c69dbc7114cb6ef198c4ae97a5.png)
 
 主成分分析 | 图片来源：作者
 
 以下相关图显示了变量之间明显的相关性。值得注意的是，即使经过彻底的微调，真实数据和合成数据之间可能仍会存在属性差异。这些差异实际上可能是有益的，因为它们可能揭示数据集中隐藏的属性，这些属性可以用于创建新颖的解决方案。观察发现，增加训练轮数会提高合成数据的质量。
 
-![XXXXX](../Images/757eb3ac9a934085d45b8900328c92c0.png)
+![XXXXX](img/757eb3ac9a934085d45b8900328c92c0.png)
 
 变量之间的相关性（真实数据）| 图片来源于作者
 
-![XXXXX](../Images/f0eec5a1fb2c4b88d74823fa59ef96ae.png)
+![XXXXX](img/f0eec5a1fb2c4b88d74823fa59ef96ae.png)
 
 变量之间的相关性（合成数据）| 图片来源于作者
 
 样本数据和真实数据的摘要统计结果也表现出令人满意的效果。
 
-![XXXXX](../Images/aa2df72c0607132355d2d0199d17d4e0.png)
+![XXXXX](img/aa2df72c0607132355d2d0199d17d4e0.png)
 
 真实数据与合成数据的摘要统计 | 图片来源于作者
 

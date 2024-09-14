@@ -1,8 +1,8 @@
 # 相关性介绍
 
-> 原文：[https://www.kdnuggets.com/2023/05/introduction-correlation.html](https://www.kdnuggets.com/2023/05/introduction-correlation.html)
+> 原文：[`www.kdnuggets.com/2023/05/introduction-correlation.html`](https://www.kdnuggets.com/2023/05/introduction-correlation.html)
 
-![相关性介绍](../Images/7229eb0d0d86903866ca586deb020211.png)
+![相关性介绍](img/7229eb0d0d86903866ca586deb020211.png)
 
 编辑提供的图片
 
@@ -18,21 +18,21 @@
 
 +   相关性的数学定义
 
-+   相关系数的Python实现
++   相关系数的 Python 实现
 
 +   协方差矩阵
 
-+   协方差矩阵的Python实现
++   协方差矩阵的 Python 实现
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
@@ -44,25 +44,25 @@
 
 如果变量***Y***在变量***X***增加时也增加，那么***X***和***Y***是正相关的，如下所示：
 
-![相关性介绍](../Images/6ca85baa7bbc8012db6b13bcb32960a1.png)
+![相关性介绍](img/6ca85baa7bbc8012db6b13bcb32960a1.png)
 
-X和Y之间的正相关。 图片由作者提供。
+X 和 Y 之间的正相关。 图片由作者提供。
 
 # 负相关
 
 如果变量***Y***在变量***X***增加时减少，那么***X***和***Y***是负相关的，如下所示：
 
-![相关性介绍](../Images/d0e26ad8ba07ccc8b73da71d06084e5c.png)
+![相关性介绍](img/d0e26ad8ba07ccc8b73da71d06084e5c.png)
 
-X和Y之间的负相关。 图片由作者提供。
+X 和 Y 之间的负相关。 图片由作者提供。
 
 # 无相关性
 
 当***X***和**Y**之间没有明显关系时，我们说**X**和***Y***是无相关的，如下所示：
 
-![相关性介绍](../Images/75101f9df34307dfdfb0fc0a2636b093.png)
+![相关性介绍](img/75101f9df34307dfdfb0fc0a2636b093.png)
 
-X和Y是无相关的。 图片由作者提供。
+X 和 Y 是无相关的。 图片由作者提供。
 
 # 相关性的数学定义
 
@@ -74,11 +74,11 @@ Y = (Y1 , Y2 , . . ., Yn )
 
 ***X***和***Y***之间的相关系数定义为
 
-![相关性介绍](../Images/a7db4e9be71b492973664ef1f5d6d610.png)
+![相关性介绍](img/a7db4e9be71b492973664ef1f5d6d610.png)
 
-其中mu和sigma分别表示均值和标准差，Xstd是变量X的标准化特征。相关系数是***X***和***Y***的标准化特征之间的向量点积（标量积）。相关系数的取值范围在-1到1之间。接近1的值表示强正相关，接近-1的值表示强负相关，接近零的值表示低相关性或无相关性。
+其中 mu 和 sigma 分别表示均值和标准差，Xstd 是变量 X 的标准化特征。相关系数是***X***和***Y***的标准化特征之间的向量点积（标量积）。相关系数的取值范围在-1 到 1 之间。接近 1 的值表示强正相关，接近-1 的值表示强负相关，接近零的值表示低相关性或无相关性。
 
-## 相关系数的Python实现
+## 相关系数的 Python 实现
 
 ```py
 import numpy as np
@@ -96,7 +96,7 @@ plt.scatter(X,Y)
 plt.show() 
 ```
 
-![相关性介绍](../Images/392a538b7630ff8ed8124e5c990e5823.png)
+![相关性介绍](img/392a538b7630ff8ed8124e5c990e5823.png)
 
 X 和 Y 之间没有相关性。图片由作者提供。
 
@@ -121,7 +121,7 @@ array([[1\.        , 0.27562159],
 
 ***协方差矩阵*** 是数据科学和机器学习中非常有用的矩阵。它提供了数据集中特征之间的共同变动（相关性）信息。协方差矩阵定义如下：
 
-![相关性介绍](../Images/42dbeb899224d092171c0591d0cf6abe.png)
+![相关性介绍](img/42dbeb899224d092171c0591d0cf6abe.png)
 
 其中 mu 和 sigma 代表给定特征的均值和标准差。这里的 n 是数据集中观察的数量，j 和 k 的下标取值为 1, 2, 3, . . ., m，其中 m 是数据集中的特征数量。例如，如果一个数据集有 4 个特征和 100 个观察值，则 n = 100，m = 4，因此协方差矩阵将是一个 4 x 4 的矩阵。对角线元素将全为 1，因为它们表示特征与自身之间的相关性，根据定义，相关性等于 1。
 
@@ -129,7 +129,7 @@ array([[1\.        , 0.27562159],
 
 假设我想计算 4 只科技股票（AAPL、TSLA、GOOGL 和 AMZN）在 *1000* 天内的相关程度。我们的数据集有 m = 4 个特征和 n = 1000 个观察值。协方差矩阵将是一个 *4 x 4* 的矩阵，如下图所示。
 
-![相关性介绍](../Images/b6326d19e65daebf91a0329a9f8d11c7.png)
+![相关性介绍](img/b6326d19e65daebf91a0329a9f8d11c7.png)
 
 技术股票之间的协方差矩阵。图片由作者提供。
 

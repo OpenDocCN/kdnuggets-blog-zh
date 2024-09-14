@@ -1,8 +1,8 @@
 # 为什么组织需要数据仓库
 
-> 原文：[https://www.kdnuggets.com/2022/09/organizations-need-data-warehouses.html](https://www.kdnuggets.com/2022/09/organizations-need-data-warehouses.html)
+> 原文：[`www.kdnuggets.com/2022/09/organizations-need-data-warehouses.html`](https://www.kdnuggets.com/2022/09/organizations-need-data-warehouses.html)
 
-![为什么组织需要数据仓库](../Images/78bf2d024a0f28d367eff2ecf8ff98f6.png)
+![为什么组织需要数据仓库](img/78bf2d024a0f28d367eff2ecf8ff98f6.png)
 
 [Fabio](https://unsplash.com/@fabioha) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -106,8 +106,8 @@
 
 +   [合成数据社区已经到来，我们为什么需要它](https://www.kdnuggets.com/2022/04/community-synthetic-data-need.html)
 
-+   [关于数据管理你需要知道的6件事及其重要性……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理你需要知道的 6 件事及其重要性……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [你需要合成数据的5个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [你需要合成数据的 5 个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [为什么你需要在2022年学习Python](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
++   [为什么你需要在 2022 年学习 Python](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)

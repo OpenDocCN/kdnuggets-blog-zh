@@ -1,28 +1,28 @@
-# 修复CRISP-DM中的部署和迭代问题
+# 修复 CRISP-DM 中的部署和迭代问题
 
-> 原文：[https://www.kdnuggets.com/2017/02/fixing-deployment-iteration-problems-crisp-dm.html](https://www.kdnuggets.com/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)
+> 原文：[`www.kdnuggets.com/2017/02/fixing-deployment-iteration-problems-crisp-dm.html`](https://www.kdnuggets.com/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
-这是三篇文章中的最后一篇。第一篇概述了 [CRISP-DM 使用中的四个问题及解决方法](/2017/01/four-problems-crisp-dm-fix.html)，第二篇讨论了 [为CRISP-DM带来业务清晰度](/2017/01/business-clarity-crisp-dm.html)。这篇文章讨论了分析工作完成后分析如何被部署和管理的两个相关问题。关注业务决策过程有助于解决这两个问题。在CRISP-DM中，这涉及到部署阶段和迭代循环的变更，如图1所示。
+这是三篇文章中的最后一篇。第一篇概述了 CRISP-DM 使用中的四个问题及解决方法，第二篇讨论了 为 CRISP-DM 带来业务清晰度。这篇文章讨论了分析工作完成后分析如何被部署和管理的两个相关问题。关注业务决策过程有助于解决这两个问题。在 CRISP-DM 中，这涉及到部署阶段和迭代循环的变更，如图 1 所示。
 
-![](../Images/729c9cdb5b27a1e5bc27d43814e6f2c6.png)
+![](img/729c9cdb5b27a1e5bc27d43814e6f2c6.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-**图1：CRISP-DM中的部署和管理活动。**
+**图 1：CRISP-DM 中的部署和管理活动。**
 
-令人沮丧的是，许多本来可以帮助业务的分析模型实际上并未发挥作用。许多分析模型被开发出来但并未在合理的时间框架内（或者根本没有）被部署和使用。正如最近国际分析学院网络研讨会的调查结果所示，60%的项目未能在“几个月”内对其分析结果采取行动。其他调查和研究结果表明，对于许多这些分析，几个月变成了几年，而且许多分析根本没有被部署。希望开发有影响力的分析的团队需要将将其分析部署到生产环境中，并将其与业务环境集成，作为项目中的关键步骤。这就是CRISP-DM中的部署阶段的作用。成功部署涉及多个因素。
+令人沮丧的是，许多本来可以帮助业务的分析模型实际上并未发挥作用。许多分析模型被开发出来但并未在合理的时间框架内（或者根本没有）被部署和使用。正如最近国际分析学院网络研讨会的调查结果所示，60%的项目未能在“几个月”内对其分析结果采取行动。其他调查和研究结果表明，对于许多这些分析，几个月变成了几年，而且许多分析根本没有被部署。希望开发有影响力的分析的团队需要将将其分析部署到生产环境中，并将其与业务环境集成，作为项目中的关键步骤。这就是 CRISP-DM 中的部署阶段的作用。成功部署涉及多个因素。
 
 团队必须选择合适的分析交付选项。分析的风格（例如是视觉的还是数值的，是固定的还是交互的）必须与意图的决策风格匹配。嵌入在网站中的自动决策需要不同于由呼叫中心代表做出的手动决策。必须用于移动工作人员的分析与支持桌面工作人员的分析有所不同，依此类推。决策模型揭示了组织的影响，并展示了谁的行为需要改变，以及系统或流程需要围绕分析决策进行重新编码。
 
@@ -50,22 +50,22 @@
 
 **相关：**
 
-+   [基于标准的预测分析部署](/2016/06/zementis-standards-based-deployment-predictive-analytics.html)
++   基于标准的预测分析部署
 
-+   [为 CRISP-DM 带来业务清晰度](/2017/01/business-clarity-crisp-dm.html)
++   为 CRISP-DM 带来业务清晰度
 
-+   [使用 CRISP-DM 的四个问题及解决方法](/2017/01/four-problems-crisp-dm-fix.html)
++   使用 CRISP-DM 的四个问题及解决方法
 
 ### 更多相关主题
 
-+   [数据协作失败的地方（以及修复的4个技巧）](https://www.kdnuggets.com/2023/01/collaboration-fails-around-data-4-tips-fixing.html)
++   [数据协作失败的地方（以及修复的 4 个技巧）](https://www.kdnuggets.com/2023/01/collaboration-fails-around-data-4-tips-fixing.html)
 
 +   [理解 Python 的迭代和成员资格：__contains__ 和 __iter__ 魔法方法指南](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
 
-+   [回到基础 第4周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础 第 4 周：高级主题和部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
 +   [7 大模型部署和服务工具](https://www.kdnuggets.com/top-7-model-deployment-and-serving-tools)
 
 +   [机器学习算法的完整端到端部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)

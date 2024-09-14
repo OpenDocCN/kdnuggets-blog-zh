@@ -1,8 +1,8 @@
 # 顶级免费资源来学习 ChatGPT
 
-> 原文：[https://www.kdnuggets.com/2023/02/top-free-resources-learn-chatgpt.html](https://www.kdnuggets.com/2023/02/top-free-resources-learn-chatgpt.html)
+> 原文：[`www.kdnuggets.com/2023/02/top-free-resources-learn-chatgpt.html`](https://www.kdnuggets.com/2023/02/top-free-resources-learn-chatgpt.html)
 
-![Top Free Resources To Learn ChatGPT](../Images/6bf9757ffe71a939044c441e8abaa598.png)
+![Top Free Resources To Learn ChatGPT](img/6bf9757ffe71a939044c441e8abaa598.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作。
 
 * * *
 
@@ -26,7 +26,7 @@
 
 # 备忘单
 
-+   [ChatGPT 备忘单](/2023/01/chatgpt-cheat-sheet.html)：学习 ChatGPT 在 NLP、代码、结构和非结构化输出、媒体类型和元 ChatGPT 的技巧和窍门。
++   ChatGPT 备忘单：学习 ChatGPT 在 NLP、代码、结构和非结构化输出、媒体类型和元 ChatGPT 的技巧和窍门。
 
 +   [OpenAI Cookbook](https://github.com/openai/openai-cookbook)：用于理解 OpenAI API 并利用其构建 ChatGPT 应用程序。它还包含 GPT3、嵌入和微调的代码示例。
 
@@ -58,13 +58,13 @@
 
 # 博客
 
-+   [ChatGPT 作为 Python 编程助手](/2023/01/chatgpt-python-programming-assistant.html)：通过遵循简单的指南提升 Python 编程技能。
++   ChatGPT 作为 Python 编程助手：通过遵循简单的指南提升 Python 编程技能。
 
-+   [ChatGPT：你需要知道的一切](/2023/01/chatgpt-everything-need-know.html)：用通俗的英语解释 ChatGPT。
++   ChatGPT：你需要知道的一切：用通俗的英语解释 ChatGPT。
 
 +   [创建你自己的 ChatGPT](https://ai.plainenglish.io/creating-your-own-chatgpt-a-guide-to-fine-tuning-llms-with-lora-d7817b77fac0)：学习如何使用 LoRA 对 LLMs 进行微调，使用最少的资源。
 
-+   [检测 ChatGPT、GPT3 和 GPT2 的 5 个免费工具](/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)：用于内容审查和防止滥用的 ChatGPT 检测工具。
++   检测 ChatGPT、GPT3 和 GPT2 的 5 个免费工具：用于内容审查和防止滥用的 ChatGPT 检测工具。
 
 # 终极指南
 

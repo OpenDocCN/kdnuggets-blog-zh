@@ -1,8 +1,8 @@
 # 使用 Promptr 和 GPT 自动化你的代码库
 
-> 原文：[https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)
+> 原文：[`www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html`](https://www.kdnuggets.com/2023/04/automate-codebase-promptr-gpt.html)
 
-![使用 Promptr 和 GPT 自动化你的代码库](../Images/dcc002dcec50af0612d32ae18fa3b898.png)
+![使用 Promptr 和 GPT 自动化你的代码库](img/dcc002dcec50af0612d32ae18fa3b898.png)
 
 作者提供的图片
 
@@ -40,7 +40,7 @@ promptr  -m <mode> [options] <file1> <file2> <file3> ...
 
     # Promptr 是如何工作的？
 
-    ![Promptr 是如何工作的？](../Images/736c5e5e3469ed76a2c2a755d558aa4d.png)
+    ![Promptr 是如何工作的？](img/736c5e5e3469ed76a2c2a755d558aa4d.png)
 
     作者提供的图片
 
@@ -112,11 +112,11 @@ promptr  -m <mode> [options] <file1> <file2> <file3> ...
 
     ## 我们的前三名课程推荐
 
-    ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+    ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-    ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+    ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-    ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
+    ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
 
     * * *
 

@@ -1,42 +1,42 @@
-# Chatbot Arena：LLM基准测试平台
+# Chatbot Arena：LLM 基准测试平台
 
-> 原文：[https://www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html](https://www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html)
+> 原文：[`www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html`](https://www.kdnuggets.com/2023/05/chatbot-arena-llm-benchmark-platform.html)
 
-![Chatbot Arena：LLM基准测试平台](../Images/21f44c8b4c0b3a2d946c0ba3951d2490.png)
+![Chatbot Arena：LLM 基准测试平台](img/21f44c8b4c0b3a2d946c0ba3951d2490.png)
 
 图片由作者提供
 
 我们都知道大型语言模型（LLM）已经在世界范围内掀起了风暴，在如此短的时间内，信息量实在太大。
 
-# 什么是Chatbot Arena？
+# 什么是 Chatbot Arena？
 
-为了再添些许变化，[Chatbot Arena](https://chat.lmsys.org/?arena)是由[大型模型系统组织](https://lmsys.org/)（LMSYS Org）创建的LLM基准测试平台。它是一个由加州大学伯克利分校的学生和教职员工创办的开放研究组织。
+为了再添些许变化，[Chatbot Arena](https://chat.lmsys.org/?arena)是由[大型模型系统组织](https://lmsys.org/)（LMSYS Org）创建的 LLM 基准测试平台。它是一个由加州大学伯克利分校的学生和教职员工创办的开放研究组织。
 
-他们的总体目标是通过使用开放数据集、模型、系统和评估工具的共同开发方法，使大型模型对每个人更加可及。LMSYS团队训练大型语言模型，并广泛提供这些模型，同时开发分布式系统，以加速LLM的训练和推理。
+他们的总体目标是通过使用开放数据集、模型、系统和评估工具的共同开发方法，使大型模型对每个人更加可及。LMSYS 团队训练大型语言模型，并广泛提供这些模型，同时开发分布式系统，以加速 LLM 的训练和推理。
 
-## 对于LLM基准测试的需求
+## 对于 LLM 基准测试的需求
 
-随着ChatGPT持续的热度，开源LLM迅速增长，这些模型经过微调以遵循特定的指令。比如Alpaca和Vicuna，它们基于LLaMA，可以根据用户的提示提供帮助。
+随着 ChatGPT 持续的热度，开源 LLM 迅速增长，这些模型经过微调以遵循特定的指令。比如 Alpaca 和 Vicuna，它们基于 LLaMA，可以根据用户的提示提供帮助。
 
-然而，对于这种快速发展的事物，社区很难跟上不断的新进展，并有效地对这些模型进行基准测试。由于可能存在开放性问题，对LLM助手进行基准测试可能是一个挑战。
+然而，对于这种快速发展的事物，社区很难跟上不断的新进展，并有效地对这些模型进行基准测试。由于可能存在开放性问题，对 LLM 助手进行基准测试可能是一个挑战。
 
 因此，需要进行人工评估，采用成对比较的方法。成对比较是将模型成对比较以判断哪个模型表现更好的过程。
 
-# Chatbot Arena如何运作？
+# Chatbot Arena 如何运作？
 
-在Chatbot Arena中，用户可以并排与两个匿名模型对话，形成自己的意见，并投票选出哪个模型更好。一旦用户投票，模型的名称将会被揭示。用户可以选择继续与这两个模型对话，或重新开始，与两个新的随机选择的匿名模型对话。
+在 Chatbot Arena 中，用户可以并排与两个匿名模型对话，形成自己的意见，并投票选出哪个模型更好。一旦用户投票，模型的名称将会被揭示。用户可以选择继续与这两个模型对话，或重新开始，与两个新的随机选择的匿名模型对话。
 
-你可以选择同时与两个匿名模型进行对话，或选择你想对话的模型。下面是与两个匿名模型对话的截图示例，展示了LLM对战！
+你可以选择同时与两个匿名模型进行对话，或选择你想对话的模型。下面是与两个匿名模型对话的截图示例，展示了 LLM 对战！
 
-![Chatbot Arena：LLM基准测试平台](../Images/2534b4a61e93804db88b100996f36926.png)
+![Chatbot Arena：LLM 基准测试平台](img/2534b4a61e93804db88b100996f36926.png)
 
 图片截图由作者提供
 
-收集的数据会被计算为Elo评级，并放入[排行榜](https://chat.lmsys.org/?leaderboard)。Elo评级系统是一种用于计算玩家相对技能水平的方法，常用于象棋等游戏中。两个用户之间的评级差异可以预测该场比赛的结果。
+收集的数据会被计算为 Elo 评级，并放入[排行榜](https://chat.lmsys.org/?leaderboard)。Elo 评级系统是一种用于计算玩家相对技能水平的方法，常用于象棋等游戏中。两个用户之间的评级差异可以预测该场比赛的结果。
 
-截至2023年5月5日，这就是Chatbot Arena排行榜的样子：
+截至 2023 年 5 月 5 日，这就是 Chatbot Arena 排行榜的样子：
 
-![Chatbot Arena: LLM 基准平台](../Images/03f45d5681c629cc3d0ac94cb009eec5.png)
+![Chatbot Arena: LLM 基准平台](img/03f45d5681c629cc3d0ac94cb009eec5.png)
 
 图片来源 [Chatbot Arena](https://lmsys.org/blog/2023-05-03-arena)
 
@@ -72,11 +72,11 @@ Chatbot Arena 的团队邀请整个社区通过贡献自己的模型，加入他
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 

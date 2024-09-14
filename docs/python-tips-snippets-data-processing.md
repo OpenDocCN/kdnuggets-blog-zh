@@ -1,8 +1,8 @@
 # 5 个 Python 数据处理技巧与代码片段
 
-> 原文：[https://www.kdnuggets.com/2021/07/python-tips-snippets-data-processing.html](https://www.kdnuggets.com/2021/07/python-tips-snippets-data-processing.html)
+> 原文：[`www.kdnuggets.com/2021/07/python-tips-snippets-data-processing.html`](https://www.kdnuggets.com/2021/07/python-tips-snippets-data-processing.html)
 
-[评论](#comments) ![图片](../Images/113c4ec2bfab26d5c9db691de1e5d6ba.png)
+评论 ![图片](img/113c4ec2bfab26d5c9db691de1e5d6ba.png)
 
 图片来源：[Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/python-code?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -197,11 +197,11 @@ Alphanumeric pairs sorted by element 0 (first element):
 
 **相关**：
 
-+   [SQL中的数据准备及备忘单!](/2021/05/data-preparation-sql-cheat-sheet.html)
++   SQL 中的数据准备及备忘单!
 
-+   [如何在命令行清理文本数据](/2020/12/clean-text-data-command-line.html)
++   如何在命令行清理文本数据
 
-+   [数据科学、数据可视化和机器学习的顶级 Python 库](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   数据科学、数据可视化和机器学习的顶级 Python 库
 
 ### 更多关于这个主题
 

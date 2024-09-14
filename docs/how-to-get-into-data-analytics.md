@@ -1,14 +1,14 @@
 # 如何在没有相关学位的情况下进入数据分析领域
 
-> 原文：[https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
+> 原文：[`www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html`](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
 
-[评论](#comments)
+评论
 
 **作者 [Zulie Rane](https://www.linkedin.com/in/zulie-rane-2a225a185/)，自由撰稿人及编程爱好者**。
 
-![](../Images/353dcbe89331797a5dfe52166580c41b.png)
+![](img/353dcbe89331797a5dfe52166580c41b.png)
 
-数据分析是一个非常酷的、蓬勃发展的行业。它已经存在了很长时间，这也解释了为什么如此多人在考虑如何进入数据分析领域。自互联网和智能手机的广泛应用以来，数据量激增。2020年初，全球的数据量估计为 [44 zettabytes](https://seedscientific.com/how-much-data-is-created-every-day/)，即44 x [10^21 bytes](https://en.wikipedia.org/wiki/Zettabyte_Era)。这些数据包含大量有用的信息，例如消费者的购买模式或疾病的指标。
+数据分析是一个非常酷的、蓬勃发展的行业。它已经存在了很长时间，这也解释了为什么如此多人在考虑如何进入数据分析领域。自互联网和智能手机的广泛应用以来，数据量激增。2020 年初，全球的数据量估计为 [44 zettabytes](https://seedscientific.com/how-much-data-is-created-every-day/)，即 44 x [10²¹ bytes](https://en.wikipedia.org/wiki/Zettabyte_Era)。这些数据包含大量有用的信息，例如消费者的购买模式或疾病的指标。
 
 数据分析师处理数据集，并负责理解它们。数据在说什么，公司应该如何应对？一个简单的例子是你将商品放入购物车后，出现的包含常被一起购买的商品的横幅。数据分析师可能负责确定哪些产品应该关联在一起，以提高转化率。
 
@@ -18,11 +18,11 @@
 
 这篇文章将带你了解获得第一个数据分析师职位所需的一切知识。
 
-![](../Images/85a1f66f54358a4f06721655f48c9e96.png)
+![](img/85a1f66f54358a4f06721655f48c9e96.png)
 
 ### 什么是数据分析？
 
-在你开始考虑如何进入数据分析领域之前，你应该确保你理解这个领域。数据分析是从大量数据中提取意义的艺术。根据[DOMO](https://www.domo.com/solution/data-never-sleeps-6)的说法，自2020年以来，每个人每秒钟产生1.7MB的数据。数据分析师的任务是找到与他们的业务应用相关的数据，理解这些数据，并找到将这些知识应用于改善业务的方法。
+在你开始考虑如何进入数据分析领域之前，你应该确保你理解这个领域。数据分析是从大量数据中提取意义的艺术。根据[DOMO](https://www.domo.com/solution/data-never-sleeps-6)的说法，自 2020 年以来，每个人每秒钟产生 1.7MB 的数据。数据分析师的任务是找到与他们的业务应用相关的数据，理解这些数据，并找到将这些知识应用于改善业务的方法。
 
 数据分析领域内有许多子领域。这些包括描述性、诊断性、预测性和规范性分析。你可以通过以下方式理解这些不同类型的分析。
 
@@ -40,7 +40,7 @@
 
 ### 数据分析需要哪些技术技能？
 
-由于数据分析是数学和编程的交叉领域，因此它是一个极其技术性的领域。你需要使用许多不同的工具和[技术技能](https://www.stratascratch.com/blog/most-in-demand-data-science-technical-skills/)来完成工作。一位软件工程师玛格丽塔·哈马彻（Margarita Hamacher）整理了一个数据分析师所需的[7项技术技能](https://margarita-hamacher.medium.com/7-crucial-technical-skills-for-data-analysts-e56525b648b0)的综合清单。数据分析不仅仅是硬技能。但对于任何想要进入数据分析领域的人来说，这些技术技能将是一个很好的起点。
+由于数据分析是数学和编程的交叉领域，因此它是一个极其技术性的领域。你需要使用许多不同的工具和[技术技能](https://www.stratascratch.com/blog/most-in-demand-data-science-technical-skills/)来完成工作。一位软件工程师玛格丽塔·哈马彻（Margarita Hamacher）整理了一个数据分析师所需的[7 项技术技能](https://margarita-hamacher.medium.com/7-crucial-technical-skills-for-data-analysts-e56525b648b0)的综合清单。数据分析不仅仅是硬技能。但对于任何想要进入数据分析领域的人来说，这些技术技能将是一个很好的起点。
 
 这些技能包括数学、数据可视化、机器学习、编码等。数学要求可以进一步分解为线性代数、统计学和概率论，这些都是数据分析师非常重要的理论基础。值得强调的是如何分离用于训练和测试的数据，以及列举你应该熟悉的基本机器学习算法，如果不能实现这些算法也没关系。
 
@@ -48,7 +48,7 @@
 
 我会建议你创建一些使用这些技能的个人项目，并在简历中提供这些项目的链接。如果你遇到以下问题：
 
-![](../Images/6a1353d849d9ba25126f4d45e8a60626.png)
+![](img/6a1353d849d9ba25126f4d45e8a60626.png)
 
 *[链接到问题](https://platform.stratascratch.com/technical/2017-highly-correlated-predictors)*
 
@@ -56,13 +56,13 @@
 
 ### 如何进入数据分析领域：为什么数据分析值得进入？
 
-数据分析是一个真正迷人的领域。例如，大多数经典经济理论基于人类个体做出理性决策的假设。这个假设是错误的，因此使得许多经典经济理论完全过时。例如，有一种旧的经济理论认为消费者喜欢选择，尽管在某些情况下这是真的，但做决定可能是身体上令人疲惫的。Mark Lepper 和 Sheen Iyengar 发现了选择悖论。他们发现，当客户面临6种选择时，更可能购买果酱，而不是24种选择。然而，基于数据的经济理论要准确得多。虽然数据分析仍然需要偶尔做一些小假设，但由于它完全基于收集的数据，如果你的数据是全面和具有代表性的，数据分析提供了一种优雅且准确的方式来理解世界及其决策或习惯。
+数据分析是一个真正迷人的领域。例如，大多数经典经济理论基于人类个体做出理性决策的假设。这个假设是错误的，因此使得许多经典经济理论完全过时。例如，有一种旧的经济理论认为消费者喜欢选择，尽管在某些情况下这是真的，但做决定可能是身体上令人疲惫的。Mark Lepper 和 Sheen Iyengar 发现了选择悖论。他们发现，当客户面临 6 种选择时，更可能购买果酱，而不是 24 种选择。然而，基于数据的经济理论要准确得多。虽然数据分析仍然需要偶尔做一些小假设，但由于它完全基于收集的数据，如果你的数据是全面和具有代表性的，数据分析提供了一种优雅且准确的方式来理解世界及其决策或习惯。
 
-数据分析是一个快速发展的领域。美国劳工统计局预测到2026年数据科学领域将会有[28%的增长](https://www.bls.gov/opub/btn/volume-7/big-data-adds-up.htm)。如果你关心薪水，美国数据分析师的平均工资是[$70K](https://www.glassdoor.com/Salaries/data-analyst-salary-SRCH_KO0,12.htm)，随着对数据分析师需求的增加，这个数字只会有上涨趋势。现在是进入数据分析领域的绝佳时机，你可以采取一些简单的步骤来实现这一目标。
+数据分析是一个快速发展的领域。美国劳工统计局预测到 2026 年数据科学领域将会有[28%的增长](https://www.bls.gov/opub/btn/volume-7/big-data-adds-up.htm)。如果你关心薪水，美国数据分析师的平均工资是[$70K](https://www.glassdoor.com/Salaries/data-analyst-salary-SRCH_KO0,12.htm)，随着对数据分析师需求的增加，这个数字只会有上涨趋势。现在是进入数据分析领域的绝佳时机，你可以采取一些简单的步骤来实现这一目标。
 
 ### 谁是优秀的数据分析师？
 
-![](../Images/1464cef471fc0d51146e7a64e325566a.png)
+![](img/1464cef471fc0d51146e7a64e325566a.png)
 
 数据分析是一个非常技术性的领域，所以任何想进入数据分析领域的人都需要对多种高级数学概念有深入理解，并且需要成为一个合格的程序员。如果你对数字及其所揭示的内容充满热情，只要确保你掌握了上述[技术技能](https://www.stratascratch.com/blog/most-in-demand-data-science-technical-skills/)以符合职位要求，数据分析就是适合你的工作。
 
@@ -72,25 +72,25 @@
 
 ### 如何准备数据分析面试
 
-如何进入数据分析领域的一个重要部分是成功完成数据分析师职位的面试。除了精通Python并能够解释中心极限定理之外，你还可能被要求演示如何比较不同后端引擎在自动生成推荐中的表现。查看下面的面试问题示例：
+如何进入数据分析领域的一个重要部分是成功完成数据分析师职位的面试。除了精通 Python 并能够解释中心极限定理之外，你还可能被要求演示如何比较不同后端引擎在自动生成推荐中的表现。查看下面的面试问题示例：
 
-![](../Images/67e49b8781fe37d40c5ed93fc2305973.png)
+![](img/67e49b8781fe37d40c5ed93fc2305973.png)
 
 *[问题链接](https://platform.stratascratch.com/technical/2006-comparing-performance-of-engines)*
 
-准备技术面试的[最佳方式](https://www.stratascratch.com/blog/5-tips-to-prepare-for-a-data-science-interview/)是练习。回答技术问题是一种技能，就像其他技能一样。不断练习编码和非编码问题。你可以使用像StrataScratch这样的网站，它提供了大量的数据分析师面试问题，包括编码和非编码问题。
+准备技术面试的[最佳方式](https://www.stratascratch.com/blog/5-tips-to-prepare-for-a-data-science-interview/)是练习。回答技术问题是一种技能，就像其他技能一样。不断练习编码和非编码问题。你可以使用像 StrataScratch 这样的网站，它提供了大量的数据分析师面试问题，包括编码和非编码问题。
 
-除了回答编码问题，比如找出每个Facebook用户的[受欢迎程度百分比](https://platform.stratascratch.com/coding/10284-popularity-percentage?python=)，以及技术、理论性、非编码问题，比如解释不同的[时间序列预测技术](https://platform.stratascratch.com/technical/2022-time-series-forecasting-techniques)，你还需要准备与数据分析师相关的内容，以应对行为面试问题。虽然你大多数面试将是技术面试，无论是编码问题还是非编码问题，但你仍然需要有相关的实例来展示你经历过的失败或特别骄傲的成就，这些都与数据分析有关。
+除了回答编码问题，比如找出每个 Facebook 用户的[受欢迎程度百分比](https://platform.stratascratch.com/coding/10284-popularity-percentage?python=)，以及技术、理论性、非编码问题，比如解释不同的[时间序列预测技术](https://platform.stratascratch.com/technical/2022-time-series-forecasting-techniques)，你还需要准备与数据分析师相关的内容，以应对行为面试问题。虽然你大多数面试将是技术面试，无论是编码问题还是非编码问题，但你仍然需要有相关的实例来展示你经历过的失败或特别骄傲的成就，这些都与数据分析有关。
 
 这就是为什么拥有与数据分析相关的个人项目如此重要的原因。也许你对拯救动物充满热情。你可以创建一个模型，预测哪些策略对于让动物被领养最为有效。如果有机会应用你的模型，例如让一个动物收容所按照你的推荐策略操作，并观察这是否会对领养率产生影响，那就更好了。数据分析可以应用于任何有数据的领域。肯定有一个与你热情所在的主题相关的数据集。用它来练习你的数据分析师技能，以便在面试时突出显示这些技能。
 
 ### 数据分析职业选择
 
-![](../Images/61596df130dbf18ba34b578bcde1a94e.png)
+![](img/61596df130dbf18ba34b578bcde1a94e.png)
 
 许多程序员和非程序员可能担心如何进入数据分析领域，但他们应该知道，正式的教育，特别是在数据分析领域，并不是必需的。并不是很多大学提供完整的数据科学或数据分析学位课程。虽然越来越多的大学在增加数据分析课程，但数据分析师的需求仍然太高，以至于雇主不要求正式的数据分析或数据科学背景。如果你有数学或计算机科学的背景，这将非常有帮助，但不是必需的。
 
-要获得入门级的数据分析师职位，你的最佳选择是精通Python，并对SQL非常自信，同时熟悉SAS、R、Tableau或其他数据库接口工具和语言。如果你没有计算机科学或数学背景，可以在业余时间发展这些技能，并将其应用于展示你能力的个人项目中。
+要获得入门级的数据分析师职位，你的最佳选择是精通 Python，并对 SQL 非常自信，同时熟悉 SAS、R、Tableau 或其他数据库接口工具和语言。如果你没有计算机科学或数学背景，可以在业余时间发展这些技能，并将其应用于展示你能力的个人项目中。
 
 由于背景知识的重要性，数据分析是从其他行业进入的一个极好的领域。根据你分析的数据所在的行业，无论是医学影像还是在线零售行业中小型企业的购买模式，了解你分析数据的领域可能是有帮助的，有时甚至是必要的。
 
@@ -110,13 +110,13 @@
 
 ### 更多相关话题
 
-+   [9个能帮助你获得学位的专业证书... 如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个能帮助你获得学位的专业证书... 如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
-+   [5个需求高但不被足够重视的IT职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
++   [5 个需求高但不被足够重视的 IT 职位](https://www.kdnuggets.com/5-it-jobs-that-are-high-in-demand-but-dont-get-enough-recognition)
 
 +   [进入数据科学的三种可能途径](https://www.kdnuggets.com/2022/03/3-possible-ways-get-data-science.html)
 
-+   [进入FAANG公司的难度有多大](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
++   [进入 FAANG 公司的难度有多大](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
 
 +   [通过西北大学的数据科学学位开启你的职业生涯](https://www.kdnuggets.com/2022/04/nwu-launch-career-northwestern-data-science-degree.html)
 

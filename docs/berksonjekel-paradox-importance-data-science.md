@@ -1,8 +1,8 @@
 # 伯克森-杰克尔悖论及其对数据科学的重要性
 
-> 原文：[https://www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html](https://www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html`](https://www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html)
 
-![伯克森-杰克尔悖论及其对数据科学的重要性](../Images/b168d66e0d4fba76c9dfb1773c6d0e34.png)
+![伯克森-杰克尔悖论及其对数据科学的重要性](img/b168d66e0d4fba76c9dfb1773c6d0e34.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
@@ -78,11 +78,11 @@
 
 误导性的结果可能会阻碍公司发展。因此，在处理数据时，数据专业人员需要了解数据的局限性、不同变量及其之间的关系，以及如何减少误导性结果的发生。
 
-如果你想了解更多关于辛普森悖论的内容，可以阅读这个：[辛普森悖论及其在数据科学中的影响](/2023/03/simpson-paradox-implications-data-science.html)
+如果你想了解更多关于辛普森悖论的内容，可以阅读这个：辛普森悖论及其在数据科学中的影响
 
-如果你想了解更多关于其他统计悖论的内容，可以阅读这个：[5个数据科学家应该知道的统计悖论](/2023/02/5-statistical-paradoxes-data-scientists-know.html)
+如果你想了解更多关于其他统计悖论的内容，可以阅读这个：5 个数据科学家应该知道的统计悖论
 
-**[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术撰稿人以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程及基于理论的知识。她还希望探索人工智能如何/可以促进人类寿命的不同方式。她是一位渴望学习者，寻求拓宽技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术撰稿人以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程及基于理论的知识。她还希望探索人工智能如何/可以促进人类寿命的不同方式。她是一位渴望学习者，寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
@@ -94,6 +94,6 @@
 
 +   [数据科学中概率的重要性](https://www.kdnuggets.com/2023/02/importance-probability-data-science.html)
 
-+   [机器学习不像你的大脑 第6部分：重要性…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：重要性…](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
 +   [庆祝对数据隐私重要性的认知](https://www.kdnuggets.com/2022/01/celebrating-awareness-importance-data-privacy.html)

@@ -1,14 +1,14 @@
 # 数据科学家的困境：冷启动问题 – 十个机器学习示例
 
-> 原文：[https://www.kdnuggets.com/2019/01/data-scientist-dilemma-cold-start-machine-learning.html](https://www.kdnuggets.com/2019/01/data-scientist-dilemma-cold-start-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/01/data-scientist-dilemma-cold-start-machine-learning.html`](https://www.kdnuggets.com/2019/01/data-scientist-dilemma-cold-start-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Kirk D. Borne](https://twitter.com/KirkDBorne)，Booz Allen**。
 
-![](../Images/519ed9af061c6441775306ce40648d59.png)
+![](img/519ed9af061c6441775306ce40648d59.png)
 
-**来源：[https://www.yuspify.com/blog/cold-start-problem-recommender-systems/](https://www.yuspify.com/blog/cold-start-problem-recommender-systems/)**
+**来源：[`www.yuspify.com/blog/cold-start-problem-recommender-systems/`](https://www.yuspify.com/blog/cold-start-problem-recommender-systems/)**
 
 古代哲学家孔子被认为说过“研究你的过去以了解你的未来。”这一智慧不仅适用于生活，也适用于机器学习。具体来说，标签数据（过去的事物）的可用性和应用对于标记之前未见的数据（未来的事物）是监督机器学习的基础。
 
@@ -46,21 +46,21 @@
 
 以下是数据科学中冷启动问题的十个例子，其中机器学习的算法和技术在模型向最优解的进展中产生了良好的判断：
 
-+   聚类分析（如K-Means聚类），其中初始的聚类均值和聚类数量事先未知（因此最初是随机选择的），但可以利用聚类的紧凑性来评估、迭代并改进一组聚类，逐步进展到最终的最优聚类集（*即*，[最紧凑且分离最好的聚类](https://en.wikipedia.org/wiki/Dunn_index)）。
++   聚类分析（如 K-Means 聚类），其中初始的聚类均值和聚类数量事先未知（因此最初是随机选择的），但可以利用聚类的紧凑性来评估、迭代并改进一组聚类，逐步进展到最终的最优聚类集（*即*，[最紧凑且分离最好的聚类](https://en.wikipedia.org/wiki/Dunn_index)）。
 
 +   神经网络中，网络边上的初始权重是随机分配的（冷启动），但使用反向传播迭代模型到达最优网络（具有最高分类性能）。
 
-+   TensorFlow深度学习，使用与简单神经网络相同的反向传播技术，但在非常高维的深度网络层和边缘权重的参数空间中使用张量来计算权重调整。
++   TensorFlow 深度学习，使用与简单神经网络相同的反向传播技术，但在非常高维的深度网络层和边缘权重的参数空间中使用张量来计算权重调整。
 
-+   回归分析使用数据点与模型曲线之间偏差的平方和来找到最佳拟合曲线。在线性回归中，存在一个封闭形式的解（可以从[线性最小二乘技术](http://mathworld.wolfram.com/LeastSquaresFitting.html)中推导出来）。非线性回归的解通常不是一个封闭形式的数学方程组，但偏差平方和的最小化仍然适用 —— [梯度下降可以用于迭代工作流](https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931)来寻找最佳曲线。请注意，K均值聚类实际上是[piecewise regression](https://www.researchgate.net/publication/259478129_Piecewise_regression_mixture_for_simultaneous_curve_clustering_and_optimal_segmentation)的一个例子。
++   回归分析使用数据点与模型曲线之间偏差的平方和来找到最佳拟合曲线。在线性回归中，存在一个封闭形式的解（可以从[线性最小二乘技术](http://mathworld.wolfram.com/LeastSquaresFitting.html)中推导出来）。非线性回归的解通常不是一个封闭形式的数学方程组，但偏差平方和的最小化仍然适用 —— [梯度下降可以用于迭代工作流](https://towardsdatascience.com/linear-regression-using-gradient-descent-97a6c8700931)来寻找最佳曲线。请注意，K 均值聚类实际上是[piecewise regression](https://www.researchgate.net/publication/259478129_Piecewise_regression_mixture_for_simultaneous_curve_clustering_and_optimal_segmentation)的一个例子。
 
-+   非凸优化，其中目标函数具有许多山峰和谷底，因此梯度下降和爬山算法通常只会收敛到局部最优，而不是全局最优。像[遗传算法](https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html)、[粒子群优化](https://en.wikipedia.org/wiki/Particle_swarm_optimization)（当梯度无法计算时）和其他[evolutionary computing](https://slideplayer.com/slide/12452454/)方法用于生成大量随机（冷启动）模型，然后对每个模型进行迭代，直到找到全局最优（或直到时间和资源耗尽，然后选择你找到的最好的一个）。[参见下图，该图说明了遗传算法的一个示例用例。另请参阅图形下方的NOTE关于遗传算法，这同样适用于其他进化算法，表明这些算法并不是专门的机器学习算法，而实际上是[元学习算法](http://rocketdatascience.org/?p=789)]。
++   非凸优化，其中目标函数具有许多山峰和谷底，因此梯度下降和爬山算法通常只会收敛到局部最优，而不是全局最优。像[遗传算法](https://www.kdnuggets.com/2018/03/introduction-optimization-with-genetic-algorithm.html)、[粒子群优化](https://en.wikipedia.org/wiki/Particle_swarm_optimization)（当梯度无法计算时）和其他[evolutionary computing](https://slideplayer.com/slide/12452454/)方法用于生成大量随机（冷启动）模型，然后对每个模型进行迭代，直到找到全局最优（或直到时间和资源耗尽，然后选择你找到的最好的一个）。[参见下图，该图说明了遗传算法的一个示例用例。另请参阅图形下方的 NOTE 关于遗传算法，这同样适用于其他进化算法，表明这些算法并不是专门的机器学习算法，而实际上是[元学习算法](http://rocketdatascience.org/?p=789)]。
 
-+   kNN ([k-最近邻](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/))是一种监督学习技术，其中数据集本身成为模型。换句话说，将新的数据点分配到特定组（该组可能有或没有类别标签或特定含义）仅仅是基于找到哪些现有数据点类别（组）在对新数据点的最近邻进行投票时占多数。需要检查的最近邻的数量是某个数k，可以最初是任意的（冷启动），然后进行调整以提高模型性能。
++   kNN ([k-最近邻](https://www.analyticsvidhya.com/blog/2018/03/introduction-k-neighbours-algorithm-clustering/))是一种监督学习技术，其中数据集本身成为模型。换句话说，将新的数据点分配到特定组（该组可能有或没有类别标签或特定含义）仅仅是基于找到哪些现有数据点类别（组）在对新数据点的最近邻进行投票时占多数。需要检查的最近邻的数量是某个数 k，可以最初是任意的（冷启动），然后进行调整以提高模型性能。
 
 +   朴素贝叶斯分类，它将贝叶斯定理应用于具有类别标签的大数据集，但其中一些属性和特征的组合在训练数据中没有表示（*即*，一个冷启动挑战）。通过假设不同的属性是数据项的相互独立特征，可以估计新数据项的类别标签的后验概率，该数据项具有在训练数据中找不到的特征向量（属性集）。这有时被称为贝叶斯信念网络（BBN），是另一个示例，其中数据集成为模型，不同属性的个别出现频率可以指示不同属性组合的预期出现频率。
 
-+   马尔可夫建模（序列信念网络）是BBN对序列的扩展，这些序列可以包括网络日志、购买模式、基因序列、语音样本、视频、股票价格或任何其他时间序列、空间序列或参数序列。
++   马尔可夫建模（序列信念网络）是 BBN 对序列的扩展，这些序列可以包括网络日志、购买模式、基因序列、语音样本、视频、股票价格或任何其他时间序列、空间序列或参数序列。
 
 +   关联规则挖掘，它搜索发生频率高于随机抽样的数据集预期的共现关联。关联规则挖掘是另一个示例，其中数据集成为模型，没有关于关联的先验知识（*即*，冷启动挑战）。这种技术也称为市场篮子分析，已用于简单的冷启动客户购买推荐，但也用于如[tropical storm (hurricane) intensification prediction](https://ams.confex.com/ams/pdfpapers/84949.pdf)等特殊用例。
 
@@ -74,15 +74,15 @@
 
 1.  [解决推荐系统中的冷启动问题](https://medium.com/@InDataLabs/approaching-the-cold-start-problem-in-recommender-systems-e225e0084970)
 
-我们在开头提到孔子及其智慧。这是另一种形式的**智慧**： [https://rapidminer.com/wisdom/](https://rapidminer.com/wisdom/)—[RapidMiner](https://docs.rapidminer.com/)智慧会议。会议非常精彩，提供了许多优秀的教程、用例、应用程序和客户评价。我很荣幸在他们2018年在新奥尔良的会议上担任主旨发言人，主题是*“清除数据科学和机器学习中的迷雾：一些不寻常地方的常见嫌疑犯”*。你可以在这里找到我的幻灯片演示： [KirkBorne-RMWisdom2018.pdf](http://www.kirkborne.net/RMWisdom2018/KirkBorne-RMWisdom2018.pdf)
+我们在开头提到孔子及其智慧。这是另一种形式的**智慧**： [`rapidminer.com/wisdom/`](https://rapidminer.com/wisdom/)—[RapidMiner](https://docs.rapidminer.com/)智慧会议。会议非常精彩，提供了许多优秀的教程、用例、应用程序和客户评价。我很荣幸在他们 2018 年在新奥尔良的会议上担任主旨发言人，主题是*“清除数据科学和机器学习中的迷雾：一些不寻常地方的常见嫌疑犯”*。你可以在这里找到我的幻灯片演示： [KirkBorne-RMWisdom2018.pdf](http://www.kirkborne.net/RMWisdom2018/KirkBorne-RMWisdom2018.pdf)
 
-![](../Images/ff702805254f331745ddb05592f7c367.png)
+![](img/ff702805254f331745ddb05592f7c367.png)
 
-**注意：** [遗传算法](http://www.cs.ubc.ca/labs/beta/Courses/CPSC532H-13/Slides/content-session-4-slides.pdf)（GAs）是[元学习](http://rocketdatascience.org/?p=789)的一个例子。它们本身不是机器学习算法，但GAs可以应用于机器学习模型和任务的集合中，以在一组局部最优解中找到最优模型（或许是全局最优模型）。
+**注意：** [遗传算法](http://www.cs.ubc.ca/labs/beta/Courses/CPSC532H-13/Slides/content-session-4-slides.pdf)（GAs）是[元学习](http://rocketdatascience.org/?p=789)的一个例子。它们本身不是机器学习算法，但 GAs 可以应用于机器学习模型和任务的集合中，以在一组局部最优解中找到最优模型（或许是全局最优模型）。
 
 [原始版本](https://www.linkedin.com/pulse/data-scientists-dilemma-cold-start-problem-ten-machine-kirk-borne/)。转载已获许可。
 
-**个人简介**： [Kirk D. Borne](https://twitter.com/KirkDBorne) 是Booz Allen Hamilton的首席数据科学家和执行顾问。
+**个人简介**： [Kirk D. Borne](https://twitter.com/KirkDBorne) 是 Booz Allen Hamilton 的首席数据科学家和执行顾问。
 
 **资源：**
 
@@ -96,17 +96,17 @@
 
 +   [谁是数据科学家？](https://www.kdnuggets.com/2018/12/who-is-data-scientist.html)
 
-+   [AI的冷启动问题](https://www.kdnuggets.com/2018/04/cold-start-ai.html)
++   [AI 的冷启动问题](https://www.kdnuggets.com/2018/04/cold-start-ai.html)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

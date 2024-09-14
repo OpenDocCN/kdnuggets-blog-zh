@@ -1,6 +1,6 @@
-# 建立数据科学作品集：机器学习项目第 1 部分
+# 建立数据科学作品集：机器学习项目第一部分
 
-> 原文：[https://www.kdnuggets.com/2016/07/building-data-science-portfolio-machine-learning-project-part-1.html/2](https://www.kdnuggets.com/2016/07/building-data-science-portfolio-machine-learning-project-part-1.html/2)
+> 原文：[`www.kdnuggets.com/2016/07/building-data-science-portfolio-machine-learning-project-part-1.html/2`](https://www.kdnuggets.com/2016/07/building-data-science-portfolio-machine-learning-project-part-1.html/2)
 
 ### 选择角度
 
@@ -26,11 +26,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -182,7 +182,7 @@ scipy
 
 最后，我们可以创建一个空的`settings.py`文件，因为我们还没有任何项目设置。
 
-![Vik Paruchuri](../Images/e73e7cfa76d58e480c067a60ded9e910.png)**简历：[Vik Paruchuri](https://www.linkedin.com/in/vikparuchuri)** 是一位驻旧金山的数据科学家和开发者。他是 [Dataquest](https://www.dataquest.io/) 的创始人，你可以在舒适的浏览器中学习数据科学。
+![Vik Paruchuri](img/e73e7cfa76d58e480c067a60ded9e910.png)**简历：[Vik Paruchuri](https://www.linkedin.com/in/vikparuchuri)** 是一位驻旧金山的数据科学家和开发者。他是 [Dataquest](https://www.dataquest.io/) 的创始人，你可以在舒适的浏览器中学习数据科学。
 
 *如果你喜欢这个，你可能也会喜欢阅读我们“构建数据科学作品集”系列中的其他文章：*
 
@@ -194,11 +194,11 @@ scipy
 
 **相关：**
 
-+   [实际学习数据科学的 5 个步骤](/2015/10/5-steps-learn-data-science.html)
++   实际学习数据科学的 5 个步骤
 
-+   [Python 中的统计数据分析](/2016/07/statistical-data-analysis-python.html)
++   Python 中的统计数据分析
 
-+   [用 Python 矿工 Twitter 数据 第 1 部分：收集数据](/2016/06/mining-twitter-data-python-part-1.html)
++   用 Python 矿工 Twitter 数据 第一部分：收集数据
 
 ### 更多相关内容
 
@@ -208,7 +208,7 @@ scipy
 
 +   [7 个机器学习作品集项目，提升简历竞争力](https://www.kdnuggets.com/2022/09/7-machine-learning-portfolio-projects-boost-resume.html)
 
-+   [KDnuggets 新闻，9月21日：7 个机器学习作品集项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习作品集项目…](https://www.kdnuggets.com/2022/n37.html)
 
 +   [如何作为初学者打造强大的数据科学作品集](https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html)
 

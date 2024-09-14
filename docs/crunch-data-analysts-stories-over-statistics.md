@@ -1,10 +1,10 @@
 # 为什么数据分析师应该选择故事而非统计数据
 
-> 原文：[https://www.kdnuggets.com/2019/09/crunch-data-analysts-stories-over-statistics.html](https://www.kdnuggets.com/2019/09/crunch-data-analysts-stories-over-statistics.html)
+> 原文：[`www.kdnuggets.com/2019/09/crunch-data-analysts-stories-over-statistics.html`](https://www.kdnuggets.com/2019/09/crunch-data-analysts-stories-over-statistics.html)
 
 Sponsored Post.
 
-[![Crunch 2019 年 10 月 16-18 日，布达佩斯](../Images/e412ae880fd9d7592019f6d4c326c571.png)](https://ti.to/bpconferences/crunch-conference-2019/discount/KDNuggets)
+![Crunch 2019 年 10 月 16-18 日，布达佩斯](https://ti.to/bpconferences/crunch-conference-2019/discount/KDNuggets)
 
 **数据讲故事是你在今天的数据经济中可以获得和发展的最重要的技能之一。这是将你的发现转化为能够激发变革和创造价值的东西的关键“最后一公里”沟通。Brent Dykes 具有超过 15 年的企业分析经验，并将在 Crunch Conference 上分享他对数据讲故事的见解。**
 
@@ -12,11 +12,11 @@ Sponsored Post.
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 

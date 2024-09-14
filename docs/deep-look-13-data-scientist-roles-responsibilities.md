@@ -1,8 +1,8 @@
 # 深入了解 13 种数据科学家角色及其职责
 
-> 原文：[https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
+> 原文：[`www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html`](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
 
-![深入了解 13 种数据科学家角色及其职责](../Images/2d7438569bb06e0d50596d431434d2ef.png)
+![深入了解 13 种数据科学家角色及其职责](img/2d7438569bb06e0d50596d431434d2ef.png)
 
 在科技领域，数据科学家的职位和工作职责可能是最为多样的。数据科学家需要扮演多种角色，[在亚马逊的数据科学家](https://www.stratascratch.com/blog/amazon-data-scientist-position-guide/)的日常工作可能与[在微软的数据科学家](https://www.stratascratch.com/blog/microsoft-data-scientist-position-guide/)的工作有很大的不同。从寻找公司业务中可以从数据收集、分析和理解中受益的领域，到决定必须做出的战略决策以提高客户满意度或购买完成率，公司对数据科学家的要求可以非常高。
 
@@ -12,13 +12,13 @@
 
 ## 数据科学家所戴的各种“帽子”
 
-![深入了解 13 种数据科学家角色及其职责](../Images/dbcaaea465e613f069e3e86fabce31fa.png)
+![深入了解 13 种数据科学家角色及其职责](img/dbcaaea465e613f069e3e86fabce31fa.png)
 
 数据科学是一个相对较新的领域，对于非数据科学家来说，很难向外行解释[数据科学家做什么](https://www.stratascratch.com/blog/what-does-a-data-scientist-do/)。这导致了现代数据科学家可能会面临各种各样的职责和职位名称，这些职责和名称有时显得颇为滑稽。
 
 一名[数据科学家](https://www.northeastern.edu/graduate/blog/what-does-a-data-scientist-do/)，根据公司和具体工作职责，可能需要负责数据收集和清理。你也可能需要开发机器学习模型和管道，或作为公司的可视化专家。有些数据科学家更多的是[面向内部](https://svpg.com/leveraging-data-science/)，而其他人则需要与内部非技术团队或甚至客户密切合作。如果你与技术水平较低的人员合作，你需要具备[出色的沟通技能](https://www.martinsights.com/?p=1256)，无论是撰写总结分析的报告，还是展示你的发现并为未来的行动提供建议。
 
-数据科学家的关键职责（或公司对从事数据收集、分析、可视化或预测的人员的称谓）是讲述[数据的故事](https://www.nugit.co/what-is-data-storytelling/#:~:text=Data%20storytelling%20is%20a%20methodology,a%20means%20of%20sharing%20information.)。数据的来源是什么？我们从中可以学到什么关于过去的知识？它如何指导我们未来的行动？为了成功地做到这一点，你需要是业务领域专家或拥有上下文知识，以便将拼图 pieces拼接在一起，并向周围人解释数据的意义和你从中获得的见解。
+数据科学家的关键职责（或公司对从事数据收集、分析、可视化或预测的人员的称谓）是讲述[数据的故事](https://www.nugit.co/what-is-data-storytelling/#:~:text=Data%20storytelling%20is%20a%20methodology,a%20means%20of%20sharing%20information.)。数据的来源是什么？我们从中可以学到什么关于过去的知识？它如何指导我们未来的行动？为了成功地做到这一点，你需要是业务领域专家或拥有上下文知识，以便将拼图 pieces 拼接在一起，并向周围人解释数据的意义和你从中获得的见解。
 
 数据科学领域的具体职责差异很大，领域内有很多不同的角色。无论你是想进入这一领域还是想换工作，保持对职位名称和行业的开放态度非常重要。我将为你详细介绍数据科学领域中十三种不同角色的一般职责。
 
@@ -28,11 +28,11 @@
 
 ## 数据科学家职责角色分解
 
-![深入了解13种数据科学家角色及其职责](../Images/da903766918e6ab5a2dd5054f4a6e23f.png)
+![深入了解 13 种数据科学家角色及其职责](img/da903766918e6ab5a2dd5054f4a6e23f.png)
 
 ### 1\. 数据分析师
 
-[数据分析师](https://www.techopedia.com/definition/33638/data-analyst)更多地关注数据收集、清理和聚合。你必须能够自如地处理复杂的SQL查询。你将负责设计并向非技术人员展示报告。你还将有机会设计数据模型、可视化以及预测模型。
+[数据分析师](https://www.techopedia.com/definition/33638/data-analyst)更多地关注数据收集、清理和聚合。你必须能够自如地处理复杂的 SQL 查询。你将负责设计并向非技术人员展示报告。你还将有机会设计数据模型、可视化以及预测模型。
 
 ### 2\. 数据库管理员
 
@@ -50,7 +50,7 @@
 
 ### 5\. 数据工程师
 
-识别和解决数据质量挑战将是你作为数据工程师的重要任务。你还需要支持将数据源导入数据存储解决方案。数据工程师工作中令人兴奋的一部分是有机会架构和设计数据工程解决方案。你还应准备好构建ETL管道，以提取、转换和加载数据到数据仓库中用于下游报告。数据工程师还负责数据复制、提取、加载、清理和策划。
+识别和解决数据质量挑战将是你作为数据工程师的重要任务。你还需要支持将数据源导入数据存储解决方案。数据工程师工作中令人兴奋的一部分是有机会架构和设计数据工程解决方案。你还应准备好构建 ETL 管道，以提取、转换和加载数据到数据仓库中用于下游报告。数据工程师还负责数据复制、提取、加载、清理和策划。
 
 ### 6\. 数据架构师
 
@@ -108,7 +108,7 @@
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n03, 1月 19: 深入探讨 13 种数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19: 深入探讨 13 种数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [AI 在亲密角色中的应用: 女朋友和治疗师](https://www.kdnuggets.com/ai-in-intimate-roles-girlfriends-and-therapists)
 
@@ -116,6 +116,6 @@
 
 +   [庆祝科技行业女性领导者](https://www.kdnuggets.com/2022/07/celebrating-women-leadership-roles-tech-industry.html)
 
-+   [2024年每位数据科学家工具箱中的5个必备工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
++   [2024 年每位数据科学家工具箱中的 5 个必备工具](https://www.kdnuggets.com/5-tools-every-data-scientist-needs-in-their-toolbox-in-2024)
 
-+   [KDnuggets™ 新闻 22:n04，1月26日：高薪兼职工作…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04，1 月 26 日：高薪兼职工作…](https://www.kdnuggets.com/2022/n04.html)

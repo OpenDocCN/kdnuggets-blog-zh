@@ -1,32 +1,32 @@
-# 10本更多必读的免费机器学习和数据科学书籍
+# 10 本更多必读的免费机器学习和数据科学书籍
 
-> 原文：[https://www.kdnuggets.com/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html](https://www.kdnuggets.com/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html`](https://www.kdnuggets.com/2018/05/10-more-free-must-read-books-for-machine-learning-and-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 现在是时候开始另一个免费的机器学习和数据科学书籍的合集，来启动你的夏季学习季节了。因为这确实是个趋势，对吧？
 
-如果在阅读完这个列表后，你发现自己还想要更多免费的优质精选书籍，请[查看本系列的前一版](/2017/04/10-free-must-read-books-machine-learning-data-science.html)或下面的相关帖子。
+如果在阅读完这个列表后，你发现自己还想要更多免费的优质精选书籍，请查看本系列的前一版或下面的相关帖子。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-![Post header image](../Images/76a9e1c81c124bd744844e1bfe915b28.png)
+![Post header image](img/76a9e1c81c124bd744844e1bfe915b28.png)
 
-**1\. [Python数据科学手册](https://github.com/jakevdp/PythonDataScienceHandbook)**
+**1\. [Python 数据科学手册](https://github.com/jakevdp/PythonDataScienceHandbook)**
 
 作者：Jake VanderPlas
 
-> 这本书介绍了在Python中处理数据所需的核心库：特别是IPython、NumPy、Pandas、Matplotlib、Scikit-Learn及相关包。假设你对Python语言有所了解；如果你需要快速了解语言本身，请参阅免费的伴随项目，[Python速览](https://github.com/jakevdp/WhirlwindTourOfPython)：这是一个快速介绍Python语言的项目，旨在面向研究人员和科学家。
+> 这本书介绍了在 Python 中处理数据所需的核心库：特别是 IPython、NumPy、Pandas、Matplotlib、Scikit-Learn 及相关包。假设你对 Python 语言有所了解；如果你需要快速了解语言本身，请参阅免费的伴随项目，[Python 速览](https://github.com/jakevdp/WhirlwindTourOfPython)：这是一个快速介绍 Python 语言的项目，旨在面向研究人员和科学家。
 
 **2\. [神经网络与深度学习](http://neuralnetworksanddeeplearning.com/)**
 
@@ -76,23 +76,23 @@
 
 > 本书涉及凸优化，这是一类特殊的数学优化问题，包括最小二乘法和线性规划问题。众所周知，最小二乘法和线性规划问题具有相当完整的理论，出现在各种应用中，并且可以非常高效地进行数值求解。本书的基本观点是，对于更大的凸优化问题类，也是如此。
 
-**8\. [用Python进行自然语言处理](https://www.nltk.org/book/)**
+**8\. [用 Python 进行自然语言处理](https://www.nltk.org/book/)**
 
 作者：斯蒂文·伯德、伊万·克莱因和爱德华·洛珀
 
-> 这是一本关于自然语言处理的书。所谓“自然语言”，是指人类用于日常交流的语言；例如英语、印地语或葡萄牙语。与编程语言和数学符号等人工语言相比，自然语言随着代际传承而演变，并且难以用明确的规则来界定。我们将自然语言处理——或简称NLP——广泛理解为对自然语言的任何计算机操作。
+> 这是一本关于自然语言处理的书。所谓“自然语言”，是指人类用于日常交流的语言；例如英语、印地语或葡萄牙语。与编程语言和数学符号等人工语言相比，自然语言随着代际传承而演变，并且难以用明确的规则来界定。我们将自然语言处理——或简称 NLP——广泛理解为对自然语言的任何计算机操作。
 > 
 > ...
 > 
-> 本书基于Python编程语言，并结合了一个名为*自然语言工具包（NLTK）*的开源库。
+> 本书基于 Python 编程语言，并结合了一个名为*自然语言工具包（NLTK）*的开源库。
 
-**9\. [用Python自动化无聊的工作](https://automatetheboringstuff.com/)**
+**9\. [用 Python 自动化无聊的工作](https://automatetheboringstuff.com/)**
 
 作者：阿尔·斯维加特
 
 > 如果你曾花费几个小时来重命名文件或更新数百个电子表格单元格，你知道这类任务是多么乏味。但如果你可以让你的计算机为你完成这些任务呢？
 > 
-> 在《用Python自动化无聊的工作》中，你将学习如何使用Python编写程序，在几分钟内完成手动操作需要几个小时的任务——无需先前的编程经验。一旦你掌握了编程基础，你将能够创建Python程序，轻松实现有用且令人印象深刻的自动化功能。
+> 在《用 Python 自动化无聊的工作》中，你将学习如何使用 Python 编写程序，在几分钟内完成手动操作需要几个小时的任务——无需先前的编程经验。一旦你掌握了编程基础，你将能够创建 Python 程序，轻松实现有用且令人印象深刻的自动化功能。
 
 **10\. [社交媒体挖掘：导论](http://dmml.asu.edu/smm/)**
 
@@ -102,11 +102,11 @@
 
 **相关**：
 
-+   [10本免费必读的机器学习和数据科学书籍](/2017/04/10-free-must-read-books-machine-learning-data-science.html)
++   10 本免费必读的机器学习和数据科学书籍
 
-+   [数据爱好者的十大必备书籍](/2016/04/top-10-essential-books-data-enthusiast.html)
++   数据爱好者的十大必备书籍
 
-+   [在进入机器学习职业之前需要阅读的 5 本电子书](/2016/10/5-free-ebooks-machine-learning-career.html)
++   在进入机器学习职业之前需要阅读的 5 本电子书
 
 ### 更多相关话题
 

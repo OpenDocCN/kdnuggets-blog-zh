@@ -1,8 +1,8 @@
 # 数据质量维度：用伟大的期望确保您的数据质量
 
-> 原文：[https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
+> 原文：[`www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html`](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-![数据质量维度：用伟大的期望确保您的数据质量](../Images/49c001ca3799cfb522d7d5dbbb5f00f1.png)
+![数据质量维度：用伟大的期望确保您的数据质量](img/49c001ca3799cfb522d7d5dbbb5f00f1.png)
 
 图片由[Mikael Blomkvist](https://www.pexels.com/photo/a-group-of-people-with-graphs-and-pie-charts-on-table-6476258/)提供
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
-根据[2020年Gartner调查](https://www.gartner.com/en/documents/3986583)，数据质量差的平均成本为每年1280万美元。正如最新的[数据质量状态](https://greatexpectations.io/static/abb8fc238738a68f75b0207b21131298/State_of_Data_Quality_Report-MQ.pdf)报告所示，生产延迟（产品发布延迟）是数据质量差的一个明显症状。高质量、无错误的数据能提高从中得出的见解的可靠性和可信度。
+根据[2020 年 Gartner 调查](https://www.gartner.com/en/documents/3986583)，数据质量差的平均成本为每年 1280 万美元。正如最新的[数据质量状态](https://greatexpectations.io/static/abb8fc238738a68f75b0207b21131298/State_of_Data_Quality_Report-MQ.pdf)报告所示，生产延迟（产品发布延迟）是数据质量差的一个明显症状。高质量、无错误的数据能提高从中得出的见解的可靠性和可信度。
 
 为了提高数据质量，你需要一个测量框架。数据质量维度可以帮助你实现这个目标。维度使你能够衡量覆盖范围并识别需要进行数据质量测试的组件。
 
@@ -28,7 +28,7 @@
 
 # 伟大的期望
 
-伟大的期望（GX）是一个基于Python的开源工具，用于管理数据质量。它为数据团队提供了对数据进行分析、测试和创建报告的能力。该工具具有用户友好的命令行界面（CLI），使设置新测试和定制现有报告变得简单。
+伟大的期望（GX）是一个基于 Python 的开源工具，用于管理数据质量。它为数据团队提供了对数据进行分析、测试和创建报告的能力。该工具具有用户友好的命令行界面（CLI），使设置新测试和定制现有报告变得简单。
 
 伟大期望可以与各种提取、转换和加载 (ETL) 工具如 Airflow 和数据库集成。有关集成的详细列表和官方文档可以在伟大期望的[网站](https://greatexpectations.io/integrations)上找到。
 
@@ -72,7 +72,7 @@ GX 在其[仓库](https://greatexpectations.io/expectations/)中拥有许多期�
 
 为了进行数据集市分析，我将使用基于客户名称（customer_regional_sales）的表：
 
-![数据质量维度：用伟大期望保证数据质量](../Images/593563cfafa85434f268fdc7ea83c65a.png)
+![数据质量维度：用伟大期望保证数据质量](img/593563cfafa85434f268fdc7ea83c65a.png)
 
 # 在《伟大期望》中实现数据质量检查
 
@@ -189,7 +189,7 @@ df_ge.expect_column_values_to_match_regex(
 
 一致性是数据质量的一个维度，指的是数据在数据集中的一致性和准确性。它衡量数据是否在逻辑上连贯，并符合预期的值、范围和规则。为了评估一致性，我通常将数据值与已知标准或值进行比较，并检查是否有差异或偏差。此外，我还使用统计方法来识别和纠正数据中的不一致。
 
-作为我的数据集的一个示例，我创建了一个规则，即“Sales”列（表示每个订单的利润）不能为负。此外，我知道最大和为25,000。
+作为我的数据集的一个示例，我创建了一个规则，即“Sales”列（表示每个订单的利润）不能为负。此外，我知道最大和为 25,000。
 
 Great Expectations 提供了适用于此情况的 Expectation——expect_column_values_to_be_between。
 
@@ -214,11 +214,11 @@ df_ge.expect_column_values_to_be_between(
 
 完整性确保数据的正确性和有效性，特别是当它被用于多个地方时。这包括检查数据在不同数据集之间的连接时是否准确和一致，并确保数据遵循业务设定的规则。
 
-我有两个数据源和一个与这两个数据集相关的数据集。这意味着我必须检查在进行转换时数据是否丢失。对我来说，最重要的参数是订单ID。我想确保所有订单都被放置在 customer_regional_sales 中。
+我有两个数据源和一个与这两个数据集相关的数据集。这意味着我必须检查在进行转换时数据是否丢失。对我来说，最重要的参数是订单 ID。我想确保所有订单都被放置在 customer_regional_sales 中。
 
 Great Expectations 提供了几种解决方案：
 
-1.  使用 Expectation——expect_column_values_to_be_in_set。它期望每个列值都在给定的集合中。在这种情况下，我需要比较“orders”数据集中的订单ID与 customer_regional_sales 中的订单ID。
+1.  使用 Expectation——expect_column_values_to_be_in_set。它期望每个列值都在给定的集合中。在这种情况下，我需要比较“orders”数据集中的订单 ID 与 customer_regional_sales 中的订单 ID。
 
     ```py
     df_expectations = pd.read_csv('./data/orders.csv',
@@ -264,4 +264,4 @@ Great Expectations 提供了几种解决方案：
 
 +   [讲述一个精彩的数据故事：可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日: 讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日: 讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)

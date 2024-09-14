@@ -1,8 +1,8 @@
 # 初学者和 Udacity 深度学习纳米学位的 PyTorch 备忘单
 
-> 原文：[https://www.kdnuggets.com/2019/08/pytorch-cheat-sheet-beginners.html](https://www.kdnuggets.com/2019/08/pytorch-cheat-sheet-beginners.html)
+> 原文：[`www.kdnuggets.com/2019/08/pytorch-cheat-sheet-beginners.html`](https://www.kdnuggets.com/2019/08/pytorch-cheat-sheet-beginners.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Uniqtech](https://theoptips.github.io/uniqtech_1/) 提供**
 
@@ -10,7 +10,7 @@
 
 大新闻：我们在 Medium 机器学习和数据科学主页上发表了文章。请点击 ← 并评论以表示支持。下面的备忘单主要是叙述性的。详细备忘单的 PDF JPEG 版本将很快发布，并将发布在本文中。更新于 2019 年 6 月 18 日，为了使本备忘单/教程更具连贯性，我们将插入来自获奖 Kaggle 内核的代码片段，以说明重要的 PyTorch 概念 — [使用 PyTorch 进行的疟疾检测，一个图像分类计算机视觉 Kaggle 内核](https://www.kaggle.com/devilsknight/malaria-detection-with-pytorch) [见 Source 3 下] 作者 [devilsknight](https://www.kaggle.com/devilsknight) 和 vishnu aka [qwertypsv](https://www.kaggle.com/qwertypsv)。
 
-![图](../Images/b6bf45cdb45371fd00627cbdd0ae2c1f.png)
+![图](img/b6bf45cdb45371fd00627cbdd0ae2c1f.png)
 
 uniqtech 提供的初学者 PyTorch 备忘单
 
@@ -48,7 +48,7 @@ uniqtech 提供的初学者 PyTorch 备忘单
 
 这些功能通过 [功能页面](https://pytorch.org/features) 上的并排代码示例得到了优雅的展示！
 
-![图像](../Images/da94f943b753a23621a94585147571a6.png)
+![图像](img/da94f943b753a23621a94585147571a6.png)
 
 Pytorch 文档中的功能页面展示了优雅的代码示例以说明每个功能。还需注意 Python 3 的点积简写，如“@”。
 
@@ -74,7 +74,7 @@ Pytorch 也得到了 Facebook AI 研究的支持，因此如果你想在 Faceboo
 
 迁移学习使用模型来预测未曾训练的数据集的类型。它可以显著提高训练时间和准确性。它还可以帮助处理可用训练数据有限的情况。Pytorch 有一个专门页面，介绍了预训练模型及其在行业标准基准数据集上的性能。请在我们的 Pytorch 迁移学习文章中阅读更多内容。
 
-![](../Images/998ce78c4b9cc073011acd533b33cd36.png)
+![](img/998ce78c4b9cc073011acd533b33cd36.png)
 
 ```py
 # pretrained models are at torchvision > models
@@ -95,26 +95,26 @@ Pytorch 是一个深度学习框架，就像 Tensorflow 一样，这意味着：
 
 ### 安装 Pytorch
 
-![](../Images/b4233f6a8a1afcd239dbe879eb37cfd2.png)
+![](img/b4233f6a8a1afcd239dbe879eb37cfd2.png)
 
-对于安装技巧，首先使用官方的 Pytorch 文档。[https://pytorch.org/get-started/locally/](https://pytorch.org/get-started/locally/) 以上截图是可用安装的示例。
+对于安装技巧，首先使用官方的 Pytorch 文档。[`pytorch.org/get-started/locally/`](https://pytorch.org/get-started/locally/) 以上截图是可用安装的示例。
 
-使用Anaconda安装Pytorch是一个在各种系统中包括Windows上的良好起点。我们能够在游戏电脑上使用Anaconda安装Pytorch并立即开始使用它的CUDA GPU功能。[阅读我们的Anaconda速查表](https://medium.com/data-science-bootcamp/anaconda-miniconda-cheatsheet-for-data-scientists-2c1be12f56db)。
+使用 Anaconda 安装 Pytorch 是一个在各种系统中包括 Windows 上的良好起点。我们能够在游戏电脑上使用 Anaconda 安装 Pytorch 并立即开始使用它的 CUDA GPU 功能。[阅读我们的 Anaconda 速查表](https://medium.com/data-science-bootcamp/anaconda-miniconda-cheatsheet-for-data-scientists-2c1be12f56db)。
 
 ```py
 conda install numpy jupyter notebook
 conda install pytorch torchvision -c pytorch
 ```
 
-你好，Pytorch的世界就像在启动Google Colab一样简单（没错，在Google 的领地上），然后`import torch`，[看看这个只读共享笔记本](https://colab.research.google.com/drive/1uK7BnOWj_-MXI4a5h4I9SLMrqhPnG9Qu)。现代托管数据科学笔记本如Kaggle Kernel和Google Colab都预先安装了Pytorch。
+你好，Pytorch 的世界就像在启动 Google Colab 一样简单（没错，在 Google 的领地上），然后`import torch`，[看看这个只读共享笔记本](https://colab.research.google.com/drive/1uK7BnOWj_-MXI4a5h4I9SLMrqhPnG9Qu)。现代托管数据科学笔记本如 Kaggle Kernel 和 Google Colab 都预先安装了 Pytorch。
 
 > 看呐：无需服务器的深度学习！
 
-更喜欢基于Jupyter Notebook的教程吗？从这篇文章底部找到Udacity Intro to Pytorch仓库开始入门。
+更喜欢基于 Jupyter Notebook 的教程吗？从这篇文章底部找到 Udacity Intro to Pytorch 仓库开始入门。
 
-更喜欢其他的安装方法？二进制文件，从源代码编译，和Docker镜像，请见来源2。
+更喜欢其他的安装方法？二进制文件，从源代码编译，和 Docker 镜像，请见来源 2。
 
-**来自来源3的代码片段**
+**来自来源 3 的代码片段**
 
 ```py
 import numpy as np
@@ -129,11 +129,11 @@ import os
 print(os.listdir("../input/cell_images/cell_images/"))
 ```
 
-导入`torch`是执行核心Pytorch任务所必需的。你还会看到导入torch神经网络模块`nn`、优化器`optim`和计算机视觉模块`torchvision`，数据转换管道`transforms`、`datasets`和现有的`models`。在这种情况下，Kaggle团队还使用了一个`SubsetRandomSampler`，你将在后续片段中看到它如何被输送到数据转换和加载管道中。
+导入`torch`是执行核心 Pytorch 任务所必需的。你还会看到导入 torch 神经网络模块`nn`、优化器`optim`和计算机视觉模块`torchvision`，数据转换管道`transforms`、`datasets`和现有的`models`。在这种情况下，Kaggle 团队还使用了一个`SubsetRandomSampler`，你将在后续片段中看到它如何被输送到数据转换和加载管道中。
 
 ### 数据转换
 
-**来自来源3的代码片段**
+**来自来源 3 的代码片段**
 
 注意，训练、测试和验证转换器是相似但不同的。为了增广数据，训练数据会被随机旋转、调整大小和裁剪，甚至垂直翻转（在这种情况下，一个翻转的疟疾细胞不会对分类结果产生负面影响）。因为测试和验证数据应该模拟真实世界数据，不引入任何随机噪音或翻转。就像它们一样，带有中心裁剪。注意大小必须保持一致。深度学习涉及大量的矩阵乘法。维度大小总是很重要的。在图像分类任务中，我们通常希望根据将要使用的预训练模型或现有数据集对图像进行归一化。
 
@@ -161,17 +161,17 @@ train_transforms = transforms.Compose([transforms.RandomRotation(30),
 normalize = transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]) # Source 4
 ```
 
-千万别忘记使用ToTensor将所有内容转换为Pytorch张量。
+千万别忘记使用 ToTensor 将所有内容转换为 Pytorch 张量。
 
-为什么？因为Pytorch需要它。阅读Pytorch的创作者Chimtala关于此的讨论串 [Source 5]。
+为什么？因为 Pytorch 需要它。阅读 Pytorch 的创作者 Chimtala 关于此的讨论串 [Source 5]。
 
-> 输入图像首先被加载到范围[0, 1]中，然后这种归一化被应用到RGB图像中，如此描述.. torch vision — 专门用于计算机视觉的数据集、转换和模型
+> 输入图像首先被加载到范围[0, 1]中，然后这种归一化被应用到 RGB 图像中，如此描述.. torch vision — 专门用于计算机视觉的数据集、转换和模型
 > 
-> *所有预训练模型都希望输入图像以相同方式进行归一化，即形状为(3 x H x W)的3通道RGB图像的小批量，其中H和W至少应为224。*
+> *所有预训练模型都希望输入图像以相同方式进行归一化，即形状为(3 x H x W)的 3 通道 RGB 图像的小批量，其中 H 和 W 至少应为 224。*
 > 
 > *图像必须被加载到范围[0, 1]中，并且使用均值=[0.485, 0.456, 0.406]和标准差=[0.229, 0.224, 0.225]进行归一化*
 > 
-> *这种归一化的示例可在此Imagenet示例中找到[来源4]*
+> *这种归一化的示例可在此 Imagenet 示例中找到[来源 4]*
 
 ### 使用训练和测试加载器加载数据
 
@@ -494,11 +494,11 @@ VGG(
 
 Pytorch 版本
 
-对于Udacity项目，并非所有的纳米学位都已经迁移到Pytorch 1.0。使用正确版本的Pytorch对相应的项目至关重要。你可能还需要在Jupyter Notebook中更改内核，以使用相应版本的Python。Udacity项目已经迁移到Python3。并非所有现实世界中的项目都已迁移到Python 3，但现在是时候从Python 2迁移过来了。
+对于 Udacity 项目，并非所有的纳米学位都已经迁移到 Pytorch 1.0。使用正确版本的 Pytorch 对相应的项目至关重要。你可能还需要在 Jupyter Notebook 中更改内核，以使用相应版本的 Python。Udacity 项目已经迁移到 Python3。并非所有现实世界中的项目都已迁移到 Python 3，但现在是时候从 Python 2 迁移过来了。
 
-**使用CUDA**
+**使用 CUDA**
 
-虽然我们决定将CUDA放在高级部分，但现实是CUDA非常易于使用。今天就使用它吧！通过Anaconda、Pytorch和CUDA，我们将一台配备NVIDIA显卡的游戏电脑变成了家庭深度学习的强大机器。无需配置！它直接工作。这个框架在Windows机器上就能运行！（这是之前用于《刺客信条：起源》的MSI NVIDIA GTX 1060 :D 如果你想了解更多，请告诉我们。）
+虽然我们决定将 CUDA 放在高级部分，但现实是 CUDA 非常易于使用。今天就使用它吧！通过 Anaconda、Pytorch 和 CUDA，我们将一台配备 NVIDIA 显卡的游戏电脑变成了家庭深度学习的强大机器。无需配置！它直接工作。这个框架在 Windows 机器上就能运行！（这是之前用于《刺客信条：起源》的 MSI NVIDIA GTX 1060 :D 如果你想了解更多，请告诉我们。）
 
 ```py
 gpu_is_avail = torch.cuda.is_available()if not gpu_is_avail:
@@ -507,11 +507,11 @@ else:
      print('CUDA is available. ')device = torch.device(“cuda” if torch.cuda.is_available() else “cpu”)
 ```
 
-使用CUDA与Pytorch的一个常见错误是不将模型和数据同时移动到CUDA上。当需要时将它们都移回CPU。一般来说，你的模型和数据应该始终位于同一个空间。
+使用 CUDA 与 Pytorch 的一个常见错误是不将模型和数据同时移动到 CUDA 上。当需要时将它们都移回 CPU。一般来说，你的模型和数据应该始终位于同一个空间。
 
-**在生产环境中部署Pytorch**：将现有的Pytorch模型转换为生产就绪的部署有两种方法——*追踪和脚本*。追踪不支持具有代码控制流的复杂模型。脚本支持具有控制流的Pytorch代码，但仅支持有限数量的Python模块。
+**在生产环境中部署 Pytorch**：将现有的 Pytorch 模型转换为生产就绪的部署有两种方法——*追踪和脚本*。追踪不支持具有代码控制流的复杂模型。脚本支持具有控制流的 Pytorch 代码，但仅支持有限数量的 Python 模块。
 
-**选择最佳的Softmax结果**：在多类别分类中，通常使用激活函数Softmax。Pytorch有一个专门的函数来提取最顶级的结果——从Softmax输出中最可能的类别。`torch.topk(input, k, dim)`返回顶级概率。
+**选择最佳的 Softmax 结果**：在多类别分类中，通常使用激活函数 Softmax。Pytorch 有一个专门的函数来提取最顶级的结果——从 Softmax 输出中最可能的类别。`torch.topk(input, k, dim)`返回顶级概率。
 
 ```py
 torch.topk(input, k, dim=None, largest=True, sorted=True, out=None) -> (Tensor, LongTensor)
@@ -520,7 +520,7 @@ If dim is not given, the last dimension of the input is chosen.
 If largest is False then the k smallest elements are returned.
 ```
 
-**在其他平台上使用Pytorch模型**
+**在其他平台上使用 Pytorch 模型**
 
 ```py
 import torch.onnx
@@ -531,11 +531,11 @@ import torch.onnx
   torch.onnx.export(model, dummy_input, "alexnet.onnx")
 ```
 
-> “以标准ONNX（开放神经网络交换）格式导出模型，以便直接访问ONNX兼容的平台、运行时、可视化工具等。” — Pytorch 1.0文档
+> “以标准 ONNX（开放神经网络交换）格式导出模型，以便直接访问 ONNX 兼容的平台、运行时、可视化工具等。” — Pytorch 1.0 文档
 
-**更多关于Pytorch迁移学习的内容**
+**更多关于 Pytorch 迁移学习的内容**
 
-使用现有模型相当于冻结其某些层和参数，并且不对这些层和参数进行训练。通过将`require_grad`设置为False来关闭训练自动求导。
+使用现有模型相当于冻结其某些层和参数，并且不对这些层和参数进行训练。通过将`require_grad`设置为 False 来关闭训练自动求导。
 
 ```py
 for param in model.parameters():
@@ -557,7 +557,7 @@ scheduler = lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
 
 ### 保存和加载模型检查点
 
-专业提示：你知道可以在本地和Google Drive中保存和加载模型吗？这样你不必每次都从头开始。例如，如果你已经训练了5个周期，你可以保存权重，然后再训练另外5个周期。现在你总共训练了10个周期！非常方便。免费的GPU资源经常超时并被擦除。记住，增量训练是可能的。
+专业提示：你知道可以在本地和 Google Drive 中保存和加载模型吗？这样你不必每次都从头开始。例如，如果你已经训练了 5 个周期，你可以保存权重，然后再训练另外 5 个周期。现在你总共训练了 10 个周期！非常方便。免费的 GPU 资源经常超时并被擦除。记住，增量训练是可能的。
 
 你还可以保存一个检查点并在本地加载它。你可能会看到`.pt`和`.pth`扩展名。
 
@@ -576,7 +576,7 @@ torch.save({'arch': 'resnet18',
            'classifier.pth')
 ```
 
-**来自源3的代码片段**
+**来自源 3 的代码片段**
 
 ```py
 model.load_state_dict(torch.load('malaria_detection.pt'))
@@ -643,19 +643,19 @@ tensor([[1]])
 
 +   [使用 Pytorch 进行迁移学习 — 我们超短而有效的文章](https://medium.com/data-science-bootcamp/transfer-learning-with-pytorch-code-snippet-load-a-pretrained-model-900374950004)
 
-+   来源 1: [https://research.fb.com/downloads/pytorch/](https://research.fb.com/downloads/pytorch/)
++   来源 1: [`research.fb.com/downloads/pytorch/`](https://research.fb.com/downloads/pytorch/)
 
-+   来源 2: Pytorch Github 主页面 [https://github.com/pytorch/pytorch#getting-started](https://github.com/pytorch/pytorch#getting-started) 也提供了很好的备忘单。
++   来源 2: Pytorch Github 主页面 [`github.com/pytorch/pytorch#getting-started`](https://github.com/pytorch/pytorch#getting-started) 也提供了很好的备忘单。
 
-+   极其棒的论坛，包括许多活跃的核心贡献者，补充了文档 [https://discuss.pytorch.org/](https://discuss.pytorch.org/)
++   极其棒的论坛，包括许多活跃的核心贡献者，补充了文档 [`discuss.pytorch.org/`](https://discuss.pytorch.org/)
 
-+   来源 3: 使用 Pytorch 的疟疾检测 kaggle 内核 [https://www.kaggle.com/devilsknight/malaria-detection-with-pytorch](https://www.kaggle.com/devilsknight/malaria-detection-with-pytorch)
++   来源 3: 使用 Pytorch 的疟疾检测 kaggle 内核 [`www.kaggle.com/devilsknight/malaria-detection-with-pytorch`](https://www.kaggle.com/devilsknight/malaria-detection-with-pytorch)
 
-+   来源 4: [https://github.com/pytorch/examples/blob/97304e232807082c2e7b54c597615dc0ad8f6173/imagenet/main.py#L197-L198](https://github.com/pytorch/examples/blob/97304e232807082c2e7b54c597615dc0ad8f6173/imagenet/main.py#L197-L198)
++   来源 4: [`github.com/pytorch/examples/blob/97304e232807082c2e7b54c597615dc0ad8f6173/imagenet/main.py#L197-L198`](https://github.com/pytorch/examples/blob/97304e232807082c2e7b54c597615dc0ad8f6173/imagenet/main.py#L197-L198)
 
-+   来源 5: Pytorch 社区论坛 Pytorch 图像变换标准化 [https://discuss.pytorch.org/t/whats-the-range-of-the-input-value-desired-to-use-pretrained-resnet152-and-vgg19/1683](https://discuss.pytorch.org/t/whats-the-range-of-the-input-value-desired-to-use-pretrained-resnet152-and-vgg19/1683)
++   来源 5: Pytorch 社区论坛 Pytorch 图像变换标准化 [`discuss.pytorch.org/t/whats-the-range-of-the-input-value-desired-to-use-pretrained-resnet152-and-vgg19/1683`](https://discuss.pytorch.org/t/whats-the-range-of-the-input-value-desired-to-use-pretrained-resnet152-and-vgg19/1683)
 
-**[Uniqtech](https://theoptips.github.io/uniqtech_1/)**: 我们经常编写像这样的适合初学者的 Cheat Sheets。关注我们的个人资料以及我们最受欢迎的数据科学训练营出版物。查看我们关于 Pytorch 中迁移学习、Amazon SageMaker 上的 Pytorch 和数据科学的 Anaconda Cheat Sheet 的单页文章。我们主要在 Medium 上活跃，这是一个我们喜爱并有强烈认同感的社区。Medium 对其作者很好，并拥有一个极好的读者社区。如果您想了解我们即将推出的数据科学训练营课程（2024 年秋季发布）、高质量文章的奖学金，或者想为我们写作、提供反馈，请通过 [hi@uniqtech.co](mailto:hi@uniqtech.co) 发送电子邮件给我们。感谢 Medium 社区！
+**[Uniqtech](https://theoptips.github.io/uniqtech_1/)**: 我们经常编写像这样的适合初学者的 Cheat Sheets。关注我们的个人资料以及我们最受欢迎的数据科学训练营出版物。查看我们关于 Pytorch 中迁移学习、Amazon SageMaker 上的 Pytorch 和数据科学的 Anaconda Cheat Sheet 的单页文章。我们主要在 Medium 上活跃，这是一个我们喜爱并有强烈认同感的社区。Medium 对其作者很好，并拥有一个极好的读者社区。如果您想了解我们即将推出的数据科学训练营课程（2024 年秋季发布）、高质量文章的奖学金，或者想为我们写作、提供反馈，请通过 hi@uniqtech.co 发送电子邮件给我们。感谢 Medium 社区！
 
 主要作者和贡献者 [Sun](https://medium.com/u/16c164f26caa?source=post_page---------------------------).
 
@@ -663,11 +663,11 @@ tensor([[1]])
 
 **相关：**
 
-+   [深度学习 Cheat Sheets](/2018/11/deep-learning-cheat-sheets.html)
++   深度学习 Cheat Sheets
 
-+   [使用 PyTorch 框架进行 NLP 入门](/2019/04/nlp-pytorch.html)
++   使用 PyTorch 框架进行 NLP 入门
 
-+   [3 个更多的 Google Colab 环境管理技巧](/2019/01/more-google-colab-environment-management-tips.html)
++   3 个更多的 Google Colab 环境管理技巧
 
 ### 更多主题
 

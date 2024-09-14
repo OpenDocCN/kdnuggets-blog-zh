@@ -1,8 +1,8 @@
 # SQL 简化：使用 CTE 创建模块化和易于理解的查询
 
-> 原文：[https://www.kdnuggets.com/sql-simplified-crafting-modular-and-understandable-queries-with-ctes](https://www.kdnuggets.com/sql-simplified-crafting-modular-and-understandable-queries-with-ctes)
+> 原文：[`www.kdnuggets.com/sql-simplified-crafting-modular-and-understandable-queries-with-ctes`](https://www.kdnuggets.com/sql-simplified-crafting-modular-and-understandable-queries-with-ctes)
 
-![SQL 简化：使用 CTE 创建模块化和易于理解的查询](../Images/5673fbf5264a095a7e1daad673acd1ca.png)
+![SQL 简化：使用 CTE 创建模块化和易于理解的查询](img/5673fbf5264a095a7e1daad673acd1ca.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -60,7 +60,7 @@
 
 这正是我们希望在任何代码中实现的模块化方法！
 
-![SQL 简化：使用 CTE 创建模块化且易于理解的查询](../Images/3ca8ab059876c603dc047940a59670f8.png)
+![SQL 简化：使用 CTE 创建模块化且易于理解的查询](img/3ca8ab059876c603dc047940a59670f8.png)
 
 作者提供的图像
 
@@ -80,7 +80,7 @@
 
 为了说明这一点，我们将使用[InsideAirbnb](http://insideairbnb.com/barcelona) 巴塞罗那的数据表，其结构如下：
 
-![SQL 简化：使用 CTE 创建模块化且易于理解的查询](../Images/a3c5c8c19c0b7cebf72f16cc4f875253.png)
+![SQL 简化：使用 CTE 创建模块化且易于理解的查询](img/a3c5c8c19c0b7cebf72f16cc4f875253.png)
 
 一种天真的方法可能会导致你创建嵌套的子查询，这些子查询很快变成维护的噩梦，如下所示：
 
@@ -96,7 +96,7 @@
 
 +   **最终汇总：** 在最终的 SELECT 语句中组合 CTE 以连贯地展示数据。
 
-![SQL 简化：使用 CTE 创建模块化且易于理解的查询](../Images/3e2f40d29fff623e819f740de9d0d0fd.png)
+![SQL 简化：使用 CTE 创建模块化且易于理解的查询](img/3e2f40d29fff623e819f740de9d0d0fd.png)
 
 作者提供的图像
 
@@ -136,7 +136,7 @@ CTE 证明了一个结构化的方法在编程中有多么重要。通过采用 
 
 +   [超越天网：打造人工智能进化的下一前沿](https://www.kdnuggets.com/beyond-skynet-crafting-the-next-frontier-in-ai-evolution)
 
-+   [逐步指南：阅读和理解SQL查询](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)
++   [逐步指南：阅读和理解 SQL 查询](https://www.kdnuggets.com/a-step-by-step-guide-to-reading-and-understanding-sql-queries)
 
 +   [4 个有用的中级 SQL 查询用于数据科学](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 

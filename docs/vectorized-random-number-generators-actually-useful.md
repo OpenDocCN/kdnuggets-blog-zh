@@ -1,12 +1,12 @@
 # 矢量化的随机数生成器真的有用吗？
 
-> 原文：[https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html](https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html)
+> 原文：[`www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html`](https://www.kdnuggets.com/2018/08/vectorized-random-number-generators-actually-useful.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：丹尼尔·勒梅尔，魁北克大学**
 
-![Header image](../Images/25072eec309b6295ee5e3aecc0523253.png)
+![Header image](img/25072eec309b6295ee5e3aecc0523253.png)
 
 我们的处理器受益于“SIMD”指令。这些指令可以同时操作多个值，从而大大加速某些算法。早些时候，我报告过，你可以通过使用 SIMD 指令将常见（快速）随机数生成器如 PCG 和 xorshift128+ 的速度提高三到四倍。
 
@@ -40,21 +40,21 @@ for (i = size; i > 1; i--) {
 
 **相关：**
 
-+   [随机性的惊人复杂性](/2017/06/surprising-complexity-randomness.html)
++   随机性的惊人复杂性
 
-+   [2026年人工智能中的常识…](/2016/08/common-sense-artificial-intelligence-2026.html)
++   2026 年人工智能中的常识…
 
-+   [深度学习是万能钥匙吗？](/2017/02/deep-learning-silver-bullet.html)
++   深度学习是万能钥匙吗？
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术需求
 
 * * *
 

@@ -1,8 +1,8 @@
 # AI/ML 模型的风险管理框架
 
-> 原文：[https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)
+> 原文：[`www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html`](https://www.kdnuggets.com/2022/03/risk-management-framework-aiml-models.html)
 
-![AI/ML 模型的风险管理框架](../Images/7bd3035887aff786c512488ea06ba5fc.png)
+![AI/ML 模型的风险管理框架](img/7bd3035887aff786c512488ea06ba5fc.png)
 
 来源：商业矢量图由 jcomp 创作 — [www.freepik.com](https://www.freepik.com)（展示管理 AI 风险和生产成功 AI 模型的关键概念）
 
@@ -12,7 +12,7 @@ AI/ML 模型像其他数学和金融模型一样，具有其自身的风险，�
 
 风险需要提前充分考虑，从设计阶段开始。不能等到后果显现后再进行损害控制。这就是“风险管理”通过设计前瞻性的方法、拉动杠杆评估最坏情况，并及时采取行动的帮助所在。
 
-![AI/ML 模型的风险管理框架](../Images/960f56f00412ad589eef949fec84836f.png)
+![AI/ML 模型的风险管理框架](img/960f56f00412ad589eef949fec84836f.png)
 
 来源：作者
 
@@ -48,41 +48,41 @@ ML 模型可能最终解决的问题与最初设想的可能有所不同。项�
 
 Covid 已经极大地改变了世界运作的动态，使得许多 ML 模型变得无关紧要。没有任何模型/AI 解决方案提供商能够预见到这一点，考虑到这次疫情的黑天鹅效应。但，模型输出偏离预期结果的方式还有无数种，其中一个主要原因是训练数据与推理数据特征之间的漂移。现在，这在开发者的掌控之中，可以使用各种统计方法来控制。其中一个指标是 [KS 统计量](https://www.statisticshowto.com/kolmogorov-smirnov-test/)。
 
-如果你想了解更多关于如何维护数据质量以构建成功的机器学习解决方案的信息，我推荐你事先阅读这篇 [文章](/2022/03/significance-data-quality-making-successful-machine-learning-model.html)。文章解释了无缝数据集成和一致性对维护数据管道的重要性，并强调了采纳数据文化的重要性。
+如果你想了解更多关于如何维护数据质量以构建成功的机器学习解决方案的信息，我推荐你事先阅读这篇 文章。文章解释了无缝数据集成和一致性对维护数据管道的重要性，并强调了采纳数据文化的重要性。
 
 # **声誉、法规和合规风险**
 
-人工智能机器人能否获得意识并通过接管世界来危害人类安全？这样的问题主要占据我们的思考，并立即将AI变成数字化转型潮流中的反派。
+人工智能机器人能否获得意识并通过接管世界来危害人类安全？这样的问题主要占据我们的思考，并立即将 AI 变成数字化转型潮流中的反派。
 
-但AI只是一个技术本身不能造成伤害，除非它被设计和构建成这样。这引出了一个重要且常被忽视的概念——意图。
+但 AI 只是一个技术本身不能造成伤害，除非它被设计和构建成这样。这引出了一个重要且常被忽视的概念——意图。
 
-[引用Dave Waters](https://www.supplychaintoday.com/artificial-intelligence-machine-learning-quotes-top-minds/)的话，“人工智能的潜在好处巨大，危险也是如此。”
+[引用 Dave Waters](https://www.supplychaintoday.com/artificial-intelligence-machine-learning-quotes-top-minds/)的话，“人工智能的潜在好处巨大，危险也是如此。”
 
-![AI/ML模型风险管理框架](../Images/077af6302e53bfcfb7f19f8944495d64.png)
+![AI/ML 模型风险管理框架](img/077af6302e53bfcfb7f19f8944495d64.png)
 
-来源：人物矢量图由pch.vector创作 — [www.freepik.com](https://www.freepik.com)，并结合作者对良好和恶意意图的例子进行输入
+来源：人物矢量图由 pch.vector 创作 — [www.freepik.com](https://www.freepik.com)，并结合作者对良好和恶意意图的例子进行输入
 
-AI有巨大的潜力来改善人类生活，但也带来了自身的风险。
+AI 有巨大的潜力来改善人类生活，但也带来了自身的风险。
 
-一旦风险出现，就需要遵循法规。是的，法规是必要的，以建立检查和平衡机制，并确保它们提供正确的框架，不妨碍AI利益的飞跃，同时控制可能的危害。
+一旦风险出现，就需要遵循法规。是的，法规是必要的，以建立检查和平衡机制，并确保它们提供正确的框架，不妨碍 AI 利益的飞跃，同时控制可能的危害。
 
-不妥协或滥用个人数据且尊重用户隐私的社会友好型应用才能成功并进入市场。像GDPR这样的法规旨在赋予个人控制权和权利，以决定他们允许如何使用个人数据。
+不妥协或滥用个人数据且尊重用户隐私的社会友好型应用才能成功并进入市场。像 GDPR 这样的法规旨在赋予个人控制权和权利，以决定他们允许如何使用个人数据。
 
-及时干预和更新这些监管框架可以确保我们的社会继续享受AI良好意图带来的好处，同时阻止恶意AI产品的出现。
+及时干预和更新这些监管框架可以确保我们的社会继续享受 AI 良好意图带来的好处，同时阻止恶意 AI 产品的出现。
 
 # **可解释性**
 
-AI模型能否解释预测结果。模型开发者必须在不影响模型准确性的情况下解释算法的内部工作原理。这可以通过两种方式实现——可解释模型或辅助工具。
+AI 模型能否解释预测结果。模型开发者必须在不影响模型准确性的情况下解释算法的内部工作原理。这可以通过两种方式实现——可解释模型或辅助工具。
 
-![AI/ML模型风险管理框架](../Images/0c891159999ab0413218577fddfa7734.png)
+![AI/ML 模型风险管理框架](img/0c891159999ab0413218577fddfa7734.png)
 
-来源：教育矢量图由freepik创作 — [www.freepik.com](https://www.freepik.com)
+来源：教育矢量图由 freepik 创作 — [www.freepik.com](https://www.freepik.com)
 
-“可解释性”和“解释性”这两个词常被交替使用。决策树、线性回归等模型由于其固有的预测解释特性，属于可解释模型的范畴。而像深度神经网络这样的黑箱模型则需要借助LIME和SHAP框架等辅助工具和技术来解释模型输出。
+“可解释性”和“解释性”这两个词常被交替使用。决策树、线性回归等模型由于其固有的预测解释特性，属于可解释模型的范畴。而像深度神经网络这样的黑箱模型则需要借助 LIME 和 SHAP 框架等辅助工具和技术来解释模型输出。
 
-下图展示了数据科学社区应努力实现的真实状态，我们能够解释为什么模型输出特定类别X而不是类别Y。模型何时成功并可以以更大的信心信任？输入数据中的哪些变化会导致预测结果的翻转等。
+下图展示了数据科学社区应努力实现的真实状态，我们能够解释为什么模型输出特定类别 X 而不是类别 Y。模型何时成功并可以以更大的信心信任？输入数据中的哪些变化会导致预测结果的翻转等。
 
-![AI/ML模型风险管理框架](../Images/0bc4baa19aa3551af1012306a34a6147.png)
+![AI/ML 模型风险管理框架](img/0bc4baa19aa3551af1012306a34a6147.png)
 
 来源：https://[www.darpa.mil](https://www.darpa.mil/)/program/explainable-artificial-intelligence
 
@@ -90,30 +90,30 @@ AI模型能否解释预测结果。模型开发者必须在不影响模型准确
 
 我将在即将发表的文章中详细阐述这些内容。敬请关注。
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的AI/ML创新领导者和AI伦理学家。她在数据科学、产品和研究的交汇点工作，以提供业务价值和见解。她提倡数据中心科学，并在数据治理方面是领先专家，致力于构建值得信赖的AI解决方案。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位获奖的 AI/ML 创新领导者和 AI 伦理学家。她在数据科学、产品和研究的交汇点工作，以提供业务价值和见解。她提倡数据中心科学，并在数据治理方面是领先专家，致力于构建值得信赖的 AI 解决方案。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [Giskard简介：AI模型的开源质量管理](https://www.kdnuggets.com/2023/11/giskard-introduction-giskard-opensource-quality-management-ai-models)
++   [Giskard 简介：AI 模型的开源质量管理](https://www.kdnuggets.com/2023/11/giskard-introduction-giskard-opensource-quality-management-ai-models)
 
-+   [Django框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)
++   [Django 框架中的社交用户认证](https://www.kdnuggets.com/2023/01/social-user-authentication-django-framework.html)
 
 +   [适用于所有用途的唯一提示框架](https://www.kdnuggets.com/the-only-prompting-framework-for-every-use)
 
-+   [免费的4周AI质量管理数据科学课程](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费的 4 周 AI 质量管理数据科学课程](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
 
-+   [KDnuggets新闻，5月18日：5个免费机器学习托管平台…](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费机器学习托管平台…](https://www.kdnuggets.com/2022/n20.html)
 
-+   [关于数据管理及其重要性的6件事…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理及其重要性的 6 件事…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)

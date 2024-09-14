@@ -1,14 +1,14 @@
 # 如何成为在线数据科学导师
 
-> 原文：[https://www.kdnuggets.com/2021/05/how-become-online-data-science-tutor.html](https://www.kdnuggets.com/2021/05/how-become-online-data-science-tutor.html)
+> 原文：[`www.kdnuggets.com/2021/05/how-become-online-data-science-tutor.html`](https://www.kdnuggets.com/2021/05/how-become-online-data-science-tutor.html)
 
-[评论](#comments)
+评论
 
 在数据科学领域工作了几年后，我尝试理解学习和教授数据科学的最佳方法。
 
-我希望我们的团队在通过MOOC进行教学方面做得很好。
+我希望我们的团队在通过 MOOC 进行教学方面做得很好。
 
-*“超过50万学生不可能错，”* 广告如是说。
+*“超过 50 万学生不可能错，”* 广告如是说。
 
 虽然在线课程是最实惠的学习方式，但在线辅导不应被低估。
 
@@ -18,7 +18,7 @@
 
 在这篇文章中，我们将探讨这个问题，作为“在线数据科学辅导”的商业案例。
 
-![图片 1, 在线数据科学导师](../Images/f063f95833e6e083878b09ff77085031.png)
+![图片 1, 在线数据科学导师](img/f063f95833e6e083878b09ff77085031.png)
 
 ### 问题
 
@@ -34,7 +34,7 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 +   设计惊艳的数据可视化的创意方面
 
-+   通过BI工具将数据源整合到仪表板中的业务方面
++   通过 BI 工具将数据源整合到仪表板中的业务方面
 
 +   机器学习和人工智能的艰难数学方面
 
@@ -54,7 +54,7 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 你可以成为那个人！当然，要付出一定的费用。
 
-你有资格吗？如果你理解KDnuggets上写的博客的一半，你绝对有资格通过帮助有志数据科学家来赚取额外收入。
+你有资格吗？如果你理解 KDnuggets 上写的博客的一半，你绝对有资格通过帮助有志数据科学家来赚取额外收入。
 
 辅导有志者的不同方式包括：
 
@@ -86,7 +86,7 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 ### 如何将这项业务开始
 
-你需要3件事：
+你需要 3 件事：
 
 +   建立一个基础设施来主持会议并获得报酬。
 
@@ -114,11 +114,11 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 [PayPal](https://www.paypal.com/bg/business)、[Stripe](https://stripe.com/)和[Revolut](https://www.revolut.com/)都是很好的选择。
 
-将这4种工具集成在一起，或者至少视频和支付部分，将构成你的技术基础设施。
+将这 4 种工具集成在一起，或者至少视频和支付部分，将构成你的技术基础设施。
 
 如果你太忙或者不想麻烦，你可以选择一款端到端的付费在线会议解决方案。我鼓励你试试[3veta.com](https://3veta.com/)。
 
-![Image 2, Set Up Workspace](../Images/b32a4fd8b4820e64b8d57cc520348d0c.png)
+![Image 2, Set Up Workspace](img/b32a4fd8b4820e64b8d57cc520348d0c.png)
 
 **学习在线教学的基础知识**
 
@@ -126,7 +126,7 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 首先，你必须学习如何准备会议并主持会议。所有类型的在线咨询规则都是一样的。步骤很简单——都是与设置、准备设备、收集材料等有关。充分熟悉这一阶段，我强烈推荐你拥有一个 [清单](https://www.dropbox.com/s/rfyw94rsufgsogb/The%20Ultimate%20Checklist%20to%20Provide%20Services%20Online.pdf?dl=0)。
 
-![Image 3, Todo List](../Images/8f36241fd8c5755cc5abb7b1fa75e600.png)
+![Image 3, Todo List](img/8f36241fd8c5755cc5abb7b1fa75e600.png)
 
 其次，了解对方遇到的问题。
 
@@ -174,19 +174,19 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 +   如果你比较内向，你可能需要考虑更开放一点。不要害怕被关注。如果人们知道你对数据科学如此感兴趣，甚至还进行辅导，这对你的职业生涯只有好处。记住，你在这个过程中会学到很多东西。实际上，最糟糕的情况就是被在线忽视，这并不是坏结果。
 
-+   作为一名课程讲师，在处理课程的问答时，我迫切需要帮助。每当有学生回答超过5个问题时，我会联系他们并邀请他们与我们合作。
++   作为一名课程讲师，在处理课程的问答时，我迫切需要帮助。每当有学生回答超过 5 个问题时，我会联系他们并邀请他们与我们合作。
 
 **你真的能让这件事成功吗？**
 
 在线赚取额外收入从未如此简单，而 [我一直是这方面的倡导者](https://iliyavalchanov.substack.com/p/online-side-hustle-ideas)。
 
-听起来可能很难，但你知道吗？你是数据科学专家，而不是TikToker！
+听起来可能很难，但你知道吗？你是数据科学专家，而不是 TikToker！
 
 你的努力通常更困难，但总是更有回报！
 
 **相关：**
 
-+   [2021年十大数据科学课程](https://www.kdnuggets.com/2021/04/coursera2-top-10-data-science-courses.html)
++   [2021 年十大数据科学课程](https://www.kdnuggets.com/2021/04/coursera2-top-10-data-science-courses.html)
 
 +   [专业人员的数据科学课程](https://www.kdnuggets.com/2021/03/data-science-curriculum-professionals.html)
 
@@ -194,14 +194,14 @@ TikTok 热门但简单。我花了一个小时就“掌握”了它。
 
 ### 更多相关主题
 
-+   [ChatGPT作为个性化数据科学概念学习辅导员](https://www.kdnuggets.com/2023/05/chatgpt-personalized-tutor-learning-data-science-concepts.html)
++   [ChatGPT 作为个性化数据科学概念学习辅导员](https://www.kdnuggets.com/2023/05/chatgpt-personalized-tutor-learning-data-science-concepts.html)
 
-+   [KDnuggets新闻 2022年3月16日：学习数据科学基础与5…](https://www.kdnuggets.com/2022/n11.html)
++   [KDnuggets 新闻 2022 年 3 月 16 日：学习数据科学基础与 5…](https://www.kdnuggets.com/2022/n11.html)
 
-+   [如何在2022年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
++   [如何在 2022 年成为成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
 +   [五步成为数据科学专业人士](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-+   [成为一名出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [成为数据工程师需要的9项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [成为数据工程师需要的 9 项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)

@@ -1,8 +1,8 @@
-# 5个关键数据科学趋势和分析趋势
+# 5 个关键数据科学趋势和分析趋势
 
-> 原文：[https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
+> 原文：[`www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html`](https://www.kdnuggets.com/2022/08/5-key-data-science-trends-analytics-trends.html)
 
-![5个关键数据科学趋势和分析趋势](../Images/e67e6abc0b4eb593686d44cd05a0e3ef.png)
+![5 个关键数据科学趋势和分析趋势](img/e67e6abc0b4eb593686d44cd05a0e3ef.png)
 
 图片由 Karolina Grabowska 提供，来源于 [Pexels](https://www.pexels.com/photo/a-person-holding-white-printer-paper-7876376/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -30,7 +30,7 @@
 
 # 2\. 技术栈变得更加精简
 
-起初，当数据科学还在积累势头时，该领域的技术前沿一片混乱。研究人员试图使用几乎所有的语言和技术栈来搞清楚什么有效，什么无效，新手很难在一个没有过时风险的方向上定位自己。现在，情况有所不同。像R和Python这样的几种语言已[成为行业领导者](https://www.upgrad.com/blog/data-science-programming-languages/)，我们已经看到一些完整的技术栈在市场上稳定下来，并受到各级公司关注。
+起初，当数据科学还在积累势头时，该领域的技术前沿一片混乱。研究人员试图使用几乎所有的语言和技术栈来搞清楚什么有效，什么无效，新手很难在一个没有过时风险的方向上定位自己。现在，情况有所不同。像 R 和 Python 这样的几种语言已[成为行业领导者](https://www.upgrad.com/blog/data-science-programming-languages/)，我们已经看到一些完整的技术栈在市场上稳定下来，并受到各级公司关注。
 
 对那些有兴趣涉足该领域的人来说，这是一个很大的变化，因为它在学习阶段提供了更多的安全感和信心，这无疑是人们最需要这种支持的时候。
 
@@ -62,12 +62,12 @@
 
 +   [AI、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [2021年数据科学与分析行业主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
++   [2021 年数据科学与分析行业主要发展及关键…](https://www.kdnuggets.com/2021/12/developments-predictions-data-science-analytics-industry.html)
 
-+   [2022年及之后的10大关键AI与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
++   [2022 年及之后的 10 大关键 AI 与数据分析趋势](https://www.kdnuggets.com/2021/12/10-key-ai-trends-for-2022.html)
 
-+   [2021年的主要进展及2022年人工智能、数据科学等领域的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年的主要进展及 2022 年人工智能、数据科学等领域的关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
-+   [2022年数据科学、机器学习、人工智能和分析领域的关键进展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)
++   [2022 年数据科学、机器学习、人工智能和分析领域的关键进展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)
 
 +   [掌握数据宇宙：迈向成功数据科学职业的关键步骤](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)

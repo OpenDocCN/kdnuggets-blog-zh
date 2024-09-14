@@ -1,12 +1,12 @@
 # 使用 EvalML 进行自动化文本分类
 
-> 原文：[https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html](https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html)
+> 原文：[`www.kdnuggets.com/2021/04/automated-text-classification-evalml.html`](https://www.kdnuggets.com/2021/04/automated-text-classification-evalml.html)
 
-[评论](#comments)
+评论
 
 **由 [Angela Lin](https://www.linkedin.com/in/angela97lin/) 提供，EvalML 软件工程师**
 
-![在 EvalML 中使用文本数据与 Woodwork](../Images/e89a509092d49574c49cce4627da571e.png)
+![在 EvalML 中使用文本数据与 Woodwork](img/e89a509092d49574c49cce4627da571e.png)
 
 文本可以是丰富且信息量大的数据类型。它可以用于多种任务，包括情感分析、主题提取和垃圾邮件检测。然而，原始文本不能直接输入到机器学习算法中，因为大多数模型只能理解数值。因此，为了在机器学习中使用文本作为数据，必须首先对其进行处理并转换为数值。
 
@@ -28,7 +28,7 @@ X = data.drop(['Category'], axis=1)
 y = data['Category']display(X.head())
 ```
 
-![image.png](../Images/29b8bef53c129cfbbd31f9ff9cfeec62.png) 我们输入数据的一个样本
+![image.png](img/29b8bef53c129cfbbd31f9ff9cfeec62.png) 我们输入数据的一个样本
 
 我们可以绘制目标值的频率，以验证我们修改过的数据集中“ham”与“spam”的比例是否约为 3:1。
 
@@ -36,7 +36,7 @@ y = data['Category']display(X.head())
 y.value_counts().plot.pie(figsize=(10,10))
 ```
 
-![image.png](../Images/be802f439a9d168738f3bdf50987f7d5.png)
+![image.png](img/be802f439a9d168738f3bdf50987f7d5.png)
 
 “ham”与“spam”的比例约为 3:1
 
@@ -54,7 +54,7 @@ y.value_counts().plot.pie(figsize=(10,10))
 
 在将我们的数据输入到 EvalML 之前，我们有一个更基本的问题需要解决：我们如何指定我们的数据应该被视为*文本*数据？仅使用`pandas`，我们无法区分文本数据和非文本数据（例如分类数据），因为 pandas 使用相同的`object`数据类型来存储这两者。我们如何确保我们的模型正确地将我们的文本消息视为文本数据，而不是数百种不同的唯一类别？
 
-![image.png](../Images/61138c555915e5f58e40b326c4b34cd1.png)pandas 默认将“Message”视为“object”数据类型
+![image.png](img/61138c555915e5f58e40b326c4b34cd1.png)pandas 默认将“Message”视为“object”数据类型
 
 EvalML 利用开源的 [Woodwork](https://github.com/alteryx/woodwork) 库来检测和指定每个特征应该如何处理，而不考虑其底层的物理数据类型。这意味着我们可以对具有相同物理数据类型的列进行不同的处理。例如，我们可以指定希望将某些包含文本的列视为分类列，而将其他包含文本的列视为自然语言列，即使这些列具有相同的底层`object`数据类型。这种区分使我们能够澄清在`pandas`中可能具有相同底层数据类型但最终表示不同数据类型的特征之间的模糊性。
 
@@ -70,7 +70,7 @@ from evalml.utils import infer_feature_types
 X = infer_feature_types(X, {'Message': 'NaturalLanguage'})
 ```
 
-![image.png](../Images/5c7233abeb5a9c4466ae536095a832ad.png)我们的“Message”特征被自动检测为自然语言（文本）列
+![image.png](img/5c7233abeb5a9c4466ae536095a832ad.png)我们的“Message”特征被自动检测为自然语言（文本）列
 
 我们还可以为我们的目标初始化一个 Woodwork `DataColumn`。
 
@@ -80,7 +80,7 @@ y = ww.DataColumn(y)
 
 我们的目标被自动检测为分类列。这是合理的，因为我们有一个二分类问题，涉及两类文本消息：垃圾邮件和正常邮件。
 
-![image.png](../Images/f6e775f22086b30e5978afb53c300658.png)我们的目标（“y”）被自动检测为分类列
+![image.png](img/f6e775f22086b30e5978afb53c300658.png)我们的目标（“y”）被自动检测为分类列
 
 ### 运行 AutoMLSearch
 
@@ -96,19 +96,19 @@ from evalml.preprocessing import split_data
 X_train, X_holdout, y_train, y_holdout = split_data(X, y, problem_type='binary', test_size=0.2)
 ```
 
-接下来，我们可以通过指定问题类型并传入我们的训练数据来设置`AutoMLSearch`。我们有一个二分类问题，因为我们试图将消息分类为两个类别之一：ham或spam。
+接下来，我们可以通过指定问题类型并传入我们的训练数据来设置`AutoMLSearch`。我们有一个二分类问题，因为我们试图将消息分类为两个类别之一：ham 或 spam。
 
 ```py
 automl = AutoMLSearch(X_train=X_train, y_train=y_train, problem_type='binary')
 ```
 
-调用构造函数会初始化一个为我们的数据配置的`AutoMLSearch`对象。现在，我们可以调用`automl.search()`来启动AutoML过程。这将自动生成数据的管道，并训练各种模型集合。
+调用构造函数会初始化一个为我们的数据配置的`AutoMLSearch`对象。现在，我们可以调用`automl.search()`来启动 AutoML 过程。这将自动生成数据的管道，并训练各种模型集合。
 
 ```py
 automl.search()
 ```
 
-![](../Images/899148ef52aac57406cb1ac8e2206992.png)EvalML的AutoML搜索已经训练并评估了九种不同的模型。
+![](img/899148ef52aac57406cb1ac8e2206992.png)EvalML 的 AutoML 搜索已经训练并评估了九种不同的模型。
 
 要了解`AutoMLSearch`构建了哪些类型的管道，我们可以抓取表现最好的管道并更详细地检查它。我们可以调用`automl.describe_pipeline(id)`来查看管道组件和性能的详细信息，或`automl.graph(pipeline)`来查看管道作为组件流的可视化表示。
 
@@ -120,7 +120,7 @@ best_pipeline_id = automl.rankings.iloc[0]["id"])
 automl.describe_pipeline(best_pipeline_id)
 ```
 
-![image.png](../Images/ad194eb3c16553e78aec6b682fe396b6.png)我们最佳管道的描述
+![image.png](img/ad194eb3c16553e78aec6b682fe396b6.png)我们最佳管道的描述
 
 ```py
 # We can also grab the best performing pipeline like this
@@ -128,7 +128,7 @@ automl.best_pipeline
 automl.graph(automl.best_pipeline)
 ```
 
-![image.png](../Images/007fb6912a5ce713496ccd2acd828f3e.png)我们最佳管道的图示表示
+![image.png](img/007fb6912a5ce713496ccd2acd828f3e.png)我们最佳管道的图示表示
 
 通过检查表现最好的管道，我们可以更好地理解`AutoMLSearch`在做什么，以及它用我们的文本数据构建了哪些管道。最佳管道由一个`Imputer`、一个`Text Featurization Component`和一个`Random Forest Classifier`组件组成。让我们分解并了解这个管道是如何构建的：
 
@@ -163,7 +163,7 @@ OrderedDict([('MCC Binary', 0.9278003804626707),
 | 平衡准确率 | 50% | 95.53% |
 | 召回率 | 0% | 91.95% |
 
-在我们关注的三个指标（准确率、平衡准确率和召回率）上，我们显著超越了基准模型！借助EvalML，我们能够构建一个能够较好地检测垃圾邮件的模型，只需几行代码，甚至在调整二分类决策阈值之前。
+在我们关注的三个指标（准确率、平衡准确率和召回率）上，我们显著超越了基准模型！借助 EvalML，我们能够构建一个能够较好地检测垃圾邮件的模型，只需几行代码，甚至在调整二分类决策阈值之前。
 
 ### 文本的重要性
 
@@ -181,7 +181,7 @@ automl_no_text = AutoMLSearch(X_train=X_train, y_train=y_train,                 
 automl_no_text.search()
 ```
 
-如果我们对这次找到的最佳管道进行评分，我们会得到75.2%的准确率、50.3%的平衡准确率和0.6%的召回率。这些分数仅比我们基准模型的分数稍微好一点！
+如果我们对这次找到的最佳管道进行评分，我们会得到 75.2%的准确率、50.3%的平衡准确率和 0.6%的召回率。这些分数仅比我们基准模型的分数稍微好一点！
 
 ```py
 >>> best_pipeline_no_text = automl_no_text.best_pipeline
@@ -213,9 +213,9 @@ OrderedDict([('MCC Binary', 0.0710465299061946),
 automl_no_text.graph(best_pipeline_no_text)
 ```
 
-![image.png](../Images/fb140746c116973a873f4c69fa3f95a9.png)如果我们将“Message”视为分类特征，我们最佳管道的图表
+![image.png](img/fb140746c116973a873f4c69fa3f95a9.png)如果我们将“Message”视为分类特征，我们最佳管道的图表
 
-因为`AutoMLSearch`这次被告知将“消息”视为分类特征，所以每个管道都包含了一个独热编码器（而不是文本特征化组件）。该独热编码器对这些文本的前10个最常见的“类别”进行了编码；然而，由于每条文本都是独一无二的，这意味着仅对10条独特的文本消息进行了编码，而其余的消息则被丢弃了。这样做几乎移除了我们数据中的所有信息，因此我们最好的管道无法比我们的简单基线模型表现得更好。
+因为`AutoMLSearch`这次被告知将“消息”视为分类特征，所以每个管道都包含了一个独热编码器（而不是文本特征化组件）。该独热编码器对这些文本的前 10 个最常见的“类别”进行了编码；然而，由于每条文本都是独一无二的，这意味着仅对 10 条独特的文本消息进行了编码，而其余的消息则被丢弃了。这样做几乎移除了我们数据中的所有信息，因此我们最好的管道无法比我们的简单基线模型表现得更好。
 
 ### 接下来是什么？
 
@@ -239,27 +239,27 @@ automl_no_text.graph(best_pipeline_no_text)
 
 **相关：**
 
-+   [入门 5 个重要的自然语言处理库](/2021/02/getting-started-5-essential-nlp-libraries.html)
++   入门 5 个重要的自然语言处理库
 
-+   [自然语言处理管道解析](/2021/03/natural-language-processing-pipelines-explained.html)
++   自然语言处理管道解析
 
-+   [如何在命令行清理文本数据](/2020/12/clean-text-data-command-line.html)
++   如何在命令行清理文本数据
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [入门自动化文本摘要]((https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html))
++   入门自动化文本摘要)
 
 +   [什么是文本分类？](https://www.kdnuggets.com/2022/07/text-classification.html)
 

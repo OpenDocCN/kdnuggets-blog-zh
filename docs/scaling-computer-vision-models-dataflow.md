@@ -1,22 +1,22 @@
 # 使用 Dataflow 扩展计算机视觉模型
 
-> 原文：[https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
+> 原文：[`www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html`](https://www.kdnuggets.com/2020/07/scaling-computer-vision-models-dataflow.html)
 
-[评论](#comments)
+评论
 
 **作者 [Pablo Soto](https://www.linkedin.com/in/psoto23/)，[Pento](https://pento.ai/) 的创始合伙人**
 
-![图片](../Images/3c33a6f2dd790f9371940a8acaa33124.png)
+![图片](img/3c33a6f2dd790f9371940a8acaa33124.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -217,7 +217,7 @@ Dataflow 允许你指定机器类型、工作节点数量、目标等，提供�
 
 一旦你运行 Dataflow 管道，你将会在你的机器上看到关于执行状态的日志。另一种选择是使用 Dataflow Web UI。你可以在 [文档](https://cloud.google.com/dataflow/docs/guides/using-monitoring-intf) 中了解更多信息。
 
-![Dataflow UI](../Images/7cf31c9576737830d5cefcbb9631a793.png)
+![Dataflow UI](img/7cf31c9576737830d5cefcbb9631a793.png)
 
 你可以在 [这里查看完整代码](https://github.com/pento-group/dataflow-demo)。
 
@@ -270,11 +270,11 @@ Python 示例:
 
 **相关:**
 
-+   [使用 Tensorflow.js 实现计算机视觉应用的 6 个简单步骤](/2020/06/6-easy-steps-implement-computer-vision-application-tensorflow-js.html)
++   使用 Tensorflow.js 实现计算机视觉应用的 6 个简单步骤
 
-+   [使用机器学习和计算机视觉进行作物疾病检测](/2020/06/crop-disease-detection-computer-vision.html)
++   使用机器学习和计算机视觉进行作物疾病检测
 
-+   [使用深度学习自动旋转图像](/2020/07/auto-rotate-images-deep-learning.html)
++   使用深度学习自动旋转图像
 
 ### 更多相关内容
 
@@ -288,4 +288,4 @@ Python 示例:
 
 +   [关于数据管理你需要知道的 6 件事及其重要性](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在 5 分钟内构建一个机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建一个机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)

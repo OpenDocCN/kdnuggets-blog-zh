@@ -1,8 +1,8 @@
 # Python 突然变得非常受欢迎的 6 个原因
 
-> 原文：[https://www.kdnuggets.com/2017/07/6-reasons-python-suddenly-super-popular.html](https://www.kdnuggets.com/2017/07/6-reasons-python-suddenly-super-popular.html)
+> 原文：[`www.kdnuggets.com/2017/07/6-reasons-python-suddenly-super-popular.html`](https://www.kdnuggets.com/2017/07/6-reasons-python-suddenly-super-popular.html)
 
-[评论](#comments)
+评论
 
 你可能知道也可能不知道，Python 编程语言并不是年轻的。虽然它没有一些其他语言那么古老，但它存在的时间比大多数人认为的要长。它首次发布于 1991 年，尽管这些年来发生了很大变化，但它仍然用于当时的相同用途。
 
@@ -10,7 +10,7 @@
 
 使用 Python，确实没有限制。
 
-![Python](../Images/27283ea3616968fb7071321afe354d09.png)
+![Python](img/27283ea3616968fb7071321afe354d09.png)
 
 **Python 有什么特别之处？**
 
@@ -72,21 +72,21 @@ Python 是一种通用语言——有时被称为实用语言——设计上简�
 
 **相关：**
 
-+   [2017 年数据科学的前 15 大 Python 库](/2017/06/top-15-python-libraries-data-science.html)
++   2017 年数据科学的前 15 大 Python 库
 
-+   [用 Python 掌握数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   用 Python 掌握数据准备的 7 个步骤
 
-+   [数据分析入门 Python]( /2017/07/getting-started-python-data-analysis.html)
++   数据分析入门 Python
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -102,4 +102,4 @@ Python 是一种通用语言——有时被称为实用语言——设计上简�
 
 +   [停止学习数据科学以寻找目标，并寻找目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

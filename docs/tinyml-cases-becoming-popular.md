@@ -1,12 +1,12 @@
 # 为什么 TinyML 案例越来越受欢迎？
 
-> 原文：[https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
+> 原文：[`www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html`](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
 
-![为什么 TinyML 案例越来越受欢迎？](../Images/4ca3506fd8bf8de77342203bde20e0e8.png)
+![为什么 TinyML 案例越来越受欢迎？](img/4ca3506fd8bf8de77342203bde20e0e8.png)
 
 图片由[Nubia Navarro (nubikini)](https://www.pexels.com/photo/wall-e-die-cast-model-981588/)提供
 
-各类组织都使用机器学习来处理和分析大型数据集。TinyML（Tiny Machine Learning）是一种[机器学习](/2022/10/machine-learning-everybody.html) API，因其低功耗能力而日益受到欢迎。TinyML 正迅速成为从初学者层面掌握机器学习的最佳选择之一。
+各类组织都使用机器学习来处理和分析大型数据集。TinyML（Tiny Machine Learning）是一种机器学习 API，因其低功耗能力而日益受到欢迎。TinyML 正迅速成为从初学者层面掌握机器学习的最佳选择之一。
 
 本文将概述 TinyML 的定义、应用场景以及它为何越来越受欢迎。
 
@@ -28,7 +28,7 @@ TinyML 以非常优化的方式使机器学习在微控制器和[物联网](http
 
 +   **低功耗** - 微控制器是低功耗硬件，工作时只需几毫瓦和微瓦。这意味着微控制器的功耗约为普通计算机系统的千分之一。
 
-+   **低价格** - 微控制器非常便宜，仅在2020年就出货超过280亿个。
++   **低价格** - 微控制器非常便宜，仅在 2020 年就出货超过 280 亿个。
 
 +   **多功能使用** - 微控制器可以用于所有设备、工具和家电。
 
@@ -42,37 +42,37 @@ TinyML 以非常优化的方式使机器学习在微控制器和[物联网](http
 
 1.  **数据隐私** - 由于所有数据都保存在设备内部且没有连接，因此数据被泄露的风险极低。
 
-# TinyML的实施
+# TinyML 的实施
 
-有一些流行的机器学习框架支持TinyML。
+有一些流行的机器学习框架支持 TinyML。
 
 +   **Edge Impulse** 是一个免费的边缘设备（提供网络入口的硬件）机器学习开发平台。一个例子可能是路由器或路由交换机。
 
 +   **TensorFlow Lite** 是[一套工具库](https://www.tensorflow.org/lite/guide)，允许开发人员在嵌入式系统、边缘设备和其他独立设备上启用设备端机器学习。
 
-+   **PyTorch Mobile** 是一个开源的移动平台机器学习框架，兼容TinyML。
++   **PyTorch Mobile** 是一个开源的移动平台机器学习框架，兼容 TinyML。
 
-# 为什么TinyML越来越受欢迎？
+# 为什么 TinyML 越来越受欢迎？
 
-物联网（IoT）网络在各个行业中变得越来越普遍。因此，需要更多的边缘设备来连接电源和网络端点；TinyML以具有成本效益的方式满足这些要求。
+物联网（IoT）网络在各个行业中变得越来越普遍。因此，需要更多的边缘设备来连接电源和网络端点；TinyML 以具有成本效益的方式满足这些要求。
 
-如前所述，TinyML在不需要互联网连接的低功耗微控制器上工作。这使得设备能够在不消耗大量资源的情况下[实时处理和响应数据](/2020/05/optimize-response-time-machine-learning-api-production.html)。
+如前所述，TinyML 在不需要互联网连接的低功耗微控制器上工作。这使得设备能够在不消耗大量资源的情况下实时处理和响应数据。
 
-TinyML模型可以作为云环境的替代方案，降低成本，减少能耗，并提供更多的数据隐私。所有数据都在单个设备上处理，没有延迟，确保了令人印象深刻的连接和处理速度。
+TinyML 模型可以作为云环境的替代方案，降低成本，减少能耗，并提供更多的数据隐私。所有数据都在单个设备上处理，没有延迟，确保了令人印象深刻的连接和处理速度。
 
-TinyML在2022年变得越来越受欢迎，研究人员预计未来将进一步增长。技术研究和战略指导集团ABI预测，到2030年，[将有25亿台设备](https://www.abiresearch.com/press/tinyml-device-shipments-grow-25-billion-2030-15-million-2020/)使用TinyML系统。
+TinyML 在 2022 年变得越来越受欢迎，研究人员预计未来将进一步增长。技术研究和战略指导集团 ABI 预测，到 2030 年，[将有 25 亿台设备](https://www.abiresearch.com/press/tinyml-device-shipments-grow-25-billion-2030-15-million-2020/)使用 TinyML 系统。
 
-TinyML的优势从即时分析到零延迟，使其成为一个在依赖速度的世界中显而易见的选择。此外，本地数据处理意味着敏感信息比集中数据中心更好地保护免受网络犯罪分子的威胁。
+TinyML 的优势从即时分析到零延迟，使其成为一个在依赖速度的世界中显而易见的选择。此外，本地数据处理意味着敏感信息比集中数据中心更好地保护免受网络犯罪分子的威胁。
 
-# TinyML面临的挑战
+# TinyML 面临的挑战
 
-尽管TinyML的好处和潜力很明显，但它并非没有挑战，这些挑战可能对开发人员构成一些问题。
+尽管 TinyML 的好处和潜力很明显，但它并非没有挑战，这些挑战可能对开发人员构成一些问题。
 
-+   **有限的内存容量** - 使用TinyML的嵌入式系统的内存通常只有几兆字节，有时甚至只有几千字节。这对TinyML模型的复杂性施加了重大限制，因此只有少数框架可以用于TinyML开发。
++   **有限的内存容量** - 使用 TinyML 的嵌入式系统的内存通常只有几兆字节，有时甚至只有几千字节。这对 TinyML 模型的复杂性施加了重大限制，因此只有少数框架可以用于 TinyML 开发。
 
-+   **无法远程故障排除** - 由于TinyML模型仅在本地设备上运行，开发人员进行故障排除以确定和修复问题变得更加困难。这就是[云环境](/2019/06/understanding-cloud-data-services.html)提供优势的地方。
++   **无法远程故障排除** - 由于 TinyML 模型仅在本地设备上运行，开发人员进行故障排除以确定和修复问题变得更加困难。这就是云环境提供优势的地方。
 
-# TinyML在实际情况中如何应用？
+# TinyML 在实际情况中如何应用？
 
 TinyML 可以有效应用于许多不同的行业，几乎所有使用 IoT 网络和数据的行业。以下是一些 TinyML 已用于推动操作的行业。
 
@@ -96,7 +96,7 @@ TinyML 还可以用于实时健康监测设备，为患者提供更好、更个�
 
 ## 制造
 
-TinyML 可用于[推动预测性维护](/2021/01/unsupervised-learning-predictive-maintenance-auto-encoders.html)工具，帮助减少任何停机时间和因设备停运而产生的额外成本。
+TinyML 可用于推动预测性维护工具，帮助减少任何停机时间和因设备停运而产生的额外成本。
 
 # 结论
 
@@ -112,11 +112,11 @@ TinyML 已被农业、制造业和医疗行业有效使用，其受欢迎程度�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

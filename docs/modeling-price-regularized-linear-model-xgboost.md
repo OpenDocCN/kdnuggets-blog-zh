@@ -1,8 +1,8 @@
 # 使用正则化线性模型和 XGBoost 建模价格
 
-> 原文：[https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html](https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html)
+> 原文：[`www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html`](https://www.kdnuggets.com/2019/05/modeling-price-regularized-linear-model-xgboost.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Susan Li](https://www.linkedin.com/in/susanli/)，高级数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -51,7 +51,7 @@ df = pd.read_csv('house_train.csv')
 df.shape
 ```
 
-![图像](../Images/400ca1990b116f3a2bfe48c0a7c8f3e1.png)
+![图像](img/400ca1990b116f3a2bfe48c0a7c8f3e1.png)
 
 图 1
 
@@ -59,7 +59,7 @@ df.shape
 (df.isnull().sum() / len(df)).sort_values(ascending=False)[:20]
 ```
 
-![图像](../Images/1830468153937fb58fc289aef89975cc.png)
+![图像](img/1830468153937fb58fc289aef89975cc.png)
 
 图 2
 
@@ -92,7 +92,7 @@ res = stats.probplot(df['SalePrice'], plot=plt)
 plt.show();
 ```
 
-![图像](../Images/23a0ee26011f1de8cc74c911d430a5fa.png)
+![图像](img/23a0ee26011f1de8cc74c911d430a5fa.png)
 
 图 3
 
@@ -117,7 +117,7 @@ res = stats.probplot(np.log1p(df['SalePrice']), plot=plt)
 plt.show();
 ```
 
-![图像](../Images/2c04a4ee0f8aa68125e2988ac87e3145.png)
+![图像](img/2c04a4ee0f8aa68125e2988ac87e3145.png)
 
 图 4
 
@@ -131,7 +131,7 @@ plt.suptitle("Pearson Correlation Heatmap")
 plt.show();
 ```
 
-![图像](../Images/adaa4910f1cd52b6cb2a19f917ff4874.png)
+![图像](img/adaa4910f1cd52b6cb2a19f917ff4874.png)
 
 图 5
 
@@ -146,7 +146,7 @@ corr_with_sale_price.drop("SalePrice").plot.bar()
 plt.show();
 ```
 
-![图](../Images/9ccdde1368609efc06eebb128b05b154.png)
+![图](img/9ccdde1368609efc06eebb128b05b154.png)
 
 图 6
 
@@ -157,7 +157,7 @@ sns.pairplot(df[['SalePrice', 'OverallQual', 'GrLivArea', 'GarageCars']])
 plt.show();
 ```
 
-![图](../Images/806f7fed1c21eae6cc20f99891cce867.png)
+![图](img/806f7fed1c21eae6cc20f99891cce867.png)
 
 图 7
 
@@ -189,7 +189,7 @@ feature_engineering_price.py
 
 ElasticNetCV.py
 
-![](../Images/369d93d5ff7928d74aa7423c9e017608.png)
+![](img/369d93d5ff7928d74aa7423c9e017608.png)
 
 图 8
 
@@ -199,7 +199,7 @@ ElasticNetCV.py
 
 ElasticNetCV_evaluation.py
 
-![图](../Images/f455d4f7238efad312b8d52742416b95.png)
+![图](img/f455d4f7238efad312b8d52742416b95.png)
 
 图 9
 
@@ -217,7 +217,7 @@ print('{0:d} features, reduction of {1:2.2f}%'.format(
 feature_importance.sort_values().tail(30).plot(kind = 'bar', figsize = (12,5));
 ```
 
-![图](../Images/80e32f97e3f1dc425d779972f73c45c8.png)
+![图](img/80e32f97e3f1dc425d779972f73c45c8.png)
 
 图 10
 
@@ -229,7 +229,7 @@ feature_importance.sort_values().tail(30).plot(kind = 'bar', figsize = (12,5));
 
 xgb_model1.py
 
-![图](../Images/a0d49964d20588bfccfb278f5c327ac7.png)
+![图](img/a0d49964d20588bfccfb278f5c327ac7.png)
 
 图 11
 
@@ -239,21 +239,21 @@ xgb_model1.py
 
 xgb_model2.py
 
-![图像](../Images/17d6fe7f32772f7c31d43d5e0f818578.png)
+![图像](img/17d6fe7f32772f7c31d43d5e0f818578.png)
 
-图12
+图 12
 
 又有了改进！
 
-第三个Xgboost模型中，我们加入了学习率，希望能得到更准确的模型。
+第三个 Xgboost 模型中，我们加入了学习率，希望能得到更准确的模型。
 
 xgb_model3.py
 
-![图像](../Images/fefc8fc0a347a500146fefb068ceb5ab.png)
+![图像](img/fefc8fc0a347a500146fefb068ceb5ab.png)
 
-图13
+图 13
 
-不幸的是，没有改进。我得出结论xgb_model2是最佳模型。
+不幸的是，没有改进。我得出结论 xgb_model2 是最佳模型。
 
 **特征重要性**
 
@@ -262,21 +262,21 @@ from collections import OrderedDict
 OrderedDict(sorted(xgb_model2.get_booster().get_fscore().items(), key=lambda t: t[1], reverse=True))
 ```
 
-![图像](../Images/b1ad2d60c6c9805201c37dd33e3985af.png)
+![图像](img/b1ad2d60c6c9805201c37dd33e3985af.png)
 
-图14
+图 14
 
-Xgboost选出的前4个最重要特征是**LotArea**、**GrLivArea**、**OverallQual**和**TotalBsmtSF**。
+Xgboost 选出的前 4 个最重要特征是**LotArea**、**GrLivArea**、**OverallQual**和**TotalBsmtSF**。
 
-只有一个特征**GrLivArea**被ElasticNetCV和Xgboost都选中了。
+只有一个特征**GrLivArea**被 ElasticNetCV 和 Xgboost 都选中了。
 
-现在我们将选择一些相关特征，再次拟合Xgboost。
+现在我们将选择一些相关特征，再次拟合 Xgboost。
 
 xgb_model5.py
 
-![图像](../Images/b8d35c6db82deef0ea04c51bc55b8ca8.png)
+![图像](img/b8d35c6db82deef0ea04c51bc55b8ca8.png)
 
-图15
+图 15
 
 又有了小改进！
 
@@ -288,22 +288,22 @@ xgb_model5.py
 
 **相关:**
 
-+   [揭开XGBoost背后的数学](https://www.kdnuggets.com/2018/08/unveiling-mathematics-behind-xgboost.html)
++   [揭开 XGBoost 背后的数学](https://www.kdnuggets.com/2018/08/unveiling-mathematics-behind-xgboost.html)
 
-+   [使用Scikit-Learn进行多分类文本分类](/2018/08/multi-class-text-classification-scikit-learn.html)
++   使用 Scikit-Learn 进行多分类文本分类
 
-+   [简单神经网络和LSTM的时间序列预测介绍](/2019/04/introduction-time-series-forecasting-simple-neural-networks-lstm.html)
++   简单神经网络和 LSTM 的时间序列预测介绍
 
 ### 更多相关内容
 
-+   [如何加速XGBoost模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
++   [如何加速 XGBoost 模型训练](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
 
-+   [XGBoost的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)
++   [XGBoost 的假设是什么？](https://www.kdnuggets.com/2022/08/assumptions-xgboost.html)
 
-+   [调整XGBoost超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
++   [调整 XGBoost 超参数](https://www.kdnuggets.com/2022/08/tuning-xgboost-hyperparameters.html)
 
-+   [利用XGBoost进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)
++   [利用 XGBoost 进行时间序列预测](https://www.kdnuggets.com/2023/08/leveraging-xgboost-timeseries-forecasting.html)
 
-+   [GBM与XGBoost的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)
++   [GBM 与 XGBoost 的区别是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)
 
 +   [线性回归模型选择：平衡简洁性与复杂性](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)

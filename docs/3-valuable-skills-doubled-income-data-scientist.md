@@ -1,8 +1,8 @@
-# 使我的收入翻倍的3个宝贵技能
+# 使我的收入翻倍的 3 个宝贵技能
 
-> 原文：[https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html](https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html`](https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html)
 
-![作为数据科学家使我的收入翻倍的3个宝贵技能](../Images/13476b72d091756b5b5786ea471cfa6c.png)
+![作为数据科学家使我的收入翻倍的 3 个宝贵技能](img/13476b72d091756b5b5786ea471cfa6c.png)
 
 图片由 [drobotdean](https://www.freepik.com/free-photo/portrait-cheerful-rich-man-white-shirt-winning-lots-money-dollar-currency-using-his-notebook-dark-gray_6514156.htm#query=salary&position=47&from_view=search&track=sph) 提供，来源于 Freepik
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -38,7 +38,7 @@
 
 # 1\. 时间管理
 
-![作为数据科学家使我的收入翻倍的3个宝贵技能](../Images/e57d8603a6fb009eab92a4f3fd49709c.png)
+![作为数据科学家使我的收入翻倍的 3 个宝贵技能](img/e57d8603a6fb009eab92a4f3fd49709c.png)
 
 图片由 [Kevin Ku](https://unsplash.com/@ikukevk?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/time-managment?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -54,11 +54,11 @@
 
 ## 管理休息时间
 
-你不能每天工作12到18小时来完成项目。不间断的工作会以灾难告终，你会开始感受到倦怠的症状。管理休息时间是一项技能，如果你想持续成功，你需要将其作为优先事项。
+你不能每天工作 12 到 18 小时来完成项目。不间断的工作会以灾难告终，你会开始感受到倦怠的症状。管理休息时间是一项技能，如果你想持续成功，你需要将其作为优先事项。
 
-每天，我会在工作中休息1-2小时。每周，有一个较长的休息时间，每年则有一个长假。
+每天，我会在工作中休息 1-2 小时。每周，有一个较长的休息时间，每年则有一个长假。
 
-即使在项目进行中，你也需要多次休息30分钟，即使你感到卡壳和沮丧。不管多么紧急，你的健康永远放在首位。
+即使在项目进行中，你也需要多次休息 30 分钟，即使你感到卡壳和沮丧。不管多么紧急，你的健康永远放在首位。
 
 ## 管理日历
 
@@ -84,7 +84,7 @@
 
 # 2\. 深入研究和调研
 
-![3个宝贵的技能使我作为数据科学家的收入翻倍](../Images/ec2ad812b296911f6f139692c080f968.png)
+![3 个宝贵的技能使我作为数据科学家的收入翻倍](img/ec2ad812b296911f6f139692c080f968.png)
 
 照片由[UX Indonesia](https://unsplash.com/@uxindo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来源于[Unsplash](https://unsplash.com/s/photos/research?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -110,13 +110,13 @@
 
 深入研究话题或数据将帮助你发现对公司有价值的见解。
 
-永远记住，你的工作代表了你。为什么你会看到一些承包商要价300美元/小时而其他人只要60美元/小时？
+永远记住，你的工作代表了你。为什么你会看到一些承包商要价 300 美元/小时而其他人只要 60 美元/小时？
 
 工作的质量将帮助你建立一个强大的作品集。
 
 # 3\. 沟通
 
-![3个提高收入的宝贵技能](../Images/456d119613aea31c0d9a6e180c06a4c2.png)
+![3 个提高收入的宝贵技能](img/456d119613aea31c0d9a6e180c06a4c2.png)
 
 图片由 [Austin Distel](https://unsplash.com/@austindistel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，[Unsplash](https://unsplash.com/s/photos/communication?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -174,18 +174,18 @@
 
     +   通过诚实和努力工作来建立你的声誉。确保公平对待每个人。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专家，他热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些遭受心理疾病困扰的学生开发一款人工智能产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专家，他热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些遭受心理疾病困扰的学生开发一款人工智能产品。
 
 ### 相关主题
 
-+   [我如何在2个月内获得4个数据科学职位并使收入翻倍](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
++   [我如何在 2 个月内获得 4 个数据科学职位并使收入翻倍](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
 
 +   [数据：企业最宝贵的商品](https://www.kdnuggets.com/2022/03/data-valuable-commodity-businesses.html)
 
-+   [利用你的数据科学技能创造5种收入来源](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)
++   [利用你的数据科学技能创造 5 种收入来源](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)
 
-+   [每个数据科学家应该具备的13项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每个数据科学家应该具备的 13 项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
 
-+   [KDnuggets 新闻 3月30日：最受欢迎的编程入门指南…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻 3 月 30 日：最受欢迎的编程入门指南…](https://www.kdnuggets.com/2022/n13.html)
 
-+   [用数据科学翻倍你的收入的5种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)
++   [用数据科学翻倍你的收入的 5 种方法](https://www.kdnuggets.com/2022/05/5-ways-double-income-data-science.html)

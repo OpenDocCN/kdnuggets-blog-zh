@@ -1,12 +1,12 @@
-# 使用随机森林®而非神经网络的3个理由：比较机器学习与深度学习
+# 使用随机森林®而非神经网络的 3 个理由：比较机器学习与深度学习
 
-> 原文：[https://www.kdnuggets.com/2020/04/3-reasons-random-forest-neural-network-comparison.html](https://www.kdnuggets.com/2020/04/3-reasons-random-forest-neural-network-comparison.html)
+> 原文：[`www.kdnuggets.com/2020/04/3-reasons-random-forest-neural-network-comparison.html`](https://www.kdnuggets.com/2020/04/3-reasons-random-forest-neural-network-comparison.html)
 
-[评论](#comments)
+评论
 
 [神经网络](https://blog.exxactcorp.com/?s=neural+network)已被证明在许多行业领域中优于多种机器学习算法。它们会不断学习，直到找到最佳特征集以获得令人满意的预测性能。然而，神经网络会将你的变量缩放成一系列数字，一旦神经网络完成学习阶段，这些特征对我们来说变得不可辨识。
 
-![图](../Images/46aea79146c807b65c75ca95ffd2b94d.png)
+![图](img/46aea79146c807b65c75ca95ffd2b94d.png)
 
 [图片来源](http://unsplash.com/)
 
@@ -20,7 +20,7 @@
 
 一个**神经网络**是一个计算模型，松散地基于人类大脑皮层的功能，以复制相同的思维和感知方式。神经网络按层组织，由互联的节点组成，这些节点包含一个激活函数，用于计算网络的输出。
 
-![图](../Images/c7f1dc993a06a680cfb52bfe0f1bcfe4.png)
+![图](img/c7f1dc993a06a680cfb52bfe0f1bcfe4.png)
 
 [图片来源](https://www.intellisystem.it/en/category/news/news-tecnologia/)
 
@@ -28,7 +28,7 @@
 
 ### 神经网络的架构
 
-神经网络有3种基本架构：
+神经网络有 3 种基本架构：
 
 1\. 单层前馈网络
 
@@ -44,7 +44,7 @@
 
 ### 什么是随机森林算法？
 
-![图示](../Images/edada7a9d76fa2238a07e00aeaeaca8f.png)
+![图示](img/edada7a9d76fa2238a07e00aeaeaca8f.png)
 
 [图片来源](http://events.constantcontact.com/register/event?llr=x9cqvsdab&oeidk=a07egvxohhadf4625dc)
 
@@ -78,21 +78,21 @@ RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
 **相关：**
 
-+   [随机森林® — 一种强大的集成学习算法](/2020/01/random-forest-powerful-ensemble-learning-algorithm.html)
++   随机森林® — 一种强大的集成学习算法
 
-+   [随机森林®与神经网络在预测客户流失中的比较](/2019/12/random-forest-vs-neural-networks-predicting-customer-churn.html)
++   随机森林®与神经网络在预测客户流失中的比较
 
-+   [比较决策树算法：随机森林®与XGBoost](/2019/08/activestate-decision-tree-random-forest-xgboost.html)
++   比较决策树算法：随机森林®与 XGBoost
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -104,8 +104,8 @@ RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
 +   [调优随机森林超参数](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)
 
-+   [你应该使用线性回归模型而不是…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [你应该使用线性回归模型而不是…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [通过构建2022年的15个神经网络项目来学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
++   [通过构建 2022 年的 15 个神经网络项目来学习深度学习](https://www.kdnuggets.com/2022/01/15-neural-network-projects-build-2022.html)
 
-+   [你不应该使用机器学习的4个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [你不应该使用机器学习的 4 个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)

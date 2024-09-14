@@ -1,6 +1,6 @@
 # 基于密度的空间聚类（DBSCAN）
 
-> 原文：[https://www.kdnuggets.com/2017/10/density-based-spatial-clustering-applications-noise-dbscan.html](https://www.kdnuggets.com/2017/10/density-based-spatial-clustering-applications-noise-dbscan.html)
+> 原文：[`www.kdnuggets.com/2017/10/density-based-spatial-clustering-applications-noise-dbscan.html`](https://www.kdnuggets.com/2017/10/density-based-spatial-clustering-applications-noise-dbscan.html)
 
 **由 [Abhijit Annaldas](https://www.linkedin.com/in/avannaldas/), Microsoft 提供。**
 
@@ -34,7 +34,7 @@ DBSCAN 聚类可以总结为以下步骤...
 
 1.  为了便于解释，假设 **一个 *核心* 点及其距离 *n* 内的所有点** 组成一个核心集。所有重叠的核心集被分组到一个簇中。就像多个单独的图被连接形成一个连通图的集合。
 
-![](../Images/4947a12ea2689da7bb4973976189d64c.png)
+![](img/4947a12ea2689da7bb4973976189d64c.png)
 
 由于聚类完全依赖于参数 *n* 和 *m*（如上所述），正确选择这些值非常重要。虽然对该领域有较好的领域知识有助于选择这些参数的良好值，但也有一些方法可以在没有深厚领域专业知识的情况下相对准确地估算这些参数。
 
@@ -46,21 +46,21 @@ DBSCAN 聚类可以总结为以下步骤...
 
 **相关：**
 
-+   [用 Python 和 SciPy 比较距离测量](/2017/08/comparing-distance-measurements-python-scipy.html)
++   用 Python 和 SciPy 比较距离测量
 
-+   [必须知道：如何确定最有用的聚类数？](/2017/05/must-know-most-useful-number-clusters.html)
++   必须知道：如何确定最有用的聚类数？
 
-+   [文本聚类：从非结构化数据中获取快速洞察](/2017/06/text-clustering-unstructured-data.html)
++   文本聚类：从非结构化数据中获取快速洞察
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

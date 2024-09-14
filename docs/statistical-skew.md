@@ -1,8 +1,8 @@
 # 统计学中的偏度是什么？
 
-> 原文：[https://www.kdnuggets.com/2022/11/statistical-skew.html](https://www.kdnuggets.com/2022/11/statistical-skew.html)
+> 原文：[`www.kdnuggets.com/2022/11/statistical-skew.html`](https://www.kdnuggets.com/2022/11/statistical-skew.html)
 
-![统计学中的偏度是什么？](../Images/2de57048e0038cb9e69fc41d76d4429b.png)
+![统计学中的偏度是什么？](img/2de57048e0038cb9e69fc41d76d4429b.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -26,7 +26,7 @@
 
 分布可以是右偏（正偏）、左偏（负偏）或零偏度。正偏度和负偏度的分布尾部会逐渐远离中位数。
 
-![统计学中的偏度是什么？](../Images/8b343ea2c4dbb0c6a7be41cbcdda6270.png)
+![统计学中的偏度是什么？](img/8b343ea2c4dbb0c6a7be41cbcdda6270.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/Skewness#/media/File:Relationship_between_mean_and_median_under_different_skewness.png)
 
@@ -50,19 +50,19 @@
 
 Pearson 的第一个偏度系数：
 
-![统计学中的偏度是什么？](../Images/0e5b04b15ab91137fb6e244445cd9e5a.png)
+![统计学中的偏度是什么？](img/0e5b04b15ab91137fb6e244445cd9e5a.png)
 
-+   ![公式](../Images/357049e64d3302bb29db1dce888079a7.png) = Pearson 的第一个偏度系数
++   ![公式](img/357049e64d3302bb29db1dce888079a7.png) = Pearson 的第一个偏度系数
 
-+   ![方程](../Images/4c854b6a0e1352c948816bb668cecf35.png) = 标准差
++   ![方程](img/4c854b6a0e1352c948816bb668cecf35.png) = 标准差
 
-+   ![方程](../Images/f57dc09155686afe32b2afd676a3b81d.png) = 平均值
++   ![方程](img/f57dc09155686afe32b2afd676a3b81d.png) = 平均值
 
-+   ![方程](../Images/ab3093a167bf215ebd87a311fb516bd2.png) = 中位数值
++   ![方程](img/ab3093a167bf215ebd87a311fb516bd2.png) = 中位数值
 
 皮尔逊第二偏度系数：
 
-![什么是统计偏度？](../Images/1f495f1c6a8de81ee2391db2b9243717.png)
+![什么是统计偏度？](img/1f495f1c6a8de81ee2391db2b9243717.png)
 
 # 对偏斜数据怎么办？
 
@@ -84,20 +84,20 @@ Pearson 的第一个偏度系数：
 
 我希望这篇文章能帮助你更好地理解偏度是什么、不同类型的偏度、如何计算它，以及当你遇到偏斜数据时下一步该怎么做。
 
-如果你想了解更多关于统计术语的解释，可以阅读：[描述性统计关键术语解析](/2017/05/descriptive-statistics-key-terms-explained.html)
+如果你想了解更多关于统计术语的解释，可以阅读：描述性统计关键术语解析
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由技术写作人。她特别感兴趣于提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何/可以促进人类生命的持久性。作为一个热衷的学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助引导他人。
 
 ### 更多相关话题
 
-+   [Python中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
++   [Python 中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
 
-+   [5个数据科学家应了解的统计悖论](https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html)
++   [5 个数据科学家应了解的统计悖论](https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html)
 
-+   [统计学习导论，Python版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
++   [统计学习导论，Python 版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 
-+   [10个基本统计概念的简单解释](https://www.kdnuggets.com/10-basic-statistical-concepts-in-plain-english)
++   [10 个基本统计概念的简单解释](https://www.kdnuggets.com/10-basic-statistical-concepts-in-plain-english)
 
-+   [10个Python统计函数](https://www.kdnuggets.com/10-python-statistical-functions)
++   [10 个 Python 统计函数](https://www.kdnuggets.com/10-python-statistical-functions)
 
-+   [基础知识回顾第2周：数据库、SQL、数据管理及…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [基础知识回顾第 2 周：数据库、SQL、数据管理及…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)

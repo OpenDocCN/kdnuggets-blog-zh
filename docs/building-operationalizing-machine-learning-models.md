@@ -1,12 +1,12 @@
 # 建立和操作机器学习模型：成功的三个建议
 
-> 原文：[https://www.kdnuggets.com/2021/10/building-operationalizing-machine-learning-models.html](https://www.kdnuggets.com/2021/10/building-operationalizing-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2021/10/building-operationalizing-machine-learning-models.html`](https://www.kdnuggets.com/2021/10/building-operationalizing-machine-learning-models.html)
 
-[评论](#comments)
+评论
 
 **由 [杰森·雷维尔](https://www.linkedin.com/in/jayrevel/)，首席技术官，Datatron**。
 
-![](../Images/f076cb1d8aa4676ac8ffbbba92fc52fc.png)
+![](img/f076cb1d8aa4676ac8ffbbba92fc52fc.png)
 
 机器学习的最大承诺之一是通过计算人类认知来简化事物。随着企业在数字化转型过程中实施机器学习（ML）以提升收入和运营，但所有机器学习背后的承诺和机遇，可能会迅速让负责管理生产中的 ML 的团队感到困难。
 
@@ -20,7 +20,7 @@ ML 模型从来不会在第一次、第二次……或通常甚至第三次就�
 
 ### 2\. 接受数据科学家和机器学习工程师所承诺的创新通常不符合传统的、以应用为中心的“批准软件”政策。
 
-机器学习是一个快速增长和多样化的领域，技术供应商的名单不断扩展，无论大小。没有人会质疑IT需要维持适当的控制、进行安全扫描和支持操作环境。然而，将相同的控制和流程用于管理操作或产品托管技术到您的机器学习实践中，很可能会大大降低您在跨越起跑线之前所获得的回报。此外，许多数据科学家是强大的技术专家和发明家，如果他们觉得被迫在不改变所用技术或如何利用它的情况下不断提供更好的结果，他们可能会寻找其他就业机会。
+机器学习是一个快速增长和多样化的领域，技术供应商的名单不断扩展，无论大小。没有人会质疑 IT 需要维持适当的控制、进行安全扫描和支持操作环境。然而，将相同的控制和流程用于管理操作或产品托管技术到您的机器学习实践中，很可能会大大降低您在跨越起跑线之前所获得的回报。此外，许多数据科学家是强大的技术专家和发明家，如果他们觉得被迫在不改变所用技术或如何利用它的情况下不断提供更好的结果，他们可能会寻找其他就业机会。
 
 ### 3\. 不要把模型开发生命周期误认为只是另一个软件开发生命周期
 
@@ -36,19 +36,19 @@ ML 模型从来不会在第一次、第二次……或通常甚至第三次就�
 
 +   [如何解决实际世界中的机器学习问题](https://www.kdnuggets.com/2021/09/solve-machine-learning-problems-real-world.html)
 
-+   [MLOps是一个工程学科：初学者概述](https://www.kdnuggets.com/2021/07/mlops-engineering-discipline.html)
++   [MLOps 是一个工程学科：初学者概述](https://www.kdnuggets.com/2021/07/mlops-engineering-discipline.html)
 
-+   [MLOps概述](https://www.kdnuggets.com/2021/03/overview-mlops.html)
++   [MLOps 概述](https://www.kdnuggets.com/2021/03/overview-mlops.html)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

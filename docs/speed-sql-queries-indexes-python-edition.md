@@ -1,6 +1,6 @@
 # 如何使用索引加速 SQL 查询 [Python 版]
 
-> 原文：[https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
+> 原文：[`www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html`](https://www.kdnuggets.com/2023/08/speed-sql-queries-indexes-python-edition.html)
 
 ![如何使用索引加速 SQL 查询 [Python 版]](../Images/6dd7f74dcf25f10a17a48f0c17ae157a.png)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT
 
 * * *
 
@@ -362,20 +362,20 @@ Query time with index: 167.179 us
 
 我希望本指南帮助你了解如何通过在**频繁查询的列**上创建数据库索引来显著提高查询速度。这是关于数据库索引的介绍。你还可以创建多列索引、同一列的多个索引等。
 
-你可以在[这个GitHub仓库](https://github.com/balapriyac/sql-index-intro)找到本教程中使用的所有代码。祝编程愉快！
+你可以在[这个 GitHub 仓库](https://github.com/balapriyac/sql-index-intro)找到本教程中使用的所有代码。祝编程愉快！
 
-**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等与开发者社区分享她的知识。
+**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等与开发者社区分享她的知识。
 
 ### 更多相关主题
 
-+   [数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
++   [数据库优化：探索 SQL 中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
 
-+   [Python向量数据库和向量索引：架构LLM应用](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
++   [Python 向量数据库和向量索引：架构 LLM 应用](https://www.kdnuggets.com/2023/08/python-vector-databases-vector-indexes-architecting-llm-apps.html)
 
-+   [数据科学中4个有用的中级SQL查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
++   [数据科学中 4 个有用的中级 SQL 查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 
-+   [5个棘手的SQL查询解决方案](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)
++   [5 个棘手的 SQL 查询解决方案](https://www.kdnuggets.com/2020/11/5-tricky-sql-queries-solved.html)
 
-+   [解决5个复杂SQL问题：棘手查询解释](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
++   [解决 5 个复杂 SQL 问题：棘手查询解释](https://www.kdnuggets.com/2022/07/5-hardest-things-sql.html)
 
-+   [KDnuggets 新闻，12月7日：揭示数据科学的十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭示数据科学的十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)

@@ -1,10 +1,10 @@
-# 2018年数据科学、深度学习、机器学习领域的顶级Python库
+# 2018 年数据科学、深度学习、机器学习领域的顶级 Python 库
 
-> 原文：[https://www.kdnuggets.com/2018/12/top-python-libraries-2018.html](https://www.kdnuggets.com/2018/12/top-python-libraries-2018.html)
+> 原文：[`www.kdnuggets.com/2018/12/top-python-libraries-2018.html`](https://www.kdnuggets.com/2018/12/top-python-libraries-2018.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-我们最近发布了一系列文章，探讨了顶级Python库，包括[数据科学](https://www.kdnuggets.com/2018/11/top-python-data-science-libraries.html)、[深度学习](https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html)和[机器学习](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)。随着一年即将结束，我们决定给你一个特别的圣诞礼物，将这些整理成KDnuggets官方的2018年顶级Python库。
+我们最近发布了一系列文章，探讨了顶级 Python 库，包括[数据科学](https://www.kdnuggets.com/2018/11/top-python-data-science-libraries.html)、[深度学习](https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html)和[机器学习](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)。随着一年即将结束，我们决定给你一个特别的圣诞礼物，将这些整理成 KDnuggets 官方的 2018 年顶级 Python 库。
 
 一如既往，我们想听听你的意见！如果你认为我们遗漏了任何内容，或对我们的选择有不同看法，请在下面的评论区告诉我们。
 
@@ -12,27 +12,27 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-![2018年顶级Python库](../Images/233c593f13841e1f3a8c5286b4a5e6e7.png)
+![2018 年顶级 Python 库](img/233c593f13841e1f3a8c5286b4a5e6e7.png)
 
-**图 1：按GitHub星标和贡献者排名的顶级Python库。形状大小与提交次数成正比。**
+**图 1：按 GitHub 星标和贡献者排名的顶级 Python 库。形状大小与提交次数成正比。**
 
-所以这就是我们2018年顶级的15个Python库（所有数据截至2018年12月16日）：
+所以这就是我们 2018 年顶级的 15 个 Python 库（所有数据截至 2018 年 12 月 16 日）：
 
 1 – [**TensorFlow**](https://github.com/tensorflow/tensorflow)** (贡献者 – 1757, 提交 – 25756, 星标 – 116765)**
 
-“**TensorFlow** 是一个开源的软件库，用于通过数据流图进行数值计算。图节点代表数学操作，而图边代表在节点之间流动的多维数据数组（张量）。这种灵活的架构使你能够将计算部署到一个或多个CPU或GPU上，无论是桌面、服务器还是移动设备上，无需重写代码。”
+“**TensorFlow** 是一个开源的软件库，用于通过数据流图进行数值计算。图节点代表数学操作，而图边代表在节点之间流动的多维数据数组（张量）。这种灵活的架构使你能够将计算部署到一个或多个 CPU 或 GPU 上，无论是桌面、服务器还是移动设备上，无需重写代码。”
 
 2 – [**pandas**](https://github.com/pandas-dev/pandas)** (贡献者 – 1360, 提交 – 18441, 星标 – 17388)**
 
-“**pandas** 是一个Python包，提供快速、灵活且富有表现力的数据结构，旨在使处理“关系型”或“标记”数据变得既简单又直观。它旨在成为在Python中进行实际的**真实世界**数据分析的基础高层构建块。”
+“**pandas** 是一个 Python 包，提供快速、灵活且富有表现力的数据结构，旨在使处理“关系型”或“标记”数据变得既简单又直观。它旨在成为在 Python 中进行实际的**真实世界**数据分析的基础高层构建块。”
 
 3 – [**scikit-learn**](https://github.com/scikit-learn/scikit-learn)** (贡献者 – 1218, 提交 – 23509, 星标 – 32326)**
 
@@ -100,11 +100,11 @@
 
 **相关：**
 
-+   [前10大 Python 数据科学库](https://www.kdnuggets.com/2018/11/top-python-data-science-libraries.html)
++   [前 10 大 Python 数据科学库](https://www.kdnuggets.com/2018/11/top-python-data-science-libraries.html)
 
-+   [前13大 Python 深度学习库](https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html)
++   [前 13 大 Python 深度学习库](https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html)
 
-+   [前8大 Python 机器学习库](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)
++   [前 8 大 Python 机器学习库](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)
 
 ### 了解更多相关内容
 
@@ -118,4 +118,4 @@
 
 +   [成功数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [一桩90亿美元的 AI 失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一桩 90 亿美元的 AI 失败，经过审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

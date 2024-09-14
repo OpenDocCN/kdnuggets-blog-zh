@@ -1,8 +1,8 @@
 # 顶级 18 个数据科学 Facebook 小组
 
-> 原文：[https://www.kdnuggets.com/2022/06/top-18-data-science-facebook-groups.html](https://www.kdnuggets.com/2022/06/top-18-data-science-facebook-groups.html)
+> 原文：[`www.kdnuggets.com/2022/06/top-18-data-science-facebook-groups.html`](https://www.kdnuggets.com/2022/06/top-18-data-science-facebook-groups.html)
 
-![顶级 18 个数据科学 Facebook 小组](../Images/3ee8f6742dc45ee7e10b94d42252094e.png)
+![顶级 18 个数据科学 Facebook 小组](img/3ee8f6742dc45ee7e10b94d42252094e.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -64,18 +64,18 @@
 
 如果你在使用 Facebook 小组推广你的内容，组管理员会禁止你，如果你继续在其他小组发布相同的内容，Facebook 会阻止你发帖。这些限制使这些小组成为学习机器学习、深度学习、数据分析、大数据、商业智能和 SQL 的绝佳地方。你只需加入这些不断壮大的数据科学专业人士和爱好者小组即可。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款AI产品，帮助那些面临心理健康问题的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款 AI 产品，帮助那些面临心理健康问题的学生。
 
 ### 更多相关话题
 
 +   [LinkedIn 上的前 18 个数据科学小组](https://www.kdnuggets.com/2022/06/top-18-data-science-group-linkedin.html)
 
-+   [KDnuggets 新闻，12月7日：揭示数据科学的十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭示数据科学的十大误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
 
-+   [KDnuggets 新闻，6月8日：数据科学的21份备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：数据科学的 21 份备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
 +   [数据科学、数据可视化及其他的前 38 个 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入了解13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
-+   [KDnuggets 新闻 22:n16, 4月 20日: 学习的顶级 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20 日: 学习的顶级 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)

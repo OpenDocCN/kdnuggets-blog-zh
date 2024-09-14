@@ -1,8 +1,8 @@
 # 忘记 PIP、Conda 和 requirements.txt！改用 Poetry，稍后感谢我
 
-> 原文：[https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
+> 原文：[`www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html`](https://www.kdnuggets.com/2023/07/forget-pip-conda-requirementstxt-poetry-instead-thank-later.html)
 
-![忘记 PIP、Conda 和 requirements.txt！改用 Poetry，稍后感谢我](../Images/884ed43e371c84d662e8cb34e29d8451.png)
+![忘记 PIP、Conda 和 requirements.txt！改用 Poetry，稍后感谢我](img/884ed43e371c84d662e8cb34e29d8451.png)
 
 图片由我使用 Midjourney 制作
 
@@ -75,7 +75,7 @@ $ poetry init
 
 CLI 会询问你一系列设置问题，但你可以将大多数留空，因为它们可以稍后更新：
 
-![忘记 PIP、Conda 和 requirements.txt！改用 Poetry，稍后感谢我](../Images/cf5f618e50562be15c569838ab5606cc.png)
+![忘记 PIP、Conda 和 requirements.txt！改用 Poetry，稍后感谢我](img/cf5f618e50562be15c569838ab5606cc.png)
 
 GIF. 由我制作。
 
@@ -92,7 +92,7 @@ readme = "README.md"
 packages = [{include = "binary_classification"}]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "³.9"
 
 [build-system]
 requires = ["poetry-core"]
@@ -127,13 +127,13 @@ $ cat pyproject.toml
 ...
 
 [tool.poetry.dependencies]
-python = "^3.9"
-numpy = "^1.25.0"
-scikit-learn = "^1.2.2"
-requests = "^2.31.0"
-pandas = "^2.0.2"
-plotly = "^5.15.0"
-seaborn = "^0.12.2"
+python = "³.9"
+numpy = "¹.25.0"
+scikit-learn = "¹.2.2"
+requests = "².31.0"
+pandas = "².0.2"
+plotly = "⁵.15.0"
+seaborn = "⁰.12.2"
 ```
 
 让我们尝试将 `numpy` 降级到 v1.24，看看会发生什么：
@@ -152,15 +152,15 @@ Poetry 不会允许这种情况发生，因为降级版本会与 Seaborn 冲突�
 
 脚本要求：
 
-![忘记 PIP、Conda 和 requirements.txt！改用 Poetry 并感谢我](../Images/4c88c9190cfd2197d076b74cc427097e.png)
+![忘记 PIP、Conda 和 requirements.txt！改用 Poetry 并感谢我](img/4c88c9190cfd2197d076b74cc427097e.png)
 
 波浪号要求：
 
-![忘记 PIP、Conda 和 requirements.txt！改用 Poetry 并感谢我](../Images/94eccfa6a6659400d3f4f4afffe22f71.png)
+![忘记 PIP、Conda 和 requirements.txt！改用 Poetry 并感谢我](img/94eccfa6a6659400d3f4f4afffe22f71.png)
 
 通配符要求：
 
-![忘记 PIP、Conda 和 requirements.txt！改用 Poetry 并感谢我](../Images/67b0640c3ce181e6844938ed6ff4a493.png)
+![忘记 PIP、Conda 和 requirements.txt！改用 Poetry 并感谢我](img/67b0640c3ce181e6844938ed6ff4a493.png)
 
 欲了解更多高级约束规格说明，请访问 Poetry 文档的 [这个页面](https://python-poetry.org/docs/dependency-specification/)。
 
@@ -176,7 +176,7 @@ Poetry 的核心特性之一是以最有效的方式将项目环境与全局命�
 
 当情况 2 发生时，结果环境将位于 `/home/user/.cache/pypoetry/virtualenvs/` 文件夹下。Python 可执行文件也会在某处。
 
-要查看当前激活的Poetry创建的环境，你可以运行`poetry env list`：
+要查看当前激活的 Poetry 创建的环境，你可以运行`poetry env list`：
 
 ```py
 $ poetry env list
@@ -186,7 +186,7 @@ test-O3eWbxRl-py3.6
 binary_classification-O3eWbxRl-py3.9 (Activated)
 ```
 
-要在Poetry创建的环境之间切换，你可以运行`poetry env use`命令：
+要在 Poetry 创建的环境之间切换，你可以运行`poetry env use`命令：
 
 ```py
 $ poetry env use other_env
@@ -196,15 +196,15 @@ $ poetry env use other_env
 
 # 4. 完全可复现的项目
 
-当你运行`add`命令时，Poetry会生成一个`poetry.lock`文件。它不会像`1.2.*`那样指定版本约束，而是锁定你使用的库的确切版本，比如`1.2.11`。所有后续的`poetry add`或`poetry update`运行将修改锁定文件以反映变化。
+当你运行`add`命令时，Poetry 会生成一个`poetry.lock`文件。它不会像`1.2.*`那样指定版本约束，而是锁定你使用的库的确切版本，比如`1.2.11`。所有后续的`poetry add`或`poetry update`运行将修改锁定文件以反映变化。
 
 使用这样的锁定文件可以确保使用你项目的人能够在他们的机器上完全复现环境。
 
 人们长期以来使用像`requirements.txt`这样的替代品，但其格式非常松散且容易出错。一个典型的人为创建的`requirements.txt`并不全面，因为开发人员通常不愿意列出他们使用的确切库版本，只是说明版本范围，或者更糟糕的是，简单地写下库名称。
 
-然后，当其他人尝试用`pip install -r requirements.txt`复现环境时，PIP自身尝试解决版本约束，这就是为什么你最终可能会遇到依赖地狱的原因。
+然后，当其他人尝试用`pip install -r requirements.txt`复现环境时，PIP 自身尝试解决版本约束，这就是为什么你最终可能会遇到依赖地狱的原因。
 
-使用Poetry和锁定文件时，这种情况不会发生。因此，如果你在一个已经存在`requirements.txt`的项目中初始化Poetry，你可以通过以下方式将依赖添加进去：
+使用 Poetry 和锁定文件时，这种情况不会发生。因此，如果你在一个已经存在`requirements.txt`的项目中初始化 Poetry，你可以通过以下方式将依赖添加进去：
 
 ```py
 $ poetry add `cat requirements.txt`
@@ -212,7 +212,7 @@ $ poetry add `cat requirements.txt`
 
 并删除`requirements.txt`。
 
-但请注意，像Streamlit或Heroku这样的服务仍然需要旧的`requirements.txt`文件用于部署。在使用这些服务时，你可以通过以下命令将你的`poetry.lock`文件导出为文本格式：
+但请注意，像 Streamlit 或 Heroku 这样的服务仍然需要旧的`requirements.txt`文件用于部署。在使用这些服务时，你可以通过以下命令将你的`poetry.lock`文件导出为文本格式：
 
 ```py
 $ poetry export --output requirements.txt
@@ -220,10 +220,10 @@ $ poetry export --output requirements.txt
 
 # 要遵循的工作流程
 
-我希望留下这篇文章，提供一个将Poetry集成到任何数据项目中的逐步工作流程。
+我希望留下这篇文章，提供一个将 Poetry 集成到任何数据项目中的逐步工作流程。
 
 步骤 0: [安装 Poetry](https://python-poetry.org/docs/) 以适配你的系统。
 
-步骤 1: 使用`mkdir`创建一个新项目，然后在其中调用`` [poetry init](https://python-poetry.org/docs/cli/#init)来初始化Poetry。如果你想将项目转换为Python包，可以使用`[poetry new project_name](https://python-poetry.org/docs/cli/#new)`创建项目。``
+步骤 1: 使用`mkdir`创建一个新项目，然后在其中调用`` [poetry init](https://python-poetry.org/docs/cli/#init)来初始化 Poetry。如果你想将项目转换为 Python 包，可以使用`[poetry new project_name](https://python-poetry.org/docs/cli/#new)`创建项目。``
 
-```py` ``` 第2步：使用 `poetry add lib_name` 安装并添加依赖项。也可以手动编辑 `pyproject.toml` 文件，将依赖项添加到 `[tool.poetry.dependencies]` 部分。在这种情况下，你需要运行 [`poetry install`](https://python-poetry.org/docs/cli/#install) 来解决版本约束并安装库。``完成这一步后，Poetry 会为项目创建一个虚拟环境，并生成一个 `poetry.lock` 文件。   第3步：初始化 Git 和其他工具，如 [DVC](https://medium.com/towards-data-science/data-version-control-for-the-modern-data-scientist-7-dvc-concepts-you-cant-ignore-bb2433ccec88)，并开始跟踪相关文件。将 `pyproject.toml` 和 `poetry.lock` 文件放到 Git 下。   第4步：开发你的代码和模型。要运行 Python 脚本，必须使用 `poetry run python script.py`，以便使用 Poetry 的虚拟环境。   第5步：测试你的代码并进行必要的调整。对数据分析或机器学习算法进行迭代，尝试不同的技术，并根据需要优化你的代码。   可选步骤：   1. 要更新已安装的依赖项，请使用 `poetry update library` 命令。`update` 仅在 `pyproject.toml` 内的约束条件下工作，因此请查看 [这里的警告](https://python-poetry.org/docs/managing-dependencies/)。 2. 如果你从带有 requirements.txt 的项目开始，可以使用 poetry add cat requirements.txt 来自动添加和安装依赖项。 3. 如果你想导出 `poetry.lock` 文件，可以使用 `poetry export --output requirements.txt`。 4. 如果你为项目选择了包结构 (`poetry add`)，可以使用 `poetry build` 构建包，准备好推送到 PyPI。 5. 使用 `poetry env use other_env` 在虚拟环境之间切换。   通过这些步骤，你将确保不会再次陷入依赖地狱。   感谢阅读！   **[Bex Tuychiev](https://www.linkedin.com/in/bextuychiev/)** 是 Medium 上的前10名 AI 作者和 Kaggle 大师，拥有超过 15k 的关注者。他喜欢撰写详细的指南、教程和笔记本，涉及复杂的数据科学和机器学习主题，风格略带讽刺。   [原文](https://medium.com/towards-artificial-intelligence/forget-pip-conda-requirements-txt-use-poetry-instead-and-thank-me-later-226a0bc38a56)。转载许可。   * * *      ## 我们的前3个课程推荐      ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。    ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能    ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT    * * *      ### 更多相关主题    *   [用 Poetry 与 Conda 和 Pip 管理 Python 依赖项](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip) *   [停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html) *   [你应该使用线性回归模型的 3 个理由，而不是…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html) *   [忘记 ChatGPT，这个新 AI 助手领先数倍，将…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html) *   [Pip 安装 YOU：创建 Python 库的初学者指南](https://www.kdnuggets.com/pip-install-you-a-beginners-guide-to-creating-your-python-library) *   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)`` ```py ```
+```py` ``` 第 2 步：使用 `poetry add lib_name` 安装并添加依赖项。也可以手动编辑 `pyproject.toml` 文件，将依赖项添加到 `[tool.poetry.dependencies]` 部分。在这种情况下，你需要运行 [`poetry install`](https://python-poetry.org/docs/cli/#install) 来解决版本约束并安装库。``完成这一步后，Poetry 会为项目创建一个虚拟环境，并生成一个 `poetry.lock` 文件。   第 3 步：初始化 Git 和其他工具，如 [DVC](https://medium.com/towards-data-science/data-version-control-for-the-modern-data-scientist-7-dvc-concepts-you-cant-ignore-bb2433ccec88)，并开始跟踪相关文件。将 `pyproject.toml` 和 `poetry.lock` 文件放到 Git 下。   第 4 步：开发你的代码和模型。要运行 Python 脚本，必须使用 `poetry run python script.py`，以便使用 Poetry 的虚拟环境。   第 5 步：测试你的代码并进行必要的调整。对数据分析或机器学习算法进行迭代，尝试不同的技术，并根据需要优化你的代码。   可选步骤：   1. 要更新已安装的依赖项，请使用 `poetry update library` 命令。`update` 仅在 `pyproject.toml` 内的约束条件下工作，因此请查看 [这里的警告](https://python-poetry.org/docs/managing-dependencies/)。 2. 如果你从带有 requirements.txt 的项目开始，可以使用 poetry add cat requirements.txt 来自动添加和安装依赖项。 3. 如果你想导出 `poetry.lock` 文件，可以使用 `poetry export --output requirements.txt`。 4. 如果你为项目选择了包结构 (`poetry add`)，可以使用 `poetry build` 构建包，准备好推送到 PyPI。 5. 使用 `poetry env use other_env` 在虚拟环境之间切换。   通过这些步骤，你将确保不会再次陷入依赖地狱。   感谢阅读！   **[Bex Tuychiev](https://www.linkedin.com/in/bextuychiev/)** 是 Medium 上的前 10 名 AI 作者和 Kaggle 大师，拥有超过 15k 的关注者。他喜欢撰写详细的指南、教程和笔记本，涉及复杂的数据科学和机器学习主题，风格略带讽刺。   [原文](https://medium.com/towards-artificial-intelligence/forget-pip-conda-requirements-txt-use-poetry-instead-and-thank-me-later-226a0bc38a56)。转载许可。   * * *      ## 我们的前 3 个课程推荐      ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。    ![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能    ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT    * * *      ### 更多相关主题    *   [用 Poetry 与 Conda 和 Pip 管理 Python 依赖项](https://www.kdnuggets.com/managing-python-dependencies-with-poetry-vs-conda-pip) *   [停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html) *   [你应该使用线性回归模型的 3 个理由，而不是…](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html) *   [忘记 ChatGPT，这个新 AI 助手领先数倍，将…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html) *   [Pip 安装 YOU：创建 Python 库的初学者指南](https://www.kdnuggets.com/pip-install-you-a-beginners-guide-to-creating-your-python-library) *   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)`` ```py ```

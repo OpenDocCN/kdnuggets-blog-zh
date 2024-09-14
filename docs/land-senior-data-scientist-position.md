@@ -1,8 +1,8 @@
 # 如何获得高级数据科学家职位
 
-> 原文：[https://www.kdnuggets.com/2022/12/land-senior-data-scientist-position.html](https://www.kdnuggets.com/2022/12/land-senior-data-scientist-position.html)
+> 原文：[`www.kdnuggets.com/2022/12/land-senior-data-scientist-position.html`](https://www.kdnuggets.com/2022/12/land-senior-data-scientist-position.html)
 
-![如何获得高级数据科学家职位](../Images/76d52e84e7f46e8785208b83828372d5.png)
+![如何获得高级数据科学家职位](img/76d52e84e7f46e8785208b83828372d5.png)
 
 编辑提供的图片
 
@@ -42,11 +42,11 @@
 
 任何人都可以记住一个框架并按照它来得出答案。这样做并不能证明你拥有值得更高级职位的经验和能力。事实上，如果你在收到问题后立即开始使用框架，可能会显得过于反应式。
 
-例如，有些人认为评估任何假设的自然下一步是使用a/b测试。然而，有些情况下进行a/b测试是不可行的，比如资源限制或a/b测试的要求没有得到满足。
+例如，有些人认为评估任何假设的自然下一步是使用 a/b 测试。然而，有些情况下进行 a/b 测试是不可行的，比如资源限制或 a/b 测试的要求没有得到满足。
 
-想象一下，你被要求在许多想法中选择几个用于早期阶段的电子商务业务。我们不会简单地对每一个想法进行a/b测试，因为这将是昂贵和耗时的，更重要的是，这并不必要。如果我们有用户的偏好、浏览行为和购买历史的数据，我们可以通过查看数据并发现哪些部分需求和机会最多来获得大量的见解。
+想象一下，你被要求在许多想法中选择几个用于早期阶段的电子商务业务。我们不会简单地对每一个想法进行 a/b 测试，因为这将是昂贵和耗时的，更重要的是，这并不必要。如果我们有用户的偏好、浏览行为和购买历史的数据，我们可以通过查看数据并发现哪些部分需求和机会最多来获得大量的见解。
 
-另一个例子是诊断Robinhood的一个问题，其中交易活动正在减少。你可能会按照框架来检查季节性、外部事件和用户细分等因素。然而，如果你没有花时间澄清变化的程度、哪些活动正在减少、是股票还是加密货币等问题，那么就显而易见你是在遵循框架，而没有考虑到具体问题的背景。
+另一个例子是诊断 Robinhood 的一个问题，其中交易活动正在减少。你可能会按照框架来检查季节性、外部事件和用户细分等因素。然而，如果你没有花时间澄清变化的程度、哪些活动正在减少、是股票还是加密货币等问题，那么就显而易见你是在遵循框架，而没有考虑到具体问题的背景。
 
 记住，框架是通用的，而问题是具体的。你需要展示对产品本身和公司目标的意识和理解。框架是一个有用的工具，但你还需要** 展示你个体思考的能力 **以及提出具体解决方案的能力。
 
@@ -62,7 +62,7 @@
 
 最后，一位高级数据科学家在产品案例面试中展示战略性思维。什么是战略性思维？简单来说，就是** 超越数字进行思考的能力。**在进行实验时，结果很重要。然而，还有许多需要同时考虑的因素。
 
-![如何获得高级数据科学家职位](../Images/0bded75eae610b20f515073d15242b1c.png)
+![如何获得高级数据科学家职位](img/0bded75eae610b20f515073d15242b1c.png)
 
 图片来源：[Startaê Team](https://unsplash.com/@startaeteam?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -84,7 +84,7 @@
 
 ## 主动积极
 
-![如何获得高级数据科学家职位](../Images/b1052f930977aaf8b63f0523a15f2e59.png)
+![如何获得高级数据科学家职位](img/b1052f930977aaf8b63f0523a15f2e59.png)
 
 图片由[Hunters Race](https://unsplash.com/@huntersrace?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -96,7 +96,7 @@
 
 现在让我们看看另一个可以让你在高级职位中脱颖而出的领域：演示。一些公司会要求你在面试中展示过去的项目。这是评估高级职位的一个特别好的方法。
 
-![如何获得高级数据科学家职位](../Images/e52d98618492c03ee6c4c3df24781d1a.png)
+![如何获得高级数据科学家职位](img/e52d98618492c03ee6c4c3df24781d1a.png)
 
 图片由[airfocus](https://unsplash.com/@airfocus?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -136,10 +136,10 @@
 
 +   [无法找到数据科学工作？原因在这里](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 掌握机器学习的7个步骤](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 掌握机器学习的 7 个步骤](https://www.kdnuggets.com/2022/n05.html)
 
-+   [2022年将帮助你找到工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年将帮助你找到工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [2022年将帮助你找到工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [2022 年将帮助你找到工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [3个保证能让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个保证能让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)

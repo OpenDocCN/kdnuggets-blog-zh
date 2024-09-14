@@ -1,8 +1,8 @@
 # 联邦学习：简介
 
-> 原文：[https://www.kdnuggets.com/2020/04/federated-learning-introduction.html](https://www.kdnuggets.com/2020/04/federated-learning-introduction.html)
+> 原文：[`www.kdnuggets.com/2020/04/federated-learning-introduction.html`](https://www.kdnuggets.com/2020/04/federated-learning-introduction.html)
 
-[评论](#comments)
+评论
 
 机器学习能力的进步带来了重大的数据隐私问题。尤其是在用从用户与设备（如智能手机）交互中获得的数据来训练机器学习模型时，这一点尤为明显。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈向网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈向网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -36,7 +36,7 @@
 
 设备使用本地可用的数据训练模型。对模型所做的更改会被总结为更新，然后发送到云端。训练数据和个体更新都保留在设备上。为了确保这些更新更快地上传，模型使用随机旋转和量化进行压缩。当设备将其特定的模型发送到服务器时，这些模型会被平均以获得一个综合模型。这个过程会重复多次，直到获得高质量的模型。
 
-![图示](../Images/648107fd081f52d1819ad90b6615dbb9.png)
+![图示](img/648107fd081f52d1819ad90b6615dbb9.png)
 
 [source](https://www.youtube.com/watch?v=1YbPmkChcbo&feature=youtu.be)
 
@@ -50,11 +50,11 @@
 
 +   **降低能耗**，因为模型是在用户的设备上进行训练的。
 
-![](../Images/d3bdf4728e5f0105861dd31f235f87b5.png)
+![](img/d3bdf4728e5f0105861dd31f235f87b5.png)
 
 为了确保应用程序的用户体验不受影响，模型训练在用户设备连接到空闲 WiFi、处于空闲状态且连接到电源时进行。
 
-![](../Images/5a26646e776362c9e21b29293fd06396.png)
+![](img/5a26646e776362c9e21b29293fd06396.png)
 
 ### TensorFlow Federated
 
@@ -74,7 +74,7 @@ Federated Core (FC) API 是联邦学习的核心基础。它是用于在强类�
 
 在这种情况下，使用去中心化的设备数据集训练递归神经网络语言模型。其目标是在智能手机键盘上预测下一个词。
 
-![Figure](../Images/c80c87a80319edaf8b329811d6e3e35c.png)
+![Figure](img/c80c87a80319edaf8b329811d6e3e35c.png)
 
 [source](https://arxiv.org/pdf/1811.03604.pdf)
 
@@ -102,17 +102,17 @@ Federated Core (FC) API 是联邦学习的核心基础。它是用于在强类�
 
 联邦学习是一种分布式机器学习方法，它使得在大规模语料上进行模型训练成为可能…
 
-**个人简介： [德里克·穆伊提](https://derrickmwiti.com/)** 是数据分析师、作家和导师。他致力于在每项任务中取得出色结果，并且是Lapid Leaders Africa的导师。
+**个人简介： [德里克·穆伊提](https://derrickmwiti.com/)** 是数据分析师、作家和导师。他致力于在每项任务中取得出色结果，并且是 Lapid Leaders Africa 的导师。
 
 [原文](https://heartbeat.fritz.ai/federated-learning-an-introduction-a0bedc8a584c)。转载经许可。
 
 **相关内容：**
 
-+   [研究指南：机器学习模型的高级损失函数](/2019/11/research-guide-advanced-loss-functions-machine-learning-models.html)
++   研究指南：机器学习模型的高级损失函数
 
-+   [分析 GDPR 罚款 – 谁是最大的违规者？](/2020/03/analyzing-gdpr-fines.html)
++   分析 GDPR 罚款 – 谁是最大的违规者？
 
-+   [深度学习深度估计研究指南](/2019/11/research-guide-depth-estimation-deep-learning.html)
++   深度学习深度估计研究指南
 
 ### 更多相关话题
 
@@ -120,9 +120,9 @@ Federated Core (FC) API 是联邦学习的核心基础。它是用于在强类�
 
 +   [如何使用医疗数据实施联邦学习项目](https://www.kdnuggets.com/2023/02/implement-federated-learning-project-healthcare-data.html)
 
-+   [回到基础第3周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [回到基础第 3 周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
 
-+   [KDnuggets 新闻，4月27日：关于 Papers With Code 的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：关于 Papers With Code 的简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
 
 +   [统计学习导论，Python 版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 

@@ -1,8 +1,8 @@
 # 变压器的内存复杂度
 
-> 原文：[https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)
+> 原文：[`www.kdnuggets.com/2022/12/memory-complexity-transformers.html`](https://www.kdnuggets.com/2022/12/memory-complexity-transformers.html)
 
-变压器模型的关键创新是引入了自注意力机制，它为输入序列中的所有位置对计算相似度分数，并且可以并行评估每个标记，避免了递归神经网络的顺序依赖，从而使变压器能够大大超越以前的序列模型如LSTM。
+变压器模型的关键创新是引入了自注意力机制，它为输入序列中的所有位置对计算相似度分数，并且可以并行评估每个标记，避免了递归神经网络的顺序依赖，从而使变压器能够大大超越以前的序列模型如 LSTM。
 
 其他地方有很多深度解释，因此在这里我想分享一些**面试设置**中的示例问题。
 
@@ -10,19 +10,19 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-> 在一个有100万标记的书籍上运行变压器模型的问题是什么？解决这个问题的办法是什么？
+> 在一个有 100 万标记的书籍上运行变压器模型的问题是什么？解决这个问题的办法是什么？
 
-![变压器的内存复杂度](../Images/80ca231462808dc45630f195ba2547af.png)
+![变压器的内存复杂度](img/80ca231462808dc45630f195ba2547af.png)
 
-![变压器的内存复杂度](../Images/2d61db24c250ff1ddf07881a6494581f.png)
+![变压器的内存复杂度](img/2d61db24c250ff1ddf07881a6494581f.png)
 
 **以下是供读者参考的一些提示：**
 
@@ -30,9 +30,9 @@
 
 > 如果你尝试在长序列上运行大型变压器模型，你会发现内存不够用。
 
-根据谷歌研究博客（2021年）：
+根据谷歌研究博客（2021 年）：
 
-> 现有变压器模型及其衍生模型的一个限制是，完整的[self-attention mechanism](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)的计算和内存需求与输入序列长度的平方成正比。使用当前常见的硬件和模型尺寸，这通常将输入序列限制在大约512个标记左右，并且阻止变压器直接应用于需要更大上下文的任务，如[问答](https://huggingface.co/tasks/question-answering)、[文档摘要](https://arxiv.org/pdf/1804.05685)或[基因组片段分类](https://www.biorxiv.org/content/10.1101/353474v3.full)。
+> 现有变压器模型及其衍生模型的一个限制是，完整的[self-attention mechanism](https://lilianweng.github.io/lil-log/2018/06/24/attention-attention.html)的计算和内存需求与输入序列长度的平方成正比。使用当前常见的硬件和模型尺寸，这通常将输入序列限制在大约 512 个标记左右，并且阻止变压器直接应用于需要更大上下文的任务，如[问答](https://huggingface.co/tasks/question-answering)、[文档摘要](https://arxiv.org/pdf/1804.05685)或[基因组片段分类](https://www.biorxiv.org/content/10.1101/353474v3.full)。
 
 *查看***Dr.Younes Bensouda Mourri***来自*[*Deeplearning.ai*](https://www.deeplearning.ai/courses/natural-language-processing-specialization/)*的解释：*
 
@@ -52,7 +52,7 @@
 
 视频/答案来源： [自然语言处理中的注意力模型](https://www.coursera.org/learn/attention-models-in-nlp)由**Dr.Younes Bensouda Mourri** *提供，来自*[*Deeplearning.ai*](https://www.deeplearning.ai/courses/natural-language-processing-specialization/)
 
-**[Angelina Yang](https://www.linkedin.com/in/yangyy/)** 是一位数据和机器学习高级执行官，拥有超过15年的经验，致力于提供先进的机器学习解决方案和能力，以提高金融服务和金融科技行业的业务价值。专长包括在客户体验、监控、对话式 AI、风险与合规、营销、运营、定价和数据服务领域的 AI/ML/NLP/DL 模型开发和部署。
+**[Angelina Yang](https://www.linkedin.com/in/yangyy/)** 是一位数据和机器学习高级执行官，拥有超过 15 年的经验，致力于提供先进的机器学习解决方案和能力，以提高金融服务和金融科技行业的业务价值。专长包括在客户体验、监控、对话式 AI、风险与合规、营销、运营、定价和数据服务领域的 AI/ML/NLP/DL 模型开发和部署。
 
 [原文](https://medium.com/@angelina.yang/memory-complexity-with-transformers-c4e1517670b1)。经授权转载。
 

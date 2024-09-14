@@ -1,6 +1,6 @@
 # 解释机器学习模型：概述
 
-> 原文：[https://www.kdnuggets.com/2017/11/interpreting-machine-learning-models-overview.html](https://www.kdnuggets.com/2017/11/interpreting-machine-learning-models-overview.html)
+> 原文：[`www.kdnuggets.com/2017/11/interpreting-machine-learning-models-overview.html`](https://www.kdnuggets.com/2017/11/interpreting-machine-learning-models-overview.html)
 
 [一篇文章](https://www.oreilly.com/ideas/ideas-on-interpreting-machine-learning)关于机器学习解释出现在 O'Reilly 的博客上，由 Patrick Hall、Wen Phan 和 SriSatish Ambati 撰写，概述了超越常用措施的多种方法。偶然间我在周末再次读到了这篇文章，决定分享其中的一些观点。这篇文章非常棒（虽然很长），推荐给有时间的人阅读。
 
@@ -14,11 +14,11 @@
 
 +   解释技术的三部分拆解（文章的核心内容）
 
-> 第 1 部分包括在训练和解释机器学习算法的背景下查看和理解数据的方法，第 2 部分介绍了将线性模型和机器学习算法结合起来的技术，以应对可解释性至关重要的情况，第 3 部分描述了理解和验证最复杂的预测模型的方法。
+> 第一部分包括在训练和解释机器学习算法的背景下查看和理解数据的方法，第二部分介绍了将线性模型和机器学习算法结合起来的技术，以应对可解释性至关重要的情况，第三部分描述了理解和验证最复杂的预测模型的方法。
 
 文章的重点是对每种技术及其技术组的可解释性进行分解，而这篇文章则总结了这些技术。
 
-### 第 1 部分：查看你的数据
+### 第一部分：查看你的数据
 
 本节以缓慢的节奏开始文章，并指出一些在传统方法之外执行视觉数据探索的方法。
 
@@ -36,7 +36,7 @@
 
 +   残差分析
 
-![可视化](../Images/ae76e2a1bda4bdeb5a8c435c9a59cf9e.png)
+![可视化](img/ae76e2a1bda4bdeb5a8c435c9a59cf9e.png)
 
 表示由大型金融公司发放贷款的相关性图。图片由 Patrick Hall 和 H2O.ai 团队提供。
 
@@ -48,7 +48,7 @@
 
 +   可视化如何增强信任？
 
-### 第2部分：在受监管行业中使用机器学习
+### 第二部分：在受监管行业中使用机器学习
 
 这里变得更加有趣了。
 
@@ -74,11 +74,11 @@
 > 1.  
 > 1.  单调性支持一致的理由代码生成
 
-![集成方法](../Images/cd51696c84f76ff168f5f9fd852f0f22.png)
+![集成方法](img/cd51696c84f76ff168f5f9fd852f0f22.png)
 
 一张小型堆叠集成模型的示意图。图例由 Vinod Iyengar 和 H2O.ai 团队提供。
 
-### 第3部分：理解复杂的机器学习模型
+### 第三部分：理解复杂的机器学习模型
 
 在我看来，这里尤其有趣。我将复杂的机器学习模型可解释性视为自动化机器学习的支持者，因为我认为这两种技术是同一事物的两个方面：如果我们要使用自动化技术在前端生成模型，那么在后端设计和使用适当的方法来简化和理解这些模型就变得极为重要。
 
@@ -90,9 +90,9 @@
 
 > 替代模型在其系数、变量重要性、趋势和交互作用与人类领域知识和合理期望一致时，能够增强信任。当与敏感性分析结合使用以测试解释是否保持稳定并与人类领域知识以及在数据轻微且有目的地扰动时、模拟有趣场景时或数据随时间变化时的合理期望一致时，替代模型可以增加信任。
 
-**局部可解释模型无关解释（LIME）** -- LIME用于基于单个观察构建替代模型。
+**局部可解释模型无关解释（LIME）** -- LIME 用于基于单个观察构建替代模型。
 
-> LIME的实现可以按如下方式进行。首先，使用复杂模型对解释性记录进行评分。然后，为了解释关于另一条记录的决策，解释记录按其与该记录的接近程度加权，并在这个加权的解释性数据集上训练一个L1正则化的线性模型。线性模型的参数然后帮助解释对所选记录的预测。
+> LIME 的实现可以按如下方式进行。首先，使用复杂模型对解释性记录进行评分。然后，为了解释关于另一条记录的决策，解释记录按其与该记录的接近程度加权，并在这个加权的解释性数据集上训练一个 L1 正则化的线性模型。线性模型的参数然后帮助解释对所选记录的预测。
 
 **最大激活分析** -- 一种技术，旨在隔离出能够引发某个模型超参数最大响应的特定实例。
 
@@ -100,7 +100,7 @@
 
 那么... LIME，还是最大激活分析，还是两者结合？
 
-> 如上所述，LIME有助于解释模型在条件分布的局部区域内的预测。最大激活分析有助于增强对模型局部、内部机制的信任。这两者结合可以为复杂响应函数创建详细的局部解释。
+> 如上所述，LIME 有助于解释模型在条件分布的局部区域内的预测。最大激活分析有助于增强对模型局部、内部机制的信任。这两者结合可以为复杂响应函数创建详细的局部解释。
 
 **敏感性分析** -- 该技术有助于确定有意扰动的数据或类似数据变化是否会改变模型行为并使输出不稳定；它还用于研究特定场景或极端情况的模型行为。
 
@@ -110,7 +110,7 @@
 
 > 对于单个决策树，变量的重要性通过在每个选择该变量作为最佳分割候选的节点中，分割准则的累计变化来定量确定。
 
-![全球变量重要性度量](../Images/ac13d1b89b00496705c203dcfb57fa33.png)
+![全球变量重要性度量](img/ac13d1b89b00496705c203dcfb57fa33.png)
 
 决策树集成模型中变量重要性的示意图。图由 Patrick Hall 和 H2O.ai 团队提供。
 
@@ -132,34 +132,34 @@
 
 **相关**：
 
-+   [用 Python 和 Scikit-learn 简化决策树解释](/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
++   用 Python 和 Scikit-learn 简化决策树解释
 
-+   [模型可解释性的神话](/2015/04/model-interpretability-neural-networks-deep-learning.html)
++   模型可解释性的神话
 
-+   [局部可解释模型无关解释 (LIME)](/2016/08/introduction-local-interpretable-model-agnostic-explanations-lime.html)
++   局部可解释模型无关解释 (LIME)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关主题
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学，寻找目标并找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

@@ -1,28 +1,28 @@
 # 告别`Print()`：使用日志模块进行有效调试
 
-> 原文：[https://www.kdnuggets.com/say-goodbye-to-print-use-logging-module-for-effective-debugging](https://www.kdnuggets.com/say-goodbye-to-print-use-logging-module-for-effective-debugging)
+> 原文：[`www.kdnuggets.com/say-goodbye-to-print-use-logging-module-for-effective-debugging`](https://www.kdnuggets.com/say-goodbye-to-print-use-logging-module-for-effective-debugging)
 
-![告别Print()：使用日志模块](../Images/df8d7bf47fa27eaa8c487cb7ccb88789.png)
+![告别 Print()：使用日志模块](img/df8d7bf47fa27eaa8c487cb7ccb88789.png)
 
 作者提供的图片 | DALLE-3 & Canva
 
-许多人开始编程时会通过YouTube视频学习，为了简单起见，他们通常使用`print()`语句来跟踪错误。这是可以理解的，但随着初学者养成这个习惯，它可能会变得问题重重。虽然这些语句对于简单的脚本可能有效，但随着代码库的扩展，这种方法变得非常低效。因此，在这篇文章中，我将向你介绍Python内置的日志模块，它解决了这个问题。我们将看到什么是日志记录，它与`print()`语句的区别，以及一个实用的例子来全面了解其功能。
+许多人开始编程时会通过 YouTube 视频学习，为了简单起见，他们通常使用`print()`语句来跟踪错误。这是可以理解的，但随着初学者养成这个习惯，它可能会变得问题重重。虽然这些语句对于简单的脚本可能有效，但随着代码库的扩展，这种方法变得非常低效。因此，在这篇文章中，我将向你介绍 Python 内置的日志模块，它解决了这个问题。我们将看到什么是日志记录，它与`print()`语句的区别，以及一个实用的例子来全面了解其功能。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 
 ## 为什么使用日志模块而不是`Print()`？
 
-当我们谈论调试时，Python的日志模块提供了比简单的`print()`语句更详细的信息。这包括时间戳、模块名称、日志级别以及错误发生的行号等。这些额外的细节帮助我们更有效地理解代码的行为。我们想要记录的信息取决于应用程序的需求和开发者的偏好。因此，在进一步探讨之前，我们先讨论一下日志级别及其设置方法。
+当我们谈论调试时，Python 的日志模块提供了比简单的`print()`语句更详细的信息。这包括时间戳、模块名称、日志级别以及错误发生的行号等。这些额外的细节帮助我们更有效地理解代码的行为。我们想要记录的信息取决于应用程序的需求和开发者的偏好。因此，在进一步探讨之前，我们先讨论一下日志级别及其设置方法。
 
 ## 日志级别
 

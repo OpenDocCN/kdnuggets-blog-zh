@@ -1,22 +1,22 @@
-# Python Pandas 在7个简单步骤中的数据发现
+# Python Pandas 在 7 个简单步骤中的数据发现
 
-> 原文：[https://www.kdnuggets.com/2020/03/python-pandas-data-discovery.html](https://www.kdnuggets.com/2020/03/python-pandas-data-discovery.html)
+> 原文：[`www.kdnuggets.com/2020/03/python-pandas-data-discovery.html`](https://www.kdnuggets.com/2020/03/python-pandas-data-discovery.html)
 
-[评论](#comments)
+评论
 
-![](../Images/e8c474e839709536e29a8b4e888302e0.png)
+![](img/e8c474e839709536e29a8b4e888302e0.png)
 
-当我第一次开始使用Python分析数据时，我写的第一行代码是‘import **pandas** as pd’。我对**pandas**是什么感到非常困惑，并且在代码上挣扎了很多。我的脑海中有很多问题：为什么每个人在Python的第一行代码中都使用‘import **pandas** as pd’？**pandas**有什么特别的价值？
+当我第一次开始使用 Python 分析数据时，我写的第一行代码是‘import **pandas** as pd’。我对**pandas**是什么感到非常困惑，并且在代码上挣扎了很多。我的脑海中有很多问题：为什么每个人在 Python 的第一行代码中都使用‘import **pandas** as pd’？**pandas**有什么特别的价值？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,30 +24,30 @@
 
 ### 背景
 
-**Pandas**，即面板数据的缩写，由著名开发者 [Wes McKinney](https://en.wikipedia.org/wiki/Wes_McKinney) 于2008年1月11日首次发布。Wes McKinney厌恶研究人员浪费时间的想法。我最终通过他在[采访](https://qz.com/1126615/the-story-of-the-most-important-tool-in-data-science/)中所说的话理解了**pandas**的重要性。
+**Pandas**，即面板数据的缩写，由著名开发者 [Wes McKinney](https://en.wikipedia.org/wiki/Wes_McKinney) 于 2008 年 1 月 11 日首次发布。Wes McKinney 厌恶研究人员浪费时间的想法。我最终通过他在[采访](https://qz.com/1126615/the-story-of-the-most-important-tool-in-data-science/)中所说的话理解了**pandas**的重要性。
 
 > *“科学家们不必要地处理简单数据操作任务让我感到非常糟糕，”*
 > 
 > *“我告诉人们，它使那些不是计算机科学专家的人也能分析和处理数据，”*
 
-**Pandas** 是现在数据分析师使用的主要工具之一，并且在推动Python在数据科学家社区中的使用方面发挥了重要作用。根据过去十年左右[StackOverflow](https://stackoverflow.com/)问答网站的流量，Python的用户数量迅速增长。下图展示了**Pandas** 相对于其他一些Python软件库的巨大增长！
+**Pandas** 是现在数据分析师使用的主要工具之一，并且在推动 Python 在数据科学家社区中的使用方面发挥了重要作用。根据过去十年左右[StackOverflow](https://stackoverflow.com/)问答网站的流量，Python 的用户数量迅速增长。下图展示了**Pandas** 相对于其他一些 Python 软件库的巨大增长！
 
-![](../Images/4753b43455f38bb34987de932b2ca110.png)
+![](img/4753b43455f38bb34987de932b2ca110.png)
 
 参考：[编码俱乐部](https://ourcodingclub.github.io/2018/04/18/pandas-python-intro.html)
 
-现在是开始的时候了！让我们动手进行一些编码吧！这并不难，适合任何初学者。总共有7个步骤。
+现在是开始的时候了！让我们动手进行一些编码吧！这并不难，适合任何初学者。总共有 7 个步骤。
 
-### 第1步：导入库
+### 第 1 步：导入库
 
 ```py
 import pandas as pd
 
 ```
 
-### 第2步：读取数据
+### 第 2 步：读取数据
 
-方法1：加载包含表格数据的文本文件
+方法 1：加载包含表格数据的文本文件
 
 ```py
 df=pd.read_csv(‘clareyan_file.csv’)
@@ -74,7 +74,7 @@ df.tail(5)
 
 *输出*
 
-![](../Images/d4688b36cad9c1366af3df1823172cfd.png)
+![](img/d4688b36cad9c1366af3df1823172cfd.png)
 
 *这里，我使用了：df.head() 备注：python 列表是从 0 开始索引的，所以第一个元素是 0，第二个是 1，以此类推。*
 
@@ -111,11 +111,11 @@ df.dtypes
 
 *输出*
 
-![](../Images/5a0610b46b334c64463dee7d7de889d2.png)
+![](img/5a0610b46b334c64463dee7d7de889d2.png)
 
 如果你对数据类型不太熟悉，这个表格可能对你有用。
 
-![](../Images/1645d297b31f6c7d3acb9a55dff00599.png)
+![](img/1645d297b31f6c7d3acb9a55dff00599.png)
 
 *数据类型*
 
@@ -127,7 +127,7 @@ df.info()
 
 *输出*
 
-![](../Images/06cf00f25d6c8a383741c8c31f316f41.png)
+![](img/06cf00f25d6c8a383741c8c31f316f41.png)
 
 *从输出中，我们知道有 3 列，占用了 153MB 的内存。*
 
@@ -141,7 +141,7 @@ unique_counts = pd.DataFrame.from_records([(col, df[col].nunique()) for col in d
 
 *输出*
 
-![](../Images/a7cf997c9319c8a1e40fb86759fe168d.png)
+![](img/a7cf997c9319c8a1e40fb86759fe168d.png)
 
 上表突出了每列的唯一值，这些值可能会帮助你确定哪些值可能是分类变量。例如，性别的唯一值为 2（这很合理 [M/F]）。名称和出生年份可能不太可能是分类变量，因为唯一值的数量相当大。
 
@@ -153,7 +153,7 @@ df['sex']
 
 *输出*
 
-![](../Images/9423b8fd7d62866c5cdf6df67168368f.png)
+![](img/9423b8fd7d62866c5cdf6df67168368f.png)
 
 ```py
 # Counting
@@ -163,7 +163,7 @@ df.sex.value_counts()
 
 *输出*
 
-![](../Images/07851ca3c3caa06733d605527f3780c9.png)
+![](img/07851ca3c3caa06733d605527f3780c9.png)
 
 *6 名女性和 4 名男性*
 
@@ -177,7 +177,7 @@ df[(df['sex']=='M') & (df['year_born']==1990)]
 
 *输出*
 
-![](../Images/2f2c7fa59a0cb0cee5186c12ba4222af.png)
+![](img/2f2c7fa59a0cb0cee5186c12ba4222af.png)
 
 *要使用 &（AND）、~（NOT）和 |（OR），你必须在逻辑操作前后加上“（” 和 “）”。*
 
@@ -189,7 +189,7 @@ df[(df['sex']=='M') & (df['year_born']==1990)]
 
 *输出*
 
-![](../Images/ba2d6ef341f64e0618a39183cda700ac.png)
+![](img/ba2d6ef341f64e0618a39183cda700ac.png)
 
 ```py
 #show the 1st column and 1st *row*
@@ -211,7 +211,7 @@ df.loc[1]
 
 *输出*
 
-![](../Images/25dc97a41f7fc247dea4df3c53195845.png)
+![](img/25dc97a41f7fc247dea4df3c53195845.png)
 
 *第 2 行*
 
@@ -233,7 +233,7 @@ df.loc[df.sex=='M']
 
 *输出*
 
-![](../Images/0ab1cd79a60c9ca8ff65071241c763a5.png)
+![](img/0ab1cd79a60c9ca8ff65071241c763a5.png)
 
 ```py
 #only show the column of 'year born' where sex is male
@@ -243,7 +243,7 @@ df.loc[df.sex=='M','year_born']
 
 *输出*
 
-![](../Images/b4083be3525ea6602c14b46c46baa2ac.png)
+![](img/b4083be3525ea6602c14b46c46baa2ac.png)
 
 ```py
 # find the mean of year_born of male
@@ -271,7 +271,7 @@ df.isnull().sum().sort_values(ascending=False)
 
 *输出*
 
-![](../Images/d6b1b9b824cc5bd8de8c7f93316e9b3b.png)
+![](img/d6b1b9b824cc5bd8de8c7f93316e9b3b.png)
 
 *‘year_born’ 列中有 2 个缺失值。*
 
@@ -287,7 +287,7 @@ df['year_born'].fillna((df['year_born'].mean()), inplace= True)
 
 *输出*
 
-![](../Images/8fd11f72c6d0a3ba29a3ede14f796ea6.png)
+![](img/8fd11f72c6d0a3ba29a3ede14f796ea6.png)
 
 *Julie 和 Albert 的出生年份是 1982.25（由均值替代）。*
 
@@ -297,7 +297,7 @@ df.dropna(inplace = True)
 
 ```
 
-![](../Images/58e99bb4199a40c77a4a868af652ed85.png)
+![](img/58e99bb4199a40c77a4a868af652ed85.png)
 
 *第 4 行和第 9 行已被删除。*
 
@@ -313,7 +313,7 @@ df.loc[df.sex=='W', 'year_born'].hist()
 
 *输出*
 
-![](../Images/a5358a6dc3a307821ed74de996a857b1.png)
+![](img/a5358a6dc3a307821ed74de996a857b1.png)
 
 *性别=’W’的出生年份。*
 
@@ -325,15 +325,15 @@ df.hist(column='year_born')
 
 *输出*
 
-![](../Images/50d2846e0baef4a002dee53799c85ff2.png)
+![](img/50d2846e0baef4a002dee53799c85ff2.png)
 
 太棒了！我已经完成了使用**pandas**库进行数据发现的所有 7 个步骤。让我总结一下我使用过的函数：
 
-![](../Images/2d3cf5bc4f8ec79ce919fb01aa12ab66.png)
+![](img/2d3cf5bc4f8ec79ce919fb01aa12ab66.png)
 
 **附赠**：让我介绍一下只用两行代码进行探索性数据分析（EDA）的最快方法：**pandas_profiling**
 
-![](../Images/bbdb8f7d3557bc88a47527fd12e7c35e.png)
+![](img/bbdb8f7d3557bc88a47527fd12e7c35e.png)
 
 ```py
 import pandas_profiling
@@ -341,7 +341,7 @@ df.profile_report()
 
 ```
 
-![](../Images/bdf96030a7f174ec754bfc7c81c80fc8.png)
+![](img/bdf96030a7f174ec754bfc7c81c80fc8.png)
 
 其内容包括：
 

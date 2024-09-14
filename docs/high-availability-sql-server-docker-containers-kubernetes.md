@@ -1,8 +1,8 @@
 # Kubernetes 中的高可用性 SQL Server Docker 容器
 
-> 原文：[https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
+> 原文：[`www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html`](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
 
-![Kubernetes 中的 SQL Server Docker 容器](../Images/2e964f2d5f832ec43a26d0200b65f5a7.png)
+![Kubernetes 中的 SQL Server Docker 容器](img/2e964f2d5f832ec43a26d0200b65f5a7.png)
 
 图像由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -54,8 +54,8 @@ IT 通常在想要自动化管理、部署和扩展计算应用程序时转向 K
 
 +   [数据科学家的高薪副业](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)
 
-+   [KDnuggets™ 新闻 22:n04, 1月26日: 高薪副业...](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26 日: 高薪副业...](https://www.kdnuggets.com/2022/n04.html)
 
-+   [AI的人才管理：打造高效能AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
++   [AI 的人才管理：打造高效能 AI 团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
 
-+   [数据科学家的7个高薪副业](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
++   [数据科学家的 7 个高薪副业](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)

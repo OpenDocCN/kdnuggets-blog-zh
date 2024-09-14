@@ -1,8 +1,8 @@
 # 领域知识对机器学习重要吗？
 
-> 原文：[https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html](https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html`](https://www.kdnuggets.com/2022/07/domain-knowledge-important-machine-learning.html)
 
-![领域知识对机器学习重要吗？](../Images/46d05bad71fb684a9344916cf2fde103.png)
+![领域知识对机器学习重要吗？](img/46d05bad71fb684a9344916cf2fde103.png)
 
 开发机器学习模型涉及很多步骤。无论你是处理标记数据还是未标记数据，你可能会认为数字只是数字，并且在生成具有真正影响力的见解时，数据集中每个特征的意义并不重要。确实，有许多优秀的机器学习库，如[scikit-learn](https://scikit-learn.org/stable/)，使得收集一些数据并将其放入一个模板模型中变得简单快捷。很快，你可能会开始认为没有什么问题是机器学习无法解决的。
 
@@ -22,13 +22,13 @@
 
 # 数据预处理中的领域知识
 
-![数据预处理中的领域知识](../Images/26a278e22124fc9d45a46252a6230e6e.png)
+![数据预处理中的领域知识](img/26a278e22124fc9d45a46252a6230e6e.png)
 
 让我们深入探讨领域知识如何在机器学习模型开发周期的数据预处理步骤中发挥作用。
 
-在一个数据集中，并非每个数据点的值都是相同的。如果你收集了100个相同的新样本，它们不会帮助模型学习任何额外的信息。它们可能实际上会使模型集中在一个不重要的特定方向上。
+在一个数据集中，并非每个数据点的值都是相同的。如果你收集了 100 个相同的新样本，它们不会帮助模型学习任何额外的信息。它们可能实际上会使模型集中在一个不重要的特定方向上。
 
-如果你正在查看100张伞的图片，并且知道这个模型应该分类所有种类的配件，那么显然你的样本数据集并不代表整个总体。没有领域知识的话，很难知道哪些数据点有价值，或者它们是否已经在数据集中有所代表。
+如果你正在查看 100 张伞的图片，并且知道这个模型应该分类所有种类的配件，那么显然你的样本数据集并不代表整个总体。没有领域知识的话，很难知道哪些数据点有价值，或者它们是否已经在数据集中有所代表。
 
 如果你在一个不容易用现有的通用知识解决的领域工作，你可能会通过训练数据引入偏差，这会影响模型的准确性和鲁棒性。
 
@@ -36,7 +36,7 @@
 
 # 选择合适模型中的领域知识
 
-![选择合适模型中的领域知识](../Images/f8f2cafa7ec802677ffacbfdb8b81888.png)
+![选择合适模型中的领域知识](img/f8f2cafa7ec802677ffacbfdb8b81888.png)
 
 机器学习模型有很多种，考虑到许多因素，有些模型可能比其他模型更适合。数据是标记过的还是未标记的？你拥有多少数据？特征的数据类型是什么？特征的数据类型是否同质？你的目标输出是连续值还是分类？选择合适的模型很重要，但能够直接应用你选择的模型而不进行调整的情况非常少见。例如，随机森林可以直接处理异质数据类型。
 
@@ -44,7 +44,7 @@
 
 # 调整模型和架构的领域知识
 
-![调整模型和架构的领域知识](../Images/80bea4d39d4c08f84a11607ddad669d9.png)
+![调整模型和架构的领域知识](img/80bea4d39d4c08f84a11607ddad669d9.png)
 
 领域知识使你能够更好地调整模型以适应情况。数学优化只能做到一定程度，通常要实现大的改进跳跃，拥有相当的领域知识至关重要。
 
@@ -74,7 +74,7 @@
 
 注意力是一个非常宝贵和有用的概念。注意力之所以能在自然语言处理和图像识别中得到应用，是有充分理由的。
 
-自[2000年代初](https://aylien.com/blog/a-review-of-the-recent-history-of-natural-language-processing)以来，自然语言处理翻译一直是深度学习模型的一部分。大约在2013年，[长短期记忆](https://www.analyticsvidhya.com/blog/2021/06/lstm-for-text-classification/)（LSTM）在该领域首次出现，并主导了几年。LSTM模型读取句子，创建隐藏表示，然后利用隐藏表示生成输出句子。
+自[2000 年代初](https://aylien.com/blog/a-review-of-the-recent-history-of-natural-language-processing)以来，自然语言处理翻译一直是深度学习模型的一部分。大约在 2013 年，[长短期记忆](https://www.analyticsvidhya.com/blog/2021/06/lstm-for-text-classification/)（LSTM）在该领域首次出现，并主导了几年。LSTM 模型读取句子，创建隐藏表示，然后利用隐藏表示生成输出句子。
 
 作为人类，如果我们进行翻译，我们不仅仅是阅读句子并直接输出翻译。我们倾向于反复查看整个句子，或者在需要重新审视目标词的上下文时专注于某些部分。
 
@@ -94,11 +94,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 相关工作
 
 * * *
 
@@ -110,8 +110,8 @@
 
 +   [酿造特定领域 LLM 药水](https://www.kdnuggets.com/2023/08/brewing-domainspecific-llm-potion.html)
 
-+   [8篇改变NLP领域的创新BERT知识蒸馏论文](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
++   [8 篇改变 NLP 领域的创新 BERT 知识蒸馏论文](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
 
-+   [5种超越在线课程拓展数据科学知识的方法](https://www.kdnuggets.com/2022/04/5-ways-expand-knowledge-data-science-beyond-online-courses.html)
++   [5 种超越在线课程拓展数据科学知识的方法](https://www.kdnuggets.com/2022/04/5-ways-expand-knowledge-data-science-beyond-online-courses.html)
 
-+   [通过ChatPDF解锁知识的财富](https://www.kdnuggets.com/2023/04/unlock-wealth-knowledge-chatpdf.html)
++   [通过 ChatPDF 解锁知识的财富](https://www.kdnuggets.com/2023/04/unlock-wealth-knowledge-chatpdf.html)

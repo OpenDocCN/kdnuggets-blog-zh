@@ -1,8 +1,8 @@
 # 用 5 步骤开始学习 Python 数据结构
 
-> 原文：[https://www.kdnuggets.com/5-steps-getting-started-python-data-structures](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
+> 原文：[`www.kdnuggets.com/5-steps-getting-started-python-data-structures`](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
 
-![用 5 步骤开始学习 Python 数据结构](../Images/7b50389edfcbefed4f60b8c9297d036c.png)
+![用 5 步骤开始学习 Python 数据结构](img/7b50389edfcbefed4f60b8c9297d036c.png)
 
 # Python 数据结构简介
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -187,7 +187,7 @@ index_of_first_one = my_tuple.index(1)
 
 ## 元组打包和解包
 
-元组打包和解包是Python中的便捷特性：
+元组打包和解包是 Python 中的便捷特性：
 
 +   **打包：** 将多个值分配给一个元组。
 
@@ -212,11 +212,11 @@ complex_tuple = (1, 2, [3, 4])
 
 请注意，虽然你不能改变元组本身，但可以修改其中的可变元素。
 
-# 步骤3：掌握Python中的字典
+# 步骤 3：掌握 Python 中的字典
 
-## Python中的字典是什么？
+## Python 中的字典是什么？
 
-Python中的字典是一个无序的、可变的数据类型，用于存储唯一键到值的映射。字典用大括号`{ }`表示，并由用逗号分隔的键值对组成。
+Python 中的字典是一个无序的、可变的数据类型，用于存储唯一键到值的映射。字典用大括号`{ }`表示，并由用逗号分隔的键值对组成。
 
 例如：
 
@@ -264,7 +264,7 @@ del student["city"]
 
 +   `items()` - 返回(key, value)元组
 
-+   `get()` - 返回键的值，避免KeyError
++   `get()` - 返回键的值，避免 KeyError
 
 +   `pop()` - 移除键并返回值
 
@@ -288,11 +288,11 @@ print(scores.get("Daniel"))
 print(scores.keys())
 ```
 
-# 步骤4：探索Python中的集合
+# 步骤 4：探索 Python 中的集合
 
-## Python中的集合是什么？
+## Python 中的集合是什么？
 
-Python中的集合是一个无序的、可变的唯一不可变对象的集合。集合用大括号`{ }`表示，但与字典不同，没有键值对。
+Python 中的集合是一个无序的、可变的唯一不可变对象的集合。集合用大括号`{ }`表示，但与字典不同，没有键值对。
 
 例如：
 
@@ -354,11 +354,11 @@ print(A - B)
 print(A ^ B)
 ```
 
-# 步骤5：比较列表、字典和集合
+# 步骤 5：比较列表、字典和集合
 
 ## 特性比较
 
-以下是对我们在本教程中提到的四种Python数据结构的简明比较。
+以下是对我们在本教程中提到的四种 Python 数据结构的简明比较。
 
 | 结构 | 有序 | 可变 | 允许重复元素 | 用途 |
 | --- | --- | --- | --- | --- |
@@ -411,23 +411,23 @@ print(persons)
 
 # 向前推进
 
-在这个全面的教程中，我们深入探讨了Python中的基础数据结构，包括列表、元组、字典和集合。这些结构是Python编程的基石，提供了数据存储、处理和操作的框架。理解这些结构对于编写高效且可扩展的代码至关重要。从使用列表操作序列，到用字典组织数据，再到利用集合确保唯一性，这些基本工具在数据处理上提供了巨大的灵活性。
+在这个全面的教程中，我们深入探讨了 Python 中的基础数据结构，包括列表、元组、字典和集合。这些结构是 Python 编程的基石，提供了数据存储、处理和操作的框架。理解这些结构对于编写高效且可扩展的代码至关重要。从使用列表操作序列，到用字典组织数据，再到利用集合确保唯一性，这些基本工具在数据处理上提供了巨大的灵活性。
 
-正如我们通过代码示例所见，这些数据结构可以以各种方式组合使用来解决复杂问题。通过利用这些数据结构，你可以开启数据分析、机器学习及其他领域的广泛可能性。不要犹豫，查阅官方的[Python数据结构文档](https://docs.python.org/3/tutorial/datastructures.html)以获得更多见解。
+正如我们通过代码示例所见，这些数据结构可以以各种方式组合使用来解决复杂问题。通过利用这些数据结构，你可以开启数据分析、机器学习及其他领域的广泛可能性。不要犹豫，查阅官方的[Python 数据结构文档](https://docs.python.org/3/tutorial/datastructures.html)以获得更多见解。
 
 编程愉快！
 
-[**马修·梅约**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为KDnuggets的主编，马修旨在使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、机器学习算法和探索新兴的人工智能。他致力于使数据科学社区的知识普及化。马修从6岁起便开始编程。
+[**马修·梅约**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 KDnuggets 的主编，马修旨在使复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、机器学习算法和探索新兴的人工智能。他致力于使数据科学社区的知识普及化。马修从 6 岁起便开始编程。
 
 ### 关于这个话题的更多内容
 
-+   [5步开始使用SQL](https://www.kdnuggets.com/5-steps-getting-started-with-sql)
++   [5 步开始使用 SQL](https://www.kdnuggets.com/5-steps-getting-started-with-sql)
 
-+   [5步开始使用Scikit-learn](https://www.kdnuggets.com/5-steps-getting-started-scikit-learn)
++   [5 步开始使用 Scikit-learn](https://www.kdnuggets.com/5-steps-getting-started-scikit-learn)
 
-+   [5步开始使用Google Cloud Platform](https://www.kdnuggets.com/5-steps-google-cloud-platform)
++   [5 步开始使用 Google Cloud Platform](https://www.kdnuggets.com/5-steps-google-cloud-platform)
 
-+   [5步开始使用PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
++   [5 步开始使用 PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
 
 +   [Python 数据科学入门](https://www.kdnuggets.com/getting-started-with-python-for-data-science)
 

@@ -1,8 +1,8 @@
 # 关键机器学习技术：嵌套交叉验证，为什么以及如何使用 Python 代码
 
-> 原文：[https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html](https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html)
+> 原文：[`www.kdnuggets.com/2020/10/nested-cross-validation-python.html`](https://www.kdnuggets.com/2020/10/nested-cross-validation-python.html)
 
-[评论](#comments)
+评论
 
 **由 [奥马尔·马丁内斯](https://www.linkedin.com/in/omarmartinez182/)，Arcalea**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT。
 
 * * *
 
@@ -24,7 +24,7 @@
 
 > *“在机器学习研究中，偶尔会观察到一种偏差的评估协议，即使用所有可用数据进行初步模型选择步骤，这通常作为“初步研究”的一部分进行互动操作。然后，这些数据被反复重新划分，形成一个或多个随机、互不重叠的设计和测试集。这些集随后用于使用相同的固定超参数值进行性能评估。这个做法乍看似乎无害，但测试数据不再是统计上的纯净数据，因为它们已经被模型在调整超参数时“看到过”。”*
 > 
-> - [关于模型选择中的过拟合及其在性能评估中的后续选择偏差](https://jmlr.csail.mit.edu/papers/volume11/cawley10a/cawley10a.pdf)，2010年。
+> - [关于模型选择中的过拟合及其在性能评估中的后续选择偏差](https://jmlr.csail.mit.edu/papers/volume11/cawley10a/cawley10a.pdf)，2010 年。
 
 为了说明为什么会发生这种情况，让我们用一个例子。假设我们正在进行一个机器学习任务，在其中我们基于*n*轮超参数优化选择一个模型，我们通过使用网格搜索和交叉验证来完成这项工作。现在，如果我们在每次*n*次迭代中使用相同的训练和测试数据，这意味着测试集上的性能信息通过超参数的选择被纳入训练数据。在每次迭代中，这些信息可以被过程利用以找到性能最佳的超参数，这会导致测试数据集不再纯净，无法用于性能评估。如果*n*很大，那么我们可能会将测试集视为一个次级训练集（宽泛地说）。
 
@@ -32,11 +32,11 @@
 
 另一种策略，也是本文的重点，是**嵌套交叉验证**，它与上文所提论文中的一种解决方案相吻合，通过将超参数优化视为模型拟合的一部分，并用不同的验证集来评估它，这个验证集是外层交叉验证的一部分。
 
-简而言之，拟合，包括超参数的拟合，这本身包括一个内部交叉验证过程，就像模型过程中的其他部分一样，并不是用于评估特定拟合方法的模型性能的工具。要评估性能，你需要使用外部交叉验证过程。实际上，你可以让网格搜索（或任何其他优化工具）处理内部交叉验证，然后使用cross_val_score来估计外部循环中的泛化误差。因此，最终分数将通过对多个拆分的测试集分数进行平均，作为常规的交叉验证过程。
+简而言之，拟合，包括超参数的拟合，这本身包括一个内部交叉验证过程，就像模型过程中的其他部分一样，并不是用于评估特定拟合方法的模型性能的工具。要评估性能，你需要使用外部交叉验证过程。实际上，你可以让网格搜索（或任何其他优化工具）处理内部交叉验证，然后使用 cross_val_score 来估计外部循环中的泛化误差。因此，最终分数将通过对多个拆分的测试集分数进行平均，作为常规的交叉验证过程。
 
 这是该方法的简化概述。这个示例在技术上并不严格，但旨在提供整个过程的直观理解。
 
-![](../Images/de4aa608e4442ce1f06da7ffe8109d41.png)
+![](img/de4aa608e4442ce1f06da7ffe8109d41.png)
 
 *嵌套交叉验证过程的简化示意图。*
 
@@ -44,15 +44,15 @@
 
 在 python 中实现嵌套交叉验证，多亏了[scikit-learn](https://scikit-learn.org/)，相对来说比较简单。
 
-让我们来看一个例子。我们将从加载[葡萄酒数据集](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine)开始，使用来自sklearn.datasets的所有必要模块。
+让我们来看一个例子。我们将从加载[葡萄酒数据集](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_wine.html#sklearn.datasets.load_wine)开始，使用来自 sklearn.datasets 的所有必要模块。
 
-现在，我们开始实例化分类器，然后指定我们希望运行的轮数/试验次数，换句话说，就是我们将进行多少次完整的内外循环过程。由于这是计算上昂贵的，我们仅仅为了演示目的，所以选择20轮。请记住，轮数表示你将如何在每个交叉验证过程中以不同的方式拆分数据集。
+现在，我们开始实例化分类器，然后指定我们希望运行的轮数/试验次数，换句话说，就是我们将进行多少次完整的内外循环过程。由于这是计算上昂贵的，我们仅仅为了演示目的，所以选择 20 轮。请记住，轮数表示你将如何在每个交叉验证过程中以不同的方式拆分数据集。
 
 下一步是创建一个字典，以建立我们在每轮中将要探索的超参数空间，同时创建两个空数组以存储来自嵌套和非嵌套过程的结果。
 
 下一步非常重要，我们将创建一个循环，该循环将迭代我们指定的轮数，并且包含两个不同的交叉验证对象。
 
-对于这个例子，我们将对外部和内部循环都使用5折交叉验证，并且使用每轮（i）的值作为两个交叉验证对象的`random_state`。
+对于这个例子，我们将对外部和内部循环都使用 5 折交叉验证，并且使用每轮（i）的值作为两个交叉验证对象的`random_state`。
 
 然后，我们开始创建和配置对象以进行超参数优化。在这个例子中，我们将使用网格搜索。请注意，我们将`'inner_cv'`对象作为交叉验证方法传递给网格搜索。
 
@@ -75,13 +75,13 @@ Avg. difference of 0.001698 with std. dev. of 0.003162.
 
 **输出：**
 
-![](../Images/4fd278f5460b4e7fb02cff5c757ca4a7.png)
+![](img/4fd278f5460b4e7fb02cff5c757ca4a7.png)
 
 最后，我们还可以绘制每一轮两个交叉验证过程的差异。
 
 **输出：**
 
-![](../Images/2866efccbead0cc67410ff0a538a951f.png)
+![](img/2866efccbead0cc67410ff0a538a951f.png)
 
 ### 最后的思考
 
@@ -97,20 +97,20 @@ Avg. difference of 0.001698 with std. dev. of 0.003162.
 
 +   [如何（以及为什么）创建一个好的验证集](https://www.kdnuggets.com/2017/11/create-good-validation-set.html)
 
-+   [你应该在数据科学项目中使用交叉验证的5个理由](https://www.kdnuggets.com/2018/10/5-reasons-cross-validation-data-science-projects.html)
++   [你应该在数据科学项目中使用交叉验证的 5 个理由](https://www.kdnuggets.com/2018/10/5-reasons-cross-validation-data-science-projects.html)
 
 +   [使用交叉验证构建可靠的机器学习模型](https://www.kdnuggets.com/2018/08/building-reliable-machine-learning-models-cross-validation.html)
 
 ### 相关阅读
 
-+   [在Prompt工程中的并行处理：思维骨架...](https://www.kdnuggets.com/parallel-processing-in-prompt-engineering-the-skeleton-of-thought-technique)
++   [在 Prompt 工程中的并行处理：思维骨架...](https://www.kdnuggets.com/parallel-processing-in-prompt-engineering-the-skeleton-of-thought-technique)
 
 +   [AI、分析、机器学习、数据科学、深度学习等](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 
-+   [宣布PyCaret 3.0：开源、低代码Python机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
++   [宣布 PyCaret 3.0：开源、低代码 Python 机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
 
-+   [优化Python代码性能：深入了解Python分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
++   [优化 Python 代码性能：深入了解 Python 分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
 
-+   [2021年主要进展和2022年AI、数据科学等关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
++   [2021 年主要进展和 2022 年 AI、数据科学等关键趋势](https://www.kdnuggets.com/2021/12/trends-ai-data-science-ml-technology.html)
 
-+   [2022年数据科学、机器学习、AI和分析的关键进展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)
++   [2022 年数据科学、机器学习、AI 和分析的关键进展](https://www.kdnuggets.com/2022/12/key-data-science-machine-learning-ai-analytics-developments-2022.html)

@@ -1,24 +1,24 @@
-# 10个被低估的机器学习Python包
+# 10 个被低估的机器学习 Python 包
 
-> 原文：[https://www.kdnuggets.com/2021/01/10-underappreciated-python-packages-machine-learning-practitioners.html](https://www.kdnuggets.com/2021/01/10-underappreciated-python-packages-machine-learning-practitioners.html)
+> 原文：[`www.kdnuggets.com/2021/01/10-underappreciated-python-packages-machine-learning-practitioners.html`](https://www.kdnuggets.com/2021/01/10-underappreciated-python-packages-machine-learning-practitioners.html)
 
-[comments](#comments)
+comments
 
 **由[Vinay Uday Prabhu](https://vinayprabhu.github.io/)，UnifyID Inc.首席科学家**
 
-![Figure](../Images/581c9aff740dcd71f1784a23ed38d159.png)
+![Figure](img/581c9aff740dcd71f1784a23ed38d159.png)
 
-这里列出的所有PyPi包的汇编
+这里列出的所有 PyPi 包的汇编
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -26,19 +26,19 @@
 > 
 > ????????: [Github Repo](https://github.com/vinayprabhu/Favorite_PyPi_2020) 其中包含所有图像、代码和图表
 > 
-> ???????? : [带有可点击链接的PDF汇编](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/PyPi_2020_collage.pdf)
+> ???????? : [带有可点击链接的 PDF 汇编](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/PyPi_2020_collage.pdf)
 > 
-> ????????: [Colab笔记本](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/Colab_Pypi_Top10.ipynb)
+> ????????: [Colab 笔记本](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/Colab_Pypi_Top10.ipynb)
 > 
-> ????????: [HTML文档](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/Top_Pypi_2020.html)
+> ????????: [HTML 文档](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/Top_Pypi_2020.html)
 > 
-> ????????: [PDF格式的笔记本](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/Top_Pypi_2020.pdf)
+> ????????: [PDF 格式的笔记本](https://github.com/vinayprabhu/Favorite_PyPi_2020/blob/main/Top_Pypi_2020.pdf)
 
 ### 引言
 
 > *“开源的力量就是人民的力量。人民统治”：****Philippe Kahn***
 
-自从我的博士研究主要涉及在**R**（以及坦白说**Octave/MATLAB**）中进行统计分析以来，我就坚定地拥抱了Python作为机器学习者/数据科学家/ *插入最新职业热词*的通用语言。
+自从我的博士研究主要涉及在**R**（以及坦白说**Octave/MATLAB**）中进行统计分析以来，我就坚定地拥抱了 Python 作为机器学习者/数据科学家/ *插入最新职业热词*的通用语言。
 
 我的日常工作流程涉及*快速* *响应*混乱现实数据的变化，尽管这些数据常常打破了天真的假设。对我而言，研究生院与工业界之间的一个主要区别是征服内心那个驱使你从零开始实现算法的自我。 一旦过了*白板/假设建立阶段*，我会迅速浏览[PyPi 仓库](https://pypi.org/)检查是否已经有相关模块。这通常接着是
 
@@ -48,7 +48,7 @@
 
 关于子领域偏差的警告：*这篇文章专注于涉及****神经网络/深度学习****的机器学习管道。我计划在不久的将来撰写类似专题的博客文章，如时间序列分析和人体运动学分析。*✌️
 
-接下来是涵盖的10个PyPi包的基本介绍：
+接下来是涵盖的 10 个 PyPi 包的基本介绍：
 
 a) **神经网络架构规范和训练**：*NSL-tf*、*Kymatio* 和 *LARQ*
 
@@ -77,7 +77,7 @@ c) **实际部署前的压力测试**：*PyOD*、*HyPPO* 和 *Gradio* d) **文�
 
 大多数现成的机器学习分类算法的核心存在***i.i.d. 谬论***。简而言之，算法设计基于样本在训练集（以及测试集）中是独立且同分布的假设。然而，实际上这很少成立，样本之间存在可以利用的相关性，以实现更好的准确性和解释性。在广泛的应用场景中（见图-1），这些相关性通过一个底层图（G(V,E)）被捕获，该图可以是共同挖掘的或统计推断的。例如，如果你正在执行文本推文的情感检测，底层的关注者-被关注者社交图提供了建模*社交* *背景*的关键线索，这些背景是推文发布的背景信息。这种社交邻域信息可以被用来执行网络辅助分类，这对防范文本唯一的缺陷如讽刺误检和话题标签劫持至关重要。
 
-![图示](../Images/2944877f0d45bad5f74fd27be3bb672f.png)
+![图示](img/2944877f0d45bad5f74fd27be3bb672f.png)
 
 图-1：在线信息图示例
 
@@ -181,11 +181,11 @@ _________________________________________________________________
 
 去年十二月，在温哥华的 NEURIPS-2019 上，我遇到了 LARQ 的开发者，他们展示了他们的新开源 Python 库，用于训练二值化神经网络 (BNNs)，同时展示了他们的论文海报，论文标题为[*潜在权重不存在：重新思考二值化*](https://papers.nips.cc/paper/2019/file/9ca8c9b0996bbf05ae7753d34667a6fd-Paper.pdf)。
 
-神经网络优化。虽然对于资源受限的设备部署模型压缩似乎有很多兴趣（[这里有42个](https://awesomeopensource.com/projects/model-compression)！），但从零开始训练快速且简约的二值神经网络似乎是一个许多人在一开始就忽略的选项。
+神经网络优化。虽然对于资源受限的设备部署模型压缩似乎有很多兴趣（[这里有 42 个](https://awesomeopensource.com/projects/model-compression)！），但从零开始训练快速且简约的二值神经网络似乎是一个许多人在一开始就忽略的选项。
 
-LARQ包应有助于改变这一情况，考虑到其易用性、快速推断（卷积操作转变为使用二值权重的xor/位移）、出色的文档和大量的架构示例，用户可以通过完整的模型*[zoo](https://docs.larq.dev/zoo/)*进行修改。今年，我个人使用LARQ发布了关于*[风格迁移](https://matthewmcateer.me/posts/bnn-nst/)*和一个*[40 kB BiPedalNet模型](https://pml4dc.github.io/iclr2020/papers/PML4DC2020_32.pdf)*的工作，使用这个工具包总是非常顺利。除了*[Zoo](https://docs.larq.dev/zoo/)*，该包还配备了一个高度优化的*[计算引擎](https://docs.larq.dev/compute-engine/)*，*目前支持各种移动平台，已在Pixel 1手机和Raspberry Pi上进行基准测试，还提供了一个为支持的指令集开发的手工优化的TensorFlow Lite自定义操作集合，这些操作是用内联汇编或C++通过编译器内建函数开发的。*
+LARQ 包应有助于改变这一情况，考虑到其易用性、快速推断（卷积操作转变为使用二值权重的 xor/位移）、出色的文档和大量的架构示例，用户可以通过完整的模型*[zoo](https://docs.larq.dev/zoo/)*进行修改。今年，我个人使用 LARQ 发布了关于*[风格迁移](https://matthewmcateer.me/posts/bnn-nst/)*和一个*[40 kB BiPedalNet 模型](https://pml4dc.github.io/iclr2020/papers/PML4DC2020_32.pdf)*的工作，使用这个工具包总是非常顺利。除了*[Zoo](https://docs.larq.dev/zoo/)*，该包还配备了一个高度优化的*[计算引擎](https://docs.larq.dev/compute-engine/)*，*目前支持各种移动平台，已在 Pixel 1 手机和 Raspberry Pi 上进行基准测试，还提供了一个为支持的指令集开发的手工优化的 TensorFlow Lite 自定义操作集合，这些操作是用内联汇编或 C++通过编译器内建函数开发的。*
 
-在下面的示例代码单元中，我们训练了一个13.19 KB的BNN，它在MNIST数据集上经过6个周期达到了98.31%，并演示了如何轻松地从LARQ-zoo中提取一个SOTA预训练的*QuickNet*模型并进行推断。
+在下面的示例代码单元中，我们训练了一个 13.19 KB 的 BNN，它在 MNIST 数据集上经过 6 个周期达到了 98.31%，并演示了如何轻松地从 LARQ-zoo 中提取一个 SOTA 预训练的*QuickNet*模型并进行推断。
 
 ```py
 import larq as lq
@@ -244,27 +244,27 @@ plt.imshow(img)
 plt.title(f'Top prediction:\n {pred_dec[0]}');***Top-5 predictions: [('n02504458', 'African_elephant', 0.7053231), ('n01871265', 'tusker', 0.2933379), ('n02504013', 'Indian_elephant', 0.001338586), ('n02408429', 'water_buffalo', 7.938418e-08), ('n01704323', 'triceratops', 7.2361296e-08)]***
 ```
 
-![png](../Images/a6780fad5a800441cfe7fcb83d032f80.png)
+![png](img/a6780fad5a800441cfe7fcb83d032f80.png)
 
-### B) 训练后校准和性能基准测试：NetCal、PyEER和BayComp
+### B) 训练后校准和性能基准测试：NetCal、PyEER 和 BayComp
 
 在本节中，我们将查看在训练后、部署前场景中有用的包，其中从业者的目标是校准预训练模型的输出，并严格基准测试多个适合部署的模型的性能。
 
 ### [1: Netcal](https://pypi.org/project/netcal/)：
 
-![图](../Images/32e6d40a03a71407982fa90300c831bc.png)
+![图](img/32e6d40a03a71407982fa90300c831bc.png)
 
 图-2：缩放与分箱与缩放-分箱。‘B’表示模型的不同概率数
 
-输出。来源：[https://arxiv.org/pdf/1909.10155.pdf](https://arxiv.org/pdf/1909.10155.pdf)
+输出。来源：[`arxiv.org/pdf/1909.10155.pdf`](https://arxiv.org/pdf/1909.10155.pdf)
 
-我常常看到机器学习从业者误认为输出的*softmax*值和概率是等同的。它们远非如此！它们在（0,1]空间中的共存使它们伪装成概率，但‘原始’softmax值，嗯，可以说是‘[未校准](https://arxiv.org/pdf/1706.04599.pdf)’。因此，训练后校准是深度学习中快速增长的工作领域，这里提出的技术大致分为三类（见图-2）：
+我常常看到机器学习从业者误认为输出的*softmax*值和概率是等同的。它们远非如此！它们在（0,1]空间中的共存使它们伪装成概率，但‘原始’softmax 值，嗯，可以说是‘[未校准](https://arxiv.org/pdf/1706.04599.pdf)’。因此，训练后校准是深度学习中快速增长的工作领域，这里提出的技术大致分为三类（见图-2）：
 
 +   分箱（例如：直方图分箱、等距回归、贝叶斯分箱到分位数（BBQ）、近似等距回归集成（ENIR））
 
 +   缩放（例如: Logistic 校准/Platt 缩放，温度缩放，Beta 校准）
 
-+   [混合缩放-分箱](https://arxiv.org/pdf/1909.10155.pdf) (Python 库: [https://pypi.org/project/uncertainty-calibration](https://pypi.org/project/uncertainty-calibration))
++   [混合缩放-分箱](https://arxiv.org/pdf/1909.10155.pdf) (Python 库: [`pypi.org/project/uncertainty-calibration`](https://pypi.org/project/uncertainty-calibration))
 
 关于上述所有分箱和缩放技术，具有极好编写文档的实现可以在 NetCal 中找到。该包还包括生成可靠性图和估计校准误差指标（如期望/最大/平均校准误差）的原语。
 
@@ -295,7 +295,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-![png](../Images/d5cc7402f1bff615fa0059bf41206c80.png)
+![png](img/d5cc7402f1bff615fa0059bf41206c80.png)
 
 ```py
 y_pred_nsl=np.argmax(Y_pred_test,axis=1)
@@ -325,9 +325,9 @@ plt.tight_layout()
 plt.suptitle('Wrong predictions \n Class | Uncalibrated |  Calibrated');
 ```
 
-![png](../Images/69889862580274b1cdc38edc66102162.png)
+![png](img/69889862580274b1cdc38edc66102162.png)
 
-![png](../Images/daa5d781ae7379488957133f289260c2.png)
+![png](img/daa5d781ae7379488957133f289260c2.png)
 
 ```py
 from netcal.presentation import ReliabilityDiagram
@@ -336,15 +336,15 @@ diagram = ReliabilityDiagram(n_bins)
 diagram.plot(Y_pred_test, y_test)  # visualize miscalibration of uncalibrated
 ```
 
-![png](../Images/af4846a01cfe622db1c26cb4d13f6a83.png)
+![png](img/af4846a01cfe622db1c26cb4d13f6a83.png)
 
 ### [2: Baycomp](https://baycomp.readthedocs.io/): 你认为你有一个更好的分类器吗？
 
 一个被低估的难题是，机器学习从业者以及在某些方面，研究论文审稿人，如何严格确定一个分类器模型相对于其他模型的预测优势。像 [Papers with code](https://paperswithcode.com/) 这样的平台通过错误地将 top-1 准确度指标（见下图）作为决定性度量，进一步传播了这种模型排名的误区。
 
-![Figure](../Images/1a89fad6cb754f68e51ad5bae2408900.png)
+![Figure](img/1a89fad6cb754f68e51ad5bae2408900.png)
 
-来源: [https://paperswithcode.com/sota/image-classification-on-inaturalist-2018](https://paperswithcode.com/sota/image-classification-on-inaturalist-2018)
+来源: [`paperswithcode.com/sota/image-classification-on-inaturalist-2018`](https://paperswithcode.com/sota/image-classification-on-inaturalist-2018)
 
 那么，考虑到两个具有类似工程开销的分类模型，你如何选择其中一个而不是另一个？通常，我们有一个标准基准数据集（或一组数据集），作为分类器竞争的测试平台。在获得‘*该数据集空间的原始准确度指标*’后，统计思维的机器学习者可能会倾向于使用来自频率学派零假设显著性测试（NHST）框架的工具来确定哪个分类器‘更好’。然而，如 [这里](https://www.jmlr.org/papers/volume18/16-305/16-305.pdf) 所述，“*许多科学领域意识到频率学推理的局限性，在最激进的情况下甚至禁止在出版物中使用它*”。
 
@@ -358,7 +358,7 @@ Baycomp 在这种背景下出现，提供了一个 ***用于比较分类器的�
 
 **实用等效区域**（rope）由机器学习者指定，该学习者对在部署领域中可以安全假设为*等效*的内容非常熟悉。
 
-在下面的示例单元中，我们考虑了一个合成示例，其中包括两个紧密竞争的分类器以及我们刚刚使用NSL-TF和LARQ-BNN框架在MNIST数据集上训练的两个分类器。
+在下面的示例单元中，我们考虑了一个合成示例，其中包括两个紧密竞争的分类器以及我们刚刚使用 NSL-TF 和 LARQ-BNN 框架在 MNIST 数据集上训练的两个分类器。
 
 ```py
 # Helper function to plot the accuracies
@@ -399,7 +399,7 @@ print(f'The mean accuracies of the two classifiers are: {mean_legacy} and {mean_
 bar_plt2(classifier_legacy_acc,classifier_new_acc)The mean accuracies of the two classifiers are: 82.0 and 81.8
 ```
 
-![png](../Images/2d6d7dda04dc122e5edcebdba65f2f69.png)
+![png](img/2d6d7dda04dc122e5edcebdba65f2f69.png)
 
 ```py
 print('$p_{left}, p_{rope},p_{right}$ using the two_on_multiple function: ')
@@ -443,21 +443,21 @@ posterior.plot(names=("NSL", "BNN"))
 ***(0.0, 0.2846, 0.7154)***
 ```
 
-![png](../Images/c2a73cc8cfd3d6f173d37301cacecd95.png)
+![png](img/c2a73cc8cfd3d6f173d37301cacecd95.png)
 
-![图](../Images/91a01fb33e6680632e0490584b6e874d.png)
+![图](img/91a01fb33e6680632e0490584b6e874d.png)
 
-使用baycomp比较分类器 +NSL与BNN分类器在MNIST数据集上的比较
+使用 baycomp 比较分类器 +NSL 与 BNN 分类器在 MNIST 数据集上的比较
 
-***重要警告***：*有关机器学习中预测准确性崇拜的相关但不同的讨论。这*[*预测主义与适应辩论*](https://plato.stanford.edu/entries/prediction-accommodation/#:~:text=The%20view%20that%20predictions%20are,when%20predicted%20than%20when%20accommodated.)*在科学中自19世纪的约翰·赫歇尔和威廉·惠更斯时代以来一直在演变。*
+***重要警告***：*有关机器学习中预测准确性崇拜的相关但不同的讨论。这*[*预测主义与适应辩论*](https://plato.stanford.edu/entries/prediction-accommodation/#:~:text=The%20view%20that%20predictions%20are,when%20predicted%20than%20when%20accommodated.)*在科学中自 19 世纪的约翰·赫歇尔和威廉·惠更斯时代以来一直在演变。*
 
 ### [3: PyEER](https://pypi.org/project/pyeer/)
 
-![图](../Images/fe59eb7b9ce52d039f05b4232f0ce982.png)
+![图](img/fe59eb7b9ce52d039f05b4232f0ce982.png)
 
-PyEER中可用的方法广泛
+PyEER 中可用的方法广泛
 
-比较两个分类器的另一种方法，特别是在解决二元身份验证问题的背景下（而非*监控*而是*身份验证*），是通过绘制比较检测错误权衡（DET）和接收器操作特性（ROC）图。PyEER在这方面是绝对的杰作，因为它不仅可以绘制相关图形，还能自动生成指标报告和估算EER最佳阈值。在下面的示例单元中，我们比较了即将在下一节介绍的角度基础异常检测器（ABOD）和KNN内点-外点检测器二元分类器。
+比较两个分类器的另一种方法，特别是在解决二元身份验证问题的背景下（而非*监控*而是*身份验证*），是通过绘制比较检测错误权衡（DET）和接收器操作特性（ROC）图。PyEER 在这方面是绝对的杰作，因为它不仅可以绘制相关图形，还能自动生成指标报告和估算 EER 最佳阈值。在下面的示例单元中，我们比较了即将在下一节介绍的角度基础异常检测器（ABOD）和 KNN 内点-外点检测器二元分类器。
 
 ```py
 from pyeer.eer_info import get_eer_stats
@@ -492,33 +492,33 @@ plt.imshow(img2)
 plt.show()EER-KNN = 0.0, EER-ABOD = 0.008333333333333333
 ```
 
-![png](../Images/96d46c201082e58e04fc232d1fa08fb2.png)
+![png](img/96d46c201082e58e04fc232d1fa08fb2.png)
 
-### C: 现实世界部署前的压力测试：PyOD、HyPPO和Gradio
+### C: 现实世界部署前的压力测试：PyOD、HyPPO 和 Gradio
 
-![图](../Images/17ec9df55fe6dd212daf2484e5a6f557.png)
+![图](img/17ec9df55fe6dd212daf2484e5a6f557.png)
 
-OOD易感性的全景：访问SVG [这里](https://matthew-mcateer.github.io/oodles-of-oods/)
+OOD 易感性的全景：访问 SVG [这里](https://matthew-mcateer.github.io/oodles-of-oods/)
 
 对于外部分布（OOD）样本造成的自信错误预测，目前是从理论论文过渡到现实世界部署中最严重的障碍之一，因为输入没有从所谓的*训练流形*中获得保证。在与[Matthew McAteer](https://matthew-mcateer.github.io/oodles-of-oods/)的联合项目中，我创建了一个易感性全景（见上图），这应该能够帮助机器学习者覆盖与他们的模型相关的广泛特定易感性向量。
 
-虽然没有银弹（可能永远也不会有——见 [这篇](https://arxiv.org/pdf/1802.08686.pdf) 和 [这篇](https://arxiv.org/abs/1809.02104)），但很难反对在你的管道中加入OOD模型正则化和OOD检测模块。
+虽然没有银弹（可能永远也不会有——见 [这篇](https://arxiv.org/pdf/1802.08686.pdf) 和 [这篇](https://arxiv.org/abs/1809.02104)），但很难反对在你的管道中加入 OOD 模型正则化和 OOD 检测模块。
 
-关于OOD检测，我认为ML社区有三项近期努力被低估了。
+关于 OOD 检测，我认为 ML 社区有三项近期努力被低估了。
 
-前两个， *PyOD* 和 *HyPPO*，在进行推理前有助于预筛选输入，而第三个，Gradio，是一个出色的人机交互白帽压力测试工具，补充了如 [Dynabench](https://dynabench.org/) 这样的FAIR努力。
+前两个， *PyOD* 和 *HyPPO*，在进行推理前有助于预筛选输入，而第三个，Gradio，是一个出色的人机交互白帽压力测试工具，补充了如 [Dynabench](https://dynabench.org/) 这样的 FAIR 努力。
 
 ### [1: PYOD](https://pyod.readthedocs.io/en/latest/)
 
-![图示](../Images/f1cb5578bfaf5d746d6dc6a33256602b.png)
+![图示](img/f1cb5578bfaf5d746d6dc6a33256602b.png)
 
-来源：[https://www.jmlr.org/papers/volume20/19-011/19-011.pdf](https://www.jmlr.org/papers/volume20/19-011/19-011.pdf)
+来源：[`www.jmlr.org/papers/volume20/19-011/19-011.pdf`](https://www.jmlr.org/papers/volume20/19-011/19-011.pdf)
 
-PyOD可以说是最全面和可扩展的异常检测Python工具包，包含了30多种检测算法的实现！
+PyOD 可以说是最全面和可扩展的异常检测 Python 工具包，包含了 30 多种检测算法的实现！
 
-学生维护的PyPi包能够结合软件工程最佳实践，这确保了实现的模型类都经过了单元测试、跨平台持续集成、代码覆盖率和代码可维护性检查，这种情况比较少见。这与清晰统一的API、详细的文档以及即时（JIT）编译执行相结合，使得学习不同技术和实际使用变得异常轻松。作者在仔细并行化方面投入的努力，使得异常检测代码不仅非常快速且可扩展，而且在 *Python 2 和 3 及主要操作系统（Windows、Linux 和 MacOS）* 上也无缝兼容。
+学生维护的 PyPi 包能够结合软件工程最佳实践，这确保了实现的模型类都经过了单元测试、跨平台持续集成、代码覆盖率和代码可维护性检查，这种情况比较少见。这与清晰统一的 API、详细的文档以及即时（JIT）编译执行相结合，使得学习不同技术和实际使用变得异常轻松。作者在仔细并行化方面投入的努力，使得异常检测代码不仅非常快速且可扩展，而且在 *Python 2 和 3 及主要操作系统（Windows、Linux 和 MacOS）* 上也无缝兼容。
 
-在下面的示例单元格中，我们训练并可视化了两个内点-外点检测器二元分类器在一个合成数据集上的结果：角度基础异常检测器（ABOD）和KNN异常检测器。
+在下面的示例单元格中，我们训练并可视化了两个内点-外点检测器二元分类器在一个合成数据集上的结果：角度基础异常检测器（ABOD）和 KNN 异常检测器。
 
 ```py
 from pyod.models.abod import ABOD
@@ -553,23 +553,23 @@ visualize("KNN", X_train_ood, y_train_ood, X_test_ood, y_test_ood, y_train_pred_
           y_test_pred_knn, show_figure=True, save_figure=False)
 ```
 
-![图示](../Images/b1e03b0842cef601d3e1bd7dce0867b8.png)
+![图示](img/b1e03b0842cef601d3e1bd7dce0867b8.png)
 
-ABOD与KNN在异常检测中的对比
+ABOD 与 KNN 在异常检测中的对比
 
 ### [2: Hyppo](https://hyppo.neurodata.io/index.html):
 
-目睹深度学习社区普遍存在这种集体遗忘现象，继续将OOD易感性视为一种独特的“深度神经网络”缺陷，似乎需要一个深度学习解决方案，而完全忽视了统计学社区已经探索过的一系列方法和解决方案，这有些令人困惑。
+目睹深度学习社区普遍存在这种集体遗忘现象，继续将 OOD 易感性视为一种独特的“深度神经网络”缺陷，似乎需要一个深度学习解决方案，而完全忽视了统计学社区已经探索过的一系列方法和解决方案，这有些令人困惑。
 
-有人可能会认为，按定义，OOD（异常检测）属于多变量假设检验框架的范畴，因此看到深度学习OOD论文没有将其炫目的新深度方法与可能存在的传统假设检验算法进行基准测试，实在令人沮丧。在这种背景下，我们现在介绍HYPPO。
+有人可能会认为，按定义，OOD（异常检测）属于多变量假设检验框架的范畴，因此看到深度学习 OOD 论文没有将其炫目的新深度方法与可能存在的传统假设检验算法进行基准测试，实在令人沮丧。在这种背景下，我们现在介绍 HYPPO。
 
-HYPPO（**HYP**othesis Testing in **P**yth**O**n，发音为“Hippo”）可以说是由[NEURODATA](https://neurodata.io/)社区生产的最全面的开源多变量假设检验软件包。在下图中，我们可以看到这个包中实现的模块的全景，涵盖了合成数据生成（具有20种依赖结构！）、独立性测试、K样本测试以及时间序列测试。
+HYPPO（**HYP**othesis Testing in **P**yth**O**n，发音为“Hippo”）可以说是由[NEURODATA](https://neurodata.io/)社区生产的最全面的开源多变量假设检验软件包。在下图中，我们可以看到这个包中实现的模块的全景，涵盖了合成数据生成（具有 20 种依赖结构！）、独立性测试、K 样本测试以及时间序列测试。
 
-![图](../Images/a278d6ff3db81a5ad235291b15bde662.png)
+![图](img/a278d6ff3db81a5ad235291b15bde662.png)
 
-Hyppo中实现的算法全景
+Hyppo 中实现的算法全景
 
-在下面的示例单元格中，我们看到使用K-Sample-Distance Correlation（或称“Dcorr”）测试来检验PyOD中generate_data()模块生成的内外分布数据。在深度学习环境中，我们可以在输入层级别或特征嵌入空间中部署这些测试，以估计输出的softmax值是否值得进一步在推理管道中处理。
+在下面的示例单元格中，我们看到使用 K-Sample-Distance Correlation（或称“Dcorr”）测试来检验 PyOD 中 generate_data()模块生成的内外分布数据。在深度学习环境中，我们可以在输入层级别或特征嵌入空间中部署这些测试，以估计输出的 softmax 值是否值得进一步在推理管道中处理。
 
 ```py
 from hyppo.ksample import KSample
@@ -601,19 +601,19 @@ Out-train v/s Out-test
 
 ### [3: Gradio](https://gradio.app/ml_examples)：
 
-![图](../Images/f63344218fef2c36bef52b79235e381e.png)
+![图](img/f63344218fef2c36bef52b79235e381e.png)
 
-Gradio的显著性裁剪算法：[http://saliency-model.gradiohub.com/](http://saliency-model.gradiohub.com/)
+Gradio 的显著性裁剪算法：[`saliency-model.gradiohub.com/`](http://saliency-model.gradiohub.com/)
 
-迄今为止，与刚刚训练的模型交互所需的良好GUI通常需要大量的JavaScript前端技巧或Heroku-Flask路线，这可能会使算法的重点分散。
+迄今为止，与刚刚训练的模型交互所需的良好 GUI 通常需要大量的 JavaScript 前端技巧或 Heroku-Flask 路线，这可能会使算法的重点分散。
 
-借助Gradio，可以用不到10行Python代码快速启动一个GUI，包含文本输入、图像输入（配备了出色的Toast-UI图像编辑器）和一个素描板！
+借助 Gradio，可以用不到 10 行 Python 代码快速启动一个 GUI，包含文本输入、图像输入（配备了出色的 Toast-UI 图像编辑器）和一个素描板！
 
-在过去的一年里，我在工作流程中大量使用了Gradio，用它来调查Twitter的显著性裁剪算法为何会产生如此种族偏见的结果（见左图），以及为什么Onions会触发[facebook](https://www.bbc.com/news/54467384)上的NSFW过滤器（见下方推文）。
+在过去的一年里，我在工作流程中大量使用了 Gradio，用它来调查 Twitter 的显著性裁剪算法为何会产生如此种族偏见的结果（见左图），以及为什么 Onions 会触发[facebook](https://www.bbc.com/news/54467384)上的 NSFW 过滤器（见下方推文）。
 
-[NSFW-Onion](https://github.com/vinayprabhu/Crimes_of_Vision_Datasets/blob/master/Notebooks/Notebook_5b_Onion_Gradio_NSFW.ipynb)的灾难。Colab笔记本：[https://github.com/vinayprabhu/Crimes_of_Vision_Datasets/blob/master/Notebooks/Notebook_5b_Onion_Gradio_NSFW.ipynb](https://github.com/vinayprabhu/Crimes_of_Vision_Datasets/blob/master/Notebooks/Notebook_5b_Onion_Gradio_NSFW.ipynb)
+[NSFW-Onion](https://github.com/vinayprabhu/Crimes_of_Vision_Datasets/blob/master/Notebooks/Notebook_5b_Onion_Gradio_NSFW.ipynb)的灾难。Colab 笔记本：[`github.com/vinayprabhu/Crimes_of_Vision_Datasets/blob/master/Notebooks/Notebook_5b_Onion_Gradio_NSFW.ipynb`](https://github.com/vinayprabhu/Crimes_of_Vision_Datasets/blob/master/Notebooks/Notebook_5b_Onion_Gradio_NSFW.ipynb)
 
-在下面的示例单元格中，我们展示了两个简单的示例，使用Gradio启动UI，以对我们刚刚训练的MNIST分类BNN模型进行压力测试，并演示了使用InceptionV3模型进行图像分类的简便性。Gradio团队还迅速添加了解释性和嵌入可视化工具，并实现了SOTA的[盲超分辨率](https://gradio.app/g/dawoodkhan82/dan)和[实时高分辨率背景抠图](https://gradio.app/g/BackgroundMattingV2) UI！
+在下面的示例单元格中，我们展示了两个简单的示例，使用 Gradio 启动 UI，以对我们刚刚训练的 MNIST 分类 BNN 模型进行压力测试，并演示了使用 InceptionV3 模型进行图像分类的简便性。Gradio 团队还迅速添加了解释性和嵌入可视化工具，并实现了 SOTA 的[盲超分辨率](https://gradio.app/g/dawoodkhan82/dan)和[实时高分辨率背景抠图](https://gradio.app/g/BackgroundMattingV2) UI！
 
 ```py
 import gradio as gr
@@ -662,9 +662,9 @@ label = gr.outputs.Label(num_top_classes=3)
 gr.Interface(fn=classify_image, inputs=image, outputs=label, capture_session=True).launch()
 ```
 
-![图](../Images/9b5d730fae41a829217dfe3fbcc4ab6c.png)
+![图](img/9b5d730fae41a829217dfe3fbcc4ab6c.png)
 
-Gradio MNIST 分类与草图输入![图示](../Images/ead2537d8637878a263a7c0101d030a7.png)
+Gradio MNIST 分类与草图输入![图示](img/ead2537d8637878a263a7c0101d030a7.png)
 
 Gradio 图像分类（InceptionV3）与图像输入
 
@@ -672,9 +672,9 @@ Gradio 图像分类（InceptionV3）与图像输入
 
 ### 1) Jupyter_to_medium:
 
-![图示](../Images/45bb652f1b909dd4c89ef395ee1ae867.png)
+![图示](img/45bb652f1b909dd4c89ef395ee1ae867.png)
 
-示例图像。来源：[https://www.dexplo.org/jupyter_to_medium/](https://www.dexplo.org/jupyter_to_medium/)
+示例图像。来源：[`www.dexplo.org/jupyter_to_medium/`](https://www.dexplo.org/jupyter_to_medium/)
 
 *Jupyter_to_medium 包* 的视频教程
 
@@ -684,11 +684,11 @@ Gradio 图像分类（InceptionV3）与图像输入
 
 最后，我要感谢那些创造了这些精彩 PyPi 包的杰出研究人员和工程师。在即将到来的博客文章中，我计划涵盖与特定主题相关的包，如时间序列分析和降维。这里有一张回顾图片，总结了上述探索的包。
 
-![图示](../Images/b0ff25585442b78ff440f70a0a846a2b.png)
+![图示](img/b0ff25585442b78ff440f70a0a846a2b.png)
 
 本博客文章中涵盖的 PyPi 生态系统回顾
 
-希望你们中的一些人在机器学习冒险中能发现这篇博客文章有所帮助。祝好运，并祝大家2021年快乐高效 ????
+希望你们中的一些人在机器学习冒险中能发现这篇博客文章有所帮助。祝好运，并祝大家 2021 年快乐高效 ????
 
 随时欢迎对内容/错误/坏链进行反馈。你可以通过[Linkedin](https://www.linkedin.com/in/vinay-prabhu-84619785/)或[Twitter](https://twitter.com/vinayprabhu)与我联系 ????
 
@@ -698,11 +698,11 @@ Gradio 图像分类（InceptionV3）与图像输入
 
 **相关内容：**
 
-+   [数据科学作为产品 – 为什么这么难？](/2020/12/data-science-product-hard.html)
++   数据科学作为产品 – 为什么这么难？
 
-+   [生成美丽的神经网络可视化](/2020/12/generating-beautiful-neural-network-visualizations.html)
++   生成美丽的神经网络可视化
 
-+   [使用 Pomegranate 进行快速直观的统计建模](/2020/12/fast-intuitive-statistical-modeling-pomegranate.html)
++   使用 Pomegranate 进行快速直观的统计建模
 
 ### 更多相关话题
 

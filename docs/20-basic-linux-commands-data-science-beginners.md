@@ -1,8 +1,8 @@
 # 20 个基础 Linux 命令供数据科学初学者使用
 
-> 原文：[https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
+> 原文：[`www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html`](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
 
-![20 个基础 Linux 命令供数据科学初学者使用](../Images/106726c9dbad322d4261ab9a335a88ac.png)
+![20 个基础 Linux 命令供数据科学初学者使用](img/106726c9dbad322d4261ab9a335a88ac.png)
 
 照片由 [Lukas](https://unsplash.com/@lukash?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/linux?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们推荐的前 3 个课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -60,7 +60,7 @@ C:\Repository\HuggingFace
 $ cd C:/Repository/GitHub/
 ```
 
-![cd 命令](../Images/3eead84d46c06513a9b20a33a995164a.png)
+![cd 命令](img/3eead84d46c06513a9b20a33a995164a.png)
 
 # 4\. wget
 
@@ -72,7 +72,7 @@ $ wget https://raw.githubusercontent.com/uiuc-cse/data-fa14/gh-pages/data/iris.c
 
 **输出**
 
-![wget 命令](../Images/efda4692adc3448734b2ffb280e61666.png)
+![wget 命令](img/efda4692adc3448734b2ffb280e61666.png)
 
 # 5\. cat
 
@@ -162,11 +162,11 @@ $ find . -name "*.dvc" -type f
 $ grep -i "vir" iris.csv
 ```
 
-![grep 命令](../Images/d3a2cdc240bd998d66ec7461a5b3b131.png)
+![grep 命令](img/d3a2cdc240bd998d66ec7461a5b3b131.png)
 
 # 10\. history
 
-历史记录将显示过去命令的日志。我们已将输出限制为显示最近的5个命令。
+历史记录将显示过去命令的日志。我们已将输出限制为显示最近的 5 个命令。
 
 ```py
 $ history 5
@@ -188,7 +188,7 @@ $ history 5
 
 # 11\. zip
 
-**zip**用于压缩文件大小和文件包实用程序。zip命令中的第一个参数是zip文件名，第二个参数是文件名或文件名列表。zip命令主要用于压缩和打包数据集。
+**zip**用于压缩文件大小和文件包实用程序。zip 命令中的第一个参数是 zip 文件名，第二个参数是文件名或文件名列表。zip 命令主要用于压缩和打包数据集。
 
 ```py
 $ zip ZipFile.zip File1.txt File2.txt
@@ -212,7 +212,7 @@ $ cp a.txt work
 
 # 14\. mv
 
-类似于**cp**，**mv**命令允许你将文件、文件列表或目录移动到另一个位置。它也用于重命名文件和目录。mv命令中的第一个参数是文件，第二个参数是目标目录路径。
+类似于**cp**，**mv**命令允许你将文件、文件列表或目录移动到另一个位置。它也用于重命名文件和目录。mv 命令中的第一个参数是文件，第二个参数是目标目录路径。
 
 ```py
 $ mv a.txt work
@@ -254,7 +254,7 @@ VERBOSE: Performing the operation "Remove Directory" on target "C:\love".
 
 # 18\. man
 
-它用于显示Linux系统中任何命令的手册。在我们的例子中，我们将学习**echo**命令。
+它用于显示 Linux 系统中任何命令的手册。在我们的例子中，我们将学习**echo**命令。
 
 ```py
 $ man echo
@@ -283,7 +283,7 @@ $ diff app1.py app2.py
 
 # 20\. alias
 
-**alias**是一个生产力工具。我已经缩短了所有冗长和重复的命令。我已缩短了所有Linux和Git命令，以避免在编写相同命令时出错。
+**alias**是一个生产力工具。我已经缩短了所有冗长和重复的命令。我已缩短了所有 Linux 和 Git 命令，以避免在编写相同命令时出错。
 
 在下面的例子中，终端每当我运行**love**命令时，就会显示文本“i love you”。
 
@@ -291,20 +291,20 @@ $ diff app1.py app2.py
 $ alias love="echo 'i love you'"
 ```
 
-![别名命令](../Images/2ea3ae32d9cc2191d77928c8bcbd0e58.png)
+![别名命令](img/2ea3ae32d9cc2191d77928c8bcbd0e58.png)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专家，他喜欢构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理问题的学生构建AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专家，他喜欢构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理问题的学生构建 AI 产品。
 
 ### 更多相关内容
 
-+   [KDnuggets新闻，6月29日：数据科学的20个基本Linux命令……](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基本 Linux 命令……](https://www.kdnuggets.com/2022/n26.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何…](https://www.kdnuggets.com/2022/n46.html)
 
-+   [数据科学Linux备忘单](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)
++   [数据科学 Linux 备忘单](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)
 
-+   [数据科学的前5大Linux发行版](https://www.kdnuggets.com/top-5-linux-distro-for-data-science)
++   [数据科学的前 5 大 Linux 发行版](https://www.kdnuggets.com/top-5-linux-distro-for-data-science)
 
-+   [数据科学的16个必备DVC命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
++   [数据科学的 16 个必备 DVC 命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
 
-+   [数据科学的10个必备SQL命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
++   [数据科学的 10 个必备 SQL 命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)

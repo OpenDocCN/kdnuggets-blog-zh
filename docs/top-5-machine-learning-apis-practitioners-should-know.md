@@ -1,8 +1,8 @@
 # 机器学习从业者应了解的前五大 API
 
-> 原文：[https://www.kdnuggets.com/top-5-machine-learning-apis-practitioners-should-know](https://www.kdnuggets.com/top-5-machine-learning-apis-practitioners-should-know)
+> 原文：[`www.kdnuggets.com/top-5-machine-learning-apis-practitioners-should-know`](https://www.kdnuggets.com/top-5-machine-learning-apis-practitioners-should-know)
 
-![机器学习从业者应了解的前五大 API](../Images/4c626b0c092d20ee3e0be04462fb252b.png)
+![机器学习从业者应了解的前五大 API](img/4c626b0c092d20ee3e0be04462fb252b.png)
 
 作者图片 | Canva
 
@@ -12,11 +12,11 @@ API，即应用程序编程接口，是一组规则和协议，使不同的软�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -52,14 +52,14 @@ API，即应用程序编程接口，是一组规则和协议，使不同的软�
 
 ### 更多相关内容
 
-+   [KDnuggets新闻，4月13日：数据科学家应关注的Python库……](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应关注的 Python 库……](https://www.kdnuggets.com/2022/n15.html)
 
-+   [NLP从业者的5门语言学课程](https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html)
++   [NLP 从业者的 5 门语言学课程](https://www.kdnuggets.com/2022/11/5-linguistics-courses-nlp-practitioners.html)
 
-+   [SAS如何助力从业者职业发展](https://www.kdnuggets.com/2023/07/sas-help-catapult-practitioners-careers.html)
++   [SAS 如何助力从业者职业发展](https://www.kdnuggets.com/2023/07/sas-help-catapult-practitioners-careers.html)
 
-+   [LLM手册：从业者的策略和技巧](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
++   [LLM 手册：从业者的策略和技巧](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
 
-+   [每位机器学习工程师都应掌握的5项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每位机器学习工程师都应掌握的 5 项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [FastAPI教程：用Python快速构建API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
++   [FastAPI 教程：用 Python 快速构建 API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)

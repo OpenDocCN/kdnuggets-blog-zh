@@ -1,8 +1,8 @@
 # 决策树修剪：如何和为什么
 
-> 原文：[https://www.kdnuggets.com/2022/09/decision-tree-pruning-hows-whys.html](https://www.kdnuggets.com/2022/09/decision-tree-pruning-hows-whys.html)
+> 原文：[`www.kdnuggets.com/2022/09/decision-tree-pruning-hows-whys.html`](https://www.kdnuggets.com/2022/09/decision-tree-pruning-hows-whys.html)
 
-![决策树修剪：如何和为什么](../Images/ad5cf415445386976861e940e07248ed.png)
+![决策树修剪：如何和为什么](img/ad5cf415445386976861e940e07248ed.png)
 
 [Devin H](https://unsplash.com/@devin_photography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) via Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -100,7 +100,7 @@
 
 ### 更多相关主题
 
-+   [用Python和Scikit-learn简化决策树可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
++   [用 Python 和 Scikit-learn 简化决策树可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
 
 +   [决策树算法，解释](https://www.kdnuggets.com/2020/01/decision-tree-algorithm-explained.html)
 
@@ -110,4 +110,4 @@
 
 +   [随机森林与决策树：主要区别](https://www.kdnuggets.com/2022/02/random-forest-decision-tree-key-differences.html)
 
-+   [KDnuggets™ 新闻 22:n09, 3月2日: 讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09, 3 月 2 日: 讲述一个伟大的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)

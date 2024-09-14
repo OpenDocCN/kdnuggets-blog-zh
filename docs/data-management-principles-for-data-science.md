@@ -1,8 +1,8 @@
 # 数据科学的数据管理原则
 
-> 原文：[https://www.kdnuggets.com/data-management-principles-for-data-science](https://www.kdnuggets.com/data-management-principles-for-data-science)
+> 原文：[`www.kdnuggets.com/data-management-principles-for-data-science`](https://www.kdnuggets.com/data-management-principles-for-data-science)
 
-![数据科学的数据管理原则](../Images/451039f1e9a7305746481bbd9bbf340a.png)
+![数据科学的数据管理原则](img/451039f1e9a7305746481bbd9bbf340a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -70,7 +70,7 @@
 
 我们都知道在当今时代数据的重要性，因此要不惜一切代价保护它！数据泄露和隐私侵犯可能会产生严重后果，你不想面临这个问题。
 
-你可以采取一些步骤来确保数据安全和隐私，例如访问控制、加密、定期审计、数据生命周期管理等。你要确保你采取的任何保护数据的措施都符合数据隐私法规，例如GDPR。
+你可以采取一些步骤来确保数据安全和隐私，例如访问控制、加密、定期审计、数据生命周期管理等。你要确保你采取的任何保护数据的措施都符合数据隐私法规，例如 GDPR。
 
 ## 数据治理与文档管理
 
@@ -86,7 +86,7 @@
 
 为了确保团队内的数据管理，始终沟通你的任务，以避免重叠，或某人拥有比其他人更好的数据集版本。
 
-数据科学团队中的协作确保了数据对不同利益相关者的可访问性和价值。为了提高团队内部的协作和共享，你可以使用数据共享平台，使用诸如Tableau等协作工具，设置访问控制，并允许反馈。
+数据科学团队中的协作确保了数据对不同利益相关者的可访问性和价值。为了提高团队内部的协作和共享，你可以使用数据共享平台，使用诸如 Tableau 等协作工具，设置访问控制，并允许反馈。
 
 # 数据管理工具和技术
 
@@ -100,7 +100,7 @@
 
 +   Microsoft SQL Server
 
-NoSQL数据库：
+NoSQL 数据库：
 
 +   MongoDB
 
@@ -146,26 +146,26 @@ ETL（提取、转换、加载）工具：
 
 # 资源与进一步学习
 
-+   [5个数据管理挑战及解决方案](/2023/04/5-data-management-challenges-solutions.html)
++   5 个数据管理挑战及解决方案
 
-+   [前5大数据管理平台](/2022/06/top-5-data-management-platforms.html)
++   前 5 大数据管理平台
 
-+   [免费数据管理与数据科学学习CS639](/2023/01/free-data-management-data-science-learning-cs639.html)
++   免费数据管理与数据科学学习 CS639
 
-+   [为什么数据管理对数据科学如此重要？](/2022/08/data-management-important-data-science.html)
++   为什么数据管理对数据科学如此重要？
 
-**[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作员以及KDnuggets的社区经理。她特别感兴趣于提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何能够有益于人类生命的延续。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作员以及 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何能够有益于人类生命的延续。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
 +   [为什么数据管理对数据科学如此重要？](https://www.kdnuggets.com/2022/08/data-management-important-data-science.html)
 
-+   [免费数据管理与数据科学学习CS639](https://www.kdnuggets.com/2023/01/free-data-management-data-science-learning-cs639.html)
++   [免费数据管理与数据科学学习 CS639](https://www.kdnuggets.com/2023/01/free-data-management-data-science-learning-cs639.html)
 
-+   [免费4周数据科学课程关于AI质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费 4 周数据科学课程关于 AI 质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
 
 +   [数据科学项目管理方法指南](https://www.kdnuggets.com/2023/07/guide-data-science-project-management-methodologies.html)
 
-+   [掌握数据科学项目管理的7个敏捷步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握数据科学项目管理的 7 个敏捷步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
-+   [数据科学项目管理的7个技巧](https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html)
++   [数据科学项目管理的 7 个技巧](https://www.kdnuggets.com/2023/03/7-tips-data-science-project-management.html)

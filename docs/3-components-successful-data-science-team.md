@@ -1,12 +1,12 @@
 # 成功数据科学团队的三个关键组成部分
 
-> 原文：[https://www.kdnuggets.com/2015/08/3-components-successful-data-science-team.html](https://www.kdnuggets.com/2015/08/3-components-successful-data-science-team.html)
+> 原文：[`www.kdnuggets.com/2015/08/3-components-successful-data-science-team.html`](https://www.kdnuggets.com/2015/08/3-components-successful-data-science-team.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Jack Danielson.**
 
-![team-250](../Images/aff69a2e573f6fe951a3dc6158072351.png)
+![team-250](img/aff69a2e573f6fe951a3dc6158072351.png)
 
 一个由合适的专职专业人士精心构建的数据科学团队，能够为任何组织带来资产。成功的任何项目都由其资源的专业知识决定，而数据科学也不例外。需要拥有多样化技能的专业人士来成功应对复杂大数据项目的挑战。
 
@@ -36,7 +36,7 @@
 
 **组件 3 - 业务分析师：**
 
-数据探索和数据可视化是业务分析师角色的两个最重要的职责。业务分析师使用与核心业务相关的前端工具，并与组织的高层管理人员进行互动。他们进一步分析由机器学习专家提供的业务级数据，以寻找与组织核心业务利益相关的见解。![data-480](../Images/5a0dbca3e436e0953c88455a4676e264.png)
+数据探索和数据可视化是业务分析师角色的两个最重要的职责。业务分析师使用与核心业务相关的前端工具，并与组织的高层管理人员进行互动。他们进一步分析由机器学习专家提供的业务级数据，以寻找与组织核心业务利益相关的见解。![data-480](img/5a0dbca3e436e0953c88455a4676e264.png)
 
 业务分析师的另一个重要职责是与数据工程师和机器学习专家协调，使他们理解业务目标并确定可能的重点领域。业务分析师的终极责任是基于处理后的数据产生可操作的见解，并帮助公司领导做出决策。
 
@@ -48,38 +48,38 @@
 
 **尽管拥有合适的人选来填补合适的岗位是有好处的，但仅此可能不足以取得成功。这几乎适用于任何依赖团队的项目。无论你是想要与多个作者[启动一个博客](http://wisestartupblog.com/)，还是希望与合作伙伴一起建立在线业务，所有相关方都需要超越个人视角，作为一个统一的整体进行工作。当这种情况发生时，可以放心，成功将自动随之而来。**
 
-****简介:** 作为一名充满激情的自由博客作者和互联网营销专家，Jack Danielson在营销、社交媒体和搜索引擎优化方面拥有超过3年的经验。关注他在 [google plus](https://plus.google.com/u/0/103584817588517824467)。
+****简介:** 作为一名充满激情的自由博客作者和互联网营销专家，Jack Danielson 在营销、社交媒体和搜索引擎优化方面拥有超过 3 年的经验。关注他在 [google plus](https://plus.google.com/u/0/103584817588517824467)。
 
 **相关：**
 
-+   [数据科学技能的分歧：个人与团队方法](/2014/01/split-on-data-science-skills-individual-vs-team-approach.html)
++   数据科学技能的分歧：个人与团队方法
 
-+   [KDnuggets与IBM对话：数据科学家：雇佣个人还是团队？](/2014/02/kdnuggets-talks-to-ibm-data-scientists-individual-vs-team.html)
++   KDnuggets 与 IBM 对话：数据科学家：雇佣个人还是团队？
 
-+   [将数据分析外包到印度：应该还是不应该？](/2015/02/analytics-outsourcing-india.html)
++   将数据分析外包到印度：应该还是不应该？
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 了解更多此话题
 
-+   [数据共享平台的5个关键组成部分](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)
++   [数据共享平台的 5 个关键组成部分](https://www.kdnuggets.com/2022/05/5-key-components-data-sharing-platform.html)
 
-+   [它活了！用Python和一些便宜的基本组件构建你的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
++   [它活了！用 Python 和一些便宜的基本组件构建你的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
 
-+   [每位数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [如何在2022年成为一名成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
++   [如何在 2022 年成为一名成功的数据科学自由职业者](https://www.kdnuggets.com/2022/02/become-successful-data-science-freelancer-2022.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [数据质量在成功机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)**

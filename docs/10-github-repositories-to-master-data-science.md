@@ -1,8 +1,8 @@
 # 10 个 GitHub 仓库来掌握数据科学
 
-> 原文：[https://www.kdnuggets.com/10-github-repositories-to-master-data-science](https://www.kdnuggets.com/10-github-repositories-to-master-data-science)
+> 原文：[`www.kdnuggets.com/10-github-repositories-to-master-data-science`](https://www.kdnuggets.com/10-github-repositories-to-master-data-science)
 
-![10 个 GitHub 仓库来掌握数据科学](../Images/26351554432cbb62cb54038e9c1eb60b.png)
+![10 个 GitHub 仓库来掌握数据科学](img/26351554432cbb62cb54038e9c1eb60b.png)
 
 图像由 ChatGPT 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@ Virgilio 是一个全面的数据科学电子学习指南和导师。它提供�
 
 **仓库：** [microsoft/Data-Science-For-Beginners](https://github.com/microsoft/Data-Science-For-Beginners)
 
-这个微软的仓库提供了一个为期10周、包含20节课的课程，专为初学者设计。它提供了全面的课程和动手项目，以建立扎实的数据科学概念和技术基础。
+这个微软的仓库提供了一个为期 10 周、包含 20 节课的课程，专为初学者设计。它提供了全面的课程和动手项目，以建立扎实的数据科学概念和技术基础。
 
 每一节课包括一个草图笔记、补充视频、课前热身测验、书面课程、指南、知识检查、挑战、补充阅读、作业和课后测验。
 
@@ -62,7 +62,7 @@ Virgilio 是一个全面的数据科学电子学习指南和导师。它提供�
 
 这个仓库提供了一个全面的自学数据科学课程。它包括免费的课程、教科书和资源的链接，涵盖了从基础数学到高级机器学习的所有内容。
 
-你应该阅读我的博客，[免费报名数据科学本科课程](/enroll-in-a-data-science-undergraduate-program-for-free)，该博客涵盖了课程的各个方面，并解释了如何报名并开始学习。
+你应该阅读我的博客，免费报名数据科学本科课程，该博客涵盖了课程的各个方面，并解释了如何报名并开始学习。
 
 ## 7\. 开源数据科学硕士
 
@@ -100,14 +100,14 @@ Virgilio 是一个全面的数据科学电子学习指南和导师。它提供�
 
 ### 更多相关信息
 
-+   [掌握计算机科学的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
++   [掌握计算机科学的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
 
-+   [掌握数据工程的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)
++   [掌握数据工程的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)
 
-+   [掌握机器学习的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
++   [掌握机器学习的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
 
-+   [掌握MLOps的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
++   [掌握 MLOps 的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
 
-+   [掌握Python的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-python)
++   [掌握 Python 的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-python)
 
-+   [掌握SQL的10个GitHub代码库](https://www.kdnuggets.com/10-github-repositories-to-master-sql)
++   [掌握 SQL 的 10 个 GitHub 代码库](https://www.kdnuggets.com/10-github-repositories-to-master-sql)

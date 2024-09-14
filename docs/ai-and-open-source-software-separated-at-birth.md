@@ -1,8 +1,8 @@
-# AI与开源软件：天生一对？
+# AI 与开源软件：天生一对？
 
-> 原文：[https://www.kdnuggets.com/ai-and-open-source-software-separated-at-birth](https://www.kdnuggets.com/ai-and-open-source-software-separated-at-birth)
+> 原文：[`www.kdnuggets.com/ai-and-open-source-software-separated-at-birth`](https://www.kdnuggets.com/ai-and-open-source-software-separated-at-birth)
 
-![AI与开源软件：天生一对？](../Images/64fa326e22c131af7fa770f3ed25a5b3.png)
+![AI 与开源软件：天生一对？](img/64fa326e22c131af7fa770f3ed25a5b3.png)
 
 图片来源：编辑
 
@@ -12,9 +12,9 @@
 
 # 从一开始就建立
 
-一个简单而明显的相似之处是，现代机器学习和现代软件几乎完全是由开源软件构建的。对于软件而言，那是编译器和代码编辑器；对于机器学习而言，那是像PyTorch和TensorFlow这样的训练和推理框架。这些领域由开源软件主导，目前没有任何迹象表明这种情况会改变。
+一个简单而明显的相似之处是，现代机器学习和现代软件几乎完全是由开源软件构建的。对于软件而言，那是编译器和代码编辑器；对于机器学习而言，那是像 PyTorch 和 TensorFlow 这样的训练和推理框架。这些领域由开源软件主导，目前没有任何迹象表明这种情况会改变。
 
-有一个显著的明显例外：所有这些框架都依赖于非常专有的Nvidia硬件和软件栈。这实际上比起初看起来更具相似性。很长一段时间，开源软件主要运行在专有的Unix操作系统上，这些操作系统由专有的硬件供应商出售。只有在Linux出现之后，我们才开始认为一个开放的“底层”栈是可能的，现在许多开源开发是在MacOS和Windows上进行的。目前还不清楚这在机器学习中将如何发展。亚马逊（针对AWS）、谷歌（针对云和Android）和苹果都在投资竞争的芯片和栈，可能这些公司中的一个或多个会跟随[Linus（和Intel）解放*整个*栈](https://davelevy.info/commoditisation-killed-sun-microsystems/)的路径。
+有一个显著的明显例外：所有这些框架都依赖于非常专有的 Nvidia 硬件和软件栈。这实际上比起初看起来更具相似性。很长一段时间，开源软件主要运行在专有的 Unix 操作系统上，这些操作系统由专有的硬件供应商出售。只有在 Linux 出现之后，我们才开始认为一个开放的“底层”栈是可能的，现在许多开源开发是在 MacOS 和 Windows 上进行的。目前还不清楚这在机器学习中将如何发展。亚马逊（针对 AWS）、谷歌（针对云和 Android）和苹果都在投资竞争的芯片和栈，可能这些公司中的一个或多个会跟随[Linus（和 Intel）解放*整个*栈](https://davelevy.info/commoditisation-killed-sun-microsystems/)的路径。
 
 # 培训数据：新的意外供应链？
 
@@ -30,11 +30,11 @@
 
 # 开源扩展到许多细分领域
 
-另一个重要的相似之处是，我强烈怀疑机器学习会扩展到许多细分领域，就像开源软件一样。目前（实至名归）的炒作是关于大型生成模型的，但也有许多小型模型以及对大型模型的调整。实际上，托管网站HuggingFace，机器学习的主要托管平台，报告称其网站上的模型数量正在呈指数增长。
+另一个重要的相似之处是，我强烈怀疑机器学习会扩展到许多细分领域，就像开源软件一样。目前（实至名归）的炒作是关于大型生成模型的，但也有许多小型模型以及对大型模型的调整。实际上，托管网站 HuggingFace，机器学习的主要托管平台，报告称其网站上的模型数量正在呈指数增长。
 
 这些模型很可能会丰富且可用于改进，就像小块开源软件一样。这将使它们极具灵活性和强大。例如，我正在使用一个基于机器学习的小工具在我家街道上进行便宜且注重隐私的交通测量，这是几年前只有昂贵设备才能做到的用例。
 
-但这种扩散意味着它们需要被跟踪——模型可能会变得不像主机机那样，而更像开源软件或SaaS，因为成本低且易于部署，这些模型到处涌现。
+但这种扩散意味着它们需要被跟踪——模型可能会变得不像主机机那样，而更像开源软件或 SaaS，因为成本低且易于部署，这些模型到处涌现。
 
 # 元数据不是万能的，但它是第一步
 
@@ -44,13 +44,13 @@
 
 在机器学习中，元数据跟踪仍在进行中。以下是一些例子：
 
-+   一篇[2019年关键论文](https://arxiv.org/abs/1810.03993)，在业内广泛引用，敦促模型开发者用“模型卡”记录他们的工作。不幸的是，最近的研究表明它们在实际应用中的[实施仍然较弱](https://arxiv.org/abs/2204.06425)。
++   一篇[2019 年关键论文](https://arxiv.org/abs/1810.03993)，在业内广泛引用，敦促模型开发者用“模型卡”记录他们的工作。不幸的是，最近的研究表明它们在实际应用中的[实施仍然较弱](https://arxiv.org/abs/2204.06425)。
 
-+   SPDX和CycloneDX软件材料清单（SBOM）规格正在研究人工智能材料清单（AI BOMs），以比模型卡更有结构化的方式跟踪机器学习数据和模型（这符合预期的复杂性，如果这确实与开源软件类似的话）。
++   SPDX 和 CycloneDX 软件材料清单（SBOM）规格正在研究人工智能材料清单（AI BOMs），以比模型卡更有结构化的方式跟踪机器学习数据和模型（这符合预期的复杂性，如果这确实与开源软件类似的话）。
 
-+   HuggingFace创建了[各种规格和工具](https://huggingface.co/docs/hub/model-cards)，以允许模型和数据集作者记录他们的来源。
++   HuggingFace 创建了[各种规格和工具](https://huggingface.co/docs/hub/model-cards)，以允许模型和数据集作者记录他们的来源。
 
-+   上述MIT数据溯源论文尝试理解数据许可的“真实情况”，以帮助用现实世界的数据充实规格。
++   上述 MIT 数据溯源论文尝试理解数据许可的“真实情况”，以帮助用现实世界的数据充实规格。
 
 +   据说，许多从事机器学习训练的公司与数据追踪的关系显得有些随意，使用“更多更好”的借口，将数据塞入系统中，而不一定做好追踪。
 
@@ -84,7 +84,7 @@
 
 最终，显然——像开源软件一样——会有大量资金流入机器学习，但大部分资金将集中在一位作者所称的[“处理器丰富”公司](https://www.semianalysis.com/p/google-gemini-eats-the-world-gemini)周围。如果与开源软件的类比成立，这些公司将比模型的中等创作者（或用户）有非常不同的关注点和支出优先级。
 
-我们公司Tidelift已经考虑了开源软件激励机制的问题一段时间，像美国政府这样的世界最大软件采购者也在[关注这个问题](https://blog.tidelift.com/new-rfi-shows-the-us-gov-effort-to-invest-in-open-source-is-picking-up-steam)。
+我们公司 Tidelift 已经考虑了开源软件激励机制的问题一段时间，像美国政府这样的世界最大软件采购者也在[关注这个问题](https://blog.tidelift.com/new-rfi-shows-the-us-gov-effort-to-invest-in-open-source-is-picking-up-steam)。
 
 机器学习公司，尤其是那些希望创建创作者社区的公司，应该认真考虑这一挑战。如果它们依赖于成千上万的数据集，它们将如何确保这些数据集在几十年内得到维护、法律合规和安全保障？如果大型公司最终在公司内部部署了几十个或几百个模型，它们将如何确保那些拥有最佳专业知识的人员——那些创建了模型的人——仍然在场，以便在发现新问题时继续工作？
 
@@ -94,13 +94,13 @@
 
 机器学习在学术界实验文化和硅谷快速迭代文化中的深厚根基，使其获得了显著的创新爆发，这种爆发在不到十年前可能还[显得像是魔法](https://xkcd.com/1425/)。开源软件在过去十年的发展也许不那么光鲜亮丽，但在这段时间里，它已成为所有企业软件的基础——并在过程中学到了很多经验。希望机器学习不会重新发明这些轮子。
 
-**[Luis Villa](https://www.linkedin.com/in/luisv/)** 是Tidelift的联合创始人兼总法律顾问。之前，他是一位顶级开源律师，为从财富50强公司到领先的初创公司等客户提供产品开发和开源许可方面的咨询。
+**[Luis Villa](https://www.linkedin.com/in/luisv/)** 是 Tidelift 的联合创始人兼总法律顾问。之前，他是一位顶级开源律师，为从财富 50 强公司到领先的初创公司等客户提供产品开发和开源许可方面的咨询。
 
-**[](https://www.linkedin.com/in/luisv/)**[Luis Villa](https://www.linkedin.com/in/luisv/)**** 是Tidelift的联合创始人兼总法律顾问。之前，他是一位顶级开源律师，为从财富50强公司到领先的初创公司等客户提供产品开发和开源许可方面的咨询。
+**[](https://www.linkedin.com/in/luisv/)**[Luis Villa](https://www.linkedin.com/in/luisv/)**** 是 Tidelift 的联合创始人兼总法律顾问。之前，他是一位顶级开源律师，为从财富 50 强公司到领先的初创公司等客户提供产品开发和开源许可方面的咨询。
 
 ### 了解更多相关信息
 
-+   [Baby AGI：完全自主AI的诞生](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
++   [Baby AGI：完全自主 AI 的诞生](https://www.kdnuggets.com/2023/04/baby-agi-birth-fully-autonomous-ai.html)
 
 +   [封闭源代码与开源图像注释](https://www.kdnuggets.com/closed-source-vs-open-source-image-annotation)
 

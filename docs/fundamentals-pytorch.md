@@ -1,10 +1,10 @@
 # 你应该知道的 PyTorch 最重要的基础知识
 
-> 原文：[https://www.kdnuggets.com/2020/06/fundamentals-pytorch.html](https://www.kdnuggets.com/2020/06/fundamentals-pytorch.html)
+> 原文：[`www.kdnuggets.com/2020/06/fundamentals-pytorch.html`](https://www.kdnuggets.com/2020/06/fundamentals-pytorch.html)
 
-[评论](#comments)
+评论
 
-![](../Images/d2969ec5e746ad4540d7f8cf3b322008.png)
+![](img/d2969ec5e746ad4540d7f8cf3b322008.png)
 
 ### PyTorch 基础知识 – 介绍
 
@@ -34,113 +34,113 @@
 
 这些维度通常也被称为 *秩*。
 
-![](../Images/230f7ae97d3d12688a50fdee8f7e4a3d.png)
+![](img/230f7ae97d3d12688a50fdee8f7e4a3d.png)
 
 *图 1：各种维度（秩）的张量 ([图片来源](https://medium.com/mlait/tensors-representation-of-data-in-neural-networks-bbe8a711b93b)).*
 
 **张量对 ML 和 DL 重要的原因是什么？**
 
-设想一个监督学习问题。你获得了一张包含一些标签的数据表（可能是数值实体或二元分类，如是/否回答）。为了让ML算法处理这些数据，数据必须以数学对象的形式输入。表自然等同于二维矩阵，其中每一行（或实例）或每一列（或特征）可以视作一维向量。
+设想一个监督学习问题。你获得了一张包含一些标签的数据表（可能是数值实体或二元分类，如是/否回答）。为了让 ML 算法处理这些数据，数据必须以数学对象的形式输入。表自然等同于二维矩阵，其中每一行（或实例）或每一列（或特征）可以视作一维向量。
 
-类似地，黑白图像可以视作一个包含数字0或1的二维矩阵。这可以输入到神经网络中进行图像分类或分割任务。
+类似地，黑白图像可以视作一个包含数字 0 或 1 的二维矩阵。这可以输入到神经网络中进行图像分类或分割任务。
 
-时间序列或序列数据（例如，来自监测机器的ECG数据或股票市场价格跟踪数据流）是二维数据的另一个例子，其中一个维度（时间）是固定的。
+时间序列或序列数据（例如，来自监测机器的 ECG 数据或股票市场价格跟踪数据流）是二维数据的另一个例子，其中一个维度（时间）是固定的。
 
 这些是使用二维张量的经典机器学习（例如线性回归、支持向量机、决策树等）和深度学习算法的示例。
 
-超越二维，彩色或灰度图像可以视作三维张量，其中每个像素与所谓的‘颜色通道’相关联——一个由3个数字组成的向量，表示红绿蓝（RGB）光谱中的强度。这是一个三维张量的例子。
+超越二维，彩色或灰度图像可以视作三维张量，其中每个像素与所谓的‘颜色通道’相关联——一个由 3 个数字组成的向量，表示红绿蓝（RGB）光谱中的强度。这是一个三维张量的例子。
 
 同样，视频可以看作是时间上的颜色图像（或帧）序列，可以视为四维张量。
 
-简而言之，来自物理世界、传感器和仪器、商业和金融、科学或社会实验的各种数据，都可以通过多维张量轻松表示，以便让计算机中的ML/DL算法进行处理。
+简而言之，来自物理世界、传感器和仪器、商业和金融、科学或社会实验的各种数据，都可以通过多维张量轻松表示，以便让计算机中的 ML/DL 算法进行处理。
 
-让我们看看PyTorch如何定义和处理张量。
+让我们看看 PyTorch 如何定义和处理张量。
 
-### 在PyTorch中创建和转换张量
+### 在 PyTorch 中创建和转换张量
 
-张量可以从Python列表定义如下，
+张量可以从 Python 列表定义如下，
 
-![](../Images/1a645f3d7902d5ce23a854604d8b7a32.png)
+![](img/1a645f3d7902d5ce23a854604d8b7a32.png)
 
 实际元素可以按如下方式访问和索引，
 
-![](../Images/176f1784554eb13d6d89b77dea3bd98c.png)
+![](img/176f1784554eb13d6d89b77dea3bd98c.png)
 
 可以轻松创建具有特定数据类型的张量（例如，浮点数），
 
-![](../Images/fa5c22461ae055d6eeba75130f44bded.png)
+![](img/fa5c22461ae055d6eeba75130f44bded.png)
 
 大小和维度可以很容易地读取，
 
-![](../Images/ed711fb8f4d40821ee2a5059feb39b7b.png)
+![](img/ed711fb8f4d40821ee2a5059feb39b7b.png)
 
 我们可以更改张量的视图。让我们从以下一维张量开始，
 
-![](../Images/69d4901515ecbf307f803ebda11f0e4e.png)
+![](img/69d4901515ecbf307f803ebda11f0e4e.png)
 
 然后将视图更改为二维张量，
 
-![](../Images/6edac16b9d2c56f0f1901236417dc92d.png)
+![](img/6edac16b9d2c56f0f1901236417dc92d.png)
 
-在PyTorch张量和NumPy数组之间来回转换是简单高效的。
+在 PyTorch 张量和 NumPy 数组之间来回转换是简单高效的。
 
-![](../Images/3a1ea52f3b7034fde69e0e3edbfd6d2f.png)
+![](img/3a1ea52f3b7034fde69e0e3edbfd6d2f.png)
 
-从Pandas系列对象转换也很简单，
+从 Pandas 系列对象转换也很简单，
 
-![](../Images/b56ef4ea2a7282ecb74362422c9d3a3a.png)
+![](img/b56ef4ea2a7282ecb74362422c9d3a3a.png)
 
-最后，可以完成转换回Python列表的操作，
+最后，可以完成转换回 Python 列表的操作，
 
-![](../Images/4dd65f6c4260e45877800ed96e338c72.png)
+![](img/4dd65f6c4260e45877800ed96e338c72.png)
 
 **PyTorch 张量的向量和矩阵数学**
 
-PyTorch提供了一个易于理解的API和程序化工具箱，用于在数学上操作张量。我们在这里展示了1维和2维张量的基本操作。
+PyTorch 提供了一个易于理解的 API 和程序化工具箱，用于在数学上操作张量。我们在这里展示了 1 维和 2 维张量的基本操作。
 
 简单的向量加法，
 
-![](../Images/792db69dd3d8147151c0489df387b266.png)
+![](img/792db69dd3d8147151c0489df387b266.png)
 
 向量与标量的乘法，
 
-![](../Images/2585875d695b37dae47730cf28dae5bb.png)
+![](img/2585875d695b37dae47730cf28dae5bb.png)
 
 线性组合，
 
-![](../Images/5a452cd3fe0cc1313c43d1d34154fa4f.png)
+![](img/5a452cd3fe0cc1313c43d1d34154fa4f.png)
 
 元素逐位乘积，
 
-![](../Images/650b8f02bbdc14f58b39dc29346e57b9.png)
+![](img/650b8f02bbdc14f58b39dc29346e57b9.png)
 
 点积，
 
-![](../Images/b7ddef771720eb6ea283cff17f1f34dc.png)
+![](img/b7ddef771720eb6ea283cff17f1f34dc.png)
 
 将一个标量添加到张量的每个元素中，即广播，
 
-![](../Images/7fd9c5cab8f1dd8f93a69d0f1311a6cd.png)
+![](img/7fd9c5cab8f1dd8f93a69d0f1311a6cd.png)
 
 从列表列表中创建 2-D 张量，
 
-![](../Images/1423ffffc615874e9c2f1bccf51152a1.png)
+![](img/1423ffffc615874e9c2f1bccf51152a1.png)
 
 矩阵元素的切片和索引，
 
-![](../Images/4b5cfe3f44046093ae52160707c246ec.png)
+![](img/4b5cfe3f44046093ae52160707c246ec.png)
 
 矩阵乘法，
 
-![](../Images/c9a5efb99bbea4ad4012f1630eee0e75.png)
+![](img/c9a5efb99bbea4ad4012f1630eee0e75.png)
 
 矩阵转置，
 
-![](../Images/7b7c3c5960a6476daafb186a9008df0d.png)
+![](img/7b7c3c5960a6476daafb186a9008df0d.png)
 
 矩阵的逆和行列式，
 
-![](../Images/84422c9a7221bfd93314a8f2c68dbb53.png)
+![](img/84422c9a7221bfd93314a8f2c68dbb53.png)
 
 ### 自动求导：自动微分
 
@@ -150,35 +150,35 @@ PyTorch 的自动求导 [**官方文档在这里**](https://pytorch.org/tutoria
 
 我们展示简单的示例来说明 PyTorch 的自动求导特性。
 
-![](../Images/0f3e5c1f6916685796339bd0e5c3f05f.png)
+![](img/0f3e5c1f6916685796339bd0e5c3f05f.png)
 
 我们定义一个通用函数和一个张量变量 ***x***，然后定义另一个变量 ***y***，将其赋值为 ***x*** 的函数。
 
-![](../Images/17fb29b0b9c5c79077442c3b983a802f.png)
+![](img/17fb29b0b9c5c79077442c3b983a802f.png)
 
 然后，我们在 ***y*** 上使用特殊的 **backward()** 方法来进行求导，并计算在给定 ***x*** 值下的导数值。
 
-![](../Images/5e7047c8e0a61295c48b8e7c569618f9.png)
+![](img/5e7047c8e0a61295c48b8e7c569618f9.png)
 
 我们还可以处理偏导数！
 
-![](../Images/7ad48aa7236ee4fe387a62d85e7ab384.png)
+![](img/7ad48aa7236ee4fe387a62d85e7ab384.png)
 
 我们可以将 ***u*** 和 ***v*** 定义为张量变量，定义一个结合它们的函数，应用 **backward()** 方法，并计算偏导数。见下图，
 
-![](../Images/0bf12a5f2ee5ce5649bd279fb6244ab3.png)
+![](img/0bf12a5f2ee5ce5649bd279fb6244ab3.png)
 
 PyTorch 仅计算标量函数的导数，但如果我们传递一个向量，它实际上会逐元素计算导数并将其存储在相同维度的数组中。
 
-![](../Images/96c8ad30783fa05147414bf1b920dabb.png)
+![](img/96c8ad30783fa05147414bf1b920dabb.png)
 
 以下代码将计算相对于三个组成向量的导数。
 
-![](../Images/b4908eab9b5f412f72ff6e338d39de71.png)
+![](img/b4908eab9b5f412f72ff6e338d39de71.png)
 
 我们可以展示导数的图像。注意，二次函数的导数是一条直线，与抛物线曲线相切。
 
-![](../Images/9a3bdfd29fc4271ac66efab2f21cfb77.png)
+![](img/9a3bdfd29fc4271ac66efab2f21cfb77.png)
 
 ### 构建一个功能齐全的神经网络
 
@@ -252,35 +252,35 @@ PyTorch 提供了所有常见的分类和回归任务的损失函数 —
 
 思路如下，
 
-![](../Images/ddaf1cc441b4dd42f218c0b85151a2f7.png)
+![](img/ddaf1cc441b4dd42f218c0b85151a2f7.png)
 
 ### 实践示例
 
 假设我们想构建并训练以下的 2 层神经网络。
 
-![](../Images/e1e16c7faacd7079046dc18db4961113.png)
+![](img/e1e16c7faacd7079046dc18db4961113.png)
 
 我们从类定义开始，
 
-![](../Images/b41c6384b2a1c9ab8c9cc90980137ce3.png)
+![](img/b41c6384b2a1c9ab8c9cc90980137ce3.png)
 
 我们可以定义一个属于这个类的变量并打印其摘要。
 
-![](../Images/bc4381932a3ae01a5f0d67e5f74501f8.png)
+![](img/bc4381932a3ae01a5f0d67e5f74501f8.png)
 
 我们选择二元交叉熵损失，
 
-![](../Images/b82c0484793c825febc6aea49f12c68c.png)
+![](img/b82c0484793c825febc6aea49f12c68c.png)
 
 让我们将输入数据集通过我们定义的神经网络模型，即**进行一次前向传播并计算输出概率**。由于权重已被初始化为随机值，我们会看到随机的输出概率（大多数接近 0.5）。**这个网络尚未经过训练**。
 
-![](../Images/c93b460e863ae9dc8d82fb7f41a3fe2e.png)
+![](img/c93b460e863ae9dc8d82fb7f41a3fe2e.png)
 
-![](../Images/d1ad6dbac80d3fe8267d06985d9a7a50.png)
+![](img/d1ad6dbac80d3fe8267d06985d9a7a50.png)
 
 我们定义优化器，
 
-![](../Images/55175acd3a200fc0dbb21da83e19cf9e.png)
+![](img/55175acd3a200fc0dbb21da83e19cf9e.png)
 
 接下来，我们展示如何使用一个优化器的步骤进行前向和反向传播。**这段代码可以在任何 PyTorch 神经网络模型的核心中找到**。我们按照另外一个五步过程进行，
 
@@ -298,15 +298,15 @@ PyTorch 提供了所有常见的分类和回归任务的损失函数 —
 
 代码如下所示，
 
-![](../Images/c331585b9ea3bbc0bd384a69e1a8bfb6.png)
+![](img/c331585b9ea3bbc0bd384a69e1a8bfb6.png)
 
 当**我们在一个循环中运行相同类型的代码（多次周期）**时，我们可以观察到熟悉的损失曲线下降，即神经网络逐渐被训练。
 
-![](../Images/ab330f2f41dab4503f83d3df06a60b91.png)
+![](img/ab330f2f41dab4503f83d3df06a60b91.png)
 
 经过 200 轮训练后，我们可以再次直接查看概率分布，以查看神经网络输出的概率现在如何不同（试图与真实数据分布匹配）。
 
-![](../Images/268637fd77fe58320394ddec8b27666c.png)
+![](img/268637fd77fe58320394ddec8b27666c.png)
 
 ### PyTorch 基础总结
 
@@ -332,11 +332,11 @@ PyTorch 是一个很棒的工具包，可以深入了解神经网络的核心，
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

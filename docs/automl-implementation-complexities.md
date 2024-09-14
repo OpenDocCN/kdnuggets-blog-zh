@@ -1,8 +1,8 @@
 # 自动化机器学习项目实施复杂性
 
-> 原文：[https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html](https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html)
+> 原文：[`www.kdnuggets.com/2019/11/automl-implementation-complexities.html`](https://www.kdnuggets.com/2019/11/automl-implementation-complexities.html)
 
-[评论](#comments) ![图](../Images/09edc90152540fcb82614f36d080450d.png)
+评论 ![图](img/09edc90152540fcb82614f36d080450d.png)
 
 图片由 Soroush Zargar 提供，来源于 Unsplash
 
@@ -92,9 +92,9 @@ tuner.results_summary()
 
 > AutoML 的**终极目标**是为具有有限数据科学或机器学习背景的领域专家提供易于访问的深度学习工具。
 
-为了实现这一点，AutoKeras执行了Keras神经网络模型的架构搜索和超参数调整。
+为了实现这一点，AutoKeras 执行了 Keras 神经网络模型的架构搜索和超参数调整。
 
-这是使用AutoKeras的基本代码足迹：
+这是使用 AutoKeras 的基本代码足迹：
 
 ```py
 import autokeras as ak
@@ -104,19 +104,19 @@ clf.fit(x_train, y_train)
 results = clf.predict(x_test)
 ```
 
-如果你使用过Scikit-learn，这种语法应该很熟悉。上述代码使用了`task` API；不过，还有其他更复杂的API。你可以在[项目文档网站](https://autokeras.com/tutorial/)上找到这些附加API的更多信息和更详细的教程。
+如果你使用过 Scikit-learn，这种语法应该很熟悉。上述代码使用了`task` API；不过，还有其他更复杂的 API。你可以在[项目文档网站](https://autokeras.com/tutorial/)上找到这些附加 API 的更多信息和更详细的教程。
 
-显然，上述AutoKeras代码的复杂性相比Keras Tuner显著降低。然而，当你降低复杂性时，确实会牺牲一些精度，这是明显的权衡。对于具有有限机器学习专业知识的领域专家来说，这可能是一个不错的平衡点。
+显然，上述 AutoKeras 代码的复杂性相比 Keras Tuner 显著降低。然而，当你降低复杂性时，确实会牺牲一些精度，这是明显的权衡。对于具有有限机器学习专业知识的领域专家来说，这可能是一个不错的平衡点。
 
 ### automl-gs
 
-我们要查看的第三种解决方案是[automl-gs](https://github.com/minimaxir/automl-gs)，它从30,000英尺的高度审视AutoML实现。这超越了“现成”实现的复杂性，提供了一种有点类似Staples简易按钮的方法。
+我们要查看的第三种解决方案是[automl-gs](https://github.com/minimaxir/automl-gs)，它从 30,000 英尺的高度审视 AutoML 实现。这超越了“现成”实现的复杂性，提供了一种有点类似 Staples 简易按钮的方法。
 
-automl-gs提供了一个“零代码/模型定义接口”。你只需将其指向一个CSV文件，确定要预测的目标字段，然后让它自动运行。它生成的Python代码可以集成到现有的机器学习工作流中，类似于[流行的AutoML工具TPOT](https://github.com/EpistasisLab/tpot)的功能。automl-gs还宣称它不是黑箱，因为你可以看到数据是如何处理的，模型是如何构建的，从而在事后进行调整。
+automl-gs 提供了一个“零代码/模型定义接口”。你只需将其指向一个 CSV 文件，确定要预测的目标字段，然后让它自动运行。它生成的 Python 代码可以集成到现有的机器学习工作流中，类似于[流行的 AutoML 工具 TPOT](https://github.com/EpistasisLab/tpot)的功能。automl-gs 还宣称它不是黑箱，因为你可以看到数据是如何处理的，模型是如何构建的，从而在事后进行调整。
 
-automl-gs执行数据预处理，并目前使用神经网络（通过Keras）和XGBoost构建模型，同时计划实现CatBoost和LightGBM。
+automl-gs 执行数据预处理，并目前使用神经网络（通过 Keras）和 XGBoost 构建模型，同时计划实现 CatBoost 和 LightGBM。
 
-这里是调用automl-gs的两种方法的比较，通过命令行和通过一行代码。请注意，你可以在[项目网站](https://github.com/minimaxir/automl-gs)上找到关于配置选项的更多信息以及检查输出的内容。
+这里是调用 automl-gs 的两种方法的比较，通过命令行和通过一行代码。请注意，你可以在[项目网站](https://github.com/minimaxir/automl-gs)上找到关于配置选项的更多信息以及检查输出的内容。
 
 命令行：
 
@@ -124,18 +124,18 @@ automl-gs执行数据预处理，并目前使用神经网络（通过Keras）和
 automl_gs titanic.csv Survived
 ```
 
-Python代码：
+Python 代码：
 
 ```py
 from automl_gs import automl_grid_search
 automl_grid_search('titanic.csv', 'Survived')
 ```
 
-现在应该很容易比较这三种级别的AutoML项目复杂性。
+现在应该很容易比较这三种级别的 AutoML 项目复杂性。
 
-automl-gs可以通过单个命令行命令或单行Python代码API调用执行。因此，这个项目可能被任何人使用，从寻找项目基准的专业数据科学家，到具有有限编码技能或没有统计知识的业余爱好者，寻求数据科学的入门（在这里插入关于操控你不理解的力量的标准警告）。虽然一个业余项目基于预测做出一些重要决策可能会有问题（在我看来不太可能），但将机器学习和AutoML开放给任何想要了解更多的人确实具有价值。
+automl-gs 可以通过单个命令行命令或单行 Python 代码 API 调用执行。因此，这个项目可能被任何人使用，从寻找项目基准的专业数据科学家，到具有有限编码技能或没有统计知识的业余爱好者，寻求数据科学的入门（在这里插入关于操控你不理解的力量的标准警告）。虽然一个业余项目基于预测做出一些重要决策可能会有问题（在我看来不太可能），但将机器学习和 AutoML 开放给任何想要了解更多的人确实具有价值。
 
-![图示](../Images/e4120f25b929cc5ab0068e5b77466212.png)
+![图示](img/e4120f25b929cc5ab0068e5b77466212.png)
 
 automl-gs 输出代码示例 ([来源](https://github.com/minimaxir/automl-gs))
 
@@ -147,21 +147,21 @@ automl-gs 输出代码示例 ([来源](https://github.com/minimaxir/automl-gs))
 
 **相关**：
 
-+   [GitHub 仓库劫掠者与机器学习的自动化](/2019/11/github-repo-raider-automated-machine-learning.html)
++   GitHub 仓库劫掠者与机器学习的自动化
 
-+   [自动化超参数调整您的模型](/2019/09/automate-hyperparameter-tuning-models.html)
++   自动化超参数调整您的模型
 
-+   [自动化机器学习：究竟多少？](/2019/09/automated-machine-learning-just-how-much.html)
++   自动化机器学习：究竟多少？
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

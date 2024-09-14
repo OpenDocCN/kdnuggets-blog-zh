@@ -1,8 +1,8 @@
 # Mistral 7B-V0.2: 用 Hugging Face 微调 Mistral 的新开源 LLM
 
-> 原文：[https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)
+> 原文：[`www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face`](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)
 
-![Mistral 7B-V0.2: 用 Hugging Face 微调 Mistral 的新开源 LLM](../Images/48bfc0ce427cb35b9a82f42561e5b59e.png)
+![Mistral 7B-V0.2: 用 Hugging Face 微调 Mistral 的新开源 LLM](img/48bfc0ce427cb35b9a82f42561e5b59e.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@ Mistral AI，全球领先的 AI 研究公司之一，最近发布了[**Mistral 7
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -48,11 +48,11 @@ AutoTrain 是 Hugging Face 的一项功能，它自动化了模型训练过程�
 
 为了实现这一点，只需按照此[链接](https://huggingface.co/docs/hub/en/repositories-getting-started)中提供的步骤操作，然后返回本教程。
 
-我们将在Python中训练模型。选择一个笔记本环境进行训练时，你可以使用 [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks) 或 [Google Colab](https://colab.google/)，这两者都提供免费的GPU访问。
+我们将在 Python 中训练模型。选择一个笔记本环境进行训练时，你可以使用 [Kaggle Notebooks](https://www.kaggle.com/docs/notebooks) 或 [Google Colab](https://colab.google/)，这两者都提供免费的 GPU 访问。
 
-如果训练过程花费的时间过长，你可能需要切换到像AWS Sagemaker或Azure ML这样的云平台。
+如果训练过程花费的时间过长，你可能需要切换到像 AWS Sagemaker 或 Azure ML 这样的云平台。
 
-最后，在开始跟随本教程编写代码之前，请执行以下pip安装：
+最后，在开始跟随本教程编写代码之前，请执行以下 pip 安装：
 
 ```py
 !pip install -U autotrain-advanced
@@ -61,9 +61,9 @@ AutoTrain 是 Hugging Face 的一项功能，它自动化了模型训练过程�
 
 ## 2\. 准备你的数据集
 
-在本教程中，我们将使用Hugging Face上的 [Alpaca数据集](https://huggingface.co/datasets/tatsu-lab/alpaca/viewer/default/train?p=520)，其样例如下：
+在本教程中，我们将使用 Hugging Face 上的 [Alpaca 数据集](https://huggingface.co/datasets/tatsu-lab/alpaca/viewer/default/train?p=520)，其样例如下：
 
-![Mistral 7B-V0.2: 使用Hugging Face对Mistral的新开源LLM进行微调](../Images/dfc4a9431798c2b1a531e84d9364ef91.png)
+![Mistral 7B-V0.2: 使用 Hugging Face 对 Mistral 的新开源 LLM 进行微调](img/dfc4a9431798c2b1a531e84d9364ef91.png)
 
 我们将对模型进行微调，使用指令和输出对，并在评估过程中评估其对给定指令的响应能力。
 
@@ -98,7 +98,7 @@ if __name__ == "__main__":
    print("Dataset formatted and saved.")
 ```
 
-第一个函数将使用“datasets”库加载Alpaca数据集，并对其进行清理，以确保不包含任何空指令。第二个函数将你的数据结构化为AutoTrain可以理解的格式。
+第一个函数将使用“datasets”库加载 Alpaca 数据集，并对其进行清理，以确保不包含任何空指令。第二个函数将你的数据结构化为 AutoTrain 可以理解的格式。
 
 在运行上述代码后，数据集将被加载、格式化并保存在指定路径。当你打开格式化后的数据集时，你应该会看到一个标记为“formatted_text”的单列。
 
@@ -120,11 +120,11 @@ repo_id = 'your_repo_here.'
 
 +   你可以指定任何 *project_name*。这将是你所有项目和训练文件存储的地方。
 
-+   *model_name* 参数是你希望微调的模型。在这种情况下，我指定了Hugging Face上的 **Mistral-7B v0.2基础模型** 的路径。
++   *model_name* 参数是你希望微调的模型。在这种情况下，我指定了 Hugging Face 上的 **Mistral-7B v0.2 基础模型** 的路径。
 
-+   *hf_token* 变量必须设置为你的Hugging Face令牌，该令牌可以通过访问 [此链接](https://huggingface.co/settings/tokens) 获得。
++   *hf_token* 变量必须设置为你的 Hugging Face 令牌，该令牌可以通过访问 [此链接](https://huggingface.co/settings/tokens) 获得。
 
-+   你的 *repo_id* 必须设置为你在本教程第一步中创建的Hugging Face模型库。例如，我的仓库ID是 *NatasshaS/Model2*。
++   你的 *repo_id* 必须设置为你在本教程第一步中创建的 Hugging Face 模型库。例如，我的仓库 ID 是 *NatasshaS/Model2*。
 
 ## 4\. 配置模型参数
 
@@ -153,7 +153,7 @@ lora_dropout = 0.01
 
 现在我们通过设置一些环境变量来准备我们的训练环境。
 
-这一步骤确保AutoTrain功能使用期望的设置来微调模型，例如我们的项目名称和训练偏好：
+这一步骤确保 AutoTrain 功能使用期望的设置来微调模型，例如我们的项目名称和训练偏好：
 
 ```py
 os.environ["PROJECT_NAME"] = project_name
@@ -204,11 +204,11 @@ os.environ["LORA_DROPOUT"] = str(lora_dropout)
 
 对我来说，这个文件夹被命名为“*mistralai，”* 如下图所示：
 
-![Mistral 7B-V0.2: 用Hugging Face微调Mistral的新开源LLM](../Images/e650269f16bb1815dfccc3be3ad0b343.png)
+![Mistral 7B-V0.2: 用 Hugging Face 微调 Mistral 的新开源 LLM](img/e650269f16bb1815dfccc3be3ad0b343.png)
 
 在这个文件夹中，你可以找到包含模型权重、超参数和架构细节的文件。
 
-现在我们来检查这个微调后的模型是否能够准确回答数据集中的问题。为此，我们首先需要运行以下代码行，从数据集中生成5个样本输入和输出：
+现在我们来检查这个微调后的模型是否能够准确回答数据集中的问题。为此，我们首先需要运行以下代码行，从数据集中生成 5 个样本输入和输出：
 
 ```py
 # Print out 5 sample inputs and outputs from our dataset
@@ -219,7 +219,7 @@ for i, example in enumerate(dataset):
    print(f"Output: {example['output']}\n---")
 ```
 
-你应该看到一个类似于以下内容的响应，展示了5个样本数据点：
+你应该看到一个类似于以下内容的响应，展示了 5 个样本数据点：
 
 ```py
 Instruction: Give three tips for staying healthy.
@@ -273,23 +273,23 @@ grown tired of it. I knew that I needed to make a change, but I was unsure of wh
 
 请注意，由于我们指定的令牌数量，响应可能看起来不完整或被截断。请随意调整“max_length”值，以允许更长的响应。
 
-# 微调Mistral-7B V0.2 - 下一步
+# 微调 Mistral-7B V0.2 - 下一步
 
 如果你已经走到这一步，恭喜你！
 
-你已经成功微调了一个最先进的语言模型，利用了Mistral 7B v-0.2的强大功能以及Hugging Face的能力。
+你已经成功微调了一个最先进的语言模型，利用了 Mistral 7B v-0.2 的强大功能以及 Hugging Face 的能力。
 
 但旅程并不会就此结束。
 
-作为下一步，我建议尝试不同的数据集或调整某些训练参数以优化模型性能。对更大规模的模型进行微调将提升其效用，因此可以尝试使用更大的数据集或不同格式的文件，如PDF和文本文件。
+作为下一步，我建议尝试不同的数据集或调整某些训练参数以优化模型性能。对更大规模的模型进行微调将提升其效用，因此可以尝试使用更大的数据集或不同格式的文件，如 PDF 和文本文件。
 
 在处理组织中的真实数据时，这种经验变得极为宝贵，因为这些数据通常是混乱且无结构的。
 
-[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)** 是一位自学成才的数据科学家，对写作充满热情。Natassha写作内容涉及所有数据科学相关主题，真正是所有数据话题的专家。你可以通过[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系，或查看她的[YouTube频道](https://www.youtube.com/@natassha_ds)。
+[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)** 是一位自学成才的数据科学家，对写作充满热情。Natassha 写作内容涉及所有数据科学相关主题，真正是所有数据话题的专家。你可以通过[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系，或查看她的[YouTube 频道](https://www.youtube.com/@natassha_ds)。
 
 ### 更多相关话题
 
-+   [如何使用Hugging Face AutoTrain微调Mistral AI 7B LLM](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)
++   [如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)
 
 +   [RAG 与微调：哪种工具最适合提升你的 LLM 应用？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
 

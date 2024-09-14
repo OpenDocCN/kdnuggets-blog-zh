@@ -1,12 +1,12 @@
 # 理解集成学习技术
 
-> 原文：[https://www.kdnuggets.com/2020/03/making-sense-ensemble-learning-techniques.html](https://www.kdnuggets.com/2020/03/making-sense-ensemble-learning-techniques.html)
+> 原文：[`www.kdnuggets.com/2020/03/making-sense-ensemble-learning-techniques.html`](https://www.kdnuggets.com/2020/03/making-sense-ensemble-learning-techniques.html)
 
-[评论](#comments)
+评论
 
 **作者：[Ido Zehori](https://www.linkedin.com/in/ido-zehori/)，[Bigabid](https://www.bigabid.com/)的数据科学团队负责人**
 
-![图示](../Images/733e44c46833a8497ef2f1341a1d187c.png)
+![图示](img/733e44c46833a8497ef2f1341a1d187c.png)
 
 图片来源：[Packt](https://hub.packtpub.com/what-is-ensemble-learning/)
 
@@ -14,21 +14,21 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
-对于许多专注于机器学习（ML）的公司/数据科学家来说，集成学习方法已经成为首选工具。由于集成学习方法结合了多个基础模型，因此它们能够生成更为准确的ML模型。例如，在Bigabid，我们通过集成学习成功解决了从优化LTV（[客户终身价值](https://www.qualtrics.com/experience-management/customer/customer-lifetime-value/)）到[欺诈检测](https://searchsecurity.techtarget.com/definition/fraud-detection)的各种问题。
+对于许多专注于机器学习（ML）的公司/数据科学家来说，集成学习方法已经成为首选工具。由于集成学习方法结合了多个基础模型，因此它们能够生成更为准确的 ML 模型。例如，在 Bigabid，我们通过集成学习成功解决了从优化 LTV（[客户终身价值](https://www.qualtrics.com/experience-management/customer/customer-lifetime-value/)）到[欺诈检测](https://searchsecurity.techtarget.com/definition/fraud-detection)的各种问题。
 
-难以过分强调集成学习在整体ML过程中的重要性，包括[偏差-方差权衡](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff)以及三种主要的集成技术：装袋、提升和堆叠。这些强大的技术应成为任何数据科学家工具包的一部分，因为它们是普遍存在的概念。此外，理解它们的基本机制是机器学习领域的核心。
+难以过分强调集成学习在整体 ML 过程中的重要性，包括[偏差-方差权衡](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff)以及三种主要的集成技术：装袋、提升和堆叠。这些强大的技术应成为任何数据科学家工具包的一部分，因为它们是普遍存在的概念。此外，理解它们的基本机制是机器学习领域的核心。
 
 ### 集成学习方法概述
 
-集成学习是一种ML范式，其中多个基础模型（通常被称为“弱学习者”）被组合和训练以解决同一问题。这种方法基于这样的理论：通过正确地组合多个基础模型，这些弱学习者可以作为设计更复杂ML模型的构建块。这些集成模型（恰如其分地称为“强学习者”）能够实现更好、更准确的结果。
+集成学习是一种 ML 范式，其中多个基础模型（通常被称为“弱学习者”）被组合和训练以解决同一问题。这种方法基于这样的理论：通过正确地组合多个基础模型，这些弱学习者可以作为设计更复杂 ML 模型的构建块。这些集成模型（恰如其分地称为“强学习者”）能够实现更好、更准确的结果。
 
 换句话说，弱学习者只是一个单独表现较差的基础模型。实际上，它的准确性水平仅略高于偶然情况，这意味着它的预测结果仅比随机猜测稍好。这些弱学习者通常也会很简单。通常，基础模型之所以自身表现不佳，是因为它们要么有高偏差，要么方差过大，使它们变得薄弱。
 
@@ -72,11 +72,11 @@
 
 **相关内容：**
 
-+   [集成学习方法：AdaBoost](/2019/09/ensemble-methods-machine-learning-adaboost.html)
++   集成学习方法：AdaBoost
 
-+   [随机森林® — 强大的集成学习算法](/2020/01/random-forest-powerful-ensemble-learning-algorithm.html)
++   随机森林® — 强大的集成学习算法
 
-+   [解释黑箱模型：使用 LIME 和 SHAP 的集成学习和深度学习](/2020/01/explaining-black-box-models-ensemble-deep-learning-lime-shap.html)
++   解释黑箱模型：使用 LIME 和 SHAP 的集成学习和深度学习
 
 ### 更多相关主题
 
@@ -88,6 +88,6 @@
 
 +   [数据质量在成功机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [Ploomber与Kubeflow：让MLOps变得更简单](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
++   [Ploomber 与 Kubeflow：让 MLOps 变得更简单](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
 
-+   [让智能文档处理更智能：第1部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
++   [让智能文档处理更智能：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)

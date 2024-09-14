@@ -1,8 +1,8 @@
 # 10 个 GitHub 仓库来掌握统计学
 
-> 原文：[https://www.kdnuggets.com/10-github-repositories-to-master-statistics](https://www.kdnuggets.com/10-github-repositories-to-master-statistics)
+> 原文：[`www.kdnuggets.com/10-github-repositories-to-master-statistics`](https://www.kdnuggets.com/10-github-repositories-to-master-statistics)
 
-![10 个 GitHub 仓库来掌握统计学](../Images/c04f5dbd373659270ba453c387b00b55.png)
+![10 个 GitHub 仓库来掌握统计学](img/c04f5dbd373659270ba453c387b00b55.png)
 
 图片由 ChatGPT 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -78,15 +78,15 @@ TensorFlow Probability 是一个用于 TensorFlow 中的概率推理和统计分
 
 **代码库：** [unpingco/Python-for-Probability-Statistics-and-Machine-Learning](https://github.com/unpingco/Python-for-Probability-Statistics-and-Machine-Learning)
 
-该代码库包含了《Python for Probability, Statistics, and Machine Learning》一书中的代码示例和Jupyter笔记本，涵盖了从基本概率和统计到高级机器学习技术的广泛主题。
+该代码库包含了《Python for Probability, Statistics, and Machine Learning》一书中的代码示例和 Jupyter 笔记本，涵盖了从基本概率和统计到高级机器学习技术的广泛主题。
 
-在“chapters”文件夹内，有三个子文件夹，包含了关于统计学、概率论和机器学习的Jupyter笔记本。每个笔记本都包括代码、输出和描述，解释了方法论、代码和结果。
+在“chapters”文件夹内，有三个子文件夹，包含了关于统计学、概率论和机器学习的 Jupyter 笔记本。每个笔记本都包括代码、输出和描述，解释了方法论、代码和结果。
 
-## 9\. 概率与统计VIP备忘单
+## 9\. 概率与统计 VIP 备忘单
 
 **代码库：** [shervinea/stanford-cme-106-probability-and-statistics](https://github.com/shervinea/stanford-cme-106-probability-and-statistics)
 
-该代码库包含斯坦福大学工程师概率与统计课程的VIP备忘单。这些备忘单提供了关键概念和公式的简明总结，是学生和专业人士的实用参考。
+该代码库包含斯坦福大学工程师概率与统计课程的 VIP 备忘单。这些备忘单提供了关键概念和公式的简明总结，是学生和专业人士的实用参考。
 
 这是一个流行的备忘单，涵盖了条件概率、随机变量、参数估计、假设检验等主题。
 
@@ -94,24 +94,24 @@ TensorFlow Probability 是一个用于 TensorFlow 中的概率推理和统计分
 
 **代码库：** [hrnbot/Basic-Mathematics-for-Machine-Learning](https://github.com/hrnbot/Basic-Mathematics-for-Machine-Learning)
 
-理解数学基础对掌握机器学习和统计学至关重要。该代码库旨在揭示数学的奥秘，并通过Python Jupyter笔记本帮助你学习代数、微积分、统计学、概率论、向量和矩阵的基础知识。
+理解数学基础对掌握机器学习和统计学至关重要。该代码库旨在揭示数学的奥秘，并通过 Python Jupyter 笔记本帮助你学习代数、微积分、统计学、概率论、向量和矩阵的基础知识。
 
 ## 终极思考
 
-在GitHub上分享的学习资源由专家和开源社区创建，旨在分享知识，为数据科学和统计领域的初学者铺平更容易的学习道路。你将通过阅读理论、解决代码示例、理解数学概念、构建项目、进行各种分析和探索流行的统计工具来学习统计学。所有这些内容都在上述GitHub代码库中涵盖。这些资源是免费的，任何人都可以参与改进它们。所以，继续学习并构建惊人的事物。
+在 GitHub 上分享的学习资源由专家和开源社区创建，旨在分享知识，为数据科学和统计领域的初学者铺平更容易的学习道路。你将通过阅读理论、解决代码示例、理解数学概念、构建项目、进行各种分析和探索流行的统计工具来学习统计学。所有这些内容都在上述 GitHub 代码库中涵盖。这些资源是免费的，任何人都可以参与改进它们。所以，继续学习并构建惊人的事物。
 
-[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理健康问题的学生打造一个AI产品。
+[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理健康问题的学生打造一个 AI 产品。
 
 ### 了解更多
 
-+   [掌握机器学习的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
++   [掌握机器学习的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-machine-learning)
 
-+   [掌握计算机科学的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
++   [掌握计算机科学的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-computer-science)
 
-+   [掌握数据工程的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)
++   [掌握数据工程的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-data-engineering)
 
-+   [掌握MLOps的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
++   [掌握 MLOps 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
 
-+   [掌握Python的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-python)
++   [掌握 Python 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-python)
 
-+   [掌握SQL的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-sql)
++   [掌握 SQL 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-sql)

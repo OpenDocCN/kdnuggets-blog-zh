@@ -1,8 +1,8 @@
 # 创建一个简单的 Docker 数据科学镜像
 
-> 原文：[https://www.kdnuggets.com/2023/08/simple-docker-data-science-image.html](https://www.kdnuggets.com/2023/08/simple-docker-data-science-image.html)
+> 原文：[`www.kdnuggets.com/2023/08/simple-docker-data-science-image.html`](https://www.kdnuggets.com/2023/08/simple-docker-data-science-image.html)
 
-![创建一个简单的 Docker 数据科学设置](../Images/354326b0cc6fcfe512f843067a46c046.png)
+![创建一个简单的 Docker 数据科学设置](img/354326b0cc6fcfe512f843067a46c046.png)
 
 作者使用 Midjourney 创建的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

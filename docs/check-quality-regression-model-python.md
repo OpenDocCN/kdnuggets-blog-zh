@@ -1,30 +1,30 @@
-# 如何在Python中检查回归模型的质量？
+# 如何在 Python 中检查回归模型的质量？
 
-> 原文：[https://www.kdnuggets.com/2019/07/check-quality-regression-model-python.html](https://www.kdnuggets.com/2019/07/check-quality-regression-model-python.html)
+> 原文：[`www.kdnuggets.com/2019/07/check-quality-regression-model-python.html`](https://www.kdnuggets.com/2019/07/check-quality-regression-model-python.html)
 
-[评论](#comments)![图示名称](../Images/9e4cbe6f9a615429e47f6d2663996008.png)
+评论![图示名称](img/9e4cbe6f9a615429e47f6d2663996008.png)
 
 ### 为什么这很重要（以及你可能忽视了什么）
 
-尽管最新深度神经网络架构的复杂性以及[xgboost在Kaggle比赛中的惊人表现](https://blog.kaggle.com/tag/xgboost/)常被讨论，且行业中对[data-driven analytics](https://www.oreilly.com/library/view/creating-a-data-driven/9781491916902/ch01.html)和机器学习（ML）技术的关注不断增加，但对大多数行业来说，[回归分析依然是首选](https://www.surveygizmo.com/resources/blog/regression-analysis/)用于日常工作。
+尽管最新深度神经网络架构的复杂性以及[xgboost 在 Kaggle 比赛中的惊人表现](https://blog.kaggle.com/tag/xgboost/)常被讨论，且行业中对[data-driven analytics](https://www.oreilly.com/library/view/creating-a-data-driven/9781491916902/ch01.html)和机器学习（ML）技术的关注不断增加，但对大多数行业来说，[回归分析依然是首选](https://www.surveygizmo.com/resources/blog/regression-analysis/)用于日常工作。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-查看这个KDnuggets 2018–19年的调查结果（由[Matthew Mayo](https://medium.com/@mattmayo13)提供）。
+查看这个 KDnuggets 2018–19 年的调查结果（由[Matthew Mayo](https://medium.com/@mattmayo13)提供）。
 
-[**2018年和2019年使用的顶级数据科学和机器学习方法**
+**2018 年和 2019 年使用的顶级数据科学和机器学习方法**
 
-*在最新的KDnuggets调查中，读者被问到：你使用了哪些数据科学/机器学习方法和算法…*www.kdnuggets.com](/2019/04/top-data-science-machine-learning-methods-2018-2019.html)
+*在最新的 KDnuggets 调查中，读者被问到：你使用了哪些数据科学/机器学习方法和算法…*www.kdnuggets.com
 
 回归技术有多种形式——线性、非线性、泊松、树基——但核心思想在各类回归中几乎相同，并且可以应用于金融、医疗、服务业、制造业、农业等各种预测分析问题。
 
@@ -48,11 +48,11 @@
 
 在**基于 Python 的数据科学学习路径**中，这种情况非常常见，
 
-![figure-name](../Images/cb1e308ec23bdb945d0601b004ce3e41.png)
+![figure-name](img/cb1e308ec23bdb945d0601b004ce3e41.png)
 
 “是否缺少什么”这个问题的答案是肯定的！
 
-![figure-name](../Images/c1720435d2c50d68b6bf859f29b66f6a.png)
+![figure-name](img/c1720435d2c50d68b6bf859f29b66f6a.png)
 
 经常讨论的有[正则化](https://towardsdatascience.com/regularization-in-machine-learning-76441ddcf99a)、[偏差-方差权衡](http://scott.fortmann-roe.com/docs/BiasVariance.html)或可扩展性（学习和复杂度曲线）图。但是，对于以下图表和列表，讨论是否足够？
 
@@ -72,7 +72,7 @@
 
 很明显，你需要戴上[统计学家的帽子](https://towardsdatascience.com/statistics-for-people-in-a-hurry-a9613c0ed0b)，不仅仅是数据挖掘专业人士的帽子，以处理机器学习管道的这一部分。
 
-![figure-name](../Images/de8063c990e653f183c1d99f45e6d855.png)
+![figure-name](img/de8063c990e653f183c1d99f45e6d855.png)
 
 ### Scikit-learn 的问题
 
@@ -84,7 +84,7 @@
 
 在本文中，我们展示了针对多变量线性回归问题的这种标准评估集。我们将使用 statsmodels 库进行回归建模和统计测试。
 
-![figure-name](../Images/29b26bda945bc489ce754dabcd76113b.png)
+![figure-name](img/29b26bda945bc489ce754dabcd76113b.png)
 
 ### 线性回归假设及关键视觉测试的简要概述
 
@@ -106,7 +106,7 @@
 
 这里是一个视觉回顾，
 
-![figure-name](../Images/de765e96e96c40a55b15bf3608a42821.png)
+![figure-name](img/de765e96e96c40a55b15bf3608a42821.png)
 
 **可以检查哪些图？**
 
@@ -122,53 +122,53 @@
 
 ### 回归模型质量评估示例
 
-本示例的完整代码库[可以在作者的Github上找到](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Regression/Regression_Diagnostics.ipynb)。
+本示例的完整代码库[可以在作者的 Github 上找到](https://github.com/tirthajyoti/Machine-Learning-with-Python/blob/master/Regression/Regression_Diagnostics.ipynb)。
 
-我们使用的是[混凝土抗压强度预测](https://archive.ics.uci.edu/ml/datasets/Concrete+Compressive+Strength)问题，来源于UCI ML门户。混凝土的抗压强度是年龄和成分的高度复杂函数。我们能否通过这些参数的测量值来预测强度？
+我们使用的是[混凝土抗压强度预测](https://archive.ics.uci.edu/ml/datasets/Concrete+Compressive+Strength)问题，来源于 UCI ML 门户。混凝土的抗压强度是年龄和成分的高度复杂函数。我们能否通过这些参数的测量值来预测强度？
 
 **检查线性关系的变量散点图**
 
 我们可以通过散点图简单地检查线性假设的视觉效果。
 
-![figure-name](../Images/6ab0fbb97a7803457aff72bca2caf51d.png)
+![figure-name](img/6ab0fbb97a7803457aff72bca2caf51d.png)
 
 **检查多重共线性的配对散点图和相关性热图**
 
-我们可以使用[**seaborn库中的pairplot**](https://seaborn.pydata.org/generated/seaborn.pairplot.html)函数来绘制所有组合的配对散点图。
+我们可以使用[**seaborn 库中的 pairplot**](https://seaborn.pydata.org/generated/seaborn.pairplot.html)函数来绘制所有组合的配对散点图。
 
-![figure-name](../Images/e92931cf3f7b0bd87890ecd47fbf6566.png)
+![figure-name](img/e92931cf3f7b0bd87890ecd47fbf6566.png)
 
-此外，如果数据加载到Pandas中，我们可以轻松计算相关矩阵，并将其传递给[**statsmodels的特殊绘图函数**](https://www.statsmodels.org/stable/generated/statsmodels.graphics.correlation.plot_corr.html#statsmodels.graphics.correlation.plot_corr)以将相关性可视化为热图。
+此外，如果数据加载到 Pandas 中，我们可以轻松计算相关矩阵，并将其传递给[**statsmodels 的特殊绘图函数**](https://www.statsmodels.org/stable/generated/statsmodels.graphics.correlation.plot_corr.html#statsmodels.graphics.correlation.plot_corr)以将相关性可视化为热图。
 
-![figure-name](../Images/ee188737403d0b7082d46984c8bc1f82.png)
+![figure-name](img/ee188737403d0b7082d46984c8bc1f82.png)
 
-**使用statsmodel.ols()函数进行模型拟合**
+**使用 statsmodel.ols()函数进行模型拟合**
 
-主要模型拟合是使用statsmodels.OLS方法完成的。这是一个惊人的线性模型拟合工具，感觉非常像R中的强大‘lm’函数。最棒的是，它接受R风格的公式来构建完整或部分模型（即涉及所有或一些预测变量）。
+主要模型拟合是使用 statsmodels.OLS 方法完成的。这是一个惊人的线性模型拟合工具，感觉非常像 R 中的强大‘lm’函数。最棒的是，它接受 R 风格的公式来构建完整或部分模型（即涉及所有或一些预测变量）。
 
 你可能会问，在大数据时代，为什么还要创建部分模型而不是将所有数据都放进去？这是因为数据中可能存在混淆或隐性偏差，而这些问题只有通过[**控制某些因素**](https://stats.stackexchange.com/questions/78816/how-do-you-control-for-a-factor-variable)才能解决。
 
-无论如何，通过该模型拟合的模型摘要已经提供了关于模型的丰富统计信息，例如与所有预测变量相关的t统计量和p值、R平方值、调整后的R平方值、AIC和BIC等。
+无论如何，通过该模型拟合的模型摘要已经提供了关于模型的丰富统计信息，例如与所有预测变量相关的 t 统计量和 p 值、R 平方值、调整后的 R 平方值、AIC 和 BIC 等。
 
-![figure-name](../Images/33a5f6f7a0241f3f0c3bb27a0b13c417.png)
+![figure-name](img/33a5f6f7a0241f3f0c3bb27a0b13c417.png)
 
 **残差与预测变量图**
 
 接下来，我们可以绘制残差与每个预测变量的关系图，以检查独立性假设。**如果残差在零 x 轴周围均匀随机分布，并且不形成特定的聚类**，那么假设成立。在这个特定问题中，我们观察到一些聚类现象。
 
-![figure-name](../Images/5c405c5508e0063b5ce131990d60db04.png)
+![figure-name](img/5c405c5508e0063b5ce131990d60db04.png)
 
 **拟合值与残差图以检查同方差性**
 
 当我们绘制拟合响应值（按照模型）与残差的关系图时，我们清楚地观察到**残差的方差随着响应变量的大小而增加**。因此，该问题不符合同方差性，可能需要某种变量变换来提高模型质量。
 
-![figure-name](../Images/541389612dcb9a96d2c2cf463837f56a.png)
+![figure-name](img/541389612dcb9a96d2c2cf463837f56a.png)
 
 **标准化残差的直方图和 Q-Q 图**
 
 为了检查数据生成过程的正态性假设，我们可以简单地绘制标准化残差的直方图和 Q-Q 图。
 
-![figure-name](../Images/b6fc7dfb1fc4c89f7101d7c473777fb8.png)
+![figure-name](img/b6fc7dfb1fc4c89f7101d7c473777fb8.png)
 
 此外，我们可以对残差进行 Shapiro-Wilk 检验，以检查正态性。
 
@@ -176,7 +176,7 @@
 
 Cook 的距离基本上衡量了删除某一观察值的效果。具有较大 Cook 距离的点需要仔细检查，以确定是否为潜在的异常值。我们可以使用来自 [statsmodels 的特殊异常值影响类](http://www.statsmodels.org/devel/generated/statsmodels.stats.outliers_influence.OLSInfluence.summary_frame.html) 绘制 Cook 距离。
 
-![figure-name](../Images/73db1323cc8f847f5d25911ef1dd7b37.png)
+![figure-name](img/73db1323cc8f847f5d25911ef1dd7b37.png)
 
 **方差膨胀因子**
 
@@ -184,7 +184,7 @@ Cook 的距离基本上衡量了删除某一观察值的效果。具有较大 Co
 
 我们可以计算每个预测变量的 [方差膨胀因子](https://en.wikipedia.org/wiki/Variance_inflation_factor)。这是一个多项式模型的方差与仅包含一个项的模型的方差之比。同样，我们利用 statsmodels 中的 [特殊异常值影响类](https://www.statsmodels.org/stable/generated/statsmodels.stats.outliers_influence.variance_inflation_factor.html)。
 
-![figure-name](../Images/c84fa117d048f479d572f32db303e3b1.png)
+![figure-name](img/c84fa117d048f479d572f32db303e3b1.png)
 
 **其他残差诊断**
 
@@ -198,38 +198,38 @@ Statsmodels 提供了多种其他诊断测试用于检查模型质量。你可�
 
 在这篇文章中，我们介绍了如何在线性回归中添加 **模型质量评估的必要视觉分析**——各种残差图、正态性测试和多重共线性检查。
 
-甚至可以考虑创建一个简单的函数套件，能够接受scikit-learn类型的估算器，并生成这些图表，供数据科学家快速检查模型质量。
+甚至可以考虑创建一个简单的函数套件，能够接受 scikit-learn 类型的估算器，并生成这些图表，供数据科学家快速检查模型质量。
 
-目前，虽然scikit-learn没有详细的统计测试或模型质量评估绘图功能，[Yellowbrick](https://www.scikit-yb.org/en/latest/) 是一个有前途的Python库，可以为scikit-learn对象添加直观的可视化功能。我们希望在不久的将来，统计测试可以直接添加到scikit-learn ML估算器中。
+目前，虽然 scikit-learn 没有详细的统计测试或模型质量评估绘图功能，[Yellowbrick](https://www.scikit-yb.org/en/latest/) 是一个有前途的 Python 库，可以为 scikit-learn 对象添加直观的可视化功能。我们希望在不久的将来，统计测试可以直接添加到 scikit-learn ML 估算器中。
 
-如果你有任何问题或想法，欢迎通过[**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)联系作者。此外，你可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)**仓库**，获取其他有趣的Python、R或MATLAB代码片段和机器学习资源。如果你像我一样，对机器学习/数据科学充满热情，欢迎[在LinkedIn上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [在Twitter上关注我](https://twitter.com/tirthajyotiS)。
+如果你有任何问题或想法，欢迎通过[**tirthajyoti[AT]gmail.com**](mailto:tirthajyoti@gmail.com)联系作者。此外，你可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)**仓库**，获取其他有趣的 Python、R 或 MATLAB 代码片段和机器学习资源。如果你像我一样，对机器学习/数据科学充满热情，欢迎[在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/) 或 [在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 
 [**Tirthajyoti Sarkar - 高级首席工程师 - 半导体、AI、机器学习 - ON…**]
 
 *乔治亚理工学院理学硕士 - MS, 数据分析 该硕士项目提供理论和实践…*www.linkedin.com](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)
 
-**简介：[Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)** 是ON Semiconductor的高级首席工程师，专注于基于深度学习/机器学习的设计自动化项目。
+**简介：[Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)** 是 ON Semiconductor 的高级首席工程师，专注于基于深度学习/机器学习的设计自动化项目。
 
 [原文](https://towardsdatascience.com/how-do-you-check-the-quality-of-your-regression-model-in-python-fa61759ff685)。已获许可转载。
 
 **相关：**
 
-+   [为你的回归问题选择最佳的机器学习算法](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
++   为你的回归问题选择最佳的机器学习算法
 
-+   [选择评估机器学习模型的正确度量标准——第1部分](/2018/04/right-metric-evaluating-machine-learning-models-1.html)
++   选择评估机器学习模型的正确度量标准——第一部分
 
-+   [从信号中分离噪声](/2019/06/separating-signal-noise.html)
++   从信号中分离噪声
 
 ### 更多相关话题
 
-+   [数据质量维度：用Great Expectations确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
++   [数据质量维度：用 Great Expectations 确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
 +   [数据质量在成功机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [3个新的提示工程资源，值得查看](https://www.kdnuggets.com/3-new-prompt-engineering-resources)
++   [3 个新的提示工程资源，值得查看](https://www.kdnuggets.com/3-new-prompt-engineering-resources)
 
-+   [用Great Expectations克服数据质量问题](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
++   [用 Great Expectations 克服数据质量问题](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
 
 +   [线性回归模型选择：平衡简洁性与复杂性](https://www.kdnuggets.com/2023/02/linear-regression-model-selection-balancing-simplicity-complexity.html)

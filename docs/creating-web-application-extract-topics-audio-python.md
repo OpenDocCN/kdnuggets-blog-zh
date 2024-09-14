@@ -1,8 +1,8 @@
 # 创建一个从音频中提取主题的 Web 应用程序
 
-> 原文：[https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
+> 原文：[`www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html`](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
 
-![创建一个从音频中提取主题的 Web 应用程序](../Images/dec9cc3aab0728cb753ff456ee486922.png)
+![创建一个从音频中提取主题的 Web 应用程序](img/dec9cc3aab0728cb753ff456ee486922.png)
 
 图片由[israel palacio](https://unsplash.com/@othentikisra)拍摄，来自[Unsplash](https://unsplash.com/photos/Y20JJ_ddy9M)
 
@@ -28,19 +28,19 @@ git push -u origin master</name-repository></username>
 
 +   在 Python 中创建虚拟环境。
 
-# 第 1 部分：创建提取主题的 Web 应用程序
+# 第一部分：创建提取主题的 Web 应用程序
 
 本教程分为两个主要部分。在第一部分中，我们创建了一个简单的 Web 应用程序来提取播客中的主题。剩下的部分则专注于应用程序的部署，这是将应用程序随时分享给世界的重要步骤。让我们开始吧！
 
 ## 1\. 从 Listen Notes 提取集的 URL
 
-![创建一个从音频中提取主题的 Web 应用程序](../Images/0d49888cda0a6f0afbf0715c91f77593.png)
+![创建一个从音频中提取主题的 Web 应用程序](img/0d49888cda0a6f0afbf0715c91f77593.png)
 
-我们将要发现《Unconfirmed》的一期主题，名为“想在加密货币领域找工作？交易所正在招聘——第110期”。你可以在[这里](https://www.listennotes.com/podcasts/unconfirmed/want-a-job-in-crypto-p0QLnhWKHbl/)找到这一期的链接。正如你从电视和报纸上的新闻中可能了解到的，区块链行业正在迅猛发展，需要保持对该领域职位开放情况的更新。毫无疑问，他们会需要数据工程师和数据科学家来管理数据并从这些海量数据中提取价值。
+我们将要发现《Unconfirmed》的一期主题，名为“想在加密货币领域找工作？交易所正在招聘——第 110 期”。你可以在[这里](https://www.listennotes.com/podcasts/unconfirmed/want-a-job-in-crypto-p0QLnhWKHbl/)找到这一期的链接。正如你从电视和报纸上的新闻中可能了解到的，区块链行业正在迅猛发展，需要保持对该领域职位开放情况的更新。毫无疑问，他们会需要数据工程师和数据科学家来管理数据并从这些海量数据中提取价值。
 
-Listen Notes是一个播客搜索引擎和在线数据库，允许我们通过他们的API访问播客音频。我们需要定义一个函数从网页中提取节目的URL。首先，你需要创建一个账户来检索数据，并订阅[免费计划](https://www.listennotes.com/podcast-api/pricing/)来使用Listen Notes API。
+Listen Notes 是一个播客搜索引擎和在线数据库，允许我们通过他们的 API 访问播客音频。我们需要定义一个函数从网页中提取节目的 URL。首先，你需要创建一个账户来检索数据，并订阅[免费计划](https://www.listennotes.com/podcast-api/pricing/)来使用 Listen Notes API。
 
-然后，你点击你感兴趣的节目，并在页面右侧选择“使用API获取此节目”选项。按下后，你可以将默认的编码语言更改为Python，并点击requests选项以使用该python包。之后，你复制代码并将其改编为一个函数。
+然后，你点击你感兴趣的节目，并在页面右侧选择“使用 API 获取此节目”选项。按下后，你可以将默认的编码语言更改为 Python，并点击 requests 选项以使用该 python 包。之后，你复制代码并将其改编为一个函数。
 
 ```py
 import streamlit as st
@@ -72,7 +72,7 @@ api_key_listennotes:{your-api-key-listennotes}
 
 ## 2\. 从音频中提取转录和主题
 
-要提取主题，我们首先需要向AssemblyAI的转录端点发送一个POST请求，输入上一步中检索到的音频URL。之后，我们可以通过向[AssemblyAI](https://www.assemblyai.com/)发送GET请求来获取播客的转录和主题。
+要提取主题，我们首先需要向 AssemblyAI 的转录端点发送一个 POST 请求，输入上一步中检索到的音频 URL。之后，我们可以通过向[AssemblyAI](https://www.assemblyai.com/)发送 GET 请求来获取播客的转录和主题。
 
 ```py
 ## send transcription request
@@ -208,17 +208,17 @@ Hi everyone. Welcome to Unconfirmed, the podcast that reveals how the marketing 
 }
 ```
 
-我们已经获得了一个JSON文件，包含了AssemblyAI检测到的所有主题。本质上，我们将播客转录为文本，文本被拆分成不同的句子及其对应的相关性。对于每个句子，我们都有一个主题列表。在这个大字典的末尾，有一个从所有句子中提取的主题的总结。
+我们已经获得了一个 JSON 文件，包含了 AssemblyAI 检测到的所有主题。本质上，我们将播客转录为文本，文本被拆分成不同的句子及其对应的相关性。对于每个句子，我们都有一个主题列表。在这个大字典的末尾，有一个从所有句子中提取的主题的总结。
 
 值得注意的是，职业和求职是最相关的话题。在前五个标签中，我们还发现了商业和金融、初创企业、经济、商业和银行、风险投资以及其他类似的话题。
 
-## 3\. 使用Streamlit构建Web应用程序
+## 3\. 使用 Streamlit 构建 Web 应用程序
 
-![使用Python创建一个从音频中提取主题的Web应用程序](../Images/607bb4aed0df9fbaa0e5572de9c40e90.png)
+![使用 Python 创建一个从音频中提取主题的 Web 应用程序](img/607bb4aed0df9fbaa0e5572de9c40e90.png)
 
 部署的应用程序链接在[这里](https://topic-web-app-heroku.herokuapp.com/)
 
-现在，我们将前面步骤中定义的所有函数放入主块中，在其中我们使用Streamlit构建我们的Web应用程序，Streamlit是一个免费的开源框架，可以用Python编写几行代码来构建应用程序：
+现在，我们将前面步骤中定义的所有函数放入主块中，在其中我们使用 Streamlit 构建我们的 Web 应用程序，Streamlit 是一个免费的开源框架，可以用 Python 编写几行代码来构建应用程序：
 
 +   应用程序的主标题是通过`st.markdown`显示的。
 
@@ -293,7 +293,7 @@ streamlit run topic_app.py
 
 太棒了！现在应该会出现两个 URL，点击其中一个，网络应用程序就准备好了！
 
-# 第 2 部分：将 Web 应用程序部署到 Heroku
+# 第二部分：将 Web 应用程序部署到 Heroku
 
 一旦你完成了 web 应用程序的代码并检查其运行良好，下一步就是将其部署到互联网上的 Heroku。
 
@@ -348,7 +348,7 @@ heroku login
 
 按下命令后，Heroku 的窗口会出现在你的浏览器中，你需要输入帐户的电子邮件和密码。如果成功，你应该会看到以下结果：
 
-![创建一个使用 Python 从音频中提取主题的 Web 应用程序](../Images/36ee549765643344effe682113e6be0a.png)
+![创建一个使用 Python 从音频中提取主题的 Web 应用程序](img/36ee549765643344effe682113e6be0a.png)
 
 所以，你可以返回到 VS 代码中，在终端上输入命令来创建你的 web 应用程序：
 
@@ -391,11 +391,11 @@ git push
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 
@@ -405,7 +405,7 @@ git push
 
 +   [WavJourney: 进入音频故事情节生成的世界](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)
 
-+   [回到基础第4周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
++   [回到基础第 4 周：高级主题与部署](https://www.kdnuggets.com/back-to-basics-week-4-advanced-topics-and-deployment)
 
 +   [使用 Python 和 Google Earth 构建地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
 

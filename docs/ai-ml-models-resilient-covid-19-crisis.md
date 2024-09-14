@@ -1,12 +1,12 @@
 # 如何在 COVID-19 危机期间使 AI/机器学习模型保持韧性
 
-> 原文：[https://www.kdnuggets.com/2020/06/ai-ml-models-resilient-covid-19-crisis.html](https://www.kdnuggets.com/2020/06/ai-ml-models-resilient-covid-19-crisis.html)
+> 原文：[`www.kdnuggets.com/2020/06/ai-ml-models-resilient-covid-19-crisis.html`](https://www.kdnuggets.com/2020/06/ai-ml-models-resilient-covid-19-crisis.html)
 
-[评论](#comments)
+评论
 
 **[Mayank Kumar](https://in.linkedin.com/in/mayank-kumar-3814aa35)，数据科学顾问和领导者，UnitedHealth Group**。
 
-![](../Images/4e4980a22bbb5c6737f29744a089de83.png)
+![](img/4e4980a22bbb5c6737f29744a089de83.png)
 
 最近，我遇到了一些文章和对话，数据科学和分析领域的领导者们对 AI/ML 的性能和可靠性表示担忧。概念漂移或数据漂移的问题并不新鲜，但 COVID-19 使其影响显得非常显著。在本文中，我讨论了一些最佳实践，以确保创建有韧性的 AI/ML 解决方案来应对这种数据变化。
 
@@ -18,7 +18,7 @@ AI/ML 在所有行业和领域中有着极其广泛的应用。然而，并非�
 
 ### **如何应对 COVID****’****的影响？**
 
-![](../Images/1d29feb6f2b76cc8f53200057297c72a.png)
+![](img/1d29feb6f2b76cc8f53200057297c72a.png)
 
 尽管没有明确且详尽的指南来解决这个问题，但根据具体问题的不同，可能需要采用一种或多种策略的不同排列组合。以下是一些我认为可以朝这个方向努力的方法。
 
@@ -28,11 +28,11 @@ AI/ML 在所有行业和领域中有着极其广泛的应用。然而，并非�
 
 我不是在谈论临时监控，我感觉我们大多数人已经在需求下进行，当我们发现分析解决方案没有达到预期目标时。我在谈论创建主动措施，能够在数据变化、结果恶化等方面提醒解决方案拥有者。
 
-**评估你的AI/ML解决方案的灵活性**
+**评估你的 AI/ML 解决方案的灵活性**
 
-敏捷性是关键，同样AI/ML也是如此。问问自己，是否你的模型需要针对每次特征分布的变化进行重新训练，或者在你设计特征和模型的方式中是否有一定程度的动态性。为了使解决方案对最近的数据更加敏感，追踪最近的用户行为，需要付出怎样的努力？对不同决策参数赋予不同权重的人工修正有多容易？是否可以在你的AI/ML工作流中应用基于规则的业务过滤？
+敏捷性是关键，同样 AI/ML 也是如此。问问自己，是否你的模型需要针对每次特征分布的变化进行重新训练，或者在你设计特征和模型的方式中是否有一定程度的动态性。为了使解决方案对最近的数据更加敏感，追踪最近的用户行为，需要付出怎样的努力？对不同决策参数赋予不同权重的人工修正有多容易？是否可以在你的 AI/ML 工作流中应用基于规则的业务过滤？
 
-动态特性、自学习模型、提高解决方案的敏感性能力，以及在AI/ML决策流程中引入人工修正的便捷性是决定数据科学和分析解决方案在快速调整以适应数据模式变化方面的灵活性的关键因素。为此创造了一个术语，称为MLOps，类似于技术中的DevOps，旨在为数据科学领域带来类似的敏捷性。
+动态特性、自学习模型、提高解决方案的敏感性能力，以及在 AI/ML 决策流程中引入人工修正的便捷性是决定数据科学和分析解决方案在快速调整以适应数据模式变化方面的灵活性的关键因素。为此创造了一个术语，称为 MLOps，类似于技术中的 DevOps，旨在为数据科学领域带来类似的敏捷性。
 
 **重新审视结果变量的定义**
 
@@ -44,7 +44,7 @@ AI/ML 在所有行业和领域中有着极其广泛的应用。然而，并非�
 
 **更加信任实时验证你的解决方案**
 
-鉴于我们当前的数据可能已与过去所见发生了显著变化，信任我们在训练、测试和验证过程中建立的过去模型表现将不再提供真实的图景。数据科学团队应尽可能转向实时验证设置，使用A/B测试以观察模型在没有AI/ML解决方案的当前设置下的表现。
+鉴于我们当前的数据可能已与过去所见发生了显著变化，信任我们在训练、测试和验证过程中建立的过去模型表现将不再提供真实的图景。数据科学团队应尽可能转向实时验证设置，使用 A/B 测试以观察模型在没有 AI/ML 解决方案的当前设置下的表现。
 
 ### 结论
 
@@ -64,7 +64,7 @@ AI/ML 在所有行业和领域中有着极其广泛的应用。然而，并非�
 
 [COVID-19 如何影响机器学习](https://www.crayon.com/en/news-and-resources/covid-machine-learning/)
 
-**简介：**[Mayank Kumar](https://in.linkedin.com/in/mayank-kumar-3814aa35) 在医疗和制药行业拥有超过10年的数据科学经验，主要面向美国市场。目前，Mayank 管理多个项目，开发针对性的分析解决方案，利用先进的机器学习、深度学习和大数据处理工具与技术。
+**简介：**[Mayank Kumar](https://in.linkedin.com/in/mayank-kumar-3814aa35) 在医疗和制药行业拥有超过 10 年的数据科学经验，主要面向美国市场。目前，Mayank 管理多个项目，开发针对性的分析解决方案，利用先进的机器学习、深度学习和大数据处理工具与技术。
 
 **相关：**
 
@@ -78,11 +78,11 @@ AI/ML 在所有行业和领域中有着极其广泛的应用。然而，并非�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

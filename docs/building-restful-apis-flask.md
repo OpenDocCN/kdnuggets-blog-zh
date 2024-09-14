@@ -1,12 +1,12 @@
 # 使用 Flask 构建 RESTful API
 
-> 原文：[https://www.kdnuggets.com/2021/05/building-restful-apis-flask.html](https://www.kdnuggets.com/2021/05/building-restful-apis-flask.html)
+> 原文：[`www.kdnuggets.com/2021/05/building-restful-apis-flask.html`](https://www.kdnuggets.com/2021/05/building-restful-apis-flask.html)
 
-[评论](#comments)
+评论
 
 **由 [Mahadev Easwar](https://www.linkedin.com/in/mahadeveaswar/), 数据工程师**
 
-![](../Images/c9152a361ebd3ee36215cd3edc7bfdaf.png)
+![](img/c9152a361ebd3ee36215cd3edc7bfdaf.png)
 
 [Flask](https://github.com/pallets/flask/blob/master/artwork/logo-full.svg) [框架](https://www.pexels.com/)
 
@@ -22,7 +22,7 @@ web 框架是一个软件框架，用于支持动态网站、web 服务和 web �
 
 *Flask* 是一个轻量级的 WSGI web 应用框架。它旨在快速和轻松地入门，并具有扩展到复杂应用的能力。它最初是 *Werkzeug* 和 *Jinja* 的一个简单封装，现已成为最受欢迎的 Python web 应用框架之一。
 
-![](../Images/f33969b8eb5cd88b36c5e88784601d16.png)
+![](img/f33969b8eb5cd88b36c5e88784601d16.png)
 
 上个月的包下载数量。[来源](https://pypistats.org/). ²
 
@@ -53,7 +53,7 @@ Flask 提供建议，但不强制任何依赖项或项目布局。开发者可�
 **pip** install Flask
 ```
 
-![](../Images/bc15a7c0d53eb3296ba251ca818d7da8.png)
+![](img/bc15a7c0d53eb3296ba251ca818d7da8.png)
 
 安装 Flask 包
 
@@ -98,13 +98,13 @@ Demo/
 app = Flask(__name__)
 ```
 
-3\. 使用`.route()`声明端点及其接受的方法，如`POST`、`GET`。默认情况下，它仅监听`GET`方法。让我们仅为此API启用`POST`方法。
+3\. 使用`.route()`声明端点及其接受的方法，如`POST`、`GET`。默认情况下，它仅监听`GET`方法。让我们仅为此 API 启用`POST`方法。
 
 ```py
 @app.route(**"/get_emp_info"**, methods = [**'POST'**])
 ```
 
-4\. 定义应用程序将执行的功能。根据输入数据从CSV文件中检索员工数据。
+4\. 定义应用程序将执行的功能。根据输入数据从 CSV 文件中检索员工数据。
 
 ```py
 @app.route(**"/get_emp_info"**, methods = [**'POST'**])
@@ -121,27 +121,27 @@ app = Flask(__name__)
     **return** jsonify(out_data)
 ```
 
-**jsonify**()* 是Flask提供的一个辅助方法，用于正确返回*JSON*数据。它返回一个设置了application/json mimetype的Response对象。
+**jsonify**()* 是 Flask 提供的一个辅助方法，用于正确返回*JSON*数据。它返回一个设置了 application/json mimetype 的 Response 对象。
 
-5\. 将Python应用程序设置为在本地开发服务器上运行。默认情况下，调试模式为*False*。要在代码修改时重启服务，调试模式可以设置为*True*。
+5\. 将 Python 应用程序设置为在本地开发服务器上运行。默认情况下，调试模式为*False*。要在代码修改时重启服务，调试模式可以设置为*True*。
 
 ```py
 **#** Setting port number and host i.e., localhost by default **if __name__** == **"__main__"**:
     app.run(**host**=**'**0.0.0.0**'**, **port**=6123)
 ```
 
-Python Flask应用程序
+Python Flask 应用程序
 
-6\. 在本地服务器上运行Python程序
+6\. 在本地服务器上运行 Python 程序
 
 ```py
 # command prompt
 **python** app.py
 ```
 
-![](../Images/bfb2786573aa6414d5b1f0406ad5dee3.png)
+![](img/bfb2786573aa6414d5b1f0406ad5dee3.png)
 
-运行Python应用程序
+运行 Python 应用程序
 
 **测试应用程序**
 
@@ -174,47 +174,47 @@ print(ot.json())# Response JSON
 
 本文中涉及的概念：
 
-+   API与Web框架
++   API 与 Web 框架
 
-+   Flask简介
++   Flask 简介
 
-+   设置Flask环境
++   设置 Flask 环境
 
-+   构建一个Flask API
++   构建一个 Flask API
 
-+   使用*requests*包测试Flask API的请求
++   使用*requests*包测试 Flask API 的请求
 
-Flask就像是构建RESTful APIs的极简方法。
+Flask 就像是构建 RESTful APIs 的极简方法。
 
 > 简单常常能产生奇妙的效果。— 阿梅利亚·巴尔
 
 **结束语**
 
-感谢所有走到这里的人。希望你们发现这篇文章有帮助。请在评论中分享你的反馈/疑问。现在，是时候从头开始构建自己的API了。祝你好运！
+感谢所有走到这里的人。希望你们发现这篇文章有帮助。请在评论中分享你的反馈/疑问。现在，是时候从头开始构建自己的 API 了。祝你好运！
 
 *如果你觉得这篇文章有趣，并且对数据科学、数据工程或软件工程充满热情，请点击*[*关注*](https://medium.com/@mahadeveaswar)*，并随时在*[*LinkedIn*](https://www.linkedin.com/in/mahadeveaswar/)*上加我。*
 
-**简介: [Mahadev Easwar](https://www.linkedin.com/in/mahadeveaswar/)** 是一名数据工程师，具备Python、R和SQL方面的显著技能。
+**简介: [Mahadev Easwar](https://www.linkedin.com/in/mahadeveaswar/)** 是一名数据工程师，具备 Python、R 和 SQL 方面的显著技能。
 
 [原文](https://pub.towardsai.net/building-restful-apis-using-flask-8ba2716d361f)。已获得许可转载。
 
 **相关：**
 
-+   [如何将机器学习/深度学习模型部署到网络]( /2021/04/deploy-machine-learning-models-to-web.html)
++   如何将机器学习/深度学习模型部署到网络
 
-+   [将Docker化的FastAPI应用程序部署到Google Cloud Platform](/2021/05/deploy-dockerized-fastapi-app-google-cloud-platform.html)
++   将 Docker 化的 FastAPI 应用程序部署到 Google Cloud Platform
 
-+   [如何在Kubernetes中部署Flask API并与其他微服务连接](/2021/02/deploy-flask-api-kubernetes-connect-micro-services.html)
++   如何在 Kubernetes 中部署 Flask API 并与其他微服务连接
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

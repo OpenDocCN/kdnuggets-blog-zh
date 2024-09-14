@@ -1,8 +1,8 @@
-# 7个原因你在获得数据科学职位时感到困难
+# 7 个原因你在获得数据科学职位时感到困难
 
-> 原文：[https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
+> 原文：[`www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job`](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
-![7个原因你在获得数据科学职位时感到困难](../Images/4a61094952065584a5b931dd8563d8ce.png)
+![7 个原因你在获得数据科学职位时感到困难](img/4a61094952065584a5b931dd8563d8ce.png)
 
 编辑提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -32,17 +32,17 @@
 
 恭喜你！你正在走在正确的轨道上。下一个目标是将面试机会转化为工作邀请。而第一步是破解*那个*编码面试。
 
-你将首先经历一轮计时编码面试——测试你的问题解决技能——然后是一个SQL编码轮次。
+你将首先经历一轮计时编码面试——测试你的问题解决技能——然后是一个 SQL 编码轮次。
 
 但编码面试很难破解——即使对于经验丰富的专业人士也是如此。但通过持续练习和间隔重复，你可以成功破解这些面试。
 
-定期在Leetcode和Hackerrank等平台上练习编码面试问题。
+定期在 Leetcode 和 Hackerrank 等平台上练习编码面试问题。
 
 如果你在寻找资源，可以查看：
 
-+   [5本免费书籍帮助你掌握Python](/5-free-books-to-help-you-master-python)
++   5 本免费书籍帮助你掌握 Python
 
-+   [7个最佳SQL练习平台](/2023/01/7-best-platforms-practice-sql.html)
++   7 个最佳 SQL 练习平台
 
 一旦你通过了编码面试，专注并为技术面试做准备。复习你的机器学习基础知识。还要回顾你的项目，以便你可以自信地解释它们的影响。
 
@@ -50,7 +50,7 @@
 
 的确，招聘人员只会花几秒钟时间审阅你的简历，然后决定是进入下一阶段还是被拒绝。
 
-![7个你在找数据科学工作时遇到困难的原因](../Images/02165ae3f3337c9889438f77789e045b.png)
+![7 个你在找数据科学工作时遇到困难的原因](img/02165ae3f3337c9889438f77789e045b.png)
 
 作者提供的图片
 
@@ -72,7 +72,7 @@
 
 # 3\. 你的个人资料要么过于具体，要么过于通用
 
-当你申请职位时，你的简历和LinkedIn个人资料应保持一致，没有任何冲突的细节。同时，它们也应与角色所要求的经验和技能相符。
+当你申请职位时，你的简历和 LinkedIn 个人资料应保持一致，没有任何冲突的细节。同时，它们也应与角色所要求的经验和技能相符。
 
 不过，有几个注意事项你应该避免。
 
@@ -84,7 +84,7 @@
 
 ## 你的个人资料过于通用
 
-如果你是一名有着强大SQL技能和构建机器学习模型经验的潜在数据科学家，你也可以申请数据分析师和机器学习工程师的职位。
+如果你是一名有着强大 SQL 技能和构建机器学习模型经验的潜在数据科学家，你也可以申请数据分析师和机器学习工程师的职位。
 
 但你不希望让你的简历/候选人档案看起来像是你想同时成为数据分析师、机器学习工程师和数据科学家。
 
@@ -96,7 +96,7 @@
 
 你的项目帮助你获得比其他候选人更强的竞争优势。所以请明智地选择它们。
 
-![7个你在找数据科学工作时遇到困难的原因](../Images/8cabbd63583286c733a4ca907e77f0a9.png)
+![7 个你在找数据科学工作时遇到困难的原因](img/8cabbd63583286c733a4ca907e77f0a9.png)
 
 作者提供的图片
 
@@ -106,7 +106,7 @@
 
 +   泰坦尼克号生存预测
 
-+   MNIST手写数字识别
++   MNIST 手写数字识别
 
 +   使用鸢尾花数据集进行分类
 
@@ -118,7 +118,7 @@
 
 以下是一些初学者级别的项目，它们将帮助你展示你的技能，并成为一个更强的候选人：
 
-+   [客户细分](/customer-segmentation-in-python-a-practical-approach)
++   客户细分
 
 +   贷款违约预测
 
@@ -128,7 +128,7 @@
 
 使用真实世界的数据集来构建你的项目。这样你可以展示许多重要的技能：数据收集、数据清理和探索性数据分析，以及模型构建。
 
-还包括受你兴趣启发的项目。正如我在[之前的pandas指南](/7-steps-to-mastering-data-wrangling-with-pandas-and-python)中建议的那样，尝试将你感兴趣的和爱好的数据转化为有趣的项目，以帮助你在面试官面前留下深刻的印象。
+还包括受你兴趣启发的项目。正如我在之前的 pandas 指南中建议的那样，尝试将你感兴趣的和爱好的数据转化为有趣的项目，以帮助你在面试官面前留下深刻的印象。
 
 # 5\. 你的学位成了障碍
 
@@ -146,9 +146,9 @@
 
 在公开场合学习是非常重要的，特别是当你试图获得第一份工作时（老实说，即使之后也是如此）。
 
-我在2020年底开始在网上写作。从那时起，我的大多数机会都是通过我在网上发布的教程和技术深度分析获得的。
+我在 2020 年底开始在网上写作。从那时起，我的大多数机会都是通过我在网上发布的教程和技术深度分析获得的。
 
-那么你如何以及从哪里开始？利用LinkedIn和Twitter (X) 等社交媒体平台与社区分享你的工作：
+那么你如何以及从哪里开始？利用 LinkedIn 和 Twitter (X) 等社交媒体平台与社区分享你的工作：
 
 +   **做了一个项目？** 与你的网络分享。请求反馈。改进。
 
@@ -166,7 +166,7 @@
 
 由于目前就业市场的竞争非常激烈，你需要超越仅仅申请工作的阶段，开始变得更加主动。
 
-![你为什么难以获得数据科学工作的7个原因](../Images/d313c50962efb01f86635f90086d5e87.png)
+![你为什么难以获得数据科学工作的 7 个原因](img/d313c50962efb01f86635f90086d5e87.png)
 
 图片由作者提供
 
@@ -186,7 +186,7 @@
 
 以上就是总结。以下是我们讨论内容的简要回顾：
 
-+   为编码面试做准备。在Leetcode和Hackerrank等平台上练习。
++   为编码面试做准备。在 Leetcode 和 Hackerrank 等平台上练习。
 
 +   根据职位要求调整你的个人资料，但要保持一致。
 
@@ -198,18 +198,18 @@
 
 祝你求职顺利。希望你能尽快找到数据科学职位。你还有什么其他建议吗？请在评论中告诉我们。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她通过编写教程、操作指南、评论文章等与开发者社区分享自己的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她通过编写教程、操作指南、评论文章等与开发者社区分享自己的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 相关主题
 
 +   [无法找到数据科学职位？原因如下](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [2022年能让你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年能让你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [一个能让你在2022年获得工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [一个能让你在 2022 年获得工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [3个确保你获得工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个确保你获得工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [KDnuggets 新闻，6月1日: 数据科学的完整集合…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日: 数据科学的完整集合…](https://www.kdnuggets.com/2022/n22.html)

@@ -1,8 +1,8 @@
 # 学习人工智能的路径
 
-> 原文：[https://www.kdnuggets.com/2017/05/path-learning-artificial-intelligence.html](https://www.kdnuggets.com/2017/05/path-learning-artificial-intelligence.html)
+> 原文：[`www.kdnuggets.com/2017/05/path-learning-artificial-intelligence.html`](https://www.kdnuggets.com/2017/05/path-learning-artificial-intelligence.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **由 Kirill Eremenko 和 Hadelin de Ponteves 提供，Super Data Science。**
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-**点击这里加入人工智能在线课程** [链接: [http://bit.ly/2BuildAI](http://bit.ly/2BuildAI) ]
+**点击这里加入人工智能在线课程** [链接: [`bit.ly/2BuildAI`](http://bit.ly/2BuildAI) ]
 
 就在此刻，我们正在进行一个 Kickstarter 项目，以创建一个革命性的人工智能培训项目。在这篇博客中，我们将描述课程结构背后的秘密，以便即使你还没有准备好加入培训——你也可以在自己的学习计划中复制这些步骤。
 
-![](../Images/2d2d6160970f9995ca497248743429da.png)
+![](img/2d2d6160970f9995ca497248743429da.png)
 
 **图. 人工智能、机器学习与深度学习**
 
@@ -36,9 +36,9 @@
 
 1.  **人工智能等级 2 – 深度 Q 学习**
 
-然后我们将通过研究深度 Q 学习（DQN）将事情提升到下一个层级。通过 DQN，我们将能够解决一个更具挑战性的问题：征服流行的游戏《打砖块》！为了完成这个挑战，我们的输入将是编码值的向量，所有这些都描述了环境的一个状态，即：球的位置坐标、球的运动方向向量坐标，以及每个砖块是否存在的二进制值，其中1表示砖块仍在，0表示砖块已不存在。
+然后我们将通过研究深度 Q 学习（DQN）将事情提升到下一个层级。通过 DQN，我们将能够解决一个更具挑战性的问题：征服流行的游戏《打砖块》！为了完成这个挑战，我们的输入将是编码值的向量，所有这些都描述了环境的一个状态，即：球的位置坐标、球的运动方向向量坐标，以及每个砖块是否存在的二进制值，其中 1 表示砖块仍在，0 表示砖块已不存在。
 
-![](../Images/8ecd060cdff02b9b28f8a2e4fe1b464a.png)
+![](img/8ecd060cdff02b9b28f8a2e4fe1b464a.png)
 
 **图. 人工智能玩《打砖块》**
 
@@ -56,7 +56,7 @@
 
 如果环境中有多个代理需要训练呢？在这种情况下，最佳的人工智能是 A3C，这是人工智能领域的热门话题，由 Google DeepMind 去年推出。我们希望在同一地图上实现多个自动驾驶汽车的 AI。我们将训练汽车避免相互碰撞并避开障碍物。这将是结束这段 AI 之旅的一个非常激动人心的挑战！
 
-![](../Images/372895dc6ee93817807740dc5093da88.png)
+![](img/372895dc6ee93817807740dc5093da88.png)
 
 **加入我们**
 
@@ -64,7 +64,7 @@
 
 我们的 Kickstarter 项目已经得到了超过 1,500 名学生的支持。距离截止日期仅剩几天——快来加入我们，获取课程及大量早鸟奖励！
 
-**了解如何构建人工智能** [链接: [http://bit.ly/2BuildAI](http://bit.ly/2BuildAI) ]
+**了解如何构建人工智能** [链接: [`bit.ly/2BuildAI`](http://bit.ly/2BuildAI) ]
 
 人工智能是一项每个人都应该可以掌握的技能，这不仅是学习 AI 的机会，也是站在下一个工业革命前沿的机会。
 
@@ -74,15 +74,15 @@ Hadelin de Ponteves & Kirill Eremenko
 
 ##### 注：图片 #1 和 #3 的版权归 SuperDataScience Pty Ltd 所有。KDNuggets 在本博客及任何相关宣传媒体中的使用已获批准。
 
-**作者简介：** **[Kirill Eremenko](https://www.linkedin.com/in/keremenko/?ppe=1)** 是一位多语言企业家，在教育领域有3年的经验，在数据科学领域有7年的经验。而**[Hadelin de Ponteves](https://www.linkedin.com/in/hadelin-de-ponteves-1425ba5b/)** 是Google的数据工程师。
+**作者简介：** **[Kirill Eremenko](https://www.linkedin.com/in/keremenko/?ppe=1)** 是一位多语言企业家，在教育领域有 3 年的经验，在数据科学领域有 7 年的经验。而**[Hadelin de Ponteves](https://www.linkedin.com/in/hadelin-de-ponteves-1425ba5b/)** 是 Google 的数据工程师。
 
 **相关：**
 
-+   [什么是人工智能？智能的组成成分](/2017/04/grakn-artificial-intelligence-ingredients-intelligence.html)
++   什么是人工智能？智能的组成成分
 
-+   [人工智能与深度学习的进展：DeepMind、Facebook 和 OpenAI](/2017/05/advances-ai-deep-learning-deepmind-facebook-openai.html)
++   人工智能与深度学习的进展：DeepMind、Facebook 和 OpenAI
 
-+   [人工智能简史](/2017/04/brief-history-artificial-intelligence.html)
++   人工智能简史
 
 ### 更多相关主题
 
@@ -94,6 +94,6 @@ Hadelin de Ponteves & Kirill Eremenko
 
 +   [人工智能如何变革数据整合](https://www.kdnuggets.com/2022/04/artificial-intelligence-transform-data-integration.html)
 
-+   [2022年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
++   [2022 年最受欢迎的人工智能技能](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
 
-+   [AI指数报告概述：衡量人工智能的趋势](https://www.kdnuggets.com/2023/04/overview-ai-index-report-measuring-trends-artificial-intelligence.html)
++   [AI 指数报告概述：衡量人工智能的趋势](https://www.kdnuggets.com/2023/04/overview-ai-index-report-measuring-trends-artificial-intelligence.html)

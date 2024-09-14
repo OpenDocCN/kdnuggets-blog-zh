@@ -1,8 +1,8 @@
 # 集成技术何时是一个好选择？
 
-> 原文：[https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)
+> 原文：[`www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html`](https://www.kdnuggets.com/2022/07/would-ensemble-techniques-good-choice.html)
 
-![集成技术何时是一个好选择？](../Images/ee94621a31d8295616fa92d91a805cad.png)
+![集成技术何时是一个好选择？](img/ee94621a31d8295616fa92d91a805cad.png)
 
 [布雷特·乔丹](https://unsplash.com/@brett_jordan) via Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -30,7 +30,7 @@
 
 例如，如果你正在进行分类任务并希望提高模型的准确性 - 使用集成技术。如果你想减少回归任务的平均误差 - 使用集成技术。
 
-使用集成学习算法的主要2个原因是：
+使用集成学习算法的主要 2 个原因是：
 
 +   提高预测 - 你将获得比仅使用单一模型更好的预测能力。
 
@@ -40,7 +40,7 @@
 
 本质上是构建一个更稳定、更可靠、更准确的模型，让你信赖。
 
-有3种类型的集成建模技术：
+有 3 种类型的集成建模技术：
 
 1.  Bagging
 

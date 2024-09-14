@@ -1,6 +1,6 @@
 # 讲述一个精彩的数据故事：可视化决策树
 
-> 原文：[https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)
+> 原文：[`www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html`](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)
 
 你是否曾见过一个看起来很棒的仪表盘或报告，但除了好看之外没有提供更多信息？你无法真正理解故事。这通常是因为开发者没有选择合适的可视化和组织方式。选择合适的可视化将讲述一个你可能永远没有时间或机会讲述的故事。
 
@@ -10,15 +10,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-![讲述一个精彩的数据故事：可视化决策树](../Images/97d3becbfa7b27e42dd1d9454af5deeb.png)
+![讲述一个精彩的数据故事：可视化决策树](img/97d3becbfa7b27e42dd1d9454af5deeb.png)
 
 [图片由 upklyak 提供](https://www.freepik.com/free-vector/business-startup-with-businessman-flying-rocket_22535555.htm#query=data%20doodles&position=2&from_view=search&track=sph) 在 Freepik
 
@@ -30,7 +30,7 @@
 
 如何让可视化自我呈现你的故事？
 
-[![讲述一个精彩的数据故事：可视化决策树](../Images/9b1aa9d92e44e82b1cf57ad6649f457c.png)](https://www.kdnuggets.com/wp-content/uploads/pugsley-visualization-decision-tree-kd-v12.jpg)
+![讲述一个精彩的数据故事：可视化决策树](https://www.kdnuggets.com/wp-content/uploads/pugsley-visualization-decision-tree-kd-v12.jpg)
 
 可视化类型的选择至关重要。上面的决策树解释了如何根据你想讲述的故事来选择适合的可视化类型。
 
@@ -46,7 +46,7 @@
 
 **堆积面积图**将用于展示多个数据集随时间变化的情况，这些数据集一起构成一个整体。在银行家的例子中，她可以展示各个区域随时间的变化情况，同时显示区域总数如何累计到公司总数。
 
-**组合条形图和折线图**适用于当多个数据集需要在时间上共同显示，但它们的度量单位不同的情况。这将是银行家在左侧Y轴上以人数单位显示员工水平，同时在右侧Y轴上以美元单位显示净利润的方式。所有这些基于折线的可视化组合将为为什么需要采取激进措施应对前所未有的变化提供背景。
+**组合条形图和折线图**适用于当多个数据集需要在时间上共同显示，但它们的度量单位不同的情况。这将是银行家在左侧 Y 轴上以人数单位显示员工水平，同时在右侧 Y 轴上以美元单位显示净利润的方式。所有这些基于折线的可视化组合将为为什么需要采取激进措施应对前所未有的变化提供背景。
 
 # 比较类别
 
@@ -80,13 +80,13 @@
 
 **子弹图**可以用来展示单一指标的多个维度，例如目标利润、年初至今的利润和预计利润。通过使用这些单指标可视化，演示者可以将重点放在一个故事细节上。
 
-关键是如何选择合适的可视化方法背后有科学依据。你不能仅仅把任务交给图形设计师，依据视觉效果来选择可视化。为了让可视化讲述你的故事，你需要为你的目的而建立的可视化类型。学习图1中概述的概念，将使你的故事更强大、更有效。
+关键是如何选择合适的可视化方法背后有科学依据。你不能仅仅把任务交给图形设计师，依据视觉效果来选择可视化。为了让可视化讲述你的故事，你需要为你的目的而建立的可视化类型。学习图 1 中概述的概念，将使你的故事更强大、更有效。
 
-**[斯坦·普格斯利](https://www.linkedin.com/in/spugsley/)** 是一位数据仓库和分析顾问，服务于[艾德·贝利技术咨询公司](https://technologyconsulting.eidebailly.com/services/data-analytics/)，总部位于犹他州盐湖城。他还是犹他大学埃克尔斯商学院的兼职教授。你可以通过[电子邮件](mailto:SPugsley@EideBailly.com)联系作者。
+**[斯坦·普格斯利](https://www.linkedin.com/in/spugsley/)** 是一位数据仓库和分析顾问，服务于[艾德·贝利技术咨询公司](https://technologyconsulting.eidebailly.com/services/data-analytics/)，总部位于犹他州盐湖城。他还是犹他大学埃克尔斯商学院的兼职教授。你可以通过电子邮件联系作者。
 
 ### 了解更多相关主题
 
-+   [KDnuggets™ 新闻 22:n09，3月2日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
++   [KDnuggets™ 新闻 22:n09，3 月 2 日：讲述一个精彩的数据故事：A…](https://www.kdnuggets.com/2022/n09.html)
 
 +   [数据讲述——通过数据讲故事的艺术](https://www.kdnuggets.com/2023/07/manning-data-storytelling-the-art-telling-stories-data.html)
 

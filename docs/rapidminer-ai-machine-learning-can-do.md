@@ -1,10 +1,10 @@
 # 人工智能和机器学习可以做什么——以及不能做什么
 
-> 原文：[https://www.kdnuggets.com/2017/08/rapidminer-ai-machine-learning-can-do.html](https://www.kdnuggets.com/2017/08/rapidminer-ai-machine-learning-can-do.html)
+> 原文：[`www.kdnuggets.com/2017/08/rapidminer-ai-machine-learning-can-do.html`](https://www.kdnuggets.com/2017/08/rapidminer-ai-machine-learning-can-do.html)
 
 **作者：Ingo Mierswa，[RapidMiner](https://rapidminer.com/)。** 赞助文章。
 
-在我[上一篇文章](/2017/07/rapidminer-ai-machine-learning-deep-learning.html)中，我写到了人工智能（AI）。上次我写人工智能时，重点在于技术方面：什么是人工智能系统的一部分，什么不是。然而，还有一个可能更重要的问题：我们在用人工智能做什么？
+在我上一篇文章中，我写到了人工智能（AI）。上次我写人工智能时，重点在于技术方面：什么是人工智能系统的一部分，什么不是。然而，还有一个可能更重要的问题：我们在用人工智能做什么？
 
 我工作的部分内容是帮助投资者在审查人工智能公司时进行[尽职调查](https://www.entrepreneur.com/encyclopedia/due-diligence)。我与他们讨论他们可能想投资的公司。在这个过程中，我观察到[每个公司推介](https://www.techemergence.com/venture-investments-in-artificial-intelligence-trends-in-2016-and-beyond/)都充满了关于他们如何使用人工智能解决业务问题的内容。
 
@@ -28,35 +28,35 @@
 
 +   ……等等
 
-你可以看到，如果一个人拥有所有相关数据，他们可以做出这些决策——但没有AI或机器学习，他们无法做到这一点，因为他们需要每天做出数百万次这样的决策。想象一下，每天从5000万客户中筛选出高流失风险的客户。这对任何人来说都是不可能的，但对机器学习模型来说却完全没有问题。
+你可以看到，如果一个人拥有所有相关数据，他们可以做出这些决策——但没有 AI 或机器学习，他们无法做到这一点，因为他们需要每天做出数百万次这样的决策。想象一下，每天从 5000 万客户中筛选出高流失风险的客户。这对任何人来说都是不可能的，但对机器学习模型来说却完全没有问题。
 
 所以，人工智能和机器学习的最大价值在于支持我们做出重大战略决策。**机器学习在我们操作化模型并自动化数百万个决策时提供最大价值。**
 
-下图展示了决策的范围以及人类做出决策所需的时间。蓝色框表示分析可以提供帮助，但未能发挥全部价值的情况。橙色框表示AI和机器学习显示出真实价值的情况。有趣的观察是**你能够自动化的决策越多，价值就越高**（该范围的右上端）。
+下图展示了决策的范围以及人类做出决策所需的时间。蓝色框表示分析可以提供帮助，但未能发挥全部价值的情况。橙色框表示 AI 和机器学习显示出真实价值的情况。有趣的观察是**你能够自动化的决策越多，价值就越高**（该范围的右上端）。
 
-![](../Images/75d865903bb8342e8596f8bdd63bf715.png)
+![](img/75d865903bb8342e8596f8bdd63bf715.png)
 
-**图1：自动化决策的能力**
+**图 1：自动化决策的能力**
 
-这个现象的最佳描述之一来自于[Andrew Ng](http://www.andrewng.org/)，一位知名的AI领域研究人员。Andrew描述了[AI能做什么](https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now)，如下：
+这个现象的最佳描述之一来自于[Andrew Ng](http://www.andrewng.org/)，一位知名的 AI 领域研究人员。Andrew 描述了[AI 能做什么](https://hbr.org/2016/11/what-artificial-intelligence-can-and-cant-do-right-now)，如下：
 
-> *“如果一个普通人可以在不到一秒钟的时间内完成一个心理任务，我们现在或者不久的将来可能就可以用AI来自动化这个任务。”*
+> *“如果一个普通人可以在不到一秒钟的时间内完成一个心理任务，我们现在或者不久的将来可能就可以用 AI 来自动化这个任务。”*
 
 我同意他对这种描述的看法，我喜欢他强调自动化和模型的操作化，因为这正是最大价值所在。我唯一不同意的是他选择的时间单位——选择分钟而不是秒钟更为安全。
 
 如果你在寻找更多机器学习如何帮助你的业务的方法，可以查看我最近的网络研讨会[如何通过数据科学和机器学习毁掉你的业务](http://go.rapidminer.com/l/32612/2017-08-02/7z6hlv)，在这个研讨会中，我讲述了如何将机器学习应用到你的业务中，并展示了如何从统计模型中得出完全错误的结论。
 
-个人简介：[Ingo Miersw](https://twitter.com/ingomierswa?lang=en)，博士，RapidMiner的创始人和总裁。
+个人简介：[Ingo Miersw](https://twitter.com/ingomierswa?lang=en)，博士，RapidMiner 的创始人和总裁。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 

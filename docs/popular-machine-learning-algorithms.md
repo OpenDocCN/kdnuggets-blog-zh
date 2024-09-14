@@ -1,14 +1,14 @@
 # 常见的机器学习算法
 
-> 原文：[https://www.kdnuggets.com/2022/05/popular-machine-learning-algorithms.html](https://www.kdnuggets.com/2022/05/popular-machine-learning-algorithms.html)
+> 原文：[`www.kdnuggets.com/2022/05/popular-machine-learning-algorithms.html`](https://www.kdnuggets.com/2022/05/popular-machine-learning-algorithms.html)
 
-在开始学习数据科学时，有很多内容需要学习，这可能会让人感到相当不知所措。如果你需要对数据科学的基础知识有更多的了解，可以查看这篇文章：[初学者最佳数据科学书籍](/2022/03/best-data-science-books-beginners.html)。
+在开始学习数据科学时，有很多内容需要学习，这可能会让人感到相当不知所措。如果你需要对数据科学的基础知识有更多的了解，可以查看这篇文章：初学者最佳数据科学书籍。
 
-本指南将帮助有志于数据科学和机器学习工程的人员获得更好的知识和经验。我将列出不同类型的机器学习算法，这些算法可以在Python和R中使用。
+本指南将帮助有志于数据科学和机器学习工程的人员获得更好的知识和经验。我将列出不同类型的机器学习算法，这些算法可以在 Python 和 R 中使用。
 
 # 1. 线性回归
 
-![线性回归](../Images/7fa80364f50cfaf834ec522ec0d16f1b.png)
+![线性回归](img/7fa80364f50cfaf834ec522ec0d16f1b.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/Regression_analysis)
 
@@ -20,21 +20,21 @@
 
 # 2. 逻辑回归
 
-![逻辑回归](../Images/495e883e42b7ce0cda189f5bdd40129a.png)
+![逻辑回归](img/495e883e42b7ce0cda189f5bdd40129a.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/Sigmoid_function)
 
-逻辑回归是另一种从监督学习中分支出来的机器学习算法。它可以用于回归和分类任务，但主要用于分类。如果你想了解更多关于逻辑回归在分类任务中的应用，请点击[链接](/2022/04/logistic-regression-classification.html)。
+逻辑回归是另一种从监督学习中分支出来的机器学习算法。它可以用于回归和分类任务，但主要用于分类。如果你想了解更多关于逻辑回归在分类任务中的应用，请点击链接。
 
-逻辑回归用于预测具有独立变量知识的分类因变量。其目的是对输出进行分类，这些输出只能是0或1。输入的加权和通过一个称为**Sigmoid函数**的激活函数，该函数将值映射到0和1之间。
+逻辑回归用于预测具有独立变量知识的分类因变量。其目的是对输出进行分类，这些输出只能是 0 或 1。输入的加权和通过一个称为**Sigmoid 函数**的激活函数，该函数将值映射到 0 和 1 之间。
 
 逻辑回归基于最大似然估计，这是一种估计假定概率分布参数的方法，给定一些观察到的数据。
 
-在**线性回归**和**逻辑回归**之间容易感到困惑，因此如果你想对这两者有更深入的了解，可以阅读这篇文章：[线性回归与逻辑回归：简明解释](/2022/03/linear-logistic-regression-succinct-explanation.html)。
+在**线性回归**和**逻辑回归**之间容易感到困惑，因此如果你想对这两者有更深入的了解，可以阅读这篇文章：线性回归与逻辑回归：简明解释。
 
 # 3. 决策树
 
-![决策树](../Images/f3b68f21b7a55a4a00b9f4d809d23e8d.png)
+![决策树](img/f3b68f21b7a55a4a00b9f4d809d23e8d.png)
 
 来源：[explorium](https://www.explorium.ai/blog/the-complete-guide-to-decision-trees/)
 
@@ -52,7 +52,7 @@
 
 # 4\. 随机森林®
 
-![随机森林](../Images/f5c0b335f9879e20b28138287891ccdf.png)
+![随机森林](img/f5c0b335f9879e20b28138287891ccdf.png)
 
 来源: [维基百科](https://en.wikipedia.org/wiki/Random_forest)
 
@@ -70,7 +70,7 @@
 
 # 5. **朴素贝叶斯**
 
-![朴素贝叶斯](../Images/fde81628a61290e89a229fcbea992e67.png)
+![朴素贝叶斯](img/fde81628a61290e89a229fcbea992e67.png)
 
 来源: [Medium](https://medium.com/analytics-vidhya/na%C3%AFve-bayes-algorithm-5bf31e9032a2)
 
@@ -92,11 +92,11 @@
 
 # 6. **k-最近邻**
 
-![kNN](../Images/0fd1ae1b45fda631331db0173a0e7ffd.png)
+![kNN](img/0fd1ae1b45fda631331db0173a0e7ffd.png)
 
 来源：[rapidminer](https://rapidminer.com/blog/k-nearest-neighbors-laziest-machine-learning-technique/)
 
-kNN，即K-最近邻算法，是一种从监督学习中衍生出的算法，可用于解决分类和回归问题。KNN算法假设相似的事物会靠得很近。我记住它是“物以类聚”。
+kNN，即 K-最近邻算法，是一种从监督学习中衍生出的算法，可用于解决分类和回归问题。KNN 算法假设相似的事物会靠得很近。我记住它是“物以类聚”。
 
 kNN 使用距离、接近度或亲密度的概念来衡量其他数据点之间的相似性。通过一种数学方法计算图上点之间的距离，然后根据最近的标记观测数据点为未观测数据进行标记。
 
@@ -106,23 +106,23 @@ K 被称为最近邻居的数量，一般是一个奇数。
 
 # 7. K-Means
 
-![K-Means](../Images/2976669a90c0a9a44ade7c2decf73abe.png)
+![K-Means](img/2976669a90c0a9a44ade7c2decf73abe.png)
 
 来源：[Wikimedia](https://commons.wikimedia.org/wiki/File:K-means_convergence.gif)
 
-K-means 聚类是一种从无监督学习中衍生的机器学习算法。它是一种聚类算法，将相似的项目/数据点分组为簇，其中组的数量称为K。
+K-means 聚类是一种从无监督学习中衍生的机器学习算法。它是一种聚类算法，将相似的项目/数据点分组为簇，其中组的数量称为 K。
 
 簇内的数据点被认为是同质的，而与同类组相比则是异质的。
 
 K-means 通过找到这些数据点之间的相似性并将它们分组为簇来实现：
 
-1.  选择k值。
+1.  选择 k 值。
 
 1.  初始化质心。
 
 1.  选择分组并计算平均值。
 
-为了确定k值，你可以使用两种方法：
+为了确定 k 值，你可以使用两种方法：
 
 +   Elbow Method
 
@@ -130,7 +130,7 @@ K-means 通过找到这些数据点之间的相似性并将它们分组为簇来
 
 # 8. 降维
 
-![Dimensionality Reduction](../Images/33cacd72e9921b7e1b6c09f66b9b46f8.png)
+![Dimensionality Reduction](img/33cacd72e9921b7e1b6c09f66b9b46f8.png)
 
 来源：[TDS](https://towardsdatascience.com/curse-of-dimensionality-a-curse-to-machine-learning-c122ee33bfeb#:~:text=Curse%20of%20Dimensionality%20describes%20the,first%20introduced%20by%20Richard%20E.)
 
@@ -158,7 +158,7 @@ K-means 通过找到这些数据点之间的相似性并将它们分组为簇来
 
 现在你对数据科学家日常生活中使用的流行机器学习算法有了很好的理解。
 
-如果你想知道进一步扩展知识的资源，可以阅读这篇文章：[2022年你需要阅读的机器学习书籍](/2022/04/machine-learning-books-need-read-2022.html)
+如果你想知道进一步扩展知识的资源，可以阅读这篇文章：2022 年你需要阅读的机器学习书籍
 
 RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
@@ -168,11 +168,11 @@ RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -186,6 +186,6 @@ RANDOM FORESTS 和 RANDOMFORESTS 是 Minitab, LLC 的注册商标。
 
 +   [为什么 DuckDB 越来越受欢迎？](https://www.kdnuggets.com/2023/07/duckdb-getting-popular.html)
 
-+   [KDnuggets新闻3月30日：最受欢迎的编程入门课程…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻 3 月 30 日：最受欢迎的编程入门课程…](https://www.kdnuggets.com/2022/n13.html)
 
-+   [AI质量免费研讨会，因需求强烈回归](https://www.kdnuggets.com/2022/05/truera-free-workshop-ai-quality-back-popular-demand.html)
++   [AI 质量免费研讨会，因需求强烈回归](https://www.kdnuggets.com/2022/05/truera-free-workshop-ai-quality-back-popular-demand.html)

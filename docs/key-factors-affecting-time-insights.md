@@ -1,6 +1,6 @@
 # 影响洞察时间的关键因素
 
-> 原文：[https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html](https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html)
+> 原文：[`www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html`](https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html)
 
 在一个商业运作迅速的世界里，利用数据资产是保持竞争优势的最佳选择。数据分析是一项宝贵的实践，它生成的洞察帮助企业朝正确的方向前进。市场动态变化快，竞争激烈，这使得生成这些洞察变得比以往任何时候都重要。然而，数据分析本身并不是区分因素；时间的利用才是。
 
@@ -10,23 +10,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-这就是商业智能（BI）发挥作用的地方。传统的BI定义较宽泛，包括将原始数据转化为有意义和有用信息的工具和技术。
+这就是商业智能（BI）发挥作用的地方。传统的 BI 定义较宽泛，包括将原始数据转化为有意义和有用信息的工具和技术。
 
-![影响洞察时间的关键因素](../Images/10a8b44e0d97c0f7bafa53fa86c33a26.png)
+![影响洞察时间的关键因素](img/10a8b44e0d97c0f7bafa53fa86c33a26.png)
 
 图片来源于 [Freepik](https://www.freepik.com/free-photo/businesswoman-using-tablet-analysis-graph-company-finance-strategy-statistics-success-concept-planning-future-office-room_16068533.htm#query=insights&position=3&from_view=search&track=sph)
 
-尤其是当涉及大量数据和多样化的数据来源时，实现有效的BI很快就会成为一项昂贵且耗时的任务，需大量的计算资源和先进的软件能力。因此，寻求获得BI收益的组织必须投资于BI基础设施、软件和维护。此外，需要相当的专业知识来准确处理、分析和解释数据。当处理大型数据集时，这些成本会更高，对计算基础设施的要求也更大。由于使BI对企业有用所需的重大投资，清晰了解潜在的投资回报率至关重要。
+尤其是当涉及大量数据和多样化的数据来源时，实现有效的 BI 很快就会成为一项昂贵且耗时的任务，需大量的计算资源和先进的软件能力。因此，寻求获得 BI 收益的组织必须投资于 BI 基础设施、软件和维护。此外，需要相当的专业知识来准确处理、分析和解释数据。当处理大型数据集时，这些成本会更高，对计算基础设施的要求也更大。由于使 BI 对企业有用所需的重大投资，清晰了解潜在的投资回报率至关重要。
 
-# 标准化与定制BI解决方案
+# 标准化与定制 BI 解决方案
 
 现有技术和工具长期以来提供了生成洞察的标准程序。每个组织面临独特的挑战。他们通常依赖定制的商业智能解决方案，以适应其行业并帮助他们在竞争中保持领先。因此，量身定制的解决方案能够从最具行动性的洞察中创造最大商业价值，并加速创新和增长。
 
@@ -62,11 +62,11 @@
 
 为了加速商业智能（BI）计划，一个理想的平台应当允许用户通过自动化数据清理和分析迅速提取见解。它必须让开发者免于处理与数据处理平台相关的性能问题，从而能够专注于功能开发。
 
-让我们看看一些企业从快速BI结果中受益的例子：
+让我们看看一些企业从快速 BI 结果中受益的例子：
 
 ## 零售公司
 
-假设一个中型零售企业希望获得关于客户行为和偏好的见解，以改善其销售和营销策略。他们从多个来源（包括销售、客户、库存和社交媒体数据）收集了大量数据。BI工具可以帮助该零售企业处理和分析这些大数据集，以确定例如哪些产品在不同客户群体中最受欢迎，或者哪些店铺位置拥有最忠诚的客户群。这些强大的见解将帮助公司在产品开发、营销和店铺运营方面做出明智的决策。
+假设一个中型零售企业希望获得关于客户行为和偏好的见解，以改善其销售和营销策略。他们从多个来源（包括销售、客户、库存和社交媒体数据）收集了大量数据。BI 工具可以帮助该零售企业处理和分析这些大数据集，以确定例如哪些产品在不同客户群体中最受欢迎，或者哪些店铺位置拥有最忠诚的客户群。这些强大的见解将帮助公司在产品开发、营销和店铺运营方面做出明智的决策。
 
 ## 医疗保健提供者
 
@@ -74,15 +74,15 @@
 
 # 结论
 
-现代世界对商业智能的需求日益增加，但如果从数据中生成见解需要很长时间，这种需求并不足以帮助企业保持竞争优势。文章讨论了影响见解生成速度的挑战和趋势。包括数据处理自动化、定制数据分析和维护可扩展解决方案在内的有效BI策略，可以证明在及时生成见解方面的有效性。
+现代世界对商业智能的需求日益增加，但如果从数据中生成见解需要很长时间，这种需求并不足以帮助企业保持竞争优势。文章讨论了影响见解生成速度的挑战和趋势。包括数据处理自动化、定制数据分析和维护可扩展解决方案在内的有效 BI 策略，可以证明在及时生成见解方面的有效性。
 
 **[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位人工智能策略师和数字化转型领导者，致力于在产品、科学和工程交汇处构建可扩展的机器学习系统。她是一位获奖的创新领导者、作者和国际演讲者。她的使命是使机器学习民主化，打破术语，让每个人都能参与这场转型。
 
 ### 更多关于这个话题
 
-+   [可能影响您数据分析准确性的3个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
++   [可能影响您数据分析准确性的 3 个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
 
-+   [识别可由机器学习解决的问题的4个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
++   [识别可由机器学习解决的问题的 4 个因素](https://www.kdnuggets.com/2022/04/4-factors-identify-machine-learning-solvable-problems.html)
 
 +   [解锁数据洞察：有效分析的关键 Pandas 函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
 

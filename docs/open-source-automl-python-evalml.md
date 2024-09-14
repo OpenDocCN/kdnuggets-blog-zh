@@ -1,12 +1,12 @@
 # 使用 EvalML 实现简单的开源 Python AutoML
 
-> 原文：[https://www.kdnuggets.com/2021/02/open-source-automl-python-evalml.html](https://www.kdnuggets.com/2021/02/open-source-automl-python-evalml.html)
+> 原文：[`www.kdnuggets.com/2021/02/open-source-automl-python-evalml.html`](https://www.kdnuggets.com/2021/02/open-source-automl-python-evalml.html)
 
-[评论](#comments)
+评论
 
 **由 [Dylan Sherry](https://www.linkedin.com/in/dylansherry/)，EvalML 团队负责人**
 
-![使用 EvalML 实现简单的开源 Python AutoML](../Images/bc5d64a495185d869d33f09fede4dc34.png)
+![使用 EvalML 实现简单的开源 Python AutoML](img/bc5d64a495185d869d33f09fede4dc34.png)
 
 Alteryx 托管两个开源建模项目。
 
@@ -38,7 +38,7 @@ best_pipeline = automl.best_pipeline
 best_pipeline.predict(X_test)
 ```
 
-![图](../Images/1319ed30bec469e3b669a661f0796aa2.png)
+![图](img/1319ed30bec469e3b669a661f0796aa2.png)
 
 EvalML 的 AutoML 搜索演示
 
@@ -54,7 +54,7 @@ AutoML 生成的 EvalML 流水线包括开箱即用的预处理和特征工程�
 
 EvalML 设计为与 [Featuretools](https://featuretools.com/?__hstc=142826602.43730bd3179999cf11c14fbc47b01062.1613430843886.1613430843886.1613430843886.1&__hssc=142826602.1.1613430843886&__hsfp=264117289)良好兼容，它可以从多个表中集成数据并生成特征以增强 ML 模型，以及与 [Compose](https://compose.alteryx.com/)兼容，这是一个用于标签工程和时间序列汇总的工具。EvalML 用户可以轻松控制 EvalML 如何处理每个输入的特征，例如数值特征、分类特征、文本、日期时间等。
 
-![图示](../Images/3dda01534486e96ea72c50211ccece51.png)
+![图示](img/3dda01534486e96ea72c50211ccece51.png)
 
 你可以在 EvalML 中使用 Compose 和 Featuretools 来构建机器学习模型。
 
@@ -72,7 +72,7 @@ EvalML 文档提供了[自定义目标的示例](https://evalml.alteryx.com/en/v
 
 EvalML 提供了多种模型和工具用于模型理解。目前支持特征重要性和置换重要性、部分依赖、精确率-召回率、混淆矩阵、ROC 曲线、预测解释以及二分类器阈值优化。
 
-![图示](../Images/f690d8e7a632fbd3dc20f0e0028d4814.png)
+![图示](img/f690d8e7a632fbd3dc20f0e0028d4814.png)
 
 部分依赖的示例来自于 [EvalML 文档](https://evalml.alteryx.com/en/v0.18.1/user_guide/model_understanding.html#Partial-Dependence-Plots)。
 
@@ -80,45 +80,45 @@ EvalML 提供了多种模型和工具用于模型理解。目前支持特征重�
 
 EvalML 的数据检查可以在建模之前捕捉数据中的常见问题，避免这些问题导致模型质量问题或神秘的错误和堆栈跟踪。当前的数据检查包括检测 [target leakage](https://en.wikipedia.org/wiki/Leakage_(machine_learning))（模型在训练期间接触到的在预测时不可用的信息）、无效数据类型、高类别不平衡、高空值列、常量列，以及可能是 ID 而对建模无用的列。
 
-![](../Images/fa9ebf5142aba2215d86fd04304a7515.png)
+![](img/fa9ebf5142aba2215d86fd04304a7515.png)
 
-### 使用EvalML入门
+### 使用 EvalML 入门
 
-你可以通过访问 [我们的文档页面](http://evalml.alteryx.com/) 来开始使用EvalML，我们提供了[安装说明](https://evalml.alteryx.com/en/stable/install.html)以及[tutorials](https://evalml.alteryx.com/en/stable/tutorials.html)，展示了如何使用EvalML的示例，[用户指南](https://evalml.alteryx.com/en/stable/user_guide.html) 介绍了EvalML的组件和核心概念，[API参考](https://evalml.alteryx.com/en/stable/api_reference.html) 等更多内容。EvalML的代码库在[https://github.com/alteryx/evalml](https://github.com/alteryx/evalml)。要与团队联系，请查看我们的[开源Slack](https://join.slack.com/t/alteryx-oss/shared_invite/zt-6inxevps-RSbpr9lsACE1kObXz4rIuA)。我们积极参与代码库，并将回应你提出的任何问题。
+你可以通过访问 [我们的文档页面](http://evalml.alteryx.com/) 来开始使用 EvalML，我们提供了[安装说明](https://evalml.alteryx.com/en/stable/install.html)以及[tutorials](https://evalml.alteryx.com/en/stable/tutorials.html)，展示了如何使用 EvalML 的示例，[用户指南](https://evalml.alteryx.com/en/stable/user_guide.html) 介绍了 EvalML 的组件和核心概念，[API 参考](https://evalml.alteryx.com/en/stable/api_reference.html) 等更多内容。EvalML 的代码库在[`github.com/alteryx/evalml`](https://github.com/alteryx/evalml)。要与团队联系，请查看我们的[开源 Slack](https://join.slack.com/t/alteryx-oss/shared_invite/zt-6inxevps-RSbpr9lsACE1kObXz4rIuA)。我们积极参与代码库，并将回应你提出的任何问题。
 
 ### 下一步是什么？
 
-EvalML有一个活跃的功能路线图，包括时间序列建模、AutoML期间的管道并行评估、AutoML算法的升级、新模型类型和预处理步骤、模型调试和部署工具、异常检测支持等更多功能。
+EvalML 有一个活跃的功能路线图，包括时间序列建模、AutoML 期间的管道并行评估、AutoML 算法的升级、新模型类型和预处理步骤、模型调试和部署工具、异常检测支持等更多功能。
 
-想了解更多？如果你对项目的更新感兴趣，请花一点时间关注这个博客，给[我们的GitHub仓库](https://github.com/alteryx/evalml)加个星，并关注更多即将推出的功能和内容！
+想了解更多？如果你对项目的更新感兴趣，请花一点时间关注这个博客，给[我们的 GitHub 仓库](https://github.com/alteryx/evalml)加个星，并关注更多即将推出的功能和内容！
 
-**个人简介： [Dylan Sherry](https://www.linkedin.com/in/dylansherry/)** 是一位软件工程师，领导着开发EvalML AutoML包的团队。Dylan拥有十年的自动建模技术经验。
+**个人简介： [Dylan Sherry](https://www.linkedin.com/in/dylansherry/)** 是一位软件工程师，领导着开发 EvalML AutoML 包的团队。Dylan 拥有十年的自动建模技术经验。
 
 [原文](https://innovation.alteryx.com/introducing-evalml/)。经授权转载。
 
 **相关内容：**
 
-+   [Uber开源了Ludwig的第三版，它是无代码机器学习平台](/2020/10/uber-open-source-ludwig-code-free-machine-learning-platform.html)
++   Uber 开源了 Ludwig 的第三版，它是无代码机器学习平台
 
-+   [高级超参数优化/调整的算法](/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)
++   高级超参数优化/调整的算法
 
-+   [使用PyCaret 2.0构建自己的AutoML](/2020/08/build-automl-pycaret.html)
++   使用 PyCaret 2.0 构建自己的 AutoML
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的 IT 组织
 
 * * *
 
 ### 相关话题
 
-+   [AutoXGB的简单AutoML](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)
++   [AutoXGB 的简单 AutoML](https://www.kdnuggets.com/2022/02/no-brainer-automl-autoxgb.html)
 
 +   [Nota AI 发布了 NetPresso 模型搜索的测试版，他们的…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)
 

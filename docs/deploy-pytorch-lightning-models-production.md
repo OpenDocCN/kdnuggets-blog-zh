@@ -1,12 +1,12 @@
 # 如何将 PyTorch Lightning 模型部署到生产环境中
 
-> 原文：[https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html](https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html)
+> 原文：[`www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html`](https://www.kdnuggets.com/2020/11/deploy-pytorch-lightning-models-production.html)
 
-[评论](#comments)
+评论
 
 **由 [Caleb Kaiser](https://www.linkedin.com/in/caleb-kaiser-843249126/)，Cortex Labs**
 
-![图示](../Images/514b91d766979480cf4b46bcfd1d1f32.png)
+![图示](img/514b91d766979480cf4b46bcfd1d1f32.png)
 
 来源: [Pexels](https://www.pexels.com/photo/lightning-over-sea-against-storm-clouds-248775/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -46,7 +46,7 @@ PyTorch Lightning 有类似的理念，只是应用于训练。该框架提供�
 
 PyTorch Lightning Trainer，一个抽象样板训练代码的类（想想训练和验证步骤），具有一个内置的 save_checkpoint() 函数，可以将你的模型保存为 .ckpt 文件。要将模型保存为检查点，只需将以下代码添加到你的训练脚本中：
 
-![图示](../Images/fa36e3e0e9699769f07f58afcdc33958.png)
+![图示](img/fa36e3e0e9699769f07f58afcdc33958.png)
 
 来源：作者
 
@@ -70,13 +70,13 @@ PyTorch Lightning Trainer，一个抽象样板训练代码的类（想想训练�
 
 接下来，我们进行部署：
 
-![图示](../Images/4e5a3fd4b57f69ed3e24ee6e222eaddd.png)
+![图示](img/4e5a3fd4b57f69ed3e24ee6e222eaddd.png)
 
 来源：作者
 
 请注意，我们也可以将模型部署到由 Cortex 启动和管理的集群中：
 
-![图示](../Images/7bc660b5730754bcc2ef26e2da7bfa2e.png)
+![图示](img/7bc660b5730754bcc2ef26e2da7bfa2e.png)
 
 来源：作者
 
@@ -90,7 +90,7 @@ PyTorch Lightning Trainer，一个抽象样板训练代码的类（想想训练�
 
 PyTorch Lightning 最近增加了一个方便的抽象层，用于将模型导出为 ONNX（之前，你可以使用 PyTorch 内置的转换函数，但需要更多的样板代码）。要将你的模型导出为 ONNX，只需在你的训练脚本中添加这段代码：
 
-![图示](../Images/b70f75a4b628c2f6275d1578a94ef3b4.png)
+![图示](img/b70f75a4b628c2f6275d1578a94ef3b4.png)
 
 来源：作者
 
@@ -110,7 +110,7 @@ PyTorch Lightning 最近增加了一个方便的抽象层，用于将模型导�
 
 对于最终部署，我们将 PyTorch Lightning 模型导出到 Torchscript 并使用 PyTorch 的 JIT 编译器进行服务。要导出模型，只需将以下内容添加到你的训练脚本中：
 
-![图](../Images/92ec2c3c612cab32fbd93c9d8b535b75.png)
+![图](img/92ec2c3c612cab32fbd93c9d8b535b75.png)
 
 来源：作者
 
@@ -118,7 +118,7 @@ PyTorch Lightning 最近增加了一个方便的抽象层，用于将模型导�
 
 YAML 保持不变，CLI 命令当然也一致。如果需要，我们实际上可以通过简单地用新的脚本替换旧的 predictor.py 脚本，然后重新运行 $ cortex deploy 来更新之前的 PyTorch API：
 
-![图](../Images/3c280b57c196afaf26a0d27b74be83d1.png)
+![图](img/3c280b57c196afaf26a0d27b74be83d1.png)
 
 来源：作者
 
@@ -140,11 +140,11 @@ Cortex 在这里自动执行滚动更新，即启动一个新的 API 然后与�
 
 **相关内容：**
 
-+   [PyTorch 多 GPU 指标库及新 PyTorch Lightning 发布的更多内容](/2020/07/pytorch-multi-gpu-metrics-library-pytorch-lightning.html)
++   PyTorch 多 GPU 指标库及新 PyTorch Lightning 发布的更多内容
 
-+   [Pytorch Lightning vs PyTorch Ignite vs Fast.ai](/2019/08/pytorch-lightning-vs-pytorch-ignite-vs-fast-ai.html)
++   Pytorch Lightning vs PyTorch Ignite vs Fast.ai
 
-+   [训练 Lightning 快速神经网络的 9 个技巧](/2019/08/9-tips-training-lightning-fast-neural-networks-pytorch.html)
++   训练 Lightning 快速神经网络的 9 个技巧
 
 ### 更多相关内容
 

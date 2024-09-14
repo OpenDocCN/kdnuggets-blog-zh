@@ -1,8 +1,8 @@
 # PyTorch 入门
 
-> 原文：[https://www.kdnuggets.com/2020/10/getting-started-pytorch.html](https://www.kdnuggets.com/2020/10/getting-started-pytorch.html)
+> 原文：[`www.kdnuggets.com/2020/10/getting-started-pytorch.html`](https://www.kdnuggets.com/2020/10/getting-started-pytorch.html)
 
-[comments](#comments) ![Figure](../Images/0a89ffdfb417c456d45d0bf297c1c911.png)
+comments ![Figure](img/0a89ffdfb417c456d45d0bf297c1c911.png)
 
 照片由 [Ihor Malytskyi](https://unsplash.com/@ihor_malytskyi?utm_source=medium&utm_medium=referral) 提供，拍摄于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。
 
@@ -36,7 +36,7 @@ PyTorch 可以在任何操作系统上自由安装，按照 [文档说明](https
 
 对于这个例子，我们将重点使用***RISK_MM***和***Location***指示符作为我们的模型特征（图 1）。将数据分为训练集和测试集后，我们可以将 Numpy 数组转换为 PyTorch 张量，并创建训练和测试数据加载器，以便将数据输入到神经网络中。
 
-![Figure](../Images/d045070e0bdc58ec3061c5afd523698e.png)
+![Figure](img/d045070e0bdc58ec3061c5afd523698e.png)
 
 图 1：减少的数据框
 
@@ -48,7 +48,7 @@ PyTorch 可以在任何操作系统上自由安装，按照 [文档说明](https
 
 此外，PyTorch 还提供了一个[Sequential Interface](https://pytorch.org/docs/stable/nn.html#sequential)，可以用来以类似于使用 Keras Tensorflow API 的方式构建模型。
 
-在这个简单的网络中，我们输入了50个特征，因为我们之前使用Pandas的**get_dummies()**功能将输入的分类变量转换为了虚拟变量/指示变量。因此，我们的网络将由50个输入神经元、一个包含20个神经元的隐藏层和一个单神经元的输出层组成。隐藏层的大小可以根据需要进行调整，也可以很容易地添加更多的隐藏层，但这可能会导致过拟合风险，因为数据量有限。将连续层堆叠在一起时，我们只需确保一层的输出特征数量等于下一层的输入特征数量。
+在这个简单的网络中，我们输入了 50 个特征，因为我们之前使用 Pandas 的**get_dummies()**功能将输入的分类变量转换为了虚拟变量/指示变量。因此，我们的网络将由 50 个输入神经元、一个包含 20 个神经元的隐藏层和一个单神经元的输出层组成。隐藏层的大小可以根据需要进行调整，也可以很容易地添加更多的隐藏层，但这可能会导致过拟合风险，因为数据量有限。将连续层堆叠在一起时，我们只需确保一层的输出特征数量等于下一层的输入特征数量。
 
 实例化模型后，我们还可以打印出网络架构。
 
@@ -61,7 +61,7 @@ ANN(
 
 ### ANN 训练
 
-我们现在终于准备好训练我们的模型。在下面的代码片段中，我们首先定义 Binary Cross Entropy 作为我们的损失函数，并将 Adam 作为优化器来调整模型参数。最后，我们创建一个包含7次迭代的训练循环，并存储一些关键指标参数，如每次迭代的总体损失和模型准确性。
+我们现在终于准备好训练我们的模型。在下面的代码片段中，我们首先定义 Binary Cross Entropy 作为我们的损失函数，并将 Adam 作为优化器来调整模型参数。最后，我们创建一个包含 7 次迭代的训练循环，并存储一些关键指标参数，如每次迭代的总体损失和模型准确性。
 
 ```py
 Epoch: 0, Loss: 294.88, Accuracy: 0.13% 
@@ -75,7 +75,7 @@ Epoch: 6, Loss: 13.16, Accuracy: 74.13%
 
 如图 2 所示，我们的模型成功地实现了良好的准确性，而没有过度拟合原始数据（训练损失和准确性都接近饱和）。这还可以通过实施训练/验证拆分来进一步验证，以训练我们的模型并调整其参数（如在这个[GitHub](https://github.com/pierpaolo28/Kaggle-Challenges/blob/master/rain-prediction.ipynb)笔记本中演示的那样）。
 
-![Figure](../Images/251310b5154f3cd2c8cb1777febd7c9b.png)
+![Figure](img/251310b5154f3cd2c8cb1777febd7c9b.png)
 
 图 2：训练报告
 
@@ -87,17 +87,17 @@ Epoch: 6, Loss: 13.16, Accuracy: 74.13%
 Test Accuracy: 74.66 %
 ```
 
-从打印输出中可以看到，我们的模型测试准确率与最终训练准确率非常接近（74.66%对74.13%）。
+从打印输出中可以看到，我们的模型测试准确率与最终训练准确率非常接近（74.66%对 74.13%）。
 
 ### 结论
 
-如果你有兴趣了解更多关于PyTorch的潜力，[PyTorch Lighting](https://pytorch-lightning.readthedocs.io/en/latest/)和[Livlossplot](https://github.com/stared/livelossplot)是两个很好的工具，可以帮助你开发、调试和评估你的PyTorch模型。
+如果你有兴趣了解更多关于 PyTorch 的潜力，[PyTorch Lighting](https://pytorch-lightning.readthedocs.io/en/latest/)和[Livlossplot](https://github.com/stared/livelossplot)是两个很好的工具，可以帮助你开发、调试和评估你的 PyTorch 模型。
 
 *希望你喜欢这篇文章，谢谢阅读！*
 
 ### 联系方式
 
-如果你想跟进我的最新文章和项目，*请[在Medium上关注我](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------)*，并订阅我的*[邮件列表](http://eepurl.com/gwO-Dr?source=post_page---------------------------)*。以下是我的一些联系方式：
+如果你想跟进我的最新文章和项目，*请[在 Medium 上关注我](https://medium.com/@pierpaoloippolito28?source=post_page---------------------------)*，并订阅我的*[邮件列表](http://eepurl.com/gwO-Dr?source=post_page---------------------------)*。以下是我的一些联系方式：
 
 +   [Linkedin](https://uk.linkedin.com/in/pier-paolo-ippolito-202917146?source=post_page---------------------------)
 
@@ -105,46 +105,46 @@ Test Accuracy: 74.66 %
 
 +   [个人网站](https://pierpaolo28.github.io/?source=post_page---------------------------)
 
-+   [Medium个人资料](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)
++   [Medium 个人资料](https://towardsdatascience.com/@pierpaoloippolito28?source=post_page---------------------------)
 
 +   [GitHub](https://github.com/pierpaolo28?source=post_page---------------------------)
 
 +   [Kaggle](https://www.kaggle.com/pierpaolo28?source=post_page---------------------------)
 
-**简介: [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是一名数据科学家，拥有南安普顿大学人工智能硕士学位。他对AI进展和机器学习应用（如金融和医学）有浓厚兴趣。可以在[Linkedin](https://www.linkedin.com/in/pierpaolo28/)上与他联系。
+**简介: [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是一名数据科学家，拥有南安普顿大学人工智能硕士学位。他对 AI 进展和机器学习应用（如金融和医学）有浓厚兴趣。可以在[Linkedin](https://www.linkedin.com/in/pierpaolo28/)上与他联系。
 
 [原文](https://towardsdatascience.com/getting-started-with-pytorch-9bae16926744)。经许可转载。
 
 **相关内容:**
 
-+   [数据科学家用的最完整PyTorch指南](/2020/09/most-complete-guide-pytorch-data-scientists.html)
++   数据科学家用的最完整 PyTorch 指南
 
-+   [PyTorch LSTM：文本生成教程](/2020/07/pytorch-lstm-text-generation-tutorial.html)
++   PyTorch LSTM：文本生成教程
 
-+   [PyTorch深度学习：免费电子书](/2020/07/pytorch-deep-learning-free-ebook.html)
++   PyTorch 深度学习：免费电子书
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 ### 更多相关内容
 
-+   [开始使用PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
++   [开始使用 PyTorch Lightning](https://www.kdnuggets.com/2022/12/getting-started-pytorch-lightning.html)
 
-+   [用5步开始使用PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
++   [用 5 步开始使用 PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
 
 +   [开始使用自动文本摘要](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
 
 +   [开始清理数据](https://www.kdnuggets.com/2022/01/getting-started-cleaning-data.html)
 
-+   [SQL速查表入门指南](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)
++   [SQL 速查表入门指南](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)
 
-+   [使用spaCy进行NLP的入门指南](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
++   [使用 spaCy 进行 NLP 的入门指南](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)

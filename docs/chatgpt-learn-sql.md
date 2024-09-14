@@ -1,8 +1,8 @@
 # 使用 ChatGPT 学习 SQL
 
-> 原文：[https://www.kdnuggets.com/2023/04/chatgpt-learn-sql.html](https://www.kdnuggets.com/2023/04/chatgpt-learn-sql.html)
+> 原文：[`www.kdnuggets.com/2023/04/chatgpt-learn-sql.html`](https://www.kdnuggets.com/2023/04/chatgpt-learn-sql.html)
 
-![使用 ChatGPT 学习 SQL](../Images/cba4dae18084e62e05e5746551663136.png)
+![使用 ChatGPT 学习 SQL](img/cba4dae18084e62e05e5746551663136.png)
 
 图片由编辑 | Microsoft Designer
 
@@ -24,7 +24,7 @@ ChatGPT 能做许多很酷的事情。其中之一是编写代码。[**你只需
 
 要开始使用 ChatGPT，你需要注册一个账户[*这里*](https://chat.openai.com/chat).
 
-![使用 ChatGPT 学习 SQL](../Images/8c323d344b8d1a8c768e567535c7e2b3.png)
+![使用 ChatGPT 学习 SQL](img/8c323d344b8d1a8c768e567535c7e2b3.png)
 
 注册 ChatGPT 显示。
 
@@ -34,13 +34,13 @@ ChatGPT 能做许多很酷的事情。其中之一是编写代码。[**你只需
 
 一旦你启用了 ChatGPT，你应该会看到以下显示：
 
-![使用 ChatGPT 学习 SQL](../Images/22b19618c06536bde4801eca1c954976.png)
+![使用 ChatGPT 学习 SQL](img/22b19618c06536bde4801eca1c954976.png)
 
 ChatGPT 聊天显示的屏幕截图。
 
 在下方的输入框中，我们可以写下任何内容以开始与 ChatGPT 互动。由于我将打扰她——或者他——一段时间，我先提前道歉 ;)
 
-![使用 ChatGPT 学习 SQL](../Images/7f4d08c9c5874930a1b783c1a8f186e3.png)
+![使用 ChatGPT 学习 SQL](img/7f4d08c9c5874930a1b783c1a8f186e3.png)
 
 自制 gif。ChatGPT 回答我的第一条消息。
 
@@ -58,7 +58,7 @@ ChatGPT 聊天显示的屏幕截图。
 
 ChatGPT 给出简短的回答，解释了`SELECT`命令，并给出了最基本的示例：*SELECT * FROM*
 
-![使用 ChatGPT 学习 SQL](../Images/1ffddb28b0e3bc9824b018c29473be0b.png)
+![使用 ChatGPT 学习 SQL](img/1ffddb28b0e3bc9824b018c29473be0b.png)
 
 ChatGPT 聊天的截图。
 
@@ -68,7 +68,7 @@ ChatGPT 聊天的截图。
 
 正如你在下面的图片中观察到的那样，ChatGPT 解释了该命令的基础知识，并给出了几个使用示例。
 
-![使用 ChatGPT 学习 SQL](../Images/e365620b2cb45a269c2ec47c95ea0524.png)
+![使用 ChatGPT 学习 SQL](img/e365620b2cb45a269c2ec47c95ea0524.png)
 
 ChatGPT 聊天的截图。给出更多 `SELECT` 命令的示例。
 
@@ -116,7 +116,7 @@ IN
 
 ChatGPT 告诉我使用任何连接命令，正如你在下面的图片中观察到的那样。
 
-![使用 ChatGPT 学习 SQL](../Images/1a8aae4ace4c02a5877b76840cbd035a.png)
+![使用 ChatGPT 学习 SQL](img/1a8aae4ace4c02a5877b76840cbd035a.png)
 
 ChatGPT 聊天的截图。解释如何合并两个表。
 
@@ -126,7 +126,7 @@ ChatGPT 聊天的截图。解释如何合并两个表。
 
 因此，ChatGPT 让我知道只有 `INNER JOIN` 允许我这样做，正如你在下面的图片中观察到的那样：
 
-![使用 ChatGPT 学习 SQL](../Images/f6eb07765d05b40a3e129b8bf453d6ab.png)
+![使用 ChatGPT 学习 SQL](img/f6eb07765d05b40a3e129b8bf453d6ab.png)
 
 ChatGPT 聊天的截图。解释如何合并两个表并仅保留具有相同值的数据。
 
@@ -149,7 +149,7 @@ INNER JOIN table2
 
 ChatGPT 立即回答了我，正如你在下面的图片中所观察到的那样。
 
-![使用 ChatGPT 学习 SQL](../Images/dd706c309123d859daeeca2037e34f21.png)
+![使用 ChatGPT 学习 SQL](img/dd706c309123d859daeeca2037e34f21.png)
 
 ChatGPT 给我一个查询的示例，并解释这个查询的作用。
 
@@ -165,7 +165,7 @@ ChatGPT 给我一个查询的示例，并解释这个查询的作用。
 
 ChatGPT 立即给出答案：
 
-![使用 ChatGPT 学习 SQL](../Images/7550436738f99ae2d666f1e21698005e.png)
+![使用 ChatGPT 学习 SQL](img/7550436738f99ae2d666f1e21698005e.png)
 
 ChatGPT 聊天截图。它解释了给定查询的作用。
 
@@ -175,7 +175,7 @@ ChatGPT 聊天截图。它解释了给定查询的作用。
 
 > 你能进一步解释一下之前查询的第二个子查询是做什么的吗？
 
-![使用 ChatGPT 学习 SQL](../Images/e503f9fd7af61d02eb6ca6cd6dd7e7b9.png)
+![使用 ChatGPT 学习 SQL](img/e503f9fd7af61d02eb6ca6cd6dd7e7b9.png)
 
 ChatGPT 聊天截图。它进一步解释了给定查询的第二个子查询的作用。
 
@@ -189,7 +189,7 @@ ChatGPT 聊天截图。它进一步解释了给定查询的第二个子查询的
 
 > 你能给我一些练习来练习 SQL 吗？
 
-![使用 ChatGPT 学习 SQL](../Images/4b6680b66ac1249dacd6305c9ca916ee.png)
+![使用 ChatGPT 学习 SQL](img/4b6680b66ac1249dacd6305c9ca916ee.png)
 
 ChatGPT 给我一些练习 SQL 的截图。
 
@@ -199,7 +199,7 @@ ChatGPT 给我一些练习 SQL 的截图。
 
 ChatGPT 会直接回答并说明它是否正确及原因。
 
-![使用 ChatGPT 学习 SQL](../Images/6f1a94b7489acccb6507dd0a3a39065c.png)
+![使用 ChatGPT 学习 SQL](img/6f1a94b7489acccb6507dd0a3a39065c.png)
 
 ChatGPT 判断我编写的查询是否正确的截图。
 
@@ -209,7 +209,7 @@ ChatGPT 判断我编写的查询是否正确的截图。
 
 如你在下图中所见，ChatGPT 会给我所有正确的查询进行操作。
 
-![使用 ChatGPT 学习 SQL](../Images/714f282e6741023061351b7bef475b50.png)
+![使用 ChatGPT 学习 SQL](img/714f282e6741023061351b7bef475b50.png)
 
 ⚠️* 请注意，ChatGPT 提供的答案与我提交的待检查答案完全不同。*
 
@@ -229,11 +229,11 @@ ChatGPT 判断我编写的查询是否正确的截图。
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快你的网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快你的网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

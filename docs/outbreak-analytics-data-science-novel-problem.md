@@ -1,22 +1,22 @@
 # 疫情分析：应对新问题的数据科学策略
 
-> 原文：[https://www.kdnuggets.com/2020/04/outbreak-analytics-data-science-novel-problem.html](https://www.kdnuggets.com/2020/04/outbreak-analytics-data-science-novel-problem.html)
+> 原文：[`www.kdnuggets.com/2020/04/outbreak-analytics-data-science-novel-problem.html`](https://www.kdnuggets.com/2020/04/outbreak-analytics-data-science-novel-problem.html)
 
-[评论](#comments)
+评论
 
 **由 [Susan Sivek](https://community.alteryx.com/t5/user/viewprofilepage/user-id/143008) 提供，Alteryx**。
 
-![](../Images/3ed80fff40e104b5bf3a94a2cd69a232.png)
+![](img/3ed80fff40e104b5bf3a94a2cd69a232.png)
 
 > * * *
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 > 
 > * * *
 > 
@@ -34,7 +34,7 @@
 
 > *“一旦我们知道 R[0]，我们就能够掌握疫情的规模。”* *- 电影《传染病》*
 
-![](../Images/cbacd5e665b3fdfb4928ec4b426cb4f0.png)
+![](img/cbacd5e665b3fdfb4928ec4b426cb4f0.png)
 
 [*再生数*，或 R[0]](https://sph.umich.edu/pursuit/2020posts/how-scientists-quantify-outbreaks.html)（读作“R 零”），指的是一个生病的人可能感染的人的数量。由于人口统计、气候、社会结构和社交距离措施等因素，R[0] 在疾病发生的每个时间和地点都会发生变化。研究人员通过确定第一次感染和第二次感染之间的时间（*生成时间*，当这种时间对许多对病人已知时，可以绘制为*生成时间分布*）来计算 R[0]。估计 R[0] 对于预测疾病传播至关重要。对于引起 COVID-19 的 SARS-CoV-2，目前[R[0] 被认为在不同地方的范围](https://sph.umich.edu/pursuit/2020posts/how-scientists-quantify-outbreaks.html)为 1.5 到 3.5。
 
@@ -42,7 +42,7 @@
 
 还有一个类似的 R 包，[EpiEstim](https://cran.r-project.org/web/packages/EpiEstim/index.html)，由[不同的研究小组](https://academic.oup.com/aje/article/178/9/1505/89262)开发，具有[Excel 选项](http://tools.epidemiology.net/EpiEstim.xls)。EpiEstim 基于[分支过程模型](https://en.wikipedia.org/wiki/Branching_process)，并根据简单的时间序列数据估计 R[0]。该模型试图捕捉每个感染者将感染的人的数量，但带有随机性（或随机性）元素——就像在商店里与感染者随机相遇一样。下图（[更大图的一部分](https://academic.oup.com/view-large/figure/86224225/kwt13301.tiff)）显示了该模型为过去五次疫情生成的 R[0] 估计。
 
-![](../Images/60aee87b788f48d8604164b7a0072e0b.png)
+![](img/60aee87b788f48d8604164b7a0072e0b.png)
 
 ### 病原体基因组测序
 
@@ -50,7 +50,7 @@
 > 
 > - **Contagion**
 
-![](../Images/2303f586207f990c7f99dcebe2199deb.png)
+![](img/2303f586207f990c7f99dcebe2199deb.png)
 
 对来自不同地点和时间的病人的 SARS-CoV-2 样本进行基因分析可以帮助研究人员追踪病毒的传播和突变。这项分析还可以帮助快速识别可能的治疗方法。[研究人员最近展示了](https://www.biorxiv.org/content/10.1101/2020.02.03.932350v3.full.pdf)一种新的机器学习方法，通过基因组识别未知病毒的类型及其不同的变种（即确定其分类，如[“冠状病毒”的广泛类别](https://www.nature.com/articles/s41564-020-0695-z)）。
 
@@ -58,7 +58,7 @@
 
 下图展示了研究人员在最后两次测试中的结果，这些测试将 153 个病毒序列分类为四个亚属和 COVID-19，然后将 76 个病毒序列分类为其他 Sarbecovirus 类型或 COVID-19。
 
-![](../Images/6ea4d34025ab98394ca8bc89a270200b.png)
+![](img/6ea4d34025ab98394ca8bc89a270200b.png)
 
 这一策略不仅帮助确认了 SARS-CoV-2 应正确归类于其他冠状病毒科和 β 冠状病毒病原体，而且还发现它与在蝙蝠中发现的其他病毒有重要的相似之处。研究人员认为，他们的方法更快（包括 10 倍交叉验证在内的 10 分钟内），且能够比较更多、更具多样性的样本，相比于以前的分析过程。虽然对当前疫情可能会有一些见解，但这种方法对未来的疫情爆发也可能有所帮助。
 
@@ -68,7 +68,7 @@
 > 
 > - 传染*
 
-![](../Images/b7ef549f349d89301a0cfabc0604f463.png)
+![](img/b7ef549f349d89301a0cfabc0604f463.png)
 
 一种流行病学建模方法是创建一个“**SIR 模型**”，该模型将整体人群划分为“**易感**”、“**感染**”和“**移除**”（即从疾病中康复并被赋予一定程度免疫，或因死亡不再在人群中）这三个“隔间”。
 
@@ -76,11 +76,11 @@
 
 为了处理所有不确定性来源，[一组研究人员](https://www.medrxiv.org/content/10.1101/2020.02.29.20029421v1.full.pdf)开发了他们所谓的“eSIR”模型——一个扩展模型，包括“一个时间变化的概率，表示易感者遇到感染者的概率或反之亦然”，以及一个新的区隔来包括选择自我隔离的易感者。这两个因素在特定地区会根据实施隔离协议的时间而有所变化。
 
-为了进一步将不确定性纳入模型，研究人员使用了马尔可夫链蒙特卡罗（MCMC）算法。（这里有两个对MCMC的解释：[一个较简单的](https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50)，[一个较复杂的](https://link.springer.com/article/10.3758/s13423-016-1015-8)）。MCMC方法允许对那些不能直接知道的分布（如SARS-CoV-2感染的真实数量）或过于昂贵以至于难以计算的分布进行近似。eSIR模型的预测旨在揭示疫情中的“转折点”。转折点包括每日新增病例停止增长的时候，以及感染病例达到最高点的时候。该模型还可以提供R[0]的估计值。
+为了进一步将不确定性纳入模型，研究人员使用了马尔可夫链蒙特卡罗（MCMC）算法。（这里有两个对 MCMC 的解释：[一个较简单的](https://towardsdatascience.com/a-zero-math-introduction-to-markov-chain-monte-carlo-methods-dcba889e0c50)，[一个较复杂的](https://link.springer.com/article/10.3758/s13423-016-1015-8)）。MCMC 方法允许对那些不能直接知道的分布（如 SARS-CoV-2 感染的真实数量）或过于昂贵以至于难以计算的分布进行近似。eSIR 模型的预测旨在揭示疫情中的“转折点”。转折点包括每日新增病例停止增长的时候，以及感染病例达到最高点的时候。该模型还可以提供 R[0]的估计值。
 
-研究人员正在发布一个名为eSIR的R包，该包生成模型、ggplot2对象和总结统计数据。这种方法的有用之处在于，它可以帮助确定哪些隔离策略可能最有效以及何时实施。正如研究人员所说，“……过于严格的隔离可能会适得其反；人们可能会失去对隔离系统的信任和耐心，因此可能会尝试减少遵守或甚至避免隔离。”必须权衡实施严格隔离系统的风险与疾病预防的收益。该模型提供了一种重要计算的途径。
+研究人员正在发布一个名为 eSIR 的 R 包，该包生成模型、ggplot2 对象和总结统计数据。这种方法的有用之处在于，它可以帮助确定哪些隔离策略可能最有效以及何时实施。正如研究人员所说，“……过于严格的隔离可能会适得其反；人们可能会失去对隔离系统的信任和耐心，因此可能会尝试减少遵守或甚至避免隔离。”必须权衡实施严格隔离系统的风险与疾病预防的收益。该模型提供了一种重要计算的途径。
 
-![](../Images/4b3ee7aae774203084b6e5ba727b34b9.png)
+![](img/4b3ee7aae774203084b6e5ba727b34b9.png)
 
 ### 对所有建模的启示
 
@@ -114,6 +114,6 @@
 
 +   [梯度消失问题：原因、后果和解决方案](https://www.kdnuggets.com/2022/02/vanishing-gradient-problem.html)
 
-+   [今天90%的代码是为了防止失败而编写的，这才是问题](https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html)
++   [今天 90%的代码是为了防止失败而编写的，这才是问题](https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html)
 
 +   [思维图谱：大语言模型中精细问题解决的新范式](https://www.kdnuggets.com/graph-of-thoughts-a-new-paradigm-for-elaborate-problem-solving-in-large-language-models)

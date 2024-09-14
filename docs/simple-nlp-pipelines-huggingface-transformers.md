@@ -1,8 +1,8 @@
 # 使用 HuggingFace Transformers 的简单 NLP 管道
 
-> 原文：[https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)
+> 原文：[`www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html`](https://www.kdnuggets.com/2023/02/simple-nlp-pipelines-huggingface-transformers.html)
 
-![使用 HuggingFace Transformers 的简单 NLP 管道](../Images/1e310be2c1220fd85c3c9ca5c5c49028.png)
+![使用 HuggingFace Transformers 的简单 NLP 管道](img/1e310be2c1220fd85c3c9ca5c5c49028.png)
 
 图片来源：编辑
 
@@ -12,11 +12,11 @@ HuggingFace 的 transformers 是一个提供 API 和用户友好工具的广泛�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -220,7 +220,7 @@ text_generator("If it is sunny today then ", do_sample=False)
 
 # 7\. 文本翻译：
 
-在这里，我们将把文本的语言从一种语言翻译成另一种语言。例如，我们选择了从英语到法语的翻译。我们使用了基础的t5-small模型，但你可以在[这里](https://huggingface.co/models?pipeline_tag=translation)访问其他高级模型。
+在这里，我们将把文本的语言从一种语言翻译成另一种语言。例如，我们选择了从英语到法语的翻译。我们使用了基础的 t5-small 模型，但你可以在[这里](https://huggingface.co/models?pipeline_tag=translation)访问其他高级模型。
 
 ```py
 en_fr_translator = pipeline("translation_en_to_fr", model='t5-small')
@@ -235,13 +235,13 @@ en_fr_translator("Hi, How are you?")
 
 # 结论
 
-你已经到达了最后，真棒！如果你跟随了整个过程，你学习了如何使用Transformers创建基础的NLP管道。参考HuggingFace的[官方文档](https://huggingface.co/docs/transformers/main_classes/pipelines#natural-language-processing)以查看NLP中的其他有趣应用，如零样本文本分类或表格问答。要处理你自己的数据集或实现其他领域（如视觉、音频或多模态）的模型，请查看[这里](https://huggingface.co/docs/transformers/pipeline_tutorial#pipelines-for-inference)。
+你已经到达了最后，真棒！如果你跟随了整个过程，你学习了如何使用 Transformers 创建基础的 NLP 管道。参考 HuggingFace 的[官方文档](https://huggingface.co/docs/transformers/main_classes/pipelines#natural-language-processing)以查看 NLP 中的其他有趣应用，如零样本文本分类或表格问答。要处理你自己的数据集或实现其他领域（如视觉、音频或多模态）的模型，请查看[这里](https://huggingface.co/docs/transformers/pipeline_tutorial#pipelines-for-inference)。
 
-**[Yesha Shastri](https://www.linkedin.com/in/yeshashastri/)** 是一位热情的AI开发者和作家，正在蒙特利尔大学攻读机器学习硕士学位。Yesha 对探索负责任的AI技术以解决对社会有益的挑战充满兴趣，并与社区分享她的学习成果。
+**[Yesha Shastri](https://www.linkedin.com/in/yeshashastri/)** 是一位热情的 AI 开发者和作家，正在蒙特利尔大学攻读机器学习硕士学位。Yesha 对探索负责任的 AI 技术以解决对社会有益的挑战充满兴趣，并与社区分享她的学习成果。
 
 ### 更多相关内容
 
-+   [使用HuggingFace Pipelines和Streamlit回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   [使用 HuggingFace Pipelines 和 Streamlit 回答问题](https://www.kdnuggets.com/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
 
 +   [一个简单易实施的端到端项目与 HuggingFace](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)
 

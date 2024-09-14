@@ -1,8 +1,8 @@
 # 自动化如何改善数据科学家的角色
 
-> 原文：[https://www.kdnuggets.com/2020/10/automation-improving-data-scientists.html](https://www.kdnuggets.com/2020/10/automation-improving-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2020/10/automation-improving-data-scientists.html`](https://www.kdnuggets.com/2020/10/automation-improving-data-scientists.html)
 
-[评论](#comments) ![图](../Images/49a7a51a423d93c51a894995160ec539.png)
+评论 ![图](img/49a7a51a423d93c51a894995160ec539.png)
 
 来源: [数据科学中的自动化](https://towardsdatascience.com/automation-in-data-science-f11fe389d49b)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -40,7 +40,7 @@
 
 在一个例子中，制药专家探索了一个[自动发送全球通知](https://trifectaclinical.com/the-case-for-a-cloud-based-safety-letter-notification-system/)的系统，关于基于某一国家法规的药物安全事件。云计算的兴起也推动了自动化系统在数据处理中的采用。
 
-根据2016-2022年全球自动化即服务市场的市场研究报告，[该行业将增长到62.3亿美元](https://www.marketsandmarkets.com/Market-Reports/automation-as-a-service-market-57656106.html)，到期末实现28.1%的年均增长率。分析师指出，云计算是增长的重要推动因素。例如，如果数据科学家使用自动化即服务工具来减少手动任务，他们可能会通过云完成工作，并在任何地方进行工作。
+根据 2016-2022 年全球自动化即服务市场的市场研究报告，[该行业将增长到 62.3 亿美元](https://www.marketsandmarkets.com/Market-Reports/automation-as-a-service-market-57656106.html)，到期末实现 28.1%的年均增长率。分析师指出，云计算是增长的重要推动因素。例如，如果数据科学家使用自动化即服务工具来减少手动任务，他们可能会通过云完成工作，并在任何地方进行工作。
 
 ### **4\. 帮助更多的数据科学项目成功**
 
@@ -58,7 +58,7 @@
 
 一些人倾向于让自动化工具尽可能多地完成任务，但这种方法往往会导致错误。因此，一些专家提倡所谓的增强智能。它结合了人工智能（AI）与人类知识。
 
-一家公司利用AI [对成千上万](https://www.forbes.com/sites/ganeskesari/2020/10/19/go-beyond-artificial-intelligence-why-your-business-needs-augmented-intelligence/#2c6e202d23c2) 的客户评论进行分类，用于年度调查。算法的平均准确率为90%，但在一些类别中降至60%。公司通过引入人工专业知识来处理置信度较低的分组，从而弥补了这一差距。这种方法提高了准确性，并产生了可信的结果。
+一家公司利用 AI [对成千上万](https://www.forbes.com/sites/ganeskesari/2020/10/19/go-beyond-artificial-intelligence-why-your-business-needs-augmented-intelligence/#2c6e202d23c2) 的客户评论进行分类，用于年度调查。算法的平均准确率为 90%，但在一些类别中降至 60%。公司通过引入人工专业知识来处理置信度较低的分组，从而弥补了这一差距。这种方法提高了准确性，并产生了可信的结果。
 
 ### **数据科学自动化展现潜力**
 
@@ -68,22 +68,22 @@
 
 **相关内容：**
 
-+   [AutoML何时会取代数据科学家？调查结果与分析](/2020/03/poll-automl-replace-data-scientists-results.html)
++   AutoML 何时会取代数据科学家？调查结果与分析
 
-+   [预测分析在劳动行业中的潜力](/2020/09/potential-predictive-analytics-labor-industries.html)
++   预测分析在劳动行业中的潜力
 
-+   [数据科学家开发出更快速的污染减少和温室气体排放削减方法](/2020/07/data-scientists-faster-way-reduce-pollution-cut-greenhouse-gas-emissions.html)
++   数据科学家开发出更快速的污染减少和温室气体排放削减方法
 
 ### 相关话题
 
 +   [数据科学工作流中的自动化](https://www.kdnuggets.com/2023/03/automation-data-science-workflows.html)
 
-+   [免费Python自动化课程](https://www.kdnuggets.com/2022/07/free-automate-python-course.html)
++   [免费 Python 自动化课程](https://www.kdnuggets.com/2022/07/free-automate-python-course.html)
 
-+   [3个有用的Python自动化脚本](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
++   [3 个有用的 Python 自动化脚本](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
 
-+   [超越准确性：利用NLP测试库评估与改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
++   [超越准确性：利用 NLP 测试库评估与改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
 
-+   [提升SQL查询性能的5个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
++   [提升 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
 
 +   [获得数据工程师职位：免费课程和认证](https://www.kdnuggets.com/landing-a-data-engineer-role-free-courses-and-certifications)

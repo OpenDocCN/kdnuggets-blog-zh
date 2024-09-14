@@ -1,22 +1,22 @@
-# 每个懒惰的全栈数据科学家都应该使用的5种最有用的机器学习工具
+# 每个懒惰的全栈数据科学家都应该使用的 5 种最有用的机器学习工具
 
-> 原文：[https://www.kdnuggets.com/2020/11/5-useful-machine-learning-tools.html](https://www.kdnuggets.com/2020/11/5-useful-machine-learning-tools.html)
+> 原文：[`www.kdnuggets.com/2020/11/5-useful-machine-learning-tools.html`](https://www.kdnuggets.com/2020/11/5-useful-machine-learning-tools.html)
 
-[评论](#comments)
+评论
 
 **由 [Ian Xiao](https://www.linkedin.com/in/ianxiao/)，数据 | 机器学习 | 市场营销**。
 
-![](../Images/1241dd857c9085e44ef0121fa9ac25f8.png)
+![](img/1241dd857c9085e44ef0121fa9ac25f8.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -38,9 +38,9 @@
 
 我们正处于一个黄金时代。如果你在谷歌上搜索“机器学习工具”或询问顾问，你可能会得到类似这样的结果：
 
-![](../Images/668b417a79ab79987af3d9baeff0fed8.png)
+![](img/668b417a79ab79987af3d9baeff0fed8.png)
 
-*数据与人工智能格局2019，[图片来源](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmattturck.com%2Fdata2019%2F&psig=AOvVaw0oXq7zJf_Hz_RjdI-F70rq&ust=1583513401048000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCR2KPlg-gCFQAAAAAdAAAAABAJ)。*
+*数据与人工智能格局 2019，[图片来源](https://www.google.com/url?sa=i&url=https%3A%2F%2Fmattturck.com%2Fdata2019%2F&psig=AOvVaw0oXq7zJf_Hz_RjdI-F70rq&ust=1583513401048000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPCR2KPlg-gCFQAAAAAdAAAAABAJ)。*
 
 目前有**（太多）工具**；可能的组合是无限的。这可能会令人困惑和不知所措。所以，让我帮助你缩小范围。也就是说，没有完美的设置。一切都取决于你的需求和限制。所以根据需要选择和修改。
 
@@ -58,7 +58,7 @@
 
 +   完成任务即可
 
-*警告：我99%的时间使用Python。所以这些工具与Python原生兼容或是用Python构建的。我没有测试过其他编程语言，如R或Java。*
+*警告：我 99%的时间使用 Python。所以这些工具与 Python 原生兼容或是用 Python 构建的。我没有测试过其他编程语言，如 R 或 Java。*
 
 ### 1\. 冰箱：数据库
 
@@ -66,7 +66,7 @@
 
 一个免费的开源关系数据库管理系统（RDBMS），强调扩展性和技术标准的符合性。它设计用于处理各种工作负载，从单台机器到数据仓库或有多个并发用户的网络服务。
 
-![](../Images/f66c213e80066c728c54d254dc340ff5.png)
+![](img/f66c213e80066c728c54d254dc340ff5.png)
 
 *[图片来源](https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.aquafold.com%2Fdbspecific%2Fpostgresql_client&psig=AOvVaw2Q_9WB3s7LFAJq4NStNNm_&ust=1583516333356000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCMjw2Znwg-gCFQAAAAAdAAAAABAD)。*
 
@@ -74,15 +74,15 @@
 
 ### 2\. 操作台：部署管道工具
 
-管道工具对于开发的速度和质量至关重要。我们应该能够在最小的手动处理下快速迭代。这里有一个有效的设置。查看我的[12小时ML挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)文章以了解更多细节。每个*懒惰*的数据科学家应该在项目早期尝试这个方法。
+管道工具对于开发的速度和质量至关重要。我们应该能够在最小的手动处理下快速迭代。这里有一个有效的设置。查看我的[12 小时 ML 挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)文章以了解更多细节。每个*懒惰*的数据科学家应该在项目早期尝试这个方法。
 
-![](../Images/e91fbd1556e18cb036df23d847ca4674.png)
+![](img/e91fbd1556e18cb036df23d847ca4674.png)
 
-*作者的工作，[12小时ML挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)。*
+*作者的工作，[12 小时 ML 挑战](https://towardsdatascience.com/build-full-stack-ml-12-hours-50c310fedd51)。*
 
 **[Github](https://github.com/)**
 
-它提供了Git的分布式版本控制和源代码管理（SCM）功能，以及自己的特性。它提供访问控制和若干协作功能，如错误跟踪、功能请求、任务管理和每个项目的维基。
+它提供了 Git 的分布式版本控制和源代码管理（SCM）功能，以及自己的特性。它提供访问控制和若干协作功能，如错误跟踪、功能请求、任务管理和每个项目的维基。
 
 *备选方案：*[*DVC*](https://dvc.org/)*， *[*BitBucket*](https://bitbucket.org/product)*， *[*GitLab*](https://about.gitlab.com/)*
 
@@ -132,7 +132,7 @@ Jupyter *曾经* 是我探索数据、进行分析以及试验不同数据和建
 
 这很令人沮丧。因此，我使用 Streamlit 进行**早期探索**并提供最终的前端——一举两得。以下是我的典型屏幕设置。左侧是 PyCharm IDE，右侧是结果可视化。试试看吧。
 
-![](../Images/92f473ebd0ae2ea902a391d0c6eb1fb6.png)
+![](img/92f473ebd0ae2ea902a391d0c6eb1fb6.png)
 
 *IDE（左侧）+ Streamlit 实时更新（右侧），作者的工作来自 [被遗忘的算法](https://towardsdatascience.com/how-to-design-monte-carlo-simulation-138e9214910a)*
 
@@ -148,7 +148,7 @@ Jupyter *曾经* 是我探索数据、进行分析以及试验不同数据和建
 
 用于在 Python 中进行一般机器学习的首选框架。不多说了。
 
-![](../Images/1c0295553bc6cdc8c730178f48171d1a.png)
+![](img/1c0295553bc6cdc8c730178f48171d1a.png)
 
 *Scikit-Learn 的使用案例，[来源](https://scikit-learn.org/stable/)。*
 
@@ -172,7 +172,7 @@ Jupyter *曾经* 是我探索数据、进行分析以及试验不同数据和建
 
 一个免费的工具，允许数据科学家用几个代码片段设置实验，并将结果展示到基于 web 的仪表板上。
 
-![](../Images/a55aaab11613ed1876c707a798d14dbb.png)
+![](img/a55aaab11613ed1876c707a798d14dbb.png)
 
 *Atlas 过程，[来源](https://www.atlas.dessa.com/)。*
 
@@ -184,7 +184,7 @@ Jupyter *曾经* 是我探索数据、进行分析以及试验不同数据和建
 
 正如我提到的，没有完美的设置。这一切都取决于你的需求和限制。这是另一个可用工具及其如何协同工作的视角。
 
-![](../Images/2b1bc4accea69858b5d1b809418c8a88.png)
+![](img/2b1bc4accea69858b5d1b809418c8a88.png)
 
 *来自 [Sergey Karayev](https://www.linkedin.com/in/ACoAABqncBAB7JVSkewnHs3jvPfOOm-U23LAlTo/) 在 [全栈深度学习](https://full-stack-deep-learning.aerobaticapp.com/b172_eb327323-811b-4de9-8894-76ec4cfd6458/assets/slides/fsdl_4_infra_tooling.pdf) 的演讲，2019 年。*
 

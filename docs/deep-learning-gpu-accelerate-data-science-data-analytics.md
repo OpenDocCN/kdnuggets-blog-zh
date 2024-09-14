@@ -1,10 +1,10 @@
 # 不仅仅是深度学习：GPU 如何加速数据科学与数据分析
 
-> 原文：[https://www.kdnuggets.com/2021/07/deep-learning-gpu-accelerate-data-science-data-analytics.html](https://www.kdnuggets.com/2021/07/deep-learning-gpu-accelerate-data-science-data-analytics.html)
+> 原文：[`www.kdnuggets.com/2021/07/deep-learning-gpu-accelerate-data-science-data-analytics.html`](https://www.kdnuggets.com/2021/07/deep-learning-gpu-accelerate-data-science-data-analytics.html)
 
-[comments](#comments)
+comments
 
-![blog-gpu-powered-data-sci.jpg](../Images/07154ebf2b03cd01e5098fa0563117c2.png)
+![blog-gpu-powered-data-sci.jpg](img/07154ebf2b03cd01e5098fa0563117c2.png)
 
 ### GPU 如何加速数据科学与数据分析
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -28,9 +28,9 @@
 
 事实上，最近，著名的 AI 先锋 Andrew Ng 讨论了**从以模型为中心转向以数据为中心的 AI 工具开发方法**。这意味着在实际的 AI 工作负载在你的管道中执行之前，需要花费更多时间处理原始数据并进行预处理。
 
-你可以在这里观看 Andrew 的采访：[https://www.youtube.com/watch?v=06-AZXmwHjo](https://www.youtube.com/watch?v=06-AZXmwHjo)
+你可以在这里观看 Andrew 的采访：[`www.youtube.com/watch?v=06-AZXmwHjo`](https://www.youtube.com/watch?v=06-AZXmwHjo)
 
-[![Andrew Ng](../Images/7235770bd4f35c50a0d74c8cec143ab6.png)](https://www.youtube.com/watch?v=06-AZXmwHjo)
+![Andrew Ng](https://www.youtube.com/watch?v=06-AZXmwHjo)
 
 这引出了一个重要问题...
 
@@ -38,7 +38,7 @@
 
 答案并不简单，需要一些特殊的考虑和知识共享。在本文中，我们将尝试展示一些可以用于此目的的工具和平台。
 
-![](../Images/e31b35c45a2a4555907cbaa70e2c216d.png)
+![](img/e31b35c45a2a4555907cbaa70e2c216d.png)
 
 [***图片来源***](https://pixabay.com/)
 
@@ -48,7 +48,7 @@
 
 **常见的数据准备和整理任务**在 RAPIDS 生态系统中受到高度重视，因为它们在典型的数据科学管道中占据了大量时间。一个熟悉的**类似数据框 API**已经开发出来，并内置了许多优化和稳健性。它还被定制以与各种 ML 算法集成，实现端到端管道加速，并且减少了序列化成本。
 
-RAPIDS 还包括大量**对多节点、多GPU部署和分布式处理的内部支持**。它与其他库集成，使**内存不足**（即数据集大小超过单个计算机的RAM）数据处理变得简单且易于数据科学家使用。
+RAPIDS 还包括大量**对多节点、多 GPU 部署和分布式处理的内部支持**。它与其他库集成，使**内存不足**（即数据集大小超过单个计算机的 RAM）数据处理变得简单且易于数据科学家使用。
 
 这里是 RAPIDS 生态系统中包含的最显著的库。
 
@@ -62,7 +62,7 @@ CuPy 的接口与 NumPy 非常相似，可以作为大多数用例的简单替�
 
 相对于 NumPy 的加速可能会令人惊叹，具体取决于数据类型和使用情况。以下是 CuPy 和 NumPy 在两种不同数组大小以及各种常见数值操作（如 FFT、切片、求和和标准差、矩阵乘法、SVD）上的速度比较，这些操作被几乎所有机器学习算法广泛使用。
 
-![](../Images/7cafdff12da11b520bcd5d0c7dda62dd.png)
+![](img/7cafdff12da11b520bcd5d0c7dda62dd.png)
 
 *CuPy 与 NumPy 的速度比较，[**图片来源**](https://cupy.dev/)*
 
@@ -82,7 +82,7 @@ CuPy 的接口与 NumPy 非常相似，可以作为大多数用例的简单替�
 
 最后，**数据科学家和分析师（即那些不一定在日常任务中使用**[**深度学习**](https://www.exxactcorp.com/Deep-Learning-Solutions)**的人）可以高兴地使用像以下这样的强大 AI 工作站**，以提升他们的生产力。
 
-[![](../Images/c55732dbec760a86470752b9ea89de6b.png)](https://www.exxactcorp.com/NVIDIA-Data-Science-Workstations)
+![](https://www.exxactcorp.com/NVIDIA-Data-Science-Workstations)
 
 *来自 Exxact Corporation 的数据科学工作站，[**图片来源**](https://www.exxactcorp.com/NVIDIA-Data-Science-Workstations)*
 
@@ -114,7 +114,7 @@ CuGraph 是一组 GPU 加速的图算法，处理在[GPU DataFrames](https://git
 
 许多科学和业务分析任务涉及对大数据集进行广泛的图算法处理。像 cuGraph 这样的库**在工程师投资于 GPU 驱动的工作站时提供了更高的生产力保证**。
 
-![](../Images/ecbba5c74b20d8bed538c95264f9a2aa.png)
+![](img/ecbba5c74b20d8bed538c95264f9a2aa.png)
 
 *利用 GPU 加速计算来增强社交图分析，[图片来源](https://pixabay.com/vectors/social-media-connections-networking-3846597/)*
 
@@ -122,7 +122,7 @@ CuGraph 是一组 GPU 加速的图算法，处理在[GPU DataFrames](https://git
 
 RAPIDS 设想了一个 GPU 驱动的数据科学任务流程的完整管道。请注意，**深度学习，传统上是 GPU 计算的主要关注点，只是该系统的一个子组件**。
 
-![](../Images/70d3d196012e7424b8b486f890b4597e.png)
+![](img/70d3d196012e7424b8b486f890b4597e.png)
 
 *GPU 数据科学管道，[**图片来源**](https://github.com/rapidsai/cuml/blob/branch-21.06/img/rapids_arrow.png)*
 
@@ -140,7 +140,7 @@ RAPIDS 设想了一个 GPU 驱动的数据科学任务流程的完整管道。�
 
 这是一个典型 Dask 任务流程的示意图。
 
-![](../Images/f4a371fd406b4b55329d1715b20c402d.png)
+![](img/f4a371fd406b4b55329d1715b20c402d.png)
 
 *官方 Dask 流程文档，[**图片来源**](https://docs.dask.org/en/latest/)*
 
@@ -148,7 +148,7 @@ RAPIDS 设想了一个 GPU 驱动的数据科学任务流程的完整管道。�
 
 熟悉性是 Dask 设计的核心，因此典型的数据科学家可以**仅需将现有的 Pandas/Numpy 基础代码转换为 Dask 代码**，而学习曲线非常平缓。以下是来自官方文档的一些经典示例。
 
-![](../Images/fb3e45f22b1f3905e38348c90c93b831.png)
+![](img/fb3e45f22b1f3905e38348c90c93b831.png)
 
 *Dask 文档中比较 Pandas 和 NumPy，[**图片来源**](https://docs.dask.org/en/latest/)*
 
@@ -158,11 +158,11 @@ RAPIDS 设想了一个 GPU 驱动的数据科学任务流程的完整管道。�
 
 最重要的是，再次强调熟悉性在这里发挥作用，DASK-ML API 旨在模仿广受欢迎的 Scikit-learn API。
 
-![](../Images/0b60d07be82d1c73fd76738e4b038ff1.png)
+![](img/0b60d07be82d1c73fd76738e4b038ff1.png)
 
 *Dask 文档中的 XGBRegressor，[**图片来源**](https://docs.dask.org/en/latest/)*
 
-![](../Images/39a657db5d7acaaacc326946cddc9a36.png)
+![](img/39a657db5d7acaaacc326946cddc9a36.png)
 
 ### Dask 在多核 CPU 系统中的好处
 
@@ -184,19 +184,19 @@ RAPIDS 设想了一个 GPU 驱动的数据科学任务流程的完整管道。�
 
 **相关：**
 
-+   [如何使用NVIDIA GPU加速库](/2021/07/nvidia-gpu-accelerated-libraries.html)
++   如何使用 NVIDIA GPU 加速库
 
-+   [告别大数据，迎接海量数据！](/2020/10/sqream-massive-data.html)
++   告别大数据，迎接海量数据！
 
-+   [抽象与数据科学：不太理想的组合](/2021/07/abstraction-data-science-not-great-combination.html)
++   抽象与数据科学：不太理想的组合
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并为目标而…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

@@ -1,10 +1,10 @@
 # 科学债务——对数据科学意味着什么？
 
-> 原文：[https://www.kdnuggets.com/2018/05/scientific-debt.html](https://www.kdnuggets.com/2018/05/scientific-debt.html)
+> 原文：[`www.kdnuggets.com/2018/05/scientific-debt.html`](https://www.kdnuggets.com/2018/05/scientific-debt.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-**由[David Robinson](https://twitter.com/drob)，Datacamp提供**
+**由[David Robinson](https://twitter.com/drob)，Datacamp 提供**
 
 在软件工程中，一个非常有用的概念是**[技术债务](https://martinfowler.com/bliki/TechnicalDebt.html)**。
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-技术债务发生在工程师选择了一个快速但不理想的解决方案，或者没有花时间建立可持续的基础设施。也许他们正在使用一种在团队和代码库扩展时不够灵活的方法（例如硬编码“魔法数字”），或出于便利而非适当性使用工具（“我们将用PHP编写DevOps基础设施，因为这是我们团队已经掌握的”）。无论如何，这是一种看起来最初有效，但在长期中会带来真正挑战的情况，比如推迟功能发布和难以修复的漏洞。
+技术债务发生在工程师选择了一个快速但不理想的解决方案，或者没有花时间建立可持续的基础设施。也许他们正在使用一种在团队和代码库扩展时不够灵活的方法（例如硬编码“魔法数字”），或出于便利而非适当性使用工具（“我们将用 PHP 编写 DevOps 基础设施，因为这是我们团队已经掌握的”）。无论如何，这是一种看起来最初有效，但在长期中会带来真正挑战的情况，比如推迟功能发布和难以修复的漏洞。
 
-![](../Images/6053ba8c88c62e2fc9c0e0077ed441b6.png)
+![](img/6053ba8c88c62e2fc9c0e0077ed441b6.png)
 
-在我担任[DataCamp首席数据科学家](http://varianceexplained.org/r/joining-datacamp/)的新工作中，我一直在思考数据科学在企业中的角色，并与该领域的其他专业人士讨论。在[今年早些时候的一个讨论小组](https://twitter.com/robinson_es/status/959948446542151680)上，我意识到数据科学家有一个大致相当于这一概念的东西：“科学债务。”
+在我担任[DataCamp 首席数据科学家](http://varianceexplained.org/r/joining-datacamp/)的新工作中，我一直在思考数据科学在企业中的角色，并与该领域的其他专业人士讨论。在[今年早些时候的一个讨论小组](https://twitter.com/robinson_es/status/959948446542151680)上，我意识到数据科学家有一个大致相当于这一概念的东西：“科学债务。”
 
 **科学债务是指团队在数据分析、实验实践和监控中采取的捷径，这些捷径可能会带来长期的负面影响。** 当你听到这样的陈述时：
 
@@ -48,7 +48,7 @@
 
 **WidgetCorp 承担了过多的科学债务。**
 
-![](../Images/6e635bcb5831e7943c21dcb0f6cddb84.png)
+![](img/6e635bcb5831e7943c21dcb0f6cddb84.png)
 
 这可能发生的几种方式：
 
@@ -58,7 +58,7 @@
 
 **数据基础设施的缺乏**：也许在公司早期，潜在客户被锁定在销售 CRM 系统中，而会计数据则存储在通过电子邮件传送的 Excel 电子表格中。即便公司内有专门的分析师，他们也可能无法轻易获取相关数据（例如，将销售成功与公司规模联系起来）。即使理论上可以通过一些努力将数据集结合起来，[懒惰盲点](http://www.paulgraham.com/schlep.html) 也可能让每个人都完全避免进行分析。这是一个技术债务和科学债务常常一起出现的领域，因为解决科学问题需要工程方面的努力。
 
-**传播不准确的传说**。假设WidgetCorp的CEO进行了一系列公司范围的演讲和公开博客文章，传达的信息是“WidgetCorp的未来是服务大公司！”产品团队开始习惯性地优先考虑这个方向的功能，每次失败都归咎于“我想我们没有足够专注于大客户”。这种“文化惯性”可能非常难以扭转，即使高管团队愿意公开承认他们的错误（这并不是保证的！）。
+**传播不准确的传说**。假设 WidgetCorp 的 CEO 进行了一系列公司范围的演讲和公开博客文章，传达的信息是“WidgetCorp 的未来是服务大公司！”产品团队开始习惯性地优先考虑这个方向的功能，每次失败都归咎于“我想我们没有足够专注于大客户”。这种“文化惯性”可能非常难以扭转，即使高管团队愿意公开承认他们的错误（这并不是保证的！）。
 
 几乎每个经验丰富的数据科学家都有至少一些这样的故事，即使是来自其他成功的公司。这些故事对科学债务的意义就像[Daily WTF](https://thedailywtf.com/)对技术债务的意义一样。
 
@@ -66,9 +66,9 @@
 
 完全不是！
 
-![](../Images/56fe82def4c0bec91bd759fed011d8d5.png)
+![](img/56fe82def4c0bec91bd759fed011d8d5.png)
 
-我在自己的分析中经常走捷径。对一个功能发布进行随机实验有时成本过高，尤其是当用户数量相对较少或变化相当无争议时（例如，你不会对拼写错误修正进行A/B测试）。尽管相关性不意味着因果关系，但在做出商业决策时，它通常比什么都没有要好。
+我在自己的分析中经常走捷径。对一个功能发布进行随机实验有时成本过高，尤其是当用户数量相对较少或变化相当无争议时（例如，你不会对拼写错误修正进行 A/B 测试）。尽管相关性不意味着因果关系，但在做出商业决策时，它通常比什么都没有要好。
 
 将其与技术债务相比是有用的：一个小型工程团队的首要目标通常是快速构建一个最小可行产品，而不是*过度工程*一个他们认为在遥远的未来会非常稳健的系统。（科学债务中的等价物通常被称为*过度思考*，例如：“是的，我认为我们可以在检查销售交易成功与否时控制天气，但我很确定你在过度思考这个问题。”）与财务债务的比较也是有意义的：公司在成长过程中通常会承担债务（或类似地，放弃股份）。就像你不能在不借钱的情况下建立一家公司一样，你不能在确定每个决策都得到充分数据支持的情况下建立公司。
 
@@ -84,7 +84,7 @@
 > 
 > 不符合这些标准的代码不是债务，它只是低质量的工作。
 > 
-> — 实践开发者 (@practicingdev) [2018年2月26日](https://twitter.com/practicingdev/status/968175299581108224?ref_src=twsrc%5Etfw)
+> — 实践开发者 (@practicingdev) [2018 年 2 月 26 日](https://twitter.com/practicingdev/status/968175299581108224?ref_src=twsrc%5Etfw)
 
 错误的决策代价高昂，不关注数据是一种风险。我们可以对这种风险是否值得进行成本效益分析，但不应将其视为“数据科学家总是找借口”的表现。
 
@@ -108,19 +108,19 @@
 
 * * *
 
-同样，科学家，尤其是来自学术背景的科学家，通常对揭示现实中的真相有特别的兴趣。因此，“我想分析X是否是这里的一个混杂因素”的想法可能听起来像是一种奢侈，而不是一个迫切的商业需求。统计学家尤其喜欢发现数学方法中的缺陷。因此，当数据科学家说“我们不能使用那个方法，Jones等人在2012年证明了它在渐近上是不一致的”时，非技术同事可能会认为他们在过度思考，甚至是炫耀。将其框架化为我们实际上*冒的风险*有助于传达为何花时间去做是值得的。
+同样，科学家，尤其是来自学术背景的科学家，通常对揭示现实中的真相有特别的兴趣。因此，“我想分析 X 是否是这里的一个混杂因素”的想法可能听起来像是一种奢侈，而不是一个迫切的商业需求。统计学家尤其喜欢发现数学方法中的缺陷。因此，当数据科学家说“我们不能使用那个方法，Jones 等人在 2012 年证明了它在渐近上是不一致的”时，非技术同事可能会认为他们在过度思考，甚至是炫耀。将其框架化为我们实际上*冒的风险*有助于传达为何花时间去做是值得的。
 
 ### 我们如何有效地管理科学债务？
 
 +   **让数据科学家“支付利息”**。正如不是每个工程项目都会带来新特性一样，不是每次分析都会带来令人兴奋的发现或新颖的算法。有些时间需要花费在确认或证伪现有假设上。[乔纳森·诺利斯关于数据科学工作的优先级排序有一篇很好的文章](https://towardsdatascience.com/prioritizing-data-science-work-936b3765fd45)，他在文章中将这一象限描述为“提供证明”。
 
-+   **构建数据工程流程：** 正如之前所描述的，公司可能会陷入科学债务的一个原因是分析师可能无法轻松访问他们需要的数据。这些数据可能被锁在尚未被摄取的平台中，或存储在需要手动编辑的Google表格中。将相关数据摄取到数据仓库或数据湖中，可以使数据科学家更有可能进行相关发现。
++   **构建数据工程流程：** 正如之前所描述的，公司可能会陷入科学债务的一个原因是分析师可能无法轻松访问他们需要的数据。这些数据可能被锁在尚未被摄取的平台中，或存储在需要手动编辑的 Google 表格中。将相关数据摄取到数据仓库或数据湖中，可以使数据科学家更有可能进行相关发现。
 
-+   **重新审视旧的分析**：早期阶段公司进入科学债务的一个常见原因是数据不足以得出可靠的结论。即使你还没有足够的数据，也不意味着你应该忘记这个问题。有时，[我会在日历上安排时间](https://medium.com/the-mission/why-calendars-are-more-effective-than-to-do-lists-9bc6ce3bee50)以便在预期有足够数据时进行分析，即使这可能要几个月。这样也可以帮助确认一个重要的分析是否仍然相关：就像你会随着时间跟踪KPI一样，你也要跟踪结论是否仍然正确。
++   **重新审视旧的分析**：早期阶段公司进入科学债务的一个常见原因是数据不足以得出可靠的结论。即使你还没有足够的数据，也不意味着你应该忘记这个问题。有时，[我会在日历上安排时间](https://medium.com/the-mission/why-calendars-are-more-effective-than-to-do-lists-9bc6ce3bee50)以便在预期有足够数据时进行分析，即使这可能要几个月。这样也可以帮助确认一个重要的分析是否仍然相关：就像你会随着时间跟踪 KPI 一样，你也要跟踪结论是否仍然正确。
 
-+   **让数据专业知识在公司内部传播**。就像一个不能编程的人可能不会认识到技术债务一样，一个没有分析和理解数据经验的人可能不会认识到科学债务。这是另一个[在公司内部实现数据科学民主化](https://register.gotowebinar.com/register/5951553477110700289?source=blog)的理由，正如[我们在DataCamp所做的](http://varianceexplained.org/r/joining-datacamp/)。
++   **让数据专业知识在公司内部传播**。就像一个不能编程的人可能不会认识到技术债务一样，一个没有分析和理解数据经验的人可能不会认识到科学债务。这是另一个[在公司内部实现数据科学民主化](https://register.gotowebinar.com/register/5951553477110700289?source=blog)的理由，正如[我们在 DataCamp 所做的](http://varianceexplained.org/r/joining-datacamp/)。
 
-**简介：[David Robinson](https://twitter.com/drob)**，是DataCamp的首席数据科学家，使用R和Python进行工作。
+**简介：[David Robinson](https://twitter.com/drob)**，是 DataCamp 的首席数据科学家，使用 R 和 Python 进行工作。
 
 [原文](http://varianceexplained.org/r/scientific-debt/)。经许可转载。
 
@@ -134,13 +134,13 @@
 
 ### 更多相关主题
 
-+   [使用微调的SciBERT NER模型和Neo4j分析科学文章](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
++   [使用微调的 SciBERT NER 模型和 Neo4j 分析科学文章](https://www.kdnuggets.com/2021/12/analyzing-scientific-articles-finetuned-scibert-ner-model-neo4j.html)
 
-+   [AI驱动的RPA和IA对企业意味着什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)
++   [AI 驱动的 RPA 和 IA 对企业意味着什么？](https://www.kdnuggets.com/2022/12/aipowered-rpa-ia-mean-businesses.html)
 
 +   [你的特征重要吗？这并不意味着它们是好的](https://www.kdnuggets.com/your-features-are-important-it-doesnt-mean-they-are-good)
 
-+   [KDnuggets新闻，11月30日：什么是切比雪夫定理及其如何应用…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其如何应用…](https://www.kdnuggets.com/2022/n46.html)
 
 +   [学习数据科学基础需要多久？](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)
 

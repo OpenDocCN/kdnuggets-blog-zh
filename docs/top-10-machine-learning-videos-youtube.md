@@ -1,30 +1,30 @@
-# YouTube上的前10名机器学习视频
+# YouTube 上的前 10 名机器学习视频
 
-> 原文：[https://www.kdnuggets.com/2015/06/top-10-machine-learning-videos-youtube.html](https://www.kdnuggets.com/2015/06/top-10-machine-learning-videos-youtube.html)
+> 原文：[`www.kdnuggets.com/2015/06/top-10-machine-learning-videos-youtube.html`](https://www.kdnuggets.com/2015/06/top-10-machine-learning-videos-youtube.html)
 
 **作者：格兰特·马歇尔。**
 
-![Machine Learning on YouTube](../Images/f25b548ce2996fe78d0b3edfd7831745.png) YouTube上有很多关于机器学习的视频，但在有限的时间内可能很难判断哪些值得观看。这里筛选了按观看次数排序的最佳视频，以提供一些关于该主题的优秀视频内容。
+![Machine Learning on YouTube](img/f25b548ce2996fe78d0b3edfd7831745.png) YouTube 上有很多关于机器学习的视频，但在有限的时间内可能很难判断哪些值得观看。这里筛选了按观看次数排序的最佳视频，以提供一些关于该主题的优秀视频内容。
 
-如果你想以简单的方式将所有这些视频集中在一个地方，可以查看这个[播放列表](https://www.youtube.com/watch?v=qv6UVOQ0F44&list=PL_XgCvc6oOlwGLZWh7u0k7eIOLmdHlWXH)。视图数量截至2015年6月21日。
+如果你想以简单的方式将所有这些视频集中在一个地方，可以查看这个[播放列表](https://www.youtube.com/watch?v=qv6UVOQ0F44&list=PL_XgCvc6oOlwGLZWh7u0k7eIOLmdHlWXH)。视图数量截至 2015 年 6 月 21 日。
 
-![mario-screen](../Images/9bbc8d223fc78adb9f16f764e3ca4e05.png)**[1\. MarI/O - 用于视频游戏的机器学习](https://www.youtube.com/watch?v=qv6UVOQ0F44)**（1,514,045次观看）
+![mario-screen](img/9bbc8d223fc78adb9f16f764e3ca4e05.png)**[1\. MarI/O - 用于视频游戏的机器学习](https://www.youtube.com/watch?v=qv6UVOQ0F44)**（1,514,045 次观看）
 
 这个有趣的演示视频展示了机器学习如何应用于视频游戏。这是通过神经网络和遗传算法实现的。这个视频特别出色的地方在于作者简明扼要地描述了神经网络如何实现所需的性能。即使我自己玩过《超级马里奥世界》，也能说游戏性非常令人印象深刻，无论是否学习过！
 
-**[2\. 机器学习（斯坦福）](https://www.youtube.com/watch?v=UzxYlbK2c7E)**（761,843次观看）
+**[2\. 机器学习（斯坦福）](https://www.youtube.com/watch?v=UzxYlbK2c7E)**（761,843 次观看）
 
-这是安德鲁·吴主讲的斯坦福机器学习讲座系列中的第一部视频。作为自学机器学习基础的起点非常合适。如果你对视频中的内容感兴趣，他的[Coursera课程](https://www.coursera.org/course/ml)也可能会引起你的兴趣。
+这是安德鲁·吴主讲的斯坦福机器学习讲座系列中的第一部视频。作为自学机器学习基础的起点非常合适。如果你对视频中的内容感兴趣，他的[Coursera 课程](https://www.coursera.org/course/ml)也可能会引起你的兴趣。
 
-**[3\. 下一代神经网络](https://www.youtube.com/watch?v=AyzOUbkUf3M)**（401,740次观看）
+**[3\. 下一代神经网络](https://www.youtube.com/watch?v=AyzOUbkUf3M)**（401,740 次观看）
 
-乔弗里·辛顿的这场Google技术讲座涵盖了下一代神经网络。这是对深度学习的一个很好的介绍。虽然已有几年，但仍然是一个很好的技术入门。
+乔弗里·辛顿的这场 Google 技术讲座涵盖了下一代神经网络。这是对深度学习的一个很好的介绍。虽然已有几年，但仍然是一个很好的技术入门。
 
-**[4\. 机器人技术与人工智能的未来（安德鲁·吴，斯坦福大学，STAN 2011）](https://www.youtube.com/watch?v=AY4ajbu_G3k)**（233,875次观看）
+**[4\. 机器人技术与人工智能的未来（安德鲁·吴，斯坦福大学，STAN 2011）](https://www.youtube.com/watch?v=AY4ajbu_G3k)**（233,875 次观看）
 
 这个视频也是安德鲁·吴制作的。在这个视频中，安德鲁·吴不仅专注于机器学习，而是深入探讨了人工智能在机器人技术中的应用。如果你对这些话题感兴趣，可以观看这个视频。
 
-**[5\. 加州理工学院机器学习](https://www.youtube.com/watch?v=mbyG85GZ0PI)**（233,703次观看）
+**[5\. 加州理工学院机器学习](https://www.youtube.com/watch?v=mbyG85GZ0PI)**（233,703 次观看）
 
 这个视频也是机器学习讲座系列的开始。该系列由加州理工学院的亚瑟·阿布-莫斯塔法教授主讲。这个系列还有一个[在线课程](https://work.caltech.edu/telecourse.html)，并且有一本很棒的配套教材。这是学习机器学习基础的另一种好方法。
 
@@ -50,11 +50,11 @@
 
 **相关：**
 
-+   [YouTube 上观看最多的大数据视频](/2015/05/most-viewed-big-data-videos-youtube.html)
++   YouTube 上观看最多的大数据视频
 
-+   [带结构的深度学习 – 预览](/2015/05/deep-learning-structure-preview.html)
++   带结构的深度学习 – 预览
 
-+   [在机器学习中，更多数据还是更好的算法更好？](/2015/06/machine-learning-more-data-better-algorithms.html)
++   在机器学习中，更多数据还是更好的算法更好？
 
 ### 更多相关内容
 

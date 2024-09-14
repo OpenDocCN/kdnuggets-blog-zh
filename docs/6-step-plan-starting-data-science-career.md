@@ -1,10 +1,10 @@
 # 启动数据科学职业的六步计划
 
-> 原文：[https://www.kdnuggets.com/2018/12/6-step-plan-starting-data-science-career.html](https://www.kdnuggets.com/2018/12/6-step-plan-starting-data-science-career.html)
+> 原文：[`www.kdnuggets.com/2018/12/6-step-plan-starting-data-science-career.html`](https://www.kdnuggets.com/2018/12/6-step-plan-starting-data-science-career.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![标题图片](../Images/e535cfa32383f16fc23a3f4fccdba675.png)
+![标题图片](img/e535cfa32383f16fc23a3f4fccdba675.png)
 
 当人们希望启动数据科学职业但尚未迈出第一步时，他们处于一种可以理解的令人畏惧且充满不确定性的情境中。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -24,11 +24,11 @@
 
 ### 1\. 与业内人士交谈
 
-尽管阅读数据科学专业人士撰写的文章或观看这些人接受采访的YouTube视频很有价值，但如果有抱负的数据科学家能够与目前在该领域工作的人进行面对面交谈则更为理想。
+尽管阅读数据科学专业人士撰写的文章或观看这些人接受采访的 YouTube 视频很有价值，但如果有抱负的数据科学家能够与目前在该领域工作的人进行面对面交谈则更为理想。
 
 一些公司通过[数据科学导师计划](https://towardsdatascience.com/why-you-need-a-professional-data-science-mentor-and-how-to-actually-get-one-d6b89f30df6d)提供收入分成模式，这使得那些希望成为数据科学家的人员可以接受来自经验丰富的专业人士的指导。然后，如果学员在一定时间内获得数据科学职位，他们会用第一年工资的一小部分回报导师。
 
-然而，也可以采取不那么正式的方法。人们可以参加他们所在地区的数据科学会议，并报名参加研讨会或与专家进行亲密的问答环节。还有机会通过留言板和Skype对话获取见解。
+然而，也可以采取不那么正式的方法。人们可以参加他们所在地区的数据科学会议，并报名参加研讨会或与专家进行亲密的问答环节。还有机会通过留言板和 Skype 对话获取见解。
 
 与了解行业并愿意分享经验的人交谈至关重要。这可以帮助未来的数据科学家确认这个职业路径是否适合他们，或者突出为什么另一个工作选择更合适。
 
@@ -78,15 +78,15 @@
 
 然而，必须注意的是，尽管这份清单提供了建议的基础组成部分，但每个人都是不同的。人们可能不会按照这个顺序前进，也可能不会完成所有步骤。这没关系，只要他们保持目标的清晰即可。
 
-**个人简介: [Kayla Matthews](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《The Data Center Journal》和《VentureBeat》等出版物上讨论技术和大数据，并且已经写作超过五年。要阅读Kayla的更多文章，[**订阅她的博客 Productivity Bytes**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
+**个人简介: [Kayla Matthews](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《The Data Center Journal》和《VentureBeat》等出版物上讨论技术和大数据，并且已经写作超过五年。要阅读 Kayla 的更多文章，[**订阅她的博客 Productivity Bytes**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
 
 **相关：**
 
-+   [在2年内提升数据科学技能的8种方法](/2017/11/8-ways-improve-data-science-skills-2-years.html)
++   在 2 年内提升数据科学技能的 8 种方法
 
-+   [每个数据科学家都应该随手备着的6本书](/2017/10/6-books-every-data-scientist-should-keep-nearby.html)
++   每个数据科学家都应该随手备着的 6 本书
 
-+   [每个有志数据科学家在2019年应设立的6个目标](/2018/11/6-goals-every-wannabe-data-scientist-2019.html)
++   每个有志数据科学家在 2019 年应设立的 6 个目标
 
 ### 更多相关话题
 

@@ -1,22 +1,22 @@
 # 逐步解析 DENSE_RANK()：SQL 爱好者的指南
 
-> 原文：[https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)
+> 原文：[`www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts`](https://www.kdnuggets.com/breaking-down-denserank-a-step-by-step-guide-for-sql-enthusiasts)
 
-![逐步解析 DENSE_RANK()：SQL 爱好者的指南](../Images/2c67fa689690681dbae6745c0c6bb474.png)
+![逐步解析 DENSE_RANK()：SQL 爱好者的指南](img/2c67fa689690681dbae6745c0c6bb474.png)
 
 图片由编辑提供
 
-在当今数据驱动的世界中，SQL（结构化查询语言）是管理和操作数据库系统的基石。SQL的强大和灵活性的核心组成部分之一是其[窗口函数](/2017/12/sql-window-functions-tutorial-business-analytics.html/2)，这是一类在与当前行相关的行集上执行计算的函数。
+在当今数据驱动的世界中，SQL（结构化查询语言）是管理和操作数据库系统的基石。SQL 的强大和灵活性的核心组成部分之一是其窗口函数，这是一类在与当前行相关的行集上执行计算的函数。
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -28,11 +28,11 @@
 
 # 理解 SQL 中排名函数的作用
 
-SQL中的排名函数是窗口函数的一个子集，为结果集中的每一行分配一个唯一的排名。这些排名值对应于通过函数中的 ORDER BY 子句确定的特定顺序。排名函数是SQL的主要组成部分，在数据分析中被广泛使用，用于各种任务，如查找最佳销售员、识别表现最好的网页，或确定特定年份的最高票房电影。
+SQL 中的排名函数是窗口函数的一个子集，为结果集中的每一行分配一个唯一的排名。这些排名值对应于通过函数中的 ORDER BY 子句确定的特定顺序。排名函数是 SQL 的主要组成部分，在数据分析中被广泛使用，用于各种任务，如查找最佳销售员、识别表现最好的网页，或确定特定年份的最高票房电影。
 
 SQL 中有三种主要的排名函数，即 `RANK()`、`ROW_NUMBER()` 和 `DENSE_RANK()`。这些函数的操作方式略有不同，但它们的共同目的都是根据指定的条件对数据进行排名。`RANK()` 和 `DENSE_RANK()` 函数的行为类似，即对相同值的行分配相同的排名。关键的区别在于它们处理随后的排名方式。`RANK()` 跳过下一个排名，而 `DENSE_RANK()` 不会。
 
-另一方面，[`ROW_NUMBER()`](/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science) 函数为每一行分配唯一的行号，无论排序列的值是否相同。虽然 `RANK()`、`DENSE_RANK()` 和 `ROW_NUMBER()` 从表面上看可能似乎可以互换使用，但理解它们的细微差别对 SQL 中的数据分析至关重要。这些函数之间的选择可以显著影响结果和从数据中获得的洞察。
+另一方面，`ROW_NUMBER()` 函数为每一行分配唯一的行号，无论排序列的值是否相同。虽然 `RANK()`、`DENSE_RANK()` 和 `ROW_NUMBER()` 从表面上看可能似乎可以互换使用，但理解它们的细微差别对 SQL 中的数据分析至关重要。这些函数之间的选择可以显著影响结果和从数据中获得的洞察。
 
 # SQL 中的 DENSE_RANK() 是什么？
 
@@ -46,15 +46,15 @@ SQL 中有三种主要的排名函数，即 `RANK()`、`ROW_NUMBER()` 和 `DENSE
 
 理解 `DENSE_RANK()`、`RANK()` 和 `ROW_NUMBER()` 之间的差异对于高效的数据分析非常重要。这三种函数各有强大之处，但它们的细微差别可能会显著影响数据分析的结果。
 
-让我们从`RANK()`开始。这个函数会给数据集中的每个不同值分配一个唯一的排名，对于相同的值分配相同的排名。然而，当`RANK()`遇到相同的值时，它会跳过序列中的下一个排名。例如，如果你有三种产品的销售数据相同，`RANK()`会为这些产品分配相同的排名，但随后会跳过下一个排名。这意味着如果这三种产品是最畅销的，它们都会被分配排名1，但下一个最畅销的产品将被分配排名4，而不是排名2。
+让我们从`RANK()`开始。这个函数会给数据集中的每个不同值分配一个唯一的排名，对于相同的值分配相同的排名。然而，当`RANK()`遇到相同的值时，它会跳过序列中的下一个排名。例如，如果你有三种产品的销售数据相同，`RANK()`会为这些产品分配相同的排名，但随后会跳过下一个排名。这意味着如果这三种产品是最畅销的，它们都会被分配排名 1，但下一个最畅销的产品将被分配排名 4，而不是排名 2。
 
-接下来，让我们考虑`DENSE_RANK()`。与`RANK()`类似，`DENSE_RANK()`会给相同的值分配相同的排名，但不会跳过任何排名。使用之前的例子，使用`DENSE_RANK()`时，这三种最畅销的产品仍会被分配排名1，但下一个最畅销的产品会被分配排名2，而不是排名4。
+接下来，让我们考虑`DENSE_RANK()`。与`RANK()`类似，`DENSE_RANK()`会给相同的值分配相同的排名，但不会跳过任何排名。使用之前的例子，使用`DENSE_RANK()`时，这三种最畅销的产品仍会被分配排名 1，但下一个最畅销的产品会被分配排名 2，而不是排名 4。
 
 最后，`ROW_NUMBER()`采取了不同的方法。它会给每一行分配一个唯一的排名，不论这些值是否相同。这意味着即使三种产品的销售数据相同，`ROW_NUMBER()`也会为每种产品分配一个唯一的编号，这使得它非常适合需要为每一行分配唯一标识符的情况。
 
 # 解密 SQL 中 DENSE_RANK() 的语法和使用方法
 
-`DENSE_RANK()`的语法很简单。它与`OVER()`子句一起使用，在分配排名之前对数据进行分区。语法如下：`DENSE_RANK() OVER (ORDER BY column)`。这里的`column`指的是你希望用来排名的数据列。假设我们有一个名为`Sales`的表，包含`SalesPerson`和`SalesFigures`列。为了根据销售数据对销售人员进行排名，我们可以使用`DENSE_RANK()`函数，如下所示：`DENSE_RANK() OVER (ORDER BY SalesFigures DESC)`。这个SQL查询会根据销售数据从高到低对销售人员进行排名。
+`DENSE_RANK()`的语法很简单。它与`OVER()`子句一起使用，在分配排名之前对数据进行分区。语法如下：`DENSE_RANK() OVER (ORDER BY column)`。这里的`column`指的是你希望用来排名的数据列。假设我们有一个名为`Sales`的表，包含`SalesPerson`和`SalesFigures`列。为了根据销售数据对销售人员进行排名，我们可以使用`DENSE_RANK()`函数，如下所示：`DENSE_RANK() OVER (ORDER BY SalesFigures DESC)`。这个 SQL 查询会根据销售数据从高到低对销售人员进行排名。
 
 将`DENSE_RANK()`与`PARTITION BY`结合使用可以特别有洞察力。例如，如果你想在每个地区内对销售人员进行排名，你可以通过`Region`对数据进行分区，然后在每个分区内进行排名。语法如下：`DENSE_RANK() OVER (PARTITION BY Region ORDER BY SalesFigures DESC)`。通过这种方式，你不仅能获得全面的排名，还能对每个地区的表现有更细致的了解。
 
@@ -94,11 +94,11 @@ SQL 中有三种主要的排名函数，即 `RANK()`、`ROW_NUMBER()` 和 `DENSE
 
 ## Apple 顶级销售表现者解决方案
 
-**第1步：了解数据**
+**第 1 步：了解数据**
 
-首先，让我们了解`sales_data`表中的数据。该表有三列：employee_id、sales_date和total_sales。这个表代表了销售数据，包含有关员工、销售日期和总销售额的信息。
+首先，让我们了解`sales_data`表中的数据。该表有三列：employee_id、sales_date 和 total_sales。这个表代表了销售数据，包含有关员工、销售日期和总销售额的信息。
 
-**第2步：分析 DENSE_RANK() 函数**
+**第 2 步：分析 DENSE_RANK() 函数**
 
 该查询使用 DENSE_RANK() 窗口函数根据每个销售日期分区内的 total_sales 对员工进行排名。DENSE_RANK() 用于在 sales_date 的分区内为每行分配一个排名，排序基于 total_sales 降序排列。
 
@@ -222,29 +222,29 @@ WHERE
 
 +   SELECT 子句：指定将在最终结果中包含的列。它包括 customer_id、product_id、review_date、review_score 和 helpful_votes。
 
-+   FROM子句：这一部分包括一个子查询（括号内）选择product_reviews表中的列，并使用`DENSE_RANK()`添加一个计算列。计算是在由product_id和review_date定义的分区上进行的，排名基于review_score和helpful_votes的降序。
++   FROM 子句：这一部分包括一个子查询（括号内）选择 product_reviews 表中的列，并使用`DENSE_RANK()`添加一个计算列。计算是在由 product_id 和 review_date 定义的分区上进行的，排名基于 review_score 和 helpful_votes 的降序。
 
-+   `DENSE_RANK()`函数：此函数在子查询中应用，根据指定的标准为每一行分配一个排名。排名是根据每个product_id和review_date的组合单独进行的。
++   `DENSE_RANK()`函数：此函数在子查询中应用，根据指定的标准为每一行分配一个排名。排名是根据每个 product_id 和 review_date 的组合单独进行的。
 
-+   WHERE子句：筛选结果以仅包括rank_within_product等于1的行。这确保了最终结果中只包含每个产品在每个评论日期的排名最高的行。
++   WHERE 子句：筛选结果以仅包括 rank_within_product 等于 1 的行。这确保了最终结果中只包含每个产品在每个评论日期的排名最高的行。
 
 **步骤 4：执行查询**
 
-执行此查询将生成包含所需信息的结果集：每个产品和评论日期组合中基于评论分数和有用票数的排名最高评论的customer_id、product_id、review_date、review_score和helpful_votes。
+执行此查询将生成包含所需信息的结果集：每个产品和评论日期组合中基于评论分数和有用票数的排名最高评论的 customer_id、product_id、review_date、review_score 和 helpful_votes。
 
 **步骤 5：检查输出**
 
-最终输出表，名为top_reviewers，将显示每个产品在每个评论日期的排名最高的评论，同时考虑评论分数和有用票数。
+最终输出表，名为 top_reviewers，将显示每个产品在每个评论日期的排名最高的评论，同时考虑评论分数和有用票数。
 
-# 避免SQL中使用`DENSE_RANK()`的常见错误
+# 避免 SQL 中使用`DENSE_RANK()`的常见错误
 
-虽然`DENSE_RANK()`是一个非常有用的SQL函数，但分析师，特别是那些刚接触SQL的人，使用时出错并不少见。让我们更详细地探讨一些常见的错误及其避免方法。
+虽然`DENSE_RANK()`是一个非常有用的 SQL 函数，但分析师，特别是那些刚接触 SQL 的人，使用时出错并不少见。让我们更详细地探讨一些常见的错误及其避免方法。
 
-一个常见的错误是误解`DENSE_RANK()`如何处理NULL值。与某些SQL函数不同，`DENSE_RANK()`将所有NULL视为相同。这意味着，如果你在排名数据中有NULL值，`DENSE_RANK()`会将所有NULL值赋予相同的排名。在处理包含NULL值的数据集时，请注意这一点，并考虑用在你的上下文中代表其含义的值替代NULL，或根据具体要求将其排除。
+一个常见的错误是误解`DENSE_RANK()`如何处理 NULL 值。与某些 SQL 函数不同，`DENSE_RANK()`将所有 NULL 视为相同。这意味着，如果你在排名数据中有 NULL 值，`DENSE_RANK()`会将所有 NULL 值赋予相同的排名。在处理包含 NULL 值的数据集时，请注意这一点，并考虑用在你的上下文中代表其含义的值替代 NULL，或根据具体要求将其排除。
 
 另一个常见的错误是忽视在使用`DENSE_RANK()`时分区的重要性。`PARTITION BY`子句允许你将数据分为不同的段，并在这些分区内进行排名。不使用`PARTITION BY`可能会导致错误的结果，特别是当你希望对不同的类别或组重新开始排名时。
 
-与此相关的是`ORDER BY`子句在`DENSE_RANK()`中的不当使用。`DENSE_RANK()`默认按升序分配排名，意味着最小值获得排名1。如果你需要排名按降序进行，你必须在`ORDER BY`子句中包含`DESC`关键字。不这样做将产生可能与你的期望不符的排名。
+与此相关的是`ORDER BY`子句在`DENSE_RANK()`中的不当使用。`DENSE_RANK()`默认按升序分配排名，意味着最小值获得排名 1。如果你需要排名按降序进行，你必须在`ORDER BY`子句中包含`DESC`关键字。不这样做将产生可能与你的期望不符的排名。
 
 最后，一些分析师错误地使用 `DENSE_RANK()` 而应使用 `ROW_NUMBER()` 或 `RANK()`，反之亦然。正如我们讨论的，这三种函数都有独特的行为。理解这些细微差别并根据你的特定用例选择正确的函数，对于进行准确和有效的数据分析至关重要。
 

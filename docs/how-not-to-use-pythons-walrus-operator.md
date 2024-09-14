@@ -1,8 +1,8 @@
 # 如何（不）使用 Python 的海象运算符
 
-> 原文：[https://www.kdnuggets.com/how-not-to-use-pythons-walrus-operator](https://www.kdnuggets.com/how-not-to-use-pythons-walrus-operator)
+> 原文：[`www.kdnuggets.com/how-not-to-use-pythons-walrus-operator`](https://www.kdnuggets.com/how-not-to-use-pythons-walrus-operator)
 
-![如何（不）使用 Python 的海象运算符](../Images/0d9a37d36fa593592caba94c177311ff.png)
+![如何（不）使用 Python 的海象运算符](img/0d9a37d36fa593592caba94c177311ff.png)
 
 图片由作者提供 | 在 Snappify 上创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 在本教程中，我们将通过简单的代码示例来探索海象运算符的有效使用和不那么有效的使用。让我们开始吧！
 
-## Python的海象运算符的使用时机与方法
+## Python 的海象运算符的使用时机与方法
 
 让我们从看一些示例开始，这些示例中海象运算符可以使你的代码更好。
 
@@ -147,7 +147,7 @@ print(results)
 
 在这个快速教程中，我们讨论了何时应该以及何时不应该使用 Python 的海象运算符。你可以在[GitHub](https://github.com/balapriyac/python-basics/tree/main/walrus-operator)上找到代码示例。
 
-如果你想了解在使用 Python 编程时应该避免的常见陷阱，请阅读[5个常见的 Python 陷阱及如何避免](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)。
+如果你想了解在使用 Python 编程时应该避免的常见陷阱，请阅读[5 个常见的 Python 陷阱及如何避免](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)。
 
 继续编码！
 

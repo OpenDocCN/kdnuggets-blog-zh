@@ -1,10 +1,10 @@
 # 部署你的第一个机器学习 API
 
-> 原文：[https://www.kdnuggets.com/2021/10/deploying-first-machine-learning-api.html](https://www.kdnuggets.com/2021/10/deploying-first-machine-learning-api.html)
+> 原文：[`www.kdnuggets.com/2021/10/deploying-first-machine-learning-api.html`](https://www.kdnuggets.com/2021/10/deploying-first-machine-learning-api.html)
 
-[comments](#comments)
+comments
 
-![](../Images/2cbe3b5c834169f5e6ec43685940f6d7.png)
+![](img/2cbe3b5c834169f5e6ec43685940f6d7.png)
 
 作者提供的图片 | 元素来自 [vectorjuice](https://www.freepik.com/vectorjuice)
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 在这个项目中，我们将学习如何为你的机器学习模型构建应用程序编程接口（API），然后使用简单的代码进行部署。我花了一个小时来学习 FastAPI，五分钟来学习如何将其部署到 Deta 服务器。我们还将使用 Python ***Request*** 在本地服务器和远程服务器上测试我们的 API。让我们深入了解一下我们将在项目中使用的技术。
 
-![](../Images/2cbf7f788c3ca73faca8112f4391667d.png)
+![](img/2cbf7f788c3ca73faca8112f4391667d.png)
 
 作者提供的图片
 
@@ -42,7 +42,7 @@ FastAPI 是一个用于构建 Python API 的快速 Web 框架，它具有更快�
 
 ## 代码
 
-当我学习FastAPI时，我偶然发现了YouTube上的[视频](https://www.youtube.com/watch?v=1zMQBe0l1bM&t=854s&pp=sAQA)，这激励我写了这篇文章。[Sebastián Ramírez](https://dev.to/tiangolo)解释了Fast API是如何工作的，以及它是最快的Python网页框架。我们将编写两个Python文件，一个包含机器学习模型，另一个包含你的API代码。
+当我学习 FastAPI 时，我偶然发现了 YouTube 上的[视频](https://www.youtube.com/watch?v=1zMQBe0l1bM&t=854s&pp=sAQA)，这激励我写了这篇文章。[Sebastián Ramírez](https://dev.to/tiangolo)解释了 Fast API 是如何工作的，以及它是最快的 Python 网页框架。我们将编写两个 Python 文件，一个包含机器学习模型，另一个包含你的 API 代码。
 
 ## 需求
 
@@ -61,33 +61,33 @@ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.1.0
 $ pip install -r requirements.txt
 ```
 
-我们将为这个项目使用一个预训练的NLP模型，因此我们需要从GitHub仓库[https://github.com/explosion/spacy-models](https://github.com/explosion/spacy-models)下载，或者只需运行需求文件，它将自动下载并安装。
+我们将为这个项目使用一个预训练的 NLP 模型，因此我们需要从 GitHub 仓库[`github.com/explosion/spacy-models`](https://github.com/explosion/spacy-models)下载，或者只需运行需求文件，它将自动下载并安装。
 
 ## 机器学习模型
 
-我们将使用预训练的[Spacy](https://www.analyticsvidhya.com/blog/2021/07/creating-data-science-python-package-using-jupyter-notebook/) NLP模型来从文本中提取实体。如果你使用Jupyter notebook，尝试使用*%%writefile*在你的目录中创建Python文件。
+我们将使用预训练的[Spacy](https://www.analyticsvidhya.com/blog/2021/07/creating-data-science-python-package-using-jupyter-notebook/) NLP 模型来从文本中提取实体。如果你使用 Jupyter notebook，尝试使用*%%writefile*在你的目录中创建 Python 文件。
 
-首先，我们加载了NLP模型，然后从CBS [News](https://www.cbsnews.com/news/gabby-thomas-womens-200-meter-bronze-medal-olympics/)文章中提取实体。只需几行代码，你就可以运行你的第一个机器学习模型。你也可以使用相同的方法加载训练好的模型。
+首先，我们加载了 NLP 模型，然后从 CBS [News](https://www.cbsnews.com/news/gabby-thomas-womens-200-meter-bronze-medal-olympics/)文章中提取实体。只需几行代码，你就可以运行你的第一个机器学习模型。你也可以使用相同的方法加载训练好的模型。
 
-## API文件
+## API 文件
 
 这是你的主文件，其中包含：
 
 1.  **read_main**：使用***GET***，**它从资源请求数据，在我们的例子中，它将显示一条消息，说***欢迎***。**
 
-1.  **class Article**：使用*pydantic* ***BaseModel*** **来定义将用于你的API的对象和变量 [(helpmanual.io)](https://pydantic-docs.helpmanual.io/usage/models/)。在我们的例子中，我们将内容定义为字符串，将评论定义为字符串列表。**
+1.  **class Article**：使用*pydantic* ***BaseModel*** **来定义将用于你的 API 的对象和变量 [(helpmanual.io)](https://pydantic-docs.helpmanual.io/usage/models/)。在我们的例子中，我们将内容定义为字符串，将评论定义为字符串列表。**
 
-1.  **analyze_article**：它接受一个包含评论的文本列表，并使用来自ml文件的*NLP*对象显示实体。
+1.  **analyze_article**：它接受一个包含评论的文本列表，并使用来自 ml 文件的*NLP*对象显示实体。
 
 *我知道这很复杂，所以让我们将其分解成更小的部分以便更好地理解。*
 
 ## 拆解
 
-我们创建了一个FastAPI对象，然后使用它作为[装饰器](https://www.python.org/dev/peps/pep-0318/)在你的函数上，使用***@app.get(“/”)***。
+我们创建了一个 FastAPI 对象，然后使用它作为[装饰器](https://www.python.org/dev/peps/pep-0318/)在你的函数上，使用***@app.get(“/”)***。
 
-+   **@app** 是你FastAPI对象的装饰器
++   **@app** 是你 FastAPI 对象的装饰器
 
-+   **.get 或 .post** 是返回数据或处理输入的HTTP方法
++   **.get 或 .post** 是返回数据或处理输入的 HTTP 方法
 
 +   **(“/”)** 是网页服务器上的位置。在我们的例子中，它是主页。如果你想添加另一个目录，你可以使用（"/<new_section>/"）
 
@@ -133,20 +133,20 @@ cd ~”/FastAPI-ML-Project”
 
 **Deta** 所需的三个主要文件是***ml.py***、***main.py*** 和 ***requirments.txt***。
 
-![](../Images/a28c7a037b60b7d3cc2860e2d16fd698.png)
+![](img/a28c7a037b60b7d3cc2860e2d16fd698.png)
 
 作者提供的图像 | 项目目录
 
 如果你使用**Windows**，请在 PowerShell 中使用以下命令下载并安装 Deta CLI。
 
 ```py
-iwr [https://get.deta.dev/cli.ps1](https://get.deta.dev/cli.ps1) -useb | iex
+iwr [`get.deta.dev/cli.ps1`](https://get.deta.dev/cli.ps1) -useb | iex
 ```
 
 对于**Linux**
 
 ```py
-curl -fsSL [https://get.deta.dev/cli.sh](https://get.deta.dev/cli.sh) | sh
+curl -fsSL [`get.deta.dev/cli.sh`](https://get.deta.dev/cli.sh) | sh
 ```
 
 然后使用***deta login***，它会带你到浏览器并要求你输入*用户名*和*密码*。如果你已经登录，它会在几秒钟内完成认证。
@@ -155,7 +155,7 @@ curl -fsSL [https://get.deta.dev/cli.sh](https://get.deta.dev/cli.sh) | sh
 deta login
 ```
 
-![](../Images/b9199c02fe614b513f6be456b2f9490e.png)
+![](img/b9199c02fe614b513f6be456b2f9490e.png)
 
 Deta 认证 | [deta](https://www.deta.sh/)
 
@@ -165,7 +165,7 @@ Deta 认证 | [deta](https://www.deta.sh/)
 deta new
 ```
 
-你的应用程序已上传到一个终点链接。在我们的例子中是 [https://93t2gn.deta.dev/](https://93t2gn.deta.dev/)
+你的应用程序已上传到一个终点链接。在我们的例子中是 [`93t2gn.deta.dev/`](https://93t2gn.deta.dev/)
 
 ```py
 Successfully created a new micro{“name”: “FastAPI-ML-Project”,“runtime”: “python3.7”,“endpoint”: “https://93t2gn.deta.dev/",“visor”: “enabled”,“http_auth”: “disable”}Adding dependencies…Collecting fastapi…Successfully installed ……
@@ -175,13 +175,13 @@ Successfully created a new micro{“name”: “FastAPI-ML-Project”,“runtime
 
 如你所见，我们的应用已在 Deta 服务器上部署并运行。
 
-![](../Images/a8291c87931808399adc386616b0dd5d.png)
+![](img/a8291c87931808399adc386616b0dd5d.png)
 
 项目总结 | [deta](https://www.deta.sh/)
 
 你可以访问**Deta**提供的链接自行查看。
 
-![](../Images/d12e8abad67122f1150250b063d9be31.png)
+![](img/d12e8abad67122f1150250b063d9be31.png)
 
 作者提供的图像
 
@@ -211,11 +211,11 @@ Successfully created a new micro{“name”: “FastAPI-ML-Project”,“runtime
 
 **相关：**
 
-+   [用于数据科学项目的 Python APIs](/2021/09/python-apis-data-science-project.html)
++   用于数据科学项目的 Python APIs
 
-+   [使用 Flask 构建 RESTful APIs](/2021/05/building-restful-apis-flask.html)
++   使用 Flask 构建 RESTful APIs
 
-+   [使用 FastAPI 和 spaCy 构建生产就绪的机器学习 NLP API](/2021/04/production-ready-machine-learning-nlp-api-fastapi-spacy.html)
++   使用 FastAPI 和 spaCy 构建生产就绪的机器学习 NLP API
 
 ### 更多相关话题
 
@@ -223,9 +223,9 @@ Successfully created a new micro{“name”: “FastAPI-ML-Project”,“runtime
 
 +   [学习数据科学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一桩90亿美元的人工智能失败案例，经过分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一桩 90 亿美元的人工智能失败案例，经过分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [是什么让 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 

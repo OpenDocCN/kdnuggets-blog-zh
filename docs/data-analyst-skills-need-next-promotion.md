@@ -1,8 +1,8 @@
 # 数据分析师技能，助你晋升的必备技能
 
-> 原文：[https://www.kdnuggets.com/2022/09/data-analyst-skills-need-next-promotion.html](https://www.kdnuggets.com/2022/09/data-analyst-skills-need-next-promotion.html)
+> 原文：[`www.kdnuggets.com/2022/09/data-analyst-skills-need-next-promotion.html`](https://www.kdnuggets.com/2022/09/data-analyst-skills-need-next-promotion.html)
 
-![数据分析师技能，助你晋升的必备技能](../Images/c2264d8ca6af465ed769b7e2664a4808.png)
+![数据分析师技能，助你晋升的必备技能](img/c2264d8ca6af465ed769b7e2664a4808.png)
 
 [图片来源：storyset](https://www.freepik.com/free-vector/growth-analytics-concept-illustration_8672702.htm#query=analytics&position=23&from_view=search) on Freepik
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 我首先要承认，这个话题在许多不同的平台上已经被反复讨论过了。那么，我能提供什么是之前未曾提及的呢？
 
-好吧，事实是，我比大多数Medium作者都要年长。虽然有些人礼貌地称我为“成熟”或“经验丰富”，但实际上我的观点是因为我足够长时间地经历了荧光色和渐变色在条形图上流行的时期。因此，我能提供的是经得起时间考验的建议。
+好吧，事实是，我比大多数 Medium 作者都要年长。虽然有些人礼貌地称我为“成熟”或“经验丰富”，但实际上我的观点是因为我足够长时间地经历了荧光色和渐变色在条形图上流行的时期。因此，我能提供的是经得起时间考验的建议。
 
 # 数据可视化
 
@@ -42,7 +42,7 @@
 
 清理数据很重要，因为未清理的数据可能会产生误导性的模式，并导致错误的结论。在我职业生涯早期，我负责提供第一次尝试解决问题的支持电话的百分比。当我向管理层展示结果时，其中一位坚持认为这些数字“没有意义”。当我进一步调查时，我发现电话数据中有一列叫做“status”，有时会填入一个“X”。显然，系统会为测试记录记录一个“X”，这应该被忽略。
 
-数据清理技能随着实践和业务经验的增长而提高，这使得加速学习变得困难。一般来说，像 [kaggle.com](https://www.kaggle.com/) 或 [zindi](https://zindi.africa/) 这样的网站并不是练习数据清理的最佳场所，因为它们专注于数据科学，数据集通常已经相当干净。另一方面，像 [https://data.ca.gov/](https://data.ca.gov/) 或 [https://data.gov/](https://data.gov/) 这样的政府网站是找到杂乱数据集的好地方。你也可以关注 [TidyTuesday](https://github.com/rfordatascience/tidytuesday) 项目，即使你不是 R 用户，也可以找到有趣的数据集，并熟悉实际中清理数据的步骤。
+数据清理技能随着实践和业务经验的增长而提高，这使得加速学习变得困难。一般来说，像 [kaggle.com](https://www.kaggle.com/) 或 [zindi](https://zindi.africa/) 这样的网站并不是练习数据清理的最佳场所，因为它们专注于数据科学，数据集通常已经相当干净。另一方面，像 [`data.ca.gov/`](https://data.ca.gov/) 或 [`data.gov/`](https://data.gov/) 这样的政府网站是找到杂乱数据集的好地方。你也可以关注 [TidyTuesday](https://github.com/rfordatascience/tidytuesday) 项目，即使你不是 R 用户，也可以找到有趣的数据集，并熟悉实际中清理数据的步骤。
 
 # SQL
 
@@ -50,9 +50,9 @@
 
 如果你在一家允许下载 Excel 表格的公司工作——可以询问是否可以直接使用 SQL 访问数据库。一旦你熟悉了数据库结构，并能编写 SQL 以获取你想要的数据表示形式，你的工作效率和质量将会提升。
 
-有许多资源可以帮助你提升SQL技能，[CodeAcademy](https://www.codecademy.com/learn/learn-sql)、[Udemy](https://www.udemy.com/topic/sql/free/)和[Udacity](https://www.udacity.com/course/sql-for-data-analysis--ud198)都是寻找实践课程的绝佳免费资源。[SQL Generator](https://app.rasgoml.com/sql)和[SQL Beautifier](https://codebeautify.org/sqlformatter)是值得常备的有用链接，可以帮助你学习。如果遇到技术问题，[Stack Overflow](https://stackoverflow.com/questions/tagged/sql?tab=Active)有一个很棒的社区可以回答SQL相关的问题。
+有许多资源可以帮助你提升 SQL 技能，[CodeAcademy](https://www.codecademy.com/learn/learn-sql)、[Udemy](https://www.udemy.com/topic/sql/free/)和[Udacity](https://www.udacity.com/course/sql-for-data-analysis--ud198)都是寻找实践课程的绝佳免费资源。[SQL Generator](https://app.rasgoml.com/sql)和[SQL Beautifier](https://codebeautify.org/sqlformatter)是值得常备的有用链接，可以帮助你学习。如果遇到技术问题，[Stack Overflow](https://stackoverflow.com/questions/tagged/sql?tab=Active)有一个很棒的社区可以回答 SQL 相关的问题。
 
-在Rasgo，我们一直在大力回馈数据社区。我们最近的项目是推出免费的[SQL Generator](https://app.rasgoml.com/sql)，它生成特定数据转换所需的SQL语法。我们发现人们在Google和Stack Overflow上搜索所需的SQL语法——浪费了大量本可以用于数据分析的时间。SQL Generator是一个SQL查询模板，可以让你自定义列名和表结构，选择你想执行的操作，然后为你构建各种不同“风格”的SQL语法。再也不用担心DATEDIFF()与DATE_DIFF()之间的细微差别了！阅读[这篇文章](https://towardsdatascience.com/top-5-bookmarks-every-data-analyst-should-have-547a2c9ad1fe)了解一些其他有用的在线工具。
+在 Rasgo，我们一直在大力回馈数据社区。我们最近的项目是推出免费的[SQL Generator](https://app.rasgoml.com/sql)，它生成特定数据转换所需的 SQL 语法。我们发现人们在 Google 和 Stack Overflow 上搜索所需的 SQL 语法——浪费了大量本可以用于数据分析的时间。SQL Generator 是一个 SQL 查询模板，可以让你自定义列名和表结构，选择你想执行的操作，然后为你构建各种不同“风格”的 SQL 语法。再也不用担心 DATEDIFF()与 DATE_DIFF()之间的细微差别了！阅读[这篇文章](https://towardsdatascience.com/top-5-bookmarks-every-data-analyst-should-have-547a2c9ad1fe)了解一些其他有用的在线工具。
 
 # 批判性思维
 
@@ -88,7 +88,7 @@
 
 +   二月是一年中最短的月份。
 
-+   使用替代公式计算流失率表明，3月份的流失率*没有*增加。
++   使用替代公式计算流失率表明，3 月份的流失率*没有*增加。
 
 基本上，流失率的公式使得它在一年中最短的月份，也就是三月，会“激增”，这仅仅是因为数学运算的结果。
 
@@ -104,9 +104,9 @@
 
 # 结论
 
-关注最新趋势并提升让你具有市场竞争力的技能仍然很重要。例如，20年前VBA、宏、DAX和ASP是提升晋升竞争力的优秀技能。如今，这些技能的相关性较低。希望我提供了一些关于过去20年中*未曾*改变的技能的有用建议，以帮助你避免迷失在细节中。如果你想联系我讨论旧时光，你可以在[Locally Optimistic](https://locallyoptimistic.com/community/)和[DataTalks.Club](https://datatalks.club/)找到我，或直接在[Rasgo](https://rasgousergroup.slack.com/)上联系我。
+关注最新趋势并提升让你具有市场竞争力的技能仍然很重要。例如，20 年前 VBA、宏、DAX 和 ASP 是提升晋升竞争力的优秀技能。如今，这些技能的相关性较低。希望我提供了一些关于过去 20 年中*未曾*改变的技能的有用建议，以帮助你避免迷失在细节中。如果你想联系我讨论旧时光，你可以在[Locally Optimistic](https://locallyoptimistic.com/community/)和[DataTalks.Club](https://datatalks.club/)找到我，或直接在[Rasgo](https://rasgousergroup.slack.com/)上联系我。
 
-**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee)) 领导Rasgo的客户面向数据科学工作，自2008年起从事数据和分析职业。Josh在Comcast工作了10年，建立了数据科学团队，并是内部开发的Comcast功能存储的主要负责人之一——这是市场上最早的功能存储之一。离开Comcast后，Josh在DataRobot中对客户面向数据科学的发展起到了关键作用。在业余时间，Josh对有趣的话题如棒球、F1赛车、房地产市场预测等进行复杂分析。
+**[Josh Berry](https://www.linkedin.com/in/joshberry022/)** ([**@Twitter**](https://mobile.twitter.com/itsamejoshabee)) 领导 Rasgo 的客户面向数据科学工作，自 2008 年起从事数据和分析职业。Josh 在 Comcast 工作了 10 年，建立了数据科学团队，并是内部开发的 Comcast 功能存储的主要负责人之一——这是市场上最早的功能存储之一。离开 Comcast 后，Josh 在 DataRobot 中对客户面向数据科学的发展起到了关键作用。在业余时间，Josh 对有趣的话题如棒球、F1 赛车、房地产市场预测等进行复杂分析。
 
 [原文](https://towardsdatascience.com/data-analyst-skills-you-need-for-your-next-promotion-479275b80bad)。经许可转载。
 
@@ -118,8 +118,8 @@
 
 +   [想利用你的数据技能解决全球问题？这里是…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [提升你的数据科学技能：你需要的关键SQL认证](https://www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need)
++   [提升你的数据科学技能：你需要的关键 SQL 认证](https://www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need)
 
-+   [你可能在下次面试中遇到的24个SQL问题](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)
++   [你可能在下次面试中遇到的 24 个 SQL 问题](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)
 
-+   [数据科学基础：你需要了解的10项核心技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：你需要了解的 10 项核心技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)

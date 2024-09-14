@@ -1,6 +1,6 @@
 # 机器学习中的数据准备和原始数据
 
-> 原文：[https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html`](https://www.kdnuggets.com/2022/07/data-preparation-raw-data-machine-learning.html)
 
 随着可用数据量的巨大，分析和机器学习（ML）越来越多地被用来提取可以用于多种不同用途的关键信息。
 
@@ -10,17 +10,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 在这篇文章中，我将描述机器学习的数据准备技术。
 
-![机器学习中的数据准备和原始数据](../Images/7b8f7e512cc2844656d9402e9feb851b.png)
+![机器学习中的数据准备和原始数据](img/7b8f7e512cc2844656d9402e9feb851b.png)
 
 # 原始数据
 
@@ -40,7 +40,7 @@
 
 你用来构建模型的数据类型对模型的结果有很大影响。如果数据存在小的偏差或缺失信息，那么它可能会对模型的准确性产生很大影响。因此，拥有高质量的数据以用于训练模型是至关重要的。
 
-实际上，研究人员发现80%的数据工程工作都投入在数据准备上。因此，数据挖掘领域非常重视开发获取高质量数据的技术。 （张世超，张成奇，杨强，2003）
+实际上，研究人员发现 80%的数据工程工作都投入在数据准备上。因此，数据挖掘领域非常重视开发获取高质量数据的技术。 （张世超，张成奇，杨强，2003）
 
 数据准备在以下三个方面至关重要：
 
@@ -80,7 +80,7 @@
 
 传统的数据预处理和准备工作是劳动密集型的、成本高昂且容易出错的；机器学习（ML）算法可以通过从大量、多样化和实时的数据集中学习来减少这种依赖。 （Bhatnagar, Roheet, 2018）
 
-![数据准备涉及的任务](../Images/9139accd74e2d6058a04803b20a3a4b6.png)
+![数据准备涉及的任务](img/9139accd74e2d6058a04803b20a3a4b6.png)
 
 图 1 数据准备涉及的任务（来源（García, S., Ramírez-Gallego, S., Luengo, J., 2016））
 
@@ -118,7 +118,7 @@
 
 +   张世超、张成奇、杨强. (2003). 数据挖掘的数据准备。*应用人工智能*, 375-381。
 
-**[尼拉吉·阿加瓦尔](https://www.linkedin.com/in/neeagl/)** 是 [Algoscale](https://www.linkedin.com/company/algoscale) 的创始人，这是一家涵盖数据工程、应用人工智能、数据科学和产品工程的数据咨询公司。他在该领域拥有超过9年的经验，曾帮助从初创公司到财富100强企业的各种组织摄取和存储大量原始数据，以便将其转化为可操作的见解，从而实现更好的决策和更快的业务价值。
+**[尼拉吉·阿加瓦尔](https://www.linkedin.com/in/neeagl/)** 是 [Algoscale](https://www.linkedin.com/company/algoscale) 的创始人，这是一家涵盖数据工程、应用人工智能、数据科学和产品工程的数据咨询公司。他在该领域拥有超过 9 年的经验，曾帮助从初创公司到财富 100 强企业的各种组织摄取和存储大量原始数据，以便将其转化为可操作的见解，从而实现更好的决策和更快的业务价值。
 
 ### 更多相关话题
 
@@ -128,8 +128,8 @@
 
 +   [学习数据科学、机器学习和深度学习的切实计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 
-+   [每位机器学习工程师都应该掌握的5种机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每位机器学习工程师都应该掌握的 5 种机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)

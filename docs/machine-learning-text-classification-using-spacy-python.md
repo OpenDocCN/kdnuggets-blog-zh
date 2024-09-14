@@ -1,12 +1,12 @@
-# 使用Python中的SpaCy进行文本分类的机器学习
+# 使用 Python 中的 SpaCy 进行文本分类的机器学习
 
-> 原文：[https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html](https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html)
+> 原文：[`www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html`](https://www.kdnuggets.com/2018/09/machine-learning-text-classification-using-spacy-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[苏珊·李](https://www.linkedin.com/in/susanli/)，高级数据科学家**
 
-![](../Images/3a2a3fd1fc3eb06d222d6d97d671af34.png)
+![](img/3a2a3fd1fc3eb06d222d6d97d671af34.png)
 
 图片来源: Pixabay
 
@@ -14,15 +14,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-[**spaCy**](https://spacy.io/) 是一个流行且易于使用的Python自然语言处理库。它提供了当前最先进的准确性和速度水平，并且拥有一个活跃的开源社区。然而，由于SpaCy是一个相对较新的NLP库，它的采用程度还不及[NLTK](https://www.nltk.org/)，目前还没有足够的教程可用。
+[**spaCy**](https://spacy.io/) 是一个流行且易于使用的 Python 自然语言处理库。它提供了当前最先进的准确性和速度水平，并且拥有一个活跃的开源社区。然而，由于 SpaCy 是一个相对较新的 NLP 库，它的采用程度还不及[NLTK](https://www.nltk.org/)，目前还没有足够的教程可用。
 
 在这篇文章中，我们将演示如何使用**spaCy**实现文本分类，而无需具备深度学习经验。
 
@@ -52,9 +52,9 @@ df = pd.read_csv('research_paper.csv')
 df.head()
 ```
 
-![](../Images/7cb37c05ce0f5fd380d2409869cf075d.png)
+![](img/7cb37c05ce0f5fd380d2409869cf075d.png)
 
-图1
+图 1
 
 没有缺失值。
 
@@ -88,7 +88,7 @@ print('Testing Data Shape:', test.shape)
 
 测试数据形状: (828, 2)***
 
-数据集包含2507个短篇研究论文标题，这些标题被分类为5个类别（按会议）。下图总结了不同会议的研究论文分布。
+数据集包含 2507 个短篇研究论文标题，这些标题被分类为 5 个类别（按会议）。下图总结了不同会议的研究论文分布。
 
 ```py
 fig = plt.figure(figsize=(8,4))
@@ -96,9 +96,9 @@ sns.barplot(x = train['Conference'].unique(), y=train['Conference'].value_counts
 plt.show()
 ```
 
-![](../Images/0fa7a75a8554ccf261e93194b240b830.png)
+![](img/0fa7a75a8554ccf261e93194b240b830.png)
 
-图2
+图 2
 
 以下是使用 SpaCy 进行文本预处理的一种方法。之后，我们尝试找出提交至第一类和第二类（会议）INFOCOM 和 ISCAS 的论文中使用的最常见词汇。
 
@@ -145,7 +145,7 @@ plt.show()
 
 ```
 
-![](../Images/6d498603d0b0758a634d9ceb97feab17.png)
+![](img/6d498603d0b0758a634d9ceb97feab17.png)
 
 图 3
 
@@ -159,7 +159,7 @@ plt.title('Most Common Words used in the research papers for conference ISCAS')
 plt.show()
 ```
 
-![](../Images/e75d42312b46612d80c687bfbbdd0ba6.png)
+![](img/e75d42312b46612d80c687bfbbdd0ba6.png)
 
 图 4
 
@@ -341,11 +341,11 @@ avg / total       0.75      0.75      0.75       828
 
 **相关内容：**
 
-+   [使用 Scikit-Learn 的多分类文本分类](/2018/08/multi-class-text-classification-scikit-learn.html)
++   使用 Scikit-Learn 的多分类文本分类
 
-+   [LSA、PLSA、LDA 和 lda2Vec 的主题建模](/2018/08/topic-modeling-lsa-plsa-lda-lda2vec.html)
++   LSA、PLSA、LDA 和 lda2Vec 的主题建模
 
-+   [自然语言处理技巧：开始使用 NLP](/2018/06/getting-started-natural-language-processing.html)
++   自然语言处理技巧：开始使用 NLP
 
 ### 更多相关主题
 

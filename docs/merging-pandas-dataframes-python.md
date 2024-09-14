@@ -1,12 +1,12 @@
 # 在 Python 中合并 Pandas DataFrames
 
-> 原文：[https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html](https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html)
+> 原文：[`www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html`](https://www.kdnuggets.com/2020/12/merging-pandas-dataframes-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Dean McGrath](https://deanjmcgrath.com/), 渴望成为数据分析师**
 
-![Figure](../Images/145f203ebc56525355843ed2542e415c.png)
+![Figure](img/145f203ebc56525355843ed2542e415c.png)
 
 图片由 [MILKOVÍ](https://unsplash.com/@milkovi?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -68,7 +68,7 @@ Pandas 内置的 `.merge()` 函数提供了一种强大的方法，通过数据�
 
 上面的 Python 代码片段创建了两个 DataFrame，你可以使用它们来继续以下示例。
 
-![图示](../Images/14f1e8a1218cd26caaa194c2f1daa91d.png)
+![图示](img/14f1e8a1218cd26caaa194c2f1daa91d.png)
 
 上面的控制台输出显示了执行 Python 代码片段以创建两个 DataFrame 的结果。
 
@@ -78,7 +78,7 @@ Pandas 内置的 `.merge()` 函数提供了一种强大的方法，通过数据�
 
 上面的 Python 代码片段演示了如何使用内连接来连接两个 DataFrame。
 
-![图示](../Images/fb30de3a07289cc89207e1155dae615d.png)
+![图示](img/fb30de3a07289cc89207e1155dae615d.png)
 
 上面的图片显示了内连接两个 DataFrame 后的控制台输出。
 
@@ -90,7 +90,7 @@ Pandas 的左连接函数类似于 SQL 中的左外连接。返回的 DataFrame 
 
 上面的 Python 代码片段展示了使用左连接来合并两个 DataFrame 的语法。
 
-![图示](../Images/89a582d52861273215519cbaac38d1d1.png)
+![图示](img/89a582d52861273215519cbaac38d1d1.png)
 
 上面的截图显示了使用左连接合并两个 DataFrame 的控制台输出。
 
@@ -102,7 +102,7 @@ Pandas 右连接执行的功能类似于左连接，但连接方法应用于右�
 
 上面的 Python 代码片段展示了使用 Pandas 右连接合并两个 DataFrame 的语法。
 
-![图示](../Images/64ae2e7853d6cde563c7b5860c3316bd.png)
+![图示](img/64ae2e7853d6cde563c7b5860c3316bd.png)
 
 上面的截图显示了使用右连接合并两个 DataFrame 的结果。
 
@@ -114,7 +114,7 @@ Pandas 外连接合并两个 DataFrame，并本质上反映了左外连接和右
 
 上面的 Python 代码片段展示了使用外连接连接两个 DataFrame 的语法。
 
-![图示](../Images/a13036a5997863b5d3cc1aa8e5201a32.png)
+![图示](img/a13036a5997863b5d3cc1aa8e5201a32.png)
 
 上面的截图显示了使用外连接合并两个 DataFrame 的结果。
 
@@ -132,11 +132,11 @@ Pandas 外连接合并两个 DataFrame，并本质上反映了左外连接和右
 
 **相关内容：**
 
-+   [Pandas 升级版：使用 Dask 完成端到端的数据科学](/2020/11/pandas-steroids-dask-python-data-science.html)
++   Pandas 升级版：使用 Dask 完成端到端的数据科学
 
-+   [每个复杂的 DataFrame 操作，直观解释与可视化](/2020/11/dataframe-manipulation-explained-visualized.html)
++   每个复杂的 DataFrame 操作，直观解释与可视化
 
-+   [10 个被低估的 Python 技能](/2020/10/10-underrated-python-skills.html)
++   10 个被低估的 Python 技能
 
 ### 更多相关话题
 

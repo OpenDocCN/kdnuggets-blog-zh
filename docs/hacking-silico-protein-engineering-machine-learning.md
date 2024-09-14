@@ -1,28 +1,28 @@
 # 使用机器学习和人工智能解释计算蛋白质工程。
 
-> 原文：[https://www.kdnuggets.com/2017/07/hacking-silico-protein-engineering-machine-learning.html](https://www.kdnuggets.com/2017/07/hacking-silico-protein-engineering-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2017/07/hacking-silico-protein-engineering-machine-learning.html`](https://www.kdnuggets.com/2017/07/hacking-silico-protein-engineering-machine-learning.html)
 
 **由[Kamil Tamiola](https://www.linkedin.com/in/ktamiola) 创办的 Peptone**。
 
 ### 蛋白质
 
-可以安全地说，蛋白质是**构建块**和定义**生命物质**的机制。在过去70年里，在蛋白质的分离、生产、特征化和最终工程方面取得了巨大的进展。尽管在实验室和工业规模的蛋白质生产方面取得了巨大进步，但蛋白质工程及所有相关步骤仍然是**繁琐、昂贵**且真正**复杂的**。
+可以安全地说，蛋白质是**构建块**和定义**生命物质**的机制。在过去 70 年里，在蛋白质的分离、生产、特征化和最终工程方面取得了巨大的进展。尽管在实验室和工业规模的蛋白质生产方面取得了巨大进步，但蛋白质工程及所有相关步骤仍然是**繁琐、昂贵**且真正**复杂的**。
 
 ### 蛋白质是**聚合物**
 
-蛋白质是由**20种构建块**氨基酸组成的复杂生物分子，这些氨基酸按顺序连接成长的非分支链，通常称为多肽链。
+蛋白质是由**20 种构建块**氨基酸组成的复杂生物分子，这些氨基酸按顺序连接成长的非分支链，通常称为多肽链。
 
 多肽链的独特**空间排列**产生**三维分子**结构，这些结构定义了蛋白质的功能及其与其他生物分子的相互作用。
 
-尽管**蛋白质**三维结构形成的基本**力**已经**已知**并**理解**，但多肽**折叠**的确切性质仍然难以捉摸，并且在过去50年中已经进行了广泛的研究。
+尽管**蛋白质**三维结构形成的基本**力**已经**已知**并**理解**，但多肽**折叠**的确切性质仍然难以捉摸，并且在过去 50 年中已经进行了广泛的研究。
 
 ### 蛋白质工程是**复杂的**
 
 我们希望工程化蛋白质以增强其属性。通常，关注点是不同**温度、pH**或**盐度**下的稳定性。研究人员通常旨在提高蛋白质酶的**催化性能**，或向已知蛋白质中添加全新的**化学活性**。
 
-工程化蛋白质最常见且成熟的方法是通过用替代氨基酸创建其**变体**，这些变体也称为突变体。随后，使用各种实验技术对新产生的突变体进行特征化，以测量增强的程度；例如，扫描量热法、等电点测定、简单溶解度研究或高级酶活性测定。然而，由于存在**20种标准**蛋白质氨基酸，如果你决定探索所有可能的典型蛋白质氨基酸组合，那么100残基长的多肽的完全突变将产生**20^(100)**种突变组合。
+工程化蛋白质最常见且成熟的方法是通过用替代氨基酸创建其**变体**，这些变体也称为突变体。随后，使用各种实验技术对新产生的突变体进行特征化，以测量增强的程度；例如，扫描量热法、等电点测定、简单溶解度研究或高级酶活性测定。然而，由于存在**20 种标准**蛋白质氨基酸，如果你决定探索所有可能的典型蛋白质氨基酸组合，那么 100 残基长的多肽的完全突变将产生**20¹⁰⁰**种突变组合。
 
-![](../Images/56a15e41aaab6fffe9fdd87451cdc215.png)
+![](img/56a15e41aaab6fffe9fdd87451cdc215.png)
 
 相当可能，只有极少数的突变体会具有期望的属性，因为通常**改变蛋白质越多，你就越远离其原始功能**。
 
@@ -42,7 +42,7 @@
 
 机器学习方法在预测蛋白质生物物理属性中的最大**价值**在于它们能够将松散相关的蛋白质**特征**与可测量的**实验**数据“**等同**”起来。因此，利用复杂数值模型进行的预测可以通过提供独立的蛋白质结构和动态的实验代理进一步调整和优化。
 
-![protein](../Images/bea74abd387aaa5e6297d3f8d246136e.png)
+![protein](img/bea74abd387aaa5e6297d3f8d246136e.png)
 
 ### 蛋白质是动态的，并表现出不同程度的无序。
 
@@ -58,7 +58,7 @@
 
 从工业生物技术的角度来看，准确识别工程蛋白质中氨基酸突变的无序效应可以节省大量时间和资源。对任意蛋白质突变体的准确无序预测可以立即报告氨基酸序列的有问题的组合，从而将这些残基排除在进一步的突变分析之外，并大幅减少突变搜索空间。
 
-阅读更多内容，始于[**单一蛋白质结构模型不够**](https://www.linkedin.com/pulse/hacking-silico-protein-engineering-role-order-disorder-kamil-tamiola)的Kamil Tamiola文章。转载了初始部分，已获得许可。
+阅读更多内容，始于[**单一蛋白质结构模型不够**](https://www.linkedin.com/pulse/hacking-silico-protein-engineering-role-order-disorder-kamil-tamiola)的 Kamil Tamiola 文章。转载了初始部分，已获得许可。
 
 **简介：[卡米尔·塔米奥拉](https://www.linkedin.com/in/ktamiola/)** 是一位企业家和研究人员，拥有广泛的超级计算和蛋白质结构生物物理学的科学背景。
 
@@ -66,24 +66,24 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，11月16日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
 +   [机器学习关键术语解释](https://www.kdnuggets.com/2016/05/machine-learning-key-terms-explained.html)
 
-+   [解释的7个最佳机器学习库](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
++   [解释的 7 个最佳机器学习库](https://www.kdnuggets.com/2023/01/7-best-libraries-machine-learning-explained.html)
 
-+   [5分钟内解释的5种机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
++   [5 分钟内解释的 5 种机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
 
-+   [每个机器学习算法解释在1分钟内](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
++   [每个机器学习算法解释在 1 分钟内](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法解释…](https://www.kdnuggets.com/2022/n29.html)

@@ -1,8 +1,8 @@
-# 8个开源替代ChatGPT和Bard
+# 8 个开源替代 ChatGPT 和 Bard
 
-> 原文：[https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
+> 原文：[`www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html`](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
 
-![8个开源替代ChatGPT和Bard](../Images/a2e5643af552ce470bbbdfae6a562743.png)
+![8 个开源替代 ChatGPT 和 Bard](img/a2e5643af552ce470bbbdfae6a562743.png)
 
 图片来源：作者
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
-[LLaMA](https://arxiv.org/abs/2302.13971) 项目包括一组基础语言模型，参数规模从70亿到650亿不等。这些模型在数百万个标记上进行了训练，且仅使用公开可用的数据集。因此，LLaMA-13B 超过了 GPT-3 (175B)，而 LLaMA-65B 的表现则与 Chinchilla-70B 和 PaLM-540B 等最佳模型相当。
+[LLaMA](https://arxiv.org/abs/2302.13971) 项目包括一组基础语言模型，参数规模从 70 亿到 650 亿不等。这些模型在数百万个标记上进行了训练，且仅使用公开可用的数据集。因此，LLaMA-13B 超过了 GPT-3 (175B)，而 LLaMA-65B 的表现则与 Chinchilla-70B 和 PaLM-540B 等最佳模型相当。
 
-![8个开源替代ChatGPT和Bard](../Images/90ba0e0c93caae0a278d5a6fad77384c.png)
+![8 个开源替代 ChatGPT 和 Bard](img/90ba0e0c93caae0a278d5a6fad77384c.png)
 
 图片来自 [LLaMA](https://arxiv.org/abs/2302.13971)
 
@@ -38,7 +38,7 @@
 
 斯坦福 [Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html) 声称它可以与 ChatGPT 竞争，任何人都可以用不到 600$ 复制。Alpaca 7B 是从 LLaMA 7B 模型在 52K 指令跟随演示上进行微调的。
 
-![8个开源替代ChatGPT和Bard](../Images/60ffb50f39a318ece225f0d288473b80.png)
+![8 个开源替代 ChatGPT 和 Bard](img/60ffb50f39a318ece225f0d288473b80.png)
 
 训练配方 | 图片来自 [斯坦福 CRFM](https://crfm.stanford.edu/2023/03/13/alpaca.html)
 
@@ -54,7 +54,7 @@
 
 [Vicuna](https://vicuna.lmsys.org/) 是从 LLaMA 模型在 [ShareGPT](https://sharegpt.com/) 收集的用户共享对话上进行微调的。模型 Vicuna-13B 达到了超过 90%* 的 OpenAI ChatGPT 和 Google Bard 质量。它在 90% 的情况下也超越了 LLaMA 和斯坦福 Alpaca 模型。训练 Vicuna 的成本约为 300$。
 
-![8 个开源替代品，代替 ChatGPT 和 Bard](../Images/4e49e3c4c6f80310070ddf7de4694914.png)
+![8 个开源替代品，代替 ChatGPT 和 Bard](img/4e49e3c4c6f80310070ddf7de4694914.png)
 
 图片来自 [Vicuna](https://vicuna.lmsys.org/)
 
@@ -68,9 +68,9 @@
 
 # 4\. OpenChatKit
 
-[OpenChatKit: 开源 ChatGPT 替代品](/2023/03/openchatkit-opensource-chatgpt-alternative.html) 是一个完整的工具包，用于创建你的聊天机器人。它提供了训练自己定制化大语言模型的说明、模型微调、可扩展的检索系统用于更新机器人响应，以及用于过滤问题的机器人管理。
+OpenChatKit: 开源 ChatGPT 替代品 是一个完整的工具包，用于创建你的聊天机器人。它提供了训练自己定制化大语言模型的说明、模型微调、可扩展的检索系统用于更新机器人响应，以及用于过滤问题的机器人管理。
 
-![8 个开源替代品，代替 ChatGPT 和 Bard](../Images/468f34c99053ce78c84dabf1bb795862.png)
+![8 个开源替代品，代替 ChatGPT 和 Bard](img/468f34c99053ce78c84dabf1bb795862.png)
 
 图片来自 [TOGETHER](https://www.together.xyz/blog/openchatkit)
 
@@ -90,7 +90,7 @@
 
 [GPT4ALL](https://github.com/nomic-ai/gpt4all) 是一个社区驱动的项目，经过大量整理的助理交互数据进行训练，包括代码、故事、描写和多轮对话。团队提供了数据集、模型权重、数据整理过程和训练代码，以推动开源。此外，他们还发布了可以在笔记本电脑上运行的量化 4 位版本模型。你甚至可以使用 Python 客户端运行模型推理。
 
-![8 个开源替代品，代替 ChatGPT 和 Bard](../Images/f0c2a201d62329663a470ed885d8cc8c.png)
+![8 个开源替代品，代替 ChatGPT 和 Bard](img/f0c2a201d62329663a470ed885d8cc8c.png)
 
 动图来自 [GPT4ALL](https://github.com/nomic-ai/gpt4all)
 
@@ -108,7 +108,7 @@
 
 [Raven RWKV 7B](https://huggingface.co/spaces/BlinkDL/Raven-RWKV-7B) 是一个开源聊天机器人，采用 [RWKV](https://github.com/BlinkDL/RWKV-LM) 语言模型，该模型的效果与 ChatGPT 类似。该模型使用的 RNN 能在质量和规模上与 transformers 匹敌，同时更快且节省 VRAM。Raven 在 Stanford Alpaca、code-alpaca 等数据集上进行了微调。
 
-![8 个开源 ChatGPT 和 Bard 替代品](../Images/6a01f233c86592bbba3b085143579e8f.png)
+![8 个开源 ChatGPT 和 Bard 替代品](img/6a01f233c86592bbba3b085143579e8f.png)
 
 图像来源于 [Raven RWKV 7B](https://huggingface.co/spaces/BlinkDL/Raven-RWKV-7B)
 
@@ -124,9 +124,9 @@
 
 [OPT](https://arxiv.org/abs/2205.01068)：开放预训练变换器语言模型虽然不如 ChatGPT 优秀，但在零样本和少样本学习以及刻板偏见分析方面表现出色。你还可以将其与 Alpa、Colossal-AI、CTranslate2 和 FasterTransformer 集成，以获得更好的结果。
 
-**注意：** 它在列表中是因为它的受欢迎程度，因为在文本生成类别中每月下载量达到624,710次。
+**注意：** 它在列表中是因为它的受欢迎程度，因为在文本生成类别中每月下载量达到 624,710 次。
 
-![8 个开源 ChatGPT 和 Bard 替代品](../Images/b2d85448eb08edd4b5dcdefd49a1ffb1.png)
+![8 个开源 ChatGPT 和 Bard 替代品](img/b2d85448eb08edd4b5dcdefd49a1ffb1.png)
 
 图像来源于 [(arxiv.org)](https://arxiv.org/abs/2205.01068)
 
@@ -142,9 +142,9 @@
 
 # 8\. Flan-T5-XXL
 
-[Flan-T5-XXL](https://huggingface.co/google/flan-t5-xxl?text=Q%3A+%28+False+or+not+False+or+False+%29+is%3F+A%3A+Let%27s+think+step+by+step#usage) 是在一系列以指令形式呈现的数据集上微调的 T5 模型。指令微调显著提高了多种模型类别（如 PaLM、T5 和 U-PaLM）的性能。Flan-T5-XXL 模型在超过1000个额外任务上进行了微调，还覆盖了更多语言。
+[Flan-T5-XXL](https://huggingface.co/google/flan-t5-xxl?text=Q%3A+%28+False+or+not+False+or+False+%29+is%3F+A%3A+Let%27s+think+step+by+step#usage) 是在一系列以指令形式呈现的数据集上微调的 T5 模型。指令微调显著提高了多种模型类别（如 PaLM、T5 和 U-PaLM）的性能。Flan-T5-XXL 模型在超过 1000 个额外任务上进行了微调，还覆盖了更多语言。
 
-![8 个开源 ChatGPT 和 Bard 替代品](../Images/fcc3022916797e0cf409be15b1274f4c.png)
+![8 个开源 ChatGPT 和 Bard 替代品](img/fcc3022916797e0cf409be15b1274f4c.png)
 
 图像来源于 [Flan-T5-XXL](https://huggingface.co/google/flan-t5-xxl?text=Q%3A+%28+False+or+not+False+or+False+%29+is%3F+A%3A+Let%27s+think+step+by+step#usage)
 

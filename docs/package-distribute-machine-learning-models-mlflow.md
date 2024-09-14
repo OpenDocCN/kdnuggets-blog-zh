@@ -1,6 +1,6 @@
 # 如何使用 MLFlow 打包和分发机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)
+> 原文：[`www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html`](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)
 
 在机器学习模型生命周期开发的每个阶段，协作是一个基本活动。将机器学习模型从构思到部署的过程需要不同角色之间的参与和互动。此外，机器学习模型开发的性质涉及实验、工件和指标的跟踪、模型版本等，这要求有效的组织来正确维护机器学习模型生命周期。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -205,13 +205,13 @@ $ MLflow server --host localhost
 
 当尝试在浏览器中访问 http://localhost 时，将会要求通过创建的用户名和密码进行身份验证。
 
-![登录](../Images/75f7e933ab09a0f7fb49dc4d8a1bcbf1.png)
+![登录](img/75f7e933ab09a0f7fb49dc4d8a1bcbf1.png)
 
 图 1\. 登录
 
 输入凭据后，你将被引导到 MLflow 服务器 UI。
 
-![MLflow 服务器 UI](../Images/ee8980fc7b14bbdc2fb10610bfc24070.png)
+![MLflow 服务器 UI](img/ee8980fc7b14bbdc2fb10610bfc24070.png)
 
 图 2\. MLflow 服务器 UI
 
@@ -219,7 +219,7 @@ $ MLflow server --host localhost
 
 +   定义将包含访问服务器凭证的环境变量，并
 
-+   设置将存储工件的URI。
++   设置将存储工件的 URI。
 
 因此，对于凭证，我们将导出以下环境变量：
 
@@ -228,7 +228,7 @@ $ export MLflow_TRACKING_USERNAME=MLflow-user
 $ export MLflow_TRACKING_PASSWORD=MLflow-password
 ```
 
-一旦定义了环境变量，你只需定义工件存储的服务器URI。
+一旦定义了环境变量，你只需定义工件存储的服务器 URI。
 
 ```py
 import MLflow
@@ -244,29 +244,29 @@ with MLflow.start_run():
 
 执行上述代码片段时，我们可以看到测试指标和参数在服务器上的反映。
 
-![从带有服务器身份验证的客户端服务中存储的指标和参数。](../Images/27b97fd9e33290425f2e3d54daec50bc.png)
+![从带有服务器身份验证的客户端服务中存储的指标和参数。](img/27b97fd9e33290425f2e3d54daec50bc.png)
 
-图3\. 从带有服务器身份验证的客户端服务中存储的指标和参数。
+图 3\. 从带有服务器身份验证的客户端服务中存储的指标和参数。
 
-# 如何注册一个MLflow模型？
+# 如何注册一个 MLflow 模型？
 
-在开发机器学习模型时，一个日常需求是保持模型版本的有序性。为此，MLflow提供了[MLflow注册表](https://mlflow.org/docs/latest/model-registry.html)。
+在开发机器学习模型时，一个日常需求是保持模型版本的有序性。为此，MLflow 提供了[MLflow 注册表](https://mlflow.org/docs/latest/model-registry.html)。
 
-MLflow注册表是一个扩展，有助于：
+MLflow 注册表是一个扩展，有助于：
 
-+   管理每个MLModel的版本并
++   管理每个 MLModel 的版本并
 
-+   记录每个模型在三个不同阶段的演变：归档、*暂存*和*生产。它是* 与git版本系统非常相似。
++   记录每个模型在三个不同阶段的演变：归档、*暂存*和*生产。它是* 与 git 版本系统非常相似。
 
 有四种注册模型的替代方案：
 
-+   通过UI，
++   通过 UI，
 
 +   作为`MLflow.<flavor>.log_model()`的参数，
 
 +   使用`MLflow.register_model()`方法或
 
-+   使用`create_registered_model()`客户端API。
++   使用`create_registered_model()`客户端 API。
 
 在以下示例中，使用`MLflow.<flavor>.log_model()`方法注册模型：
 
@@ -287,7 +287,7 @@ with MLflow.start_run():
    MLflow.sklearn.log_model(model.tree, "MyModel-dt",      registered_model_name="Decision Tree")
 ```
 
-如果这是一个新模型，MLFlow会将其初始化为*版本1*。如果模型已经有版本，它将被初始化为*版本2*（或后续版本）。
+如果这是一个新模型，MLFlow 会将其初始化为*版本 1*。如果模型已经有版本，它将被初始化为*版本 2*（或后续版本）。
 
 默认情况下，注册模型时分配的状态为无。要为注册的模型分配状态，我们可以按以下方式进行：
 
@@ -300,20 +300,20 @@ client.transition_model_version_stage(
 )
 ```
 
-在上述代码片段中，*版本2*的*决策树*模型被分配到*暂存*状态。在服务器UI中，我们可以看到状态，如图4所示：
+在上述代码片段中，*版本 2*的*决策树*模型被分配到*暂存*状态。在服务器 UI 中，我们可以看到状态，如图 4 所示：
 
-![注册的模型](../Images/a520e6d37fe1a626f8761a15d3e6ee51.png)
+![注册的模型](img/a520e6d37fe1a626f8761a15d3e6ee51.png)
 
-图4\. 注册的模型
+图 4\. 注册的模型
 
-为了服务模型，我们将使用MLflow CLI，为此我们只需服务器URI、模型名称和模型状态，如下所示：
+为了服务模型，我们将使用 MLflow CLI，为此我们只需服务器 URI、模型名称和模型状态，如下所示：
 
 ```py
 $ export MLflow_TRACKING_URI=http://localhost
 $ mlflow models serve -m "models:/MyModel-dt/Production"
 ```
 
-# 模型的服务和POST请求
+# 模型的服务和 POST 请求
 
 ```py
 $ curl http://localhost/invocations -H 'Content-Type: application/json' -d '{"inputs": [[0.39797844703998664, 0.6739875109527594, 0.9455601866618499, 0.8668404460733665, 0.1589125298570211]}'
@@ -321,11 +321,11 @@ $ curl http://localhost/invocations -H 'Content-Type: application/json' -d '{"in
 
 ```
 
-在之前的代码片段中，向模型服务的地址发送了一个POST请求。请求中传递了一个包含五个元素的数组，这正是模型期望的推断输入数据。此情况下的预测结果为1。
+在之前的代码片段中，向模型服务的地址发送了一个 POST 请求。请求中传递了一个包含五个元素的数组，这正是模型期望的推断输入数据。此情况下的预测结果为 1。
 
-然而，需要提到的是，MLFlow允许通过[签名](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html)的实现定义`MLmodel`文件的推断数据结构。同样，请求中传递的数据可以是不同类型的，这些类型可以在[这里](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html)查看。
+然而，需要提到的是，MLFlow 允许通过[签名](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html)的实现定义`MLmodel`文件的推断数据结构。同样，请求中传递的数据可以是不同类型的，这些类型可以在[这里](https://www.mlflow.org/docs/latest/_modules/mlflow/models/signature.html)查看。
 
-上述示例的完整实现可以在此找到：[https://github.com/FernandoLpz/MLFlow-example](https://github.com/FernandoLpz/MLFlow-example)
+上述示例的完整实现可以在此找到：[`github.com/FernandoLpz/MLFlow-example`](https://github.com/FernandoLpz/MLFlow-example)
 
 # MLflow 插件
 
@@ -365,7 +365,7 @@ Kubeflow 是一个运行在 [Kubernetes](https://kubernetes.io/) 集群上的平
 
 KubeFlow 还提供了 [Katib](https://www.kubeflow.org/docs/components/katib/overview/)，这是一个用于大规模优化超参数的工具，并提供来自 Jupyter notebooks 的管理和协作服务。
 
-SEO链接：Kubernetes 和 Kubeflow 指南
+SEO 链接：Kubernetes 和 Kubeflow 指南
 
 具体来说，MLflow 是一个专注于机器学习项目开发管理和协作的工具。另一方面，Kubeflow 是一个专注于通过 Kubernetes 集群和容器使用开发、训练和部署模型的平台。
 
@@ -389,4 +389,4 @@ SEO链接：Kubernetes 和 Kubeflow 指南
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)
 
-+   [5分钟解释的机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
++   [5 分钟解释的机器学习模型](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)

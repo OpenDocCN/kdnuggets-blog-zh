@@ -1,8 +1,8 @@
 # 探索无监督学习指标
 
-> 原文：[https://www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html](https://www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html)
+> 原文：[`www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html`](https://www.kdnuggets.com/2023/04/exploring-unsupervised-learning-metrics.html)
 
-![探索无监督学习指标](../Images/2f60ef6cdd25fafa7f251367fc11a8b4.png)
+![探索无监督学习指标](img/2f60ef6cdd25fafa7f251367fc11a8b4.png)
 
 图片由 [rawpixel](https://www.freepik.com/free-vector/global-communication-background-business-network-vector-design_19585255.htm#query=clustering&position=2&from_view=search&track=sph) 提供，来源于 [Freepik](https://www.freepik.com/)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 在无监督学习中，有两种主要技术：聚类和降维。聚类技术使用算法学习模式以分割数据。而降维技术则试图减少特征数量，同时尽可能保留实际信息。
 
-一个用于聚类的示例算法是K-Means，用于降维的算法是PCA。这些是无监督学习中使用最多的算法。然而，我们很少讨论评估无监督学习的指标。尽管它很有用，我们仍然需要评估结果以了解输出是否准确。
+一个用于聚类的示例算法是 K-Means，用于降维的算法是 PCA。这些是无监督学习中使用最多的算法。然而，我们很少讨论评估无监督学习的指标。尽管它很有用，我们仍然需要评估结果以了解输出是否准确。
 
 本文将讨论用于评估无监督机器学习算法的指标，并分为两个部分：聚类算法指标和降维指标。让我们深入了解。
 
@@ -30,7 +30,7 @@
 
 我们不会详细讨论聚类算法，因为这不是本文的重点。相反，我们将重点关注用于评估的指标示例以及如何评估结果。
 
-本文将使用 [Kaggle的葡萄酒数据集](https://www.kaggle.com/datasets/harrywang/wine-dataset-for-clustering) 作为数据集示例。首先读取数据，然后使用K-Means算法对数据进行分段。
+本文将使用 [Kaggle 的葡萄酒数据集](https://www.kaggle.com/datasets/harrywang/wine-dataset-for-clustering) 作为数据集示例。首先读取数据，然后使用 K-Means 算法对数据进行分段。
 
 ```py
 import pandas as pd
@@ -41,7 +41,7 @@ kmeans = KMeans(n_clusters=4, random_state=0)
 kmeans.fit(df)
 ```
 
-我将集群数量初始化为4，这意味着我们将数据分成4个集群。这是正确的集群数量吗？还是有更合适的集群数量？通常，我们可以使用称为**肘部法则**的技术来找到适当的集群数量。让我在下面展示代码。
+我将集群数量初始化为 4，这意味着我们将数据分成 4 个集群。这是正确的集群数量吗？还是有更合适的集群数量？通常，我们可以使用称为**肘部法则**的技术来找到适当的集群数量。让我在下面展示代码。
 
 ```py
 wcss = []
@@ -58,7 +58,7 @@ plt.title('Elbow Method')
 plt.show()
 ```
 
-![探索无监督学习指标](../Images/786421ebff712af35e633c515a215698.png)
+![探索无监督学习指标](img/786421ebff712af35e633c515a215698.png)
 
 在肘部法中，我们使用 WCSS 或簇内平方和来计算数据点与各自簇的质心之间的平方距离之和，针对不同的 k（簇）。最佳的 k 值预计是 WCSS 减少最多的值，或者上图中的肘部，即 2。
 
@@ -108,7 +108,7 @@ Calinski-Harabasz 指数：708.087
 
 Davies-Bouldin 指数是一种聚类评估指标，通过计算每个簇与其最相似簇之间的平均相似性来测量。这个比率计算簇内距离与簇间距离的比值。这意味着簇之间越远且分散越少，会导致更好的分数。
 
-与之前的指标相比，戴维斯-鲍尔丁指数旨在尽可能降低得分。得分越低，每个聚类的分离度越高。让我们使用Python示例来计算这个得分。
+与之前的指标相比，戴维斯-鲍尔丁指数旨在尽可能降低得分。得分越低，每个聚类的分离度越高。让我们使用 Python 示例来计算这个得分。
 
 ```py
 # Calculate Davies-Bouldin Index
@@ -124,7 +124,7 @@ print("Davies-Bouldin Index:", round(dbi, 3))
 
 # 降维指标
 
-与聚类不同，降维的目标是减少特征数量，同时尽可能保留原始信息。因此，许多降维评估指标都关注信息保留。让我们使用PCA来减少维度，并看看这些指标的效果。
+与聚类不同，降维的目标是减少特征数量，同时尽可能保留原始信息。因此，许多降维评估指标都关注信息保留。让我们使用 PCA 来减少维度，并看看这些指标的效果。
 
 ```py
 from sklearn.decomposition import PCA
@@ -151,9 +151,9 @@ plt.title('CEV vs. Number of PC')
 plt.grid()
 ```
 
-![探索无监督学习指标](../Images/781c57c460988a9e7466edfbbaa1deda.png)
+![探索无监督学习指标](img/781c57c460988a9e7466edfbbaa1deda.png)
 
-从上述图表中，我们可以看到保留的主成分数量与解释方差的关系。作为经验法则，我们通常选择保留约90-95%的主成分进行降维，因此如果遵循上述图表，大约14个特征会减少到8个。
+从上述图表中，我们可以看到保留的主成分数量与解释方差的关系。作为经验法则，我们通常选择保留约 90-95%的主成分进行降维，因此如果遵循上述图表，大约 14 个特征会减少到 8 个。
 
 让我们查看其他指标以验证我们的降维效果。
 
@@ -163,9 +163,9 @@ plt.grid()
 
 基本上，这个指标试图查看降维技术在保持原始数据的局部结构方面做得如何。
 
-可信度指标范围从0到1，其中值越接近1，表示在降维数据点附近的邻居在原始维度中也大多接近。
+可信度指标范围从 0 到 1，其中值越接近 1，表示在降维数据点附近的邻居在原始维度中也大多接近。
 
-让我们使用Python代码计算可信度指标。
+让我们使用 Python 代码计算可信度指标。
 
 ```py
 from sklearn.manifold import trustworthiness
@@ -181,7 +181,7 @@ print("Trustworthiness:", round(tw, 3))
 
 萨蒙映射是一种非线性降维技术，旨在在降维过程中保留高维度的成对距离。其目标是使用萨蒙应力函数来计算原始数据和降维空间之间的成对距离。
 
-萨蒙应力函数的得分越低越好，因为它表示成对保留情况越好。让我们尝试使用Python代码示例。
+萨蒙应力函数的得分越低越好，因为它表示成对保留情况越好。让我们尝试使用 Python 代码示例。
 
 首先，我们需要安装一个额外的萨蒙映射包。
 
@@ -232,7 +232,7 @@ print("Sammon's Stress:", round(sammon_st, 5))
 
 +   [揭示无监督学习](https://www.kdnuggets.com/unveiling-unsupervised-learning)
 
-+   [无监督学习实践：K均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
++   [无监督学习实践：K 均值聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
 
 +   [机器学习评估指标：理论与概述](https://www.kdnuggets.com/machine-learning-evaluation-metrics-theory-and-overview)
 

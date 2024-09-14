@@ -1,8 +1,8 @@
 # 处理机器学习中的不平衡数据
 
-> 原文：[https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html](https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html`](https://www.kdnuggets.com/2020/10/imbalanced-data-machine-learning.html)
 
-[评论](#comments)
+评论
 
 作为机器学习工程师或数据科学家，有时你不可避免地会遇到一个类别标签有数百条记录而另一个类别标签有数千条记录的情况。
 
@@ -18,11 +18,11 @@
 
 **精确率** 测量了在所有被预测为真正例和假正例的样本中真正例的比例。例如，在我们模型预测的流失人群中，有多少人实际流失了？
 
-![用于帖子中的图片](../Images/8c8a6e75ec765f13c71b170a739268d0.png)
+![用于帖子中的图片](img/8c8a6e75ec765f13c71b170a739268d0.png)
 
 **召回率** 测量了真正例在真正例和假负例之和中的比例。例如，我们模型预测会流失的人中，实际流失的百分比。
 
-![用于帖子中的图片](../Images/d9823a244fcef9c52f95a711414e44ad.png)
+![用于帖子中的图片](img/d9823a244fcef9c52f95a711414e44ad.png)
 
 AUC 是通过接收器操作特性（ROC）曲线获得的。该曲线是通过将真正率与假正率绘制在图表上得到的。假正率是通过将假正例除以假正例与真正例之和得到的。
 
@@ -53,13 +53,13 @@ class_weights = {
 lr = LogisticRegression(C=3.0, fit_intercept=True, warm_start = True, class_weight=’balanced’)
 ```
 
-这是权重调整前的ROC曲线。
+这是权重调整前的 ROC 曲线。
 
-![Image for post](../Images/72c19a66abae792bd28fd187eb3cf048.png)
+![Image for post](img/72c19a66abae792bd28fd187eb3cf048.png)
 
-这是权重调整后的ROC曲线。注意AUC从0.69提高到了0.87。
+这是权重调整后的 ROC 曲线。注意 AUC 从 0.69 提高到了 0.87。
 
-![Image for post](../Images/4613bff2ccc6dc6c1ca9df6fcd6f086f.png)
+![Image for post](img/4613bff2ccc6dc6c1ca9df6fcd6f086f.png)
 
 ### 尝试不同的算法
 
@@ -67,9 +67,9 @@ lr = LogisticRegression(C=3.0, fit_intercept=True, warm_start = True, class_weig
 
 ### 生成合成数据
 
-你也可以生成[合成数据](https://heartbeat.fritz.ai/synthetic-data-a-bridge-over-the-data-moat-29f392a52f27)来增加少数类的记录数量——通常称为过采样。这通常在训练集进行训练-测试拆分后完成。在Python中，可以使用[Imblearn](https://github.com/scikit-learn-contrib/imbalanced-learn)包来实现。包中的一种策略是[Synthetic Minority Over-sampling Technique (SMOTE)](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.over_sampling.SMOTE.html)，该技术基于k最近邻算法。
+你也可以生成[合成数据](https://heartbeat.fritz.ai/synthetic-data-a-bridge-over-the-data-moat-29f392a52f27)来增加少数类的记录数量——通常称为过采样。这通常在训练集进行训练-测试拆分后完成。在 Python 中，可以使用[Imblearn](https://github.com/scikit-learn-contrib/imbalanced-learn)包来实现。包中的一种策略是[Synthetic Minority Over-sampling Technique (SMOTE)](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.over_sampling.SMOTE.html)，该技术基于 k 最近邻算法。
 
-使用SMOTE时：
+使用 SMOTE 时：
 
 +   第一个参数是`float`类型，表示在重新采样完成后，少数类样本与多数类样本的比例。
 
@@ -89,7 +89,7 @@ model = LogisticRegression()model.fit(X_resampled,y_resampled)predictions = mode
 
 ### 对多数类进行欠采样
 
-你也可以尝试减少多数类的样本数量。可以实现的一种策略是`[NearMiss](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.under_sampling.NearMiss.html)`方法。你也可以像SMOTE一样指定比例，以及通过`n_neighbors`指定邻居数量。
+你也可以尝试减少多数类的样本数量。可以实现的一种策略是`[NearMiss](https://imbalanced-learn.readthedocs.io/en/stable/generated/imblearn.under_sampling.NearMiss.html)`方法。你也可以像 SMOTE 一样指定比例，以及通过`n_neighbors`指定邻居数量。
 
 ```py
 from imblearn.under_sampling import NearMissunderSample = NearMiss(0.3,random_state=1545)pd.Series(y_resampled).value_counts()0  1110 1  333 dtype: int64
@@ -109,21 +109,21 @@ from imblearn.under_sampling import NearMissunderSample = NearMiss(0.3,random_st
 
 **相关：**
 
-+   [如何修复不平衡的数据集](/2019/05/fix-unbalanced-dataset.html)
++   如何修复不平衡的数据集
 
-+   [处理不平衡数据集的 5 种最有用技术](/2020/01/5-most-useful-techniques-handle-imbalanced-datasets.html)
++   处理不平衡数据集的 5 种最有用技术
 
-+   [专家提示：如何处理类别不平衡和缺失标签](/2019/11/tips-class-imbalance-missing-labels.html)
++   专家提示：如何处理类别不平衡和缺失标签
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -135,7 +135,7 @@ from imblearn.under_sampling import NearMissunderSample = NearMiss(0.3,random_st
 
 +   [无监督解缠表示学习中的类别不平衡数据集…](https://www.kdnuggets.com/2023/01/unsupervised-disentangled-representation-learning-class-imbalanced-dataset-elastic-infogan.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [7 种处理不平衡数据的技术](https://www.kdnuggets.com/2017/06/7-techniques-handle-imbalanced-data.html)
 

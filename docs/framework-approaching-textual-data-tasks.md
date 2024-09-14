@@ -1,6 +1,6 @@
 # 接近文本数据科学任务的框架
 
-> 原文：[https://www.kdnuggets.com/2017/11/framework-approaching-textual-data-tasks.html](https://www.kdnuggets.com/2017/11/framework-approaching-textual-data-tasks.html)
+> 原文：[`www.kdnuggets.com/2017/11/framework-approaching-textual-data-tasks.html`](https://www.kdnuggets.com/2017/11/framework-approaching-textual-data-tasks.html)
 
 今天有大量的文本数据可用，并且每天都会产生大量数据，这些数据从结构化到半结构化再到完全非结构化。我们可以用它做什么？实际上，可以做很多事情；这取决于你的目标，但有两个复杂相关但有所不同的任务类别，可以利用所有这些数据的可用性。
 
@@ -10,29 +10,29 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-**自然语言处理**（NLP）关注自然人类语言与计算设备之间的互动。NLP是计算语言学的一个重要方面，也属于计算机科学和人工智能的领域。
+**自然语言处理**（NLP）关注自然人类语言与计算设备之间的互动。NLP 是计算语言学的一个重要方面，也属于计算机科学和人工智能的领域。
 
 **文本挖掘**与自然语言处理（NLP）处于相似的领域，因为它涉及识别文本数据中有趣的、非平凡的模式。
 
 好的，很棒。但真正的*区别是什么*？
 
-首先，这两个概念的确切边界并不明确且未达成一致（见数据挖掘与数据科学），并且在不同程度上相互交织，具体取决于与之讨论这些问题的从业者和研究者。我发现通过*洞察的程度*来区分是最简单的。如果原始文本是*数据*，那么文本挖掘是*信息*，NLP是*知识*（见下方理解金字塔）。可以说是语法与语义的问题。
+首先，这两个概念的确切边界并不明确且未达成一致（见数据挖掘与数据科学），并且在不同程度上相互交织，具体取决于与之讨论这些问题的从业者和研究者。我发现通过*洞察的程度*来区分是最简单的。如果原始文本是*数据*，那么文本挖掘是*信息*，NLP 是*知识*（见下方理解金字塔）。可以说是语法与语义的问题。
 
-![数据/信息/知识](../Images/fcba6856f9d93514b15b4a585e1fb548.png)
+![数据/信息/知识](img/fcba6856f9d93514b15b4a585e1fb548.png)
 
 理解金字塔：数据、信息、知识。
 
 另一种理解这两个概念之间差异的方法是通过下方的维恩图，它还考虑了其他相关概念，以展示多个密切相关领域和学科之间的关系和重要重叠。
 
-![维恩图](../Images/0efeadf371f0cefb7d72b36283ca27a8.png)
+![维恩图](img/0efeadf371f0cefb7d72b36283ca27a8.png)
 
 来源：[实践文本挖掘与统计分析：非结构化文本数据应用](https://www.elsevier.com/books/practical-text-mining-and-statistical-analysis-for-non-structured-text-data-applications/miner/978-0-12-386979-1)。
 
@@ -52,13 +52,13 @@
 
 文字还为什么难？
 
-![NLP是困难的](../Images/5a4c88a2115dd4c217aabde148806d05.png)
+![NLP 是困难的](img/5a4c88a2115dd4c217aabde148806d05.png)
 
-来源：[CS124斯坦福](https://web.stanford.edu/class/cs124/)。
+来源：[CS124 斯坦福](https://web.stanford.edu/class/cs124/)。
 
 ### 文本数据科学任务框架
 
-我们能否制定一个足够通用的框架来处理文本数据科学任务？事实证明，处理文本与其他非文本处理任务非常相似，因此我们可以借鉴[KDD流程](https://www.kdnuggets.com/2016/03/data-science-process-rediscovered.html/2)的灵感。
+我们能否制定一个足够通用的框架来处理文本数据科学任务？事实证明，处理文本与其他非文本处理任务非常相似，因此我们可以借鉴[KDD 流程](https://www.kdnuggets.com/2016/03/data-science-process-rediscovered.html/2)的灵感。
 
 我们可以说这些是通用文本任务的主要步骤，属于文本挖掘或自然语言处理的范畴。
 
@@ -98,7 +98,7 @@
 
 +   即使在聊天机器人（一个 NLP 任务）或生成模型方面进行创新思考：某种形式的评估也是必要的
 
-![简单框架](../Images/6c6e33d544d7a2dcf6449b26a06cabc6.png)
+![简单框架](img/6c6e33d544d7a2dcf6449b26a06cabc6.png)
 
 一个简单的文本数据任务框架。这些步骤并不完全是线性的，但为了方便起见进行了可视化。
 
@@ -106,11 +106,11 @@
 
 **相关**：
 
-+   [自然语言处理关键术语解释](/2017/02/natural-language-processing-key-terms-explained.html)
++   自然语言处理关键术语解释
 
-+   [5 个免费的资源，帮助你入门自然语言处理的深度学习](/2017/07/5-free-resources-getting-started-deep-learning-nlp.html)
++   5 个免费的资源，帮助你入门自然语言处理的深度学习
 
-+   [7 种用于自然语言处理的人工神经网络类型](/2017/10/7-types-artificial-neural-networks-natural-language-processing.html)
++   7 种用于自然语言处理的人工神经网络类型
 
 ### 更多相关主题
 

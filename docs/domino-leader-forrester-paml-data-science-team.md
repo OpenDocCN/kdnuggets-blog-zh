@@ -1,22 +1,22 @@
 # 数据科学团队所需的马斯洛需求层次
 
-> 原文：[https://www.kdnuggets.com/2020/09/domino-leader-forrester-paml-data-science-team.html](https://www.kdnuggets.com/2020/09/domino-leader-forrester-paml-data-science-team.html)
+> 原文：[`www.kdnuggets.com/2020/09/domino-leader-forrester-paml-data-science-team.html`](https://www.kdnuggets.com/2020/09/domino-leader-forrester-paml-data-science-team.html)
 
 赞助帖子。
 
 **由 David Bloch 撰写**
 
-[![Domino Leader 2020 Nb Paml](../Images/97f47093bb7a62cd2f7805ce4cb5fc2b.png)](https://hubs.ly/H0w5PSG0)
+![Domino Leader 2020 Nb Paml](https://hubs.ly/H0w5PSG0)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -44,7 +44,7 @@ Domino Data Lab 被宣布为连续第二年在最近发布的 [“Forrester Wave
 
 +   将数据科学产品以简单、可重复的方式交付给最终用户的能力。
 
-[![Domino 数据科学金字塔](../Images/18cfc92584916db5e68f3e4b3aa6f7f8.png)](https://hubs.ly/H0w5PSG0)
+![Domino 数据科学金字塔](https://hubs.ly/H0w5PSG0)
 
 Domino 是由数据科学家为数据科学团队构建的平台。我们的主要关注点是满足数据科学团队的需求，帮助他们生产能够对业务产生影响的数据科学产品，而不是像我们的一些竞争对手那样销售更多的云存储。这些产品被业务利益相关者用来改变业务运作方式并创造商业价值。
 
@@ -68,12 +68,12 @@ Domino 是由数据科学家为数据科学团队构建的平台。我们的主�
 
 +   [数据质量需求的层级](https://www.kdnuggets.com/2022/08/data-quality-hierarchy-needs.html)
 
-+   [未来数据游戏的准备：2023年每位数据科学家必备的顶尖技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来数据游戏的准备：2023 年每位数据科学家必备的顶尖技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [为什么单独使用LLMs无法满足你公司预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
++   [为什么单独使用 LLMs 无法满足你公司预测需求](https://www.kdnuggets.com/2024/01/pecan-llms-used-alone-cant-address-companys-predictive-needs)
 
-+   [通过自定义指令调整ChatGPT以满足你的需求](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)
++   [通过自定义指令调整 ChatGPT 以满足你的需求](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)
 
 +   [如何建立数据科学赋能团队：完整指南](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)
 
-+   [数据科学团队协作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队协作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)

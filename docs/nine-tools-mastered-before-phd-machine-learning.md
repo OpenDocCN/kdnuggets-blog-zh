@@ -1,12 +1,12 @@
 # 我希望在机器学习博士学位之前掌握的九种工具
 
-> 原文：[https://www.kdnuggets.com/2021/09/nine-tools-mastered-before-phd-machine-learning.html](https://www.kdnuggets.com/2021/09/nine-tools-mastered-before-phd-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/09/nine-tools-mastered-before-phd-machine-learning.html`](https://www.kdnuggets.com/2021/09/nine-tools-mastered-before-phd-machine-learning.html)
 
-[comments](#comments)
+comments
 
 **由 [Aliaksei Mikhailiuk](https://www.linkedin.com/in/aliakseimikhailiuk/) 提供，人工智能科学家**
 
-![](../Images/f2afdbc6c250a36342be9c182412c909.png)
+![](img/f2afdbc6c250a36342be9c182412c909.png)
 
 图片由作者提供。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -38,7 +38,7 @@
 
 ## [Docker](https://www.docker.com/)
 
-![](../Images/eebbdcc0b2ecc174b62a99489a772e57.png)
+![](img/eebbdcc0b2ecc174b62a99489a772e57.png)
 
 图片由作者提供。
 
@@ -68,7 +68,7 @@ Conda 提供了自己的 [教程](https://conda.io/projects/conda/en/latest/use
 
 ## [Weights and biases](https://wandb.ai/site)
 
-![](../Images/6831c60dea2746d029ded5c99b361116.png)
+![](img/6831c60dea2746d029ded5c99b361116.png)
 
 wandb 面板的一组简单指标的快照——训练损失、学习率和平均验证损失。注意你还可以跟踪系统参数！图片由作者提供。
 
@@ -87,7 +87,7 @@ Weights and Biases (W&B/wandb) 是我发现得比较晚的一个宝藏工具，�
 
 ## [MLflow](https://mlflow.org/)
 
-![](../Images/3d43457ac771cfdf1d0ccede4941e326.png)
+![](img/3d43457ac771cfdf1d0ccede4941e326.png)
 
 作者提供的图片。
 
@@ -113,15 +113,15 @@ Weights and Biases (W&B/wandb) 是我发现得比较晚的一个宝藏工具，�
 
 相当基础，对吧？在看到学术界人们如何跟踪他们的代码的种种恐怖之后，我不能更强调掌握版本控制的重要性。不再有名为 code_v1、code_v2 的文件夹。
 
-Github 提供了一个非常有用的代码跟踪、合并和审查框架。每当一个团队构建一个[深度图像质量指标](https://towardsdatascience.com/deep-image-quality-assessment-30ad71641fac)时，每个成员可以有自己的代码分支并行工作。解决方案的不同部分可以合并在一起。每当有人引入一个bug时，可以很容易地恢复到工作版本。总体而言，我认为git是我在这篇文章中提到的所有工具中最重要的。
+Github 提供了一个非常有用的代码跟踪、合并和审查框架。每当一个团队构建一个[深度图像质量指标](https://towardsdatascience.com/deep-image-quality-assessment-30ad71641fac)时，每个成员可以有自己的代码分支并行工作。解决方案的不同部分可以合并在一起。每当有人引入一个 bug 时，可以很容易地恢复到工作版本。总体而言，我认为 git 是我在这篇文章中提到的所有工具中最重要的。
 
 查看这个逐步[指南](https://guides.github.com/activities/hello-world/)了解如何快速启动。
 
 ## [Lucidchart](https://www.lucidchart.com/pages/)
 
-最近我接触到了Lucidchart，此前我一直在使用[draw.io](https://app.diagrams.net/)— 一个非常简单的图表创建界面。Lucidchart强大了千倍，功能也更为多样。它的主要优势在于协作共享空间和在图表旁边做笔记的能力。想象一下一个巨大的在线白板，配有一整套模板。
+最近我接触到了 Lucidchart，此前我一直在使用[draw.io](https://app.diagrams.net/)— 一个非常简单的图表创建界面。Lucidchart 强大了千倍，功能也更为多样。它的主要优势在于协作共享空间和在图表旁边做笔记的能力。想象一下一个巨大的在线白板，配有一整套模板。
 
-要快速入门，请查看Lucidchart的这个[tutorial](https://www.lucidchart.com/pages/tour)页面。
+要快速入门，请查看 Lucidchart 的这个[tutorial](https://www.lucidchart.com/pages/tour)页面。
 
 ## 可视化
 
@@ -133,13 +133,13 @@ Github 提供了一个非常有用的代码跟踪、合并和审查框架。每�
 
 Inkscape 是一款免费的矢量图形软件。事实上，我在本科时的网页开发课程中学会了使用它。然而，我在攻读博士学位期间才真正学会了充分利用它——为论文制作那些漂亮的图像。
 
-在Inkscape提供的所有功能中，特别有价值的是[TexText](https://inkscape.org/~jcwinkler/%E2%98%85textext)扩展。使用这个软件包，你可以将你的[latex](https://www.latex-project.org/)公式无缝集成到图像中。
+在 Inkscape 提供的所有功能中，特别有价值的是[TexText](https://inkscape.org/~jcwinkler/%E2%98%85textext)扩展。使用这个软件包，你可以将你的[latex](https://www.latex-project.org/)公式无缝集成到图像中。
 
-有大量的教程，然而对于基本功能，我推荐Inkscape团队提供的教程[这里](https://inkscape.org/learn/tutorials/)。
+有大量的教程，然而对于基本功能，我推荐 Inkscape 团队提供的教程[这里](https://inkscape.org/learn/tutorials/)。
 
 ## [Streamlit](https://streamlit.io/)
 
-你是否曾经需要创建一个简单的网站来展示你的结果或一个简单的机器学习应用？只需几行Python代码，使用Streamlit就可以实现。
+你是否曾经需要创建一个简单的网站来展示你的结果或一个简单的机器学习应用？只需几行 Python 代码，使用 Streamlit 就可以实现。
 
 我发现它特别适用于论文补充材料，但它甚至可以在项目展示和客户演示中更加有用。
 
@@ -181,21 +181,21 @@ Inkscape 是一款免费的矢量图形软件。事实上，我在本科时的�
 
 **相关：**
 
-+   [我在数据科学职业生涯三年中学到的三大重要课程](/2021/09/3-important-lessons-data-science-career.html)
++   我在数据科学职业生涯三年中学到的三大重要课程
 
-+   [数据科学、数据可视化和机器学习的38个顶级Python库](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   数据科学、数据可视化和机器学习的 38 个顶级 Python 库
 
-+   [数据科学工具的受欢迎程度，动画版](/2020/06/data-science-tools-popularity-animated.html)
++   数据科学工具的受欢迎程度，动画版
 
 ### 更多相关话题
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [我希望在开始数据科学时知道的三件事](https://www.kdnuggets.com/2023/01/3-things-wish-knew-started-data-science.html)
 
 +   [成为优秀数据科学家所需的五项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 

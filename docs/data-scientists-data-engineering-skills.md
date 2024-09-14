@@ -1,10 +1,10 @@
 # 没有数据工程技能的数据科学家将面临严峻的现实
 
-> 原文：[https://www.kdnuggets.com/2021/09/data-scientists-data-engineering-skills.html](https://www.kdnuggets.com/2021/09/data-scientists-data-engineering-skills.html)
+> 原文：[`www.kdnuggets.com/2021/09/data-scientists-data-engineering-skills.html`](https://www.kdnuggets.com/2021/09/data-scientists-data-engineering-skills.html)
 
-[评论](#comments)
+评论
 
-![](../Images/a4621c3a66ffadb010efac3b48eab6a1.png)
+![](img/a4621c3a66ffadb010efac3b48eab6a1.png)
 
 *照片由 [Ben White](https://unsplash.com/@benwhitephotography?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/surprise?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -62,7 +62,7 @@ ETL 程序的转换部分涉及许多数据清理和操作步骤。如果你处�
 
 ### 结论
 
-长话短说，数据处理将成为你作为数据科学家的重要部分。我所说的重要，是指你80%以上的时间都将用于数据处理。数据处理不仅仅是清理和操作数据。它还包括 ETL 操作，这通常被认为是数据工程师的工作。
+长话短说，数据处理将成为你作为数据科学家的重要部分。我所说的重要，是指你 80%以上的时间都将用于数据处理。数据处理不仅仅是清理和操作数据。它还包括 ETL 操作，这通常被认为是数据工程师的工作。
 
 我强烈推荐熟悉 ETL 工具和概念。如果你有机会进行实践，那将非常有帮助。
 
@@ -72,7 +72,7 @@ ETL 程序的转换部分涉及许多数据清理和操作步骤。如果你处�
 
 **相关：**
 
-+   [数据科学在未来10年不会消失，但你的技能可能会](https://www.kdnuggets.com/2021/06/data-science-not-becoming-extinct-10-years.html)
++   [数据科学在未来 10 年不会消失，但你的技能可能会](https://www.kdnuggets.com/2021/06/data-science-not-becoming-extinct-10-years.html)
 
 +   [数据工程师最重要的工具](https://www.kdnuggets.com/2021/08/most-important-tool-data-engineers.html)
 
@@ -80,14 +80,14 @@ ETL 程序的转换部分涉及许多数据清理和操作步骤。如果你处�
 
 ### 更多相关话题
 
-+   [成为出色数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [如何在没有任何工作经验的情况下获得你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)

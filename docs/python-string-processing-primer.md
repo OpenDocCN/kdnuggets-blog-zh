@@ -1,6 +1,6 @@
 # Python 字符串处理备忘单
 
-> 原文：[https://www.kdnuggets.com/2020/01/python-string-processing-primer.html](https://www.kdnuggets.com/2020/01/python-string-processing-primer.html)
+> 原文：[`www.kdnuggets.com/2020/01/python-string-processing-primer.html`](https://www.kdnuggets.com/2020/01/python-string-processing-primer.html)
 
 # Python 中的字符串处理
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -28,7 +28,7 @@
 
 这个实用的备忘单包含了所有的代码在 [**这个可下载的 PDF 文件**](https://www.kdnuggets.com/publications/sheets/Python-String-Processing-Cheatsheet-KDnuggets.pdf) 中。
 
-[![Python 字符串处理备忘单](../Images/1829cc006761b1f6e785213a4bd45a2e.png)](https://www.kdnuggets.com/publications/sheets/Python-String-Processing-Cheatsheet-KDnuggets.pdf)
+![Python 字符串处理备忘单](https://www.kdnuggets.com/publications/sheets/Python-String-Processing-Cheatsheet-KDnuggets.pdf)
 
 # 去除空白
 
@@ -266,18 +266,18 @@ print('\'hippopotamus\' a palindrome -> {}'.format(is_palindrome(s2)))
 'hippopotamus' is a palindrome -> False
 ```
 
-确保你下载了[Python字符串处理备忘单](https://www.kdnuggets.com/publications/sheets/Python-String-Processing-Cheatsheet-KDnuggets.pdf)。
+确保你下载了[Python 字符串处理备忘单](https://www.kdnuggets.com/publications/sheets/Python-String-Processing-Cheatsheet-KDnuggets.pdf)。
 
 ### 更多相关主题
 
-+   [Python字符串方法](https://www.kdnuggets.com/2022/12/python-string-methods.html)
++   [Python 字符串方法](https://www.kdnuggets.com/2022/12/python-string-methods.html)
 
-+   [Python字符串匹配无需复杂的正则表达式语法](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
++   [Python 字符串匹配无需复杂的正则表达式语法](https://www.kdnuggets.com/2023/02/python-string-matching-without-complex-regex-syntax.html)
 
-+   [将字节转换为Python中的字符串：初学者教程](https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners)
++   [将字节转换为 Python 中的字符串：初学者教程](https://www.kdnuggets.com/convert-bytes-to-string-in-python-a-tutorial-for-beginners)
 
-+   [SQL备忘单的数据准备](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 备忘单的数据准备](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
-+   [KDnuggets新闻，11月30日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理以及如何…](https://www.kdnuggets.com/2022/n46.html)
 
-+   [R中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
++   [R 中的数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)

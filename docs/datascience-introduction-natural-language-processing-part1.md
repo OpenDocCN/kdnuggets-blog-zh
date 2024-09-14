@@ -1,6 +1,6 @@
-# 自然语言处理简介，第1部分：词汇单元
+# 自然语言处理简介，第一部分：词汇单元
 
-> 原文：[https://www.kdnuggets.com/2017/02/datascience-introduction-natural-language-processing-part1.html](https://www.kdnuggets.com/2017/02/datascience-introduction-natural-language-processing-part1.html)
+> 原文：[`www.kdnuggets.com/2017/02/datascience-introduction-natural-language-processing-part1.html`](https://www.kdnuggets.com/2017/02/datascience-introduction-natural-language-processing-part1.html)
 
 **由[DataScience.com](https://www.datascience.com/blog/introduction-to-natural-language-processing-lexical-units-learn-data-science-tutorials)赞助的帖子。**
 
@@ -16,9 +16,9 @@
 
 ### 商业用途
 
-公司通常可以访问包含有价值信息的自然语言记录。产品评论或甚至Twitter上的推文可能包含与产品相关的特定投诉或功能请求，这可以帮助优先排序和评估提案。[在线市场](https://www.datascience.com/resources/article/business-intelligence-to-data-science-for-retailers)可能有可用的商品描述，有助于定义产品分类法。数字报纸可能有在线文章的档案，可用于构建搜索引擎，让用户找到相关内容。代表自然语言的信息也可以用于构建强大的应用程序，如[回答问题的机器人](https://www.datascience.com/blog/training-a-predictive-model-chatbot-for-business-applications)或翻译软件。
+公司通常可以访问包含有价值信息的自然语言记录。产品评论或甚至 Twitter 上的推文可能包含与产品相关的特定投诉或功能请求，这可以帮助优先排序和评估提案。[在线市场](https://www.datascience.com/resources/article/business-intelligence-to-data-science-for-retailers)可能有可用的商品描述，有助于定义产品分类法。数字报纸可能有在线文章的档案，可用于构建搜索引擎，让用户找到相关内容。代表自然语言的信息也可以用于构建强大的应用程序，如[回答问题的机器人](https://www.datascience.com/blog/training-a-predictive-model-chatbot-for-business-applications)或翻译软件。
 
-![intro-to-natural-language-processing-part-1-lexical-units-sentiment.png](../Images/e477b47b0cdf19f3986ca94599611841.png)
+![intro-to-natural-language-processing-part-1-lexical-units-sentiment.png](img/e477b47b0cdf19f3986ca94599611841.png)
 
 *自然语言处理可以用来从文本中识别特定的投诉。*
 
@@ -34,9 +34,9 @@ A: "找到离我最近的电影院。"
 
 B: "找到离我最近的电影院。"
 
-在A中，用户暗示她想查看多个电影院，而在B中，她只是想要一个最近的电影院。忽略单数和复数之间的区别会降低我们应用的质量。
+在 A 中，用户暗示她想查看多个电影院，而在 B 中，她只是想要一个最近的电影院。忽略单数和复数之间的区别会降低我们应用的质量。
 
-![intro-to-natural-language-processing-part-1-lexical-units-plurals.png](../Images/64fe1fa4313cf54542605a72ff6aa6a3.png)
+![intro-to-natural-language-processing-part-1-lexical-units-plurals.png](img/64fe1fa4313cf54542605a72ff6aa6a3.png)
 
 另外，假设我们要总结以下产品评论：
 
@@ -50,9 +50,9 @@ B: “该产品存在一个连接问题。”
 
 分词算法可以很简单且确定性，例如每当字符不是字母数字时将字符分割成词素。非字母数字字符可能是空格、标点符号、井号等。我们可以使用[模式匹配](https://en.wikipedia.org/wiki/Pattern_matching)来实现这种方法，根据一些规则检查字符或字符序列的存在，其中我们将这些模式定义为[正则表达式](https://en.wikipedia.org/wiki/Regular_expression)（通常缩写为“regex”）。例如，我们可以用正则表达式字符串“*0-9*”或“*\d.*”来表示所有数字字符的集合。我们可以将带有修饰符的术语组合成复杂的搜索模式。我们可以通过每次匹配查询`[^A-Za-z0-9]+`来将字符分割在非字母数字字符上。正则表达式的应用非常广泛，几乎所有现代编程语言中都有相应的实现。
 
-很容易找到这种策略失败的例子（“didn't ≠ ["didn", "t"]）。在一些应用中，研究人员使用多个复杂的正则表达式查询和特定于形态的规则来捕获这些模式，并通过[有限状态机](http://www.cs.rochester.edu/u/james/CSC248/Lec7.pdf)来确定正确的分词。编码一个详尽的规则集可能很困难，并且将取决于应用程序和分析的文本数据类型（尽管已有一些[部分规则集](https://github.com/explosion/spaCy/blob/master/spacy/en/tokenizer_exceptions.py)被汇编）。为了适应新的语料库，可以通过在手动分词的文本上训练统计模型来构建分词器，尽管由于确定性方法的成功，这种方法在实践中很少使用。这些模型可能会查看字符属性序列，例如是否连续的字母数字字符以大写字母开头，并将分词建模为这些属性的函数。模型学习使用的规则将取决于提供的训练语料库（如Twitter、医学文章等）。
+很容易找到这种策略失败的例子（“didn't ≠ ["didn", "t"]）。在一些应用中，研究人员使用多个复杂的正则表达式查询和特定于形态的规则来捕获这些模式，并通过[有限状态机](http://www.cs.rochester.edu/u/james/CSC248/Lec7.pdf)来确定正确的分词。编码一个详尽的规则集可能很困难，并且将取决于应用程序和分析的文本数据类型（尽管已有一些[部分规则集](https://github.com/explosion/spaCy/blob/master/spacy/en/tokenizer_exceptions.py)被汇编）。为了适应新的语料库，可以通过在手动分词的文本上训练统计模型来构建分词器，尽管由于确定性方法的成功，这种方法在实践中很少使用。这些模型可能会查看字符属性序列，例如是否连续的字母数字字符以大写字母开头，并将分词建模为这些属性的函数。模型学习使用的规则将取决于提供的训练语料库（如 Twitter、医学文章等）。
 
-另一个挑战是多项字符序列可以构成一个词汇单位。这些多项序列可能是像“New York”这样的命名实体，在这种情况下，我们进行[命名实体识别](https://en.wikipedia.org/wiki/Named-entity_recognition)或只是常见短语。解决这个问题的一种方法是通过将所有长度为n的项集（n-grams）作为标记来允许表示中的一些冗余。如果我们仅限于单个词和二元组，“New York”将被标记为“New”，“York”，“New York”。为了增加一些复杂性，而不是穷尽所有n-grams，我们可以选择一组术语的最高阶n-gram表示，依据某些条件，比如它是否存在于硬编码词典（称为地名词典）中，或在我们的数据集中是否常见。或者，我们可以使用机器学习模型。如果给定单词的概率，*p*(word[*i*] | word[*i*-1])，在前面的单词下足够高，我们可能会将这个序列视为一个二项词汇单位（或者，我们可以使用公式*p*(word[*i*] | word[*i*-1]) = bigram) 使用标记的示例）。虽然平滑可以帮助改善问题，但这些语言模型通常难以泛化，并且需要一定程度的迁移学习、特征工程、确定性或抽象。概率n-gram模型需要标记的示例、机器学习算法和特征提取器（后两者包含在[斯坦福NER软件](http://nlp.stanford.edu/software/CRF-NER.shtml)中）。如果这些模型不值得投资，高质量的预训练模型通常可以在新的数据集上成功使用。
+另一个挑战是多项字符序列可以构成一个词汇单位。这些多项序列可能是像“New York”这样的命名实体，在这种情况下，我们进行[命名实体识别](https://en.wikipedia.org/wiki/Named-entity_recognition)或只是常见短语。解决这个问题的一种方法是通过将所有长度为 n 的项集（n-grams）作为标记来允许表示中的一些冗余。如果我们仅限于单个词和二元组，“New York”将被标记为“New”，“York”，“New York”。为了增加一些复杂性，而不是穷尽所有 n-grams，我们可以选择一组术语的最高阶 n-gram 表示，依据某些条件，比如它是否存在于硬编码词典（称为地名词典）中，或在我们的数据集中是否常见。或者，我们可以使用机器学习模型。如果给定单词的概率，*p*(word[*i*] | word[*i*-1])，在前面的单词下足够高，我们可能会将这个序列视为一个二项词汇单位（或者，我们可以使用公式*p*(word[*i*] | word[*i*-1]) = bigram) 使用标记的示例）。虽然平滑可以帮助改善问题，但这些语言模型通常难以泛化，并且需要一定程度的迁移学习、特征工程、确定性或抽象。概率 n-gram 模型需要标记的示例、机器学习算法和特征提取器（后两者包含在[斯坦福 NER 软件](http://nlp.stanford.edu/software/CRF-NER.shtml)中）。如果这些模型不值得投资，高质量的预训练模型通常可以在新的数据集上成功使用。
 
 在分词后，我们可能希望对我们的词元进行标准化。 [标准化](http://nlp.stanford.edu/IR-book/html/htmledition/normalization-equivalence-classing-of-terms-1.html)是一组规则，旨在将所有词汇等价类的实例减少到其规范形式。
 
@@ -98,7 +98,7 @@ Porter 词干提取器可能是最著名的替换类型词干提取算法，尽�
 
 本文中包含的依赖关系图是使用了令人惊叹的开源库 DisplaCy 构建的。点击[这里](https://github.com/explosion/displacy)查看。
 
-*想要继续学习吗？下载我们的[Forrester新研究](https://www.datascience.com/resources/white-papers/forrester-data-science-platforms-create-business-value)，了解保持公司在数据科学前沿的工具和实践。*
+*想要继续学习吗？下载我们的[Forrester 新研究](https://www.datascience.com/resources/white-papers/forrester-data-science-platforms-create-business-value)，了解保持公司在数据科学前沿的工具和实践。*
 
 [原文](https://www.datascience.com/blog/introduction-to-natural-language-processing-lexical-units-learn-data-science-tutorials)。
 
@@ -106,11 +106,11 @@ Porter 词干提取器可能是最著名的替换类型词干提取算法，尽�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

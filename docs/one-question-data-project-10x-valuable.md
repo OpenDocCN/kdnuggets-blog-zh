@@ -1,22 +1,22 @@
 # 让你的数据项目价值提高 10 倍的一个问题
 
-> 原文：[https://www.kdnuggets.com/2021/02/one-question-data-project-10x-valuable.html](https://www.kdnuggets.com/2021/02/one-question-data-project-10x-valuable.html)
+> 原文：[`www.kdnuggets.com/2021/02/one-question-data-project-10x-valuable.html`](https://www.kdnuggets.com/2021/02/one-question-data-project-10x-valuable.html)
 
-[评论](#comments)
+评论
 
 **[布列塔尼·戴维斯](https://www.linkedin.com/in/brittanymdavis/)，Narrator 数据主管**。
 
-![](../Images/8e3053e4cee3cc5c0515a43b0aa07606.png)
+![](img/8e3053e4cee3cc5c0515a43b0aa07606.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@
 
 一个好的回答听起来是这样的：
 
-+   “我需要知道哪些客户可能会流失，因为我想给他们发送10美元的忠诚积分以挽救他们。”
++   “我需要知道哪些客户可能会流失，因为我想给他们发送 10 美元的忠诚积分以挽救他们。”
 
 +   “我需要了解如何对我们的客户进行分段，因为我想基于我们最高价值的客户建立一个类似的受众。”
 
@@ -62,7 +62,7 @@
 
 1.  **听起来具体但实际上不具体的回答。** 小心那些听起来很具体但实际上并非如此的回答。“我需要对我们的客户进行分段，以便我可以个性化他们的邮件。”这是什么意思？他们将如何个性化邮件？我们可能会发现邮件团队只是想更新主题行以提高打开率。这些信息可能会改变整个分析。
 
-1.  **“一旦我看到数据，我就知道该怎么做。”** 这通常是没有行动计划的标志。这些回答通常会导致一个分析有趣但不可操作的常见情况。如果你听到这样的回答，我建议和你的同事进行一些假设演练：“如果数据说X，你会怎么做？如果它说Y呢？”我喜欢这个练习，因为它允许你们俩窥探未来，在你们有了答案但仍不知道如何处理的情况下。大多数人倾向于对数据能为他们做什么进行浪漫化幻想，这也是为什么当你得到分析结果但它无法解决任何问题时会感到失望。假设游戏有助于让每个人回到现实，并对数据能够实现的内容保持务实态度。
+1.  **“一旦我看到数据，我就知道该怎么做。”** 这通常是没有行动计划的标志。这些回答通常会导致一个分析有趣但不可操作的常见情况。如果你听到这样的回答，我建议和你的同事进行一些假设演练：“如果数据说 X，你会怎么做？如果它说 Y 呢？”我喜欢这个练习，因为它允许你们俩窥探未来，在你们有了答案但仍不知道如何处理的情况下。大多数人倾向于对数据能为他们做什么进行浪漫化幻想，这也是为什么当你得到分析结果但它无法解决任何问题时会感到失望。假设游戏有助于让每个人回到现实，并对数据能够实现的内容保持务实态度。
 
 1.  **“一旦我知道答案，我将能够问**{插入后续问题}**。”** 更多的问题是好的，只要它们最终能引导到行动。无尽的问题只是会导致更多的学习，学习固然重要，但它不是公司运作的核心——决策才是。对于这样的回答，跟踪问题的线索，看看是否最终能得到一个行动：“在你回答后续问题之后，你打算做什么？”
 
@@ -76,7 +76,7 @@
 
 +   [当良好的数据分析未能提供预期结果时](https://www.kdnuggets.com/2020/11/good-data-analyses-fail.html)
 
-+   [如何成为10倍的数据科学家](https://www.kdnuggets.com/2020/10/10x-data-scientist.html)
++   [如何成为 10 倍的数据科学家](https://www.kdnuggets.com/2020/10/10x-data-scientist.html)
 
 +   [每个数据科学家需要向商业领袖学习什么](https://www.kdnuggets.com/2020/07/data-scientist-learn-from-business-leaders.html)
 
@@ -84,12 +84,12 @@
 
 +   [数据：商业最有价值的商品](https://www.kdnuggets.com/2022/03/data-valuable-commodity-businesses.html)
 
-+   [3项提高我作为数据科学家收入的宝贵技能](https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html)
++   [3 项提高我作为数据科学家收入的宝贵技能](https://www.kdnuggets.com/2022/10/3-valuable-skills-doubled-income-data-scientist.html)
 
 +   [为什么你需要学习多于一种编程语言！](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
 +   [利用数据科学使清洁能源更公平](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)
 
-+   [绿色AI：7种使应用程序更可持续的策略](https://www.kdnuggets.com/greening-ai-7-strategies-to-make-applications-more-sustainable)
++   [绿色 AI：7 种使应用程序更可持续的策略](https://www.kdnuggets.com/greening-ai-7-strategies-to-make-applications-more-sustainable)
 
 +   [ETL vs ELT：哪个适合你的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)

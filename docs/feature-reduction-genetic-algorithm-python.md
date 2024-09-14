@@ -1,8 +1,8 @@
-# 使用遗传算法和Python进行特征减少
+# 使用遗传算法和 Python 进行特征减少
 
-> 原文：[https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html](https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html)
+> 原文：[`www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html`](https://www.kdnuggets.com/2019/03/feature-reduction-genetic-algorithm-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/feature-reduction-genetic-algorithm-python.html?page=2#comments)![实用计算机视觉应用深度学习](../Images/1bf50c2f23d12814ce8634a5b1cee1e1.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![实用计算机视觉应用深度学习](img/1bf50c2f23d12814ce8634a5b1cee1e1.png)
 
 ### 介绍
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -28,13 +28,13 @@
 
 在开始本教程之前，值得一提的是，它是我在 LinkedIn 个人资料中发布的 2 个之前教程的扩展。
 
-第一个教程的标题是“**使用 NumPy 实现人工神经网络并对 Fruits360 图像数据集进行分类**”。它开始时从 Fruits360 数据集的 4 个类别中提取长度为 360 的特征向量。接着，使用 NumPy 从头构建一个人工神经网络（ANN）来对数据集进行分类。此教程可在此处找到：[https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad)。其 GitHub 项目可在此处找到：[https://github.com/ahmedfgad/NumPyANN](https://github.com/ahmedfgad/NumPyANN)。
+第一个教程的标题是“**使用 NumPy 实现人工神经网络并对 Fruits360 图像数据集进行分类**”。它开始时从 Fruits360 数据集的 4 个类别中提取长度为 360 的特征向量。接着，使用 NumPy 从头构建一个人工神经网络（ANN）来对数据集进行分类。此教程可在此处找到：[`www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad`](https://www.linkedin.com/pulse/artificial-neural-network-implementation-using-numpy-fruits360-gad)。其 GitHub 项目可在此处找到：[`github.com/ahmedfgad/NumPyANN`](https://github.com/ahmedfgad/NumPyANN)。
 
-第二个教程的标题是“**使用遗传算法优化人工神经网络**”。该教程构建并使用遗传算法来优化 ANN 参数，以提高分类准确率。此教程可在此处找到：[https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad](https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad)。其 GitHub 项目也可以在此处找到：[https://github.com/ahmedfgad/NeuralGenetic](https://github.com/ahmedfgad/NeuralGenetic)。
+第二个教程的标题是“**使用遗传算法优化人工神经网络**”。该教程构建并使用遗传算法来优化 ANN 参数，以提高分类准确率。此教程可在此处找到：[`www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad`](https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad)。其 GitHub 项目也可以在此处找到：[`github.com/ahmedfgad/NeuralGenetic`](https://github.com/ahmedfgad/NeuralGenetic)。
 
 本教程讨论了如何使用遗传算法（GA）来缩减从 Fruits360 数据集中提取的长度为 360 的特征向量。本教程首先讨论需要遵循的步骤。然后，使用 Python 实现这些步骤，主要利用 NumPy 和 Sklearn。
 
-本教程的实现可以在我的 GitHub 页面找到，链接如下：[https://github.com/ahmedfgad/FeatureReductionGenetic](https://github.com/ahmedfgad/FeatureReductionGenetic)。
+本教程的实现可以在我的 GitHub 页面找到，链接如下：[`github.com/ahmedfgad/FeatureReductionGenetic`](https://github.com/ahmedfgad/FeatureReductionGenetic)。
 
 遗传算法从一个初始种群开始，该种群由多个染色体（即解）组成，每个染色体都有一系列基因。通过适应度函数，遗传算法选择最佳解作为父代，用于创建新种群。新种群中的新解通过对父代应用两种操作来生成：交叉和变异。在将遗传算法应用于特定问题时，我们需要确定基因的表示、合适的适应度函数以及如何应用交叉和变异。让我们看看这些是如何工作的。
 
@@ -44,41 +44,41 @@
 
 +   遗传算法优化简介
 
-    +   [https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
+    +   [`www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/`](https://www.linkedin.com/pulse/introduction-optimization-genetic-algorithm-ahmed-gad/)
 
-    +   [/2018/03/introduction-optimization-with-genetic-algorithm.html](/2018/03/introduction-optimization-with-genetic-algorithm.html)
+    +   /2018/03/introduction-optimization-with-genetic-algorithm.html
 
-    +   [https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
+    +   [`towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b`](https://towardsdatascience.com/introduction-to-optimization-with-genetic-algorithm-2f5001d9964b)
 
 +   遗传算法（GA）优化 - 步骤示例
 
-    +   [https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)
+    +   [`www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example`](https://www.slideshare.net/AhmedGadFCIT/genetic-algorithm-ga-optimization-stepbystep-example)
 
-+   遗传算法在Python中的实现
++   遗传算法在 Python 中的实现
 
-    +   [https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)
+    +   [`www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/`](https://www.linkedin.com/pulse/genetic-algorithm-implementation-python-ahmed-gad/)
 
-    +   [/2018/07/genetic-algorithm-implementation-python.html](/2018/07/genetic-algorithm-implementation-python.html)
+    +   /2018/07/genetic-algorithm-implementation-python.html
 
-    +   [https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)
+    +   [`towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6`](https://towardsdatascience.com/genetic-algorithm-implementation-in-python-5ab67bb124a6)
 
-    +   [https://github.com/ahmedfgad/GeneticAlgorithmPython](https://github.com/ahmedfgad/GeneticAlgorithmPython)
+    +   [`github.com/ahmedfgad/GeneticAlgorithmPython`](https://github.com/ahmedfgad/GeneticAlgorithmPython)
 
-我在2018年还写了一本书，其中一个章节讲述了遗传算法。这本书的标题是**《使用深度学习和卷积神经网络的实际计算机视觉应用》**，可以在这里的Springer上找到[https://www.springer.com/us/book/9781484241660](https://www.springer.com/us/book/9781484241660)。
+我在 2018 年还写了一本书，其中一个章节讲述了遗传算法。这本书的标题是**《使用深度学习和卷积神经网络的实际计算机视觉应用》**，可以在这里的 Springer 上找到[`www.springer.com/us/book/9781484241660`](https://www.springer.com/us/book/9781484241660)。
 
 ### 染色体表示
 
-遗传算法中的基因是染色体的构建块。首先，我们需要确定染色体中包含哪些基因。为此，考虑到每个可能影响结果的属性应视为一个基因。由于我们的任务目标是选择最佳的特征元素集合，因此每个特征元素可能会影响结果，因此每个特征元素都被视为一个基因。染色体将由所有基因（即所有特征元素）组成。因为有360个特征元素，所以将有360个基因。现在清楚的一点是染色体的长度是360。
+遗传算法中的基因是染色体的构建块。首先，我们需要确定染色体中包含哪些基因。为此，考虑到每个可能影响结果的属性应视为一个基因。由于我们的任务目标是选择最佳的特征元素集合，因此每个特征元素可能会影响结果，因此每个特征元素都被视为一个基因。染色体将由所有基因（即所有特征元素）组成。因为有 360 个特征元素，所以将有 360 个基因。现在清楚的一点是染色体的长度是 360。
 
-确定了所选基因之后，接下来是确定基因的表示方式。有不同的表示方法，如十进制、二进制、浮点、字符串等。我们的目标是知道基因（即特征元素）是否在减少的特征集合中被选择。因此，分配给基因的值应反映其是否被选择。根据这个描述，很明显每个基因有2个可能的值。一个值表示基因被选择，另一个值表示基因未被选择。因此，二进制表示是最佳选择。当基因值为1时，它将被选择到减少的特征集合中。当值为0时，则会被忽略。
+确定了所选基因之后，接下来是确定基因的表示方式。有不同的表示方法，如十进制、二进制、浮点、字符串等。我们的目标是知道基因（即特征元素）是否在减少的特征集合中被选择。因此，分配给基因的值应反映其是否被选择。根据这个描述，很明显每个基因有 2 个可能的值。一个值表示基因被选择，另一个值表示基因未被选择。因此，二进制表示是最佳选择。当基因值为 1 时，它将被选择到减少的特征集合中。当值为 0 时，则会被忽略。
 
-总结一下，染色体将由360个以二进制表示的基因组成。根据下图，特征向量与染色体之间存在一对一的映射关系。即染色体中的第一个基因与特征向量中的第一个元素相关联。当该基因的值为1时，这意味着特征向量中的第一个元素被选择。
+总结一下，染色体将由 360 个以二进制表示的基因组成。根据下图，特征向量与染色体之间存在一对一的映射关系。即染色体中的第一个基因与特征向量中的第一个元素相关联。当该基因的值为 1 时，这意味着特征向量中的第一个元素被选择。
 
-![染色体表示](../Images/db95ac7af78596be8d5db825557827dc.png)
+![染色体表示](img/db95ac7af78596be8d5db825557827dc.png)
 
 ### 适应度函数
 
-通过了解如何创建染色体，可以轻松地使用NumPy随机初始化初始种群。初始化后，选择父代。遗传算法基于**达尔文**的理论“**适者生存**”。即从当前种群中选择最佳解进行配对，以产生更好的解。通过保留好的解并淘汰坏的解，我们可以达到最优或次优解。
+通过了解如何创建染色体，可以轻松地使用 NumPy 随机初始化初始种群。初始化后，选择父代。遗传算法基于**达尔文**的理论“**适者生存**”。即从当前种群中选择最佳解进行配对，以产生更好的解。通过保留好的解并淘汰坏的解，我们可以达到最优或次优解。
 
 选择父代的标准是与每个解（即染色体）相关的适应度值。适应度值越高，解越好。适应度值是通过适应度函数计算得出的。那么，在我们的任务中，最佳的函数是什么呢？我们任务的目标是创建一个减少的特征向量，以提高分类准确率。因此，判断一个解是否好的标准是**分类准确率**。因此，适应度函数将返回一个指定每个解的分类准确率的数字。准确率越高，解越好。
 
@@ -102,7 +102,7 @@
 
 项目组织成两个文件。一个文件名为“GA.py”，其中包含遗传算法步骤的实现函数。另一个文件是主要文件，它只导入这个文件并在一个循环中调用其函数，该循环遍历各代。
 
-主文件开始时会读取从Fruits360数据集中提取的特征，如下代码所示。这些特征被返回到**data_inputs**变量中。关于如何提取这些特征的详细信息，可以在教程开始时提到的两个教程中找到。文件还读取了与样本关联的类别标签，存储在**data_outputs**变量中。
+主文件开始时会读取从 Fruits360 数据集中提取的特征，如下代码所示。这些特征被返回到**data_inputs**变量中。关于如何提取这些特征的详细信息，可以在教程开始时提到的两个教程中找到。文件还读取了与样本关联的类别标签，存储在**data_outputs**变量中。
 
 一些样本被选为训练，其索引存储在**train_indices**变量中。类似地，测试样本的索引存储在**test_indices**变量中。
 
@@ -169,9 +169,9 @@ num_generations = 100
 
 ```
 
-它初始化了遗传算法的所有参数。这包括每代种群中的解数量，根据**sol_per_pop**变量设置为8，后代数量，根据**num_parents_mating**变量设置为4，以及突变数量，根据**num_mutations**变量设置为3。之后，它在一个名为**new_population**的变量中随机创建初始种群。
+它初始化了遗传算法的所有参数。这包括每代种群中的解数量，根据**sol_per_pop**变量设置为 8，后代数量，根据**num_parents_mating**变量设置为 4，以及突变数量，根据**num_mutations**变量设置为 3。之后，它在一个名为**new_population**的变量中随机创建初始种群。
 
-有一个名为**best_outputs**的空列表，用于存储每次生成后的最佳结果。这有助于在完成所有代之后可视化遗传算法的进展。**num_generations**变量设置了代的数量为100。请注意，你可以更改这些参数，这可能会带来更好的结果。
+有一个名为**best_outputs**的空列表，用于存储每次生成后的最佳结果。这有助于在完成所有代之后可视化遗传算法的进展。**num_generations**变量设置了代的数量为 100。请注意，你可以更改这些参数，这可能会带来更好的结果。
 
 ### 了解更多此主题
 
@@ -183,6 +183,6 @@ num_generations = 100
 
 +   [Feature Store Summit 2022: 一场关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
-+   [Python中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
++   [Python 中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
 
-+   [理解和实现Python中的遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)
++   [理解和实现 Python 中的遗传算法](https://www.kdnuggets.com/understanding-and-implementing-genetic-algorithms-in-python)

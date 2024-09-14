@@ -1,8 +1,8 @@
 # 理解 Python 的迭代和成员资格：__contains__ 和 __iter__ 魔法方法指南
 
-> 原文：[https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
+> 原文：[`www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods`](https://www.kdnuggets.com/understanding-pythons-iteration-and-membership-a-guide-to-__contains__-and-__iter__-magic-methods)
 
-![__contains__ 和 __iter__ 魔法方法指南](../Images/0e31af489ddc2b5846ca89419af9c6ec.png)
+![__contains__ 和 __iter__ 魔法方法指南](img/0e31af489ddc2b5846ca89419af9c6ec.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -70,7 +70,7 @@ class FileIterator:
         return value
 ```
 
-我们初始化一个索引值为0，并接受文件作为初始化参数。**__next__** 方法检查索引是否溢出。如果是，它会引发**StopIteration**异常以表示迭代结束。否则，它返回当前索引的文件，并通过递增索引移动到下一个文件。这个过程会持续直到所有文件都被迭代过。
+我们初始化一个索引值为 0，并接受文件作为初始化参数。**__next__** 方法检查索引是否溢出。如果是，它会引发**StopIteration**异常以表示迭代结束。否则，它返回当前索引的文件，并通过递增索引移动到下一个文件。这个过程会持续直到所有文件都被迭代过。
 
 不过，我们还没有完成！我们仍然没有实现 `iter` 方法。`iter` 方法必须返回一个迭代器对象。现在我们已经实现了 `FileIterator` 类，我们可以最终转向 `iter` 方法。
 

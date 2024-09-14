@@ -1,8 +1,8 @@
 # 简单快速的数据流用于机器学习项目
 
-> 原文：[https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)
+> 原文：[`www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html`](https://www.kdnuggets.com/2022/11/simple-fast-data-streaming-machine-learning-projects.html)
 
-![简单快速的数据流用于机器学习项目](../Images/b9f199330321477dc272afb77c29bb8e.png)
+![简单快速的数据流用于机器学习项目](img/b9f199330321477dc272afb77c29bb8e.png)
 
 图像作者
 
@@ -93,7 +93,7 @@ fs.listdir()
 
 `install_hooks` 允许 Python 库（*某些例外情况适用*）像访问系统上的文件一样访问 DVC 跟踪的文件。它简单且快速。
 
-在下面的示例中，我们调用了`install_hooks()`并使用PIL.Image显示了一张女人做下犬瑜伽姿势的图片。
+在下面的示例中，我们调用了`install_hooks()`并使用 PIL.Image 显示了一张女人做下犬瑜伽姿势的图片。
 
 ```py
 from PIL import Image
@@ -102,23 +102,23 @@ install_hooks()
 Image.open("./Data/Yoga Pose/Downdog/00000011.jpg")
 ```
 
-![简单快速的数据流处理，适用于机器学习项目](../Images/789836de3311bdae8f95c1da58639861.png)
+![简单快速的数据流处理，适用于机器学习项目](img/789836de3311bdae8f95c1da58639861.png)
 
 我知道，这就像魔法一样。它也会让你惊讶于更快的加载时间。
 
-> **注意：** 使用DagsHubFilesystem或install_hooks命令时，会要求你生成一个临时OAuth密钥以增加安全性。
+> **注意：** 使用 DagsHubFilesystem 或 install_hooks 命令时，会要求你生成一个临时 OAuth 密钥以增加安全性。
 
-# 使用Direct Data Access进行瑜伽姿势分类
+# 使用 Direct Data Access 进行瑜伽姿势分类
 
-在本教程中，我们将使用Direct Data Access对Resnet34模型进行微调，数据集为瑜伽姿势[数据集](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)。该数据集包括5类瑜伽姿势图像，图像是通过Bing API提取的。
+在本教程中，我们将使用 Direct Data Access 对 Resnet34 模型进行微调，数据集为瑜伽姿势[数据集](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)。该数据集包括 5 类瑜伽姿势图像，图像是通过 Bing API 提取的。
 
-![简单快速的数据流处理，适用于机器学习项目](../Images/5ccfbe25f6d40cd47cc6a4c3dda2ea88.png)
+![简单快速的数据流处理，适用于机器学习项目](img/5ccfbe25f6d40cd47cc6a4c3dda2ea88.png)
 
 作者提供的图片
 
 ## 设置
 
-你可以fork并克隆我的[仓库](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)，并在Google Colab或Jupyter Notebook上运行下面的命令。该命令需要一个分支名称、仓库名称、用户名和访问令牌。你可以简单地用你的配置替换占位符。
+你可以 fork 并克隆我的[仓库](https://dagshub.com/kingabzpro/Yoga-Pose-Classification)，并在 Google Colab 或 Jupyter Notebook 上运行下面的命令。该命令需要一个分支名称、仓库名称、用户名和访问令牌。你可以简单地用你的配置替换占位符。
 
 > **注意：** 请确保你在仓库内部以激活流媒体功能。
 
@@ -127,9 +127,9 @@ Image.open("./Data/Yoga Pose/Downdog/00000011.jpg")
 %cd {DAGSHUB_REPO_NAME}
 ```
 
-如果你在开始时遇到问题，可以查看[Colab笔记本](https://colab.research.google.com/drive/1h-vikoiyOd5heR_-U76ScpJuov2vtzin?usp=sharing)。
+如果你在开始时遇到问题，可以查看[Colab 笔记本](https://colab.research.google.com/drive/1h-vikoiyOd5heR_-U76ScpJuov2vtzin?usp=sharing)。
 
-接下来，我们将导入Pytorch、FastAI、os和Matplotlib。该项目基于FastAI框架。阅读[文档](https://docs.fast.ai/)以了解更多信息。
+接下来，我们将导入 Pytorch、FastAI、os 和 Matplotlib。该项目基于 FastAI 框架。阅读[文档](https://docs.fast.ai/)以了解更多信息。
 
 ```py
 import torch
@@ -141,9 +141,9 @@ import os
 
 ## 数据加载器
 
-在调用install_hooks()之后，我们可以通过：`ImageDataloaders`自动访问文件。
+在调用 install_hooks()之后，我们可以通过：`ImageDataloaders`自动访问文件。
 
-加载和下载18.1 MB数据集花费了6.54秒。这相比使用`dvc pull` + ImageDataLoaders的73.84秒要快。
+加载和下载 18.1 MB 数据集花费了 6.54 秒。这相比使用`dvc pull` + ImageDataLoaders 的 73.84 秒要快。
 
 ```py
 %%time
@@ -160,19 +160,19 @@ Wall time: 6.54 s
 
 ## 可视化
 
-我们的数据集非常简单，包括各种带标签的瑜伽姿势。我们将使用它来训练我们的模型。Resnet34不需要大量数据，即使是几百张图像也能提供最先进的结果。
+我们的数据集非常简单，包括各种带标签的瑜伽姿势。我们将使用它来训练我们的模型。Resnet34 不需要大量数据，即使是几百张图像也能提供最先进的结果。
 
 ```py
 data.show_batch()
 ```
 
-![简单快速的数据流处理，适用于机器学习项目](../Images/46d4008e4fecddd9536514de05b294d1.png)
+![简单快速的数据流处理，适用于机器学习项目](img/46d4008e4fecddd9536514de05b294d1.png)
 
 ## 模型微调
 
-在我们开始微调之前，我们需要设置MLflow以跟踪实验。DagsHub提供了一个免费的MLflow服务器。你只需设置跟踪URI，我们就可以开始了。你可以通过点击仓库页面上的绿色按钮（Remote）并通过MLflow选项卡访问URI。
+在我们开始微调之前，我们需要设置 MLflow 以跟踪实验。DagsHub 提供了一个免费的 MLflow 服务器。你只需设置跟踪 URI，我们就可以开始了。你可以通过点击仓库页面上的绿色按钮（Remote）并通过 MLflow 选项卡访问 URI。
 
-`get_experiment_id`函数生成并返回实验ID。
+`get_experiment_id`函数生成并返回实验 ID。
 
 ```py
 import mlflow
@@ -188,9 +188,9 @@ def get_experiment_id(name):
 exp_id = get_experiment_id("yoga_colab")
 ```
 
-之后，使用mlflow.fastai.autolog()激活跟踪功能。它将记录实验并将其发送到DagsHub上的MLflow服务器。
+之后，使用 mlflow.fastai.autolog()激活跟踪功能。它将记录实验并将其发送到 DagsHub 上的 MLflow 服务器。
 
-最后，我们将用resnet34构建我们的学习器，并将指标设置为准确率和错误率。
+最后，我们将用 resnet34 构建我们的学习器，并将指标设置为准确率和错误率。
 
 ```py
 %%time
@@ -200,7 +200,7 @@ with mlflow.start_run(experiment_id=exp_id) as run:
          learn.fine_tune(3)
 ```
 
-微调3个epoch后，我们获得了95.9%的准确率和0.04的损失，取得了最先进的结果。
+微调 3 个 epoch 后，我们获得了 95.9%的准确率和 0.04 的损失，取得了最先进的结果。
 
 | **epoch** | **train_loss** | **valid_loss** | **accuracy** | **error_rate** | **time** |
 | --- | --- | --- | --- | --- | --- |
@@ -242,13 +242,13 @@ learn.predict(files[0])
 learn.show_results()
 ```
 
-![简单快捷的数据流处理用于机器学习项目](../Images/84bedd1062e31a73f982431661497eba.png)
+![简单快捷的数据流处理用于机器学习项目](img/84bedd1062e31a73f982431661497eba.png)
 
 ## MLflow
 
 你可以使用 DagsHub 实验标签查看过去的实验和结果。我最初使用 Keras MobilenetV3 和其他各种模型进行训练。最后，我选择了 FastAI 和 Resnet34，以获得更简单和更好的结果。
 
-![简单快捷的数据流处理用于机器学习项目](../Images/ffcba172d5d27efeb1b76a45ae94f463.png)
+![简单快捷的数据流处理用于机器学习项目](img/ffcba172d5d27efeb1b76a45ae94f463.png)
 
 图片来自 [kingabzpro/Yoga-Pose-Classification](https://dagshub.com/kingabzpro/Yoga-Pose-Classification/experiments/#/)
 
@@ -258,7 +258,7 @@ learn.show_results()
 
 为了在未见过的数据上测试我们的模型，让我们从 Google 下载瑜伽姿势图像。我们将上传这些图像，并通过流式传输访问它们进行预测。
 
-![简单快捷的数据流处理用于机器学习项目](../Images/1115add7eec3555469eb1c571f93d32c.png)
+![简单快捷的数据流处理用于机器学习项目](img/1115add7eec3555469eb1c571f93d32c.png)
 
 图片来自 Google 搜索
 
@@ -301,7 +301,7 @@ ds.commit("multiple files upload", versioning="dvc")
 
 当我第一次上传文件而不克隆 Git 仓库并拉取 DVC 数据时，我非常高兴。
 
-![简单快捷的数据流处理用于机器学习项目](../Images/e873359bb8cdb21bb587928894987b64.png)
+![简单快捷的数据流处理用于机器学习项目](img/e873359bb8cdb21bb587928894987b64.png)
 
 ## 上传单个文件
 
@@ -320,7 +320,7 @@ repo.upload(
 
 第三张图像已成功上传到 DagsHub 仓库。
 
-![简单快速的数据流处理用于机器学习项目](../Images/6271de110fa4911b3ed5f9a56a69d7ca.png)
+![简单快速的数据流处理用于机器学习项目](img/6271de110fa4911b3ed5f9a56a69d7ca.png)
 
 ## 模型预测
 
@@ -340,7 +340,7 @@ learn.predict(img_loc)
 
 该模型已以 99.9% 的准确度预测了 Warrior2 姿势。
 
-![简单快速的数据流处理用于机器学习项目](../Images/5d4d3cf4ab050928f77e953971ab1795.png)
+![简单快速的数据流处理用于机器学习项目](img/5d4d3cf4ab050928f77e953971ab1795.png)
 
 ```py
 CPU times: user 56.7 ms, sys: 2.14 ms, total: 58.8 ms
@@ -370,11 +370,11 @@ Wall time: 62.2 ms
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

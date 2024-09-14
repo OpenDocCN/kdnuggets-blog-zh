@@ -1,12 +1,12 @@
 # 机器学习项目中最重要的步骤是什么？
 
-> 原文：[https://www.kdnuggets.com/2017/08/most-important-step-machine-learning-project.html](https://www.kdnuggets.com/2017/08/most-important-step-machine-learning-project.html)
+> 原文：[`www.kdnuggets.com/2017/08/most-important-step-machine-learning-project.html`](https://www.kdnuggets.com/2017/08/most-important-step-machine-learning-project.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：Shahar Cohen，YellowRoad**。
 
-![](../Images/a95cd621d56c13db31353a2279f06864.png)
+![](img/a95cd621d56c13db31353a2279f06864.png)
 
 [CRISP-DM](https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining) 是机器学习项目的常见标准。业务理解、数据理解、数据准备、建模、评估和部署。这六个步骤对机器学习项目至关重要。每个步骤中的质量问题都会直接影响整个结果的质量。它们都很重要。
 
@@ -42,21 +42,21 @@
 
 **相关：**
 
-+   [数据科学家如何提高生产力](/2017/05/data-scientist-improve-productivity.html)
++   数据科学家如何提高生产力
 
-+   [数据版本控制：迭代机器学习](/2017/05/data-version-control-iterative-machine-learning.html)
++   数据版本控制：迭代机器学习
 
-+   [解决CRISP-DM中的部署和迭代问题](/2017/02/fixing-deployment-iteration-problems-crisp-dm.html)
++   解决 CRISP-DM 中的部署和迭代问题
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -68,8 +68,8 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，进行分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，进行分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)

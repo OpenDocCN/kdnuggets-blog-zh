@@ -1,22 +1,22 @@
 # 数据仓库中的机器学习与现代数据科学堆栈
 
-> 原文：[https://www.kdnuggets.com/2021/06/in-warehouse-machine-learning-modern-data-science-stack.html](https://www.kdnuggets.com/2021/06/in-warehouse-machine-learning-modern-data-science-stack.html)
+> 原文：[`www.kdnuggets.com/2021/06/in-warehouse-machine-learning-modern-data-science-stack.html`](https://www.kdnuggets.com/2021/06/in-warehouse-machine-learning-modern-data-science-stack.html)
 
-[评论](#comments)
+评论
 
 **作者 [Nick Acosta](https://www.linkedin.com/in/nick-acosta-0a9165103/)，开发者倡导者，Fivetran 联盟**。
 
-![现代数据堆栈](../Images/1d62e85840a765cd7077159441d92df3.png)
+![现代数据堆栈](img/1d62e85840a765cd7077159441d92df3.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 **BigQuery ML 和 Redshift ML**
 
-![Redshift 与 Bigquery](../Images/c6ac7c81de9e9302856ca3d8ffdba882.png)
+![Redshift 与 Bigquery](img/c6ac7c81de9e9302856ca3d8ffdba882.png)
 
 *AWS 和 Google Cloud 最近都为其数据仓库 Redshift（左）和 BigQuery（右）新增了机器学习功能。*
 
@@ -68,8 +68,8 @@ BigQuery ML 和 Redshift ML 将机器学习功能添加到 BigQuery 和 Redshift
 
 +   [全栈一切？数据科学与开发技术之间的组织交集](https://www.kdnuggets.com/2022/08/full-stack-everything-organizational-intersections-data-science-dev-tech.html)
 
-+   [为什么通用语义层对你的数据栈有益的6个原因](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
++   [为什么通用语义层对你的数据栈有益的 6 个原因](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
 
 +   [弹性机器学习栈是模块化的](https://www.kdnuggets.com/2022/06/comet-resilient-ml-stack-modular.html)
 
-+   [免费全栈LLM训练营](https://www.kdnuggets.com/2023/06/free-full-stack-llm-bootcamp.html)
++   [免费全栈 LLM 训练营](https://www.kdnuggets.com/2023/06/free-full-stack-llm-bootcamp.html)

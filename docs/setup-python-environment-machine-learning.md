@@ -1,10 +1,10 @@
 # 如何为机器学习设置 Python 环境
 
-> 原文：[https://www.kdnuggets.com/2019/02/setup-python-environment-machine-learning.html](https://www.kdnuggets.com/2019/02/setup-python-environment-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/02/setup-python-environment-machine-learning.html`](https://www.kdnuggets.com/2019/02/setup-python-environment-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Header image](../Images/7bae1bb29491cd1ca0909193a110506c.png)
+![Header image](img/7bae1bb29491cd1ca0909193a110506c.png)
 
 设置您的 Python 环境以进行机器学习可能是一项棘手的任务。如果您以前从未设置过这样的环境，可能会花费数小时尝试不同的命令来使其正常工作。但我们只想直接进入机器学习！
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
-在本教程中，您将学习如何设置一个*稳定的*Python机器学习开发环境。您将能够直接深入到机器学习中，再也不必担心安装软件包的问题。
+在本教程中，您将学习如何设置一个*稳定的*Python 机器学习开发环境。您将能够直接深入到机器学习中，再也不必担心安装软件包的问题。
 
 ### (1) 设置 Python 3 和 Pip
 
@@ -58,7 +58,7 @@ source ~/.bashrc
 
 现在我们将设置一个*虚拟环境*。在这个环境中，我们将安装进行机器学习所需的所有 Python 包。
 
-我们使用虚拟环境来分隔我们的编码设置。想象一下，如果你在某个时刻想在电脑上做两个不同的项目，而这两个项目需要不同版本的不同库。如果将它们都放在同一个工作环境中可能会很混乱，你可能会遇到库版本冲突的问题。你的项目1的ML代码需要`numpy`的1.0版本，但项目2需要1.15版本。糟糕！
+我们使用虚拟环境来分隔我们的编码设置。想象一下，如果你在某个时刻想在电脑上做两个不同的项目，而这两个项目需要不同版本的不同库。如果将它们都放在同一个工作环境中可能会很混乱，你可能会遇到库版本冲突的问题。你的项目 1 的 ML 代码需要`numpy`的 1.0 版本，但项目 2 需要 1.15 版本。糟糕！
 
 虚拟环境允许我们隔离工作区域，以避免这些冲突。
 
@@ -68,7 +68,7 @@ source ~/.bashrc
 sudo pip install virtualenv virtualenvwrapper
 ```
 
-一旦我们安装了virtualenv和virtualenvwrapper，我们将需要再次编辑我们的`~/.bashrc`文件。将这3行放在文件底部并保存。
+一旦我们安装了 virtualenv 和 virtualenvwrapper，我们将需要再次编辑我们的`~/.bashrc`文件。将这 3 行放在文件底部并保存。
 
 ```py
 export WORKON_HOME=$HOME/.virtualenvs
@@ -104,7 +104,7 @@ deactivate
 
 ### (3) 安装机器学习库
 
-现在我们可以安装我们的ML库了！我们将使用最常用的库：
+现在我们可以安装我们的 ML 库了！我们将使用最常用的库：
 
 +   **numpy:** 处理矩阵，尤其是数学运算
 
@@ -132,29 +132,29 @@ scikit-learn
 pip install -r requirements.txt
 ```
 
-看！Pip会一次性安装文件中列出的所有包。
+看！Pip 会一次性安装文件中列出的所有包。
 
 恭喜，你的环境已设置好，你准备好进行机器学习了！
 
 ### 想要学习？
 
-关注我[ twitter](https://twitter.com/GeorgeSeif94)，我会发布最新最精彩的AI、技术和科学内容！
+关注我[ twitter](https://twitter.com/GeorgeSeif94)，我会发布最新最精彩的 AI、技术和科学内容！
 
-**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** 是一名认证极客和AI / 机器学习工程师。
+**Bio: [George Seif](https://towardsdatascience.com/@george.seif94)** 是一名认证极客和 AI / 机器学习工程师。
 
 [原文](https://towardsdatascience.com/how-to-setup-a-python-environment-for-machine-learning-354d6c29a264)。转载已获许可。
 
 **相关:**
 
-+   [为你的回归问题选择最佳机器学习算法](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
++   为你的回归问题选择最佳机器学习算法
 
-+   [数据科学家需要了解的5种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家需要了解的 5 种聚类算法
 
-+   [Python中的5种快速简单的数据可视化（附代码）](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   Python 中的 5 种快速简单的数据可视化（附代码）
 
 ### 更多相关主题
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
 +   [每个初学者数据科学家都应该掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 

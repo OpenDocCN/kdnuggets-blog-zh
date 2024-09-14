@@ -1,10 +1,10 @@
 # 特征提取的《搭便车指南》
 
-> 原文：[https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)
+> 原文：[`www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html`](https://www.kdnuggets.com/2019/06/hitchhikers-guide-feature-extraction.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![头图](../Images/5f86cc6fb889e4686a0a72c2c4c793f9.png)
+![头图](img/5f86cc6fb889e4686a0a72c2c4c793f9.png)
 
 优质特征是任何机器学习模型的核心。
 
@@ -26,7 +26,7 @@
 
 ### 1\. 使用 featuretools 自动创建特征：
 
-![图示](../Images/051bc46ba1fb390831ff59508a9aba88.png)
+![图示](img/051bc46ba1fb390831ff59508a9aba88.png)
 
 自动化是未来
 
@@ -38,15 +38,15 @@
 
 假设我们在数据库中有三个表：**Customers、Sessions 和 Transactions。**
 
-![图示](../Images/87c9b50ea1c26bb769730ab4fb383404.png)
+![图示](img/87c9b50ea1c26bb769730ab4fb383404.png)
 
 数据集和关系
 
-![](../Images/e20dc7cbaa02de204e692c8a2e7b9e98.png)
+![](img/e20dc7cbaa02de204e692c8a2e7b9e98.png)
 
-![](../Images/6c8c5cc1acb015cd75f2ecc7f1bbdc5b.png)
+![](img/6c8c5cc1acb015cd75f2ecc7f1bbdc5b.png)
 
-![](../Images/1a8e2e18274c92478c43dedc8176ff00.png)
+![](img/1a8e2e18274c92478c43dedc8176ff00.png)
 
 这是一个相当好的玩具数据集，因为它包含了基于时间的列以及分类和数值列。
 
@@ -58,7 +58,7 @@ Featuretools 与实体集一起工作。
 
 ***你可以理解实体集为数据框以及它们之间关系的容器。***
 
-![图示](../Images/e4c224d30d8ecd909868d9666be07551.png)
+![图示](img/e4c224d30d8ecd909868d9666be07551.png)
 
 实体集 = 数据框和关系的集合
 
@@ -111,7 +111,7 @@ es = es.entity_from_dataframe(entity_id = 'customers', dataframe = customers_df,
 
 这就是我们当前的实体集桶的样子。它里边只有一个数据框，并且没有任何关系。
 
-![](../Images/cd74bee9bf6fa51a9d17cae1312d10fc.png)
+![](img/cd74bee9bf6fa51a9d17cae1312d10fc.png)
 
 让我们添加所有的数据框：
 
@@ -131,7 +131,7 @@ es = es.entity_from_dataframe(entity_id="sessions",
 
 这就是我们当前的实体集桶的样子。
 
-![](../Images/910ec22c3a18981f103dbe64c0bc4b51.png)
+![](img/910ec22c3a18981f103dbe64c0bc4b51.png)
 
 所有三个数据框，但没有关系。这里所说的关系是指我的桶并不知道`customers_df`和`session_df`中的`customer_id`是相同的列。
 
@@ -155,11 +155,11 @@ es = es.add_relationship(sess_relationship)
 
 在此之后，我们的实体集看起来像这样：
 
-![](../Images/d2eb7db8a7c43e1dd430b175051fb739.png)
+![](img/d2eb7db8a7c43e1dd430b175051fb739.png)
 
 我们可以看到数据集以及它们之间的关系。我们在这里的大部分工作已经完成。我们准备好生成特征了。
 
-![图](../Images/f1bcb0e1b85a7e800ac2454ad79b3534.png)
+![图](img/f1bcb0e1b85a7e800ac2454ad79b3534.png)
 
 特征工程和烹饪没有什么不同。把特征当作配料来看待。
 
@@ -171,9 +171,9 @@ feature_matrix, feature_defs = ft.dfs(entityset=es, target_entity="customers",ma
 feature_matrix.head()
 ```
 
-![](../Images/a4436f8d39f831bea87377cd0603d9d8.png)
+![](img/a4436f8d39f831bea87377cd0603d9d8.png)
 
-我们最终得到***73个新特征。**** 你可以从*`*feature_defs.*`*中看到特征名称。一些我们最终创建的特征包括：
+我们最终得到***73 个新特征。**** 你可以从*`*feature_defs.*`*中看到特征名称。一些我们最终创建的特征包括：
 
 ```py
 [<Feature: NUM_UNIQUE(sessions.device)>,
@@ -201,9 +201,9 @@ feature_matrix.head()
  <Feature: STD(sessions.NUM_UNIQUE(transactions.product_id))>]
 ```
 
-你可以得到像***金额标准差的总和(***`SUM(sessions.STD(transactions.amount))`***)****或****金额总和的标准差(***`STD(sessions.SUM(transactions.amount))`***)***这样的特征。这就是函数调用中`max_depth`参数的含义。我们在这里将其指定为2，以获取两个层次的汇总。
+你可以得到像***金额标准差的总和(***`SUM(sessions.STD(transactions.amount))`***)****或****金额总和的标准差(***`STD(sessions.SUM(transactions.amount))`***)***这样的特征。这就是函数调用中`max_depth`参数的含义。我们在这里将其指定为 2，以获取两个层次的汇总。
 
-***如果我们将`*max_depth*`*改为3，我们可以得到像:* `MAX(sessions.NUM_UNIQUE(transactions.YEAR(transaction_time)))`
+***如果我们将`*max_depth*`*改为 3，我们可以得到像:* `MAX(sessions.NUM_UNIQUE(transactions.YEAR(transaction_time)))`
 
 想象一下，如果你需要编写代码来获得这样的特征，你需要花费多少时间。此外，增加`max_depth`可能需要更长的时间。
 
@@ -215,11 +215,11 @@ feature_matrix.head()
 
 **独热编码**
 
-![图](../Images/44dd804d1a86ab98f8e287671c731e46.png)
+![图](img/44dd804d1a86ab98f8e287671c731e46.png)
 
 独热咖啡
 
-我们可以使用***独热编码***来编码我们的类别特征。因此，如果我们在一个类别中有n个级别，我们将得到n-1个特征。
+我们可以使用***独热编码***来编码我们的类别特征。因此，如果我们在一个类别中有 n 个级别，我们将得到 n-1 个特征。
 
 在我们的`session_df`表中，有一个名为`device`的列，其中包含三个级别——桌面、移动或平板。我们可以使用以下方法从这样的列中提取两个列：
 
@@ -227,7 +227,7 @@ feature_matrix.head()
 pd.get_dummies(sessions_df['device'],drop_first=True)
 ```
 
-![](../Images/9c1108188b124037f8fb325559321b06.png)
+![](img/9c1108188b124037f8fb325559321b06.png)
 
 这是谈论分类特征时最自然的想法，并且在许多情况下效果良好。
 
@@ -244,7 +244,7 @@ def map_values(x):
 df['Temperature_oe'] = df['Temperature'].apply(lambda x: map_values(x))
 ```
 
-![](../Images/e425f5e288245e881d47397618b38e64.png)
+![](img/e425f5e288245e881d47397618b38e64.png)
 
 使用这种方法，我保留了信息：低<中<高。
 
@@ -261,7 +261,7 @@ sessions_df['device_le'] = le.fit_transform(sessions_df['device'])
 sessions_df.head()
 ```
 
-![](../Images/f28727d5151cda32553d90d8c9fd8a72.png)
+![](img/f28727d5151cda32553d90d8c9fd8a72.png)
 
 **BinaryEncoder**
 
@@ -281,11 +281,11 @@ be = BinaryEncoder(cols = ['Club'])
 players = be.fit_transform(players)
 ```
 
-![](../Images/8a4dbd75b2491befdac3f1a4681b51ca.png)
+![](img/8a4dbd75b2491befdac3f1a4681b51ca.png)
 
 **HashingEncoder**
 
-![](../Images/83eb3d841b017b622c2b74cb6aed4f7b.png)
+![](img/83eb3d841b017b622c2b74cb6aed4f7b.png)
 
 ***可以将 Hashing Encoder 视为一个黑箱函数，它将字符串转换为 0 到某个预定值之间的数字。***
 
@@ -303,13 +303,13 @@ he = HashingEncoder(cols = ['Club'])
 players = he.fit_transform(players)
 ```
 
-![](../Images/64299f4b5fd80cad547a13277bfd332f.png)
+![](img/64299f4b5fd80cad547a13277bfd332f.png)
 
 可能会出现碰撞（例如，尤文图斯和 PSG 具有相同的编码），但有时这种技术效果不错。
 
 **Target/Mean Encoding**
 
-![](../Images/7576d94e734662c5ec8be7e04a3dc31d.png)
+![](img/7576d94e734662c5ec8be7e04a3dc31d.png)
 
 这是我在 Kaggle 比赛中发现效果不错的一种技术。如果训练/测试数据来自同一数据集的同一时间段（横截面），我们可以巧妙地使用特征。
 
@@ -328,7 +328,7 @@ new_train = targetc.fit_transform(train)
 new_train[['Pclass_Kfold_Target_Enc','Pclass']]
 ```
 
-![](../Images/6947f886fc1b7a8e3354f6e0edc284f0.png)
+![](img/6947f886fc1b7a8e3354f6e0edc284f0.png)
 
 你可以看到乘客类别 3 是如何被编码为 0.261538 和 0.230570，具体取决于平均值是从哪个折叠中得出的。
 
@@ -362,7 +362,7 @@ df.to_csv(‘submission.csv.gz’, index=False, compression=’gzip’)
 
 训练数据如下：
 
-![](../Images/1be75e88586a7632bfcb636262619813.png)
+![](img/1be75e88586a7632bfcb636262619813.png)
 
 我将在这里编写的大部分函数都受到 [Kernel](https://www.kaggle.com/gaborfodor/from-eda-to-the-top-lb-0-368) 的启发，该 Kernel 是由 Beluga 编写的。
 
@@ -391,7 +391,7 @@ train['haversine_distance'] = train.apply(lambda x: haversine_array(x['pickup_la
 
 **B. 两个经纬度之间的曼哈顿距离：**
 
-![图](../Images/54c342a45edd211eddb44fa42659f95a.png)
+![图](img/54c342a45edd211eddb44fa42659f95a.png)
 
 曼哈顿天际线
 
@@ -439,7 +439,7 @@ train.loc[:, 'center_longitude'] = (train['pickup_longitude'].values + train['dr
 
 这些是我们创建的新列：
 
-![](../Images/d73b9558220f2e7edecc60635a1bf5b9.png)
+![](img/d73b9558220f2e7edecc60635a1bf5b9.png)
 
 ### 5\. 自编码器：
 
@@ -447,9 +447,9 @@ train.loc[:, 'center_longitude'] = (train['pickup_longitude'].values + train['dr
 
 ***什么是自编码器？***
 
-编码器是深度学习函数，近似于从X到X的映射，即输入=输出。它们首先将输入特征压缩到较低维度的*表示*中，然后从这种表示中重建输出。
+编码器是深度学习函数，近似于从 X 到 X 的映射，即输入=输出。它们首先将输入特征压缩到较低维度的*表示*中，然后从这种表示中重建输出。
 
-![](../Images/21236b659aff70e01c030c3db0993e03.png)
+![](img/21236b659aff70e01c030c3db0993e03.png)
 
 我们可以使用这种*表示*向量作为我们模型的特征。
 
@@ -463,7 +463,7 @@ train.loc[:, 'center_longitude'] = (train['pickup_longitude'].values + train['dr
 
 或者在我们的情况下，就是旅行时长。下面是没有对数转换的旅行时长图。
 
-![](../Images/ae26ed2e140adfb89b68cb4eadbbdb0f.png)
+![](img/ae26ed2e140adfb89b68cb4eadbbdb0f.png)
 
 进行对数转换后：
 
@@ -471,7 +471,7 @@ train.loc[:, 'center_longitude'] = (train['pickup_longitude'].values + train['dr
 train['log_trip_duration'] = train['trip_duration'].apply(lambda x: np.log(1+x))
 ```
 
-![](../Images/e67f237b5eb7a9bccf500982fec5cec7.png)
+![](img/e67f237b5eb7a9bccf500982fec5cec7.png)
 
 对旅行时长进行对数转换后，数据的偏态性大大减小，因此对模型的帮助更大。
 
@@ -483,11 +483,11 @@ train['log_trip_duration'] = train['trip_duration'].apply(lambda x: np.log(1+x))
 
 **领域特定特征：**
 
-![图](../Images/0993d316761b5b05acdec1d5ce5e1ae4.png)
+![图](img/0993d316761b5b05acdec1d5ce5e1ae4.png)
 
 风格很重要
 
-假设你有一些购物车数据，并且你想要对TripType进行分类。这正是Walmart招聘中的问题：在 [Kaggle](https://www.kaggle.com/c/walmart-recruiting-trip-type-classification/)上的Trip Type分类。
+假设你有一些购物车数据，并且你想要对 TripType 进行分类。这正是 Walmart 招聘中的问题：在 [Kaggle](https://www.kaggle.com/c/walmart-recruiting-trip-type-classification/)上的 Trip Type 分类。
 
 旅行类型的一些示例：顾客可能会进行一次小型的每日晚餐旅行，一次每周的大型购物旅行，一次购买节日礼物的旅行，或一次季节性购物旅行。
 
@@ -497,11 +497,11 @@ train['log_trip_duration'] = train['trip_duration'].apply(lambda x: np.log(1+x))
 
 这些特征可能有效，也可能无效。从我的观察来看，它们通常提供了很大的价值。
 
-***我觉得这就是Target的“怀孕青少年模型”是如何制作的。*** 他们可能会有一个变量，其中包含所有怀孕青少年可能购买的商品，并将其放入分类算法中。
+***我觉得这就是 Target 的“怀孕青少年模型”是如何制作的。*** 他们可能会有一个变量，其中包含所有怀孕青少年可能购买的商品，并将其放入分类算法中。
 
 **交互特征：**
 
-如果你有特征A和B，可以创建特征A*B、A+B、A/B、A-B等。
+如果你有特征 A 和 B，可以创建特征 A*B、A+B、A/B、A-B 等。
 
 例如，为了预测房价，如果我们有两个特征：长度和宽度，更好的方法是创建一个面积（长度 x 宽度）特征。
 
@@ -509,7 +509,7 @@ train['log_trip_duration'] = train['trip_duration'].apply(lambda x: np.log(1+x))
 
 ### 结论
 
-![图示](../Images/3713c2084537b71228e7c1cd4fdcdf27.png)
+![图示](img/3713c2084537b71228e7c1cd4fdcdf27.png)
 
 创造力是 ***至关重要的！！！***
 
@@ -537,27 +537,27 @@ train['log_trip_duration'] = train['trip_duration'].apply(lambda x: np.log(1+x))
 
 **相关：**
 
-+   [使用正则化线性模型与 XGBoost 进行价格建模](/2019/05/modeling-price-regularized-linear-model-xgboost.html)
++   使用正则化线性模型与 XGBoost 进行价格建模
 
-+   [数据科学实战：Kaggle实战教程第4部分 – 数据转换与特征提取](/2016/06/doing-data-science-kaggle-walkthrough-data-transformation-feature-extraction.html)
++   数据科学实战：Kaggle 实战教程第四部分 – 数据转换与特征提取
 
-+   [scikit-feature：Python中的开源特征选择库](/2016/03/scikit-feature-open-source-feature-selection-python.html)
++   scikit-feature：Python 中的开源特征选择库
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
 ### 更多相关主题
 
-+   [特征存储峰会2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [特征存储峰会 2022：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
 +   [特征选择：科学与艺术的交汇](https://www.kdnuggets.com/2021/12/feature-selection-science-meets-art.html)
 
@@ -565,6 +565,6 @@ train['log_trip_duration'] = train['trip_duration'].apply(lambda x: np.log(1+x))
 
 +   [为多变量时间序列构建可操作的特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
 
-+   [实时AI与机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)
++   [实时 AI 与机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)

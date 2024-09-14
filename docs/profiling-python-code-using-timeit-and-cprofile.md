@@ -1,8 +1,8 @@
 # 使用 timeit 和 cProfile 进行 Python 代码性能分析
 
-> 原文：[https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)
+> 原文：[`www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile`](https://www.kdnuggets.com/profiling-python-code-using-timeit-and-cprofile)
 
-![使用 timeit 和 cProfile 进行 Python 代码性能分析](../Images/fa9801a9e924ea0b2e0312ae54e644a0.png)
+![使用 timeit 和 cProfile 进行 Python 代码性能分析](img/fa9801a9e924ea0b2e0312ae54e644a0.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -65,7 +65,7 @@ $ python -m timeit -s 'nums=[6,9,2,3,7]' 'list(reversed(nums))'
 500000 loops, best of 5: 695 nsec per loop
 ```
 
-当你没有指定`repeat`的值时，使用默认值5。当你没有指定`number`时，代码将运行足够多的次数，以达到至少[0.2秒](https://docs.python.org/3/library/timeit.html#cmdoption-timeit-n)的总时间。
+当你没有指定`repeat`的值时，使用默认值 5。当你没有指定`number`时，代码将运行足够多的次数，以达到至少[0.2 秒](https://docs.python.org/3/library/timeit.html#cmdoption-timeit-n)的总时间。
 
 此示例明确设置了执行语句的次数：
 
@@ -74,7 +74,7 @@ $ python -m timeit -s 'nums=[6,9,2,3,7]' -n 100Bu000 'list(reversed(nums))'
 100000 loops, best of 5: 540 nsec per loop
 ```
 
-`repeat`的默认值是5，但我们可以将其设置为任何合适的值：
+`repeat`的默认值是 5，但我们可以将其设置为任何合适的值：
 
 ```py
 $ python3 -m timeit -s 'nums=[6,9,2,3,7]' -r 3 'list(reversed(nums))'
@@ -88,11 +88,11 @@ $ python3 -m timeit -s 'nums=[6,9,2,3,7]' 'nums[::-1]'
 1000000 loops, best of 5: 142 nsec per loop
 ```
 
-列表切片方法似乎更快（所有示例均在Ubuntu 22.04上的Python 3.10中）。
+列表切片方法似乎更快（所有示例均在 Ubuntu 22.04 上的 Python 3.10 中）。
 
-## 在Python脚本中运行timeit
+## 在 Python 脚本中运行 timeit
 
-这是在Python脚本中运行timeit的等效方法：
+这是在 Python 脚本中运行 timeit 的等效方法：
 
 ```py
 import timeit
@@ -109,7 +109,7 @@ print(f"Using reversed() fn.: {t1}")
 print(f"Using list slicing: {t2}")
 ```
 
-`timeit()`可调用对象返回`stmt`执行`number`次的执行时间。注意，我们可以明确指定运行次数，或者让`number`取默认值1000000。
+`timeit()`可调用对象返回`stmt`执行`number`次的执行时间。注意，我们可以明确指定运行次数，或者让`number`取默认值 1000000。
 
 ```py
 Output >>
@@ -134,7 +134,7 @@ print(f"Using reversed() fn.: {t1}")
 print(f"Using list slicing: {t2}")
 ```
 
-这将重复运行代码`number`次，重复`repeat`次，并返回最小执行时间。这里我们有5次重复，每次100000次。
+这将重复运行代码`number`次，重复`repeat`次，并返回最小执行时间。这里我们有 5 次重复，每次 100000 次。
 
 ```py
 Output >>
@@ -142,15 +142,15 @@ Using reversed() fn.: 0.055375300000000016
 Using list slicing: 0.015101400000000043
 ```
 
-# 如何使用cProfile分析Python脚本
+# 如何使用 cProfile 分析 Python 脚本
 
-我们已经看到timeit可以用来测量短代码片段的执行时间。然而，在实际应用中，分析整个Python脚本更有帮助。
+我们已经看到 timeit 可以用来测量短代码片段的执行时间。然而，在实际应用中，分析整个 Python 脚本更有帮助。
 
-这将给我们所有函数和方法调用的执行时间——包括内置函数和方法。因此，我们可以更好地了解更昂贵的函数调用，并识别优化机会。例如：可能存在一个过慢的API调用。或者一个函数可能有一个可以用更Pythonic的推导式替换的循环。
+这将给我们所有函数和方法调用的执行时间——包括内置函数和方法。因此，我们可以更好地了解更昂贵的函数调用，并识别优化机会。例如：可能存在一个过慢的 API 调用。或者一个函数可能有一个可以用更 Pythonic 的推导式替换的循环。
 
-让我们学习如何使用cProfile模块（也属于Python标准库）来分析Python脚本。
+让我们学习如何使用 cProfile 模块（也属于 Python 标准库）来分析 Python 脚本。
 
-考虑以下Python脚本：
+考虑以下 Python 脚本：
 
 ```py
 # main.py
@@ -182,17 +182,17 @@ if __name__ == "__main__":
 
 +   `useful_func()`返回列表中目标数字的索引（如果目标在列表中）。
 
-上述列出的函数将在每次运行main.py脚本时被调用。
+上述列出的函数将在每次运行 main.py 脚本时被调用。
 
-## 在命令行运行cProfile
+## 在命令行运行 cProfile
 
-使用命令行运行cProfile：
+使用命令行运行 cProfile：
 
 ```py
 python3 -m file-name.py
 ```
 
-这里我们将文件命名为main.py：
+这里我们将文件命名为 main.py：
 
 ```py
 python3 -m main.py
@@ -210,9 +210,9 @@ python3 -m main.py
 
 以及以下配置文件：
 
-![使用timeit和cProfile分析Python代码](../Images/25aca12ae8639e7c2b0a59e3d1e3f1a9.png)
+![使用 timeit 和 cProfile 分析 Python 代码](img/25aca12ae8639e7c2b0a59e3d1e3f1a9.png)
 
-这里，`ncalls`指的是函数调用的次数，`percall`指的是每次函数调用的时间。如果`ncalls`的值大于1，则`percall`是所有调用的平均时间。
+这里，`ncalls`指的是函数调用的次数，`percall`指的是每次函数调用的时间。如果`ncalls`的值大于 1，则`percall`是所有调用的平均时间。
 
 脚本的执行时间被 `another_func` 所主导，该函数使用内置的 `sleep` 函数调用（休眠 20 秒）。我们也看到 `print` 函数调用的开销相当大。
 
@@ -251,7 +251,7 @@ if __name__ == "__main__":
 
 让我们更深入地查看生成的输出文件：
 
-![使用 timeit 和 cProfile 进行 Python 性能分析](../Images/cb3d21db14288a67207a1a122de8946e.png)
+![使用 timeit 和 cProfile 进行 Python 性能分析](img/cb3d21db14288a67207a1a122de8946e.png)
 
 当你分析一个大型脚本时，*按执行时间排序结果* 会很有帮助。为此，你可以在 profile 对象上调用 `sort_stats` 方法，并根据执行时间进行排序：
 
@@ -269,11 +269,11 @@ if __name__ == "__main__":
 
 现在运行脚本时，你应该能看到按时间排序的结果：
 
-![使用 timeit 和 cProfile 进行 Python 性能分析](../Images/ae9bde6a1312f616cb0873602633ea6f.png)
+![使用 timeit 和 cProfile 进行 Python 性能分析](img/ae9bde6a1312f616cb0873602633ea6f.png)
 
 # 结论
 
-我希望这份指南能帮助你开始使用 Python 进行性能分析。始终记住，优化不应以牺牲可读性为代价。如果你有兴趣了解其他性能分析工具，包括第三方 Python 包，请查看这篇[关于 Python 性能分析器的文章](/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)。
+我希望这份指南能帮助你开始使用 Python 进行性能分析。始终记住，优化不应以牺牲可读性为代价。如果你有兴趣了解其他性能分析工具，包括第三方 Python 包，请查看这篇关于 Python 性能分析器的文章。
 
 **[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在学习并通过撰写教程、操作指南、意见文章等与开发者社区分享她的知识。
 

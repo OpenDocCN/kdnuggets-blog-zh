@@ -1,18 +1,18 @@
 # 使用米切尔范式对学习算法的简明解释
 
-> 原文：[https://www.kdnuggets.com/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html](https://www.kdnuggets.com/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html)
+> 原文：[`www.kdnuggets.com/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html`](https://www.kdnuggets.com/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 > 如果一个计算机程序在一些任务类别*T*和性能测量*P*方面，随着经验*E*的增加，其在*T*中任务的性能（由*P*衡量）有所提升，则称该程序从经验*E*中学习。
 > 
 > - Tom Mitchell, "机器学习"¹
 
-Tom Mitchell的引言在机器学习界广为人知并经过时间考验，首次出现在他1997年的书中。这个句子对我个人产生了很大的影响，我在多年来多次引用了它，并在我的硕士论文中提到过。这个引言在Goodfellow, Bengio & Courville的《深度学习》第五章中也占据了重要位置，为书中对学习算法的解释提供了起点。
+Tom Mitchell 的引言在机器学习界广为人知并经过时间考验，首次出现在他 1997 年的书中。这个句子对我个人产生了很大的影响，我在多年来多次引用了它，并在我的硕士论文中提到过。这个引言在 Goodfellow, Bengio & Courville 的《深度学习》第五章中也占据了重要位置，为书中对学习算法的解释提供了起点。
 
 尽管本质上抽象，但变量*E*、*T*和*P*可以映射到机器学习算法及其学习过程中，以帮助加深对学习算法的抽象理解，甚至更具体地理解。让我们看看如何从这些简洁的几个词中获得大量的信息。
 
-![Image](../Images/dc620e17165be2135838c86857032359.png)
+![Image](img/dc620e17165be2135838c86857032359.png)
 
 **图 1**. 视觉化的米切尔范式。
 
@@ -46,7 +46,7 @@ Tom Mitchell的引言在机器学习界广为人知并经过时间考验，首�
 
 我们还可以将数据集作为经验的一部分更全面地描述。通常，数据被打包成矩阵，这些矩阵是示例的集合。示例则是特征的集合，这些特征描述了一个特定的示例。这个特征集可能会被标签（或目标）补充，具体取决于它是否用于监督学习或无监督学习。
 
-![图片](../Images/b7637382d8bbc451a472ebbbffe9b730.png)
+![图片](img/b7637382d8bbc451a472ebbbffe9b730.png)
 
 **图 2**. 使用 Mitchell 模式来解释图像分类任务。
 
@@ -54,27 +54,27 @@ Tom Mitchell的引言在机器学习界广为人知并经过时间考验，首�
 
 **参考文献：**
 
-1.  [机器学习](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mitchell/ftp/mlbook.html)，Tom Mitchell，麦Graw-Hill，1997年。
+1.  [机器学习](http://www.cs.cmu.edu/afs/cs.cmu.edu/user/mitchell/ftp/mlbook.html)，Tom Mitchell，麦 Graw-Hill，1997 年。
 
-1.  [深度学习](https://www.deeplearningbook.org/)，Ian Goodfellow, Yoshua Bengio & Aaron Courville，MIT出版社，2016年。
+1.  [深度学习](https://www.deeplearningbook.org/)，Ian Goodfellow, Yoshua Bengio & Aaron Courville，MIT 出版社，2016 年。
 
 **相关：**
 
-+   [Keras 4步工作流](/2018/06/keras-4-step-workflow.html)
++   Keras 4 步工作流
 
-+   [接近机器学习过程的框架](/2018/05/general-approaches-machine-learning-process.html)
++   接近机器学习过程的框架
 
-+   [接近文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   接近文本数据科学任务的框架
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -82,7 +82,7 @@ Tom Mitchell的引言在机器学习界广为人知并经过时间考验，首�
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍](https://www.kdnuggets.com/2022/n12.html)
 
 +   [协作过滤的直观解释](https://www.kdnuggets.com/2022/09/intuitive-explanation-collaborative-filtering.html)
 

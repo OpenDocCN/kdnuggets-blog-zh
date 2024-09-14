@@ -1,8 +1,8 @@
-# 5个保持数据科学家技能更新的项目创意
+# 5 个保持数据科学家技能更新的项目创意
 
-> 原文：[https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html`](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
 
-![5个保持数据科学家技能更新的项目创意](../Images/7fb89a1bef3b7fff3be874a1a53b24e7.png)
+![5 个保持数据科学家技能更新的项目创意](img/7fb89a1bef3b7fff3be874a1a53b24e7.png)
 
 我相信实践。实践是知识和思想的应用。我不相信的一种观点是，理论与实践之间的道路是一条单向高速公路。换句话说，它告诉我们实践仅仅是理论原则的应用。但实践远不止如此；它也是新理论的诞生地，推动了新理论的发展。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -22,13 +22,13 @@
 
 而且你需要使用它们！如果你缺乏机会，你必须自己创造机会。最全面的方法是构思一个[数据科学项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/)，并从头到尾完成它。
 
-在这样的项目中，你会使用API来获取实际数据。通过数据清洗和分析，你将获得洞见，并可以将其呈现在一些漂亮的可视化图表中。最后，你可以将其发布在reddit上，获得反馈，并可能考虑这些反馈以改进你的项目。
+在这样的项目中，你会使用 API 来获取实际数据。通过数据清洗和分析，你将获得洞见，并可以将其呈现在一些漂亮的可视化图表中。最后，你可以将其发布在 reddit 上，获得反馈，并可能考虑这些反馈以改进你的项目。
 
 理想情况下，项目也应该有趣，而不仅仅是枯燥的技能打磨方式。
 
-# 1\. 前10首歌曲的歌词词数变化
+# 1\. 前 10 首歌曲的歌词词数变化
 
-项目的构思是通过[Spotify API](https://developer.spotify.com/documentation/web-api/)获取Spotify上前10首最受欢迎歌曲的数据。然后，可以将Spotify的元数据与来自[Genius API](https://docs.genius.com/#/getting-started-h1)或其他歌词网站的歌词进行关联。
+项目的构思是通过[Spotify API](https://developer.spotify.com/documentation/web-api/)获取 Spotify 上前 10 首最受欢迎歌曲的数据。然后，可以将 Spotify 的元数据与来自[Genius API](https://docs.genius.com/#/getting-started-h1)或其他歌词网站的歌词进行关联。
 
 歌词中“词”的定义由你决定。例如，你可以计算总词数或仅计算唯一词数。你是否包括像‘na na na’或‘la la la’这样的合唱部分？
 
@@ -38,7 +38,7 @@
 
 # 2\. 投资出租物业
 
-![投资出租物业](../Images/755954edef96f7990160535bf9b3b0f1.png)
+![投资出租物业](img/755954edef96f7990160535bf9b3b0f1.png)
 
 如果你考虑在全国范围内投资物业以便出租，分析哪些因素影响租金价格，从而影响业务的盈利性和潜力将是非常有用的。
 
@@ -60,7 +60,7 @@
 
 # 5\. 预测书籍销售
 
-![预测书籍销售](../Images/9cef0528b65a3d5612a6ae52c46dfe94.png)
+![预测书籍销售](img/9cef0528b65a3d5612a6ae52c46dfe94.png)
 
 [亚马逊 API](https://aws.amazon.com/api-gateway/)是这个项目的一个很好的工具。通过它，你可以获得有关书籍销售的数据。例如，你可以分析不同类型、出版社、作者、页数、价格、评论数、评分等方面的销售情况。
 

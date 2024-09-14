@@ -1,8 +1,8 @@
 # 7 个 AI 组合项目以提升简历
 
-> 原文：[https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
+> 原文：[`www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume`](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
 
-![7 个 AI 组合项目以提升简历](../Images/347ab27e170cb00e43de8a9f9f62fdb7.png)
+![7 个 AI 组合项目以提升简历](img/347ab27e170cb00e43de8a9f9f62fdb7.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,9 +24,9 @@
 
 ## 1\. 在 5 分钟内构建和部署你的机器学习应用程序
 
-**项目链接：** [在 5 分钟内使用 Hugging Face 和 Gradio 构建 AI 聊天机器人](/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
+**项目链接：** 在 5 分钟内使用 Hugging Face 和 Gradio 构建 AI 聊天机器人
 
-![7 个 AI 组合项目以提升简历](../Images/83ede02d4fbe3698004b244be73e88cd.png)
+![7 个 AI 组合项目以提升简历](img/83ede02d4fbe3698004b244be73e88cd.png)
 
 项目截图
 
@@ -38,7 +38,7 @@
 
 **项目链接：** [DuckDB 教程：构建 AI 项目](https://www.datacamp.com/tutorial/building-ai-projects-with-duckdb)
 
-![7 个 AI 组合项目以提升简历](../Images/2e0221886e4f7d263a5afc78e5f8965f.png)
+![7 个 AI 组合项目以提升简历](img/2e0221886e4f7d263a5afc78e5f8965f.png)
 
 项目截图
 
@@ -48,7 +48,7 @@
 
 **项目链接：** [Cohere Command R+: 完整的逐步教程](https://www.datacamp.com/tutorial/cohere-command-r-tutorial)
 
-![7 个 AI 投资组合项目提升简历](../Images/45837c4d222e9dd9d457db98ddb9e33c.png)
+![7 个 AI 投资组合项目提升简历](img/45837c4d222e9dd9d457db98ddb9e33c.png)
 
 项目中的截图
 
@@ -58,7 +58,7 @@
 
 **项目链接：** [微调 Llama 3 并本地使用：逐步指南 | DataCamp](https://www.datacamp.com/tutorial/llama3-fine-tuning-locally)
 
-![7 个 AI 投资组合项目提升简历](../Images/4b4c937c15ceb1ec6fc8884b3bb7d8eb.png)
+![7 个 AI 投资组合项目提升简历](img/4b4c937c15ceb1ec6fc8884b3bb7d8eb.png)
 
 项目中的图片
 
@@ -72,13 +72,13 @@
 
 **教程链接：** [使用 🤗 Transformers 微调 XLSR-Wav2Vec2 以进行低资源 ASR](https://huggingface.co/blog/fine-tune-xlsr-wav2vec2)
 
-![7 个 AI 投资组合项目提升简历](../Images/2e0221886e4f7d263a5afc78e5f8965f.png)
+![7 个 AI 投资组合项目提升简历](img/2e0221886e4f7d263a5afc78e5f8965f.png)
 
 截图来自 [kingabzpro/wav2vec2-large-xls-r-300m-Urdu](https://huggingface.co/kingabzpro/wav2vec2-large-xls-r-300m-Urdu)
 
 我最受欢迎的项目！每个月下载量接近五十万次。我在一个乌尔都语数据集上使用 Transformer 库对 Wave2Vec2 Large 模型进行了微调。在此之后，我通过集成语言模型提高了生成输出的结果。
 
-![7 个 AI 投资组合项目提升简历](../Images/0190157e8a5c4ac1604c376706f87204.png)
+![7 个 AI 投资组合项目提升简历](img/0190157e8a5c4ac1604c376706f87204.png)
 
 截图来自 [Urdu ASR SOTA - a Hugging Face Space by kingabzpro](https://huggingface.co/spaces/kingabzpro/Urdu-ASR-SOTA)
 
@@ -88,7 +88,7 @@
 
 **项目链接：** [面向初学者的 CI/CD 机器学习指南 | DataCamp](https://www.datacamp.com/tutorial/ci-cd-for-machine-learning)
 
-![7 个 AI 组合项目提升简历](../Images/9b611eac05598c9517eff8b7a4f7214c.png)
+![7 个 AI 组合项目提升简历](img/9b611eac05598c9517eff8b7a4f7214c.png)
 
 项目中的图片
 
@@ -100,7 +100,7 @@
 
 **项目链接：** [使用 DreamBooth 和 LoRA 微调 Stable Diffusion XL | DataCamp](https://www.datacamp.com/tutorial/fine-tuning-stable-diffusion-xl-with-dreambooth-and-lora)
 
-![7 个 AI 组合项目提升简历](../Images/c7d33e53bedd25c4d846ccd809b4ac8f.png)
+![7 个 AI 组合项目提升简历](img/c7d33e53bedd25c4d846ccd809b4ac8f.png)
 
 项目中的图片
 

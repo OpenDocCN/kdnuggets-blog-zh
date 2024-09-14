@@ -1,38 +1,38 @@
-# 制定有效编码常规的5个关键步骤
+# 制定有效编码常规的 5 个关键步骤
 
-> 原文：[https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html](https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html)
+> 原文：[`www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html`](https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html)
 
-![制定有效编码常规的5个关键步骤](../Images/f32f58b9951e0e71fee8bdd02b7ea750.png)
+![制定有效编码常规的 5 个关键步骤](img/f32f58b9951e0e71fee8bdd02b7ea750.png)
 
 图片作者
 
 # 介绍
 
-我记得翻阅詹姆斯·克利尔的《[原子习惯](https://jamesclear.com/atomic-habits)》。它让我思考心理学如何影响我们的日常生活。作为一名程序员，我开始思考如何利用这些见解来创建一个真正有效的编码常规。相信我，如果我们能在某种程度上掌握我们大脑的艺术和学习方式，这将是一个游戏规则的改变者。经过仔细的研究和观察，我制定了这5个步骤来塑造一个有效的编码常规。让我们一个一个地了解这些步骤，见证心理学如何改变你的编码体验：
+我记得翻阅詹姆斯·克利尔的《[原子习惯](https://jamesclear.com/atomic-habits)》。它让我思考心理学如何影响我们的日常生活。作为一名程序员，我开始思考如何利用这些见解来创建一个真正有效的编码常规。相信我，如果我们能在某种程度上掌握我们大脑的艺术和学习方式，这将是一个游戏规则的改变者。经过仔细的研究和观察，我制定了这 5 个步骤来塑造一个有效的编码常规。让我们一个一个地了解这些步骤，见证心理学如何改变你的编码体验：
 
-# 1\. 小的增量效果的力量：从1%规则开始
+# 1\. 小的增量效果的力量：从 1%规则开始
 
-这个策略非常适合初学者和防止职业倦怠。它关注于逐步进步的重要性，并随着时间的发展建立一致性。受到这个理念的启发，我将仅仅一小部分时间（15分钟）用于编码。尽管看起来微不足道，但它可以铺平一致性的道路。我们的脑袋认为它不那么令人生畏，随着时间的推移，我们开始获得信心。这就像是种下了进步的种子，随着时间的推移而成长。你不是在追求完美，而是在接受进步。我将从数学上向你解释一下：
+这个策略非常适合初学者和防止职业倦怠。它关注于逐步进步的重要性，并随着时间的发展建立一致性。受到这个理念的启发，我将仅仅一小部分时间（15 分钟）用于编码。尽管看起来微不足道，但它可以铺平一致性的道路。我们的脑袋认为它不那么令人生畏，随着时间的推移，我们开始获得信心。这就像是种下了进步的种子，随着时间的推移而成长。你不是在追求完美，而是在接受进步。我将从数学上向你解释一下：
 
-第1天：15分钟
+第 1 天：15 分钟
 
-第2天：15分钟 + 1% = 15.15分钟
+第 2 天：15 分钟 + 1% = 15.15 分钟
 
-第3天：15.15分钟 + 1% = 15.303分钟
+第 3 天：15.15 分钟 + 1% = 15.303 分钟
 
-第4天：15.303分钟 + 1% = 15.45803分钟
+第 4 天：15.303 分钟 + 1% = 15.45803 分钟
 
 …依此类推
 
-**30天累计效果：**
+**30 天累计效果：**
 
-30天后，你的每日编码时间将大约为22.44分钟
+30 天后，你的每日编码时间将大约为 22.44 分钟
 
-60天后，你的每日编码时间将大约为33.81分钟
+60 天后，你的每日编码时间将大约为 33.81 分钟
 
-90天后，你的每日编码时间将大约为51.07分钟
+90 天后，你的每日编码时间将大约为 51.07 分钟
 
-180天后，你的每日编码时间将大约为140.61分钟
+180 天后，你的每日编码时间将大约为 140.61 分钟
 
 …依此类推
 
@@ -50,13 +50,13 @@
 
 为了让这一切奏效，我设置了一个专门的编码空间，这个空间作为启动点，我的大脑会说“嘿，现在是编码时间了！”。我沉浸在编码中，并从解决编码挑战或解码问题中获得进展的感觉。这是一种小胜利，使我更容易重新进入编码周期。
 
-![制定有效编码常规的5个关键步骤](../Images/b8146e9f37d43f65e64023ea5250a7a7.png)
+![制定有效编码常规的 5 个关键步骤](img/b8146e9f37d43f65e64023ea5250a7a7.png)
 
 图片由作者提供
 
 # 3\. 习惯叠加：将编码与现有习惯联系起来
 
-在开始一个新习惯时，你常常会遇到初期的阻力，但通过习惯叠加，这一过程会变得异常顺利。它涉及将旧习惯与新习惯配对。因为你的大脑喜欢模式，这样更容易。习惯叠加有3个要素：
+在开始一个新习惯时，你常常会遇到初期的阻力，但通过习惯叠加，这一过程会变得异常顺利。它涉及将旧习惯与新习惯配对。因为你的大脑喜欢模式，这样更容易。习惯叠加有 3 个要素：
 
 **锚定习惯（现有习惯）**：这是你已经能够轻松做到的事情。
 
@@ -70,7 +70,7 @@
 
 你猜怎么着？你的环境对你的心态影响比你想象的更大。它们作为环境提示，巧妙地引导我们的行动。考虑到它的重要性，我为自己设立了一个专门的编码空间——这是我旅程中的一个转折点。没有干扰和有意识的设置立刻让我进入了编码的心态。每当我的大脑看到我的工作空间，它就知道现在是编码时间了。这一步提高了我的集中力。
 
-![制定有效编码常规的5个关键步骤](../Images/24a0c0be962e9d55fa27d1b0b66605f5.png)
+![制定有效编码常规的 5 个关键步骤](img/24a0c0be962e9d55fa27d1b0b66605f5.png)
 
 图片由 [storyset](https://www.freepik.com/free-vector/online-games-addiction-concept-illustration_8239225.htm#query=coding%20setup&position=11&from_view=search&track=ais) 提供
 
@@ -82,17 +82,17 @@
 
 恭喜！你已经掌握了建立有效例行程序的工具。随着我结束这篇文章，我邀请我的读者分享他们的转变经历。哪些编码习惯对你有所帮助？最后，请记住，前面提到的策略的有效性可能因人而异，所以尝试并找到最适合你的方法。
 
-**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发者，对数据科学和人工智能在医学中的应用有浓厚兴趣。Kanwal 被选为2022年APAC地区的谷歌一代学者。Kanwal 喜欢通过撰写文章分享技术知识，并热衷于提高女性在科技行业的代表性。
+**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1)** 是一名有志的软件开发者，对数据科学和人工智能在医学中的应用有浓厚兴趣。Kanwal 被选为 2022 年 APAC 地区的谷歌一代学者。Kanwal 喜欢通过撰写文章分享技术知识，并热衷于提高女性在科技行业的代表性。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -100,12 +100,12 @@
 
 +   [大数据分析：为何对商业智能如此重要？](https://www.kdnuggets.com/2023/06/big-data-analytics-crucial-business-intelligence.html)
 
-+   [对话AI开发中的三个关键挑战及如何避免它们](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
++   [对话 AI 开发中的三个关键挑战及如何避免它们](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
 
 +   [在数据科学项目中停止硬编码 - 使用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 
 +   [如何回答数据科学编码面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [15个你必须知道的数据科学Python编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个你必须知道的数据科学 Python 编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
 +   [轻松从网站上抓取图像，无需编码](https://www.kdnuggets.com/2022/06/octoparse-scrape-images-easily-websites-nocoding-way.html)

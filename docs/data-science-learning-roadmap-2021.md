@@ -1,10 +1,10 @@
-# 2021年数据科学学习路线图
+# 2021 年数据科学学习路线图
 
-> 原文：[https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)
+> 原文：[`www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html`](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)
 
-[评论](#comments)
+评论
 
-[![](../Images/32326fe105d24f4024e735c48a5c6c03.png)](https://www.freecodecamp.org/news/content/images/size/w1000/2021/01/Blue-and-Ivory-Photo-Musician-Influencer-Digital-Brutalism-YouTube-Thumbnail-Set.png)
+![](https://www.freecodecamp.org/news/content/images/size/w1000/2021/01/Blue-and-Ivory-Photo-Musician-Influencer-Digital-Brutalism-YouTube-Thumbnail-Set.png)
 
 尽管日期发生了变化，但新的一年给每个人带来了重新开始的希望。如果你再加上一点计划、一些清晰的目标和学习路线图，你将拥有一个充满成长的年份。
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 本文旨在通过提供**学习框架、资源和项目创意**来加强你的计划，帮助你建立一个展示数据科学专长的扎实作品集。
 
-仅供参考：我根据自己在数据科学领域的个人经验准备了这份路线图。这并不是唯一的学习计划。你可以根据自己感兴趣的特定领域或研究方向调整这份路线图。此外，这个路线图是以Python为基础的，因为我个人更喜欢它。
+仅供参考：我根据自己在数据科学领域的个人经验准备了这份路线图。这并不是唯一的学习计划。你可以根据自己感兴趣的特定领域或研究方向调整这份路线图。此外，这个路线图是以 Python 为基础的，因为我个人更喜欢它。
 
 ### 什么是学习路线图？
 
@@ -32,7 +32,7 @@
 
 这里有一个金字塔，描绘了按复杂性和行业应用排序的高级技能。
 
-![](../Images/9807f03f9625a1f385ad3a7010bde1fb.png)
+![](img/9807f03f9625a1f385ad3a7010bde1fb.png)
 
 *数据科学任务按复杂性排序。*
 
@@ -186,11 +186,11 @@
 
 +   [AWS 认证机器学习（300 美元）](https://aws.amazon.com/certification/certified-machine-learning-specialty/)— AWS 提供的一个监考考试，这将使你的个人资料更具分量（但不保证任何东西），需要对 AWS 服务和机器学习有一定的理解。
 
-+   [专业数据工程师](https://cloud.google.com/certification/data-engineer) — 由GCP提供的认证。这也是一项监考考试，评估你设计数据处理系统、在生产环境中部署机器学习模型以及确保解决方案质量和自动化的能力。
++   [专业数据工程师](https://cloud.google.com/certification/data-engineer) — 由 GCP 提供的认证。这也是一项监考考试，评估你设计数据处理系统、在生产环境中部署机器学习模型以及确保解决方案质量和自动化的能力。
 
 ### 5. 如何学习应用统计学和数学
 
-*（预计时间：4–5个月）*
+*（预计时间：4–5 个月）*
 
 统计方法是数据科学的核心部分。几乎所有的数据科学面试都主要关注描述性和推断统计学。
 
@@ -200,29 +200,29 @@
 
 +   **描述统计学** — 能够总结数据是很强大的，但并不总是必要。学习位置估计（均值、中位数、众数、加权统计、修剪统计）和变异性来描述数据。
 
-+   **推断统计学** — 设计假设检验、A/B测试、定义业务指标、分析收集的数据和实验结果，使用置信区间、p值和α值。
++   **推断统计学** — 设计假设检验、A/B 测试、定义业务指标、分析收集的数据和实验结果，使用置信区间、p 值和α值。
 
 +   **线性代数、单变量和多变量微积分** ，以理解机器学习中的损失函数、梯度和优化器。
 
 **学习统计学和数学的资源：**
 
-+   [在这个免费的8小时课程中学习大学级统计学](https://www.freecodecamp.org/news/free-statistics-course/) ，课程在 freeCodeCamp 的 YouTube 频道上提供。
++   [在这个免费的 8 小时课程中学习大学级统计学](https://www.freecodecamp.org/news/free-statistics-course/) ，课程在 freeCodeCamp 的 YouTube 频道上提供。
 
 +   [[书籍] 数据科学的实用统计](https://www.amazon.com/Practical-Statistics-Data-Scientists-Essential/dp/149207294X/ref=sr_1_1?crid=QOOZP96ISCU4&dchild=1&keywords=practical+statistics+for+data+scientists&qid=1610247485&s=books&sprefix=practical+stat%2Cstripbooks%2C362&sr=1-1) *（强烈推荐）* — **一本详细介绍所有重要统计方法的指南，包含清晰简洁的应用/示例**。
 
 +   [[书籍] 裸统计学](https://www.amazon.com/Naked-Statistics-Stripping-Dread-Data/dp/1480590185) — 一本非技术性的详细指南，帮助理解统计学对我们日常事件、体育、推荐系统等许多实例的影响。
 
-+   [Python中的统计思维](https://learn.datacamp.com/courses/statistical-thinking-in-python-part-1) — 一门基础课程，帮助你开始统计思维。该课程还有第二部分。
++   [Python 中的统计思维](https://learn.datacamp.com/courses/statistical-thinking-in-python-part-1) — 一门基础课程，帮助你开始统计思维。该课程还有第二部分。
 
-+   [描述统计学入门](https://www.udacity.com/course/intro-to-descriptive-statistics--ud827) — 由Udacity提供。包括解释广泛使用的定位和变异性测量（标准差、方差、中位绝对偏差）的讲解视频。
++   [描述统计学入门](https://www.udacity.com/course/intro-to-descriptive-statistics--ud827) — 由 Udacity 提供。包括解释广泛使用的定位和变异性测量（标准差、方差、中位绝对偏差）的讲解视频。
 
-+   [推论统计学，Udacity](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)——该课程包括视频讲座，教你如何从数据中得出可能并不立即显而易见的结论。它侧重于发展假设，并使用常见的测试，如t检验、方差分析（ANOVA）和回归分析。
++   [推论统计学，Udacity](https://www.udacity.com/course/intro-to-inferential-statistics--ud201)——该课程包括视频讲座，教你如何从数据中得出可能并不立即显而易见的结论。它侧重于发展假设，并使用常见的测试，如 t 检验、方差分析（ANOVA）和回归分析。
 
 +   这里有一份[数据科学统计指南](https://www.freecodecamp.org/news/statistics-for-data-science/)来帮助你走上正确的道路。
 
 **统计项目想法：**
 
-+   解决上述课程提供的练习，然后尝试处理一些公共数据集，在这些数据集中应用这些统计概念。提出类似于“在0.05显著性水平下，是否有足够证据表明波士顿的母亲生育时的平均年龄超过25岁？”的问题。
++   解决上述课程提供的练习，然后尝试处理一些公共数据集，在这些数据集中应用这些统计概念。提出类似于“在 0.05 显著性水平下，是否有足够证据表明波士顿的母亲生育时的平均年龄超过 25 岁？”的问题。
 
 +   尝试设计并与同伴/小组/班级一起进行小实验，让他们与应用程序互动或回答问题。在一段时间后，一旦你收集到足够的数据，就对这些数据应用统计方法。这可能非常难以实现，但应该非常有趣。
 
@@ -230,7 +230,7 @@
 
 ### 6\. 如何学习机器学习和人工智能
 
-*(预计时间：4–5个月)*
+*(预计时间：4–5 个月)*
 
 在深入掌握所有上述主要概念后，你现在应该准备好开始使用高级机器学习算法。
 
@@ -238,33 +238,33 @@
 
 1.  **监督学习**——包括回归和分类问题。学习简单线性回归、多重回归、多项式回归、朴素贝叶斯、逻辑回归、KNN、树模型、集成模型。了解评估指标。
 
-1.  **无监督学习**——聚类和降维是无监督学习中两个广泛使用的应用。深入研究主成分分析（PCA）、K均值聚类、层次聚类和高斯混合模型。
+1.  **无监督学习**——聚类和降维是无监督学习中两个广泛使用的应用。深入研究主成分分析（PCA）、K 均值聚类、层次聚类和高斯混合模型。
 
-1.  **强化学习**（可跳过）——帮助你构建自我奖励系统。学习优化奖励，使用TF-Agents库，创建深度Q网络，等等。
+1.  **强化学习**（可跳过）——帮助你构建自我奖励系统。学习优化奖励，使用 TF-Agents 库，创建深度 Q 网络，等等。
 
 大多数机器学习项目要求你掌握我在[这篇博客](https://towardsdatascience.com/task-cheatsheet-for-almost-every-machine-learning-project-d0946861c6d0)中解释的许多任务。
 
 **学习机器学习的资源：**
 
-+   这里有一个免费的完整课程[使用ScikitLearn的Python机器学习](https://www.freecodecamp.org/news/machine-learning-with-scikit-learn-full-course/)在freeCodeCamp YouTube频道上。
++   这里有一个免费的完整课程[使用 ScikitLearn 的 Python 机器学习](https://www.freecodecamp.org/news/machine-learning-with-scikit-learn-full-course/)在 freeCodeCamp YouTube 频道上。
 
-+   [书籍] [动手学习机器学习：Scikit-Learn、Keras 和 TensorFlow 第2版](https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646/ref=sr_1_1?dchild=1&keywords=Hands-On+Machine+Learning+with+Scikit-Learn%2C+Keras%2C+and+TensorFlow%2C+2nd+Edition&qid=1610253356&sr=8-1)——这是我最喜欢的机器学习书籍之一。书中不仅涵盖了理论数学推导，还通过示例展示了算法的实现。你应该完成每章末尾给出的练习。
++   [书籍] [动手学习机器学习：Scikit-Learn、Keras 和 TensorFlow 第 2 版](https://www.amazon.com/Hands-Machine-Learning-Scikit-Learn-TensorFlow/dp/1492032646/ref=sr_1_1?dchild=1&keywords=Hands-On+Machine+Learning+with+Scikit-Learn%2C+Keras%2C+and+TensorFlow%2C+2nd+Edition&qid=1610253356&sr=8-1)——这是我最喜欢的机器学习书籍之一。书中不仅涵盖了理论数学推导，还通过示例展示了算法的实现。你应该完成每章末尾给出的练习。
 
-+   [Andrew Ng的机器学习课程](https://www.coursera.org/learn/machine-learning)——任何想学习机器学习的人都必修的课程。毫无疑问！
++   [Andrew Ng 的机器学习课程](https://www.coursera.org/learn/machine-learning)——任何想学习机器学习的人都必修的课程。毫无疑问！
 
-+   [机器学习简介](https://www.kaggle.com/learn/intro-to-machine-learning)——Kaggle的互动课程。
++   [机器学习简介](https://www.kaggle.com/learn/intro-to-machine-learning)——Kaggle 的互动课程。
 
-+   [游戏AI和强化学习简介](https://www.kaggle.com/learn/intro-to-game-ai-and-reinforcement-learning)——Kaggle上另一个关于强化学习的互动课程。
++   [游戏 AI 和强化学习简介](https://www.kaggle.com/learn/intro-to-game-ai-and-reinforcement-learning)——Kaggle 上另一个关于强化学习的互动课程。
 
-**[deeplearning.ai的深度学习专业化](https://www.deeplearning.ai/deep-learning-specialization/)**
+**[deeplearning.ai 的深度学习专业化](https://www.deeplearning.ai/deep-learning-specialization/)**
 
-对于那些有兴趣进一步深入深度学习的人，你可以从完成deeplearning.ai提供的专业化课程和《动手学习》书籍开始。从数据科学的角度来看，除非你打算解决计算机视觉或NLP问题，否则这并不是特别重要。
+对于那些有兴趣进一步深入深度学习的人，你可以从完成 deeplearning.ai 提供的专业化课程和《动手学习》书籍开始。从数据科学的角度来看，除非你打算解决计算机视觉或 NLP 问题，否则这并不是特别重要。
 
 深度学习值得拥有一份专门的路线图。我将很快创建一个包含所有基础概念的路线图。
 
 ### 跟踪你的学习进度
 
-我还为你在Notion上创建了一个学习跟踪器。你可以根据自己的需求自定义它，并用来跟踪你的进度，方便访问所有资源和项目。
+我还为你在 Notion 上创建了一个学习跟踪器。你可以根据自己的需求自定义它，并用来跟踪你的进度，方便访问所有资源和项目。
 
 [在这里找到学习跟踪器](https://www.notion.so/Data-Science-learning-tracker-0d3c503280d744acb1b862a1ddd8344e)。
 
@@ -276,19 +276,19 @@
 
 **相关：**
 
-+   [10个数据科学自学资源](https://www.kdnuggets.com/2021/02/10-resources-data-science-self-study.html)
++   [10 个数据科学自学资源](https://www.kdnuggets.com/2021/02/10-resources-data-science-self-study.html)
 
 +   [到目前为止的数据科学学习之旅](https://www.kdnuggets.com/2021/01/data-science-learning-journey.html)
 
-+   [2021年免费学习数据科学](https://www.kdnuggets.com/2021/01/learn-data-science-free-2021.html)
++   [2021 年免费学习数据科学](https://www.kdnuggets.com/2021/01/learn-data-science-free-2021.html)
 
 ### 更多相关内容
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [停止学习数据科学以寻找目标，并以寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

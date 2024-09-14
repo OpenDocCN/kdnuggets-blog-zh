@@ -1,8 +1,8 @@
 # 了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA
 
-> 原文：[https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)
+> 原文：[`www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html`](https://www.kdnuggets.com/2023/05/learn-run-alpacalora-device-steps.html)
 
-![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](../Images/b8c4bb8fbbee6508b65e2b6a3ead8c58.png)
+![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](img/b8c4bb8fbbee6508b65e2b6a3ead8c58.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
@@ -30,23 +30,23 @@
 
 `LLaMA` 模型有多个版本，即 7B、13B、30B 和 65B。`Alpaca` 可以扩展到 7B、13B、30B 和 65B 参数模型。
 
-![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](../Images/584392b5c100755a7dbd7a7455207f98.png)
+![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](img/584392b5c100755a7dbd7a7455207f98.png)
 
-图1 Aplaca 7B 架构 | 图片来源于[斯坦福大学](https://crfm.stanford.edu/2023/03/13/alpaca.html)
+图 1 Aplaca 7B 架构 | 图片来源于[斯坦福大学](https://crfm.stanford.edu/2023/03/13/alpaca.html)
 
-Alpaca-LoRA是[斯坦福Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html)的一个较小版本，功耗更低，可以在低端设备如树莓派上运行。Alpaca-LoRA使用[低秩适应(LoRA)](https://arxiv.org/pdf/2106.09685.pdf)来加速大模型的训练，同时消耗更少的内存。
+Alpaca-LoRA 是[斯坦福 Alpaca](https://crfm.stanford.edu/2023/03/13/alpaca.html)的一个较小版本，功耗更低，可以在低端设备如树莓派上运行。Alpaca-LoRA 使用[低秩适应(LoRA)](https://arxiv.org/pdf/2106.09685.pdf)来加速大模型的训练，同时消耗更少的内存。
 
-# Alpaca LoRA Python实现
+# Alpaca LoRA Python 实现
 
-我们将创建一个Python环境来在本地计算机上运行Alpaca-LoRA。你需要一个GPU来运行该模型。它不能在CPU上运行（或运行非常缓慢）。如果使用7B模型，至少需要12GB的RAM，如果使用13B或30B模型，则需要更高的内存。
+我们将创建一个 Python 环境来在本地计算机上运行 Alpaca-LoRA。你需要一个 GPU 来运行该模型。它不能在 CPU 上运行（或运行非常缓慢）。如果使用 7B 模型，至少需要 12GB 的 RAM，如果使用 13B 或 30B 模型，则需要更高的内存。
 
-如果你没有GPU，可以在[Google Colab](https://colab.research.google.com/)中执行相同的步骤。最后，我会与你分享Colab链接。
+如果你没有 GPU，可以在[Google Colab](https://colab.research.google.com/)中执行相同的步骤。最后，我会与你分享 Colab 链接。
 
-我们将遵循[tloen](https://github.com/tloen/alpaca-lora)提供的Alpaca-LoRA的GitHub仓库。
+我们将遵循[tloen](https://github.com/tloen/alpaca-lora)提供的 Alpaca-LoRA 的 GitHub 仓库。
 
 ## 1\. 创建虚拟环境
 
-我们将在虚拟环境中安装所有库。这不是强制性的，但建议这么做。以下命令适用于Windows操作系统。（Google Colab不需要这一步）
+我们将在虚拟环境中安装所有库。这不是强制性的，但建议这么做。以下命令适用于 Windows 操作系统。（Google Colab 不需要这一步）
 
 创建虚拟环境的命令
 
@@ -66,9 +66,9 @@ $ .\venv\Scripts\activate
 $ deactivate
 ```
 
-## 2\. 克隆GitHub仓库
+## 2\. 克隆 GitHub 仓库
 
-现在，我们将克隆Alpaca LoRA的仓库。
+现在，我们将克隆 Alpaca LoRA 的仓库。
 
 ```py
 $ git clone https://github.com/tloen/alpaca-lora.git
@@ -83,7 +83,7 @@ $ pip install -r .\requirements.txt
 
 ## 3\. 训练
 
-名为`finetune.py`的Python文件包含LLaMA模型的超参数，如批量大小、训练轮数、学习率（LR）等，你可以对这些参数进行调整。运行`finetune.py`不是强制性的。否则，执行文件将从`tloen/alpaca-lora-7b`读取基础模型和权重。
+名为`finetune.py`的 Python 文件包含 LLaMA 模型的超参数，如批量大小、训练轮数、学习率（LR）等，你可以对这些参数进行调整。运行`finetune.py`不是强制性的。否则，执行文件将从`tloen/alpaca-lora-7b`读取基础模型和权重。
 
 ```py
 $ python finetune.py \
@@ -106,9 +106,9 @@ $ python finetune.py \
 
 ## 4\. 运行模型
 
-名为`generate.py`的Python文件将从`tloen/alpaca-lora-7b`读取Hugging Face模型和LoRA权重。它使用Gradio运行一个用户界面，用户可以在文本框中输入问题，并在另一个文本框中接收输出。
+名为`generate.py`的 Python 文件将从`tloen/alpaca-lora-7b`读取 Hugging Face 模型和 LoRA 权重。它使用 Gradio 运行一个用户界面，用户可以在文本框中输入问题，并在另一个文本框中接收输出。
 
-**注意：** 如果你在Google Colab中工作，请在`generate.py`文件的`launch()`函数中标记`share=True`。这将使界面在公共URL上运行。否则，它将在本地主机`[http://0.0.0.0:7860](http://0.0.0.0:7860)`上运行。
+**注意：** 如果你在 Google Colab 中工作，请在`generate.py`文件的`launch()`函数中标记`share=True`。这将使界面在公共 URL 上运行。否则，它将在本地主机`[`0.0.0.0:7860`](http://0.0.0.0:7860)`上运行。
 
 ```py
 $ python generate.py --load_8bit --base_model 'decapoda-research/llama-7b-hf' --lora_weights 'tloen/alpaca-lora-7b'
@@ -116,15 +116,15 @@ $ python generate.py --load_8bit --base_model 'decapoda-research/llama-7b-hf' --
 
 **输出：**
 
-![学习如何在你的设备上仅需几个步骤运行Alpaca-LoRA](../Images/1e0726a6a301a56a44268453e27482b3.png)
+![学习如何在你的设备上仅需几个步骤运行 Alpaca-LoRA](img/1e0726a6a301a56a44268453e27482b3.png)
 
-它有两个URL，一个是公开的，一个是在本地主机上运行的。如果你使用Google Colab，可以访问公共链接。
+它有两个 URL，一个是公开的，一个是在本地主机上运行的。如果你使用 Google Colab，可以访问公共链接。
 
-## 5\. Docker化应用程序
+## 5\. Docker 化应用程序
 
-如果你希望将应用程序导出到某处或遇到一些依赖问题，你可以将应用程序[Docker化](https://docs.docker.com/get-started/overview/)。Docker是一个创建应用程序不可变镜像的工具。然后这个镜像可以被分享，并且可以转换回应用程序，这样它就能在一个包含所有必要库、工具、代码和运行时的容器中运行。你可以从[这里](https://docs.docker.com/desktop/install/windows-install/)下载适用于Windows的Docker。
+如果你希望将应用程序导出到某处或遇到一些依赖问题，你可以将应用程序[Docker 化](https://docs.docker.com/get-started/overview/)。Docker 是一个创建应用程序不可变镜像的工具。然后这个镜像可以被分享，并且可以转换回应用程序，这样它就能在一个包含所有必要库、工具、代码和运行时的容器中运行。你可以从[这里](https://docs.docker.com/desktop/install/windows-install/)下载适用于 Windows 的 Docker。
 
-**注意：** 如果你使用Google Colab，可以跳过这一步。
+**注意：** 如果你使用 Google Colab，可以跳过这一步。
 
 **构建容器镜像：**
 
@@ -147,7 +147,7 @@ $ docker run --gpus=all --shm-size 64g -p 7860:7860 -v ${HOME}/.cache:/root/.cac
 
 现在，我们的 Alpaca-LoRA 正在运行。接下来我们将探索它的一些功能，并请它为我们写一些东西。
 
-![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](../Images/ade3cd343800038ea531c1f99d39e4f3.png)
+![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](img/ade3cd343800038ea531c1f99d39e4f3.png)
 
 图 2 Aplaca-LoRA 用户界面 | 图片由作者提供
 
@@ -161,7 +161,7 @@ Q1: 编写一个 Python 代码来查找一个数字的阶乘。
 
 输出：
 
-![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](../Images/e8020577429f8bba9aba273563e7ea9a.png)
+![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](img/e8020577429f8bba9aba273563e7ea9a.png)
 
 图 3 输出-1 | 图片由作者提供
 
@@ -169,7 +169,7 @@ Q2: 将“KDnuggets 是一个领先的数据科学、机器学习、人工智能
 
 输出：
 
-![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](../Images/3cdbfaea397d27a0550d4755fa940b9e.png)
+![了解如何在您的设备上仅需几个步骤运行 Alpaca-LoRA](img/3cdbfaea397d27a0550d4755fa940b9e.png)
 
 图 4 输出-2 | 图片由作者提供
 

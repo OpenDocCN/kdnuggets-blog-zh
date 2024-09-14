@@ -1,28 +1,28 @@
-# 数据科学备忘单完整合集 – 第2部分
+# 数据科学备忘单完整合集 – 第二部分
 
-> 原文：[https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
+> 原文：[`www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html`](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-![数据科学备忘单完整合集 - 第2部分](../Images/eb686be0d531e379cb79fd1249db730e.png)
+![数据科学备忘单完整合集 - 第二部分](img/eb686be0d531e379cb79fd1249db730e.png)
 
 作者提供的图像
 
-> **编辑注**：有关本系列两个部分的完整备忘单范围，请参见 [**数据科学备忘单完整合集 - 第1部分**](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)。
+> **编辑注**：有关本系列两个部分的完整备忘单范围，请参见 [**数据科学备忘单完整合集 - 第一部分**](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 寻找适合你的备忘单可能需要一些时间，因为大多数备忘单并不容易理解。该博客包含易于跟随和总结的备忘单，以复习数据科学的高级概念。
 
-该博客系列分为两部分，包含易于跟随和总结的备忘单，以复习所有的数据科学概念。这两部分系列进一步分为子类别 SQL、网页抓取、统计学、数据分析、商业智能、大数据、数据结构与算法、机器学习、深度学习、自然语言处理、数据工程、网络框架，以及一体化VIP备忘单。
+该博客系列分为两部分，包含易于跟随和总结的备忘单，以复习所有的数据科学概念。这两部分系列进一步分为子类别 SQL、网页抓取、统计学、数据分析、商业智能、大数据、数据结构与算法、机器学习、深度学习、自然语言处理、数据工程、网络框架，以及一体化 VIP 备忘单。
 
 **第二篇博客包含七个子类别：**
 
@@ -38,13 +38,13 @@
 
 1.  网络框架
 
-1.  VIP备忘单
+1.  VIP 备忘单
 
 ## 数据结构与算法
 
 最常见的技术面试问题涉及数据结构和算法。如果你是软件工程师或数据科学家，你必须了解常见的数据结构操作、搜索和排序算法以及数据结构类型。这个列表旨在帮助你理解复杂的排序函数和算法。
 
-+   [**大O复杂度图表**](https://www.bigocheatsheet.com/)
++   [**大 O 复杂度图表**](https://www.bigocheatsheet.com/)
 
 +   [**常见数据结构操作 / 数组排序算法**](https://www.bigocheatsheet.com/)
 
@@ -62,19 +62,19 @@
 
 +   [**无监督学习**](https://github.com/afshinea/stanford-cs-229-machine-learning/blob/master/en/cheatsheet-unsupervised-learning.pdf)
 
-+   [**Scikit-Learn：Python机器学习**](http://datacamp-community-prod.s3.amazonaws.com/eb807da5-dce5-4b97-a54d-74e89f14266b)
++   [**Scikit-Learn：Python 机器学习**](http://datacamp-community-prod.s3.amazonaws.com/eb807da5-dce5-4b97-a54d-74e89f14266b)
 
 +   [**Scikit-Learn：机器学习算法选择**](http://scikit-learn.org/stable/_static/ml_map.png)
 
 +   [**机器学习算法**](https://download.microsoft.com/download/3/5/b/35bb997f-a8c7-485d-8c56-19444dafd757/azure-machine-learning-algorithm-cheat-sheet-nov2019.pdf?WT.mc_id=docs-article-lazzeri)
 
-+   [**R中的时间序列**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/time-series.pdf)
++   [**R 中的时间序列**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/time-series.pdf)
 
 +   [**机器学习技巧与窍门**](https://stanford.edu/~shervine/teaching/cs-229/cheatsheet-machine-learning-tips-and-tricks)
 
-+   [**Caret：R中的建模和机器学习**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/caret.pdf)
++   [**Caret：R 中的建模和机器学习**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/caret.pdf)
 
-+   [**使用R进行机器学习建模**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/Machine%20Learning%20Modelling%20in%20R.pdf)
++   [**使用 R 进行机器学习建模**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/Machine%20Learning%20Modelling%20in%20R.pdf)
 
 ## 深度学习
 
@@ -92,7 +92,7 @@
 
 +   [**带图示的神经网络类型**](https://www.asimovinstitute.org/wp-content/uploads/2016/09/neuralnetworks.png)
 
-+   [**Keras：Python中的神经网络**](http://datacamp-community-prod.s3.amazonaws.com/af9bb467-170d-41c9-a0bd-26e675384c4e)
++   [**Keras：Python 中的神经网络**](http://datacamp-community-prod.s3.amazonaws.com/af9bb467-170d-41c9-a0bd-26e675384c4e)
 
 +   [**使用 Keras 进行深度学习（R 语言）**](https://raw.githubusercontent.com/rstudio/cheatsheets/main/keras.pdf)
 
@@ -142,7 +142,7 @@
 
 +   [**BigQuery**](https://cloud.google.com/blog/topics/developers-practitioners/query-big-bigquery-cheat-sheet)
 
-![The Complete Collection of Data Science Cheat Sheets - Part 2](../Images/94b110e2b3f7ce7ab9e3f91a1e44a3b9.png)
+![The Complete Collection of Data Science Cheat Sheets - Part 2](img/94b110e2b3f7ce7ab9e3f91a1e44a3b9.png)
 
 图片来源于 [vectorjuice](https://www.freepik.com/vectorjuice)
 
@@ -182,18 +182,18 @@ VIP 备忘单是数据科学的宝贵资源，其中包含关于数据科学及�
 
 如果你正在准备面试或演讲，使用这些备忘单来复习数据科学的核心概念。我们涵盖了数据结构与算法、机器学习、深度学习、自然语言处理、数据工程和网页框架。如果你想在下一次面试中表现出色，请收藏这个网页，以便随时回来准备技术面试。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理健康问题的学生构建AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理健康问题的学生构建 AI 产品。
 
 ### 更多相关主题
 
-+   [数据科学备忘单全集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单全集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日: 数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [KDnuggets 新闻, 4月6日: 8个免费的MIT数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻, 4 月 6 日: 8 个免费的 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学书籍全集 - 第1部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
++   [数据科学书籍全集 - 第一部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
 
-+   [数据科学书籍全集 - 第2部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
++   [数据科学书籍全集 - 第二部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
 
-+   [数据科学访谈全集 - 第1部分](https://www.kdnuggets.com/2022/06/complete-collection-data-science-interviews-part-1.html)
++   [数据科学访谈全集 - 第一部分](https://www.kdnuggets.com/2022/06/complete-collection-data-science-interviews-part-1.html)

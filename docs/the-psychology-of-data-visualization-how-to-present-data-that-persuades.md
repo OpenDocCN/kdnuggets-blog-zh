@@ -1,8 +1,8 @@
 # 数据可视化的心理学：如何展示能说服人的数据
 
-> 原文：[https://www.kdnuggets.com/the-psychology-of-data-visualization-how-to-present-data-that-persuades](https://www.kdnuggets.com/the-psychology-of-data-visualization-how-to-present-data-that-persuades)
+> 原文：[`www.kdnuggets.com/the-psychology-of-data-visualization-how-to-present-data-that-persuades`](https://www.kdnuggets.com/the-psychology-of-data-visualization-how-to-present-data-that-persuades)
 
-![数据可视化的心理学：如何展示能说服人的数据](../Images/3e0bc41d53f895e3d36ffeebe755d6b2.png)
+![数据可视化的心理学：如何展示能说服人的数据](img/3e0bc41d53f895e3d36ffeebe755d6b2.png)
 
 图片来源于 [pikisuperstar](https://www.freepik.com/free-vector/gradient-infographic-dashboard-elements-pack_13792868.htm#fromView=search&page=1&position=32&uuid=f26e78e4-84a0-4a9c-9b08-78581ad0c6ef) 在 Freepik
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-数据可视化登场了。通过利用所有感官中最直接和最主导的一个，复杂和[精细的数据点可以被浓缩](/2021/08/visualization-transforming-exploratory-data-analysis.html)成一种每个参与者都可以直观理解的可操作格式。
+数据可视化登场了。通过利用所有感官中最直接和最主导的一个，复杂和精细的数据点可以被浓缩成一种每个参与者都可以直观理解的可操作格式。
 
 因此，通过视觉表现有效沟通洞察力和想法的能力变得越来越重要。有效的可视化可以切穿噪音，突出模式和关系，并引导观众的注意力到最关键的洞察力上。
 
@@ -28,17 +28,17 @@
 
 # 视觉处理的心理学
 
-数据可视化中的视觉处理心理学是一个深具吸引力的领域，[交叉心理学、神经科学和设计原则](/data-visualization-theory-and-techniques)。它关注于人类如何解读、理解和回应视觉数据展示。它突显了我们视觉系统相比其他数据处理形式的惊人效率。
+数据可视化中的视觉处理心理学是一个深具吸引力的领域，交叉心理学、神经科学和设计原则。它关注于人类如何解读、理解和回应视觉数据展示。它突显了我们视觉系统相比其他数据处理形式的惊人效率。
 
-人脑处理视觉信息的速度极快。实际上，研究表明，它可以在[13毫秒内](https://news.mit.edu/2014/in-the-blink-of-an-eye-0116)理解形状、颜色和方向。这种速度使得视觉数据比文本信息更为即时和有影响力。
+人脑处理视觉信息的速度极快。实际上，研究表明，它可以在[13 毫秒内](https://news.mit.edu/2014/in-the-blink-of-an-eye-0116)理解形状、颜色和方向。这种速度使得视觉数据比文本信息更为即时和有影响力。
 
-因此，仅仅使用图表往往不能充分体现你的努力。例如，与之前的表现相比，即使是简单的图表，加上百分比变化和数字，也比简单、乏味的陈述更能解释[你的云成本优化努力](https://cast.ai/cloud-cost-optimization/)如何[为组织带来回报](/2022/08/data-visualization-add-impact-work-reports-presentations.html)。
+因此，仅仅使用图表往往不能充分体现你的努力。例如，与之前的表现相比，即使是简单的图表，加上百分比变化和数字，也比简单、乏味的陈述更能解释[你的云成本优化努力](https://cast.ai/cloud-cost-optimization/)如何为组织带来回报。
 
-此外，[双重加工理论解释了](https://conceptually.org/concepts/dual-processing-theory)我们有两种思维方式：快速、本能的（系统1）和慢速、分析的（系统2）。可视化利用系统1，让我们能够快速理解复杂信息，而无需进行更深层次、较慢的分析。
+此外，[双重加工理论解释了](https://conceptually.org/concepts/dual-processing-theory)我们有两种思维方式：快速、本能的（系统 1）和慢速、分析的（系统 2）。可视化利用系统 1，让我们能够快速理解复杂信息，而无需进行更深层次、较慢的分析。
 
 我们使用颜色、形状和位置的方式会影响人们记住和根据可视化做出决策的能力。了解视觉元素如何影响感知和记忆有助于创建更有效的视觉效果。
 
-创建[有效的数据可视化](/data-visualization-presenting-complex-information-effectively)意味着利用人类天生的视觉处理能力，以一种立即可理解和难以忘怀的方式呈现复杂信息。
+创建有效的数据可视化意味着利用人类天生的视觉处理能力，以一种立即可理解和难以忘怀的方式呈现复杂信息。
 
 # 说服性数据可视化原则
 
@@ -46,7 +46,7 @@
 
 ## 战略讲故事
 
-每个有效的数据可视化都始于一个清晰、具体的目标。这意味着准确知道你希望在观众中引发什么行动或理解。从那里，[围绕你的数据构建一个叙事](/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)有助于吸引观众，使信息更具相关性和吸引力。
+每个有效的数据可视化都始于一个清晰、具体的目标。这意味着准确知道你希望在观众中引发什么行动或理解。从那里，围绕你的数据构建一个叙事有助于吸引观众，使信息更具相关性和吸引力。
 
 这个叙事应有一个清晰的引言、主体和结论，每部分都建立在上一部分的基础上，引导观众达到预期的理解或行动。
 
@@ -54,7 +54,7 @@
 
 为你的观众选择正确的数据至关重要。数据应直接与观众的兴趣或需求相关。这种量身定制的方法确保可视化能直接针对观众的关注点或好奇心，*使信息更具说服力*，[让信息更具说服力](https://flourish.studio/blog/choosing-the-right-visualisation/)。
 
-数据选择的一个问题是它可能非常耗时。然而，你不必完全手动完成所有工作——[使用自动化文档生成工具](https://apryse.com/blog/docx-template-document-generation-using-python)可以减少所需时间，使你可以将更多精力投入到分析最具吸引力的数据点上以用于演示。此外，你还可以[使用各种可视化工具](/2023/02/5-sql-visualization-tools-data-engineers.html)——不需要为所有内容都制作手工演示。
+数据选择的一个问题是它可能非常耗时。然而，你不必完全手动完成所有工作——[使用自动化文档生成工具](https://apryse.com/blog/docx-template-document-generation-using-python)可以减少所需时间，使你可以将更多精力投入到分析最具吸引力的数据点上以用于演示。此外，你还可以使用各种可视化工具——不需要为所有内容都制作手工演示。
 
 ## 设计原则
 
@@ -92,11 +92,11 @@
 
 数据可视化还增强了讲故事的能力。它允许企业以引人注目的方式展示他们的故事，使沟通利益相关者、培训团队或吸引客户变得更加容易。这种方法对于呈现想法和策略非常有效，例如提出整合新技术或流程以提高部门效率。
 
-此外，[它提高了生产力](/2022/08/data-visualization-add-impact-work-reports-presentations.html)，通过提供即时见解，帮助快速行动，减少因数据误解而导致的延迟。通过使数据更易于消化，团队可以专注于可操作项和改进，而不是花时间理解复杂的数据集。
+此外，它提高了生产力，通过提供即时见解，帮助快速行动，减少因数据误解而导致的延迟。通过使数据更易于消化，团队可以专注于可操作项和改进，而不是花时间理解复杂的数据集。
 
 风险管理是数据可视化发挥重要作用的另一个领域。它帮助组织更好地理解和应对涉及不确定性和风险的情况，通过可视化简化数据以突出潜在的关注领域。
 
-有时，管理层和高管需要一点推动。我并不是在责怪谁——权威人士通常没有时间去微观管理和全神贯注于操作层面的所有细节和复杂性。举个例子，如果你知道[SAP咨询将使你的部门受益](https://www.suretysystems.com/consulting/sap/)并且能带来更大的整合和效率，那么将这些信息一次性呈现出来，并用[充满图表和图形的引人入胜的叙述](/2022/04/franks-winning-room-creating-delivering-effective-data-driven-presentation.html)比仅仅提及事实而让初步印象渐渐消退更有可能奏效。
+有时，管理层和高管需要一点推动。我并不是在责怪谁——权威人士通常没有时间去微观管理和全神贯注于操作层面的所有细节和复杂性。举个例子，如果你知道[SAP 咨询将使你的部门受益](https://www.suretysystems.com/consulting/sap/)并且能带来更大的整合和效率，那么将这些信息一次性呈现出来，并用充满图表和图形的引人入胜的叙述比仅仅提及事实而让初步印象渐渐消退更有可能奏效。
 
 # 结论
 
@@ -106,18 +106,18 @@
 
 只有在达到这种平衡时，我们才能创造出不仅美丽而且清晰、深刻且有影响力的可视化。
 
-[](http://nahlawrites.com/)****[Nahla Davies](http://nahlawrites.com/)****是一位软件开发人员和技术作家。在全职从事技术写作之前，她还曾担任过一家《Inc. 5000》体验品牌机构的首席程序员，该公司客户包括三星、时代华纳、Netflix和索尼。
+[](http://nahlawrites.com/)****[Nahla Davies](http://nahlawrites.com/)****是一位软件开发人员和技术作家。在全职从事技术写作之前，她还曾担任过一家《Inc. 5000》体验品牌机构的首席程序员，该公司客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 更多相关话题
 
-+   [数据科学、数据可视化及…的前38个Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [数据科学、数据可视化及…的前 38 个 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-+   [KDnuggets新闻 22:n16, 4月20日：学习的最佳YouTube频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 4 月 20 日：学习的最佳 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
 
 +   [数据科学中的绘图和数据可视化](https://www.kdnuggets.com/2022/06/plotting-data-visualization-data-science.html)
 
-+   [SQL用于数据可视化：如何为图表和图形准备数据](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)
++   [SQL 用于数据可视化：如何为图表和图形准备数据](https://www.kdnuggets.com/sql-for-data-visualization-how-to-prepare-data-for-charts-and-graphs)
 
-+   [使用Seaborn进行Python数据可视化](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
++   [使用 Seaborn 进行 Python 数据可视化](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
 
 +   [讲述一个出色的数据故事：可视化决策树](https://www.kdnuggets.com/2021/02/telling-great-data-story-visualization-decision-tree.html)

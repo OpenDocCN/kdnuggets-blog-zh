@@ -1,8 +1,8 @@
 # GitHub 上的精彩公共数据集
 
-> 原文：[https://www.kdnuggets.com/2015/04/awesome-public-datasets-github.html](https://www.kdnuggets.com/2015/04/awesome-public-datasets-github.html)
+> 原文：[`www.kdnuggets.com/2015/04/awesome-public-datasets-github.html`](https://www.kdnuggets.com/2015/04/awesome-public-datasets-github.html)
 
-![设计师数据设计](../Images/b6091fd736b6460bab81cff9840517e1.png)无论你阅读多少关于技术的书籍，有些知识只能通过经验获得。这在大数据领域尤为真实。尽管网上有很多资源（包括 [KDnuggets 数据集](/datasets/index.html)）可以用于大型数据集，但许多有抱负的从业者（主要是新手）往往对尝试将数据科学技能应用于现实生活中的大型数据集时的无限选项知之甚少。因此，我们始终在寻找更多更好的可供公众使用的数据集。
+![设计师数据设计](img/b6091fd736b6460bab81cff9840517e1.png)无论你阅读多少关于技术的书籍，有些知识只能通过经验获得。这在大数据领域尤为真实。尽管网上有很多资源（包括 KDnuggets 数据集）可以用于大型数据集，但许多有抱负的从业者（主要是新手）往往对尝试将数据科学技能应用于现实生活中的大型数据集时的无限选项知之甚少。因此，我们始终在寻找更多更好的可供公众使用的数据集。
 
 在我们这一旅程的下一个努力中，我们在这里分享了一份由 [Xia Ming](http://xiaming.me/pages/about.html)（简历见文末）整理的精彩公共数据源列表，这些数据源来自博客、回答和用户反馈。下面列出的多数数据集是免费的，但有些则不是。
 
@@ -118,11 +118,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

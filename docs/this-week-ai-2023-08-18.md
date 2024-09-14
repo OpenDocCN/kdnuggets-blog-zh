@@ -1,34 +1,34 @@
-# 本周人工智能动态，8月18日：OpenAI财务困境 • Stability AI宣布StableCode
+# 本周人工智能动态，8 月 18 日：OpenAI 财务困境 • Stability AI 宣布 StableCode
 
-> 原文：[https://www.kdnuggets.com/2023/08/this-week-ai-2023-08-18.html](https://www.kdnuggets.com/2023/08/this-week-ai-2023-08-18.html)
+> 原文：[`www.kdnuggets.com/2023/08/this-week-ai-2023-08-18.html`](https://www.kdnuggets.com/2023/08/this-week-ai-2023-08-18.html)
 
-![### ALT ###](../Images/ed6e88542b41e9889a22780056e09561.png)
+![### ALT ###](img/ed6e88542b41e9889a22780056e09561.png)
 
-图片由编辑使用Midjourney创建
+图片由编辑使用 Midjourney 创建
 
-欢迎来到本周的“本周人工智能动态”版块，这里是KDnuggets的每周精选帖子，旨在让你了解人工智能快速发展的世界中的最引人注目的进展。从塑造我们对AI在社会中角色理解的突破性头条到引发思考的文章、富有洞察力的学习资源和推动我们知识边界的研究，这篇帖子提供了AI当前格局的全面概述。本周更新旨在让你在这一不断发展的领域中保持更新和知情。敬请关注，阅读愉快！
+欢迎来到本周的“本周人工智能动态”版块，这里是 KDnuggets 的每周精选帖子，旨在让你了解人工智能快速发展的世界中的最引人注目的进展。从塑造我们对 AI 在社会中角色理解的突破性头条到引发思考的文章、富有洞察力的学习资源和推动我们知识边界的研究，这篇帖子提供了 AI 当前格局的全面概述。本周更新旨在让你在这一不断发展的领域中保持更新和知情。敬请关注，阅读愉快！
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 # 头条新闻
 
-“头条新闻”部分讨论了过去一周在人工智能领域的顶级新闻和发展信息。信息涵盖了政府AI政策、技术进步和企业AI创新。
+“头条新闻”部分讨论了过去一周在人工智能领域的顶级新闻和发展信息。信息涵盖了政府 AI 政策、技术进步和企业 AI 创新。
 
-???? **[ChatGPT陷入困境：OpenAI可能在2024年破产，AI机器人每天给公司带来70万美元成本](https://www.firstpost.com/tech/news-analysis/openai-may-go-bankrupt-by-2024-chatgpt-costs-company-700000-dollars-every-day-12986012.html)**
+???? **[ChatGPT 陷入困境：OpenAI 可能在 2024 年破产，AI 机器人每天给公司带来 70 万美元成本](https://www.firstpost.com/tech/news-analysis/openai-may-go-bankrupt-by-2024-chatgpt-costs-company-700000-dollars-every-day-12986012.html)**
 
-OpenAI因运行ChatGPT和其他AI服务的高成本而面临财务困境。尽管早期增长迅猛，但ChatGPT的用户基础在最近几个月有所下降。OpenAI正努力有效地变现其技术并产生可持续收入。同时，其现金消耗速度惊人。随着竞争加剧和企业GPU短缺阻碍模型开发，OpenAI需要紧急寻找盈利路径。如果未能实现，破产可能在这家开创性AI初创企业的视野之内。
+OpenAI 因运行 ChatGPT 和其他 AI 服务的高成本而面临财务困境。尽管早期增长迅猛，但 ChatGPT 的用户基础在最近几个月有所下降。OpenAI 正努力有效地变现其技术并产生可持续收入。同时，其现金消耗速度惊人。随着竞争加剧和企业 GPU 短缺阻碍模型开发，OpenAI 需要紧急寻找盈利路径。如果未能实现，破产可能在这家开创性 AI 初创企业的视野之内。
 
-???? **[Stability AI宣布StableCode，一款为开发者提供的AI编码助手](https://www.maginative.com/article/stability-ai-announces-stablecode-an-ai-coding-assistant-for-developers/)**
+???? **[Stability AI 宣布 StableCode，一款为开发者提供的 AI 编码助手](https://www.maginative.com/article/stability-ai-announces-stablecode-an-ai-coding-assistant-for-developers/)**
 
 Stability AI 发布了其首个专为软件开发优化的生成 AI 产品 StableCode。StableCode 集成了多个在超过 5000 亿个代码标记上训练的模型，提供智能自动补全、响应自然语言指令，并管理长跨度的代码。尽管对话式 AI 已经可以编写代码，StableCode 的设计目的是通过理解代码结构和依赖关系来提高程序员的生产力。凭借其专门的训练和能够处理长上下文的模型，StableCode 旨在提升开发者工作流程，并降低新手编码者的入门门槛。此次发布标志着 Stability AI 在 AI 辅助编码工具领域的首次尝试，面对日益激烈的竞争。
 
@@ -58,15 +58,15 @@ LLaMA-2-7B-32K 是由 Together Computer 开发的开源长上下文语言模型�
 
 ???? **[LLM 研究中的开放挑战](https://huyenchip.com/2023/08/16/llm-research-open-challenges.html)**
 
-这篇文章概述了改进大型语言模型的10个关键研究方向：减少幻觉、优化上下文长度/构建、融入多模态数据、加速模型、设计新架构、开发像光子芯片这样的GPU替代品、构建可用的代理、改进从人类反馈中学习、增强聊天界面，以及扩展到非英语语言。它引用了这些领域的相关论文，指出了诸如为强化学习表示人类偏好和为低资源语言构建模型等挑战。作者总结说，虽然像多语言能力这样的某些问题更易于解决，但像架构这样的其他问题则需要更多突破。总体而言，研究人员、公司和社区中的技术和非技术专长将对推动LLMs的积极发展至关重要。
+这篇文章概述了改进大型语言模型的 10 个关键研究方向：减少幻觉、优化上下文长度/构建、融入多模态数据、加速模型、设计新架构、开发像光子芯片这样的 GPU 替代品、构建可用的代理、改进从人类反馈中学习、增强聊天界面，以及扩展到非英语语言。它引用了这些领域的相关论文，指出了诸如为强化学习表示人类偏好和为低资源语言构建模型等挑战。作者总结说，虽然像多语言能力这样的某些问题更易于解决，但像架构这样的其他问题则需要更多突破。总体而言，研究人员、公司和社区中的技术和非技术专长将对推动 LLMs 的积极发展至关重要。
 
-???? **[为什么你（可能）不需要微调LLM](https://www.tidepool.so/2023/08/17/why-you-probably-dont-need-to-fine-tune-an-llm/)**
+???? **[为什么你（可能）不需要微调 LLM](https://www.tidepool.so/2023/08/17/why-you-probably-dont-need-to-fine-tune-an-llm/)**
 
-这篇文章概述了改进大型语言模型的10个关键研究方向：减少幻觉、优化上下文长度/构建、融入多模态数据、加速模型、设计新架构、开发像光子芯片这样的GPU替代品、构建可用的代理、改进从人类反馈中学习、增强聊天界面，以及扩展到非英语语言。它引用了这些领域的相关论文，指出了诸如为强化学习表示人类偏好和为低资源语言构建模型等挑战。作者总结说，虽然像多语言能力这样的某些问题更易于解决，但像架构这样的其他问题则需要更多突破。总体而言，研究人员、公司和社区中的技术和非技术专长将对推动LLMs的积极发展至关重要。
+这篇文章概述了改进大型语言模型的 10 个关键研究方向：减少幻觉、优化上下文长度/构建、融入多模态数据、加速模型、设计新架构、开发像光子芯片这样的 GPU 替代品、构建可用的代理、改进从人类反馈中学习、增强聊天界面，以及扩展到非英语语言。它引用了这些领域的相关论文，指出了诸如为强化学习表示人类偏好和为低资源语言构建模型等挑战。作者总结说，虽然像多语言能力这样的某些问题更易于解决，但像架构这样的其他问题则需要更多突破。总体而言，研究人员、公司和社区中的技术和非技术专长将对推动 LLMs 的积极发展至关重要。
 
-???? **[使用OpenAI GPT模型的最佳实践](https://www.kdnuggets.com/2023/08/best-practices-openai-gpt-model.html)**
+???? **[使用 OpenAI GPT 模型的最佳实践](https://www.kdnuggets.com/2023/08/best-practices-openai-gpt-model.html)**
 
-这篇文章概述了使用OpenAI的GPT模型时获得高质量输出的最佳实践，借鉴了社区经验。建议提供详细的提示，包括长度和角色等细节；多步骤的指示；要模仿的示例；参考文献和引文；用于关键思考的时间；以及执行代码以提高精确度。按照这些关于如何指导模型的建议，比如明确步骤和角色，可以得到更准确、相关且可定制的结果。该指导旨在帮助用户有效地构建提示，以充分发挥OpenAI强大的生成能力。
+这篇文章概述了使用 OpenAI 的 GPT 模型时获得高质量输出的最佳实践，借鉴了社区经验。建议提供详细的提示，包括长度和角色等细节；多步骤的指示；要模仿的示例；参考文献和引文；用于关键思考的时间；以及执行代码以提高精确度。按照这些关于如何指导模型的建议，比如明确步骤和角色，可以得到更准确、相关且可定制的结果。该指导旨在帮助用户有效地构建提示，以充分发挥 OpenAI 强大的生成能力。
 
 ???? **[我们对人工智能的看法都错了](https://arnoldkling.substack.com/p/were-all-wrong-about-ai)**
 
@@ -94,12 +94,12 @@ LLaMA-2-7B-32K 是由 Together Computer 开发的开源长上下文语言模型�
 
 +   [揭示 StableCode：AI 辅助编码的新视野](https://www.kdnuggets.com/2023/08/unveiling-stablecode-new-horizon-ai-assisted-coding)
 
-+   [本周 AI 动态，8月7日：生成式 AI 进入 Jupyter 和 Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
++   [本周 AI 动态，8 月 7 日：生成式 AI 进入 Jupyter 和 Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
 
-+   [生成式AI游乐场：文本到图像的稳定扩散与…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)
++   [生成式 AI 游乐场：文本到图像的稳定扩散与…](https://www.kdnuggets.com/2024/02/intel-generative-ai-playground-text-to-image-stable-diffusion)
 
-+   [本周提升搜索应用的8种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
++   [本周提升搜索应用的 8 种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
 
-+   [回归基础 第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [回归基础 第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
-+   [回归基础 第3周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [回归基础 第 3 周：机器学习简介](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)

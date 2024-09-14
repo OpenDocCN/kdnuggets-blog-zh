@@ -1,8 +1,8 @@
 # 数据科学家将在 10 年内灭绝
 
-> 原文：[https://www.kdnuggets.com/2021/06/data-scientists-extinct-10-years.html](https://www.kdnuggets.com/2021/06/data-scientists-extinct-10-years.html)
+> 原文：[`www.kdnuggets.com/2021/06/data-scientists-extinct-10-years.html`](https://www.kdnuggets.com/2021/06/data-scientists-extinct-10-years.html)
 
-[评论](#comments)
+评论
 
 **作者：[Mikhail Mew](https://aiinvestor.medium.com/)，研究员，投资者，数据科学家**
 
@@ -10,7 +10,7 @@
 > 
 > [**放松！数据科学家在 10 年内不会灭绝，但角色会改变**](https://www.kdnuggets.com/2021/07/poll-data-scientists-not-extinct-10-years.html)
 
-![数据科学家将在 10 年内灭绝？](../Images/2535115e2417e814643ee8d5286d7b9c.png)
+![数据科学家将在 10 年内灭绝？](img/2535115e2417e814643ee8d5286d7b9c.png)
 
 图片由 [Levi Bare](https://unsplash.com/@levibare1?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -20,11 +20,11 @@
 
 数据科学有一个奇特的区别，它是少数几个没有特定领域的研究领域之一。药学学生成为药剂师，法律学生成为律师，会计学生成为会计师。那么数据科学学生是否必须成为数据科学家呢？但数据科学家是哪个领域的呢？数据科学的广泛应用证明了它是一把双刃剑。一方面，它是一个强大的工具箱，可以应用于任何产生和捕获数据的行业。另一方面，这些工具的一般适用性意味着用户在实际使用之前，很少会对这些行业有真正的领域知识。然而，在数据科学崛起的初期，这个问题并不重要，因为雇主们急于利用这项新兴技术，却没有完全理解它是什么以及如何将其完全融入公司中。
 
-然而，近十年后，商业环境及其运作方式已发生变化。它们现在追求数据科学的成熟，拥有大规模的团队，并以行业标准为基准。紧迫的招聘需求已经转向理解业务、相关行业以及其利益相关者的问题解决者和批判性思考者。仅仅能够操作几个软件包或重复几行代码已经不够，数据科学从业者也不再以编程能力来定义。这从无代码、AutoML解决方案如DataRobot、RapidMiner和Alteryx的日益流行中得到了证明。
+然而，近十年后，商业环境及其运作方式已发生变化。它们现在追求数据科学的成熟，拥有大规模的团队，并以行业标准为基准。紧迫的招聘需求已经转向理解业务、相关行业以及其利益相关者的问题解决者和批判性思考者。仅仅能够操作几个软件包或重复几行代码已经不够，数据科学从业者也不再以编程能力来定义。这从无代码、AutoML 解决方案如 DataRobot、RapidMiner 和 Alteryx 的日益流行中得到了证明。
 
 ### 这意味着什么？
 
-数据科学家将在10年内消失（或多或少），至少这个角色头衔会消失。未来，被统称为数据科学的技能将由新一代数据敏锐的业务专家和主题领域专家承担，他们能够将深厚的领域知识融入分析中，无论他们是否会编程。他们的职称将反映他们的专业知识，而不是他们展示这些知识的方式，无论是合规专家、产品经理还是投资分析师。我们不需要回顾太久就能找到历史先例。在电子表格刚出现时，数据录入专家曾是备受青睐的，但如今，正如《数据讲故事》一书的作者**科尔·努斯鲍默·克纳夫利克**（Cole Nussbaumer Knaflic）恰如其分地观察到的那样，熟练使用微软办公套件已成为基本要求。在此之前，能够用打字机盲打被认为是一项专业技能，但随着个人计算机的普及，这也变得司空见惯。
+数据科学家将在 10 年内消失（或多或少），至少这个角色头衔会消失。未来，被统称为数据科学的技能将由新一代数据敏锐的业务专家和主题领域专家承担，他们能够将深厚的领域知识融入分析中，无论他们是否会编程。他们的职称将反映他们的专业知识，而不是他们展示这些知识的方式，无论是合规专家、产品经理还是投资分析师。我们不需要回顾太久就能找到历史先例。在电子表格刚出现时，数据录入专家曾是备受青睐的，但如今，正如《数据讲故事》一书的作者**科尔·努斯鲍默·克纳夫利克**（Cole Nussbaumer Knaflic）恰如其分地观察到的那样，熟练使用微软办公套件已成为基本要求。在此之前，能够用打字机盲打被认为是一项专业技能，但随着个人计算机的普及，这也变得司空见惯。
 
 最后，对于那些考虑从事数据科学职业或开始学习的人来说，时常参考你无疑会遇到的韦恩图可能会对你有益。它将数据科学描述为统计学、编程和领域知识的汇聚。尽管它们在交集区域中占据了相等的份额，但有些领域的权重可能会比其他领域更高。
 
@@ -36,17 +36,17 @@
 
 **相关：**
 
-+   [数据科学家应如何与利益相关者沟通](/2021/06/data-scientist-communicate-stakeholders.html)
++   数据科学家应如何与利益相关者沟通
 
-+   [使用 BERT 构建求职知识图谱](/2021/06/knowledge-graph-job-search-bert.html)
++   使用 BERT 构建求职知识图谱
 
-+   [高效能数据科学家的五种思维方式](/2021/06/five-types-thinking-data-scientist.html)
++   高效能数据科学家的五种思维方式
 
 ### 更多相关话题
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 

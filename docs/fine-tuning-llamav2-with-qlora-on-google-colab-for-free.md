@@ -1,34 +1,34 @@
-# 在Google Colab上免费微调LLAMAv2与QLora
+# 在 Google Colab 上免费微调 LLAMAv2 与 QLora
 
-> 原文：[https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)
+> 原文：[`www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free`](https://www.kdnuggets.com/fine-tuning-llamav2-with-qlora-on-google-colab-for-free)
 
-![在Google Colab上免费微调LLAMAv2与QLora](../Images/c4099ca8d941760761ce95a69a350c6b.png)
+![在 Google Colab 上免费微调 LLAMAv2 与 QLora](img/c4099ca8d941760761ce95a69a350c6b.png)
 
-使用ideogram.ai生成，提示为：“一张LLAMA的照片，横幅上写着‘QLora’，3D渲染，野生动物摄影”
+使用 ideogram.ai 生成，提示为：“一张 LLAMA 的照片，横幅上写着‘QLora’，3D 渲染，野生动物摄影”
 
-直到最近，在Google Colab上使用单个GPU免费微调一个7B模型曾是一个梦想。2023年5月23日，Tim Dettmers及其团队提交了一篇关于微调量化大语言模型的革命性论文[1]。
+直到最近，在 Google Colab 上使用单个 GPU 免费微调一个 7B 模型曾是一个梦想。2023 年 5 月 23 日，Tim Dettmers 及其团队提交了一篇关于微调量化大语言模型的革命性论文[1]。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
-量化模型是将其权重的数据类型降至比训练时使用的数据类型更低的模型。例如，如果你在32位浮点数上训练一个模型，然后将这些权重转换为较低的数据类型，如16/8/4位浮点数，而对模型性能的影响最小或没有影响。
+量化模型是将其权重的数据类型降至比训练时使用的数据类型更低的模型。例如，如果你在 32 位浮点数上训练一个模型，然后将这些权重转换为较低的数据类型，如 16/8/4 位浮点数，而对模型性能的影响最小或没有影响。
 
-![在Google Colab上免费微调LLAMAv2与QLora](../Images/0b322b679c4a64d081cc5545a40f8991.png)
+![在 Google Colab 上免费微调 LLAMAv2 与 QLora](img/0b322b679c4a64d081cc5545a40f8991.png)
 
 来源 [2]
 
-我们这里不会多谈量化的理论，你可以参考Hugging-Face的优秀博客文章[2][3]以及Tim Dettmers本人的优秀YouTube视频[4]以了解基础理论。
+我们这里不会多谈量化的理论，你可以参考 Hugging-Face 的优秀博客文章[2][3]以及 Tim Dettmers 本人的优秀 YouTube 视频[4]以了解基础理论。
 
-简而言之，可以说QLora的意思是：
+简而言之，可以说 QLora 的意思是：
 
 > 使用低秩适配矩阵（LoRA）微调量化大语言模型[5]
 
@@ -36,9 +36,9 @@
 
 # 数据准备
 
-重要的是要理解，大语言模型旨在接受指令，这一点在2021年ACL论文[6]中首次介绍。其核心思想很简单，我们给语言模型一个指令，它会遵循指令并执行该任务。因此，我们要微调的模型所需的数据集应为指令格式，如果不是，我们可以转换它。
+重要的是要理解，大语言模型旨在接受指令，这一点在 2021 年 ACL 论文[6]中首次介绍。其核心思想很简单，我们给语言模型一个指令，它会遵循指令并执行该任务。因此，我们要微调的模型所需的数据集应为指令格式，如果不是，我们可以转换它。
 
-一种常见的格式是指令格式。我们将使用Alpaca Prompt模板[7]。
+一种常见的格式是指令格式。我们将使用 Alpaca Prompt 模板[7]。
 
 ```py
 Below is an instruction that describes a task, paired with an input that provides further context. Write a response that appropriately completes the request.
@@ -53,7 +53,7 @@ Below is an instruction that describes a task, paired with an input that provide
 {response}
 ```
 
-我们将使用[SNLI数据集](https://nlp.stanford.edu/projects/snli/)，这是一个包含2个句子及其之间关系的数据集，关系可能是矛盾、蕴含或中立。我们将利用它通过LLAMAv2生成句子的矛盾。我们可以简单地使用pandas加载此数据集。
+我们将使用[SNLI 数据集](https://nlp.stanford.edu/projects/snli/)，这是一个包含 2 个句子及其之间关系的数据集，关系可能是矛盾、蕴含或中立。我们将利用它通过 LLAMAv2 生成句子的矛盾。我们可以简单地使用 pandas 加载此数据集。
 
 ```py
 import pandas as pd
@@ -62,7 +62,7 @@ df = pd.read_csv('snli_1.0_train_matched.csv')
 df['gold_label'].value_counts().plot(kind='barh')
 ```
 
-![在 Google Colab 上免费微调 LLAMAv2 与 QLora](../Images/d2eac6c0d0e494320d1cdd66f4ce7704.png)
+![在 Google Colab 上免费微调 LLAMAv2 与 QLora](img/d2eac6c0d0e494320d1cdd66f4ce7704.png)
 
 标签分布
 
@@ -72,7 +72,7 @@ df['gold_label'].value_counts().plot(kind='barh')
 df[df['gold_label'] == 'contradiction'].sample(10)[['sentence1', 'sentence2']]
 ```
 
-![在 Google Colab 上免费微调 LLAMAv2 与 QLora](../Images/6effab1043714f8a9c0e22f8cdfe4170.png)
+![在 Google Colab 上免费微调 LLAMAv2 与 QLora](img/6effab1043714f8a9c0e22f8cdfe4170.png)
 
 来自 SNLI 的矛盾示例
 
@@ -439,7 +439,7 @@ The weather forecast predicts a sunny day with a high temperature around 30 degr
 
 # 过滤有用的输出
 
-由于令牌限制，模型可能在生成响应后仍会继续预测。在这种情况下，你需要添加一个后处理函数来过滤我们需要的JSON部分。可以使用简单的正则表达式来完成。
+由于令牌限制，模型可能在生成响应后仍会继续预测。在这种情况下，你需要添加一个后处理函数来过滤我们需要的 JSON 部分。可以使用简单的正则表达式来完成。
 
 ```py
 import re
@@ -463,38 +463,38 @@ def format_results(s):
 
 # 摘要
 
-在这篇博客中，你学习了QLora的基础知识，如何在Colab上使用QLora微调LLama v2模型，Instruction Tuning，以及一个可以用来进一步指导微调模型的Alpaca数据集样本模板。
+在这篇博客中，你学习了 QLora 的基础知识，如何在 Colab 上使用 QLora 微调 LLama v2 模型，Instruction Tuning，以及一个可以用来进一步指导微调模型的 Alpaca 数据集样本模板。
 
 ## 参考文献
 
-[1]: QLoRA：高效微调量化LLM，2023年5月23日，Tim Dettmers等人
+[1]: QLoRA：高效微调量化 LLM，2023 年 5 月 23 日，Tim Dettmers 等人
 
-[2]: [https://huggingface.co/blog/hf-bitsandbytes-integration](https://huggingface.co/blog/hf-bitsandbytes-integration)
+[2]: [`huggingface.co/blog/hf-bitsandbytes-integration`](https://huggingface.co/blog/hf-bitsandbytes-integration)
 
-[3]: [https://huggingface.co/blog/4bit-transformers-bitsandbytes](https://huggingface.co/blog/4bit-transformers-bitsandbytes)
+[3]: [`huggingface.co/blog/4bit-transformers-bitsandbytes`](https://huggingface.co/blog/4bit-transformers-bitsandbytes)
 
-[4]: [https://www.youtube.com/watch?v=y9PHWGOa8HA](https://www.youtube.com/watch?v=y9PHWGOa8HA)
+[4]: [`www.youtube.com/watch?v=y9PHWGOa8HA`](https://www.youtube.com/watch?v=y9PHWGOa8HA)
 
-[5]: [https://arxiv.org/abs/2106.09685](https://arxiv.org/abs/2106.09685)
+[5]: [`arxiv.org/abs/2106.09685`](https://arxiv.org/abs/2106.09685)
 
-[6]: [https://aclanthology.org/2022.acl-long.244/](https://aclanthology.org/2022.acl-long.244/)
+[6]: [`aclanthology.org/2022.acl-long.244/`](https://aclanthology.org/2022.acl-long.244/)
 
-[7]: [https://crfm.stanford.edu/2023/03/13/alpaca.html](https://crfm.stanford.edu/2023/03/13/alpaca.html)
+[7]: [`crfm.stanford.edu/2023/03/13/alpaca.html`](https://crfm.stanford.edu/2023/03/13/alpaca.html)
 
-[8]: Colab Notebook由@[maximelabonne](https://twitter.com/maximelabonne) [https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing)
+[8]: Colab Notebook 由@[maximelabonne](https://twitter.com/maximelabonne) [`colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing`](https://colab.research.google.com/drive/1PEQyJO1-f6j0S_XJ8DV50NkpzasXkrzd?usp=sharing)
 
-**Ahmad Anis**是一位热情的机器学习工程师和研究员，目前在[redbuffer.ai](https://redbuffer.ai/)工作。除了本职工作外，Ahmad还积极参与机器学习社区。他担任了Cohere for AI的区域负责人，这是一个致力于开放科学的非营利组织，同时还是AWS社区建设者。Ahmad是Stackoverflow的活跃贡献者，拥有2300多积分。他为许多著名的开源项目做出了贡献，包括OpenAI的Shap-E。
+**Ahmad Anis**是一位热情的机器学习工程师和研究员，目前在[redbuffer.ai](https://redbuffer.ai/)工作。除了本职工作外，Ahmad 还积极参与机器学习社区。他担任了 Cohere for AI 的区域负责人，这是一个致力于开放科学的非营利组织，同时还是 AWS 社区建设者。Ahmad 是 Stackoverflow 的活跃贡献者，拥有 2300 多积分。他为许多著名的开源项目做出了贡献，包括 OpenAI 的 Shap-E。
 
 ### 更多相关话题
 
-+   [在Google Colab上免费运行Mixtral 8x7b](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)
++   [在 Google Colab 上免费运行 Mixtral 8x7b](https://www.kdnuggets.com/running-mixtral-8x7b-on-google-colab-for-free)
 
-+   [用HuggingFace微调BERT以进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
++   [用 HuggingFace 微调 BERT 以进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
 
-+   [用噪声标签数据微调OpenAI语言模型](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
++   [用噪声标签数据微调 OpenAI 语言模型](https://www.kdnuggets.com/2023/04/finetuning-openai-language-models-noisily-labeled-data.html)
 
-+   [PEFT概述：最先进的参数高效微调](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)
++   [PEFT 概述：最先进的参数高效微调](https://www.kdnuggets.com/overview-of-peft-stateoftheart-parameterefficient-finetuning)
 
-+   [掌握大型语言模型微调的7个步骤](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)
++   [掌握大型语言模型微调的 7 个步骤](https://www.kdnuggets.com/7-steps-to-mastering-large-language-model-fine-tuning)
 
-+   [Mistral 7B-V0.2：用Hugging Face微调Mistral的新开源LLM…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)
++   [Mistral 7B-V0.2：用 Hugging Face 微调 Mistral 的新开源 LLM…](https://www.kdnuggets.com/mistral-7b-v02-fine-tuning-mistral-new-open-source-llm-with-hugging-face)

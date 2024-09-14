@@ -1,8 +1,8 @@
-# 5个免费课程掌握MLOps
+# 5 个免费课程掌握 MLOps
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-to-master-mlops](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
+> 原文：[`www.kdnuggets.com/5-free-courses-to-master-mlops`](https://www.kdnuggets.com/5-free-courses-to-master-mlops)
 
-![5个免费课程掌握MLOps](../Images/b6cf6dcd5ff41272f500d2f4de5c7e02.png)
+![5 个免费课程掌握 MLOps](img/b6cf6dcd5ff41272f500d2f4de5c7e02.png)
 
 图片由[Microsoft Bing](https://www.bing.com/images/create)生成
 
@@ -12,29 +12,29 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-在数据驱动决策的今天，仅仅创建机器学习（ML）模型是不够的。组织需要的不仅仅是构建模型——他们需要成功地部署、管理并持续改进这些模型在现实世界中的表现。想象一下：你构建了一个超级智能的系统来预测天气模式，但除非你确保它每天都在工作，并且随着新数据变得更聪明，否则它就像是一个在棚子里积灰的强大工具。这就是MLOps的作用。
+在数据驱动决策的今天，仅仅创建机器学习（ML）模型是不够的。组织需要的不仅仅是构建模型——他们需要成功地部署、管理并持续改进这些模型在现实世界中的表现。想象一下：你构建了一个超级智能的系统来预测天气模式，但除非你确保它每天都在工作，并且随着新数据变得更聪明，否则它就像是一个在棚子里积灰的强大工具。这就是 MLOps 的作用。
 
-如果你对将你的MLOps技能提升到下一个水平感到好奇，并想知道如何将你出色的模型转化为现实世界的解决方案，这篇文章将是你的指南。我将向你介绍五个免费课程，这些课程将MLOps分解为易于理解的部分。无论你是刚起步还是已经是机器学习的专家，这里都有适合你的课程。
+如果你对将你的 MLOps 技能提升到下一个水平感到好奇，并想知道如何将你出色的模型转化为现实世界的解决方案，这篇文章将是你的指南。我将向你介绍五个免费课程，这些课程将 MLOps 分解为易于理解的部分。无论你是刚起步还是已经是机器学习的专家，这里都有适合你的课程。
 
-# MLOps的Python基础
+# MLOps 的 Python 基础
 
-链接：[MLOps的Python基础](https://www.coursera.org/learn/python-mlops-duke)
+链接：[MLOps 的 Python 基础](https://www.coursera.org/learn/python-mlops-duke)
 
-![5个免费课程掌握MLOps](../Images/cbf1e6f482f59d40e56e7b031abadcee.png)
+![5 个免费课程掌握 MLOps](img/cbf1e6f482f59d40e56e7b031abadcee.png)
 
-MLOps的Python基础课程
+MLOps 的 Python 基础课程
 
-这个课程将教你在MLOps角色中成功所需的基本Python技能。它涵盖了Python编程语言的基础知识，包括数据类型、函数、模块和测试技术。它还涉及如何有效地处理数据集和其他数据科学任务，使用Pandas和NumPy。在这个课程中，通过一系列动手练习，你将获得在MLOps工作流程中使用Python的实践经验。课程结束时，你将掌握编写Python脚本来自动化常见MLOps任务的必要技能。
+这个课程将教你在 MLOps 角色中成功所需的基本 Python 技能。它涵盖了 Python 编程语言的基础知识，包括数据类型、函数、模块和测试技术。它还涉及如何有效地处理数据集和其他数据科学任务，使用 Pandas 和 NumPy。在这个课程中，通过一系列动手练习，你将获得在 MLOps 工作流程中使用 Python 的实践经验。课程结束时，你将掌握编写 Python 脚本来自动化常见 MLOps 任务的必要技能。
 
-这个课程非常适合那些希望进入MLOps领域的人或那些希望提升Python技能的经验丰富的MLOps专业人员。
+这个课程非常适合那些希望进入 MLOps 领域的人或那些希望提升 Python 技能的经验丰富的 MLOps 专业人员。
 
 ## 涵盖的主题：
 
@@ -64,7 +64,7 @@ MLOps的Python基础课程
 
 链接: [MLOps 入门](https://www.udemy.com/course/mlops-for-beginners/)
 
-![5个免费的 MLOps 精通课程](../Images/fdab258786f29d5380badfdd82541b74.png)
+![5 个免费的 MLOps 精通课程](img/fdab258786f29d5380badfdd82541b74.png)
 
 MLOps 入门课程
 
@@ -94,7 +94,7 @@ MLOps 入门课程
 
 链接: [生产环境下的机器学习工程（MLOps）专业化](https://www.coursera.org/specializations/machine-learning-engineering-for-production-mlops)
 
-![5个免费的 MLOps 精通课程](../Images/862180332095ce82ef2f618696477ebb.png)
+![5 个免费的 MLOps 精通课程](img/862180332095ce82ef2f618696477ebb.png)
 
 生产环境下的机器学习工程专业化
 
@@ -124,7 +124,7 @@ MLOps 入门课程
 
 链接: [机器学习操作专业化](https://www.coursera.org/specializations/mlops-machine-learning-duke)
 
-![5个免费的 MLOps 精通课程](../Images/b296713c2148de59e6d44b80489d9749.png)
+![5 个免费的 MLOps 精通课程](img/b296713c2148de59e6d44b80489d9749.png)
 
 机器学习操作专业化
 
@@ -162,7 +162,7 @@ MLOps 入门课程
 
 链接：[Made with MLOps](https://madewithml.com/)
 
-![5 个免费课程掌握 MLOps](../Images/f8dd76322b8fff42344cde20089438bd.png)
+![5 个免费课程掌握 MLOps](img/f8dd76322b8fff42344cde20089438bd.png)
 
 Made With ML MLOps 课程
 
@@ -192,22 +192,22 @@ Made with ML 课程涵盖了机器学习的基础知识以及模型部署、测�
 
 MLOps 是一个迅速发展的领域，对技能娴熟的专业人员有着很高的需求。通过掌握 MLOps，你可以开启新的职业机会，并在世界上产生真正的影响。借助这五个免费课程，你可以迈出成为 MLOps 专家的第一步。那么你还在等什么呢？立即注册并开始学习吧！
 
-如果你是机器学习和 MLOps 的初学者，你可能想看看我们的文章[掌握机器学习的 5 本免费书籍](/5-free-books-to-master-machine-learning)。但如果你想直接深入 MLOps，只打算选择一两门课程，我建议你参加**Andrew Ng 的机器学习工程生产（MLOps）专业化**和**Made with MLOps**课程。
+如果你是机器学习和 MLOps 的初学者，你可能想看看我们的文章掌握机器学习的 5 本免费书籍。但如果你想直接深入 MLOps，只打算选择一两门课程，我建议你参加**Andrew Ng 的机器学习工程生产（MLOps）专业化**和**Made with MLOps**课程。
 
 我们很想知道，哪些课程在你的机器学习旅程中发挥了关键作用。欢迎在下面的评论中分享你的想法！
 
-**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal是一位机器学习工程师和技术作家，对数据科学以及人工智能与医学的交汇处充满深厚的热情。她共同撰写了电子书《利用ChatGPT最大化生产力》。作为2022年APAC的Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为Teradata多样性技术学者、Mitacs Globalink研究学者和哈佛WeCode学者。Kanwal还是变革的热心倡导者，她创立了FEMCodes以赋能女性进入STEM领域。
+**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal 是一位机器学习工程师和技术作家，对数据科学以及人工智能与医学的交汇处充满深厚的热情。她共同撰写了电子书《利用 ChatGPT 最大化生产力》。作为 2022 年 APAC 的 Google Generation Scholar，她倡导多样性和学术卓越。她还被认定为 Teradata 多样性技术学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 还是变革的热心倡导者，她创立了 FEMCodes 以赋能女性进入 STEM 领域。
 
 ### 相关话题
 
-+   [掌握数据科学、数据工程、机器学习等的25门免费课程](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
++   [掌握数据科学、数据工程、机器学习等的 25 门免费课程](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)
 
 +   [学习数据科学、数据工程等的免费课程合集](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)
 
-+   [掌握MLOps的10个GitHub仓库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
++   [掌握 MLOps 的 10 个 GitHub 仓库](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
 
-+   [谷歌提供的5门MLOps课程，提升你的ML工作流程](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)
++   [谷歌提供的 5 门 MLOps 课程，提升你的 ML 工作流程](https://www.kdnuggets.com/5-mlops-courses-from-google-to-level-up-your-ml-workflow)
 
-+   [掌握生成性人工智能的5门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-generative-ai)
++   [掌握生成性人工智能的 5 门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-generative-ai)
 
-+   [掌握数据科学数学的5门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
++   [掌握数据科学数学的 5 门免费课程](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)

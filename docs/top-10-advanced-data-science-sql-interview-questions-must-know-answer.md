@@ -1,8 +1,8 @@
 # 你必须知道如何回答的前 10 个高级数据科学 SQL 面试问题
 
-> 原文：[https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
+> 原文：[`www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html`](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
-![你必须知道如何回答的前 10 个高级数据科学 SQL 面试问题](../Images/d59a4b2b424770120f327b180bf5431e.png)
+![你必须知道如何回答的前 10 个高级数据科学 SQL 面试问题](img/d59a4b2b424770120f327b180bf5431e.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -318,24 +318,24 @@ FROM
 
 # 问题 10
 
-## 解释SQL中的独占锁和更新锁
+## 解释 SQL 中的独占锁和更新锁
 
 独占锁是一种锁，防止其他事务读取或写入被锁定的行。这种锁通常在事务需要修改表中的数据时使用，并希望确保没有其他事务可以同时访问该表。
 
 更新锁是一种锁，允许其他事务读取被锁定的行，但防止它们更新或写入被锁定的行。这种锁通常在事务需要读取表中的数据时使用，但希望确保在当前事务完成之前，数据不会被其他事务修改。
 
-**[索尼亚·贾米尔](www.linkedin.com/in/sonia-jamil)** 目前在巴基斯坦最大的电信公司之一担任数据库分析师。除了全职工作，她还兼职做自由职业者。她的背景包括数据库管理方面的专业知识，并且有在本地和云环境中的SQL Server经验。她精通最新的SQL Server技术，并对数据管理和数据分析有着浓厚的兴趣。
+**索尼亚·贾米尔** 目前在巴基斯坦最大的电信公司之一担任数据库分析师。除了全职工作，她还兼职做自由职业者。她的背景包括数据库管理方面的专业知识，并且有在本地和云环境中的 SQL Server 经验。她精通最新的 SQL Server 技术，并对数据管理和数据分析有着浓厚的兴趣。
 
 ### 更多相关话题
 
 +   [如何回答数据科学编程面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [KDnuggets 新闻，5月4日：9门免费哈佛课程学习数据……](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据……](https://www.kdnuggets.com/2022/n18.html)
 
-+   [15个数据科学必知的Python编程面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个数据科学必知的 Python 编程面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [25个数据科学家高级SQL面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
++   [25 个数据科学家高级 SQL 面试问题](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
 
-+   [26个你应该知道的数据科学面试问题](https://www.kdnuggets.com/26-data-science-interview-questions-you-should-know)
++   [26 个你应该知道的数据科学面试问题](https://www.kdnuggets.com/26-data-science-interview-questions-you-should-know)
 
-+   [24个SQL面试问题，你可能会在下一个面试中遇到](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)
++   [24 个 SQL 面试问题，你可能会在下一个面试中遇到](https://www.kdnuggets.com/2022/06/24-sql-questions-might-see-next-interview.html)

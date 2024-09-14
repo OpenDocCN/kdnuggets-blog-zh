@@ -1,8 +1,8 @@
-# 如何使用Python和机器学习来预测足球比赛的赢家
+# 如何使用 Python 和机器学习来预测足球比赛的赢家
 
-> 原文：[https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)
+> 原文：[`www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html`](https://www.kdnuggets.com/2023/01/python-machine-learning-predict-football-match-winners.html)
 
-![如何使用Python和机器学习来预测足球比赛的赢家](../Images/6615eaaadd9f0b259c4193da10950ebd.png)
+![如何使用 Python 和机器学习来预测足球比赛的赢家](img/6615eaaadd9f0b259c4193da10950ebd.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-photo/crop-legs-shooting-ball_2233009.htm#query=football%20field&position=0&from_view=keyword)
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
-Python是最具多功能性的编程语言之一。多年来，Python编程已发展成为构建各种机器学习应用程序的最受欢迎的编程语言。
+Python 是最具多功能性的编程语言之一。多年来，Python 编程已发展成为构建各种机器学习应用程序的最受欢迎的编程语言。
 
-这种应用程序的一个关键元素通常是根据可处理的数据进行某种预测。预测具有不确定性这一方面，使用Python编程可以很容易地解决。
+这种应用程序的一个关键元素通常是根据可处理的数据进行某种预测。预测具有不确定性这一方面，使用 Python 编程可以很容易地解决。
 
-在本文中，我们将尝试解决这样一个问题。借助Python编程，我们将尝试预测足球比赛的结果。
+在本文中，我们将尝试解决这样一个问题。借助 Python 编程，我们将尝试预测足球比赛的结果。
 
-由于这个问题涉及一定程度的不确定性，Python编程可能是研究和解决这个问题的最佳选择。这正是我们在这里尝试实现的目标。
+由于这个问题涉及一定程度的不确定性，Python 编程可能是研究和解决这个问题的最佳选择。这正是我们在这里尝试实现的目标。
 
 # 概述
 
@@ -40,7 +40,7 @@ Python是最具多功能性的编程语言之一。多年来，Python编程已�
 
 因此，在这个问题中，我们将基于过去比赛的数据来得出结果。我们将基于过去的数据进行统计研究，并预测足球比赛中最可能的赢家。
 
-为此，我们将使用监督学习来构建一个用于检测的算法，使用Python编程。
+为此，我们将使用监督学习来构建一个用于检测的算法，使用 Python 编程。
 
 # 问题陈述
 
@@ -58,13 +58,13 @@ Python是最具多功能性的编程语言之一。多年来，Python编程已�
 
 网络爬虫是一种从互联网上不同网站的大量数据中提取相关数据的方法。
 
-要提取的数据大多是非结构化的，且以HTML格式存在。这些数据以将其转化为结构化的列表形式的方式进行爬取，便于后续处理应用。
+要提取的数据大多是非结构化的，且以 HTML 格式存在。这些数据以将其转化为结构化的列表形式的方式进行爬取，便于后续处理应用。
 
 为了成功进行网络爬虫，我们需要将搜索范围缩小到包含特定足球比赛数据的网站。
 
-确定后，我们将使用该URL主要访问网页的HTML脚本。
+确定后，我们将使用该 URL 主要访问网页的 HTML 脚本。
 
-使用此HTML代码，爬虫将其转换为所需的输出格式（可能是电子表格、列表或CSV/JSON文件等）。
+使用此 HTML 代码，爬虫将其转换为所需的输出格式（可能是电子表格、列表或 CSV/JSON 文件等）。
 
 为了解决这个问题，我们将对网站 [FBref.com](https://fbref.com/en/matches/e1867e7b/Sao-Paulo-Botafogo-RJ-April-27-2019-Serie-A) 上的数据进行网络爬虫。
 
@@ -72,25 +72,25 @@ Python是最具多功能性的编程语言之一。多年来，Python编程已�
 
 1.  导航到上述网站的“Competitions”部分。
 
-1.  选择任何提到的比赛（如2022-23赛季英超），以提取结果用于预测。
+1.  选择任何提到的比赛（如 2022-23 赛季英超），以提取结果用于预测。
 
 1.  转到所选比赛部分下的“Scores & Fixtures”部分。
 
-比分将用于进行预测，因此我们需要抓取这些信息。因此，复制页面的URL。
+比分将用于进行预测，因此我们需要抓取这些信息。因此，复制页面的 URL。
 
-在这种情况下（假设为英超联赛），链接将是：[https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures#sched_2022-2023_9_1](https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures#sched_2022-2023_9_1)
+在这种情况下（假设为英超联赛），链接将是：[`fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures#sched_2022-2023_9_1`](https://fbref.com/en/comps/9/schedule/Premier-League-Scores-and-Fixtures#sched_2022-2023_9_1)
 
 你还可以根据需要获取其他比赛的链接。
 
 1.  然而，需要注意的是，我们也可以使用任何其他网站来进行检测。
 
-    例如，我们可以通过提供比赛比分的链接，比如 [https://en.wikipedia.org/wiki/2022_FIFA_World_Cup](https://en.wikipedia.org/wiki/2022_FIFA_World_Cup)，直接从维基百科抓取比赛结果。
+    例如，我们可以通过提供比赛比分的链接，比如 [`en.wikipedia.org/wiki/2022_FIFA_World_Cup`](https://en.wikipedia.org/wiki/2022_FIFA_World_Cup)，直接从维基百科抓取比赛结果。
 
-1.  要执行实际的网络爬虫，需要将复制的URL提供给网络爬虫脚本或代码，以提取相关的比赛数据。
+1.  要执行实际的网络爬虫，需要将复制的 URL 提供给网络爬虫脚本或代码，以提取相关的比赛数据。
 
-1.  脚本将用于将一个赛季中的所有比赛合并成一个列表或.csv文件。
+1.  脚本将用于将一个赛季中的所有比赛合并成一个列表或.csv 文件。
 
-1.  从上面复制的URL将作为输入提供，同时提供包含锦标赛信息的表格的ID。
+1.  从上面复制的 URL 将作为输入提供，同时提供包含锦标赛信息的表格的 ID。
 
 1.  汇总的包含所有比赛的列表将作为输出接收。
 
@@ -223,7 +223,7 @@ points_away_team = 3 * pr_away + pr_draw
 
 ### 支持向量机
 
-SVM或支持向量机是一种基于监督学习的算法。
+SVM 或支持向量机是一种基于监督学习的算法。
 
 它主要用于分类问题。它通过在各种数据之间创建边界来进行分类。
 
@@ -231,7 +231,7 @@ SVM或支持向量机是一种基于监督学习的算法。
 
 但它也可以被修改或扩展为多分类问题。
 
-要使用Python编程进行SVM预测，我们可以使用以下方法：
+要使用 Python 编程进行 SVM 预测，我们可以使用以下方法：
 
 ```py
 svc_predict = svm.SVC()
@@ -239,11 +239,11 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.30)
 svc_predict.fit(x_train, y_train)
 ```
 
-在这里，svc_predict是针对训练数据x_train和y_train的SVM计算。x_train和y_train包含用于训练模型的数据，而x_test和y_test表示用于测试模型的数据。
+在这里，svc_predict 是针对训练数据 x_train 和 y_train 的 SVM 计算。x_train 和 y_train 包含用于训练模型的数据，而 x_test 和 y_test 表示用于测试模型的数据。
 
 ### KNN
 
-K-最近邻或KNN是一种基于监督学习的算法。
+K-最近邻或 KNN 是一种基于监督学习的算法。
 
 它通过类标签进行数据分类。基本上，类被标记以创建分隔。
 
@@ -267,7 +267,7 @@ knn_predict.fit(x_train, y_train)
 
 它可以用来预测事件的发生概率，这也是我们在此场景中使用它的原因。
 
-在逻辑回归的情况下，因变量被限制在0到1的范围内。
+在逻辑回归的情况下，因变量被限制在 0 到 1 的范围内。
 
 这就是它为何在二分类问题中表现良好的原因，例如足球比赛中的胜负情景。
 
@@ -295,30 +295,30 @@ logistic_predict.fit(x_train, y_train)
 
 # 结论
 
-这个特定问题非常复杂，但我们仍然通过Python编程轻松地达到了结果。
+这个特定问题非常复杂，但我们仍然通过 Python 编程轻松地达到了结果。
 
-尽管结果不是绝对准确，但算法仍然展示了Python编程如何每天改变世界。
+尽管结果不是绝对准确，但算法仍然展示了 Python 编程如何每天改变世界。
 
 算法能够轻松地逻辑预测结果，这是一项可能没有游戏相关的先验信息， humans 可能无法完成的任务。
 
 使用这样的预测模型，我们可以对其进行微调，并在未来获得更好的结果。
 
-希望你已经了解了如何使用Python和机器学习来预测数据。你可以通过免费的资源如 [KDnuggets](/2022/09/free-python-data-science-course.html)，[Scaler](https://www.scaler.com/topics/python/)，或者 [freecodecamp](https://www.freecodecamp.org/news/learning-python-from-zero-to-hero-120ea540b567/) 来学习更多关于Python的知识。
+希望你已经了解了如何使用 Python 和机器学习来预测数据。你可以通过免费的资源如 KDnuggets，[Scaler](https://www.scaler.com/topics/python/)，或者 [freecodecamp](https://www.freecodecamp.org/news/learning-python-from-zero-to-hero-120ea540b567/) 来学习更多关于 Python 的知识。
 
 快乐学习！
 
-**[Vaishnavi Amira Yada](https://www.linkedin.com/in/vaishnavi-amira-yada/)** 是一名技术内容作家。她拥有Python、Java、DSA、C等方面的知识。她发现自己在写作方面很有才华，并且非常喜欢它。
+**[Vaishnavi Amira Yada](https://www.linkedin.com/in/vaishnavi-amira-yada/)** 是一名技术内容作家。她拥有 Python、Java、DSA、C 等方面的知识。她发现自己在写作方面很有才华，并且非常喜欢它。
 
 ### 更多相关内容
 
-+   [数据湖与SQL：数据天堂中的完美匹配](https://www.kdnuggets.com/2023/01/data-lakes-sql-match-made-data-heaven.html)
++   [数据湖与 SQL：数据天堂中的完美匹配](https://www.kdnuggets.com/2023/01/data-lakes-sql-match-made-data-heaven.html)
 
 +   [学习现代预测技术以帮助预测未来的业务……](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)
 
-+   [学习如何使用ChatGPT学习Python（或其他任何东西）](https://www.kdnuggets.com/2023/02/learn-python-chatgpt.html)
++   [学习如何使用 ChatGPT 学习 Python（或其他任何东西）](https://www.kdnuggets.com/2023/02/learn-python-chatgpt.html)
 
 +   [如何使用合成数据克服机器学习数据短缺](https://www.kdnuggets.com/2022/03/synthetic-data-overcome-data-shortages-machine-learning-model-training.html)
 
-+   [你不应该使用机器学习的4个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [你不应该使用机器学习的 4 个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
 +   [你如何使用机器学习自动标记数据](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)

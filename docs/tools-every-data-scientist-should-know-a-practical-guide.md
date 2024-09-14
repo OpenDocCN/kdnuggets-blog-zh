@@ -1,8 +1,8 @@
 # 每个数据科学家都应知晓的工具：实用指南
 
-> 原文：[https://www.kdnuggets.com/tools-every-data-scientist-should-know-a-practical-guide](https://www.kdnuggets.com/tools-every-data-scientist-should-know-a-practical-guide)
+> 原文：[`www.kdnuggets.com/tools-every-data-scientist-should-know-a-practical-guide`](https://www.kdnuggets.com/tools-every-data-scientist-should-know-a-practical-guide)
 
-![每个数据科学家都应知晓的工具](../Images/084b27f8c0395401d9545e3b4fc13e1d.png)
+![每个数据科学家都应知晓的工具](img/084b27f8c0395401d9545e3b4fc13e1d.png)
 
 图片由作者提供
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,41 +24,41 @@
 
 数据科学是一个多学科领域，它结合了来自各种学科的知识，通过数据驱动的分析帮助企业做出明智的决策。
 
-![每个数据科学家都应知晓的工具](../Images/71dfc97429d720566a266e25185e7d87.png)
+![每个数据科学家都应知晓的工具](img/71dfc97429d720566a266e25185e7d87.png)
 
 ## **Python**
 
-与R一起，Python是数据研究中最常用的语言之一。它灵活且可读，拥有许多库来支持，特别是在数据科学中，使其适合各种任务，从网络爬虫到模型构建。
+与 R 一起，Python 是数据研究中最常用的语言之一。它灵活且可读，拥有许多库来支持，特别是在数据科学中，使其适合各种任务，从网络爬虫到模型构建。
 
-以下是每个类别在Python中的关键库
+以下是每个类别在 Python 中的关键库
 
 +   网络爬虫：
 
-    +   [BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/): Python中最简单的网络爬虫库。
+    +   [BeautifulSoup](https://beautiful-soup-4.readthedocs.io/en/latest/): Python 中最简单的网络爬虫库。
 
     +   [Scrapy](https://docs.scrapy.org/en/latest/): 高级网络爬虫库。
 
 +   数据探索与操作：
 
-    +   [Pandas:](https://pandas.pydata.org/) Python数据操作和分析工具包。
+    +   [Pandas:](https://pandas.pydata.org/) Python 数据操作和分析工具包。
 
     +   [NumPy](https://numpy.org/doc/): 支持大型多维数组和矩阵。
 
 +   数据可视化：
 
-    +   [Matplotlib:](https://matplotlib.org/) 核心Python绘图库
+    +   [Matplotlib:](https://matplotlib.org/) 核心 Python 绘图库
 
-    +   [Seaborn:](https://seaborn.pydata.org/) 基于Matplotlib的可视化库。它提供了一个高级接口，用于创建吸引人的统计图形。
+    +   [Seaborn:](https://seaborn.pydata.org/) 基于 Matplotlib 的可视化库。它提供了一个高级接口，用于创建吸引人的统计图形。
 
     +   [Plotly:](https://plotly.com/python/) 互动图形库
 
 +   模型建模：
 
-    +   [Scikit-learn:](https://scikit-learn.org/) Python中最关键的机器学习库
+    +   [Scikit-learn:](https://scikit-learn.org/) Python 中最关键的机器学习库
 
     +   [TensorFlow:](https://www.tensorflow.org/) 适用于应用和扩展深度学习。
 
-    +   [PyTorch:](https://pytorch.org/) 用于图像处理和NLP应用的机器学习库。
+    +   [PyTorch:](https://pytorch.org/) 用于图像处理和 NLP 应用的机器学习库。
 
 ## **R**
 
@@ -146,7 +146,7 @@ SQL 是与关系数据库交互的语言，并用于存储和处理数据。
 
 +   [Oracle](https://www.oracle.com/)：这是一个在企业环境中广泛使用的多模型数据库管理系统。它结合了最佳的关系模型和基于树的存储表示。
 
-![数据科学工具](../Images/6d785035f3e4f9343c3ed663b9be5151.png)
+![数据科学工具](img/6d785035f3e4f9343c3ed663b9be5151.png)
 
 ## **高级可视化工具**
 

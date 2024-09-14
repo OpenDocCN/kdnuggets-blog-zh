@@ -1,6 +1,6 @@
 # 将 Python 和 R 集成到数据分析管道中，第一部分
 
-> 原文：[https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html/2](https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html/2)
+> 原文：[`www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html/2`](https://www.kdnuggets.com/2015/10/integrating-python-r-data-analysis-part1.html/2)
 
 ### 命令行脚本
 
@@ -56,61 +56,61 @@
 
 `# 使用切片，选择除第一个元素之外的所有元素 my_args = sys.argv[1:]`
 
-与上述R的例子类似，记住所有参数都作为字符串解析，因此需要根据需要转换为预期的类型。
+与上述 R 的例子类似，记住所有参数都作为字符串解析，因此需要根据需要转换为预期的类型。
 
 ### 将输出写入文件
 
-在通过中间文件在R和Python之间共享数据时，你有几种选择。通常，对于平面文件，CSV是一种适合表格数据的好格式，而JSON或YAML则更适合处理结构化较少的数据（或元数据），这些数据可能包含可变数量的字段或更多嵌套的数据结构。
+在通过中间文件在 R 和 Python 之间共享数据时，你有几种选择。通常，对于平面文件，CSV 是一种适合表格数据的好格式，而 JSON 或 YAML 则更适合处理结构化较少的数据（或元数据），这些数据可能包含可变数量的字段或更多嵌套的数据结构。
 
-所有这些都是非常常见的 [数据序列化格式](https://en.wikipedia.org/wiki/Serialization)，并且两种语言中都已有解析器。在R中，推荐使用以下包来处理每种格式：
+所有这些都是非常常见的 [数据序列化格式](https://en.wikipedia.org/wiki/Serialization)，并且两种语言中都已有解析器。在 R 中，推荐使用以下包来处理每种格式：
 
-+   [readr](https://cran.r-project.org/web/packages/readr/index.html) 用于CSV文件
++   [readr](https://cran.r-project.org/web/packages/readr/index.html) 用于 CSV 文件
 
-+   [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) 用于JSON文件
++   [jsonlite](https://cran.r-project.org/web/packages/jsonlite/index.html) 用于 JSON 文件
 
-+   [yaml](http://cran.fhcrc.org/web/packages/yaml/index.html) 用于YAML文件
++   [yaml](http://cran.fhcrc.org/web/packages/yaml/index.html) 用于 YAML 文件
 
-而在Python中：
+而在 Python 中：
 
-+   [csv](https://docs.Python.org/3/library/csv.html) 用于CSV文件
++   [csv](https://docs.Python.org/3/library/csv.html) 用于 CSV 文件
 
-+   [json](https://docs.Python.org/3/library/json.html) 用于JSON文件
++   [json](https://docs.Python.org/3/library/json.html) 用于 JSON 文件
 
-+   [PyYAML](http://pyyaml.org/wiki/PyYAMLDocumentation) 用于YAML文件
++   [PyYAML](http://pyyaml.org/wiki/PyYAMLDocumentation) 用于 YAML 文件
 
-csv和json模块是Python标准库的一部分，随Python本身分发，而PyYAML需要单独安装。所有R包也需要以通常的方式安装。
+csv 和 json 模块是 Python 标准库的一部分，随 Python 本身分发，而 PyYAML 需要单独安装。所有 R 包也需要以通常的方式安装。
 
 ### 总结
 
-在R和Python之间（以及反向）传递数据可以通过以下单一管道完成：
+在 R 和 Python 之间（以及反向）传递数据可以通过以下单一管道完成：
 
 +   使用命令行传递参数，以及
 
 +   通过结构化一致的平面文件传输数据。
 
-然而，在某些情况下，使用平面文件作为中间数据存储既麻烦又对性能有害。在下一篇文章中，我们将探讨如何让R和Python直接调用对方并在内存中返回输出。
+然而，在某些情况下，使用平面文件作为中间数据存储既麻烦又对性能有害。在下一篇文章中，我们将探讨如何让 R 和 Python 直接调用对方并在内存中返回输出。
 
 [原文](http://www.mango-solutions.com/wp/2015/10/integrating-python-and-r-into-a-data-analysis-pipeline-part-1/)。
 
 **相关：**
 
-+   [R与Python：面对面的数据分析](/2015/10/r-vs-python-data-analysis.html)
++   R 与 Python：面对面的数据分析
 
-+   [数据科学编程：Python与R的对比](/2015/10/data-science-programming-python-vs-r.html)
++   数据科学编程：Python 与 R 的对比
 
-+   [R与Python的数据科学：赢家是……](/2015/05/r-vs-python-data-science.html)
++   R 与 Python 的数据科学：赢家是……
 
-+   [R，Python用户表现出令人惊讶的稳定性，但存在显著的区域差异](/2015/07/poll-primary-analytics-language-r-python.html)
++   R，Python 用户表现出令人惊讶的稳定性，但存在显著的区域差异
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

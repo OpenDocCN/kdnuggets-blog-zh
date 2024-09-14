@@ -1,32 +1,32 @@
-# 如何在Python中生成FiveThirtyEight图表
+# 如何在 Python 中生成 FiveThirtyEight 图表
 
-> 原文：[https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html](https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html)
+> 原文：[`www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html`](https://www.kdnuggets.com/2017/12/generate-fivethirtyeight-graphs-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-**由[Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)，Dataquest.io的学生成功专家**
+**由[Alex Olteanu](https://www.dataquest.io/blog/author/alex-olteanu/)，Dataquest.io 的学生成功专家**
 
 如果你阅读数据科学文章，可能已经碰到过[FiveThirtyEight](https://fivethirtyeight.com/)的内容。自然，你对他们的[精彩可视化](https://fivethirtyeight.com/features/the-52-best-and-weirdest-charts-we-made-in-2016/)印象深刻。你想制作自己的精彩可视化，因此询问了[Quora](https://www.quora.com/How-does-FiveThirtyEight-create-their-data-visualizations)和[Reddit](https://www.reddit.com/r/statistics/comments/2jon2b/anyone_knows_how_are_made_the_graphs_on/)怎么做。你收到了些回答，但它们相当模糊。你仍然无法自己制作图表。
 
-在这篇文章中，我们将帮助你。使用Python的[matplotlib](https://matplotlib.org/index.html#)和[pandas](http://pandas.pydata.org/pandas-docs/stable/index.html)，我们将看到复制任何FiveThirtyEight（FTE）可视化的核心部分是相当简单的。
+在这篇文章中，我们将帮助你。使用 Python 的[matplotlib](https://matplotlib.org/index.html#)和[pandas](http://pandas.pydata.org/pandas-docs/stable/index.html)，我们将看到复制任何 FiveThirtyEight（FTE）可视化的核心部分是相当简单的。
 
 我们从这里开始：
 
-![default_graph](../Images/0c08238c4969eb5ff53e0ccfa7e48e54.png)
+![default_graph](img/0c08238c4969eb5ff53e0ccfa7e48e54.png)
 
 然后，在教程结束时，达到这里：
 
-![final3](../Images/02b129309908aee0d2db50c351d3d94d.png)
+![final3](img/02b129309908aee0d2db50c351d3d94d.png)
 
-要跟随教程，你至少需要一些Python的基础知识。如果你知道方法和属性之间的区别，那么你已经准备好了。
+要跟随教程，你至少需要一些 Python 的基础知识。如果你知道方法和属性之间的区别，那么你已经准备好了。
 
 ### 介绍数据集
 
-我们将使用描述1970年至2011年间美国女性获得学士学位百分比的数据。我们将使用数据科学家[Randal Olson](http://www.randalolson.com/2014/06/14/percentage-of-bachelors-degrees-conferred-to-women-by-major-1970-2012/)编制的数据集，他从[国家教育统计中心](https://nces.ed.gov/about/)收集了这些数据。
+我们将使用描述 1970 年至 2011 年间美国女性获得学士学位百分比的数据。我们将使用数据科学家[Randal Olson](http://www.randalolson.com/2014/06/14/percentage-of-bachelors-degrees-conferred-to-women-by-major-1970-2012/)编制的数据集，他从[国家教育统计中心](https://nces.ed.gov/about/)收集了这些数据。
 
-如果你想自己动手编写代码，可以从[Randal's blog](http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv)下载数据。为了节省时间，你可以跳过下载文件，直接将直接链接传递给pandas的`read_csv()`[函数](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html?highlight=read_csv#pandas.read_csv)。在下面的代码单元中，我们：
+如果你想自己动手编写代码，可以从[Randal's blog](http://www.randalolson.com/wp-content/uploads/percent-bachelors-degrees-women-usa.csv)下载数据。为了节省时间，你可以跳过下载文件，直接将直接链接传递给 pandas 的`read_csv()`[函数](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.read_csv.html?highlight=read_csv#pandas.read_csv)。在下面的代码单元中，我们：
 
-+   导入pandas模块。
++   导入 pandas 模块。
 
 +   将指向数据集的直接链接分配给名为`direct_link`的变量。
 
@@ -85,7 +85,7 @@ None
 
 除了 `Year` 列外，其他每一列的名称表示学士学位的学科。学士列中的每个数据点表示授予女性的学士学位的百分比。因此，每一行描述了给定年份授予女性的各种学士学位的百分比。
 
-如前所述，我们的数据从1970年到2011年。为了确认后一个限制，让我们使用 `tail()` [方法](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.tail.html?highlight=tail#pandas.DataFrame.tail) 打印数据集的最后五行：
+如前所述，我们的数据从 1970 年到 2011 年。为了确认后一个限制，让我们使用 `tail()` [方法](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.tail.html?highlight=tail#pandas.DataFrame.tail) 打印数据集的最后五行：
 
 ```py
 women_majors.tail()
@@ -104,15 +104,15 @@ women_majors.tail()
 
 几乎每个 FTE 图表都是文章的一部分。图表通过展示小故事或有趣的想法来补充文本。在复制我们的 FTE 图表时，我们需要注意这一点。
 
-为了避免在本教程中跑题，我们假装已经写了大部分关于美国教育性别差距演变的文章。现在我们需要创建一个图表，帮助读者可视化1970年女性情况非常糟糕的学士学位的性别差距演变。我们已经设置了20%的阈值，现在我们想要绘制所有1970年女性毕业生百分比低于20%的学士学位的演变。
+为了避免在本教程中跑题，我们假装已经写了大部分关于美国教育性别差距演变的文章。现在我们需要创建一个图表，帮助读者可视化 1970 年女性情况非常糟糕的学士学位的性别差距演变。我们已经设置了 20%的阈值，现在我们想要绘制所有 1970 年女性毕业生百分比低于 20%的学士学位的演变。
 
 首先识别这些特定的学士学位。在以下代码单元中，我们将：
 
 +   使用`.loc`，这是一个[基于标签的索引器](http://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.loc.html?highlight=loc#pandas.DataFrame.loc)，来：
 
-    +   选择第一行（对应于1970年）；
+    +   选择第一行（对应于 1970 年）；
 
-    +   选择第一行中值小于20的项；`Year`字段也将被检查，但显然不会包含在内，因为1970远大于20。
+    +   选择第一行中值小于 20 的项；`Year`字段也将被检查，但显然不会包含在内，因为 1970 远大于 20。
 
 +   将结果内容分配给`under_20`。
 
@@ -156,15 +156,15 @@ print('Type:', type(under_20_graph))
 
 ```
 
-![](../Images/a593bbd04871b2356ba6b00209b670ab.png)
+![](img/a593bbd04871b2356ba6b00209b670ab.png)
 
 ### 使用 matplotlib 的 fivethirtyeight 样式
 
-上图具有一些特征，例如脊柱的宽度和颜色、y轴标签的字体大小、没有网格等。所有这些特征构成了 matplotlib 的默认样式。
+上图具有一些特征，例如脊柱的宽度和颜色、y 轴标签的字体大小、没有网格等。所有这些特征构成了 matplotlib 的默认样式。
 
 简短插曲，值得一提的是，在本文中我们将使用一些图形部分的技术术语。如果你在任何时候感到迷失，可以参考下面的图例。
 
-![anatomy1](../Images/0f47f940dc093daadce8595661fb8dca.png)
+![anatomy1](img/0f47f940dc093daadce8595661fb8dca.png)
 
 来源：[Matplotlib.org](http://matplotlib.org/faq/usage_faq.html#parts-of-a-figure)
 
@@ -215,9 +215,9 @@ women_majors.plot(x = 'Year', y = under_20.index, figsize = (12,8))
 
 ```
 
-![538_graphs_AO_11_1](../Images/cdee0cf7d81b8bba45d2ceb49508800d.png)
+![538_graphs_AO_11_1](img/cdee0cf7d81b8bba45d2ceb49508800d.png)
 
-![](../Images/c69d43b978cacd11f996c059d1cb2047.png)
+![](img/c69d43b978cacd11f996c059d1cb2047.png)
 
 哇，这真是一个重大变化！与我们的第一个图形相比，我们可以看到这个图形有不同的背景颜色，有网格线，完全没有脊柱，主要刻度标签的粗细和字体大小也不同等。
 
@@ -231,21 +231,21 @@ women_majors.plot(x = 'Year', y = under_20.index, figsize = (12,8))
 
 **相关：**
 
-+   [分析科学研究人员的迁移](/2017/11/analyzing-migration-scientific-researchers.html)
++   分析科学研究人员的迁移
 
-+   [7 种技术可视化地理空间数据](/2017/10/7-techniques-visualize-geospatial-data.html)
++   7 种技术可视化地理空间数据
 
-+   [Python 图表画廊](/2017/11/python-graph-gallery.html)
++   Python 图表画廊
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 部门
 
 * * *
 

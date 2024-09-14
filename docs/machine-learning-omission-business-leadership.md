@@ -1,12 +1,12 @@
 # 机器学习的最大遗漏：业务领导力
 
-> 原文：[https://www.kdnuggets.com/2020/10/machine-learning-omission-business-leadership.html](https://www.kdnuggets.com/2020/10/machine-learning-omission-business-leadership.html)
+> 原文：[`www.kdnuggets.com/2020/10/machine-learning-omission-business-leadership.html`](https://www.kdnuggets.com/2020/10/machine-learning-omission-business-leadership.html)
 
 赞助帖子。
 
 **由[Eric Siegel](https://www.kdnuggets.com/tag/eric-siegel)**
 
-[![图片](../Images/76a6516f1c9c7cb0d7c84e7fcbceb943.png)](http://www.machinelearning.courses)
+![图片](http://www.machinelearning.courses)
 
 *在这篇文章中，我识别了我[面向商业的机器学习课程](http://www.machinelearning.courses)解决的非常特别的学习者需求，该课程提供对技术人员和商业领导者都至关重要的材料。如果你或你团队的成员会从中受益，请查看更多信息并[在这里报名](http://www.machinelearning.courses)*。
 
@@ -72,17 +72,17 @@
 
 想了解更多，请查看我的[机器学习课程](http://www.machinelearning.courses)的详细大纲。
 
-![Image](../Images/91ec2c123926e0475d131119d05a96f8.png)**埃里克·西格尔（Eric Siegel），博士**，是一位领先的顾问和前哥伦比亚大学教授，他让机器学习变得易于理解和引人入胜。他是长期举办的[**预测分析世界**](https://www.predictiveanalyticsworld.com/)和[**深度学习世界**](https://www.deeplearningworld.com/)会议系列的创始人，自2009年以来已服务于超过17,000名与会者，同时也是备受推崇的在线课程[**机器领导力与实践——端到端精通**](http://www.machinelearning.courses/)的讲师，一位受欢迎的演讲者，他已被委托进行[**超过110次主题演讲**](http://www.predictiveanalyticsspeaker.com/)，并且是[***机器学习时代***](http://www.machinelearningtimes.com/)的执行编辑。他著有畅销书[***预测分析：预测谁会点击、购买、说谎或死亡***](http://www.thepredictionbook.com/)，该书在35多所大学的课程中被使用过，他在哥伦比亚大学教授时曾获教学奖，并且为学生演唱过[**教育歌曲**](http://www.cs.columbia.edu/~evs/songs)。埃里克还发布了[**关于分析和社会正义的专栏文章**](http://www.civilrightsdata.com/)。关注他[@predictanalytic](at @predictanalytic)。
+![Image](img/91ec2c123926e0475d131119d05a96f8.png)**埃里克·西格尔（Eric Siegel），博士**，是一位领先的顾问和前哥伦比亚大学教授，他让机器学习变得易于理解和引人入胜。他是长期举办的[**预测分析世界**](https://www.predictiveanalyticsworld.com/)和[**深度学习世界**](https://www.deeplearningworld.com/)会议系列的创始人，自 2009 年以来已服务于超过 17,000 名与会者，同时也是备受推崇的在线课程[**机器领导力与实践——端到端精通**](http://www.machinelearning.courses/)的讲师，一位受欢迎的演讲者，他已被委托进行[**超过 110 次主题演讲**](http://www.predictiveanalyticsspeaker.com/)，并且是[***机器学习时代***](http://www.machinelearningtimes.com/)的执行编辑。他著有畅销书[***预测分析：预测谁会点击、购买、说谎或死亡***](http://www.thepredictionbook.com/)，该书在 35 多所大学的课程中被使用过，他在哥伦比亚大学教授时曾获教学奖，并且为学生演唱过[**教育歌曲**](http://www.cs.columbia.edu/~evs/songs)。埃里克还发布了[**关于分析和社会正义的专栏文章**](http://www.civilrightsdata.com/)。关注他@predictanalytic。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求。
 
 * * *
 

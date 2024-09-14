@@ -1,12 +1,12 @@
 # Prefect 自动化与协调数据管道的方法
 
-> 原文：[https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html](https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html)
+> 原文：[`www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html`](https://www.kdnuggets.com/2021/09/prefect-way-automate-orchestrate-data-pipelines.html)
 
-[评论](#comments)
+评论
 
 **由 [Murallie Thuwarakesh](https://www.linkedin.com/in/thuwarakesh/)，Stax, Inc. 的数据科学家提供。**
 
-![](../Images/69cc42fcb364c7c8c0cbc7f68d6d0684.png)
+![](img/69cc42fcb364c7c8c0cbc7f68d6d0684.png)
 
 插图来自 [Undraw](https://undraw.co/illustrations)。
 
@@ -46,45 +46,45 @@ pip install prefect
 
 该脚本从 OpenWeatherMap API 下载天气数据，并将风速值存储在一个文件中。现实生活中的 ETL 应用可能很复杂。但这个示例应用很好地涵盖了基本方面。
 
-注意：请将 API 密钥替换为真实的密钥。你可以从 [https://openweathermap.org/api](https://openweathermap.org/api) 获取一个。
+注意：请将 API 密钥替换为真实的密钥。你可以从 [`openweathermap.org/api`](https://openweathermap.org/api) 获取一个。
 
 你可以使用命令 `python app.py` 运行此脚本，其中 app.py 是你脚本文件的名称。这将创建一个名为 windspeed.txt 的新文件，包含一个值。这是你访问 API 时波士顿的风速。如果你重新运行脚本，它将向同一文件追加另一个值。
 
 ## 你的第一个 Prefect ETL 工作流。
 
-上面的脚本运行良好。然而，它缺少完整ETL的一些关键特性，比如重试和调度。此外，如前所述，实际的ETL可能在一个工作流中有数百个任务。其中一些可以并行运行，而有些则依赖于一个或多个其他任务。
+上面的脚本运行良好。然而，它缺少完整 ETL 的一些关键特性，比如重试和调度。此外，如前所述，实际的 ETL 可能在一个工作流中有数百个任务。其中一些可以并行运行，而有些则依赖于一个或多个其他任务。
 
-想象一下，如果有一个临时网络问题阻止你调用API，脚本会立即失败而不会再做进一步尝试。在实时应用程序中，这种停机时间并不奇怪。它们发生的原因有很多——服务器停机、网络停机、服务器查询限制超出。
+想象一下，如果有一个临时网络问题阻止你调用 API，脚本会立即失败而不会再做进一步尝试。在实时应用程序中，这种停机时间并不奇怪。它们发生的原因有很多——服务器停机、网络停机、服务器查询限制超出。
 
-此外，你必须每次手动执行上述脚本以更新你的windspeed.txt文件。然而，将工作流调度在预定时间内运行在ETL工作流中是很常见的。
+此外，你必须每次手动执行上述脚本以更新你的 windspeed.txt 文件。然而，将工作流调度在预定时间内运行在 ETL 工作流中是很常见的。
 
-这时像Prefect和Airflow这样的工具就派上用场了。下面是你如何调整上面的代码使其成为Prefect工作流的方法。
-
-代码来自 [作者](https://thuwarakesh.medium.com/)。
-
-`@task` 装饰器将一个普通的Python函数转换为Prefect任务。可选参数允许你指定其重试行为。在上面的例子中，我们配置了该函数在失败之前尝试三次。我们还配置了每次重试之间延迟三分钟。
-
-使用这种新设置，我们的ETL对我们之前讨论的网络问题具有弹性。
-
-要测试其功能，请将计算机从网络断开连接，并用`python app.py`运行脚本。你会看到一条消息，说明第一次尝试失败，下一次将会在接下来的3分钟内开始。在三分钟内，将计算机重新连接到互联网。已经运行的脚本现在将无错误地完成。
-
-## 使用Prefect调度工作流。
-
-重试只是ETL故事的一部分。许多工作流应用程序的另一个挑战是按计划间隔运行它们。Prefect的调度API对任何Python程序员来说都是直接了当的。它是如何工作的，下面是说明。
+这时像 Prefect 和 Airflow 这样的工具就派上用场了。下面是你如何调整上面的代码使其成为 Prefect 工作流的方法。
 
 代码来自 [作者](https://thuwarakesh.medium.com/)。
 
-我们创建了一个IntervalSchedule对象，它在脚本执行后五秒启动。我们还将其配置为以一分钟为间隔运行。
+`@task` 装饰器将一个普通的 Python 函数转换为 Prefect 任务。可选参数允许你指定其重试行为。在上面的例子中，我们配置了该函数在失败之前尝试三次。我们还配置了每次重试之间延迟三分钟。
 
-如果你用`python app.py`运行脚本并监控windspeed.txt文件，你会看到每分钟都会有新值出现。
+使用这种新设置，我们的 ETL 对我们之前讨论的网络问题具有弹性。
 
-除了这种简单的调度外，Prefect的调度API提供了更多的控制。你可以用类似cron的方法调度工作流，使用带有时区的时钟时间，或者做一些更有趣的事情，比如仅在周末执行工作流。我在这里没有涵盖所有内容，但Prefect的官方 [文档](https://docs.prefect.io/core/concepts/schedules.html#clocks) 非常完美。
+要测试其功能，请将计算机从网络断开连接，并用`python app.py`运行脚本。你会看到一条消息，说明第一次尝试失败，下一次将会在接下来的 3 分钟内开始。在三分钟内，将计算机重新连接到互联网。已经运行的脚本现在将无错误地完成。
+
+## 使用 Prefect 调度工作流。
+
+重试只是 ETL 故事的一部分。许多工作流应用程序的另一个挑战是按计划间隔运行它们。Prefect 的调度 API 对任何 Python 程序员来说都是直接了当的。它是如何工作的，下面是说明。
+
+代码来自 [作者](https://thuwarakesh.medium.com/)。
+
+我们创建了一个 IntervalSchedule 对象，它在脚本执行后五秒启动。我们还将其配置为以一分钟为间隔运行。
+
+如果你用`python app.py`运行脚本并监控 windspeed.txt 文件，你会看到每分钟都会有新值出现。
+
+除了这种简单的调度外，Prefect 的调度 API 提供了更多的控制。你可以用类似 cron 的方法调度工作流，使用带有时区的时钟时间，或者做一些更有趣的事情，比如仅在周末执行工作流。我在这里没有涵盖所有内容，但 Prefect 的官方 [文档](https://docs.prefect.io/core/concepts/schedules.html#clocks) 非常完美。
 
 ## Prefect UI。
 
-像Airflow（和许多其他工具）一样，Prefect也附带一个具有美观UI的服务器。它允许你控制和可视化你的工作流执行。
+像 Airflow（和许多其他工具）一样，Prefect 也附带一个具有美观 UI 的服务器。它允许你控制和可视化你的工作流执行。
 
-![](../Images/ddd8676fce6a1b9429b402f51ac70153.png)
+![](img/ddd8676fce6a1b9429b402f51ac70153.png)
 
 插图来自 [作者](https://thuwarakesh.medium.com/)。
 
@@ -94,11 +94,11 @@ pip install prefect
 **$** prefect server start
 ```
 
-![](../Images/b5c02b84f51a3d5e2e98b33338181f95.png)
+![](img/b5c02b84f51a3d5e2e98b33338181f95.png)
 
 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 
-这个命令将启动 prefect 服务器，你可以通过你的网页浏览器访问它：`[http://localhost:8080/](http://localhost:8080/)`。
+这个命令将启动 prefect 服务器，你可以通过你的网页浏览器访问它：`[`localhost:8080/`](http://localhost:8080/)`。
 
 然而，Prefect 服务器本身无法执行你的工作流。它的作用只是为所有 Prefect 活动提供一个控制面板。由于这个仪表板与应用程序的其余部分解耦，你可以使用 Prefect cloud 完成相同的任务。我们将在稍后详细讨论这个问题。
 
@@ -110,7 +110,7 @@ pip install prefect
 **$** prefect agent local start
 ```
 
-![](../Images/534ec6d177c19b7a01220df8515db045.png)
+![](img/534ec6d177c19b7a01220df8515db045.png)
 
 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 
@@ -125,13 +125,13 @@ pip install prefect
 **$** python app.py
 ```
 
-![](../Images/22763187f237d00dfafed1c5e4e7f193.png)
+![](img/22763187f237d00dfafed1c5e4e7f193.png)
 
 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 
 在网页界面中，你可以看到新项目‘Tutorial’出现在下拉菜单中，我们的风速跟踪器在工作流列表中。该工作流已经计划并正在运行。如果你愿意，也可以手动运行它们。
 
-![](../Images/bf943e7a6d1a57976712d9c428b30771.png)
+![](img/bf943e7a6d1a57976712d9c428b30771.png)
 
 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 
@@ -145,7 +145,7 @@ pip install prefect
 
 如果你在 UI 中手动运行风速跟踪器工作流，你会看到一个名为 input 的部分。在这里，你可以为每次执行设置城市的值。
 
-![](../Images/c2ff3cfc4e99ae12ebde80a0a0006942.png)
+![](img/c2ff3cfc4e99ae12ebde80a0a0006942.png)
 
 插图由 [作者](https://thuwarakesh.medium.com/) 提供。
 
@@ -245,21 +245,21 @@ Prefect 是一个简单的工具，具有超越 Airflow 的灵活扩展性。你
 
 **相关内容：**
 
-+   [Prefect：如何使用 Python 编写和安排你的第一个 ETL 管道](/2021/08/prefect-write-schedule-etl-pipeline-python.html)
++   Prefect：如何使用 Python 编写和安排你的第一个 ETL 管道
 
-+   [使用 Gretel 和 Apache Airflow 构建合成数据管道](/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)
++   使用 Gretel 和 Apache Airflow 构建合成数据管道
 
-+   [本地开发和测试 AWS 的 ETL 管道](/2021/08/development-testing-etl-pipelines-aws-locally.html)
++   本地开发和测试 AWS 的 ETL 管道
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

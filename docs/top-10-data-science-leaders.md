@@ -1,8 +1,8 @@
 # 你应该关注的十大数据科学领袖
 
-> 原文：[https://www.kdnuggets.com/2019/07/top-10-data-science-leaders.html](https://www.kdnuggets.com/2019/07/top-10-data-science-leaders.html)
+> 原文：[`www.kdnuggets.com/2019/07/top-10-data-science-leaders.html`](https://www.kdnuggets.com/2019/07/top-10-data-science-leaders.html)
 
-![评论](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![评论](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Admond Lee](https://www.linkedin.com/in/admond1994/)，美光科技 / AI 时间杂志 / 亚洲科技**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -32,9 +32,9 @@
 
 这极大地帮助了我的数据科学之路，成为一名数据科学家，因为他们定期分享数据科学中的实际经验、最新技术和工具、技术和非技术知识等。
 
-这些数据科学领袖只是LinkedIn上杰出数据科学社区的一部分，他们激励我通过在[LinkedIn](https://www.linkedin.com/in/admond1994/)和[Medium](https://medium.com/@admond1994)上分享我的经验和知识来回馈社区。
+这些数据科学领袖只是 LinkedIn 上杰出数据科学社区的一部分，他们激励我通过在[LinkedIn](https://www.linkedin.com/in/admond1994/)和[Medium](https://medium.com/@admond1994)上分享我的经验和知识来回馈社区。
 
-因此你现在阅读的这篇文章（以及[Medium上的其他文章](https://medium.com/@admond1994)）。
+因此你现在阅读的这篇文章（以及[Medium 上的其他文章](https://medium.com/@admond1994)）。
 
 **如果你在数据科学领域，我强烈建议你关注这些巨头——我将在下面的部分列出——并成为我们数据科学社区的一员，向最优秀的人学习并分享你的经验和知识。**
 
@@ -42,7 +42,7 @@
 
 ### 你应该关注的十大数据科学领袖
 
-![图示](../Images/6aff3513d4e08b1909aaf8b93d0c80ab.png)
+![图示](img/6aff3513d4e08b1909aaf8b93d0c80ab.png)
 
 [(来源)](https://unsplash.com/photos/7e2pe9wjL9M)
 
@@ -84,9 +84,9 @@ Kyle 还定期在 LinkedIn 上与数据科学社区分享他的经验和见解�
 
 **[4\. 法比奥·瓦斯克斯](https://www.linkedin.com/in/faviovazquez/)**
 
-[法比奥·瓦斯克斯](https://medium.com/@faviovazquez)在数据科学领域有着深厚的经验，他总是乐于在LinkedIn上无保留地分享他的想法和见解。
+[法比奥·瓦斯克斯](https://medium.com/@faviovazquez)在数据科学领域有着深厚的经验，他总是乐于在 LinkedIn 上无保留地分享他的想法和见解。
 
-就我个人而言，我是他其中一个YouTube频道的粉丝——[数据科学办公时间](https://www.youtube.com/channel/UC5c7r0SlnNmPfqxEyni71FA)，那里有其他了不起的数据科学领袖分享他们在不同主题上的经验。
+就我个人而言，我是他其中一个 YouTube 频道的粉丝——[数据科学办公时间](https://www.youtube.com/channel/UC5c7r0SlnNmPfqxEyni71FA)，那里有其他了不起的数据科学领袖分享他们在不同主题上的经验。
 
 我无法告诉你我仅从他们的网络研讨会中学到了多少。
 
@@ -98,41 +98,41 @@ Kyle 还定期在 LinkedIn 上与数据科学社区分享他的经验和见解�
 
 **[5\. 埃里克·韦伯](https://www.linkedin.com/in/eric-weber-060397b7/)**
 
-埃里克曾是LinkedIn的高级数据科学家，现在在CoreLogic担任数据管理与数据科学主任。
+埃里克曾是 LinkedIn 的高级数据科学家，现在在 CoreLogic 担任数据管理与数据科学主任。
 
 我特别喜欢埃里克的一点是他对当前数据科学领域的敏锐观察。
 
 他总是愿意分享他的知识和经验，以揭示一些常见但被遗忘的数据科学领域，这些领域总是让我感到惊叹。
 
-埃里克是我自加入LinkedIn数据科学社区以来一直关注的数据科学领袖之一。从他那里学到的东西实在太多了，我迫不及待地想在未来与大家分享！
+埃里克是我自加入 LinkedIn 数据科学社区以来一直关注的数据科学领袖之一。从他那里学到的东西实在太多了，我迫不及待地想在未来与大家分享！
 
 **[6\. 凯特·斯特拉赫尼](https://www.linkedin.com/in/kate-strachnyi-data/)**
 
 凯特以[《颠覆者：数据科学领袖》](https://amzn.to/2EPFAow)的作者而著名。
 
-她还是[Datacated Weekly](https://storybydata.com/datacatedweekly/)的主持人——一个致力于帮助他人了解数据领域各种主题的项目——以及[我的Story by Data YouTube频道上的数据科学人物（HoDS）](https://www.youtube.com/channel/UCU9GTVEPqlSNRDHypVf3BRw)的主持人。
+她还是[Datacated Weekly](https://storybydata.com/datacatedweekly/)的主持人——一个致力于帮助他人了解数据领域各种主题的项目——以及[我的 Story by Data YouTube 频道上的数据科学人物（HoDS）](https://www.youtube.com/channel/UCU9GTVEPqlSNRDHypVf3BRw)的主持人。
 
-她在这篇文章中还采访了一些数据科学领域的领袖，因此如果你想了解数据领域的各种主题，我强烈建议你查看她的YouTube频道。
+她在这篇文章中还采访了一些数据科学领域的领袖，因此如果你想了解数据领域的各种主题，我强烈建议你查看她的 YouTube 频道。
 
 数据科学人物（HoDS）与[Favio Vázquez](https://medium.com/@faviovazquez)
 
-如你可能已经意识到的那样，LinkedIn上的数据科学社区是一个紧密联系的社区，我们彼此互动，共享和学习。
+如你可能已经意识到的那样，LinkedIn 上的数据科学社区是一个紧密联系的社区，我们彼此互动，共享和学习。
 
 **[7. 塔里·辛格](https://www.linkedin.com/in/tarrysingh/)**
 
-[塔里·辛格](https://medium.com/@tarrysingh)是[deepkapha.ai](https://deepkapha.ai/)的创始人兼首席执行官，该公司为企业提供AI解决方案，并致力于AI研究和慈善事业。
+[塔里·辛格](https://medium.com/@tarrysingh)是[deepkapha.ai](https://deepkapha.ai/)的创始人兼首席执行官，该公司为企业提供 AI 解决方案，并致力于 AI 研究和慈善事业。
 
-塔里在使用深度学习和AI解决现实世界问题方面的热情，激励我在刚开始从事数据科学时，回馈社会。
+塔里在使用深度学习和 AI 解决现实世界问题方面的热情，激励我在刚开始从事数据科学时，回馈社会。
 
-关注他的工作和分享。你将会惊讶于他的见解和分享，尤其是在AI最新前沿技术方面。
+关注他的工作和分享。你将会惊讶于他的见解和分享，尤其是在 AI 最新前沿技术方面。
 
 **[8. 伊玛德·穆罕默德·汗](https://www.linkedin.com/in/imaad-mohamed-khan-218b3999/)**
 
-[伊玛德·穆罕默德·汗](https://medium.com/@Imaadmkhan1)目前是Indegene的一名数据科学家。
+[伊玛德·穆罕默德·汗](https://medium.com/@Imaadmkhan1)目前是 Indegene 的一名数据科学家。
 
 他的帖子总是充满灵感，并且对数据科学的任何主题直截了当。
 
-此外，伊玛德还不时在印度组织Mantissa数据科学聚会，为大家提供一个分享和表达观点的机会，同时共同学习。
+此外，伊玛德还不时在印度组织 Mantissa 数据科学聚会，为大家提供一个分享和表达观点的机会，同时共同学习。
 
 他绝对是我总是期待向其学习的数据科学家之一。
 
@@ -148,21 +148,21 @@ Kyle 还定期在 LinkedIn 上与数据科学社区分享他的经验和见解�
 
 他是一名数据工程师和数据科学平台架构师，构建每天处理和分析大量数据的数据科学平台。
 
-如果你想了解更多关于数据工程的内容，比如Hadoop、Spark和Kafka，快去查看他的YouTube频道 — [数据科学的管道工](https://www.youtube.com/channel/UCY8mzqqGwl5_bTpBY9qLMAA)。
+如果你想了解更多关于数据工程的内容，比如 Hadoop、Spark 和 Kafka，快去查看他的 YouTube 频道 — [数据科学的管道工](https://www.youtube.com/channel/UCY8mzqqGwl5_bTpBY9qLMAA)。
 
 什么是数据科学的管道工？ — 由[安德烈亚斯·克雷茨](https://www.linkedin.com/in/andreas-kretz/)编写
 
 **[10. 安德烈·布尔科夫](https://www.linkedin.com/in/andriyburkov/)**
 
-安德烈 — Gartner的高级数据科学和机器学习团队负责人 — 可以被视为LinkedIn上数据科学的领军人物和名人，他有一本著名的畅销书 — [《百页机器学习书》](http://themlbook.com/)。
+安德烈 — Gartner 的高级数据科学和机器学习团队负责人 — 可以被视为 LinkedIn 上数据科学的领军人物和名人，他有一本著名的畅销书 — [《百页机器学习书》](http://themlbook.com/)。
 
 他的畅销书已经被翻译成不同国家的多种语言（甚至被一些大学的图书馆和课程作为教学材料！）。
 
-他还在LinkedIn上定期（几乎是每天！）分享大量有用的数据科学技巧，我相信你不想错过这些内容。
+他还在 LinkedIn 上定期（几乎是每天！）分享大量有用的数据科学技巧，我相信你不想错过这些内容。
 
 ### 最后的想法
 
-![图示](../Images/d5701cd6cb8e401c266d167f2e492560.png)
+![图示](img/d5701cd6cb8e401c266d167f2e492560.png)
 
 [(来源)](https://unsplash.com/photos/bEcC0nyIp2g)
 
@@ -190,19 +190,19 @@ Kyle 还定期在 LinkedIn 上与数据科学社区分享他的经验和见解�
 
 **相关：**
 
-+   [LinkedIn 2018年顶级声音：数据科学与分析](/2018/11/linkedin-top-voices-2018-data-science-analytics.html)
++   LinkedIn 2018 年顶级声音：数据科学与分析
 
-+   [没有借口 – 470位杰出的分析女性](/2017/12/470-outstanding-women-analytics.html)
++   没有借口 – 470 位杰出的分析女性
 
-+   [LinkedIn上活跃的大数据、数据科学、机器学习领域的前10位影响者，更新版](/2017/09/top-10-big-data-science-machine-learning-influencers-linkedin-updated.html)
++   LinkedIn 上活跃的大数据、数据科学、机器学习领域的前 10 位影响者，更新版
 
 ### 更多相关内容
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 

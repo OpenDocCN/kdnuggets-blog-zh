@@ -1,16 +1,16 @@
 # ELMo：上下文化语言嵌入
 
-> 原文：[https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html](https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html)
+> 原文：[`www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html`](https://www.kdnuggets.com/2019/01/elmo-contextual-language-embedding.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/)撰写，高级分析专家**
 
-![图](../Images/a74f9c9205ba620c8eb635c5ce9a34be.png)
+![图](img/a74f9c9205ba620c8eb635c5ce9a34be.png)
 
-使用最先进的ELMo自然语言模型进行语义句子相似性分析
+使用最先进的 ELMo 自然语言模型进行语义句子相似性分析
 
-本文将探讨自然语言建模的最新进展——深度上下文化词嵌入。重点在于实践而非理论，包含了如何使用最先进的ELMo模型来审查给定文档中的句子相似性，以及创建一个简单的语义搜索引擎的实际示例。完整代码可以在 Colab 笔记本中查看，链接在[这里](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1)。
+本文将探讨自然语言建模的最新进展——深度上下文化词嵌入。重点在于实践而非理论，包含了如何使用最先进的 ELMo 模型来审查给定文档中的句子相似性，以及创建一个简单的语义搜索引擎的实际示例。完整代码可以在 Colab 笔记本中查看，链接在[这里](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1)。
 
 ### **上下文在自然语言处理中的重要性**
 
@@ -24,23 +24,23 @@
 
 在这些句子中，虽然“桶”这个词始终相同，但其含义却大相径庭。
 
-![](../Images/ab68e5ad764de2c7ec2ad19eca2d8a9f.png)
+![](img/ab68e5ad764de2c7ec2ad19eca2d8a9f.png)
 
 词语的含义可能会根据上下文而有所不同
 
 尽管我们可以轻松解读这些语言中的复杂性，但创建一个可以理解给定文本周围词语不同细微含义的模型却很困难。
 
-正因如此，传统的词嵌入（如word2vec、GloVe、fastText）显得力不从心。它们每个词只有一种表示，因此无法捕捉每个词在不同上下文中含义的变化。
+正因如此，传统的词嵌入（如 word2vec、GloVe、fastText）显得力不从心。它们每个词只有一种表示，因此无法捕捉每个词在不同上下文中含义的变化。
 
-### **介绍ELMo：深度上下文化词表示**
+### **介绍 ELMo：深度上下文化词表示**
 
-ELMo应运而生。ELMo由AllenNLP于2018年开发，超越了传统的嵌入技术。它使用深度双向LSTM模型来创建词表示。
+ELMo 应运而生。ELMo 由 AllenNLP 于 2018 年开发，超越了传统的嵌入技术。它使用深度双向 LSTM 模型来创建词表示。
 
-与其说ELMo拥有一个词汇表及其对应向量，不如说ELMo在词语使用的上下文中进行分析。它还是基于字符的，使模型能够形成对超出词汇表范围的词的表示。
+与其说 ELMo 拥有一个词汇表及其对应向量，不如说 ELMo 在词语使用的上下文中进行分析。它还是基于字符的，使模型能够形成对超出词汇表范围的词的表示。
 
-因此，ELMo的使用方式与word2vec或fastText截然不同。ELMo不是通过字典“查找”词及其对应的向量，而是通过将文本传递给深度学习模型即时创建向量。
+因此，ELMo 的使用方式与 word2vec 或 fastText 截然不同。ELMo 不是通过字典“查找”词及其对应的向量，而是通过将文本传递给深度学习模型即时创建向量。
 
-### **一个实际示例，5分钟内ELMo的实际应用**
+### **一个实际示例，5 分钟内 ELMo 的实际应用**
 
 让我们开始吧！我会在这里添加主要的代码片段，但如果你想查看完整的代码集（或者确实想体验点击笔记本中每个单元格的奇妙感觉），请查看相应的 [Colab 输出](https://colab.research.google.com/drive/13f6dKakC-0yO6_DxqSqo0Kl41KMHT8A1)。
 
@@ -159,7 +159,7 @@ files.download('Sentence encode.html')
 
 通过这个可视化，我们可以看到 ELMo 在按语义相似性分组句子方面做得非常出色。实际上，模型的效果非常令人惊讶：
 
-![](../Images/037e9b1b847b7fdcf675ce65cecca0d8.png)
+![](img/037e9b1b847b7fdcf675ce65cecca0d8.png)
 
 下载 HTML 文件（链接见上）以查看 ELMo 的实际效果
 
@@ -185,7 +185,7 @@ search_string = "example text" #@param {type:"string"}
 
 让我们来检验一下。让我们看看 ASOS 在其现代奴隶制报告中关于伦理规范的做法：
 
-![](../Images/12eb9c43b35ea7f42e9db71d586de9f0.png)
+![](img/12eb9c43b35ea7f42e9db71d586de9f0.png)
 
 只需几分钟即可创建一个完全互动的语义搜索引擎！
 
@@ -213,7 +213,7 @@ search_string = "example text" #@param {type:"string"}
 
 最后，关于最先进的语言模型，下面的内容是值得一读的：
 
-[http://jalammar.github.io/illustrated-bert/](http://jalammar.github.io/illustrated-bert/)
+[`jalammar.github.io/illustrated-bert/`](http://jalammar.github.io/illustrated-bert/)
 
 **简介：[Josh Taylor](https://www.linkedin.com/in/josh-taylor-24806975/)** (**[@josh_taylor_01](https://twitter.com/josh_taylor_01)**) 是一位通过先进分析、机器学习和可视化技术生成洞见的专家，目前为女王陛下的政府工作。所有观点均为个人意见。
 
@@ -221,29 +221,29 @@ search_string = "example text" #@param {type:"string"}
 
 **相关：**
 
-+   [词嵌入与自监督学习，解释说明](/2019/01/burkov-self-supervised-learning-word-embeddings.html)
++   词嵌入与自监督学习，解释说明
 
-+   [自然语言处理任务的数据表示](/2018/11/data-representation-natural-language-processing.html)
++   自然语言处理任务的数据表示
 
-+   [2018年数据科学领域的前20大Python库](/2018/06/top-20-python-libraries-data-science-2018.html)
++   2018 年数据科学领域的前 20 大 Python 库
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [终极指南：NLP中不同的词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
++   [终极指南：NLP 中不同的词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
 +   [Python：机器学习的编程语言](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)
 
@@ -251,4 +251,4 @@ search_string = "example text" #@param {type:"string"}
 
 +   [自然语言处理任务的数据表示](https://www.kdnuggets.com/2018/11/data-representation-natural-language-processing.html)
 
-+   [是什么让Python成为创业公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为创业公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

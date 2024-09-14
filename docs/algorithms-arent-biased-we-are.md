@@ -1,12 +1,12 @@
 # 算法并不偏见，我们才是
 
-> 原文：[https://www.kdnuggets.com/2019/01/algorithms-arent-biased-we-are.html](https://www.kdnuggets.com/2019/01/algorithms-arent-biased-we-are.html)
+> 原文：[`www.kdnuggets.com/2019/01/algorithms-arent-biased-we-are.html`](https://www.kdnuggets.com/2019/01/algorithms-arent-biased-we-are.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Rahul Bhargava](https://www.media.mit.edu/people/rahulb/overview/)，麻省理工学院**。
 
-对使用AI改善你组织的运营感到兴奋？对计算机模型带来的见解和预测充满好奇？我想提醒你关于偏见及其如何在这些类型的项目中出现，分享一些说明性的例子，并翻译最新的关于“算法偏见”的学术研究。
+对使用 AI 改善你组织的运营感到兴奋？对计算机模型带来的见解和预测充满好奇？我想提醒你关于偏见及其如何在这些类型的项目中出现，分享一些说明性的例子，并翻译最新的关于“算法偏见”的学术研究。
 
 首先——语言很重要。我们称呼事物的方式影响我们的理解。这就是为什么**我尽量避免使用“人工智能”这一受炒作驱动的术语**。大多数被称为人工智能的项目更恰当地描述为“机器学习”。机器学习可以描述为训练计算机做出你希望它帮助做出的决策的过程。本文描述了为什么你需要关注你机器学习问题中的数据。
 
@@ -34,7 +34,7 @@
 
 **那些算法没有偏见，是我们有！算法是镜子。**
 
-![](../Images/07623c5d75a367f0c5d8fc2bcaa5bea5.png)
+![](img/07623c5d75a367f0c5d8fc2bcaa5bea5.png)
 
 **算法镜子无法完全反射我们周围的世界，也无法反射我们想要的世界**
 
@@ -44,7 +44,7 @@
 
 那么我们如何检测和纠正这些问题呢？教师对学生的学习感到责任和自豪。机器学习模型的开发者也应该感受到类似的责任，或许也应该有类似的自豪感。
 
-我对像[微软努力消除公共可用语言模型中的性别偏见](https://www.technologyreview.com/s/602025/how-vector-space-mathematics-reveals-the-hidden-sexism-in-language/)（尝试解决“医生是男性”问题）这样的例子感到振奋。我喜欢我的同事Joy Buolamwini将其重新框架为她称之为“[算法正义联盟](https://www.ajlunited.org/)”的社会和技术干预中的“正义”问题的努力（[视频](https://www.ted.com/talks/joy_buolamwini_how_i_m_fighting_bias_in_algorithms)）。[ProPublica](https://www.propublica.org/)的调查报道让公司对其歧视性量刑预测负责。令人惊叹的[Zeynep Tufekci](https://www.ted.com/talks/zeynep_tufekci_we_re_building_a_dystopia_just_to_make_people_click_on_ads)在谈论和写作社会面临的危险方面走在前沿。Cathy O’Neil的[数学毁灭武器](https://weaponsofmathdestructionbook.com/)记录了这一切的诸多影响，对社会发出了警告。像[法律领域正在讨论的影响](https://scholarship.law.duke.edu/cgi/viewcontent.cgi?referer=&httpsredir=1&article=1315&context=dltr)一样，算法驱动的决策在公共政策设置中的影响也在讨论中。[城市条例](https://www.propublica.org/article/new-york-city-moves-to-create-accountability-for-algorithms)也开始处理如何立法应对我描述的一些影响的问题。
+我对像[微软努力消除公共可用语言模型中的性别偏见](https://www.technologyreview.com/s/602025/how-vector-space-mathematics-reveals-the-hidden-sexism-in-language/)（尝试解决“医生是男性”问题）这样的例子感到振奋。我喜欢我的同事 Joy Buolamwini 将其重新框架为她称之为“[算法正义联盟](https://www.ajlunited.org/)”的社会和技术干预中的“正义”问题的努力（[视频](https://www.ted.com/talks/joy_buolamwini_how_i_m_fighting_bias_in_algorithms)）。[ProPublica](https://www.propublica.org/)的调查报道让公司对其歧视性量刑预测负责。令人惊叹的[Zeynep Tufekci](https://www.ted.com/talks/zeynep_tufekci_we_re_building_a_dystopia_just_to_make_people_click_on_ads)在谈论和写作社会面临的危险方面走在前沿。Cathy O’Neil 的[数学毁灭武器](https://weaponsofmathdestructionbook.com/)记录了这一切的诸多影响，对社会发出了警告。像[法律领域正在讨论的影响](https://scholarship.law.duke.edu/cgi/viewcontent.cgi?referer=&httpsredir=1&article=1315&context=dltr)一样，算法驱动的决策在公共政策设置中的影响也在讨论中。[城市条例](https://www.propublica.org/article/new-york-city-moves-to-create-accountability-for-algorithms)也开始处理如何立法应对我描述的一些影响的问题。
 
 这些努力希望能作为这些算法镜子的“校正镜片”——解决我们在自我反射中看到的令人担忧的方面。关键在于记住，我们必须采取行动解决这个问题。**通过算法做出的决策并不会自动使其可靠和可信；就像用数据量化某事并不会自动使其成为事实一样**。我们需要审视这些算法镜中的自我反射，确保看到我们想要的未来。
 
@@ -70,11 +70,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 

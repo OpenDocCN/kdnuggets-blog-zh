@@ -1,12 +1,12 @@
 # 使用机器学习检测应用内购买欺诈
 
-> 原文：[https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html](https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html`](https://www.kdnuggets.com/2015/11/detecting-app-purchase-fraud-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2015/11/detecting-app-purchase-fraud-machine-learning.html/2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Ella Gati，[Soomla](http://soom.la/)**。
 
-![检测欺诈](../Images/ab29ff4938f17b9d142fb4fed194168d.png)黑客应用程序如 [Freedom](http://onhax.net/freedom-iap-apk)、[iAP Cracker](http://www.cydiainsider.com/iap-cracker)、[iAPFree](http://www.cydiainsider.com/iapfree) 等允许用户免费进行应用内购买。通过这些黑客手段，玩家可以在没有支付任何费用的情况下获得他们购买的金币、宝石、关卡或生命。如果游戏开发者没有在应用内购买上实施任何验证过程，例如 [SOOMLA 的欺诈保护](http://know.soom.la/unity/grow/grow_fraudprotection)，这些购买将被记录为系统中的真实购买。因此，报告的收入可能与实际收入大相径庭（尤其是在存在大量欺诈的热门游戏中）。
+![检测欺诈](img/ab29ff4938f17b9d142fb4fed194168d.png)黑客应用程序如 [Freedom](http://onhax.net/freedom-iap-apk)、[iAP Cracker](http://www.cydiainsider.com/iap-cracker)、[iAPFree](http://www.cydiainsider.com/iapfree) 等允许用户免费进行应用内购买。通过这些黑客手段，玩家可以在没有支付任何费用的情况下获得他们购买的金币、宝石、关卡或生命。如果游戏开发者没有在应用内购买上实施任何验证过程，例如 [SOOMLA 的欺诈保护](http://know.soom.la/unity/grow/grow_fraudprotection)，这些购买将被记录为系统中的真实购买。因此，报告的收入可能与实际收入大相径庭（尤其是在存在大量欺诈的热门游戏中）。
 
 我们希望使报告尽可能准确，并能够向游戏开发者传达他们游戏的真实状态。我们使用机器学习和统计建模技术来解决这个问题。
 
@@ -75,13 +75,13 @@
 | 2 | 提升树 | 均匀 | **0.01** | 0.11 | **0.94** | 0.84 |
 | 2 | 增强树 | 按类别 | 0.05 | 0.05 | 0.90 | 0.85 |
 
-这些结果非常令人印象深刻！每个游戏模型的F1分数高达97%。
+这些结果非常令人印象深刻！每个游戏模型的 F1 分数高达 97%。
 
-第二个游戏的真实数据较少（这是一个每月平均购买次数少100倍的游戏，我们获得了一个月的购买数据），这解释了其较低的性能。
+第二个游戏的真实数据较少（这是一个每月平均购买次数少 100 倍的游戏，我们获得了一个月的购买数据），这解释了其较低的性能。
 
 增强树算法优于随机森林算法，这并不令人惊讶，因为它是一种优化，通常可以在较少的树木中提供更好的准确性。
 
-使用按类别大小调整的权重通常会导致更低的假阳性率（FPR）和更高的假阴性率（FNR），F1分数略低。如前所述，我们更关心假阳性率，因此在后续实验中我们使用了具有非均匀权重的增强树算法。
+使用按类别大小调整的权重通常会导致更低的假阳性率（FPR）和更高的假阴性率（FNR），F1 分数略低。如前所述，我们更关心假阳性率，因此在后续实验中我们使用了具有非均匀权重的增强树算法。
 
 ### 跨游戏分类
 
@@ -89,31 +89,31 @@
 
 为了测试这一点，第二个实验在一个包含来自一个游戏的数据的训练集和来自另一个游戏的数据的测试集上进行。
 
-![准确性热力图](../Images/14ce57eb9cb840125ddfdfea237073bb.png)
+![准确性热力图](img/14ce57eb9cb840125ddfdfea237073bb.png)
 
-上表展示了跨游戏实验的准确性。所有分数都为79%或更高！这对其他所有游戏来说都是好消息。正如预期的，当训练集和测试集来自相同的游戏数据（70%-30%的随机拆分）时，获得了最高的分数。最低的分数是在测试第4个游戏时获得的，它是最小的游戏（200次购买）。
+上表展示了跨游戏实验的准确性。所有分数都为 79%或更高！这对其他所有游戏来说都是好消息。正如预期的，当训练集和测试集来自相同的游戏数据（70%-30%的随机拆分）时，获得了最高的分数。最低的分数是在测试第 4 个游戏时获得的，它是最小的游戏（200 次购买）。
 
-另一个有趣的结果是本实验中的FPR分数。
+另一个有趣的结果是本实验中的 FPR 分数。
 
-[![FPR热力图](../Images/2088015e8df1c497a1723c68cb429a58.png)](http://blog.soom.la/wp-content/uploads/2015/11/FPRHeatMap1.png)
+![FPR 热力图](http://blog.soom.la/wp-content/uploads/2015/11/FPRHeatMap1.png)
 
-同时值得注意的是，训练于游戏4的模型生成了较差的假阳性率（FPR）分数。这是由于购买数量少，以及欺诈行为相对较低（54%对比于其他游戏的77%-85%）。由于游戏1具有最大的真实数据，训练于其他（较小的）游戏的模型假阳性率非常高，最多有30%的有效购买被分类为欺诈。当训练于其他游戏时，我们得到的结果要好得多，错误分类的有效购买率为1-2%。
+同时值得注意的是，训练于游戏 4 的模型生成了较差的假阳性率（FPR）分数。这是由于购买数量少，以及欺诈行为相对较低（54%对比于其他游戏的 77%-85%）。由于游戏 1 具有最大的真实数据，训练于其他（较小的）游戏的模型假阳性率非常高，最多有 30%的有效购买被分类为欺诈。当训练于其他游戏时，我们得到的结果要好得多，错误分类的有效购买率为 1-2%。
 
 这一实验证明了游戏之间的数据传输在大多数情况下效果良好，但如果你的游戏具有非常独特的用户行为，可能会出现问题。
 
 ### 结果
 
-最终，我们在所有的真实数据上训练了一个模型，并用它对我们数据库中的所有购买进行分类。根据分类器的结果，55.7%的购买是欺诈行为，这些购买占总收入的72.9%。
+最终，我们在所有的真实数据上训练了一个模型，并用它对我们数据库中的所有购买进行分类。根据分类器的结果，55.7%的购买是欺诈行为，这些购买占总收入的 72.9%。
 
-[![按游戏大小的欺诈百分比 - SOOMLA](../Images/f489742d584de7c49173e9dfb75c3c7c.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-percentage-by-game-size.png)
+![按游戏大小的欺诈百分比 - SOOMLA](http://blog.soom.la/wp-content/uploads/2015/11/fraud-percentage-by-game-size.png)
 
-这些数字在不同游戏之间有所不同。我们可以看到一个普遍趋势：较大的游戏（用户更多的游戏）的欺诈百分比最高，即使我们也看到一些相对较小的游戏有高达89%的欺诈。这些差异可以通过不同的经济模型或游戏在不同国家的受欢迎程度来解释。
+这些数字在不同游戏之间有所不同。我们可以看到一个普遍趋势：较大的游戏（用户更多的游戏）的欺诈百分比最高，即使我们也看到一些相对较小的游戏有高达 89%的欺诈。这些差异可以通过不同的经济模型或游戏在不同国家的受欢迎程度来解释。
 
-根据我们的模型结果，欺诈在斯拉夫国家最为普遍。俄罗斯、乌克兰和白俄罗斯排名前列，超过90%的购买都是欺诈行为。
+根据我们的模型结果，欺诈在斯拉夫国家最为普遍。俄罗斯、乌克兰和白俄罗斯排名前列，超过 90%的购买都是欺诈行为。
 
-[![每个国家的欺诈率 - SOOMLA](../Images/6663ecfe3bd727cf726651dcb4c2ed86.png)](http://blog.soom.la/wp-content/uploads/2015/11/fraud-rate-per-country.png)
+![每个国家的欺诈率 - SOOMLA](http://blog.soom.la/wp-content/uploads/2015/11/fraud-rate-per-country.png)
 
-模型预测仅有2%的用户有一些有效购买和一些欺诈。其余98%的用户要么是欺诈者（总是进行欺诈），要么不是（所有购买都有效）。在这98%中，超过一半是欺诈者。
+模型预测仅有 2%的用户有一些有效购买和一些欺诈。其余 98%的用户要么是欺诈者（总是进行欺诈），要么不是（所有购买都有效）。在这 98%中，超过一半是欺诈者。
 
 ### 对游戏开发者的影响
 
@@ -131,33 +131,33 @@
 
 我们掌握的真实数据越多，我们的分类结果就会越好。游戏开发者和工作室可以通过提供反馈或与我们分享销售报告来获得更好的报告并帮助我们改进。
 
-有问题？请联系 [ella@soom.la](mailto:ella@soom.la)。
+有问题？请联系 ella@soom.la。
 
-[本文首次出现在Soomla博客上](http://blog.soom.la/2015/11/detecting-app-purchase-fraud-machine-learning.html)。
+[本文首次出现在 Soomla 博客上](http://blog.soom.la/2015/11/detecting-app-purchase-fraud-machine-learning.html)。
 
 **相关：**
 
-+   [数据挖掘医疗数据 – 我们能发现什么？](/2014/04/data-mining-medicare-data.html)
++   数据挖掘医疗数据 – 我们能发现什么？
 
-+   [如何使用Hadoop和大数据发现被盗数据？](/2015/11/discover-stolen-data-hadoop-big-data.html)
++   如何使用 Hadoop 和大数据发现被盗数据？
 
-+   [欺诈检测解决方案](/solutions/fraud-detection.html)
++   欺诈检测解决方案
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
 ### 更多相关话题
 
-+   [使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
 +   [5 款免费工具用于检测 ChatGPT、GPT3 和 GPT2](https://www.kdnuggets.com/2023/02/5-free-tools-detecting-chatgpt-gpt3-gpt2.html)
 
@@ -165,6 +165,6 @@
 
 +   [在 5 分钟内构建机器学习 Web 应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在 5 分钟内构建机器学习 Web 应用…](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习 Web 应用…](https://www.kdnuggets.com/2022/n10.html)
 
 +   [使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)

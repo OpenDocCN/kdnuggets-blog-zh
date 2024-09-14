@@ -1,8 +1,8 @@
 # Hugging Face Diffusers 概览
 
-> 原文：[https://www.kdnuggets.com/an-overview-of-hugging-face-diffusers](https://www.kdnuggets.com/an-overview-of-hugging-face-diffusers)
+> 原文：[`www.kdnuggets.com/an-overview-of-hugging-face-diffusers`](https://www.kdnuggets.com/an-overview-of-hugging-face-diffusers)
 
-![Hugging Face Diffusers 概览](../Images/f6108832a80f1123ece521a4c494e821.png)
+![Hugging Face Diffusers 概览](img/f6108832a80f1123ece521a4c494e821.png)
 
 图片由作者提供
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -54,11 +54,11 @@ torch 包将用于 diffuser 管道的一般设置和配置。AutoPipelineForText
 
 扩散模型由多个组件组成，包括但不限于文本编码器、UNet、调度器和变分自编码器。我们可以单独加载这些模块，但 diffusers 库提供了一个构建方法，可以加载给定结构化检查点目录的预训练模型。对于初学者来说，可能很难知道使用哪个管道，因此 AutoPipeline 使得为特定任务加载模型变得更容易。
 
-在这个例子中，我们将加载一个由Stability AI训练的、在[HuggingFace](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)上公开提供的SDXL模型。目录中的文件根据其名称进行结构化，每个目录都有自己的safetensors文件。SDXL模型的目录结构如下所示：
+在这个例子中，我们将加载一个由 Stability AI 训练的、在[HuggingFace](https://huggingface.co/stabilityai/stable-diffusion-xl-base-1.0)上公开提供的 SDXL 模型。目录中的文件根据其名称进行结构化，每个目录都有自己的 safetensors 文件。SDXL 模型的目录结构如下所示：
 
-![SDXL模型的目录结构](../Images/13b6b0b3589de3e35e8729d6e8c7f19c.png)
+![SDXL 模型的目录结构](img/13b6b0b3589de3e35e8729d6e8c7f19c.png)
 
-要在我们的代码中加载模型，我们使用AutoPipelineForText2Image类并调用from_pretrained函数。
+要在我们的代码中加载模型，我们使用 AutoPipelineForText2Image 类并调用 from_pretrained 函数。
 
 ```py
 pipeline = AutoPipelineForText2Image.from_pretrained(
@@ -67,11 +67,11 @@ pipeline = AutoPipelineForText2Image.from_pretrained(
 ) 
 ```
 
-我们将模型路径作为第一个参数提供。它可以是上述的HuggingFace模型卡名称，也可以是您提前下载模型的本地目录。此外，我们将模型权重精度定义为关键字参数。当我们在CPU上运行模型时，通常使用32位浮点精度。然而，运行扩散模型计算成本高昂，且在CPU设备上运行推理将需要几个小时！对于GPU，我们可以使用16位或32位数据类型，但16位更优，因为它利用了较低的GPU内存。
+我们将模型路径作为第一个参数提供。它可以是上述的 HuggingFace 模型卡名称，也可以是您提前下载模型的本地目录。此外，我们将模型权重精度定义为关键字参数。当我们在 CPU 上运行模型时，通常使用 32 位浮点精度。然而，运行扩散模型计算成本高昂，且在 CPU 设备上运行推理将需要几个小时！对于 GPU，我们可以使用 16 位或 32 位数据类型，但 16 位更优，因为它利用了较低的 GPU 内存。
 
-上述命令将从HuggingFace下载模型，下载时间可能会根据您的互联网连接而有所不同。模型的大小可以从1GB到超过10GB不等。
+上述命令将从 HuggingFace 下载模型，下载时间可能会根据您的互联网连接而有所不同。模型的大小可以从 1GB 到超过 10GB 不等。
 
-一旦模型加载完成，我们需要将模型移动到合适的硬件设备上。使用以下代码将模型移动到CPU或GPU。请注意，对于Apple Silicon芯片，将模型移动到MPS设备以利用MacOS设备上的GPU。
+一旦模型加载完成，我们需要将模型移动到合适的硬件设备上。使用以下代码将模型移动到 CPU 或 GPU。请注意，对于 Apple Silicon 芯片，将模型移动到 MPS 设备以利用 MacOS 设备上的 GPU。
 
 ```py
 # "mps" if on M1/M2 MacOS Device
@@ -93,9 +93,9 @@ results = pipeline(
 )
 ```
 
-我们可以使用管道对象，并通过多个关键字参数调用它以控制生成的图像。我们将提示定义为描述我们希望生成的图像的字符串参数。此外，我们可以定义生成图像的高度和宽度，但应为8或16的倍数，因为底层的变压器架构要求如此。此外，总的推理步骤可以调整以控制最终图像的质量。更多的去噪步骤会生成更高质量的图像，但需要更长时间生成。
+我们可以使用管道对象，并通过多个关键字参数调用它以控制生成的图像。我们将提示定义为描述我们希望生成的图像的字符串参数。此外，我们可以定义生成图像的高度和宽度，但应为 8 或 16 的倍数，因为底层的变压器架构要求如此。此外，总的推理步骤可以调整以控制最终图像的质量。更多的去噪步骤会生成更高质量的图像，但需要更长时间生成。
 
-最终，管道返回一个生成的图像列表。我们可以从数组中访问第一个图像，并将其作为Pillow图像进行操作，以便保存或显示图像。
+最终，管道返回一个生成的图像列表。我们可以从数组中访问第一个图像，并将其作为 Pillow 图像进行操作，以便保存或显示图像。
 
 ```py
 img = results.images[0]
@@ -103,7 +103,7 @@ img.save('result.png')
 img # To show the image in Jupyter notebook 
 ```
 
-![生成的图像](../Images/d66a9e1aa7d812723bc97cbab89a52d4.png)
+![生成的图像](img/d66a9e1aa7d812723bc97cbab89a52d4.png)
 
 生成的图像
 

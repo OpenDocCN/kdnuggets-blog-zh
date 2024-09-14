@@ -1,8 +1,8 @@
-# 可解释人工智能：10个 Python 库解密您的模型决策
+# 可解释人工智能：10 个 Python 库解密您的模型决策
 
-> 原文：[https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
+> 原文：[`www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html`](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
 
-![可解释人工智能：10个 Python 库解密您的模型决策](../Images/8eb96b67e4f791d4df13c6b2556316e6.png)
+![可解释人工智能：10 个 Python 库解密您的模型决策](img/8eb96b67e4f791d4df13c6b2556316e6.png)
 
 作者提供的图片
 
@@ -12,15 +12,15 @@ XAI 是一种人工智能，允许人类理解模型或系统的结果和决策�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
-# 解释的3个阶段
+# 解释的 3 个阶段
 
 ## 模型前解释性
 
@@ -36,7 +36,7 @@ XAI 是一种人工智能，允许人类理解模型或系统的结果和决策�
 
 # 人工智能解释性的 Python 库
 
-我找到这10个用于人工智能解释性的 Python 库：
+我找到这 10 个用于人工智能解释性的 Python 库：
 
 ## SHAP (SHapley Additive exPlanations)
 

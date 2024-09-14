@@ -1,26 +1,26 @@
 # 理解神经网络的思维方式
 
-> 原文：[https://www.kdnuggets.com/2020/07/understanding-neural-networks-think.html](https://www.kdnuggets.com/2020/07/understanding-neural-networks-think.html)
+> 原文：[`www.kdnuggets.com/2020/07/understanding-neural-networks-think.html`](https://www.kdnuggets.com/2020/07/understanding-neural-networks-think.html)
 
-[评论](#comments)![图](../Images/0efaa7a2bc2407cb8427e52fe4864cf4.png)
+评论![图](img/0efaa7a2bc2407cb8427e52fe4864cf4.png)
 
-来源：[https://distill.pub/2018/building-blocks/](https://distill.pub/2018/building-blocks/)
+来源：[`distill.pub/2018/building-blocks/`](https://distill.pub/2018/building-blocks/)
 
 > * * *
 > 
 > ## 我们的前 3 个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 > 
 > * * *
 > 
 > 我最近开始了一份专注于 AI 教育的新通讯。《TheSequence》是一份无废话（即无炒作、无新闻等）的 AI 重点通讯，阅读时间仅需 5 分钟。目标是让你了解机器学习项目、研究论文和概念。请通过下面的订阅尝试一下：
 
-[![图片](../Images/f2aed90f956dea213be7c9bbf9cd7072.png)](https://thesequence.substack.com/)
+![图片](https://thesequence.substack.com/)
 
 任何深度学习解决方案中的一个挑战性元素是理解深度神经网络做出的知识和决策。尽管神经网络决策的解释一直很困难，但随着深度学习的兴起以及操作多维数据集的大规模神经网络的普及，这一问题变得更加棘手。毫不奇怪，神经网络的解释已成为深度学习生态系统中最活跃的研究领域之一。
 
@@ -30,15 +30,15 @@ Google 研究的主要见解是不要将不同的可解释性技术孤立看待�
 
 Google 的新可解释性模型具体是如何工作的？在我看来，主要的创新点在于，它分析了神经网络不同组件在不同层次上的决策：个别神经元、连接的神经元组和完整的层。Google 还使用了一种新颖的研究技术——矩阵分解，以分析任意神经元组对最终决策的影响。
 
-![图](../Images/99dba3fddd2ba92aed2c6e61f61314a0.png)
+![图](img/99dba3fddd2ba92aed2c6e61f61314a0.png)
 
-来源: [https://distill.pub/2018/building-blocks/](https://distill.pub/2018/building-blocks/)
+来源: [`distill.pub/2018/building-blocks/`](https://distill.pub/2018/building-blocks/)
 
 将 Google 的可解释性模块视为一个模型，该模型检测神经网络在不同抽象层次上，从基础计算图到最终决策的洞察力，是一种很好的思考方式。
 
-![图](../Images/ab0251e72755e0e8defcd6c54b948099.png)
+![图](img/ab0251e72755e0e8defcd6c54b948099.png)
 
-来源: [https://distill.pub/2018/building-blocks/](https://distill.pub/2018/building-blocks/)
+来源: [`distill.pub/2018/building-blocks/`](https://distill.pub/2018/building-blocks/)
 
 谷歌对深度神经网络可解释性的研究不仅仅是一个理论练习。研究小组在发布论文时，还推出了[Lucid](https://github.com/tensorflow/lucid)，这是一个神经网络可视化库，允许开发者创建清晰的特征可视化，以展示神经网络各个部分所做出的决策。谷歌还发布了[colab notebooks](https://github.com/tensorflow/lucid#notebooks)。这些笔记本使得在交互环境中使用 Lucid 创建 Lucid 可视化变得非常容易。
 
@@ -46,11 +46,11 @@ Google 的新可解释性模型具体是如何工作的？在我看来，主要�
 
 **相关：**
 
-+   [通过遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元](/2020/06/learning-forgetting-deep-neural-networks-jennifer-aniston.html)
++   通过遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元
 
-+   [Uber 的 Ludwig 是一个用于低代码机器学习的开源框架](/2020/06/uber-ludwig-open-source-framework-machine-learning.html)
++   Uber 的 Ludwig 是一个用于低代码机器学习的开源框架
 
-+   [谷歌推出 TAPAS：一种基于 BERT 的神经网络，用于使用自然语言查询表格](/2020/05/google-tapas-bert-neural-network-querying-natural-language.html)
++   谷歌推出 TAPAS：一种基于 BERT 的神经网络，用于使用自然语言查询表格
 
 ### 更多相关话题
 

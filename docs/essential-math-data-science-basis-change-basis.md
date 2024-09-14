@@ -1,8 +1,8 @@
 # 数据科学的基本数学：基和基的变化
 
-> 原文：[https://www.kdnuggets.com/2021/05/essential-math-data-science-basis-change-basis.html](https://www.kdnuggets.com/2021/05/essential-math-data-science-basis-change-basis.html)
+> 原文：[`www.kdnuggets.com/2021/05/essential-math-data-science-basis-change-basis.html`](https://www.kdnuggets.com/2021/05/essential-math-data-science-basis-change-basis.html)
 
-[评论](#comments)[![图片](../Images/e6b504358bea8f63e781d7dbce4b4afc.png)](https://www.essentialmathfordatascience.com/?utm_source=kdnuggets&utm_medium=blog&utm_campaign=kdnuggets_scalars_vectors)
+评论![图片](https://www.essentialmathfordatascience.com/?utm_source=kdnuggets&utm_medium=blog&utm_campaign=kdnuggets_scalars_vectors)
 
 ### 基和基的变化
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -24,7 +24,7 @@
 
 最终，你将看到如何使用基变换矩阵改变基。
 
-将矩阵分解视为特征分解或奇异值分解是一种很好的方法。如你在[数据科学的基本数学](https://bit.ly/2XmxUDo)第09章所见，通过特征分解，你选择基使得新矩阵（类似于原始矩阵）变为对角矩阵。
+将矩阵分解视为特征分解或奇异值分解是一种很好的方法。如你在[数据科学的基本数学](https://bit.ly/2XmxUDo)第九章所见，通过特征分解，你选择基使得新矩阵（类似于原始矩阵）变为对角矩阵。
 
 ### 定义
 
@@ -38,19 +38,19 @@
 
 空间中的每个向量都是基向量的唯一组合。空间的维度定义为基集合的大小。例如，ℝ²中有两个基向量（对应于笛卡尔平面中的*x*和*y*轴），或者ℝ³中有三个。
 
-如[数据科学的基本数学](https://bit.ly/2XmxUDo)第7.4节所示，如果一个集合中的向量数量大于空间的维度，则它们不能是线性无关的。如果一个集合包含的向量少于维度数，这些向量不能生成整个空间。
+如[数据科学的基本数学](https://bit.ly/2XmxUDo)第 7.4 节所示，如果一个集合中的向量数量大于空间的维度，则它们不能是线性无关的。如果一个集合包含的向量少于维度数，这些向量不能生成整个空间。
 
 如你所见，向量可以表示为从原点到空间中某一点的箭头。这个点的坐标可以存储在一个列表中。笛卡尔平面中向量的几何表示意味着我们采用一个参考：由两个轴*x*和*y*给出的方向。
 
-*基向量* 是指对应于此参考的向量。在笛卡尔平面上，基向量是正交的单位向量（长度为1），通常记作 *i* 和 *j*。
+*基向量* 是指对应于此参考的向量。在笛卡尔平面上，基向量是正交的单位向量（长度为 1），通常记作 *i* 和 *j*。
 
-![图](../Images/75abae1f82c052e72ac4233224f92824.png)
+![图](img/75abae1f82c052e72ac4233224f92824.png)
 
-图1：笛卡尔平面中的基向量。
+图 1：笛卡尔平面中的基向量。
 
-例如，在图1中，基向量 *i* 和 *j* 分别指向 *x* 轴和 *y* 轴的方向。这些向量给出了标准基。如果你将这些基向量放入一个矩阵中，你会得到以下单位矩阵（有关单位矩阵的更多细节，请参见 [数据科学基础数学](https://bit.ly/2XmxUDo) 第6.4.3节）：
+例如，在图 1 中，基向量 *i* 和 *j* 分别指向 *x* 轴和 *y* 轴的方向。这些向量给出了标准基。如果你将这些基向量放入一个矩阵中，你会得到以下单位矩阵（有关单位矩阵的更多细节，请参见 [数据科学基础数学](https://bit.ly/2XmxUDo) 第 6.4.3 节）：
 
-![方程](../Images/8745df10a640478dabf741f4c041d3ad.png)
+![方程](img/8745df10a640478dabf741f4c041d3ad.png)
 
 因此，I[2] 的列生成了 ℝ²。以同样的方式，I[3] 的列生成了 ℝ³，依此类推。
 
@@ -58,11 +58,11 @@
 
 基向量可以是正交的，因为正交向量是独立的。然而，反之并不一定成立：非正交向量可以是线性独立的，从而形成基（但不是标准基）。
 
-向量空间的基非常重要，因为与向量对应的坐标值依赖于这个基。顺便提一下，你可以选择不同的基向量，比如图2中的那些。
+向量空间的基非常重要，因为与向量对应的坐标值依赖于这个基。顺便提一下，你可以选择不同的基向量，比如图 2 中的那些。
 
-![图](../Images/2795fbf5a32a170533b55b23c9369ffc.png)
+![图](img/2795fbf5a32a170533b55b23c9369ffc.png)
 
-图2：另一组基向量。
+图 2：另一组基向量。
 
 请记住，向量坐标依赖于隐含的基向量选择。
 
@@ -72,15 +72,15 @@
 
 例如，考虑以下二维向量 *v*：
 
-![方程](../Images/bdbc0d62944a979af07e3a37d2fa47a2.png)
+![方程](img/bdbc0d62944a979af07e3a37d2fa47a2.png)
 
-![图](../Images/06bf51959e36cec8c24ba741bb60bf62.png)
+![图](img/06bf51959e36cec8c24ba741bb60bf62.png)
 
-图3：向量 *v* 的分量。
+图 3：向量 *v* 的分量。
 
-向量 *v* 的分量是对 *x* 轴和 *y* 轴的投影（*vx* 和 *vy*，如图3所示）。向量 *v* 对应于其分量的和：*v = vx + vy*，你可以通过缩放基向量来获得这些分量：v[x] = 2i 和 v[y] = −0.5j。因此，图3中显示的向量 *v* 可以被视为两个基向量 *i* 和 *j* 的线性组合：
+向量 *v* 的分量是对 *x* 轴和 *y* 轴的投影（*vx* 和 *vy*，如图 3 所示）。向量 *v* 对应于其分量的和：*v = vx + vy*，你可以通过缩放基向量来获得这些分量：v[x] = 2i 和 v[y] = −0.5j。因此，图 3 中显示的向量 *v* 可以被视为两个基向量 *i* 和 *j* 的线性组合：
 
-![图像](../Images/ccaa7755676689feb17b21aa45daaa7a.png)
+![图像](img/ccaa7755676689feb17b21aa45daaa7a.png)
 
 ### 其他基
 
@@ -88,23 +88,23 @@
 
 例如，让我们考虑 ℝ² 中的以下向量：
 
-![方程](../Images/bdbc0d62944a979af07e3a37d2fa47a2.png)
+![方程](img/bdbc0d62944a979af07e3a37d2fa47a2.png)
 
 和
 
-![方程](../Images/d5aac9c53b1403a498959d5725fa08a5.png)
+![方程](img/d5aac9c53b1403a498959d5725fa08a5.png)
 
-向量 *v* 和 *w* 在图4中表示。
+向量 *v* 和 *w* 在图 4 中表示。
 
-![图](../Images/98618f53875cfaf1216fc1a0def0beff.png)
+![图](img/98618f53875cfaf1216fc1a0def0beff.png)
 
-图4：二维空间中的另一组基。
+图 4：二维空间中的另一组基。
 
 从上面的定义来看，向量*v*和*w*是一个基，因为它们是线性无关的（你不能通过其他向量的组合来获得其中一个），并且它们张成了空间（通过这些向量的线性组合可以到达整个空间）。
 
 重要的是要记住，当你使用向量的分量（例如*v*的*x*和*y*分量）时，这些值是相对于你选择的基的。如果使用其他基，这些值会有所不同。
 
-你可以在[数据科学的基础数学](https://bit.ly/2XmxUDo)的第09章和第10章中看到，改变基的能力在线性代数中是基础性的，并且是理解特征分解或奇异值分解的关键。
+你可以在[数据科学的基础数学](https://bit.ly/2XmxUDo)的第九章和第十章中看到，改变基的能力在线性代数中是基础性的，并且是理解特征分解或奇异值分解的关键。
 
 ### 向量是相对于一个基定义的
 
@@ -112,13 +112,13 @@
 
 让我们考虑以下向量：
 
-![方程式](../Images/bdbc0d62944a979af07e3a37d2fa47a2.png)
+![方程式](img/bdbc0d62944a979af07e3a37d2fa47a2.png)
 
-*x*和*y*分量的值分别是2和-0.5。默认使用标准基。
+*x*和*y*分量的值分别是 2 和-0.5。默认使用标准基。
 
 你可以写*Iv*以指定这些数字相对于标准基的坐标。在这种情况下，*i*被称为*基变换矩阵*。
 
-![方程式](../Images/320812594db3f651649cec12f8381c9a.png)
+![方程式](img/320812594db3f651649cec12f8381c9a.png)
 
 你可以使用不同于*i*的矩阵来相对于另一个基定义向量。
 
@@ -130,23 +130,23 @@
 
 考虑以下二维向量：
 
-![方程式](../Images/26700ba0d9f632e5e492026c494c09c4.png)
+![方程式](img/26700ba0d9f632e5e492026c494c09c4.png)
 
-在ℝ²笛卡尔平面中，你可以将*v*视为标准基向量*i*和*j*的线性组合，如图5所示。
+在ℝ²笛卡尔平面中，你可以将*v*视为标准基向量*i*和*j*的线性组合，如图 5 所示。
 
-![图像](../Images/b19d23f9a4599f98cc9e7120d2d743a9.png)
+![图像](img/b19d23f9a4599f98cc9e7120d2d743a9.png)
 
-图5：向量*v*可以被描述为基向量*i*和*j*的线性组合。
+图 5：向量*v*可以被描述为基向量*i*和*j*的线性组合。
 
-但是，如果你使用其他坐标系统，*v*将与新的数字相关联。图6展示了使用新坐标系统（*i′*和*j′*）表示的向量*v*。
+但是，如果你使用其他坐标系统，*v*将与新的数字相关联。图 6 展示了使用新坐标系统（*i′*和*j′*）表示的向量*v*。
 
-![图像](../Images/d0a11833437fec9544a44a4a7b2524b2.png)
+![图像](img/d0a11833437fec9544a44a4a7b2524b2.png)
 
-图6：相对于新基坐标的向量*v*。
+图 6：相对于新基坐标的向量*v*。
 
 在新的基下，*v*是一个新的数字集合：
 
-![方程式](../Images/7218e1a0415a511f6d76e99477847889.png)
+![方程式](img/7218e1a0415a511f6d76e99477847889.png)
 
 ### 基础变换矩阵
 
@@ -154,35 +154,35 @@
 
 让我们再次回顾前面的例子。你得到：
 
-![方程](../Images/3275fa3ef3320c1895a59f3eca0fcef1.png)
+![方程](img/3275fa3ef3320c1895a59f3eca0fcef1.png)
 
 和
 
-![方程](../Images/ded8d7a00aff8e53779a16901e3b5c07.png)
+![方程](img/ded8d7a00aff8e53779a16901e3b5c07.png)
 
-如图7所示。
+如图 7 所示。
 
-![图](../Images/da6de766a0b325f2d141454daec4e1a1.png)
+![图](img/da6de766a0b325f2d141454daec4e1a1.png)
 
-图7：新基础向量相对于旧基础的坐标。
+图 7：新基础向量相对于旧基础的坐标。
 
 由于它们是基础向量， *i′* 和 *j′* 可以表示为 *i* 和 *j* 的线性组合。
 
-![方程](../Images/30a1c98087ecba1d6c1e9eba995b9498.png)
+![方程](img/30a1c98087ecba1d6c1e9eba995b9498.png)
 
-![方程](../Images/30a1c98087ecba1d6c1e9eba995b9498.png)
+![方程](img/30a1c98087ecba1d6c1e9eba995b9498.png)
 
 让我们将这些方程写成矩阵形式：
 
-![方程](../Images/4f94558b6771e405c124076f5333cef9.png)
+![方程](img/4f94558b6771e405c124076f5333cef9.png)
 
 为了将基础向量作为列，你需要转置矩阵。你得到：
 
-![方程](../Images/82a23d6ad540e6ec090a667c3fd77d23.png)
+![方程](img/82a23d6ad540e6ec090a667c3fd77d23.png)
 
 这个矩阵叫做基础变换矩阵。我们称之为 *CC*：
 
-![方程](../Images/4397d19acb92635b3fa6ee0e573295c1.png)
+![方程](img/4397d19acb92635b3fa6ee0e573295c1.png)
 
 如你所见，基础变换矩阵的每一列都是新基础的一个基础向量。接下来你将看到，你可以使用基础变换矩阵 *CC* 将向量从输出基础转换到输入基础。
 
@@ -194,29 +194,29 @@
 
 基础变换矩阵将输入基础映射到输出基础。我们将输入基础称为 *B[1]*，其基础向量为 *i* 和 *j*，将输出基础称为 *B[2]*，其基础向量为 *i′* 和 *j′*。你得到：
 
-![方程](../Images/eb84a33cf4857397428ea5e67cd59259.png)
+![方程](img/eb84a33cf4857397428ea5e67cd59259.png)
 
 和
 
-![方程](../Images/2436836d0cfc163ef725163b7598e2ad.png)
+![方程](img/2436836d0cfc163ef725163b7598e2ad.png)
 
 从基础变换的方程中，你可以得到：
 
-![方程](../Images/9ba226064bcc12acbacc7cf5a1fa0ce6.png)
+![方程](img/9ba226064bcc12acbacc7cf5a1fa0ce6.png)
 
 如果你想找到给定 *B[1]* 和 *B[2]* 的基础变换矩阵，你需要计算 *B[1]* 的逆以隔离 *C*：
 
-![方程](../Images/43d7441a2ff95d4dd9f87a93b5a7f7fd.png)
+![方程](img/43d7441a2ff95d4dd9f87a93b5a7f7fd.png)
 
-换句话说，你可以通过将输入基矩阵 (![Equation](../Images/8cb3c4dbe4fbdcb101b6deb9b261639a.png)，包含输入基向量作为列) 的逆矩阵与输出基矩阵 (![Equation](../Images/02ee94e3d3dec2826394204135015d70.png)，包含输出基向量作为列) 相乘来计算基变换矩阵。
+换句话说，你可以通过将输入基矩阵 (![Equation](img/8cb3c4dbe4fbdcb101b6deb9b261639a.png)，包含输入基向量作为列) 的逆矩阵与输出基矩阵 (![Equation](img/02ee94e3d3dec2826394204135015d70.png)，包含输出基向量作为列) 相乘来计算基变换矩阵。
 
 **将向量从输出基转换到输入基**
 
-小心，这个基变换矩阵允许你将向量从 ![Equation](../Images/02ee94e3d3dec2826394204135015d70.png) 转换到 ![Equation](../Images/79d05474d7441c806192311d43997a58.png) ，而不是相反。直观地说，这是因为移动一个物体是与移动参考系相反的。因此，要从 ![Equation](../Images/79d05474d7441c806192311d43997a58.png) 转换到 ![Equation](../Images/02ee94e3d3dec2826394204135015d70.png)，你必须使用基变换矩阵 ![Equation](../Images/728bfb2df9980896265268b27e8f37a1.png) 的逆矩阵。
+小心，这个基变换矩阵允许你将向量从 ![Equation](img/02ee94e3d3dec2826394204135015d70.png) 转换到 ![Equation](img/79d05474d7441c806192311d43997a58.png) ，而不是相反。直观地说，这是因为移动一个物体是与移动参考系相反的。因此，要从 ![Equation](img/79d05474d7441c806192311d43997a58.png) 转换到 ![Equation](img/02ee94e3d3dec2826394204135015d70.png)，你必须使用基变换矩阵 ![Equation](img/728bfb2df9980896265268b27e8f37a1.png) 的逆矩阵。
 
-请注意，如果输入基是标准基 (![Equation](../Images/9aea49fd60c7884041bbbc3edf65f86e.png))，那么基变换矩阵只是输出基矩阵：
+请注意，如果输入基是标准基 (![Equation](img/9aea49fd60c7884041bbbc3edf65f86e.png))，那么基变换矩阵只是输出基矩阵：
 
-![Equation](../Images/ea2845047bf63cc106f684b5444b33a6.png)
+![Equation](img/ea2845047bf63cc106f684b5444b33a6.png)
 
 **可逆基变换矩阵**
 
@@ -228,29 +228,29 @@
 
 ### **符号**
 
-你将把 *v* 的基从标准基变换到新的基。我们将标准基表示为 ![Equation](../Images/79d05474d7441c806192311d43997a58.png)，新基表示为 ![Equation](../Images/02ee94e3d3dec2826394204135015d70.png)。记住，基是一个包含基向量作为列的矩阵。你有：
+你将把 *v* 的基从标准基变换到新的基。我们将标准基表示为 ![Equation](img/79d05474d7441c806192311d43997a58.png)，新基表示为 ![Equation](img/02ee94e3d3dec2826394204135015d70.png)。记住，基是一个包含基向量作为列的矩阵。你有：
 
-![Equation](../Images/ace6a7f51c4045fd6933870e33458ecf.png)
+![Equation](img/ace6a7f51c4045fd6933870e33458ecf.png)
 
 和
 
-![Equation](../Images/2a72edbc586c39eccec1c572a22a6c7e.png)
+![Equation](img/2a72edbc586c39eccec1c572a22a6c7e.png)
 
-让我们将相对于基 ![Equation](../Images/79d05474d7441c806192311d43997a58.png) 的向量 *v* 表示为 ![Equation](../Images/dbcdc906d5d3d4bea68c658bc9258003.png)：
+让我们将相对于基 ![Equation](img/79d05474d7441c806192311d43997a58.png) 的向量 *v* 表示为 ![Equation](img/dbcdc906d5d3d4bea68c658bc9258003.png)：
 
-![Equation](../Images/75f7c71cacd836984ee0848eed7cfe46.png)
+![Equation](img/75f7c71cacd836984ee0848eed7cfe46.png)
 
-目标是找到相对于基 ![Equation](../Images/02ee94e3d3dec2826394204135015d70.png) 的 *v* 的坐标，记作 ![Equation](../Images/e501ba75023d58a21777eebb46165988.png)。
+目标是找到相对于基 ![Equation](img/02ee94e3d3dec2826394204135015d70.png) 的 *v* 的坐标，记作 ![Equation](img/e501ba75023d58a21777eebb46165988.png)。
 
 **方括号符号**
 
-为了区分用来定义向量的基，你可以将基名称（如 ![公式](../Images/79d05474d7441c806192311d43997a58.png)）以下标的形式放在向量名称后面，括在方括号内。例如，![公式](../Images/dbcdc906d5d3d4bea68c658bc9258003.png) 表示相对于基 ![公式](../Images/79d05474d7441c806192311d43997a58.png) 的向量 *v*，也称为 *v* 相对于 ![公式](../Images/79d05474d7441c806192311d43997a58.png) 的 *表示*。
+为了区分用来定义向量的基，你可以将基名称（如 ![公式](img/79d05474d7441c806192311d43997a58.png)）以下标的形式放在向量名称后面，括在方括号内。例如，![公式](img/dbcdc906d5d3d4bea68c658bc9258003.png) 表示相对于基 ![公式](img/79d05474d7441c806192311d43997a58.png) 的向量 *v*，也称为 *v* 相对于 ![公式](img/79d05474d7441c806192311d43997a58.png) 的 *表示*。
 
 ### **使用线性组合**
 
-![图片](../Images/c123977d8ae6ee5cb1c754e0e2f2baaf.png)
+![图片](img/c123977d8ae6ee5cb1c754e0e2f2baaf.png)
 
-![图片](../Images/4ab5e777ba128e38fee43d6ac1b68c76.png)
+![图片](img/4ab5e777ba128e38fee43d6ac1b68c76.png)
 
 让我们编写代码：
 
@@ -269,11 +269,11 @@ v_B2
 array([ 0.86757991, -1.00456621]) 
 ```
 
-这些值是向量 *v* 相对于基 ![公式](../Images/02ee94e3d3dec2826394204135015d70.png) 的坐标。这意味着如果你去到 *0.86757991i′−1.00456621j′*，你会到达标准基中的位置（2, 1），如图6所示。
+这些值是向量 *v* 相对于基 ![公式](img/02ee94e3d3dec2826394204135015d70.png) 的坐标。这意味着如果你去到 *0.86757991i′−1.00456621j′*，你会到达标准基中的位置（2, 1），如图 6 所示。
 
 ### 结论
 
-理解基的概念是处理矩阵分解（也称为矩阵因式分解），如特征分解或奇异值分解（SVD）的一个好方法。从这些术语来看，你可以将矩阵分解视为寻找一个基，其中与变换相关的矩阵具有特定属性：因式分解是一个基变换矩阵、新的变换矩阵，最后是基变换矩阵的逆矩阵，以回到初始基（更多细节见[数据科学基础数学](https://bit.ly/2XmxUDo)第09章和10章）。
+理解基的概念是处理矩阵分解（也称为矩阵因式分解），如特征分解或奇异值分解（SVD）的一个好方法。从这些术语来看，你可以将矩阵分解视为寻找一个基，其中与变换相关的矩阵具有特定属性：因式分解是一个基变换矩阵、新的变换矩阵，最后是基变换矩阵的逆矩阵，以回到初始基（更多细节见[数据科学基础数学](https://bit.ly/2XmxUDo)第九章和 10 章）。
 
 **个人简介：[Hadrien Jean](https://hadrienj.github.io/)** 是一位机器学习科学家。他拥有巴黎高等师范学院的认知科学博士学位，主要研究行为和电生理数据下的听觉感知。他曾在工业界工作，构建了用于语音处理的深度学习管道。在数据科学与环境交汇的领域，他从事利用深度学习分析音频记录进行生物多样性评估的项目。他还定期在 Le Wagon（数据科学训练营）创作内容并授课，并在他的博客中撰写文章（[hadrienj.github.io](http://hadrienj.github.io)）。
 
@@ -281,22 +281,22 @@ array([ 0.86757991, -1.00456621])
 
 **相关内容：**
 
-+   [数据科学基础数学：标量和向量](/2021/02/essential-math-data-science-scalars-vectors.html)
++   数据科学基础数学：标量和向量
 
-+   [数据科学基础数学：矩阵与矩阵乘积导论](/2021/02/essential-math-data-science-matrices-matrix-product.html)
++   数据科学基础数学：矩阵与矩阵乘积导论
 
-+   [数据科学基础数学：信息论](/2021/01/essential-math-data-science-information-theory.html)
++   数据科学基础数学：信息论
 
 ### 更多相关内容
 
 +   [如何克服对数学的恐惧并学习数据科学中的数学](https://www.kdnuggets.com/2021/03/overcome-fear-learn-math-data-science.html)
 
-+   [数据科学的基本数学：特征向量及其在PCA中的应用](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)
++   [数据科学的基本数学：特征向量及其在 PCA 中的应用](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)
 
 +   [数据科学的基本数学：奇异值分解的视觉介绍](https://www.kdnuggets.com/2022/06/essential-math-data-science-visual-introduction-singular-value-decomposition.html)
 
-+   [Excel中的Python：这将永远改变数据科学](https://www.kdnuggets.com/python-in-excel-this-will-change-data-science-forever)
++   [Excel 中的 Python：这将永远改变数据科学](https://www.kdnuggets.com/python-in-excel-this-will-change-data-science-forever)
 
-+   [忘了ChatGPT吧，这个新的AI助手领先了许多，并将…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
++   [忘了 ChatGPT 吧，这个新的 AI 助手领先了许多，并将…](https://www.kdnuggets.com/2023/08/forget-chatgpt-new-ai-assistant-leagues-ahead-change-way-work-forever.html)
 
-+   [我使用ChatGPT（每天）五个月。这些是一些隐藏的宝石…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
++   [我使用 ChatGPT（每天）五个月。这些是一些隐藏的宝石…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)

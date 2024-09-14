@@ -1,8 +1,8 @@
 # 15 个数学 MOOC 课程，专注于数据科学
 
-> 原文：[https://www.kdnuggets.com/2015/09/15-math-mooc-data-science.html/2](https://www.kdnuggets.com/2015/09/15-math-mooc-data-science.html/2)
+> 原文：[`www.kdnuggets.com/2015/09/15-math-mooc-data-science.html/2`](https://www.kdnuggets.com/2015/09/15-math-mooc-data-science.html/2)
 
-**8\. [线性代数应用第2部分](https://www.edx.org/course/applications-linear-algebra-part-2-davidsonx-d003x-2)**
+**8\. [线性代数应用第二部分](https://www.edx.org/course/applications-linear-algebra-part-2-davidsonx-d003x-2)**
 
 *学校*: 大卫森学院
 
@@ -108,7 +108,7 @@
 
 *时间*: 存档材料（任何时间）
 
-*描述摘录*：在本课程中，你将学习线性代数的概念和方法，并了解如何使用这些方法思考计算机科学中出现的问题。你将用Python编程语言编写小程序，实现基本的矩阵和向量功能及算法，并用这些来处理真实世界的数据。
+*描述摘录*：在本课程中，你将学习线性代数的概念和方法，并了解如何使用这些方法思考计算机科学中出现的问题。你将用 Python 编程语言编写小程序，实现基本的矩阵和向量功能及算法，并用这些来处理真实世界的数据。
 
 **额外： [初学者线性代数：开启美好职业的大门](https://www.udemy.com/linear-algebra-an-introduction/?couponCode=NUGGETS)**
 
@@ -126,22 +126,22 @@
 
 **相关：**
 
-+   [战略商业分析的新MOOC课程](/2015/09/mooc-strategic-business-analytics.html)
++   战略商业分析的新 MOOC 课程
 
-+   [你是否在努力获得机器学习技能？](/2015/09/acquire-machine-learning-skills.html)
++   你是否在努力获得机器学习技能？
 
-+   [前20名数据科学MOOC课程](/2015/09/top-20-data-science-moocs.html)
++   前 20 名数据科学 MOOC 课程
 
 ### 更多相关主题
 
-+   [9月26-30日：SIAM数据科学数学会议（线上线下混合）](https://www.kdnuggets.com/2022/08/siam-conference-mathematics-data-science-hybrid.html)
++   [9 月 26-30 日：SIAM 数据科学数学会议（线上线下混合）](https://www.kdnuggets.com/2022/08/siam-conference-mathematics-data-science-hybrid.html)
 
 +   [梯度下降：山地徒步者的优化指南…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)
 
-+   [深入了解DeepMind在利用深度学习推动数学发展的新努力](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)
++   [深入了解 DeepMind 在利用深度学习推动数学发展的新努力](https://www.kdnuggets.com/2021/12/inside-deepmind-new-efforts-deep-learning-advance-mathematics.html)
 
 +   [机器学习数学：免费电子书](https://www.kdnuggets.com/2020/04/mathematics-machine-learning-book.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标以…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学基础：你需要知道的10项必备技能…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：你需要知道的 10 项必备技能…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)

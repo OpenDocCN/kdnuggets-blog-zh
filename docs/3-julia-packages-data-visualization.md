@@ -1,8 +1,8 @@
 # 3 Julia 数据可视化包
 
-> 原文：[https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
+> 原文：[`www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html`](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
 
-![3 Julia 数据可视化包](../Images/5f07d11cdde1cad0eb8414926ed6ee0e.png)
+![3 Julia 数据可视化包](img/5f07d11cdde1cad0eb8414926ed6ee0e.png)
 
 作者提供的图片
 
@@ -37,16 +37,16 @@ y1 = sin.(x)
 Plots.plot(x, y1)
 ```
 
-![3 Julia 数据可视化包](../Images/38ed1aff86e70f760f5ebb1a0e26ae5d.png)
+![3 Julia 数据可视化包](img/38ed1aff86e70f760f5ebb1a0e26ae5d.png)
 
 你可以使用`Plots.plot!`函数重叠图表。这将显示相同轴的两个图表。
 
 ```py
-y2 = @. cos(x)^2 - 1/2 
+y2 = @. cos(x)² - 1/2 
 Plots.plot!(x, y2)
 ```
 
-![3 Julia 数据可视化包](../Images/5a64e7fee073c540ddbe106a022c723f.png)
+![3 Julia 数据可视化包](img/5a64e7fee073c540ddbe106a022c723f.png)
 
 ## 示例 2
 
@@ -58,7 +58,7 @@ cars = dataset("datasets", "mtcars")
 first(cars,5)
 ```
 
-![3 Julia 数据可视化包](../Images/090df84efbdc1db5271baed41314a5de.png)
+![3 Julia 数据可视化包](img/090df84efbdc1db5271baed41314a5de.png)
 
 然后，我们将使用`Plots.bar`函数来表示每个模型的“每加仑的英里数”和 QSec。
 
@@ -90,7 +90,7 @@ Plots.bar(cars.Model,
     yticks =0:25)
 ```
 
-![3 Julia 数据可视化包](../Images/d0384303f7e47b15c412b56c877bf861.png)
+![3 Julia 数据可视化包](img/d0384303f7e47b15c412b56c877bf861.png)
 
 ## 示例 3
 
@@ -102,7 +102,7 @@ y = [0.1,0.2,0.4,0.3]
 Plots.pie(x,y,title ="KDnuggets Readers" ,l = 0.5)
 ```
 
-![3 Julia 数据可视化包](../Images/690b76658f14ea28f5a5693ae2f01f95.png)
+![3 Julia 数据可视化包](img/690b76658f14ea28f5a5693ae2f01f95.png)
 
 # Gadfly.jl
 
@@ -132,7 +132,7 @@ stacked_birth = stack(births, [:Males, :Females])
 first(stacked_birth,5)
 ```
 
-![3 Julia Packages for Data Visualization](../Images/50d374a45b58471e82c4891427bb1112.png)
+![3 Julia Packages for Data Visualization](img/50d374a45b58471e82c4891427bb1112.png)
 
 我们正在堆叠这些列，以便可以显示两个不同颜色的图表。
 
@@ -144,7 +144,7 @@ Gadfly.plot(stacked_birth, x=:Year, y=:value, color=:variable,
      Geom.line)
 ```
 
-![3 Julia Packages for Data Visualization](../Images/ab4281db7c3e7b42e00d320a248de6c7.png)
+![3 Julia Packages for Data Visualization](img/ab4281db7c3e7b42e00d320a248de6c7.png)
 
 ## 示例 2
 
@@ -164,7 +164,7 @@ Gadfly.plot(
             )
 ```
 
-![3 Julia Packages for Data Visualization](../Images/970e567902741e81e47a37e188b74ce7.png)
+![3 Julia Packages for Data Visualization](img/970e567902741e81e47a37e188b74ce7.png)
 
 # VegaLite.jl
 
@@ -199,7 +199,7 @@ cars |> @vlplot(
 )
 ```
 
-![3 Julia Packages for Data Visualization](../Images/7aec8be30290c9c613222b642a236188.png)
+![3 Julia Packages for Data Visualization](img/7aec8be30290c9c613222b642a236188.png)
 
 ## 示例 2
 
@@ -216,7 +216,7 @@ cars |> @vlplot(
 )
 ```
 
-![3 Julia Packages for Data Visualization](../Images/4c2c1539eff4b34eb7263adf785e7444.png)
+![3 Julia Packages for Data Visualization](img/4c2c1539eff4b34eb7263adf785e7444.png)
 
 **[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专家，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些在心理健康方面挣扎的学生构建 AI 产品。
 
@@ -224,11 +224,11 @@ cars |> @vlplot(
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 

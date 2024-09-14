@@ -1,36 +1,36 @@
 # 为什么机器学习工程师正在取代数据科学家
 
-> 原文：[https://www.kdnuggets.com/2021/11/why-machine-learning-engineers-are-replacing-data-scientists.html](https://www.kdnuggets.com/2021/11/why-machine-learning-engineers-are-replacing-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2021/11/why-machine-learning-engineers-are-replacing-data-scientists.html`](https://www.kdnuggets.com/2021/11/why-machine-learning-engineers-are-replacing-data-scientists.html)
 
-[评论](#comments)
+评论
 
-**由[Arthur Mello](https://www.linkedin.com/in/melloarthur/?originalSubdomain=fr)，AVISIA的数据科学顾问**。
+**由[Arthur Mello](https://www.linkedin.com/in/melloarthur/?originalSubdomain=fr)，AVISIA 的数据科学顾问**。
 
-![](../Images/aca2004021208b41e34f99d10f55f6db.png)
+![](img/aca2004021208b41e34f99d10f55f6db.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
 *照片由[T K](https://unsplash.com/@realaxer?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
-### ML工程难道只是另一个流行词吗？
+### ML 工程难道只是另一个流行词吗？
 
-ML工程和数据科学并不是同样的东西，原因如下：你知道人们常说数据科学是商业知识、统计学和计算机科学的结合吗？实际上，ML工程更多地涉及计算机科学，较少涉及统计学和商业知识。
+ML 工程和数据科学并不是同样的东西，原因如下：你知道人们常说数据科学是商业知识、统计学和计算机科学的结合吗？实际上，ML 工程更多地涉及计算机科学，较少涉及统计学和商业知识。
 
 实际上，这意味着数据科学家更擅长创建新的模型、分析和解读数据，并理解这些模型的数学基础。他或她通常来自统计学背景，有些可能拥有博士学位，并且非常擅长数学，而编程则是为了用计算机进行数学运算而学习的技能。
 
-另一方面，ML工程师擅长于构建和优化数据流、实施模型以及将其投入生产。他或她通常来自计算机科学背景，可能接受的正式教育少于数据科学家，并且在编程和理解云基础设施方面表现出色。然而，ML工程师与数据工程师不同，因为他们还需要非常擅长调整模型（尤其是神经网络）、理解交叉验证和特征工程等。总体而言，他们在数据基础设施方面应该比数据科学家更优秀，在机器学习方面比数据工程师更出色。
+另一方面，ML 工程师擅长于构建和优化数据流、实施模型以及将其投入生产。他或她通常来自计算机科学背景，可能接受的正式教育少于数据科学家，并且在编程和理解云基础设施方面表现出色。然而，ML 工程师与数据工程师不同，因为他们还需要非常擅长调整模型（尤其是神经网络）、理解交叉验证和特征工程等。总体而言，他们在数据基础设施方面应该比数据科学家更优秀，在机器学习方面比数据工程师更出色。
 
-如果你仍然不相信机器学习工程是真实存在的，可以查看Google Cloud Platform的专业机器学习工程师认证[课程](https://cloud.google.com/training?skip_cache=true)。它与传统的数据科学课程没有太大关系，仅涉及一些基本的统计知识，但也没有深入探讨选择数据库的规则等。
+如果你仍然不相信机器学习工程是真实存在的，可以查看 Google Cloud Platform 的专业机器学习工程师认证[课程](https://cloud.google.com/training?skip_cache=true)。它与传统的数据科学课程没有太大关系，仅涉及一些基本的统计知识，但也没有深入探讨选择数据库的规则等。
 
 ### 为什么机器学习工程是未来？
 
@@ -40,7 +40,7 @@ ML工程和数据科学并不是同样的东西，原因如下：你知道人们
 
 这意味着许多组织正在雇佣人员重复解决基本相同类型的问题。存在大量冗余，而且做这项工作的人的质量差异很大。
 
-与此同时，我们看到像**谷歌**和**亚马逊**这样的公司拥有一些世界上最顶尖的数据科学家，他们正在其云平台（分别是GCP和AWS）上开发“即用型”机器学习系统。这意味着你可以将你的数据接入他们的系统，从中受益于所有这些知识，你需要的只是一个懂得如何*建立连接*和进行必要*调优*的人——像一位**机器学习工程师**。
+与此同时，我们看到像**谷歌**和**亚马逊**这样的公司拥有一些世界上最顶尖的数据科学家，他们正在其云平台（分别是 GCP 和 AWS）上开发“即用型”机器学习系统。这意味着你可以将你的数据接入他们的系统，从中受益于所有这些知识，你需要的只是一个懂得如何*建立连接*和进行必要*调优*的人——像一位**机器学习工程师**。
 
 换句话说，如果数据科学不是业务的核心，那么你的数据问题极不可能是全新的，因此更高效的是利用你可以从这些云提供商那里获得的*积累知识*。往往，企业都在解决类似的问题：销售预测、客户细分、评分、推荐等。这些问题早已被这些**科技巨头**解决，你应该从*迁移学习*中受益，而不是从头开始解决它们。
 
@@ -52,7 +52,7 @@ ML工程和数据科学并不是同样的东西，原因如下：你知道人们
 
 ### 你应该怎么做？
 
-![](../Images/b49e10f8162c8094ba58975a44f726df.png)
+![](img/b49e10f8162c8094ba58975a44f726df.png)
 
 *照片由[Kameron Kincade](https://unsplash.com/@kkincade?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -62,17 +62,17 @@ ML工程和数据科学并不是同样的东西，原因如下：你知道人们
 
 **命令行**
 
-你可能已经使用过命令行来做一些简单的事情，例如下载Python包，但你应该在这方面有所提高。为了使用像GCP和AWS这样的平台，这将会很有帮助。[Codeacademy](https://www.codecademy.com/learn/learn-the-command-line)提供了一些不错的课程。
+你可能已经使用过命令行来做一些简单的事情，例如下载 Python 包，但你应该在这方面有所提高。为了使用像 GCP 和 AWS 这样的平台，这将会很有帮助。[Codeacademy](https://www.codecademy.com/learn/learn-the-command-line)提供了一些不错的课程。
 
 **Spark**
 
-尽管我们倾向于使用Pandas来学习数据科学，但当你有太多数据并需要并行运行算法时，Spark将会很有帮助。我认为Spark的最常用版本是Scala，但如果你更熟悉Python，可以学习PySpark。
+尽管我们倾向于使用 Pandas 来学习数据科学，但当你有太多数据并需要并行运行算法时，Spark 将会很有帮助。我认为 Spark 的最常用版本是 Scala，但如果你更熟悉 Python，可以学习 PySpark。
 
 **云服务提供商**
 
-主要的三大云服务提供商是AWS、GCP和Azure，但我建议你选择一个并坚持使用。我不能说哪个更好，虽然我个人选择的是GCP。在选择之前，尝试在线查找它们的比较——有很多比较资料。你也可以查看你所在国家最常用的或你公司使用的那个。现在，无论你选择哪个，你都能找到使用它的公司，并且这些公司在寻找具有这些特定技能的人。
+主要的三大云服务提供商是 AWS、GCP 和 Azure，但我建议你选择一个并坚持使用。我不能说哪个更好，虽然我个人选择的是 GCP。在选择之前，尝试在线查找它们的比较——有很多比较资料。你也可以查看你所在国家最常用的或你公司使用的那个。现在，无论你选择哪个，你都能找到使用它的公司，并且这些公司在寻找具有这些特定技能的人。
 
-不管怎样，一旦选择了你的平台，就要真正掌握它。我是说，**真正**掌握。有很多你可以用这些平台做的事情，所以要专注于你在机器学习方面的需求。查看它们的机器学习认证大纲会给你一个很好的学习概述。你可以在这里访问这些资源：[GCP](https://cloud.google.com/training?skip_cache=true)、[AWS](https://aws.amazon.com/fr/certification/certified-machine-learning-specialty/)、Azure ([DS](https://docs.microsoft.com/en-us/learn/certifications/azure-data-scientist/) 或 [AI](https://docs.microsoft.com/en-us/learn/certifications/azure-ai-engineer/))。如果你想要一个GCP学习指南，我 [写过一个](https://towardsdatascience.com/how-i-passed-the-gcp-professional-ml-engineer-certification-47104f40bec5)。
+不管怎样，一旦选择了你的平台，就要真正掌握它。我是说，**真正**掌握。有很多你可以用这些平台做的事情，所以要专注于你在机器学习方面的需求。查看它们的机器学习认证大纲会给你一个很好的学习概述。你可以在这里访问这些资源：[GCP](https://cloud.google.com/training?skip_cache=true)、[AWS](https://aws.amazon.com/fr/certification/certified-machine-learning-specialty/)、Azure ([DS](https://docs.microsoft.com/en-us/learn/certifications/azure-data-scientist/) 或 [AI](https://docs.microsoft.com/en-us/learn/certifications/azure-ai-engineer/))。如果你想要一个 GCP 学习指南，我 [写过一个](https://towardsdatascience.com/how-i-passed-the-gcp-professional-ml-engineer-certification-47104f40bec5)。
 
 如果你已经在一家定期使用这些工具的公司工作，尝试获得相关认证，然后参与涉及这些工具的项目，这样你可以进行实践。如果你的公司不使用这些工具，认证可能会帮助你获得其他公司中的相关职位。不管怎样：学习、获取证书、实践。我无法过于强调掌握这些工具的重要性。
 
@@ -104,6 +104,6 @@ ML 工程涉及到**准备**数据、检测**模型漂移**、使数据**管道*
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)

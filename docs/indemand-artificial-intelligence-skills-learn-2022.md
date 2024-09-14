@@ -1,64 +1,64 @@
-# 2022年最需求的人工智能技能
+# 2022 年最需求的人工智能技能
 
-> 原文：[https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
+> 原文：[`www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html`](https://www.kdnuggets.com/2022/08/indemand-artificial-intelligence-skills-learn-2022.html)
 
-![2022年最需求的人工智能技能](../Images/fbeb55b7f4a3573950e2e7ad01a9ff8d.png)
+![2022 年最需求的人工智能技能](img/fbeb55b7f4a3573950e2e7ad01a9ff8d.png)
 
-关于人工智能（AI）的热度多年来持续增长。然而，近年来，随着科技巨头和初创公司竞相开发新的AI应用和能力，这一热度激增。
+关于人工智能（AI）的热度多年来持续增长。然而，近年来，随着科技巨头和初创公司竞相开发新的 AI 应用和能力，这一热度激增。
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您在IT领域的发展
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您在 IT 领域的发展
 
 * * *
 
-在人工智能领域，机器被赋予了自主学习和工作的能力，根据提供的数据做出决策。尽管AI有许多不同的定义，但一般来说，可以将其总结为让计算机系统“智能化”的过程——能够理解困难任务并执行复杂命令。
+在人工智能领域，机器被赋予了自主学习和工作的能力，根据提供的数据做出决策。尽管 AI 有许多不同的定义，但一般来说，可以将其总结为让计算机系统“智能化”的过程——能够理解困难任务并执行复杂命令。
 
-AI迅猛增长的一个主要原因是它能自动化那些耗时或让人感到疲惫的任务。例如，在零售业，AI可以跟踪库存水平并预测客户需求，这些信息可以用于优化供应链和改善库存管理。在医疗保健中，AI可以处理和解读医学图像，有助于诊断疾病和制定治疗计划。
+AI 迅猛增长的一个主要原因是它能自动化那些耗时或让人感到疲惫的任务。例如，在零售业，AI 可以跟踪库存水平并预测客户需求，这些信息可以用于优化供应链和改善库存管理。在医疗保健中，AI 可以处理和解读医学图像，有助于诊断疾病和制定治疗计划。
 
-因此，各个企业和行业对AI技能的需求非常大。根据[Gartner](https://www.gartner.com/en/newsroom/press-releases/2021-11-22-gartner-forecasts-worldwide-artificial-intelligence-software-market-to-reach-62-billion-in-2022)的预测，2020年至2021年，全球AI收入增长了14.1%，达到了515亿美元。根据[Fortune Business Insights](https://www.fortunebusinessinsights.com/industry-reports/artificial-intelligence-market-100114)的预测，在2021-2028年预测期内，全球AI产业预计将以33.6%的年均增长率增长，到2028年达到3600亿美元。
+因此，各个企业和行业对 AI 技能的需求非常大。根据[Gartner](https://www.gartner.com/en/newsroom/press-releases/2021-11-22-gartner-forecasts-worldwide-artificial-intelligence-software-market-to-reach-62-billion-in-2022)的预测，2020 年至 2021 年，全球 AI 收入增长了 14.1%，达到了 515 亿美元。根据[Fortune Business Insights](https://www.fortunebusinessinsights.com/industry-reports/artificial-intelligence-market-100114)的预测，在 2021-2028 年预测期内，全球 AI 产业预计将以 33.6%的年均增长率增长，到 2028 年达到 3600 亿美元。
 
-毋庸置疑，AI正在迅速发展，每天都变得更加复杂。在AI能力的快速扩展中，各行各业的企业都在寻找将AI融入其运营的方法。随着企业争取领先地位，具备正确技能的人将会非常抢手。
+毋庸置疑，AI 正在迅速发展，每天都变得更加复杂。在 AI 能力的快速扩展中，各行各业的企业都在寻找将 AI 融入其运营的方法。随着企业争取领先地位，具备正确技能的人将会非常抢手。
 
 事不宜迟，让我们深入探讨雇主在员工和组织中寻找的最受欢迎的人工智能技能。
 
 # 顶级人工智能技能
 
-![顶级人工智能技能](../Images/c4ba554ad4808a37fda2496484323c65.png)
+![顶级人工智能技能](img/c4ba554ad4808a37fda2496484323c65.png)
 
-学生、在职人员和商业领袖对于掌握AI技能的热情非常高。那么，成为成功的AI工程师需要哪些关键能力呢？它们如下所述：
+学生、在职人员和商业领袖对于掌握 AI 技能的热情非常高。那么，成为成功的 AI 工程师需要哪些关键能力呢？它们如下所述：
 
 ## 编程技能
 
 无论你身处哪个领域，计算机编程语言都是必不可少的，因为它们是我们每天执行的计算机程序的基础。它们使我们能够与计算机沟通并创建使计算机运行的程序。很难想象没有计算机编程语言的世界。
 
-AI aspirants需要熟悉一些最广泛使用的编程语言，包括Python、R、Java和C++等。每种编程语言都有其自身的规范，这些规范可以在人工智能和机器学习中应用。
+AI aspirants 需要熟悉一些最广泛使用的编程语言，包括 Python、R、Java 和 C++等。每种编程语言都有其自身的规范，这些规范可以在人工智能和机器学习中应用。
 
 ## Python
 
-由于其简洁性、代码可靠性和执行速度，Python在AI和机器学习中被广泛使用。它需要很少的代码，能帮助你编写复杂的算法，并且包括多种先进的库用于复杂和科学计算。
+由于其简洁性、代码可靠性和执行速度，Python 在 AI 和机器学习中被广泛使用。它需要很少的代码，能帮助你编写复杂的算法，并且包括多种先进的库用于复杂和科学计算。
 
 ## R
 
-对于数值分析、统计计算、机器学习、神经网络和其他任务，R是必需的。R提供了收集和整理数据集、应用机器学习和统计函数以及使用矩阵变换和线性代数处理数据的能力。
+对于数值分析、统计计算、机器学习、神经网络和其他任务，R 是必需的。R 提供了收集和整理数据集、应用机器学习和统计函数以及使用矩阵变换和线性代数处理数据的能力。
 
 ## Java
 
-在AI中，Java用于实现映射器、归约器、智能编程、搜索算法、遗传编程、机器学习方法、神经网络等。
+在 AI 中，Java 用于实现映射器、归约器、智能编程、搜索算法、遗传编程、机器学习方法、神经网络等。
 
 ## C++
 
-AI利用C++语言来促进过程编程和硬件资源操作。它可以用来创建浏览器、视频游戏和操作系统。由于其适应性和面向对象的特性，它在AI中非常有用。
+AI 利用 C++语言来促进过程编程和硬件资源操作。它可以用来创建浏览器、视频游戏和操作系统。由于其适应性和面向对象的特性，它在 AI 中非常有用。
 
 ## 库和框架
 
-在创建AI应用程序时，开发人员可以访问各种库和框架。流行的框架和库包括Seaborn、Matplotlib、TensorFlow、NumPy、Keras、Apache Spark等。它们用于数字操作、科学计算和研究大数据集等。这些库还可以用于快速准确地编写代码。
+在创建 AI 应用程序时，开发人员可以访问各种库和框架。流行的框架和库包括 Seaborn、Matplotlib、TensorFlow、NumPy、Keras、Apache Spark 等。它们用于数字操作、科学计算和研究大数据集等。这些库还可以用于快速准确地编写代码。
 
 ## 数学和统计学
 
@@ -74,7 +74,7 @@ AI利用C++语言来促进过程编程和硬件资源操作。它可以用来创
 
 ## 自然语言处理和计算机视觉
 
-研究计算机如何解释和处理人类语言的学科称为自然语言处理（NLP）。它包括理解词义、将短语解析为其组成部分以及理解词汇关系等活动。NLP可以用于广泛的活动，包括机器理解、文本摘要和自动翻译。
+研究计算机如何解释和处理人类语言的学科称为自然语言处理（NLP）。它包括理解词义、将短语解析为其组成部分以及理解词汇关系等活动。NLP 可以用于广泛的活动，包括机器理解、文本摘要和自动翻译。
 
 计算机视觉（CV）专注于计算机对数字图像的解释和理解。它涵盖了如识别面孔、识别照片中的物品和对象，以及预测图像中物体的三维几何形状等活动。
 
@@ -148,11 +148,11 @@ YouTube 是全球领先的视频平台，由谷歌拥有，包含了许多关于
 
 随着企业越来越认识到人工智能技术如何提升他们的工作流程，对人工智能技能的需求也在不断增加。高效的人工智能专业人员将受到高度需求，并可能在广泛的行业中找到工作。此外，掌握人工智能的人将能够为自己和公司开启新的机会。
 
-**[Kanchanapally Swapnil Raju](https://www.linkedin.com/in/kanchanapally-swapnil-raju-012384142/)** 是[**Great Learning**](https://www.mygreatlearning.com/)的技术内容策略师，他规划并持续撰写关于前沿技术的内容，如数据科学、人工智能、软件工程和云计算。他掌握了MEAN Stack开发技能以及C、C++和Java等编程语言。他是一个不断学习的人，渴望探索新技术、提升写作技能，并指导他人。
+**[Kanchanapally Swapnil Raju](https://www.linkedin.com/in/kanchanapally-swapnil-raju-012384142/)** 是[**Great Learning**](https://www.mygreatlearning.com/)的技术内容策略师，他规划并持续撰写关于前沿技术的内容，如数据科学、人工智能、软件工程和云计算。他掌握了 MEAN Stack 开发技能以及 C、C++和 Java 等编程语言。他是一个不断学习的人，渴望探索新技术、提升写作技能，并指导他人。
 
 ### 更多相关内容
 
-+   [2022年人工智能项目创意](https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html)
++   [2022 年人工智能项目创意](https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html)
 
 +   [利用热门数据技能快速提升你的职业发展](https://www.kdnuggets.com/2023/01/datacamp-fast-track-next-move-indemand-data-skills.html)
 

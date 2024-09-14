@@ -1,10 +1,10 @@
 # 如何避免分析兔子洞：避免调查循环及其陷阱
 
-> 原文：[https://www.kdnuggets.com/2017/04/avoid-analytic-rabbit-holes-investigation-loops.html](https://www.kdnuggets.com/2017/04/avoid-analytic-rabbit-holes-investigation-loops.html)
+> 原文：[`www.kdnuggets.com/2017/04/avoid-analytic-rabbit-holes-investigation-loops.html`](https://www.kdnuggets.com/2017/04/avoid-analytic-rabbit-holes-investigation-loops.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
-![](../Images/5e268a2ef5929b28494398e2a371d6cf.png)
+![](img/5e268a2ef5929b28494398e2a371d6cf.png)
 
 “*如果我们添加这些变量会怎样?..*”是一个致命的问题类型，可能会毁掉你的分析项目。虽然好奇心是数据科学家的最佳朋友，但随之而来的诅咒也是不可避免的——有些人称之为*分析瘫痪*，有些人则称之为*过度分析*，但我称这些情况为“*分析兔子洞*”。在你开始任何数据科学项目时——无论是深入的统计研究、机器学习模型，还是简单的业务分析——总会涉及某些步骤。有些来源将它们分解得更细致，有些则更为概括，但从实际业务的角度来看，这种观点最为合理。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -38,22 +38,22 @@
 
 **相关：**
 
-+   [警惕两种数据模糊化策略](/2017/04/beware-two-data-obfuscation-tactics.html)
++   警惕两种数据模糊化策略
 
-+   [什么使数据科学家出色？](/2017/03/what-makes-great-data-scientist.html)
++   什么使数据科学家出色？
 
-+   [使用CRISP-DM时的四个问题及其解决方法](/2017/01/four-problems-crisp-dm-fix.html)
++   使用 CRISP-DM 时的四个问题及其解决方法
 
 ### 了解更多此主题
 
-+   [如何掌握AI世界的最新动态](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)
++   [如何掌握 AI 世界的最新动态](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)
 
 +   [数据管理：如何保持对客户的关注？](https://www.kdnuggets.com/2022/04/data-management-stay-top-customer-mind.html)
 
-+   [5个项目想法，让你作为数据科学家保持更新](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
++   [5 个项目想法，让你作为数据科学家保持更新](https://www.kdnuggets.com/2022/07/5-project-ideas-stay-uptodate-data-scientist.html)
 
-+   [如何保持Python的最新状态](https://www.kdnuggets.com/2022/06/stay-current-python.html)
++   [如何保持 Python 的最新状态](https://www.kdnuggets.com/2022/06/stay-current-python.html)
 
 +   [顶级编程语言及其应用](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 
-+   [深入了解13个数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
++   [深入了解 13 个数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)

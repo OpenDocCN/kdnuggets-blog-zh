@@ -1,6 +1,6 @@
 # 使用 Seaborn 进行 Python 数据可视化
 
-> 原文：[https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
+> 原文：[`www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html`](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
 
 在我的数据科学工作中，我构建了不少预测算法，并编写了复杂的 SQL 查询来分析数据趋势。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -46,7 +46,7 @@ df = sns.load_dataset('tips')
 df.head()
 ```
 
-![使用 Seaborn 进行 Python 数据可视化](../Images/37767b8a066e5006451b43bf5ae89d95.png)
+![使用 Seaborn 进行 Python 数据可视化](img/37767b8a066e5006451b43bf5ae89d95.png)
 
 上述数据框包含与餐厅顾客相关的 7 个变量：收到的小费（以美元计）、账单金额（以美元计）、付款人的性别、是否有吸烟者、日期、时间和聚会规模。
 
@@ -66,9 +66,9 @@ df.head()
 sns.distplot(df['total_bill'],kde=False)
 ```
 
-![使用 Seaborn 进行数据可视化](../Images/c59dfa87c2c02e4e3886266c98ca5b99.png)
+![使用 Seaborn 进行数据可视化](img/c59dfa87c2c02e4e3886266c98ca5b99.png)
 
-上图是“total_bill”变量的简单直方图。一眼就能看出，这家餐馆的一顿饭通常花费在$10到$25之间，由于有些顾客点了价格超过$50的更贵的食物，导致了正偏态。
+上图是“total_bill”变量的简单直方图。一眼就能看出，这家餐馆的一顿饭通常花费在$10 到$25 之间，由于有些顾客点了价格超过$50 的更贵的食物，导致了正偏态。
 
 ## 计数图
 
@@ -78,7 +78,7 @@ sns.distplot(df['total_bill'],kde=False)
 sns.countplot(x='sex',data=df)
 ```
 
-![使用 Seaborn 进行数据可视化](../Images/1993820c900c49f3db60816e54923bd1.png)
+![使用 Seaborn 进行数据可视化](img/1993820c900c49f3db60816e54923bd1.png)
 
 餐馆的男性顾客几乎是女性顾客的两倍。
 
@@ -88,7 +88,7 @@ sns.countplot(x='sex',data=df)
 sns.countplot(x='day',data=df)
 ```
 
-![使用 Seaborn 进行数据可视化](../Images/e69e4e593728f7d313a436e77010884e.png)
+![使用 Seaborn 进行数据可视化](img/e69e4e593728f7d313a436e77010884e.png)
 
 在所有记录的四天中，餐馆在周六的顾客人数最多，其次是周日。令人惊讶的是，周五的交易量最低。
 
@@ -104,7 +104,7 @@ sns.countplot(x='day',data=df)
 sns.barplot(x='sex',y='total_bill',data=df)
 ```
 
-![使用 Seaborn 进行数据可视化](../Images/33b725815a864d09a5bd2b7bd3556b8c.png)
+![使用 Seaborn 进行数据可视化](img/33b725815a864d09a5bd2b7bd3556b8c.png)
 
 看起来男性在这家餐馆的单次账单花费略高于女性，尽管差异不显著。
 
@@ -120,9 +120,9 @@ sns.barplot(x='sex',y='total_bill',data=df)
 sns.boxplot(data=df, x='sex', y='total_bill')
 ```
 
-![使用 Seaborn 进行数据可视化](../Images/14c9aeb7b1b39f1e0f3d271f7bf61df5.png)
+![使用 Seaborn 进行数据可视化](img/14c9aeb7b1b39f1e0f3d271f7bf61df5.png)
 
-一眼看去，我们可以看出，男性和女性顾客的中位花费几乎相同——大约在$15-$19之间。然而，最低和最高花费之间存在很大的差异。
+一眼看去，我们可以看出，男性和女性顾客的中位花费几乎相同——大约在$15-$19 之间。然而，最低和最高花费之间存在很大的差异。
 
 有些女性顾客的用餐花费低至$5，而最高花费约为$30。这可能是因为女性通常比男性吃得少，或者更倾向于小团体就餐。
 
@@ -138,7 +138,7 @@ sns.boxplot(data=df, x='sex', y='total_bill')
 sns.lmplot(x='total_bill',y='tip',data=df)
 ```
 
-![使用 Seaborn 的 Python 数据可视化](../Images/5f321b46c303312f04e8d5fc259215da.png)
+![使用 Seaborn 的 Python 数据可视化](img/5f321b46c303312f04e8d5fc259215da.png)
 
 上面的图表验证了我们的假设。更高的账单与更高的小费相关联，并且观察到两个变量之间有正线性关系。
 
@@ -150,7 +150,7 @@ sns.lmplot(x='total_bill',y='tip',data=df)
 sns.pairplot(df)
 ```
 
-![使用 Seaborn 的 Python 数据可视化](../Images/28ccceb4f79b4772c6defc2c8c227c23.png)
+![使用 Seaborn 的 Python 数据可视化](img/28ccceb4f79b4772c6defc2c8c227c23.png)
 
 在 Seaborn 中创建一个 pairplot 允许我们一次性可视化数据集中每个数值变量之间的关系。
 
@@ -170,20 +170,20 @@ Seaborn 的 pairplot() 方法在分析具有多个数值特征的数据集时非
 
 在我们上面创建的可视化中，例如，我们着手了解男性是否在餐馆花费比女性更多的餐费。然后，我们决定通过条形图来探讨性别与总账单金额之间的关系。
 
-这篇文章是入门级的，仅仅触及了你可以使用Seaborn库做的事情的表面。如果你想深入了解可以用Seaborn构建的不同类型的图表（总共有14种），我建议你观看[这个](https://www.youtube.com/watch?v=6GUZXDef2U0)小时的YouTube教程。
+这篇文章是入门级的，仅仅触及了你可以使用 Seaborn 库做的事情的表面。如果你想深入了解可以用 Seaborn 构建的不同类型的图表（总共有 14 种），我建议你观看[这个](https://www.youtube.com/watch?v=6GUZXDef2U0)小时的 YouTube 教程。
 
 **[Natassha Selvaraj](https://www.natasshaselvaraj.com/)** 是一位自学成才的数据科学家，热衷于写作。你可以通过[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)与她联系。
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻 22:n16, 2022年4月20日: 学习的顶级YouTube频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16, 2022 年 4 月 20 日: 学习的顶级 YouTube 频道…](https://www.kdnuggets.com/2022/n16.html)
 
-+   [使用Seaborn创建美丽的直方图](https://www.kdnuggets.com/2023/01/creating-beautiful-histograms-seaborn.html)
++   [使用 Seaborn 创建美丽的直方图](https://www.kdnuggets.com/2023/01/creating-beautiful-histograms-seaborn.html)
 
-+   [使用Matplotlib和Seaborn创建可视化](https://www.kdnuggets.com/creating-visuals-with-matplotlib-and-seaborn)
++   [使用 Matplotlib 和 Seaborn 创建可视化](https://www.kdnuggets.com/creating-visuals-with-matplotlib-and-seaborn)
 
-+   [数据科学、数据可视化和…的顶级38个Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [数据科学、数据可视化和…的顶级 38 个 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-+   [Python如何用于数据可视化？](https://www.kdnuggets.com/2022/12/python-used-data-visualization.html)
++   [Python 如何用于数据可视化？](https://www.kdnuggets.com/2022/12/python-used-data-visualization.html)
 
 +   [数据科学的绘图和数据可视化](https://www.kdnuggets.com/2022/06/plotting-data-visualization-data-science.html)

@@ -1,14 +1,14 @@
 # 深度学习能帮助找到完美的约会对象吗？
 
-> 原文：[https://www.kdnuggets.com/2015/07/can-deep-learning-help-find-perfect-girl.html](https://www.kdnuggets.com/2015/07/can-deep-learning-help-find-perfect-girl.html)
+> 原文：[`www.kdnuggets.com/2015/07/can-deep-learning-help-find-perfect-girl.html`](https://www.kdnuggets.com/2015/07/can-deep-learning-help-find-perfect-girl.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)**由 Harm de Vries 提供**
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论**由 Harm de Vries 提供**
 
-![在线约会](../Images/cbc2001f70f00d64c7689314473cc48c.png)我搬到蒙特利尔后做的第一件事就是安装[Tinder](http://www.tinder.com/)。对于那些不熟悉在线约会市场的人，Tinder 是一个展示附近用户的约会应用，你可以通过他们的个人资料图片来喜欢或不喜欢他们。在使用这个应用一段时间后，我发现尽管我始终不喜欢有很多穿孔和纹身的女孩（无意冒犯，只是我的类型），但这个应用一直在向我展示这些个人资料。Tinder 没有利用我的滑动历史来了解我喜欢哪种类型的女孩，这让我感到惊讶。
+![在线约会](img/cbc2001f70f00d64c7689314473cc48c.png)我搬到蒙特利尔后做的第一件事就是安装[Tinder](http://www.tinder.com/)。对于那些不熟悉在线约会市场的人，Tinder 是一个展示附近用户的约会应用，你可以通过他们的个人资料图片来喜欢或不喜欢他们。在使用这个应用一段时间后，我发现尽管我始终不喜欢有很多穿孔和纹身的女孩（无意冒犯，只是我的类型），但这个应用一直在向我展示这些个人资料。Tinder 没有利用我的滑动历史来了解我喜欢哪种类型的女孩，这让我感到惊讶。
 
 这个观察让我思考：计算机能否学会我对哪类女孩有吸引力？我通过对 Tinder 上超过 9000 张个人资料图片进行标记，并利用[深度学习](http://www.wired.com/2015/05/remaking-google-facebook-deep-learning-tackles-robotics/)，即人工智能领域的最新革命，来进行尝试。在这篇博客文章中，我将提供一个高层次的视角，介绍我如何使用这些技术来预测我的 Tinder 滑动。你可以在[这篇论文](http://arxiv.org/abs/1505.00359)中找到技术细节，该论文已被接受用于[ICML 深度学习研讨会](https://sites.google.com/site/deeplearning2015/)。
 
-![](../Images/456267832e9db367141a6b18f9d43ed0.png)
+![](img/456267832e9db367141a6b18f9d43ed0.png)
 
 ### 机器学习
 
@@ -18,7 +18,7 @@
 
 另一方面，如果我给你一张女孩/男孩的照片，你可以在一瞬间决定你是否喜欢她/他。这提示了一种更好的策略：我们让计算机通过展示你喜欢或不喜欢的女孩的个人资料图片来自我学习。我们称之为*机器学习*，因为程序从这些个人资料图片中学习一套吸引力规则。
 
-![](../Images/1a367f14313bf3f7f699572667d32b0a.png)
+![](img/1a367f14313bf3f7f699572667d32b0a.png)
 
 ### 深度学习
 
@@ -36,29 +36,29 @@
 
 训练后，我们通常观察到第一层的神经元对边缘和颜色斑点做出反应，而下一层利用这些观察来检测更复杂的模式，例如眼睛和耳朵。最后一层可能会检测到完整的面孔或穿孔和纹身（这对于预测我的偏好非常重要）。
 
-参见后续内容: [**深度学习能帮助你找到完美女孩吗？ – 第二部分。**](/2015/07/can-deep-learning-help-find-perfect-girl-2.html)
+参见后续内容: **深度学习能帮助你找到完美女孩吗？ – 第二部分。**
 
-[![harm](../Images/a2f74a8aafd2b288dfce247857ef42e7.png)Harm de Vries](http://www-etud.iro.umontreal.ca/~devries/) 是一名博士生，由 Aaron Courville 和 Roland Memisevic 监督，并且是由 Yoshua Bengio 领导的蒙特利尔学习算法研究所的成员。他的主要兴趣在于深度学习的理论和应用。
+![harmHarm de Vries](http://www-etud.iro.umontreal.ca/~devries/) 是一名博士生，由 Aaron Courville 和 Roland Memisevic 监督，并且是由 Yoshua Bengio 领导的蒙特利尔学习算法研究所的成员。他的主要兴趣在于深度学习的理论和应用。
 
 [原始资料](http://www-etud.iro.umontreal.ca/~devries/perfect-girl.html) 作者 Harm de Vries。
 
 **相关：**
 
-+   [爱、性与预测分析](/2015/06/love-sex-predictive-analytics.html)
++   爱、性与预测分析
 
-+   [Thomas Levi，PlentyOfFish 讲述大数据对浪漫的启示](/2014/07/interview-thomas-levi-pof-big-data-romance.html)
++   Thomas Levi，PlentyOfFish 讲述大数据对浪漫的启示
 
-+   [漫画：人类在深度学习上仍然领先](/2015/07/cartoon-humans-ahead-deep-learning.html)
++   漫画：人类在深度学习上仍然领先
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 

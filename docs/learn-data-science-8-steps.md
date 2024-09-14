@@ -1,6 +1,6 @@
 # 以 8 个（简单的）步骤学习数据科学
 
-> 原文：[https://www.kdnuggets.com/2016/10/learn-data-science-8-steps.html/2](https://www.kdnuggets.com/2016/10/learn-data-science-8-steps.html/2)
+> 原文：[`www.kdnuggets.com/2016/10/learn-data-science-8-steps.html/2`](https://www.kdnuggets.com/2016/10/learn-data-science-8-steps.html/2)
 
 **第 3 步\. 理解数据库**
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@
 
 对于那些会编程的数据科学初学者来说，了解数据科学工作流程的最简单方法是通过练习你的编程技能：可以从 [R](https://www.r-project.org/) 或 [Python](https://www.python.org/) 开始你的学习之旅。这里有几个包和库，旨在让你的编码生活更轻松。请查看下面的信息图片段：
 
-![8 个简单步骤](../Images/11ed8437ee71577652136cf4c60ab78c.png)
+![8 个简单步骤](img/11ed8437ee71577652136cf4c60ab78c.png)
 
 对于那些仍然觉得自己黑客技能不足的初学者来说，值得查看一些不需要你编写所有代码的开源替代方案。这些工具将允许你在数据科学工作流程中同时完成多个步骤。例如，[RapidMiner](https://rapidminer.com/)允许你导入或收集数据，对其进行一些操作以清理数据，建模和评估。请注意，了解如何使用这些工具很重要，但你仍然应该继续提高你的编码技能！
 
@@ -42,7 +42,7 @@
 
 1.  熟悉一下[Hadoop](http://hadoop.apache.org/)框架：它广泛用于分布式数据存储和处理。
 
-1.  不要忘记[Spark](http://spark.apache.org/)。掌握结合Python或Scala使用Spark的方法是关键。而且，更好的是，你一举两得：你既能练习编码技能，又能拓宽对数据科学的视野。
+1.  不要忘记[Spark](http://spark.apache.org/)。掌握结合 Python 或 Scala 使用 Spark 的方法是关键。而且，更好的是，你一举两得：你既能练习编码技能，又能拓宽对数据科学的视野。
 
 **步骤 6. 成长、连接和学习**
 
@@ -52,7 +52,7 @@
 
 *学习*。持续学习和数据科学几乎可以算是同义词。上述提到的[Kaggle](https://www.kaggle.com/)和[DrivenData](https://www.drivendata.org/)挑战将教会你一些关于数据科学实践的知识。除了这些相对较小的练习外，你还可以考虑启动一个个人项目，并更深入地探索一些内容。
 
-**第7步：彻底沉浸自己**
+**第 7 步：彻底沉浸自己**
 
 就像语言沉浸一样，你需要一个数据科学的沉浸。根据你已经拥有的技能和知识，你可以考虑参加训练营、实习或找一份工作。训练营是启动或提升你数据科学学习的绝佳方式。作为额外的好处，你将遇到很多人，并有机会建立或扩展你的网络。如果你在寻找训练营时遇到困难，可以查看[Galvanize](http://www.galvanize.com/)和[Metis](http://www.thisismetis.com/)，但也不要忘记你的[Meetup](http://www.meetup.com/)小组可能也会为社区组织训练营和研讨会！
 
@@ -60,17 +60,17 @@
 
 最后的沉浸选项是大多数学习者经历瓶颈的地方，正如最近在“数据科学面试”中的搜索趋势所证实的那样。即使你可能对数据科学家的职位非常热情，但在寻找工作时必须牢记几点：
 
-+   职位发布并不总是准确的。他们可能会发布一个“数据科学家”职位，但实际上他们可能在寻找数据工程师或业务分析师。查看DataCamp的[数据行业：谁做什么](https://www.datacamp.com/community/tutorials/data-science-industry-infographic)信息图，了解公司在发布职位时的要求。
++   职位发布并不总是准确的。他们可能会发布一个“数据科学家”职位，但实际上他们可能在寻找数据工程师或业务分析师。查看 DataCamp 的[数据行业：谁做什么](https://www.datacamp.com/community/tutorials/data-science-industry-infographic)信息图，了解公司在发布职位时的要求。
 
 +   调整你的期望：如果你没有真实的数据科学工作流程、数据库或端到端开发经验，那么直接从数据科学家或分析师职位入手是不现实的。确保在申请时你有相关的经验可供展示。
 
 如果你不能立即找到工作，不要灰心。相反，尽量确保你保持忙碌，积累经验，并关注那些之前发布过数据科学职位的公司，比如[Google](https://www.google.com/)、[Microsoft](http://www.microsoft.com/)和[Twitter](https://www.twitter.com/)。
 
-**第8步：与社区互动**
+**第 8 步：与社区互动**
 
 最后一步有时会被忽视。即使你在数据科学领域或者作为数据科学家有了工作，你仍然需要记住，数据科学等同于持续学习。时刻有新的进展，保持对周围发生的事情的关注和好奇是关键。因此，不要犹豫参与社交媒体讨论，订阅新闻通讯，关注数据科学行业的关键人物，收听播客……任何可以让你与社区互动的方式！
 
-为了跟上最新的动态，你可以注册以下新闻通讯：双月刊[KD Nuggets](/)新闻通讯和[Data Elixir](http://www.dataelixir.com/)或[Data Science Weekly](http://www.datascienceweekly.org/)新闻通讯。接着，在[Twitter](https://www.twitter.com/)上关注一些数据科学行业的关键人物。这也会帮助你跟上最新动态。一些可能会引起你兴趣的人物包括[DJ Patil](https://twitter.com/DJ44)、[Andrew Ng](https://twitter.com/AndrewYNg)和[Ben Lorica](https://twitter.com/bigdata)。
+为了跟上最新的动态，你可以注册以下新闻通讯：双月刊 KD Nuggets 新闻通讯和[Data Elixir](http://www.dataelixir.com/)或[Data Science Weekly](http://www.datascienceweekly.org/)新闻通讯。接着，在[Twitter](https://www.twitter.com/)上关注一些数据科学行业的关键人物。这也会帮助你跟上最新动态。一些可能会引起你兴趣的人物包括[DJ Patil](https://twitter.com/DJ44)、[Andrew Ng](https://twitter.com/AndrewYNg)和[Ben Lorica](https://twitter.com/bigdata)。
 
 加入一些在线社区。LinkedIn、Facebook、Reddit……这些平台都提供了与同行联系的机会。你应该抓住机会成为这些小组中的一员：
 
@@ -84,7 +84,7 @@
 
 最后，别忘了为你加入的社区做出贡献！
 
-**在DataCamp上**
+**在 DataCamp 上**
 
 [DataCamp](https://www.datacamp.com/) 是一个在线互动教育平台，专注于为数据科学提供最佳学习体验。我们的课程涉及[R](https://www.datacamp.com/courses?learn=r_programming)、[Python](https://www.datacamp.com/courses?learn=python_programming) 和 [数据科学](https://www.datacamp.com/courses)等主题，结合视频讲解和浏览器内编程挑战，使你能够通过实践学习。[你可以随时随地免费开始每门课程](https://www.datacamp.com/courses)。
 
@@ -92,11 +92,11 @@
 
 **相关**:
 
-+   [团队的 4 个在线数据科学培训选项](/2016/08/datacamp-online-data-science-training-team.html)
++   团队的 4 个在线数据科学培训选项
 
-+   [数据分析与数据科学 Python 学习综合指南](/2016/04/datacamp-learning-python-data-analysis-data-science.html)
++   数据分析与数据科学 Python 学习综合指南
 
-+   [最佳数据科学在线课程](/2015/10/best-data-science-online-courses.html)
++   最佳数据科学在线课程
 
 ### 相关主题
 

@@ -1,12 +1,12 @@
 # 使用数据科学预测和防止现实世界问题
 
-> 原文：[https://www.kdnuggets.com/2021/04/data-science-predict-prevent-real-world-problems.html](https://www.kdnuggets.com/2021/04/data-science-predict-prevent-real-world-problems.html)
+> 原文：[`www.kdnuggets.com/2021/04/data-science-predict-prevent-real-world-problems.html`](https://www.kdnuggets.com/2021/04/data-science-predict-prevent-real-world-problems.html)
 
-[评论](#comments)
+评论
 
 各行各业的人们越来越感兴趣于利用数据科学来了解改善决策的重要趋势。数据科学在预测事件和防止不良后果方面也发挥了重要作用。以下是一些发人深省的例子。
 
-![图](../Images/fa2980b9029a7cf50e5655d9b7bec2e9.png)
+![图](img/fa2980b9029a7cf50e5655d9b7bec2e9.png)
 
 图片来自 [Gerd Altmann](https://pixabay.com/users/geralt-9301/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2731501) [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=2731501)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,9 +26,9 @@
 
 许多行业现在都有广泛的在线存在。然而，定向网络攻击可以迅速阻碍整个公司，迫使员工暂时转向纸质记录，或处理文件或门户的访问丧失。
 
-然而，数据科学可以帮助公司IT团队掌握并阻止威胁。例如，关联规则学习（ARL）[基于](https://www.infosecurity-magazine.com/blogs/data-science-helping-cybersecurity-1/)某些特征来评估风险。它允许管理人员根据是否与过去的问题有共同点来预测可能的问题。
+然而，数据科学可以帮助公司 IT 团队掌握并阻止威胁。例如，关联规则学习（ARL）[基于](https://www.infosecurity-magazine.com/blogs/data-science-helping-cybersecurity-1/)某些特征来评估风险。它允许管理人员根据是否与过去的问题有共同点来预测可能的问题。
 
-当数据科学帮助发现异常值时，预防也变得可能。假设系统发现一个来自外国的未知IP地址的人在深夜试图访问公司网络。它可以自动拒绝该个人的访问，直到人工进行更仔细的检查。
+当数据科学帮助发现异常值时，预防也变得可能。假设系统发现一个来自外国的未知 IP 地址的人在深夜试图访问公司网络。它可以自动拒绝该个人的访问，直到人工进行更仔细的检查。
 
 ### **2\. 改善执法政策**
 
@@ -56,7 +56,7 @@
 
 ### **5\. 避免缺货情况**
 
-当消费者打算购买某物却发现货架空空时，他们自然会感到沮丧。这就是为什么许多零售商现在[利用大数据来预测需求](//www.digitalistmags.com/customer-experience/2020/05/21/converting-retail-big-data-into-predictive-insights-06203818/)并防止库存短缺。数据分析系统可以查看社会趋势、天气模式、区域偏好和其他细节，以评估人们购买的可能性。
+当消费者打算购买某物却发现货架空空时，他们自然会感到沮丧。这就是为什么许多零售商现在利用大数据来预测需求并防止库存短缺。数据分析系统可以查看社会趋势、天气模式、区域偏好和其他细节，以评估人们购买的可能性。
 
 这种方法还可以将适当数量的商品发送到正确的位置，例如具有全国性网点的连锁店。数据可能显示在科罗拉多州对运动服的需求迅速增加，而在阿肯色州这种销售下降或保持平稳。零售商可以利用这些信息保持商店的适当库存。
 
@@ -72,11 +72,11 @@
 
 **相关内容：**
 
-+   [预测分析在劳动行业的潜力](/2020/09/potential-predictive-analytics-labor-industries.html)
++   预测分析在劳动行业的潜力
 
-+   [数据科学家开发了更快的方式来减少污染，减少温室气体排放](/2020/07/data-scientists-faster-way-reduce-pollution-cut-greenhouse-gas-emissions.html)
++   数据科学家开发了更快的方式来减少污染，减少温室气体排放
 
-+   [自动化如何改善数据科学家的角色](/2020/10/automation-improving-data-scientists.html)
++   自动化如何改善数据科学家的角色
 
 ### 更多相关内容
 

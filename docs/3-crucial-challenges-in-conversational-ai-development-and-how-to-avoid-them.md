@@ -1,28 +1,28 @@
-# 对话式人工智能开发中的3个关键挑战及其解决方法
+# 对话式人工智能开发中的 3 个关键挑战及其解决方法
 
-> 原文：[https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
+> 原文：[`www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them`](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
 
-![XXXXX](../Images/b19209ac90f0bb6c7a52366d0e1df830.png)
+![XXXXX](img/b19209ac90f0bb6c7a52366d0e1df830.png)
 
 图片来源：[Freepik](https://www.freepik.com/free-vector/hand-drawn-flat-design-npl-illustration_22379569.htm#query=Conversational%20AI&position=8&from_view=search&track=ais&uuid=d808c694-ede6-4be4-b65b-f42080e496fc)
 
-对话式人工智能是指模拟人类互动的虚拟代理和聊天机器人，可以与人类进行对话。使用对话式人工智能正迅速成为一种生活方式——从要求Alexa“*找到最近的餐馆*”到要求Siri“*创建一个提醒*”，虚拟助手和聊天机器人通常用于回答消费者的问题、解决投诉、进行预订等等。
+对话式人工智能是指模拟人类互动的虚拟代理和聊天机器人，可以与人类进行对话。使用对话式人工智能正迅速成为一种生活方式——从要求 Alexa“*找到最近的餐馆*”到要求 Siri“*创建一个提醒*”，虚拟助手和聊天机器人通常用于回答消费者的问题、解决投诉、进行预订等等。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
 
 * * *
 
 开发这些虚拟助手需要大量的努力。然而，理解和解决关键挑战可以简化开发过程。我使用了在招聘平台上创建成熟聊天机器人的第一手经验作为参考点，来解释关键挑战及其相应的解决方案。
 
-要构建对话式人工智能聊天机器人，开发人员可以使用像RASA、亚马逊的Lex或谷歌的Dialogflow这样的框架来构建聊天机器人。当计划进行自定义更改或机器人处于成熟阶段时，大多数人更倾向于使用RASA，因为它是一个开源框架。其他框架也适合作为起点。
+要构建对话式人工智能聊天机器人，开发人员可以使用像 RASA、亚马逊的 Lex 或谷歌的 Dialogflow 这样的框架来构建聊天机器人。当计划进行自定义更改或机器人处于成熟阶段时，大多数人更倾向于使用 RASA，因为它是一个开源框架。其他框架也适合作为起点。
 
 这些挑战可以被分类为聊天机器人的三个主要组件。
 
@@ -32,7 +32,7 @@
 
 **自然语言生成（NLG）**是从给定数据中生成书面或口头句子的过程。它构建响应，然后呈现给用户。
 
-![XXXXX](../Images/5a66517deff8242279377ebc0a4c4392.png)
+![XXXXX](img/5a66517deff8242279377ebc0a4c4392.png)
 
 图片来源：Talentica Software
 

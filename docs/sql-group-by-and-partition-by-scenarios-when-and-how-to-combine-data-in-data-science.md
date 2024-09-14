@@ -1,8 +1,8 @@
 # SQL Group By 和 Partition By 场景：何时以及如何在数据科学中组合数据
 
-> 原文：[https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
+> 原文：[`www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science`](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
 
-![SQL Group By 和 Partition By 场景：何时以及如何在数据科学中组合数据](../Images/b5b2d952dee44687f4b69129f0697533.png)
+![SQL Group By 和 Partition By 场景：何时以及如何在数据科学中组合数据](img/b5b2d952dee44687f4b69129f0697533.png)
 
 图片来源 [Freepik](https://www.freepik.com/free-vector/abstract-technology-sql-illustration_21743443.htm#query=sql&position=14&from_view=search&track=sph&uuid=27f89b21-e929-4fca-80ed-4c8c1cefdaa0)
 
@@ -12,23 +12,23 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-SQL（结构化查询语言）是一种用于管理和操作数据的编程语言。这就是为什么SQL查询对于以结构化和高效的方式与数据库交互非常重要。
+SQL（结构化查询语言）是一种用于管理和操作数据的编程语言。这就是为什么 SQL 查询对于以结构化和高效的方式与数据库交互非常重要。
 
-SQL中的分组作为组织和分析数据的强大工具。它有助于从复杂的数据集中提取有意义的见解和摘要。分组的最佳使用案例是总结和理解数据特征，从而帮助企业进行分析和报告任务。
+SQL 中的分组作为组织和分析数据的强大工具。它有助于从复杂的数据集中提取有意义的见解和摘要。分组的最佳使用案例是总结和理解数据特征，从而帮助企业进行分析和报告任务。
 
 我们通常有很多需求，需要通过共同的数据组合数据集记录，以计算组中的统计信息。这些实例大多数可以归纳为常见的场景。这些场景可以在类似需求出现时应用。
 
-# SQL子句：Group By
+# SQL 子句：Group By
 
-SQL中的GROUP BY子句用于
+SQL 中的 GROUP BY 子句用于
 
 1.  按某些列对数据进行分组
 
@@ -38,11 +38,11 @@ SQL中的GROUP BY子句用于
 
 分组列 = 分组列中的值在组中的所有行应相同
 
-聚合列 = 聚合列中的值通常是对应用了函数（如sum、max等）的不同值。
+聚合列 = 聚合列中的值通常是对应用了函数（如 sum、max 等）的不同值。
 
 聚合列不应为分组列。
 
-## 场景1：分组以查找总和
+## 场景 1：分组以查找总和
 
 假设我们想要计算销售表中每个类别的总销售额。
 
@@ -68,7 +68,7 @@ group by category;
 | 健身器材 | 2,000 |
 | 文具 | 1,400 |
 
-## 场景2：分组以查找计数
+## 场景 2：分组以查找计数
 
 假设我们想计算每个部门的员工数量。
 
@@ -379,8 +379,8 @@ Group By 和 Partition By 用于解决许多问题，例如：
 
 +   [视觉 ChatGPT：微软结合 ChatGPT 和 VFM](https://www.kdnuggets.com/2023/03/visual-chatgpt-microsoft-combine-chatgpt-vfms.html)
 
-+   [KDnuggets 新闻，6月8日：21个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
-+   [KDnuggets 新闻，12月7日：破解十大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：破解十大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入了解13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)

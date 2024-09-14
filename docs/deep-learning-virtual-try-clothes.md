@@ -1,8 +1,8 @@
 # 虚拟试衣服装的深度学习 – 挑战与机遇。
 
-> 原文：[https://www.kdnuggets.com/2020/10/deep-learning-virtual-try-clothes.html](https://www.kdnuggets.com/2020/10/deep-learning-virtual-try-clothes.html)
+> 原文：[`www.kdnuggets.com/2020/10/deep-learning-virtual-try-clothes.html`](https://www.kdnuggets.com/2020/10/deep-learning-virtual-try-clothes.html)
 
-[评论](#comments)
+评论
 
 **作者：[Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)，MobiDev 的数据科学工程师**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求。
 
 * * *
 
@@ -26,7 +26,7 @@
 
 对于这种模型类型的一个示例，我们可以查看 Facebook 研究团队的[DensePose](https://github.com/facebookresearch/Densepose)（**图 1**）。然而，这种方法不够准确、对移动设备而言速度较慢且成本高昂。
 
-![](../Images/c454a7b8aa2c0b2598991b23e2054bb1.png)
+![](img/c454a7b8aa2c0b2598991b23e2054bb1.png)
 
 ***图 1**：使用 DensePose 进行身体网格检测 ([来源](https://www.skylab.ai/product/product-pose-recognition))。*
 
@@ -34,7 +34,7 @@
 
 一个受欢迎的选择是，与其使用 3D 服装进行试穿，不如使用 2D 服装和 2D 人体轮廓。这正是[Zeekit](https://zeekit.me/)公司所做的，为用户提供了将多种服装类型（如连衣裙、裤子、衬衫等）应用到他们的照片上的可能性。
 
-![](../Images/43af6ef9d0a9b7ecb05a7ea14e0c3f24.png)
+![](img/43af6ef9d0a9b7ecb05a7ea14e0c3f24.png)
 
 ***图 2**：2D 服装试穿，Zeekit ([来源](https://www.youtube.com/watch?v=IXIbeBQwgDA), 0:29 - 0:39)。*
 
@@ -42,11 +42,11 @@
 
 ### 选定模型和研究计划
 
-对于这项研究，我们选择了在“[Towards Photo-Realistic Virtual Try-On by Adaptively GeneratingPreserving](https://arxiv.org/abs/2003.05863v1)[↔](https://arxiv.org/abs/2003.05863v1)[Image Content](https://arxiv.org/abs/2003.05863v1)”论文中描述的自适应内容生成与保存网络（ACGPN）模型。为了说明ACGPN的工作原理，让我们查看其架构如**图3**所示。
+对于这项研究，我们选择了在“[Towards Photo-Realistic Virtual Try-On by Adaptively GeneratingPreserving](https://arxiv.org/abs/2003.05863v1)[↔](https://arxiv.org/abs/2003.05863v1)[Image Content](https://arxiv.org/abs/2003.05863v1)”论文中描述的自适应内容生成与保存网络（ACGPN）模型。为了说明 ACGPN 的工作原理，让我们查看其架构如**图 3**所示。
 
-![](../Images/896bc1e05c38321ad1b5c84d7231b686.png)
+![](img/896bc1e05c38321ad1b5c84d7231b686.png)
 
-***图3**：ACGPN模型的架构（致谢： [Yang et al.,2020](https://arxiv.org/abs/2003.05863)）。*
+***图 3**：ACGPN 模型的架构（致谢： [Yang et al.,2020](https://arxiv.org/abs/2003.05863)）。*
 
 该模型包括三个主要模块：语义生成、衣物变形和内容融合。
 
@@ -68,41 +68,41 @@
 
 ### 在原始数据和我们的预处理模型上复制作者的结果
 
-[原始论文](https://arxiv.org/abs/2003.05863v1)的作者没有提到他们用于创建人物分割标签和检测人体上的关键点的模型。因此，我们自行选择了模型，并确保了ACGPN模型输出的质量与论文中报告的相似。
+[原始论文](https://arxiv.org/abs/2003.05863v1)的作者没有提到他们用于创建人物分割标签和检测人体上的关键点的模型。因此，我们自行选择了模型，并确保了 ACGPN 模型输出的质量与论文中报告的相似。
 
-作为关键点检测器，我们选择了**OpenPose**模型，因为它提供了适当的关键点顺序（COCO关键点数据集），并且在其他与虚拟试衣服更换相关的研究中被使用。
+作为关键点检测器，我们选择了**OpenPose**模型，因为它提供了适当的关键点顺序（COCO 关键点数据集），并且在其他与虚拟试衣服更换相关的研究中被使用。
 
-![](../Images/4c8cce74b90e1f59fd210a896d4af14a.png)
+![](img/4c8cce74b90e1f59fd210a896d4af14a.png)
 
-***图 4**: 使用OpenPose的COCO关键点检测示例。*
+***图 4**: 使用 OpenPose 的 COCO 关键点检测示例。*
 
-我们选择了在[Self Correction for Human Parsing](https://arxiv.org/abs/1910.09777)论文中提出的SCHP模型进行身体部位分割。该模型利用了用于人体解析的常见架构[CE2P](https://arxiv.org/abs/1809.05996)，并对损失函数进行了一些修改。
+我们选择了在[Self Correction for Human Parsing](https://arxiv.org/abs/1910.09777)论文中提出的 SCHP 模型进行身体部位分割。该模型利用了用于人体解析的常见架构[CE2P](https://arxiv.org/abs/1809.05996)，并对损失函数进行了一些修改。
 
-SCHP分割模型使用预训练的骨干（编码器）从输入图像中提取特征。然后使用恢复的特征进行边缘分支中的人体轮廓预测和解析分支中的人体分割。这两个分支的输出连同来自编码器的特征图一起输入到融合分支，以提高分割图的质量。
+SCHP 分割模型使用预训练的骨干（编码器）从输入图像中提取特征。然后使用恢复的特征进行边缘分支中的人体轮廓预测和解析分支中的人体分割。这两个分支的输出连同来自编码器的特征图一起输入到融合分支，以提高分割图的质量。
 
-![](../Images/3ba651a21dee45db067048896a831b04.png)
+![](img/3ba651a21dee45db067048896a831b04.png)
 
-***图 5**: SCHP模型（基于CE2P）的架构，图像来源 – [Li等人](https://arxiv.org/abs/1910.09777)*
+***图 5**: SCHP 模型（基于 CE2P）的架构，图像来源 – [Li 等人](https://arxiv.org/abs/1910.09777)*
 
-SCHP模型中的另一个新元素是自我纠正特性，用于迭代地改进模型在噪声地面真值标签上的预测。这些标签通常用于人体解析任务，因为人为标注者可能难以生成分割标签。在此过程中，模型首先在不准确的人体标注上进行训练，并与在从先前训练的模型中获得的伪地面真值掩码上训练的新模型进行聚合。
+SCHP 模型中的另一个新元素是自我纠正特性，用于迭代地改进模型在噪声地面真值标签上的预测。这些标签通常用于人体解析任务，因为人为标注者可能难以生成分割标签。在此过程中，模型首先在不准确的人体标注上进行训练，并与在从先前训练的模型中获得的伪地面真值掩码上训练的新模型进行聚合。
 
 这个过程会重复几次，直到模型和伪地面真值掩码的准确性达到更好的水平。对于人体解析任务，我们使用了在[Look Into Person (LIP)](http://sysu-hcp.net/lip/)数据集上训练的模型，因为它最适合这个任务。
 
-![](../Images/7bbd637e56f932ceeef597b5df735c19.png)
+![](img/7bbd637e56f932ceeef597b5df735c19.png)
 
-***图 6**: 使用SCHP模型的人体解析示例（左侧 - 人体，右侧 - 分割）。*
+***图 6**: 使用 SCHP 模型的人体解析示例（左侧 - 人体，右侧 - 分割）。*
 
 最后，当关键点和人体解析模型准备好后，我们使用它们的输出在与作者训练时相同的数据上运行了 ACGPN 模型。在下面的图像中，您可以看到我们从 VITON 数据集中获得的结果。
 
-语义生成模块会修改原始分割，以反映新的服装类型。例如，原始图像上的套头衫有长袖，而目标服装（T恤）则有短袖。因此，分割掩码需要修改，以便手臂部分更加显露。这个转化后的分割掩码随后被内容融合模块用于修复修改过的身体部位（例如，绘制裸露的手臂），这是系统执行的**最具挑战性的任务之一**（**图 7**）。
+语义生成模块会修改原始分割，以反映新的服装类型。例如，原始图像上的套头衫有长袖，而目标服装（T 恤）则有短袖。因此，分割掩码需要修改，以便手臂部分更加显露。这个转化后的分割掩码随后被内容融合模块用于修复修改过的身体部位（例如，绘制裸露的手臂），这是系统执行的**最具挑战性的任务之一**（**图 7**）。
 
-![](../Images/60f40ab66588e961626777359429ac2c.png)
+![](img/60f40ab66588e961626777359429ac2c.png)
 
 ***图 7**：ACGPN 模型的输入和输出。*
 
 在下面的图像中（**图 8**），您可以看到使用 ACGPN 模型成功和失败的服装替换结果。我们遇到的最频繁的错误包括修复效果差（B1）、新服装与身体部位重叠（B2）以及边缘缺陷（B3）。
 
-![](../Images/893869661dd8d833c61984105067b884.png)
+![](img/893869661dd8d833c61984105067b884.png)
 
 ***图 8**：成功（A1-A3）和失败（B1-B3）的服装替换。伪影用红色矩形标记。*
 
@@ -110,84 +110,84 @@ SCHP模型中的另一个新元素是自我纠正特性，用于迭代地改进�
 
 对于这个实验，我们挑选了几件服装（**图 9**）并将它们应用到 VITON 数据集中人物的图像上。请注意，有些图像不是实际的服装照片，而是 3D 渲染或 2D 绘图。
 
-![](../Images/f35954c550e02a8624e596186f1eb490.png)
+![](img/f35954c550e02a8624e596186f1eb490.png)
 
 ***图 9**：用于虚拟试穿的服装图像（A - 项目的照片，B、C - 3D 渲染，D - 2D 绘图）。*
 
 继续查看服装替换的结果（**图 10**），我们可以将其大致分为三组。
 
-![](../Images/f47a6e251df27ec5d73d4d1963a7a963.png)
+![](img/f47a6e251df27ec5d73d4d1963a7a963.png)
 
 ***图 10**：使用自定义服装的替换示例（A 行 - 成功且有少量伪影，B 行 - 中等伪影，C 行 - 大量伪影）。*
 
 A 行中的图像没有缺陷，看起来最自然。这可以归因于图像中的人物姿势相似，都是直立面向相机。正如[论文](https://arxiv.org/abs/2003.05863v1)的作者所解释的，这种姿势使得模型更容易定义新服装如何被扭曲并应用到人物图像上。
 
-行B中的图像展示了模型处理起来更具挑战性的姿势。人物的躯干略微弯曲，手臂部分遮挡了应有服装的身体区域。如**图8**所示，弯曲的躯干会导致边缘缺陷。注意到困难的长袖服装（**图9**中的项目C）被正确处理。这是因为袖子需要经过复杂的变换才能与人物的手臂对齐。如果手臂弯曲或其轮廓被原始图像中的服装遮挡，这会非常复杂。
+行 B 中的图像展示了模型处理起来更具挑战性的姿势。人物的躯干略微弯曲，手臂部分遮挡了应有服装的身体区域。如**图 8**所示，弯曲的躯干会导致边缘缺陷。注意到困难的长袖服装（**图 9**中的项目 C）被正确处理。这是因为袖子需要经过复杂的变换才能与人物的手臂对齐。如果手臂弯曲或其轮廓被原始图像中的服装遮挡，这会非常复杂。
 
-行C中的图像展示了模型几乎完全失败的例子。这是预期的行为，因为输入图像中的人物躯干扭曲严重，手臂弯曲到遮挡了几乎一半的腹部和胸部区域。
+行 C 中的图像展示了模型几乎完全失败的例子。这是预期的行为，因为输入图像中的人物躯干扭曲严重，手臂弯曲到遮挡了几乎一半的腹部和胸部区域。
 
 ### 默认服装应用于定制人物图像
 
-让我们回顾一下模型在自然环境中对非约束图像的应用实验。用于模型训练的VITON数据集具有非常静态的光照条件，且相机视角和姿势的变化不多。
+让我们回顾一下模型在自然环境中对非约束图像的应用实验。用于模型训练的 VITON 数据集具有非常静态的光照条件，且相机视角和姿势的变化不多。
 
-在使用真实图像测试模型时，我们意识到训练数据与非约束数据之间的差异显著降低了模型输出的质量。你可以在**图11**中看到这个问题的例子。
+在使用真实图像测试模型时，我们意识到训练数据与非约束数据之间的差异显著降低了模型输出的质量。你可以在**图 11**中看到这个问题的例子。
 
-![](../Images/d1d1cba475ffc62fc9df0e4f30e679de.png)
+![](img/d1d1cba475ffc62fc9df0e4f30e679de.png)
 
-**图11**：服装替换 - 背景与训练数据的不相似性的影响。行A - 原始背景，行B - 用与VITON数据集中的背景相似的背景替换的背景。
+**图 11**：服装替换 - 背景与训练数据的不相似性的影响。行 A - 原始背景，行 B - 用与 VITON 数据集中的背景相似的背景替换的背景。
 
-我们找到了一些姿势和相机视角与训练数据集图像相似的人物图像，并且在处理后发现了许多伪影（行A）。然而，在去除不寻常的背景纹理并用与训练数据集相同的背景颜色填充该区域后，输出质量有所提高（尽管仍有一些伪影存在）。
+我们找到了一些姿势和相机视角与训练数据集图像相似的人物图像，并且在处理后发现了许多伪影（行 A）。然而，在去除不寻常的背景纹理并用与训练数据集相同的背景颜色填充该区域后，输出质量有所提高（尽管仍有一些伪影存在）。
 
-在使用更多图像测试模型时，我们发现模型在与训练分布相似的图像上表现尚可，而在输入明显不同的图像上则完全失败。你可以在**图12**中看到应用模型的更成功的尝试以及我们发现的典型问题。
+在使用更多图像测试模型时，我们发现模型在与训练分布相似的图像上表现尚可，而在输入明显不同的图像上则完全失败。你可以在**图 12**中看到应用模型的更成功的尝试以及我们发现的典型问题。
 
-![](../Images/307810ddde2af8e850da9ecc203c0086.png)
+![](img/307810ddde2af8e850da9ecc203c0086.png)
 
-***图12**：在非约束环境中的图像上的服装替换输出（行A - 小瑕疵，行B - 中等瑕疵，行C - 主要瑕疵）。*
+***图 12**：在非约束环境中的图像上的服装替换输出（行 A - 小瑕疵，行 B - 中等瑕疵，行 C - 主要瑕疵）。*
 
-行A中的图像展示了主要缺陷是边缘缺陷的地方的例子。
+行 A 中的图像展示了主要缺陷是边缘缺陷的地方的例子。
 
-行B中的图像显示了更严重的遮罩错误情况。例如，布料模糊、孔洞以及出现皮肤/服装补丁的位置不应存在这些问题。
+行 B 中的图像显示了更严重的遮罩错误情况。例如，布料模糊、孔洞以及出现皮肤/服装补丁的位置不应存在这些问题。
 
-行C中的图像展示了严重的修补错误，比如手臂绘制不佳和遮罩错误，如身体未遮罩的部分。
+行 C 中的图像展示了严重的修补错误，比如手臂绘制不佳和遮罩错误，如身体未遮罩的部分。
 
 ### 将定制服装应用于定制人物图像
 
 在这里，我们测试了模型在处理定制服装和定制人物照片方面的效果，并将结果再次分为三组。
 
-![](../Images/502d7f03aefd18a3fad64187f8420a64.png)
+![](img/502d7f03aefd18a3fad64187f8420a64.png)
 
-***图13***：在不受约束的环境和定制服装图像中替换衣物。
+***图 13***：在不受约束的环境和定制服装图像中替换衣物。
 
-行A中的图像显示了我们从模型中获得的最佳结果。定制服装和定制人物图像的组合被证明在处理时难度较大，除非有中等程度的伪影。
+行 A 中的图像显示了我们从模型中获得的最佳结果。定制服装和定制人物图像的组合被证明在处理时难度较大，除非有中等程度的伪影。
 
-行B中的图像显示了伪影变得更加丰富的结果。
+行 B 中的图像显示了伪影变得更加丰富的结果。
 
-行C中的图像显示了由于变换错误导致的最严重的失真结果。
+行 C 中的图像显示了由于变换错误导致的最严重的失真结果。
 
 ### 未来计划
 
-ACGPN模型有其局限性，例如训练数据必须包含目标衣物和穿着这些特定衣物的人物的配对图像。
+ACGPN 模型有其局限性，例如训练数据必须包含目标衣物和穿着这些特定衣物的人物的配对图像。
 
-考虑到上述所有描述，可能会产生虚拟试穿衣物不可实现的印象，但事实并非如此。虽然现在是一个具有挑战性的任务，但它也为未来基于AI的创新提供了机会窗口。而且，已经有新的方法被设计来解决这些问题。另一个重要的事情是，在选择合适的用例场景时，要考虑技术能力。
+考虑到上述所有描述，可能会产生虚拟试穿衣物不可实现的印象，但事实并非如此。虽然现在是一个具有挑战性的任务，但它也为未来基于 AI 的创新提供了机会窗口。而且，已经有新的方法被设计来解决这些问题。另一个重要的事情是，在选择合适的用例场景时，要考虑技术能力。
 
 **相关：**
 
 +   [时尚中的数据科学](https://www.kdnuggets.com/2018/03/data-science-fashion.html)
 
-+   [在GANs中毕业：从理解生成对抗网络到运行自己的网络](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html)
++   [在 GANs 中毕业：从理解生成对抗网络到运行自己的网络](https://www.kdnuggets.com/2019/04/graduating-gans-understanding-generative-adversarial-networks.html)
 
-+   [3D人体姿态估计实验与分析](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
++   [3D 人体姿态估计实验与分析](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
 
 ### 更多相关主题
 
-+   [通过免费虚拟通行证成为AI Con USA 2024的一部分](https://www.kdnuggets.com/2024/05/ai-con-usa-navigate-the-future-of-ai-with-a-free-virtual-pass)
++   [通过免费虚拟通行证成为 AI Con USA 2024 的一部分](https://www.kdnuggets.com/2024/05/ai-con-usa-navigate-the-future-of-ai-with-a-free-virtual-pass)
 
-+   [在神经网络之前尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [在神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
 
-+   [2023年你需要尝试的5个令人惊叹的免费LLMs游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
++   [2023 年你需要尝试的 5 个令人惊叹的免费 LLMs 游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
 
-+   [2024年你必须尝试的5个最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
++   [2024 年你必须尝试的 5 个最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
 
-+   [你必须尝试的前5款AI编码助手](https://www.kdnuggets.com/top-5-ai-coding-assistants-you-must-try)
++   [你必须尝试的前 5 款 AI 编码助手](https://www.kdnuggets.com/top-5-ai-coding-assistants-you-must-try)
 
-+   [2024年你必须尝试的7个平台端到端MLOps平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
++   [2024 年你必须尝试的 7 个平台端到端 MLOps 平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)

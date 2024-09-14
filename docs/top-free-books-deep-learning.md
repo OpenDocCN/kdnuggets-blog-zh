@@ -1,22 +1,22 @@
-# 深度学习领域的8本必读免费书籍
+# 深度学习领域的 8 本必读免费书籍
 
-> 原文：[https://www.kdnuggets.com/2018/04/top-free-books-deep-learning.html](https://www.kdnuggets.com/2018/04/top-free-books-deep-learning.html)
+> 原文：[`www.kdnuggets.com/2018/04/top-free-books-deep-learning.html`](https://www.kdnuggets.com/2018/04/top-free-books-deep-learning.html)
 
-[评论](#comments)
+评论
 
 深度学习是构成机器学习这一广泛主题的重要部分。虽然相对较新，但其受欢迎程度不断上升，因此人们希望阅读和学习更多关于这一主题的内容。如果能有一个全面的资源列表，集中在一个地方，完全免费且对所有人开放，那将是最理想的。
 
-![免费深度学习书籍](../Images/fa4827235f9489a12ba739030f01bc38.png)
+![免费深度学习书籍](img/fa4827235f9489a12ba739030f01bc38.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,15 +24,15 @@
 
 **1\. [深度学习](http://www.deeplearningbook.org/)**
 
-由Ian Goodfellow、Yoshua Bengio和Aaron Courville提供
+由 Ian Goodfellow、Yoshua Bengio 和 Aaron Courville 提供
 
 > 《深度学习教材》是一个旨在帮助学生和从业者进入机器学习领域，特别是深度学习领域的资源。该书的在线版本现已完成，并将持续免费在线提供。
 
 **2\. [深度学习教程](http://deeplearning.net/tutorial/deeplearning.pdf)**
 
-由蒙特利尔大学LISA实验室提供
+由蒙特利尔大学 LISA 实验室提供
 
-> 由蒙特利尔大学LISA实验室开发，这本免费且简明的教程以书籍形式呈现，探讨了机器学习的基础知识。书中强调了使用[Theano](https://pypi.python.org/pypi/Theano)库（最初由该大学开发）在Python中创建深度学习模型。
+> 由蒙特利尔大学 LISA 实验室开发，这本免费且简明的教程以书籍形式呈现，探讨了机器学习的基础知识。书中强调了使用[Theano](https://pypi.python.org/pypi/Theano)库（最初由该大学开发）在 Python 中创建深度学习模型。
 
 **3\. [深度学习：方法与应用](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/DeepLearning-NowPublishing-Vol7-SIG-039.pdf)**
 
@@ -40,11 +40,11 @@
 
 > 本书概述了一般深度学习方法论及其在各种信号和信息处理任务中的应用。
 
-**4\. [首次接触TensorFlow，开始深度学习编程](http://jorditorres.org/research-teaching/tensorflow/first-contact-with-tensorflow-book/)**
+**4\. [首次接触 TensorFlow，开始深度学习编程](http://jorditorres.org/research-teaching/tensorflow/first-contact-with-tensorflow-book/)**
 
 作者：Jordi Torres
 
-> 本书面向那些只有基本机器学习理解的工程师，旨在通过使用TensorFlow的动手方法拓展他们在深度学习激动人心领域的知识。
+> 本书面向那些只有基本机器学习理解的工程师，旨在通过使用 TensorFlow 的动手方法拓展他们在深度学习激动人心领域的知识。
 
 **5\. [神经网络与深度学习](http://neuralnetworksanddeeplearning.com/index.html)**
 
@@ -68,11 +68,11 @@
 
 作者：Simon Haykin
 
-> Simon Haykin的这本第三版书籍提供了对神经网络的最新处理，内容全面、深入且易读，分为三个部分。书中首先介绍了有监督学习的经典方法，然后转到基于径向基函数（RBF）网络的核方法。书的最后部分致力于正则化理论，这也是机器学习的核心。
+> Simon Haykin 的这本第三版书籍提供了对神经网络的最新处理，内容全面、深入且易读，分为三个部分。书中首先介绍了有监督学习的经典方法，然后转到基于径向基函数（RBF）网络的核方法。书的最后部分致力于正则化理论，这也是机器学习的核心。
 
 **相关：**
 
-+   [2018年顶级20篇深度学习论文](https://www.kdnuggets.com/2018/03/top-20-deep-learning-papers-2018.html)
++   [2018 年顶级 20 篇深度学习论文](https://www.kdnuggets.com/2018/03/top-20-deep-learning-papers-2018.html)
 
 +   [对深度学习的“奇怪”介绍](https://www.kdnuggets.com/2018/03/weird-introduction-deep-learning.html)
 
@@ -80,11 +80,11 @@
 
 ### 了解更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

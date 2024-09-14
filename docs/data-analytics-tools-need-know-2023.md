@@ -1,8 +1,8 @@
-# 2023年你需要了解的数据分析工具
+# 2023 年你需要了解的数据分析工具
 
-> 原文：[https://www.kdnuggets.com/2023/05/data-analytics-tools-need-know-2023.html](https://www.kdnuggets.com/2023/05/data-analytics-tools-need-know-2023.html)
+> 原文：[`www.kdnuggets.com/2023/05/data-analytics-tools-need-know-2023.html`](https://www.kdnuggets.com/2023/05/data-analytics-tools-need-know-2023.html)
 
-![2023年你需要了解的数据分析工具](../Images/7b1d032fb64ce245758939f603cc7501.png)
+![2023 年你需要了解的数据分析工具](img/7b1d032fb64ce245758939f603cc7501.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -50,9 +50,9 @@ Excel 被许多来自不同行业的人频繁使用——它是大多数领域�
 
 +   用途：开发网站/软件、任务自动化、数据分析和数据可视化
 
-Python是一种通用编程语言，以其简单的语法而闻名，使得学习编程语言变得容易。由于其直观的语法，它目前是最受欢迎的编程语言。它包含多种库，例如[NumPy](https://numpy.org/)，以帮助处理计算任务。
+Python 是一种通用编程语言，以其简单的语法而闻名，使得学习编程语言变得容易。由于其直观的语法，它目前是最受欢迎的编程语言。它包含多种库，例如[NumPy](https://numpy.org/)，以帮助处理计算任务。
 
-作为数据分析师，你可以使用Python来帮助你的数据分析，例如导入和过滤数据、统计测试、寻找数据之间的关联以及生成可视化。
+作为数据分析师，你可以使用 Python 来帮助你的数据分析，例如导入和过滤数据、统计测试、寻找数据之间的关联以及生成可视化。
 
 ## R
 
@@ -62,9 +62,9 @@ Python是一种通用编程语言，以其简单的语法而闻名，使得学�
 
 +   使用：统计分析和数据挖掘。
 
-很多人在选择学习哪种编程语言时感到困惑——Python还是R。Python以通用编程语言而闻名，而R是一种统计编程语言。
+很多人在选择学习哪种编程语言时感到困惑——Python 还是 R。Python 以通用编程语言而闻名，而 R 是一种统计编程语言。
 
-与Python相比，R的语法更为复杂，但这是因为它专门构建用于处理重统计计算任务和创建数据可视化。
+与 Python 相比，R 的语法更为复杂，但这是因为它专门构建用于处理重统计计算任务和创建数据可视化。
 
 ## SQL
 
@@ -84,9 +84,9 @@ Python是一种通用编程语言，以其简单的语法而闻名，使得学�
 
 +   使用：创建和共享代码/计算文档。
 
-Jupyter Notebook是一款开源软件，提供交互式计算，并且与不同的编程语言兼容。它可以创建和共享包含实时代码、方程式、可视化和文本的文档，供团队成员之间使用。
+Jupyter Notebook 是一款开源软件，提供交互式计算，并且与不同的编程语言兼容。它可以创建和共享包含实时代码、方程式、可视化和文本的文档，供团队成员之间使用。
 
-它的主要用途包括编程实践、跨项目协作、数据清洗、数据可视化和共享。它还与大数据分析工具如Apache Spark集成，接下来我们将讨论这个工具。
+它的主要用途包括编程实践、跨项目协作、数据清洗、数据可视化和共享。它还与大数据分析工具如 Apache Spark 集成，接下来我们将讨论这个工具。
 
 ## Apache Spark
 
@@ -96,9 +96,9 @@ Jupyter Notebook是一款开源软件，提供交互式计算，并且与不同�
 
 +   使用：大数据工作负载。
 
-Apache Spark是一个分析引擎，可以快速而有效地处理大规模数据。据知，Apache Spark可以帮助你将工作负载运行速度提高100倍。作为数据分析师，你将使用它来处理各种数据集，分析非结构化的大数据，以及进行机器学习。
+Apache Spark 是一个分析引擎，可以快速而有效地处理大规模数据。据知，Apache Spark 可以帮助你将工作负载运行速度提高 100 倍。作为数据分析师，你将使用它来处理各种数据集，分析非结构化的大数据，以及进行机器学习。
 
-该框架与Python、R、Java、Scala和SQL等编程语言兼容。
+该框架与 Python、R、Java、Scala 和 SQL 等编程语言兼容。
 
 ## Tableau
 
@@ -156,20 +156,20 @@ KNIME 是一个开源软件，允许你在任何复杂程度上构建分析。�
 
 如果你仍然不确定数据分析的路径并需要更多指导，可以阅读：
 
-+   [2022年顶级数据分析师认证课程](/2022/11/top-data-analyst-certification-courses-2022.html)
++   2022 年顶级数据分析师认证课程
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作者以及KDnuggets的社区经理。她特别感兴趣于提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何/能够促进人类寿命的延续。作为一名热心的学习者，她致力于拓宽自己的技术知识和写作技能，同时帮助指导他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术写作者以及 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何/能够促进人类寿命的延续。作为一名热心的学习者，她致力于拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
-+   [2023年成为数据科学家需要掌握的19项技能](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
++   [2023 年成为数据科学家需要掌握的 19 项技能](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
 
-+   [KDnuggets新闻，4月13日：数据科学家应该了解的Python库](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库](https://www.kdnuggets.com/2022/n15.html)
 
-+   [2023年你需要尝试的5个惊人且免费的LLM游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
++   [2023 年你需要尝试的 5 个惊人且免费的 LLM 游乐场](https://www.kdnuggets.com/5-amazing-free-llms-playgrounds-you-need-to-try-in-2023)
 
-+   [2023年你应该了解的10个惊人的机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
++   [2023 年你应该了解的 10 个惊人的机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
 
-+   [数据科学最低要求：你需要了解的10项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学最低要求：你需要了解的 10 项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
 +   [以数据为中心的人工智能：你需要了解的最新研究](https://www.kdnuggets.com/2022/02/datacentric-ai-latest-research-need-know.html)

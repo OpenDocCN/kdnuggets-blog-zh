@@ -1,8 +1,8 @@
 # 设计伦理算法
 
-> 原文：[https://www.kdnuggets.com/2019/03/designing-ethical-algorithms.html](https://www.kdnuggets.com/2019/03/designing-ethical-algorithms.html)
+> 原文：[`www.kdnuggets.com/2019/03/designing-ethical-algorithms.html`](https://www.kdnuggets.com/2019/03/designing-ethical-algorithms.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Claire Whittaker](https://www.artificiallyintelligentclaire.com/)，Artificially Intelligent Claire**
 
@@ -12,17 +12,17 @@
 
 在算法设计中，你可以调整哪些关键杠杆来使其符合伦理？
 
-设计伦理算法时需要考虑的5个领域。
+设计伦理算法时需要考虑的 5 个领域。
 
 ### 这个算法将用于什么？
 
 花些时间考虑一下你算法的最终用途。你认为这个机器学习工具的应用是否符合伦理？
 
-![Image](../Images/172a622ff39df43130ad6e11c25c0778.png)
+![Image](img/172a622ff39df43130ad6e11c25c0778.png)
 
 我们越来越希望机器学习科学家和开发者在他们不同意自己工作的使用方式时站出来发声。
 
-值得注意的是，最近微软的员工对[公司与美国军方签订合同制造AR头显](https://www.theguardian.com/technology/2019/feb/22/microsoft-protest-us-army-augmented-reality-headsets)发表了公开声明。他们表示，他们并没有签约成为战争利润者，并且不同意这一举动。
+值得注意的是，最近微软的员工对[公司与美国军方签订合同制造 AR 头显](https://www.theguardian.com/technology/2019/feb/22/microsoft-protest-us-army-augmented-reality-headsets)发表了公开声明。他们表示，他们并没有签约成为战争利润者，并且不同意这一举动。
 
 在进行广泛应用的机器学习项目时，问问自己你是否认为这项工作符合伦理。当机器学习算法应用于现实世界时，你是否对其潜力感到满意？
 
@@ -48,7 +48,7 @@
 
 在优化权重时，你可能需要考虑输出是否在设计上是伦理的。
 
-![图片](../Images/71cb6480795ad012adb1e4a19170768c.png)
+![图片](img/71cb6480795ad012adb1e4a19170768c.png)
 
 ### 你将如何定义一个伦理的特征集？
 
@@ -68,7 +68,7 @@
 
 技术领域内各种类型的多样性不足是一个已知问题。
 
-缺乏代表性样本的AI开发在过去造成了一些重大挑战。
+缺乏代表性样本的 AI 开发在过去造成了一些重大挑战。
 
 这不仅仅是技术领域中的挑战。
 
@@ -88,25 +88,25 @@
 
 确保你的算法在设计上是伦理的将使这一好处得以实现。
 
-**简介: [克莱尔·惠特克](https://www.artificiallyintelligentclaire.com/)** 正在致力于帮助每个人理解大数据概念及如何使用人工智能。这是她的热情所在！她如此热衷，以至于希望将这份热爱传递给你！她通过博客分享学习编程和AI创新的经历，帮助好奇的千禧一代，他们热爱技术和人工智能。你可以在她的博客 [人工智能克莱尔](https://www.artificiallyintelligentclaire.com/) 上阅读她在人工智能伦理方面的更多经历。
+**简介: [克莱尔·惠特克](https://www.artificiallyintelligentclaire.com/)** 正在致力于帮助每个人理解大数据概念及如何使用人工智能。这是她的热情所在！她如此热衷，以至于希望将这份热爱传递给你！她通过博客分享学习编程和 AI 创新的经历，帮助好奇的千禧一代，他们热爱技术和人工智能。你可以在她的博客 [人工智能克莱尔](https://www.artificiallyintelligentclaire.com/) 上阅读她在人工智能伦理方面的更多经历。
 
 **相关:**
 
-+   [伦理 + 数据科学：DJ Patil，前美国首席数据科学家的观点](/2018/09/ethics-data-science.html)
++   伦理 + 数据科学：DJ Patil，前美国首席数据科学家的观点
 
-+   [算法不是偏见，我们才是](/2019/01/algorithms-arent-biased-we-are.html)
++   算法不是偏见，我们才是
 
-+   [利用Mitchell范式对学习算法的简要解释](/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html)
++   利用 Mitchell 范式对学习算法的简要解释
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -122,4 +122,4 @@
 
 +   [机器学习中使用的主要监督学习算法](https://www.kdnuggets.com/2022/06/primary-supervised-learning-algorithms-used-machine-learning.html)
 
-+   [Python中的免费算法课程](https://www.kdnuggets.com/2022/09/free-algorithms-python-course.html)
++   [Python 中的免费算法课程](https://www.kdnuggets.com/2022/09/free-algorithms-python-course.html)

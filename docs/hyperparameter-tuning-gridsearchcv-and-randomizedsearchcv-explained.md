@@ -1,8 +1,8 @@
 # 超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释
 
-> 原文：[https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)
+> 原文：[`www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained`](https://www.kdnuggets.com/hyperparameter-tuning-gridsearchcv-and-randomizedsearchcv-explained)
 
-![超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释](../Images/97aa1d8c8affaf9e44ae26a81fe8b3ff.png)
+![超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释](img/97aa1d8c8affaf9e44ae26a81fe8b3ff.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -34,7 +34,7 @@
 
 # 训练基线 SVM 分类器
 
-让我们开始在酒类数据集上训练一个简单的 [支持向量机 (SVM) 分类器](/2023/07/gentle-introduction-support-vector-machines.html)。
+让我们开始在酒类数据集上训练一个简单的 支持向量机 (SVM) 分类器。
 
 首先，导入所需的模块和类：
 
@@ -54,13 +54,13 @@ X = wine.data
 y = wine.target
 ```
 
-酒类数据集是一个简单的数据集，包含13个数值特征和三个输出类别标签。这是一个很好的数据集，用于了解多分类问题。你可以运行`wine.DESCR`来获取数据集的描述。
+酒类数据集是一个简单的数据集，包含 13 个数值特征和三个输出类别标签。这是一个很好的数据集，用于了解多分类问题。你可以运行`wine.DESCR`来获取数据集的描述。
 
-![超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释](../Images/b96d32e12e7d2cdc4fdf54c6d1bbfe48.png)
+![超参数调优：GridSearchCV 和 RandomizedSearchCV 的解释](img/b96d32e12e7d2cdc4fdf54c6d1bbfe48.png)
 
 wine.DESCR 的输出
 
-接下来，将数据集分成训练集和测试集。在这里，我们使用了`test_size`为0.2。所以80%的数据进入训练数据集，20%进入测试数据集。
+接下来，将数据集分成训练集和测试集。在这里，我们使用了`test_size`为 0.2。所以 80%的数据进入训练数据集，20%进入测试数据集。
 
 ```py
 # Split the dataset into training and testing sets
@@ -152,7 +152,7 @@ param_grid = {
 
 +   `gamma` 设置为 0.1, 1, 'scale' 和 'auto'。
 
-这将导致总共36种不同的组合需要评估。网格搜索对每个组合进行拟合和评估，并使用交叉验证选择出最佳表现的组合。
+这将导致总共 36 种不同的组合需要评估。网格搜索对每个组合进行拟合和评估，并使用交叉验证选择出最佳表现的组合。
 
 然后我们实例化`GridSearchCV`来调整`baseline_svm`的超参数：
 
@@ -164,7 +164,7 @@ grid_search = GridSearchCV(estimator=baseline_svm, param_grid=param_grid, cv=5)
 grid_search.fit(X_train, y_train)
 ```
 
-注意，我们使用了5折交叉验证。
+注意，我们使用了 5 折交叉验证。
 
 最后，我们在测试数据上评估通过网格搜索找到的最佳模型——具有最优超参数的模型的性能：
 
@@ -180,7 +180,7 @@ print(f"Best SVM Accuracy: {accuracy_best:.2f}")
 print(f"Best Hyperparameters: {best_params}")
 ```
 
-如所见，模型在以下超参数下达到了0.94的准确率：
+如所见，模型在以下超参数下达到了 0.94 的准确率：
 
 ```py
 Output >>>
@@ -212,9 +212,9 @@ Best Hyperparameters: {'C': 0.1, 'gamma': 0.1, 'kernel': 'poly'}
 
 随机搜索然后*随机抽样*从这些分布中选取固定数量的超参数组合。这使得随机搜索能够高效地探索多样的超参数组合。
 
-# Scikit-Learn中的RandomizedSearchCV
+# Scikit-Learn 中的 RandomizedSearchCV
 
-现在让我们使用随机搜索来调整基线SVM分类器的参数。
+现在让我们使用随机搜索来调整基线 SVM 分类器的参数。
 
 我们导入`RandomizedSearchCV`类并定义`param_dist`，一个更大的超参数搜索空间：
 
@@ -229,7 +229,7 @@ param_dist = {
 }
 ```
 
-类似于网格搜索，我们实例化随机搜索模型来寻找最佳超参数。在这里，我们将`n_iter`设置为20；因此将采样20个随机的超参数组合。
+类似于网格搜索，我们实例化随机搜索模型来寻找最佳超参数。在这里，我们将`n_iter`设置为 20；因此将采样 20 个随机的超参数组合。
 
 ```py
 # Create the RandomizedSearchCV object
@@ -260,7 +260,7 @@ Best SVM Accuracy: 0.94
 Best Hyperparameters: {'C': 9.66495227534876, 'gamma': 6.25055192527397, 'kernel': 'poly'} 
 ```
 
-通过随机搜索找到的参数与通过网格搜索找到的参数不同。具有这些超参数的模型也达到了0.94的准确率。
+通过随机搜索找到的参数与通过网格搜索找到的参数不同。具有这些超参数的模型也达到了 0.94 的准确率。
 
 # 随机搜索的优缺点
 
@@ -284,18 +284,18 @@ Best Hyperparameters: {'C': 9.66495227534876, 'gamma': 6.25055192527397, 'kernel
 
 这两种技术都帮助你确定机器学习模型的最佳超参数，同时减少对特定训练-测试划分的过拟合风险。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过撰写教程、操作指南、观点文章等，与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关话题
 
 +   [使用网格搜索和随机搜索进行超参数调整](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 
-+   [超参数优化：10个顶级Python库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)
++   [超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)
 
 +   [数据治理与可观测性解释](https://www.kdnuggets.com/2022/08/data-governance-observability-explained.html)
 
 +   [混淆矩阵、精确度和召回率解释](https://www.kdnuggets.com/2022/11/confusion-matrix-precision-recall-explained.html)
 
-+   [KDnuggets新闻，11月16日：LinkedIn如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
-+   [用HuggingFace微调BERT进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)
++   [用 HuggingFace 微调 BERT 进行推文分类](https://www.kdnuggets.com/2022/01/finetuning-bert-tweets-classification-ft-hugging-face.html)

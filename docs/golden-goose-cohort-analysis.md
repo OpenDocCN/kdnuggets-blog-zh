@@ -1,30 +1,30 @@
-# 谁是你的金鹅？： cohort分析
+# 谁是你的金鹅？： cohort 分析
 
-> 原文：[https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2)
+> 原文：[`www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2`](https://www.kdnuggets.com/2019/05/golden-goose-cohort-analysis.html/2)
 
-### K均值聚类
+### K 均值聚类
 
-[**K均值聚类**](https://en.wikipedia.org/wiki/K-means_clustering) 是一种无监督学习算法，根据点之间的距离进行分组。怎么做？K均值聚类中有两个距离概念。**簇内平方和**（WSS）和**簇间平方和**（BSS）。
+[**K 均值聚类**](https://en.wikipedia.org/wiki/K-means_clustering) 是一种无监督学习算法，根据点之间的距离进行分组。怎么做？K 均值聚类中有两个距离概念。**簇内平方和**（WSS）和**簇间平方和**（BSS）。
 
-![簇内平方和](../Images/f07e5d2dd5697a3e33e5548bab01835b.png)
+![簇内平方和](img/f07e5d2dd5697a3e33e5548bab01835b.png)
 
-WSS指每个簇内点与相应质心之间的距离总和，而BSS指质心与总体样本均值之间的距离总和乘以每个簇内点的数量。因此，你可以将WSS视为紧凑度的度量，将BSS视为分离度的度量。为了使聚类成功，我们需要获得较低的WSS和较高的BSS。
+WSS 指每个簇内点与相应质心之间的距离总和，而 BSS 指质心与总体样本均值之间的距离总和乘以每个簇内点的数量。因此，你可以将 WSS 视为紧凑度的度量，将 BSS 视为分离度的度量。为了使聚类成功，我们需要获得较低的 WSS 和较高的 BSS。
 
-通过迭代和移动簇质心，K均值算法试图获得质心的优化点，以最小化WSS值并最大化BSS值。我不会深入讲解基本概念，但你可以从[视频](https://www.youtube.com/watch?v=_aWzGGNrcic)中找到进一步的解释。
+通过迭代和移动簇质心，K 均值算法试图获得质心的优化点，以最小化 WSS 值并最大化 BSS 值。我不会深入讲解基本概念，但你可以从[视频](https://www.youtube.com/watch?v=_aWzGGNrcic)中找到进一步的解释。
 
-![K均值算法如何工作](../Images/a23f666f8b4c08edcb9c51565a201632.png)
+![K 均值算法如何工作](img/a23f666f8b4c08edcb9c51565a201632.png)
 
 图片来源于维基百科
 
-由于K均值聚类使用距离作为相似度因素，因此我们需要对数据进行缩放。假设我们有两个不同尺度的特征，例如身高和体重。身高超过150cm，而体重平均低于100kg。如果我们绘制这些数据，点之间的距离将高度受身高的主导，导致分析偏倚。
+由于 K 均值聚类使用距离作为相似度因素，因此我们需要对数据进行缩放。假设我们有两个不同尺度的特征，例如身高和体重。身高超过 150cm，而体重平均低于 100kg。如果我们绘制这些数据，点之间的距离将高度受身高的主导，导致分析偏倚。
 
-因此，在K均值聚类中，缩放和归一化数据是预处理的关键步骤。如果我们检查RFM值的分布，可以发现它们是右偏的。没有标准化的状态下使用它并不好。我们先将RFM值转换为对数尺度，然后再进行归一化。
+因此，在 K 均值聚类中，缩放和归一化数据是预处理的关键步骤。如果我们检查 RFM 值的分布，可以发现它们是右偏的。没有标准化的状态下使用它并不好。我们先将 RFM 值转换为对数尺度，然后再进行归一化。
 
 ```py
 
 ```
 
-# 为小于0的值定义函数
+# 为小于 0 的值定义函数
 
 定义函数以将负值变为零
 
@@ -64,7 +64,7 @@ rfm_scaled = pd.DataFrame(rfm_scaled, index = rfm.index, columns = rfm_log.colum
 
 ```py
 
-![StandardScaler()](../Images/8639a07780dedd6acbca1d131af0fd5d.png)
+![StandardScaler()](img/8639a07780dedd6acbca1d131af0fd5d.png)
 The plot on the left is the distributions of RFM before preprocessing, and the plot on the right is the distributions of RFM after normalization. By making them in the somewhat normal distribution, we can give hints to our model to grasp the trends between values easily and accurately. Now, we are done with preprocessing.
 What is the next? The next step will be selecting the right number of clusters. We have to choose how many groups we’re going to make. If there is prior knowledge, we can just give the number right ahead to the algorithm. But most of the case in unsupervised learning, there isn’t. So we need to choose the optimized number, and the Elbow method is one of the solutions where we can get the hints.
 
@@ -85,11 +85,11 @@ plt.show()
 
 ```
 
-使用for循环，我为从1到10的每个聚类数量建立了模型。然后收集每个模型的WSS值。看看下面的图。随着聚类数量的增加，WSS值减少。这并不奇怪，因为我们创建的聚类越多，每个聚类的大小就会减小，因此每个聚类内的距离总和会减少。那么最佳数量是多少呢？
+使用 for 循环，我为从 1 到 10 的每个聚类数量建立了模型。然后收集每个模型的 WSS 值。看看下面的图。随着聚类数量的增加，WSS 值减少。这并不奇怪，因为我们创建的聚类越多，每个聚类的大小就会减小，因此每个聚类内的距离总和会减少。那么最佳数量是多少呢？
 
-![K均值中的肘部法则](../Images/99080f4deadcffcee1c97cff37387121.png)
+![K 均值中的肘部法则](img/99080f4deadcffcee1c97cff37387121.png)
 
-答案在这条线的“肘部”位置。某个地方WSS显著减少，但K值不太高。我的选择是三。你怎么看？这难道不真的像是这条线的肘部吗？
+答案在这条线的“肘部”位置。某个地方 WSS 显著减少，但 K 值不太高。我的选择是三。你怎么看？这难道不真的像是这条线的肘部吗？
 
 现在我们选择了聚类数量，可以建立模型并生成实际的聚类，如下所示。我们还可以检查每个点与质心或聚类标签之间的距离。让我们创建一个新列，并为每个客户分配标签。
 
@@ -103,13 +103,13 @@ rfm.head()
 
 ```
 
-![RFM分位组](../Images/2dae5957861ab24a67ccd13ace500cea.png)
+![RFM 分位组](img/2dae5957861ab24a67ccd13ace500cea.png)
 
-现在我们制作了两种类型的分段，RFM分位组和K-均值组。让我们进行可视化并比较这两种方法。
+现在我们制作了两种类型的分段，RFM 分位组和 K-均值组。让我们进行可视化并比较这两种方法。
 
 蛇形图和热力图
 
-我将制作两种图，一种是折线图，另一种是热力图。通过这两种图，我们可以轻松比较RFM值的差异。首先，我会创建列以分配两个聚类标签。然后通过将RFM值融入一列来重塑数据框。
+我将制作两种图，一种是折线图，另一种是热力图。通过这两种图，我们可以轻松比较 RFM 值的差异。首先，我会创建列以分配两个聚类标签。然后通过将 RFM 值融入一列来重塑数据框。
 
 ```py
 # assign cluster column 
@@ -122,9 +122,9 @@ rfm_melted.head()
 
 ```
 
-![K均值中的肘部法则](../Images/b85d1164af1d1b2f58a22bbcb67f5ed9.png)
+![K 均值中的肘部法则](img/b85d1164af1d1b2f58a22bbcb67f5ed9.png)
 
-这将使得最近性、频率和货币价值类别作为观察对象，这允许我们将值绘制在一个图中。将`Metrics`放在x轴，将`Value`放在y轴，并按`RFM_Level`对值进行分组。这次重复相同的代码，将值按`K_Cluster`分组。结果如下所示。
+这将使得最近性、频率和货币价值类别作为观察对象，这允许我们将值绘制在一个图中。将`Metrics`放在 x 轴，将`Value`放在 y 轴，并按`RFM_Level`对值进行分组。这次重复相同的代码，将值按`K_Cluster`分组。结果如下所示。
 
 ```py
 # a snake plot with RFM
@@ -138,7 +138,7 @@ plt.legend(loc = 'upper right')
 
 ```
 
-![RFM的蛇形图](../Images/ed077f5713a4379c9ff7a3be96b0c058.png)
+![RFM 的蛇形图](img/ed077f5713a4379c9ff7a3be96b0c058.png)
 
 这种图被称为“蛇形图”，尤其在市场分析中使用。看起来**金色**和**绿色**组在左侧图上类似于右侧图上的**1**和**2**簇。而**铜色**和**银色**组似乎被合并为**0**组。
 
@@ -158,7 +158,7 @@ plt.plot()
 
 ```
 
-然后重复之前做的K-聚类的相同代码。
+然后重复之前做的 K-聚类的相同代码。
 
 ```py
 # calculate the proportional gap with total mean
@@ -171,7 +171,7 @@ plt.plot()
 
 ```
 
-![RFM和K均值的热力图](../Images/23b61b84fb6390961e07e98ce4dee968.png)
+![RFM 和 K 均值的热力图](img/23b61b84fb6390961e07e98ce4dee968.png)
 
 可能会看到不匹配，特别是在图的顶部。但这只是因为顺序不同。左侧的**绿色**组将对应于**2**组。如果你查看每个框内的值，可以看到**金色**和**1**组之间的差异变得显著。而这可以通过颜色的深浅轻易识别出来。
 
@@ -181,11 +181,11 @@ plt.plot()
 
 资源
 
-+   一篇关于 RFM 分析的精彩文章：[https://clevertap.com/blog/rfm-analysis/](https://clevertap.com/blog/rfm-analysis/)
++   一篇关于 RFM 分析的精彩文章：[`clevertap.com/blog/rfm-analysis/`](https://clevertap.com/blog/rfm-analysis/)
 
-+   另一个有用的 RFM 分析解释：[https://www.optimove.com/learning-center/rfm-segmentation](https://www.optimove.com/learning-center/rfm-segmentation)
++   另一个有用的 RFM 分析解释：[`www.optimove.com/learning-center/rfm-segmentation`](https://www.optimove.com/learning-center/rfm-segmentation)
 
-+   K-means 聚类的直观解释：[https://www.youtube.com/watch?v=_aWzGGNrcic](https://www.youtube.com/watch?v=_aWzGGNrcic)
++   K-means 聚类的直观解释：[`www.youtube.com/watch?v=_aWzGGNrcic`](https://www.youtube.com/watch?v=_aWzGGNrcic)
 
 **简介：**[Jiwon Jeong](https://www.linkedin.com/in/jiwon-jeong/) 是延世大学的研究生助理。
 
@@ -193,21 +193,21 @@ plt.plot()
 
 **相关：**
 
-+   [使用 K-means 算法进行聚类](/2018/07/clustering-using-k-means-algorithm.html)
++   使用 K-means 算法进行聚类
 
-+   [K-Means 和其他聚类算法：Python 快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)
++   K-Means 和其他聚类算法：Python 快速入门
 
-+   [客户细分初学者指南](/2017/03/yhat-beginner-guide-customer-segmentation.html)
++   客户细分初学者指南
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
 
 * * *
 

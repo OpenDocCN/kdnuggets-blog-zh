@@ -1,8 +1,8 @@
 # 掌握数据科学数学的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-mastering-math-for-data-science](https://www.kdnuggets.com/7-steps-to-mastering-math-for-data-science)
+> 原文：[`www.kdnuggets.com/7-steps-to-mastering-math-for-data-science`](https://www.kdnuggets.com/7-steps-to-mastering-math-for-data-science)
 
-![掌握数据科学数学的 7 个步骤](../Images/7e14f91e11f6925d464b95a7f2e5830f.png)
+![掌握数据科学数学的 7 个步骤](img/7e14f91e11f6925d464b95a7f2e5830f.png)
 
 作者提供的图片 | 创建于 Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -64,13 +64,13 @@
 
 #### 资源
 
-+   [微积分 I: 单变量微积分 | MIT开放课程](https://ocw.mit.edu/courses/18-01-calculus-i-single-variable-calculus-fall-2020/)
++   [微积分 I: 单变量微积分 | MIT 开放课程](https://ocw.mit.edu/courses/18-01-calculus-i-single-variable-calculus-fall-2020/)
 
-+   [多变量微积分 | MIT开放课程](https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/)
++   [多变量微积分 | MIT 开放课程](https://ocw.mit.edu/courses/18-02-multivariable-calculus-fall-2007/)
 
 ## 第三步：熟悉线性代数
 
-线性代数对于数据科学中的许多算法至关重要，包括用于降维（如PCA）、数据变换等的算法。
+线性代数对于数据科学中的许多算法至关重要，包括用于降维（如 PCA）、数据变换等的算法。
 
 它提供了处理具有多维数据集的数学框架，并帮助高效存储和操作高维空间中的数据。
 
@@ -88,7 +88,7 @@
 
 +   [3blue1brown – 线性代数](https://www.3blue1brown.com/topics/linear-algebra)
 
-+   [线性代数 | MIT开放课程](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
++   [线性代数 | MIT 开放课程](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/)
 
 ## 第四步：学习离散数学
 
@@ -108,11 +108,11 @@
 
 #### 资源
 
-+   [计算机科学数学 | MIT开放课程](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/)
++   [计算机科学数学 | MIT 开放课程](https://ocw.mit.edu/courses/6-042j-mathematics-for-computer-science-fall-2010/)
 
 +   [计算机科学离散数学导论 | Coursera](https://www.coursera.org/specializations/discrete-mathematics)
 
-## 第5步：学习概率与统计
+## 第 5 步：学习概率与统计
 
 概率与统计可以让你根据数据做出明智的决策，建模不确定性和检验假设。这些都是数据科学中预测建模、风险评估和数据解释的基础工具。
 
@@ -130,11 +130,11 @@
 
 #### 资源
 
-+   [使用Python的统计学 | Coursera](https://www.coursera.org/specializations/statistics-with-python)
++   [使用 Python 的统计学 | Coursera](https://www.coursera.org/specializations/statistics-with-python)
 
 +   [概率 | Khan Academy](https://www.khanacademy.org/math/probability)
 
-## 第6步：探索优化技术
+## 第 6 步：探索优化技术
 
 在处理机器学习算法和统计模型时，你会遇到优化问题。无论是寻找模型的最佳参数还是最小化误差率，理解优化技术可以提高模型的性能和效率。在进行优化时，你会发现需要掌握微积分和线性代数。
 
@@ -154,7 +154,7 @@
 
 +   [凸优化导论 | 麻省理工学院开放课程](https://ocw.mit.edu/courses/6-079-introduction-to-convex-optimization-fall-2009/)
 
-## 第7步：拥抱**及时**学习
+## 第 7 步：拥抱**及时**学习
 
 我们已经讲解了数据科学中你需要了解的不同数学主题。但你也可能意识到，事先掌握每一个数学概念是不可能的。一旦你获得了一些基础知识，你可以根据需要**及时**学习其他概念。
 
@@ -168,7 +168,7 @@
 
 学习愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点工作。她的兴趣和专长包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、意见文章等，与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、意见文章等，与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关话题
 
@@ -176,10 +176,10 @@
 
 +   [掌握数据宇宙：成功数据科学职业的关键步骤](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)
 
-+   [KDnuggets™ 新闻 22:n05，2月2日：掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [掌握数据科学的SQL的7个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
++   [掌握数据科学的 SQL 的 7 个步骤](https://www.kdnuggets.com/2022/04/7-steps-mastering-sql-data-science.html)
 
-+   [掌握数据科学的Python的7个步骤](https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
++   [掌握数据科学的 Python 的 7 个步骤](https://www.kdnuggets.com/2022/06/7-steps-mastering-python-data-science.html)
 
-+   [通过敏捷方法掌握数据科学项目管理的7个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [通过敏捷方法掌握数据科学项目管理的 7 个步骤](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)

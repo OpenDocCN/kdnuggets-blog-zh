@@ -1,8 +1,8 @@
 # 数据插补的三种方法
 
-> 原文：[https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)
+> 原文：[`www.kdnuggets.com/2022/12/3-approaches-data-imputation.html`](https://www.kdnuggets.com/2022/12/3-approaches-data-imputation.html)
 
-![数据插补的三种方法](../Images/b2163a5083acf6a2b2a8ca411d8199b4.png)
+![数据插补的三种方法](img/b2163a5083acf6a2b2a8ca411d8199b4.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

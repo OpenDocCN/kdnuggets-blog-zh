@@ -1,10 +1,10 @@
 # 数据科学课程路线图
 
-> 原文：[https://www.kdnuggets.com/2019/12/data-science-curriculum-roadmap.html](https://www.kdnuggets.com/2019/12/data-science-curriculum-roadmap.html)
+> 原文：[`www.kdnuggets.com/2019/12/data-science-curriculum-roadmap.html`](https://www.kdnuggets.com/2019/12/data-science-curriculum-roadmap.html)
 
 ([额外作者列表](https://github.com/brohrer/academic_advisory/blob/master/authors.md))
 
-[评论](#comments)
+评论
 
 我们在收到来自学术伙伴的多个请求后，冒险建议了一条课程路线图。作为一个团队，我们的大部分时间都花在了行业中，尽管我们中的许多人也曾在学术领域度过了一段时间。以下是一些广泛的建议，每种实施都不可避免地需要大量调整。考虑到这一点，以下是我们的课程推荐。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -32,7 +32,7 @@
 
 也有一些**通用数据科学项目**，在一定程度上涵盖了所有这些领域。此外，还有相当多的**领域特定项目**，教授特定领域的工程、分析和建模技能的子集。
 
-[![数据项目原型](../Images/a272cadb9860f193dc15840ddefc6f53.png)](https://i.ibb.co/y68JxPM/rohrer-program-archetypes.png)
+![数据项目原型](https://i.ibb.co/y68JxPM/rohrer-program-archetypes.png)
 
 这些项目模型的课程推荐会有所不同。然而，它们都会包含一些核心主题。分析、工程和建模中心的项目将有各自额外的主题领域。一般课程将包括一些分析、工程和建模课程的内容，但可能不会深入到相同的程度。学生通常会从这三个领域的任何组合中自行选择课程。
 
@@ -186,11 +186,11 @@
 
 **相关：**
 
-+   [2019年5大著名深度学习课程/学校](/2019/09/famous-deep-learning-courses-schools-2019.html)
++   2019 年 5 大著名深度学习课程/学校
 
-+   [应对数据科学技能日益增长的需求](/2019/10/growing-need-skills-data-science.html)
++   应对数据科学技能日益增长的需求
 
-+   [我在数据科学硕士课程中学到的7件事](/2019/10/top-7-things-learned-data-science-masters.html)
++   我在数据科学硕士课程中学到的 7 件事
 
 ### 更多相关内容
 
@@ -198,10 +198,10 @@
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

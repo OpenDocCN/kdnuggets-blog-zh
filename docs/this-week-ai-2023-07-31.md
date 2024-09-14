@@ -1,28 +1,28 @@
-# 本周AI，7月31日：AI巨头承诺负责任的创新 • 白鲸入侵
+# 本周 AI，7 月 31 日：AI 巨头承诺负责任的创新 • 白鲸入侵
 
-> 原文：[https://www.kdnuggets.com/2023/07/this-week-ai-2023-07-31.html](https://www.kdnuggets.com/2023/07/this-week-ai-2023-07-31.html)
+> 原文：[`www.kdnuggets.com/2023/07/this-week-ai-2023-07-31.html`](https://www.kdnuggets.com/2023/07/this-week-ai-2023-07-31.html)
 
-![准确把握AI](../Images/9fb9e0beead4bcec6623bdbbeb1102e9.png)
+![准确把握 AI](img/9fb9e0beead4bcec6623bdbbeb1102e9.png)
 
-由编辑使用BlueWillow创建的图像
+由编辑使用 BlueWillow 创建的图像
 
-欢迎来到KDnuggets首期的“本周AI”专刊。此精选的每周更新旨在让您了解人工智能领域迅速发展的最重要进展。从塑造我们对AI在社会角色理解的突破性头条新闻，到引发深思的文章、深刻的学习资源，以及推动知识边界的重点研究，这篇文章提供了AI当前格局的全面概述。虽然尚未深入细节，但请期待探索反映AI广泛和动态本质的众多话题。请记住，这只是许多未来每周更新中的第一个，旨在让您在这一不断发展的领域中保持更新和知情。敬请关注，祝您阅读愉快！
+欢迎来到 KDnuggets 首期的“本周 AI”专刊。此精选的每周更新旨在让您了解人工智能领域迅速发展的最重要进展。从塑造我们对 AI 在社会角色理解的突破性头条新闻，到引发深思的文章、深刻的学习资源，以及推动知识边界的重点研究，这篇文章提供了 AI 当前格局的全面概述。虽然尚未深入细节，但请期待探索反映 AI 广泛和动态本质的众多话题。请记住，这只是许多未来每周更新中的第一个，旨在让您在这一不断发展的领域中保持更新和知情。敬请关注，祝您阅读愉快！
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
 # 头条新闻
 
-“头条新闻”部分讨论了过去一周在人工智能领域的最新新闻和发展。信息涵盖从政府的AI政策到技术进步以及AI领域的企业创新。
+“头条新闻”部分讨论了过去一周在人工智能领域的最新新闻和发展。信息涵盖从政府的 AI 政策到技术进步以及 AI 领域的企业创新。
 
 **[AI 巨头在拜登-哈里斯政府下承诺负责任创新](https://www.whitehouse.gov/briefing-room/statements-releases/2023/07/21/fact-sheet-biden-harris-administration-secures-voluntary-commitments-from-leading-artificial-intelligence-companies-to-manage-the-risks-posed-by-ai/)** 
 
@@ -58,11 +58,11 @@ Stability AI 和其 CarperAI 实验室宣布推出 Stable Beluga 1 和 Stable Be
 
 **[Cohere 的 LLM 大学：通往大型语言模型世界的门户](https://www.kdnuggets.com/2023/07/everything-need-llm-university-cohere.html)**
 
-Cohere的LLM大学是一个为对自然语言处理（NLP）和大型语言模型（LLMs）感兴趣的开发者提供的综合学习资源。课程旨在提供坚实的NLP和LLMs基础，并在此基础上构建实际应用。课程分为四个主要模块：“大型语言模型是什么？”，“使用Cohere端点进行文本表示”，“使用Cohere端点生成文本”和“部署”。无论你是新的机器学习工程师还是希望扩展技能的经验丰富的开发者，Cohere的LLM大学都提供了一个全面的NLP和LLMs世界指南。
+Cohere 的 LLM 大学是一个为对自然语言处理（NLP）和大型语言模型（LLMs）感兴趣的开发者提供的综合学习资源。课程旨在提供坚实的 NLP 和 LLMs 基础，并在此基础上构建实际应用。课程分为四个主要模块：“大型语言模型是什么？”，“使用 Cohere 端点进行文本表示”，“使用 Cohere 端点生成文本”和“部署”。无论你是新的机器学习工程师还是希望扩展技能的经验丰富的开发者，Cohere 的 LLM 大学都提供了一个全面的 NLP 和 LLMs 世界指南。
 
-???? **[来自Google的免费生成式AI学习路径](https://www.kdnuggets.com/2023/07/free-google-generative-ai-learning-path.html)**
+???? **[来自 Google 的免费生成式 AI 学习路径](https://www.kdnuggets.com/2023/07/free-google-generative-ai-learning-path.html)**
 
-Google Cloud发布了生成式AI学习路径，这是一个包含从生成式AI基础知识到更高级工具（如生成式AI工作室）的免费课程合集。学习路径包括七门课程：“生成式AI概述”、“大型语言模型简介”、“图像生成简介”、“注意力机制”、“Transformer模型和BERT模型”、“创建图像字幕模型”和“生成式AI工作室简介”。这些课程涵盖了包括大型语言模型、图像生成、注意力机制、Transformer模型、BERT模型和图像字幕模型在内的多个主题。
+Google Cloud 发布了生成式 AI 学习路径，这是一个包含从生成式 AI 基础知识到更高级工具（如生成式 AI 工作室）的免费课程合集。学习路径包括七门课程：“生成式 AI 概述”、“大型语言模型简介”、“图像生成简介”、“注意力机制”、“Transformer 模型和 BERT 模型”、“创建图像字幕模型”和“生成式 AI 工作室简介”。这些课程涵盖了包括大型语言模型、图像生成、注意力机制、Transformer 模型、BERT 模型和图像字幕模型在内的多个主题。
 
 # 研究聚焦
 
@@ -70,20 +70,20 @@ Google Cloud发布了生成式AI学习路径，这是一个包含从生成式AI�
 
 ???? **[大型语言模型在数据科学教育演变中的作用](https://arxiv.org/abs/2307.02792)**
 
-题为“**大型语言模型在数据科学教育演变中的作用**”的研究论文讨论了大型语言模型（LLMs）对数据科学家角色和职责的变革性影响。作者认为，大型语言模型的崛起正在将数据科学家的重点从动手编码转移到管理和评估由自动化人工智能系统执行的分析。这种转变需要数据科学教育的重大演变，强调在学生中培养多样化的技能，包括由LLMs启发的创造力、批判性思维、受AI指导的编程以及跨学科知识。
+题为“**大型语言模型在数据科学教育演变中的作用**”的研究论文讨论了大型语言模型（LLMs）对数据科学家角色和职责的变革性影响。作者认为，大型语言模型的崛起正在将数据科学家的重点从动手编码转移到管理和评估由自动化人工智能系统执行的分析。这种转变需要数据科学教育的重大演变，强调在学生中培养多样化的技能，包括由 LLMs 启发的创造力、批判性思维、受 AI 指导的编程以及跨学科知识。
 
-作者们还提出，大型语言模型（LLMs）在课堂上可以作为互动教学和学习工具发挥重要作用。它们可以促进个性化教育，丰富学习体验。然而，将LLMs整合到教育中需要谨慎考虑，以平衡LLMs的好处，同时促进人类专业知识和创新。论文建议，数据科学教育的未来很可能涉及人类学习者与AI模型之间的共生关系，其中双方相互学习并提升各自的能力。
+作者们还提出，大型语言模型（LLMs）在课堂上可以作为互动教学和学习工具发挥重要作用。它们可以促进个性化教育，丰富学习体验。然而，将 LLMs 整合到教育中需要谨慎考虑，以平衡 LLMs 的好处，同时促进人类专业知识和创新。论文建议，数据科学教育的未来很可能涉及人类学习者与 AI 模型之间的共生关系，其中双方相互学习并提升各自的能力。
 
 ### 更多相关内容
 
-+   [学习如何设计和部署负责任的AI系统](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)
++   [学习如何设计和部署负责任的 AI 系统](https://www.kdnuggets.com/2023/10/teradata-design-deploy-responsible-ai-systems-whitepaper)
 
-+   [学习如何设计和部署负责任的AI系统](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)
++   [学习如何设计和部署负责任的 AI 系统](https://www.kdnuggets.com/2023/11/teradata-design-deploy-responsible-ai-systems-whitepaper)
 
-+   [免费4周数据科学课程：AI质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费 4 周数据科学课程：AI 质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
 
-+   [本周提升搜索应用的8种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
++   [本周提升搜索应用的 8 种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
 
-+   [本周AI动态，8月7日：生成式AI进入Jupyter和Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
++   [本周 AI 动态，8 月 7 日：生成式 AI 进入 Jupyter 和 Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
 
-+   [回到基础 第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [回到基础 第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)

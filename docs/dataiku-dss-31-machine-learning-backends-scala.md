@@ -1,10 +1,10 @@
 # Dataiku DSS 3.1 – 现在支持 5 种机器学习后端和 Scala！
 
-> 原文：[https://www.kdnuggets.com/2016/08/dataiku-dss-31-machine-learning-backends-scala.html](https://www.kdnuggets.com/2016/08/dataiku-dss-31-machine-learning-backends-scala.html)
+> 原文：[`www.kdnuggets.com/2016/08/dataiku-dss-31-machine-learning-backends-scala.html`](https://www.kdnuggets.com/2016/08/dataiku-dss-31-machine-learning-backends-scala.html)
 
-| [![](../Images/22900342d05c68e995c425355a4710d4.png)](http://hubs.ly/H03N25H0) | ![](../Images/24a77df1aca35129328f7dbdb25ee76a.png) |
+| ![](http://hubs.ly/H03N25H0) | ![](img/24a77df1aca35129328f7dbdb25ee76a.png) |
 | --- | --- |
-| ![](../Images/953ef90d450482d1bb0c1c46dfe4f8a1.png) | ![](../Images/24a77df1aca35129328f7dbdb25ee76a.png) |
+| ![](img/953ef90d450482d1bb0c1c46dfe4f8a1.png) | ![](img/24a77df1aca35129328f7dbdb25ee76a.png) |
 
 | Dataiku DSS 3.1 现在支持 5 种机器学习后端和 Scala！
 
@@ -12,10 +12,10 @@ Dataiku DSS 3.1 引入了新的视觉机器学习引擎，允许用户在无代�
 
 视觉无代码和自由形式代码转换的融合是 Dataiku DSS 在数据应用原型制作和生产中的主要优势之一。除了**Python、R、SQL、Hive、Impala 和 Pig**，Dataiku DSS 3.1 现在还允许 Apache Spark 用户**用 Scala 编写转换和交互式笔记本**，将 Spark 的原生和最高效的语言的力量带给使用 Dataiku DSS 的数据分析师。
 
-| [![](../Images/19b906fd34bcfa772c71db641529fbac.png)](http://hubs.ly/H03N25H0) |
+| ![](http://hubs.ly/H03N25H0) |
 | --- |
-| ![](../Images/0a8769368ddf10a094eefab55801b1f9.png) | ![](../Images/24a77df1aca35129328f7dbdb25ee76a.png) |
-| ![](../Images/bb56c158e4f3d15a1af027cebdd81f5f.png) | [![](../Images/c43489403f3945a38c2467f34198c6f5.png)](http://www.dataiku.com/learn/whatsnew/) | ![](../Images/2ab76801a20bbda8754f3aa969580980.png) | ![](../Images/24a77df1aca35129328f7dbdb25ee76a.png) |
+| ![](img/0a8769368ddf10a094eefab55801b1f9.png) | ![](img/24a77df1aca35129328f7dbdb25ee76a.png) |
+| ![](img/bb56c158e4f3d15a1af027cebdd81f5f.png) | ![](http://www.dataiku.com/learn/whatsnew/) | ![](img/2ab76801a20bbda8754f3aa969580980.png) | ![](img/24a77df1aca35129328f7dbdb25ee76a.png) |
 
 | Dataiku DSS 3.1 的其他功能包括：
 
@@ -25,9 +25,9 @@ Dataiku DSS 3.1 引入了新的视觉机器学习引擎，允许用户在无代�
 
 +   **与 Tableau 的无缝集成**：用户可以通过为数据集创建自定义导出格式（包括 Tableau .tde 文件）来扩展 Dataiku DSS 的兼容性。这允许与 Tableau 和其他工具更好地集成。
 
-| ![](../Images/24a77df1aca35129328f7dbdb25ee76a.png) |
+| ![](img/24a77df1aca35129328f7dbdb25ee76a.png) |
 | --- |
-| [www.dataiku.com](http://www.dataiku.com/) &#124; [联系我们](mailto:contact@dataiku.com) |
+| [www.dataiku.com](http://www.dataiku.com/) &#124; 联系我们 |
 
 ### 更多相关主题
 

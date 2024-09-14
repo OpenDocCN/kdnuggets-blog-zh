@@ -1,8 +1,8 @@
-# 流行的机器学习面试问题，第 2 部分
+# 流行的机器学习面试问题，第二部分
 
-> 原文：[https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions-part2.html](https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions-part2.html)
+> 原文：[`www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions-part2.html`](https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions-part2.html)
 
-[评论](#comments)
+评论
 
 **作者 [Mo Daoud](https://mohamed-daoud214.medium.com/)，从事技术工作，AI 爱好者**。
 
@@ -10,7 +10,7 @@
 
 在这里，我展示了在面试中我通常看到的更多问题。我必须说明，这不是一份面试准备指南，也不是所有问题的完整列表。相反，你应该将这篇文章作为复习你机器学习知识的材料。我建议你在阅读答案之前先阅读问题，并尝试自己回答。这样，你可以验证你的知识，并发现技能上的差距。让我们开始吧。
 
-![](../Images/004475fc96ce5b397df59868fa7d8d31.png)
+![](img/004475fc96ce5b397df59868fa7d8d31.png)
 
 *图片由 [Gabrielle Henderson](https://unsplash.com/@gabriellefaithhenderson?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -20,7 +20,7 @@ ANN 代表 **人工神经网络**，这是深度学习的基础。在 ANN 中，
 
 我通常发现候选人在面试时通过绘图来说明他们的想法并确认他们的知识。绘制以下图表将帮助你进一步解释 ANN 以及它是如何学习的。
 
-![](../Images/8658016cf94fa6a946df2fe411aed9e3.png)
+![](img/8658016cf94fa6a946df2fe411aed9e3.png)
 
 *人工神经网络：学习步骤。图片作者。*
 
@@ -42,7 +42,7 @@ CNN 处理图像并经过以下步骤
 
 下面的图示展示了整个卷积神经网络（CNN）操作。
 
-![](../Images/a5e8416db925a357745b392bf1249f00.png)
+![](img/a5e8416db925a357745b392bf1249f00.png)
 
 *卷积神经网络。图片由作者提供。*
 
@@ -60,7 +60,7 @@ RNN 是 **递归神经网络**，主要用于时间序列问题，如股票市�
 
 ***每个机器学习算法都被认为是人工智能（AI），但不是所有的人工智能算法都被认为是机器学习。***
 
-![](../Images/b129ee5b601aa70a97d9e9f53de9352a.png)
+![](img/b129ee5b601aa70a97d9e9f53de9352a.png)
 
 *AI、ML 和 DL 之间的关系。图片由作者提供。*
 
@@ -68,7 +68,7 @@ RNN 是 **递归神经网络**，主要用于时间序列问题，如股票市�
 
 **深度学习**：你设计神经网络的架构，特征从提供的标记训练数据中被 ***自动*** 提取。
 
-![](../Images/090d0482e9f390f2e1dcec82640743c6.png)
+![](img/090d0482e9f390f2e1dcec82640743c6.png)
 
 *机器学习与深度学习之间的区别。图片由作者提供。*
 
@@ -80,25 +80,25 @@ RNN 是 **递归神经网络**，主要用于时间序列问题，如股票市�
 
 使用不平衡数据集创建模型会导致结果不佳，尤其是对更多训练数据（在我们这个例子中是非欺诈性交易）有偏向。你绝不应使用不平衡数据集来创建模型。解决方案是尽量收集更多平衡的数据，如果不可能，则可以使用**SMOTE（合成少数类过采样）**或**随机过采样（ROS）**对数据进行过采样。
 
-![](../Images/b3e7ada95649d93ce2ba6ccd232cc99f.png)
+![](img/b3e7ada95649d93ce2ba6ccd232cc99f.png)
 
-*SMOTE技术用于平衡数据集。图片来源：作者。*
+*SMOTE 技术用于平衡数据集。图片来源：作者。*
 
 **SMOTE**技术会生成新的少数类观察值，在这个例子中是欺诈性观察值。这些合成观察值几乎与原始欺诈性观察值相同。该技术迅速有效，但其生成的合成观察值类型不如其他过采样技术创造的独特观察值有用。
 
-### *Q5. 什么是正则化，L1和L2正则化有什么区别？*
+### *Q5. 什么是正则化，L1 和 L2 正则化有什么区别？*
 
 在机器学习中，正则化是对参数进行约束、规整或使系数估计向零收缩的过程。换句话说，这种技术会抑制学习更复杂或更灵活的模型，从而避免过拟合的风险。正则化基本上是随着模型复杂性的增加而增加惩罚，这有助于避免过拟合。
 
-**L1有效地去除不重要的特征**，过于激进的去除可能导致欠拟合。**L2则对每个特征进行加权**，而不是完全去除它们，这可能带来更好的准确性。简而言之，L1去除特征，而L2则不去除，而是对其权重进行规整。
+**L1 有效地去除不重要的特征**，过于激进的去除可能导致欠拟合。**L2 则对每个特征进行加权**，而不是完全去除它们，这可能带来更好的准确性。简而言之，L1 去除特征，而 L2 则不去除，而是对其权重进行规整。
 
 ### *Q6. 什么是迁移学习？它有什么用？*
 
-**迁移学习**允许你从现有的训练模型开始，通常是从像GitHub这样的来源获取现成的模型。你将现有的训练模型应用于你不同但紧密相关的观察数据。这节省了你部署和操作机器学习解决方案的时间，因为你是从一个预训练的模型开始的。
+**迁移学习**允许你从现有的训练模型开始，通常是从像 GitHub 这样的来源获取现成的模型。你将现有的训练模型应用于你不同但紧密相关的观察数据。这节省了你部署和操作机器学习解决方案的时间，因为你是从一个预训练的模型开始的。
 
 在迁移学习中，网络初始化为预训练的权重，仅将顶层全连接层初始化为随机权重。然后，整个网络会根据新数据进行微调。在这种模式下，即使数据集较小，也可以进行训练。这是因为网络已经过训练，因此可以在没有足够训练数据的情况下使用。
 
-![](../Images/135e1449807cc5af6751270c60629db0.png)
+![](img/135e1449807cc5af6751270c60629db0.png)
 
 *全学习 vs. 迁移学习。图像来源于作者。*
 
@@ -156,11 +156,11 @@ RMSE 是预测数值目标与真实数值答案之间的差距（即真实数值
 
 ### *Q13\. 什么是 ROC 和 AUC？它们用于什么？*
 
-**ROC（接收操作特征）**曲线，或ROC曲线，是一种图形绘制，展示了二元分类系统在其区分阈值变化时的诊断能力。
+**ROC（接收操作特征）**曲线，或 ROC 曲线，是一种图形绘制，展示了二元分类系统在其区分阈值变化时的诊断能力。
 
-![](../Images/e5f6090e3d150b6db5423705319c675d.png)
+![](img/e5f6090e3d150b6db5423705319c675d.png)
 
-*ROC曲线。[来源](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)。*
+*ROC 曲线。[来源](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)。*
 
 该曲线绘制了两个参数：
 
@@ -168,15 +168,15 @@ RMSE 是预测数值目标与真实数值答案之间的差距（即真实数值
 
 +   假正率
 
-ROC曲线在不同分类阈值下绘制真正率与假正率。降低分类阈值将更多项分类为正，从而增加假正例和真正例。
+ROC 曲线在不同分类阈值下绘制真正率与假正率。降低分类阈值将更多项分类为正，从而增加假正例和真正例。
 
-**ROC曲线下的面积（AUC）**衡量ROC曲线下方的整个二维面积。AUC用于相互比较/评估机器学习分类模型，并测量整个ROC曲线下的二维面积。
+**ROC 曲线下的面积（AUC）**衡量 ROC 曲线下方的整个二维面积。AUC 用于相互比较/评估机器学习分类模型，并测量整个 ROC 曲线下的二维面积。
 
-![](../Images/2cbc28b5174e287f36cf89099d41fd39.png)
+![](img/2cbc28b5174e287f36cf89099d41fd39.png)
 
 *AUC. [来源](https://developers.google.com/machine-learning/crash-course/classification/roc-and-auc)。*
 
-AUC提供了所有可能分类阈值下的性能总衡量。一种解释AUC的方法是模型将随机正例的排名高于随机负例的概率。
+AUC 提供了所有可能分类阈值下的性能总衡量。一种解释 AUC 的方法是模型将随机正例的排名高于随机负例的概率。
 
 祝你好运，无论你即将参加哪个面试。网上有大量的机器学习和人工智能信息，你可以从许多来源获取知识。我鼓励你利用免费资源、课程和类似的文章来深入了解机器学习。无论你从事哪个行业，机器学习和人工智能都会影响你的工作，因此请为自己装备所需的知识。
 
@@ -194,11 +194,11 @@ AUC提供了所有可能分类阈值下的性能总衡量。一种解释AUC的�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -206,12 +206,12 @@ AUC提供了所有可能分类阈值下的性能总衡量。一种解释AUC的�
 
 +   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
-+   [20个问题（附答案）检测虚假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
++   [20 个问题（附答案）检测虚假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/01/20-questions-detect-fake-data-scientists-chatgpt-1.html)
 
-+   [20个问题（附答案）检测虚假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
++   [20 个问题（附答案）检测虚假数据科学家：ChatGPT…](https://www.kdnuggets.com/2023/02/20-questions-detect-fake-data-scientists-chatgpt-2.html)
 
 +   [经验丰富的专业人士 SQL 面试问题](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
 
 +   [如何回答数据科学编程面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [15个你必须了解的 Python 编程面试问题（适用于数据科学）](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个你必须了解的 Python 编程面试问题（适用于数据科学）](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)

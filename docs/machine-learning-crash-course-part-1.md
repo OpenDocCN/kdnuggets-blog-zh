@@ -1,6 +1,6 @@
 # 机器学习速成课程：第一部分
 
-> 原文：[https://www.kdnuggets.com/2017/05/machine-learning-crash-course-part-1.html](https://www.kdnuggets.com/2017/05/machine-learning-crash-course-part-1.html)
+> 原文：[`www.kdnuggets.com/2017/05/machine-learning-crash-course-part-1.html`](https://www.kdnuggets.com/2017/05/machine-learning-crash-course-part-1.html)
 
 **由丹尼尔·耿和香农·史密斯，UC 伯克利。**
 
@@ -20,21 +20,21 @@
 
 假设你是一台计算机，拥有一组苹果和橙子的图像。从每张图像中，你可以推断出水果的颜色和大小，并且你想将这些图像分类为苹果或橙子。许多机器学习算法的第一步是获取**标记的训练数据**。在我们的例子中，这意味着获得大量的水果图像，每张图像都标记为苹果或橙子。从这些图像中，我们可以提取颜色和大小信息，然后观察它们与苹果或橙子的关系。例如，我们标记的训练数据可能会绘制成如下图样：
 
-![](../Images/a387d319ffeb0c4fa59ad5e29d4074d2.png)
+![](img/a387d319ffeb0c4fa59ad5e29d4074d2.png)
 
 红色的 x 标记的是苹果，橙色的 x 标记的是橙子。你可能会注意到数据中存在一个模式。苹果似乎集中在图表的左侧，因为它们大多是红色的，而橙子则集中在右侧，因为它们大多是橙色的。我们希望我们的算法能够学习这些类型的模式。
 
 对于这个特定问题，我们的目标是创建一个算法，在两个标记的组之间绘制一条线，这条线称为**决策边界**。我们数据的最简单决策边界可能看起来像这样：
 
-![](../Images/38cece74c80ce71dd532286c795ae5a0.png)
+![](img/38cece74c80ce71dd532286c795ae5a0.png)
 
 只是一条在苹果和橙子之间的直线。然而，更复杂的机器学习算法可能最终会绘制出更复杂的决策边界，如下所示：
 
-![](../Images/250f46298856796d339c0b6fd9429d8d.png)
+![](img/250f46298856796d339c0b6fd9429d8d.png)
 
 我们的假设是，我们在上面的*标记训练数据*中绘制的用于区分苹果图像和橙子图像的线条，将能够在任何图像中区分苹果和橙子。**换句话说，通过给我们的算法提供苹果和橙子的示例，它可以将经验推广到它以前从未遇到过的苹果和橙子的图像上。** 例如，如果我们给出一个水果的图像，如下面的蓝色 X，我们可以根据我们绘制的决策边界将其分类为橙子：
 
-![](../Images/1666829e250366f626ee75ef803eb249.png)
+![](img/1666829e250366f626ee75ef803eb249.png)
 
 这就是机器学习的威力。我们获取一些训练数据，运行一个机器学习算法，绘制出数据上的决策边界，然后将我们学到的知识推广到全新的数据上。
 
@@ -44,17 +44,17 @@
 
 假设我们有一些标记好的训练数据。特别是，假设我们有各种房子的价格与其平方面积的关系。如果我们将这些信息可视化成图表，它看起来是这样的：
 
-![](../Images/c55ec432a2a39d3b9429298b38c25a82.png)
+![](img/c55ec432a2a39d3b9429298b38c25a82.png)
 
 每一个 X 代表了一个不同的房子，每个房子都有不同的价格和平方面积。注意到虽然数据中有一些变化（换句话说，每个数据点有些散乱），但也存在一个模式：房子越大，价格也越高。我们希望我们的算法能找到并利用这一模式，根据房屋大小预测房价。
 
 仅通过直观地观察训练数据，我们可以看到图表中大多数房子似乎落在一个对角线区域上。我们可以概括这个想法，认为*所有*的房子都有很高的概率出现在对角线的数据点簇上。例如，在下面的图表中，房子处于绿色 X 位置的可能性很高，而处于红色 X 位置的可能性则很低。
 
-![](../Images/626b435612aeebffcd8ebf0ac190ee6d.png)
+![](img/626b435612aeebffcd8ebf0ac190ee6d.png)
 
 现在我们可以进一步概括，问一下，对于任意给定的平方英尺，房子的价值是多少？当然，得到一个精确的答案是非常困难的。然而，得到一个近似答案要容易得多。为此，我们绘制一条线穿过数据簇，尽可能靠近每个数据点。这条线称为**预测器**，根据房子的平方英尺预测房价。对于预测器上的任何点，高概率的情况下，该平方英尺的房子会有那个价格。从某种意义上说，我们可以说预测器代表了给定平方英尺房子的“平均”价格。
 
-![](../Images/70f95bdcda2ba2120efef4b3fefa9823.png)
+![](img/70f95bdcda2ba2120efef4b3fefa9823.png)
 
 预测器不一定非得是线性的。它可以是你能想象到的任何类型的函数或模型——二次函数、正弦函数，甚至是任意函数都可以使用。然而，使用最复杂的模型作为预测器并不总是有效；不同的函数对不同的问题更为有效，程序员需要找出合适的模型。
 
@@ -62,13 +62,13 @@
 
 <https://i.imgur.com/9C5ZeYa.mp4?_=1>
 
-[https://i.imgur.com/9C5ZeYa.mp4](https://i.imgur.com/9C5ZeYa.mp4)
+[`i.imgur.com/9C5ZeYa.mp4`](https://i.imgur.com/9C5ZeYa.mp4)
 
 在这种情况下，我们可以再次将预测器拟合到数据中。但不是绘制一条线通过数据，我们需要绘制一个平面，因为最能预测房价的函数是一个二变量函数。
 
 <https://i.imgur.com/m2cTv6d.mp4?_=2>
 
-[https://i.imgur.com/m2cTv6d.mp4](https://i.imgur.com/m2cTv6d.mp4)
+[`i.imgur.com/m2cTv6d.mp4`](https://i.imgur.com/m2cTv6d.mp4)
 
 我们已经看到了一些关于一个和两个输入变量的示例，但许多机器学习应用需要考虑数百甚至数千个变量。虽然人类遗憾地无法可视化超过三维的情况，但我们刚刚学到的相同原则也适用于这些系统。
 
@@ -76,19 +76,19 @@
 
 如我们之前提到的，有许多不同类型的预测器。在我们关于房价的例子中，我们使用了线性模型来逼近我们的数据。线性预测器的数学形式大致如下：
 
-![方程式](../Images/e02cc4770e26d5e9ec32892fd8ec10db.png)
+![方程式](img/e02cc4770e26d5e9ec32892fd8ec10db.png)
 
 每个*x*代表一个不同的输入特征，如平方英尺或生活成本，每个*c*被称为参数或权重。某个特定权重越大，模型对其对应特征的考虑就越多。例如，平方英尺是预测房价的一个很好的指标，因此我们的算法应通过增加与平方英尺相关的系数来给予平方英尺更多考虑。相比之下，如果我们的数据包括房间的电源插座数量，我们的算法可能会给予它相对较低的权重，因为插座数量与房价的关系不大。
 
-在我们基于平方英尺预测房价的例子中，由于我们只考虑一个变量，我们的模型只需要一个输入特征，即一个x：
+在我们基于平方英尺预测房价的例子中，由于我们只考虑一个变量，我们的模型只需要一个输入特征，即一个 x：
 
-![方程](../Images/f59fb89f5a42f90a7918d3e48820f192.png)
+![方程](img/f59fb89f5a42f90a7918d3e48820f192.png)
 
 这个方程式可能在这个形式下更容易识别：
 
-![方程](../Images/b1aea269c89c8b7e89ab82f8e7faffd6.png)
+![方程](img/b1aea269c89c8b7e89ab82f8e7faffd6.png)
 
-*y(x)*是我们的输出，在这种情况下是房价，而*x*是我们的特征，在这种情况下是房子的大小。*c[0]*是y截距，用于考虑房子的基础价格。
+*y(x)*是我们的输出，在这种情况下是房价，而*x*是我们的特征，在这种情况下是房子的大小。*c[0]*是 y 截距，用于考虑房子的基础价格。
 
 现在的问题是：机器学习算法如何选择*c[2]*和*c[1]*以使直线能够最好地预测房价？
 
@@ -100,7 +100,7 @@
 
 最佳预测器将最小化成本函数的输出，换句话说，它将最小化成本。为了可视化这一点，让我们看看下面的三个预测函数：
 
-![](../Images/c7f433ebd9f99c6f345babd7473fc5e1.png)
+![](img/c7f433ebd9f99c6f345babd7473fc5e1.png)
 
 预测器*a*和*c*与数据的拟合程度并不好，我们的成本函数应该给这两条直线一个高成本。另一方面，预测器*b*似乎与数据拟合得非常好，因此我们的成本函数应该给它一个非常低的成本。
 
@@ -110,23 +110,23 @@
 
 让我们拆解一下“均方误差”这个名字。在这里，误差指的是数据点与预测值之间的垂直距离，或者只是差值 *( x[i] - y[i] )*。我们可以使用下面的图来可视化误差，其中每一个条形图代表不同的 *( x[i] - y[i] )*。
 
-![](../Images/9153ea088522de8a3022c36a6bed045b.png)
+![](img/9153ea088522de8a3022c36a6bed045b.png)
 
 对于单个数据点 *( x[i] , y[i] )*，其中 *x[i]* 是房屋的面积，而 *y[i]* 是房屋的价格，预测器 *y(x)* 的平方误差是：
 
-![公式](../Images/a000239d4905831c739605fcee3a6e0c.png)
+![公式](img/a000239d4905831c739605fcee3a6e0c.png)
 
 误差的平方值的好处在于一切都是正值。这样我们可以实际最小化平方误差。现在我们对所有数据点取均值，即得到均方误差：
 
-![公式](../Images/318c18158dabf8c819f6e02f6f76abf6.png)
+![公式](img/318c18158dabf8c819f6e02f6f76abf6.png)
 
-在这里，我们总结了所有的平方误差，并除以N，即我们拥有的数据点的数量，这只是平方误差的平均值。因此，就是均方误差。
+在这里，我们总结了所有的平方误差，并除以 N，即我们拥有的数据点的数量，这只是平方误差的平均值。因此，就是均方误差。
 
 ### 梯度下降
 
 当我们绘制成本函数（只有两个变量）时，它会看起来像这样：
 
-![](../Images/320b648014287fa2b888287aa66d5bef.png)
+![](img/320b648014287fa2b888287aa66d5bef.png)
 
 现在，很明显这个成本函数的最小值在哪里。我们可以用肉眼估算。然而，请记住我们只有一个特征——面积。在现实中，几乎所有现代机器学习算法的应用都涉及多个特征。在某些情况下，使用的参数多达[tens of millions](https://www.nvidia.cn/content/tesla/pdf/machine-learning/imagenet-classification-with-deep-convolutional-nn.pdf)——试图想象一个千万维的空间真是太有趣了！
 
@@ -140,35 +140,35 @@
 
 换句话说，实际上机器学习只是模式识别。机器学习算法通过在训练数据中绘制线条来学习模式，然后将其看到的模式推广到新数据。但这引出了一个问题，机器学习是否真的在“学习”？谁能说学习不是模式识别呢？
 
-> **编辑注:** 如果你喜欢这篇文章，可能会想查看[Machine Learning @ Berkeley blog](https://ml.berkeley.edu/blog)的第2部分和第3部分：
+> **编辑注:** 如果你喜欢这篇文章，可能会想查看[Machine Learning @ Berkeley blog](https://ml.berkeley.edu/blog)的第二部分和第三部分：
 > 
-> +   [机器学习速成课程：第2部分](https://ml.berkeley.edu/blog/2016/12/24/tutorial-2/)
+> +   [机器学习速成课程：第二部分](https://ml.berkeley.edu/blog/2016/12/24/tutorial-2/)
 > +   
-> +   [机器学习速成课程：第3部分](https://ml.berkeley.edu/blog/2017/02/04/tutorial-3/)
+> +   [机器学习速成课程：第三部分](https://ml.berkeley.edu/blog/2017/02/04/tutorial-3/)
 > +   
-> **[Daniel Geng](https://dangeng.github.io/)** 是来自密歇根州安娜堡的UC Berkeley新生。你可以在某个有风景的地方看到他编程、做数学、物理或玩梗。
+> **[Daniel Geng](https://dangeng.github.io/)** 是来自密歇根州安娜堡的 UC Berkeley 新生。你可以在某个有风景的地方看到他编程、做数学、物理或玩梗。
 > 
-> **[Shannon Shih](http://shannonsh.github.io/)** 是一位艺术家和程序员，也是UC Berkeley的网络工程助理。
+> **[Shannon Shih](http://shannonsh.github.io/)** 是一位艺术家和程序员，也是 UC Berkeley 的网络工程助理。
 > 
 > [原文](https://ml.berkeley.edu/blog/2016/11/06/tutorial-1/)。经许可转载。
 
 **相关:**
 
-+   [保持简单！如何理解梯度下降算法](/2017/04/simple-understand-gradient-descent-algorithm.html)
++   保持简单！如何理解梯度下降算法
 
-+   [机器学习关键术语解释](/2016/05/machine-learning-key-terms-explained.html)
++   机器学习关键术语解释
 
-+   [掌握Python机器学习的7个步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -176,12 +176,12 @@
 
 +   [免费人工智能和深度学习速成课程](https://www.kdnuggets.com/2022/07/free-artificial-intelligence-deep-learning-crash-course.html)
 
-+   [免费Python速成课程](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)
++   [免费 Python 速成课程](https://www.kdnuggets.com/2022/07/free-python-crash-course.html)
 
-+   [免费MLOps速成课程](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)
++   [免费 MLOps 速成课程](https://www.kdnuggets.com/2022/08/free-mlops-crash-course.html)
 
 +   [免费的中级 Python 编程速成课程](https://www.kdnuggets.com/2022/12/free-intermediate-python-programming-crash-course.html)
 
 +   [通过这个免费的 DevOps 速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
 
-+   [实用强化学习课程第 3 部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
++   [实用强化学习课程第三部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)

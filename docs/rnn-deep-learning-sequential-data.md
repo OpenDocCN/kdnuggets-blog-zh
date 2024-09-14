@@ -1,12 +1,12 @@
 # 循环神经网络（RNN）：用于序列数据的深度学习
 
-> 原文：[https://www.kdnuggets.com/2020/07/rnn-deep-learning-sequential-data.html](https://www.kdnuggets.com/2020/07/rnn-deep-learning-sequential-data.html)
+> 原文：[`www.kdnuggets.com/2020/07/rnn-deep-learning-sequential-data.html`](https://www.kdnuggets.com/2020/07/rnn-deep-learning-sequential-data.html)
 
-[评论](#comments)
+评论
 
 循环神经网络（RNN）是一类人工神经网络，可以在[深度学习](https://blog.exxactcorp.com/category/deep-learning/)中处理一系列输入，并在处理下一序列的输入时保留其状态。传统神经网络会处理一个输入并移动到下一个，忽略其序列。诸如时间序列的数据具有需要遵循的顺序以便理解。传统的前馈网络无法理解这一点，因为每个输入被假定为彼此独立，而在时间序列设置中，每个输入依赖于先前的输入。
 
-![图像](../Images/ebdc0da1eb3f72438224bb2b01b4b3f4.png)
+![图像](img/ebdc0da1eb3f72438224bb2b01b4b3f4.png)
 
 [插图 1: 来源](https://www.dummies.com/programming/big-data/data-science/deep-learning-and-recurrent-neural-networks/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -38,21 +38,21 @@
 
 ### **RNN 与自回归模型**
 
-自回归模型是指将具有时间维度的数据的值回归到先前的值，直到用户指定的某个点。RNN的工作方式相同，但明显的区别在于RNN查看所有数据（即不需要用户指定特定的时间段）。
+自回归模型是指将具有时间维度的数据的值回归到先前的值，直到用户指定的某个点。RNN 的工作方式相同，但明显的区别在于 RNN 查看所有数据（即不需要用户指定特定的时间段）。
 
 ***Y******t ******= β******0****** + β******1******y******t-1****** + Ɛ******t***
 
 上述 AR 模型是一个阶数为 1 的 AR(1) 模型，它以直接前值来预测下一时间段的值 (yt)。由于这是一个线性模型，它需要某些线性回归的假设，特别是因变量和自变量之间的线性假设。在这种情况下，***Y******t ***和 ***y******t-1 ***必须具有线性关系。此外，还有其他检查，例如自相关检查，需要确定预测 ***Y******t******的适当阶数。***
 
-循环神经网络无需线性或模型阶数检查。它可以自动检查整个数据集以预测下一序列。如下面的图像所示，一个神经网络包含3个隐藏层，具有相等的权重、偏置和激活函数，并用于预测输出。
+循环神经网络无需线性或模型阶数检查。它可以自动检查整个数据集以预测下一序列。如下面的图像所示，一个神经网络包含 3 个隐藏层，具有相等的权重、偏置和激活函数，并用于预测输出。
 
-![图像](../Images/17cf506bfd51128920b1b80d5e555bb9.png)
+![图像](img/17cf506bfd51128920b1b80d5e555bb9.png)
 
 [来源](https://hackernoon.com/rnn-or-recurrent-neural-network-for-noobs-a9afbb00e860)
 
 这些隐藏层可以合并成一个单一的递归隐藏层。递归神经元现在存储所有之前步骤的输入，并将这些信息与当前步骤的输入合并。
 
-![图像](../Images/13f5e5872ab6f20539c8e81982e67afb.png)
+![图像](img/13f5e5872ab6f20539c8e81982e67afb.png)
 
 [来源](https://hackernoon.com/rnn-or-recurrent-neural-network-for-noobs-a9afbb00e860)
 
@@ -80,7 +80,7 @@
 
 长短期记忆网络是一种特殊的递归神经网络，能够处理长期依赖问题，而不会受到梯度不稳定的影响。
 
-![图像](../Images/b60656880e1eccebad51931e5ae7c94b.png)
+![图像](img/b60656880e1eccebad51931e5ae7c94b.png)
 
 [来源](https://www.superdatascience.com/blogs/recurrent-neural-networks-rnn-lstm-variation/)
 
@@ -168,17 +168,17 @@ Epoch 4/4
 
 **相关内容：**
 
-+   [LSTM 用于时间序列预测](/2020/04/lstm-time-series-prediction.html)
++   LSTM 用于时间序列预测
 
-+   [NLP 中的深度学习：ANNs、RNNs 和 LSTMs 解析！](/2019/08/deep-learning-nlp-explained.html)
++   NLP 中的深度学习：ANNs、RNNs 和 LSTMs 解析！
 
-+   [理解应用于 LSTM 的反向传播](/2019/05/understanding-backpropagation-applied-lstm.html)
++   理解应用于 LSTM 的反向传播
 
 ### 更多相关内容
 
-+   [神经网络与深度学习：教科书（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
++   [神经网络与深度学习：教科书（第 2 版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
 
-+   [深度神经网络不会引导我们走向AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
++   [深度神经网络不会引导我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
 
 +   [使用最先进的深度学习进行可解释的预测和即时预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)
 

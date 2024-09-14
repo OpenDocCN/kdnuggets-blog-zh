@@ -1,8 +1,8 @@
-# Python中的情感分析：超越词袋模型
+# Python 中的情感分析：超越词袋模型
 
-> 原文：[https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)
+> 原文：[`www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words`](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)
 
-![Python中的情感分析：超越词袋模型](../Images/21b240ebcad7d65a1085b57a36dd9f3d.png)
+![Python 中的情感分析：超越词袋模型](img/21b240ebcad7d65a1085b57a36dd9f3d.png)
 
 图片由 [DALL-E](https://openai.com/dall-e-2) 创建
 
@@ -12,31 +12,31 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
-在本文中，我们将使用Twitter数据进行一个简要的案例研究。最后，你将看到一个对现实生活有重大影响的案例研究，这肯定会引起你的兴趣。但首先，让我们从基础开始。
+在本文中，我们将使用 Twitter 数据进行一个简要的案例研究。最后，你将看到一个对现实生活有重大影响的案例研究，这肯定会引起你的兴趣。但首先，让我们从基础开始。
 
 # 什么是情感分析？
 
-情感分析是一种预测情感的方法，就像数字心理学家一样。借助这个你创建的心理学家，你将掌控你分析文本的命运。你可以像著名心理学家弗洛伊德一样进行分析，或者只是像一个心理学家一样存在，每次会话收费10美元。
+情感分析是一种预测情感的方法，就像数字心理学家一样。借助这个你创建的心理学家，你将掌控你分析文本的命运。你可以像著名心理学家弗洛伊德一样进行分析，或者只是像一个心理学家一样存在，每次会话收费 10 美元。
 
 就像你的心理学家倾听和理解你的情感一样，情感分析对文本（如评论、评价或推文）做了同样的事情，正如我们在下一节中将要做的那样。为了做到这一点，让我们开始对准备好的数据集进行案例研究。
 
-# 案例研究：Twitter数据的情感分析
+# 案例研究：Twitter 数据的情感分析
 
-为了进行情感分析，我们将使用来自Kaggle的数据集。这个数据集是通过使用Twitter API收集的。这里是这个数据集的链接：[https://www.kaggle.com/datasets/kazanova/sentiment140](https://www.kaggle.com/datasets/kazanova/sentiment140)
+为了进行情感分析，我们将使用来自 Kaggle 的数据集。这个数据集是通过使用 Twitter API 收集的。这里是这个数据集的链接：[`www.kaggle.com/datasets/kazanova/sentiment140`](https://www.kaggle.com/datasets/kazanova/sentiment140)
 
 现在，让我们开始探索数据集。
 
 ## 探索数据集
 
-现在，在进行情感分析之前，让我们探索一下数据集。要读取它，请使用编码。因为这个原因，我们将在之后添加列名。你可以增加数据探索的方法。Head、info和describe方法会给你很好的提示；让我们看看代码。
+现在，在进行情感分析之前，让我们探索一下数据集。要读取它，请使用编码。因为这个原因，我们将在之后添加列名。你可以增加数据探索的方法。Head、info 和 describe 方法会给你很好的提示；让我们看看代码。
 
 ```py
 import pandas as pd
@@ -52,21 +52,21 @@ head, info, describe
 
 这是输出结果。
 
-![Python中的情感分析：超越词袋模型](../Images/46989683bdc41a76858772472433372d.png)
+![Python 中的情感分析：超越词袋模型](img/46989683bdc41a76858772472433372d.png)
 
 当然，如果您的项目没有图像限制，您可以逐一运行这些方法。让我们看看我们从这些探索方法中获得的见解。
 
 ### 见解
 
-+   数据集包含160万条推文，任何列中都没有缺失值。
++   数据集包含 160 万条推文，任何列中都没有缺失值。
 
-+   每条推文都有一个目标情感（0表示负面，2表示中性，4表示正面）、一个ID、一个时间戳、一个标志（查询或'NO_QUERY'）、用户名和文本。
++   每条推文都有一个目标情感（0 表示负面，2 表示中性，4 表示正面）、一个 ID、一个时间戳、一个标志（查询或'NO_QUERY'）、用户名和文本。
 
 +   情感目标是平衡的，正负标签数量相等。
 
 ## 可视化数据集
 
-太棒了，我们对数据集有了统计和结构上的知识。现在，让我们创建一些可视化图表来描绘它。现在，我们都知道最尖锐的情感，正面和负面。为了查看哪些单词会被使用，我们将使用一个叫做[wordcloud](https://www.stratascratch.com/blog/top-18-python-libraries-a-data-scientist-should-know/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sentiment+analysis)的python库。
+太棒了，我们对数据集有了统计和结构上的知识。现在，让我们创建一些可视化图表来描绘它。现在，我们都知道最尖锐的情感，正面和负面。为了查看哪些单词会被使用，我们将使用一个叫做[wordcloud](https://www.stratascratch.com/blog/top-18-python-libraries-a-data-scientist-should-know/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sentiment+analysis)的 python 库。
 
 该库将根据数据集中单词的频率可视化数据集。如果单词使用频繁，你可以通过查看其大小来理解它们，这与单词的使用量呈正相关，单词越大，使用频率越高。
 
@@ -105,7 +105,7 @@ plt.show()
 
 这是输出结果。
 
-![Python中的情感分析：超越词袋模型](../Images/89dd8bde1eb6668bf2afbcf4285f942e.png)
+![Python 中的情感分析：超越词袋模型](img/89dd8bde1eb6668bf2afbcf4285f942e.png)
 
 图中的“Thank”和“now”词语看起来更积极。然而，“work”和“now”则显得有趣，因为这些词似乎经常出现在负面推文中。
 
@@ -129,7 +129,7 @@ plt.show()
 
 1.  评估模型（带绘图）
 
-现在，处理160万条推文可能对你的计算机或平台来说是一个巨大的工作量；因此，我最初选择了5万条正面推文和5万条负面推文。
+现在，处理 160 万条推文可能对你的计算机或平台来说是一个巨大的工作量；因此，我最初选择了 5 万条正面推文和 5 万条负面推文。
 
 ```py
 # Since we need to use a smaller dataset due to resource constraints, let's sample 100k tweets
@@ -202,13 +202,13 @@ plt.show()
 
 这是输出结果。
 
-![Python中的情感分析：超越词袋模型](../Images/467019001728241d68e666f2bb0836e6.png)
+![Python 中的情感分析：超越词袋模型](img/467019001728241d68e666f2bb0836e6.png)
 
 ## 情感分析的最终见解
 
-+   **训练准确率**：准确率从接近80%开始，并在第十个周期内不断增加到接近100%。所以，模型看起来在有效学习。
++   **训练准确率**：准确率从接近 80%开始，并在第十个周期内不断增加到接近 100%。所以，模型看起来在有效学习。
 
-+   **验证准确率**：验证准确率再次从80%左右开始，并迅速稳定增长，这可能表明模型未能对未见数据进行泛化。
++   **验证准确率**：验证准确率再次从 80%左右开始，并迅速稳定增长，这可能表明模型未能对未见数据进行泛化。
 
 # 案例研究建议：总统选举情感分析
 
@@ -218,19 +218,19 @@ plt.show()
 
 发表在《计算机科学与通信的最新进展》中，介绍了一种基于机器学习的方法来预测选举结果。[这里](https://www.researchgate.net/publication/343310126_Predicting_Election_Results_from_Twitter_Using_Machine_Learning_Algorithms)可以阅读全文。
 
-总之，他们进行了情感分析，并在2019年AP大会选举中达到了94.2%的准确率。看起来他们确实非常接近。
+总之，他们进行了情感分析，并在 2019 年 AP 大会选举中达到了 94.2%的准确率。看起来他们确实非常接近。
 
-如果你计划做一个作品集项目、类似的研究，或者打算在这个案例研究的基础上进一步深入，你可以使用Twitter API或x API。以下是计划：[https://developer.twitter.com/en/products/twitter-api](https://developer.twitter.com/en/products/twitter-api)
+如果你计划做一个作品集项目、类似的研究，或者打算在这个案例研究的基础上进一步深入，你可以使用 Twitter API 或 x API。以下是计划：[`developer.twitter.com/en/products/twitter-api`](https://developer.twitter.com/en/products/twitter-api)
 
-![Python中的情感分析：超越词袋模型](../Images/36b4c517916b26cada362022d6ff15ea.png)
+![Python 中的情感分析：超越词袋模型](img/36b4c517916b26cada362022d6ff15ea.png)
 
-在重大体育或政治事件后，你可以对Twitter上的话题标签进行情感分析。在2024年，许多国家（如美国）将举行选举，你可以查看[新闻](https://www.deccanherald.com/india/2024-year-of-elections-60-countries-to-head-for-polls-most-in-a-single-year-till-2048-2838106)。
+在重大体育或政治事件后，你可以对 Twitter 上的话题标签进行情感分析。在 2024 年，许多国家（如美国）将举行选举，你可以查看[新闻](https://www.deccanherald.com/india/2024-year-of-elections-60-countries-to-head-for-polls-most-in-a-single-year-till-2048-2838106)。
 
 # 最后的想法
 
-数据科学的力量在这个例子中得到了真正的体现。今年，我们将见证全球范围内的众多选举，因此如果你希望吸引对你的项目的关注，这可能是一个好主意。如果你是一个初学者，正在寻找学习数据科学的方法，你可以在StrataScratch上找到许多现实生活中的项目、[数据科学面试问题](https://www.stratascratch.com/blog/40-data-science-interview-questions-from-top-companies/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sentiment+analysis)和博客文章，如[数据科学项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sentiment+analysis)。
+数据科学的力量在这个例子中得到了真正的体现。今年，我们将见证全球范围内的众多选举，因此如果你希望吸引对你的项目的关注，这可能是一个好主意。如果你是一个初学者，正在寻找学习数据科学的方法，你可以在 StrataScratch 上找到许多现实生活中的项目、[数据科学面试问题](https://www.stratascratch.com/blog/40-data-science-interview-questions-from-top-companies/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sentiment+analysis)和博客文章，如[数据科学项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+sentiment+analysis)。
 
-[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一位数据科学家和产品策略专家。他还是一名兼职教授，教授分析课程，并且是StrataScratch的创始人，该平台帮助数据科学家准备面试，提供来自顶级公司的真实面试问题。Nate撰写了关于职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并覆盖所有SQL相关内容。
+[](https://twitter.com/StrataScratch)****[Nate Rosidi](https://twitter.com/StrataScratch)**** 是一位数据科学家和产品策略专家。他还是一名兼职教授，教授分析课程，并且是 StrataScratch 的创始人，该平台帮助数据科学家准备面试，提供来自顶级公司的真实面试问题。Nate 撰写了关于职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并覆盖所有 SQL 相关内容。
 
 ### 更多相关主题
 
@@ -240,7 +240,7 @@ plt.show()
 
 +   [使用同态加密对加密数据进行情感分析](https://www.kdnuggets.com/2022/12/zama-sentiment-analysis-encrypted-data-homomorphic-encryption.html)
 
-+   [如何使用Hugging Face Transformers微调BERT进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
++   [如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
 
 +   [超越 Numpy 和 Pandas：发掘鲜为人知的 Python 库的潜力](https://www.kdnuggets.com/2023/08/beyond-numpy-pandas-unlocking-potential-lesserknown-python-libraries.html)
 

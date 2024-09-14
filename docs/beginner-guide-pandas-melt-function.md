@@ -1,8 +1,8 @@
 # Pandas Melt 函数初学者指南
 
-> 原文：[https://www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html](https://www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html)
+> 原文：[`www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html`](https://www.kdnuggets.com/2023/03/beginner-guide-pandas-melt-function.html)
 
-![Pandas Melt 函数初学者指南](../Images/80237e1988db8ea9c1e495a23e2040a3.png)
+![Pandas Melt 函数初学者指南](img/80237e1988db8ea9c1e495a23e2040a3.png)
 
 图片来自 [catalyststuff](https://www.freepik.com/free-vector/cute-panda-reading-book-cartoon_11919389.htm#query=pandas&position=32&from_view=search&track=sph) 在 [Freepik](https://www.freepik.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,7 +28,7 @@ df = pd.read_csv('time series data.csv')
 df.head()
 ```
 
-![Pandas Melt 函数初学者指南](../Images/360060f8bcda075d189128bba9fa03c8.png)
+![Pandas Melt 函数初学者指南](img/360060f8bcda075d189128bba9fa03c8.png)
 
 在上述数据集中，每行表示销售发生的时间。另一方面，列是产品类型和其他支持类别（价格、温度）。
 
@@ -42,7 +42,7 @@ Pandas melt 函数用于将数据集从宽格式转换成长格式。什么是�
 pd.melt(df)
 ```
 
-![Pandas Melt 函数初学者指南](../Images/340da26a4d717140dda3b1bda971be6b.png)
+![Pandas Melt 函数初学者指南](img/340da26a4d717140dda3b1bda971be6b.png)
 
 我们从上面的输出中得到长格式数据集。数据集仅包含两列；‘variable’，它是宽格式数据集中的列名，以及‘value’，它是宽格式数据集中每行的数据值。
 
@@ -60,7 +60,7 @@ pd.melt(
 ) 
 ```
 
-![初学者 Pandas Melt 函数指南](../Images/83160460f23bc52fd97ed9b83a09812d.png)
+![初学者 Pandas Melt 函数指南](img/83160460f23bc52fd97ed9b83a09812d.png)
 
 在上述代码中，我们将‘t’列指定为数据标识符，将‘ProductP1’和‘ProductP2’指定为类别。为了便于阅读，我们将变量名称更改为‘Product’，值更改为‘Sales’。
 
@@ -77,7 +77,7 @@ df.melt(
 )
 ```
 
-![初学者 Pandas Melt 函数指南](../Images/83160460f23bc52fd97ed9b83a09812d.png)
+![初学者 Pandas Melt 函数指南](img/83160460f23bc52fd97ed9b83a09812d.png)
 
 根据你的数据处理流程，你可以选择不同的数据融化方法。两种方法的结果完全相同。
 
@@ -93,7 +93,7 @@ pd.melt(
 ) 
 ```
 
-![初学者 Pandas Melt 函数指南](../Images/3070b66250c7efbb7e3cb786be07687d.png)
+![初学者 Pandas Melt 函数指南](img/3070b66250c7efbb7e3cb786be07687d.png)
 
 结果将会是‘t’和‘price’列作为数据集标识符。上述方法在你的宽格式数据集中有多个键时尤其有用，而这些键你不想删除。
 
@@ -111,10 +111,10 @@ pd.melt(
 
 +   [Python 函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)
 
-+   [你需要了解的关于梯度下降和成本函数的5个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
++   [你需要了解的关于梯度下降和成本函数的 5 个概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
 
 +   [什么是函数？](https://www.kdnuggets.com/2022/11/function.html)
 
-+   [数据科学中的3个SQL聚合函数面试问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)
++   [数据科学中的 3 个 SQL 聚合函数面试问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)
 
 +   [多标签自然语言处理：类别不平衡和损失函数的分析……](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)

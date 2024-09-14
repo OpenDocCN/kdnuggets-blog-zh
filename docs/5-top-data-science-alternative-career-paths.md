@@ -1,22 +1,22 @@
-# 5种数据科学替代职业路径
+# 5 种数据科学替代职业路径
 
-> 原文：[https://www.kdnuggets.com/5-top-data-science-alternative-career-paths](https://www.kdnuggets.com/5-top-data-science-alternative-career-paths)
+> 原文：[`www.kdnuggets.com/5-top-data-science-alternative-career-paths`](https://www.kdnuggets.com/5-top-data-science-alternative-career-paths)
 
-![5种数据科学替代职业路径](../Images/dd02b1d6240bba7b700d906d4bbaff71.png)
+![5 种数据科学替代职业路径](img/dd02b1d6240bba7b700d906d4bbaff71.png)
 
 图片由编辑提供
 
-数据科学仍然是年度最佳职业，尤其是在生成式AI的热潮中。然而，数据科学职位的需求往往远低于申请人数；显著的是，许多雇主仍然更倾向于招聘高级数据科学家而非初级数据科学家。这就是为什么许多学习数据科学的学生很难找到工作的原因。
+数据科学仍然是年度最佳职业，尤其是在生成式 AI 的热潮中。然而，数据科学职位的需求往往远低于申请人数；显著的是，许多雇主仍然更倾向于招聘高级数据科学家而非初级数据科学家。这就是为什么许多学习数据科学的学生很难找到工作的原因。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -30,9 +30,9 @@
 
 机器学习工程师更关注机器学习部署到生产中的技术方面，比如结构如何设计或生产如何扩展。另一方面，数据科学家则专注于从数据中提取洞察，并提供解决方案以解决业务问题。
 
-这两者都共享数据分析和机器学习的基础，但不同之处使这些职业路径有所区分。如果你觉得机器学习工程师职位适合你，你应该专注于学习更多关于软件工程实践和MLOps的知识，以便转行。
+这两者都共享数据分析和机器学习的基础，但不同之处使这些职业路径有所区分。如果你觉得机器学习工程师职位适合你，你应该专注于学习更多关于软件工程实践和 MLOps 的知识，以便转行。
 
-文章 [如何成为机器学习工程师 by Nisha Arya](/2022/05/become-machine-learning-engineer.html) 也可以帮助你开启这条职业道路。
+文章 如何成为机器学习工程师 by Nisha Arya 也可以帮助你开启这条职业道路。
 
 # 2\. 数据工程师
 
@@ -40,19 +40,19 @@
 
 数据工程师的工作集中于后端基础设施，以支持任何数据任务，并维护数据管理和存储的架构。数据工程师还专注于根据需求构建数据管道，包括数据的收集、转换和交付。
 
-数据工程师和数据科学家都处理数据，但数据工程师更侧重于数据基础设施。这意味着你必须掌握包括SQL、数据库管理和大数据技术在内的附加技能。
+数据工程师和数据科学家都处理数据，但数据工程师更侧重于数据基础设施。这意味着你必须掌握包括 SQL、数据库管理和大数据技术在内的附加技能。
 
-想了解更多关于数据工程师职业的信息，请阅读[Bala Priya C的《免费数据工程入门课程》](/free-data-engineering-course-for-beginners)。
+想了解更多关于数据工程师职业的信息，请阅读 Bala Priya C 的《免费数据工程入门课程》。
 
 # 3\. 商业智能
 
 商业智能（BI）是那些仍然喜欢从数据中获得洞察，但更感兴趣于分析历史数据以指导业务的人的一个替代职业路径。对于任何企业来说，这都是一个重要的职位，因为公司需要从数据中了解其当前状况。
 
-BI更侧重于描述性分析，业务领导者和利益相关者使用数据洞察来制定可行的举措。这些洞察将基于当前和历史数据，形式为KPI和业务指标，以便企业能够做出明智的决策。为了促进分析，BI使用工具创建业务仪表板和报告。这使得BI与数据科学家不同，因为后者的工作重点是使用高级统计分析提供未来预测。
+BI 更侧重于描述性分析，业务领导者和利益相关者使用数据洞察来制定可行的举措。这些洞察将基于当前和历史数据，形式为 KPI 和业务指标，以便企业能够做出明智的决策。为了促进分析，BI 使用工具创建业务仪表板和报告。这使得 BI 与数据科学家不同，因为后者的工作重点是使用高级统计分析提供未来预测。
 
-许多BI职位要求具备如基础统计学、SQL以及Power BI等数据可视化工具的技能。这些都是数据科学家需要学习的技能，因此BI是那些喜欢分析数据的人的一个合适的替代职业路径。
+许多 BI 职位要求具备如基础统计学、SQL 以及 Power BI 等数据可视化工具的技能。这些都是数据科学家需要学习的技能，因此 BI 是那些喜欢分析数据的人的一个合适的替代职业路径。
 
-如果你想提升自己在BI职位上的技能，[Nahla Davies的《大数据分析：为什么它对商业智能如此关键？》](/2023/06/big-data-analytics-crucial-business-intelligence.html)文章将给你提供优势。
+如果你想提升自己在 BI 职位上的技能，Nahla Davies 的《大数据分析：为什么它对商业智能如此关键？》文章将给你提供优势。
 
 # 4\. 数据产品经理
 
@@ -64,11 +64,11 @@ BI更侧重于描述性分析，业务领导者和利益相关者使用数据洞
 
 # 5. 数据分析师
 
-你应该考虑的最后一个职业路径是数据分析师。数据分析师通常处理原始数据，以提供业务所需的特定问题的答案。这与BI的工作形成对比，尽管它们有重叠的技能，但BI通常使用工具创建仪表板和报告，以持续跟踪KPI和业务指标。相比之下，数据分析师通常以项目为基础工作。
+你应该考虑的最后一个职业路径是数据分析师。数据分析师通常处理原始数据，以提供业务所需的特定问题的答案。这与 BI 的工作形成对比，尽管它们有重叠的技能，但 BI 通常使用工具创建仪表板和报告，以持续跟踪 KPI 和业务指标。相比之下，数据分析师通常以项目为基础工作。
 
-数据分析师通常在每个部门工作，提供详细的临时分析以完成特定项目，并执行统计分析以从数据中获得洞察。数据分析师可以使用SQL、编程语言（Python/R）和数据可视化工具，这些技能都是数据科学所学到的。
+数据分析师通常在每个部门工作，提供详细的临时分析以完成特定项目，并执行统计分析以从数据中获得洞察。数据分析师可以使用 SQL、编程语言（Python/R）和数据可视化工具，这些技能都是数据科学所学到的。
 
-如果这是一个替代职业路径，你可以参加[Bala Priya C.讲解的免费数据分析师入门训练营](/free-data-analyst-bootcamp-for-beginners)
+如果这是一个替代职业路径，你可以参加 Bala Priya C.讲解的免费数据分析师入门训练营
 
 # 结论
 
@@ -86,7 +86,7 @@ BI更侧重于描述性分析，业务领导者和利益相关者使用数据洞
 
 希望这对你有帮助！在这里列出的社区分享你的想法，并在下面添加你的评论。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)****是一位数据科学助理经理和数据撰写员。在全职工作于Allianz Indonesia的同时，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius在各种AI和机器学习主题上撰写文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)****是一位数据科学助理经理和数据撰写员。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 在各种 AI 和机器学习主题上撰写文章。
 
 ### 相关话题
 
@@ -94,10 +94,10 @@ BI更侧重于描述性分析，业务领导者和利益相关者使用数据洞
 
 +   [机器学习中的替代特征选择方法](https://www.kdnuggets.com/2021/12/alternative-feature-selection-methods-machine-learning.html)
 
-+   [OpenChatKit：开源ChatGPT替代品](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
++   [OpenChatKit：开源 ChatGPT 替代品](https://www.kdnuggets.com/2023/03/openchatkit-opensource-chatgpt-alternative.html)
 
-+   [8个开源ChatGPT和Bard的替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
++   [8 个开源 ChatGPT 和 Bard 的替代品](https://www.kdnuggets.com/2023/04/8-opensource-alternative-chatgpt-bard.html)
 
-+   [ChatGLM-6B：一个轻量级的开源ChatGPT替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
++   [ChatGLM-6B：一个轻量级的开源 ChatGPT 替代品](https://www.kdnuggets.com/2023/04/chatglm6b-lightweight-opensource-chatgpt-alternative.html)
 
-+   [MiniGPT-4：一种轻量级的GPT-4替代方案，用于增强…](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)
++   [MiniGPT-4：一种轻量级的 GPT-4 替代方案，用于增强…](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)

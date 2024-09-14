@@ -1,26 +1,26 @@
-# 2023年每位机器学习工程师应该掌握的5项机器学习技能
+# 2023 年每位机器学习工程师应该掌握的 5 项机器学习技能
 
-> 原文：[https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
+> 原文：[`www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html`](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-![2023年每位机器学习工程师应该掌握的5项机器学习技能](../Images/7866d7508edd10d63179e468c087cd27.png)
+![2023 年每位机器学习工程师应该掌握的 5 项机器学习技能](img/7866d7508edd10d63179e468c087cd27.png)
 
 图片来源 [olia danilevich](https://www.pexels.com/photo/man-using-3-computers-4974914/)
 
-2022年，越来越多的人开始接受人工智能。最引人注目的是，文本生成图像模型（AI艺术）变得极其流行。搜索引擎被像ChatGPT这样的复杂聊天机器人所取代。随着像 [PaLM + RLHF](https://github.com/lucidrains/PaLM-rlhf-pytorch) 这样的开源替代品的出现，人工智能和机器学习将变得对新手开发人员更加可及。然而，成为真正的机器学习工程师需要的不仅仅是脚本编写或编码技能。它目前是全球最需求量大的技术职位之一。
+2022 年，越来越多的人开始接受人工智能。最引人注目的是，文本生成图像模型（AI 艺术）变得极其流行。搜索引擎被像 ChatGPT 这样的复杂聊天机器人所取代。随着像 [PaLM + RLHF](https://github.com/lucidrains/PaLM-rlhf-pytorch) 这样的开源替代品的出现，人工智能和机器学习将变得对新手开发人员更加可及。然而，成为真正的机器学习工程师需要的不仅仅是脚本编写或编码技能。它目前是全球最需求量大的技术职位之一。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 需求
 
 * * *
 
-因此，越来越多的人开始将其视为潜在的职业道路。然而，随着机器学习和人工智能的迅速发展，即使是最有经验的机器学习工程师也很难跟上最新的实践。那么，2023年你需要具备哪些技能才能成为机器学习工程师或提升为一名机器学习工程师呢？本指南将回答这些问题。
+因此，越来越多的人开始将其视为潜在的职业道路。然而，随着机器学习和人工智能的迅速发展，即使是最有经验的机器学习工程师也很难跟上最新的实践。那么，2023 年你需要具备哪些技能才能成为机器学习工程师或提升为一名机器学习工程师呢？本指南将回答这些问题。
 
 # 什么是机器学习工程师？
 
@@ -42,13 +42,13 @@
 
 ## 2\. 自然语言处理
 
-自然语言处理（NLP）是人工智能的一个子领域，[专注于计算机和人类语言之间的互动](https://www.techtarget.com/searchenterpriseai/definition/natural-language-processing-NLP)。NLP的目标是使机器能够理解、解释和生成包括书面文本和口语在内的人类语言。它涉及开发可以分析语言数据并从中提取意义的算法和模型。
+自然语言处理（NLP）是人工智能的一个子领域，[专注于计算机和人类语言之间的互动](https://www.techtarget.com/searchenterpriseai/definition/natural-language-processing-NLP)。NLP 的目标是使机器能够理解、解释和生成包括书面文本和口语在内的人类语言。它涉及开发可以分析语言数据并从中提取意义的算法和模型。
 
-![2023年每个机器学习工程师应该知道的5项机器学习技能](../Images/32a303619c29c9bf92b8a7774b82aa95.png)
+![2023 年每个机器学习工程师应该知道的 5 项机器学习技能](img/32a303619c29c9bf92b8a7774b82aa95.png)
 
 来自[datasciencedojo](https://datasciencedojo.com/blog/natural-language-processing-applications/)的图像
 
-自然语言处理在机器学习中很重要，因为它使机器能够以自然的方式与人类交流。这一点尤其重要，因为越来越多需要人机互动的应用正在开发。如果没有NLP，这些互动将仅限于简单的命令或响应，这将显著降低它们的有用性和潜在影响。
+自然语言处理在机器学习中很重要，因为它使机器能够以自然的方式与人类交流。这一点尤其重要，因为越来越多需要人机互动的应用正在开发。如果没有 NLP，这些互动将仅限于简单的命令或响应，这将显著降低它们的有用性和潜在影响。
 
 ## 3\. 统计分析
 
@@ -64,7 +64,7 @@
 
 在数据准备中使用的一些关键工具和库包括 Python 中的 [pandas](https://pandas.pydata.org/)、[NumPy](https://numpy.org/) 和 [scikit-learn](https://scikit-learn.org/)，以及 R 中的 [dplyr](https://dplyr.tidyverse.org/) 和 [tidyr](https://tidyr.tidyverse.org/)。了解这些工具和库，以及像 Python 和 R 这样的编程语言，对于提高数据准备能力是非常重要的。
 
-![2023年每个机器学习工程师应该知道的5个机器学习技能](../Images/9af90f9801c71184dcb856c42befefc3.png)
+![2023 年每个机器学习工程师应该知道的 5 个机器学习技能](img/9af90f9801c71184dcb856c42befefc3.png)
 
 图片来自 [Pexels](https://www.pexels.com/photo/python-book-1181671/)
 
@@ -100,20 +100,20 @@
 
 # 结论
 
-与大多数技术职位一样，机器学习工程师必须愿意终身学习。你必须跟上[最新框架](/2018/05/general-approaches-machine-learning-process.html)、技术和实践。耐心、韧性以及开放的学习态度是作为机器学习工程师需要磨练的好技能。这是辛苦的工作，需要时间，但这个过程是充实的。优秀的软件开发人员和机器学习工程师很少会长时间处于失业状态。上述指南探讨了2023年每个机器学习工程师应该掌握的5项机器学习技能。将其收藏起来，随时回顾，当你感到迷茫并希望提升自己时。
+与大多数技术职位一样，机器学习工程师必须愿意终身学习。你必须跟上最新框架、技术和实践。耐心、韧性以及开放的学习态度是作为机器学习工程师需要磨练的好技能。这是辛苦的工作，需要时间，但这个过程是充实的。优秀的软件开发人员和机器学习工程师很少会长时间处于失业状态。上述指南探讨了 2023 年每个机器学习工程师应该掌握的 5 项机器学习技能。将其收藏起来，随时回顾，当你感到迷茫并希望提升自己时。
 
-**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她还曾担任Inc. 5,000名企业品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix和索尼。
+**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她还曾担任 Inc. 5,000 名企业品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 更多相关话题
 
-+   [每个数据工程师应该知道的7个Python库](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
++   [每个数据工程师应该知道的 7 个 Python 库](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
 
-+   [每个AI工程师应了解的工具：实用指南](https://www.kdnuggets.com/tools-every-ai-engineer-should-know-a-practical-guide)
++   [每个 AI 工程师应了解的工具：实用指南](https://www.kdnuggets.com/tools-every-ai-engineer-should-know-a-practical-guide)
 
-+   [未来证明你的数据技能：每个数据科学家在2023年需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
++   [未来证明你的数据技能：每个数据科学家在 2023 年需要的顶级技能](https://www.kdnuggets.com/futureproof-your-data-game-top-skills-every-data-scientist-needs-in-2023)
 
-+   [2023年成为数据科学家需要掌握的19项顶级技能](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
++   [2023 年成为数据科学家需要掌握的 19 项顶级技能](https://www.kdnuggets.com/2023/04/top-19-skills-need-know-2023-data-scientist.html)
 
-+   [2023年你应该知道的10个令人惊叹的机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
++   [2023 年你应该知道的 10 个令人惊叹的机器学习可视化](https://www.kdnuggets.com/2022/11/10-amazing-machine-learning-visualizations-know-2023.html)
 
-+   [每个数据科学家应具备的13项顶级技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每个数据科学家应具备的 13 项顶级技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)

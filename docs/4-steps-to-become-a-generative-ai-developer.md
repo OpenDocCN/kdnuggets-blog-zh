@@ -1,6 +1,6 @@
 # 成为生成性 AI 开发者的 4 个步骤
 
-> 原文：[https://www.kdnuggets.com/4-steps-to-become-a-generative-ai-developer](https://www.kdnuggets.com/4-steps-to-become-a-generative-ai-developer)
+> 原文：[`www.kdnuggets.com/4-steps-to-become-a-generative-ai-developer`](https://www.kdnuggets.com/4-steps-to-become-a-generative-ai-developer)
 
 # 介绍
 
@@ -8,15 +8,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
-![成为生成性 AI 开发者的 4 个步骤](../Images/27d90c80b76b10a711b09e5e09c63a86.png)
+![成为生成性 AI 开发者的 4 个步骤](img/27d90c80b76b10a711b09e5e09c63a86.png)
 
 OpenAI 的 CEO **萨姆·奥特曼** 在 2023 年 10 月的 OpenAI 开发者日上展示了产品使用数据。OpenAI 将客户划分为三个细分市场：开发者、企业和普通用户。链接: https://www.youtube.com/watch?v=U9mJuUkhUzk&t=120s
 
@@ -32,7 +32,7 @@ OpenAI 的 CEO **萨姆·奥特曼** 在 2023 年 10 月的 OpenAI 开发者日�
 
 ## 聊天机器人
 
-![成为生成性 AI 开发者的 4 个步骤](../Images/6fa1f5d44dff9c458878bc2f4d181811.png)
+![成为生成性 AI 开发者的 4 个步骤](img/6fa1f5d44dff9c458878bc2f4d181811.png)
 
 由 DALL·E 3 生成的图像
 
@@ -56,7 +56,7 @@ MIT 技术评论的文章 [生成性 AI 对聊天机器人的影响](https://www
 
 ## 个性化内容
 
-![成为生成式 AI 开发者的 4 个步骤](../Images/f1e8ac5c3ad899c9c1413bb9354918ca.png)
+![成为生成式 AI 开发者的 4 个步骤](img/f1e8ac5c3ad899c9c1413bb9354918ca.png)
 
 由 DALL·E 3 生成的图像
 
@@ -94,35 +94,35 @@ MIT 技术评论的文章 [生成性 AI 对聊天机器人的影响](https://www
 
 第一步是为你想使用的任何工具设置账户。你需要开发者账户和 API 密钥才能使用这些平台。
 
-[OpenAI API初学者指南：实践教程和最佳实践](https://www.datacamp.com/tutorial/guide-to-openai-api-on-tutorial-best-practices)包含了逐步说明，介绍了如何设置OpenAI开发者账户并创建API密钥。
+[OpenAI API 初学者指南：实践教程和最佳实践](https://www.datacamp.com/tutorial/guide-to-openai-api-on-tutorial-best-practices)包含了逐步说明，介绍了如何设置 OpenAI 开发者账户并创建 API 密钥。
 
-同样，[Pinecone向量数据库掌握教程：全面指南](https://www.datacamp.com/tutorial/mastering-vector-databases-with-pinecone-tutorial)包含了设置Pinecone的详细信息。
+同样，[Pinecone 向量数据库掌握教程：全面指南](https://www.datacamp.com/tutorial/mastering-vector-databases-with-pinecone-tutorial)包含了设置 Pinecone 的详细信息。
 
-[什么是Hugging Face？AI社区的开源绿洲](https://www.datacamp.com/tutorial/what-is-hugging-face) 解释了如何开始使用Hugging Face。
+[什么是 Hugging Face？AI 社区的开源绿洲](https://www.datacamp.com/tutorial/what-is-hugging-face) 解释了如何开始使用 Hugging Face。
 
-## 学习LLM
+## 学习 LLM
 
-要开始编程使用像GPT这样的LLM，最简单的方法是学习如何调用API以发送提示并接收消息。
+要开始编程使用像 GPT 这样的 LLM，最简单的方法是学习如何调用 API 以发送提示并接收消息。
 
-虽然许多任务可以通过LLM的单次往返交换完成，但像聊天机器人这样的用例需要较长的对话。OpenAI最近在其助手API中宣布了“线程”功能，你可以在[OpenAI助手API教程](https://www.datacamp.com/tutorial/open-ai-assistants-api-tutorial)中了解更多。
+虽然许多任务可以通过 LLM 的单次往返交换完成，但像聊天机器人这样的用例需要较长的对话。OpenAI 最近在其助手 API 中宣布了“线程”功能，你可以在[OpenAI 助手 API 教程](https://www.datacamp.com/tutorial/open-ai-assistants-api-tutorial)中了解更多。
 
-并非所有的LLM都支持这项功能，因此你可能还需要学习如何手动管理对话状态。例如，你需要决定对话中之前的消息中哪些仍然与当前对话相关。
+并非所有的 LLM 都支持这项功能，因此你可能还需要学习如何手动管理对话状态。例如，你需要决定对话中之前的消息中哪些仍然与当前对话相关。
 
 除此之外，不必仅限于文本工作。你可以尝试处理其他媒体；例如，转录音频（语音转文本）或从文本生成图像。
 
 ## 学习向量数据库
 
-向量数据库最简单的应用场景是语义搜索。在这里，你使用一个嵌入模型（见[OpenAI API文本嵌入介绍](https://www.datacamp.com/tutorial/introduction-to-text-embeddings-with-the-open-ai-api)），将文本（或其他输入）转换成一个表示其含义的数值向量。
+向量数据库最简单的应用场景是语义搜索。在这里，你使用一个嵌入模型（见[OpenAI API 文本嵌入介绍](https://www.datacamp.com/tutorial/introduction-to-text-embeddings-with-the-open-ai-api)），将文本（或其他输入）转换成一个表示其含义的数值向量。
 
 然后，你将嵌入的数据（数值向量）插入到向量数据库中。搜索就是编写一个搜索查询，询问数据库中哪些条目与您所请求的内容最接近。
 
 例如，你可以将公司某个产品的一些常见问题（FAQs）嵌入，并上传到向量数据库中。然后，你询问有关该产品的问题，它会返回最接近的匹配项，将数值向量转换回原始文本。
 
-## 结合LLM和向量数据库
+## 结合 LLM 和向量数据库
 
 你可能会发现，直接从向量数据库返回文本条目是不够的。通常，你希望文本以一种更自然的方式处理，以回答查询。
 
-解决这个问题的方法是一种称为检索增强生成（RAG）的技术。这意味着在你从向量数据库中检索文本之后，你会为大型语言模型（LLM）写一个提示，然后将检索到的文本包含在提示中（你*增强*了提示与*检索到*的文本）。然后，你要求LLM写出一个易于理解的回答。
+解决这个问题的方法是一种称为检索增强生成（RAG）的技术。这意味着在你从向量数据库中检索文本之后，你会为大型语言模型（LLM）写一个提示，然后将检索到的文本包含在提示中（你*增强*了提示与*检索到*的文本）。然后，你要求 LLM 写出一个易于理解的回答。
 
 在回答用户从常见问题中提问的例子中，你需要编写一个包含占位符的提示，像下面这样。
 
@@ -156,7 +156,7 @@ DataCamp 提供了 [一系列九个代码实操课程](https://www.datacamp.com/
 
 +   [成为数据科学专业人士的五个步骤](https://www.kdnuggets.com/2022/03/become-data-science-professional-five-steps.html)
 
-+   [KDnuggets 新闻 2022年3月16日：学习数据科学基础和5…](https://www.kdnuggets.com/2022/n11.html)
++   [KDnuggets 新闻 2022 年 3 月 16 日：学习数据科学基础和 5…](https://www.kdnuggets.com/2022/n11.html)
 
 +   [软件开发者与软件工程师](https://www.kdnuggets.com/2022/05/software-developer-software-engineer.html)
 

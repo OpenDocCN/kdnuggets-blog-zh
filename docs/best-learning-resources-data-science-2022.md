@@ -1,8 +1,8 @@
-# 2022年数据科学最佳学习资源
+# 2022 年数据科学最佳学习资源
 
-> 原文：[https://www.kdnuggets.com/2022/01/best-learning-resources-data-science-2022.html](https://www.kdnuggets.com/2022/01/best-learning-resources-data-science-2022.html)
+> 原文：[`www.kdnuggets.com/2022/01/best-learning-resources-data-science-2022.html`](https://www.kdnuggets.com/2022/01/best-learning-resources-data-science-2022.html)
 
-![2022年数据科学最佳学习资源](../Images/f8c4a09d9f7e8e0d95255ff0df0ee9e7.png)
+![2022 年数据科学最佳学习资源](img/f8c4a09d9f7e8e0d95255ff0df0ee9e7.png)
 
 作者图片 | 照片由 [jannoon028](https://www.freepik.com/free-photo/symbols-come-out-bulb-top-book_985250.htm#page=1&query=data%20learn&position=2&from_view=search) 提供
 
@@ -12,33 +12,33 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作。
 
 * * *
 
 ## 书籍
 
-![2022年数据科学最佳学习资源](../Images/06038b524b68d3e7afa3dba99e49f7e1.png)
+![2022 年数据科学最佳学习资源](img/06038b524b68d3e7afa3dba99e49f7e1.png)
 
 作者图片
 
 有些人喜欢阅读书籍，因此今年有一些有趣的书籍可供选择。在我们跳到书单之前，花点时间问问自己喜欢哪种编程语言。大多数人会选择**Python**，但**R**和**Julia**也非常受欢迎，因为它们都是为数据科学设计的。
 
-**初级水平：** [数据分析的Python：使用Pandas、NumPy和IPython进行数据整理](https://www.amazon.com/gp/product/1491957662/ref=as_li_tl?ie=UTF8&tag=quantpytho-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1491957662&linkId=8c3bf87b221dbcd8f541f0db20d4da83)
+**初级水平：** [数据分析的 Python：使用 Pandas、NumPy 和 IPython 进行数据整理](https://www.amazon.com/gp/product/1491957662/ref=as_li_tl?ie=UTF8&tag=quantpytho-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=1491957662&linkId=8c3bf87b221dbcd8f541f0db20d4da83)
 
 **中级水平：** [数据科学实用统计学](https://www.amazon.in/Practical-Statistics-Data-Scientists-Essential/dp/8194435005/ref=pd_sbs_1/257-4386611-5385532?pd_rd_w=LKFEw&pf_rd_p=458377ad-f0e1-4b16-b359-07fb8404ce8b&pf_rd_r=BSBTA733JSS7J2PBQAZD&pd_rd_r=8fa4ddb3-2129-4b80-b6fd-36f073aaf854&pd_rd_wg=v1MHW&pd_rd_i=8194435005&psc=1)
 
-**R 爱好者：** [数据科学中的R](https://www.oreilly.com/library/view/r-for-data/9781491910382/)
+**R 爱好者：** [数据科学中的 R](https://www.oreilly.com/library/view/r-for-data/9781491910382/)
 
-**未来语言：** [Julia数据科学](https://www.amazon.com/dp/B09KMRKQ96/)
+**未来语言：** [Julia 数据科学](https://www.amazon.com/dp/B09KMRKQ96/)
 
 ## 课程
 
-![2022年数据科学最佳学习资源](../Images/1df4ea25e5bb3ab8862aa67f0f5270f0.png)
+![2022 年数据科学最佳学习资源](img/1df4ea25e5bb3ab8862aa67f0f5270f0.png)
 
 作者图片
 
@@ -74,7 +74,7 @@
 
 ## 平台
 
-![2022年最佳数据科学学习资源](../Images/67a0871e072c416d4cddb374b26aef50.png)
+![2022 年最佳数据科学学习资源](img/67a0871e072c416d4cddb374b26aef50.png)
 
 作者提供的图像
 
@@ -92,7 +92,7 @@
 
 ## 博客
 
-![2022年最佳数据科学学习资源](../Images/2b4728c2635927d50a154f520ddfba40.png)
+![2022 年最佳数据科学学习资源](img/2b4728c2635927d50a154f520ddfba40.png)
 
 图像来自 [freepik](https://www.freepik.com/freepik)
 
@@ -100,7 +100,7 @@
 
 +   [Towards Data Science](https://towardsdatascience.com/)
 
-+   [KDnuggets](/news/index.html)
++   KDnuggets
 
 +   [博客 — Analytics Vidhya](https://www.analyticsvidhya.com/blog/)
 
@@ -108,7 +108,7 @@
 
 ## 认证
 
-![2022年最佳数据科学学习资源](../Images/759931874f36c5f1b9bfe3daae289b33.png)
+![2022 年最佳数据科学学习资源](img/759931874f36c5f1b9bfe3daae289b33.png)
 
 作者提供的示例证书
 
@@ -126,7 +126,7 @@
 
 ## 数据社交网络
 
-![2022年最佳数据科学学习资源](../Images/1f4b653642bc5c408a478a5cbbfa023d.png)
+![2022 年最佳数据科学学习资源](img/1f4b653642bc5c408a478a5cbbfa023d.png)
 
 作者提供的图片 | 元素来源于 [freepik](https://www.freepik.com/free-vector/social-tree-concept-illustration_12491662.htm#page=1&query=social%20media&position=10&from_view=search)
 
@@ -154,9 +154,9 @@
 
 ### 更多相关内容
 
-+   [2022年值得报名的8个最佳数据科学课程，助力职业快速提升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
++   [2022 年值得报名的 8 个最佳数据科学课程，助力职业快速提升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
 
-+   [2022年最佳数据科学职业路线图](https://www.kdnuggets.com/2022/04/best-data-science-career-tracks-2022.html)
++   [2022 年最佳数据科学职业路线图](https://www.kdnuggets.com/2022/04/best-data-science-career-tracks-2022.html)
 
 +   [最佳数据科学资源、训练营和学习课程…](https://www.kdnuggets.com/2023/12/springboard-best-data-science-resources-bootcamp-courses-learn-data-science-new-year)
 

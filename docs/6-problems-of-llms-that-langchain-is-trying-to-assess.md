@@ -1,8 +1,8 @@
 # LangChain 尝试评估的 6 个 LLM 问题
 
-> 原文：[https://www.kdnuggets.com/6-problems-of-llms-that-langchain-is-trying-to-assess](https://www.kdnuggets.com/6-problems-of-llms-that-langchain-is-trying-to-assess)
+> 原文：[`www.kdnuggets.com/6-problems-of-llms-that-langchain-is-trying-to-assess`](https://www.kdnuggets.com/6-problems-of-llms-that-langchain-is-trying-to-assess)
 
-![LangChain 尝试评估的 6 个 LLM 问题](../Images/9796dbede1367593fc71890ba082eea6.png)
+![LangChain 尝试评估的 6 个 LLM 问题](img/9796dbede1367593fc71890ba082eea6.png)
 
 图片由作者提供
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -60,31 +60,31 @@ LangChain 是一个围绕 LLMs 构建的开源框架。它为开发人员提供�
 
 所有这些问题引出了以下问题：
 
-> 如何开发一个复杂的应用程序，同时确保LLM模型按预期行为。
+> 如何开发一个复杂的应用程序，同时确保 LLM 模型按预期行为。
 
 提示充满了重复的结构和文本，响应像幼儿的游乐场一样无结构，而这些模型的记忆？我们可以说，远远不如大象。
 
 所以……我们如何与它们合作？
 
-尝试使用AI和LLM开发复杂应用程序可能是一个完全的头痛问题。
+尝试使用 AI 和 LLM 开发复杂应用程序可能是一个完全的头痛问题。
 
-这就是LangChain作为问题解决者的角色。
+这就是 LangChain 作为问题解决者的角色。
 
-从本质上讲，LangChain由几个巧妙的组件组成，这些组件允许你轻松地将LLM集成到任何开发中。
+从本质上讲，LangChain 由几个巧妙的组件组成，这些组件允许你轻松地将 LLM 集成到任何开发中。
 
-LangChain因其能够通过赋予强大的大型语言模型记忆和上下文来增强其能力而激发了热情。这一附加功能使得模拟“推理”过程成为可能，从而能够更精确地处理更复杂的任务。
+LangChain 因其能够通过赋予强大的大型语言模型记忆和上下文来增强其能力而激发了热情。这一附加功能使得模拟“推理”过程成为可能，从而能够更精确地处理更复杂的任务。
 
-对于开发人员来说，LangChain的吸引力在于其创新的方法来创建用户界面。用户无需依赖传统的拖放或编码方法，而是可以直接表达他们的需求，界面则根据这些请求进行构建。
+对于开发人员来说，LangChain 的吸引力在于其创新的方法来创建用户界面。用户无需依赖传统的拖放或编码方法，而是可以直接表达他们的需求，界面则根据这些请求进行构建。
 
-这是一个旨在为软件开发人员和数据工程师提供超级动力的框架，能够无缝地将LLM集成到他们的应用程序和数据工作流程中。
+这是一个旨在为软件开发人员和数据工程师提供超级动力的框架，能够无缝地将 LLM 集成到他们的应用程序和数据工作流程中。
 
 这就引出了以下问题……
 
-# LangChain如何尝试解决所有这些问题？
+# LangChain 如何尝试解决所有这些问题？
 
-了解当前LLM存在6个主要问题后，我们现在可以看看LangChain如何尝试评估这些问题。
+了解当前 LLM 存在 6 个主要问题后，我们现在可以看看 LangChain 如何尝试评估这些问题。
 
-![LangChain正在尝试评估的LLM的6个问题](../Images/755bed3be93c07ec17c9052b5e3a237d.png)
+![LangChain 正在尝试评估的 LLM 的 6 个问题](img/755bed3be93c07ec17c9052b5e3a237d.png)
 
 图片由作者提供
 
@@ -98,9 +98,9 @@ LangChain因其能够通过赋予强大的大型语言模型记忆和上下文�
 Hey ChatGPT, can you please explain to me how to plot a scatter chart in Python?
 ```
 
-然而，随着时间的推移，人们意识到这过于简单。我们没有为LLM提供足够的上下文来理解其主要任务。
+然而，随着时间的推移，人们意识到这过于简单。我们没有为 LLM 提供足够的上下文来理解其主要任务。
 
-今天，我们需要告诉任何LLM的不仅仅是描述要完成的主要任务。我们必须描述AI的高级行为、写作风格，并包括确保答案准确的指令。还有其他任何细节，以便为我们的模型提供更具上下文的指令。
+今天，我们需要告诉任何 LLM 的不仅仅是描述要完成的主要任务。我们必须描述 AI 的高级行为、写作风格，并包括确保答案准确的指令。还有其他任何细节，以便为我们的模型提供更具上下文的指令。
 
 所以今天，我们不再使用最初的提示，而是提交更类似于：
 
@@ -111,11 +111,11 @@ Can you please explain to me how to generate a scatter chart using the Seaborn l
 
 对吧？
 
-然而，正如你们大多数人已经意识到的，我可以请求不同的任务，但仍保持LLM的相同行为。这意味着提示的大部分内容可以保持不变。
+然而，正如你们大多数人已经意识到的，我可以请求不同的任务，但仍保持 LLM 的相同行为。这意味着提示的大部分内容可以保持不变。
 
 这就是为什么我们应该能够只写一次这一部分，然后将其添加到任何需要的提示中。
 
-LangChain通过提供提示模板来解决重复文本问题。
+LangChain 通过提供提示模板来解决重复文本问题。
 
 这些模板将你任务所需的具体细节（如准确要求散点图）与通常的文本（如描述模型的高层次行为）混合在一起。
 

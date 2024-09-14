@@ -1,8 +1,8 @@
 # 深度学习在 Python 中的十大视频
 
-> 原文：[https://www.kdnuggets.com/2017/11/top-10-videos-deep-learning-python.html](https://www.kdnuggets.com/2017/11/top-10-videos-deep-learning-python.html)
+> 原文：[`www.kdnuggets.com/2017/11/top-10-videos-deep-learning-python.html`](https://www.kdnuggets.com/2017/11/top-10-videos-deep-learning-python.html)
 
-![头图](../Images/0622f9b73303760e290a3a006164b0bb.png)
+![头图](img/0622f9b73303760e290a3a006164b0bb.png)
 
 这个“十大”列表是根据内容质量而非观看次数创建的。为了帮助你选择合适的框架，我们首先从一个比较几个流行 Python DL 库的视频开始。我已经包含了这十大项目的亮点以及我对每一个优缺点的看法，以便你选择最适合你需求的一个。我把最好的留到最后——最全面但免费的 YouTube 深度学习课程 ☺。我们开始吧！
 
@@ -12,7 +12,7 @@
 
 **2\. 播放列表：[Sentdex 的 TensorFlow 教程](https://www.youtube.com/watch?v=oYbVFhK_olY&list=PLSPWNkAMSvv5DKeSVDbEbUKSsK4Z-GgiP)（114K 次观看）** - 4.5 小时
 
-Sentdex 的这14个视频播放列表是最有条理、解释最全面、简洁却易于跟随的 Python 深度学习教程。它包括了使用 MNIST 数据集的递归神经网络和卷积神经网络的 TensorFlow 实现。
+Sentdex 的这 14 个视频播放列表是最有条理、解释最全面、简洁却易于跟随的 Python 深度学习教程。它包括了使用 MNIST 数据集的递归神经网络和卷积神经网络的 TensorFlow 实现。
 
 **3\. 单独教程：[TensorFlow 教程 02：卷积神经网络](https://www.youtube.com/watch?v=HMcx-zY8JSg)（69.7K 次观看）** - 36 分钟
 
@@ -48,25 +48,25 @@ YouTube 频道‘The SemiColon’发布了一系列 11 个视频，讲解了使�
 
 **10\. 免费在线课程: [Andrew Ng 的深度学习（完整课程）](https://www.youtube.com/playlist?list=PLBAGcD3siRDguyYYzhVwZ3tLvOyyG5k6K)（28K 观看次数）** - 4 周课程
 
-与我之前的[金融机器学习顶级视频推荐](https://www.kdnuggets.com/2017/09/top-10-videos-machine-learning-finance.html?preview=true)一样，我将最好的留到最后☺。如果你想从公认的最著名机器学习讲师之一安德鲁·吴那里学习深度学习，那么这个播放列表适合你。这个课程旨在为期4周，涵盖98个视频，教你深度学习、神经网络、二分类、导数、梯度下降、激活函数、反向传播、正则化、RMSprop、调优、丢弃法、在不同分布上进行训练和测试等内容，使用Python代码在Jupyter notebook中进行。
+与我之前的[金融机器学习顶级视频推荐](https://www.kdnuggets.com/2017/09/top-10-videos-machine-learning-finance.html?preview=true)一样，我将最好的留到最后☺。如果你想从公认的最著名机器学习讲师之一安德鲁·吴那里学习深度学习，那么这个播放列表适合你。这个课程旨在为期 4 周，涵盖 98 个视频，教你深度学习、神经网络、二分类、导数、梯度下降、激活函数、反向传播、正则化、RMSprop、调优、丢弃法、在不同分布上进行训练和测试等内容，使用 Python 代码在 Jupyter notebook 中进行。
 
 **相关：**
 
-+   [Python 深度学习框架概述](/2017/02/python-deep-learning-frameworks-overview.html)
++   Python 深度学习框架概述
 
-+   [在哪里学习深度学习- 课程、教程、软件](/2014/05/learn-deep-learning-courses-tutorials-overviews.html)
++   在哪里学习深度学习- 课程、教程、软件
 
-+   [TensorFlow 非常棒- 对深度学习加速的理性看法](/2015/12/tensor-flow-terrific-deep-learning-library.html)
++   TensorFlow 非常棒- 对深度学习加速的理性看法
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -74,12 +74,12 @@ YouTube 频道‘The SemiColon’发布了一系列 11 个视频，讲解了使�
 
 +   [学习数据科学的统计学最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功的数据科学家具备的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家具备的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

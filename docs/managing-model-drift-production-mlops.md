@@ -1,6 +1,6 @@
 # 在生产中管理模型漂移与 MLOps
 
-> 原文：[https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
+> 原文：[`www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html`](https://www.kdnuggets.com/2023/05/managing-model-drift-production-mlops.html)
 
 机器学习模型是强大的工具，可以帮助企业做出更明智的决策并优化运营。然而，随着这些模型的部署和运行，它们会受到称为模型漂移的现象的影响。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 在这篇文章中，我们将深入探讨模型漂移、不同类型的模型漂移、如何检测模型漂移以及最重要的，如何在生产中使用 MLOps 来处理模型漂移。通过理解和管理模型漂移，企业可以确保其机器学习模型随时间保持准确和有效，提供他们所需的洞察和结果以蓬勃发展。
 
-![在生产中管理模型漂移与 MLOps](../Images/e494e029c562afb95ebea73c828ecc93.png)
+![在生产中管理模型漂移与 MLOps](img/e494e029c562afb95ebea73c828ecc93.png)
 
 图片由 [Nicolas Peyrol](https://unsplash.com/ko/@nicolaspeyrol?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/photos/wRIqMJE-XaU?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -50,7 +50,7 @@
 
 下面的图中展示了这四种概念漂移类型。
 
-![生产环境中的模型漂移管理与MLOps](../Images/d94f4c339029cc96f6f588eb6bd18ea1.png)
+![生产环境中的模型漂移管理与 MLOps](img/d94f4c339029cc96f6f588eb6bd18ea1.png)
 
 概念漂移类型 | 图片来源于[在概念漂移下学习：综述](https://arxiv.org/pdf/2004.05785.pdf)。
 
@@ -66,17 +66,17 @@
 
 检测模型漂移并不简单，并且没有通用的方法来检测它。然而，我们将讨论一些流行的方法来检测它：
 
-+   **Kolmogorov-Smirnov检验（K-S检验）：** K-S检验是一种非参数检验，用于检测数据分布的变化。它用于比较训练数据和训练后数据之间的分布变化。该检验的零假设是两个数据集的分布相同，因此如果零假设被拒绝，则说明存在模型漂移。
++   **Kolmogorov-Smirnov 检验（K-S 检验）：** K-S 检验是一种非参数检验，用于检测数据分布的变化。它用于比较训练数据和训练后数据之间的分布变化。该检验的零假设是两个数据集的分布相同，因此如果零假设被拒绝，则说明存在模型漂移。
 
 +   **人口稳定性指数（PSI）：** PSI 是一种统计度量，用于测量两个不同数据集中类别变量分布的相似性。因此，它可以用来测量训练数据集和训练后数据集类别变量特征的变化。
 
-+   **Page-Hinkley方法：** Page-Hinkley方法也是一种统计方法，用于观察数据均值随时间的变化。它通常用于检测数据中不明显的小变化。
++   **Page-Hinkley 方法：** Page-Hinkley 方法也是一种统计方法，用于观察数据均值随时间的变化。它通常用于检测数据中不明显的小变化。
 
 +   **性能监控：** 监控机器学习模型在生产环境中的性能并观察其变化是检测概念漂移的重要方法之一。如果性能变化超过某个阈值，我们可以触发某种动作来纠正这种概念漂移。
 
 # 处理生产环境中的漂移
 
-![在生产环境中通过MLOps管理模型漂移](../Images/cfd44c9d4cee28036a3b63391fa3cdc1.png)
+![在生产环境中通过 MLOps 管理模型漂移](img/cfd44c9d4cee28036a3b63391fa3cdc1.png)
 
 处理生产环境中的漂移 | 图片由 [ijeab](https://www.freepik.com/author/ijeab) 提供，来自 Freepik。
 

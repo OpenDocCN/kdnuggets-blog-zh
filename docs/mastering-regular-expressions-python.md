@@ -1,10 +1,10 @@
-# 精通Python中的正则表达式
+# 精通 Python 中的正则表达式
 
-> 原文：[https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html](https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html)
+> 原文：[`www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html`](https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html)
 
-![是时候提升正则表达式技能了](../Images/b2ffc730a091c45a10dbb74f4e4d22fc.png)
+![是时候提升正则表达式技能了](img/b2ffc730a091c45a10dbb74f4e4d22fc.png)
 
-图片由作者使用Midjourney创建
+图片由作者使用 Midjourney 创建
 
 # 介绍
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织 IT
 
 * * *
 
-正则表达式或称regex，是操作文本和数据的强大工具。它们提供了一种简洁而灵活的方式来‘匹配’（指定和识别）文本字符串，例如特定字符、单词或字符模式。正则表达式在多种编程语言中使用，但在本文中，我们将重点讨论如何在Python中使用正则表达式。
+正则表达式或称 regex，是操作文本和数据的强大工具。它们提供了一种简洁而灵活的方式来‘匹配’（指定和识别）文本字符串，例如特定字符、单词或字符模式。正则表达式在多种编程语言中使用，但在本文中，我们将重点讨论如何在 Python 中使用正则表达式。
 
-Python以其清晰、易读的语法，是学习和应用正则表达式的绝佳语言。Python的[re模块](https://docs.python.org/3/library/re.html)提供了正则表达式操作的支持。该模块包含了根据指定模式搜索、替换和拆分文本的功能。通过掌握Python中的正则表达式，你可以高效地处理和分析文本数据。
+Python 以其清晰、易读的语法，是学习和应用正则表达式的绝佳语言。Python 的[re 模块](https://docs.python.org/3/library/re.html)提供了正则表达式操作的支持。该模块包含了根据指定模式搜索、替换和拆分文本的功能。通过掌握 Python 中的正则表达式，你可以高效地处理和分析文本数据。
 
 本文将指导你从正则表达式的基础到更复杂的操作，为你提供应对任何文本处理挑战的工具。我们将从简单的字符匹配开始，然后探讨更复杂的模式匹配、分组和前瞻断言。让我们开始吧！
 
@@ -30,7 +30,7 @@ Python以其清晰、易读的语法，是学习和应用正则表达式的绝�
 
 正则表达式的核心原理是对字符串中的模式进行匹配。这些模式最简单的形式是字面匹配，其中寻找的模式是字符的直接序列。但正则表达式模式可以比简单的字面匹配更为复杂和强大。
 
-在Python中，[re](https://docs.python.org/3/library/re.html)模块提供了一整套处理正则表达式的函数。例如，`re.search()`函数扫描给定的字符串，寻找正则表达式模式匹配的位置。我们用一个例子来说明：
+在 Python 中，[re](https://docs.python.org/3/library/re.html)模块提供了一整套处理正则表达式的函数。例如，`re.search()`函数扫描给定的字符串，寻找正则表达式模式匹配的位置。我们用一个例子来说明：
 
 ```py
 import re
@@ -47,7 +47,7 @@ match = re.search(pattern, text)
 print(match)
 ```
 
-这段Python代码在变量`text`中搜索变量`pattern`定义的模式。如果在文本中找到该模式，`re.search()`函数返回一个Match对象，否则返回None。
+这段 Python 代码在变量`text`中搜索变量`pattern`定义的模式。如果在文本中找到该模式，`re.search()`函数返回一个 Match 对象，否则返回 None。
 
 Match 对象包括关于匹配的信息，包括原始输入字符串、使用的正则表达式和匹配的位置。例如，使用 `match.start()` 和 `match.end()` 可以提供字符串中匹配的起始和结束位置。
 
@@ -110,7 +110,7 @@ print(matches)
 
 +   **\d**: 匹配任何十进制数字；等同于 [0-9]
 
-+   **\D**: 匹配任何非数字字符；等同于 [^0-9]
++   **\D**: 匹配任何非数字字符；等同于 [⁰-9]
 
 +   **\w**: 匹配任何字母数字单词字符（字母、数字、下划线）；等同于 [a-zA-Z0-9_]
 
@@ -209,7 +209,7 @@ pattern = r'<[^>]+>'
 ...
 ```
 
-![Python 正则表达式工作流程](../Images/408c5716ae70eef500aba9afafeda87f.png)
+![Python 正则表达式工作流程](img/408c5716ae70eef500aba9afafeda87f.png)
 
 Python 正则表达式匹配工作流程
 

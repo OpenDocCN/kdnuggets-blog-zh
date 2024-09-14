@@ -1,34 +1,34 @@
 # 你需要知道的：现代开源数据科学/机器学习生态系统
 
-> 原文：[https://www.kdnuggets.com/2019/06/top-data-science-machine-learning-tools.html](https://www.kdnuggets.com/2019/06/top-data-science-machine-learning-tools.html)
+> 原文：[`www.kdnuggets.com/2019/06/top-data-science-machine-learning-tools.html`](https://www.kdnuggets.com/2019/06/top-data-science-machine-learning-tools.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)最近我们报告了第20届年度 KDnuggets 软件调查结果：
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) comments 最近我们报告了第 20 届年度 KDnuggets 软件调查结果：
 
-> [**Python 领先于11个顶级数据科学、机器学习平台：趋势与分析**](/2019/05/poll-top-data-science-machine-learning-platforms.html)。
+> **Python 领先于 11 个顶级数据科学、机器学习平台：趋势与分析**。
 
-正如我们之前所做的（见 [2017年数据科学生态系统](/2017/06/ecosystem-data-science-machine-learning-software.html)，[2018年数据科学生态系统](/2018/06/ecosystem-data-science-python-victory.html)），我们检查了哪些工具属于同一回答 - 用户的技能组合。我们注意到这并不一定意味着所有工具在每个项目中都一起使用，但拥有同时使用工具X和Y的知识和技能使得在某些项目中同时使用X和Y的可能性更大。我们看到的结果与这个假设一致。
+正如我们之前所做的（见 2017 年数据科学生态系统，2018 年数据科学生态系统），我们检查了哪些工具属于同一回答 - 用户的技能组合。我们注意到这并不一定意味着所有工具在每个项目中都一起使用，但拥有同时使用工具 X 和 Y 的知识和技能使得在某些项目中同时使用 X 和 Y 的可能性更大。我们看到的结果与这个假设一致。
 
 顶级工具显示出令人惊讶的稳定性 - 我们看到与去年基本相同的模式。
 
-首先，我们选择了至少获得20%投票的工具。有11个这样的工具 - 与去年完全相同的11个工具，尽管顺序稍有变化。Keras 从第10名上升到第8名，Anaconda 从第6名上升到第5名。Tableau 和 SQL 略微下降。
+首先，我们选择了至少获得 20%投票的工具。有 11 个这样的工具 - 与去年完全相同的 11 个工具，尽管顺序稍有变化。Keras 从第 10 名上升到第 8 名，Anaconda 从第 6 名上升到第 5 名。Tableau 和 SQL 略微下降。
 
-这个11个工具的分界点是自然的，因为第11名（Apache Spark，21%）与第12名（Microsoft Power BI，13%）之间存在较大的差距。
+这个 11 个工具的分界点是自然的，因为第 11 名（Apache Spark，21%）与第 12 名（Microsoft Power BI，13%）之间存在较大的差距。
 
-我们使用了与我们的 [2017年分析](/2017/06/ecosystem-data-science-machine-learning-software.html) 和 [2018年分析](/2018/06/ecosystem-data-science-python-victory.html) 相同的 Lift 衡量标准。
+我们使用了与我们的 2017 年分析 和 2018 年分析 相同的 Lift 衡量标准。
 
-然后我们将关联性最强的工具分组，从 Tensorflow 和 Keras 开始，直到我们得到下面的图1。通过仅显示 abs(Lift1) > 15% 的关联性，我们使模式更容易被看到。
+然后我们将关联性最强的工具分组，从 Tensorflow 和 Keras 开始，直到我们得到下面的图 1。通过仅显示 abs(Lift1) > 15% 的关联性，我们使模式更容易被看到。
 
-![Poll Data Science 2019 Top11 Ecosystem](../Images/e693c7e44a379deb6021581f02666e95.png)
+![Poll Data Science 2019 Top11 Ecosystem](img/e693c7e44a379deb6021581f02666e95.png)
 
-**图1：2019年数据科学、机器学习顶级工具关联性**
+**图 1：2019 年数据科学、机器学习顶级工具关联性**
 
 条形长度对应的是 lift1 的绝对值，颜色表示 lift 的值（绿色 - 正相关，红色 - 负相关）。
 
-我们注意到现代开源数据科学生态系统中的6个主要工具是：**Python、Anaconda、scikit-learn、Tensorflow、Keras 和 Apache Spark**。这与去年完全相同 - 见下文。
+我们注意到现代开源数据科学生态系统中的 6 个主要工具是：**Python、Anaconda、scikit-learn、Tensorflow、Keras 和 Apache Spark**。这与去年完全相同 - 见下文。
 
-![Poll Data Science 2018 Top11 Ecosystem](../Images/3dc7d1a3ce5534b576dffcc38fe97894.png)
+![Poll Data Science 2018 Top11 Ecosystem](img/3dc7d1a3ce5534b576dffcc38fe97894.png)
 
-**图1b：2018年数据科学、机器学习顶级工具关联性**
+**图 1b：2018 年数据科学、机器学习顶级工具关联性**
 
 Rapidminer 与上述所有工具的负相关性较小，且与其他工具的关联性也不强。
 
@@ -60,11 +60,11 @@ Lift 定义：
 
 令 **with_Py(X)** = 工具 X 在 Python 中的使用百分比，**with_R(X)** = 工具 X 在 R 中的使用百分比。为了可视化每个工具与 Python 或 R 的接近程度，我们使用了一个非常简单的度量 **Bias_Py_R(X) = with_Py(X) - with_R(X)**，如果工具更多地与 Python 一起使用，则为正值，如果更多地与 R 一起使用，则为负值。
 
-在图 2 中，我们绘制了最受欢迎的工具（至少 90 个投票）的偏向性，可以看到几乎每个工具都偏向 Python。唯一的 3 个例外是 R（显而易见）、微软 SQL Server 和 SAS Base（完全没有偏向）。作为对比，在 [类似的 2017 年分析](/2017/06/ecosystem-data-science-machine-learning-software.html) 中，2018 年有 10 个工具偏向 R，2017 年有 3 个 R 偏向的工具。
+在图 2 中，我们绘制了最受欢迎的工具（至少 90 个投票）的偏向性，可以看到几乎每个工具都偏向 Python。唯一的 3 个例外是 R（显而易见）、微软 SQL Server 和 SAS Base（完全没有偏向）。作为对比，在 类似的 2017 年分析 中，2018 年有 10 个工具偏向 R，2017 年有 3 个 R 偏向的工具。
 
 R 是一个优秀的平台，具有深度和广度，广泛用于数据分析和可视化，目前仍占据约 50% 的份额。然而，展望未来，我们预计 Python 生态系统会有更多的发展和活力。
 
-![Python 与 R 2019 调查](../Images/ed865016c623cec504be5f0e3ea14710.png) **图 2：数据科学、机器学习平台 2019：Python 与 R 偏向性**
+![Python 与 R 2019 调查](img/ed865016c623cec504be5f0e3ea14710.png) **图 2：数据科学、机器学习平台 2019：Python 与 R 偏向性**
 
 我不认为前 11 大平台的份额和关联的相对稳定性表明创新的终结，而只是可能在另一个主要系统 - 也许与 AutoML 相关的某些东西 - 颠覆当前生态系统之前的一个暂停。
 
@@ -80,7 +80,7 @@ R 是一个优秀的平台，具有深度和广度，广泛用于数据分析和
 
 这里是一个图表，显示了前几个工具（至少 50 个投票），排除了深度学习和大数据工具本身。
 
-![2019 年大数据与深度学习亲和力调查](../Images/458cedafffbd17d6145cdfb9b31ece60.png) **图 3：KDnuggets 2019 数据科学、机器学习调查：深度学习与大数据亲和力**
+![2019 年大数据与深度学习亲和力调查](img/458cedafffbd17d6145cdfb9b31ece60.png) **图 3：KDnuggets 2019 数据科学、机器学习调查：深度学习与大数据亲和力**
 
 我们注意到，Scala 是在深度学习和大数据领域使用最广泛的语言。图表的右下角较重，几乎每个工具在深度学习中的使用频率都高于在大数据中的使用频率。
 
@@ -125,7 +125,7 @@ R 是一个优秀的平台，具有深度和广度，广泛用于数据分析和
 
 **相关信息：**
 
-+   [**Python 领先的 11 大数据科学、机器学习平台：趋势与分析**](/2019/05/poll-top-data-science-machine-learning-platforms.html)。
++   **Python 领先的 11 大数据科学、机器学习平台：趋势与分析**。
 
 +   [新兴生态系统：数据科学和机器学习软件分析](https://www.kdnuggets.com/2017/06/ecosystem-data-science-machine-learning-software.html)
 
@@ -135,11 +135,11 @@ R 是一个优秀的平台，具有深度和广度，广泛用于数据分析和
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

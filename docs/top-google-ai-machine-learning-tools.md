@@ -1,12 +1,12 @@
 # 顶级 Google AI 和机器学习工具适合每个人
 
-> 原文：[https://www.kdnuggets.com/2020/08/top-google-ai-machine-learning-tools.html](https://www.kdnuggets.com/2020/08/top-google-ai-machine-learning-tools.html)
+> 原文：[`www.kdnuggets.com/2020/08/top-google-ai-machine-learning-tools.html`](https://www.kdnuggets.com/2020/08/top-google-ai-machine-learning-tools.html)
 
-[comments](#comments)
+comments
 
 **由 [Claire D. Costa](https://www.linkedin.com/in/claire-d-costa-a0379419b/)，Digitalogy, LLC 的内容撰写者和战略家**。
 
-![](../Images/074606dfa897325105c36070eabc7324.png)
+![](img/074606dfa897325105c36070eabc7324.png)
 
 *Google AI 将人工智能的好处带给每个人 ([source](https://in.pinterest.com/pin/781585710312288592/))。*
 
@@ -50,7 +50,7 @@ TensorFlow 提供了顺畅的模型构建和灵活的多设备部署，使得创
 
 > 拍照 -> 获取图片中的文本
 
-![](../Images/d7921391d13700021c69367e0f30441f.png)
+![](img/d7921391d13700021c69367e0f30441f.png)
 
 *ML Kit 提取图片中存在的任何文本 ([source](https://medium.com/@bapspatil/ok-ml-kit-how-smart-are-you-83c9e58b7330))。*
 
@@ -66,7 +66,7 @@ TensorFlow 提供了顺畅的模型构建和灵活的多设备部署，使得创
 
 > 传递消息到 ML Kit -> 获取 3 条智能回复
 
-![](../Images/36b73e2a02648d0dfdaf6346cd7c64b1.png)
+![](img/36b73e2a02648d0dfdaf6346cd7c64b1.png)
 
 *ML Kit 为你提供 3 条智能回复。*
 
@@ -74,7 +74,7 @@ TensorFlow 提供了顺畅的模型构建和灵活的多设备部署，使得创
 
 > 拍照 -> 从扫描的条形码/二维码中获取信息
 
-![](../Images/5ae220b3e06c2c8e3d1a54cdddf53fbc.png)
+![](img/5ae220b3e06c2c8e3d1a54cdddf53fbc.png)
 
 *ML Kit 支持从条形码中扫描和提取信息 ([source](https://medium.com/@bapspatil/ok-ml-kit-how-smart-are-you-83c9e58b7330))。*
 
@@ -82,13 +82,13 @@ TensorFlow 提供了顺畅的模型构建和灵活的多设备部署，使得创
 
 通过现成的 API，支持设备端或云端实现多种用例，你可以轻松地将 ML 模型应用到数据中，并通过与 TensorFlow Lite 的自定义集成选项跟踪应用的性能。
 
-![](../Images/8b36214a97dbdf363b564407a1e257d6.png)
+![](img/8b36214a97dbdf363b564407a1e257d6.png)
 
 *此选项允许你将 TensorFlow Lite 模型添加到 ML Kit 并使用它们 ([source](https://medium.com/@bapspatil/ok-ml-kit-how-smart-are-you-83c9e58b7330))。*
 
 ### Google 开源
 
-![](../Images/06f1a8e2700f37ff1464776fe3502992.png)
+![](img/06f1a8e2700f37ff1464776fe3502992.png)
 
 *Google 开源将开源的所有价值带给 Google，将 Google 的所有资源带给开源 ([source](https://opensource.google/))。*
 
@@ -106,13 +106,13 @@ Google 承诺通过鼓励开发者将他们的代码开放给任何有兴趣的�
 
 Google 在其开源倡议中提供了 Fairness Indicators。这是一个提供量化机器学习系统公平性指标的工具。**由 TensorFlow 提供支持**，其目的是消除机器学习系统中的任何偏见，同时提高公平性并减少不公平偏见对系统和组织的影响。随着需求的增长，Google 设计了这个工具，考虑了各种类型的企业。
 
-![](../Images/5afc2f02e0121909493e502541f29214.png)
+![](img/5afc2f02e0121909493e502541f29214.png)
 
 *使用 Fairness Indicators 可视化公平性评估指标 ([source](https://blog.tensorflow.org/2019/12/fairness-indicators-fair-ML-systems.html))。*
 
 **CoLaboratory**
 
-![](../Images/956e5614888c6cd42a0c2d8db37b06ea.png)
+![](img/956e5614888c6cd42a0c2d8db37b06ea.png)
 
 *开始使用 Python 与 Google Colaboratory ([source](https://lambdachops.com/start-writing-python-with-google-colab))。*
 
@@ -170,7 +170,7 @@ Google 的另一项举措通过向用户提供有趣的挑战来提高数据集�
 
 **Cloud TPU**
 
-![](../Images/122573548859c98f6d899c4874cf7812.png)
+![](img/122573548859c98f6d899c4874cf7812.png)
 
 *TPU V2 (来源: [Google Cloud Platform Blog](https://blog.google/products/google-cloud/google-cloud-offer-tpus-machine-learning/)).*
 
@@ -228,11 +228,11 @@ Google 的另一项举措通过向用户提供有趣的挑战来提高数据集�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

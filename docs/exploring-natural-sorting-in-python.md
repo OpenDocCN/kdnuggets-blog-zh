@@ -1,8 +1,8 @@
 # 探索 Python 中的自然排序
 
-> 原文：[https://www.kdnuggets.com/exploring-natural-sorting-in-python](https://www.kdnuggets.com/exploring-natural-sorting-in-python)
+> 原文：[`www.kdnuggets.com/exploring-natural-sorting-in-python`](https://www.kdnuggets.com/exploring-natural-sorting-in-python)
 
-![natsort](../Images/d6abe96d6dbba0e1997ba250e5355cd5.png)
+![natsort](img/d6abe96d6dbba0e1997ba250e5355cd5.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -62,13 +62,13 @@ $ pip3 install natsort
 
 +   排序文件名：在处理包含数字的文件名时，自然排序确保文件按自然直观的顺序排列。
 
-+   版本排序：自然排序也有助于对版本号字符串进行排序，确保版本根据其数字值而非ASCII值进行排序。这可能不会反映所需的版本顺序。
++   版本排序：自然排序也有助于对版本号字符串进行排序，确保版本根据其数字值而非 ASCII 值进行排序。这可能不会反映所需的版本顺序。
 
 现在让我们继续编写这些示例代码。
 
 ### 排序文件名
 
-现在我们已经安装了natsort库，可以将其导入到我们的Python脚本中，使用该库提供的不同函数。
+现在我们已经安装了 natsort 库，可以将其导入到我们的 Python 脚本中，使用该库提供的不同函数。
 
 让我们重新回顾排序文件名的第一个例子（就是我们在教程开始时看到的那个），其中字典序排序的结果并不是我们想要的。
 
@@ -85,7 +85,7 @@ sorted_filenames = natsort.natsorted(filenames)
 print(sorted_filenames)
 ```
 
-在这个例子中，来自natsort库的`natsorted()`函数被用来自然地排序文件名列表。结果是文件名按预期的数字顺序排列：
+在这个例子中，来自 natsort 库的`natsorted()`函数被用来自然地排序文件名列表。结果是文件名按预期的数字顺序排列：
 
 ```py
 Output >>> ['file1.txt', 'file2.txt', 'file10.txt']
@@ -117,9 +117,9 @@ Output >>> ['v-1.2', 'v-1.5', 'v-1.10']
 
 使用内置的`sorted()`函数时，你可能已经使用了`key`参数进行自定义。同样，`sorted()`函数也接受可选的`key`参数，你可以用它来根据特定的标准进行排序。
 
-让我们举一个例子：我们有`file_data`，它是一个元组列表。元组中的第一个元素（索引0处）是文件名，第二个元素（索引1处）是文件大小。
+让我们举一个例子：我们有`file_data`，它是一个元组列表。元组中的第一个元素（索引 0 处）是文件名，第二个元素（索引 1 处）是文件大小。
 
-假设我们想按文件大小升序排序。因此，我们将`key`参数设置为`lambda x: x[1]`，这样就使用了索引1处的文件大小作为排序键：
+假设我们想按文件大小升序排序。因此，我们将`key`参数设置为`lambda x: x[1]`，这样就使用了索引 1 处的文件大小作为排序键：
 
 ```py
 import natsort
@@ -151,7 +151,7 @@ data_20221231_235959.csv 150
 
 ## 不区分大小写的字符串排序
 
-自然排序还有另一个有用的场景，就是当你需要对字符串进行不区分大小写的排序时。基于ASCII值的字典序排序将不会给出期望的结果。
+自然排序还有另一个有用的场景，就是当你需要对字符串进行不区分大小写的排序时。基于 ASCII 值的字典序排序将不会给出期望的结果。
 
 为了进行不区分大小写的排序，我们可以将`alg`设置为`natsort.ns.IGNORECASE`，这将在排序时忽略大小写。`alg`键控制`natsorted()`使用的算法：
 
@@ -177,20 +177,20 @@ Output >>> ['apple', 'Banana', 'cat', 'Dog', 'Elephant']
 
 就这样！在本教程中，我们回顾了字典序排序的局限性以及自然排序如何成为处理字母数字字符串的良好替代方案。你可以在[GitHub](https://github.com/balapriyac/python-basics/tree/main/natural-sorting)上找到所有代码。
 
-我们从简单的例子开始，也了解了如何基于自定义键排序以及在Python中处理不区分大小写的排序。接下来，你可以探索[natsort库的其他功能](https://natsort.readthedocs.io/en/5.1.0/)。在另一个Python教程中再见。直到那时，继续编程！
+我们从简单的例子开始，也了解了如何基于自定义键排序以及在 Python 中处理不区分大小写的排序。接下来，你可以探索[natsort 库的其他功能](https://natsort.readthedocs.io/en/5.1.0/)。在另一个 Python 教程中再见。直到那时，继续编程！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术写作人员。她喜欢在数学、编程、数据科学和内容创作的交汇点工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过编写教程、使用指南、意见文章等与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术写作人员。她喜欢在数学、编程、数据科学和内容创作的交汇点工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和咖啡！目前，她正在通过编写教程、使用指南、意见文章等与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关话题
 
-+   [用Python探索数据清理技术](https://www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html)
++   [用 Python 探索数据清理技术](https://www.kdnuggets.com/2023/04/exploring-data-cleaning-techniques-python.html)
 
-+   [探索Python itertools中的无限迭代器](https://www.kdnuggets.com/exploring-infinite-iterators-in-python-itertools)
++   [探索 Python itertools 中的无限迭代器](https://www.kdnuggets.com/exploring-infinite-iterators-in-python-itertools)
 
-+   [用Python探索OpenAI API](https://www.kdnuggets.com/exploring-the-openai-api-with-python)
++   [用 Python 探索 OpenAI API](https://www.kdnuggets.com/exploring-the-openai-api-with-python)
 
-+   [25本免费书籍掌握SQL、Python、数据科学、机器学习……](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍掌握 SQL、Python、数据科学、机器学习……](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [探索思维树提示：AI如何通过搜索学习推理……](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
++   [探索思维树提示：AI 如何通过搜索学习推理……](https://www.kdnuggets.com/2023/07/exploring-tree-of-thought-prompting-ai-learn-reason-through-search.html)
 
-+   [探索GPT-4的力量和局限性](https://www.kdnuggets.com/2023/07/exploring-power-limitations-gpt4.html)
++   [探索 GPT-4 的力量和局限性](https://www.kdnuggets.com/2023/07/exploring-power-limitations-gpt4.html)

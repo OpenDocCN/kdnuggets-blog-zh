@@ -1,22 +1,22 @@
 # 如何处理数据集中的缺失值
 
-> 原文：[https://www.kdnuggets.com/2020/06/missing-values-dataset.html](https://www.kdnuggets.com/2020/06/missing-values-dataset.html)
+> 原文：[`www.kdnuggets.com/2020/06/missing-values-dataset.html`](https://www.kdnuggets.com/2020/06/missing-values-dataset.html)
 
-[评论](#comments)
+评论
 
 **作者 [Yogita Kinha](http://www.linkedin.com/in/yogita-kinha)，顾问和博客作者**
 
-![](../Images/601a6d7f0a72fa9012db04fc3e3612c3.png)
+![](img/601a6d7f0a72fa9012db04fc3e3612c3.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -28,13 +28,13 @@
 
 我们可以使用 pandas 函数检查数据集中的空值，如下所示：
 
-![](../Images/5bbee16c73d338ae2b230e03dcd66fc6.png)
+![](img/5bbee16c73d338ae2b230e03dcd66fc6.png)
 
-![](../Images/b5978e130137a5f30d6f78280237a4fd.png)
+![](img/b5978e130137a5f30d6f78280237a4fd.png)
 
 但是，有时识别缺失值可能并不那么简单。需要使用领域知识并查看数据描述来理解变量。例如，在下面的数据集中，isnull() 不显示任何空值。
 
-![](../Images/750268e2b15735bc2ad1c53da7bb43e9.png)
+![](img/750268e2b15735bc2ad1c53da7bb43e9.png)
 
 在这个例子中，有些列的最小值为零。在某些列中，零值没有意义，并表示无效或缺失的值。
 
@@ -52,7 +52,7 @@
 
 通过检查这些列中的零值数量，可以明显看出第 1、2 和 5 列有少量零值，而第 3 和 4 列有更多零值。
 
-![](../Images/9eb03f12081b98af0607fedd1a1d032c.png)
+![](img/9eb03f12081b98af0607fedd1a1d032c.png)
 
 每列中的缺失值可能需要不同的策略。我们可以将这些零值标记为 NaN，以突出缺失值，以便进一步处理。
 
@@ -122,9 +122,9 @@ MI 包括以下三个基本步骤：
 
 1.  汇总：从每个分析的数据集中获得的参数估计（例如系数和标准误差）然后被平均以得到一个单一的点估计。
 
-Python的Scikit-learn提供了方法——impute.SimpleImputer用于单变量插补，impute.IterativeImputer用于多变量插补。
+Python 的 Scikit-learn 提供了方法——impute.SimpleImputer 用于单变量插补，impute.IterativeImputer 用于多变量插补。
 
-R中的MICE包支持多重插补功能。Python虽然不直接支持多重插补，但可以通过在样本后验为True时，使用不同随机种子重复应用IterativeImputer来进行多重插补。
+R 中的 MICE 包支持多重插补功能。Python 虽然不直接支持多重插补，但可以通过在样本后验为 True 时，使用不同随机种子重复应用 IterativeImputer 来进行多重插补。
 
 总之，处理缺失数据对于数据科学项目至关重要。然而，在处理缺失数据时，数据分布不应改变。任何缺失数据处理方法应满足以下规则：
 
@@ -138,31 +138,31 @@ R中的MICE包支持多重插补功能。Python虽然不直接支持多重插补
 
 **参考文献：**
 
-+   [https://machinelearningmastery.com/handle-missing-data-python/](https://machinelearningmastery.com/handle-missing-data-python/) [https://en.wikipedia.org/wiki/Imputation_(statistics)](https://en.wikipedia.org/wiki/Imputation_(statistics)) [https://stats.idre.ucla.edu/stata/seminars/mi_in_stata_pt1_new/](https://stats.idre.ucla.edu/stata/seminars/mi_in_stata_pt1_new/)
++   [`machinelearningmastery.com/handle-missing-data-python/`](https://machinelearningmastery.com/handle-missing-data-python/) [`en.wikipedia.org/wiki/Imputation_(statistics)`](https://en.wikipedia.org/wiki/Imputation_(statistics)) [`stats.idre.ucla.edu/stata/seminars/mi_in_stata_pt1_new/`](https://stats.idre.ucla.edu/stata/seminars/mi_in_stata_pt1_new/)
 
-+   [https://pdfs.semanticscholar.org/e4f8/1aa5b67132ccf875cfb61946892024996413.pdf](https://pdfs.semanticscholar.org/e4f8/1aa5b67132ccf875cfb61946892024996413.pdf)
++   [`pdfs.semanticscholar.org/e4f8/1aa5b67132ccf875cfb61946892024996413.pdf`](https://pdfs.semanticscholar.org/e4f8/1aa5b67132ccf875cfb61946892024996413.pdf)
 
-*原文发表在*[*https://www.edvancer.in*](https://www.edvancer.in/data-cleaning-missing-values-treatment)*上，日期为2019年7月2日。*
+*原文发表在*[*https://www.edvancer.in*](https://www.edvancer.in/data-cleaning-missing-values-treatment)*上，日期为 2019 年 7 月 2 日。*
 
-**简介：[Yogita Kinha](http://www.linkedin.com/in/yogita-kinha)** 是一位熟练的专业人士，拥有R、Python、机器学习和统计计算及图形的程序环境经验，具备Hadoop生态系统的实操经验，以及在软件测试领域的测试和报告经验。
+**简介：[Yogita Kinha](http://www.linkedin.com/in/yogita-kinha)** 是一位熟练的专业人士，拥有 R、Python、机器学习和统计计算及图形的程序环境经验，具备 Hadoop 生态系统的实操经验，以及在软件测试领域的测试和报告经验。
 
 [原文](https://medium.com/limitedio/how-to-deal-with-missing-values-in-your-dataset-988696b1f450)。经许可转载。
 
 **相关内容：**
 
-+   [数据转换：标准化与归一化](/2020/04/data-transformation-standardization-normalization.html)
++   数据转换：标准化与归一化
 
-+   [在Scikit-Learn中简化混合特征类型预处理的管道](/2020/06/simplifying-mixed-feature-type-preprocessing-scikit-learn-pipelines.html)
++   在 Scikit-Learn 中简化混合特征类型预处理的管道
 
-+   [Scikit-learn 0.23中的5个重要新特性](/2020/05/5-great-new-features-scikit-learn.html)
++   Scikit-learn 0.23 中的 5 个重要新特性
 
 ### 更多相关内容
 
-+   [使用SQL处理时间序列中的缺失值](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
++   [使用 SQL 处理时间序列中的缺失值](https://www.kdnuggets.com/2022/09/handling-missing-values-timeseries-sql.html)
 
 +   [如何利用插值技术处理 Pandas 中的缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
 
-+   [机器学习并不像你的大脑 第 4 部分：神经元的…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)
++   [机器学习并不像你的大脑 第四部分：神经元的…](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-4-neuron-limited-ability-represent-precise-values.html)
 
 +   [使用 SHAP 值来提升机器学习模型的可解释性](https://www.kdnuggets.com/2023/08/shap-values-model-interpretability-machine-learning.html)
 

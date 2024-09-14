@@ -1,8 +1,8 @@
 # 现代数据科学中的贝叶斯思维
 
-> 原文：[https://www.kdnuggets.com/bayesian-thinking-in-modern-data-science](https://www.kdnuggets.com/bayesian-thinking-in-modern-data-science)
+> 原文：[`www.kdnuggets.com/bayesian-thinking-in-modern-data-science`](https://www.kdnuggets.com/bayesian-thinking-in-modern-data-science)
 
-![现代数据科学中的贝叶斯思维](../Images/398d47632c0aafbd03702c6dc0a9f7a8.png)
+![现代数据科学中的贝叶斯思维](img/398d47632c0aafbd03702c6dc0a9f7a8.png)
 
 编辑图片 | Midjourney
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -36,7 +36,7 @@
 
 该定理描述了如何根据新信息更新假设的概率。它的数学表达式为：
 
-![现代数据科学中的贝叶斯思维](../Images/f14c5716e5dc1ab7c93f5450a1d9abdd.png) 贝叶斯定理（来源：[Eric Castellanos 博客](https://ericcastellanos.me/post/a_gentle_introduction_to_bayesian_statistics/)) 其中：
+![现代数据科学中的贝叶斯思维](img/f14c5716e5dc1ab7c93f5450a1d9abdd.png) 贝叶斯定理（来源：[Eric Castellanos 博客](https://ericcastellanos.me/post/a_gentle_introduction_to_bayesian_statistics/)) 其中：
 
 **P(A|B)** 是假设的后验概率。
 
@@ -62,7 +62,7 @@
 
 ### 贝叶斯神经网络
 
-贝叶斯神经网络（BNNs）是提供概率性输出的神经网络。它们提供预测结果以及不确定性度量。与固定参数不同，BNNs 使用权重和偏置的概率分布。这使得BNNs能够捕捉并在网络中传播不确定性。它们对需要不确定性测量和决策的任务非常有用。它们被用于分类和回归任务。
+贝叶斯神经网络（BNNs）是提供概率性输出的神经网络。它们提供预测结果以及不确定性度量。与固定参数不同，BNNs 使用权重和偏置的概率分布。这使得 BNNs 能够捕捉并在网络中传播不确定性。它们对需要不确定性测量和决策的任务非常有用。它们被用于分类和回归任务。
 
 示例：在欺诈检测中，贝叶斯网络分析诸如交易历史和用户行为等变量之间的关系，以发现与欺诈相关的异常模式。与传统方法相比，它们提高了欺诈检测系统的准确性。
 
@@ -125,20 +125,20 @@ print(pm.summary(trace))
 
 ## 总结
 
-贝叶斯方法将先验信念与新证据结合，以进行信息化决策。它们在多个领域提高预测准确性并管理不确定性。工具如PyMC4、Stan和TensorFlow Probability提供了强大的贝叶斯分析支持。这些工具帮助从复杂数据中做出概率预测。
+贝叶斯方法将先验信念与新证据结合，以进行信息化决策。它们在多个领域提高预测准确性并管理不确定性。工具如 PyMC4、Stan 和 TensorFlow Probability 提供了强大的贝叶斯分析支持。这些工具帮助从复杂数据中做出概率预测。
 
 **[Jayita Gulati](https://www.linkedin.com/in/jayitagulati1998/)** 是一位机器学习爱好者和技术作者，因对构建机器学习模型的热情而驱动。她拥有利物浦大学计算机科学硕士学位。
 
 ### 更多相关主题
 
-+   [KDnuggets新闻，7月13日：数据科学的线性代数；10种现代…](https://www.kdnuggets.com/2022/n28.html)
++   [KDnuggets 新闻，7 月 13 日：数据科学的线性代数；10 种现代…](https://www.kdnuggets.com/2022/n28.html)
 
 +   [使用基础和现代算法处理计算机科学问题…](https://www.kdnuggets.com/2023/11/packt-tackle-computer-science-problems-fundamental-modern-algorithms-machine-learning)
 
-+   [10种现代数据工程工具](https://www.kdnuggets.com/2022/07/10-modern-data-engineering-tools.html)
++   [10 种现代数据工程工具](https://www.kdnuggets.com/2022/07/10-modern-data-engineering-tools.html)
 
 +   [学习现代预测技术，帮助预测未来商业结果…](https://www.kdnuggets.com/2022/12/sphere-learn-modern-forecasting-techniques-help-predict-future-business-outcomes.html)
 
-+   [2024年必须了解的7种现代SQL数据库](https://www.kdnuggets.com/7-modern-sql-database-you-must-know-in-2024)
++   [2024 年必须了解的 7 种现代 SQL 数据库](https://www.kdnuggets.com/7-modern-sql-database-you-must-know-in-2024)
 
 +   [数据科学中的贝叶斯与频率学派统计](https://www.kdnuggets.com/2023/05/bayesian-frequentist-statistics-data-science.html)

@@ -1,8 +1,8 @@
-# 2023年7款最佳数据建模工具
+# 2023 年 7 款最佳数据建模工具
 
-> 原文：[https://www.kdnuggets.com/2023/03/list-7-best-data-modeling-tools-2023.html](https://www.kdnuggets.com/2023/03/list-7-best-data-modeling-tools-2023.html)
+> 原文：[`www.kdnuggets.com/2023/03/list-7-best-data-modeling-tools-2023.html`](https://www.kdnuggets.com/2023/03/list-7-best-data-modeling-tools-2023.html)
 
-![2023年7款最佳数据建模工具](../Images/5c2059af2c98823d5a92cfc6c55b6ab0.png)
+![2023 年 7 款最佳数据建模工具](img/5c2059af2c98823d5a92cfc6c55b6ab0.png)
 
 图片来自 macrovectoron [Freepik](https://www.freepik.com/free-vector/holographic-human-machine-direct-manipulation-interfaces-system-big-data-transfer-analysis-communication-isometric-composition_7380081.htm#query=data%20model&position=11&from_view=search&track=ais)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 # 1\. Erwin 数据建模工具
 
-![2023年7款最佳数据建模工具](../Images/0d5bd1ed8e23060f0967224f69d90d27.png)
+![2023 年 7 款最佳数据建模工具](img/0d5bd1ed8e23060f0967224f69d90d27.png)
 
 **ED Modeler** 是一个用于设计和分析数据结构的工具，具有标准化设计，支持图示数据的部署，无论其位置和结构如何，提供自动化功能生成模式和混合架构。
 
@@ -50,7 +50,7 @@
 
 # 2. ER/Studio
 
-![2023年最佳数据建模工具的7个列表](../Images/ae27893a3cf5c0920040e9a01ccdafd4.png)
+![2023 年最佳数据建模工具的 7 个列表](img/ae27893a3cf5c0920040e9a01ccdafd4.png)
 
 **Idera 的 ER/Studio** 是一个数据建模工具，能够识别多个数据库系统中的数据资产和来源，支持数据模型的创建与共享，并从开始到结束跟踪它们。
 
@@ -78,7 +78,7 @@
 
 # 4. Oracle SQL Developer 数据建模工具
 
-![2023年最佳数据建模工具的7个列表](../Images/960438756e49bdd10c37e0016fe5a5be.png)
+![2023 年最佳数据建模工具的 7 个列表](img/960438756e49bdd10c37e0016fe5a5be.png)
 
 **Oracle SQL Developer Data Modeler** 是另一款出色的免费数据库建模工具，帮助企业获取、组织数据并从中获取洞察，同时提高生产力。它提供了广泛的数据模型，包括逻辑模型、关系模型、物理模型和多维数据类型模型。
 
@@ -92,7 +92,7 @@
 
 # 5\. IBM Infosphere Data Architect
 
-![2023年7大最佳数据建模工具](../Images/11d57ead97ba867f5c4c084a02d9d4b5.png)
+![2023 年 7 大最佳数据建模工具](img/11d57ead97ba867f5c4c084a02d9d4b5.png)
 
 **IBM Infosphere** 以其处理各种数据模式的能力而闻名，并有助于标准化应用程序、数据库和服务器之间的接口。除此之外，Infosphere 还帮助跨生命周期工作，并协助组织缩短上市时间。
 
@@ -108,7 +108,7 @@
 
 # 6\. MySQL Workbench
 
-![2023年7大最佳数据建模工具](../Images/1bff79a08d5618ce866f2e2581ba81fa.png)
+![2023 年 7 大最佳数据建模工具](img/1bff79a08d5618ce866f2e2581ba81fa.png)
 
 在处理复杂的 ER 模型时，Workbench 是一个合适的模型。它专门为**MySQL DB**创建，有助于生成、执行和优化 SQL 查询，支持包括 Mac、Linux 和 Windows 在内的所有主要操作系统。
 
@@ -126,7 +126,7 @@
 
 # 7\. Archi
 
-![2023年7大最佳数据建模工具](../Images/4a7b6d9b40ba80a7d50ce4a764466da4.png)
+![2023 年 7 大最佳数据建模工具](img/4a7b6d9b40ba80a7d50ce4a764466da4.png)
 
 **Archi** 在需要小团队内进行数据处理的小型和中型组织中得到广泛使用。它提供了一种优雅的视觉数据表示解决方案，同时成本低廉。
 
@@ -152,9 +152,9 @@
 
 ### 更多相关主题
 
-+   [2023年你需要了解的数据分析工具](https://www.kdnuggets.com/2023/05/data-analytics-tools-need-know-2023.html)
++   [2023 年你需要了解的数据分析工具](https://www.kdnuggets.com/2023/05/data-analytics-tools-need-know-2023.html)
 
-+   [2023年十大开源数据科学工具的比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
++   [2023 年十大开源数据科学工具的比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
 
 +   [如何开始使用 SQL - 免费学习资源列表](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)
 

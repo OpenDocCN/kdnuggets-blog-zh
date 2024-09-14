@@ -1,8 +1,8 @@
 # 一个主观的 R 数据科学工具箱，来自 Hadley Wickham 的 tidyverse
 
-> 原文：[https://www.kdnuggets.com/2017/10/tidyverse-powerful-r-toolbox.html](https://www.kdnuggets.com/2017/10/tidyverse-powerful-r-toolbox.html)
+> 原文：[`www.kdnuggets.com/2017/10/tidyverse-powerful-r-toolbox.html`](https://www.kdnuggets.com/2017/10/tidyverse-powerful-r-toolbox.html)
 
-![](../Images/c25a61e728673f95213e84868a59ef3e.png)
+![](img/c25a61e728673f95213e84868a59ef3e.png)
 
 在这篇文章中，我们将总结一下 **tidyverse**，这是一套 R 包，它们共享一种常见的数据表示和 API 设计，以实现数据科学工作流程的协调和流畅性，旨在提高一致性，易于安装。它可以被视为 R 中的数据科学和数据管理工具箱，因为它是为指导用户进行提高可重现性和沟通能力的工作流程而构建的。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速跟踪网络安全职业发展
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速跟踪网络安全职业发展
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 部门支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 部门支持你的组织
 
 * * *
 
@@ -22,7 +22,7 @@
 
 首先，介绍 tidyverse 的历史，以及它是如何形成的和背后的幕后推手是谁。这个“包里的包”是由 Hadley Wickham 开发的，他是 RStudio 的首席科学家，也是令人惊叹的 O'Reilly 系列书籍“R 数据科学”的合著者；他也负责将其维护到最佳状态。你可能已经熟悉 Hadley，因为他开发了之前的 R 包，如 reshape、reshape2 和 plyr；这些又是 tidyverse 的构建块，是几次实验和版本的产物。它旨在为统计学家和数据科学家提供帮助，提高他们的生产力，并试图将规范化的数据科学工作流程（图）抽象为一个实际的产品。它是一个非常多功能和一致性的软件包，因为其强大的功能涵盖从提高生产力和工作流程改进到新的数据科学软件开发和数据科学教育。
 
-![](../Images/0e8a6ee7ad2203a2bbc1496486941786.png)
+![](img/0e8a6ee7ad2203a2bbc1496486941786.png)
 
 重要的是要更详细地介绍一下这个包的一般特性，这样我们就可以在我们的实际示例中看到它的运作方式。它的一致性深深根植于变量、函数和运算符遵循正则模式和语法的事实。例如，每个函数的第一个参数将是一个整洁的数据框（每个观察一行，每个变量一列，每个单元格一个入口）。为了执行操作，可以直观地连接一系列命令、基本函数和运算符来创建一个整洁的管道。核心包组织的方式、编码风格和测试程序构成了第二个较低级别的一致性因素，因此当我们说“一致”这个词时，不应轻易忽视。最后，由于分析工作流程过程与不同的 tidyverse 子包之间存在一对一的关系，因此能够轻松建立有效的端到端工作流程，以响应特定的分析目的并利用多种类型的数据。
 
@@ -56,11 +56,11 @@
 
 **相关**:
 
-+   [R 和 dplyr 的下一代数据处理](/2017/08/next-generation-data-manipulation-dplyr.html)
++   R 和 dplyr 的下一代数据处理
 
-+   [缺失数据的解决方案：使用 R 进行插补](/2017/09/missing-data-imputation-using-r.html)
++   缺失数据的解决方案：使用 R 进行插补
 
-+   [Python vs R – 数据科学、机器学习中谁更领先？](/2017/09/python-vs-r-data-science-machine-learning.html)
++   Python vs R – 数据科学、机器学习中谁更领先？
 
 ### 更多相关主题
 
@@ -68,10 +68,10 @@
 
 +   [停止学习数据科学，找到目标，找到目标...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学最低要求：你需要知道的10个基本技能才能开始...](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学最低要求：你需要知道的 10 个基本技能才能开始...](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
 +   [数据科学定义幽默：一系列古怪的引语...](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)
 
-+   [5个数据科学项目，学习5个关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目，学习 5 个关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets新闻，11月30日：Chebychev的定理是什么，以及如何...](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：Chebychev 的定理是什么，以及如何...](https://www.kdnuggets.com/2022/n46.html)

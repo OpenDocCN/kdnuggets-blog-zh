@@ -1,8 +1,8 @@
 # 使用直方图探索数据分布
 
-> 原文：[https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html](https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html)
+> 原文：[`www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html`](https://www.kdnuggets.com/2023/05/exploring-data-distributions-histograms.html)
 
-![使用直方图探索数据分布](../Images/f26cd301002228f46e823712f476de40.png)
+![使用直方图探索数据分布](img/f26cd301002228f46e823712f476de40.png)
 
 图片来自 Bing 图像生成器
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -37,7 +37,7 @@ df = pd.read_csv('https://raw.githubusercontent.com/bot13956/Bayes_theorem/maste
 pd.head() 
 ```
 
-![使用直方图探索数据分布](../Images/1b63f1cbfdfac7627e53d27392102498.png)
+![使用直方图探索数据分布](img/1b63f1cbfdfac7627e53d27392102498.png)
 
 [heights](https://github.com/bot13956/Bayes_theorem/blob/master/heights.csv) 数据集的头部信息显示了男性和女性的身高（以英寸为单位）。图片由作者提供。
 
@@ -51,7 +51,7 @@ sns.histplot(data = df, x="height")
 plt.show()
 ```
 
-![使用直方图探索数据分布](../Images/8e33669bb392070ffd910a22d8045187.png)
+![使用直方图探索数据分布](img/8e33669bb392070ffd910a22d8045187.png)
 
 直方图显示了数据集中所有身高的分布。图片由作者提供。
 
@@ -65,7 +65,7 @@ sns.histplot(data=df, x="height", hue="sex")
 plt.show()
 ```
 
-![使用直方图探索数据分布](../Images/12e10d96f0a64161f5b187073b98e10b.png)
+![使用直方图探索数据分布](img/12e10d96f0a64161f5b187073b98e10b.png)
 
 显示男性和女性身高分布的直方图。图片由作者提供。
 
@@ -79,7 +79,7 @@ sns.histplot(data = df[df.sex=='Male']['height'], color='blue')
 plt.show()
 ```
 
-![使用直方图探索数据分布](../Images/d73d68f6976a0edafc710dc62002946c.png)
+![使用直方图探索数据分布](img/d73d68f6976a0edafc710dc62002946c.png)
 
 显示男性身高分布的直方图。图片由作者提供。
 
@@ -89,7 +89,7 @@ sns.histplot(data = df[df.sex=='Female']['height'], color='orange')
 plt.show()
 ```
 
-![使用直方图探索数据分布](../Images/a02f430334a604c64f1690b843d122d8.png)
+![使用直方图探索数据分布](img/a02f430334a604c64f1690b843d122d8.png)
 
 显示女性身高分布的直方图。图片由作者提供。
 
@@ -103,7 +103,7 @@ sns.histplot(data = df, x = 'height', KDE = 'True')
 plt.show()
 ```
 
-![使用直方图探索数据分布](../Images/8ae440d0ea1ffa8ed96eceb13c84d527.png)
+![使用直方图探索数据分布](img/8ae440d0ea1ffa8ed96eceb13c84d527.png)
 
 带有 KDE 图的全部身高数据直方图。图片由作者提供。
 
@@ -113,7 +113,7 @@ sns.histplot(data=df, x="height", hue="sex", KDE = 'True')
 plt.show()
 ```
 
-![使用直方图探索数据分布](../Images/d370688d11721e36d2e7ea9b7bf5d706.png)
+![使用直方图探索数据分布](img/d370688d11721e36d2e7ea9b7bf5d706.png)
 
 带有核密度估计图的男性和女性身高分布直方图。图片由作者提供。
 

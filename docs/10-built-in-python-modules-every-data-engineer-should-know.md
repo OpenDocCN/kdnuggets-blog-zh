@@ -1,8 +1,8 @@
 # 每个数据工程师都应该知道的 10 个内置 Python 模块
 
-> 原文：[https://www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know](https://www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know)
+> 原文：[`www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know`](https://www.kdnuggets.com/10-built-in-python-modules-every-data-engineer-should-know)
 
-![每个数据工程师都应该知道的 10 个内置 Python 模块](../Images/6e455bb9f0812cffe77fc8a0247e588f.png)
+![每个数据工程师都应该知道的 10 个内置 Python 模块](img/6e455bb9f0812cffe77fc8a0247e588f.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@ Python 是你作为数据工程师将使用的编程语言之一。作为数据�
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -36,7 +36,7 @@ Python 是你作为数据工程师将使用的编程语言之一。作为数据�
 
 让我们开始吧。
 
-![python-modules-de](../Images/e7ddd9abf64a5e3813f724b2f64dd6e4.png)
+![python-modules-de](img/e7ddd9abf64a5e3813f724b2f64dd6e4.png)
 
 数据工程的内置 Python 模块 | 作者提供的图像
 

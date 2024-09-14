@@ -1,10 +1,10 @@
 # DIY 深度学习项目
 
-> 原文：[https://www.kdnuggets.com/2018/06/diy-deep-learning-projects.html](https://www.kdnuggets.com/2018/06/diy-deep-learning-projects.html)
+> 原文：[`www.kdnuggets.com/2018/06/diy-deep-learning-projects.html`](https://www.kdnuggets.com/2018/06/diy-deep-learning-projects.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![图像](../Images/17f2247c67478f353b74fc6c0d17296d.png)
+![图像](img/17f2247c67478f353b74fc6c0d17296d.png)
 
 ### LinkedIn 数据科学社区
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
-![](../Images/338973683142cf09dec12d6f65a55655.png)
+![](img/338973683142cf09dec12d6f65a55655.png)
 
 阿克沙伊·巴哈杜尔（Akshay Bahadur）是 LinkedIn 数据科学社区中的优秀例子之一。还有许多其他平台上的优秀人士，如 Quora、StackOverflow、YouTube 和众多论坛，他们在科学、哲学、数学、语言以及数据科学及其相关领域相互帮助。
 
-![](../Images/835c6f3c51ede047eadc1d6ca2ac2318.png)
+![](img/835c6f3c51ede047eadc1d6ca2ac2318.png)
 
 阿克沙伊·巴哈杜尔（Akshay Bahadur）。
 
@@ -32,9 +32,9 @@
 
 ### 从深度学习和计算机视觉开始
 
-![](../Images/eb810539c6ccac2761f884c014417c71.png)
+![](img/eb810539c6ccac2761f884c014417c71.png)
 
-[https://github.com/facebookresearch/Detectron](https://github.com/facebookresearch/Detectron)
+[`github.com/facebookresearch/Detectron`](https://github.com/facebookresearch/Detectron)
 
 在深度学习领域，研究图像分类、检测以及在“看到”某物时采取行动非常重要，这一领域在这个十年取得了令人惊叹的成果，比如在某些问题上超越了人类水平的表现。
 
@@ -68,7 +68,7 @@
 > 
 > 视频跟踪是使用相机随时间定位移动物体（或多个物体）的过程。它有多种用途，包括：人机交互、安全与监控、视频通信与压缩、增强现实、交通控制、医学成像和视频编辑。
 
-![](../Images/fd9958aece7bd34acb9d68b741ace2fd.png)
+![](img/fd9958aece7bd34acb9d68b741ace2fd.png)
 
 这是你需要的所有代码来重现它：
 
@@ -164,43 +164,43 @@ cv2.destroyAllWindows()
 
 **算法**
 
-每只眼睛由6个（x，y）坐标表示，从眼睛的左上角开始（就像你在看那个人一样），然后顺时针环绕眼睛：
+每只眼睛由 6 个（x，y）坐标表示，从眼睛的左上角开始（就像你在看那个人一样），然后顺时针环绕眼睛：
 
-![](../Images/bbdf9b2032f999fdfb37fe73b2402e4d.png)
+![](img/bbdf9b2032f999fdfb37fe73b2402e4d.png)
 
 **条件**
 
-它检查20个连续的帧，如果眼睛纵横比小于0.25，则会生成警报。
+它检查 20 个连续的帧，如果眼睛纵横比小于 0.25，则会生成警报。
 
 **关系**
 
-![](../Images/e9960701bb337eb9d65d773675f4c540.png)
+![](img/e9960701bb337eb9d65d773675f4c540.png)
 
 **总结**
 
-![](../Images/2069cf3ed782cfb6cd957bbbf49fe34b.png)
+![](img/2069cf3ed782cfb6cd957bbbf49fe34b.png)
 
-![](../Images/bf8688f84fe8201275fb8cc0c24cc37e.png)
+![](img/bf8688f84fe8201275fb8cc0c24cc37e.png)
 
-### 3. 使用Softmax回归进行数字识别
+### 3. 使用 Softmax 回归进行数字识别
 
 [**akshaybahadur21/Digit-Recognizer**](https://github.com/akshaybahadur21/Digit-Recognizer)
 
 *Digit-Recognizer - 识别数字的机器学习分类器* [github.com](https://github.com/akshaybahadur21/Digit-Recognizer)
 
-这段代码帮助你使用softmax回归分类不同的数字。你可以安装Conda来解决机器学习的所有依赖关系。
+这段代码帮助你使用 softmax 回归分类不同的数字。你可以安装 Conda 来解决机器学习的所有依赖关系。
 
 **描述**
 
-Softmax回归（同义词：多项逻辑回归、最大熵分类器或多类逻辑回归）是逻辑回归的一种推广，我们可以用于多类分类（假设类别是相互排斥的）。相对而言，在二分类任务中，我们使用（标准）逻辑回归模型。
+Softmax 回归（同义词：多项逻辑回归、最大熵分类器或多类逻辑回归）是逻辑回归的一种推广，我们可以用于多类分类（假设类别是相互排斥的）。相对而言，在二分类任务中，我们使用（标准）逻辑回归模型。
 
-![](../Images/205b0cabc1ab47ddf01fa63dbb82487f.png)
+![](img/205b0cabc1ab47ddf01fa63dbb82487f.png)
 
 **Python 实现**
 
-使用的数据集是MNIST，图像大小为28 X 28，计划是使用逻辑回归、浅层网络和深度神经网络来分类0到9的数字。
+使用的数据集是 MNIST，图像大小为 28 X 28，计划是使用逻辑回归、浅层网络和深度神经网络来分类 0 到 9 的数字。
 
-这里最好的部分之一是他使用Numpy编码了三个模型，包括优化、前向和反向传播以及所有其他内容。
+这里最好的部分之一是他使用 Numpy 编码了三个模型，包括优化、前向和反向传播以及所有其他内容。
 
 对于逻辑回归：[**查看代码**](https://gist.github.com/FavioVazquez/122e778c15e23d6c18969bc9e70cdbc5)
 
@@ -216,7 +216,7 @@ Softmax回归（同义词：多项逻辑回归、最大熵分类器或多类逻�
 python Dig-Rec.py
 ```
 
-![](../Images/0bcd81e8fa9f98464832fc19bc07631a.png)
+![](img/0bcd81e8fa9f98464832fc19bc07631a.png)
 
 **通过网络摄像头显示图像的执行**
 
@@ -226,7 +226,7 @@ python Dig-Rec.py
 python Digit-Recognizer.py
 ```
 
-![](../Images/c8360c56faba426c0dfada7fc591de13.png)
+![](img/c8360c56faba426c0dfada7fc591de13.png)
 
 ### Devanagiri 识别
 
@@ -234,11 +234,11 @@ python Digit-Recognizer.py
 
 *Devanagiri-Recognizer - 使用卷积网络的印地语字母分类器* [github.com](https://github.com/akshaybahadur21/Devanagiri-Recognizer)
 
-这段代码帮助你使用卷积网络对印地语（Devanagiri）不同字母进行分类。你可以安装Conda来解决机器学习的所有依赖关系。
+这段代码帮助你使用卷积网络对印地语（Devanagiri）不同字母进行分类。你可以安装 Conda 来解决机器学习的所有依赖关系。
 
 **使用的技术**
 
-> 我使用了卷积神经网络。我使用Tensorflow作为框架，Keras API提供高级抽象。
+> 我使用了卷积神经网络。我使用 Tensorflow 作为框架，Keras API 提供高级抽象。
 
 **架构**
 
@@ -252,9 +252,9 @@ CONV2D → MAXPOOL → CONV2D → MAXPOOL → FC → Softmax → 分类
 
 1.  你可以添加额外的图像到训练集中，以提高准确性。
 
-**Python实现**
+**Python 实现**
 
-数据集- DHCD（Devanagari字符数据集），图像大小为32 X 32，并使用卷积网络。
+数据集- DHCD（Devanagari 字符数据集），图像大小为 32 X 32，并使用卷积网络。
 
 要运行代码，输入`python Dev-Rec.py`
 
@@ -262,19 +262,19 @@ CONV2D → MAXPOOL → CONV2D → MAXPOOL → FC → Softmax → 分类
 python Dev-Rec.py
 ```
 
-![](../Images/7bc3ba69048c99f3fb0a415154c37d90.png)
+![](img/7bc3ba69048c99f3fb0a415154c37d90.png)
 
-### 4\. 使用FaceNet进行面部识别
+### 4\. 使用 FaceNet 进行面部识别
 
 [**akshaybahadur21/Facial-Recognition-using-Facenet**](https://github.com/akshaybahadur21/Facial-Recognition-using-Facenet)
 
-[*Facial-Recognition-using-Facenet - 使用facenets实现面部识别。*](https://github.com/akshaybahadur21/Facial-Recognition-using-Facenet)
+[*Facial-Recognition-using-Facenet - 使用 facenets 实现面部识别。*](https://github.com/akshaybahadur21/Facial-Recognition-using-Facenet)
 
-这段代码帮助进行面部识别，使用facenets（[https://arxiv.org/pdf/1503.03832.pdf](https://arxiv.org/pdf/1503.03832.pdf)）。facenets的概念最初在一篇研究论文中提出。主要概念涉及三元组损失函数，用于比较不同人的图像。这个概念使用了inception网络，源码来自于此，而fr_utils.py来自于deeplearning.ai作为参考。我添加了自己的一些功能，以提供稳定性和更好的检测。
+这段代码帮助进行面部识别，使用 facenets（[`arxiv.org/pdf/1503.03832.pdf`](https://arxiv.org/pdf/1503.03832.pdf)）。facenets 的概念最初在一篇研究论文中提出。主要概念涉及三元组损失函数，用于比较不同人的图像。这个概念使用了 inception 网络，源码来自于此，而 fr_utils.py 来自于 deeplearning.ai 作为参考。我添加了自己的一些功能，以提供稳定性和更好的检测。
 
 **代码要求**
 
-你可以为Python安装Conda，它解决了所有机器学习的依赖关系，你将需要：
+你可以为 Python 安装 Conda，它解决了所有机器学习的依赖关系，你将需要：
 
 ```py
 numpy
@@ -294,13 +294,13 @@ scipy
 
 1.  仅在你的眼睛睁开时检测面部。（安全措施）。
 
-1.  使用dlib的面部对齐功能，以便在实时流媒体中有效预测。
+1.  使用 dlib 的面部对齐功能，以便在实时流媒体中有效预测。
 
-**Python实现**
+**Python 实现**
 
-1.  使用的网络- Inception网络
+1.  使用的网络- Inception 网络
 
-1.  原始论文——Google的Facenet
+1.  原始论文——Google 的 Facenet
 
 **步骤**
 
@@ -310,7 +310,7 @@ scipy
 
 1.  运行`rec-feat.py`来运行应用程序。
 
-![](../Images/1f71c3e2a0a479ea1676da80444be5ff.png)
+![](img/1f71c3e2a0a479ea1676da80444be5ff.png)
 
 ### 5\. Emojinator
 
@@ -322,7 +322,7 @@ scipy
 
 **代码要求**
 
-你可以为Python安装Conda，它解决了所有机器学习的依赖关系，你将需要：
+你可以为 Python 安装 Conda，它解决了所有机器学习的依赖关系，你将需要：
 
 ```py
 numpy
@@ -364,7 +364,7 @@ scipy
 
 Akshay Bahadur 和 Raghav Patnecha。
 
-![](../Images/bf56b24d5e89f9afd35f9cca9a979c8c.png)
+![](img/bf56b24d5e89f9afd35f9cca9a979c8c.png)
 
 ### 结语
 
@@ -398,11 +398,11 @@ Akshay Bahadur 和 Raghav Patnecha。
 
 **相关:**
 
-+   [一个“奇怪”的深度学习入门](//2018/03/weird-introduction-deep-learning.html)
++   一个“奇怪”的深度学习入门
 
-+   [成为数据科学家的两面性](/2018/03/two-sides-getting-job-data-scientist.html)
++   成为数据科学家的两面性
 
-+   [我深入学习深度学习的历程](/2018/01/journey-into-deep-learning.html)
++   我深入学习深度学习的历程
 
 ### 更多相关话题
 

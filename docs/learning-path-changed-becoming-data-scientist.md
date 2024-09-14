@@ -1,10 +1,10 @@
 # 成为数据科学家后我的学习路径如何改变
 
-> 原文：[https://www.kdnuggets.com/2021/08/learning-path-changed-becoming-data-scientist.html](https://www.kdnuggets.com/2021/08/learning-path-changed-becoming-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/08/learning-path-changed-becoming-data-scientist.html`](https://www.kdnuggets.com/2021/08/learning-path-changed-becoming-data-scientist.html)
 
-[评论](#comments)
+评论
 
-![](../Images/ec2ed53e88405bfeaa2cd14acb5eb03c.png)
+![](img/ec2ed53e88405bfeaa2cd14acb5eb03c.png)
 
 图片来源：[Karsten Würth](https://unsplash.com/@karsten_wuerth?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/path?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -18,15 +18,15 @@
 
 ## 数据的规模
 
-> 对于实际问题来说，1000万行数据并不算多。
+> 对于实际问题来说，1000 万行数据并不算多。
 
-对我来说，最显著的变化是数据的规模。当我自学时，我使用的数据集最多只有10万行。我现在把它视为一个小数据集。数据的规模取决于你所工作的领域和问题。一般来说，对于实际问题来说，1000万行数据并不算多。
+对我来说，最显著的变化是数据的规模。当我自学时，我使用的数据集最多只有 10 万行。我现在把它视为一个小数据集。数据的规模取决于你所工作的领域和问题。一般来说，对于实际问题来说，1000 万行数据并不算多。
 
 使用大型数据集有其自身的挑战。首先，我需要学习可以处理这种数据集的新工具。在开始作为数据科学家工作之前，Pandas 对我来说已经足够。然而，它在大规模数据处理方面并不高效。
 
 允许分布式计算的工具更受欢迎。Spark 是其中最受欢迎的工具之一。它是一个用于大规模数据处理的分析引擎。Spark 让你可以将数据和计算分布在集群上，以实现显著的性能提升。
 
-幸运的是，可以使用Python代码运行Spark。PySpark 是 Spark 的 Python API。它结合了 Python 的简单性和 Spark 的高效性。
+幸运的是，可以使用 Python 代码运行 Spark。PySpark 是 Spark 的 Python API。它结合了 Python 的简单性和 Spark 的高效性。
 
 ## 云计算
 
@@ -36,7 +36,7 @@
 
 为了高效地完成工作，全面了解云工具和服务非常重要。虽然有很多云服务提供商，但主要的玩家是 AWS、Azure 和 Google Cloud Platform。我不得不学习如何使用他们的服务和管理存储在云中的数据。
 
-![](../Images/8367e3ace3ba598ada95f99e550339fe.png)
+![](img/8367e3ace3ba598ada95f99e550339fe.png)
 
 照片来自 [Spikeball](https://unsplash.com/@spikeball?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) ，发布在 [Unsplash](https://unsplash.com/s/photos/together?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)上
 
@@ -82,22 +82,22 @@ Git 比看起来要复杂一些。然而，经过几个项目的实践，你会�
 
 **相关内容:**
 
-+   [是什么让我花了那么久才找到数据科学家的工作](/2021/03/land-data-scientist-job.html)
++   是什么让我花了那么久才找到数据科学家的工作
 
-+   [你投资组合中最好的数据科学项目](/2021/02/best-data-science-project-portfolio.html)
++   你投资组合中最好的数据科学项目
 
-+   [数据科学家必须了解的10个统计概念](/2021/04/10-statistical-concepts-data-scientists.html)
++   数据科学家必须了解的 10 个统计概念
 
 ### 更多相关内容
 
 +   [数据科学已经改变，而不是消失！](https://www.kdnuggets.com/2023/08/data-science-changed-died.html)
 
-+   [8篇改变了NLP领域的创新BERT知识蒸馏论文](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
++   [8 篇改变了 NLP 领域的创新 BERT 知识蒸馏论文](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
 
-+   [我如何获得4份数据科学工作邀请并在2个月内收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
++   [我如何获得 4 份数据科学工作邀请并在 2 个月内收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
 
 +   [成为数据优先企业的好处](https://www.kdnuggets.com/2022/07/benefits-becoming-datafirst-enterprise.html)
 
-+   [为什么TinyML案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
++   [为什么 TinyML 案例越来越受欢迎？](https://www.kdnuggets.com/2022/10/tinyml-cases-becoming-popular.html)
 
 +   [成为技术行业专家的终极路线图](https://www.kdnuggets.com/the-ultimate-roadmap-to-becoming-specialised-in-the-tech-industry)

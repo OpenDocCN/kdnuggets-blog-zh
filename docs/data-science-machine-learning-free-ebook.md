@@ -1,24 +1,24 @@
 # 数据科学与机器学习：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2020/12/data-science-machine-learning-free-ebook.html](https://www.kdnuggets.com/2020/12/data-science-machine-learning-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2020/12/data-science-machine-learning-free-ebook.html`](https://www.kdnuggets.com/2020/12/data-science-machine-learning-free-ebook.html)
 
-[评论](#comments)
+评论
 
 我们已经有一段时间没有与读者分享免费电子书了，但本周我们发现了另一部值得关注的作品，并希望在假期学习季节（这绝对是一个存在的事情）来临之前与大家分享。
 
 今天我们分享**[数据科学与机器学习：数学与统计方法](https://acems.org.au/data-science-machine-learning-book-available-download)**，由 D.P. Kroese、Z.I. Botev、T. Taimre 和 R. Vaisman 合著。该书去年出版，除了可以免费下载 PDF 外，还可以购买印刷版（和 Kindle 版）。
 
-![书籍封面](../Images/6720a35a57799d43e4f611d71f19ec55.png)
+![书籍封面](img/6720a35a57799d43e4f611d71f19ec55.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -62,21 +62,21 @@
 
 1.  概率与统计
 
-1.  Python基础
+1.  Python 基础
 
 通过阅读这本书，你不会成为一个完整的数据科学专家，但这并不是它的目标。通过学习《数据科学与机器学习：数学与统计方法》，你将获得该领域基础知识的坚实基础，在此基础上可以添加更多前沿的方法和算法。
 
-我最喜欢的机器学习书籍之一，是我首次接触该主题时使用的书籍，名为[《数据挖掘：实用机器学习工具与技术》](https://www.elsevier.com/books/data-mining-practical-machine-learning-tools-and-techniques/witten/978-0-12-374856-0)，也称为Weka书。我作为初学者非常喜欢它如何将实践和理论结合起来，根据需要介绍和解释数学，以学习当时呈现的实际实施。我发现这本书有类似的格式，具有使用Python代替Weka工具包的优势，至少在今天，Python的实现路径要更为相关。
+我最喜欢的机器学习书籍之一，是我首次接触该主题时使用的书籍，名为[《数据挖掘：实用机器学习工具与技术》](https://www.elsevier.com/books/data-mining-practical-machine-learning-tools-and-techniques/witten/978-0-12-374856-0)，也称为 Weka 书。我作为初学者非常喜欢它如何将实践和理论结合起来，根据需要介绍和解释数学，以学习当时呈现的实际实施。我发现这本书有类似的格式，具有使用 Python 代替 Weka 工具包的优势，至少在今天，Python 的实现路径要更为相关。
 
 我推荐这本书给任何学习数据科学和机器学习基础知识的人，并且希望按照所描述的展示格式进行学习。
 
 **相关**：
 
-+   [理解机器学习：免费的电子书](/2020/06/understanding-machine-learning-free-ebook.html)
++   理解机器学习：免费的电子书
 
-+   [统计学习导论：免费的电子书](/2020/06/introduction-statistical-learning-free-ebook.html)
++   统计学习导论：免费的电子书
 
-+   [数据挖掘与机器学习：基本概念与算法：免费的电子书](/2020/07/data-mining-machine-learning-free-ebook.html)
++   数据挖掘与机器学习：基本概念与算法：免费的电子书
 
 ### 更多相关主题
 

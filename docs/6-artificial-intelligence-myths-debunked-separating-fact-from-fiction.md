@@ -1,8 +1,8 @@
-# 6个人工智能神话破解：分辨事实与虚构
+# 6 个人工智能神话破解：分辨事实与虚构
 
-> 原文：[https://www.kdnuggets.com/6-artificial-intelligence-myths-debunked-separating-fact-from-fiction](https://www.kdnuggets.com/6-artificial-intelligence-myths-debunked-separating-fact-from-fiction)
+> 原文：[`www.kdnuggets.com/6-artificial-intelligence-myths-debunked-separating-fact-from-fiction`](https://www.kdnuggets.com/6-artificial-intelligence-myths-debunked-separating-fact-from-fiction)
 
-![6个人工智能神话破解：分辨事实与虚构](../Images/210e9d3ef296f3feaadf060e77067773.png)
+![6 个人工智能神话破解：分辨事实与虚构](img/210e9d3ef296f3feaadf060e77067773.png)
 
 图片由编辑提供
 
@@ -26,7 +26,7 @@
 
 另一方面，人工智能是一种机器模拟，旨在模仿这种自然智能的某些方面。我们与之互动的大多数人工智能应用，尤其是在商业和在线平台上，依赖于机器学习。
 
-![6个人工智能神话破解：分辨事实与虚构](../Images/9005e4d672aea5087a82ba3dce22d97b.png)
+![6 个人工智能神话破解：分辨事实与虚构](img/9005e4d672aea5087a82ba3dce22d97b.png)
 
 由 Dall-E 生成的图像
 
@@ -42,29 +42,29 @@ Llama 的 2 个开源大型语言模型（LLM）推出时，以强大的 700 亿
 
 然而，LLM 的特征数量并不一定意味着更好的性能。
 
-数据的质量和训练方法通常是模型性能和准确性的更关键因素。这已经通过[斯坦福的Alpaca实验](https://crfm.stanford.edu/2023/03/13/alpaca.html)得到证明，在这个实验中，一个简单的70亿特征的Llama基础LLM能与配备1760亿特征的ChatGPT 3.5相匹敌。
+数据的质量和训练方法通常是模型性能和准确性的更关键因素。这已经通过[斯坦福的 Alpaca 实验](https://crfm.stanford.edu/2023/03/13/alpaca.html)得到证明，在这个实验中，一个简单的 70 亿特征的 Llama 基础 LLM 能与配备 1760 亿特征的 ChatGPT 3.5 相匹敌。
 
 所以这是一个明确的“否”！
 
-更大并不总是更好。优化LLMs的规模及其对应的性能将使这些模型的使用在本地得到普及，并使我们能够将其集成到日常设备中。
+更大并不总是更好。优化 LLMs 的规模及其对应的性能将使这些模型的使用在本地得到普及，并使我们能够将其集成到日常设备中。
 
-# 3. AI的透明度和问责制
+# 3. AI 的透明度和问责制
 
-一个常见的误解是，AI是一个神秘的黑箱，缺乏任何透明度。实际上，虽然AI系统可以很复杂且仍然相当不透明，但正在进行显著的努力以提高其透明度和问责制。
+一个常见的误解是，AI 是一个神秘的黑箱，缺乏任何透明度。实际上，虽然 AI 系统可以很复杂且仍然相当不透明，但正在进行显著的努力以提高其透明度和问责制。
 
-监管机构正在推动伦理和负责任的AI使用。重要的举措如[斯坦福AI透明度报告](https://www.reuters.com/technology/stanford-researchers-issue-ai-transparency-report-urge-tech-companies-reveal-2023-10-18/)和[欧洲AI法案](https://www.europarl.europa.eu/news/en/headlines/society/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence?&at_campaign=20226-Digital&at_medium=Google_Ads&at_platform=Search&at_creation=RSA&at_goal=TR_G&at_advertiser=Webcomm&at_audience=ai%20eu&at_topic=Artificial_intelligence_Act&at_location=ES&gclid=CjwKCAjwysipBhBXEiwApJOcu1LmQb4wn6mx4gvY-k5rCK9AVDIknxLTvi2jTRjrLUNBM8-ZUsVTgBoCtfoQAvD_BwE)旨在促使公司提升AI透明度，并为政府制定这一新兴领域的法规提供依据。
+监管机构正在推动伦理和负责任的 AI 使用。重要的举措如[斯坦福 AI 透明度报告](https://www.reuters.com/technology/stanford-researchers-issue-ai-transparency-report-urge-tech-companies-reveal-2023-10-18/)和[欧洲 AI 法案](https://www.europarl.europa.eu/news/en/headlines/society/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence?&at_campaign=20226-Digital&at_medium=Google_Ads&at_platform=Search&at_creation=RSA&at_goal=TR_G&at_advertiser=Webcomm&at_audience=ai%20eu&at_topic=Artificial_intelligence_Act&at_location=ES&gclid=CjwKCAjwysipBhBXEiwApJOcu1LmQb4wn6mx4gvY-k5rCK9AVDIknxLTvi2jTRjrLUNBM8-ZUsVTgBoCtfoQAvD_BwE)旨在促使公司提升 AI 透明度，并为政府制定这一新兴领域的法规提供依据。
 
-透明AI已成为AI社区的一个焦点讨论点，涵盖了各种问题，如允许个人确定AI模型经过彻底测试的过程以及理解AI决策背后的理由。
+透明 AI 已成为 AI 社区的一个焦点讨论点，涵盖了各种问题，如允许个人确定 AI 模型经过彻底测试的过程以及理解 AI 决策背后的理由。
 
-这就是为什么全球的数据专业人士已经在致力于使AI模型更透明的方法。
+这就是为什么全球的数据专业人士已经在致力于使 AI 模型更透明的方法。
 
 因此，虽然这可能部分正确，但并不像普遍认为的那么严重！
 
-# 4. AI的绝对正确性
+# 4. AI 的绝对正确性
 
-许多人认为AI系统是完美无误的，这远非事实。像任何系统一样，AI的表现取决于其训练数据的质量，而这些数据通常，甚至总是，由人类创建或策划的。
+许多人认为 AI 系统是完美无误的，这远非事实。像任何系统一样，AI 的表现取决于其训练数据的质量，而这些数据通常，甚至总是，由人类创建或策划的。
 
-如果这些数据包含偏见，AI系统将无意中 perpetuate（延续）这些偏见。
+如果这些数据包含偏见，AI 系统将无意中 perpetuate（延续）这些偏见。
 
 [麻省理工学院团队对广泛使用的预训练语言模型的分析揭示了在将性别与某些职业和情感相关联时的明显偏见](https://news.mit.edu/2023/large-language-models-are-biased-can-logic-help-save-them-0303)。例如，像空乘人员或秘书这样的角色主要与女性特质相关，而律师和法官则与男性特质相关。情感方面也观察到了类似的行为。
 
@@ -78,11 +78,11 @@ Llama 的 2 个开源大型语言模型（LLM）推出时，以强大的 700 亿
 
 然而，历史表明，虽然技术可能使某些工作岗位变得过时，但同时也孕育了新的行业和机会。
 
-![6 人工智能神话破解：事实与虚构的分离](../Images/a963b70ab9a0cc4bb388b618dcf09a3e.png)
+![6 人工智能神话破解：事实与虚构的分离](img/a963b70ab9a0cc4bb388b618dcf09a3e.png)
 
 图片来自 [LinkedIn](https://www.linkedin.com/posts/josep-ferrer-sanchez_aicommunity-artificialintelligence-productivityboost-activity-7067892146204286976-KAbV?utm_source=share&utm_medium=member_desktop)
 
-例如，世界经济论坛预测，[虽然人工智能可能在2025年取代8500万个工作岗位，但将创造9700万个新岗位。](https://cepr.org/voxeu/columns/impact-artificial-intelligence-growth-and-employment#:~:text=The%20World%20Economic%20Forum%20concluded,information%20security%20and%20digital%20marketing.)
+例如，世界经济论坛预测，[虽然人工智能可能在 2025 年取代 8500 万个工作岗位，但将创造 9700 万个新岗位。](https://cepr.org/voxeu/columns/impact-artificial-intelligence-growth-and-employment#:~:text=The%20World%20Economic%20Forum%20concluded,information%20security%20and%20digital%20marketing.)
 
 # 6\. 人工智能接管
 
@@ -90,7 +90,7 @@ Llama 的 2 个开源大型语言模型（LLM）推出时，以强大的 700 亿
 
 尽管像埃隆·马斯克和斯蒂芬·霍金这样的有影响力人物表达了担忧，但当前的人工智能状态远未达到这种反乌托邦的形象。
 
-当今的人工智能模型，如ChatGPT，旨在协助特定任务，不具备科幻故事中描绘的能力或动机。
+当今的人工智能模型，如 ChatGPT，旨在协助特定任务，不具备科幻故事中描绘的能力或动机。
 
 所以现在……我们仍然安全！
 

@@ -1,8 +1,8 @@
 # Python 中的垃圾邮件过滤器：从零开始的朴素贝叶斯
 
-> 原文：[https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html](https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html)
+> 原文：[`www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html`](https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html)
 
-[评论](#comments)
+评论
 
 **由 [Alex Olteanu](https://www.linkedin.com/in/alex-olteanu-92b174116/)，[Dataquest](https://www.dataquest.io/) 数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -48,7 +48,7 @@ sms_spam.head()
 
 `(5572, 2)`
 
-![Figure](../Images/265504bcc608cf71d6887f351635d352.png)
+![Figure](img/265504bcc608cf71d6887f351635d352.png)
 
 下图显示，大约 87% 的消息是正常邮件（非垃圾邮件），其余 13% 是垃圾邮件。这个样本看起来具有代表性，因为在实际情况中，大多数人收到的消息都是正常邮件。
 
@@ -81,7 +81,7 @@ print(test_set.shape)
 
 `(4458, 2) (1114, 2)`
 
-我们现在将分析训练集和测试集中垃圾邮件和正常邮件的百分比。我们期望这些百分比接近于我们在完整数据集中看到的情况，其中大约87%的消息是正常邮件，剩余的13%是垃圾邮件。
+我们现在将分析训练集和测试集中垃圾邮件和正常邮件的百分比。我们期望这些百分比接近于我们在完整数据集中看到的情况，其中大约 87%的消息是正常邮件，剩余的 13%是垃圾邮件。
 
 ```py
 training_set['Label'].value_counts(normalize=True)
@@ -101,35 +101,35 @@ test_set['Label'].value_counts(normalize=True)
 
 当有新消息到达时，我们的多项式朴素贝叶斯算法将根据其对以下两个方程的结果进行分类，其中“w[1]”是第一个单词，w[1],w[2], ..., w[n]是整个消息：
 
-![方程](../Images/f1e9827fbae3494998643a8431efc05b.png)
+![方程](img/f1e9827fbae3494998643a8431efc05b.png)
 
-![方程](../Images/17a9e66d3702a62babe9fb63a985ec59.png)
+![方程](img/17a9e66d3702a62babe9fb63a985ec59.png)
 
 如果 P(Spam | w[1],w[2], ..., w[n]) 大于 P(Ham | w[1],w[2], ..., w[n])，则该消息是垃圾邮件。
 
 要计算 P(w[i]|Spam) 和 P(w[i]|Ham)，我们需要使用单独的方程：
 
-![方程](../Images/b05463d443bba797ea7fa001401c07cd.png)
+![方程](img/b05463d443bba797ea7fa001401c07cd.png)
 
-![方程](../Images/5429c2fc55cf1708455741c1ff29934f.png)
+![方程](img/5429c2fc55cf1708455741c1ff29934f.png)
 
 让我们澄清这些方程中的一些术语：
 
-![方程](../Images/29c67324c5a672f11833f2fbc6200ab4.png)
+![方程](img/29c67324c5a672f11833f2fbc6200ab4.png)
 
-![方程](../Images/7dc722bce7c206cc698010e5b4db3407.png)
+![方程](img/7dc722bce7c206cc698010e5b4db3407.png)
 
-![方程](../Images/515c66e8edb41425717b34df1143ea53.png)
+![方程](img/515c66e8edb41425717b34df1143ea53.png)
 
-![方程](../Images/3a44382d98df6f625f2677df3849cab5.png)
+![方程](img/3a44382d98df6f625f2677df3849cab5.png)
 
-![方程](../Images/de4d6dcb2277aec1e921deb5a004ce88.png)
+![方程](img/de4d6dcb2277aec1e921deb5a004ce88.png)
 
-![方程](../Images/2fadcfbd0c5858609020e66b5b7132ce.png)
+![方程](img/2fadcfbd0c5858609020e66b5b7132ce.png)
 
 为了计算所有这些概率，我们首先需要进行一些数据清理，将数据转换为一种格式，以便我们可以轻松提取所需的所有信息。目前，我们的训练集和测试集具有以下格式（下面的消息是虚构的，以便示例更易于理解）：
 
-![图片](../Images/c9833ab5ce3d6c76ae567b4a3100b0c6.png)为了简化计算，我们希望将数据转换为这种格式（下表是您上面看到的表格的转换）：![图片](../Images/2704688e1ce498ab335df58469957288.png)在上述转换中注意到：
+![图片](img/c9833ab5ce3d6c76ae567b4a3100b0c6.png)为了简化计算，我们希望将数据转换为这种格式（下表是您上面看到的表格的转换）：![图片](img/2704688e1ce498ab335df58469957288.png)在上述转换中注意到：
 
 +   `SMS`列被一系列表示词汇表中唯一单词的新列替代——词汇表是我们所有句子中唯一单词的集合。
 
@@ -162,7 +162,7 @@ test_set['Label'].value_counts(normalize=True)
 training_set.head(3)
 ```
 
-![Figure](../Images/562a84e7285cd77e18428d9a3e94080f.png)
+![Figure](img/562a84e7285cd77e18428d9a3e94080f.png)
 
 ```py
 # After cleaning
@@ -172,7 +172,7 @@ training_set['SMS'] = training_set['SMS'].str.lower()
 training_set.head(3)
 ```
 
-![Figure](../Images/b47074671f9ef0ab7bd26ac95a3fae62.png)
+![Figure](img/b47074671f9ef0ab7bd26ac95a3fae62.png)
 
 ### 创建词汇表
 
@@ -201,7 +201,7 @@ for sms in training_set['SMS']:
 vocabulary = list(set(vocabulary))
 ```
 
-看起来我们的训练集中的所有消息共有7,783个唯一的单词。
+看起来我们的训练集中的所有消息共有 7,783 个唯一的单词。
 
 ```py
 len(vocabulary)
@@ -213,7 +213,7 @@ len(vocabulary)
 
 现在我们将使用刚刚创建的词汇表进行我们想要的数据转换。
 
-![img](../Images/0b66cc95e81e151004b29a6816b5fe57.png)最终，我们将创建一个新的 DataFrame。我们首先构建一个字典，然后将其转换为所需的 DataFrame。
+![img](img/0b66cc95e81e151004b29a6816b5fe57.png)最终，我们将创建一个新的 DataFrame。我们首先构建一个字典，然后将其转换为所需的 DataFrame。
 
 例如，要创建我们上面看到的表格，我们可以使用这个字典：
 
@@ -233,7 +233,7 @@ word_counts = pd.DataFrame(word_counts_per_sms)
 word_counts.head()
 ```
 
-![Figure](../Images/e573e195fcd92e1668cda41655532212.png)
+![Figure](img/e573e195fcd92e1668cda41655532212.png)
 
 要为我们的训练集创建所需的字典，我们可以使用以下代码：
 
@@ -262,30 +262,30 @@ word_counts = pd.DataFrame(word_counts_per_sms)
 word_counts.head()
 ```
 
-![Figure](../Images/bf4b842ef1b6274cd9a35b80c629f812.png)
+![Figure](img/bf4b842ef1b6274cd9a35b80c629f812.png)
 
-`Label` 列缺失，因此我们将使用 [`pd.concat()` 函数](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html) 将刚构建的DataFrame与包含训练集的DataFrame连接起来。这样，我们也将拥有 `Label` 和 `SMS` 列。
+`Label` 列缺失，因此我们将使用 [`pd.concat()` 函数](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.concat.html) 将刚构建的 DataFrame 与包含训练集的 DataFrame 连接起来。这样，我们也将拥有 `Label` 和 `SMS` 列。
 
 ```py
 training_set_clean = pd.concat([training_set, word_counts], axis=1)
 training_set_clean.head()
 ```
 
-![图](../Images/7f797b923991a3a7eaad114b44298b68.png)
+![图](img/7f797b923991a3a7eaad114b44298b68.png)
 
 ### 首先计算常数
 
 现在我们已经完成了训练集的清理，我们可以开始编码垃圾邮件过滤器。多项式朴素贝叶斯算法需要回答这两个概率问题，以便能够对新消息进行分类：
 
-![方程](../Images/f1e9827fbae3494998643a8431efc05b.png)
+![方程](img/f1e9827fbae3494998643a8431efc05b.png)
 
-![方程](../Images/17a9e66d3702a62babe9fb63a985ec59.png)
+![方程](img/17a9e66d3702a62babe9fb63a985ec59.png)
 
 同样，要在上述公式中计算 P(w[i]|Spam) 和 P(w[i]|Ham)，我们需要使用以下方程：
 
-![方程](../Images/b05463d443bba797ea7fa001401c07cd.png)
+![方程](img/b05463d443bba797ea7fa001401c07cd.png)
 
-![方程](../Images/5429c2fc55cf1708455741c1ff29934f.png)
+![方程](img/5429c2fc55cf1708455741c1ff29934f.png)
 
 上述四个方程中的一些项在每个新消息中将具有相同的值。我们可以一次性计算这些项的值，并避免在新消息到来时重新计算。作为开始，我们首先计算：
 
@@ -299,7 +299,7 @@ training_set_clean.head()
 
 +   N[Ham] 等于所有非垃圾邮件中的单词总数 —— 它 *不是* 等于非垃圾邮件的数量，也 *不是* 等于非垃圾邮件中的 *唯一* 单词的总数。
 
-我们还将使用拉普拉斯平滑，并设置 ![方程](../Images/fa6e5d31b57abbc4612155e378c2b80f.png)。
+我们还将使用拉普拉斯平滑，并设置 ![方程](img/fa6e5d31b57abbc4612155e378c2b80f.png)。
 
 ```py
 # Isolating spam and ham messages first
@@ -327,7 +327,7 @@ alpha = 1
 
 ### 计算参数
 
-现在我们已经计算了常数项，我们可以继续计算参数P(w[i]|Spam)和P(w[i]|Ham)。
+现在我们已经计算了常数项，我们可以继续计算参数 P(w[i]|Spam)和 P(w[i]|Ham)。
 
 P(w[i]|Spam) 和 P(w[i]|Ham) 会根据具体的单词而变化。例如，P("secret"|Spam) 会有一个特定的概率值，而 P("cousin"|Spam) 或 P("lovely"|Spam) 可能会有其他值。
 
@@ -335,9 +335,9 @@ P(w[i]|Spam) 和 P(w[i]|Ham) 会根据具体的单词而变化。例如，P("sec
 
 参数是使用以下两个方程计算的：
 
-![方程](../Images/b05463d443bba797ea7fa001401c07cd.png)
+![方程](img/b05463d443bba797ea7fa001401c07cd.png)
 
-![方程](../Images/5429c2fc55cf1708455741c1ff29934f.png)
+![方程](img/5429c2fc55cf1708455741c1ff29934f.png)
 
 ```py
 # Initiate parameters
@@ -365,7 +365,7 @@ for word in vocabulary:
 
 +   比较 P(Spam|w[1], w[2], ..., w[n]) 和 P(Ham|w[1], w[2], ..., w[n]) 的值，并且：
 
-    +   如果 P(Ham|w[1], w[2], ..., w[n]) > P(Spam|w[1], w[2], ..., w[n])，则该消息被分类为ham。
+    +   如果 P(Ham|w[1], w[2], ..., w[n]) > P(Spam|w[1], w[2], ..., w[n])，则该消息被分类为 ham。
 
     +   如果 P(Ham|w[1], w[2], ..., w[n]) < P(Spam|w[1], w[2], ..., w[n])，则将消息分类为垃圾邮件。
 
@@ -437,7 +437,7 @@ classify("Sounds good, Tom, then see u there")
 
 ### 测量垃圾邮件过滤器的准确性
 
-这两个结果看起来很有前景，但让我们看看过滤器在我们的测试集上的表现如何，该测试集包含1,114条消息。
+这两个结果看起来很有前景，但让我们看看过滤器在我们的测试集上的表现如何，该测试集包含 1,114 条消息。
 
 我们将从编写一个返回分类标签而不是打印它们的函数开始。
 
@@ -475,11 +475,11 @@ test_set['predicted'] = test_set['SMS'].apply(classify_test_set)
 test_set.head()
 ```
 
-![图](../Images/84541adc5e9b95ca33c7a6bc27415ac7.png)
+![图](img/84541adc5e9b95ca33c7a6bc27415ac7.png)
 
 我们可以将预测值与实际值进行比较，以测量我们的垃圾邮件过滤器对新消息的分类效果。为了进行测量，我们将使用**准确率**作为指标：
 
-![公式](../Images/1185d75031e99251338213769eee62f2.png)
+![公式](img/1185d75031e99251338213769eee62f2.png)
 
 ```py
 correct = 0
@@ -497,15 +497,15 @@ print('Accuracy:', correct/total)
 
 `Correct: 1100 Incorrect: 14 Accuracy: 0.9874326750448833`
 
-准确率接近98.74%，这非常好。我们的垃圾邮件过滤器对1,114条在训练中未见过的消息进行了分类，其中1,100条分类正确。
+准确率接近 98.74%，这非常好。我们的垃圾邮件过滤器对 1,114 条在训练中未见过的消息进行了分类，其中 1,100 条分类正确。
 
 ### 下一步
 
-在这篇博客文章中，我们成功地用多项式朴素贝叶斯算法编写了一个短信垃圾邮件过滤器。该过滤器在我们使用的测试集上的准确率为98.74%，这是一个很有前景的结果。我们的初步目标是超过80%的准确率，并且我们成功实现了这一点。
+在这篇博客文章中，我们成功地用多项式朴素贝叶斯算法编写了一个短信垃圾邮件过滤器。该过滤器在我们使用的测试集上的准确率为 98.74%，这是一个很有前景的结果。我们的初步目标是超过 80%的准确率，并且我们成功实现了这一点。
 
 接下来的步骤包括：
 
-+   分析14条被错误分类的消息，并尝试找出算法为何将其错误分类的原因
++   分析 14 条被错误分类的消息，并尝试找出算法为何将其错误分类的原因
 
 +   通过使算法对字母大小写敏感来使过滤过程更复杂
 
@@ -513,22 +513,22 @@ print('Accuracy:', correct/total)
 
 **相关内容:**
 
-+   [概率学习：贝叶斯定理](/2019/10/probability-learning-bayes-theorem.html)
++   概率学习：贝叶斯定理
 
-+   [朴素贝叶斯算法：你需要知道的一切](/2020/06/naive-bayes-algorithm-everything.html)
++   朴素贝叶斯算法：你需要知道的一切
 
-+   [概率学习：朴素贝叶斯](/2019/11/probability-learning-naive-bayes.html)
++   概率学习：朴素贝叶斯
 
 ### 更多相关主题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [高斯朴素贝叶斯，解析](https://www.kdnuggets.com/2023/03/gaussian-naive-bayes-explained.html)
 
 +   [朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)
 
-+   [如何使用Python筛选数据](https://www.kdnuggets.com/2022/02/filter-data-python.html)
++   [如何使用 Python 筛选数据](https://www.kdnuggets.com/2022/02/filter-data-python.html)
 
-+   [你可能不知道的4个Python Itertools筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
++   [你可能不知道的 4 个 Python Itertools 筛选函数](https://www.kdnuggets.com/2023/08/4-python-itertools-filter-functions-probably-didnt-know.html)
 
-+   [理解贝叶斯定理的3种方法将提升你的数据科学技能](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)
++   [理解贝叶斯定理的 3 种方法将提升你的数据科学技能](https://www.kdnuggets.com/2022/06/3-ways-understanding-bayes-theorem-improve-data-science.html)

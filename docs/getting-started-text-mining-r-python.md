@@ -1,6 +1,6 @@
 # 开始使用 R 和 Python 进行文本挖掘的提示
 
-> 原文：[https://www.kdnuggets.com/2017/11/getting-started-text-mining-r-python.html](https://www.kdnuggets.com/2017/11/getting-started-text-mining-r-python.html)
+> 原文：[`www.kdnuggets.com/2017/11/getting-started-text-mining-r-python.html`](https://www.kdnuggets.com/2017/11/getting-started-text-mining-r-python.html)
 
 **作者：Chaitanya Sagar，[Perceptive Analytics](http://www.perceptive-analytics.com/)。**
 
@@ -8,7 +8,7 @@
 
 你我以及所有人关于当今热门话题的文本帖子中蕴藏着大量信息。无论我们在大公司还是小公司工作，我们都收集与各自业务相关的数据，并将其存储以便用于各种项目。同时，我们都需要这些‘非结构化数据’来了解和理解更多关于我们的客户、顾客以及公司在当今世界的状态。然而，处理这些数据并不容易。数据是非结构化的，每一部分都不包含全部信息，每部分都是独特的。这就是文本数据的特点。它需要首先处理并转换为适合分析的形式。这与我们创建的数据库非常相似，只是这些数据库不能直接使用，而且数据量非常大。本文以简单直观的方式打开了文本挖掘的世界，并提供了开始文本挖掘的绝佳提示。
 
-![](../Images/4a09fc15ca3b602f36a8a527949e76c8.png)
+![](img/4a09fc15ca3b602f36a8a527949e76c8.png)
 
 **提示 #1：先思考**
 
@@ -40,11 +40,11 @@
 
 +   对处理后的词干词进行最终分析并可视化结果。
 
-步骤简短而简单，但都依赖于第一步的顺利执行。你需要收集数据以便进行文本挖掘。有许多方式可以收集数据，其中最受欢迎的来源之一是Twitter。Twitter提供了一些API，可以使用R和Python挖掘推文。除了Twitter，现在你还可以从任何网站捕获数据，包括电子商务网站、电影网站、歌曲网站等。一些网站还包含预格式化的文本数据库，如Project Gutenberg、语料库等。Google趋势和Yahoo也提供一些在线分析。
+步骤简短而简单，但都依赖于第一步的顺利执行。你需要收集数据以便进行文本挖掘。有许多方式可以收集数据，其中最受欢迎的来源之一是 Twitter。Twitter 提供了一些 API，可以使用 R 和 Python 挖掘推文。除了 Twitter，现在你还可以从任何网站捕获数据，包括电子商务网站、电影网站、歌曲网站等。一些网站还包含预格式化的文本数据库，如 Project Gutenberg、语料库等。Google 趋势和 Yahoo 也提供一些在线分析。
 
 **提示 #4: 找到并使用最佳的文本到数据转换方法**
 
-根据工具和项目目标，你可能会使用不同的方法将收集的文本转换为数据。如果你使用R，可能会用到如twitteR、tm和stringr等包进行大部分预处理。在Python中，相应的包是nltk库和Tweepy包。无论使用哪种语言和包，都要确保你有足够的资源和内存来处理数据。文本挖掘可能会很麻烦，因为即使在去除停用词后，数据中仍然可能存在无关文本。使用良好的数据准备方法会在应用建模技术时提供很多有用的信息。
+根据工具和项目目标，你可能会使用不同的方法将收集的文本转换为数据。如果你使用 R，可能会用到如 twitteR、tm 和 stringr 等包进行大部分预处理。在 Python 中，相应的包是 nltk 库和 Tweepy 包。无论使用哪种语言和包，都要确保你有足够的资源和内存来处理数据。文本挖掘可能会很麻烦，因为即使在去除停用词后，数据中仍然可能存在无关文本。使用良好的数据准备方法会在应用建模技术时提供很多有用的信息。
 
 **提示 #5: 探索和尝试**
 
@@ -52,7 +52,7 @@
 
 **提示 #6：深入挖掘并亲自实践**
 
-每个机器学习和数据科学项目的主要目标是发现数据中那些难以发现的模式。你需要寻找这些有趣的模式，如果你害怕这一步，那你就不是真正的数据科学家。这个过程可以简单到只需将一个简单的分类器应用于数据点，并查看其性能。这将设定一个基准，同时给你一个数据预测能力的概念。有时，数据可能存在偏差或预测能力差，数据质量检查可以帮助定义这一点。例如，如果我基于标签收集Twitter数据，我可以将收集的数据分为训练集和测试集，将标签作为依赖特征。如果我的预测性能不理想，我需要回到几步前，找出低性能的原因，然后检查我如何收集数据或清理数据，具体情况而定。获得模式的其他方法包括关联。例如，某些数据点可能彼此相关，而其他数据点可能具有相似或相反的模式。如果用于文本挖掘的推文中可能会有重复推文，因为转发或对评论的辩论。处理数据也会暴露出诸如处理讽刺或传达混合表达的评论等问题。如果不仔细检查数据，很难知道你的数据有多少受到这些问题的影响，以及是否应该删除这些数据或使用某种技术来处理这种情况。
+每个机器学习和数据科学项目的主要目标是发现数据中那些难以发现的模式。你需要寻找这些有趣的模式，如果你害怕这一步，那你就不是真正的数据科学家。这个过程可以简单到只需将一个简单的分类器应用于数据点，并查看其性能。这将设定一个基准，同时给你一个数据预测能力的概念。有时，数据可能存在偏差或预测能力差，数据质量检查可以帮助定义这一点。例如，如果我基于标签收集 Twitter 数据，我可以将收集的数据分为训练集和测试集，将标签作为依赖特征。如果我的预测性能不理想，我需要回到几步前，找出低性能的原因，然后检查我如何收集数据或清理数据，具体情况而定。获得模式的其他方法包括关联。例如，某些数据点可能彼此相关，而其他数据点可能具有相似或相反的模式。如果用于文本挖掘的推文中可能会有重复推文，因为转发或对评论的辩论。处理数据也会暴露出诸如处理讽刺或传达混合表达的评论等问题。如果不仔细检查数据，很难知道你的数据有多少受到这些问题的影响，以及是否应该删除这些数据或使用某种技术来处理这种情况。
 
 **提示 #7: 重新工作和重复**
 
@@ -60,31 +60,31 @@
 
 **提示 #8: 以视觉方式呈现文本**
 
-如前所述，文本挖掘可以解决许多问题，并且可以从同一数据中解决多个问题。面对如此多的内容，提出以吸引人的方式展示结果是一种良好的实践。这也是为什么大多数文本挖掘结果已被可视化为词云、情感研究和图形的原因。每项任务都有相应的包和库，包括R中的wordcloud、ggplot2、igraph、text2vec、networkD3和plotly，以及Python中的Networkx、matplotlib、plotly。你还可以使用其他先进的可视化工具，如Tableau或Power BI，以更多的方式展示数据。
+如前所述，文本挖掘可以解决许多问题，并且可以从同一数据中解决多个问题。面对如此多的内容，提出以吸引人的方式展示结果是一种良好的实践。这也是为什么大多数文本挖掘结果已被可视化为词云、情感研究和图形的原因。每项任务都有相应的包和库，包括 R 中的 wordcloud、ggplot2、igraph、text2vec、networkD3 和 plotly，以及 Python 中的 Networkx、matplotlib、plotly。你还可以使用其他先进的可视化工具，如 Tableau 或 Power BI，以更多的方式展示数据。
 
 **结论：路线图**
 
-结果可视化并不是文本挖掘项目的最终步骤。由于文本来自在线来源，因此它不断变化，捕获的数据也在变化。随着数据的变化，见解也在变化，因此，当项目完成并被接受时，应不断更新新的数据和见解。这些见解可以随着变化的速度进一步丰富。随着时间的推移，变化也可以作为进展的度量来捕捉。这成为另一个需要解决的纵向问题。除了可以用文本数据解决的问题，文本挖掘并非易事。当你创建一个数据收集、清洗和分析的路线图时，可能会遇到一些障碍。这些障碍可能包括决定是处理单个词频还是使用词组（即n-grams），或创建自己的可视化方法来展示结果，或管理内存。同时，文本挖掘领域也在不断出现新的项目。最好的学习方式是亲自面对问题，从解决问题的经验中学习。希望这篇文章能激励你进入文本世界，开始挖掘有价值的信息。
+结果可视化并不是文本挖掘项目的最终步骤。由于文本来自在线来源，因此它不断变化，捕获的数据也在变化。随着数据的变化，见解也在变化，因此，当项目完成并被接受时，应不断更新新的数据和见解。这些见解可以随着变化的速度进一步丰富。随着时间的推移，变化也可以作为进展的度量来捕捉。这成为另一个需要解决的纵向问题。除了可以用文本数据解决的问题，文本挖掘并非易事。当你创建一个数据收集、清洗和分析的路线图时，可能会遇到一些障碍。这些障碍可能包括决定是处理单个词频还是使用词组（即 n-grams），或创建自己的可视化方法来展示结果，或管理内存。同时，文本挖掘领域也在不断出现新的项目。最好的学习方式是亲自面对问题，从解决问题的经验中学习。希望这篇文章能激励你进入文本世界，开始挖掘有价值的信息。
 
-**简介：[Chaitanya Sagar](https://www.linkedin.com/in/chaitanyasagar/)** 是[Perceptive Analytics](http://www.perceptive-analytics.com/)的创始人兼首席执行官。Perceptive Analytics被Analytics India Magazine评选为值得关注的十大分析公司之一。该公司致力于电子商务、零售和制药公司的市场分析。
+**简介：[Chaitanya Sagar](https://www.linkedin.com/in/chaitanyasagar/)** 是[Perceptive Analytics](http://www.perceptive-analytics.com/)的创始人兼首席执行官。Perceptive Analytics 被 Analytics India Magazine 评选为值得关注的十大分析公司之一。该公司致力于电子商务、零售和制药公司的市场分析。
 
 **相关：**
 
-+   [前10名R语言机器学习视频](/2017/10/top-10-machine-learning-r-videos.html)
++   前 10 名 R 语言机器学习视频
 
-+   [使用R学习广义线性模型（GLM）](/2017/10/learn-generalized-linear-models-glm-r.html)
++   使用 R 学习广义线性模型（GLM）
 
-+   [缺失数据解决方案：使用R进行插补](/2017/09/missing-data-imputation-using-r.html)
++   缺失数据解决方案：使用 R 进行插补
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -92,12 +92,12 @@
 
 +   [用自动化文本总结入门](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
 
-+   [开始使用语言模型的5个技巧](https://www.kdnuggets.com/5-tips-for-getting-started-with-language-models)
++   [开始使用语言模型的 5 个技巧](https://www.kdnuggets.com/5-tips-for-getting-started-with-language-models)
 
-+   [用PyTest入门：轻松编写和运行Python测试](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)
++   [用 PyTest 入门：轻松编写和运行 Python 测试](https://www.kdnuggets.com/getting-started-with-pytest-effortlessly-write-and-run-tests-in-python)
 
-+   [用Python生成器入门](https://www.kdnuggets.com/2023/02/getting-started-python-generators.html)
++   [用 Python 生成器入门](https://www.kdnuggets.com/2023/02/getting-started-python-generators.html)
 
-+   [用5个步骤开始学习Python数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
++   [用 5 个步骤开始学习 Python 数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
 
-+   [用Python进行数据科学入门](https://www.kdnuggets.com/getting-started-with-python-for-data-science)
++   [用 Python 进行数据科学入门](https://www.kdnuggets.com/getting-started-with-python-for-data-science)

@@ -1,8 +1,8 @@
 # 6 个 ChatGPT 提示，提升工作生产力
 
-> 原文：[https://www.kdnuggets.com/6-chatgpt-prompts-to-enhance-your-productivity-at-work](https://www.kdnuggets.com/6-chatgpt-prompts-to-enhance-your-productivity-at-work)
+> 原文：[`www.kdnuggets.com/6-chatgpt-prompts-to-enhance-your-productivity-at-work`](https://www.kdnuggets.com/6-chatgpt-prompts-to-enhance-your-productivity-at-work)
 
-![6 个 ChatGPT 提示，提升工作生产力](../Images/79f87039ad145108df0d05aec2d900b5.png)
+![6 个 ChatGPT 提示，提升工作生产力](img/79f87039ad145108df0d05aec2d900b5.png)
 
 图片来源：Freepik
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -78,7 +78,7 @@
 
 ## 3 - 在会议上掌握高管演示的关键要点和行动项目
 
-您的直线经理要求您创建两张幻灯片，总结高管会议的要点和行动项目，而整个对话记录已经被记录下来。那么为什么不请求ChatGPT的帮助，以提升您的演示技巧并留下深刻印象呢？
+您的直线经理要求您创建两张幻灯片，总结高管会议的要点和行动项目，而整个对话记录已经被记录下来。那么为什么不请求 ChatGPT 的帮助，以提升您的演示技巧并留下深刻印象呢？
 
 **提示：**
 
@@ -94,7 +94,7 @@
 
 > "***上次高管会议的要点：***
 > 
-> +   回顾第二季度财务业绩：超出目标10%
+> +   回顾第二季度财务业绩：超出目标 10%
 > +   
 > +   讨论产品发布的新营销策略
 > +   

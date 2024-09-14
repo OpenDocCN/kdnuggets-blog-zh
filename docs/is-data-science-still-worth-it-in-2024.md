@@ -1,8 +1,8 @@
 # 2024 年数据科学还值得吗？
 
-> 原文：[https://www.kdnuggets.com/is-data-science-still-worth-it-in-2024](https://www.kdnuggets.com/is-data-science-still-worth-it-in-2024)
+> 原文：[`www.kdnuggets.com/is-data-science-still-worth-it-in-2024`](https://www.kdnuggets.com/is-data-science-still-worth-it-in-2024)
 
-![数据科学 2024](../Images/cbf64213a469134c6d3499d7c1be6032.png)
+![数据科学 2024](img/cbf64213a469134c6d3499d7c1be6032.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@
 
 ## 所以，数据科学值得吗？
 
-简单的答案是肯定的。对于那些具备分析和人工智能模型开发技能的人员来说，机会非常大。[《美国新闻与世界报道》](https://money.usnews.com/careers/best-jobs/data-scientist)将数据科学排名为第4大技术工作、第7大STEM工作，并在2024年列为100个最佳工作的第8位。
+简单的答案是肯定的。对于那些具备分析和人工智能模型开发技能的人员来说，机会非常大。[《美国新闻与世界报道》](https://money.usnews.com/careers/best-jobs/data-scientist)将数据科学排名为第 4 大技术工作、第 7 大 STEM 工作，并在 2024 年列为 100 个最佳工作的第 8 位。
 
 这些数据突显了对[数据科学专业人士](https://datacamp.pxf.io/75Yn9A)的需求，以及他们在未来技术和商业中的重要性。
 
@@ -50,21 +50,21 @@
 
 进入科技行业现在不再那么困难。各种在线课程可以在几个月内而不是几年内帮助你进入这一领域。
 
-其中一个课程是DataCamp的[数据科学家认证](https://datacamp.pxf.io/75Yn9A)。这是一个行业认可的认证，让你可以确信你的认证具有价值，并将被主要组织认可。
+其中一个课程是 DataCamp 的[数据科学家认证](https://datacamp.pxf.io/75Yn9A)。这是一个行业认可的认证，让你可以确信你的认证具有价值，并将被主要组织认可。
 
 在此认证中，你将学习如何使用机器学习和人工智能收集、分析和解释大量数据。通过这种技术学习，你还将学会如何有效地将你的分析结果传达给业务利益相关者。
 
-令人惊讶的是，你可以在[30天内](https://datacamp.pxf.io/75Yn9A)完成这一过程！一旦注册，你将有30天的时间完成所有必要的计时和实操考试，以确保成功！学习平台提供了你所需的一切准备，以实现你的目标。
+令人惊讶的是，你可以在[30 天内](https://datacamp.pxf.io/75Yn9A)完成这一过程！一旦注册，你将有 30 天的时间完成所有必要的计时和实操考试，以确保成功！学习平台提供了你所需的一切准备，以实现你的目标。
 
 最困难的部分是找工作，对吗？在当前经济和就业市场中，很多人害怕投资于他们的职业发展，我理解你的担忧。
 
-然而，DataCamp还为你提供了独家访问他们的认证社区的机会，在这里你可以与其他认证专业人士联系，并探索由社区团队为你量身定制的内容。在这个社区中，你将了解与行业专家的新活动，这对网络拓展、讨论组提问和获得反馈、专门为你定制的内容以及资源来帮助你在求职中脱颖而出非常有帮助。
+然而，DataCamp 还为你提供了独家访问他们的认证社区的机会，在这里你可以与其他认证专业人士联系，并探索由社区团队为你量身定制的内容。在这个社区中，你将了解与行业专家的新活动，这对网络拓展、讨论组提问和获得反馈、专门为你定制的内容以及资源来帮助你在求职中脱颖而出非常有帮助。
 
 ## 总结
 
 许多人对数据科学在当前市场上的增长持有不同意见。然而，仍然有很多人进入这一领域以满足需求。任何技术角色都需要学习和提升技能，因此作为数据科学家进入这一领域将使你能够转向其他需求量大的领域，如商业智能或数据工程。
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一名数据科学家、自由技术写作人员，同时也是KDnuggets的编辑和社区经理。她特别关注于提供数据科学职业建议或教程以及基于理论的数据科学知识。Nisha涉及广泛的话题，并希望探索人工智能如何有利于人类寿命的不同方式。作为一个热衷学习者，Nisha致力于拓宽她的技术知识和写作技能，同时帮助指导他人。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)**是一名数据科学家、自由技术写作人员，同时也是 KDnuggets 的编辑和社区经理。她特别关注于提供数据科学职业建议或教程以及基于理论的数据科学知识。Nisha 涉及广泛的话题，并希望探索人工智能如何有利于人类寿命的不同方式。作为一个热衷学习者，Nisha 致力于拓宽她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关话题
 
@@ -76,6 +76,6 @@
 
 +   [调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)
 
-+   [2024年顶级免费数据科学在线课程](https://www.kdnuggets.com/top-free-data-science-online-courses-for-2024)
++   [2024 年顶级免费数据科学在线课程](https://www.kdnuggets.com/top-free-data-science-online-courses-for-2024)
 
-+   [追求2024年第3名在线数据科学硕士项目](https://www.kdnuggets.com/2024/05/baypath/pursue-a-masters-in-data-science-with-the-3-rd-best-online-program)
++   [追求 2024 年第 3 名在线数据科学硕士项目](https://www.kdnuggets.com/2024/05/baypath/pursue-a-masters-in-data-science-with-the-3-rd-best-online-program)

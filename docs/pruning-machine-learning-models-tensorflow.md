@@ -1,8 +1,8 @@
 # TensorFlow 中的机器学习模型剪枝
 
-> 原文：[https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html](https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html)
+> 原文：[`www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html`](https://www.kdnuggets.com/2020/12/pruning-machine-learning-models-tensorflow.html)
 
-[评论](#comments)
+评论
 
 [在上一篇文章中](https://heartbeat.fritz.ai/research-guide-pruning-techniques-for-neural-networks-d9b8440ab10d)，我们回顾了一些关于剪枝神经网络的主要文献。我们了解到剪枝是一种模型优化技术，涉及到在权重张量中消除不必要的值。这将导致更小的模型，其准确性非常接近基线模型。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -69,7 +69,7 @@ early_stop = keras.callbacks.EarlyStopping(monitor=’val_loss’, patience=30)
 model = setup_model()model.summary()
 ```
 
-![帖子图像](../Images/2557a1d142f91122421703dfb64bc1dd.png)
+![帖子图像](img/2557a1d142f91122421703dfb64bc1dd.png)
 
 让我们编译模型并训练它。
 
@@ -95,7 +95,7 @@ tf.keras.utils.plot_model(
 )
 ```
 
-![帖子图像](../Images/17359d8f180680b7254944b99f740797.png)
+![帖子图像](img/17359d8f180680b7254944b99f740797.png)
 
 现在让我们检查均方误差。我们可以继续到下一部分，看看剪枝整个模型时该误差如何变化。
 
@@ -127,7 +127,7 @@ from sklearn.metrics import mean_squared_errorpredictions = model.predict(X_test
 model_to_prune.summary()
 ```
 
-![帖子图片](../Images/600a83cad46033ad4505372e7850a817.png)
+![帖子图片](img/600a83cad46033ad4505372e7850a817.png)
 
 在我们可以将模型拟合到训练和测试集之前，我们必须编译模型。
 
@@ -175,7 +175,7 @@ prune_predictions = model_to_prune.predict(X_test)print(‘Whole Model Pruned MS
 model_layer_prunning.summary()
 ```
 
-![帖子图片](../Images/cb575b67fcf38555ae54a9132353e9bc.png)
+![帖子图片](img/cb575b67fcf38555ae54a9132353e9bc.png)
 
 然后我们编译并拟合模型。
 
@@ -201,11 +201,11 @@ layer_prune_predictions = model_layer_prunning.predict(X_test)print(‘Layer Pru
 
 这是 TensorBoard 上剪枝总结的一个快照。
 
-![帖子图片](../Images/869fe54127f831eb2c443bd69ffb8251.png)
+![帖子图片](img/869fe54127f831eb2c443bd69ffb8251.png)
 
 其他剪枝总结也可以在 Tensorboard 上查看。
 
-![帖子图片](../Images/1df0795bf97341e8e19402d6820ba186.png)
+![帖子图片](img/1df0795bf97341e8e19402d6820ba186.png)
 
 现在让我们定义一个函数来计算模型的大小。
 
@@ -259,11 +259,11 @@ heartbeat.fritz.ai
 
 **相关：**
 
-+   [使用 TensorFlow Serving 将训练好的模型部署到生产环境](/2020/11/serving-tensorflow-models.html)
++   使用 TensorFlow Serving 将训练好的模型部署到生产环境
 
-+   [处理机器学习中的不平衡数据](/2020/10/imbalanced-data-machine-learning.html)
++   处理机器学习中的不平衡数据
 
-+   [如何将 PyTorch Lightning 模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)
++   如何将 PyTorch Lightning 模型部署到生产环境
 
 ### 更多主题
 

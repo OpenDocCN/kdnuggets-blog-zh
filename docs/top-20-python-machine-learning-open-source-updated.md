@@ -1,18 +1,18 @@
-# 前20名Python机器学习开源项目，已更新
+# 前 20 名 Python 机器学习开源项目，已更新
 
-> 原文：[https://www.kdnuggets.com/2016/11/top-20-python-machine-learning-open-source-updated.html](https://www.kdnuggets.com/2016/11/top-20-python-machine-learning-open-source-updated.html)
+> 原文：[`www.kdnuggets.com/2016/11/top-20-python-machine-learning-open-source-updated.html`](https://www.kdnuggets.com/2016/11/top-20-python-machine-learning-open-source-updated.html)
 
-继去年分析：[前20名Python机器学习开源项目](/2015/06/top-20-python-machine-learning-open-source-projects.html "Top 20 Python Machine Learning Open Source Projects")，今年KDnuggets带来最新的前20名Python机器学习开源项目，更新于Github。奇怪的是，去年一些最活跃的项目已经变得停滞，还有一些从前20名中跌出（考虑贡献和提交），而13个新项目进入了前20名。
+继去年分析：前 20 名 Python 机器学习开源项目，今年 KDnuggets 带来最新的前 20 名 Python 机器学习开源项目，更新于 Github。奇怪的是，去年一些最活跃的项目已经变得停滞，还有一些从前 20 名中跌出（考虑贡献和提交），而 13 个新项目进入了前 20 名。
 
-[![python-top20-2016-bubble-chart](../Images/9a96037518221555e0eaeec58b725706.png)](/wp-content/uploads/python-top20-2016-bubble-chart.png)
+![python-top20-2016-bubble-chart](img/python-top20-2016-bubble-chart.png)
 
-**2016年前20名Python机器学习开源项目。**
+**2016 年前 20 名 Python 机器学习开源项目。**
 
-1.  **[Scikit-learn](http://scikit-learn.org/)** 是简单高效的数据挖掘和数据分析工具，人人可用，可在各种背景下重用，基于NumPy、SciPy和matplotlib，开源，可商业使用 – BSD许可证。
+1.  **[Scikit-learn](http://scikit-learn.org/)** 是简单高效的数据挖掘和数据分析工具，人人可用，可在各种背景下重用，基于 NumPy、SciPy 和 matplotlib，开源，可商业使用 – BSD 许可证。
 
     提交次数：21486，贡献者：736，Github URL：[Scikit-learn](https://github.com/scikit-learn/scikit-learn)
 
-1.  **[Tensorflow](https://www.tensorflow.org/)** 最初由Google Brain团队的研究人员和工程师在Google的机器智能研究组织中开发。该系统旨在促进机器学习研究，并使从研究原型到生产系统的过渡快速而简便。
+1.  **[Tensorflow](https://www.tensorflow.org/)** 最初由 Google Brain 团队的研究人员和工程师在 Google 的机器智能研究组织中开发。该系统旨在促进机器学习研究，并使从研究原型到生产系统的过渡快速而简便。
 
     提交次数：10466，贡献者：493，Github URL：[Tensorflow](https://github.com/tensorflow/tensorflow)
 
@@ -24,7 +24,7 @@
 
     提交次数：3801，贡献者：215，Github URL：[Caffe](https://github.com/BVLC/caffe)
 
-1.  **[Gensim](https://radimrehurek.com/gensim/)** 是一个免费的Python库，具有可扩展的统计语义功能，分析纯文本文档的语义结构，检索语义相似的文档。
+1.  **[Gensim](https://radimrehurek.com/gensim/)** 是一个免费的 Python 库，具有可扩展的统计语义功能，分析纯文本文档的语义结构，检索语义相似的文档。
 
     提交次数：2702，贡献者：145，Github URL：[Gensim](https://github.com/RaRe-Technologies/gensim)
 
@@ -86,41 +86,41 @@
 
 1.  **[Pattern](https://pypi.python.org/pypi/Pattern)** 是一个用于 Python 编程语言的网页挖掘模块。它集合了数据挖掘（Google + Twitter + Wikipedia API、网络爬虫、HTML DOM 解析器）、自然语言处理（词性标注、n-gram 搜索、情感分析、WordNet）、机器学习（向量空间模型、k-means 聚类、朴素贝叶斯 + k-NN + SVM 分类器）和网络分析（图中心性和可视化）工具。
 
-    提交次数：943，贡献者数量：20，Github网址：[Pattern](https://github.com/clips/pattern)
+    提交次数：943，贡献者数量：20，Github 网址：[Pattern](https://github.com/clips/pattern)
 
-我们可以在以下图表中看到，PyMVPA的贡献率高于列表中的所有顶级项目。令人惊讶的是，尽管Scikit-learn的贡献者数量最多，但其贡献率却很低。这可能是因为PyMVPA是一个新项目，处于开发的早期阶段，导致由于新想法/功能开发、缺陷修复、重构等产生了许多提交。而Scikit-learn是一个成熟且稳定的项目，导致改进或缺陷修复的数量较少。
+我们可以在以下图表中看到，PyMVPA 的贡献率高于列表中的所有顶级项目。令人惊讶的是，尽管 Scikit-learn 的贡献者数量最多，但其贡献率却很低。这可能是因为 PyMVPA 是一个新项目，处于开发的早期阶段，导致由于新想法/功能开发、缺陷修复、重构等产生了许多提交。而 Scikit-learn 是一个成熟且稳定的项目，导致改进或缺陷修复的数量较少。
 
-[![python-top20-2016-commitspercontributor](../Images/fe49c038db44d6da2445e3be7ad11f13.png)](/wp-content/uploads/python-top20-2016-CommitsPerContributor-e1479736475540.png)
+![python-top20-2016-commitspercontributor](img/python-top20-2016-CommitsPerContributor-e1479736475540.png)
 
-当我们比较2016年和2015年那些都在前20名列表中的项目时，我们可以看到Pattern、PyBrain和Pylearn2没有重大贡献，也没有新的贡献者。此外，贡献者数量和提交次数之间可以看到一个显著的相关性。贡献者的增加可能导致提交次数的增加，我认为这就是开源项目和社区的魔力；它带来了头脑风暴、新想法和更好的软件工具。
+当我们比较 2016 年和 2015 年那些都在前 20 名列表中的项目时，我们可以看到 Pattern、PyBrain 和 Pylearn2 没有重大贡献，也没有新的贡献者。此外，贡献者数量和提交次数之间可以看到一个显著的相关性。贡献者的增加可能导致提交次数的增加，我认为这就是开源项目和社区的魔力；它带来了头脑风暴、新想法和更好的软件工具。
 
-[![python-top20-2016-comparison](../Images/fe3f47943a77b1072ce0e81a799448fa.png)](/wp-content/uploads/python-top20-2016-comparison.png)
+![python-top20-2016-comparison](img/python-top20-2016-comparison.png)
 
-这是KDnuggets团队——Prasad和Gregory对2016年前20名Python机器学习开源项目的分析，基于贡献者数量和提交次数。
+这是 KDnuggets 团队——Prasad 和 Gregory 对 2016 年前 20 名 Python 机器学习开源项目的分析，基于贡献者数量和提交次数。
 
 祝开放源代码和知识共享愉快！
 
 Prasad Pore。[[Ln](https://www.linkedin.com/in/prasadpore)] [[Tw](https://twitter.com/prasadpore)] [[Fb](https://www.facebook.com/BusinessAnalyticsUnicorn)]
 
-**个人简介：** [Prasad Pore](https://www.linkedin.com/in/prasadpore) 是一位专注于业务的分析顾问，拥有8年的强大且多样化的IT经验，业务转型、数据工程、统计建模、机器学习和项目管理方面的技能得到了锤炼。他拥有数据分析硕士学位，专攻业务，和信息技术学士学位。他总是喜欢讨论如何利用技术创新如移动应用程序、物联网、区块链和数据分析来帮助做出更好的商业决策。
+**个人简介：** [Prasad Pore](https://www.linkedin.com/in/prasadpore) 是一位专注于业务的分析顾问，拥有 8 年的强大且多样化的 IT 经验，业务转型、数据工程、统计建模、机器学习和项目管理方面的技能得到了锤炼。他拥有数据分析硕士学位，专攻业务，和信息技术学士学位。他总是喜欢讨论如何利用技术创新如移动应用程序、物联网、区块链和数据分析来帮助做出更好的商业决策。
 
 **相关信息：**
 
-+   [**Github上的前10个数据科学资源**](/2016/03/top-10-data-science-github.html)
++   **Github 上的前 10 个数据科学资源**
 
-+   [**Github上的前10个数据可视化项目**](/2016/02/top-10-data-visualization-github.html)
++   **Github 上的前 10 个数据可视化项目**
 
-+   [**Github上的前10个深度学习项目**](/2016/01/top-10-deep-learning-github.html)
++   **Github 上的前 10 个深度学习项目**
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 

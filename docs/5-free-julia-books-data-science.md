@@ -1,8 +1,8 @@
 # 5 本免费的 Julia 数据科学书籍
 
-> 原文：[https://www.kdnuggets.com/2023/06/5-free-julia-books-data-science.html](https://www.kdnuggets.com/2023/06/5-free-julia-books-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/06/5-free-julia-books-data-science.html`](https://www.kdnuggets.com/2023/06/5-free-julia-books-data-science.html)
 
-![5 本免费的 Julia 数据科学书籍](../Images/499b048bd5df209b58ec0929adfc9de8.png)
+![5 本免费的 Julia 数据科学书籍](img/499b048bd5df209b58ec0929adfc9de8.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
@@ -26,7 +26,7 @@
 
 [《Think Julia: How to Think Like a Computer Scientist》](https://benlauwens.github.io/ThinkJulia.jl/latest/book.html#_the_first_program)由 Ben Lauwens 和 Allen B. Downey 编写，是一本适合所有想学习 Julia 的读者的书，从初学者到经验丰富的程序员皆可。
 
-![5 本免费的 Julia 数据科学书籍](../Images/b53b3f2d7a0c1c7a85406da2f4bba2d4.png)
+![5 本免费的 Julia 数据科学书籍](img/b53b3f2d7a0c1c7a85406da2f4bba2d4.png)
 
 图书封面
 
@@ -42,7 +42,7 @@
 
 本书从 Julia 及其历史的介绍开始，接着讨论了它的特性、优点和独特的卖点。它将 Julia 与其他流行编程语言，如 Python、MATLAB 和 R 进行了比较。
 
-![5 本免费的 Julia 数据科学书籍](../Images/b9bb77b102206496777026d10fb6e14d.png)
+![5 本免费的 Julia 数据科学书籍](img/b9bb77b102206496777026d10fb6e14d.png)
 
 书籍封面
 
@@ -52,7 +52,7 @@
 
 [使用 Julia 进行统计分析](https://www.dbooks.org/statistics-with-julia-1534/) 由 Hayden Klok 和 Yoni Nazarathy 编写，是一本关于使用 Julia 编程语言进行统计分析的全面指南。适合任何希望学习如何使用 Julia 进行统计分析和建模的人。
 
-![5 本免费的 Julia 数据科学书籍](../Images/dac88affa59c1c6ffe2b3786e6817a4f.png)
+![5 本免费的 Julia 数据科学书籍](img/dac88affa59c1c6ffe2b3786e6817a4f.png)
 
 书籍封面
 
@@ -68,7 +68,7 @@
 
 书中首先解释了什么是数据科学和软件工程，然后解释了为什么你应该花时间学习那些在招聘信息中从未提到的语言。
 
-![5 本免费的 Julia 数据科学书籍](../Images/ecc423e7ae4227a2ec843865adf6682c.png)
+![5 本免费的 Julia 数据科学书籍](img/ecc423e7ae4227a2ec843865adf6682c.png)
 
 书籍封面
 
@@ -80,7 +80,7 @@
 
 [Julia 数据分析](https://www.manning.com/books/julia-for-data-analysis) 由 Bogumi? Kami?ski 编写，是一本实用指南，适合经验丰富的数据分析师、程序员以及希望学习如何使用 Julia 进行有效数据分析和报告的初学者。
 
-![5 本免费的 Julia 数据科学书籍](../Images/995f691658ef07c6fee0782998977300.png)
+![5 本免费的 Julia 数据科学书籍](img/995f691658ef07c6fee0782998977300.png)
 
 书籍封面
 
@@ -90,18 +90,18 @@
 
 第二部分涉及数据分析的工具箱。在这一部分，你将学习如何使用数据框处理数据，清洗、操作和转换数据以进行分析，并创建一个用于分享数据分析结果的网页服务。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些在心理健康方面挣扎的学生打造一款人工智能产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为那些在心理健康方面挣扎的学生打造一款人工智能产品。
 
 ### 更多相关主题
 
-+   [3个用于数据可视化的Julia包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
++   [3 个用于数据可视化的 Julia 包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
 
-+   [使用Julia进行数据分析](https://www.kdnuggets.com/learn-data-analysis-with-julia)
++   [使用 Julia 进行数据分析](https://www.kdnuggets.com/learn-data-analysis-with-julia)
 
-+   [我应该学习Julia吗？](https://www.kdnuggets.com/2022/11/learn-julia.html)
++   [我应该学习 Julia 吗？](https://www.kdnuggets.com/2022/11/learn-julia.html)
 
-+   [如何在Jupyter Notebook上设置Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
++   [如何在 Jupyter Notebook 上设置 Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
 
-+   [KDnuggets新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
 
-+   [2023年你必须阅读的5本免费数据科学书籍](https://www.kdnuggets.com/2023/01/5-free-data-science-books-must-read-2023.html)
++   [2023 年你必须阅读的 5 本免费数据科学书籍](https://www.kdnuggets.com/2023/01/5-free-data-science-books-must-read-2023.html)

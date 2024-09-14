@@ -1,8 +1,8 @@
 # 2024 年你必须知道的 7 个现代 SQL 数据库
 
-> 原文：[https://www.kdnuggets.com/7-modern-sql-database-you-must-know-in-2024](https://www.kdnuggets.com/7-modern-sql-database-you-must-know-in-2024)
+> 原文：[`www.kdnuggets.com/7-modern-sql-database-you-must-know-in-2024`](https://www.kdnuggets.com/7-modern-sql-database-you-must-know-in-2024)
 
-![2024 年你必须知道的 7 个现代 SQL 数据库](../Images/3f77694df63934d736e24ab192f9eadc.png)
+![2024 年你必须知道的 7 个现代 SQL 数据库](img/3f77694df63934d736e24ab192f9eadc.png)
 
 图片由 ChatGPT 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -62,20 +62,20 @@ MongoDB 可以在不同的环境中使用，包括 MongoDB Atlas（一个完全�
 
 ## 最后的思考
 
-选择最佳的数据库系统对于组织如何处理、分析数据并获取有用信息非常重要。通过了解这些现代SQL数据库的优势和特性，你可以做出符合具体需求的明智决策。使用这些技术不仅能提升你的数据工程操作，还能为你的组织未来的增长和成功奠定基础。
+选择最佳的数据库系统对于组织如何处理、分析数据并获取有用信息非常重要。通过了解这些现代 SQL 数据库的优势和特性，你可以做出符合具体需求的明智决策。使用这些技术不仅能提升你的数据工程操作，还能为你的组织未来的增长和成功奠定基础。
 
-[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，他热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个AI产品，帮助那些与心理健康问题作斗争的学生。
+[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，他热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一个 AI 产品，帮助那些与心理健康问题作斗争的学生。
 
 ### 更多相关内容
 
-+   [2024年必须尝试的5个最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
++   [2024 年必须尝试的 5 个最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
 
-+   [前10个必须了解的高级数据科学SQL面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [前 10 个必须了解的高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
-+   [2024年必须尝试的7个平台的端到端MLOps](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
++   [2024 年必须尝试的 7 个平台的端到端 MLOps](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
 
-+   [15个数据科学必知的Python编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个数据科学必知的 Python 编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
-+   [KDnuggets新闻，5月4日：9门免费哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程来学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
-+   [学习数据库和SQL的5门免费大学课程](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
++   [学习数据库和 SQL 的 5 门免费大学课程](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)

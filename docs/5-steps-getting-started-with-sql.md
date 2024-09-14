@@ -1,8 +1,8 @@
-# SQL入门五步骤
+# SQL 入门五步骤
 
-> 原文：[https://www.kdnuggets.com/5-steps-getting-started-with-sql](https://www.kdnuggets.com/5-steps-getting-started-with-sql)
+> 原文：[`www.kdnuggets.com/5-steps-getting-started-with-sql`](https://www.kdnuggets.com/5-steps-getting-started-with-sql)
 
-![SQL入门五步骤](../Images/fa59cd914bdc8e4ddf8c87a652f631d5.png)
+![SQL 入门五步骤](img/fa59cd914bdc8e4ddf8c87a652f631d5.png)
 
 # 结构化查询语言简介
 
@@ -10,19 +10,19 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-在关系型数据库中管理和操作数据时，结构化查询语言（SQL）是最重要的工具。SQL是一个主要的领域特定语言，它是数据库管理的基石，并提供了一种与数据库交互的标准化方式。随着数据驱动决策和创新的力量，SQL仍然是一个至关重要的技术，需要数据分析师、开发人员和数据科学家给予高度关注。
+在关系型数据库中管理和操作数据时，结构化查询语言（SQL）是最重要的工具。SQL 是一个主要的领域特定语言，它是数据库管理的基石，并提供了一种与数据库交互的标准化方式。随着数据驱动决策和创新的力量，SQL 仍然是一个至关重要的技术，需要数据分析师、开发人员和数据科学家给予高度关注。
 
-SQL最初由IBM于1970年代开发，并在1980年代末由ANSI和ISO标准化。各种类型的组织——从小型企业到大学，再到大型公司——都依赖于如MySQL、SQL Server和PostgreSQL等SQL数据库来处理大规模数据。随着数据驱动行业的扩展，SQL的重要性不断增长。其普遍应用使其成为各种专业人士在数据领域及其他领域的关键技能。
+SQL 最初由 IBM 于 1970 年代开发，并在 1980 年代末由 ANSI 和 ISO 标准化。各种类型的组织——从小型企业到大学，再到大型公司——都依赖于如 MySQL、SQL Server 和 PostgreSQL 等 SQL 数据库来处理大规模数据。随着数据驱动行业的扩展，SQL 的重要性不断增长。其普遍应用使其成为各种专业人士在数据领域及其他领域的关键技能。
 
-SQL允许用户执行各种数据相关任务，包括：
+SQL 允许用户执行各种数据相关任务，包括：
 
 +   查询数据
 
@@ -34,17 +34,17 @@ SQL允许用户执行各种数据相关任务，包括：
 
 +   创建和修改表
 
-本教程将提供SQL的逐步讲解，重点是通过大量的实操示例开始学习。
+本教程将提供 SQL 的逐步讲解，重点是通过大量的实操示例开始学习。
 
-# 第一步：设置你的SQL环境
+# 第一步：设置你的 SQL 环境
 
-## 选择SQL数据库管理系统（DBMS）
+## 选择 SQL 数据库管理系统（DBMS）
 
-在深入SQL查询之前，你需要选择一个适合你项目需求的数据库管理系统（DBMS）。DBMS是你SQL活动的支柱，提供不同的功能、性能优化和定价模型。你对DBMS的选择会显著影响你与数据的互动方式。
+在深入 SQL 查询之前，你需要选择一个适合你项目需求的数据库管理系统（DBMS）。DBMS 是你 SQL 活动的支柱，提供不同的功能、性能优化和定价模型。你对 DBMS 的选择会显著影响你与数据的互动方式。
 
-+   **MySQL**：开源，广泛采用，被Facebook和Google使用。适用于从小项目到企业级应用的各种应用。
++   **MySQL**：开源，广泛采用，被 Facebook 和 Google 使用。适用于从小项目到企业级应用的各种应用。
 
-+   **PostgreSQL**：开源，功能强大，被Apple使用。以其性能和标准遵从性而闻名。
++   **PostgreSQL**：开源，功能强大，被 Apple 使用。以其性能和标准遵从性而闻名。
 
 +   **SQL Server Express**：微软的入门级选项。适用于具有有限扩展需求的小型到中型应用程序。
 
@@ -254,7 +254,7 @@ BEGIN;
 
 在上面的示例中，两个 UPDATE 语句都被包含在一个事务中。要么两者都成功执行，要么出现错误时两者都不执行，从而确保数据的完整性。
 
-# 第4步：优化和性能调优
+# 第 4 步：优化和性能调优
 
 ## 理解查询性能
 

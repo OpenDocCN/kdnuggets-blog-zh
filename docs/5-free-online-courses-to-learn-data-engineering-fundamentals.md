@@ -1,8 +1,8 @@
 # 五门免费在线课程，学习数据工程基础
 
-> 原文：[https://www.kdnuggets.com/5-free-online-courses-to-learn-data-engineering-fundamentals](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-engineering-fundamentals)
+> 原文：[`www.kdnuggets.com/5-free-online-courses-to-learn-data-engineering-fundamentals`](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-engineering-fundamentals)
 
-![数据工程](../Images/3237c36c633bf05ac8500747ed8786b8b.png)
+![数据工程](img/3237c36c633bf05ac8500747ed8786b8b.png)
 
 作者提供的图片 | Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -70,18 +70,18 @@
 
 在这个博客中，我旨在带你从小块课程到完整认证的过程中学习数据工程的基础知识。每个人的学习水平不同，我们的学习方式也各不相同。选择适合你的课程对学习数据工程的基础知识非常重要。
 
-[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)**** 是一名数据科学家、自由撰稿人，同时担任KDnuggets的编辑和社区经理。她特别关注提供数据科学职业建议或教程，以及围绕数据科学的理论知识。尼莎涵盖了广泛的话题，并希望探索人工智能如何有助于延长人类寿命。作为一个热衷学习者，尼莎寻求拓宽她的技术知识和写作技能，同时帮助他人指导。
+[](https://www.linkedin.com/in/nisha-arya-ahmed/)****[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)**** 是一名数据科学家、自由撰稿人，同时担任 KDnuggets 的编辑和社区经理。她特别关注提供数据科学职业建议或教程，以及围绕数据科学的理论知识。尼莎涵盖了广泛的话题，并希望探索人工智能如何有助于延长人类寿命。作为一个热衷学习者，尼莎寻求拓宽她的技术知识和写作技能，同时帮助他人指导。
 
 ### 更多相关话题
 
-+   [5门免费在线课程学习数据科学基础](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-science-fundamentals)
++   [5 门免费在线课程学习数据科学基础](https://www.kdnuggets.com/5-free-online-courses-to-learn-data-science-fundamentals)
 
-+   [KDnuggets 新闻 2022年3月16日：学习数据科学基础与5…](https://www.kdnuggets.com/2022/n11.html)
++   [KDnuggets 新闻 2022 年 3 月 16 日：学习数据科学基础与 5…](https://www.kdnuggets.com/2022/n11.html)
 
 +   [学习数据科学基础需要多长时间？](https://www.kdnuggets.com/2022/03/long-take-learn-data-science-fundamentals.html)
 
-+   [KDnuggets 新闻，4月6日：8门免费MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [8门免费MIT课程在线学习数据科学](https://www.kdnuggets.com/2022/03/8-free-mit-courses-learn-data-science-online.html)
++   [8 门免费 MIT 课程在线学习数据科学](https://www.kdnuggets.com/2022/03/8-free-mit-courses-learn-data-science-online.html)
 
 +   [学习数据科学、数据工程等的免费课程合集](https://www.kdnuggets.com/collection-of-free-courses-to-learn-data-science-data-engineering-machine-learning-mlops-and-llmops)

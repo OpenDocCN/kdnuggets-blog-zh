@@ -1,8 +1,8 @@
 # 入门 Python 生成器
 
-> 原文：[https://www.kdnuggets.com/2023/02/getting-started-python-generators.html](https://www.kdnuggets.com/2023/02/getting-started-python-generators.html)
+> 原文：[`www.kdnuggets.com/2023/02/getting-started-python-generators.html`](https://www.kdnuggets.com/2023/02/getting-started-python-generators.html)
 
-![入门 Python 生成器](../Images/becf600d7f768a14d0dbe4156ec7bdeb.png)
+![入门 Python 生成器](img/becf600d7f768a14d0dbe4156ec7bdeb.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -208,7 +208,7 @@ size_g: [56, 56, 56, 56, 56, 56]
 
 为了更好地了解静态列表和生成器的大小如何随`num`的变化而变化，我们可以绘制`num`的值以及列表和生成器的大小，如下所示：
 
-![开始使用 Python 生成器](../Images/6904c75748fc0fcdd820c52c9c3a5653.png)
+![开始使用 Python 生成器](img/6904c75748fc0fcdd820c52c9c3a5653.png)
 
 在上图中，我们看到当`num`增加时，生成器的大小保持不变，而列表的大小则极为庞大。
 

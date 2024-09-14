@@ -1,22 +1,22 @@
-# 免费报名4年计算机科学学位课程
+# 免费报名 4 年计算机科学学位课程
 
-> 原文：[https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
+> 原文：[`www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free`](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
 
-![免费报名4年计算机科学学位课程](../Images/e87ef5f98f37795c725b67f856a1e0ca.png)
+![免费报名 4 年计算机科学学位课程](img/e87ef5f98f37795c725b67f856a1e0ca.png)
 
 图片由作者提供
 
-你是否曾经想学习计算机科学，但又不想支付高昂的大学学费？那么你很幸运！有一个令人难以置信的开源课程叫做 OSSU（开源社会大学），它允许你免费报名参加相当于4年计算机科学学位课程的学习。
+你是否曾经想学习计算机科学，但又不想支付高昂的大学学费？那么你很幸运！有一个令人难以置信的开源课程叫做 OSSU（开源社会大学），它允许你免费报名参加相当于 4 年计算机科学学位课程的学习。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
 
 * * *
 
@@ -24,13 +24,13 @@
 
 [ossu/computer-science](https://github.com/ossu/computer-science) 提供了计算机科学基础概念的完整教育，这些概念对所有计算学科至关重要。课程内容是根据领先大学本科计算机科学专业的学位要求设计的。它利用了来自 edX、Coursera 和 Udacity 的高质量课程，这些课程由 MIT、哈佛和普林斯顿等学校的教授讲授。
 
-![免费报名4年计算机科学学位课程](../Images/bc3901dd8bb53dbbe8b5f7ff28376d38.png)
+![免费报名 4 年计算机科学学位课程](img/bc3901dd8bb53dbbe8b5f7ff28376d38.png)
 
 图片来自 [ossu/computer-science](https://github.com/ossu/computer-science?tab=readme-ov-file#advanced-cs)
 
 课程内容涵盖了从编程语言、算法和数据结构到操作系统、计算机体系结构和软件工程的一切。完成核心计算机科学要求后，你可以选择高级选修课，专注于软件测试、博弈论、线性代数等领域。
 
-最好的部分是所有课程材料都可以在网上免费获得，你可以按照自己的节奏完成课程。虽然如果每周学习约20小时可以在2年内完成，但你可以根据自己的日程进行调整。你还可以加入一个全球范围的独立学习者社区，互相支持。
+最好的部分是所有课程材料都可以在网上免费获得，你可以按照自己的节奏完成课程。虽然如果每周学习约 20 小时可以在 2 年内完成，但你可以根据自己的日程进行调整。你还可以加入一个全球范围的独立学习者社区，互相支持。
 
 > **⚠️免责声明**
 > 
@@ -94,23 +94,23 @@ Core CS 部分的所有课程相当于大学计算机科学学位的前三年。
 
 若需更多指导，有围绕项目的结构化课程专门化供你选择。主题包括全栈开发、数据科学、机器人技术等。通过核心基础，你现在可以识别与你兴趣相匹配的系列课程。
 
-当你的期末项目完成后，通过拉取请求将其信息提交至OSSU [PROJECTS](https://github.com/ossu/computer-science/blob/master/PROJECTS.md)。此外，将OSSU徽章添加到你的项目README中。然后，利用社区渠道向其他学生宣布你的作品。
+当你的期末项目完成后，通过拉取请求将其信息提交至 OSSU [PROJECTS](https://github.com/ossu/computer-science/blob/master/PROJECTS.md)。此外，将 OSSU 徽章添加到你的项目 README 中。然后，利用社区渠道向其他学生宣布你的作品。
 
-评估通过获取同行反馈和展示能力而不是传统评分来完成。这也使OSSU能够评估其课程在多大程度上为独立学习者的实际成就做好了准备。
+评估通过获取同行反馈和展示能力而不是传统评分来完成。这也使 OSSU 能够评估其课程在多大程度上为独立学习者的实际成就做好了准备。
 
 # 结论
 
-OSSU计算机科学学位项目为那些有兴趣学习计算机科学但又不愿意承受高额学费的学生提供了绝佳机会。该项目拥有结构良好的课程，涵盖计算机科学的所有基本概念，使你能够在这一领域获得全面的教育。项目的灵活性允许你按照自己的节奏学习，使其成为任何人都能接触的选项，无论他们的时间安排如何。那么为什么要等待呢？立即通过OSSU开始你的计算机科学教育吧，完全免费。
+OSSU 计算机科学学位项目为那些有兴趣学习计算机科学但又不愿意承受高额学费的学生提供了绝佳机会。该项目拥有结构良好的课程，涵盖计算机科学的所有基本概念，使你能够在这一领域获得全面的教育。项目的灵活性允许你按照自己的节奏学习，使其成为任何人都能接触的选项，无论他们的时间安排如何。那么为什么要等待呢？立即通过 OSSU 开始你的计算机科学教育吧，完全免费。
 
-[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)****（[@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)）是一位认证的数据科学专业人士，他热衷于构建机器学习模型。目前，他专注于内容创作并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款AI产品，帮助那些受心理疾病困扰的学生。
+[](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)****（[@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)）是一位认证的数据科学专业人士，他热衷于构建机器学习模型。目前，他专注于内容创作并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络构建一款 AI 产品，帮助那些受心理疾病困扰的学生。
 
 ### 更多相关话题
 
 +   [免费注册数据科学本科课程](https://www.kdnuggets.com/enroll-in-a-data-science-undergraduate-program-for-free)
 
-+   [不要错过！2023年结束前免费注册课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！2023 年结束前免费注册课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
 
-+   [2022年值得报名的8个最佳数据科学课程，以获得职业快速提升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
++   [2022 年值得报名的 8 个最佳数据科学课程，以获得职业快速提升](https://www.kdnuggets.com/2022/02/scaler-8-best-data-science-courses-enroll-2022-steep-career-advancement.html)
 
 +   [通过西北大学的数据科学学位开启你的职业生涯](https://www.kdnuggets.com/2022/04/nwu-launch-career-northwestern-data-science-degree.html)
 

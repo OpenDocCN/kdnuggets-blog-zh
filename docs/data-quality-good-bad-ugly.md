@@ -1,8 +1,8 @@
 # 数据质量：优质的、劣质的与糟糕的
 
-> 原文：[https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)
+> 原文：[`www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html`](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)
 
-![数据质量：优质的、劣质的与糟糕的](../Images/50947723520394410be06ca0a0185ff0.png)
+![数据质量：优质的、劣质的与糟糕的](img/50947723520394410be06ca0a0185ff0.png)
 
 [背景矢量由 rawpixel.com 创建 - www.freepik.com](https://www.freepik.com/vectors/background)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -74,7 +74,7 @@
 
 **1\. 数据是如何收集的？**
 
-数据来源很重要。例如，这些数据是通过政府普查收集的，还是由某人手动创建并上传到Kaggle上的。收集来自上班路上不太感兴趣的人的数据，与发送调查问卷的网页链接让他们在自己时间里填写的方式是不同的。
+数据来源很重要。例如，这些数据是通过政府普查收集的，还是由某人手动创建并上传到 Kaggle 上的。收集来自上班路上不太感兴趣的人的数据，与发送调查问卷的网页链接让他们在自己时间里填写的方式是不同的。
 
 **2\. 数据代表了什么？**
 
@@ -98,10 +98,10 @@
 
 +   [揭示糟糕的科学](https://www.kdnuggets.com/2022/01/demystifying-bad-science.html)
 
-+   [10个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
++   [10 个最常见的数据质量问题及其解决方法](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
 +   [元数据如何改善安全性、质量和透明度](https://www.kdnuggets.com/2022/04/metadata-improves-security-quality-transparency.html)
 
-+   [使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
-+   [免费4周数据科学课程：人工智能质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)
++   [免费 4 周数据科学课程：人工智能质量管理](https://www.kdnuggets.com/2022/02/truera-free-4-week-data-science-course-ai-quality-management.html)

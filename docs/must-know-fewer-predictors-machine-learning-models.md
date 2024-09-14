@@ -1,8 +1,8 @@
 # 必知：为什么在机器学习模型中使用较少的预测变量可能更好？
 
-> 原文：[https://www.kdnuggets.com/2017/04/must-know-fewer-predictors-machine-learning-models.html](https://www.kdnuggets.com/2017/04/must-know-fewer-predictors-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2017/04/must-know-fewer-predictors-machine-learning-models.html`](https://www.kdnuggets.com/2017/04/must-know-fewer-predictors-machine-learning-models.html)
 > 
-> **编辑注：** 本文最初作为对我们[17 个必知的数据科学面试问题与答案](/2017/02/17-data-science-interview-questions-answers.html)系列中一个问题的回答而发布。由于回答内容足够详尽，因此决定将其独立成文。
+> **编辑注：** 本文最初作为对我们 17 个必知的数据科学面试问题与答案系列中一个问题的回答而发布。由于回答内容足够详尽，因此决定将其独立成文。
 
 以下是为什么使用较少的预测变量可能比使用更多预测变量更好的几个原因：
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -34,11 +34,11 @@
 
 假设你有一个项目，其中有大量的预测变量，并且所有这些变量都是相关的（即对因变量有可测量的影响）。因此，你显然希望使用所有变量，以获得一个成功率非常高的数据模型。尽管这种方法听起来非常诱人，但实际考虑因素（如可用数据量、存储和计算资源、完成所需时间等）使得这种方法几乎不可能实现。
 
-因此，即使你有大量相关的预测变量，使用较少的预测变量（通过特征选择筛选或通过特征提取开发）也是一个好主意。这本质上类似于帕累托原则，即许多事件中，大约80%的效果来自20%的原因。
+因此，即使你有大量相关的预测变量，使用较少的预测变量（通过特征选择筛选或通过特征提取开发）也是一个好主意。这本质上类似于帕累托原则，即许多事件中，大约 80%的效果来自 20%的原因。
 
-专注于这20%最重要的预测变量，将大大有助于在合理时间内建立成功率可观的数据模型，而不需要大量不切实际的数据或其他资源。
+专注于这 20%最重要的预测变量，将大大有助于在合理时间内建立成功率可观的数据模型，而不需要大量不切实际的数据或其他资源。
 
-![训练与复杂度](../Images/b30a107ef5009d61aa270f2047eb9950.png)
+![训练与复杂度](img/b30a107ef5009d61aa270f2047eb9950.png)
 
 训练误差与测试误差对模型复杂度的关系（来源：[Quora](https://www.quora.com/Why-might-it-be-preferable-to-include-fewer-predictors-over-many/answer/Sergül-Aydöre)由[Sergul Aydore](https://www.quora.com/profile/Sergül-Aydöre)发布）
 
@@ -50,22 +50,22 @@
 
 **相关：**
 
-+   [17个必须了解的数据科学面试问题及答案](/2017/02/17-data-science-interview-questions-answers.html)
++   17 个必须了解的数据科学面试问题及答案
 
-+   [接近（几乎）任何机器学习问题](/2016/08/approaching-almost-any-machine-learning-problem.html)
++   接近（几乎）任何机器学习问题
 
-+   [识别可能更好预测的变量](/2017/02/schmarzo-variables-better-predictors.html)
++   识别可能更好预测的变量
 
 ### 更多相关内容
 
 +   [为什么机器学习模型会默默“死去”？](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)
 
-+   [ETL与机器学习有什么关系？](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)
++   [ETL 与机器学习有什么关系？](https://www.kdnuggets.com/2022/08/etl-machine-learning.html)
 
 +   [评估你的机器学习模型的（更好）方法](https://www.kdnuggets.com/2022/01/much-better-approach-evaluate-machine-learning-model.html)
 
 +   [为什么你应该使用线性回归模型而不是……](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [每个数据科学家应该具备的13项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
++   [每个数据科学家应该具备的 13 项技能](https://www.kdnuggets.com/2022/03/top-13-skills-every-data-scientist.html)
 
-+   [21份数据科学面试必备的备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
++   [21 份数据科学面试必备的备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)

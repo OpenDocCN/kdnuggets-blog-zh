@@ -1,22 +1,22 @@
 # 作为数据科学家提问的艺术
 
-> 原文：[https://www.kdnuggets.com/2019/02/asking-great-questions-data-scientist.html](https://www.kdnuggets.com/2019/02/asking-great-questions-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2019/02/asking-great-questions-data-scientist.html`](https://www.kdnuggets.com/2019/02/asking-great-questions-data-scientist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Kristen Kehrer](https://www.linkedin.com/in/kristen-kehrer-datamovesme/)、[DataMovesMe](https://datamovesme.com/)**。
 
-![Data Scientist](../Images/36c4ea589842db6c2753051bf0aaeb97.png)
+![Data Scientist](img/36c4ea589842db6c2753051bf0aaeb97.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
 
 * * *
 
@@ -92,7 +92,7 @@
 
 - 卡尔洛·希门尼斯
 
-我自己也经历了Karlo提到的情况。直接的方式有时可能会被解读为判断。我们确实需要尽力发挥我们的“商业头脑”，以便表现得像一个真正试图理解并满足他们需求的人。我发现，如果我将问题表述为“寻求他们宝贵的反馈”，这对所有参与者都是双赢的。
+我自己也经历了 Karlo 提到的情况。直接的方式有时可能会被解读为判断。我们确实需要尽力发挥我们的“商业头脑”，以便表现得像一个真正试图理解并满足他们需求的人。我发现，如果我将问题表述为“寻求他们宝贵的反馈”，这对所有参与者都是双赢的。
 
 随着你与团队和利益相关者建立关系，这种情况发生的可能性会大大降低。一旦大家意识到你的性格并建立了融洽的关系，人们将会期待你的提问方式。
 

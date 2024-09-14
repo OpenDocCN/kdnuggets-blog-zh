@@ -1,12 +1,12 @@
 # 从我的第一次 Kaggle 比赛中学到的经验
 
-> 原文：[https://www.kdnuggets.com/2020/09/lessons-first-kaggle-competition.html](https://www.kdnuggets.com/2020/09/lessons-first-kaggle-competition.html)
+> 原文：[`www.kdnuggets.com/2020/09/lessons-first-kaggle-competition.html`](https://www.kdnuggets.com/2020/09/lessons-first-kaggle-competition.html)
 
-[评论](#comments)
+评论
 
 **作者 [Shruti Turner](https://www.linkedin.com/in/shrutiturner/)，帝国理工学院假肢博士研究员**
 
-![图](../Images/06a877f8c05548ed56f03a71d239c368.png)
+![图](img/06a877f8c05548ed56f03a71d239c368.png)
 
 图片来源：[Johnson Martin](https://pixabay.com/users/JohnsonMartin-724525/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1084923) 来自 [Pixabay](https://pixabay.com/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=1084923)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -48,7 +48,7 @@
 
 1.  **下一次开始之前进行一些规划可能会有帮助**——我太急于动手了，查看了提供的数据，做了一些快速观察，然后直接开始编写代码。在查看了其他解决方案/教程笔记本后，我更加理解了在数据中寻找什么和解决问题的不同方法（以及原因！）我发现的东西与我做的不是很不同，但它们是更深入的解决方案；是在我所做的基础上的下一步。
 
-1.  **我喜欢解决这些类型的问题，并且想要做更多的这类问题**——如果这是我考虑追求的职业方向，这是一个重要的因素。我原本只打算花一个小时，结果下次抬头时已经过去了4小时。
+1.  **我喜欢解决这些类型的问题，并且想要做更多的这类问题**——如果这是我考虑追求的职业方向，这是一个重要的因素。我原本只打算花一个小时，结果下次抬头时已经过去了 4 小时。
 
 ### 下一步
 
@@ -66,11 +66,11 @@
 
 **相关：**
 
-+   [Kaggle Kernels 初学者指南：逐步教程](/2019/07/kaggle-kernels-guide-beginners-tutorial.html)
++   Kaggle Kernels 初学者指南：逐步教程
 
-+   [如果我必须重新开始学习数据科学，我会怎么做？](/2020/08/start-learning-data-science-again.html)
++   如果我必须重新开始学习数据科学，我会怎么做？
 
-+   [Kaggle Learn 是“更快的数据科学教育”吗？](/2019/08/kaggle-learn-faster-data-science-education.html)
++   Kaggle Learn 是“更快的数据科学教育”吗？
 
 ### 更多相关内容
 
@@ -78,7 +78,7 @@
 
 +   [资深数据科学家的经验教训](https://www.kdnuggets.com/2022/09/lessons-senior-data-scientist.html)
 
-+   [KDnuggets 新闻，9月28日：免费 Python 算法课程 •…](https://www.kdnuggets.com/2022/n38.html)
++   [KDnuggets 新闻，9 月 28 日：免费 Python 算法课程 •…](https://www.kdnuggets.com/2022/n38.html)
 
 +   [4 个职业教训帮助我应对困难的就业市场](https://www.kdnuggets.com/2023/05/4-lessons-made-difference-navigating-current-job-market.html)
 

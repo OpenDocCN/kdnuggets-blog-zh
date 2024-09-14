@@ -1,6 +1,6 @@
 # 使用 PyTorch 的迁移学习实用指南
 
-> 原文：[https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
+> 原文：[`www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html`](https://www.kdnuggets.com/2023/06/practical-guide-transfer-learning-pytorch.html)
 
 与[Naresh](https://medium.com/u/1e659a80cffd)和[Gaurav](http://www.gaurav.ai/)联合撰写。
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
 
 * * *
 
@@ -58,13 +58,13 @@
 
 Jeremy Howard（来自 fast.ai）[说](https://www.fast.ai/posts/2020-01-13-self_supervised.html)。
 
-> *“在可能的情况下，你应该以一个预训练模型开始你的神经网络训练并进行微调。你真的不希望从随机权重开始，因为那意味着你从一个完全不知道如何做任何事情的模型开始！通过预训练，你可以使用比从头开始少1000倍的数据。”*
+> *“在可能的情况下，你应该以一个预训练模型开始你的神经网络训练并进行微调。你真的不希望从随机权重开始，因为那意味着你从一个完全不知道如何做任何事情的模型开始！通过预训练，你可以使用比从头开始少 1000 倍的数据。”*
 
 接下来，我们将看看如何将迁移学习的概念与人类学习联系起来进行思考。
 
 ## 迁移学习的人类类比
 
-+   **模型训练**：在孩子出生后，他们需要一段时间来学习站立、平衡和行走。在这个过程中，他们经历了建立身体肌肉的阶段，他们的大脑也学会了理解和内化站立、平衡和行走的技能。他们经历了若干次尝试，有些成功，有些失败，最终达到能够稳定地站立、平衡和行走的阶段。这类似于训练深度学习模型的过程，模型需要经过大量的时间（训练周期）才能学习到一个通用任务（例如将图像分类为1000个ImageNet类别之一），而这在训练该任务时非常重要。
++   **模型训练**：在孩子出生后，他们需要一段时间来学习站立、平衡和行走。在这个过程中，他们经历了建立身体肌肉的阶段，他们的大脑也学会了理解和内化站立、平衡和行走的技能。他们经历了若干次尝试，有些成功，有些失败，最终达到能够稳定地站立、平衡和行走的阶段。这类似于训练深度学习模型的过程，模型需要经过大量的时间（训练周期）才能学习到一个通用任务（例如将图像分类为 1000 个 ImageNet 类别之一），而这在训练该任务时非常重要。
 
 +   **迁移学习**：一个已经学会走路的孩子发现学习相关的高级技能，如跳跃和跑步，要容易得多。迁移学习类似于这种人类学习的方面，其中一个已经学会了通用技能的预训练模型被用来高效地训练其他相关任务。
 
@@ -72,7 +72,7 @@ Jeremy Howard（来自 fast.ai）[说](https://www.fast.ai/posts/2020-01-13-self
 
 ## 为什么我应该使用迁移学习？
 
-许多视觉AI任务，如图像分类、图像分割、目标定位或检测，仅在它们分类、分割或检测的具体对象上有所不同。训练这些任务的模型已经学习了训练数据集中对象的特征。因此，它们可以很容易地适应相关任务。例如，一个训练用来识别图像中是否有汽车的模型可以被微调以识别猫或狗。
+许多视觉 AI 任务，如图像分类、图像分割、目标定位或检测，仅在它们分类、分割或检测的具体对象上有所不同。训练这些任务的模型已经学习了训练数据集中对象的特征。因此，它们可以很容易地适应相关任务。例如，一个训练用来识别图像中是否有汽车的模型可以被微调以识别猫或狗。
 
 迁移学习的主要优势是能够使你在任务上获得更好的准确性。我们可以将其优势分解如下：
 
@@ -112,7 +112,7 @@ Jeremy Howard（来自 fast.ai）[说](https://www.fast.ai/posts/2020-01-13-self
 
 **使用预训练模型时的法律考虑**
 
-ImageNet 仅用于非商业研究目的 ([https://image-net.org/download](https://image-net.org/download))。因此，目前不清楚是否可以合法地将预训练于 ImageNet 的模型权重用于商业目的。如果你计划这样做，请寻求法律建议。
+ImageNet 仅用于非商业研究目的 ([`image-net.org/download`](https://image-net.org/download))。因此，目前不清楚是否可以合法地将预训练于 ImageNet 的模型权重用于商业目的。如果你计划这样做，请寻求法律建议。
 
 现在我们知道了可以找到用于迁移学习的预训练模型的位置，我们来看看可以在哪里获取用于自定义分类任务的数据集。
 
@@ -128,7 +128,7 @@ Flowers 102 数据集来自于 [牛津视觉几何组](https://www.robots.ox.ac.
 
 图像分类任务的迁移学习可以视为三个步骤的序列，如图 1 所示。这些步骤如下：
 
-![使用 PyTorch 进行迁移学习的实用指南](../Images/ca3d49ee22f436287775d519acd189ad.png)
+![使用 PyTorch 进行迁移学习的实用指南](img/ca3d49ee22f436287775d519acd189ad.png)
 
 图 1：使用 PyTorch 进行迁移学习。来源：作者
 
@@ -150,11 +150,11 @@ Flowers 102 数据集来自于 [牛津视觉几何组](https://www.robots.ox.ac.
 
 下面的图示直观地展示了特征提取和微调。
 
-![使用 PyTorch 进行迁移学习的实用指南](../Images/6c3d03dfd4a4c1adcdd479febd32b4d5.png)
+![使用 PyTorch 进行迁移学习的实用指南](img/6c3d03dfd4a4c1adcdd479febd32b4d5.png)
 
 图 2：微调（b）和特征提取（c）的视觉解释。来源：[不遗忘学习](https://arxiv.org/pdf/1606.09282.pdf)
 
-![使用 PyTorch 进行迁移学习的实用指南](../Images/d372d5f5eccded958b1771c00b2695ce.png)
+![使用 PyTorch 进行迁移学习的实用指南](img/d372d5f5eccded958b1771c00b2695ce.png)
 
 图 3：图示显示了在特征提取和微调阶段哪些层是可训练的（未冻结）。来源：作者
 
@@ -188,7 +188,7 @@ print(len(classification_models), "classification models:", classification_model
 
 ## 初始模型选择
 
-现在我们有80个候选模型需要选择，我们需要将其缩小到几个可以进行实验的模型。预训练模型骨干网络的选择是一个超参数，我们可以（且应该）通过实验探索多个选项，以查看哪个效果最佳。运行实验成本高且耗时，而且不太可能尝试所有模型，这就是为什么我们首先尝试将列表缩小到3-4个模型的原因。
+现在我们有 80 个候选模型需要选择，我们需要将其缩小到几个可以进行实验的模型。预训练模型骨干网络的选择是一个超参数，我们可以（且应该）通过实验探索多个选项，以查看哪个效果最佳。运行实验成本高且耗时，而且不太可能尝试所有模型，这就是为什么我们首先尝试将列表缩小到 3-4 个模型的原因。
 
 我们决定首先使用以下预训练模型骨干网络。
 
@@ -200,13 +200,13 @@ print(len(classification_models), "classification models:", classification_model
 
 以下是我们选择这三种模型的原因。
 
-1.  我们不受限于模型大小或推理延迟，因此我们不需要寻找超级高效的模型。如果你想要对各种移动设备视觉模型进行比较研究，请阅读题为“[移动设备上AI模型和框架的比较与基准测试](https://arxiv.org/pdf/2005.05085.pdf)”的论文。
+1.  我们不受限于模型大小或推理延迟，因此我们不需要寻找超级高效的模型。如果你想要对各种移动设备视觉模型进行比较研究，请阅读题为“[移动设备上 AI 模型和框架的比较与基准测试](https://arxiv.org/pdf/2005.05085.pdf)”的论文。
 
-1.  我们选择的模型在视觉机器学习社区中相当受欢迎，并且通常是分类任务的良好选择。你可以使用这些模型论文的引用计数作为模型有效性的一个较好指标。然而，请注意，像AlexNet这样的老旧模型的论文引用计数可能较多，但它们通常不是进行严肃分类任务的默认选择。
+1.  我们选择的模型在视觉机器学习社区中相当受欢迎，并且通常是分类任务的良好选择。你可以使用这些模型论文的引用计数作为模型有效性的一个较好指标。然而，请注意，像 AlexNet 这样的老旧模型的论文引用计数可能较多，但它们通常不是进行严肃分类任务的默认选择。
 
-1.  即使在模型架构中，通常也有许多不同的变种或尺寸。例如，EfficientNet有从B0到B7的不同版本。有关这些版本的具体细节，请参考相关模型的论文。
+1.  即使在模型架构中，通常也有许多不同的变种或尺寸。例如，EfficientNet 有从 B0 到 B7 的不同版本。有关这些版本的具体细节，请参考相关模型的论文。
 
-torchvision中各种预训练分类模型的引用计数。
+torchvision 中各种预训练分类模型的引用计数。
 
 1.  Resnet: 165k
 
@@ -224,7 +224,7 @@ torchvision中各种预训练分类模型的引用计数。
 
 如果你想了解更多可能影响你选择的预训练模型的因素，请阅读以下文章：
 
-1.  [4种适用于计算机视觉迁移学习的预训练CNN模型](https://towardsdatascience.com/4-pre-trained-cnn-models-to-use-for-computer-vision-with-transfer-learning-885cb1b2dfc)
+1.  [4 种适用于计算机视觉迁移学习的预训练 CNN 模型](https://towardsdatascience.com/4-pre-trained-cnn-models-to-use-for-computer-vision-with-transfer-learning-885cb1b2dfc)
 
 1.  [如何选择适合你卷积神经网络的最佳预训练模型？](https://data-science-blog.com/blog/2022/04/11/how-to-choose-the-best-pre-trained-model-for-your-convolutional-neural-network/)
 
@@ -261,19 +261,19 @@ resnet152
 
 你可以在[这里找到完整的探索性模型分析笔记本](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/torchvision-model-exploration.ipynb)。
 
-由于我们将对3个预训练模型进行实验，并分别对每个模型执行转移学习，因此让我们定义一些抽象和类，以帮助我们运行和跟踪这些实验。
+由于我们将对 3 个预训练模型进行实验，并分别对每个模型执行转移学习，因此让我们定义一些抽象和类，以帮助我们运行和跟踪这些实验。
 
-## 定义一个PyTorch模型来封装预训练模型
+## 定义一个 PyTorch 模型来封装预训练模型
 
-为了方便探索，我们将定义一个名为`Flowers102Classifier`的PyTorch模型，并在整个过程中使用它。我们将逐步为该类添加功能，直到实现最终目标。有关[Flowers 102分类的转移学习的完整笔记本可以在这里找到](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb)。
+为了方便探索，我们将定义一个名为`Flowers102Classifier`的 PyTorch 模型，并在整个过程中使用它。我们将逐步为该类添加功能，直到实现最终目标。有关[Flowers 102 分类的转移学习的完整笔记本可以在这里找到](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb)。
 
 下面的部分将深入探讨执行转移学习所需的每一个机械步骤。
 
 ## 替换旧的分类头为新的分类头
 
-每个在ImageNet分类任务上进行预训练的模型的现有分类头有1000个输出特征。我们自定义的花卉分类任务有102个输出特征。因此，我们需要将最终的分类头（层）替换为一个具有102个输出特征的新分类头。
+每个在 ImageNet 分类任务上进行预训练的模型的现有分类头有 1000 个输出特征。我们自定义的花卉分类任务有 102 个输出特征。因此，我们需要将最终的分类头（层）替换为一个具有 102 个输出特征的新分类头。
 
-我们类的构造函数将包括加载来自`torchvision`的预训练模型的代码，并使用预训练权重，并将分类头替换为一个用于102类的自定义分类头。
+我们类的构造函数将包括加载来自`torchvision`的预训练模型的代码，并使用预训练权重，并将分类头替换为一个用于 102 类的自定义分类头。
 
 ```py
 def __init__(self, backbone, load_pretrained):
@@ -341,19 +341,19 @@ def __init__(self, backbone, load_pretrained):
 
 **特征提取**：我们将模型中所有层的权重的`requires_grad`设置为`False`，仅将新添加的层的`requires_grad`设置为`True`。
 
-我们用**16个epochs**和学习率为1e-3训练新层。这确保了新层能够调整和适应其权重，以适应网络中特征提取器部分的权重。冻结网络中的其他层并仅训练新层是重要的，以免使网络忘记已经学到的内容。如果我们不冻结较早的层，它们将会在添加新分类头时被重新训练为随机初始化的垃圾权重。
+我们用**16 个 epochs**和学习率为 1e-3 训练新层。这确保了新层能够调整和适应其权重，以适应网络中特征提取器部分的权重。冻结网络中的其他层并仅训练新层是重要的，以免使网络忘记已经学到的内容。如果我们不冻结较早的层，它们将会在添加新分类头时被重新训练为随机初始化的垃圾权重。
 
-**微调**：我们将所有层的权重的requires_grad设置为True。我们训练整个网络**8个周期**。然而，在这种情况下，我们采用了差异学习率策略。我们使学习率（LR）衰减，以便LR在向输入层（远离输出分类头）移动时减少。我们在向模型的初始层移动时衰减学习率，因为这些初始层已经学习了关于图像的基本特征，这对于大多数视觉AI任务都是共通的。因此，初始层用非常低的学习率进行训练，以避免干扰它们已学到的知识。当我们向分类头部的模型后层移动时，模型正在学习一些任务特定的内容，因此用更高的学习率训练这些后层是有意义的。这里可以采用不同的策略，在我们的案例中，我们使用了2种不同的策略来说明它们的有效性。
+**微调**：我们将所有层的权重的 requires_grad 设置为 True。我们训练整个网络**8 个周期**。然而，在这种情况下，我们采用了差异学习率策略。我们使学习率（LR）衰减，以便 LR 在向输入层（远离输出分类头）移动时减少。我们在向模型的初始层移动时衰减学习率，因为这些初始层已经学习了关于图像的基本特征，这对于大多数视觉 AI 任务都是共通的。因此，初始层用非常低的学习率进行训练，以避免干扰它们已学到的知识。当我们向分类头部的模型后层移动时，模型正在学习一些任务特定的内容，因此用更高的学习率训练这些后层是有意义的。这里可以采用不同的策略，在我们的案例中，我们使用了 2 种不同的策略来说明它们的有效性。
 
-1.  **VGG16**：对于vgg16网络，我们将学习率**线性**地从LR=1e-4衰减到LR=1e-7（比分类层的学习率低1000倍）。由于特征提取阶段有44层，每一层的学习率比前一层低（1e-7 - 1e-4）/44 = 2.3e-6。
+1.  **VGG16**：对于 vgg16 网络，我们将学习率**线性**地从 LR=1e-4 衰减到 LR=1e-7（比分类层的学习率低 1000 倍）。由于特征提取阶段有 44 层，每一层的学习率比前一层低（1e-7 - 1e-4）/44 = 2.3e-6。
 
-1.  **ResNet**：对于ResNet（50/152）网络，我们从LR=1e-4开始以指数方式衰减学习率。每向上一层，我们将学习率减少3倍。
+1.  **ResNet**：对于 ResNet（50/152）网络，我们从 LR=1e-4 开始以指数方式衰减学习率。每向上一层，我们将学习率减少 3 倍。
 
-![使用PyTorch进行迁移学习的实用指南](../Images/43ffa221f6003b98afc4a6c4a37b2961.png)
+![使用 PyTorch 进行迁移学习的实用指南](img/43ffa221f6003b98afc4a6c4a37b2961.png)
 
-图4：一个示例显示学习率（LR）以10的因子指数衰减，当我们向靠近网络输入的层移动时。来源：作者。
+图 4：一个示例显示学习率（LR）以 10 的因子指数衰减，当我们向靠近网络输入的层移动时。来源：作者。
 
-用于冻结特征提取和微调的层的代码显示在下面名为fine_tune()的函数中。
+用于冻结特征提取和微调的层的代码显示在下面名为 fine_tune()的函数中。
 
 ```py
 def fine_tune(self, what: FineTuneType):
@@ -375,9 +375,9 @@ def fine_tune(self, what: FineTuneType):
             p.requires_grad = True 
 ```
 
-代码片段：在特征提取（NEW_LAYERS）和微调（ALL）阶段使用requires_grad冻结和解冻参数。
+代码片段：在特征提取（NEW_LAYERS）和微调（ALL）阶段使用 requires_grad 冻结和解冻参数。
 
-在PyTorch中，为每一层设置差异学习率的方式是将需要该学习率的权重指定给在迁移学习期间使用的优化器。在我们的笔记本中，我们使用Adam优化器。下面的get_optimizer_params()方法获取优化器参数，以传递给我们将使用的Adam（或其他）优化器。
+在 PyTorch 中，为每一层设置差异学习率的方式是将需要该学习率的权重指定给在迁移学习期间使用的优化器。在我们的笔记本中，我们使用 Adam 优化器。下面的 get_optimizer_params()方法获取优化器参数，以传递给我们将使用的 Adam（或其他）优化器。
 
 ```py
 def get_optimizer_params(self):
@@ -431,13 +431,13 @@ def get_optimizer_params(self):
 
 代码片段：在微调模型时，每层的差异学习率。
 
-一旦我们有了各自学习率的模型参数，就可以用一行代码将它们传递给优化器。对那些在get_optimizer_params()返回的字典中未指定权重的参数，使用默认学习率1e-8。
+一旦我们有了各自学习率的模型参数，就可以用一行代码将它们传递给优化器。对那些在 get_optimizer_params()返回的字典中未指定权重的参数，使用默认学习率 1e-8。
 
 ```py
 optimizer = torch.optim.Adam(fc.get_optimizer_params(), lr=1e-8)
 ```
 
-代码片段：将具有各自学习率的参数传递给Adam优化器。
+代码片段：将具有各自学习率的参数传递给 Adam 优化器。
 
 现在我们知道了如何进行迁移学习，让我们来看看在微调模型之前还需要考虑哪些其他因素。这包括我们需要采取的步骤以防止过拟合，以及选择合适的训练/验证/测试集划分。
 
@@ -459,19 +459,19 @@ optimizer = torch.optim.Adam(fc.get_optimizer_params(), lr=1e-8)
 
 ## 训练/验证/测试拆分
 
-Flowers 102 数据集的作者推荐的训练/验证/测试拆分是1020/1020/6149。许多作者采取不同的方法。例如，
+Flowers 102 数据集的作者推荐的训练/验证/测试拆分是 1020/1020/6149。许多作者采取不同的方法。例如，
 
-1.  在[ResNet strikes back](https://arxiv.org/pdf/2110.00476.pdf)论文中，作者使用了训练+验证（2040张图像）拆分作为训练集，测试集作为测试集。是否存在验证拆分尚不明确。
+1.  在[ResNet strikes back](https://arxiv.org/pdf/2110.00476.pdf)论文中，作者使用了训练+验证（2040 张图像）拆分作为训练集，测试集作为测试集。是否存在验证拆分尚不明确。
 
-1.  在[Flowers 102 分类](https://towardsdatascience.com/build-train-and-deploy-a-real-world-flower-classifier-of-102-flower-types-a90f66d2092a)这篇文章中，作者使用了6149的测试拆分作为训练拆分。
+1.  在[Flowers 102 分类](https://towardsdatascience.com/build-train-and-deploy-a-real-world-flower-classifier-of-102-flower-types-a90f66d2092a)这篇文章中，作者使用了 6149 的测试拆分作为训练拆分。
 
-1.  在这个[笔记本](https://github.com/bduvenhage/pytorch_challenge/blob/master/Image_Classifier_Project_Colab.ipynb)中，作者使用了6552、818和819的训练/验证/测试拆分。
+1.  在这个[笔记本](https://github.com/bduvenhage/pytorch_challenge/blob/master/Image_Classifier_Project_Colab.ipynb)中，作者使用了 6552、818 和 819 的训练/验证/测试拆分。
 
 了解哪些作者在做什么的唯一方法是阅读论文或代码。
 
-在我们的笔记本（在本文中），我们使用了6149的拆分作为训练拆分，2040的拆分作为验证拆分。我们没有使用测试拆分，因为我们并不真正尝试竞争。
+在我们的笔记本（在本文中），我们使用了 6149 的拆分作为训练拆分，2040 的拆分作为验证拆分。我们没有使用测试拆分，因为我们并不真正尝试竞争。
 
-此时，你应该感到有信心访问[这个笔记本](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb)，它执行了上述所有步骤并展示了结果。请随意在Kaggle或Google Colab上克隆该笔记本，并在GPU上自行运行。如果你使用Google Colab，你需要修正一些路径，这些路径涉及数据集和预训练模型的下载以及微调模型最佳权重的存储。
+此时，你应该感到有信心访问[这个笔记本](https://github.com/dhruvbird/ml-notebooks/blob/main/Flowers-102-transfer-learning/flowers102-classification-using-pre-trained-models.ipynb)，它执行了上述所有步骤并展示了结果。请随意在 Kaggle 或 Google Colab 上克隆该笔记本，并在 GPU 上自行运行。如果你使用 Google Colab，你需要修正一些路径，这些路径涉及数据集和预训练模型的下载以及微调模型最佳权重的存储。
 
 下面，我们将查看我们的迁移学习实验的结果！
 
@@ -479,19 +479,19 @@ Flowers 102 数据集的作者推荐的训练/验证/测试拆分是1020/1020/61
 
 结果中有一些共同的主题，我们将在下面探讨。
 
-1.  单独经过特征提取步骤后，几乎所有网络的准确率都在91%到94%之间。
+1.  单独经过特征提取步骤后，几乎所有网络的准确率都在 91%到 94%之间。
 
-1.  几乎所有的网络在微调步骤后都表现非常好，准确率达到96%以上。这表明微调步骤在迁移学习过程中确实很有帮助。
+1.  几乎所有的网络在微调步骤后都表现非常好，准确率达到 96%以上。这表明微调步骤在迁移学习过程中确实很有帮助。
 
 我们网络中的参数数量差异显著，vgg16 为 135M 参数，ResNet50 为 23M 参数，ResNet152 为 58M 参数。这表明我们可能可以找到一个具有类似准确率和性能的较小网络。
 
-![使用 PyTorch 进行转移学习的实用指南](../Images/f62f4d7b6be49cdb920d90146304b94e.png)
+![使用 PyTorch 进行转移学习的实用指南](img/f62f4d7b6be49cdb920d90146304b94e.png)
 
 图 5：转移学习过程中的训练/验证损失和准确率。来源：作者。
 
 垂直的红线表示我们从特征提取（16 个时期）切换到微调（8 个时期）的时间点。你可以看到，当我们切换到微调时，所有网络的准确率都有所提高。这表明在特征提取后进行微调是非常有效的。
 
-![使用 PyTorch 进行转移学习的实用指南](../Images/b87247c2760e4623a9c283252b70b34c.png)
+![使用 PyTorch 进行转移学习的实用指南](img/b87247c2760e4623a9c283252b70b34c.png)
 
 图 6：在花卉分类任务上进行转移学习后，所有 3 个预训练模型的验证准确率。图中显示了第 16 个时期特征提取后的验证准确率以及每个模型在微调阶段的最佳验证准确率。来源：作者。
 

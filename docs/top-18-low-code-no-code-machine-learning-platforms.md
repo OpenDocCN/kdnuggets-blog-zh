@@ -1,8 +1,8 @@
-# 前18名低代码和无代码机器学习平台
+# 前 18 名低代码和无代码机器学习平台
 
-> 原文：[https://www.kdnuggets.com/2021/09/top-18-low-code-no-code-machine-learning-platforms.html](https://www.kdnuggets.com/2021/09/top-18-low-code-no-code-machine-learning-platforms.html)
+> 原文：[`www.kdnuggets.com/2021/09/top-18-low-code-no-code-machine-learning-platforms.html`](https://www.kdnuggets.com/2021/09/top-18-low-code-no-code-machine-learning-platforms.html)
 
-[评论](#comments)
+评论
 
 **由 [Yulia Gavrilova](https://twitter.com/lumosmassimo)，serokell.io 的人工智能和技术伦理**。
 
@@ -10,7 +10,7 @@
 
 **低代码** 只是意味着减少了编程量。许多元素可以从库中简单地拖放。然而，也可以通过编写自己的代码来定制这些元素，这样可以增加灵活性。
 
-![](../Images/2c0645fc915537bd59e6727744f58f10.png)
+![](img/2c0645fc915537bd59e6727744f58f10.png)
 
 **无代码** 平台完全不需要编程知识。不同的人，如艺术家、教师、高层管理人员，都可以使用这些平台。他们在工作中需要人工智能，但不想深入编程和计算机科学。无代码解决方案功能有限，但可以快速构建简单的东西。
 
@@ -34,7 +34,7 @@
 
 [H2O](https://www.h2o.ai/products/h2o-automl/) 是一个开源机器学习平台。它提供了部署最广泛使用的机器学习算法的工具，如梯度下降、线性回归、深度人工神经网络等。这个平台的特点是其先进的 AutoML。该功能提供了同时构建多个模型的自动化过程，使你即使没有先前经验也可以创建和测试功能性机器学习模型。
 
-## 2021年你应该使用的无代码机器学习平台
+## 2021 年你应该使用的无代码机器学习平台
 
 这里有一系列无代码平台，您可以探索，如果您希望快速部署机器学习元素并将其与现有软件集成。
 
@@ -118,11 +118,11 @@ https://www.youtube.com/watch?v=qFvWPSqwJa4
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

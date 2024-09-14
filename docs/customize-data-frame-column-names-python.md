@@ -1,8 +1,8 @@
 # 在 Python 中自定义数据框列名
 
-> 原文：[https://www.kdnuggets.com/2022/08/customize-data-frame-column-names-python.html](https://www.kdnuggets.com/2022/08/customize-data-frame-column-names-python.html)
+> 原文：[`www.kdnuggets.com/2022/08/customize-data-frame-column-names-python.html`](https://www.kdnuggets.com/2022/08/customize-data-frame-column-names-python.html)
 
-![在 Python 中自定义数据框列名](../Images/870b0ab6c500f79158301a70882fd8c8.png)
+![在 Python 中自定义数据框列名](img/870b0ab6c500f79158301a70882fd8c8.png)
 
 编辑图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -44,7 +44,7 @@ df
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/09b34401e88dbc1af33bcd7e19633c95.png)
+![在 Python 中自定义数据框列名](img/09b34401e88dbc1af33bcd7e19633c95.png)
 
 **让我们开始探索这些场景吧**
 
@@ -64,9 +64,9 @@ df.columns
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/6fd09eeff594fd3192843055a83cf9a6.png)
+![在 Python 中自定义数据框列名](img/6fd09eeff594fd3192843055a83cf9a6.png)
 
-# 场景2
+# 场景 2
 
 在下面的代码中，我们将声明一个名为**columnnames**的空[字典](https://www.w3schools.com/python/python_dictionaries.asp)，然后声明另一个名为**count to 0**的**变量**。
 
@@ -92,7 +92,7 @@ columnnames
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/01e7f112fa72eef5530e7a50ca151d7e.png)
+![在 Python 中自定义数据框列名](img/01e7f112fa72eef5530e7a50ca151d7e.png)
 
 **代码：**
 
@@ -104,7 +104,7 @@ df.columns
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/73b0babe14a5b32c3a0d1ca52d0bb993.png)
+![在 Python 中自定义数据框列名](img/73b0babe14a5b32c3a0d1ca52d0bb993.png)
 
 # 场景 3
 
@@ -130,7 +130,7 @@ columnnames
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/4b99f216a947e92c7f0c2b9c60f7ef9f.png)
+![在 Python 中自定义数据框列名](img/4b99f216a947e92c7f0c2b9c60f7ef9f.png)
 
 **代码：**
 
@@ -142,7 +142,7 @@ df.columns
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/f6b74516170f875b804d8b6e35969ffd.png)
+![在 Python 中自定义数据框列名](img/f6b74516170f875b804d8b6e35969ffd.png)
 
 # 场景 4
 
@@ -170,7 +170,7 @@ columnnames
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/8ef393a9428224fe5b830f4192d2f893.png)
+![在 Python 中自定义数据框列名](img/8ef393a9428224fe5b830f4192d2f893.png)
 
 **代码：**
 
@@ -182,7 +182,7 @@ df.columns
 
 **输出：**
 
-![在 Python 中自定义数据框列名](../Images/2971a94c297be8f98d7951ad060fb7a2.png)
+![在 Python 中自定义数据框列名](img/2971a94c297be8f98d7951ad060fb7a2.png)
 
 # 结论
 
@@ -200,6 +200,6 @@ df.columns
 
 +   [作为数据科学家如何注释你的 Python 代码](https://www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist)
 
-+   [KDnuggets™ 新闻 22:n01，1月5日：跟踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01，1 月 5 日：跟踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
 
 +   [从新手到高手：为什么你的 Python 技能在数据科学中至关重要](https://www.kdnuggets.com/novice-to-ninja-why-your-python-skills-matter-in-data-science)

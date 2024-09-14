@@ -1,12 +1,12 @@
 # 找到你的完美职业匹配：数据世界中职位的快速指南
 
-> 原文：[https://www.kdnuggets.com/2020/04/find-perfect-fit-data-job-roles-guide.html](https://www.kdnuggets.com/2020/04/find-perfect-fit-data-job-roles-guide.html)
+> 原文：[`www.kdnuggets.com/2020/04/find-perfect-fit-data-job-roles-guide.html`](https://www.kdnuggets.com/2020/04/find-perfect-fit-data-job-roles-guide.html)
 
-[评论](#comments)
+评论
 
 **由 [Alon Mei-raz](https://www.linkedin.com/in/alonm/?originalSubdomain=il) 提供，数据与洞察副总裁，Hapoalim 银行**
 
-![图示](../Images/37a0b6accca120c2f6799b0786ace79c.png)
+![图示](img/37a0b6accca120c2f6799b0786ace79c.png)
 
 [箭头矢量图由 macrovector 创建 - www.freepik.com](https://www.freepik.com/free-photos-vectors/arrow)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -98,15 +98,15 @@ ETL 开发人员必须具备以下经验：ETL 工具（流行的有：Talend、
 
 那你还在等什么呢？
 
-**个人简介：[Alon Mei-raz](https://www.linkedin.com/in/alonm/?originalSubdomain=il)** 是以色列领先银行的副总裁数据与洞察，负责所有数据平台和团队，这些团队为超过200万客户提供支持。Alon 在HPE、Sun Microsystems及其他市场领先公司担任过各种技术领导和高级管理职位超过15年，在移动性、机器学习和聊天机器人领域拥有广泛的经验。
+**个人简介：[Alon Mei-raz](https://www.linkedin.com/in/alonm/?originalSubdomain=il)** 是以色列领先银行的副总裁数据与洞察，负责所有数据平台和团队，这些团队为超过 200 万客户提供支持。Alon 在 HPE、Sun Microsystems 及其他市场领先公司担任过各种技术领导和高级管理职位超过 15 年，在移动性、机器学习和聊天机器人领域拥有广泛的经验。
 
 **相关：**
 
-+   [大数据和数据科学的5条职业路径，解释说明](/2017/02/5-career-paths-data-science-big-data-explained.html)
++   大数据和数据科学的 5 条职业路径，解释说明
 
-+   [成功数据科学职业的建议](/2020/03/advice-successful-data-science-career.html)
++   成功数据科学职业的建议
 
-+   [4种数据科学家的现实职业选择](/2020/04/4-career-options-data-scientists.html)
++   4 种数据科学家的现实职业选择
 
 ### 更多相关话题
 
@@ -114,10 +114,10 @@ ETL 开发人员必须具备以下经验：ETL 工具（流行的有：Talend、
 
 +   [停止学习数据科学以寻找目标，寻找目标去……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [通过自定义指令调整ChatGPT以满足您的需求](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)
++   [通过自定义指令调整 ChatGPT 以满足您的需求](https://www.kdnuggets.com/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)
 
 +   [揭开选择完美机器学习算法的秘密！](https://www.kdnuggets.com/2023/07/ml-algorithm-choose.html)
 
-+   [KDnuggets™新闻22:n03，1月19日：深入探讨13个数据……](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™新闻 22:n03，1 月 19 日：深入探讨 13 个数据……](https://www.kdnuggets.com/2022/n03.html)
 
-+   [深入探讨13种数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
++   [深入探讨 13 种数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)

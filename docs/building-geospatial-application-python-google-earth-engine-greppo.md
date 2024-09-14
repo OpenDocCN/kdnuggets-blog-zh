@@ -1,8 +1,8 @@
 # 使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用
 
-> 原文：[https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
+> 原文：[`www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html`](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
 
-![使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用](../Images/5664095a43f9f5f9138ecffae1bbe32b.png)
+![使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用](img/5664095a43f9f5f9138ecffae1bbe32b.png)
 
 使用 Greppo 和 GEE 的最终网络应用。图像由作者提供。
 
@@ -12,11 +12,11 @@ Google Earth Engine 是数据科学家工具箱中处理地理空间数据的一
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -40,29 +40,29 @@ pip install earthengine-api greppo
 
 网络应用的代码将放在 **app.py** 中，应用程序通过命令行使用命令 greppo serve app.py 提供和运行。
 
-注意：要在命令行中运行`greppo`命令，你需要激活安装了greppo的Python环境。文件app.py可以重命名，但确保在运行命令`greppo serve app.py`时处于该文件所在的文件夹中，或者在相对文件夹结构`greppo serve /demo/folder/app.py`中。
+注意：要在命令行中运行`greppo`命令，你需要激活安装了 greppo 的 Python 环境。文件 app.py 可以重命名，但确保在运行命令`greppo serve app.py`时处于该文件所在的文件夹中，或者在相对文件夹结构`greppo serve /demo/folder/app.py`中。
 
-Greppo的GitHub仓库：[https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)
+Greppo 的 GitHub 仓库：[`github.com/greppo-io/greppo`](https://github.com/greppo-io/greppo)
 
-如有任何问题，请通过[GitHub](https://github.com/greppo-io/greppo)上的“issues”或在[Discord频道](https://discord.gg/RNJBjgh8gz)联系我们。
+如有任何问题，请通过[GitHub](https://github.com/greppo-io/greppo)上的“issues”或在[Discord 频道](https://discord.gg/RNJBjgh8gz)联系我们。
 
-## ****GEE认证与初始化****
+## ****GEE 认证与初始化****
 
-要使用Google Earth Engine，你需要创建一个服务帐户并获取与该帐户关联的访问密钥文件。这只需几分钟，但确保按照说明正确操作。请按照[这里](https://developers.google.com/earth-engine/guides/service_account?hl=en)的说明进行操作。要使用服务帐户和密钥文件，请使用以下代码进行初始化。
+要使用 Google Earth Engine，你需要创建一个服务帐户并获取与该帐户关联的访问密钥文件。这只需几分钟，但确保按照说明正确操作。请按照[这里](https://developers.google.com/earth-engine/guides/service_account?hl=en)的说明进行操作。要使用服务帐户和密钥文件，请使用以下代码进行初始化。
 
-注意：确保将key-file.json保存在其他位置，最好安全地保存在计算机的根文件夹中，并且不要提交到公共仓库中。
+注意：确保将 key-file.json 保存在其他位置，最好安全地保存在计算机的根文件夹中，并且不要提交到公共仓库中。
 
-# **理解GEE的客户端-服务器模型**
+# **理解 GEE 的客户端-服务器模型**
 
-正如GEE的开发文档所说，Earth Engine不像你之前用过的任何GIS或地理空间工具。GEE主要是一个云平台，所有处理都在云端完成，而不是在你的机器上。你与GEE的互动仅仅是将指令翻译并发送到GEE的云平台。为了更好地理解这一点，我们需要深入了解GEE的客户端与服务器以及其惰性计算模型。
+正如 GEE 的开发文档所说，Earth Engine 不像你之前用过的任何 GIS 或地理空间工具。GEE 主要是一个云平台，所有处理都在云端完成，而不是在你的机器上。你与 GEE 的互动仅仅是将指令翻译并发送到 GEE 的云平台。为了更好地理解这一点，我们需要深入了解 GEE 的客户端与服务器以及其惰性计算模型。
 
 ## **[**客户端与服务器**](https://developers.google.com/earth-engine/guides/client_server)**
 
-从我之前提到的开始，**GEE主要是一个云平台**。它让你在云端进行所有处理。那么，你如何访问这些处理功能呢？
+从我之前提到的开始，**GEE 主要是一个云平台**。它让你在云端进行所有处理。那么，你如何访问这些处理功能呢？
 
-这里就是`earthengine-api`库发挥作用的地方。Python包`earthengine-api`为客户端（也就是你）提供了作为服务器对象代理的对象，这些对象在云端传递和处理。
+这里就是`earthengine-api`库发挥作用的地方。Python 包`earthengine-api`为客户端（也就是你）提供了作为服务器对象代理的对象，这些对象在云端传递和处理。
 
-为了更好地理解客户端-服务器模型，我们以客户端中的字符串变量和服务器中的字符串变量为例。在客户端创建字符串并打印其类型时，我们得到的是Python的`class str`对象来表示字符串。如果我们想将字符串发送到服务器进行使用或操作，我们会使用`ee.String`将数据包装在一个代理容器中，这样服务器就可以读取。更具体地说，`ee.objects`是`ee.computedObject`，它是代理对象的父类。
+为了更好地理解客户端-服务器模型，我们以客户端中的字符串变量和服务器中的字符串变量为例。在客户端创建字符串并打印其类型时，我们得到的是 Python 的`class str`对象来表示字符串。如果我们想将字符串发送到服务器进行使用或操作，我们会使用`ee.String`将数据包装在一个代理容器中，这样服务器就可以读取。更具体地说，`ee.objects`是`ee.computedObject`，它是代理对象的父类。
 
 ```py
 
@@ -126,7 +126,7 @@ Greppo的GitHub仓库：[https://github.com/greppo-io/greppo](https://github.com
 
 要在使用 Greppo 的 Web 应用程序中可视化此地图，你只需使用 `app.ee_layer()`。`ee_object` 是地球引擎图像对象，`vis_param` 是可视化参数字典，name 对应于在 Web 应用前端使用的唯一标识符，而 `description` 是可选的，用于向应用用户提供额外的说明。有关更多信息，请参见文档 [**此处**](https://docs.greppo.io/map-components/ee-layer.html)。
 
-![使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用](../Images/779e70a54ff2b5f2543b1c82524fed60.png)
+![使用 Google Earth Engine 和 Greppo 在 Python 中构建地理空间应用](img/779e70a54ff2b5f2543b1c82524fed60.png)
 
 上一步骤的 Web 应用视图。图片由作者提供。
 
@@ -146,37 +146,37 @@ Greppo的GitHub仓库：[https://github.com/greppo-io/greppo](https://github.com
 
 `app.number()` 接受名称（前端显示的标识符）和值（此元素的默认值）。接下来，我们还将创建一个文本输入框，用于获取点的名称，使用`app.text()`，并将`name`和`value`作为`app.number()`中提到的参数。
 
-使用该点的纬度和经度，我们现在可以创建一个带有可视化参数`color: ‘red’`的地球引擎Geometry对象。我们可以使用上述提到的`app.ee_layer()`来显示这个对象。
+使用该点的纬度和经度，我们现在可以创建一个带有可视化参数`color: ‘red’`的地球引擎 Geometry 对象。我们可以使用上述提到的`app.ee_layer()`来显示这个对象。
 
-要查找该点的高程，我们使用`sample`方法在DEM对象上进行地球引擎操作。我们在DEM中对该点进行采样以获取DEM的属性。我们从输出中获取第一个点，并使用`.get`方法查找与高程属性相关的值。最后，我们组合一个多行字符串来显示输出。
+要查找该点的高程，我们使用`sample`方法在 DEM 对象上进行地球引擎操作。我们在 DEM 中对该点进行采样以获取 DEM 的属性。我们从输出中获取第一个点，并使用`.get`方法查找与高程属性相关的值。最后，我们组合一个多行字符串来显示输出。
 
 注：要在初始加载时将地图居中于某个点并设置缩放级别，请使用`app.map(center=[lat, lon], zoom=level)`。
 
-![用Python、Google Earth Engine和Greppo构建地理空间应用](../Images/fb4df010040335931e2d2978fbf16a1e.png)
+![用 Python、Google Earth Engine 和 Greppo 构建地理空间应用](img/fb4df010040335931e2d2978fbf16a1e.png)
 
-带有交互功能的Web应用视图。图像由作者提供。
+带有交互功能的 Web 应用视图。图像由作者提供。
 
 # **结论**
 
-我们的目标是使用Python完全创建一个Web应用，利用Google Earth Engine的数据和计算功能以及Greppo的Web应用开发库。我们了解了GEE的工作原理，了解了如何将Greppo与GEE集成。学会使用`app.ee_layer(), app.display(), app.number() 和 app.text()`来创建一个完整的Web应用，实现前端和后端的全程通信。
+我们的目标是使用 Python 完全创建一个 Web 应用，利用 Google Earth Engine 的数据和计算功能以及 Greppo 的 Web 应用开发库。我们了解了 GEE 的工作原理，了解了如何将 Greppo 与 GEE 集成。学会使用`app.ee_layer(), app.display(), app.number() 和 app.text()`来创建一个完整的 Web 应用，实现前端和后端的全程通信。
 
-演示的所有文件可以在这里找到： [https://github.com/greppo-io/greppo-demo/tree/main/ee-demo](https://github.com/greppo-io/greppo-demo/tree/main/ee-demo)
+演示的所有文件可以在这里找到： [`github.com/greppo-io/greppo-demo/tree/main/ee-demo`](https://github.com/greppo-io/greppo-demo/tree/main/ee-demo)
 
-查看[**GitHub库：这里**](https://github.com/greppo-io/greppo)，了解Greppo的最新动态。如果发现错误、问题或需要功能请求，请通过[Discord频道](https://discord.gg/RNJBjgh8gz)联系，或在GitHub上提出问题。用Greppo构建了什么？在GitHub上发布它。
+查看[**GitHub 库：这里**](https://github.com/greppo-io/greppo)，了解 Greppo 的最新动态。如果发现错误、问题或需要功能请求，请通过[Discord 频道](https://discord.gg/RNJBjgh8gz)联系，或在 GitHub 上提出问题。用 Greppo 构建了什么？在 GitHub 上发布它。
 
-+   GitHub库： [https://github.com/greppo-io/greppo](https://github.com/greppo-io/greppo)
++   GitHub 库： [`github.com/greppo-io/greppo`](https://github.com/greppo-io/greppo)
 
-+   文档： [https://docs.greppo.io/](https://docs.greppo.io/)
++   文档： [`docs.greppo.io/`](https://docs.greppo.io/)
 
-+   网站： [https://greppo.io/](https://greppo.io/)
++   网站： [`greppo.io/`](https://greppo.io/)
 
-**[Adithya Krishnan](https://www.linkedin.com/in/adithyakrishnan/)** ([@krish_adi_](https://twitter.com/krish_adi_)) 是一名科学家、开发者、创始人和攀登者。他对构建Web应用、云服务、数据科学以及AI/ML项目感兴趣。 [了解更多](https://krishadi.com/)。
+**[Adithya Krishnan](https://www.linkedin.com/in/adithyakrishnan/)** ([@krish_adi_](https://twitter.com/krish_adi_)) 是一名科学家、开发者、创始人和攀登者。他对构建 Web 应用、云服务、数据科学以及 AI/ML 项目感兴趣。 [了解更多](https://krishadi.com/)。
 
 ### 更多相关内容
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
-+   [构建视觉搜索引擎 - 第1部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
 +   [5 个用于地理空间数据分析的 Python 包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
 

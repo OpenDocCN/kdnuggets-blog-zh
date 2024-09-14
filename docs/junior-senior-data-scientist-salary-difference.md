@@ -1,8 +1,8 @@
 # 初级与高级数据科学家薪资：有什么区别？
 
-> 原文：[https://www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html](https://www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html)
+> 原文：[`www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html`](https://www.kdnuggets.com/2022/03/junior-senior-data-scientist-salary-difference.html)
 
-![初级与高级数据科学家薪资：有什么区别？](../Images/05d44e4e156d8f6c6a3128c6f774c509.png)
+![初级与高级数据科学家薪资：有什么区别？](img/05d44e4e156d8f6c6a3128c6f774c509.png)
 
 图片来源：[Precondo CA](https://unsplash.com/@precondo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/money?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [1]。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全认证](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全认证](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业认证](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业认证](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业认证](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业认证](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -32,29 +32,29 @@
 
 # 初级数据科学家
 
-![初级与高级数据科学家薪资：有什么区别？](../Images/67d2c0176b229f0493a9f9c39105b539.png)
+![初级与高级数据科学家薪资：有什么区别？](img/67d2c0176b229f0493a9f9c39105b539.png)
 
 图片来源：[Nathan Dumlao](https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/junior?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [2]。
 
 在我看来，初级数据科学家职位似乎相当稀缺。这一观察很有趣，并且在某种程度上显得独特，但我认为缺乏*初级*职位有其原因：
 
-1.  一个原因可能是**名称本身**。也许招聘经理和招聘人员会推广没有附带级别的数据显示科学家头衔，并根据面试中的表现进行招聘。例如，他们可能招聘的是初级数据科学家I、数据科学家II、高级数据科学家、首席/资深数据科学家、数据科学家经理等。
+1.  一个原因可能是**名称本身**。也许招聘经理和招聘人员会推广没有附带级别的数据显示科学家头衔，并根据面试中的表现进行招聘。例如，他们可能招聘的是初级数据科学家 I、数据科学家 II、高级数据科学家、首席/资深数据科学家、数据科学家经理等。
 
 1.  另一个原因可能是公司的**员工数量/招聘能力**。公司可能只有资金招聘一名数据科学家，并且他们更倾向于招聘高级数据科学家而非初级数据科学家。这种差异可能取决于公司规模及其可能需要的项目。
 
 话虽如此，假设这是你情况中的一个职位，并查看一些初级数据科学家职位的数字。
 
-**注意：** 这些薪资信息最后更新于2022年2月1日
+**注意：** 这些薪资信息最后更新于 2022 年 2 月 1 日
 
 > 这里是一些不同级别的初级数据科学家及其各自的[薪资](https://www.payscale.com/research/US/Job=Junior_Data_Scientist/Salary) [3]（已四舍五入）：
 
-+   平均总体初级数据科学家 → `67k美元`
++   平均总体初级数据科学家 → `67k 美元`
 
-+   平均10%（*百分位*）的初级数据科学家 → `53k美元`
++   平均 10%（*百分位*）的初级数据科学家 → `53k 美元`
 
-+   平均中位数初级数据科学家 → `67k美元`
++   平均中位数初级数据科学家 → `67k 美元`
 
-+   平均90%（*百分位*）的初级数据科学家 → `90k美元`
++   平均 90%（*百分位*）的初级数据科学家 → `90k 美元`
 
 > 我是否同意这些数字？
 
@@ -84,31 +84,31 @@
 
 +   在简历中包含学校项目，并将其与更多商业类型的内容相关联
 
-+   包括你认为别人认为你具备的技能，你可能会认为大家都知道SQL，所以可以省略它，但也许你是唯一一个在简历中没有包含SQL的申请者，结果没有进入下一轮面试。
++   包括你认为别人认为你具备的技能，你可能会认为大家都知道 SQL，所以可以省略它，但也许你是唯一一个在简历中没有包含 SQL 的申请者，结果没有进入下一轮面试。
 
-+   在线项目，展示了从网站如GitHub或Kaggle的部分或大部分端到端数据科学过程
++   在线项目，展示了从网站如 GitHub 或 Kaggle 的部分或大部分端到端数据科学过程
 
 # 高级数据科学家
 
-![初级与高级数据科学家薪资：有什么区别？](../Images/cefcdd336cb65aee9c62fbf16dc5e4b4.png)
+![初级与高级数据科学家薪资：有什么区别？](img/cefcdd336cb65aee9c62fbf16dc5e4b4.png)
 
 图片来源： [奥斯汀·迪斯特尔](https://unsplash.com/@austindistel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/expert?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [4]。
 
-这个薪资分析中使用了更多的数据点，因此它更能指示我们可能假设的平均值以及其他特征。之前的角色有55个薪资数据，而这个薪资资料有大约1500个。**有了更多的信息/数据，我们可以深入探讨城市/地点和技能对薪资的影响。**
+这个薪资分析中使用了更多的数据点，因此它更能指示我们可能假设的平均值以及其他特征。之前的角色有 55 个薪资数据，而这个薪资资料有大约 1500 个。**有了更多的信息/数据，我们可以深入探讨城市/地点和技能对薪资的影响。**
 
 > 这里是一些不同经验水平的高级数据科学家及其各自的 [薪资](https://www.payscale.com/research/US/Job=Senior_Data_Scientist/Salary) [5]（四舍五入）：
 
-+   平均整体高级数据科学家 → `127k美元`
++   平均整体高级数据科学家 → `127k 美元`
 
-+   平均入门级高级数据科学家 → `108k美元`（≤ 1年）
++   平均入门级高级数据科学家 → `108k 美元`（≤ 1 年）
 
-+   平均早期职业高级数据科学家 → `123k美元`（1–4年）
++   平均早期职业高级数据科学家 → `123k 美元`（1–4 年）
 
-+   平均中期职业高级数据科学家 → `131k美元`（5–9年）
++   平均中期职业高级数据科学家 → `131k 美元`（5–9 年）
 
-+   平均晚期职业高级数据科学家 → `140k美元`（10–19年）
++   平均晚期职业高级数据科学家 → `140k 美元`（10–19 年）
 
-**注意：** 该薪资信息最后更新于2022年3月2日。
+**注意：** 该薪资信息最后更新于 2022 年 3 月 2 日。
 
 > 我是否同意这些数字？
 
@@ -120,9 +120,9 @@
 
 薪资范围也包括这些：
 
-+   奖金 → `5k美元` — `24k美元`
++   奖金 → `5k 美元` — `24k 美元`
 
-+   利润分享 → `2k美元` — `25k美元`
++   利润分享 → `2k 美元` — `25k 美元`
 
 > 为了阐述城市和技能对薪资的影响，我将包括一些美国**平均高级数据科学家薪资**的组合，方便你查看一些示例：
 
@@ -160,17 +160,17 @@
 
 ## 参考文献
 
-[1] 图片来源：[Precondo CA](https://unsplash.com/@precondo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/money?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2019年）
+[1] 图片来源：[Precondo CA](https://unsplash.com/@precondo?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/money?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2019 年）
 
-[2] 图片来源：[Nathan Dumlao](https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/junior?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2018年）
+[2] 图片来源：[Nathan Dumlao](https://unsplash.com/@nate_dumlao?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/junior?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2018 年）
 
-[3] PayScale, Inc., [初级数据科学家薪资](https://www.payscale.com/research/US/Job=Junior_Data_Scientist/Salary)，（2022年2月1日）
+[3] PayScale, Inc., [初级数据科学家薪资](https://www.payscale.com/research/US/Job=Junior_Data_Scientist/Salary)，（2022 年 2 月 1 日）
 
-[4] 图片来源：[Austin Distel](https://unsplash.com/@austindistel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/expert?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2019年）
+[4] 图片来源：[Austin Distel](https://unsplash.com/@austindistel?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/expert?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2019 年）
 
-[3] PayScale, Inc., [高级数据科学家薪资](https://www.payscale.com/research/US/Job=Senior_Data_Scientist/Salary)，（2022年3月2日）
+[3] PayScale, Inc., [高级数据科学家薪资](https://www.payscale.com/research/US/Job=Senior_Data_Scientist/Salary)，（2022 年 3 月 2 日）
 
-**[Matthew Przybyla](https://www.linkedin.com/in/matthew-przybyla-0a095b31/)** ([Medium](https://datascience2.medium.com/)) 是德州Favor Delivery的高级数据科学家。他拥有南美 Methodist University 的数据科学硕士学位。他喜欢撰写关于数据科学领域的趋势话题和教程，从新算法到关于数据科学家日常工作经验的建议。Matt 喜欢突出数据科学的商业方面，而不仅仅是技术方面。欢迎通过[LinkedIn](https://www.linkedin.com/in/matthew-przybyla-0a095b31)联系 Matt。
+**[Matthew Przybyla](https://www.linkedin.com/in/matthew-przybyla-0a095b31/)** ([Medium](https://datascience2.medium.com/)) 是德州 Favor Delivery 的高级数据科学家。他拥有南美 Methodist University 的数据科学硕士学位。他喜欢撰写关于数据科学领域的趋势话题和教程，从新算法到关于数据科学家日常工作经验的建议。Matt 喜欢突出数据科学的商业方面，而不仅仅是技术方面。欢迎通过[LinkedIn](https://www.linkedin.com/in/matthew-przybyla-0a095b31)联系 Matt。
 
 ### 更多相关话题
 
@@ -184,4 +184,4 @@
 
 +   [NLP、NLU 和 NLG：它们的区别是什么？全面指南](https://www.kdnuggets.com/2022/06/nlp-nlu-nlg-difference-comprehensive-guide.html)
 
-+   [I类和II类错误：有什么区别？](https://www.kdnuggets.com/2022/08/type-type-ii-errors-difference.html)
++   [I 类和 II 类错误：有什么区别？](https://www.kdnuggets.com/2022/08/type-type-ii-errors-difference.html)

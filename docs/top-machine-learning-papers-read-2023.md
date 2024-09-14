@@ -1,8 +1,8 @@
-# 2023年值得阅读的顶级机器学习论文
+# 2023 年值得阅读的顶级机器学习论文
 
-> 原文：[https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html](https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html)
+> 原文：[`www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html`](https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html)
 
-![2023年值得阅读的顶级机器学习论文](../Images/ba1bd1af52d3d703c8973f22eab795e7.png)
+![2023 年值得阅读的顶级机器学习论文](img/ba1bd1af52d3d703c8973f22eab795e7.png)
 
 图片由[pch.vector](https://www.freepik.com/free-vector/scientists-studying-neural-connections-programmers-writing-codes-machine-brain_12291267.htm#query=machine%20learning&position=0&from_view=search&track=ais)提供，来源于[Freepik](https://www.freepik.com/)
 
@@ -12,29 +12,29 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-近年来，生成式人工智能因机器学习的应用而改变了世界。例如，ChatGPT和Stable Diffusion。即便2023年生成式人工智能占主导地位，我们仍应关注更多的机器学习突破。
+近年来，生成式人工智能因机器学习的应用而改变了世界。例如，ChatGPT 和 Stable Diffusion。即便 2023 年生成式人工智能占主导地位，我们仍应关注更多的机器学习突破。
 
-这里是2023年值得阅读的顶级机器学习论文，以确保你不会错过即将出现的趋势。
+这里是 2023 年值得阅读的顶级机器学习论文，以确保你不会错过即将出现的趋势。
 
 ## 1) 学习歌曲中的美：神经唱歌声音美化器
 
 唱歌声音美化（SVB）是生成式人工智能中的一项新任务，旨在将业余歌唱声音改善为优美的声音。这正是[Liu et al. (2022)](https://arxiv.org/pdf/2202.13277v2.pdf)研究的目标，他们提出了一种名为神经唱歌声音美化器（NSVB）的新生成模型。
 
-NSVB是一种使用潜在映射算法的半监督学习模型，作为音高修正器并改善声音音质。这项工作有望改善音乐行业，值得关注。
+NSVB 是一种使用潜在映射算法的半监督学习模型，作为音高修正器并改善声音音质。这项工作有望改善音乐行业，值得关注。
 
 ## 2) 优化算法的符号发现
 
-深度神经网络模型变得比以往任何时候都大，许多研究已经进行了以简化训练过程。谷歌团队的最新研究（[Chen et al. (2023)](https://arxiv.org/pdf/2302.06675v2.pdf)）提出了一种名为Lion（EvoLved Sign Momentum）的神经网络优化方法。该方法表明，该算法比Adam更节省内存，并且需要更小的学习率。这是一项非常出色的研究，展现了许多不容错过的潜力。
+深度神经网络模型变得比以往任何时候都大，许多研究已经进行了以简化训练过程。谷歌团队的最新研究（[Chen et al. (2023)](https://arxiv.org/pdf/2302.06675v2.pdf)）提出了一种名为 Lion（EvoLved Sign Momentum）的神经网络优化方法。该方法表明，该算法比 Adam 更节省内存，并且需要更小的学习率。这是一项非常出色的研究，展现了许多不容错过的潜力。
 
-## 3) TimesNet：用于通用时间序列分析的时间2D变异建模
+## 3) TimesNet：用于通用时间序列分析的时间 2D 变异建模
 
 时间序列分析在许多业务中是一个常见的应用场景；例如，价格预测、异常检测等。然而，仅基于当前数据（1D 数据）分析时间数据面临许多挑战。这就是为什么[Wu 等 (2023)](https://arxiv.org/pdf/2210.02186v2.pdf)提出了一种新方法，称为 TimesNet，将 1D 数据转化为 2D 数据，在实验中表现出色。你应该阅读这篇论文，以更好地理解这种新方法，它将对未来的时间序列分析大有帮助。
 
@@ -78,6 +78,6 @@ ChatGPT 已经改变了世界。可以肯定地说，随着公众越来越倾向
 
 +   [你应该阅读的生成式代理研究论文](https://www.kdnuggets.com/generative-agent-research-papers-you-should-read)
 
-+   [2023年你必须阅读的5本免费数据科学书籍](https://www.kdnuggets.com/2023/01/5-free-data-science-books-must-read-2023.html)
++   [2023 年你必须阅读的 5 本免费数据科学书籍](https://www.kdnuggets.com/2023/01/5-free-data-science-books-must-read-2023.html)
 
-+   [2023年可读的5本免费自然语言处理书籍](https://www.kdnuggets.com/2023/06/5-free-books-natural-language-processing-read-2023.html)
++   [2023 年可读的 5 本免费自然语言处理书籍](https://www.kdnuggets.com/2023/06/5-free-books-natural-language-processing-read-2023.html)

@@ -1,12 +1,12 @@
 # 50+ 个数据科学、机器学习备忘单，已更新
 
-> 原文：[https://www.kdnuggets.com/2016/12/data-science-machine-learning-cheat-sheets-updated.html](https://www.kdnuggets.com/2016/12/data-science-machine-learning-cheat-sheets-updated.html)
+> 原文：[`www.kdnuggets.com/2016/12/data-science-machine-learning-cheat-sheets-updated.html`](https://www.kdnuggets.com/2016/12/data-science-machine-learning-cheat-sheets-updated.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-本文更新了 Bhavya Geethika 的一篇非常受欢迎的文章 [50+ 个数据科学、机器学习备忘单](/2015/07/good-data-science-machine-learning-cheat-sheets.html)。如果我们遗漏了一些受欢迎的备忘单，请在下方评论中添加。
+本文更新了 Bhavya Geethika 的一篇非常受欢迎的文章 50+ 个数据科学、机器学习备忘单。如果我们遗漏了一些受欢迎的备忘单，请在下方评论中添加。
 
-[![备忘单 数据科学 机器学习 Python R hadoop](../Images/092946514b98927beab02e0f346531d3.png)](/wp-content/uploads/cheatsheets-data-science-machine-learning-Python-R-hadoop.jpg)
+![备忘单 数据科学 机器学习 Python R hadoop](img/cheatsheets-data-science-machine-learning-Python-R-hadoop.jpg)
 
 Python、R 及 Numpy、Scipy、Pandas 的备忘单
 
@@ -14,11 +14,11 @@ Python、R 及 Numpy、Scipy、Pandas 的备忘单
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -94,7 +94,7 @@ R 的生态系统扩展如此之大，以至于需要大量的参考。R 参考�
 
 1.  [SQL 备忘单](http://www.sql-tutorial.net/sql-cheat-sheet.pdf)
 
-1.  [一页SQL](http://www.sql.su/)
+1.  [一页 SQL](http://www.sql.su/)
 
 1.  [MySQL 参考指南](http://cse.unl.edu/~sscott/ShowFiles/SQL/CheatSheet/SQLCheatSheet.html)
 
@@ -144,7 +144,7 @@ Django 是一个免费的开源 Web 应用框架，使用 Python 编写。如果
 
 1.  [Django 备忘单 v.1](http://www.mercurytide.co.uk/media/resources/Django/django10-cheat-sheet.pdf)
 
-1.  [Django 备忘单第 1 部分](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p1.png)，[第 2 部分，](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p2.png) [第 3 部分](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p3.png)，[第 4 部分](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p4.png)
+1.  [Django 备忘单第一部分](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p1.png)，[第二部分，](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p2.png) [第三部分](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p3.png)，[第四部分](http://www.mercurytide.co.uk/media/resources/django-cheat-sheet-p4.png)
 
 1.  [Django 参考备忘单](http://www.cheat-sheets.org/saved-copy/django_reference_sheet.pdf)
 
@@ -182,11 +182,11 @@ Django 是一个免费的开源 Web 应用框架，使用 Python 编写。如果
 
 **相关**：
 
-+   [50+ 数据科学与机器学习备忘单](/2015/07/good-data-science-machine-learning-cheat-sheets.html)
++   50+ 数据科学与机器学习备忘单
 
-+   [数据科学备忘单指南](/2014/05/guide-to-data-science-cheat-sheets.html)
++   数据科学备忘单指南
 
-+   [按受欢迎程度排名的前20个R包](/2015/06/top-20-r-packages.html)
++   按受欢迎程度排名的前 20 个 R 包
 
 ### 更多相关话题
 
@@ -196,8 +196,8 @@ Django 是一个免费的开源 Web 应用框架，使用 Python 编写。如果
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

@@ -1,8 +1,8 @@
 # ChatGPT 的新对手：谷歌的 Gemini
 
-> 原文：[https://www.kdnuggets.com/chatgpts-new-rival-googles-gemini](https://www.kdnuggets.com/chatgpts-new-rival-googles-gemini)
+> 原文：[`www.kdnuggets.com/chatgpts-new-rival-googles-gemini`](https://www.kdnuggets.com/chatgpts-new-rival-googles-gemini)
 
-![ChatGPT 的新对手：谷歌的 Gemini](../Images/87b4f9f85b133ad5ae6ddbc3927a86c9.png)
+![ChatGPT 的新对手：谷歌的 Gemini](img/87b4f9f85b133ad5ae6ddbc3927a86c9.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -54,7 +54,7 @@ Gemini 不仅仅是一个单一的 AI 模型。它有不同的变体以满足不
 
 谷歌一直在努力测试 Gemini 模型，以确保它们符合要求，并在各种任务上进行了严格评估。据说，谷歌的 Gemini Ultra 在 LLM 研究中使用的 32 个广泛使用的学术基准中的 30 个上超过了当前的最先进成果，获得了高达 90.0% 的惊人分数。
 
-![ChatGPT 的新对手：谷歌的 Gemini](../Images/a75d83bc4f66bf868d3cd15b26995c42.png)
+![ChatGPT 的新对手：谷歌的 Gemini](img/a75d83bc4f66bf868d3cd15b26995c42.png)
 
 图片来自[谷歌 Gemini](https://deepmind.google/technologies/gemini/#capabilities)
 
@@ -62,7 +62,7 @@ Gemini Ultra 已被证明是第一个在[MMLU](https://arxiv.org/abs/2009.03300)
 
 从这些基准来看，我们可以看到 Gemini 最大的优势在于其理解和互动视频及音频的能力。
 
-我们已经看到 OpenAI 通过创建[DALL-E](/dalle-3-is-here-with-chatgpt-integration)和[Whisper](/2023/06/openai-whisper-api-transcription-translation.html)来实现这一目标。然而，谷歌从一开始就采取了更进一步的多感官模型。谷歌还提到了编码的改进，因为它使用了一种新的代码生成系统，称为 AlphaCode 2，性能据说比其他编码竞赛参与者高出 85%。
+我们已经看到 OpenAI 通过创建 DALL-E 和 Whisper 来实现这一目标。然而，谷歌从一开始就采取了更进一步的多感官模型。谷歌还提到了编码的改进，因为它使用了一种新的代码生成系统，称为 AlphaCode 2，性能据说比其他编码竞赛参与者高出 85%。
 
 话虽如此，基准测试只是基准测试。我们将能通过日常用户的互动来充分了解 Gemini 的全部能力。
 

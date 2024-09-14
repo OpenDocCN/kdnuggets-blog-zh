@@ -1,12 +1,12 @@
 # 开发者的顶级机器学习软件工具
 
-> 原文：[https://www.kdnuggets.com/2019/11/top-machine-learning-software-developers.html](https://www.kdnuggets.com/2019/11/top-machine-learning-software-developers.html)
+> 原文：[`www.kdnuggets.com/2019/11/top-machine-learning-software-developers.html`](https://www.kdnuggets.com/2019/11/top-machine-learning-software-developers.html)
 
-[评论](#comments)
+评论
 
 **作者：[Sandra Parker](https://medium.com/@Sandra_Parker)，QArea 软件开发公司**。
 
-![](../Images/ac989bc9d10a089cb478210e5ebb1ec1.png)
+![](img/ac989bc9d10a089cb478210e5ebb1ec1.png)
 
 今天，感兴趣于机器学习潜力的程序员谈论的是用人工智能构建应用程序以及用于[基于 AI 的软件开发](https://qarea.com/expertise/ai-chatbot)的工具。好的例子包括 PyTorch 和 TensorFlow 等解决方案。
 
@@ -50,37 +50,37 @@ Pix2code 仍处于实验阶段，是一个创新的工具，可以将图形用�
 
 ### 使用机器学习工具进行软件开发的好处
 
-正如你所见，这些创新工具可以协助代码完成、安全措施，甚至代码生成。机器学习带来了巨大的可能性，以及快速高效的软件创建，因此值得深入研究这些工具。不过，任何单一工具都无法在没有经验丰富的软件开发团队的情况下运作。这些工具在节省开发时间方面不可或缺，但规划的初始过程和测试、QA及部署的最终过程仍需要熟练的开发人员。
+正如你所见，这些创新工具可以协助代码完成、安全措施，甚至代码生成。机器学习带来了巨大的可能性，以及快速高效的软件创建，因此值得深入研究这些工具。不过，任何单一工具都无法在没有经验丰富的软件开发团队的情况下运作。这些工具在节省开发时间方面不可或缺，但规划的初始过程和测试、QA 及部署的最终过程仍需要熟练的开发人员。
 
-**个人简介：** [桑德拉·帕克](https://medium.com/@Sandra_Parker) 是 [QArea](https://qarea.com/) 的业务开发人员，QArea 是一家软件开发与QA公司，帮助企业通过定制的软件开发和测试加速其业务。
+**个人简介：** [桑德拉·帕克](https://medium.com/@Sandra_Parker) 是 [QArea](https://qarea.com/) 的业务开发人员，QArea 是一家软件开发与 QA 公司，帮助企业通过定制的软件开发和测试加速其业务。
 
 **相关：**
 
-+   [AI & 机器学习：2018年每个软件工程师需要的关键技能](https://www.kdnuggets.com/2018/02/qcon-ai-machine-learning-san-francisco.html)
++   [AI & 机器学习：2018 年每个软件工程师需要的关键技能](https://www.kdnuggets.com/2018/02/qcon-ai-machine-learning-san-francisco.html)
 
-+   [连接数据系统与DevOps](https://www.kdnuggets.com/2016/06/connecting-data-systems-devops.html)
++   [连接数据系统与 DevOps](https://www.kdnuggets.com/2016/06/connecting-data-systems-devops.html)
 
-+   [为什么Java是物联网(IoT)的首选语言](https://www.kdnuggets.com/2017/05/java-language-choice-iot.html)
++   [为什么 Java 是物联网(IoT)的首选语言](https://www.kdnuggets.com/2017/05/java-language-choice-iot.html)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关主题
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成为伟大的数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

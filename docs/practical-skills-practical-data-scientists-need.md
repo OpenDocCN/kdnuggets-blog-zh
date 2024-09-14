@@ -1,12 +1,12 @@
 # 实用数据科学家需要的实际技能
 
-> 原文：[https://www.kdnuggets.com/2016/05/practical-skills-practical-data-scientists-need.html](https://www.kdnuggets.com/2016/05/practical-skills-practical-data-scientists-need.html)
+> 原文：[`www.kdnuggets.com/2016/05/practical-skills-practical-data-scientists-need.html`](https://www.kdnuggets.com/2016/05/practical-skills-practical-data-scientists-need.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Noah Lorang](https://twitter.com/noahhlo), Basecamp**。
 
-![技能](../Images/d148738d1d32c44877be61597b10e380.png)当我写到我[主要只用算术](https://m.signalvnoise.com/data-scientists-mostly-just-do-arithmetic-and-that-s-a-good-thing-c6371885f7f6#.spcfjporf)时，很多人问我如果没有复杂的算法，数据科学家需要哪些技能或工具。我提到的这种神秘的“基础数学”是什么？这是我对实际工作所需技能的看法，我在[Basecamp](https://basecamp.com/?source=svn)的工作主要是进行简单分析，以解决实际的业务问题。
+![技能](img/d148738d1d32c44877be61597b10e380.png)当我写到我[主要只用算术](https://m.signalvnoise.com/data-scientists-mostly-just-do-arithmetic-and-that-s-a-good-thing-c6371885f7f6#.spcfjporf)时，很多人问我如果没有复杂的算法，数据科学家需要哪些技能或工具。我提到的这种神秘的“基础数学”是什么？这是我对实际工作所需技能的看法，我在[Basecamp](https://basecamp.com/?source=svn)的工作主要是进行简单分析，以解决实际的业务问题。
 
 #### 最重要的技能：能够理解业务和问题
 
@@ -102,21 +102,21 @@
 
 **相关：**
 
-+   [构建数据科学职业的免费建议](/2016/05/advice-building-data-science-career.html)
++   构建数据科学职业的免费建议
 
-+   [数据科学家 – 让自己未来可用](/2016/05/data-scientists-future-proof-yourselves.html)
++   数据科学家 – 让自己未来可用
 
-+   [数据科学家的职业建议 – 去赚更多的钱](/2016/03/career-advice-data-scientists-make-more-money.html)
++   数据科学家的职业建议 – 去赚更多的钱
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织中的 IT 工作
 
 * * *
 

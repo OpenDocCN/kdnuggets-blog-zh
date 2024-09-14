@@ -1,12 +1,12 @@
-# 使用DALEX和Neptune进行可解释且可复现的机器学习模型开发
+# 使用 DALEX 和 Neptune 进行可解释且可复现的机器学习模型开发
 
-> 原文：[https://www.kdnuggets.com/2020/08/explainable-reproducible-machine-learning-model-development-dalex-neptune.html](https://www.kdnuggets.com/2020/08/explainable-reproducible-machine-learning-model-development-dalex-neptune.html)
+> 原文：[`www.kdnuggets.com/2020/08/explainable-reproducible-machine-learning-model-development-dalex-neptune.html`](https://www.kdnuggets.com/2020/08/explainable-reproducible-machine-learning-model-development-dalex-neptune.html)
 
-[评论](#comments)
+评论
 
-**由[Jakub Czakon](https://www.linkedin.com/in/jakub-czakon-2b797b69/)、neptune.ai的高级数据科学家，[Przemysław Biecek](https://www.linkedin.com/in/pbiecek/)、MI2DataLab创始人以及MI2DataLab的研究工程师Adam Rydelek**
+**由[Jakub Czakon](https://www.linkedin.com/in/jakub-czakon-2b797b69/)、neptune.ai 的高级数据科学家，[Przemysław Biecek](https://www.linkedin.com/in/pbiecek/)、MI2DataLab 创始人以及 MI2DataLab 的研究工程师 Adam Rydelek**
 
-![](../Images/f6bf1686db1df1c4f1f5dfd97c02ac5f.png)
+![](img/f6bf1686db1df1c4f1f5dfd97c02ac5f.png)
 
 机器学习模型开发是困难的，尤其是在现实世界中。
 
@@ -46,25 +46,25 @@
 
 +   使用**Neptune**使你的模型有版本控制并使实验可复现
 
-+   使用**Neptune + DALEX集成**自动保存每次训练运行的模型解释器和交互式解释图表
++   使用**Neptune + DALEX 集成**自动保存每次训练运行的模型解释器和交互式解释图表
 
 +   使用**版本控制的解释器**比较、调试和审计你构建的每个模型
 
 让我们深入了解一下。
 
-### 使用DALEX进行可解释的机器学习
+### 使用 DALEX 进行可解释的机器学习
 
-如今，仅仅在测试集上得分高的模型通常是不够的。这就是为什么对可解释人工智能（**XAI**）的兴趣日益增长，XAI是一套让你理解模型行为的方法和技术。
+如今，仅仅在测试集上得分高的模型通常是不够的。这就是为什么对可解释人工智能（**XAI**）的兴趣日益增长，XAI 是一套让你理解模型行为的方法和技术。
 
 有许多可解释人工智能（XAI）方法在多种编程语言中可用。在机器学习中一些最常用的方法是*LIME*、*SHAP*或*PDP*，但还有许多其他方法。
 
 在众多技术中很容易迷失方向，这时**可解释人工智能金字塔**派上用场。它将与模型探索相关的需求汇聚成一个可扩展的逐层地图。左侧关于单个实例的需求，右侧关于整个模型的需求。连续的层次深入探讨有关模型行为的更多详细问题（局部或全局）。
 
-![图](../Images/0a85199219440aaa9d112da40313744e.png)
+![图](img/0a85199219440aaa9d112da40313744e.png)
 
 XAI pyramide | 了解更多请参见[解释模型分析电子书](https://pbiecek.github.io/ema/)
 
-DALEX（适用于R和Python）是一个**帮助你理解**复杂模型工作原理的工具。它目前仅适用于表格数据（但未来将支持文本和视觉）。
+DALEX（适用于 R 和 Python）是一个**帮助你理解**复杂模型工作原理的工具。它目前仅适用于表格数据（但未来将支持文本和视觉）。
 
 它与用于构建机器学习模型的最流行框架集成，如*keras, sklearn, xgboost, lightgbm, H2O*等！
 
@@ -100,9 +100,9 @@ exp = dx.Explainer(classifier, X, y, label = "Titanic Random Forest")
 
 一切从预测开始，向下移动到上面金字塔的左半部分，你可以探索和理解发生了什么。
 
-DALEX提供了一系列方法，展示每个变量的局部影响：
+DALEX 提供了一系列方法，展示每个变量的局部影响：
 
-+   [SHAP](https://github.com/slundberg/shap): 使用经典的Shapley值计算特征对模型预测的贡献
++   [SHAP](https://github.com/slundberg/shap): 使用经典的 Shapley 值计算特征对模型预测的贡献
 
 +   [Break Down](https://pbiecek.github.io/breakDown/): 将预测分解成可以归因于每个变量的部分，使用所谓的“贪婪解释”
 
@@ -110,7 +110,7 @@ DALEX提供了一系列方法，展示每个变量的局部影响：
 
 向下移动金字塔，局部解释的下一个关键部分是**理解模型对特征值变化的敏感性**。
 
-在DALEX中有一种简单的方法来绘制这些信息：
+在 DALEX 中有一种简单的方法来绘制这些信息：
 
 +   [Ceteris Paribus](https://github.com/pbiecek/ceterisParibus): 显示模型预测的变化，仅允许单个变量的差异，同时保持其他变量不变
 
@@ -140,7 +140,7 @@ cp.plot(variable_type = "numerical")
 cp.plot(variable_type = "categorical")
 ```
 
-![本地解释 dalex](../Images/af80b569c95394071aa04cf71a65a0de.png)
+![本地解释 dalex](img/af80b569c95394071aa04cf71a65a0de.png)
 
 ### **模型理解（全局解释）**
 
@@ -177,7 +177,7 @@ ale_cat = exp.model_profile(type = 'accumulated',
 ale_cat.plot(pdp_cat)
 ```
 
-![全局解释 dalex](../Images/af19a0391f6e9c8dde1f156b86505d31.png)
+![全局解释 dalex](img/af19a0391f6e9c8dde1f156b86505d31.png)
 
 ### **可重复使用且有组织的解释对象**
 
@@ -257,7 +257,7 @@ log_pickle('model.pkl', clf) # model file
 
 每次你运行的实验或模型训练都会被版本控制，并在 Neptune 应用程序（和数据库 ????）中等待你。
 
-![图](../Images/5c1627d06e0e3712b005925b22acce45.png)
+![图](img/5c1627d06e0e3712b005925b22acce45.png)
 
 [在 Neptune 中查看](https://ui.neptune.ai/o/shared/org/dalex-integration/e/DAL-79/details)
 
@@ -322,7 +322,7 @@ log_local_explanations(expl, observation)
 
 交互式解释图表将在 Neptune 应用的“Artifacts”部分等待你：
 
-![图](../Images/354524bc9f4a79a229dbf7c8eb896a22.png)
+![图](img/354524bc9f4a79a229dbf7c8eb896a22.png)
 
 [在 Neptune 中查看](https://ui.neptune.ai/shared/dalex-integration/e/DAL-78/artifacts?path=charts%2F&file=SHAP.html)
 
@@ -352,7 +352,7 @@ log_global_explanations(expl, categorical_features=["gender", "class"])
 
 就是这样。现在你可以前往“Artifacts”部分，找到你的本地解释图表：
 
-![图](../Images/8a1ad29846aabf8b31bcc54d6e62aaa6.png)
+![图](img/8a1ad29846aabf8b31bcc54d6e62aaa6.png)
 
 [在 Neptune 中查看](https://ui.neptune.ai/o/shared/org/dalex-integration/e/DAL-78/artifacts?path=charts%2F&file=Variable%20Importance.html)
 
@@ -418,7 +418,7 @@ explainer = get_pickle(filename='explainer.pkl', experiment=experiment)
 
 +   检查特征变化如何影响结果。
 
-![图示](../Images/8b46514b05aa3005b55ae67533d11601.png)
+![图示](img/8b46514b05aa3005b55ae67533d11601.png)
 
 [在 Neptune 中查看](https://ui.neptune.ai/shared/dalex-integration/n/6b9d8213-9d1c-4a7d-a448-d2d9e29f7878/66389c83-b397-4ec6-a1fc-8b5847980fe5)
 
@@ -438,7 +438,7 @@ explainer = get_pickle(filename='explainer.pkl', experiment=experiment)
 
 你可以根据参数、数据版本或指标在 Neptune UI 中比较实验：
 
-![图示](../Images/264e24ab0f479d0ae3aea82e2c3eec12.png)
+![图示](img/264e24ab0f479d0ae3aea82e2c3eec12.png)
 
 [在 Neptune 中查看](https://ui.neptune.ai/o/shared/org/dalex-integration/compare?shortId=%5B%22DAL-78%22%2C%22DAL-77%22%2C%22DAL-76%22%2C%22DAL-75%22%2C%22DAL-72%22%5D&viewId=495b4a41-3424-4d01-9064-70be82716196)
 
@@ -469,7 +469,7 @@ for exp in experiments:
 shaps[0].plot(shaps[1:])
 ```
 
-![图示](../Images/6169f3b94a4c2d57e5fa4cc80356ca92.png)
+![图示](img/6169f3b94a4c2d57e5fa4cc80356ca92.png)
 
 [在 Neptune 中查看](https://ui.neptune.ai/o/shared/org/dalex-integration/n/comparison-6b9d8213-9d1c-4a7d-a448-d2d9e29f7878/4bf30571-1ef1-4c63-9241-6d3b2cab65a7)
 
@@ -495,7 +495,7 @@ shaps[0].plot(shaps[1:])
 
 祝训练愉快！
 
-[![](../Images/c89ec4635ace581269125d4065e3d508.png)](https://docs.neptune.ai/integrations/dalex.html)
+![](https://docs.neptune.ai/integrations/dalex.html)
 
 [**Jakub Czakon**](https://www.linkedin.com/in/jakub-czakon-2b797b69/) 是 neptune.ai 的高级数据科学家。
 
@@ -507,21 +507,21 @@ shaps[0].plot(shaps[1:])
 
 **相关：**
 
-+   [一种简单且可解释的二分类器性能度量](/2020/03/interpretable-performance-measure-binary-classifier.html)
++   一种简单且可解释的二分类器性能度量
 
-+   [解释“黑箱”机器学习模型：SHAP 的实际应用](/2020/05/explaining-blackbox-machine-learning-models-practical-application-shap.html)
++   解释“黑箱”机器学习模型：SHAP 的实际应用
 
-+   [可解释性第 3 部分：通过 LIME 和 SHAP 打开黑箱](/2019/12/interpretability-part-3-lime-shap.html)
++   可解释性第三部分：通过 LIME 和 SHAP 打开黑箱
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -537,4 +537,4 @@ shaps[0].plot(shaps[1:])
 
 +   [开放助手：探索开放和协作的可能性……](https://www.kdnuggets.com/2023/04/open-assistant-explore-possibilities-open-collaborative-chatbot-development.html)
 
-+   [12个VSCode技巧和窍门用于Python开发](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)
++   [12 个 VSCode 技巧和窍门用于 Python 开发](https://www.kdnuggets.com/2023/05/12-vscode-tips-tricks-python-development.html)

@@ -1,8 +1,8 @@
 # 免费使用 Lightning AI Studio
 
-> 原文：[https://www.kdnuggets.com/using-lightning-ai-studio-for-free](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)
+> 原文：[`www.kdnuggets.com/using-lightning-ai-studio-for-free`](https://www.kdnuggets.com/using-lightning-ai-studio-for-free)
 
-![XXXXX](../Images/1b683e472b370d8613c7a937e7decfa1.png)
+![XXXXX](img/1b683e472b370d8613c7a937e7decfa1.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
@@ -48,11 +48,11 @@
 
 一旦创建了账户，请按照几个简单的步骤自定义您的 Studio 体验。要获得 7 小时的免费 GPU，您需要验证您的电话号码。
 
-![XXXXX](../Images/cc44c8b981d11e1d88520a4e178a0ac9.png)
+![XXXXX](img/cc44c8b981d11e1d88520a4e178a0ac9.png)
 
 完成初步步骤后，你将被引导到一个包含基本 Python 文件的示例项目中。仅需几分钟，你的 Studio 就会准备好处理图像并微调 Renest 模型。要开始，简单地编写代码并执行文件。
 
-![XXXXX](../Images/83c470f10cf37f88952bab9f317af97d.png)
+![XXXXX](img/83c470f10cf37f88952bab9f317af97d.png)
 
 用户界面 (UI) 与 VSCode 相似，但右侧面板提供了更多选项。
 
@@ -60,19 +60,19 @@
 
 Lighting AI 平台提供了由用户设计的项目模板 Studio。这些模板包括代码、环境设置和数据，帮助你启动项目。你可以在平台上找到各种 Studio 模板，如训练、微调、预处理、推理和超参数搜索模板。你可以轻松搜索并浏览这些模板，找到适合你需求的模板。
 
-![XXXXX](../Images/97187a9e6dde2a880e111395cb5b5e7b.png)
+![XXXXX](img/97187a9e6dde2a880e111395cb5b5e7b.png)
 
 例如，访问 Mistral 7B API。点击“获取”并等待其完成。
 
-![XXXXX](../Images/55d352056f95f9a006b536cf6b970a9e.png)
+![XXXXX](img/55d352056f95f9a006b536cf6b970a9e.png)
 
 点击`run.ipynb`文件并运行第一个单元。
 
-![XXXXX](../Images/97b295dded03ec323b147bbc31cc2415.png)
+![XXXXX](img/97b295dded03ec323b147bbc31cc2415.png)
 
 访问 Mistral 7B API 后，代码会返回结果。要查看客户端代码，请进入服务器文件夹并打开`client.py`文件。
 
-![XXXXX](../Images/1f18a76341833d13204076ff3f59c365.png)
+![XXXXX](img/1f18a76341833d13204076ff3f59c365.png)
 
 我经常使用 VSCode，发现开始使用 Lightning AI Studio 非常简单。
 
@@ -80,11 +80,11 @@ Lighting AI 平台提供了由用户设计的项目模板 Studio。这些模板�
 
 如果你对 Jupyter Notebook 的 UI 感到舒适，可以通过点击右侧面板上的 Jupyter Notebook 按钮来切换 IDE。右侧面板是你可以找到各种 Lightning AI Studio 插件的地方。
 
-![XXXXX](../Images/a2e4e03e90cc7bdeebe15c69fc7ab722.png)
+![XXXXX](img/a2e4e03e90cc7bdeebe15c69fc7ab722.png)
 
 要添加新的插件，点击“+”按钮，然后从 IDE、AI Agents、Training、Serving 和 Webapps 插件中进行选择。
 
-![XXXXX](../Images/6b3c38a750ff80ade295fc5459c40d88.png)
+![XXXXX](img/6b3c38a750ff80ade295fc5459c40d88.png)
 
 就这么简单。现在你可以享受 VSCode 和 Jupyter Notebook 扩展的 Studio 插件。
 

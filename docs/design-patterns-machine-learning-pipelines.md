@@ -1,12 +1,12 @@
 # 机器学习管道的设计模式
 
-> 原文：[https://www.kdnuggets.com/2021/11/design-patterns-machine-learning-pipelines.html](https://www.kdnuggets.com/2021/11/design-patterns-machine-learning-pipelines.html)
+> 原文：[`www.kdnuggets.com/2021/11/design-patterns-machine-learning-pipelines.html`](https://www.kdnuggets.com/2021/11/design-patterns-machine-learning-pipelines.html)
 
-[评论](#comments)
+评论
 
 **由 [Davit Buniatyan](https://www.linkedin.com/in/davidbuniatyan/)，Activeloop 的首席执行官，一家 Y-Combinator 孵化器的初创公司**。
 
-![机器学习管道的设计模式](../Images/ef7e6722925ec2460275b149d19f7894.png)
+![机器学习管道的设计模式](img/ef7e6722925ec2460275b149d19f7894.png)
 
 机器学习管道的设计模式在过去十年中经历了几次演变。这些变化通常是由于内存和 CPU 性能之间的不平衡所驱动的。它们也不同于传统的数据处理管道（如 MapReduce），因为它们需要支持与深度学习相关的长期运行的、有状态的任务的执行。
 
@@ -82,11 +82,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 

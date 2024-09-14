@@ -1,8 +1,8 @@
 # 专家推荐的前 5 种机器学习最佳实践
 
-> 原文：[https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html](https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html)
+> 原文：[`www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html`](https://www.kdnuggets.com/2022/09/top-5-machine-learning-practices-recommended-experts.html)
 
-![专家推荐的前 5 种机器学习最佳实践](../Images/75a17310ddc230734baba2099a6c2b0d.png)
+![专家推荐的前 5 种机器学习最佳实践](img/75a17310ddc230734baba2099a6c2b0d.png)
 
 # 介绍
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 维护
 
 * * *
 
@@ -48,23 +48,23 @@
 
 这是另一种提高模型性能和加快数据转换的基本技术。特征工程涉及从已有特征中注入新特征到模型中。它可以帮助我们识别强健的特征并去除相关或冗余的特征。然而，它需要领域专业知识，如果我们的初始基线已经包含多样的特征，可能不可行。让我们通过一个例子来理解这一点。假设你有一个数据集，包含房屋的长度、宽度和价格，如下所示：
 
-![专家推荐的前 5 个机器学习实践](../Images/7480347eeecdb6aa0dfd3d08d3a31dca.png)
+![专家推荐的前 5 个机器学习实践](img/7480347eeecdb6aa0dfd3d08d3a31dca.png)
 
 与其使用上述数据集，我们可以引入另一个名为“面积”的特征，并仅测量该变量对房价的影响。这个过程属于**特征创建**的范畴。
 
-![专家推荐的前 5 个机器学习实践](../Images/239a4cf0346ed5456a62a7c61caac8d5.png)
+![专家推荐的前 5 个机器学习实践](img/239a4cf0346ed5456a62a7c61caac8d5.png)
 
 类似地，**特征转换**和**特征提取**根据我们的项目领域可能会证明有价值。特征转换涉及对特征应用转换函数以获得更好的可视化，而在特征提取中，我们通过仅提取相关特征来压缩数据量。
 
 尽管**特征缩放**也是特征工程的一部分，我单独讨论了它，以强调其重要性。特征缩放是用于标准化自变量和特征范围的方法。**为什么这个步骤如此重要？**大多数算法如线性回归、逻辑回归和神经网络使用梯度下降作为优化技术。梯度下降严重依赖于特征的范围来确定向最小值的步长，但我们的大多数数据在范围上变化剧烈。这迫使我们在将数据输入模型之前进行标准化或规范化。对此，最重要的两种技术是：
 
-+   **归一化** **-** 归一化是一种将数据限制在通常范围[0,1]之间的技术，但你也可以定义范围[a,b]，其中a和b是实数。
++   **归一化** **-** 归一化是一种将数据限制在通常范围[0,1]之间的技术，但你也可以定义范围[a,b]，其中 a 和 b 是实数。
 
-![专家推荐的前五大机器学习实践](../Images/050cdba749c836c4a1ef8f8dcd4e1657.png)
+![专家推荐的前五大机器学习实践](img/050cdba749c836c4a1ef8f8dcd4e1657.png)
 
-+   **标准化** **-** 标准化将数据转换为均值为0，方差为1。我们首先计算特征的标准差和均值，然后使用以下公式计算新值：
++   **标准化** **-** 标准化将数据转换为均值为 0，方差为 1。我们首先计算特征的标准差和均值，然后使用以下公式计算新值：
 
-![专家推荐的前五大机器学习实践](../Images/5d629fc90db84cc81bcbc7775a31eaea.png)
+![专家推荐的前五大机器学习实践](img/5d629fc90db84cc81bcbc7775a31eaea.png)
 
 对于哪一种更好的讨论已经很多，一些研究表明，对于高斯分布，标准化更有帮助，因为它不受异常值的影响，反之亦然。但这取决于你所处理的问题类型。因此，强烈建议同时测试两者并比较性能，以找出最适合你的方法。
 
@@ -74,13 +74,13 @@
 
 +   **L1 正则化** **-** 也被称为套索回归。它通过向系数绝对值的大小添加惩罚，迫使一些系数估计值恰好为零。它形成一个稀疏模型，对特征选择有用。
 
-![专家推荐的前五大机器学习实践](../Images/4d1b9343fd3381b6c575eedd8ecd03c0.png)
+![专家推荐的前五大机器学习实践](img/4d1b9343fd3381b6c575eedd8ecd03c0.png)
 
 +   **L2 正则化** **-** 也被称为岭回归。它通过添加系数绝对值的平方来惩罚模型。因此，它迫使系数的值接近零但不完全为零。它提高了模型的可解释性。
 
-![专家推荐的前五大机器学习实践](../Images/1109a6d2b02c79f8caecbbd6a4125ba7.png)
+![专家推荐的前五大机器学习实践](img/1109a6d2b02c79f8caecbbd6a4125ba7.png)
 
-尽管L2正则化比L1给出更准确的预测，但这以计算能力为代价。在存在异常值的情况下，L2可能不是最佳选择，因为由于平方的存在，成本会呈指数增长。因此，与L2相比，L1更具鲁棒性。
+尽管 L2 正则化比 L1 给出更准确的预测，但这以计算能力为代价。在存在异常值的情况下，L2 可能不是最佳选择，因为由于平方的存在，成本会呈指数增长。因此，与 L2 相比，L1 更具鲁棒性。
 
 ## 4\. 识别错误
 
@@ -96,7 +96,7 @@
 
 +   **残差图 -** 它显示水平轴上的自变量和垂直轴上的残差。如果数据点在水平轴上随机分布，则线性模型更适合，反之亦然。
 
-+   **预测误差图 -** 它显示实际目标与预测值的对比，以提供关于方差的想法。45度线是预测与模型完全匹配的地方。
++   **预测误差图 -** 它显示实际目标与预测值的对比，以提供关于方差的想法。45 度线是预测与模型完全匹配的地方。
 
 ## 5. 超参数调优
 
@@ -112,20 +112,20 @@
 
 # 结论
 
-机器学习和深度学习需要良好的计算资源和专业知识。构建机器学习模型是一个迭代过程，涉及实现各种技巧以提高整体模型性能。我列出了ML专家推荐的一些最佳实践，以便访问您当前模型的不足之处。然而，正如我总是说的，一切都需要足够的实践和耐心，所以请继续从错误中学习。
+机器学习和深度学习需要良好的计算资源和专业知识。构建机器学习模型是一个迭代过程，涉及实现各种技巧以提高整体模型性能。我列出了 ML 专家推荐的一些最佳实践，以便访问您当前模型的不足之处。然而，正如我总是说的，一切都需要足够的实践和耐心，所以请继续从错误中学习。
 
 **[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)** 是一名有志的软件开发人员，她相信持续的努力和承诺。她是一名雄心勃勃的程序员，对数据科学和机器学习领域有浓厚的兴趣。
 
 ### 更多相关主题
 
-+   [2022年技术专家简单薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
++   [2022 年技术专家简单薪资指南](https://www.kdnuggets.com/2022/07/simple-salary-guide-tech-experts-2022.html)
 
-+   [为何最新的LLMs使用MoE（专家混合）架构](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)
++   [为何最新的 LLMs 使用 MoE（专家混合）架构](https://www.kdnuggets.com/why-the-newest-llms-use-a-moe-mixture-of-experts-architecture)
 
 +   [MLOps：最佳实践及如何应用](https://www.kdnuggets.com/2022/04/mlops-best-practices-apply.html)
 
-+   [创建领域特定AI模型的最佳实践](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)
++   [创建领域特定 AI 模型的最佳实践](https://www.kdnuggets.com/2022/07/best-practices-creating-domainspecific-ai-models.html)
 
-+   [将ChatGPT集成到数据科学工作流中：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
++   [将 ChatGPT 集成到数据科学工作流中：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [数据仓库和ETL最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
++   [数据仓库和 ETL 最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)

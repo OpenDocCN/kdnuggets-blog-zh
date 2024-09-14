@@ -1,8 +1,8 @@
-# Scikit-learn中的K-最近邻
+# Scikit-learn 中的 K-最近邻
 
-> 原文：[https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)
+> 原文：[`www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html`](https://www.kdnuggets.com/2022/07/knearest-neighbors-scikitlearn.html)
 
-![Scikit-learn中的K-最近邻](../Images/617f62294b09863e60149f470d2d8903.png)
+![Scikit-learn 中的 K-最近邻](img/617f62294b09863e60149f470d2d8903.png)
 
 [Nina Strehl](https://unsplash.com/@ninastrehl) via Unsplash
 
@@ -12,35 +12,35 @@ K-最近邻（KNN）是一种监督学习的机器学习算法，可用于回归
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 一种监督式机器学习算法依赖于有标签的输入数据，算法在这些数据上进行学习，并利用学到的知识在输入未标记数据时生成准确的输出。
 
-KNN的使用是根据训练数据的特征（有标签的数据）对测试数据集进行预测。进行这些预测的方法是通过计算测试数据和训练数据之间的距离，假设数据点的相似特征或属性存在于接近的范围内。
+KNN 的使用是根据训练数据的特征（有标签的数据）对测试数据集进行预测。进行这些预测的方法是通过计算测试数据和训练数据之间的距离，假设数据点的相似特征或属性存在于接近的范围内。
 
-它允许我们在考虑新数据点的特征的基础上，识别并分配新数据的类别，这些特征是基于训练数据中的学习数据点。这些新数据点的特征将被KNN算法学习，并根据其与其他数据点的接近程度进行分类。
+它允许我们在考虑新数据点的特征的基础上，识别并分配新数据的类别，这些特征是基于训练数据中的学习数据点。这些新数据点的特征将被 KNN 算法学习，并根据其与其他数据点的接近程度进行分类。
 
-# 为什么KNN是一个好的算法？
+# 为什么 KNN 是一个好的算法？
 
-KNN特别适用于分类任务。分类是许多数据科学家和机器学习工程师遇到的典型任务，它解决了许多现实世界的问题。
+KNN 特别适用于分类任务。分类是许多数据科学家和机器学习工程师遇到的典型任务，它解决了许多现实世界的问题。
 
-因此，像KNN这样的算法是用于模式分类和回归模型的好且准确的选择。KNN被认为不会对数据做任何假设，因此比其他分类算法具有更高的准确性。该算法也容易实现且易于解释。
+因此，像 KNN 这样的算法是用于模式分类和回归模型的好且准确的选择。KNN 被认为不会对数据做任何假设，因此比其他分类算法具有更高的准确性。该算法也容易实现且易于解释。
 
-# KNN中的“k”
+# KNN 中的“k”
 
-KNN中的“K”是一个参数，指的是最近邻的数量，其中K值本质上创建了一个环境，使数据点根据接近程度理解其相似性。使用K值，我们计算测试数据点与已训练标签点之间的距离，以更好地对新数据点进行分类。
+KNN 中的“K”是一个参数，指的是最近邻的数量，其中 K 值本质上创建了一个环境，使数据点根据接近程度理解其相似性。使用 K 值，我们计算测试数据点与已训练标签点之间的距离，以更好地对新数据点进行分类。
 
-K值是一个正整数，通常值较小，推荐为奇数。当K值较小时，误差率下降，偏差较低但方差较高，这会导致模型过拟合。
+K 值是一个正整数，通常值较小，推荐为奇数。当 K 值较小时，误差率下降，偏差较低但方差较高，这会导致模型过拟合。
 
 # 如何计算数据点之间的距离？
 
-KNN是一种基于距离的算法，最常用的方法包括：
+KNN 是一种基于距离的算法，最常用的方法包括：
 
 +   连续数据的欧氏距离和曼哈顿距离
 
@@ -52,21 +52,21 @@ KNN是一种基于距离的算法，最常用的方法包括：
 
 汉明距离比较两个二进制数据字符串，然后比较这两个字符串输入以找到每个位置字符的不同数量。
 
-# 简单的KNN算法步骤
+# 简单的 KNN 算法步骤
 
-这些是KNN算法的一般步骤
+这些是 KNN 算法的一般步骤
 
 1.  加载你的数据集
 
-1.  选择一个k值。你应该选择一个奇数，以避免出现平局。
+1.  选择一个 k 值。你应该选择一个奇数，以避免出现平局。
 
 1.  计算新数据点与邻近的已训练数据点之间的距离。
 
-1.  将新数据点分配给其K个最近邻
+1.  将新数据点分配给其 K 个最近邻
 
-# 使用sklearn进行kNN
+# 使用 sklearn 进行 kNN
 
-`neighbours`是来自sklearn模块的一个包，用于最近邻分类任务。这可用于无监督学习和有监督学习。
+`neighbours`是来自 sklearn 模块的一个包，用于最近邻分类任务。这可用于无监督学习和有监督学习。
 
 首先，你需要导入这些库：
 
@@ -76,7 +76,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 ```
 
-这是sklearn的neighbors包：
+这是 sklearn 的 neighbors 包：
 
 ```py
 sklearn.neighbors.KNeighborsClassifier
@@ -88,11 +88,11 @@ sklearn.neighbors.KNeighborsClassifier
 class sklearn.neighbors.KNeighborsClassifier(n_neighbors=5, *, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
 ```
 
-示例中使用的距离度量是minkowski，但如上所述，你可以使用不同的距离度量。
+示例中使用的距离度量是 minkowski，但如上所述，你可以使用不同的距离度量。
 
 如果你想了解更多关于这些参数的信息，请点击这个[链接](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)。
 
-# Scikit-Learn中的K近邻在鸢尾花数据集上的应用
+# Scikit-Learn 中的 K 近邻在鸢尾花数据集上的应用
 
 ## 加载鸢尾花数据集
 
@@ -119,11 +119,11 @@ df = pd.read_csv(url, names=names)
 
 执行`df.head()`后数据集应呈现如下：
 
-![鸢尾花数据集](../Images/b25c0e8dcb031b95eee8a7dee71ed74f.png)
+![鸢尾花数据集](img/b25c0e8dcb031b95eee8a7dee71ed74f.png)
 
 ## 数据集预处理
 
-下一步是根据属性和标签拆分数据集。类别列被视为标签，称为y，而前4列是属性，称为X。
+下一步是根据属性和标签拆分数据集。类别列被视为标签，称为 y，而前 4 列是属性，称为 X。
 
 ```py
 X = dataset.iloc[:, :-1].values
@@ -180,7 +180,7 @@ print(classification_report(y_test, y_pred))
 
 这是输出：
 
-![代码输出](../Images/4e1a093c224913a29143f850e70b107a.png)
+![代码输出](img/4e1a093c224913a29143f850e70b107a.png)
 
 # 结论
 

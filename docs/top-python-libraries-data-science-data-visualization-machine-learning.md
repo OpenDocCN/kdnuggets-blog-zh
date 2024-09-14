@@ -1,24 +1,24 @@
 # 顶级 38 个 Python 数据科学、数据可视化和机器学习库
 
-> 原文：[https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html`](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-自上次我们进行[Python 库汇总](/2018/11/top-python-data-science-libraries.html)以来已经有一段时间了，因此我们借此机会在十一月开始时提供了这样一个新的列表。
+自上次我们进行 Python 库汇总以来已经有一段时间了，因此我们借此机会在十一月开始时提供了这样一个新的列表。
 
-# 我们如何构建这份包含38个 Python 数据科学库的列表
+# 我们如何构建这份包含 38 个 Python 数据科学库的列表
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-上次我们在 KDnuggets 做这个时，编辑和作者[Dan Clark](/author/dan-clark)将广泛的 Python 数据科学相关库分成了几个较小的集合，包括数据科学库、机器学习库和深度学习库。虽然将库分成类别本质上是任意的，但在之前的发布时这是合理的。
+上次我们在 KDnuggets 做这个时，编辑和作者 Dan Clark 将广泛的 Python 数据科学相关库分成了几个较小的集合，包括数据科学库、机器学习库和深度学习库。虽然将库分成类别本质上是任意的，但在之前的发布时这是合理的。
 
 不过这次，我们将收集到的开源 Python 数据科学库分成了两部分。这篇文章（本篇）涵盖了“数据科学、数据可视化和机器学习”，可以看作是涵盖常见任务的“传统”数据科学工具。第二篇文章，将于下周发布，将覆盖用于构建神经网络的库，以及用于执行自然语言处理和计算机视觉任务的库。
 
@@ -42,11 +42,11 @@
 
 我们的列表由团队一致决定的、代表常用和广泛使用的 Python 数据科学库组成。此外，库必须有一个 Github 仓库才能被纳入。类别没有特定顺序，每个库也没有特定顺序。我们曾考虑按星标或其他指标构建排序，但决定不这样做，以免对库的价值或重要性进行显著的偏颇。它们在此的排列因此完全是随机的。库的描述直接来自 Github 仓库，以某种形式或另一种形式呈现。
 
-感谢 [Ahmed Anis](/author/ahmad-anis) 对数据收集的贡献，以及 KDnuggets 其他员工的意见、见解和建议。
+感谢 Ahmed Anis 对数据收集的贡献，以及 KDnuggets 其他员工的意见、见解和建议。
 
-请注意，下面的可视化由 [Gregory Piatetsky](/author/gregory-piatetsky) 展示了每个库的类型，通过星标和贡献者进行绘制，其符号大小反映了库在 Github 上的相对提交次数。
+请注意，下面的可视化由 Gregory Piatetsky 展示了每个库的类型，通过星标和贡献者进行绘制，其符号大小反映了库在 Github 上的相对提交次数。
 
-![图示](../Images/efac55ca46436fcc252d98cc9ddba066.png)
+![图示](img/efac55ca46436fcc252d98cc9ddba066.png)
 
 图 1：顶级 Python 数据科学、数据可视化和机器学习库
 

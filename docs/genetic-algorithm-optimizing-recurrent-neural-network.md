@@ -1,8 +1,8 @@
 # 使用遗传算法优化递归神经网络
 
-> 原文：[https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html](https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)
+> 原文：[`www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html`](https://www.kdnuggets.com/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 Aaqib Saeed，特温特大学**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -36,11 +36,11 @@
 
 1.  **突变**：其目的是通过随机交换或关闭解决方案位引入多样性和新颖性，例如二进制突变。
 
-![解决方案的遗传表示](../Images/bba3790751846c9f5fc72ffb4653617c.png)
+![解决方案的遗传表示](img/bba3790751846c9f5fc72ffb4653617c.png)
 
 有时还使用一种称为“精英主义”的技术，它保留一些最佳解决方案，并传递给下一代。**图 2** 描述了一个完整的遗传算法，其中，初始解决方案（种群）是随机生成的。接下来，它们根据适应度函数进行评估，然后执行选择、交叉和突变。这个过程会重复定义的迭代次数（在 GA 术语中称为代）。最后，选择适应度得分最高的解决方案作为最佳解决方案。要了解更多信息，请查看以下资源 [[3]](http://www.flll.jku.at/div/teaching/Ga/GA-Notes.pdf) 和 [[4]](http://www.cs.cmu.edu/~tom/mlbook.html)。
 
-![遗传算法](../Images/39049a30d230fa390264432946b6aa1a.png)
+![遗传算法](img/39049a30d230fa390264432946b6aa1a.png)
 
 ### 实现
 
@@ -195,19 +195,19 @@ print('Test RMSE: ', rmse)
 
 1.  遗传算法：理论与应用，作者 Ulrich Bodenhofer
 
-1.  《机器学习》一书第 9 章，遗传算法，作者 Tom M. Mitchell
+1.  《机器学习》一书第九章，遗传算法，作者 Tom M. Mitchell
 
-![作者](../Images/f9c21800dc7ef2fdf98de5b260d7c466.png)**简介： [Aaqib Saeed](http://aqibsaeed.github.io/)** 是荷兰特温特大学（University of Twente）计算机科学（专注于数据科学和智能服务）的研究生。
+![作者](img/f9c21800dc7ef2fdf98de5b260d7c466.png)**简介： [Aaqib Saeed](http://aqibsaeed.github.io/)** 是荷兰特温特大学（University of Twente）计算机科学（专注于数据科学和智能服务）的研究生。
 
 [原文](http://aqibsaeed.github.io/2017-08-11-genetic-algorithm-for-optimizing-rnn/)。转载已获许可。
 
 **相关：**
 
-+   [使用 Tensorflow 中的神经网络进行城市声音分类](/2016/09/urban-sound-classification-neural-networks-tensorflow.html)
++   使用 Tensorflow 中的神经网络进行城市声音分类
 
-+   [在 Tensorflow 中实现 CNN 进行人类活动识别](/2016/11/implementing-cnn-human-activity-recognition-tensorflow.html)
++   在 Tensorflow 中实现 CNN 进行人类活动识别
 
-+   [今天我在午休时间用 Keras 构建了一个神经网络](/2017/12/today-built-neural-network-during-lunch-break-keras.html)
++   今天我在午休时间用 Keras 构建了一个神经网络
 
 ### 更多相关话题
 

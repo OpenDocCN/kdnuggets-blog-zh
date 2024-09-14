@@ -1,8 +1,8 @@
 # 电子书：使用 R 学习数据科学 – 免费下载
 
-> 原文：[https://www.kdnuggets.com/2021/09/ebook-learn-data-science-r.html](https://www.kdnuggets.com/2021/09/ebook-learn-data-science-r.html)
+> 原文：[`www.kdnuggets.com/2021/09/ebook-learn-data-science-r.html`](https://www.kdnuggets.com/2021/09/ebook-learn-data-science-r.html)
 
-[comments](#comments)
+comments
 
 **由 [Narayana Murthy](https://twitter.com/nemani_narayana)，数据科学家**。
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![](../Images/9821e0c3e6d224ca0af16b5541138850.png)
+![](img/9821e0c3e6d224ca0af16b5541138850.png)
 
 ## 学习数据科学
 
 数据科学是各种技能的结合。数据科学家需要精通统计学、数学、编程及其他技能。
 
-![](../Images/89e95af94119b27e30b6bca53b4932b1.png)
+![](img/89e95af94119b27e30b6bca53b4932b1.png)
 
 所以合乎逻辑的问题是，**从哪里开始**？
 
@@ -48,7 +48,7 @@ R 语言是初学者、学术人员和领域专家的最佳选择。学习数据
 
 针对特定主题的课程能很好地理解数据科学概念。能够在一个地方学习所有技能将是非常好的。
 
-[用 R 学习数据科学](http://www.dswithr.ml/) 涵盖统计学、基础数学、R 语言、可视化和机器学习算法。内容精准完整，书长达250页。
+[用 R 学习数据科学](http://www.dswithr.ml/) 涵盖统计学、基础数学、R 语言、可视化和机器学习算法。内容精准完整，书长达 250 页。
 
 章节包括：
 
@@ -80,7 +80,7 @@ R 语言是初学者、学术人员和领域专家的最佳选择。学习数据
 
 **相关：**
 
-+   [2021年数据科学学习路线图](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)
++   [2021 年数据科学学习路线图](https://www.kdnuggets.com/2021/02/data-science-learning-roadmap-2021.html)
 
 +   [R 还是 Python？为什么不两者兼顾？](https://www.kdnuggets.com/2020/12/r-python-both-prython.html)
 

@@ -1,8 +1,8 @@
-# 5门免费MIT数学课程，助你学习数据科学
+# 5 门免费 MIT 数学课程，助你学习数据科学
 
-> 原文：[https://www.kdnuggets.com/5-free-mit-courses-to-learn-math-for-data-science](https://www.kdnuggets.com/5-free-mit-courses-to-learn-math-for-data-science)
+> 原文：[`www.kdnuggets.com/5-free-mit-courses-to-learn-math-for-data-science`](https://www.kdnuggets.com/5-free-mit-courses-to-learn-math-for-data-science)
 
-![math-courses-fimg](../Images/2720a85cdbe3c2acdffe12b446aadc0b.png)
+![math-courses-fimg](img/2720a85cdbe3c2acdffe12b446aadc0b.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -34,11 +34,11 @@
 
 ## 1\. 线性代数
 
-除了熟悉高中数学外，线性代数是数据科学中最重要的数学主题。由Gilbert Strang教授讲授的超受欢迎的[线性代数](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/)课程是你可以选修的最佳数学课程之一。对于此课程及后续课程，请完成习题集并尝试考试以测试你的理解。
+除了熟悉高中数学外，线性代数是数据科学中最重要的数学主题。由 Gilbert Strang 教授讲授的超受欢迎的[线性代数](https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/)课程是你可以选修的最佳数学课程之一。对于此课程及后续课程，请完成习题集并尝试考试以测试你的理解。
 
 课程分为以下三个主要模块：
 
-+   方程组Ax = b和四个矩阵子空间
++   方程组 Ax = b 和四个矩阵子空间
 
 +   最小二乘法、行列式和特征值
 
@@ -148,7 +148,7 @@
 
 如果你想掌握数据科学中的数学，这些课程列表应该足以让你学习所有你需要的内容——无论是进入机器学习研究还是获得数据科学的高级学位。
 
-如果你还在寻找更多的课程来学习数据科学中的数学，可以阅读[5门免费课程掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)。
+如果你还在寻找更多的课程来学习数据科学中的数学，可以阅读[5 门免费课程掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)。
 
 **[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交叉点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、观点文章等方式学习和分享知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
@@ -156,12 +156,12 @@
 
 +   [如何克服对数学的恐惧并学习数据科学中的数学](https://www.kdnuggets.com/2021/03/overcome-fear-learn-math-data-science.html)
 
-+   [KDnuggets新闻，4月6日：8门免费MIT课程学习数据科学……](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学……](https://www.kdnuggets.com/2022/n14.html)
 
-+   [8门免费MIT课程，在线学习数据科学](https://www.kdnuggets.com/2022/03/8-free-mit-courses-learn-data-science-online.html)
++   [8 门免费 MIT 课程，在线学习数据科学](https://www.kdnuggets.com/2022/03/8-free-mit-courses-learn-data-science-online.html)
 
 +   [哈佛、斯坦福等大学的免费数据科学课程合集](https://www.kdnuggets.com/a-collection-of-free-data-science-courses-from-harvard-stanford-mit-cornell-and-berkeley)
 
-+   [MIT免费微积分课程：理解深度学习的关键](https://www.kdnuggets.com/2020/07/free-mit-courses-calculus-key-deep-learning.html)
++   [MIT 免费微积分课程：理解深度学习的关键](https://www.kdnuggets.com/2020/07/free-mit-courses-calculus-key-deep-learning.html)
 
-+   [5门免费课程掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)
++   [5 门免费课程掌握数据科学中的数学](https://www.kdnuggets.com/5-free-courses-to-master-math-for-data-science)

@@ -1,8 +1,8 @@
 # 如何设计数据收集实验
 
-> 原文：[https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)
+> 原文：[`www.kdnuggets.com/2022/04/design-experiments-data-collection.html`](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)
 
-![如何设计数据收集实验](../Images/7d7ec60a7d3d1dd285ebdacbd1da90c8.png)
+![如何设计数据收集实验](img/7d7ec60a7d3d1dd285ebdacbd1da90c8.png)
 
 图片由[Science in HD](https://unsplash.com/@scienceinhd?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,7 +14,7 @@
 
 数据在数据科学和机器学习中扮演着核心角色。我们通常假设用于分析或模型构建的数据是现成的并且免费的。有时我们可能没有数据，并且获取完整的数据集要么是不可能的，要么需要很长时间才能收集。在这种情况下，我们需要设计一种方法来尝试快速有效地收集我们能获得的最佳数据子集。设计数据收集实验的过程称为**实验设计**。实验设计的一些例子包括调查和临床试验。
 
-我们现在讨论设计和执行数据收集实验时需要记住的4个主要因素。
+我们现在讨论设计和执行数据收集实验时需要记住的 4 个主要因素。
 
 # **实验设计因素**
 

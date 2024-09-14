@@ -1,6 +1,6 @@
 # 如何构建数据科学赋能团队：完整指南
 
-> 原文：[https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)
+> 原文：[`www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html`](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)
 
 数据科学赋能团队（DSET）促进开发者和数据科学家的协作。在这篇博客中，我们将讨论什么是数据科学赋能团队，如何建立 DSET，以及如何与数据科学家合作。
 
@@ -10,17 +10,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
 成立数据科学赋能团队（DSET）的公司能够获得更快的开发周期的竞争优势。
 
-![如何构建数据科学赋能团队：完整指南](../Images/9bc2f25f991e17fb6ad3dc2a5cfe85c0.png)
+![如何构建数据科学赋能团队：完整指南](img/9bc2f25f991e17fb6ad3dc2a5cfe85c0.png)
 
 [Freepik](https://www.freepik.com/free-photo/hand-with-support-gears-isolated-white-background_19069065.htm#query=collaboration&position=1&from_view=search)
 
@@ -38,7 +38,7 @@
 
 下一步是[在你的组织中建立 DSET](https://www.analyticsinsight.net/how-to-form-a-data-science-enablement-team/)。别担心，这不需要你安排或投资额外的资源，只需在开发人员和数据科学家之间架起一座桥梁即可。
 
-![如何建立数据科学赋能团队：完整指南](../Images/e2642957e04e346da2ea4951794ca3d8.png)
+![如何建立数据科学赋能团队：完整指南](img/e2642957e04e346da2ea4951794ca3d8.png)
 
 [Freepik](https://www.freepik.com/free-photo/diverse-team-coworkers-having-successful-partnership-feeling-happy-about-professional-teamwork-cheerful-people-celebrating-collaboration-agreement-together-boardroom-meeting_29602690.htm#query=collaboration&position=10&from_view=search)
 
@@ -54,7 +54,7 @@ DSET 主要是一组人员，大多是开发人员，他们与数据科学家合
 
 数据科学家需要帮助以便能够有效地完成工作。数据科学赋能团队可以通过从数据中提取洞察，然后基于这些洞察提供建议来提供这种帮助。
 
-![如何建立数据科学赋能团队：完整指南](../Images/47d6b34a21fbbcf76ee38f9ba6f756bf.png)
+![如何建立数据科学赋能团队：完整指南](img/47d6b34a21fbbcf76ee38f9ba6f756bf.png)
 
 [Freepik](https://www.freepik.com/free-photo/manager-leading-brainstorming-meeting-with-group-creative-designers-office-leader-business-concept_10928866.htm#query=collaboration&position=13&from_view=search)
 
@@ -74,18 +74,18 @@ DSET 主要是一组人员，大多是开发人员，他们与数据科学家合
 
 不再等待，用创新的方法展示数据科学和机器学习的力量。通过高效的合作优化模型部署，在现代商业世界中竞争。
 
-**[Ayesha Saleem](https://www.linkedin.com/in/ayesha-saleem-6347ba120/)** 是 [Data Science Dojo](https://datasciencedojo.com/) 的数字内容作家。Ayesha 热衷于通过有意义的内容写作、文案写作、电子邮件营销、SEO写作、社交媒体营销和创意写作来重新塑造品牌。
+**[Ayesha Saleem](https://www.linkedin.com/in/ayesha-saleem-6347ba120/)** 是 [Data Science Dojo](https://datasciencedojo.com/) 的数字内容作家。Ayesha 热衷于通过有意义的内容写作、文案写作、电子邮件营销、SEO 写作、社交媒体营销和创意写作来重新塑造品牌。
 
 ### 了解更多信息
 
-+   [Python中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
++   [Python 中的地理编码：完整指南](https://www.kdnuggets.com/2022/11/geocoding-python-complete-guide.html)
 
 +   [决策树软件完整指南](https://www.kdnuggets.com/2022/08/complete-guide-decision-tree-software.html)
 
-+   [KDnuggets™新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
-+   [数据科学团队合作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队合作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
 
-+   [KDnuggets新闻，4月6日：8门免费MIT数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [KDnuggets新闻，5月25日：每个数据科学家都需了解的6种Python机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个数据科学家都需了解的 6 种 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)

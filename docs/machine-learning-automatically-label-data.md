@@ -1,22 +1,22 @@
 # 如何利用机器学习自动标注数据
 
-> 原文：[https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)
+> 原文：[`www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html`](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)
 
-![如何利用机器学习自动标注数据](../Images/808a6bf6be8b5e11ad86c10e30f388a4.png)
+![如何利用机器学习自动标注数据](img/808a6bf6be8b5e11ad86c10e30f388a4.png)
 
 照片由 [Matt Briney](https://unsplash.com/@mbriney?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供
 
-到 2025 年，全球创建、复制和消费的数据量预计将达到 [181 兹字节](https://www.statista.com/statistics/871513/worldwide-data-created/)。然而，由于远程工作的普及（由 Covid-19 大流行引起），我们生成、使用和 [保护数据](/2020/10/data-protection-techniques-guarantee-privacy.html) 的方式发生了变化。因此，我们可以预期会超出最初的预测。
+到 2025 年，全球创建、复制和消费的数据量预计将达到 [181 兹字节](https://www.statista.com/statistics/871513/worldwide-data-created/)。然而，由于远程工作的普及（由 Covid-19 大流行引起），我们生成、使用和 保护数据 的方式发生了变化。因此，我们可以预期会超出最初的预测。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -32,11 +32,11 @@
 
 传统上，数据标签首先由人工输入提供。例如，可能会要求人工标注者描述图像文件的内容。根据相关机器学习模型的复杂性和目的，标签的响应可以从非常详细到二进制——包括开/关或是/否答案。
 
-然后，这些数据会被送入[机器学习模型](/2021/10/machine-learning-model-development-operations-principles-practice.html)来训练它识别模式。教会机器和深度学习模型的过程称为模型训练。即使是已建立的机器学习模型也可以使用新的标注数据进行再训练。
+然后，这些数据会被送入机器学习模型来训练它识别模式。教会机器和深度学习模型的过程称为模型训练。即使是已建立的机器学习模型也可以使用新的标注数据进行再训练。
 
 使用标注数据的三种最常见的数据模型和领域是：
 
-+   [**计算机视觉**](/2021/01/top-10-computer-vision-papers-2020.html) **（CV）：** 机器学习的一个领域，教会计算机识别和解释图像。计算机视觉模型使用标注的视觉数据来帮助识别图像或识别模式。例如，一个训练用来区分鸟类的计算机视觉模型应首先接收标注的图像数据和有用的描述词。
++   **计算机视觉** **（CV）：** 机器学习的一个领域，教会计算机识别和解释图像。计算机视觉模型使用标注的视觉数据来帮助识别图像或识别模式。例如，一个训练用来区分鸟类的计算机视觉模型应首先接收标注的图像数据和有用的描述词。
 
 +   **自然语言处理（NLP）：** 研究教会计算机如何识别和理解书面及口语的领域。目前，NLP 的最主流应用是在写作助手中的预测文本。一些 NLP 公司会获取用户应用数据作为其最终数据集（记录用户与写作助手和其他应用互动时的数据）。然而，这些数据仍然需要在某些情况下进行注释和排序。通常，这一过程最初由人工操作员完成。
 
@@ -74,7 +74,7 @@
 
 上述每种方法都有其优缺点。然而，我们可以利用机器学习来规避其中的一些缺点和劣势。例如，我们不必完全用机器学习或人工智能解决方案取代内部人工标注。我们可以实现一个机器学习模型来帮助排序和准备数据。我们可以训练一个机器学习模型来区分高质量数据和多余数据。此外，我们可以实施另一个机器学习模型，在数据准备后验证和审计数据标签。
 
-我们可以使用[主动学习](/2020/10/introduction-ai-updated.html)模型来帮助去除任何多余或非必要的描述符。实质上，机器学习可以减少人为错误和人工标注员处理数据集所需的时间。
+我们可以使用主动学习模型来帮助去除任何多余或非必要的描述符。实质上，机器学习可以减少人为错误和人工标注员处理数据集所需的时间。
 
 合成标注需要一个已建立的标签数据库来注释新的数据。这种方法可以通过静态编码算法或机器学习模型完成。然而，后者是最有效的——尤其是对于较大的项目。它涉及首先用已经建立的数据集和人工标签来训练机器学习模型。一旦测试并达到能力水平，它可以标注新的原始数据。使用机器学习进行合成标注消除了对人工标注员的需求。
 
@@ -84,7 +84,7 @@
 
 随着公司追求更准确的数据和数据标注，显然它们不再能仅仅依赖人工互动来实现这一目标。这并不意味着人工标注者已经过时，但随着数据及其处理方式的不断变化，我们排序和标注数据的方式也必须随之改变。
 
-我们可以逐步实施新的基于机器学习的协议和功能，以确保数据及其标签的准确性。数据科学是一个不断发展的领域，持续不断地取得进展和突破。然而，这对你来说是好消息（至少部分是好消息），因为你不会被抛在荒野之外。已经有成熟的[机器学习数据标注](/2021/12/data-labeling-ml-overview-and-tools.html)平台可以帮助你的公司从对经典人工标注的依赖中迁移出来。
+我们可以逐步实施新的基于机器学习的协议和功能，以确保数据及其标签的准确性。数据科学是一个不断发展的领域，持续不断地取得进展和突破。然而，这对你来说是好消息（至少部分是好消息），因为你不会被抛在荒野之外。已经有成熟的机器学习数据标注平台可以帮助你的公司从对经典人工标注的依赖中迁移出来。
 
 **[Nahla Davies](http://nahlawrites.com/)** 是一位软件开发者和技术作家。在全职从事技术写作之前，她曾管理——以及其他有趣的事情——担任过一家 Inc. 5000 体验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 

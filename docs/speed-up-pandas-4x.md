@@ -1,22 +1,22 @@
 # 如何通过一行代码将 Pandas 提速 4 倍
 
-> 原文：[https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html](https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html)
+> 原文：[`www.kdnuggets.com/2019/11/speed-up-pandas-4x.html`](https://www.kdnuggets.com/2019/11/speed-up-pandas-4x.html)
 
-[评论](#comments)
+评论
 
 [Pandas](https://pandas.pydata.org/) 是处理 Python 数据的首选库。它易于使用，并且在处理不同类型和大小的数据时相当灵活。它拥有大量的[不同函数](https://dev.pandas.io/docs/user_guide/index.html)，使得数据操作变得轻而易举。
 
-![](../Images/637b258d0b1a651f13343b312131a6fb.png)
+![](img/637b258d0b1a651f13343b312131a6fb.png)
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@
 
 理论上，将计算并行化就像在每个可用的 CPU 核心上对不同的数据点应用该计算一样简单。对于 Pandas DataFrame，一个基本的想法是将 DataFrame 划分为几块，块数等于 CPU 核心的数量，然后让每个 CPU 核心在其块上运行计算。最后，我们可以汇总结果，这是一项计算上便宜的操作。
 
-![](../Images/3fa16195a5acf43a3969a8c66c906475.png)
+![](img/3fa16195a5acf43a3969a8c66c906475.png)
 
 *多核系统如何更快地处理数据。对于单核处理（左），所有 10 个任务都去一个节点。对于双核处理（右），每个节点承担 5 个任务，从而将处理速度加倍。*
 
@@ -48,40 +48,40 @@
 
 想象一下，如果你有一个列很多但行较少的 DataFrame。一些库只在行之间进行分区，这在这种情况下效率较低，因为我们有更多的列而不是行。但使用 Modin，由于分区是在两个维度上进行的，因此并行处理在各种形状的 DataFrame 中都保持高效，无论它们是较宽（列很多）、较长（行很多）还是两者兼具。
 
-![](../Images/5b89c639a28c62e3f40bef41799c69fd.png)
+![](img/5b89c639a28c62e3f40bef41799c69fd.png)
 
 *Pandas DataFrame（左）作为一个块存储，只发送到一个 CPU 核心。Modin DataFrame（右）在行和列之间进行分区，每个分区可以发送到系统中不同的 CPU 核心，最多可达到系统的核心数。*
 
 上图是一个简单的示例。Modin 实际上使用一个*分区管理器*，它可以根据操作的类型改变分区的大小和形状。例如，可能有一个操作需要整个行或整个列。在这种情况下，[分区管理器](https://modin.readthedocs.io/en/latest/architecture.html#partition-manager)会以其能找到的最优方式进行分区和分配到 CPU 核心。它具有灵活性。
 
-为了进行并行处理的繁重工作，Modin可以使用[Dask](https://dask.org/)或[Ray](https://github.com/ray-project/ray/)。它们都是具有Python API的并行计算库，你可以在运行时选择使用其中一个。Ray目前是更安全的选择，因为它更稳定——Dask后端是实验性的。
+为了进行并行处理的繁重工作，Modin 可以使用[Dask](https://dask.org/)或[Ray](https://github.com/ray-project/ray/)。它们都是具有 Python API 的并行计算库，你可以在运行时选择使用其中一个。Ray 目前是更安全的选择，因为它更稳定——Dask 后端是实验性的。
 
 不过，理论说够了。让我们来看看代码和速度基准测试吧！
 
-### 测试Modin速度
+### 测试 Modin 速度
 
-安装和使用Modin的最简单方法是通过pip。以下命令安装Modin、Ray以及所有相关的依赖：
+安装和使用 Modin 的最简单方法是通过 pip。以下命令安装 Modin、Ray 以及所有相关的依赖：
 
 ```py
 pip install modin[ray]
 
 ```
 
-在接下来的示例和基准测试中，我们将使用[*CS:GO Competitive Matchmaking Data*](https://www.kaggle.com/skihikingkevin/csgo-matchmaking-damage)来自Kaggle。CSV的每一行包含了CS:GO竞技比赛中一轮的数据。
+在接下来的示例和基准测试中，我们将使用[*CS:GO Competitive Matchmaking Data*](https://www.kaggle.com/skihikingkevin/csgo-matchmaking-damage)来自 Kaggle。CSV 的每一行包含了 CS:GO 竞技比赛中一轮的数据。
 
-目前我们将专注于实验最大的CSV文件（有几个），叫做*esea_master_dmg_demos.part1.csv*，大小为1.2GB。如此大的文件，我们应该能够看到Pandas的性能下降情况以及Modin如何帮助我们。测试时，我将使用一款[i7–8700k CPU](https://ark.intel.com/content/www/us/en/ark/products/126684/intel-core-i7-8700k-processor-12m-cache-up-to-4-70-ghz.html)，它有6个物理核心和12个线程。
+目前我们将专注于实验最大的 CSV 文件（有几个），叫做*esea_master_dmg_demos.part1.csv*，大小为 1.2GB。如此大的文件，我们应该能够看到 Pandas 的性能下降情况以及 Modin 如何帮助我们。测试时，我将使用一款[i7–8700k CPU](https://ark.intel.com/content/www/us/en/ark/products/126684/intel-core-i7-8700k-processor-12m-cache-up-to-4-70-ghz.html)，它有 6 个物理核心和 12 个线程。
 
-我们进行的第一个测试是用我们熟悉的*read_csv()*读取数据。Pandas和Modin的代码完全一样。
+我们进行的第一个测试是用我们熟悉的*read_csv()*读取数据。Pandas 和 Modin 的代码完全一样。
 
-为了测量速度，我导入了*time*模块，并在*read_csv()*前后加了*time.time()*。结果是Pandas加载数据从CSV到内存花费了8.38秒，而Modin只用了3.22秒。这是2.6倍的加速。仅仅通过更改导入语句就取得这样的速度提升，算是不小的进步！
+为了测量速度，我导入了*time*模块，并在*read_csv()*前后加了*time.time()*。结果是 Pandas 加载数据从 CSV 到内存花费了 8.38 秒，而 Modin 只用了 3.22 秒。这是 2.6 倍的加速。仅仅通过更改导入语句就取得这样的速度提升，算是不小的进步！
 
-让我们对DataFrame进行几个较重的处理。连接多个DataFrame是Pandas中常见的操作——我们可能有几个或更多的CSV文件包含数据，需要逐个读取并连接。我们可以轻松地使用*pd.concat()*函数来完成，Pandas和Modin都能做到。
+让我们对 DataFrame 进行几个较重的处理。连接多个 DataFrame 是 Pandas 中常见的操作——我们可能有几个或更多的 CSV 文件包含数据，需要逐个读取并连接。我们可以轻松地使用*pd.concat()*函数来完成，Pandas 和 Modin 都能做到。
 
-我们预计Modin在这种操作中表现会很好，因为它处理大量数据。代码如下所示。
+我们预计 Modin 在这种操作中表现会很好，因为它处理大量数据。代码如下所示。
 
-在上面的代码中，我们将DataFrame自身连接了5次。Pandas在3.56秒内完成了连接操作，而Modin在0.041秒内完成，速度提升了86.83倍！即使我们只有6个CPU核心，DataFrame的分区也大大提高了速度。
+在上面的代码中，我们将 DataFrame 自身连接了 5 次。Pandas 在 3.56 秒内完成了连接操作，而 Modin 在 0.041 秒内完成，速度提升了 86.83 倍！即使我们只有 6 个 CPU 核心，DataFrame 的分区也大大提高了速度。
 
-Pandas中常用来清理DataFrame的一个函数是*.fillna()*函数。这个函数查找DataFrame中的所有NaN值，并用你选择的值替换它们。这里有很多操作。Pandas必须遍历每一行每一列来查找NaN值并进行替换。这是应用Modin的绝佳机会，因为我们重复执行了很多简单操作。
+Pandas 中常用来清理 DataFrame 的一个函数是*.fillna()*函数。这个函数查找 DataFrame 中的所有 NaN 值，并用你选择的值替换它们。这里有很多操作。Pandas 必须遍历每一行每一列来查找 NaN 值并进行替换。这是应用 Modin 的绝佳机会，因为我们重复执行了很多简单操作。
 
 这次，Pandas 执行* .fillna()* 用了 1.8 秒，而 Modin 只用了 0.21 秒，实现了 8.57 倍的加速！
 

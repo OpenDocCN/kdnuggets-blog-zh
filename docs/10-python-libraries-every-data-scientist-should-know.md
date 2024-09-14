@@ -1,42 +1,42 @@
-# 每个数据科学家都应该知道的10个Python库
+# 每个数据科学家都应该知道的 10 个 Python 库
 
-> 原文：[https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know](https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know)
+> 原文：[`www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know`](https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know)
 
-![python-libs-fimg](../Images/10e6881683f95a8507ae28d86040e4b9.png)
+![python-libs-fimg](img/10e6881683f95a8507ae28d86040e4b9.png)
 
 图片由作者提供
 
-如果你想在数据领域发展，你可能知道Python是数据科学的首选语言。除了易于学习，Python还拥有丰富的库，可以用几行代码完成任何数据科学任务。
+如果你想在数据领域发展，你可能知道 Python 是数据科学的首选语言。除了易于学习，Python 还拥有丰富的库，可以用几行代码完成任何数据科学任务。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-所以无论你是刚开始成为数据科学家，还是希望转行数据领域，学习使用这些库都将非常有帮助。在这篇文章中，我们将探讨一些数据科学必知的Python库。
+所以无论你是刚开始成为数据科学家，还是希望转行数据领域，学习使用这些库都将非常有帮助。在这篇文章中，我们将探讨一些数据科学必知的 Python 库。
 
-我们特别关注用于数据分析和可视化的Python库、网页抓取、API的使用、机器学习等。让我们开始吧。
+我们特别关注用于数据分析和可视化的 Python 库、网页抓取、API 的使用、机器学习等。让我们开始吧。
 
-![py-ds-libraries](../Images/482a1472b6fea19a62d7f52c2027b307.png)
+![py-ds-libraries](img/482a1472b6fea19a62d7f52c2027b307.png)
 
-Python数据科学库 | 图片由作者提供
+Python 数据科学库 | 图片由作者提供
 
 ## 1\. Pandas
 
-[Pandas](https://pandas.pydata.org/)是你在进行数据分析时首先接触的库之一。Series和dataframes，这两个pandas的关键数据结构，简化了操作结构化数据的过程。
+[Pandas](https://pandas.pydata.org/)是你在进行数据分析时首先接触的库之一。Series 和 dataframes，这两个 pandas 的关键数据结构，简化了操作结构化数据的过程。
 
-你可以使用pandas进行数据清理、转换、合并和连接，因此它对数据预处理和分析都很有帮助。
+你可以使用 pandas 进行数据清理、转换、合并和连接，因此它对数据预处理和分析都很有帮助。
 
-让我们来了解一下pandas的关键特性：
+让我们来了解一下 pandas 的关键特性：
 
-+   Pandas提供了两种主要的数据结构：Series（单维）和DataFrame（二维），它们允许轻松操作结构化数据。
++   Pandas 提供了两种主要的数据结构：Series（单维）和 DataFrame（二维），它们允许轻松操作结构化数据。
 
 +   处理缺失数据、过滤数据以及执行各种操作以清理和预处理数据集的函数和方法
 
@@ -44,11 +44,11 @@ Python数据科学库 | 图片由作者提供
 
 +   专门处理时间序列数据的函数，使处理时间数据更加容易
 
-这门来自Kaggle的[短课程](https://www.kaggle.com/learn/pandas)将帮助你开始使用pandas进行数据分析。
+这门来自 Kaggle 的[短课程](https://www.kaggle.com/learn/pandas)将帮助你开始使用 pandas 进行数据分析。
 
 ## 2\. Matplotlib
 
-你必须超越分析，进行数据可视化才能理解数据。[Matplotlib](https://matplotlib.org/)是你在转向其他库如Seaborn、Plotly等之前接触的第一个数据可视化库。
+你必须超越分析，进行数据可视化才能理解数据。[Matplotlib](https://matplotlib.org/)是你在转向其他库如 Seaborn、Plotly 等之前接触的第一个数据可视化库。
 
 它是可自定义的（尽管需要一些努力），适用于从简单的折线图到更复杂的可视化的各种绘图任务。一些功能包括：
 
@@ -104,23 +104,23 @@ Kaggle 上的[数据可视化微课程](https://www.kaggle.com/learn/data-visual
 
 ## 6\. Beautiful Soup
 
-网络爬虫是数据科学家的必备技能，[Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/)是所有网络爬虫相关操作的首选库。获取数据后，可以使用Beautiful Soup来导航和搜索解析树，轻松定位和提取所需的信息。
+网络爬虫是数据科学家的必备技能，[Beautiful Soup](https://beautiful-soup-4.readthedocs.io/en/latest/)是所有网络爬虫相关操作的首选库。获取数据后，可以使用 Beautiful Soup 来导航和搜索解析树，轻松定位和提取所需的信息。
 
-因此，Beautiful Soup通常与Requests库一起使用来获取和解析网页。你可以：
+因此，Beautiful Soup 通常与 Requests 库一起使用来获取和解析网页。你可以：
 
-+   解析HTML文档以查找特定信息
++   解析 HTML 文档以查找特定信息
 
-+   使用Python风格的惯用语在解析树中导航和搜索，以提取特定数据
++   使用 Python 风格的惯用语在解析树中导航和搜索，以提取特定数据
 
 +   查找和修改文档中的标签和属性
 
-[掌握BeautifulSoup的网络爬虫](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)是学习Beautiful Soup的全面指南。
+[掌握 BeautifulSoup 的网络爬虫](https://www.kdnuggets.com/mastering-web-scraping-with-beautifulsoup)是学习 Beautiful Soup 的全面指南。
 
 ## 7\. Scikit-Learn
 
 [Scikit-Learn](https://scikit-learn.org/)是一个机器学习库，提供了用于分类、回归、聚类和降维的现成算法实现。它还包括模型选择、预处理和评估的模块，使其成为构建和评估机器学习模型的实用工具。
 
-Scikit-Learn库还具有专门的模块用于：
+Scikit-Learn 库还具有专门的模块用于：
 
 +   数据预处理，例如缩放、标准化和编码类别特征
 
@@ -128,19 +128,19 @@ Scikit-Learn库还具有专门的模块用于：
 
 +   模型评估
 
-[使用Python和Scikit-Learn进行机器学习 - 完整课程](https://www.youtube.com/watch?v=hDKCxebp88A)是一个学习使用Scikit-Learn构建机器学习模型的好资源。
+[使用 Python 和 Scikit-Learn 进行机器学习 - 完整课程](https://www.youtube.com/watch?v=hDKCxebp88A)是一个学习使用 Scikit-Learn 构建机器学习模型的好资源。
 
 ## 8\. Statsmodels
 
-[Statsmodels](https://www.statsmodels.org/)是一个专注于统计建模的库。它提供了一系列用于估计统计模型、执行假设检验和数据探索的工具。如果你想探索计量经济学和其他需要严谨统计分析的领域，Statsmodels特别有用。
+[Statsmodels](https://www.statsmodels.org/)是一个专注于统计建模的库。它提供了一系列用于估计统计模型、执行假设检验和数据探索的工具。如果你想探索计量经济学和其他需要严谨统计分析的领域，Statsmodels 特别有用。
 
-你可以使用statsmodels进行估计、统计测试等。Statsmodels提供了以下功能：
+你可以使用 statsmodels 进行估计、统计测试等。Statsmodels 提供了以下功能：
 
 +   用于总结和探索数据集以获得建模前的见解的函数
 
 +   不同类型的统计模型，包括线性回归、广义线性模型和时间序列分析
 
-+   一系列统计测试，包括t检验、卡方检验和非参数检验
++   一系列统计测试，包括 t 检验、卡方检验和非参数检验
 
 +   用于诊断和验证模型的工具，包括残差分析和拟合优度测试
 
@@ -184,9 +184,9 @@ XGBoost 的一些特性包括：
 
 +   [每个数据工程师都应该知道的 7 个 Python 库](https://www.kdnuggets.com/7-python-libraries-every-data-engineer-should-know)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [KDnuggets 新闻，5月25日：每个数据科学家都应该了解的 6 种 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个数据科学家都应该了解的 6 种 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
 
 +   [每个数据科学家都应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
 

@@ -1,8 +1,8 @@
 # Scikit Learn 简介：Python 机器学习的黄金标准
 
-> 原文：[https://www.kdnuggets.com/2019/02/introduction-scikit-learn-gold-standard-python-machine-learning.html](https://www.kdnuggets.com/2019/02/introduction-scikit-learn-gold-standard-python-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2019/02/introduction-scikit-learn-gold-standard-python-machine-learning.html`](https://www.kdnuggets.com/2019/02/introduction-scikit-learn-gold-standard-python-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![图](../Images/b4c2ace28629c74c6bce82ecc2623ca6.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![图](img/b4c2ace28629c74c6bce82ecc2623ca6.png)
 
 对 Scikit Learn 的众多机器学习模型的比较
 
@@ -62,7 +62,7 @@ Scikit 的强大算法集合包括：
 
 Scikit Learn 还允许我们使用 graphviz 库来可视化我们的树。它提供了一些选项，有助于可视化决策节点和模型学习到的分裂，这对理解其工作原理非常有用。下面我们将根据特征名称为节点着色，并显示每个节点的类别和特征信息。
 
-![](../Images/ecaf20a53098ea1fa03240e432bd03e3.png)
+![](img/ecaf20a53098ea1fa03240e432bd03e3.png)
 
 此外，Scikit Learn 的文档非常精美！每个[算法参数](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier)都解释得很清楚，命名也很直观。此外，他们还提供了[带有示例代码的教程](https://scikit-learn.org/stable/modules/tree.html)，介绍如何训练和应用模型、其优缺点以及实际应用技巧！
 
@@ -76,21 +76,21 @@ Scikit Learn 还允许我们使用 graphviz 库来可视化我们的树。它提
 
 **相关：**
 
-+   [Python 中的 5 种快速且简单的数据可视化（带代码）](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   Python 中的 5 种快速且简单的数据可视化（带代码）
 
-+   [数据科学家需要了解的 5 种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家需要了解的 5 种聚类算法
 
-+   [为你的回归问题选择最佳机器学习算法](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
++   为你的回归问题选择最佳机器学习算法
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

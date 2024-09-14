@@ -1,6 +1,6 @@
 # 模型：从实验室到工厂
 
-> 原文：[https://www.kdnuggets.com/2017/04/models-from-lab-factory.html](https://www.kdnuggets.com/2017/04/models-from-lab-factory.html)
+> 原文：[`www.kdnuggets.com/2017/04/models-from-lab-factory.html`](https://www.kdnuggets.com/2017/04/models-from-lab-factory.html)
 
 **作者：Mauricio Vacas，硅谷数据科学。**
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 在没有严格流程的情况下部署模型是有后果的——请看一下金融服务中的以下示例。
 
-由于其高频交易算法，[Knight 是美国股票市场上最大的交易商](https://en.wikipedia.org/wiki/Knight_Capital_Group)，在纽约证券交易所的市场份额为17.3%，在纳斯达克的市场份额为16.9%。由于[2012年的计算机交易“故障”](https://www.wsj.com/news/articles/SB10000872396390443866404577564772083961412)，公司在不到一小时的时间内损失了4.4亿美元。该公司在年底被收购。这说明了将未经充分测试的模型部署到生产环境中的风险以及可能出现的错误的影响。
+由于其高频交易算法，[Knight 是美国股票市场上最大的交易商](https://en.wikipedia.org/wiki/Knight_Capital_Group)，在纽约证券交易所的市场份额为 17.3%，在纳斯达克的市场份额为 16.9%。由于[2012 年的计算机交易“故障”](https://www.wsj.com/news/articles/SB10000872396390443866404577564772083961412)，公司在不到一小时的时间内损失了 4.4 亿美元。该公司在年底被收购。这说明了将未经充分测试的模型部署到生产环境中的风险以及可能出现的错误的影响。
 
 在这篇文章中，我们将探讨通过模型管理和部署过程来避免这些情况的技术。以下是我们在部署模型到生产环境时需要解决的一些问题：
 
@@ -34,11 +34,11 @@
 
 将数据科学开发和部署视为更大模型生命周期工作流中的两个独立过程是有帮助的。下面的示例图说明了这个过程是什么样的。
 
-![数据科学开发和部署图像](../Images/ff7c1c4e644f9ccb36b39b12583e6f9e.png)
+![数据科学开发和部署图像](img/ff7c1c4e644f9ccb36b39b12583e6f9e.png)
 
 1.  我们有终端用户与应用程序交互，生成的数据会存储在应用程序的在线生产数据存储库中。
 
-1.  这些数据随后会被送入离线历史数据存储库（如Hadoop或S3），以便数据科学家可以分析这些数据，了解用户如何与应用程序互动。例如，它还可以用于构建一个模型，将用户根据他们在应用程序中的行为进行聚类，以便我们可以利用这些信息进行市场推广。
+1.  这些数据随后会被送入离线历史数据存储库（如 Hadoop 或 S3），以便数据科学家可以分析这些数据，了解用户如何与应用程序互动。例如，它还可以用于构建一个模型，将用户根据他们在应用程序中的行为进行聚类，以便我们可以利用这些信息进行市场推广。
 
 1.  一旦模型开发完成，我们需要将其注册到模型注册库中，以便进行治理流程，在该流程中，模型将被审查和批准用于生产，并且可以评估部署的需求。
 
@@ -52,11 +52,11 @@
 
 数据实验室是一个供数据科学家探索的环境，与应用程序的生产关注点分离。我们的最终目标可能是能够利用数据驱动组织内的决策，但在达到这一目标之前，我们需要理解哪些假设对我们的组织有意义并验证其价值。因此，我们主要关注创建一个环境——“实验室”——让数据科学家可以提出问题、构建模型和实验数据。
 
-该过程主要是迭代的，如下图所示，基于[CRISP-DM模型](https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining)。
+该过程主要是迭代的，如下图所示，基于[CRISP-DM 模型](https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining)。
 
-![数据挖掘过程](../Images/ad3ae4e57fbdc42893adcec2bea02edd.png)
+![数据挖掘过程](img/ad3ae4e57fbdc42893adcec2bea02edd.png)
 
-我们不会在这篇文章中深入探讨太多细节，但我们确实有一个教程可以深入了解这个主题。如果你想下载该教程的幻灯片，可以在我们的[Enterprise Data World 2017页面](https://www.svds.com/event/enterprise-data-world-2017/)上进行下载。
+我们不会在这篇文章中深入探讨太多细节，但我们确实有一个教程可以深入了解这个主题。如果你想下载该教程的幻灯片，可以在我们的[Enterprise Data World 2017 页面](https://www.svds.com/event/enterprise-data-world-2017/)上进行下载。
 
 我们在这里关注的是，我们需要一个实验室来支持模型的探索和开发，但当我们需要将该模型部署以自动应用于实时数据、在定义的约束内向适当的用户提供结果并监控过程中的失败或异常时，我们也需要一个工厂。
 
@@ -70,7 +70,7 @@
 
 为了为模型提供结构，我们根据其组件——数据依赖关系、脚本、配置和文档——来定义模型。此外，我们捕获模型及其版本的元数据，以提供额外的业务背景和模型特定信息。通过为模型提供结构，我们可以在模型注册表中保持模型库存，包括不同的模型版本和由执行过程提供的相关结果。下图说明了这一概念。
 
-![模型结构图](../Images/4d3679d6fc962d348023570667a21d60.png)
+![模型结构图](img/4d3679d6fc962d348023570667a21d60.png)
 
 从注册表中，我们可以：
 
@@ -86,7 +86,7 @@
 
 这里是一个矩阵，分解了我们在实际工作中模型的不同元素：
 
-![版本维度表](../Images/adc5b6c025aceee2b594d3a76d46684b.png)
+![版本维度表](img/adc5b6c025aceee2b594d3a76d46684b.png)
 
 注册表需要捕获数据、脚本、训练模型对象和特定模型版本的文档之间的关联，如图所示。
 
@@ -130,22 +130,22 @@
 
 **相关内容:**
 
-+   [Jupyter生态系统导航简短指南](/2017/03/guide-navigating-jupyter-ecosystem.html)
++   Jupyter 生态系统导航简短指南
 
-+   [深度学习入门指南](/2017/03/getting-started-deep-learning.html)
++   深度学习入门指南
 
-+   [开源语音识别工具包](/2017/03/open-source-toolkits-speech-recognition.html)
++   开源语音识别工具包
 
 ### 更多相关内容
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [机器学习模型为何沉默地“消亡”？](https://www.kdnuggets.com/2022/01/machine-learning-models-die-silence.html)
 
-+   [用LIME解释NLP模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
++   [用 LIME 解释 NLP 模型](https://www.kdnuggets.com/2022/01/explain-nlp-models-lime.html)
 
-+   [GPT-4：一体化的8种模型；秘密揭晓](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)
++   [GPT-4：一体化的 8 种模型；秘密揭晓](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)
 
-+   [AI的未来：探索下一代生成模型](https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html)
++   [AI 的未来：探索下一代生成模型](https://www.kdnuggets.com/2023/05/future-ai-exploring-next-generation-generative-models.html)
 
 +   [什么是基础模型及其工作原理？](https://www.kdnuggets.com/2023/05/foundation-models-work.html)

@@ -1,10 +1,10 @@
 # 如何获得数据科学工作：一个极其具体的指南
 
-> 原文：[https://www.kdnuggets.com/2017/03/get-data-science-job-guide.html](https://www.kdnuggets.com/2017/03/get-data-science-job-guide.html)
+> 原文：[`www.kdnuggets.com/2017/03/get-data-science-job-guide.html`](https://www.kdnuggets.com/2017/03/get-data-science-job-guide.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
-![](../Images/ae4f6f038334a3bb03aca88e7b596a83.png)
+![](img/ae4f6f038334a3bb03aca88e7b596a83.png)
 
 #### 1\. 访问[LinkedIn](https://www.linkedin.com/)
 
@@ -24,7 +24,7 @@
 
 +   选择一个技能，并用它来[创建一个小的演示或教程](http://brohrer.github.io/one_step_program_become_data_scientist.html)。不要花费超过十个小时。
 
-+   将你的演示/教程发布到网上。将技能添加到你的LinkedIn个人资料中，并在项目部分添加链接。
++   将你的演示/教程发布到网上。将技能添加到你的 LinkedIn 个人资料中，并在项目部分添加链接。
 
 #### 4\. 面试
 
@@ -44,11 +44,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -64,11 +64,11 @@
 
 **相关：**
 
-+   [分析与数据科学专业人员的职业建议](/2017/02/career-advice-analytics-data-science.html) –
++   分析与数据科学专业人员的职业建议 –
 
-+   [想要一个数据科学职位？](/2017/02/springboard-data-science-job.html)
++   想要一个数据科学职位？
 
-+   [如何获得你的第一份数据科学工作？](/2017/02/how-get-first-job-data-science.html)
++   如何获得你的第一份数据科学工作？
 
 ### 更多相关话题
 
@@ -78,8 +78,8 @@
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

@@ -1,8 +1,8 @@
 # Python 枚举：如何在 Python 中构建枚举
 
-> 原文：[https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)
+> 原文：[`www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python`](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)
 
-![Python 枚举：如何在 Python 中构建枚举](../Images/3e65f6a3b6634eddfaab25f2aaf94ca5.png)
+![Python 枚举：如何在 Python 中构建枚举](img/3e65f6a3b6634eddfaab25f2aaf94ca5.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@
 
 我们将创建一个 `TaskStatus` 枚举，它包含以下四个名称和值：
 
-![Python 枚举：如何在 Python 中构建枚举](../Images/5112ef4e5b244d82b0a35453f1b423d8.png)
+![Python 枚举：如何在 Python 中构建枚举](img/5112ef4e5b244d82b0a35453f1b423d8.png)
 
 图片来源：作者
 
@@ -68,7 +68,7 @@ class TaskStatus(Enum):
     ABANDONED = -1
 ```
 
-我们创建的所有枚举成员都是Enum类的实例。你可以通过调用`isinstance()`函数来验证，如下所示：
+我们创建的所有枚举成员都是 Enum 类的实例。你可以通过调用`isinstance()`函数来验证，如下所示：
 
 ```py
 print(isinstance(TaskStatus.TODO,Enum))
@@ -94,13 +94,13 @@ Output >>>
 
 所有枚举成员都有一个**名称**和一个**值**。这意味着你可以通过它们的名称来访问枚举成员，比如`TaskStatus.TODO`。或者通过值来访问它们，比如`TaskStatus(0)`。
 
-# 使用Python枚举
+# 使用 Python 枚举
 
 现在我们已经创建了一个简单的`TaskStatus`枚举，接下来让我们学习如何执行一些简单的任务，例如对枚举成员进行迭代。
 
 ## 迭代枚举
 
-在Python中，你可以以类似于处理任何可迭代对象的方式来处理枚举。例如，你可以使用`len()`函数来计算枚举成员的数量：
+在 Python 中，你可以以类似于处理任何可迭代对象的方式来处理枚举。例如，你可以使用`len()`函数来计算枚举成员的数量：
 
 ```py
 num_statuses = len(TaskStatus)
@@ -111,7 +111,7 @@ print(num_statuses)
 Output >>> 4
 ```
 
-你也可以像迭代Python的可迭代对象（如列表）一样迭代枚举。在下面的for循环中，我们访问每个枚举成员的名称和值，并将它们打印出来：
+你也可以像迭代 Python 的可迭代对象（如列表）一样迭代枚举。在下面的 for 循环中，我们访问每个枚举成员的名称和值，并将它们打印出来：
 
 ```py
 for status in TaskStatus:
@@ -141,7 +141,7 @@ ABANDONED -1
 
 +   ABANDONED: -1
 
-但你也可以使用默认的排序方式，通过使用`auto()`辅助函数。当你这样做时，如果枚举中有‘n’个成员，分配的值是1到n。但你可以传入一个起始值，比如k，`auto(k)`用于使枚举从k开始并递增到k + n。
+但你也可以使用默认的排序方式，通过使用`auto()`辅助函数。当你这样做时，如果枚举中有‘n’个成员，分配的值是 1 到 n。但你可以传入一个起始值，比如 k，`auto(k)`用于使枚举从 k 开始并递增到 k + n。
 
 让我们按如下方式修改`TaskStatus`枚举：
 
@@ -161,7 +161,7 @@ class TaskStatus(Enum):
 print(list(TaskStatus))
 ```
 
-我们看到这些值是1到4，正如预期的那样：
+我们看到这些值是 1 到 4，正如预期的那样：
 
 ```py
 Output >>>
@@ -169,9 +169,9 @@ Output >>>
 [<TaskStatus.TODO: 1>, <TaskStatus.IN_PROGRESS: 2>, <TaskStatus.DONE: 3>, <TaskStatus.ABANDONED: 4>]
 ```
 
-# 基于TaskStatus枚举——一个更有用的示例
+# 基于 TaskStatus 枚举——一个更有用的示例
 
-现在，让我们在已有的`TaskStatus`枚举基础上继续构建。在你的工作目录中创建一个task.py文件，并包含以下版本的枚举：
+现在，让我们在已有的`TaskStatus`枚举基础上继续构建。在你的工作目录中创建一个 task.py 文件，并包含以下版本的枚举：
 
 ```py
 # task.py
@@ -187,7 +187,7 @@ class TaskState(Enum):
 
 假设我们有一个任务，包含一个名称和一个当前状态。有效的状态转换如下所示：
 
-![Python Enum: How To Build Enumerations in Python](../Images/0a6c001697289295fc82d0f80e750f30.png)
+![Python Enum: How To Build Enumerations in Python](img/0a6c001697289295fc82d0f80e750f30.png)
 
 作者提供的图片
 
@@ -215,9 +215,9 @@ class Task:
             raise ValueError(f"Invalid state transition from {self.state.name} to {new_state.name}")
 ```
 
-我们有一个`update_status()`方法，用于检查在当前状态下过渡到新状态是否有效。对于无效的过渡，会引发ValueError异常。
+我们有一个`update_status()`方法，用于检查在当前状态下过渡到新状态是否有效。对于无效的过渡，会引发 ValueError 异常。
 
-这是`Task`类的一个实例：状态为TODO的“写报告”任务：
+这是`Task`类的一个实例：状态为 TODO 的“写报告”任务：
 
 ```py
 # Create a new task with the initial state "To Do"
@@ -234,7 +234,7 @@ Task Name: Write Report
 Current State: TODO
 ```
 
-将任务的状态更新为IN_PROGRESS应该能成功，因为这是一个有效的状态转换：
+将任务的状态更新为 IN_PROGRESS 应该能成功，因为这是一个有效的状态转换：
 
 ```py
 # Update the task state to "In Progress"
@@ -246,7 +246,7 @@ print(f"Updated State: {task.state.name}")
 Output >>> Updated State: IN_PROGRESS
 ```
 
-一旦任务完成，我们可以将其状态更新为DONE：
+一旦任务完成，我们可以将其状态更新为 DONE：
 
 ```py
 # Update the task state to "DONE"
@@ -258,14 +258,14 @@ print(f"Updated State: {task.state.name}")
 Output >>> Updated State: DONE
 ```
 
-但如果你尝试将状态更新为无效的状态，比如尝试将DONE更新为TODO，你会遇到ValueError异常：
+但如果你尝试将状态更新为无效的状态，比如尝试将 DONE 更新为 TODO，你会遇到 ValueError 异常：
 
 ```py
 # Attempt to update the task state to an invalid state
 task.update_state(TaskState.TODO)
 ```
 
-这是因为从DONE到TODO的无效状态转换引发的ValueError的追溯：
+这是因为从 DONE 到 TODO 的无效状态转换引发的 ValueError 的追溯：
 
 ```py
 Traceback (most recent call last):
@@ -278,7 +278,7 @@ ValueError: Invalid state transition from DONE to TODO</module>
 
 # 总结
 
-在本教程中，我们学习了如何通过编写一个简单的TaskStatus枚举来构建枚举。我们学习了如何访问枚举成员并对其进行迭代。
+在本教程中，我们学习了如何通过编写一个简单的 TaskStatus 枚举来构建枚举。我们学习了如何访问枚举成员并对其进行迭代。
 
 此外，我们还学习了如果你选择使用 `auto()` 辅助函数来设置枚举成员的值，默认排序是如何工作的。然后，我们尝试在一个更有用的示例中使用 TaskStatus 枚举。
 

@@ -1,8 +1,8 @@
 # 如何使用 Apache Kafka 构建可扩展的数据架构
 
-> 原文：[https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)
+> 原文：[`www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html`](https://www.kdnuggets.com/2023/04/build-scalable-data-architecture-apache-kafka.html)
 
-![如何使用 Apache Kafka 构建可扩展的数据架构](../Images/9c5d0e1e11b48a64ac229f965a43009f.png)
+![如何使用 Apache Kafka 构建可扩展的数据架构](img/9c5d0e1e11b48a64ac229f965a43009f.png)
 
 图片由作者提供
 
@@ -12,23 +12,23 @@ Apache Kafka 是一个分布式消息传递系统，采用发布-订阅模型。
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 消息传递系统使多个应用程序可以相互发送或接收数据，而无需担心数据传输和共享问题。**点对点**和**发布-订阅**是两种广泛使用的消息传递系统。在点对点系统中，发送方将数据推送到队列中，接收方从队列中弹出数据，就像一个标准的队列系统，遵循 FIFO（先进先出）原则。此外，数据在被读取后会被删除，并且每次只允许一个接收方。接收方读取消息没有时间依赖。
 
-![如何使用 Apache Kafka 构建可扩展的数据架构](../Images/efa5d4c06f76f04465e52ebcdb70dc19.png)
+![如何使用 Apache Kafka 构建可扩展的数据架构](img/efa5d4c06f76f04465e52ebcdb70dc19.png)
 
 **图 1** 点对点消息系统 | 图片由作者提供
 
 在发布-订阅模型中，发送方称为发布者，接收方称为订阅者。在这种模型下，多个发送方和接收方可以同时读取或写入数据。但是，它存在时间依赖性。消费者必须在一定时间内消费消息，因为超过该时间消息将被删除，即使未被读取。根据用户的配置，这个时间限制可以是一天、一周或一个月。
 
-![如何使用 Apache Kafka 构建可扩展的数据架构](../Images/a47141ce8f4609d6c2550993775a5f18.png)
+![如何使用 Apache Kafka 构建可扩展的数据架构](img/a47141ce8f4609d6c2550993775a5f18.png)
 
 **图 2** 发布-订阅消息系统 | 图片由作者提供
 
@@ -46,73 +46,73 @@ Kafka 架构由几个关键组件组成：
 
 1.  消费者
 
-1.  Kafka集群
+1.  Kafka 集群
 
 1.  Zookeeper
 
-![如何构建一个可扩展的数据架构与Apache Kafka](../Images/883018809ecf5ef892050f17df50b2d0.png)
+![如何构建一个可扩展的数据架构与 Apache Kafka](img/883018809ecf5ef892050f17df50b2d0.png)
 
-**图3** Kafka架构 | 图片来源：[ibm-cloud-architecture](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/)
+**图 3** Kafka 架构 | 图片来源：[ibm-cloud-architecture](https://ibm-cloud-architecture.github.io/refarch-eda/technology/kafka-overview/)
 
 让我们简要了解每个组件。
 
-Kafka将消息存储在不同的**主题**中。主题是包含特定类别消息的组。它类似于数据库中的表。一个主题可以通过其名称唯一标识。我们不能创建两个名称相同的主题。
+Kafka 将消息存储在不同的**主题**中。主题是包含特定类别消息的组。它类似于数据库中的表。一个主题可以通过其名称唯一标识。我们不能创建两个名称相同的主题。
 
 主题进一步被分类为**分区**。这些分区的每条记录都与一个称为**偏移量**的唯一标识符相关联，这个标识符表示记录在该分区中的位置。
 
-除此之外，系统中还有生产者和消费者。生产者使用生产API在主题中写入或发布数据。这些生产者可以在主题或分区级别写入数据。
+除此之外，系统中还有生产者和消费者。生产者使用生产 API 在主题中写入或发布数据。这些生产者可以在主题或分区级别写入数据。
 
-消费者使用消费者API从主题中读取或消费数据。他们也可以在主题或分区级别读取数据。执行类似任务的消费者将组成一个称为**消费者组**的群体。
+消费者使用消费者 API 从主题中读取或消费数据。他们也可以在主题或分区级别读取数据。执行类似任务的消费者将组成一个称为**消费者组**的群体。
 
-还有其他系统，如**代理**和**Zookeeper**，它们在Kafka服务器的后台运行。代理是维护和记录已发布消息的软件。它还负责使用偏移量将正确的消息传递给正确的消费者，并按照正确的顺序传递。集体相互通信的代理组可以称为**Kafka集群**。代理可以动态添加或从Kafka集群中移除，而不会导致系统停机。Kafka集群中的一个代理被称为**控制器**。它管理集群内的状态和副本，并执行管理任务。
+还有其他系统，如**代理**和**Zookeeper**，它们在 Kafka 服务器的后台运行。代理是维护和记录已发布消息的软件。它还负责使用偏移量将正确的消息传递给正确的消费者，并按照正确的顺序传递。集体相互通信的代理组可以称为**Kafka 集群**。代理可以动态添加或从 Kafka 集群中移除，而不会导致系统停机。Kafka 集群中的一个代理被称为**控制器**。它管理集群内的状态和副本，并执行管理任务。
 
-另一方面，Zookeeper负责维护Kafka集群的健康状态，并与集群中的每个代理协调。它以键值对的形式维护每个集群的元数据。
+另一方面，Zookeeper 负责维护 Kafka 集群的健康状态，并与集群中的每个代理协调。它以键值对的形式维护每个集群的元数据。
 
-本教程主要集中在Apache Kafka的实际实现上。如果你想了解更多关于其架构的内容，可以阅读[这篇](https://www.upsolver.com/blog/apache-kafka-architecture-what-you-need-to-know#:~:text=Its%20core%20architectural%20concept%20is,maintain%20a%20consistent%20system%20state.)由Upsolver撰写的文章。
+本教程主要集中在 Apache Kafka 的实际实现上。如果你想了解更多关于其架构的内容，可以阅读[这篇](https://www.upsolver.com/blog/apache-kafka-architecture-what-you-need-to-know#:~:text=Its%20core%20architectural%20concept%20is,maintain%20a%20consistent%20system%20state.)由 Upsolver 撰写的文章。
 
 # 出租车预订应用程序：一个实际的用例
 
-考虑一个像Uber这样的出租车预订服务的用例。这个应用程序使用Apache Kafka通过各种服务（如事务、电子邮件、分析等）发送和接收消息。
+考虑一个像 Uber 这样的出租车预订服务的用例。这个应用程序使用 Apache Kafka 通过各种服务（如事务、电子邮件、分析等）发送和接收消息。
 
-![如何构建一个可扩展的数据架构与Apache Kafka](../Images/664bb35c487cf63d41198f8b0d60b017.png)
+![如何构建一个可扩展的数据架构与 Apache Kafka](img/664bb35c487cf63d41198f8b0d60b017.png)
 
-**图4** 出租车应用程序的架构 | 图片来源：作者
+**图 4** 出租车应用程序的架构 | 图片来源：作者
 
-架构包括几个服务。`Rides`服务接收来自客户的乘车请求，并将乘车详细信息写入Kafka消息系统。
+架构包括几个服务。`Rides`服务接收来自客户的乘车请求，并将乘车详细信息写入 Kafka 消息系统。
 
 然后这些订单详细信息被`Transaction`服务读取，该服务确认订单和支付状态。确认该乘车后，`Transaction`服务将确认的乘车再次写入消息系统，并附加一些额外的详细信息。最后，确认的乘车详细信息会被其他服务（如电子邮件或数据分析）读取，以向客户发送确认邮件并进行一些分析。
 
-我们可以以非常高的吞吐量和最小的延迟实时执行所有这些过程。此外，由于Apache Kafka的水平扩展能力，我们可以扩展此应用程序以处理数百万用户。
+我们可以以非常高的吞吐量和最小的延迟实时执行所有这些过程。此外，由于 Apache Kafka 的水平扩展能力，我们可以扩展此应用程序以处理数百万用户。
 
 # 上述用例的实际实现
 
-本节包含了在我们的应用程序中实现Kafka消息系统的快速教程。它包括下载Kafka、配置它以及创建生产者-消费者函数的步骤。
+本节包含了在我们的应用程序中实现 Kafka 消息系统的快速教程。它包括下载 Kafka、配置它以及创建生产者-消费者函数的步骤。
 
-**注意：** 本教程基于Python编程语言，并使用Windows机器。
+**注意：** 本教程基于 Python 编程语言，并使用 Windows 机器。
 
-## Apache Kafka下载步骤
+## Apache Kafka 下载步骤
 
-从[该链接](https://kafka.apache.org/downloads)下载最新版本的Apache Kafka。Kafka基于JVM语言，因此必须在系统中安装Java 7或更高版本。
+从[该链接](https://kafka.apache.org/downloads)下载最新版本的 Apache Kafka。Kafka 基于 JVM 语言，因此必须在系统中安装 Java 7 或更高版本。
 
-1.  从计算机（C:）驱动器中提取下载的zip文件，并将文件夹重命名为`/apache-kafka`。
+1.  从计算机（C:）驱动器中提取下载的 zip 文件，并将文件夹重命名为`/apache-kafka`。
 
-1.  上级目录包含两个子目录，`/bin`和`/config`，其中包含Zookeeper和Kafka服务器的可执行文件和配置文件。
+1.  上级目录包含两个子目录，`/bin`和`/config`，其中包含 Zookeeper 和 Kafka 服务器的可执行文件和配置文件。
 
 ## 配置步骤
 
-首先，我们需要为Kafka和Zookeeper服务器创建日志目录。这些目录将存储这些集群的所有元数据以及主题和分区的消息。
+首先，我们需要为 Kafka 和 Zookeeper 服务器创建日志目录。这些目录将存储这些集群的所有元数据以及主题和分区的消息。
 
 **注意：** 默认情况下，这些日志目录会创建在`/tmp`目录中，这是一个易失性目录，当系统关闭或重新启动时，所有数据都会消失。我们需要为日志目录设置永久路径以解决此问题。让我们看看如何操作。
 
-导航到`apache-kafka` >> `config`并打开`server.properties`文件。在这里，你可以配置Kafka的许多属性，例如日志目录路径、日志保留时间、分区数量等。
+导航到`apache-kafka` >> `config`并打开`server.properties`文件。在这里，你可以配置 Kafka 的许多属性，例如日志目录路径、日志保留时间、分区数量等。
 
-在`server.properties`文件中，我们需要将日志目录文件的路径从临时的`/tmp`目录更改为永久目录。日志目录包含Kafka服务器中生成或写入的数据。要更改路径，请将`log.dirs`变量从`/tmp/kafka-logs`更新为`c:/apache-kafka/kafka-logs`。这将使日志永久存储。
+在`server.properties`文件中，我们需要将日志目录文件的路径从临时的`/tmp`目录更改为永久目录。日志目录包含 Kafka 服务器中生成或写入的数据。要更改路径，请将`log.dirs`变量从`/tmp/kafka-logs`更新为`c:/apache-kafka/kafka-logs`。这将使日志永久存储。
 
 ```py
 log.dirs=c:/apache-kafka/kafka-logs
 ```
 
-Zookeeper服务器还包含一些日志文件，用于存储Kafka服务器的元数据。要更改路径，请重复上述步骤，即打开`zookeeper.properties`文件并按如下方式替换路径。
+Zookeeper 服务器还包含一些日志文件，用于存储 Kafka 服务器的元数据。要更改路径，请重复上述步骤，即打开`zookeeper.properties`文件并按如下方式替换路径。
 
 ```py
 dataDir=c:/apache-kafka/zookeeper-logs
@@ -128,7 +128,7 @@ dataDir=c:/apache-kafka/zookeeper-logs
 $ .\bin\windows\zookeeper-server-start.bat .\config\zookeeper.properties
 ```
 
-![如何使用 Apache Kafka 构建可扩展的数据架构](../Images/b6dc180652bec959922eb6b09f7361dd.png)
+![如何使用 Apache Kafka 构建可扩展的数据架构](img/b6dc180652bec959922eb6b09f7361dd.png)
 
 作者提供的图片
 
@@ -298,17 +298,17 @@ $ python analysis.py
 $ python ride.py
 ```
 
-![如何使用Apache Kafka构建可扩展的数据架构](../Images/aa6353d2ed294dbf68800c4b306dd089.png)
+![如何使用 Apache Kafka 构建可扩展的数据架构](img/aa6353d2ed294dbf68800c4b306dd089.png)
 
 作者提供的图片
 
-当行程详情被推送到服务器时，您可以同时从所有文件中接收输出。您还可以通过删除`rides.py`文件中的延迟函数来提高处理速度。`rides.py`文件将数据推送到kafka服务器，其他三个文件则同时从kafka服务器读取数据并相应地执行功能。
+当行程详情被推送到服务器时，您可以同时从所有文件中接收输出。您还可以通过删除`rides.py`文件中的延迟函数来提高处理速度。`rides.py`文件将数据推送到 kafka 服务器，其他三个文件则同时从 kafka 服务器读取数据并相应地执行功能。
 
-希望您对Apache Kafka及其实现有一个基本的了解。
+希望您对 Apache Kafka 及其实现有一个基本的了解。
 
 # 结论
 
-在这篇文章中，我们了解了Apache Kafka、它的工作原理以及如何使用出租车预订应用的案例来实际应用它。设计一个可扩展的Kafka管道需要精心规划和实施。您可以增加代理和分区的数量，以使这些应用程序更具可扩展性。每个分区是独立处理的，以便将负载分配到各个分区。同时，您可以通过设置缓存大小、缓冲区大小或线程数量来优化kafka配置。
+在这篇文章中，我们了解了 Apache Kafka、它的工作原理以及如何使用出租车预订应用的案例来实际应用它。设计一个可扩展的 Kafka 管道需要精心规划和实施。您可以增加代理和分区的数量，以使这些应用程序更具可扩展性。每个分区是独立处理的，以便将负载分配到各个分区。同时，您可以通过设置缓存大小、缓冲区大小或线程数量来优化 kafka 配置。
 
 [GitHub](https://github.com/aryan0141/apache-kafka-tutorial/tree/master) 链接，获取文章中使用的完整代码。
 
@@ -318,13 +318,13 @@ $ python ride.py
 
 ### 更多相关主题
 
-+   [使用Kafka和Risingwave构建F1流数据管道](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)
++   [使用 Kafka 和 Risingwave 构建 F1 流数据管道](https://www.kdnuggets.com/building-a-formula-1-streaming-data-pipeline-with-kafka-and-risingwave)
 
-+   [使用SQL + Python构建可扩展的ETL](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
++   [使用 SQL + Python 构建可扩展的 ETL](https://www.kdnuggets.com/2022/04/building-scalable-etl-sql-python.html)
 
 +   [广义和可扩展的最优稀疏决策树（GOSDT）](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)
 
-+   [KDnuggets™新闻 22:n07, 2月16日：如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™新闻 22:n07, 2 月 16 日：如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
 
 +   [数据网格及其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 

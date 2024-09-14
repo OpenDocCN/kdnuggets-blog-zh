@@ -1,22 +1,22 @@
 # 探索小数据场景下的迁移学习潜力
 
-> 原文：[https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)
+> 原文：[`www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios`](https://www.kdnuggets.com/exploring-the-potential-of-transfer-learning-in-small-data-scenarios)
 
-![探索小数据场景下的迁移学习潜力](../Images/83b8a5c4a5dfc4b464030e70d478d4ee.png)
+![探索小数据场景下的迁移学习潜力](img/83b8a5c4a5dfc4b464030e70d478d4ee.png)
 
 编辑提供的图像 | 迁移学习流程来自 [Skyengine.ai](https://skyengine.ai/se/skyengine-blog/128-what-is-transfer-learning)
 
-说到 [机器学习](/5-cheap-books-to-master-machine-learning)，在数据需求旺盛的情况下，并不是每个人都有机会随时访问大量数据集来进行学习——这时 [迁移学习](/2022/01/transfer-learning.html) 就会派上用场，尤其是在你面临有限数据或获取更多数据成本过高的情况下。
+说到 机器学习，在数据需求旺盛的情况下，并不是每个人都有机会随时访问大量数据集来进行学习——这时 迁移学习 就会派上用场，尤其是在你面临有限数据或获取更多数据成本过高的情况下。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -34,7 +34,7 @@
 
 它积极加速训练过程，同时显著减少所需的数据量。在小数据场景下，这尤其有利，因为它绕过了实现高模型准确度所需的大量数据集的传统需求。
 
-利用预训练模型可以让从业者绕过许多[与模型开发常见相关的初始障碍](/2022/09/comet-tackle-3-common-machine-learning-challenges.html)，如特征选择和模型架构设计。
+利用预训练模型可以让从业者绕过许多与模型开发常见相关的初始障碍，如特征选择和模型架构设计。
 
 # 预训练模型是迁移学习的支柱
 
@@ -42,31 +42,31 @@
 
 [预训练模型](https://blogs.nvidia.com/blog/what-is-a-pretrained-ai-model/)的多功能性令人惊叹，应用范围从图像和语音识别到自然语言处理。采用这些模型来处理新任务可以大幅缩短开发时间和所需资源。
 
-例如，[在ImageNet数据库上训练的模型](https://www.fast.ai/posts/2018-08-10-fastai-diu-imagenet.html)，该数据库包含数百万个标记图像，跨越数千个类别，为各种图像识别任务提供了丰富的特征集。
+例如，[在 ImageNet 数据库上训练的模型](https://www.fast.ai/posts/2018-08-10-fastai-diu-imagenet.html)，该数据库包含数百万个标记图像，跨越数千个类别，为各种图像识别任务提供了丰富的特征集。
 
 这些模型对新、小数据集的适应性突显了它们的价值，使得在没有大量计算资源的情况下提取复杂特征成为可能。
 
 # 小数据环境中的潜在挑战
 
-在有限数据的情况下工作面临独特的挑战——[主要问题是过拟合](/2022/08/avoid-overfitting.html)，模型过于充分地学习了训练数据，包括其噪声和异常值，导致在未见数据上的表现较差。
+在有限数据的情况下工作面临独特的挑战——主要问题是过拟合，模型过于充分地学习了训练数据，包括其噪声和异常值，导致在未见数据上的表现较差。
 
 迁移学习通过使用在多样化数据集上预训练的模型来降低这种风险，从而增强了泛化能力。
 
 然而，迁移学习的有效性依赖于预训练模型与新任务的相关性。如果涉及的任务差异过大，那么迁移学习的好处可能无法充分显现。
 
-此外，[用小数据集对预训练模型进行微调](/2022/02/5-ways-apply-ai-small-data-sets.html)需要小心调整参数，以避免丧失模型已经获得的宝贵知识。
+此外，用小数据集对预训练模型进行微调需要小心调整参数，以避免丧失模型已经获得的宝贵知识。
 
-除了这些障碍外，数据在压缩过程中也可能受到威胁。这甚至适用于一些非常简单的操作，比如你想要[压缩PDF文件](https://xodo.com/compress-pdf)，但幸运的是，这些情况可以通过准确的调整来避免。
+除了这些障碍外，数据在压缩过程中也可能受到威胁。这甚至适用于一些非常简单的操作，比如你想要[压缩 PDF 文件](https://xodo.com/compress-pdf)，但幸运的是，这些情况可以通过准确的调整来避免。
 
 在机器学习的背景下，即使在进行存储或传输压缩时，[确保数据的完整性和质量](https://www.ibm.com/blog/6-pillars-of-data-quality-and-how-to-improve-your-data/)对于开发可靠模型至关重要。
 
-转移学习依赖于预训练模型，进一步突出了[数据资源管理](/data-management-principles-for-data-science)的必要性，以防信息丢失，确保每一条数据在训练和应用阶段都得到充分利用。
+转移学习依赖于预训练模型，进一步突出了数据资源管理的必要性，以防信息丢失，确保每一条数据在训练和应用阶段都得到充分利用。
 
 保持已学特征与适应新任务之间的平衡是一个微妙的过程，需要对模型和手头数据有深入的理解。
 
 # 转移学习的未来方向
 
-[转移学习的前景不断扩展](/2022/01/transfer-learning-image-recognition-natural-language-processing.html)，研究不断突破可能性的界限。
+转移学习的前景不断扩展，研究不断突破可能性的界限。
 
 一个令人兴奋的方向是开发[更通用的模型](https://www.sciencedirect.com/science/article/pii/S2211339822000314)，这些模型可以应用于更广泛的任务，只需进行最小调整。
 
@@ -86,7 +86,7 @@
 
 这种适应性不仅展示了转移学习的效率，还突显了它使先进机器学习技术普及的潜力，使得较小的组织和研究人员能够进行以前由于数据限制而无法触及的项目。
 
-即使是一个[Django平台](https://platform.sh/marketplace/django/)，你也可以利用转移学习来提升你的应用能力，[无需从头开始](/back-to-basics-week-3-introduction-to-machine-learning)。
+即使是一个[Django 平台](https://platform.sh/marketplace/django/)，你也可以利用转移学习来提升你的应用能力，无需从头开始。
 
 转移学习超越了特定编程语言或框架的界限，使得可以将先进的机器学习模型应用于在多种环境中开发的项目。
 
@@ -98,7 +98,7 @@
 
 这种效率在[资源有限的场景中尤其重要](https://open.bu.edu/handle/2144/43099)，无论是数据、计算能力，还是两者兼有。
 
-由于[43%的所有网站](https://www.hostingadvice.com/how-to/wordpress-statistics/)使用WordPress作为其CMS，这为专注于例如[网页抓取](https://www.geeksforgeeks.org/what-is-web-scraping-and-how-to-use-it/)或比较不同类型内容的上下文和语言差异的ML模型提供了良好的测试平台。
+由于[43%的所有网站](https://www.hostingadvice.com/how-to/wordpress-statistics/)使用 WordPress 作为其 CMS，这为专注于例如[网页抓取](https://www.geeksforgeeks.org/what-is-web-scraping-and-how-to-use-it/)或比较不同类型内容的上下文和语言差异的 ML 模型提供了良好的测试平台。
 
 这突显了[迁移学习在实际应用中的实际好处](https://thirdeyedata.ai/a-comprehensive-hands-on-guide-to-transfer-learning-with-real-world-applications-in-deep-learning/)，在这些应用中，访问大规模的领域特定数据可能会受到限制。迁移学习还鼓励重用现有模型，通过减少从零开始进行高能耗训练的需求，符合可持续实践。
 
@@ -108,7 +108,7 @@
 
 在我们结束对迁移学习的探索时，显然这种技术正在显著改变我们所知的机器学习，特别是对于那些面临数据资源有限的项目。
 
-迁移学习允许有效利用预训练模型，使得无论是小规模还是大规模的项目都能取得显著成果，[而不需要大量的数据集](/2022/03/new-way-managing-deep-learning-datasets.html)或计算资源。
+迁移学习允许有效利用预训练模型，使得无论是小规模还是大规模的项目都能取得显著成果，而不需要大量的数据集或计算资源。
 
 展望未来，迁移学习的潜力广泛而多样，使机器学习项目变得更可行且资源消耗更少的前景不仅令人期待，而且已经在成为现实。
 
@@ -116,7 +116,7 @@
 
 迁移学习正在使机器学习民主化，将先进的技术提供给比以往更广泛的受众。
 
-[](http://nahlawrites.com/)****[Nahla Davies](http://nahlawrites.com/)****是一位软件开发人员和技术作家。在全职从事技术写作之前，她曾管理——包括其他引人注目的工作——担任一家Inc. 5000体验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix和索尼。
+[](http://nahlawrites.com/)****[Nahla Davies](http://nahlawrites.com/)****是一位软件开发人员和技术作家。在全职从事技术写作之前，她曾管理——包括其他引人注目的工作——担任一家 Inc. 5000 体验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 相关主题更多内容
 

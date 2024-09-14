@@ -1,8 +1,8 @@
-# 3个数据科学领域的难度较高的 Python 编程面试问题
+# 3 个数据科学领域的难度较高的 Python 编程面试问题
 
-> 原文：[https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html`](https://www.kdnuggets.com/2023/03/3-hard-python-coding-interview-questions-data-science.html)
 
-![3个数据科学领域的难度较高的 Python 编程面试问题](../Images/ef834afd04b8f0fed2b9ef0cabf7c0fa.png)
+![3 个数据科学领域的难度较高的 Python 编程面试问题](img/ef834afd04b8f0fed2b9ef0cabf7c0fa.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -26,15 +26,15 @@
 
 # Python 编程面试题 #1：Python 中的数学
 
-![3个数据科学领域的难度较高的 Python 编程面试问题](../Images/921bd99bf32d8b42c3c05943fe0907d1.png)
+![3 个数据科学领域的难度较高的 Python 编程面试问题](img/921bd99bf32d8b42c3c05943fe0907d1.png)
 
 图片来源：作者
 
 看看 Google 提出的这个问题。
 
-![3个数据科学领域的难度较高的 Python 编程面试问题](../Images/27c123d68c90c7c62247b8d5fe2a8976.png)
+![3 个数据科学领域的难度较高的 Python 编程面试问题](img/27c123d68c90c7c62247b8d5fe2a8976.png)
 
-问题链接：[https://platform.stratascratch.com/coding/10067-google-fit-user-tracking](https://platform.stratascratch.com/coding/10067-google-fit-user-tracking?utm_source=blog&utm_medium=click&utm_campaign=kdn+3+hard+python+questions)
+问题链接：[`platform.stratascratch.com/coding/10067-google-fit-user-tracking`](https://platform.stratascratch.com/coding/10067-google-fit-user-tracking?utm_source=blog&utm_medium=click&utm_campaign=kdn+3+hard+python+questions)
 
 你的任务是基于 GPS 数据计算平均距离，使用两种方法。一种考虑地球的曲率，另一种则不考虑。
 
@@ -42,9 +42,9 @@
 
 这可不简单，对吧？
 
-你首先应该认识到有一个数学Python模块，它提供了数学函数的访问权限。你将在这个问题中频繁使用这个模块。
+你首先应该认识到有一个数学 Python 模块，它提供了数学函数的访问权限。你将在这个问题中频繁使用这个模块。
 
-让我们开始导入必要的库和正弦、余弦、反余弦和弧度函数。下一步是将可用的DataFrame与其自身在用户ID、会话ID和会话日期上合并。同时，添加后缀以区分它们。
+让我们开始导入必要的库和正弦、余弦、反余弦和弧度函数。下一步是将可用的 DataFrame 与其自身在用户 ID、会话 ID 和会话日期上合并。同时，添加后缀以区分它们。
 
 ```py
 import numpy as np
@@ -60,13 +60,13 @@ df = pd.merge(
 )
 ```
 
-然后找出两个步骤ID之间的差异。
+然后找出两个步骤 ID 之间的差异。
 
 ```py
 df['step_var'] = df['step_id_2'] - df['step_id_1']
 ```
 
-之前的步骤是必要的，以便在下一步中排除所有只有一个步骤ID的会话。这正是问题告诉我们要做的。下面是具体做法。
+之前的步骤是必要的，以便在下一步中排除所有只有一个步骤 ID 的会话。这正是问题告诉我们要做的。下面是具体做法。
 
 ```py
 df = df.loc[
@@ -76,9 +76,9 @@ df = df.loc[
 ]
 ```
 
-使用pandas `idxmax()`函数来访问步骤之间差异最大的会话。
+使用 pandas `idxmax()`函数来访问步骤之间差异最大的会话。
 
-在准备好数据集后，现在进入数学部分。创建一个pandas Series，然后使用for循环。使用`iterrows()`方法计算每一行，即会话的距离。这是考虑了地球曲率的距离，代码反映了问题中给出的公式。
+在准备好数据集后，现在进入数学部分。创建一个 pandas Series，然后使用 for 循环。使用`iterrows()`方法计算每一行，即会话的距离。这是考虑了地球曲率的距离，代码反映了问题中给出的公式。
 
 ```py
 df["distance_curvature"] = pd.Series()
@@ -108,7 +108,7 @@ for i, r in df.iterrows():
     )
 ```
 
-将结果转化为DataFrame并开始计算输出指标。第一个是考虑地球曲率的平均距离。然后是没有曲率的相同计算。最终指标是两者之间的差异。
+将结果转化为 DataFrame 并开始计算输出指标。第一个是考虑地球曲率的平均距离。然后是没有曲率的相同计算。最终指标是两者之间的差异。
 
 ```py
 result = pd.DataFrame()
@@ -170,23 +170,23 @@ result
 | --- | --- | --- |
 | 0.077 | 0.088 | -0.01 |
 
-# Python编程面试问题#2：Python中的图论
+# Python 编程面试问题#2：Python 中的图论
 
-![3个困难的Python编程面试问题](../Images/ae168e1bc2f8162e3544af4c093cfc2f.png)
+![3 个困难的 Python 编程面试问题](img/ae168e1bc2f8162e3544af4c093cfc2f.png)
 
 图片来源：作者
 
-这是StrataScratch中非常有趣的Python编程面试问题之一。它将你置于一个非常常见但复杂的现实数据科学家情况中。
+这是 StrataScratch 中非常有趣的 Python 编程面试问题之一。它将你置于一个非常常见但复杂的现实数据科学家情况中。
 
-这是Delta Airlines提出的问题。让我们来看看它。
+这是 Delta Airlines 提出的问题。让我们来看看它。
 
-![3个困难的Python编程面试问题](../Images/6804eddaa007d73368fc15c9134e37db.png)
+![3 个困难的 Python 编程面试问题](img/6804eddaa007d73368fc15c9134e37db.png)
 
-问题链接：[https://platform.stratascratch.com/coding/2008-the-cheapest-airline-connection](https://platform.stratascratch.com/coding/2008-the-cheapest-airline-connection?utm_source=blog&utm_medium=click&utm_campaign=kdn+3+hard+python+questions)
+问题链接：[`platform.stratascratch.com/coding/2008-the-cheapest-airline-connection`](https://platform.stratascratch.com/coding/2008-the-cheapest-airline-connection?utm_source=blog&utm_medium=click&utm_campaign=kdn+3+hard+python+questions)
 
 这个问题要求你找到最多有两个停靠点的最便宜的航空公司连接。这听起来非常熟悉，对吧？是的，这是一种稍作修改的[最短路径问题](https://en.wikipedia.org/wiki/Shortest_path_problem)：不是路径，而是成本。
 
-我将展示的解决方案广泛使用了`merge()` pandas函数。我还会使用`itertools`进行循环。在导入所有必要的库和模块后，第一步是生成所有可能的原始和目的地组合。
+我将展示的解决方案广泛使用了`merge()` pandas 函数。我还会使用`itertools`进行循环。在导入所有必要的库和模块后，第一步是生成所有可能的原始和目的地组合。
 
 ```py
 import pandas as pd
@@ -389,19 +389,19 @@ result[~result["min_price"].isna()][["origin", "destination", "min_price"]]
 
 # Python 编码面试问题 #3：Python 中的二叉树
 
-![3 个困难的 Python 编码面试问题（数据科学）](../Images/2b3717b071ec9f80cc360e48044643fb.png)
+![3 个困难的 Python 编码面试问题（数据科学）](img/2b3717b071ec9f80cc360e48044643fb.png)
 
 作者提供的图像
 
 除了图表，你还将作为数据科学家处理二叉树。因此，如果你知道如何解决由 DoorDash、Facebook、Microsoft、Amazon、Bloomberg、Apple 和 TikTok 等公司提出的这个 Python 编码面试问题，那将会很有用。
 
-![3 个困难的 Python 编码面试问题（数据科学）](../Images/bab29be0d74887f82eb7506fefa6c2ee.png)
+![3 个困难的 Python 编码面试问题（数据科学）](img/bab29be0d74887f82eb7506fefa6c2ee.png)
 
-问题链接：[https://leetcode.com/problems/binary-tree-maximum-path-sum/description/](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/)
+问题链接：[`leetcode.com/problems/binary-tree-maximum-path-sum/description/`](https://leetcode.com/problems/binary-tree-maximum-path-sum/description/)
 
 约束条件是：
 
-![3 个困难的 Python 编码面试问题（数据科学）](../Images/37c2d7aaaaeca4a3651124fd49e92861.png)
+![3 个困难的 Python 编码面试问题（数据科学）](img/37c2d7aaaaeca4a3651124fd49e92861.png)
 
 ```py
 class Solution:
@@ -425,7 +425,7 @@ class Solution:
 
 解决方案的第一步是定义一个 maxPathSum 函数。为了确定是否存在从根节点向下的左侧或右侧节点的路径，请编写递归函数 gain_from_subtree。
 
-第一个实例是子树的根节点。如果路径等于一个根节点（没有子节点），则子树的增益为0。然后在左节点和右节点中进行递归。如果路径和为负，问题要求不予考虑；我们通过将其设置为0来实现这一点。
+第一个实例是子树的根节点。如果路径等于一个根节点（没有子节点），则子树的增益为 0。然后在左节点和右节点中进行递归。如果路径和为负，问题要求不予考虑；我们通过将其设置为 0 来实现这一点。
 
 然后将子树的增益和当前最大路径进行比较，如果必要则进行更新。
 
@@ -433,28 +433,28 @@ class Solution:
 
 这些是案例 1 和 2 的输出。
 
-![3个困难的Python编码面试问题](../Images/c977db889f49dd2afacc0384bb6f5812.png)
+![3 个困难的 Python 编码面试问题](img/c977db889f49dd2afacc0384bb6f5812.png)
 
-![3个困难的Python编码面试问题](../Images/1ec7ee12b021aea078eba2a7c2a5fce5.png)
+![3 个困难的 Python 编码面试问题](img/1ec7ee12b021aea078eba2a7c2a5fce5.png)
 
 ## 总结
 
-这次，我想给你一些不同的内容。作为数据科学家，你应该了解许多Python概念。这次我决定涵盖三个不常见的主题：数学、图数据结构和二叉树。
+这次，我想给你一些不同的内容。作为数据科学家，你应该了解许多 Python 概念。这次我决定涵盖三个不常见的主题：数学、图数据结构和二叉树。
 
-我展示的这三个问题似乎很适合展示如何将这些概念转化为Python代码。查看 “[Python编码面试问题](https://www.stratascratch.com/blog/python-coding-interview-questions/?utm_source=blog&utm_medium=click&utm_campaign=kdn+3+hard+python+questions)” 来练习更多Python概念。
+我展示的这三个问题似乎很适合展示如何将这些概念转化为 Python 代码。查看 “[Python 编码面试问题](https://www.stratascratch.com/blog/python-coding-interview-questions/?utm_source=blog&utm_medium=click&utm_campaign=kdn+3+hard+python+questions)” 来练习更多 Python 概念。
 
 **[Nate Rosidi](https://www.stratascratch.com)** 是一名数据科学家和产品策略专家。他还是一名兼职教授，教授分析学，并且是 [StrataScratch](https://www.stratascratch.com/) 的创始人，这是一个帮助数据科学家准备面试的平台，提供来自顶级公司的真实面试问题。可以在 [Twitter: StrataScratch](https://twitter.com/StrataScratch) 或 [LinkedIn](https://www.linkedin.com/in/nathanrosidi/) 上与他联系。
 
 ### 相关主题
 
-+   [KDnuggets新闻，5月4日：学习数据的9门哈佛免费课程…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：学习数据的 9 门哈佛免费课程…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [停止在数据科学项目中硬编码 - 使用配置文件代替](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)
 
-+   [15个你必须了解的Python编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
++   [15 个你必须了解的 Python 编码面试问题](https://www.kdnuggets.com/2022/04/15-python-coding-interview-questions-must-know-data-science.html)
 
 +   [如何回答数据科学编码面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [想成为数据科学家？第1部分：你需要的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要的 10 项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
 
-+   [进入FAANG公司有多难](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)
++   [进入 FAANG 公司有多难](https://www.kdnuggets.com/2023/05/hard-get-faang-companies.html)

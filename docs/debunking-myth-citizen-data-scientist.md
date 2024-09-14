@@ -1,8 +1,8 @@
 # 揭穿公民数据科学家的神话
 
-> 原文：[https://www.kdnuggets.com/2022/10/debunking-myth-citizen-data-scientist.html](https://www.kdnuggets.com/2022/10/debunking-myth-citizen-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2022/10/debunking-myth-citizen-data-scientist.html`](https://www.kdnuggets.com/2022/10/debunking-myth-citizen-data-scientist.html)
 
-![揭穿公民数据科学家的神话](../Images/693f18a0dbee0f857d7e794f2ac2ae95.png)
+![揭穿公民数据科学家的神话](img/693f18a0dbee0f857d7e794f2ac2ae95.png)
 
 图片来源于 [Hunters Race](https://unsplash.com/@huntersrace?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/model-professional?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的IT组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的 IT 组织
 
 * * *
 
@@ -24,9 +24,9 @@
 
 # 人工智能旅程：挣扎是真实的
 
-几乎所有行业的组织都在积极探索如何利用人工智能和机器学习来加速业务并取得更大的成果。根据高德纳的新调查，平均而言，只有[54%的AI模型](https://www.gartner.com/en/newsroom/press-releases/2022-08-22-gartner-survey-reveals-80-percent-of-executives-think-automation-can-be-applied-to-any-business-decision)从试点阶段进入生产阶段。造成这一现象的原因有很多；对于一些公司来说，没有熟练的数据科学团队只是其中之一。
+几乎所有行业的组织都在积极探索如何利用人工智能和机器学习来加速业务并取得更大的成果。根据高德纳的新调查，平均而言，只有[54%的 AI 模型](https://www.gartner.com/en/newsroom/press-releases/2022-08-22-gartner-survey-reveals-80-percent-of-executives-think-automation-can-be-applied-to-any-business-decision)从试点阶段进入生产阶段。造成这一现象的原因有很多；对于一些公司来说，没有熟练的数据科学团队只是其中之一。
 
-![揭穿公民数据科学家的神话](../Images/1c0f8cad3fb19491dce019aca50797ec.png)
+![揭穿公民数据科学家的神话](img/1c0f8cad3fb19491dce019aca50797ec.png)
 
 # 探索公民数据科学家的理念
 
@@ -54,15 +54,15 @@
 
 这并不简单。而且，这并不意味着公民数据科学家不是一个可行的概念。重要的是要理解这些角色需要作为补充，而不是替代数据科学家。
 
-虽然很诱人地认为可以利用技术来颠覆或替代某些技能角色的需求，尤其是许多行业面临技能差距。然而，在目前的技术水平下，AI/ML项目无法仅仅交给公民数据科学家来处理。
+虽然很诱人地认为可以利用技术来颠覆或替代某些技能角色的需求，尤其是许多行业面临技能差距。然而，在目前的技术水平下，AI/ML 项目无法仅仅交给公民数据科学家来处理。
 
 # 好数据的价格
 
-尽管有很多关于无代码或低代码软件开发的讨论，但业界已经了解到这种方法的现实性以及它的适用场景。在需要开发关键任务软件时，无代码/低代码方法并不适用。因此，仅依靠公民数据科学家来运行你的AI/ML是更加不切实际的。
+尽管有很多关于无代码或低代码软件开发的讨论，但业界已经了解到这种方法的现实性以及它的适用场景。在需要开发关键任务软件时，无代码/低代码方法并不适用。因此，仅依靠公民数据科学家来运行你的 AI/ML 是更加不切实际的。
 
-深入理解你的数据对AI/ML的成功至关重要。这是专业数据科学家所带来的，他们提供必要的背景洞察，以确定哪些数据是有用和好的，哪些则不是。虽然引入新的声音和想法是积极的，但这并没有消除对熟练专业数据科学家的需求。你不能通过不拥有专业数据科学家来削减成本。
+深入理解你的数据对 AI/ML 的成功至关重要。这是专业数据科学家所带来的，他们提供必要的背景洞察，以确定哪些数据是有用和好的，哪些则不是。虽然引入新的声音和想法是积极的，但这并没有消除对熟练专业数据科学家的需求。你不能通过不拥有专业数据科学家来削减成本。
 
-**[Victor Thu](https://www.linkedin.com/in/victorthu/)** 是 [Datatron](https://datatron.com/) 的总裁。在他的职业生涯中，Victor 专注于产品营销、市场推广和产品管理，曾在 Petuum、VMware 和 Citrix 等公司担任C级和董事级职位。
+**[Victor Thu](https://www.linkedin.com/in/victorthu/)** 是 [Datatron](https://datatron.com/) 的总裁。在他的职业生涯中，Victor 专注于产品营销、市场推广和产品管理，曾在 Petuum、VMware 和 Citrix 等公司担任 C 级和董事级职位。
 
 ### 更多相关话题
 
@@ -74,6 +74,6 @@
 
 +   [数据科学家探索性数据分析的必备指南](https://www.kdnuggets.com/2023/06/data-scientist-essential-guide-exploratory-data-analysis.html)
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入了解13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
-+   [KDnuggets 新闻 2022年3月16日：学习数据科学基础 & 5…](https://www.kdnuggets.com/2022/n11.html)
++   [KDnuggets 新闻 2022 年 3 月 16 日：学习数据科学基础 & 5…](https://www.kdnuggets.com/2022/n11.html)

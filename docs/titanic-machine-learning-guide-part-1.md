@@ -1,6 +1,6 @@
 # 你能在泰坦尼克号上幸存吗？Python 中机器学习的指南第一部分
 
-> 原文：[https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-1.html](https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-1.html)
+> 原文：[`www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-1.html`](https://www.kdnuggets.com/2016/07/titanic-machine-learning-guide-part-1.html)
 
 **Patrick Triest，SocialCops**。
 
@@ -59,7 +59,7 @@ titanic_df.head()
 
 [点击这里查看概要](https://gist.github.com/triestpa/63916ed9026f4d94d59453d53784703b)
 
-[![Titanic head()](../Images/9c7a78b8fc7cf94bafbbbbf4dfba10b1.png)](https://gist.github.com/triestpa/63916ed9026f4d94d59453d53784703b)
+![Titanic head()](https://gist.github.com/triestpa/63916ed9026f4d94d59453d53784703b)
 
 列标题变量的含义如下：
 
@@ -100,9 +100,9 @@ titanic_df['survived'].mean()
 
 [点击这里查看概要](https://gist.github.com/triestpa/4c8a7694a2b7fee5633d99b2a421d5ef)
 
-计算结果显示，只有38%的乘客幸存。这并不是最好的几率。造成如此大量人员伤亡的原因是泰坦尼克号仅配备了20只救生艇，这远远不够1,317名乘客和885名船员。所有乘客都不可能有相同的生存机会，因此我们将继续分析数据，以考察决定谁获得救生艇位置和谁没有的社会动态。
+计算结果显示，只有 38%的乘客幸存。这并不是最好的几率。造成如此大量人员伤亡的原因是泰坦尼克号仅配备了 20 只救生艇，这远远不够 1,317 名乘客和 885 名船员。所有乘客都不可能有相同的生存机会，因此我们将继续分析数据，以考察决定谁获得救生艇位置和谁没有的社会动态。
 
-在20世纪初，社会阶层严重分化，尤其是在泰坦尼克号上，奢华的一等舱区域对二等舱的中产阶级乘客完全封闭，尤其是对那些持有三等舱“经济票”的乘客。为了了解每个等级的组成情况，我们可以按等级分组数据，并查看每列的平均值：
+在 20 世纪初，社会阶层严重分化，尤其是在泰坦尼克号上，奢华的一等舱区域对二等舱的中产阶级乘客完全封闭，尤其是对那些持有三等舱“经济票”的乘客。为了了解每个等级的组成情况，我们可以按等级分组数据，并查看每列的平均值：
 
 ```py
 titanic_df.groupby('pclass').mean()
@@ -111,9 +111,9 @@ titanic_df.groupby('pclass').mean()
 
 [点击这里查看概要](https://gist.github.com/triestpa/b939b78f9c6b37d82f91f72dc36b9185)
 
-![Class means](../Images/73edbbd0420fb96aa3e22706c61bdb4b.png)
+![Class means](img/73edbbd0420fb96aa3e22706c61bdb4b.png)
 
-我们可以从这些数据中得出一些有趣的见解。例如，一等舱乘客的生存机会为62%，而三等舱乘客的生存机会为25.5%。此外，低等级舱的乘客通常较年轻，一等舱的票价显著高于二等和三等舱。一等舱的平均票价为87.5英镑，相当于2016年的13,487美元。
+我们可以从这些数据中得出一些有趣的见解。例如，一等舱乘客的生存机会为 62%，而三等舱乘客的生存机会为 25.5%。此外，低等级舱的乘客通常较年轻，一等舱的票价显著高于二等和三等舱。一等舱的平均票价为 87.5 英镑，相当于 2016 年的 13,487 美元。
 
 我们可以通过对等级和性别进行分组来扩展统计分析。
 
@@ -125,14 +125,14 @@ class_sex_grouping
 
 [点击这里查看要点](https://gist.github.com/triestpa/7eebb009c3529d3cfb132bd495a8f6f6)
 
-![按性别幸存](../Images/b905c0bb74aeb8b8ea7f7ad9f68c1c38.png)
+![按性别幸存](img/b905c0bb74aeb8b8ea7f7ad9f68c1c38.png)
 
 ```py
 class_sex_grouping['survived'].plot.bar()
 
 ```
 
-[点击这里查看要点](https://gist.github.com/triestpa/7eebb009c3529d3cfb132bd495a8f6f6)![按性别幸存](../Images/ebda2056c300993db9b0259b0e9efe32.png)
+[点击这里查看要点](https://gist.github.com/triestpa/7eebb009c3529d3cfb132bd495a8f6f6)![按性别幸存](img/ebda2056c300993db9b0259b0e9efe32.png)
 
 在泰坦尼克号沉没时，官员们以严格的海事传统优先考虑允许谁进入救生艇，首先撤离妇女和儿童。我们的统计结果清晰地反映了这一政策的第一部分，因为在所有舱位中，女性的生存概率远高于男性。我们还可以看到，女性的平均年龄低于男性，更有可能与家人一起旅行，并且票价略高。
 
@@ -145,31 +145,31 @@ age_grouping['survived'].plot.bar()
 
 ```
 
-[点击这里查看要点](https://gist.github.com/triestpa/775c689998337c7afafa9fc7cfe2511c)![按年龄幸存](../Images/e33ce2952c4f80c9381539ebf49d7de1.png)
+[点击这里查看要点](https://gist.github.com/triestpa/775c689998337c7afafa9fc7cfe2511c)![按年龄幸存](img/e33ce2952c4f80c9381539ebf49d7de1.png)
 
 在这里我们可以看到，儿童确实是最有可能幸存的年龄组，尽管这个百分比仍然悲惨地低于 60%。
 
-![Patrick Triest](../Images/58fde3736bd01dbcfdf3fd2657ea5996.png)**简历： [Patrick Triest](https://www.linkedin.com/in/triestpa)** 是一位 23 岁的安卓开发者 / 物联网工程师 / 数据科学家 / 渴望开创者，来自波士顿，目前在 SocialCops 工作。他对学习上瘾，有时在发现特别有趣的东西后，他会非常兴奋并写下他的想法。
+![Patrick Triest](img/58fde3736bd01dbcfdf3fd2657ea5996.png)**简历： [Patrick Triest](https://www.linkedin.com/in/triestpa)** 是一位 23 岁的安卓开发者 / 物联网工程师 / 数据科学家 / 渴望开创者，来自波士顿，目前在 SocialCops 工作。他对学习上瘾，有时在发现特别有趣的东西后，他会非常兴奋并写下他的想法。
 
 [原文](http://blog.socialcops.com/engineering/machine-learning-python)。经许可转载。
 
 **相关：**
 
-+   [7 步掌握 Python 机器学习](/2015/11/seven-steps-machine-learning-python.html)
++   7 步掌握 Python 机器学习
 
-+   [数据科学和机器学习的前 10 名 IPython 笔记本教程](/2016/04/top-10-ipython-nb-tutorials.html)
++   数据科学和机器学习的前 10 名 IPython 笔记本教程
 
-+   [R 学习路径：7 步从初学者到专家](/2016/03/datacamp-r-learning-path-7-steps.html)
++   R 学习路径：7 步从初学者到专家
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -185,4 +185,4 @@ age_grouping['survived'].plot.bar()
 
 +   [数据科学面试指南 - 第一部分：结构](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)
 
-+   [想成为数据科学家？第一部分：你需要掌握的10项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要掌握的 10 项硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)

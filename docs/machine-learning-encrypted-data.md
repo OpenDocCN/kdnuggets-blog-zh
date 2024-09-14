@@ -1,30 +1,30 @@
 # 在加密数据上进行机器学习
 
-> 原文：[https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html](https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html)
+> 原文：[`www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html`](https://www.kdnuggets.com/2022/08/machine-learning-encrypted-data.html)
 
-![在加密数据上进行机器学习](../Images/ab000d69b2d278f21817615872dc2a16.png)
+![在加密数据上进行机器学习](img/ab000d69b2d278f21817615872dc2a16.png)
 
-本博客介绍了一种隐私保护机器学习（PPML）解决方案，用于Kaggle上的泰坦尼克挑战，使用[Concrete-ML](https://docs.zama.ai/concrete-ml)开源工具包。其主要目标是展示[全同态加密](https://en.wikipedia.org/wiki/Homomorphic_encryption)（FHE）如何用于保护数据，同时使用机器学习模型进行预测而不降低其性能。在这个例子中，将考虑[XGBoost](https://xgboost.readthedocs.io/en/stable/)分类器模型，因为它实现了接近最先进的准确度。
+本博客介绍了一种隐私保护机器学习（PPML）解决方案，用于 Kaggle 上的泰坦尼克挑战，使用[Concrete-ML](https://docs.zama.ai/concrete-ml)开源工具包。其主要目标是展示[全同态加密](https://en.wikipedia.org/wiki/Homomorphic_encryption)（FHE）如何用于保护数据，同时使用机器学习模型进行预测而不降低其性能。在这个例子中，将考虑[XGBoost](https://xgboost.readthedocs.io/en/stable/)分类器模型，因为它实现了接近最先进的准确度。
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织中的 IT 工作
 
 * * *
 
 # 竞赛
 
-[Kaggle](https://www.kaggle.com/)是一个在线社区，让任何人都可以围绕机器学习和数据科学构建和分享项目。它提供数据集、课程、示例和竞赛，任何愿意发现或提升自己领域知识的数据科学家都可以免费使用。其简易性使其成为ML社区中最受欢迎的平台之一。
+[Kaggle](https://www.kaggle.com/)是一个在线社区，让任何人都可以围绕机器学习和数据科学构建和分享项目。它提供数据集、课程、示例和竞赛，任何愿意发现或提升自己领域知识的数据科学家都可以免费使用。其简易性使其成为 ML 社区中最受欢迎的平台之一。
 
 此外，Kaggle 提供了几个难度不同的教程，供新手开始在真实例子中操作基本数据科学工具。在这些教程中可以找到[Titanic 竞赛](https://www.kaggle.com/competitions/titanic)。它通过使用一组简单的乘客数据来介绍一个二分类问题，这些乘客在悲惨的泰坦尼克号船难中旅行。
 
-Concrete-ML团队为本次竞赛发送的Jupyter Notebook可以在[此处](https://www.kaggle.com/code/concretemlteam/titanic-with-privacy-preserving-machine-learning)找到。它是借助几个其他公开可用的笔记本创建的，以提供清晰的指南和高效的结果。
+Concrete-ML 团队为本次竞赛发送的 Jupyter Notebook 可以在[此处](https://www.kaggle.com/code/concretemlteam/titanic-with-privacy-preserving-machine-learning)找到。它是借助几个其他公开可用的笔记本创建的，以提供清晰的指南和高效的结果。
 
 # 准备工作
 
@@ -55,7 +55,7 @@ test_ids = test_data["PassengerId"]
 
 数据的样子如下：
 
-![加密数据上的机器学习](../Images/240d2ad44fcae3a48bcc2f9452914b07.png)
+![加密数据上的机器学习](img/240d2ad44fcae3a48bcc2f9452914b07.png)
 
 可以做出以下几项陈述：
 
@@ -74,7 +74,7 @@ print(test_data.isnull().sum())
 
 这将输出以下结果。
 
-![加密数据上的机器学习](../Images/437589ec739051496df1005ba0be9b92.png)
+![加密数据上的机器学习](img/437589ec739051496df1005ba0be9b92.png)
 
 似乎有四个变量是不完整的，即 Cabin、Age、Embarked 和 Fare。然而，Cabin 变量似乎缺失的数据最多：
 
@@ -188,7 +188,7 @@ titles = data.Title.value_counts()
 print(titles)
 ```
 
-![加密数据上的机器学习](../Images/de3d409f93d540664b5598ee23998ce0.png)
+![加密数据上的机器学习](img/de3d409f93d540664b5598ee23998ce0.png)
 
 为了防止模型变得过于特定，将所有“少见”的标题归为一个新的“Rare”变量。
 
@@ -356,10 +356,10 @@ submission.to_csv("titanic_submission_xgb_clear.csv", index=False)
 
 +   [学术界是否在过度关注方法论，而忽视了真正的见解？](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)
 
-+   [如何将Python Pandas的速度提升超过300倍](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)
++   [如何将 Python Pandas 的速度提升超过 300 倍](https://www.kdnuggets.com/how-to-speed-up-python-pandas-by-over-300x)
 
-+   [每个机器学习工程师都应该掌握的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该掌握的 5 项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets新闻，12月14日：3个免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)

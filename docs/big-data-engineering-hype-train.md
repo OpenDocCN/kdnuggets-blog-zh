@@ -1,12 +1,12 @@
 # 旅行时需要了解的大数据工程热潮中的事项
 
-> 原文：[https://www.kdnuggets.com/2018/10/big-data-engineering-hype-train.html](https://www.kdnuggets.com/2018/10/big-data-engineering-hype-train.html)
+> 原文：[`www.kdnuggets.com/2018/10/big-data-engineering-hype-train.html`](https://www.kdnuggets.com/2018/10/big-data-engineering-hype-train.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Wojciech Pituła](https://www.linkedin.com/in/krever/)，高级软件开发工程师**
 
-![Image](../Images/7f93092ba3a272d34c52e4a1ef26b263.png)
+![Image](img/7f93092ba3a272d34c52e4a1ef26b263.png)
 
 ### 为什么？
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -148,17 +148,17 @@ Apache Spark 已成为处理数据时的首选工具。拥有一些经验是好�
 
 +   什么是概率数据结构？
 
-    +   当数据量超过某些阈值时，使用精确计算变得不再可行。在这种情况下，你应该了解一些基本的概率数据结构，例如布隆过滤器或HyperLogLog，这些结构可以以受控的误差率计算诸如基数或集合成员资格等内容。
+    +   当数据量超过某些阈值时，使用精确计算变得不再可行。在这种情况下，你应该了解一些基本的概率数据结构，例如布隆过滤器或 HyperLogLog，这些结构可以以受控的误差率计算诸如基数或集合成员资格等内容。
 
-+   你知道哪些SQL数据库？它们有哪些限制？
++   你知道哪些 SQL 数据库？它们有哪些限制？
 
-    +   熟悉至少一个成熟的SQL数据库是有好处的。我敢打赌，至少30%的大数据项目可以仅使用Postgres，并抛弃所有的Spark/Hadoop代码。
+    +   熟悉至少一个成熟的 SQL 数据库是有好处的。我敢打赌，至少 30%的大数据项目可以仅使用 Postgres，并抛弃所有的 Spark/Hadoop 代码。
 
 ### 摘要
 
 这个列表并不全面，但可能不可能创建一个全面的列表。你潜在雇主的具体要求可能与此列表有很大不同，但能够回答这些问题将为你未来的发展奠定良好的基础。
 
-如果有人希望通过回答这些问题或添加更多主题（内联或通过链接）来完善本文，请随时通过[GitHub repo](https://github.com/Krever/krever.github.io)提交PR。
+如果有人希望通过回答这些问题或添加更多主题（内联或通过链接）来完善本文，请随时通过[GitHub repo](https://github.com/Krever/krever.github.io)提交 PR。
 
 **简介： [Wojciech Pituła](https://www.linkedin.com/in/krever/)** 是索尼的高级软件开发工程师。
 
@@ -166,22 +166,22 @@ Apache Spark 已成为处理数据时的首选工具。拥有一些经验是好�
 
 **相关：**
 
-+   [构建数据科学团队的成功计划](/2018/09/winning-game-plan-building-data-science-team.html)
++   构建数据科学团队的成功计划
 
-+   [你应该了解的10大大数据趋势](/2018/09/10-big-data-trends.html)
++   你应该了解的 10 大大数据趋势
 
-+   [机器学习会超越大数据吗？](/2017/05/machine-learning-overtaking-big-data.html)
++   机器学习会超越大数据吗？
 
 ### 更多相关话题
 
 +   [扩展你的网络数据驱动产品时需要知道的事项](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
 
-+   [你不知道的低代码工具的7种用途](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [你不知道的低代码工具的 7 种用途](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
-+   [KDnuggets 新闻，4月13日：数据科学家应该了解的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [你需要了解的6件关于数据管理的事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [你需要了解的 6 件关于数据管理的事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [你不知道的SAS数据科学学院的3件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [你不知道的 SAS 数据科学学院的 3 件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
 
-+   [构建LLM应用时需要了解的5件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)
++   [构建 LLM 应用时需要了解的 5 件事](https://www.kdnuggets.com/2023/08/5-things-need-know-building-llm-applications.html)

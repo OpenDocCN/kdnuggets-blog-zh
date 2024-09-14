@@ -1,8 +1,8 @@
 # 揭示糟糕科学
 
-> 原文：[https://www.kdnuggets.com/2022/01/demystifying-bad-science.html](https://www.kdnuggets.com/2022/01/demystifying-bad-science.html)
+> 原文：[`www.kdnuggets.com/2022/01/demystifying-bad-science.html`](https://www.kdnuggets.com/2022/01/demystifying-bad-science.html)
 
-![揭示糟糕科学](../Images/85ecf1cafa11eb770a7a5ab07b19c7be.png)
+![揭示糟糕科学](img/85ecf1cafa11eb770a7a5ab07b19c7be.png)
 
 图片由 [LoganArt 在 Pixabay](https://pixabay.com/users/loganart-665411/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 支持中为你的组织提供帮助
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 支持中为你的组织提供帮助
 
 * * *
 
@@ -28,7 +28,7 @@
 
 零假设显著性测试（NHST）多年来遭到统计学家的严厉批评。许多人会记得这来自于初级统计学课程。虽然表面上看似简单，NHST 被广泛误解和滥用。
 
-**《美国统计学家》**已专门为此及相关主题刊出了一个开放获取的[**专刊**](https://amstat.tandfonline.com/doi/full/10.1080/00031305.2019.1583913#.X28Ecj_iuUk)。简而言之，一个重要的问题是，**p**值大于0.05的发现比统计显著的发现更不容易被接受发表，甚至不容易提交发表。这被称为出版偏倚或[**文件抽屉问题**](https://web.ma.utexas.edu/users/mks/statmistakes/filedrawer.html)。
+**《美国统计学家》**已专门为此及相关主题刊出了一个开放获取的[**专刊**](https://amstat.tandfonline.com/doi/full/10.1080/00031305.2019.1583913#.X28Ecj_iuUk)。简而言之，一个重要的问题是，**p**值大于 0.05 的发现比统计显著的发现更不容易被接受发表，甚至不容易提交发表。这被称为出版偏倚或[**文件抽屉问题**](https://web.ma.utexas.edu/users/mks/statmistakes/filedrawer.html)。
 
 然而，“负面发现”与统计显著结果同样重要，而且许多潜在的重要研究结果显然从未公之于众。由于知识的积累是科学的本质，这是一个严重的问题，直到最近才开始引起许多统计学家长期以来认为应当重视的关注。统计显著性与决策显著性也不完全相同。
 
@@ -58,7 +58,7 @@
 
 **未考虑其他解释。** 多种原因可能导致相同的效果，而未考虑竞争解释会削弱研究的可信度。与遗漏变量类似，这可能是偶然的，也可能是故意的。
 
-**未对多重比较进行校正。** 同一数据上的统计检验彼此并不独立。因此，如果在四种类型的患者中进行成对比较，在标准的0.05 alpha水平下需要进行六次检验，而这些比较的整体置信水平大约为75%，而非95%。
+**未对多重比较进行校正。** 同一数据上的统计检验彼此并不独立。因此，如果在四种类型的患者中进行成对比较，在标准的 0.05 alpha 水平下需要进行六次检验，而这些比较的整体置信水平大约为 75%，而非 95%。
 
 **使用替代变量作为因变量。** 通常，无法直接测量结果，研究人员必须依赖替代变量。医疗研究中的一个例子是使用测试结果来指示某种特定疾病的存在。虽然使用替代变量不一定是缺陷，但在一些研究中可能会出现问题。
 
@@ -100,13 +100,13 @@
 
 总结来说，严谨的科学是具有挑战性的，任何研究都可以受到质疑。欺骗是人类本性的一部分，科学家、人类、记者和政策制定者都是如此。我们也是如此，必须小心，不要仅仅因为研究令人兴奋、让我们感到安慰或符合我们的信念就信任它。
 
-**[凯文·格雷](https://www.linkedin.com/in/cannongray)** 是 [Cannon Gray](http://cannongray.com/home) 的总裁，该公司是一家市场科学和分析咨询公司。他在尼尔森、坎塔尔、麦肯和TIAA-CREF拥有超过30年的市场研究经验。
+**[凯文·格雷](https://www.linkedin.com/in/cannongray)** 是 [Cannon Gray](http://cannongray.com/home) 的总裁，该公司是一家市场科学和分析咨询公司。他在尼尔森、坎塔尔、麦肯和 TIAA-CREF 拥有超过 30 年的市场研究经验。
 
 ### 更多相关话题
 
 +   [数据质量：好、坏与丑](https://www.kdnuggets.com/2022/01/data-quality-good-bad-ugly.html)
 
-+   [可解释的人工智能：揭开模型决策的10个Python库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
++   [可解释的人工智能：揭开模型决策的 10 个 Python 库](https://www.kdnuggets.com/2023/01/explainable-ai-10-python-libraries-demystifying-decisions.html)
 
 +   [揭示机器学习的真相](https://www.kdnuggets.com/demystifying-machine-learning)
 
@@ -114,4 +114,4 @@
 
 +   [停止学习数据科学以寻找目标，并通过找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学基础：开始所需掌握的10项关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学基础：开始所需掌握的 10 项关键技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)

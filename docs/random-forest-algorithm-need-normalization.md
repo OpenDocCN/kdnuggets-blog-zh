@@ -1,8 +1,8 @@
 # 随机森林算法是否需要归一化？
 
-> 原文：[https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)
+> 原文：[`www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html`](https://www.kdnuggets.com/2022/07/random-forest-algorithm-need-normalization.html)
 
-![随机森林算法是否需要归一化？](../Images/01e6640db11dfd6c875a881e214a27bf.png)
+![随机森林算法是否需要归一化？](img/01e6640db11dfd6c875a881e214a27bf.png)
 
 [Irina Iriser](https://unsplash.com/@iriser) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -63,17 +63,17 @@ X_test_norm = norm.transform(X_test)
 
 **公式：**
 
-![基尼指数](../Images/3bf349e90272695b3ad6a6e91126cee8.png)
+![基尼指数](img/3bf349e90272695b3ad6a6e91126cee8.png)
 
-它计算了一个特定特征在随机选择时被错误分类的概率。基尼 impurity 的范围在0到0.5之间，其中最小值0是最佳值（分类是纯的），0.5是我们能得到的最差值。
+它计算了一个特定特征在随机选择时被错误分类的概率。基尼 impurity 的范围在 0 到 0.5 之间，其中最小值 0 是最佳值（分类是纯的），0.5 是我们能得到的最差值。
 
 # 熵
 
 熵是数据点中不纯或随机性的度量。在使用机器学习算法时，你的主要目标应是减少不确定性和随机性。
 
-![熵](../Images/48512193a267aadafb0cd2ac52a32033.png)
+![熵](img/48512193a267aadafb0cd2ac52a32033.png)
 
-熵的范围从0到1，其中最小值0是最佳值（纯度），1是最差值（高水平的不纯）。
+熵的范围从 0 到 1，其中最小值 0 是最佳值（纯度），1 是最差值（高水平的不纯）。
 
 # 结论
 
@@ -89,10 +89,10 @@ X_test_norm = norm.transform(X_test)
 
 +   [调整随机森林超参数](https://www.kdnuggets.com/2022/08/tuning-random-forest-hyperparameters.html)
 
-+   [K-Means聚类是什么，它的算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
++   [K-Means 聚类是什么，它的算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
 
 +   [数据转换：标准化与归一化](https://www.kdnuggets.com/2020/04/data-transformation-standardization-normalization.html)
 
-+   [优化数据存储：SQL中的数据类型和归一化探索](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
++   [优化数据存储：SQL 中的数据类型和归一化探索](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
 
 +   [朴素贝叶斯算法：你需要知道的一切](https://www.kdnuggets.com/2020/06/naive-bayes-algorithm-everything.html)

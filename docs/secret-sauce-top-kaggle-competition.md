@@ -1,8 +1,8 @@
 # 我的秘密武器，帮助我在 Kaggle 比赛中进入前 2%
 
-> 原文：[https://www.kdnuggets.com/2018/11/secret-sauce-top-kaggle-competition.html](https://www.kdnuggets.com/2018/11/secret-sauce-top-kaggle-competition.html)
+> 原文：[`www.kdnuggets.com/2018/11/secret-sauce-top-kaggle-competition.html`](https://www.kdnuggets.com/2018/11/secret-sauce-top-kaggle-competition.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Abhay Pawar](https://www.linkedin.com/in/abhayspawar/), Instacart**。
 
@@ -12,17 +12,17 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 在数值数据上构建任何监督学习模型的最重要方面之一是充分理解特征。查看模型的部分依赖图有助于你了解模型输出如何随特征变化。
 
-![](../Images/07c9b6de56eb09c892fd33c2bfcca060.png)
+![](img/07c9b6de56eb09c892fd33c2bfcca060.png)
 
 **[来源](http://scikit-learn.org/stable/auto_examples/ensemble/plot_partial_dependence.html)**
 
@@ -46,13 +46,13 @@
 
 1.  **特征理解**
 
-![](../Images/ea624a802c8f342df8575ad80e83098b.png)
+![](img/ea624a802c8f342df8575ad80e83098b.png)
 
 **特征与目标的散点图无帮助**
 
 如果因变量（目标）是二值的，散点图就不起作用，因为所有点要么在 0，要么在 1。对于连续目标，数据点过多会使理解目标与特征的趋势变得困难。Featexp 创建了更好的图表来帮助解决这个问题。我们来试试吧！
 
-![](../Images/4f370ec9c6877ce1c858a553c8cd5f6a.png)
+![](img/4f370ec9c6877ce1c858a553c8cd5f6a.png)
 
 **DAYS_BIRTH（年龄）的特征与目标图**
 
@@ -62,7 +62,7 @@ Featexp 创建了一个数值特征的等人口区间（X 轴）。然后计算�
 
 噪声特征会导致过拟合，识别这些特征并不容易。在 featexp 中，你可以传递一个测试集，并比较训练集/测试集中的特征趋势以识别噪声特征。这个测试集不是实际的测试集，而是你的本地测试集/验证集，你对其目标是知道的。
 
-![](../Images/351dde6ae8bc3e0a98dacd8ce5f3f4e2.png)
+![](img/351dde6ae8bc3e0a98dacd8ce5f3f4e2.png)
 
 **训练集和测试集中的特征趋势比较**
 
@@ -74,7 +74,7 @@ Featexp 计算两个指标以显示在这些图表上，这有助于评估噪声
 
 下述特征没有保持相同的趋势，因此其趋势相关性较低，为 85%。这两个指标可以用来去掉噪声特征。
 
-![](../Images/83ad33aa0de9f5870280829884569f80.png)
+![](img/83ad33aa0de9f5870280829884569f80.png)
 
 噪声特征示例
 
@@ -82,39 +82,39 @@ Featexp 计算两个指标以显示在这些图表上，这有助于评估噪声
 
 使用不同时间段的测试数据效果更好，因为这样你可以确保特征趋势随时间保持一致。
 
-***get_trend_stats()***函数在featexp中返回一个包含每个特征趋势相关性和变化的数据框。
+***get_trend_stats()***函数在 featexp 中返回一个包含每个特征趋势相关性和变化的数据框。
 
-![](../Images/d3de62250fd43f434c6f248afa3dda3f.png)
+![](img/d3de62250fd43f434c6f248afa3dda3f.png)
 
 **get_trend_stats()返回的数据框**
 
 让我们实际尝试在数据中丢弃趋势相关性低的特征，看看结果是否有所改善。
 
-![](../Images/2e5ecf19c6de1dc2da562afc954c2ea4.png)
+![](img/2e5ecf19c6de1dc2da562afc954c2ea4.png)
 
-**不同特征选择下的AUC与趋势相关性**
+**不同特征选择下的 AUC 与趋势相关性**
 
-**我们可以看到，丢弃特征的趋势相关性阈值越高，排行榜（LB）AUC越高。** 不丢弃重要特征可以进一步提高LB AUC到0.74。值得注意且令人担忧的是测试AUC没有像LB AUC那样变化。确保验证策略正确，使得本地测试AUC跟随LB AUC也很重要。完整代码可以在[featexp_demo](https://github.com/abhayspawar/featexp/blob/master/featexp_demo.ipynb)笔记本中找到。
+**我们可以看到，丢弃特征的趋势相关性阈值越高，排行榜（LB）AUC 越高。** 不丢弃重要特征可以进一步提高 LB AUC 到 0.74。值得注意且令人担忧的是测试 AUC 没有像 LB AUC 那样变化。确保验证策略正确，使得本地测试 AUC 跟随 LB AUC 也很重要。完整代码可以在[featexp_demo](https://github.com/abhayspawar/featexp/blob/master/featexp_demo.ipynb)笔记本中找到。
 
 1.  **特征工程**
 
-通过查看这些图，你可以获得创建更好特征的洞见。对数据有更好的理解可以导致更好的特征工程。但除此之外，它还可以帮助你改进现有特征。让我们再看一个特征EXT_SOURCE_1：
+通过查看这些图，你可以获得创建更好特征的洞见。对数据有更好的理解可以导致更好的特征工程。但除此之外，它还可以帮助你改进现有特征。让我们再看一个特征 EXT_SOURCE_1：
 
-![](../Images/92d9594de93911d7327e963c608c014d.png)
+![](img/92d9594de93911d7327e963c608c014d.png)
 
-**EXT_SOURCE_1的特征与目标关系图**
+**EXT_SOURCE_1 的特征与目标关系图**
 
-具有高EXT_SOURCE_1值的客户违约率较低。但，第一个区间（~8%的违约率）并没有跟随特征趋势（先上升再下降）。这个区间只有-99.985左右的负值和一个大的人口基数。这可能意味着这些是特殊值，因此不符合特征趋势。幸运的是，非线性模型在学习这种关系时不会有问题。但是，对于像逻辑回归这样的线性模型，这些特殊值和空值（将作为单独的区间显示）应该用具有类似违约率的区间的值进行填补，而不是简单地用特征均值填补。
+具有高 EXT_SOURCE_1 值的客户违约率较低。但，第一个区间（~8%的违约率）并没有跟随特征趋势（先上升再下降）。这个区间只有-99.985 左右的负值和一个大的人口基数。这可能意味着这些是特殊值，因此不符合特征趋势。幸运的是，非线性模型在学习这种关系时不会有问题。但是，对于像逻辑回归这样的线性模型，这些特殊值和空值（将作为单独的区间显示）应该用具有类似违约率的区间的值进行填补，而不是简单地用特征均值填补。
 
 1.  **特征重要性**
 
-Featexp还可以帮助你评估特征的重要性。DAYS_BIRTH和EXT_SOURCE_1都有较好的趋势。然而，EXT_SOURCE_1的人口集中在特殊值区间，意味着该特征对大多数客户的信息相同，因此不能很好地区分他们。这表明它可能没有DAYS_BIRTH重要。根据XGBoost模型的特征重要性，DAYS_BIRTH实际上比EXT_SOURCE_1更重要。
+Featexp 还可以帮助你评估特征的重要性。DAYS_BIRTH 和 EXT_SOURCE_1 都有较好的趋势。然而，EXT_SOURCE_1 的人口集中在特殊值区间，意味着该特征对大多数客户的信息相同，因此不能很好地区分他们。这表明它可能没有 DAYS_BIRTH 重要。根据 XGBoost 模型的特征重要性，DAYS_BIRTH 实际上比 EXT_SOURCE_1 更重要。
 
 1.  **特征调试**
 
-查看Featexp的图可以帮助你通过以下两种方式捕捉复杂特征工程代码中的错误：
+查看 Featexp 的图可以帮助你通过以下两种方式捕捉复杂特征工程代码中的错误：
 
-![](../Images/427300b93d98d42509f93614b0ea11f4.png)
+![](img/427300b93d98d42509f93614b0ea11f4.png)
 
 **零变异特征只显示一个区间**
 
@@ -128,7 +128,7 @@ Featexp还可以帮助你评估特征的重要性。DAYS_BIRTH和EXT_SOURCE_1都
 
 下面的特征在‘空值’分箱中的违约率为 0%，在所有其他分箱中的违约率为 100%。显然，这是泄漏的极端案例。该特征仅在客户违约时有值。根据特征的性质，这可能是由于错误，或者该特征仅为违约者填充（在这种情况下应删除）。**了解泄漏特征的问题有助于更快地进行调试。**
 
-![](../Images/253799c3124bc342cdd142d4037a4b0d.png)
+![](img/253799c3124bc342cdd142d4037a4b0d.png)
 
 **理解特征为何会泄漏**
 
@@ -160,12 +160,12 @@ Featexp还可以帮助你评估特征的重要性。DAYS_BIRTH和EXT_SOURCE_1都
 
 +   [开始使用 LLMOps：无缝交互的秘诀](https://www.kdnuggets.com/getting-started-with-llmops-the-secret-sauce-behind-seamless-interactions)
 
-+   [GPT-4：一体化的8种模型；秘密已揭晓](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)
++   [GPT-4：一体化的 8 种模型；秘密已揭晓](https://www.kdnuggets.com/2023/08/gpt4-8-models-one-secret.html)
 
-+   [HuggingGPT：解决复杂AI任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
++   [HuggingGPT：解决复杂 AI 任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
 
-+   [在Kaggle竞争的四大技巧及为何你应立即开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)
++   [在 Kaggle 竞争的四大技巧及为何你应立即开始](https://www.kdnuggets.com/2022/05/packt-top-4-tricks-competing-kaggle-start.html)
 
-+   [2024年成为数据科学家的10个Kaggle机器学习项目](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)
++   [2024 年成为数据科学家的 10 个 Kaggle 机器学习项目](https://www.kdnuggets.com/top-10-kaggle-machine-learning-projects-to-become-data-scientist-in-2024)
 
-+   [最全面的Kaggle解决方案和创意列表](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)
++   [最全面的 Kaggle 解决方案和创意列表](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)

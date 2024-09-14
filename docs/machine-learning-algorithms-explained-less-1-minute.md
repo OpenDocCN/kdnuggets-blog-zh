@@ -1,8 +1,8 @@
 # 机器学习算法解释，少于 1 分钟
 
-> 原文：[https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
+> 原文：[`www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html`](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 
-![机器学习算法解释，少于 1 分钟](../Images/513b4a116bd442cb812272e0c636791c.png)
+![机器学习算法解释，少于 1 分钟](img/513b4a116bd442cb812272e0c636791c.png)
 
 图片由 [pch.vector](https://www.freepik.com/free-vector/man-digital-era-algorithm-ai-social-system-21st-century-workforce-challenge-flat-vector-illustration-smart-business-process-human-resources-automation-artificial-intelligence-concept_22343897.htm#query=Algorithms&position=23&from_view=search&track=sph) 在 Freepik 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,9 +28,9 @@
 
 # 逻辑回归
 
-逻辑回归与线性回归类似，用于对分类因变量进行预测，基于自变量的知识。分类变量有两个或更多类别。逻辑回归将输出分类为只能在0和1之间的值。
+逻辑回归与线性回归类似，用于对分类因变量进行预测，基于自变量的知识。分类变量有两个或更多类别。逻辑回归将输出分类为只能在 0 和 1 之间的值。
 
-例如，你可以使用逻辑回归来确定学生是否会被某个特定大学录取，取决于他们的成绩——结果可以是“是”或“否”，或者是0或1。
+例如，你可以使用逻辑回归来确定学生是否会被某个特定大学录取，取决于他们的成绩——结果可以是“是”或“否”，或者是 0 或 1。
 
 # 决策树
 
@@ -48,11 +48,11 @@
 
 K-最近邻利用数据点之间的距离来决定这些数据点是否可以分组。数据点之间的接近度反映了它们之间的相似性。
 
-例如，如果我们有一个图表，其中有一组彼此靠近的数据点称为组A，另一组彼此靠近的数据点称为组B。当输入一个新的数据点时，根据新数据点更接近哪个组——这将是它的新分类组。
+例如，如果我们有一个图表，其中有一组彼此靠近的数据点称为组 A，另一组彼此靠近的数据点称为组 B。当输入一个新的数据点时，根据新数据点更接近哪个组——这将是它的新分类组。
 
 # 支持向量机
 
-类似于最近邻，支持向量机执行分类、回归和异常值检测任务。它通过绘制一个超平面（直线）来分隔类别。位于直线一侧的数据点将被标记为组A，而另一侧的数据点将被标记为组B。
+类似于最近邻，支持向量机执行分类、回归和异常值检测任务。它通过绘制一个超平面（直线）来分隔类别。位于直线一侧的数据点将被标记为组 A，而另一侧的数据点将被标记为组 B。
 
 例如，当输入一个新的数据点时，依据该数据点位于超平面哪一侧及其在边界内的位置——这将决定数据点属于哪个类别。
 
@@ -62,11 +62,11 @@ K-最近邻利用数据点之间的距离来决定这些数据点是否可以分
 
 它预测每个类别的概率，归属于某个特定类别，概率最高的类别被认为是最可能的类别。
 
-# k均值聚类
+# k 均值聚类
 
-K均值聚类，类似于最近邻，但使用聚类的方法将相似的项/数据点分组在簇中。簇的数量被称为K。你通过选择k值、初始化质心，然后选择组并计算平均值来完成这一过程。
+K 均值聚类，类似于最近邻，但使用聚类的方法将相似的项/数据点分组在簇中。簇的数量被称为 K。你通过选择 k 值、初始化质心，然后选择组并计算平均值来完成这一过程。
 
-例如，如果存在3个簇，且输入一个新的数据点，根据它属于哪个簇——这就是它所属的簇。
+例如，如果存在 3 个簇，且输入一个新的数据点，根据它属于哪个簇——这就是它所属的簇。
 
 # 袋装
 
@@ -90,13 +90,13 @@ XGBoost，代表极端梯度提升，被用于 Boosting。
 
 # 结论
 
-本文的目的是帮助你以最简单的术语理解机器学习算法。如果你想更深入地了解每一个算法，可以阅读这个[流行的机器学习算法](/2022/05/popular-machine-learning-algorithms.html)。
+本文的目的是帮助你以最简单的术语理解机器学习算法。如果你想更深入地了解每一个算法，可以阅读这个流行的机器学习算法。
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由技术撰稿人。她特别感兴趣于提供数据科学职业建议或教程以及数据科学的理论知识。她还希望探索人工智能如何能促进人类寿命的不同方式。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，7月20日：机器学习算法的解释…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法的解释…](https://www.kdnuggets.com/2022/n29.html)
 
 +   [在少于 15 行代码中进行多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 

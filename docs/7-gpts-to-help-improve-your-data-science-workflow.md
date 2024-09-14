@@ -1,50 +1,50 @@
-# 提升数据科学工作流程的7个GPT
+# 提升数据科学工作流程的 7 个 GPT
 
-> 原文：[https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)
+> 原文：[`www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow`](https://www.kdnuggets.com/7-gpts-to-help-improve-your-data-science-workflow)
 
-![提升数据科学工作流程的7个GPT](../Images/f3acad0a6a54fa22fa21f3b5c968b41a.png)
+![提升数据科学工作流程的 7 个 GPT](img/f3acad0a6a54fa22fa21f3b5c968b41a.png)
 
 图片由编辑提供
 
-ChatGPT已经成为改变世界运作方式的OpenAI产品。许多读者已经在使用它们，或者至少在测试它们。它帮助我们的方式，让我觉得我们可能无法回到过去的工作方式。
+ChatGPT 已经成为改变世界运作方式的 OpenAI 产品。许多读者已经在使用它们，或者至少在测试它们。它帮助我们的方式，让我觉得我们可能无法回到过去的工作方式。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 
-OpenAI提供的一项创新是GPT商店，用户可以在其中开发自己的自定义GPT模型并与公众分享。超过300万个ChatGPT自定义GPT模型对外开放。的确，其中一些可能对提升数据科学家的活动有所帮助。
+OpenAI 提供的一项创新是 GPT 商店，用户可以在其中开发自己的自定义 GPT 模型并与公众分享。超过 300 万个 ChatGPT 自定义 GPT 模型对外开放。的确，其中一些可能对提升数据科学家的活动有所帮助。
 
-本文将讨论来自GPT商店的7个GPT，它们可能会改善你的数据科学工作流程。这些GPT是什么？让我们深入了解。
+本文将讨论来自 GPT 商店的 7 个 GPT，它们可能会改善你的数据科学工作流程。这些 GPT 是什么？让我们深入了解。
 
-顺便提一下，我会使用[Kaggle上的电信流失数据集](https://www.kaggle.com/datasets/barun2104/telecom-churn)作为GPTs使用的示例数据集。
+顺便提一下，我会使用[Kaggle 上的电信流失数据集](https://www.kaggle.com/datasets/barun2104/telecom-churn)作为 GPTs 使用的示例数据集。
 
-# 1\. ChatGPT提供的数据分析师
+# 1\. ChatGPT 提供的数据分析师
 
-让我们从ChatGPT团队为我们创建的[数据分析师](https://chat.openai.com/g/g-HMNcP6w7d-data-analyst)开始。这是一个专门训练用于分析我们的数据并按需可视化的自定义GPT。通过上传文件，如CSV文件，并提供所需的提示，数据分析师GPT可以自动完成工作。
+让我们从 ChatGPT 团队为我们创建的[数据分析师](https://chat.openai.com/g/g-HMNcP6w7d-data-analyst)开始。这是一个专门训练用于分析我们的数据并按需可视化的自定义 GPT。通过上传文件，如 CSV 文件，并提供所需的提示，数据分析师 GPT 可以自动完成工作。
 
 例如，我会要求数据分析师根据我提供的数据集进行流失相关性分析。
 
-![提升数据科学工作流程的7个GPT](../Images/338ff5b1e65e07c8937058e3c8f2ecd5.png)
+![提升数据科学工作流程的 7 个 GPT](img/338ff5b1e65e07c8937058e3c8f2ecd5.png)
 
 数据分析师执行相关性分析（图片由作者提供）
 
-你可以向数据分析师GPT请求进一步分析。如果需要，你也可以使用GPT提供完整代码自行执行。
+你可以向数据分析师 GPT 请求进一步分析。如果需要，你也可以使用 GPT 提供完整代码自行执行。
 
-# 2\. 由Maryam Eskandari撰写的机器学习
+# 2\. 由 Maryam Eskandari 撰写的机器学习
 
-我们将讨论的下一个GPT是[机器学习GPT](https://chat.openai.com/g/g-TfiZbdLM0-machine-learning)。这个自定义GPT被设计为机器学习和数据科学活动的助手。它的实用性包括讨论、学习和开发适合我们数据项目的算法。
+我们将讨论的下一个 GPT 是[机器学习 GPT](https://chat.openai.com/g/g-TfiZbdLM0-machine-learning)。这个自定义 GPT 被设计为机器学习和数据科学活动的助手。它的实用性包括讨论、学习和开发适合我们数据项目的算法。
 
 作为一个例子，我请求机器学习 GPT 从我们的示例数据集中执行模型开发以预测流失。以下是结果。
 
-![7 GPTs to Help Improve Your Data Science Workflow](../Images/801a659e1f72785f8c38bf509f6827f6.png)
+![7 GPTs to Help Improve Your Data Science Workflow](img/801a659e1f72785f8c38bf509f6827f6.png)
 
 机器学习执行模型实验（图像由作者提供）
 
@@ -92,7 +92,7 @@ ScholarGPT 提供了更多研究论文供你选择，因此你可以选择适用
 
 例如，我要求模型从 Churn 数据集中提供一个建议图表，它建议通过特征来可视化流失情况。下面是图像结果。
 
-![7 个 GPT 帮助改进你的数据科学工作流程](../Images/5f70545abea696c8e00231b209d04241.png)
+![7 个 GPT 帮助改进你的数据科学工作流程](img/5f70545abea696c8e00231b209d04241.png)
 
 特征流失（由 Whimsical Diagram GPT 生成的图像）
 
@@ -104,7 +104,7 @@ ScholarGPT 提供了更多研究论文供你选择，因此你可以选择适用
 
 数据科学的核心是将结果传达给他人，因此拥有有效的结果并以观众能够理解的方式展示是至关重要的。通过 Canva GPT，我们可以请求建议哪种设计最合适。例如，我要求模型提供一个适合展示流失统计数据的设计。
 
-![7 个 GPT 帮助改进你的数据科学工作流程](../Images/57c1f0aa4453cd353453b3ff0b39fdec.png)
+![7 个 GPT 帮助改进你的数据科学工作流程](img/57c1f0aa4453cd353453b3ff0b39fdec.png)
 
 流失统计设计选择（Canva GPT）
 

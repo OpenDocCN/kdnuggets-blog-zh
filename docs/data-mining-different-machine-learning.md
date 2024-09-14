@@ -1,8 +1,8 @@
 # 数据挖掘与机器学习有何不同？
 
-> 原文：[https://www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html](https://www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html`](https://www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html)
 
-![数据挖掘与机器学习有何不同？](../Images/04dbfec41c5d79f9d5ba437de7e600f6.png)
+![数据挖掘与机器学习有何不同？](img/04dbfec41c5d79f9d5ba437de7e600f6.png)
 
 我们生活在一个数据驱动、信息丰富的数字时代，企业时常见到新的技术术语和概念。随着越来越多的企业适应人工智能和机器学习，大数据和数据分析展示奇迹的可能性也大大增加。数据是一个关键工具；然而，数据量越大，组织获得洞察所需的时间就越长。
 
@@ -34,7 +34,7 @@
 
 在今天竞争激烈的商业世界中，从数据中获取尽可能多的好处至关重要。这里是数据挖掘为企业提供的一系列广泛的好处。
 
-1.  与传统的数据处理方法如BI工具和软件系统相比，数据挖掘是一种成本效益高的解决方案。
+1.  与传统的数据处理方法如 BI 工具和软件系统相比，数据挖掘是一种成本效益高的解决方案。
 
 1.  企业通过数据挖掘方法进行有利可图的生产和操作调整。
 
@@ -62,11 +62,11 @@
 
 数据挖掘受限于数据的组织和收集方式，并作为从复杂数据集中提取相关见解的手段。机器学习识别所有相关数据点之间的关联，以提供准确的结论，并最终塑造模型的行为。
 
-**例如，** CRM系统实施机器学习程序以增强其关系智能，以更好地理解客户。它可以分析过去的行动以提高转化率并改善客户满意度评分。这里有一个小的比较表格，帮助你更好地区分数据挖掘和机器学习。
+**例如，** CRM 系统实施机器学习程序以增强其关系智能，以更好地理解客户。它可以分析过去的行动以提高转化率并改善客户满意度评分。这里有一个小的比较表格，帮助你更好地区分数据挖掘和机器学习。
 
 | **比较基础** | **数据挖掘** | **机器学习** |
 | --- | --- | --- |
-| 历史 | 它在1930年被引入，称为数据库中的知识发现。 | 它在1950年首次引入，用于Samuel的棋盘游戏程序。 |
+| 历史 | 它在 1930 年被引入，称为数据库中的知识发现。 | 它在 1950 年首次引入，用于 Samuel 的棋盘游戏程序。 |
 | 起源 | 它起源于包含非结构化数据的传统数据库。 | 它起源于现有的数据和算法。 |
 | 意义 | 它有助于从大型数据集中提取信息。 | 它从数据中引入了一个新算法。 |
 | 责任 | 它用于从现有数据中获取规则。 | 它教会计算机学习和理解给定的规则。 |
@@ -81,17 +81,17 @@
 
 然而，保持数据挖掘过程是至关重要的，因为它将定义特定业务的问题。数据挖掘和机器学习是推动业务发展的必要手段，需要更好地协同工作。
 
-[**Sudeep Srivastava**](https://www.linkedin.com/in/sudeep-srivastava/?originalSubdomain=in) 是Appinventiv的首席执行官，他以乐观和精心计算的风险相结合的完美特质建立了自己，这一特质在Appinventiv的每个工作过程中都得到了体现。他建立了一个以挖掘移动行业未开发想法而闻名的品牌，花时间探索将Appinventiv带到技术与生活融合的地步。
+[**Sudeep Srivastava**](https://www.linkedin.com/in/sudeep-srivastava/?originalSubdomain=in) 是 Appinventiv 的首席执行官，他以乐观和精心计算的风险相结合的完美特质建立了自己，这一特质在 Appinventiv 的每个工作过程中都得到了体现。他建立了一个以挖掘移动行业未开发想法而闻名的品牌，花时间探索将 Appinventiv 带到技术与生活融合的地步。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

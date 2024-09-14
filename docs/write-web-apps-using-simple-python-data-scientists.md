@@ -1,8 +1,8 @@
 # 如何使用简单的 Python 为数据科学家编写 Web 应用程序
 
-> 原文：[https://www.kdnuggets.com/2019/10/write-web-apps-using-simple-python-data-scientists.html](https://www.kdnuggets.com/2019/10/write-web-apps-using-simple-python-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/10/write-web-apps-using-simple-python-data-scientists.html`](https://www.kdnuggets.com/2019/10/write-web-apps-using-simple-python-data-scientists.html)
 
-[评论](#comments)
+评论
 
 如果没有一个好的展示方式，机器学习项目永远不会真正完成。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -46,11 +46,11 @@
 
 这应该会显示一个提示信息：
 
-![](../Images/b36ddb8cd9c75be4801d6302f5800e74.png)
+![](img/b36ddb8cd9c75be4801d6302f5800e74.png)
 
 您可以在浏览器中访问本地 URL: `localhost:8501` 来查看 Streamlit 应用程序的实际效果。开发者提供了一些有趣的演示，您可以尽情体验。在回来之前请充分体验一下工具的强大。
 
-![](../Images/98b81dabd0800ee19aa539508e72d6fd.png)
+![](img/98b81dabd0800ee19aa539508e72d6fd.png)
 
 ### Streamlit Hello World
 
@@ -58,7 +58,7 @@ Streamlit 旨在通过简单的 Python 使应用程序开发变得容易。
 
 所以，让我们写一个简单的应用来看看它是否能兑现这个承诺。
 
-在这里，我开始一个简单的应用，我们将其称为Streamlit的Hello World。只需将下面给出的代码粘贴到名为`helloworld.py`的文件中
+在这里，我开始一个简单的应用，我们将其称为 Streamlit 的 Hello World。只需将下面给出的代码粘贴到名为`helloworld.py`的文件中
 
 ```py
 import streamlit as stx = st.slider('x')
@@ -73,11 +73,11 @@ streamlit run helloworld.py
 
 完成后，你应该能在浏览器中的`localhost:8501`看到一个简单的应用，允许你移动滑块并显示结果。
 
-![图示](../Images/77e116a21563e022c2f0faaabb15f40e.png)
+![图示](img/77e116a21563e022c2f0faaabb15f40e.png)
 
 一个简单的滑块小部件应用
 
-这非常简单。在上述应用中，我们使用了Streamlit的两个功能：
+这非常简单。在上述应用中，我们使用了 Streamlit 的两个功能：
 
 +   `st.slider` 小部件可以滑动以更改网页应用的输出。
 
@@ -85,9 +85,9 @@ streamlit run helloworld.py
 
 ***重要提示：记住，每次我们更改小部件的值时，整个应用都会从头到尾重新运行。***
 
-### Streamlit小部件
+### Streamlit 小部件
 
-小部件为我们提供了一种控制应用的方式。阅读小部件的最佳地方是[API参考](https://streamlit.io/docs/api.html)文档，但我将描述一些你可能会使用的最重要的小部件。
+小部件为我们提供了一种控制应用的方式。阅读小部件的最佳地方是[API 参考](https://streamlit.io/docs/api.html)文档，但我将描述一些你可能会使用的最重要的小部件。
 
 **1\. 滑块**
 
@@ -95,11 +95,11 @@ streamlit run helloworld.py
 streamlit.slider(*label*, *min_value=None*, *max_value=None*, *value=None*, *step=None*, *format=None*)
 ```
 
-我们已经在上面看到`st.slider`的效果。它可以与min_value、max_value和step一起使用，以获取范围内的输入。
+我们已经在上面看到`st.slider`的效果。它可以与 min_value、max_value 和 step 一起使用，以获取范围内的输入。
 
 **2\. 文本输入**
 
-获取用户输入的最简单方式，无论是一些URL输入还是文本输入进行情感分析。只需要一个标签来命名文本框。
+获取用户输入的最简单方式，无论是一些 URL 输入还是文本输入进行情感分析。只需要一个标签来命名文本框。
 
 ```py
 import streamlit as sturl = st.text_input('Enter URL')
@@ -108,7 +108,7 @@ st.write('The Entered URL is', url)
 
 这是应用的外观：
 
-![图示](../Images/584efce2218bc6fd32061a4abd5bfad9.png)
+![图示](img/584efce2218bc6fd32061a4abd5bfad9.png)
 
 一个简单的文本输入小部件应用
 
@@ -126,7 +126,7 @@ if st.checkbox('Show dataframe'):
     st.write(df)
 ```
 
-![图示](../Images/41dfc8c293a9ecd40feb63126ca6ff55.png)
+![图示](img/41dfc8c293a9ecd40feb63126ca6ff55.png)
 
 一个简单的复选框小部件应用
 
@@ -142,7 +142,7 @@ import numpy as npdf = pd.read_csv("football_data.csv")option = st.selectbox(
      df['Club'].unique())'You selected: ', option
 ```
 
-![图示](../Images/004085363e293314b892eb7782fb8a5a.png)
+![图示](img/004085363e293314b892eb7782fb8a5a.png)
 
 一个简单的下拉/选择框小部件应用
 
@@ -157,7 +157,7 @@ import numpy as npdf = pd.read_csv("football_data.csv")options = st.multiselect(
  'What are your favorite clubs?', df['Club'].unique())st.write('You selected:', options)
 ```
 
-![图示](../Images/8cc0cd817759f5e70e3718703b1090bb.png)
+![图示](img/8cc0cd817759f5e70e3718703b1090bb.png)
 
 一个简单的多选小部件应用
 
@@ -177,7 +177,7 @@ st.write(new_df)
 
 我们的简单应用程序看起来像：
 
-![图](../Images/67f9558dfafa88892f7dba592c60529b.png)
+![图](img/67f9558dfafa88892f7dba592c60529b.png)
 
 使用多个小部件联合使用
 
@@ -198,7 +198,7 @@ fig = px.scatter(new_df, x ='Overall',y='Age',color='Name')# Plot!
 st.plotly_chart(fig)
 ```
 
-![图](../Images/e48af5b9978fab715a87f740201f3d69.png)
+![图](img/e48af5b9978fab715a87f740201f3d69.png)
 
 添加图表
 
@@ -247,7 +247,7 @@ fig = px.scatter(new_df, x ='Overall',y='Age',color='Name')# Plot!
 st.plotly_chart(fig)
 ```
 
-![图](../Images/985ed87f7ef1cb1d21b1140f0da1a995.png)
+![图](img/985ed87f7ef1cb1d21b1140f0da1a995.png)
 
 将小部件移动到侧边栏
 
@@ -272,7 +272,7 @@ fig = px.scatter(new_df, x ='Overall',y='Age',color='Name')'''
 '''st.plotly_chart(fig)
 ```
 
-![图](../Images/4c18d90180760c668954ca4899252e07.png)
+![图](img/4c18d90180760c668954ca4899252e07.png)
 
 我们的最终应用演示
 
@@ -282,7 +282,7 @@ Streamlit 已经使创建应用程序的整个过程变得更加普及，我非�
 
 在这篇文章中，我们创建了一个简单的网页应用。但可能性是无穷的。举个例子，这里是来自 Streamlit 网站的[面部 GAN](https://research.nvidia.com/publication/2017-10_Progressive-Growing-of)。它通过使用相同的部件和缓存指导思想来工作。
 
-![](../Images/8c128ce20d3beb22716789d4ed7d4b62.png)
+![](img/8c128ce20d3beb22716789d4ed7d4b62.png)
 
 我喜欢开发者使用的默认颜色和样式，比我之前用于演示的 Dash 更加舒适。你还可以在你的 Streamlit 应用中加入[音频](https://streamlit.io/docs/api.html#display-interactive-widgets)和视频。
 
@@ -308,11 +308,11 @@ Streamlit 已经使创建应用程序的整个过程变得更加普及，我非�
 
 **相关：**
 
-+   [数据科学家的 6 条建议](/2019/09/advice-data-scientists.html)
++   数据科学家的 6 条建议
 
-+   [Kaggle 的优质特征构建技巧和窍门](/2018/12/feature-building-techniques-tricks-kaggle.html)
++   Kaggle 的优质特征构建技巧和窍门
 
-+   [数据科学家应该知道的 5 个图算法](/2019/09/5-graph-algorithms-data-scientists-know.html)
++   数据科学家应该知道的 5 个图算法
 
 ### 更多相关内容
 

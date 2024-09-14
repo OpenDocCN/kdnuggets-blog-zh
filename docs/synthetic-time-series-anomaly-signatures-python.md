@@ -1,10 +1,10 @@
-# 使用Python创建具有异常特征的合成时间序列
+# 使用 Python 创建具有异常特征的合成时间序列
 
-> 原文：[https://www.kdnuggets.com/2021/10/synthetic-time-series-anomaly-signatures-python.html](https://www.kdnuggets.com/2021/10/synthetic-time-series-anomaly-signatures-python.html)
+> 原文：[`www.kdnuggets.com/2021/10/synthetic-time-series-anomaly-signatures-python.html`](https://www.kdnuggets.com/2021/10/synthetic-time-series-anomaly-signatures-python.html)
 
-[comments](#comments)
+comments
 
-![](../Images/2853b86d2ee323dcee3a240c620cd80d.png)
+![](img/2853b86d2ee323dcee3a240c620cd80d.png)
 
 **图片来源**：作者使用 [Pixabay](https://pixabay.com/illustrations/digitization-cyborg-chip-circuit-6399664/) （免费使用）制作
 
@@ -22,11 +22,11 @@
 
 压力。温度。电动组件的振动和加速度。质量检查数据。操作员行动日志。
 
-数据不断涌入。这是[工业4.0](https://www.epicor.com/en-us/resource-center/articles/what-is-industry-4-0/)或[智能工厂时代](https://metrology.news/factory-2030-the-coming-of-age-of-the-smart-factory/)的新常态。虽然结构化和半结构化数据在上升，但仍有大量时间序列（或类似时间序列）数据来自现代工厂中嵌入的各种测量点。
+数据不断涌入。这是[工业 4.0](https://www.epicor.com/en-us/resource-center/articles/what-is-industry-4-0/)或[智能工厂时代](https://metrology.news/factory-2030-the-coming-of-age-of-the-smart-factory/)的新常态。虽然结构化和半结构化数据在上升，但仍有大量时间序列（或类似时间序列）数据来自现代工厂中嵌入的各种测量点。
 
-[**工厂2030——智能工厂的“成年礼”——计量与质量新闻——在线…**](https://metrology.news/factory-2030-the-coming-of-age-of-the-smart-factory/)
+[**工厂 2030——智能工厂的“成年礼”——计量与质量新闻——在线…**](https://metrology.news/factory-2030-the-coming-of-age-of-the-smart-factory/)
 
-![](../Images/2148876c777ba46aff97a88897de4575.png)
+![](img/2148876c777ba46aff97a88897de4575.png)
 
 **图片来源**： [Pixabay](https://pixabay.com/illustrations/industry-web-network-artificial-4330186/) （免费使用）
 
@@ -60,7 +60,7 @@
 
 ## 工业过程的概念和‘单元过程时间’
 
-![](../Images/b76d062be63451034d17935114d1af0c.png)
+![](img/b76d062be63451034d17935114d1af0c.png)
 
 **图像来源**：作者创作
 
@@ -78,21 +78,21 @@
 
 因此，这就是基本的`SyntheticTS`类的定义开始，
 
-![](../Images/ed4b5f58af6c096601acc2f45ec74acc.png)
+![](img/ed4b5f58af6c096601acc2f45ec74acc.png)
 
 ## ‘正常’过程
 
 为了生成异常，我们需要一个基准正常状态。我们可以字面上使用“**正态分布**”来实现。你可以根据具体的过程类型和情况随时更改，但绝大多数工业过程在其传感器测量方面确实遵循正态分布。
 
-![](../Images/e32ada8481560ebd81bfd8d9391070a3.png)
+![](img/e32ada8481560ebd81bfd8d9391070a3.png)
 
-假设我们有一个工业过程/机器从2021年5月1日启动，并运行到2021年5月6日（一个典型的6天周期，通常在每周维护之前）。单位过程时间为15分钟。我们选择了过程的均值为100，标准差为5。
+假设我们有一个工业过程/机器从 2021 年 5 月 1 日启动，并运行到 2021 年 5 月 6 日（一个典型的 6 天周期，通常在每周维护之前）。单位过程时间为 15 分钟。我们选择了过程的均值为 100，标准差为 5。
 
-![](../Images/3ba564c75732b06bb1ae60d36299efab.png)
+![](img/3ba564c75732b06bb1ae60d36299efab.png)
 
-![](../Images/9f417dbfdf355caaa98c3e2bdf945ea8.png)
+![](img/9f417dbfdf355caaa98c3e2bdf945ea8.png)
 
-![](../Images/b6a6be0e912f49b1b714a147b6fb3f8c.png)
+![](img/b6a6be0e912f49b1b714a147b6fb3f8c.png)
 
 ## 基本的‘异常化’方法
 
@@ -110,31 +110,31 @@
 
 这是一个例子，
 
-![](../Images/6be322f5559cf1884c3f0e69526f9061.png)
+![](img/6be322f5559cf1884c3f0e69526f9061.png)
 
 ## 变化的异常尺度
 
 我们可以通过简单地改变`anomaly_scale`参数，将异常放置在不同的距离上。
 
-![](../Images/a4110279666cf9be3d20e78c5f347898.png)
+![](img/a4110279666cf9be3d20e78c5f347898.png)
 
 这是生成的图示。注意图示的纵轴刻度是如何随着异常的增大而变化的。
 
-![](../Images/5e9e65cc2a880eb4769d0fc8e113c313.png)
+![](img/5e9e65cc2a880eb4769d0fc8e113c313.png)
 
 ## 异常比例的变化
 
-接下来，我们改变异常的比例（保持尺度为2.0不变）。
+接下来，我们改变异常的比例（保持尺度为 2.0 不变）。
 
-![](../Images/17582c98f11117f388f269bb89a1b4f0.png)
+![](img/17582c98f11117f388f269bb89a1b4f0.png)
 
 ## 引入‘正向偏移’
 
 这是工业过程中相当常见的情况，过程中由于机器设置或其他原因的突然变化，导致出现明显的偏移。**有时这是计划好的，有时则是无意的**。根据情况，异常检测算法可能需要不同地分析和处理。无论如何，我们需要一种方法在合成数据中引入这种偏移。
 
-在这种情况下，我们选择了数据的10%偏移，即均值为`pct_drift_mean=10`参数。请注意，如果我们不在方法中指定参数`time_drift`，则代码会自动在整个过程的开始和结束时间的中点引入漂移。
+在这种情况下，我们选择了数据的 10%偏移，即均值为`pct_drift_mean=10`参数。请注意，如果我们不在方法中指定参数`time_drift`，则代码会自动在整个过程的开始和结束时间的中点引入漂移。
 
-![](../Images/0b340736ebd60dad544790d407e55aad.png)
+![](img/0b340736ebd60dad544790d407e55aad.png)
 
 ## 在特定位置的负偏移
 
@@ -148,7 +148,7 @@
 
 这是一个更现实的情况。
 
-![](../Images/6871007d9e376f58d62c63de14f440ef.png)
+![](img/6871007d9e376f58d62c63de14f440ef.png)
 
 ## 分块异常
 
@@ -156,9 +156,9 @@
 
 目前，代码创建的分块异常均匀分布在整个时间段内。但在下一次代码更新中，这可以通过单独的时间点和分块的异常特征进行自定义。
 
-![](../Images/57676a76d6f787b595cf7595589aa315.png)
+![](img/57676a76d6f787b595cf7595589aa315.png)
 
-![](../Images/c0fe23837bc4599f186de8de4dd7be77.png)
+![](img/c0fe23837bc4599f186de8de4dd7be77.png)
 
 ## 总结
 
@@ -166,7 +166,7 @@
 
 ## 保持简单
 
-为了聚焦于工业使用案例，**我们没有在基线数据**生成中添加传统的时间序列模式（例如季节性、上升/下降趋势），并保持极其简单作为高斯过程。数据中也没有自回归特性。尽管像ARIMA这样的算法在金融和商业数据分析中非常受欢迎且有用，但工业环境中生成的独立传感器数据通常是正态分布的，我们遵循这一原则。
+为了聚焦于工业使用案例，**我们没有在基线数据**生成中添加传统的时间序列模式（例如季节性、上升/下降趋势），并保持极其简单作为高斯过程。数据中也没有自回归特性。尽管像 ARIMA 这样的算法在金融和商业数据分析中非常受欢迎且有用，但工业环境中生成的独立传感器数据通常是正态分布的，我们遵循这一原则。
 
 ## 进一步改进
 
@@ -188,21 +188,21 @@
 
 **相关内容：**
 
-+   [使用合成数据教 AI 分类时间序列模式](/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)
++   使用合成数据教 AI 分类时间序列模式
 
-+   [3 种数据采集、注释和增强工具](/2021/08/3-data-labeling-synthesizing-augmentation-tools.html)
++   3 种数据采集、注释和增强工具
 
-+   [使用 Gretel 和 Apache Airflow 构建合成数据管道](/2021/09/build-synthetic-data-pipeline-gretel-apache-airflow.html)
++   使用 Gretel 和 Apache Airflow 构建合成数据管道
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 

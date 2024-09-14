@@ -1,22 +1,22 @@
 # 数据科学在电影行业中的应用
 
-> 原文：[https://www.kdnuggets.com/2019/07/data-science-film-industry.html](https://www.kdnuggets.com/2019/07/data-science-film-industry.html)
+> 原文：[`www.kdnuggets.com/2019/07/data-science-film-industry.html`](https://www.kdnuggets.com/2019/07/data-science-film-industry.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：弗兰基·沃拉斯。**
 
-![](../Images/c498bb9a174a378c7800ff19fd7770fe.png)
+![](img/c498bb9a174a378c7800ff19fd7770fe.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -30,23 +30,23 @@
 
 ### 电影成功指标与相关数据
 
-![](../Images/cf2147290e0baf6a21935dc1e94cd2bc.png)
+![](img/cf2147290e0baf6a21935dc1e94cd2bc.png)
 
 图片来源：[Pexels](https://www.pexels.com/photo/coding-computer-data-depth-of-field-577585/)
 
 技术可以告诉电影制作人他们应如何制作和营销任何一部电影。从选角决定到甚至[营销中使用的颜色](https://infographicworld.com/psychology-color-marketing/)，电影的每一个方面都可以影响销售。利用技术，我们可以预测客户的偏好，并确定如何优化内容以达到最大的潜力。
 
-预测观众对电影的期望几乎可以保证该电影的成功。在2018年，被华特迪士尼公司收购的20世纪福克斯公司发布了一篇论文，概述了[如何使用机器学习分析电影预告片的内容](https://www.theverge.com/2018/11/2/18055514/fox-google-ai-analyze-movie-trailer-predict-success-logan)。在这一过程中收集的数据用于比较预告片，并预测其他可能引起观众兴趣的电影。
+预测观众对电影的期望几乎可以保证该电影的成功。在 2018 年，被华特迪士尼公司收购的 20 世纪福克斯公司发布了一篇论文，概述了[如何使用机器学习分析电影预告片的内容](https://www.theverge.com/2018/11/2/18055514/fox-google-ai-analyze-movie-trailer-predict-success-logan)。在这一过程中收集的数据用于比较预告片，并预测其他可能引起观众兴趣的电影。
 
-20世纪福克斯使用Google服务器和开源AI框架TensorFlow创建了Merlin，一个“实验性的电影观众预测和推荐系统”。在Merlin的试运行中，该工具分析了超级英雄金刚狼的起源故事“Logan”的预告片，以预测“Logan”观众可能感兴趣的其他电影。在预测的20部电影中，[11部是正确的](https://cloud.google.com/blog/products/ai-machine-learning/how-20th-century-fox-uses-ml-to-predict-a-movie-audience)。
+20 世纪福克斯使用 Google 服务器和开源 AI 框架 TensorFlow 创建了 Merlin，一个“实验性的电影观众预测和推荐系统”。在 Merlin 的试运行中，该工具分析了超级英雄金刚狼的起源故事“Logan”的预告片，以预测“Logan”观众可能感兴趣的其他电影。在预测的 20 部电影中，[11 部是正确的](https://cloud.google.com/blog/products/ai-machine-learning/how-20th-century-fox-uses-ml-to-predict-a-movie-audience)。
 
-实际排名前五的电影都在预测名单中：X战警： apocalypse；约翰·威克2；奇异博士；蝙蝠侠大战超人：正义黎明；自杀小队。一般来说，观众在寻找一部以“坚韧的男性动作主角”为特色的超级英雄电影。
+实际排名前五的电影都在预测名单中：X 战警： apocalypse；约翰·威克 2；奇异博士；蝙蝠侠大战超人：正义黎明；自杀小队。一般来说，观众在寻找一部以“坚韧的男性动作主角”为特色的超级英雄电影。
 
-尽管其数据解释并不完美，Merlin是[过去十年软件开发演变的一个典型例子](https://online.maryville.edu/blog/ai-and-the-evolution-of-software-development/)。为了让程序员更好地专注于改进AI算法，未来的软件开发必须包括旨在减少重复任务所花费时间的节省措施。由于AI设计用于专注于单一任务，它是提高程序数据分析准确性的理想起点。
+尽管其数据解释并不完美，Merlin 是[过去十年软件开发演变的一个典型例子](https://online.maryville.edu/blog/ai-and-the-evolution-of-software-development/)。为了让程序员更好地专注于改进 AI 算法，未来的软件开发必须包括旨在减少重复任务所花费时间的节省措施。由于 AI 设计用于专注于单一任务，它是提高程序数据分析准确性的理想起点。
 
 ### 大数据在分析中的作用
 
-当大数据首次出现于2010年左右时，它有效地改变了将数据分析转化为有用洞察和利润的方法。大数据通常来源于外部，利用从互联网、公共数据源等收集的信息来做出更准确的预测。在娱乐行业中，大数据可以用于提供个性化的用户体验，并减少流媒体网站观众的流失率。
+当大数据首次出现于 2010 年左右时，它有效地改变了将数据分析转化为有用洞察和利润的方法。大数据通常来源于外部，利用从互联网、公共数据源等收集的信息来做出更准确的预测。在娱乐行业中，大数据可以用于提供个性化的用户体验，并减少流媒体网站观众的流失率。
 
 在用户可以选择的电影和电视节目种类繁多的情况下，留住观众对流媒体服务和电影制作公司至关重要。高流失率表明公司做错了什么，结合机器学习，[大数据可以帮助公司识别问题领域](https://www.kdnuggets.com/2019/05/churn-prediction-machine-learning.html)。
 
@@ -56,11 +56,11 @@
 
 与此同时，推荐系统基于显性和隐性信息。“显性数据是你字面上告诉我们的：你对《王冠》点赞，我们就知道了，”Netflix 产品创新副总裁 Todd Yellin [告诉 Wired](https://www.wired.co.uk/article/how-do-netflixs-algorithms-work-machine-learning-helps-to-predict-what-viewers-will-like)。 “隐性数据实际上是行为数据。你没有明确告诉我们‘我喜欢《不可破的金米·施密特》’，你只是 binge 观看了它并在两个晚上内看完了，所以我们从行为上理解这一点。大多数有用的数据是隐性的。”
 
-如果利润有所显示，Netflix 的算法无疑是成功的：自2015年以来，Netflix 的利润增长了[超过30%](https://www.macrotrends.net/stocks/charts/NFLX/netflix/revenue)，年收入达到166.14亿美元。
+如果利润有所显示，Netflix 的算法无疑是成功的：自 2015 年以来，Netflix 的利润增长了[超过 30%](https://www.macrotrends.net/stocks/charts/NFLX/netflix/revenue)，年收入达到 166.14 亿美元。
 
 ### 电影行业中的预测分析
 
-![](../Images/dbf2b20cbaf576e0a17bd4ef5f929238.png)
+![](img/dbf2b20cbaf576e0a17bd4ef5f929238.png)
 
 图片来源: [Pexels](https://www.pexels.com/photo/man-holding-remote-control-1040160/)
 
@@ -86,10 +86,10 @@ Buzz 的显著特点在于，可以从许多来源获得有关这种现象的信
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败，详细分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，详细分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

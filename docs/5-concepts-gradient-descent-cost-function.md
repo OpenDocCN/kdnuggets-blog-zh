@@ -1,26 +1,26 @@
-# 你应该了解的梯度下降和成本函数的5个概念
+# 你应该了解的梯度下降和成本函数的 5 个概念
 
-> 原文：[https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
+> 原文：[`www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html`](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
 
-![](../Images/d76ba8086768f959395ebc4c9b2fa781.png)
+![](img/d76ba8086768f959395ebc4c9b2fa781.png)
 
-这张图片是在香港的Brick Hill（南朗山）顶端拍摄的。
+这张图片是在香港的 Brick Hill（南朗山）顶端拍摄的。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 
 梯度下降是一种迭代优化算法，用于在机器学习中最小化损失函数。损失函数描述了给定当前参数集（权重和偏置）的模型表现如何，梯度下降用于找到最佳的参数集。我们使用梯度下降来更新我们模型的 [参数](https://ml-cheatsheet.readthedocs.io/en/latest/glossary.html#glossary-parameters)。例如，参数指的是 [线性回归](https://ml-cheatsheet.readthedocs.io/en/latest/linear_regression.html) 中的系数和神经网络中的 [权重](https://ml-cheatsheet.readthedocs.io/en/latest/nn_concepts.html#nn-weights)。
 
-在本文中，我将解释梯度下降和成本函数的5个主要概念，包括：
+在本文中，我将解释梯度下降和成本函数的 5 个主要概念，包括：
 
 +   最小化成本函数的原因
 
@@ -36,13 +36,13 @@
 
 学习神经网络的主要步骤是定义一个成本函数（也称为损失函数），它衡量网络在测试集上预测输出的效果。目标是找到一组能够最小化成本的权重和偏置。一个常用的函数是 [均方误差](https://en.wikipedia.org/wiki/Mean_squared_error)，它测量实际值*y*与估计值*y*（预测值）之间的差异。下面回归线的方程是 hθ(*x*) = θ + θ1*x*，它只有两个参数：权重（θ1）和偏置 *（θ0）*。
 
-![](../Images/ec4316e92785c86355c84c1d29a539e3.png)
+![](img/ec4316e92785c86355c84c1d29a539e3.png)
 
 ## 最小化成本函数
 
 > 任何机器学习模型的目标是最小化成本函数。
 
-![](../Images/4ad9fd044086ce7d21139e04b052bc36.png)
+![](img/4ad9fd044086ce7d21139e04b052bc36.png)
 
 # 如何最小化成本函数
 
@@ -52,7 +52,7 @@
 
 梯度下降利用微积分迭代地运行，以找到对应于给定成本函数最小值的参数的最优值。在数学上，‘*导数*’的技巧对最小化成本函数极为重要，因为它帮助找到最小点。导数是微积分中的一个概念，指的是函数在某一点的斜率。我们需要知道斜率，以便了解移动系数值的方向（符号），以便在下一次迭代中获得更低的成本。
 
-![](../Images/26cdb80a0de1c698b94e989586bd6fca.png)
+![](img/26cdb80a0de1c698b94e989586bd6fca.png)
 
 θ1 会逐渐收敛到最小值。
 
@@ -62,13 +62,13 @@
 
 如果你对微积分有一些基本了解会更好，因为在这个过程中应用了偏导数和链式法则。
 
-![](../Images/eaec5633766b8bcc9dc195f0f5f5a851.png)
+![](img/eaec5633766b8bcc9dc195f0f5f5a851.png)
 
 为了解析梯度，我们使用新的*权重 ‘θ0**’***和*偏差 ‘θ1’*值对数据点进行迭代，并计算偏导数。这一新的梯度告诉我们在当前位置（当前参数值）函数的斜率，以及我们应该移动的方向来更新参数。更新的大小由学习率控制。
 
 ## 学习率（α）
 
-![](../Images/81e801c6f317ade5295a4bb41ea75969.png)
+![](img/81e801c6f317ade5295a4bb41ea75969.png)
 
 请注意，我们使用‘:=’来表示赋值或更新。
 
@@ -80,9 +80,9 @@
 
 然而，在我们的数据集中应用典型的梯度下降优化技术存在一个缺点。由于我们必须使用所有的一百万个样本来完成一次迭代，而这必须在每次迭代中进行直到达到最小点，因此计算成本非常高。这一问题可以通过随机梯度下降来解决。
 
-词语‘*stochastic*’指的是一个与随机概率相关的系统或过程。随机梯度下降利用这一概念来加速梯度下降的过程。因此，与典型的梯度下降优化方法不同，随机梯度下降在每次迭代中只使用1个示例的成本梯度（详细情况见下图）。虽然使用整个数据集对于以较少噪声或较少随机性的方式达到最小值非常有用，但当我们的数据集非常大时，就会出现问题。
+词语‘*stochastic*’指的是一个与随机概率相关的系统或过程。随机梯度下降利用这一概念来加速梯度下降的过程。因此，与典型的梯度下降优化方法不同，随机梯度下降在每次迭代中只使用 1 个示例的成本梯度（详细情况见下图）。虽然使用整个数据集对于以较少噪声或较少随机性的方式达到最小值非常有用，但当我们的数据集非常大时，就会出现问题。
 
-![](../Images/1493f0189dd890f78d2031c44982d392.png)
+![](img/1493f0189dd890f78d2031c44982d392.png)
 
 两者之间的主要区别在于，随机梯度下降方法帮助我们避免了找到局部极值或局部最小值而不是整体全局最小值的问题。
 
@@ -100,7 +100,7 @@
 
 # 总结
 
-阅读完这篇博客后，你现在应该对梯度下降和成本函数的5个概念有了更好的理解：
+阅读完这篇博客后，你现在应该对梯度下降和成本函数的 5 个概念有了更好的理解：
 
 +   成本函数是什么，如何最小化它？
 
@@ -114,14 +114,14 @@
 
 ### 更多相关话题
 
-+   [回到基础，第Dos部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
++   [回到基础，第 Dos 部分：梯度下降](https://www.kdnuggets.com/2023/03/back-basics-part-dos-gradient-descent.html)
 
 +   [梯度下降：优化的山地旅行者指南…](https://www.kdnuggets.com/gradient-descent-the-mountain-trekker-guide-to-optimization-with-mathematics)
 
-+   [在深入了解Transformer之前你应该知道的概念](https://www.kdnuggets.com/2023/01/concepts-know-getting-transformer.html)
++   [在深入了解 Transformer 之前你应该知道的概念](https://www.kdnuggets.com/2023/01/concepts-know-getting-transformer.html)
 
-+   [数据科学中你应该知道的7个SQL概念](https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html)
++   [数据科学中你应该知道的 7 个 SQL 概念](https://www.kdnuggets.com/2022/11/7-sql-concepts-needed-data-science.html)
 
-+   [KDnuggets新闻，4月13日：数据科学家应该知道的Python库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应该知道的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [多标签NLP：类别不平衡和损失函数的分析…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)
++   [多标签 NLP：类别不平衡和损失函数的分析…](https://www.kdnuggets.com/2023/03/multilabel-nlp-analysis-class-imbalance-loss-function-approaches.html)

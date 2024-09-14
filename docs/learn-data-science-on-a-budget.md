@@ -1,10 +1,10 @@
 # 预算内学习数据科学
 
-> 原文：[https://www.kdnuggets.com/learn-data-science-on-a-budget](https://www.kdnuggets.com/learn-data-science-on-a-budget)
+> 原文：[`www.kdnuggets.com/learn-data-science-on-a-budget`](https://www.kdnuggets.com/learn-data-science-on-a-budget)
 
-![预算内学习数据科学](../Images/d59fda2bd7144b9861761728d94be2e6.png)
+![预算内学习数据科学](img/d59fda2bd7144b9861761728d94be2e6.png)
 
-图片由DALLE提供
+图片由 DALLE 提供
 
 找到合适的平台或课程从来不是一件容易的事。这需要很多试错，最糟糕的是当你为这些课程付费时。你会觉得自己一直在寻找最佳课程来提升职业生涯，但最后却回到起点 - 你的钱包也受到了伤害（有时一点，有时很多）。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -26,9 +26,9 @@
 
 链接：[理解数据科学](https://www.datacamp.com/courses/understanding-data-science)
 
-让我们从DataCamp开始 - 这是一个提供各种课程的在线学习平台。他们的《理解数据科学》课程专为希望涉足数据科学世界的初学者设计。而且你也不用担心是否有编程经验 - 因为不需要！
+让我们从 DataCamp 开始 - 这是一个提供各种课程的在线学习平台。他们的《理解数据科学》课程专为希望涉足数据科学世界的初学者设计。而且你也不用担心是否有编程经验 - 因为不需要！
 
-这是一个2小时的课程，包括15个学习视频和48个练习题！分为4个部分，第1部分“数据科学简介”是免费的，其余3个部分需要你获取[会员资格](https://www.datacamp.com/pricing?period=yearly)。会员价格合理，通过它你可以访问DataCamp的完整内容库，方便你在学习额外课程时使用。
+这是一个 2 小时的课程，包括 15 个学习视频和 48 个练习题！分为 4 个部分，第一部分“数据科学简介”是免费的，其余 3 个部分需要你获取[会员资格](https://www.datacamp.com/pricing?period=yearly)。会员价格合理，通过它你可以访问 DataCamp 的完整内容库，方便你在学习额外课程时使用。
 
 # 从零开始的数据科学
 
@@ -36,7 +36,7 @@
 
 这是针对那些喜欢用书本作为学习方法的书虫们。在《从零开始的数据科学》这本书中，你将学习数据科学的学科内容，例如库、框架、模块和工具包。还会了解算法的工作原理以及如何从头开始实现它们。
 
-如果你正在寻找Python的速成课程，想要学习数据科学的基础，深入了解机器学习的基本原理，并进一步探索 - 这本书就是为你准备的。
+如果你正在寻找 Python 的速成课程，想要学习数据科学的基础，深入了解机器学习的基本原理，并进一步探索 - 这本书就是为你准备的。
 
 # 概率论简介
 
@@ -74,9 +74,9 @@ Freecodecamp.org 最初是一个希望让学习对每个人都可及的组织—
 
 +   [停止学习数据科学，寻找目的，然后再…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [5个数据科学项目来学习5项关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
++   [5 个数据科学项目来学习 5 项关键的数据科学技能](https://www.kdnuggets.com/2022/03/5-data-science-projects-learn-5-critical-data-science-skills.html)
 
-+   [KDnuggets 新闻，5月4日：9门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [最佳数据科学资源、训练营和课程](https://www.kdnuggets.com/2023/12/springboard-best-data-science-resources-bootcamp-courses-learn-data-science-new-year)
 

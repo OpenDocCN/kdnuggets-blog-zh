@@ -1,8 +1,8 @@
 # ChatOps/LMOps 的崛起
 
-> 原文：[https://www.kdnuggets.com/2023/05/rise-chatopslmops.html](https://www.kdnuggets.com/2023/05/rise-chatopslmops.html)
+> 原文：[`www.kdnuggets.com/2023/05/rise-chatopslmops.html`](https://www.kdnuggets.com/2023/05/rise-chatopslmops.html)
 
-![ChatOps/LMOps 的崛起](../Images/3678686ad6706ae6bc8dcbcf5fa269d0.png)
+![ChatOps/LMOps 的崛起](img/3678686ad6706ae6bc8dcbcf5fa269d0.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -48,61 +48,61 @@ ChatOps 主要关注公司如何简化操作并增加团队之间的协作。它
 
 ChatOps 的目标是帮助促进工作流程中的步骤，以及快速解决问题所需的行动。聊天机器人允许用户简单对话，并将其引导到所需的确切内容。
 
-聊天机器人并不是ChatOps的必需品。它们是用来帮助创建从ChatOps洞察中获得的自动化流程的工具。
+聊天机器人并不是 ChatOps 的必需品。它们是用来帮助创建从 ChatOps 洞察中获得的自动化流程的工具。
 
-# 什么是LMOps？
+# 什么是 LMOps？
 
-所以现在你可能在想我为什么把LMOps放在标题里，对吧？通过数据和统计测试，聊天机器人能够预测一系列单词的概率。它们建立在语言模型上。因此有了LMOps（语言模型操作）。
+所以现在你可能在想我为什么把 LMOps 放在标题里，对吧？通过数据和统计测试，聊天机器人能够预测一系列单词的概率。它们建立在语言模型上。因此有了 LMOps（语言模型操作）。
 
-**LMOps** 旨在利用基础研究和技术来构建AI产品，并特别在大型语言模型（LLMs）和生成AI模型上实现AI能力。
+**LMOps** 旨在利用基础研究和技术来构建 AI 产品，并特别在大型语言模型（LLMs）和生成 AI 模型上实现 AI 能力。
 
-微软研究院开源了[LMOps](https://github.com/microsoft/LMOps)，提供了一系列工具来帮助改善作为生成AI模型输入的文本提示。
+微软研究院开源了[LMOps](https://github.com/microsoft/LMOps)，提供了一系列工具来帮助改善作为生成 AI 模型输入的文本提示。
 
 研究表明，随着语言模型（LMs）变得越来越大，它们自然会变得更能在上下文中学习。
 
-如果你想了解更多关于LLM的信息，可以查看这个博客：[大型语言模型的顶级免费课程](/2023/03/top-free-courses-large-language-models.html)。你还可以看看：[顶级开源大型语言模型](/2022/09/john-snow-top-open-source-large-language-models.html)。
+如果你想了解更多关于 LLM 的信息，可以查看这个博客：大型语言模型的顶级免费课程。你还可以看看：顶级开源大型语言模型。
 
-最近一个流行的LLMs示例是ChatGPT AI聊天机器人。我们都知道它变得多么受欢迎。每个人都在谈论它。这是ChatOps的崛起吗？
+最近一个流行的 LLMs 示例是 ChatGPT AI 聊天机器人。我们都知道它变得多么受欢迎。每个人都在谈论它。这是 ChatOps 的崛起吗？
 
-# ChatOps中的自然语言处理
+# ChatOps 中的自然语言处理
 
 **自然语言处理（NLP）** 是计算机/软件/应用程序通过语音和文本检测和理解人类语言的能力，就像我们人类一样。
 
-NLP帮助你的聊天机器人和其他聊天工具分析和理解自然语言，并与客户进行沟通。
+NLP 帮助你的聊天机器人和其他聊天工具分析和理解自然语言，并与客户进行沟通。
 
-但你需要明白，NLP在每个ChatOps中可能并不重要——这取决于你用它来做什么。如果你使用ChatOps来帮助处理客户互动、参与、呼叫中心等——你将需要NLP。它使ChatOps工具能够尽可能准确地回答尽可能多的问题。
+但你需要明白，NLP 在每个 ChatOps 中可能并不重要——这取决于你用它来做什么。如果你使用 ChatOps 来帮助处理客户互动、参与、呼叫中心等——你将需要 NLP。它使 ChatOps 工具能够尽可能准确地回答尽可能多的问题。
 
-然而，使用NLP和LLMs，你将能够构建更好、更准确的ChatOps工具。
+然而，使用 NLP 和 LLMs，你将能够构建更好、更准确的 ChatOps 工具。
 
-ChatOps正在帮助公司自动化任务，并在内部和外部进行更好的沟通。随着LLMs的最新进展，它们有很大的可能性会驱动下一代聊天机器人。
+ChatOps 正在帮助公司自动化任务，并在内部和外部进行更好的沟通。随着 LLMs 的最新进展，它们有很大的可能性会驱动下一代聊天机器人。
 
-# ChatOps的好处
+# ChatOps 的好处
 
 ## 自动化
 
-自动化你的任务是节省时间的好方法。如果你的文档和资源被保存在一个存储库中，它们可以被集中到一个通讯平台中。然后，ChatOps工具可以执行重复的任务和操作，并专注于更具协作性的工作。
+自动化你的任务是节省时间的好方法。如果你的文档和资源被保存在一个存储库中，它们可以被集中到一个通讯平台中。然后，ChatOps 工具可以执行重复的任务和操作，并专注于更具协作性的工作。
 
 ## 上下文协作
 
 必须浏览大量文件和文档以找到你所需的内容，对于许多公司来说，这可能是一个大麻烦和时间消耗。你的公司越大，文档就越多。
 
-与其将资源分散到多个渠道，并需要翻阅这些渠道以获取上下文信息，不如使用ChatOps在几秒钟内轻松获取最新的上下文信息。
+与其将资源分散到多个渠道，并需要翻阅这些渠道以获取上下文信息，不如使用 ChatOps 在几秒钟内轻松获取最新的上下文信息。
 
 ## 生产力和员工参与度
 
 不同团队之间的协作使员工变得更高效和投入。科技公司实时访问上下文数据，从而节省了工作流程中的时间。
 
-通过ChatOps实现自动化任务，这减少了大量繁琐的工作，使员工能够更加投入，并专注于其他任务。
+通过 ChatOps 实现自动化任务，这减少了大量繁琐的工作，使员工能够更加投入，并专注于其他任务。
 
 # 总结
 
-我们已经迎来了ChatGPT的发布，并了解了GoogleBard。人们争相尝试这些聊天机器人，许多人和公司从中受益。话虽如此，由于聊天机器人源自ChatOps，我们很可能会看到更多关于ChatOps的发展。
+我们已经迎来了 ChatGPT 的发布，并了解了 GoogleBard。人们争相尝试这些聊天机器人，许多人和公司从中受益。话虽如此，由于聊天机器人源自 ChatOps，我们很可能会看到更多关于 ChatOps 的发展。
 
-**[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作人员以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程以及基于理论的数据科学知识。她还希望探索人工智能如何能够促进人类寿命的延续。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿雅](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作人员以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程以及基于理论的数据科学知识。她还希望探索人工智能如何能够促进人类寿命的延续。作为一个热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
-+   [为什么艾米莉·埃克达尔选择co:rise来提升她作为…的工作表现](https://www.kdnuggets.com/2022/08/corise-emily-ekdahl-chose-corise-level-job-performance-machine-learning-engineer.html)
++   [为什么艾米莉·埃克达尔选择 co:rise 来提升她作为…的工作表现](https://www.kdnuggets.com/2022/08/corise-emily-ekdahl-chose-corise-level-job-performance-machine-learning-engineer.html)
 
 +   [拖拽、放置、分析：无代码数据科学的崛起](https://www.kdnuggets.com/drag-drop-analyze-the-rise-of-nocode-data-science)
 
@@ -110,6 +110,6 @@ ChatOps正在帮助公司自动化任务，并在内部和外部进行更好的�
 
 +   [超越人类边界：超级智能的崛起](https://www.kdnuggets.com/beyond-human-boundaries-the-rise-of-superintelligence)
 
-+   [首席AI官的崛起](https://www.kdnuggets.com/the-rise-of-chief-ai-officer)
++   [首席 AI 官的崛起](https://www.kdnuggets.com/the-rise-of-chief-ai-officer)
 
-+   [LSTM的复兴：扩展LSTM模型挑战Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)
++   [LSTM 的复兴：扩展 LSTM 模型挑战 Transformer…](https://www.kdnuggets.com/lstms-rise-again-extended-lstm-models-challenge-the-transformer-superiority)

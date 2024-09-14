@@ -1,12 +1,12 @@
 # 模型重训练终极指南
 
-> 原文：[https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)
+> 原文：[`www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html`](https://www.kdnuggets.com/2019/12/ultimate-guide-model-retraining.html)
 
-[评论](#comments)
+评论
 
 **由[Luigi Patruno](https://mlinproduction.com/about/)，数据科学家及“ML in Production”创始人**。
 
-![](../Images/8fc6ca9cef42f54a2d66263d0f17d448.png)
+![](img/8fc6ca9cef42f54a2d66263d0f17d448.png)
 
 机器学习模型通过学习一组输入特征与输出目标之间的映射来进行训练。通常，这个映射是通过优化某个成本函数来最小化预测误差而学习到的。一旦找到最优模型，它就会被投入使用，目标是对未来未见数据生成准确的预测。根据问题的不同，这些新数据示例可能来自用户交互、计划的处理过程或其他软件系统的请求。理想情况下，我们希望我们的模型对这些未来实例的预测与训练过程中使用的数据一样准确。
 
@@ -84,7 +84,7 @@
 
 这个过程会产生一些**最佳**模型，然后将其部署到生产环境中。由于模型漂移特别指选择的模型由于特征/目标数据的分布变化而导致的预测性能退化，模型再训练**不**应该导致不同的模型生成过程。再训练仅指在新的训练数据集上重新运行生成之前选择的模型的过程。特征、模型算法和超参数搜索空间都应保持不变。可以这样理解，再训练不涉及任何代码更改，仅涉及更改训练数据集。
 
-这并不是说未来版本的模型不应该包括新特性或考虑其他算法类型/架构。我只是说，这些类型的变化会导致完全不同的模型——在部署到生产环境之前，你应该以不同的方式进行测试。根据你的机器学习组织的成熟度，这些变化理想情况下应通过A/B测试引入，以测量新模型对预定指标（如用户参与度或留存率）的影响。
+这并不是说未来版本的模型不应该包括新特性或考虑其他算法类型/架构。我只是说，这些类型的变化会导致完全不同的模型——在部署到生产环境之前，你应该以不同的方式进行测试。根据你的机器学习组织的成熟度，这些变化理想情况下应通过 A/B 测试引入，以测量新模型对预定指标（如用户参与度或留存率）的影响。
 
 ### 你应该多久重新训练一次模型
 
@@ -118,7 +118,7 @@
 
 +   [机器学习模型是否应在每次有新观测数据时进行重新训练？](https://www.quora.com/Should-a-machine-learning-model-be-retrained-each-time-new-observations-are-available)
 
-+   [使用SAGEMAKER的机器学习和自动化模型重新训练](https://www.inawisdom.com/machine-learning/machine-learning-automated-model-retraining-sagemaker/)
++   [使用 SAGEMAKER 的机器学习和自动化模型重新训练](https://www.inawisdom.com/machine-learning/machine-learning-automated-model-retraining-sagemaker/)
 
 +   [机器学习中概念漂移的温和介绍](https://machinelearningmastery.com/gentle-introduction-concept-drift-machine-learning/)
 
@@ -130,7 +130,7 @@
 
 [原文](https://mlinproduction.com/model-retraining/)。经许可转载。
 
-**个人简介：** [Luigi Patruno](https://mlinproduction.com/about/) 是一位数据科学家和机器学习顾问。他目前是2U的数据科学总监，领导一个负责构建机器学习模型和基础设施的数据科学团队。作为顾问，Luigi 帮助公司通过将现代数据科学方法应用于战略业务和产品计划来创造价值。他创办了 [MLinProduction.com](http://MLinProduction.com) 以收集和分享机器学习运维的最佳实践，并且教授过统计学、数据分析和大数据工程的研究生课程。
+**个人简介：** [Luigi Patruno](https://mlinproduction.com/about/) 是一位数据科学家和机器学习顾问。他目前是 2U 的数据科学总监，领导一个负责构建机器学习模型和基础设施的数据科学团队。作为顾问，Luigi 帮助公司通过将现代数据科学方法应用于战略业务和产品计划来创造价值。他创办了 [MLinProduction.com](http://MLinProduction.com) 以收集和分享机器学习运维的最佳实践，并且教授过统计学、数据分析和大数据工程的研究生课程。
 
 **相关内容：**
 
@@ -144,11 +144,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
 
 * * *
 

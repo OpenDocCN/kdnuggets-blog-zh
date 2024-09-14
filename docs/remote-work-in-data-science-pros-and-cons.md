@@ -1,8 +1,8 @@
 # 数据科学中的远程工作：优缺点
 
-> 原文：[https://www.kdnuggets.com/remote-work-in-data-science-pros-and-cons](https://www.kdnuggets.com/remote-work-in-data-science-pros-and-cons)
+> 原文：[`www.kdnuggets.com/remote-work-in-data-science-pros-and-cons`](https://www.kdnuggets.com/remote-work-in-data-science-pros-and-cons)
 
-![数据科学中的远程工作：优缺点](../Images/3a8bc9fcf57e6b31071ee1fc916d2e83.png)
+![数据科学中的远程工作：优缺点](img/3a8bc9fcf57e6b31071ee1fc916d2e83.png)
 
 图片来源：[Ketut Subiyanto](https://www.pexels.com/photo/kids-making-noise-and-disturbing-mom-working-at-home-4474035/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -30,7 +30,7 @@
 
 ## 灵活性和工作与生活平衡
 
-远程工作让你摆脱了传统9到5工作时间的严格限制。你可以将工作时间调整到你最具生产力的时间段，而无需遵循固定的时间表。
+远程工作让你摆脱了传统 9 到 5 工作时间的严格限制。你可以将工作时间调整到你最具生产力的时间段，而无需遵循固定的时间表。
 
 这种新发现的灵活性意味着，无论你是夜猫子还是早起鸟，你都可以优化你的工作以[与最佳生产力时间对齐](https://intentionalinsights.org/how-to-identify-your-peak-productivity-hours-during-your-work-day/)和自然节奏。
 
@@ -44,7 +44,7 @@
 
 这个全球就业市场为你提供了与前沿公司、初创企业或成熟组织合作的机会，无论它们的实际位置在哪里。结果是？一个更广泛的职位范围，可以满足你独特的技能和兴趣。
 
-进入全球就业市场也带来了[高薪数据科学职位](/7-platforms-for-getting-high-paying-data-science-jobs)的潜力。全球公司往往认识到数据科学家的价值，并愿意提供有竞争力的薪水来吸引顶尖人才。你甚至可以利用这一机会为薪水更高的地区的组织工作。
+进入全球就业市场也带来了高薪数据科学职位的潜力。全球公司往往认识到数据科学家的价值，并愿意提供有竞争力的薪水来吸引顶尖人才。你甚至可以利用这一机会为薪水更高的地区的组织工作。
 
 ## 提高生产力
 
@@ -82,7 +82,7 @@
 
 此外，远程工作通常需要高度的自律和有效的时间管理。缺乏结构化的办公室环境可能导致拖延和时间管理问题。当没有上司或同事的监督时，你可能会觉得有诱惑推迟任务或难以优先处理工作。
 
-当你需要维护多个数据科学领域的客户并[成功达到每个客户设定的 KPI](https://www.klipfolio.com/resources/kpi-examples)，尤其是与产品/服务营销相关的 KPI 时，这尤其困难。例如，如果你是[为一家 SaaS 公司工作的承包数据科学家](/2021/08/how-become-freelance-data-scientist.html)，你可能会听到有人要求你加快速度，以便他们能推出一个最小可行产品（MVP）。
+当你需要维护多个数据科学领域的客户并[成功达到每个客户设定的 KPI](https://www.klipfolio.com/resources/kpi-examples)，尤其是与产品/服务营销相关的 KPI 时，这尤其困难。例如，如果你是为一家 SaaS 公司工作的承包数据科学家，你可能会听到有人要求你加快速度，以便他们能推出一个最小可行产品（MVP）。
 
 ## 沟通挑战
 
@@ -98,7 +98,7 @@
 
 这意味着你可能会很容易陷入自由职业或合同项目的职位，比如使用数据科学来[帮助非营利组织找到合适的银行](https://relayfi.com/blog/banks-with-virtual-debit-cards)和合作伙伴，或者利用你在[自动驾驶运输领域的专长](https://blog.coursera.org/ds-academy-7-seriously-cool-jobs-in-data-science/)来为城市提供智能交通网络的建议。不幸的是，这些职位通常工作安全性和稳定性较差。
 
-当然，有[远程数据科学工作和各种副业](/7-high-paying-side-hustles-for-data-scientists)，但如果你没有太多经验，可能需要做出妥协。
+当然，有远程数据科学工作和各种副业，但如果你没有太多经验，可能需要做出妥协。
 
 # 准备好启动你的远程数据科学职业生涯了吗？
 
@@ -108,18 +108,18 @@
 
 无论你选择哪条道路，未来的工作将继续演变，数据科学也不例外。也就是说，无论你是在热闹的办公室中合作，还是在家中的舒适环境中默默处理数据，你的专业知识将始终是宝贵且受欢迎的资产。
 
-[](http://nahlawrites.com/)****[Nahla Davies](http://nahlawrites.com/)****是一名软件开发人员和技术写作者。在全职从事技术写作之前，她曾担任过许多引人注目的职位，包括在一家Inc. 5000的体验品牌公司担任首席程序员，该公司的客户包括三星、时代华纳、Netflix和索尼。
+[](http://nahlawrites.com/)****[Nahla Davies](http://nahlawrites.com/)****是一名软件开发人员和技术写作者。在全职从事技术写作之前，她曾担任过许多引人注目的职位，包括在一家 Inc. 5000 的体验品牌公司担任首席程序员，该公司的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 了解更多主题
 
 +   [如何找到最佳的数据科学远程工作](https://www.kdnuggets.com/2022/12/find-best-data-science-remote-jobs.html)
 
-+   [营销分析和数据科学专业人员今天需要的5项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
++   [营销分析和数据科学专业人员今天需要的 5 项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
 
 +   [数据科学家和数据工程师如何协作？](https://www.kdnuggets.com/2022/08/data-scientists-data-engineers-work-together.html)
 
 +   [如何利用数据可视化提升工作报告的影响力…](https://www.kdnuggets.com/2022/08/data-visualization-add-impact-work-reports-presentations.html)
 
-+   [2022年值得工作的6家数据科学初创公司](https://www.kdnuggets.com/2022/02/6-data-science-startups-work-2022.html)
++   [2022 年值得工作的 6 家数据科学初创公司](https://www.kdnuggets.com/2022/02/6-data-science-startups-work-2022.html)
 
 +   [如何在没有工作经验的情况下获得数据科学的第一份工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)

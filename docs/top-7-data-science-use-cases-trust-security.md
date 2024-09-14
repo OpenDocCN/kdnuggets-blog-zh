@@ -1,22 +1,22 @@
-# 信任与安全中的前7大数据科学应用案例
+# 信任与安全中的前 7 大数据科学应用案例
 
-> 原文：[https://www.kdnuggets.com/2019/12/top-7-data-science-use-cases-trust-security.html](https://www.kdnuggets.com/2019/12/top-7-data-science-use-cases-trust-security.html)
+> 原文：[`www.kdnuggets.com/2019/12/top-7-data-science-use-cases-trust-security.html`](https://www.kdnuggets.com/2019/12/top-7-data-science-use-cases-trust-security.html)
 
-[评论](#comments)
+评论
 
 **由[ActiveWizards](https://activewizards.com/)提供**
 
-![图示](../Images/ba1e042349884f8f3d9f0cb2aab7d0ba.png)
+![图示](img/ba1e042349884f8f3d9f0cb2aab7d0ba.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 欺诈和网络犯罪使用先进的技术和方法，这些方法难以检测。改进在线非法活动的复杂机制正在不断发展。多年来建立的客户信任可能在信任违规事件后变成浪费时间。
 
-传统的欺诈检测操作涉及欺诈筛查团队与欺诈检测软件合作，以汇总和整合历史数据。得益于数据科学、算法和AI驱动的解决方案，欺诈相关损失的发生率可以最小化。
+传统的欺诈检测操作涉及欺诈筛查团队与欺诈检测软件合作，以汇总和整合历史数据。得益于数据科学、算法和 AI 驱动的解决方案，欺诈相关损失的发生率可以最小化。
 
 关于一些现实生活中的例子：
 
@@ -70,7 +70,7 @@
 
 信任对互动至关重要。对人工智能的信任可以显著改善客户体验。人工智能引擎和算法可以经过训练以执行各种任务，并促进信任与安全的改善过程。
 
-将人工智能引入信任和安全改进过程为公司和组织开辟了新的机会。借助人工智能驱动的软件，他们现在可以在用户进行欺诈之前检测并禁止可疑活动。此外，还出现了禁止来自同一来源的IP的选项，如果该来源被视为不可靠。
+将人工智能引入信任和安全改进过程为公司和组织开辟了新的机会。借助人工智能驱动的软件，他们现在可以在用户进行欺诈之前检测并禁止可疑活动。此外，还出现了禁止来自同一来源的 IP 的选项，如果该来源被视为不可靠。
 
 人工智能模型可以通过内部和外部数据来检测各种因素。因此，公司可以防止支付欺诈、账户接管或账户滥用。此外，人工智能的引入还减少了偏见。[研究发现，人工智能解决方案能够检测到](https://www.technologyreview.com/s/602025/how-vector-space-mathematics-reveals-the-hidden-sexism-in-language/) 人眼可能忽视的隐性偏见，但这些偏见却可能造成严重问题。数据科学家能够防止偏见渗入他们的算法和模型，同时保留有用的偏见。
 
@@ -90,7 +90,7 @@
 
 网络安全是一个较高层次的问题。网络安全涵盖了更广泛的范围和问题。其关键任务是保护所有有价值的数据。因此，信任和安全以及网络安全是相互依存的。网络安全拥有大量技术和措施以确保数据的完整性、机密性和可用性。对这些技术以及大规模数据管理和存储系统的信任问题比以往任何时候都更为重要。在个人和财务数据安全问题上，风险每天都在增加。公司和组织面临着寻找新方法以提供足够的安全水平和鼓励客户信任的需求。
 
-由AI增强的高级安全工具、实时分析功能和预测算法扩大了保护网络攻击的行动范围。
+由 AI 增强的高级安全工具、实时分析功能和预测算法扩大了保护网络攻击的行动范围。
 
 ### 分析
 
@@ -108,21 +108,21 @@
 
 随着在线互动的增加，对信任和安全的数据驱动工具和技术的投资也在增加。信任和安全措施的重要性比以往任何时候都更加关键。
 
-**[ActiveWizards](https://activewizards.com/)** 是一个由数据科学家和工程师组成的团队，专注于数据项目（大数据、数据科学、机器学习、数据可视化）。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB等）以及数据密集型网络应用开发（RESTful APIs、Flask、Django、Meteor）。
+**[ActiveWizards](https://activewizards.com/)** 是一个由数据科学家和工程师组成的团队，专注于数据项目（大数据、数据科学、机器学习、数据可视化）。核心专长领域包括数据科学（研究、机器学习算法、可视化和工程）、数据可视化（d3.js、Tableau 等）、大数据工程（Hadoop、Spark、Kafka、Cassandra、HBase、MongoDB 等）以及数据密集型网络应用开发（RESTful APIs、Flask、Django、Meteor）。
 
 [原文](https://activewizards.com/blog/top-7-data-science-use-cases-in-trust-and-security/)。经许可转载。
 
 **相关内容：**
 
-+   [能源和公用事业中的前10大数据科学用例](/2019/09/top-10-data-science-use-cases-energy-utilities.html)
++   能源和公用事业中的前 10 大数据科学用例
 
-+   [金融领域的前7大数据科学用例](/2018/05/top-7-data-science-use-cases-finance.html)
++   金融领域的前 7 大数据科学用例
 
-+   [营销中的前8大数据科学用例](/2019/11/top-8-data-science-use-cases-marketing.html)
++   营销中的前 8 大数据科学用例
 
 ### 更多相关主题
 
-+   [NoSQL数据库及其用例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
++   [NoSQL 数据库及其用例](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
 +   [AI 和 LLM 用例中的向量数据库](https://www.kdnuggets.com/vector-databases-in-ai-and-llm-use-cases)
 

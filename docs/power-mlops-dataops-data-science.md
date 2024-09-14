@@ -1,22 +1,22 @@
 # 释放 MLOps 和 DataOps 在数据科学中的力量
 
-> 原文：[https://www.kdnuggets.com/2021/06/power-mlops-dataops-data-science.html](https://www.kdnuggets.com/2021/06/power-mlops-dataops-data-science.html)
+> 原文：[`www.kdnuggets.com/2021/06/power-mlops-dataops-data-science.html`](https://www.kdnuggets.com/2021/06/power-mlops-dataops-data-science.html)
 
-[评论](#comments)
+评论
 
 **由 [Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/) 发表，他是 Intellectus 的创始人兼首席执行官**。
 
-![](../Images/48afb2bff1fb2e3e30045c24f69e1f4c.png)
+![](img/48afb2bff1fb2e3e30045c24f69e1f4c.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -50,35 +50,35 @@
 
 在这里，数据的使用既简单又安全，防止组织面临不可预见的问题。目标是流式传输干净的数据，以实现可信赖的[可操作预测分析](https://expersight.com/predictive-analytics-interweaving-of-statistics-computer-science-and-business/)。不可忽视的是，定义数据角色、制定数据政策和设计数据管道都包含在这一实践中。
 
-有趣的是，定制化方案因其适应不断发展的企业面貌而获得了广泛的赞誉。考虑K2View，它提供了一种独特的方法来收集、清理、分析和流式传输数据。他们的[数据织物技术](https://www.k2view.com/products/data-fabric/)从多个来源捕获数据，并将其对齐到统一模板中，从而简化了编排、元数据管理和数据治理。
+有趣的是，定制化方案因其适应不断发展的企业面貌而获得了广泛的赞誉。考虑 K2View，它提供了一种独特的方法来收集、清理、分析和流式传输数据。他们的[数据织物技术](https://www.k2view.com/products/data-fabric/)从多个来源捕获数据，并将其对齐到统一模板中，从而简化了编排、元数据管理和数据治理。
 
 在追求更快数据交付的过程中，他们的技术遵循数据科学中的连续性原则：
 
 +   ***持续数据集成***
 
-    实现按需数据集成和跨域管理主数据集。这有助于实时访问在Fabric数据模型中反映的新来源。此模型是访问数据的中央数据仓库。
+    实现按需数据集成和跨域管理主数据集。这有助于实时访问在 Fabric 数据模型中反映的新来源。此模型是访问数据的中央数据仓库。
 
 +   ***持续数据交付***
 
     处理对织物模型的所有修改。它们几乎不依赖于停机时间，并在运行时进行操作而不干扰交付。
 
-+   ***持续数据部署*** 随需数据访问到任何请求应用程序，通过ETL、虚拟化、流式传输、网络服务或消息传递等交付模型。
++   ***持续数据部署*** 随需数据访问到任何请求应用程序，通过 ETL、虚拟化、流式传输、网络服务或消息传递等交付模型。
 
-[Gartner](https://www.gartner.com/smarterwithgartner/gartner-top-10-data-and-analytics-trends-for-2021/) 建议，仅通过使用织物技术，企业可以节省30%的集成时间、30%的部署时间以及70%的维护资源。因此，各种行业的企业已经采纳了织物模型，以强化他们的DataOps和MLOps计划。
+[Gartner](https://www.gartner.com/smarterwithgartner/gartner-top-10-data-and-analytics-trends-for-2021/) 建议，仅通过使用织物技术，企业可以节省 30%的集成时间、30%的部署时间以及 70%的维护资源。因此，各种行业的企业已经采纳了织物模型，以强化他们的 DataOps 和 MLOps 计划。
 
 ### 转发
 
-对于那些努力超越大量数据的企业来说，拥抱混合思维模式是至关重要的。因此，支持DataOps和MLOps的数据交付模型为长远发展提供了更强的基础。在企业规模上实施数据管理是实现业务敏捷性的唯一公式。因此，优先考虑能够在动态使用案例和混合环境中产生业务价值的数据。
+对于那些努力超越大量数据的企业来说，拥抱混合思维模式是至关重要的。因此，支持 DataOps 和 MLOps 的数据交付模型为长远发展提供了更强的基础。在企业规模上实施数据管理是实现业务敏捷性的唯一公式。因此，优先考虑能够在动态使用案例和混合环境中产生业务价值的数据。
 
-**简介: [Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/)** 是一位物联网和大数据爱好者，他在IDG、IEEE、Entrepreneur等出版物上贡献了许多文章。他共同开发了像[Getlua](https://getlua.com/)这样的平台，允许用户轻松地[合并多个文件](https://getlua.com/merge-pdf)。他还创立了一个研究平台，从专家那里生成可操作的见解。
+**简介: [Yash Mehta](https://www.linkedin.com/in/yash-mehta-esthan/)** 是一位物联网和大数据爱好者，他在 IDG、IEEE、Entrepreneur 等出版物上贡献了许多文章。他共同开发了像[Getlua](https://getlua.com/)这样的平台，允许用户轻松地[合并多个文件](https://getlua.com/merge-pdf)。他还创立了一个研究平台，从专家那里生成可操作的见解。
 
 **相关:**
 
-+   [如何使用MLOps制定有效的AI战略](https://www.kdnuggets.com/2021/01/mlops-effective-ai-strategy.html)
++   [如何使用 MLOps 制定有效的 AI 战略](https://www.kdnuggets.com/2021/01/mlops-effective-ai-strategy.html)
 
-+   [MLOps: 模型监控101](https://www.kdnuggets.com/2021/01/mlops-model-monitoring-101.html)
++   [MLOps: 模型监控 101](https://www.kdnuggets.com/2021/01/mlops-model-monitoring-101.html)
 
-+   [DataOps: 你需要了解的5件事](https://www.kdnuggets.com/2021/05/dataops-5-things-need-know.html)
++   [DataOps: 你需要了解的 5 件事](https://www.kdnuggets.com/2021/05/dataops-5-things-need-know.html)
 
 ### 更多相关内容
 

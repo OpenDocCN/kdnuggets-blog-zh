@@ -1,8 +1,8 @@
 # 正则化是什么以及有什么用？
 
-> 原文：[https://www.kdnuggets.com/wtf-is-regularization-and-what-is-it-for](https://www.kdnuggets.com/wtf-is-regularization-and-what-is-it-for)
+> 原文：[`www.kdnuggets.com/wtf-is-regularization-and-what-is-it-for`](https://www.kdnuggets.com/wtf-is-regularization-and-what-is-it-for)
 
-![正则化是什么以及有什么用？](../Images/d39360463487f8003bd583da1523f5d9.png)
+![正则化是什么以及有什么用？](img/d39360463487f8003bd583da1523f5d9.png)
 
 “预防胜于治疗”这句古老的谚语提醒我们，防止问题发生比在问题发生后修复更容易。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
@@ -30,7 +30,7 @@
 
 让我们看看过拟合的表现。
 
-![正则化是什么以及有什么用？](../Images/00ccaf0f05fa34b1cd5866ec402cda5c.png)
+![正则化是什么以及有什么用？](img/00ccaf0f05fa34b1cd5866ec402cda5c.png)
 
 正则化技术调整学习过程，以简化模型，确保其在训练数据上表现良好，并且能够很好地泛化到新数据。我们将探讨两种著名的方法。
 
@@ -44,15 +44,15 @@
 
 **Lasso 正则化**通过允许某些系数值为零，鼓励模型只使用最重要的特征，这对特征选择特别有用。
 
-![方程](../Images/8c5e1b738e7a4baa7bd1b0ad96b01bb5.png)
+![方程](img/8c5e1b738e7a4baa7bd1b0ad96b01bb5.png)
 
-![正则化是什么以及有什么用？](../Images/f00c7b9e37dfd3f73eae01feef99b5a1.png)
+![正则化是什么以及有什么用？](img/f00c7b9e37dfd3f73eae01feef99b5a1.png)
 
 另一方面，**岭回归正则化**通过惩罚系数值的平方来抑制显著系数。
 
-![方程](../Images/921975c606833ee14811111d51b36028.png)
+![方程](img/921975c606833ee14811111d51b36028.png)
 
-![正则化是什么，有什么用？](../Images/4a1d226d0650c5dd32dc770b8353f0e9.png)
+![正则化是什么，有什么用？](img/4a1d226d0650c5dd32dc770b8353f0e9.png)
 
 简而言之，它们的计算方式不同。
 
@@ -62,17 +62,17 @@
 
 现在，我们将应用正则化来分析心脏病患者数据，以展示正则化的效果。你可以从[这里](https://www.kaggle.com/datasets/arezaei81/heartcsv?resource=download)获取数据集。
 
-为了应用机器学习，我们将使用Scikit-learn；为了应用深度学习，我们将使用TensorFlow。开始吧！
+为了应用机器学习，我们将使用 Scikit-learn；为了应用深度学习，我们将使用 TensorFlow。开始吧！
 
 ## 机器学习中的正则化
 
-Scikit-learn是最受欢迎的[Python库](https://www.stratascratch.com/blog/top-18-python-libraries-a-data-scientist-should-know/?utm_source=blog&utm_medium=click&utm_campaign=kdn+regularization)之一，提供简单高效的数据分析和建模工具。
+Scikit-learn 是最受欢迎的[Python 库](https://www.stratascratch.com/blog/top-18-python-libraries-a-data-scientist-should-know/?utm_source=blog&utm_medium=click&utm_campaign=kdn+regularization)之一，提供简单高效的数据分析和建模工具。
 
 它包括了各种正则化技术的实现，特别是针对线性模型。
 
-在这里，我们将探讨如何应用L1（Lasso）和L2（Ridge）正则化。
+在这里，我们将探讨如何应用 L1（Lasso）和 L2（Ridge）正则化。
 
-在下面的代码中，我们将使用Ridge（L2）和Lasso（L1）正则化技术训练逻辑回归。最后，我们将看到详细的报告。让我们看一下代码。
+在下面的代码中，我们将使用 Ridge（L2）和 Lasso（L1）正则化技术训练逻辑回归。最后，我们将看到详细的报告。让我们看一下代码。
 
 ```py
 from sklearn.model_selection import train_test_split
@@ -126,29 +126,29 @@ for metric in performance_metrics:
 
 这是输出结果。
 
-![正则化是什么，有什么用？](../Images/e9a18c84b34123f686942ea4dc3a6e64.png)
+![正则化是什么，有什么用？](img/e9a18c84b34123f686942ea4dc3a6e64.png)
 
 让我们评估结果。
 
 ### L1 正则化
 
-+   在C=0.001时，准确率显著较低（48%）。这表明模型存在欠拟合，正则化过强。
++   在 C=0.001 时，准确率显著较低（48%）。这表明模型存在欠拟合，正则化过强。
 
-+   随着C增加到0.01，L1的准确率保持不变，这表明模型仍然存在欠拟合或正则化过强。
++   随着 C 增加到 0.01，L1 的准确率保持不变，这表明模型仍然存在欠拟合或正则化过强。
 
-+   在C=0.1时，准确率显著提高至87%，这表明减少正则化强度使模型能够更好地从数据中学习。
++   在 C=0.1 时，准确率显著提高至 87%，这表明减少正则化强度使模型能够更好地从数据中学习。
 
 ### L2 正则化
 
-总的来说，L2正则化表现一致良好，C=0.001时准确率为87%，C=0.01时略微提高至89%，然后在C=0.1时稳定在87%。
+总的来说，L2 正则化表现一致良好，C=0.001 时准确率为 87%，C=0.01 时略微提高至 89%，然后在 C=0.1 时稳定在 87%。
 
-这表明L2正则化通常在逻辑回归模型中对这个数据集更宽容、更有效，可能与其性质有关。
+这表明 L2 正则化通常在逻辑回归模型中对这个数据集更宽容、更有效，可能与其性质有关。
 
 ## 深度学习中的正则化
 
-深度学习中使用了几种正则化技术，包括L1（Lasso）和L2（Ridge）正则化、丢弃法和提前停止。
+深度学习中使用了几种正则化技术，包括 L1（Lasso）和 L2（Ridge）正则化、丢弃法和提前停止。
 
-在这里，为了重复之前机器学习示例中的操作，我们将应用L1和L2正则化。这次让我们定义一系列L1和L2正则化值。
+在这里，为了重复之前机器学习示例中的操作，我们将应用 L1 和 L2 正则化。这次让我们定义一系列 L1 和 L2 正则化值。
 
 然后，对于所有这些值，我们将训练和评估我们的深度学习模型，并在最后评估结果。
 
@@ -208,13 +208,13 @@ print(f"Best accuracy: {best_accuracy:.3f}")
 
 这是输出结果。
 
-![正则化是什么，有什么用？](../Images/aed9cbfb94be24b5c3de86e5d681d49d.png)
+![正则化是什么，有什么用？](img/aed9cbfb94be24b5c3de86e5d681d49d.png)
 
-深度学习模型的性能在不同的L1和L2正则化值组合下差异较大。
+深度学习模型的性能在不同的 L1 和 L2 正则化值组合下差异较大。
 
-最佳性能出现在L1=0.01和L2=0.001时，准确率为88.5%，这表明平衡的正则化防止了过拟合，同时允许模型捕捉数据中的潜在模式。
+最佳性能出现在 L1=0.01 和 L2=0.001 时，准确率为 88.5%，这表明平衡的正则化防止了过拟合，同时允许模型捕捉数据中的潜在模式。
 
-较高的正则化值，特别是在L1=0.1或L2=0.1时，会大幅降低模型准确性到52.5%，这表明过度正则化严重限制了模型的学习能力。
+较高的正则化值，特别是在 L1=0.1 或 L2=0.1 时，会大幅降低模型准确性到 52.5%，这表明过度正则化严重限制了模型的学习能力。
 
 ## 机器学习与深度学习中的正则化
 
@@ -222,9 +222,9 @@ print(f"Best accuracy: {best_accuracy:.3f}")
 
 **正则化的有效性**：在机器学习和深度学习的背景下，适当的正则化有助于减轻过拟合，但过度正则化会导致欠拟合。最佳正则化强度因情况而异，深度学习模型可能由于其更高的复杂性需要更细致的平衡。
 
-**性能：** 表现最佳的机器学习模型（L2与C=0.01，89%准确率）和表现最佳的深度学习模型（L1=0.01，L2=0.001，88.5%准确率）达到了类似的准确性，证明了两种方法都可以有效正则化，以在该数据集上实现高性能。
+**性能：** 表现最佳的机器学习模型（L2 与 C=0.01，89%准确率）和表现最佳的深度学习模型（L1=0.01，L2=0.001，88.5%准确率）达到了类似的准确性，证明了两种方法都可以有效正则化，以在该数据集上实现高性能。
 
-**正则化策略：** L2正则化在逻辑回归模型中似乎更有效且对C的选择不那么敏感，而L1和L2正则化的组合在深度学习中提供了最佳结果，提供了特征选择和权重惩罚之间的平衡。
+**正则化策略：** L2 正则化在逻辑回归模型中似乎更有效且对 C 的选择不那么敏感，而 L1 和 L2 正则化的组合在深度学习中提供了最佳结果，提供了特征选择和权重惩罚之间的平衡。
 
 正则化的选择和强度应谨慎调整，以平衡学习复杂性与过拟合或欠拟合的风险。
 
@@ -236,7 +236,7 @@ print(f"Best accuracy: {best_accuracy:.3f}")
 
 进入数据项目，尝试在不同场景中对数据进行正则化，例如[交付时间预测](https://platform.stratascratch.com/data-projects/delivery-duration-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+regularization)。我们在这个数据项目中使用了机器学习和深度学习模型。然而，最后我们也提到可能还有改进的空间。那么，为什么不在那里尝试正则化，看看是否有帮助呢？
 
-[](https://twitter.com/StrataScratch)****[内特·罗斯迪](https://twitter.com/StrataScratch)****是一位数据科学家和产品策略专家。他还是一名兼职教授，教授分析学，并且是StrataScratch的创始人，该平台帮助数据科学家通过顶级公司真实面试问题准备面试。内特撰写关于职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有SQL内容。
+[](https://twitter.com/StrataScratch)****[内特·罗斯迪](https://twitter.com/StrataScratch)****是一位数据科学家和产品策略专家。他还是一名兼职教授，教授分析学，并且是 StrataScratch 的创始人，该平台帮助数据科学家通过顶级公司真实面试问题准备面试。内特撰写关于职业市场的最新趋势，提供面试建议，分享数据科学项目，并涵盖所有 SQL 内容。
 
 ### 相关主题
 

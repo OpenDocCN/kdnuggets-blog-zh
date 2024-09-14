@@ -1,22 +1,22 @@
 # 特征选择 – 你想知道的一切
 
-> 原文：[https://www.kdnuggets.com/2021/06/feature-selection-overview.html](https://www.kdnuggets.com/2021/06/feature-selection-overview.html)
+> 原文：[`www.kdnuggets.com/2021/06/feature-selection-overview.html`](https://www.kdnuggets.com/2021/06/feature-selection-overview.html)
 
-[评论](#comments)
+评论
 
 **作者 [Danny Butvinik](https://www.linkedin.com/in/danny-butvinik-5a6357212/)，NICE Actimize 的首席数据科学家**
 
-![](../Images/d08fe77a346ebb0542891d31e27c5d24.png)
+![](img/d08fe77a346ebb0542891d31e27c5d24.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
@@ -24,7 +24,7 @@
 
 特征选择作为一种降维技术，旨在通过去除无关、冗余或噪声特征，从原始特征中选择一个相关特征的小子集。特征选择通常可以带来更好的学习性能、更高的学习准确性、更低的计算成本和更好的模型可解释性。本文重点介绍了特征选择过程，并提供了从数据和算法角度对特征选择类型、方法和技术的全面结构化概述。
 
-![](../Images/90ef63aa643bd74e6672d89e00e26b50.png)
+![](img/90ef63aa643bd74e6672d89e00e26b50.png)
 
 *图 1：特征选择的高级分类。*
 
@@ -52,7 +52,7 @@
 
 由于研究人员可以使用大量已开发的分析方法，数据集大小缩减现在变得更加重要，同时平均数据集的大小在特征和样本数量上都在不断增长。
 
-![](../Images/df1a4f4160873ed067e0e6229dad5fd8.png)
+![](img/df1a4f4160873ed067e0e6229dad5fd8.png)
 
 *图 2：表格数据中特征选择和数据大小缩减的说明。*
 
@@ -78,7 +78,7 @@
 
 有监督的特征选择方法根据与学习模型的交互分为四类，如过滤器、包装器、混合方法和嵌入方法。
 
-![](../Images/a4bdec7cac389a3e230c291c01ca8fb2.png)
+![](img/a4bdec7cac389a3e230c291c01ca8fb2.png)
 
 *图 3：有监督特征选择方法和技术的扩展分类。*
 
@@ -104,11 +104,11 @@
 
 ### 无监督特征选择方法
 
-由于可用标签的稀缺，无监督特征选择（UFS）方法在高维数据分析中被广泛采用。然而，大多数现有的UFS方法主要关注于特征在维持数据结构中的重要性，而忽略了特征之间的冗余。此外，确定合适的特征数量也是一个挑战。
+由于可用标签的稀缺，无监督特征选择（UFS）方法在高维数据分析中被广泛采用。然而，大多数现有的 UFS 方法主要关注于特征在维持数据结构中的重要性，而忽略了特征之间的冗余。此外，确定合适的特征数量也是一个挑战。
 
 无监督特征选择方法根据与学习模型的交互被分类为四种类型，如过滤、包裹和混合方法。
 
-![](../Images/f8d7eabb6532e166dd603a06f126e52f.png)
+![](img/f8d7eabb6532e166dd603a06f126e52f.png)
 
 *图 4：无监督特征选择方法和技术的扩展分类。*
 
@@ -146,9 +146,9 @@
 
 +   评估度量：用于评估后继候选的函数，允许比较不同的假设以指导搜索过程。
 
-![](../Images/3134c03dd70e7be58833b7dfb14c2038.png)
+![](img/3134c03dd70e7be58833b7dfb14c2038.png)
 
-*图5：特征选择算法的描述。*
+*图 5：特征选择算法的描述。*
 
 ### 金融犯罪领域的特征表示
 
@@ -204,7 +204,7 @@ NICE Actimize 在数据科学和机器学习领域的研究包括特征选择和
 
 +   [关于机器学习你想知道的一切](https://www.kdnuggets.com/2022/09/everything-youve-ever-wanted-to-know-about-machine-learning.html)
 
-+   [KDnuggets 新闻，9月14日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
++   [KDnuggets 新闻，9 月 14 日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
 
 +   [StarCoder: 你一直想要的编码助手](https://www.kdnuggets.com/2023/05/starcoder-coding-assistant-always-wanted.html)
 

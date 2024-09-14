@@ -1,36 +1,36 @@
-# 数据科学家在2022年应该了解的Python库
+# 数据科学家在 2022 年应该了解的 Python 库
 
-> 原文：[https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
+> 原文：[`www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html`](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
 
-随着越来越多的人进入科技领域，试图从事数据科学家、数据分析师、机器学习工程师等角色，编程语言Python变得越来越受欢迎。由于其简化的语法，Python语言被认为是最易于使用的编程语言之一。
+随着越来越多的人进入科技领域，试图从事数据科学家、数据分析师、机器学习工程师等角色，编程语言 Python 变得越来越受欢迎。由于其简化的语法，Python 语言被认为是最易于使用的编程语言之一。
 
 随着数据科学的流行，新的库不断发布，以帮助解决数据科学中的挑战。学习库的方方面面可能会非常让人不知所措；然而，有些库对我们的学习至关重要。
 
-以下是每个数据科学家在2022年应该了解的Python库，以保持和提升他们的编程技能。
+以下是每个数据科学家在 2022 年应该了解的 Python 库，以保持和提升他们的编程技能。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 # Pandas
 
-![python_libraries_data_scientists_know_2022](../Images/cd1a6e18430b2a4d65e180c15904cd6a.png)
+![python_libraries_data_scientists_know_2022](img/cd1a6e18430b2a4d65e180c15904cd6a.png)
 
 来源：<href en.wikipedia.org="" wiki="" pandas_="" rel="noopener" target="_blank">维基百科</href>
 
-Pandas是由[Wes McKinney](http://wesmckinney.com/pages/about.html)于2008年创建的，是一个用于数据处理和分析的Python库。Wes McKinney基于对强大且灵活分析工具的需求构建了Pandas。
+Pandas 是由[Wes McKinney](http://wesmckinney.com/pages/about.html)于 2008 年创建的，是一个用于数据处理和分析的 Python 库。Wes McKinney 基于对强大且灵活分析工具的需求构建了 Pandas。
 
-Pandas可以处理：
+Pandas 可以处理：
 
-+   处理缺失数据（表示为NaN）
++   处理缺失数据（表示为 NaN）
 
 +   数据集的灵活重塑和透视
 
@@ -42,17 +42,17 @@ Pandas可以处理：
 
 **核心任务：** 数据处理和分析
 
-**如何安装Pandas：** [Pandas安装](https://pandas.pydata.org/docs/getting_started/install.html)
+**如何安装 Pandas：** [Pandas 安装](https://pandas.pydata.org/docs/getting_started/install.html)
 
 ```py
 pip install pandas
 ```
 
-**获取书籍：** [Wes McKinney的《数据分析的Python语言》](https://www.amazon.com/gp/product/1491957662/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=quantpytho-20&creative=9325&linkCode=as2&creativeASIN=1491957662&linkId=ea8de4253cce96046e8ab0383ac71b33)
+**获取书籍：** [Wes McKinney 的《数据分析的 Python 语言》](https://www.amazon.com/gp/product/1491957662/ref=as_li_qf_asin_il_tl?ie=UTF8&tag=quantpytho-20&creative=9325&linkCode=as2&creativeASIN=1491957662&linkId=ea8de4253cce96046e8ab0383ac71b33)
 
 # NumPy
 
-![python_libraries_data_scientists_know_2022](../Images/af3c6b6dccf1a98783576c5a3d931746.png)
+![python_libraries_data_scientists_know_2022](img/af3c6b6dccf1a98783576c5a3d931746.png)
 
 来源：<href en.wikipedia.org="" wiki="" numpy="" rel="noopener" target="_blank">维基百科</href>
 
@@ -78,7 +78,7 @@ pip install numpy
 
 # SciPy
 
-![python_libraries_data_scientists_know_2022](../Images/517da304cd64e80ef9d032255d7d4e46.png)
+![python_libraries_data_scientists_know_2022](img/517da304cd64e80ef9d032255d7d4e46.png)
 
 来源：<href scipy.org="" rel="noopener" target="_blank">SciPy</href>
 
@@ -110,7 +110,7 @@ conda install scipy
 
 # Matplotlib
 
-![python_libraries_data_scientists_know_2022](../Images/fd5dd902ad66250f56115ce15b129448.png)
+![python_libraries_data_scientists_know_2022](img/fd5dd902ad66250f56115ce15b129448.png)
 
 来源：<href github.com="" matplotlib="" rel="noopener" target="_blank">GitHub</href>
 
@@ -154,7 +154,7 @@ conda install matplotlib
 
 # Seaborn
 
-![python_libraries_data_scientists_know_2022](../Images/36da5f75019106823e7f83e7f704c78f.png)
+![python_libraries_data_scientists_know_2022](img/36da5f75019106823e7f83e7f704c78f.png)
 
 Seaborn 是一个建立在 [matplotlib](https://matplotlib.org/) 之上的库，并与 [pandas](https://pandas.pydata.org/) 数据结构紧密集成。它提供了一个高层接口，通过其绘图函数绘制吸引人且信息丰富的统计图形，帮助你进一步探索和理解数据。
 
@@ -182,7 +182,7 @@ conda install seaborn
 
 # Scikit-learn
 
-![python_libraries_data_scientists_know_2022](../Images/8e8d054ca181202039685eafb0fde4d4.png)
+![python_libraries_data_scientists_know_2022](img/8e8d054ca181202039685eafb0fde4d4.png)
 
 来源：<href en.wikipedia.org="" wiki="" scikit-learn="" rel="noopener" target="_blank">维基百科</href>
 
@@ -216,7 +216,7 @@ pip install scikit-learn
 
 # TensorFlow
 
-![python_libraries_data_scientists_know_2022](../Images/4ecfa49d9f34359b8c757c913e42cb15.png)
+![python_libraries_data_scientists_know_2022](img/4ecfa49d9f34359b8c757c913e42cb15.png)
 
 来源：<href en.wikipedia.org="" wiki="" tensorflow="" rel="noopener" target="_blank">维基百科</href>
 

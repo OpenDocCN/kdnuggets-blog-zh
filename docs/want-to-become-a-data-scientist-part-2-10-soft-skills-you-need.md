@@ -1,22 +1,22 @@
-# 想成为数据科学家？第2部分：你需要的10项软技能
+# 想成为数据科学家？第二部分：你需要的 10 项软技能
 
-> 原文：[https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
+> 原文：[`www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need`](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
 
-![想成为数据科学家？第2部分：你需要的10项软技能](../Images/01a827b4545dd83ca9c545ae9d05e221.png)
+![想成为数据科学家？第二部分：你需要的 10 项软技能](img/01a827b4545dd83ca9c545ae9d05e221.png)
 
 作者提供的图像
 
-这是成为数据科学家所需技能的第2部分。许多人谈论数据科学家所需的硬技能。公司会列出他们希望你了解的各种工具和软件，但在面试时，最重要的是你如何看待自己。
+这是成为数据科学家所需技能的第二部分。许多人谈论数据科学家所需的硬技能。公司会列出他们希望你了解的各种工具和软件，但在面试时，最重要的是你如何看待自己。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 工作
 
 * * *
 
@@ -90,18 +90,18 @@
 
 祝你学习愉快！
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作作者和KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程以及与数据科学相关的理论知识。她还希望探索人工智能在延续人类生命方面的不同方式。她是一个热衷于学习的人，致力于扩展她的技术知识和写作技能，同时帮助指导他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作作者和 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程以及与数据科学相关的理论知识。她还希望探索人工智能在延续人类生命方面的不同方式。她是一个热衷于学习的人，致力于扩展她的技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关内容
 
-+   [想成为数据科学家？第1部分：你需要的10种硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
++   [想成为数据科学家？第一部分：你需要的 10 种硬技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-1-10-hard-skills-you-need)
 
 +   [每个数据科学家需要的软技能](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
 
 +   [想用你的数据技能解决全球问题？这里有一些…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [如果你想成为数据分析师，你应该考虑的3门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，你应该考虑的 3 门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-+   [远程工作的数据科学家需要的6种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
++   [远程工作的数据科学家需要的 6 种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
 
 +   [如果你想进入科技领域：成为一名软件开发者](https://www.kdnuggets.com/if-you-want-to-get-in-the-tech-space-become-a-software-developer)

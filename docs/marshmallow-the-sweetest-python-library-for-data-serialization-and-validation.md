@@ -1,8 +1,8 @@
 # Marshmallow: 最甜美的 Python 数据序列化与验证库
 
-> 原文：[https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation](https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation)
+> 原文：[`www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation`](https://www.kdnuggets.com/marshmallow-the-sweetest-python-library-for-data-serialization-and-validation)
 
-![Marshmallow: 最甜美的 Python 数据序列化与验证库](../Images/b6ac43e0310a98ea737b8b8744447f8b.png)
+![Marshmallow: 最甜美的 Python 数据序列化与验证库](img/b6ac43e0310a98ea737b8b8744447f8b.png)
 
 图片由作者提供 | Leonardo AI & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
@@ -76,11 +76,11 @@ class ProductSchema(Schema):
     price = fields.Float(required=True)
 ```
 
-我们创建一个继承自Marshmallow中的`Schema`类的新类。然后，我们声明与`Product`类相同的变量名称并定义它们的字段类型。Marshmallow中的字段类支持各种数据类型；在这里，我们使用原始类型Int、String和Float。
+我们创建一个继承自 Marshmallow 中的`Schema`类的新类。然后，我们声明与`Product`类相同的变量名称并定义它们的字段类型。Marshmallow 中的字段类支持各种数据类型；在这里，我们使用原始类型 Int、String 和 Float。
 
 #### 序列化
 
-既然我们已经为对象定义了模式，我们现在可以将Python类实例转换为JSON字符串或Python字典进行序列化。这里是基本实现：
+既然我们已经为对象定义了模式，我们现在可以将 Python 类实例转换为 JSON 字符串或 Python 字典进行序列化。这里是基本实现：
 
 ```py
 product = Product(_id=4, name="Test Product", price=10.6)
@@ -97,15 +97,15 @@ result = schema.dumps(product)
 **# type(str) -> {"_id": 4, "name": "Test Product", "price": 10.6}**
 ```
 
-我们创建一个`ProductSchema`对象，它将`Product`对象转换为可序列化的格式，如JSON或字典。
+我们创建一个`ProductSchema`对象，它将`Product`对象转换为可序列化的格式，如 JSON 或字典。
 
-> 注意`dump`和`dumps`函数结果之间的区别。一个返回一个可以使用pickle保存的Python字典对象，另一个返回一个遵循JSON格式的字符串对象。
+> 注意`dump`和`dumps`函数结果之间的区别。一个返回一个可以使用 pickle 保存的 Python 字典对象，另一个返回一个遵循 JSON 格式的字符串对象。
 
 #### 反序列化
 
-为了逆转序列化过程，我们使用反序列化。一个对象被保存，以便以后可以加载和访问，而Marshmallow可以帮助实现这一点。
+为了逆转序列化过程，我们使用反序列化。一个对象被保存，以便以后可以加载和访问，而 Marshmallow 可以帮助实现这一点。
 
-Python字典可以通过load函数进行验证，该函数验证变量及其相关的数据类型。下面的函数展示了它是如何工作的：
+Python 字典可以通过 load 函数进行验证，该函数验证变量及其相关的数据类型。下面的函数展示了它是如何工作的：
 
 ```py
 product_data = {
@@ -128,9 +128,9 @@ result = schema.load(faulty_data)
 **# Raises validation error**
 ```
 
-模式验证字典是否具有正确的参数和数据类型。如果验证失败，将引发`ValidationError`，因此将`load function`封装在try-except块中是必要的。如果验证成功，结果对象仍然是一个字典，当原始参数也是字典时，这并不是很有用，对吧？我们通常希望的是验证字典并将其转换回最初序列化的原始对象。
+模式验证字典是否具有正确的参数和数据类型。如果验证失败，将引发`ValidationError`，因此将`load function`封装在 try-except 块中是必要的。如果验证成功，结果对象仍然是一个字典，当原始参数也是字典时，这并不是很有用，对吧？我们通常希望的是验证字典并将其转换回最初序列化的原始对象。
 
-为了实现这一点，我们使用Marshmallow提供的`post_load`装饰器：
+为了实现这一点，我们使用 Marshmallow 提供的`post_load`装饰器：
 
 ```py
 from marshmallow import Schema, fields, post_load
@@ -145,15 +145,15 @@ class ProductSchema(Schema):
       return Product(**data)
 ```
 
-我们在模式类中创建一个带有`post_load`装饰器的函数。这个函数接收经过验证的字典并将其转换回`Product`对象。包括`**kwargs`非常重要，因为Marshmallow可能会通过装饰器传递其他必要的参数。
+我们在模式类中创建一个带有`post_load`装饰器的函数。这个函数接收经过验证的字典并将其转换回`Product`对象。包括`**kwargs`非常重要，因为 Marshmallow 可能会通过装饰器传递其他必要的参数。
 
-对load功能的这种修改确保在验证后，Python字典被传递到`post_load`函数中，该函数从字典中创建`Product`对象。这使得使用Marshmallow进行对象反序列化成为可能。
+对 load 功能的这种修改确保在验证后，Python 字典被传递到`post_load`函数中，该函数从字典中创建`Product`对象。这使得使用 Marshmallow 进行对象反序列化成为可能。
 
 #### 验证
 
-通常，我们需要针对我们的使用案例进行额外的验证。虽然数据类型验证是必不可少的，但它并不能涵盖我们可能需要的所有验证。即使在这个简单的示例中，我们的`Product`对象也需要额外的验证。我们需要确保价格不低于0\. 我们还可以定义更多规则，例如确保产品名称的长度在3到128个字符之间。这些规则有助于确保我们的代码库符合定义的数据库模式。
+通常，我们需要针对我们的使用案例进行额外的验证。虽然数据类型验证是必不可少的，但它并不能涵盖我们可能需要的所有验证。即使在这个简单的示例中，我们的`Product`对象也需要额外的验证。我们需要确保价格不低于 0\. 我们还可以定义更多规则，例如确保产品名称的长度在 3 到 128 个字符之间。这些规则有助于确保我们的代码库符合定义的数据库模式。
 
-现在让我们看看如何使用Marshmallow实现这种验证：
+现在让我们看看如何使用 Marshmallow 实现这种验证：
 
 ```py
 from marshmallow import Schema, fields, validates, ValidationError, post_load

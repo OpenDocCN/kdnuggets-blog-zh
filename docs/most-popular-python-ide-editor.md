@@ -1,14 +1,14 @@
 # 以下是最受欢迎的 Python IDE / 编辑器
 
-> 原文：[https://www.kdnuggets.com/2018/12/most-popular-python-ide-editor.html](https://www.kdnuggets.com/2018/12/most-popular-python-ide-editor.html)
+> 原文：[`www.kdnuggets.com/2018/12/most-popular-python-ide-editor.html`](https://www.kdnuggets.com/2018/12/most-popular-python-ide-editor.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)我们最新的调查受到最近 KDnuggets 博客 [最适合数据科学的 Python IDE 是什么？](/2018/11/best-python-ide-data-science.html) 的启发，该博客获得了大量的浏览量和评论，就像我在 [LinkedIn 的帖子](https://www.linkedin.com/feed/update/urn:li:activity:6468481295524651008) 一样。
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论我们最新的调查受到最近 KDnuggets 博客 最适合数据科学的 Python IDE 是什么？ 的启发，该博客获得了大量的浏览量和评论，就像我在 [LinkedIn 的帖子](https://www.linkedin.com/feed/update/urn:li:activity:6468481295524651008) 一样。
 
 为了帮助解决关于哪些是最受欢迎的 Python IDE 或编辑器的争论，我们询问了
 
-> ![Python](../Images/dbc3374f77d8d39a439bacaca874664e.png)你在2018年使用最多的 Python 编辑器或 IDE 是什么？
+> ![Python](img/dbc3374f77d8d39a439bacaca874664e.png)你在 2018 年使用最多的 Python 编辑器或 IDE 是什么？
 
-超过1900人参与了这项调查，结果见下方的图 1。前5名选择是
+超过 1900 人参与了这项调查，结果见下方的图 1。前 5 名选择是
 
 +   Jupyter，57%
 
@@ -20,9 +20,9 @@
 
 +   Sublime Text，12%
 
-![投票顶级 Python IDE / 编辑器](../Images/08e83b9f665c35d007f1e8aefec33792.png) **图 1：最受欢迎的 Python IDE，编辑器**
+![投票顶级 Python IDE / 编辑器](img/08e83b9f665c35d007f1e8aefec33792.png) **图 1：最受欢迎的 Python IDE，编辑器**
 
-结果加起来超过100%，因为我们允许最多选择3项。大约43%的受访者只选择了一个选项，30%选择了2项，27%选择了3项。
+结果加起来超过 100%，因为我们允许最多选择 3 项。大约 43%的受访者只选择了一个选项，30%选择了 2 项，27%选择了 3 项。
 
 我们还询问了雇佣情况，结果如下
 
@@ -38,9 +38,9 @@
 
 IDE/编辑器的分布是否因雇佣情况而异？
 
-![投票按雇佣情况顶级 Python IDE](../Images/f79d3171e6541d9f87d190cde644631e.png) **图 2：按雇佣情况最受欢迎的 Python IDE，编辑器**
+![投票按雇佣情况顶级 Python IDE](img/f79d3171e6541d9f87d190cde644631e.png) **图 2：按雇佣情况最受欢迎的 Python IDE，编辑器**
 
-图 2 显示了按雇佣情况的前5名选择，相对比例在公司/自雇、学生和学术界中惊人地相似。Jupyter 作为一个大神，在所有雇佣类型中都是明确的领导者，份额在每种情况下都惊人地均匀——在56%到59%之间。
+图 2 显示了按雇佣情况的前 5 名选择，相对比例在公司/自雇、学生和学术界中惊人地相似。Jupyter 作为一个大神，在所有雇佣类型中都是明确的领导者，份额在每种情况下都惊人地均匀——在 56%到 59%之间。
 
 我们看到的唯一主要区别是政府/非营利组织的第二选择是 Spyder，而不是其他人选择的 PyCharm。
 
@@ -62,7 +62,7 @@ IDE/编辑器的分布是否因雇佣情况而异？
 
 各地区的偏好是否相同？
 
-![投票按地区顶级 Python IDE](../Images/ebf97c059fb71b4b5247d0dcf880ebc3.png) **图 3：按地区最受欢迎的 Python IDE，编辑器**
+![投票按地区顶级 Python IDE](img/ebf97c059fb71b4b5247d0dcf880ebc3.png) **图 3：按地区最受欢迎的 Python IDE，编辑器**
 
 Jupyter 在所有地方都是无可争议的领导者。主要区域如美国/加拿大、欧洲、亚洲以及澳大利亚/新西兰的偏好顺序都是相同的：Jupyter > PyCharm > Spyder > VS Code > Sublime。
 
@@ -72,9 +72,9 @@ Jupyter 在所有地方都是无可争议的领导者。主要区域如美国/�
 
 在这次调查中，大约 43% 的受访者仅选择了一项，30% 选择了两项，27% 选择了三项。
 
-我使用了与我的博客[新兴生态系统：数据科学和机器学习软件分析](/2017/06/ecosystem-data-science-machine-learning-software.html)中相同的关联提升方法。
+我使用了与我的博客新兴生态系统：数据科学和机器学习软件分析中相同的关联提升方法。
 
-![Python IDE 关联投票结果](../Images/ed4c7b2c8e3148c6bf0a0fff321f73a9.png) **图 4：各地区最受欢迎的 Python IDE 和编辑器**
+![Python IDE 关联投票结果](img/ed4c7b2c8e3148c6bf0a0fff321f73a9.png) **图 4：各地区最受欢迎的 Python IDE 和编辑器**
 
 绿色 - 正相关，红色 - 负相关。
 
@@ -84,21 +84,21 @@ Jupyter 在所有地方都是无可争议的领导者。主要区域如美国/�
 
 **相关：**
 
-+   [新兴生态系统：数据科学和机器学习软件分析](/2017/06/ecosystem-data-science-machine-learning-software.html)
++   新兴生态系统：数据科学和机器学习软件分析
 
-+   [什么是数据科学的最佳 Python IDE？](/2018/11/best-python-ide-data-science.html)
++   什么是数据科学的最佳 Python IDE？
 
-+   [前 10 个 Python 数据科学库](/2018/11/top-python-data-science-libraries.html)
++   前 10 个 Python 数据科学库
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 

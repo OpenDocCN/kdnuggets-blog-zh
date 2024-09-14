@@ -1,8 +1,8 @@
 # 使用 Facebook 的 Prophet 进行销售预测
 
-> 原文：[https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html](https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html)
+> 原文：[`www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html`](https://www.kdnuggets.com/2018/11/sales-forecasting-using-prophet.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 销售预测是许多以销售为驱动的组织中最常见的任务之一。这项活动使组织能够以一定的信心充分规划未来。在本教程中，我们将使用 [Prophet](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F)，这是 [Facebook](https://medium.com/r/?url=https%3A%2F%2Fresearch.fb.com%2Fprophet-forecasting-at-scale%2F) 开发的一个包，展示如何实现这一点。此包在 [Python](https://medium.com/r/?url=https%3A%2F%2Fpypi.org%2Fproject%2Ffbprophet%2F) 和 [R](https://medium.com/r/?url=https%3A%2F%2Fcran.r-project.org%2Fpackage%3Dprophet) 中均可用。我们假设读者对在 Python 中处理 [时间序列](https://medium.com/r/?url=https%3A%2F%2Ftowardsdatascience.com%2Fanalyzing-time-series-data-in-pandas-be3887fdd621) 数据有基本的理解。
 
@@ -48,7 +48,7 @@
 
 让我们开始导入 Pandas 进行数据处理，以及 Prophet 进行预测。接下来，我们加载数据集并查看其头部。
 
-![](../Images/a8bb0bb5c5f8a89701ab19d413f19630.png)
+![](img/a8bb0bb5c5f8a89701ab19d413f19630.png)
 
 ### 模型拟合
 
@@ -58,7 +58,7 @@
 
 下一步是准备我们的模型进行未来预测。这可以通过使用*Prophet.make_future_dataframe*方法并传入我们希望预测的天数来实现。我们使用*periods*属性来指定这个值。这还包括历史日期。我们将使用这些历史日期将预测值与*ds*列中的实际值进行比较。
 
-![](../Images/73e6e0d67ebd1a4ce5cc0bbfe1ba9bde.png)
+![](img/73e6e0d67ebd1a4ce5cc0bbfe1ba9bde.png)
 
 ### 获取预测结果
 
@@ -66,27 +66,27 @@
 
 如果我们查看预测数据框的*head*，会发现它有很多列。然而，我们主要关注***ds, yhat, yhat_lower***和**yhat_upper。yhat***是我们的预测值，***yhat_lower***是我们预测的下限，***yhat_upper***是我们预测的上限。
 
-![](../Images/9611e5d094b1b70f52590abf5917cd02.png)
+![](img/9611e5d094b1b70f52590abf5917cd02.png)
 
 让我们继续查看预测数据框的尾部和头部。
 
-![](../Images/1eb594eb646016567b3b1905b20692dc.png)
+![](img/1eb594eb646016567b3b1905b20692dc.png)
 
 ### 绘制预测结果
 
 Prophet 具有一个内置功能，允许我们绘制刚刚生成的预测结果。这可以通过使用*mode.plot()*方法并将我们的预测结果作为参数传递来实现。图中的蓝线表示预测值，而黑点表示我们数据集中的数据。
 
-![](../Images/5e8321f5aa1266894a1c30d11b557c36.png)
+![](img/5e8321f5aa1266894a1c30d11b557c36.png)
 
 ### 绘制预测组件
 
 *plot_components* 方法绘制了时间序列数据的趋势、年度和每周季节性。
 
-![](../Images/c57f0df60f7021d68d76c0115b382199.png)
+![](img/c57f0df60f7021d68d76c0115b382199.png)
 
 ### 交叉验证
 
-接下来，让我们使用历史数据测量预测误差。我们将通过将预测值与实际值进行比较来完成此操作。为了执行此操作，我们选择数据历史中的截止点，并用该截止点之前的数据拟合模型。然后，我们将实际值与预测值进行比较。*交叉验证*方法允许我们在Prophet中执行此操作。此方法使用以下参数，如下所述：
+接下来，让我们使用历史数据测量预测误差。我们将通过将预测值与实际值进行比较来完成此操作。为了执行此操作，我们选择数据历史中的截止点，并用该截止点之前的数据拟合模型。然后，我们将实际值与预测值进行比较。*交叉验证*方法允许我们在 Prophet 中执行此操作。此方法使用以下参数，如下所述：
 
 1.  *预测范围*预测范围
 
@@ -96,43 +96,43 @@ Prophet 具有一个内置功能，允许我们绘制刚刚生成的预测结果
 
 *交叉验证*方法的输出是一个数据框，其中包含*y*真实值和*yhat*预测值。我们将使用此数据框来计算预测误差。
 
-![](../Images/90de0b7c64702b4ab65fe3c99a072cb4.png)
+![](img/90de0b7c64702b4ab65fe3c99a072cb4.png)
 
 ### 获取性能指标
 
 我们使用*performance_metrics*工具计算均方误差（MSE）、均方根误差（RMSE）、平均绝对误差（MAE）、平均绝对百分比误差（MAPE）以及`yhat_lower`和`yhat_upper`估计值的覆盖率。
 
-![](../Images/712e69f483eb285945db01796056aeb1.png)
+![](img/712e69f483eb285945db01796056aeb1.png)
 
 ### **可视化性能指标**
 
-性能指标可以使用*plot_cross_validation_metric*工具进行可视化。让我们下面可视化RMSE。
+性能指标可以使用*plot_cross_validation_metric*工具进行可视化。让我们下面可视化 RMSE。
 
-![](../Images/bf30e4505691c8f74fb932ec9b19ea7a.png)
+![](img/bf30e4505691c8f74fb932ec9b19ea7a.png)
 
 ### 结论
 
-正如我们所见，Prophet在时间序列预测中非常强大和有效。然而，正如我们之前提到的，还有一些其他预测工具。工具的选择是基于数据集的性质逐案决定的。人们可以始终比较这些工具，并使用那些能提供最佳预测且误差最小的工具。这些方法包括[ARIMA](https://medium.com/r/?url=https%3A%2F%2Fwww.statsmodels.org%2Fdev%2Fgenerated%2Fstatsmodels.tsa.arima_model.ARIMA.html)、[Holt-Winters 方法](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt-winters.html)、[Holt 的线性趋势](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt.html)、[简单指数平滑](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fses.html)和[移动平均](https://medium.com/r/?url=https%3A%2F%2Fwww.babypips.com%2Flearn%2Fforex%2Fusing-moving-averages)等。您可以从[官方文档](https://medium.com/r/?url=https%3A%2F%2Ffacebook.github.io%2Fprophet%2F)或阅读[Prophet 论文](https://medium.com/r/?url=https%3A%2F%2Fpeerj.com%2Fpreprints%2F3190.pdf)了解更多关于Prophet的信息。
+正如我们所见，Prophet 在时间序列预测中非常强大和有效。然而，正如我们之前提到的，还有一些其他预测工具。工具的选择是基于数据集的性质逐案决定的。人们可以始终比较这些工具，并使用那些能提供最佳预测且误差最小的工具。这些方法包括[ARIMA](https://medium.com/r/?url=https%3A%2F%2Fwww.statsmodels.org%2Fdev%2Fgenerated%2Fstatsmodels.tsa.arima_model.ARIMA.html)、[Holt-Winters 方法](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt-winters.html)、[Holt 的线性趋势](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fholt.html)、[简单指数平滑](https://medium.com/r/?url=https%3A%2F%2Fotexts.org%2Ffpp2%2Fses.html)和[移动平均](https://medium.com/r/?url=https%3A%2F%2Fwww.babypips.com%2Flearn%2Fforex%2Fusing-moving-averages)等。您可以从[官方文档](https://medium.com/r/?url=https%3A%2F%2Ffacebook.github.io%2Fprophet%2F)或阅读[Prophet 论文](https://medium.com/r/?url=https%3A%2F%2Fpeerj.com%2Fpreprints%2F3190.pdf)了解更多关于 Prophet 的信息。
 
-**简介：[Derrick Mwiti](https://derrickmwiti.com/)** 是一名数据分析师、作家和导师。他致力于在每个任务中取得优异成果，并且是Lapid Leaders Africa的导师。
+**简介：[Derrick Mwiti](https://derrickmwiti.com/)** 是一名数据分析师、作家和导师。他致力于在每个任务中取得优异成果，并且是 Lapid Leaders Africa 的导师。
 
 **相关内容：**
 
-+   [使用 Keras 长短期记忆（LSTM）模型预测股票价格](/2018/11/keras-long-short-term-memory-lstm-model-predict-stock-prices.html)
++   使用 Keras 长短期记忆（LSTM）模型预测股票价格
 
-+   [Keras 深度学习入门](/2018/10/introduction-deep-learning-keras.html)
++   Keras 深度学习入门
 
-+   [PyTorch 深度学习入门](/2018/11/introduction-pytorch-deep-learning.html)
++   PyTorch 深度学习入门
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 

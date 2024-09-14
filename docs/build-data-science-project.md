@@ -1,22 +1,22 @@
 # 学习构建一个端到端的数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2020/11/build-data-science-project.html](https://www.kdnuggets.com/2020/11/build-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2020/11/build-data-science-project.html`](https://www.kdnuggets.com/2020/11/build-data-science-project.html)
 
-[评论](#comments)
+评论
 
 **由 [Mathang Peddi](https://twitter.com/mathang_peddi)，数据科学和机器学习爱好者**。
 
-![](../Images/60d41c87f95db9168c12644c58b73b90.png)
+![](img/60d41c87f95db9168c12644c58b73b90.png)
 
 > * * *
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT需求
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 > 
 > * * *
 > 
@@ -28,7 +28,7 @@
 
 ### 数据科学工作流程
 
-![](../Images/a95db02bd5f88ad6309bf374869606ea.png)
+![](img/a95db02bd5f88ad6309bf374869606ea.png)
 
 **业务理解**
 
@@ -60,11 +60,11 @@
 
 数据科学家会尝试更多地了解以前收集的数据。我们需要检查每个数据的类型，并学习更多关于属性及其名称的知识。
 
-![](../Images/95848d8879964505bfb3fb2f98a2a688.png)
+![](img/95848d8879964505bfb3fb2f98a2a688.png)
 
 有些薪资数据包含 -1，因此这些值对我们不太重要，可以将其移除。由于薪资估算列目前是字符串格式，所以我们需要将 -1 以字符串格式呈现。
 
-![](../Images/049d6e06238ed69d2e53d37bd8934331.png)
+![](img/049d6e06238ed69d2e53d37bd8934331.png)
 
 现在我们可以看到，行数已经减少到 742。我们观察到大多数变量是分类变量而非数值变量。这个数据集包含 2 个数值变量和 12 个分类变量。但实际上，我们的依赖变量，薪资估算，必须是数值型的。因此，我们需要将其转换为数值变量。
 
@@ -78,11 +78,11 @@
 
 在抓取数据后，我需要清理数据，以便它可以用于我们的模型。我进行了一些更改并创建了新的变量。
 
-![](../Images/f41ac081e8f4cb8a80d102be011e5c63.png)
+![](img/f41ac081e8f4cb8a80d102be011e5c63.png)
 
 当我们在左括号处分割时，发生的情况是，所有行的‘（’左侧和右侧部分进入两个不同的列表。这就是为什么我们需要包括 [0] 来获取薪资。获得薪资后，将‘K’，‘$’替换为空字符串。在一些条目中，薪资被标记为‘雇主提供’和‘按小时计算’，这些是不一致的，需要处理。
 
-![](../Images/90a4cd64b49bfcae449f6851023091af.png)
+![](img/90a4cd64b49bfcae449f6851023091af.png)
 
 现在我们不应使用雇主提供的或按小时计算的薪资。所以我们返回包含每个条目最小和最大薪资的两个列表。这成为我们最终的因变量（用于预测一个人的平均薪资）。
 
@@ -94,11 +94,11 @@ EDA 在这一阶段扮演着非常重要的角色，因为清理数据的总结�
 
 数据科学家有机会了解他的工作是否准备好提交，或是否需要审查。建模专注于开发描述性或预测性的模型。所以在这里，我们执行预测建模，这是一个利用数据挖掘和概率来预测结果的过程。对于预测建模，数据科学家使用一个训练集，这是一组已知结果的历史数据。这一步可以重复多次，直到模型理解问题和答案。
 
-如果我们有分类数据，则需要创建虚拟变量，所以我将分类变量转换为虚拟变量。我还将数据分成训练集和测试集，测试集大小为20%。我尝试了三种不同的模型，并使用平均绝对误差进行了评估。我选择 MAE，因为它相对容易解释，而且异常值对这种类型的模型没有特别大的影响。
+如果我们有分类数据，则需要创建虚拟变量，所以我将分类变量转换为虚拟变量。我还将数据分成训练集和测试集，测试集大小为 20%。我尝试了三种不同的模型，并使用平均绝对误差进行了评估。我选择 MAE，因为它相对容易解释，而且异常值对这种类型的模型没有特别大的影响。
 
-![](../Images/72459f03ca6713721ffc2d56463514e1.png)
+![](img/72459f03ca6713721ffc2d56463514e1.png)
 
-转换后，我们的数据集的列数从14增加到了178！！
+转换后，我们的数据集的列数从 14 增加到了 178！！
 
 我已经实现了三种不同的模型：
 
@@ -108,27 +108,27 @@ EDA 在这一阶段扮演着非常重要的角色，因为清理数据的总结�
 
 +   随机森林——同样，由于数据的稀疏性，我认为这会是一个很好的选择。
 
-![](../Images/7c50ef3091e8a0ad62ab0bb81c47a3f8.png)
+![](img/7c50ef3091e8a0ad62ab0bb81c47a3f8.png)
 
 现在开始时，它稍微有点差。所以我们尝试找到 alpha 的最佳值，使得误差最小。
 
-![](../Images/97c2f6817ec2ae0b23d7e6cd327b47e0.png)
+![](img/97c2f6817ec2ae0b23d7e6cd327b47e0.png)
 
 在这里我也选择了 i/10，但误差仍然很高，所以我减少了 alpha 的值。
 
-![](../Images/395d15057e8d4782d7d2820041246692.png)
+![](img/395d15057e8d4782d7d2820041246692.png)
 
 在绘制图表并检查 alpha 值后，我们发现 alpha 值为 0.13 可以得到最佳的误差项。现在我们的误差从 21.09 降低到 19.25（这意味着 19.25K 美元）。我们还可以通过调整 GridSearch 来改进模型。
 
 GridSearch 是进行超参数调优的过程，以确定给定模型的最佳值。GridSearchCV 基本上就是将所有你想要的参数输入，然后它会运行所有模型，并筛选出结果最佳的模型。
 
-![](../Images/50f8eede39c41a70fce07519c3ca784e.png)
+![](img/50f8eede39c41a70fce07519c3ca784e.png)
 
 我们还可以使用支持向量回归、XGBoost 或其他任何模型。
 
 随机森林回归是一种基于树的决策过程，并且我们的数据集中有很多 0 和 1，所以我们期望它是一个更好的模型。这就是为什么我在这里选择了随机森林回归。
 
-![](../Images/c39324a94fd3b6dc42f895550ff2772b.png)
+![](img/c39324a94fd3b6dc42f895550ff2772b.png)
 
 因此，我们现在获得的误差值比之前的更小，所以随机森林模型比之前的模型更好。我将随机森林模型与线性回归模型结合起来进行预测。所以我取了两者的平均值，即对每个模型给予了 50% 的权重。
 
@@ -148,9 +148,9 @@ GridSearch 是进行超参数调优的过程，以确定给定模型的最佳值
 
 我已使用 flask 在 Heroku 部署了我的机器学习模型。我使用线性回归训练了模型（因为它易于理解），但你也可以使用任何其他机器学习模型，甚至可以使用集成模型，因为它们提供了良好的准确性。
 
-![](../Images/604e2b4e6f1b47e4e3e75706c89b897d.png)
+![](img/604e2b4e6f1b47e4e3e75706c89b897d.png)
 
-在部署模型后，我尝试预测一位机器学习工程师的薪资，其中公司的评级为4，公司成立39年前。根据我的模型，员工的预期薪资为117.31K美元。
+在部署模型后，我尝试预测一位机器学习工程师的薪资，其中公司的评级为 4，公司成立 39 年前。根据我的模型，员工的预期薪资为 117.31K 美元。
 
 在本文中，我没有详细讨论所有内容。但你可以随时参考我的[GitHub 仓库](https://github.com/mathangpeddi/Glassdoor-Job-Salaries)来获取整个项目。我的结论是，你不应期待一个完美的模型，而是期望一个你今天可以在自己的公司/项目中使用的工具！
 
@@ -164,17 +164,17 @@ GridSearch 是进行超参数调优的过程，以确定给定模型的最佳值
 
 +   [创建真实数据科学作品集项目的逐步指南](https://www.kdnuggets.com/2020/10/guide-authentic-data-science-portfolio-project.html)
 
-+   [8个 AI/机器学习项目让你的作品集脱颖而出](https://www.kdnuggets.com/2020/09/8-ml-ai-projects-stand-out.html)
++   [8 个 AI/机器学习项目让你的作品集脱颖而出](https://www.kdnuggets.com/2020/09/8-ml-ai-projects-stand-out.html)
 
 +   [如何建立数据科学作品集](https://www.kdnuggets.com/2018/07/build-data-science-portfolio.html)
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 个预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学，寻找目标，再寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

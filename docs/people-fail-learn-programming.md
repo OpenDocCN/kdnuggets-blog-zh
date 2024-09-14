@@ -1,8 +1,8 @@
 # 为什么大多数人无法学会编程？
 
-> 原文：[https://www.kdnuggets.com/2022/03/people-fail-learn-programming.html](https://www.kdnuggets.com/2022/03/people-fail-learn-programming.html)
+> 原文：[`www.kdnuggets.com/2022/03/people-fail-learn-programming.html`](https://www.kdnuggets.com/2022/03/people-fail-learn-programming.html)
 
-![为什么大多数人无法学会编程？](../Images/bbfcb9e6f31cc98bf9285d0fb3a87467.png)
+![为什么大多数人无法学会编程？](img/bbfcb9e6f31cc98bf9285d0fb3a87467.png)
 
 图片由 [Fotis Fotopoulos](https://unsplash.com/@ffstop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -132,10 +132,10 @@
 
 +   [哈佛最受欢迎的编程入门课程免费提供！](https://www.kdnuggets.com/2022/03/popular-intro-programming-course-harvard-free.html)
 
-+   [KDnuggets新闻3月30日：最受欢迎的编程入门课程…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻 3 月 30 日：最受欢迎的编程入门课程…](https://www.kdnuggets.com/2022/n13.html)
 
 +   [调查：机器学习项目仍然经常无法部署](https://www.kdnuggets.com/survey-machine-learning-projects-still-routinely-fail-to-deploy)
 
-+   [AI人员管理：建立高效能AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
++   [AI 人员管理：建立高效能 AI 团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
 
 +   [人员分析的努力值得回报吗？](https://www.kdnuggets.com/2022/09/efforts-people-analytics-worth-outcome.html)

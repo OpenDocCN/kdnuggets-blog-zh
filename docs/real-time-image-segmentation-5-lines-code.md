@@ -1,8 +1,8 @@
 # 实时图像分割使用 5 行代码
 
-> 原文：[https://www.kdnuggets.com/2021/10/real-time-image-segmentation-5-lines-code.html](https://www.kdnuggets.com/2021/10/real-time-image-segmentation-5-lines-code.html)
+> 原文：[`www.kdnuggets.com/2021/10/real-time-image-segmentation-5-lines-code.html`](https://www.kdnuggets.com/2021/10/real-time-image-segmentation-5-lines-code.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ayoola Olafenwa](https://www.linkedin.com/in/ayoola-olafenwa-003b901a9/)，机器学习工程师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -28,11 +28,11 @@ PixelLib 库是一个旨在通过少量 Python 代码实现图像和视频中对
 
 **注意：** 本文基于使用 PyTorch 和 ***PointRend*** 进行实例分割。如果你想学习如何使用 Tensorflow 和 Mask R-CNN 进行实例分割，请阅读这篇 [文章](https://towardsdatascience.com/image-segmentation-with-six-lines-0f-code-acb870a462e8)。
 
-![图示](../Images/22bc7c780b4afe84799ac42f72f0cfd6.png)
+![图示](img/22bc7c780b4afe84799ac42f72f0cfd6.png)
 
 [原始图像来源](https://unsplash.com/photos/6UWqw25wfLI)（左：MASK R-CNN，右：PointRend）
 
-![图示](../Images/cb489b9285153f06bae3e2511f8f1e0f.png)
+![图示](img/cb489b9285153f06bae3e2511f8f1e0f.png)
 
 [原始图像来源](https://unsplash.com/photos/rrI02QQ9GSQ)（左：MASK R-CNN，右：PointRend）
 
@@ -93,7 +93,7 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 
 **分割样本图像**
 
-![Figure](../Images/a8a8466af953d96d9291e39b63072e43.png)
+![Figure](img/a8a8466af953d96d9291e39b63072e43.png)
 
 [原始图像来源](https://commons.wikimedia.org/wiki/File:Carspotters.jpg)
 
@@ -103,7 +103,7 @@ ins.segmentImage("image.jpg", show_bboxes = True, output_image_name="output.jpg"
 
 **分割后的图像**
 
-![Image](../Images/03a6cceedbc5db33a5d577d457ae424b.png)
+![Image](img/03a6cceedbc5db33a5d577d457ae424b.png)
 
 ```py
 The checkpoint state_dict contains keys that are not used by the model:
@@ -149,7 +149,7 @@ ins.load_model("pointrend_resnet50.pkl", confidence = 0.3)
 
 **速度记录**
 
-PixelLib 使得可以进行实时物体分割，并添加了调整推理速度以适应实时预测的功能。使用 4GB 容量的 Nvidia GPU 处理单张图像的默认推理速度约为***0.26秒***。
+PixelLib 使得可以进行实时物体分割，并添加了调整推理速度以适应实时预测的功能。使用 4GB 容量的 Nvidia GPU 处理单张图像的默认推理速度约为***0.26 秒***。
 
 **速度调整**
 
@@ -161,7 +161,7 @@ PixelLib 支持速度调整，有两种速度调整模式，分别是***fast***�
 ins.load_model("pointrend_resnet50.pkl", detection_speed = "fast")
 ```
 
-在***load_model***函数中，我们添加了参数***detection_speed***并将其值设置为***fast***。快速模式处理单张图像的时间为***0.20秒***。
+在***load_model***函数中，我们添加了参数***detection_speed***并将其值设置为***fast***。快速模式处理单张图像的时间为***0.20 秒***。
 
 **快速模式检测的完整代码**
 
@@ -180,7 +180,7 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 ins.load_model("pointrend_resnet50.pkl", detection_speed = "rapid")
 ```
 
-在***load_model***函数中，我们添加了参数***detection_speed***并将其值设置为***rapid***。**迅速**模式处理单张图像的时间为***0.15秒***。
+在***load_model***函数中，我们添加了参数***detection_speed***并将其值设置为***rapid***。**迅速**模式处理单张图像的时间为***0.15 秒***。
 
 **快速模式检测的完整代码**
 
@@ -197,7 +197,7 @@ ins.segmentImage("image.jpg", show_bboxes=True, output_image_name="output_image.
 
 有两种类型的 PointRend 模型用于物体分割，它们分别是***resnet50 变体***和***resnet101 变体***。在本文中使用的是***resnet50 变体***，因为它速度较快且准确性良好。***resnet101 变体***更准确，但比***resnet50 变体***慢。根据 [官方报告](https://github.com/facebookresearch/detectron2/tree/main/projects/PointRend)上的信息，***resnet50 变体***在 COCO 上达到***38.3 mAP***，而***resnet101 变体***在 COCO 上达到***40.1 mAP***。
 
-**Resnet101 的速度记录：** 分割的默认速度为***0.5秒***，快速模式为***0.3秒***，而迅速模式为***0.25秒***。
+**Resnet101 的速度记录：** 分割的默认速度为***0.5 秒***，快速模式为***0.3 秒***，而迅速模式为***0.25 秒***。
 
 **Resnet101 变体的代码**
 
@@ -210,13 +210,13 @@ ins.load_model("pointrend_resnet101.pkl", network_backbone="resnet101")
 ins.segmentImage("sample.jpg",  show_bboxes = True, output_image_name="output.jpg")
 ```
 
-使用resnet101模型进行推理的代码相同，只不过我们在***load_model***函数中加载了***PointRend resnet101模型***。从[这里](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.2.0/pointrend_resnet101.pkl)下载resnet101模型。我们在***load_model***函数中添加了一个额外的参数***network_backbone***，并将其值设置为***resnet101***。
+使用 resnet101 模型进行推理的代码相同，只不过我们在***load_model***函数中加载了***PointRend resnet101 模型***。从[这里](https://github.com/ayoolaolafenwa/PixelLib/releases/download/0.2.0/pointrend_resnet101.pkl)下载 resnet101 模型。我们在***load_model***函数中添加了一个额外的参数***network_backbone***，并将其值设置为***resnet101***。
 
-**注意：** 如果你想要实现高推理速度和良好的准确性，使用**PointRend** ***resnet50变体***，但如果你更关注准确性，使用**PointRend** ***resnet101变体***。所有这些推理报告均基于使用4GB容量的Nvidia GPU。
+**注意：** 如果你想要实现高推理速度和良好的准确性，使用**PointRend** ***resnet50 变体***，但如果你更关注准确性，使用**PointRend** ***resnet101 变体***。所有这些推理报告均基于使用 4GB 容量的 Nvidia GPU。
 
 **图像分割中的自定义对象检测**
 
-使用的PointRend模型是一个预训练的COCO模型，支持80种对象类别。PixelLib支持自定义对象检测，使得过滤检测结果和确保目标对象的分割成为可能。我们可以从支持的80个对象类别中选择，以匹配我们的目标。这是80个支持的对象类别：
+使用的 PointRend 模型是一个预训练的 COCO 模型，支持 80 种对象类别。PixelLib 支持自定义对象检测，使得过滤检测结果和确保目标对象的分割成为可能。我们可以从支持的 80 个对象类别中选择，以匹配我们的目标。这是 80 个支持的对象类别：
 
 ```py
 person, bicycle, car, motorcycle, airplane,
@@ -245,11 +245,11 @@ ins.segmentImage("image.jpg", show_bboxes=True, segment_target_classes = target_
 
 调用了函数***select_target_classes***以选择需要分割的目标对象。函数***segmentImage***增加了一个新参数***segment_target_classes***，以从目标类别中选择并根据这些类别过滤检测结果。我们过滤检测结果，仅检测图像中的人。
 
-![图片](../Images/03a6cceedbc5db33a5d577d457ae424b.png)
+![图片](img/03a6cceedbc5db33a5d577d457ae424b.png)
 
 ### **图像中的对象提取**
 
-PixelLib使得提取和分析图像中分割出的对象成为可能。
+PixelLib 使得提取和分析图像中分割出的对象成为可能。
 
 **对象提取的代码**
 
@@ -274,7 +274,7 @@ segmented_object_5.jpg
 segmented_object_6.jpg
 ```
 
-![图示](../Images/8b1a301199f1b4ca6df20a01cd384dcc.png)
+![图示](img/8b1a301199f1b4ca6df20a01cd384dcc.png)
 
 注意：图像中的所有对象都被提取了，我选择只显示其中的三个。
 
@@ -292,19 +292,19 @@ save_extracted_objects=True, output_image_name="output_image.jpg" )
 
 我们引入了一个新参数***extract_from_box***，用于从其边界框坐标中提取分割出的对象。每个提取出的对象将保存为***object_extract_index***，例如***object_extract_1***。对象将按提取顺序保存。
 
-![图示](../Images/948881319af9a109839b6ad02bbf7278.png)
+![图示](img/948881319af9a109839b6ad02bbf7278.png)
 
 从边界框坐标提取
 
 **图像分割输出可视化**
 
-PixelLib使得可以根据图像分辨率调节图像的可视化。
+PixelLib 使得可以根据图像分辨率调节图像的可视化。
 
 ```py
 ins.segmentImage("sample.jpg", show_bboxes=True, output_image_name= "output.jpg")
 ```
 
-![图示](../Images/2eff7a7adc25c50baf6aac1db642d3ee.png)
+![图示](img/2eff7a7adc25c50baf6aac1db642d3ee.png)
 
 [原始图片来源](https://unsplash.com/photos/UiVe5QvOhao)
 
@@ -316,44 +316,44 @@ ins.segmentImage("sample.jpg", show_bboxes=True, output_image_name= "output.jpg"
 ins.segmentImage(“sample.jpg”, show_bboxes=True, text_size=5, text_thickness=4, box_thickness=10, output_image_name=”output.jpg”)
 ```
 
-segmentImage函数接受了新的参数，用于调整文本和边界框的厚度。
+segmentImage 函数接受了新的参数，用于调整文本和边界框的厚度。
 
-+   ***text_size:*** 默认文本大小为***0.6***，适用于分辨率适中的图像。对于高分辨率图像则显得过小。我将其增加到了5。
++   ***text_size:*** 默认文本大小为***0.6***，适用于分辨率适中的图像。对于高分辨率图像则显得过小。我将其增加到了 5。
 
-+   ***text_thickness:*** 默认文本厚度为1。我将其增加到4，以匹配图像分辨率。
++   ***text_thickness:*** 默认文本厚度为 1。我将其增加到 4，以匹配图像分辨率。
 
-+   ***box_thickness:*** 默认框厚度为2，我将其更改为10，以匹配图像分辨率。
++   ***box_thickness:*** 默认框厚度为 2，我将其更改为 10，以匹配图像分辨率。
 
 **改进可视化的输出图像**
 
-![Image](../Images/0841dec48cb891e893d87abb233a4a2d.png)
+![Image](img/0841dec48cb891e893d87abb233a4a2d.png)
 
 **注意：** 根据图像的分辨率调整参数。我为分辨率为***5760 x 3840***的示例图像使用的值可能对分辨率较低的图像来说过大。如果您的图像分辨率非常高，可以将参数值增加到超过我在此示例代码中设置的值。***text_thickness*** 和 ***box_thickness*** 参数值必须为整数，不能用浮点数表示。***text_size*** 值可以用整数或浮点数表示。
 
-我们在这篇文章中详细讨论了如何执行准确且快速的图像分割和对象提取。我们还描述了PixelLib的升级，通过PointRend，使库能够满足计算机视觉中对精度和速度性能平衡的日益增长的需求。
+我们在这篇文章中详细讨论了如何执行准确且快速的图像分割和对象提取。我们还描述了 PixelLib 的升级，通过 PointRend，使库能够满足计算机视觉中对精度和速度性能平衡的日益增长的需求。
 
-**注意：** [阅读完整教程](https://towardsdatascience.com/real-time-image-segmentation-using-5-lines-of-code-7c480abdb835)，其中包括如何使用PixelLib对一批图像、视频和实时摄像头视频进行对象分割。
+**注意：** [阅读完整教程](https://towardsdatascience.com/real-time-image-segmentation-using-5-lines-of-code-7c480abdb835)，其中包括如何使用 PixelLib 对一批图像、视频和实时摄像头视频进行对象分割。
 
-**简历：[Ayoola Olafenwa](https://www.linkedin.com/in/ayoola-olafenwa-003b901a9/)** 是一位自学编程的程序员、技术作家和深度学习从业者。Ayoola开发了两个开源计算机视觉项目，被全球许多开发者使用，目前担任DeepQuest AI的机器学习工程师，负责在云端构建和部署机器学习应用。Ayoola的专业领域是计算机视觉和机器学习。她有使用深度学习库如PyTorch和Tensorflow来构建和部署机器学习模型的经验，并在云计算平台如Azure上使用Docker、Pulumi和Kubernetes等DevOp工具进行生产部署。Ayoola还在使用高效框架如PyTorchMobile、TensorflowLite和ONNX Runtime将机器学习模型部署到边缘设备如Nvidia Jetson Nano和Raspberry PI上。
+**简历：[Ayoola Olafenwa](https://www.linkedin.com/in/ayoola-olafenwa-003b901a9/)** 是一位自学编程的程序员、技术作家和深度学习从业者。Ayoola 开发了两个开源计算机视觉项目，被全球许多开发者使用，目前担任 DeepQuest AI 的机器学习工程师，负责在云端构建和部署机器学习应用。Ayoola 的专业领域是计算机视觉和机器学习。她有使用深度学习库如 PyTorch 和 Tensorflow 来构建和部署机器学习模型的经验，并在云计算平台如 Azure 上使用 Docker、Pulumi 和 Kubernetes 等 DevOp 工具进行生产部署。Ayoola 还在使用高效框架如 PyTorchMobile、TensorflowLite 和 ONNX Runtime 将机器学习模型部署到边缘设备如 Nvidia Jetson Nano 和 Raspberry PI 上。
 
 **相关：**
 
-+   [使用5行代码提取图像和视频中的对象](/2021/03/extraction-objects-images-videos-5-lines-code.html)
++   使用 5 行代码提取图像和视频中的对象
 
-+   [使用5行代码更改任何图像的背景](/2020/11/change-background-image-5-lines-code.html)
++   使用 5 行代码更改任何图像的背景
 
-+   [使用5行代码更改任何视频的背景](/2020/12/change-background-video-5-lines-code.html)
++   使用 5 行代码更改任何视频的背景
 
 ### 更多相关话题
 
-+   [少于15行代码实现多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
++   [少于 15 行代码实现多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 
 +   [如何使用图数据库构建实时推荐引擎](https://www.kdnuggets.com/2023/08/build-realtime-recommendation-engine-graph-databases.html)
 
 +   [Segment Anything Model：图像分割的基础模型](https://www.kdnuggets.com/2023/07/segment-anything-model-foundation-model-image-segmentation.html)
 
-+   [实时AI和机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)
++   [实时 AI 和机器学习的特征存储](https://www.kdnuggets.com/2022/03/feature-stores-realtime-ai-machine-learning.html)
 
-+   [使用AI实现实时翻译](https://www.kdnuggets.com/2022/07/realtime-translations-ai.html)
++   [使用 AI 实现实时翻译](https://www.kdnuggets.com/2022/07/realtime-translations-ai.html)
 
-+   [大数据如何实时拯救生命：IoV数据分析帮助…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)
++   [大数据如何实时拯救生命：IoV 数据分析帮助…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)

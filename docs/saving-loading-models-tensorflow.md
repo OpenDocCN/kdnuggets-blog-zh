@@ -1,10 +1,10 @@
 # 在 TensorFlow 中保存和加载模型——为什么这很重要以及如何做到
 
-> 原文：[https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html](https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html)
+> 原文：[`www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html`](https://www.kdnuggets.com/2021/02/saving-loading-models-tensorflow.html)
 
-[评论](#comments)
+评论
 
-![](../Images/d6d138bf9bad0178ad0122d702dcb071.png)
+![](img/d6d138bf9bad0178ad0122d702dcb071.png)
 
 *照片由 [Nana Smirnova](https://unsplash.com/@nananadolgo?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 记住，在梯度下降中，我们根据误差或损失函数更新权重和偏差。
 
-![](../Images/886dd93c4d1cf92b9b527e2ae87af6d6.png)
+![](img/886dd93c4d1cf92b9b527e2ae87af6d6.png)
 
 现在想象一下，你训练了一个模型数千个周期，可能是几天、几周甚至几小时，并且得到了相当好的权重，这意味着你的模型表现非常好，然后当你关闭程序/Jupyter notebook 时丢失了所有权重。
 
@@ -103,7 +103,7 @@ print(f"test accuracy {acc*100}")
 
 ```
 
-![](../Images/6026b662eede755193b243e4b32a56e8.png)
+![](img/6026b662eede755193b243e4b32a56e8.png)
 
 现在，我们只需调用 *model.save* 函数并传入 *filepath* 作为参数，就可以保存模型。
 
@@ -135,7 +135,7 @@ print(f"test accuracy {acc*100}")
 
 ```
 
-![](../Images/090fb3395a9d3e21f58be16eb3c7a893.png)
+![](img/090fb3395a9d3e21f58be16eb3c7a893.png)
 
 我们可以看到我们得到的准确率与旧模型完全相同。
 

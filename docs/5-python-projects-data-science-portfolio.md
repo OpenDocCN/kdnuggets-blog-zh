@@ -1,8 +1,8 @@
 # 5 个用于数据科学投资组合的 Python 项目
 
-> 原文：[https://www.kdnuggets.com/2022/12/5-python-projects-data-science-portfolio.html](https://www.kdnuggets.com/2022/12/5-python-projects-data-science-portfolio.html)
+> 原文：[`www.kdnuggets.com/2022/12/5-python-projects-data-science-portfolio.html`](https://www.kdnuggets.com/2022/12/5-python-projects-data-science-portfolio.html)
 
-![5 个用于数据科学投资组合的 Python 项目](../Images/a1134de2f0b6ab74d5f32b6cd746f149.png)
+![5 个用于数据科学投资组合的 Python 项目](img/a1134de2f0b6ab74d5f32b6cd746f149.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 # 1\. 从雅虎财经抓取股票价格
 
-![5 个用于数据科学投资组合的 Python 项目](../Images/fb00bb9c4916dc59654b68f11e15f2a3.png)
+![5 个用于数据科学投资组合的 Python 项目](img/fb00bb9c4916dc59654b68f11e15f2a3.png)
 
 项目图片
 
@@ -46,53 +46,53 @@
 
 # 2\. Instagram 达到分析项目
 
-![5 个用于数据科学投资组合的 Python 项目](../Images/e2601341aa4bbd9309ff785b11d4c791.png)
+![5 个用于数据科学投资组合的 Python 项目](img/e2601341aa4bbd9309ff785b11d4c791.png)
 
 项目图片
 
 分析项目并不是关于创建花哨的可视化。它是关于理解数据并以通俗的语言解释数据。数据科学家需要清理数据，进行统计分析，添加数据可视化图表，用非技术语言向利益相关者解释可视化，并进行预测分析。
 
-在这个项目中，你将分析Instagram数据集，使用各种可视化图表来解释模式和趋势，并最终创建一个简单的机器学习模型来预测Instagram帖子的覆盖率。
+在这个项目中，你将分析 Instagram 数据集，使用各种可视化图表来解释模式和趋势，并最终创建一个简单的机器学习模型来预测 Instagram 帖子的覆盖率。
 
-**项目链接**: [使用Python的Instagram覆盖分析](https://thecleverprogrammer.com/2022/03/22/instagram-reach-analysis-using-python/)
+**项目链接**: [使用 Python 的 Instagram 覆盖分析](https://thecleverprogrammer.com/2022/03/22/instagram-reach-analysis-using-python/)
 
-# 3\. 使用Flask应用程序的航班价格预测
+# 3\. 使用 Flask 应用程序的航班价格预测
 
-![5个Python数据科学项目组合](../Images/581325bbd2bb656b44584afe4d372842.png)
+![5 个 Python 数据科学项目组合](img/581325bbd2bb656b44584afe4d372842.png)
 
 项目中的图像
 
-在这个项目中，你将清理数据，进行探索性数据分析，可视化数据以理解票价趋势，训练和评估模型，并使用Flask构建模型推断。
+在这个项目中，你将清理数据，进行探索性数据分析，可视化数据以理解票价趋势，训练和评估模型，并使用 Flask 构建模型推断。
 
 如果你是初学者，这是你想要的完美起点。你将了解如何处理数据并部署你的机器学习解决方案。
 
-**项目链接**: [使用Flask应用程序的航班价格预测](https://machinelearningprojects.net/flight-price-prediction/)
+**项目链接**: [使用 Flask 应用程序的航班价格预测](https://machinelearningprojects.net/flight-price-prediction/)
 
 # 4\. 时间序列分析与预测端到端项目
 
-![5个Python数据科学项目组合](../Images/e9a6e7b92f9394fdb55bfdd29c037659.png)
+![5 个 Python 数据科学项目组合](img/e9a6e7b92f9394fdb55bfdd29c037659.png)
 
 项目中的图像
 
 金融市场对时间序列分析和预测的需求巨大。公司正在开发方法来理解模式和趋势，以避免灾难，并为利益相关者赚取更多利润。
 
-在这个项目中，你将分析数据，然后可视化趋势，以制定更好的预测策略。之后，你将训练和评估ARIMA模型，并使用预测结果比较过去和未来的趋势。
+在这个项目中，你将分析数据，然后可视化趋势，以制定更好的预测策略。之后，你将训练和评估 ARIMA 模型，并使用预测结果比较过去和未来的趋势。
 
 这个项目深入探讨了时间序列分析，我强烈推荐给所有的毕业年学生。
 
-**项目链接**: [基于Python的时间序列分析与预测的端到端项目](https://towardsdatascience.com/an-end-to-end-project-on-time-series-analysis-and-forecasting-with-python-4835e6bf050b)
+**项目链接**: [基于 Python 的时间序列分析与预测的端到端项目](https://towardsdatascience.com/an-end-to-end-project-on-time-series-analysis-and-forecasting-with-python-4835e6bf050b)
 
 # 5\. 自动语音识别项目
 
-![5个Python数据科学项目组合](../Images/44e97c22982209b033d19075dee9b53d.png)
+![5 个 Python 数据科学项目组合](img/44e97c22982209b033d19075dee9b53d.png)
 
-作者提供的图像 | [实时乌尔都语ASR](https://huggingface.co/spaces/kingabzpro/real-time-Urdu-ASR)
+作者提供的图像 | [实时乌尔都语 ASR](https://huggingface.co/spaces/kingabzpro/real-time-Urdu-ASR)
 
 这是一个对任何人来说都稍具挑战性的项目。我花了两个月时间理解处理音频数据及其处理，以创建自动语音识别模型。
 
-在这个项目中，你将学习处理和处理音频及文本数据。之后，你将使用HuggingFace transformers来构建和改进多语言语音识别模型。此外，你还将学习清理音频和文本数据，并使用n-gram语言模型来改善WER性能指标。
+在这个项目中，你将学习处理和处理音频及文本数据。之后，你将使用 HuggingFace transformers 来构建和改进多语言语音识别模型。此外，你还将学习清理音频和文本数据，并使用 n-gram 语言模型来改善 WER 性能指标。
 
-**项目链接**: [使用Facebook wav2vec2-xls-r-300m的自动语音识别](https://dagshub.com/kingabzpro/Urdu-ASR-SOTA)
+**项目链接**: [使用 Facebook wav2vec2-xls-r-300m 的自动语音识别](https://dagshub.com/kingabzpro/Urdu-ASR-SOTA)
 
 # 结论
 
@@ -116,4 +116,4 @@
 
 +   [7 个 AI 作品集项目提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
 
-+   [KDnuggets 新闻，9月21日：7 个机器学习作品集项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习作品集项目…](https://www.kdnuggets.com/2022/n37.html)

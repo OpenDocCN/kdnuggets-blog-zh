@@ -1,16 +1,16 @@
 # 野外的线性回归
 
-> 原文：[https://www.kdnuggets.com/2018/10/linear-regression-wild.html](https://www.kdnuggets.com/2018/10/linear-regression-wild.html)
+> 原文：[`www.kdnuggets.com/2018/10/linear-regression-wild.html`](https://www.kdnuggets.com/2018/10/linear-regression-wild.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/a31f527c56b511703f7c01820284d373.png)
+![](img/a31f527c56b511703f7c01820284d373.png)
 
 在我一次数据科学职位的面试中，我收到了一项家庭作业，我想和你分享。
 
-面试官给了我一个包含测量量x和y的CSV文件，其中y是一个响应变量，可以写成x的显式函数。已知用于测量x的技术在标准差意义上是测量y的技术的两倍好。
+面试官给了我一个包含测量量 x 和 y 的 CSV 文件，其中 y 是一个响应变量，可以写成 x 的显式函数。已知用于测量 x 的技术在标准差意义上是测量 y 的技术的两倍好。
 
-任务：将y建模为x的函数。
+任务：将 y 建模为 x 的函数。
 
 这是我需要的所有导入：
 
@@ -29,7 +29,7 @@ data.head()
 
 ```
 
-![](../Images/f67bca2fb3b2fa280bc9bf50acbd697d.png) 让我们可视化数据，看看是否容易通过目测捕捉到模式：
+![](img/f67bca2fb3b2fa280bc9bf50acbd697d.png) 让我们可视化数据，看看是否容易通过目测捕捉到模式：
 
 ```py
 
@@ -37,7 +37,7 @@ data.plot.scatter('x', 'y', title='data')
 
 ```
 
-![](../Images/4301d0eacfea5e24be147a3eefe4632d.png)
+![](img/4301d0eacfea5e24be147a3eefe4632d.png)
 
 这明显看起来是线性回归的情况。我首先会手动去除异常值：
 
@@ -48,7 +48,7 @@ data.plot.scatter('x', 'y', title='data without outliers')
 
 ```
 
-![](../Images/98ae66e8e50fe6e2e71fc3bc23e33ccf.png)
+![](img/98ae66e8e50fe6e2e71fc3bc23e33ccf.png)
 
 我将使用**LinearRegression**来拟合最佳直线：
 
@@ -61,7 +61,7 @@ plt.plot(data['x'], lr_predicted_y)
 
 ```
 
-![](../Images/962661b3101777a60f96ef21bdac2017.png)
+![](img/962661b3101777a60f96ef21bdac2017.png)
 
 在数据上拟合一条直线视觉上看起来很有说服力，但我将验证线性回归的假设，以确保我使用了正确的模型。
 
@@ -77,7 +77,7 @@ plt.title('residuals')
 
 ```
 
-![](../Images/cfced82716a4b9290b84cdaae8fd6820.png)
+![](img/cfced82716a4b9290b84cdaae8fd6820.png)
 
 +   残差中似乎没有自相关。
 
@@ -85,7 +85,7 @@ plt.title('residuals')
 
 +   多重共线性在这里不相关，因为只有一个因变量。
 
-+   残差应当是正态分布的：我将通过QQ图验证这一点：
++   残差应当是正态分布的：我将通过 QQ 图验证这一点：
 
 ```py
 
@@ -93,11 +93,11 @@ probplot(residuals, plot=plt)
 
 ```
 
-![](../Images/45dbf02e6803e02e18b49154defb2dca.png)
+![](img/45dbf02e6803e02e18b49154defb2dca.png)
 
 看起来相当正常…
 
-我将得出结论，假设x和y之间的线性关系最好的模型为：
+我将得出结论，假设 x 和 y 之间的线性关系最好的模型为：
 
 ```py
 
@@ -158,7 +158,7 @@ plt.legend(loc='best')
 
 ```
 
-![](../Images/2b4fb742caaed1a863c8db290fb2204f.png)
+![](img/2b4fb742caaed1a863c8db290fb2204f.png)
 
 我们拟合了两个模型：一个是简单的线性回归模型，另一个是考虑了 *x* 测量误差的线性回归模型。
 
@@ -188,11 +188,11 @@ plt.legend(loc='best')
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -204,8 +204,8 @@ plt.legend(loc='best')
 
 +   [比较线性回归和逻辑回归](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 
-+   [你应该使用线性回归模型而不是…的3个原因](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [你应该使用线性回归模型而不是…的 3 个原因](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12, 3月23日：最佳数据科学书籍](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12, 3 月 23 日：最佳数据科学书籍](https://www.kdnuggets.com/2022/n12.html)

@@ -1,10 +1,10 @@
 # Quora 上的十大数据科学作家及其最佳建议
 
-> 原文：[https://www.kdnuggets.com/2015/09/top-data-science-writers-quora.html](https://www.kdnuggets.com/2015/09/top-data-science-writers-quora.html)
+> 原文：[`www.kdnuggets.com/2015/09/top-data-science-writers-quora.html`](https://www.kdnuggets.com/2015/09/top-data-science-writers-quora.html)
 
 这是 Quora 上十大数据科学作家及其选定答案的列表。
 
-![Quora Data Science](../Images/8b75ef59eb455d02cc6bfb874b0dc877.png)
+![Quora Data Science](img/8b75ef59eb455d02cc6bfb874b0dc877.png)
 
 **1\. [William Chen](https://www.quora.com/William-Chen-6)**，Quora 数据科学家。85098 次浏览
 
@@ -24,7 +24,7 @@
 
 *选定答案：* [Gayle Laakmann McDowell 会给未来软件工程师的十大职业建议是什么？](https://www.quora.com/What-are-the-top-10-pieces-of-career-advice-Gayle-Laakmann-McDowell-would-give-to-future-software-engineers)
 
-#7：如果你不想永远做开发者，就要尽快转变。深入获得技术专长非常有价值。但你做开发者的时间长短并不是特别重要。大学毕业几年内，做出选择。你是否愿意在未来的10、20、30年里继续做工程师？如果不愿意，赶紧开始转型吧。作为工程师的更多时间对你帮助不大。
+#7：如果你不想永远做开发者，就要尽快转变。深入获得技术专长非常有价值。但你做开发者的时间长短并不是特别重要。大学毕业几年内，做出选择。你是否愿意在未来的 10、20、30 年里继续做工程师？如果不愿意，赶紧开始转型吧。作为工程师的更多时间对你帮助不大。
 
 **4\. [Ricardo Vladimiro](https://www.quora.com/Ricardo-Vladimiro-1)**，Miniclip 游戏分析和数据科学负责人。37838 次浏览
 
@@ -96,26 +96,26 @@ R 在数据分析方面比 Python 更好，因为 R 从一开始就是为了统�
 
 该列表基于 [Quora 数据科学作家排名](https://www.quora.com/Data-Science/writers) - 感谢 Xamat Amatriain（Quora 领导工程）提供的提示。
 
-**个人简介： [Matthew Mayo](/author/matt-mayo)** 是一名计算机科学研究生，目前正在进行将机器学习算法并行化的论文工作。他还是数据挖掘的学生、数据爱好者和有志成为机器学习科学家的学员。
+**个人简介： Matthew Mayo** 是一名计算机科学研究生，目前正在进行将机器学习算法并行化的论文工作。他还是数据挖掘的学生、数据爱好者和有志成为机器学习科学家的学员。
 
 **相关：**
 
-+   [Top /r/MachineLearning Posts, August: 深度学习以许多著名画家的风格绘画](/2015/09/top-reddit-machine-learning-august.html)
++   Top /r/MachineLearning Posts, August: 深度学习以许多著名画家的风格绘画
 
-+   [8月的热门故事：如何免费成为数据科学家；数据是丑陋的——数据清洗的故事](/2015/09/top-news-2015-aug.html)
++   8 月的热门故事：如何免费成为数据科学家；数据是丑陋的——数据清洗的故事
 
-+   [数据科学和商业智能中按角色分类的薪资](/2015/09/salaries-roles-data-science-business-intelligence.html)
++   数据科学和商业智能中按角色分类的薪资
 
 ### 更多相关话题
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日：深入了解13种数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日：深入了解 13 种数据…](https://www.kdnuggets.com/2022/n03.html)
 
-+   [KDnuggets™ 新闻 22:n04, 1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
 +   [顶级编程语言及其用途](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 
-+   [如何获得机器学习职位：来自Meta、Google Brain和SAP工程师的建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
++   [如何获得机器学习职位：来自 Meta、Google Brain 和 SAP 工程师的建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
 
-+   [为什么数据科学家期望从Google Bard获得有缺陷的建议](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
++   [为什么数据科学家期望从 Google Bard 获得有缺陷的建议](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
 
-+   [深入了解13种数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)
++   [深入了解 13 种数据科学家角色及其职责](https://www.kdnuggets.com/2022/01/deep-look-13-data-scientist-roles-responsibilities.html)

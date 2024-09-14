@@ -1,8 +1,8 @@
 # RAPIDS cuDF 在 Google Colab 上加速数据科学
 
-> 原文：[https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)
+> 原文：[`www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html`](https://www.kdnuggets.com/2023/01/rapids-cudf-accelerated-data-science-google-colab.html)
 
-![RAPIDS cuDF 在 Google Colab 上加速数据科学](../Images/ebe6221c7de3a1c01f29693d8d7ef500.png)
+![RAPIDS cuDF 在 Google Colab 上加速数据科学](img/ebe6221c7de3a1c01f29693d8d7ef500.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@ NVIDIA GPU 已成为加速计算密集型机器学习任务的最有效方式之
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@ NVIDIA GPU 已成为加速计算密集型机器学习任务的最有效方式之
 
 例如，通过切换到 cuDF，一个简单的连接操作可以从 761 毫秒缩短到 27 毫秒：
 
-![RAPIDS cuDF 在 Google Colab 上加速数据科学](../Images/750dcd15e012b6133d40a8da944a07e6.png)
+![RAPIDS cuDF 在 Google Colab 上加速数据科学](img/750dcd15e012b6133d40a8da944a07e6.png)
 
 # 开始在 Colab 上使用 RAPIDS
 

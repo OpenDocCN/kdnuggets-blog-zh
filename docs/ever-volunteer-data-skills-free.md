@@ -1,10 +1,10 @@
 # 你是否应该免费提供你的数据技能？
 
-> 原文：[https://www.kdnuggets.com/2018/03/ever-volunteer-data-skills-free.html](https://www.kdnuggets.com/2018/03/ever-volunteer-data-skills-free.html)
+> 原文：[`www.kdnuggets.com/2018/03/ever-volunteer-data-skills-free.html`](https://www.kdnuggets.com/2018/03/ever-volunteer-data-skills-free.html)
 
-![评论](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![评论](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![标题图片](../Images/6d2d3418a7b04c41e1fb101246a26ab2.png)
+![标题图片](img/6d2d3418a7b04c41e1fb101246a26ab2.png)
 
 作为数据专家，你属于相对较小的职业群体。你拥有的技能始终处于高需求状态，并且随着技术的进步，这些技能的需求只会变得更高。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -24,9 +24,9 @@
 
 ### 你可以帮助非营利组织用数据回答关键问题
 
-你可能愿意无偿提供服务的一个潜在原因是，你正在与非营利组织短期合作，帮助慈善机构利用数据。这种情况[被称为 DataDive](http://www.datakind.org/datadives)，并在48小时或更短时间内完成。
+你可能愿意无偿提供服务的一个潜在原因是，你正在与非营利组织短期合作，帮助慈善机构利用数据。这种情况[被称为 DataDive](http://www.datakind.org/datadives)，并在 48 小时或更短时间内完成。
 
-在参加该活动期间，你将成为一个最多由20名数据专家组成的团队的一部分，并且可以在过程中在各组之间跳转。这种设置意味着你有机会与领域内的其他人建立联系，并协助各种项目，同时帮助需要帮助的组织。
+在参加该活动期间，你将成为一个最多由 20 名数据专家组成的团队的一部分，并且可以在过程中在各组之间跳转。这种设置意味着你有机会与领域内的其他人建立联系，并协助各种项目，同时帮助需要帮助的组织。
 
 许多非营利组织可能已经意识到收集和分析数据的潜力，但可能没有足够的财力开始。这种安排帮助你用你的专业知识直接协助他们。
 
@@ -70,7 +70,7 @@
 
 **相关：**
 
-+   [2年内提高数据科学技能的8种方法](/2017/11/8-ways-improve-data-science-skills-2-years.html)
++   2 年内提高数据科学技能的 8 种方法
 
 +   [非营利组织如何从数据科学的力量中受益](https://www.kdnuggets.com/2018/01/nonprofits-data-science.html)
 
@@ -78,14 +78,14 @@
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，9月14日：免费的数据科学 Python 课程•…](https://www.kdnuggets.com/2022/n36.html)
++   [KDnuggets 新闻，9 月 14 日：免费的数据科学 Python 课程•…](https://www.kdnuggets.com/2022/n36.html)
 
 +   [你想了解的机器学习一切](https://www.kdnuggets.com/2022/09/everything-youve-ever-wanted-to-know-about-machine-learning.html)
 
 +   [在不断变化的世界中如何成长为数据科学家](https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html)
 
-+   [IMPACT：数据可观测性峰会将于11月8日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观测性峰会将于 11 月 8 日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
-+   [KDnuggets 新闻 3月30日：最受欢迎的编程入门…](https://www.kdnuggets.com/2022/n13.html)
++   [KDnuggets 新闻 3 月 30 日：最受欢迎的编程入门…](https://www.kdnuggets.com/2022/n13.html)
 
-+   [如果你想成为数据分析师，应该考虑的3门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，应该考虑的 3 门课程](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)

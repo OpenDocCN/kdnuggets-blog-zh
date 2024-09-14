@@ -1,8 +1,8 @@
 # 在数据科学面试中进行精彩演示
 
-> 原文：[https://www.kdnuggets.com/2022/01/deliver-killer-presentation-data-science-interviews.html](https://www.kdnuggets.com/2022/01/deliver-killer-presentation-data-science-interviews.html)
+> 原文：[`www.kdnuggets.com/2022/01/deliver-killer-presentation-data-science-interviews.html`](https://www.kdnuggets.com/2022/01/deliver-killer-presentation-data-science-interviews.html)
 
-![在数据科学面试中进行精彩演示](../Images/0e3bfc03497f677787f753bf8b952424.png)
+![在数据科学面试中进行精彩演示](img/0e3bfc03497f677787f753bf8b952424.png)
 
 图片来源：[Campaign Creators](https://unsplash.com/@campaign_creators?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 演示可能会让人紧张，但它们是证明你是一个有能力的数据科学家至关重要的一部分。数据科学家必须是能够推动对话、说服利益相关者接受他们建议和故事的销售者。面试中的演示环节是你展示自己能成为推动者而不仅仅是支持者的地方。
 
-在这个博客中，我们将探讨面试中做演示的5个技巧。我们将讨论演示中应该包含哪些信息，以及如何以引人入胜的方式呈现这些内容。如果你更喜欢观看而非阅读，可以前往[我的 YouTube 频道](https://www.youtube.com/channel/UCAWsBMQY4KSuOuGODki-l7A)6，观看有关这个主题的[视频](https://youtu.be/yypjNbugVKM)。
+在这个博客中，我们将探讨面试中做演示的 5 个技巧。我们将讨论演示中应该包含哪些信息，以及如何以引人入胜的方式呈现这些内容。如果你更喜欢观看而非阅读，可以前往[我的 YouTube 频道](https://www.youtube.com/channel/UCAWsBMQY4KSuOuGODki-l7A)6，观看有关这个主题的[视频](https://youtu.be/yypjNbugVKM)。
 
 让我们开始吧！
 
@@ -102,7 +102,7 @@
 
 如果你喜欢这篇文章并想支持我...
 
-+   订阅我的[YouTube频道](https://www.youtube.com/channel/UCAWsBMQY4KSuOuGODki-l7A)!
++   订阅我的[YouTube 频道](https://www.youtube.com/channel/UCAWsBMQY4KSuOuGODki-l7A)!
 
 +   在[LinkedIn](https://www.linkedin.com/in/wzding/)上联系我！
 
@@ -116,10 +116,10 @@
 
 +   [如何使用 ChatGPT 将文本转换为 PowerPoint 演示文稿](https://www.kdnuggets.com/2023/08/chatgpt-convert-text-powerpoint-presentation.html)
 
-+   [KDnuggets 新闻，6月8日：21个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
-+   [KDnuggets™ 新闻 22:n03，1月19日：深入了解13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19 日：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [成功应对初级数据科学职位面试的更多技巧](https://www.kdnuggets.com/more-tips-for-successfully-navigating-beginner-data-science-job-interviews)
 
-+   [21个数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
++   [21 个数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)

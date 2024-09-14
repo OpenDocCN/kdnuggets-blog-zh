@@ -1,8 +1,8 @@
 # 如何有效使用 Docker 标签管理镜像版本
 
-> 原文：[https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively](https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively)
+> 原文：[`www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively`](https://www.kdnuggets.com/how-to-use-docker-tags-to-manage-image-versions-effectively)
 
-![如何有效使用 Docker 标签管理镜像版本](../Images/dd653bcf22dab12e9752b41efb278659.png)
+![如何有效使用 Docker 标签管理镜像版本](img/dd653bcf22dab12e9752b41efb278659.png)
 
 编辑器提供的图片 | Midjourney 和 Canva
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

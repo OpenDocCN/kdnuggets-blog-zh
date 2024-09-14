@@ -1,6 +1,6 @@
 # 分类的最近邻
 
-> 原文：[https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)
+> 原文：[`www.kdnuggets.com/2022/04/nearest-neighbors-classification.html`](https://www.kdnuggets.com/2022/04/nearest-neighbors-classification.html)
 
 # K-最近邻
 
@@ -10,11 +10,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -32,19 +32,19 @@ KNN 中的 ‘K’ 是一个参数，表示最近邻居的数量。K 是一个�
 
 我们会说 k=3，新数据点将属于 B 类，因为与 A 类相比，更多的训练过的 B 类数据点具有与新数据点相似的特征。
 
-![k-最近邻](../Images/42005d40ecbc49545df65119eba77d02.png)
+![k-最近邻](img/42005d40ecbc49545df65119eba77d02.png)
 
 来源：[datacamp.com](https://www.datacamp.com/community/tutorials/k-nearest-neighbor-classification-scikit-learn)
 
 如果我们将 k 值增加到 7，我们将看到新数据点将属于 A 类，因为与 B 类相比，更多的训练过的 A 类数据点具有与新数据点相似的特征。
 
-![K 最近邻](../Images/7804c5e5e9412162aad3060cbce401b8.png)
+![K 最近邻](img/7804c5e5e9412162aad3060cbce401b8.png)
 
 来源: [datacamp.com](https://www.datacamp.com/community/tutorials/k-nearest-neighbor-classification-scikit-learn)
 
 k 值通常是一个较小的数字，因为随着 k 值的增加，误差率也会增加。下图展示了这一点：
 
-![训练误差](../Images/7e7fd5c0894c6e2a155c91de8e5811f0.png)
+![训练误差](img/7e7fd5c0894c6e2a155c91de8e5811f0.png)
 
 来源: [analyticsvidhya](https://www.analyticsvidhya.com/wp-content/uploads/2014/10/training-error.png)
 
@@ -64,11 +64,11 @@ KNN 通过计算数据点之间的距离来对新数据点进行分类。在 KNN
 
 下图是公式：
 
-![](../Images/3bc2167ca1bc8ba49564ffa3c8edf704.png)
+![](img/3bc2167ca1bc8ba49564ffa3c8edf704.png)
 
 下图解释了三者之间的区别：
 
-![XXXXX](../Images/b7aedd9bfc220a7674cd7252a7b0fdc6.png)
+![XXXXX](img/b7aedd9bfc220a7674cd7252a7b0fdc6.png)
 
 来源: [Packt 订阅](https://subscription.packtpub.com/book/big_data_and_business_intelligence/9781785882104/6/ch06lvl1sec40/measuring-distance-or-similarity)
 
@@ -86,9 +86,9 @@ KNN 通过计算数据点之间的距离来对新数据点进行分类。在 KNN
 
 以下是一个概述这些步骤的图像：
 
-![实现你自己的 KNN](../Images/d45e3a6dc623593dacc476176f823385.png)
+![实现你自己的 KNN](img/d45e3a6dc623593dacc476176f823385.png)
 
-来源: [kdnuggets.com](/2016/01/implementing-your-own-knn-using-python.html)
+来源: kdnuggets.com
 
 # KNN 算法分类实现
 
@@ -114,7 +114,7 @@ dataset = pd.read_csv(url, names=names)
 dataset
 ```
 
-![](../Images/28d3e9e7fc4e3581ef92d7257e8a0956.png)
+![](img/28d3e9e7fc4e3581ef92d7257e8a0956.png)
 
 ## 数据预处理
 
@@ -174,7 +174,7 @@ print(classification_report(y_test, y_pred))
 
 这是输出的样子：
 
-![XXXXX](../Images/a6fb0d4f8939a1f9d53d75cd86ceecd5.png)
+![XXXXX](img/a6fb0d4f8939a1f9d53d75cd86ceecd5.png)
 
 从这里我们可以看到 KNN 算法对 30 个数据点进行了分类，精确率平均达到了 95%，召回率为 93%，F1 分数为 94%。
 
@@ -207,7 +207,7 @@ plt.ylabel('Mean Error')
 
 图的输出：
 
-![图的输出](../Images/0ff8c40f751d4aa9f7c253ab3c5dba74.png)
+![图的输出](img/0ff8c40f751d4aa9f7c253ab3c5dba74.png)
 
 来源：作者图片
 

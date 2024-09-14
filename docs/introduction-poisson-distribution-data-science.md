@@ -1,8 +1,8 @@
 # 数据科学的基础数学：泊松分布
 
-> 原文：[https://www.kdnuggets.com/2020/12/introduction-poisson-distribution-data-science.html](https://www.kdnuggets.com/2020/12/introduction-poisson-distribution-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/12/introduction-poisson-distribution-data-science.html`](https://www.kdnuggets.com/2020/12/introduction-poisson-distribution-data-science.html)
 
-[评论](#comments)[![Image](../Images/45c05efbbd9635efb62adde614427da4.png)](https://www.essentialmathfordatascience.com/)
+评论![Image](https://www.essentialmathfordatascience.com/)
 
 *泊松分布*，以法国数学家丹尼斯·西蒙·泊松命名，是一种离散分布函数，用于描述事件在固定时间（或空间）区间内发生特定次数的概率。它用于建模基于计数的数据，例如一小时内到达邮箱的邮件数量或一天内进入商店的顾客数量等。
 
@@ -10,29 +10,29 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求。
 
 * * *
 
 ### 数学定义
 
-让我们从一个例子开始，图1展示了莎拉在一小时间隔内收到的邮件数量。
+让我们从一个例子开始，图 1 展示了莎拉在一小时间隔内收到的邮件数量。
 
-![Figure](../Images/16fefd9b7e16e9dd894f9181fe7dea65.png)
+![Figure](img/16fefd9b7e16e9dd894f9181fe7dea65.png)
 
-*图1：莎拉在过去100小时内每小时接收的邮件数量。*
+*图 1：莎拉在过去 100 小时内每小时接收的邮件数量。*
 
-柱状图的高度显示了莎拉观察到相应邮件数量的一小时间隔数。例如，突出显示的柱状图显示大约有15个一小时的时间段，她收到了一封邮件。
+柱状图的高度显示了莎拉观察到相应邮件数量的一小时间隔数。例如，突出显示的柱状图显示大约有 15 个一小时的时间段，她收到了一封邮件。
 
 泊松分布由预期事件数量*λ*（发音为“lambda”）进行参数化。该分布是一个函数，将事件的发生次数（下一个公式中的整数*k*）作为输入，输出对应的概率（即发生*k*次事件的概率）。
 
 泊松分布，记作*Poi*，表示如下：
 
-![Equation](../Images/9de3e85848358b7ecdf0662832dc08e0.png)
+![Equation](img/9de3e85848358b7ecdf0662832dc08e0.png)
 
 对于*k = 0, 1, 2, ...*
 
@@ -46,9 +46,9 @@
 
 ### 示例
 
-Priya在国家公园录制鸟鸣，使用放置在树上的麦克风。她记录了鸟鸣叫的次数，并希望建模一分钟内的鸟鸣叫数量。为此任务，她将假设检测到的鸟是独立的。
+Priya 在国家公园录制鸟鸣，使用放置在树上的麦克风。她记录了鸟鸣叫的次数，并希望建模一分钟内的鸟鸣叫数量。为此任务，她将假设检测到的鸟是独立的。
 
-查看过去几小时的数据，Priya观察到平均每分钟检测到两只鸟。因此，值2可能是分布参数*λ*的一个好候选值。她的目标是知道在下一分钟内特定数量的鸟鸣叫的概率。
+查看过去几小时的数据，Priya 观察到平均每分钟检测到两只鸟。因此，值 2 可能是分布参数*λ*的一个好候选值。她的目标是知道在下一分钟内特定数量的鸟鸣叫的概率。
 
 让我们从你上面看到的公式实现泊松分布函数：
 
@@ -59,7 +59,7 @@ def poisson_distribution(k, lambd):
 
 记住*λ*是鸟在一分钟内鸣叫的预期次数，所以在这个例子中，你有*λ=2*。函数`poisson_distribution(k, lambd)`接受*k*和*λ*的值，并返回观察到*k*次事件的概率（即记录到*k*只鸟鸣叫）。
 
-例如，Priya在下一分钟观察到5只鸟的概率为：
+例如，Priya 在下一分钟观察到 5 只鸟的概率为：
 
 ```py
 poisson_distribution(k=5, lambd=2)
@@ -69,7 +69,7 @@ poisson_distribution(k=5, lambd=2)
 0.03608940886309672
 ```
 
-5只鸟在下一分钟鸣叫的概率约为0.036（3.6%）。
+5 只鸟在下一分钟鸣叫的概率约为 0.036（3.6%）。
 
 与二项函数类似，对于较大的*k*值，这将导致溢出。因此，你可能需要使用模块`scipy.stats`中的`poisson`，如下所示：
 
@@ -97,13 +97,13 @@ plt.bar(k_axis, distribution)
 # [...] Add axes, labels...
 ```
 
-![Figure](../Images/f44fed18e97b9b6e5d474fb464ca55ab.png)
+![Figure](img/f44fed18e97b9b6e5d474fb464ca55ab.png)
 
 *图 2: *λ=2*的泊松分布。*
 
 对应于*k*值的概率在图中的概率质量函数中进行了总结。
 
-1.  你可以看到，在下一分钟内，Priya听到一两只鸟鸣叫的可能性最大。
+1.  你可以看到，在下一分钟内，Priya 听到一两只鸟鸣叫的可能性最大。
 
 最后，你可以为不同值的*λ*绘制函数：
 
@@ -124,7 +124,7 @@ for lambd in range(1, 7):
 # Add axes labels etc.
 ```
 
-![Figure](../Images/56212362b7ea55e62140e2620765de9a.png)
+![Figure](img/56212362b7ea55e62140e2620765de9a.png)
 
 *图 3: 不同值的*λ*的泊松分布。*
 
@@ -136,23 +136,23 @@ for lambd in range(1, 7):
 
 在[数据科学的基本数学](https://bit.ly/3n8O2n1)中，你看到如果你多次运行一个随机实验，获得`mm`次成功的概率，在*N*次试验中，每次试验成功的概率为*μ*，可以通过二项分布计算：
 
-![Equation](../Images/08bf4492c868228ed3da70b3403c9c10.png)
+![Equation](img/08bf4492c868228ed3da70b3403c9c10.png)
 
 ### **问题陈述**
 
 你如何使用二项公式来建模在*给定时间间隔*内观察事件一定次数的概率，而不是在一定次数的试验中？这里有一些问题：
 
-1.  你不知道NN，因为没有特定的试验次数，只有一个时间窗口。
+1.  你不知道 NN，因为没有特定的试验次数，只有一个时间窗口。
 
-1.  你不知道μμ，但你知道事件发生的预期次数。例如，你知道在过去的100小时里，你平均每小时收到3封电子邮件，你想知道在下一个小时内收到5封电子邮件的概率。
+1.  你不知道μμ，但你知道事件发生的预期次数。例如，你知道在过去的 100 小时里，你平均每小时收到 3 封电子邮件，你想知道在下一个小时内收到 5 封电子邮件的概率。
 
 让我们从数学上处理这些问题。
 
-为了解决第一个问题，你可以将时间视为小的离散块。我们称这些块为ϵϵ（发音为“epsilon”），如图4所示。如果你将每个块视为一次试验，你就有*N*个块。
+为了解决第一个问题，你可以将时间视为小的离散块。我们称这些块为ϵϵ（发音为“epsilon”），如图 4 所示。如果你将每个块视为一次试验，你就有*N*个块。
 
-![Figure](../Images/29c00df79ca80abcda9f5ae4bfdc37b5.png)
+![Figure](img/29c00df79ca80abcda9f5ae4bfdc37b5.png)
 
->*图4：你可以将连续时间划分为长度为ϵ的段。*
+>*图 4：你可以将连续时间划分为长度为ϵ的段。*
 
 连续时间尺度的估计在*ϵ*非常小的时候更准确。如果ϵϵ很小，段数*N*将会很大。此外，由于段很小，每个段的成功概率也很小。
 
@@ -162,49 +162,49 @@ for lambd in range(1, 7):
 
 让我们在这种情况下找到μμ并将其替换到二项公式中。你知道在一段时间*t*内事件的预期次数，我们称之为*λ*（发音为“lambda”）。由于你将*t*分成长度为*ϵ*的小间隔，你有试验次数：
 
-![Equation](../Images/d3112c0038a94579eb3394fc72c3d489.png)
+![Equation](img/d3112c0038a94579eb3394fc72c3d489.png)
 
 你有*λ*作为*N*次试验中的成功次数。所以在一次试验中成功的概率*μ*是：
 
-![Equation](../Images/7b95863f42d226c28c2dfc1dc908bbac.png)
+![Equation](img/7b95863f42d226c28c2dfc1dc908bbac.png)
 
 将μμ替换到二项公式中，你得到：
 
-![Equation](../Images/f89a1da3d2a7dd4c7080638f165c14d2.png)
+![Equation](img/f89a1da3d2a7dd4c7080638f165c14d2.png)
 
-通过展开表达式，将二项系数写为阶乘（如在[数据科学的基本数学](https://bit.ly/3n8O2n1)中所做），并使用公式![Equation](../Images/f58c698cc95abd27e85c2952c12c81d0.png)，你得到：
+通过展开表达式，将二项系数写为阶乘（如在[数据科学的基本数学](https://bit.ly/3n8O2n1)中所做），并使用公式![Equation](img/f58c698cc95abd27e85c2952c12c81d0.png)，你得到：
 
-![Equation](../Images/53ffdeaa272bf96bc6235a0607c51eec.png)
+![Equation](img/53ffdeaa272bf96bc6235a0607c51eec.png)
 
-我们来考虑这个表达式的第一个元素。如果你声明NN趋向于无穷大（因为*ϵ*趋向于零），你得到：
+我们来考虑这个表达式的第一个元素。如果你声明 NN 趋向于无穷大（因为*ϵ*趋向于零），你得到：
 
-![Equation](../Images/6ad83c4f63afde3bc5dd9c6c7b8469e3.png)
+![Equation](img/6ad83c4f63afde3bc5dd9c6c7b8469e3.png)
 
 这是因为 *k* 可以在与 *N* 相比小时被忽略。例如，你有：
 
-![方程](../Images/1283fe5c029d40d1148cc0cf268e61c7.png)
+![方程](img/1283fe5c029d40d1148cc0cf268e61c7.png)
 
-这近似于 ![方程](../Images/86a22344034f1866092c2252570e84e6.png)
+这近似于 ![方程](img/86a22344034f1866092c2252570e84e6.png)
 
 因此，第一个比率变为：
 
-![方程](../Images/349e98e0ecc7248356e9671d3bc64369.png)
+![方程](img/349e98e0ecc7248356e9671d3bc64369.png)
 
-然后，利用 ![方程](../Images/536b8d0759fbe9fae7c69c8af43e1ac0.png) 的事实，你得到：
+然后，利用 ![方程](img/536b8d0759fbe9fae7c69c8af43e1ac0.png) 的事实，你得到：
 
-![方程](../Images/7fa39431fb19735eb035a4a916eab020.png)
+![方程](img/7fa39431fb19735eb035a4a916eab020.png)
 
-最后，由于 ![方程](../Images/7c477776dfcdddb6656b6a1d746b75e7.png) 在 *N* 趋近于无穷大时趋近于 1：
+最后，由于 ![方程](img/7c477776dfcdddb6656b6a1d746b75e7.png) 在 *N* 趋近于无穷大时趋近于 1：
 
-![方程](../Images/84f8ca3b317a26c867268540503f2506.png)
+![方程](img/84f8ca3b317a26c867268540503f2506.png)
 
 让我们将这些代入二项分布的公式中：
 
-![方程](../Images/1c77526394b64223a0ee3559445b49d6.png)
+![方程](img/1c77526394b64223a0ee3559445b49d6.png)
 
 这是泊松分布，记作 *Poi*：
 
-![方程](../Images/9de3e85848358b7ecdf0662832dc08e0.png)
+![方程](img/9de3e85848358b7ecdf0662832dc08e0.png)
 
 对于 *k = 0, 1, 2, ...*
 
@@ -214,11 +214,11 @@ for lambd in range(1, 7):
 
 **相关：**
 
-+   [数据科学的基础数学：概率密度函数与概率质量函数](/2020/12/essential-math-data-science-probability-density-probability-mass-functions.html)
++   数据科学的基础数学：概率密度函数与概率质量函数
 
-+   [数据科学的基础数学：积分与曲线下的面积](/2020/11/essential-math-data-science-integrals-area-under-curve.html)
++   数据科学的基础数学：积分与曲线下的面积
 
-+   [数据科学与机器学习的免费数学课程](/2020/02/free-mathematics-courses-data-science-machine-learning.html)
++   数据科学与机器学习的免费数学课程
 
 ### 进一步了解此主题
 

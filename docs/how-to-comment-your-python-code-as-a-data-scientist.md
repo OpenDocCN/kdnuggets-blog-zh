@@ -1,28 +1,28 @@
-# 数据科学家如何注释你的Python代码
+# 数据科学家如何注释你的 Python 代码
 
-> 原文：[https://www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist](https://www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist)
+> 原文：[`www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist`](https://www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist)
 
-![如何作为数据科学家注释你的Python代码](../Images/5ccfd6e8042e67b15a468c68bb8e8726.png)
+![如何作为数据科学家注释你的 Python 代码](img/5ccfd6e8042e67b15a468c68bb8e8726.png)
 
-图片由DALL·E 3生成
+图片由 DALL·E 3 生成
 
-数据科学家面临一个令人兴奋的职位；虽然他们在现代时代的工作需要使用编程语言，但他们的工作仍然需要记住许多业务方面。这就是为什么数据科学家使用的Python代码通常反映了解决业务问题的故事。数据科学家的工作环境也很独特；我们使用Jupyter Notebook IDE，它提供了一个出色的方式来进行数据处理和模型开发的实验。
+数据科学家面临一个令人兴奋的职位；虽然他们在现代时代的工作需要使用编程语言，但他们的工作仍然需要记住许多业务方面。这就是为什么数据科学家使用的 Python 代码通常反映了解决业务问题的故事。数据科学家的工作环境也很独特；我们使用 Jupyter Notebook IDE，它提供了一个出色的方式来进行数据处理和模型开发的实验。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 数据科学家的编程活动有所不同，这包括注释活动，即解释代码的活动。对于经常面临需求变更和进行协作的数据显示，提供适当的代码解释是至关重要的。
 
-本文将讨论如何作为数据科学家进行Python代码注释。我们将探讨各种可以提升你工作效率的点，并给任何阅读你代码的人带来价值。让我们深入了解。
+本文将讨论如何作为数据科学家进行 Python 代码注释。我们将探讨各种可以提升你工作效率的点，并给任何阅读你代码的人带来价值。让我们深入了解。
 
 # 注释的类型
 
@@ -33,7 +33,7 @@
 import pandas as pd
 ```
 
-另一种注释方式是使用多行注释方法，采用三重引号。严格来说，它们不是注释而是字符串对象，但如果我们不将其赋值给变量，Python会忽略它们。我们可以通过以下示例看到它们的实际应用。
+另一种注释方式是使用多行注释方法，采用三重引号。严格来说，它们不是注释而是字符串对象，但如果我们不将其赋值给变量，Python 会忽略它们。我们可以通过以下示例看到它们的实际应用。
 
 ```py
 """
@@ -104,13 +104,13 @@ some_function_to_fix()
 
 数据科学家 IDE 相当出色，因为我们使用笔记本进行实验。使用笔记本中的单元，我们可以将每段代码隔离开来，以便它可以独立运行，而无需运行整个代码。笔记本单元不仅限于代码，还可以转换为 Markdown 单元。
 
-Markdown是一种格式语言，用于描述文本的外观。在单元中，Markdown可以进一步解释下面的代码。使用Markdown的优点在于我们可以比标准注释过程更详细地进行注释。你甚至可以添加表格、图片、LaTeX等。
+Markdown 是一种格式语言，用于描述文本的外观。在单元中，Markdown 可以进一步解释下面的代码。使用 Markdown 的优点在于我们可以比标准注释过程更详细地进行注释。你甚至可以添加表格、图片、LaTeX 等。
 
-例如，下面的图片展示了我们如何使用Markdown来解释我们的项目、目标和步骤。
+例如，下面的图片展示了我们如何使用 Markdown 来解释我们的项目、目标和步骤。
 
-![如何作为数据科学家注释你的Python代码](../Images/0fefe0bfac47688588ce11a0e0d01160.png)
+![如何作为数据科学家注释你的 Python 代码](img/0fefe0bfac47688588ce11a0e0d01160.png)
 
-你可以在他们的[文档](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Working%20With%20Markdown%20Cells.html)中进一步阅读有关Jupyter Markdown单元的内容，以进一步了解你可以做什么。
+你可以在他们的[文档](https://jupyter-notebook.readthedocs.io/en/stable/examples/Notebook/Working%20With%20Markdown%20Cells.html)中进一步阅读有关 Jupyter Markdown 单元的内容，以进一步了解你可以做什么。
 
 # 结论
 
@@ -122,22 +122,22 @@ Markdown是一种格式语言，用于描述文本的外观。在单元中，Mar
 
 1.  使用注释来帮助工作流程
 
-1.  实施Markdown Notebook单元
+1.  实施 Markdown Notebook 单元
 
 希望对你有帮助。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰稿人。在全职工作于印尼安联公司期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius撰写了各种AI和机器学习主题的文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰稿人。在全职工作于印尼安联公司期间，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 撰写了各种 AI 和机器学习主题的文章。
 
 ### 更多相关话题
 
-+   [作为数据科学家的Python代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
++   [作为数据科学家的 Python 代码管理](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日: 追踪和可视化的3种工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日: 追踪和可视化的 3 种工具…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [加速你的Python代码的3种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
++   [加速你的 Python 代码的 3 种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
 
-+   [3种工具来追踪和可视化你的Python代码执行](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
++   [3 种工具来追踪和可视化你的 Python 代码执行](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
 
-+   [使用NumPy加速你的Python代码](https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy)
++   [使用 NumPy 加速你的 Python 代码](https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy)
 
-+   [优化Python代码性能：深入了解Python性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
++   [优化 Python 代码性能：深入了解 Python 性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)

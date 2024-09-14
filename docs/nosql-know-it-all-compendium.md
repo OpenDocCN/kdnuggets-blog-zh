@@ -1,34 +1,34 @@
 # NoSQL 全知道大全
 
-> 原文：[https://www.kdnuggets.com/2021/05/nosql-know-it-all-compendium.html](https://www.kdnuggets.com/2021/05/nosql-know-it-all-compendium.html)
+> 原文：[`www.kdnuggets.com/2021/05/nosql-know-it-all-compendium.html`](https://www.kdnuggets.com/2021/05/nosql-know-it-all-compendium.html)
 
-[评论](#comments)
+评论
 
 > **编辑备注：** 这是从 KDnuggets 文章中摘录的合集，由作者 [Alex Williams](https://www.kdnuggets.com/author/alex-williams) 编写，涵盖了针对初学者的 NoSQL 主题和概念，附有进一步阅读的完整文章链接。
 
-![图片](../Images/a006484896574454a33c2b7c3afcb660.png)
+![图片](img/a006484896574454a33c2b7c3afcb660.png)
 
 ### 什么是 NoSQL？
 
-NoSQL 本质上是对 SQL 刚性结构的回应。虽然 NoSQL 在1970年代初期首次创建，但直到2000年代末，亚马逊和谷歌都投入了大量的研究和开发，NoSQL 才真正起飞。从那时起，它已经成为现代世界的重要组成部分，许多全球大网站都使用某种形式的 NoSQL。
+NoSQL 本质上是对 SQL 刚性结构的回应。虽然 NoSQL 在 1970 年代初期首次创建，但直到 2000 年代末，亚马逊和谷歌都投入了大量的研究和开发，NoSQL 才真正起飞。从那时起，它已经成为现代世界的重要组成部分，许多全球大网站都使用某种形式的 NoSQL。
 
 那么 NoSQL 到底是什么呢？本质上，它是一种创建数据库的理念，不需要模式，也不将数据存储在关系模型中。实际上，NoSQL 提供了各种 NoSQL 数据库，每种数据库都有自己的专业化和使用案例。因此，NoSQL 在填补特定需求时非常多样化，你几乎可以找到符合你需求的 NoSQL 数据模型。
 
 虽然 SQL 是特定的数据库和语言，但 NoSQL 并不是，但这并不意味着我们不能看看两者之间的通用理念和差异。
 
-继续阅读**[NoSQL 入门指南](/2020/12/nosql-beginners.html)**。
+继续阅读**NoSQL 入门指南**。
 
 ### SQL 与 NoSQL
 
 开发者们都非常清楚持续教育的必要性。无论是学习新的框架还是新的服务，创新和适应都是开发的基础。今天的一个热点话题是选择标准的 SQL 数据库还是转向 NoSQL 数据库。
 
-NoSQL 数据库已经存在了几十年，感谢 Carlo Strozzi 的创新。然而，这些数据库直到2000年代初期才开始受到关注。当时，谷歌和亚马逊等公司开始更加努力地开发 NoSQL 数据库。尽管它们近年来变得非常流行，许多开发者、架构师和设计师可能仍未完全了解 NoSQL 数据库所提供的功能。
+NoSQL 数据库已经存在了几十年，感谢 Carlo Strozzi 的创新。然而，这些数据库直到 2000 年代初期才开始受到关注。当时，谷歌和亚马逊等公司开始更加努力地开发 NoSQL 数据库。尽管它们近年来变得非常流行，许多开发者、架构师和设计师可能仍未完全了解 NoSQL 数据库所提供的功能。
 
 因此，了解这两种数据库之间的差异，可以参考以下每个开发者都应该知道的 7 个关键要点。
 
-继续阅读**[SQL 与 NoSQL: 7 个关键要点](/2020/12/sql-vs-nosql-7-key-takeaways.html)**。
+继续阅读**SQL 与 NoSQL: 7 个关键要点**。
 
-![图片](../Images/2c0abac08b02b9ee25a102f78bde8506.png)
+![图片](img/2c0abac08b02b9ee25a102f78bde8506.png)
 
 NoSQL 已越来越受欢迎，作为传统 SQL 数据库和数据库管理方法的补充工具。正如我们所知，NoSQL 不遵循 SQL 的关系模型，这使得它能够做许多强大的事情。更重要的是，它非常灵活和可扩展，这对那些没有时间或预算来设计 SQL 数据库的新项目来说非常有利。
 
@@ -42,9 +42,9 @@ NoSQL 已越来越受欢迎，作为传统 SQL 数据库和数据库管理方法
 
 通过快速查看，我们可以看到一个列族包含几行。在每一行中，可以有几列不同的列，具有不同的名称、链接，甚至大小（这意味着它们不需要遵循标准）。此外，这些列仅存在于它们自己的行中，并且可以包含值对、名称和时间戳。
 
-![Image](../Images/693cf6110d5044826ce975d87d07376d.png)
+![Image](img/693cf6110d5044826ce975d87d07376d.png)
 
-继续阅读 **[列导向数据库解析](/2021/02/understanding-nosql-database-types-column-oriented-databases.html)**。
+继续阅读 **列导向数据库解析**。
 
 ### 图数据库
 
@@ -56,7 +56,7 @@ NoSQL 已越来越受欢迎，作为传统 SQL 数据库和数据库管理方法
 
 +   边：这解释了两个节点之间的实际关系。有趣的是，边还可以包含自身的信息，例如两个节点之间关系的性质。类似地，边也可能具有描述数据流向的方向。
 
-继续阅读 **[图数据库解析](/2021/02/understanding-nosql-database-types-graph.html)**。
+继续阅读 **图数据库解析**。
 
 ### 文档数据库
 
@@ -66,9 +66,9 @@ NoSQL 已越来越受欢迎，作为传统 SQL 数据库和数据库管理方法
 
 如前所述，每个文档需要某种键，该键通过唯一 ID 提供。当在任何过程中提供唯一 ID 时，文档中的信息会被直接读取和处理，而不是逐列提取。
 
-![图片](../Images/e7845aaaa8bc8c19709b31936fb43e00.png)
+![图片](img/e7845aaaa8bc8c19709b31936fb43e00.png)
 
-继续阅读 **[文档数据库解析](/2021/03/understanding-nosql-database-types-document.html)**。
+继续阅读 **文档数据库解析**。
 
 ### 键值数据库
 
@@ -78,40 +78,40 @@ NoSQL 已越来越受欢迎，作为传统 SQL 数据库和数据库管理方法
 
 当然，这也带来了一个缺点，即你从请求中获取的信息没有经过过滤。在某些情况下，这种数据控制的缺失可能会带来问题，但大多数情况下，这种交换是值得的。由于键值存储快速且可靠，大多数程序员会绕过可能出现的任何过滤/控制问题。
 
-继续阅读 **[键值数据库解析](/2021/04/nosql-explained-understanding-key-value-databases.html)**。
+继续阅读 **键值数据库解析**。
 
 **简介：[亚历克斯·威廉姆斯](https://hostingdata.co.uk/author/alex-williams/)** 是一名经验丰富的全栈开发人员，同时也是 [Hosting Data UK](https://hostingdata.co.uk/) 的拥有者。在伦敦大学 IT 专业毕业后，亚历克斯作为开发人员为来自世界各地的客户领导了各种项目近 10 年。最近，亚历克斯转为独立 IT 顾问，并开设了自己的博客。在博客中，他探索了网络开发、数据管理、数字营销和针对刚起步的在线商业主的解决方案。
 
 **相关**：
 
-+   [NoSQL 入门](/2020/12/nosql-beginners.html)
++   NoSQL 入门
 
-+   [SQL 与 NoSQL：7 个关键要点](/2020/12/sql-vs-nosql-7-key-takeaways.html)
++   SQL 与 NoSQL：7 个关键要点
 
-+   [是否使用 SQL：这是个问题！](/2018/05/sql-not-sql-question.html)
++   是否使用 SQL：这是个问题！
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ### 更多相关主题
 
-+   [SQL与NoSQL：7个关键要点](https://www.kdnuggets.com/2020/12/sql-vs-nosql-7-key-takeaways.html)
++   [SQL 与 NoSQL：7 个关键要点](https://www.kdnuggets.com/2020/12/sql-vs-nosql-7-key-takeaways.html)
 
-+   [NoSQL数据库及其应用场景](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
++   [NoSQL 数据库及其应用场景](https://www.kdnuggets.com/2023/03/nosql-databases-cases.html)
 
-+   [Python中的所有集合](https://www.kdnuggets.com/2022/09/collections-python.html)
++   [Python 中的所有集合](https://www.kdnuggets.com/2022/09/collections-python.html)
 
 +   [科技领域的裁员潮怎么回事？](https://www.kdnuggets.com/2023/02/layoffs-tech.html)
 
-+   [超级巴德：能做一切且更优秀的AI](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)
++   [超级巴德：能做一切且更优秀的 AI](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)
 
-+   [如果你想掌握生成性AI，忽略所有（除了两个）工具](https://www.kdnuggets.com/if-you-want-to-master-generative-ai-ignore-all-but-two-tools)
++   [如果你想掌握生成性 AI，忽略所有（除了两个）工具](https://www.kdnuggets.com/if-you-want-to-master-generative-ai-ignore-all-but-two-tools)

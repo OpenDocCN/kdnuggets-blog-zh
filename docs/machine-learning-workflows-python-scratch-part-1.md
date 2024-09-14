@@ -1,10 +1,10 @@
 # 从头开始的 Python 机器学习工作流程 第一部分：数据准备
 
-> 原文：[https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html](https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html)
+> 原文：[`www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html`](https://www.kdnuggets.com/2017/05/machine-learning-workflows-python-scratch-part-1.html)
 
 现在，机器学习的认知似乎常常被简化为将一系列参数传递给越来越多的库和 API，期望得到魔法般的结果并等待输出。也许你对这些库的内部运作非常了解——从数据准备到模型构建，再到结果解释、可视化等——但你仍然依赖这些各种工具来完成任务。
 
-![Python ML](../Images/121f3d758c7beab31102198c7374013c.png)
+![Python ML](img/121f3d758c7beab31102198c7374013c.png)
 
 从头开始的 Python 机器学习工作流程。
 
@@ -26,7 +26,7 @@
 
 ### 我们所说的工作流是什么意思？
 
-工作流对不同的人可能意味着不同的东西，但我们通常谈论的是被视为机器学习项目一部分的整个过程。有许多[过程框架](/2016/03/data-science-process-rediscovered.html)可以帮助我们跟踪我们正在做的事情，但现在我们简化为包括以下内容：
+工作流对不同的人可能意味着不同的东西，但我们通常谈论的是被视为机器学习项目一部分的整个过程。有许多过程框架可以帮助我们跟踪我们正在做的事情，但现在我们简化为包括以下内容：
 
 +   获取一些数据
 
@@ -38,7 +38,7 @@
 
 我们可以随着进展对这些进行扩展，但这就是我们目前的简单机器学习过程框架。此外，“管道”意味着能够将工作流功能链在一起，因此我们在前进时也会记住这一点。
 
-![](../Images/8c3fd95a2ad1af6bf6aab320fe16eeb7.png)
+![](img/8c3fd95a2ad1af6bf6aab320fe16eeb7.png)
 
 非常简单的机器学习过程框架。
 
@@ -48,7 +48,7 @@
 
 让我们来看看：
 
-![鸢尾花头部](../Images/a1b16b920d9db20d37557fb649789604.png)
+![鸢尾花头部](img/a1b16b920d9db20d37557fb649789604.png)
 
 鉴于我们对这样一个简单数据集及其文件的了解，让我们首先考虑一下从原始数据到结果我们需要做什么：
 
@@ -60,11 +60,11 @@
 
 现在，上述内容并不适用于*所有*数据集，但也不特定于*这个*数据集。这使我们有机会编写可以在以后重复使用的代码。我们将在此关注的良好编码实践将包括重用性和模块化。
 
-一些简单的[探索性数据分析](/2017/04/value-exploratory-data-analysis.html)如下所示。
+一些简单的探索性数据分析如下所示。
 
-![鸢尾花描述](../Images/b92651aef94bc787ab47401ac1b5bad2.png)
+![鸢尾花描述](img/b92651aef94bc787ab47401ac1b5bad2.png)
 
-![鸢尾花直方图](../Images/60acdb508037bf752b6dd1d35d72a6fe.png)
+![鸢尾花直方图](img/60acdb508037bf752b6dd1d35d72a6fe.png)
 
 对鸢尾花数据集的非常简单的探索性数据分析：数据集描述（上），默认属性分布直方图（下）。
 
@@ -74,7 +74,7 @@
 
 最终，我们还需要为我们的算法提供更好的数据表示方式，因此我们在继续之前将确保得到一个矩阵——或 numpy ndarray。我们的数据准备工作流程应该如下：
 
-![数据处理准备过程框架](../Images/2b1892e803954b3888cf48f32e0c71b7.png)
+![数据处理准备过程框架](img/2b1892e803954b3888cf48f32e0c71b7.png)
 
 非常简单的数据准备过程。
 
@@ -139,31 +139,31 @@
 
 **相关内容**：
 
-+   [数据准备技巧、窍门和工具：与业内人士的访谈](/2016/10/data-preparation-tips-tricks-tools.html)
++   数据准备技巧、窍门和工具：与业内人士的访谈
 
-+   [Pandas备忘单：Python中的数据科学与数据处理](/2017/01/pandas-cheat-sheet.html)
++   Pandas 备忘单：Python 中的数据科学与数据处理
 
-+   [通过Python和Scikit-learn简化决策树解释](/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
++   通过 Python 和 Scikit-learn 简化决策树解释
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [每位数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目的，并通过寻找目的来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

@@ -1,52 +1,52 @@
-# Pydantic教程：简化Python中的数据验证
+# Pydantic 教程：简化 Python 中的数据验证
 
-> 原文：[https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)
+> 原文：[`www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple`](https://www.kdnuggets.com/pydantic-tutorial-data-validation-in-python-made-simple)
 
-![Pydantic教程：简化Python中的数据验证](../Images/472c573b553fe701a75ff772541202af.png)
+![Pydantic 教程：简化 Python 中的数据验证](img/472c573b553fe701a75ff772541202af.png)
 
 作者提供的图片
 
-# 为什么使用Pydantic？
+# 为什么使用 Pydantic？
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-Python是一种动态类型语言。因此，你可以创建变量而无需明确指定数据类型。你也可以随时将完全不同的值赋给同一个变量。**虽然这使得初学者更容易上手，但也同样容易在你的Python应用程序中创建无效对象。**
+Python 是一种动态类型语言。因此，你可以创建变量而无需明确指定数据类型。你也可以随时将完全不同的值赋给同一个变量。**虽然这使得初学者更容易上手，但也同样容易在你的 Python 应用程序中创建无效对象。**
 
-你可以创建数据类，允许定义带有类型提示的字段。但它们不直接支持数据验证。引入 [Pydantic](https://docs.pydantic.dev/latest/)，一个流行的数据验证和序列化库。Pydantic提供开箱即用的数据验证和序列化支持。这意味着你可以：
+你可以创建数据类，允许定义带有类型提示的字段。但它们不直接支持数据验证。引入 [Pydantic](https://docs.pydantic.dev/latest/)，一个流行的数据验证和序列化库。Pydantic 提供开箱即用的数据验证和序列化支持。这意味着你可以：
 
-+   利用Python的类型提示来验证字段，
++   利用 Python 的类型提示来验证字段，
 
-+   使用Pydantic提供的自定义字段和内置验证器，并
++   使用 Pydantic 提供的自定义字段和内置验证器，并
 
 +   根据需要定义自定义验证器。
 
-在本教程中，我们将建模一个简单的‘员工’类，并使用Pydantic的数据验证功能来验证不同字段的值。让我们开始吧！
+在本教程中，我们将建模一个简单的‘员工’类，并使用 Pydantic 的数据验证功能来验证不同字段的值。让我们开始吧！
 
-# 安装Pydantic
+# 安装 Pydantic
 
-如果你有Python 3.8或更高版本，你可以使用pip安装Pydantic：
+如果你有 Python 3.8 或更高版本，你可以使用 pip 安装 Pydantic：
 
 ```py
 $ pip install pydantic
 ```
 
-如果你在应用程序中需要电子邮件验证，可以在安装Pydantic时像这样安装可选的 [email-validator](https://github.com/JoshData/python-email-validator) 依赖：
+如果你在应用程序中需要电子邮件验证，可以在安装 Pydantic 时像这样安装可选的 [email-validator](https://github.com/JoshData/python-email-validator) 依赖：
 
 ```py
 $ pip install pydantic[email]
 ```
 
-或者，你可以运行以下命令安装email-validator：
+或者，你可以运行以下命令安装 email-validator：
 
 ```py
 $ pip install email-validator
@@ -54,7 +54,7 @@ $ pip install email-validator
 
 **注意**：在我们的示例中，我们将使用电子邮件验证。如果你希望跟随代码进行，请安装相应的依赖。
 
-# 创建一个基本的Pydantic模型
+# 创建一个基本的 Pydantic 模型
 
 现在让我们创建一个简单的`Employee`类。首先，我们创建一个继承自`BaseModel`类的类。各种字段和预期类型如下所示：
 
@@ -71,7 +71,7 @@ class Employee(BaseModel):
     employee_id: str
 ```
 
-注意，我们已将电子邮件指定为Pydantic支持的`EmailStr`类型，而不是普通的Python字符串。这是因为*所有有效的字符串可能不是有效的电子邮件*。
+注意，我们已将电子邮件指定为 Pydantic 支持的`EmailStr`类型，而不是普通的 Python 字符串。这是因为*所有有效的字符串可能不是有效的电子邮件*。
 
 # 在员工模型中验证字段
 
@@ -165,7 +165,7 @@ class Employee(BaseModel):
 
 我们可以看到，在对应于‘Alice Brown’的第三条记录中，我们有两个无效的字段：`email`和`employee_id`：
 
-![Pydantic 教程：简化 Python 数据验证](../Images/d740eb545c95d03f1e265ba994f3f067.png)
+![Pydantic 教程：简化 Python 数据验证](img/d740eb545c95d03f1e265ba994f3f067.png)
 
 因为我们已经指定电子邮件应为`EmailStr`，所以电子邮件字符串将自动进行验证。我们还添加了`validate_employee_id`类方法来检查对象是否具有有效的员工 ID。
 

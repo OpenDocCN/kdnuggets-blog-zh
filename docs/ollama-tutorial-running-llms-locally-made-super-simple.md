@@ -1,8 +1,8 @@
 # Ollama 教程：本地运行 LLMs 变得超级简单
 
-> 原文：[https://www.kdnuggets.com/ollama-tutorial-running-llms-locally-made-super-simple](https://www.kdnuggets.com/ollama-tutorial-running-llms-locally-made-super-simple)
+> 原文：[`www.kdnuggets.com/ollama-tutorial-running-llms-locally-made-super-simple`](https://www.kdnuggets.com/ollama-tutorial-running-llms-locally-made-super-simple)
 
-![ollama-tutorial](../Images/1f45326dd049cd0966bfbd8d5988835b.png)
+![ollama-tutorial](img/1f45326dd049cd0966bfbd8d5988835b.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -54,7 +54,7 @@ $ ollama pull gemma:2b
 
 模型的大小为 1.7B，拉取应该需要一两分钟：
 
-![ollama-pull](../Images/d1a077a8dd047ac39c1a9b9b8e445478.png)
+![ollama-pull](img/d1a077a8dd047ac39c1a9b9b8e445478.png)
 
 ## 步骤 3：运行模型
 
@@ -66,7 +66,7 @@ $ ollama run gemma:2b
 
 这样会启动一个 Ollama REPL，你可以在其中与 Gemma 2B 模型进行交互。以下是一个示例：
 
-![ollama-response](../Images/8644500443780001ff507a342f3ec1f8.png)
+![ollama-response](img/8644500443780001ff507a342f3ec1f8.png)
 
 对于关于 Python 标准库的简单问题，回应似乎相当不错。并且包括了最常用的模块。
 
@@ -98,7 +98,7 @@ $ ollama run ipe
 
 以下是一个示例：
 
-![ipe-response](../Images/5818ee682cda05d60d9c3d1b28fa2057.png)
+![ipe-response](img/5818ee682cda05d60d9c3d1b28fa2057.png)
 
 ## 步骤 5：在 Python 中使用 Ollama
 

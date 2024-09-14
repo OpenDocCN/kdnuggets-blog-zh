@@ -1,8 +1,8 @@
 # 哪个最好：数据科学训练营 vs 学位 vs 在线课程
 
-> 原文：[https://www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html](https://www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html)
+> 原文：[`www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html`](https://www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html)
 
-![哪个最好：数据科学训练营 vs 学位 vs 在线课程](../Images/ed6483d30d5d8dad8ce4c3217309360b.png)
+![哪个最好：数据科学训练营 vs 学位 vs 在线课程](img/ed6483d30d5d8dad8ce4c3217309360b.png)
 
 | 类型 | 成本 | 时长 | 学习方式 |
 | --- | --- | --- | --- |
@@ -14,11 +14,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -38,7 +38,7 @@
 
 # 数据科学训练营
 
-![哪个更好：数据科学训练营 vs 学位 vs 在线课程](../Images/917377a872e9f317bfdc28e7d21a986c.png)
+![哪个更好：数据科学训练营 vs 学位 vs 在线课程](img/917377a872e9f317bfdc28e7d21a986c.png)
 
 数据科学训练营通常由一个组织以整批学生的形式同时进行。他们大约在十年前开始变得受欢迎，如今你可以找到几乎任何类型的数据科学学习训练营。
 
@@ -54,21 +54,21 @@
 
 ## 数据科学训练营的缺点
 
-数据科学训练营的缺点，正如我之前提到的，类似于优点。它很密集。你会花费大量金钱。2020年，[数据科学训练营的平均费用](https://blog.boot.dev/education/cost-of-coding-bootcamp/)约为13,500美元。
+数据科学训练营的缺点，正如我之前提到的，类似于优点。它很密集。你会花费大量金钱。2020 年，[数据科学训练营的平均费用](https://blog.boot.dev/education/cost-of-coding-bootcamp/)约为 13,500 美元。
 
-除了金钱，你还会花费大量的另一种宝贵资源：时间。许多训练营要求每周工作40小时，还不包括完成作业和做家庭作业所需的时间。如果你有工作，除非你的老板非常理解，否则这不是你可以轻松应对的事情。
+除了金钱，你还会花费大量的另一种宝贵资源：时间。许多训练营要求每周工作 40 小时，还不包括完成作业和做家庭作业所需的时间。如果你有工作，除非你的老板非常理解，否则这不是你可以轻松应对的事情。
 
 简而言之？它是不灵活的——如果它不适合你的情况，你也无能为力。
 
 另一个优点也转变成了缺点：由于训练营的重点是就业能力，而不是教授数据科学，许多训练营跳过了数据科学的基础知识。大多数训练营不会教授你很多数据科学所需的基本数学和统计学知识。
 
-当然，你将能够像巫师一样编写代码，但你将缺乏可能变得重要的关键知识。此外，如果缺乏基础知识，以后很难扩展你的知识。你可能能记住Python语法，但如果你不理解双尾T检验是什么，你可能会遇到困难。面试中总有可能会被问到这种问题——雇主不仅希望你能写出代码，还希望知道你是否理解它。如果你不能证明这一点，你可能会发现自己找不到工作。
+当然，你将能够像巫师一样编写代码，但你将缺乏可能变得重要的关键知识。此外，如果缺乏基础知识，以后很难扩展你的知识。你可能能记住 Python 语法，但如果你不理解双尾 T 检验是什么，你可能会遇到困难。面试中总有可能会被问到这种问题——雇主不仅希望你能写出代码，还希望知道你是否理解它。如果你不能证明这一点，你可能会发现自己找不到工作。
 
 # 数据科学学位
 
-![哪一个更好：数据科学训练营 vs 学位 vs 在线课程](../Images/dc21345f7ebc8f002a4dd2a5674eb577.png)
+![哪一个更好：数据科学训练营 vs 学位 vs 在线课程](img/dc21345f7ebc8f002a4dd2a5674eb577.png)
 
-数据科学学位是指你在大学里花费几年时间学习如何从事数据科学。对于本文来说，我不会包括Coursera或EdX的选项，因为这些属于数据科学在线课程。我说的是选择专业、住在宿舍以及坐在讲座厅里学习数据科学学位的情况。
+数据科学学位是指你在大学里花费几年时间学习如何从事数据科学。对于本文来说，我不会包括 Coursera 或 EdX 的选项，因为这些属于数据科学在线课程。我说的是选择专业、住在宿舍以及坐在讲座厅里学习数据科学学位的情况。
 
 ## 数据科学学位的优点
 
@@ -80,7 +80,7 @@
 
 ## 数据科学学位的缺点
 
-缺点与数据科学训练营非常相似，只是更糟糕：如果你觉得训练营花费$13.5k很贵，那么你可能不愿意知道数据科学学位[更为昂贵](https://nces.ed.gov/programs/coe/indicator/cua#:~:text=In%20academic%20year%202017%E2%80%9318,%2422%2C100%20at%20private%20for%2Dprofit)。除了教育费用外，你还要支付两到四年的住宿和膳食费。公立大学的学位——最便宜的选择——如果你住在校外，每年的费用大约为$14.9k。如果选择在私立非营利大学的校园内，最昂贵的选择每年的费用为$54.4k。
+缺点与数据科学训练营非常相似，只是更糟糕：如果你觉得训练营花费$13.5k 很贵，那么你可能不愿意知道数据科学学位[更为昂贵](https://nces.ed.gov/programs/coe/indicator/cua#:~:text=In%20academic%20year%202017%E2%80%9318,%2422%2C100%20at%20private%20for%2Dprofit)。除了教育费用外，你还要支付两到四年的住宿和膳食费。公立大学的学位——最便宜的选择——如果你住在校外，每年的费用大约为$14.9k。如果选择在私立非营利大学的校园内，最昂贵的选择每年的费用为$54.4k。
 
 还有时间因素的问题，你需要花费两到四年的时间。虽然这是优质的教育，但你会用自己生命中的数年时间来获得它。
 
@@ -88,17 +88,17 @@
 
 # 数据科学在线课程
 
-![哪一个更好：数据科学训练营 vs 学位 vs 在线课程](../Images/99fd8958d8812cb848a486c4192e2a9f.png)
+![哪一个更好：数据科学训练营 vs 学位 vs 在线课程](img/99fd8958d8812cb848a486c4192e2a9f.png)
 
 数据科学在线课程是第三种选择。它无疑是最灵活和实惠的。正如我之前提到的，你可以选择任何数据科学主题的在线课程。这也是需要最多内部自律的选项。
 
 ## 数据科学在线课程的优点
 
-数据科学在线课程的主要好处在于你如何利用它。你可以找到在YouTube上运行的惊人的[免费数据科学在线课程](https://www.youtube.com/watch?v=-ETQ97mXXF0)。你还可以[获得谷歌认证](https://www.coursera.org/professional-certificates/google-it-automation?utm_source=gg&utm_medium=sem&utm_campaign=11-GoogleITwithPython-US&utm_content=B2C&campaignid=8986236679&adgroupid=90732373397&device=c&keyword=free%20python&matchtype=b&network=g&devicemodel=&adpostion=&creativeid=516859841235&hide_mobile_promo&gclid=CjwKCAjwpqCZBhAbEiwAa7pXeRMfBwmIvmhxAPmqYLz4CdpZLaRtXai2pmvvrZ1rU3Y4hvqRMLAFIhoChkEQAvD_BwE)。如果你想熟练掌握[Ruby on Rails](https://gorails.com/series)，有课程可以选择。如果你更愿意学习[密码学](https://www.udemy.com/course/conversation-on-cryptography-a-total-course-w-mike-meyers/)，也可以朝这个方向发展。如果你想为像FAANG这样的特定大公司做准备，有一个平台“[StrataScratch](https://www.stratascratch.com)”可以帮助你为面试做好准备。
+数据科学在线课程的主要好处在于你如何利用它。你可以找到在 YouTube 上运行的惊人的[免费数据科学在线课程](https://www.youtube.com/watch?v=-ETQ97mXXF0)。你还可以[获得谷歌认证](https://www.coursera.org/professional-certificates/google-it-automation?utm_source=gg&utm_medium=sem&utm_campaign=11-GoogleITwithPython-US&utm_content=B2C&campaignid=8986236679&adgroupid=90732373397&device=c&keyword=free%20python&matchtype=b&network=g&devicemodel=&adpostion=&creativeid=516859841235&hide_mobile_promo&gclid=CjwKCAjwpqCZBhAbEiwAa7pXeRMfBwmIvmhxAPmqYLz4CdpZLaRtXai2pmvvrZ1rU3Y4hvqRMLAFIhoChkEQAvD_BwE)。如果你想熟练掌握[Ruby on Rails](https://gorails.com/series)，有课程可以选择。如果你更愿意学习[密码学](https://www.udemy.com/course/conversation-on-cryptography-a-total-course-w-mike-meyers/)，也可以朝这个方向发展。如果你想为像 FAANG 这样的特定大公司做准备，有一个平台“[StrataScratch](https://www.stratascratch.com)”可以帮助你为面试做好准备。
 
 这里的另一个优点也是一个缺点：它是自定进度的。如果你在工作，还要照顾两个孩子，那么训练营或学位可能不适合你。在线课程会是一个更好的解决方案。它更容易融入你现有的生活方式。
 
-在线课程通常也更便宜。因为它既不会试图在接下来的12周内让你找到工作，也不会尝试教你所有的数据科学知识，所以它通常更实惠。
+在线课程通常也更便宜。因为它既不会试图在接下来的 12 周内让你找到工作，也不会尝试教你所有的数据科学知识，所以它通常更实惠。
 
 ## 数据科学在线课程的缺点
 
@@ -108,7 +108,7 @@
 
 找到一个全面的课程也更难。虽然你可以通过一点谷歌搜索来创建自己的数据科学课程，但你必须自己整理信息，而不是将信息一 spoon-fed。再者，你总有可能遗漏某些内容。
 
-你可能会面临动力不足的问题，因为社区支持较少（虽然一些在线课程正在通过Discord和社区活动来解决这个问题）。无论是训练营还是学位课程都会提供同行和陪伴。而在课程中，你是孤身一人。
+你可能会面临动力不足的问题，因为社区支持较少（虽然一些在线课程正在通过 Discord 和社区活动来解决这个问题）。无论是训练营还是学位课程都会提供同行和陪伴。而在课程中，你是孤身一人。
 
 最终，你会错过学位所提供的基础知识和训练营给予的就业技巧。
 
@@ -120,9 +120,9 @@
 
 **数据科学训练营**：大约$13,500，三个月，侧重就业且强度大。
 
-**数据科学学位**：介于$32,000-$200,000之间，两到四年，基础知识，强度大。
+**数据科学学位**：介于$32,000-$200,000 之间，两到四年，基础知识，强度大。
 
-**数据科学课程**：许多免费选项，还有许多便宜的选项，大约$100或更少。这些课程可能需要一周或几个月完成，涵盖从就业相关话题到基础知识的内容。大多数课程为自定进度和自我激励。
+**数据科学课程**：许多免费选项，还有许多便宜的选项，大约$100 或更少。这些课程可能需要一周或几个月完成，涵盖从就业相关话题到基础知识的内容。大多数课程为自定进度和自我激励。
 
 **[Nate Rosidi](https://www.stratascratch.com)** 是一名数据科学家，从事产品策略工作。他还是一位兼职教授，教授分析课程，并且是 [StrataScratch](https://www.stratascratch.com/) 的创始人，这是一个帮助数据科学家通过顶级公司真实面试问题准备面试的平台。你可以通过 [Twitter: StrataScratch](https://twitter.com/StrataScratch) 或 [LinkedIn](https://www.linkedin.com/in/nathanrosidi/) 与他联系。
 
@@ -132,10 +132,10 @@
 
 +   [最佳数据科学资源、训练营和课程…](https://www.kdnuggets.com/2023/12/springboard-best-data-science-resources-bootcamp-courses-learn-data-science-new-year)
 
-+   [RAG与Finetuning：哪个是提升你的LLM应用的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
++   [RAG 与 Finetuning：哪个是提升你的 LLM 应用的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
 
 +   [通过西北大学的数据科学学位启动你的职业生涯](https://www.kdnuggets.com/2022/04/nwu-launch-career-northwestern-data-science-degree.html)
 
-+   [免费报名4年计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
++   [免费报名 4 年计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
 
 +   [如果没有合适的学位，如何进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)

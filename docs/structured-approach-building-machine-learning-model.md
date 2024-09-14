@@ -1,6 +1,6 @@
 # 构建机器学习模型的结构化方法
 
-> 原文：[https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)
+> 原文：[`www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html`](https://www.kdnuggets.com/2022/06/structured-approach-building-machine-learning-model.html)
 
 # 介绍
 
@@ -8,17 +8,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
 构建机器学习模型涉及很多步骤，这些步骤不仅限于目标指南，还需要根据业务问题的复杂性采取更详细的方法和深度。
 
-![构建机器学习模型的结构化方法](../Images/77d7781740e0acb5976bb29863f7129b.png)
+![构建机器学习模型的结构化方法](img/77d7781740e0acb5976bb29863f7129b.png)
 
 [Office 信息图矢量图由 pch.vector 创建](https://www.freepik.com/free-vector/team-engineers-working-mechanism-together-using-laptop-talking-sitting-gears-writing-codes-cartoon-illustration_12699861.htm#query=structure&position=4&from_view=search)
 
@@ -30,7 +30,7 @@
 
 一旦机器学习解决方案似乎是解决业务问题的唯一选择，并且了解其优缺点后，数据科学家将业务问题框定为统计问题，并决定它属于哪个框架？机器学习问题可以大致分为监督学习和无监督学习问题。
 
-此外，评估指标对于决定最佳算法也很重要。需要注意的是，将评估指标（如精度、召回率等（如果是分类问题））转换和翻译为业务指标。数据科学家在追求最佳精度时往往无法解释这对业务结果的影响。例如，如果我们知道精度下降1%在财务上的价值，理解为什么精度在特定用例中很重要就会变得更清晰。
+此外，评估指标对于决定最佳算法也很重要。需要注意的是，将评估指标（如精度、召回率等（如果是分类问题））转换和翻译为业务指标。数据科学家在追求最佳精度时往往无法解释这对业务结果的影响。例如，如果我们知道精度下降 1%在财务上的价值，理解为什么精度在特定用例中很重要就会变得更清晰。
 
 # 2\. 起步阶段
 
@@ -38,9 +38,9 @@
 
 恭喜你，现在的处境要好得多。为什么？因为模型构建旅程中的有趣部分从这里开始。你现在可以开始讨论数据了。
 
-请注意，现实世界的解决方案不会像Kaggle提供的那样给你一个精心构建的问题陈述。尽管这是每个数据科学家都想避免的麻烦，但这正是一个资深数据科学家的真实考验。那些能够在不那么清晰的情况下找到出路的人，并且不会等待指示，而是利用现有数据并记录假设和限制以支持发现的人。你不应该等到所有数据都可用 - 通常你不会拥有所有实时操作所需的属性。
+请注意，现实世界的解决方案不会像 Kaggle 提供的那样给你一个精心构建的问题陈述。尽管这是每个数据科学家都想避免的麻烦，但这正是一个资深数据科学家的真实考验。那些能够在不那么清晰的情况下找到出路的人，并且不会等待指示，而是利用现有数据并记录假设和限制以支持发现的人。你不应该等到所有数据都可用 - 通常你不会拥有所有实时操作所需的属性。
 
-在跨越数据不足的障碍后，数据质量的问题接踵而至。这本身就是一门学问，可以进一步阅读[这里](/2022/03/significance-data-quality-making-successful-machine-learning-model.html)。
+在跨越数据不足的障碍后，数据质量的问题接踵而至。这本身就是一门学问，可以进一步阅读这里。
 
 # 3\. 与数据建立联系
 
@@ -82,6 +82,6 @@
 
 +   [合成数据平台：释放生成型 AI 的力量…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
 
-+   [用LLMs将非结构化数据转换为结构化洞察的5种方法](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
++   [用 LLMs 将非结构化数据转换为结构化洞察的 5 种方法](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
 
 +   [逐步教程：构建你的第一个机器学习模型](https://www.kdnuggets.com/step-by-step-tutorial-to-building-your-first-machine-learning-model)

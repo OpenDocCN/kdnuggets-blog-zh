@@ -1,18 +1,18 @@
 # 如何在没有任何工作经验的情况下获得你的第一份数据科学工作
 
-> 原文：[https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
+> 原文：[`www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html`](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
 无论你是新毕业的学生，正在寻求职业转变的人，还是像上面那只猫一样，数据科学领域都充满了几乎满足现代员工所有要求的工作。 从事数据科学工作为你提供了工作保障、高薪和晋升空间，还可以让你在全球任何地方工作。 基本上，对于那些感兴趣的人来说，数据科学工作是不容错过的选择。
 
 然而，在令人畏惧的求职过程中，我们中的许多人会遇到类似这样的情况：
 
-![工作经验悖论](../Images/3a8d50683ae0649cb8c41e7089e342d5.png)
+![工作经验悖论](img/3a8d50683ae0649cb8c41e7089e342d5.png)
 
 图片来源于 [9GAG](https://images-cdn.9gag.com/photo/aQ1n2w8_700b.jpg)
 
 是的，这看起来非常熟悉。
 
-我自己也遇到过很多情况，公司常常要求22岁之前拥有20年的工作经验，我理解当你是新毕业生、寻求职业转变的人，甚至是一只猫时，找工作时的挫折感。
+我自己也遇到过很多情况，公司常常要求 22 岁之前拥有 20 年的工作经验，我理解当你是新毕业生、寻求职业转变的人，甚至是一只猫时，找工作时的挫折感。
 
 但这并不意味着你应该灰心丧气。虽然许多数据科学职位需要工作经验，但仍有很多方法可以创造自己的工作经验，使你成为这些职业的合格候选人。
 
@@ -20,7 +20,7 @@
 
 # 这不仅仅是关于你知道什么，而是关于你认识谁和谁认识你。
 
-在类似加拿大的国家，拥有某种形式的大学学历已成为常态（[2016年，54%的加拿大人年龄在25到64岁之间拥有大学或学院认证](https://www150.statcan.gc.ca/n1/daily-quotidien/171129/dq171129a-eng.htm)），现在不再是关于你知道什么了。相反，是关于你认识谁和谁认识你。
+在类似加拿大的国家，拥有某种形式的大学学历已成为常态（[2016 年，54%的加拿大人年龄在 25 到 64 岁之间拥有大学或学院认证](https://www150.statcan.gc.ca/n1/daily-quotidien/171129/dq171129a-eng.htm)），现在不再是关于你知道什么了。相反，是关于你认识谁和谁认识你。
 
 谷歌一下“人脉的重要性”，你会看到所有主要玩家（《福布斯》，《赫芬顿邮报》，《Indeed》等）关于为什么人脉是你职业生涯中最重要的事情之一的文章。 《福布斯》说得最好：
 
@@ -74,19 +74,19 @@
 
 通过创建自己的项目，你向雇主展示了数据科学家在工作中成功所需的天生好奇心和动力。不仅如此，许多技术公司要求查看你的项目组合，以便在雇用你之前看到你的工作质量。
 
-现在找到免费数据集来构建项目比以往任何时候都容易。觉得我在开玩笑？上次我查看时，*Kaggle* 上有67,862个数据集可供任何人使用。这真是大量的数据。
+现在找到免费数据集来构建项目比以往任何时候都容易。觉得我在开玩笑？上次我查看时，*Kaggle* 上有 67,862 个数据集可供任何人使用。这真是大量的数据。
 
 此外，快速搜索一下，你会发现成百上千篇文章，提供了各种数据科学项目的灵感。以下是一些可以帮助你入门的项目。
 
-[**我计划在2021年完成的7个数据科学项目**](https://towardsdatascience.com/the-7-data-science-projects-i-plan-on-completing-in-2021-5f7dd5cda72f)
+[**我计划在 2021 年完成的 7 个数据科学项目**](https://towardsdatascience.com/the-7-data-science-projects-i-plan-on-completing-in-2021-5f7dd5cda72f)
 
 我计划如何利用这些项目在年底前提升我的数据科学技能。
 
-[**12个圣诞节12天数据科学项目**](https://towardsdatascience.com/12-data-science-projects-for-12-days-of-christmas-aff693f5ed2b)
+[**12 个圣诞节 12 天数据科学项目**](https://towardsdatascience.com/12-data-science-projects-for-12-days-of-christmas-aff693f5ed2b)
 
 相关且有价值的数据科学项目，你可以在一天之内完成！
 
-[**12个适合初学者和专家的数据科学项目创意**](https://towardsdatascience.com/12-cool-data-science-projects-ideas-for-beginners-and-experts-fc75b5498e03)
+[**12 个适合初学者和专家的数据科学项目创意**](https://towardsdatascience.com/12-cool-data-science-projects-ideas-for-beginners-and-experts-fc75b5498e03)
 
 “你完成了多少个数据科学项目？”
 
@@ -96,9 +96,9 @@
 
 # 实习、志愿服务或做无偿工作来获得宝贵的行业经验
 
-有时候，获得必要工作经验的最佳方式就是免费工作。没有人喜欢无偿工作，但在一个通常要求你在22岁之前有20年工作经验的世界里，免费工作常常是你求职成功的通行证。
+有时候，获得必要工作经验的最佳方式就是免费工作。没有人喜欢无偿工作，但在一个通常要求你在 22 岁之前有 20 年工作经验的世界里，免费工作常常是你求职成功的通行证。
 
-实习、志愿服务或做无偿工作，是获得许多公司所寻找的必要工作经验的三种最佳方式。这些“工作”不仅让你能够使用真实世界的数据获得实际经验，而且还向招聘经理展示了你是一个通过艰苦努力获得工作经验的团队合作者。此外，你可能会有机会创造对许多人和社区产生积极影响的有意义的解决方案。如果你所工作的公司愿意在你的LinkedIn个人资料上给予你一个极好的评价或推荐信，那就更好了！
+实习、志愿服务或做无偿工作，是获得许多公司所寻找的必要工作经验的三种最佳方式。这些“工作”不仅让你能够使用真实世界的数据获得实际经验，而且还向招聘经理展示了你是一个通过艰苦努力获得工作经验的团队合作者。此外，你可能会有机会创造对许多人和社区产生积极影响的有意义的解决方案。如果你所工作的公司愿意在你的 LinkedIn 个人资料上给予你一个极好的评价或推荐信，那就更好了！
 
 # 最后的思考
 
@@ -108,20 +108,20 @@
 
 通过稍微发挥一点创造力、毅力和韧性（也许还需要一些耐心），你将很快走上找到那份梦寐以求的数据科学工作的道路。
 
-**[麦迪逊·亨特](https://madison13.medium.com/)** 是一名地球科学本科生，软件开发研究生。麦迪逊撰写有关数据科学、环境和STEM的随笔。
+**[麦迪逊·亨特](https://madison13.medium.com/)** 是一名地球科学本科生，软件开发研究生。麦迪逊撰写有关数据科学、环境和 STEM 的随笔。
 
 [原文](https://towardsdatascience.com/how-to-get-your-first-job-in-data-science-without-any-work-experience-37e33fad41b4)。已获许可转载。
 
 ### 更多相关话题
 
-+   [NExT-GPT介绍：任何到任何的多模态大语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
++   [NExT-GPT 介绍：任何到任何的多模态大语言模型](https://www.kdnuggets.com/introduction-to-nextgpt-anytoany-multimodal-large-language-model)
 
-+   [获得第一个数据科学职位的7个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
++   [获得第一个数据科学职位的 7 个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
 
-+   [5个免费认证帮助你获得第一个开发者职位](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
++   [5 个免费认证帮助你获得第一个开发者职位](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
 
 +   [在参加任何免费的数据科学课程之前请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
 
-+   [SHAP：在Python中解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
++   [SHAP：在 Python 中解释任何机器学习模型](https://www.kdnuggets.com/2022/11/shap-explain-machine-learning-model-python.html)
 
 +   [在不标记的情况下找到图像中的图片](https://www.kdnuggets.com/2022/09/find-picture-image-without-marking.html)

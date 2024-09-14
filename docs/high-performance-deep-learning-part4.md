@@ -1,12 +1,12 @@
-# 高性能深度学习：如何训练更小、更快、更好的模型 – 第4部分
+# 高性能深度学习：如何训练更小、更快、更好的模型 – 第四部分
 
-> 原文：[https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)
+> 原文：[`www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html`](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part4.html)
 
-[评论](#comments)
+评论
 
-![](../Images/9970edb2850289adc136ca465d25bc5e.png)
+![](img/9970edb2850289adc136ca465d25bc5e.png)
 
-在之前的部分（[第1部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)，[第2部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)，[第3部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)），我们讨论了为什么效率对深度学习模型实现高性能模型和帕累托最优模型至关重要，以及深度学习中效率的关注领域。我们还涵盖了两个关注领域（压缩技术和学习技术）。让我们继续花更多时间讨论其他关注领域。您也可以阅读我们的[深度学习效率调研论文](https://arxiv.org/abs/2106.08962)。
+在之前的部分（[第一部分](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)，[第二部分](https://www.kdnuggets.com/2021/06/high-performance-deep-learning-part2.html)，[第三部分](https://www.kdnuggets.com/2021/07/high-performance-deep-learning-part3.html)），我们讨论了为什么效率对深度学习模型实现高性能模型和帕累托最优模型至关重要，以及深度学习中效率的关注领域。我们还涵盖了两个关注领域（压缩技术和学习技术）。让我们继续花更多时间讨论其他关注领域。您也可以阅读我们的[深度学习效率调研论文](https://arxiv.org/abs/2106.08962)。
 
 ### 自动化
 
@@ -16,19 +16,19 @@
 
 虽然我们可以通过实验建立直觉，但找到最佳超参数值需要手动搜索以优化给定的目标函数（通常是验证集上的损失值）的确切值。
 
-如果用户对要调整的超参数有先验经验，可以使用的简单自动化超参数优化算法是网格搜索（也称为参数扫描）。在这种情况下，我们根据用户提供的每个超参数的有效范围，搜索所有不同且有效的超参数组合。例如，如果学习率（lr）的可能值为{0.01, 0.05}，权重衰减（decay）的可能值为{0.1, 0.2}，则会有4种可能的组合{lr=0.01, decay=0.1}，{lr=0.01, decay=0.2}，{lr=0.05, decay=0.1}和{lr=0.05, decay=0.2}。
+如果用户对要调整的超参数有先验经验，可以使用的简单自动化超参数优化算法是网格搜索（也称为参数扫描）。在这种情况下，我们根据用户提供的每个超参数的有效范围，搜索所有不同且有效的超参数组合。例如，如果学习率（lr）的可能值为{0.01, 0.05}，权重衰减（decay）的可能值为{0.1, 0.2}，则会有 4 种可能的组合{lr=0.01, decay=0.1}，{lr=0.01, decay=0.2}，{lr=0.05, decay=0.1}和{lr=0.05, decay=0.2}。
 
 上述每种组合都是一个*试验*，每个试验可以并行运行。所有试验完成后，将找到超参数的最佳组合。由于这种方法尝试所有可能的组合，因此总试验数量增长非常快，因此遭遇了维度灾难 [3]。
 
-另一种方法是随机搜索 [4]，其中试验是从搜索空间中随机抽样的，搜索空间是使用用户提供的可能值的范围构建的。类似于网格搜索，每个试验仍然是独立并行运行的。然而，随机搜索易于根据可用的计算能力进行扩展，因为试验是独立同分布的（iid），因此找到最佳试验的可能性随着试验数量的增加而增加。这允许在到目前为止的最佳试验足够好时预先终止搜索。还有类似于随机搜索的方法，如Successive Halving (SHA) [5] 和 HyperBand [6]，但它们将更多资源分配给表现良好的试验。
+另一种方法是随机搜索 [4]，其中试验是从搜索空间中随机抽样的，搜索空间是使用用户提供的可能值的范围构建的。类似于网格搜索，每个试验仍然是独立并行运行的。然而，随机搜索易于根据可用的计算能力进行扩展，因为试验是独立同分布的（iid），因此找到最佳试验的可能性随着试验数量的增加而增加。这允许在到目前为止的最佳试验足够好时预先终止搜索。还有类似于随机搜索的方法，如 Successive Halving (SHA) [5] 和 HyperBand [6]，但它们将更多资源分配给表现良好的试验。
 
-![](../Images/9ca0b362fe05d2c92248f7703eb48306.png)
+![](img/9ca0b362fe05d2c92248f7703eb48306.png)
 
 *网格搜索、随机搜索和贝叶斯优化。[来源](https://en.wikipedia.org/w/index.php?title=Hyperparameter_optimization)*
 
-基于贝叶斯优化（BO）的搜索 [7] 是一种更复杂的方法，它保持一个单独的模型来预测给定试验是否可能改进到目前为止找到的最佳试验。该模型基于过去试验的表现来预测这种可能性。BO相对于随机搜索的改进在于搜索是有指导的，而不是随机的。因此，达到最优解所需的试验更少。由于试验的选择依赖于过去试验的结果，因此这种方法是顺序的。然而，可以基于相同的估计同时生成多个试验，这可能会导致比纯顺序BO更快的收敛，但代价是某些试验可能会浪费。
+基于贝叶斯优化（BO）的搜索 [7] 是一种更复杂的方法，它保持一个单独的模型来预测给定试验是否可能改进到目前为止找到的最佳试验。该模型基于过去试验的表现来预测这种可能性。BO 相对于随机搜索的改进在于搜索是有指导的，而不是随机的。因此，达到最优解所需的试验更少。由于试验的选择依赖于过去试验的结果，因此这种方法是顺序的。然而，可以基于相同的估计同时生成多个试验，这可能会导致比纯顺序 BO 更快的收敛，但代价是某些试验可能会浪费。
 
-在实际应用方面，HPO可供用户在几个软件工具包中使用，这些工具包集成了算法本身以及易于使用的界面（UI用于指定超参数及其范围），包括Vizier [8]（一个内部的Google工具，也可以通过Google Cloud进行黑箱调优）。亚马逊提供了Sagemaker [9]，功能类似，也可以作为AWS服务访问。NNI [10]、Tune [11] 和 Advisor [12] 是其他可以本地使用的开源HPO软件包。这些工具包还提供了对未有前景的试验进行早期停止的选项。Vizier使用中位数停止规则，如果某个试验在时间步* t* 的表现低于到目前为止所有试验的中位数表现，则终止该试验。
+在实际应用方面，HPO 可供用户在几个软件工具包中使用，这些工具包集成了算法本身以及易于使用的界面（UI 用于指定超参数及其范围），包括 Vizier [8]（一个内部的 Google 工具，也可以通过 Google Cloud 进行黑箱调优）。亚马逊提供了 Sagemaker [9]，功能类似，也可以作为 AWS 服务访问。NNI [10]、Tune [11] 和 Advisor [12] 是其他可以本地使用的开源 HPO 软件包。这些工具包还提供了对未有前景的试验进行早期停止的选项。Vizier 使用中位数停止规则，如果某个试验在时间步* t* 的表现低于到目前为止所有试验的中位数表现，则终止该试验。
 
 **神经架构搜索 (NAS)**：我们可以把 NAS 看作是超参数优化 (HPO) 的扩展，目标是寻找改变网络架构本身的参数。NAS 可以被认为包括以下几个部分：
 
@@ -38,7 +38,7 @@
 
 1.  *评估策略*：这定义了我们用来评估模型 *适应度* 的指标。它可以是简单的传统指标，如验证损失、准确率等。也可以是复合指标，例如 MNasNet [15] 中创建的基于准确性和模型延迟的自定义单一指标。
 
-![](../Images/989bce40cf3d67a66e9086d6ec346ff7.png)
+![](img/989bce40cf3d67a66e9086d6ec346ff7.png)
 
 *神经架构搜索：控制器负责基于搜索空间和从模型评估中收到的反馈生成候选模型。*
 
@@ -48,7 +48,7 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 与 [13] 中的端到端网络搜索相比，单独学习这些单元似乎将搜索时间提高了 7 倍，同时在当时击败了 CIFAR-10 中的最新技术。
 
-![](../Images/dd702b82dac94007e1eaf168e23a1b10.png)
+![](img/dd702b82dac94007e1eaf168e23a1b10.png)
 
 *普通和缩减单元。来源：[16]*
 
@@ -56,11 +56,11 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 在评估候选网络时，也可以关注不仅仅是质量，还包括模型大小、延迟等足迹指标。架构搜索可以帮助进行多目标搜索以优化两者。例如，MNasNet [15] 直接将模型在目标移动设备上的延迟纳入目标函数，如下所示：
 
-![](../Images/c88b99cd0a05ea82161005b7307f808b.png)
+![](img/c88b99cd0a05ea82161005b7307f808b.png)
 
 *MNasNet 中的多目标奖励函数。*
 
-![](../Images/55058749bb9c46eb639000459abcb5c0.png)
+![](img/55058749bb9c46eb639000459abcb5c0.png)
 
 *生成 MNASNet 中的候选模型，同时优化移动设备上的延迟。来源：[15]*
 
@@ -74,23 +74,23 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 **视觉：** 视觉领域中一个经典的高效层例子是卷积层的使用，它相对于全连接（FC）层在视觉模型中有所改进。FC 层存在两个主要问题：
 
-（1）FC层忽略输入像素的空间信息。从直观上讲，仅通过查看单个像素值很难建立对给定输入的理解。它们还忽略了附近区域的空间局部性。
+（1）FC 层忽略输入像素的空间信息。从直观上讲，仅通过查看单个像素值很难建立对给定输入的理解。它们还忽略了附近区域的空间局部性。
 
-（2）使用FC层还会导致参数数量的爆炸，尤其是在处理中等大小的输入时。一个100 × 100的RGB图像有3个通道，会导致第一层中的每个神经元有3 × 10⁴个连接。这也使得网络容易过拟合。
+（2）使用 FC 层还会导致参数数量的爆炸，尤其是在处理中等大小的输入时。一个 100 × 100 的 RGB 图像有 3 个通道，会导致第一层中的每个神经元有 3 × 10⁴个连接。这也使得网络容易过拟合。
 
-卷积层通过学习滤波器来避免这个问题，每个滤波器是一个固定大小的3D权重矩阵（3x3, 5x5等），第三维度与输入的通道数相同。每个滤波器在输入上进行卷积，以生成该滤波器的*特征图*。每个滤波器可以学习检测诸如边缘（水平、垂直、对角线等）之类的特征，从而在特征图中该特征存在的地方值更高。单个卷积层的特征图可以从图像中提取有意义的信息。叠加在上面的卷积层将使用前一层生成的特征图作为输入，逐步学习更复杂的特征（特征图中的每个像素是从图像的逐渐更大部分生成的，随着层的叠加，*感受野*也会增加）。
+卷积层通过学习滤波器来避免这个问题，每个滤波器是一个固定大小的 3D 权重矩阵（3x3, 5x5 等），第三维度与输入的通道数相同。每个滤波器在输入上进行卷积，以生成该滤波器的*特征图*。每个滤波器可以学习检测诸如边缘（水平、垂直、对角线等）之类的特征，从而在特征图中该特征存在的地方值更高。单个卷积层的特征图可以从图像中提取有意义的信息。叠加在上面的卷积层将使用前一层生成的特征图作为输入，逐步学习更复杂的特征（特征图中的每个像素是从图像的逐渐更大部分生成的，随着层的叠加，*感受野*也会增加）。
 
-![](../Images/c2527ad7c06c81c339df4fb0558be37c.png)
+![](img/c2527ad7c06c81c339df4fb0558be37c.png)
 
-*二维输入（蓝色）上的卷积操作的示意图，使用了2x2的滤波器（绿色）。[来源](https://github.com/vdumoulin/conv_arithmetic)。*
+*二维输入（蓝色）上的卷积操作的示意图，使用了 2x2 的滤波器（绿色）。[来源](https://github.com/vdumoulin/conv_arithmetic)。*
 
-![](../Images/9c48da6a9e44a6704ea9e29e81df5678.png)
+![](img/9c48da6a9e44a6704ea9e29e81df5678.png)
 
-*卷积操作的3D可视化。[来源](https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728)*
+*卷积操作的 3D 可视化。[来源](https://towardsdatascience.com/a-basic-introduction-to-separable-convolutions-b99ec3102728)*
 
-卷积层高效性的核心思想是相同的滤波器在图像的任何位置上使用，无论滤波器应用于何处，从而实现空间不变性，同时共享参数。回到一个100×100 RGB图像的例子，它有3个通道，一个5 × 5的滤波器将意味着总共75（5 × 5 × 3）个参数。每一层可以学习多个独特的滤波器，并且仍然在非常合理的参数预算范围内。这也具有正则化效果，即显著减少的参数数量使得优化更容易，泛化更好。
+卷积层高效性的核心思想是相同的滤波器在图像的任何位置上使用，无论滤波器应用于何处，从而实现空间不变性，同时共享参数。回到一个 100×100 RGB 图像的例子，它有 3 个通道，一个 5 × 5 的滤波器将意味着总共 75（5 × 5 × 3）个参数。每一层可以学习多个独特的滤波器，并且仍然在非常合理的参数预算范围内。这也具有正则化效果，即显著减少的参数数量使得优化更容易，泛化更好。
 
-**深度可分离卷积层**：在卷积操作中，每个滤波器用于在两个空间维度和第三个通道维度上进行卷积。因此，每个滤波器的大小是s[x] x s[y] x input_channels，其中s[x]和s[y]通常相等。这是对每个滤波器执行的，使得卷积操作在* x *和* y *维度上空间上进行，并在z维度上进行深度卷积。
+**深度可分离卷积层**：在卷积操作中，每个滤波器用于在两个空间维度和第三个通道维度上进行卷积。因此，每个滤波器的大小是 s[x] x s[y] x input_channels，其中 s[x]和 s[y]通常相等。这是对每个滤波器执行的，使得卷积操作在* x *和* y *维度上空间上进行，并在 z 维度上进行深度卷积。
 
 深度可分离卷积将其分解为两个步骤：
 
@@ -106,33 +106,33 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 传统上，使用 RNN 在编码器和解码器中完成这项工作。然而，第一个解码器层只能看到最终编码器步骤的隐藏状态。这是一个“瓶颈”，因为第一个解码器步骤必须从最终隐藏状态中提取所有信息。
 
-![](../Images/0572503216411994f09cfc4a68f95771.png)
+![](img/0572503216411994f09cfc4a68f95771.png)
 
 *机器翻译任务中从英语到印地语的解码器信息瓶颈。*
 
-注意力机制在Bahdanau等人[23]中被引入，允许解码器能够看到所有的编码器状态。这是一种突出输入序列相关部分并将输入序列压缩为*上下文向量*的方法，基于序列与另一个向量（称为查询向量）的相似性。在像机器翻译这样的序列到序列任务中，这使得可以根据所有编码器状态（表示为键和值）和解码器的先前隐藏状态（查询向量）来调整输入到解码器。上下文向量是基于解码器的先前隐藏状态对编码器状态的加权和。由于注意力机制生成了编码器状态的加权和，这些权重也可以用于可视化网络的行为。
+注意力机制在 Bahdanau 等人[23]中被引入，允许解码器能够看到所有的编码器状态。这是一种突出输入序列相关部分并将输入序列压缩为*上下文向量*的方法，基于序列与另一个向量（称为查询向量）的相似性。在像机器翻译这样的序列到序列任务中，这使得可以根据所有编码器状态（表示为键和值）和解码器的先前隐藏状态（查询向量）来调整输入到解码器。上下文向量是基于解码器的先前隐藏状态对编码器状态的加权和。由于注意力机制生成了编码器状态的加权和，这些权重也可以用于可视化网络的行为。
 
-![](../Images/23384e064b8600c78f717611afc56206.png)
+![](img/23384e064b8600c78f717611afc56206.png)
 
 *注意力在解码器中的使用。 [来源](https://arxiv.org/pdf/1902.02181.pdf#:~:text=The%20attention%20mechanism%20is%20a,to%20its%20higher%20level%20representation.)*
 
-**Transformer及其朋友**：Transformer架构[24]在2017年提出，首次引入了对解码器和编码器都使用注意力机制。在编码器中，他们使用自注意力机制，其中键、值和查询向量都来源于先前的编码器层。Transformer网络的训练成本比当时的可比替代方案低两个数量级。
+**Transformer 及其朋友**：Transformer 架构[24]在 2017 年提出，首次引入了对解码器和编码器都使用注意力机制。在编码器中，他们使用自注意力机制，其中键、值和查询向量都来源于先前的编码器层。Transformer 网络的训练成本比当时的可比替代方案低两个数量级。
 
-![](../Images/87a8b89453c8d581c2a89ed72dd26879.png)
+![](img/87a8b89453c8d581c2a89ed72dd26879.png)
 
-*Transformer架构。 [来源](https://jalammar.github.io/illustrated-transformer/)*
+*Transformer 架构。 [来源](https://jalammar.github.io/illustrated-transformer/)*
 
-另一个核心思想是自注意力机制允许对输入序列中标记之间的关系进行并行化处理。RNNs本质上要求逐步处理。例如，在RNN中，一个标记的上下文可能在整个序列处理完之前无法完全理解。而有了注意力机制，所有标记可以一起处理，并且可以学习成对的关系。这使得利用优化训练设备如GPU和TPU变得更加容易。
+另一个核心思想是自注意力机制允许对输入序列中标记之间的关系进行并行化处理。RNNs 本质上要求逐步处理。例如，在 RNN 中，一个标记的上下文可能在整个序列处理完之前无法完全理解。而有了注意力机制，所有标记可以一起处理，并且可以学习成对的关系。这使得利用优化训练设备如 GPU 和 TPU 变得更加容易。
 
-如第3部分介绍的那样，BERT模型架构[25]在多个自然语言理解基准测试中超越了当时的最先进技术。BERT是一个堆叠的Transformer编码器层，通过双向掩蔽语言模型训练目标进行预训练。它也可以作为一个通用编码器，然后用于其他任务。其他类似的模型，如GPT家族[26]，也被用于解决许多自然语言理解任务。
+如第三部分介绍的那样，BERT 模型架构[25]在多个自然语言理解基准测试中超越了当时的最先进技术。BERT 是一个堆叠的 Transformer 编码器层，通过双向掩蔽语言模型训练目标进行预训练。它也可以作为一个通用编码器，然后用于其他任务。其他类似的模型，如 GPT 家族[26]，也被用于解决许多自然语言理解任务。
 
 ### 参考文献
 
-[1] Tong Yu和Hong Zhu. 2020\. 超参数优化：算法和应用的回顾。arXiv预印本 arXiv:2003.05689 (2020)。
+[1] Tong Yu 和 Hong Zhu. 2020\. 超参数优化：算法和应用的回顾。arXiv 预印本 arXiv:2003.05689 (2020)。
 
-[2] Jeremy Jordan. 2020\. 设定神经网络的学习率。Jeremy Jordan (2020年8月)。 [https://www.jeremyjordan.me/nn-learning-rate](https://www.jeremyjordan.me/nn-learning-rate)
+[2] Jeremy Jordan. 2020\. 设定神经网络的学习率。Jeremy Jordan (2020 年 8 月)。 [`www.jeremyjordan.me/nn-learning-rate`](https://www.jeremyjordan.me/nn-learning-rate)
 
-[3] [https://en.wikipedia.org/wiki/Curse_of_dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality)
+[3] [`en.wikipedia.org/wiki/Curse_of_dimensionality`](https://en.wikipedia.org/wiki/Curse_of_dimensionality)
 
 [4] James Bergstra 和 Yoshua Bengio. 2012\. 随机搜索超参数优化。机器学习研究杂志 13, 2 (2012)。
 
@@ -142,25 +142,25 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 [7] Apoorv Agnihotri 和 Nipun Batra. 2020\. 探索贝叶斯优化。Distill 5, 5 (2020), e26。
 
-[8] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro 和 D Sculley. 2017\. Google Vizier：一个黑箱优化服务。见于第23届ACM SIGKDD国际知识发现与数据挖掘会议论文集。1487–1495。
+[8] Daniel Golovin, Benjamin Solnik, Subhodeep Moitra, Greg Kochanski, John Karro 和 D Sculley. 2017\. Google Vizier：一个黑箱优化服务。见于第 23 届 ACM SIGKDD 国际知识发现与数据挖掘会议论文集。1487–1495。
 
-[9] Valerio Perrone, Huibin Shen, Aida Zolic, Iaroslav Shcherbatyi, Amr Ahmed, Tanya Bansal, Michele Donini, Fela Winkelmolen, Rodolphe Jenatton, Jean Baptiste Faddoul 等. 2020\. 亚马逊 SageMaker 自动模型调优：可扩展的黑箱优化。arXiv预印本 arXiv:2012.08489 (2020)。
+[9] Valerio Perrone, Huibin Shen, Aida Zolic, Iaroslav Shcherbatyi, Amr Ahmed, Tanya Bansal, Michele Donini, Fela Winkelmolen, Rodolphe Jenatton, Jean Baptiste Faddoul 等. 2020\. 亚马逊 SageMaker 自动模型调优：可扩展的黑箱优化。arXiv 预印本 arXiv:2012.08489 (2020)。
 
-[10] 微软研究院. 2019\. 神经网络智能 - 微软研究院。https://www.microsoft.com/enus/research/project/neural-network-intelligence [在线; 访问日期：2021年6月3日]。
+[10] 微软研究院. 2019\. 神经网络智能 - 微软研究院。https://www.microsoft.com/enus/research/project/neural-network-intelligence [在线; 访问日期：2021 年 6 月 3 日]。
 
-[11] Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez 和 Ion Stoica. 2018\. Tune：一个用于分布式模型选择和训练的研究平台。arXiv预印本 arXiv:1807.05118 (2018)。
+[11] Richard Liaw, Eric Liang, Robert Nishihara, Philipp Moritz, Joseph E Gonzalez 和 Ion Stoica. 2018\. Tune：一个用于分布式模型选择和训练的研究平台。arXiv 预印本 arXiv:1807.05118 (2018)。
 
-[12] Dihao Chen. 2021\. advisor. https://github.com/tobegit3hub/advisor [在线; 访问日期：2021年6月3日]。
+[12] Dihao Chen. 2021\. advisor. https://github.com/tobegit3hub/advisor [在线; 访问日期：2021 年 6 月 3 日]。
 
-[13] Barret Zoph 和 Quoc V Le. 2016\. 通过强化学习进行神经网络架构搜索。arXiv预印本 arXiv:1611.01578 (2016)。
+[13] Barret Zoph 和 Quoc V Le. 2016\. 通过强化学习进行神经网络架构搜索。arXiv 预印本 arXiv:1611.01578 (2016)。
 
-[14] Hanxiao Liu, Karen Simonyan 和 Yiming Yang. 2018\. Darts：可微分架构搜索。arXiv预印本 arXiv:1806.09055 (2018)。
+[14] Hanxiao Liu, Karen Simonyan 和 Yiming Yang. 2018\. Darts：可微分架构搜索。arXiv 预印本 arXiv:1806.09055 (2018)。
 
-[15] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew Howard 和 Quoc V Le. 2019\. Mnasnet：面向平台的移动神经网络架构搜索。见于IEEE/CVF计算机视觉与模式识别会议论文集。2820–2828。
+[15] Mingxing Tan, Bo Chen, Ruoming Pang, Vijay Vasudevan, Mark Sandler, Andrew Howard 和 Quoc V Le. 2019\. Mnasnet：面向平台的移动神经网络架构搜索。见于 IEEE/CVF 计算机视觉与模式识别会议论文集。2820–2828。
 
-[16] Barret Zoph, Vijay Vasudevan, Jonathon Shlens 和 Quoc V Le. 2018\. 学习可转移的架构以实现可扩展的图像识别。见于IEEE计算机视觉与模式识别会议论文集。8697–8710。
+[16] Barret Zoph, Vijay Vasudevan, Jonathon Shlens 和 Quoc V Le. 2018\. 学习可转移的架构以实现可扩展的图像识别。见于 IEEE 计算机视觉与模式识别会议论文集。8697–8710。
 
-[17] Esteban Real, Alok Aggarwal, Yanping Huang 和 Quoc V Le. 2019\. 用于图像分类器架构搜索的正则化进化。见于AAAI人工智能会议论文集，第33卷。4780–4789。
+[17] Esteban Real, Alok Aggarwal, Yanping Huang 和 Quoc V Le. 2019\. 用于图像分类器架构搜索的正则化进化。见于 AAAI 人工智能会议论文集，第 33 卷。4780–4789。
 
 [18] Chenxi Liu, Barret Zoph, Maxim Neumann, Jonathon Shlens, Wei Hua, Li-Jia Li, Li Fei-Fei, Alan Yuille, Jonathan Huang, 和 Kevin Murphy. 2018\. 进阶神经架构搜索。欧洲计算机视觉会议 (ECCV) 论文集。19–34。
 
@@ -168,9 +168,9 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 [20] Thomas Elsken, Jan Hendrik Metzen, Frank Hutter 等. 2019\. 神经架构搜索：综述。J. Mach. Learn. Res. 20, 55 (2019), 1–21。
 
-[21] François Chollet. 2017\. Xception：深度学习与深度可分离卷积。IEEE计算机视觉与模式识别会议论文集。1251–1258
+[21] François Chollet. 2017\. Xception：深度学习与深度可分离卷积。IEEE 计算机视觉与模式识别会议论文集。1251–1258
 
-[22] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, 和 Liang-Chieh Chen. 2018\. Mobilenetv2：倒置残差和线性瓶颈。IEEE计算机视觉与模式识别会议论文集。4510–4520。
+[22] Mark Sandler, Andrew Howard, Menglong Zhu, Andrey Zhmoginov, 和 Liang-Chieh Chen. 2018\. Mobilenetv2：倒置残差和线性瓶颈。IEEE 计算机视觉与模式识别会议论文集。4510–4520。
 
 [23] Dzmitry Bahdanau, Kyunghyun Cho, 和 Yoshua Bengio. 2014\. 通过联合学习对齐和翻译进行神经机器翻译。arXiv 预印本 arXiv:1409.0473 (2014)。
 
@@ -192,11 +192,11 @@ Zoph 等人 2016 年的论文 [13] 演示了可以使用强化学习生成端到
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 

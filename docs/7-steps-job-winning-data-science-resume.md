@@ -1,8 +1,8 @@
 # 7 个步骤打造获奖的数据科学简历
 
-> 原文：[https://www.kdnuggets.com/2020/01/7-steps-job-winning-data-science-resume.html](https://www.kdnuggets.com/2020/01/7-steps-job-winning-data-science-resume.html)
+> 原文：[`www.kdnuggets.com/2020/01/7-steps-job-winning-data-science-resume.html`](https://www.kdnuggets.com/2020/01/7-steps-job-winning-data-science-resume.html)
 
-[评论](#comments)
+评论
 
 **由 [Aditya Sharma](https://www.linkedin.com/in/aditya-sharma/)，Hiration 联合创始人**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -52,9 +52,9 @@
 
 但这还不是全部。
 
-作为一名数据科学家，你正在推动一场变革。除了这些基本信息外，随意添加你的作品集或其他公共细节，如LinkedIn、GitHub、Kaggle等。
+作为一名数据科学家，你正在推动一场变革。除了这些基本信息外，随意添加你的作品集或其他公共细节，如 LinkedIn、GitHub、Kaggle 等。
 
-只有在这样做会对你的简历增值的情况下才做。如果你链接的是一个空的LinkedIn个人资料或几个月前最后更新过的GitHub账户，那是没有意义的。如果GitHub、Kaggle或其他公共平台上有显著的成就，可以在简历的单独部分提及这些成就。
+只有在这样做会对你的简历增值的情况下才做。如果你链接的是一个空的 LinkedIn 个人资料或几个月前最后更新过的 GitHub 账户，那是没有意义的。如果 GitHub、Kaggle 或其他公共平台上有显著的成就，可以在简历的单独部分提及这些成就。
 
 然而，这样做只有在你的工作经验部分缺乏数据科学相关内容时才有意义。如果你的工作经验本身已经证明了你的技能，你就不需要额外强调这些成就来验证它们。
 
@@ -92,7 +92,7 @@
 
 ### 在你的总结中少谈数据科学，更多地谈论“影响”
 
-总结应该是一个简短的3-4行陈述，描述你能为下一个组织带来的影响。在这里不要过多涉及你的数据科学技能——这正是简历其他部分的内容。总之，仅仅提及你通过特定技能能带来的价值。
+总结应该是一个简短的 3-4 行陈述，描述你能为下一个组织带来的影响。在这里不要过多涉及你的数据科学技能——这正是简历其他部分的内容。总之，仅仅提及你通过特定技能能带来的价值。
 
 不要详细描述你熟悉的技术、算法和库。提及你能带来的商业影响：明智的决策、改进的流程、领导力支持等。
 
@@ -102,7 +102,7 @@
 
 以下快照展示了理想的数据科学简历中该部分的样子：
 
-![图示](../Images/b6a81a7cb42db27c9e7acb58487bab32.png)
+![图示](img/b6a81a7cb42db27c9e7acb58487bab32.png)
 
 *数据科学简历中的关键技能和技术技能部分*
 
@@ -118,7 +118,7 @@
 
 +   使用一行式要点展示你的主要成就，使用[以行动为导向的成就陈述](https://careerdevelopment.princeton.edu/sites/careerservices/files/media/resume_guide_2018.pdf)。
 
-+   将类似的要点分组在独特的子标题或类别下。因此，与其在工作经验中写10+点，不如将它们分成4-5点一组。
++   将类似的要点分组在独特的子标题或类别下。因此，与其在工作经验中写 10+点，不如将它们分成 4-5 点一组。
 
 +   用一个[动词](https://careerservices.uni.edu/sites/default/files/docs/resume_verbs.pdf)开头每个要点。
 
@@ -126,7 +126,7 @@
 
 同样，如果你详细描述你的项目/竞赛，请提供关于你贡献、参与者数量等的近似数据。以下是你数据科学简历中专业编排的工作经验部分的快照：
 
-![图示](../Images/4b2e65d9b37ce6f4f50a9447e8c17c20.png)
+![图示](img/4b2e65d9b37ce6f4f50a9447e8c17c20.png)
 
 *数据科学简历中的专业经验部分*
 
@@ -142,7 +142,7 @@
 
 +   在简历标题中写上你的全名。
 
-+   除了基本联系方式外，还要包含你的GitHub/LinkedIn/Kaggle详情。
++   除了基本联系方式外，还要包含你的 GitHub/LinkedIn/Kaggle 详情。
 
 +   如果你是一位有经验的专业人士，请正确地将你最新的职位名称作为个人资料标题。如果你还没有相关的工作经验，可以将个人资料标题简单地标记为“认证数据科学专业人士”。
 
@@ -158,26 +158,26 @@
 
 附注：如果你想深入了解我们讨论的细节，或者想查看一个完整的数据科学简历样本，请查阅[这份详尽的指南](https://www.hiration.com/blog/data-scientist-resume/) [关于数据科学简历](https://www.hiration.com/blog/data-scientist-resume/)。
 
-**简介：[Aditya Sharma](https://www.linkedin.com/in/aditya-sharma/)** 正在致力于帮助全球专业人士获得梦想工作。他对Hiration — 一个由AI驱动的[简历生成器](https://www.hiration.com/)和帮助求职者在严酷的就业市场中找到方向的平台 — 充满热情，他是联合创始人及非正式的首席问题解决官（Chief Problem-solving Officer）。
+**简介：[Aditya Sharma](https://www.linkedin.com/in/aditya-sharma/)** 正在致力于帮助全球专业人士获得梦想工作。他对 Hiration — 一个由 AI 驱动的[简历生成器](https://www.hiration.com/)和帮助求职者在严酷的就业市场中找到方向的平台 — 充满热情，他是联合创始人及非正式的首席问题解决官（Chief Problem-solving Officer）。
 
 **相关：**
 
-+   [我没有被聘用为数据科学家。所以我寻求了关于谁在聘用的数据。](/2019/09/getting-hired-data-scientist-sought-data.html)
++   我没有被聘用为数据科学家。所以我寻求了关于谁在聘用的数据。
 
-+   [数据科学家最受欢迎的技术技能](/2019/12/most-demand-tech-skills-data-scientists.html)
++   数据科学家最受欢迎的技术技能
 
-+   [完整的数据科学LinkedIn个人资料指南](/2019/11/data-science-linkedin-profile-guide.html)
++   完整的数据科学 LinkedIn 个人资料指南
 
 ### 更多相关话题
 
 +   [数据科学简历中的必备要素](https://www.kdnuggets.com/2022/06/musthaves-data-science-resume.html)
 
-+   [学生在数据科学简历中遗漏的7件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
++   [学生在数据科学简历中遗漏的 7 件事](https://www.kdnuggets.com/7-things-students-are-missing-in-a-data-science-resume)
 
-+   [7个机器学习项目提升简历](https://www.kdnuggets.com/2022/09/7-machine-learning-portfolio-projects-boost-resume.html)
++   [7 个机器学习项目提升简历](https://www.kdnuggets.com/2022/09/7-machine-learning-portfolio-projects-boost-resume.html)
 
-+   [7个AI项目提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
++   [7 个 AI 项目提升简历](https://www.kdnuggets.com/7-ai-portfolio-projects-to-boost-the-resume)
 
-+   [KDnuggets 新闻，9月21日：7个机器学习项目…](https://www.kdnuggets.com/2022/n37.html)
++   [KDnuggets 新闻，9 月 21 日：7 个机器学习项目…](https://www.kdnuggets.com/2022/n37.html)
 
 +   [掌握数据宇宙：迈向成功数据科学职业的关键步骤](https://www.kdnuggets.com/mastering-the-data-universe-key-steps-to-a-thriving-data-science-career)

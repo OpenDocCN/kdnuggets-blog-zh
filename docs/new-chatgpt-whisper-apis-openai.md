@@ -1,8 +1,8 @@
 # 来自 OpenAI 的新 ChatGPT 和 Whisper API
 
-> 原文：[https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)
+> 原文：[`www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html`](https://www.kdnuggets.com/2023/03/new-chatgpt-whisper-apis-openai.html)
 
-![来自 OpenAI 的新 ChatGPT 和 Whisper API](../Images/d0c8dc8871d2d215fbdce4adbe5afc0a.png)
+![来自 OpenAI 的新 ChatGPT 和 Whisper API](img/d0c8dc8871d2d215fbdce4adbe5afc0a.png)
 
 作者提供的图片
 
@@ -28,11 +28,11 @@ ChatGPT 可以做的示例包括
 
 如果你想了解更多关于 ChatGPT 的信息，请查看以下文章：
 
-+   [ChatGPT：你需要知道的一切](/2023/01/chatgpt-everything-need-know.html)
++   ChatGPT：你需要知道的一切
 
-+   [ChatGPT 作为 Python 编程助手](/2023/01/chatgpt-python-programming-assistant.html)
++   ChatGPT 作为 Python 编程助手
 
-+   [ChatGPT 备忘单](/2023/01/chatgpt-cheat-sheet.html)
++   ChatGPT 备忘单
 
 ## ChatGPT API
 
@@ -50,7 +50,7 @@ GPT 模型传统上使用非结构化文本，然后将其表示为一系列“�
 
 以下是 OpenAI 的 Whisper 方法的图片：
 
-![来自 OpenAI 的新 ChatGPT 和 Whisper API](../Images/f10d580ef0024311e5829192b3b381b1.png)
+![来自 OpenAI 的新 ChatGPT 和 Whisper API](img/f10d580ef0024311e5829192b3b381b1.png)
 
 来自 [OpenAI GitHub](https://github.com/openai/whisper) 的图片
 
@@ -92,11 +92,11 @@ ChatGPT 和 Whisper API 的推出预计将对开发者社区产生深远的影�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 

@@ -1,8 +1,8 @@
 # 随机森林®，解析
 
-> 原文：[https://www.kdnuggets.com/2017/10/random-forests-explained.html](https://www.kdnuggets.com/2017/10/random-forests-explained.html)
+> 原文：[`www.kdnuggets.com/2017/10/random-forests-explained.html`](https://www.kdnuggets.com/2017/10/random-forests-explained.html)
 
-![](../Images/32bd7c1f79cf7bfb80a751e5590bb162.png)
+![](img/32bd7c1f79cf7bfb80a751e5590bb162.png)
 
 在这篇文章中，我们将概述一种非常流行的集成方法——随机森林（®）。我们首先讨论这种集成学习算法的基本组件——决策树，然后介绍其底层算法和训练程序。我们还将讨论该工具的一些变体和优势，最后提供一些资源，帮助你入门这一强大的工具。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供IT支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
@@ -22,7 +22,7 @@
 
 决策树是一种机器学习算法，能够适应复杂的数据集，并执行分类和回归任务。树的核心思想是在训练集中寻找一对变量-值，并将其拆分，以生成“最佳”的两个子集。目标是基于最佳拆分标准创建分支和叶子，这一过程称为树的生长。具体来说，在每个分支或节点处，一个条件语句会根据特定变量的固定阈值对数据点进行分类，从而实现数据拆分。为了进行预测，每个新实例从根节点（树的顶部）开始，沿着分支移动，直到到达一个叶子节点，此时不再进行进一步的分支。
 
-用于训练树的算法称为CART（®）（分类与回归树）。正如我们之前提到的，算法寻找最佳的特征-值对来创建节点和分支。在每次拆分后，这一任务会递归进行，直到达到树的最大深度或找到一个优化的树。根据任务的不同，算法可能使用不同的度量标准（基尼不纯度、信息增益或均方误差）来衡量拆分的质量。需要提到的是，由于CART算法的贪婪特性，找到一个最优的树并不保证，通常情况下，一个合理的估计就足够了。
+用于训练树的算法称为 CART（®）（分类与回归树）。正如我们之前提到的，算法寻找最佳的特征-值对来创建节点和分支。在每次拆分后，这一任务会递归进行，直到达到树的最大深度或找到一个优化的树。根据任务的不同，算法可能使用不同的度量标准（基尼不纯度、信息增益或均方误差）来衡量拆分的质量。需要提到的是，由于 CART 算法的贪婪特性，找到一个最优的树并不保证，通常情况下，一个合理的估计就足够了。
 
 树有很高的过拟合训练数据的风险，并且如果在生长阶段没有适当约束和正则化，它们可能会变得计算复杂。这种过拟合意味着模型的低偏差、高方差权衡。因此，为了解决这个问题，我们使用集成学习，这种方法可以纠正过度学习的习惯，并希望得到更好、更强的结果。
 
@@ -32,7 +32,7 @@
 
 在我们的例子中，随机森林（强学习者）作为决策树（弱学习者）的集成来执行回归和分类等不同任务。
 
-![](../Images/2b5e97066ca2c2499491ffcb8bd2221c.png)
+![](img/2b5e97066ca2c2499491ffcb8bd2221c.png)
 
 *随机森林是如何训练的？*
 
@@ -54,17 +54,17 @@
 
 *更多信息*
 
-你可以在[这个维基百科文章](https://en.wikipedia.org/wiki/Random_forest)中找到更多关于随机森林的信息。约翰霍普金斯大学Coursera的[实践机器学习](https://www.coursera.org/learn/practical-machine-learning/lecture/XKsl6/random-forests)课程提供了一个直观的方法，并且在R中有应用。对于Python实现，请[跟随这段代码](https://github.com/ageron/handson-ml/blob/master/07_ensemble_learning_and_random_forests.ipynb)，它来自Aurélien Géron的[书籍](https://shop.oreilly.com/product/0636920052289.do)《动手机器学习：Scikit-Learn和TensorFlow》。
+你可以在[这个维基百科文章](https://en.wikipedia.org/wiki/Random_forest)中找到更多关于随机森林的信息。约翰霍普金斯大学 Coursera 的[实践机器学习](https://www.coursera.org/learn/practical-machine-learning/lecture/XKsl6/random-forests)课程提供了一个直观的方法，并且在 R 中有应用。对于 Python 实现，请[跟随这段代码](https://github.com/ageron/handson-ml/blob/master/07_ensemble_learning_and_random_forests.ipynb)，它来自 Aurélien Géron 的[书籍](https://shop.oreilly.com/product/0636920052289.do)《动手机器学习：Scikit-Learn 和 TensorFlow》。
 
-Random Forests™ 是Leo Breiman和Adele Cutler的商标，并被[Salford Systems](https://www.salford-systems.com/products/randomforests)独家授权用于商业软件发布。CART(®) 是加利福尼亚统计软件公司的注册商标，并被[Salford Systems](https://www.salford-systems.com/products/cart)独家授权。
+Random Forests™ 是 Leo Breiman 和 Adele Cutler 的商标，并被[Salford Systems](https://www.salford-systems.com/products/randomforests)独家授权用于商业软件发布。CART(®) 是加利福尼亚统计软件公司的注册商标，并被[Salford Systems](https://www.salford-systems.com/products/cart)独家授权。
 
 *相关内容*
 
-+   [Python中的随机森林](/2016/12/random-forests-python.html)
++   Python 中的随机森林
 
-+   [理解机器学习算法](/2017/10/understanding-machine-learning-algorithms.html)
++   理解机器学习算法
 
-+   [与算法的亲密接触](/2017/03/dataiku-top-algorithms.html)
++   与算法的亲密接触
 
 ### 更多相关话题
 
@@ -72,10 +72,10 @@ Random Forests™ 是Leo Breiman和Adele Cutler的商标，并被[Salford System
 
 +   [停止学习数据科学，寻找目标，并以目标为…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [数据科学学习统计学的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

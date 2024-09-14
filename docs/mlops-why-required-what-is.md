@@ -1,8 +1,8 @@
 # MLOps - “为何需要？” 和 “它是什么？”
 
-> 原文：[https://www.kdnuggets.com/2020/12/mlops-why-required-what-is.html](https://www.kdnuggets.com/2020/12/mlops-why-required-what-is.html)
+> 原文：[`www.kdnuggets.com/2020/12/mlops-why-required-what-is.html`](https://www.kdnuggets.com/2020/12/mlops-why-required-what-is.html)
 
-[评论](#comments)
+评论
 
 **由 [Arnab Bose](https://www.linkedin.com/in/arnab-bose-phd-6369531/)（首席科学官）和 [Aditya Aggarwal](https://www.linkedin.com/in/aditya-agarwal-2395076/)（高级分析实践负责人，Abzooba）**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
 数据科学家构建的机器学习（ML）模型仅占企业生产部署工作流中的一小部分，如下图 1 所示 [[1](http://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems)]。为了将 ML 模型投入运营，数据科学家需要与多个其他团队紧密合作，如业务、工程和运营团队。这在组织层面上代表了沟通、协作和协调方面的挑战。MLOps 的目标是通过成熟的实践来简化这些挑战。此外，MLOps 带来了敏捷性和速度，这在当今数字世界中是基石。
 
-![](../Images/854497bda1c4d99fc84214fc1d3afbaa.png)
+![](img/854497bda1c4d99fc84214fc1d3afbaa.png)
 
 *图 1: 现实世界的机器学习系统仅有一小部分由 ML 代码组成，如图中间的小框所示。所需的外围基础设施广泛且复杂。*
 
@@ -30,9 +30,9 @@
 
 机器学习模型运营化的挑战与软件生产化有很多共同之处，而 DevOps 已经证明了自己在这方面的有效性。
 
-因此，采纳 **DevOps 的最佳实践** 是帮助数据科学家克服软件生产化常见挑战的明智方法。例如，DevOps 提倡的敏捷方法论相比于瀑布方法论，能显著提升效率。表1中列出了 MLOps 中使用的额外 DevOps 实践。​​​​​​​​​​​​​​​​​​​​​
+因此，采纳 **DevOps 的最佳实践** 是帮助数据科学家克服软件生产化常见挑战的明智方法。例如，DevOps 提倡的敏捷方法论相比于瀑布方法论，能显著提升效率。表 1 中列出了 MLOps 中使用的额外 DevOps 实践。​​​​​​​​​​​​​​​​​​​​​
 
-**表1: MLOps 利用 DevOps。**
+**表 1: MLOps 利用 DevOps。**
 
 | **机器学习模型运营化挑战** | **来自 DevOps 的解决方案** |
 | --- | --- |
@@ -45,7 +45,7 @@
 
 这种挑战的一个例子是数据的角色。在传统的软件工程（即软件 1.0）中，开发者编写逻辑和规则（作为代码），这些逻辑和规则在程序空间中定义明确，如图 2 所示 [[2](https://medium.com/%40karpathy/software-2-0-a64152b37c35)]。然而，在机器学习（即软件 2.0）中，数据科学家编写代码来定义如何使用参数解决业务问题。参数值是通过数据（如梯度下降技术）找到的。这些值可能会随着数据的不同版本而改变，从而改变代码的行为。换句话说，数据在定义输出时与编写的代码同样重要，并且二者可以独立变化。这为软件中需要定义和跟踪的模型代码增加了一层数据复杂性。
 
-![](../Images/362338fccf7567fe9714262db57bdf37.png)
+![](img/362338fccf7567fe9714262db57bdf37.png)
 
 *图 2：软件 1.0 与软件 2.0。*
 
@@ -64,31 +64,31 @@
 
 ### MLOps 组件
 
-​​​​​​​根据MLOps的背景及其与DevOps的相似性和差异，以下描述了MLOps框架的不同组件，如图3所示。其底层工作流程通过敏捷方法论，如第2节所示。
+​​​​​​​根据 MLOps 的背景及其与 DevOps 的相似性和差异，以下描述了 MLOps 框架的不同组件，如图 3 所示。其底层工作流程通过敏捷方法论，如第二部分所示。
 
-![](../Images/7a116b4a1223b7bcbbccbfbe62898272.png)
+![](img/7a116b4a1223b7bcbbccbfbe62898272.png)
 
-*图3：MLOps框架。*
+*图 3：MLOps 框架。*
 
-1.  **用例发现：** 这一阶段涉及业务和数据科学家之间的协作，以定义业务问题，并将其转化为通过ML解决的问题陈述和目标，以及相关的KPI（关键绩效指标）。
+1.  **用例发现：** 这一阶段涉及业务和数据科学家之间的协作，以定义业务问题，并将其转化为通过 ML 解决的问题陈述和目标，以及相关的 KPI（关键绩效指标）。
 
 1.  ​​​​**数据工程：** 这一阶段涉及数据工程师和数据科学家之间的合作，以从各种来源获取数据，并为建模准备数据（处理/验证）。
 
-1.  ​​​​​​​**机器学习管道：** 这一阶段设计和部署一个与CI/CD集成的管道。数据科学家使用管道进行多次实验和测试。平台跟踪数据和模型的谱系以及实验中的相关KPI。
+1.  ​​​​​​​**机器学习管道：** 这一阶段设计和部署一个与 CI/CD 集成的管道。数据科学家使用管道进行多次实验和测试。平台跟踪数据和模型的谱系以及实验中的相关 KPI。
 
 1.  **生产部署：** 这一阶段涉及将系统安全无缝地部署到选择的生产服务器中，无论是公共云、本地服务器还是混合模式。
 
-1.  **生产监控：** 这一阶段包括模型和基础设施的监控。使用配置的KPI（如输入数据分布的变化或模型性能的变化）对模型进行持续监控。为更多的实验设置触发器，涉及新算法、新数据和超参数，这些会生成新版本的ML管道。基础设施根据内存和计算需求进行监控，并在需要时进行扩展。
+1.  **生产监控：** 这一阶段包括模型和基础设施的监控。使用配置的 KPI（如输入数据分布的变化或模型性能的变化）对模型进行持续监控。为更多的实验设置触发器，涉及新算法、新数据和超参数，这些会生成新版本的 ML 管道。基础设施根据内存和计算需求进行监控，并在需要时进行扩展。
 
 ​​​​​
 
 **参考文献**
 
-1.  Sculley, G. Holt, D. Golovin, E. Davydov, T. Phillips, D. Ebner, V. Chaudhary, M. Young, J. Crespo, 和 D. Dennison, “机器学习系统中的隐性技术债务”，在《神经信息处理系统进展28：神经信息处理系统年会2015》，2015年12月7-12日，加拿大蒙特利尔，2015年，页2503–2511。 [在线] 可用： [http://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems](http://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems)
+1.  Sculley, G. Holt, D. Golovin, E. Davydov, T. Phillips, D. Ebner, V. Chaudhary, M. Young, J. Crespo, 和 D. Dennison, “机器学习系统中的隐性技术债务”，在《神经信息处理系统进展 28：神经信息处理系统年会 2015》，2015 年 12 月 7-12 日，加拿大蒙特利尔，2015 年，页 2503–2511。 [在线] 可用： [`papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems`](http://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems)
 
-1.  ​​​​​​​ Karpathy, "软件2.0", 2017年11月12日 [在线] 可用： [https://medium.com/@karpathy/software-2-0-a64152b37c35](https://medium.com/%40karpathy/software-2-0-a64152b37c35)
+1.  ​​​​​​​ Karpathy, "软件 2.0", 2017 年 11 月 12 日 [在线] 可用： [`medium.com/@karpathy/software-2-0-a64152b37c35`](https://medium.com/%40karpathy/software-2-0-a64152b37c35)
 
-1.  Breck, M. Zinkevich, N. Polyzotis, S. Whang 和 S. Roy, "机器学习的数据验证"，在《第2届SysML会议论文集》，美国加州帕洛阿尔托，2019年。可用： [https://mlsys.org/Conferences/2019/doc/2019/167.pdf](https://mlsys.org/Conferences/2019/doc/2019/167.pdf)
+1.  Breck, M. Zinkevich, N. Polyzotis, S. Whang 和 S. Roy, "机器学习的数据验证"，在《第 2 届 SysML 会议论文集》，美国加州帕洛阿尔托，2019 年。可用： [`mlsys.org/Conferences/2019/doc/2019/167.pdf`](https://mlsys.org/Conferences/2019/doc/2019/167.pdf)
 
 **简历：** [Dr. Arnab Bose](https://www.linkedin.com/in/arnab-bose-phd-6369531/) 是 Abzooba 的首席科学官，并且是芝加哥大学的兼职教授，教授机器学习与预测分析、机器学习操作、时间序列分析与预测以及健康分析。他是一位拥有 20 年预测分析行业经验的资深专家，喜欢利用结构化和非结构化数据预测和影响医疗保健、零售、金融和交通领域的行为结果。他目前的关注领域包括使用机器学习进行健康风险分层和慢性病管理，以及机器学习模型的生产部署和监控。
 

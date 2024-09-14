@@ -1,36 +1,36 @@
-# 使用Numpy矩阵：一个便捷的初学者参考
+# 使用 Numpy 矩阵：一个便捷的初学者参考
 
-> 原文：[https://www.kdnuggets.com/2017/03/working-numpy-matrices.html](https://www.kdnuggets.com/2017/03/working-numpy-matrices.html)
+> 原文：[`www.kdnuggets.com/2017/03/working-numpy-matrices.html`](https://www.kdnuggets.com/2017/03/working-numpy-matrices.html)
 
 **作者：Ieva Zarina，Nordigen 软件开发工程师。**
 
-在我开始处理自然语言处理时，我使用了默认的Python列表。但随着实验规模的扩大和数据量的增加，我很快就耗尽了内存。Python列表在内存空间上不是优化的，因此转向了 [Numpy](http://www.numpy.org/)。
+在我开始处理自然语言处理时，我使用了默认的 Python 列表。但随着实验规模的扩大和数据量的增加，我很快就耗尽了内存。Python 列表在内存空间上不是优化的，因此转向了 [Numpy](http://www.numpy.org/)。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-![Numpy](../Images/d021f4f813085ed85b4cb6a6984b9721.png)
+![Numpy](img/d021f4f813085ed85b4cb6a6984b9721.png)
 
-Numpy是Python科学生态系统中*事实上的*ndarray工具。
+Numpy 是 Python 科学生态系统中*事实上的*ndarray 工具。
 
-Numpy数组很像C中的数组 – 通常你会先创建所需大小的数组，然后填充它。不推荐进行合并、附加，因为Numpy会创建一个与被合并数组相同大小的空数组，然后将内容复制到其中。
+Numpy 数组很像 C 中的数组 – 通常你会先创建所需大小的数组，然后填充它。不推荐进行合并、附加，因为 Numpy 会创建一个与被合并数组相同大小的空数组，然后将内容复制到其中。
 
-下面是一些可以操作Numpy数组（[ndarray](http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html)）的方法：
+下面是一些可以操作 Numpy 数组（[ndarray](http://docs.scipy.org/doc/numpy/reference/generated/numpy.ndarray.html)）的方法：
 
-### 创建ndarray
+### 创建 ndarray
 
-创建Numpy矩阵的一些方法是：
+创建 Numpy 矩阵的一些方法是：
 
-+   **从Python列表转换**使用 [numpy.asarray()](http://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.asarray.html)：
++   **从 Python 列表转换**使用 [numpy.asarray()](http://docs.scipy.org/doc/numpy-1.10.1/reference/generated/numpy.asarray.html)：
 
 ```py
 import numpy as np
@@ -40,7 +40,7 @@ c = np.asarray(list)
 
 ```
 
-+   **创建一个大小为**所需的ndarray，并填充为1、0或随机值：
++   **创建一个大小为**所需的 ndarray，并填充为 1、0 或随机值：
 
 ```py
 # Array items as ndarray 
@@ -96,7 +96,7 @@ x = a[:,1:3] # select cols from 2nd col until 3rd
 
 ### 合并数组
 
-不建议合并Numpy数组，因为Numpy会在内部创建一个大的空数组，然后将内容复制进去。最好是在一开始就创建所需大小的数组，然后直接填充。然而，有时候你无法避免合并。在这种情况下，Numpy提供了一些**内置函数：**
+不建议合并 Numpy 数组，因为 Numpy 会在内部创建一个大的空数组，然后将内容复制进去。最好是在一开始就创建所需大小的数组，然后直接填充。然而，有时候你无法避免合并。在这种情况下，Numpy 提供了一些**内置函数：**
 
 **[连接](http://docs.scipy.org/doc/numpy/reference/generated/numpy.concatenate.html)**
 
@@ -304,11 +304,11 @@ svm_loaded[1] # labels at index 1
 
 **相关：**
 
-+   [掌握 Python 机器学习的 7 个额外步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个额外步骤
 
-+   [K-Means & 其他聚类算法：Python 快速入门](/2017/03/k-means-clustering-algorithms-intro-python.html)
++   K-Means & 其他聚类算法：Python 快速入门
 
-+   [使用 Iris 数据集的简单 XGBoost 教程](/2017/03/simple-xgboost-tutorial-iris-dataset.html)
++   使用 Iris 数据集的简单 XGBoost 教程
 
 ### 更多相关话题
 
@@ -320,6 +320,6 @@ svm_loaded[1] # labels at index 1
 
 +   [让深度学习在实际环境中发挥作用：一个以数据为中心的课程](https://www.kdnuggets.com/2022/04/corise-deep-learning-wild-data-centric-course.html)
 
-+   [远程工作的数据科学家需要的6种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
++   [远程工作的数据科学家需要的 6 种软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
 
 +   [让深度学习在实际环境中发挥作用：一个以数据为中心的课程](https://www.kdnuggets.com/2022/11/corise-deep-learning-wild-data-centric-course.html)

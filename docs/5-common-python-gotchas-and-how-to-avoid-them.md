@@ -1,8 +1,8 @@
 # 5 个常见的 Python 陷阱（以及如何避免它们）
 
-> 原文：[https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
+> 原文：[`www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them`](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
 
-![5 个常见的 Python 陷阱（以及如何避免它们）](../Images/0dd7eeede41f544136175d06e3de1e51.png)
+![5 个常见的 Python 陷阱（以及如何避免它们）](img/0dd7eeede41f544136175d06e3de1e51.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@ Python 是一种对初学者友好且多才多艺的编程语言，以其简洁�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -82,7 +82,7 @@ def add_to_cart(item, cart=None):
 
 所以每个用户现在都有一个单独的购物车。🙂
 
-如果你需要复习 Python 函数和函数参数，可以阅读 [Python 函数参数：终极指南](/2023/02/python-function-arguments-definitive-guide.html)。
+如果你需要复习 Python 函数和函数参数，可以阅读 Python 函数参数：终极指南。
 
 # 2\. 循环和推导式中的变量作用域
 
@@ -293,7 +293,7 @@ Deep Copy: [[100, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 哦，如果你想读这个教程的续集，请在评论中告诉我们。
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她通过编写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编程教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她通过编写教程、操作指南、观点文章等方式，学习并与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编程教程。
 
 ### 更多相关话题
 
@@ -305,6 +305,6 @@ Deep Copy: [[100, 2, 3], [4, 5, 6], [7, 8, 9]]
 
 +   [10 个最常见的数据质量问题及如何解决](https://www.kdnuggets.com/2022/11/10-common-data-quality-issues-fix.html)
 
-+   [KDnuggets 新闻，8月24日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)
++   [KDnuggets 新闻，8 月 24 日：在 Python 中实现 DBSCAN • 如何…](https://www.kdnuggets.com/2022/n34.html)
 
 +   [常见数据问题（及解决方案）](https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html)

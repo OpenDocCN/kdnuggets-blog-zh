@@ -1,8 +1,8 @@
 # 假设检验解释
 
-> 原文：[https://www.kdnuggets.com/2021/09/hypothesis-testing-explained.html](https://www.kdnuggets.com/2021/09/hypothesis-testing-explained.html)
+> 原文：[`www.kdnuggets.com/2021/09/hypothesis-testing-explained.html`](https://www.kdnuggets.com/2021/09/hypothesis-testing-explained.html)
 
-![假设检验](../Images/d53a562e56b3f5acb08053d17b42cec1.png)
+![假设检验](img/d53a562e56b3f5acb08053d17b42cec1.png)
 
 # 什么是假设检验？
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
@@ -34,13 +34,13 @@
 
 以下表格总结了第一类和第二类错误：
 
-![](../Images/cb762a8fb1bd225fa86977b2c7aaa571.png)
+![](img/cb762a8fb1bd225fa86977b2c7aaa571.png)
 
 # 假设检验的类型
 
 假设检验可以分为两个大类 [2]：
 
-+   **参数检验**，如果样本符合正态分布。一般来说，如果样本的均值为0，方差为1，则样本符合正态分布。
++   **参数检验**，如果样本符合正态分布。一般来说，如果样本的均值为 0，方差为 1，则样本符合正态分布。
 
 +   **非参数检验**，如果样本不符合正态分布。
 
@@ -58,31 +58,31 @@
 
 如前所述，参数检验假设数据呈正态分布。下表描述了一些最受欢迎的参数检验及其测量内容。
 
-![](../Images/70b53c2cffdaebd66d2f7d550540001d.png)
+![](img/70b53c2cffdaebd66d2f7d550540001d.png)
 
 ## 非参数检验
 
-非参数检验不对数据分布做任何假设。下表描述了一些最受欢迎的非参数检验及其测量内容。![](../Images/96d0f823fa0d686f8db72c36f80c970d.png)
+非参数检验不对数据分布做任何假设。下表描述了一些最受欢迎的非参数检验及其测量内容。![](img/96d0f823fa0d686f8db72c36f80c970d.png)
 
 # 摘要
 
 在这篇简短的文章中，我描述了假设检验的概念，以及最受欢迎的检验及其使用场景。
 
-对于那些仍然难以理解假设检验的人，有一个名为easy-ht的Python库 [6]，它可以在无需统计学知识的情况下运行主要的假设检验。关于如何使用*easy-ht*的教程可以在[此链接](https://alod83.altervista.org/)找到。
+对于那些仍然难以理解假设检验的人，有一个名为 easy-ht 的 Python 库 [6]，它可以在无需统计学知识的情况下运行主要的假设检验。关于如何使用*easy-ht*的教程可以在[此链接](https://alod83.altervista.org/)找到。
 
 ## 参考文献
 
-[1] 统计假设检验概述 [https://statisticsbyjim.com/hypothesis-testing/statistical-hypothesis-testing-overview/](https://statisticsbyjim.com/hypothesis-testing/statistical-hypothesis-testing-overview/)
+[1] 统计假设检验概述 [`statisticsbyjim.com/hypothesis-testing/statistical-hypothesis-testing-overview/`](https://statisticsbyjim.com/hypothesis-testing/statistical-hypothesis-testing-overview/)
 
-[2] 参数统计与非参数统计的区别是什么？ [https://sourceessay.com/what-is-the-difference-between-parametric-and-non-parametric-statistics/](https://sourceessay.com/what-is-the-difference-between-parametric-and-non-parametric-statistics/)
+[2] 参数统计与非参数统计的区别是什么？ [`sourceessay.com/what-is-the-difference-between-parametric-and-non-parametric-statistics/`](https://sourceessay.com/what-is-the-difference-between-parametric-and-non-parametric-statistics/)
 
-[3] 你应该使用哪个统计检验？ [https://help.xlstat.com/s/article/which-statistical-test-should-you-use?language=en_US](https://help.xlstat.com/s/article/which-statistical-test-should-you-use?language=en_US)
+[3] 你应该使用哪个统计检验？ [`help.xlstat.com/s/article/which-statistical-test-should-you-use?language=en_US`](https://help.xlstat.com/s/article/which-statistical-test-should-you-use?language=en_US)
 
-[4] Kolmogorov–Smirnov检验 [https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)
+[4] Kolmogorov–Smirnov 检验 [`en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test`](https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test)
 
-[5] Wilcoxon检验 [https://www.investopedia.com/terms/w/wilcoxon-test.asp](https://www.investopedia.com/terms/w/wilcoxon-test.asp)
+[5] Wilcoxon 检验 [`www.investopedia.com/terms/w/wilcoxon-test.asp`](https://www.investopedia.com/terms/w/wilcoxon-test.asp)
 
-[6] easy-ht [https://pypi.org/project/easy-ht/](https://pypi.org/project/easy-ht/)
+[6] easy-ht [`pypi.org/project/easy-ht/`](https://pypi.org/project/easy-ht/)
 
 **[安杰利卡·洛·杜卡](https://alod83.altervista.org/)** ([Medium](https://alod83.medium.com/)) (@alod83) 在意大利比萨的国家研究委员会（IIT-CNR）信息学与电信研究所担任博士后研究员。她是比萨大学数字人文学科硕士课程中的“数据新闻学”教授。她的研究兴趣包括数据科学、数据分析、文本分析、开放数据、网络应用和数据新闻，应用于社会、旅游和文化遗产。她曾从事数据安全、语义网和链接数据方面的工作。安杰利卡还是一位热情的技术作家。
 

@@ -1,26 +1,26 @@
 # 成为数据科学“独角兽”的六个商业概念
 
-> 原文：[https://www.kdnuggets.com/2017/03/6-business-concepts-data-science-unicorn.html](https://www.kdnuggets.com/2017/03/6-business-concepts-data-science-unicorn.html)
+> 原文：[`www.kdnuggets.com/2017/03/6-business-concepts-data-science-unicorn.html`](https://www.kdnuggets.com/2017/03/6-business-concepts-data-science-unicorn.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
-![独角兽数据科学家](../Images/b5d95968c8431ae21ec71cdaeecb2da7.png)在中世纪，独角兽是一个稀有的神秘生物，具有强大的力量。在今天的世界里，类似的神秘生物就是数据科学独角兽，能够同样精通技术、数据科学和业务。这种专业人士是任何数据科学团队中最宝贵的资源。许多数据专业人士在前两个领域——技术和数据科学上是专家，但缺乏业务/领域技能。
+![独角兽数据科学家](img/b5d95968c8431ae21ec71cdaeecb2da7.png)在中世纪，独角兽是一个稀有的神秘生物，具有强大的力量。在今天的世界里，类似的神秘生物就是数据科学独角兽，能够同样精通技术、数据科学和业务。这种专业人士是任何数据科学团队中最宝贵的资源。许多数据专业人士在前两个领域——技术和数据科学上是专家，但缺乏业务/领域技能。
 
-数据科学项目不仅仅是关于ETL和构建模型，更在于理解业务及其战略问题，提出正确的问题，并利用技术和数据科学来解决这些问题。对业务及其问题的理解不清可能会使数据科学/分析项目以及整个业务战略陷入困境。典型的分析团队包括业务/数据分析师（他们了解业务，定义业务问题，并从业务角度解释数据科学结果）、数据科学家（数据科学专家）和数据工程师（技术专家，开发者，测试者和管理员）。
+数据科学项目不仅仅是关于 ETL 和构建模型，更在于理解业务及其战略问题，提出正确的问题，并利用技术和数据科学来解决这些问题。对业务及其问题的理解不清可能会使数据科学/分析项目以及整个业务战略陷入困境。典型的分析团队包括业务/数据分析师（他们了解业务，定义业务问题，并从业务角度解释数据科学结果）、数据科学家（数据科学专家）和数据工程师（技术专家，开发者，测试者和管理员）。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
-尽管这三种专家在同一个团队中，但在整合他们的专业知识后，可能存在正确理解问题或解释结果的差距。因此，理想的角色是了解所有三个领域的人，帮助团队更好地理解业务及其问题，寻找创新解决方案，并以正确的方式解释结果，为业务创造价值。这个博客概述了数据科学的商业方面，特别适合那些希望提升分析职业生涯并成为“独角兽”的技术和数据科学专业人士。![数据驱动的业务](../Images/63e5d1d5a8f76ddda31677b87692e7c4.png)
+尽管这三种专家在同一个团队中，但在整合他们的专业知识后，可能存在正确理解问题或解释结果的差距。因此，理想的角色是了解所有三个领域的人，帮助团队更好地理解业务及其问题，寻找创新解决方案，并以正确的方式解释结果，为业务创造价值。这个博客概述了数据科学的商业方面，特别适合那些希望提升分析职业生涯并成为“独角兽”的技术和数据科学专业人士。![数据驱动的业务](img/63e5d1d5a8f76ddda31677b87692e7c4.png)
 
 要理解当今以数据/分析驱动的业务，以下概念非常重要：
 
@@ -68,7 +68,7 @@
 
 +   [什么是商业智能？](https://www.youtube.com/watch?v=LFnewuBsYiY)
 
-4. “[关键绩效指标（KPIs）](https://www.ap-institute.com/what-is-a-key-performance-indicator)帮助我们衡量公司、业务单元、项目或个人相对于其战略目标和目的的表现。设计良好的KPIs提供了至关重要的导航工具，让我们清晰了解当前的绩效水平。” – www.ap-institute.com
+4. “[关键绩效指标（KPIs）](https://www.ap-institute.com/what-is-a-key-performance-indicator)帮助我们衡量公司、业务单元、项目或个人相对于其战略目标和目的的表现。设计良好的 KPIs 提供了至关重要的导航工具，让我们清晰了解当前的绩效水平。” – www.ap-institute.com
 
 视频：
 
@@ -80,7 +80,7 @@
 
 5. [管理信息报告](https://www.reference.com/business-finance/mi-reporting-28e8e9807061317b)，是“一种沟通方法，允许业务经理向受众传达思想和概念，了解市场趋势，并确保高效的业务运作。” – reference.com
 
-由于管理报告帮助业务高管做出明智决策，因此有效且视觉化地呈现组织信息变得非常重要。在今天的IT支持企业中，BI仪表板和报告工具是非常受欢迎的管理报告方式。 [商业管理报告示例](http://yourbusiness.azcentral.com/examples-business-management-reports-12395.html)
+由于管理报告帮助业务高管做出明智决策，因此有效且视觉化地呈现组织信息变得非常重要。在今天的 IT 支持企业中，BI 仪表板和报告工具是非常受欢迎的管理报告方式。 [商业管理报告示例](http://yourbusiness.azcentral.com/examples-business-management-reports-12395.html)
 
 6\. “战略决策是由高级管理层做出的长期复杂决策。这些决策将影响整个公司的方向。一个例子可能是成为该领域的市场领导者。
 
@@ -94,13 +94,13 @@
 
 +   [战略决策制定](https://www.youtube.com/watch?v=quQuZy6mh_8)
 
-以下是Bernard Marr的影片列表——一位著名的大数据、分析和企业绩效的作者、演讲者和顾问，解释了关于商业、大数据和分析的更多细节：
+以下是 Bernard Marr 的影片列表——一位著名的大数据、分析和企业绩效的作者、演讲者和顾问，解释了关于商业、大数据和分析的更多细节：
 
 1.  [智能公司（Bernard Marr）](https://www.youtube.com/watch?v=_kpEkr9_RDU&list=PL0F4D46A0E6D4F3F8&index=10)
 
-1.  [通过EPM、BI和分析做出更好的决策](https://www.youtube.com/watch?v=P8mpzAsV2hw&list=PL0F4D46A0E6D4F3F8&index=4)
+1.  [通过 EPM、BI 和分析做出更好的决策](https://www.youtube.com/watch?v=P8mpzAsV2hw&list=PL0F4D46A0E6D4F3F8&index=4)
 
-1.  [构建智能PM系统](https://www.youtube.com/watch?v=Cqwsw7SlPa0&list=PL0F4D46A0E6D4F3F8&index=5)
+1.  [构建智能 PM 系统](https://www.youtube.com/watch?v=Cqwsw7SlPa0&list=PL0F4D46A0E6D4F3F8&index=5)
 
 1.  [未来价值驱动因素 – 使用五步过程利用你的无形资产](https://www.youtube.com/watch?v=1Bh0uZT22f8&list=PL0F4D46A0E6D4F3F8&index=14)
 
@@ -118,22 +118,22 @@
 
 **相关：**
 
-+   [数据科学的幻觉](/2016/11/data-science-delusion.html)
++   数据科学的幻觉
 
-+   [数据科学技能与商业问题](/2014/06/data-science-skills-business-problems.html)
++   数据科学技能与商业问题
 
-+   [访谈：Kenneth Viciana，Equifax关于数据湖及其他洞察文化策略](/2015/03/interview-kenneth-viciana-equifax-data-lake.html)
++   访谈：Kenneth Viciana，Equifax 关于数据湖及其他洞察文化策略
 
 ### 更多相关话题
 
-+   [成为一名出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)

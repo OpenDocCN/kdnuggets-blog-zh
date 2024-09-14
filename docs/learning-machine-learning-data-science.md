@@ -1,28 +1,28 @@
 # 学习机器学习 vs 学习数据科学
 
-> 原文：[https://www.kdnuggets.com/2018/12/learning-machine-learning-data-science.html](https://www.kdnuggets.com/2018/12/learning-machine-learning-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/12/learning-machine-learning-data-science.html`](https://www.kdnuggets.com/2018/12/learning-machine-learning-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Terran Melconian](http://www.terran.us/)，企业家和顾问，以及 [Trevor Bass](http://trevorbass.com/)，edX**
 
-![社交媒体信息过载](../Images/8147600ea5351fb122c271cc67fa06e3.png)
+![社交媒体信息过载](img/8147600ea5351fb122c271cc67fa06e3.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
 **图片由 [Intersection Consulting](https://www.flickr.com/photos/intersectionconsulting/7537238368) 提供**
 
-当你想到“数据科学”和“机器学习”时，这两个术语是否混淆在一起，如同Currier和Ives或Sturm和Drang？如果是这样，你来对地方了。本文将澄清两者之间的一些重要且常被忽视的区别，帮助你更好地专注于学习和招聘。
+当你想到“数据科学”和“机器学习”时，这两个术语是否混淆在一起，如同 Currier 和 Ives 或 Sturm 和 Drang？如果是这样，你来对地方了。本文将澄清两者之间的一些重要且常被忽视的区别，帮助你更好地专注于学习和招聘。
 
 ### **机器学习与数据科学的比较**
 
@@ -38,7 +38,7 @@
 
 +   与不同利益相关者沟通
 
-这些职能的需求促成了数据科学作为一个领域的认知。[哈佛商业评论告诉我们](https://hbr.org/2018/08/what-data-scientists-really-do-according-to-35-data-scientists)，“数据科学家的关键技能不是构建和使用深度学习基础设施的能力。而是学习能力和良好的沟通能力，以回答商业问题，将复杂的结果向非技术相关者解释清楚。” [其他作者同意](https://www.safaribooksonline.com/library/view/analyzing-the-analyzers/9781449368388/ch04.html)：“我们认为数据科学家的一个定义特征是其技能的广度——他们能够单独完成所有需要的步骤，至少是原型级别的，以获取新见解或构建数据产品。” [另一篇HBR文章](https://hbr.org/2018/03/getting-value-from-machine-learning-isnt-about-fancier-algorithms-its-about-making-it-easier-to-use)确认，“从机器学习中获得价值并不是关于更复杂的算法——而是让它更易于使用……大多数公司面临的差距不是机器学习不起作用，而是他们难以实际使用它。”
+这些职能的需求促成了数据科学作为一个领域的认知。[哈佛商业评论告诉我们](https://hbr.org/2018/08/what-data-scientists-really-do-according-to-35-data-scientists)，“数据科学家的关键技能不是构建和使用深度学习基础设施的能力。而是学习能力和良好的沟通能力，以回答商业问题，将复杂的结果向非技术相关者解释清楚。” [其他作者同意](https://www.safaribooksonline.com/library/view/analyzing-the-analyzers/9781449368388/ch04.html)：“我们认为数据科学家的一个定义特征是其技能的广度——他们能够单独完成所有需要的步骤，至少是原型级别的，以获取新见解或构建数据产品。” [另一篇 HBR 文章](https://hbr.org/2018/03/getting-value-from-machine-learning-isnt-about-fancier-algorithms-its-about-making-it-easier-to-use)确认，“从机器学习中获得价值并不是关于更复杂的算法——而是让它更易于使用……大多数公司面临的差距不是机器学习不起作用，而是他们难以实际使用它。”
 
 机器学习是数据科学家的一项重要技能，但它只是其中之一。将机器学习视为数据科学的全部，就如同将会计视为运营一个盈利公司的全部。此外，数据科学中的技能差距主要体现在与机器学习互补的领域——商业敏感性、统计学、问题框架和沟通能力。
 
@@ -86,11 +86,11 @@
 
 ### 更多相关主题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学，找到目标，然后找到目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

@@ -1,8 +1,8 @@
 # 如何优化 Dockerfile 指令以加快构建时间
 
-> 原文：[https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)
+> 原文：[`www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times`](https://www.kdnuggets.com/how-to-optimize-dockerfile-instructions-for-faster-build-times)
 
-![如何优化 Dockerfile 指令以加快构建时间](../Images/6482b856bf98e0dd989cc253f576f91b.png)
+![如何优化 Dockerfile 指令以加快构建时间](img/6482b856bf98e0dd989cc253f576f91b.png)
 
 编辑者提供的图像 | Midjourney & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

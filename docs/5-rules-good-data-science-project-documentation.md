@@ -1,8 +1,8 @@
-# 良好的数据科学项目文档的5条规则
+# 良好的数据科学项目文档的 5 条规则
 
-> 原文：[https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)
+> 原文：[`www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html`](https://www.kdnuggets.com/2022/12/5-rules-good-data-science-project-documentation.html)
 
-![良好的数据科学项目文档的5条规则](../Images/a75cb618c0d6df2db54bb9cca3764126.png)
+![良好的数据科学项目文档的 5 条规则](img/a75cb618c0d6df2db54bb9cca3764126.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -76,13 +76,13 @@
 
 如今，编写强健的代码已不再是唯一要求；为了证明你的能力和你对项目及领域的熟悉程度，你需要提供撰写良好的文档，突出说明你的代码如何工作以及如何使用。
 
-产生优质文档取决于许多因素；在这篇文章中，我们探讨了5个部分，如果包含这些部分，将为你的文档增加价值，并使其尽可能有用。
+产生优质文档取决于许多因素；在这篇文章中，我们探讨了 5 个部分，如果包含这些部分，将为你的文档增加价值，并使其尽可能有用。
 
 你可能认为“良好的文档”这个术语非常模糊，并且因人而异。例如，我可能会认为某些文档很好且有用，而你可能认为正好相反。如果我们不能设定严格的规则来定义什么是好的文档，*我们如何决定文档是否好？*
 
 简单的答案就是反馈。大多数现代文档通常包含一个“*请给我们反馈*”的部分。用户可以联系程序员，报告文档中的遗漏或不准确的信息，以便使其更加完善和有用。
 
-**[Sara Metwalli](https://www.linkedin.com/in/sara-a-metwalli/)** 是庆应义塾大学的博士候选人，研究测试和调试量子电路的方法。我是IBM的研究实习生和Qiskit倡导者，致力于构建一个更加量子化的未来。我还是Medium、Built-in、She Can Code和KDN上的文章作者，撰写关于编程、数据科学和技术主题的文章。我也是Woman Who Code Python国际章的负责人，火车爱好者、旅行者和摄影爱好者。
+**[Sara Metwalli](https://www.linkedin.com/in/sara-a-metwalli/)** 是庆应义塾大学的博士候选人，研究测试和调试量子电路的方法。我是 IBM 的研究实习生和 Qiskit 倡导者，致力于构建一个更加量子化的未来。我还是 Medium、Built-in、She Can Code 和 KDN 上的文章作者，撰写关于编程、数据科学和技术主题的文章。我也是 Woman Who Code Python 国际章的负责人，火车爱好者、旅行者和摄影爱好者。
 
 ### 更多相关主题
 
@@ -96,4 +96,4 @@
 
 +   [机器学习不像你的大脑 第七部分：神经元](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-seven-neurons-good.html)
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)

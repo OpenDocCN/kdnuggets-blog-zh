@@ -1,14 +1,14 @@
 # 简单而实用的数据清洗代码
 
-> 原文：[https://www.kdnuggets.com/2019/02/simple-yet-practical-data-cleaning-codes.html](https://www.kdnuggets.com/2019/02/simple-yet-practical-data-cleaning-codes.html)
+> 原文：[`www.kdnuggets.com/2019/02/simple-yet-practical-data-cleaning-codes.html`](https://www.kdnuggets.com/2019/02/simple-yet-practical-data-cleaning-codes.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Admond Lee](https://www.linkedin.com/in/admond1994/)，美光科技 / AI Time Journal / Tech in Asia**
 
-![](../Images/fed5bafb8bf3f9637902354cf7d045e3.png)
+![](img/fed5bafb8bf3f9637902354cf7d045e3.png)
 
-在我的一篇文章—[我的第一次数据科学家实习](https://towardsdatascience.com/my-first-data-scientist-internship-7f7aa2ee4040)中，我谈到了数据清洗（数据预处理、数据清理……无论它是什么）是多么重要，以及它如何轻易占据整个数据科学工作流程的40%-70%。世界是不完美的，数据也是如此。
+在我的一篇文章—[我的第一次数据科学家实习](https://towardsdatascience.com/my-first-data-scientist-internship-7f7aa2ee4040)中，我谈到了数据清洗（数据预处理、数据清理……无论它是什么）是多么重要，以及它如何轻易占据整个数据科学工作流程的 40%-70%。世界是不完美的，数据也是如此。
 
 ***垃圾进，垃圾出***
 
@@ -24,13 +24,13 @@
 
 ### 为什么这篇文章对你很重要？
 
-![first-post-on-linkedin](../Images/c0e2ed09dc70451ba63092b0223c47dd.png)[我最近在LinkedIn上的帖子](https://www.linkedin.com/feed/update/urn:li:activity:6486373885376851968)
+![first-post-on-linkedin](img/c0e2ed09dc70451ba63092b0223c47dd.png)[我最近在 LinkedIn 上的帖子](https://www.linkedin.com/feed/update/urn:li:activity:6486373885376851968)
 
-一周前，我在LinkedIn上发布了帖子，询问和回答了一些有抱负的数据科学家和数据科学专业人士面临的关于数据科学的热门问题。
+一周前，我在 LinkedIn 上发布了帖子，询问和回答了一些有抱负的数据科学家和数据科学专业人士面临的关于数据科学的热门问题。
 
-*如果你一直关注我的工作，[我正在致力于在LinkedIn上民主化分享学习环境](https://www.linkedin.com/pulse/2018-year-turning-point-my-life-kin-lim-lee/)，特别关注数据科学，通过在LinkedIn上发起讨论，汇聚有抱负的数据科学家、数据科学家及其他不同专业和背景的数据专业人士。如果你想参与这些关于数据科学的有趣话题讨论，可以随时关注我在[LinkedIn](https://www.linkedin.com/in/admond1994/)。你会惊讶于数据科学社区的参与性和支持性。]* *????*
+*如果你一直关注我的工作，[我正在致力于在 LinkedIn 上民主化分享学习环境](https://www.linkedin.com/pulse/2018-year-turning-point-my-life-kin-lim-lee/)，特别关注数据科学，通过在 LinkedIn 上发起讨论，汇聚有抱负的数据科学家、数据科学家及其他不同专业和背景的数据专业人士。如果你想参与这些关于数据科学的有趣话题讨论，可以随时关注我在[LinkedIn](https://www.linkedin.com/in/admond1994/)。你会惊讶于数据科学社区的参与性和支持性。]* *????*
 
-![](../Images/00d09f37cbe02734f5961cf97ed3448b.png)
+![](img/00d09f37cbe02734f5961cf97ed3448b.png)
 
 我在评论中收到了一些有趣的问题。然而，有一个特别的问题是由[Anirban](https://www.linkedin.com/in/anirban-kar-chaudhuri-7913737b/)提出的，这让我最终决定写一篇文章来回答这个问题，因为我一直不时收到类似的问题。
 
@@ -159,7 +159,7 @@ def convert_str_datetime(df):
 
 ### 最后的想法
 
-![](../Images/177e8049d4f988d1ab40735e88b089c4.png)[（来源）](https://unsplash.com/photos/oTvU7Zmtei)
+![](img/177e8049d4f988d1ab40735e88b089c4.png)[（来源）](https://unsplash.com/photos/oTvU7Zmtei)
 
 感谢阅读。
 
@@ -173,21 +173,21 @@ def convert_str_datetime(df):
 
 **相关:**
 
-+   [特征预处理笔记：什么、为什么和怎么做](/2018/10/notes-feature-preprocessing-what-why-how.html)
++   特征预处理笔记：什么、为什么和怎么做
 
-+   [财务数据分析 – 数据处理 1：贷款资格预测](/2018/09/financial-data-analysis-loan-eligibility-prediction.html)
++   财务数据分析 – 数据处理 1：贷款资格预测
 
-+   [用 Python 整理数据](/2017/01/tidying-data-python.html)
++   用 Python 整理数据
 
     * * *
 
     ## 我们的前三大课程推荐
 
-    ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+    ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-    ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+    ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-    ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+    ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
     * * *
 

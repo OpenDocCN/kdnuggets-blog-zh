@@ -1,12 +1,12 @@
 # CSV 文件用于存储？不，谢谢。有更好的选择。
 
-> 原文：[https://www.kdnuggets.com/2021/08/csv-files-storage-better-option.html](https://www.kdnuggets.com/2021/08/csv-files-storage-better-option.html)
+> 原文：[`www.kdnuggets.com/2021/08/csv-files-storage-better-option.html`](https://www.kdnuggets.com/2021/08/csv-files-storage-better-option.html)
 
-[评论](#comments)
+评论
 
 **由 [Dario Radečić](https://www.linkedin.com/in/darioradecic/)，NEOS 顾问**
 
-![](../Images/d14607bf88dee7dbf39799962a09bbb6.png)
+![](img/d14607bf88dee7dbf39799962a09bbb6.png)
 
 由 [David Emrich](https://unsplash.com/@davidemrich?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供的照片，来源于 [Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -36,7 +36,7 @@ CSV 是按行组织的，这意味着它们查询速度慢且难以高效存储�
 
 首先让我们看看亚马逊 S3 的存储定价。这些数字来自 [这里](https://blog.openbridge.com/how-to-be-a-hero-with-powerful-parquet-google-and-amazon-f2ae0f35ee04):
 
-![](../Images/7135321fc9ab9fb9bd49c4d317f2affb.png)
+![](img/7135321fc9ab9fb9bd49c4d317f2affb.png)
 
 图片 1 — 亚马逊 S3 不同数据格式的存储定价（作者提供的图片）
 
@@ -44,7 +44,7 @@ CSV 是按行组织的，这意味着它们查询速度慢且难以高效存储�
 
 接下来，让我们看看 Apache Parquet 的速度提升：
 
-![](../Images/cde5d1c5b280a6901edec4f09d325fd1.png)
+![](img/cde5d1c5b280a6901edec4f09d325fd1.png)
 
 图片 2 — 不同数据格式的 Amazon S3 存储和查询价格比较（图片由作者提供）
 
@@ -60,13 +60,13 @@ CSV 和 Parquet 格式都用于存储数据，但它们的内部结构截然不�
 
 这意味着什么呢？假设你有以下数据：
 
-![](../Images/a854a06b4e48249c7e7da1cbb69b7f45.png)
+![](img/a854a06b4e48249c7e7da1cbb69b7f45.png)
 
 图片 3 — 示例表数据（图片由作者提供）
 
 这就是前一个表格在行存储和列存储中的组织方式：
 
-![](../Images/c529e06ae2f92f3745a38a2e8891e977.png)
+![](img/c529e06ae2f92f3745a38a2e8891e977.png)
 
 图片 4 — 行存储 vs. 列存储（图片由作者提供）
 
@@ -91,7 +91,7 @@ df.head()
 
 这就是它的样子：
 
-![](../Images/0651ecc4b1d1f15616a4ea75d9af4779.png)
+![](img/0651ecc4b1d1f15616a4ea75d9af4779.png)
 
 图片 5 — NYSE 股票价格数据集的前几行 — CSV（图片由作者提供）
 
@@ -110,7 +110,7 @@ df_parquet.head()
 
 这就是数据集的样子：
 
-![](../Images/9f7b652826b990832a6a981428f64bc7.png)
+![](img/9f7b652826b990832a6a981428f64bc7.png)
 
 图片 6 — NYSE 股票价格数据集的前几行 — Parquet（图片由作者提供）
 
@@ -118,7 +118,7 @@ df_parquet.head()
 
 那么，文件大小是否有所减少？嗯，是的：
 
-![](../Images/652fc4de3649e290bb33e192e18073e8.png)
+![](img/652fc4de3649e290bb33e192e18073e8.png)
 
 图 7 — NYSE 股票价格数据集中的 CSV 与 Parquet 文件大小对比（图像由作者提供）
 
@@ -144,21 +144,21 @@ df_parquet.head()
 
 **相关:**
 
-+   [5 个 Python 数据处理技巧与代码片段](/2021/07/python-tips-snippets-data-processing.html)
++   5 个 Python 数据处理技巧与代码片段
 
-+   [如何查询你的 Pandas 数据框](/2021/08/query-pandas-dataframe.html)
++   如何查询你的 Pandas 数据框
 
-+   [Pandas 不够用？这里有一些处理更大、更快数据的 Python 替代方案](/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
++   Pandas 不够用？这里有一些处理更大、更快数据的 Python 替代方案
 
 * * *
 
 ## 我们的 3 个最佳课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

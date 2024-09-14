@@ -1,8 +1,8 @@
 # 使用 Python 的 Pathlib 组织、搜索和备份文件
 
-> 原文：[https://www.kdnuggets.com/organize-search-and-back-up-files-with-pythons-pathlib](https://www.kdnuggets.com/organize-search-and-back-up-files-with-pythons-pathlib)
+> 原文：[`www.kdnuggets.com/organize-search-and-back-up-files-with-pythons-pathlib`](https://www.kdnuggets.com/organize-search-and-back-up-files-with-pythons-pathlib)
 
-![pathlib-examples](../Images/cf0155e2b6b24b2c3482db40b1b6e159.png)
+![pathlib-examples](img/cf0155e2b6b24b2c3482db40b1b6e159.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@ Python 内置的 [pathlib 模块](https://docs.python.org/3/library/pathlib.html
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -36,7 +36,7 @@ Python 内置的 [pathlib 模块](https://docs.python.org/3/library/pathlib.html
 
 让我们来看一个简单的例子，其中项目目录包含 requirements.txt、配置文件和 Python 脚本。我们希望将文件按扩展名分类到子目录中——每个扩展名对应一个子目录。为了方便起见，我们选择将扩展名作为子目录的名称。
 
-![organize-files](../Images/8375a8a21063cc3860e26869efe8fb33.png)
+![organize-files](img/8375a8a21063cc3860e26869efe8fb33.png)
 
 按扩展名组织文件 | 图片由作者提供
 
@@ -87,7 +87,7 @@ organize_files_by_extension('new_project')
 
 下面是示例函数调用的输出（在 new_project 目录中整理文件）：
 
-![organize](../Images/fb56ab7258f4809fd98ad6ee186a31d6.png)
+![organize](img/fb56ab7258f4809fd98ad6ee186a31d6.png)
 
 现在在你的工作环境中的项目目录上尝试这个。我使用了 if-else 来处理错误。但你也可以使用 try-except 块来改进这个版本。
 
@@ -180,7 +180,7 @@ back_up_files('new_project', 'backup')
 
 运行脚本并验证输出后，你可以随时检查备份目录的内容：
 
-![备份](../Images/19072361bcdcaf944a25088a4f8132a4.png)
+![备份](img/19072361bcdcaf944a25088a4f8132a4.png)
 
 对于你的示例目录，你可以使用 `back_up_files('/path/to/directory', '/path/to/backup/directory')` 来备份感兴趣的文件。
 
@@ -198,10 +198,10 @@ back_up_files('new_project', 'backup')
 
 +   [通过 Uplimit 的机器学习搜索课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [如何使用 Python 的 Pathlib 导航文件系统](https://www.kdnuggets.com/how-to-navigate-the-filesystem-with-pythons-pathlib)
 
-+   [IMPACT：数据可观察性峰会将于11月8日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观察性峰会将于 11 月 8 日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
-+   [回到基础第1周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [回到基础第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)

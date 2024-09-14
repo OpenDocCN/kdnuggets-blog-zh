@@ -1,12 +1,12 @@
 # 创建你自己的计算机视觉沙箱
 
-> 原文：[https://www.kdnuggets.com/2020/02/computer-vision-sandbox.html](https://www.kdnuggets.com/2020/02/computer-vision-sandbox.html)
+> 原文：[`www.kdnuggets.com/2020/02/computer-vision-sandbox.html`](https://www.kdnuggets.com/2020/02/computer-vision-sandbox.html)
 
-[评论](#comments)
+评论
 
 **由 [Waun Broderick](https://www.linkedin.com/in/waunbroderick/)，首席技术官，Gyroscopic 联合创始人**
 
-![图示](../Images/a843abceab533ceaa0f49136b79823f1.png)
+![图示](img/a843abceab533ceaa0f49136b79823f1.png)
 
 图片由 [Lorenzo Herrera](https://unsplash.com/@lorenzoherrera?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -56,7 +56,7 @@
 
 不过请放心，我们并没有在原本不存在的地方创建嵌套问题，而是确保我们能够创建出可以在本次演练中以及未来项目中使用的小段落。
 
-![图](../Images/08fb74ada07424f843e64e38ce2e0ccb.png)
+![图](img/08fb74ada07424f843e64e38ce2e0ccb.png)
 
 迷茫的男子在做心理数学
 
@@ -85,7 +85,7 @@ python ./bing_image_scraper.py  --query "{{TERM}}" --output {{DIR}}
 
 重复这个过程，找到所有你希望为 CNN 模型准备的必要图像类别。接下来的代码将依赖于每个文件夹的名称为一个类别，并且所有图像都放在各自的文件夹中。
 
-![图](../Images/cac712c8a870baf25ffbc01f1ddc912d.png)
+![图](img/cac712c8a870baf25ffbc01f1ddc912d.png)
 
 建议的照片目录结构
 
@@ -93,7 +93,7 @@ python ./bing_image_scraper.py  --query "{{TERM}}" --output {{DIR}}
 
 最好浏览一下抓取到的图像，并删除那些不符合搜索标准的图像。由于其缺乏严格的规范，网络图像抓取工具常常会获取与搜索主题不直接相关的图像，如果不加以监控，最终会变成‘*垃圾进，垃圾出*’。
 
-![图](../Images/3caf83f335e300f6893ca040d6d7574c.png)
+![图](img/3caf83f335e300f6893ca040d6d7574c.png)
 
 男子在用吸尘器处理火焰
 
@@ -146,7 +146,7 @@ for subdir, dirs, files in os.walk(rootdir):
 
 运行脚本后，你的文件夹现在应该包含原始抓取的图像，以及具有你选择的不同变换的新图像。
 
-![图示](../Images/23fe7b3872cb00893b748f1ddd19aaa6.png)
+![图示](img/23fe7b3872cb00893b748f1ddd19aaa6.png)
 
 相同的蜘蛛侠互相指向对方
 
@@ -190,7 +190,7 @@ def build_data(data):
 
 然后，我们在其顺序池化和卷积层中创建 CNN 的架构。变量的大小过滤器、层结构、[正则化器](https://keras.io/regularizers/) 或 [核心层](https://keras.io/layers/core/) 也可以根据你的项目要求进行添加和修改。本项目使用了修改版的 VGG-16 网络架构作为基础，但可以更改为你选择或创建的任何架构。
 
-![图示](../Images/a1ecfb8bd42b7caae4c82cf45da51aa0.png)
+![图示](img/a1ecfb8bd42b7caae4c82cf45da51aa0.png)
 
 VGG-16 架构
 
@@ -243,7 +243,7 @@ def train_model(x_train, x_test, y_train, y_test):
 
 恭喜！你已成功创建了第一个 CNN 模型和数据收集管道！
 
-![图示](../Images/ab95188455e55147d3e7f808eadf95d8.png)
+![图示](img/ab95188455e55147d3e7f808eadf95d8.png)
 
 女人胜利地欢呼
 
@@ -294,11 +294,11 @@ def build_flag_identifier():
 
 **相关：**
 
-+   [如何将 RGB 图像转换为灰度图像](/2019/12/convert-rgb-image-grayscale.html)
++   如何将 RGB 图像转换为灰度图像
 
-+   [如何将图片转换为数字](/2020/01/convert-picture-numbers.html)
++   如何将图片转换为数字
 
-+   [谷歌开源 MobileNetV3：改进移动计算机视觉模型的新思路](/2019/12/google-open-sources-mobilenetv3-improve-mobile-computer-vision-models.html)
++   谷歌开源 MobileNetV3：改进移动计算机视觉模型的新思路
 
 ### 更多相关内容
 

@@ -1,10 +1,10 @@
 # 《用 R 学习机器学习的游击指南》
 
-> 原文：[https://www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-r.html](https://www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-r.html)
+> 原文：[`www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-r.html`](https://www.kdnuggets.com/2017/05/guerrilla-guide-machine-learning-r.html)
 
 当然，有很多教程和概述可以帮助你获取机器学习所需的见解，但其中许多（大多数？）采取的是长期视角：首先建立基础，然后学习基本知识，再学习一些补充理论，然后在实际操作中不要走得太远，退一步，尝试一些示例，独立完成一个项目……这些都是很好的建议，也是学习……几乎任何东西的好方法。
 
-![大猩猩](../Images/6c0750a3be8ba75b5f92ab2689b960a1.png)
+![大猩猩](img/6c0750a3be8ba75b5f92ab2689b960a1.png)
 
 我知道，我知道……还是不好笑。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -30,53 +30,53 @@
 
 第一步总是第一步：让我们学习 R。或者，让我们*快速*学习 R。你需要安装 R 和 R Studio——编程语言和 R 的图形用户界面编程环境。各种关于如何完成这一步的视频存在，具体取决于操作系统。因此，我将留给你自己去找到适合你个人配置的视频。
 
-不过，如果你对一些能帮助完成安装任务的术语感兴趣，可以查看 [McMaster大学的R和RStudio安装指南](http://socserv.mcmaster.ca/jfox/Courses/R/ICPSR/R-install-instructions.html)：
+不过，如果你对一些能帮助完成安装任务的术语感兴趣，可以查看 [McMaster 大学的 R 和 RStudio 安装指南](http://socserv.mcmaster.ca/jfox/Courses/R/ICPSR/R-install-instructions.html)：
 
-一旦你安装了R，你肯定会想知道如何使用它（这就是你在这里的原因，对吧？）。这段由Brian Palmer制作的第一个视频是对基本R命令的介绍，采用了入门统计的视角。
+一旦你安装了 R，你肯定会想知道如何使用它（这就是你在这里的原因，对吧？）。这段由 Brian Palmer 制作的第一个视频是对基本 R 命令的介绍，采用了入门统计的视角。
 
-以下是Ralf Becker制作的视频，涵盖了一些非常基础的数据集分析，这为下一部分做好了很好的准备。
+以下是 Ralf Becker 制作的视频，涵盖了一些非常基础的数据集分析，这为下一部分做好了很好的准备。
 
 ### 机器学习速成课程
 
-接下来，让我们来看看一个介绍性的机器学习概述。虽然这个话题有各种各样的视频——包括我过去使用和/或建议过的许多——我喜欢保持新鲜感，因此我们将使用Nando de Freitas（录制时来自不列颠哥伦比亚大学）的以下视频。请注意，这完全不是R特定的，而是从概念上而非实际操作上涵盖机器学习。
+接下来，让我们来看看一个介绍性的机器学习概述。虽然这个话题有各种各样的视频——包括我过去使用和/或建议过的许多——我喜欢保持新鲜感，因此我们将使用 Nando de Freitas（录制时来自不列颠哥伦比亚大学）的以下视频。请注意，这完全不是 R 特定的，而是从概念上而非实际操作上涵盖机器学习。
 
-这是来自该领域伟大思想者的机器学习的极佳介绍。顺便说一下，de Freitas还有许多其他优秀的机器学习视频可以在YouTube上找到，如果你正在寻找更多相关材料，值得一看。
+这是来自该领域伟大思想者的机器学习的极佳介绍。顺便说一下，de Freitas 还有许多其他优秀的机器学习视频可以在 YouTube 上找到，如果你正在寻找更多相关材料，值得一看。
 
-### R的数据分析
+### R 的数据分析
 
-尽管接下来的这对视频在标题中包含了“数据分析”一词，但它们实际上进入了机器学习的领域。然而，这些视频进度较慢，并涵盖了大量的R中描述性统计，这是提升语言能力的好地方。这些优秀的视频由微软的Dave Langer制作。
+尽管接下来的这对视频在标题中包含了“数据分析”一词，但它们实际上进入了机器学习的领域。然而，这些视频进度较慢，并涵盖了大量的 R 中描述性统计，这是提升语言能力的好地方。这些优秀的视频由微软的 Dave Langer 制作。
 
-### 使用R进行机器学习
+### 使用 R 进行机器学习
 
-为了继续我们在R中进行的机器学习探索，请查看Bargava Subramanian制作的这段视频，标题为“使用R进行机器学习：分类方法速成课程”。该视频很好地将前两个部分介绍的理论与R中的实际应用结合起来。
+为了继续我们在 R 中进行的机器学习探索，请查看 Bargava Subramanian 制作的这段视频，标题为“使用 R 进行机器学习：分类方法速成课程”。该视频很好地将前两个部分介绍的理论与 R 中的实际应用结合起来。
 
-### R中的高级机器学习
+### R 中的高级机器学习
 
 我犹豫是否称之为*高级*机器学习，但在我们迄今为止看到的背景下，我认为这个标签适用。
 
-我们将探讨两个不同的机器学习主题。第一个是文档分类，这段由Tim D'Auria制作的视频展示了“如何在不到25分钟内使用R构建文档分类器”。有趣吧？
+我们将探讨两个不同的机器学习主题。第一个是文档分类，这段由 Tim D'Auria 制作的视频展示了“如何在不到 25 分钟内使用 R 构建文档分类器”。有趣吧？
 
-最后，Hamed Hasheminia快速展示了在R中实现神经网络的方法：
+最后，Hamed Hasheminia 快速展示了在 R 中实现神经网络的方法：
 
 ### 寻找更多？
 
 一个合乎逻辑的下一步可能是更深入地讨论个别算法，以下是一些在这一方向上的额外资源：
 
-+   [R学习路径：从初学者到专家的7个步骤](/2016/03/datacamp-r-learning-path-7-steps.html)
++   R 学习路径：从初学者到专家的 7 个步骤
 
-+   [使用支持向量回归在R中构建回归模型](/2017/03/building-regression-models-support-vector-regression.html)
++   使用支持向量回归在 R 中构建回归模型
 
-+   [初学者的神经网络指南！](/2016/08/begineers-guide-neural-networks-r.html)
++   初学者的神经网络指南！
 
 希望这些内容足以激励那些有动力的黑客在几天内开始机器学习的实践。然而，这不是一个完整的课程；理解机器学习的基础统计构建块需要多年时间，而掌握实际技能则需要数百小时的实践。不过，没人说你不能在完善新技能的过程中动手玩一玩，享受一些入门的乐趣。
 
 **相关**：
 
-+   [《与Python一起进行机器学习的游击指南》](/2017/05/guerrilla-guide-machine-learning-python.html)
++   《与 Python 一起进行机器学习的游击指南》
 
-+   [机器学习关键术语解析](/2016/05/machine-learning-key-terms-explained.html)
++   机器学习关键术语解析
 
-+   [机器学习的最佳R包](/2017/03/best-r-packages-machine-learning.html)
++   机器学习的最佳 R 包
 
 ### 相关主题
 
@@ -84,10 +84,10 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一项90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一项 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [构建强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

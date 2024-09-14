@@ -1,8 +1,8 @@
 # 使用谷歌的 NotebookLM 进行数据科学：综合指南
 
-> 原文：[https://www.kdnuggets.com/using-google-notebooklm-for-data-science-a-comprehensive-guide](https://www.kdnuggets.com/using-google-notebooklm-for-data-science-a-comprehensive-guide)
+> 原文：[`www.kdnuggets.com/using-google-notebooklm-for-data-science-a-comprehensive-guide`](https://www.kdnuggets.com/using-google-notebooklm-for-data-science-a-comprehensive-guide)
 
-![使用谷歌的 NotebookLM 进行数据科学：综合指南](../Images/cc3671201dc1a7a7a84615ba2ee86f99.png)
+![使用谷歌的 NotebookLM 进行数据科学：综合指南](img/cc3671201dc1a7a7a84615ba2ee86f99.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -36,7 +36,7 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 首先，我们将访问“notebooklm.google.com”网站并创建一个项目。
 
-![使用谷歌的 NotebookLM 进行数据科学：综合指南](../Images/98b15c6abc0836c2dc99ccb826474e03.png)
+![使用谷歌的 NotebookLM 进行数据科学：综合指南](img/98b15c6abc0836c2dc99ccb826474e03.png)
 
 我下载了关于强化学习的热门研究论文的 PDF 文件：
 
@@ -48,11 +48,11 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 然后我们将这些 PDF 一一上传到我们的项目中。
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/9accb146320979d656cfd7c47a33806e.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/9accb146320979d656cfd7c47a33806e.png)
 
 上传文件后，我们选择那些作为背景信息使用。
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/5fe827a63b1838a1fc618673fde95bf5.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/5fe827a63b1838a1fc618673fde95bf5.png)
 
 ## 总结
 
@@ -60,7 +60,7 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 提示：“请总结一下这篇研究论文。尽量使用项目符号。”
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/30c8db1fe236d34c32f63210ba35ef2a.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/30c8db1fe236d34c32f63210ba35ef2a.png)
 
 获取答案只花了几秒钟。还提供了进一步的问题。
 
@@ -70,7 +70,7 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 提示：“创建这篇论文中使用的关键术语列表。”
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/6686c7366437cccc8703cb21a64f8afd.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/6686c7366437cccc8703cb21a64f8afd.png)
 
 它不仅为我们提供了关键术语，还指明了它们在论文中的位置。
 
@@ -80,7 +80,7 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 提示：“分析所有三篇研究论文，并提供对强化学习当前研究状态的分析。”
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/4c9c0560a7375c3d7a63d1515f3d42fb.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/4c9c0560a7375c3d7a63d1515f3d42fb.png)
 
 表现非常出色。
 
@@ -90,7 +90,7 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 提示：“使用三篇论文，生成一个新的研究标题，帮助我获得作为研究强化工程师的职位。”
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/3dbae422cf4350e902368d1faaa41932.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/3dbae422cf4350e902368d1faaa41932.png)
 
 很好，但不够出色。
 
@@ -100,19 +100,19 @@ NotebookLM 解决了使用 ChatGPT 和 Poe 的限制。它允许你上传超过�
 
 询问有关您来源的任何问题，NotebookLM 将回答这些问题，并附上来自这些文档的引用。
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/1d936ed244e85ddb8ec1407c5bef936a.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/1d936ed244e85ddb8ec1407c5bef936a.png)
 
 ## 文档指南
 
 当您上传新的来源时，NotebookLM 会创建一个“来源指南”，总结文档内容并建议关键主题和问题。
 
-![使用谷歌的 NotebookLM 进行数据科学：全面指南](../Images/38510323705dc27e12b831d5e764eede.png)
+![使用谷歌的 NotebookLM 进行数据科学：全面指南](img/38510323705dc27e12b831d5e764eede.png)
 
 ## 记笔记
 
 每个笔记本包含一个笔记部分，您可以在其中记录由 NotebookLM 揭示的想法或信息。
 
-![使用 Google 的 NotebookLM 进行数据科学：全面指南](../Images/7fd7a72d7df3408694b912f423d57bb1.png)
+![使用 Google 的 NotebookLM 进行数据科学：全面指南](img/7fd7a72d7df3408694b912f423d57bb1.png)
 
 # 可访问性和限制
 

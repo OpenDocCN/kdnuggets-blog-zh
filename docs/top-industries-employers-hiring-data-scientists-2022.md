@@ -1,8 +1,8 @@
 # 2022 年数据科学家招聘的顶级行业和雇主
 
-> 原文：[https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
+> 原文：[`www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html`](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
 
-![2022 年数据科学家招聘的顶级行业和雇主](../Images/ec936d7c9837fef326c0ace30fe20f31.png)
+![2022 年数据科学家招聘的顶级行业和雇主](img/ec936d7c9837fef326c0ace30fe20f31.png)
 
 [Eric Prouzet](https://unsplash.com/@eprouzet) via Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -150,7 +150,7 @@
 
 # 虚拟现实
 
-疫情推动了大量概念在线化以及整体技术的未来。虚拟现实在流行游戏《口袋妖怪GO》中得到了体现，你可以四处走动寻找实际上并不存在的宝可梦。
+疫情推动了大量概念在线化以及整体技术的未来。虚拟现实在流行游戏《口袋妖怪 GO》中得到了体现，你可以四处走动寻找实际上并不存在的宝可梦。
 
 虚拟现实利用计算知识、机器学习算法和数据来创造最佳体验。然而，虚拟现实还有更多的潜力尚待开发。
 
@@ -168,12 +168,12 @@
 
 +   [数据科学家招聘经理所寻找的素质](https://www.kdnuggets.com/2022/04/qualities-hiring-managers-looking-data-scientists.html)
 
-+   [令人惊艳的LLM作品集项目创意](https://www.kdnuggets.com/llm-portfolio-projects-ideas-to-wow-employers)
++   [令人惊艳的 LLM 作品集项目创意](https://www.kdnuggets.com/llm-portfolio-projects-ideas-to-wow-employers)
 
 +   [学位还是证书？雇主更看重哪种资质？](https://www.kdnuggets.com/degree-or-certificate-which-credential-do-employers-value-more)
 
 +   [人工智能如何彻底改变传统行业？](https://www.kdnuggets.com/how-ai-is-revolutionizing-the-legacy-industries)
 
-+   [2022年数据科学家的薪资是多少？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)
++   [2022 年数据科学家的薪资是多少？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)
 
-+   [2022年数据科学家应该了解的Python库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)
++   [2022 年数据科学家应该了解的 Python 库](https://www.kdnuggets.com/2022/04/python-libraries-data-scientists-know-2022.html)

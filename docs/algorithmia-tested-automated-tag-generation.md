@@ -1,10 +1,10 @@
 # Algorithmia 测试：人工 vs 自动标签生成
 
-> 原文：[https://www.kdnuggets.com/2015/04/algorithmia-tested-automated-tag-generation.html/2](https://www.kdnuggets.com/2015/04/algorithmia-tested-automated-tag-generation.html/2)
+> 原文：[`www.kdnuggets.com/2015/04/algorithmia-tested-automated-tag-generation.html/2`](https://www.kdnuggets.com/2015/04/algorithmia-tested-automated-tag-generation.html/2)
 
 **结论 – 标签**
 
-结果很有趣。对于这些标签来说，写文章时进行的许多分类似乎都是由 Algorithmia 自动提取的。例如，KDnuggets 上的 [新闻](/news/index.html) 类别中的大多数文章都被赋予了 **新闻** 标签。此外，自动生成的标签有时非常具体。例如，标签“treenet”是为这些 2014 年 5 月的文章 [May](/2014/05/video-series-data-mining-for-statisticians.html) 和 2014 年 1 月的文章 [January](/2014/01/data-mining-for-beginners-boot-camp-salford-video-series.html) 生成的，相隔五个月。我预计人工编辑不会做出这些连接，这显示了机器生成标签的一个巨大好处。
+结果很有趣。对于这些标签来说，写文章时进行的许多分类似乎都是由 Algorithmia 自动提取的。例如，KDnuggets 上的 新闻 类别中的大多数文章都被赋予了 **新闻** 标签。此外，自动生成的标签有时非常具体。例如，标签“treenet”是为这些 2014 年 5 月的文章 May 和 2014 年 1 月的文章 January 生成的，相隔五个月。我预计人工编辑不会做出这些连接，这显示了机器生成标签的一个巨大好处。
 
 表格 1: 按频率排序的标签
 
@@ -41,21 +41,21 @@
 
 **相关：**
 
-+   [Algorithmia – 市场如何促进创新？](/2015/04/algorithmia-marketplace-innovation.html)
++   Algorithmia – 市场如何促进创新？
 
-+   [KDnuggets 对分析市场的评估：大数据的下一个大趋势](/2013/11/kdnuggets-review-analytics-marketplaces-next-big-thing-for-big-data.html)
++   KDnuggets 对分析市场的评估：大数据的下一个大趋势
 
-+   [调查：机器学习 API](/2015/04/poll-machine-learning-apis.html)
++   调查：机器学习 API
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快您的网络安全职业发展。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加快您的网络安全职业发展。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

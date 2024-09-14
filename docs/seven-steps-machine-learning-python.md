@@ -1,6 +1,6 @@
 # 掌握 Python 机器学习的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/2015/11/seven-steps-machine-learning-python.html/2](https://www.kdnuggets.com/2015/11/seven-steps-machine-learning-python.html/2)
+> 原文：[`www.kdnuggets.com/2015/11/seven-steps-machine-learning-python.html/2`](https://www.kdnuggets.com/2015/11/seven-steps-machine-learning-python.html/2)
 
 ### 第 4 步：开始使用 Python 进行机器学习
 
@@ -16,7 +16,7 @@
 
 时候到了。让我们开始使用 Python 的*事实上的*标准机器学习库 scikit-learn 来实现机器学习算法。
 
-![scikit-learn 流程图](../Images/481115fc1e34c879fe8bf66dd936be66.png)
+![scikit-learn 流程图](img/481115fc1e34c879fe8bf66dd936be66.png)
 
 scikit-learn 流程图。
 
@@ -58,7 +58,7 @@ scikit-learn 的一般介绍，涵盖了 k 最近邻算法，这是 Python 最�
 
 +   [逻辑回归](http://nbviewer.ipython.org/github/justmarkham/gadsdc1/blob/master/logistic_assignment/kevin_logistic_sklearn.ipynb)，作者：Kevin Markham
 
-### 第6步：使用 Python 进行高级机器学习主题
+### 第 6 步：使用 Python 进行高级机器学习主题
 
 我们已经初步了解了 scikit-learn，现在我们将注意力转向一些更高级的主题。首先是支持向量机，这是一种依赖于数据高维空间复杂变换的非线性分类器。
 
@@ -80,11 +80,11 @@ scikit-learn 的一般介绍，涵盖了 k 最近邻算法，这是 Python 最�
 
 ### 第 7 步：Python 中的深度学习
 
-![深度学习无处不在！](../Images/72a09e8266e2645f59f5f8fb58906cfc.png)
+![深度学习无处不在！](img/72a09e8266e2645f59f5f8fb58906cfc.png)
 
 学习是深刻的。
 
-深度学习无处不在！深度学习建立在几几十年的神经网络研究基础上，但最近几年的进展显著提升了深度神经网络的感知能力和普遍兴趣。如果你对深度学习不熟悉，[KDnuggets 有很多文章](/?s=deep+learning) 详细介绍了这项技术的众多近期创新、成就和荣誉。
+深度学习无处不在！深度学习建立在几几十年的神经网络研究基础上，但最近几年的进展显著提升了深度神经网络的感知能力和普遍兴趣。如果你对深度学习不熟悉，KDnuggets 有很多文章 详细介绍了这项技术的众多近期创新、成就和荣誉。
 
 这最后一步并不声称是任何形式的深度学习诊所；我们将查看两个领先的现代 Python 深度学习库中的几个简单网络实现。对于那些有兴趣深入了解深度学习的人，我推荐从以下免费的在线书籍开始：
 
@@ -116,11 +116,11 @@ Theano 是我们将要查看的第一个 Python 深度学习库。来自作者�
 
 **相关内容：**
 
-+   [前 20 名数据科学 MOOC](/2015/09/top-20-data-science-moocs.html)
++   前 20 名数据科学 MOOC
 
-+   [60+ 本关于大数据、数据科学、数据挖掘、机器学习、Python、R 等的免费书籍](/2015/09/free-data-science-books.html)
++   60+ 本关于大数据、数据科学、数据挖掘、机器学习、Python、R 等的免费书籍
 
-+   [15 门数据科学数学 MOOC](/2015/09/15-math-mooc-data-science.html)
++   15 门数据科学数学 MOOC
 
 ### 更多相关内容
 

@@ -1,8 +1,8 @@
 # 我应该使用哪种机器学习算法？
 
-> 原文：[https://www.kdnuggets.com/2017/06/which-machine-learning-algorithm.html](https://www.kdnuggets.com/2017/06/which-machine-learning-algorithm.html)
+> 原文：[`www.kdnuggets.com/2017/06/which-machine-learning-algorithm.html`](https://www.kdnuggets.com/2017/06/which-machine-learning-algorithm.html)
 
-**作者：SAS首席科学家** **Hui Li**。
+**作者：SAS 首席科学家** **Hui Li**。
 
 该资源主要面向初级至中级的数据科学家或分析师，他们对识别和应用 [机器学习](https://www.sas.com/en_us/insights/analytics/machine-learning.html) 算法来解决他们感兴趣的问题感兴趣。
 
@@ -20,7 +20,7 @@
 
 ### 机器学习算法速查表
 
-[![流程图展示了在何时使用哪些算法](../Images/fddbffd393b7de45b096f912ebf37e3f.png)](http://blogs.sas.com/content/subconsciousmusings/files/2017/04/machine-learning-cheet-sheet.png)
+![流程图展示了在何时使用哪些算法](http://blogs.sas.com/content/subconsciousmusings/files/2017/04/machine-learning-cheet-sheet.png)
 
 **机器学习算法速查表** 帮助你从多种机器学习算法中选择出适合你特定问题的算法。本文将引导你如何使用这张速查表。
 
@@ -84,29 +84,29 @@
 
 更详细地了解个别算法可以帮助你理解它们提供了什么以及如何使用它们。这些描述提供了更多细节，并给出了有关何时使用特定算法的额外提示，与备忘单保持一致。
 
-关于算法及其使用考虑的完整讨论，请参阅**[SAS网站上的完整文章](https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/)。**
+关于算法及其使用考虑的完整讨论，请参阅**[SAS 网站上的完整文章](https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/)。**
 
-**简介： [Hui Li](https://www.linkedin.com/in/hui-li-42250619/)** 是SAS数据科学技术的首席研究员。她目前的工作集中在深度学习、认知计算和SAS Viya中的SAS推荐系统。她在杜克大学获得了电气与计算机工程博士学位和硕士学位。在加入SAS之前，她曾在杜克大学担任研究科学家，并在Signal Innovation Group, Inc.担任研究工程师。她的研究兴趣包括大规模异构数据的机器学习、协同过滤推荐、贝叶斯统计建模和强化学习。
+**简介： [Hui Li](https://www.linkedin.com/in/hui-li-42250619/)** 是 SAS 数据科学技术的首席研究员。她目前的工作集中在深度学习、认知计算和 SAS Viya 中的 SAS 推荐系统。她在杜克大学获得了电气与计算机工程博士学位和硕士学位。在加入 SAS 之前，她曾在杜克大学担任研究科学家，并在 Signal Innovation Group, Inc.担任研究工程师。她的研究兴趣包括大规模异构数据的机器学习、协同过滤推荐、贝叶斯统计建模和强化学习。
 
 [原文](https://blogs.sas.com/content/subconsciousmusings/2017/04/12/machine-learning-algorithm-use/)。经许可转载。
 
 **相关：**
 
-+   [与算法亲密接触](/2017/03/dataiku-top-algorithms.html)
++   与算法亲密接触
 
-+   [从零开始的Python机器学习工作流第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从零开始的 Python 机器学习工作流第一部分：数据准备
 
-+   [提高 k-means 聚类效率的朴素分片质心初始化方法](/2017/03/naive-sharding-centroid-initialization-method.html)
++   提高 k-means 聚类效率的朴素分片质心初始化方法
 
 * * *
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

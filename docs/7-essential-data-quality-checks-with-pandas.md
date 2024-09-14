@@ -1,8 +1,8 @@
 # 7 个重要的数据质量检查与 Pandas
 
-> 原文：[https://www.kdnuggets.com/7-essential-data-quality-checks-with-pandas](https://www.kdnuggets.com/7-essential-data-quality-checks-with-pandas)
+> 原文：[`www.kdnuggets.com/7-essential-data-quality-checks-with-pandas`](https://www.kdnuggets.com/7-essential-data-quality-checks-with-pandas)
 
-![7 个重要的数据质量检查与 Pandas](../Images/c9dfcc4434fa36f099ef3af225d45b7b.png)
+![7 个重要的数据质量检查与 Pandas](img/c9dfcc4434fa36f099ef3af225d45b7b.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的信息技术
 
 * * *
 
@@ -50,7 +50,7 @@ df['MedHouseVal'] = data.target
 print(data.DESCR)
 ```
 
-![7 个重要的数据质量检查与 Pandas](../Images/f75bc0f8c1f2fd389c4abd2454c2c71d.png)
+![7 个重要的数据质量检查与 Pandas](img/f75bc0f8c1f2fd389c4abd2454c2c71d.png)
 
 data.DESCR 的输出
 
@@ -88,7 +88,7 @@ memory usage: 1.4 MB</class>
 df.describe()
 ```
 
-![7 个重要的数据质量检查与 Pandas](../Images/116989112eb8a816cb5b4b701c5f246c.png)
+![7 个重要的数据质量检查与 Pandas](img/116989112eb8a816cb5b4b701c5f246c.png)
 
 df.describe() 的输出
 
@@ -198,7 +198,7 @@ dtype: object
 
 +   人口
 
-处理异常值的一种方法是使用 [四分位距](https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6th/a/interquartile-range-review)，即第75百分位数与第25百分位数之间的差异。如果 Q1 是第25百分位数，Q3 是第75百分位数，则四分位距为：Q3 - Q1。
+处理异常值的一种方法是使用 [四分位距](https://www.khanacademy.org/math/cc-sixth-grade-math/cc-6th-data-statistics/cc-6th/a/interquartile-range-review)，即第 75 百分位数与第 25 百分位数之间的差异。如果 Q1 是第 25 百分位数，Q3 是第 75 百分位数，则四分位距为：Q3 - Q1。
 
 然后我们使用四分位数和 IQR 来定义区间 `[Q1 - 1.5 * IQR, Q3 + 1.5 * IQR]`。所有超出此范围的点都是异常值。
 
@@ -228,7 +228,7 @@ for column, outliers in outliers_dict.items():
 	print("\n")
 ```
 
-![7 个使用 Pandas 进行的基本数据质量检查](../Images/2c799aaf132686d2ac77a2b57ab6cb4a.png)
+![7 个使用 Pandas 进行的基本数据质量检查](img/2c799aaf132686d2ac77a2b57ab6cb4a.png)
 
 'AveRooms' 列中的异常值 | 异常值检查的截断输出
 
@@ -343,7 +343,7 @@ Entries that do not follow the expected format:
 
 当你在进行较小的数据分析项目时，这些使用 pandas 的数据质量检查是一个很好的起点。根据问题和数据集，你可以加入额外的检查。
 
-如果你有兴趣学习数据分析，查看指南 [7 步掌握 Pandas 和 Python 数据整理](/7-steps-to-mastering-data-wrangling-with-pandas-and-python)。
+如果你有兴趣学习数据分析，查看指南 7 步掌握 Pandas 和 Python 数据整理。
 
 **[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是来自印度的开发者和技术作者。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 

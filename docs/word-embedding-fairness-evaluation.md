@@ -1,8 +1,8 @@
 # 词嵌入公平性评估
 
-> 原文：[https://www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html](https://www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html)
+> 原文：[`www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html`](https://www.kdnuggets.com/2020/08/word-embedding-fairness-evaluation.html)
 
-[评论](#comments)
+评论
 
 **由 [Pablo Badilla](https://github.com/pabloBad) 和 [Felipe Bravo-Marquez](https://felipebravom.com/).**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -46,7 +46,7 @@ WEFE 实现了以下指标：
 
 使用 WEFE 测量偏差的标准过程如下面的图示所示：
 
-![](../Images/18c45d588c5ef552585c79cbf5f1c733.png)
+![](img/18c45d588c5ef552585c79cbf5f1c733.png)
 
 ### 安装
 
@@ -70,15 +70,15 @@ conda install -c pbadilla wefe
 
 +   一个查询研究了男性名字和职业相关词，女性名字和家庭相关词之间的关系，我们称之为 *"男性名字与女性名字的职业和家庭相关性"*。查询中使用的词在代码中详细列出。
 
-+   词嵌入关联测试 (WEAT) 度量。由 [Caliskan et al. 2017](https://science.sciencemag.org/content/356/6334/183) 提出，WEAT 接受两个目标词集 ![T_1](../Images/f01b5d6895fd5737e9be0526d9c6ae47.png) 和 ![T_2](../Images/ad767c6639a21d27fa3ddd0a35d27437.png)，以及两个属性词集 ![A_1](../Images/d555bfe9ca33a05d4b870b4616a7fd43.png) 和 ![A_2](../Images/00133e8e7354f7d7e09b1fa458d3fa80.png)。因此，它总是期望查询的形式为 ![Q=({T_1,T_2},{A_1,A_2}](../Images/87bad9406d9016590e9353e89947ed9d.png)。其目标是通过置换测试量化两个词集对的关联强度。
++   词嵌入关联测试 (WEAT) 度量。由 [Caliskan et al. 2017](https://science.sciencemag.org/content/356/6334/183) 提出，WEAT 接受两个目标词集 ![T_1](img/f01b5d6895fd5737e9be0526d9c6ae47.png) 和 ![T_2](img/ad767c6639a21d27fa3ddd0a35d27437.png)，以及两个属性词集 ![A_1](img/d555bfe9ca33a05d4b870b4616a7fd43.png) 和 ![A_2](img/00133e8e7354f7d7e09b1fa458d3fa80.png)。因此，它总是期望查询的形式为 ![Q=({T_1,T_2},{A_1,A_2}](img/87bad9406d9016590e9353e89947ed9d.png)。其目标是通过置换测试量化两个词集对的关联强度。
 
-给定一个词嵌入 ![w](../Images/7a3eede3eb2f17394a728c1e88d0f15e.png)，WEAT 首先定义度量 ![d(w,A_1,A_2) = mean_{x \in A_1}cos(w,x) - mean_{x \in A_2}cos(w,x)](../Images/fb06ef8288166b327cd744d24b34595d.png)，其中 ![cos(w, x)](../Images/76e3a5fe79fe71ec84e79d0168efd124.png) 是词嵌入向量的余弦相似度。
+给定一个词嵌入 ![w](img/7a3eede3eb2f17394a728c1e88d0f15e.png)，WEAT 首先定义度量 ![d(w,A_1,A_2) = mean_{x \in A_1}cos(w,x) - mean_{x \in A_2}cos(w,x)](img/fb06ef8288166b327cd744d24b34595d.png)，其中 ![cos(w, x)](img/76e3a5fe79fe71ec84e79d0168efd124.png) 是词嵌入向量的余弦相似度。
 
-然后对于查询 ![Q=({T_1,T_2},{A_1,A_2})](../Images/e24ae1da3e7d38f348b19e4c7e1c3756.png) ，WEAT 度量定义在查询词集的嵌入上如下：
+然后对于查询 ![Q=({T_1,T_2},{A_1,A_2})](img/e24ae1da3e7d38f348b19e4c7e1c3756.png) ，WEAT 度量定义在查询词集的嵌入上如下：
 
-![F_WEAT(M, Q) = sum{w in T_1} d(w, A_1, A_2) - sum(w in T_2) d(w, A_1, A_2)](../Images/1902c0651183c8c50f98ba1694c4b621.png)
+![F_WEAT(M, Q) = sum{w in T_1} d(w, A_1, A_2) - sum(w in T_2) d(w, A_1, A_2)](img/1902c0651183c8c50f98ba1694c4b621.png)
 
-其思路是，如果![F_WEAT](../Images/43232187d3c1036efba02b4c9cef50d0.png)给出的值越积极，目标![T_1](../Images/f01b5d6895fd5737e9be0526d9c6ae47.png)与属性![A_1](../Images/d555bfe9ca33a05d4b870b4616a7fd43.png)的关系就越紧密，目标![T_2](../Images/ad767c6639a21d27fa3ddd0a35d27437.png)与属性![A_2](../Images/00133e8e7354f7d7e09b1fa458d3fa80.png)的关系也会更紧密。另一方面，如果值越负，目标![T_1](../Images/f01b5d6895fd5737e9be0526d9c6ae47.png)与属性![A_2](../Images/00133e8e7354f7d7e09b1fa458d3fa80.png)的关系会更紧密，而目标![T_2](../Images/ad767c6639a21d27fa3ddd0a35d27437.png)与属性![A_1](../Images/d555bfe9ca33a05d4b870b4616a7fd43.png)的关系也会更紧密。通常这些值在![+-0.5](../Images/a36bb2646a3883fc6697b352bf51d82b.png)和![+-2](../Images/873856290f1a350d49f45d31c6f4062f.png)之间。理想得分为![+-0.5](../Images/9f5253164e33e3aad6d3a176d24706bf.png)。
+其思路是，如果![F_WEAT](img/43232187d3c1036efba02b4c9cef50d0.png)给出的值越积极，目标![T_1](img/f01b5d6895fd5737e9be0526d9c6ae47.png)与属性![A_1](img/d555bfe9ca33a05d4b870b4616a7fd43.png)的关系就越紧密，目标![T_2](img/ad767c6639a21d27fa3ddd0a35d27437.png)与属性![A_2](img/00133e8e7354f7d7e09b1fa458d3fa80.png)的关系也会更紧密。另一方面，如果值越负，目标![T_1](img/f01b5d6895fd5737e9be0526d9c6ae47.png)与属性![A_2](img/00133e8e7354f7d7e09b1fa458d3fa80.png)的关系会更紧密，而目标![T_2](img/ad767c6639a21d27fa3ddd0a35d27437.png)与属性![A_1](img/d555bfe9ca33a05d4b870b4616a7fd43.png)的关系也会更紧密。通常这些值在![+-0.5](img/a36bb2646a3883fc6697b352bf51d82b.png)和![+-2](img/873856290f1a350d49f45d31c6f4062f.png)之间。理想得分为![+-0.5](img/9f5253164e33e3aad6d3a176d24706bf.png)。
 
 1\. 首先，我们使用 [gensim](https://radimrehurek.com/gensim/) API 加载一个词嵌入模型。
 
@@ -219,7 +219,7 @@ plot_queries_results(results)
 
 ```
 
-![](../Images/9264aa1bdd739c4d9eb262bbebf7fe9e.png)
+![](img/9264aa1bdd739c4d9eb262bbebf7fe9e.png)
 
 ### 聚合结果
 
@@ -248,7 +248,7 @@ weat_results
 | glove-wiki-gigaword-300 | 0.802102 |
 | glove-twitter-200 | 0.438586 |
 
-这种聚合的思想是根据各种查询量化嵌入模型的偏见量。在这种情况下，我们可以看到glove-twitter的性别偏见比其他模型少。
+这种聚合的思想是根据各种查询量化嵌入模型的偏见量。在这种情况下，我们可以看到 glove-twitter 的性别偏见比其他模型少。
 
 ### 排名词嵌入
 
@@ -272,19 +272,19 @@ ranking
 
 如果你喜欢这个项目，非常欢迎你在[Github](https://github.com/dccuchile/wefe)上“点赞”它。
 
-[1] P. Badilla, F. Bravo-Marquez 和 J. Pérez [WEFE: 词嵌入公平性评估框架](https://www.ijcai20.org/) 在 *第29届国际联合人工智能会议暨第17届环太平洋国际人工智能会议（IJCAI-PRICAI 2020）*，横滨，日本。
+[1] P. Badilla, F. Bravo-Marquez 和 J. Pérez [WEFE: 词嵌入公平性评估框架](https://www.ijcai20.org/) 在 *第 29 届国际联合人工智能会议暨第 17 届环太平洋国际人工智能会议（IJCAI-PRICAI 2020）*，横滨，日本。
 
 **相关：**
 
-+   [AI中的偏见：入门](https://www.kdnuggets.com/2020/06/bias-ai-primer.html)
++   [AI 中的偏见：入门](https://www.kdnuggets.com/2020/06/bias-ai-primer.html)
 
-+   [将伦理应用于AI的5种方法](https://www.kdnuggets.com/2019/12/5-ways-apply-ethics-ai.html)
++   [将伦理应用于 AI 的 5 种方法](https://www.kdnuggets.com/2019/12/5-ways-apply-ethics-ai.html)
 
-+   [NLP中的词嵌入及其应用](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html)
++   [NLP 中的词嵌入及其应用](https://www.kdnuggets.com/2019/02/word-embeddings-nlp-applications.html)
 
 ### 更多相关话题
 
-+   [终极指南：NLP中的不同词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
++   [终极指南：NLP 中的不同词嵌入技术](https://www.kdnuggets.com/2021/11/guide-word-embedding-techniques-nlp.html)
 
 +   [分类问题的更多性能评估指标你…](https://www.kdnuggets.com/2020/04/performance-evaluation-metrics-classification.html)
 

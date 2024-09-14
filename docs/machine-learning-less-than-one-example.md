@@ -1,16 +1,16 @@
 # 做到不可能的事？少于一个示例的机器学习
 
-> 原文：[https://www.kdnuggets.com/2020/11/machine-learning-less-than-one-example.html](https://www.kdnuggets.com/2020/11/machine-learning-less-than-one-example.html)
+> 原文：[`www.kdnuggets.com/2020/11/machine-learning-less-than-one-example.html`](https://www.kdnuggets.com/2020/11/machine-learning-less-than-one-example.html)
 
-[评论](#comments)
+评论
 
-![](../Images/e18f71d0759fc5c1745c0815d776efed.png)
+![](img/e18f71d0759fc5c1745c0815d776efed.png)
 
 *“少于一个示例学习”使机器学习算法能够用少于 N 个训练示例来分类 N 个标签。*
 
 如果我让你想象一种介于马和鸟之间的生物——比如一匹会飞的马——你是否需要看到一个具体的例子？这样的生物并不存在，但这并不妨碍我们用想象力创造一个：飞马。
 
-![](../Images/d717c55796dfc05b6fc7b6bf5b00934d.png)
+![](img/d717c55796dfc05b6fc7b6bf5b00934d.png)
 
 人类的思维具备各种机制，可以通过结合其对现实世界的抽象和具体知识来创造新概念。我们可以想象出我们可能从未见过的现有事物（如长脖子的马——长颈鹿），以及在现实生活中不存在的事物（如喷火的有翅蛇——龙）。这种认知灵活性使我们能够用很少甚至没有新的示例来学习新事物。
 
@@ -24,7 +24,7 @@
 
 ### k-NN 分类器
 
-![](../Images/407814ec1d5b83e6cc6d2180e4aad3af.png)
+![](img/407814ec1d5b83e6cc6d2180e4aad3af.png)
 
 *k-NN 机器学习算法通过寻找最接近的实例来对数据进行分类。*
 
@@ -52,7 +52,7 @@ k-NN 是一种“基于实例”的机器学习算法。当你提供更多每个
 
 基本上，LO-shot 通过在现有类别之间划分空间来使用软标签创建新类别。
 
-![](../Images/f6bf799d37192639d351108ea722fb60.png)
+![](img/f6bf799d37192639d351108ea722fb60.png)
 
 *LO-shot 学习使用软标签来划分现有类别之间的空间。*
 
@@ -60,7 +60,7 @@ k-NN 是一种“基于实例”的机器学习算法。当你提供更多每个
 
 在论文中，研究人员展示了 LO-shot 学习可以扩展到使用 *N* 个标签甚至更多的 *3N-2* 类别。
 
-![](../Images/180a91d5144256abca75295a6bfa6261.png)
+![](img/180a91d5144256abca75295a6bfa6261.png)
 
 *LO-shot 学习可以扩展以每个实例获得多个类别。左侧：从四个实例获得的 10 个类别。右侧：从五个实例获得的 13 个类别。*
 
@@ -72,7 +72,7 @@ k-NN 是一种“基于实例”的机器学习算法。当你提供更多每个
 
 ### 机器学习研究的新领域
 
-![](../Images/c13bb4a384a89236bc87fe06934c78b6.png)
+![](img/c13bb4a384a89236bc87fe06934c78b6.png)
 
 “对于像 k-NN 这样的基于实例的算法，LO-shot 学习的效率提升是相当显著的，特别是对于具有大量类别的数据集，”Susholutsky 说。“更广泛地说，LO-shot 学习在任何将分类算法应用于具有大量类别的数据集的场景中都很有用，特别是如果某些类别的样本很少，甚至没有样本。基本上，大多数零-shot 学习或少-shot 学习有用的场景中，LO-shot 学习也可能有用。”
 
@@ -98,11 +98,11 @@ k-NN 是一种“基于实例”的机器学习算法。当你提供更多每个
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -110,7 +110,7 @@ k-NN 是一种“基于实例”的机器学习算法。当你提供更多每个
 
 +   [机器学习算法一分钟内讲解](https://www.kdnuggets.com/2022/07/machine-learning-algorithms-explained-less-1-minute.html)
 
-+   [KDnuggets 新闻，7月20日：机器学习算法讲解…](https://www.kdnuggets.com/2022/n29.html)
++   [KDnuggets 新闻，7 月 20 日：机器学习算法讲解…](https://www.kdnuggets.com/2022/n29.html)
 
 +   [少于 15 行代码实现的多模态深度学习](https://www.kdnuggets.com/2023/01/predibase-multi-modal-deep-learning-less-15-lines-code.html)
 

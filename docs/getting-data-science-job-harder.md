@@ -1,22 +1,22 @@
 # 获取数据科学职位比以往任何时候都更加困难 - 如何将这一点转变为你的优势
 
-> 原文：[https://www.kdnuggets.com/2020/10/getting-data-science-job-harder.html](https://www.kdnuggets.com/2020/10/getting-data-science-job-harder.html)
+> 原文：[`www.kdnuggets.com/2020/10/getting-data-science-job-harder.html`](https://www.kdnuggets.com/2020/10/getting-data-science-job-harder.html)
 
-[评论](#comments)
+评论
 
 **由 [库尔蒂斯·派克斯](https://www.linkedin.com/in/kurtispykes/)，AI 作家**。
 
-![](../Images/dbd60871826bf353ba2fb58adbcf28d7.png)
+![](img/dbd60871826bf353ba2fb58adbcf28d7.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -52,13 +52,13 @@
 
 克服这一挑战的一个好方法是承认职位描述只是公司的一份愿望清单，他们希望聘请一个他们认为有能力解决实际问题的人。
 
-就此而言，务必以一种让他人（公司）认为你具备解决他们挑战的能力的方式展示你的能力。此外，如果你满足任何职位描述的至少50%的要求，那么你可能是合格的，应该尝试申请该职位——如果你完全符合职位描述的100%，你可能会显得过于资深。
+就此而言，务必以一种让他人（公司）认为你具备解决他们挑战的能力的方式展示你的能力。此外，如果你满足任何职位描述的至少 50%的要求，那么你可能是合格的，应该尝试申请该职位——如果你完全符合职位描述的 100%，你可能会显得过于资深。
 
 ### 数据科学正变得越来越生产化
 
-能够启动一个Jupyter Notebook并进行一些可视化，然后建立一个模型在过去曾有效，但在我看来，这已不足以让你引起关注。
+能够启动一个 Jupyter Notebook 并进行一些可视化，然后建立一个模型在过去曾有效，但在我看来，这已不足以让你引起关注。
 
-Jupyter Notebooks在进行实验时非常有用，但当你进入现实世界时，有一个阶段我们会超越实验阶段。我认为每个数据科学家都应该知道如何启动一个Jupyter Notebook，但随着数据科学变得更加生产化，能够编写生产级代码的数据科学家将获得额外的加分，因为这样可以节省成本和时间。
+Jupyter Notebooks 在进行实验时非常有用，但当你进入现实世界时，有一个阶段我们会超越实验阶段。我认为每个数据科学家都应该知道如何启动一个 Jupyter Notebook，但随着数据科学变得更加生产化，能够编写生产级代码的数据科学家将获得额外的加分，因为这样可以节省成本和时间。
 
 这里有三个原因说明每位数据科学家都应该知道如何编写生产级代码：
 
@@ -78,11 +78,11 @@ Jupyter Notebooks在进行实验时非常有用，但当你进入现实世界时
 
 ### 竞争
 
-数据科学是地球上增长最快和最具前景的技术之一，很多人纷纷更新技能，争取成为数据科学家。为了证实这一点，自开设以来，超过350万人已报名参加安德鲁·吴的机器学习课程（这是数据科学的重要组成部分）。
+数据科学是地球上增长最快和最具前景的技术之一，很多人纷纷更新技能，争取成为数据科学家。为了证实这一点，自开设以来，超过 350 万人已报名参加安德鲁·吴的机器学习课程（这是数据科学的重要组成部分）。
 
-![](../Images/8ad9c3d78f2247e609f3d7c3bd102568.png)
+![](img/8ad9c3d78f2247e609f3d7c3bd102568.png)
 
-这是21世纪最吸引人的工作是有原因的。
+这是 21 世纪最吸引人的工作是有原因的。
 
 现在越来越多的人试图进入这一领域，因此工作竞争非常激烈。然而，这不应成为你决定不去寻找工作的理由！
 
@@ -90,7 +90,7 @@ Jupyter Notebooks在进行实验时非常有用，但当你进入现实世界时
 
 是的，我们确实需要做更多的事情来脱颖而出。然而，根据我在 LinkedIn 个人资料上进行的最近一次调查，这并不一定意味着拥有最华丽的简历。
 
-![](../Images/6a0d34c5dc35049e1aac51191d6ba573.png)
+![](img/6a0d34c5dc35049e1aac51191d6ba573.png)
 
 *来源：[Kurtis Pykes 的 LinkedIn](https://www.linkedin.com/posts/kurtispykes_datascience-machinelearning-artificialintelligence-activity-6714579336265011200-2Q0l)。*
 
@@ -108,7 +108,7 @@ LinkedIn 使得找到在特定公司工作的人员变得非常容易，它应�
 
 **相关：**
 
-+   [我如何在8个月内提升我的数据科学技能](https://www.kdnuggets.com/2020/10/level-up-data-science-skills-8-months.html)
++   [我如何在 8 个月内提升我的数据科学技能](https://www.kdnuggets.com/2020/10/level-up-data-science-skills-8-months.html)
 
 +   [不受欢迎的观点 – 数据科学家应更具端到端能力](https://www.kdnuggets.com/2020/09/data-scientists-should-be-more-end-to-end.html)
 
@@ -116,11 +116,11 @@ LinkedIn 使得找到在特定公司工作的人员变得非常容易，它应�
 
 ### 更多相关主题
 
-+   [IMPACT: 数据可观测性峰会将于11月8日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT: 数据可观测性峰会将于 11 月 8 日回归…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
 +   [使用 DuckDB 和…将你的笔记本电脑变成个人分析引擎](https://www.kdnuggets.com/turn-your-laptop-into-a-personal-analytics-engine-with-duckdb-and-motherduck)
 
-+   [KDnuggets 新闻，9月14日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
++   [KDnuggets 新闻，9 月 14 日：免费数据科学 Python 课程 •…](https://www.kdnuggets.com/2022/n36.html)
 
 +   [在不断变化的世界中如何成长为数据科学家](https://www.kdnuggets.com/2022/01/grow-data-scientist-everchanging-world.html)
 

@@ -1,8 +1,8 @@
 # 介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型
 
-> 原文：[https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)
+> 原文：[`www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html`](https://www.kdnuggets.com/2023/04/introducing-tpu-v4-googles-cutting-edge-supercomputer-large-language-models.html)
 
-![介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型](../Images/0dad33ae6b45aeffa128995ae7739c43.png)
+![介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型](img/0dad33ae6b45aeffa128995ae7739c43.png)
 
 图片来源：编辑
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@ TPU 代表张量处理单元，它们被设计用于机器学习和深度学习�
 
 TPU v2 芯片包含两个 TensorCores、四个 MXUs、一个矢量单元和一个标量单元。见下图：
 
-![介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型](../Images/259c8fa83f027f061868b432cfacae63.png)
+![介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型](img/259c8fa83f027f061868b432cfacae63.png)
 
 图片来源：[Google](https://cloud.google.com/tpu/docs/system-architecture-tpu-vm)
 
@@ -48,7 +48,7 @@ TPU v4 也是首个具有硬件支持嵌入的超级计算机。神经网络在�
 
 下图展示了在 CPU、TPU v3、TPU v4（使用 SparseCore）和 TPU v4（在 CPU 内存中使用嵌入，不使用 SparseCore）上的推荐模型性能。可以看到，TPU v4 SparseCore 在推荐模型上比 TPU v3 快 3 倍，比使用 CPU 的系统快 5 到 30 倍。
 
-![介绍 TPU v4：Google 的前沿超级计算机，用于大型语言模型](../Images/70bd04dcc3d9db52513a04d61349bb72.png)
+![介绍 TPU v4：Google 的前沿超级计算机，用于大型语言模型](img/70bd04dcc3d9db52513a04d61349bb72.png)
 
 图片由 [Google](https://cloud.google.com/blog/topics/systems/tpu-v4-enables-performance-energy-and-co2e-efficiency-gains) 提供
 
@@ -72,7 +72,7 @@ TPU v4 还具有多维模型分区技术，使大型语言模型的低延迟、�
 
 递归神经网络（RNN）的应用有所下降，因为 RNN 是一次性处理输入，而与之相比，变换模型在自然语言翻译和文本摘要方面更为出色。
 
-![介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型](../Images/22ec13f5b8689ecfcfc1bbf86ee8bf38.png)
+![介绍 TPU v4: 谷歌前沿超级计算机用于大型语言模型](img/22ec13f5b8689ecfcfc1bbf86ee8bf38.png)
 
 要了解更多关于 TPU v4 能力的信息，请阅读研究论文 [TPU v4: 一种用于机器学习的光学可重构超级计算机，支持嵌入的硬件](https://arxiv.org/pdf/2304.01433.pdf)。
 

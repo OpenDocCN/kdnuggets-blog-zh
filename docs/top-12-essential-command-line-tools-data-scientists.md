@@ -1,22 +1,22 @@
-# 数据科学家的前12个必备命令行工具
+# 数据科学家的前 12 个必备命令行工具
 
-> 原文：[https://www.kdnuggets.com/2018/03/top-12-essential-command-line-tools-data-scientists.html](https://www.kdnuggets.com/2018/03/top-12-essential-command-line-tools-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2018/03/top-12-essential-command-line-tools-data-scientists.html`](https://www.kdnuggets.com/2018/03/top-12-essential-command-line-tools-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Header image](../Images/f33aa745a691adba06e0d95f1c1542f6.png)
+![Header image](img/f33aa745a691adba06e0d95f1c1542f6.png)
 
-本文简要概述了十几个类Unix操作系统命令行工具，这些工具对数据科学任务可能有用。列表中不包括任何一般的文件管理命令（`pwd`、`ls`、`mkdir`、`rm` 等）或远程会话管理工具（`rsh`、`ssh` 等），而是包括了一些从数据科学角度来看有用的工具，通常与各种程度的数据检查和处理相关。这些工具也都包含在典型的类Unix操作系统中。
+本文简要概述了十几个类 Unix 操作系统命令行工具，这些工具对数据科学任务可能有用。列表中不包括任何一般的文件管理命令（`pwd`、`ls`、`mkdir`、`rm` 等）或远程会话管理工具（`rsh`、`ssh` 等），而是包括了一些从数据科学角度来看有用的工具，通常与各种程度的数据检查和处理相关。这些工具也都包含在典型的类 Unix 操作系统中。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -85,7 +85,7 @@ sepal_length,sepal_width,petal_length,petal_width,species
 
 ### 4\. `head`
 
-[`head`](https://en.wikipedia.org/wiki/Head_(Unix)) 将文件的前 n 行（默认10行）输出到标准输出。显示的行数可以通过 `-n` 选项设置。
+[`head`](https://en.wikipedia.org/wiki/Head_(Unix)) 将文件的前 n 行（默认 10 行）输出到标准输出。显示的行数可以通过 `-n` 选项设置。
 
 ```py
 
@@ -114,7 +114,7 @@ sepal_length,sepal_width,petal_length,petal_width,species
 
 ```
 
-![Typing crazy](../Images/34e52931353bd75ff0d26c15821b1320.png)
+![Typing crazy](img/34e52931353bd75ff0d26c15821b1320.png)
 
 操作命令行魔法。
 
@@ -137,9 +137,9 @@ sepal_length,sepal_width,petal_length,petal_width,species
 
 ### 7\. `cut`
 
-[`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)) 用于从文件中切割出文本行的部分。虽然这些切片可以使用多种标准进行，但`cut`在从CSV文件中提取列数据时非常有用。
+[`cut`](https://en.wikipedia.org/wiki/Cut_(Unix)) 用于从文件中切割出文本行的部分。虽然这些切片可以使用多种标准进行，但`cut`在从 CSV 文件中提取列数据时非常有用。
 
-这会输出使用逗号作为字段分隔符（"-d ','"）的iris.csv文件的第五列（"-f 5"）：
+这会输出使用逗号作为字段分隔符（"-d ','"）的 iris.csv 文件的第五列（"-f 5"）：
 
 ```py
 ~$ cut -d ',' -f 5 iris.csv
@@ -167,7 +167,7 @@ setosa
 
 ```
 
-![Cowsay whut?!?](../Images/6df61c61b757a4c270b8969d61750952.png)
+![Cowsay whut?!?](img/6df61c61b757a4c270b8969d61750952.png)
 
 牛说什么。
 
@@ -175,7 +175,7 @@ setosa
 
 [`awk`](https://en.wikipedia.org/wiki/AWK) 实际上不是一个“命令”，而是一个完整的编程语言。它用于处理和提取文本，可以在命令行中以单行命令形式调用。
 
-掌握`awk`需要一些时间，但在此之前，下面是它能完成的一个示例。考虑到我们的示例文件——iris.csv——相当有限（尤其是在文本多样性方面），这行代码将调用`awk`，在指定文件（"iris.csv"）中搜索“setosa”字符串，并逐一打印遇到的项目（保存在$0变量中）：
+掌握`awk`需要一些时间，但在此之前，下面是它能完成的一个示例。考虑到我们的示例文件——iris.csv——相当有限（尤其是在文本多样性方面），这行代码将调用`awk`，在指定文件（"iris.csv"）中搜索“setosa”字符串，并逐一打印遇到的项目（保存在$0 变量中）：
 
 ```py
 ~$ awk '/setosa/ { print $0 }' iris.csv
@@ -206,7 +206,7 @@ setosa
 
 ### 11\. `sed`
 
-[`sed`](https://en.wikipedia.org/wiki/Sed) 是一个流编辑器，另一种文本处理和转换工具，类似于`awk`。我们将使用下面这行代码将iris.csv文件中“setosa”的出现替换为“iris-setosa”：
+[`sed`](https://en.wikipedia.org/wiki/Sed) 是一个流编辑器，另一种文本处理和转换工具，类似于`awk`。我们将使用下面这行代码将 iris.csv 文件中“setosa”的出现替换为“iris-setosa”：
 
 ```py
 ~$ sed 's/setosa/iris-setosa/g' iris.csv > output.csv
@@ -235,26 +235,26 @@ sepal_length,sepal_width,petal_length,petal_width,species
 
 ```
 
--   这里有一个简单的介绍，讲述了12个实用的命令行工具。这只是数据科学（或其他任何目标）在命令行上可能实现的一小部分。摆脱鼠标的束缚，看看你的生产力如何提高。
+-   这里有一个简单的介绍，讲述了 12 个实用的命令行工具。这只是数据科学（或其他任何目标）在命令行上可能实现的一小部分。摆脱鼠标的束缚，看看你的生产力如何提高。
 
 **相关**：
 
-+   [命令行中的数据科学：探索数据](/2018/02/data-science-command-line-book-exploring-data.html)
++   命令行中的数据科学：探索数据
 
-+   [Docker如何帮助你成为更高效的数据科学家](/2018/01/docker-help-become-more-effective-data-scientist.html)
++   Docker 如何帮助你成为更高效的数据科学家
 
-+   [在Pandas中使用Excel](/2018/01/using-excel-pandas.html)
++   在 Pandas 中使用 Excel
 
 ### 更多相关话题
 
-+   [数据科学的5个额外命令行工具](https://www.kdnuggets.com/2023/03/5-command-line-tools-data-science.html)
++   [数据科学的 5 个额外命令行工具](https://www.kdnuggets.com/2023/03/5-command-line-tools-data-science.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
 +   [停止学习数据科学以寻找目标，并通过找到目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [90亿美元的人工智能失败，经过检讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [90 亿美元的人工智能失败，经过检讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

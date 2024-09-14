@@ -1,12 +1,12 @@
 # 3 个额外的 Google Colab 环境管理技巧
 
-> 原文：[https://www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html](https://www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html)
+> 原文：[`www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html`](https://www.kdnuggets.com/2019/01/more-google-colab-environment-management-tips.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-Google 的 Colab 在 2018 年初首次公开发布时受到了各种宣传。最初对它非常兴奋之后，我写了一篇[简短的帖子](/2018/02/essential-google-colaboratory-tips-tricks.html)，给新用户提供了一些提示，其中包括利用免费的 GPU 运行时、安装额外的第三方 Python 库，以及上传和使用数据文件到你的 Colab 环境。
+Google 的 Colab 在 2018 年初首次公开发布时受到了各种宣传。最初对它非常兴奋之后，我写了一篇简短的帖子，给新用户提供了一些提示，其中包括利用免费的 GPU 运行时、安装额外的第三方 Python 库，以及上传和使用数据文件到你的 Colab 环境。
 
-![Header image](../Images/f2a5d9754f4267cd5dd86c2c0a9ed1ec.png)
+![Header image](img/f2a5d9754f4267cd5dd86c2c0a9ed1ec.png)
 
 像每一种新事物一样，Colab 的兴奋感在初期的狂热之后有所减退。然而，在重新翻阅书籍并需要一个可以在我的笔记本、工作站和 Chromebook 之间无缝访问和共享的稳定笔记本环境后，我决定再看一眼 Colab。事实证明这是一个好决定；在过去几个月里，我一直定期使用 Colab 进行*所有*与学习相关的编码。
 
@@ -18,7 +18,7 @@ Google 的 Colab 在 2018 年初首次公开发布时受到了各种宣传。最
 
 好吧，这实际上不算是 Colab 的技巧，但首先要将 Colab 从浏览器中移出。如果你像我一样，你的标签页情况不太理想。再添加 Colab 管理界面**和**一堆笔记本不会有所帮助，所以将 Colab 作为独立应用运行。这依赖于操作系统，但涉及到在你的 Chrome 浏览器中安装 Colab "应用"，并从应用上下文菜单中选择“以窗口打开”和“创建快捷方式...”，然后你需要找到该快捷方式并用它在自己的窗口中打开应用。
 
-![右键点击](../Images/d8a2c5bd1d585486045c441491f12d1c.png)
+![右键点击](img/d8a2c5bd1d585486045c441491f12d1c.png)
 
 就这样；现在你可以从自己的图标中在独立窗口中打开 Colab，就像在帖子头图中一样。我知道，这其实不是重点，但仍然很有用。
 
@@ -62,7 +62,7 @@ from google.colab import drive
 drive.mount('/content/gdrive')
 ```
 
-![GDrive auth code](../Images/f996dc6b9e01900fa6d41db2e7d1e871.png)
+![GDrive auth code](img/f996dc6b9e01900fa6d41db2e7d1e871.png)
 
 点击链接并输入授权代码后，你可以按照如下方式访问你的驱动器：
 
@@ -72,7 +72,7 @@ drive.mount('/content/gdrive')
 
 ```
 
-![Colab GDrive ls](../Images/b240bde1eb37c12ce6c34973ab68db04.png)
+![Colab GDrive ls](img/b240bde1eb37c12ce6c34973ab68db04.png)
 
 当然，它不是永久性的，但也不费多少事，而且在我看来，比使用其他任何选项都更直接（并且也不那么不永久）。如果你使用像[AutoKey](https://github.com/autokey/autokey)这样的桌面自动化和文本扩展工具，那么常用的代码片段和命令会变得更加简单。
 
@@ -106,25 +106,25 @@ import naive_sharding
 
 修改上述一些代码片段，你可以看到如何轻松地将模型权重进出 Colab 环境。因此，凭借上述简短的说明和发散性思维，你可以在 Google Colab 上完成相当多的工作，尽管许多反对者可能会让你相信不可能。鉴于无需设置，并且 Chromebook 访问也非常简单，我最近发现 Colab 是一个理想的编码工具。
 
-别忘了阅读[这里找到的前三个提示和技巧](/2018/02/essential-google-colaboratory-tips-tricks.html)。
+别忘了阅读这里找到的前三个提示和技巧。
 
 **相关内容**：
 
-+   [3 个必备的 Google Colaboratory 提示与技巧](/2018/02/essential-google-colaboratory-tips-tricks.html)
++   3 个必备的 Google Colaboratory 提示与技巧
 
-+   [数据科学笔记本使用最佳实践](/2018/11/best-practices-notebooks-data-science.html)
++   数据科学笔记本使用最佳实践
 
-+   [如何在 Google Cloud 上设置免费的数据科学环境](/2018/08/set-up-free-data-science-environment-google-cloud.html)
++   如何在 Google Cloud 上设置免费的数据科学环境
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

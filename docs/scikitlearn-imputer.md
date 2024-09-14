@@ -1,8 +1,8 @@
 # 使用 Scikit-learn 的填补器
 
-> 原文：[https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html](https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html)
+> 原文：[`www.kdnuggets.com/2022/07/scikitlearn-imputer.html`](https://www.kdnuggets.com/2022/07/scikitlearn-imputer.html)
 
-![使用 Scikit-learn 的填补器](../Images/6237013757a9a03d4aae1d849299a8af.png)
+![使用 Scikit-learn 的填补器](img/6237013757a9a03d4aae1d849299a8af.png)
 
 [拼图形状](https://www.freepik.com/photos/puzzle-shape) 照片由[freepik](https://www.freepik.com)创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -57,9 +57,9 @@ from sklearn.compose import ColumnTransformer
 
 ```
 
-[Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)数据集是Kaggle入门预测比赛的一部分。它包括训练、测试和提交的CSV文件。我们将使用**train.csv**，其中包含宇宙飞船上的乘客信息。
+[Spaceship Titanic](https://www.kaggle.com/competitions/spaceship-titanic/data?select=train.csv)数据集是 Kaggle 入门预测比赛的一部分。它包括训练、测试和提交的 CSV 文件。我们将使用**train.csv**，其中包含宇宙飞船上的乘客信息。
 
-pandas的**read_csv()**函数读取train.csv并显示数据框。
+pandas 的**read_csv()**函数读取 train.csv 并显示数据框。
 
 ```py
 df = pd.read_csv("dataset/train.csv")
@@ -68,11 +68,11 @@ df
 
 ```
 
-![使用Scikit-learn的插补器](../Images/f6f658a4b29bc3a93b8c4935833f651e.png)
+![使用 Scikit-learn 的插补器](img/f6f658a4b29bc3a93b8c4935833f651e.png)
 
 ## 数据分析
 
-在本节中，我们将探讨缺失值的列，但首先需要检查数据集的形状。它有8693行和14列。
+在本节中，我们将探讨缺失值的列，但首先需要检查数据集的形状。它有 8693 行和 14 列。
 
 ```py
 df.shape
@@ -92,7 +92,7 @@ NA.style.background_gradient(cmap="Pastel1_r", subset=['NA Count'])
 
 ```
 
-![使用Scikit-learn的插补器](../Images/28ac6aaf0b02b65004ff589fe965ab36.png)
+![使用 Scikit-learn 的插补器](img/28ac6aaf0b02b65004ff589fe965ab36.png)
 
 除了**PassengerID**和**Transported**之外，每一列都有缺失值。
 
@@ -126,7 +126,7 @@ data1.Age[0:5]
 
 ```
 
-接下来，我们将使用sklearn的**SimpleImputer**并将其应用于**Age**列。它将用列的**average**值替换缺失数据。
+接下来，我们将使用 sklearn 的**SimpleImputer**并将其应用于**Age**列。它将用列的**average**值替换缺失数据。
 
 正如我们所观察到的，**Age**列中没有剩余的缺失值。
 
@@ -144,7 +144,7 @@ data1['Age'].isna().sum()
 
 ## 类别数据插补
 
-对于类别数据插补，我们将使用包含201个缺失值的**HomePlanet**列。
+对于类别数据插补，我们将使用包含 201 个缺失值的**HomePlanet**列。
 
 ```py
 data1['HomePlanet'].isna().sum()
@@ -172,7 +172,7 @@ data1['HomePlanet'] = imp.fit_transform(data1['HomePlanet'].values.reshape(-1, 1
 
 ```
 
-我们已经填充了HomePlanet列中的所有缺失值。
+我们已经填充了 HomePlanet 列中的所有缺失值。
 
 ```py
 data1['HomePlanet'].isna().sum()
@@ -185,7 +185,7 @@ data1['HomePlanet'].isna().sum()
 
 在**单变量插补器**中，缺失值是通过相同的特征计算的，而在**多变量插补器**中，算法使用所有可用特征维度来预测缺失值。
 
-我们将一次性填充数值列，正如我们所看到的，它们都有150+的缺失值。
+我们将一次性填充数值列，正如我们所看到的，它们都有 150+的缺失值。
 
 ```py
 data2[num_na].isna().sum()
@@ -202,7 +202,7 @@ data2[num_na].isna().sum()
 
 ```
 
-我们将使用`IterativeImputer`，设置**max_iter**为10，以估计和填充数值列中的缺失值。该算法将在估计值时考虑所有列。
+我们将使用`IterativeImputer`，设置**max_iter**为 10，以估计和填充数值列中的缺失值。该算法将在估计值时考虑所有列。
 
 ```py
 imp = IterativeImputer(max_iter=10, random_state=0)
@@ -224,7 +224,7 @@ data2[num_na].isna().sum()
 
 ## 机器学习中的类别和数值数据插补
 
-为什么选择Scikit-learn的插补器？除了插补器外，机器学习框架还提供特征转换、数据处理、管道和机器学习算法。它们都能无缝集成。只需几行代码，你就可以在任何数据集上进行插补、归一化、转换和训练你的模型。
+为什么选择 Scikit-learn 的插补器？除了插补器外，机器学习框架还提供特征转换、数据处理、管道和机器学习算法。它们都能无缝集成。只需几行代码，你就可以在任何数据集上进行插补、归一化、转换和训练你的模型。
 
 在本节中，我们将学习如何在机器学习项目中集成插补器以获得更好的结果。
 

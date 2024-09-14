@@ -1,8 +1,8 @@
 # 使用 SQL 查询你的 Pandas DataFrames
 
-> 原文：[https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
+> 原文：[`www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html`](https://www.kdnuggets.com/2021/10/query-pandas-dataframes-sql.html)
 
-![使用 SQL 查询你的 Pandas DataFrames](../Images/2ea84109c8d12ff5edd83ecd449d24b9.png)
+![使用 SQL 查询你的 Pandas DataFrames](img/2ea84109c8d12ff5edd83ecd449d24b9.png)
 
 图片由 Jeffrey Czum 提供，来源于 Pexels（作者编辑）
 
@@ -12,11 +12,11 @@ Pandas —— 或更具体地说，它的主要数据容器，[DataFrame](https:
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

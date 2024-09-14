@@ -1,12 +1,12 @@
 # 使用 PyCaret 2.0 构建你自己的 AutoML
 
-> 原文：[https://www.kdnuggets.com/2020/08/build-automl-pycaret.html](https://www.kdnuggets.com/2020/08/build-automl-pycaret.html)
+> 原文：[`www.kdnuggets.com/2020/08/build-automl-pycaret.html`](https://www.kdnuggets.com/2020/08/build-automl-pycaret.html)
 
-[评论](#comments)
+评论
 
 **由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 的创始人和作者**
 
-![图示](../Images/ebd6f2d3031fd2699b0b56170a71c36a.png)
+![图示](img/ebd6f2d3031fd2699b0b56170a71c36a.png)
 
 PyCaret — 一个开源的低代码 Python 机器学习库
 
@@ -54,7 +54,7 @@ PyCaret 是一个用于监督学习和无监督学习的工作流自动化工具
 
 PyCaret 中的所有模块支持数据准备（超过 25 种基本预处理技术，配有大量未训练的模型以及对自定义模型的支持，自动超参数调优，模型分析和可解释性，自动模型选择，实验记录和简单的云部署选项）。
 
-![图示](../Images/f04fa31cd25523d0e3a6fa808557fbb0.png)
+![图示](img/f04fa31cd25523d0e3a6fa808557fbb0.png)
 
 https://www.pycaret.org/guide
 
@@ -68,9 +68,9 @@ https://www.pycaret.org/guide
 
 如果你是第一次使用 Python，安装 Anaconda Distribution 是开始的最简单方式。 [点击这里](https://www.anaconda.com/distribution/) 下载包含 Python 3.7 或更高版本的 Anaconda Distribution。
 
-![图示](../Images/c7c8ab066e516a98e8339027d3f08f0c.png)
+![图示](img/c7c8ab066e516a98e8339027d3f08f0c.png)
 
-[https://www.anaconda.com/products/individual](https://www.anaconda.com/products/individual)
+[`www.anaconda.com/products/individual`](https://www.anaconda.com/products/individual)
 
 ### 设置环境
 
@@ -84,7 +84,7 @@ https://www.pycaret.org/guide
 conda create --name **myenv** python=3.7
 ```
 
-![图示](../Images/ca629ea77ecd0f69afc5f6279ebf25f4.png)
+![图示](img/ca629ea77ecd0f69afc5f6279ebf25f4.png)
 
 Anaconda Prompt — 创建环境
 
@@ -104,7 +104,7 @@ pip install **pycaret==2.0**
 
 `C:\Users\***username***\AppData\Local\Continuum\anaconda3\envs\myenv`
 
-![图像](../Images/1b946ad7361f6b2dc10da9efbb2296a0.png)
+![图像](img/1b946ad7361f6b2dc10da9efbb2296a0.png)
 
 文件 → 选项 → 全局 → Python 脚本
 
@@ -114,7 +114,7 @@ pip install **pycaret==2.0**
 
 一家保险公司希望通过更好地预测患者费用来改善现金流预测，使用住院时的基本人口统计数据和患者健康风险指标。
 
-![图像](../Images/15cb86b37c83b7fbc80ec7c8d1b53f3c.png)
+![图像](img/15cb86b37c83b7fbc80ec7c8d1b53f3c.png)
 
 *(*[*数据源*](https://www.kaggle.com/mirichoi0218/insurance#insurance.csv)*)*
 
@@ -126,15 +126,15 @@ pip install **pycaret==2.0**
 
 你可以直接从我们的 GitHub 上加载数据集，方法是：Power BI Desktop → 获取数据 → Web
 
-数据集链接：[https://raw.githubusercontent.com/pycaret/pycaret/master/datasets/insurance.csv](https://raw.githubusercontent.com/pycaret/pycaret/master/datasets/insurance.csv)
+数据集链接：[`raw.githubusercontent.com/pycaret/pycaret/master/datasets/insurance.csv`](https://raw.githubusercontent.com/pycaret/pycaret/master/datasets/insurance.csv)
 
-![图像](../Images/7c9a9d98fe18942bb5df5adac07e96a8.png)
+![图像](img/7c9a9d98fe18942bb5df5adac07e96a8.png)
 
 Power BI Desktop → 获取数据 → Web
 
 在 Power Query 中创建一个重复的数据集：
 
-![图像](../Images/b9cdb8d9f55c88017447107fcea8bf85.png)
+![图像](img/b9cdb8d9f55c88017447107fcea8bf85.png)
 
 Power Query → 创建一个重复的数据集
 
@@ -150,7 +150,7 @@ best_model = compare_models()**# finalize best model** best = finalize_model(bes
 save_model(best, 'c:/users/moezs/best-model-power')**# return the performance metrics df** dataset = pull()
 ```
 
-![图像](../Images/cb1d217ca940b1dd5ad8481e25483e4b.png)
+![图像](img/cb1d217ca940b1dd5ad8481e25483e4b.png)
 
 Power Query 中的脚本
 
@@ -162,7 +162,7 @@ Power Query 中的脚本
 
 输出：
 
-![图像](../Images/1bf6f2ac6a2004416fe10d76f3b6e164.png)
+![图像](img/1bf6f2ac6a2004416fe10d76f3b6e164.png)
 
 Python 脚本的输出
 
@@ -170,7 +170,7 @@ Python 脚本的输出
 
 表现最佳的模型**梯度提升回归器**将与整个转换管道一起作为 pickle 文件保存在你的本地目录中。此文件稍后可以用来对新的数据集生成预测（见下方步骤 3）。
 
-![图片](../Images/2f3d1f34f6ce81e94ad11f60a177486a.png)
+![图片](img/2f3d1f34f6ce81e94ad11f60a177486a.png)
 
 转换管道和模型保存为 pickle 文件
 
@@ -191,7 +191,7 @@ save_model(best, 'c:/users/moezs/best-model-power')**# return the performance me
 
 示例仪表板已创建。PBIX 文件[已上传到这里](https://github.com/pycaret/pycaret-powerbi-automl)。
 
-![图片](../Images/28d20533650eb410ff6ba82d854e0d10.png)
+![图片](img/28d20533650eb410ff6ba82d854e0d10.png)
 
 使用 PyCaret AutoML 结果创建的仪表板
 
@@ -210,7 +210,7 @@ from pycaret.regression import load_model, predict_model**# load model in a vari
 
 输出：
 
-![图片](../Images/f8e32de1177d53c5a94f5857415a408e.png)
+![图片](img/f8e32de1177d53c5a94f5857415a408e.png)
 
 `predict_model` 函数在 Power Query 中的输出
 
@@ -220,7 +220,7 @@ from pycaret.regression import load_model, predict_model**# load model in a vari
 
 为了实现这一点，你必须确保安装了包含依赖 Python 包的 Python 运行时在托管个人网关的机器上。请注意，共享的本地数据网关不支持 Python 脚本执行。[点击这里](https://powerbi.microsoft.com/en-us/blog/python-visualizations-in-power-bi-service/)以了解更多信息。
 
-本教程中使用的 PBIX 文件已上传到这个 GitHub 仓库：[https://github.com/pycaret/pycaret-powerbi-automl](https://github.com/pycaret/pycaret-powerbi-automl)
+本教程中使用的 PBIX 文件已上传到这个 GitHub 仓库：[`github.com/pycaret/pycaret-powerbi-automl`](https://github.com/pycaret/pycaret-powerbi-automl)
 
 如果你想了解更多关于 PyCaret 2.0 的信息，请阅读这个[公告](https://towardsdatascience.com/announcing-pycaret-2-0-39c11014540e)。
 
@@ -280,21 +280,21 @@ from pycaret.regression import load_model, predict_model**# load model in a vari
 
 **相关：**
 
-+   [Github 是你将来需要的最佳 AutoML](/2020/08/github-best-automl-ever-need.html)
++   Github 是你将来需要的最佳 AutoML
 
-+   [你不知道的 PyCaret 的 5 件事](/2020/07/5-things-pycaret.html)
++   你不知道的 PyCaret 的 5 件事
 
-+   [使用 Docker 容器将机器学习管道部署到云端](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
++   使用 Docker 容器将机器学习管道部署到云端
 
 * * *
 
 ## 我们的前 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

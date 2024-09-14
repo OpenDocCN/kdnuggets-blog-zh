@@ -1,20 +1,20 @@
 # 机器学习概述：分类
 
-> 原文：[https://www.kdnuggets.com/2017/07/machine-learning-abstracts-classification.html](https://www.kdnuggets.com/2017/07/machine-learning-abstracts-classification.html)
+> 原文：[`www.kdnuggets.com/2017/07/machine-learning-abstracts-classification.html`](https://www.kdnuggets.com/2017/07/machine-learning-abstracts-classification.html)
 
 **由纳伦德拉·纳思·乔希撰写，卡内基梅隆大学。**
 
-![奥斯卡自拍](../Images/fb22811380bb6d654a34d38a692f7281.png)
+![奥斯卡自拍](img/fb22811380bb6d654a34d38a692f7281.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -60,11 +60,11 @@
 
 **给我一个例子，怎么样！**
 
-让我们考虑这个春季清理的例子。假设你有10个项目需要决定是保留还是丢弃。
+让我们考虑这个春季清理的例子。假设你有 10 个项目需要决定是保留还是丢弃。
 
-你使用7项物品来**“训练”**你的分类算法。训练是使算法**“学习”**的过程。
+你使用 7 项物品来**“训练”**你的分类算法。训练是使算法**“学习”**的过程。
 
-![](../Images/d231adb32fe247a28a5c2c025d58eb4d.png)
+![](img/d231adb32fe247a28a5c2c025d58eb4d.png)
 
 我的**“训练集”**
 
@@ -72,13 +72,13 @@
 
 > 保留 = SENTIMENTAL_VALUE | (NEED_FUTURE & EXPENSIVE)
 
-训练后，分类算法将学习到相同的内容，并尝试将其学到的应用于尚未见过的下一个物品，例如，物品8。
+训练后，分类算法将学习到相同的内容，并尝试将其学到的应用于尚未见过的下一个物品，例如，物品 8。
 
-![](../Images/cf025975833fca64a04d333e3c3aeade.png)
+![](img/cf025975833fca64a04d333e3c3aeade.png)
 
-物品8
+物品 8
 
-根据算法的学习，它将把物品8分类为**保留**。
+根据算法的学习，它将把物品 8 分类为**保留**。
 
 我希望这能给你一个关于分类背后直觉的大致了解。在下一篇文章中，我将讨论不同类型的分类算法。
 
@@ -96,11 +96,11 @@
 
 **相关内容：**
 
-+   [我应该使用哪种机器学习算法？](/2017/06/which-machine-learning-algorithm.html)
++   我应该使用哪种机器学习算法？
 
-+   [为什么选择人工智能和机器学习？](/2017/06/why-artificial-intelligence-machine-learning.html)
++   为什么选择人工智能和机器学习？
 
-+   [机器学习速成课程：第1部分](/2017/05/machine-learning-crash-course-part-1.html)
++   机器学习速成课程：第一部分
 
 ### 更多相关话题
 

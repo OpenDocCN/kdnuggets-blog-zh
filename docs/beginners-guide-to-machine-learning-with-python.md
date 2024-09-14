@@ -1,8 +1,8 @@
 # 初学者的 Python 机器学习指南
 
-> 原文：[https://www.kdnuggets.com/beginners-guide-to-machine-learning-with-python](https://www.kdnuggets.com/beginners-guide-to-machine-learning-with-python)
+> 原文：[`www.kdnuggets.com/beginners-guide-to-machine-learning-with-python`](https://www.kdnuggets.com/beginners-guide-to-machine-learning-with-python)
 
-![Python 机器学习](../Images/7cd2c87585f7c595fc94b1a9f0c66bbd.png)
+![Python 机器学习](img/7cd2c87585f7c595fc94b1a9f0c66bbd.png)
 
 *作者提供的图片*
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@
 
 但有时，AI、机器学习和深度学习之间的区别并不明显。这里有一个宏大的方案，最好地代表了这些术语。
 
-![Python 机器学习](../Images/0eb5a95241894cd072523c1b4b1fff2d.png)
+![Python 机器学习](img/0eb5a95241894cd072523c1b4b1fff2d.png)
 
 ## **初学者如何分类机器学习**
 
@@ -56,7 +56,7 @@
 
 就像 Sci-kit Learn 一样，[这里](https://scikit-learn.org/stable/)。
 
-![Python 机器学习](../Images/712e147cc26059c5260f47be2b612b64.png)
+![Python 机器学习](img/712e147cc26059c5260f47be2b612b64.png)
 
 *图片来源：[scikit-learn.org](https://scikit-learn.org/stable/)*
 
@@ -68,7 +68,7 @@ Sci-kit learn 是 Python 中最著名的机器学习库；我们将在本文中�
 
 ## **什么是回归？**
 
-![机器学习与 Python](../Images/02a246d7bd2da21c4d0ecba6139b0906.png)
+![机器学习与 Python](img/02a246d7bd2da21c4d0ecba6139b0906.png)
 
 回归是一种机器学习算法，用于预测连续值。以下是一些回归的现实生活示例，
 
@@ -100,7 +100,7 @@ Sci-kit learn 是 Python 中最著名的机器学习库；我们将在本文中�
 
 在这里，让我们使用我们平台上的数据项目来预测价格 [这里](https://platform.stratascratch.com/data-projects/predicting-price?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+with+python)。
 
-![机器学习与 Python](../Images/f7c98dde1f2620d9a44a9c3f8ea580b0.png)
+![机器学习与 Python](img/f7c98dde1f2620d9a44a9c3f8ea580b0.png)
 
 ## **数据探索与分析**
 
@@ -135,7 +135,7 @@ data.head()
 
 这里是输出结果。
 
-![机器学习与 Python](../Images/1da563d6fa787ff346930a6a2ba2cb68.png)
+![机器学习与 Python](img/1da563d6fa787ff346930a6a2ba2cb68.png)
 
 现在，让我们检查第二个函数：查看有关数据集列的信息。
 
@@ -170,7 +170,7 @@ data.describe()
 
 这里是输出结果。
 
-![机器学习与 Python](../Images/e7f8fb9b4e7546b63dd4d321db486468.png)
+![机器学习与 Python](img/e7f8fb9b4e7546b63dd4d321db486468.png)
 
 现在，你对我们的数据更熟悉了。在机器学习中，所有预测变量，也就是你打算用于预测的列，应该是数字型的。
 
@@ -248,7 +248,7 @@ data.head()
 
 在这段代码中，我们通过在字典中为每一天定义一个数字，然后简单地用这些数字替换日期名称来定义工作日。这里是输出结果。
 
-![使用Python进行机器学习](../Images/a77fdd9e6771e16d774f4e305663d0c3.png)
+![使用 Python 进行机器学习](img/a77fdd9e6771e16d774f4e305663d0c3.png)
 
 现在，我们快完成了。
 
@@ -274,7 +274,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 如果你是初学者，这段代码可能看起来很复杂，但请放心，它并不复杂。在代码中，我们首先将模型名称及其相应的 scikit-learn 函数分配给模型的字典。
 
-接下来，我们创建一个名为 results 的空字典来存储这些结果。在第一次循环中，我们同时应用所有机器学习模型，并使用 R^2 和 MSE 等指标评估它们，这些指标评估算法的表现。
+接下来，我们创建一个名为 results 的空字典来存储这些结果。在第一次循环中，我们同时应用所有机器学习模型，并使用 R² 和 MSE 等指标评估它们，这些指标评估算法的表现。
 
 在最终的循环中，我们打印出我们保存的结果。这是代码
 
@@ -299,19 +299,19 @@ for name, model in models.items():
     r2 = r2_score(y_test, y_pred)
 
     # Store results
-    results[name] = {'MSE': mse, 'R^2 Score': r2}
+    results[name] = {'MSE': mse, 'R² Score': r2}
 
 # Print the results
 for model_name, metrics in results.items():
-    print(f"{model_name} - MSE: {metrics['MSE']}, R^2 Score: {metrics['R^2 Score']}") 
+    print(f"{model_name} - MSE: {metrics['MSE']}, R² Score: {metrics['R² Score']}") 
 ```
 
 这是输出结果。
 
 ```py
-Multiple Linear Regression - MSE: 35143.23011545407, R^2 Score: 0.5825954700994046
-Decision Tree Regression - MSE: 44552.00644904675, R^2 Score: 0.4708451884787034
-Support Vector Regression - MSE: 73965.02477382126, R^2 Score: 0.12149975134965318 
+Multiple Linear Regression - MSE: 35143.23011545407, R² Score: 0.5825954700994046
+Decision Tree Regression - MSE: 44552.00644904675, R² Score: 0.4708451884787034
+Support Vector Regression - MSE: 73965.02477382126, R² Score: 0.12149975134965318 
 ```
 
 ## **数据可视化**
@@ -338,17 +338,17 @@ plt.show()
 
 这是输出结果。
 
-![使用Python进行机器学习](../Images/757e172aa44ea5ea903ee5fdffa00e2d.png)
+![使用 Python 进行机器学习](img/757e172aa44ea5ea903ee5fdffa00e2d.png)
 
 ## **数据项目**
 
 在结束之前，这里有一些数据项目可以开始。
 
-+   [2024年数据工程师薪资](https://www.kaggle.com/code/marcinkubowicz/data-science-eda) - 分析了2024年数据工程师薪资趋势
++   [2024 年数据工程师薪资](https://www.kaggle.com/code/marcinkubowicz/data-science-eda) - 分析了 2024 年数据工程师薪资趋势
 
-+   [2018-2019英超联赛](https://www.kaggle.com/code/yusukefromjpn/2018-19-manchester-united-analysis)- 分析了曼联2018-2019赛季的统计数据
++   [2018-2019 英超联赛](https://www.kaggle.com/code/yusukefromjpn/2018-19-manchester-united-analysis)- 分析了曼联 2018-2019 赛季的统计数据
 
-+   [交付时间预测](https://platform.stratascratch.com/data-projects/delivery-duration-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+with+python)- 分析了Doordash的交付时间
++   [交付时间预测](https://platform.stratascratch.com/data-projects/delivery-duration-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+with+python)- 分析了 Doordash 的交付时间
 
 +   [客户流失预测](https://platform.stratascratch.com/data-projects/customer-churn-prediction?utm_source=blog&utm_medium=click&utm_campaign=kdn+ml+with+python)- 分析了索尼的客户流失情况
 
@@ -362,22 +362,22 @@ plt.show()
 
 ## **结论**
 
-我们的结果本可以更好，因为还有很多步骤可以提高模型的效率，但我们在这里已经取得了一个很好的开始。查看[Sci-kit Learn的官方文档](https://scikit-learn.org/stable/)了解你还能做些什么。
+我们的结果本可以更好，因为还有很多步骤可以提高模型的效率，但我们在这里已经取得了一个很好的开始。查看[Sci-kit Learn 的官方文档](https://scikit-learn.org/stable/)了解你还能做些什么。
 
 当然，学习后，你需要反复做数据项目来提高你的能力，并学习更多内容。
 
-[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一位数据科学家，专注于产品战略。他还是一位兼职教授，教授分析学，并且是StrataScratch的创始人，这个平台帮助数据科学家准备面试，通过顶级公司的真实面试问题。内特撰写关于职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有关于SQL的内容。
+[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一位数据科学家，专注于产品战略。他还是一位兼职教授，教授分析学，并且是 StrataScratch 的创始人，这个平台帮助数据科学家准备面试，通过顶级公司的真实面试问题。内特撰写关于职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有关于 SQL 的内容。
 
 ### 更多相关内容
 
 +   [基础机器学习算法：初学者指南](https://www.kdnuggets.com/2021/05/essential-machine-learning-algorithms-beginners.html)
 
-+   [初学者的前10个机器学习算法指南](https://www.kdnuggets.com/a-beginner-guide-to-the-top-10-machine-learning-algorithms)
++   [初学者的前 10 个机器学习算法指南](https://www.kdnuggets.com/a-beginner-guide-to-the-top-10-machine-learning-algorithms)
 
 +   [初学者的深度检查机器学习测试指南](https://www.kdnuggets.com/beginners-guide-to-machine-learning-testing-with-deepchecks)
 
 +   [人工智能和机器学习职业的初学者指南](https://www.kdnuggets.com/beginners-guide-to-careers-in-ai-and-machine-learning)
 
-+   [使用Python进行网页抓取的初学者指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)
++   [使用 Python 进行网页抓取的初学者指南](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)
 
-+   [预测指南：Python中的线性回归初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)
++   [预测指南：Python 中的线性回归初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)

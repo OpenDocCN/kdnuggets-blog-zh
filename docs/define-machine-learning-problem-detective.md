@@ -1,12 +1,12 @@
 # 如何像侦探一样定义机器学习问题
 
-> 原文：[https://www.kdnuggets.com/2018/10/define-machine-learning-problem-detective.html](https://www.kdnuggets.com/2018/10/define-machine-learning-problem-detective.html)
+> 原文：[`www.kdnuggets.com/2018/10/define-machine-learning-problem-detective.html`](https://www.kdnuggets.com/2018/10/define-machine-learning-problem-detective.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [comments](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) comments
 
 **由[Spencer Norris](https://www.spencernorris.xyz/)，数据科学家，独立记者**。
 
-![](../Images/6b7db80ffebecc19b28072006a9b5680.png)
+![](img/6b7db80ffebecc19b28072006a9b5680.png)
 
 本文最初发表在[OpenDataScience.com](https://OpenDataScience.com)。
 
@@ -28,19 +28,19 @@
 
 问题是，即使有这些观察，仍然有无限多的可能性可以解释它们。例如，取一个*D*，仅包含以下两个观察。
 
-![](../Images/34fede020a28b73c80591562bb2826a8.png)
+![](img/34fede020a28b73c80591562bb2826a8.png)
 
 我们对什么样的函数`f`可以解释这些观察有一些很好的猜测。很可能，它是直线——对吧？
 
-![](../Images/fc260dbd08bc14bd0f43cbd57e402dcb.png)
+![](img/fc260dbd08bc14bd0f43cbd57e402dcb.png)
 
 那样最有意义。但是为什么它不能是一个多项式函数呢？
 
-![](../Images/578cf61a8a8fb74eccd365e37ce77cd0.png)
+![](img/578cf61a8a8fb74eccd365e37ce77cd0.png)
 
 为什么它不能是更复杂的东西？
 
-![](../Images/91523165a11be2d56f8615c486a308dd.png)
+![](img/91523165a11be2d56f8615c486a308dd.png)
 
 实际情况是，这些解释中的任何一种都没有完全不合理的理由。*它们都是同样有效的假设*。
 
@@ -80,11 +80,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

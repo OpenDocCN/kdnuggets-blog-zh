@@ -1,8 +1,8 @@
 # 数据仓库和 ETL 最佳实践
 
-> 原文：[https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
+> 原文：[`www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html`](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
 
-![数据仓库和 ETL 最佳实践](../Images/9b82de01bb1a1498b5c42accf540f8a5.png)
+![数据仓库和 ETL 最佳实践](img/9b82de01bb1a1498b5c42accf540f8a5.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -64,7 +64,7 @@ ETL 代表 **提取**、**转换** 和 **加载**。它是将数据从多个来�
 
 ## 3\. 审查源数据和系统
 
-源系统包含传送到数据仓库的数据。你可以使用分析工具来帮助你识别NULL值或了解列的用途。与其花时间在分析查询上，不如审查你的源系统，以改善你的ETL过程。
+源系统包含传送到数据仓库的数据。你可以使用分析工具来帮助你识别 NULL 值或了解列的用途。与其花时间在分析查询上，不如审查你的源系统，以改善你的 ETL 过程。
 
 你需要识别每个源表中的主键定义以及任何相关的信息/数据。将此实践作为一个验证阶段，以确保你对输入到数据仓库中的数据有信心。
 
@@ -84,27 +84,27 @@ ETL 代表 **提取**、**转换** 和 **加载**。它是将数据从多个来�
 
 所有数据提取过程应经过彻底审查和验证。
 
-## 6\. 汇总ETL日志中的所有活动
+## 6\. 汇总 ETL 日志中的所有活动
 
 最佳实践之一，不仅适用于数据仓库，也适用于生活中的其他方面，就是记录一切。回到一个曾经写满不同想法和过程的白板，总比回到一个空白的白板要好。
 
-通过ETL日志，你可以找到有价值的信息，如提取时间、行的变化、错误等。
+通过 ETL 日志，你可以找到有价值的信息，如提取时间、行的变化、错误等。
 
 ## 7\. 警报
 
-观察ETL过程可能会让人感到不知所措。你希望保持关注，但有时它可能会比你想象的更长时间，你可能会发现自己在不合时宜的时间还在忙碌。一些公司创建了消息和警报程序，通知他们任何需要注意的致命错误。
+观察 ETL 过程可能会让人感到不知所措。你希望保持关注，但有时它可能会比你想象的更长时间，你可能会发现自己在不合时宜的时间还在忙碌。一些公司创建了消息和警报程序，通知他们任何需要注意的致命错误。
 
 # 结论
 
-尽管有人可能会说这些是每个人在处理数据仓库和ETL时应该做的实践，但你会惊讶于这些实际上是许多公司/团队面临的主要挑战。
+尽管有人可能会说这些是每个人在处理数据仓库和 ETL 时应该做的实践，但你会惊讶于这些实际上是许多公司/团队面临的主要挑战。
 
-如果你想了解更多关于数据仓库和ETL的内容，请阅读：
+如果你想了解更多关于数据仓库和 ETL 的内容，请阅读：
 
-+   [为什么组织需要数据仓库](/2022/09/organizations-need-data-warehouses.html)
++   为什么组织需要数据仓库
 
-+   [SQL 和数据集成：ETL 与 ELT](/2023/01/sql-data-integration-etl-elt.html)
++   SQL 和数据集成：ETL 与 ELT
 
-+   [ETL 与 ELT：数据集成对决](/2022/08/etl-elt-data-integration-showdown.html)
++   ETL 与 ELT：数据集成对决
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由技术写作员。她特别关注提供数据科学职业建议或教程以及围绕数据科学的理论知识。她还希望探索人工智能如何或能在延长人类寿命方面发挥作用。作为一名热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助指导他人。
 

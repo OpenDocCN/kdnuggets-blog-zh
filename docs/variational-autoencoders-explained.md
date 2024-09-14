@@ -1,10 +1,10 @@
 # 变分自编码器详细解析
 
-> 原文：[https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html](https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html)
+> 原文：[`www.kdnuggets.com/2018/11/variational-autoencoders-explained.html`](https://www.kdnuggets.com/2018/11/variational-autoencoders-explained.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![](../Images/1286eca0c2755dee82f0ae1831d7ab32.png)
+![](img/1286eca0c2755dee82f0ae1831d7ab32.png)
 
 在这系列的 [上一篇文章](http://anotherdatum.com/vae.html)中，我介绍了变分自编码器（VAE）框架，并解释了其背后的理论。
 
@@ -22,7 +22,7 @@
 
 ### 该模型
 
-![](../Images/3b3da4fde243cf4db3f55e8861f5a65a.png)
+![](img/3b3da4fde243cf4db3f55e8861f5a65a.png)
 
 该模型由三个子网络组成：
 
@@ -56,7 +56,7 @@
 
 ### 训练
 
-![](../Images/d94560854f9b4a91929db09f7f3861cd.png)
+![](img/d94560854f9b4a91929db09f7f3861cd.png)
 
 我们将训练模型来优化两个损失——VAE 损失和分类损失——使用 [SGD](https://en.wikipedia.org/wiki/Stochastic_gradient_descent)。
 
@@ -70,17 +70,17 @@
 
 让我们验证两个损失是否看起来不错，即——是否在减少：
 
-![](../Images/0548475d920b2aa89d6e12cc74b9364d.png)
+![](img/0548475d920b2aa89d6e12cc74b9364d.png)
 
 此外，让我们绘制生成的图像，看看模型是否确实能够生成数字的图像：
 
-![](../Images/53f3601c848327e3e915709f0c622828.png)
+![](img/53f3601c848327e3e915709f0c622828.png)
 
 ### 最终想法
 
 很高兴看到使用简单的前馈网络（没有花哨的卷积）我们能够在仅仅 20 个纪元后生成漂亮的图像。模型学会了相当快地使用特殊的数字维度——在第 9 纪元时，我们已经看到了我们尝试生成的数字序列。
 
-每个纪元使用不同的随机值来处理其他维度，因此我们可以看到风格在不同纪元之间的差异，并且在每个纪元内部是相似的——至少在一些纪元中是这样。例如，在第18纪元中，所有数字都比第20纪元更粗体。
+每个纪元使用不同的随机值来处理其他维度，因此我们可以看到风格在不同纪元之间的差异，并且在每个纪元内部是相似的——至少在一些纪元中是这样。例如，在第 18 纪元中，所有数字都比第 20 纪元更粗体。
 
 我邀请你打开 [这个笔记本](https://github.com/yoel-zeldes/yoel-zeldes.github.io/blob/source/content/vae2/vae2.ipynb) 并玩一玩 VAE。例如，超参数的值对生成的图像有很大的影响。玩得开心 :)
 
@@ -106,11 +106,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 

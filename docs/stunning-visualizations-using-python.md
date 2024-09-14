@@ -1,22 +1,22 @@
 # 如何从零开始使用 Python 创建令人惊叹的可视化
 
-> 原文：[https://www.kdnuggets.com/2021/02/stunning-visualizations-using-python.html](https://www.kdnuggets.com/2021/02/stunning-visualizations-using-python.html)
+> 原文：[`www.kdnuggets.com/2021/02/stunning-visualizations-using-python.html`](https://www.kdnuggets.com/2021/02/stunning-visualizations-using-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Sharan Kumar R](https://twitter.com/rsharankumar)，数据科学家 | 作者**。
 
-![](../Images/9602de62bf763160febe3257a65733ef.png)
+![](img/9602de62bf763160febe3257a65733ef.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -50,7 +50,7 @@
 
 让我们从一些基本的可视化开始。最好使用代码‘fig,ax=plt.subplots()’，其中‘plt.subplots()’是一个函数，将返回一个包含图形和坐标轴对象的元组，并将其分别分配给变量‘fig’和‘ax’。虽然不使用此方法也可以绘制图表，但使用此方法可以对图形进行修改，比如根据需要调整图表大小，并保存图表。此外，这里的‘ax’变量可以用于为坐标轴提供标签。下面是一个简单的示例，我将数据作为数组传递，并直接打印为图表，
 
-在上述代码中，首先导入所需的库，然后使用‘plt.subplots()’函数生成图形和坐标轴对象，然后将数据直接作为数组传递给坐标轴对象以绘制图表。在第二个图表中，坐标轴变量‘ax’接受了针对x轴、y轴和标题的标签输入。
+在上述代码中，首先导入所需的库，然后使用‘plt.subplots()’函数生成图形和坐标轴对象，然后将数据直接作为数组传递给坐标轴对象以绘制图表。在第二个图表中，坐标轴变量‘ax’接受了针对 x 轴、y 轴和标题的标签输入。
 
 **趋势图**
 
@@ -144,26 +144,26 @@ Matplotlib 是 Python 中一个非常重要的可视化库，因为许多其他 
 
 [原文](https://towardsdatascience.com/how-to-do-visualization-using-python-from-scratch-651304b5ee7a)。经许可转载。
 
-**简介：** [Sharan Kumar R](https://twitter.com/rsharankumar) 是一位拥有超过10年经验的数据科学专家，曾著有两本数据科学书籍，现可在[此处](https://www.amazon.com/Sharan-Kumar-Ravindran/e/B015SUYR2S/ref=dp_byline_cont_ebooks_1)购买。Sharan还主持一个[YouTube频道](https://www.youtube.com/c/DataSciencewithSharan)，用于教授和讨论各种数据科学概念。
+**简介：** [Sharan Kumar R](https://twitter.com/rsharankumar) 是一位拥有超过 10 年经验的数据科学专家，曾著有两本数据科学书籍，现可在[此处](https://www.amazon.com/Sharan-Kumar-Ravindran/e/B015SUYR2S/ref=dp_byline_cont_ebooks_1)购买。Sharan 还主持一个[YouTube 频道](https://www.youtube.com/c/DataSciencewithSharan)，用于教授和讨论各种数据科学概念。
 
 **相关：**
 
 +   [这些数据科学技能将成为你的超级力量](https://www.kdnuggets.com/2020/08/data-science-skills-superpower.html)
 
-+   [每个数据科学家都应掌握的前10大数据可视化工具](https://www.kdnuggets.com/2020/05/top-10-data-visualization-tools-every-data-scientist.html)
++   [每个数据科学家都应掌握的前 10 大数据可视化工具](https://www.kdnuggets.com/2020/05/top-10-data-visualization-tools-every-data-scientist.html)
 
-+   [如何在Python（和R）中可视化数据](https://www.kdnuggets.com/2019/11/visualize-data-python-and-r.html)
++   [如何在 Python（和 R）中可视化数据](https://www.kdnuggets.com/2019/11/visualize-data-python-and-r.html)
 
 ### 了解更多相关内容
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [建立一个强大的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [用ChatGPT在几秒钟内创建惊艳的数据可视化](https://www.kdnuggets.com/create-stunning-data-viz-in-seconds-with-chatgpt)
++   [用 ChatGPT 在几秒钟内创建惊艳的数据可视化](https://www.kdnuggets.com/create-stunning-data-viz-in-seconds-with-chatgpt)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)

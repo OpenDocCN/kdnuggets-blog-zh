@@ -1,10 +1,10 @@
 # 什么原因让我找数据科学家工作花了这么长时间
 
-> 原文：[https://www.kdnuggets.com/2021/03/land-data-scientist-job.html](https://www.kdnuggets.com/2021/03/land-data-scientist-job.html)
+> 原文：[`www.kdnuggets.com/2021/03/land-data-scientist-job.html`](https://www.kdnuggets.com/2021/03/land-data-scientist-job.html)
 
-[评论](#comments)
+评论
 
-![](../Images/44c2e336bffe0615f045d4ebb440354a.png)
+![](img/44c2e336bffe0615f045d4ebb440354a.png)
 
 *照片由 [Mārtiņš Zemlickis](https://unsplash.com/@mzemlickis?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/marathon?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -50,7 +50,7 @@
 
 我之前没有任何编程经验。我甚至不得不上了两次“C++导论”课程才能通过。这并不是因为它很难。我只是对编程没有兴趣。我在大学里学习了电气工程，我当时并不认为我会需要编程技能。我明显错了。
 
-我花了一段时间才获得编程技能。我说的可不仅仅是Pandas和Scikit-learn。你还需要更多的技能。我认为SQL是必须的。你还需要非常熟练于一种编程语言，最好是Python或R。Git、Spark（或PySpark）、Airflow、云计算、Docker是你需要熟悉的一些其他工具。
+我花了一段时间才获得编程技能。我说的可不仅仅是 Pandas 和 Scikit-learn。你还需要更多的技能。我认为 SQL 是必须的。你还需要非常熟练于一种编程语言，最好是 Python 或 R。Git、Spark（或 PySpark）、Airflow、云计算、Docker 是你需要熟悉的一些其他工具。
 
 因此，如果你没有编程背景，可能需要一段时间才能掌握软件工具和包。
 
@@ -70,20 +70,20 @@
 
 +   [如何成功成为自由职业数据科学家](https://www.kdnuggets.com/2021/03/succeed-becoming-freelance-data-scientist.html)
 
-+   [5项支持技能，助你获得数据科学职位](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
++   [5 项支持技能，助你获得数据科学职位](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
 
-+   [6个数据科学证书，让你的职业更上一层楼](https://www.kdnuggets.com/2021/02/6-data-science-certificates.html)
++   [6 个数据科学证书，让你的职业更上一层楼](https://www.kdnuggets.com/2021/02/6-data-science-certificates.html)
 
 ### 该主题的更多内容
 
-+   [我参加了Google数据分析认证课程，已有2,148,697人报名…](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
++   [我参加了 Google 数据分析认证课程，已有 2,148,697 人报名…](https://www.kdnuggets.com/i-took-the-google-data-analytics-certification-where-2148697-have-already-enrolled)
 
 +   [无法找到数据科学工作？这就是原因](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [2022年能让你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年能让你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [一个能让你在2022年获得工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [一个能让你在 2022 年获得工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [3个保证能让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个保证能让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [利用ChatGPT帮助你获得数据科学职位](https://www.kdnuggets.com/using-chatgpt-to-help-land-a-data-science-job)
++   [利用 ChatGPT 帮助你获得数据科学职位](https://www.kdnuggets.com/using-chatgpt-to-help-land-a-data-science-job)

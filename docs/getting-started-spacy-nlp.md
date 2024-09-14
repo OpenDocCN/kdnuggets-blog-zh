@@ -1,8 +1,8 @@
 # Getting Started with spaCy for NLP
 
-> 原文：[https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
+> 原文：[`www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html`](https://www.kdnuggets.com/2022/11/getting-started-spacy-nlp.html)
 
-![Getting Started with spaCy for NLP](../Images/229bca305b47c63570cb9b57e3f926b9.png)
+![Getting Started with spaCy for NLP](img/229bca305b47c63570cb9b57e3f926b9.png)
 
 Image by Editor
 
@@ -83,7 +83,7 @@ python
 
 除了通过空格分割单词外，tokenization 算法还对分割后的文本进行双重检查。
 
-![Getting Started with spaCy for NLP](../Images/101b1489919b38d00512b294cff9b53b.png)
+![Getting Started with spaCy for NLP](img/101b1489919b38d00512b294cff9b53b.png)
 
 来源：[spaCy documentation](https://spacy.io/usage/spacy-101)
 
@@ -210,7 +210,7 @@ KDNuggets 0 9 ORG
 
 # 词向量和相似度
 
-在自然语言处理（NLP）中，我们常常希望分析词语、句子或文档的相似性，这可以用于推荐系统或抄袭检测工具等应用。相似度得分通过查找词嵌入之间的距离来计算，即词的向量表示。spaCy通过中型和大型管道提供了这一功能。较大的管道更为准确，因为它包含了在更多样化数据上训练的模型。然而，我们这里只是为了理解而使用中型管道。
+在自然语言处理（NLP）中，我们常常希望分析词语、句子或文档的相似性，这可以用于推荐系统或抄袭检测工具等应用。相似度得分通过查找词嵌入之间的距离来计算，即词的向量表示。spaCy 通过中型和大型管道提供了这一功能。较大的管道更为准确，因为它包含了在更多样化数据上训练的模型。然而，我们这里只是为了理解而使用中型管道。
 
 我们首先定义要比较相似性的句子。
 
@@ -234,7 +234,7 @@ Similarity score of doc1 and doc3: 0.6487306770376172
 
 # 基于规则的匹配
 
-基于规则的匹配可以被认为类似于正则表达式，我们可以在文本中指定要查找的特定模式。spaCy的匹配器模块不仅完成了上述任务，还提供了对文档信息的访问，例如词汇、词性标签、词元、依赖结构等，这使得在多个附加条件下提取词汇成为可能。
+基于规则的匹配可以被认为类似于正则表达式，我们可以在文本中指定要查找的特定模式。spaCy 的匹配器模块不仅完成了上述任务，还提供了对文档信息的访问，例如词汇、词性标签、词元、依赖结构等，这使得在多个附加条件下提取词汇成为可能。
 
 在这里，我们首先创建一个匹配器对象来包含所有词汇。接下来，我们将定义要查找的文本模式，并将其作为规则添加到匹配器模块中。最后，我们将对输入句子调用匹配器模块。
 
@@ -285,25 +285,25 @@ book
 []
 ```
 
-在这篇博客中，我们讨论了如何安装和开始使用spaCy。我们还探索了它提供的各种基本功能，如分词、词形还原、依赖分析、词性标注、命名实体识别等。spaCy在开发用于生产的NLP管道时非常方便。其详细的文档、易用性和多样的功能使其成为NLP领域广泛使用的库之一。
+在这篇博客中，我们讨论了如何安装和开始使用 spaCy。我们还探索了它提供的各种基本功能，如分词、词形还原、依赖分析、词性标注、命名实体识别等。spaCy 在开发用于生产的 NLP 管道时非常方便。其详细的文档、易用性和多样的功能使其成为 NLP 领域广泛使用的库之一。
 
-**[Yesha Shastri](https://www.linkedin.com/in/yeshashastri/)** 是一位热情的AI开发者和作家，目前在蒙特利尔大学攻读机器学习硕士学位。Yesha对探索负责任的AI技术以解决有益于社会的挑战感兴趣，并与社区分享她的学习成果。
+**[Yesha Shastri](https://www.linkedin.com/in/yeshashastri/)** 是一位热情的 AI 开发者和作家，目前在蒙特利尔大学攻读机器学习硕士学位。Yesha 对探索负责任的 AI 技术以解决有益于社会的挑战感兴趣，并与社区分享她的学习成果。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
 ### 更多相关内容
 
-+   [使用spaCy进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
++   [使用 spaCy 进行自然语言处理](https://www.kdnuggets.com/2023/01/natural-language-processing-spacy.html)
 
 +   [入门自动文本摘要](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
 

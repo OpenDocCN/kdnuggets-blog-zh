@@ -1,22 +1,22 @@
-# 谷歌通过将生成式人工智能添加到Docs和Gmail中来回应ChatGPT
+# 谷歌通过将生成式人工智能添加到 Docs 和 Gmail 中来回应 ChatGPT
 
-> 原文：[https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
+> 原文：[`www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html`](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
 
-![谷歌通过将生成式人工智能添加到Docs和Gmail中来回应ChatGPT](../Images/55603e9bf4537c1fd1c8965b2455776e.png)
+![谷歌通过将生成式人工智能添加到 Docs 和 Gmail 中来回应 ChatGPT](img/55603e9bf4537c1fd1c8965b2455776e.png)
 
 作者提供的图片
 
-3月14日，[谷歌宣布](https://workspace.google.com/blog/product-announcements/generative-ai)将把生成式人工智能添加到Google Workspace中，用户可以利用生成式人工智能的强大功能来创建、连接和协作。
+3 月 14 日，[谷歌宣布](https://workspace.google.com/blog/product-announcements/generative-ai)将把生成式人工智能添加到 Google Workspace 中，用户可以利用生成式人工智能的强大功能来创建、连接和协作。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -28,13 +28,13 @@
 
 生成式人工智能使用无监督和半监督的机器学习算法，并输入大量数据。生成式人工智能使用的神经网络将学习输入数据上的模式，给定的参数有限，以便生成式人工智能模型能够学会做出自己的结论。
 
-这些工具用于创建设计艺术、生成代码、撰写博客和生成高质量内容。你可能已经听说过一些流行的生成式人工智能工具，如ChatGPT、DALL-E 2和Bing AI。
+这些工具用于创建设计艺术、生成代码、撰写博客和生成高质量内容。你可能已经听说过一些流行的生成式人工智能工具，如 ChatGPT、DALL-E 2 和 Bing AI。
 
 那么谷歌有什么计划？
 
 # 谷歌生成式人工智能文档
 
-谷歌致力于在其工作区内连接用户，以便他们可以共同创建、构建和成长。他们将把人工智能整合到Gmail、Docs、Slides、Sheets、Meet和Chat中。
+谷歌致力于在其工作区内连接用户，以便他们可以共同创建、构建和成长。他们将把人工智能整合到 Gmail、Docs、Slides、Sheets、Meet 和 Chat 中。
 
 目前这些工具尚未公开提供，但谷歌计划在全年内向受信任的测试者推出该服务。他们将首先在美国以英语开始受信任的测试者计划，然后优化工具，使其更适合不同国家和语言的消费者、企业和教育机构。
 
@@ -58,7 +58,7 @@
 
 以下是一个示例：
 
-![Google 通过将生成式 AI 添加到 Docs 和 Gmail 来回应 ChatGPT](../Images/7ab04523a0d5f254aeb27ad99f3ba920.png)
+![Google 通过将生成式 AI 添加到 Docs 和 Gmail 来回应 ChatGPT](img/7ab04523a0d5f254aeb27ad99f3ba920.png)
 
 图片来源：[Google Workspace 博客](https://workspace.google.com/blog/product-announcements/generative-ai)
 

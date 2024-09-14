@@ -1,12 +1,12 @@
-# 使用 Scikit-learn 管道管理机器学习工作流第 2 部分：集成网格搜索
+# 使用 Scikit-learn 管道管理机器学习工作流第二部分：集成网格搜索
 
-> 原文：[https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html](https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html)
+> 原文：[`www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html`](https://www.kdnuggets.com/2018/01/managing-machine-learning-workflows-scikit-learn-pipelines-part-2.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Pipeline](../Images/f6e4b8b675c6c9d128270e42ce22de20.png)
+![Pipeline](img/f6e4b8b675c6c9d128270e42ce22de20.png)
 
-在我们[上一篇文章](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)中，我们讨论了 Scikit-learn 管道作为简化机器学习工作流的方法。管道设计为一种可管理的方式，先进行一系列数据转换，然后应用估计器，管道被认为是一个简单的工具，主要用于：
+在我们上一篇文章中，我们讨论了 Scikit-learn 管道作为简化机器学习工作流的方法。管道设计为一种可管理的方式，先进行一系列数据转换，然后应用估计器，管道被认为是一个简单的工具，主要用于：
 
 +   创建连贯且易于理解的工作流的便利性
 
@@ -20,11 +20,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -109,7 +109,7 @@ Best params:
   'clf__min_samples_leaf': 1, 'clf__presort': True}
 ```
 
-脚本报告了最高的准确度（0.925），这显然比默认的0.867要好，并且额外的计算量并不多，至少在我们的玩具数据集上是这样。我们包括500个模型的详尽方法在强大的数据集上可能会有更严重的计算影响，正如你所想象的那样。
+脚本报告了最高的准确度（0.925），这显然比默认的 0.867 要好，并且额外的计算量并不多，至少在我们的玩具数据集上是这样。我们包括 500 个模型的详尽方法在强大的数据集上可能会有更严重的计算影响，正如你所想象的那样。
 
 脚本还报告了具有最高准确度的模型的最佳超参数配置，如上所示。在我们的简单示例中，这种差异应该足以表明，不应盲目跟随 Scikit-learn 的默认设置。
 
@@ -121,11 +121,11 @@ Best params:
 
 **相关：**
 
-+   [使用 Scikit-learn 管道管理机器学习工作流 第1部分：温和的介绍](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
++   使用 Scikit-learn 管道管理机器学习工作流 第一部分：温和的介绍
 
-+   [掌握 Python 数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握 Python 数据准备的 7 个步骤
 
-+   [从零开始的 Python 机器学习工作流 第1部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从零开始的 Python 机器学习工作流 第一部分：数据准备
 
 ### 了解更多相关主题
 
@@ -133,7 +133,7 @@ Best params:
 
 +   [将 ChatGPT 集成到数据科学工作流中：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [通过 Uplimit 的机器学习课程提升您的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
 

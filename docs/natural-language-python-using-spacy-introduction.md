@@ -1,8 +1,8 @@
 # 使用 spaCy 的 Python 自然语言：简介
 
-> 原文：[https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html](https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html)
+> 原文：[`www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html`](https://www.kdnuggets.com/2019/09/natural-language-python-using-spacy-introduction.html)
 
-[评论](#comments)
+评论
 
 **作者：[Paco Nathan](https://twitter.com/pacoid)**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -34,9 +34,9 @@
 
 我们已经在 Domino 中配置了默认计算环境，以包含本教程所需的所有软件包、库、模型和数据。[查看 Domino 项目以运行代码。](https://try.dominodatalab.com/u/domino-johnjoo/spacy-dev/overview)
 
-![](../Images/12edb7abbae9b1e4aad03968716e8847.png)
+![](img/12edb7abbae9b1e4aad03968716e8847.png)
 
-![](../Images/6a52a1f569a31b20cf65e6d774fbf268.png)
+![](img/6a52a1f569a31b20cf65e6d774fbf268.png)
 
 如果你对 Domino’s 计算环境如何工作感兴趣，可以查看 [支持页面](https://support.dominodatalab.com/hc/en-us/articles/115000392643-Environment-management)。
 
@@ -90,7 +90,7 @@ df = pd.DataFrame(rows, columns=cols)
 df
 ```
 
-![](../Images/6efac198b9c30e6826f149f2fef68f55.png)
+![](img/6efac198b9c30e6826f149f2fef68f55.png)
 
 可读性提高了！在这个简单的例子中，整个文档只是一个简短的句子。在那个句子中的每个词，*spaCy* 都创建了一个标记，我们访问了每个标记中的字段来显示：
 
@@ -110,7 +110,7 @@ from spacy import displacy
 displacy.render(doc, style="dep")
 ```
 
-![](../Images/11f4063ce82c16944df254f90c40ecbd.png)
+![](img/11f4063ce82c16944df254f90c40ecbd.png)
 
 这是否让你想起了小学的回忆？坦白说，对于那些来自计算语言学背景的人来说，这个图示确实带来快乐。
 
@@ -184,7 +184,7 @@ import warnings
 warnings.filterwarnings("ignore")
 ```
 
-在以下函数`get_text()`中，我们将解析HTML以查找所有的`<p/>`标签，然后提取这些标签的文本：
+在以下函数`get_text()`中，我们将解析 HTML 以查找所有的`<p/>`标签，然后提取这些标签的文本：
 
 ```py
 from bs4 import BeautifulSoup
@@ -246,7 +246,7 @@ bsd mit 0.9895838089575453
 
 这很有趣，因为[BSD](https://opensource.org/licenses/BSD-3-Clause)和[MIT](https://opensource.org/licenses/MIT)许可证似乎是最相似的文档。事实上，它们密切相关。
 
-坦率地说，由于OSI免责声明在页脚中包含了一些额外的文本——但这为比较许可证提供了一个合理的近似。
+坦率地说，由于 OSI 免责声明在页脚中包含了一些额外的文本——但这为比较许可证提供了一个合理的近似。
 
 ### 自然语言理解
 
@@ -293,15 +293,15 @@ California GPE
 displacy.render(doc, style="ent")
 ```
 
-![](../Images/d89ad761f54624be253828504cdedc5e.png)
+![](img/d89ad761f54624be253828504cdedc5e.png)
 
-如果你正在处理[knowledge graph](https://www.akbc.ws/2019/)应用程序和其他[linked data](http://linkeddata.org/)，你的挑战是构建文档中的命名实体与其他相关信息之间的链接，这称为[entity linking](http://nlpprogress.com/english/entity_linking.html)。识别文档中的命名实体是这种特定类型的AI工作中的第一步。例如，给定上述文本，可以将`Steve Wozniak`命名实体链接到[lookup in DBpedia](http://dbpedia.org/page/Steve_Wozniak)。
+如果你正在处理[knowledge graph](https://www.akbc.ws/2019/)应用程序和其他[linked data](http://linkeddata.org/)，你的挑战是构建文档中的命名实体与其他相关信息之间的链接，这称为[entity linking](http://nlpprogress.com/english/entity_linking.html)。识别文档中的命名实体是这种特定类型的 AI 工作中的第一步。例如，给定上述文本，可以将`Steve Wozniak`命名实体链接到[lookup in DBpedia](http://dbpedia.org/page/Steve_Wozniak)。
 
 更一般来说，还可以将*lemmas*链接到描述其含义的资源。例如，在早期部分，我们解析了句子`The gorillas just went wild`，并能够显示单词`went`的词元是动词`go`。此时我们可以使用一个叫做[WordNet](https://wordnet.princeton.edu/)的古老项目，它提供了一个英语的词汇数据库——换句话说，它是一个可计算的词典。
 
-有一个名为[spacy-wordnet](https://github.com/recognai/spacy-wordnet)的*spaCy*与WordNet的集成，由自然语言和知识图谱工作的专家*[Daniel Vila Suero](https://twitter.com/dvilasuero)*提供。
+有一个名为[spacy-wordnet](https://github.com/recognai/spacy-wordnet)的*spaCy*与 WordNet 的集成，由自然语言和知识图谱工作的专家*[Daniel Vila Suero](https://twitter.com/dvilasuero)*提供。
 
-然后我们将通过NLTK加载WordNet数据（这些事情会发生）：
+然后我们将通过 NLTK 加载 WordNet 数据（这些事情会发生）：
 
 ```py
 import nltk
@@ -399,7 +399,7 @@ token._.wordnet.wordnet_domains()
 
 同样，如果你正在处理知识图谱，那些来自*WordNet*的“词义”链接可以与图算法一起使用，以帮助识别特定词的含义。这也可以用于通过一种叫做*总结*的技术开发较大文本部分的摘要。这超出了本教程的范围，但在自然语言处理领域中这是一个有趣的应用。
 
-反过来，如果你知道*a priori*一份文档是关于特定领域或主题集合的，那么你可以限制从*WordNet*返回的含义。在以下示例中，我们希望考虑金融和银行领域的NLU结果：
+反过来，如果你知道*a priori*一份文档是关于特定领域或主题集合的，那么你可以限制从*WordNet*返回的含义。在以下示例中，我们希望考虑金融和银行领域的 NLU 结果：
 
 ```py
 domains = ["finance", "banking"]
@@ -432,7 +432,7 @@ I (require|want|need) to (draw_off|withdraw|draw|take_out) 5,000 euros .
 
 有时，试图理解文本——或者更好地说，理解一个*corpus*（一个包含许多相关文本的数据集）——时遇到的问题变得如此复杂，以至于你需要先可视化它。这是一个用于理解文本的交互式可视化工具：[scattertext](https://spacy.io/universe/project/scattertext)，这是[Jason Kessler](https://twitter.com/jasonkessler)的天才作品。
 
-让我们分析2012年美国总统选举期间的党派大会的文本数据。注意：这个单元可能需要几分钟才能运行，但经过所有这些数字运算后，结果是值得等待的。
+让我们分析 2012 年美国总统选举期间的党派大会的文本数据。注意：这个单元可能需要几分钟才能运行，但经过所有这些数字运算后，结果是值得等待的。
 
 ```py
 import scattertext as st
@@ -450,7 +450,7 @@ corpus = st.CorpusFromPandas(convention_df,
                              nlp=nlp).build()
 ```
 
-一旦你准备好了`corpus`，生成一个HTML中的交互式可视化：
+一旦你准备好了`corpus`，生成一个 HTML 中的交互式可视化：
 
 ```py
 html = st.produce_scattertext_explorer(
@@ -474,19 +474,19 @@ with open(file_name, "wb") as f:
 IFrame(src=file_name, width = 1200, height=700)
 ```
 
-现在我们将渲染HTML——请稍等一两分钟，它值得等待：
+现在我们将渲染 HTML——请稍等一两分钟，它值得等待：
 
-![](../Images/82c17273d5bee33940a24dde852dbb2a.png)
+![](img/82c17273d5bee33940a24dde852dbb2a.png)
 
-想象一下，如果你有过去三年中针对特定产品的客户支持文本。假设你的团队需要了解客户如何谈论该产品？这个*scattertext*库可能会非常有用！你可以对*NPS评分*（一个客户评估指标）进行聚类（k=2），然后用聚类中的前两个组件替换民主党/共和党的维度。
+想象一下，如果你有过去三年中针对特定产品的客户支持文本。假设你的团队需要了解客户如何谈论该产品？这个*scattertext*库可能会非常有用！你可以对*NPS 评分*（一个客户评估指标）进行聚类（k=2），然后用聚类中的前两个组件替换民主党/共和党的维度。
 
 ### 概要
 
-五年前，如果你询问有关Python中自然语言的开源工具，许多数据科学工作者的默认答案可能是[NLTK](https://www.nltk.org/)。该项目包括几乎所有内容，但组件相对学术。另一个受欢迎的自然语言项目是斯坦福大学的[CoreNLP](https://stanfordnlp.github.io/CoreNLP/)，虽然也相当学术，但功能强大，不过CoreNLP在生产环境中与其他软件集成可能会有挑战。
+五年前，如果你询问有关 Python 中自然语言的开源工具，许多数据科学工作者的默认答案可能是[NLTK](https://www.nltk.org/)。该项目包括几乎所有内容，但组件相对学术。另一个受欢迎的自然语言项目是斯坦福大学的[CoreNLP](https://stanfordnlp.github.io/CoreNLP/)，虽然也相当学术，但功能强大，不过 CoreNLP 在生产环境中与其他软件集成可能会有挑战。
 
-几年前，这个自然语言领域的一切开始发生变化。*spaCy*的两位主要作者，[Matthew Honnibal](https://twitter.com/honnibal)和[Ines Montani](https://twitter.com/_inesmontani)，于2015年推出了该项目，行业采纳迅速。他们专注于一种*主观性*的方法（做必要的事，做到最好，不多也不少），这使得在Python中的数据科学工作流程中能够简单、快速地集成，并且执行速度更快、准确性更高。基于这些优先级，*spaCy*变成了*NLTK*的反面。自2015年以来，*spaCy*始终专注于作为一个开源项目（即依赖其社区进行方向指导、集成等）以及商业级软件（而非学术研究）。尽管如此，*spaCy*迅速纳入了机器学习的SOTA进展，实际上成为了将研究成果转化为行业应用的桥梁。
+几年前，这个自然语言领域的一切开始发生变化。*spaCy*的两位主要作者，[Matthew Honnibal](https://twitter.com/honnibal)和[Ines Montani](https://twitter.com/_inesmontani)，于 2015 年推出了该项目，行业采纳迅速。他们专注于一种*主观性*的方法（做必要的事，做到最好，不多也不少），这使得在 Python 中的数据科学工作流程中能够简单、快速地集成，并且执行速度更快、准确性更高。基于这些优先级，*spaCy*变成了*NLTK*的反面。自 2015 年以来，*spaCy*始终专注于作为一个开源项目（即依赖其社区进行方向指导、集成等）以及商业级软件（而非学术研究）。尽管如此，*spaCy*迅速纳入了机器学习的 SOTA 进展，实际上成为了将研究成果转化为行业应用的桥梁。
 
-值得注意的是，自2000年代中期谷歌开始赢得国际语言翻译竞赛后，自然语言的机器学习得到了极大的提升。另一个重大变化发生在2017-2018年，当时，随着*深度学习*的诸多成功，这些方法开始超越之前的机器学习模型。例如，请参见[ELMo](https://arxiv.org/abs/1802.05365)对语言嵌入的工作，由Allen AI主导，接着是[Google的BERT](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)，以及最近的[百度的ERNIE](https://medium.com/syncedreview/baidus-ernie-tops-google-s-bert-in-chinese-nlp-tasks-d6a42b49223d)——换句话说，全球的搜索引擎巨头们为我们提供了基于深度学习的开源嵌入语言模型的《芝麻街》剧目，这些模型现在是最先进的（SOTA）。说到这一点，为了跟踪自然语言的SOTA，可以关注[NLP-Progress](http://nlpprogress.com/)和[Papers with Code](https://paperswithcode.com/sota)。
+值得注意的是，自 2000 年代中期谷歌开始赢得国际语言翻译竞赛后，自然语言的机器学习得到了极大的提升。另一个重大变化发生在 2017-2018 年，当时，随着*深度学习*的诸多成功，这些方法开始超越之前的机器学习模型。例如，请参见[ELMo](https://arxiv.org/abs/1802.05365)对语言嵌入的工作，由 Allen AI 主导，接着是[Google 的 BERT](https://ai.googleblog.com/2018/11/open-sourcing-bert-state-of-art-pre.html)，以及最近的[百度的 ERNIE](https://medium.com/syncedreview/baidus-ernie-tops-google-s-bert-in-chinese-nlp-tasks-d6a42b49223d)——换句话说，全球的搜索引擎巨头们为我们提供了基于深度学习的开源嵌入语言模型的《芝麻街》剧目，这些模型现在是最先进的（SOTA）。说到这一点，为了跟踪自然语言的 SOTA，可以关注[NLP-Progress](http://nlpprogress.com/)和[Papers with Code](https://paperswithcode.com/sota)。
 
 过去两年自然语言的应用场景发生了剧烈变化，深度学习技术的出现使得这些变化加速。大约在 2014 年，一个 Python 自然语言教程可能会展示*词频统计*、*关键词搜索*或*情感检测*，当时的目标用例相对较为平淡。而到了 2019 年，我们谈论的则是分析成千上万的文档以优化工业*supply chain*…或分析数亿份文档用于保险公司保单持有人，或无数份关于财务披露的文档。更现代的自然语言处理工作倾向于自然语言理解（NLU），通常用于支持*知识图谱*的构建，并且越来越多地应用于自然语言生成（NLG），在这里，大量类似文档可以在人工规模下进行总结。
 
@@ -516,11 +516,11 @@ IFrame(src=file_name, width = 1200, height=700)
 
 **相关：**
 
-+   [自然语言处理中的迁移学习现状](/2019/09/state-transfer-learning-nlp.html)
++   自然语言处理中的迁移学习现状
 
-+   [Reddit 帖子分类](/2019/09/reddit-post-classification.html)
++   Reddit 帖子分类
 
-+   [2018 年数据科学和 AI 的顶级 7 个 Python 库](/2019/01/vazquez-2018-top-7-python-libraries.html)
++   2018 年数据科学和 AI 的顶级 7 个 Python 库
 
 ### 相关话题
 

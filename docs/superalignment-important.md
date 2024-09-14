@@ -1,8 +1,8 @@
 # 什么是超级对齐以及它为何重要？
 
-> 原文：[https://www.kdnuggets.com/2023/07/superalignment-important.html](https://www.kdnuggets.com/2023/07/superalignment-important.html)
+> 原文：[`www.kdnuggets.com/2023/07/superalignment-important.html`](https://www.kdnuggets.com/2023/07/superalignment-important.html)
 
-![什么是超级对齐以及它为何重要？](../Images/b6f6b042ee1a6432a38c3359acd7bcb3.png)
+![什么是超级对齐以及它为何重要？](img/b6f6b042ee1a6432a38c3359acd7bcb3.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 

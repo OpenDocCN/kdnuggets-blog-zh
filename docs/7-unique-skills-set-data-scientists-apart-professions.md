@@ -1,8 +1,8 @@
 # 数据科学家与其他职业不同的七项独特技能
 
-> 原文：[https://www.kdnuggets.com/2022/05/7-unique-skills-set-data-scientists-apart-professions.html](https://www.kdnuggets.com/2022/05/7-unique-skills-set-data-scientists-apart-professions.html)
+> 原文：[`www.kdnuggets.com/2022/05/7-unique-skills-set-data-scientists-apart-professions.html`](https://www.kdnuggets.com/2022/05/7-unique-skills-set-data-scientists-apart-professions.html)
 
-![数据科学家与其他职业不同的七项独特技能](../Images/e5b4168ed89c67ec272dcd77fa2ce810.png)
+![数据科学家与其他职业不同的七项独特技能](img/e5b4168ed89c67ec272dcd77fa2ce810.png)
 
 成为数据科学家归结为：处理数据、提取洞察并传达这些洞察。这分解为七项独特的技能，没有其他职位需要这些技能，即便是数据分析师和数据工程师等紧密相关的职位。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 那么，哪些七项技能使数据科学家与其他数据职位不同呢？让我们深入了解一下。
 
-![技能表](../Images/c0a646dbd88cd55bfec54967b9ccec4e.png)
+![技能表](img/c0a646dbd88cd55bfec54967b9ccec4e.png)
 
 # 1\. 与你的利益相关者沟通
 
@@ -40,7 +40,7 @@
 
 许多人认为数据科学家是每天都在处理数字的人。事实远非如此。虽然数据科学家确实会处理数字和清理数据，但他们的主要角色之一是批判性地思考他们的发现，并提出对未来业务有影响的问题。
 
-例如，假设一个化妆品公司被要求通过增加个性化来提升利润。数据科学家必须了解业务运作，以便建立一个预测模型，让她能够说：“好吧，平均客户都有一张忠诚卡，对吧？我们可以用它来将交易匹配到个人。然后我们可以预测客户A会需要指甲油去除剂，而客户B则更感兴趣腮红。”
+例如，假设一个化妆品公司被要求通过增加个性化来提升利润。数据科学家必须了解业务运作，以便建立一个预测模型，让她能够说：“好吧，平均客户都有一张忠诚卡，对吧？我们可以用它来将交易匹配到个人。然后我们可以预测客户 A 会需要指甲油去除剂，而客户 B 则更感兴趣腮红。”
 
 某些工作会关注数字背后的内容。其他则关注客户行为。只有数据科学家必须理解两者。了解业务运作和关键绩效指标（KPIs）对于成为一名优秀的数据科学家至关重要。
 
@@ -54,7 +54,7 @@
 
 数据科学家还会面临复杂和混乱的数据集，他们会被要求挖掘这些数据以创建预测性和有用的模型供业务使用。为此，数据科学家需要有结构化和逻辑化的问题解决方法。
 
-有一个很好的过程可以跟随，如果你想提升你的结构化思维技能。首先，了解如何识别问题。当你面对新情境时，考虑一下情况。接下来，提出问题以深入了解问题的核心。为什么会这样？你忽略了什么？之后，确定你的偏见。养成确定假设的习惯。接着，预见障碍——情况中可能会出现什么问题？可能会产生什么后果？最后，练习在不使用Google的情况下找出答案。（你可以使用Google来检查自己，但你要养成独立思考的习惯。）
+有一个很好的过程可以跟随，如果你想提升你的结构化思维技能。首先，了解如何识别问题。当你面对新情境时，考虑一下情况。接下来，提出问题以深入了解问题的核心。为什么会这样？你忽略了什么？之后，确定你的偏见。养成确定假设的习惯。接着，预见障碍——情况中可能会出现什么问题？可能会产生什么后果？最后，练习在不使用 Google 的情况下找出答案。（你可以使用 Google 来检查自己，但你要养成独立思考的习惯。）
 
 有一个很好的指南可以参考 [这里](https://towardsdatascience.com/mastering-the-most-important-skill-in-data-science-critical-thinking-27316aa80f0b) 以获取进一步的指导和示例。
 
@@ -70,7 +70,7 @@
 
 成为数据科学家的一部分就是能够应对各种挑战。有些商业人士会要求他们不理解的技术东西。有些技术人员会要求商业图景无法允许的东西。在这些中间，数据科学家需要搞清楚谁的需求需要满足，以及何时满足。这需要很多冷静的深呼吸。
 
-例如，数据科学家Paul May [写道](https://towardsdatascience.com/the-struggles-of-a-data-scientist-38ec17e76eba) 他看到 [数据科学公司](https://www.stratascratch.com/blog/11-best-companies-to-work-for-as-a-data-scientist/) “要求在项目中使用神经网络（因为它很吸引人），即使它完全不合适或相比替代算法表现较差。”数据科学家必须决定：是找办法让它工作？还是告诉他们的商业负责人这没有意义？
+例如，数据科学家 Paul May [写道](https://towardsdatascience.com/the-struggles-of-a-data-scientist-38ec17e76eba) 他看到 [数据科学公司](https://www.stratascratch.com/blog/11-best-companies-to-work-for-as-a-data-scientist/) “要求在项目中使用神经网络（因为它很吸引人），即使它完全不合适或相比替代算法表现较差。”数据科学家必须决定：是找办法让它工作？还是告诉他们的商业负责人这没有意义？
 
 作为数据科学家，你需要忍受对你工作的误解，被分配与数据相关的任何任务，因为这在你的职位名称中，人们认为你做的事是魔法，因为数据领域不被理解。耐心是数据科学领域任何人的重要美德。
 
@@ -118,4 +118,4 @@
 
 +   [如何在 Python 中找到集合差异](https://www.kdnuggets.com/2023/03/find-set-difference-python.html)
 
-+   [机器学习不像你的大脑 第6部分：…的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：…的重要性](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)

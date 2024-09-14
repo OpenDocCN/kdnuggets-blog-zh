@@ -1,6 +1,6 @@
-# 集成 Python 和 R，第 2 部分：从 Python 执行 R 及反之亦然
+# 集成 Python 和 R，第二部分：从 Python 执行 R 及反之亦然
 
-> 原文：[https://www.kdnuggets.com/2015/10/integrating-python-r-executing-part2.html](https://www.kdnuggets.com/2015/10/integrating-python-r-executing-part2.html)
+> 原文：[`www.kdnuggets.com/2015/10/integrating-python-r-executing-part2.html`](https://www.kdnuggets.com/2015/10/integrating-python-r-executing-part2.html)
 
 **作者：Chris Musselle ([Mango Solutions](http://www.mango-solutions.com))**。
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-![](../Images/0eb09d69ebb8a6b50ef17b89287ac9a4.png)
+![](img/0eb09d69ebb8a6b50ef17b89287ac9a4.png)
 
 ### 命令行执行和执行子进程
 
@@ -120,13 +120,13 @@ x = subprocess.check_output(cmd, universal_newlines=True)
 
 **相关：**
 
-+   [R 与 Python：正面交锋的数据分析](/2015/10/r-vs-python-data-analysis.html)
++   R 与 Python：正面交锋的数据分析
 
-+   [数据科学编程：Python 与 R](/2015/10/data-science-programming-python-vs-r.html)
++   数据科学编程：Python 与 R
 
-+   [数据科学中的 R 与 Python：赢家是…](/2015/05/r-vs-python-data-science.html)
++   数据科学中的 R 与 Python：赢家是…
 
-+   [R 和 Python 用户表现出惊人的稳定性，但地区差异显著](/2015/07/poll-primary-analytics-language-r-python.html)
++   R 和 Python 用户表现出惊人的稳定性，但地区差异显著
 
 ### 更多相关话题
 
@@ -138,6 +138,6 @@ x = subprocess.check_output(cmd, universal_newlines=True)
 
 +   [在内容创作中整合生成式人工智能](https://www.kdnuggets.com/integrating-generative-ai-in-content-creation)
 
-+   [机器学习不像你的大脑 第 6 部分：…的重](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
++   [机器学习不像你的大脑 第六部分：…的重](https://www.kdnuggets.com/2022/08/machine-learning-like-brain-part-6-importance-precise-synapse-weights-ability-set-quickly.html)
 
-+   [数据科学备忘单的完整合集 - 第 2 部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单的完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)

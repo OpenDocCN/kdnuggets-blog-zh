@@ -1,8 +1,8 @@
 # 2024 年你必须尝试的 7 个端到端 MLOps 平台
 
-> 原文：[https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
+> 原文：[`www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024`](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
 
-![2024 年你必须尝试的 7 个端到端 MLOps 平台](../Images/14275e8f7e1f71492698efbca7c42187.png)
+![2024 年你必须尝试的 7 个端到端 MLOps 平台](img/14275e8f7e1f71492698efbca7c42187.png)
 
 作者图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -40,13 +40,13 @@ Hugging Face 还提供构建和部署网页应用程序及机器学习演示的�
 
 ## 3\. Iguazio MLOps Platform
 
-[Iguazio MLOps Platform](https://www.iguazio.com/platform/) 是你MLOps生命周期的全能解决方案。你可以构建一个完全自动化的机器学习管道，用于数据收集、训练、追踪、部署和监控。它本质上简单，所以你可以专注于构建和训练出色的模型，而不用担心部署和操作。
+[Iguazio MLOps Platform](https://www.iguazio.com/platform/) 是你 MLOps 生命周期的全能解决方案。你可以构建一个完全自动化的机器学习管道，用于数据收集、训练、追踪、部署和监控。它本质上简单，所以你可以专注于构建和训练出色的模型，而不用担心部署和操作。
 
 Iguazio 允许你从各种数据源中摄取数据，提供集成的功能商店，并拥有用于管理和监控模型及实时生产的仪表板。此外，它支持自动追踪、数据版本控制、CI/CD、持续模型性能监控和模型漂移缓解。
 
 ## 4\. DagsHub
 
-[DagsHub](https://dagshub.com/) 是我最喜欢的平台。我用它来构建和展示我的作品集项目。它类似于GitHub，但专为数据科学家和机器学习工程师设计。
+[DagsHub](https://dagshub.com/) 是我最喜欢的平台。我用它来构建和展示我的作品集项目。它类似于 GitHub，但专为数据科学家和机器学习工程师设计。
 
 DagsHub 提供代码和数据版本控制、实验追踪、模式注册、模型训练和部署的持续集成和部署（CI/CD）、模型服务等工具。它是一个开放平台，意味着任何人都可以构建、贡献和学习项目。
 
@@ -56,15 +56,15 @@ DagsHub 的最佳功能包括：
 
 +   模型服务。
 
-+   ML管道可视化。
++   ML 管道可视化。
 
-+   对Jupyter笔记本、代码、数据集和图像进行差异比较和评论。
++   对 Jupyter 笔记本、代码、数据集和图像进行差异比较和评论。
 
 唯一缺少的就是一个专门用于模型推理的计算实例。
 
 ## 5\. Weights & Biases
 
-[Weights & Biases](https://wandb.ai/site) 起初是一个实验性的追踪平台，但已发展成一个端到端的机器学习平台。现在，它提供实验可视化、超参数优化、模型注册、工作流自动化、工作流管理、监控以及无代码的机器学习应用开发。此外，它还提供LLMOps解决方案，例如探索和调试LLM应用程序以及GenAI应用评估。
+[Weights & Biases](https://wandb.ai/site) 起初是一个实验性的追踪平台，但已发展成一个端到端的机器学习平台。现在，它提供实验可视化、超参数优化、模型注册、工作流自动化、工作流管理、监控以及无代码的机器学习应用开发。此外，它还提供 LLMOps 解决方案，例如探索和调试 LLM 应用程序以及 GenAI 应用评估。
 
 Weights & Biases 提供云和私有托管。你可以在本地托管服务器或使用托管服务生存。个人使用免费，但团队和企业解决方案需要付费。你还可以使用开源核心库在本地机器上运行，享受隐私和控制。
 
@@ -92,13 +92,13 @@ TrueFoundry 还支持 LLMs，你可以轻松地微调开源 LLMs 并使用优化
 
 ### 更多相关主题
 
-+   [2024年你必须尝试的5个最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
++   [2024 年你必须尝试的 5 个最佳向量数据库](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
 
-+   [5款最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
++   [5 款最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
 
-+   [你必须尝试的前5个AI编码助手](https://www.kdnuggets.com/top-5-ai-coding-assistants-you-must-try)
++   [你必须尝试的前 5 个 AI 编码助手](https://www.kdnuggets.com/top-5-ai-coding-assistants-you-must-try)
 
-+   [2024年你必须尝试的5个免费AI游乐场](https://www.kdnuggets.com/5-free-ai-playgrounds-for-you-to-try-in-2024)
++   [2024 年你必须尝试的 5 个免费 AI 游乐场](https://www.kdnuggets.com/5-free-ai-playgrounds-for-you-to-try-in-2024)
 
 +   [初学者的端到端机器学习指南](https://www.kdnuggets.com/2021/12/beginner-guide-end-end-machine-learning.html)
 

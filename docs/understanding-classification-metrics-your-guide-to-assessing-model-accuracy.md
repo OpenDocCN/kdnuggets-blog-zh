@@ -1,8 +1,8 @@
 # 理解分类指标：评估模型准确性的指南
 
-> 原文：[https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)
+> 原文：[`www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy`](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)
 
-![理解分类指标：评估模型准确性的指南](../Images/d8c51c838f49efba326a254b57e7ef70.png)
+![理解分类指标：评估模型准确性的指南](img/d8c51c838f49efba326a254b57e7ef70.png)
 
 作者图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -34,9 +34,9 @@
 
 现在，让我们仅考虑一个二分类问题以便于理解。由于数据集中只有两种不同的类别，将真实标签与预测标签进行比较可能会产生以下四种结果，如图示所示。
 
-![理解分类指标：评估模型准确性的指南](../Images/719be79e30179bd695d06f5b2f699682.png)
+![理解分类指标：评估模型准确性的指南](img/719be79e30179bd695d06f5b2f699682.png)
 
-作者图像：*使用1表示正标签，0表示负标签，预测结果可以分为四个类别。*
+作者图像：*使用 1 表示正标签，0 表示负标签，预测结果可以分为四个类别。*
 
 **真阳性：** 模型在实际标签为正类时也预测为正类。这是所需的行为，因为模型能够成功预测正类标签。
 
@@ -44,7 +44,7 @@
 
 **假阴性：** 模型对正类样本预测为负类。模型错误地将数据样本识别为负类。
 
-**真阴性：** 所需的行为也是如此。模型正确地识别负类样本，对数据样本进行预测为0时，实际标签也是0。
+**真阴性：** 所需的行为也是如此。模型正确地识别负类样本，对数据样本进行预测为 0 时，实际标签也是 0。
 
 现在，我们可以在这些术语的基础上理解常见评估指标的工作原理。
 
@@ -54,11 +54,11 @@
 
 因此，准确度可以按如下方式计算：
 
-![理解分类指标：评估模型准确性的指南](../Images/40587aa0a1b7bb350a1f793b70ad898a.png)
+![理解分类指标：评估模型准确性的指南](img/40587aa0a1b7bb350a1f793b70ad898a.png)
 
 或
 
-![理解分类指标：评估模型准确性的指南](../Images/9170ae8f55a5c3e6c98532d10cff1c2e.png)
+![理解分类指标：评估模型准确性的指南](img/9170ae8f55a5c3e6c98532d10cff1c2e.png)
 
 ## 使用时机
 
@@ -80,7 +80,7 @@
 
 在数学上，它表示为
 
-![理解分类指标：评估模型准确性的指南](../Images/4c4490aeaa7a1666c6fe8ddd63c9a7bd.png)
+![理解分类指标：评估模型准确性的指南](img/4c4490aeaa7a1666c6fe8ddd63c9a7bd.png)
 
 ## 使用时机
 
@@ -96,7 +96,7 @@
 
 召回率，也称为敏感度，衡量模型记住数据集中正标签的能力。**它衡量模型将数据集中正标签预测为正的比例。**
 
-![理解分类指标：评估模型准确性的指南](../Images/6774d1487ecbaa6f323fe54b59b11268.png)
+![理解分类指标：评估模型准确性的指南](img/6774d1487ecbaa6f323fe54b59b11268.png)
 
 更高的召回率意味着模型在记住具有正标签的数据样本方面表现更好。
 
@@ -110,7 +110,7 @@
 
 召回率是精确度和召回率的调和均值。它惩罚那些在这两个指标之间存在显著不平衡的模型。
 
-![理解分类指标：评估模型准确性的指南](../Images/4de1a23f859f171be8687854d07e0e45.png)
+![理解分类指标：评估模型准确性的指南](img/4de1a23f859f171be8687854d07e0e45.png)
 
 在精确度和召回率都重要的场景中广泛使用，并允许在两者之间取得平衡。
 

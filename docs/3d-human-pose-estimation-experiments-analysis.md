@@ -1,8 +1,8 @@
 # 3D 人体姿态估计实验与分析
 
-> 原文：[https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
+> 原文：[`www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html`](https://www.kdnuggets.com/2020/08/3d-human-pose-estimation-experiments-analysis.html)
 
-[comments](#comments)
+comments
 
 **由 [Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)，[MobiDev](https://mobidev.biz/services/data-science)的数据科学工程师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 事务
 
 * * *
 
@@ -26,7 +26,7 @@
 
 3D 人体姿态估计的目标是通过使用包含人的图像来检测人体上特定数量的关节（关键点）的 XYZ 坐标。视觉上，3D 关键点（关节）跟踪如下：
 
-![Figure](../Images/0d1eebae1652d4ae982fa5db8c576480.png)
+![Figure](img/0d1eebae1652d4ae982fa5db8c576480.png)
 
 3D 关键点及其规格 (https://mobidev.biz/wp-content/uploads/2020/07/3d-keypoints-human-pose-estimation.png)
 
@@ -44,9 +44,9 @@
 
 无论是使用图像 →2D →3D 还是图像 → 3D 的方法，3D 关键点通常通过单视角图像推断得出。另一方面，也可以利用多视角图像数据，其中每一帧都由多个摄像头从不同角度聚焦于目标场景进行拍摄。
 
-![图像](../Images/a4a2c3f9c9d817b542a85f635e85821e.png)
+![图像](img/a4a2c3f9c9d817b542a85f635e85821e.png)
 
-多摄像头模型姿态估计 – 多个 2D 检测结果被合并以预测最终的 3D 姿态（来源 – 可学习的三角测量，[https://arxiv.org/abs/1905.05754](https://arxiv.org/abs/1905.05754)）
+多摄像头模型姿态估计 – 多个 2D 检测结果被合并以预测最终的 3D 姿态（来源 – 可学习的三角测量，[`arxiv.org/abs/1905.05754`](https://arxiv.org/abs/1905.05754)）
 
 多视角技术可以提高深度感知，并帮助解决图像中一些身体部位被遮挡的情况。因此，模型的预测变得更加准确。
 
@@ -58,7 +58,7 @@
 
 当复杂的多摄像机设置和深度传感器不可用时，这种情况就会发生。因此，我们选择了 [VideoPose3D](https://github.com/facebookresearch/VideoPose3D) 模型，因为它适用于简单的单视角检测。VideoPose3D 属于卷积神经网络（CNNs）家族，并采用扩张时间卷积（见下方插图）。
 
-![图像](../Images/828fa0eee1d3319f4930308cee842139.png)
+![图像](img/828fa0eee1d3319f4930308cee842139.png)
 
 使用 VideoPose3D 进行 2D 到 3D 关键点转换。请注意，在此插图中，使用了过去和未来的帧来进行预测。（致谢 [Pavllo et al](https://arxiv.org/abs/1811.11742)。）
 
@@ -72,27 +72,27 @@
 
 为了测量角度，我们将脊柱（起始关键点 0，结束关键点 8）视为一个向量，并通过取余弦相似度方程的*反余弦*来测量该向量与 XY 平面的角度。在下方视频中，你可以看到模型如何在示例视频中检测脊柱角度。如你所见，当以不正确的姿势蹲下时，角度可能小至 28-27°。
 
-[![图像](../Images/df31d8b2674b8a085749b57b7057a80d.png)](https://i.ibb.co/XsY88MT/image17.gif)
+![图像](https://i.ibb.co/XsY88MT/image17.gif)
 
 脊柱角度检测——人员过度前倾（点击查看动画）
 
-[https://youtu.be/yZv-qoKfmqk](https://youtu.be/yZv-qoKfmqk)
+[`youtu.be/yZv-qoKfmqk`](https://youtu.be/yZv-qoKfmqk)
 
 从正确执行动作的视频中（见下方视频），我们可以看到角度不会低于 ~47°。这意味着所选方法可以正确检测蹲下时的脊柱角度。
 
-[![图像](../Images/20308a4f7e374145f2193ebebbcc05c0.png)](https://i.ibb.co/T42Sfz8/image11.gif)
+![图像](https://i.ibb.co/T42Sfz8/image11.gif)
 
 脊柱角度检测——保持背部挺直（点击查看动画）
 
-[https://youtu.be/ikQhw9pNMy4](https://youtu.be/ikQhw9pNMy4)
+[`youtu.be/ikQhw9pNMy4`](https://youtu.be/ikQhw9pNMy4)
 
 ### 运动开始和结束的检测
 
 为了能够自动分析仅在运动的活跃阶段或检测其持续时间，我们调查了自动检测运动开始和结束的过程。
 
-由于深蹲时需要特定的手臂定位，我们决定使用手臂的位置作为检测的参考。在深蹲时，两只手臂通常会弯曲成小于90°的角度，手的位置接近肩膀（按高度）。通过使用一些任意阈值（在我们的案例中，我们选择了小于78°的角度和小于最大z轴值的10%的距离），我们可以检测到这种情况，如下所示。
+由于深蹲时需要特定的手臂定位，我们决定使用手臂的位置作为检测的参考。在深蹲时，两只手臂通常会弯曲成小于 90°的角度，手的位置接近肩膀（按高度）。通过使用一些任意阈值（在我们的案例中，我们选择了小于 78°的角度和小于最大 z 轴值的 10%的距离），我们可以检测到这种情况，如下所示。
 
-[![图像](../Images/885c4ef468fec4fb2e5243782417b1c8.png)](https://i.ibb.co/sjqcsDz/image1.gif)
+![图像](https://i.ibb.co/sjqcsDz/image1.gif)
 
 深蹲开始检测（点击查看动画）
 
@@ -100,13 +100,13 @@ https://youtu.be/KjtXIoX-KSo
 
 为了检查运动过程中是否保持了条件和阈值，我们从不同的角度分析了另一段视频，并审查了系统在检测开始后如何在运动中运作。结果发现，观察到的参数远低于所选的阈值。
 
-[![图像](../Images/350ae89db0544e8798545c668de169b6.png)](https://i.ibb.co/K04qdgT/image19.gif)
+![图像](https://i.ibb.co/K04qdgT/image19.gif)
 
 运动过程中深蹲条件的稳定性（点击查看动画）
 
 我们还检查了在人员完成运动后条件的表现，并看到一旦杠铃被放下，错误条件会立即触发。最后，我们得出结论，这种方法效果很好，尽管它有一些细节（在“人体姿态估计技术中的错误及可能解决方案”部分中描述）。
 
-[![图像](../Images/6ffc60c182946b60357acbb90d9a51bd.png)](https://i.ibb.co/0QSQ6kH/image6.gif)
+![图像](https://i.ibb.co/0QSQ6kH/image6.gif)
 
 深蹲条件 – 深蹲结束检查（点击查看动画）
 
@@ -114,17 +114,17 @@ https://youtu.be/KjtXIoX-KSo
 
 膝盖内翻或膝盖凹陷是深蹲中的常见错误。这种问题通常发生在运动员到达深蹲的底部并开始起身时。错误的技术可能导致膝关节的严重磨损，并导致韧带撕裂或膝盖杯的更换。
 
-为了查看模型如何检测膝盖凹陷错误，我们捕捉了关节的3D位置。由于结果骨架（见下图）可以随机定位，我们沿Z轴旋转它以使其与某个平面对齐。
+为了查看模型如何检测膝盖凹陷错误，我们捕捉了关节的 3D 位置。由于结果骨架（见下图）可以随机定位，我们沿 Z 轴旋转它以使其与某个平面对齐。
 
-![图像](../Images/6eafd263e54706d954e78997073f5774.png)
+![图像](img/6eafd263e54706d954e78997073f5774.png)
 
-关键点旋转以匹配选定的平面（在此情况下为ZY平面）
+关键点旋转以匹配选定的平面（在此情况下为 ZY 平面）
 
-然后，我们将3D关键点投影到平面上，并开始跟踪膝盖相对于脚的位置。目标是检测双腿弯曲的情况，以及膝盖比脚更靠近躯干中心的情况。
+然后，我们将 3D 关键点投影到平面上，并开始跟踪膝盖相对于脚的位置。目标是检测双腿弯曲的情况，以及膝盖比脚更靠近躯干中心的情况。
 
 从下面的图像中，你可以看到膝盖位置不正确的情况被很好地检测出来了，这意味着这种方法效果很好。
 
-[![图像](../Images/1bc2c78655e23720ff20f9242e47bfd4.png)](https://mobidev.biz/wp-content/uploads/2020/07/detect-mistakes-knee-cave.gif)
+![图像](https://mobidev.biz/wp-content/uploads/2020/07/detect-mistakes-knee-cave.gif)
 
 膝盖内陷检测：原始视频、3D 检测和 ZY 平面的正投影（点击查看动画）
 
@@ -140,7 +140,7 @@ https://youtu.be/KjtXIoX-KSo
 
 1.  分析不同关节之间的距离逐帧
 
-[![图像](../Images/e6b494b816174676f52ab1762331c628.png)](https://i.ibb.co/D1vT5fh/image5.gif)
+![图像](https://i.ibb.co/D1vT5fh/image5.gif)
 
 比较两位运动员在抓举中的运动：在姿态重建视图的左上角框中显示了相应关节之间的距离（点击查看动画）
 
@@ -152,7 +152,7 @@ https://youtu.be/34z5FI5ldyE
 
 如果你曾考虑过 3D 人体姿态估计是否可以用来计数运动中的重复次数，我们准备了一个基于硬拉练习的示例，展示了如何以自动化方式确定重复次数和运动阶段（向上或向下）。在下面的图像中，你可以看到我们能够检测到人正在向上运动，并且可以相当可靠地计数重复次数。
 
-[![图像](../Images/b9ac9b58f4546d6ec427083fa0339546.png)](https://i.ibb.co/VMF2Pn1/image20.gif)
+![图像](https://i.ibb.co/VMF2Pn1/image20.gif)
 
 硬拉中的重复次数和运动阶段检测（点击查看动画）
 
@@ -160,21 +160,21 @@ https://youtu.be/zX51qbBCiLM
 
 我们首先考虑了如何定义一个重复动作。基本上，硬拉中的一次重复是当最初弯腰的人开始上升，达到垂直位置，然后再次开始下降。因此，我们需要寻找一个时间点，在这个时间点，一个连续的“向上”帧组后面跟着一个连续的“向下”帧组。两个组之间的边缘帧将是我们可以向计数器中添加一次重复的地方。
 
-在实际应用中，找到上升和下降帧的关键是脊柱角度，我们已经知道如何检测。利用这一点，我们可以遍历所有检测到的帧，并比较邻近帧中的脊柱角度。结果，我们将得到一个由1和0组成的向量，其中连续的1可以代表上升，0代表下降。
+在实际应用中，找到上升和下降帧的关键是脊柱角度，我们已经知道如何检测。利用这一点，我们可以遍历所有检测到的帧，并比较邻近帧中的脊柱角度。结果，我们将得到一个由 1 和 0 组成的向量，其中连续的 1 可以代表上升，0 代表下降。
 
-![图示](../Images/f97664de1269fa6aec043aa8865524a5.png)
+![图示](img/f97664de1269fa6aec043aa8865524a5.png)
 
 基于脊柱角度比较序列中的两个姿势，以确定个人是上升还是下降。比较滤镜遍历序列中的所有帧。
 
 显然，这些检测结果需要进行一些小的清理，以去除偶然的检测和振荡。这可以通过使用相对小尺寸（4-5）帧的滑动窗口遍历数据，并用窗口内的多数值替换所有值来完成。
 
-![图片](../Images/786f92432e81b86fed7b11512e9fe7f7.png)![图示](../Images/809195e4f541199ece6f79d1c9bf8ad6.png)
+![图片](img/786f92432e81b86fed7b11512e9fe7f7.png)![图示](img/809195e4f541199ece6f79d1c9bf8ad6.png)
 
-运动阶段检测示例，在值清理前（上方）和后（下方）的前17帧（1- 上升，0 – 下降）
+运动阶段检测示例，在值清理前（上方）和后（下方）的前 17 帧（1- 上升，0 – 下降）
 
 清理完成后，我们可以开始检测实际的边缘帧，即个人完成一个重复的地方。这出奇简单，因为我们可以应用用于边缘检测的卷积滤镜（核）。
 
-![图示](../Images/385cbccbcf90256e0eb7e7ba93dea3e0.png)
+![图示](img/385cbccbcf90256e0eb7e7ba93dea3e0.png)
 
 使用边缘检测核的卷积结果
 
@@ -186,7 +186,7 @@ https://youtu.be/zX51qbBCiLM
 
 **问题：** 乍一看，蹲下起始检测似乎工作正常，但任意阈值在一个手臂角度短暂超过时会产生错误。
 
-[![图示](../Images/dddacc0934ace589e66efcc1cdc1a43d.png)](https://i.ibb.co/3hsGc6R/image15.gif)
+![图示](https://i.ibb.co/3hsGc6R/image15.gif)
 
 蹲下起始检测 – 阈值错误（点击查看动画）
 
@@ -196,7 +196,7 @@ https://youtu.be/zX51qbBCiLM
 
 **问题：** 在处理不寻常的运动和严格的正面视角时，模型往往会产生低质量的结果，特别是腿部关键点。造成这一问题的可能原因是，尽管 Human3.6M 数据集的规模很大，但其在姿势、运动和视角方面仍然有限。因此，模型无法准确地对呈现的数据（这些数据远远超出了已学习的分布）进行泛化。相比之下，当视角为非正面时，相同的运动预测会更好。
 
-[![图示](../Images/e7afe1cf672515e103e6fe5983a4dbe6.png)](https://i.ibb.co/hRmGf7S/image10.gif)
+![图示](https://i.ibb.co/hRmGf7S/image10.gif)
 
 正面位置的运动员在抓举动作中的 3D 检测效果差（点击查看动画）
 
@@ -208,7 +208,7 @@ https://youtu.be/Za1GPq6sHUk
 
 **问题：** 在进行 3D 人体姿势估计时，我们发现 2D 检测部分可能导致预测精度低。
 
-[![图示](../Images/683d4e52bdd4c176159422718081fa4c.png)](https://i.ibb.co/VJgLk2j/image9.gif)
+![图示](https://i.ibb.co/VJgLk2j/image9.gif)
 
 在不寻常动作中，腿部位置未被正确检测（点击查看动画）
 
@@ -228,27 +228,27 @@ Keypoint R-CNN 模型错误地检测了快速移动的腿部位置，这在一�
 
 ### 遮挡关节错误
 
-**问题：** 当身体部位被其他身体部位或物体遮挡时，2D预测器可能会返回较差的结果。在举重时，如果杠铃上的重量遮挡了手的位置，检测器可能会“失误”，将关键点放置在离真实位置较远的地方。这会导致3D关键点模型输出的不稳定和“抖动的手”效果。
+**问题：** 当身体部位被其他身体部位或物体遮挡时，2D 预测器可能会返回较差的结果。在举重时，如果杠铃上的重量遮挡了手的位置，检测器可能会“失误”，将关键点放置在离真实位置较远的地方。这会导致 3D 关键点模型输出的不稳定和“抖动的手”效果。
 
-[![图像](../Images/ba909d713af0704bda3bab0e9045a824.png)](https://i.ibb.co/9hGMVWM/image16.gif)
+![图像](https://i.ibb.co/9hGMVWM/image16.gif)
 
-2D关键点模型未能检测左手的位置，导致3D重建不准确（点击查看动画）
+2D 关键点模型未能检测左手的位置，导致 3D 重建不准确（点击查看动画）
 
 https://youtu.be/1rg1lj-eAaw
 
-**解决方案：** 可以使用多视角系统来获得更好的准确性，因为它们可以显著减少遮挡问题。也有一些专门 [设计](https://arxiv.org/abs/1907.06922) 来处理遮挡的2D关键点定位模型。
+**解决方案：** 可以使用多视角系统来获得更好的准确性，因为它们可以显著减少遮挡问题。也有一些专门 [设计](https://arxiv.org/abs/1907.06922) 来处理遮挡的 2D 关键点定位模型。
 
-总之，根据我们的实际发现，大多数3D人体姿态估计技术的弱点是可以避免的。主要任务是选择合适的模型架构和训练数据。此外，3D人体姿态估计的快速发展表明，当前的障碍在未来可能会变得不那么严重。
+总之，根据我们的实际发现，大多数 3D 人体姿态估计技术的弱点是可以避免的。主要任务是选择合适的模型架构和训练数据。此外，3D 人体姿态估计的快速发展表明，当前的障碍在未来可能会变得不那么严重。
 
 **简介：[Maksym Tatariants](https://www.linkedin.com/in/maksym-tatariants/)** 是 [MobiDev](https://mobidev.biz/services/data-science) 的数据科学工程师。他拥有环境和机械工程、材料科学和化学方面的背景，并热衷于在数据科学和机器学习领域获得新的见解和经验。他特别对基于深度学习的技术及其在商业应用中的应用感兴趣。
 
 **相关：**
 
-+   [2019年人体姿态估计指南](/2019/08/2019-guide-human-pose-estimation.html)
++   2019 年人体姿态估计指南
 
-+   [用于评估深度学习目标检测器的指标](/2020/08/metrics-evaluate-deep-learning-object-detectors.html)
++   用于评估深度学习目标检测器的指标
 
-+   [计算机视觉模型是否容易受到权重中毒攻击？](/2020/08/computer-vision-models-vulnerable-weight-poisoning-attacks.html)
++   计算机视觉模型是否容易受到权重中毒攻击？
 
 ### 更多相关话题
 
@@ -256,7 +256,7 @@ https://youtu.be/1rg1lj-eAaw
 
 +   [如何设计数据收集实验](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)
 
-+   [用于深度学习实验的Hydra配置](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)
++   [用于深度学习实验的 Hydra 配置](https://www.kdnuggets.com/2023/03/hydra-configs-deep-learning-experiments.html)
 
 +   [深度学习与人类认知能力之间的差距](https://www.kdnuggets.com/2022/10/gap-deep-learning-human-cognitive-abilities.html)
 

@@ -1,20 +1,20 @@
-# 3个理由说明你应该使用线性回归模型而不是神经网络
+# 3 个理由说明你应该使用线性回归模型而不是神经网络
 
-> 原文：[https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
+> 原文：[`www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html`](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-![3 Reasons Why You Should Use Linear Regression Models Instead of Neural Networks](../Images/57e381d5ad862d71d48bd56edd375075.png)
+![3 Reasons Why You Should Use Linear Regression Models Instead of Neural Networks](img/57e381d5ad862d71d48bd56edd375075.png)
 
 首先，我并不是说线性回归比深度学习更好。
 
 * * *
 
-## 我们的前3个课程推荐
+## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -36,7 +36,7 @@
 
 线性回归和神经网络都是你可以用来进行预测的模型。但是，回归分析不仅仅限于进行预测，它还允许你做许多其他事情，包括但不限于：
 
-+   **回归分析让你理解变量之间关系的强度**。通过像R平方/调整R平方这样的统计测量，回归分析可以告诉你模型解释了数据总变异性的多少。
++   **回归分析让你理解变量之间关系的强度**。通过像 R 平方/调整 R 平方这样的统计测量，回归分析可以告诉你模型解释了数据总变异性的多少。
 
 +   **回归分析告诉你模型中哪些预测变量在统计上显著，哪些不是**。简单来说，如果你给回归模型 50 个特征，你可以找出哪些特征是目标变量的有效预测因子，哪些不是。
 

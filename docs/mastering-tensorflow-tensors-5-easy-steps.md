@@ -1,14 +1,14 @@
 # 通过 5 个简单步骤掌握 TensorFlow 张量
 
-> 原文：[https://www.kdnuggets.com/2020/11/mastering-tensorflow-tensors-5-easy-steps.html](https://www.kdnuggets.com/2020/11/mastering-tensorflow-tensors-5-easy-steps.html)
+> 原文：[`www.kdnuggets.com/2020/11/mastering-tensorflow-tensors-5-easy-steps.html`](https://www.kdnuggets.com/2020/11/mastering-tensorflow-tensors-5-easy-steps.html)
 
-[评论](#comments)
+评论
 
 **作者 [Orhan G. Yalçın](https://www.linkedin.com/in/orhangaziyalcin/)，AI 研究员**
 
 *如果你正在阅读这篇文章，我相信我们有相似的兴趣，并且在相似的行业中。那就通过* [*Linkedin*](https://linkedin.com/in/orhangaziyalcin/) *来联系吧！请不要犹豫发送联系请求！* [*Orhan G. Yalçın — Linkedin*](https://linkedin.com/in/orhangaziyalcin/)
 
-![图像](../Images/d50c55750c8559cd8fd43f07ccdbcffc.png)照片由 [Esther Jiao](https://unsplash.com/@estherrj?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+![图像](img/d50c55750c8559cd8fd43f07ccdbcffc.png)照片由 [Esther Jiao](https://unsplash.com/@estherrj?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
 在这篇文章中，我们将深入探讨 TensorFlow [张量](https://www.kdnuggets.com/2018/05/wtf-tensor.html) 的细节。我们将通过这五个简单步骤涵盖所有与 TensorFlow 张量相关的主题：
 
@@ -26,7 +26,7 @@
 
 ### 张量的定义：张量是什么？
 
-![图像](../Images/d09490d09a2cbcbc2f2e360cc8df63a1.png)图 1. 三阶张量的可视化（图由作者提供）
+![图像](img/d09490d09a2cbcbc2f2e360cc8df63a1.png)图 1. 三阶张量的可视化（图由作者提供）
 
 张量是 TensorFlow 的多维数组，具有统一的数据类型。它们与 NumPy 数组非常相似，并且是不可变的，这意味着一旦创建后不能被更改。你只能创建一个新的副本并进行编辑。
 
@@ -64,7 +64,7 @@ TensorFlow 张量被创建为 `tf.Tensor` 对象，它们有几个特征。首�
 
 +   **秩-N 张量：** 一个包含 N 个轴（N 维）的张量。
 
-![图示](../Images/b4dcb40089fec79f7031da9a1f518e49.png)图 2\. 秩-1 张量 | 秩-2 张量 | 秩-3 张量（作者提供的图）
+![图示](img/b4dcb40089fec79f7031da9a1f518e49.png)图 2\. 秩-1 张量 | 秩-2 张量 | 秩-3 张量（作者提供的图）
 
 例如，我们可以通过将一个三层嵌套列表对象传递给 `tf.constant` 函数来创建一个秩-3 张量。对于这个例子，我们可以将数字分割成一个每层有三个元素的三层嵌套列表：
 
@@ -253,7 +253,7 @@ The shape of our flattened Tensor object is: tf.Tensor([1 2 3 4 5 6], shape=(6,)
 
 1.  稀疏 Tensor
 
-![图](../Images/1dd5906e1bdbb46b2f349c933f730228.png)图 3\. 不规则 Tensor | 字符串 Tensor | 稀疏 Tensor（图由作者提供）
+![图](img/1dd5906e1bdbb46b2f349c933f730228.png)图 3\. 不规则 Tensor | 字符串 Tensor | 稀疏 Tensor（图由作者提供）
 
 让我们仔细看看它们每一个是什么。
 
@@ -302,13 +302,13 @@ tf.Tensor( [[ 25   0   0   0   0]
 
 这应该会让你更有信心，因为你现在对 TensorFlow 框架的构建块有了更多了解。
 
-查看 [本教程系列的第 1 部分](https://towardsdatascience.com/beginners-guide-to-tensorflow-2-x-for-deep-learning-applications-c7ebd0dcfbee?source=linkShare-ff47ab81282a-1602188004&_branch_match_id=834349989166411892):
+查看 [本教程系列的第一部分](https://towardsdatascience.com/beginners-guide-to-tensorflow-2-x-for-deep-learning-applications-c7ebd0dcfbee?source=linkShare-ff47ab81282a-1602188004&_branch_match_id=834349989166411892):
 
 [**TensorFlow 2.x 初学者指南，用于深度学习应用**](https://link.medium.com/yJp16uPoqab)
 
 了解 TensorFlow 平台及其对机器学习专家的提供
 
-继续阅读 [系列第 3 部分](https://towardsdatascience.com/mastering-tensorflow-variables-in-5-easy-step-5ba8062a1756):
+继续阅读 [系列第三部分](https://towardsdatascience.com/mastering-tensorflow-variables-in-5-easy-step-5ba8062a1756):
 
 [**在 5 个简单步骤中掌握 TensorFlow “变量”**](https://towardsdatascience.com/mastering-tensorflow-variables-in-5-easy-step-5ba8062a1756)
 
@@ -338,27 +338,27 @@ tf.Tensor( [[ 25   0   0   0   0]
 
 如果你能够预测明天的比特币 (BTC) 价格，那不是太棒了吗？加密货币市场有…
 
-**简介：[Orhan G. Yalçın](https://www.linkedin.com/in/orhangaziyalcin/)** 是法律领域的AI研究员。他是一位合格的律师，拥有商业发展和数据科学技能，曾在Allen & Overy担任法律实习生，处理资本市场、竞争和公司法事务。
+**简介：[Orhan G. Yalçın](https://www.linkedin.com/in/orhangaziyalcin/)** 是法律领域的 AI 研究员。他是一位合格的律师，拥有商业发展和数据科学技能，曾在 Allen & Overy 担任法律实习生，处理资本市场、竞争和公司法事务。
 
 [原文](https://towardsdatascience.com/mastering-tensorflow-tensors-in-5-easy-steps-35f21998bb86)。已获许可转载。
 
 **相关：**
 
-+   [什么是张量？！?](/2018/05/wtf-tensor.html)
++   什么是张量？！?
 
-+   [TensorFlow 2 入门](/2020/07/getting-started-tensorflow2.html)
++   TensorFlow 2 入门
 
-+   [你应该知道的PyTorch最重要基础知识](/2020/06/fundamentals-pytorch.html)
++   你应该知道的 PyTorch 最重要基础知识
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -366,12 +366,12 @@ tf.Tensor( [[ 25   0   0   0   0]
 
 +   [你需要知道的关于张量的所有信息](https://www.kdnuggets.com/2022/05/everything-need-know-tensors.html)
 
-+   [TensorFlow用于计算机视觉 - 轻松实现迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 用于计算机视觉 - 轻松实现迁移学习](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
-+   [用Python构建AI应用的10个简单步骤](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)
++   [用 Python 构建 AI 应用的 10 个简单步骤](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)
 
-+   [用Python构建命令行应用的7个简单步骤](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
++   [用 Python 构建命令行应用的 7 个简单步骤](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
 
-+   [用Docker容器化Python应用的5个简单步骤](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
++   [用 Docker 容器化 Python 应用的 5 个简单步骤](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
 
-+   [2022年掌握Python机器学习的7个步骤](https://www.kdnuggets.com/2022/02/7-steps-mastering-machine-learning-python.html)
++   [2022 年掌握 Python 机器学习的 7 个步骤](https://www.kdnuggets.com/2022/02/7-steps-mastering-machine-learning-python.html)

@@ -1,20 +1,20 @@
-# 使用BERT进行长文本文档分类
+# 使用 BERT 进行长文本文档分类
 
-> 原文：[https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
+> 原文：[`www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html`](https://www.kdnuggets.com/2022/02/classifying-long-text-documents-bert.html)
 
-**由Sinequa提供**
+**由 Sinequa 提供**
 
 ### 我们想要实现什么目标？
 
-我们想将文本分类到预定义的类别中，这是NLP中非常常见的任务。多年来，简单文档的经典方法是使用[TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)生成特征，并将其与[逻辑回归](https://en.wikipedia.org/wiki/Logistic_regression)结合。以前我们在Sinequa用来进行文本分类时依赖于这一套方案，剧透一下，使用这里介绍的模型，我们将非常嘈杂和长文档数据集的基线从5%提高到了30%。这种旧方法有两个主要问题：特征稀疏性，我们通过压缩技术解决了这一问题，以及词匹配问题，我们通过利用Sinequa强大的语言学能力（主要通过我们自家开发的分词器）来克服。
+我们想将文本分类到预定义的类别中，这是 NLP 中非常常见的任务。多年来，简单文档的经典方法是使用[TF-IDF](https://en.wikipedia.org/wiki/Tf%E2%80%93idf)生成特征，并将其与[逻辑回归](https://en.wikipedia.org/wiki/Logistic_regression)结合。以前我们在 Sinequa 用来进行文本分类时依赖于这一套方案，剧透一下，使用这里介绍的模型，我们将非常嘈杂和长文档数据集的基线从 5%提高到了 30%。这种旧方法有两个主要问题：特征稀疏性，我们通过压缩技术解决了这一问题，以及词匹配问题，我们通过利用 Sinequa 强大的语言学能力（主要通过我们自家开发的分词器）来克服。
 
-后来，语言模型的潘多拉盒子被打开了（这些模型在海量语料库上进行无监督预训练，并在下游监督任务中进行微调），TF-IDF基础的技术不再是最先进的。这些语言模型可能是[word2vec](https://arxiv.org/pdf/1301.3781.pdf)与LSTM或CNN、ELMo，以及最重要的Transformer（2017年：[https://arxiv.org/pdf/1706.03762.pdf](https://arxiv.org/pdf/1706.03762.pdf)）。
+后来，语言模型的潘多拉盒子被打开了（这些模型在海量语料库上进行无监督预训练，并在下游监督任务中进行微调），TF-IDF 基础的技术不再是最先进的。这些语言模型可能是[word2vec](https://arxiv.org/pdf/1301.3781.pdf)与 LSTM 或 CNN、ELMo，以及最重要的 Transformer（2017 年：[`arxiv.org/pdf/1706.03762.pdf`](https://arxiv.org/pdf/1706.03762.pdf)）。
 
-[BERT](https://arxiv.org/pdf/1810.04805.pdf)是一个基于Transformer的语言模型，近年来获得了大量关注，因为它远远超越了所有NLP基线，并成为构建我们文本分类的自然选择。
+[BERT](https://arxiv.org/pdf/1810.04805.pdf)是一个基于 Transformer 的语言模型，近年来获得了大量关注，因为它远远超越了所有 NLP 基线，并成为构建我们文本分类的自然选择。
 
 ### 那么挑战是什么呢？
 
-基于Transformer的语言模型如BERT在理解语义上下文方面表现出色（这是词袋方法所无法做到的），因为它们专门为此目的而设计。如引言中所述，BERT在所有NLP基线测试中表现优异，但正如我们在科学界所说的，“没有免费的午餐”。像BERT这样的模型提供的广泛语义理解带来了一个大问题：它无法处理非常长的文本序列。基本上，这个限制是512个标记（标记是文本中的一个词或子词），这大致相当于两到三段维基百科内容，而我们显然不希望仅仅考虑如此小的文本子部分进行分类。
+基于 Transformer 的语言模型如 BERT 在理解语义上下文方面表现出色（这是词袋方法所无法做到的），因为它们专门为此目的而设计。如引言中所述，BERT 在所有 NLP 基线测试中表现优异，但正如我们在科学界所说的，“没有免费的午餐”。像 BERT 这样的模型提供的广泛语义理解带来了一个大问题：它无法处理非常长的文本序列。基本上，这个限制是 512 个标记（标记是文本中的一个词或子词），这大致相当于两到三段维基百科内容，而我们显然不希望仅仅考虑如此小的文本子部分进行分类。
 
 为了说明这一点，考虑将全面的产品评论分类为正面或负面评论的任务。前几句话或段落可能只包含产品的描述，可能需要进一步阅读评论才能理解评论者是否真正喜欢这个产品。如果我们的模型不能涵盖全部内容，可能无法做出正确的预测。因此，我们的模型的一个要求是捕捉文档的上下文，同时正确管理文档开头和结尾之间的长期依赖关系。
 
@@ -32,7 +32,7 @@
 
 +   长短期记忆网络（LSTM）
 
-+   Transformers（用来聚合Transformers，没错 :)）
++   Transformers（用来聚合 Transformers，没错 :)）
 
 我们在不同标准文本分类语料库上的实验表明，使用额外的 Transformer 层来合并生成的嵌入效果最佳，而不会引入大量计算成本。
 
@@ -40,25 +40,25 @@
 
 我们考虑一个具有 *L* 标签的文本分类任务。对于一个文档 *D*，其由 [WordPiece 分词](https://medium.com/@makcedward/how-subword-helps-on-your-nlp-model-83dd1b836f46) 提供的标记可以表示为 *X =( x₁, …, xₙ)*，其中 *N* 为 *D* 中标记的总数。设 K 为最大序列长度（对于 BERT 为 512）。设 *I* 为 *D* 中 *K* 个标记或更少的序列数，它由 I=⌊ N/K ⌋ 给出。
 
-请注意，如果文档中的最后一个序列的大小小于 *K*，它将用0填充，直到 *Kᵗʰ* 索引。如果 *s*ⁱ 其中 *i* ∈ {1, .., I} 是 *D* 中第 *i* 个具有 *K* 元素的序列，我们有：
+请注意，如果文档中的最后一个序列的大小小于 *K*，它将用 0 填充，直到 *Kᵗʰ* 索引。如果 *s*ⁱ 其中 *i* ∈ {1, .., I} 是 *D* 中第 *i* 个具有 *K* 元素的序列，我们有：
 
-![使用BERT对长文本文档进行分类](../Images/fe2509ceb48bea5689f16d7a8f8c8ee4.png)
+![使用 BERT 对长文本文档进行分类](img/fe2509ceb48bea5689f16d7a8f8c8ee4.png)
 
 我们可以注意到
 
-![使用BERT对长文本文档进行分类](../Images/27b03622aad1a7ae0acb19ec0608d055.png)
+![使用 BERT 对长文本文档进行分类](img/27b03622aad1a7ae0acb19ec0608d055.png)
 
 BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 让我们定义 BERT 为文档的第 *i* 个序列返回的每个 token 的嵌入，如下所示：
 
-![使用BERT对长文本文档进行分类](../Images/35c447f8e3bd57d3afd2a4c217f40271.png)
+![使用 BERT 对长文本文档进行分类](img/35c447f8e3bd57d3afd2a4c217f40271.png)
 
 其中 *CLS* 是插入到每个输入 BERT 的文本序列前的特殊 token 的嵌入，通常被认为是总结整个序列的嵌入。
 
 为了结合这些序列，我们只使用 *CLSᵢ*，不使用 *y*。我们使用 *t* 个变换器 *T₁, …,Tₜ* 来获得最终向量，以便输入到网络的最后一个全连接层：
 
-![使用BERT对长文本文档进行分类](../Images/525bf66dd2e6ee6f0f01f037fd2fc077.png)
+![使用 BERT 对长文本文档进行分类](img/525bf66dd2e6ee6f0f01f037fd2fc077.png)
 
 其中 **∘** 是函数复合操作。
 
@@ -66,9 +66,9 @@ BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 概率 ***P*** *∈ ℝᴸ* 由以下公式给出：
 
-![使用BERT对长文本文档进行分类](../Images/ca67617333e27a025e6f4a90cda4b273.png)
+![使用 BERT 对长文本文档进行分类](img/ca67617333e27a025e6f4a90cda4b273.png)
 
-最后，对向量 *P* 应用 *argmax* 返回预测的标签。有关上述架构的总结，您可以查看图1。
+最后，对向量 *P* 应用 *argmax* 返回预测的标签。有关上述架构的总结，您可以查看图 1。
 
 上述架构使我们能够利用 BERT 进行文本分类任务，绕过变换器的最大序列长度限制，同时保持对多个序列的上下文。让我们看看如何将其与其他类型的特征结合。
 
@@ -82,11 +82,11 @@ BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 给定一个具有 *M* 个元数据注释的文档。让
 
-![使用BERT对长文本文档进行分类](../Images/f70c6576edd8fae6d57820c73e26627c.png)
+![使用 BERT 对长文本文档进行分类](img/f70c6576edd8fae6d57820c73e26627c.png)
 
 是 BERT 为每个元数据生成的 CLS 嵌入。使用与上述相同的技术来获取概率向量，如下所示：
 
-![使用BERT对长文本文档进行分类](../Images/8b53f277d7ed866c65bdc58c0c6c187e.png)
+![使用 BERT 对长文本文档进行分类](img/8b53f277d7ed866c65bdc58c0c6c187e.png)
 
 ### 分类元数据
 
@@ -102,7 +102,7 @@ BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 希望你坚持到现在，下面的图示将有助于进一步澄清问题。
 
-![使用 BERT 对长文本进行分类](../Images/cafa9638af84fb59586d0e154088a182.png)
+![使用 BERT 对长文本进行分类](img/cafa9638af84fb59586d0e154088a182.png)
 
 图 1
 
@@ -122,19 +122,19 @@ BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 +   我们用具有上述最大长度的文档进行实验。实际上，文档的大小各不相同，由于我们在模型中使用了动态大小的张量，因此短文档的推理时间显著更快。作为一个经验法则，使用一个长度是原文档一半的文档，推理时间会减少 50%。
 
-![使用 BERT 对长文本进行分类](../Images/0845164d19924ac923409789417a43cc.png)
+![使用 BERT 对长文本进行分类](img/0845164d19924ac923409789417a43cc.png)
 
-![使用 BERT 分类长文本文档](../Images/4550d304174ee43ad464ad219c6fd843.png)
+![使用 BERT 分类长文本文档](img/4550d304174ee43ad464ad219c6fd843.png)
 
 **参考文献**
 
-1.  [https://arxiv.org/abs/2006.04152](https://arxiv.org/abs/2006.04152)， [https://arxiv.org/pdf/2001.08950.pdf](https://arxiv.org/pdf/2001.08950.pdf)
+1.  [`arxiv.org/abs/2006.04152`](https://arxiv.org/abs/2006.04152)， [`arxiv.org/pdf/2001.08950.pdf`](https://arxiv.org/pdf/2001.08950.pdf)
 
-1.  [https://blog.tensorflow.org/2020/04/tfrt-new-tensorflow-runtime.html](https://blog.tensorflow.org/2020/04/tfrt-new-tensorflow-runtime.html)
+1.  [`blog.tensorflow.org/2020/04/tfrt-new-tensorflow-runtime.html`](https://blog.tensorflow.org/2020/04/tfrt-new-tensorflow-runtime.html)
 
-1.  [https://www.tensorflow.org/xla?hl=fr](https://www.tensorflow.org/xla?hl=fr)
+1.  [`www.tensorflow.org/xla?hl=fr`](https://www.tensorflow.org/xla?hl=fr)
 
-1.  [https://medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333](https://medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333)
+1.  [`medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333`](https://medium.com/microsoftazure/accelerate-your-nlp-pipelines-using-hugging-face-transformers-and-onnx-runtime-2443578f4333)
 
 ### 还有什么可以做的？
 
@@ -142,13 +142,13 @@ BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 构建一种类似于 Transformer 的架构，但没有时间和内存的二次复杂度，目前是一个非常活跃的研究领域。一旦预训练模型发布，有几个候选者绝对值得尝试：
 
-+   Linformer [[https://arxiv.org/pdf/2006.04768.pdf](https://arxiv.org/pdf/2006.04768.pdf)]
++   Linformer [[`arxiv.org/pdf/2006.04768.pdf`](https://arxiv.org/pdf/2006.04768.pdf)]
 
-+   BigBird [[https://arxiv.org/pdf/2007.14062.pdf](https://arxiv.org/pdf/2007.14062.pdf)]
++   BigBird [[`arxiv.org/pdf/2007.14062.pdf`](https://arxiv.org/pdf/2007.14062.pdf)]
 
-+   改革者 [[https://arxiv.org/pdf/2001.04451.pdf](https://arxiv.org/pdf/2001.04451.pdf)]（仅 O(N log(N)) 复杂度）
++   改革者 [[`arxiv.org/pdf/2001.04451.pdf`](https://arxiv.org/pdf/2001.04451.pdf)]（仅 O(N log(N)) 复杂度）
 
-+   Performers [[https://arxiv.org/pdf/2009.14794.pdf](https://arxiv.org/pdf/2009.14794.pdf)]
++   Performers [[`arxiv.org/pdf/2009.14794.pdf`](https://arxiv.org/pdf/2009.14794.pdf)]
 
 +   等等…
 
@@ -166,11 +166,11 @@ BERT 返回 CLS 嵌入以及每个 token 的嵌入。
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 

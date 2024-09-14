@@ -1,8 +1,8 @@
 # 机器学习分类算法
 
-> 原文：[https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)
+> 原文：[`www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html`](https://www.kdnuggets.com/2022/03/machine-learning-algorithms-classification.html)
 
-![机器学习分类算法](../Images/841f1967f90042877b182b0acb204859.png)
+![机器学习分类算法](img/841f1967f90042877b182b0acb204859.png)
 
 [Kevin Ku](https://unsplash.com/@ikukevk) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT服务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 服务
 
 * * *
 
@@ -24,7 +24,7 @@
 
 # 机器学习的类型
 
-机器学习有3种不同的类型：
+机器学习有 3 种不同的类型：
 
 1.  监督学习
 
@@ -38,7 +38,7 @@
 
 **无监督学习**在无标记数据上进行学习，推断隐藏结构以产生准确和可靠的输出。
 
-一个**无监督学习**算法的例子是K-Means。
+一个**无监督学习**算法的例子是 K-Means。
 
 **强化学习**是训练机器学习模型以做出一系列决策。它关注于智能体如何在环境中采取行动以最大化累计奖励的概念。
 
@@ -54,7 +54,7 @@
 
 ## 逻辑回归
 
-![机器学习分类算法](../Images/554bc3913eb38eb35fa36003bb007ce7.png)
+![机器学习分类算法](img/554bc3913eb38eb35fa36003bb007ce7.png)
 
 [来源](https://www.statstest.com/simple-logistic-regression/)
 
@@ -64,7 +64,7 @@
 
 ## 决策树
 
-![分类的机器学习算法](../Images/17c569e347e751740f8188e77b47b232.png)
+![分类的机器学习算法](img/17c569e347e751740f8188e77b47b232.png)
 
 [来源](https://medium.datadriveninvestor.com/decision-tree-algorithm-with-hands-on-example-e6c2afb40d38)
 
@@ -76,7 +76,7 @@
 
 ## 随机森林®
 
-![分类的机器学习算法](../Images/11f341206d9515b13cc4543719a87742.png)
+![分类的机器学习算法](img/11f341206d9515b13cc4543719a87742.png)
 
 [来源](https://ai-pool.com/a/s/random-forests-understanding)
 
@@ -88,7 +88,7 @@
 
 ## K-最近邻（KNN）
 
-![分类的机器学习算法](../Images/098b622a1e7ed80a21f3fd495e3b810d.png)
+![分类的机器学习算法](img/098b622a1e7ed80a21f3fd495e3b810d.png)
 
 [来源](https://www.javatpoint.com/k-nearest-neighbor-algorithm-for-machine-learning)
 
@@ -100,7 +100,7 @@ KNN 使用相似性概念，或其他词汇如距离、邻近或接近。它使�
 
 ## 支持向量机（SVM）
 
-![机器学习分类算法](../Images/ea155fc0ac7d7f8ade3a85df3d23497d.png)
+![机器学习分类算法](img/ea155fc0ac7d7f8ade3a85df3d23497d.png)
 
 [来源](https://matlab1.com/support-vector-machine-2/)
 

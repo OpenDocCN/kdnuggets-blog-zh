@@ -1,8 +1,8 @@
 # 数据科学家常犯的 10 大编码错误
 
-> 原文：[https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html](https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html`](https://www.kdnuggets.com/2019/04/top-10-coding-mistakes-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [诺曼·尼默](https://www.linkedin.com/in/normanniemer/)，首席数据科学家**
 
@@ -12,15 +12,15 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![标题图片](../Images/f1f471b811e4b07b98d166e825945e20.png)
+![标题图片](img/f1f471b811e4b07b98d166e825945e20.png)
 
 ### 1\. 不要分享代码中引用的数据
 
@@ -184,17 +184,17 @@ df_train = pd.read_pickle(df_train)
 
 **解决方案**: 使用 [pycharm](https://www.jetbrains.com/pycharm/) 和/或 [spyder](https://www.spyder-ide.org/)。
 
-**简介: [诺曼·尼默](https://www.linkedin.com/in/normanniemer/)** 是一家大型资产管理公司的首席数据科学家，他提供基于数据的投资见解。他拥有哥伦比亚大学的金融工程硕士学位和伦敦Cass商学院的银行与金融学士学位。
+**简介: [诺曼·尼默](https://www.linkedin.com/in/normanniemer/)** 是一家大型资产管理公司的首席数据科学家，他提供基于数据的投资见解。他拥有哥伦比亚大学的金融工程硕士学位和伦敦 Cass 商学院的银行与金融学士学位。
 
 [原文](https://github.com/d6t/d6t-python/blob/master/blogs/top10-mistakes-coding.md)。已获得许可转载。
 
 **相关:**
 
-+   [你机器学习代码可能糟糕的4个原因](/2019/02/4-reasons-machine-learning-code-probably-bad.html)
++   你机器学习代码可能糟糕的 4 个原因
 
-+   [机器学习项目清单](/2018/12/machine-learning-project-checklist.html)
++   机器学习项目清单
 
-+   [初创公司数据科学项目流程](/2019/01/data-science-project-flow-startups.html)
++   初创公司数据科学项目流程
 
 ### 更多相关话题
 
@@ -202,10 +202,10 @@ df_train = pd.read_pickle(df_train)
 
 +   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [我在转行数据科学时犯的5个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
++   [我在转行数据科学时犯的 5 个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成为伟大数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)

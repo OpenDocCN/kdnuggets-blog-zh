@@ -1,12 +1,12 @@
 # 创建你的第一个语音助手
 
-> 原文：[https://www.kdnuggets.com/2019/09/build-your-first-voice-assistant.html](https://www.kdnuggets.com/2019/09/build-your-first-voice-assistant.html)
+> 原文：[`www.kdnuggets.com/2019/09/build-your-first-voice-assistant.html`](https://www.kdnuggets.com/2019/09/build-your-first-voice-assistant.html)
 
-[评论](#comments)![图像](../Images/147df9c07f706c18ecf8a9bdb821095c.png)
+评论![图像](img/147df9c07f706c18ecf8a9bdb821095c.png)
 
 来源：[giphy](https://media.giphy.com/media/3oz8xTfD5SrkAwNNUQ/giphy.gif)
 
-> 现在，听到有人跟不存在的人说话已不再令人惊讶。我们问Alexa天气情况和调低恒温器的温度。然后，我们询问Siri我们今天的日程安排并拨打电话。现在我们通过声音和语音界面技术连接得比以往任何时候都更多。我无法再想象手动完成任务的情景！这真是未来的科技。
+> 现在，听到有人跟不存在的人说话已不再令人惊讶。我们问 Alexa 天气情况和调低恒温器的温度。然后，我们询问 Siri 我们今天的日程安排并拨打电话。现在我们通过声音和语音界面技术连接得比以往任何时候都更多。我无法再想象手动完成任务的情景！这真是未来的科技。
 > 
 > — [福布斯](https://www.forbes.com/sites/danielnewman/2018/08/22/voice-interface-technology-the-future-of-business/#5f12070e316a)
 
@@ -14,11 +14,11 @@
 
 谁不想拥有一个总是听到你呼唤、预见你每个需求并在必要时采取行动的助手呢？得益于基于人工智能的语音助手，这种奢侈现在已经可以实现。
 
-语音助手体积较小，能够在听到你的命令后执行各种操作。它们可以开灯、回答问题、播放音乐、下在线订单，并做各种基于AI的事情。
+语音助手体积较小，能够在听到你的命令后执行各种操作。它们可以开灯、回答问题、播放音乐、下在线订单，并做各种基于 AI 的事情。
 
 语音助手不应与虚拟助手混淆，后者是远程工作的人，因此可以处理各种任务。语音助手则是基于技术的。随着语音助手变得越来越强大，它们在个人和商业领域的实用性也会增加。
 
-![图像](../Images/16bd5e820b43d21d7dea3e97e9369c29.png)
+![图像](img/16bd5e820b43d21d7dea3e97e9369c29.png)
 
 [来源](https://ugetfix.com/how-useful-is-cortana-try-it-to-find-out/)
 
@@ -26,11 +26,11 @@
 
 一个**语音助手**或**智能个人助手**是一个可以根据口头命令执行任务或服务的软件代理，即通过解读人类语言并通过合成声音回应。用户可以通过语音提问、控制家庭自动化设备和媒体播放，以及通过口头命令管理其他基本任务，如电子邮件、待办事项列表、打开或关闭应用程序等。
 
-让我给你一个例子，[Braina (Brain Artificial)](https://en.wikipedia.org/wiki/Braina) 是一个智能个人助手、人类语言界面、自动化和**语音识别软件**，用于Windows PC。Braina 是一个多功能的AI软件，它允许你使用**语音命令**与计算机互动，支持世界上大多数语言。Braina 还允许你在世界上100多种不同语言中准确地将语音转换为文本。
+让我给你一个例子，[Braina (Brain Artificial)](https://en.wikipedia.org/wiki/Braina) 是一个智能个人助手、人类语言界面、自动化和**语音识别软件**，用于 Windows PC。Braina 是一个多功能的 AI 软件，它允许你使用**语音命令**与计算机互动，支持世界上大多数语言。Braina 还允许你在世界上 100 多种不同语言中准确地将语音转换为文本。
 
 ### 语音助手的历史
 
-![图像](../Images/a0e1065f65fd78d0318a61dadb957793.png)
+![图像](img/a0e1065f65fd78d0318a61dadb957793.png)
 
 [现代语音助手的历史](https://www.theoneoff.com/journal/the-rise-of-vui/)
 
@@ -42,7 +42,7 @@
 
 1997 年 4 月，Dragon NaturallySpeaking 是第一个能够理解约 100 个单词并将其转换为可读内容的持续听写产品。
 
-![图](../Images/e5039254d28bd942c2345da636cdab47.png)
+![图](img/e5039254d28bd942c2345da636cdab47.png)
 
 [来源](https://triggermovement.com/tag/tech/)
 
@@ -95,7 +95,7 @@ pip install wikipedia
 
 ### 让我们开始使用 Python 构建我们的桌面语音助手
 
-![图](../Images/542495fd4bb60e616d8032b2acb7b406.png)
+![图](img/542495fd4bb60e616d8032b2acb7b406.png)
 
 [来源](https://www.hackerearth.com/blog/talent-assessment/hire-programmer-using-online-coding-tests/)
 
@@ -135,7 +135,7 @@ pip install wikipedia
 
 例如：“请打开 facebook.com”或“嘿，你能打开 linkedin.com 吗”，你可以像这样让苏菲亚为你打开任何网站。
 
-> **如何运作：**如果你在指令中说了**打开**这个词，它将使用 re.search() 在用户的指令中搜索网站名称。接着，它将把网站名称附加到 [https://www.](https://www./) 上，并通过**webbrowser**模块在浏览器中打开完整的 URL。
+> **如何运作：**如果你在指令中说了**打开**这个词，它将使用 re.search() 在用户的指令中搜索网站名称。接着，它将把网站名称附加到 [`www.`](https://www./) 上，并通过**webbrowser**模块在浏览器中打开完整的 URL。
 
 ```py` ``` elif 'open' in command:          reg_ex = re.search('open (.+)', command)          if reg_ex:              domain = reg_ex.group(1)              print(domain)              url = 'https://www.' + domain              webbrowser.open(url)              sofiaResponse('您请求的网站已为您打开。')          else:              pass ```py ````
 
@@ -175,25 +175,25 @@ Sofia 还可以告诉你世界上任何城市的天气、最高温度和最低�
 
 说“hello Sofia”来打招呼，或者当你想让程序终止时，可以说类似“shutdown Sofia”或“Sofia 请关闭”等。
 
-> **工作原理：**如果你在指令中提到了**hello**这个词，那么根据一天中的时间，机器人会向用户打招呼。如果时间超过中午12点，机器人会回应“Hello Sir. Good afternoon”，同样，如果时间超过下午6点，机器人会回应“Hello Sir. Good evening”。当你给出关闭命令时，**sys.exit()** 将被调用以终止程序。
+> **工作原理：**如果你在指令中提到了**hello**这个词，那么根据一天中的时间，机器人会向用户打招呼。如果时间超过中午 12 点，机器人会回应“Hello Sir. Good afternoon”，同样，如果时间超过下午 6 点，机器人会回应“Hello Sir. Good evening”。当你给出关闭命令时，**sys.exit()** 将被调用以终止程序。
 
 ```py` ``` #问候索非亚 elif 'hello' in command: day_time = int(strftime('%H')) if day_time < 12: sofiaResponse('Hello Sir. Good morning') elif 12 <= day_time < 18: sofiaResponse('Hello Sir. Good afternoon') else: sofiaResponse('Hello Sir. Good evening')#终止程序 elif 'shutdown' in command: sofiaResponse('Bye bye Sir. Have a nice day') sys.exit() ```py ````
 
-### **8\. 在VLC媒体播放器中播放歌曲**
+### **8\. 在 VLC 媒体播放器中播放歌曲**
 
-该功能允许你的语音机器人在VLC媒体播放器中播放你想要的歌曲。用户会说“索非亚，给我放一首歌”，机器人会问“Sir，我该播放什么歌？”只需说出歌曲的名称，索非亚会从YouTube下载这首歌到你的本地驱动器中，在VLC媒体播放器中播放该歌曲，如果你再次要求播放歌曲，之前下载的歌曲将会自动删除。
+该功能允许你的语音机器人在 VLC 媒体播放器中播放你想要的歌曲。用户会说“索非亚，给我放一首歌”，机器人会问“Sir，我该播放什么歌？”只需说出歌曲的名称，索非亚会从 YouTube 下载这首歌到你的本地驱动器中，在 VLC 媒体播放器中播放该歌曲，如果你再次要求播放歌曲，之前下载的歌曲将会自动删除。
 
-> **工作原理：**如果你在指令中提到了**play me a song**这个短语，那么它会询问你要播放什么视频歌曲。你要求的歌曲将在youtube.com上进行搜索，如果找到，歌曲将使用Python的youtube_dl库下载到你的本地目录中。 [youtube-dl](https://ytdl-org.github.io/youtube-dl/index.html) 是一个用于从YouTube.com及其他一些网站下载视频的命令行程序。下载完成后，歌曲会使用Python的 [VLC库](https://pypi.org/project/python-vlc/) 播放，play(path_to__videosong) 模块会实际播放这首歌。
+> **工作原理：**如果你在指令中提到了**play me a song**这个短语，那么它会询问你要播放什么视频歌曲。你要求的歌曲将在 youtube.com 上进行搜索，如果找到，歌曲将使用 Python 的 youtube_dl 库下载到你的本地目录中。 [youtube-dl](https://ytdl-org.github.io/youtube-dl/index.html) 是一个用于从 YouTube.com 及其他一些网站下载视频的命令行程序。下载完成后，歌曲会使用 Python 的 [VLC 库](https://pypi.org/project/python-vlc/) 播放，play(path_to__videosong) 模块会实际播放这首歌。
 
 如果下次你要求播放任何其他歌曲，本地目录将被清空，并且在该目录中会下载一首新的歌曲。
 
-```py` ``` elif 'play me a song' in command:          path = '/Users/nageshsinghchauhan/Documents/videos/'          folder = path          for the_file in os.listdir(folder):              file_path = os.path.join(folder, the_file)              try:                  if os.path.isfile(file_path):                      os.unlink(file_path)              except Exception as e:                  print(e)sofiaResponse('我该播放什么歌曲，先生？')mysong = myCommand()          if mysong:              flag = 0              url = "https://www.youtube.com/results?search_query=" + mysong.replace(' ', '+')              response = urllib2.urlopen(url)              html = response.read()              soup1 = soup(html,"lxml")              url_list = []              for vid in soup1.findAll(attrs={'class':'yt-uix-tile-link'}):                  if ('https://www.youtube.com' + vid['href']).startswith("https://www.youtube.com/watch?v="):                      flag = 1                      final_url = 'https://www.youtube.com' + vid['href']                      url_list.append(final_url)url = url_list[0]              ydl_opts = {}os.chdir(path)              with youtube_dl.YoutubeDL(ydl_opts) as ydl:                  ydl.download([url])              vlc.play(path)if flag == 0:                  sofiaResponse('我在Youtube上没有找到任何东西 ') ```py ```
+```py` ``` elif 'play me a song' in command:          path = '/Users/nageshsinghchauhan/Documents/videos/'          folder = path          for the_file in os.listdir(folder):              file_path = os.path.join(folder, the_file)              try:                  if os.path.isfile(file_path):                      os.unlink(file_path)              except Exception as e:                  print(e)sofiaResponse('我该播放什么歌曲，先生？')mysong = myCommand()          if mysong:              flag = 0              url = "https://www.youtube.com/results?search_query=" + mysong.replace(' ', '+')              response = urllib2.urlopen(url)              html = response.read()              soup1 = soup(html,"lxml")              url_list = []              for vid in soup1.findAll(attrs={'class':'yt-uix-tile-link'}):                  if ('https://www.youtube.com' + vid['href']).startswith("https://www.youtube.com/watch?v="):                      flag = 1                      final_url = 'https://www.youtube.com' + vid['href']                      url_list.append(final_url)url = url_list[0]              ydl_opts = {}os.chdir(path)              with youtube_dl.YoutubeDL(ydl_opts) as ydl:                  ydl.download([url])              vlc.play(path)if flag == 0:                  sofiaResponse('我在 Youtube 上没有找到任何东西 ') ```py ```
 
 ### **9\. 更换桌面壁纸。**
 
 你们也可以使用此功能更换桌面壁纸。当你说“更换壁纸”或“索非亚，请更换壁纸”时，机器人会从[unsplash.com](https://unsplash.com/)下载随机壁纸，并将其设置为你的桌面背景。
 
-> **工作原理：** 如果你在命令中说了**更换壁纸**这句话，程序将从unsplash.com下载一张随机壁纸，将其存储在本地目录中，并通过subprocess.call()将其设置为桌面壁纸。我使用了unsplash API来访问其内容。
+> **工作原理：** 如果你在命令中说了**更换壁纸**这句话，程序将从 unsplash.com 下载一张随机壁纸，将其存储在本地目录中，并通过 subprocess.call()将其设置为桌面壁纸。我使用了 unsplash API 来访问其内容。
 
 如果下次你要求再次更换壁纸，本地目录将被清空，并且会在该目录下下载新的壁纸。
 
@@ -237,21 +237,21 @@ Sofia 还可以告诉你最新的新闻更新。用户只需说 “Sofia，今�
 
 **相关：**
 
-+   [实用的 Python 语音识别基础](/2019/07/practical-speech-recognition-python-basics.html)
++   实用的 Python 语音识别基础
 
-+   [顶级语音处理 API 比较](/2018/12/activewizards-comparison-speech-processing-apis.html)
++   顶级语音处理 API 比较
 
-+   [TensorFlow 与 PyTorch 与 Keras 的 NLP 比较](/2019/09/tensorflow-pytorch-keras-nlp.html)
++   TensorFlow 与 PyTorch 与 Keras 的 NLP 比较
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

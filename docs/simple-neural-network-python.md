@@ -1,8 +1,8 @@
 # 如何在 Python 中创建一个简单的神经网络
 
-> 原文：[https://www.kdnuggets.com/2018/10/simple-neural-network-python.html](https://www.kdnuggets.com/2018/10/simple-neural-network-python.html)
+> 原文：[`www.kdnuggets.com/2018/10/simple-neural-network-python.html`](https://www.kdnuggets.com/2018/10/simple-neural-network-python.html)
 
-[评论](#comments)
+评论
 
 **由 [迈克尔·J·加尔巴德博士](https://www.linkedin.com/in/garbade) 提供**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -40,7 +40,7 @@
 
 下面是一个展示简单神经网络结构的图示：
 
-![简单神经网络](../Images/29d7e7f6e21746e8ed80b14139130709.png)
+![简单神经网络](img/29d7e7f6e21746e8ed80b14139130709.png)
 
 而且，理解神经网络如何工作的最佳方法是从头开始学习如何构建一个（不使用任何库）。
 
@@ -85,7 +85,7 @@
 
 我们将使用 [Sigmoid 函数](https://en.wikipedia.org/wiki/Sigmoid_function)，它绘制了一个典型的“S”形曲线，作为神经网络的激活函数。
 
-![Sigmoid Function](../Images/23dc35355351fe8b4fbed81bcc47a082.png)
+![Sigmoid Function](img/23dc35355351fe8b4fbed81bcc47a082.png)
 
 该函数可以将任何值映射到 0 到 1 的范围内。它将帮助我们标准化输入的加权和。
 
@@ -109,11 +109,11 @@ Sigmoid 函数的输出可以用来生成其导数。例如，如果输出变量
 
 1.  根据获得的错误程度，我们使用 [错误加权导数公式](https://en.wikipedia.org/wiki/Backpropagation#Finding_the_derivative_of_the_error) 进行了一些微调。
 
-1.  我们将这个过程迭代了任意次数，共15,000次。在每次迭代中，整个训练集会同时处理。
+1.  我们将这个过程迭代了任意次数，共 15,000 次。在每次迭代中，整个训练集会同时处理。
 
 我们使用了“.T”函数将矩阵从水平位置转置到垂直位置。因此，数字将以这种方式存储：
 
-![T 函数](../Images/3d92ccc4641d7bf781369d1a550dcd5b.png)
+![T 函数](img/3d92ccc4641d7bf781369d1a550dcd5b.png)
 
 最终，神经元的权重将针对提供的训练数据进行优化。因此，如果神经元被要求处理一个新的情况，而这个情况与之前的情况相同，它可以做出准确的预测。这就是反向传播的过程。
 
@@ -202,7 +202,7 @@ if __name__ == "__main__":
 
 这是运行代码后的输出：
 
-![代码输出](../Images/5837a16e4584cf2dab3d923e14ff06d5.png)
+![代码输出](img/5837a16e4584cf2dab3d923e14ff06d5.png)
 
 我们成功创建了一个简单的神经网络。
 
@@ -228,7 +228,7 @@ if __name__ == "__main__":
 
 +   [深度学习介绍](https://www.kdnuggets.com/2018/09/introduction-deep-learning.html)
 
-+   [使用 Python 进行基本图像数据分析 – 第 3 部分](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
++   [使用 Python 进行基本图像数据分析 – 第三部分](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
 
 ### 更多相关主题
 

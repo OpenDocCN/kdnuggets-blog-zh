@@ -1,6 +1,6 @@
 # 10 ChatGPT 项目备忘单
 
-> 原文：[https://www.kdnuggets.com/10-chatgpt-projects-cheat-sheet](https://www.kdnuggets.com/10-chatgpt-projects-cheat-sheet)
+> 原文：[`www.kdnuggets.com/10-chatgpt-projects-cheat-sheet`](https://www.kdnuggets.com/10-chatgpt-projects-cheat-sheet)
 
 # 你需要的脱颖而出的要素
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -20,7 +20,7 @@
 
 [](https://www.kdnuggets.com/publications/sheets/KDnuggets_10_ChatGPT_Projects_Cheat_Sheet.pdf)
 
-[![10 ChatGPT 项目备忘单](../Images/23ac6e6f9611daf8b2efff295e3fdbc5.png)](https://www.kdnuggets.com/publications/sheets/KDnuggets_10_ChatGPT_Projects_Cheat_Sheet.pdf)
+![10 ChatGPT 项目备忘单](https://www.kdnuggets.com/publications/sheets/KDnuggets_10_ChatGPT_Projects_Cheat_Sheet.pdf)
 
 备忘单链接到每个项目的教程，逐步讲解如何利用 ChatGPT 的对话提示进行实现。高亮部分包括使用 ChatGPT 进行贷款批准分类器模型、简历解析器、实时语言翻译器、探索性数据分析，甚至将其功能集成到 Google Sheets 中。无论你是 ChatGPT 的新手还是希望推动其边界，这些项目合集都作为一个发射台，提升生产力并加速 AI 辅助开发。
 
@@ -32,14 +32,14 @@
 
 ### 更多相关内容
 
-+   [ChatGPT秘籍](https://www.kdnuggets.com/2023/01/chatgpt-cheat-sheet.html)
++   [ChatGPT 秘籍](https://www.kdnuggets.com/2023/01/chatgpt-cheat-sheet.html)
 
-+   [ChatGPT与机器学习秘籍](https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html)
++   [ChatGPT 与机器学习秘籍](https://www.kdnuggets.com/2023/05/machine-learning-chatgpt-cheat-sheet.html)
 
-+   [ChatGPT在数据科学中的秘籍](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
++   [ChatGPT 在数据科学中的秘籍](https://www.kdnuggets.com/2023/03/chatgpt-data-science-cheat-sheet.html)
 
-+   [ChatGPT在数据科学面试中的秘籍](https://www.kdnuggets.com/2023/06/chatgpt-data-science-interviews-cheat-sheet.html)
++   [ChatGPT 在数据科学面试中的秘籍](https://www.kdnuggets.com/2023/06/chatgpt-data-science-interviews-cheat-sheet.html)
 
-+   [10个用于数据科学的ChatGPT插件秘籍](https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html)
++   [10 个用于数据科学的 ChatGPT 插件秘籍](https://www.kdnuggets.com/2023/06/10-chatgpt-plugins-data-science-cheat-sheet.html)
 
-+   [KDnuggets 2023秘籍集合](https://www.kdnuggets.com/the-kdnuggets-2023-cheat-sheet-collection)
++   [KDnuggets 2023 秘籍集合](https://www.kdnuggets.com/the-kdnuggets-2023-cheat-sheet-collection)

@@ -1,12 +1,12 @@
 # 优步在大规模运行机器学习中学到的一些东西
 
-> 原文：[https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html](https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html)
+> 原文：[`www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html`](https://www.kdnuggets.com/2020/07/some-things-uber-learned-machine-learning-scale.html)
 
-[评论](#comments)![图](../Images/eb8f7a43eb80f9a018d9a21faae73c47.png)
+评论![图](img/eb8f7a43eb80f9a018d9a21faae73c47.png)
 
-来源: [https://eng.uber.com/scaling-michelangelo/](https://eng.uber.com/scaling-michelangelo/)
+来源: [`eng.uber.com/scaling-michelangelo/`](https://eng.uber.com/scaling-michelangelo/)
 
-在过去几年中，优步一直是开源机器学习技术最活跃的贡献者之一。虽然像谷歌或脸书这样的公司将贡献重点放在了新的深度学习技术栈如TensorFlow、Caffe2或PyTorch上，但优步工程团队确实专注于在现实世界中大规模构建机器学习的工具和最佳实践。像[米开朗基罗](https://eng.uber.com/michelangelo/)、[Horovod](https://github.com/uber/horovod)、[PyML](https://towardsdatascience.com/uber-introduces-pyml-their-secret-weapon-for-rapid-machine-learning-development-c0f40009a617)、[Pyro](http://pyro.ai/)等技术是优步对机器学习生态系统贡献的一些例子。由于只有少数公司开发大规模机器学习解决方案，优步的经验和指导对机器学习从业者来说变得更加宝贵（我确实学到了很多，并且经常写关于优步努力的文章）。
+在过去几年中，优步一直是开源机器学习技术最活跃的贡献者之一。虽然像谷歌或脸书这样的公司将贡献重点放在了新的深度学习技术栈如 TensorFlow、Caffe2 或 PyTorch 上，但优步工程团队确实专注于在现实世界中大规模构建机器学习的工具和最佳实践。像[米开朗基罗](https://eng.uber.com/michelangelo/)、[Horovod](https://github.com/uber/horovod)、[PyML](https://towardsdatascience.com/uber-introduces-pyml-their-secret-weapon-for-rapid-machine-learning-development-c0f40009a617)、[Pyro](http://pyro.ai/)等技术是优步对机器学习生态系统贡献的一些例子。由于只有少数公司开发大规模机器学习解决方案，优步的经验和指导对机器学习从业者来说变得更加宝贵（我确实学到了很多，并且经常写关于优步努力的文章）。
 
 最近，[优步工程团队发布了米开朗基罗平台前三年的运营评估](https://eng.uber.com/scaling-michelangelo/)。如果我们去除所有米开朗基罗的具体细节，优步的帖子包含了对开始机器学习之旅的组织者来说几条非显而易见的宝贵经验。我将尝试以更通用的方式总结一些关键收获，以适用于任何主流的机器学习场景。
 
@@ -14,11 +14,11 @@
 
 [米开朗基罗](https://eng.uber.com/michelangelo/)是优步机器学习技术栈的核心部分。从概念上看，米开朗基罗可以视作一个针对优步内部机器学习工作负载的机器学习即服务平台。从功能角度讲，米开朗基罗自动化了机器学习模型生命周期的不同方面，使得优步的各个工程团队能够在规模上构建、部署、监控和操作机器学习模型。具体而言，米开朗基罗在一个非常复杂的工作流中抽象了机器学习模型的生命周期：
 
-![](../Images/502e122776a3767aa08fe7cf9b2f4374.png)
+![](img/502e122776a3767aa08fe7cf9b2f4374.png)
 
 米开朗基罗的架构使用了现代但复杂的技术栈，基于如[HDFS](http://hadoop.apache.org/)、[Spark](https://spark.apache.org/)、[Samza](http://samza.apache.org/)、[Cassandra](http://cassandra.apache.org/)、[MLLib](https://spark.apache.org/mllib/)、[XGBoost](https://github.com/dmlc/xgboost)和[TensorFlow](https://www.tensorflow.org/)等技术。
 
-![](../Images/c548e6ba1b27b3e378fd9ba43bbe4650.png)
+![](img/c548e6ba1b27b3e378fd9ba43bbe4650.png)
 
 Michelangelo 支持 Uber 不同部门中的数百种机器学习场景。例如，Uber Eats 使用在 Michelangelo 上运行的机器学习模型来排名餐馆推荐。类似地，Uber 应用中的精确到达时间（ETA）是通过在 Michelangelo 上运行的非常复杂的机器学习模型计算的，这些模型逐段估算 ETA。
 
@@ -52,21 +52,21 @@ Michelangelo 支持 Uber 不同部门中的数百种机器学习场景。例如�
 
 **相关：**
 
-+   [Uber 的 Ludwig 是一个开源的低代码机器学习框架](/2020/06/uber-ludwig-open-source-framework-machine-learning.html)
++   Uber 的 Ludwig 是一个开源的低代码机器学习框架
 
-+   [遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元](/2020/06/learning-forgetting-deep-neural-networks-jennifer-aniston.html)
++   遗忘学习：深度神经网络与詹妮弗·安妮斯顿神经元
 
-+   [谷歌发布 TAPAS，一种基于 BERT 的神经网络，用于通过自然语言查询表格](/2020/05/google-tapas-bert-neural-network-querying-natural-language.html)
++   谷歌发布 TAPAS，一种基于 BERT 的神经网络，用于通过自然语言查询表格
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
@@ -74,12 +74,12 @@ Michelangelo 支持 Uber 不同部门中的数百种机器学习场景。例如�
 
 +   [事情并非总是正常的：一些“其他”分布](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)
 
-+   [它活过来了！用Python和一些便宜的组件构建您的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
++   [它活过来了！用 Python 和一些便宜的组件构建您的第一个机器人](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
 
-+   [我使用ChatGPT（每天）五个月了。这里有一些隐藏的宝藏……](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
++   [我使用 ChatGPT（每天）五个月了。这里有一些隐藏的宝藏……](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
 
-+   [一些提升我们LLM模型的绝佳提示工程技术](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)
++   [一些提升我们 LLM 模型的绝佳提示工程技术](https://www.kdnuggets.com/some-kick-ass-prompt-engineering-techniques-to-boost-our-llm-models)
 
-+   [我从使用ChatGPT进行数据科学中学到了什么](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
++   [我从使用 ChatGPT 进行数据科学中学到了什么](https://www.kdnuggets.com/what-i-learned-from-using-chatgpt-for-data-science)
 
 +   [如何利用云计算高效扩展数据科学项目](https://www.kdnuggets.com/2023/05/efficiently-scale-data-science-projects-cloud-computing.html)

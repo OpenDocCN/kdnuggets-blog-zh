@@ -1,8 +1,8 @@
 # 提高你的回调率与 LinkedIn 个人资料
 
-> 原文：[https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile](https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile)
+> 原文：[`www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile`](https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile)
 
-![提高你的回调率与 LinkedIn 个人资料](../Images/5a974effd7ceae17fdeee2b85f3b0a54.png)
+![提高你的回调率与 LinkedIn 个人资料](img/5a974effd7ceae17fdeee2b85f3b0a54.png)
 
 图片来源：[rawpixel](https://www.freepik.com/free-photo/people-holding-linkedin-icon-tablet_3682517.htm#query=linkedin&position=7&from_view=search&track=sph) on Freepik
 
@@ -34,7 +34,7 @@
 
 如前所述，LinkedIn 是你的个人品牌。LinkedIn 横幅可以让你通过它来展示你自己。例如，如果你有一家公司并且有一个口号，你可以将你的口号上传到横幅上。另一个例子是，软件工程师通过编程展示个人资料的分解，如下所示。
 
-![提高你的回调率与 LinkedIn 个人资料](../Images/4e129c11bdd76dc040a5ef3d07536eff.png)
+![提高你的回调率与 LinkedIn 个人资料](img/4e129c11bdd76dc040a5ef3d07536eff.png)
 
 图片来源：[Aaron Cordova](https://www.linkedin.com/in/cordovaaaron/)
 
@@ -44,17 +44,17 @@ vvvvvv
 
 # 介绍部分
 
-一旦你为你的LinkedIn个人资料添加了美学吸引力，下一步就是添加一些内容。在这里，我们将从“简介”部分开始，你可以通过点击个人资料右上角的铅笔图标进入该部分，图标旁边是你的个人资料照片。
+一旦你为你的 LinkedIn 个人资料添加了美学吸引力，下一步就是添加一些内容。在这里，我们将从“简介”部分开始，你可以通过点击个人资料右上角的铅笔图标进入该部分，图标旁边是你的个人资料照片。
 
 你需要填写你的名字和姓氏，然后进入你的标题部分。你的标题非常重要，因为它告知其他成员你的专业领域，如软件工程。
 
-这是我在LinkedIn上遇到的一些示例标题：
+这是我在 LinkedIn 上遇到的一些示例标题：
 
-1.  Google云人工智能服务负责人
+1.  Google 云人工智能服务负责人
 
 1.  人工智能 | Web3 | 营销
 
-1.  在OpenAI担任开发者关系负责人
+1.  在 OpenAI 担任开发者关系负责人
 
 1.  人工智能与数据科学 | 预测分析 | 数据策略 | 公共部门 | 女性在人工智能领域
 
@@ -62,15 +62,15 @@ vvvvvv
 
 # 教育部分
 
-你可以通过两种方式填写你的LinkedIn教育部分。
+你可以通过两种方式填写你的 LinkedIn 教育部分。
 
 1.  第一个方法是点击相同的铅笔图标，向下滚动到教育部分并填写。
 
-1.  另一个方法是向下滚动到LinkedIn个人资料中的教育部分，并填写更详细的概述。
+1.  另一个方法是向下滚动到 LinkedIn 个人资料中的教育部分，并填写更详细的概述。
 
 填写你的教育部分，包括大学、训练营、课程和其他成就。不要包括如幼儿园和小学等教育阶段。
 
-完成后，你可以选择在LinkedIn个人资料的简介部分显示你的教育经历。你可以通过点击铅笔图标并勾选“在我的简介中显示教育经历”框来实现这一点。
+完成后，你可以选择在 LinkedIn 个人资料的简介部分显示你的教育经历。你可以通过点击铅笔图标并勾选“在我的简介中显示教育经历”框来实现这一点。
 
 # 位置设置
 
@@ -80,11 +80,11 @@ vvvvvv
 
 # 自定义网址
 
-在你LinkedIn个人资料页面顶部，你会看到一个名为“联系信息”的链接。在这一部分，你会看到你的LinkedIn个人资料网址。你可以通过点击个人资料页面右侧的铅笔图标来编辑这个网址。创建一个独特的个人资料网址非常重要，以提高你的排名。
+在你 LinkedIn 个人资料页面顶部，你会看到一个名为“联系信息”的链接。在这一部分，你会看到你的 LinkedIn 个人资料网址。你可以通过点击个人资料页面右侧的铅笔图标来编辑这个网址。创建一个独特的个人资料网址非常重要，以提高你的排名。
 
 # 摘要部分
 
-在你个人资料的顶部，你会看到一个“添加部分”按钮。点击这个按钮，然后选择“关于”，再选择“摘要”。我认为这一部分需要是非常简短的自我介绍，当我说简短时，我指的是2到3个短段落。
+在你个人资料的顶部，你会看到一个“添加部分”按钮。点击这个按钮，然后选择“关于”，再选择“摘要”。我认为这一部分需要是非常简短的自我介绍，当我说简短时，我指的是 2 到 3 个短段落。
 
 在这一部分，你可以提供更多关于你的专业和技能的详细信息，以及提及职业变化。在这里，人们可以更多地了解你，你基本上是在推销你的能力和技能。你还可以包括你的个人博客、网站等。
 
@@ -140,18 +140,18 @@ vvvvvv
 
 通过上述所有步骤，你将提高招聘人员发现你个人资料的可能性。这篇逐步博客将帮助你迅速找到梦想工作！如果你有更多建议，请在评论中告诉我们。
 
-**[尼莎·阿利亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作人以及KDnuggets的社区经理。她特别关注于提供数据科学职业建议或教程，以及基于理论的数据科学知识。她还希望探索人工智能如何能促进人类生命的延续。作为一名热衷于学习的人，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
+**[尼莎·阿利亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术写作人以及 KDnuggets 的社区经理。她特别关注于提供数据科学职业建议或教程，以及基于理论的数据科学知识。她还希望探索人工智能如何能促进人类生命的延续。作为一名热衷于学习的人，她寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关内容
 
 +   [基准率谬误及其对数据科学的影响](https://www.kdnuggets.com/2023/04/base-rate-fallacy-impact-data-science.html)
 
-+   [LinkedIn如何使用机器学习来排名你的动态](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)
++   [LinkedIn 如何使用机器学习来排名你的动态](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)
 
-+   [与LinkedIn学习：关于AI的免费课程](https://www.kdnuggets.com/learn-with-linkedin-free-courses-about-ai)
++   [与 LinkedIn 学习：关于 AI 的免费课程](https://www.kdnuggets.com/learn-with-linkedin-free-courses-about-ai)
 
-+   [LinkedIn上的前18个数据科学群组](https://www.kdnuggets.com/2022/06/top-18-data-science-group-linkedin.html)
++   [LinkedIn 上的前 18 个数据科学群组](https://www.kdnuggets.com/2022/06/top-18-data-science-group-linkedin.html)
 
-+   [KDnuggets新闻，11月16日：LinkedIn如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
-+   [KDnuggets新闻，6月8日：21个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)

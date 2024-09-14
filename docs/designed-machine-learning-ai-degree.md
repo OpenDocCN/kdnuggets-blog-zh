@@ -1,22 +1,22 @@
 # 我设计了自己的机器学习和人工智能学位
 
-> 原文：[https://www.kdnuggets.com/2020/05/designed-machine-learning-ai-degree.html](https://www.kdnuggets.com/2020/05/designed-machine-learning-ai-degree.html)
+> 原文：[`www.kdnuggets.com/2020/05/designed-machine-learning-ai-degree.html`](https://www.kdnuggets.com/2020/05/designed-machine-learning-ai-degree.html)
 
-[评论](#comments)
+评论
 
 **由[Angelica Dietzel](https://medium.com/@angelicacodes)撰写，数据科学自学之旅**。
 
-![](../Images/b3a9d6cac18e22d22999c582e51d8196.png)
+![](img/b3a9d6cac18e22d22999c582e51d8196.png)
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@
 
 我从数学开始。我相信数学扮演着重要角色，因为它为机器学习和人工智能奠定了基础（而且我喜欢数学！），所以我包含了一些涵盖线性代数、多变量微积分、概率和统计的课程。
 
-我选择的学位基础语言是Python，但我也包括了一门很好的R语言课程。
+我选择的学位基础语言是 Python，但我也包括了一门很好的 R 语言课程。
 
 我转向提供数据科学、机器学习、人工智能和深度学习基础的课程。我以深入探讨机器学习和人工智能的高级课程结束我的学位。我还包括了额外的课程来填补一些空白。
 
@@ -52,7 +52,7 @@
 
 **[数据科学数学技能](https://www.coursera.org/learn/datasciencemathskills)** 由杜克大学（Coursera）[$49]
 
-+   **涵盖内容：**集合论、区间符号、含不等式的代数；在x-y平面上绘制函数及其反函数；瞬时变化率和曲线的切线概念；指数、对数、概率论，包括贝叶斯定理
++   **涵盖内容：**集合论、区间符号、含不等式的代数；在 x-y 平面上绘制函数及其反函数；瞬时变化率和曲线的切线概念；指数、对数、概率论，包括贝叶斯定理
 
 **[机器学习数学](https://www.coursera.org/specializations/mathematics-machine-learning)** 由帝国理工学院（Coursera）[$49/月]
 
@@ -74,15 +74,15 @@
 
 **[计算机科学导论](https://www.edx.org/course/cs50s-introduction-to-computer-science)** 由哈佛大学（edX）[免费，证书$99]
 
-+   **涵盖内容：**抽象、算法、数据结构、封装、资源管理、安全、软件工程和网页开发。提供对C、Python、SQL和JavaScript以及CSS和HTML的熟悉
++   **涵盖内容：**抽象、算法、数据结构、封装、资源管理、安全、软件工程和网页开发。提供对 C、Python、SQL 和 JavaScript 以及 CSS 和 HTML 的熟悉
 
 **[编程入门：基础知识](https://www.coursera.org/learn/learn-to-program)** 由多伦多大学（Coursera）[免费，证书$49]
 
-+   **涵盖内容：**编程的基本构建块；教你如何使用Python编写有趣且实用的程序
++   **涵盖内容：**编程的基本构建块；教你如何使用 Python 编写有趣且实用的程序
 
 ### Python 基础
 
-**[Python编程入门](https://www.udacity.com/course/introduction-to-python--ud1110)**（Udacity）[免费]
+**[Python 编程入门](https://www.udacity.com/course/introduction-to-python--ud1110)**（Udacity）[免费]
 
 +   **覆盖内容：** Python 的基础知识。学习使用 Python 数据类型和变量表示和存储数据，使用条件语句和循环，利用复杂数据结构的强大功能。
 
@@ -134,7 +134,7 @@
 
 **[深度学习](https://www.coursera.org/specializations/deep-learning/)** 由 deeplearning.ai 和斯坦福大学（Coursera） [$49/月]
 
-+   **覆盖范围：** 深度学习基础；了解如何构建神经网络并领导成功的机器学习项目；卷积网络、RNN、LSTM、Adam、Dropout、BatchNorm、Xavier/He初始化。
++   **覆盖范围：** 深度学习基础；了解如何构建神经网络并领导成功的机器学习项目；卷积网络、RNN、LSTM、Adam、Dropout、BatchNorm、Xavier/He 初始化。
 
 **[深度学习 NanoDegree](https://www.udacity.com/course/deep-learning-nanodegree--nd101)**（Udacity） [$324/月，4 个月]
 
@@ -200,8 +200,8 @@
 
 +   [哪个更好：数据科学训练营 vs 学位 vs 在线课程](https://www.kdnuggets.com/2022/09/best-data-science-bootcamp-degree-online-course.html)
 
-+   [免费注册4年计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
++   [免费注册 4 年计算机科学学位课程](https://www.kdnuggets.com/enroll-in-a-4-year-computer-science-degree-program-for-free)
 
-+   [9种职业证书可以帮助你获得学位……如果……](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 种职业证书可以帮助你获得学位……如果……](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
 +   [学位还是证书？雇主更看重哪种资质？](https://www.kdnuggets.com/degree-or-certificate-which-credential-do-employers-value-more)

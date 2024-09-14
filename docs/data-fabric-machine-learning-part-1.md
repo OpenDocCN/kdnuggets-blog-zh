@@ -1,30 +1,30 @@
-# 机器学习的数据织物——第1部分
+# 机器学习的数据织物——第一部分
 
-> 原文：[https://www.kdnuggets.com/2019/05/data-fabric-machine-learning-part-1.html](https://www.kdnuggets.com/2019/05/data-fabric-machine-learning-part-1.html)
+> 原文：[`www.kdnuggets.com/2019/05/data-fabric-machine-learning-part-1.html`](https://www.kdnuggets.com/2019/05/data-fabric-machine-learning-part-1.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![figure-name](../Images/3b6a008a65ca824b4b8855e0ad9ed9ba.png) 图片由[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)提供
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![figure-name](img/3b6a008a65ca824b4b8855e0ad9ed9ba.png) 图片由[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)提供
 
-阅读第1-b部分：关于数据织物的深度学习：
+阅读第 1-b 部分：关于数据织物的深度学习：
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-[**机器学习的数据织物。第1-b部分：图上的深度学习。**
+[**机器学习的数据织物。第 1-b 部分：图上的深度学习。**
 
 *图上的深度学习日益重要。在这里，我将展示机器学习的基本思路……*towardsdatascience.com](https://towardsdatascience.com/the-data-fabric-for-machine-learning-part-1-b-deep-learning-on-graphs-309316774fe7)
 
 ### 介绍
 
-如果你在线搜索机器学习，你会发现大约2,050,000,000个结果。是的，真的。很难找到适合所有用途或案例的描述或定义，但有一些很棒的定义。在这里，我将提出一种不同的机器学习定义，着重于一种新的范式——数据织物。
+如果你在线搜索机器学习，你会发现大约 2,050,000,000 个结果。是的，真的。很难找到适合所有用途或案例的描述或定义，但有一些很棒的定义。在这里，我将提出一种不同的机器学习定义，着重于一种新的范式——数据织物。
 
 ### 目标
 
@@ -44,9 +44,9 @@
 
 如果我们能构建一个支持公司所有数据的**数据织物**，那么在其中获得的**商业洞察**可以被看作是一个**凹痕**。发现这个洞察的**自动过程**被称为**机器学习**。
 
-### 第1节：什么是数据织物？
+### 第一部分：什么是数据织物？
 
-![figure-name](../Images/81df123d0740e0031bfb34ac77acdce7.png)
+![figure-name](img/81df123d0740e0031bfb34ac77acdce7.png)
 
 我曾[讨论过](https://towardsdatascience.com/deep-learning-for-the-masses-and-the-semantic-layer-f1db5e3ab94b)数据织物，并给出了一个定义（我会在下面再次提供）。
 
@@ -68,11 +68,11 @@
 
 数据架构应该是统一和一致的，这意味着我们应该努力将组织中的所有数据集中到一个地方，并真正管理和治理这些数据。
 
-### 第2节：什么是机器学习？
+### 第二部分：什么是机器学习？
 
-![figure-name](../Images/17a990317b08ef4cc5d50d958c65faeb.png)[http://www.cognub.com/index.php/cognitive-platform/](http://www.cognub.com/index.php/cognitive-platform/)
+![figure-name](img/17a990317b08ef4cc5d50d958c65faeb.png)[`www.cognub.com/index.php/cognitive-platform/`](http://www.cognub.com/index.php/cognitive-platform/)
 
-机器学习已经存在了一段时间了。关于它有很多很好的描述、书籍、文章和博客，所以我不会用10段文字来让你感到乏味。
+机器学习已经存在了一段时间了。关于它有很多很好的描述、书籍、文章和博客，所以我不会用 10 段文字来让你感到乏味。
 
 我只是想澄清一些要点。
 
@@ -88,9 +88,9 @@
 
 你可以同意这个定义，也可以不同意，目前文献中有很多很好的定义，我只是认为这个定义简单且对我想表达的内容很有用。
 
-### 第3节：在数据架构中进行机器学习
+### 第三部分：在数据架构中进行机器学习
 
-![figure-nme](../Images/ab0e5489a97a3e332021baafdaab2d3a.png)
+![figure-nme](img/ab0e5489a97a3e332021baafdaab2d3a.png)
 
 在爱因斯坦的引力理论（广义相对论）中，他在数学上提出了质量可以扭曲时空，而这种扭曲就是我们理解的引力。我知道如果你不熟悉这个理论，它可能听起来有些奇怪。让我试着解释一下。
 
@@ -100,7 +100,7 @@
 
 > 时空告诉物质如何移动；物质告诉时空如何弯曲。
 
-![figure-name](../Images/8b0ae7f43da6f6ce68f73d1657953ee1.png)
+![figure-name](img/8b0ae7f43da6f6ce68f73d1657953ee1.png)
 
 在上面的图像中，“立方体”是对时空结构的表示，当质量在其中移动时，它会扭曲它，“线条”的移动方式会告诉我们附近的物体如何在那个附近表现。所以引力就像是：
 
@@ -108,25 +108,25 @@
 
 这正是我提出的机器学习在数据结构中的作用。我知道我听起来很疯狂。让我解释一下。
 
-假设我们已经创建了一个数据结构。对我来说，最好的工具是Anzo，正如我在其他文章中提到的。
+假设我们已经创建了一个数据结构。对我来说，最好的工具是 Anzo，正如我在其他文章中提到的。
 
-![figure-name](../Images/bb9ab66b19dc0f7afdfbf08d331a2ed9.png)[https://www.cambridgesemantics.com/](https://www.cambridgesemantics.com/)
+![figure-name](img/bb9ab66b19dc0f7afdfbf08d331a2ed9.png)[`www.cambridgesemantics.com/`](https://www.cambridgesemantics.com/)
 
-你可以用Anzo构建一个叫做“企业知识图谱”的东西，当然也可以创建你的数据结构。
+你可以用 Anzo 构建一个叫做“企业知识图谱”的东西，当然也可以创建你的数据结构。
 
 图谱的节点和边灵活地捕捉到每个数据源的高分辨率副本——无论是结构化还是非结构化。图谱可以帮助用户快速、互动地回答任何问题，让用户与数据对话以发现**洞察力**。
 
 顺便说一下，这就是我对洞察力的描绘方式：
 
-![figure-name](../Images/f8af3a69f5bf7b33f01be6398252f33c.png)图片来源：[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)
+![figure-name](img/f8af3a69f5bf7b33f01be6398252f33c.png)图片来源：[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)
 
 如果我们有数据结构：
 
-![figure-name](../Images/31d9ffa90316974f9ee189b06a006976.png)图片来源：[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)
+![figure-name](img/31d9ffa90316974f9ee189b06a006976.png)图片来源：[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)
 
 我提议的观点是，洞察力可以被认为是数据结构中的一个**凹痕**。发现这个洞察力的自动过程就是机器学习。
 
-![figure-name](../Images/4e8419430956a0a2dbe8e15a8985029e.png)图片来源：[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)
+![figure-name](img/4e8419430956a0a2dbe8e15a8985029e.png)图片来源：[Héizel Vázquez](https://www.instagram.com/heizelvazquez/)
 
 所以现在我们可以说：
 
@@ -176,11 +176,11 @@
 
 **相关:**
 
-+   [我对敏捷数据科学研究的最佳建议](/2019/03/best-tips-agile-data-science-research.html)
++   我对敏捷数据科学研究的最佳建议
 
-+   [如何实时监控机器学习模型](/2019/01/monitor-machine-learning-real-time.html)
++   如何实时监控机器学习模型
 
-+   [人工智能/机器学习进展的年度回顾：Xavier Amatriain 2018 总结](/2019/01/xamat-ai-machine-learning-roundup.html)
++   人工智能/机器学习进展的年度回顾：Xavier Amatriain 2018 总结
 
 ### 更多相关内容
 

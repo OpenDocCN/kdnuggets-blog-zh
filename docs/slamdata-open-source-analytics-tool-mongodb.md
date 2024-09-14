@@ -1,8 +1,8 @@
 # SlamData 开源分析工具用于 MongoDB
 
-> 原文：[https://www.kdnuggets.com/2014/12/slamdata-open-source-analytics-tool-mongodb.html](https://www.kdnuggets.com/2014/12/slamdata-open-source-analytics-tool-mongodb.html)
+> 原文：[`www.kdnuggets.com/2014/12/slamdata-open-source-analytics-tool-mongodb.html`](https://www.kdnuggets.com/2014/12/slamdata-open-source-analytics-tool-mongodb.html)
 
-作者：John A. De Goes (SlamData)，2014年12月。
+作者：John A. De Goes (SlamData)，2014 年 12 月。
 
 SlamData 是一个开源工具，使 MongoDB 上的分析变得简单易用，无论是对开发者还是非开发者。我们刚刚推出了 v1.1，大大增强了工具的功能，并修复了 1.0 版本中识别的一些问题。
 
@@ -58,13 +58,13 @@ LIMIT 10
 
 在这个查询中，双重嵌套在数组中的文档被用来过滤和汇总总体结果中的值。这种查询在 RDBMS 中是不可能的，MongoDB API 的等效代码也很难编写、调试和理解。
 
-![SlamData 狂热粉丝](../Images/d262db620b20a3a56e07749e94d87e46.png)
+![SlamData 狂热粉丝](img/d262db620b20a3a56e07749e94d87e46.png)
 
 通过利用行业标准 SQL，SlamData 使广泛的用户和工具能够与 MongoDB 进行接口，并帮助团队快速轻松地理解由他们的 MongoDB 应用生成或收集的数据。
 
 在当前的 1.1 版本中，支持所有标准 SQL 子句，包括 SELECT、AS、FROM、JOIN、WHERE、GROUP BY、HAVING、OUTER JOIN、CROSS 等。
 
-![SlamData 互动提示示例](../Images/a90c5f3443723356da2ce9826d235f4a.png)
+![SlamData 互动提示示例](img/a90c5f3443723356da2ce9826d235f4a.png)
 
 **开启盒子**
 
@@ -98,11 +98,11 @@ SlamData 是一个 100% 开源项目，所以如果你喜欢你所看到的内�
 
 **相关：**
 
-+   [MongoHQ 更名为 Compose，合并 ElasticSearch 和 MongoDB](/2014/08/mongohq-becomes-compose-combines-elasticsearch-mongodb.html)
++   MongoHQ 更名为 Compose，合并 ElasticSearch 和 MongoDB
 
-+   [采访：Prateek Jain，eHarmony 工程总监谈快速搜索与分片](/2014/05/interview-prateek-jain-eharmony-search-sharding.html)
++   采访：Prateek Jain，eHarmony 工程总监谈快速搜索与分片
 
-+   [Top KDnuggets 推文，8 月 8-10 日：忘记 SQL 与 NoSQL。新趋势是 HTAP：混合事务/分析处理](/2014/08/top-tweets-aug08-10.html)
++   Top KDnuggets 推文，8 月 8-10 日：忘记 SQL 与 NoSQL。新趋势是 HTAP：混合事务/分析处理
 
 ### 相关话题
 

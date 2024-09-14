@@ -1,8 +1,8 @@
 # 使用 MLflow 在 Databricks 上进行模型实验、跟踪和注册
 
-> 原文：[https://www.kdnuggets.com/2021/01/model-experiments-tracking-registration-mlflow-databricks.html](https://www.kdnuggets.com/2021/01/model-experiments-tracking-registration-mlflow-databricks.html)
+> 原文：[`www.kdnuggets.com/2021/01/model-experiments-tracking-registration-mlflow-databricks.html`](https://www.kdnuggets.com/2021/01/model-experiments-tracking-registration-mlflow-databricks.html)
 
-[评论](#comments)
+评论
 
 **作者 [Dash Desai](https://www.linkedin.com/in/dash-desai/)，StreamSets 平台和技术推广总监**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -32,11 +32,11 @@
 
 数据摄取过程的另一个方面是存储——在某些情况下，公司可能已经拥有数据湖或数据仓库，而在某些情况下，他们可能需要建立一个。StreamSets DataOps 平台能够连接到现有的数据湖和数据仓库（无论是本地的还是云端的），还具有创建新数据湖和数据仓库的内置功能。
 
-![现代数据集成用于 DataOps](../Images/12bff326545c71bc6f41afffdea07c7f.png)
+![现代数据集成用于 DataOps](img/12bff326545c71bc6f41afffdea07c7f.png)
 
-在构建这些数据管道的过程中，数据工程师还可以执行数据科学家所需的一些关键转换。数据准备过程中一些常见的转换包括：字段/列/特征的数据类型转换、重命名字段/列/特征、连接数据集、合并数据集、重新分区、数据集数据格式转换（例如，将JSON转换为Parquet，以便在Apache Spark中进行高效的下游分析）等。所有这些转换及更多转换均由StreamSets DataOps平台提供支持。
+在构建这些数据管道的过程中，数据工程师还可以执行数据科学家所需的一些关键转换。数据准备过程中一些常见的转换包括：字段/列/特征的数据类型转换、重命名字段/列/特征、连接数据集、合并数据集、重新分区、数据集数据格式转换（例如，将 JSON 转换为 Parquet，以便在 Apache Spark 中进行高效的下游分析）等。所有这些转换及更多转换均由 StreamSets DataOps 平台提供支持。
 
-*重要说明：广泛而彻底的特征工程任务及对特征、其与目标变量的相关性、特征重要性等的深入分析，最适合使用交互式工具进行，如Databricks Notebook、Jupyter、RStudio和ML平台。*
+*重要说明：广泛而彻底的特征工程任务及对特征、其与目标变量的相关性、特征重要性等的深入分析，最适合使用交互式工具进行，如 Databricks Notebook、Jupyter、RStudio 和 ML 平台。*
 
 ### 模型实验、跟踪和注册
 
@@ -44,13 +44,13 @@
 
 在没有适当行业标准的情况下，数据科学家不得不依靠手动跟踪模型、输入、超参数、输出及其他类似工件，这导致模型部署/发布周期非常长，实际上阻碍了组织适应动态变化、获得竞争优势，并在某些情况下无法遵守不断变化的治理和法规。
 
-### StreamSets如何提供帮助
+### StreamSets 如何提供帮助
 
-使用StreamSets Transformer，[一个Spark ETL引擎](https://streamsets.com/products/dataops-platform/transformer-etl/)，很容易通过其PySpark或Scala API与[MLflow](https://mlflow.org/)集成。
+使用 StreamSets Transformer，[一个 Spark ETL 引擎](https://streamsets.com/products/dataops-platform/transformer-etl/)，很容易通过其 PySpark 或 Scala API 与[MLflow](https://mlflow.org/)集成。
 
-+   这种MLflow集成允许跟踪和版本化模型训练代码、数据、配置、超参数，并且可以从Transformer在MLflow的中央存储库中注册和管理模型。这对于重新训练模型和/或重现实验至关重要。
++   这种 MLflow 集成允许跟踪和版本化模型训练代码、数据、配置、超参数，并且可以从 Transformer 在 MLflow 的中央存储库中注册和管理模型。这对于重新训练模型和/或重现实验至关重要。
 
-+   使用[MLflow on Databricks](https://docs.databricks.com/applications/mlflow/index.html)时，它创建了一个强大而无缝的解决方案，因为[Transformer can run on Databricks](https://streamsets.com/solutions/streamsets-for-databricks/)集群，而Databricks自带MLflow服务器。
++   使用[MLflow on Databricks](https://docs.databricks.com/applications/mlflow/index.html)时，它创建了一个强大而无缝的解决方案，因为[Transformer can run on Databricks](https://streamsets.com/solutions/streamsets-for-databricks/)集群，而 Databricks 自带 MLflow 服务器。
 
 ### 端到端用例
 
@@ -64,7 +64,7 @@
 
 更重要的是，管道还与[Databricks 上的 MLflow](https://docs.databricks.com/applications/mlflow/index.html)集成，以跟踪和版本化模型训练代码，包括超参数、模型评估指标，并注册模型。
 
-**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](../Images/b18bd6ccd1ef4da94c8ad40ce57f779c.png)**
+**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](img/b18bd6ccd1ef4da94c8ad40ce57f779c.png)**
 
 **模型训练与实验**
 
@@ -173,19 +173,19 @@ output = inputs[0]
 
 这里是 MLflow 中跟踪的来自 Transformer 管道的模型训练运行。
 
-**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](../Images/621550444f5f5e9f78ea27f94aeda536.png)**
+**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](img/621550444f5f5e9f78ea27f94aeda536.png)**
 
 **Databricks 上的模型版本控制**
 
 这里是从 Transformer 管道注册的模型版本。
 
-**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](../Images/71af7b1d9949d7e5d7bde0d90f25de9f.png)**
+**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](img/71af7b1d9949d7e5d7bde0d90f25de9f.png)**
 
 **Databricks 上的模型比较**
 
 这是从 Transformer 管道创建的两个选定模型的并排比较。
 
-**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](../Images/a9f6c3ab266eb42837024a2c6d8e62c6.png)**
+**![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](img/a9f6c3ab266eb42837024a2c6d8e62c6.png)**
 
 ### 模型重新训练
 
@@ -193,7 +193,7 @@ output = inputs[0]
 
 编排管道被设计为持续运行并“等待”训练数据集文件上传到 Amazon S3。 一旦训练数据集上传，此管道会触发/启动前面描述的模型（重新）训练任务。
 
-![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](../Images/303066fe0a00df998d4f07c69006e900.png)
+![使用 MLflow 在 StreamSets 和 Databricks 上进行模型实验、跟踪和注册](img/303066fe0a00df998d4f07c69006e900.png)
 
 还需注意，管道中传递了两个超参数 ***maxIter*** 和 ***numberOfCVFolds***，因此无需硬编码它们，并且可以在模型重新训练和实验过程中动态传递到管道中。 StreamSets DataOps 平台还提供检查当前运行的作业状态的方法，以便根据管道中所示的状态采取行动。
 
@@ -213,22 +213,22 @@ StreamSets DataOps 平台不是一个机器学习平台，但它提供了重要�
 
 **相关：**
 
-+   [MLOps正在改变机器学习模型的开发方式](/2020/12/mlops-changing-machine-learning-developed.html)
++   MLOps 正在改变机器学习模型的开发方式
 
-+   [生产机器学习监控：异常值、漂移、解释器与统计性能](/2020/12/production-machine-learning-monitoring-outliers-drift-explainers-statistical-performance.html)
++   生产机器学习监控：异常值、漂移、解释器与统计性能
 
-+   [管理机器学习周期：从比较数据科学实验/协作工具中获得的五个经验教训](/2020/01/managing-machine-learning-cycles.html)
++   管理机器学习周期：从比较数据科学实验/协作工具中获得的五个经验教训
 
 ### 更多相关话题
 
 +   [机器学习实验的版本控制与追踪](https://www.kdnuggets.com/2021/12/versioning-machine-learning-experiments-tracking.html)
 
-+   [如何使用MLFlow打包和分发机器学习模型](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)
++   [如何使用 MLFlow 打包和分发机器学习模型](https://www.kdnuggets.com/2022/08/package-distribute-machine-learning-models-mlflow.html)
 
 +   [制定分析追踪的开放标准](https://www.kdnuggets.com/2022/07/developing-open-standard-analytics-tracking.html)
 
-+   [机器学习实验追踪的7款最佳工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
++   [机器学习实验追踪的 7 款最佳工具](https://www.kdnuggets.com/2023/02/7-best-tools-machine-learning-experiment-tracking.html)
 
-+   [优化数据分析：在Databricks中集成GitHub Copilot](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)
++   [优化数据分析：在 Databricks 中集成 GitHub Copilot](https://www.kdnuggets.com/optimizing-data-analytics-integrating-github-copilot-in-databricks)
 
 +   [如何设计数据收集实验](https://www.kdnuggets.com/2022/04/design-experiments-data-collection.html)

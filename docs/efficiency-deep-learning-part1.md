@@ -1,10 +1,10 @@
 # 高性能深度学习，第一部分
 
-> 原文：[https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)
+> 原文：[`www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html`](https://www.kdnuggets.com/2021/06/efficiency-deep-learning-part1.html)
 
-[评论](#comments)
+评论
 
-![](../Images/9970edb2850289adc136ca465d25bc5e.png)
+![](img/9970edb2850289adc136ca465d25bc5e.png)
 
 机器学习在今天的应用中无处不在。它在没有单一算法完美解决问题的领域中天然适用，并且在算法需要很好地预测正确输出的情况下，有大量未见过的数据。与我们期望确切最优解的传统算法问题不同，机器学习应用可以容忍近似答案。深度学习与神经网络在过去十年里一直是训练新机器学习模型的主流方法。它的崛起通常归因于 2012 年的 ImageNet [1] 竞赛。那一年，多伦多大学的一个团队提交了一个深度卷积网络（AlexNet [2]，以首席开发者 Alex Krizhevsky 命名），表现比下一个最佳提交好 41%。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,9 +34,9 @@
 
 由于这项开创性的工作，出现了创建更深网络、参数数量越来越大的竞赛。几种模型架构如 VGGNet、Inception、ResNet 等，在随后的几年中相继打破了 ImageNet 比赛的记录。这些模型也已在实际应用中投入使用。
 
-![](../Images/26bfdb65847643ab0246ee3cd5782b3a.png)
+![](img/26bfdb65847643ab0246ee3cd5782b3a.png)
 
-![](../Images/f6cf23304bf80faa7cd8a27f1bc8e8ac.png)
+![](img/f6cf23304bf80faa7cd8a27f1bc8e8ac.png)
 
 *图 1：流行的计算机视觉和自然语言深度学习模型参数数量的增长趋势 [4]。*
 
@@ -54,7 +54,7 @@
 
 1.  **启用设备端部署**：随着智能手机、物联网设备的普及，部署在这些设备上的应用必须是实时的。因此，需要*设备端*机器学习模型（即模型推理直接在设备上进行），这使得优化模型以适应运行设备变得非常重要。
 
-1.  **隐私与数据敏感性**：在用户数据可能涉及敏感处理或受各种限制（如欧洲的GDPR法规）的情况下，使用尽可能少的数据进行训练至关重要。因此，高效地使用少量数据训练模型意味着需要收集的数据更少。类似地，使设备上的模型能够运行意味着模型推理可以完全在用户设备上进行，而无需将输入数据发送到服务器端。
+1.  **隐私与数据敏感性**：在用户数据可能涉及敏感处理或受各种限制（如欧洲的 GDPR 法规）的情况下，使用尽可能少的数据进行训练至关重要。因此，高效地使用少量数据训练模型意味着需要收集的数据更少。类似地，使设备上的模型能够运行意味着模型推理可以完全在用户设备上进行，而无需将输入数据发送到服务器端。
 
 1.  **新应用**：效率还将使得在现有资源约束下无法实现的应用成为可能。
 
@@ -70,7 +70,7 @@
 
 如果我们有两个模型在给定任务上表现相同，我们可能会选择在上述一个或理想情况下两个方面表现更好的模型。如果在推理受限（如移动和嵌入设备）或昂贵（云服务器）的设备上部署模型，关注推理效率可能是值得的。同样，如果在有限或昂贵的训练资源下从头开始训练大型模型，开发针对训练效率设计的模型将有所帮助。
 
-![](../Images/e1079ed6677f853b3518c62769b02a27.png)
+![](img/e1079ed6677f853b3518c62769b02a27.png)
 
 *图 2: 帕累托最优性：绿色点代表帕累托最优模型（共同形成帕累托前沿），其中没有其他模型（红色点）在相同的推理延迟下获得更好的准确性，反之亦然。*
 
@@ -86,13 +86,13 @@
 
 [2] Alex Krizhevsky, Ilya Sutskever, 和 Geoffrey E Hinton. 2012\. 使用深度卷积神经网络进行 Imagenet 分类。神经信息处理系统进展 25 (2012), 1097–1105。
 
-[3] 卷积网络: [http://yann.lecun.com/exdb/lenet/index.html](http://yann.lecun.com/exdb/lenet/index.html)
+[3] 卷积网络: [`yann.lecun.com/exdb/lenet/index.html`](http://yann.lecun.com/exdb/lenet/index.html)
 
-[4] PapersWithCode: [https://paperswithcode.com/](https://paperswithcode.com/)
+[4] PapersWithCode: [`paperswithcode.com/`](https://paperswithcode.com/)
 
 [5] Tom B Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, 等. 2020\. 语言模型是少量样本学习者。arXiv 预印本 arXiv:2005.14165 (2020)。
 
-**简介：** [Gaurav Menghani](http://www.gaurav.im/)（[@GauravML](https://twitter.com/GauravML)）是Google Research的高级软件工程师，他领导着旨在优化大型机器学习模型的研究项目，以实现高效的训练和推理，这些模型可以在从微控制器到基于Tensor Processing Unit（TPU）的服务器等各种设备上运行。他的工作对YouTube、Cloud、Ads、Chrome等领域的超过10亿活跃用户产生了积极的影响。他还是即将出版的Manning Publication的《高效机器学习》一书的作者。在Google之前，Gaurav在Facebook工作了4.5年，并对Facebook的搜索系统和大规模分布式数据库做出了重要贡献。他拥有纽约州立大学石溪分校的计算机科学硕士学位。
+**简介：** [Gaurav Menghani](http://www.gaurav.im/)（[@GauravML](https://twitter.com/GauravML)）是 Google Research 的高级软件工程师，他领导着旨在优化大型机器学习模型的研究项目，以实现高效的训练和推理，这些模型可以在从微控制器到基于 Tensor Processing Unit（TPU）的服务器等各种设备上运行。他的工作对 YouTube、Cloud、Ads、Chrome 等领域的超过 10 亿活跃用户产生了积极的影响。他还是即将出版的 Manning Publication 的《高效机器学习》一书的作者。在 Google 之前，Gaurav 在 Facebook 工作了 4.5 年，并对 Facebook 的搜索系统和大规模分布式数据库做出了重要贡献。他拥有纽约州立大学石溪分校的计算机科学硕士学位。
 
 **相关：**
 
@@ -100,18 +100,18 @@
 
 +   [深度学习的最重要思想](https://www.kdnuggets.com/2020/09/deep-learnings-most-important-ideas.html)
 
-+   [关于强化学习的2件事——计算效率和样本效率](https://www.kdnuggets.com/2020/04/2-things-reinforcement-learning.html)
++   [关于强化学习的 2 件事——计算效率和样本效率](https://www.kdnuggets.com/2020/04/2-things-reinforcement-learning.html)
 
 ### 更多相关主题
 
 +   [数据科学家的高薪副业](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)
 
-+   [KDnuggets™ 新闻 22:n04, 1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
-+   [人工智能人员管理：构建高效能AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
++   [人工智能人员管理：构建高效能 AI 团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
 
-+   [7个高薪的数据科学副业](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
++   [7 个高薪的数据科学副业](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
 
-+   [7个平台获取高薪数据科学职位](https://www.kdnuggets.com/7-platforms-for-getting-high-paying-data-science-jobs)
++   [7 个平台获取高薪数据科学职位](https://www.kdnuggets.com/7-platforms-for-getting-high-paying-data-science-jobs)
 
-+   [Kubernetes中的高可用性SQL Server Docker容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
++   [Kubernetes 中的高可用性 SQL Server Docker 容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)

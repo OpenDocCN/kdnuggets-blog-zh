@@ -1,10 +1,10 @@
-# 接受数据科学家职位前需要审查的5件事
+# 接受数据科学家职位前需要审查的 5 件事
 
-> 原文：[https://www.kdnuggets.com/2019/05/5-things-review-before-accepting-data-scientist-job-offer.html](https://www.kdnuggets.com/2019/05/5-things-review-before-accepting-data-scientist-job-offer.html)
+> 原文：[`www.kdnuggets.com/2019/05/5-things-review-before-accepting-data-scientist-job-offer.html`](https://www.kdnuggets.com/2019/05/5-things-review-before-accepting-data-scientist-job-offer.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![握手](../Images/3d910cc9ac7bdca50b225665a26bb3a7.png)
+![握手](img/3d910cc9ac7bdca50b225665a26bb3a7.png)
 
 如果你正在阅读这篇文章，你可能已经收到了至少一个数据科学职位的录用通知。祝贺你！这本身就是一种成就，特别是考虑到数据科学职位市场的竞争激烈。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 ### 1\. 薪资
 
-根据PayScale，[数据科学家的平均薪资](https://www.payscale.com/research/US/Job=Data_Scientist_%2F_Engineer/Salary)为$92,949。对于入门级职位，这一数字降至$88,973。希望你在开始求职之前，已经研究过与自己经验相当的数据科学家的薪资。如果没有，现在是时候获取这些数据，并看看它们与工作报价的对比情况。
+根据 PayScale，[数据科学家的平均薪资](https://www.payscale.com/research/US/Job=Data_Scientist_%2F_Engineer/Salary)为$92,949。对于入门级职位，这一数字降至$88,973。希望你在开始求职之前，已经研究过与自己经验相当的数据科学家的薪资。如果没有，现在是时候获取这些数据，并看看它们与工作报价的对比情况。
 
 考虑生活成本等因素，尤其是当工作要求你搬到一个新地方时。此外，评估你是否需要忍受长时间的通勤来每天上班。是否有公共交通线路可用？回答这些问题可以帮助你确定所提供的薪水是否能让你过上舒适的生活。
 
@@ -40,7 +40,7 @@
 
 ### 3\. 你是否是随意雇佣员工
 
-[宾夕法尼亚州是一个随意雇佣州](https://www.weisbergcummings.com/review-contract-before-accepting-new-job/)，与弗吉尼亚州、德克萨斯州和其他11个州一样。这意味着，如果你住在这些州之一，合同标识为随意雇佣员工，你的雇主可以因任何理由或没有理由解雇你。如果看到合同中有可能随时终止的条款，请仔细考虑是否接受该工作。
+[宾夕法尼亚州是一个随意雇佣州](https://www.weisbergcummings.com/review-contract-before-accepting-new-job/)，与弗吉尼亚州、德克萨斯州和其他 11 个州一样。这意味着，如果你住在这些州之一，合同标识为随意雇佣员工，你的雇主可以因任何理由或没有理由解雇你。如果看到合同中有可能随时终止的条款，请仔细考虑是否接受该工作。
 
 有些公司决定投资数据科学主要是为了跟上竞争对手。但它们通常没有具体计划说明如何使用数据科学或数据如何帮助解决具体问题。
 
@@ -58,7 +58,7 @@
 
 工作合同中还应说明此职位每周涉及的小时数。此外，还要检查合同以了解如果加班会发生什么情况。
 
-在美国，联邦法律规定，如果你是符合领取加班费的员工，你将获得基本工资加50%——通常称为时间和一半。然而，[并非所有工人都能获得](https://www.nolo.com/legal-encyclopedia/overtime-pay-rights-employee-30142.html)加班费。作为数据科学自由职业者或每小时收入超过某一额度可能意味着你无法获得加班费。
+在美国，联邦法律规定，如果你是符合领取加班费的员工，你将获得基本工资加 50%——通常称为时间和一半。然而，[并非所有工人都能获得](https://www.nolo.com/legal-encyclopedia/overtime-pay-rights-employee-30142.html)加班费。作为数据科学自由职业者或每小时收入超过某一额度可能意味着你无法获得加班费。
 
 你的数据科学角色可能会要求你偶尔在平常工作时间之外工作，例如完成一个有紧迫截止日期的项目。但如果你没有加班费，考虑到你可能会因为为了薪资而过度工作，进而对这份看似理想的工作产生反感。
 
@@ -66,23 +66,23 @@
 
 在收到工作邀请后，几乎立刻接受是很有诱惑的。但最好的做法是要求时间审视，并评估上述因素以及其他对你重要的因素。这样展示的谨慎帮助你判断这份工作是否适合你。
 
-**简介：[Kayla Matthews](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《The Data Center Journal》和《VentureBeat》等出版物上讨论技术和大数据，已有五年以上的写作经验。要阅读更多Kayla的文章，[**订阅她的博客 Productivity Bytes**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
+**简介：[Kayla Matthews](http://productivitybytes.com/subscribe-to-productivity-bytes/)** 在《The Week》、《The Data Center Journal》和《VentureBeat》等出版物上讨论技术和大数据，已有五年以上的写作经验。要阅读更多 Kayla 的文章，[**订阅她的博客 Productivity Bytes**](http://productivitybytes.com/subscribe-to-productivity-bytes/)。
 
 原创。已获授权转载。
 
 **相关：**
 
-+   [如何识别一个好的数据科学家职位与不好的职位](/2019/04/recognize-good-data-scientist-job-from-bad.html)
++   如何识别一个好的数据科学家职位与不好的职位
 
-+   [数据科学家的日常生活](/2017/11/day-life-data-scientist.html)
++   数据科学家的日常生活
 
-+   [如何自行DIY数据科学教育](/2019/04/diy-your-data-science-education.html)
++   如何自行 DIY 数据科学教育
 
 ### 更多相关主题
 
-+   [选择下一个数据科学职位前需要记住的5件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
++   [选择下一个数据科学职位前需要记住的 5 件事](https://www.kdnuggets.com/2022/01/5-things-keep-mind-selecting-next-job.html)
 
-+   [在使用神经网络之前尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [在使用神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
 
 +   [谷歌建议你在参加其机器学习课程前做的事…](https://www.kdnuggets.com/2021/10/google-recommends-before-machine-learning-data-science-course.html)
 
@@ -90,4 +90,4 @@
 
 +   [在参加任何免费数据科学课程前请阅读此文](https://www.kdnuggets.com/read-this-before-you-take-any-free-data-science-course)
 
-+   [不要错过！在2023年结束前注册免费的课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！在 2023 年结束前注册免费的课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)

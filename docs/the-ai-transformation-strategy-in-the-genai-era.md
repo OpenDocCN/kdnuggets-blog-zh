@@ -1,36 +1,36 @@
-# AI转型策略在GenAI时代
+# AI 转型策略在 GenAI 时代
 
-> 原文：[https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
+> 原文：[`www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era`](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
 
-AI战略家擅长为企业构建AI路线图和愿景。然而，由于AI项目的范围不断变化，将路线图与预期的业务结果对齐变得具有挑战性。
+AI 战略家擅长为企业构建 AI 路线图和愿景。然而，由于 AI 项目的范围不断变化，将路线图与预期的业务结果对齐变得具有挑战性。
 
-![The AI Transformation Strategy in the GenAI Era](../Images/ef0380fe3d2b04a6c4e58c097fee3ec2.png)
+![The AI Transformation Strategy in the GenAI Era](img/ef0380fe3d2b04a6c4e58c097fee3ec2.png)
 
 图片来源：作者
 
-因此，至关重要的是不断调整和完善AI策略，以确保其与不断变化的业务目标和技术格局保持一致。
+因此，至关重要的是不断调整和完善 AI 策略，以确保其与不断变化的业务目标和技术格局保持一致。
 
-但在我们开始制定策略之前，让我们讨论一下AI战略家的角色。
+但在我们开始制定策略之前，让我们讨论一下 AI 战略家的角色。
 
-# AI战略家的日常生活
+# AI 战略家的日常生活
 
-AI战略家熟悉AI工作流程，并将业务需求映射到利用AI的技术解决方案。他们理解相关的复杂性以及机会估算，并不一定需要了解算法的复杂细节。
+AI 战略家熟悉 AI 工作流程，并将业务需求映射到利用 AI 的技术解决方案。他们理解相关的复杂性以及机会估算，并不一定需要了解算法的复杂细节。
 
-让我们深入探讨这三个机会估算的支柱。首先，需要注意的是，有许多创新的方法来解决业务问题，并非所有方法都需要像AI那样复杂和先进的技术。
+让我们深入探讨这三个机会估算的支柱。首先，需要注意的是，有许多创新的方法来解决业务问题，并非所有方法都需要像 AI 那样复杂和先进的技术。
 
 有些问题可以通过规则轻松解决，而其他问题则可以简单地自动化，解决问题到一定程度。
 
-进行这样的评估是分析基准的关键，这涉及到对现有解决方案解决问题的部分进行清点。如果当前解决方案不可接受，那么战略家会通过解释拟议的AI驱动解决方案在有效性上的潜在提升及其带来的风险来进行权衡。
+进行这样的评估是分析基准的关键，这涉及到对现有解决方案解决问题的部分进行清点。如果当前解决方案不可接受，那么战略家会通过解释拟议的 AI 驱动解决方案在有效性上的潜在提升及其带来的风险来进行权衡。
 
-![The AI Transformation Strategy in the GenAI Era](../Images/a5d5363669be8c52fc5d146c33cabf46.png)
+![The AI Transformation Strategy in the GenAI Era](img/a5d5363669be8c52fc5d146c33cabf46.png)
 
 图片来源：作者
 
-首先，战略家确保团队具备AI意识，并选择一个先进的解决方案，充分了解时间、精力、成本、复杂性和相关风险。可以公平地说，AI战略家是AI转型成功的关键。
+首先，战略家确保团队具备 AI 意识，并选择一个先进的解决方案，充分了解时间、精力、成本、复杂性和相关风险。可以公平地说，AI 战略家是 AI 转型成功的关键。
 
-配备强大的商业头脑，AI战略家通常遵循三个因素来构建成功的路线图：
+配备强大的商业头脑，AI 战略家通常遵循三个因素来构建成功的路线图：
 
-首先是确保拟议的解决方案在技术上可行。他们识别数据需求，并评估手头的问题是否需要使用AI。如果数据不可用、未经授权用于模型训练或没有准确的标签呢？这些都属于AI战略家的职能范围。
+首先是确保拟议的解决方案在技术上可行。他们识别数据需求，并评估手头的问题是否需要使用 AI。如果数据不可用、未经授权用于模型训练或没有准确的标签呢？这些都属于 AI 战略家的职能范围。
 
 除了可行的解决方案，第二个方面是可行性。即使解决方案可以扩展，人工智能策略师也会从技术与商业的角度评估所提议的模型开发是否在财务上对商业目标具有可行性。如果成本效益分析表明，新人工智能/机器学习模型开发的预期收益无法证明其建设成本的合理性，那么最好放弃这个想法。
 
@@ -46,7 +46,7 @@ AI战略家熟悉AI工作流程，并将业务需求映射到利用AI的技术�
 
 转型往往是组织认识到需要重新审视传统商业方式的转折点。他们明白，现有的经营模式不可持续，导致失去竞争优势，从而影响增长。
 
-![人工智能转型策略在GenAI时代](../Images/fb77b12fdb12d5acb093537749bdb7dd.png)
+![人工智能转型策略在 GenAI 时代](img/fb77b12fdb12d5acb093537749bdb7dd.png)
 
 图片来源：作者
 
@@ -64,7 +64,7 @@ AI 策略师与技术专家关注的是如何通过技术实现商业愿景。�
 
 然而，AI 不能独立工作，它需要核心数据来建模现象。因此，它与数据策略密切配合。
 
-![GenAI 时代的 AI 转型战略](../Images/30ceaeb92071e1d50ce055191898ede3.png)
+![GenAI 时代的 AI 转型战略](img/30ceaeb92071e1d50ce055191898ede3.png)
 
 图片由作者提供
 
@@ -94,6 +94,6 @@ AI 策略师与技术专家关注的是如何通过技术实现商业愿景。�
 
 +   [在生成 AI 时代如何脱颖而出并保护你的工作](https://www.kdnuggets.com/how-to-standout-and-safeguard-your-job-in-the-generative-ai-era)
 
-+   [掌握数据战略的15本最佳书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据战略的 15 本最佳书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)

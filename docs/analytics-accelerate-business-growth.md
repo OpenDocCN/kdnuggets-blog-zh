@@ -1,6 +1,6 @@
 # 如何利用分析加速业务增长？
 
-> 原文：[https://www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html](https://www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html)
+> 原文：[`www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html`](https://www.kdnuggets.com/2022/12/analytics-accelerate-business-growth.html)
 
 # 分析及其目标
 
@@ -8,17 +8,17 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 分析通常与通过分析历史数据来理解特定事件发生的原因相关。这更多的是一种诊断方法，用于找出过去发生的事情的原因。随着更先进和复杂的算法的出现，分析已经发展为一种前瞻性的方法。这种预测性的方法从过去的数据中学习关联，以预测未来的趋势和行为。这种预测性前瞻使企业领导者能够校准他们的决策，并根据这些预测采取正确的行动。
 
-![如何利用分析加速业务增长？](../Images/b52a462a58c213ca7e18c350645d0590.png)
+![如何利用分析加速业务增长？](img/b52a462a58c213ca7e18c350645d0590.png)
 
 图片来源于 rawpixel.com，来自 Freepik
 
@@ -56,7 +56,7 @@
 
 不仅仅是引入客户，更要确保在整个过程中留住他们，这一点非常重要。一个满意的客户就是一个重复的客户，反之亦然。获取一个客户需要付出大量的努力，而没有制定成功的客户留存策略将是一场噩梦。不用说，获取一个客户的成本要高于留住一个客户。企业对此非常了解，因此他们希望利用分析提供的每一个见解，以便为现有客户提供更好的体验。
 
-利用分析工具来了解你当前的用户群体，并为他们提供更好的优惠和服务，从而建立与产品和服务的长期关系。如果你有兴趣了解更多关于客户留存与获取成本的数据驱动分析，可以查看这个[链接](https://www.markinblog.com/customer-loyalty-retention-statistics/?gclid=CjwKCAjwpKyYBhB7EiwAU2Hn2a2vGDdTcfj5LA12AM2PGpIYPtbF3da6CCvTYjBaz09sWX4FxN0yTRoCP7UQAvD_BwE#:~:text=Customer%20Acquisition%20vs.%20Retention%20Costs%20Summary)。这表明，新客户的获取成本是留住老客户的七倍。此外，还指出，从现有客户中产生转化的概率为60-70%，这远高于从新客户中产生转化的5-20%的概率。
+利用分析工具来了解你当前的用户群体，并为他们提供更好的优惠和服务，从而建立与产品和服务的长期关系。如果你有兴趣了解更多关于客户留存与获取成本的数据驱动分析，可以查看这个[链接](https://www.markinblog.com/customer-loyalty-retention-statistics/?gclid=CjwKCAjwpKyYBhB7EiwAU2Hn2a2vGDdTcfj5LA12AM2PGpIYPtbF3da6CCvTYjBaz09sWX4FxN0yTRoCP7UQAvD_BwE#:~:text=Customer%20Acquisition%20vs.%20Retention%20Costs%20Summary)。这表明，新客户的获取成本是留住老客户的七倍。此外，还指出，从现有客户中产生转化的概率为 60-70%，这远高于从新客户中产生转化的 5-20%的概率。
 
 # 人员、流程和技术
 
@@ -84,10 +84,10 @@
 
 +   [如何更好地利用数据科学推动业务增长](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)
 
-+   [通过Uplimit的Metaflow加速你的机器学习之旅……](https://www.kdnuggets.com/2023/10/uplimit-accelerate-your-machine-learning-journey-metaflow-mastery-course)
++   [通过 Uplimit 的 Metaflow 加速你的机器学习之旅……](https://www.kdnuggets.com/2023/10/uplimit-accelerate-your-machine-learning-journey-metaflow-mastery-course)
 
-+   [基于LLM的自主智能体背后的增长](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
++   [基于 LLM 的自主智能体背后的增长](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
 
-+   [辛辛那提大学 MS 商业分析 2024年夏季……](https://www.kdnuggets.com/2024/02/uc-business-analytics-summer-2024-information-session)
++   [辛辛那提大学 MS 商业分析 2024 年夏季……](https://www.kdnuggets.com/2024/02/uc-business-analytics-summer-2024-information-session)
 
 +   [大数据分析：为什么对商业智能如此重要？](https://www.kdnuggets.com/2023/06/big-data-analytics-crucial-business-intelligence.html)

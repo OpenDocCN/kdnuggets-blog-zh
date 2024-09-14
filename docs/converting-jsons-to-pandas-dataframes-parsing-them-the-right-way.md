@@ -1,8 +1,8 @@
 # 将 JSON 转换为 Pandas DataFrames：正确解析
 
-> 原文：[https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)
+> 原文：[`www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way`](https://www.kdnuggets.com/converting-jsons-to-pandas-dataframes-parsing-them-the-right-way)
 
-![将 JSON 转换为 Pandas DataFrames：正确解析](../Images/4c8ffa1017679f5afc34ea6344d20936.png)
+![将 JSON 转换为 Pandas DataFrames：正确解析](img/4c8ffa1017679f5afc34ea6344d20936.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -53,7 +53,7 @@ pd.json_normalize(json_string)
 
 通过将此命令应用于单条记录的 JSON，我们得到最基本的表格。然而，当我们的数据稍微复杂一些并呈现 JSON 列表时，我们仍然可以使用相同的命令，且不会出现进一步的复杂情况，输出将对应于一个包含多个记录的表格。
 
-![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/2276b03bfa4c46301c146e806f7236df.png)
+![将 JSON 转换为 Pandas DataFrames: 正确解析它们](img/2276b03bfa4c46301c146e806f7236df.png)
 
 作者提供的图像
 
@@ -65,7 +65,7 @@ pd.json_normalize(json_string)
 
 假设某些值没有被提供，例如，David 的收入记录丢失。当我们将 JSON 转换为简单的 pandas 数据框时，相应的值将显示为 NaN。
 
-![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/6f73df019796f8cd437090538bfdee19.png)
+![将 JSON 转换为 Pandas DataFrames: 正确解析它们](img/6f73df019796f8cd437090538bfdee19.png)
 
 作者提供的图像
 
@@ -115,7 +115,7 @@ pd.json_normalize(filtered_json_list)
 
 +   roles.数据分析师
 
-![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/61d6d8f305b831a591028a14b9fc22fc.png)
+![将 JSON 转换为 Pandas DataFrames: 正确解析它们](img/61d6d8f305b831a591028a14b9fc22fc.png)
 
 作者提供的图像
 
@@ -127,7 +127,7 @@ pd.json_normalize(mutliple_level_json_list, max_level = 0)
 
 待处理的值将保留在 JSON 中，并存在于我们的 pandas DataFrame 中。
 
-![将 JSON 转换为 Pandas DataFrames: 正确解析它们](../Images/89e11109652ab5577b6db0630ba4d993.png)
+![将 JSON 转换为 Pandas DataFrames: 正确解析它们](img/89e11109652ab5577b6db0630ba4d993.png)
 
 作者提供的图像
 
@@ -143,7 +143,7 @@ pd.json_normalize(mutliple_level_json_list, max_level = 0)
 
 这个操作会生成一个专门的表格，仅包含列表的内容。默认情况下，此过程只会展开列表中的元素。然而，为了丰富该表格的额外上下文，例如为每条记录保留相关的 ID，我们可以使用 meta 参数。
 
-![将 JSON 转换为 Pandas DataFrames：正确解析它们](../Images/034c44ebd509147c75c500ce585bf44c.png)
+![将 JSON 转换为 Pandas DataFrames：正确解析它们](img/034c44ebd509147c75c500ce585bf44c.png)
 
 图片由作者提供
 

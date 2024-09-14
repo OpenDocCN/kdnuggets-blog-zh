@@ -1,8 +1,8 @@
 # 使用 Numpy 加速你的 Python 代码的一个简单技巧
 
-> 原文：[https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html](https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html)
+> 原文：[`www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html`](https://www.kdnuggets.com/2019/06/speeding-up-python-code-numpy.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![figure-name](../Images/3dca2a2ec5dce62853868c8be29e6f66.png)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![figure-name](img/3dca2a2ec5dce62853868c8be29e6f66.png)
 
 Python 非常庞大。
 
@@ -12,11 +12,11 @@ Python 非常庞大。
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -169,11 +169,11 @@ print("Run time = {}".format(end_time - start_time))
 
 **相关：**
 
-+   [为什么你应该更频繁地使用 .npy 文件](/2018/04/start-using-npy-files-more-often.html)
++   为什么你应该更频繁地使用 .npy 文件
 
-+   [为什么你应该忘记数据科学代码中的‘for-loop’，而拥抱矢量化](/2017/11/forget-for-loop-data-science-code-vectorization.html)
++   为什么你应该忘记数据科学代码中的‘for-loop’，而拥抱矢量化
 
-+   [处理 NumPy 矩阵：一个实用的初步参考](/2017/03/working-numpy-matrices.html)
++   处理 NumPy 矩阵：一个实用的初步参考
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # 如何通过 API 创建和部署一个简单的情感分析应用
 
-> 原文：[https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html](https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html)
+> 原文：[`www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html`](https://www.kdnuggets.com/2021/06/create-deploy-sentiment-analysis-app-api.html)
 
-[评论](#comments)![图](../Images/577cfe14fcb8f4b13d547bfba1b66c5c.png)
+评论![图](img/577cfe14fcb8f4b13d547bfba1b66c5c.png)
 
 图片来源：[Reputation X](https://blog.reputationx.com/reputation-sentiment)
 
@@ -178,21 +178,21 @@ INFO:     Application startup complete.
 
 按指示打开浏览器，访问 http://127.0.0.1:8000，你应该会看到：
 
-![API response](../Images/7fcd0ce954d7df772c423d60d1414df4.png)
+![API response](img/7fcd0ce954d7df772c423d60d1414df4.png)
 
 如果你看到欢迎信息，恭喜，成功了！我们可以尝试使用浏览器地址栏进行一些请求，将下面引号中的内容粘贴到请求 URL 和查询字符串后面 (`http://127.0.0.1:8000/sentiment_analysis/?text=`)：
 
 **“欢迎来到我的家！”**
 
-![API response](../Images/d0d6c8735adcaceda7fa038bfce7dcad.png)
+![API response](img/d0d6c8735adcaceda7fa038bfce7dcad.png)
 
 **“我不喜欢你的猫”**
 
-![API response](../Images/30aebef4b84ba3aab21496426d743fe8.png)
+![API response](img/30aebef4b84ba3aab21496426d743fe8.png)
 
 **“那部电影只是一般般”**
 
-![API response](../Images/b82560d7baf0820f9857c290570c40e6.png)
+![API response](img/b82560d7baf0820f9857c290570c40e6.png)
 
 很好，我们得到了结果！那如果我们想把它当作 API 来访问呢？在 Python 中，我们可以使用 requests 库。确保它已经安装，可以使用以下命令：
 
@@ -231,21 +231,21 @@ python rest_request.py
 
 **相关内容**：
 
-+   [使用 5 个重要的自然语言处理库入门](/2021/02/getting-started-5-essential-nlp-libraries.html)
++   使用 5 个重要的自然语言处理库入门
 
-+   [立即学习自然语言处理的神经网络](/2021/04/learn-neural-networks-natural-language-processing-now.html)
++   立即学习自然语言处理的神经网络
 
-+   [使用 TPOT 进行机器学习管道优化](/2021/05/machine-learning-pipeline-optimization-tpot.html)
++   使用 TPOT 进行机器学习管道优化
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

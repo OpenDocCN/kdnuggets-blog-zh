@@ -1,8 +1,8 @@
 # 机器学习备忘单
 
-> 原文：[https://www.kdnuggets.com/2018/09/machine-learning-cheat-sheets.html](https://www.kdnuggets.com/2018/09/machine-learning-cheat-sheets.html)
+> 原文：[`www.kdnuggets.com/2018/09/machine-learning-cheat-sheets.html`](https://www.kdnuggets.com/2018/09/machine-learning-cheat-sheets.html)
 
-[评论](#comments)
+评论
 
 机器学习的备忘单很多。然而，优质、简洁的技术备忘单却不多。一套涵盖理论机器学习概念的好资源将非常宝贵。
 
@@ -20,7 +20,7 @@
 
 +   ...以及更多
 
-[![提示与技巧](../Images/1c7364822e579f786b0b01ec318ed20b.png)![提示与技巧](../Images/48e279d379b5a8b339ed94ef7a4cfc81.png)](https://github.com/afshinea/stanford-cs-229-machine-learning)
+![提示与技巧![提示与技巧](img/48e279d379b5a8b339ed94ef7a4cfc81.png)](https://github.com/afshinea/stanford-cs-229-machine-learning)
 
 各个备忘单的链接如下：
 
@@ -44,21 +44,21 @@
 
 **相关**：
 
-+   [数据科学备忘单](/2018/09/meverick-lin-data-science-cheat-sheet.html)
++   数据科学备忘单
 
-+   [数据可视化备忘单](/2018/08/data-visualization-cheatsheet.html)
++   数据可视化备忘单
 
-+   [SQL 备忘单](/2018/07/sql-cheat-sheet.html)
++   SQL 备忘单
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 

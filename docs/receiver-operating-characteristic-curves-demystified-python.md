@@ -1,22 +1,22 @@
 # 接收器操作特性曲线揭秘（使用 Python）
 
-> 原文：[https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html](https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
+> 原文：[`www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html`](https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Syed Sadat Nazrul](https://www.linkedin.com/in/snazrul1/) 统计科学家**
 
-![Image](../Images/02f70f95e8cbdccd75cab6f2efaf86c9.png)
+![Image](img/02f70f95e8cbdccd75cab6f2efaf86c9.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -62,7 +62,7 @@ fig, ax = plt.subplots(1,1, figsize=(10,5))
 plot_pdf(good, bad, ax)
 ```
 
-![](../Images/7a9921ab52c894aab2fe18cf002ba628.png)
+![](img/7a9921ab52c894aab2fe18cf002ba628.png)
 
 现在我们有了二元类别的概率分布，我们可以使用这个分布来推导 ROC 曲线。
 
@@ -70,7 +70,7 @@ plot_pdf(good, bad, ax)
 
 为了从概率分布中导出 ROC 曲线，我们需要计算真正正例率 (TPR) 和假正例率 (FPR)。以一个简单的例子为例，假设阈值为 P(X=‘坏’)=0.6。
 
-![](../Images/86ee109313664de02f85d6b4c2bb54fc.png)
+![](img/86ee109313664de02f85d6b4c2bb54fc.png)
 
 真正的正例是阈值右侧标记为“坏”的区域。假正例是阈值右侧标记为“好”的区域。总正例是“坏”曲线下方的总面积，而总负例是“好”曲线下方的总面积。我们按照图示的方法进行划分，以得出 TPR 和 FPR。我们通过不同的阈值得出 TPR 和 FPR 以获取 ROC 曲线。利用这些知识，我们创建了 ROC 绘图函数：
 
@@ -116,7 +116,7 @@ fig, ax = plt.subplots(1,1, figsize=(10,5))
 plot_roc(good_pdf, bad_pdf, ax)
 ```
 
-![](../Images/3473fd9e1c1159c53781c36a04da17e5.png)
+![](img/3473fd9e1c1159c53781c36a04da17e5.png)
 
 现在将概率分布图和 ROC 曲线并排绘制以进行视觉比较：
 
@@ -127,7 +127,7 @@ plot_roc(good_pdf, bad_pdf, ax[1])
 plt.tight_layout()
 ```
 
-![](../Images/02f70f95e8cbdccd75cab6f2efaf86c9.png)
+![](img/02f70f95e8cbdccd75cab6f2efaf86c9.png)
 
 ### 类别分离的影响
 
@@ -147,7 +147,7 @@ for good_mean, bad_mean in means_tuples:
 plt.tight_layout()
 ```
 
-![](../Images/20818e7120759fbec5979733f40c7320.png)
+![](img/20818e7120759fbec5979733f40c7320.png)
 
 正如你所看到的，随着我们增加类之间的分离，AUC 也在增加。
 
@@ -167,11 +167,11 @@ plt.tight_layout()
 
 **相关内容：**
 
-+   [机器学习的学习曲线](/2018/01/learning-curves-machine-learning.html)
++   机器学习的学习曲线
 
-+   [选择合适的机器学习模型评估指标——第1部分](/2018/04/right-metric-evaluating-machine-learning-models-1.html)
++   选择合适的机器学习模型评估指标——第一部分
 
-+   [选择评估机器学习模型的正确指标 — 第二部分](/2018/06/right-metric-evaluating-machine-learning-models-2.html)
++   选择评估机器学习模型的正确指标 — 第二部分
 
 ### 更多相关话题
 

@@ -1,6 +1,6 @@
 # 理解深度学习需要重新思考泛化
 
-> 原文：[https://www.kdnuggets.com/2017/06/understanding-deep-learning-rethinking-generalization.html](https://www.kdnuggets.com/2017/06/understanding-deep-learning-rethinking-generalization.html)
+> 原文：[`www.kdnuggets.com/2017/06/understanding-deep-learning-rethinking-generalization.html`](https://www.kdnuggets.com/2017/06/understanding-deep-learning-rethinking-generalization.html)
 
 [理解深度学习需要重新思考泛化](https://openreview.net/forum?id=Sy8gdB9xx&noteId=Sy8gdB9xx) Zhang et al., *ICLR’17*
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 方面的工作
 
 * * *
 
@@ -44,7 +44,7 @@
 
 如果你拿到一个在随机标签上训练的网络，然后看看它在测试数据上的表现，它当然会表现得非常差，因为它并没有真正学到任何关于数据集的东西。换句话说，它有很高的*泛化误差*。将这些因素综合起来，你会意识到：
 
-> …仅通过随机化标签，我们可以使模型的泛化误差大幅上升，*而不改变模型、模型的大小、超参数或优化器*。我们在多个不同的标准架构上进行了验证，这些架构在CIFAR 10和ImageNet分类基准上进行训练。（强调由我加上）。
+> …仅通过随机化标签，我们可以使模型的泛化误差大幅上升，*而不改变模型、模型的大小、超参数或优化器*。我们在多个不同的标准架构上进行了验证，这些架构在 CIFAR 10 和 ImageNet 分类基准上进行训练。（强调由我加上）。
 
 换句话说：模型、模型的大小、超参数和优化器无法解释最先进神经网络的泛化性能。这必然是因为尽管它们保持不变，泛化性能却可以显著变化。
 
@@ -68,7 +68,7 @@
 
 +   高斯（如前所述，为每张图片生成虚假的数据）
 
-![](../Images/e95aab14ed016d23369c11732e68ee35.png)
+![](img/e95aab14ed016d23369c11732e68ee35.png)
 
 在整个范围内，网络仍然能够完美地拟合训练数据。
 
@@ -82,19 +82,19 @@
 
 > 我们展示了显式正则化形式，如权重衰减、丢弃法和数据增强，并不能充分解释神经网络的泛化误差：*显式正则化可能改善泛化性能，但既不是必要的，也不是单独足够的来控制泛化误差。*
 
-![](../Images/d58e95f0f54f415be1f649119ec37010.png)
+![](img/d58e95f0f54f415be1f649119ec37010.png)
 
 显式正则化似乎更多的是一种调节参数，有助于改善泛化，但其缺乏并不一定意味着泛化误差差。确实，并不是所有适合训练数据的模型都能很好地泛化。论文中的一个有趣分析表明，我们在使用梯度下降的过程中会得到一定程度的正则化：
 
-> 我们分析了SGD如何作为隐式正则化器。对于线性模型，SGD总是会收敛到具有小范数的解。因此，算法本身隐式地对解进行正则化… 尽管这并不能解释为什么某些架构比其他架构泛化得更好，但它确实表明需要更多的研究来准确理解使用SGD训练的模型所继承的特性。
+> 我们分析了 SGD 如何作为隐式正则化器。对于线性模型，SGD 总是会收敛到具有小范数的解。因此，算法本身隐式地对解进行正则化… 尽管这并不能解释为什么某些架构比其他架构泛化得更好，但它确实表明需要更多的研究来准确理解使用 SGD 训练的模型所继承的特性。
 
 ### 机器学习模型的有效容量
 
 考虑到神经网络在有限样本大小为*n*的情况下的情形。如果一个网络具有*p*个参数，其中*p*大于*n*，那么*即使是一个简单的两层神经网络也能表示输入样本的任何函数。* 作者在附录中证明了以下定理：
 
-> 存在一个具有ReLU激活和*2n + d* 权重的两层神经网络，可以表示*在*d维中大小为*n*的样本上的任何函数。
+> 存在一个具有 ReLU 激活和*2n + d* 权重的两层神经网络，可以表示*在*d 维中大小为*n*的样本上的任何函数。
 
-即使是深度为2的线性网络也已经能够表示训练数据的任何标记！
+即使是深度为 2 的线性网络也已经能够表示训练数据的任何标记！
 
 ### 那么，这一切将把我们带到哪里？
 
@@ -104,11 +104,11 @@
 
 **相关：**
 
-+   [深度学习论文阅读路线图](/2017/06/deep-learning-papers-reading-roadmap.html)
++   深度学习论文阅读路线图
 
-+   [深度学习101：揭开张量的神秘面纱](/2017/06/deep-learning-demystifying-tensors.html)
++   深度学习 101：揭开张量的神秘面纱
 
-+   [为什么深度学习没有局部最小值？](/2017/06/deep-learning-local-minimum.html)
++   为什么深度学习没有局部最小值？
 
 ### 更多关于此话题
 
@@ -116,7 +116,7 @@
 
 +   [学习数据科学的统计学顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [建立一个高效的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 

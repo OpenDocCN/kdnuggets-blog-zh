@@ -1,32 +1,32 @@
 # 机器学习在移动应用开发中有哪些好处？
 
-> 原文：[https://www.kdnuggets.com/2021/09/machine-learning-beneficial-mobile-app-development.html](https://www.kdnuggets.com/2021/09/machine-learning-beneficial-mobile-app-development.html)
+> 原文：[`www.kdnuggets.com/2021/09/machine-learning-beneficial-mobile-app-development.html`](https://www.kdnuggets.com/2021/09/machine-learning-beneficial-mobile-app-development.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ria Katiyar](https://www.linkedin.com/in/ria-katiyar/)，技术写作人**
 
-![图片](../Images/907c57001287cc4aa996bec7ab757107.png)
+![图片](img/907c57001287cc4aa996bec7ab757107.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-你是否曾经想过为什么YouTube会播放你想听的音乐？或者，当你在Amazon上购物时，为什么会有“为你推荐”部分？机器学习就是答案。通过实施人工智能和机器学习，公司现在可以提供定制的内容，并吸引越来越多的用户。
+你是否曾经想过为什么 YouTube 会播放你想听的音乐？或者，当你在 Amazon 上购物时，为什么会有“为你推荐”部分？机器学习就是答案。通过实施人工智能和机器学习，公司现在可以提供定制的内容，并吸引越来越多的用户。
 
 机器学习应用正在迅速融入我们的日常生活，因为技术正在向提供智能移动中心解决方案的方向发展。
 
-由于人工智能和机器学习技术，将会创造出更具吸引力的移动应用程序。到2021年，机器学习投资将总计达580亿美元。到2024年，行业的价值将达到208.3亿美元，[年均增长率为44.06%](https://www.forbes.com/sites/louiscolumbus/2020/01/19/roundup-of-machine-learning-forecasts-and-market-estimates-2020/#73262d7d5c02)。专家预测，到2024年，神经网络市场将达到230亿美元。机器学习应用将为许多行业注入活力，使安全、金融、照片和视频应用获得飞跃式增长。
+由于人工智能和机器学习技术，将会创造出更具吸引力的移动应用程序。到 2021 年，机器学习投资将总计达 580 亿美元。到 2024 年，行业的价值将达到 208.3 亿美元，[年均增长率为 44.06%](https://www.forbes.com/sites/louiscolumbus/2020/01/19/roundup-of-machine-learning-forecasts-and-market-estimates-2020/#73262d7d5c02)。专家预测，到 2024 年，神经网络市场将达到 230 亿美元。机器学习应用将为许多行业注入活力，使安全、金融、照片和视频应用获得飞跃式增长。
 
-机器学习算法的发展显著推动了应用程序开发。不论是Android还是iOS，这些平台的SDK都包含了许多API，允许开发者访问设备的机器学习功能。[苹果的iPhone](https://developer.apple.com/machine-learning/) CPU包括一个专用的神经引擎，可以加速特定的工作负载。Google的Pixel手机同样具备[设备端机器学习](https://www.blog.google/products/pixel/pixel-3-and-device-ai-putting-superpowers-your-pocket/)。
+机器学习算法的发展显著推动了应用程序开发。不论是 Android 还是 iOS，这些平台的 SDK 都包含了许多 API，允许开发者访问设备的机器学习功能。[苹果的 iPhone](https://developer.apple.com/machine-learning/) CPU 包括一个专用的神经引擎，可以加速特定的工作负载。Google 的 Pixel 手机同样具备[设备端机器学习](https://www.blog.google/products/pixel/pixel-3-and-device-ai-putting-superpowers-your-pocket/)。
 
 移动应用开发人员通过实施人工智能和机器学习，可以从这些颠覆性技术所带来的革命性变化中受益。这是因为人工智能和机器学习有潜力增强移动应用程序，提供更流畅的用户体验，并利用强大的功能。
 
@@ -102,22 +102,22 @@
 
 **相关：**
 
-+   [基础机器学习算法：初学者指南](/2021/05/essential-machine-learning-algorithms-beginners.html)
++   基础机器学习算法：初学者指南
 
-+   [学习和实践数据科学的9大移动应用]( /2020/01/top-9-mobile-apps-learning-practicing-data-science.html)
++   学习和实践数据科学的 9 大移动应用
 
-+   [数据科学能否灵活？将最佳敏捷实践应用于数据科学过程](/2021/01/data-science-agile-best-practices.html)
++   数据科学能否灵活？将最佳敏捷实践应用于数据科学过程
 
 ### 更多相关内容
 
 +   [数据科学如何改变移动应用开发？](https://www.kdnuggets.com/2023/03/data-science-transform-mobile-app-development.html)
 
-+   [6个理由说明通用语义层对你的数据栈有益](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
++   [6 个理由说明通用语义层对你的数据栈有益](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
 
-+   [5分钟内构建机器学习Web应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
++   [5 分钟内构建机器学习 Web 应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets新闻2022年3月9日：构建机器学习Web应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：构建机器学习 Web 应用](https://www.kdnuggets.com/2022/n10.html)
 
-+   [使用Heroku部署机器学习Web应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)
++   [使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)
 
 +   [人工智能将如何改变移动应用](https://www.kdnuggets.com/2022/12/artificial-intelligence-change-mobile-apps.html)

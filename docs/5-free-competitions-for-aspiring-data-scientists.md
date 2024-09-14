@@ -1,8 +1,8 @@
 # 5 个免费竞赛，适合有志的数据科学家
 
-> 原文：[https://www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists](https://www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists)
+> 原文：[`www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists`](https://www.kdnuggets.com/5-free-competitions-for-aspiring-data-scientists)
 
-![5 个免费竞赛，适合有志的数据科学家](../Images/c749a76c634bd145b881d169996ea418.png)图片由编辑 | Midjourney & Canva
+![5 个免费竞赛，适合有志的数据科学家](img/c749a76c634bd145b881d169996ea418.png)图片由编辑 | Midjourney & Canva
 
 数据科学就像艺术，因为解决问题的方法有很多种。这就是为什么数据科学竞赛存在的原因，以获得破解数据科学问题的最佳方法。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

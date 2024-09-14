@@ -1,8 +1,8 @@
 # 揭示链式思维提示在大型语言模型中的力量
 
-> 原文：[https://www.kdnuggets.com/2023/07/power-chain-thought-prompting-large-language-models.html](https://www.kdnuggets.com/2023/07/power-chain-thought-prompting-large-language-models.html)
+> 原文：[`www.kdnuggets.com/2023/07/power-chain-thought-prompting-large-language-models.html`](https://www.kdnuggets.com/2023/07/power-chain-thought-prompting-large-language-models.html)
 
-![揭示链式思维提示在大型语言模型中的力量](../Images/786c67d6492286a8cfa0ded2b2775d7e.png)
+![揭示链式思维提示在大型语言模型中的力量](img/786c67d6492286a8cfa0ded2b2775d7e.png)
 
 作者通过 Midjourney 创建的图像
 
@@ -14,11 +14,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 工作
 
 * * *
 

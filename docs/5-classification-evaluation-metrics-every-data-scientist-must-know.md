@@ -1,8 +1,8 @@
-# 每个数据科学家必须了解的5种分类评价指标
+# 每个数据科学家必须了解的 5 种分类评价指标
 
-> 原文：[https://www.kdnuggets.com/2019/10/5-classification-evaluation-metrics-every-data-scientist-must-know.html](https://www.kdnuggets.com/2019/10/5-classification-evaluation-metrics-every-data-scientist-must-know.html)
+> 原文：[`www.kdnuggets.com/2019/10/5-classification-evaluation-metrics-every-data-scientist-must-know.html`](https://www.kdnuggets.com/2019/10/5-classification-evaluation-metrics-every-data-scientist-must-know.html)
 
-[comments](#comments)
+comments
 
 ***我们想要优化什么？*** 大多数企业无法回答这个简单的问题。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 ***如果我们预测的是会撞击地球的小行星数量呢？***
 
-只需始终说零。你将会99%准确。我的模型可能相对准确，但完全没有价值。在这种情况下我们应该怎么办？
+只需始终说零。你将会 99%准确。我的模型可能相对准确，但完全没有价值。在这种情况下我们应该怎么办？
 
 > *设计数据科学项目比建模本身更为重要。*
 
@@ -32,7 +32,7 @@
 
 ### 1\. 准确率、精确率和召回率：
 
-![](../Images/fe2bc86aaaf0cf9b6c68d2768751a9ed.png)
+![](img/fe2bc86aaaf0cf9b6c68d2768751a9ed.png)
 
 ### A. 准确率
 
@@ -48,7 +48,7 @@
 
 **警告**
 
-假设我们的目标类别非常稀疏。我们是否希望准确率作为模型性能的衡量标准？***如果我们预测的是小行星是否会撞击地球？*** 只需始终回答`No`。你将会99%准确。我的模型可能相对准确，但完全没有价值。
+假设我们的目标类别非常稀疏。我们是否希望准确率作为模型性能的衡量标准？***如果我们预测的是小行星是否会撞击地球？*** 只需始终回答`No`。你将会 99%准确。我的模型可能相对准确，但完全没有价值。
 
 ### B. 精确率
 
@@ -76,7 +76,7 @@
 
 在小行星预测问题中，我们从未预测到真正的正例。
 
-因此回忆率也等于0。
+因此回忆率也等于 0。
 
 **何时使用？**
 
@@ -84,39 +84,39 @@
 
 **警告**
 
-***回忆率为1当我们对所有样本预测1时。***
+***回忆率为 1 当我们对所有样本预测 1 时。***
 
-因此，出现了利用精确度与回忆率权衡的想法—— ***F1分数***。
+因此，出现了利用精确度与回忆率权衡的想法—— ***F1 分数***。
 
 ### 2\. F1 分数：
 
 这是我***最喜欢的评估指标***，我在分类项目中经常使用这个指标。
 
-F1分数是0到1之间的数字，是精确度和回忆率的调和平均数。
+F1 分数是 0 到 1 之间的数字，是精确度和回忆率的调和平均数。
 
-![](../Images/d13bce6c7f3757567b2860521e727525.png)
+![](img/d13bce6c7f3757567b2860521e727525.png)
 
 让我们从一个二分类预测问题开始。 ***我们正在预测小行星是否会撞击地球。***
 
-所以如果我们对整个训练集说“否”。我们的精确度为0。我们的正类回忆率是多少？是零。准确率是多少？超过99%。
+所以如果我们对整个训练集说“否”。我们的精确度为 0。我们的正类回忆率是多少？是零。准确率是多少？超过 99%。
 
-因此，F1分数也是0。因此我们了解到，准确率为99%的分类器在我们的情况下基本上毫无用处。因此它解决了我们的问题。
+因此，F1 分数也是 0。因此我们了解到，准确率为 99%的分类器在我们的情况下基本上毫无用处。因此它解决了我们的问题。
 
 **何时使用？**
 
 我们希望拥有一个精确度和回忆率都很好的模型。
 
-![图示](../Images/588de63fd8749e1cfea448c9144f6dbe.png)
+![图示](img/588de63fd8749e1cfea448c9144f6dbe.png)
 
 精确度-回忆率权衡
 
-简单地说，***F1分数在你的分类器中在精确度和回忆率之间保持了一种平衡***。如果你的精确度低，F1分数低；如果回忆率低，F1分数同样低。
+简单地说，***F1 分数在你的分类器中在精确度和回忆率之间保持了一种平衡***。如果你的精确度低，F1 分数低；如果回忆率低，F1 分数同样低。
 
-> 如果你是警察检查员，并且你想抓住罪犯，你希望确保你抓到的人是罪犯（精确度），同时你也希望捕捉到尽可能多的罪犯（回忆率）。F1分数处理了这种权衡。
+> 如果你是警察检查员，并且你想抓住罪犯，你希望确保你抓到的人是罪犯（精确度），同时你也希望捕捉到尽可能多的罪犯（回忆率）。F1 分数处理了这种权衡。
 
 **如何使用？**
 
-你可以使用以下方法计算二分类预测问题的F1分数：
+你可以使用以下方法计算二分类预测问题的 F1 分数：
 
 ```py
 
@@ -127,7 +127,7 @@ y_pred = [0, 0, 1, 0, 0, 1]
 
 ```
 
-这是我用来获得最大化F1分数的最佳阈值的函数。下面的函数迭代可能的阈值，以找到提供最佳F1分数的阈值。
+这是我用来获得最大化 F1 分数的最佳阈值的函数。下面的函数迭代可能的阈值，以找到提供最佳 F1 分数的阈值。
 
 ```py
 # y_pred is an array of predictions
@@ -144,11 +144,11 @@ def bestThresshold(y_true,y_pred):
 
 **警告**
 
-F1分数的主要问题是它对精确度和回忆率给予相等的权重。我们有时可能需要在评估中包含领域知识，以便我们想要更多的回忆率或更多的精确度。
+F1 分数的主要问题是它对精确度和回忆率给予相等的权重。我们有时可能需要在评估中包含领域知识，以便我们想要更多的回忆率或更多的精确度。
 
-为解决此问题，我们可以通过创建加权的F1指标来实现，下面的公式中β管理精确度和召回率之间的权衡。
+为解决此问题，我们可以通过创建加权的 F1 指标来实现，下面的公式中β管理精确度和召回率之间的权衡。
 
-![](../Images/642e02997e7d35b1a68750374c0e6542.png)
+![](img/642e02997e7d35b1a68750374c0e6542.png)
 
 在这里，我们给予召回率β倍的权重，而不是精确度。
 
@@ -161,19 +161,19 @@ fbeta_score(y_true, y_pred,beta=0.5)
 
 ```
 
-F1分数也可以用于多类问题。请参阅[这篇](https://towardsdatascience.com/multi-class-metrics-made-simple-part-ii-the-f1-score-ebe8b2c2ca1)精彩博客文章，由[Boaz Shmueli](https://medium.com/u/57ee515c83c5?source=post_page-----aa97784ff226----------------------)提供详细信息。
+F1 分数也可以用于多类问题。请参阅[这篇](https://towardsdatascience.com/multi-class-metrics-made-simple-part-ii-the-f1-score-ebe8b2c2ca1)精彩博客文章，由[Boaz Shmueli](https://medium.com/u/57ee515c83c5?source=post_page-----aa97784ff226----------------------)提供详细信息。
 
 ### 3\. 日志损失/二元交叉熵
 
 日志损失是评估二元分类器的一个相当好的指标，并且在逻辑回归和神经网络中有时也是优化目标。
 
-二元日志损失的示例如下公式，其中p是预测1的概率。
+二元日志损失的示例如下公式，其中 p 是预测 1 的概率。
 
-![](../Images/589f6701243bff934d5bab0dac0f4793.png)
+![](img/589f6701243bff934d5bab0dac0f4793.png)
 
-![](../Images/5eb3b742cca4ae0ee23b80a85487d7f6.png)
+![](img/5eb3b742cca4ae0ee23b80a85487d7f6.png)
 
-如你所见，当我们对1的预测相当确定且实际标签为1时，日志损失减少。
+如你所见，当我们对 1 的预测相当确定且实际标签为 1 时，日志损失减少。
 
 **何时使用？**
 
@@ -195,11 +195,11 @@ log_loss(y_true, y_pred, eps=1e-15)
 
 ### 4\. 分类交叉熵
 
-日志损失也可以推广到多类问题。在多类情况下，分类器必须为所有示例分配每个类别的概率。如果有N个样本属于M个类别，则*分类交叉熵*是-`ylogp`值的总和：
+日志损失也可以推广到多类问题。在多类情况下，分类器必须为所有示例分配每个类别的概率。如果有 N 个样本属于 M 个类别，则*分类交叉熵*是-`ylogp`值的总和：
 
-![](../Images/607c37a49856b1fa9722078f40518ccb.png)
+![](img/607c37a49856b1fa9722078f40518ccb.png)
 
-`y_ij`是1如果样本`i`属于类别`j`，否则为0
+`y_ij`是 1 如果样本`i`属于类别`j`，否则为 0
 
 `p_ij`是我们分类器预测样本`i`属于类别`j`的概率。
 
@@ -224,15 +224,15 @@ log_loss(y_true, y_pred, eps=1e-15)
 
 ### 5\. AUC
 
-AUC是ROC曲线下的面积。
+AUC 是 ROC 曲线下的面积。
 
-***AUC ROC指标显示正类概率与负类概率的分离程度***
+***AUC ROC 指标显示正类概率与负类概率的分离程度***
 
-***ROC曲线是什么？***
+***ROC 曲线是什么？***
 
-![](../Images/fe2bc86aaaf0cf9b6c68d2768751a9ed.png)
+![](img/fe2bc86aaaf0cf9b6c68d2768751a9ed.png)
 
-我们从分类器得到了概率。我们可以使用各种阈值来绘制我们的灵敏度（TPR）和（1-特异度）（FPR）的曲线，这样我们就会得到ROC曲线。
+我们从分类器得到了概率。我们可以使用各种阈值来绘制我们的灵敏度（TPR）和（1-特异度）（FPR）的曲线，这样我们就会得到 ROC 曲线。
 
 其中，真正的阳性率（True Positive Rate，TPR）只是我们使用算法捕获的真正阳性的比例。
 
@@ -242,23 +242,23 @@ AUC是ROC曲线下的面积。
 
 `1- Specificity = FPR(False Positive Rate)= FP/(TN+FP)`
 
-![图](../Images/c1344e1d0fb96baffeb0c4d68b4b55aa.png)
+![图](img/c1344e1d0fb96baffeb0c4d68b4b55aa.png)
 
 ROC 曲线
 
-在这里，我们可以使用ROC曲线来决定阈值。
+在这里，我们可以使用 ROC 曲线来决定阈值。
 
 阈值的选择还将取决于分类器的使用意图。
 
-如果这是一个癌症分类应用，你不希望你的阈值设为0.5。即使一个患者的癌症概率是0.3，你也会将他分类为1。
+如果这是一个癌症分类应用，你不希望你的阈值设为 0.5。即使一个患者的癌症概率是 0.3，你也会将他分类为 1。
 
-否则，在降低信用卡限额的应用中，你不希望你的阈值设为0.5。你此时更担心降低限额对客户满意度的负面影响。
+否则，在降低信用卡限额的应用中，你不希望你的阈值设为 0.5。你此时更担心降低限额对客户满意度的负面影响。
 
 **何时使用？**
 
-AUC是**尺度不变的**。它衡量的是预测的排名情况，而不是其绝对值。因此，例如，如果你作为市场营销人员想要找出响应营销活动的用户列表。AUC是一个好的指标，因为按概率排名的预测就是你将创建营销活动用户列表的顺序。
+AUC 是**尺度不变的**。它衡量的是预测的排名情况，而不是其绝对值。因此，例如，如果你作为市场营销人员想要找出响应营销活动的用户列表。AUC 是一个好的指标，因为按概率排名的预测就是你将创建营销活动用户列表的顺序。
 
-使用AUC的另一个好处是它是**分类阈值不变的**，类似于对数损失。它衡量模型预测的质量，而不管选择了什么分类阈值，这与F1分数或准确度不同，它们依赖于阈值的选择。
+使用 AUC 的另一个好处是它是**分类阈值不变的**，类似于对数损失。它衡量模型预测的质量，而不管选择了什么分类阈值，这与 F1 分数或准确度不同，它们依赖于阈值的选择。
 
 **如何使用？**
 
@@ -274,7 +274,7 @@ y_scores = np.array([0.1, 0.4, 0.35, 0.8])
 
 **注意事项**
 
-有时我们需要从模型中获得良好的概率输出，而AUC对此无济于事。
+有时我们需要从模型中获得良好的概率输出，而 AUC 对此无济于事。
 
 ### 结论
 
@@ -298,11 +298,11 @@ y_scores = np.array([0.1, 0.4, 0.35, 0.8])
 
 **相关：**
 
-+   [数据科学家应该了解的5种图算法](/2019/09/5-graph-algorithms-data-scientists-know.html)
++   数据科学家应该了解的 5 种图算法
 
-+   [特征提取的向导](/2019/06/hitchhikers-guide-feature-extraction.html)
++   特征提取的向导
 
-+   [数据科学家的6条建议](/2019/09/advice-data-scientists.html)
++   数据科学家的 6 条建议
 
 ### 相关主题
 
@@ -314,6 +314,6 @@ y_scores = np.array([0.1, 0.4, 0.35, 0.8])
 
 +   [理解分类指标：评估模型准确性的指南](https://www.kdnuggets.com/understanding-classification-metrics-your-guide-to-assessing-model-accuracy)
 
-+   [KDnuggets 新闻，5月25日：每个数据科学家都应该了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个数据科学家都应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)
 
-+   [每个数据科学家都应该了解的6种Python机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
++   [每个数据科学家都应该了解的 6 种 Python 机器学习工具](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)

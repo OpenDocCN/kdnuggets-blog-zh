@@ -1,10 +1,10 @@
 # 数据科学与大数据：两种截然不同的事物
 
-> 原文：[https://www.kdnuggets.com/2015/07/data-science-big-data-different-beasts.html](https://www.kdnuggets.com/2015/07/data-science-big-data-different-beasts.html)
+> 原文：[`www.kdnuggets.com/2015/07/data-science-big-data-different-beasts.html`](https://www.kdnuggets.com/2015/07/data-science-big-data-different-beasts.html)
 
 **由肖恩·麦克卢尔**（ThoughtWorks）。
 
-![2 Beasts](../Images/984f790aacdc244b643178c1b8951a73.png)
+![2 Beasts](img/984f790aacdc244b643178c1b8951a73.png)
 
 在今天的经济中，数据的重要性难以夸大。我们使用的工具和采取的行动消耗并生成我们世界的数字版本，所有这些都被捕获，等待使用。数据已成为大多数行业中真正感兴趣的资源，并被正确地视为竞争优势和颠覆性战略的入口。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -34,7 +34,7 @@
 
 自铁器时代开始，铁匠们利用他们的技能和专长将原料转化为各种有价值的产品。通过使用特定领域的工具，铁匠将原材料锻造、拉伸、弯曲、冲压和焊接成有用的物品。经过多年的研究、试验和错误，铁匠学会了使用特定的气体、特定的温度、受控的气氛和各种矿石来源，以生产出符合其独特应用的定制产品。
 
-![锻造铁](../Images/42831a8eb4914793df72e069bd7ca670.png)
+![锻造铁](img/42831a8eb4914793df72e069bd7ca670.png)
 
 随着工业革命的到来，能够更高效地将原材料转化为有价值的产品并进行规模化。但对规模化的关注并不是获取更多的材料，而是构建能够规模化和机械化转化专长的工具。随着这种机械化的发展，对工艺的理解变得更加重要，因为为了有效地操作、维护和在规模化中创新，必须深刻理解将原材料转化为能满足市场不断变化需求的产品的过程。
 
@@ -50,23 +50,23 @@
 
 填充车间所需的技能和专业知识，以将数据转化为有用的东西。带来的矿石将成为定义业务的产品。
 
-**简介：** [肖恩·麦克卢尔](https://www.linkedin.com/in/thoughtworks)，博士，是ThoughtWorks的高级数据科学家。
+**简介：** [肖恩·麦克卢尔](https://www.linkedin.com/in/thoughtworks)，博士，是 ThoughtWorks 的高级数据科学家。
 
 **相关：**
 
-+   [数据科学中的缺失D](/2015/07/data-science-domain-knowledge.html)
++   数据科学中的缺失 D
 
-+   [疑问与验证：数据科学的强大工具](/2015/07/doubt-verify-data-science-power-tools.html)
++   疑问与验证：数据科学的强大工具
 
-+   [2015年预测：大数据和数据科学会发生什么？](/2014/12/2015-predictions-big-data-data-science.html)
++   2015 年预测：大数据和数据科学会发生什么？
 
 ### 更多相关话题
 
-+   [Interview Kickstart数据科学面试课程——是什么让它…](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
++   [Interview Kickstart 数据科学面试课程——是什么让它…](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
 
 +   [如何从不同背景转型为数据科学家？](https://www.kdnuggets.com/2023/05/transition-data-science-different-background.html)
 
-+   [Python中加载数据的5种不同方法](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)
++   [Python 中加载数据的 5 种不同方法](https://www.kdnuggets.com/2020/08/5-different-ways-load-data-python.html)
 
 +   [数据挖掘与机器学习的区别是什么？](https://www.kdnuggets.com/2022/06/data-mining-different-machine-learning.html)
 

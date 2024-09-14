@@ -1,8 +1,8 @@
 # 90% 的今天的代码是为了防止失败而编写的，这是一种问题
 
-> 原文：[https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html](https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html)
+> 原文：[`www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html`](https://www.kdnuggets.com/2022/07/90-today-code-written-prevent-failure-problem.html)
 
-![90% 的今天的代码是为了防止失败而编写的，这是一种问题](../Images/5a4ded8e8356b840efe3d6216a5262cc.png)
+![90% 的今天的代码是为了防止失败而编写的，这是一种问题](img/5a4ded8e8356b840efe3d6216a5262cc.png)
 
 图片来源：[cottonbro](https://www.pexels.com/photo/man-with-binary-code-projected-on-his-face-5474031/)
 
@@ -12,7 +12,7 @@
 
 为实现预期结果而编写的高效代码可以被归类为**积极工程**。公司雇佣工程师的目的是编写积极的代码，构建解决方案以满足业务关键和分析目标。相反，**消极工程**是为了对抗预期的失败并确保积极代码实际运行而编写的防御性代码。
 
-尝试预测可能出现的各种问题使得编写消极代码既费时又令人沮丧，工程师报告说，他们通常将90%的时间花在消极或防御性问题上。不幸的是，这段时间会影响整体生产力和主要目标，只剩下10% 的时间用于工程师被雇佣来构建的积极解决方案。
+尝试预测可能出现的各种问题使得编写消极代码既费时又令人沮丧，工程师报告说，他们通常将 90%的时间花在消极或防御性问题上。不幸的是，这段时间会影响整体生产力和主要目标，只剩下 10% 的时间用于工程师被雇佣来构建的积极解决方案。
 
 工程师可能认为这种防御性的方法对他们的积极代码的成功是必要的，并且有助于减少失败的风险。但作为一个在风险管理领域工作了整个职业生涯的人，我可以说，有效的风险缓解并不试图预测和对冲所有可能的结果。相反，人们应当建立一个具有足够具体工具的框架，以应对手头的任务，同时又足够通用以处理未知问题。**这就是关于建立一个消极工程框架，让用户可以与失败共处，而不是对抗失败。**
 
@@ -28,11 +28,11 @@
 
 事实是，无论你写多少负面代码或尝试实施多少保障措施，失败都是工程师生活中不可避免的一部分。此外，失败的催化剂可能超出你的控制范围。以一家高增长初创公司的数据团队为例，这支由五名工程师组成的团队在管理分析堆栈时，其整个基础设施完全失败，导致报告中充满错误。
 
-从他们破损的仪表盘开始倒推，团队发现几乎在每一层堆栈中都有一个又一个错误。团队最终发现这是因为每个阶段将其失败传递给后续阶段，导致每一步的失败链反应。在经过三天的调查工作后，团队揭示了失败的根源：问题竟然如此简单——附加在SaaS供应商上的信用卡已过期。由于供应商的API集成在团队管道的早期阶段，账单错误造成了一连串的失败，直至终端用户仪表盘。
+从他们破损的仪表盘开始倒推，团队发现几乎在每一层堆栈中都有一个又一个错误。团队最终发现这是因为每个阶段将其失败传递给后续阶段，导致每一步的失败链反应。在经过三天的调查工作后，团队揭示了失败的根源：问题竟然如此简单——附加在 SaaS 供应商上的信用卡已过期。由于供应商的 API 集成在团队管道的早期阶段，账单错误造成了一连串的失败，直至终端用户仪表盘。
 
 一旦他们找到了问题，团队幸运地解决了它。他们只需要了解根本原因，解决方案就很简单。防御性、消极的代码无法阻止这种失败——因为催化剂是外部的——但一个保险框架可以减轻其影响。一个好的工作流程工具可以识别根本故障，并防止下游任务的执行，预期如果这些任务继续执行，将只会导致一系列失败。这种可见性将帮助五人团队将三天的调查时间缩短到几分钟，并大幅提高生产力。
 
-生产力提升可能是消极工程框架的最大好处，工程师接受失败的发生，并拥有减轻其影响的工具。与其花费90%的时间去防止失败，他们可以更多地投入到编写积极的代码中，从而推动业务成果。即使将消极代码的时间减少到80%，也意味着将积极工程时间从10%提升到20%——有效地使生产力时间翻倍。这仅仅是心态转变带来的非凡收益。工程师因此可以自信地确保他们的积极代码按照设计运行，并管理未知及其带来的所有风险。
+生产力提升可能是消极工程框架的最大好处，工程师接受失败的发生，并拥有减轻其影响的工具。与其花费 90%的时间去防止失败，他们可以更多地投入到编写积极的代码中，从而推动业务成果。即使将消极代码的时间减少到 80%，也意味着将积极工程时间从 10%提升到 20%——有效地使生产力时间翻倍。这仅仅是心态转变带来的非凡收益。工程师因此可以自信地确保他们的积极代码按照设计运行，并管理未知及其带来的所有风险。
 
 **[Jeremiah Lowin](https://www.linkedin.com/in/jlowin/)** 是 [Prefect](https://www.prefect.io/) 的创始人兼首席执行官。
 
@@ -40,11 +40,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -52,7 +52,7 @@
 
 +   [大数据如何实时拯救生命：物联网数据分析帮助…](https://www.kdnuggets.com/how-big-data-is-saving-lives-in-real-time-iov-data-analytics-helps-prevent-accidents)
 
-+   [今天所有营销分析和数据科学专业人士需要的5项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
++   [今天所有营销分析和数据科学专业人士需要的 5 项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
 
 +   [导航当今的数据和人工智能市场不确定性](https://www.kdnuggets.com/2024/02/altair-navigating-todays-data-ai-market-uncertainty)
 
@@ -60,4 +60,4 @@
 
 +   [数据编排：生成型人工智能成功与失败的分界线](https://www.kdnuggets.com/2024/07/astronomer/data-orchestration-the-dividing-line-between-generative-ai-success-and-failure)
 
-+   [Python中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)
++   [Python 中的遗传编程：背包问题](https://www.kdnuggets.com/2023/01/knapsack-problem-genetic-programming-python.html)

@@ -1,12 +1,12 @@
 # 自然语言处理的线性代数
 
-> 原文：[https://www.kdnuggets.com/2021/08/linear-algebra-natural-language-processing.html](https://www.kdnuggets.com/2021/08/linear-algebra-natural-language-processing.html)
+> 原文：[`www.kdnuggets.com/2021/08/linear-algebra-natural-language-processing.html`](https://www.kdnuggets.com/2021/08/linear-algebra-natural-language-processing.html)
 
-[评论](#comments)
+评论
 
 **由 [Taaniya Arora](https://medium.com/@TaaniyaArora)，数据科学家**
 
-![](../Images/0865fd73b4005b8f794326168d6b677f.png)
+![](img/0865fd73b4005b8f794326168d6b677f.png)
 
 图片由[Michael Dziedzic](https://unsplash.com/@lazycreekimages?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -34,27 +34,27 @@
 
 ## 我们坐标系统中的单位向量
 
-***i***-> 表示一个单位向量（长度为1单位），指向x方向
+***i***-> 表示一个单位向量（长度为 1 单位），指向 x 方向
 
-***j***-> 表示y方向上的单位向量
+***j***-> 表示 y 方向上的单位向量
 
 它们共同构成了我们坐标向量空间的基础。
 
 我们将在下面的后续部分中进一步讨论**基础**这一术语。
 
-![](../Images/099b26537ff5a6f1dda889bf00ce567d.png)
+![](img/099b26537ff5a6f1dda889bf00ce567d.png)
 
 标准单位向量 — 作者图片
 
 +   假设我们有一个向量 3***i***+ 5***j***
 
-+   这个向量的x，y坐标分别是：3和5
++   这个向量的 x，y 坐标分别是：3 和 5
 
-+   这些坐标是将单位向量在x和y方向上分别缩放3和5单位的标量
++   这些坐标是将单位向量在 x 和 y 方向上分别缩放 3 和 5 单位的标量
 
-![](../Images/ab03155c8441be62dbcb33f9a9f5a7d6.png)
+![](img/ab03155c8441be62dbcb33f9a9f5a7d6.png)
 
-二维X-Y空间中的一个向量 — 作者图片
+二维 X-Y 空间中的一个向量 — 作者图片
 
 ## 两个向量的线性组合
 
@@ -62,7 +62,7 @@
 
 ***l*** = *x1.* ***u*** + *x2.* ***v***
 
-+   数字*x1*，*x2*是向量x的分量
++   数字*x1*，*x2*是向量 x 的分量
 
 +   这本质上是在给定向量上进行的缩放和加法操作。
 
@@ -92,17 +92,17 @@ plt.ylabel("y-axis")
 plt.show()
 ```
 
-![](../Images/cb3e7ee2e66b9f581e0804970e01ac37.png)
+![](img/cb3e7ee2e66b9f581e0804970e01ac37.png)
 
 向量的线性组合 — 作者提供的图像
 
-我们也可以从教授在他的笔记中给出的类似3维示例中理解这一点 -
+我们也可以从教授在他的笔记中给出的类似 3 维示例中理解这一点 -
 
-![](../Images/209915af4612495ea4b870beb5a0f8e7.png)
+![](img/209915af4612495ea4b870beb5a0f8e7.png)
 
-线性代数，第1章- 向量简介，MIT
+线性代数，第一章- 向量简介，MIT
 
-从示例中的3个向量绘制它们在3D空间中的图像（轴的单位与图中的向量不同）
+从示例中的 3 个向量绘制它们在 3D 空间中的图像（轴的单位与图中的向量不同）
 
 ```py
 u_vec = np.array([1, -1, 0])
@@ -118,9 +118,9 @@ plt.grid()
 plt.show()
 ```
 
-![](../Images/bf63a365b492826b88939fcb5bc0d4e6.png)
+![](img/bf63a365b492826b88939fcb5bc0d4e6.png)
 
-3D空间中的向量 — 作者提供的图像
+3D 空间中的向量 — 作者提供的图像
 
 ## 跨度
 
@@ -132,7 +132,7 @@ plt.show()
 
 ## 共线性
 
-共线性是指当我们有p个不同的预测变量，但其中一些是其他变量的线性组合，因此它们不提供额外的信息时。两个共线向量/变量将具有接近+/-1的相关性，并且可以通过它们的相关矩阵检测到。
+共线性是指当我们有 p 个不同的预测变量，但其中一些是其他变量的线性组合，因此它们不提供额外的信息时。两个共线向量/变量将具有接近+/-1 的相关性，并且可以通过它们的相关矩阵检测到。
 
 当超过两个向量共线且任何一对向量可能没有高相关性时，就存在**多重共线性**。
 
@@ -154,19 +154,19 @@ plt.show()
 
 ## 自然语言处理中的向量空间模型
 
-**向量空间**是一个向量集合V，其中定义了两个操作——向量加法和标量乘法。例如，如果两个向量***u***和***v***在空间***V***中，则它们的和***w = u + v***也将位于向量空间***V***中。
+**向量空间**是一个向量集合 V，其中定义了两个操作——向量加法和标量乘法。例如，如果两个向量***u***和***v***在空间***V***中，则它们的和***w = u + v***也将位于向量空间***V***中。
 
-一个二维向量空间是一组具有2个轴的线性独立的基向量。
+一个二维向量空间是一组具有 2 个轴的线性独立的基向量。
 
 每个轴表示向量空间中的一个维度。
 
-再次回顾之前的向量***a*** = (3,5) = 3 ***i*** + 5 ***j***。这个向量在二维空间中用两个线性独立的基向量 — X和Y表示，它们不仅代表2个轴，也代表空间的2个维度。
+再次回顾之前的向量***a*** = (3,5) = 3 ***i*** + 5 ***j***。这个向量在二维空间中用两个线性独立的基向量 — X 和 Y 表示，它们不仅代表 2 个轴，也代表空间的 2 个维度。
 
-这里的3和5是表示在X-Y二维空间中的该向量的x，y分量。
+这里的 3 和 5 是表示在 X-Y 二维空间中的该向量的 x，y 分量。
 
-![](../Images/ab03155c8441be62dbcb33f9a9f5a7d6.png)
+![](img/ab03155c8441be62dbcb33f9a9f5a7d6.png)
 
-二维X-Y平面中的向量 — 作者提供的图像
+二维 X-Y 平面中的向量 — 作者提供的图像
 
 ## **自然语言处理中的向量空间模型**
 
@@ -180,13 +180,13 @@ plt.show()
 
 +   术语的组合将文档表示为该空间中的点或向量。
 
-对于3个词，我们将有一个3D向量模型，如下所示 -
+对于 3 个词，我们将有一个 3D 向量模型，如下所示 -
 
-![](../Images/46eb924f89cb4d6ba86b226ab4c30f0a.png)
+![](img/46eb924f89cb4d6ba86b226ab4c30f0a.png)
 
-3个词的向量空间模型——作者提供的图像
+3 个词的向量空间模型——作者提供的图像
 
-上面的表格表示TF-IDF事件矩阵。
+上面的表格表示 TF-IDF 事件矩阵。
 
 ***D1*** = (0.91, 0, 0.0011) 表示在三个轴——好、房子、车子——上的文档向量。同样，我们还有***D2***和***D3***文档向量。
 
@@ -200,7 +200,7 @@ plt.show()
 
 这是通过如余弦相似度这样的距离度量实现的，通过文档和查询的向量之间的距离，距离查询更近的文档被排在更高的位置。
 
-+   词汇量/词汇大小可以大到几百万，例如，Google新闻语料库有300万条，这意味着有那么多独立的轴/维度来表示向量。因此，我们希望在向量空间中使用操作来减少维度数量，并将相似的词放在同一个轴上。
++   词汇量/词汇大小可以大到几百万，例如，Google 新闻语料库有 300 万条，这意味着有那么多独立的轴/维度来表示向量。因此，我们希望在向量空间中使用操作来减少维度数量，并将相似的词放在同一个轴上。
 
 ## 密集向量
 
@@ -214,7 +214,7 @@ plt.show()
 
 +   word2vec 是一个用于**学习** 从大规模语料库中获得词密集向量的框架。它有两个变体——skip-gram 和 CBOW（连续词袋模型）。
 
-+   其他获取稠密向量的框架和技术包括全球向量（GloVe）、fastText、ELMo（语言模型中的嵌入）和最近的最先进Bert基于方法，用于在推理过程中获取上下文化的词嵌入。
++   其他获取稠密向量的框架和技术包括全球向量（GloVe）、fastText、ELMo（语言模型中的嵌入）和最近的最先进 Bert 基于方法，用于在推理过程中获取上下文化的词嵌入。
 
 ## 结论
 
@@ -232,37 +232,37 @@ plt.show()
 
 +   [矩阵-向量介绍，MIT](https://math.mit.edu/~gs/linearalgebra/linearalgebra5_1-3.pdf)
 
-+   [NLP的向量空间模型，NPTEL](https://www.youtube.com/watch?v=6Nz88LHOIdo)
++   [NLP 的向量空间模型，NPTEL](https://www.youtube.com/watch?v=6Nz88LHOIdo)
 
 +   Gareth James, Daniela Witten, Trevor Hastie 和 Robert Tibshirani 的统计学习介绍，电子书
 
-**个人简介: [Taaniya Arora](https://medium.com/@TaaniyaArora)** 是一位数据科学家和问题解决者，尤其对NLP和强化学习感兴趣。
+**个人简介: [Taaniya Arora](https://medium.com/@TaaniyaArora)** 是一位数据科学家和问题解决者，尤其对 NLP 和强化学习感兴趣。
 
 [原文](https://towardsdatascience.com/from-linear-algebra-to-text-representation-for-natural-language-processing-239cd3ccb12f)。转载授权。
 
 **相关：**
 
-+   [最佳SOTA NLP课程是免费的!](/2021/07/best-sota-nlp-course-free.html)
++   最佳 SOTA NLP 课程是免费的!
 
-+   [数据科学与机器学习中的基本线性代数](/2021/05/essential-linear-algebra-data-science-machine-learning.html)
++   数据科学与机器学习中的基本线性代数
 
-+   [如何克服数学恐惧并学习数据科学中的数学](/2021/03/overcome-fear-learn-math-data-science.html)
++   如何克服数学恐惧并学习数据科学中的数学
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
 
 +   [自然语言处理关键术语解释](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)
 

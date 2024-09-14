@@ -1,26 +1,26 @@
 # 为你的数据科学初创公司打造电梯演讲
 
-> 原文：[https://www.kdnuggets.com/2019/08/elevator-pitch-data-science-startup.html](https://www.kdnuggets.com/2019/08/elevator-pitch-data-science-startup.html)
+> 原文：[`www.kdnuggets.com/2019/08/elevator-pitch-data-science-startup.html`](https://www.kdnuggets.com/2019/08/elevator-pitch-data-science-startup.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Estelle Liotard，市场营销专家和商业顾问。**
 
-![](../Images/56d2b3f1547be8aab095bdc1e60d9202.png)
+![](img/56d2b3f1547be8aab095bdc1e60d9202.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-“电梯演讲”一词最初来源于企业家和小企业主在被问到“你做什么？”时，发展出一个30秒的演讲。这可能发生在社交场合和活动等地方。这是企业主/企业家提供非常简短（因此，30秒）解释他们向客户或客户提供的价值的机会，然后递交名片。这一活动一直被视为“传播信息”的工具，而不是寻求资金的工具。
+“电梯演讲”一词最初来源于企业家和小企业主在被问到“你做什么？”时，发展出一个 30 秒的演讲。这可能发生在社交场合和活动等地方。这是企业主/企业家提供非常简短（因此，30 秒）解释他们向客户或客户提供的价值的机会，然后递交名片。这一活动一直被视为“传播信息”的工具，而不是寻求资金的工具。
 
 ### 电梯演讲的扩展
 
@@ -40,15 +40,15 @@
 
 1.  注意你对自己所做的事情和解决的问题的描述。投资者不是技术专家，他们不一定理解算法、人工智能、预测模型等术语。在描述你所做的事情时，用所有人都能理解的通俗语言进行说明。一个好的建议？查看[一些成功的初创公司推介示例](https://slidebean.com/blog/startups-elevator-pitch-examples)。
 
-![](../Images/1eb35b7401abe0f495c9d1611fd59d62.png)
+![](img/1eb35b7401abe0f495c9d1611fd59d62.png)
 
 ### 新旧基础的变化
 
-启动一家初创公司所需的资金比以前少得多。因此，许多创始人使用种子资金（他们自己、家庭、朋友、短期小额贷款、众筹等）来开发至少一个MVP（最小可行产品），然后通过获取少量客户/客户来展示它是一个可行的产品。
+启动一家初创公司所需的资金比以前少得多。因此，许多创始人使用种子资金（他们自己、家庭、朋友、短期小额贷款、众筹等）来开发至少一个 MVP（最小可行产品），然后通过获取少量客户/客户来展示它是一个可行的产品。
 
 这很重要。投资者希望看到产品/服务是可行的证据。你可以这样做：
 
-1.  “展示，不要仅仅说明。” 不要只是说你的数据科学初创公司将提供什么。展示它为你现有的少数客户提供了什么，或者提供一个视觉演示，展示你的数据科学服务的某个特定方面如何解决问题。否则，展示一些来自初期客户的统计数据。例如，“在我们最初引入的15位客户中，所有15位在合作满一年后仍继续使用我们的服务。”
+1.  “展示，不要仅仅说明。” 不要只是说你的数据科学初创公司将提供什么。展示它为你现有的少数客户提供了什么，或者提供一个视觉演示，展示你的数据科学服务的某个特定方面如何解决问题。否则，展示一些来自初期客户的统计数据。例如，“在我们最初引入的 15 位客户中，所有 15 位在合作满一年后仍继续使用我们的服务。”
 
 1.  投资者的获取方式发生了剧变。过去，寻找投资者是一个相当隐秘的过程。你需要认识一个认识可能感兴趣的人。互联网改变了这一切。通过众筹平台、“天使投资人”名单、招募提案的开放活动等，你可以轻松找到潜在的资助者，并设计你的提案以单独接触目标投资者。此外，网络交流可以在线进行，不再受地理位置限制。
 
@@ -60,7 +60,7 @@
 
 1.  做你自己，但也要融入他们
 
-无论你是写一个电梯推介以口头形式向潜在投资者展示，还是为视频演示准备脚本，你都需要一个扎实的推介元素和[你的声音](https://bestessay.education/blog/finding-you-appealing-writing-voice)，否则你会显得不够真诚。这对那些不一定擅长文字的技术人员来说具有挑战性。正如[Studicus](https://studicus.com/descriptive-essay-writing-service)的编剧Susan Johnston所说：“我们有很多客户拥有惊人的概念和想法，但他们无法将这些转化为引人入胜的声音。技术人员常常处于这种情况。他们需要获得专业帮助，因为他们的声音必须真实，同时也是潜在客户和投资者可以理解的。”
+无论你是写一个电梯推介以口头形式向潜在投资者展示，还是为视频演示准备脚本，你都需要一个扎实的推介元素和[你的声音](https://bestessay.education/blog/finding-you-appealing-writing-voice)，否则你会显得不够真诚。这对那些不一定擅长文字的技术人员来说具有挑战性。正如[Studicus](https://studicus.com/descriptive-essay-writing-service)的编剧 Susan Johnston 所说：“我们有很多客户拥有惊人的概念和想法，但他们无法将这些转化为引人入胜的声音。技术人员常常处于这种情况。他们需要获得专业帮助，因为他们的声音必须真实，同时也是潜在客户和投资者可以理解的。”
 
 1.  你不是一个编剧或市场营销人员
 
@@ -76,17 +76,17 @@
 
 +   [定位机器学习公司](https://www.kdnuggets.com/2016/04/positioning-machine-learning-company.html)
 
-+   [2018年将是建立人工智能创业公司的最佳时机](https://www.kdnuggets.com/2017/11/2018-perfect-time-build-ai-startup.html)
++   [2018 年将是建立人工智能创业公司的最佳时机](https://www.kdnuggets.com/2017/11/2018-perfect-time-build-ai-startup.html)
 
 ### 相关主题
 
 +   [超越天网：打造人工智能演变的下一个前沿](https://www.kdnuggets.com/beyond-skynet-crafting-the-next-frontier-in-ai-evolution)
 
-+   [SQL简化：用CTE编写模块化和易于理解的查询](https://www.kdnuggets.com/sql-simplified-crafting-modular-and-understandable-queries-with-ctes)
++   [SQL 简化：用 CTE 编写模块化和易于理解的查询](https://www.kdnuggets.com/sql-simplified-crafting-modular-and-understandable-queries-with-ctes)
 
-+   [12个建议：从数据分析师到初创公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
++   [12 个建议：从数据分析师到初创公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
 
-+   [在ChatGPT时代建立深科技初创公司的10个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
++   [在 ChatGPT 时代建立深科技初创公司的 10 个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
 
 +   [最佳文本分类任务架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)
 

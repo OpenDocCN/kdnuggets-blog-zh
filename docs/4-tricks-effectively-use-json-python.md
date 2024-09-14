@@ -1,12 +1,12 @@
 # 使用 JSON 在 Python 中的 4 个技巧
 
-> 原文：[https://www.kdnuggets.com/2020/09/4-tricks-effectively-use-json-python.html](https://www.kdnuggets.com/2020/09/4-tricks-effectively-use-json-python.html)
+> 原文：[`www.kdnuggets.com/2020/09/4-tricks-effectively-use-json-python.html`](https://www.kdnuggets.com/2020/09/4-tricks-effectively-use-json-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Erik van Baaren](https://medium.com/@eriky)，[Python 3 指南](https://python3.guide/)**
 
-![图示](../Images/126e2354b612ada101cd10cb652dc896.png)
+![图示](img/126e2354b612ada101cd10cb652dc896.png)
 
 作者插图
 
@@ -83,13 +83,13 @@ python3 -m json.tool
 
 旁注：如果你使用的是 Mac 或 Linux 并且有机会安装它，请查看一下 `jq` 命令行工具。它容易记住，能够为你的输出着色，并且具有大量额外功能，正如我在 [关于成为命令行高手的文章](https://towardsdatascience.com/this-will-make-you-a-command-line-ninja-93a51cdb16b1) 中所解释的那样。
 
-![图示](../Images/bd9c87b19426c42e16f3b2c85aa24f45.png)
+![图示](img/bd9c87b19426c42e16f3b2c85aa24f45.png)
 
 jq 默认会对你的 JSON 进行格式化输出
 
 ### 4\. 使用 JMESPath 搜索 JSON
 
-![图示](../Images/f3ce0370cfbe428e42c7aa78e160af16.png)
+![图示](img/f3ce0370cfbe428e42c7aa78e160af16.png)
 
 [截图](http://jmespath.org/) 作者
 
@@ -165,21 +165,21 @@ Python 3.8.2 (default, Jul 16 2020, 14:00:26)
 
 **相关：**
 
-+   [你应该知道的 3 个高级 Python 特性](/2020/07/3-advanced-python-features.html)
++   你应该知道的 3 个高级 Python 特性
 
-+   [为什么学习 Python？这里有 8 个数据驱动的理由](/2020/07/learn-python-8-data-driven-reasons.html)
++   为什么学习 Python？这里有 8 个数据驱动的理由
 
-+   [你不知道的 10 个 Scikit-Learn 事实](/2020/09/10-things-know-scikit-learn.html)
++   你不知道的 10 个 Scikit-Learn 事实
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 

@@ -1,6 +1,6 @@
 # 线性回归与逻辑回归：简明解释
 
-> 原文：[https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
+> 原文：[`www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html`](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
 它们都以字母‘L’开头并以回归结尾，因此人们可能会混淆它们是可以理解的。线性回归和逻辑回归是两种常用的机器学习算法，都源自于监督学习。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -28,7 +28,7 @@
 
 **回归**是关于通过寻找因变量和自变量之间的相关性来预测连续的输出。
 
-![线性回归与逻辑回归：简明解释](../Images/dfe7d0f607596f0c73af5c8853f1daf8.png)
+![线性回归与逻辑回归：简明解释](img/dfe7d0f607596f0c73af5c8853f1daf8.png)
 
 来源: [Javatpoint](https://www.javatpoint.com/regression-vs-classification-in-machine-learning)
 
@@ -46,9 +46,9 @@
 
 如果你还记得高中数学，你会记得公式：***y = mx + b***，它表示直线的斜率截距。‘y’和‘x’表示变量，‘m’描述直线的斜率，‘b’描述 y 轴截距，即直线穿过 y 轴的位置。
 
-对于线性回归，‘y’表示因变量，‘x’表示自变量，????0表示 y 轴截距，????1表示斜率，描述了自变量与因变量之间的关系。
+对于线性回归，‘y’表示因变量，‘x’表示自变量，????0 表示 y 轴截距，????1 表示斜率，描述了自变量与因变量之间的关系。
 
-![线性与逻辑回归的简明解释](../Images/e59fc95300b68f0d53ebd08222aade1d.png)
+![线性与逻辑回归的简明解释](img/e59fc95300b68f0d53ebd08222aade1d.png)
 
 来源：[TowardsDataScience](https://towardsdatascience.com/simple-linear-regression-in-python-numpy-only-130a988c0212)
 
@@ -62,13 +62,13 @@
 
 在逻辑回归中，加权输入的总和会通过一个称为 Sigmoid 函数的激活函数，该函数将值映射到 0 和 1 之间。
 
-![线性与逻辑回归的简明解释](../Images/b258e6d701fe7960fa34dde9514b8b22.png)
+![线性与逻辑回归的简明解释](img/b258e6d701fe7960fa34dde9514b8b22.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/Sigmoid_function)
 
 ## Sigmoid 函数的公式
 
-![线性与逻辑回归的简明解释](../Images/80ed0a68d4665eff4cd32d814bdde821.png)
+![线性与逻辑回归的简明解释](img/80ed0a68d4665eff4cd32d814bdde821.png)
 
 逻辑回归基于**最大似然估计**，这是一种在给定一些观测数据的情况下估计假设概率分布参数的方法。
 
@@ -86,7 +86,7 @@ MSE 衡量观察值的实际值和预测值之间的平均平方差。成本将�
 
 MSE 的公式：
 
-![线性回归与逻辑回归：简明解释](../Images/dc644e002638624a6007becd4e32f56a.png)
+![线性回归与逻辑回归：简明解释](img/dc644e002638624a6007becd4e32f56a.png)
 
 ## 逻辑回归
 
@@ -96,21 +96,21 @@ MSE 的公式：
 
 交叉熵的公式：
 
-![线性回归与逻辑回归：简明解释](../Images/f9276f5b5e3a1f671416c6cb4760d326.png)
+![线性回归与逻辑回归：简明解释](img/f9276f5b5e3a1f671416c6cb4760d326.png)
 
 # 线性回归与逻辑回归比较
 
 | **线性回归** | **逻辑回归** |
 | --- | --- |
 | 用于预测连续因变量，使用一组给定的自变量。 | 用于预测分类因变量，使用一组给定的自变量。 |
-| 产生的输出必须是连续值，如价格和年龄。 | 产生的输出必须是分类值，如0或1，是或否。 |
+| 产生的输出必须是连续值，如价格和年龄。 | 产生的输出必须是分类值，如 0 或 1，是或否。 |
 | 因变量和自变量之间的关系必须是线性的。 | 因变量和自变量之间的关系不需要是线性的。 |
 | 用于解决回归问题。 | 用于解决分类问题。 |
-| 我们找到并使用最佳拟合线来帮助我们轻松预测输出。 | 我们使用S曲线（Sigmoid）来帮助我们对预测输出进行分类。 |
+| 我们找到并使用最佳拟合线来帮助我们轻松预测输出。 | 我们使用 S 曲线（Sigmoid）来帮助我们对预测输出进行分类。 |
 | 最小二乘估计方法用于估计准确性。 | 最大似然估计方法用于估计准确性。 |
 | 自变量之间可能存在多重共线性。 | 自变量之间不应存在多重共线性。 |
 
-![线性回归与逻辑回归：简明解释](../Images/81e1998bc8155b36a9dcb92cd029857d.png)
+![线性回归与逻辑回归：简明解释](img/81e1998bc8155b36a9dcb92cd029857d.png)
 
 来源: [javatpoint](https://www.javatpoint.com/linear-regression-vs-logistic-regression-in-machine-learning)
 
@@ -118,7 +118,7 @@ MSE 的公式：
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻 22:n12, 3月23日: 最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12, 3 月 23 日: 最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
 
 +   [线性回归与逻辑回归比较](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 

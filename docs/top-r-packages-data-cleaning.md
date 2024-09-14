@@ -1,32 +1,32 @@
-# 数据清理的顶级R包
+# 数据清理的顶级 R 包
 
-> 原文：[https://www.kdnuggets.com/2019/03/top-r-packages-data-cleaning.html](https://www.kdnuggets.com/2019/03/top-r-packages-data-cleaning.html)
+> 原文：[`www.kdnuggets.com/2019/03/top-r-packages-data-cleaning.html`](https://www.kdnuggets.com/2019/03/top-r-packages-data-cleaning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Anna Kayfitz， [StrategicDB Corp](https://strategicdb.com)的首席执行官**
 
-![数据清理](../Images/6e43452bbd82d735a0d17ed0a8e59259.png)
+![数据清理](img/6e43452bbd82d735a0d17ed0a8e59259.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 随着每天有数百万或数十亿的数据元素进入你的业务，几乎不可避免地会有一些数据缺乏创建高效商业模型所需的质量。确保你的数据干净应该始终是数据科学工作流的第一步，也是最重要的一步，因为没有它，你将很难看到重要的信息，并可能因为重复、异常或缺失信息而做出错误的决策。
 
-R是最常用且功能强大的数据编程工具之一，它是一个用于统计计算和图形绘制的开源语言和环境。R为用户提供了创建数据科学项目所需的所有工具，但无论如何，它的效果取决于输入的数据。因此，R环境中有许多库可以帮助在项目开始之前进行数据清理和处理。
+R 是最常用且功能强大的数据编程工具之一，它是一个用于统计计算和图形绘制的开源语言和环境。R 为用户提供了创建数据科学项目所需的所有工具，但无论如何，它的效果取决于输入的数据。因此，R 环境中有许多库可以帮助在项目开始之前进行数据清理和处理。
 
 **探索数据**
 
-你导入的数据集中的大多数探索工具已经存在于R平台中。
+你导入的数据集中的大多数探索工具已经存在于 R 平台中。
 
 **总结（数据）**
 
@@ -34,9 +34,9 @@ R是最常用且功能强大的数据编程工具之一，它是一个用于统�
 
 紧接着，你可以使用直方图来更好地理解数据的分布。这将可视化显示数据集中或任何你特别希望观察的数值列中的异常值。
 
-**plyr包**
+**plyr 包**
 
-你需要安装plyr包来创建你的直方图，使用标准的R功能来安装库。
+你需要安装 plyr 包来创建你的直方图，使用标准的 R 功能来安装库。
 
 ```py
 
@@ -111,15 +111,15 @@ Na.omit(YOUR_DATA_COLUMN)
 
 +   **janitor 包**
 
-该包能够通过多个列找到重复项，并轻松从数据框中创建友好的列。它甚至具有一个get_dupes()函数，用于在多个数据行中查找重复值。如果你希望以更高级的方式去重数据，例如，查找不同的组合或使用模糊逻辑，你可能需要查看一个[去重工具](https://strategicdb.com/data-cleansing-services/deduping-tool/)。
+该包能够通过多个列找到重复项，并轻松从数据框中创建友好的列。它甚至具有一个 get_dupes()函数，用于在多个数据行中查找重复值。如果你希望以更高级的方式去重数据，例如，查找不同的组合或使用模糊逻辑，你可能需要查看一个[去重工具](https://strategicdb.com/data-cleansing-services/deduping-tool/)。
 
-+   **splitstackshape包**
++   **splitstackshape 包**
 
 这是一个较旧的包，可以处理数据框列中的逗号分隔值。对于调查或文本分析准备非常有用。
 
-R有大量的包，这篇文章仅触及了它的表面。随着新库不断出现，在开始任何新项目之前，进行研究并选择适合自己的包非常重要。
+R 有大量的包，这篇文章仅触及了它的表面。随着新库不断出现，在开始任何新项目之前，进行研究并选择适合自己的包非常重要。
 
-**简介**：Anna Kayfitz是[StrategicDB Corp](https://strategicdb.com)的首席执行官，该公司专注于数据清理和分析。她拥有Schulich商学院的MBA学位，并在创办StrategicDB之前在数据分析和营销领域工作了10多年。
+**简介**：Anna Kayfitz 是[StrategicDB Corp](https://strategicdb.com)的首席执行官，该公司专注于数据清理和分析。她拥有 Schulich 商学院的 MBA 学位，并在创办 StrategicDB 之前在数据分析和营销领域工作了 10 多年。
 
 **资源：**
 
@@ -131,17 +131,17 @@ R有大量的包，这篇文章仅触及了它的表面。随着新库不断出�
 
 +   [不要在孤立中进行分析](https://www.kdnuggets.com/2019/02/mode-dont-do-analysis-vacuum.html)
 
-+   [在Jupyter中运行R和Python](https://www.kdnuggets.com/2019/02/running-r-and-python-in-jupyter.html)
++   [在 Jupyter 中运行 R 和 Python](https://www.kdnuggets.com/2019/02/running-r-and-python-in-jupyter.html)
 
-+   [2018年数据科学和人工智能的7个顶级R包](https://www.kdnuggets.com/2019/01/vazquez-2018-top-7-r-packages.html)
++   [2018 年数据科学和人工智能的 7 个顶级 R 包](https://www.kdnuggets.com/2019/01/vazquez-2018-top-7-r-packages.html)
 
 ### 更多相关话题
 
-+   [2023年需要了解的顶级数据Python包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
++   [2023 年需要了解的顶级数据 Python 包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
 
-+   [3个用于数据可视化的Julia包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
++   [3 个用于数据可视化的 Julia 包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
 
-+   [5个用于地理空间数据分析的Python包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
++   [5 个用于地理空间数据分析的 Python 包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
 
 +   [SQL、Python、数据清理、数据整理和探索性数据分析的指南集合](https://www.kdnuggets.com/collection-of-guides-on-mastering-sql-python-data-cleaning-data-wrangling-and-exploratory-data-analysis)
 

@@ -1,8 +1,8 @@
 # 使用 SRU++ 降低 NLP 模型训练的高成本
 
-> 原文：[https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html](https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html)
+> 原文：[`www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html`](https://www.kdnuggets.com/2021/03/reducing-high-cost-training-nlp-models-sru.html)
 
-[评论](#comments)
+评论
 
 **由 [Tao Lei, PhD](https://www.asapp.com/blog/author/taolei/)，ASAPP 研究负责人和科学家撰写** 
 
@@ -34,7 +34,7 @@ Transformer [架构](https://arxiv.org/abs/1706.03762) 被提出以加速 NLP �
 
 针对之前的研究，我们通过将自注意力纳入 SRU 架构来增强其建模能力。图 1c 展示了结果架构 SRU++ 的简单示意图。
 
-![ASAPP - 图 1: SRU 和 SRU++ 网络的示意图。 (a) 原始 SRU 网络，(b) 使用投影技巧减少参数数量的 SRU 变体，Lei 等（2018）进行的实验，以及 (c) 本研究提出的 SRU++。数字表示中间输入/输出的隐藏尺寸。SRU 和 SRU++ 的更详细描述见我们的论文。](../Images/bc626d6b413b0cd5ff1e1564306c3101.png)
+![ASAPP - 图 1: SRU 和 SRU++ 网络的示意图。 (a) 原始 SRU 网络，(b) 使用投影技巧减少参数数量的 SRU 变体，Lei 等（2018）进行的实验，以及 (c) 本研究提出的 SRU++。数字表示中间输入/输出的隐藏尺寸。SRU 和 SRU++ 的更详细描述见我们的论文。](img/bc626d6b413b0cd5ff1e1564306c3101.png)
 
 图 1: SRU 和 SRU++ 网络的示意图。 (a) 原始 SRU 网络，(b) 使用投影技巧减少参数数量的 SRU 变体，Lei 等（2018）进行的实验，以及 (c) 本研究提出的 SRU++。数字表示中间输入/输出的隐藏尺寸。SRU 和 SRU++ 的更详细描述见我们的论文。
 
@@ -46,7 +46,7 @@ SRU++ 通过首先将输入投影到较小的维度来替代输入的线性映�
 
 我们在多个语言建模基准上评估了 SRU++，如 Enwik8 数据集。与 Transformer 模型（如 Transformer-XL）相比，SRU++ 可以在只使用一部分资源的情况下实现类似的结果。图 2 比较了两者在直接可比训练设置下的训练效率。SRU++ 的效率比 Transformer-XL 高 8.7 倍，并且达到 BPC（每字符位数）1.17 的效率提高了 5.1 倍。
 
-![ASAPP - 图 2：Enwik8 数据集上的开发 BPC 与用于训练的 GPU 小时数的关系。SRU++ 和 Transformer-XL 模型均具有 41-42M 参数，并使用 fp32 精度和可比设置（例如学习率）进行训练。](../Images/10af8624da3dff307c63e66480a869e8.png)图 2：Enwik8 数据集上的开发 BPC 与用于训练的 GPU 小时数的关系。SRU++ 和 Transformer-XL 模型均具有 41-42M 参数，并使用 fp32 精度和可比设置（例如学习率）进行训练。
+![ASAPP - 图 2：Enwik8 数据集上的开发 BPC 与用于训练的 GPU 小时数的关系。SRU++ 和 Transformer-XL 模型均具有 41-42M 参数，并使用 fp32 精度和可比设置（例如学习率）进行训练。](img/10af8624da3dff307c63e66480a869e8.png)图 2：Enwik8 数据集上的开发 BPC 与用于训练的 GPU 小时数的关系。SRU++ 和 Transformer-XL 模型均具有 41-42M 参数，并使用 fp32 精度和可比设置（例如学习率）进行训练。
 
 | **模型** | **数据集** | **结果** | **GPU 天数** |
 | --- | --- | --- | --- |
@@ -89,21 +89,21 @@ SRU++ 通过首先将输入投影到较小的维度来替代输入的线性映�
 
 **相关：**
 
-+   [Google 的模型搜索：一个利用神经网络构建神经网络的新开源框架](/2021/03/google-model-search-open-source-framework.html)
++   Google 的模型搜索：一个利用神经网络构建神经网络的新开源框架
 
-+   [深度学习先驱 Geoff Hinton 论他的最新研究与 AI 的未来](/2021/01/deep-learning-pioneer-geoff-hinton-research-future-ai.html)
++   深度学习先驱 Geoff Hinton 论他的最新研究与 AI 的未来
 
-+   [2011：DanNet 引发深度 CNN 革命](/2021/02/dannet-triggers-deep-cnn-revolution.html)
++   2011：DanNet 引发深度 CNN 革命
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -119,4 +119,4 @@ SRU++ 通过首先将输入投影到较小的维度来替代输入的线性映�
 
 +   [数据科学家的高薪副业](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)
 
-+   [AI的人才管理：构建高效能AI团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)
++   [AI 的人才管理：构建高效能 AI 团队](https://www.kdnuggets.com/2022/03/people-management-ai-building-highvelocity-ai-teams.html)

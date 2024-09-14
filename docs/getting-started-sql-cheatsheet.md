@@ -1,6 +1,6 @@
 # 开始使用 SQL 备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)
+> 原文：[`www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html`](https://www.kdnuggets.com/2022/08/getting-started-sql-cheatsheet.html)
 
 # 数据科学中的 SQL
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 你可以**[在这里下载备忘单](https://www.kdnuggets.com/publications/sheets/Getting-Started-with-SQL-Cheatsheet-KDnuggets.pdf)**。
 
-[![开始使用 SQL 备忘单](../Images/c127dbaa851f7c0550f15efdeaf2735e.png)](https://www.kdnuggets.com/publications/sheets/Getting-Started-with-SQL-Cheatsheet-KDnuggets.pdf)
+![开始使用 SQL 备忘单](https://www.kdnuggets.com/publications/sheets/Getting-Started-with-SQL-Cheatsheet-KDnuggets.pdf)
 
 # 开始使用 SQL 备忘单
 
@@ -46,4 +46,4 @@
 
 +   [数据科学的 Linux 速查表](https://www.kdnuggets.com/2022/11/linux-data-science-cheatsheet.html)
 
-+   [KDnuggets 新闻，11月30日：什么是切比雪夫定理及其应用…](https://www.kdnuggets.com/2022/n46.html)
++   [KDnuggets 新闻，11 月 30 日：什么是切比雪夫定理及其应用…](https://www.kdnuggets.com/2022/n46.html)

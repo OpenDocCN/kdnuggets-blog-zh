@@ -1,8 +1,8 @@
 # 合成数据生成：新数据科学家必须掌握的技能
 
-> 原文：[https://www.kdnuggets.com/2018/12/synthetic-data-generation-must-have-skill.html/2](https://www.kdnuggets.com/2018/12/synthetic-data-generation-must-have-skill.html/2)
+> 原文：[`www.kdnuggets.com/2018/12/synthetic-data-generation-must-have-skill.html/2`](https://www.kdnuggets.com/2018/12/synthetic-data-generation-must-have-skill.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/12/synthetic-data-generation-must-have-skill.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### **使用任意符号表达式生成数据**
 
@@ -14,7 +14,7 @@
 
 为了解决符号表达式输入的问题，可以轻松利用[令人惊叹的 Python 包 SymPy](https://www.sympy.org/en/index.html)，它允许理解、渲染和评估符号数学表达式，达到相当高的复杂度。
 
-![](../Images/6bfd02f8ccda1c3ae5bf9f0e19d6e80b.png)
+![](img/6bfd02f8ccda1c3ae5bf9f0e19d6e80b.png)
 
 在[我之前的一篇文章](https://towardsdatascience.com/random-regression-and-classification-problem-generation-with-symbolic-expression-a4e190e37b8d)中，我详细描述了如何利用 SymPy 库创建类似于 scikit-learn 中的函数，但可以生成具有高度复杂符号表达式的回归和分类数据集。请查看那篇文章，并访问我的[**Github 仓库获取实际代码**](https://github.com/tirthajyoti/PythonMachineLearning/tree/master/Random%20Function%20Generator)。
 
@@ -24,13 +24,13 @@
 
 例如，我们可以将一个平方项（***x*²**）和一个正弦项（***sin*(*x*)**）的符号表达式作为乘积，来创建一个随机化的回归数据集。
 
-![](../Images/85a946c10f2d59377173cf9ced391f6d.png)
+![](img/85a946c10f2d59377173cf9ced391f6d.png)
 
 **图**：使用符号表达式的随机回归数据集：***x².sin(x)***
 
 或者，可以生成一个非线性椭圆分类边界数据集，用于测试神经网络算法。**注意**，在下图中，用户如何输入**符号表达式**`m='x1**2-x2**2'`并生成该数据集。
 
-![](../Images/e92a957b3c2a0626847185e367d61588.png)
+![](img/e92a957b3c2a0626847185e367d61588.png)
 
 **图**：具有非线性分隔符的分类样本。
 
@@ -52,19 +52,19 @@
 
 你可以阅读上面的文章获取更多详细信息。在这里，我将展示几个简单的数据生成示例和截图，
 
-![](../Images/7b68a565290eb7b22817589d0588bab2.png)
+![](img/7b68a565290eb7b22817589d0588bab2.png)
 
 **图**：使用 pydbgen 库生成随机姓名。
 
 **生成一些国际电话号码，**
 
-![](../Images/8ab00b89d37ae786e20c1f9b3c199890.png)
+![](img/8ab00b89d37ae786e20c1f9b3c199890.png)
 
 **图**：使用 pydbgen 库生成随机电话号码。
 
 **生成一个包含随机姓名、地址、社会保险号等条目的完整数据框，**
 
-![](../Images/3339ae7875c412d6c20a422982e6cf64.png)
+![](img/3339ae7875c412d6c20a422982e6cf64.png)
 
 **图**：使用 pydbgen 库生成带有随机条目的完整数据框。
 
@@ -88,21 +88,21 @@
 
 **相关内容：**
 
-+   [IT 工程师需要学习多少数学才能进入数据科学？](/2017/12/mathematics-needed-learn-data-science-machine-learning.html)
++   IT 工程师需要学习多少数学才能进入数据科学？
 
-+   [数据科学的基础数学：‘为什么’和‘如何’](/2018/09/essential-math-data-science.html)
++   数据科学的基础数学：‘为什么’和‘如何’
 
-+   [15 分钟指南：选择有效的机器学习和数据科学课程](/2017/12/guide-effective-courses-machine-learning-data-science.html)
++   15 分钟指南：选择有效的机器学习和数据科学课程
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -119,45 +119,45 @@
 +   [合成数据平台：释放生成式人工智能的力量以…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
 
 +   [数据访问在大多数公司中严重不足，71%的人认为…](https://www.kdnuggets.com/2023/07/mostly-data-access-severely-lacking-synthetic-data-help.html)
-on中的机器学习**](https://scikit-learn.org/stable/)
+on 中的机器学习**](https://scikit-learn.org/stable/)
 
 这里是快速概述，
 
-[**回归问题生成**](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html)：Scikit-learn的`**dataset.make_regression**`函数可以创建具有任意输入特征数量、输出目标和可控信息耦合度的随机回归问题。它还可以混合高斯噪声。
+[**回归问题生成**](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_regression.html)：Scikit-learn 的`**dataset.make_regression**`函数可以创建具有任意输入特征数量、输出目标和可控信息耦合度的随机回归问题。它还可以混合高斯噪声。
 
-![](../Images/0bc690033731842204a0c602bf98cb90.png)
+![](img/0bc690033731842204a0c602bf98cb90.png)
 
-**图**：使用scikit-learn生成的随机回归问题，噪声程度不同。
+**图**：使用 scikit-learn 生成的随机回归问题，噪声程度不同。
 
 [**分类问题生成**](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_classification.html#sklearn.datasets.make_classification)：类似于上面的回归函数，`**dataset.make_classification**`生成一个具有可控类别分离度和添加噪声的随机多类别分类问题（数据集）。如果需要，你还可以随机翻转任何百分比的输出标记，以创建一个更难的分类数据集。
 
-![](../Images/7de9b85a3338a1bc169618f991b06178.png)
+![](img/7de9b85a3338a1bc169618f991b06178.png)
 
 **图**：使用 scikit-learn 生成随机分类问题，具有不同的类别分离。
 
 [**聚类问题生成**](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_blobs.html#sklearn.datasets.make_blobs)：有很多函数可以生成有趣的簇。最直接的一个是 `datasets.make_blobs`，它生成任意数量的簇，并且可以控制距离参数。
 
-![](../Images/586cc2772bbd0087827a7971c506762a.png)
+![](img/586cc2772bbd0087827a7971c506762a.png)
 
 **图**：使用 scikit-learn 生成简单的簇数据。
 
 **各向异性簇生成**：通过简单的矩阵乘法变换，你可以生成沿某些轴对齐或各向异性分布的簇。
 
-![](../Images/a0342b5ebd4f23d2628e3630ae3d59a2.png)
+![](img/a0342b5ebd4f23d2628e3630ae3d59a2.png)
 
 **图**：使用 scikit-learn 生成各向异性对齐的簇数据。
 
 [**同心环簇数据生成**](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_circles.html#sklearn.datasets.make_circles)：为了测试基于亲和力的聚类算法或高斯混合模型，生成特定形状的簇非常有用。我们可以使用 `**datasets.make_circles**` 函数来实现。
 
-![](../Images/838ef03e3a3116849d522691b90b4d7f.png)
+![](img/838ef03e3a3116849d522691b90b4d7f.png)
 
 当然，我们还可以在数据中加入一些噪声，以测试聚类算法的鲁棒性。
 
-![](../Images/dc20d13fbf864bb507951c35927cda2d.png)
+![](img/dc20d13fbf864bb507951c35927cda2d.png)
 
 [**月牙形簇数据生成**](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.make_moons.html#sklearn.datasets.make_moons)：我们还可以生成月牙形簇数据来测试算法，使用 `**datasets.make_moons**` 函数可以控制噪声。
 
-![](../Images/fd6d9a8f3c4d66c94a0ba69cad0ec68b.png)
+![](img/fd6d9a8f3c4d66c94a0ba69cad0ec68b.png)
 
 ### 更多相关主题
 

@@ -1,8 +1,8 @@
 # 7 步骤掌握 pandas 和 Python 的数据整理
 
-> 原文：[https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)
+> 原文：[`www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python`](https://www.kdnuggets.com/7-steps-to-mastering-data-wrangling-with-pandas-and-python)
 
-![7 步骤掌握 pandas 和 Python 的数据整理](../Images/ff0b15afe644696456cd7f6fe13a1582.png)
+![7 步骤掌握 pandas 和 Python 的数据整理](img/ff0b15afe644696456cd7f6fe13a1582.png)
 
 使用 DALLE 3 生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
@@ -80,13 +80,13 @@ SQL 是数据分析的必备工具；**那么学习 SQL 如何帮助你学习 pa
 
 +   **从 Parquet 文件中读取数据**：了解 `pd.read_parquet()` 函数，它允许您从 Parquet 文件（一种列式存储文件格式）中导入数据。学习 Parquet 文件如何在大数据处理和分析中提供优势。
 
-+   **从关系数据库表中导入数据**：了解`pd.read_sql()`函数，它允许你从关系数据库查询数据并将其加载到数据框中。了解如何建立数据库连接、执行SQL查询，并直接将数据提取到pandas中。
++   **从关系数据库表中导入数据**：了解`pd.read_sql()`函数，它允许你从关系数据库查询数据并将其加载到数据框中。了解如何建立数据库连接、执行 SQL 查询，并直接将数据提取到 pandas 中。
 
-我们现在已经学习了如何将数据集加载到pandas数据框中。那么接下来呢？
+我们现在已经学习了如何将数据集加载到 pandas 数据框中。那么接下来呢？
 
-# 第3步：选择行和列，筛选数据框
+# 第 3 步：选择行和列，筛选数据框
 
-接下来，你应该学习如何从pandas数据框中选择特定的行和列，以及如何根据特定标准筛选数据。学习这些技巧对于数据处理和从数据集中提取相关信息至关重要。
+接下来，你应该学习如何从 pandas 数据框中选择特定的行和列，以及如何根据特定标准筛选数据。学习这些技巧对于数据处理和从数据集中提取相关信息至关重要。
 
 ## 索引和切片数据框
 
@@ -108,21 +108,21 @@ SQL 是数据分析的必备工具；**那么学习 SQL 如何帮助你学习 pa
 
 +   **组合过滤器**：学习如何使用逻辑运算符如'&'（和）、'|'（或）和'~'（非）组合多个过滤器。这将使你能够创建更复杂的筛选条件。
 
-+   **使用isin()**：学习使用`isin()`方法根据值是否在指定列表中进行数据筛选。这对提取某列值匹配任何提供项的行非常有用。
++   **使用 isin()**：学习使用`isin()`方法根据值是否在指定列表中进行数据筛选。这对提取某列值匹配任何提供项的行非常有用。
 
-通过学习本步骤中概述的概念，你将能够有效地从pandas数据框中选择和筛选数据，从而提取出最相关的信息。
+通过学习本步骤中概述的概念，你将能够有效地从 pandas 数据框中选择和筛选数据，从而提取出最相关的信息。
 
 ## 关于资源的快速说明
 
-对于第3到第6步，你可以使用以下资源进行学习和实践：
+对于第 3 到第 6 步，你可以使用以下资源进行学习和实践：
 
-+   [10分钟了解pandas - pandas用户指南](https://pandas.pydata.org/docs/user_guide/10min.html)
++   [10 分钟了解 pandas - pandas 用户指南](https://pandas.pydata.org/docs/user_guide/10min.html)
 
-+   [通过实例学习Pandas和Python数据分析 - freeCodeCamp](https://www.youtube.com/watch?v=gtjxAH8uaP0)
++   [通过实例学习 Pandas 和 Python 数据分析 - freeCodeCamp](https://www.youtube.com/watch?v=gtjxAH8uaP0)
 
 +   [Intro to pandas - Kaggle Learn](https://www.kaggle.com/learn/pandas)
 
-# 第4步：探索和清理数据集
+# 第 4 步：探索和清理数据集
 
 到目前为止，你已经知道如何将数据加载到 pandas 数据框中，选择列和过滤数据框。在这一步，你将学习如何使用 pandas 探索和清理数据集。
 

@@ -1,8 +1,8 @@
 # 数据科学是一个即将破裂的泡沫吗？
 
-> 原文：[https://www.kdnuggets.com/is-data-science-a-bubble-waiting-to-burst](https://www.kdnuggets.com/is-data-science-a-bubble-waiting-to-burst)
+> 原文：[`www.kdnuggets.com/is-data-science-a-bubble-waiting-to-burst`](https://www.kdnuggets.com/is-data-science-a-bubble-waiting-to-burst)
 
-![数据科学是一个即将破裂的泡沫吗](../Images/3a5a5c89206054d16f7ec014b8e1be4e.png)
+![数据科学是一个即将破裂的泡沫吗](img/3a5a5c89206054d16f7ec014b8e1be4e.png)
 
 图片由作者提供
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -40,57 +40,57 @@
 
 现在我们可以开始深入探讨一些细节。人们指出的泡沫破裂或即将破裂的最初迹象是数据科学领域的大规模裁员。
 
-确实，数据看起来不太乐观。从2022年开始，直到2024年，技术领域总体上[经历了](https://techcrunch.com/2024/03/27/tech-layoffs-2023-list/) 430,000次裁员。很难从这些数据中分离出数据科学特定的数据，但最佳估计是约30%的裁员发生在数据科学和工程领域。
+确实，数据看起来不太乐观。从 2022 年开始，直到 2024 年，技术领域总体上[经历了](https://techcrunch.com/2024/03/27/tech-layoffs-2023-list/) 430,000 次裁员。很难从这些数据中分离出数据科学特定的数据，但最佳估计是约 30%的裁员发生在数据科学和工程领域。
 
-![数据科学是否是一个即将破裂的泡沫](../Images/4014696b35351812886515d533505fe4.png)
+![数据科学是否是一个即将破裂的泡沫](img/4014696b35351812886515d533505fe4.png)
 
-来源：[https://techcrunch.com/2024/04/05/tech-layoffs-2023-list/](https://techcrunch.com/2024/04/05/tech-layoffs-2023-list/)
+来源：[`techcrunch.com/2024/04/05/tech-layoffs-2023-list/`](https://techcrunch.com/2024/04/05/tech-layoffs-2023-list/)
 
-然而，这并不是数据科学的泡沫破裂。它的范围稍微小一些——这是一个*疫情*泡沫破裂。在2020年，随着更多人待在家中，利润上升，资金便宜，FAANG及其相关公司吸纳了创纪录数量的技术工人，但仅仅几年后就裁掉了其中许多人。
+然而，这并不是数据科学的泡沫破裂。它的范围稍微小一些——这是一个*疫情*泡沫破裂。在 2020 年，随着更多人待在家中，利润上升，资金便宜，FAANG 及其相关公司吸纳了创纪录数量的技术工人，但仅仅几年后就裁掉了其中许多人。
 
 如果你缩小视角，看看招聘和裁员的整体情况，你会发现后疫情时期的低迷是整体上升趋势中的一个下滑，现在甚至开始恢复：
 
-![数据科学是否是一个即将破裂的泡沫](../Images/7e8cccf1d2c189c3c8cbf9afa50269ac.png)
+![数据科学是否是一个即将破裂的泡沫](img/7e8cccf1d2c189c3c8cbf9afa50269ac.png)
 
-来源：[https://www.statista.com/](https://www.statista.com/statistics/199999/worldwide-tech-layoffs-covid-19/#:~:text=The%20technology%20sector%20experienced%20a%20record%20high,rounds%20of%20layoffs%20within%20the%20same%20period)
+来源：[`www.statista.com/`](https://www.statista.com/statistics/199999/worldwide-tech-layoffs-covid-19/#:~:text=The%20technology%20sector%20experienced%20a%20record%20high,rounds%20of%20layoffs%20within%20the%20same%20period)
 
-你可以清楚地看到，2020年市场紧缩时技术裁员大幅减少，然后从2022年第一季度开始裁员急剧上升。现在，到2024年，裁员数量比2023年要少。
+你可以清楚地看到，2020 年市场紧缩时技术裁员大幅减少，然后从 2022 年第一季度开始裁员急剧上升。现在，到 2024 年，裁员数量比 2023 年要少。
 
 ## **职位空缺**
 
-另一个常被提及的令人担忧的数据是FAANG公司将职位空缺减少了90%或更多。再次，这主要是对疫情期间职位空缺数量激增的反应。
+另一个常被提及的令人担忧的数据是 FAANG 公司将职位空缺减少了 90%或更多。再次，这主要是对疫情期间职位空缺数量激增的反应。
 
-尽管如此，技术领域的职位空缺仍低于疫情前水平。下面，你可以看到一张调整后的图表，显示了相对于2020年2月的技术职位需求。可以明显看出，技术领域遭受了一个打击，短期内难以恢复。
+尽管如此，技术领域的职位空缺仍低于疫情前水平。下面，你可以看到一张调整后的图表，显示了相对于 2020 年 2 月的技术职位需求。可以明显看出，技术领域遭受了一个打击，短期内难以恢复。
 
-![数据科学是否是一个即将破裂的泡沫](../Images/48c77cb5a80aee006fcc46744449f1f8.png)
+![数据科学是否是一个即将破裂的泡沫](img/48c77cb5a80aee006fcc46744449f1f8.png)
 
-来源：[https://www.hiringlab.org/2024/02/20/labor-market-update-tech-jobs-below-pre-pandemic-levels/](https://www.hiringlab.org/2024/02/20/labor-market-update-tech-jobs-below-pre-pandemic-levels/)
+来源：[`www.hiringlab.org/2024/02/20/labor-market-update-tech-jobs-below-pre-pandemic-levels/`](https://www.hiringlab.org/2024/02/20/labor-market-update-tech-jobs-below-pre-pandemic-levels/)
 
-然而，让我们更详细地查看一些实际数据。查看下面的图表，尽管职位空缺明显低于2022年的高峰，但整体职位空缺数量实际上在增加——比最低点增长了32.4%。
+然而，让我们更详细地查看一些实际数据。查看下面的图表，尽管职位空缺明显低于 2022 年的高峰，但整体职位空缺数量实际上在增加——比最低点增长了 32.4%。
 
-![数据科学是否是一个即将破裂的泡沫](../Images/f54e3b374b4643af554212d923bea873.png)
+![数据科学是否是一个即将破裂的泡沫](img/f54e3b374b4643af554212d923bea873.png)
 
-来源：[https://www.trueup.io/job-trend](https://www.trueup.io/job-trend)
+来源：[`www.trueup.io/job-trend`](https://www.trueup.io/job-trend)
 
 ## **叙事**
 
-如果你查看任何在线的劳动力和新闻报告，你会看到目前正发生一些反对远程工作和反对技术的逆流。Meta、谷歌以及其他FAANG公司，由于害怕员工在疫情高峰期间享有的谈判权力，现在推动办公室复工命令（数据科学职位和其他技术职位通常是远程的），并根据他们的收入和利润报告，裁员数量有些不必要。
+如果你查看任何在线的劳动力和新闻报告，你会看到目前正发生一些反对远程工作和反对技术的逆流。Meta、谷歌以及其他 FAANG 公司，由于害怕员工在疫情高峰期间享有的谈判权力，现在推动办公室复工命令（数据科学职位和其他技术职位通常是远程的），并根据他们的收入和利润报告，裁员数量有些不必要。
 
-举个例子，谷歌母公司Alphabet [裁员](https://www.theverge.com/2024/1/30/24056132/google-spent-two-billion-on-layoffs-severance-fourth-quarter-earnings-2023)了超过12,000名员工，尽管其广告、云计算和服务部门都有增长。
+举个例子，谷歌母公司 Alphabet [裁员](https://www.theverge.com/2024/1/30/24056132/google-spent-two-billion-on-layoffs-severance-fourth-quarter-earnings-2023)了超过 12,000 名员工，尽管其广告、云计算和服务部门都有增长。
 
 这只是审视数据的一个方面，但公司进行裁员的部分原因更多是为了让董事会满意，而不是因为对数据科学家的需求减少。
 
 ## **需求**
 
-我发现，那些认为我们处于数据科学泡沫中的人，往往是不真正了解数据科学家工作的人。想想那个BLS统计数据，问问自己：为什么这个信息充分的政府机构相信这个行业有强劲的增长？
+我发现，那些认为我们处于数据科学泡沫中的人，往往是不真正了解数据科学家工作的人。想想那个 BLS 统计数据，问问自己：为什么这个信息充分的政府机构相信这个行业有强劲的增长？
 
-因为*数据科学家*的需求无法消失。虽然职位名称可能会改变——例如AI专家或ML云专家而非数据科学家——但数据科学家执行的技能和任务无法外包、删除、减少或自动化。
+因为*数据科学家*的需求无法消失。虽然职位名称可能会改变——例如 AI 专家或 ML 云专家而非数据科学家——但数据科学家执行的技能和任务无法外包、删除、减少或自动化。
 
 例如，预测模型对企业预测销售、预测客户行为、管理库存和预见市场趋势至关重要。这使得公司能够做出明智的决策，战略性地规划未来，并保持竞争优势。
 
 在金融领域，数据科学在识别可疑活动、预防欺诈和降低风险方面发挥着至关重要的作用。高级算法分析交易模式，以检测可能表明欺诈的异常现象，从而帮助保护企业和消费者。
 
-NLP使机器能够理解和解释人类语言，推动了像聊天机器人、情感分析和语言翻译服务这样的应用。这对于改善客户服务、分析社交媒体情感和促进全球沟通至关重要。
+NLP 使机器能够理解和解释人类语言，推动了像聊天机器人、情感分析和语言翻译服务这样的应用。这对于改善客户服务、分析社交媒体情感和促进全球沟通至关重要。
 
 我可以列出更多的例子来证明数据科学不是一种时尚，数据科学家的需求将永远存在。
 
@@ -98,7 +98,7 @@ NLP使机器能够理解和解释人类语言，推动了像聊天机器人、�
 
 回到我之前的例子，感觉我们正处于一个泡沫中，泡沫要么正在破裂，要么即将破裂的部分原因是对数据科学作为职业的看法。
 
-早在2011年，《哈佛商业评论》曾著名地称之为十年来最性感的职业。在此后的几年里，公司雇用了比他们知道如何处理的更多的“数据科学家”，经常对数据科学家实际的工作内容感到不确定。
+早在 2011 年，《哈佛商业评论》曾著名地称之为十年来最性感的职业。在此后的几年里，公司雇用了比他们知道如何处理的更多的“数据科学家”，经常对数据科学家实际的工作内容感到不确定。
 
 现在，时隔十五年，这个领域变得更加成熟。雇主们明白数据科学是一个广泛的领域，更加关注聘用机器学习专家、数据管道工程师、云计算工程师、统计学家以及其他广泛归于数据科学范畴但更为专业的职位。
 
@@ -110,7 +110,7 @@ NLP使机器能够理解和解释人类语言，推动了像聊天机器人、�
 
 如果你对数据科学了解不多，你可能会猜测公司可以简单地“自动化”这些工作，甚至可以不去做。但如果你了解数据科学家实际的工作内容，你会明白，这份工作现在是不可替代的。
 
-想象一下2010年代的情况：我谈到的那个人，凭借对数据工具的基本了解，迅速进入了一个高薪的职业。现在情况不再如此，但这种重新校准并不是一些人认为的泡沫破裂的迹象。相反，这是数据科学领域的成熟。虽然初级数据科学领域可能已经饱和，但对于那些具备专业技能、深厚知识和实际经验的人来说，这个领域依然广阔。
+想象一下 2010 年代的情况：我谈到的那个人，凭借对数据工具的基本了解，迅速进入了一个高薪的职业。现在情况不再如此，但这种重新校准并不是一些人认为的泡沫破裂的迹象。相反，这是数据科学领域的成熟。虽然初级数据科学领域可能已经饱和，但对于那些具备专业技能、深厚知识和实际经验的人来说，这个领域依然广阔。
 
 此外，关于“泡沫”的叙述源于对泡沫实际含义的误解。泡沫发生在某物的价值（在这种情况下，是职业领域）由投机驱动而非实际内在价值。然而，正如我们所讨论的，数据科学的价值主张是实在且可衡量的。公司需要数据科学家，简单明了。这里没有投机成分。
 
@@ -122,18 +122,18 @@ NLP使机器能够理解和解释人类语言，推动了像聊天机器人、�
 
 如果你想从事数据科学工作，就去做吧。我们实际上处于泡沫中的机会非常小。你可以做的最好的事情是，如我所示，选择你的专业领域并在该领域发展你的技能。数据科学是一个广泛的领域，涉及不同的行业、语言、职位名称、职责和资历。选择一个专业领域，训练技能，为面试做准备，并确保获得工作。
 
-[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一名数据科学家和产品策略专家。他还是一位兼职教授，教授分析学，并且是StrataScratch的创始人，这个平台帮助数据科学家通过顶级公司的真实面试问题准备面试。内特撰写关于职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有与SQL相关的内容。
+[](https://twitter.com/StrataScratch)****[内特·罗西迪](https://twitter.com/StrataScratch)****是一名数据科学家和产品策略专家。他还是一位兼职教授，教授分析学，并且是 StrataScratch 的创始人，这个平台帮助数据科学家通过顶级公司的真实面试问题准备面试。内特撰写关于职业市场最新趋势的文章，提供面试建议，分享数据科学项目，并涵盖所有与 SQL 相关的内容。
 
 ### 更多相关话题
 
-+   [生成性AI泡沫即将破裂](https://www.kdnuggets.com/the-generative-ai-bubble-will-burst-soon)
++   [生成性 AI 泡沫即将破裂](https://www.kdnuggets.com/the-generative-ai-bubble-will-burst-soon)
 
-+   [从Dot com到Dot AI：新的科技泡沫？](https://www.kdnuggets.com/dot-com-to-dot-ai-new-tech-bubble)
++   [从 Dot com 到 Dot AI：新的科技泡沫？](https://www.kdnuggets.com/dot-com-to-dot-ai-new-tech-bubble)
 
 +   [停止学习数据科学以寻找目标，并寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学最基础：你需要知道的10项基本技能…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学最基础：你需要知道的 10 项基本技能…](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06, 2月 9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
 
 +   [数据科学定义幽默：一系列古怪的名言…](https://www.kdnuggets.com/2022/02/data-science-definition-humor.html)

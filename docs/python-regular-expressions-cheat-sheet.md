@@ -1,8 +1,8 @@
 # Python 正则表达式备忘单
 
-> 原文：[https://www.kdnuggets.com/2018/04/python-regular-expressions-cheat-sheet.html](https://www.kdnuggets.com/2018/04/python-regular-expressions-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2018/04/python-regular-expressions-cheat-sheet.html`](https://www.kdnuggets.com/2018/04/python-regular-expressions-cheat-sheet.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Alex Yang](https://twitter.com/alexalexyang) 提供，Dataquest**
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-[![python-regular-expressions-cheatsheet_pic](../Images/bf77777d0f58aa462437128796d1ca94.png)](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
+![python-regular-expressions-cheatsheet_pic](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
 
 [在这里下载备忘单](https://www.dataquest.io/blog/large_files/python-regular-expressions-cheat-sheet.pdf)
 
@@ -36,11 +36,11 @@
 
 `A|B` | 匹配表达式`A`或`B`。如果`A`首先匹配，则`B`将不会被尝试。
 
-`+` | 贪婪地匹配其左侧的表达式1次或多次。
+`+` | 贪婪地匹配其左侧的表达式 1 次或多次。
 
-`*` | 贪婪地匹配其左侧的表达式0次或多次。
+`*` | 贪婪地匹配其左侧的表达式 0 次或多次。
 
-`?` | 贪婪地匹配其左侧的表达式0次或1次。但是，如果`?`被添加到限定符（`+`、`*`和`?`本身）中，它将以非贪婪的方式进行匹配。
+`?` | 贪婪地匹配其左侧的表达式 0 次或 1 次。但是，如果`?`被添加到限定符（`+`、`*`和`?`本身）中，它将以非贪婪的方式进行匹配。
 
 `{m}` | 匹配其左侧的表达式`m`次，并不少于。
 
@@ -138,9 +138,9 @@
 
 `re.sub(A, B, C)` | 在字符串`C`中将`A`替换为`B`。
 
-**Python用户的有用正则表达式网站**
+**Python 用户的有用正则表达式网站**
 
-+   [Python 3 re模块文档](https://docs.python.org/3/library/re.html)
++   [Python 3 re 模块文档](https://docs.python.org/3/library/re.html)
 
 +   [在线正则表达式测试器和调试器](https://regex101.com/)
 
@@ -150,22 +150,22 @@
 
 **相关：**
 
-+   [30份重要的数据科学、机器学习与深度学习备忘单](/2017/09/essential-data-science-machine-learning-deep-learning-cheat-sheets.html)
++   30 份重要的数据科学、机器学习与深度学习备忘单
 
-+   [Python中的函数式编程介绍](/2018/02/introduction-functional-programming-python.html)
++   Python 中的函数式编程介绍
 
-+   [文本数据预处理：Python中的操作指南](/2018/03/text-data-preprocessing-walkthrough-python.html)
++   文本数据预处理：Python 中的操作指南
 
 ### 更多相关主题
 
-+   [用Python掌握正则表达式](https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html)
++   [用 Python 掌握正则表达式](https://www.kdnuggets.com/2023/08/mastering-regular-expressions-python.html)
 
-+   [数据清洗中使用正则表达式的5个技巧](https://www.kdnuggets.com/5-tips-for-using-regular-expressions-in-data-cleaning)
++   [数据清洗中使用正则表达式的 5 个技巧](https://www.kdnuggets.com/5-tips-for-using-regular-expressions-in-data-cleaning)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)

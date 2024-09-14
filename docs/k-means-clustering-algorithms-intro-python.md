@@ -1,6 +1,6 @@
 # K-Means 和其他聚类算法：使用 Python 的快速介绍
 
-> 原文：[https://www.kdnuggets.com/2017/03/k-means-clustering-algorithms-intro-python.html](https://www.kdnuggets.com/2017/03/k-means-clustering-algorithms-intro-python.html)
+> 原文：[`www.kdnuggets.com/2017/03/k-means-clustering-algorithms-intro-python.html`](https://www.kdnuggets.com/2017/03/k-means-clustering-algorithms-intro-python.html)
 
 **Nikos Koufos，[LearnDataSci](http://www.learndatasci.com/) 作者。**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 对于聚类问题，我们将使用著名的 *Zachary’s Karate Club* 数据集。数据集背后的故事很简单：曾经有一个空手道俱乐部，俱乐部中有一位管理员“John A”和一位教练“Mr. Hi”（均为化名）。然后他们之间发生了冲突，导致学生（节点）分成了两组。一组跟随 John，另一组跟随 Mr. Hi。
 
-![空手道俱乐部聚类的可视化](../Images/f34f92e5fccc0a8debafe667480bffb6.png)
+![空手道俱乐部聚类的可视化](img/f34f92e5fccc0a8debafe667480bffb6.png)
 
 来源：[维基百科](https://en.wikipedia.org/wiki/Zachary's_karate_club)
 
@@ -103,9 +103,9 @@ def drawCommunities(G, partition, pos):
 
 ```
 
-这个函数的作用是简单地提取结果中的聚类数量，然后为每个聚类分配不同的颜色（对于给定时间最多10个颜色即可），然后进行绘图。
+这个函数的作用是简单地提取结果中的聚类数量，然后为每个聚类分配不同的颜色（对于给定时间最多 10 个颜色即可），然后进行绘图。
 
-![zacharys karate club cluster nodes](../Images/3f4fd1bd77a0f8eccd8114e9294a882b.png)
+![zacharys karate club cluster nodes](img/3f4fd1bd77a0f8eccd8114e9294a882b.png)
 
 ### 聚类算法
 
@@ -113,7 +113,7 @@ def drawCommunities(G, partition, pos):
 
 **K-均值聚类**
 
-![k-means clustering](../Images/2320bd58c7dced4d4b53fa875a2d2e61.png)
+![k-means clustering](img/2320bd58c7dced4d4b53fa875a2d2e61.png)
 
 来源：[github.com/nitoyon/tech.nitoyon.com](https://github.com/nitoyon/tech.nitoyon.com)
 
@@ -186,13 +186,13 @@ for x in results:
 
 **归一化互信息（NMI）**
 
-两个随机变量的互信息是衡量这两个变量之间相互依赖的度量。归一化互信息是对互信息（MI）得分进行归一化，将结果缩放到0（无互信息）到1（完美相关）之间。换句话说，0表示不相似，1表示完全匹配。
+两个随机变量的互信息是衡量这两个变量之间相互依赖的度量。归一化互信息是对互信息（MI）得分进行归一化，将结果缩放到 0（无互信息）到 1（完美相关）之间。换句话说，0 表示不相似，1 表示完全匹配。
 
 **调整兰德指数（ARS）**
 
-调整兰德指数则通过考虑所有样本对，并统计在预测和真实聚类中分配到相同或不同聚类的样本对，来计算两个聚类之间的相似度。如果这有点难以理解，请记住，目前的0表示最低相似度，而1表示最高相似度。
+调整兰德指数则通过考虑所有样本对，并统计在预测和真实聚类中分配到相同或不同聚类的样本对，来计算两个聚类之间的相似度。如果这有点难以理解，请记住，目前的 0 表示最低相似度，而 1 表示最高相似度。
 
-因此，为了得到这些指标（NMI和ARS）的组合，我们只需计算它们总和的平均值。记住，数值越高，结果越好。
+因此，为了得到这些指标（NMI 和 ARS）的组合，我们只需计算它们总和的平均值。记住，数值越高，结果越好。
 
 下面，我绘制了评分评估图，以便我们能更好地理解我们的结果。我们可以用很多方式绘制它们，比如点图、折线图，但我认为条形图在我们的情况下更好。为此，只需使用以下代码：
 
@@ -232,13 +232,13 @@ plt.show()
 
 ```
 
-正如你在下方图表中看到的，K-means和层次聚类在我们的数据集中表现最佳（最佳可能结果）。当然，这并不意味着谱聚类和AF算法表现较差，只是它们不适合我们的数据。
+正如你在下方图表中看到的，K-means 和层次聚类在我们的数据集中表现最佳（最佳可能结果）。当然，这并不意味着谱聚类和 AF 算法表现较差，只是它们不适合我们的数据。
 
-![聚类评分评估](../Images/bc767fb2612fb0eac38cb7a8b335e5bb.png)
+![聚类评分评估](img/bc767fb2612fb0eac38cb7a8b335e5bb.png)
 
 好了，这就是全部内容！
 
-感谢你参与这个聚类入门。我希望你在观察如何轻松操作公共数据集并在Python中应用几种不同的聚类算法时，能够发现一些价值。如果你有任何问题，请在下方评论区告诉我，也可以随意附上你尝试过的聚类项目！
+感谢你参与这个聚类入门。我希望你在观察如何轻松操作公共数据集并在 Python 中应用几种不同的聚类算法时，能够发现一些价值。如果你有任何问题，请在下方评论区告诉我，也可以随意附上你尝试过的聚类项目！
 
 **个人简介：尼科斯·库福斯** 是 **[LearnDataSci](http://www.learndatasci.com/)** 的作者，希腊伊奥尼纳大学计算机科学与工程研究生，并担任计算机科学本科教学助理。
 
@@ -246,22 +246,22 @@ plt.show()
 
 **相关：**
 
-+   [比较聚类技术：简明技术概述](/2016/09/comparing-clustering-techniques-concise-technical-overview.html)
++   比较聚类技术：简明技术概述
 
-+   [使用聚类自动分割数据](/2017/02/automatically-segmenting-data-clustering.html)
++   使用聚类自动分割数据
 
-+   [聚类关键术语解析](/2016/10/clustering-key-terms-explained.html)
++   聚类关键术语解析
 
 ### 更多相关主题
 
-+   [聚类释放：理解k-means 聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
++   [聚类释放：理解 k-means 聚类](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
 
 +   [k-means 聚类的质心初始化方法](https://www.kdnuggets.com/2020/06/centroid-initialization-k-means-clustering.html)
 
-+   [什么是k-means 聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
++   [什么是 k-means 聚类及其算法如何工作？](https://www.kdnuggets.com/2023/05/kmeans-clustering-algorithm-work.html)
 
 +   [动手实践无监督学习：k-means 聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
 
 +   [快速指南：如何找到适合注释的头脑](https://www.kdnuggets.com/2022/04/quick-guide-find-right-minds-annotation.html)
 
-+   [快速数据科学技巧和窍门以学习SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)
++   [快速数据科学技巧和窍门以学习 SAS](https://www.kdnuggets.com/2022/05/sas-quick-data-science-tips-tricks-learn.html)

@@ -1,8 +1,8 @@
 # 使用深度神经网络构建音频分类器
 
-> 原文：[https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html](https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html)
+> 原文：[`www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html`](https://www.kdnuggets.com/2017/12/audio-classifier-deep-neural-networks.html)
 
-[评论](/2017/12/audio-classifier-deep-neural-networks.html/#comments)
+评论
 
 **作者** [Narayan Srinivasan](https://www.linkedin.com/in/narayansrinivasan97/)。
 
@@ -14,7 +14,7 @@
 
 **步骤 1\. 提取特征**
 
-尽管深度学习消除了对手工设计特征的需求，但我们仍然需要为数据选择一个表示模型。我们没有直接使用音频文件作为振幅与时间信号，而是使用具有128个组件（频带）的对数尺度mel频谱图，覆盖听觉频率范围（0-22050 Hz），使用23毫秒（44.1 kHz下的1024个样本）的窗口大小和相同持续时间的跳跃大小。这种转换考虑到人耳以对数尺度听取声音，且人耳蜗对频率相近的声音区分度不高。随着频率的增加，这种效应变得更强。因此，我们仅考虑不同频带的功率。这个示例代码提供了将音频文件转换为频谱图图像的见解。我们使用了glob和librosa库 - 这段代码是转换为频谱图的标准代码，你可以根据需要进行修改。
+尽管深度学习消除了对手工设计特征的需求，但我们仍然需要为数据选择一个表示模型。我们没有直接使用音频文件作为振幅与时间信号，而是使用具有 128 个组件（频带）的对数尺度 mel 频谱图，覆盖听觉频率范围（0-22050 Hz），使用 23 毫秒（44.1 kHz 下的 1024 个样本）的窗口大小和相同持续时间的跳跃大小。这种转换考虑到人耳以对数尺度听取声音，且人耳蜗对频率相近的声音区分度不高。随着频率的增加，这种效应变得更强。因此，我们仅考虑不同频带的功率。这个示例代码提供了将音频文件转换为频谱图图像的见解。我们使用了 glob 和 librosa 库 - 这段代码是转换为频谱图的标准代码，你可以根据需要进行修改。
 
 在接下来的代码中，
 
@@ -24,23 +24,23 @@ sub_dirs = 要探索的父目录内的目录列表
 
 因此，所有位于 area parent_dir/sub_dirs/*.wav 的 *.wav 文件被提取，遍历所有子目录。
 
-对于感兴趣的人，有一篇关于mel尺度和mfcc系数的有趣文章。 [Ref](https://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/)。
+对于感兴趣的人，有一篇关于 mel 尺度和 mfcc 系数的有趣文章。 [Ref](https://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/)。
 
 现在，音频文件被表示为一个 128（帧）x 128（频带）的频谱图图像。
 
-![音频分类代码](../Images/794b6ba0f37b7c82566bca64995ba0b0.png)
+![音频分类代码](img/794b6ba0f37b7c82566bca64995ba0b0.png)
 
-![](../Images/ffb438457a621ff28aa5db91e4ef8223.png)
+![](img/ffb438457a621ff28aa5db91e4ef8223.png)
 
 音频分类问题现在被转化为图像分类问题。我们需要检测图像中是否存在特定实体（‘狗’、‘猫’、‘车’等）。
 
 **步骤 2：选择架构**
 
-我们使用卷积神经网络（CNN）来分类频谱图图像。这是因为CNN在检测图像中不同部分的局部特征模式（例如边缘）方面表现更好，并且在捕捉逐层变得越来越复杂的层次特征方面也很擅长，如图中所示。
+我们使用卷积神经网络（CNN）来分类频谱图图像。这是因为 CNN 在检测图像中不同部分的局部特征模式（例如边缘）方面表现更好，并且在捕捉逐层变得越来越复杂的层次特征方面也很擅长，如图中所示。
 
-![](../Images/03c83c4f60de3b6acb959d2753c28df5.png)
+![](img/03c83c4f60de3b6acb959d2753c28df5.png)
 
-另一种思考方式是使用递归神经网络（RNN）来捕捉声音数据中的序列信息，通过一次传递一帧，但由于在大多数情况下CNN的表现优于独立的RNN - 我们在这个实验中没有使用RNN。在许多情况下，RNN与CNN一起使用以提高网络性能，我们将在未来实验这些架构。[[Ref]](https://arxiv.org/abs/1704.07709)
+另一种思考方式是使用递归神经网络（RNN）来捕捉声音数据中的序列信息，通过一次传递一帧，但由于在大多数情况下 CNN 的表现优于独立的 RNN - 我们在这个实验中没有使用 RNN。在许多情况下，RNN 与 CNN 一起使用以提高网络性能，我们将在未来实验这些架构。[[Ref]](https://arxiv.org/abs/1704.07709)
 
 **步骤 3：迁移学习**
 
@@ -60,7 +60,7 @@ rubberband -t 1.5 -p 2 input.wav output.wav
 
 为了可视化这意味着什么，请查看我从互联网获取的这张猫的图片。
 
-![](../Images/06ff45551a975c58b22cca5b6fe5b348.png)
+![](img/06ff45551a975c58b22cca5b6fe5b348.png)
 
 如果我们只有右侧的图像，我们可以使用数据增强来制作该图像的镜像，结果仍然是一只猫（额外的训练数据！）。对于计算机来说，这两者是完全不同的像素分布，有助于它学习更通用的概念（如果 A 是狗，那么 A 的镜像也是狗）。
 
@@ -88,11 +88,11 @@ rubberband -t 1.5 -p 2 input.wav output.wav
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -106,6 +106,6 @@ rubberband -t 1.5 -p 2 input.wav output.wav
 
 +   [WavJourney：探索音频故事生成的世界](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)
 
-+   [神经网络与深度学习：教科书（第2版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
++   [神经网络与深度学习：教科书（第 2 版）](https://www.kdnuggets.com/2023/07/aggarwal-neural-networks-deep-learning-textbook-2nd-edition.html)
 
 +   [深度神经网络不会引领我们走向 AGI](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)

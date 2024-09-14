@@ -1,12 +1,12 @@
 # 机器学习正在走向实时
 
-> 原文：[https://www.kdnuggets.com/2021/01/machine-learning-real-time.html](https://www.kdnuggets.com/2021/01/machine-learning-real-time.html)
+> 原文：[`www.kdnuggets.com/2021/01/machine-learning-real-time.html`](https://www.kdnuggets.com/2021/01/machine-learning-real-time.html)
 
-[评论](#comments)
+评论
 
-**由[Chip Huyen](https://huyenchip.com/)撰写，Snorkel AI的ML生产，斯坦福大学讲师**。
+**由[Chip Huyen](https://huyenchip.com/)撰写，Snorkel AI 的 ML 生产，斯坦福大学讲师**。
 
-![实时](../Images/58a4de630b7ab8bbc230e0e05f8d8a0a.png)
+![实时](img/58a4de630b7ab8bbc230e0e05f8d8a0a.png)
 
 在与来自美国、欧洲和中国主要互联网公司的机器学习和基础设施工程师交流后，我注意到两个公司群体。一个群体在基础设施上投入了大量资金（数亿美元），以实现实时机器学习，并且已经看到了投资回报。另一个群体仍在怀疑实时机器学习是否有价值。
 
@@ -26,7 +26,7 @@
 
 **用例**
 
-延迟很重要，特别是对于用户面向的应用程序。在2009年，谷歌的实验表明，[将网页搜索延迟增加100到400毫秒会使用户每天的搜索次数减少0.2%到0.6%](https://services.google.com/fh/files/blogs/google_delayexp.pdf)。在2019年，[Booking.com发现延迟增加30%大约会导致0.5%的转化率下降——“这是对我们业务的一个相关成本。”](https://blog.acolyer.org/2019/10/07/150-successful-machine-learning-models/)
+延迟很重要，特别是对于用户面向的应用程序。在 2009 年，谷歌的实验表明，[将网页搜索延迟增加 100 到 400 毫秒会使用户每天的搜索次数减少 0.2%到 0.6%](https://services.google.com/fh/files/blogs/google_delayexp.pdf)。在 2019 年，[Booking.com 发现延迟增加 30%大约会导致 0.5%的转化率下降——“这是对我们业务的一个相关成本。”](https://blog.acolyer.org/2019/10/07/150-successful-machine-learning-models/)
 
 无论你的机器学习模型多么出色，如果它们在预测时仅仅多花费了几毫秒，用户就会去点击其他东西。
 
@@ -36,21 +36,21 @@
 
 当输入空间是有限的时，这种方法可以奏效——你确切知道有多少个可能的输入需要进行预测。一个例子是当你需要为用户生成电影推荐时——你确切知道有多少用户。因此，你可以定期（例如每几小时）为每个用户预测一组推荐结果。
 
-为了使用户输入空间有限，许多应用程序要求用户从类别中选择，而不是输入任意查询。例如，如果你访问TripAdvisor，你首先必须选择一个预定义的大都市区域，而不能直接输入任何位置。
+为了使用户输入空间有限，许多应用程序要求用户从类别中选择，而不是输入任意查询。例如，如果你访问 TripAdvisor，你首先必须选择一个预定义的大都市区域，而不能直接输入任何位置。
 
-这种方法有许多限制。TripAdvisor的结果在其预定义类别中还不错，如**“餐厅”**在**“旧金山”**，但当你尝试输入诸如**“海斯谷高评分泰国餐厅”**这样的任意查询时，效果就很差。
+这种方法有许多限制。TripAdvisor 的结果在其预定义类别中还不错，如**“餐厅”**在**“旧金山”**，但当你尝试输入诸如**“海斯谷高评分泰国餐厅”**这样的任意查询时，效果就很差。
 
-![](../Images/23367ba14d3d6d5bcc84a86eddbc7ce9.png)
+![](img/23367ba14d3d6d5bcc84a86eddbc7ce9.png)
 
-批量预测所造成的限制即使在像Netflix这样的技术进步公司中也存在。比如你最近看了很多恐怖片，所以当你第一次登录Netflix时，恐怖片占据了推荐列表。但今天你心情不错，于是你搜索“喜剧”并开始浏览喜剧分类。Netflix应该学习并在你的推荐列表中显示更多喜剧内容，对吗？但它不能在下一次生成批量推荐之前更新列表。
+批量预测所造成的限制即使在像 Netflix 这样的技术进步公司中也存在。比如你最近看了很多恐怖片，所以当你第一次登录 Netflix 时，恐怖片占据了推荐列表。但今天你心情不错，于是你搜索“喜剧”并开始浏览喜剧分类。Netflix 应该学习并在你的推荐列表中显示更多喜剧内容，对吗？但它不能在下一次生成批量推荐之前更新列表。
 
-在上述两个例子中，批量预测导致用户体验下降（这与用户参与度/保留度密切相关），而非灾难性失败。其他例子包括广告排名、Twitter的热门话题排名、Facebook的新闻动态排名、到达时间估算等。
+在上述两个例子中，批量预测导致用户体验下降（这与用户参与度/保留度密切相关），而非灾难性失败。其他例子包括广告排名、Twitter 的热门话题排名、Facebook 的新闻动态排名、到达时间估算等。
 
 还有许多应用程序如果没有在线预测，将导致灾难性的失败或根本无法正常工作。例如，高频交易、自动驾驶汽车、语音助手、使用面部/指纹解锁手机、老年人跌倒检测、欺诈检测等。能够检测到三小时前发生的欺诈交易总比根本无法检测到要好，但能够实时检测到可以防止欺诈交易的发生。
 
 从批量预测切换到实时预测可以让你使用动态特征来做出更相关的预测。静态特征是变化缓慢或很少变化的信息——如年龄、性别、职业、邻里等。动态特征是基于当前发生的事情——如你正在观看的内容、你刚刚点赞的内容等。了解用户现在的兴趣将使你的系统能够做出更相关的推荐。
 
-![](../Images/d4becf5482ba17f49624c25d3a5cf789.png)
+![](img/d4becf5482ba17f49624c25d3a5cf789.png)
 
 **解决方案**
 
@@ -70,41 +70,41 @@
 
 1.  **使模型更小（模型压缩）**
 
-起初，这一系列技术旨在使模型更小，以便适应边缘设备。使模型更小通常会使其运行更快。模型压缩的最常见通用技术是量化，例如，使用16位浮点数（半精度）或8位整数（定点）代替32位浮点数（全精度）来表示模型权重。在极端情况下，有些人尝试了1位表示（二进制权重神经网络），例如，[BinaryConnect](https://arxiv.org/abs/1511.00363)和[Xnor-Net](https://arxiv.org/abs/1603.05279)。Xnor-Net的作者创办了Xnor.ai，这是一家专注于模型压缩的初创公司，该公司已被[苹果以2亿美元的价格收购](https://www.geekwire.com/2020/exclusive-apple-acquires-xnor-ai-edge-ai-spin-paul-allens-ai2-price-200m-range/)。
+起初，这一系列技术旨在使模型更小，以便适应边缘设备。使模型更小通常会使其运行更快。模型压缩的最常见通用技术是量化，例如，使用 16 位浮点数（半精度）或 8 位整数（定点）代替 32 位浮点数（全精度）来表示模型权重。在极端情况下，有些人尝试了 1 位表示（二进制权重神经网络），例如，[BinaryConnect](https://arxiv.org/abs/1511.00363)和[Xnor-Net](https://arxiv.org/abs/1603.05279)。Xnor-Net 的作者创办了 Xnor.ai，这是一家专注于模型压缩的初创公司，该公司已被[苹果以 2 亿美元的价格收购](https://www.geekwire.com/2020/exclusive-apple-acquires-xnor-ai-edge-ai-spin-paul-allens-ai2-price-200m-range/)。
 
-另一种流行的技术是[知识蒸馏](https://arxiv.org/abs/1503.02531)——一个小模型（学生）被训练以模仿一个较大的模型或模型集合（教师）。尽管学生通常是通过预训练的教师进行训练，但两者也可以同时训练。一个在生产中使用的蒸馏网络的例子是[DistilBERT](https://arxiv.org/abs/1910.01108)，它将BERT模型的大小减少了40%，同时保留了97%的语言理解能力，并且运行速度快了60%。
+另一种流行的技术是[知识蒸馏](https://arxiv.org/abs/1503.02531)——一个小模型（学生）被训练以模仿一个较大的模型或模型集合（教师）。尽管学生通常是通过预训练的教师进行训练，但两者也可以同时训练。一个在生产中使用的蒸馏网络的例子是[DistilBERT](https://arxiv.org/abs/1910.01108)，它将 BERT 模型的大小减少了 40%，同时保留了 97%的语言理解能力，并且运行速度快了 60%。
 
-其他技术包括剪枝（找出对预测最不重要的参数并将其设置为0）和低秩分解（用紧凑的块替换过度参数化的卷积滤波器，以减少参数数量并提高速度）。详见[A Survey of Model Compression and Acceleration for Deep Neural Networks](https://arxiv.org/abs/1710.09282)（Cheng et al. 2017）。
+其他技术包括剪枝（找出对预测最不重要的参数并将其设置为 0）和低秩分解（用紧凑的块替换过度参数化的卷积滤波器，以减少参数数量并提高速度）。详见[A Survey of Model Compression and Acceleration for Deep Neural Networks](https://arxiv.org/abs/1710.09282)（Cheng et al. 2017）。
 
-关于模型压缩的研究论文数量正在增长。现成的工具也在不断增加。Awesome Open Source有一个列表，[前40名模型压缩开源项目](https://awesomeopensource.com/projects/model-compression)。
+关于模型压缩的研究论文数量正在增长。现成的工具也在不断增加。Awesome Open Source 有一个列表，[前 40 名模型压缩开源项目](https://awesomeopensource.com/projects/model-compression)。
 
 1.  **使硬件更快**
 
-这是另一个蓬勃发展的研究领域。大型公司和初创公司都在竞相开发硬件，以使大型机器学习模型在云端以及尤其在设备上更快地进行推理，甚至训练。IDC预测，到2020年，边缘和移动设备进行推理的总量将[达到37亿台，而进一步有1.16亿台进行训练](https://www.arm.com/-/media/global/solutions/artificial-intelligence/ai-ml-on-cpu-whitepaper.pdf?revision=17a2b30b-0f5a-4a42-8681-3d9f3f94e513)。
+这是另一个蓬勃发展的研究领域。大型公司和初创公司都在竞相开发硬件，以使大型机器学习模型在云端以及尤其在设备上更快地进行推理，甚至训练。IDC 预测，到 2020 年，边缘和移动设备进行推理的总量将[达到 37 亿台，而进一步有 1.16 亿台进行训练](https://www.arm.com/-/media/global/solutions/artificial-intelligence/ai-ml-on-cpu-whitepaper.pdf?revision=17a2b30b-0f5a-4a42-8681-3d9f3f94e513)。
 
 +   **实时管道**
 
-假设你有一个共享打车应用，并且想要检测欺诈交易，例如使用被盗信用卡进行的支付。当真正的信用卡持有者发现未经授权的支付时，他们会与银行争议，你需要退款。为了最大化利润，欺诈者可能会连续打车或者使用多个账户进行打车。2019年，商家估计欺诈交易占其年度在线销售的平均[27%](https://network.americanexpress.com/globalnetwork/dam/jcr:09c34553-b4a2-43ca-bf3e-47cbc911ea51/American%20Express%202019%20Digital%20Payments%20Survey_Insights%20Paper.pdf)。你检测到被盗信用卡的时间越长，损失的钱就越多。
+假设你有一个共享打车应用，并且想要检测欺诈交易，例如使用被盗信用卡进行的支付。当真正的信用卡持有者发现未经授权的支付时，他们会与银行争议，你需要退款。为了最大化利润，欺诈者可能会连续打车或者使用多个账户进行打车。2019 年，商家估计欺诈交易占其年度在线销售的平均[27%](https://network.americanexpress.com/globalnetwork/dam/jcr:09c34553-b4a2-43ca-bf3e-47cbc911ea51/American%20Express%202019%20Digital%20Payments%20Survey_Insights%20Paper.pdf)。你检测到被盗信用卡的时间越长，损失的钱就越多。
 
 要检测交易是否欺诈，仅仅查看该交易是不够的。你需要至少查看涉及该交易的用户的近期历史、他们在应用内的最近行程和活动、信用卡的近期交易以及其他同时发生的交易。
 
-为了快速访问这些信息，你需要尽可能将它们保存在内存中。每当发生你关心的事件——用户选择位置、预订行程、联系司机、取消行程、添加信用卡、删除信用卡等——这些事件的信息会进入你的内存存储。信息会保留在内存中直到它们仍然有用（通常为几天），然后要么进入永久存储（例如S3），要么被丢弃。最常用的工具是[Apache Kafka](https://github.com/apache/kafka)，还有如Amazon Kinesis这样的替代品。Kafka是一个流存储：它存储数据的同时流入。
+为了快速访问这些信息，你需要尽可能将它们保存在内存中。每当发生你关心的事件——用户选择位置、预订行程、联系司机、取消行程、添加信用卡、删除信用卡等——这些事件的信息会进入你的内存存储。信息会保留在内存中直到它们仍然有用（通常为几天），然后要么进入永久存储（例如 S3），要么被丢弃。最常用的工具是[Apache Kafka](https://github.com/apache/kafka)，还有如 Amazon Kinesis 这样的替代品。Kafka 是一个流存储：它存储数据的同时流入。
 
-流数据与静态数据不同——静态数据是指已经存在于某个地方的完整数据，如CSV文件。当读取CSV文件时，你知道何时任务完成。而数据流是不会结束的。
+流数据与静态数据不同——静态数据是指已经存在于某个地方的完整数据，如 CSV 文件。当读取 CSV 文件时，你知道何时任务完成。而数据流是不会结束的。
 
 一旦你有了处理流数据的方法，你就需要提取特征以输入到你的机器学习模型中。在流数据的特征基础上，你可能还需要静态数据的特征（例如账户创建时间、用户评分等）。你需要一个工具，能够处理流数据和静态数据，并将它们从各种数据源中整合在一起。
 
 **流处理与批处理**
 
-人们通常使用“批处理”来指代静态数据处理，因为你可以将数据分批处理。这与“流处理”相对，后者处理每个到达的事件。批处理是**高效的**——你可以利用MapReduce等工具处理大量数据。流处理是**快速的**，因为你可以在数据到达时立即处理。Apache Flink的PMC成员Robert Metzger争辩说流处理的效率可以和批处理一样高，因为[批处理是流处理的一个特殊情况](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming)。
+人们通常使用“批处理”来指代静态数据处理，因为你可以将数据分批处理。这与“流处理”相对，后者处理每个到达的事件。批处理是**高效的**——你可以利用 MapReduce 等工具处理大量数据。流处理是**快速的**，因为你可以在数据到达时立即处理。Apache Flink 的 PMC 成员 Robert Metzger 争辩说流处理的效率可以和批处理一样高，因为[批处理是流处理的一个特殊情况](https://www.ververica.com/blog/batch-is-a-special-case-of-streaming)。
 
 处理流数据更为困难，因为数据量是不受限的，而且数据以不同的速率和速度到达。让流处理器进行批处理要比让批处理器进行流处理容易。
 
-Apache Kafka具备一定的流处理能力，一些公司在其Kafka流存储之上利用这一能力，但Kafka的流处理在处理各种数据源方面能力有限。已有努力将SQL这一流行的用于静态数据表的查询语言扩展以处理数据流[[1](http://cs.brown.edu/~ugur/streamsql.pdf), [2](https://en.wikipedia.org/wiki/StreamSQL)]。然而，最流行的流处理工具是[Apache Flink](https://github.com/apache/flink)，它原生支持批处理。
+Apache Kafka 具备一定的流处理能力，一些公司在其 Kafka 流存储之上利用这一能力，但 Kafka 的流处理在处理各种数据源方面能力有限。已有努力将 SQL 这一流行的用于静态数据表的查询语言扩展以处理数据流[[1](http://cs.brown.edu/~ugur/streamsql.pdf), [2](https://en.wikipedia.org/wiki/StreamSQL)]。然而，最流行的流处理工具是[Apache Flink](https://github.com/apache/flink)，它原生支持批处理。
 
-在机器学习生产的早期阶段，许多公司在其现有的MapReduce/Spark/Hadoop数据管道上构建了ML系统。当这些公司需要进行实时推断时，他们需要为流数据建立一个独立的管道。
+在机器学习生产的早期阶段，许多公司在其现有的 MapReduce/Spark/Hadoop 数据管道上构建了 ML 系统。当这些公司需要进行实时推断时，他们需要为流数据建立一个独立的管道。
 
-拥有两个不同的数据处理管道是机器学习生产中常见的错误原因，例如，一个管道中的变化没有在另一个管道中正确复制，导致两个管道提取出不同的特征集。如果两个管道由两个不同的团队维护，这种情况尤其常见，例如，开发团队维护用于训练的批处理管道，而部署团队维护用于推断的流处理管道。包括[Uber](https://www.infoq.com/presentations/sql-streaming-apache-flink/)和[微博](https://www.youtube.com/watch?v=WQ520rWgd9A&ab_channel=FlinkForward)在内的公司已经进行了重大基础设施改革，以通过Flink统一他们的批处理和流处理管道。
+拥有两个不同的数据处理管道是机器学习生产中常见的错误原因，例如，一个管道中的变化没有在另一个管道中正确复制，导致两个管道提取出不同的特征集。如果两个管道由两个不同的团队维护，这种情况尤其常见，例如，开发团队维护用于训练的批处理管道，而部署团队维护用于推断的流处理管道。包括[Uber](https://www.infoq.com/presentations/sql-streaming-apache-flink/)和[微博](https://www.youtube.com/watch?v=WQ520rWgd9A&ab_channel=FlinkForward)在内的公司已经进行了重大基础设施改革，以通过 Flink 统一他们的批处理和流处理管道。
 
 **事件驱动 vs. 请求驱动**
 
@@ -126,7 +126,7 @@ Apache Kafka具备一定的流处理能力，一些公司在其Kafka流存储之
 
 与其让 20 个服务向服务 A 请求数据，不如在服务 A 内部发生事件时，将该事件广播到一个流中，任何需要 A 数据的服务可以订阅这个流并挑选所需的数据？如果有一个流，所有服务都可以广播它们的事件并进行订阅呢？这个模型称为 pub/sub：发布与订阅。这是像 Kafka 这样的解决方案所允许的。由于所有数据都流经一个流，你可以设置一个仪表板来监控数据及其在系统中的转换。因为它基于服务广播的事件，这种架构是事件驱动的。
 
-![](../Images/4ceecb97d4d7ef3d243f242fa13277c7.png)
+![](img/4ceecb97d4d7ef3d243f242fa13277c7.png)
 
 *[超越微服务：流、状态与可扩展性](https://www.infoq.com/presentations/microservices-streams-state-scalability/) (Gwen Shapira, QCon 2019).*
 
@@ -134,9 +134,9 @@ Apache Kafka具备一定的流处理能力，一些公司在其Kafka流存储之
 
 **挑战**
 
-许多公司正在从批处理转向流处理，从请求驱动架构转向事件驱动架构。我从与美国和中国主要互联网公司的交谈中得到的印象是，这一变化在美国仍然很慢，但在中国则要快得多。流式架构的采用与Kafka和Flink的普及有关。Robert Metzger告诉我，他观察到在亚洲，使用Flink进行机器学习工作负载的情况比在美国更多。关于“Apache Flink”的Google趋势数据与这一观察结果一致。
+许多公司正在从批处理转向流处理，从请求驱动架构转向事件驱动架构。我从与美国和中国主要互联网公司的交谈中得到的印象是，这一变化在美国仍然很慢，但在中国则要快得多。流式架构的采用与 Kafka 和 Flink 的普及有关。Robert Metzger 告诉我，他观察到在亚洲，使用 Flink 进行机器学习工作负载的情况比在美国更多。关于“Apache Flink”的 Google 趋势数据与这一观察结果一致。
 
-![](../Images/57fdf04eedadbcf1c20c288a28d4c694.png)
+![](img/57fdf04eedadbcf1c20c288a28d4c694.png)
 
 流处理不够普及有很多原因。
 
@@ -154,17 +154,17 @@ Apache Kafka具备一定的流处理能力，一些公司在其Kafka流存储之
 
 1.  **思维方式的转变**
 
-    从批处理转向流处理需要一种思维方式的转变。使用批处理时，你知道何时完成任务。使用流处理时，任务永远不会完成。你可以制定规则，比如获取过去2分钟内所有数据点的平均值，但如果一个发生在2分钟前的事件被延迟了，还没有进入流中怎么办？在批处理下，你可以有明确定义的表并进行联接，但在流处理下没有表可以联接，那么在两个流上进行联接操作意味着什么呢？
+    从批处理转向流处理需要一种思维方式的转变。使用批处理时，你知道何时完成任务。使用流处理时，任务永远不会完成。你可以制定规则，比如获取过去 2 分钟内所有数据点的平均值，但如果一个发生在 2 分钟前的事件被延迟了，还没有进入流中怎么办？在批处理下，你可以有明确定义的表并进行联接，但在流处理下没有表可以联接，那么在两个流上进行联接操作意味着什么呢？
 
-1.  **Python不兼容**
+1.  **Python 不兼容**
 
-    Python是机器学习的通用语言，而Kafka和Flink运行在Java和Scala上。引入流处理可能会在工作流程中造成语言不兼容。Apache Beam在Flink之上提供了一个Python接口用于与流进行通信，但你仍然需要能够使用Java/Scala的人。
+    Python 是机器学习的通用语言，而 Kafka 和 Flink 运行在 Java 和 Scala 上。引入流处理可能会在工作流程中造成语言不兼容。Apache Beam 在 Flink 之上提供了一个 Python 接口用于与流进行通信，但你仍然需要能够使用 Java/Scala 的人。
 
 1.  **更高的处理成本**
 
-    批处理意味着你可以更高效地利用计算资源。如果你的硬件能够一次处理1000个数据点，那么一次只处理1个数据点就显得非常浪费。
+    批处理意味着你可以更高效地利用计算资源。如果你的硬件能够一次处理 1000 个数据点，那么一次只处理 1 个数据点就显得非常浪费。
 
-### 级别2：在线学习 - 你的系统可以实时地整合新数据并进行更新
+### 级别 2：在线学习 - 你的系统可以实时地整合新数据并进行更新
 
 > ***实时** 在这里被定义为分钟级别*
 
@@ -180,7 +180,7 @@ Apache Kafka具备一定的流处理能力，一些公司在其Kafka流存储之
 
 对于大多数所谓的在线培训公司，它们的模型在微批次中学习，并在一段时间后进行评估。只有在性能被评估为令人满意之后，模型才会被更广泛地部署。对于微博来说，他们从学习到部署模型更新的迭代周期是 10 分钟。
 
-![](../Images/2b26a0ab4dcd1b6e180e6e7347bb5be9.png)
+![](img/2b26a0ab4dcd1b6e180e6e7347bb5be9.png)
 
 *[微博中的 Flink 机器学习](https://www.youtube.com/watch?v=WQ520rWgd9A)（钱宇，Flink Forward 2020）。*
 
@@ -212,21 +212,21 @@ TikTok 非常令人上瘾。其秘密在于其 [推荐系统](https://newsroom.
 
 在线学习的另一个理论挑战是模型评估。在传统的批量训练中，你会在固定的保留测试集上评估模型。如果一个新模型在相同的测试集上表现优于现有模型，我们会说新模型更好。然而，在线学习的目标是使你的模型适应不断变化的数据。如果你的更新模型已经适应了现在的数据，而我们知道现在的数据与过去的数据不同，那么用旧数据测试你的更新模型就没有意义了。
 
-那么我们如何知道在过去10分钟的数据上训练的模型是否优于在20分钟前的数据上训练的模型呢？我们必须在当前数据上比较这两个模型。在线训练要求在线评估，但使用未经用户测试的模型似乎是灾难的开端。
+那么我们如何知道在过去 10 分钟的数据上训练的模型是否优于在 20 分钟前的数据上训练的模型呢？我们必须在当前数据上比较这两个模型。在线训练要求在线评估，但使用未经用户测试的模型似乎是灾难的开端。
 
-许多公司仍然在进行在线学习。新模型首先会接受离线测试以确保它们不会造成灾难，然后通过复杂的A/B测试系统与现有模型进行在线评估。只有当一个模型在公司关心的某些指标上表现优于现有模型时，才会被更广泛地部署。（别让我谈论选择在线评估指标的问题。）
+许多公司仍然在进行在线学习。新模型首先会接受离线测试以确保它们不会造成灾难，然后通过复杂的 A/B 测试系统与现有模型进行在线评估。只有当一个模型在公司关心的某些指标上表现优于现有模型时，才会被更广泛地部署。（别让我谈论选择在线评估指标的问题。）
 
 +   **实用性**
 
 目前尚无标准化的在线训练基础设施。一些公司已经趋向于流式架构和[参数服务器](https://web.eecs.umich.edu/~mosharaf/Readings/Parameter-Server.pdf)，但除此之外，我所接触到的进行在线训练的公司需要在内部构建很多基础设施。我不愿意在线讨论这个问题，因为一些公司要求我保密这些信息，因为他们正在为他们构建解决方案——这是他们的竞争优势。
 
-### 美国和中国的MLOps竞赛
+### 美国和中国的 MLOps 竞赛
 
-我读了很多关于美国和中国在人工智能竞赛中的对比，但大多数比较似乎关注于[研究论文、专利、引用和资助](https://datainnovation.org/2019/08/who-is-winning-the-ai-race-china-the-eu-or-the-united-states/)。只有在我开始与美国和中国公司讨论实时机器学习后，我才注意到他们的MLOps基础设施存在惊人的差异。
+我读了很多关于美国和中国在人工智能竞赛中的对比，但大多数比较似乎关注于[研究论文、专利、引用和资助](https://datainnovation.org/2019/08/who-is-winning-the-ai-race-china-the-eu-or-the-united-states/)。只有在我开始与美国和中国公司讨论实时机器学习后，我才注意到他们的 MLOps 基础设施存在惊人的差异。
 
 很少有美国互联网公司尝试在线学习，即使在这些公司中，在线学习也仅用于简单的模型，如逻辑回归。我从直接与中国公司交流和与在两个国家工作过的人的交流中得到的印象是，在线学习在中国更为普遍，中国工程师更渴望进行尝试。你可以在[这里](https://twitter.com/chipro/status/1337077324936663040)和[这里](https://www.linkedin.com/posts/chiphuyen_mlops-machinelearning-activity-6742844916705177600-taRd)看到一些对话。
 
-![](../Images/11a1db19b83783be99737342f17b6bea.png)
+![](img/11a1db19b83783be99737342f17b6bea.png)
 
 ### 结论
 
@@ -248,17 +248,17 @@ TikTok 非常令人上瘾。其秘密在于其 [推荐系统](https://newsroom.
 
 +   [推荐引擎和实时个性化 – 下载指南](https://www.kdnuggets.com/2017/10/dataiku-recommendation-engines-real-time-personalization-download-guidebook.html)
 
-+   [如何利用MLOps制定有效的人工智能策略](https://www.kdnuggets.com/2021/01/mlops-effective-ai-strategy.html)
++   [如何利用 MLOps 制定有效的人工智能策略](https://www.kdnuggets.com/2021/01/mlops-effective-ai-strategy.html)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -266,11 +266,11 @@ TikTok 非常令人上瘾。其秘密在于其 [推荐系统](https://newsroom.
 
 +   [如何保持对人工智能世界动态的了解](https://www.kdnuggets.com/2022/03/stay-top-going-ai-world.html)
 
-+   [Python中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)
++   [Python 中的情感分析：超越词袋模型](https://www.kdnuggets.com/sentiment-analysis-in-python-going-beyond-bag-of-words)
 
-+   [每个机器学习工程师都应该掌握的5项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该掌握的 5 项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 门免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 

@@ -1,6 +1,6 @@
 # 数据科学家应该使用 LightGBM 的 3 个理由
 
-> 原文：[https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
+> 原文：[`www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html`](https://www.kdnuggets.com/2022/01/data-scientists-reasons-lightgbm.html)
 
 ## **介绍**
 
@@ -8,7 +8,7 @@
 
 ## **分类编码**
 
-![3 Reasons to Use LightGBM](../Images/6d31ac99849ebac049210036fe773f8b.png)
+![3 Reasons to Use LightGBM](img/6d31ac99849ebac049210036fe773f8b.png)
 
 图片由 [米哈伊尔·瓦西里耶夫](https://unsplash.com/@miklevasilyev?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/cat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [2]
 
@@ -32,7 +32,7 @@
 
 ## **快速**
 
-![3 Reasons to Use LightGBM](../Images/8b675b876edb6aa5a92d298261365cc2.png)
+![3 Reasons to Use LightGBM](img/8b675b876edb6aa5a92d298261365cc2.png)
 
 图片由 [安迪·比尔斯](https://unsplash.com/@andybeales?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/sprint?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [3]。
 
@@ -50,7 +50,7 @@
 
 ## **准确**
 
-![使用 LightGBM 的 3 个理由](../Images/bf775900501c92daa0f0ccaded4b89a4.png)
+![使用 LightGBM 的 3 个理由](img/bf775900501c92daa0f0ccaded4b89a4.png)
 
 图片由 [Silvan Arnet](https://unsplash.com/@silvanarnet?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 拍摄，来源于 [Unsplash](https://unsplash.com/s/photos/bullseye?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) [4]。
 
@@ -86,36 +86,36 @@ XGBoost、CatBoost 和 LightGBM 都是准确的模型。是的，最终这取决
 
 [1] 微软公司，[LightGBM 文档](https://lightgbm.readthedocs.io/en/latest/FAQ.html)，(2022)
 
-[2] 图片由 [Mikhail Vasilyev](https://unsplash.com/@miklevasilyev?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/cat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2017年）
+[2] 图片由 [Mikhail Vasilyev](https://unsplash.com/@miklevasilyev?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/cat?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2017 年）
 
-[3] 图片由 [Andy Beales](https://unsplash.com/@andybeales?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/sprint?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2015年）
+[3] 图片由 [Andy Beales](https://unsplash.com/@andybeales?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/sprint?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2015 年）
 
-[4] 图片由 [Silvan Arnet](https://unsplash.com/@silvanarnet?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/bullseye?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2020年）
+[4] 图片由 [Silvan Arnet](https://unsplash.com/@silvanarnet?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/bullseye?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)，（2020 年）
 
-**[Matthew Przybyla](https://www.linkedin.com/in/matthew-przybyla-0a095b31/)** ([Medium](https://datascience2.medium.com/)) 是位于德克萨斯州Favor Delivery的高级数据科学家。他拥有南美 Methodist University的数据科学硕士学位。他喜欢撰写关于数据科学领域的趋势话题和教程，从新算法到数据科学家日常工作经验的建议。Matt喜欢突出数据科学的商业方面，而不仅仅是技术方面。欢迎通过 [LinkedIn](https://www.linkedin.com/in/matthew-przybyla-0a095b31) 联系Matt。
+**[Matthew Przybyla](https://www.linkedin.com/in/matthew-przybyla-0a095b31/)** ([Medium](https://datascience2.medium.com/)) 是位于德克萨斯州 Favor Delivery 的高级数据科学家。他拥有南美 Methodist University 的数据科学硕士学位。他喜欢撰写关于数据科学领域的趋势话题和教程，从新算法到数据科学家日常工作经验的建议。Matt 喜欢突出数据科学的商业方面，而不仅仅是技术方面。欢迎通过 [LinkedIn](https://www.linkedin.com/in/matthew-przybyla-0a095b31) 联系 Matt。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
 ### 更多相关主题
 
-+   [3个你应该使用线性回归模型而不是…的理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [3 个你应该使用线性回归模型而不是…的理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [避免数据科学职业的5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [避免数据科学职业的 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [你应该获得认证的5个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
++   [你应该获得认证的 5 个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
 
-+   [4个你不应该使用机器学习的理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [4 个你不应该使用机器学习的理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
-+   [5个你需要合成数据的理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [5 个你需要合成数据的理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [7个你不应该成为数据科学家的理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
++   [7 个你不应该成为数据科学家的理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)

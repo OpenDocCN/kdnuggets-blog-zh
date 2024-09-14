@@ -1,8 +1,8 @@
 # 什么是对抗性机器学习？
 
-> 原文：[https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/03/adversarial-machine-learning.html`](https://www.kdnuggets.com/2022/03/adversarial-machine-learning.html)
 
-![什么是对抗性机器学习？](../Images/f538ec918d541053baf0f220da9a42e2.png)
+![什么是对抗性机器学习？](img/f538ec918d541053baf0f220da9a42e2.png)
 
 [Clint Patterson](https://unsplash.com/@cbpsc1) via Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -72,7 +72,7 @@
 
 这种类型的攻击在那些高度保密且可以变现的模型中尤为突出，例如提取股票市场预测模型。
 
-一个黑箱攻击的例子是使用图神经网络（GNN），它们被广泛用于分析图结构数据，例如社交网络和异常检测。GNN模型是有价值的资产，成为对手的吸引目标。
+一个黑箱攻击的例子是使用图神经网络（GNN），它们被广泛用于分析图结构数据，例如社交网络和异常检测。GNN 模型是有价值的资产，成为对手的吸引目标。
 
 数据的所有者训练了一个原始模型，对手则接收一个模仿原始模型的另一个模型的预测。对手可能会对这些输出按查询付费的方式向他人收费，从而复制模型的功能。这本质上允许对手通过使用持续调优的过程来重建模型。
 
@@ -90,7 +90,7 @@
 
 # 结论
 
-很多公司正在投资人工智能技术，以现代化其解决问题和决策的能力。国防部（DoD）尤其受益于人工智能，在数据驱动的情况下可以提高意识并加快决策速度。DoD承诺增加对人工智能的使用，因此必须测试其能力和局限性，以确保人工智能技术符合正确的性能和安全标准。然而，这是一项重大挑战，因为人工智能系统可能不可预测并适应行为。
+很多公司正在投资人工智能技术，以现代化其解决问题和决策的能力。国防部（DoD）尤其受益于人工智能，在数据驱动的情况下可以提高意识并加快决策速度。DoD 承诺增加对人工智能的使用，因此必须测试其能力和局限性，以确保人工智能技术符合正确的性能和安全标准。然而，这是一项重大挑战，因为人工智能系统可能不可预测并适应行为。
 
 我们必须更加警惕和理解与机器学习相关的风险以及数据被利用的高概率。投资和采用机器学习模型及人工智能的组织必须纳入正确的协议，以减少数据损坏、盗窃和对抗样本的风险。
 
@@ -98,9 +98,9 @@
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
-+   [每个机器学习工程师应掌握的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
 +   [学习数据科学、机器学习和深度学习的全面计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 

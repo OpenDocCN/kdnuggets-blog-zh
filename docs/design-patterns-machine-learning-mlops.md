@@ -1,8 +1,8 @@
-# MLOps中的机器学习设计模式
+# MLOps 中的机器学习设计模式
 
-> 原文：[https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
+> 原文：[`www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html`](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
 
-![MLOps中的机器学习设计模式](../Images/0ef26b2991f977072f7375150694848d.png)
+![MLOps 中的机器学习设计模式](img/0ef26b2991f977072f7375150694848d.png)
 
 由[Juliana Malta](https://unsplash.com/@julianamalta?utm_source=medium&utm_medium=referral)提供的照片，发布在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -10,31 +10,31 @@
 
 设计模式是一组最佳实践和可重用的解决方案，用于解决常见问题。数据科学和其他领域，如软件开发、架构等，都由大量重复出现的问题组成，因此尝试对最常见的问题进行分类，并提供不同形式的蓝图以便于识别和解决，这将为更广泛的社区带来巨大的好处。
 
-使用设计模式的想法最早由Erich Gamma等人提出于“*设计模式：可重用面向对象软件的元素*”*[1]，并在最近通过Sara Robinson等人应用于机器学习过程中的“*机器学习设计模式*”*[2]。
+使用设计模式的想法最早由 Erich Gamma 等人提出于“*设计模式：可重用面向对象软件的元素*”*[1]，并在最近通过 Sara Robinson 等人应用于机器学习过程中的“*机器学习设计模式*”*[2]。
 
-在本文中，我们将探索构成**MLOps**的不同设计模式。MLOps（机器学习 -> 操作）是一组旨在将实验性的机器学习模型转化为生产化服务的过程，准备在现实世界中做出决策。从本质上讲，MLOps基于与DevOps相同的原则，但额外关注数据验证和持续培训/评估（见图1）。
+在本文中，我们将探索构成**MLOps**的不同设计模式。MLOps（机器学习 -> 操作）是一组旨在将实验性的机器学习模型转化为生产化服务的过程，准备在现实世界中做出决策。从本质上讲，MLOps 基于与 DevOps 相同的原则，但额外关注数据验证和持续培训/评估（见图 1）。
 
-![MLOps中的机器学习设计模式](../Images/549a97d539698d267e74282f085a7a15.png)
+![MLOps 中的机器学习设计模式](img/549a97d539698d267e74282f085a7a15.png)
 
-图1：DevOps和MLOps（图由作者提供）。
+图 1：DevOps 和 MLOps（图由作者提供）。
 
-MLOps的主要好处之一是：
+MLOps 的主要好处之一是：
 
 +   改善市场时间（更快的部署）。
 
 +   增强模型的鲁棒性（更容易识别数据漂移、重新训练模型等）。
 
-+   更大的灵活性来训练/比较不同的ML模型。
++   更大的灵活性来训练/比较不同的 ML 模型。
 
 另一方面，**DevOps**强调软件开发的两个关键概念：持续集成（CI）和持续交付（CD）。持续集成专注于使用中央代码库作为团队协作的手段，并尽可能自动化新代码的添加、测试和验证过程。通过这种方式，可以随时测试应用程序的不同部分是否能正确通信，并尽早识别任何形式的错误。而持续交付则专注于平稳地更新软件部署，尽量避免任何形式的停机。
 
-## MLOps设计模式
+## MLOps 设计模式
 
 ### 工作流程管道
 
-机器学习（ML）项目由许多不同的步骤构成（见图2）。
+机器学习（ML）项目由许多不同的步骤构成（见图 2）。
 
-![MLOps中的机器学习设计模式](../Images/d67585e8517c963f95f8760ed21dff4b.png)
+![MLOps 中的机器学习设计模式](img/d67585e8517c963f95f8760ed21dff4b.png)
 
 图 2：ML 项目关键步骤（图像由作者提供）。
 
@@ -50,7 +50,7 @@ MLOps的主要好处之一是：
 
 工作流管道设计模式旨在定义创建 ML 管道的蓝图。ML 管道可以表示为 **有向无环图（DAG）**，其中每个步骤都以一个容器为特征（见图 3）。
 
-![MLOps 中的机器学习设计模式](../Images/8fdb9e96375795d3fc795f260065c7eb.png)
+![MLOps 中的机器学习设计模式](img/8fdb9e96375795d3fc795f260065c7eb.png)
 
 图 3：有向无环图示例（图像由作者提供）。
 
@@ -68,7 +68,7 @@ MLOps的主要好处之一是：
 
 特征存储是为机器学习过程设计的数据管理层（见图 4）。这种设计模式的主要用途是简化组织管理和使用机器学习特征的方式。这是通过创建某种形式的中央存储库来实现的，公司用它来存储为 ML 过程创建的所有特征。这样，如果数据科学家需要在不同的 ML 项目中使用相同的特征子集，他们就不必多次将原始数据转换为处理过的特征（这可能非常耗时）。两个最常见的开源特征存储解决方案是 [Feast](https://feast.dev/) 和 [Hopsworks](https://www.hopsworks.ai/)。
 
-![MLOps 中的机器学习设计模式](../Images/81166c9ed5a002978d349d0977cdd3cb.png)
+![MLOps 中的机器学习设计模式](img/81166c9ed5a002978d349d0977cdd3cb.png)
 
 图 4：特征存储设计模式（图像由作者提供）。
 
@@ -78,7 +78,7 @@ MLOps的主要好处之一是：
 
 转换设计模式旨在通过将输入、特征和转换保持为独立实体（图 5），使在生产中部署和维护机器学习模型变得更加容易。原始数据通常需要经过不同的预处理步骤，然后才能作为机器学习模型的输入，一些这些转换需要保存下来，以便在为推理预处理数据时重用。
 
-![机器学习中的设计模式（MLOps）](../Images/349ee124b39ddfde5f64adf6787dbe8a.png)
+![机器学习中的设计模式（MLOps）](img/349ee124b39ddfde5f64adf6787dbe8a.png)
 
 图 5：输入和特征关系（图像由作者提供）。
 
@@ -94,11 +94,11 @@ MLOps的主要好处之一是：
 
 ### 级联
 
-在某些场景下，仅用一个机器学习模型可能无法解决问题。在这种情况下，可能需要创建一系列相互依赖的机器学习模型以实现最终目标。例如，假设我们要预测推荐给用户的商品类型（图6）。为了解决这个问题，我们首先要创建一个模型来预测用户是否超过18岁，然后根据该模型的响应，将我们的流程路由到两个不同的机器学习推荐引擎中的一个（一个用于推荐给18岁以上用户，另一个用于推荐给18岁以下用户）。
+在某些场景下，仅用一个机器学习模型可能无法解决问题。在这种情况下，可能需要创建一系列相互依赖的机器学习模型以实现最终目标。例如，假设我们要预测推荐给用户的商品类型（图 6）。为了解决这个问题，我们首先要创建一个模型来预测用户是否超过 18 岁，然后根据该模型的响应，将我们的流程路由到两个不同的机器学习推荐引擎中的一个（一个用于推荐给 18 岁以上用户，另一个用于推荐给 18 岁以下用户）。
 
-![机器学习中的设计模式用于 MLOps](../Images/d10c02ccd8863a367a66eefed8763348.png)
+![机器学习中的设计模式用于 MLOps](img/d10c02ccd8863a367a66eefed8763348.png)
 
-图6：级联设计模式（图片来源：作者）。
+图 6：级联设计模式（图片来源：作者）。
 
 为了创建这个*级联*的机器学习模型，我们需要确保它们一起训练。实际上，由于它们之间的依赖性，如果第一个模型发生变化（而其他模型没有更新），这可能会导致后续模型的不稳定。这种过程可以使用工作流管道设计模式来自动化。
 
@@ -124,7 +124,7 @@ MLOps的主要好处之一是：
 
 [1] “设计模式：可重用面向对象软件的元素”（Addison-Wesley，1995）。访问链接： [www.uml.org.cn/c%2B%2B/pdf/DesignPatterns.pdf](http://www.uml.org.cn/c%2B%2B/pdf/DesignPatterns.pdf)
 
-[2] “机器学习设计模式”（Sara Robinson 等，2020）。访问链接： [https://www.oreilly.com/library/view/machine-learning-design/9781098115777/](https://www.oreilly.com/library/view/machine-learning-design/9781098115777/)
+[2] “机器学习设计模式”（Sara Robinson 等，2020）。访问链接： [`www.oreilly.com/library/view/machine-learning-design/9781098115777/`](https://www.oreilly.com/library/view/machine-learning-design/9781098115777/)
 
 **[Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是一位数据科学家，并拥有南安普顿大学的人工智能硕士学位。他对人工智能的进展和机器学习应用（如金融和医学）充满兴趣。与他在 [Linkedin](https://www.linkedin.com/in/pierpaolo28/) 上联系。
 
@@ -134,11 +134,11 @@ MLOps的主要好处之一是：
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -150,8 +150,8 @@ MLOps的主要好处之一是：
 
 +   [学习系统设计：五本必读书籍](https://www.kdnuggets.com/learning-system-design-top-5-essential-reads)
 
-+   [优化和管理机器学习生命周期的十大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化和管理机器学习生命周期的十大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
 
-+   [像老板一样进行MLOps：无泪的机器学习指南](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)
++   [像老板一样进行 MLOps：无泪的机器学习指南](https://www.kdnuggets.com/2023/06/mlops-like-boss-guide-machine-learning-without-tears.html)
 
 +   [25 个免费课程，掌握数据科学、数据工程、机器学习……](https://www.kdnuggets.com/25-free-courses-to-master-data-science-data-engineering-machine-learning-mlops-and-generative-ai)

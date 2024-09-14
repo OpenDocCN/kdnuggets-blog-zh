@@ -1,8 +1,8 @@
 # 自动微分：你没在用的最佳机器学习库？
 
-> 原文：[https://www.kdnuggets.com/2020/09/autograd-best-machine-learning-library-not-using.html](https://www.kdnuggets.com/2020/09/autograd-best-machine-learning-library-not-using.html)
+> 原文：[`www.kdnuggets.com/2020/09/autograd-best-machine-learning-library-not-using.html`](https://www.kdnuggets.com/2020/09/autograd-best-machine-learning-library-not-using.html)
 
-[评论](#comments)
+评论
 
 ### **自动微分：你错过的机器学习库**
 
@@ -16,21 +16,21 @@
 
 深度学习，即使用基于哺乳动物大脑计算思想的多层人工神经网络，以其对计算机视觉和自然语言处理等领域的影响而闻名。我们还看到，在过去十年中，与深度学习一起发展的硬件和软件的许多教训（梯度下降、函数逼近和加速张量计算）在没有神经网络的情况下找到了有趣的应用。
 
-自动微分和 [量子电路参数上的梯度下降](https://pennylane.ai/qml/demos/tutorial_qubit_rotation.html) 为噪声中等规模量子（NISQ）计算设备时代的量子计算提供了有意义的实用性（*即* 现在可用的量子计算设备）。在 [DeepMind在CASP13](https://blog.exxactcorp.com/deepminds-protein-folding-upset/) 蛋白质折叠预测大会和竞赛中的令人印象深刻的逆袭的倒数第二步使用了直接应用于预测氨基酸位置的梯度下降，而不是Google Alphabet子公司所知名的深度神经网络。这些只是可微编程不受人工神经元范式限制的力量的几个例子。
+自动微分和 [量子电路参数上的梯度下降](https://pennylane.ai/qml/demos/tutorial_qubit_rotation.html) 为噪声中等规模量子（NISQ）计算设备时代的量子计算提供了有意义的实用性（*即* 现在可用的量子计算设备）。在 [DeepMind 在 CASP13](https://blog.exxactcorp.com/deepminds-protein-folding-upset/) 蛋白质折叠预测大会和竞赛中的令人印象深刻的逆袭的倒数第二步使用了直接应用于预测氨基酸位置的梯度下降，而不是 Google Alphabet 子公司所知名的深度神经网络。这些只是可微编程不受人工神经元范式限制的力量的几个例子。
 
-![深度学习可以被归类为更广泛的可微编程的一个子空间](../Images/ea7f9a42f05755997fec3fe8344e6faa.png)
+![深度学习可以被归类为更广泛的可微编程的一个子空间](img/ea7f9a42f05755997fec3fe8344e6faa.png)
 
 *深度学习可以被归类为更广泛的可微编程的一个子空间。深度神经进化指的是通过选择来优化神经网络，而不需要显式的微分或梯度下降。*
 
-可微编程是一个更广泛的编程范式，涵盖了大部分深度学习，除了如神经进化/进化算法等不使用梯度优化的方法。Facebook首席AI科学家Yann LeCun在一个 [Facebook帖子](https://www.facebook.com/yann.lecun/posts/10155003011462143?_fb_noscript=1) 中吹捧了可微编程的可能性（内容 [在Github gist中镜像](https://gist.github.com/halhenke/872708ccea42ee8cafd950c6c2069814)）。据LeCun所述，可微编程不过是现代深度学习的重新品牌，结合了具有循环和条件的神经网络的动态定义。
+可微编程是一个更广泛的编程范式，涵盖了大部分深度学习，除了如神经进化/进化算法等不使用梯度优化的方法。Facebook 首席 AI 科学家 Yann LeCun 在一个 [Facebook 帖子](https://www.facebook.com/yann.lecun/posts/10155003011462143?_fb_noscript=1) 中吹捧了可微编程的可能性（内容 [在 Github gist 中镜像](https://gist.github.com/halhenke/872708ccea42ee8cafd950c6c2069814)）。据 LeCun 所述，可微编程不过是现代深度学习的重新品牌，结合了具有循环和条件的神经网络的动态定义。
 
-我认为，可微分编程的广泛应用的后果更接近于Andrej Karpathy所描述的[“软件 2.0”](https://medium.com/@karpathy/software-2-0-a64152b37c35)，尽管他也主要将讨论限制在神经网络上。合理地说，软件 2.0/可微分编程作为一个整体比LeCun或Karpathy所描述的更广泛。可微分编程代表了一种超越神经网络作为函数近似器的约束，以便为各种系统提供基于梯度的优化算法的概括。如果有一个Python库能够体现可微分编程的简单性、灵活性和实用性，那一定是Autograd。
+我认为，可微分编程的广泛应用的后果更接近于 Andrej Karpathy 所描述的[“软件 2.0”](https://medium.com/@karpathy/software-2-0-a64152b37c35)，尽管他也主要将讨论限制在神经网络上。合理地说，软件 2.0/可微分编程作为一个整体比 LeCun 或 Karpathy 所描述的更广泛。可微分编程代表了一种超越神经网络作为函数近似器的约束，以便为各种系统提供基于梯度的优化算法的概括。如果有一个 Python 库能够体现可微分编程的简单性、灵活性和实用性，那一定是 Autograd。
 
 ### 结合深度学习与可微分编程
 
 关于任意物理模拟和数学原语的微分为解决深度神经网络低效或无效的问题提供了机会。这并不是说你应该抛弃所有深度学习的直觉和经验。相反，最令人印象深刻的解决方案将结合深度学习元素与可微分编程的更广泛能力，例如[Degrave et al. 2018](https://arxiv.org/abs/1611.01652)的工作，其作者将一个可微分物理引擎与神经网络控制器结合在一起，解决了机器人控制任务。
 
-本质上，他们将环境中可微分的部分扩展到了神经网络之外，包含了模拟的机器人运动学。然后，他们可以通过机器人环境的参数反向传播到神经网络策略中，从而在样本效率方面将优化过程加速约6到8倍。他们选择使用[Theano](http://deeplearning.net/software/theano/)作为自动微分库，这限制了他们通过条件语句进行微分的能力，从而限制了他们可以实现的接触约束类型。使用Autograd构建的可微分物理模拟器，甚至是支持动态分支微分的最新版本的PyTorch或TensorFlow 2.0，将提供更多优化神经网络机器人控制器的可能性，例如提供更现实的碰撞检测。
+本质上，他们将环境中可微分的部分扩展到了神经网络之外，包含了模拟的机器人运动学。然后，他们可以通过机器人环境的参数反向传播到神经网络策略中，从而在样本效率方面将优化过程加速约 6 到 8 倍。他们选择使用[Theano](http://deeplearning.net/software/theano/)作为自动微分库，这限制了他们通过条件语句进行微分的能力，从而限制了他们可以实现的接触约束类型。使用 Autograd 构建的可微分物理模拟器，甚至是支持动态分支微分的最新版本的 PyTorch 或 TensorFlow 2.0，将提供更多优化神经网络机器人控制器的可能性，例如提供更现实的碰撞检测。
 
 深度神经网络的[通用逼近能力](https://en.wikipedia.org/wiki/Universal_approximation_theorem)使它们成为解决科学、控制和数据科学问题的绝佳工具，但有时这种灵活性更像是负担而非实用，任何曾经挣扎于过拟合的人都可以证明这一点。正如约翰·冯·诺依曼的名言所说：“用四个参数我可以拟合一头大象，用五个参数我可以让它摆动鼻子。”（这个概念的实际演示可以在“Mayer *et al.* 的‘用 4 个复杂参数画大象’”中找到[[pdf](https://publications.mpi-cbg.de/getDocument.html?id=ff8080812daff75c012dc1b7bc10000c)]。） 
 
@@ -69,7 +69,7 @@ for ii in range(9):
     my_fn = egrad(my_fn) 
 ```
 
-![使用 Autograd 进行微分](../Images/e2c8eff7d2033e84302f17d109e6c79c.png)
+![使用 Autograd 进行微分](img/e2c8eff7d2033e84302f17d109e6c79c.png)
 
 *使用 Autograd 进行微分。在这种情况下，Autograd 能够微分到第七阶，但在 x=0 附近遇到了一些数值稳定性问题（注意图中央的尖锐橄榄绿色峰值）。*
 
@@ -108,11 +108,11 @@ total time: 115.41, epoch time 0.43
 
 ### 使用 Autograd 模拟光学神经网络
 
-光学神经网络（ONNs）是一个古老的概念，科学期刊《应用光学》曾在 [1987年](https://www.osapublishing.org/ao/issue.cfm?volume=26&issue=23) 和 [1993年](https://www.osapublishing.org/ao/issue.cfm?volume=32&issue=8) 上刊登过相关专题。近期，学术界（*例如*[ Zuo *et al*. 2019](https://www.osapublishing.org/optica/abstract.cfm?uri=optica-6-9-1132)）和一些初创公司如 [Optalysys](https://www.optalysys.com/)、  [Fathom Computing](https://www.wired.com/story/this-computer-uses-lightnot-electricityto-train-ai-algorithms/) 和 [Lightmatter](https://lightmatter.co/) 以及 [Lightelligence](https://www.lightelligence.ai/technology) 也重新审视了这一概念，其中最后两个公司是由同一MIT实验室的合著者在 [《自然》](https://www.nature.com/articles/nphoton.2017.93)上发表的高影响力论文中衍生出来的。
+光学神经网络（ONNs）是一个古老的概念，科学期刊《应用光学》曾在 [1987 年](https://www.osapublishing.org/ao/issue.cfm?volume=26&issue=23) 和 [1993 年](https://www.osapublishing.org/ao/issue.cfm?volume=32&issue=8) 上刊登过相关专题。近期，学术界（*例如*[ Zuo *et al*. 2019](https://www.osapublishing.org/optica/abstract.cfm?uri=optica-6-9-1132)）和一些初创公司如 [Optalysys](https://www.optalysys.com/)、  [Fathom Computing](https://www.wired.com/story/this-computer-uses-lightnot-electricityto-train-ai-algorithms/) 和 [Lightmatter](https://lightmatter.co/) 以及 [Lightelligence](https://www.lightelligence.ai/technology) 也重新审视了这一概念，其中最后两个公司是由同一 MIT 实验室的合著者在 [《自然》](https://www.nature.com/articles/nphoton.2017.93)上发表的高影响力论文中衍生出来的。
 
-光是实现神经网络的一个有吸引力的物理现象，因为描述神经网络和光学传播所用的数学有相似之处。由于[透镜的傅里叶变换性质](https://en.wikipedia.org/wiki/Fourier_optics#Applications_of_Fourier_optics_principles)和[傅里叶变换的卷积性质](http://www.thefouriertransform.com/transform/properties.php)，卷积层可以通过在输入平面后放置一个扰动元素（这被称为[4f相关器](https://en.wikipedia.org/wiki/Optical_correlator)）来实现，同时，矩阵乘法可以通过将元素放置在2个焦距和1个透镜的位置来实现。但这不是一堂光学课，而是一个编码教程，所以我们来看看代码吧！
+光是实现神经网络的一个有吸引力的物理现象，因为描述神经网络和光学传播所用的数学有相似之处。由于[透镜的傅里叶变换性质](https://en.wikipedia.org/wiki/Fourier_optics#Applications_of_Fourier_optics_principles)和[傅里叶变换的卷积性质](http://www.thefouriertransform.com/transform/properties.php)，卷积层可以通过在输入平面后放置一个扰动元素（这被称为[4f 相关器](https://en.wikipedia.org/wiki/Optical_correlator)）来实现，同时，矩阵乘法可以通过将元素放置在 2 个焦距和 1 个透镜的位置来实现。但这不是一堂光学课，而是一个编码教程，所以我们来看看代码吧！
 
-要安装必要的依赖项，请使用你选择的环境管理器激活所需的虚拟环境，并使用 pip 安装Autograd和scikit-image（如果你还没有安装的话）。
+要安装必要的依赖项，请使用你选择的环境管理器激活所需的虚拟环境，并使用 pip 安装 Autograd 和 scikit-image（如果你还没有安装的话）。
 
 `pip install autograd`
 
@@ -120,9 +120,9 @@ pip install scikit-image
 
 我们将模拟一个光学系统，该系统基本上作为一个单输出生成器，通过一系列均匀间隔的相位图像处理一个平坦的输入波前。为了保持教程的相对简单性和减少代码行数，我们将尝试仅匹配一个目标图像，见下文（如果你想跟随教程，可以下载该图像到你的工作目录）。完成这个简单的教程后，你可能会想尝试构建一个光学分类器、自编码器或其他图像变换。
 
-![Autograd图像变换示例](../Images/a156bf0c62efa17b762b1a91f8b2bc59.png)
+![Autograd 图像变换示例](img/a156bf0c62efa17b762b1a91f8b2bc59.png)
 
-现在开始一些Python代码，首先导入我们需要的包。
+现在开始一些 Python 代码，首先导入我们需要的包。
 
 ```py
 import autograd.numpy as np
@@ -299,7 +299,7 @@ plt.savefig(“./smiley_losses.png”)
 
 如果一切顺利，你应该会看到均方误差损失单调减少，代码会保存一系列图像，描绘光学网络的输出如何越来越接近目标图像。
 
-![光学系统优化以匹配目标图像](../Images/18839ccfb209efdfa4bc4bc317ce4ab4.png)
+![光学系统优化以匹配目标图像](img/18839ccfb209efdfa4bc4bc317ce4ab4.png)
 
 *光学系统优化以匹配目标图像。每个带有蓝色背景的编号图像是模型在不同训练步骤下的输出。对单样本训练，损失在训练过程中平稳下降，这并不令人惊讶。*
 
@@ -319,21 +319,21 @@ Autograd 可能不如 PyTorch 或 TensorFlow 强大，它也没有实现所有�
 
 **相关：**
 
-+   [深度学习的 PyTorch：免费电子书](/2020/07/pytorch-deep-learning-free-ebook.html)
++   深度学习的 PyTorch：免费电子书
 
-+   [深度神经网络中的批量归一化](/2020/08/batch-normalization-deep-neural-networks.html)
++   深度神经网络中的批量归一化
 
-+   [信号处理中的深度学习：你需要知道的]( /2020/07/deep-learning-signal-processing.html)
++   信号处理中的深度学习：你需要知道的
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 

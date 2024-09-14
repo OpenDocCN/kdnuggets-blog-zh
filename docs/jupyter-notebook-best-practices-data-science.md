@@ -1,6 +1,6 @@
 # Jupyter Notebook 数据科学最佳实践
 
-> 原文：[https://www.kdnuggets.com/2016/10/jupyter-notebook-best-practices-data-science.html](https://www.kdnuggets.com/2016/10/jupyter-notebook-best-practices-data-science.html)
+> 原文：[`www.kdnuggets.com/2016/10/jupyter-notebook-best-practices-data-science.html`](https://www.kdnuggets.com/2016/10/jupyter-notebook-best-practices-data-science.html)
 
 **由 Jonathan Whitmore，硅谷数据科学。**
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-![Jupyter](../Images/f79919b082e4195113c37e791c8cd699.png)
+![Jupyter](img/f79919b082e4195113c37e791c8cd699.png)
 
 需要在版本控制下进行工作，并保持共享空间而不互相干扰，这一直是一个棘手的问题。我们在这里展示了当前适合我们的系统视图——也可能对你的数据科学团队有所帮助。
 
@@ -56,9 +56,9 @@
 
 例如，一位数据科学家可能会对以下初步图表提供反馈，并希望看到改进：
 
-[![not-great](../Images/00cf9c2843f638280f29a35ea9441241.png)](http://www.svds.com/wp-content/uploads/2015/09/not-great.png)
+![not-great](http://www.svds.com/wp-content/uploads/2015/09/not-great.png)
 
-[![better-fit](../Images/4be609a94bc651a8b98b7b2a349c38d7.png)](http://www.svds.com/wp-content/uploads/2015/09/better-fit.png)
+![better-fit](http://www.svds.com/wp-content/uploads/2015/09/better-fit.png)
 
 顶部的图表与数据的拟合效果较差，而底部的图表效果更好。在团队成员工作代码的拉取请求审查中直接查看这些图表是至关重要的。
 
@@ -98,7 +98,7 @@
 
 **示例目录结构**
 
-```py` ```   - 开发 # (实验室笔记风格)   + [ISO 8601日期]-[DS-缩写]-[2-4字描述].ipynb   + 2015-06-28-jw-initial-data-clean.html   + 2015-06-28-jw-initial-data-clean.ipynb   + 2015-06-28-jw-initial-data-clean.py   + 2015-07-02-jw-coal-productivity-factors.html   + 2015-07-02-jw-coal-productivity-factors.ipynb   + 2015-07-02-jw-coal-productivity-factors.py  - 交付 # (最终分析、代码、演示等)   + Coal-mine-productivity.ipynb   + Coal-mine-productivity.html   + Coal-mine-productivity.py  - 图形   + 2015-07-16-jw-production-vs-hours-worked.png  - src # (模块和脚本)   + init.py   + load_coal_data.py   + figures # (图形和图表)   + production-vs-number-employees.png   + production-vs-hours-worked.png  - 数据 (备份，单独于版本控制)   + coal_prod_cleaned.csv ```py ````
+```py` ```   - 开发 # (实验室笔记风格)   + [ISO 8601 日期]-[DS-缩写]-[2-4 字描述].ipynb   + 2015-06-28-jw-initial-data-clean.html   + 2015-06-28-jw-initial-data-clean.ipynb   + 2015-06-28-jw-initial-data-clean.py   + 2015-07-02-jw-coal-productivity-factors.html   + 2015-07-02-jw-coal-productivity-factors.ipynb   + 2015-07-02-jw-coal-productivity-factors.py  - 交付 # (最终分析、代码、演示等)   + Coal-mine-productivity.ipynb   + Coal-mine-productivity.html   + Coal-mine-productivity.py  - 图形   + 2015-07-16-jw-production-vs-hours-worked.png  - src # (模块和脚本)   + init.py   + load_coal_data.py   + figures # (图形和图表)   + production-vs-number-employees.png   + production-vs-hours-worked.png  - 数据 (备份，单独于版本控制)   + coal_prod_cleaned.csv ```py ````
 
 **好处**
 
@@ -110,32 +110,32 @@
 
 +   按主题 (`ls *-coal-*.ipynb`)
 
-其次，在拉取请求过程中，拥有.py文件可以让人快速查看哪些输入文本已更改，而拥有.html文件则可以快速查看哪些输出已更改。使这成为一个无痛的后保存钩子，使得这种工作流程变得轻松。
+其次，在拉取请求过程中，拥有.py 文件可以让人快速查看哪些输入文本已更改，而拥有.html 文件则可以快速查看哪些输出已更改。使这成为一个无痛的后保存钩子，使得这种工作流程变得轻松。
 
-最后，这种方法还有许多较小的优点，无法一一列举——如果你有问题或对模型有进一步改进的建议，请 [联系我们](http://www.svds.com/contact/)! 更多相关信息，请查看来自O'Reilly Media的 [相关视频](http://shop.oreilly.com/product/0636920044260.do)。
+最后，这种方法还有许多较小的优点，无法一一列举——如果你有问题或对模型有进一步改进的建议，请 [联系我们](http://www.svds.com/contact/)! 更多相关信息，请查看来自 O'Reilly Media 的 [相关视频](http://shop.oreilly.com/product/0636920044260.do)。
 
-**简介: [乔纳森·惠特莫](https://www.linkedin.com/in/jonathanbwhitmore/)** 是SVDS的数据科学家。在从事天体物理学博士后职位后，乔纳森成为了计算和天文学方面备受欢迎的演讲者。他对将机器学习和统计技术应用于工业问题感到兴奋，并开发了新颖的数据分析技术。
+**简介: [乔纳森·惠特莫](https://www.linkedin.com/in/jonathanbwhitmore/)** 是 SVDS 的数据科学家。在从事天体物理学博士后职位后，乔纳森成为了计算和天文学方面备受欢迎的演讲者。他对将机器学习和统计技术应用于工业问题感到兴奋，并开发了新颖的数据分析技术。
 
 [原始](https://www.svds.com/tbt-jupyter-notebook-best-practices-data-science/?utm_source=kdnuggets&utm_medium=referral)。经授权转载。
 
 **相关：**
 
-+   [Python中的统计数据分析](/2016/07/statistical-data-analysis-python.html)
++   Python 中的统计数据分析
 
-+   [Jupyter+Spark+Mesos: 一个“有见地”的Docker镜像](/2016/05/ibm-jupyter-spark-mesos-docker.html)
++   Jupyter+Spark+Mesos: 一个“有见地”的 Docker 镜像
 
-+   [数据科学入门 – Python](/2016/07/getting-started-data-science-python.html)
++   数据科学入门 – Python
 
 ### 更多相关主题
 
-+   [Jupyter Notebook上的5个免费的数据科学项目模板](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)
++   [Jupyter Notebook 上的 5 个免费的数据科学项目模板](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)
 
-+   [数据科学家的10个Jupyter Notebook技巧和窍门](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
++   [数据科学家的 10 个 Jupyter Notebook 技巧和窍门](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
 
-+   [金融中的Python：在Jupyter Notebook中实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)
++   [金融中的 Python：在 Jupyter Notebook 中实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)
 
-+   [如何在Jupyter Notebook中设置Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
++   [如何在 Jupyter Notebook 中设置 Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
 
-+   [Jupyter Notebook魔法方法备忘单](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)
++   [Jupyter Notebook 魔法方法备忘单](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)
 
-+   [Mercury概述：创建数据科学组合和……](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
++   [Mercury 概述：创建数据科学组合和……](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)

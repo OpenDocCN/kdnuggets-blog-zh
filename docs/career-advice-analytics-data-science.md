@@ -1,8 +1,8 @@
 # 分析与数据科学专业人士的职业建议
 
-> 原文：[https://www.kdnuggets.com/2017/02/career-advice-analytics-data-science.html](https://www.kdnuggets.com/2017/02/career-advice-analytics-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/02/career-advice-analytics-data-science.html`](https://www.kdnuggets.com/2017/02/career-advice-analytics-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **作者：[凯蒂·费格森](https://www.linkedin.com/in/katiecferguson/) 和 [弗洛拉·姜](https://www.linkedin.com/in/jiangflora/)，Burtch Works。**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -32,11 +32,11 @@
 
 1.  **参加聚会** – 除了像 ASA 和 INFORMS 这样更正式的组织，许多地区还拥有充满活力的聚会社区，分析和数据科学专业人士可以在这里聚集、分享想法、讨论话题或观看演讲。你可以[在这里浏览聚会](https://www.meetup.com/find/)。
 
-1.  **参加会议** – 留意会议和讲座，看看是否有适合你参加的。KDnuggets 保持着一个[即将举行的会议列表](/meetings/)。
+1.  **参加会议** – 留意会议和讲座，看看是否有适合你参加的。KDnuggets 保持着一个即将举行的会议列表。
 
 #### **网络交流 – 如何准备**
 
-![](../Images/2abba4938a85bed1149597ea9e2e3ea1.png)
+![](img/2abba4938a85bed1149597ea9e2e3ea1.png)
 
 1.  **保持你的 LinkedIn 个人资料和简历更新** – 这几乎是不言而喻的！即使你目前没有在找工作，你也希望你的个人资料保持专业，展现你最好的一面。同样，即使你没有求职，你也应该保持简历的最新状态。当项目的情况还在你脑海里时，描述你的影响会更容易，如果你等得太久，可能会发现总结数据项目变得困难。而且，当你最终决定开始找工作时，这将加快过程，因为你的简历可能只需做些微调，而不是彻底修改。你可以在[这里](http://www.burtchworks.com/2017/01/23/career-growth-tips-analytics-data-science/2.%09http:/www.burtchworks.com/2016/05/09/resume-tips-analytics/)找到更多我们的分析简历技巧。
 
@@ -46,7 +46,7 @@
 
 #### **持续学习**
 
-![](../Images/2acc78924a22f73b35cfa2bbd1104097.png)
+![](img/2acc78924a22f73b35cfa2bbd1104097.png)
 
 1.  **在线课程/认证** – 随着分析和数据科学的蓬勃发展，有许多学习和增加工具包与技能的选项。只使用过 R？考虑学习 SAS 或 Python。想了解更多关于机器学习的知识？浏览[Coursera](https://www.coursera.org/)、[Udacity](https://www.udacity.com/) 或 [Udemy](https://www.udemy.com/)上的课程。一些大学也提供在线证书。分析和数据科学工具将不断发展，所以要关注你领域中的新进展。如果你只学会了一个工具，然后这个工具变得过时，你可能会发现适应技能变得困难。
 
@@ -70,22 +70,22 @@
 
 **相关：**
 
-+   [如何获得你的第一份数据科学工作？](/2017/02/how-get-first-job-data-science.html)
++   如何获得你的第一份数据科学工作？
 
-+   [影响数据科学市场的4大趋势](/2016/07/4-trends-disrupting-data-science-market.html)
++   影响数据科学市场的 4 大趋势
 
-+   [如何在大数据领域留下你的印记](/2016/12/kavitha-woman-big-data.html)
++   如何在大数据领域留下你的印记
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，5月11日：专业人士SQL笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
++   [KDnuggets 新闻，5 月 11 日：专业人士 SQL 笔记；如何…](https://www.kdnuggets.com/2022/n19.html)
 
-+   [Burtch Works 2023年数据科学与人工智能专业人员薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
++   [Burtch Works 2023 年数据科学与人工智能专业人员薪资报告…](https://www.kdnuggets.com/2023/08/burtch-works-2023-data-science-ai-professionals-salary-report.html)
 
-+   [为什么数据科学家期望Google Bard提供有缺陷的建议](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
++   [为什么数据科学家期望 Google Bard 提供有缺陷的建议](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
 
-+   [经验丰富的专业人士SQL面试问题](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
++   [经验丰富的专业人士 SQL 面试问题](https://www.kdnuggets.com/2022/01/sql-interview-questions-experienced-professionals.html)
 
-+   [专业人士SQL笔记：免费的电子书评测](https://www.kdnuggets.com/2022/05/sql-notes-professionals-free-ebook-review.html)
++   [专业人士 SQL 笔记：免费的电子书评测](https://www.kdnuggets.com/2022/05/sql-notes-professionals-free-ebook-review.html)
 
-+   [如何找到ML工作：Meta、Google Brain 和 SAP 的工程师建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
++   [如何找到 ML 工作：Meta、Google Brain 和 SAP 的工程师建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)

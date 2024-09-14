@@ -1,6 +1,6 @@
 # YouTube 上的十大数据科学视频
 
-> 原文：[https://www.kdnuggets.com/2016/10/top-10-data-science-videos-youtube.html/2](https://www.kdnuggets.com/2016/10/top-10-data-science-videos-youtube.html/2)
+> 原文：[`www.kdnuggets.com/2016/10/top-10-data-science-videos-youtube.html/2`](https://www.kdnuggets.com/2016/10/top-10-data-science-videos-youtube.html/2)
 
 **7\. [数据科学 – 埃因霍温理工大学 – (观看次数: 58K)](https://www.youtube.com/watch?v=7IJfSC8o6Y4)**
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
-埃因霍温理工大学对其数据科学新课程的戏剧性广告。广告风格具有电影感，使用计算机图形模仿科幻动作片，类似于《少数派报告》和《盗梦空间》，通过使用Oculus Rift和多点触控界面等技术实现。以下是他们的[本科](https://www.tue.nl/en/education/tue-bachelor-college/undergraduate-programs/data-science/)和[硕士](https://www.tue.nl/en/education/tue-graduate-school/masters-programs/data-science-in-engineering/)课程链接。
+埃因霍温理工大学对其数据科学新课程的戏剧性广告。广告风格具有电影感，使用计算机图形模仿科幻动作片，类似于《少数派报告》和《盗梦空间》，通过使用 Oculus Rift 和多点触控界面等技术实现。以下是他们的[本科](https://www.tue.nl/en/education/tue-bachelor-college/undergraduate-programs/data-science/)和[硕士](https://www.tue.nl/en/education/tue-graduate-school/masters-programs/data-science-in-engineering/)课程链接。
 
 **8\. [工作中的数据科学家一天 – (观看次数: 57K)](https://www.youtube.com/watch?v=EaptTxhh6sM)**
 
@@ -32,13 +32,13 @@ RCRtv 探索了德州普莱诺 AT&T Foundry 中数据科学家的一天。
 
 类别：教育
 
-Bigdata Simplified的一段屏幕录制视频，讲述数据科学家和数据分析师之间的区别。视频强调了数据的生成方式、价值以及如何释放其力量，最后介绍了数据分析师和数据科学家的不同特点。
+Bigdata Simplified 的一段屏幕录制视频，讲述数据科学家和数据分析师之间的区别。视频强调了数据的生成方式、价值以及如何释放其力量，最后介绍了数据分析师和数据科学家的不同特点。
 
 **10\. [数据科学的未来 – 数据科学@斯坦福 – (观看次数: 37K)](https://www.youtube.com/watch?v=hxXIJnjC_HI)**
 
 类别：教育
 
-斯坦福大学医学与遗传学副教授**尤安·阿什利**、斯坦福大学化学教授**维贾伊·潘德**、斯坦福大学工程与电气工程教授**赫克托·加西亚-莫利纳**以及斯坦福大学校长**约翰·亨内西**，他们共同举办了一场长达近26分钟的有趣数据科学会议。他们试图解决的问题包括：这个新兴学科有多真实？它带来了哪些机会和挑战？斯坦福大学如何在研究和教育中培养数据科学？
+斯坦福大学医学与遗传学副教授**尤安·阿什利**、斯坦福大学化学教授**维贾伊·潘德**、斯坦福大学工程与电气工程教授**赫克托·加西亚-莫利纳**以及斯坦福大学校长**约翰·亨内西**，他们共同举办了一场长达近 26 分钟的有趣数据科学会议。他们试图解决的问题包括：这个新兴学科有多真实？它带来了哪些机会和挑战？斯坦福大学如何在研究和教育中培养数据科学？
 
 **观察：**
 
@@ -52,9 +52,9 @@ Bigdata Simplified的一段屏幕录制视频，讲述数据科学家和数据�
 
 无论多么困难，在互联网上，甚至在训练营中，他们都在强调数据科学中讲故事的重要性，我觉得沟通在这个领域中是一个大问题。我不仅仅是在谈论可视化和报告。这些都是过时的、混乱的，并且常常是自我指涉的。我意识到我可能听起来很直接，甚至有点苛刻，但推动我如此坦诚的是希望让数据科学向世界开放的真实愿望。一个关键的绩效参数应该是有多少技术文盲的人能够了解并熟悉这个领域。数据科学可能不是万灵药，但它可以改变世界。
 
-作为这一思考的直接结果，我决定检索和分析2014年第一批500个观看量最多的视频的文本元数据，这些视频的标题中包含“数据科学”和/或“数据科学家”这两个词。收集完所有的元数据后，我将所有标签、描述和标题拼接成一个词袋。我然后使用了来自gensim Python框架的word2vec。分析很简单，但结果很有趣。
+作为这一思考的直接结果，我决定检索和分析 2014 年第一批 500 个观看量最多的视频的文本元数据，这些视频的标题中包含“数据科学”和/或“数据科学家”这两个词。收集完所有的元数据后，我将所有标签、描述和标题拼接成一个词袋。我然后使用了来自 gensim Python 框架的 word2vec。分析很简单，但结果很有趣。
 
-元数据中的30725个词汇中，大多数与“业务”（工作、职业、管理、行业等）、“教育”（大学、课程、学习、教程、编程等）和“数据科学工具和技术”（机器学习、算法等）相关。像“未来”和“社会”这样的词汇仅占总数的0.13%。与“未来”最相似的词汇再次与“业务”（工作、职业、信息、产品、首席）相关。“新闻学”、“进步”、“政治”、“心理学”在与数据科学视频相关的术语中不到0.016%。这也是一个似乎不以“名人”为导向的领域。Dr. DJ Patil是唯一一个“突出”的影响者：占总词汇的0.1%。
+元数据中的 30725 个词汇中，大多数与“业务”（工作、职业、管理、行业等）、“教育”（大学、课程、学习、教程、编程等）和“数据科学工具和技术”（机器学习、算法等）相关。像“未来”和“社会”这样的词汇仅占总数的 0.13%。与“未来”最相似的词汇再次与“业务”（工作、职业、信息、产品、首席）相关。“新闻学”、“进步”、“政治”、“心理学”在与数据科学视频相关的术语中不到 0.016%。这也是一个似乎不以“名人”为导向的领域。Dr. DJ Patil 是唯一一个“突出”的影响者：占总词汇的 0.1%。
 
 从这非常简单的分析中可能得出的结论是：
 
@@ -72,19 +72,19 @@ Bigdata Simplified的一段屏幕录制视频，讲述数据科学家和数据�
 
 **相关：**
 
-+   [YouTube上的十大机器学习视频](/2015/06/top-10-machine-learning-videos-youtube.html)
++   YouTube 上的十大机器学习视频
 
-+   [YouTube上最受欢迎的数据挖掘视频](/2015/05/most-viewed-data-mining-videos-youtube.html)
++   YouTube 上最受欢迎的数据挖掘视频
 
-+   [YouTube上最受欢迎的大数据视频](/2015/05/most-viewed-big-data-videos-youtube.html)
++   YouTube 上最受欢迎的大数据视频
 
 ### 更多相关主题
 
-+   [成为伟大的数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 

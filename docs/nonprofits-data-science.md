@@ -1,22 +1,22 @@
 # 非营利组织如何从数据科学的力量中受益
 
-> 原文：[https://www.kdnuggets.com/2018/01/nonprofits-data-science.html](https://www.kdnuggets.com/2018/01/nonprofits-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/01/nonprofits-data-science.html`](https://www.kdnuggets.com/2018/01/nonprofits-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/01/nonprofits-data-science.html/#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Ramya Sriram](https://blog.kolabtree.com/author/ramyas/)，Kolabtree。**
 
-![](../Images/0a327e0e65720206d26af158823c6c6b.png)
+![](img/0a327e0e65720206d26af158823c6c6b.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -24,17 +24,17 @@
 
 **1\. 市场营销和筹款**
 
-非营利组织拥有庞大的数据集，可以利用这些数据集开发统计模型，帮助它们优化筹款工作。[国际特赦组织](https://data-informed.com/amnesty-international-optimizes-fundraising-with-analytics/)使用细分和预测建模来帮助识别和定位正确的群体，从而制定更精细的营销策略。数据洞察帮助非政府组织根据各种因素识别和分类捐赠者，这样它们可以更有效地推动营销和筹款工作。数据分析还帮助慈善组织发现关系，从而制定具体的激励措施。在研究数据并发现能够为捐赠者提供一些东西后，而不是反过来，麦克米伦癌症支持组织推出了“世界最大咖啡”计划，这使得收入从[1500万英镑跃升至2000万英镑](https://www.theguardian.com/voluntary-sector-network/2014/mar/04/how-to-use-data-analysis-to-enhance-fundraising)。
+非营利组织拥有庞大的数据集，可以利用这些数据集开发统计模型，帮助它们优化筹款工作。[国际特赦组织](https://data-informed.com/amnesty-international-optimizes-fundraising-with-analytics/)使用细分和预测建模来帮助识别和定位正确的群体，从而制定更精细的营销策略。数据洞察帮助非政府组织根据各种因素识别和分类捐赠者，这样它们可以更有效地推动营销和筹款工作。数据分析还帮助慈善组织发现关系，从而制定具体的激励措施。在研究数据并发现能够为捐赠者提供一些东西后，而不是反过来，麦克米伦癌症支持组织推出了“世界最大咖啡”计划，这使得收入从[1500 万英镑跃升至 2000 万英镑](https://www.theguardian.com/voluntary-sector-network/2014/mar/04/how-to-use-data-analysis-to-enhance-fundraising)。
 
 **2\. 监控和实施具体活动**
 
-数据科学可以帮助非营利组织准确衡量其活动的表现，并帮助它们调整流程以获得更好的结果。数据分析和可视化在危机中的实时追踪和优化救援工作中也能发挥重要作用。总部位于美国的软件公司Qlik提供的数据科学工具，能够帮助组织发现洞察、模式并增强关键决策过程。在过去，他们曾与非营利组织合作，利用数据的力量推动社会公益事业：在尼泊尔地震期间支持[救援工作](https://global.qlik.com/us/blog/posts/evan-siff/making-a-difference-for-nepal)，以及[防止埃博拉病毒传播](https://global.qlik.com/us/blog/posts/evan-siff/fighting-ebola-with-data)在西非。
+数据科学可以帮助非营利组织准确衡量其活动的表现，并帮助它们调整流程以获得更好的结果。数据分析和可视化在危机中的实时追踪和优化救援工作中也能发挥重要作用。总部位于美国的软件公司 Qlik 提供的数据科学工具，能够帮助组织发现洞察、模式并增强关键决策过程。在过去，他们曾与非营利组织合作，利用数据的力量推动社会公益事业：在尼泊尔地震期间支持[救援工作](https://global.qlik.com/us/blog/posts/evan-siff/making-a-difference-for-nepal)，以及[防止埃博拉病毒传播](https://global.qlik.com/us/blog/posts/evan-siff/fighting-ebola-with-data)在西非。
 
-芝加哥大学运营一个名为[社会公益数据科学](https://dssg.uchicago.edu/)的项目，培训研究员从事专注于社会影响的数据科学项目。研究员们与政府部门和非营利组织合作，解决与教育、医疗保健、公共安全和环境相关的问题。他们的一个项目，与芝加哥公共卫生部门合作，使用预测分析帮助预防儿童铅中毒。在1978年禁用铅基涂料之前，铅基涂料被广泛使用，而住在老旧房屋中的儿童仍然可能暴露于此。模型根据各种因素识别可能使用铅基涂料的房屋，从而减轻暴露的危险。
+芝加哥大学运营一个名为[社会公益数据科学](https://dssg.uchicago.edu/)的项目，培训研究员从事专注于社会影响的数据科学项目。研究员们与政府部门和非营利组织合作，解决与教育、医疗保健、公共安全和环境相关的问题。他们的一个项目，与芝加哥公共卫生部门合作，使用预测分析帮助预防儿童铅中毒。在 1978 年禁用铅基涂料之前，铅基涂料被广泛使用，而住在老旧房屋中的儿童仍然可能暴露于此。模型根据各种因素识别可能使用铅基涂料的房屋，从而减轻暴露的危险。
 
 **3\. 精简资金**
 
-![](../Images/d823fe9e5b59b121dfe83c4791b986d8.png)
+![](img/d823fe9e5b59b121dfe83c4791b986d8.png)
 
 总部位于印度的 Akshaya Patra 基金会 [转向大数据](https://www.akshayapatra.org/news/increasing-efficiency-with-big-data-analytics)以帮助他们找到一种具有成本效益的方式，将他们的午餐计划送到全国各地的政府学校。优化他们提供该计划的路线帮助他们确保有效使用资金。根据分析中的洞察分配资金帮助非政府组织充分利用资源，这是其顺利运作的关键。
 
@@ -60,6 +60,6 @@
 
 +   [合成数据平台：释放生成性人工智能的力量以…](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
 
-+   [利用数据的力量的3个步骤](https://www.kdnuggets.com/2022/05/3-steps-harnessing-power-data.html)
++   [利用数据的力量的 3 个步骤](https://www.kdnuggets.com/2022/05/3-steps-harnessing-power-data.html)
 
 +   [为有效的 Tableau 和 Power BI 仪表板准备数据](https://www.kdnuggets.com/2022/06/prepare-data-effective-tableau-power-bi-dashboards.html)

@@ -1,10 +1,10 @@
 # 数据科学面试中的最常见 SQL 错误
 
-> 原文：[https://www.kdnuggets.com/2021/11/common-sql-mistakes-data-science-interviews.html](https://www.kdnuggets.com/2021/11/common-sql-mistakes-data-science-interviews.html)
+> 原文：[`www.kdnuggets.com/2021/11/common-sql-mistakes-data-science-interviews.html`](https://www.kdnuggets.com/2021/11/common-sql-mistakes-data-science-interviews.html)
 
-[评论](#comments)
+评论
 
-![](../Images/c43d8e46ee83bd41246ce4db2f52d87d.png)
+![](img/c43d8e46ee83bd41246ce4db2f52d87d.png)
 
 这些错误涉及到在 [数据科学编程面试问题](https://www.stratascratch.com/blog/data-science-coding-interview-questions-with-5-technical-concepts/) 中经常出现的概念，这些概念可能会导致你的面试失败，因此了解如何避免它们以及如何纠正它们非常重要。
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -24,9 +24,9 @@
 
 可能最常见的错误与在数据集中查找最高或最低值的记录有关。这听起来是一个简单的问题，但由于 SQL 的工作方式，我们通常不能简单地使用 MAX 或 MIN 函数。相反，我们需要设计另一种方法来输出相关的行。在这样做时，有一种常用的方法在逻辑上似乎是正确的，更糟糕的是，它经常产生预期的结果。问题在于这种解决方案没有考虑所有可能性，并跳过了一些重要的边缘情况。让我们看一个例子来理解这个错误。
 
-![](../Images/163f3659d0e8283a035e890259544add.png)
+![](img/163f3659d0e8283a035e890259544add.png)
 
-*链接: [https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries](https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries)*
+*链接: [`platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries`](https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries)*
 
 这个问题来源于 DoorDash 数据科学家职位的实际面试。我们需要在员工和他们的职位数据集中找到薪资最高的职位名称。一个常见且可能是最简单的解决方案如下：
 
@@ -84,9 +84,9 @@ WHERE rnk = 1
 
 ### 错误 2：Row_Number() 与 Rank() 与 Dense_Rank()
 
-![](../Images/96c1aac0a09f342759de1f3fd8cfb24e.png)
+![](img/96c1aac0a09f342759de1f3fd8cfb24e.png)
 
-*链接: [https://platform.stratascratch.com/coding/10062-fans-vs-opposition](https://platform.stratascratch.com/coding/10062-fans-vs-opposition)*​
+*链接: [`platform.stratascratch.com/coding/10062-fans-vs-opposition`](https://platform.stratascratch.com/coding/10062-fans-vs-opposition)*​
 
 说到 RANK() 和窗口函数，常见的一个错误与它们有关。看看上面 Facebook 的 [SQL 面试问题](https://www.stratascratch.com/blog/sql-interview-questions-you-must-prepare-the-ultimate-guide/)。这里 Facebook 说他们对员工进行了调查，以量化一些新编程语言的受欢迎程度。现在他们希望将最喜欢它的人与最讨厌它的人匹配。最大的粉丝与最大的反对者配对，第二大的粉丝与第二大的反对者配对，以此类推。
 
@@ -180,15 +180,15 @@ INNER JOIN
 
 ### 错误 3：引号中的别名
 
-![](../Images/c1299e21f58af834d8d60e89fc46e5f1.png)
+![](img/c1299e21f58af834d8d60e89fc46e5f1.png)
 
-在这个例子中，我们给一些子查询和列命名，如‘fans’和‘opposition’。这些是所谓的别名，在SQL中非常流行，但也是一些常见错误的来源。让我们换个简单的例子来看一下这些错误。
+在这个例子中，我们给一些子查询和列命名，如‘fans’和‘opposition’。这些是所谓的别名，在 SQL 中非常流行，但也是一些常见错误的来源。让我们换个简单的例子来看一下这些错误。
 
-![](../Images/fa25d424331eee091f4e873c3ccf5a9c.png)
+![](img/fa25d424331eee091f4e873c3ccf5a9c.png)
 
-*链接: [https://platform.stratascratch.com/coding/2061-users-with-many-searches?python=](https://platform.stratascratch.com/coding/2061-users-with-many-searches?python=)*​
+*链接: [`platform.stratascratch.com/coding/2061-users-with-many-searches?python=`](https://platform.stratascratch.com/coding/2061-users-with-many-searches?python=)*​
 
-在这个最近的数据科学面试问题中，Facebook要求根据某些搜索数据库计算2021年8月进行过超过五次搜索的用户数量。解决方案如下：
+在这个最近的数据科学面试问题中，Facebook 要求根据某些搜索数据库计算 2021 年 8 月进行过超过五次搜索的用户数量。解决方案如下：
 
 ```py
 SELECT count(user_id) AS result
@@ -202,7 +202,7 @@ WHERE AugustSearches > 5
 
 ```
 
-在内部查询中，我们统计了每个用户在所需时间框架内的搜索次数，然后在外部查询中，我们只考虑进行过超过五次搜索的用户，并对他们进行计数。但是，当我们尝试运行时，出现了错误。它说‘*列 "augustsearches" 不存在*’。这怎么可能呢？毕竟，我们在内部查询中将别名赋予了‘AugustSearches’，所以我们应该可以在外部查询的WHERE子句中使用它，对吗？是的，但不幸的是，我们在分配别名时犯了一个错误。你能看出来吗？修复它的最简单方法是去掉别名中的引号：
+在内部查询中，我们统计了每个用户在所需时间框架内的搜索次数，然后在外部查询中，我们只考虑进行过超过五次搜索的用户，并对他们进行计数。但是，当我们尝试运行时，出现了错误。它说‘*列 "augustsearches" 不存在*’。这怎么可能呢？毕竟，我们在内部查询中将别名赋予了‘AugustSearches’，所以我们应该可以在外部查询的 WHERE 子句中使用它，对吗？是的，但不幸的是，我们在分配别名时犯了一个错误。你能看出来吗？修复它的最简单方法是去掉别名中的引号：
 
 ```py
 SELECT count(user_id) AS result
@@ -216,7 +216,7 @@ WHERE AugustSearches > 5
 
 ```
 
-这是一个常见错误，因为我们在SQL中使用引号来书写字符串，而别名感觉像是字符串。但实际上，这个问题起因于其他地方，涉及到大写字母。为了节省内存，SQL总是将列名转换为小写字母。所以即使我们写‘WHERE AugustSearches’，SQL也会将其解释为‘WHERE augustsearches’。但当我们在引号中定义别名时，SQL保留所有的大写字母，但当我们将别名与不带引号的别名进行比较时，会导致问题。理论上，我们可以始终使用带引号的别名：
+这是一个常见错误，因为我们在 SQL 中使用引号来书写字符串，而别名感觉像是字符串。但实际上，这个问题起因于其他地方，涉及到大写字母。为了节省内存，SQL 总是将列名转换为小写字母。所以即使我们写‘WHERE AugustSearches’，SQL 也会将其解释为‘WHERE augustsearches’。但当我们在引号中定义别名时，SQL 保留所有的大写字母，但当我们将别名与不带引号的别名进行比较时，会导致问题。理论上，我们可以始终使用带引号的别名：
 
 ```py
 SELECT count(user_id) AS result
@@ -244,11 +244,11 @@ WHERE august_searches > 5
 
 ```
 
-### 错误4：别名的不一致性
+### 错误 4：别名的不一致性
 
-![](../Images/163f3659d0e8283a035e890259544add.png)
+![](img/163f3659d0e8283a035e890259544add.png)
 
-*链接: [https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries](https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries)*​
+*链接: [`platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries`](https://platform.stratascratch.com/coding/10353-workers-with-the-highest-salaries)*​
 
 另一个常见的问题是别名使用的不一致。这不是一个重大错误，只要不同表中没有相同的列名，它不会造成主要问题。但这是一个可以决定你的数据科学面试成功与否的细节。让我们回到开始的问题，即关于最高收入职位的那个。这是另一个可能的正确解决方案：
 
@@ -295,9 +295,9 @@ ORDER BY t.worker_title ASC
 
 ### 错误 6: 在包含 NULL 值的列上进行 JOIN
 
-![](../Images/2b82ad2a07c716522a58e9548ee991a9.png)
+![](img/2b82ad2a07c716522a58e9548ee991a9.png)
 
-*链接: [https://platform.stratascratch.com/coding/9627-3-bed-minimum](https://platform.stratascratch.com/coding/9627-3-bed-minimum)*
+*链接: [`platform.stratascratch.com/coding/9627-3-bed-minimum`](https://platform.stratascratch.com/coding/9627-3-bed-minimum)*
 
 让我们再展示一个常见的错误，同样与 JOIN 语句有关。看看这个问题，Airbnb 要求找出每个至少有三个床的邻里中的平均床数。虽然存在更简单的解决方案，但一种有效的方法是将原始表与自身合并，但以汇总的方式，这样我们就已经得到每个邻里的床数，前提是床数至少为三个。我们可以通过子查询或像这个解决方案中的 JOIN 语句来实现：
 

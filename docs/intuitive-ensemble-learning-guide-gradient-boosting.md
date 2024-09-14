@@ -1,8 +1,8 @@
 # 直观的集成学习指南与梯度提升
 
-> 原文：[https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html](https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)
+> 原文：[`www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html`](https://www.kdnuggets.com/2018/07/intuitive-ensemble-learning-guide-gradient-boosting.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 使用单一的机器学习模型可能并不总是能拟合数据。优化其参数也可能无济于事。一个解决方案是将多个模型结合起来拟合数据。本教程讨论了集成学习的重要性，以梯度提升为研究案例。
 
@@ -12,61 +12,61 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-机器学习（ML）管道中的一个关键步骤是选择最适合数据的算法。根据数据中的一些统计信息和可视化，ML工程师将选择最佳算法。让我们以图1中的回归示例来应用这一点。
+机器学习（ML）管道中的一个关键步骤是选择最适合数据的算法。根据数据中的一些统计信息和可视化，ML 工程师将选择最佳算法。让我们以图 1 中的回归示例来应用这一点。
 
-**图1**
+**图 1**
 
-![](../Images/cd452bb8c00bc8e5697c7c1efff89210.png)
+![](img/cd452bb8c00bc8e5697c7c1efff89210.png)
 
-根据图2可视化数据，似乎线性回归模型将是合适的。
+根据图 2 可视化数据，似乎线性回归模型将是合适的。
 
-**图2**
+**图 2**
 
-![](../Images/d8fa607e02e4ca34f856ecc1af2ddc85.png)
+![](img/d8fa607e02e4ca34f856ecc1af2ddc85.png)
 
-一个只有一个输入和一个输出的回归模型将根据图3中的方程进行制定。
+一个只有一个输入和一个输出的回归模型将根据图 3 中的方程进行制定。
 
-**图3**
+**图 3**
 
-![](../Images/8cc21deb9b95317fddebfed354641791.png)
+![](img/8cc21deb9b95317fddebfed354641791.png)
 
-其中a和b是方程的参数。
+其中 a 和 b 是方程的参数。
 
-由于我们不知道最优的参数来拟合数据，我们可以从初始值开始。我们可以将a设置为1.0，b设置为0.0，并如图4所示可视化模型。
+由于我们不知道最优的参数来拟合数据，我们可以从初始值开始。我们可以将 a 设置为 1.0，b 设置为 0.0，并如图 4 所示可视化模型。
 
-**图4**
+**图 4**
 
-![](../Images/582d31456edef8d913fa3c9747aeca66.png)
+![](img/582d31456edef8d913fa3c9747aeca66.png)
 
 基于初始值的模型似乎并没有拟合数据。
 
 预计第一次试验可能无法奏效。问题在于如何在这种情况下提升结果？换句话说，如何最大化分类准确性或最小化回归误差？有多种方法可以实现这一目标。
 
-一种简单的方法是尝试更改之前选择的参数。经过若干次试验，模型将知道最优的参数是a=2和b=1。模型将在这种情况下拟合数据，如图5所示。非常好。
+一种简单的方法是尝试更改之前选择的参数。经过若干次试验，模型将知道最优的参数是 a=2 和 b=1。模型将在这种情况下拟合数据，如图 5 所示。非常好。
 
-**图5**
+**图 5**
 
-![](../Images/be32c3a96d8a9942b2a5a25b6dd797d6.png)
+![](img/be32c3a96d8a9942b2a5a25b6dd797d6.png)
 
 但在某些情况下，改变模型参数并不能使模型更好地拟合数据。会出现一些错误预测。假设数据中有一个新点（x=2，y=2）。根据图 6，无法找到使模型完全拟合每个数据点的参数。
 
 **图 6**
 
-![](../Images/9ed3f14b772824c56d96a5faff54b516.png)
+![](img/9ed3f14b772824c56d96a5faff54b516.png)
 
 有人可能会说，拟合 4 个点而漏掉一个是可以接受的。但是如果有更多的点线无法拟合，如图 7 所示呢？这样模型的错误预测会比正确预测更多。没有单一的直线能够拟合整个数据。模型对直线上的点预测较强，但对其他点预测较弱。
 
 **图 7**
 
-![](../Images/762589b52f4c7a84eeab9bdc7a20de2d.png)
+![](img/762589b52f4c7a84eeab9bdc7a20de2d.png)
 
 ### **集成学习**
 
@@ -74,13 +74,13 @@
 
 **图 8**
 
-![](../Images/5749554a805253a1b1564d107189fe41.png)
+![](img/5749554a805253a1b1564d107189fe41.png)
 
 应用到图 7 中的先前问题时，图 9 展示了 4 个回归模型拟合数据的集成结果。
 
 **图 9**
 
-![](../Images/bae40240b28680b575171720d328b7a3.png)
+![](img/bae40240b28680b575171720d328b7a3.png)
 
 这引出了另一个问题。如果有多个模型来拟合数据，如何得到单一预测？有两种方法可以将多个回归模型组合以返回单一结果。它们是自助法和提升法（本教程的重点）。
 
@@ -94,17 +94,17 @@
 
 下面是梯度提升在一个简单示例中的工作原理：
 
-假设要建立一个回归模型，数据有一个输出，其中第一个样本的输出为15。它如图 10 所示。目标是建立一个能够正确预测这种样本输出的回归模型。
+假设要建立一个回归模型，数据有一个输出，其中第一个样本的输出为 15。它如图 10 所示。目标是建立一个能够正确预测这种样本输出的回归模型。
 
 **图 10**
 
-![](../Images/ca0f50adb19096d37b8a0195f700b88c.png)
+![](img/ca0f50adb19096d37b8a0195f700b88c.png)
 
-第一个弱模型预测第一个样本的输出为9，而不是15，如图 11 所示。
+第一个弱模型预测第一个样本的输出为 9，而不是 15，如图 11 所示。
 
 **图 11**
 
-![](../Images/3e7d934838de8899e3bb763e00476635.png)
+![](img/3e7d934838de8899e3bb763e00476635.png)
 
 为了测量预测中的损失量，需要计算其残差。残差是期望输出与预测输出之间的差异。它按照以下方程计算：
 
@@ -112,7 +112,7 @@
 
 其中**predicted1**和**residual1**分别是第一个弱模型的预测输出和残差。
 
-通过代入期望输出和预测输出的值，残差将为6：
+通过代入期望输出和预测输出的值，残差将为 6：
 
 **15 – 9 = 6**
 
@@ -124,7 +124,7 @@
 
 **desired = predicted1 + predicted2(residual1) = 9 + 6 = 15**
 
-但如果第二个弱模型未能正确预测**residual1**的值，例如返回了3，则第二个弱学习器也会有一个非零残差，计算如下：
+但如果第二个弱模型未能正确预测**residual1**的值，例如返回了 3，则第二个弱学习器也会有一个非零残差，计算如下：
 
 **residual2 = predicted1 - predicted2 = 6 - 3 = 3**
 
@@ -132,13 +132,13 @@
 
 **图 12**
 
-![](../Images/01af35abbd568828c1eecc3687c726f5.png)
+![](img/01af35abbd568828c1eecc3687c726f5.png)
 
-为了修正第二个弱模型的不足，将创建第三个弱模型。其目标是预测第二个弱模型的残差。因此，其目标是3。我们样本的期望输出将等于所有弱模型的预测值，如下所示：
+为了修正第二个弱模型的不足，将创建第三个弱模型。其目标是预测第二个弱模型的残差。因此，其目标是 3。我们样本的期望输出将等于所有弱模型的预测值，如下所示：
 
 **desired = predicted1 + predicted2(residual1) + predicted3(residual2)**
 
-如果第三个弱模型的预测值是2，即它无法预测第二个弱模型的残差，则第三个模型将有一个等于如下的残差：
+如果第三个弱模型的预测值是 2，即它无法预测第二个弱模型的残差，则第三个模型将有一个等于如下的残差：
 
 **residual3 = predicted2 – predicted3 = 3 - 2 = 1**
 
@@ -146,9 +146,9 @@
 
 **图 13**
 
-![](../Images/ac903b318ace39264e89d2603faf1a38.png)
+![](img/ac903b318ace39264e89d2603faf1a38.png)
 
-结果，将创建第四个弱模型来预测第三个弱模型的残差，该残差等于1。期望输出将等于所有弱模型的预测值，如下所示：
+结果，将创建第四个弱模型来预测第三个弱模型的残差，该残差等于 1。期望输出将等于所有弱模型的预测值，如下所示：
 
 **desired = predicted1 + predicted2(residual1) + predicted3(residual2) + predicted4(residual3)**
 
@@ -156,7 +156,7 @@
 
 **图 14**
 
-![](../Images/d9c8542828319814727f44251f3379df.png)
+![](img/d9c8542828319814727f44251f3379df.png)
 
 这是梯度提升算法的核心思想。使用前一个模型的残差作为下一个模型的目标。
 
@@ -172,11 +172,11 @@
 
 **相关内容：**
 
-+   [Python 集成学习介绍](/2018/02/introduction-python-ensembles.html)
++   Python 集成学习介绍
 
-+   [从头开始使用 NumPy 构建卷积神经网络](/2018/04/building-convolutional-neural-network-numpy-scratch.html)
++   从头开始使用 NumPy 构建卷积神经网络
 
-+   [集成学习以提高机器学习结果](/2017/09/ensemble-learning-improve-machine-learning-results.html)
++   集成学习以提高机器学习结果
 
 ### 更多相关内容
 
@@ -190,4 +190,4 @@
 
 +   [带例子的集成学习](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)
 
-+   [集成学习技术：Python中随机森林的实践指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
++   [集成学习技术：Python 中随机森林的实践指南](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)

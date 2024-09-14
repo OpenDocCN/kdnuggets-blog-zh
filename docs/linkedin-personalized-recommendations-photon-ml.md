@@ -1,6 +1,6 @@
 # 如何通过 Photon-ML 机器学习工具在 LinkedIn 上生成个性化推荐
 
-> 原文：[https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html](https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html)
+> 原文：[`www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html`](https://www.kdnuggets.com/2017/10/linkedin-personalized-recommendations-photon-ml.html)
 
 **作者：马一鸣、陈碧中与迪帕克·阿加瓦尔，LinkedIn 公司**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -28,7 +28,7 @@ LinkedIn 上的许多产品都由推荐系统驱动。这些系统的核心组�
 
 在 LinkedIn，我们通过 Photon-ML 在许多产品领域观察到了用户参与度和其他业务指标的显著提升。以一个具体的例子来说，我们使用广义加性混合效应（GAME）模型进行个性化职位推荐，在我们的在线 A/B 实验中，为求职者产生了 20% 到 40% 更多的职位申请。
 
-![LinkedIn 图片](../Images/49da1fcd3e13df7ec6787de1b1df203e.png)
+![LinkedIn 图片](img/49da1fcd3e13df7ec6787de1b1df203e.png)
 
 图 1\. LinkedIn 职位首页的快照
 
@@ -46,42 +46,42 @@ LinkedIn 上的许多产品都由推荐系统驱动。这些系统的核心组�
 
 现在让我们深入探讨一下 GAME 模型如何实现如此高水平的个性化。令 *y[mjt]* 表示成员 *m* 在上下文 *t* 中是否申请职位 *j* 的二元响应，其中上下文通常包括职位展示的时间和地点。我们用 *q[m]* 表示成员 *m* 的特征向量，包含从成员的公开资料中提取的特征，例如成员的头衔、职位职能、教育历史、行业等。我们用 *s[j]* 表示职位 *j* 的特征向量，包含从职位发布中提取的特征，例如职位头衔、所需技能和经验等。令 *x[mjt]* 表示（*m, j, t*）三元组的整体特征向量，这可以包括 *q[m]* 和 *s[j]* 的特征级主效应，*q[m]* 和 *s[j]* 的外积用于捕捉成员和职位特征之间的交互作用，以及上下文的特征。我们假设 *x[mjt]* 不包含成员 ID 或项目 ID 作为特征，因为 ID 会与常规特征不同对待。用于预测成员 *m* 申请职位 *j* 的概率的 GAME 模型采用逻辑回归形式：
 
-![方程式](../Images/200876f8b83666b6a8eb38aff11812b3.png)      **(1)**
+![方程式](img/200876f8b83666b6a8eb38aff11812b3.png)      **(1)**
 
 其中
 
-![方程式](../Images/6761cbc6946e5453aa66a263baa73dec.png)
+![方程式](img/6761cbc6946e5453aa66a263baa73dec.png)
 
 是连接函数，***b*** 是全局系数向量（在统计学文献中也称为 ***固定效应*** 系数），*α[m]* 和 *β[j]* 分别是成员 *m* 和职位 *j* 特有的系数向量。*α[m]* 和 *β[j]* 称为 ***随机效应系数***，它们捕捉成员 *m* 对不同项目特征的个人偏好以及职位 *j* 对不同成员特征的吸引力。对于过去对不同项目有许多响应的成员 *m*，我们能够准确估计她的个人系数向量 *α[m]* 并提供个性化预测。另一方面，如果成员 *m* 过去没有多少响应数据，*α[m]* 的后验均值将接近于零，成员 *m* 的模型将回退到全局固定效应组件 *x'[mjt]b*。相同的行为适用于每个职位的系数向量 *β[j]*。
 
 ### Photon-ML: 可扩展的平台用于构建个性化模型
 
-为了在Hadoop集群上使用大量数据训练模型，我们在Apache Spark的基础上开发了Photon-ML。设计可扩展算法的一个主要挑战是需要从数据中学习的模型参数数量巨大（例如，数十亿）。如果我们天真地使用标准机器学习方法（例如Spark提供的MLlib）训练模型，则更新大量参数的网络通信成本过高，计算上不可行。大量的参数主要来自用户特定和工作特定模型。因此，使算法可扩展的关键是避免将用户特定和工作特定模型中的大量参数传递或广播到集群。
+为了在 Hadoop 集群上使用大量数据训练模型，我们在 Apache Spark 的基础上开发了 Photon-ML。设计可扩展算法的一个主要挑战是需要从数据中学习的模型参数数量巨大（例如，数十亿）。如果我们天真地使用标准机器学习方法（例如 Spark 提供的 MLlib）训练模型，则更新大量参数的网络通信成本过高，计算上不可行。大量的参数主要来自用户特定和工作特定模型。因此，使算法可扩展的关键是避免将用户特定和工作特定模型中的大量参数传递或广播到集群。
 
-我们通过应用并行块坐标下降（PBCD）解决了大规模模型训练问题，该方法交替训练全球模型、用户特定模型和工作特定模型，直到收敛。全球模型使用标准的分布式梯度下降方法进行训练。对于用户特定模型和工作特定模型，我们设计了一种模型参数更新方案，使得用户特定和工作特定模型中的参数无需在集群中的机器之间传递。相反，每个训练样本的部分得分在机器之间传递。这显著降低了通信成本。PBCD可以轻松应用于具有不同子模型类型的模型。
+我们通过应用并行块坐标下降（PBCD）解决了大规模模型训练问题，该方法交替训练全球模型、用户特定模型和工作特定模型，直到收敛。全球模型使用标准的分布式梯度下降方法进行训练。对于用户特定模型和工作特定模型，我们设计了一种模型参数更新方案，使得用户特定和工作特定模型中的参数无需在集群中的机器之间传递。相反，每个训练样本的部分得分在机器之间传递。这显著降低了通信成本。PBCD 可以轻松应用于具有不同子模型类型的模型。
 
 ### 结论与未来工作
 
-在本文中，我们简要说明了如何使用Photon-ML实现个性化推荐。由于文章长度限制，许多有趣的优化和实现细节被省略了。我们强烈建议读者查看开源的Photon-ML库。在LinkedIn，我们致力于构建最先进的推荐系统。我们对Photon-ML制定了令人兴奋的计划。在不久的将来，我们计划向Photon-ML添加更多建模能力，包括树模型和不同的深度学习算法，以捕捉非线性和更深层次的表示结构。
+在本文中，我们简要说明了如何使用 Photon-ML 实现个性化推荐。由于文章长度限制，许多有趣的优化和实现细节被省略了。我们强烈建议读者查看开源的 Photon-ML 库。在 LinkedIn，我们致力于构建最先进的推荐系统。我们对 Photon-ML 制定了令人兴奋的计划。在不久的将来，我们计划向 Photon-ML 添加更多建模能力，包括树模型和不同的深度学习算法，以捕捉非线性和更深层次的表示结构。
 
 **相关：**
 
-+   [推荐系统算法概述](/2017/08/recommendation-system-algorithms-overview.html)
++   推荐系统算法概述
 
-+   [调查推荐系统的9个必备数据集](/2016/02/nine-datasets-investigating-recommender-systems.html)
++   调查推荐系统的 9 个必备数据集
 
-+   [LinkedIn上的前10位活跃大数据、数据科学、机器学习影响者（更新）](/2017/09/top-10-big-data-science-machine-learning-influencers-linkedin-updated.html)
++   LinkedIn 上的前 10 位活跃大数据、数据科学、机器学习影响者（更新）
 
 ### 更多相关内容
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标并找到目标以...](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元AI失败的剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元 AI 失败的剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

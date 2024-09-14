@@ -1,22 +1,22 @@
 # 了解大型语言模型
 
-> 原文：[https://www.kdnuggets.com/2023/03/learn-large-language-models.html](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)
+> 原文：[`www.kdnuggets.com/2023/03/learn-large-language-models.html`](https://www.kdnuggets.com/2023/03/learn-large-language-models.html)
 
-![了解大型语言模型](../Images/bcd10bd6f242e6c5109e5adab22340d1.png)
+![了解大型语言模型](img/bcd10bd6f242e6c5109e5adab22340d1.png)
 
 作者提供的图片
 
-随着ChatGPT和Google Bard的发布，越来越多的人开始谈论大型语言模型。这是新的趋势，大家都想了解更多。
+随着 ChatGPT 和 Google Bard 的发布，越来越多的人开始谈论大型语言模型。这是新的趋势，大家都想了解更多。
 
 * * *
 
-## 我们的前3名课程推荐
+## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -24,19 +24,19 @@
 
 现在，随着技术的快速发展，越来越多的公司正在寻找新的方法来提升计算机学习和处理语言的能力。这得益于人工智能（AI）在语言处理技术方面的最新突破。
 
-这些语言处理技术使公司能够构建对语言有更好理解的智能系统。这些技术基于大型预训练的Transformer语言模型或大型语言模型——它们具有更广泛的能力和对语言的理解，以及这些模型处理文本的需求。
+这些语言处理技术使公司能够构建对语言有更好理解的智能系统。这些技术基于大型预训练的 Transformer 语言模型或大型语言模型——它们具有更广泛的能力和对语言的理解，以及这些模型处理文本的需求。
 
 # 什么是大型语言模型？
 
-查看AI应用程序，如ChatGPT和Google Bard——它们能够总结文章、帮助你写故事/漫画，并进行长时间类似人类的对话。它们能够做很多事情，这都归功于内嵌的大型语言模型。
+查看 AI 应用程序，如 ChatGPT 和 Google Bard——它们能够总结文章、帮助你写故事/漫画，并进行长时间类似人类的对话。它们能够做很多事情，这都归功于内嵌的大型语言模型。
 
 大型语言模型（LLM）是一种深度学习算法，能够读取、识别、总结、翻译、预测以及生成文本。它们的预测未来单词和构造句子的能力使它们能够学习人类的说话和写作方式，并进行对话——就像人类一样！
 
-大型语言模型是Transformer模型的一种，它们是目前Transformer模型最成功的应用之一。
+大型语言模型是 Transformer 模型的一种，它们是目前 Transformer 模型最成功的应用之一。
 
-## **Transformer模型**
+## **Transformer 模型**
 
-Transformer模型是神经网络，能够学习上下文并追踪序列数据中的关系，例如句子中的单词。Transformer模型使用称为注意力或自注意力的数学技术。这些技术用于检测
+Transformer 模型是神经网络，能够学习上下文并追踪序列数据中的关系，例如句子中的单词。Transformer 模型使用称为注意力或自注意力的数学技术。这些技术用于检测
 
 Transformer 模型使用称为注意力或自注意力的数学技术。注意力是当 Transformer 模型关注另一序列的不同部分，而自注意力是当 Transformer 模型关注同一输入序列的不同部分。
 
@@ -74,15 +74,15 @@ Transformer 模型能够实时翻译文本和语音，并适应由不同群体�
 
 如果你想了解更多关于 ChatGPT 的信息，可以阅读这些：
 
-+   [ChatGPT: 你需要知道的一切](/2023/01/chatgpt-everything-need-know.html)
++   ChatGPT: 你需要知道的一切
 
-+   [ChatGPT 入门](/2023/02/chatgpt-beginners.html)
++   ChatGPT 入门
 
-+   [ChatGPT 作为 Python 编程助手](/2023/01/chatgpt-python-programming-assistant.html)
++   ChatGPT 作为 Python 编程助手
 
-+   [ChatGPT 快速参考表](/2023/01/chatgpt-cheat-sheet.html)
++   ChatGPT 快速参考表
 
-+   [学习 ChatGPT 的顶级免费资源](/2023/02/top-free-resources-learn-chatgpt.html)
++   学习 ChatGPT 的顶级免费资源
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家、自由技术作家以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程，以及有关数据科学的理论知识。她还希望探索人工智能如何或能够促进人类寿命的不同方式。她是一个热衷学习者，寻求扩展自己的技术知识和写作技能，同时帮助指导他人。
 

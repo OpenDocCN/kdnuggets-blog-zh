@@ -1,8 +1,8 @@
 # 使用 Hugging Face 从零开始训练 BPE、WordPiece 和 Unigram 分词器
 
-> 原文：[https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html](https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html)
+> 原文：[`www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html`](https://www.kdnuggets.com/2021/10/bpe-wordpiece-unigram-tokenizers-using-hugging-face.html)
 
-[评论](#comments)
+评论
 
 **由 [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)，数据科学讲师 | 导师 | YouTuber**
 
@@ -14,7 +14,7 @@
 
 主要区别在于 **字符对的选择** 和 **每种算法使用的合并策略**，这些算法用于生成最终的令牌集合。
 
-![图片](../Images/673d4a24d1ac87e138a8959acc3f40ef.png)
+![图片](img/673d4a24d1ac87e138a8959acc3f40ef.png)
 
 ## BPE - 基于频率的模型
 
@@ -50,13 +50,13 @@
 
 一种方法是从头编写这些算法，使用研究论文，然后进行测试，这是一种真正理解每种算法工作原理的好方法，但你可能会花费数周的时间来完成这个过程。
 
-我则使用了[Hugging Face的tokenizers](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)包，它提供了今天最常用的所有分词器的实现。它还允许我在选择的数据集上从头开始训练这些模型，然后对我们选择的输入字符串进行分词。
+我则使用了[Hugging Face 的 tokenizers](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)包，它提供了今天最常用的所有分词器的实现。它还允许我在选择的数据集上从头开始训练这些模型，然后对我们选择的输入字符串进行分词。
 
 ### **训练数据集**
 
-我选择了两个不同的数据集来训练这些模型，一个是来自Gutenberg的免费书籍，作为一个小数据集，另一个是[wikitext-103](https://blog.einstein.ai/the-wikitext-long-term-dependency-language-modeling-dataset/)，它包含516M的文本。
+我选择了两个不同的数据集来训练这些模型，一个是来自 Gutenberg 的免费书籍，作为一个小数据集，另一个是[wikitext-103](https://blog.einstein.ai/the-wikitext-long-term-dependency-language-modeling-dataset/)，它包含 516M 的文本。
 
-在Colab中，你可以先下载数据集并解压（如果需要的话），
+在 Colab 中，你可以先下载数据集并解压（如果需要的话），
 
 ```py
 !wget http://www.gutenberg.org/cache/epub/16457/pg16457.txt
@@ -72,7 +72,7 @@
 
 ### **导入所需的模型和训练器**
 
-通过文档，你会发现包的主要API是`Tokenizer`类。
+通过文档，你会发现包的主要 API 是`Tokenizer`类。
 
 然后，你可以用你选择的模型（BPE/Unigram/WordPiece）实例化任何分词器。
 
@@ -89,17 +89,17 @@ from tokenizers.trainers import BpeTrainer, WordLevelTrainer, \
 from tokenizers.pre_tokenizers import Whitespace
 ```
 
-### **自动化训练和分词的3步过程**
+### **自动化训练和分词的 3 步过程**
 
-由于我需要对三种不同的模型执行类似的过程，我将这些过程分解为3个函数。我只需要为每个模型调用这些函数，我的工作就完成了。
+由于我需要对三种不同的模型执行类似的过程，我将这些过程分解为 3 个函数。我只需要为每个模型调用这些函数，我的工作就完成了。
 
 那么，这些函数是什么样的呢？
 
-### **第1步 - 准备分词器**
+### **第 1 步 - 准备分词器**
 
-准备分词器要求我们用我们选择的模型实例化`Tokenizer`类，但由于我们有四个模型（还添加了一个简单的词级算法）需要测试，我们将编写if/else语句来用正确的模型实例化分词器。
+准备分词器要求我们用我们选择的模型实例化`Tokenizer`类，但由于我们有四个模型（还添加了一个简单的词级算法）需要测试，我们将编写 if/else 语句来用正确的模型实例化分词器。
 
-为了在小数据集和大数据集上训练实例化的分词器，我们还需要实例化一个训练器，在我们的案例中，这些将是**[`BpeTrainer`](https://huggingface.co/docs/tokenizers/python/latest/api/reference.html#tokenizers.trainers.BpeTrainer)`、WordLevelTrainer、WordPieceTrainer和UnigramTrainer`**。
+为了在小数据集和大数据集上训练实例化的分词器，我们还需要实例化一个训练器，在我们的案例中，这些将是**[`BpeTrainer`](https://huggingface.co/docs/tokenizers/python/latest/api/reference.html#tokenizers.trainers.BpeTrainer)`、WordLevelTrainer、WordPieceTrainer 和 UnigramTrainer`**。
 
 实例化和训练将需要我们指定一些特殊的标记。这些标记用于未知词汇以及我们以后需要添加到词汇表中的其他特殊标记。
 
@@ -193,7 +193,7 @@ for files in [small_file, large_files]:
 
 **##输出：**
 
-[![](../Images/198a394da78449354ccb0821037853a1.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F43eb1a88-36a1-4343-be1e-ac65843e3837_1306x430.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F43eb1a88-36a1-4343-be1e-ac65843e3837_1306x430.png)
 
 ## 输出分析：
 
@@ -205,13 +205,13 @@ for files in [small_file, large_files]:
 
 +   **Unigram 模型** 在两个数据集上生成了相似（68 和 67）的标记。但你可以看到生成的标记之间的差异：
 
-[![](../Images/19bbf33161f11709f988096b3a59efb5.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fbdf3d128-641c-4680-9b43-0e04a505d67c_428x43.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fbdf3d128-641c-4680-9b43-0e04a505d67c_428x43.png)
 
 使用较大的数据集时，合并更接近生成更适合编码我们常用的真实世界英语的标记。
 
-[![](../Images/28734781ce5a4cafcbc9aba5f363a43e.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Feb49063b-8896-496e-acec-0dea60d6ea37_260x40.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Feb49063b-8896-496e-acec-0dea60d6ea37_260x40.png)
 
-+   **WordPiece**在较小的数据集上生成了52个令牌，在较大的数据集上生成了48个令牌。生成的令牌有双##以表示将令牌用作前缀/后缀。[![](../Images/ac28c07cbcdf72cb828877c152386ca3.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5225119-6158-45e7-83b1-26bf587791f3_391x45.png)
++   **WordPiece**在较小的数据集上生成了 52 个令牌，在较大的数据集上生成了 48 个令牌。生成的令牌有双##以表示将令牌用作前缀/后缀。![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2Fa5225119-6158-45e7-83b1-26bf587791f3_391x45.png)
 
 +   所有三种算法在较大的数据集上生成了更少的子词令牌和更好的子词令牌。
 
@@ -221,7 +221,7 @@ for files in [small_file, large_files]:
 
 由于每个模型生成的令牌数量不同，我已添加了一个<PAD>令牌，以使数据矩形并适配数据框。
 
-<PAD>在数据框中基本上是nan。
+<PAD>在数据框中基本上是 nan。
 
 ```py
 import pandas as pd
@@ -241,21 +241,21 @@ df.head(10)
 
 **##输出：**
 
-[![](../Images/5049300edd0a6d1c89ab139f3b07f95c.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F856ab4bc-7343-4114-9867-27e64a71d21a_306x474.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F856ab4bc-7343-4114-9867-27e64a71d21a_306x474.png)
 
 你还可以使用集合查看令牌的差异：
 
-[![](../Images/34a662dd103b84cdcf7f2eb321c1a8ea.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F7be68b1a-d979-4688-94e9-b19219f2259d_370x692.png)[![](../Images/76e9e0b32184034f37d1b848d86aa050.png)](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F8942a6e1-d1bc-4a6e-bbec-3473a87ef9ca_370x626.png)
+![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F7be68b1a-d979-4688-94e9-b19219f2259d_370x692.png)![](https://cdn.substack.com/image/fetch/f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fbucketeer-e05bbc84-baa3-437e-9518-adb32be77984.s3.amazonaws.com%2Fpublic%2Fimages%2F8942a6e1-d1bc-4a6e-bbec-3473a87ef9ca_370x626.png)
 
-所有代码可以在这个[Colab笔记本](https://colab.research.google.com/drive/10gwzRY55JqzgeEQOX6nwFs6bQ84-mB9f?usp=sharing)中找到。
+所有代码可以在这个[Colab 笔记本](https://colab.research.google.com/drive/10gwzRY55JqzgeEQOX6nwFs6bQ84-mB9f?usp=sharing)中找到。
 
 ## 结束思考和下一步！
 
-基于生成的令牌类型，WPC确实似乎生成了更常见于英语中的子词令牌，但不要对这一观察结果负责。
+基于生成的令牌类型，WPC 确实似乎生成了更常见于英语中的子词令牌，但不要对这一观察结果负责。
 
-这些算法彼此略有不同，并且在开发一个不错的NLP模型时做了些类似的工作。但性能在很大程度上取决于语言模型的使用场景、词汇量、速度以及其他因素。
+这些算法彼此略有不同，并且在开发一个不错的 NLP 模型时做了些类似的工作。但性能在很大程度上取决于语言模型的使用场景、词汇量、速度以及其他因素。
 
-对这些算法的进一步改进是 [SentencePiece算法](https://arxiv.org/pdf/1808.06226.pdf)，它是对整个分词问题的全面方法，但 HuggingFace 已经缓解了大部分问题，更棒的是，他们在一个 GitHub 仓库中实现了所有这些算法。
+对这些算法的进一步改进是 [SentencePiece 算法](https://arxiv.org/pdf/1808.06226.pdf)，它是对整个分词问题的全面方法，但 HuggingFace 已经缓解了大部分问题，更棒的是，他们在一个 GitHub 仓库中实现了所有这些算法。
 
 这部分介绍了分词算法，下一步是理解什么是嵌入，分词在创建这些嵌入中的关键作用，以及它们如何影响模型的性能。
 
@@ -265,37 +265,37 @@ df.head(10)
 
 1.  [子词正则化：通过多个子词候选改善神经网络翻译模型](https://arxiv.org/pdf/1804.10959.pdf) 由 Taku Kudo 发表
 
-1.  [用子词单元的稀有词神经机器翻译](https://arxiv.org/pdf/1508.07909.pdf) - 研究论文讨论了基于BPE压缩算法的不同分割技术。
+1.  [用子词单元的稀有词神经机器翻译](https://arxiv.org/pdf/1508.07909.pdf) - 研究论文讨论了基于 BPE 压缩算法的不同分割技术。
 
-1.  [Hugging Face的分词器包。](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)
+1.  [Hugging Face 的分词器包。](https://huggingface.co/docs/tokenizers/python/latest/quicktour.html)
 
 如果你想开始数据科学或机器学习领域的学习，可以查看我关于 [数据科学与机器学习基础](https://www.wiplane.com/p/foundations-for-data-science-ml) 的课程。
 
 如果你希望查看更多类似内容而又不是订阅者，可以通过下面的按钮订阅我的通讯。
 
-有什么要补充或建议的，可以回复此邮件或在Substack上的帖子中评论。
+有什么要补充或建议的，可以回复此邮件或在 Substack 上的帖子中评论。
 
-**个人简介: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一名在网络技术和数据科学（即全栈数据科学）方面具有丰富经验的工程师。他指导了超过1000名人工智能/网络/数据科学的学员，并正在设计数据科学和机器学习工程学习路径。此前，Harshit 曾与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家共同开发数据处理算法。
+**个人简介: [Harshit Tyagi](https://www.linkedin.com/in/tyagiharshit/)** 是一名在网络技术和数据科学（即全栈数据科学）方面具有丰富经验的工程师。他指导了超过 1000 名人工智能/网络/数据科学的学员，并正在设计数据科学和机器学习工程学习路径。此前，Harshit 曾与耶鲁大学、麻省理工学院和加州大学洛杉矶分校的研究科学家共同开发数据处理算法。
 
 [原始](https://dswharshit.substack.com/p/ecde3224-cb0f-425b-97a2-853ea873d279)。经许可转载。
 
 **相关：**
 
-+   [使用HuggingFace管道的简单问答网络应用](/2021/10/simple-question-answering-web-app-hugging-face-pipelines.html)
++   使用 HuggingFace 管道的简单问答网络应用
 
-+   [分词的演变 – 自然语言处理中的字节对编码](/2021/10/evolution-tokenization-byte-pair-encoding-nlp.html)
++   分词的演变 – 自然语言处理中的字节对编码
 
-+   [深度学习的文本预处理方法](/2021/09/text-preprocessing-methods-deep-learning.html)
++   深度学习的文本预处理方法
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 

@@ -1,8 +1,8 @@
 # 成为 MLOps 工程师所需的唯一免费课程
 
-> 原文：[https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
+> 原文：[`www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer`](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
 
-![成为 MLOps 工程师所需的唯一免费课程](../Images/14a751a25a9cb7bacb9bdaa56a8661bf.png)
+![成为 MLOps 工程师所需的唯一免费课程](img/14a751a25a9cb7bacb9bdaa56a8661bf.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 ## 先决条件
 
-为了最大程度地从本课程中受益，参与者应具备基本的 Python 和 Docker 知识，并对命令行工具感到舒适。这是一门高级课程，需要一年以上的机器学习和编程经验。如果您对机器学习或数据科学不熟悉，可以尝试查看 [5 门免费课程掌握数据科学](/5-free-courses-to-master-data-science)。
+为了最大程度地从本课程中受益，参与者应具备基本的 Python 和 Docker 知识，并对命令行工具感到舒适。这是一门高级课程，需要一年以上的机器学习和编程经验。如果您对机器学习或数据科学不熟悉，可以尝试查看 5 门免费课程掌握数据科学。
 
 ## 主要特点
 
@@ -46,7 +46,7 @@
 
 +   **专家讲师：** 向经验丰富的讲师学习，包括 Cristian Martinez、Jeff Hale、Alexey Grigorev、Emeli Dral 和 Sejal Vaidya。
 
-[![成为 MLOps 工程师所需的唯一免费课程](../Images/73d68019ca4b138108553e603c472c06.png)](https://github.com/DataTalksClub/mlops-zoomcamp)
+![成为 MLOps 工程师所需的唯一免费课程](https://github.com/DataTalksClub/mlops-zoomcamp)
 
 # 大纲概述
 

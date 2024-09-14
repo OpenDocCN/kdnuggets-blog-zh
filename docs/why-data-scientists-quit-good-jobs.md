@@ -1,22 +1,22 @@
 # 为什么许多数据科学家离开优秀公司的好工作
 
-> 原文：[https://www.kdnuggets.com/2021/03/why-data-scientists-quit-good-jobs.html](https://www.kdnuggets.com/2021/03/why-data-scientists-quit-good-jobs.html)
+> 原文：[`www.kdnuggets.com/2021/03/why-data-scientists-quit-good-jobs.html`](https://www.kdnuggets.com/2021/03/why-data-scientists-quit-good-jobs.html)
 
-[评论](#comments)
+评论
 
-**由 [Adam Sroka](https://www.linkedin.com/in/aesroka/?originalSubdomain=uk) 撰写，他是Origami的机器学习工程负责人**。
+**由 [Adam Sroka](https://www.linkedin.com/in/aesroka/?originalSubdomain=uk) 撰写，他是 Origami 的机器学习工程负责人**。
 
-![](../Images/6118565da8a8ce070552578198a5eaad.png)
+![](img/6118565da8a8ce070552578198a5eaad.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
@@ -24,15 +24,15 @@
 
 > 你对你的工作满意吗？不满意？无论如何，参与一个简短的调查
 > 
-> [**KDnuggets工作满意度调查**](https://www.kdnuggets.com/2021/03/kdnuggets-survey-data-community-job-satisfaction.html)
+> [**KDnuggets 工作满意度调查**](https://www.kdnuggets.com/2021/03/kdnuggets-survey-data-community-job-satisfaction.html)
 
 ### 理想工作？
 
-我们经常被告知数据科学作为职业有多受欢迎。常常会看到数据科学被称为“[21世纪最性感的职业](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)”或每年的高薪期待比较。
+我们经常被告知数据科学作为职业有多受欢迎。常常会看到数据科学被称为“[21 世纪最性感的职业](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)”或每年的高薪期待比较。
 
 数据科学有很多优点。它是一个具有挑战性的角色，有许多东西需要学习并保持忙碌。与许多其他角色相比，数据科学家可以获得更多的自主权来探索和解决有趣的问题。而且，在许多情况下，你将有机会与来自不同领域的才华横溢和技能出众的人合作。
 
-尽管如此，根据这项 [Kaggle调查](https://www.kaggle.com/kaggle/kaggle-survey-2017)，许多数据科学家每周花费几小时寻找新职位。实际上，从事机器学习的人常常名列寻找新职位的开发者之中——在 [2020年Stack Overflow开发者调查](https://insights.stackoverflow.com/survey/2020) 中占20.5%，仅次于学术界！
+尽管如此，根据这项 [Kaggle 调查](https://www.kaggle.com/kaggle/kaggle-survey-2017)，许多数据科学家每周花费几小时寻找新职位。实际上，从事机器学习的人常常名列寻找新职位的开发者之中——在 [2020 年 Stack Overflow 开发者调查](https://insights.stackoverflow.com/survey/2020) 中占 20.5%，仅次于学术界！
 
 如果数据科学如此理想，那就会引发一个问题……
 
@@ -56,7 +56,7 @@
 
 ### 现实 vs 期望
 
-![](../Images/88d196e4c3c6701ef1c6b368e1c2520f.png)
+![](img/88d196e4c3c6701ef1c6b368e1c2520f.png)
 
 *有时候，工作环境并不像人们预期的那样（照片由 [Sebastian Herrmann](https://unsplash.com/@officestock?utm_source=medium&utm_medium=referral) 提供，发布于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)）。*
 
@@ -82,7 +82,7 @@
 
 你可能会发现许多你预期会存在的基础设施和数据处理实际上并不存在。
 
-我之前在一家初创公司工作，担任第二名数据科学家。我在那儿待了18个月的同事在这段时间里一直在构建一些基础的数据管道。幸运的是，他们经历了所有说服相关人员批准预算、解决采用新云技术时的安全和IT问题、千百次解释所有这一切意义的痛苦。
+我之前在一家初创公司工作，担任第二名数据科学家。我在那儿待了 18 个月的同事在这段时间里一直在构建一些基础的数据管道。幸运的是，他们经历了所有说服相关人员批准预算、解决采用新云技术时的安全和 IT 问题、千百次解释所有这一切意义的痛苦。
 
 > *在某些情况下，你会被用作一个聪明的技术人员，能够很好地处理松散的要求以完成工作。你也能做数据科学的事实可能只是其次。*
 
@@ -104,13 +104,13 @@
 
 +   数据团队中还有多少其他人？
 
-+   是否有数据工程师/分析师/DevOps工程师，还是你需要自己完成所有这些工作？
++   是否有数据工程师/分析师/DevOps 工程师，还是你需要自己完成所有这些工作？
 
 现在，这一切可能看起来很悲观——但实际上并非如此。许多组织在这方面表现良好，但这需要在管理期望和找到有正确支持并且设置成功的位置之间取得平衡。
 
 ### 政治的奇妙世界
 
-![](../Images/70c6cd017740a94283735ffe17d3e545.png)
+![](img/70c6cd017740a94283735ffe17d3e545.png)
 
 *有时你会觉得自己像个政治家（照片由[Deniz Fuchidzhiev](https://unsplash.com/@dfuchidzhiev?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)）。*
 
@@ -120,7 +120,7 @@
 
 > *不幸的是，政治是许多职业的一部分。现在，你不必“玩这个游戏”——你始终可以将你那稀有且需求量大的技能带到其他地方。*
 
-如果你对[退出、声音、忠诚、忽视模型](https://en.wikipedia.org/wiki/Exit,_Voice,_and_Loyalty_Model)不熟悉，我建议你去读一读。该模型源于阿尔伯特·赫希曼的研究，概述了个体如何应对不可接受的情况的抽象模型。该书于1970年首次出版，已经被广泛讨论，并[进一步扩展](https://hbr.org/2012/12/exit-voice-and-albert-o-hirsch.html)。
+如果你对[退出、声音、忠诚、忽视模型](https://en.wikipedia.org/wiki/Exit,_Voice,_and_Loyalty_Model)不熟悉，我建议你去读一读。该模型源于阿尔伯特·赫希曼的研究，概述了个体如何应对不可接受的情况的抽象模型。该书于 1970 年首次出版，已经被广泛讨论，并[进一步扩展](https://hbr.org/2012/12/exit-voice-and-albert-o-hirsch.html)。
 
 当情况不对时，归结为四个选项：
 
@@ -146,7 +146,7 @@
 
 ### 数据科学 == 数据一切
 
-![](../Images/e782ae41b72bef99ace87c9ccbc65cfe.png)
+![](img/e782ae41b72bef99ace87c9ccbc65cfe.png)
 
 *当你成为所有数据问题的首选人时，这可能会变得令人不堪重负（照片由 [Usman Yousaf](https://unsplash.com/@usmanyousaf?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供）。*
 

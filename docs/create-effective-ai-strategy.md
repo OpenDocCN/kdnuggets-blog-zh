@@ -1,8 +1,8 @@
 # 如何制定有效的 AI 战略
 
-> 原文：[https://www.kdnuggets.com/2022/11/create-effective-ai-strategy.html](https://www.kdnuggets.com/2022/11/create-effective-ai-strategy.html)
+> 原文：[`www.kdnuggets.com/2022/11/create-effective-ai-strategy.html`](https://www.kdnuggets.com/2022/11/create-effective-ai-strategy.html)
 
-![如何制定有效的 AI 战略](../Images/97eb53e4cf725564fe2230de5cf87c92.png)
+![如何制定有效的 AI 战略](img/97eb53e4cf725564fe2230de5cf87c92.png)
 
 图片由 macrovector 提供，来源于 [Freepik](https://www.freepik.com/free-vector/artificial-intelligence-big-set-with-business-teamwork-project-symbols-flat-isolated-vector-illustration_26765700.htm#query=AI%20strategits&position=10&from_view=search&track=ais)
 
@@ -54,7 +54,7 @@
 
 AI 策略师是一个协调者，负责与包括业务、产品、数据科学和分析以及工程等多个团队合作。
 
-![如何制定有效的 AI 策略](../Images/381a554d7184d1bcf51cd7549306b153.png)
+![如何制定有效的 AI 策略](img/381a554d7184d1bcf51cd7549306b153.png)
 
 来源: [图片由 tirachardz 提供于 Freepik](https://www.freepik.com/free-photo/businessmen-businesswomen-meeting-brainstorming-ideas_15113199.htm#query=strategy&position=3&from_view=search&track=sph)
 
@@ -80,14 +80,14 @@ AI 策略师是一个协调者，负责与包括业务、产品、数据科学�
 
 ### 更多相关话题
 
-+   [掌握数据战略的15本最佳书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据战略的 15 本最佳书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
 
-+   [KDnuggets新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
-+   [GenAI时代的人工智能转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
++   [GenAI 时代的人工智能转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
 
 +   [终极人工智能战略手册](https://www.kdnuggets.com/the-ultimate-ai-strategy-playbook)
 
-+   [使用Tableau创建高效的综合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
++   [使用 Tableau 创建高效的综合数据源](https://www.kdnuggets.com/2022/05/create-efficient-combined-data-sources-tableau.html)
 
-+   [利用你的数据科学技能创建5种收入来源](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)
++   [利用你的数据科学技能创建 5 种收入来源](https://www.kdnuggets.com/2023/03/data-science-skills-create-5-streams-income.html)

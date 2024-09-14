@@ -1,10 +1,10 @@
 # K-means 聚类简介：教程
 
-> 原文：[https://www.kdnuggets.com/2016/12/datascience-introduction-k-means-clustering-tutorial.html](https://www.kdnuggets.com/2016/12/datascience-introduction-k-means-clustering-tutorial.html)
+> 原文：[`www.kdnuggets.com/2016/12/datascience-introduction-k-means-clustering-tutorial.html`](https://www.kdnuggets.com/2016/12/datascience-introduction-k-means-clustering-tutorial.html)
 
 **由 DataScience 提供。** 赞助帖子。
 
-[![Kmeans Clustering](../Images/dcfae6b175469597996ed7b0fa3b6505.png)**K-means 聚类简介：教程**](https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials)。
+![Kmeans Clustering**K-means 聚类简介：教程**](https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials)。
 
 Andrea Trevino 博士在本教程中为广泛使用的 K-means 聚类算法提供了初学者入门介绍。
 

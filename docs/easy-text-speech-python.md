@@ -1,12 +1,12 @@
 # 使用 Python 进行简单的文本到语音转换
 
-> 原文：[https://www.kdnuggets.com/2020/05/easy-text-speech-python.html](https://www.kdnuggets.com/2020/05/easy-text-speech-python.html)
+> 原文：[`www.kdnuggets.com/2020/05/easy-text-speech-python.html`](https://www.kdnuggets.com/2020/05/easy-text-speech-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Dhilip Subramanian](https://medium.com/@sdhilip)，数据科学家和 AI 爱好者**
 
-![图](../Images/372778b615ab2e1cca09b35535b177d2.png)
+![图](img/372778b615ab2e1cca09b35535b177d2.png)
 
 来源：[thenextweb.com](https://thenextweb.com/artificial-intelligence/2018/01/11/ai-learns-how-to-fool-text-to-speech-thats-bad-news-for-voice-assistants/)
 
@@ -14,9 +14,9 @@
 
 Python 附带了许多方便且易于访问的库，本文将探讨如何使用 Python 实现文本到语音的功能。
 
-![图](../Images/6043a7d8831e00540cd318984d8c8e14.png)
+![图](img/6043a7d8831e00540cd318984d8c8e14.png)
 
-来源：[https://www.youtube.com/watch?v=eiP-12qHM-c](https://www.youtube.com/watch?v=eiP-12qHM-c)
+来源：[`www.youtube.com/watch?v=eiP-12qHM-c`](https://www.youtube.com/watch?v=eiP-12qHM-c)
 
 Python 中提供了不同的 API 以将文本转换为语音。其中一个 API 是 Google 文字转语音，通常称为 gTTS API。该库非常易于使用，它将输入的文本转换为可以保存为 mp3 文件的音频文件。它支持多种语言，并且语音可以以两种可用的音频速度之一传递，即快或慢。更多详情可在 [这里](https://gtts.readthedocs.io/en/latest/module.html) 找到
 
@@ -63,7 +63,7 @@ os.system(“start text.mp3”)
 
 **输出**
 
-![图](../Images/a4f81dc00ad0f7833affac021f7c1b48.png)
+![图](img/a4f81dc00ad0f7833affac021f7c1b48.png)
 
 text.mp3 文件
 
@@ -116,7 +116,7 @@ os.system("start voice.mp3")
 
 **输出**
 
-![图](../Images/682ce26382c90988e1ece0400138efc6.png)
+![图](img/682ce26382c90988e1ece0400138efc6.png)
 
 将 draft.txt 文件转换为 voice.mp3
 
@@ -136,21 +136,21 @@ GTTS 是一个简单的文本转语音工具，但它需要互联网连接，因
 
 **相关:**
 
-+   [五款酷炫的 Python 数据科学库](/2020/04/five-cool-python-libraries-data-science.html)
++   五款酷炫的 Python 数据科学库
 
-+   [Python 中文本挖掘：步骤和示例](/2020/05/text-mining-python-steps-examples.html)
++   Python 中文本挖掘：步骤和示例
 
-+   [2019 深度学习语音合成指南](/2019/09/2019-guide-speech-synthesis-deep-learning.html)
++   2019 深度学习语音合成指南
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 

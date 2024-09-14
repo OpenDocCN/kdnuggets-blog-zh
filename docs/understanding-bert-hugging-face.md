@@ -1,10 +1,10 @@
 # 使用 Hugging Face 理解 BERT
 
-> 原文：[https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html](https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html)
+> 原文：[`www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html`](https://www.kdnuggets.com/2021/07/understanding-bert-hugging-face.html)
 
-[评论](#comments)
+评论
 
-![bert-lg-hugging-face.jpg](../Images/095380cfb6379c817ecc69910337478f.png)
+![bert-lg-hugging-face.jpg](img/095380cfb6379c817ecc69910337478f.png)
 
 ### **使用 BERT 和 Hugging Face 创建问答模型**
 
@@ -14,17 +14,17 @@
 
 ### **什么是问答任务？**
 
-在这个任务中，我们给定一个问题和一个段落，其中包含答案的段落是我们的[BERT架构](https://www.exxactcorp.com/blog/Deep-Learning/a-deep-dive-into-the-transformer-architecture-the-development-of-transformer-models)，目标是确定答案在段落中的起始和结束跨度。
+在这个任务中，我们给定一个问题和一个段落，其中包含答案的段落是我们的[BERT 架构](https://www.exxactcorp.com/blog/Deep-Learning/a-deep-dive-into-the-transformer-architecture-the-development-of-transformer-models)，目标是确定答案在段落中的起始和结束跨度。
 
-![Figure](../Images/042fb23b542c92d878f7fb880dd4e8ff.png)
+![Figure](img/042fb23b542c92d878f7fb880dd4e8ff.png)
 
-*BERT微调问答任务示意图*
+*BERT 微调问答任务示意图*
 
 正如上一篇文章中所解释的，在上述示例中，我们向 BERT 架构提供两个输入。段落和问题通过<SEP>标记分隔。紫色层是 BERT 编码器的输出。
 
 我们现在定义两个向量 S 和 E（在微调过程中将被学习），它们的形状为 (1x768)。然后我们将这些向量与 BERT 的第二句输出向量进行点积，得到一些分数。我们随后对这些分数应用 Softmax 以获得概率。训练目标是正确起始和结束位置的对数似然的总和。在数学上，对于起始位置的概率向量：
 
-![equation-700.jpg](../Images/2457015fb5dfbd7b790e050ef2eb1594.png)
+![equation-700.jpg](img/2457015fb5dfbd7b790e050ef2eb1594.png)
 
 其中 T_i 是我们关注的词。结束位置的公式是类似的。
 
@@ -86,13 +86,13 @@ architectures -0.01
 ...
 ```
 
-我们将得到输出为input_ids[answer_start:answer_end]，其中answer_start是词“general”（最大开始分数的词）的索引，answer_end是BERT（最大结束分数的词）的索引。答案将是“general purpose architectures”。
+我们将得到输出为 input_ids[answer_start:answer_end]，其中 answer_start 是词“general”（最大开始分数的词）的索引，answer_end 是 BERT（最大结束分数的词）的索引。答案将是“general purpose architectures”。
 
 ### **使用问答数据集微调我们自己的模型**
 
-在大多数情况下，我们将希望在自己的数据集上训练自己的QA模型。在这种情况下，我们将从SQuAD数据集和Hugging Face库中的基础BERT模型开始进行微调。
+在大多数情况下，我们将希望在自己的数据集上训练自己的 QA 模型。在这种情况下，我们将从 SQuAD 数据集和 Hugging Face 库中的基础 BERT 模型开始进行微调。
 
-让我们看看在开始微调之前，SQuAD数据集的样子：
+让我们看看在开始微调之前，SQuAD 数据集的样子：
 
 ```py
 Context:Within computer systems, two of many security models capable of enforcing privilege separation are access control lists (ACLs) and capability-based security. Using ACLs to confine programs has been proven to be insecure in many situations, such as if the host computer can be tricked into indirectly allowing restricted file access, an issue known as the confused deputy problem. It has also been shown that the promise of ACLs of giving access to an object to only one person can never be guaranteed in practice. Both of these problems are resolved by capabilities. This does not mean practical flaws exist in all ACL-based systems, but only that the designers of certain utilities must take responsibility to ensure that they do not introduce flaws. [citation needed]
@@ -116,9 +116,9 @@ Answer Start in Text:[132]
 --------------------------------------------------------------------
 ```
 
-我们可以看到每个示例包含上下文、答案和答案的开始标记。我们可以使用下面的脚本将数据预处理为所需的格式。一旦我们拥有上述格式的数据，脚本将处理很多事情，其中最重要的是答案在max_length附近的情况以及使用答案和开始标记索引计算跨度。
+我们可以看到每个示例包含上下文、答案和答案的开始标记。我们可以使用下面的脚本将数据预处理为所需的格式。一旦我们拥有上述格式的数据，脚本将处理很多事情，其中最重要的是答案在 max_length 附近的情况以及使用答案和开始标记索引计算跨度。
 
-一旦我们获得了所需格式的数据，我们就可以从那里对我们的BERT基础模型进行微调。
+一旦我们获得了所需格式的数据，我们就可以从那里对我们的 BERT 基础模型进行微调。
 
 ```py
 model_checkpoint = "bert-base-uncased"
@@ -143,35 +143,35 @@ trainer = Trainer(
 trainer.save_model(trainer.save_model("test-squad-trained"))
 ```
 
-![图示](../Images/f592cf5eaa766177b529c57fd508cca9.png)
+![图示](img/f592cf5eaa766177b529c57fd508cca9.png)
 
-*微调BERT基础模型的输出*
+*微调 BERT 基础模型的输出*
 
 一旦我们训练了模型，我们可以这样使用它：
 
-在这种情况下，我们也取最大开始分数和最大结束分数的索引，并预测答案为它们之间的内容。如果我们想获得BERT论文中提供的精确实现，我们可以稍微调整上述代码，找出最大化（start_score + end_score）的索引。
+在这种情况下，我们也取最大开始分数和最大结束分数的索引，并预测答案为它们之间的内容。如果我们想获得 BERT 论文中提供的精确实现，我们可以稍微调整上述代码，找出最大化（start_score + end_score）的索引。
 
-![图示](../Images/6827e92363f87bb01fd57443ee9d9ccf.png)
+![图示](img/6827e92363f87bb01fd57443ee9d9ccf.png)
 
 *模型训练中的代码输出*
 
 ### **参考文献**
 
-+   [Attention Is All You Need](https://arxiv.org/abs/1706.03762)：介绍Transformer的论文。
++   [Attention Is All You Need](https://arxiv.org/abs/1706.03762)：介绍 Transformer 的论文。
 
-+   [BERT论文](https://arxiv.org/abs/1810.04805)：请阅读这篇论文。
++   [BERT 论文](https://arxiv.org/abs/1810.04805)：请阅读这篇论文。
 
 +   [Hugging Face](https://huggingface.co/transformers/usage.html)
 
-在这篇文章中，我介绍了如何从零开始使用BERT创建一个问答模型。我希望这对理解BERT以及Hugging Face库都很有用。
+在这篇文章中，我介绍了如何从零开始使用 BERT 创建一个问答模型。我希望这对理解 BERT 以及 Hugging Face 库都很有用。
 
 如果你想查看本系列中的其他文章，可以查看这些：
 
-+   [从数据科学的角度理解Transformers](https://mlwhiz.com/blog/2020/09/20/transformers/)
++   [从数据科学的角度理解 Transformers](https://mlwhiz.com/blog/2020/09/20/transformers/)
 
-+   [从编程的角度理解Transformers](https://mlwhiz.com/blog/2020/10/10/create-transformer-from-scratch/)
++   [从编程的角度理解 Transformers](https://mlwhiz.com/blog/2020/10/10/create-transformer-from-scratch/)
 
-+   [用草图简单解释BERT](https://mlwhiz.medium.com/explaining-bert-simply-using-sketches-ba30f6f0c8cb)
++   [用草图简单解释 BERT](https://mlwhiz.medium.com/explaining-bert-simply-using-sketches-ba30f6f0c8cb)
 
 我们将来会写更多类似的主题，所以请告诉我们你的想法。我们应该写一些技术性很强的主题，还是更偏向于初学者水平？评论区是你的朋友，使用它吧。
 
@@ -179,21 +179,21 @@ trainer.save_model(trainer.save_model("test-squad-trained"))
 
 **相关：**
 
-+   [学习实用NLP的最佳方法？](/2021/06/best-way-learn-practical-nlp.html)
++   学习实用 NLP 的最佳方法？
 
-+   [如何使用 T5 Transformer 生成有意义的句子](/2021/05/generate-meaningful-sentences-t5-transformer.html)
++   如何使用 T5 Transformer 生成有意义的句子
 
-+   [如何通过 API 创建和部署简单的情感分析应用](/2021/06/create-deploy-sentiment-analysis-app-api.html)
++   如何通过 API 创建和部署简单的情感分析应用
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -201,7 +201,7 @@ trainer.save_model(trainer.save_model("test-squad-trained"))
 
 +   [如何使用 Hugging Face Transformers 微调 BERT 进行情感分析](https://www.kdnuggets.com/how-to-fine-tune-bert-sentiment-analysis-hugging-face-transformers)
 
-+   [前10名机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)
++   [前 10 名机器学习演示：Hugging Face Spaces 版](https://www.kdnuggets.com/2022/05/top-10-machine-learning-demos-hugging-face-spaces-edition.html)
 
 +   [一个开发 Hugging Face 客户数据建模的社区](https://www.kdnuggets.com/2022/08/objectiv-community-developing-hugging-face-customer-data-modeling.html)
 

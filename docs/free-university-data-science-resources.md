@@ -1,10 +1,10 @@
 # 免费大学数据科学资源
 
-> 原文：[https://www.kdnuggets.com/2022/05/free-university-data-science-resources.html](https://www.kdnuggets.com/2022/05/free-university-data-science-resources.html)
+> 原文：[`www.kdnuggets.com/2022/05/free-university-data-science-resources.html`](https://www.kdnuggets.com/2022/05/free-university-data-science-resources.html)
 
-![免费大学数据科学资源](../Images/ddd059c2fa4917bfb1fac81cf526d796.png)
+![免费大学数据科学资源](img/ddd059c2fa4917bfb1fac81cf526d796.png)
 
-[Dom Fou](https://unsplash.com/@domlafou) 通过Unsplash
+[Dom Fou](https://unsplash.com/@domlafou) 通过 Unsplash
 
 当你开始学习数据科学时，选择正确的课程可能会非常混乱，而且课程也可能非常昂贵。选择免费的选项总是最好的，这样你可以真正了解自己是否适合这门课程，以及是否愿意为证书付费。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@
 
 **CS 221 — 人工智能**
 
-+   [含有PowerPoint的时间表](https://web.stanford.edu/class/archive/cs/cs221/cs221.1196/#schedule)
++   [含有 PowerPoint 的时间表](https://web.stanford.edu/class/archive/cs/cs221/cs221.1196/#schedule)
 
 +   [备忘单](https://stanford.edu/~shervine/teaching/cs-221/)
 
@@ -42,7 +42,7 @@
 
 **CS 230 — 深度学习**
 
-+   [含有PowerPoint的时间表](https://cs230.stanford.edu/syllabus/)
++   [含有 PowerPoint 的时间表](https://cs230.stanford.edu/syllabus/)
 
 +   [讲座视频](https://cs230.stanford.edu/lecture/)
 
@@ -50,9 +50,9 @@
 
 ## 2\. [哥伦比亚工程学院](https://www.cs.columbia.edu/) - 应用机器学习
 
-应用机器学习课程由**安德烈亚斯·C·穆勒**创建，他是Python机器学习库Scikit-learn的开发者之一，同时还是哥伦比亚大学的讲师。
+应用机器学习课程由**安德烈亚斯·C·穆勒**创建，他是 Python 机器学习库 Scikit-learn 的开发者之一，同时还是哥伦比亚大学的讲师。
 
-课程覆盖了机器学习的基础知识，包括数据探索、数据清洗、模型评估和调优。其他涉及的方面还有GitHub、单元测试等。
+课程覆盖了机器学习的基础知识，包括数据探索、数据清洗、模型评估和调优。其他涉及的方面还有 GitHub、单元测试等。
 
 +   [时间表和幻灯片](https://www.cs.columbia.edu/~amueller/comsw4995s20/schedule/)
 
@@ -60,7 +60,7 @@
 
 ## 3\. [伯克利](http://ai.berkeley.edu/home.html) - 人工智能
 
-伯克利大学提供一个名为CS 188 - 人工智能导论的课程。该课程涵盖了智能计算机系统的基本理解和技术，特别强调统计学和决策理论建模范式。
+伯克利大学提供一个名为 CS 188 - 人工智能导论的课程。该课程涵盖了智能计算机系统的基本理解和技术，特别强调统计学和决策理论建模范式。
 
 +   春季 2021: [幻灯片和讲座](https://inst.eecs.berkeley.edu/~cs188/sp21/)
 
@@ -68,11 +68,11 @@
 
 如果你计划独立学习这些材料，你可以在[Gradescope](https://www.gradescope.com/)上创建一个账户，并使用此代码进行注册：93PWD8。然后，你可以使用以下链接进行学习：
 
-[https://www.gradescope.com/courses/33660](https://www.gradescope.com/courses/33660)
+[`www.gradescope.com/courses/33660`](https://www.gradescope.com/courses/33660)
 
 ## 4\. [巴黎综合理工学院](https://www.ip-paris.fr/education/masters/mention-mathematiques-appliquees-statistiques/master-year-2-data-science) - 数据科学
 
-巴黎综合理工学院提供一个名为Master Year 2 Data Science的课程。该课程将涵盖深度学习的基础知识，重点关注应用。
+巴黎综合理工学院提供一个名为 Master Year 2 Data Science 的课程。该课程将涵盖深度学习的基础知识，重点关注应用。
 
 这门课程适合那些精通数据科学并对深度学习有更大兴趣的人。为了确保你理解讲座幻灯片和笔记，请确保你的数据科学技能完好无损。
 
@@ -82,13 +82,13 @@
 
 麻省理工学院是位于剑桥的私立土地赠授研究型大学。他们提供一门名为深度学习和人工智能的课程，深入探讨深度学习的基础、自动驾驶汽车和人工智能。
 
-有2017年的讲座提供了对深度学习多年来发展的洞察。
+有 2017 年的讲座提供了对深度学习多年来发展的洞察。
 
 +   [幻灯片和讲座](https://deeplearning.mit.edu/)
 
-## 6\. [MIT开放课程网](https://ocw.mit.edu/)
+## 6\. [MIT 开放课程网](https://ocw.mit.edu/)
 
-麻省理工学院（MIT）是学习的领先机构，2001年，该大学推出了一个名为[开放课程网](https://ocw.mit.edu/index.htm)的平台。他们分享开放教育资源（OER）来帮助人们学习、增加知识和改变生活，完全免费！
+麻省理工学院（MIT）是学习的领先机构，2001 年，该大学推出了一个名为[开放课程网](https://ocw.mit.edu/index.htm)的平台。他们分享开放教育资源（OER）来帮助人们学习、增加知识和改变生活，完全免费！
 
 你可以搜索你想要的任何内容，然后点击课程；会有一个左侧下拉菜单提供课程大纲和其他资源。他们有一个课程列表，我会提供几个可以让你开始的课程：
 
@@ -100,11 +100,11 @@
 
 +   [问题集、讲座视频和带有解决方案的考试](https://ocw.mit.edu/courses/6-00-introduction-to-computer-science-and-programming-fall-2008/)
 
-**3\. 计算机科学与Python编程导论**
+**3\. 计算机科学与 Python 编程导论**
 
 +   [带有示例的习题集、讲义、讲座视频和编程作业](https://ocw.mit.edu/courses/6-0001-introduction-to-computer-science-and-programming-in-python-fall-2016/)
 
-**4\. Python计算机科学与编程入门**
+**4\. Python 计算机科学与编程入门**
 
 +   [讲座视频、习题集、讲义和编程作业](https://ocw.mit.edu/courses/6-0002-introduction-to-computational-thinking-and-data-science-fall-2016/)
 
@@ -124,9 +124,9 @@
 
 +   如果你没有钱但想学习数据科学
 
-+   [学习数据科学的最佳YouTube频道](/2022/04/top-youtube-channels-learning-data-science.html)
++   学习数据科学的最佳 YouTube 频道
 
-+   [哈佛大学最受欢迎且免费的编程入门课程：CS50](/2022/03/popular-intro-programming-course-harvard-free.html)
++   哈佛大学最受欢迎且免费的编程入门课程：CS50
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一位数据科学家和自由技术写作者。她特别感兴趣于提供数据科学职业建议或教程以及有关数据科学的理论知识。她还希望探索人工智能如何促进人类寿命的不同方式。她是一位热衷学习者，寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
 
@@ -134,12 +134,12 @@
 
 +   [学习数据分析和数据科学的最佳免费资源](https://www.kdnuggets.com/2024/03/365datascience-best-free-resources-learn-data-analysis-data-science)
 
-+   [掌握数据科学求职的5个免费资源](https://www.kdnuggets.com/5-free-resources-to-master-your-data-science-job-search)
++   [掌握数据科学求职的 5 个免费资源](https://www.kdnuggets.com/5-free-resources-to-master-your-data-science-job-search)
 
-+   [学习机器学习线性代数的3个最佳免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
++   [学习机器学习线性代数的 3 个最佳免费资源](https://www.kdnuggets.com/2022/03/top-3-free-resources-learn-linear-algebra-machine-learning.html)
 
-+   [如何开始使用SQL - 免费学习资源列表](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)
++   [如何开始使用 SQL - 免费学习资源列表](https://www.kdnuggets.com/2022/10/get-running-sql-list-free-learning-resources.html)
 
-+   [掌握Python的9个免费资源](https://www.kdnuggets.com/2022/11/9-free-resources-master-python.html)
++   [掌握 Python 的 9 个免费资源](https://www.kdnuggets.com/2022/11/9-free-resources-master-python.html)
 
-+   [可以帮助你成为专家的免费Python资源](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
++   [可以帮助你成为专家的免费 Python 资源](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)

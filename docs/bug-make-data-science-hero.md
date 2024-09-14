@@ -1,6 +1,6 @@
 # 一种能让你成为数据科学英雄的错误
 
-> 原文：[https://www.kdnuggets.com/2022/03/bug-make-data-science-hero.html](https://www.kdnuggets.com/2022/03/bug-make-data-science-hero.html)
+> 原文：[`www.kdnuggets.com/2022/03/bug-make-data-science-hero.html`](https://www.kdnuggets.com/2022/03/bug-make-data-science-hero.html)
 
 # 一种有用的错误？！？ 
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-![一种能让你成为数据科学英雄的错误](../Images/f195e4f98e7e0e77ceebc5753de1ef7a.png)
+![一种能让你成为数据科学英雄的错误](img/f195e4f98e7e0e77ceebc5753de1ef7a.png)
 
 来源：Web vector created by storyset - [www.freepik.com](https://www.freepik.com)
 
@@ -56,9 +56,9 @@
 
 # **触手可及的成果**
 
-从0到70%的进展相对容易，通过从零开始并获得巨大的回报。但一旦生成了基线，在此基础上进行边际改进并不容易。
+从 0 到 70%的进展相对容易，通过从零开始并获得巨大的回报。但一旦生成了基线，在此基础上进行边际改进并不容易。
 
-![一个能让你成为数据科学英雄的bug](../Images/357675f024e62b683f26c8246cc68b23.png)
+![一个能让你成为数据科学英雄的 bug](img/357675f024e62b683f26c8246cc68b23.png)
 
 来源：作者
 
@@ -78,9 +78,9 @@
 
 # **现实检查时间**
 
-![一个能让你成为数据科学英雄的bug](../Images/d3c946d376dad6a49b32a63f2fb6033d.png)
+![一个能让你成为数据科学英雄的 bug](img/d3c946d376dad6a49b32a63f2fb6033d.png)
 
-来源：背景矢量由redgreystock创建 - [www.freepik.com](https://www.freepik.com)
+来源：背景矢量由 redgreystock 创建 - [www.freepik.com](https://www.freepik.com)
 
 私下里说，他们负责所有与数据相关的事务，以实现业务目标。
 

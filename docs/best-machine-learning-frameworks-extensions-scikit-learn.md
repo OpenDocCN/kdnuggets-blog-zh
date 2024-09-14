@@ -1,8 +1,8 @@
 # Scikit-learn 的最佳机器学习框架和扩展
 
-> 原文：[https://www.kdnuggets.com/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html](https://www.kdnuggets.com/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html`](https://www.kdnuggets.com/2021/03/best-machine-learning-frameworks-extensions-scikit-learn.html)
 
-[评论](#comments)
+评论
 
 很多包实现了 [Scikit-learn](https://scikit-learn.org/) 估算器 API。
 
@@ -56,7 +56,7 @@ mapper.fit_transform(data)
 mapper.transformed_names_
 ```
 
-![scikit-learn 扩展](../Images/e20ec6b1d2a971d30cf79b13060e9d58.png)
+![scikit-learn 扩展](img/e20ec6b1d2a971d30cf79b13060e9d58.png)
 
 传递`df_out=True`给映射器将把结果返回为 Pandas DataFrame。
 
@@ -67,7 +67,7 @@ mapper = DataFrameMapper([
 ],df_out=True)
 ```
 
-![scikit-learn 扩展](../Images/3af27754b889c66f1b59217310b36c41.png)
+![scikit-learn 扩展](img/3af27754b889c66f1b59217310b36c41.png)
 
 ### [Sklearn-xarray](https://phausamann.github.io/sklearn-xarray/)
 
@@ -92,7 +92,7 @@ data = np.random.rand(16, 4)
 my_xarray = xr.DataArray(data)
 ```
 
-![scikit-learn 扩展](../Images/72abea9b124f6c109fed33700306eb55.png)
+![scikit-learn 扩展](img/72abea9b124f6c109fed33700306eb55.png)
 
 从 Sklearn 中选择一种转换应用于此 ‘DataArray’。在这种情况下，[我们来应用](https://phausamann.github.io/sklearn-xarray/content/wrappers.html) ‘StandardScaler’。
 
@@ -101,7 +101,7 @@ from sklearn.preprocessing import StandardScaler
 Xt = wrap(StandardScaler()).fit_transform(X)
 ```
 
-![scikit-learn 扩展](../Images/0608abb02873fc4fb3286eac01d25fda.png)
+![scikit-learn 扩展](img/0608abb02873fc4fb3286eac01d25fda.png)
 
 包装的估算器可以无缝地在 Sklearn 管道中使用。
 
@@ -217,13 +217,13 @@ tpot.export('tpot_digits_pipeline.py')
 
 这是一个自动特征工程的工具。它通过将时间序列和关系数据集转换为特征矩阵来工作。
 
-通过pip安装‘featuretools[complete]’以开始使用它。
+通过 pip 安装‘featuretools[complete]’以开始使用它。
 
 深度特征合成（DFS）可以用于自动特征工程。
 
 首先，你需要定义一个包含数据集中所有实体的字典。在‘featuretools’中，实体是一个单独的表。然后，定义不同实体之间的关系。
 
-下一步是将实体、关系列表和目标实体传递给DFS。这将为你提供特征矩阵及其对应的特征定义列表。
+下一步是将实体、关系列表和目标实体传递给 DFS。这将为你提供特征矩阵及其对应的特征定义列表。
 
 ```py
 import featuretools as ft
@@ -244,15 +244,15 @@ feature_matrix, features_defs = ft.dfs(entities=entities,
 
 ### [Neuraxle](https://www.neuraxle.org/)
 
-你可以使用Neuraxle进行超参数调优和AutoML。通过pip安装‘neuraxle’以开始使用它。
+你可以使用 Neuraxle 进行超参数调优和 AutoML。通过 pip 安装‘neuraxle’以开始使用它。
 
-除了Scikit-learn，Neuraxle还兼容Keras、TensorFlow和PyTorch。它还具有：
+除了 Scikit-learn，Neuraxle 还兼容 Keras、TensorFlow 和 PyTorch。它还具有：
 
 +   并行计算和序列化，
 
 +   通过提供对这类项目至关重要的抽象来处理时间序列。
 
-要使用Neuraxle进行自动化机器学习，你需要：
+要使用 Neuraxle 进行自动化机器学习，你需要：
 
 +   一个定义好的管道
 
@@ -270,11 +270,11 @@ feature_matrix, features_defs = ft.dfs(entities=entities,
 
 ### 实验框架
 
-现在是时候介绍几个你可以用于机器学习实验的SciKit工具了。
+现在是时候介绍几个你可以用于机器学习实验的 SciKit 工具了。
 
-### [SciKit-Learn实验室](https://scikit-learn-laboratory.readthedocs.io/en/latest/)
+### [SciKit-Learn 实验室](https://scikit-learn-laboratory.readthedocs.io/en/latest/)
 
-SciKit-Learn实验室是一个命令行工具，你可以用来运行机器学习实验。要开始使用它，请通过pip安装`skll`。
+SciKit-Learn 实验室是一个命令行工具，你可以用来运行机器学习实验。要开始使用它，请通过 pip 安装`skll`。
 
 在那之后，你需要获取一个`SKLL`格式的数据集。
 
@@ -288,7 +288,7 @@ $ run_experimen experiment.cfg
 
 ### Neptune
 
-[Scikit-learn与Neptune的集成](https://docs.neptune.ai/integrations/sklearn.html)让你可以使用Neptune记录你的实验。例如，你可以记录你的Scikit-learn回归器的总结。
+[Scikit-learn 与 Neptune 的集成](https://docs.neptune.ai/integrations/sklearn.html)让你可以使用 Neptune 记录你的实验。例如，你可以记录你的 Scikit-learn 回归器的总结。
 
 ```py
 from neptunecontrib.monitoring.sklearn import log_regressor_summary
@@ -300,15 +300,15 @@ log_regressor_summary(rfr, X_train, X_test, y_train, y_test)
 
 ### 模型选择
 
-现在让我们转移话题，看看专注于模型选择和优化的SciKit库。
+现在让我们转移话题，看看专注于模型选择和优化的 SciKit 库。
 
 ### [Scikit-optimize](https://scikit-optimize.github.io/stable/)
 
-这个库实现了基于序列模型的优化方法。通过pip安装‘scikit-optimize’以开始使用这些功能。
+这个库实现了基于序列模型的优化方法。通过 pip 安装‘scikit-optimize’以开始使用这些功能。
 
-Scikit-optimize可以通过基于贝叶斯定理的贝叶斯优化来进行超参数调优。
+Scikit-optimize 可以通过基于贝叶斯定理的贝叶斯优化来进行超参数调优。
 
-你可以使用‘BayesSearchCV’根据这一理论获得最佳参数。一个Scikit-learn模型作为第一个参数传递给它。
+你可以使用‘BayesSearchCV’根据这一理论获得最佳参数。一个 Scikit-learn 模型作为第一个参数传递给它。
 
 ```py
 from skopt.space import Real, Categorical, Integer
@@ -332,9 +332,9 @@ regressor.fit(X_train,y_train)
 
 ### [Sklearn-deap](https://github.com/rsteca/sklearn-deap)
 
-Sklearn-deap是一个用于实现[进化算法](https://en.wikipedia.org/wiki/Evolutionary_algorithm)的包。它减少了你找到最佳模型参数所需的时间。
+Sklearn-deap 是一个用于实现[进化算法](https://en.wikipedia.org/wiki/Evolutionary_algorithm)的包。它减少了你找到最佳模型参数所需的时间。
 
-它并不会尝试每一种可能的组合，而是只演化出结果最佳的组合。通过pip安装‘sklearn-deap’。
+它并不会尝试每一种可能的组合，而是只演化出结果最佳的组合。通过 pip 安装‘sklearn-deap’。
 
 ```py
 from evolutionary_search import EvolutionaryAlgorithmSearchCV
@@ -354,13 +354,13 @@ cv.fit(X, y)
 
 ### 生产用模型导出
 
-继续前进，现在我们来看看可以用来导出模型以供生产的Scikit工具。
+继续前进，现在我们来看看可以用来导出模型以供生产的 Scikit 工具。
 
 ### [sklearn-onnx](https://github.com/onnx/sklearn-onnx/)
 
-sklearn-onnx实现了将Scikit-learn模型转换为[ONNX](https://onnx.ai/)。
+sklearn-onnx 实现了将 Scikit-learn 模型转换为[ONNX](https://onnx.ai/)。
 
-要使用它，你需要通过pip获取‘skl2onnx’。一旦你的管道准备好，你可以使用‘to_onnx’函数来[转换](http://onnx.ai/sklearn-onnx/auto_tutorial/plot_abegin_convert_pipeline.html)模型为ONNX格式。
+要使用它，你需要通过 pip 获取‘skl2onnx’。一旦你的管道准备好，你可以使用‘to_onnx’函数来[转换](http://onnx.ai/sklearn-onnx/auto_tutorial/plot_abegin_convert_pipeline.html)模型为 ONNX 格式。
 
 ```py
 from skl2onnx import to_onnx 
@@ -373,7 +373,7 @@ onx = to_onnx(pipeline, X_train[:1].astype(numpy.float32))
 
 它处理各种基于树的模型，如随机森林和梯度提升树。
 
-你可以用它导入Scikit-learn模型。这里的‘model’是一个scikit-learn模型对象。
+你可以用它导入 Scikit-learn 模型。这里的‘model’是一个 scikit-learn 模型对象。
 
 ```py
 import treelite.sklearn 
@@ -386,7 +386,7 @@ model = treelite.sklearn.import_model(model)
 
 ### [Dtreeviz](https://github.com/parrt/dtreeviz/)
 
-dtreeviz用于决策树的可视化和模型解释。
+dtreeviz 用于决策树的可视化和模型解释。
 
 ```py
 from dtreeviz.trees import dtreeviz 
@@ -398,26 +398,26 @@ viz = dtreeviz(
 )
 ```
 
-![](../Images/d12bd6f8518cbf2053f0378db032cb43.png)
+![](img/d12bd6f8518cbf2053f0378db032cb43.png)
 
 ### [Eli5](https://github.com/TeamHG-Memex/eli5/)
 
-eli5是一个可以用于调试和检查机器学习分类器的包。你还可以用它来解释这些分类器的预测。
+eli5 是一个可以用于调试和检查机器学习分类器的包。你还可以用它来解释这些分类器的预测。
 
-例如，Scikit-learn估算器权重的解释可以如下所示：
+例如，Scikit-learn 估算器权重的解释可以如下所示：
 
 ```py
 import eli5 
 eli5.show_weights(model)
 ```
 
-![scikit-learn扩展](../Images/2f9114ee1b717a317a3ddf58fa13bfc1.png)
+![scikit-learn 扩展](img/2f9114ee1b717a317a3ddf58fa13bfc1.png)
 
-### 其他SciKit工具
+### 其他 SciKit 工具
 
 ### [dabl](https://github.com/amueller/dabl)– 数据分析基础库
 
-dabl提供了常见机器学习任务的样板代码。它仍在积极开发中，因此不推荐用于生产系统。
+dabl 提供了常见机器学习任务的样板代码。它仍在积极开发中，因此不推荐用于生产系统。
 
 ```py
 import dabl
@@ -431,9 +431,9 @@ print("Accuracy score", sc.score(X_test, y_test))
 
 ### [skorch](https://github.com/skorch-dev/skorch)
 
-Skorch是PyTorch的Scikit-learn封装器。
+Skorch 是 PyTorch 的 Scikit-learn 封装器。
 
-它允许你在Scikit-learn中使用PyTorch。它支持多种数据类型，如PyTorch Tensors、NumPy数组和Python字典。
+它允许你在 Scikit-learn 中使用 PyTorch。它支持多种数据类型，如 PyTorch Tensors、NumPy 数组和 Python 字典。
 
 ```py
 from skorch import NeuralNetClassifier
@@ -448,7 +448,7 @@ net.fit(X, y)
 
 ### 最后的思考
 
-在本文中，我们探讨了一些扩展Scikit-learn生态系统的流行工具和库。
+在本文中，我们探讨了一些扩展 Scikit-learn 生态系统的流行工具和库。
 
 如你所见，这些工具可以用于：
 
@@ -474,21 +474,21 @@ net.fit(X, y)
 
 **相关：**
 
-+   [数据科学、数据可视化和机器学习的顶级 Python 库](/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   数据科学、数据可视化和机器学习的顶级 Python 库
 
-+   [深度学习、自然语言处理和计算机视觉的顶级 Python 库](/2020/11/top-python-libraries-deep-learning-natural-language-processing-computer-vision.html)
++   深度学习、自然语言处理和计算机视觉的顶级 Python 库
 
-+   [在 TensorFlow 中修剪机器学习模型](/2020/12/pruning-machine-learning-models-tensorflow.html)
++   在 TensorFlow 中修剪机器学习模型
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -498,7 +498,7 @@ net.fit(X, y)
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [分析一个90亿美元的 AI 失败案例](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [分析一个 90 亿美元的 AI 失败案例](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [成功数据科学家的 5 大特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 

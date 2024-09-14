@@ -1,8 +1,8 @@
 # 训练和可视化词向量
 
-> 原文：[https://www.kdnuggets.com/2018/01/training-visualising-word-vectors.html](https://www.kdnuggets.com/2018/01/training-visualising-word-vectors.html)
+> 原文：[`www.kdnuggets.com/2018/01/training-visualising-word-vectors.html`](https://www.kdnuggets.com/2018/01/training-visualising-word-vectors.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Priyanka Kochhar](https://github.com/priya-dwivedi) 编写，深度学习顾问**
 
@@ -12,7 +12,7 @@
 
 请参见下面的剪辑。
 
-![](../Images/95e7808cb6d9ccfb709d13388288fc97.png)
+![](img/95e7808cb6d9ccfb709d13388288fc97.png)
 
 你可以在我的 [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/word2vec_skipgram/Skip-Grams-Solution.ipynb) 仓库中找到完整代码。
 
@@ -48,7 +48,7 @@ Nearest to http: www, htm, com, edu, html, org, php, ac,
 
 生成这些词向量主要有两种模型——连续词袋模型（CBOW）和 Skip Gram 模型。CBOW 模型试图根据上下文单词预测中心单词，而 Skip Gram 模型试图根据中心单词预测上下文单词。一个简化的例子是：
 
-CBOW: 猫吃了____。填补空白，在这种情况下，是“食物”。
+CBOW: 猫吃了 ____。填补空白，在这种情况下，是“食物”。
 
 Skip-gram: ___ ___ ___ 食物。填补词的上下文。在这种情况下，是“猫吃了”
 
@@ -76,9 +76,9 @@ vocab_to_int = {word: ii for ii, word in enumerate(vocab, 0)}
 
 3\. 创建输入和目标
 
-Skip Gram的输入是每个词（编码为整数），目标是该窗口周围的词。Mikolov等人发现，如果这个窗口的大小是可变的，并且离中心词较近的词被更频繁地采样，性能会更好。
+Skip Gram 的输入是每个词（编码为整数），目标是该窗口周围的词。Mikolov 等人发现，如果这个窗口的大小是可变的，并且离中心词较近的词被更频繁地采样，性能会更好。
 
-“由于距离较远的词通常与当前词的相关性不如靠近的词，因此我们通过在训练示例中减少从这些词中采样的频率来给予远离词较少的权重……如果我们选择窗口大小=5，对于每个训练词，我们将随机选择一个在1到窗口大小之间的数字R，然后使用当前词的历史中R个词和未来中R个词作为正确标签。”
+“由于距离较远的词通常与当前词的相关性不如靠近的词，因此我们通过在训练示例中减少从这些词中采样的频率来给予远离词较少的权重……如果我们选择窗口大小=5，对于每个训练词，我们将随机选择一个在 1 到窗口大小之间的数字 R，然后使用当前词的历史中 R 个词和未来中 R 个词作为正确标签。”
 
 ```py
  R = np.random.randint(1, window_size+1)
@@ -91,23 +91,23 @@ Skip Gram的输入是每个词（编码为整数），目标是该窗口周围�
 
 从[Chris McCormick 的博客](http://mccormickml.com/2016/04/19/word2vec-tutorial-the-skip-gram-model/)中，我们可以看到我们将要构建的网络的一般结构。
 
-![](../Images/968c128d8ca16ad61a212372dd92165f.png)
+![](img/968c128d8ca16ad61a212372dd92165f.png)
 
-我们将把输入词“ants”表示为一个独热向量。这个向量将有10,000个分量（每个词汇表中的一个），我们将在对应“ants”词的位置上放置一个“1”，其他位置上放置“0”。
+我们将把输入词“ants”表示为一个独热向量。这个向量将有 10,000 个分量（每个词汇表中的一个），我们将在对应“ants”词的位置上放置一个“1”，其他位置上放置“0”。
 
-网络的输出是一个包含10,000个分量的单一向量，其中包含我们词汇表中每个词的概率，即随机选择的附近词是该词汇表词的概率。
+网络的输出是一个包含 10,000 个分量的单一向量，其中包含我们词汇表中每个词的概率，即随机选择的附近词是该词汇表词的概率。
 
-在训练结束时，隐藏层将拥有训练好的词向量。隐藏层的大小对应于我们向量的维度数量。在上述示例中，每个词将具有长度为300的向量。
+在训练结束时，隐藏层将拥有训练好的词向量。隐藏层的大小对应于我们向量的维度数量。在上述示例中，每个词将具有长度为 300 的向量。
 
-你可能已经注意到，skip-gram神经网络包含大量权重……以我们300个特征和10,000个单词的词汇表为例，每个隐藏层和输出层都有300万权重！在大型数据集上训练将非常困难，因此word2vec的作者引入了一些调整以使训练成为可能。你可以在 [链接](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/) 中阅读更多内容。 [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/word2vec_skipgram/Skip-Grams-Solution.ipynb) 上的代码实现了这些调整以加速训练。
+你可能已经注意到，skip-gram 神经网络包含大量权重……以我们 300 个特征和 10,000 个单词的词汇表为例，每个隐藏层和输出层都有 300 万权重！在大型数据集上训练将非常困难，因此 word2vec 的作者引入了一些调整以使训练成为可能。你可以在 [链接](http://mccormickml.com/2017/01/11/word2vec-tutorial-part-2-negative-sampling/) 中阅读更多内容。 [Github](https://github.com/priya-dwivedi/Deep-Learning/blob/master/word2vec_skipgram/Skip-Grams-Solution.ipynb) 上的代码实现了这些调整以加速训练。
 
-5\. 使用Tensorboard进行可视化
+5\. 使用 Tensorboard 进行可视化
 
-你可以使用Tensorboard中的嵌入投影器来可视化嵌入。为此，你需要做几件事：
+你可以使用 Tensorboard 中的嵌入投影器来可视化嵌入。为此，你需要做几件事：
 
 +   在训练结束时将模型保存在检查点目录中
 
-+   创建一个metadata.tsv文件，其中包含每个整数到单词的映射，以便Tensorboard显示单词而不是整数。将此tsv文件保存在相同的检查点目录中
++   创建一个 metadata.tsv 文件，其中包含每个整数到单词的映射，以便 Tensorboard 显示单词而不是整数。将此 tsv 文件保存在相同的检查点目录中
 
 +   运行这段代码：
 
@@ -121,41 +121,41 @@ embedding_conf.metadata_path = os.path.join(‘checkpoints’, ‘metadata.tsv�
 projector.visualize_embeddings(summary_writer, config)
 ```
 
-+   通过将Tensorboard指向检查点目录来打开Tensorboard
++   通过将 Tensorboard 指向检查点目录来打开 Tensorboard
 
 就这些了！
 
-如果你喜欢这篇文章，请给我一个❤️:) 希望你能拉取代码并自己尝试。如果你对此话题有其他想法，请在这篇文章下评论或通过 [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com) 联系我。
+如果你喜欢这篇文章，请给我一个❤️:) 希望你能拉取代码并自己尝试。如果你对此话题有其他想法，请在这篇文章下评论或通过 priya.toronto3@gmail.com 联系我。
 
 **其他文章**：[ https://medium.com/@priya.dwivedi/](https://medium.com/@priya.dwivedi/)
 
-PS：我有一家深度学习咨询公司，喜欢处理有趣的问题。如果你有一个我们可以合作的项目，请通过 [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com) 联系我。
+PS：我有一家深度学习咨询公司，喜欢处理有趣的问题。如果你有一个我们可以合作的项目，请通过 priya.toronto3@gmail.com 联系我。
 
 **参考文献：**
 
 +   [Udacity](https://www.udacity.com/) 深度学习纳米学位
 
-**简介：[Priyanka Kochhar](https://github.com/priya-dwivedi)** 已从事数据科学工作超过10年。她现在有自己的深度学习咨询公司，喜欢处理有趣的问题。她帮助多个初创公司部署创新的AI解决方案。如果你有一个她可以合作的项目，请通过 [priya.toronto3@gmail.com](mailto:priya.toronto3@gmail.com) 联系她。
+**简介：[Priyanka Kochhar](https://github.com/priya-dwivedi)** 已从事数据科学工作超过 10 年。她现在有自己的深度学习咨询公司，喜欢处理有趣的问题。她帮助多个初创公司部署创新的 AI 解决方案。如果你有一个她可以合作的项目，请通过 priya.toronto3@gmail.com 联系她。
 
 [原文](https://towardsdatascience.com/training-and-visualising-word-vectors-2f946c6430f8)。经许可转载。
 
 **相关：**
 
-+   [接近文本数据科学任务的框架](/2017/11/framework-approaching-textual-data-tasks.html)
++   接近文本数据科学任务的框架
 
-+   [文本数据预处理的一般方法](/2017/12/general-approach-preprocessing-text-data.html)
++   文本数据预处理的一般方法
 
-+   [超越Word2Vec仅用于词语](/2018/01/beyond-word2vec-for-words.html)
++   超越 Word2Vec 仅用于词语
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 

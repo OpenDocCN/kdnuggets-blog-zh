@@ -1,16 +1,16 @@
 # PyTorch LSTM：文本生成教程
 
-> 原文：[https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html](https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html)
+> 原文：[`www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html`](https://www.kdnuggets.com/2020/07/pytorch-lstm-text-generation-tutorial.html)
 
-[评论](#comments)
+评论
 
 **作者 [Domas Bitvinskas](https://domasbitvinskas.com/)，Closeheat**
 
-长短期记忆（LSTM）是一种流行的递归神经网络（RNN）架构。本教程讲解如何在PyTorch上使用LSTM生成文本；在这种情况下 - 一些相当无聊的笑话。
+长短期记忆（LSTM）是一种流行的递归神经网络（RNN）架构。本教程讲解如何在 PyTorch 上使用 LSTM 生成文本；在这种情况下 - 一些相当无聊的笑话。
 
 本教程需要：
 
-+   基本的Python、PyTorch和机器学习知识
++   基本的 Python、PyTorch 和机器学习知识
 
 +   本地安装的 [Python](https://www.python.org/) v3+， [PyTorch](https://pytorch.org/) v1+， [NumPy](https://numpy.org/) v1+
 
@@ -18,19 +18,19 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-### 什么是LSTM？
+### 什么是 LSTM？
 
-LSTM是RNN的一种变体，广泛应用于深度学习。如果你在处理数据序列时，可以使用LSTM。
+LSTM 是 RNN 的一种变体，广泛应用于深度学习。如果你在处理数据序列时，可以使用 LSTM。
 
-以下是你可能熟悉的LSTM网络的最直接应用场景：
+以下是你可能熟悉的 LSTM 网络的最直接应用场景：
 
 +   时间序列预测（例如，股票预测）
 
@@ -44,39 +44,39 @@ LSTM是RNN的一种变体，广泛应用于深度学习。如果你在处理数�
 
 ### RNN
 
-在开始使用LSTM之前，你需要了解RNN的工作原理。
+在开始使用 LSTM 之前，你需要了解 RNN 的工作原理。
 
-RNN是处理序列数据的神经网络。它可以是视频、音频、文本、股市时间序列甚至单张图像被切割成序列的各部分。
+RNN 是处理序列数据的神经网络。它可以是视频、音频、文本、股市时间序列甚至单张图像被切割成序列的各部分。
 
-与RNN相比，标准神经网络（卷积神经网络或普通神经网络）有一个主要缺点 - 它们不能利用之前的输入来指导后续的预测。没有某种形式的记忆，无法解决某些机器学习问题。
+与 RNN 相比，标准神经网络（卷积神经网络或普通神经网络）有一个主要缺点 - 它们不能利用之前的输入来指导后续的预测。没有某种形式的记忆，无法解决某些机器学习问题。
 
-例如，当你有一些视频帧显示一个球的移动，并想预测球的方向时，你可能会遇到问题。标准神经网络看到的问题是：你在一张图像中看到一个球，在另一张图像中也看到一个球。它没有机制将这两张图像作为序列连接起来。标准神经网络不能将两个独立的球的图像与“球在移动”的概念联系起来。它只看到图像#1中有一个球，图像#2中也有一个球，但网络输出是分开的。
+例如，当你有一些视频帧显示一个球的移动，并想预测球的方向时，你可能会遇到问题。标准神经网络看到的问题是：你在一张图像中看到一个球，在另一张图像中也看到一个球。它没有机制将这两张图像作为序列连接起来。标准神经网络不能将两个独立的球的图像与“球在移动”的概念联系起来。它只看到图像#1 中有一个球，图像#2 中也有一个球，但网络输出是分开的。
 
-![CNN预测](../Images/baa3bd7a309f8f353a6148d3b91b7a0c.png)
+![CNN 预测](img/baa3bd7a309f8f353a6148d3b91b7a0c.png)
 
-将其与RNN进行比较，RNN记住最后的帧，并可以用来指导下一次预测。
+将其与 RNN 进行比较，RNN 记住最后的帧，并可以用来指导下一次预测。
 
-![RNN预测](../Images/07258636d83044d793a5b5e1d3dc6c8a.png)
+![RNN 预测](img/07258636d83044d793a5b5e1d3dc6c8a.png)
 
-### LSTM与RNN
+### LSTM 与 RNN
 
-典型的RNN无法记忆长序列。所谓的“梯度消失”效应发生在RNN单元网络的反向传播阶段。携带序列开始部分信息的单元梯度经过小数的矩阵乘法后在长序列中接近0。换句话说，序列开始部分的信息对序列末端几乎没有影响。
+典型的 RNN 无法记忆长序列。所谓的“梯度消失”效应发生在 RNN 单元网络的反向传播阶段。携带序列开始部分信息的单元梯度经过小数的矩阵乘法后在长序列中接近 0。换句话说，序列开始部分的信息对序列末端几乎没有影响。
 
 你可以在递归神经网络示例中看到这一点。给定足够长的序列，序列第一个元素的信息对序列最后一个元素的输出没有影响。
 
-LSTM是一种RNN架构，可以记忆长序列 - 最多100个元素。LSTM具有记忆门控机制，使长期记忆能够继续流入LSTM单元。
+LSTM 是一种 RNN 架构，可以记忆长序列 - 最多 100 个元素。LSTM 具有记忆门控机制，使长期记忆能够继续流入 LSTM 单元。
 
-![LSTM单元](../Images/c94720cbdb164fbdc2e54c03668782df.png)
+![LSTM 单元](img/c94720cbdb164fbdc2e54c03668782df.png)
 
-### 使用PyTorch进行文本生成
+### 使用 PyTorch 进行文本生成
 
-你将使用PyTorch中的LSTM网络训练一个笑话文本生成器，并遵循最佳实践。首先，创建一个新的文件夹来存储代码：
+你将使用 PyTorch 中的 LSTM 网络训练一个笑话文本生成器，并遵循最佳实践。首先，创建一个新的文件夹来存储代码：
 
 `$ mkdir text-generation`
 
 ### 模型
 
-要创建一个LSTM模型，在`text-generation`文件夹中创建一个名为`model.py`的文件，内容如下：
+要创建一个 LSTM 模型，在`text-generation`文件夹中创建一个名为`model.py`的文件，内容如下：
 
 ```py
 import torch
@@ -113,17 +113,17 @@ class Model(nn.Module):
                 torch.zeros(self.num_layers, sequence_length, self.lstm_size))
 ```
 
-这是一个标准的PyTorch模型。`Embedding`层将单词索引转换为单词向量。`LSTM`是网络的主要可学习部分 - PyTorch实现中的`LSTM`单元内部实现了门控机制，可以学习长序列的数据。
+这是一个标准的 PyTorch 模型。`Embedding`层将单词索引转换为单词向量。`LSTM`是网络的主要可学习部分 - PyTorch 实现中的`LSTM`单元内部实现了门控机制，可以学习长序列的数据。
 
-如早前[什么是LSTM？](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial#what-is-lstm)部分所述 - RNN和LSTM具有在训练周期之间传递的额外状态信息。`forward`函数具有一个`prev_state`参数。这个状态保持在模型外部，并手动传递。
+如早前[什么是 LSTM？](https://closeheat.com/blog/pytorch-lstm-text-generation-tutorial#what-is-lstm)部分所述 - RNN 和 LSTM 具有在训练周期之间传递的额外状态信息。`forward`函数具有一个`prev_state`参数。这个状态保持在模型外部，并手动传递。
 
-它还具有`init_state`函数。在每个epoch开始时调用此函数，以初始化正确形状的状态。
+它还具有`init_state`函数。在每个 epoch 开始时调用此函数，以初始化正确形状的状态。
 
 ### 数据集
 
-在本教程中，我们使用Reddit清理笑话数据集来训练网络。[下载 (139KB)](https://raw.githubusercontent.com/amoudgl/short-jokes-dataset/master/data/reddit-cleanjokes.csv)数据集，并将其放入`text-generation/data/`文件夹中。
+在本教程中，我们使用 Reddit 清理笑话数据集来训练网络。[下载 (139KB)](https://raw.githubusercontent.com/amoudgl/short-jokes-dataset/master/data/reddit-cleanjokes.csv)数据集，并将其放入`text-generation/data/`文件夹中。
 
-数据集包含1623个笑话，内容如下：
+数据集包含 1623 个笑话，内容如下：
 
 ```py
 ID,Joke
@@ -133,7 +133,7 @@ ID,Joke
 …
 ```
 
-要将数据加载到PyTorch中，请使用PyTorch的`Dataset`类。创建一个名为`dataset.py`的文件，内容如下：
+要将数据加载到 PyTorch 中，请使用 PyTorch 的`Dataset`类。创建一个名为`dataset.py`的文件，内容如下：
 
 ```py
 import torch
@@ -173,7 +173,7 @@ class Dataset(torch.utils.data.Dataset):
         )
 ```
 
-这个`Dataset`类继承自PyTorch的`torch.utils.data.Dataset`类，并定义了两个重要的方法`__len__`和`__getitem__`。详细了解PyTorch中`Dataset`类的工作原理，请参考[数据加载教程](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class)。
+这个`Dataset`类继承自 PyTorch 的`torch.utils.data.Dataset`类，并定义了两个重要的方法`__len__`和`__getitem__`。详细了解 PyTorch 中`Dataset`类的工作原理，请参考[数据加载教程](https://pytorch.org/tutorials/beginner/data_loading_tutorial.html#dataset-class)。
 
 `load_words`函数加载数据集。数据集中计算独特的词汇量，以定义网络的词汇表大小和嵌入大小。`index_to_word`和`word_to_index`将单词转换为数字索引，反之亦然。
 
@@ -310,11 +310,11 @@ print(predict(dataset, model, text='Knock knock. Whos there?'))
 
 **相关：**
 
-+   [PyTorch 深度学习：免费电子书](/2020/07/pytorch-deep-learning-free-ebook.html)
++   PyTorch 深度学习：免费电子书
 
-+   [使用 TensorFlow 和 LSTM 循环神经网络生成烹饪食谱：逐步指南](/2020/07/generating-cooking-recipes-using-tensorflow.html)
++   使用 TensorFlow 和 LSTM 循环神经网络生成烹饪食谱：逐步指南
 
-+   [你应该知道的 PyTorch 最重要的基础知识](/2020/06/fundamentals-pytorch.html)
++   你应该知道的 PyTorch 最重要的基础知识
 
 ### 更多相关主题
 

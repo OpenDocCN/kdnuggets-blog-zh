@@ -1,22 +1,22 @@
 # 处理数据泄漏
 
-> 原文：[https://www.kdnuggets.com/2021/10/dealing-data-leakage.html](https://www.kdnuggets.com/2021/10/dealing-data-leakage.html)
+> 原文：[`www.kdnuggets.com/2021/10/dealing-data-leakage.html`](https://www.kdnuggets.com/2021/10/dealing-data-leakage.html)
 
-[评论](#comments)
+评论
 
 **由 [Susan Currie Sivek, Ph.D.](https://www.linkedin.com/in/ssivek/)，高级数据科学记者**
 
-![图示](../Images/0837488b007543b7781e158aa9753758.png)
+![图示](img/0837488b007543b7781e158aa9753758.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -52,7 +52,7 @@
 
 在所有这些情况下，当模型构建时包含了在预测时无法知道的信息。我们无法在尝试确定客户是否会订阅时知道他们会订阅多少个月。（我们可以构建一个预测订阅月数的模型吗？当然可以。但我们会基于已知订阅者的数据，而不是所有可能订阅或不订阅的客户数据。）类似地，如果我们告诉模型某些材料建造的房屋曾经提出过火灾保险索赔，那么我们就把火灾发生后的知识引入了试图预测火灾的模型中。
 
-即使是看似无害的细节，如文件大小或时间戳，也可能无意中成为目标变量的代理。例如，2013年的Kaggle竞赛[因这种问题被暂停](https://www.kaggle.com/c/the-icml-2013-whale-challenge-right-whale-redux/discussion/4865#25839)并重新整理数据集。发现（并认真报告）泄露的团队曾短暂地在排行榜上名列前茅！
+即使是看似无害的细节，如文件大小或时间戳，也可能无意中成为目标变量的代理。例如，2013 年的 Kaggle 竞赛[因这种问题被暂停](https://www.kaggle.com/c/the-icml-2013-whale-challenge-right-whale-redux/discussion/4865#25839)并重新整理数据集。发现（并认真报告）泄露的团队曾短暂地在排行榜上名列前茅！
 
 数据泄露导致的结果是对训练数据的过拟合。你的模型可能在具备额外知识的情况下预测得非常好——在开卷考试中表现出色——但在预测时没有这些信息时表现就不好。
 
@@ -70,7 +70,7 @@
 
 另一个问题可能会出现，如果你使用 [k-折交叉验证](https://community.alteryx.com/t5/Data-Science/Holdouts-and-Cross-Validation-Why-the-Data-Used-to-Evaluate-your/ba-p/448982?utm_content=827583&utm_source=kdn) 来评估你的模型。只要你的数据集中每个人/来源仅包含一个观察值，这种类型的泄漏对你来说不应该是个问题。然而，如果你的数据集中每个人或来源有多个观察值（即，数据行），那么在创建训练和测试模型的数据子集或“折”时，来自同一来源的所有观察值需要被归为一组。
 
-例如，如果来自A人的观察值被包含在训练组和测试组中，你可能会使用A人的训练数据来预测A人的测试数据。模型在测试集上的表现似乎更好——测试集也包含A人——因为它已经从训练集中知道了A人的一些信息。但在生产中，它不会有这种先前接触的优势。有关这个问题的更多详细信息（有时称为“组泄漏”），请查看这篇文章。
+例如，如果来自 A 人的观察值被包含在训练组和测试组中，你可能会使用 A 人的训练数据来预测 A 人的测试数据。模型在测试集上的表现似乎更好——测试集也包含 A 人——因为它已经从训练集中知道了 A 人的一些信息。但在生产中，它不会有这种先前接触的优势。有关这个问题的更多详细信息（有时称为“组泄漏”），请查看这篇文章。
 
 [via GIPHY](https://giphy.com/gifs/xyShS1HDFNNZe)
 
@@ -94,7 +94,7 @@
 
 ### 你的模型防泄漏
 
-我希望这个概述为你提供了一些新的技术，以帮助你避免这些泄漏情况！通过仔细的EDA和对数据集的全面了解，以及正确的预处理和交叉验证设置，你应该能够保持目标的良好控制，并使数据集免于污染。
+我希望这个概述为你提供了一些新的技术，以帮助你避免这些泄漏情况！通过仔细的 EDA 和对数据集的全面了解，以及正确的预处理和交叉验证设置，你应该能够保持目标的良好控制，并使数据集免于污染。
 
 ### 推荐阅读
 
@@ -106,17 +106,17 @@
 
 最初发布于[Alteryx Community Data Science Blog](https://community.alteryx.com/t5/Data-Science/Dealing-with-Data-Leakage/ba-p/827583?utm_content=827583&utm_source=kdn)。
 
-**简介：[Susan Currie Sivek, Ph.D.](https://www.linkedin.com/in/ssivek/)** 是Alteryx Community的高级数据科学记者，她与全球观众探讨数据科学概念。她也是[数据科学混音器](https://community.alteryx.com/t5/Data-Science-Mixer/bg-p/mixer?utm_content=733996&utm_source=kdn)播客的主持人。她在学术界和社会科学方面的背景为她研究数据和传达复杂观点的方式提供了信息，同时她的新闻培训也为她的创意注入了灵感。
+**简介：[Susan Currie Sivek, Ph.D.](https://www.linkedin.com/in/ssivek/)** 是 Alteryx Community 的高级数据科学记者，她与全球观众探讨数据科学概念。她也是[数据科学混音器](https://community.alteryx.com/t5/Data-Science-Mixer/bg-p/mixer?utm_content=733996&utm_source=kdn)播客的主持人。她在学术界和社会科学方面的背景为她研究数据和传达复杂观点的方式提供了信息，同时她的新闻培训也为她的创意注入了灵感。
 
 [原文](https://community.alteryx.com/t5/Data-Science/Dealing-with-Data-Leakage/ba-p/827583?utm_content=827583&utm_source=kdn)。经授权转载。
 
 **相关内容：**
 
-+   [机器学习的持续训练 – 成功策略的框架](/2021/04/continuous-training-machine-learning.html)
++   机器学习的持续训练 – 成功策略的框架
 
-+   [AI训练数据的5篇重要论文](/2020/06/5-essential-papers-ai-training-data.html)
++   AI 训练数据的 5 篇重要论文
 
-+   [Python中的数据集拆分最佳实践](/2020/05/dataset-splitting-best-practices-python.html)
++   Python 中的数据集拆分最佳实践
 
 ### 更多相关话题
 

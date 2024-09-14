@@ -1,12 +1,12 @@
-# 使用Hugging Face Transformers进行文本情感检测
+# 使用 Hugging Face Transformers 进行文本情感检测
 
-> 原文：[https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
+> 原文：[`www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text`](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
 
-![情感检测和情感分析是流行的NLP任务](../Images/22573f8999395d71f8c12dd0adedaba6.png)
+![情感检测和情感分析是流行的 NLP 任务](img/22573f8999395d71f8c12dd0adedaba6.png)
 
-图片由[juicy_fish在Freepik](https://www.freepik.com/free-vector/three-feedback-emoji-happy-sad-medium-flat-style_41681695.htm#fromView=search&page=1&position=13&uuid=6fbf4fab-f376-491f-992a-75df016f5210)提供
+图片由[juicy_fish 在 Freepik](https://www.freepik.com/free-vector/three-feedback-emoji-happy-sad-medium-flat-style_41681695.htm#fromView=search&page=1&position=13&uuid=6fbf4fab-f376-491f-992a-75df016f5210)提供
 
-Hugging Face托管了各种基于变换器的语言模型（LMs），这些模型专门用于处理语言理解和语言生成任务，包括但不限于：
+Hugging Face 托管了各种基于变换器的语言模型（LMs），这些模型专门用于处理语言理解和语言生成任务，包括但不限于：
 
 +   文本分类
 
@@ -24,11 +24,11 @@ Hugging Face托管了各种基于变换器的语言模型（LMs），这些模�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -36,7 +36,7 @@ Hugging Face托管了各种基于变换器的语言模型（LMs），这些模�
 
 还有一些语言模型，虽然仍然可以被识别为情感分析模型，但它们被训练来将文本分类为几种情感，例如愤怒、快乐、悲伤等。
 
-本教程基于Python，重点介绍了如何加载和展示使用Hugging Face预训练模型来分类输入文本的主要情感。我们将使用[情感数据集](https://huggingface.co/datasets/jeffnyman/emotions)，这是Hugging Face中心公开提供的数据集。该数据集包含成千上万条用英语编写的Twitter消息。
+本教程基于 Python，重点介绍了如何加载和展示使用 Hugging Face 预训练模型来分类输入文本的主要情感。我们将使用[情感数据集](https://huggingface.co/datasets/jeffnyman/emotions)，这是 Hugging Face 中心公开提供的数据集。该数据集包含成千上万条用英语编写的 Twitter 消息。
 
 ## 加载数据集
 
@@ -58,7 +58,7 @@ num_rows: 16000
 })
 ```
 
-情感数据集中的训练折叠包含16000个与Twitter消息相关的实例。每个实例有两个特征：一个输入特征包含实际消息文本，一个输出特征或标签包含其关联的情感作为数字标识符：
+情感数据集中的训练折叠包含 16000 个与 Twitter 消息相关的实例。每个实例有两个特征：一个输入特征包含实际消息文本，一个输出特征或标签包含其关联的情感作为数字标识符：
 
 +   0: 悲伤
 

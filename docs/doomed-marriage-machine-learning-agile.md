@@ -1,12 +1,12 @@
 # 机器学习与敏捷的注定失败的结合
 
-> 原文：[https://www.kdnuggets.com/2019/11/doomed-marriage-machine-learning-agile.html](https://www.kdnuggets.com/2019/11/doomed-marriage-machine-learning-agile.html)
+> 原文：[`www.kdnuggets.com/2019/11/doomed-marriage-machine-learning-agile.html`](https://www.kdnuggets.com/2019/11/doomed-marriage-machine-learning-agile.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ian Xiao](https://www.linkedin.com/in/ianxiao/)，Dessa 的参与负责人**
 
-![图片](../Images/687835b90a7daa8db3e550b10691b099.png)
+![图片](img/687835b90a7daa8db3e550b10691b099.png)
 
 图片由 [photo-nic.co.uk nic](https://unsplash.com/@chiro?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，[Unsplash](https://unsplash.com/s/photos/falling?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,39 +14,39 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作。
 
 * * *
 
 **总结**: 在机器学习项目中，过度采用敏捷和塞巴斯蒂安的建议的三大错误。我认为在机器学习项目中什么是可以用敏捷方法做的，什么不是。
 
-***免责声明***: 本文未得到我所在公司或我提到的任何工具或服务的认可或赞助。我将AI、数据科学和机器学习交替使用。
+***免责声明***: 本文未得到我所在公司或我提到的任何工具或服务的认可或赞助。我将 AI、数据科学和机器学习交替使用。
 
 ***喜欢你读到的内容吗？*** 关注我在 *[*Medium*](https://medium.com/@ianxiao)*、*[*LinkedIn*](https://www.linkedin.com/in/ianxiao/)* 或 *[*Twitter*](https://twitter.com/ian_xxiao)*。另外，你是否想作为数据科学家学习商业思维和沟通技巧？查看我的“*[*利用机器学习影响力*](https://www.bizanalyticsbootcamp.com/influence-with-ml-digital)*”指南。
 
 ### 一个忏悔
 
-2016年11月3日晚上11:35。我坐在多伦多心脏地带贝街的一个会议室里。我盯着街对面空荡荡的办公室楼层。我的房间灯光渐暗。我的手机亮了，我收到了三个通知。
+2016 年 11 月 3 日晚上 11:35。我坐在多伦多心脏地带贝街的一个会议室里。我盯着街对面空荡荡的办公室楼层。我的房间灯光渐暗。我的手机亮了，我收到了三个通知。
 
-// 高管演示，10小时内。
+// 高管演示，10 小时内。
 
-// 给杰斯打电话。发送最终的婚礼后勤细节，12小时内。
+// 给杰斯打电话。发送最终的婚礼后勤细节，12 小时内。
 
-// 前往机场。18小时后飞往香港参加我们的婚礼。
+// 前往机场。18 小时后飞往香港参加我们的婚礼。
 
 “他妈的… 他妈的。他妈的！”
 
-我按下键盘；笔记本电脑开机了；一个数字出现了。它还是不能工作。我该如何解释预期转化率下降了35%？
+我按下键盘；笔记本电脑开机了；一个数字出现了。它还是不能工作。我该如何解释预期转化率下降了 35%？
 
 我拿起电话，打给了我的同事西蒙，他将帮助我进行演示：“我们来计划一下应急处理吧。”
 
 “嘿，你在想我们的婚礼吗？”我亲爱的妻子杰斯问。
 
-我猛然回到现实。这是2019年11月5日。*我承认*。不，我并没有想着我们的婚礼，但祝我们周年快乐！我永远不会忘记这个日期。
+我猛然回到现实。这是 2019 年 11 月 5 日。*我承认*。不，我并没有想着我们的婚礼，但祝我们周年快乐！我永远不会忘记这个日期。
 
 ### 该死的，塞巴斯蒂安
 
@@ -56,7 +56,7 @@
 
 这是我最喜欢的机器学习工作流程图，部分原因是塞巴斯蒂安写字的手写字体是用计算机写字板写的（说真的）。**但是，有一个重要的细微差别。**
 
-![图](../Images/e5c11c2e4b10cc09558ec1cf89d8c05c.png)
+![图](img/e5c11c2e4b10cc09558ec1cf89d8c05c.png)
 
 塞巴斯蒂安·特伦，[Udacity](https://www.udacity.com/)——数据科学导论，最佳在线课程！
 
@@ -92,7 +92,7 @@
 
 +   模型架构的开发
 
-+   用户界面的设计和开发（例如仪表盘、Web-UI等）
++   用户界面的设计和开发（例如仪表盘、Web-UI 等）
 
 +   [CICD](https://semaphoreci.com/blog/cicd-pipeline) 测试用例的设计和开发
 
@@ -130,27 +130,27 @@
 
 许多数据科学家未曾充分考虑的一件事
 
-**简介：[Ian Xiao](https://www.linkedin.com/in/ianxiao/)** 是Dessa的参与负责人，负责在企业中部署机器学习。他领导业务和技术团队来部署机器学习解决方案，并改善F100企业的市场营销和销售。
+**简介：[Ian Xiao](https://www.linkedin.com/in/ianxiao/)** 是 Dessa 的参与负责人，负责在企业中部署机器学习。他领导业务和技术团队来部署机器学习解决方案，并改善 F100 企业的市场营销和销售。
 
 [原文](https://towardsdatascience.com/a-doomed-marriage-of-ml-and-agile-b91b95b37e35)。已获许可转载。
 
 **相关：**
 
-+   [对抗另一个人工智能寒冬的最后防线](/2019/11/last-defense-another-ai-winter.html)
++   对抗另一个人工智能寒冬的最后防线
 
-+   [数据科学很无聊（第一部分）](/2019/09/data-science-boring-part-1.html)
++   数据科学很无聊（第一部分）
 
-+   [数据科学很无聊（第二部分）](/2019/10/data-science-boring-part-2.html)
++   数据科学很无聊（第二部分）
 
 ### 更多相关主题
 
-+   [掌握数据科学项目管理的7个步骤（敏捷方法）](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
++   [掌握数据科学项目管理的 7 个步骤（敏捷方法）](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
 +   [学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 
-+   [每个机器学习工程师应该掌握的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应该掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3个免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
 +   [人工智能、分析、机器学习、数据科学、深度学习…](https://www.kdnuggets.com/2021/12/developments-predictions-ai-machine-learning-data-science-research.html)
 

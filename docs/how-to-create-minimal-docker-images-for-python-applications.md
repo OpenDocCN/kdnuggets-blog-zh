@@ -1,8 +1,8 @@
 # 如何为 Python 应用创建最小的 Docker 镜像
 
-> 原文：[https://www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications](https://www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications)
+> 原文：[`www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications`](https://www.kdnuggets.com/how-to-create-minimal-docker-images-for-python-applications)
 
-![如何为 Python 应用创建最小的 Docker 镜像](../Images/ae992706a0204663973d2080d2e67d71.png)
+![如何为 Python 应用创建最小的 Docker 镜像](img/ae992706a0204663973d2080d2e67d71.png)
 
 图片来源 | Midjourney & Canva
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -152,7 +152,7 @@ inventory-app   full                4e623743f556   2 hours ago         1.02GB
 
 所以你的基础镜像应该足够小，但也不要小到遇到兼容性问题或者在安装依赖项时绞尽脑汁（这在 Python 应用中很常见）。这就是为什么我们在下一步将使用 `python:3.11-slim` 基础镜像并构建我们的镜像。
 
-![base-image](../Images/ceb96d9bfe9d23b760c9d28c4fd47030.png)
+![base-image](img/ceb96d9bfe9d23b760c9d28c4fd47030.png)
 
 选择最佳基础镜像 | 作者图片
 
@@ -218,7 +218,7 @@ inventory-app   full                4e623743f556   2 hours ago         1.02GB
 
 +   [使用 Docker 在 5 个简单步骤中容器化 Python 应用](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
 
-+   [构建生成性AI应用程序的最佳Python工具备忘单](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)
++   [构建生成性 AI 应用程序的最佳 Python 工具备忘单](https://www.kdnuggets.com/2023/08/best-python-tools-generative-ai-cheat-sheet.html)
 
 +   [如何为您的数据项目创建采样计划](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)
 

@@ -1,6 +1,6 @@
 # 比较线性回归和逻辑回归
 
-> 原文：[https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
+> 原文：[`www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html`](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 
 数据科学面试的深度有所不同。有些面试会深入探讨候选人对高级模型或复杂微调的知识。而许多面试则在入门级别进行，测试候选人的基本知识。在本文中，我们将看到一个可以在这种面试中讨论的问题。尽管这个问题非常简单，但讨论涉及到许多有趣的机器学习基础方面。
 
@@ -8,11 +8,11 @@
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 > 
 > * * *
 > 
@@ -20,7 +20,7 @@
 
 实际上，两者之间有许多相似之处，从它们的名字发音相似开始。它们都使用直线作为模型函数。它们的图形也非常相似。
 
-![比较线性回归和逻辑回归](../Images/dddee014bc459c3e0923fb7a490ecce5.png)
+![比较线性回归和逻辑回归](img/dddee014bc459c3e0923fb7a490ecce5.png)
 
 图片由作者提供
 
@@ -40,7 +40,7 @@
 
 # 应用
 
-![比较线性回归和逻辑回归](../Images/730b545ace7fe794761c035901f68de9.png)
+![比较线性回归和逻辑回归](img/730b545ace7fe794761c035901f68de9.png)
 
 图片由 Rajashree Rajadhyax 提供
 
@@ -64,35 +64,35 @@ LogReg 主要用于分类。分类是将输入归入多个可能类别之一的�
 
 所以当我们说机器学习系统从数据中学习时，这只是部分正确。选择函数类型的第一步是手动的，并且是模型设计的一部分。函数的类型也称为“假设”或“模型家族”。
 
-在LinReg和LogReg中，模型家族都是线性函数。正如你所知道的，一条线有两个参数——斜率和截距。但这仅在函数只有一个输入时才成立。对于大多数实际问题，输入不止一个。这些情况的模型函数称为线性函数，而不是线。线性函数有更多的参数需要学习。如果模型有n个输入，线性函数有n+1个参数。如前所述，这些参数是从给定的数据中学习的。为了本文的目的，我们将继续假设函数是具有两个参数的简单直线。LogReg的模型函数稍微复杂一点。直线存在，但它与另一个函数组合在一起。我们稍后会看到这一点。
+在 LinReg 和 LogReg 中，模型家族都是线性函数。正如你所知道的，一条线有两个参数——斜率和截距。但这仅在函数只有一个输入时才成立。对于大多数实际问题，输入不止一个。这些情况的模型函数称为线性函数，而不是线。线性函数有更多的参数需要学习。如果模型有 n 个输入，线性函数有 n+1 个参数。如前所述，这些参数是从给定的数据中学习的。为了本文的目的，我们将继续假设函数是具有两个参数的简单直线。LogReg 的模型函数稍微复杂一点。直线存在，但它与另一个函数组合在一起。我们稍后会看到这一点。
 
 # 输入和输出
 
-如上所述，LinReg和LogReg都从给定的数据中学习线性函数的参数，这些数据被称为训练数据。训练数据包含了什么？
+如上所述，LinReg 和 LogReg 都从给定的数据中学习线性函数的参数，这些数据被称为训练数据。训练数据包含了什么？
 
-训练数据是通过记录一些实际世界现象（RWP）来准备的。例如，最高气温与柠檬水销售之间的关系就是一个RWP。我们看不到潜在的关系。我们只能看到每天的温度值和销售情况。在记录观察时，我们将一些量指定为RWP的输入，其他量指定为输出。在柠檬水的例子中，我们称最高气温为输入，柠檬水的销售为输出。
+训练数据是通过记录一些实际世界现象（RWP）来准备的。例如，最高气温与柠檬水销售之间的关系就是一个 RWP。我们看不到潜在的关系。我们只能看到每天的温度值和销售情况。在记录观察时，我们将一些量指定为 RWP 的输入，其他量指定为输出。在柠檬水的例子中，我们称最高气温为输入，柠檬水的销售为输出。
 
-![比较线性回归和逻辑回归](../Images/d7b5eefa49d29dd3bcfdc14352466e62.png)
+![比较线性回归和逻辑回归](img/d7b5eefa49d29dd3bcfdc14352466e62.png)
 
 作者提供的图片
 
-我们的训练数据包含输入和输出的对。在这个示例中，数据将包括每日最高气温和售出的柠檬水数量。这将是LinReg的输入和输出。
+我们的训练数据包含输入和输出的对。在这个示例中，数据将包括每日最高气温和售出的柠檬水数量。这将是 LinReg 的输入和输出。
 
-LogReg执行的任务是分类，因此它的输出应该是一个类别。假设有两个类别，称为0和1。模型的输出也应该是0或1。
+LogReg 执行的任务是分类，因此它的输出应该是一个类别。假设有两个类别，称为 0 和 1。模型的输出也应该是 0 或 1。
 
 然而，这种指定输出的方法不是很合适。请看下面的图：
 
-![比较线性回归和逻辑回归](../Images/91fb36966ce902a4dda4c3a24e234a6a.png)
+![比较线性回归和逻辑回归](img/91fb36966ce902a4dda4c3a24e234a6a.png)
 
 作者提供的图片
 
-黄色点属于类别1，浅蓝色点属于类别0。那条线是我们的模型函数，它将这两个类别分开。根据这个分隔线，黄色点（a和b）都属于类别1。然而，点b的隶属度比点a更确定。如果模型只是输出0和1，那么这一事实就会丢失。
+黄色点属于类别 1，浅蓝色点属于类别 0。那条线是我们的模型函数，它将这两个类别分开。根据这个分隔线，黄色点（a 和 b）都属于类别 1。然而，点 b 的隶属度比点 a 更确定。如果模型只是输出 0 和 1，那么这一事实就会丢失。
 
-为了纠正这种情况，LogReg模型会产生每个点属于某个类别的概率。在上述示例中，点‘a’属于类别1的概率较低，而点‘b’的概率较高。由于概率是0到1之间的数值，LogReg的输出也是如此。
+为了纠正这种情况，LogReg 模型会产生每个点属于某个类别的概率。在上述示例中，点‘a’属于类别 1 的概率较低，而点‘b’的概率较高。由于概率是 0 到 1 之间的数值，LogReg 的输出也是如此。
 
 现在请看下面的图：
 
-![比较线性回归和逻辑回归](../Images/f9ef7037add14ed255794a565ffefe95.png)
+![比较线性回归和逻辑回归](img/f9ef7037add14ed255794a565ffefe95.png)
 
 作者提供的图片
 
@@ -100,11 +100,11 @@ LogReg执行的任务是分类，因此它的输出应该是一个类别。假�
 
 为了使 LogReg 模型能够产生这样的输出，线性函数必须连接到另一个函数。这个第二个函数叫做 sigmoid，其方程为：
 
-![比较线性回归和逻辑回归](../Images/11042e42f0e56a3a1bc967c839326d0b.png)
+![比较线性回归和逻辑回归](img/11042e42f0e56a3a1bc967c839326d0b.png)
 
 图片由作者提供
 
-因此，LogReg 模型看起来像：![比较线性回归和逻辑回归](../Images/327b254aec1777aa616c3e6e1971be66.png)
+因此，LogReg 模型看起来像：![比较线性回归和逻辑回归](img/327b254aec1777aa616c3e6e1971be66.png)
 
 图片由作者提供
 
@@ -147,31 +147,31 @@ output_of_linear_equation_for_the_inputs — actual_output_from_the_data point
 ))
 ```
 
-LogReg的优化度量以非常不同的方式定义。在SSE函数中，我们问以下问题：
+LogReg 的优化度量以非常不同的方式定义。在 SSE 函数中，我们问以下问题：
 
 ```py
 If we use this line for fitting the training data, how much error will it make?
 ```
 
-在设计LogReg优化度量时，我们问：
+在设计 LogReg 优化度量时，我们问：
 
 ```py
 If this line is the separator, how likely is it that we will get the distribution of classes that is seen in the training data?
 ```
 
-该度量的输出因此是一个似然性。度量函数的数学形式使用对数，因此得名对数似然性（LL）。在讨论输出时，我们看到LogReg函数涉及指数项（e ‘提升到’ z的项），对数有助于有效处理这些指数项。
+该度量的输出因此是一个似然性。度量函数的数学形式使用对数，因此得名对数似然性（LL）。在讨论输出时，我们看到 LogReg 函数涉及指数项（e ‘提升到’ z 的项），对数有助于有效处理这些指数项。
 
-你应该直观地理解优化应当最大化LL。这样考虑：我们想找到使训练数据最可能的线。然而在实际中，我们更倾向于使用可以最小化的度量，因此我们只是取LL的负值。我们因此得到了负对数似然性（NLL）损失函数，尽管我认为称之为损失函数并不完全正确。
+你应该直观地理解优化应当最大化 LL。这样考虑：我们想找到使训练数据最可能的线。然而在实际中，我们更倾向于使用可以最小化的度量，因此我们只是取 LL 的负值。我们因此得到了负对数似然性（NLL）损失函数，尽管我认为称之为损失函数并不完全正确。
 
-因此，我们有两个损失函数：LinReg的SSE和LogReg的NLL。请注意，这些损失函数有许多名称，你应当熟悉这些术语。
+因此，我们有两个损失函数：LinReg 的 SSE 和 LogReg 的 NLL。请注意，这些损失函数有许多名称，你应当熟悉这些术语。
 
 # 总结
 
-尽管线性回归和逻辑回归看起来非常相似，但实际上它们有很大不同。LinReg用于估计/预测，而LogReg用于分类。确实它们都使用线性函数作为基础，但LogReg进一步添加了逻辑函数。它们在消耗训练数据和生成模型输出的方式上有所不同。两者也使用了非常不同的损失函数。
+尽管线性回归和逻辑回归看起来非常相似，但实际上它们有很大不同。LinReg 用于估计/预测，而 LogReg 用于分类。确实它们都使用线性函数作为基础，但 LogReg 进一步添加了逻辑函数。它们在消耗训练数据和生成模型输出的方式上有所不同。两者也使用了非常不同的损失函数。
 
-进一步的细节可以深入探讨。为什么选择SSE？如何计算似然性？我们没有在这里深入优化方法以避免更多的数学内容。然而，你必须记住，LogReg的优化通常需要迭代梯度下降方法，而LinReg通常可以使用快速的封闭形式解法。我们可以在另一篇文章中讨论这些和更多的点。
+进一步的细节可以深入探讨。为什么选择 SSE？如何计算似然性？我们没有在这里深入优化方法以避免更多的数学内容。然而，你必须记住，LogReg 的优化通常需要迭代梯度下降方法，而 LinReg 通常可以使用快速的封闭形式解法。我们可以在另一篇文章中讨论这些和更多的点。
 
-**[Devesh Rajadhyax](https://www.linkedin.com/in/deveshraj/)** 已在人工智能领域工作了八年。他创立了Cere Labs公司，致力于AI的各个方面。Cere Labs创建了一个名为Cerescope的AI平台，基于深度学习、机器学习和认知计算。该平台已经被用于金融服务、医疗保健、零售、制造等领域的解决方案建设。
+**[Devesh Rajadhyax](https://www.linkedin.com/in/deveshraj/)** 已在人工智能领域工作了八年。他创立了 Cere Labs 公司，致力于 AI 的各个方面。Cere Labs 创建了一个名为 Cerescope 的 AI 平台，基于深度学习、机器学习和认知计算。该平台已经被用于金融服务、医疗保健、零售、制造等领域的解决方案建设。
 
 [原文](https://towardsdatascience.com/comparing-linear-and-logistic-regression-11a3e1812212)。转载授权。
 
@@ -179,7 +179,7 @@ If this line is the separator, how likely is it that we will get the distributio
 
 +   [线性回归与逻辑回归: 简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12, 3月23日: 数据科学最佳书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12, 3 月 23 日: 数据科学最佳书籍…](https://www.kdnuggets.com/2022/n12.html)
 
 +   [分类指标演示: 逻辑回归与…](https://www.kdnuggets.com/2022/10/classification-metrics-walkthrough-logistic-regression-accuracy-precision-recall-roc.html)
 

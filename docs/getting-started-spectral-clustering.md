@@ -1,8 +1,8 @@
 # 谱聚类入门
 
-> 原文：[https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html](https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html)
+> 原文：[`www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html`](https://www.kdnuggets.com/2020/05/getting-started-spectral-clustering.html)
 
-[评论](#comments)
+评论
 
 **由 [Dr. Juan Camilo Orduz](https://juanitorduz.github.io/)，数学家与数据科学家**
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -106,7 +106,7 @@ for i, param_list in enumerate(param_lists):
 plt.tight_layout()
 ```
 
-![png](../Images/c8894108718ff5a45081a704ad65bf04.png)
+![png](img/c8894108718ff5a45081a704ad65bf04.png)
 
 前两个图显示了 33 个明确的聚类。对于最后一个，聚类结构不太明确。
 
@@ -120,31 +120,31 @@ plt.tight_layout()
 
 +   假设我们有一个数据点的数据集
 
-    ![Equation](../Images/628675573c23169f3faa55b59ce2e594.png)。
+    ![Equation](img/628675573c23169f3faa55b59ce2e594.png)。
 
 +   对于数据集 *X*，我们关联一个（加权）图 *G*，它编码了数据点之间的接近程度。具体来说，
 
     +   *G* 的节点由每个数据点给出
 
-        ![Equation](../Images/db373d731ded926a6199712cd8295a29.png)。
+        ![Equation](img/db373d731ded926a6199712cd8295a29.png)。
 
-    +   如果两个节点 ![方程](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) 和 ![方程](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) 是*接近的*，则它们由一条边连接。*接近*的概念取决于我们想要编码的距离。有两种常见的选择。
+    +   如果两个节点 ![方程](img/b1af7e2fbfa7601511b5f4b136868e55.png) 和 ![方程](img/b1af7e2fbfa7601511b5f4b136868e55.png) 是*接近的*，则它们由一条边连接。*接近*的概念取决于我们想要编码的距离。有两种常见的选择。
 
         +   （欧几里得距离）给定
 
-            ![方程](../Images/81f088809e21d1638e66b0261198fa0f.png) ![方程](../Images/584073cbd8da3032d36a754d5eb06ae5.png) 和 ![方程](../Images/e555ff9b12a949daf21c9f32002fae9f.png) 通过边连接，如果 ![方程](../Images/da6f736c1fb8e5463247e2198341bbea.png)。在一些应用中，边可能具有形如 ![方程](../Images/eb417e0b46304c6674fcdc1be311a4e2.png)的权重。
+            ![方程](img/81f088809e21d1638e66b0261198fa0f.png) ![方程](img/584073cbd8da3032d36a754d5eb06ae5.png) 和 ![方程](img/e555ff9b12a949daf21c9f32002fae9f.png) 通过边连接，如果 ![方程](img/da6f736c1fb8e5463247e2198341bbea.png)。在一些应用中，边可能具有形如 ![方程](img/eb417e0b46304c6674fcdc1be311a4e2.png)的权重。
 
-        +   （最近邻） ![方程](../Images/584073cbd8da3032d36a754d5eb06ae5.png) 和 ![方程](../Images/e555ff9b12a949daf21c9f32002fae9f.png) 通过边连接，如果 ![方程](../Images/e555ff9b12a949daf21c9f32002fae9f.png) 是 ![方程](../Images/e555ff9b12a949daf21c9f32002fae9f.png)的k-最近邻。
+        +   （最近邻） ![方程](img/584073cbd8da3032d36a754d5eb06ae5.png) 和 ![方程](img/e555ff9b12a949daf21c9f32002fae9f.png) 通过边连接，如果 ![方程](img/e555ff9b12a949daf21c9f32002fae9f.png) 是 ![方程](img/e555ff9b12a949daf21c9f32002fae9f.png)的 k-最近邻。
 
-一旦图构建完成，我们可以考虑其相关的 [邻接矩阵](https://en.wikipedia.org/wiki/Adjacency_matrix) ![方程](../Images/22fc3a5df44a891d66abe7740209bb57.png)，如果 ![方程](../Images/b1af7e2fbfa7601511b5f4b136868e55.png) 和 ![方程](../Images/4d4150c9b2a5a30fb031eeec94194cdf.png) 通过边连接，则该矩阵的 ![方程](../Images/d8d974867821c70d67c0b36b26fdb70c.png) 位置有一个非零值。另一方面，设 ![方程](../Images/ad0c74480cf07e40fcd0d89db4843165.png) 表示图的 [度矩阵](https://en.wikipedia.org/wiki/Degree_matrix)，这是一个对角矩阵，包含每个节点的度数。然后，图拉普拉斯算子 ![方程](../Images/d1acf57e680b35fda6ce8a1d54c1809c.png) 被定义为差值 ![方程](../Images/36bf73978d86cfa96b0e79619e028eed.png)。这个矩阵是对称的，且正半定的，这意味着（通过 [谱定理](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/)）所有的特征值都是实数且非负的。 [这里](https://juanitorduz.github.io/documents/orduz_pydata2018.pdf) 你可以找到有关图拉普拉斯算子定义和性质的更多细节。
+一旦图构建完成，我们可以考虑其相关的 [邻接矩阵](https://en.wikipedia.org/wiki/Adjacency_matrix) ![方程](img/22fc3a5df44a891d66abe7740209bb57.png)，如果 ![方程](img/b1af7e2fbfa7601511b5f4b136868e55.png) 和 ![方程](img/4d4150c9b2a5a30fb031eeec94194cdf.png) 通过边连接，则该矩阵的 ![方程](img/d8d974867821c70d67c0b36b26fdb70c.png) 位置有一个非零值。另一方面，设 ![方程](img/ad0c74480cf07e40fcd0d89db4843165.png) 表示图的 [度矩阵](https://en.wikipedia.org/wiki/Degree_matrix)，这是一个对角矩阵，包含每个节点的度数。然后，图拉普拉斯算子 ![方程](img/d1acf57e680b35fda6ce8a1d54c1809c.png) 被定义为差值 ![方程](img/36bf73978d86cfa96b0e79619e028eed.png)。这个矩阵是对称的，且正半定的，这意味着（通过 [谱定理](https://juanitorduz.github.io/the-spectral-theorem-for-matrices/)）所有的特征值都是实数且非负的。 [这里](https://juanitorduz.github.io/documents/orduz_pydata2018.pdf) 你可以找到有关图拉普拉斯算子定义和性质的更多细节。
 
 ### 动机
 
-为什么图拉普拉斯算子对检测聚类很重要？让我们从一个简单的情况开始，其中数据*X*有两个聚类 ![方程](../Images/394c56d673b3a944a22dfd064b7b1b2d.png) 和 ![方程](../Images/58f1efbbcaec2f9ce8b58c6f443c7e4e.png)，它们分得如此开，以至于它们对应于 [连通分量](https://en.wikipedia.org/wiki/Component_(graph_theory)) ![方程](../Images/70daf2b4cc119e119b330d34b719091f.png) 和 ![方程](../Images/3563c17713e7c121b642fa4d6d6deef8.png) 的关联图 ![方程](../Images/e3f936b28e6b566fa65492a69c8d19d9.png)。观察图拉普拉斯算子的纯定义，我们可以重新排序点，使得图拉普拉斯算子分解为
+为什么图拉普拉斯算子对检测聚类很重要？让我们从一个简单的情况开始，其中数据*X*有两个聚类 ![方程](img/394c56d673b3a944a22dfd064b7b1b2d.png) 和 ![方程](img/58f1efbbcaec2f9ce8b58c6f443c7e4e.png)，它们分得如此开，以至于它们对应于 [连通分量](https://en.wikipedia.org/wiki/Component_(graph_theory)) ![方程](img/70daf2b4cc119e119b330d34b719091f.png) 和 ![方程](img/3563c17713e7c121b642fa4d6d6deef8.png) 的关联图 ![方程](img/e3f936b28e6b566fa65492a69c8d19d9.png)。观察图拉普拉斯算子的纯定义，我们可以重新排序点，使得图拉普拉斯算子分解为
 
-![Equation](../Images/9e1a00f1cbf8f5e76f26beaf7769c9e6.png)
+![Equation](img/9e1a00f1cbf8f5e76f26beaf7769c9e6.png)
 
-其中 ![Equation](../Images/0cbf0ffdfb63ef726502c6218bd180b9.png) 和 ![Equation](../Images/d0733378c3834ee62c808977704e49e1.png) 分别是 ![Equation](../Images/70daf2b4cc119e119b330d34b719091f.png) 和 ![Equation](../Images/3563c17713e7c121b642fa4d6d6deef8.png) 的图拉普拉斯矩阵。可以证明，零特征值的核（特征空间）的维度为 22，并且由正交特征向量 ![Equation](../Images/99ad52ec914e0013f46613d30a94228e.png) 和 ![Equation](../Images/578eeb5f2e21c06953ba290515bc798f.png) 生成。这一论点易于推广到多个连通分量。
+其中 ![Equation](img/0cbf0ffdfb63ef726502c6218bd180b9.png) 和 ![Equation](img/d0733378c3834ee62c808977704e49e1.png) 分别是 ![Equation](img/70daf2b4cc119e119b330d34b719091f.png) 和 ![Equation](img/3563c17713e7c121b642fa4d6d6deef8.png) 的图拉普拉斯矩阵。可以证明，零特征值的核（特征空间）的维度为 22，并且由正交特征向量 ![Equation](img/99ad52ec914e0013f46613d30a94228e.png) 和 ![Equation](img/578eeb5f2e21c06953ba290515bc798f.png) 生成。这一论点易于推广到多个连通分量。
 
 总结来说，关键属性是
 
@@ -156,7 +156,7 @@ plt.tight_layout()
 
 下面是（未归一化的）谱聚类的步骤²。根据上述讨论，这些步骤现在应该是合理的。
 
-*输入：* 相似度矩阵 ![Equation](../Images/c0e21230b0f47a4d142b1e63b751b5a3.png) （即距离的选择），构造的簇数 *k*。
+*输入：* 相似度矩阵 ![Equation](img/c0e21230b0f47a4d142b1e63b751b5a3.png) （即距离的选择），构造的簇数 *k*。
 
 *步骤：*
 
@@ -164,15 +164,15 @@ plt.tight_layout()
 
 +   计算（未归一化的）拉普拉斯矩阵 *L*。
 
-+   计算 *L* 的前 *k* 个特征向量 ![Equation](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png)。
++   计算 *L* 的前 *k* 个特征向量 ![Equation](img/340e87fdf0f7fa75361e5c8e6a46be1a.png)。
 
-+   设 ![Equation](../Images/287f7668a0c2dca27024ea343b202992.png) 为包含向量 ![Equation](../Images/340e87fdf0f7fa75361e5c8e6a46be1a.png) 作为列的矩阵。
++   设 ![Equation](img/287f7668a0c2dca27024ea343b202992.png) 为包含向量 ![Equation](img/340e87fdf0f7fa75361e5c8e6a46be1a.png) 作为列的矩阵。
 
-+   对于 ![Equation](../Images/95ed894fa54521bff2c75a83dd08aea0.png)，设 ![Equation](../Images/2c527f8105d1c5242fee69dc31707f29.png) 为对应于 *U* 的第 *i* 行的向量。
++   对于 ![Equation](img/95ed894fa54521bff2c75a83dd08aea0.png)，设 ![Equation](img/2c527f8105d1c5242fee69dc31707f29.png) 为对应于 *U* 的第 *i* 行的向量。
 
-+   使用 *k*-均值算法将点 ![Equation](../Images/2c527f8105d1c5242fee69dc31707f29.png) 聚类为簇 ![Equation](../Images/477b4ba9f8acdbd306b0f6d105825c18.png)
++   使用 *k*-均值算法将点 ![Equation](img/2c527f8105d1c5242fee69dc31707f29.png) 聚类为簇 ![Equation](img/477b4ba9f8acdbd306b0f6d105825c18.png)
 
-![Figure](../Images/9bc86f62df7589ebf0ebd687c7e37f5e.png)
+![Figure](img/9bc86f62df7589ebf0ebd687c7e37f5e.png)
 
 让我们通过一个例子来重现这些步骤，以更好地理解这个算法的有效性。
 
@@ -200,11 +200,11 @@ sns.scatterplot(x='x', y='y', color='black', data=data_df, ax=ax)
 ax.set(title='Input Data');
 ```
 
-![png](../Images/f97a4611ce6beab8594af5917ecacced.png)
+![png](img/f97a4611ce6beab8594af5917ecacced.png)
 
 ### K - 均值
 
-让我们首先运行k-means算法尝试获取一些聚类。我们使用肘部法则选择聚类数，通过考虑惯性（样本到其最近聚类中心的平方距离之和）作为聚类数的函数。
+让我们首先运行 k-means 算法尝试获取一些聚类。我们使用肘部法则选择聚类数，通过考虑惯性（样本到其最近聚类中心的平方距离之和）作为聚类数的函数。
 
 ```py
 from sklearn.cluster import KMeans
@@ -225,9 +225,9 @@ sns.lineplot(x=k_candidates, y = inertias, alpha=0.5, ax=ax)
 ax.set(title='Inertia K-Means', ylabel='inertia', xlabel='k');
 ```
 
-![png](../Images/b019d8bcb460805d2d043e1ed1dcb3a6.png)
+![png](img/b019d8bcb460805d2d043e1ed1dcb3a6.png)
 
-从这个图中我们看到![Equation](../Images/84d09e70b54382413998df3c984dfc85.png)是一个不错的选择。让我们获取这些聚类。
+从这个图中我们看到![Equation](img/84d09e70b54382413998df3c984dfc85.png)是一个不错的选择。让我们获取这些聚类。
 
 ```py
 k_means = KMeans(random_state=25, n_clusters=3)
@@ -241,7 +241,7 @@ sns.scatterplot(x='x', y='y', data=data_df.assign(cluster = cluster), hue='clust
 ax.set(title='K-Means Clustering');
 ```
 
-![png](../Images/e3059a9e5cf46b505f23fa4c429ff056.png)
+![png](img/e3059a9e5cf46b505f23fa4c429ff056.png)
 
 结果并不令人惊讶，因为*k*-均值生成的是凸聚类。
 
@@ -271,7 +271,7 @@ sns.heatmap(graph_laplacian, ax=ax, cmap='viridis_r')
 ax.set(title='Graph Laplacian');
 ```
 
-![png](../Images/d0d9e2e88c1f3cb09b84bfe253ede257.png)
+![png](img/d0d9e2e88c1f3cb09b84bfe253ede257.png)
 
 ### 第二步：计算图拉普拉斯算子的谱
 
@@ -307,7 +307,7 @@ def compute_spectrum_graph_laplacian(graph_laplacian):
 eigenvals, eigenvcts = compute_spectrum_graph_laplacian(graph_laplacian)
 ```
 
-现在我们计算![Equation](../Images/ebbe6af529c5d2cb7495acd213460fb7.png)范数的特征向量。
+现在我们计算![Equation](img/ebbe6af529c5d2cb7495acd213460fb7.png)范数的特征向量。
 
 ```py
 eigenvcts_norms = np.apply_along_axis(
@@ -342,7 +342,7 @@ sns.lineplot(x=range(1, eigenvals_sorted_indices.size + 1), y=eigenvals_sorted, 
 ax.set(title='Sorted Eigenvalues Graph Laplacian', xlabel='index', ylabel=r'$\lambda$');
 ```
 
-![png](../Images/f67cfa86f3804094977d27bc0e351c09.png)
+![png](img/f67cfa86f3804094977d27bc0e351c09.png)
 
 ### 第三步：寻找小特征值
 
@@ -359,9 +359,9 @@ ax.legend()
 ax.set(title=f'Sorted Eigenvalues Graph Laplacian (First {index_lim})', xlabel='index', ylabel=r'$\lambda$');
 ```
 
-![png](../Images/afcad65549982c9e2bef1011d50cad25.png)
+![png](img/afcad65549982c9e2bef1011d50cad25.png)
 
-从图中我们可以看到前33个特征值（排序后）基本上为零。
+从图中我们可以看到前 33 个特征值（排序后）基本上为零。
 
 ```py
 zero_eigenvals_index = np.argwhere(abs(eigenvals) < 1e-5)
@@ -398,7 +398,7 @@ sns.heatmap(proj_df, ax=ax, cmap='viridis_r')
 ax.set(title='Eigenvectors Generating the Kernel of the Graph Laplacian');
 ```
 
-![png](../Images/ea0131165b6c60930073f8634160c703.png)
+![png](img/ea0131165b6c60930073f8634160c703.png)
 
 我们可以清楚地看到一个块结构（表示连接的组件）。一般来说，当聚类不是孤立的连接组件时，寻找零特征值或谱间隙过于限制。因此，我们简单地选择我们想要找到的聚类数。
 
@@ -415,9 +415,9 @@ def project_and_transpose(eigenvals, eigenvcts, num_ev):
     return proj_df
 ```
 
-### 第四步：运行K均值聚类
+### 第四步：运行 K 均值聚类
 
-为了选择聚类数（从上面的图中我们已经怀疑是![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png)），我们对不同的聚类值运行k-means，并绘制相关的惯性（样本到其最近聚类中心的平方距离之和）。
+为了选择聚类数（从上面的图中我们已经怀疑是![Equation](img/42aaa1975c4182cd2fa1ac18601919e9.png)），我们对不同的聚类值运行 k-means，并绘制相关的惯性（样本到其最近聚类中心的平方距离之和）。
 
 ```py
 inertias = []
@@ -437,7 +437,7 @@ sns.lineplot(x=k_candidates, y = inertias, alpha=0.5, ax=ax)
 ax.set(title='Inertia K-Means', ylabel='inertia', xlabel='k');
 ```
 
-![png](../Images/c77f9787b4fe915c608ee99ed5748e1e.png)从这个图中我们可以看到，最佳的聚类数是![Equation](../Images/42aaa1975c4182cd2fa1ac18601919e9.png)。
+![png](img/c77f9787b4fe915c608ee99ed5748e1e.png)从这个图中我们可以看到，最佳的聚类数是![Equation](img/42aaa1975c4182cd2fa1ac18601919e9.png)。
 
 ```py
 def run_k_means(df, n_clusters):
@@ -464,7 +464,7 @@ ax.scatter(
 ax.set_title('Small Eigenvectors Clusters', x=0.2);
 ```
 
-![png](../Images/7ed923e9d74d2a7f774a2643e7021446.png)
+![png](img/7ed923e9d74d2a7f774a2643e7021446.png)
 
 ### 第五步：分配聚类标签
 
@@ -478,7 +478,7 @@ sns.scatterplot(x='x', y='y', data=data_df, hue='cluster', ax=ax)
 ax.set(title='Spectral Clustering');
 ```
 
-![png](../Images/864ee35d3fb1cfc6b0d007936166eb3e.png)
+![png](img/864ee35d3fb1cfc6b0d007936166eb3e.png)
 
 请注意，通过谱聚类我们可以得到非凸簇。
 
@@ -511,7 +511,7 @@ sns.scatterplot(x='x', y='y', data=data_df, hue='cluster', ax=ax)
 ax.set(title='Spectral Clustering');
 ```
 
-![png](../Images/fc7734aa4b32d1d89239b44fd816fcaf.png)
+![png](img/fc7734aa4b32d1d89239b44fd816fcaf.png)
 
 +   2 个簇
 
@@ -524,7 +524,7 @@ sns.scatterplot(x='x', y='y', data=data_df, hue='cluster', ax=ax)
 ax.set(title='Spectral Clustering');
 ```
 
-![png](../Images/c30b2867ebc3f8be68cfd44b96cefd9f.png)
+![png](img/c30b2867ebc3f8be68cfd44b96cefd9f.png)
 
 ### 示例 3
 
@@ -539,7 +539,7 @@ sns.scatterplot(x='x', y='y', data=data_df, hue='cluster', ax=ax)
 ax.set(title='Spectral Clustering');
 ```
 
-![png](../Images/e238deb3594f39f8d89fc3515a6cf9f6.png)
+![png](img/e238deb3594f39f8d89fc3515a6cf9f6.png)
 
 ### SpectralClustering（Scikit-Learn）
 
@@ -567,7 +567,7 @@ sns.scatterplot(x='x', y='y', data=data_df, hue='cluster', ax=ax)
 ax.set(title='Spectral Clustering - Scikit Learn');
 ```
 
-![png](../Images/a42093418da0e5f4e1143431af8f8640.png)
+![png](img/a42093418da0e5f4e1143431af8f8640.png)
 
 ### 示例 3（重新审视）
 
@@ -589,7 +589,7 @@ sns.scatterplot(x='x', y='y', data=data_df, hue='cluster', ax=ax)
 ax.set(title='Spectral Clustering - Scikit Learn');
 ```
 
-![png](../Images/b9b745d9dd22b0ff3eb7568bb6d20cef.png)
+![png](img/b9b745d9dd22b0ff3eb7568bb6d20cef.png)
 
 ### 最终备注
 
@@ -609,7 +609,7 @@ sns.scatterplot(x='r2', y='r2', color='black', data=data_df, ax=ax)
 ax.set(title='Radius Feature');
 ```
 
-![png](../Images/89ccb4ff837b01003f2969aeed5544cb.png)然后，我们可以直接运行 k-均值。
+![png](img/89ccb4ff837b01003f2969aeed5544cb.png)然后，我们可以直接运行 k-均值。
 
 ```py
 inertias = []
@@ -628,7 +628,7 @@ sns.lineplot(x=k_candidates, y = inertias, alpha=0.5, ax=ax)
 ax.set(title='Inertia K-Means', ylabel='inertia', xlabel='k');
 ```
 
-![png](../Images/bc7398233baa7d80bd3c690a174d3e2d.png)
+![png](img/bc7398233baa7d80bd3c690a174d3e2d.png)
 
 ```py
 k_means = KMeans(random_state=25, n_clusters=3)
@@ -642,7 +642,7 @@ sns.scatterplot(x='r2', y='r2', hue='cluster', data=data_df, ax=ax)
 ax.set(title='Radius Feature (K-Means)');
 ```
 
-![png](../Images/d19bc17d0ca6564929915d30c216ba3b.png)最后，我们可视化原始数据及其对应的簇。
+![png](img/d19bc17d0ca6564929915d30c216ba3b.png)最后，我们可视化原始数据及其对应的簇。
 
 ```py
 fig, ax = plt.subplots()
@@ -650,7 +650,7 @@ sns.scatterplot(x='x', y='y', hue='cluster', data=data_df, ax=ax)
 ax.set(title='Radius Feature (K-Means)');
 ```
 
-![png](../Images/e131f8312c09746af8345d37cb6e2c60.png)
+![png](img/e131f8312c09746af8345d37cb6e2c60.png)
 
 1.  [拉普拉斯特征映射用于降维和数据表示](http://web.cse.ohio-state.edu/~belkin.8/papers/LEM_NC_03.pdf)
 
@@ -662,11 +662,11 @@ ax.set(title='Radius Feature (K-Means)');
 
 **相关：**
 
-+   [数据科学家需要了解的 5 种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家需要了解的 5 种聚类算法
 
-+   [聚类关键术语解释](/2016/10/clustering-key-terms-explained.html)
++   聚类关键术语解释
 
-+   [通过采样进行 k-均值聚类的迭代初始质心搜索](/2018/09/iterative-initial-centroid-search-sampling-k-means-clustering.html)
++   通过采样进行 k-均值聚类的迭代初始质心搜索
 
 ### 更多相关话题
 

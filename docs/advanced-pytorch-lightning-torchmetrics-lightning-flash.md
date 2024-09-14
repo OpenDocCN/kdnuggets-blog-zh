@@ -1,10 +1,10 @@
 # 高级 PyTorch Lightning 使用 TorchMetrics 和 Lightning Flash
 
-> 原文：[https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html](https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html)
+> 原文：[`www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html`](https://www.kdnuggets.com/2021/11/advanced-pytorch-lightning-torchmetrics-lightning-flash.html)
 
-[评论](#comments)
+评论
 
-![blog-advanced-pytorch-lightning.jpg](../Images/006950f7cf1ddac40699ea278992b451.png)
+![blog-advanced-pytorch-lightning.jpg](img/006950f7cf1ddac40699ea278992b451.png)
 
 仅回顾一下我们上一个帖子中关于[PyTorch Lightning 入门](https://www.exxactcorp.com/blog/Deep-Learning/getting-started-with-pytorch-lightning)的内容，在本教程中，我们将深入探讨你应该使用的两个额外工具：TorchMetrics 和 Lightning Flash。
 
@@ -206,11 +206,11 @@ def validation_epoch_end(self, validation_step_outputs):
 
 ### **Lightning Flash**
 
-如同一套俄罗斯套娃的深度学习抽象库，Lightning Flash 在 PyTorch Lightning 上添加了更多抽象和简化。事实上，我们只需7行代码就能训练一个图像分类任务。我们将使用 CIFAR10 数据集以及基于 Lightning Flash 内置 ResNet18 主干的分类模型。接着，我们将展示如何将模型主干重新用于分类新数据集 CIFAR100。
+如同一套俄罗斯套娃的深度学习抽象库，Lightning Flash 在 PyTorch Lightning 上添加了更多抽象和简化。事实上，我们只需 7 行代码就能训练一个图像分类任务。我们将使用 CIFAR10 数据集以及基于 Lightning Flash 内置 ResNet18 主干的分类模型。接着，我们将展示如何将模型主干重新用于分类新数据集 CIFAR100。
 
-尽管 Lightning Flash 仍在积极开发中，且有许多尖锐的边角，但你已经可以用很少的代码组装特定的工作流程，甚至有一个他们称之为 Flash Zero 的“无代码”功能。为了我们的目的，我们可以用不到20行代码组装一个迁移学习工作流程。
+尽管 Lightning Flash 仍在积极开发中，且有许多尖锐的边角，但你已经可以用很少的代码组装特定的工作流程，甚至有一个他们称之为 Flash Zero 的“无代码”功能。为了我们的目的，我们可以用不到 20 行代码组装一个迁移学习工作流程。
 
-首先，我们将用8行代码在 CIFAR10 数据集上进行训练。我们利用 `ImageClassifier` 类及其内置的主干架构，以及 `ImageClassificationData` 类来替代训练和验证的数据加载器。
+首先，我们将用 8 行代码在 CIFAR10 数据集上进行训练。我们利用 `ImageClassifier` 类及其内置的主干架构，以及 `ImageClassificationData` 类来替代训练和验证的数据加载器。
 
 ```py
 metrics_10 = [torchmetrics.Accuracy(), \
@@ -258,7 +258,7 @@ trainer_2.finetune(model_2, datamodule=datamodule,\
 
 说到简化，还有一种使用 Flash 训练模型的方法我们不得不提及。通过 **Flash Zero**，你可以直接从命令行调用 Lightning Flash，使用内置的 SOTA 模型来训练常见的深度学习任务。Flash Zero 也有很多棱角分明的地方，如果你想根据自己的需求进行调整，准备好为 PyTorch Lightning 项目贡献一些 pull request。
 
-例如，下面是从[ Flash Zero](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html) 文档中修改的一个示例。如果你查看[ 原版](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html#using-your-own-data) （截至本写作时），你可能会立即注意到下载 hymenoptera 数据集的命令行参数中有一个错别字：下载输出文件名缺少扩展名。下面的修正版下载了 hymenoptera 数据集，并用 ResNet18 主干训练了一个分类器，训练了10个周期：
+例如，下面是从[ Flash Zero](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html) 文档中修改的一个示例。如果你查看[ 原版](https://lightning-flash.readthedocs.io/en/latest/general/flash_zero.html#using-your-own-data) （截至本写作时），你可能会立即注意到下载 hymenoptera 数据集的命令行参数中有一个错别字：下载输出文件名缺少扩展名。下面的修正版下载了 hymenoptera 数据集，并用 ResNet18 主干训练了一个分类器，训练了 10 个周期：
 
 ```py
 curl https://pl-flash-data.s3.amazonaws.com/hymenoptera_data.zip \
@@ -286,21 +286,21 @@ flash image_classification --trainer.max_epochs 10 –model.backbone \
 
 **相关:**
 
-+   [PyTorch Lightning 入门](/2021/10/introduction-pytorch-lightning.html)
++   PyTorch Lightning 入门
 
-+   [如何将 PyTorch Lightning 模型部署到生产环境](/2020/11/deploy-pytorch-lightning-models-production.html)
++   如何将 PyTorch Lightning 模型部署到生产环境
 
-+   [开始使用 PyTorch Lightning](/2021/10/getting-started-pytorch-lightning.html)
++   开始使用 PyTorch Lightning
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 

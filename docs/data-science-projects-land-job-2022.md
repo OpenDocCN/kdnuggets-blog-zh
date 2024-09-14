@@ -1,8 +1,8 @@
-# 2022年能让你获得工作的数据科学项目
+# 2022 年能让你获得工作的数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
+> 原文：[`www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html`](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-![2022年能让你获得工作的数据科学项目](../Images/a443f9d3b9c9577228a1a1d610f59bcb.png)
+![2022 年能让你获得工作的数据科学项目](img/a443f9d3b9c9577228a1a1d610f59bcb.png)
 
 图片来源：[国家癌症研究所](https://unsplash.com/@nci?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/data-science-projects?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-在我2020年写的[上一篇文章](https://towardsdatascience.com/data-science-projects-that-will-get-you-the-job-805065e7260)中，我提供了一些数据科学项目的想法，你可以将这些项目添加到你的作品集中，以增加获得工作的机会。距离那时已经过去两年了。
+在我 2020 年写的[上一篇文章](https://towardsdatascience.com/data-science-projects-that-will-get-you-the-job-805065e7260)中，我提供了一些数据科学项目的想法，你可以将这些项目添加到你的作品集中，以增加获得工作的机会。距离那时已经过去两年了。
 
 在行业工作了一段时间，与数据科学招聘经理交谈，并审阅了简历后，我对应该添加到简历中的项目类型有了略微不同的看法。
 
@@ -86,11 +86,11 @@
 
 ## 1\. 总是优先考虑质量而非数量
 
-在你的简历中，最好有2到3个完整的端到端项目，而不是10个简单的常见项目。招聘经理通常会要求你详细介绍一个完整的数据科学项目以及你是如何实施的。确保这个项目不如《泰坦尼克号》或《虹膜花预测》那样简单。
+在你的简历中，最好有 2 到 3 个完整的端到端项目，而不是 10 个简单的常见项目。招聘经理通常会要求你详细介绍一个完整的数据科学项目以及你是如何实施的。确保这个项目不如《泰坦尼克号》或《虹膜花预测》那样简单。
 
 ## 2\. 在简历中包括不同类型的项目
 
-我上面列出的项目主要集中在机器学习上。确保还展示涉及数据收集、预处理和EDA的项目，因为许多数据科学职位要求的技能集不仅仅限于模型构建。
+我上面列出的项目主要集中在机器学习上。确保还展示涉及数据收集、预处理和 EDA 的项目，因为许多数据科学职位要求的技能集不仅仅限于模型构建。
 
 ## 3\. 具有创造性和原创性
 
@@ -102,14 +102,14 @@
 
 ### 更多相关内容
 
-+   [KDnuggets新闻，6月1日：数据科学的完整集合…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日：数据科学的完整集合…](https://www.kdnuggets.com/2022/n22.html)
 
-+   [2022年能让你找到工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [2022 年能让你找到工作的数据科学作品集](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-+   [KDnuggets™新闻22:n05，2月2日：掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™新闻 22:n05，2 月 2 日：掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [3个确保能让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个确保能让你找到工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [2024年能让你找到工作的5个数据分析项目](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
++   [2024 年能让你找到工作的 5 个数据分析项目](https://www.kdnuggets.com/5-data-analyst-projects-to-land-a-job-in-2024)
 
-+   [你为什么难以找到数据科学工作的7个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [你为什么难以找到数据科学工作的 7 个原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)

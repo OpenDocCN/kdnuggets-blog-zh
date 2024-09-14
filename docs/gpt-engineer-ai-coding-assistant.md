@@ -1,8 +1,8 @@
 # GPT-Engineer：你的全新 AI 编程助手
 
-> 原文：[https://www.kdnuggets.com/2023/07/gpt-engineer-ai-coding-assistant.html](https://www.kdnuggets.com/2023/07/gpt-engineer-ai-coding-assistant.html)
+> 原文：[`www.kdnuggets.com/2023/07/gpt-engineer-ai-coding-assistant.html`](https://www.kdnuggets.com/2023/07/gpt-engineer-ai-coding-assistant.html)
 
-![](../Images/6b94e9e2a86562b8155251594d79954d.png)
+![](img/6b94e9e2a86562b8155251594d79954d.png)
 
 由作者使用 Midjourney 创建
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
 
 * * *
 

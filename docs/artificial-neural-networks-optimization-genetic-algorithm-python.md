@@ -1,16 +1,16 @@
-# 使用遗传算法和Python优化人工神经网络
+# 使用遗传算法和 Python 优化人工神经网络
 
-> 原文：[https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html/2](https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html/2)
+> 原文：[`www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html/2`](https://www.kdnuggets.com/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/03/artificial-neural-networks-optimization-genetic-algorithm-python.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-### 完整的Python实现
+### 完整的 Python 实现
 
-这个项目的Python实现包括三个Python文件：
+这个项目的 Python 实现包括三个 Python 文件：
 
-1.  **GA.py** 用于实现GA函数。
+1.  **GA.py** 用于实现 GA 函数。
 
-1.  **ANN.py** 用于实现ANN函数。
+1.  **ANN.py** 用于实现 ANN 函数。
 
 1.  第三个文件用于通过多个代调用这些函数。这是项目的主要文件。
 
@@ -20,15 +20,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-第三个文件是主要文件，因为它连接了所有函数。它读取特征和类标签文件，根据标准差过滤特征，创建ANN架构，生成初始解，通过计算所有解的适应度值、选择最佳父代、应用交叉和变异，最后创建新种群来循环多个代。其实现如下。该文件定义了GA参数，如每个种群的解的数量、选择的父代数量、变异百分比和代数。你可以尝试不同的值。
+第三个文件是主要文件，因为它连接了所有函数。它读取特征和类标签文件，根据标准差过滤特征，创建 ANN 架构，生成初始解，通过计算所有解的适应度值、选择最佳父代、应用交叉和变异，最后创建新种群来循环多个代。其实现如下。该文件定义了 GA 参数，如每个种群的解的数量、选择的父代数量、变异百分比和代数。你可以尝试不同的值。
 
 ```py
 
@@ -204,11 +204,11 @@ f.close()
 
 ```
 
-基于1,000代，文件末尾使用**Matplotlib**可视化库创建了一个图表，显示每代准确率的变化。它显示在下一个图中。
+基于 1,000 代，文件末尾使用**Matplotlib**可视化库创建了一个图表，显示每代准确率的变化。它显示在下一个图中。
 
-![遗传算法准确性](../Images/64fe9af88fc4f028af9430b41dc84444.png)
+![遗传算法准确性](img/64fe9af88fc4f028af9430b41dc84444.png)
 
-经过1,000次迭代后，准确率超过97%。相比之下，如果不使用优化技术，则准确率为45%。这说明结果可能不佳并非因为模型或数据有问题，而是因为没有使用优化技术。当然，使用不同的参数值，例如10,000代，可能会提高准确率。在该文件的末尾，它将参数以矩阵形式保存到磁盘以备后用。
+经过 1,000 次迭代后，准确率超过 97%。相比之下，如果不使用优化技术，则准确率为 45%。这说明结果可能不佳并非因为模型或数据有问题，而是因为没有使用优化技术。当然，使用不同的参数值，例如 10,000 代，可能会提高准确率。在该文件的末尾，它将参数以矩阵形式保存到磁盘以备后用。
 
 ### GA.py 实现
 
@@ -400,27 +400,27 @@ def fitness(weights_mat, data_inputs, data_outputs, activation="relu"):
 
 +   电子邮件: [ahmed.f.gad@gmail.com](https://mailto:ahmed.f.gad@gmail.com)
 
-+   LinkedIn: [https://linkedin.com/in/ahmedfgad/](https://linkedin.com/in/ahmedfgad/)
++   LinkedIn: [`linkedin.com/in/ahmedfgad/`](https://linkedin.com/in/ahmedfgad/)
 
-+   KDnuggets: [https://www.kdnuggets.com/author/ahmed-gad](https://www.kdnuggets.com/author/ahmed-gad)
++   KDnuggets: [`www.kdnuggets.com/author/ahmed-gad`](https://www.kdnuggets.com/author/ahmed-gad)
 
-+   YouTube: [https://youtube.com/AhmedGadFCIT](https://youtube.com/AhmedGadFCIT)
++   YouTube: [`youtube.com/AhmedGadFCIT`](https://youtube.com/AhmedGadFCIT)
 
-+   TowardsDataScience: [https://towardsdatascience.com/@ahmedfgad](https://towardsdatascience.com/@ahmedfgad)
++   TowardsDataScience: [`towardsdatascience.com/@ahmedfgad`](https://towardsdatascience.com/@ahmedfgad)
 
-+   GitHub: [https://github.com/ahmedfgad](https://github.com/ahmedfgad)
++   GitHub: [`github.com/ahmedfgad`](https://github.com/ahmedfgad)
 
 [原文](https://www.linkedin.com/pulse/artificial-neural-networks-optimization-using-genetic-ahmed-gad/)。经许可转载。
 
-**个人简介: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术优秀荣誉学士学位。因在学院中排名第一，他于2015年被推荐到埃及某学院担任助教，并于2016年在其学院担任助教及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
+**个人简介: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于 2015 年 7 月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术优秀荣誉学士学位。因在学院中排名第一，他于 2015 年被推荐到埃及某学院担任助教，并于 2016 年在其学院担任助教及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
 
 **相关：**
 
-+   [使用 NumPy 和图像分类的人工神经网络实现](/2019/02/artificial-neural-network-implementation-using-numpy-and-image-classification.html)
++   使用 NumPy 和图像分类的人工神经网络实现
 
-+   [Python 中的遗传算法实现](/2018/07/genetic-algorithm-implementation-python.html)
++   Python 中的遗传算法实现
 
-+   [学习率在人工神经网络中是否有用？](/2018/01/learning-rate-useful-neural-network.html)
++   学习率在人工神经网络中是否有用？
 
 ### 更多相关内容
 
@@ -434,7 +434,7 @@ def fitness(weights_mat, data_inputs, data_outputs, activation="relu"):
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成为一名优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为一名优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 dnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)

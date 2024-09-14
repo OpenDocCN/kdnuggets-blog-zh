@@ -1,8 +1,8 @@
 # 5 个必须了解的 R 数据分析包
 
-> 原文：[https://www.kdnuggets.com/5-must-know-r-packages-for-data-analysis](https://www.kdnuggets.com/5-must-know-r-packages-for-data-analysis)
+> 原文：[`www.kdnuggets.com/5-must-know-r-packages-for-data-analysis`](https://www.kdnuggets.com/5-must-know-r-packages-for-data-analysis)
 
-![5 个必须了解的 R 数据分析包](../Images/4065694acdeedbecb12700c703a4f572.png)
+![5 个必须了解的 R 数据分析包](img/4065694acdeedbecb12700c703a4f572.png)
 
 图片来源 | Ideogram
 
@@ -12,11 +12,11 @@ R 是一种功能强大且多用途的编程语言，广泛用于数据分析和
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

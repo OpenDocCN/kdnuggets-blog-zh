@@ -1,8 +1,8 @@
 # 让数据科学回归“科学”
 
-> 原文：[https://www.kdnuggets.com/2017/09/science-data-science.html](https://www.kdnuggets.com/2017/09/science-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/09/science-data-science.html`](https://www.kdnuggets.com/2017/09/science-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Rubens Zimbres，数据科学家及机器学习研究员。**
 
@@ -12,19 +12,19 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
-下面的图片展示了科学研究所需的步骤，包括相应的数据分析和模拟。实际上，这是我在博士论文中做的草图。简而言之，我研究了过去27年的商业管理文献，并试图开发一种知识上颠覆性的方式来衡量和预测服务质量，将商业管理与电气工程概念相结合。在4年的过程中，我进行了定性-定量纵向研究，并使用基于代理的建模开发了一个模拟，试图找到一种可以模拟人类行为的5状态细胞自动机规则。我探讨了复杂性概念、自组织系统、秩序的涌现和社会网络。
+下面的图片展示了科学研究所需的步骤，包括相应的数据分析和模拟。实际上，这是我在博士论文中做的草图。简而言之，我研究了过去 27 年的商业管理文献，并试图开发一种知识上颠覆性的方式来衡量和预测服务质量，将商业管理与电气工程概念相结合。在 4 年的过程中，我进行了定性-定量纵向研究，并使用基于代理的建模开发了一个模拟，试图找到一种可以模拟人类行为的 5 状态细胞自动机规则。我探讨了复杂性概念、自组织系统、秩序的涌现和社会网络。
 
-一篇论文发表在Elsevier的[《电子计算机科学理论笔记》(Electronic Notes in Theoretical Computer Science)](http://www.sciencedirect.com/science/journal/15710661?sdc=1)（2009），标题为[**《社交网络中质量感知的动态：一种基于细胞自动机的美学服务模型》**](http://www.sciencedirect.com/science/article/pii/S1571066109003740)。
+一篇论文发表在 Elsevier 的[《电子计算机科学理论笔记》(Electronic Notes in Theoretical Computer Science)](http://www.sciencedirect.com/science/journal/15710661?sdc=1)（2009），标题为[**《社交网络中质量感知的动态：一种基于细胞自动机的美学服务模型》**](http://www.sciencedirect.com/science/article/pii/S1571066109003740)。
 
-[![](../Images/fef3ef07f0eaefc12a3946667d882389.png)](https://i.imgur.com/YxhIQhM.jpg)
+![](https://i.imgur.com/YxhIQhM.jpg)
 
 我从科学方法中学到的一件事是，在解决问题时要摆脱*先验*和*后验*偏见。*先验*偏见发生在你以预先设定的想法开始分析时。在这种情况下，你的发现只会确认你最初陈述的内容，因为整个研究过程都存在偏见。*后验*偏见发生在你开始分析某事时，但实际上你已经知道结果是什么，这样整个过程也会有偏见。
 
@@ -40,7 +40,7 @@
 
 注意到到目前为止我们甚至没有考虑假设和算法。只有在准确知道问题中涉及哪些变量之后，我们才会制定假设。假设你认为利润受到对产品质量的正面客户认知和关于你公司的高口碑广告的影响。这就是名义网络，你在其中绘制相关性和因果关系。在数据科学中，你需要了解客户的认知，并且是否存在口碑广告。然后你会发现你在处理不同的数据集，一个是市场研究数据，另一个是社交媒体推荐。你还有另一个包含公司财务数据的数据集（包含利润数据）。
 
-现在是时候选择了：你是选择定量方法，使用市场研究数据集和财务数据中的结构化数据吗？但社交媒体是非结构化的，因此你必须使用自然语言处理进行定性分析。更糟糕的是，你想进行纵向分析，将数据转换为时间序列并用ARIMA进行分析。啊，利润可以通过深度神经网络来预测，使用市场研究数据、财务数据和社交媒体中的词嵌入作为特征！
+现在是时候选择了：你是选择定量方法，使用市场研究数据集和财务数据中的结构化数据吗？但社交媒体是非结构化的，因此你必须使用自然语言处理进行定性分析。更糟糕的是，你想进行纵向分析，将数据转换为时间序列并用 ARIMA 进行分析。啊，利润可以通过深度神经网络来预测，使用市场研究数据、财务数据和社交媒体中的词嵌入作为特征！
 
 现在我们进入了数据科学家的乐趣：算法、分类、回归、深度学习、无监督学习、准确性、过拟合、偏差-方差权衡、超参数调优。乐趣开始了！
 
@@ -58,17 +58,17 @@
 
 在验证你的数据分析结果后，你将确认或拒绝假设，并向高层管理人员建议战略举措。请注意，数据科学家需要商业管理人员的全面参与才能成功。数据分析和建模的发现必须为战略决策、市场定位、产品发布、品牌形象等多个领域提供洞察。
 
-所以，数据科学中的**科学**不仅仅涉及机器学习、深度学习、自然语言处理、人工智能算法和公式。这不仅仅是STEM。它涉及我们从学术界借鉴的一种跨学科且严谨的方法，旨在为企业带来超出平均水平的利润，常常涉及心理学、博弈论、商业管理、复杂性、非线性效应和复杂因果关系。
+所以，数据科学中的**科学**不仅仅涉及机器学习、深度学习、自然语言处理、人工智能算法和公式。这不仅仅是 STEM。它涉及我们从学术界借鉴的一种跨学科且严谨的方法，旨在为企业带来超出平均水平的利润，常常涉及心理学、博弈论、商业管理、复杂性、非线性效应和复杂因果关系。
 
 **简介：[鲁本斯·辛布雷斯](https://www.linkedin.com/in/rubens-zimbres/)** 是一名数据科学家，拥有电气工程方向的工商管理硕士和博士学位。他的研究重点是机器学习、深度学习和自然语言处理。
 
 **相关：**
 
-+   [应用于大数据的机器学习，解释](/2017/07/machine-learning-big-data-explained.html)
++   应用于大数据的机器学习，解释
 
-+   [特征选择的实际重要性](/2017/06/practical-importance-feature-selection.html)
++   特征选择的实际重要性
 
-+   [教学数据科学过程](/2017/05/teaching-data-science-process.html)
++   教学数据科学过程
 
 ### 更多相关内容
 
@@ -78,8 +78,8 @@
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为优秀数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

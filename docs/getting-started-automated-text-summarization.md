@@ -1,8 +1,8 @@
 # 开始自动文本摘要
 
-> 原文：[https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
+> 原文：[`www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html`](https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html)
 
-![图示](../Images/ab8265240781f013c50e69641c7c4132.png)
+![图示](img/ab8265240781f013c50e69641c7c4132.png)
 
 来源：[SFL Scientific](https://sflscientific.com/data-science-blog/2016/11/17/text-summarization-in-natural-language-processing)
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -22,7 +22,7 @@
 
 摘要技术有两种分类：抽取式和生成式。我们将在此重点讨论抽取式方法，它通过识别文本中重要的句子或摘录并逐字复述这些内容作为摘要。不会生成新的文本；仅使用现有文本进行摘要。这与生成式方法不同，生成式方法使用更强大的自然语言处理技术来解释文本并生成新的摘要文本。
 
-这篇文章将演示一个抽取式摘要过程，使用简单的词频方法，在 Python 中实现。在开始之前，请注意我们不会在这篇文章中花费太多精力进行数据预处理、分词、标准化等操作（[类似于上次](/2019/11/create-vocabulary-nlp-tasks-python.html)），也不会介绍任何能够轻松有效执行这些任务的库。我希望重点介绍文本摘要的步骤，略过其他重要的概念。我计划在这篇文章后续进行更多的跟进，并在过程中逐步增加我们自然语言处理任务的复杂性。
+这篇文章将演示一个抽取式摘要过程，使用简单的词频方法，在 Python 中实现。在开始之前，请注意我们不会在这篇文章中花费太多精力进行数据预处理、分词、标准化等操作（类似于上次），也不会介绍任何能够轻松有效执行这些任务的库。我希望重点介绍文本摘要的步骤，略过其他重要的概念。我计划在这篇文章后续进行更多的跟进，并在过程中逐步增加我们自然语言处理任务的复杂性。
 
 此外，例如，由于我们在这里进行了一些最小化的分词，你将会体会到何时进行分词，且更有效的处理方法可以作为读者的练习。
 
@@ -48,7 +48,7 @@ from sklearn.feature_extraction.stop_words import ENGLISH_STOP_WORDS as stop_wor
 
 我们需要`punctuation`和`stop_words`模块来识别这些元素，以便在对单词和句子进行评分时确定它们的相对重要性。对于这个任务，我们不会认为标点符号或停用词“重要”。为什么？与语言建模任务相比，其中这些元素无疑是有用的，或者与文本分类任务相比，这些元素可能会有用，但很明显，包含频繁出现的停用词或重复的标点符号会导致偏向这些标记，对我们没有益处。我们有各种理由希望**不**排除停用词（任意删除它们应当避免），但这似乎不是其中之一。
 
-接下来，我们需要一些文本来测试我们的摘要技术。我手动从CNN复制并粘贴了这篇文章，但你可以随意寻找自己的：
+接下来，我们需要一些文本来测试我们的摘要技术。我手动从 CNN 复制并粘贴了这篇文章，但你可以随意寻找自己的：
 
 ```py
 # https://www.cnn.com/2019/11/26/politics/judiciary-committee-hearing/index.html
@@ -87,7 +87,7 @@ def sent_tokenizer(s):
 
 我们需要单个单词来确定它们在文档中的相对频率，并分配相应的分数；我们需要单个句子来随后汇总每个单词的分数，以确定句子的“重要性”。
 
-请注意，我们在这里使用“重要性”作为文档中相对词频的同义词；我们将每个单词的出现次数除以文档中出现频率最高的单词的出现次数。这种高频等于真正的*重要性*吗？假设它等于重要性是幼稚的，但这也是引入文本摘要概念的最简单方法。对我们这里的“重要性”假设感兴趣吗？可以尝试像TF-IDF或词嵌入这样的东西。
+请注意，我们在这里使用“重要性”作为文档中相对词频的同义词；我们将每个单词的出现次数除以文档中出现频率最高的单词的出现次数。这种高频等于真正的*重要性*吗？假设它等于重要性是幼稚的，但这也是引入文本摘要概念的最简单方法。对我们这里的“重要性”假设感兴趣吗？可以尝试像 TF-IDF 或词嵌入这样的东西。
 
 好的，我们开始分词吧：
 

@@ -1,8 +1,8 @@
 # 开始使用 Python 进行数据分析
 
-> 原文：[https://www.kdnuggets.com/2017/07/getting-started-python-data-analysis.html](https://www.kdnuggets.com/2017/07/getting-started-python-data-analysis.html)
+> 原文：[`www.kdnuggets.com/2017/07/getting-started-python-data-analysis.html`](https://www.kdnuggets.com/2017/07/getting-started-python-data-analysis.html)
 
-![](../Images/af736f0163342583682835b150c0b856.png)
+![](img/af736f0163342583682835b150c0b856.png)
 
 一位朋友最近问了这个问题，我认为如果在这里发布可能会对其他人有帮助。这是为那些对 Python 完全陌生的人准备的，旨在提供从零到一的最简单路径。
 
@@ -50,11 +50,11 @@
 
 **相关：**
 
-+   [相关性介绍](/2017/02/datascience-introduction-correlation.html)
++   相关性介绍
 
-+   [掌握 Python 数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握 Python 数据准备的 7 个步骤
 
-+   [数据科学基础：从数据中可以挖掘出哪些模式？](/2016/12/data-science-basics-types-patterns-mined-data.html)
++   数据科学基础：从数据中可以挖掘出哪些模式？
 
 ### 更多相关话题
 

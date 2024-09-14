@@ -1,8 +1,8 @@
 # SQL 案例研究：帮助初创公司 CEO 管理数据
 
-> 原文：[https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2](https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2)
+> 原文：[`www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2`](https://www.kdnuggets.com/2018/09/sql-case-study-helping-startup-ceo-manage-data.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2018/09/sql-case-study-helping-startup-ceo-manage-data.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **表中存在多少行？**
 
@@ -232,45 +232,45 @@ GROUP BY city;
 
 希望你觉得这篇文章有用。如果你想了解我在获得第一个数据科学实习之前的故事，我在 Medium 上写了一篇 [文章](https://medium.com/@ezzeddinabdullah/from-electronics-and-communications-engineering-to-data-science-a373448a783d)。如果你想看到更多更新和挑战，请关注我：
 
-+   Linkedin: [https://www.linkedin.com/in/ezzeddinabdullah/](https://www.linkedin.com/in/ezzeddinabdullah/)
++   Linkedin: [`www.linkedin.com/in/ezzeddinabdullah/`](https://www.linkedin.com/in/ezzeddinabdullah/)
 
-+   Medium: [https://medium.com/@ezzeddinabdullah](https://medium.com/@ezzeddinabdullah)
++   Medium: [`medium.com/@ezzeddinabdullah`](https://medium.com/@ezzeddinabdullah)
 
-+   Twitter: [https://twitter.com/EzzEddinAbdulah](https://twitter.com/EzzEddinAbdulah)
++   Twitter: [`twitter.com/EzzEddinAbdulah`](https://twitter.com/EzzEddinAbdulah)
 
-+   Quora: [https://www.quora.com/profile/Ezz-El-Din-Abdullah](https://www.quora.com/profile/Ezz-El-Din-Abdullah)
++   Quora: [`www.quora.com/profile/Ezz-El-Din-Abdullah`](https://www.quora.com/profile/Ezz-El-Din-Abdullah)
 
 **简历： [Ezz El Din Abdullah](https://www.linkedin.com/in/ezzeddinabdullah/) 是前数据科学实习生和编程导师。**
 
 **相关：**
 
-+   [SQL 备忘单](/2018/07/sql-cheat-sheet.html)
++   SQL 备忘单
 
-+   [SQL 中的可扩展随机行选择](/2018/04/scalable-select-random-rows-sql.html)
++   SQL 中的可扩展随机行选择
 
-+   [选择 SQL 还是不选择 SQL：这是一个问题！](/2018/05/sql-not-sql-question.html)
++   选择 SQL 还是不选择 SQL：这是一个问题！
 
 * * *
 
 ## 我们的前 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
 ### 主题更多信息
 
-+   [使用Python的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
++   [使用 Python 的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
 
-+   [12个建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
++   [12 个建议：从数据分析师到创业公司联合创始人](https://www.kdnuggets.com/2021/12/12-tips-data-analyst-to-co-founder.html)
 
-+   [ChatGPT时代建立深科技创业公司的10个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
++   [ChatGPT 时代建立深科技创业公司的 10 个障碍](https://www.kdnuggets.com/2023/04/10-hurdles-building-deep-tech-startup-age-chatgpt.html)
 
-+   [KDnuggets新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
 
 +   [超级学习指南：一本免费的算法与数据结构电子书](https://www.kdnuggets.com/2022/06/super-study-guide-free-algorithms-data-structures-ebook.html)
 

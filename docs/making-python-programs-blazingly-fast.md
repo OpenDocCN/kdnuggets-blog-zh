@@ -1,8 +1,8 @@
 # 让 Python 程序闪电般快速
 
-> 原文：[https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html](https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html)
+> 原文：[`www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html`](https://www.kdnuggets.com/2020/09/making-python-programs-blazingly-fast.html)
 
-[评论](#comments)
+评论
 
 **由 [Martin Heinz](https://www.linkedin.com/in/heinz-martin/)，IBM 的 DevOps 工程师**
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 方面支持你的组织
 
 * * *
 
 那么，让我们证明一些人的观点是错误的，看看如何提高我们*Python* 程序的性能，让它们真正变快！
 
-![图](../Images/8e2b22b053bf334d3c9ae781110804fe.png)
+![图](img/8e2b22b053bf334d3c9ae781110804fe.png)
 
 by [@veri_ivanova](https://unsplash.com/@veri_ivanova) 在 unsplash
 
@@ -56,7 +56,7 @@ by [@veri_ivanova](https://unsplash.com/@veri_ivanova) 在 unsplash
 
 ### 加速
 
-现在，来点有趣的。让我们让你的 Python 程序运行得更快。我（主要）不会给你展示一些黑客技巧、窍门和代码片段，这些东西能神奇地解决你的性能问题。这更多是关于一般的想法和策略，这些想法和策略在使用时可以对性能产生巨大影响，在某些情况下甚至可以提高30%的速度。
+现在，来点有趣的。让我们让你的 Python 程序运行得更快。我（主要）不会给你展示一些黑客技巧、窍门和代码片段，这些东西能神奇地解决你的性能问题。这更多是关于一般的想法和策略，这些想法和策略在使用时可以对性能产生巨大影响，在某些情况下甚至可以提高 30%的速度。
 
 ### 使用内置数据类型
 
@@ -66,7 +66,7 @@ by [@veri_ivanova](https://unsplash.com/@veri_ivanova) 在 unsplash
 
 我已经在之前的博客文章中[这里](https://martinheinz.dev/blog/4)展示过这个内容，但我认为用简单的例子重复一遍是值得的：
 
-上面的函数使用`time.sleep`模拟了重计算。当第一次用参数`1`调用时，它会等待2秒钟，然后才返回结果。当再次调用时，结果已经被缓存，所以它跳过了函数体，立即返回结果。更多的*实际生活*例子请参见之前的博客文章[这里](https://martinheinz.dev/blog/4)。
+上面的函数使用`time.sleep`模拟了重计算。当第一次用参数`1`调用时，它会等待 2 秒钟，然后才返回结果。当再次调用时，结果已经被缓存，所以它跳过了函数体，立即返回结果。更多的*实际生活*例子请参见之前的博客文章[这里](https://martinheinz.dev/blog/4)。
 
 ### 使用局部变量
 
@@ -102,11 +102,11 @@ by [@veri_ivanova](https://unsplash.com/@veri_ivanova) 在 unsplash
 
 **相关：**
 
-+   [自动化你的 Python 项目的每个方面](/2020/09/automating-every-aspect-python-project.html)
++   自动化你的 Python 项目的每个方面
 
-+   [MIT 免费课程：Python 计算机科学与编程导论](/2020/09/free-mit-intro-computer-science-programming-python.html)
++   MIT 免费课程：Python 计算机科学与编程导论
 
-+   [用一行代码进行统计和可视化探索数据分析](/2020/09/statistical-visual-exploratory-data-analysis-one-line-code.html)
++   用一行代码进行统计和可视化探索数据分析
 
 ### 更多相关主题
 
@@ -118,6 +118,6 @@ by [@veri_ivanova](https://unsplash.com/@veri_ivanova) 在 unsplash
 
 +   [预测的实现：Python 中线性回归的初学者指南](https://www.kdnuggets.com/2023/06/making-predictions-beginner-guide-linear-regression-python.html)
 
-+   [BERT在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
++   [BERT 在稀疏性下能有多快？](https://www.kdnuggets.com/2022/04/fast-bert-go-sparsity.html)
 
 +   [使用快速克里金（FKR）加速机器学习](https://www.kdnuggets.com/2022/06/vmc-speed-machine-learning-fast-kriging.html)

@@ -1,6 +1,6 @@
 # Python 控制流程备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)
+> 原文：[`www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html`](https://www.kdnuggets.com/2022/11/python-control-flow-cheatsheet.html)
 
 # 顺其自然
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 [](https://www.kdnuggets.com/publications/sheets/Python_Control_Flow_Cheatsheet_KDnuggets.pdf)
 
-[![Python 控制流程备忘单](../Images/08dce803c057523d094afd36551d2907.png)](https://www.kdnuggets.com/publications/sheets/Python_Control_Flow_Cheatsheet_KDnuggets.pdf)
+![Python 控制流程备忘单](https://www.kdnuggets.com/publications/sheets/Python_Control_Flow_Cheatsheet_KDnuggets.pdf)
 
 [我们新的快速参考备忘单](https://www.kdnuggets.com/publications/sheets/Python_Control_Flow_Cheatsheet_KDnuggets.pdf) 将为你提供在 Python 中实现流程控制的理解。这个资源将提供一个概述和快速参考：
 

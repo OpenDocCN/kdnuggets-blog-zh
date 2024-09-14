@@ -1,10 +1,10 @@
-# 我在构建第一个模型时希望知道的4个机器学习概念
+# 我在构建第一个模型时希望知道的 4 个机器学习概念
 
-> 原文：[https://www.kdnuggets.com/2021/03/4-machine-learning-concepts.html](https://www.kdnuggets.com/2021/03/4-machine-learning-concepts.html)
+> 原文：[`www.kdnuggets.com/2021/03/4-machine-learning-concepts.html`](https://www.kdnuggets.com/2021/03/4-machine-learning-concepts.html)
 
-[comments](#comments)
+comments
 
-![](../Images/f3e4c5afe5eb26c64bb410bd38c947de.png)
+![](img/f3e4c5afe5eb26c64bb410bd38c947de.png)
 
 *照片由 [Anthony Tori](https://unsplash.com/@anthonytori?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/thinking?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -14,23 +14,23 @@
 
 鉴于这是我**第一次**“认真”对待的模型，我曾对我构建模型的过程有一个天真的误解：
 
-![](../Images/19f8e9274e514a717bd43f8f86cf6d6f.png)
+![](img/19f8e9274e514a717bd43f8f86cf6d6f.png)
 
 *图片由作者创作。*
 
 实际上，我的过程更像这样：
 
-![](../Images/2816a854c6a33c2e0ef6ec9bc9317aef.png)
+![](img/2816a854c6a33c2e0ef6ec9bc9317aef.png)
 
 *图片由作者创作。*
 
 总体而言，我会说这是一次成功，但在构建模型的过程中确实经历了很多起伏——为什么？因为我花了很多时间学习我之前不知道的新概念。在这篇文章中，我想反思并记录下在构建这个模型之前我希望知道的事情。
 
-话虽如此，这里有4个概念是我希望在构建这个模型之前就知道的！
+话虽如此，这里有 4 个概念是我希望在构建这个模型之前就知道的！
 
 ### 1. 使用简单 Web UI 进行模型部署
 
-![](../Images/94e8712acdfa4133f6473b104aac7c21.png)
+![](img/94e8712acdfa4133f6473b104aac7c21.png)
 
 *[图片由 Gradio 提供（已获许可）](https://www.gradio.app/hub/aliabid94/hub-titanic)*
 
@@ -42,15 +42,15 @@
 
 1.  **这是进行演示的好方法**。就个人而言，我发现向某些利益相关者展示 Jupyter Notebook 并没有体现我的模型的实际表现，尽管它的表现非常好。使用这样的库可以更容易地传达你的结果，并更好地推销自己。
 
-1.  **实现和分发很简单**。重申一下，学习曲线很小，因为只需3行代码即可实现此功能。此外，它非常容易分发，因为网络应用程序可以通过公共链接访问。
+1.  **实现和分发很简单**。重申一下，学习曲线很小，因为只需 3 行代码即可实现此功能。此外，它非常容易分发，因为网络应用程序可以通过公共链接访问。
 
-> **总结：利用像****Gradio****这样的ML模型GUI来进行更好的测试和沟通。**
+> **总结：利用像****Gradio****这样的 ML 模型 GUI 来进行更好的测试和沟通。**
 
 ### 2\. 特征重要性
 
 特征重要性是指将分数分配给输入变量的一组技术，基于它们在预测目标变量方面的表现。分数越高，该特征在模型中越*重要*。
 
-![](../Images/17e98d4217cdb76aab8ce19aa1b68529.png)
+![](img/17e98d4217cdb76aab8ce19aa1b68529.png)
 
 *由作者创建的图像。*
 
@@ -80,7 +80,7 @@
 
 +   神经网络中的隐藏层数量
 
-关于超参数的事情是，虽然它们不是由数据本身决定的，但设置正确的超参数可以将你的机器学习模型的准确率从80%提高到95%以上。这就是我所经历的情况。
+关于超参数的事情是，虽然它们不是由数据本身决定的，但设置正确的超参数可以将你的机器学习模型的准确率从 80%提高到 95%以上。这就是我所经历的情况。
 
 现在回到我的主要观点，有一些技术可以自动优化你的模型超参数，这样你就不需要测试一堆不同的数值了。
 
@@ -108,7 +108,7 @@
 
 **相关：**
 
-+   [如何将我的机器学习模型从80%准确率持续提升到90%以上](https://www.kdnuggets.com/2020/09/improve-machine-learning-models-accuracy.html)
++   [如何将我的机器学习模型从 80%准确率持续提升到 90%以上](https://www.kdnuggets.com/2020/09/improve-machine-learning-models-accuracy.html)
 
 +   [机器学习中的模型评估指标](https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html)
 
@@ -118,11 +118,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -134,7 +134,7 @@
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [成功数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 

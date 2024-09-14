@@ -1,8 +1,8 @@
 # 数据科学的七大免费云笔记本
 
-> 原文：[https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)
+> 原文：[`www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science`](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)
 
-![数据科学的七大免费云笔记本](../Images/75ff32ecbd3bde29d634f8cd5e40cac7.png)
+![数据科学的七大免费云笔记本](img/75ff32ecbd3bde29d634f8cd5e40cac7.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 我强烈推荐你创建一个账户并亲自体验一下。即使是非技术专业人士，也能通过 Deepnote 的 AI 功能更轻松地编写和调试代码。
 
-![数据科学的七大免费云笔记本](../Images/c567a227c71d69980dc8bb321720ff89.png)
+![数据科学的七大免费云笔记本](img/c567a227c71d69980dc8bb321720ff89.png)
 
 作者提供的图片
 
@@ -42,29 +42,29 @@
 
 当我参与比赛或尝试深度学习模型时，它是我首选的平台。
 
-再次推荐Kaggle，因为它拥有强大的社区和高端硬件，适合你的AI项目。
+再次推荐 Kaggle，因为它拥有强大的社区和高端硬件，适合你的 AI 项目。
 
-![数据科学前7名免费云笔记本](../Images/9e558c949979df28704bc1c7ae8423d1.png)
+![数据科学前 7 名免费云笔记本](img/9e558c949979df28704bc1c7ae8423d1.png)
 
 图片来源：作者
 
 # 3\. Hex
 
-[Hex](https://hex.tech/)现在已经向公众开放，它是处理数据科学和分析任务的热门选择。它提供了类似Deepnote的功能，但由于环境加载和代码运行速度较慢，我将它排在第三。它在很多方面也有局限性。
+[Hex](https://hex.tech/)现在已经向公众开放，它是处理数据科学和分析任务的热门选择。它提供了类似 Deepnote 的功能，但由于环境加载和代码运行速度较慢，我将它排在第三。它在很多方面也有局限性。
 
-Hex是一个现代数据工作空间，旨在使数据处理更加轻松和协作。它允许用户连接各种数据源，包括数据库、云存储和API。一旦连接数据，用户可以在交互式笔记本中使用SQL或Python直接分析数据。
+Hex 是一个现代数据工作空间，旨在使数据处理更加轻松和协作。它允许用户连接各种数据源，包括数据库、云存储和 API。一旦连接数据，用户可以在交互式笔记本中使用 SQL 或 Python 直接分析数据。
 
-![数据科学前7名免费云笔记本](../Images/b9b31fd2b0552493e5d7d185ca9dd1cb.png)
+![数据科学前 7 名免费云笔记本](img/b9b31fd2b0552493e5d7d185ca9dd1cb.png)
 
 图片来源：作者
 
 # 4\. Noteable
 
-我在[Noteable](https://noteable.io/)被引入为ChatGPT插件时才发现它。在此之前，我完全不知道它的存在。它简单、快速，功能多样。
+我在[Noteable](https://noteable.io/)被引入为 ChatGPT 插件时才发现它。在此之前，我完全不知道它的存在。它简单、快速，功能多样。
 
-该平台提供数据连接、加载、版本管理、笔记本发布、实时协作和快速环境加载。这个平台的最佳特点是其简约设计。此外，你可以将其与ChatGPT连接，以生成和运行代码并获取输出。这一功能使它在笔记本类别中具有很高的价值。
+该平台提供数据连接、加载、版本管理、笔记本发布、实时协作和快速环境加载。这个平台的最佳特点是其简约设计。此外，你可以将其与 ChatGPT 连接，以生成和运行代码并获取输出。这一功能使它在笔记本类别中具有很高的价值。
 
-![数据科学前7名免费云笔记本](../Images/22ab462dc6f08d8d4f9e67ca674f8fbc.png)
+![数据科学前 7 名免费云笔记本](img/22ab462dc6f08d8d4f9e67ca674f8fbc.png)
 
 图片来源：作者
 
@@ -72,9 +72,9 @@ Hex是一个现代数据工作空间，旨在使数据处理更加轻松和协�
 
 [Google Colab](https://colab.research.google.com/)是我们喜爱和珍惜的老牌云笔记本。我们用它来运行深度学习代码，有时它是一个出色且方便的工具。随着时间的推移，它的免费层级受到了限制，并且更加注重付费选项。
 
-除了轻松访问免费GPU和快速加载时间，Google Colab几乎没有其他优势。它不是一个你每天都想使用的完整数据科学平台。
+除了轻松访问免费 GPU 和快速加载时间，Google Colab 几乎没有其他优势。它不是一个你每天都想使用的完整数据科学平台。
 
-![数据科学前7名免费云笔记本](../Images/cd27c6a40e9f58f20b51f76e350228f5.png)
+![数据科学前 7 名免费云笔记本](img/cd27c6a40e9f58f20b51f76e350228f5.png)
 
 图片来源：作者
 
@@ -82,40 +82,40 @@ Hex是一个现代数据工作空间，旨在使数据处理更加轻松和协�
 
 [Naas](https://site.naas.ai/)以其解决各种问题的数据模板而闻名。这个平台提供了一种低代码解决方案，通过结合自动化、分析和人工智能，创建强大的数据产品。
 
-它的计算能力和功能有限。它确实提供了每月免费信用额度用于运行和执行代码。除此之外，它就是云上的JupyterLab。
+它的计算能力和功能有限。它确实提供了每月免费信用额度用于运行和执行代码。除此之外，它就是云上的 JupyterLab。
 
-![数据科学前7名免费云笔记本](../Images/e596c974e05a565c21c17030b87c5fdb.png)
+![数据科学前 7 名免费云笔记本](img/e596c974e05a565c21c17030b87c5fdb.png)
 
 图片来源：作者
 
 # 7\. Datalore
 
-[JetBrains Datalore](https://www.jetbrains.com/datalore/) 类似于Noteable，但速度较慢，缺乏一些关键功能。你还受到计算限制。我曾经在Datalore上运行我的代码，但自从其推出以来，平台没有什么改进或变化。看起来JetBrains已经忘记了它。
+[JetBrains Datalore](https://www.jetbrains.com/datalore/) 类似于 Noteable，但速度较慢，缺乏一些关键功能。你还受到计算限制。我曾经在 Datalore 上运行我的代码，但自从其推出以来，平台没有什么改进或变化。看起来 JetBrains 已经忘记了它。
 
-它有一些你可以在Deepnote中获得的功能，但对于任何初学者来说，UI是混乱的。唯一的优点是它提供免费的存储和计算。
+它有一些你可以在 Deepnote 中获得的功能，但对于任何初学者来说，UI 是混乱的。唯一的优点是它提供免费的存储和计算。
 
-![数据科学的前7名免费云笔记本](../Images/1997f158c8d003cb0f674156a439a514.png)
+![数据科学的前 7 名免费云笔记本](img/1997f158c8d003cb0f674156a439a514.png)
 
 作者提供的图片
 
 # 结论
 
-总之，云笔记本已成为数据科学家和分析师高效完成工作的必备工具。顶级选项提供了极大的价值，包括免费GPU、简单设置、协作功能和与其他服务的集成。Deepnote脱颖而出，是功能最全的选项，具备快速环境加载、AI协助、实时协作和发布能力。
+总之，云笔记本已成为数据科学家和分析师高效完成工作的必备工具。顶级选项提供了极大的价值，包括免费 GPU、简单设置、协作功能和与其他服务的集成。Deepnote 脱颖而出，是功能最全的选项，具备快速环境加载、AI 协助、实时协作和发布能力。
 
-Kaggle非常适合深度学习，因为它提供了高级硬件访问。Hex和Noteable提供现代化的界面和集成，如ChatGPT。虽然Google Colab等有其特定用途，但Deepnote凭借其对端到端数据科学工作流的关注，似乎处于领先地位。无论你选择哪个平台，云笔记本无疑会增强你的数据科学项目和洞察能力。
+Kaggle 非常适合深度学习，因为它提供了高级硬件访问。Hex 和 Noteable 提供现代化的界面和集成，如 ChatGPT。虽然 Google Colab 等有其特定用途，但 Deepnote 凭借其对端到端数据科学工作流的关注，似乎处于领先地位。无论你选择哪个平台，云笔记本无疑会增强你的数据科学项目和洞察能力。
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/)) 是一位认证数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为心理健康问题的学生开发AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan/)) 是一位认证数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写有关机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为心理健康问题的学生开发 AI 产品。
 
 ### 更多相关话题
 
-+   [2022年前5名免费云笔记本](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
++   [2022 年前 5 名免费云笔记本](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
 
-+   [Anaconda的新动态！数据科学培训和云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
++   [Anaconda 的新动态！数据科学培训和云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
 
-+   [11个AWS云和数据迁移的最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [11 个 AWS 云和数据迁移的最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
-+   [Gemini的免费Google云学习路径](https://www.kdnuggets.com/free-google-cloud-learning-path-for-gemini)
++   [Gemini 的免费 Google 云学习路径](https://www.kdnuggets.com/free-google-cloud-learning-path-for-gemini)
 
-+   [前5名云机器学习平台和工具](https://www.kdnuggets.com/the-top-5-cloud-machine-learning-platforms-tools)
++   [前 5 名云机器学习平台和工具](https://www.kdnuggets.com/the-top-5-cloud-machine-learning-platforms-tools)
 
-+   [2024年顶级8款云容器管理解决方案](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)
++   [2024 年顶级 8 款云容器管理解决方案](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)

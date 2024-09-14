@@ -1,8 +1,8 @@
-# 5个数据管理挑战及解决方案
+# 5 个数据管理挑战及解决方案
 
-> 原文：[https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html](https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html)
+> 原文：[`www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html`](https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html)
 
-![5个数据管理挑战及解决方案](../Images/4d133002259f518d223d6b8017fe585c.png)
+![5 个数据管理挑战及解决方案](img/4d133002259f518d223d6b8017fe585c.png)
 
 图片来源于 [Kampus Production](https://www.pexels.com/photo/people-sitting-at-the-table-8190804/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -36,13 +36,13 @@
 
 现代数据策略只能通过发展现有的数据架构来实施。这些架构的固有复杂性要求对相关的基础技术进行彻底的改革，这可能是一项昂贵且耗时的工作。此外，如果遗留系统未更新以满足现代业务需求，数据孤岛可能变得难以整合，导致信息在业务单位之间共享不足或不准确。因此，数据架构需要灵活且适应现代需求，以确保无缝和持续的数据分析，从而进一步推动创新。
 
-大多数企业仍然采用瀑布式的数据共享方法。然而，灵活的数据架构必须确保部门间的数据无缝协作。这可以通过在数据管理策略中采用DataOps原则来实现，因为DataOps专注于自动化组织内部数据的无缝流动。除了灵活性，DataOps还引入了急需的敏捷性，以便迅速扩展数据管道，以适应组织的增长。
+大多数企业仍然采用瀑布式的数据共享方法。然而，灵活的数据架构必须确保部门间的数据无缝协作。这可以通过在数据管理策略中采用 DataOps 原则来实现，因为 DataOps 专注于自动化组织内部数据的无缝流动。除了灵活性，DataOps 还引入了急需的敏捷性，以便迅速扩展数据管道，以适应组织的增长。
 
 # 3\. 数据治理和合规的缺失
 
 组织必须实施适当的数据治理实践，以确保数据的完整性和可用性，并便于访问。这确保了数据的可靠性，流动的顺畅，并受到保护以防滥用。然而，在实施数据治理时，组织必须规避如缺乏技能的数据治理领导和资源、数据质量差以及对企业数据缺乏控制等问题。
 
-数据治理和合规是密不可分的。数据治理实践和政策的漏洞可能导致监管合规问题。监管机构可以根据违规的性质和严重程度以及当地的法律法规，处以罚款和处罚。这些违规行为可能会遭受高达[2000万欧元或上一财政年度4%的总收入](https://gdpr-info.eu/)（以较高者为准）的罚款。此外，因数据滥用或泄露，企业可能面临一个或多个诉讼。在严重情况下，当加大监管审查时，操作流程可能会长时间受到干扰。
+数据治理和合规是密不可分的。数据治理实践和政策的漏洞可能导致监管合规问题。监管机构可以根据违规的性质和严重程度以及当地的法律法规，处以罚款和处罚。这些违规行为可能会遭受高达[2000 万欧元或上一财政年度 4%的总收入](https://gdpr-info.eu/)（以较高者为准）的罚款。此外，因数据滥用或泄露，企业可能面临一个或多个诉讼。在严重情况下，当加大监管审查时，操作流程可能会长时间受到干扰。
 
 为应对数据治理和合规挑战，组织需要建立明确的政策和程序，分配职责，培训员工，并实施适当的技术和组织控制措施。他们还需要定期监控和审计数据实践，以确保持续合规和不断改进。
 
@@ -50,7 +50,7 @@
 
 大量数据对企业保持敏感数据和个人可识别信息（PII）的隐私构成了关键挑战。此外，随着网络攻击和数据泄露变得越来越普遍，投资和更新旧有安全工具和基础设施的成本也在上升。
 
-根据 Check Point Research (CPR) 的报告，**2022年第三季度的网络安全攻击比2021年增加了[28%](https://blog.checkpoint.com/2022/10/26/third-quarter-of-2022-reveals-increase-in-cyberattacks/#:~:text=Global%20attacks%20increased%20by%2028,organization%20worldwide%20reached%20over%201%2C130)**，这表明数据泄露和滥用的潜在风险增加。随着业务基础设施快速采用数字模型，必须部署强有力的安全措施和实践，以保护数据隐私并确保其完整性。在数据管理战略的框架下，必须通过认证严格执行对数据的物理和数字访问。在系统故障、数据损坏或不可预见的灾难发生时，也必须有适当的恢复措施来恢复数据。
+根据 Check Point Research (CPR) 的报告，**2022 年第三季度的网络安全攻击比 2021 年增加了[28%](https://blog.checkpoint.com/2022/10/26/third-quarter-of-2022-reveals-increase-in-cyberattacks/#:~:text=Global%20attacks%20increased%20by%2028,organization%20worldwide%20reached%20over%201%2C130)**，这表明数据泄露和滥用的潜在风险增加。随着业务基础设施快速采用数字模型，必须部署强有力的安全措施和实践，以保护数据隐私并确保其完整性。在数据管理战略的框架下，必须通过认证严格执行对数据的物理和数字访问。在系统故障、数据损坏或不可预见的灾难发生时，也必须有适当的恢复措施来恢复数据。
 
 企业必须投资于数据收集和分类工具，以区分符合监管要求的数据。组织必须制定严格的数据管理政策和程序，包括数据保留、数据质量和数据访问。解决方案应包括基于数据敏感性进行分类，并根据数据的分类应用适当的安全控制。必须根据需要进行持续的风险评估，以识别数据安全和隐私的潜在风险，并实施措施以降低这些风险。
 
@@ -60,7 +60,7 @@
 
 应对这些挑战需要所有数据生态系统相关利益方的协作努力。组织必须采用全面的数据管理方法，关注数据质量、集成、隐私、安全、治理、可扩展性和分析。这需要结合技术解决方案，如数据集成平台、数据分析工具和安全软件，以及组织变革，包括过程改进、培训和沟通。
 
-集成自然语言处理（NLP）和机器学习（ML）模型可以丰富数据生态系统。NLP结合流程自动化，可将原始和非结构化数据转换为结构化数据。另一方面，ML模型可以帮助改进数据生态系统中的操作逻辑，并将人工干预的负担降到最低。
+集成自然语言处理（NLP）和机器学习（ML）模型可以丰富数据生态系统。NLP 结合流程自动化，可将原始和非结构化数据转换为结构化数据。另一方面，ML 模型可以帮助改进数据生态系统中的操作逻辑，并将人工干预的负担降到最低。
 
 # 结论
 
@@ -68,18 +68,18 @@
 
 理解和努力进行数据管理的重要性将继续增长。随着数据管理的发展，连接各级数据将始终是至关重要的，以满足日益复杂的业务需求。这将进一步推动数据管理领域的创新，并在最前沿采用人工智能。
 
-**[迪特玛·里奇](https://www.linkedin.com/in/rietsch/)**是[Pimcore](https://pimcore.com/en)的首席执行官。作为一名拥有强烈创新意识、技术洞察力和数字化转型感的连续创业者，他是一位充满热情的企业家，20多年来一直在设计和实现令人兴奋的数字项目。
+**[迪特玛·里奇](https://www.linkedin.com/in/rietsch/)**是[Pimcore](https://pimcore.com/en)的首席执行官。作为一名拥有强烈创新意识、技术洞察力和数字化转型感的连续创业者，他是一位充满热情的企业家，20 多年来一直在设计和实现令人兴奋的数字项目。
 
 ### 更多相关内容
 
-+   [克服多语言语音技术中的障碍：前5名挑战及创新解决方案](https://www.kdnuggets.com/2023/08/overcoming-barriers-multilingual-voice-technology-top-5-challenges-innovative-solutions.html)
++   [克服多语言语音技术中的障碍：前 5 名挑战及创新解决方案](https://www.kdnuggets.com/2023/08/overcoming-barriers-multilingual-voice-technology-top-5-challenges-innovative-solutions.html)
 
-+   [2024年顶级8大云容器管理解决方案](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)
++   [2024 年顶级 8 大云容器管理解决方案](https://www.kdnuggets.com/the-top-8-cloud-container-management-solutions-of-2024)
 
-+   [介绍MetaGPT的数据解释器：最前沿的开源LLM基础…](https://www.kdnuggets.com/metagpt-data-interpreter-open-source-llm-based-data-solutions)
++   [介绍 MetaGPT 的数据解释器：最前沿的开源 LLM 基础…](https://www.kdnuggets.com/metagpt-data-interpreter-open-source-llm-based-data-solutions)
 
 +   [数据隐私：学习如何实施技术隐私解决方案…](https://www.kdnuggets.com/2022/04/manning-data-privacy-learn-implement-technical-privacy-solutions-tools-scale.html)
 
 +   [常见的数据问题（及解决方案）](https://www.kdnuggets.com/2022/02/common-data-problems-solutions.html)
 
-+   [最全面的Kaggle解决方案和创意列表](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)
++   [最全面的 Kaggle 解决方案和创意列表](https://www.kdnuggets.com/2022/11/comprehensive-list-kaggle-solutions-ideas.html)

@@ -1,8 +1,8 @@
 # 从头到尾解释数据集
 
-> 原文：[https://www.kdnuggets.com/2018/08/interpreting-data-set.html](https://www.kdnuggets.com/2018/08/interpreting-data-set.html)
+> 原文：[`www.kdnuggets.com/2018/08/interpreting-data-set.html`](https://www.kdnuggets.com/2018/08/interpreting-data-set.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Ilknur Kaynar Kabul](https://www.linkedin.com/in/ilknur-kabul-5584b937/)，[SAS](https://www.sas.com/en_us/home.html)**
 
@@ -12,19 +12,19 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
 要建立一个强大的 [机器学习](https://www.sas.com/en_us/insights/analytics/machine-learning.html) 系统，熟悉数据集、了解特征分布、识别重要和不重要的特征、发现特征之间的趋势和关系等至关重要。在深入挖掘数据之前，不要急于建模。记住，输出的质量取决于输入的质量。垃圾进，垃圾出。
 
-数据科学家在建模之前花费大量时间进行数据准备，因为理解、生成和选择有用的特征会影响模型性能。这有助于数据科学家检查拟合模型所需的假设。除了理解输入数据集，理解模型构建过程中生成的数据也很重要——例如，可以在深度Q网络（DQN）的激活数据上使用不同的探索和可视化技术。
+数据科学家在建模之前花费大量时间进行数据准备，因为理解、生成和选择有用的特征会影响模型性能。这有助于数据科学家检查拟合模型所需的假设。除了理解输入数据集，理解模型构建过程中生成的数据也很重要——例如，可以在深度 Q 网络（DQN）的激活数据上使用不同的探索和可视化技术。
 
-根据数据的大小和类型，理解和解释数据集可能会很有挑战性。仅凭查看从数百万个观测值中随机选择的前100个观测值，无法理解数据集并得出结论。如果数据有成千上万的变量，别指望为每个特征绘制统计图。最好选择少量特征或有方法总结它们。而且请记住，如果数据有异质变量，每个变量不能以相同的方式对待。
+根据数据的大小和类型，理解和解释数据集可能会很有挑战性。仅凭查看从数百万个观测值中随机选择的前 100 个观测值，无法理解数据集并得出结论。如果数据有成千上万的变量，别指望为每个特征绘制统计图。最好选择少量特征或有方法总结它们。而且请记住，如果数据有异质变量，每个变量不能以相同的方式对待。
 
 可以做什么？使用不同的探索性数据分析和可视化技术以获得更好的理解。这包括总结主要数据集特征，寻找代表性或关键点以及发现相关特征。在获得对数据集的整体理解后，你可以考虑在建模中使用哪些观察值和特征。
 
@@ -46,9 +46,9 @@
 
 在下面的插图中，每个类别中的机器人图片包括具有不同头部和身体形状的机器人。穿着服装的机器人也可以属于这些类别之一，尽管它们可能与典型的机器人图片非常不同。这些图片对于理解数据是必要的，因为它们是重要的少数。
 
-![博客帖子批评](../Images/e8336fe2345b6e96e7d58279cf8a5a64.png)
+![博客帖子批评](img/e8336fe2345b6e96e7d58279cf8a5a64.png)
 
-[Been Kim在这一领域的工作](http://people.csail.mit.edu/beenkim/papers/KIM2016NIPS_MMD.pdf)专注于在使用一种称为最大均值差异（MMD）评价者的无监督技术时找到那些少数群体并发现原型。
+[Been Kim 在这一领域的工作](http://people.csail.mit.edu/beenkim/papers/KIM2016NIPS_MMD.pdf)专注于在使用一种称为最大均值差异（MMD）评价者的无监督技术时找到那些少数群体并发现原型。
 
 +   **区分：**找到代表可能不总是足够的。如果特征数量很高，仍然很难理解所选择的观察值。这是因为人类无法理解长而复杂的解释。解释需要简单。
 
@@ -56,7 +56,7 @@
 
 除了理解重要特征，还需要了解不同簇之间的差异，以用于许多应用，例如差异诊断。为此，需要在数据中找到区分维度。思维缺口模型（MGM）结合了提取和选择方法，并报告了一组全球可区分的维度，以帮助进一步探索。
 
-![博客文章区分](../Images/23e7c644e13da4e8785c6680fe1352d9.png)
+![博客文章区分](img/23e7c644e13da4e8785c6680fe1352d9.png)
 
 在上述示例中，通过查看从不同机器人图片中提取的特征，我们可以说头部的形状是一个区分维度。然而，眼睛的形状由于相似性，我们无法这样说。
 
@@ -72,13 +72,13 @@
 
 +   **主成分分析：**这是一种线性确定性算法，旨在以尽可能少的维度捕捉数据的变异性。这是一种有效的降维算法，特别是在变量之间存在强线性关系时。
 
-![博客文章 PCA](../Images/60f66641bb3961e13496618339bd7c0f.png)
+![博客文章 PCA](img/60f66641bb3961e13496618339bd7c0f.png)
 
 它可以用来突出变化并消除维度。如果需要解释数据，可以保留考虑了大量变化的前几个主成分。其余主成分仅占有微不足道的方差。为了可解释性和分析，这些主成分不应被保留。
 
 +   **t-SNE（T-distributed Stochastic Neighbor Embedding）:** 一种维度减少算法，试图保留数据中的局部邻域。它是非线性和非确定性的；并允许创建 2D 或 3D 投影。t-SNE 找到其他方法可能遗漏的结构。
 
-![博客文章 TSNE](../Images/5495eff073c9939ee4a98bd60357c129.png)
+![博客文章 TSNE](img/5495eff073c9939ee4a98bd60357c129.png)
 
 它对于可视化和解释数据集非常有用，但有很多需要谨慎的地方。在保留局部结构的同时，它可能会扭曲全局结构。如果需要更多关于 t-SNE 的信息，可以查看 distill.pub 上的优秀文章 “[如何有效使用 t-SNE](https://distill.pub/2016/misread-tsne/)”。
 
@@ -100,11 +100,11 @@ TDA 中的映射算法对于数据可视化和聚类非常有用。可以创建�
 
 **相关：**
 
-+   [数据分析不足的5个原因](https://www.kdnuggets.com/2018/07/5-reasons-data-analytics-falling-short.html)
++   [数据分析不足的 5 个原因](https://www.kdnuggets.com/2018/07/5-reasons-data-analytics-falling-short.html)
 
 +   [Gartner 2018 数据科学和机器学习平台魔力象限的赢家和输家](https://www.kdnuggets.com/2018/02/gartner-2018-mq-data-science-machine-learning-changes.html)
 
-+   [我们最喜欢的5个免费可视化工具](https://www.kdnuggets.com/2018/07/5-favorite-open-source-visualization-tools.html)
++   [我们最喜欢的 5 个免费可视化工具](https://www.kdnuggets.com/2018/07/5-favorite-open-source-visualization-tools.html)
 
 ### 更多相关话题
 
@@ -112,10 +112,10 @@ TDA 中的映射算法对于数据可视化和聚类非常有用。可以创建�
 
 +   [完整的机器学习算法端到端部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [5款最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
++   [5 款最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
 
 +   [一个简单易实现的 HuggingFace 端到端项目](https://www.kdnuggets.com/a-simple-to-implement-end-to-end-project-with-huggingface)
 
-+   [2024年你必须尝试的7个端到端 MLOps 平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
++   [2024 年你必须尝试的 7 个端到端 MLOps 平台](https://www.kdnuggets.com/7-end-to-end-mlops-platforms-you-must-try-in-2024)
 
-+   [区分数据科学家与其他职业的5个因素](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   [区分数据科学家与其他职业的 5 个因素](https://www.kdnuggets.com/2021/11/5-things-set-data-scientist-apart-other-professions.html)

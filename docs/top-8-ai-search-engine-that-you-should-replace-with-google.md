@@ -1,8 +1,8 @@
 # 你应该用来替代 Google 的 8 个 AI 搜索引擎
 
-> 原文：[https://www.kdnuggets.com/top-8-ai-search-engine-that-you-should-replace-with-google](https://www.kdnuggets.com/top-8-ai-search-engine-that-you-should-replace-with-google)
+> 原文：[`www.kdnuggets.com/top-8-ai-search-engine-that-you-should-replace-with-google`](https://www.kdnuggets.com/top-8-ai-search-engine-that-you-should-replace-with-google)
 
-![你应该用来替代 Google 的 8 个 AI 搜索引擎](../Images/85d56a4e598e79714677fe43a4bcd1a4.png)
+![你应该用来替代 Google 的 8 个 AI 搜索引擎](img/85d56a4e598e79714677fe43a4bcd1a4.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -38,35 +38,35 @@
 
 1.  **与数据互动：** Perplexity 允许用户在平台内对文件提出问题并搜索网络。这提供了一个空间中的完整项目视图。
 
-![你应该用来替代 Google 的 8 个 AI 搜索引擎](../Images/571e9e31c4b46f07f99ebf7ceb270db7.png)
+![你应该用来替代 Google 的 8 个 AI 搜索引擎](img/571e9e31c4b46f07f99ebf7ceb270db7.png)
 
 Pro 版的 Perplexity AI 提供了更具对话性的搜索体验。它与用户互动，询问详细信息和偏好，以提供更精确的结果。它还总结了最相关的发现，并从各种来源提取信息。
 
 # Bing
 
-微软[Bing](https://www.bing.com/)自GPT-3.5发布以来进行了重大升级。现在，它是一个完全功能的GenAI搜索引擎，使用如GPT-4、视觉模型和图像生成模型等大型语言模型，提供全新改进的网页搜索体验。现在，你可以搜索具体答案并获得结果摘要。此外，你还可以与AI聊天机器人互动，提出后续问题，甚至与文档聊天，集成ChatGPT插件，并在Bing平台内设计图形。
+微软[Bing](https://www.bing.com/)自 GPT-3.5 发布以来进行了重大升级。现在，它是一个完全功能的 GenAI 搜索引擎，使用如 GPT-4、视觉模型和图像生成模型等大型语言模型，提供全新改进的网页搜索体验。现在，你可以搜索具体答案并获得结果摘要。此外，你还可以与 AI 聊天机器人互动，提出后续问题，甚至与文档聊天，集成 ChatGPT 插件，并在 Bing 平台内设计图形。
 
-![你应该用这些顶级AI搜索引擎替代Google](../Images/64a02c15cf3910f608f2ee173f4d0070.png)
+![你应该用这些顶级 AI 搜索引擎替代 Google](img/64a02c15cf3910f608f2ee173f4d0070.png)
 
 # Komo AI
 
-[Komo AI](https://komo.ai/)是一个先进的AI驱动搜索工具，旨在提供快速、私密和准确的无广告搜索体验。与ChatGPT不同，Komo AI提供视频、图片和网站的链接，以促进详细研究。它是一个强大的AI聊天机器人，经过了包括公共数据集、网络爬虫、人类标签和生成数据在内的各种数据源的训练，使其成为一个强大而高效的搜索工具。
+[Komo AI](https://komo.ai/)是一个先进的 AI 驱动搜索工具，旨在提供快速、私密和准确的无广告搜索体验。与 ChatGPT 不同，Komo AI 提供视频、图片和网站的链接，以促进详细研究。它是一个强大的 AI 聊天机器人，经过了包括公共数据集、网络爬虫、人类标签和生成数据在内的各种数据源的训练，使其成为一个强大而高效的搜索工具。
 
-![你应该用这些顶级AI搜索引擎替代Google](../Images/5cd045b041eccc12178816a161d85ea2.png)
+![你应该用这些顶级 AI 搜索引擎替代 Google](img/5cd045b041eccc12178816a161d85ea2.png)
 
-Komo AI的最佳特点是其简洁性。在欢迎页面上，你只会看到一个搜索框，即使在执行搜索后，你也会收到最少且相关的结果，而不是充满内容的整个页面。
+Komo AI 的最佳特点是其简洁性。在欢迎页面上，你只会看到一个搜索框，即使在执行搜索后，你也会收到最少且相关的结果，而不是充满内容的整个页面。
 
 # Exa AI
 
-[Exa AI](https://exa.ai/)是一个先进的搜索引擎，超越了传统的基于关键词的搜索，通过理解查询背后的含义来提供结果。前身为Metaphor，Exa允许LLMs使用自然语言进行搜索，并从其神经数据库中获取相关网页列表。此外，Exa AI为AI应用设计，提供AI聊天对话服务和用于网页搜索的API。你可以在文档[页面](https://docs.exa.ai/reference/getting-started)找到Python、Go和JavaScript SDK。
+[Exa AI](https://exa.ai/)是一个先进的搜索引擎，超越了传统的基于关键词的搜索，通过理解查询背后的含义来提供结果。前身为 Metaphor，Exa 允许 LLMs 使用自然语言进行搜索，并从其神经数据库中获取相关网页列表。此外，Exa AI 为 AI 应用设计，提供 AI 聊天对话服务和用于网页搜索的 API。你可以在文档[页面](https://docs.exa.ai/reference/getting-started)找到 Python、Go 和 JavaScript SDK。
 
-![你应该用这些顶级AI搜索引擎替代Google](../Images/e45e5d5dcee43b221e9d6fad6f224319.png)
+![你应该用这些顶级 AI 搜索引擎替代 Google](img/e45e5d5dcee43b221e9d6fad6f224319.png)
 
 # You.com
 
-[You.com](https://you.com/)是一个ChatGPT风格的AI搜索引擎，专注于为用户提供个性化的答案和体验。它结合了自然语言处理、深度学习和知识图谱技术，以理解用户查询并提供准确的结果。
+[You.com](https://you.com/)是一个 ChatGPT 风格的 AI 搜索引擎，专注于为用户提供个性化的答案和体验。它结合了自然语言处理、深度学习和知识图谱技术，以理解用户查询并提供准确的结果。
 
-![你应该用这些顶级AI搜索引擎替代Google](../Images/47ec275591244d1caca957f9eee498b2.png)
+![你应该用这些顶级 AI 搜索引擎替代 Google](img/47ec275591244d1caca957f9eee498b2.png)
 
 使用 You.com，你可以访问先进的 LLMs、私人模式、区域选择以及强大的工具，如内容和图像生成器以及图像增强器。然而，用户界面可能比较难以导航。
 
@@ -74,7 +74,7 @@ Komo AI的最佳特点是其简洁性。在欢迎页面上，你只会看到一�
 
 [Yep](https://yep.com/) 是一个提供快速、私人且无广告搜索体验的搜索引擎。它重视用户隐私和内容创作者的利益。Yep 通过使用内容信号、链接信号和自然语言处理来专注于搜索质量，提供相关且准确的搜索结果。
 
-![你应该用这些 AI 搜索引擎替代 Google](../Images/2785708389d78f320079f9bb99b09101.png)
+![你应该用这些 AI 搜索引擎替代 Google](img/2785708389d78f320079f9bb99b09101.png)
 
 现在，它提供了类似 Bing 的 AI 聊天机器人功能。你可以提出后续问题并获得快速准确的结果。它简单易用，为你的查询提供了相关结果。
 
@@ -82,7 +82,7 @@ Komo AI的最佳特点是其简洁性。在欢迎页面上，你只会看到一�
 
 [Brave](https://search.brave.com/) 搜索引擎是一个强大的工具，利用先进的 AI 技术为用户提供增强的搜索体验。
 
-![你应该用这些 AI 搜索引擎替代 Google](../Images/870430c4d80e0be6736592474efcbf14.png)
+![你应该用这些 AI 搜索引擎替代 Google](img/870430c4d80e0be6736592474efcbf14.png)
 
 一个显著的特点是 CodeLLM，这是一个专门设计用于编程查询的 AI 工具，通过提供高质量的搜索结果来帮助解决编程问题。此外，该搜索引擎还配备了总结功能，利用人工智能在搜索结果页面顶部生成简洁且相关的摘要，提供用户基于查询的快速和有用的答案。
 
@@ -90,7 +90,7 @@ Komo AI的最佳特点是其简洁性。在欢迎页面上，你只会看到一�
 
 [Andi Search](https://andisearch.com/) 不仅仅是另一个搜索引擎。它使用先进的生成 AI 和语言模型，提供的不仅仅是链接，而是直接的答案、总结和解释，以对话的语气让你感觉像是在与专家交谈。
 
-![你应该用这些 AI 搜索引擎替代 Google](../Images/a43740a9f1af42f7abc427afb737b203.png)
+![你应该用这些 AI 搜索引擎替代 Google](img/a43740a9f1af42f7abc427afb737b203.png)
 
 Andi Search 提供了类似 ChatGPT 的搜索体验和一个可以深入探讨话题的工作区。通过总结文章和提出后续问题的选项，Andi Search 使快速有效地理解复杂话题变得更加容易。
 
@@ -104,7 +104,7 @@ Andi Search 提供了类似 ChatGPT 的搜索体验和一个可以深入探讨�
 
 ### 更多相关主题
 
-+   [构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
 +   [使用 Python 的网格搜索和随机搜索进行超参数调整](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
 

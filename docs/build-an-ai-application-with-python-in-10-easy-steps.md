@@ -1,8 +1,8 @@
 # 用 Python 构建 AI 应用的 10 个简单步骤
 
-> 原文：[https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)
+> 原文：[`www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps`](https://www.kdnuggets.com/build-an-ai-application-with-python-in-10-easy-steps)
 
-![用 Python 构建 AI 应用的 10 个简单步骤](../Images/3559aeb1b843b824a1d0176df7d4a1f9.png)
+![用 Python 构建 AI 应用的 10 个简单步骤](img/3559aeb1b843b824a1d0176df7d4a1f9.png)
 
 机器学习之所以如此受欢迎，有其充分的理由。许多企业选择利用这一机会来创建产品。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -22,7 +22,7 @@
 
 本文将探讨创建成功的 AI 应用程序的基本步骤和选项，使用 Python 和其他工具。
 
-![用 Python 构建 AI 应用的 10 个简单步骤](../Images/cfe3e7204d82aa5bfac9ef733884d39c.png)
+![用 Python 构建 AI 应用的 10 个简单步骤](img/cfe3e7204d82aa5bfac9ef733884d39c.png)
 
 # 步骤 1：定义目标
 
@@ -34,7 +34,7 @@ Generate 5 ideas about AI Applications that I'll build with Python.
 
 现在，让我们看看 ChatGPT 的回答。
 
-![用 Python 构建 AI 应用的 10 个简单步骤](../Images/8b839f8e2281ec3f00baa40d4709bdae.png)
+![用 Python 构建 AI 应用的 10 个简单步骤](img/8b839f8e2281ec3f00baa40d4709bdae.png)
 
 # 步骤 2：收集数据
 
@@ -54,17 +54,17 @@ Generate 5 ideas about AI Applications that I'll build with Python.
 
 现在你已经有了目标，数据也准备好了。是时候进行实际操作了。接下来的步骤是准备数据以应用你想要的模型。这个模型可以是机器学习模型或深度学习模型。无论是哪种，数据需要具备特定的特征：
 
-1.  **清理**：如果你通过网络爬取或使用 API 收集数据，这一步会更加复杂。你应该删除重复项、无关条目、纠正类型、处理缺失值等，使用的方法可以包括填补或删除。[https://www.stratascratch.com/blog/data-cleaning-101-avoid-these-5-traps-in-your-data/](https://www.stratascratch.com/blog/data-cleaning-101-avoid-these-5-traps-in-your-data/?utm_source=blog&utm_medium=click&utm_campaign=kdn+python+ai+application)
+1.  **清理**：如果你通过网络爬取或使用 API 收集数据，这一步会更加复杂。你应该删除重复项、无关条目、纠正类型、处理缺失值等，使用的方法可以包括填补或删除。[`www.stratascratch.com/blog/data-cleaning-101-avoid-these-5-traps-in-your-data/`](https://www.stratascratch.com/blog/data-cleaning-101-avoid-these-5-traps-in-your-data/?utm_source=blog&utm_medium=click&utm_campaign=kdn+python+ai+application)
 
 1.  **正确格式化**：现在，为了应用你的模型，特征应该是一致和适当的。如果你有分类数据，它们需要被编码以应用机器学习。你的数值特征应该被缩放和标准化，以便获得更好的模型。
 
 1.  **平衡**：机器学习需要迭代，这要求你采取一些步骤，比如[这个](https://towardsdatascience.com/how-to-balance-a-dataset-in-python-36dff9d12704#:~:text=A%20balanced%20dataset%20is%20a,class%20weight)。你的数据集应该是平衡的，这意味着你必须确保数据集不会偏向某一类，以确保你的预测不会有偏差。
 
-1.  **特征工程**：有时，你需要调整特征以提高模型的性能。你可能会移除一些影响模型性能的特征，或者将它们组合起来以改善性能。[https://www.linkedin.com/posts/stratascratch_feature-selection-for-machine-learning-in-activity-7082376269958418432-iZWb](https://www.linkedin.com/posts/stratascratch_feature-selection-for-machine-learning-in-activity-7082376269958418432-iZWb)
+1.  **特征工程**：有时，你需要调整特征以提高模型的性能。你可能会移除一些影响模型性能的特征，或者将它们组合起来以改善性能。[`www.linkedin.com/posts/stratascratch_feature-selection-for-machine-learning-in-activity-7082376269958418432-iZWb`](https://www.linkedin.com/posts/stratascratch_feature-selection-for-machine-learning-in-activity-7082376269958418432-iZWb)
 
 1.  **拆分**：如果你对机器学习不熟悉，并且你的模型表现得特别好，要小心。在机器学习中，一些模型可能表现得过于完美，这可能表示过拟合问题。为了解决这个问题，一种方法是将数据拆分为训练集、测试集，有时甚至是验证集。
 
-[https://platform.stratascratch.com/technical/2246-overfitting-problem](https://platform.stratascratch.com/technical/2246-overfitting-problem?utm_source=blog&utm_medium=click&utm_campaign=kdn+python+ai+application)
+[`platform.stratascratch.com/technical/2246-overfitting-problem`](https://platform.stratascratch.com/technical/2246-overfitting-problem?utm_source=blog&utm_medium=click&utm_campaign=kdn+python+ai+application)
 
 # 步骤 4: 选择模型。
 
@@ -72,13 +72,13 @@ Generate 5 ideas about AI Applications that I'll build with Python.
 
 你可以从以下 Python 库中选择一个模型：
 
-1.  **Scikit-learn:** 这对于初学者来说非常理想。你可以用最少的代码实现机器学习代码。这里是官方文档：[https://scikit-learn.org/stable/](https://scikit-learn.org/stable/)
+1.  **Scikit-learn:** 这对于初学者来说非常理想。你可以用最少的代码实现机器学习代码。这里是官方文档：[`scikit-learn.org/stable/`](https://scikit-learn.org/stable/)
 
-1.  **Tensorflow**：Tensorflow 非常适合于扩展性和深度学习。它允许你开发复杂的模型。以下是官方文档：[https://www.tensorflow.org/](https://www.tensorflow.org/)
+1.  **Tensorflow**：Tensorflow 非常适合于扩展性和深度学习。它允许你开发复杂的模型。以下是官方文档：[`www.tensorflow.org/`](https://www.tensorflow.org/)
 
-1.  **Keras**：它在 TensorFlow 之上运行，使深度学习变得更加简单。以下是官方文档：[https://keras.io/](https://keras.io/)
+1.  **Keras**：它在 TensorFlow 之上运行，使深度学习变得更加简单。以下是官方文档：[`keras.io/`](https://keras.io/)
 
-1.  **PyTorch**：它通常更适合用于研究和开发，因为它可以轻松地动态修改模型。以下是官方文档：[https://pytorch.org/](https://pytorch.org/)
+1.  **PyTorch**：它通常更适合用于研究和开发，因为它可以轻松地动态修改模型。以下是官方文档：[`pytorch.org/`](https://pytorch.org/)
 
 # 步骤 5：训练你的模型
 
@@ -154,10 +154,10 @@ Generate 5 ideas about AI Applications that I'll build with Python.
 
 +   [用 Docker 轻松容器化 Python 应用的 5 个步骤](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
 
-+   [创建一个用Python从音频中提取主题的Web应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
++   [创建一个用 Python 从音频中提取主题的 Web 应用程序](https://www.kdnuggets.com/2023/01/creating-web-application-extract-topics-audio-python.html)
 
-+   [使用Google Earth构建Python中的地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
++   [使用 Google Earth 构建 Python 中的地理空间应用程序…](https://www.kdnuggets.com/2022/03/building-geospatial-application-python-google-earth-engine-greppo.html)
 
-+   [数据科学的基本数学：特征向量及其在PCA中的应用](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)
++   [数据科学的基本数学：特征向量及其在 PCA 中的应用](https://www.kdnuggets.com/2022/06/essential-math-data-science-eigenvectors-application-pca.html)
 
-+   [本周提升搜索应用的8种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)
++   [本周提升搜索应用的 8 种方法](https://www.kdnuggets.com/2022/09/corise-8-ways-improve-search-application-week.html)

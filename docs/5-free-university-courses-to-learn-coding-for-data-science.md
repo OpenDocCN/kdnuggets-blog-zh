@@ -1,22 +1,22 @@
-# 5个免费大学课程学习数据科学编程
+# 5 个免费大学课程学习数据科学编程
 
-> 原文：[https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
+> 原文：[`www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science`](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
 
-![5个免费大学课程学习数据科学编程。](../Images/e281165ad0c4926fea8a6b3f5ea6dc32.png)
+![5 个免费大学课程学习数据科学编程。](img/e281165ad0c4926fea8a6b3f5ea6dc32.png)
 
 图片作者
 
-我花了大约30,000美元攻读了一个为期3年的计算机科学学位，以成为数据科学家。
+我花了大约 30,000 美元攻读了一个为期 3 年的计算机科学学位，以成为数据科学家。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -30,25 +30,25 @@
 
 > 由于互联网的存在，你现在可以在家中免费获得常春藤联盟的教育。
 
-如果我可以重新开始，这里有5个我会选择的免费大学课程，用于学习数据科学编程。
+如果我可以重新开始，这里有 5 个我会选择的免费大学课程，用于学习数据科学编程。
 
-*注意：Python和R是数据科学中使用最广泛的编程语言，因此该列表中的大多数课程都集中于其中一个或这两种语言。*
+*注意：Python 和 R 是数据科学中使用最广泛的编程语言，因此该列表中的大多数课程都集中于其中一个或这两种语言。*
 
-## 1\. 哈佛大学 — CS50计算机科学导论
+## 1\. 哈佛大学 — CS50 计算机科学导论
 
-[哈佛的CS50](https://youtu.be/LfaMVlDaQ24?si=xum1jufnVQizRh34)课程是大学提供的最受欢迎的入门级编程课程之一。
+[哈佛的 CS50](https://youtu.be/LfaMVlDaQ24?si=xum1jufnVQizRh34)课程是大学提供的最受欢迎的入门级编程课程之一。
 
-该课程带你了解计算机科学的基础，包括理论概念和实际应用。你将接触到多种编程语言，如Python、C和SQL。
+该课程带你了解计算机科学的基础，包括理论概念和实际应用。你将接触到多种编程语言，如 Python、C 和 SQL。
 
-将此课程视为一个迷你计算机科学学位，打包成24小时的YouTube内容。相比之下，CS50涵盖了我在大学学习了三个学期的内容。
+将此课程视为一个迷你计算机科学学位，打包成 24 小时的 YouTube 内容。相比之下，CS50 涵盖了我在大学学习了三个学期的内容。
 
-在CS50中，你将学到：
+在 CS50 中，你将学到：
 
 +   编程基础
 
 +   数据结构与算法
 
-+   使用HTML和CSS进行网页设计
++   使用 HTML 和 CSS 进行网页设计
 
 +   软件工程概念
 
@@ -58,13 +58,13 @@
 
 如果你想成为数据科学家，必须具备坚实的编程和计算机科学基础。你将经常被期望从数据库中提取数据，部署生产中的机器学习模型，并构建可扩展的模型管道。
 
-像CS50这样的课程为你提供了前往学习旅程下一阶段所需的技术基础。
+像 CS50 这样的课程为你提供了前往学习旅程下一阶段所需的技术基础。
 
-**课程链接**: [哈佛CS50](https://youtu.be/LfaMVlDaQ24?si=xum1jufnVQizRh34)
+**课程链接**: [哈佛 CS50](https://youtu.be/LfaMVlDaQ24?si=xum1jufnVQizRh34)
 
 ## 2\. 麻省理工学院——计算机科学与编程导论
 
-[MITx的计算机科学与编程导论](https://www.edx.org/learn/computer-science/massachusetts-institute-of-technology-introduction-to-computer-science-and-programming-using-python) 是另一门旨在为你提供计算机科学和编程基础技能的入门课程。
+[MITx 的计算机科学与编程导论](https://www.edx.org/learn/computer-science/massachusetts-institute-of-technology-introduction-to-computer-science-and-programming-using-python) 是另一门旨在为你提供计算机科学和编程基础技能的入门课程。
 
 然而，与 CS50 不同的是，这门课程主要用 Python 进行教学，并且着重于计算思维和问题解决。
 
@@ -126,43 +126,43 @@
 
 ## 4\. 密歇根大学——面向每个人的 Python
 
-[人人学Python](https://www.coursera.org/specializations/python) 是一个入门级编程专业课程，专注于教授Python。
+[人人学 Python](https://www.coursera.org/specializations/python) 是一个入门级编程专业课程，专注于教授 Python。
 
-这是一个包含5门课程的学习路径，涵盖了Python基础、数据结构、API使用和使用Python访问数据库。
+这是一个包含 5 门课程的学习路径，涵盖了 Python 基础、数据结构、API 使用和使用 Python 访问数据库。
 
-与之前列出的课程不同，人人学Python主要是实践性的。这个专业化课程专注于实际应用，而不是理论概念。
+与之前列出的课程不同，人人学 Python 主要是实践性的。这个专业化课程专注于实际应用，而不是理论概念。
 
 这使得它非常适合那些想要立即投入实际项目实施的人。
 
-在完成这个5门课程的专业化之后，你将熟悉以下一些概念：
+在完成这个 5 门课程的专业化之后，你将熟悉以下一些概念：
 
-+   Python变量
++   Python 变量
 
 +   函数和循环
 
 +   数据结构
 
-+   API和访问网络数据
++   API 和访问网络数据
 
-+   使用Python操作数据库
++   使用 Python 操作数据库
 
-+   使用Python进行数据可视化
++   使用 Python 进行数据可视化
 
-你可以在Coursera上免费旁听这门课程。
+你可以在 Coursera 上免费旁听这门课程。
 
-**课程链接**: [人人学Python](https://www.coursera.org/specializations/python)
+**课程链接**: [人人学 Python](https://www.coursera.org/specializations/python)
 
-## 5\. 约翰霍普金斯大学 — R编程
+## 5\. 约翰霍普金斯大学 — R 编程
 
-你可能注意到到目前为止，每门课程都专注于Python编程。
+你可能注意到到目前为止，每门课程都专注于 Python 编程。
 
-那是因为我有点儿Python爱好者的情结。
+那是因为我有点儿 Python 爱好者的情结。
 
-我发现这种语言多功能且用户友好，并且Python的知识可以转移到数据科学以外的广泛领域。
+我发现这种语言多功能且用户友好，并且 Python 的知识可以转移到数据科学以外的广泛领域。
 
-然而，学习R在数据科学中也有一些好处。R编程是专门为统计分析设计的，而且R中有许多专门用于参数调整和优化的包，而这些在Python中是没有的。
+然而，学习 R 在数据科学中也有一些好处。R 编程是专门为统计分析设计的，而且 R 中有许多专门用于参数调整和优化的包，而这些在 Python 中是没有的。
 
-如果你对深入的统计分析、学术研究和高级数据可视化感兴趣，你应该考虑学习R。如果你想学习R，[约翰霍普金斯大学的R编程专业化](https://www.coursera.org/learn/r-programming)是一个很好的起点。
+如果你对深入的统计分析、学术研究和高级数据可视化感兴趣，你应该考虑学习 R。如果你想学习 R，[约翰霍普金斯大学的 R 编程专业化](https://www.coursera.org/learn/r-programming)是一个很好的起点。
 
 在这个专业化课程中，你将学到以下内容：
 
@@ -170,15 +170,15 @@
 
 +   控制流
 
-+   在R中阅读、清理和处理数据
++   在 R 中阅读、清理和处理数据
 
 +   探索性数据分析
 
 +   数据模拟和分析
 
-你可以在Coursera上免费旁听这门课程。
+你可以在 Coursera 上免费旁听这门课程。
 
-**课程链接**: [R编程专业化](https://www.coursera.org/learn/r-programming)
+**课程链接**: [R 编程专业化](https://www.coursera.org/learn/r-programming)
 
 ## 数据科学编程学习：下一步
 
@@ -196,15 +196,15 @@
 
 随着你的编程技能提升，你可以开始增加难度并解决更复杂的问题。
 
-当我刚开始进入数据科学领域时，我每天做HackerRank问题，大约两个月后发现我的编程技能有了显著提高。
+当我刚开始进入数据科学领域时，我每天做 HackerRank 问题，大约两个月后发现我的编程技能有了显著提高。
 
 ### 2\. 创建个人项目
 
-一旦你花了几个月时间解决HackerRank挑战，你会发现自己已经准备好处理端到端的项目了。
+一旦你花了几个月时间解决 HackerRank 挑战，你会发现自己已经准备好处理端到端的项目了。
 
-你可以从创建一个简单的Python计算器应用开始，然后逐步进阶到更具挑战性的项目，比如数据可视化仪表板。
+你可以从创建一个简单的 Python 计算器应用开始，然后逐步进阶到更具挑战性的项目，比如数据可视化仪表板。
 
-如果你还不知道从哪里开始，查看这个[Python项目创意列表](https://www.datacamp.com/blog/60-python-projects-for-all-levels-expertise)以获得灵感。
+如果你还不知道从哪里开始，查看这个[Python 项目创意列表](https://www.datacamp.com/blog/60-python-projects-for-all-levels-expertise)以获得灵感。
 
 ### 3\. 建立一个作品集网站
 
@@ -212,7 +212,7 @@
 
 当潜在雇主寻找程序员或数据科学家时，他们可以在一个地方查看你的所有工作（技能、认证和项目）。
 
-如果你想自己构建一个作品集网站，我已经创建了一个完整的视频教程，讲解如何[用ChatGPT免费构建数据科学作品集网站](https://youtu.be/jtfwcyDAcvE?si=ezwrc_xBeNnWkxyF)。
+如果你想自己构建一个作品集网站，我已经创建了一个完整的视频教程，讲解如何[用 ChatGPT 免费构建数据科学作品集网站](https://youtu.be/jtfwcyDAcvE?si=ezwrc_xBeNnWkxyF)。
 
 你可以查看教程，以获取创建视觉上吸引人的作品集网站的逐步指南。
 
@@ -220,18 +220,18 @@
 
 &nbsp
 
-[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)**是一位自学的数据科学家，热衷于写作。Natassha写关于所有数据科学相关的内容，是所有数据话题的真正大师。你可以在[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)上与她联系，或查看她的[YouTube频道](https://www.youtube.com/@natassha_ds)。
+[](https://linktr.ee/natasshaselvaraj)**[Natassha Selvaraj](https://linktr.ee/natasshaselvaraj)**是一位自学的数据科学家，热衷于写作。Natassha 写关于所有数据科学相关的内容，是所有数据话题的真正大师。你可以在[LinkedIn](https://www.linkedin.com/in/natassha-selvaraj-33430717a/)上与她联系，或查看她的[YouTube 频道](https://www.youtube.com/@natassha_ds)。
 
 ### 更多相关主题
 
-+   [5个免费大学课程，助你在编码面试中脱颖而出](https://www.kdnuggets.com/5-free-university-courses-to-ace-coding-interviews)
++   [5 个免费大学课程，助你在编码面试中脱颖而出](https://www.kdnuggets.com/5-free-university-courses-to-ace-coding-interviews)
 
-+   [KDnuggets新闻，5月4日：9个免费哈佛大学课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 个免费哈佛大学课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
-+   [5个免费大学数据科学课程](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
++   [5 个免费大学数据科学课程](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
 
-+   [5个免费斯坦福大学数据科学课程](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)
++   [5 个免费斯坦福大学数据科学课程](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)
 
-+   [5个免费大学计算机科学课程](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
++   [5 个免费大学计算机科学课程](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
 
-+   [5个免费大学课程，学习数据库和SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
++   [5 个免费大学课程，学习数据库和 SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)

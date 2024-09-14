@@ -1,8 +1,8 @@
 # CDC 数据复制：技术、权衡、见解
 
-> 原文：[https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html](https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html)
+> 原文：[`www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html`](https://www.kdnuggets.com/2023/08/cdc-data-replication-techniques-tradeoffs-insights.html)
 
-![CDC 数据复制：技术、权衡、见解](../Images/de50cce7fd391b4711058dae7ad0b0e1.png)
+![CDC 数据复制：技术、权衡、见解](img/de50cce7fd391b4711058dae7ad0b0e1.png)
 
 许多行业中的组织运营的生产数据库中，大多数数据不会频繁更改；也就是说，日常的更改和更新仅占存储在其中的数据总量的一小部分。正是这些组织最能从变更数据捕获（CDC）数据复制中受益。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@ CDC 数据复制是一种在两个数据库之间实时或接近实时地复制�
 
 数据更改可以实时或以小批量（例如每小时）捕获并传递到其新目标。
 
-![CDC 数据复制：技术、权衡、见解](../Images/45ccb8b2d082582facb91e4d7957cf4d.png)
+![CDC 数据复制：技术、权衡、见解](img/45ccb8b2d082582facb91e4d7957cf4d.png)
 
 这张图展示了基于日志的 CDC，其中红色行是新添加的数据。
 
@@ -42,13 +42,13 @@ CDC 数据复制是一种在两个数据库之间实时或接近实时地复制�
 
 任何运行专有数据收集系统的组织都可能有一个存储该系统关键数据的生产数据库。
 
-由于生产数据库是为写操作而设计的，因此它们不会将数据有效地利用。许多组织因此会希望将数据复制到一个[数据仓库](/2022/09/organizations-need-data-warehouses.html)中，以便可以进行复杂的读取操作以用于分析和商业智能。
+由于生产数据库是为写操作而设计的，因此它们不会将数据有效地利用。许多组织因此会希望将数据复制到一个数据仓库中，以便可以进行复杂的读取操作以用于分析和商业智能。
 
 如果你的分析团队需要近实时的数据，CDC 是一个很好的方式，因为它会迅速将更改传递到分析仓库中。
 
 ## 数据库迁移
 
-当你从一种数据库技术迁移到另一种时，CDC 也非常有用，你需要在停机情况下保持一切可用。一个经典的例子是[从本地数据库迁移](/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)到云数据库。
+当你从一种数据库技术迁移到另一种时，CDC 也非常有用，你需要在停机情况下保持一切可用。一个经典的例子是从本地数据库迁移到云数据库。
 
 ## 灾难恢复
 
@@ -58,13 +58,13 @@ CDC 数据复制是一种在两个数据库之间实时或接近实时地复制�
 
 CDC 有三种主要技术，每种技术都有其自身的优缺点。
 
-![CDC 数据复制：技术、权衡、见解](../Images/1213377610dd04eabf3e4df83b21c638.png)
+![CDC 数据复制：技术、权衡、见解](img/1213377610dd04eabf3e4df83b21c638.png)
 
 CDC 实现涉及灵活性、保真度、延迟、维护和安全性之间的权衡。
 
 ## 基于查询的 CDC
 
-基于查询的 CDC 非常简单。你只需使用这种技术[编写一个简单的选择查询](/2023/03/sql-query-optimization-techniques.html)来从特定表中选择数据，然后添加一些条件，比如“仅选择昨天更新或添加的数据。”假设你已经配置了一个备用表的模式，这些查询将捕获更改的数据并生成一个新的二维表，该表可以插入到新的位置。
+基于查询的 CDC 非常简单。你只需使用这种技术编写一个简单的选择查询来从特定表中选择数据，然后添加一些条件，比如“仅选择昨天更新或添加的数据。”假设你已经配置了一个备用表的模式，这些查询将捕获更改的数据并生成一个新的二维表，该表可以插入到新的位置。
 
 ### 优势
 
@@ -80,15 +80,15 @@ CDC 实现涉及灵活性、保真度、延迟、维护和安全性之间的权�
 
 +   **较高延迟**。依赖于轮询来检测更改，这可能会引入复制过程中的延迟。这意味着你无法通过选择查询实现实时复制，必须安排某种批处理。如果你需要分析长期时间序列的数据，如客户行为，这可能不是大问题。
 
-## 基于日志的CDC
+## 基于日志的 CDC
 
-我们今天使用的大多数数据库技术都支持集群，这意味着你可以在多个副本中运行它们以实现高可用性。这些技术必须有某种二进制日志，捕获数据库的所有更改。在基于日志的CDC中，更改是从日志中读取的，而不是数据库本身，然后复制到目标系统。
+我们今天使用的大多数数据库技术都支持集群，这意味着你可以在多个副本中运行它们以实现高可用性。这些技术必须有某种二进制日志，捕获数据库的所有更改。在基于日志的 CDC 中，更改是从日志中读取的，而不是数据库本身，然后复制到目标系统。
 
 ### 优势
 
 +   **低延迟**。数据更改可以非常迅速地复制到下游系统。
 
-+   **高保真度**。日志捕获数据库的*所有*更改，包括数据定义语言（DDL）更改和数据操作语言（DML）更改。这使得追踪已删除的行成为可能（而基于查询的CDC无法做到这一点）。
++   **高保真度**。日志捕获数据库的*所有*更改，包括数据定义语言（DDL）更改和数据操作语言（DML）更改。这使得追踪已删除的行成为可能（而基于查询的 CDC 无法做到这一点）。
 
 ### 缺点
 
@@ -96,25 +96,25 @@ CDC 实现涉及灵活性、保真度、延迟、维护和安全性之间的权�
 
 +   **灵活性有限**。捕获数据库的所有更改，这限制了定义更改和定制复制过程的灵活性。如果有高度定制的需求，日志将需要进行大量后处理。
 
-一般来说，基于日志的CDC实施起来很困难。有关更多信息，请参见下面的“见解”部分。
+一般来说，基于日志的 CDC 实施起来很困难。有关更多信息，请参见下面的“见解”部分。
 
-## 基于触发器的CDC
+## 基于触发器的 CDC
 
-基于触发器的CDC是前三种技术的一种混合。它涉及为捕获表中的某些更改定义触发器，然后将这些更改插入并在新表中跟踪。从这个新表中，更改被复制到目标系统。
+基于触发器的 CDC 是前三种技术的一种混合。它涉及为捕获表中的某些更改定义触发器，然后将这些更改插入并在新表中跟踪。从这个新表中，更改被复制到目标系统。
 
 ### 优势
 
-+   **灵活性**。允许你定义捕获哪些更改以及如何捕获它们（如基于查询的CDC），包括已删除的行（如基于日志的CDC）。
++   **灵活性**。允许你定义捕获哪些更改以及如何捕获它们（如基于查询的 CDC），包括已删除的行（如基于日志的 CDC）。
 
 +   **低延迟**。每次触发器触发时，它都算作一个事件，事件可以实时或近实时处理。
 
 ### 缺点
 
-+   **极其复杂的维护**。就像基于查询的CDC中的查询一样，所有触发器都需要单独维护。因此，如果你有一个包含200个表的数据库，并需要捕获所有表的更改，你的整体维护成本将非常高。
++   **极其复杂的维护**。就像基于查询的 CDC 中的查询一样，所有触发器都需要单独维护。因此，如果你有一个包含 200 个表的数据库，并需要捕获所有表的更改，你的整体维护成本将非常高。
 
 # 实施见解
 
-作为一家数据集成公司的首席执行官，我在大大小小的规模上实施CDC有很多经验。以下是我在过程中学到的一些东西。
+作为一家数据集成公司的首席执行官，我在大大小小的规模上实施 CDC 有很多经验。以下是我在过程中学到的一些东西。
 
 ## 针对不同日志的不同实现
 
@@ -138,7 +138,7 @@ CDC 实现涉及灵活性、保真度、延迟、维护和安全性之间的权�
 
 这可能是另一个完全不同的主题。但简而言之，我可以说每种技术在引发异常和呈现错误方面的方式不同。因此，你应该定义一个策略来处理连接失败的情况。你应该重试吗？还是应该将所有内容封装在事务中？
 
-![CDC 数据复制：技术、权衡、见解](../Images/3dd7a5aeffc8c4bc67b20f33407900e9.png)
+![CDC 数据复制：技术、权衡、见解](img/3dd7a5aeffc8c4bc67b20f33407900e9.png)
 
 实现内部 CDC 数据复制相当复杂且高度特定于案例。这就是为什么它传统上不被认为是一个流行的复制解决方案，也很难给出通用的实施建议。近年来，像 Dataddo、Informatica、SAP Replication Server 等托管工具显著降低了其可访问性门槛。
 
@@ -154,18 +154,18 @@ CDC 实现涉及灵活性、保真度、延迟、维护和安全性之间的权�
 
 尽管如此，没有完美的技术解决方案，只有权衡。这同样适用于 CDC 数据复制。那些选择实现 CDC 的人将不得不不平等地优先考虑灵活性、准确性、延迟、维护和安全性。
 
-**[Petr Nemeth](https://www.linkedin.com/in/petrnemeth/)** 是Dataddo的创始人兼首席执行官——一个完全托管的、无代码的数据集成平台，连接云服务、仪表盘应用程序、数据仓库和数据湖。该平台提供ETL、ELT、逆向ETL和数据库复制功能（包括CDC），以及200多个连接器的广泛组合，使得任何技术水平的业务专业人士都能够将数据从几乎任何来源发送到任何目的地。在创办Dataddo之前，Petr曾在电信、IT和媒体公司担任开发人员、分析师和系统架构师，参与涉及物联网、大数据和商业智能的大型项目。
+**[Petr Nemeth](https://www.linkedin.com/in/petrnemeth/)** 是 Dataddo 的创始人兼首席执行官——一个完全托管的、无代码的数据集成平台，连接云服务、仪表盘应用程序、数据仓库和数据湖。该平台提供 ETL、ELT、逆向 ETL 和数据库复制功能（包括 CDC），以及 200 多个连接器的广泛组合，使得任何技术水平的业务专业人士都能够将数据从几乎任何来源发送到任何目的地。在创办 Dataddo 之前，Petr 曾在电信、IT 和媒体公司担任开发人员、分析师和系统架构师，参与涉及物联网、大数据和商业智能的大型项目。
 
 ### 相关主题
 
-+   [软件错误与权衡：Tomasz Lelek的新书](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
++   [软件错误与权衡：Tomasz Lelek 的新书](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
 
-+   [ChatGPT驱动的数据探索：揭示数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
++   [ChatGPT 驱动的数据探索：揭示数据集中的隐藏洞察](https://www.kdnuggets.com/2023/07/chatgptpowered-data-exploration-unlock-hidden-insights-dataset.html)
 
-+   [用LLMs将非结构化数据转化为结构化洞察的5种方法](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
++   [用 LLMs 将非结构化数据转化为结构化洞察的 5 种方法](https://www.kdnuggets.com/5-ways-of-converting-unstructured-data-into-structured-insights-with-llms)
 
-+   [解锁数据洞察：有效分析的关键Pandas函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
++   [解锁数据洞察：有效分析的关键 Pandas 函数](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
 
 +   [影响洞察时间的关键因素](https://www.kdnuggets.com/2023/03/key-factors-affecting-time-insights.html)
 
-+   [开发安全、可靠和可信的AI框架的专家见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)
++   [开发安全、可靠和可信的 AI 框架的专家见解](https://www.kdnuggets.com/expert-insights-on-developing-safe-secure-and-trustworthy-ai-frameworks)

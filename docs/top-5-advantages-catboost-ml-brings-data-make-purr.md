@@ -1,8 +1,8 @@
-# CatBoost ML带给你的数据的前五大优势，让数据发出咕噜声
+# CatBoost ML 带给你的数据的前五大优势，让数据发出咕噜声
 
-> 原文：[https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html](https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html)
+> 原文：[`www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html`](https://www.kdnuggets.com/2023/02/top-5-advantages-catboost-ml-brings-data-make-purr.html)
 
-![CatBoost ML带给你的数据的前五大优势，让数据发出咕噜声](../Images/b5141eb9353787d5ff87af24ed6aa35c.png)
+![CatBoost ML 带给你的数据的前五大优势，让数据发出咕噜声](img/b5141eb9353787d5ff87af24ed6aa35c.png)
 
 图片来源：编辑
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-如今，相对不熟悉数据的人可能会突然承担起既要贡献数据池又要解释机器学习分析的责任。这可能会导致数据对你发出嘶嘶声，而不是合作地咕噜作响。为了减少因数据卫生不佳、过拟合或更糟糕情况带来的潜在问题，CatBoost跃上厨房桌子，明显展示自己是许多领域的最佳选择。
+如今，相对不熟悉数据的人可能会突然承担起既要贡献数据池又要解释机器学习分析的责任。这可能会导致数据对你发出嘶嘶声，而不是合作地咕噜作响。为了减少因数据卫生不佳、过拟合或更糟糕情况带来的潜在问题，CatBoost 跃上厨房桌子，明显展示自己是许多领域的最佳选择。
 
 # 拥有猫（Boost）的好处
 
-[CatBoost](/2020/10/fast-gradient-boosting-catboost.html)是一个梯度提升机器学习系统，通过为高度分类或包含缺失数据点的数据源提供独特的解决方案，从其他GBDT中脱颖而出。实际上，这就是API名字的由来，源于Boosting Categories，而不是某种猫的来源。[并排比较](/2018/03/catboost-vs-light-gbm-vs-xgboost.html)显示，CatBoost在预测交付时间和参数调优时间方面也显著优于XGBoost和LightGBM，同时在其他指标上保持可比性。
+CatBoost 是一个梯度提升机器学习系统，通过为高度分类或包含缺失数据点的数据源提供独特的解决方案，从其他 GBDT 中脱颖而出。实际上，这就是 API 名字的由来，源于 Boosting Categories，而不是某种猫的来源。并排比较显示，CatBoost 在预测交付时间和参数调优时间方面也显著优于 XGBoost 和 LightGBM，同时在其他指标上保持可比性。
 
 在幕后，CatBoost 通过使用按流行度划分的方法来创建对称决策树。通过将特征分组到只有左右两个子节点的单一划分中，与每个特征都有子节点的树相比，所需的处理能力和时间大大减少。这些特征可以是分类的，也可以是数值的。然后，它们可以在树的不同层级进行解析，直到满足目标变量。这有效地对数据进行正则化，防止数据点通过提供多个视角对同一子集形成明确的相关性。这使得 CatBoost 的预测在训练过程中对过拟合和泛化错误具有更强的弹性。
 
@@ -46,49 +46,49 @@ CatBoost 处理分类特征时使用明文，避免了像其他坚持数值输�
 
 尽管这些计算可能发生在云端，但实际的好处包括：
 
-+   由于API原生处理基于文本的分类数据，因此所需的计算和数据转换较少，从而减少了错误。
++   由于 API 原生处理基于文本的分类数据，因此所需的计算和数据转换较少，从而减少了错误。
 
-+   与一热编码相比，CatBoost将数据分解为更少的特征，从而提高了分析团队的简洁性和最终解释性。
++   与一热编码相比，CatBoost 将数据分解为更少的特征，从而提高了分析团队的简洁性和最终解释性。
 
 +   输入到库中的基于文本的数据会返回相同的文本标签，从而简化了解释。
 
-+   CatBoost通过使得关注单一特征对模型的贡献变得容易，从而促进深度分析，而不是关注特定特征的特定值，这与一热编码列的情况不同。使用`get_feature_importance()`方法，CatBoost利用SHAP值来测量特征，这些值也可以很容易地可视化以进行解释和分析（见下文）。
++   CatBoost 通过使得关注单一特征对模型的贡献变得容易，从而促进深度分析，而不是关注特定特征的特定值，这与一热编码列的情况不同。使用`get_feature_importance()`方法，CatBoost 利用 SHAP 值来测量特征，这些值也可以很容易地可视化以进行解释和分析（见下文）。
 
 +   同样，这种对分类数据的使用使得来自不同部门的员工能够更轻松地输入和解释数据。
 
 +   这种可访问性水平允许公司拥有统一的数据流，使公司所有部门都参照同一信息池。那些因为拥有一个实体的多个档案而遭遇[部门间混淆](https://www.satrixsolutions.com/blog/how-to-improve-interdepartmental-relationships)的公司知道，这可以节省多少压力和资源。
 
-![CatBoost ML为您的数据带来的前五大优势](../Images/6861f804dfc8ad1571ae3809fb0c848e.png)![CatBoost ML为您的数据带来的前五大优势](../Images/2f25ef514eb92afc310915c926aa4fbf.png)
+![CatBoost ML 为您的数据带来的前五大优势](img/6861f804dfc8ad1571ae3809fb0c848e.png)![CatBoost ML 为您的数据带来的前五大优势](img/2f25ef514eb92afc310915c926aa4fbf.png)
 
-*CatBoost原生托管SHAP库，方便进行类似于这些的输出可视化，这些可视化是在欺诈预防数据上训练的。*
+*CatBoost 原生托管 SHAP 库，方便进行类似于这些的输出可视化，这些可视化是在欺诈预防数据上训练的。*
 
-CatBoost API的这一方面对于处理本质上较少数值型数据的垂直领域来说是一个明显的优势，比如医疗诊断、欺诈预防、市场细分和广告等领域。这些领域都涉及大量的分类数据，CatBoost的巧妙处理可以带来益处。
+CatBoost API 的这一方面对于处理本质上较少数值型数据的垂直领域来说是一个明显的优势，比如医疗诊断、欺诈预防、市场细分和广告等领域。这些领域都涉及大量的分类数据，CatBoost 的巧妙处理可以带来益处。
 
 ## 2: 忽略树
 
-![CatBoost ML为您的数据带来的前五大优势](../Images/f295fce2eb47cfff82a1d220e909a264.png)
+![CatBoost ML 为您的数据带来的前五大优势](img/f295fce2eb47cfff82a1d220e909a264.png)
 
-CatBoost在其梯度提升过程中利用忽略决策树作为基础学习器。这意味着每棵树仅限于一个对称分裂，且两侧由算法内置的特征重要性测量平衡。
+CatBoost 在其梯度提升过程中利用忽略决策树作为基础学习器。这意味着每棵树仅限于一个对称分裂，且两侧由算法内置的特征重要性测量平衡。
 
-与XGBoost将节点分裂多次以处理高维特征不同，CatBoost创建多个层级来分析单一特征。这使得它在以下方面表现出色：
+与 XGBoost 将节点分裂多次以处理高维特征不同，CatBoost 创建多个层级来分析单一特征。这使得它在以下方面表现出色：
 
-+   优化处理时间和功耗。高维非数值数据在经过XGBoost处理时不可避免地需要比CatBoost更多的处理时间和功耗。每个节点的单次分裂意味着每次决策的处理速度显著更快，减少了能量消耗并优化了内部或外部的等待时间。
++   优化处理时间和功耗。高维非数值数据在经过 XGBoost 处理时不可避免地需要比 CatBoost 更多的处理时间和功耗。每个节点的单次分裂意味着每次决策的处理速度显著更快，减少了能量消耗并优化了内部或外部的等待时间。
 
 +   正则化和对抗过拟合的鲁棒性。那些利用特征并将树分裂为该特征所有可能结果的算法，通常会发现它们的数据经常过拟合。通过限制树的每一层的复杂性，它本质上通过数据创建了一个更为严格的回归线，一种事实上的正则化。这导致了较少的假阴性和假阳性，这可能会影响你的组织如何以各种方式使用数据。
 
 +   易于解释性。再次，根据行业和自动化的过程，能够解释如何做出给定的机器学习判断可能是有充分理由的。这可能是为了满足客户需求，但也可能是法律合规的一部分，以确保透明公正的实践或进行安全尽职调查。
 
-CatBoost的“无视树模型”是其处理轻便性的主要来源，也使其成为大型数据集的高度可扩展选项。在处理分类数据时，CatBoost在快速得出结论的同时，更有效地忽略数据噪声。例如，在市场细分、自动化供应链优化、PPC广告等领域，嘈杂数据有时是一个看似随机的广告被投放到你的设备上，或者链锁店有过多或过少的某种商品的原因。
+CatBoost 的“无视树模型”是其处理轻便性的主要来源，也使其成为大型数据集的高度可扩展选项。在处理分类数据时，CatBoost 在快速得出结论的同时，更有效地忽略数据噪声。例如，在市场细分、自动化供应链优化、PPC 广告等领域，嘈杂数据有时是一个看似随机的广告被投放到你的设备上，或者链锁店有过多或过少的某种商品的原因。
 
-## 3: 数据“Nan处理”
+## 3: 数据“Nan 处理”
 
-缺失值的数据集通常在分析中价值较低。在处理数值数据集时，与其让这些缺失值影响模型的稳定性，不如让CatBoost自动替换这些缺失值。根据子集的大小，这些值要么通过简单计算替换，要么通过特征之间的机器学习衍生关系替换。这些关系可能只有边际可解释性，但在实际工作过程中，可解释的好处包括：
+缺失值的数据集通常在分析中价值较低。在处理数值数据集时，与其让这些缺失值影响模型的稳定性，不如让 CatBoost 自动替换这些缺失值。根据子集的大小，这些值要么通过简单计算替换，要么通过特征之间的机器学习衍生关系替换。这些关系可能只有边际可解释性，但在实际工作过程中，可解释的好处包括：
 
-+   在准确性和假阳性率方面的更好表现，使得CatBoost在分析数据的任何地方都能实现更平滑的过程。
++   在准确性和假阳性率方面的更好表现，使得 CatBoost 在分析数据的任何地方都能实现更平滑的过程。
 
 +   在防止欺诈的情况下，空值本身可以作为潜在风险的指示器。
 
-+   为每个客户提供定制模型，因为每个客户的过程不同，数据和nan比例（数据集中“非数字”条目的比例）也不同。
++   为每个客户提供定制模型，因为每个客户的过程不同，数据和 nan 比例（数据集中“非数字”条目的比例）也不同。
 
 +   其他领域如医疗保健、银行、客户分析和供应链管理也很好地利用了 NaN 处理——考虑一下数据输入链中的任何人，从新客户到履行代理，可能会倾向于*不*填写部分表单。这有时可能是懒惰，其他时候可能表明[尝试申请欺诈](https://seon.io/resources/application-fraud/)。
 
@@ -109,7 +109,7 @@ for col in df.columns:
 
 如上所述，CatBoost 的单一对称分裂对处理能力和预测速度有很大好处。
 
-这主要有两个原因。第一个是对称树结构通过[向量乘法](/2021/02/essential-math-data-science-scalars-vectors.html)进行预测的能力。在其他梯度提升库在树的每一层进行这些计算时，CatBoost 可以将其应用于整棵树，从而大幅加快预测生成速度。
+这主要有两个原因。第一个是对称树结构通过向量乘法进行预测的能力。在其他梯度提升库在树的每一层进行这些计算时，CatBoost 可以将其应用于整棵树，从而大幅加快预测生成速度。
 
 CatBoost 速度的第二个解释是其按流行度排序的特性，它将维度数据分组为两个相等的分支，而不是为每个特征创建一个可能的分支。显然，单次分裂所需的能量少于五次，但这种组织方式有利于**并行处理**——将数据分割为子集，以便将任务分配到多个处理器上。根据可用的硬件资源，CatBoost 也可以找到最优的并行处理方法。
 
@@ -140,13 +140,13 @@ model = CatBoostRegressor(
     boston_data['data'], boston_data['target'])
 ```
 
-上面的代码块展示了如何在波士顿数据集上训练一个干净且简单的CatBoost模型。这是一个很好的例子，说明了CatBoost如何创造出比某些其他产品更为友好的环境，尤其是考虑到围绕该产品的大型活跃社区。
+上面的代码块展示了如何在波士顿数据集上训练一个干净且简单的 CatBoost 模型。这是一个很好的例子，说明了 CatBoost 如何创造出比某些其他产品更为友好的环境，尤其是考虑到围绕该产品的大型活跃社区。
 
 这种易用性带来的好处应该很明显，特别是对那些有经验自行上手新型高级商业软件的人而言。一般来说，能够让更多的团队成员参与到[数据处理](https://www.integrate.io/blog/the-5-types-of-data-processing/)中，而不让他们感到畏惧，对于分配责任和优化资源分配都是很有价值的。
 
-# 你是CatBoost的粉丝还是…
+# 你是 CatBoost 的粉丝还是…
 
-尽管CatBoost是专为分类数据设计的，注重速度和效率，但它在处理数值数据方面也同样灵活。不过，也有一些领域可能更适合使用XGBoost或LightGBM。这两种算法是为了速度和可扩展性而设计的，特别是在处理高度维度且不断变化的纯数值数据时。因此，处理非常庞大的、固有的且不断变化的数据集的领域，可能更适合使用这两种API之一，比如：
+尽管 CatBoost 是专为分类数据设计的，注重速度和效率，但它在处理数值数据方面也同样灵活。不过，也有一些领域可能更适合使用 XGBoost 或 LightGBM。这两种算法是为了速度和可扩展性而设计的，特别是在处理高度维度且不断变化的纯数值数据时。因此，处理非常庞大的、固有的且不断变化的数据集的领域，可能更适合使用这两种 API 之一，比如：
 
 +   财务预测
 
@@ -154,22 +154,22 @@ model = CatBoostRegressor(
 
 +   供应链管理
 
-LightGBM尤其在处理对处理速度要求极高的地方表现出色，例如自然语言处理和图像识别。
+LightGBM 尤其在处理对处理速度要求极高的地方表现出色，例如自然语言处理和图像识别。
 
-随着数据在越来越数字化的企业空间中的业务功能中变得无处不在，数据解决方案需要变得更加易于接触。像广告、市场分析、客户细分、欺诈预防和医疗治疗这些领域，CatBoost可能是一个不错的选择。许多金融领域也是如此。虽然它可能永远无法像真正的家猫那样易于接近，但在许多情况下，CatBoost可能更加友好，当然也更有用。
+随着数据在越来越数字化的企业空间中的业务功能中变得无处不在，数据解决方案需要变得更加易于接触。像广告、市场分析、客户细分、欺诈预防和医疗治疗这些领域，CatBoost 可能是一个不错的选择。许多金融领域也是如此。虽然它可能永远无法像真正的家猫那样易于接近，但在许多情况下，CatBoost 可能更加友好，当然也更有用。
 
-**[Gellért Nacsa](https://www.linkedin.com/in/gellert-nacsa/)** 是SEON的数据科学负责人。他在大学学习应用数学，并曾担任数据分析师、算法设计师和数据科学家。他喜欢玩弄数据、机器学习，并且一直在学习新东西。
+**[Gellért Nacsa](https://www.linkedin.com/in/gellert-nacsa/)** 是 SEON 的数据科学负责人。他在大学学习应用数学，并曾担任数据分析师、算法设计师和数据科学家。他喜欢玩弄数据、机器学习，并且一直在学习新东西。
 
 ### 相关阅读
 
-+   [Windows on Snapdragon将混合AI带到边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)
++   [Windows on Snapdragon 将混合 AI 带到边缘应用](https://www.kdnuggets.com/qualcomm-windows-on-snapdragon-brings-hybrid-ai-to-apps-at-the-edge)
 
 +   [在数据科学之旅中实现飞跃](https://www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html)
 
 +   [如何让大型语言模型与你的软件和谐共处…](https://www.kdnuggets.com/how-to-make-large-language-models-play-nice-with-your-software-using-langchain)
 
-+   [用ChatGPT的GPTs创建你自己的GPT！](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)
++   [用 ChatGPT 的 GPTs 创建你自己的 GPT！](https://www.kdnuggets.com/make-your-own-gpts-with-chatgpts-gpts)
 
-+   [2022年数据科学家的收入有多少？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)
++   [2022 年数据科学家的收入有多少？](https://www.kdnuggets.com/2022/02/much-data-scientists-make-2022.html)
 
 +   [利用数据科学使清洁能源更公平](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)

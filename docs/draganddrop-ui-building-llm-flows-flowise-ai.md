@@ -1,40 +1,40 @@
-# 构建LLM流程的拖放UI：Flowise AI
+# 构建 LLM 流程的拖放 UI：Flowise AI
 
-> 原文：[https://www.kdnuggets.com/2023/07/draganddrop-ui-building-llm-flows-flowise-ai.html](https://www.kdnuggets.com/2023/07/draganddrop-ui-building-llm-flows-flowise-ai.html)
+> 原文：[`www.kdnuggets.com/2023/07/draganddrop-ui-building-llm-flows-flowise-ai.html`](https://www.kdnuggets.com/2023/07/draganddrop-ui-building-llm-flows-flowise-ai.html)
 
-![](../Images/d050fc69e35810e770f63a0a62eb1ebc.png)
+![](img/d050fc69e35810e770f63a0a62eb1ebc.png)
 
 图片由作者提供
 
-关于大语言模型（LLMs）的热度不断上升，越来越多的公司推出工具以便于人们的生活。那么这些工具到底是什么呢？其中之一就是Flowise AI。
+关于大语言模型（LLMs）的热度不断上升，越来越多的公司推出工具以便于人们的生活。那么这些工具到底是什么呢？其中之一就是 Flowise AI。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-# Flowise AI是什么？
+# Flowise AI 是什么？
 
-[Flowise AI](https://flowiseai.com/)是一个开源的UI可视化工具，用于帮助开发LangChain应用。在我们深入了解Flowise AI之前，让我们快速定义一下[LangChain](/2023/04/langchain-101-build-gptpowered-applications.html)。LangChain是一个框架/ python库，帮助你利用LLMs构建自己的定制NLP应用。
+[Flowise AI](https://flowiseai.com/)是一个开源的 UI 可视化工具，用于帮助开发 LangChain 应用。在我们深入了解 Flowise AI 之前，让我们快速定义一下 LangChain。LangChain 是一个框架/ python 库，帮助你利用 LLMs 构建自己的定制 NLP 应用。
 
-Flowise使用LangChain作为其代理执行器，Chroma作为其向量存储，OpenAI进行嵌入，HuggingFace的推理模型，GitHub作为文档加载器，SERP作为查询API。其图形用户界面对基于LangChain.js的LLM应用构建非常有帮助。
+Flowise 使用 LangChain 作为其代理执行器，Chroma 作为其向量存储，OpenAI 进行嵌入，HuggingFace 的推理模型，GitHub 作为文档加载器，SERP 作为查询 API。其图形用户界面对基于 LangChain.js 的 LLM 应用构建非常有帮助。
 
-那么是什么让它如此简单和有用呢？拖放工具。每个人都喜欢拖放，尤其是在自定义NLP应用时。更大的优点是它不需要任何编码经验！
+那么是什么让它如此简单和有用呢？拖放工具。每个人都喜欢拖放，尤其是在自定义 NLP 应用时。更大的优点是它不需要任何编码经验！
 
-![构建LLM流程的拖放UI：Flowise AI](../Images/d82c62b3c3deac3fdabb0ac57871fba7.png)
+![构建 LLM 流程的拖放 UI：Flowise AI](img/d82c62b3c3deac3fdabb0ac57871fba7.png)
 
 图片由[Flowise AI](https://flowiseai.com/)提供
 
-# 我可以用Flowise AI构建什么？
+# 我可以用 Flowise AI 构建什么？
 
-你可以使用Flowise AI构建多个应用，例如：
+你可以使用 Flowise AI 构建多个应用，例如：
 
 +   聊天机器人
 
@@ -48,19 +48,19 @@ Flowise使用LangChain作为其代理执行器，Chroma作为其向量存储，O
 
 +   艺术
 
-# 我为什么要使用Flowise AI？
+# 我为什么要使用 Flowise AI？
 
-+   **简洁：** 拖放工具使构建自己的LLM流程变得容易。
++   **简洁：** 拖放工具使构建自己的 LLM 流程变得容易。
 
 +   **无需编码技能：** 对于行业新人和没有开发人员的组织，这一点非常有用。
 
 +   **开源：** 免费使用和修改，允许根据自己的需求进行调整。
 
-+   **强大：** 该工具可以用于开发广泛的LLM应用。
++   **强大：** 该工具可以用于开发广泛的 LLM 应用。
 
-+   **社区：** Flowise由一个支持性的开发社区支持，可以帮助你充分利用Flowise。
++   **社区：** Flowise 由一个支持性的开发社区支持，可以帮助你充分利用 Flowise。
 
-# Flowise AI安装
+# Flowise AI 安装
 
 那么，我如何安装这个简单的拖放可定制 NLP 工具呢？你可以通过三种不同的方式安装 Flowise AI。让我们逐一介绍。
 
@@ -88,7 +88,7 @@ npx flowise start --FLOWISE_USERNAME=user --FLOWISE_PASSWORD=1234
 
 1.  完成后，你可以通过打开以下网址在网页上查看：
 
-[http://localhost:3000](http://localhost:3000/)
+[`localhost:3000`](http://localhost:3000/)
 
 如果你更愿意使用 Docker，请继续以下部分。
 
@@ -102,7 +102,7 @@ npx flowise start --FLOWISE_USERNAME=user --FLOWISE_PASSWORD=1234
 
 1.  然后你需要执行：docker-compose up -d
 
-1.  然后你需要打开 [http://localhost:3000](http://localhost:3000/)
+1.  然后你需要打开 [`localhost:3000`](http://localhost:3000/)
 
 1.  你可以通过 docker-compose stop 停止容器
 
@@ -166,7 +166,7 @@ yarn start
 
 1.  你可以在以下位置访问应用程序：
 
-[http://localhost:3000](http://localhost:3000/)
+[`localhost:3000`](http://localhost:3000/)
 
 1.  对于开发构建，请使用：
 

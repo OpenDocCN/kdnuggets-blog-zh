@@ -1,8 +1,8 @@
 # 在本地运行 Llama 3 的最简单方法
 
-> 原文：[https://www.kdnuggets.com/easiest-way-of-running-llama-3-locally](https://www.kdnuggets.com/easiest-way-of-running-llama-3-locally)
+> 原文：[`www.kdnuggets.com/easiest-way-of-running-llama-3-locally`](https://www.kdnuggets.com/easiest-way-of-running-llama-3-locally)
 
-![最简单的本地运行 Llama 3 的方法](../Images/39060dd5295993a6ff5cdf6171b3a640.png)
+![最简单的本地运行 Llama 3 的方法](img/39060dd5295993a6ff5cdf6171b3a640.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -34,13 +34,13 @@ Ollama 的最佳部分是它可以与各种软件、扩展和应用程序集成�
 
 通过访问 GitHub 仓库 [Ollama/ollama](https://github.com/ollama/ollama)，向下滚动并点击适合您操作系统的下载链接来下载和安装 Ollama。
 
-![Ollama 的各种操作系统下载选项](../Images/6e8b4e26d87d3166233ef73014ddd816.png)
+![Ollama 的各种操作系统下载选项](img/6e8b4e26d87d3166233ef73014ddd816.png)
 
 图片来自 [ollama/ollama](https://github.com/ollama/ollama) | 各种操作系统的下载选项
 
 成功安装 Ollama 后，它将在系统托盘中显示如下图所示。
 
-![Ollama 在系统托盘中](../Images/2f89a1204d44f371b2c87bcdc44c667b.png)
+![Ollama 在系统托盘中](img/2f89a1204d44f371b2c87bcdc44c667b.png)
 
 ## 下载和使用 Llama 3
 
@@ -52,11 +52,11 @@ ollama run llama3
 
 根据您的互联网速度，下载 4.7GB 模型大约需要 30 分钟。
 
-![PowerShell：使用 Ollama 下载 Llama 3](../Images/5723d8bfd58789ad1627b12f584e983f.png)
+![PowerShell：使用 Ollama 下载 Llama 3](img/5723d8bfd58789ad1627b12f584e983f.png)
 
 除了 Llama 3 模型，你还可以通过输入下面的命令来安装其他 LLMs。
 
-![使用 Ollama 运行其他 LLMs](../Images/ed95b36b560e7818b171650123da7288.png)
+![使用 Ollama 运行其他 LLMs](img/ed95b36b560e7818b171650123da7288.png)
 
 图片来自 [ollama/ollama](https://github.com/ollama/ollama) | 使用 Ollama 运行其他 LLMs
 
@@ -64,7 +64,7 @@ ollama run llama3
 
 **提示：** *“描述数据科学家的一天。”*
 
-![在 Ollama 中使用 Llama 3](../Images/0988f34affd21f6b2648f83ad2ac06e2.png)
+![在 Ollama 中使用 Llama 3](img/0988f34affd21f6b2648f83ad2ac06e2.png)
 
 为了展示响应生成的速度，我附上了一个 GIF，显示了 Ollama 生成 Python 代码并解释它的过程。
 
@@ -72,7 +72,7 @@ ollama run llama3
 
 **提示：** *“编写一个构建数字时钟的 Python 代码。”*
 
-![检查使用 Ollama 在 GPU 上生成 Llama 3 响应的速度](../Images/413943f3b41ecb21cc7e968434a65a19.png)
+![检查使用 Ollama 在 GPU 上生成 Llama 3 响应的速度](img/413943f3b41ecb21cc7e968434a65a19.png)
 
 你可以通过输入 `/bye` 来退出聊天，然后通过输入 `ollama run llama3` 重新开始。
 
@@ -82,7 +82,7 @@ ollama run llama3
 
 在本地使用 LLMs 提供了隐私、安全性以及对响应生成的更多控制。此外，你不需要支付任何服务费用。你甚至可以创建自己的 AI 驱动编码助手，并在 VSCode 中使用它。
 
-如果你想了解其他在本地运行 LLMs 的应用程序，那么你应该阅读 [在你的笔记本电脑上使用 LLMs 的 5 种方法](/5-ways-to-use-llms-on-your-laptop)。
+如果你想了解其他在本地运行 LLMs 的应用程序，那么你应该阅读 在你的笔记本电脑上使用 LLMs 的 5 种方法。
 
 [](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络构建一款 AI 产品，帮助那些在精神健康方面挣扎的学生。
 

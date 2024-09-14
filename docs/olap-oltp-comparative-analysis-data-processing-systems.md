@@ -1,8 +1,8 @@
 # OLAP 与 OLTP：数据处理系统的比较分析
 
-> 原文：[https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)
+> 原文：[`www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html`](https://www.kdnuggets.com/2023/08/olap-oltp-comparative-analysis-data-processing-systems.html)
 
-![OLAP 与 OLTP：数据处理系统的比较分析](../Images/d2c448ce3d58f2b90edfcda8f62e99cc.png)
+![OLAP 与 OLTP：数据处理系统的比较分析](img/d2c448ce3d58f2b90edfcda8f62e99cc.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 部门
 
 * * *
 
@@ -60,7 +60,7 @@ OLAP 数据库使用**非规范化**的数据结构以*优化查询性能*。通
 
 OLAP 系统支持多维数据分析，通常使用星型或雪花型模式实现，其中数据被组织成维度和度量。所有 OLAP 系统的核心是*OLAP 立方体*，它促进了多维数据分析。**那么 OLAP 立方体是什么？**
 
-![OLAP 与 OLTP：数据处理系统的比较分析](../Images/a03b504cb9e4f7e7e01e736af705ad87.png)
+![OLAP 与 OLTP：数据处理系统的比较分析](img/a03b504cb9e4f7e7e01e736af705ad87.png)
 
 OLAP 立方体用于多维数据分析 | 图片来源于作者
 
@@ -86,24 +86,24 @@ OLTP 数据库采用**规范化**的数据结构，以最小化数据冗余并�
 
 ## #3 – 查询类型与响应时间
 
-OLAP系统优化了处理涉及聚合、排序、分组和计算的复杂分析查询。这些查询通常涉及大量历史数据，并需要显著的计算资源。由于其分析性质，OLAP查询可能具有较长的执行时间。
+OLAP 系统优化了处理涉及聚合、排序、分组和计算的复杂分析查询。这些查询通常涉及大量历史数据，并需要显著的计算资源。由于其分析性质，OLAP 查询可能具有较长的执行时间。
 
-OLTP系统设计用于处理大量小型、快速和并发的事务查询。这些查询主要涉及单条记录的插入、更新和删除。OLTP系统专注于实时数据处理，并确保事务操作的快速响应时间。
+OLTP 系统设计用于处理大量小型、快速和并发的事务查询。这些查询主要涉及单条记录的插入、更新和删除。OLTP 系统专注于实时数据处理，并确保事务操作的快速响应时间。
 
 ## #4 – 性能需求
 
-OLAP系统旨在支持复杂的分析查询和多维数据分析。
+OLAP 系统旨在支持复杂的分析查询和多维数据分析。
 
-OLTP系统应该具备快速的响应时间。它们应能够支持大量的并发事务，同时保持数据完整性——数据差异最小化。
+OLTP 系统应该具备快速的响应时间。它们应能够支持大量的并发事务，同时保持数据完整性——数据差异最小化。
 
-# OLAP与OLTP：总结区别
+# OLAP 与 OLTP：总结区别
 
-让我们通过列出OLAP和OLTP系统在我们讨论的不同特性上的区别来总结我们的讨论：
+让我们通过列出 OLAP 和 OLTP 系统在我们讨论的不同特性上的区别来总结我们的讨论：
 
 | **特性** | **OLAP** | **OLTP** |
 | --- | --- | --- |
 | **数据量** | 大量历史数据 | 小量实时事务数据 |
-| **系统规模** | 远大于OLTP系统 | 远小于OLTP系统 |
+| **系统规模** | 远大于 OLTP 系统 | 远小于 OLTP 系统 |
 | **数据模型** | 为了性能而非规范化 | 为了完整性和最小冗余而规范化 |
 | **查询类型** | 复杂分析查询 | 简单查询 |
 | **响应时间** | 可能较长的执行时间 | 更快的响应时间 |
@@ -111,17 +111,17 @@ OLTP系统应该具备快速的响应时间。它们应能够支持大量的并�
 
 # 总结
 
-总结：OLAP系统有助于对大量历史数据进行深入分析，而OLTP系统则确保快速可靠的实时操作。
+总结：OLAP 系统有助于对大量历史数据进行深入分析，而 OLTP 系统则确保快速可靠的实时操作。
 
-然而，在实际应用中，组织通常会在其数据处理生态系统中部署OLAP和OLTP的组合。这种混合方法使他们能够有效管理操作数据，同时从历史数据中获取有价值的见解。
+然而，在实际应用中，组织通常会在其数据处理生态系统中部署 OLAP 和 OLTP 的组合。这种混合方法使他们能够有效管理操作数据，同时从历史数据中获取有价值的见解。
 
-如果你想开始学习数据工程，查看[这份数据工程初学者指南](/2023/07/beginner-guide-data-engineering.html)。
+如果你想开始学习数据工程，查看这份数据工程初学者指南。
 
-**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、评论文章等方式，学习并与开发者社区分享她的知识。
+**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过编写教程、操作指南、评论文章等方式，学习并与开发者社区分享她的知识。
 
 ### 更多相关内容
 
-+   [OLAP已死了吗？](https://www.kdnuggets.com/2022/10/olap-dead.html)
++   [OLAP 已死了吗？](https://www.kdnuggets.com/2022/10/olap-dead.html)
 
 +   [Pandas 与 Polars：Python 数据框架库的比较分析](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
 

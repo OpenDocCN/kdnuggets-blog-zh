@@ -1,26 +1,26 @@
-# 文本聚类：从非结构化数据中快速获得洞察，第2部分
+# 文本聚类：从非结构化数据中快速获得洞察，第二部分
 
-> 原文：[https://www.kdnuggets.com/2017/07/text-clustering-unstructured-data-part2.html](https://www.kdnuggets.com/2017/07/text-clustering-unstructured-data-part2.html)
+> 原文：[`www.kdnuggets.com/2017/07/text-clustering-unstructured-data-part2.html`](https://www.kdnuggets.com/2017/07/text-clustering-unstructured-data-part2.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 **由 Vivek Kalyanarangan 提供**。
 
-![文本聚类](../Images/67c6b391782158a75264cfc1b6faf4f4.png)
+![文本聚类](img/67c6b391782158a75264cfc1b6faf4f4.png)
 
 在这两部分系列中，我们将探讨文本聚类以及如何从非结构化数据中获得洞察。它将非常强大且具备工业级别的力量。第一部分将关注动机，第二部分将讨论实施。
 
 本文是关于如何使用文本聚类从非结构化数据中获得洞察的两部分系列的第二部分。我们将以非常模块化的方式构建它，以便可以应用于任何数据集。此外，我们还将专注于**将功能暴露为 API**，以便它可以作为即插即用的模型，而不会对现有系统造成干扰。
 
-+   [文本聚类：如何从非结构化数据中快速获得洞察——第1部分：动机](/2017/06/text-clustering-unstructured-data.html)
++   文本聚类：如何从非结构化数据中快速获得洞察——第一部分：动机
 
-+   文本聚类：如何从非结构化数据中快速获得洞察——第2部分：实施
++   文本聚类：如何从非结构化数据中快速获得洞察——第二部分：实施
 
 如果你很急，你可以在我的 [Github 页面](https://github.com/vivekkalyanarangan30/Text-Clustering-API/) 找到完整的项目代码
 
 这只是最终输出效果的预览——
 
-![文本聚类 API](../Images/7e0179269fc5076a5b471604f0c09141.png)
+![文本聚类 API](img/7e0179269fc5076a5b471604f0c09141.png)
 
 ### 安装
 
@@ -49,7 +49,7 @@ python CLAAS_public.py
 
 ```
 
-服务器将启动，你现在可以在此位置访问工具——[http://localhost:8180/apidocs/index.html](http://localhost:8180/apidocs/index.html)
+服务器将启动，你现在可以在此位置访问工具——[`localhost:8180/apidocs/index.html`](http://localhost:8180/apidocs/index.html)
 
 ### 工作流程
 
@@ -89,21 +89,21 @@ python CLAAS_public.py
 
 **相关：**
 
-+   [文本聚类：从非结构化数据中快速获得见解](/2017/06/text-clustering-unstructured-data.html)
++   文本聚类：从非结构化数据中快速获得见解
 
-+   [K-means 聚类与 Tableau – 呼叫详细记录示例](/2017/06/kmeans-clustering-tableau-call-detail-records.html)
++   K-means 聚类与 Tableau – 呼叫详细记录示例
 
-+   [从零开始的 Python 机器学习工作流程 第 2 部分：k-means 聚类](/2017/06/machine-learning-workflows-python-scratch-part-2.html)
++   从零开始的 Python 机器学习工作流程 第二部分：k-means 聚类
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 

@@ -1,6 +1,6 @@
 # 数据科学：现实与期望
 
-> 原文：[https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html](https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html)
+> 原文：[`www.kdnuggets.com/2022/03/data-science-reality-expectations.html`](https://www.kdnuggets.com/2022/03/data-science-reality-expectations.html)
 
 -   当你告诉别人你是数据科学家时，这会带来很多假设和高期望。每个公司对数据科学家的定义都是独特的，这取决于他们的期望。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 # 1. 缺乏数据科学领导力
 
-![数据科学：现实与期望](../Images/f5baaf9e5f5eca7e996356e14d374310.png)
+![数据科学：现实与期望](img/f5baaf9e5f5eca7e996356e14d374310.png)
 
 [Jehyun Sung](https://unsplash.com/@jaysung) 来自 Unsplash
 
@@ -40,19 +40,19 @@
 
 # 2\. 孤狼：非自愿
 
-这一点与上面提到的有关。过去十年中，数据驱动的初创公司急剧增加。有些初创公司一开始就表现良好并高效运营，但大多数公司员工少于100人。
+这一点与上面提到的有关。过去十年中，数据驱动的初创公司急剧增加。有些初创公司一开始就表现良好并高效运营，但大多数公司员工少于 100 人。
 
-排除高管、董事总经理、HR团队等后，只有少数员工擅长数据分析、数据可视化、机器学习和SQL。如果你是团队中的主要数据科学家，你很可能会被来自不同团队成员的多个请求压得喘不过气来。
+排除高管、董事总经理、HR 团队等后，只有少数员工擅长数据分析、数据可视化、机器学习和 SQL。如果你是团队中的主要数据科学家，你很可能会被来自不同团队成员的多个请求压得喘不过气来。
 
 在这种情况下，拒绝这些请求并无妨。工作过多会开始影响你和你的健康。此时，公司应理解公司的成长，并开始考虑扩展数据团队。
 
 # 3\. 数据科学家并非无所不知
 
-![数据科学：现实与期望](../Images/34e15fe414d838009db55021f24c6a0b.png)
+![数据科学：现实与期望](img/34e15fe414d838009db55021f24c6a0b.png)
 
 [Patrick Tomasso](https://unsplash.com/@impatrickt) via Unsplash
 
-数据科学家的面试过程通常非常复杂。可以查看 [simplilearn](https://www.simplilearn.com/tutorials/data-science-tutorial/data-science-interview-questions) 来查看前60名数据科学面试问题及答案：从基础到技术。在过去，我被问过有关SQL、线性回归和逻辑回归、决策树等问题。
+数据科学家的面试过程通常非常复杂。可以查看 [simplilearn](https://www.simplilearn.com/tutorials/data-science-tutorial/data-science-interview-questions) 来查看前 60 名数据科学面试问题及答案：从基础到技术。在过去，我被问过有关 SQL、线性回归和逻辑回归、决策树等问题。
 
 你可以想象，准备数据科学面试是多么令人畏惧，你需要掌握广泛的概念！然而，不要让这阻碍你追求数据科学的职业生涯。了解的背景越多，你的机会就越大。继续练习顶级面试问题，直到你感到自信。你可以向招聘经理询问面试过程的详细信息，这将有助于你准备。
 
@@ -70,14 +70,14 @@
 
 ### 更多相关话题
 
-+   [数据科学职业：7个期望与现实的差距](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
++   [数据科学职业：7 个期望与现实的差距](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
 
-+   [数据质量维度：用Great Expectations确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
++   [数据质量维度：用 Great Expectations 确保数据质量](https://www.kdnuggets.com/2023/03/data-quality-dimensions-assuring-data-quality-great-expectations.html)
 
-+   [用Great Expectations克服数据质量问题](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
++   [用 Great Expectations 克服数据质量问题](https://www.kdnuggets.com/2023/01/overcome-data-quality-issues-great-expectations.html)
 
 +   [梦想与现实之间：生成文本与幻觉](https://www.kdnuggets.com/between-dreams-and-reality-generative-text-and-hallucinations)
 
-+   [从虚构到现实：ChatGPT与真正AI的科幻梦想……](https://www.kdnuggets.com/from-fiction-to-reality-chatgpt-and-the-sci-fi-dream-of-true-ai-conversation)
++   [从虚构到现实：ChatGPT 与真正 AI 的科幻梦想……](https://www.kdnuggets.com/from-fiction-to-reality-chatgpt-and-the-sci-fi-dream-of-true-ai-conversation)
 
-+   [KDnuggets™ 新闻 22:n06, 2月9日：数据科学编程……](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06, 2 月 9 日：数据科学编程……](https://www.kdnuggets.com/2022/n06.html)

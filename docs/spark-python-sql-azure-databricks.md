@@ -1,8 +1,8 @@
 # 在 Azure Databricks 上使用 Spark、Python 或 SQL
 
-> 原文：[https://www.kdnuggets.com/2020/08/spark-python-sql-azure-databricks.html](https://www.kdnuggets.com/2020/08/spark-python-sql-azure-databricks.html)
+> 原文：[`www.kdnuggets.com/2020/08/spark-python-sql-azure-databricks.html`](https://www.kdnuggets.com/2020/08/spark-python-sql-azure-databricks.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ajay Ohri](http://linkedin.com/in/ajayohri)，数据科学经理**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
@@ -24,11 +24,11 @@
 
 为什么我们需要学习如何在 SQL、Spark 和 Python Pandas 数据框之间互换代码？SQL 适合编写简洁易读的数据处理代码，Spark 适合处理大数据和机器学习，而 Python Pandas 可用于从数据处理、机器学习到 seaborn 或 matplotlib 库中的绘图等各种任务。
 
-![图片](../Images/10e3236941f0b760eb80a0b99e6a2abe.png)
+![图片](img/10e3236941f0b760eb80a0b99e6a2abe.png)
 
 我们选择 SQL 笔记本以便于操作，然后选择适当的集群及其内存、核心、Spark 版本等。即使是 SQL 笔记本，我们也可以通过在单元格中的代码前面输入 %python 来编写 Python 代码。
 
-![图片](../Images/f90682a67b15f98366a13a8280832397.png)
+![图片](img/f90682a67b15f98366a13a8280832397.png)
 
 现在让我们开始数据输入、数据检查和数据互换的基础知识。
 
@@ -117,23 +117,23 @@ pandasdf.head()
 
 **参考文献**
 
-1.  Azure Databricks 简介 - [https://www.slideshare.net/jamserra/introduction-to-azure-databricks-83448539](https://www.slideshare.net/jamserra/introduction-to-azure-databricks-83448539)
+1.  Azure Databricks 简介 - [`www.slideshare.net/jamserra/introduction-to-azure-databricks-83448539`](https://www.slideshare.net/jamserra/introduction-to-azure-databricks-83448539)
 
-1.  Dataframes 和 Datasets - [https://docs.databricks.com/spark/latest/dataframes-datasets/index.html](https://docs.databricks.com/spark/latest/dataframes-datasets/index.html)
+1.  Dataframes 和 Datasets - [`docs.databricks.com/spark/latest/dataframes-datasets/index.html`](https://docs.databricks.com/spark/latest/dataframes-datasets/index.html)
 
-1.  优化 PySpark 与 pandas DataFrames 之间的转换 - [https://docs.databricks.com/spark/latest/spark-sql/spark-pandas.html](https://docs.databricks.com/spark/latest/spark-sql/spark-pandas.html)
+1.  优化 PySpark 与 pandas DataFrames 之间的转换 - [`docs.databricks.com/spark/latest/spark-sql/spark-pandas.html`](https://docs.databricks.com/spark/latest/spark-sql/spark-pandas.html)
 
-1.  pyspark 包 - [https://spark.apache.org/docs/latest/api/python/pyspark.html](https://spark.apache.org/docs/latest/api/python/pyspark.html)
+1.  pyspark 包 - [`spark.apache.org/docs/latest/api/python/pyspark.html`](https://spark.apache.org/docs/latest/api/python/pyspark.html)
 
 **个人简介： [Ajay Ohri](http://linkedin.com/in/ajayohri)** 是数据科学经理（Publicis Sapient），并且是《R for Cloud Computing》和《Python for R Users》以及其他 4 本数据科学书籍的作者。
 
 **相关**：
 
-+   [Dataproc 上的 Apache Spark 与 Google BigQuery 比较](/2020/07/apache-spark-dataproc-vs-google-bigquery.html)
++   Dataproc 上的 Apache Spark 与 Google BigQuery 比较
 
-+   [使用 Kubernetes 对 PySpark 进行容器化](/2020/08/containerization-pyspark-kubernetes.html)
++   使用 Kubernetes 对 PySpark 进行容器化
 
-+   [数据科学的 5 个 Apache Spark 最佳实践](/2020/08/5-spark-best-practices-data-science.html)
++   数据科学的 5 个 Apache Spark 最佳实践
 
 ### 更多相关主题
 

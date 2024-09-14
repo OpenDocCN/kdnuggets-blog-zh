@@ -1,8 +1,8 @@
 # 如何避免过拟合
 
-> 原文：[https://www.kdnuggets.com/2022/08/avoid-overfitting.html](https://www.kdnuggets.com/2022/08/avoid-overfitting.html)
+> 原文：[`www.kdnuggets.com/2022/08/avoid-overfitting.html`](https://www.kdnuggets.com/2022/08/avoid-overfitting.html)
 
-![如何避免过拟合？](../Images/569d3cb65a771a94a3c42900ea9615bf.png)
+![如何避免过拟合？](img/569d3cb65a771a94a3c42900ea9615bf.png)
 
 编辑器提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -94,7 +94,7 @@
 
 交叉验证的好处在于它简单易懂，易于实现，并且与其他方法相比，通常具有较低的偏差。
 
-如果你想了解更多关于最常用的交叉验证技术 K-fold 的信息，可以阅读这篇文章：[为什么使用 k-fold 交叉验证？](/2022/07/kfold-cross-validation.html)
+如果你想了解更多关于最常用的交叉验证技术 K-fold 的信息，可以阅读这篇文章：为什么使用 k-fold 交叉验证？
 
 ## 集成
 
@@ -112,7 +112,7 @@ Bagging 是“Bootstrap Aggregation”的缩写，是一种用于减少预测模
 
 弱学习者按顺序训练，以便它们能够专注于学习之前的错误。完成这些后，所有的弱学习者将合并成一个强学习者。
 
-如果你想了解更多关于集成技术的信息，可以阅读这篇文章：[集成技术何时是一个好的选择？](/2022/07/would-ensemble-techniques-good-choice.html)
+如果你想了解更多关于集成技术的信息，可以阅读这篇文章：集成技术何时是一个好的选择？
 
 # 结论
 
@@ -132,14 +132,14 @@ Bagging 是“Bootstrap Aggregation”的缩写，是一种用于减少预测模
 
 ### 更多相关话题
 
-+   [KDnuggets新闻，8月24日：在Python中实现DBSCAN • 如何……](https://www.kdnuggets.com/2022/n34.html)
++   [KDnuggets 新闻，8 月 24 日：在 Python 中实现 DBSCAN • 如何……](https://www.kdnuggets.com/2022/n34.html)
 
-+   [避免数据科学职业的前5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [避免数据科学职业的前 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
 +   [新手数据科学家应避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-+   [对话式人工智能开发中的3个关键挑战及如何避免](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
++   [对话式人工智能开发中的 3 个关键挑战及如何避免](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
 
-+   [5个常见的Python陷阱（以及如何避免它们）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
++   [5 个常见的 Python 陷阱（以及如何避免它们）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
 
-+   [避免这5个每个AI新手常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个每个 AI 新手常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)

@@ -1,6 +1,6 @@
 # 介绍 Dask-SearchCV：与 Scikit-Learn 的分布式超参数优化
 
-> 原文：[https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html](https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html)
+> 原文：[`www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html`](https://www.kdnuggets.com/2017/05/dask-searchcv-distributed-hyperparameter-optimization-scikit-learn.html)
 
 **作者：Jim Crist，Continuum Analytics。**
 
@@ -10,7 +10,7 @@
 
 +   范围的大幅缩减。之前的版本尝试实现*模型*和*数据*并行。由于不是机器学习专家，数据并行的实现方式不够严格。现在的范围缩小为仅实现超参数搜索（模型并行），这是我们可以做好的事情。
 
-+   优化的图构建。结果发现，当人们被给予在集群中运行网格搜索的选项时，他们立即想要扩大网格大小。尽管代码变得更复杂，但我们现在可以处理极大的网格（例如，50万候选者现在需要几秒钟构建图，而之前则需要几分钟）。*需要注意的是，对于如此大小的网格，主动搜索可能会显著表现更好*。相关问题：[#29](https://github.com/dask/dask-searchcv/issues/29)。
++   优化的图构建。结果发现，当人们被给予在集群中运行网格搜索的选项时，他们立即想要扩大网格大小。尽管代码变得更复杂，但我们现在可以处理极大的网格（例如，50 万候选者现在需要几秒钟构建图，而之前则需要几分钟）。*需要注意的是，对于如此大小的网格，主动搜索可能会显著表现更好*。相关问题：[#29](https://github.com/dask/dask-searchcv/issues/29)。
 
 +   增强了与 Scikit-Learn 的兼容性。现在只有少数例外，`GridSearchCV` 和 `RandomizedSearchCV` 的实现应该可以直接替代它们的 scikit-learn 对应版本。
 
@@ -87,13 +87,13 @@ Wall time: 7min 16s
 
 作为一个有向无环图，它可能看起来像这样：
 
-![Scikit-Learn 网格搜索图](../Images/fb1f4a2c477cc380179c1536b5d1ecd9.png)
+![Scikit-Learn 网格搜索图](img/fb1f4a2c477cc380179c1536b5d1ecd9.png)
 
 相比之下，dask 版本看起来更像是：
 
 作为有向无环图，这可能看起来像是：
 
-![Dask-SearchCV 网格搜索图](../Images/579dd09f9c87c7484ced84ddcfc673be.png)
+![Dask-SearchCV 网格搜索图](img/579dd09f9c87c7484ced84ddcfc673be.png)
 
 仔细观察，你会发现 Scikit-Learn 版本会多次使用相同的参数和数据拟合管道中的早期步骤。由于 Dask 比 Joblib 更具灵活性，我们能够在图中合并这些任务，并仅对任何参数/数据/估计器组合执行一次拟合步骤。对于那些早期步骤相对昂贵的管道，这在进行网格搜索时可能是一个重大优势。
 
@@ -118,7 +118,7 @@ Wall time: 2min 43s
 
 下面你可以看到这个运行的 [诊断图](http://distributed.readthedocs.io/en/latest/web.html)。这些图展示了 24 个工作节点随时间推移所执行的操作。我们可以看到我们在保持集群的工作量（蓝色）相对充足，闲置时间（白色）较少。虽然有一定的序列化（红色），但被序列化的值很小，因此这相对便宜。请注意，这个图也有点误导，因为红色框是绘制在正在运行的任务上，使其看起来比实际情况更糟。
 
-![分布式网格搜索任务图](../Images/1d69dc7b91f6f13fb870a5c37f74d3b9.png)
+![分布式网格搜索任务图](img/1d69dc7b91f6f13fb870a5c37f74d3b9.png)
 
 ### 使用 Joblib 的分布式网格搜索
 
@@ -168,21 +168,21 @@ Wall time: 3min 32s
 
 **相关：**
 
-+   [Dask 与 Pandas 和 XGBoost：在分布式系统之间良好配合](/2017/04/dask-pandas-xgboost-playing-nicely-distributed-systems.html)
++   Dask 与 Pandas 和 XGBoost：在分布式系统之间良好配合
 
-+   [介绍 Dask 并行编程：与项目首席开发者的访谈](/2016/09/introducing-dask-parallel-programming.html)
++   介绍 Dask 并行编程：与项目首席开发者的访谈
 
-+   [科学 Python 入门（以及背后的数学）– Matplotlib](/2016/06/intro-scientific-python-matplotlib.html)
++   科学 Python 入门（以及背后的数学）– Matplotlib
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 

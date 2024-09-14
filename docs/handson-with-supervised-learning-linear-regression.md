@@ -1,8 +1,8 @@
 # 实践监督学习：线性回归
 
-> 原文：[https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)
+> 原文：[`www.kdnuggets.com/handson-with-supervised-learning-linear-regression`](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)
 
-![实践监督学习：线性回归](../Images/533f1a539c9dab6c2a4740198f34cf39.png)
+![实践监督学习：线性回归](img/533f1a539c9dab6c2a4740198f34cf39.png)
 
 作者提供的图像
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 线性回归是基本的监督机器学习算法，用于根据输入特征预测连续目标变量。顾名思义，它假设因变量和自变量之间的关系是线性的。因此，如果我们尝试绘制因变量 Y 对自变量 X 的图，我们将得到一条直线。该直线的方程可以表示为：
 
-![方程](../Images/5fafd0dd11eff7815530e8bc855d776c.png "Y=b_{0}+b_{1}X")
+![方程](img/5fafd0dd11eff7815530e8bc855d776c.png "Y=b_{0}+b_{1}X")
 
 其中，
 
@@ -69,7 +69,7 @@ print(train.head())
 
 **输出：**
 
-![实践监督学习：线性回归](../Images/9f7f3acbd879c61e1734252b0b514207.png)
+![实践监督学习：线性回归](img/9f7f3acbd879c61e1734252b0b514207.png)
 
 train.head()
 
@@ -196,7 +196,7 @@ plt.grid(True)  # Enable grid
 plt.show() 
 ```
 
-![动手实践监督学习：线性回归](../Images/65c0f8fe5cef6b40862a22bc53a20a6a.png)
+![动手实践监督学习：线性回归](img/65c0f8fe5cef6b40862a22bc53a20a6a.png)
 
 图片由作者提供
 
@@ -243,7 +243,7 @@ plt.show()
 
 输出：
 
-![动手实践监督学习：线性回归](../Images/137a116933abb033820ccc5f5e66522c.png)
+![动手实践监督学习：线性回归](img/137a116933abb033820ccc5f5e66522c.png)
 
 图片由作者提供
 
@@ -257,7 +257,7 @@ plt.show()
 
 +   [机器学习中使用的主要监督学习算法](https://www.kdnuggets.com/2022/06/primary-supervised-learning-algorithms-used-machine-learning.html)
 
-+   [KDnuggets 新闻，6月22日：主要的监督学习算法……](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要的监督学习算法……](https://www.kdnuggets.com/2022/n25.html)
 
 +   [比较线性回归与逻辑回归](https://www.kdnuggets.com/2022/11/comparing-linear-logistic-regression.html)
 
@@ -265,4 +265,4 @@ plt.show()
 
 +   [线性回归与逻辑回归：简明解释](https://www.kdnuggets.com/2022/03/linear-logistic-regression-succinct-explanation.html)
 
-+   [KDnuggets 新闻 22:n12，3月23日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)
++   [KDnuggets 新闻 22:n12，3 月 23 日：最佳数据科学书籍…](https://www.kdnuggets.com/2022/n12.html)

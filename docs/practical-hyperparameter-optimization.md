@@ -1,22 +1,22 @@
 # 实用超参数优化
 
-> 原文：[https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html](https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html)
+> 原文：[`www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html`](https://www.kdnuggets.com/2020/02/practical-hyperparameter-optimization.html)
 
-[comments](#comments)
+comments
 
 **由 [Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)，南安普顿大学**
 
-![](../Images/e7d267de83d374a4b81eacc48c82c3dc.png)
+![](img/e7d267de83d374a4b81eacc48c82c3dc.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -46,17 +46,17 @@
 
 1.  **人工神经网络（ANNs）调整**
 
-![Figure](../Images/a925c643693adacdb575d44ea48f69bb.png)
+![Figure](img/a925c643693adacdb575d44ea48f69bb.png)
 
 图 1：ML 优化工作流程 [1]
 
 为了演示如何在 Python 中执行超参数优化，我决定对 [信用卡欺诈检测 Kaggle 数据集](https://www.kaggle.com/mlg-ulb/creditcardfraud)进行完整的数据分析。本文的目标是正确分类哪些信用卡交易应标记为欺诈或真实（即二分类）。该数据集在分发之前已被匿名化，因此大多数特征的含义尚未公开。
 
-在这种情况下，我决定只使用数据集的一个子集，以加快训练时间并确保在两个不同类别之间实现完美平衡。此外，仅使用有限数量的特征以使优化任务更具挑战性。最终的数据集如下面的图（图2）所示。
+在这种情况下，我决定只使用数据集的一个子集，以加快训练时间并确保在两个不同类别之间实现完美平衡。此外，仅使用有限数量的特征以使优化任务更具挑战性。最终的数据集如下面的图（图 2）所示。
 
-![Figure](../Images/ac4eeb1e5f700fc844f3fead905f2a0d.png)
+![Figure](img/ac4eeb1e5f700fc844f3fead905f2a0d.png)
 
-图2：信用卡欺诈检测数据集
+图 2：信用卡欺诈检测数据集
 
 本文中使用的所有代码（以及更多！）可以在我的 [GitHub 仓库](https://github.com/pierpaolo28/Kaggle-Challenges/blob/master/credit-card-fraud-model-tuning.ipynb) 和 [Kaggle 个人资料](https://www.kaggle.com/pierpaolo28/credit-card-fraud-model-tuning) 中找到。
 
@@ -128,7 +128,7 @@ weighted avg       0.95      0.95      0.95       240
 
 最常用的交叉验证方法之一是 K 折验证。在 K 折中，我们将训练集划分为 N 个分区，然后迭代地使用 N-1 个分区训练模型，并用剩下的分区进行测试（在每次迭代中我们会改变剩下的分区）。在训练了 N 次模型后，我们将平均每次迭代中获得的训练结果，以得到整体训练性能结果（图 3）。
 
-![图像](../Images/ef469d0bf742072bd0a720a564e8c996.png)
+![图像](img/ef469d0bf742072bd0a720a564e8c996.png)
 
 图 3：K 折交叉验证 [2]
 
@@ -138,7 +138,7 @@ weighted avg       0.95      0.95      0.95       240
 
 一旦训练好模型，我们可以可视化超参数的变化如何影响整体模型准确度（图 4）。在这个例子中，我决定观察估算器数量和准则的变化如何影响随机森林的准确性。
 
-![图像](../Images/f655111ff344502011d6b50d2e15d0ba.png)
+![图像](img/f655111ff344502011d6b50d2e15d0ba.png)
 
 图 4：准则与 N 估算器准确度热图
 
@@ -169,9 +169,9 @@ weighted avg       0.97      0.97      0.97       240
 
 为了选择在网格搜索中使用的参数，我们现在可以查看随机搜索中表现最好的参数，并基于这些参数形成一个网格，以查看是否能找到更好的组合。
 
-可以使用Python中的scikit-learn ***GridSearchCV()***函数来实现网格搜索。此次，我决定将训练集分成4个折叠（***cv = 4***）。
+可以使用 Python 中的 scikit-learn ***GridSearchCV()***函数来实现网格搜索。此次，我决定将训练集分成 4 个折叠（***cv = 4***）。
 
-使用网格搜索时，会尝试网格中所有可能的参数组合。在这种情况下，训练期间将使用128000种组合（2 × 10 × 4 × 4 × 4 × 10）。而在之前的网格搜索示例中，仅使用了80种组合。
+使用网格搜索时，会尝试网格中所有可能的参数组合。在这种情况下，训练期间将使用 128000 种组合（2 × 10 × 4 × 4 × 4 × 10）。而在之前的网格搜索示例中，仅使用了 80 种组合。
 
 ```py
 [[115   1]
@@ -194,11 +194,11 @@ weighted avg       0.97      0.97      0.97       240
 
 ### 贝叶斯优化
 
-贝叶斯优化可以在Python中使用Hyperopt库进行。贝叶斯优化利用概率来找到函数的最小值。最终目标是找到能使函数输出值最低的输入值。
+贝叶斯优化可以在 Python 中使用 Hyperopt 库进行。贝叶斯优化利用概率来找到函数的最小值。最终目标是找到能使函数输出值最低的输入值。
 
 已经证明，贝叶斯优化比随机搜索、网格搜索或手动搜索更高效。因此，贝叶斯优化可以在测试阶段带来更好的性能，并减少优化时间。
 
-在Hyperopt中，可以通过给函数**fmin()**传递3个主要参数来实现贝叶斯优化。
+在 Hyperopt 中，可以通过给函数**fmin()**传递 3 个主要参数来实现贝叶斯优化。
 
 +   **目标函数** = 定义要最小化的损失函数。
 
@@ -322,9 +322,9 @@ Base Accuracy vs Optimized ANN 1.3158%.
 
 ### 参考文献
 
-[1] 超参数优化：自动化算法的解释，Dawid Kopczyk。访问地址：[https://dkopczyk.quantee.co.uk/hyperparameter-optimization/](https://dkopczyk.quantee.co.uk/hyperparameter-optimization/)
+[1] 超参数优化：自动化算法的解释，Dawid Kopczyk。访问地址：[`dkopczyk.quantee.co.uk/hyperparameter-optimization/`](https://dkopczyk.quantee.co.uk/hyperparameter-optimization/)
 
-[2] 模型选择，ethen8181。访问地址：[http://ethen8181.github.io/machine-learning/model_selection/model_selection.html](http://ethen8181.github.io/machine-learning/model_selection/model_selection.html)
+[2] 模型选择，ethen8181。访问地址：[`ethen8181.github.io/machine-learning/model_selection/model_selection.html`](http://ethen8181.github.io/machine-learning/model_selection/model_selection.html)
 
 **简介：[Pier Paolo Ippolito](https://www.linkedin.com/in/pierpaolo28/)** 是南安普顿大学人工智能专业的最后一年硕士生。他是 AI 爱好者、数据科学家和 RPA 开发人员。
 
@@ -332,11 +332,11 @@ Base Accuracy vs Optimized ANN 1.3158%.
 
 **相关：**
 
-+   [自动化机器学习项目实施复杂性](/2019/11/automl-implementation-complexities.html)
++   自动化机器学习项目实施复杂性
 
-+   [自动化机器学习：团队如何在 AutoML 项目中协作？](/2020/01/teams-work-together-automl-project.html)
++   自动化机器学习：团队如何在 AutoML 项目中协作？
 
-+   [如何自动化超参数优化](/2019/06/automate-hyperparameter-optimization.html)
++   如何自动化超参数优化
 
 ### 更多相关主题
 

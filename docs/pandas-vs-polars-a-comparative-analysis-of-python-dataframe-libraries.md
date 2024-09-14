@@ -1,8 +1,8 @@
 # Pandas 与 Polars：Python 数据框库的比较分析
 
-> 原文：[https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
+> 原文：[`www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries`](https://www.kdnuggets.com/pandas-vs-polars-a-comparative-analysis-of-python-dataframe-libraries)
 
-![Pandas 与 Polars：Python 数据框库的比较分析](../Images/ca1a80f423fc593f1f6737ac93380a5f.png)
+![Pandas 与 Polars：Python 数据框库的比较分析](img/ca1a80f423fc593f1f6737ac93380a5f.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@ Pandas 长期以来一直是处理数据的首选库。然而，我相当确定�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -38,7 +38,7 @@ Polars 出色性能的秘密在于四个主要原因：
 
 与基于 Python 库如 NumPy 的 Pandas 形成鲜明对比，Polars 是使用 Rust 构建的。这个以快速性能著称的低级语言，可以编译成机器代码，而不需要使用解释器。
 
-![Pandas 与 Polars：Python 数据框库的比较分析](../Images/ab6f749f2dc6c630d51166e9acece8dd.png)
+![Pandas 与 Polars：Python 数据框库的比较分析](img/ab6f749f2dc6c630d51166e9acece8dd.png)
 
 作者提供的图片
 
@@ -62,7 +62,7 @@ Polars 在其惰性执行中使用了查询优化器，以高效地规划并可�
 
 Rust 设计的另一个好处是其对安全并发的支持，确保可预测和高效的并行处理。此功能使 Polars 能够充分利用机器的多个核心进行复杂操作。
 
-![Pandas 与 Polars：Python 数据帧库的比较分析](../Images/6852908fe27f6494efe73be1a1cd5812.png)
+![Pandas 与 Polars：Python 数据帧库的比较分析](img/6852908fe27f6494efe73be1a1cd5812.png)
 
 作者提供的图片
 

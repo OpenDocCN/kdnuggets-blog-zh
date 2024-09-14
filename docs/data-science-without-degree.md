@@ -1,16 +1,16 @@
 # 如何在没有学位的情况下进入数据科学
 
-> 原文：[https://www.kdnuggets.com/2020/11/data-science-without-degree.html](https://www.kdnuggets.com/2020/11/data-science-without-degree.html)
+> 原文：[`www.kdnuggets.com/2020/11/data-science-without-degree.html`](https://www.kdnuggets.com/2020/11/data-science-without-degree.html)
 
-[评论](#comments)
+评论
 
-![](../Images/97a4a86f6773b3a3dcba4e638405586f.png)
+![](img/97a4a86f6773b3a3dcba4e638405586f.png)
 
 本文适合以下几类人群：
 
 1.  你没有高等教育学位，但你对数据科学感兴趣。
 
-1.  你没有STEM相关的学位，但你对数据科学感兴趣。
+1.  你没有 STEM 相关的学位，但你对数据科学感兴趣。
 
 1.  你在一个完全与数据科学无关的领域工作，但你对数据科学感兴趣。
 
@@ -50,7 +50,7 @@
 
 *统计学和概率论：* 如果你读过我以前的文章，可能已经听过千万次，但数据科学家实际上只是现代的统计学家。
 
-+   如果你对统计学和数学几乎没有接触，我推荐[Khan Academy的统计学和概率论课程](https://www.khanacademy.org/math/statistics-probability)。
++   如果你对统计学和数学几乎没有接触，我推荐[Khan Academy 的统计学和概率论课程](https://www.khanacademy.org/math/statistics-probability)。
 
 +   然而，如果你对微积分和积分有一定的了解，我强烈推荐你学习乔治亚理工学院的课程“[统计方法](https://mediaspace.gatech.edu/playlist/dedicated/74258101/1_g5xwvbde/1_iw8fk73m)”。虽然它讲解的证明较多，难度略高，但它会帮助你理解每个概念的复杂性。
 
@@ -64,17 +64,17 @@
 
 *编程：* 就像对数学和统计有基本了解很重要一样，掌握编程的核心基础将使你的生活变得轻松许多，特别是在实现阶段。因此，我建议你在深入研究机器学习算法之前，花时间学习基本的**SQL**和**Python**。
 
-+   如果你完全没有SQL的基础，我建议你学习[Mode的SQL教程](https://mode.com/sql-tutorial/introduction-to-sql/)，因为它非常简洁且全面。
++   如果你完全没有 SQL 的基础，我建议你学习[Mode 的 SQL 教程](https://mode.com/sql-tutorial/introduction-to-sql/)，因为它非常简洁且全面。
 
-+   类似地，如果你完全没有Python的基础，[Codecademy](https://www.codecademy.com/catalog/language/python)是一个很好的资源来熟悉Python。
++   类似地，如果你完全没有 Python 的基础，[Codecademy](https://www.codecademy.com/catalog/language/python)是一个很好的资源来熟悉 Python。
 
-**第1级：专业化**
+**第 1 级：专业化**
 
 一旦你掌握了基础知识，你就可以开始专业化。此时，你可以决定是否专注于机器学习算法、深度学习、自然语言处理、计算机视觉等领域……
 
-+   如果你想了解更多关于机器学习算法和实现的知识，我建议你查看[Kaggle的机器学习入门](https://www.kaggle.com/learn/intro-to-machine-learning)、[斯坦福的机器学习课程](https://www.coursera.org/learn/machine-learning)或[Udemy的机器学习A-Z课程](https://www.udemy.com/course/machinelearning/)。查看一下，看看哪个最适合你！
++   如果你想了解更多关于机器学习算法和实现的知识，我建议你查看[Kaggle 的机器学习入门](https://www.kaggle.com/learn/intro-to-machine-learning)、[斯坦福的机器学习课程](https://www.coursera.org/learn/machine-learning)或[Udemy 的机器学习 A-Z 课程](https://www.udemy.com/course/machinelearning/)。查看一下，看看哪个最适合你！
 
-+   如果你想深入了解深度学习，可以查看[ai的专门化课程](https://www.coursera.org/specializations/deep-learning)。这是值得投资的！
++   如果你想深入了解深度学习，可以查看[ai 的专门化课程](https://www.coursera.org/specializations/deep-learning)。这是值得投资的！
 
 +   如果你想深入了解 NLP，这里有 [来自斯坦福大学和牛津大学的 5 个免费自然语言处理课程](https://towardsdatascience.com/here-are-5-free-natural-language-processing-courses-from-top-universities-f108e2456dce)。
 
@@ -112,15 +112,15 @@
 
 **个人网站**
 
-说到网站，我强烈建议以网站形式建立数据科学作品集。HTML 和 CSS 非常容易学习，这将是一个有趣的项目！如果你没有时间，像Squarespace这样的工具也会很有效。
+说到网站，我强烈建议以网站形式建立数据科学作品集。HTML 和 CSS 非常容易学习，这将是一个有趣的项目！如果你没有时间，像 Squarespace 这样的工具也会很有效。
 
-**在Medium上写博客**
+**在 Medium 上写博客**
 
-我可能有些偏见，因为这个方法对我很有效，但这并不意味着我不能推荐博客写作！借助像Medium这样的平台，你可以撰写项目 walkthroughs，例如我在[葡萄酒质量预测](https://towardsdatascience.com/predicting-wine-quality-with-several-classification-techniques-179038ea6434)上的文章。
+我可能有些偏见，因为这个方法对我很有效，但这并不意味着我不能推荐博客写作！借助像 Medium 这样的平台，你可以撰写项目 walkthroughs，例如我在[葡萄酒质量预测](https://towardsdatascience.com/predicting-wine-quality-with-several-classification-techniques-179038ea6434)上的文章。
 
 非营利机会
 
-最后，利用非营利的数据科学机会。我遇到了一篇[由Susan Currie Sivek撰写的有用文章，](https://medium.com/swlh/data-science-volunteering-ways-to-help-2c2d0f5dd9ff) 提供了几个你可以参与真实数据科学项目的组织。
+最后，利用非营利的数据科学机会。我遇到了一篇[由 Susan Currie Sivek 撰写的有用文章，](https://medium.com/swlh/data-science-volunteering-ways-to-help-2c2d0f5dd9ff) 提供了几个你可以参与真实数据科学项目的组织。
 
 [原文](https://towardsdatascience.com/how-to-get-into-data-science-without-a-degree-2f84516f1afd)。经许可转载。
 
@@ -134,11 +134,11 @@
 
 ### 更多相关主题
 
-+   [成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [如果你没有相关学位，如何进入数据分析领域](https://www.kdnuggets.com/2021/12/how-to-get-into-data-analytics.html)
 

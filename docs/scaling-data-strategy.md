@@ -1,12 +1,12 @@
 # 扩展您的数据战略
 
-> 原文：[https://www.kdnuggets.com/2020/03/scaling-data-strategy.html](https://www.kdnuggets.com/2020/03/scaling-data-strategy.html)
+> 原文：[`www.kdnuggets.com/2020/03/scaling-data-strategy.html`](https://www.kdnuggets.com/2020/03/scaling-data-strategy.html)
 
-[评论](#comments)
+评论
 
 **作者 [哈维尔·博斯](https://www.linkedin.com/in/javier-bosch/)，[SSENSE](https://medium.com/ssense-tech)的高级数据科学家**
 
-![图表](../Images/0c307116d82e9a4369dedd95a16709c2.png)
+![图表](img/0c307116d82e9a4369dedd95a16709c2.png)
 
 [图片来源](https://pixabay.com/illustrations/meeting-conference-sales-business-1184892/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -26,7 +26,7 @@
 
 快速增长的公司同时享有两个独特的优势。它们能够利用小而强大的团队，拥有积极的态度，并迅速将产品特性推向市场。同时，为了维持快速扩展，它们有实际的动机同样重视建立可持续增长的基本实践。这意味着要管理数字化转型，以利用新技术的好处，并管理越来越多的同时进行且相互关联的项目。更不用说在这些项目和流程交汇处，通常会有大量的数据在流动！随着数据呈指数增长，这一独特的位置可以被用来制定一个强大且长期的数据战略。
 
-在SSENSE，我们尝试通过数据驱动的解决方案来解决大规模问题。在这种背景下，商业关系可能迅速变得复杂，识别数据中的模式和行为可能变得越来越具有挑战性。如果您定期启动与组织中现有功能和流程紧密交织的新项目，那么您将无法再建立孤立的、一锤子买卖的解决方案。您的运营已经增长到值得制定企业数据战略的程度。在本文中，我将基于我之前的专业经验，展示我对一致性数据战略的愿景。尽管本文的目的是不是详细描述我们在SSENSE的具体数据战略，但许多主要原则都从中汲取了灵感。
+在 SSENSE，我们尝试通过数据驱动的解决方案来解决大规模问题。在这种背景下，商业关系可能迅速变得复杂，识别数据中的模式和行为可能变得越来越具有挑战性。如果您定期启动与组织中现有功能和流程紧密交织的新项目，那么您将无法再建立孤立的、一锤子买卖的解决方案。您的运营已经增长到值得制定企业数据战略的程度。在本文中，我将基于我之前的专业经验，展示我对一致性数据战略的愿景。尽管本文的目的是不是详细描述我们在 SSENSE 的具体数据战略，但许多主要原则都从中汲取了灵感。
 
 ### **数据战略**
 
@@ -102,7 +102,7 @@
 
 1.  [如何创建成功的数据策略 — Stephanie Shen](https://towardsdatascience.com/how-to-create-a-successful-data-strategy-1293bacf463c)
 
-1.  [数据策略的5个关键组成部分 — SAS](https://www.sas.com/content/dam/SAS/en_us/doc/whitepaper1/5-essential-components-of-data-strategy-108109.pdf)
+1.  [数据策略的 5 个关键组成部分 — SAS](https://www.sas.com/content/dam/SAS/en_us/doc/whitepaper1/5-essential-components-of-data-strategy-108109.pdf)
 
 1.  [如何建立数据策略 — Lotame](https://www.lotame.com/how-to-build-a-data-strategy/)
 
@@ -118,11 +118,11 @@
 
 **相关内容：**
 
-+   [怀念严格类型化模式](/2020/02/loving-memory-strictly-typed-schemas.html)
++   怀念严格类型化模式
 
-+   [推荐系统指标：比较苹果、橙子和香蕉](/2020/02/comparing-apples-oranges-bananas.html)
++   推荐系统指标：比较苹果、橙子和香蕉
 
-+   [数据湖中的模式演变](/2020/01/schema-evolution-data-lakes.html)
++   数据湖中的模式演变
 
 ### 更多相关主题
 
@@ -132,8 +132,8 @@
 
 +   [通过 Apache Gobblin 扩展数据管理](https://www.kdnuggets.com/2023/01/scaling-data-management-apache-gobblin.html)
 
-+   [掌握数据策略的15本顶尖书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据策略的 15 本顶尖书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
 +   [GenAI 时代的人工智能转型策略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)

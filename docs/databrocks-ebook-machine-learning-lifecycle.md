@@ -1,6 +1,6 @@
 # [电子书] 规范化机器学习生命周期
 
-> 原文：[https://www.kdnuggets.com/2019/03/databrocks-ebook-machine-learning-lifecycle.html](https://www.kdnuggets.com/2019/03/databrocks-ebook-machine-learning-lifecycle.html)
+> 原文：[`www.kdnuggets.com/2019/03/databrocks-ebook-machine-learning-lifecycle.html`](https://www.kdnuggets.com/2019/03/databrocks-ebook-machine-learning-lifecycle.html)
 
 赞助广告。
 
@@ -24,7 +24,7 @@
 
 &#124;
 
-&#124; [![规范化机器学习电子书邮件头](../Images/980878d311e55684315d0d93cedda1e1.png)](https://pages.databricks.com/EB-Standardizing-the-Machine-Learning-Lifecycle-LP.html?utm_source=kdnuggets&utm_medium=email&utm_campaign=70161000001uNZIAA2) &#124;
+&#124; ![规范化机器学习电子书邮件头](https://pages.databricks.com/EB-Standardizing-the-Machine-Learning-Lifecycle-LP.html?utm_source=kdnuggets&utm_medium=email&utm_campaign=70161000001uNZIAA2) &#124;
 
 &#124;   &#124;
 
@@ -74,19 +74,19 @@ Databricks 团队 &#124;
 
 &#124;
 
-[![推特](../Images/370e94aa2f6504dbef19829f3a12296a.png "Twitter")](https://twitter.com/databricks)
+![推特](https://twitter.com/databricks)
 
 &#124;
 
-[![领英](../Images/6200fdfe9795f133d4c8a00f8932b84d.png "LinkedIn")](https://www.linkedin.com/company/databricks)
+![领英](https://www.linkedin.com/company/databricks)
 
 &#124;
 
-[![脸书](../Images/66b0f6ae4ff7aff6d3f7afe10e97e061.png "Facebook")](https://www.facebook.com/pages/Databricks/560203607379694)
+![脸书](https://www.facebook.com/pages/Databricks/560203607379694)
 
 &#124;
 
-[![RSS](../Images/3b005d3100b1fff9781b8d37951b580a.png "RSS")](https://databricks.com/feed)
+![RSS](https://databricks.com/feed)
 
 &#124;
 
@@ -112,11 +112,11 @@ Spark 标志是 **[Apache 软件基金会](http://www.apache.org/)** 的商标�
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 

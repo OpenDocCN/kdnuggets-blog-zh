@@ -1,8 +1,8 @@
-# 你不该成为数据科学家的7个理由
+# 你不该成为数据科学家的 7 个理由
 
-> 原文：[https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
+> 原文：[`www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist`](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
 
-![你不该成为数据科学家的7个理由](../Images/571de6ff659f5a837571c93a8d51fe1a.png)
+![你不该成为数据科学家的 7 个理由](img/571de6ff659f5a837571c93a8d51fe1a.png)
 
 图片由编辑提供
 
@@ -46,31 +46,31 @@
 
 此外，在早期阶段的初创公司，你通常需要身兼数职。因此，你的工作不仅仅是构建模型。即使你成功地将机器学习模型部署到生产环境中，你还需要监控模型的性能，关注漂移情况，并根据需要进行回退和再训练。
 
-[Abid Ali Awan](https://www.datacamp.com/portfolio/kingabzpro)，KDnuggets的作家、编辑和数据科学家，分享道：
+[Abid Ali Awan](https://www.datacamp.com/portfolio/kingabzpro)，KDnuggets 的作家、编辑和数据科学家，分享道：
 
 > “如果你在一家公司工作，你可能经常需要在多个团队之间切换，同时处理不同的项目。然而，你所参与的大多数项目可能甚至没有进入生产阶段。
 > 
 > 由于公司的优先事项可能会改变，或者项目的影响可能没有那么显著。不断在团队和项目之间切换可能会让人感到疲惫，你可能会对自己正在贡献什么感到茫然。”
 > 
-> – Abid Ali Awan，KDnuggets的作家、编辑和数据科学家
+> – Abid Ali Awan，KDnuggets 的作家、编辑和数据科学家
 
 所以，进行数据科学项目的过程并不是一个线性的开始到结束的过程，你完成一个项目后就转到下一个项目。
 
 # 3\. 你对角色模糊感到沮丧
 
-在两个不同组织中，数据科学家的日常工作可能完全不同。数据科学家、机器学习工程师和MLOps工程师的角色往往有很多重叠的功能。
+在两个不同组织中，数据科学家的日常工作可能完全不同。数据科学家、机器学习工程师和 MLOps 工程师的角色往往有很多重叠的功能。
 
 假设你是一位非常有兴趣构建预测模型的数据科学家。你在一个你感兴趣的组织中获得了数据科学家的角色。
 
-然而，如果你发现自己整天都在处理电子表格中的数据和制作报告，或者用SQL从数据库中提取数据，不要感到惊讶。你可能会认为使用SQL处理数据并寻找业务问题的答案更适合数据分析师的角色。
+然而，如果你发现自己整天都在处理电子表格中的数据和制作报告，或者用 SQL 从数据库中提取数据，不要感到惊讶。你可能会认为使用 SQL 处理数据并寻找业务问题的答案更适合数据分析师的角色。
 
-而在其他情况下，你可能负责构建和部署模型到生产环境中，监控模型漂移，并根据需要重新训练模型。在这种情况下，你既是数据科学家，又兼任[ MLOps工程师](/2023/04/role-mlops-engineer-organization.html)的角色。
+而在其他情况下，你可能负责构建和部署模型到生产环境中，监控模型漂移，并根据需要重新训练模型。在这种情况下，你既是数据科学家，又兼任 MLOps 工程师的角色。
 
-让我们听听Abid对数据职业角色流动性的看法：
+让我们听听 Abid 对数据职业角色流动性的看法：
 
-> “我总是对被称为**‘数据科学家’**感到困惑。这到底意味着什么？我是数据分析师、商业智能工程师、机器学习工程师、MLOps工程师，还是上述所有角色？如果你在一家小公司或初创公司工作，你的角色在公司内部是流动的。然而，大型组织可能会对角色有更明确的区分。但这并不能保证角色完全明确。你可能是数据科学家，但你做的很多工作可能是创建与商业目标对齐的分析报告。”
+> “我总是对被称为**‘数据科学家’**感到困惑。这到底意味着什么？我是数据分析师、商业智能工程师、机器学习工程师、MLOps 工程师，还是上述所有角色？如果你在一家小公司或初创公司工作，你的角色在公司内部是流动的。然而，大型组织可能会对角色有更明确的区分。但这并不能保证角色完全明确。你可能是数据科学家，但你做的很多工作可能是创建与商业目标对齐的分析报告。”
 > 
-> – Abid Ali Awan，KDnuggets的作家、编辑和数据科学家
+> – Abid Ali Awan，KDnuggets 的作家、编辑和数据科学家
 
 # 4\. 你不关心业务目标
 
@@ -108,7 +108,7 @@
 
 +   清洗数据以使其适合分析
 
-现在，这项工作可能不是特别令人兴奋。通常，你甚至不需要构建机器学习模型。一旦数据存储在数据库中，你可以使用SQL来回答问题。在这种情况下，你甚至不需要构建机器学习模型。
+现在，这项工作可能不是特别令人兴奋。通常，你甚至不需要构建机器学习模型。一旦数据存储在数据库中，你可以使用 SQL 来回答问题。在这种情况下，你甚至不需要构建机器学习模型。
 
 关于重要的工作往往不有趣，Abid 这样分享他的观点：
 
@@ -184,18 +184,18 @@
 
 *感谢马修、阿比德、妮莎和坎瓦尔分享他们对数据科学职业多个方面的见解，并使这篇文章更加有趣和愉快！*
 
-**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在学习并通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是一位来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在学习并通过撰写教程、操作指南、观点文章等与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [你不应该使用机器学习的4个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [你不应该使用机器学习的 4 个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
-+   [你应该避免数据科学职业的前5个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [你应该避免数据科学职业的前 5 个理由](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
-+   [你需要合成数据的5个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
++   [你需要合成数据的 5 个理由](https://www.kdnuggets.com/2023/02/5-reasons-need-synthetic-data.html)
 
-+   [你在找数据科学工作时遇到困难的7个理由](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [你在找数据科学工作时遇到困难的 7 个理由](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
-+   [你应该使用线性回归模型而不是…的3个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
++   [你应该使用线性回归模型而不是…的 3 个理由](https://www.kdnuggets.com/2021/08/3-reasons-linear-regression-instead-neural-networks.html)
 
-+   [你应该获得认证的5个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)
++   [你应该获得认证的 5 个理由](https://www.kdnuggets.com/2023/05/sas-5-reasons-get-certified.html)

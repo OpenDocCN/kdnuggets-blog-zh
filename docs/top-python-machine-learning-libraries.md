@@ -1,8 +1,8 @@
 # 顶级 8 个 Python 机器学习库
 
-> 原文：[https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)
+> 原文：[`www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html`](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 Python 在机器学习、AI、深度学习和数据科学任务中继续领先。根据 builtwith.com，45% 的科技公司更愿意使用 Python 实现 AI 和机器学习。
 
@@ -12,11 +12,11 @@ Python 在机器学习、AI、深度学习和数据科学任务中继续领先�
 
 ## 我们的顶级 3 门课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -32,7 +32,7 @@ Python 在机器学习、AI、深度学习和数据科学任务中继续领先�
 
 一如既往，请随时在下面的评论区表达你的挫折/不同意见/烦恼！
 
-![Top Python Machine Learning Libraries](../Images/706b40ac80e566e780ea6caaf1426184.png)
+![Top Python Machine Learning Libraries](img/706b40ac80e566e780ea6caaf1426184.png)
 
 *顶级 8 个 Python 机器学习库按 GitHub 贡献者、星标和提交数量排序（圆圈的大小）*
 
@@ -56,7 +56,7 @@ Python 在机器学习、AI、深度学习和数据科学任务中继续领先�
 
 **5\. [LightGBM](https://github.com/Microsoft/LightGBM) (贡献者 – 91, 提交记录 – 1272, 星标 – 6736)**
 
-“一个快速、分布式、高性能的梯度提升（GBDT、GBRT、GBM 或 MART）框架，基于决策树算法，用于排序、分类和许多其他机器学习任务。它隶属于微软的 DMTK([http://github.com/microsoft/dmtk](https://github.com/microsoft/dmtk)) 项目。”
+“一个快速、分布式、高性能的梯度提升（GBDT、GBRT、GBM 或 MART）框架，基于决策树算法，用于排序、分类和许多其他机器学习任务。它隶属于微软的 DMTK([`github.com/microsoft/dmtk`](https://github.com/microsoft/dmtk)) 项目。”
 
 **6\. [CatBoost](https://github.com/catboost/catboost) (贡献者 – 77, 提交记录 – 3304, 星标 – 3241)**
 
@@ -74,22 +74,22 @@ Python 在机器学习、AI、深度学习和数据科学任务中继续领先�
 
 **相关内容：**
 
-+   [使用Mitchell范式对学习算法的简明解释](https://www.kdnuggets.com/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html)
++   [使用 Mitchell 范式对学习算法的简明解释](https://www.kdnuggets.com/2018/10/mitchell-paradigm-concise-explanation-learning-algorithms.html)
 
-+   [让Python在你的数据上更快](https://www.kdnuggets.com/2018/10/intel-unleash-faster-python-data.html)
++   [让 Python 在你的数据上更快](https://www.kdnuggets.com/2018/10/intel-unleash-faster-python-data.html)
 
-+   [如何在Python中创建一个简单的神经网络](https://www.kdnuggets.com/2018/10/simple-neural-network-python.html)
++   [如何在 Python 中创建一个简单的神经网络](https://www.kdnuggets.com/2018/10/simple-neural-network-python.html)
 
 ### 更多主题内容
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [停止学习数据科学以寻找目标，并以目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

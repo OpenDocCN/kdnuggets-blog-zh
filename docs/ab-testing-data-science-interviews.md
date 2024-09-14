@@ -1,28 +1,28 @@
 # 如何在 A/B 测试数据科学面试中表现出色
 
-> 原文：[https://www.kdnuggets.com/2021/04/ab-testing-data-science-interviews.html](https://www.kdnuggets.com/2021/04/ab-testing-data-science-interviews.html)
+> 原文：[`www.kdnuggets.com/2021/04/ab-testing-data-science-interviews.html`](https://www.kdnuggets.com/2021/04/ab-testing-data-science-interviews.html)
 
-[评论](#comments)
+评论
 
 **由 [Preeti Semwal](https://www.linkedin.com/in/preeti-semwal/)，数据科学与分析领袖**。
 
-![](../Images/f54cf1d0f34eaac7d02df379e5795132.png)
+![](img/f54cf1d0f34eaac7d02df379e5795132.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 *图片由 [bruce mars](https://unsplash.com/@brucemars?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/happy?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
-A/B 测试是一项需求量大的技能，常在数据科学面试中被考察。然而，针对 A/B 测试面试的资源非常有限。在我15年的职业生涯中，作为数据科学的招聘经理，我发现大多数候选人在这些面试中表现不佳。实际上，实验领域一直在发展，每年都有新的概念和方法变得更加相关。这意味着，即使是经验丰富的数据科学家，也可能在面试中感到困惑。
+A/B 测试是一项需求量大的技能，常在数据科学面试中被考察。然而，针对 A/B 测试面试的资源非常有限。在我 15 年的职业生涯中，作为数据科学的招聘经理，我发现大多数候选人在这些面试中表现不佳。实际上，实验领域一直在发展，每年都有新的概念和方法变得更加相关。这意味着，即使是经验丰富的数据科学家，也可能在面试中感到困惑。
 
 在这篇文章中，我们将进行一次模拟面试，帮助你了解面试官在寻找什么以及如何应对这些面试。为什么要进行模拟面试呢？作为数据科学家，我们有时在沟通上会遇到困难，心中有一个模板会大大有帮助。就我个人而言，当我能够想象一个高风险的情境及其可能的发展时，这有助于我在心理上更好地准备、有效应对压力，并整体上表现更好。
 
@@ -64,25 +64,25 @@ A/B 测试是一项需求量大的技能，常在数据科学面试中被考察�
 
 我们还应考虑**保护性指标**——这些是对业务至关重要的指标，我们不希望通过实验对其产生影响，例如在应用上花费的时间或应用卸载等。有没有这样的指标我们需要在这种情况下包括在内？
 
-面试官 — 我同意你选择的主要指标，但你可以忽略这个练习中的次要指标。在防护指标方面你做得很对。Doordash希望在涉及到他们的应用时对任何功能或发布保持谨慎，因为我们知道，安装了应用的客户的生命周期价值要高得多。我们希望小心，以免驱使用户卸载应用。
+面试官 — 我同意你选择的主要指标，但你可以忽略这个练习中的次要指标。在防护指标方面你做得很对。Doordash 希望在涉及到他们的应用时对任何功能或发布保持谨慎，因为我们知道，安装了应用的客户的生命周期价值要高得多。我们希望小心，以免驱使用户卸载应用。
 
 面试者 — 好的，这很重要。所以我们将把卸载百分比作为我们的防护指标。
 
-**第3部分 — 选择显著性水平、功效、最小可检测效应（MDE），并计算测试所需的样本大小和持续时间**
+**第三部分 — 选择显著性水平、功效、最小可检测效应（MDE），并计算测试所需的样本大小和持续时间**
 
 *面试官关注的内容 -*
 
 > *你对统计概念和样本大小及持续时间的计算的了解*
 > 
-> *你是否考虑了网络效应（在双边市场如Doordash、Uber、Lyft、Airbnb或社交网络如Facebook和LinkedIn中常见）、星期几效应、季节性或新奇效应，这些因素可能会影响测试的有效性，并需要在制定实验设计时加以考虑*
+> *你是否考虑了网络效应（在双边市场如 Doordash、Uber、Lyft、Airbnb 或社交网络如 Facebook 和 LinkedIn 中常见）、星期几效应、季节性或新奇效应，这些因素可能会影响测试的有效性，并需要在制定实验设计时加以考虑*
 
 面试者 — 现在，我想讨论实验设计。
 
-首先，我们需要考虑**网络效应**——这些效应发生在对照组的行为受到施加于实验组的处理影响时。由于Doordash是一个双边市场，它更容易出现网络效应。在这个具体案例中，如果对实验组施加的处理增加了该组的需求，可能会导致供应（即配送员）的不足，从而影响对照组的表现。
+首先，我们需要考虑**网络效应**——这些效应发生在对照组的行为受到施加于实验组的处理影响时。由于 Doordash 是一个双边市场，它更容易出现网络效应。在这个具体案例中，如果对实验组施加的处理增加了该组的需求，可能会导致供应（即配送员）的不足，从而影响对照组的表现。
 
 为了考虑网络效应，我们需要选择不同于我们通常选择的**随机化单位**。有许多方法可以做到这一点——我们可以进行**基于地理的随机化**，或**基于时间的随机化**，或**网络集群随机化**，或**网络自中心随机化**。你想让我详细讲解这些方法吗？
 
-面试官 — 我很高兴你提到了网络效应，事实上，这是我们在Doordash实验中认真观察的内容。为了节省时间，我们假设这里不存在网络效应，继续前进吧。
+面试官 — 我很高兴你提到了网络效应，事实上，这是我们在 Doordash 实验中认真观察的内容。为了节省时间，我们假设这里不存在网络效应，继续前进吧。
 
 面试者 — 如果我们假设没有需要考虑的网络效应，那么实验的**随机化单位**就是用户——即，我们将随机选择用户并将他们分配到处理组和对照组。处理组将收到通知，而对照组不会收到任何通知。接下来，我想计算样本大小和持续时间。为此，我需要一些输入。
 
@@ -116,7 +116,7 @@ A/B 测试是一项需求量大的技能，常在数据科学面试中被考察�
 
 面试官 — 好的，这很公平。你会如何分析测试结果？
 
-**第 4 部分 — 分析结果并得出有效结论**
+**第四部分 — 分析结果并得出有效结论**
 
 *面试官想要了解的内容 -*
 
@@ -130,7 +130,7 @@ A/B 测试是一项需求量大的技能，常在数据科学面试中被考察�
 
 +   **检查随机化** — 作为最佳实践，我们应该检查在分配测试和对照组时随机化是否正确。为此，我们可以查看一些不受测试影响的基线指标，并对比这两个组的这些指标。我们可以通过比较这两个组的直方图或密度曲线来进行比较。如果没有差异，我们可以得出随机化正确的结论。
 
-+   **所有指标的显著性测试**（包括主要指标和保护指标） — 我们的主要指标（转化率）和保护指标（卸载率）都是比例。我们可以使用z检验来测试统计显著性。我们可以使用R或Python等编程语言来进行这一测试。
++   **所有指标的显著性测试**（包括主要指标和保护指标） — 我们的主要指标（转化率）和保护指标（卸载率）都是比例。我们可以使用 z 检验来测试统计显著性。我们可以使用 R 或 Python 等编程语言来进行这一测试。
 
 如果转化率有统计学显著增加且卸载率未受到负面影响，我建议实施该测试。
 
@@ -142,23 +142,23 @@ A/B 测试是一项需求量大的技能，常在数据科学面试中被考察�
 
 ### 结论
 
-在A/B测试或实验面试中表现出色将为你提供招聘过程中的优势，并使你从其他候选人中脱颖而出。因此，我强烈建议专注时间学习A/B测试的关键概念，并为这些面试做好充分准备。
+在 A/B 测试或实验面试中表现出色将为你提供招聘过程中的优势，并使你从其他候选人中脱颖而出。因此，我强烈建议专注时间学习 A/B 测试的关键概念，并为这些面试做好充分准备。
 
 我推荐的几个好资源 —
 
-+   [产品A/B测试完整课程与面试指南](https://www.udemy.com/course/product-experimentation-ab-testing-in-r-with-real-examples/?couponCode=A1E0CB457DED2602EEAB) *(免责声明 — 我是该课程的讲师)*
++   [产品 A/B 测试完整课程与面试指南](https://www.udemy.com/course/product-experimentation-ab-testing-in-r-with-real-examples/?couponCode=A1E0CB457DED2602EEAB) *(免责声明 — 我是该课程的讲师)*
 
-+   如果你对实验有高级知识，这本书很适合回顾关键概念 — 罗恩·科哈维、黛安·唐和夏雅的《[值得信赖的在线控制实验（A/B测试实用指南）](https://www.amazon.com/gp/product/1108724264/)》
++   如果你对实验有高级知识，这本书很适合回顾关键概念 — 罗恩·科哈维、黛安·唐和夏雅的《[值得信赖的在线控制实验（A/B 测试实用指南）](https://www.amazon.com/gp/product/1108724264/)》
 
 [原文](https://towardsdatascience.com/cracking-a-b-testing-data-science-interviews-bc66e399b109)。经授权转载。
 
-**简介：** [Preeti Semwal](https://www.linkedin.com/in/preeti-semwal/) 拥有15年的经验，帮助组织将数据科学和分析的力量融入业务战略。凭借通过数据讲述故事的卓越能力以及向高层管理人员展示的丰富经验，Preeti 是一位真正相信赋能、培养和倡导团队的领导者。
+**简介：** [Preeti Semwal](https://www.linkedin.com/in/preeti-semwal/) 拥有 15 年的经验，帮助组织将数据科学和分析的力量融入业务战略。凭借通过数据讲述故事的卓越能力以及向高层管理人员展示的丰富经验，Preeti 是一位真正相信赋能、培养和倡导团队的领导者。
 
 **相关：**
 
-+   [关于A/B测试的5件事](https://www.kdnuggets.com/2018/09/5-things-know-about-ab-testing.html)
++   [关于 A/B 测试的 5 件事](https://www.kdnuggets.com/2018/09/5-things-know-about-ab-testing.html)
 
-+   [A/B测试：数据科学面试中的7个常见问题及答案，第1部分](https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-1.html)
++   [A/B 测试：数据科学面试中的 7 个常见问题及答案，第一部分](https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-1.html)
 
 +   [A/B 测试：数据科学面试中的 7 个常见问题及答案，第二部分](https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html)
 

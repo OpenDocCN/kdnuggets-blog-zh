@@ -1,8 +1,8 @@
 # 生成代理研究论文阅读推荐
 
-> 原文：[https://www.kdnuggets.com/generative-agent-research-papers-you-should-read](https://www.kdnuggets.com/generative-agent-research-papers-you-should-read)
+> 原文：[`www.kdnuggets.com/generative-agent-research-papers-you-should-read`](https://www.kdnuggets.com/generative-agent-research-papers-you-should-read)
 
-![生成代理研究论文阅读推荐](../Images/de055e807dc0ff09c73c804fcdd73ab0.png)
+![生成代理研究论文阅读推荐](img/de055e807dc0ff09c73c804fcdd73ab0.png)
 
 图片来源于 [pikisuperstar](https://www.freepik.com/free-vector/hand-drawn-bodyguard-illustration_40126467.htm#query=generative%20agents&position=0&from_view=search&track=ais) 在 [Freepik](https://www.freepik.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -32,9 +32,9 @@
 
 这些反思和计划系统与内存流协同工作，影响代理的未来行为。
 
-为了模拟上述系统，研究人员专注于创建一个受《模拟人生》游戏启发的互动代理社会。上述架构与ChatGPT连接，并成功展示了其沙盒内的25个代理互动。以下图像展示了一整天代理活动的一个示例。
+为了模拟上述系统，研究人员专注于创建一个受《模拟人生》游戏启发的互动代理社会。上述架构与 ChatGPT 连接，并成功展示了其沙盒内的 25 个代理互动。以下图像展示了一整天代理活动的一个示例。
 
-![生成代理研究论文阅读推荐](../Images/e2e7316fdb15cc94f0b28c8979747c93.png)
+![生成代理研究论文阅读推荐](img/e2e7316fdb15cc94f0b28c8979747c93.png)
 
 生成代理的日常活动和互动（Park *et al*., 2023）
 
@@ -46,25 +46,25 @@
 
 [软件开发的交流代理论文](https://arxiv.org/pdf/2307.07924v3.pdf)（Quan *et al.*, 2023）是一种通过生成代理来革命性改进软件开发的新方法。研究人员提出的前提是如何利用大型语言模型（LLM）的自然语言沟通来简化和统一整个软件开发过程。任务包括开发代码、生成文档、分析需求等。
 
-研究人员指出，使用LLM生成整个软件面临两个主要挑战：幻觉和决策过程中缺乏交叉检查。为了解决这些问题，研究人员提出了一种基于聊天的软件开发框架，称为ChatDev。
+研究人员指出，使用 LLM 生成整个软件面临两个主要挑战：幻觉和决策过程中缺乏交叉检查。为了解决这些问题，研究人员提出了一种基于聊天的软件开发框架，称为 ChatDev。
 
-ChatDev框架分为四个阶段：设计、编码、测试和文档编写。在每个阶段中，ChatDev会建立几个具有不同角色的代理，例如代码审阅员、软件程序员等。为了确保代理之间的通信顺畅，研究人员开发了一个聊天链，将各个阶段划分为顺序原子子任务。每个子任务都实现了代理之间的协作和互动。
+ChatDev 框架分为四个阶段：设计、编码、测试和文档编写。在每个阶段中，ChatDev 会建立几个具有不同角色的代理，例如代码审阅员、软件程序员等。为了确保代理之间的通信顺畅，研究人员开发了一个聊天链，将各个阶段划分为顺序原子子任务。每个子任务都实现了代理之间的协作和互动。
 
-ChatDev框架如下图所示。
+ChatDev 框架如下图所示。
 
-![你应该阅读的生成代理研究论文](../Images/0e301ea74a7108fbeff5e0bdd1900a09.png)
+![你应该阅读的生成代理研究论文](img/0e301ea74a7108fbeff5e0bdd1900a09.png)
 
-提出的ChatDev框架（Quan *et al.*, 2023）
+提出的 ChatDev 框架（Quan *et al.*, 2023）
 
-研究人员进行了各种实验来测量ChatDev框架在软件开发中的表现。通过使用*gpt3.5-turbo-16k*，以下是软件统计实验的表现。
+研究人员进行了各种实验来测量 ChatDev 框架在软件开发中的表现。通过使用*gpt3.5-turbo-16k*，以下是软件统计实验的表现。
 
-![你应该阅读的生成代理研究论文](../Images/8388482d3072479460aece7a7df5572b.png)
+![你应该阅读的生成代理研究论文](img/8388482d3072479460aece7a7df5572b.png)
 
-ChatDev框架软件统计数据（Quan *et al.*, 2023）
+ChatDev 框架软件统计数据（Quan *et al.*, 2023）
 
-上述数字是关于ChatDev生成的软件系统的统计分析指标。例如，生成的代码行数最少为39行，最多为359行。研究人员还展示了生成的软件系统中有86.66%正常工作。
+上述数字是关于 ChatDev 生成的软件系统的统计分析指标。例如，生成的代码行数最少为 39 行，最多为 359 行。研究人员还展示了生成的软件系统中有 86.66%正常工作。
 
-这是一篇很棒的论文，展示了改变开发者工作方式的潜力。进一步阅读论文以了解ChatDev的完整实现。完整代码也可以在ChatDev的[仓库](https://github.com/openbmb/chatdev)中找到。
+这是一篇很棒的论文，展示了改变开发者工作方式的潜力。进一步阅读论文以了解 ChatDev 的完整实现。完整代码也可以在 ChatDev 的[仓库](https://github.com/openbmb/chatdev)中找到。
 
 ## 2\. AgentVerse：促进多代理协作并探索代理中的涌现行为
 
@@ -82,13 +82,13 @@ AgentVerse 框架试图将框架拆分为四个步骤，包括：
 
 AgentVerse 的整体结构如下面的图像所示。
 
-![你应该阅读的生成代理研究论文](../Images/8252848c049dc5a46f17db9e712b9cc7.png)
+![你应该阅读的生成代理研究论文](img/8252848c049dc5a46f17db9e712b9cc7.png)
 
 AgentVerse 框架（Chen *et al.*, 2023）
 
 研究人员对该框架进行了实验，并将 AgentVerse 框架与单一代理解决方案进行了比较。结果如下面的图像所示。
 
-![你应该阅读的生成代理研究论文](../Images/08e558f4e54d4c6f76389deff904a893.png)
+![你应该阅读的生成代理研究论文](img/08e558f4e54d4c6f76389deff904a893.png)
 
 AgentVerse 性能分析（Chen *et al.*, 2023）
 
@@ -100,15 +100,15 @@ AgentVerse 框架在所有展示的任务中通常优于单个代理。这证明
 
 AgentSims 是一个具有互动和可视化基础设施的程序，用于策划 LLM 的评估任务。AgentSims 的总体目标是为研究人员和专家提供一个平台，以简化任务设计过程，并将其作为评估工具。AgentSims 的前端如下面的图像所示。
 
-![你应该阅读的生成代理研究论文](../Images/99db7c0d1d441547bc7f5df1a0496889.png)
+![你应该阅读的生成代理研究论文](img/99db7c0d1d441547bc7f5df1a0496889.png)
 
-AgentSims前端（林*等人*., 2023）
+AgentSims 前端（林*等人*., 2023）
 
-由于AgentSims的目标是为需要更简单LLM评估的方法的每个人提供服务，研究人员开发了可以与用户界面交互的前端。你还可以在他们的[网站](https://agentsims.com/)上尝试完整演示，或在AgentSims的[代码库](https://github.com/py499372727/AgentSims/)中访问完整代码。
+由于 AgentSims 的目标是为需要更简单 LLM 评估的方法的每个人提供服务，研究人员开发了可以与用户界面交互的前端。你还可以在他们的[网站](https://agentsims.com/)上尝试完整演示，或在 AgentSims 的[代码库](https://github.com/py499372727/AgentSims/)中访问完整代码。
 
 # 结论
 
-生成智能体是LLMs中模拟人类行为的一种新方法。最新的研究由Park *等人*., 2023进行，展示了生成智能体的巨大潜力。这就是为什么许多基于生成智能体的研究不断涌现，并开启了许多新领域。
+生成智能体是 LLMs 中模拟人类行为的一种新方法。最新的研究由 Park *等人*., 2023 进行，展示了生成智能体的巨大潜力。这就是为什么许多基于生成智能体的研究不断涌现，并开启了许多新领域。
 
 在这篇文章中，我们讨论了三种不同的生成智能体研究，包括：
 
@@ -118,18 +118,18 @@ AgentSims前端（林*等人*., 2023）
 
 3. AgentSims: 一个开源的大型语言模型评估沙盒（[林*等人*., 2023](https://arxiv.org/pdf/2308.04026.pdf)）
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。虽然全职在印尼安联工作，他还是喜欢通过社交媒体和写作媒体分享Python和数据技巧。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。虽然全职在印尼安联工作，他还是喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。
 
 ### 更多相关话题
 
-+   [理解AI中的智能体环境](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
++   [理解 AI 中的智能体环境](https://www.kdnuggets.com/2022/05/understanding-agent-environment-ai.html)
 
-+   [KDnuggets新闻，4月27日：关于带代码的论文简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
++   [KDnuggets 新闻，4 月 27 日：关于带代码的论文简要介绍；…](https://www.kdnuggets.com/2022/n17.html)
 
-+   [过去12个月必读的自然语言处理论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
++   [过去 12 个月必读的自然语言处理论文](https://www.kdnuggets.com/2023/03/must-read-nlp-papers-last-12-months.html)
 
-+   [2023年需阅读的顶级机器学习论文](https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html)
++   [2023 年需阅读的顶级机器学习论文](https://www.kdnuggets.com/2023/03/top-machine-learning-papers-read-2023.html)
 
-+   [2024年需阅读的5篇机器学习论文](https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024)
++   [2024 年需阅读的 5 篇机器学习论文](https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024)
 
 +   [自然语言处理初学者的研究论文](https://www.kdnuggets.com/2022/11/research-papers-nlp-beginners.html)

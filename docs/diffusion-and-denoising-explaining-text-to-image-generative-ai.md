@@ -1,8 +1,8 @@
 # 扩散与去噪：解释文本到图像生成 AI
 
-> 原文：[https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)
+> 原文：[`www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai`](https://www.kdnuggets.com/diffusion-and-denoising-explaining-text-to-image-generative-ai)
 
-![扩散与去噪：解释文本到图像生成 AI](../Images/ddf316fd3e2893f67a9d64b6401c6fef.png)
+![扩散与去噪：解释文本到图像生成 AI](img/ddf316fd3e2893f67a9d64b6401c6fef.png)
 
 ## 扩散的概念
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-![扩散和去噪过程](../Images/e53be5f6aad31b14b122d1a17b57103c.png)
+![扩散和去噪过程](img/e53be5f6aad31b14b122d1a17b57103c.png)
 
 与本节顶部的图像不同，现代扩散模型不会直接从添加噪声的图像中预测噪声。相反，它们在图像的潜在空间表示中预测噪声。潜在空间以压缩的数值特征集表示图像，这是变分自编码器或 [VAE](https://en.wikipedia.org/wiki/Variational_autoencoder) 编码模块的输出。这个技巧使得“潜在”被包含在 [潜在扩散](https://arxiv.org/pdf/2112.10752.pdf) 中，并大大减少了生成图像的时间和计算需求。正如论文作者所报告的，潜在扩散使得推理速度比直接扩散快至少约 2.7 倍，并且训练速度快约三倍。
 
 使用潜在扩散的人们经常谈到使用“扩散模型”，但实际上，扩散过程涉及几个模块。如上图所示，文本到图像工作流程的扩散管道通常包括一个文本嵌入模型（及其分词器）、一个去噪预测/扩散模型和一个图像解码器。潜在扩散的另一个重要部分是调度器，它决定了噪声如何在一系列“时间步骤”（一系列逐步更新，逐渐从潜在空间中去除噪声）中被缩放和更新。
 
-![潜在扩散模型架构图](../Images/e3eb94eb011d1bc8106e89dc07afa10a.png)
+![潜在扩散模型架构图](img/e3eb94eb011d1bc8106e89dc07afa10a.png)
 
 ## 潜在扩散代码示例
 
@@ -216,7 +216,7 @@ else:
 
 ### 引导比例
 
-如果你使用非常不寻常的文本提示（与数据集中的提示大相径庭），可能会进入潜在空间的较少涉足部分。空提示嵌入提供了平衡，按照guidance_scale将两者结合起来可以在提示的具体性与常见图像特征之间进行权衡。
+如果你使用非常不寻常的文本提示（与数据集中的提示大相径庭），可能会进入潜在空间的较少涉足部分。空提示嵌入提供了平衡，按照 guidance_scale 将两者结合起来可以在提示的具体性与常见图像特征之间进行权衡。
 
 ```py
 guidance_images = []
@@ -293,7 +293,7 @@ grid_show(my_output_trappist1e.images)
 plt.show()
 ```
 
-![扩散图像变体测试](../Images/23eb7c1af72b1ce4acf0e8bc46b4e436.png)
+![扩散图像变体测试](img/23eb7c1af72b1ce4acf0e8bc46b4e436.png)
 
 通过向模型提供一个初始图像示例，我们可以生成类似的图像。你还可以使用文本引导的图像到图像流程，通过增加引导、添加负面提示以及更多如“非现实主义”或“水彩”或“纸上素描”等来改变图像的风格。你的结果可能会有所不同，调整提示将是找到你想创建的正确图像的最简单方法。
 

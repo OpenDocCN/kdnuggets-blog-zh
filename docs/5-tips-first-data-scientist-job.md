@@ -1,12 +1,12 @@
 # 5 个获得第一份数据科学家工作的技巧
 
-> 原文：[https://www.kdnuggets.com/2021/11/5-tips-first-data-scientist-job.html](https://www.kdnuggets.com/2021/11/5-tips-first-data-scientist-job.html)
+> 原文：[`www.kdnuggets.com/2021/11/5-tips-first-data-scientist-job.html`](https://www.kdnuggets.com/2021/11/5-tips-first-data-scientist-job.html)
 
-[评论](#comments)
+评论
 
 **由 [Renato Boemer](https://www.linkedin.com/in/renatoboemer/) 提供，Renato Boemer**
 
-![](../Images/a98e0ab38a9b14c62f212d0a166db810.png)
+![](img/a98e0ab38a9b14c62f212d0a166db810.png)
 
 由 [Sam Dan Truong](https://unsplash.com/@sam_truong?utm_source=medium&utm_medium=referral) 拍摄，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -28,7 +28,7 @@
 
 此外，我和另外两个训练营的校友创建了一个 Slack 频道。在这个频道中，我们分享我们的简历、求职信、面试和测试的反馈。我们讨论面试问题和答案，并且我们总是分享我们的代码和笔记本以互相帮助。不要害怕分享你的工作，而是学会合作。毕竟，你有相同的目标：尽快成为数据科学家。
 
-![](../Images/fd5c2d3a33f88333337c847b3ac30372.png)
+![](img/fd5c2d3a33f88333337c847b3ac30372.png)
 
 图片来源： [JESHOOTS.COM](https://unsplash.com/@jeshoots?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -44,7 +44,7 @@
 
 了解你想要什么而没有经历过它是有些抽象的。你怎么知道你想成为数据科学家，而不是机器学习工程师、数据工程师或数据分析师？起初，这些职位看起来都很相似，也许你会接受其中任何一个作为你的第一份工作。嗯，这就是我最初的想法，而这是一个错误。
 
-求职阶段的关键区别在于面试的准备。如果你知道你想要一个数据科学家职位，确保你确切知道数据科学家做什么。在研究过程中，一些细微差别将开始显现。例如，数据科学家往往不使用由数据分析师使用的Tableau，或由数据工程师使用的Docker。你不需要掌握广泛的数据科学知识，而是可以提高你在新工作中需要的知识深度。一些示例包括Pandas、Numpy、Scikit-learn的线性和逻辑回归、matplotlib和seaborn。如果你掌握了这些，我相信你很快就会找到数据科学家职位。
+求职阶段的关键区别在于面试的准备。如果你知道你想要一个数据科学家职位，确保你确切知道数据科学家做什么。在研究过程中，一些细微差别将开始显现。例如，数据科学家往往不使用由数据分析师使用的 Tableau，或由数据工程师使用的 Docker。你不需要掌握广泛的数据科学知识，而是可以提高你在新工作中需要的知识深度。一些示例包括 Pandas、Numpy、Scikit-learn 的线性和逻辑回归、matplotlib 和 seaborn。如果你掌握了这些，我相信你很快就会找到数据科学家职位。
 
 ## **5- **学会接受拒绝**
 
@@ -52,21 +52,21 @@
 
 然而，随着时间的推移，拒绝不断涌入你的收件箱，你的动力水平不可避免地会下降。数据科学家职位有很多，同时候选人数量也在增加。此外，招聘过程很慢，但从候选人的角度来看更慢。我在新工作后收到拒绝邮件。这是正常的，接受拒绝。
 
-保持动力的一个方法是与一群正在经历相同过程的朋友分享。正如我之前所说，创建一个与其他校友的Slack频道，分享你的挫折。我相信他们也正在经历相同的事情。这很重要，因为你会发现你并不是编程不行，只是时间、坚持和努力的问题。
+保持动力的一个方法是与一群正在经历相同过程的朋友分享。正如我之前所说，创建一个与其他校友的 Slack 频道，分享你的挫折。我相信他们也正在经历相同的事情。这很重要，因为你会发现你并不是编程不行，只是时间、坚持和努力的问题。
 
 ### 永不放弃！
 
-**想要获取Medium文章的完整访问权限并支持我的工作？每月仅需5美元。请使用下面的链接订阅：**
+**想要获取 Medium 文章的完整访问权限并支持我的工作？每月仅需 5 美元。请使用下面的链接订阅：**
 
-**[通过我的推荐链接加入Medium — Renato Boemer](https://boemer.medium.com/membership)**
+**[通过我的推荐链接加入 Medium — Renato Boemer](https://boemer.medium.com/membership)**
 
 ### **以下是一些你可能感兴趣的文章：**
 
-[**提升生产力：使用Python和Pandas进行数据清理**](https://towardsdatascience.com/increase-productivity-data-cleaning-using-python-and-pandas-5e369f898012)
+[**提升生产力：使用 Python 和 Pandas 进行数据清理**](https://towardsdatascience.com/increase-productivity-data-cleaning-using-python-and-pandas-5e369f898012)
 
 [**什么让数据科学家脱颖而出？**](https://towardsdatascience.com/what-makes-a-data-scientist-stand-out-e8822f466d4c)
 
-[**在30多岁时转行成为数据科学家。**](https://towardsdatascience.com/switching-career-to-data-science-in-your-30s-6122e51a18a3)
+[**在 30 多岁时转行成为数据科学家。**](https://towardsdatascience.com/switching-career-to-data-science-in-your-30s-6122e51a18a3)
 
 **简介：[Renato Boemer](https://www.linkedin.com/in/renatoboemer/)** 是一位以影响力为导向的数据科学专业人士，拥有创新和营销背景，使他能够将统计学、编程和商业洞察力相结合。
 
@@ -74,21 +74,21 @@
 
 **相关：**
 
-+   [数据科学家职业路径从新手到第一份工作](/2021/11/data-scientist-career-path-first-job.html)
++   数据科学家职业路径从新手到第一份工作
 
-+   [数据科学家：如何推销你的项目和你自己](/2021/11/data-scientists-sell-project.html)
++   数据科学家：如何推销你的项目和你自己
 
-+   [数据科学家的虚拟演讲技巧](/2021/11/virtual-presentation-tips-data-scientists.html)
++   数据科学家的虚拟演讲技巧
 
 ### 相关话题更多内容
 
 +   [如何在没有任何工作经验的情况下获得第一份数据科学职位](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
-+   [获得第一份数据科学职位的7个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
++   [获得第一份数据科学职位的 7 个步骤](https://www.kdnuggets.com/7-steps-to-landing-your-first-data-science-job)
 
 +   [我如何获得第一份数据科学家职位](https://www.kdnuggets.com/2023/02/got-first-job-data-scientist.html)
 
-+   [获得第一份开发者职位的5个免费认证](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
++   [获得第一份开发者职位的 5 个免费认证](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
 
 +   [如何作为学生获得数据科学职位](https://www.kdnuggets.com/how-to-get-a-job-in-data-science-as-a-student)
 

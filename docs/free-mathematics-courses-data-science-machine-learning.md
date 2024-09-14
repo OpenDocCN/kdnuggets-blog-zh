@@ -1,8 +1,8 @@
 # 数据科学与机器学习的免费数学课程
 
-> 原文：[https://www.kdnuggets.com/2020/02/free-mathematics-courses-data-science-machine-learning.html](https://www.kdnuggets.com/2020/02/free-mathematics-courses-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/02/free-mathematics-courses-data-science-machine-learning.html`](https://www.kdnuggets.com/2020/02/free-mathematics-courses-data-science-machine-learning.html)
 
-[评论](#comments)
+评论
 
 你是否有兴趣学习成功数据科学职业的基础知识？或者你是否希望复习数学知识，或者通过扩展基础来加深理解？
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 查看一下列表，并仔细检查那些可能对你感兴趣的课程。希望你能找到有用的东西。
 
-![数学](../Images/7cdcf7cb797cdddb98db0c07ba4fc558.png)
+![数学](img/7cdcf7cb797cdddb98db0c07ba4fc558.png)
 
 原图来自 [Chuk Yong](https://pixabay.com/users/Pixapopz-2873171/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1500720) [Pixabay](https://pixabay.com/?utm_source=link-attribution&utm_medium=referral&utm_campaign=image&utm_content=1500720)
 
@@ -64,7 +64,7 @@
 
 +   **[线性模型与矩阵代数入门，哈佛大学](https://www.edx.org/course/introduction-to-linear-models-and-matrix-algebra)**（课程）
 
-    在这门数据分析的入门在线课程中，我们将使用矩阵代数来表示常用来模拟实验单位之间差异的线性模型。我们对这些差异进行统计推断。在整个课程中，我们将使用R编程语言来执行矩阵操作。
+    在这门数据分析的入门在线课程中，我们将使用矩阵代数来表示常用来模拟实验单位之间差异的线性模型。我们对这些差异进行统计推断。在整个课程中，我们将使用 R 编程语言来执行矩阵操作。
 
 **微积分**
 
@@ -116,11 +116,11 @@
 
 +   **[提升你的统计推断能力，埃因霍温理工大学](https://www.coursera.org/learn/statistical-inferences)**（课程）
 
-    首先，我们将讨论如何正确解读p值、效应量、置信区间、贝叶斯因子和似然比，以及这些统计数据如何回答你可能感兴趣的不同问题。然后，你将学习如何设计实验以控制假阳性率，以及如何确定研究的样本量，例如为了实现高统计效能。随后，你将学习如何在科学文献中解读证据，考虑到广泛存在的发表偏倚，例如通过学习p曲线分析。最后，我们将讨论如何进行科学哲学、理论构建和累积科学，包括如何进行重复性研究，为什么以及如何预注册你的实验，以及如何按照开放科学原则分享你的结果。
+    首先，我们将讨论如何正确解读 p 值、效应量、置信区间、贝叶斯因子和似然比，以及这些统计数据如何回答你可能感兴趣的不同问题。然后，你将学习如何设计实验以控制假阳性率，以及如何确定研究的样本量，例如为了实现高统计效能。随后，你将学习如何在科学文献中解读证据，考虑到广泛存在的发表偏倚，例如通过学习 p 曲线分析。最后，我们将讨论如何进行科学哲学、理论构建和累积科学，包括如何进行重复性研究，为什么以及如何预注册你的实验，以及如何按照开放科学原则分享你的结果。
 
 +   **[概率与数据介绍，杜克大学](https://www.coursera.org/learn/probability-intro)**（课程）
 
-    本课程介绍了数据采样与探索的基本知识，以及基本的概率理论和贝叶斯规则。你将研究各种采样方法，并讨论这些方法如何影响推断的范围。课程将涵盖多种探索性数据分析技术，包括数值汇总统计和基本数据可视化。你将被指导安装和使用R及RStudio（免费的统计软件），并将使用这些软件进行实验练习和最终项目。本课程中的概念和技术将作为专业课程中推断和建模课程的基础。
+    本课程介绍了数据采样与探索的基本知识，以及基本的概率理论和贝叶斯规则。你将研究各种采样方法，并讨论这些方法如何影响推断的范围。课程将涵盖多种探索性数据分析技术，包括数值汇总统计和基本数据可视化。你将被指导安装和使用 R 及 RStudio（免费的统计软件），并将使用这些软件进行实验练习和最终项目。本课程中的概念和技术将作为专业课程中推断和建模课程的基础。
 
 +   **[概率论与数理统计，宾州州立大学](https://online.stat.psu.edu/stat414/)**（课程）
 
@@ -146,9 +146,9 @@
 
 +   [15 个数据科学数学 MOOC](https://www.kdnuggets.com/2015/09/15-math-mooc-data-science.html)
 
-+   [基于高中知识的机器学习和人工智能简介](/2020/02/intro-machine-learning-ai.html)
++   基于高中知识的机器学习和人工智能简介
 
-+   [贝叶斯背后的数学](/2019/11/math-behind-bayes.html)
++   贝叶斯背后的数学
 
 ### 更多相关内容
 

@@ -1,14 +1,14 @@
 # 在 Google Colaboratory 上掌握快速梯度提升与免费 GPU
 
-> 原文：[https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html](https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html)
+> 原文：[`www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html`](https://www.kdnuggets.com/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者 [Anna Veronika Dorogush](https://www.linkedin.com/in/anna-veronika-dorogush-08739637/)，CatBoost 团队负责人**
 
-![掌握梯度提升图 1](../Images/62dab8909af11b3717938905d64a8f7c.png)
+![掌握梯度提升图 1](img/62dab8909af11b3717938905d64a8f7c.png)
 
-**NVIDIA K80 GPU，[https://www.nvidia.com/ru-ru/data-center/tesla-k80/](https://www.nvidia.com/ru-ru/data-center/tesla-k80/)**
+**NVIDIA K80 GPU，[`www.nvidia.com/ru-ru/data-center/tesla-k80/`](https://www.nvidia.com/ru-ru/data-center/tesla-k80/)**
 
 **决策树上的梯度提升**（GBDT）是一个最先进的机器学习工具，用于处理异构或结构化数据。在处理数据时，理想的算法高度依赖于数据的类型。对于同质数据，如图像、声音或文本，最佳解决方案是神经网络。而对于结构化数据，例如信用评分、推荐或其他表格数据，最佳解决方案是 GBDT。
 
@@ -20,7 +20,7 @@
 
 该库是在领先的俄罗斯科技公司 [Yandex](https://yandex.com) 的生产需求下开发的，约一年半前以 [Apache 2 许可证](https://en.wikipedia.org/wiki/Apache_License) 开源。
 
-![掌握梯度提升图 2](../Images/9bb20a26e6a3b27261e83e1bc0a2c29f.png)
+![掌握梯度提升图 2](img/9bb20a26e6a3b27261e83e1bc0a2c29f.png)
 
 我演示的测试环境将是**Google Colaboratory**。这是一个用于机器学习的研究工具，提供免费的 GPU 运行时访问。它是一个不需要设置的 Jupyter notebook 环境。
 
@@ -32,7 +32,7 @@ Google Colaboratory 免费提供相当老旧的 GPU——一块大约 11GB 内�
 
 前往 [Colaboratory](https://colab.research.google.com) 并创建一个新的 Python 3 notebook。
 
-![掌握梯度提升 图 3](../Images/4be7e2cb46334ca9eb4ecd65f18c0d9a.png)
+![掌握梯度提升 图 3](img/4be7e2cb46334ca9eb4ecd65f18c0d9a.png)
 
 ### 设置 GPU 作为硬件加速器
 
@@ -40,11 +40,11 @@ Google Colaboratory 免费提供相当老旧的 GPU——一块大约 11GB 内�
 
 第 1 步。导航到 “Runtime” 菜单并选择 “Change runtime type”
 
-![掌握梯度提升 图 4](../Images/691557beda28be1fc217785b2b258ccd.png)
+![掌握梯度提升 图 4](img/691557beda28be1fc217785b2b258ccd.png)
 
 第 2 步。选择 “GPU” 作为硬件加速器。
 
-![掌握梯度提升 图 5](../Images/bcb8c4599e6ea3a34d6a2b89d152f19e.png)
+![掌握梯度提升 图 5](img/bcb8c4599e6ea3a34d6a2b89d152f19e.png)
 
 ### 导入 CatBoost
 
@@ -54,7 +54,7 @@ Google Colaboratory 免费提供相当老旧的 GPU——一块大约 11GB 内�
 
 *!pip install catboost*
 
-![掌握梯度提升 图 6](../Images/3ec24905d856d4a3bede106e32662599.png)
+![掌握梯度提升 图 6](img/3ec24905d856d4a3bede106e32662599.png)
 
 从 pypi 安装的 CatBoost 库支持 GPU，因此你可以直接使用它。 你只需要在机器上安装 NVIDIA 驱动程序，其他一切都会开箱即用。 这对 Windows 也适用，使得希望在 GPU 上训练模型的 Windows 用户更加轻松。
 
@@ -92,7 +92,7 @@ CatBoost 在 CPU 上训练 100 次迭代需要大约 15 分钟。
 
 如果 Colab 显示警告“GPU 内存使用接近限制”，只需点击“忽略”。
 
-![掌握梯度提升 图 7](../Images/2b65f3aa59ac6d9a48ce75e0fdbb633f.png)
+![掌握梯度提升 图 7](img/2b65f3aa59ac6d9a48ce75e0fdbb633f.png)
 
 在 GPU 上适配模型的时间：195 秒
 
@@ -122,7 +122,7 @@ GPU 相比于 CPU 的加速：4 倍
 
 代码相当简单，但一旦我们在 Epsilon 数据集上运行，Colaboratory 会话崩溃。
 
-![掌握梯度提升 图 8](../Images/95585dac0f80bdc1a163fc298f4a43cc.png)
+![掌握梯度提升 图 8](img/95585dac0f80bdc1a163fc298f4a43cc.png)
 
 不幸的是，GPU 版本也出现了相同的错误。启动上述简单代码后，内核会崩溃。
 
@@ -134,7 +134,7 @@ Colaboratory 预装的 LightGBM 版本不支持 GPU。并且 [GPU 版本的安�
 
 *!pip install -U lightgbm --install-option=--gpu*
 
-![掌握梯度提升 图 9](../Images/57c772f59ed4bf65e1531d1f68b2d360.png)
+![掌握梯度提升 图 9](img/57c772f59ed4bf65e1531d1f68b2d360.png)
 
 很遗憾，我们无法比较其他库的 CPU 与 GPU 执行时间，除了 CatBoost。可能在较小的数据集上会有效。
 
@@ -178,11 +178,11 @@ Colaboratory 预装的 LightGBM 版本不支持 GPU。并且 [GPU 版本的安�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 

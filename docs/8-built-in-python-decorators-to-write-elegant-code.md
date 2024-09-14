@@ -1,8 +1,8 @@
 # 8 种内置 Python 装饰器帮助编写优雅代码
 
-> 原文：[https://www.kdnuggets.com/8-built-in-python-decorators-to-write-elegant-code](https://www.kdnuggets.com/8-built-in-python-decorators-to-write-elegant-code)
+> 原文：[`www.kdnuggets.com/8-built-in-python-decorators-to-write-elegant-code`](https://www.kdnuggets.com/8-built-in-python-decorators-to-write-elegant-code)
 
-![8 种内置 Python 装饰器帮助编写优雅代码](../Images/9a45d20f9bd18537e1f5c2974d8fb7a8.png)
+![8 种内置 Python 装饰器帮助编写优雅代码](img/9a45d20f9bd18537e1f5c2974d8fb7a8.png)
 
 图片由编辑提供
 
@@ -12,7 +12,7 @@ Python，凭借其简洁易读的语法，是一种广泛使用的高级编程�
 
 在 Python 中，装饰器是一个函数，它允许你在不改变另一个函数核心逻辑的情况下修改其行为。它接受另一个函数作为参数，并返回具有扩展功能的函数。这样，你可以使用装饰器为现有函数添加额外逻辑，以增加可重用性，只需几行代码。本文将探讨八种内置 Python 装饰器，它们可以帮助你编写更优雅、易维护的代码。
 
-![8 种内置 Python 装饰器帮助编写优雅代码](../Images/92724f0843ac2c039dd26e41b8a9cb17.png)
+![8 种内置 Python 装饰器帮助编写优雅代码](img/92724f0843ac2c039dd26e41b8a9cb17.png)
 
 图片由编辑提供
 
@@ -79,7 +79,7 @@ Point(x=3, y=2)
 True
 ```
 
-`@dataclass`装饰器应用在Point类定义之上，告诉Python利用默认行为生成特殊方法。这会自动创建`__init__`方法，在对象实例化时初始化类属性，如x和y。因此，像point这样的实例可以在无需显式编码的情况下构造。此外，`__repr__`方法，负责提供对象的字符串表示，也会自动调整。这确保了当对象（如point）被打印时，它会生成一个清晰有序的表示，如输出所示：Point(x=3, y=2)。另外，两个实例point1和point2之间的相等比较（==）会产生True。这一点值得注意，因为默认情况下，Python基于内存位置检查相等性。然而，在dataclass对象的上下文中，相等性是由对象中包含的数据来确定的。这是因为`@dataclass`装饰器生成了一个`__eq__`方法，检查对象中数据的相等性，而不是检查相同的内存位置。
+`@dataclass`装饰器应用在 Point 类定义之上，告诉 Python 利用默认行为生成特殊方法。这会自动创建`__init__`方法，在对象实例化时初始化类属性，如 x 和 y。因此，像 point 这样的实例可以在无需显式编码的情况下构造。此外，`__repr__`方法，负责提供对象的字符串表示，也会自动调整。这确保了当对象（如 point）被打印时，它会生成一个清晰有序的表示，如输出所示：Point(x=3, y=2)。另外，两个实例 point1 和 point2 之间的相等比较（==）会产生 True。这一点值得注意，因为默认情况下，Python 基于内存位置检查相等性。然而，在 dataclass 对象的上下文中，相等性是由对象中包含的数据来确定的。这是因为`@dataclass`装饰器生成了一个`__eq__`方法，检查对象中数据的相等性，而不是检查相同的内存位置。
 
 # 3\. `@enum.unique`
 
@@ -116,7 +116,7 @@ except ValueError as e:
 Error: duplicate values found in <enum>: BUS -> MOTORCYCLE</enum>
 ```
 
-在上述实现中，“BUS”和“MOTORCYCLE”具有相同的值“3”。因此，`@unique`装饰器会引发一个ValueError，提示发现了重复的值。你不能多次使用相同的键，也不能将相同的值分配给不同的成员。通过这种方式，它帮助防止多个枚举成员的值重复。
+在上述实现中，“BUS”和“MOTORCYCLE”具有相同的值“3”。因此，`@unique`装饰器会引发一个 ValueError，提示发现了重复的值。你不能多次使用相同的键，也不能将相同的值分配给不同的成员。通过这种方式，它帮助防止多个枚举成员的值重复。
 
 # 4\. `@partial`
 
@@ -145,7 +145,7 @@ print("Output:",result)
 Output: 9
 ```
 
-在上述实现中，我们有一个名为“power”的函数，它接受两个参数“base”和“exponent”，并返回基数的指数幂结果。我们使用原始函数创建了一个名为“square”的部分函数，其中指数被预设为2。通过这种方式，我们可以使用`partial`装饰器扩展原始函数的功能。
+在上述实现中，我们有一个名为“power”的函数，它接受两个参数“base”和“exponent”，并返回基数的指数幂结果。我们使用原始函数创建了一个名为“square”的部分函数，其中指数被预设为 2。通过这种方式，我们可以使用`partial`装饰器扩展原始函数的功能。
 
 # 5\. `@singledispatch`
 
@@ -319,11 +319,11 @@ Area: 78.5
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 

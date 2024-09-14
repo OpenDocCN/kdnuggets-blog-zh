@@ -1,32 +1,32 @@
 # LinkedIn 上前 16 位活跃的大数据和数据科学领袖
 
-> 原文：[https://www.kdnuggets.com/2016/09/top-big-data-science-leaders-linkedin.html](https://www.kdnuggets.com/2016/09/top-big-data-science-leaders-linkedin.html)
+> 原文：[`www.kdnuggets.com/2016/09/top-big-data-science-leaders-linkedin.html`](https://www.kdnuggets.com/2016/09/top-big-data-science-leaders-linkedin.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)**由 [Prasad Pore](https://www.linkedin.com/in/prasadpore "Prasad Pore 的帖子")，KDnuggets。**
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论**由 [Prasad Pore](https://www.linkedin.com/in/prasadpore "Prasad Pore 的帖子")，KDnuggets。**
 
-有很多列表评估谁在 LinkedIn 上有影响力，或谁在大数据/数据科学领域活跃，但我们尚未见到结合这两个标准的列表。KDnuggets 之前的帖子 [**认识 LinkedIn 上的 11 位大数据与数据科学领袖**](/2016/05/10-big-data-data-science-leaders-linkedin.html) 关注了 LinkedIn 上拥有大量关注者的人，但其中一些人，如 Hilary Mason，自 2013 年以来未再发表过文章，而其他人主要写作的主题与大数据和数据科学无关。此帖展示了 16 位在过去 3 个月内发布过帖子并且今年至少有 3 篇相关帖子的“大数据和数据科学”领域领袖。关注者数量截至 2016 年 9 月 23 日。
+有很多列表评估谁在 LinkedIn 上有影响力，或谁在大数据/数据科学领域活跃，但我们尚未见到结合这两个标准的列表。KDnuggets 之前的帖子 **认识 LinkedIn 上的 11 位大数据与数据科学领袖** 关注了 LinkedIn 上拥有大量关注者的人，但其中一些人，如 Hilary Mason，自 2013 年以来未再发表过文章，而其他人主要写作的主题与大数据和数据科学无关。此帖展示了 16 位在过去 3 个月内发布过帖子并且今年至少有 3 篇相关帖子的“大数据和数据科学”领域领袖。关注者数量截至 2016 年 9 月 23 日。
 
-![LinkedIn 上的数据科学活跃领袖](../Images/87c6aa4ea2f75e621e9fc4f00b2b637d.png)
+![LinkedIn 上的数据科学活跃领袖](img/87c6aa4ea2f75e621e9fc4f00b2b637d.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-**1\. [Bernard Marr](https://www.linkedin.com/in/bernardmarr)** (801K 关注者) 是畅销商业作者、主题演讲者及大数据、分析和企业绩效领域的顾问。他是世界经济论坛的常客，为《福布斯》撰稿，并被CEO Journal誉为当今领先的商业头脑之一，LinkedIn 评选为全球五大商业影响者之一。
+**1\. [Bernard Marr](https://www.linkedin.com/in/bernardmarr)** (801K 关注者) 是畅销商业作者、主题演讲者及大数据、分析和企业绩效领域的顾问。他是世界经济论坛的常客，为《福布斯》撰稿，并被 CEO Journal 誉为当今领先的商业头脑之一，LinkedIn 评选为全球五大商业影响者之一。
 
 最近的帖子：[大数据：语音分析的惊人潜力](https://www.linkedin.com/pulse/big-data-mind-blowing-potential-voice-analytics-bernard-marr?trk=mp-reader-card)
 
 [大数据、人工智能和机器人技术能否引领这种令人毛骨悚然的未来？](https://www.linkedin.com/pulse/could-big-data-ai-robotics-lead-spine-chilling-future-bernard-marr?trk=mp-reader-card)
 
-**2\. [Josh Bersin](https://www.linkedin.com/in/bersin)** (427K 关注者) 是Bersin by Deloitte的创始人兼首席顾问。Bersin by Deloitte 是领先的基于研究的信息、基准测试、专业发展和咨询服务提供商，服务于战略人力资源、人才管理、领导力发展、招聘和培训组织。
+**2\. [Josh Bersin](https://www.linkedin.com/in/bersin)** (427K 关注者) 是 Bersin by Deloitte 的创始人兼首席顾问。Bersin by Deloitte 是领先的基于研究的信息、基准测试、专业发展和咨询服务提供商，服务于战略人力资源、人才管理、领导力发展、招聘和培训组织。
 
 最近的帖子： [数据证明文化、价值观和职业是雇主品牌的最大驱动因素](https://www.linkedin.com/pulse/culture-values-career-opportunities-biggest-drivers-your-josh-bersin?trk=prof-post)
 
@@ -56,27 +56,27 @@
 
 [KDnuggets 16:n32: 数据科学家曾是最性感的工作……深入了解深度学习](https://www.linkedin.com/pulse/kdnuggets-16n32-data-scientist-sexiest-job-until-up-gregory?trk=mp-reader-card)
 
-**7\. [卡拉·詹特里](https://www.linkedin.com/in/datanerd13)**（5万粉丝）是一名自由职业数据科学家，擅长全面的客户满意度和保留分析、品牌研究和竞争分析、员工保留研究、数据库创建和挖掘、调查创建和分析（新产品和品牌）。她拥有19年的行业经验。
+**7\. [卡拉·詹特里](https://www.linkedin.com/in/datanerd13)**（5 万粉丝）是一名自由职业数据科学家，擅长全面的客户满意度和保留分析、品牌研究和竞争分析、员工保留研究、数据库创建和挖掘、调查创建和分析（新产品和品牌）。她拥有 19 年的行业经验。
 
-最近的帖子: [荣幸成为O'Reilly封面女孩](https://www.linkedin.com/pulse/honored-oreilly-cover-girl-carla-gentry?trk=mp-reader-card)
+最近的帖子: [荣幸成为 O'Reilly 封面女孩](https://www.linkedin.com/pulse/honored-oreilly-cover-girl-carla-gentry?trk=mp-reader-card)
 
 [成为数据科学家](https://www.linkedin.com/pulse/being-data-scientist-carla-gentry?trk=mp-reader-card)
 
-**8. [文森特·格兰维尔](https://www.linkedin.com/in/vincentg)**（2万粉丝）是Analytic Bridge和Data Science Central的创始人。文森特曾是剑桥大学和国家统计科学研究所的博士后。
+**8. [文森特·格兰维尔](https://www.linkedin.com/in/vincentg)**（2 万粉丝）是 Analytic Bridge 和 Data Science Central 的创始人。文森特曾是剑桥大学和国家统计科学研究所的博士后。
 
-最近的帖子: [20个数据科学和机器学习主题受到极大关注](https://www.linkedin.com/pulse/20-data-science-ml-topics-getting-big-traction-vincent-granville?trk=mp-reader-card)
+最近的帖子: [20 个数据科学和机器学习主题受到极大关注](https://www.linkedin.com/pulse/20-data-science-ml-topics-getting-big-traction-vincent-granville?trk=mp-reader-card)
 
-[摇滚明星数据科学家的10个博客](https://www.linkedin.com/pulse/10-blogs-from-rock-star-data-scientists-vincent-granville?trk=mp-reader-card)
+[摇滚明星数据科学家的 10 个博客](https://www.linkedin.com/pulse/10-blogs-from-rock-star-data-scientists-vincent-granville?trk=mp-reader-card)
 
-**9\. [柯克·博恩](https://www.linkedin.com/in/kirkdborne)**（9500粉丝）是大数据和数据科学顾问、咨询师、博主、数据科学家、天体物理学家、空间科学家及演讲者。2016年：全球大数据第1位，机器学习第2位，物联网第13位影响者；2015年：大数据、第2位数据挖掘、第2位数据科学影响者。
+**9\. [柯克·博恩](https://www.linkedin.com/in/kirkdborne)**（9500 粉丝）是大数据和数据科学顾问、咨询师、博主、数据科学家、天体物理学家、空间科学家及演讲者。2016 年：全球大数据第 1 位，机器学习第 2 位，物联网第 13 位影响者；2015 年：大数据、第 2 位数据挖掘、第 2 位数据科学影响者。
 
 最近的帖子: [为了所有人的数据科学](https://www.linkedin.com/pulse/data-science-good-all-kirk-borne?trk=mp-reader-card)
 
 [数据飞扬](https://www.linkedin.com/pulse/when-data-fly-kirk-borne?trk=mp-reader-card)
 
-**10\. [鲍勃·高尔利](https://www.linkedin.com/in/robertgourley)**（7300粉丝）是Cognitio Corp.的合伙人和联合创始人，《每日威胁简报》的作者和出版人，2007年InfoWorld年度前25名CTO获奖者，2009年被《华盛顿人》杂志评为“DC科技泰坦”，曾担任国防情报局CTO。他拥有化学学士学位、国家安全事务和军事科学硕士学位以及计算机科学硕士学位。
+**10\. [鲍勃·高尔利](https://www.linkedin.com/in/robertgourley)**（7300 粉丝）是 Cognitio Corp.的合伙人和联合创始人，《每日威胁简报》的作者和出版人，2007 年 InfoWorld 年度前 25 名 CTO 获奖者，2009 年被《华盛顿人》杂志评为“DC 科技泰坦”，曾担任国防情报局 CTO。他拥有化学学士学位、国家安全事务和军事科学硕士学位以及计算机科学硕士学位。
 
-最近的帖子: [在10月4日的Synergy论坛上帮助设定企业技术的发展方向](https://www.linkedin.com/pulse/help-set-course-enterprise-technology-4-oct-synergy-forum-bob-gourley?trk=mp-reader-card)
+最近的帖子: [在 10 月 4 日的 Synergy 论坛上帮助设定企业技术的发展方向](https://www.linkedin.com/pulse/help-set-course-enterprise-technology-4-oct-synergy-forum-bob-gourley?trk=mp-reader-card)
 
 [明确且不含糊的警告：选举日可能会发生网络攻击，并可能威胁我们的宪法制度](https://www.linkedin.com/pulse/clear-unambiguous-warning-cyber-attacks-likely-occur-election-bob?trk=mp-reader-card)
 
@@ -116,15 +116,15 @@
 
 **相关：**
 
-+   [**在 LinkedIn 上认识 11 位大数据和数据科学领袖**](/2016/05/10-big-data-data-science-leaders-linkedin.html)
++   **在 LinkedIn 上认识 11 位大数据和数据科学领袖**
 
-+   [**大数据 2016：顶级影响者和品牌**](/2016/02/big-data-top-influencers-brands.html)
++   **大数据 2016：顶级影响者和品牌**
 
-+   [**前 100 名大数据专家**](/2016/01/maptive-top-big-data-experts.html)
++   **前 100 名大数据专家**
 
 ### 相关文章
 
-+   [KDnuggets 新闻，6月8日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
 +   [LinkedIn 上的前 18 个数据科学小组](https://www.kdnuggets.com/2022/06/top-18-data-science-group-linkedin.html)
 
@@ -132,6 +132,6 @@
 
 +   [LinkedIn 如何使用机器学习来排名你的动态](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)
 
-+   [KDnuggets 新闻，11月16日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何使用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
 +   [通过 LinkedIn 个人资料提高回拨率](https://www.kdnuggets.com/increase-your-callback-rate-with-a-linkedin-profile)

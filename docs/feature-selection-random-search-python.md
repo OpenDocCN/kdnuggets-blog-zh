@@ -1,22 +1,22 @@
-# Python中的随机搜索特征选择
+# Python 中的随机搜索特征选择
 
-> 原文：[https://www.kdnuggets.com/2019/08/feature-selection-random-search-python.html](https://www.kdnuggets.com/2019/08/feature-selection-random-search-python.html)
+> 原文：[`www.kdnuggets.com/2019/08/feature-selection-random-search-python.html`](https://www.kdnuggets.com/2019/08/feature-selection-random-search-python.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[吉安卢卡·马拉托](http://www.gianlucamalato.it/)，数据科学家、小说作者和软件开发者。**
 
-![](../Images/2fa60c200e38bb2510ca3c1de6181396.png)
+![](img/2fa60c200e38bb2510ca3c1de6181396.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -28,7 +28,7 @@
 
 一般来说，无监督的方法通常足以用于简单的特征选择。然而，每个模型都有**自己独特的方式**来“思考”特征以及处理特征与目标变量的相关性。此外，有些模型不太关心**多重共线性**（即特征之间的相关性），而有些模型在发生这种情况时会显示出**非常大的问题**（例如线性模型）。
 
-尽管可以通过模型引入的一些**相关性**指标来**排序**特征（例如，对线性回归系数执行的t检验的p值），但仅仅选择最相关的变量可能还不够。想象一下一个特征，它等于另一个特征，只是乘以二。这些特征之间的线性相关性为1，这种简单的乘法不会影响与目标变量的相关性，因此如果我们只选择最相关的变量，我们将得到原始特征和被乘以二的特征。这会导致**多重共线性**，这对我们的模型可能非常危险。
+尽管可以通过模型引入的一些**相关性**指标来**排序**特征（例如，对线性回归系数执行的 t 检验的 p 值），但仅仅选择最相关的变量可能还不够。想象一下一个特征，它等于另一个特征，只是乘以二。这些特征之间的线性相关性为 1，这种简单的乘法不会影响与目标变量的相关性，因此如果我们只选择最相关的变量，我们将得到原始特征和被乘以二的特征。这会导致**多重共线性**，这对我们的模型可能非常危险。
 
 这就是为什么我们必须引入某种方法来更好地选择特征。
 
@@ -56,23 +56,23 @@
 
 随机搜索可以用于特征选择，效果**相当好**。类似于随机搜索的一个例子是**随机森林**模型，它对每棵树进行特征的随机选择。
 
-这个想法很简单：**随机**选择特征，通过**k折交叉验证**来测量模型性能，并重复多次。给出最佳性能的特征组合就是我们所寻找的。
+这个想法很简单：**随机**选择特征，通过**k 折交叉验证**来测量模型性能，并重复多次。给出最佳性能的特征组合就是我们所寻找的。
 
 更准确地说，以下是需要遵循的步骤：
 
-1.  生成一个随机整数*N*，范围在1到特征数量之间。
+1.  生成一个随机整数*N*，范围在 1 到特征数量之间。
 
-1.  生成一个随机的*N*整数序列，范围在0到*N-1*之间，且不重复。这个序列表示我们的特征数组。请记住，Python数组是从0开始的。
+1.  生成一个随机的*N*整数序列，范围在 0 到*N-1*之间，且不重复。这个序列表示我们的特征数组。请记住，Python 数组是从 0 开始的。
 
-1.  在这些特征上训练模型，并使用k折交叉验证进行交叉验证，保存**某些性能指标的平均值**。
+1.  在这些特征上训练模型，并使用 k 折交叉验证进行交叉验证，保存**某些性能指标的平均值**。
 
-1.  从第1点开始重复，次数可以随意。
+1.  从第 1 点开始重复，次数可以随意。
 
 1.  最后，获取根据所选择的性能指标提供最佳性能的特征数组。
 
-### Python中的一个实际示例
+### Python 中的一个实际示例
 
-对于这个示例，我将使用**乳腺癌数据集**，它包含在**sklearn**模块中。我们的模型将是**逻辑回归**，并且我们将使用**准确率**作为性能指标进行5折交叉验证。
+对于这个示例，我将使用**乳腺癌数据集**，它包含在**sklearn**模块中。我们的模型将是**逻辑回归**，并且我们将使用**准确率**作为性能指标进行 5 折交叉验证。
 
 首先，我们必须导入必要的模块。
 
@@ -100,7 +100,7 @@ lr = LogisticRegression()
 
 ```
 
-然后，我们可以在k折交叉验证中测量所有特征的平均准确率。
+然后，我们可以在 k 折交叉验证中测量所有特征的平均准确率。
 
 ```py
 # Model accuracy using all the features
@@ -109,9 +109,9 @@ np.mean(cross_val_score(lr,data,target,cv=5,scoring="accuracy"))
 
 ```
 
-这是95%。我们要记住这一点。
+这是 95%。我们要记住这一点。
 
-现在，我们可以实现一个例如300次迭代的随机搜索。
+现在，我们可以实现一个例如 300 次迭代的随机搜索。
 
 ```py
 result = []
@@ -178,4 +178,4 @@ np.mean(cross_val_score(lr, data[:,result[0][‘columns’]], target, cv=5, scor
 
 +   [通过 Uplimit 的机器学习课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
 
-+   [构建视觉搜索引擎 - 第 2 部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)

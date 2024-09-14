@@ -1,22 +1,22 @@
 # 传统编程和机器学习有多大不同？
 
-> 原文：[https://www.kdnuggets.com/2018/12/different-conventional-programming-machine-learning.html](https://www.kdnuggets.com/2018/12/different-conventional-programming-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/12/different-conventional-programming-machine-learning.html`](https://www.kdnuggets.com/2018/12/different-conventional-programming-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Avneesh Sharma，技术产品管理**
 
-![标题图片](../Images/15028624695298db41beacf31e05677d.png)
+![标题图片](img/15028624695298db41beacf31e05677d.png)
 
 工程让我们突破了人类能力的极限。我们利用对自然的理解来服务于我们的目的。无论是高性能的机械设备还是编码的硅芯片，计算机迄今为止是自然力量最复杂的应用之一，帮助人类推动能力的极限，即计算机能够执行的许多任务，往往是人类或一组人无法如此迅速和高效完成的。正如史蒂夫·乔布斯所说，[计算机就像我们思想的自行车](https://www.youtube.com/watch?v=ob_GX50Za6c&feature=youtu.be&t=34)。
 
-我从小就对计算机充满了好奇。我在2001年第一次接触计算机，当时我写了一个BASIC程序来加两个数字。我惊讶于无论加法有多么困难，计算机都能立即给出答案。
+我从小就对计算机充满了好奇。我在 2001 年第一次接触计算机，当时我写了一个 BASIC 程序来加两个数字。我惊讶于无论加法有多么困难，计算机都能立即给出答案。
 
 当我听到**机器学习**时，我无法抑制惊讶。我无法理解，跟我习惯的普通软件程序不同，我不需要事先详细教会计算机如何处理所有未来的场景。计算机可以自己学习如何解决问题。这对人类来说是一个巨大的飞跃。
 
 ### 什么是机器学习？
 
-术语‘[机器学习](https://en.wikipedia.org/wiki/Machine_learning#Overview)’并不新鲜。它是由亚瑟·塞缪尔在1959年创造的。它借鉴了计算机科学、统计学、线性代数和概率论等不同领域的理解，并应用于解决实际问题。机器学习使计算机能够从历史数据中学习，制定出可以用于解决未来类似问题的解决方案，而不需要显式地教会计算机所有可能场景的组合。而机器学习的实际应用正是那些连明确的数学解决方案都难以阐明的问题。
+术语‘[机器学习](https://en.wikipedia.org/wiki/Machine_learning#Overview)’并不新鲜。它是由亚瑟·塞缪尔在 1959 年创造的。它借鉴了计算机科学、统计学、线性代数和概率论等不同领域的理解，并应用于解决实际问题。机器学习使计算机能够从历史数据中学习，制定出可以用于解决未来类似问题的解决方案，而不需要显式地教会计算机所有可能场景的组合。而机器学习的实际应用正是那些连明确的数学解决方案都难以阐明的问题。
 
 如果一个现实世界的问题符合以下条件，它就是机器学习应用的候选：
 
@@ -32,11 +32,11 @@
 
 ### 示例
 
-让我们以一个玩具问题来演示区别。这个问题接受一个输入数字，并尝试用3和5进行除法。如果数字能被3整除，则打印'fizz'；如果能被5整除，则打印'buzz'；如果能被两者整除，则打印'fizzbuzz'。如果不能被3或5整除，则打印'other'。这被称为[Fizzbuzz](https://en.wikipedia.org/wiki/Fizz_buzz)游戏。
+让我们以一个玩具问题来演示区别。这个问题接受一个输入数字，并尝试用 3 和 5 进行除法。如果数字能被 3 整除，则打印'fizz'；如果能被 5 整除，则打印'buzz'；如果能被两者整除，则打印'fizzbuzz'。如果不能被 3 或 5 整除，则打印'other'。这被称为[Fizzbuzz](https://en.wikipedia.org/wiki/Fizz_buzz)游戏。
 
 ### **传统编程**
 
-在传统编程中，给计算机输入指令非常简单，因为我们只有4种场景需要验证，并根据这些场景打印输出。Python代码可以如下编写，但如果你不喜欢编码，可以跳过阅读代码。
+在传统编程中，给计算机输入指令非常简单，因为我们只有 4 种场景需要验证，并根据这些场景打印输出。Python 代码可以如下编写，但如果你不喜欢编码，可以跳过阅读代码。
 
 ```py
 def fizzbuzz(n):  # if the number is divisible by 3 as well as by 5 and returns # "FizzBuzz"
@@ -55,9 +55,9 @@ def fizzbuzz(n):  # if the number is divisible by 3 as well as by 5 and returns
 
 假设我们已经有很多数字，其输出结果已知，即它是'fizz'、'buzz'还是'fizzbuzz'。我们现在需要做的就是编写机器学习代码，并输入（训练）现有数据。然后通过用未见过的数据进行测试来验证我们是否成功创建了模型。如果模型能在不实际计算结果的情况下提供输出，那么我们就达到了目的。
 
-我们将使用Google的[Tensorflow](https://www.tensorflow.org/)库来实现。以下是实现中的一些代码片段。
+我们将使用 Google 的[Tensorflow](https://www.tensorflow.org/)库来实现。以下是实现中的一些代码片段。
 
-再次强调，如果你不喜欢编码，可以跳过代码。完整的工作代码可以在我的Github账户的[这里](https://github.com/sharmaavneesh/MachineLearning/tree/master/fizzbuzz)找到。
+再次强调，如果你不喜欢编码，可以跳过代码。完整的工作代码可以在我的 Github 账户的[这里](https://github.com/sharmaavneesh/MachineLearning/tree/master/fizzbuzz)找到。
 
 **a. 创建模型**
 
@@ -189,15 +189,15 @@ Testing Accuracy: 98.0 %
 
 ### 结论
 
-我们重复地输入相同的数据5000次，每次都重新打乱。每次运行后，我们通过测量测试数据的误差率来评估模型的准确性。如图所示，模型的准确率为98%。我绘制了每次迭代后的误差图。数值越接近1，模型表现越好。图表如下：
+我们重复地输入相同的数据 5000 次，每次都重新打乱。每次运行后，我们通过测量测试数据的误差率来评估模型的准确性。如图所示，模型的准确率为 98%。我绘制了每次迭代后的误差图。数值越接近 1，模型表现越好。图表如下：
 
-![](../Images/cadee22cf29994bce3ff797d5cda9e61.png)
+![](img/cadee22cf29994bce3ff797d5cda9e61.png)
 
 ### 结束语
 
-如上所示，在这个特定的玩具案例中——传统程序将始终给出正确的输出，而机器学习可能无法达到100%的准确水平。
+如上所示，在这个特定的玩具案例中——传统程序将始终给出正确的输出，而机器学习可能无法达到 100%的准确水平。
 
-现在设想一个场景，你正在经营一家像Netflix这样的公司，拥有数百万客户。每个客户都有一组独特的偏好。例如，有些人可能喜欢纪录片和喜剧电影，但他在周二观看纪录片，在周日观看喜剧电影。而另一些人则在周六晚上狂看视频，喜欢在周日观看恐怖片等等。你可以想象，当有这么多变量决定确切的偏好时，记录每个人的习惯会多么复杂。因为如果你想向每个客户推荐他/她将要观看的电影，你必须了解该人的确切偏好。
+现在设想一个场景，你正在经营一家像 Netflix 这样的公司，拥有数百万客户。每个客户都有一组独特的偏好。例如，有些人可能喜欢纪录片和喜剧电影，但他在周二观看纪录片，在周日观看喜剧电影。而另一些人则在周六晚上狂看视频，喜欢在周日观看恐怖片等等。你可以想象，当有这么多变量决定确切的偏好时，记录每个人的习惯会多么复杂。因为如果你想向每个客户推荐他/她将要观看的电影，你必须了解该人的确切偏好。
 
 对于传统编程，这个问题变得越来越困难，因为：
 
@@ -221,27 +221,27 @@ PS：文章中使用的完整代码可以在 [这里](https://github.com/sharmaa
 
 1.  https://www.youtube.com/watch?v=mbyG85GZ0PI&index=1&list=PLD63A284B7615313A
 
-**简介： [Avneesh Sharma](https://www.linkedin.com/in/avneesh-sharma/)** 是布法罗大学（2018-19）的管理信息系统硕士候选人。他拥有8年的软件产品/功能从头开发经验。他喜欢解决对业务有直接影响的问题，并使最终用户满意。他相信，创造技术通常是解决现实世界痛点的一种手段，以简化生活。
+**简介： [Avneesh Sharma](https://www.linkedin.com/in/avneesh-sharma/)** 是布法罗大学（2018-19）的管理信息系统硕士候选人。他拥有 8 年的软件产品/功能从头开发经验。他喜欢解决对业务有直接影响的问题，并使最终用户满意。他相信，创造技术通常是解决现实世界痛点的一种手段，以简化生活。
 
 [原文](https://www.linkedin.com/pulse/how-different-conventional-programming-machine-learning-sharma/)。经许可转载。
 
 **相关内容：**
 
-+   [回归分析真的算作机器学习吗？](/2017/06/regression-analysis-really-machine-learning.html)
++   回归分析真的算作机器学习吗？
 
-+   [机器学习与统计学]( /2016/11/machine-learning-vs-statistics.html)
++   机器学习与统计学
 
-+   [大数据、圣经密码和邦费罗尼]( /2016/07/big-data-bible-codes-bonferroni.html)
++   大数据、圣经密码和邦费罗尼
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 

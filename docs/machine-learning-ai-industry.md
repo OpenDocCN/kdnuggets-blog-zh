@@ -1,26 +1,26 @@
 # 机器学习和人工智能行业现状
 
-> 原文：[https://www.kdnuggets.com/2020/04/machine-learning-ai-industry.html](https://www.kdnuggets.com/2020/04/machine-learning-ai-industry.html)
+> 原文：[`www.kdnuggets.com/2020/04/machine-learning-ai-industry.html`](https://www.kdnuggets.com/2020/04/machine-learning-ai-industry.html)
 
-[评论](#comments)
+评论
 
 **由[Ed Fernandez](https://cps.northeastern.edu/faculty/eduardo-fernandez-rojo)，董事会成员、顾问、早期阶段及初创公司风险投资**。
 
-从2012年到2018年，蓝筹技术公司为内部使用实施了定制构建的机器学习平台（即Facebook的FBLearning、Uber的Michelangelo、Twitter的Cortex、AirBnB的BigHead），这些平台大多基于开源包，并且针对各自公司的特定用例进行了深度定制。
+从 2012 年到 2018 年，蓝筹技术公司为内部使用实施了定制构建的机器学习平台（即 Facebook 的 FBLearning、Uber 的 Michelangelo、Twitter 的 Cortex、AirBnB 的 BigHead），这些平台大多基于开源包，并且针对各自公司的特定用例进行了深度定制。
 
-自那时以来，行业已经看到企业级机器学习平台解决方案的强劲演变，包括来自现有供应商（如Amazon Sagemaker、Microsoft Azure ML、Google Cloud ML等）和领域挑战者（如DataRobot、H2O、BigML、Dataiku）的解决方案。现有供应商采用增量策略，其机器学习服务建立在现有云服务之上，作为另一应用层，而挑战者则采取了机器学习的*本土*方法。
+自那时以来，行业已经看到企业级机器学习平台解决方案的强劲演变，包括来自现有供应商（如 Amazon Sagemaker、Microsoft Azure ML、Google Cloud ML 等）和领域挑战者（如 DataRobot、H2O、BigML、Dataiku）的解决方案。现有供应商采用增量策略，其机器学习服务建立在现有云服务之上，作为另一应用层，而挑战者则采取了机器学习的*本土*方法。
 
 随着机器学习的普及，许多企业正迅速转向*现成*的数据科学和机器学习平台，以加速上市时间、降低运营成本，并提高成功率（*部署和运营的机器学习模型数量*）。
 
-鉴于当前只有一小部分机器学习项目、概念验证（PoC）和模型能够投入生产并实现有意义的投资回报率（ROI），机器学习平台和自动机器学习（*Automated Machine Learning*）正作为首选工具出现，以加快机器学习模型的快速原型制作和用例验证（*ROI验证*）。
+鉴于当前只有一小部分机器学习项目、概念验证（PoC）和模型能够投入生产并实现有意义的投资回报率（ROI），机器学习平台和自动机器学习（*Automated Machine Learning*）正作为首选工具出现，以加快机器学习模型的快速原型制作和用例验证（*ROI 验证*）。
 
 **结论：**
 
-1.  尽管过去几年包括公司对机器学习项目和倡议的显著和不断增长的投入，**只有一小部分机器学习模型达到了生产阶段**并且产生了实际成果。那些成功的模型在很多情况下已经证明是有利可图的。在大规模应用中，[帕累托原则](https://en.wikipedia.org/wiki/Pareto_principle)适用，**20%的机器学习项目带来了80%的收益**，而许多概念验证（PoC）项目则被弃置或冻结以便后续改进。
+1.  尽管过去几年包括公司对机器学习项目和倡议的显著和不断增长的投入，**只有一小部分机器学习模型达到了生产阶段**并且产生了实际成果。那些成功的模型在很多情况下已经证明是有利可图的。在大规模应用中，[帕累托原则](https://en.wikipedia.org/wiki/Pareto_principle)适用，**20%的机器学习项目带来了 80%的收益**，而许多概念验证（PoC）项目则被弃置或冻结以便后续改进。
 
 1.  证据表明，市场正接近一个转折点，越来越多的公司倾向于**购买（而非自建）**与机器学习平台和工具相关的解决方案，考虑**现成供应商解决方案或混合方法与开源方案**。
 
-1.  **自动机器学习（AutoML）以及API**是机器学习平台的重要组成部分，用于提高模型快速原型制作、机器学习用例验证和部署能力。其基本原理是通过增加机器学习候选用例的数量和成功率（生产中的机器学习模型）来实现更好的投资回报率（ROI）。
+1.  **自动机器学习（AutoML）以及 API**是机器学习平台的重要组成部分，用于提高模型快速原型制作、机器学习用例验证和部署能力。其基本原理是通过增加机器学习候选用例的数量和成功率（生产中的机器学习模型）来实现更好的投资回报率（ROI）。
 
 1.  **数据（数量和质量 — 机器学习准备就绪）、机器学习技术债务、MLOps 与 DevOps 以及企业机器学习流程和技能仍然是采纳的主要障碍**。尽管如此，传统的机器学习很快就会超越炒作周期的顶峰，预计在企业中的主流采用只有 2-3 年的时间。
 
@@ -66,7 +66,7 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 然而，从市场上不同的产品和服务中，确实出现了共同点，总结如下：
 
-![](../Images/eaaf93a423b12095bcb7f1f87cb656ae.png)
+![](img/eaaf93a423b12095bcb7f1f87cb656ae.png)
 
 *机器学习平台提供了构建机器学习解决方案（主要是预测和处方模型）所需的高级功能。*
 
@@ -80,7 +80,7 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 +   *特征工程*
 
-+   *模型选择、评估与测试（及AutoML）*
++   *模型选择、评估与测试（及 AutoML）*
 
 +   *部署*
 
@@ -88,13 +88,13 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 +   *维护与 • 协作*
 
-![](../Images/e11d3906d69ac47f6ba600e0582d5df1.png)
+![](img/e11d3906d69ac47f6ba600e0582d5df1.png)
 
 机器学习平台作为工具、系统和服务的组合，能够进行实验和快速原型开发，但它们的投资回报率在企业运营和业务流程中体现，远超实验阶段。
 
 > *参考资料：*
 > 
-> *Poul Petersen，端到端机器学习应用的解剖 [https://www.slideshare.net/bigml/mlsev-anatomy-of-an-ml-application](https://www.slideshare.net/bigml/mlsev-anatomy-of-an-ml-application)*
+> *Poul Petersen，端到端机器学习应用的解剖 [`www.slideshare.net/bigml/mlsev-anatomy-of-an-ml-application`](https://www.slideshare.net/bigml/mlsev-anatomy-of-an-ml-application)*
 > 
 > *[机器学习平台研究报告](https://assets.ctfassets.net/nubxhjiwc091/48kgJWJ6s6p7QZWKOsKWhH/c92e2a2a1e85f6ef44d1bd19d012bf8e/Machine_Learnings_Platform_Digital_Catapult_paper.pdf) Papis.io*
 
@@ -106,9 +106,9 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 然而，这不仅仅是技术问题。流程、优先级和人员（领导力与问责）在引入和成功部署机器学习驱动的应用程序和服务中也发挥着重要作用。
 
-机器学习应用程序不仅在软件开发上有所不同，部署和集成它们与现有系统也证明是一个主要挑战。考虑到机器学习软件开发的众多差异，DevOps无法充分处理MLOps（机器学习操作）（更多细节见第5节）。
+机器学习应用程序不仅在软件开发上有所不同，部署和集成它们与现有系统也证明是一个主要挑战。考虑到机器学习软件开发的众多差异，DevOps 无法充分处理 MLOps（机器学习操作）（更多细节见第五部分）。
 
-![](../Images/84fe8d918543c25de6f5a1f2f3cfade2.png)
+![](img/84fe8d918543c25de6f5a1f2f3cfade2.png)
 
 ### 机器学习算法
 
@@ -116,7 +116,7 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 精确地说，AutoML（自动化机器学习）为这一过程提供了进一步的自动化，创建许多具有不同算法的模型候选者，并评估其性能以建议给定预测目标的最佳模型选项。
 
-![](../Images/11e2b0830e7f98ed3afabbf1ad79b826.png)
+![](img/11e2b0830e7f98ed3afabbf1ad79b826.png)
 
 *机器学习算法 — 监督学习与非监督学习 (#MLSEV 感谢 BigML Inc)。*
 
@@ -124,15 +124,15 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 几乎 80-90% 的用例利用了传统的机器学习算法，如线性回归、逻辑回归、随机森林或集成方法，这些方法提供了可靠的结果并进一步解释了相对于更不透明的神经网络方法的可解释性。
 
-[Kaggle 的调查](https://www.kaggle.com/kaggle-survey-2019)涵盖了近20K名受访者（数据科学家占据了重要部分），是监控算法使用情况的良好代理：
+[Kaggle 的调查](https://www.kaggle.com/kaggle-survey-2019)涵盖了近 20K 名受访者（数据科学家占据了重要部分），是监控算法使用情况的良好代理：
 
-![](../Images/e623b5111b820972ddabab8031d1f18f.png)
+![](img/e623b5111b820972ddabab8031d1f18f.png)
 
 *蓝色框：传统机器学习算法 — 红色框：CNN、RNN、DNN 和贝叶斯 — 来源：Kaggle · 数据科学与机器学习现状 2019。*
 
 > *参考资料：*
 > 
-> *Kaggle 的数据科学与机器学习现状调查 [https://www.kaggle.com/kaggle-survey-2019](https://www.kaggle.com/kaggle-survey-2019)*
+> *Kaggle 的数据科学与机器学习现状调查 [`www.kaggle.com/kaggle-survey-2019`](https://www.kaggle.com/kaggle-survey-2019)*
 > 
 > *麦肯锡 — [分析时代](https://www.mckinsey.com/~/media/McKinsey/Business%20Functions/McKinsey%20Analytics/Our%20Insights/The%20age%20of%20analytics%20Competing%20in%20a%20data%20driven%20world/MGI-The-Age-of-Analytics-Full-report.ashx)*
 
@@ -142,13 +142,13 @@ DevOps **<>** ModelOps • 机器学习平台驱动的组织 • 领导力与问
 
 需要解决的用例和实时与静态数据建模的需求是影响平台架构的其他因素。Uber 服务的实时需求（例如，预测乘车时间）与 AirBnB（例如，推荐系统）和 FICO（例如，信用评分）在访问、处理数据需求和预测时间上有很大不同，因此具有非常独特的架构需求。
 
-![](../Images/8f81a9978bd38a85a03346a590abc1f0.png)
+![](img/8f81a9978bd38a85a03346a590abc1f0.png)
 
-*Uber 的机器学习平台 — Michelangelo，来源：Uber 工程 [https://eng.uber.com/michelangelo-machine-learning-platform/](https://eng.uber.com/michelangelo-machine-learning-platform/)。*
+*Uber 的机器学习平台 — Michelangelo，来源：Uber 工程 [`eng.uber.com/michelangelo-machine-learning-platform/`](https://eng.uber.com/michelangelo-machine-learning-platform/)。*
 
 例如，在 Uber 的案例中，在线部署的模型无法访问存储在 HDFS 中的数据，这使得从生产在线数据库中检索关键特征变得困难（例如，查询 UberEATS 订单服务以计算某餐厅在特定时间段内的平均餐前准备时间）。
 
-Uber 的解决方案是预计算并在 Cassandra 中存储所需的特征，以便在预测时能够满足延迟要求（来源：Uber 工程 — Michelangelo [https://eng.uber.com/michelangelo-machine-learning-platform/](https://eng.uber.com/michelangelo-machine-learning-platform/)）。
+Uber 的解决方案是预计算并在 Cassandra 中存储所需的特征，以便在预测时能够满足延迟要求（来源：Uber 工程 — Michelangelo [`eng.uber.com/michelangelo-machine-learning-platform/`](https://eng.uber.com/michelangelo-machine-learning-platform/)）。
 
 商业 ML 平台，与定制构建的开源平台不同，旨在对大量多样化的 ML 问题和用例进行概括。它们的架构需要支持关键功能，同时通过抽象层允许足够的定制：
 
@@ -168,29 +168,29 @@ Uber 的解决方案是预计算并在 Cassandra 中存储所需的特征，以�
 
 **DSL 领域特定语言**
 
-![](../Images/132f023c2a5fe1d7e143b33c9d8eb1ab.png)
+![](img/132f023c2a5fe1d7e143b33c9d8eb1ab.png)
 
 *ML 平台架构概述（感谢 BigML Inc）。*
 
-APIs 和程序化自动化与 DSLs ——**领域特定语言**——值得另写一篇文章。特别是 AutoML，将在本系列文章的第 7 节中进行讲解。
+APIs 和程序化自动化与 DSLs ——**领域特定语言**——值得另写一篇文章。特别是 AutoML，将在本系列文章的第七部分中进行讲解。
 
 DSLs 在 APIs 和计算基础设施之上提供了必要的抽象层，以应对复杂性、自动化和定制化。DSL 方法的例子包括 Uber 的特征选择和转换 DSL ([Uber’s ML Platform — Michelangelo](https://eng.uber.com/michelangelo-machine-learning-platform/)) 和 [BigML 的 ML 工作流自动化 DSL](https://github.com/whizzml/examples) ([WhizzML](https://github.com/whizzml/examples))。
 
 > *参考资料：*
 > 
-> *Uber 工程 — Michelangelo [https://eng.uber.com/michelangelo-machine-learning-platform/](https://eng.uber.com/michelangelo-machine-learning-platform/)*
+> *Uber 工程 — Michelangelo [`eng.uber.com/michelangelo-machine-learning-platform/`](https://eng.uber.com/michelangelo-machine-learning-platform/)*
 > 
-> *Arxiv: 关于 DSLs 用于机器学习和大数据的调查 [https://arxiv.org/pdf/1602.07637](https://arxiv.org/pdf/1602.07637)*
+> *Arxiv: 关于 DSLs 用于机器学习和大数据的调查 [`arxiv.org/pdf/1602.07637`](https://arxiv.org/pdf/1602.07637)*
 > 
-> *PAPIS.io 会议记录：机器学习 API 的过去、现在和未来 [http://proceedings.mlr.press/v50/cetinsoy15.pdf](http://proceedings.mlr.press/v50/cetinsoy15.pdf)*
+> *PAPIS.io 会议记录：机器学习 API 的过去、现在和未来 [`proceedings.mlr.press/v50/cetinsoy15.pdf`](http://proceedings.mlr.press/v50/cetinsoy15.pdf)*
 > 
-> *WhizzML，一个用于 ML 工作流自动化的 DSL [https://bigml.com/whizzml](https://bigml.com/whizzml)*
+> *WhizzML，一个用于 ML 工作流自动化的 DSL [`bigml.com/whizzml`](https://bigml.com/whizzml)*
 
 ### 机器学习炒作周期的更新
 
 随着企业和从业者超越 ML 实践的学习曲线，机器学习和深度学习技术已经经历并超越了炒作周期的高峰，迅速穿越“失望谷”（调整期望）。Gartner 最新的炒作周期报告对此进行了反映，并预测主流采用将在接下来的 2-3 年内发生。
 
-![](../Images/2cf696411dff5660832d3efbc76fd2b4.png)
+![](img/2cf696411dff5660832d3efbc76fd2b4.png)
 
 *来源：Gartner 数据科学与机器学习 2019 年炒作周期。*
 
@@ -200,13 +200,13 @@ DSLs 在 APIs 和计算基础设施之上提供了必要的抽象层，以应对
 
 近年来，市场已被划分为开源解决方案和行业解决方案。
 
-从 2012 年到 2018 年，蓝筹科技公司实施了用于内部使用的定制机器学习平台（例如，Facebook 的 FBLearning、Uber 的 Michelangelo、Twitter 的 Cortex、AirBnB 的 BigHead，更多详细分析见第 4 节）。
+从 2012 年到 2018 年，蓝筹科技公司实施了用于内部使用的定制机器学习平台（例如，Facebook 的 FBLearning、Uber 的 Michelangelo、Twitter 的 Cortex、AirBnB 的 BigHead，更多详细分析见第四部分）。
 
 这些平台中的许多主要基于开源包，并且已被深度定制以适应这些公司的具体使用场景。
 
-尽管开源包具有固有的免费特性（获取的成本效益）和几乎无限的定制能力，但开源的一个问题在于其相关的隐性技术债务，尤其是 Glue Code（更多细节见第 2 节，请参阅 [机器学习系统中的隐性技术债务](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)。*D. Sculley 等人，Google，NIPS 2015*）。
+尽管开源包具有固有的免费特性（获取的成本效益）和几乎无限的定制能力，但开源的一个问题在于其相关的隐性技术债务，尤其是 Glue Code（更多细节见第二部分，请参阅 [机器学习系统中的隐性技术债务](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)。*D. Sculley 等人，Google，NIPS 2015*）。
 
-![](../Images/94803b14dbf119d87eb578732a82a330.png)
+![](img/94803b14dbf119d87eb578732a82a330.png)
 
 [*Sculley 等人，Google，NIPS 2015*](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)
 
@@ -216,13 +216,13 @@ DSLs 在 APIs 和计算基础设施之上提供了必要的抽象层，以应对
 
 对于许多企业来说，一个重要的关键驱动因素是**市场时间和竞争力**。由于他们在传统的研发方法中难以扩大规模并成功将足够的机器学习模型投入生产，许多企业正在迅速转向*现成*的数据科学与机器学习平台，以加速市场进入，降低运营成本，并提高成功率（部署和运营的机器学习模型数量）。
 
-![](../Images/f4a2575f4253ea3df780f09a01f1a108.png)
+![](img/f4a2575f4253ea3df780f09a01f1a108.png)
 
 > *参考资料：*
 > 
-> *机器学习系统中的隐性技术债务。*D. Sculley 等人，Google，NIPS 2015 *[https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)*
+> *机器学习系统中的隐性技术债务。*D. Sculley 等人，Google，NIPS 2015 *[`papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf`](https://papers.nips.cc/paper/5656-hidden-technical-debt-in-machine-learning-systems.pdf)*
 > 
-> *Gartner 的 AI 热点周期 [https://www.gartner.com/smarterwithgartner/top-trends-on-the-gartner-hype-cycle-for-artificial-intelligence-2019/](https://www.gartner.com/smarterwithgartner/top-trends-on-the-gartner-hype-cycle-for-artificial-intelligence-2019/)*
+> *Gartner 的 AI 热点周期 [`www.gartner.com/smarterwithgartner/top-trends-on-the-gartner-hype-cycle-for-artificial-intelligence-2019/`](https://www.gartner.com/smarterwithgartner/top-trends-on-the-gartner-hype-cycle-for-artificial-intelligence-2019/)*
 
 该帖子对应的配套幻灯片可通过以下链接获取 [[在机器学习学校 #MLSEV 的演示文稿 - 3 月 26 日](https://www.slideshare.net/edslide/machine-learning-platformization-automl-adopting-ml-at-scale-in-the-enterprise)]
 
@@ -242,11 +242,11 @@ DSLs 在 APIs 和计算基础设施之上提供了必要的抽象层，以应对
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 

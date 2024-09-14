@@ -1,22 +1,22 @@
 # 数据科学的软件工程技巧与最佳实践
 
-> 原文：[https://www.kdnuggets.com/2020/10/software-engineering-best-practices-data-science.html](https://www.kdnuggets.com/2020/10/software-engineering-best-practices-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/10/software-engineering-best-practices-data-science.html`](https://www.kdnuggets.com/2020/10/software-engineering-best-practices-data-science.html)
 
-[评论](#comments)
+评论
 
 **作者 [Ahmed Besbes](https://ahmedbesbes.com)，AI 工程师 // 博主 // 跑者**。
 
-![](../Images/78dbf50aeffb2874715d1afcd7beab53.png)
+![](img/78dbf50aeffb2874715d1afcd7beab53.png)
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,7 +26,7 @@
 
 ### Jupyter Notebook 的问题
 
-![](../Images/c6d5b3b1ae9a15554525c6807fa87a01.png)
+![](img/c6d5b3b1ae9a15554525c6807fa87a01.png)
 
 *来源: [datascience.foundation](https://datascience.foundation/datatalk/setting-up-a-python-jupyter-notebook-online-working-with-python-on-the-cloud)。*
 
@@ -34,9 +34,9 @@
 
 +   由于所有对象（函数或类）都在一个地方定义和实例化，**维护性变得非常困难**：即使你只想对某个函数做一个小改动，你也必须在 notebook 中找到它，修复它并重新运行整个代码。你不希望这样，相信我。把你的逻辑和处理函数分离到外部脚本中不是更简单吗？
 
-+   由于其互动性和即时反馈，jupyter笔记本推动数据科学家在全局命名空间中声明变量，而不是使用函数。这在python开发中被认为是[不良实践](https://stackoverflow.com/questions/19158339/why-are-global-variables-evil/19158418#19158418)，因为它**限制了有效的代码重用。**它也有害于可重复性，因为你的笔记本变成了一个包含所有变量的大型状态机。在这种配置下，你必须记住哪个结果被缓存了，哪个没有，同时还要期望其他用户遵循你的单元格执行顺序。
++   由于其互动性和即时反馈，jupyter 笔记本推动数据科学家在全局命名空间中声明变量，而不是使用函数。这在 python 开发中被认为是[不良实践](https://stackoverflow.com/questions/19158339/why-are-global-variables-evil/19158418#19158418)，因为它**限制了有效的代码重用。**它也有害于可重复性，因为你的笔记本变成了一个包含所有变量的大型状态机。在这种配置下，你必须记住哪个结果被缓存了，哪个没有，同时还要期望其他用户遵循你的单元格执行顺序。
 
-+   笔记本的格式在后台是JSON对象，这使得**代码版本控制变得困难。**这就是为什么我很少看到数据科学家使用GIT提交笔记本的不同版本或合并特定功能的分支。因此，团队合作变得低效且笨拙：团队成员开始通过电子邮件或Slack交换代码片段和笔记本，回滚到代码的前一个版本是一场噩梦，文件组织也开始变得混乱。这是我常见的情况，在使用jupyter笔记本没有适当版本控制的两三周后：
++   笔记本的格式在后台是 JSON 对象，这使得**代码版本控制变得困难。**这就是为什么我很少看到数据科学家使用 GIT 提交笔记本的不同版本或合并特定功能的分支。因此，团队合作变得低效且笨拙：团队成员开始通过电子邮件或 Slack 交换代码片段和笔记本，回滚到代码的前一个版本是一场噩梦，文件组织也开始变得混乱。这是我常见的情况，在使用 jupyter 笔记本没有适当版本控制的两三周后：
 
     ****analysis.**ipynb** **analysis_COPY(1).ipynb
 
@@ -46,15 +46,15 @@
 
     analysis_FINAL_2.ipynb**
 
-+   Jupyter笔记本适合探索和快速原型设计。它们显然不是为了可重用性或生产用途而设计的。如果你用jupyter笔记本开发了一个数据处理管道，你最多只能说你的代码仅在你的笔记本电脑或虚拟机上以线性同步的方式按单元格的执行顺序工作。这并没有说明你的代码在更复杂的环境下如何表现，比如更大的输入数据集、其他异步并行任务或较少的资源分配。
++   Jupyter 笔记本适合探索和快速原型设计。它们显然不是为了可重用性或生产用途而设计的。如果你用 jupyter 笔记本开发了一个数据处理管道，你最多只能说你的代码仅在你的笔记本电脑或虚拟机上以线性同步的方式按单元格的执行顺序工作。这并没有说明你的代码在更复杂的环境下如何表现，比如更大的输入数据集、其他异步并行任务或较少的资源分配。
 
     **笔记本实际上很难测试，因为它们的行为有时是不可预测的。**
 
-+   作为一个大部分时间都在VSCode中利用强大扩展功能进行代码[linting](https://marketplace.visualstudio.com/items?itemName=ms-python.python)、样式[格式化](https://prettier.io/)、代码结构、自动补全和代码库搜索的人，我在切换回jupyter时不禁感到有些无力。
++   作为一个大部分时间都在 VSCode 中利用强大扩展功能进行代码[linting](https://marketplace.visualstudio.com/items?itemName=ms-python.python)、样式[格式化](https://prettier.io/)、代码结构、自动补全和代码库搜索的人，我在切换回 jupyter 时不禁感到有些无力。
 
-    **与VSCode相比，jupyter notebook缺乏强制编码最佳实践的扩展。**
+    **与 VSCode 相比，jupyter notebook 缺乏强制编码最佳实践的扩展。**
 
-好了，各位，暂时别再吐槽了。我真的很喜欢jupyter，我认为它在设计上做得很好。你绝对可以用它来启动小项目或快速原型设计。
+好了，各位，暂时别再吐槽了。我真的很喜欢 jupyter，我认为它在设计上做得很好。你绝对可以用它来启动小项目或快速原型设计。
 
 但为了以工业化的方式推出这些想法，你必须遵循一些在数据科学家使用笔记本时可能会丢失的软件工程原则。让我们一起回顾其中的一些，看看它们为什么重要。
 
@@ -66,7 +66,7 @@
 
 ### 1 - 清理你的代码
 
-![](../Images/da7e4c6d843c484a8b08c17bfbdc3a2c.png)
+![](img/da7e4c6d843c484a8b08c17bfbdc3a2c.png)
 
 *照片由 [Florian Olivo](https://unsplash.com/@florianolv?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供。*
 
@@ -106,9 +106,9 @@ optimizer = SGD(learning_rate, momentum=True)
 
 +   **使用缩进和空白**让你的代码有呼吸的空间。存在一些标准约定，比如“每个缩进使用 4 个空格”、“不同部分之间应有额外的空行”等……由于我总是记不住这些，我使用了一个非常好的**VSCode 插件 [**prettier**](https://prettier.io/)**，它可以在按下 ctrl+s 时自动重新格式化我的代码**。
 
-![](../Images/cc1aada2ec1307d7795092311db43747.png)
+![](img/cc1aada2ec1307d7795092311db43747.png)
 
-*来源：[https://prettier.io/](https://prettier.io/)。*
+*来源：[`prettier.io/`](https://prettier.io/)。*
 
 ### 2 - 使你的代码模块化
 
@@ -122,13 +122,13 @@ optimizer = SGD(learning_rate, momentum=True)
 
 +   **函数应该做一件事**。如果一个函数执行多个操作，就会变得更难以概括。
 
-+   **将你的逻辑抽象到函数中，但** **不要过度工程化**：你可能会遇到模块过多的情况。根据你的判断，如果你经验不足，可以查看流行的GitHub库，例如 [scikit-learn](https://github.com/scikit-learn/scikit-learn) 并查看他们的编码风格。
++   **将你的逻辑抽象到函数中，但** **不要过度工程化**：你可能会遇到模块过多的情况。根据你的判断，如果你经验不足，可以查看流行的 GitHub 库，例如 [scikit-learn](https://github.com/scikit-learn/scikit-learn) 并查看他们的编码风格。
 
 ### 3 - 重构你的代码
 
 重构旨在重新组织代码的内部结构，而不改变其功能。通常在一个有效（但尚未完全组织）的代码版本上进行。它有助于去重函数，重组文件结构，并增加更多抽象。
 
-要了解更多关于Python重构的内容，这篇文章是一个很好的 [resource](https://realpython.com/python-refactoring/)。
+要了解更多关于 Python 重构的内容，这篇文章是一个很好的 [resource](https://realpython.com/python-refactoring/)。
 
 ### 4 - 提高代码效率
 
@@ -140,15 +140,15 @@ optimizer = SGD(learning_rate, momentum=True)
 
 +   通过检查每个操作的运行时间来检查脚本的可能瓶颈
 
-+   尽量避免使用for循环，并向量化你的操作，特别是如果你使用像 [NumPy](https://numpy.org/) 或 [pandas](https://pandas.pydata.org/)这样的库
++   尽量避免使用 for 循环，并向量化你的操作，特别是如果你使用像 [NumPy](https://numpy.org/) 或 [pandas](https://pandas.pydata.org/)这样的库
 
-+   通过使用多进程来利用机器的CPU核心
++   通过使用多进程来利用机器的 CPU 核心
 
-### 5 - 使用GIT或任何其他版本控制系统
+### 5 - 使用 GIT 或任何其他版本控制系统
 
-根据我的个人经验，使用GIT + Github帮助我提高了编码技能并更好地组织了我的项目。由于我在与朋友和/或同事合作时使用了它，这使我遵守了过去没有遵守的标准。
+根据我的个人经验，使用 GIT + Github 帮助我提高了编码技能并更好地组织了我的项目。由于我在与朋友和/或同事合作时使用了它，这使我遵守了过去没有遵守的标准。
 
-![](../Images/414a1e5ca6eb074cff85a8e61606fdb3.png)
+![](img/414a1e5ca6eb074cff85a8e61606fdb3.png)
 
 *来源: [freecodecamp](https://www.freecodecamp.org/news/the-beginners-guide-to-git-github/)。*
 
@@ -166,11 +166,11 @@ optimizer = SGD(learning_rate, momentum=True)
 
 +   为团队成员分配任务并监控他们的进展
 
-像Github或Gitlab这样的平台甚至提供了持续集成和持续交付钩子，用于自动构建和部署你的项目。
+像 Github 或 Gitlab 这样的平台甚至提供了持续集成和持续交付钩子，用于自动构建和部署你的项目。
 
-如果你是Git的新手，那么我推荐查看这个 [tutorial](https://nvie.com/posts/a-successful-git-branching-model/)。或者你可以查看这个备忘单：
+如果你是 Git 的新手，那么我推荐查看这个 [tutorial](https://nvie.com/posts/a-successful-git-branching-model/)。或者你可以查看这个备忘单：
 
-![](../Images/85a170b7c85c43de0628582251eb0eac.png)
+![](img/85a170b7c85c43de0628582251eb0eac.png)
 
 *来源: [Atlassian](https://www.atlassian.com/git/tutorials/atlassian-git-cheatsheet)。*
 
@@ -182,9 +182,9 @@ optimizer = SGD(learning_rate, momentum=True)
 
 测试可以简单到检查输出形状或函数返回的预期值。
 
-![](../Images/14b4af8b9d46b3df6fa8c98dbc2053b5.png)
+![](img/14b4af8b9d46b3df6fa8c98dbc2053b5.png)
 
-*[https://pytest-c-testrunner.readthedocs.io/](https://pytest-c-testrunner.readthedocs.io/)*
+*[`pytest-c-testrunner.readthedocs.io/`](https://pytest-c-testrunner.readthedocs.io/)*
 
 为你的函数和模块编写测试带来了许多好处：
 
@@ -216,21 +216,21 @@ logging.warning('And this, too')
 
 ```
 
-![](../Images/de411838c7bf41eeb639cad1aa115d46.png)
+![](img/de411838c7bf41eeb639cad1aa115d46.png)
 
 *来源: [realpython](https://realpython.com/python-logging-source-code/)。*
 
 ### 结论
 
-数据科学家通过生成与公司系统和基础设施不相关的报告和jupyter笔记本来解决问题的时代早已过去。如今，数据科学家开始生成可测试和可运行的代码，与IT系统无缝集成。**因此，遵循软件工程最佳实践成为了必需。**
+数据科学家通过生成与公司系统和基础设施不相关的报告和 jupyter 笔记本来解决问题的时代早已过去。如今，数据科学家开始生成可测试和可运行的代码，与 IT 系统无缝集成。**因此，遵循软件工程最佳实践成为了必需。**
 
 [原文](https://medium.com/swlh/software-engineering-tips-and-best-practices-for-data-science-5d85dbcf87fd)。经许可转载。
 
-**简介:** [Ahmed Besbes](https://ahmedbesbes.com)是一位居住在法国的数据科学家，工作领域涵盖金融服务、媒体和公共部门。Ahmed的工作包括设计、构建和部署AI应用程序以解决业务问题。Ahmed还博客分享技术话题，如深度学习。
+**简介:** [Ahmed Besbes](https://ahmedbesbes.com)是一位居住在法国的数据科学家，工作领域涵盖金融服务、媒体和公共部门。Ahmed 的工作包括设计、构建和部署 AI 应用程序以解决业务问题。Ahmed 还博客分享技术话题，如深度学习。
 
 **相关：**
 
-+   [将机器学习模型投入生产的5大最佳实践](https://www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html)
++   [将机器学习模型投入生产的 5 大最佳实践](https://www.kdnuggets.com/2020/10/5-best-practices-machine-learning-models-production.html)
 
 +   [数据科学家的软件工程基础](https://www.kdnuggets.com/2020/06/software-engineering-fundamentals-data-scientists.html)
 
@@ -242,10 +242,10 @@ logging.warning('And this, too')
 
 +   [学习数据科学统计的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每位数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

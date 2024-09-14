@@ -1,8 +1,8 @@
 # 使用 Python 进行数据缩放
 
-> 原文：[https://www.kdnuggets.com/2023/07/data-scaling-python.html](https://www.kdnuggets.com/2023/07/data-scaling-python.html)
+> 原文：[`www.kdnuggets.com/2023/07/data-scaling-python.html`](https://www.kdnuggets.com/2023/07/data-scaling-python.html)
 
-![数据缩放与 Python](../Images/f0302aa41f65da53da03fad65b3b1405.png)
+![数据缩放与 Python](img/f0302aa41f65da53da03fad65b3b1405.png)
 
 图像由 [Unsplash](https://unsplash.com/photos/98MbUldcDJY) 提供
 
@@ -18,11 +18,11 @@
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -32,9 +32,9 @@
 
 当数据使用归一化进行缩放时，转换后的数据可以使用此方程计算
 
-![方程](../Images/a228570bc55074300b222ac2581b3858.png)
+![方程](img/a228570bc55074300b222ac2581b3858.png)
 
-其中 ![方程](../Images/460e7ddbd8d06b9714acf7c971df15cb.png) 和 ![方程](../Images/204fd8187a69f9198d100ec96dc558b7.png) 是数据的最大值和最小值。得到的缩放数据范围在 [0, 1] 之间。
+其中 ![方程](img/460e7ddbd8d06b9714acf7c971df15cb.png) 和 ![方程](img/204fd8187a69f9198d100ec96dc558b7.png) 是数据的最大值和最小值。得到的缩放数据范围在 [0, 1] 之间。
 
 ## Python 实现归一化
 
@@ -46,15 +46,15 @@ norm = Normalizer()
 X_norm = norm.fit_transform(data)
 ```
 
-设 X 为给定数据，具有 ![方程](../Images/d9f5876351204741a5e6c55c08894aed.png) 和 ![方程](../Images/271b256b2dc053cd669828ac5d3d92d4.png)。数据 X 如下图所示：
+设 X 为给定数据，具有 ![方程](img/d9f5876351204741a5e6c55c08894aed.png) 和 ![方程](img/271b256b2dc053cd669828ac5d3d92d4.png)。数据 X 如下图所示：
 
-![数据缩放与 Python](../Images/4085e2934676bfc1f46ae2e6f0e50874.png)
+![数据缩放与 Python](img/4085e2934676bfc1f46ae2e6f0e50874.png)
 
 图 1\. 数据 X 的箱线图，值在 17.7 和 71.4 之间。图像由作者提供。
 
 归一化后的 X 如下图所示：
 
-![数据缩放与 Python](../Images/f6449899c171b4fa2b3a96c9bf95cc9a.png)
+![数据缩放与 Python](img/f6449899c171b4fa2b3a96c9bf95cc9a.png)
 
 图 2\. 归一化后的 X 值在 0 和 1 之间。图像由作者提供。
 
@@ -62,9 +62,9 @@ X_norm = norm.fit_transform(data)
 
 理想情况下，当数据呈正态分布或高斯分布时，应使用标准化。标准化的数据可以按如下方式计算：
 
-![方程](../Images/e8b2d0e2bee7ffc0938640b3208a676d.png)
+![方程](img/e8b2d0e2bee7ffc0938640b3208a676d.png)
 
-在这里，![公式](../Images/628f5cb6469c6a962d97fb0855c36436.png) 是数据的均值，而 ![公式](../Images/62bc082726295453c2636d93de924b80.png) 是标准差。标准化值通常应在[-2, 2]范围内，这代表95%的置信区间。标准化值小于-2或大于2的情况可以被视为异常值。因此，标准化可以用于异常值检测。
+在这里，![公式](img/628f5cb6469c6a962d97fb0855c36436.png) 是数据的均值，而 ![公式](img/62bc082726295453c2636d93de924b80.png) 是标准差。标准化值通常应在[-2, 2]范围内，这代表 95%的置信区间。标准化值小于-2 或大于 2 的情况可以被视为异常值。因此，标准化可以用于异常值检测。
 
 ## 标准化的 Python 实现
 
@@ -78,7 +78,7 @@ X_std = stdsc.fit_transform(data)
 
 使用上述描述的数据，标准化数据如下所示：
 
-![使用 Python 进行数据缩放](../Images/5a47e485f9dd55d58cac14b95f922ae7.png)
+![使用 Python 进行数据缩放](img/5a47e485f9dd55d58cac14b95f922ae7.png)
 
 图 3. 标准化 X。作者提供的图片。
 

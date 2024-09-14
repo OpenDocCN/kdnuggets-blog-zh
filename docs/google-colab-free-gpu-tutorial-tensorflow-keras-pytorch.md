@@ -1,8 +1,8 @@
 # 使用 Google Colab、TensorFlow、Keras 和 PyTorch 进行深度学习开发
 
-> 原文：[https://www.kdnuggets.com/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html/2](https://www.kdnuggets.com/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html/2)
+> 原文：[`www.kdnuggets.com/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html/2`](https://www.kdnuggets.com/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html/2)
 
-[评论](/2018/02/google-colab-free-gpu-tutorial-tensorflow-keras-pytorch.html?page=2#comments)
+评论
 
 ### 将 Github 仓库克隆到 Google Colab
 
@@ -10,11 +10,11 @@
 
 **第 1 步：找到 Github 仓库并获取 “Git” 链接**
 
-找到任何 Github 仓库使用。例如：[https://github.com/wxs/keras-mnist-tutorial](https://github.com/wxs/keras-mnist-tutorial)
+找到任何 Github 仓库使用。例如：[`github.com/wxs/keras-mnist-tutorial`](https://github.com/wxs/keras-mnist-tutorial)
 
 克隆或下载 > 复制链接！
 
-![](../Images/bbd341f04219e95d4394107b6fb6c6a0.png)
+![](img/bbd341f04219e95d4394107b6fb6c6a0.png)
 
 **2\. Git 克隆**
 
@@ -24,25 +24,25 @@
 !git clone https://github.com/wxs/keras-mnist-tutorial.git
 ```
 
-![](../Images/f3e50d19a360fe0e9de6193f724c3ce9.png)
+![](img/f3e50d19a360fe0e9de6193f724c3ce9.png)
 
 **3\. 在 Google Drive 中打开文件夹**
 
 文件夹与 Github 仓库当然是一样的 :)
 
-![](../Images/8bbd826394f76ccb072f00427448c6c1.png)
+![](img/8bbd826394f76ccb072f00427448c6c1.png)
 
 **4\. 打开笔记本**
 
 右键点击 > 用 Colaboratory 打开
 
-![](../Images/27ace19d53e6bfed55f5caa865348a00.png)
+![](img/27ace19d53e6bfed55f5caa865348a00.png)
 
 **5\. 运行**
 
 现在你可以在 Google Colab 中运行 Github 仓库。
 
-![](../Images/d5432ba2357fe8df00fb274feccc98a2.png)
+![](img/d5432ba2357fe8df00fb274feccc98a2.png)
 
 ### 一些有用的提示
 
@@ -114,7 +114,7 @@ import tensorflow as tf
 tf.test.gpu_device_name()
 ```
 
-![](../Images/de6e3024f09c168e8cd3d210d0ec0e80.png)
+![](img/de6e3024f09c168e8cd3d210d0ec0e80.png)
 
 **3\. 我正在使用哪个 GPU？**
 
@@ -125,7 +125,7 @@ device_lib.list_local_devices()
 
 目前，**Colab 仅提供 Tesla K80**。
 
-![](../Images/c7c910f7ea11bcc4b5b070931c78559f.png)
+![](img/c7c910f7ea11bcc4b5b070931c78559f.png)
 
 **4\. 那 RAM 呢？**
 
@@ -133,7 +133,7 @@ device_lib.list_local_devices()
 !cat /proc/meminfo
 ```
 
-![](../Images/3f1cbd63c4efeaa88b47f2f331c4b4f0.png)
+![](img/3f1cbd63c4efeaa88b47f2f331c4b4f0.png)
 
 **5\. 那 CPU 呢？**
 
@@ -141,7 +141,7 @@ device_lib.list_local_devices()
 !cat /proc/cpuinfo
 ```
 
-![](../Images/e1a982195ddd274d93edde452943de04.png)
+![](img/e1a982195ddd274d93edde452943de04.png)
 
 **6\. 更改工作目录**
 
@@ -206,7 +206,7 @@ Warning: apt-key output should not be parsed (stdout is not a terminal)
 
 我推荐这个仓库：
 
-[https://github.com/mixuala/colab_utils](https://github.com/mixuala/colab_utils)
+[`github.com/mixuala/colab_utils`](https://github.com/mixuala/colab_utils)
 
 ### 结论
 
@@ -222,21 +222,21 @@ Warning: apt-key output should not be parsed (stdout is not a terminal)
 
 **相关:**
 
-+   [3 个必备的 Google Colaboratory 小贴士](/2018/02/essential-google-colaboratory-tips-tricks.html)
++   3 个必备的 Google Colaboratory 小贴士
 
-+   [Fast.ai 第 1 课在 Google Colab 上（免费 GPU）](/2018/02/fast-ai-lesson-1-google-colab-free-gpu.html)
++   Fast.ai 第 1 课在 Google Colab 上（免费 GPU）
 
-+   [构建神经网络的简单入门指南](/2018/02/simple-starter-guide-build-neural-network.html)
++   构建神经网络的简单入门指南
 
 * * *
 
 ## 我们的 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 

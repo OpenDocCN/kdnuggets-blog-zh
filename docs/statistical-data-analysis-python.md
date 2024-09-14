@@ -1,6 +1,6 @@
 # Python 中的统计数据分析
 
-> 原文：[https://www.kdnuggets.com/2016/07/statistical-data-analysis-python.html](https://www.kdnuggets.com/2016/07/statistical-data-analysis-python.html)
+> 原文：[`www.kdnuggets.com/2016/07/statistical-data-analysis-python.html`](https://www.kdnuggets.com/2016/07/statistical-data-analysis-python.html)
 
 **由克里斯托弗·丰内斯贝克，范德比尔特大学医学院**。
 
@@ -10,7 +10,7 @@
 
 本教程将介绍使用 Python 进行统计数据分析，使用存储为 Pandas DataFrame 对象的数据。数据分析中的大部分工作涉及到数据的导入、清理和转换，以便进行分析。因此，本课程的前半部分包括对基本和中级 Pandas 使用的两部分概述，展示如何有效地操作内存中的数据集。这包括任务如索引、对齐、连接/合并方法、日期/时间类型以及处理缺失数据。接下来，我们将介绍使用 Pandas 和 Matplotlib 进行绘图和可视化，重点是创建有效的数据可视化，同时避免常见的陷阱。最后，参与者将学习使用 Numpy、Scipy 和 Pandas 中的一些高级函数进行统计数据建模的方法。这将包括将数据拟合到概率分布中，使用线性和非线性模型估计变量之间的关系，以及对自助法的简要介绍。每个教程部分将涉及样本数据集的实际操作和分析，数据集将在课程前提供给参与者。
 
-![Pandas IPython](../Images/dca790229b1f2b9ae167294328581727.png)
+![Pandas IPython](img/dca790229b1f2b9ae167294328581727.png)
 
 本教程的目标受众包括所有新的 Python 用户，尽管我们建议用户还参加入门阶段的 NumPy 和 IPython 课程。
 
@@ -136,34 +136,34 @@ Frank Harrell 的回归建模技巧。我每周都会拿出来用。
 
 **相关：**
 
-+   [掌握Python机器学习的7个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
-+   [数据科学实战：Kaggle第3部分 – 数据清洗](/2016/06/doing-data-science-kaggle-walkthrough-data-cleaning.html)
++   数据科学实战：Kaggle 第三部分 – 数据清洗
 
-+   [Python数据科学：Pandas与Spark DataFrame的关键区别](/2016/01/python-data-science-pandas-spark-dataframe-differences.html)
++   Python 数据科学：Pandas 与 Spark DataFrame 的关键区别
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关内容
 
-+   [Python中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
++   [Python 中的统计函数](https://www.kdnuggets.com/2022/10/statistical-functions-python.html)
 
-+   [统计学习简介，Python版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
++   [统计学习简介，Python 版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 
-+   [10个Python统计函数](https://www.kdnuggets.com/10-python-statistical-functions)
++   [10 个 Python 统计函数](https://www.kdnuggets.com/10-python-statistical-functions)
 
-+   [数据科学家应了解的5个统计悖论](https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html)
++   [数据科学家应了解的 5 个统计悖论](https://www.kdnuggets.com/2023/02/5-statistical-paradoxes-data-scientists-know.html)
 
-+   [基础回顾第2周：数据库、SQL、数据管理和…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   [基础回顾第 2 周：数据库、SQL、数据管理和…](https://www.kdnuggets.com/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
 
 +   [什么是统计偏斜？](https://www.kdnuggets.com/2022/11/statistical-skew.html)

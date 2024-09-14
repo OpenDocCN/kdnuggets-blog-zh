@@ -1,22 +1,22 @@
 # 避免这五种让你看起来像数据新手的行为
 
-> 原文：[https://www.kdnuggets.com/2021/10/avoid-five-behaviors-data-novice.html](https://www.kdnuggets.com/2021/10/avoid-five-behaviors-data-novice.html)
+> 原文：[`www.kdnuggets.com/2021/10/avoid-five-behaviors-data-novice.html`](https://www.kdnuggets.com/2021/10/avoid-five-behaviors-data-novice.html)
 
-[评论](#comments)
+评论
 
 **由 [Tessa Xie](https://www.linkedin.com/in/tessayuqingxie/)，Cruise 高级数据科学家，Medium 撰稿人。**
 
-![](../Images/4351f8052df30ecb443c8f6d9ae9cbe5.png)
+![](img/4351f8052df30ecb443c8f6d9ae9cbe5.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 ### #1 过度解读结果，试图从虚无中编造故事。
 
-“我们已经推断出X和Y之间有正相关……基于30个数据点，我们相信这是因为……”每当我听到类似上述的陈述时，我都会略感不安。在趋势分析和生成洞察时，样本量始终是首要考虑的因素。除非是一个具有代表性的客户群体的焦点小组（我甚至对焦点小组的调查结果存有疑虑，但那是另一个话题），否则30个数据点通常不会给你任何可靠的洞察。
+“我们已经推断出 X 和 Y 之间有正相关……基于 30 个数据点，我们相信这是因为……”每当我听到类似上述的陈述时，我都会略感不安。在趋势分析和生成洞察时，样本量始终是首要考虑的因素。除非是一个具有代表性的客户群体的焦点小组（我甚至对焦点小组的调查结果存有疑虑，但那是另一个话题），否则 30 个数据点通常不会给你任何可靠的洞察。
 
 有没有比从极小的数据集中推测“趋势”更尴尬的事情？有的，就是为这些“趋势”出现的原因提出理论。我见过人们提出各种荒谬的理论来解释为什么来自微小数据集的结果是“违反直觉”的；当真正的解释很简单……那就是噪声时，他们会失去可信度以及大部分听众。
 
@@ -38,15 +38,15 @@
 
 没有完美的数据集；任何告诉你其他情况的人要么在撒谎，要么是无知。因此，作为数据专家，你应该比仅凭数据质量表面现象更了解。你查询和分析的每一份数据都需要经过质量检查——确保表格实际去重，检查时间戳是否在你认为的时区等等。在使用数据之前不进行质量检查可能会导致意外结果和误导性的洞察，并使人们对你处理复杂数据的能力产生怀疑。
 
-**试试这个：** 制定一个质量检查框架（即你执行的测试列表），每次处理新数据集时都要遵循。例如，检查（意外的）重复项；如果你预计数据集中每个订单只有一行，写一个快速查询按订单ID分组并统计行数——你会惊讶于有多少“订单级”表在某些订单ID下有1,000条记录。始终，始终，始终检查你的工作，并与利益相关者和主题专家双重检查。
+**试试这个：** 制定一个质量检查框架（即你执行的测试列表），每次处理新数据集时都要遵循。例如，检查（意外的）重复项；如果你预计数据集中每个订单只有一行，写一个快速查询按订单 ID 分组并统计行数——你会惊讶于有多少“订单级”表在某些订单 ID 下有 1,000 条记录。始终，始终，始终检查你的工作，并与利益相关者和主题专家双重检查。
 
 ### #3. 过度工程化。
 
-我仍然记得当我学到像随机森林或XGBoost这样的复杂模型后的兴奋；当你有了锤子，尤其是一个闪亮的酷锤子时，所有东西都像钉子。但实际上，除非你是机器学习工程师，否则你在日常数据工作中很少需要10层神经网络。使用复杂的机器学习模型，而简单的线性回归足矣，不仅效率低下，还适得其反。正如我在关于[data science lessons I learned from working at McKinsey](https://towardsdatascience.com/5-lessons-mckinsey-taught-me-that-will-make-you-a-better-data-scientist-66cd9cc16aba)的文章中提到的，作为行业中的数据科学家，产生商业影响是首要目标，而不是炫耀你掌握了多少机器学习知识。
+我仍然记得当我学到像随机森林或 XGBoost 这样的复杂模型后的兴奋；当你有了锤子，尤其是一个闪亮的酷锤子时，所有东西都像钉子。但实际上，除非你是机器学习工程师，否则你在日常数据工作中很少需要 10 层神经网络。使用复杂的机器学习模型，而简单的线性回归足矣，不仅效率低下，还适得其反。正如我在关于[data science lessons I learned from working at McKinsey](https://towardsdatascience.com/5-lessons-mckinsey-taught-me-that-will-make-you-a-better-data-scientist-66cd9cc16aba)的文章中提到的，作为行业中的数据科学家，产生商业影响是首要目标，而不是炫耀你掌握了多少机器学习知识。
 
 过度工程化模型和分析是一种让自己成为人们不愿意合作的、效果不佳的数据合作伙伴的可靠方法。
 
-**试试这个方法：**从简单开始，只有在确实必要时才使用更复杂的方法。对你在分析中使用的方法要做出非常明确的决策，并应用80/20原则，以避免那些带来边际效益的、不必要的努力。
+**试试这个方法：**从简单开始，只有在确实必要时才使用更复杂的方法。对你在分析中使用的方法要做出非常明确的决策，并应用 80/20 原则，以避免那些带来边际效益的、不必要的努力。
 
 ### #4\. 使用流行词汇。
 
@@ -56,7 +56,7 @@
 
 ### #5\. 忽视利益相关者在创建数据产品时的需求。
 
-我偶尔遇到一些新的数据从业者，他们不仅仅遭受上述症状3和4的困扰，还过度热衷于在工作中创建没人欣赏的“数据宠物项目”。别误会，我认为所有的数据热情都应该受到鼓励，宠物项目对技能发展有帮助……只是在你的日常工作中，商业对你使用数据产品来推动影响有很高的期望。
+我偶尔遇到一些新的数据从业者，他们不仅仅遭受上述症状 3 和 4 的困扰，还过度热衷于在工作中创建没人欣赏的“数据宠物项目”。别误会，我认为所有的数据热情都应该受到鼓励，宠物项目对技能发展有帮助……只是在你的日常工作中，商业对你使用数据产品来推动影响有很高的期望。
 
 数据产品（例如，仪表盘）就像任何其他产品一样，其设计的首要规则应该是以用户为中心。它们应该基于需求而生……而不是***仅仅***基于激情。
 
@@ -74,26 +74,26 @@
 
 [原文](https://medium.com/geekculture/avoid-these-five-behaviors-that-make-you-look-like-a-data-novice-40f01158ae00)。经授权转载。
 
-**简介：**[Tessa Xie](https://www.linkedin.com/in/tessayuqingxie/) 是一名从事AV行业的数据科学家，曾在麦肯锡工作，且是三次顶级中等作家。Tessa白天是数据领域的先锋，晚上是作家，周末则是画家、潜水员，还有更多身份。
+**简介：**[Tessa Xie](https://www.linkedin.com/in/tessayuqingxie/) 是一名从事 AV 行业的数据科学家，曾在麦肯锡工作，且是三次顶级中等作家。Tessa 白天是数据领域的先锋，晚上是作家，周末则是画家、潜水员，还有更多身份。
 
 **相关：**
 
 +   [我在数据科学职业生涯三年中学到的三大重要课程](https://www.kdnuggets.com/2021/09/3-important-lessons-data-science-career.html)
 
-+   [避免的5个数据科学职业错误](https://www.kdnuggets.com/2021/08/5-data-science-career-mistakes-avoid.html)
++   [避免的 5 个数据科学职业错误](https://www.kdnuggets.com/2021/08/5-data-science-career-mistakes-avoid.html)
 
-+   [成为更好的分析师的3种思维方式改变](https://www.kdnuggets.com/2021/08/3-mindset-changes-better-analyst.html)
++   [成为更好的分析师的 3 种思维方式改变](https://www.kdnuggets.com/2021/08/3-mindset-changes-better-analyst.html)
 
 ### 更多相关话题
 
-+   [避免这5个每个AI初学者都会犯的常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个每个 AI 初学者都会犯的常见错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [KDnuggets™新闻 22:n03，1月19日：深入探讨13个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™新闻 22:n03，1 月 19 日：深入探讨 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [停止学习数据科学来寻找目标，寻找目标去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
 +   [数据科学统计学习的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)

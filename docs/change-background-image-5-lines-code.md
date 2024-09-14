@@ -1,12 +1,12 @@
 # 使用 5 行代码更改任何图像的背景
 
-> 原文：[https://www.kdnuggets.com/2020/11/change-background-image-5-lines-code.html](https://www.kdnuggets.com/2020/11/change-background-image-5-lines-code.html)
+> 原文：[`www.kdnuggets.com/2020/11/change-background-image-5-lines-code.html`](https://www.kdnuggets.com/2020/11/change-background-image-5-lines-code.html)
 
-[评论](#comments)
+评论
 
 **由 [Ayoola Olafenwa](https://www.linkedin.com/in/ayoola-olafenwa-003b901a9/), 独立 AI 研究员**
 
-![图示](../Images/38515998ac57f5eee4ba4a5aca43b7d3.png)
+![图示](img/38515998ac57f5eee4ba4a5aca43b7d3.png)
 
 作者的照片拼贴
 
@@ -14,11 +14,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织在 IT 方面
 
 * * *
 
@@ -62,7 +62,7 @@ PixelLib 使得只需 5 行代码即可更改任何图像的背景。
 
 ***sample.jpg***
 
-![图示](../Images/9cb4a915a796572f6a6dd0110321f946.png)
+![图示](img/9cb4a915a796572f6a6dd0110321f946.png)
 
 来源：[Unsplash.com by Leighann Blackwoo](https://unsplash.com/photos/nRVMVZvy6mo)
 
@@ -70,7 +70,7 @@ PixelLib 使得只需 5 行代码即可更改任何图像的背景。
 
 ***background.jpg***
 
-![图示](../Images/9c5016861bdf4d0e608c01f520fb00e7.png)
+![图示](img/9c5016861bdf4d0e608c01f520fb00e7.png)
 
 来源：[Unsplash.com by Dawid Zawila](https://unsplash.com/photos/9P2-bzjvIHk)
 
@@ -104,7 +104,7 @@ change_bg.change_bg_img(f_image_path = "sample.jpg",b_image_path = "background.j
 
 ***输出图像***
 
-![Image for post](../Images/012617613c0220817884933b5f80812e.png)
+![Image for post](img/012617613c0220817884933b5f80812e.png)
 
 > 哇！这真是太美了，我们成功地替换了图像的背景。
 
@@ -130,7 +130,7 @@ change_bg.color_bg("sample.jpg", colors = (0, 128, 0), output_image_name="colore
 
 ***绿色背景***
 
-![Image for post](../Images/c0ebebee08ecb2cb60bcdeaddc54c229.png)
+![Image for post](img/c0ebebee08ecb2cb60bcdeaddc54c229.png)
 
 **注意：** 你可以通过提供颜色的 RGB 值来为图像的背景分配任何颜色**。**
 
@@ -142,7 +142,7 @@ change_bg.color_bg("sample.jpg", colors = (255, 255, 255), output_image_name="co
 
 ***白色背景***
 
-![Image](../Images/80fc8571372c7acb74f8d79a4da939ce.png)
+![Image](img/80fc8571372c7acb74f8d79a4da939ce.png)
 
 相同的图像，背景为白色。
 
@@ -164,7 +164,7 @@ change_bg.gray_bg(“sample.jpg”,output_image_name=”gray_img.jpg”)
 
 ***输出图像***
 
-![Image](../Images/763baa93f343c2e8b1b9fb768e3e8c3c.png)
+![Image](img/763baa93f343c2e8b1b9fb768e3e8c3c.png)
 
 **注意：** 图像的背景将被更改，现有对象会保持其原始质量。
 
@@ -176,7 +176,7 @@ change_bg.gray_bg(“sample.jpg”,output_image_name=”gray_img.jpg”)
 
 ***sample2.jpg***
 
-![图示](../Images/1c5fa8b203a9d001b56b1565d53dca74.png)
+![图示](img/1c5fa8b203a9d001b56b1565d53dca74.png)
 
 来源: [Unsplash.com by Airella Horvath](https://unsplash.com/photos/V4jPefMoo3E)
 
@@ -192,7 +192,7 @@ change_bg.blur_bg("sample2.jpg", low = True, output_image_name="blur_img.jpg")
 
 *extreme:* 当设置为 true 时，背景会被深度模糊。
 
-![图片](../Images/08ed37a3b1414351c86e83205c3f097b.png)
+![图片](img/08ed37a3b1414351c86e83205c3f097b.png)
 
 图像被轻微模糊。
 
@@ -202,7 +202,7 @@ change_bg.blur_bg("sample2.jpg", moderate = True, output_image_name="blur_img.jp
 
 我们希望适度模糊图像的背景，因此将 *moderate* 设置为 *true*。
 
-![帖子图片](../Images/7a440303d6f21e2fa0fdd361614a2416.png)
+![帖子图片](img/7a440303d6f21e2fa0fdd361614a2416.png)
 
 图像的背景以适度效果模糊。
 
@@ -212,7 +212,7 @@ change_bg.blur_bg("sample2.jpg", extreme = True, output_image_name="blur_img.jpg
 
 我们希望将图像的背景深度模糊，因此将 *extreme* 设置为 *true*。
 
-![帖子图片](../Images/6a18b9119b67043398b0bebd2bee1e2b.png)
+![帖子图片](img/6a18b9119b67043398b0bebd2bee1e2b.png)
 
 图像的背景被极度模糊。
 
@@ -256,11 +256,11 @@ Facebook: [Ayoola Olafenwa](https://web.facebook.com/ayofen)
 
 **相关内容：**
 
-+   [使用 TensorFlow 轻松进行图像数据集增强](/2020/02/easy-image-dataset-augmentation-tensorflow.html)
++   使用 TensorFlow 轻松进行图像数据集增强
 
-+   [使用深度学习自动旋转图像](/2020/07/auto-rotate-images-deep-learning.html)
++   使用深度学习自动旋转图像
 
-+   [计算机视觉路线图](/2020/10/roadmap-computer-vision.html)
++   计算机视觉路线图
 
 ### 更多相关主题
 

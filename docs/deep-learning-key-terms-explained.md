@@ -1,20 +1,20 @@
 # 深度学习关键术语解释
 
-> 原文：[https://www.kdnuggets.com/2016/10/deep-learning-key-terms-explained.html](https://www.kdnuggets.com/2016/10/deep-learning-key-terms-explained.html)
+> 原文：[`www.kdnuggets.com/2016/10/deep-learning-key-terms-explained.html`](https://www.kdnuggets.com/2016/10/deep-learning-key-terms-explained.html)
 
 深度学习因其在多个领域取得了令人瞩目的成功而研究和产业上都在快速发展。深度学习是应用深度神经网络技术——即具有多个隐藏层的神经网络架构——来解决问题的过程。深度学习是一个过程，类似于数据挖掘，它使用深度神经网络架构，这些架构是特定类型的机器学习算法。
 
-![深度学习关键术语解释](../Images/35cca5c97cb4d4033c23fdadcb5820b8.png)
+![深度学习关键术语解释](img/35cca5c97cb4d4033c23fdadcb5820b8.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -48,7 +48,7 @@ ANNs 的架构实际上变化很大，因此没有明确的神经网络定义。
 
 话虽如此，了解生物神经元在很高层次上的工作方式对我们还是有益的，至少可以帮助我们理解人工神经网络的灵感来源。
 
-![深度学习关键术语解释](../Images/5158d1fbee8ed1fd959d9b3c99cf8e3e.png)
+![深度学习关键术语解释](img/5158d1fbee8ed1fd959d9b3c99cf8e3e.png)
 
 图片来源：[维基百科](https://en.wikipedia.org/wiki/Neuron)
 
@@ -102,7 +102,7 @@ ANNs 的架构实际上变化很大，因此没有明确的神经网络定义。
 
 梯度下降是一种优化算法，用于寻找函数的局部极小值。虽然它不能保证全局最小值，但梯度下降对于那些难以通过解析方法精确求解的函数尤其有用，比如设置导数为零并求解。
 
-![梯度下降](../Images/94eda817597caeb0cdaf77e939e34353.png)
+![梯度下降](img/94eda817597caeb0cdaf77e939e34353.png)
 
 如上所述，在神经网络的背景下，**随机梯度下降**用于对网络的参数进行有信息的调整，目标是最小化成本函数，从而使网络的实际输出逐步接近预期输出。这种迭代的最小化使用了微积分，特别是微分。在每次训练步骤后，网络权重根据成本函数的梯度和网络当前的权重进行更新，以便下一次训练步骤的结果可能更接近正确（通过较小的成本函数来衡量）。反向传播（误差的反向传播）是用于将这些更新分配到网络的方法。
 
@@ -114,9 +114,9 @@ ANNs 的架构实际上变化很大，因此没有明确的神经网络定义。
 
 通常与计算机视觉和图像识别相关，卷积神经网络（CNNs）运用卷积的数学概念来模拟生物视觉皮层的神经连接网。
 
-首先，卷积如[Denny Britz 详尽描述的](../2015/11/understanding-convolutional-neural-networks-nlp.html)那样，可以被视为在图像的矩阵表示上滑动的窗口（见下文）。这允许松散地模拟生物视觉场的重叠铺排。
+首先，卷积如 Denny Britz 详尽描述的那样，可以被视为在图像的矩阵表示上滑动的窗口（见下文）。这允许松散地模拟生物视觉场的重叠铺排。
 
-![卷积](../Images/2975d711123d889f2cba78afe99c5195.png)
+![卷积](img/2975d711123d889f2cba78afe99c5195.png)
 
 图片来源：[Analytics Vidhya](https://www.analyticsvidhya.com/blog/2021/07/convolution-neural-network-the-base-for-many-deep-learning-algorithms-cnn-illustrated-by-1-d-ecg-signal-physionet/)
 
@@ -124,15 +124,15 @@ ANNs 的架构实际上变化很大，因此没有明确的神经网络定义。
 
 # 14. 长短期记忆网络
 
-长短期记忆网络（LSTM）是一种递归神经网络，优化用于学习和处理时间相关的数据，这些数据可能在相关事件之间有不确定或未知的时间间隔。它们特有的架构允许持久性，为人工神经网络提供了“记忆”。最近在手写识别和自动语音识别领域的突破受益于LSTM网络。
+长短期记忆网络（LSTM）是一种递归神经网络，优化用于学习和处理时间相关的数据，这些数据可能在相关事件之间有不确定或未知的时间间隔。它们特有的架构允许持久性，为人工神经网络提供了“记忆”。最近在手写识别和自动语音识别领域的突破受益于 LSTM 网络。
 
-![LSTM](../Images/93ed8d39f58131aeb44cb0f2e4b38e98.png)
+![LSTM](img/93ed8d39f58131aeb44cb0f2e4b38e98.png)
 
 图片来源: [克里斯托弗·奥拉赫](http://colah.github.io/posts/2015-08-Understanding-LSTMs/)
 
 这显然只是深度学习术语的一个小子集，许多额外的概念，从基础到高级，等待着你在深入了解当前领先的机器学习研究领域时去探索。
 
-**[马修·梅约](https://www.linkedin.com/in/mattmayo13/)** （[**@mattmayo13**](https://twitter.com/mattmayo13)）是一名数据科学家，同时也是KDnuggets的总编辑，KDnuggets是一个开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1 at kdnuggets[dot]com联系到。
+**[马修·梅约](https://www.linkedin.com/in/mattmayo13/)** （[**@mattmayo13**](https://twitter.com/mattmayo13)）是一名数据科学家，同时也是 KDnuggets 的总编辑，KDnuggets 是一个开创性的在线数据科学和机器学习资源。他的兴趣领域包括自然语言处理、算法设计与优化、无监督学习、神经网络以及机器学习的自动化方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 联系到。
 
 ### 更多相关内容
 
@@ -144,6 +144,6 @@ ANNs 的架构实际上变化很大，因此没有明确的神经网络定义。
 
 +   [自然语言处理关键术语详解](https://www.kdnuggets.com/2017/02/natural-language-processing-key-terms-explained.html)
 
-+   [生成式AI关键术语详解](https://www.kdnuggets.com/generative-ai-key-terms-explained)
++   [生成式 AI 关键术语详解](https://www.kdnuggets.com/generative-ai-key-terms-explained)
 
 +   [遗传算法关键术语详解](https://www.kdnuggets.com/2018/04/genetic-algorithm-key-terms-explained.html)

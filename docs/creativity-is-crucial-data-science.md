@@ -1,10 +1,10 @@
 # 创造力在数据科学中至关重要
 
-> 原文：[https://www.kdnuggets.com/2017/02/creativity-is-crucial-data-science.html](https://www.kdnuggets.com/2017/02/creativity-is-crucial-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/02/creativity-is-crucial-data-science.html`](https://www.kdnuggets.com/2017/02/creativity-is-crucial-data-science.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
-![creativity-data-science](../Images/0b303be717863c0bfb11ad46c063fa42.png)
+![creativity-data-science](img/0b303be717863c0bfb11ad46c063fa42.png)
 
 数据科学可能不会被认为是最具创意的追求。
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -42,22 +42,22 @@
 
 **相关：**
 
-+   [分析与数据科学专业人员的职业建议](/2017/02/career-advice-analytics-data-science.html)
++   分析与数据科学专业人员的职业建议
 
-+   [为什么数据科学家和数据工程师需要理解云中的虚拟化](/2017/01/data-scientist-engineer-understand-virtualization-cloud.html)
++   为什么数据科学家和数据工程师需要理解云中的虚拟化
 
-+   [大数据和物联网并不会让商业更智能，分析和数据科学才会](/2017/01/big-data-iot-business-smarter-analytics-data-science.html)
++   大数据和物联网并不会让商业更智能，分析和数据科学才会
 
 ### 更多相关主题
 
 +   [大数据分析：为何对商业智能如此重要？](https://www.kdnuggets.com/2023/06/big-data-analytics-crucial-business-intelligence.html)
 
-+   [对话式人工智能开发中的3个关键挑战及其避免方法](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
++   [对话式人工智能开发中的 3 个关键挑战及其避免方法](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
 
-+   [开发有效编码习惯的5个关键步骤](https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html)
++   [开发有效编码习惯的 5 个关键步骤](https://www.kdnuggets.com/2023/08/5-crucial-steps-develop-effective-coding-routine.html)
 
 +   [停止学习数据科学以寻找目标，并以目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [数据科学的最低要求：开始时需要掌握的10项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
++   [数据科学的最低要求：开始时需要掌握的 10 项基本技能](https://www.kdnuggets.com/2020/10/data-science-minimum-10-essential-skills.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程……](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程……](https://www.kdnuggets.com/2022/n06.html)

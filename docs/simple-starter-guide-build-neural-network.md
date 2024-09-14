@@ -1,16 +1,16 @@
 # 构建神经网络的简单入门指南
 
-> 原文：[https://www.kdnuggets.com/2018/02/simple-starter-guide-build-neural-network.html](https://www.kdnuggets.com/2018/02/simple-starter-guide-build-neural-network.html)
+> 原文：[`www.kdnuggets.com/2018/02/simple-starter-guide-build-neural-network.html`](https://www.kdnuggets.com/2018/02/simple-starter-guide-build-neural-network.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Jeff Hu](https://www.linkedin.com/in/yaochiehhu/)，机器学习爱好者**
 
-![Header iamge](../Images/fc4c11c0a8e72faaf2ca753224789de7.png)
+![Header iamge](img/fc4c11c0a8e72faaf2ca753224789de7.png)
 
-图片来源于 [https://media.scmagazine.com](https://media.scmagazine.com/)
+图片来源于 [`media.scmagazine.com`](https://media.scmagazine.com/)
 
-从今天开始，你将能够通过 [PyTorch](http://pytorch.org/) 编程并构建一个原始的 [**前馈神经网络**](https://brilliant.org/wiki/feedforward-neural-networks/)（FNN）。这是 FNN 的 Python Jupyter 代码库：[https://github.com/yhuag/neural-network-lab](https://github.com/yhuag/neural-network-lab)
+从今天开始，你将能够通过 [PyTorch](http://pytorch.org/) 编程并构建一个原始的 [**前馈神经网络**](https://brilliant.org/wiki/feedforward-neural-networks/)（FNN）。这是 FNN 的 Python Jupyter 代码库：[`github.com/yhuag/neural-network-lab`](https://github.com/yhuag/neural-network-lab)
 
 本指南作为基础实践工作，引导你从头开始构建神经网络。大多数数学概念和科学决策被省略。你可以自由研究更多内容。
 
@@ -64,9 +64,9 @@ MNIST 是一个包含大量手写数字（即 0 到 9）的巨大数据库，旨
 
 现在我们已经准备好了数据集。我们将开始构建神经网络。概念性示意图如下：
 
-![](../Images/5aa5e0ecf1e76a49324c6da5ec93a9c9.png)
+![](img/5aa5e0ecf1e76a49324c6da5ec93a9c9.png)
 
-FNN 图片来源于 [http://web.utk.edu/](http://web.utk.edu/)
+FNN 图片来源于 [`web.utk.edu/`](http://web.utk.edu/)
 
 **前馈神经网络模型结构**
 
@@ -133,7 +133,7 @@ python fnn.py
 
 你将看到训练过程如下：
 
-![](../Images/1253e956ebdc7cdfcde3b4a47fa3af04.png)
+![](img/1253e956ebdc7cdfcde3b4a47fa3af04.png)
 
 感谢你的时间，希望你喜欢这个教程。所有代码可以在[这里](https://github.com/yhuag/neural-network-lab/blob/master/Feedforward%20Neural%20Network.ipynb)找到！
 
@@ -145,21 +145,21 @@ python fnn.py
 
 **相关内容：**
 
-+   [今天我在午休时用 Keras 构建了一个神经网络](/2017/12/today-built-neural-network-during-lunch-break-keras.html)
++   今天我在午休时用 Keras 构建了一个神经网络
 
-+   [PyTorch 还是 TensorFlow？](/2017/08/pytorch-tensorflow.html)
++   PyTorch 还是 TensorFlow？
 
-+   [用 Keras 精通深度学习的 7 个步骤](/2017/10/seven-steps-deep-learning-keras.html)
++   用 Keras 精通深度学习的 7 个步骤
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 

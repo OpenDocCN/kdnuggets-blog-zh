@@ -1,6 +1,6 @@
 # 将预测性维护从理论转向实践
 
-> 原文：[https://www.kdnuggets.com/2019/12/mathworks-predictive-maintenance-theory-practice.html](https://www.kdnuggets.com/2019/12/mathworks-predictive-maintenance-theory-practice.html)
+> 原文：[`www.kdnuggets.com/2019/12/mathworks-predictive-maintenance-theory-practice.html`](https://www.kdnuggets.com/2019/12/mathworks-predictive-maintenance-theory-practice.html)
 
 赞助文章。
 
@@ -20,13 +20,13 @@
 
 对于将预测性维护应用于从风力涡轮机到空气压缩机等工业系统的组织来说，这成为了一个日益重要的难题。作为解决这一困境的途径，可以使用模拟模型生成合成故障数据，以在缺乏现场测量故障数据的情况下训练算法。
 
-![图像](../Images/2b3c66dc5b5156f0ace8dd99c3c1cd20.png)
+![图像](img/2b3c66dc5b5156f0ace8dd99c3c1cd20.png)
 
 图 1\. 一个用于训练故障分类机器学习算法以克服缺乏测量故障数据的三重泵模拟模型，位于 Simulink 和 Simscape 中。© 1984–2019 The MathWorks, Inc.
 
 **3\. 部署用于运行中的算法。** 一旦预测性维护算法在桌面上完成设计和训练，就需要将其部署到设备上。此步骤的工作量高度依赖于现有的 IT 和 OT 基础设施。虽然有些算法在实时硬件平台上实现（例如，嵌入式控制器、工业 PC 或 PLC），但其他算法将被集成到现有的非实时基础设施中（例如，运行 Windows 或 Linux 的边缘设备）或在云中。越来越多的公司选择使用能够自动生成 C 或 IEC 61131-3 代码、.NET 组件或独立可执行文件的工具链，例如这家[国际包装和纸品制造商](https://www.mathworks.com/company/user_stories/mondi-implements-statistics-based-health-monitoring-and-predictive-maintenance-for-manufacturing-processes-with-machine-learning.html?s_eid=PEP_22664)，它使用预测性维护软件来减少塑料制造厂的废料和机器停机时间。
 
-![图像](../Images/8ac7e182c3137e49224dbaf327b1aa02.png)
+![图像](img/8ac7e182c3137e49224dbaf327b1aa02.png)
 
 图 2\. 一个基于 MATLAB 的人机界面（HMI），使设备操作员在故障发生之前能够接收潜在故障的警告。© 1984–2019 The MathWorks, Inc.
 
@@ -42,31 +42,31 @@
 
 +   转向一种完全新的基于使用的商业模式（例如，销售压缩空气的立方米而不是压缩机，或电梯使用小时而不是整个电梯）。
 
-要了解更多有关本文博客帖子中涵盖的主题的信息，请发送电子邮件至 [pwallner@mathworks.com](mailto:pwallner@mathworks.com) 的工业自动化与机械行业经理 Philipp H. F. Wallner，或查看以下链接：
+要了解更多有关本文博客帖子中涵盖的主题的信息，请发送电子邮件至 pwallner@mathworks.com 的工业自动化与机械行业经理 Philipp H. F. Wallner，或查看以下链接：
 
 +   [预测维护](https://www.mathworks.com/videos/series/predictive-maintenance-tech-talk-series.html?s_eid=PEP_22664)（视频系列）：了解更多关于预测维护的概念和工作流程。
 
-+   [使用Simulink生成故障数据](https://www.mathworks.com/help/predmaint/ug/Use-Simulink-to-Generate-Fault-Data.html;jsessionid=fb6612944dab76ce72922e571d95?s_eid=PEP_22664)（示例）：此示例展示了如何使用仿真模型生成故障和健康数据。它使用一个传动系统，并对齿轮齿故障、传感器漂移故障和轴磨损故障进行建模。
++   [使用 Simulink 生成故障数据](https://www.mathworks.com/help/predmaint/ug/Use-Simulink-to-Generate-Fault-Data.html;jsessionid=fb6612944dab76ce72922e571d95?s_eid=PEP_22664)（示例）：此示例展示了如何使用仿真模型生成故障和健康数据。它使用一个传动系统，并对齿轮齿故障、传感器漂移故障和轴磨损故障进行建模。
 
-+   [Mondi实施基于统计的健康监测和机器学习预测维护以优化制造过程](https://www.mathworks.com/company/user_stories/mondi-implements-statistics-based-health-monitoring-and-predictive-maintenance-for-manufacturing-processes-with-machine-learning.html?s_eid=PEP_22664)（客户参考）：查看Mondi Gronau如何减少工厂中的废料和机器停机时间，每年节省超过50,000欧元。
++   [Mondi 实施基于统计的健康监测和机器学习预测维护以优化制造过程](https://www.mathworks.com/company/user_stories/mondi-implements-statistics-based-health-monitoring-and-predictive-maintenance-for-manufacturing-processes-with-machine-learning.html?s_eid=PEP_22664)（客户参考）：查看 Mondi Gronau 如何减少工厂中的废料和机器停机时间，每年节省超过 50,000 欧元。
 
-+   [MATLAB中的预测维护简介](https://www.mathworks.com/campaigns/offers/introduction-to-predictive-maintenance-with-matlab.html?s_eid=PEP_22664)（电子书）：学习如何开发你的预测维护、状态监测和异常检测算法。
++   [MATLAB 中的预测维护简介](https://www.mathworks.com/campaigns/offers/introduction-to-predictive-maintenance-with-matlab.html?s_eid=PEP_22664)（电子书）：学习如何开发你的预测维护、状态监测和异常检测算法。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 ### 更多相关内容
 
-+   [从理论到实践：构建k最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
++   [从理论到实践：构建 k 最近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 
 +   [数据可视化：理论与技术](https://www.kdnuggets.com/data-visualization-theory-and-techniques)
 

@@ -1,8 +1,8 @@
-# 使用Bash构建您的第一个ETL管道
+# 使用 Bash 构建您的第一个 ETL 管道
 
-> 原文：[https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
+> 原文：[`www.kdnuggets.com/building-your-first-etl-pipeline-with-bash`](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
 
-![使用Bash构建第一个ETL管道](../Images/25385ed4de8b6638a1ca5f30f762b1f7.png)
+![使用 Bash 构建第一个 ETL 管道](img/25385ed4de8b6638a1ca5f30f762b1f7.png)
 
 图片由作者提供 | Midjourney & Canva
 
@@ -12,31 +12,31 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
-ETL，即提取、转换、加载，是一个必要的数据工程过程，涉及从各种来源提取数据，将其转换为可用的格式，并将其移至某个目的地，如数据库。ETL管道自动化了这一过程，确保数据以一致和高效的方式处理，为数据分析、报告和机器学习等任务提供框架，并确保数据干净、可靠且可用。
+ETL，即提取、转换、加载，是一个必要的数据工程过程，涉及从各种来源提取数据，将其转换为可用的格式，并将其移至某个目的地，如数据库。ETL 管道自动化了这一过程，确保数据以一致和高效的方式处理，为数据分析、报告和机器学习等任务提供框架，并确保数据干净、可靠且可用。
 
-Bash，缩写自Bourne-Again Shell — 又名Unix Shell — 是一个强大的工具，用于构建ETL管道，因其简洁性、灵活性和极广泛的适用性，因此是初学者和资深专家的绝佳选择。Bash脚本可以自动化任务、移动文件和与命令行上的其他工具进行交互，这使它成为ETL工作的良好选择。此外，bash在类Unix系统（如Linux、BSD、macOS等）中无处不在，因此在大多数这类系统上无需额外操作即可使用。
+Bash，缩写自 Bourne-Again Shell — 又名 Unix Shell — 是一个强大的工具，用于构建 ETL 管道，因其简洁性、灵活性和极广泛的适用性，因此是初学者和资深专家的绝佳选择。Bash 脚本可以自动化任务、移动文件和与命令行上的其他工具进行交互，这使它成为 ETL 工作的良好选择。此外，bash 在类 Unix 系统（如 Linux、BSD、macOS 等）中无处不在，因此在大多数这类系统上无需额外操作即可使用。
 
-本文针对的是希望构建第一个ETL管道的初学者和实践数据科学家、数据工程师。假设读者具备基本的命令行理解，并旨在提供一个使用bash创建ETL管道的实用指南。文章的最终目标是引导读者完成构建基础ETL管道的过程，通过这篇文章，读者将能够了解如何实现一个从源提取数据、转换数据并将其加载到目标数据库的ETL管道。
+本文针对的是希望构建第一个 ETL 管道的初学者和实践数据科学家、数据工程师。假设读者具备基本的命令行理解，并旨在提供一个使用 bash 创建 ETL 管道的实用指南。文章的最终目标是引导读者完成构建基础 ETL 管道的过程，通过这篇文章，读者将能够了解如何实现一个从源提取数据、转换数据并将其加载到目标数据库的 ETL 管道。
 
 ## 设置您的环境
 
 在开始之前，请确保您具备以下内容：
 
-+   一个基于Unix的系统（Linux或macOS）
++   一个基于 Unix 的系统（Linux 或 macOS）
 
-+   Bash shell（通常在Unix系统上预装）
++   Bash shell（通常在 Unix 系统上预装）
 
 +   基本的命令行操作理解
 
-对于我们的ETL管道，我们将需要这些特定的命令行工具：
+对于我们的 ETL 管道，我们将需要这些特定的命令行工具：
 
 +   `curl`
 
@@ -48,13 +48,13 @@ Bash，缩写自Bourne-Again Shell — 又名Unix Shell — 是一个强大的�
 
 +   `sqlite3`
 
-您可以使用系统的包管理器安装它们。在基于Debian的系统上，您可以使用`apt-get`：
+您可以使用系统的包管理器安装它们。在基于 Debian 的系统上，您可以使用`apt-get`：
 
 ```py
 sudo apt-get install curl jq awk sed sqlite3
 ```
 
-在macOS上，您可以使用`brew`：
+在 macOS 上，您可以使用`brew`：
 
 ```py
 brew install curl jq awk sed sqlite3 

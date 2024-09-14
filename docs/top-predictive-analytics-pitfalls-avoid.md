@@ -1,26 +1,26 @@
 # 避免顶级预测分析陷阱
 
-> 原文：[https://www.kdnuggets.com/2017/01/top-predictive-analytics-pitfalls-avoid.html](https://www.kdnuggets.com/2017/01/top-predictive-analytics-pitfalls-avoid.html)
+> 原文：[`www.kdnuggets.com/2017/01/top-predictive-analytics-pitfalls-avoid.html`](https://www.kdnuggets.com/2017/01/top-predictive-analytics-pitfalls-avoid.html)
 
 **由 Robin Davies， [Principa.](http://www.principa.co.za)**
 
-![](../Images/c1e9232e97c11fb89eecfad3fd888e9a.png)
+![](img/c1e9232e97c11fb89eecfad3fd888e9a.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 预测分析可以产生惊人的结果。基于历史事件中的观察模式进行未来决策所获得的提升，可能远远超过依赖直觉或凭借轶事事件来进行决策的效果。虽然有许多示例展示了在各行各业中可能获得的提升，但我们最近在零售行业做的测试显示，应用稳定的预测模型使我们在产品接受度上提高了五倍，相较于随机样本。说实话，如果预测分析，特别是机器学习没有取得令人印象深刻的结果，就不会如此受到关注。
 
-[阅读我们在使用机器学习预测2015年橄榄球世界杯结果时学到的经验教训](http://insights.principa.co.za/machine-learning-out-predicts-humans-during-the-rugby-world-cup)
+[阅读我们在使用机器学习预测 2015 年橄榄球世界杯结果时学到的经验教训](http://insights.principa.co.za/machine-learning-out-predicts-humans-during-the-rugby-world-cup)
 
 但预测模型并不是万无一失的。它们有点像赛马：对变化非常敏感，容易让骑手感到困惑。
 
@@ -56,7 +56,7 @@
 
 +   **使用错误的度量标准来衡量模型的表现。**
 
-    例如，在10,000个案例中只有两个案例是欺诈的，9,998个案例不是欺诈。如果在模型训练中使用的性能度量只是简单的准确率，那么模型将试图最大化准确率。因此，如果它预测所有10,000个案例都不是欺诈，那么模型的准确率将达到99.98%，这看起来非常惊人，但在识别欺诈方面并没有任何实际用途。它仅仅正确地识别了99.98%的非欺诈实例。因此，对于稀有事件建模（例如欺诈），需要应用其他方法。
+    例如，在 10,000 个案例中只有两个案例是欺诈的，9,998 个案例不是欺诈。如果在模型训练中使用的性能度量只是简单的准确率，那么模型将试图最大化准确率。因此，如果它预测所有 10,000 个案例都不是欺诈，那么模型的准确率将达到 99.98%，这看起来非常惊人，但在识别欺诈方面并没有任何实际用途。它仅仅正确地识别了 99.98%的非欺诈实例。因此，对于稀有事件建模（例如欺诈），需要应用其他方法。
 
 +   **在非线性交互上使用简单线性模型。**
 
@@ -66,7 +66,7 @@
 
 +   **进行正则化而没有标准化。**
 
-    许多实践者没有意识到，在数据标准化之前对模型特征应用正则化的冗余。因为正则化会对尺度较小的特征施加更多惩罚。例如，如果有一个尺度在3,000到10,000之间的特征，另一个尺度在0到1之间，另一个在-9,999到9,999之间。
+    许多实践者没有意识到，在数据标准化之前对模型特征应用正则化的冗余。因为正则化会对尺度较小的特征施加更多惩罚。例如，如果有一个尺度在 3,000 到 10,000 之间的特征，另一个尺度在 0 到 1 之间，另一个在-9,999 到 9,999 之间。
 
 +   **未考虑实时评分环境。**
 
@@ -78,7 +78,7 @@
 
 +   **未考虑应用有效预测分析的现实世界影响及可能的后果。**
 
-    四年前，美国零售商Target成为头条新闻，当时《纽约时报》记者查尔斯·杜希格（Charles Duhigg）揭示了[Target的分析模型预测了一名青少年的怀孕](https://www.example.org/2014/05/target-predict-teen-pregnancy-inside-story.html)，而她的父亲还不知道。正如一些人所指出的，虽然你可以做到，并不意味着你应该这样做。
+    四年前，美国零售商 Target 成为头条新闻，当时《纽约时报》记者查尔斯·杜希格（Charles Duhigg）揭示了[Target 的分析模型预测了一名青少年的怀孕](https://www.example.org/2014/05/target-predict-teen-pregnancy-inside-story.html)，而她的父亲还不知道。正如一些人所指出的，虽然你可以做到，并不意味着你应该这样做。
 
 多年来，我们通过预测分析共同学到了一些宝贵的经验。为什么不利用这些经验呢？如果你想在预测分析领域获得进一步的指导，[请联系我们！](http://www.principa.co.za/contact) 我们很高兴与你面谈，分享知识，并了解你的预测分析项目和计划。
 
@@ -88,24 +88,24 @@
 
 **相关：**
 
-+   [可靠的数据科学：避免最具害的预测陷阱](/2017/01/siegel-data-science-avoiding-prediction-pitfall.html)
++   可靠的数据科学：避免最具害的预测陷阱
 
-+   [通过AI进行物联网的持续改进/持续学习](/2016/11/continuous-improvement-iot-ai-learning.html)
++   通过 AI 进行物联网的持续改进/持续学习
 
-+   [4个原因你的机器学习模型可能出错（以及如何修复它）](/2016/12/4-reasons-machine-learning-model-wrong.html)
++   4 个原因你的机器学习模型可能出错（以及如何修复它）
 
-+   [Target真的预测了青少年的怀孕吗？内幕故事](/2014/05/target-predict-teen-pregnancy-inside-story.html)
++   Target 真的预测了青少年的怀孕吗？内幕故事
 
 ### 更多相关话题
 
-+   [你为什么应该避免从事数据科学职业的5个主要原因](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
++   [你为什么应该避免从事数据科学职业的 5 个主要原因](https://www.kdnuggets.com/2022/04/top-5-reasons-avoid-data-science-career.html)
 
 +   [新手数据科学家应该避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
 +   [如何避免过拟合](https://www.kdnuggets.com/2022/08/avoid-overfitting.html)
 
-+   [对话式AI开发中的3个关键挑战及如何避免](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
++   [对话式 AI 开发中的 3 个关键挑战及如何避免](https://www.kdnuggets.com/3-crucial-challenges-in-conversational-ai-development-and-how-to-avoid-them)
 
-+   [5个常见的Python陷阱（及如何避免）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
++   [5 个常见的 Python 陷阱（及如何避免）](https://www.kdnuggets.com/5-common-python-gotchas-and-how-to-avoid-them)
 
-+   [避免这5个AI新手常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个 AI 新手常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)

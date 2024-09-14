@@ -1,8 +1,8 @@
 # 机器学习模型监控检查清单：需要跟踪的 7 件事
 
-> 原文：[https://www.kdnuggets.com/2021/03/machine-learning-model-monitoring-checklist.html](https://www.kdnuggets.com/2021/03/machine-learning-model-monitoring-checklist.html)
+> 原文：[`www.kdnuggets.com/2021/03/machine-learning-model-monitoring-checklist.html`](https://www.kdnuggets.com/2021/03/machine-learning-model-monitoring-checklist.html)
 
-[评论](#comments)
+评论
 
 **由 [Emeli Dral](https://twitter.com/EmeliDral)，Evidently AI 的首席技术官兼联合创始人 & [Elena Samuylova](https://twitter.com/elenasamuylova/)，Evidently AI 的首席执行官兼联合创始人**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 这意味着我们需要监控我们的模型。而且还有更多的事情需要注意！
 
-![图片](../Images/b29caf6d23d8985bee785a88032cd741.png)
+![图片](img/b29caf6d23d8985bee785a88032cd741.png)
 
 如果生产中的 ML 让您感到措手不及，这里有一个检查清单，供您关注。
 
@@ -62,7 +62,7 @@
 
 这两种漂移的**最终衡量标准是模型质量的退化**。但有时，实际值尚未知道，我们不能直接计算。在这种情况下，有一些领先指标可以跟踪。我们可以监测输入数据或目标函数的属性是否发生变化。
 
-![Image](../Images/6efeba1798617c476e8b559d61ecbcb6.png)
+![Image](img/6efeba1798617c476e8b559d61ecbcb6.png)
 
 例如，你可以跟踪关键模型特征和模型预测的分布。如果它们与过去的时间段显著不同，则触发警报。
 
@@ -72,19 +72,19 @@
 
 **4\. 模型性能**
 
-了解模型是否表现良好的最直接方法是将预测结果与实际值进行对比。你可以使用与模型训练阶段相同的指标，无论是分类的精准度/召回率，回归的RMSE，等等。如果数据质量或现实世界的模式发生变化，我们将看到这些指标逐渐下降。
+了解模型是否表现良好的最直接方法是将预测结果与实际值进行对比。你可以使用与模型训练阶段相同的指标，无论是分类的精准度/召回率，回归的 RMSE，等等。如果数据质量或现实世界的模式发生变化，我们将看到这些指标逐渐下降。
 
 这里有一些警告。
 
 **首先，真实标签或实际标签往往会有延迟。** 例如，如果你为较长时间范围做预测，或者数据传递有延迟。有时你需要额外的努力来标记新数据以检查预测是否正确。在这种情况下，首先追踪数据和目标漂移作为早期警告是有意义的。
 
-**其次，需要追踪的不仅仅是模型质量，还要关注相关的业务KPI。** ROC AUC的下降并不能直接说明它对营销转化率的影响有多大。将模型质量与业务指标连接起来或找到一些可解释的代理指标是至关重要的。
+**其次，需要追踪的不仅仅是模型质量，还要关注相关的业务 KPI。** ROC AUC 的下降并不能直接说明它对营销转化率的影响有多大。将模型质量与业务指标连接起来或找到一些可解释的代理指标是至关重要的。
 
 **第三，你的质量度量标准应适合使用场景。** 例如，如果你有不平衡的类别，准确度指标远非理想。在回归问题中，你可能会关注误差的符号。因此，你不仅应追踪绝对值，还应追踪误差分布。区分偶发异常值和实际退化也是至关重要的。
 
 所以选择你的度量标准要明智！
 
-![Image](../Images/8439a2a6935b22fb1dd1563563b1cb95.png)
+![Image](img/8439a2a6935b22fb1dd1563563b1cb95.png)
 
 *我们的目标是追踪模型的实际效果以及在出现问题时如何进行调试。*
 
@@ -102,7 +102,7 @@
 
 根据使用场景，我们可以通过在模型输出上添加后处理或业务逻辑来解决问题。或者通过重建模型以考虑低性能段。
 
-![Image](../Images/66ca85daea3a3aed3b32bb11d84053f1.png)
+![Image](img/66ca85daea3a3aed3b32bb11d84053f1.png)
 
 *我们的目标是超越整体性能，了解模型在特定数据切片上的质量。*
 
@@ -128,7 +128,7 @@
 
 一个开源工具供检查：[*Seldon Alibi-Detect*](https://github.com/SeldonIO/alibi-detect)
 
-![Image](../Images/0bcc5f81d4c8b8260764e402db3ec31d.png)
+![Image](img/0bcc5f81d4c8b8260764e402db3ec31d.png)
 
 监控可能听起来很无聊。但它对机器学习在现实世界中的应用至关重要。不要等到模型失败才去创建你的第一个仪表板！
 
@@ -138,11 +138,11 @@
 
 **相关：**
 
-+   [机器学习系统设计：斯坦福大学免费课程](/2021/02/machine-learning-systems-design-free-stanford-course.html)
++   机器学习系统设计：斯坦福大学免费课程
 
-+   [MLOps：模型监控 101](/2021/01/mlops-model-monitoring-101.html)
++   MLOps：模型监控 101
 
-+   [如何使用 MLOps 制定有效的 AI 策略](/2021/01/mlops-effective-ai-strategy.html)
++   如何使用 MLOps 制定有效的 AI 策略
 
 ### 更多相关话题
 

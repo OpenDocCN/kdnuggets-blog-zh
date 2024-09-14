@@ -1,8 +1,8 @@
 # 用 Python 轻松构建命令行应用程序的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
+> 原文：[`www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps`](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
 
-![用 Python 轻松构建命令行应用程序的 7 个步骤](../Images/adfbc1490240615cbb4432af75a24c12.png)
+![用 Python 轻松构建命令行应用程序的 7 个步骤](img/adfbc1490240615cbb4432af75a24c12.png)
 
 作者提供的图片
 
@@ -20,19 +20,19 @@
 
 将任务添加到列表中：
 
-![用 Python 轻松构建命令行应用程序的 7 个步骤](../Images/30e5521fc97f097d0038bc3e4fe3c4f3.png)
+![用 Python 轻松构建命令行应用程序的 7 个步骤](img/30e5521fc97f097d0038bc3e4fe3c4f3.png)
 
 作者提供的图片
 
 获取列表中所有任务的清单：
 
-![用 Python 轻松构建命令行应用程序的 7 个步骤](../Images/122c08c7195318e0e83e01aa44bd4882.png)
+![用 Python 轻松构建命令行应用程序的 7 个步骤](img/122c08c7195318e0e83e01aa44bd4882.png)
 
 作者提供的图片
 
 以及在完成后使用索引删除任务：
 
-![用 Python 轻松构建命令行应用程序的 7 个步骤](../Images/85939a9a2447db626be2653cf89a2e53.png)
+![用 Python 轻松构建命令行应用程序的 7 个步骤](img/85939a9a2447db626be2653cf89a2e53.png)
 
 作者提供的图片
 
@@ -106,7 +106,7 @@ def add_task(task):
 
 注意我们如何使用`with`语句来管理文件。这样可以确保文件在操作后关闭——即使发生错误——从而最小化资源泄漏。
 
-要了解更多信息，请阅读[本教程中的上下文管理器章节，以高效处理资源](/how-to-write-efficient-python-code-a-tutorial-for-beginners)。
+要了解更多信息，请阅读本教程中的上下文管理器章节，以高效处理资源。
 
 `list_tasks`函数通过检查文件是否存在来列出所有任务。文件仅在你添加第一个任务时创建。我们首先检查文件是否存在，然后读取并打印任务。如果当前没有任务，我们会得到一条有用的信息：
 
@@ -267,11 +267,11 @@ $ python3 todo.py --list
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -281,7 +281,7 @@ $ python3 todo.py --list
 
 +   [在 5 分钟内构建机器学习网络应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在 5 分钟内构建机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习网络应用](https://www.kdnuggets.com/2022/n10.html)
 
 +   [用 Docker 容器化 Python 应用的 5 个简单步骤](https://www.kdnuggets.com/containerize-python-apps-with-docker-in-5-easy-steps)
 

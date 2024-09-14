@@ -1,12 +1,12 @@
 # 一个错误如何浪费了我 3 年的数据科学旅程
 
-> 原文：[https://www.kdnuggets.com/2021/06/single-mistake-wasted-3-years-data-science.html](https://www.kdnuggets.com/2021/06/single-mistake-wasted-3-years-data-science.html)
+> 原文：[`www.kdnuggets.com/2021/06/single-mistake-wasted-3-years-data-science.html`](https://www.kdnuggets.com/2021/06/single-mistake-wasted-3-years-data-science.html)
 
-[评论](#comments)
+评论
 
 **由 [Pranjal Saxena](https://www.linkedin.com/in/pranjalai/)，数据科学家，人工智能领域顶级写手**
 
-![成人和孩子在电脑上工作](../Images/0e55084f539e97723417528b4f8f46ee.png)
+![成人和孩子在电脑上工作](img/0e55084f539e97723417528b4f8f46ee.png)
 
 照片由 [**Julia M Cameron**](https://www.pexels.com/@julia-m-cameron?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，来自 [**Pexels**](https://www.pexels.com/photo/photo-of-woman-tutoring-young-boy-4145354/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 支持
 
 * * *
 
@@ -62,19 +62,19 @@
 
 如果你想要更多关于数据科学和技术的精彩文章，[这里是我的新闻通讯](https://mailchi.mp/4d33914bb328/pranjals-newsletter)。
 
-感谢Anupam Chugh。
+感谢 Anupam Chugh。
 
-觉得这个故事有趣吗？在Medium上关注我（[Pranjal](https://pranjalai.medium.com/)）。如果你有私人问题，欢迎通过[Linkedin](https://www.linkedin.com/in/pranjalai/)联系我。如果你希望直接收到更多关于数据科学和技术的精彩文章，可以订阅我的免费新闻通讯：[Pranjal’s Newsletter](https://mailchi.mp/4d33914bb328/pranjals-newsletter)。
+觉得这个故事有趣吗？在 Medium 上关注我（[Pranjal](https://pranjalai.medium.com/)）。如果你有私人问题，欢迎通过[Linkedin](https://www.linkedin.com/in/pranjalai/)联系我。如果你希望直接收到更多关于数据科学和技术的精彩文章，可以订阅我的免费新闻通讯：[Pranjal’s Newsletter](https://mailchi.mp/4d33914bb328/pranjals-newsletter)。
 
 [原文](https://betterprogramming.pub/how-a-single-mistake-wasted-3-years-of-my-data-science-journey-b7ca1e962085)。经许可转载。
 
 **相关：**
 
-+   [未来5年数据科学职位会短缺吗？](/2021/06/shortage-data-science-jobs-5-years.html)
++   未来 5 年数据科学职位会短缺吗？
 
-+   [数据科学家、数据工程师及其他数据职业解析](/2021/05/data-scientist-data-engineer-data-careers-explained.html)
++   数据科学家、数据工程师及其他数据职业解析
 
-+   [如何成为数据科学家的指南（逐步方法）](/2021/05/guide-become-data-scientist.html)
++   如何成为数据科学家的指南（逐步方法）
 
 ### 更多相关话题
 
@@ -82,10 +82,10 @@
 
 +   [在你的数据科学旅程中实现量子飞跃](https://www.kdnuggets.com/2023/02/make-quantum-leaps-data-science-journey.html)
 
-+   [30年的数据科学：来自数据科学从业者的回顾](https://www.kdnuggets.com/30-years-of-data-science-a-review-from-a-data-science-practitioner)
++   [30 年的数据科学：来自数据科学从业者的回顾](https://www.kdnuggets.com/30-years-of-data-science-a-review-from-a-data-science-practitioner)
 
-+   [规划你获得SAS认证的旅程](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
++   [规划你获得 SAS 认证的旅程](https://www.kdnuggets.com/2022/11/sas-map-journey-towards-sas-certification.html)
 
-+   [机器学习模型可解释性如何加速AI采纳之旅](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)
++   [机器学习模型可解释性如何加速 AI 采纳之旅](https://www.kdnuggets.com/2022/07/ml-model-explainability-accelerates-ai-adoption-journey-financial-services.html)
 
 +   [WavJourney：进入音频故事情节生成的世界](https://www.kdnuggets.com/wavjourney-a-journey-into-the-world-of-audio-storyline-generation)

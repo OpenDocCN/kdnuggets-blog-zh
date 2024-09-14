@@ -1,8 +1,8 @@
 # 5 步骤开始使用 Google Cloud Platform
 
-> 原文：[https://www.kdnuggets.com/5-steps-google-cloud-platform](https://www.kdnuggets.com/5-steps-google-cloud-platform)
+> 原文：[`www.kdnuggets.com/5-steps-google-cloud-platform`](https://www.kdnuggets.com/5-steps-google-cloud-platform)
 
-![5 步骤开始使用 Google Cloud Platform](../Images/c6bac588fecf1105151920b8b05e8ab3.png)
+![5 步骤开始使用 Google Cloud Platform](img/c6bac588fecf1105151920b8b05e8ab3.png)
 
 # Google Cloud Platform 介绍
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -205,7 +205,7 @@ ORDER BY Year ASC;
 
 成本优化对于在性能和费用之间保持平衡至关重要。
 
-+   **使用预emptible VMs 和自动扩展**：为了管理成本，利用预emptible VMs，它们的成本远低于常规 VMs。结合自动扩展，可以确保在需要时拥有必要的资源，而不会过度配置。
++   **使用预 emptible VMs 和自动扩展**：为了管理成本，利用预 emptible VMs，它们的成本远低于常规 VMs。结合自动扩展，可以确保在需要时拥有必要的资源，而不会过度配置。
 
 +   **比较无服务器与容器化部署**：评估无服务器和容器化部署之间的成本差异，以确定最具成本效益的方法。
 
@@ -237,22 +237,22 @@ ORDER BY Year ASC;
 
 +   **参与项目合作**：与同事合作项目或参与利用 GCP 的开源项目。实际的合作提供了不同的视角，并提升你的解决问题的技能。
 
-技术领域，尤其是云计算和机器学习，持续不断地发展。保持对最新进展的关注、参与社区活动并从事实际项目是不断提升技能的绝佳方式。此外，反思已完成的项目，从遇到的挑战中学习，并将这些经验应用于未来的工作中。每个项目都是一个学习机会，而持续改进是你在GCP上数据科学和机器学习之旅成功的关键。
+技术领域，尤其是云计算和机器学习，持续不断地发展。保持对最新进展的关注、参与社区活动并从事实际项目是不断提升技能的绝佳方式。此外，反思已完成的项目，从遇到的挑战中学习，并将这些经验应用于未来的工作中。每个项目都是一个学习机会，而持续改进是你在 GCP 上数据科学和机器学习之旅成功的关键。
 
-通过遵循本指南，你为在Google Cloud Platform上的冒险奠定了坚实的基础。未来的道路充满了学习、探索和大量的机会，让你的数据项目产生重大影响。
+通过遵循本指南，你为在 Google Cloud Platform 上的冒险奠定了坚实的基础。未来的道路充满了学习、探索和大量的机会，让你的数据项目产生重大影响。
 
-[**马修·梅奥**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为KDnuggets的总编辑，马修旨在让复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、机器学习算法以及探索新兴的人工智能。他的使命是将数据科学社区的知识普及化。马修从6岁起就开始编程。
+[**马修·梅奥**](https://www.linkedin.com/in/mattmayo13/) ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为 KDnuggets 的总编辑，马修旨在让复杂的数据科学概念变得易于理解。他的专业兴趣包括自然语言处理、机器学习算法以及探索新兴的人工智能。他的使命是将数据科学社区的知识普及化。马修从 6 岁起就开始编程。
 
 ### 更多相关主题
 
-+   [5步开始使用Python数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
++   [5 步开始使用 Python 数据结构](https://www.kdnuggets.com/5-steps-getting-started-python-data-structures)
 
-+   [5步开始使用SQL](https://www.kdnuggets.com/5-steps-getting-started-with-sql)
++   [5 步开始使用 SQL](https://www.kdnuggets.com/5-steps-getting-started-with-sql)
 
-+   [5步开始使用Scikit-learn](https://www.kdnuggets.com/5-steps-getting-started-scikit-learn)
++   [5 步开始使用 Scikit-learn](https://www.kdnuggets.com/5-steps-getting-started-scikit-learn)
 
-+   [5步开始使用PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
++   [5 步开始使用 PyTorch](https://www.kdnuggets.com/5-steps-getting-started-pytorch)
 
-+   [5个简单步骤系列：精通Python、SQL、Scikit-learn、PyTorch等](https://www.kdnuggets.com/5-simple-steps-series-master-python-sql-scikit-learn-pytorch-google-cloud)
++   [5 个简单步骤系列：精通 Python、SQL、Scikit-learn、PyTorch 等](https://www.kdnuggets.com/5-simple-steps-series-master-python-sql-scikit-learn-pytorch-google-cloud)
 
 +   [Qdrant：开源向量搜索引擎与托管云平台](https://www.kdnuggets.com/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html)

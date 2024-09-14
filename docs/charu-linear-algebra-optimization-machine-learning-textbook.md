@@ -1,14 +1,14 @@
 # 线性代数与优化及机器学习：一本教科书
 
-> 原文：[https://www.kdnuggets.com/2020/05/charu-linear-algebra-optimization-machine-learning-textbook.html](https://www.kdnuggets.com/2020/05/charu-linear-algebra-optimization-machine-learning-textbook.html)
+> 原文：[`www.kdnuggets.com/2020/05/charu-linear-algebra-optimization-machine-learning-textbook.html`](https://www.kdnuggets.com/2020/05/charu-linear-algebra-optimization-machine-learning-textbook.html)
 
 赞助帖子。
 
-**《机器学习的线性代数与优化：一本教科书》（Springer），作者 Charu C. Aggarwal，2020年5月。**
+**《机器学习的线性代数与优化：一本教科书》（Springer），作者 Charu C. Aggarwal，2020 年 5 月。**
 
 [**目录**](http://www.charuaggarwal.net/Linear-Algebra-And-Optimization.pdf)
 
-[![图示](../Images/4c263455bd0532ce761720539026aa93.png)](https://rd.springer.com/book/10.1007/978-3-030-40344-7)
+![图示](https://rd.springer.com/book/10.1007/978-3-030-40344-7)
 
 **[PDF 下载链接](https://rd.springer.com/book/10.1007/978-3-030-40344-7)**（仅限连接到订阅机构的计算机免费）。PDF 版本包含电子阅读器的链接，并且在公式排版方面优于 Kindle 版本。
 
@@ -28,11 +28,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -46,6 +46,6 @@
 
 +   [数据科学中的线性代数](https://www.kdnuggets.com/2022/07/linear-algebra-data-science.html)
 
-+   [KDnuggets 新闻，7月13日：数据科学中的线性代数；10 个现代…](https://www.kdnuggets.com/2022/n28.html)
++   [KDnuggets 新闻，7 月 13 日：数据科学中的线性代数；10 个现代…](https://www.kdnuggets.com/2022/n28.html)
 
 +   [掌握线性代数的 5 个免费课程](https://www.kdnuggets.com/2022/10/5-free-courses-master-linear-algebra.html)

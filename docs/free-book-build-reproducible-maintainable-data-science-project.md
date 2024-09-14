@@ -1,6 +1,6 @@
 # 构建可重复和可维护的数据科学项目：一本免费在线书籍
 
-> 原文：[https://www.kdnuggets.com/2022/08/free-book-build-reproducible-maintainable-data-science-project.html](https://www.kdnuggets.com/2022/08/free-book-build-reproducible-maintainable-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2022/08/free-book-build-reproducible-maintainable-data-science-project.html`](https://www.kdnuggets.com/2022/08/free-book-build-reproducible-maintainable-data-science-project.html)
 
 确定如何结构化、管理和维护你的数据科学项目是一系列不简单的任务，如果执行得当，可以在项目展开和成熟的过程中大大简化你的工作。旨在确保可重复性会增加额外的复杂性和难度，但有助于项目的长期性和可信度。
 
@@ -10,15 +10,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-![构建可重复和可维护的数据科学项目：一本免费在线书籍](../Images/4fa96cbb2b3c8885210d835a0b41d0c8.png)
+![构建可重复和可维护的数据科学项目：一本免费在线书籍](img/4fa96cbb2b3c8885210d835a0b41d0c8.png)
 
 Python 项目文件结构（来源：[构建可重复和可维护的数据科学项目](https://khuyentran1401.github.io/reproducible-data-science/README.html) 作者：[Khuyen Tran](https://mathdatasimplified.com/)）
 
@@ -52,7 +52,7 @@ Tran 的书和随附的 [数据科学 Cookie Cutter](https://github.com/khuyentr
 
 同样重视测试、配置文件管理、项目安装、数据和模型管理，以及代码的合规性和组织。简而言之，无论你应该做什么来确保你的代码是可重复和可维护的，Tran 在本书中都有覆盖。不仅涵盖了概念和实践，随附的 GitHub 存储库还包含一个有助于执行整个任务集的项目。
 
-![构建一个可重复和可维护的数据科学项目：一本免费在线书籍](../Images/712da72b29d8d5ada22c69b490142b1d.png)
+![构建一个可重复和可维护的数据科学项目：一本免费在线书籍](img/712da72b29d8d5ada22c69b490142b1d.png)
 
 预提交任务（来源：[构建一个可重复和可维护的数据科学项目](https://khuyentran1401.github.io/reproducible-data-science/README.html) 由 [Khuyen Tran](https://mathdatasimplified.com/) 提供）
 
@@ -82,4 +82,4 @@ Tran 的免费在线书籍对初学者和经验丰富的从业者都是一个有
 
 +   [《免费 Python 项目编程课程》](https://www.kdnuggets.com/2022/08/free-python-project-coding-course.html)
 
-+   [《KDnuggets 新闻，4月6日：8门免费 MIT 数据科学课程》](https://www.kdnuggets.com/2022/n14.html)
++   [《KDnuggets 新闻，4 月 6 日：8 门免费 MIT 数据科学课程》](https://www.kdnuggets.com/2022/n14.html)

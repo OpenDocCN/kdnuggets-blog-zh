@@ -1,28 +1,28 @@
-# NumPy用于图像处理
+# NumPy 用于图像处理
 
-> 原文：[https://www.kdnuggets.com/numpy-for-image-processing](https://www.kdnuggets.com/numpy-for-image-processing)
+> 原文：[`www.kdnuggets.com/numpy-for-image-processing`](https://www.kdnuggets.com/numpy-for-image-processing)
 
-![NumPy用于图像处理](../Images/94513646e5d024dabc980fa9cecef53a.png)
+![NumPy 用于图像处理](img/94513646e5d024dabc980fa9cecef53a.png)
 
 图像来源于 [freepik](https://www.freepik.com/free-photo/combination-facial-features-concept_36029178.htm#fromView=search&page=1&position=19&uuid=e5fa53f4-8eb8-4a51-ac7c-bc74f85aa07d)
 
-NumPy是Python中强大的图像处理工具。它允许你使用数组操作来处理图像。本文探讨了使用NumPy的几种图像处理技术。
+NumPy 是 Python 中强大的图像处理工具。它允许你使用数组操作来处理图像。本文探讨了使用 NumPy 的几种图像处理技术。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 ## 导入库
 
-我们必须导入所需的库：PIL、NumPy和Matplotlib。PIL用于打开图像。NumPy允许高效的数组操作和图像处理。Matplotlib用于可视化图像。
+我们必须导入所需的库：PIL、NumPy 和 Matplotlib。PIL 用于打开图像。NumPy 允许高效的数组操作和图像处理。Matplotlib 用于可视化图像。
 
 ```py
 import numpy as np
@@ -65,11 +65,11 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![裁剪图像](../Images/2fb66f7dbcc3909e72e85a7c6614a37a.png)
+![裁剪图像](img/2fb66f7dbcc3909e72e85a7c6614a37a.png)
 
 ## 旋转图像
 
-我们使用NumPy的**'rot90'**函数将图像数组逆时针旋转90度。
+我们使用 NumPy 的**'rot90'**函数将图像数组逆时针旋转 90 度。
 
 ```py
 # Load the image using PIL (Python Imaging Library)
@@ -100,11 +100,11 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![旋转图像](../Images/a081fe73d36876f650f6c5dc5e6a8bea.png)
+![旋转图像](img/a081fe73d36876f650f6c5dc5e6a8bea.png)
 
 ## 翻转图像
 
-我们使用NumPy的**'fliplr'**函数水平翻转图像数组。
+我们使用 NumPy 的**'fliplr'**函数水平翻转图像数组。
 
 ```py
 # Load the image using PIL (Python Imaging Library)
@@ -135,11 +135,11 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![翻转图像](../Images/1a246e242681af3078cf7e7a27046a65.png)
+![翻转图像](img/1a246e242681af3078cf7e7a27046a65.png)
 
 ## 图像的负片
 
-图像的负片是通过反转其像素值来制作的。在灰度图像中，每个像素的值从最大值（8位图像为255）中减去。在彩色图像中，这是为每个颜色通道单独完成的。
+图像的负片是通过反转其像素值来制作的。在灰度图像中，每个像素的值从最大值（8 位图像为 255）中减去。在彩色图像中，这是为每个颜色通道单独完成的。
 
 ```py
 # Load the image using PIL (Python Imaging Library)
@@ -180,11 +180,11 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![负片图像](../Images/0e351b24bd7a7621b56296bd353c69e5.png)
+![负片图像](img/0e351b24bd7a7621b56296bd353c69e5.png)
 
 ## 二值化图像
 
-二值化图像将其转换为黑白图像。每个像素根据阈值标记为黑色或白色。小于阈值的像素变为0（黑色），大于阈值的像素变为255（白色）。
+二值化图像将其转换为黑白图像。每个像素根据阈值标记为黑色或白色。小于阈值的像素变为 0（黑色），大于阈值的像素变为 255（白色）。
 
 ```py
 # Load the image using PIL (Python Imaging Library)
@@ -217,11 +217,11 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![二值化图像](../Images/e4b7c0bad77818b6bfd37654d0aa951f.png)
+![二值化图像](img/e4b7c0bad77818b6bfd37654d0aa951f.png)
 
 ## 颜色空间转换
 
-颜色空间转换将图像从一种颜色模型转换为另一种。这是通过改变像素值的数组来完成的。我们使用RGB通道的加权和将彩色图像转换为灰度图像。
+颜色空间转换将图像从一种颜色模型转换为另一种。这是通过改变像素值的数组来完成的。我们使用 RGB 通道的加权和将彩色图像转换为灰度图像。
 
 ```py
 # Load the image using PIL (Python Imaging Library)
@@ -250,7 +250,7 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![颜色转换](../Images/b401b33889ddb0569abcc086abc5e8bf.png)
+![颜色转换](img/b401b33889ddb0569abcc086abc5e8bf.png)
 
 ## 像素强度直方图
 
@@ -276,7 +276,7 @@ plt.grid(True)
 plt.show() 
 ```
 
-![直方图](../Images/48edb31106b04096721b51cf892eb592.png)
+![直方图](img/48edb31106b04096721b51cf892eb592.png)
 
 ## 图像掩膜
 
@@ -319,7 +319,7 @@ plt.tight_layout()
 plt.show() 
 ```
 
-![掩膜图像](../Images/b255bd686a67722dd9d15b6483165418.png)
+![掩膜图像](img/b255bd686a67722dd9d15b6483165418.png)
 
 ## 总结
 

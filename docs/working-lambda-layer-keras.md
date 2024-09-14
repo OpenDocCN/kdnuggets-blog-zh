@@ -1,70 +1,70 @@
-# 在Keras中使用Lambda层
+# 在 Keras 中使用 Lambda 层
 
-> 原文：[https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html](https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html)
+> 原文：[`www.kdnuggets.com/2021/01/working-lambda-layer-keras.html`](https://www.kdnuggets.com/2021/01/working-lambda-layer-keras.html)
 
-[评论](#comments)
+评论
 
-![在Keras中使用Lambda层](../Images/c3a523288bdaacf398ad685f673c0a8e.png)
+![在 Keras 中使用 Lambda 层](img/c3a523288bdaacf398ad685f673c0a8e.png)
 
-Keras是一个流行且易于使用的深度学习模型构建库。它支持所有已知类型的层：输入层、全连接层、卷积层、转置卷积层、重塑层、归一化层、丢弃层、展平层和激活层。每个层对数据执行特定操作。
+Keras 是一个流行且易于使用的深度学习模型构建库。它支持所有已知类型的层：输入层、全连接层、卷积层、转置卷积层、重塑层、归一化层、丢弃层、展平层和激活层。每个层对数据执行特定操作。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 尽管如此，你可能希望对数据执行一些现有层未应用的操作，这时候现有的层类型可能不够用。举个简单的例子，假设你需要一个在模型架构的某个特定点添加固定数字的层。因为没有现有的层可以做到这一点，你可以自己构建一个。
 
-在本教程中，我们将讨论在Keras中使用`Lambda`层。这使你能够将操作指定为函数。我们还将看到如何调试Keras加载功能，当构建一个包含lambda层的模型时。
+在本教程中，我们将讨论在 Keras 中使用`Lambda`层。这使你能够将操作指定为函数。我们还将看到如何调试 Keras 加载功能，当构建一个包含 lambda 层的模型时。
 
 本教程涵盖的部分如下：
 
-+   使用`Functional API`构建Keras模型
++   使用`Functional API`构建 Keras 模型
 
 +   添加一个`Lambda`层
 
-+   向lambda层传递多个张量
++   向 lambda 层传递多个张量
 
-+   保存和加载带有lambda层的模型
++   保存和加载带有 lambda 层的模型
 
-+   解决加载带有lambda层的模型时的SystemError
++   解决加载带有 lambda 层的模型时的 SystemError
 
 让这个项目成为现实
 
-[在Gradient上运行](https://www.paperspace.com/account/signup)
+[在 Gradient 上运行](https://www.paperspace.com/account/signup)
 
-### **使用`Functional API`构建Keras模型**
+### **使用`Functional API`构建 Keras 模型**
 
-在Keras中可以使用三种不同的API来构建模型：
+在 Keras 中可以使用三种不同的 API 来构建模型：
 
-1.  顺序API
+1.  顺序 API
 
-1.  功能API
+1.  功能 API
 
-1.  模型子类化API
+1.  模型子类化 API
 
-你可以在[this post](https://www.pyimagesearch.com/2019/10/28/3-ways-to-create-a-keras-model-with-tensorflow-2-0-sequential-functional-and-model-subclassing)中找到有关这些内容的更多信息，但在本教程中我们将专注于使用Keras `Functional API`构建自定义模型。由于我们希望专注于架构，我们将使用一个简单的问题示例来构建一个识别MNIST数据集图像的模型。
+你可以在[this post](https://www.pyimagesearch.com/2019/10/28/3-ways-to-create-a-keras-model-with-tensorflow-2-0-sequential-functional-and-model-subclassing)中找到有关这些内容的更多信息，但在本教程中我们将专注于使用 Keras `Functional API`构建自定义模型。由于我们希望专注于架构，我们将使用一个简单的问题示例来构建一个识别 MNIST 数据集图像的模型。
 
-在Keras中构建模型时，你需要将层一个接一个地堆叠。这些层在`keras.layers`模块中可用（如下所示）。模块名称以`tensorflow`为前缀，因为我们使用TensorFlow作为Keras的后端。
+在 Keras 中构建模型时，你需要将层一个接一个地堆叠。这些层在`keras.layers`模块中可用（如下所示）。模块名称以`tensorflow`为前缀，因为我们使用 TensorFlow 作为 Keras 的后端。
 
 ```py
 import tensorflow.keras.layers
 ```
 
-创建的第一层是`Input`层。这是使用`tensorflow.keras.layers.Input()`类创建的。这个类的构造函数必须传递的一个必要参数是`shape`参数，它指定了将用于训练的数据中每个样本的形状。在本教程中，我们将从密集层开始，因此输入应为1-D向量。`shape`参数因此被赋值为一个包含一个值的元组（如下所示）。这个值是784，因为MNIST数据集中每个图像的大小是28 x 28 = 784。一个可选的`name`参数指定了该层的名称。
+创建的第一层是`Input`层。这是使用`tensorflow.keras.layers.Input()`类创建的。这个类的构造函数必须传递的一个必要参数是`shape`参数，它指定了将用于训练的数据中每个样本的形状。在本教程中，我们将从密集层开始，因此输入应为 1-D 向量。`shape`参数因此被赋值为一个包含一个值的元组（如下所示）。这个值是 784，因为 MNIST 数据集中每个图像的大小是 28 x 28 = 784。一个可选的`name`参数指定了该层的名称。
 
 ```py
 input_layer = tensorflow.keras.layers.Input(shape=(784), name="input_layer")
 ```
 
-下一层是使用`Dense`类创建的密集层，如下代码所示。它接受一个名为`units`的参数来指定这一层中的神经元数量。请注意这一层是通过在括号中指定该层的名称来连接到输入层的。这是因为功能API中的层实例是可以调用在张量上的，并且也返回一个张量。
+下一层是使用`Dense`类创建的密集层，如下代码所示。它接受一个名为`units`的参数来指定这一层中的神经元数量。请注意这一层是通过在括号中指定该层的名称来连接到输入层的。这是因为功能 API 中的层实例是可以调用在张量上的，并且也返回一个张量。
 
 ```py
 dense_layer_1 = tensorflow.keras.layers.Dense(units=500, name="dense_layer_1")(input_layer)
@@ -76,7 +76,7 @@ dense_layer_1 = tensorflow.keras.layers.Dense(units=500, name="dense_layer_1")(i
 activ_layer_1 = tensorflow.keras.layers.ReLU(name="activ_layer_1")(dense_layer_1)
 ```
 
-根据以下几行代码，添加了另几个密集-ReLu层。
+根据以下几行代码，添加了另几个密集-ReLu 层。
 
 ```py
 dense_layer_2 = tensorflow.keras.layers.Dense(units=250, name="dense_layer_2")(activ_layer_1)
@@ -86,7 +86,7 @@ dense_layer_3 = tensorflow.keras.layers.Dense(units=20, name="dense_layer_3")(ac
 activ_layer_3 = tensorflow.keras.layers.ReLU(name="relu_layer_3")(dense_layer_3)
 ```
 
-下一行根据MNIST数据集中的类别数量向网络架构中添加了最后一层。由于MNIST数据集包含10个类别（每个数字一个），因此在这一层中使用的单位数量为10。
+下一行根据 MNIST 数据集中的类别数量向网络架构中添加了最后一层。由于 MNIST 数据集包含 10 个类别（每个数字一个），因此在这一层中使用的单位数量为 10。
 
 ```py
 dense_layer_4 = tensorflow.keras.layers.Dense(units=10, name="dense_layer_4")(activ_layer_3)
@@ -110,7 +110,7 @@ model = tensorflow.keras.models.Model(input_layer, output_layer, name="model")
 model.compile(optimizer=tensorflow.keras.optimizers.Adam(lr=0.0005), loss="categorical_crossentropy")
 ```
 
-使用`model.summary()`我们可以查看模型架构的概述。输入层接受形状为(None, 784)的张量，这意味着每个样本必须被重塑为784个元素的向量。输出`Softmax`层返回10个数字，每个数字是MNIST数据集相应类别的得分。
+使用`model.summary()`我们可以查看模型架构的概述。输入层接受形状为(None, 784)的张量，这意味着每个样本必须被重塑为 784 个元素的向量。输出`Softmax`层返回 10 个数字，每个数字是 MNIST 数据集相应类别的得分。
 
 ```py
 _________________________________________________________________
@@ -140,7 +140,7 @@ Non-trainable params: 0
 _________________________________________________________________
 ```
 
-现在我们已经构建并编译了模型，让我们看看数据集是如何准备的。首先，我们将从`keras.datasets`模块加载MNIST，将数据类型更改为`float64`，因为这比将其值保持在0-255范围内更容易训练网络，最后重新塑形，使每个样本成为784个元素的向量。
+现在我们已经构建并编译了模型，让我们看看数据集是如何准备的。首先，我们将从`keras.datasets`模块加载 MNIST，将数据类型更改为`float64`，因为这比将其值保持在 0-255 范围内更容易训练网络，最后重新塑形，使每个样本成为 784 个元素的向量。
 
 ```py
 (x_train, y_train), (x_test, y_test) = tensorflow.keras.datasets.mnist.load_data()
@@ -425,21 +425,21 @@ model.load_weights('model_weights.h5')
 
 ### **结论**
 
-本教程讨论了如何使用`Lambda`层创建自定义层，以执行Keras中预定义层不支持的操作。`Lambda`类的构造函数接受一个函数，该函数指定了层的工作方式，并接受层调用时的张量。在函数内部，你可以执行任何操作，然后返回修改后的张量。
+本教程讨论了如何使用`Lambda`层创建自定义层，以执行 Keras 中预定义层不支持的操作。`Lambda`类的构造函数接受一个函数，该函数指定了层的工作方式，并接受层调用时的张量。在函数内部，你可以执行任何操作，然后返回修改后的张量。
 
-尽管Keras在加载使用lambda层的模型时存在问题，但我们也看到如何通过保存训练模型权重、使用代码重现模型架构，并将权重加载到该架构中来简单解决此问题。
+尽管 Keras 在加载使用 lambda 层的模型时存在问题，但我们也看到如何通过保存训练模型权重、使用代码重现模型架构，并将权重加载到该架构中来简单解决此问题。
 
-**简历: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于2015年7月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术学士学位，并以优异的成绩排名第一。由于在学院排名第一，他被推荐于2015年在埃及的某所学院担任助教，随后于2016年继续担任助教及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
+**简历: [Ahmed Gad](https://www.linkedin.com/in/ahmedfgad/)** 于 2015 年 7 月获得埃及梅努非亚大学计算机与信息学院（FCI）信息技术学士学位，并以优异的成绩排名第一。由于在学院排名第一，他被推荐于 2015 年在埃及的某所学院担任助教，随后于 2016 年继续担任助教及研究员。他目前的研究兴趣包括深度学习、机器学习、人工智能、数字信号处理和计算机视觉。
 
 [原文](https://blog.paperspace.com/working-with-the-lambda-layer-in-keras/)。经许可转载。
 
 **相关内容:**
 
-+   [从Y=X到构建完整的人工神经网络](/2020/11/building-complete-artificial-neural-network.html)
++   从 Y=X 到构建完整的人工神经网络
 
-+   [轻松使用torchlayers构建PyTorch模型](/2020/04/pytorch-models-torchlayers.html)
++   轻松使用 torchlayers 构建 PyTorch 模型
 
-+   [如何在深度学习中创建自定义实时图表](/2020/12/create-custom-real-time-plots-deep-learning.html)
++   如何在深度学习中创建自定义实时图表
 
 ### 更多相关内容
 
@@ -447,10 +447,10 @@ model.load_weights('model_weights.h5')
 
 +   [语义层的力量：数据工程师指南](https://www.kdnuggets.com/2023/10/cube-power-of-a-semantic-layer-a-data-engineers-guide)
 
-+   [语义层：AI驱动数据体验的骨干](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)
++   [语义层：AI 驱动数据体验的骨干](https://www.kdnuggets.com/2023/10/cube-semantic-layer-backbone-aipowered-data-experiences)
 
-+   [6个理由说明通用语义层对你的数据栈有益](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
++   [6 个理由说明通用语义层对你的数据栈有益](https://www.kdnuggets.com/2024/01/cube-6-reasons-why-a-universal-semantic-layer-is-beneficial)
 
 +   [大数据处理：工具与技术](https://www.kdnuggets.com/working-with-big-data-tools-and-techniques)
 
-+   [Python中SQLite数据库使用指南](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)
++   [Python 中 SQLite 数据库使用指南](https://www.kdnuggets.com/a-guide-to-working-with-sqlite-databases-in-python)

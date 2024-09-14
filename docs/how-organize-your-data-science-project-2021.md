@@ -1,10 +1,10 @@
 # 如何在 2021 年组织你的数据科学项目
 
-> 原文：[https://www.kdnuggets.com/2021/04/how-organize-your-data-science-project-2021.html](https://www.kdnuggets.com/2021/04/how-organize-your-data-science-project-2021.html)
+> 原文：[`www.kdnuggets.com/2021/04/how-organize-your-data-science-project-2021.html`](https://www.kdnuggets.com/2021/04/how-organize-your-data-science-project-2021.html)
 
-[评论](#comments)
+评论
 
-![](../Images/5a825a00f837bb46261d409bf2812f14.png)
+![](img/5a825a00f837bb46261d409bf2812f14.png)
 
 *保持本地和 GitHub 上有两个版本的项目总是一个好主意。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -64,15 +64,15 @@
 
 1.  我该如何评估模型以检测数据集中的偏差？
 
-1.  我应该使用集成方法吗？即使用不同的模型进行训练，然后进行集成平均，例如，使用SVM、KNN、逻辑回归等分类器，然后对3个模型进行平均？
+1.  我应该使用集成方法吗？即使用不同的模型进行训练，然后进行集成平均，例如，使用 SVM、KNN、逻辑回归等分类器，然后对 3 个模型进行平均？
 
 1.  我该如何选择最终模型？
 
-(2) **项目数据集**：你应该包括所有用于项目的数据集的逗号分隔值（CSV）文件。在这个例子中，只有一个CSV文件：[cruise_ship_info.csv](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size/blob/master/cruise_ship_info.csv)。
+(2) **项目数据集**：你应该包括所有用于项目的数据集的逗号分隔值（CSV）文件。在这个例子中，只有一个 CSV 文件：[cruise_ship_info.csv](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size/blob/master/cruise_ship_info.csv)。
 
-(3) **项目代码：** 一旦你弄清楚了你的项目计划和目标，就可以开始编码了。根据你解决的问题类型，你可能决定使用jupyter笔记本或R脚本来编写代码。我们假设我们将使用jupyter笔记本。
+(3) **项目代码：** 一旦你弄清楚了你的项目计划和目标，就可以开始编码了。根据你解决的问题类型，你可能决定使用 jupyter 笔记本或 R 脚本来编写代码。我们假设我们将使用 jupyter 笔记本。
 
-在你的jupyter笔记本上，开始添加项目标题或标题，例如：
+在你的 jupyter 笔记本上，开始添加项目标题或标题，例如：
 
 ```py
 Machine Learning Model for Predicting a Ship’s Crew Size
@@ -94,7 +94,7 @@ Date: 4/8/2019
 
 ```
 
-在你开发代码时，你要确保jupyter笔记本被组织成强调机器学习模型构建工作流程的各个部分，例如：
+在你开发代码时，你要确保 jupyter 笔记本被组织成强调机器学习模型构建工作流程的各个部分，例如：
 
 ```py
 Importation of necessary python libraries
@@ -111,7 +111,7 @@ Model building, testing, and evaluation
 
 ```
 
-对于示例项目的jupyter笔记本和R脚本文件，请参见以下Github库，[bot13956/ML_Model_for_Predicting_Ships_Crew_Size](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size/blob/master/Ship_Crew_Size_ML_Model.ipynb) 和 [bot13956/weather_pattern](https://github.com/bot13956/weather_pattern)。
+对于示例项目的 jupyter 笔记本和 R 脚本文件，请参见以下 Github 库，[bot13956/ML_Model_for_Predicting_Ships_Crew_Size](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size/blob/master/Ship_Crew_Size_ML_Model.ipynb) 和 [bot13956/weather_pattern](https://github.com/bot13956/weather_pattern)。
 
 (4) **项目输出：** 你也可以将关键项目输出存储在本地目录中。一些关键项目输出可能是数据可视化图表、显示模型误差与不同参数的函数关系的图形，或者包含关键输出的表格，如 R2 值、均方误差或回归系数。项目输出非常方便，因为它们可以用来准备项目报告或 PowerPoint 演示文稿，以便向数据科学团队或公司业务管理员展示。
 
@@ -153,7 +153,7 @@ Ship_Crew_Size_ML_Model.ipynb: the jupyter notebook containing code.
 
 这是一个机器学习项目的 GitHub 仓库示例：
 
-**仓库** **网址**： [https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size)。
+**仓库** **网址**： [`github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size`](https://github.com/bot13956/ML_Model_for_Predicting_Ships_Crew_Size)。
 
 总之，我们讨论了数据科学项目的组织方式。良好的组织有助于提高生产力和效率。当你下次需要处理新项目时，请花时间组织你的项目。这不仅有助于提高效率和生产力，还能帮助减少错误。此外，保持对所有当前和已完成项目的良好记录使你能够创建一个仓库，在其中保存所有项目以备将来使用。
 
@@ -169,11 +169,11 @@ Ship_Crew_Size_ML_Model.ipynb: the jupyter notebook containing code.
 
 ### 更多相关内容
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成为优秀数据科学家的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
 +   [停止学习数据科学，寻找目的和……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

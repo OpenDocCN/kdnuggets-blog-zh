@@ -1,6 +1,6 @@
 # 介绍 Dask 的并行编程：与项目首席开发人员的访谈
 
-> 原文：[https://www.kdnuggets.com/2016/09/introducing-dask-parallel-programming.html](https://www.kdnuggets.com/2016/09/introducing-dask-parallel-programming.html)
+> 原文：[`www.kdnuggets.com/2016/09/introducing-dask-parallel-programming.html`](https://www.kdnuggets.com/2016/09/introducing-dask-parallel-programming.html)
 
 在接下来的几周内，KDnuggets 计划分享一些关于 [Dask](https://github.com/dask/dask) 的信息和教程。
 
@@ -10,7 +10,7 @@
 
 你的兴趣被激发了吗？如果你有兴趣了解一个为计算和互动数据科学而构建的软件项目，这可能会彻底改变你进行数据处理和并行化自己项目的方式，请阅读我与 Dask 首席开发人员马修·洛克林的讨论。
 
-![马修·洛克林](../Images/6f5d90ad47d44c38416155cfeab3e476.png)
+![马修·洛克林](img/6f5d90ad47d44c38416155cfeab3e476.png)
 
 **马修·梅约：首先，你能给我们一个 Dask 的一句话概述吗？**
 
@@ -36,7 +36,7 @@ Dask 的不同之处在于，虽然 Airflow/Luigi/Celery 主要用于较长时�
 
 在这个任务调度器之上，我们构建了更高级的数组、数据框和列表接口，这些接口模仿了 NumPy、Pandas 和 Python 迭代器。这将 Dask 推向了流行的“大数据”框架空间，如 Hadoop 和 Spark。尤其是如今 Spark 的主导地位相当巨大，特别是在商业分析用例中（数据摄取、SQL 相关、一些轻量级机器学习）。大多数在这些用例中使用 Dask 的人要么是因为他们想留在 Python 中，要么是因为他们喜欢 Pandas，或者是因为他们在处理一些对 Spark 过于复杂的东西，如 N 维数组或一些更高级的 Pandas 时间序列功能。如果你已经在使用 Python，Dask 通常会感觉轻量一些。不过，Spark 的成熟度要高得多，确实做得非常好。
 
-![Dask collections, schedulers](../Images/886235e58709b73171859e19b96bbcd7.png)
+![Dask collections, schedulers](img/886235e58709b73171859e19b96bbcd7.png)
 
 **Dask 比其他潜在解决方案更擅长什么？**
 
@@ -54,7 +54,7 @@ Dask 的不同之处在于，虽然 Airflow/Luigi/Celery 主要用于较长时�
 
 在人们的脑海中，从“仅仅是一个库”到“一个框架”存在一个大的飞跃。你可以像使用 Python 中的 multiprocessing 模块、Joblib 或 concurrent.futures 模块一样使用 Dask，感觉像是“仅仅是一个库”。Dask 设计成尽可能小的库，以补充现有的 PyData 生态系统中的并行处理。它从未设计成取代任何东西。许多其他库的核心开发人员似乎正是因为这个原因而接受了它。
 
-最初，Dask 将其生命的第一年专注于单机并行处理。它满足了那些拥有“适中大数据”且希望充分利用笔记本电脑或重型工作站所有计算能力的人的需求。这个庞大的用户群体大多来自科学和金融领域，他们拥有“适中大数据”，并且不愿意处理将代码运行在集群上的复杂性。Dask 在这些用户中一开始就受到了极大的欢迎。此外，除了最大规模的问题外，单台重型工作站的性能和生产力几乎没有可比性。我们现在已经转向分布式系统，但单机并行处理今天仍然占据了大约80%的使用比例。
+最初，Dask 将其生命的第一年专注于单机并行处理。它满足了那些拥有“适中大数据”且希望充分利用笔记本电脑或重型工作站所有计算能力的人的需求。这个庞大的用户群体大多来自科学和金融领域，他们拥有“适中大数据”，并且不愿意处理将代码运行在集群上的复杂性。Dask 在这些用户中一开始就受到了极大的欢迎。此外，除了最大规模的问题外，单台重型工作站的性能和生产力几乎没有可比性。我们现在已经转向分布式系统，但单机并行处理今天仍然占据了大约 80%的使用比例。
 
 **你能描述一个简单的 Dask 使用案例吗，以便给读者提供一些可视化的概念？**
 
@@ -62,9 +62,9 @@ Dask 的不同之处在于，虽然 Airflow/Luigi/Celery 主要用于较长时�
 
 一家汽车公司的假设质量保证团队正在使用收集的遥测数据（他们从每辆车的数百个传感器中收集数据）和关于他们认为汽车组件如何运作的工程模型来寻找故障。团队中的几个不同研究人员负责汽车的不同组件，并构建自定义的 Python 函数来建模这些组件在不同情况下的响应。其他负责集成这些组件的研究人员将前一层组件专注的研究人员创建的模型结合起来，形成一个复杂的关系树（汽车很复杂）。他们在来自数据的数百万种情况中运行这些模型。他们的聚合模型具有大量的并行性，但却非常混乱。他们将所有功能交给 Dask 处理，Dask 管理这些并行性，在原型设计期间运行在团队的笔记本电脑上，在需要处理完整数据集时运行在集群上。之后，他们生成视觉报告，并聚在一起查看结果。根据结果，各个部分的研究人员会离开并调整模型的各个部分，修改 Dask 图的某些小部分，只重新运行受影响的计算部分。
 
-对于大数据集合（数组/数据框/列表），让我们来看一下气候科学。气候科学家拥有的数据类似于“地球每平方公里的温度、气压和风速，覆盖各种高度，追溯五十年。”他们希望筛选这些五维的密集数据立方体，对其进行分组、与其他数据集联接，并将其减少到有助于回答研究问题的汇总数据。他们使用流行的[XArray 项目](http://xarray.pydata.org/en/stable/)来管理他们的数据。XArray 在数据集较小且适合内存时（比如1GB）使用 NumPy，但当数据集大于内存但仍适合存储（比如10GB-100GB）时则切换到 Dask.array。在这些较大的数据集上，完整的计算可能需要一两分钟（磁盘有时较慢），但气候科学家很高兴，因为他们可以继续在笔记本电脑上工作，而无需切换到集群。他们现在可以查看分辨率更高、时间跨度更长的数据，而不必过于担心规模，一切都在他们的个人计算机上，并且使用之前在内存数据上使用的相同接口。
+对于大数据集合（数组/数据框/列表），让我们来看一下气候科学。气候科学家拥有的数据类似于“地球每平方公里的温度、气压和风速，覆盖各种高度，追溯五十年。”他们希望筛选这些五维的密集数据立方体，对其进行分组、与其他数据集联接，并将其减少到有助于回答研究问题的汇总数据。他们使用流行的[XArray 项目](http://xarray.pydata.org/en/stable/)来管理他们的数据。XArray 在数据集较小且适合内存时（比如 1GB）使用 NumPy，但当数据集大于内存但仍适合存储（比如 10GB-100GB）时则切换到 Dask.array。在这些较大的数据集上，完整的计算可能需要一两分钟（磁盘有时较慢），但气候科学家很高兴，因为他们可以继续在笔记本电脑上工作，而无需切换到集群。他们现在可以查看分辨率更高、时间跨度更长的数据，而不必过于担心规模，一切都在他们的个人计算机上，并且使用之前在内存数据上使用的相同接口。
 
-![Dask logo](../Images/0b8634648f8ce3dace49e6acf212ca23.png)
+![Dask logo](img/0b8634648f8ce3dace49e6acf212ca23.png)
 
 **你是怎么参与 Dask 开发的，Matthew？**
 
@@ -74,15 +74,15 @@ Dask 的不同之处在于，虽然 Airflow/Luigi/Celery 主要用于较长时�
 
 文档是一个不错的开始：
 
-[http://dask.<wbr>readthedocs.io/en/latest/](http://dask.readthedocs.io/en/latest/)
+[`dask.<wbr>readthedocs.io/en/latest/`](http://dask.readthedocs.io/en/latest/)
 
 有一个带有初学者问题标签的问题跟踪器：
 
-[https://github.com/<wbr>dask/dask/issues](https://github.com/dask/dask/issues)
+[`github.com/<wbr>dask/dask/issues`](https://github.com/dask/dask/issues)
 
 我还建议尝试分布式调度器的快速入门，它更专注于 Airflow/Luigi 工作负载：
 
-[http://distributed.<wbr>readthedocs.io/en/latest/<wbr>quickstart.html](http://distributed.readthedocs.io/en/latest/quickstart.html)
+[`distributed.<wbr>readthedocs.io/en/latest/<wbr>quickstart.html`](http://distributed.readthedocs.io/en/latest/quickstart.html)
 
 不过，目前 Dask 的核心部分感觉相当稳固。我认为现在最好的做法是将 Dask 应用于新问题，并看看它们如何突破。每次发生这种情况，我们都会学习如何更好地执行任务调度。
 
@@ -100,11 +100,11 @@ Dask 的不同之处在于，虽然 Airflow/Luigi/Celery 主要用于较长时�
 
 **相关**：
 
-+   [科学 Python 介绍（以及一些数学原理）— Matplotlib](/2016/06/intro-scientific-python-matplotlib.html)
++   科学 Python 介绍（以及一些数学原理）— Matplotlib
 
-+   [白皮书：使用 Datashader 的大数据可视化](/2016/08/whitepaper-big-data-visualization-datashader.html)
++   白皮书：使用 Datashader 的大数据可视化
 
-+   [关于分析准备的思考](/2016/06/thinking-domain-readiness.html)
++   关于分析准备的思考
 
 ### 更多相关话题
 

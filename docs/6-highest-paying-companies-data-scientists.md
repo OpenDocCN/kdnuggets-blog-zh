@@ -1,8 +1,8 @@
 # 数据科学家薪资最高的 6 家公司
 
-> 原文：[https://www.kdnuggets.com/2022/05/6-highest-paying-companies-data-scientists.html](https://www.kdnuggets.com/2022/05/6-highest-paying-companies-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2022/05/6-highest-paying-companies-data-scientists.html`](https://www.kdnuggets.com/2022/05/6-highest-paying-companies-data-scientists.html)
 
-![6 家数据科学家薪资最高公司的封面](../Images/cd8e4989079fa4cbfeac4efade351da6.png)
+![6 家数据科学家薪资最高公司的封面](img/cd8e4989079fa4cbfeac4efade351da6.png)
 
 数据科学是一个蓬勃发展的行业。如果你拥有相关技能和兴趣，就有机会获得高薪。数据科学家的薪资水平即使与技术社区的其他人相比也很高。由于数据科学领域不断发展和变化，它被广泛认为是技术行业中最紧缺的技能。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -22,7 +22,7 @@
 
 这些是数据科学领域薪资最高的六家公司。我查看了绝对薪资，但我还会告诉你在选择数据科学工作时需要考虑的[其他因素](https://www.stratascratch.com/blog/11-best-companies-to-work-for-as-a-data-scientist/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)。
 
-![数据科学家薪资最高公司的总结](../Images/5d0482e8ed4f5e37601665591b797f76.png)
+![数据科学家薪资最高公司的总结](img/5d0482e8ed4f5e37601665591b797f76.png)
 
 数据科学家薪资最高公司的总结
 
@@ -62,7 +62,7 @@ Oracle 平均支付给他们的数据科学家的年薪为[$154K](https://www.gl
 
 # 6\. Google
 
-谷歌拥有近40亿的月活跃用户，而YouTube则有超过19亿的月活跃用户。谷歌依赖其数据科学家来解读他们通过谷歌搜索、谷歌地图、Gmail、YouTube以及安卓操作系统等生成的大量数据。
+谷歌拥有近 40 亿的月活跃用户，而 YouTube 则有超过 19 亿的月活跃用户。谷歌依赖其数据科学家来解读他们通过谷歌搜索、谷歌地图、Gmail、YouTube 以及安卓操作系统等生成的大量数据。
 
 在谷歌的一个数据科学家可能会利用[自然语言处理](https://www.ibm.com/cloud/learn/natural-language-processing)（NLP），这是机器学习的一个领域，以更好地理解用户的搜索词，从而对最相关的搜索结果进行排序。或者，你也可能深入挖掘来自谷歌地图的地理位置数据，以提高驾驶方向的准确性。
 
@@ -70,7 +70,7 @@ Oracle 平均支付给他们的数据科学家的年薪为[$154K](https://www.gl
 
 # 如何提升
 
-![如何提升](../Images/9cb75de25550fabe0b5ad6462c97b6c6.png)
+![如何提升](img/9cb75de25550fabe0b5ad6462c97b6c6.png)
 
 如果你已经[获得了数据科学家的职位](https://www.stratascratch.com/blog/how-to-get-a-data-science-job-the-ultimate-guide/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)，并且有兴趣在这些高薪公司找到工作，你需要专注于学习新的[数据科学技能并提升一些现有的技能](https://www.stratascratch.com/blog/what-skills-do-you-need-as-a-data-scientist/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)。
 
@@ -84,7 +84,7 @@ Oracle 平均支付给他们的数据科学家的年薪为[$154K](https://www.gl
 
 # 数据科学家的薪酬不仅仅是钱的问题
 
-还有很多大公司平均支付的数据科学家薪资在$115K到$150K之间。其中包括Uber（[$146K](https://www.glassdoor.ie/Salary/Uber-Data-Scientist-US-Salaries-EJI_IE575263.0,4_KO5,19_IL.20,22_IN1.htm)）、IBM（[$138K](https://www.glassdoor.ie/Salary/IBM-Data-Scientist-US-Salaries-EJI_IE354.0,3_KO4,18_IL.19,21_IN1.htm)）、Amazon（[$138K](https://www.glassdoor.ie/Salary/Amazon-Data-Scientist-US-Salaries-EJI_IE6036.0,6_KO7,21_IL.22,24_IN1.htm)）、Microsoft（[$137K](https://www.glassdoor.ie/Salary/Microsoft-Data-Scientist-US-Salaries-EJI_IE1651.0,9_KO10,24_IL.25,27_IN1.htm)）、Capital One（[$133K](https://www.glassdoor.ie/Salary/Capital-One-Data-Scientist-US-Salaries-EJI_IE3736.0,11_KO12,26_IL.27,29_IN1.htm)）、Intel（[$130K](https://www.glassdoor.ie/Salary/Intel-Corporation-Data-Scientist-US-Salaries-EJI_IE1519.0,17_KO18,32_IL.33,35_IN1.htm)）、Quora（[$127K](https://www.glassdoor.ie/Salary/Quora-Inc-Data-Scientist-US-Salaries-EJI_IE646885.0,9_KO10,24_IL.25,27_IN1.htm)）、Walmart（[$120K](https://www.glassdoor.ie/Salary/Walmart-Data-Scientist-US-Salaries-EJI_IE715.0,7_KO8,22_IL.23,25_IN1.htm)）、ServiceNow（[$119K](https://www.glassdoor.ie/Salary/ServiceNow-Data-Scientist-US-Salaries-EJI_IE403326.0,10_KO11,25_IL.26,28_IN1.htm)）和Wayfair（[$114K](https://www.glassdoor.ie/Salary/Wayfair-Data-Scientist-US-Salaries-EJI_IE134525.0,7_KO8,22_IL.23,25_IN1.htm)）。但还有其他因素需要考虑。
+还有很多大公司平均支付的数据科学家薪资在$115K 到$150K 之间。其中包括 Uber（[$146K](https://www.glassdoor.ie/Salary/Uber-Data-Scientist-US-Salaries-EJI_IE575263.0,4_KO5,19_IL.20,22_IN1.htm)）、IBM（[$138K](https://www.glassdoor.ie/Salary/IBM-Data-Scientist-US-Salaries-EJI_IE354.0,3_KO4,18_IL.19,21_IN1.htm)）、Amazon（[$138K](https://www.glassdoor.ie/Salary/Amazon-Data-Scientist-US-Salaries-EJI_IE6036.0,6_KO7,21_IL.22,24_IN1.htm)）、Microsoft（[$137K](https://www.glassdoor.ie/Salary/Microsoft-Data-Scientist-US-Salaries-EJI_IE1651.0,9_KO10,24_IL.25,27_IN1.htm)）、Capital One（[$133K](https://www.glassdoor.ie/Salary/Capital-One-Data-Scientist-US-Salaries-EJI_IE3736.0,11_KO12,26_IL.27,29_IN1.htm)）、Intel（[$130K](https://www.glassdoor.ie/Salary/Intel-Corporation-Data-Scientist-US-Salaries-EJI_IE1519.0,17_KO18,32_IL.33,35_IN1.htm)）、Quora（[$127K](https://www.glassdoor.ie/Salary/Quora-Inc-Data-Scientist-US-Salaries-EJI_IE646885.0,9_KO10,24_IL.25,27_IN1.htm)）、Walmart（[$120K](https://www.glassdoor.ie/Salary/Walmart-Data-Scientist-US-Salaries-EJI_IE715.0,7_KO8,22_IL.23,25_IN1.htm)）、ServiceNow（[$119K](https://www.glassdoor.ie/Salary/ServiceNow-Data-Scientist-US-Salaries-EJI_IE403326.0,10_KO11,25_IL.26,28_IN1.htm)）和 Wayfair（[$114K](https://www.glassdoor.ie/Salary/Wayfair-Data-Scientist-US-Salaries-EJI_IE134525.0,7_KO8,22_IL.23,25_IN1.htm)）。但还有其他因素需要考虑。
 
 另请查看这个“[*最佳数据科学公司*](https://www.stratascratch.com/blog/11-best-companies-to-work-for-as-a-data-scientist/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)”的列表，旨在超越通常和预期的范围。这里有一些优秀的、可能被低估的选择，可以作为数据科学家的工作机会。
 
@@ -92,7 +92,7 @@ Oracle 平均支付给他们的数据科学家的年薪为[$154K](https://www.gl
 
 许多这些公司总部位于美国西海岸。一些公司在美国其他地方也有办事处，但那些非常关注硅谷的公司，需警惕生活成本极高。在比较薪资时，一定要考虑到你需要生活的地方及其生活成本。
 
-例如，西雅图的生活成本约为旧金山的83%。如果你收到的西雅图公司的报价超过了旧金山公司薪资报价的83%，那么即使你接受的工作薪资在绝对值上较低，你也可能能够负担更高的生活标准或存更多的钱。
+例如，西雅图的生活成本约为旧金山的 83%。如果你收到的西雅图公司的报价超过了旧金山公司薪资报价的 83%，那么即使你接受的工作薪资在绝对值上较低，你也可能能够负担更高的生活标准或存更多的钱。
 
 ## 福利和津贴
 
@@ -112,14 +112,14 @@ Oracle 平均支付给他们的数据科学家的年薪为[$154K](https://www.gl
 
 ### 相关主题更多信息
 
-+   [今年5种高薪编程语言](https://www.kdnuggets.com/2023/07/5-highestpaid-languages-learn-year.html)
++   [今年 5 种高薪编程语言](https://www.kdnuggets.com/2023/07/5-highestpaid-languages-learn-year.html)
 
 +   [数据科学家的高薪兼职工作](https://www.kdnuggets.com/2022/01/high-paying-side-hustles-data-scientists.html)
 
-+   [KDnuggets™ 新闻 22:n04, 1月26日: 高薪兼职工作…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04, 1 月 26 日: 高薪兼职工作…](https://www.kdnuggets.com/2022/n04.html)
 
-+   [数据科学家的7种高薪兼职工作](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
++   [数据科学家的 7 种高薪兼职工作](https://www.kdnuggets.com/7-high-paying-side-hustles-for-data-scientists)
 
-+   [获取高薪数据科学职位的7个平台](https://www.kdnuggets.com/7-platforms-for-getting-high-paying-data-science-jobs)
++   [获取高薪数据科学职位的 7 个平台](https://www.kdnuggets.com/7-platforms-for-getting-high-paying-data-science-jobs)
 
-+   [8个免费的谷歌课程以获得高薪工作](https://www.kdnuggets.com/8-free-google-courses-to-land-top-paying-jobs)
++   [8 个免费的谷歌课程以获得高薪工作](https://www.kdnuggets.com/8-free-google-courses-to-land-top-paying-jobs)

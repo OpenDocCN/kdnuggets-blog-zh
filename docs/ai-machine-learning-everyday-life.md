@@ -1,8 +1,8 @@
 # 我们日常生活中的人工智能和机器学习
 
-> 原文：[https://www.kdnuggets.com/2020/02/ai-machine-learning-everyday-life.html](https://www.kdnuggets.com/2020/02/ai-machine-learning-everyday-life.html)
+> 原文：[`www.kdnuggets.com/2020/02/ai-machine-learning-everyday-life.html`](https://www.kdnuggets.com/2020/02/ai-machine-learning-everyday-life.html)
 
-[评论](#comments)
+评论
 
 **由 [Chandramauli Dave](https://twitter.com/seochandramauli), Space-O Canada**，[软件开发趋势](https://www.spaceo.ca/top-software-development-trends/)。
 
@@ -14,7 +14,7 @@
 
 如今，我们大多数人在外出前会检查 Google 地图，以评估当前的交通状况和最快的到达路线。你知道这个应用程序是如何提供如此准确的信息的吗？这都要归功于人工智能。此外，人工智能算法使应用程序能够提供实时的交通流速，减少绕行，节省时间。
 
-![](../Images/7ffa07730426b4c668ebdc3cc85a2231.png)
+![](img/7ffa07730426b4c668ebdc3cc85a2231.png)
 
 另一方面，共享出行应用程序，如 Uber，已充分利用机器学习来确定我们的出行价格、预计到达时间以及预测乘客需求以定义高峰价格时间。
 
@@ -28,7 +28,7 @@
 
 你一定注意到 Gmail 会提示你简单的短语来回复邮件。例如，“*是的，我感兴趣*”或“*谢谢*”。此外，即使你手动输入回复时，它也会提示合适的词汇。例如，如果你输入了“*期待*”，Gmail 会提示你“*收到你的回复*”，你只需按 Tab 键即可添加。
 
-![](../Images/faef69868d216d966e687819b22d9fd6.png)
+![](img/faef69868d216d966e687819b22d9fd6.png)
 
 智能回复根据机器学习和人工智能的学习、预测和镜像您的回应方式进行定制。
 
@@ -48,7 +48,7 @@
 
 +   在 Facebook 和 Instagram 上提供定向广告
 
-![](../Images/8172fb1be7448eb1be91015eb413e2eb.png)
+![](img/8172fb1be7448eb1be91015eb413e2eb.png)
 
 Pinterest 的 LENS 工具使用 AI 来检测图片中的物体。一旦你通过这个工具拍摄照片，其 AI 功能会弹出类似的钉子。Pinterest 还使用 ML 来进行搜索和发现、电子邮件营销以及防止垃圾邮件。
 
@@ -60,7 +60,7 @@ Pinterest 的 LENS 工具使用 AI 来检测图片中的物体。一旦你通过
 
 你是否注意到，当你输入搜索查询时，谷歌会提示你它认为你正在寻找的内容？这被称为预测搜索，可能是由于人工智能。谷歌有大量关于我们的数据，如年龄、位置、过去的搜索记录和个人信息，基于这些数据推荐预测搜索词。
 
-![](../Images/41a7c253372dc1c5d93639c739ebd60c.png)
+![](img/41a7c253372dc1c5d93639c739ebd60c.png)
 
 **优化的搜索引擎结果**
 
@@ -70,7 +70,7 @@ Pinterest 的 LENS 工具使用 AI 来检测图片中的物体。一旦你通过
 
 在当今快节奏的生活中，我们都曾在线购物。除了让我们可以在任何地方购物，领先的电子商务网站还能够了解我们的口味以及我们可能感兴趣的潜在产品。它们是怎么做到的？魔法？不，正是 ML 和 AI 的强大力量。
 
-![](../Images/dc132a39b1668f65f0184b25f1c608c9.png)
+![](img/dc132a39b1668f65f0184b25f1c608c9.png)
 
 在线购物网站，如亚马逊，通过 ML 记录我们的购买、搜索的产品以及我们添加到愿望清单中的物品，以向每位用户提供最合适的产品推荐。这导致了彻底个性化的购物体验。
 
@@ -78,7 +78,7 @@ Pinterest 的 LENS 工具使用 AI 来检测图片中的物体。一旦你通过
 
 AI 技术使得移动银行对那些没有时间去银行的人来说变得个性化和简便。例如，富国银行正在其应用程序中使用 AI，提供个性化的提醒和洞察，包括账单支付提醒和预警透支通知，这些都是基于消费者账户分析的。
 
-![](../Images/608d640f5ca986ac4475d2b1408ad4a1.png)
+![](img/608d640f5ca986ac4475d2b1408ad4a1.png)
 
 银行和金融机构也在使用基于 ML 和 AI 的系统来区分合法交易和欺诈交易。这些系统跟踪账户中的交易频率并识别异常模式，以发出及时警报。PayPal 使用 ML 来对抗在线洗钱行为。
 
@@ -106,11 +106,11 @@ AI 技术使得移动银行对那些没有时间去银行的人来说变得个�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -126,4 +126,4 @@ AI 技术使得移动银行对那些没有时间去银行的人来说变得个�
 
 +   [AIoT 革命：人工智能和物联网如何改变我们的世界](https://www.kdnuggets.com/2022/07/aiot-revolution-ai-iot-transforming-world.html)
 
-+   [KDnuggets 新闻，7月27日：AIoT 革命：人工智能和物联网如何…](https://www.kdnuggets.com/2022/n30.html)
++   [KDnuggets 新闻，7 月 27 日：AIoT 革命：人工智能和物联网如何…](https://www.kdnuggets.com/2022/n30.html)

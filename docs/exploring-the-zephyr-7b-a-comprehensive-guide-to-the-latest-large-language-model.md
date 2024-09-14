@@ -1,8 +1,8 @@
 # 探索 Zephyr 7B：最新大型语言模型的全面指南
 
-> 原文：[https://www.kdnuggets.com/exploring-the-zephyr-7b-a-comprehensive-guide-to-the-latest-large-language-model](https://www.kdnuggets.com/exploring-the-zephyr-7b-a-comprehensive-guide-to-the-latest-large-language-model)
+> 原文：[`www.kdnuggets.com/exploring-the-zephyr-7b-a-comprehensive-guide-to-the-latest-large-language-model`](https://www.kdnuggets.com/exploring-the-zephyr-7b-a-comprehensive-guide-to-the-latest-large-language-model)
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/10b39d79a6e686d9cc4e3145e18c937d.png)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/10b39d79a6e686d9cc4e3145e18c937d.png)
 
 图片由 [Google DeepMind](https://www.pexels.com/photo/an-artist-s-illustration-of-artificial-intelligence-ai-this-image-represents-how-ai-powered-tools-can-support-us-and-save-time-it-was-created-by-martina-stiftinger-as-part-of-the-visua-18069239/) 提供
 
@@ -18,17 +18,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 然而，7B 模型相对容易且便宜部署，但无法与 70B 等更大模型媲美。最强的开源竞争者是 Mistral 7B，它会超越许多更大的模型。
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/885bea73025d52991e66d7eda74d2446.png)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/885bea73025d52991e66d7eda74d2446.png)
 
 来自 [Mistral.ai](https://mistral.ai/news/announcing-mistral-7b/) 的 Mistral-7B 比较
 
@@ -40,7 +40,7 @@ Zephyr 7B 是由 HuggingFace H4（Helpful, Honest, Harmless, Huggy）团队创�
 
 Zephyr 是 Mistral-7B 的对齐版本，主要通过蒸馏技术创建，并在学术和对话基准测试中与 70B 模型相当。
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/e16f6ba0bbd29b5cb68165720bd5cb79.png)Zephyr-7B 性能比较 | 来源：[Zephyr 论文](https://arxiv.org/abs/2310.16944)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/e16f6ba0bbd29b5cb68165720bd5cb79.png)Zephyr-7B 性能比较 | 来源：[Zephyr 论文](https://arxiv.org/abs/2310.16944)
 
 ## 主要特性
 
@@ -58,7 +58,7 @@ Zephyr 卓越表现的原因在于 H4 团队使用的这四项关键技术。
 
 这里一个有趣的方法是使用教师模型（已训练的大型语言模型）来生成指令和响应。这种精炼技术首次用于 Alpaca（Taori et al., 2023），证明了小模型可以通过**精炼监督微调**超越更大的模型。
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/e71c20282740d59d9e9fa0a01422208d.png)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/e71c20282740d59d9e9fa0a01422208d.png)
 
 自我指导管道 | 来源：[自我指导论文](https://arxiv.org/abs/2212.10560)
 
@@ -68,7 +68,7 @@ H4 团队使用 Zephyr 构建了高质量的监督（指令，完成）数据集
 
 大型语言模型通常通过**来自人类反馈的强化学习（RLHF）**进行对齐。Zephyr 则使用来自更优教师模型（如 GPT-4）的反馈来对齐模型的兴趣，采用了 Ultra Feedback 的方法。
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/6fd933bf69fbba697ba316aaa0ec5579.png)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/6fd933bf69fbba697ba316aaa0ec5579.png)
 
 UltraFeedback 构建过程 | 来源：[UltraFeedback 论文](https://arxiv.org/abs/2310.01377)
 
@@ -78,11 +78,11 @@ UltraFeedback 构建过程 | 来源：[UltraFeedback 论文](https://arxiv.org/a
 
 最后一阶段的目标是最大化模型对 yw（最高评分的完成）相对于 yl（低评分的完成）的偏好。这是通过**DPO**（**直接偏好优化**）来完成的。使用 DPO 比使用纯 RLHF 更简单，直观上它比 RLHF 表现更好。在这种情况下，该方法被称为**dDPO**，因为它使用了由教师模型生成的精炼数据集。
 
-![DPO 与 RLHF 对比 | 来源:](../Images/d5c62eeb7e9fb475d39ffd35cff700e8.png) [Zephyr 论文](https://arxiv.org/abs/2310.16944)
+![DPO 与 RLHF 对比 | 来源:](img/d5c62eeb7e9fb475d39ffd35cff700e8.png) [Zephyr 论文](https://arxiv.org/abs/2310.16944)
 
 整体算法看起来大致如下：
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/94a6f3973c2f1e21a14e30e049876142.png)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/94a6f3973c2f1e21a14e30e049876142.png)
 
 这些步骤可以转化为以下几个步骤：
 
@@ -100,9 +100,9 @@ Zephyr 使用的基础模型是 Mistral-7B，该模型在发布时是最先进�
 
 Zephyr 团队结合了训练大型语言模型的最佳技术，并且凭借仅 7B 参数的模型达到了 40B 模型的性能，并且在聊天模型中达到了 70B 的水平。
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/89bd26616561e68efc609e6014d45108.png)Zephyr 与其他 LLM 的比较 | 来源：[Zephyr 论文](https://arxiv.org/abs/2310.16944)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/89bd26616561e68efc609e6014d45108.png)Zephyr 与其他 LLM 的比较 | 来源：[Zephyr 论文](https://arxiv.org/abs/2310.16944)
 
-![探索 Zephyr 7B：最新大型语言模型的全面指南](../Images/e16f6ba0bbd29b5cb68165720bd5cb79.png)Zephyr 与其他 LLM 的比较 | 来源：[Zephyr 论文](https://arxiv.org/abs/2310.16944)
+![探索 Zephyr 7B：最新大型语言模型的全面指南](img/e16f6ba0bbd29b5cb68165720bd5cb79.png)Zephyr 与其他 LLM 的比较 | 来源：[Zephyr 论文](https://arxiv.org/abs/2310.16944)
 
 # 使用
 
@@ -147,13 +147,13 @@ Zephyr-7B 是一个小型模型，展示了从大型语言模型蒸馏到小型�
 
 ## 参考文献
 
-1.  Zephyr: 直接蒸馏的 LM 对齐 ([https://arxiv.org/abs/2310.16944](https://arxiv.org/abs/2310.16944))
+1.  Zephyr: 直接蒸馏的 LM 对齐 ([`arxiv.org/abs/2310.16944`](https://arxiv.org/abs/2310.16944))
 
-1.  HuggingFace Zephyr 博客 ([https://huggingface.co/blog/Isamu136/understanding-zephyr](https://huggingface.co/blog/Isamu136/understanding-zephyr))
+1.  HuggingFace Zephyr 博客 ([`huggingface.co/blog/Isamu136/understanding-zephyr`](https://huggingface.co/blog/Isamu136/understanding-zephyr))
 
-1.  Self Instruct: [https://arxiv.org/abs/2212.10560](https://arxiv.org/abs/2212.10560)
+1.  Self Instruct: [`arxiv.org/abs/2212.10560`](https://arxiv.org/abs/2212.10560)
 
-1.  UltraFeedback: [https://arxiv.org/abs/2310.01377](https://arxiv.org/abs/2310.01377)
+1.  UltraFeedback: [`arxiv.org/abs/2310.01377`](https://arxiv.org/abs/2310.01377)
 
 **[](https://twitter.com/AhmadMustafaAn1)**[Ahmad Anis](https://twitter.com/AhmadMustafaAn1)**** 是一位充满热情的机器学习工程师和研究员，目前在 [redbuffer.ai](https://redbuffer.ai/) 工作。除了日常工作外，Ahmad 积极参与机器学习社区。他担任 Cohere for AI 的地区负责人，该组织致力于开放科学，并且是 AWS 社区建设者。Ahmad 还活跃于 Stackoverflow，拥有 2300+ 点。他对许多著名的开源项目做出了贡献，包括 OpenAI 的 Shap-E。
 

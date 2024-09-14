@@ -1,22 +1,22 @@
 # 数值数据的特征工程
 
-> 原文：[https://www.kdnuggets.com/2020/09/feature-engineering-numerical-data.html](https://www.kdnuggets.com/2020/09/feature-engineering-numerical-data.html)
+> 原文：[`www.kdnuggets.com/2020/09/feature-engineering-numerical-data.html`](https://www.kdnuggets.com/2020/09/feature-engineering-numerical-data.html)
 
-[评论](#comments)
+评论
 
 数值数据几乎是一个福音。为什么说几乎呢？因为它已经是机器学习模型可以处理的格式。然而，如果我们将其翻译成易于理解的术语，仅仅因为一本博士级教材是用英语写的——我会说、读和写英语——并不意味着我能够充分理解这本教材以得出有用的见解。使教材对我有用的，应该是它以一种考虑到我心理模型假设的方式总结最重要的信息，比如“数学是一种神话”（顺便说一下，我现在已经不再这样看待了，因为我真的开始享受数学了）。同样，一个好的特征应该能够代表数据的显著方面，并且符合机器学习模型所做的假设。
 
-![数据工程](../Images/efe8223e7c92f882a8d32fd9e5e37cb1.png)
+![数据工程](img/efe8223e7c92f882a8d32fd9e5e37cb1.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 部门
 
 * * *
 
@@ -42,7 +42,7 @@
 
 在固定宽度的情况下，值被自动或自定义设计为将数据分割成离散的区间——这些区间也可以是线性缩放或指数缩放的。一个常见的例子是将人的年龄按十年间隔分区，例如区间 1 包含 0–9 岁，区间 2 包含 10–19 岁，等等。
 
-注意，如果值跨越了很大的数值范围，那么一个更好的方法可能是将值分组为常数的幂，例如10的幂：0–9、10–99、100–999、1000–9999。注意分箱宽度呈指数增长，因此在1000–9999的情况下，分箱宽度为O(10000)，而0–9为O(10)。取计数的对数以将计数映射到数据的分箱中。
+注意，如果值跨越了很大的数值范围，那么一个更好的方法可能是将值分组为常数的幂，例如 10 的幂：0–9、10–99、100–999、1000–9999。注意分箱宽度呈指数增长，因此在 1000–9999 的情况下，分箱宽度为 O(10000)，而 0–9 为 O(10)。取计数的对数以将计数映射到数据的分箱中。
 
 ```py
 import numpy as np 
@@ -149,9 +149,9 @@ fig.show() # display figure
 
 ```
 
-![](../Images/0128765b007865d69c64281134a0a389.png)
+![](img/0128765b007865d69c64281134a0a389.png)
 
-*图1：可视化原始数据和各种幂变换。*
+*图 1：可视化原始数据和各种幂变换。*
 
 *注意：Box-Cox 变换仅在数据为非负数时有效*
 
@@ -161,27 +161,27 @@ fig.show() # display figure
 
 顾名思义，特征缩放（也称为特征归一化）涉及到改变特征的尺度。当数据集中各特征的尺度差异很大时，敏感于输入特征尺度的模型（如线性回归、逻辑回归、神经网络）将会受到影响。确保特征在相似的尺度内是至关重要的。而像树模型（如决策树、随机森林、梯度提升）这样的模型不关心尺度。
 
-缩放特征的常见方法包括最小-最大缩放、标准化和L²归一化。以下是简要介绍及其在Python中的实现。
+缩放特征的常见方法包括最小-最大缩放、标准化和 L²归一化。以下是简要介绍及其在 Python 中的实现。
 
-**最小-最大缩放** - 特征被缩放到一个固定范围（通常在0到1之间），这意味着我们将减少标准差，从而抑制异常值对特征的影响。其中x是实例的个体值（如，个人1，特征2），max(x)，min(x)是特征的最大值和最小值 — 见图2。有关更多信息，请参见[sklearn文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html)。
+**最小-最大缩放** - 特征被缩放到一个固定范围（通常在 0 到 1 之间），这意味着我们将减少标准差，从而抑制异常值对特征的影响。其中 x 是实例的个体值（如，个人 1，特征 2），max(x)，min(x)是特征的最大值和最小值 — 见图 2。有关更多信息，请参见[sklearn 文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html)。
 
-![](../Images/157fdaa503f0d1e9470d4abdfecbed6d.png)
+![](img/157fdaa503f0d1e9470d4abdfecbed6d.png)
 
-*图2：最小-最大缩放的公式。*
+*图 2：最小-最大缩放的公式。*
 
-**标准化** - 特征值将被重新缩放，以符合正态分布的性质，其中均值为0，标准差为1。为此，我们从特征实例值中减去特征的均值（在所有实例上计算），然后除以方差 — 见图3。有关标准化，请参阅[sklearn文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html)。
+**标准化** - 特征值将被重新缩放，以符合正态分布的性质，其中均值为 0，标准差为 1。为此，我们从特征实例值中减去特征的均值（在所有实例上计算），然后除以方差 — 见图 3。有关标准化，请参阅[sklearn 文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.StandardScaler.html)。
 
-![](../Images/eb10ee1da49f806d2f3c13d7c09bfc86.png)
+![](img/eb10ee1da49f806d2f3c13d7c09bfc86.png)
 
-*图3：标准化的公式。*
+*图 3：标准化的公式。*
 
-**L² 归一化** - 该技术将原始特征值除以l²范数（也称为欧几里得距离）— 图4中的第二个公式。L²范数取所有实例中特征集值的平方和。有关L²范数，请参阅sklearn的[文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer)（注意，还可以通过将norm参数设置为"l1"来进行L¹归一化）。
+**L² 归一化** - 该技术将原始特征值除以 l²范数（也称为欧几里得距离）— 图 4 中的第二个公式。L²范数取所有实例中特征集值的平方和。有关 L²范数，请参阅 sklearn 的[文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.Normalizer.html#sklearn.preprocessing.Normalizer)（注意，还可以通过将 norm 参数设置为"l1"来进行 L¹归一化）。
 
-![](../Images/7152bbf318af813b1bb26af628e98fb2.png)
+![](img/7152bbf318af813b1bb26af628e98fb2.png)
 
-*图4：L² 归一化的公式。*
+*图 4：L² 归一化的公式。*
 
-> *特征缩放效果的可视化将更好地展示发生了什么。为此，我使用了可以从sklearn数据集中导入的葡萄酒数据集。*
+> *特征缩放效果的可视化将更好地展示发生了什么。为此，我使用了可以从 sklearn 数据集中导入的葡萄酒数据集。*
 
 ```py
 import pandas as pd
@@ -240,9 +240,9 @@ fig.show()
 
 ```
 
-![](../Images/89d92631e43a8a4e64462d398d69b551.png)
+![](img/89d92631e43a8a4e64462d398d69b551.png)
 
-*图5：原始特征和各种缩放实现的图示。*
+*图 5：原始特征和各种缩放实现的图示。*
 
 ### 特征交互
 
@@ -250,19 +250,19 @@ fig.show()
 
 设想一个简单的线性模型，该模型使用输入特征的线性组合来预测输出 y：
 
-![](../Images/bfcaba2049dd879a6c88b78eb18ed3ef.png)
+![](img/bfcaba2049dd879a6c88b78eb18ed3ef.png)
 
-*图6：线性模型的公式。*
+*图 6：线性模型的公式。*
 
 我们可以扩展线性模型以捕捉特征之间发生的交互。
 
-![](../Images/72d7a01b39fe9a925af4ba2d08d110f7.png)
+![](img/72d7a01b39fe9a925af4ba2d08d110f7.png)
 
-*图7：扩展线性模型。*
+*图 7：扩展线性模型。*
 
 *注意：线性函数的使用代价较高，线性模型的配对交互的评分和训练复杂度从 O(n) 增加到 O(n²)。然而，你可以进行特征提取来克服这个问题（特征提取超出了本文的范围，但我将在未来的文章中讨论）。*
 
-让我们在Python中编写代码，我将利用scikit-learn的*PolynomialFeatures*类，你可以在[文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html)中阅读更多内容：
+让我们在 Python 中编写代码，我将利用 scikit-learn 的*PolynomialFeatures*类，你可以在[文档](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.PolynomialFeatures.html)中阅读更多内容：
 
 ```py
 import numpy as np
@@ -287,7 +287,7 @@ X_poly.shape
 
 ```
 
-*这篇文章深受书籍[《机器学习特征工程：数据科学家的原则与技术》](https://www.amazon.co.uk/Feature-Engineering-Machine-Learning-Principles-ebook/dp/B07BNX4MWC)的启发，我强烈推荐阅读。尽管该书于2016年出版，但即便是没有数学背景的人也能从中获得非常有用的信息和清晰的解释。*
+*这篇文章深受书籍[《机器学习特征工程：数据科学家的原则与技术》](https://www.amazon.co.uk/Feature-Engineering-Machine-Learning-Principles-ebook/dp/B07BNX4MWC)的启发，我强烈推荐阅读。尽管该书于 2016 年出版，但即便是没有数学背景的人也能从中获得非常有用的信息和清晰的解释。*
 
 ### 结论
 
@@ -295,23 +295,23 @@ X_poly.shape
 
 [原文](https://towardsdatascience.com/feature-engineering-for-numerical-data-e20167ec18)。转载已获许可。
 
-**简历：** [Kurtis Pykes](https://www.linkedin.com/in/kurtispykes/) 是Codehouse的机器学习工程实习生。他热衷于利用机器学习和数据科学的力量来帮助人们变得更高效和有效。
+**简历：** [Kurtis Pykes](https://www.linkedin.com/in/kurtispykes/) 是 Codehouse 的机器学习工程实习生。他热衷于利用机器学习和数据科学的力量来帮助人们变得更高效和有效。
 
 **相关：**
 
-+   [SQL和Python中的特征工程：混合方法](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
++   [SQL 和 Python 中的特征工程：混合方法](https://www.kdnuggets.com/2020/07/feature-engineering-sql-python-hybrid-approach.html)
 
 +   [数据转换：标准化与归一化](https://www.kdnuggets.com/2020/04/data-transformation-standardization-normalization.html)
 
-+   [高级特征工程和预处理的4个技巧](https://www.kdnuggets.com/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)
++   [高级特征工程和预处理的 4 个技巧](https://www.kdnuggets.com/2019/08/4-tips-advanced-feature-engineering-preprocessing.html)
 
 ### 了解更多相关主题
 
-+   [2022特征商店峰会：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [2022 特征商店峰会：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
 
 +   [为多变量时间序列构建可处理的特征工程管道](https://www.kdnuggets.com/2022/03/building-tractable-feature-engineering-pipeline-multivariate-time-series.html)
 
-+   [使用RAPIDS cuDF在特征工程中利用GPU](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
++   [使用 RAPIDS cuDF 在特征工程中利用 GPU](https://www.kdnuggets.com/2023/06/rapids-cudf-leverage-gpu-feature-engineering.html)
 
 +   [机器学习中特征工程的实用方法](https://www.kdnuggets.com/2023/07/practical-approach-feature-engineering-machine-learning.html)
 

@@ -1,10 +1,10 @@
 # 使用卷积神经网络和 OpenCV 预测年龄和性别
 
-> 原文：[https://www.kdnuggets.com/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html](https://www.kdnuggets.com/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html)
+> 原文：[`www.kdnuggets.com/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html`](https://www.kdnuggets.com/2019/04/predict-age-gender-using-convolutional-neural-network-opencv.html)
 
-[评论](#comments)![图](../Images/ab74974a523a926ad87742cfb6a68feb.png)
+评论![图](img/ab74974a523a926ad87742cfb6a68feb.png)
 
-来源：[https://www.zymr.com/difference-machine-learning-artificial-intelligence-bots/](https://www.zymr.com/difference-machine-learning-artificial-intelligence-bots/)
+来源：[`www.zymr.com/difference-machine-learning-artificial-intelligence-bots/`](https://www.zymr.com/difference-machine-learning-artificial-intelligence-bots/)
 
 > 自动化的年龄和性别分类在社交平台和社交媒体兴起之后，变得越来越相关。然而，与最近在面部识别任务上取得的巨大进展相比，现有方法在现实世界图像上的表现仍然显著不足。 — [**使用卷积神经网络进行年龄和性别分类**](https://talhassner.github.io/home/publication/2015_CVPR)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 部门
 
 * * *
 
@@ -26,9 +26,9 @@
 
 **现实世界应用案例：**
 
-![图](../Images/e68f5884c27d59a18cd0b74421bc2c24.png)
+![图](img/e68f5884c27d59a18cd0b74421bc2c24.png)
 
-来源：[https://www.kiwi-digital.com/produkty/age-gender-detection](https://www.kiwi-digital.com/produkty/age-gender-detection)
+来源：[`www.kiwi-digital.com/produkty/age-gender-detection`](https://www.kiwi-digital.com/produkty/age-gender-detection)
 
 最近我遇到了 [**Quividi**](https://www.quividi.com/)，这是一款 AI 软件应用程序，用于基于在线面部分析检测用户的年龄和性别，并根据目标受众自动开始播放广告。
 
@@ -36,7 +36,7 @@
 
 受上述用例的启发，我们将在这篇详细的文章中构建一个简单的年龄和性别检测模型。那么让我们开始我们的用例：
 
-**用例**—我们将进行一些人脸识别、人脸检测工作，并且，我们将使用CNN（卷积神经网络）从YouTube视频中进行年龄和性别预测，你不需要下载视频，只需视频URL即可。令人感兴趣的是在视频URL上使用CNN进行年龄和性别预测。
+**用例**—我们将进行一些人脸识别、人脸检测工作，并且，我们将使用 CNN（卷积神经网络）从 YouTube 视频中进行年龄和性别预测，你不需要下载视频，只需视频 URL 即可。令人感兴趣的是在视频 URL 上使用 CNN 进行年龄和性别预测。
 
 **要求：**
 
@@ -48,7 +48,7 @@ pip install pafy
 
 pip install youtube_dl（了解更多关于[youtube_dl](https://rg3.github.io/youtube-dl/)的信息）
 
-**pafy**：Pafy库用于检索YouTube内容和元数据（如标题、评分、观看次数、时长、评分、作者、缩略图、关键词等）。了解更多关于[pafy](https://pypi.org/project/pafy/)的信息。我们来看一个示例：
+**pafy**：Pafy 库用于检索 YouTube 内容和元数据（如标题、评分、观看次数、时长、评分、作者、缩略图、关键词等）。了解更多关于[pafy](https://pypi.org/project/pafy/)的信息。我们来看一个示例：
 
 ```py
 import pafy
@@ -84,41 +84,41 @@ https://github.com/vdespa/postman-testing-file-uploads
 
 **步骤：**
 
-1.  从YouTube获取视频URL。
+1.  从 YouTube 获取视频 URL。
 
-1.  使用Haar级联进行人脸检测
+1.  使用 Haar 级联进行人脸检测
 
-1.  使用CNN进行性别识别
+1.  使用 CNN 进行性别识别
 
-1.  使用CNN进行年龄识别
+1.  使用 CNN 进行年龄识别
 
-**1. 从YouTube获取视频URL：**
+**1. 从 YouTube 获取视频 URL：**
 
-获取YouTube视频URL，并尝试使用pafy获取视频属性，如上所述。
+获取 YouTube 视频 URL，并尝试使用 pafy 获取视频属性，如上所述。
 
-**2. 使用Haar级联进行人脸检测：**
+**2. 使用 Haar 级联进行人脸检测：**
 
-这是大多数人至少听说过的一部分。OpenCV/JavaCV提供了直接的方法来导入Haar级联并用于人脸检测。我不会深入解释这一部分。你们可以参考我之前的[文章](https://medium.com/analytics-vidhya/how-to-build-a-face-detection-model-in-python-8dc9cecadfe9)以了解更多关于使用OpenCV进行人脸检测的内容。
+这是大多数人至少听说过的一部分。OpenCV/JavaCV 提供了直接的方法来导入 Haar 级联并用于人脸检测。我不会深入解释这一部分。你们可以参考我之前的[文章](https://medium.com/analytics-vidhya/how-to-build-a-face-detection-model-in-python-8dc9cecadfe9)以了解更多关于使用 OpenCV 进行人脸检测的内容。
 
-**3. 使用CNN进行性别识别：**
+**3. 使用 CNN 进行性别识别：**
 
-使用OpenCV的fisherfaces实现进行性别识别非常流行，你们中的一些人可能也尝试过或读过相关内容。但在这个例子中，我将使用一种不同的方法来识别性别。这种方法是由两位以色列研究人员Gil Levi和Tal Hassner于2015年提出的。我在这个例子中使用了他们训练的CNN模型。我们将使用OpenCV的dnn包，即“深度神经网络”。
+使用 OpenCV 的 fisherfaces 实现进行性别识别非常流行，你们中的一些人可能也尝试过或读过相关内容。但在这个例子中，我将使用一种不同的方法来识别性别。这种方法是由两位以色列研究人员 Gil Levi 和 Tal Hassner 于 2015 年提出的。我在这个例子中使用了他们训练的 CNN 模型。我们将使用 OpenCV 的 dnn 包，即“深度神经网络”。
 
-在dnn包中，OpenCV提供了一个叫做Net的类，可以用来填充神经网络。此外，这些包支持从著名的深度学习框架（如caffe、tensorflow和torch）中导入神经网络模型。我之前提到的研究人员已经将他们的CNN模型发布为caffe模型。因此，我们将使用CaffeImporter将该模型导入到我们的应用程序中。
+在 dnn 包中，OpenCV 提供了一个叫做 Net 的类，可以用来填充神经网络。此外，这些包支持从著名的深度学习框架（如 caffe、tensorflow 和 torch）中导入神经网络模型。我之前提到的研究人员已经将他们的 CNN 模型发布为 caffe 模型。因此，我们将使用 CaffeImporter 将该模型导入到我们的应用程序中。
 
-**4. 使用CNN进行年龄识别**
+**4. 使用 CNN 进行年龄识别**
 
-这与性别检测部分几乎相似，区别在于对应的prototxt文件和caffe模型文件是“deploy_agenet.prototxt”和“age_net.caffemodel”。此外，该CNN的输出层（概率层）包含8个值，用于8个年龄类别（“0–2”，“4–6”，“8–13”，“15–20”，“25–32”，“38–43”，“48–53”和“60-”）
+这与性别检测部分几乎相似，区别在于对应的 prototxt 文件和 caffe 模型文件是“deploy_agenet.prototxt”和“age_net.caffemodel”。此外，该 CNN 的输出层（概率层）包含 8 个值，用于 8 个年龄类别（“0–2”，“4–6”，“8–13”，“15–20”，“25–32”，“38–43”，“48–53”和“60-”）
 
-一个caffe模型有2个相关文件，
+一个 caffe 模型有 2 个相关文件，
 
-**1 .prototxt**——CNN的定义在这里。该文件定义了神经网络中的层，每一层的输入、输出和功能。
+**1 .prototxt**——CNN 的定义在这里。该文件定义了神经网络中的层，每一层的输入、输出和功能。
 
 **2 .caffemodel** — 这包含了训练神经网络（训练模型）的信息。
 
-从[这里](https://talhassner.github.io/home/publication/2015_CVPR)下载.prtotxt和.caffemodel。
+从[这里](https://talhassner.github.io/home/publication/2015_CVPR)下载.prtotxt 和.caffemodel。
 
-从[这里](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml)下载用于面部检测的haar cascade。
+从[这里](https://github.com/opencv/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml)下载用于面部检测的 haar cascade。
 
 所以我们开始编写我们的模型代码。
 
@@ -203,7 +203,7 @@ video_detector(age_net, gender_net)
 
 现在让我们理解一下代码：
 
-第1步：导入所有必需的库。
+第 1 步：导入所有必需的库。
 
 ```py
 import cv2
@@ -211,7 +211,7 @@ import numpy as np
 import pafy
 ```
 
-第2步：获取YouTube视频URL并创建一个对象‘play’，该对象包含视频的最佳分辨率，格式为[webm](https://www.webmproject.org/about/)/mp4。
+第 2 步：获取 YouTube 视频 URL 并创建一个对象‘play’，该对象包含视频的最佳分辨率，格式为[webm](https://www.webmproject.org/about/)/mp4。
 
 ```py
 url = 'https://www.youtube.com/watch?v=c07IsbSNqfI&feature=youtu.be'
@@ -219,28 +219,28 @@ vPafy = pafy.new(url)
 play = vPafy.getbest(preftype="mp4")
 ```
 
-第3步：我们通常需要用相机捕获实时流。OpenCV提供了一个非常简单的接口。我们可以从相机捕获视频，将其转换为灰度视频并显示。这只是一个简单的开始任务。
+第 3 步：我们通常需要用相机捕获实时流。OpenCV 提供了一个非常简单的接口。我们可以从相机捕获视频，将其转换为灰度视频并显示。这只是一个简单的开始任务。
 
-要捕获视频，你需要创建一个视频捕获对象。它的参数可以是设备索引或视频文件的名称。设备索引只是指定哪个相机的数字。通常一个相机会连接（如我的情况）。所以我直接传递0（或-1）。你可以通过传递1选择第二个相机，以此类推。之后，你可以逐帧捕获。
+要捕获视频，你需要创建一个视频捕获对象。它的参数可以是设备索引或视频文件的名称。设备索引只是指定哪个相机的数字。通常一个相机会连接（如我的情况）。所以我直接传递 0（或-1）。你可以通过传递 1 选择第二个相机，以此类推。之后，你可以逐帧捕获。
 
 ```py
 cap = cv2.VideoCapture(0) #if you are using webcam
 ```
 
-但在我的情况下，我正在读取一个在线视频URL，因此，我将‘play’对象传递给VideoCapture()。
+但在我的情况下，我正在读取一个在线视频 URL，因此，我将‘play’对象传递给 VideoCapture()。
 
 ```py
 cap = cv2.VideoCapture(play.url)
 ```
 
-第4步：使用set()我会设置我们视频帧的高度和宽度。**cap.set(propId, value)**，其中3是宽度的propertyId，4是高度的propertyId。
+第 4 步：使用 set()我会设置我们视频帧的高度和宽度。**cap.set(propId, value)**，其中 3 是宽度的 propertyId，4 是高度的 propertyId。
 
 ```py
 cap.set(3, 480) #set width of the frame
 cap.set(4, 640) #set height of the frame
 ```
 
-第5步：创建3个独立的列表来存储Model_Mean_Values、年龄和性别。
+第 5 步：创建 3 个独立的列表来存储 Model_Mean_Values、年龄和性别。
 
 ```py
 MODEL_MEAN_VALUES = (78.4263377603, 87.7689143744, 114.895847746)
@@ -248,7 +248,7 @@ age_list = ['(0, 2)', '(4, 6)', '(8, 12)', '(15, 20)', '(25, 32)', '(38, 43)', '
 gender_list = ['Male', 'Female']
 ```
 
-第6步：我定义了一个函数来加载年龄和性别检测器的caffemodel和prototxt，这些基本上是预训练的CNN模型，用于进行检测。
+第 6 步：我定义了一个函数来加载年龄和性别检测器的 caffemodel 和 prototxt，这些基本上是预训练的 CNN 模型，用于进行检测。
 
 ```py
 def load_caffe_models():
@@ -260,7 +260,7 @@ gender_net = cv2.dnn.readNetFromCaffe('deploy_gender.prototxt', 'gender_net.caff
 return(age_net, gender_net)
 ```
 
-第7步：现在我们将进行面部检测、年龄检测和性别检测，为此在你的主函数中创建一个函数**video_detector(age_net, gender_net)**，并将age_net和gender_net作为参数传递。
+第 7 步：现在我们将进行面部检测、年龄检测和性别检测，为此在你的主函数中创建一个函数**video_detector(age_net, gender_net)**，并将 age_net 和 gender_net 作为参数传递。
 
 ```py
 if __name__ == "__main__":
@@ -269,35 +269,35 @@ age_net, gender_net = load_caffe_models()
 video_detector(age_net, gender_net)
 ```
 
-第8步：读取第3步中由VideoCapture()创建的cap对象。
+第 8 步：读取第 3 步中由 VideoCapture()创建的 cap 对象。
 
-**cap.read()**返回一个布尔值（True/False）。如果帧被正确读取，它将为True。
+**cap.read()**返回一个布尔值（True/False）。如果帧被正确读取，它将为 True。
 
 #所以你可以通过检查这个返回值来查看视频的结尾。
 
-#有时候，cap可能没有初始化捕获。在这种情况下，这段代码会显示错误。
+#有时候，cap 可能没有初始化捕获。在这种情况下，这段代码会显示错误。
 
-#你可以通过方法cap.isOpened()检查它是否初始化。如果为True，表示正常。否则，使用cap.open()打开它。
+#你可以通过方法 cap.isOpened()检查它是否初始化。如果为 True，表示正常。否则，使用 cap.open()打开它。
 
 ```py
 ret, image = cap.read()
 ```
 
-第9步：将图像转换为灰度图像，因为OpenCV面部检测器期望[灰度图像](https://en.wikipedia.org/wiki/Grayscale)。
+第 9 步：将图像转换为灰度图像，因为 OpenCV 面部检测器期望[灰度图像](https://en.wikipedia.org/wiki/Grayscale)。
 
 ```py
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 ```
 
-第10步：加载用于面部检测的预构建模型。
+第 10 步：加载用于面部检测的预构建模型。
 
 ```py
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt.xml')
 ```
 
-第11步：现在，我们如何使用CascadeClassifier从图像中检测面孔？
+第 11 步：现在，我们如何使用 CascadeClassifier 从图像中检测面孔？
 
-好吧，OpenCV的CascadedClassifier因为**detectMultiScale()**使得这一过程变得简单，它能精确检测你需要的内容。
+好吧，OpenCV 的 CascadedClassifier 因为**detectMultiScale()**使得这一过程变得简单，它能精确检测你需要的内容。
 
 ```py
 detectMultiScale(image, scaleFactor, minNeighbors)
@@ -407,15 +407,15 @@ if cv2.waitKey(1) & 0xFF == ord('q'):
 
 我们的程序最多等待 1 毫秒以便用户按下一个键。然后它获取读取的键值并与 `0xFF` 进行 AND 运算，这样可以去掉低于 8 位的部分，并将结果与字母 `q` 的 ASCII 码进行比较，这意味着用户通过按下键盘上的 `q` 来决定退出。
 
-**输出**：视频网址-1：[https://www.youtube.com/watch?v=iH1ZJVqJO3Y](https://www.youtube.com/watch?v=iH1ZJVqJO3Y)
+**输出**：视频网址-1：[`www.youtube.com/watch?v=iH1ZJVqJO3Y`](https://www.youtube.com/watch?v=iH1ZJVqJO3Y)
 
-![图示](../Images/a1c89e6e5e72c57f245f31473e3c5c13.png)
+![图示](img/a1c89e6e5e72c57f245f31473e3c5c13.png)
 
 Youtube 视频 1
 
-视频网址-2：[https://www.youtube.com/watch?v=qLNhVC296YI](https://www.youtube.com/watch?v=qLNhVC296YI)
+视频网址-2：[`www.youtube.com/watch?v=qLNhVC296YI`](https://www.youtube.com/watch?v=qLNhVC296YI)
 
-![图示](../Images/ebf2004b089b2167c848dfe2bf2a1645.png)
+![图示](img/ebf2004b089b2167c848dfe2bf2a1645.png)
 
 Youtube 视频 2
 
@@ -441,7 +441,7 @@ Youtube 视频 2
 
 +   [计算机视觉中的一切](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [使用 RetinaNet 在航拍图像中进行行人检测](/2019/03/pedestrian-detection-aerial-images-retinanet.html)
++   使用 RetinaNet 在航拍图像中进行行人检测
 
 ### 更多相关话题
 

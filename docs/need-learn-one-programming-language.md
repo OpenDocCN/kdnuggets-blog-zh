@@ -1,26 +1,26 @@
 # 为什么你需要学习多于一种编程语言！
 
-> 原文：[https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
+> 原文：[`www.kdnuggets.com/2022/06/need-learn-one-programming-language.html`](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
-![为什么你需要学习多于一种编程语言！](../Images/e2c89ac9fe62bb80feccf1b2b17509b1.png)
+![为什么你需要学习多于一种编程语言！](img/e2c89ac9fe62bb80feccf1b2b17509b1.png)
 
 图片来源：[ThisisEngineering RAEng](https://unsplash.com/@thisisengineering?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/coding?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-在IT、数据科学、机器学习的领域，最大的技能需求是多样化。仅凭一种编程语言，你的能力将受到局限。不论你遇到什么工作，了解另一种语言总会对你的任务或职业有帮助。
+在 IT、数据科学、机器学习的领域，最大的技能需求是多样化。仅凭一种编程语言，你的能力将受到局限。不论你遇到什么工作，了解另一种语言总会对你的任务或职业有帮助。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 需求
 
 * * *
 
-根据[Deloitte调查](https://www2.deloitte.com/content/dam/Deloitte/se/Documents/technology/DI_2021-Tech-Trends.pdf)，有三分之一的当前员工技能在未来三年内将不再相关。
+根据[Deloitte 调查](https://www2.deloitte.com/content/dam/Deloitte/se/Documents/technology/DI_2021-Tech-Trends.pdf)，有三分之一的当前员工技能在未来三年内将不再相关。
 
 我不仅仅是从个人经验出发，你也可以亲自验证。当你寻找技术职位时，通常会提到如果你在一种或多种编程语言方面熟练，他们会更倾向于你。这不是强制要求，而是一个偏好。这是有原因的；如果你的职业生涯中只依赖一种编程语言，你的技能会被超越。
 
@@ -28,7 +28,7 @@
 
 # 你最终会被淘汰...
 
-大多数成功的公司，特别是科技公司，都是建立在不止一种编程语言之上的。你的公司可能包括Node.js、Ruby、Java、Python等多种编程语言。如果你只掌握一种编程语言，你的技能会开始受到限制。这些语言在不同项目或业务方面之间不可互换，这可能导致你感到被淘汰。
+大多数成功的公司，特别是科技公司，都是建立在不止一种编程语言之上的。你的公司可能包括 Node.js、Ruby、Java、Python 等多种编程语言。如果你只掌握一种编程语言，你的技能会开始受到限制。这些语言在不同项目或业务方面之间不可互换，这可能导致你感到被淘汰。
 
 学习编程语言的概念与学习外语相同。一旦你掌握了一种，其他的学习起来也会变得更容易。各种编程语言之间有很多相似之处，你应该利用这一点。与其因为技能不够多样化而被淘汰，不如成为一个多才多艺的开发者。
 
@@ -60,13 +60,13 @@
 
 ### 更多相关话题
 
-+   [为什么你需要在2022年学习Python](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
++   [为什么你需要在 2022 年学习 Python](https://www.kdnuggets.com/2022/04/need-learn-python-2022.html)
 
 +   [为什么大多数人无法学会编程？](https://www.kdnuggets.com/2022/03/people-fail-learn-programming.html)
 
 +   [Python：机器学习的编程语言](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)
 
-+   [是什么让Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [DataLang：为数据科学家量身定制的新编程语言... 创建中…](https://www.kdnuggets.com/2023/04/datalang-new-programming-language-data-scientists-chatgpt.html)
 

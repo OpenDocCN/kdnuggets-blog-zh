@@ -1,8 +1,8 @@
 # 从实践到生产中迁移机器学习时需要问的问题
 
-> 原文：[https://www.kdnuggets.com/2016/11/moving-machine-learning-practice-production.html](https://www.kdnuggets.com/2016/11/moving-machine-learning-practice-production.html)
+> 原文：[`www.kdnuggets.com/2016/11/moving-machine-learning-practice-production.html`](https://www.kdnuggets.com/2016/11/moving-machine-learning-practice-production.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Ramanan Balakrishnan，Semantics3**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -32,11 +32,11 @@
 
 > 我是否有可靠的数据来源？我从哪里获得我的数据集？
 
-在开始时，大多数教程通常包含定义良好的数据集。无论是[MNIST](http://yann.lecun.com/exdb/mnist/)、[维基百科语料库](http://corpus.byu.edu/wikipedia.asp)还是来自[UCI机器学习库](https://archive.ics.uci.edu/ml/)的任何优秀选项，这些数据集通常无法代表你希望解决的问题。
+在开始时，大多数教程通常包含定义良好的数据集。无论是[MNIST](http://yann.lecun.com/exdb/mnist/)、[维基百科语料库](http://corpus.byu.edu/wikipedia.asp)还是来自[UCI 机器学习库](https://archive.ics.uci.edu/ml/)的任何优秀选项，这些数据集通常无法代表你希望解决的问题。
 
 对于你的具体使用案例，可能根本不存在合适的数据集，构建数据集可能比你预期的要花费更长的时间。
 
-例如，在Semantics3，我们处理了许多电子商务特定的问题，从*产品分类*到*产品匹配*再到*搜索相关性*。针对这些问题，我们不得不内部审视并付出相当的努力来生成高保真的产品数据集。
+例如，在 Semantics3，我们处理了许多电子商务特定的问题，从*产品分类*到*产品匹配*再到*搜索相关性*。针对这些问题，我们不得不内部审视并付出相当的努力来生成高保真的产品数据集。
 
 在许多情况下，即使你拥有所需的数据，仍可能需要大量（且*昂贵*）的人工劳动来对数据进行分类、注释和标记以供训练使用。
 
@@ -76,13 +76,13 @@
 
 ### 没有哪个系统是孤立存在的
 
-> 我需要进行批处理还是实时预测？嵌入式模型还是接口？RPC还是REST？
+> 我需要进行批处理还是实时预测？嵌入式模型还是接口？RPC 还是 REST？
 
 你的*99%-验证准确率*模型除非与生产系统的其他部分接口，否则用处不大[.](https://xkcd.com/1312/)这个决策至少部分取决于你的使用案例。
 
 执行简单任务的模型可能可以将其权重直接打包到应用程序中，而更复杂的模型可能需要与集中式的重型服务器进行通信。
 
-在我们的案例中，大多数生产系统离线批处理任务，而少数通过HTTP上的JSON-RPC提供实时预测。
+在我们的案例中，大多数生产系统离线批处理任务，而少数通过 HTTP 上的 JSON-RPC 提供实时预测。
 
 知道这些问题的答案也可能会限制你在构建模型时应该考虑的架构类型。构建一个复杂的模型，结果发现它无法在你的移动应用中部署，是一个可以轻松避免的灾难。
 
@@ -94,13 +94,13 @@
 
 *我的模型如何影响整体系统性能？我应该测量哪些数据？模型是否正确处理了所有可能的输入和场景？*
 
-由于曾在[过去](https://engineering.semantics3.com/2016/07/20/an-unexpected-dba-journey/)使用过Postgres，我倾向于用它来监控我的模型。定期保存生产统计数据（数据样本、预测结果、异常数据细节）在执行分析（和错误追踪）时证明了其无价之宝。
+由于曾在[过去](https://engineering.semantics3.com/2016/07/20/an-unexpected-dba-journey/)使用过 Postgres，我倾向于用它来监控我的模型。定期保存生产统计数据（数据样本、预测结果、异常数据细节）在执行分析（和错误追踪）时证明了其无价之宝。
 
 另一个需要考虑的重要方面是模型的在线学习要求。*你的模型是否应该即时学习新特性？*当滑板成为现实[,](http://www.slate.com/articles/technology/future_tense/2012/11/where_s_my_hoverboard_sorry_you_re_probably_never_getting_one.html)产品分类器应该将其归入*车辆*、*玩具*还是保持*未分类*？这些都是在构建系统时值得讨论的重要问题。
 
 ### 总结一下
 
-![这不仅仅是秘密调料](../Images/dccfceb5534b4afa45333e29828b1d44.png)
+![这不仅仅是秘密调料](img/dccfceb5534b4afa45333e29828b1d44.png)
 
 *这不仅仅是秘密调料*
 
@@ -114,22 +114,22 @@
 
 **相关:**
 
-+   [机器学习：完整而详细的概述](/2016/10/machine-learning-complete-detailed-overview.html)
++   机器学习：完整而详细的概述
 
-+   [深度学习研究综述：生成对抗网络](/2016/10/deep-learning-research-review-generative-adversarial-networks.html)
++   深度学习研究综述：生成对抗网络
 
-+   [将更智能的决策深嵌入运营IT结构](/2016/10/zementis-deep-learning-meets-deep-deployment.html)
++   将更智能的决策深嵌入运营 IT 结构
 
 ### 更多相关话题
 
 +   [将机器学习算法全面部署到…](https://www.kdnuggets.com/2021/12/deployment-machine-learning-algorithm-live-production-environment.html)
 
-+   [从PoC到生产的机器学习操作化](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)
++   [从 PoC 到生产的机器学习操作化](https://www.kdnuggets.com/2022/05/operationalizing-machine-learning-poc-production.html)
 
 +   [将机器学习模型部署到云中的生产环境](https://www.kdnuggets.com/deploying-your-ml-model-to-production-in-the-cloud)
 
-+   [使用Eurybia检测数据漂移以确保生产ML模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
++   [使用 Eurybia 检测数据漂移以确保生产 ML 模型质量](https://www.kdnuggets.com/2022/07/detecting-data-drift-ensuring-production-ml-model-quality-eurybia.html)
 
 +   [为生产优先考虑数据科学模型](https://www.kdnuggets.com/2022/04/prioritizing-data-science-models-production.html)
 
-+   [Feature Store峰会2023：部署ML模型的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)
++   [Feature Store 峰会 2023：部署 ML 模型的实用策略…](https://www.kdnuggets.com/2023/09/hopsworks-feature-store-summit-2023-practical-strategies-deploying-ml-models-production-environments)

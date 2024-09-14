@@ -1,8 +1,8 @@
 # AI Chrome 扩展工具清单
 
-> 原文：[https://www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html](https://www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html)
+> 原文：[`www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html`](https://www.kdnuggets.com/2023/06/ai-chrome-extensions-data-scientists-cheat-sheet.html)
 
-[![AI Chrome 扩展工具清单](../Images/ad1303f371adba3e2afa83f1b882b55f.png)](https://www.kdnuggets.com/publications/sheets/10_AI_Chrome_Extensions_for_Data_Scientists_KDnuggets.pdf)
+![AI Chrome 扩展工具清单](https://www.kdnuggets.com/publications/sheets/10_AI_Chrome_Extensions_for_Data_Scientists_KDnuggets.pdf)
 
 随着我们进入大数据和人工智能时代，数据科学家和研究人员可用的工具和资源持续呈指数增长。每种工具，无论是向导、代码生成器还是 AI 驱动的数据提取工具，都承诺减轻重复任务的负担，提供有价值的见解，并提高整体工作流程的效率和生产力。KDnuggets 最新的工具清单，[**AI Chrome 扩展工具清单**](https://www.kdnuggets.com/publications/sheets/10_AI_Chrome_Extensions_for_Data_Scientists_KDnuggets.pdf)，向你展示了一系列先进的工具和资源，旨在支持你的数据科学工作。它们涵盖了从理解复杂科学文献到撰写高质量手稿等广泛应用。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -32,9 +32,9 @@
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，7月5日：一个糟糕的数据科学项目 • 10 AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 AI…](https://www.kdnuggets.com/2023/n24.html)
 
-+   [KDnuggets 新闻，7月6日：12 个必备的数据科学 VSCode 扩展…](https://www.kdnuggets.com/2022/n27.html)
++   [KDnuggets 新闻，7 月 6 日：12 个必备的数据科学 VSCode 扩展…](https://www.kdnuggets.com/2022/n27.html)
 
 +   [12 个必备的 VSCode 扩展，用于数据科学](https://www.kdnuggets.com/2022/07/12-essential-vscode-extensions-data-science.html)
 

@@ -1,6 +1,6 @@
 # 为你的数据集选择合适的聚类算法
 
-> 原文：[https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)
+> 原文：[`www.kdnuggets.com/2019/10/right-clustering-algorithm.html`](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)
 
 数据聚类是安排正确且全面数据模型的关键步骤。为了进行分析，信息的量应该根据共性进行分类。主要问题是，哪种共性参数提供了最佳结果——以及“最佳”的定义到底意味着什么。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 # 四种基本算法及其选择方法
 
-根据聚类模型的不同，区分出四类常见的算法。总共有不少于100种算法，但它们的受欢迎程度相对适中，以及它们的应用领域。
+根据聚类模型的不同，区分出四类常见的算法。总共有不少于 100 种算法，但它们的受欢迎程度相对适中，以及它们的应用领域。
 
 # 基于连接性的聚类
 
@@ -30,7 +30,7 @@
 
 应用基于连接性的算法后，你会得到一个数据树状图，它展示了信息的结构，而不是其在簇中的明确分离。这种特性可能既有利也有害：算法的复杂性可能过高，或者对几乎没有层次结构的数据集来说根本不适用。它还表现出较差的性能：由于迭代次数过多，完整处理将花费不合理的时间。此外，使用层次算法无法获得精确的结构。
 
-![](../Images/751b46e72c63821f823138179b1ba200.png)
+![](img/751b46e72c63821f823138179b1ba200.png)
 
 [图像来源](https://genomicsclass.github.io/book/pages/figure/clustering_and_heatmaps-color_dendrogram-1.png)
 
@@ -40,7 +40,7 @@
 
 **基于质心**的聚类，凭我的经验，由于其相对简单性，是最常见的模型。该模型旨在将数据集中的每个对象分类到特定簇中。簇的数量（*k*）是随机选择的，这可能是该方法的最大“弱点”。这种 *k-means* 算法在机器学习中尤其受欢迎，因为它与 [k-最近邻](https://www.kaggle.com/chavesfm/tuning-parameters-for-k-nearest-neighbors-iris) (kNN) 方法类似。
 
-![](../Images/1a44928d1bd4107472b395c5b0f895bf.png)
+![](img/1a44928d1bd4107472b395c5b0f895bf.png)
 
 [图像来源](https://www.mathworks.com/help/examples/stats/win64/AssignNewDataToExistingClustersAndGenerateCodeExample_01.png)
 
@@ -62,19 +62,19 @@
 
 **期望最大化**算法则允许避免这些复杂性，同时提供更高的准确度。简单来说，它计算每个数据点与我们指定的所有聚类的关系概率。用于这种聚类模型的主要“工具”是**高斯混合模型（GMM）**——即数据点一般遵循[高斯分布](https://www.encyclopedia.com/science-and-technology/mathematics/mathematics/normal-distribution#3)的假设。
 
-k-means算法基本上是EM原理的简化版本。它们都需要手动输入聚类数量，这也是这些方法的主要复杂之处。除此之外，计算原理（无论是GMM还是k-means）都很简单：聚类的近似范围随着每次新的迭代逐渐确定。
+k-means 算法基本上是 EM 原理的简化版本。它们都需要手动输入聚类数量，这也是这些方法的主要复杂之处。除此之外，计算原理（无论是 GMM 还是 k-means）都很简单：聚类的近似范围随着每次新的迭代逐渐确定。
 
-与基于质心的模型不同，EM算法允许点被分类到两个或多个聚类中——它只是为每个事件提供可能性，从而进行进一步分析。更重要的是，与k-means中聚类以圆形视觉呈现不同，EM算法中每个聚类的边界组成不同尺寸的椭球。然而，该算法对于数据点不遵循高斯分布的数据集将无效。这是该方法的主要缺点：它更适用于理论问题，而不是实际测量或观察。
+与基于质心的模型不同，EM 算法允许点被分类到两个或多个聚类中——它只是为每个事件提供可能性，从而进行进一步分析。更重要的是，与 k-means 中聚类以圆形视觉呈现不同，EM 算法中每个聚类的边界组成不同尺寸的椭球。然而，该算法对于数据点不遵循高斯分布的数据集将无效。这是该方法的主要缺点：它更适用于理论问题，而不是实际测量或观察。
 
 # 基于密度的聚类
 
 最终，**基于密度的聚类**，也就是[数据科学家心中的非官方最爱](http://www.mastersindatascience.org/careers/data-scientist/)，登场了。这个名称包含了模型的主要点——将数据集划分为聚类，计数器输入ε参数，即“邻域”距离。如果对象位于ε半径的圆（球体）内，则它与该聚类相关。
 
-![](../Images/564c5cbe622f373106b85a379f77f1e0.png)
+![](img/564c5cbe622f373106b85a379f77f1e0.png)
 
 [图片来源](https://www.datanovia.com/en/wp-content/uploads/dn-tutorials/005-advanced-clustering/figures/023-dbscan-density-based-clustering-density-based-clustering-1.png)
 
-步步进行，DBSCAN（基于密度的空间聚类算法）算法检查每个对象，将其状态更改为“已查看”，将其分类为聚类或噪声，直到整个数据集处理完毕。DBSCAN确定的聚类可以具有任意形状，因此非常准确。此外，该算法无需计算聚类的数量——它会自动确定。
+步步进行，DBSCAN（基于密度的空间聚类算法）算法检查每个对象，将其状态更改为“已查看”，将其分类为聚类或噪声，直到整个数据集处理完毕。DBSCAN 确定的聚类可以具有任意形状，因此非常准确。此外，该算法无需计算聚类的数量——它会自动确定。
 
 尽管如此，即便是像 DBSCAN 这样的杰作也有一个缺点。如果数据集包含变密度的簇，该方法效果较差。如果对象的分布过于接近，而且 ε 参数难以估计，这也可能不是你的选择。
 

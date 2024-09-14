@@ -1,8 +1,8 @@
 # 数据中心人工智能与表格数据
 
-> 原文：[https://www.kdnuggets.com/2022/09/datacentric-ai-tabular-data.html](https://www.kdnuggets.com/2022/09/datacentric-ai-tabular-data.html)
+> 原文：[`www.kdnuggets.com/2022/09/datacentric-ai-tabular-data.html`](https://www.kdnuggets.com/2022/09/datacentric-ai-tabular-data.html)
 
-![](../Images/30b6d1dfb28f1f3801886bc1765f437b.png)
+![](img/30b6d1dfb28f1f3801886bc1765f437b.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的信息技术
 
 * * *
 
@@ -24,7 +24,7 @@
 
 尽管全球企业主要依赖表格数据，但计算机视觉和自然语言处理模型却抢尽了风头。学术研究和行业创新都集中在计算机视觉和自然语言处理上。这些工作带来了跨行业的惊人、改变世界的应用，如自动驾驶汽车、增强现实和接近人类水平的文本生成及对话工具。
 
-同时，尽管表格数据对企业至关重要，但只有极少数的人工智能研究集中在改进处理这种数据格式的方法上。例如，在[计算机科学 arXiv](https://arxiv.org/search/cs)学术研究库中，提到“表格”的论文约有900篇，而“自然语言处理”的论文有超过5,000篇，“计算机视觉”的论文更是超过81,000篇。
+同时，尽管表格数据对企业至关重要，但只有极少数的人工智能研究集中在改进处理这种数据格式的方法上。例如，在[计算机科学 arXiv](https://arxiv.org/search/cs)学术研究库中，提到“表格”的论文约有 900 篇，而“自然语言处理”的论文有超过 5,000 篇，“计算机视觉”的论文更是超过 81,000 篇。
 
 你所知道的每一个电子表格都包含了表格数据。表格数据的捕捉和分析是我们拥有成千上万的数据库管理、商业智能、客户关系管理、企业资源计划、计算机科学以及其他商业工具的原因，这些工具创造了数万亿美元的市场价值。然而，表格数据的分析可以从更先进的方法中受益，包括数据准备、建模和部署过程的所有阶段。那么，为什么我们——广大的数据科学社区——不花更多时间和资源开发处理表格数据的技术呢？
 
@@ -34,15 +34,15 @@
 
 对大多数人来说，电子表格并不完全激发灵感。更常见的，你会听到关于那些数据行列的枯燥乏味的抱怨。然而，即使对于那些稀有的电子表格爱好者，计算机视觉和自然语言处理项目也一直充满吸引力。让计算机理解图像或自然语言可能会让人感觉是在帮助推动数字化进程。相比之下，表格数据更像是用计算机的母语进行简单的对话。
 
-然而，为了在企业中更广泛地推广人工智能并推动创新以提升收入驱动的AI举措，现在是时候了解一下表格数据的诱人之处了。
+然而，为了在企业中更广泛地推广人工智能并推动创新以提升收入驱动的 AI 举措，现在是时候了解一下表格数据的诱人之处了。
 
 # 表格数据在研究中更难获取
 
-计算机视觉和自然语言处理研究之所以能超越表格数据研究，另一个原因是这些项目的原材料更容易获得。互联网上有 [数十亿张照片](https://photutorial.com/photos-statistics/) 和 [数十亿](https://www.statista.com/chart/19058/number-of-websites-online/) 的网页包含文本，这为构建图像和语言项目的训练语料库提供了无限的可能性，这些项目为像DALL-E和LaMDA这样的强大模型提供了信息。
+计算机视觉和自然语言处理研究之所以能超越表格数据研究，另一个原因是这些项目的原材料更容易获得。互联网上有 [数十亿张照片](https://photutorial.com/photos-statistics/) 和 [数十亿](https://www.statista.com/chart/19058/number-of-websites-online/) 的网页包含文本，这为构建图像和语言项目的训练语料库提供了无限的可能性，这些项目为像 DALL-E 和 LaMDA 这样的强大模型提供了信息。
 
 相比之下，公开可用的表格数据——特别是来自企业的数据——则显得相对稀缺。数据科学学生在同样的表格数据集上反复练习（比如鸢尾花数据集）。研究人员可能很难找到那些超出著名 [数据集库](https://archive.ics.uci.edu/ml/index.php) 的多样化表格数据集。可以理解的是，企业不愿意发布反映客户活动或影响其业务策略的内部数据，这些数据很可能是表格形式的。而且，别忘了，还有许多法规限制了在其指定用途之外共享这些数据。没有访问许多多样化、大规模且面向业务的数据集，表格数据方法的发展就停滞不前。
 
-![数据驱动的人工智能和表格数据](../Images/29f37a6cbe7646a9c1069b40dc501206.png)
+![数据驱动的人工智能和表格数据](img/29f37a6cbe7646a9c1069b40dc501206.png)
 
 来自 [Pecan AI](https://www.pecan.ai/) 的图像
 
@@ -50,9 +50,9 @@
 
 一个像素代表了一个大而有限的可能性领域。无论是狗的照片还是孩子的蜡笔画，一篇短篇小说还是一首史诗诗歌：无论图像或文本的内容是什么，数字化和预处理将其重塑为机器学习算法可以使用的一致格式。
 
-表格数据中缺乏这种基本的一致性是高效机器学习的一个主要挑战。图像和文本可能*看起来*更复杂——但找到大多数表格数据集中潜在的共同结构同样具有挑战性，甚至更具挑战性。表格中的每一列都是不同的，可能没有明确标识。数据类型可能没有提供或配置准确。例如，某列中的五位数字是代表家庭收入还是邮政编码？另一列中的0和1是表示“否”和“是”，还是代表另一种二进制变量？而且——永恒的问题——这个日期格式*是什么*？
+表格数据中缺乏这种基本的一致性是高效机器学习的一个主要挑战。图像和文本可能*看起来*更复杂——但找到大多数表格数据集中潜在的共同结构同样具有挑战性，甚至更具挑战性。表格中的每一列都是不同的，可能没有明确标识。数据类型可能没有提供或配置准确。例如，某列中的五位数字是代表家庭收入还是邮政编码？另一列中的 0 和 1 是表示“否”和“是”，还是代表另一种二进制变量？而且——永恒的问题——这个日期格式*是什么*？
 
-这些不一致性和不确定性通常使得准备表格数据成为一项艰巨的任务，尤其是当数据表需要从组织中不同来源合并时。将来自不同来源的类似信息匹配并标准化为单一的建模流程可能很困难。难怪一些数据科学家 [仍然报告](https://www.datanami.com/2020/07/06/data-prep-still-dominates-data-scientists-time-survey-finds/#:~:text=In%20some%20surveys%20in%20the,equivalent%20of%20digital%20janitorial%20work.) 他们在数据准备任务上花费了超过70%的时间，将其视为数字清洁工工作的等同物。
+这些不一致性和不确定性通常使得准备表格数据成为一项艰巨的任务，尤其是当数据表需要从组织中不同来源合并时。将来自不同来源的类似信息匹配并标准化为单一的建模流程可能很困难。难怪一些数据科学家 [仍然报告](https://www.datanami.com/2020/07/06/data-prep-still-dominates-data-scientists-time-survey-finds/#:~:text=In%20some%20surveys%20in%20the,equivalent%20of%20digital%20janitorial%20work.) 他们在数据准备任务上花费了超过 70%的时间，将其视为数字清洁工工作的等同物。
 
 # 手工艺方法在数据准备和特征工程中的失败
 
@@ -62,7 +62,7 @@
 
 尽管有其缺点，但即兴的数据准备方法仍然存在，因为普遍存在的观念认为每个表格数据集都是独特的。实际上，表格数据的不可预测元素在一定范围的情况下可能是相当可预测的。
 
-![数据中心的 AI 和表格数据](../Images/f916be8f8a68f507cdc6c459a3529e30.png)
+![数据中心的 AI 和表格数据](img/f916be8f8a68f507cdc6c459a3529e30.png)
 
 图片来源于 [Pecan AI](https://www.pecan.ai/)
 
@@ -78,7 +78,7 @@
 
 # 数据中心化必须包括表格数据
 
-在人工智能领域的讨论中，越来越多地引用“数据中心化人工智能”的概念。正如[一个在线中心](https://datacentricai.org/)所说，数据中心化人工智能是“系统地工程化构建人工智能系统所用数据的学科”。像Andrew Ng这样的数据科学领袖普及了这个想法。然而，这些讨论再次集中在计算机视觉和自然语言处理应用上。
+在人工智能领域的讨论中，越来越多地引用“数据中心化人工智能”的概念。正如[一个在线中心](https://datacentricai.org/)所说，数据中心化人工智能是“系统地工程化构建人工智能系统所用数据的学科”。像 Andrew Ng 这样的数据科学领袖普及了这个想法。然而，这些讨论再次集中在计算机视觉和自然语言处理应用上。
 
 数据中心化人工智能的概念是对我们领域长期以来强调“海量数据”和不断完善和调整机器学习模型的平衡。数据中心化的观点认为，我们应该专注于*优质*数据，这些数据能够有效地训练即使是更简单的模型，以获得良好的性能。
 
@@ -98,12 +98,12 @@
 
 +   [如何生成合成表格数据集](https://www.kdnuggets.com/2022/03/generate-tabular-synthetic-dataset.html)
 
-+   [2022年及以后顶级AI和数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶级 AI 和数据科学工具和技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
 +   [SQL Group By 和 Partition By 场景：何时及如何结合数据](https://www.kdnuggets.com/sql-group-by-and-partition-by-scenarios-when-and-how-to-combine-data-in-data-science)
 
-+   [天高任翔：了解JetBlue如何利用Monte Carlo和Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)
++   [天高任翔：了解 JetBlue 如何利用 Monte Carlo 和 Snowflake…](https://www.kdnuggets.com/2022/12/monte-carlo-jetblue-snowflake-build-trust-improve-model-accuracy.html)
 
-+   [IMPACT：数据可观测性峰会将于11月8日回归](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观测性峰会将于 11 月 8 日回归](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
 +   [SQL 和数据集成：ETL 和 ELT](https://www.kdnuggets.com/2023/01/sql-data-integration-etl-elt.html)

@@ -1,12 +1,12 @@
 # 基本数据科学维恩图
 
-> 原文：[https://www.kdnuggets.com/2019/02/essential-data-science-venn-diagram.html](https://www.kdnuggets.com/2019/02/essential-data-science-venn-diagram.html)
+> 原文：[`www.kdnuggets.com/2019/02/essential-data-science-venn-diagram.html`](https://www.kdnuggets.com/2019/02/essential-data-science-venn-diagram.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Andrew Silver](http://adret-llc.com/)，Adret LLC**
 
-![数据科学维恩图](../Images/23301aefbc516c00e713face05c6f959.png)
+![数据科学维恩图](img/23301aefbc516c00e713face05c6f959.png)
 
 几年前，Drew Conway 提出了并分享了他现在无处不在的 [数据科学维恩图](http://drewconway.com/zia/2013/3/26/the-data-science-venn-diagram)。这非常有帮助，我们都受到了启发。感谢你，Conway 博士！
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -26,9 +26,9 @@
 
 首先，让我说我的维恩图，就像所有的维恩图一样，固有地存在缺陷。为什么？因为它是一个二维图示，展示了固有的多维动态。这部分反映在左下角的免责声明中，沟通维度（听觉+视觉）和软技能没有显示。*创造力*、*毅力*、*内省诚实* 和其他属性也在图形中缺失。
 
-![数据科学维恩图图 2](../Images/d83cc029f7ced36aafb47a8775f96ab2.png)**必要性**
+![数据科学维恩图图 2](img/d83cc029f7ced36aafb47a8775f96ab2.png)**必要性**
 
-统计学广泛涉及量化方差的结构，其快乐结果是能够构建描述性、解释性、预测性和规范性模型（数据科学的输出）。因此，指出统计方法在数据科学维恩图上方差最大来源并不羞愧：*多变量*统计方法（评估≥3个变量）与 [单变量和双变量] 统计方法之间的差异。
+统计学广泛涉及量化方差的结构，其快乐结果是能够构建描述性、解释性、预测性和规范性模型（数据科学的输出）。因此，指出统计方法在数据科学维恩图上方差最大来源并不羞愧：*多变量*统计方法（评估≥3 个变量）与 [单变量和双变量] 统计方法之间的差异。
 
 是的，我在这里暗示这比有监督与无监督统计建模、参数与非参数建模之间的差异要大。基于的方差度量是人群中对高级统计方法的意识差异明显。需要的是人们应该更加了解在第四次工业革命中发挥核心作用的多变量分析。
 
@@ -48,7 +48,7 @@
 
 标记为“传统软件”的区域描述起来较为困难。这回到试图用二维图形总结多变量系统的局限性。这一重叠区域也可以用来描述机械自动化（这无疑构成了全球经济的一个重要部分）。就本讨论而言，并且在大多数白领知识性工作的背景下，可以说这一领域代表了在执行风险评估时缺乏严谨性。
 
-![数据科学图3](../Images/0877574857e790b5b04732efe691b706.png)
+![数据科学图 3](img/0877574857e790b5b04732efe691b706.png)
 
 **操作顺序**
 
@@ -60,11 +60,11 @@
 
 总结来说，这个新的维恩图告诉我们一些我们已经知道的事情，但可能没有正式表达出来。这是一个简单的模式，作为这样的模式，它可以帮助人们更好地优先排序他们的工作流程。例如，它鼓励数据科学家在开始工作时首先与领域专家交谈——这已经被誉为最佳实践。如果你是那种不仅对*什么*要做感到满意，还想理解*为什么*的人，理解事情发生的*本质*会有所帮助。
 
-近70年前，[塞缪尔·威尔克斯写道](https://quotablemath.blogspot.com/2018/02/misquoted-hg-wells-on-statistics.html) *“统计思维有一天将像读写能力一样对有效公民至关重要。”* 在不久的将来，*多元* 统计思维可能会成为更多职业的先决条件。如果我对数据科学维恩图的重新阐述能对任何人有所帮助，我会认为这段时间花得非常值得。
+近 70 年前，[塞缪尔·威尔克斯写道](https://quotablemath.blogspot.com/2018/02/misquoted-hg-wells-on-statistics.html) *“统计思维有一天将像读写能力一样对有效公民至关重要。”* 在不久的将来，*多元* 统计思维可能会成为更多职业的先决条件。如果我对数据科学维恩图的重新阐述能对任何人有所帮助，我会认为这段时间花得非常值得。
 
 ***世界是我们创造的，它需要更智能***。如果你喜欢这篇文章，请考虑与朋友分享。
 
-（注意：这些维恩图图形可在注明出处的情况下使用。上述图表的初步版本首次发布于 [www.adret-llc.com](http://www.adret-llc.com) 和 [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6256833177369792512) 上，时间是2017年初。 文章 [在Medium上转载](https://towardsdatascience.com/the-essential-data-science-venn-diagram-35800c3bef40)。）
+（注意：这些维恩图图形可在注明出处的情况下使用。上述图表的初步版本首次发布于 [www.adret-llc.com](http://www.adret-llc.com) 和 [LinkedIn](https://www.linkedin.com/feed/update/urn:li:activity:6256833177369792512) 上，时间是 2017 年初。 文章 [在 Medium 上转载](https://towardsdatascience.com/the-essential-data-science-venn-diagram-35800c3bef40)。）
 
 **简历**: [安德鲁·西尔弗](http://adret-llc.com/) 是一名地质学家（领域专家）和统计学家，拥有德克萨斯农工大学的 M.S. Analytics 和莱斯大学的 M.S. Earth Science 学位。他目前在上游能源领域提供咨询服务。
 

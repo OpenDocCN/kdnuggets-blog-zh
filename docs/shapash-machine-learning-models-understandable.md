@@ -1,20 +1,20 @@
 # Shapash：使机器学习模型可理解
 
-> 原文：[https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html](https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html)
+> 原文：[`www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html`](https://www.kdnuggets.com/2021/04/shapash-machine-learning-models-understandable.html)
 
-[评论](#comments)
+评论
 
 **由[Yann Golhen](https://twitter.com/GolhenY)，MAIF，首席数据科学家**。
 
-![](../Images/51fc6f2804c9a06c9bd2adee12ade00b.png)
+![](img/51fc6f2804c9a06c9bd2adee12ade00b.png)
 
-*[Shapash Web应用程序演示](https://shapash-demo.ossbymaif.fr/)*
+*[Shapash Web 应用程序演示](https://shapash-demo.ossbymaif.fr/)*
 
-[Shapash](https://github.com/MAIF/shapash)由[MAIF](https://www.maif.fr/)提供，是一个Python工具包，旨在帮助数据科学家理解机器学习模型。它使得与非数据专家（如业务分析师、经理和最终用户）分享和讨论模型可解释性变得更加容易。
+[Shapash](https://github.com/MAIF/shapash)由[MAIF](https://www.maif.fr/)提供，是一个 Python 工具包，旨在帮助数据科学家理解机器学习模型。它使得与非数据专家（如业务分析师、经理和最终用户）分享和讨论模型可解释性变得更加容易。
 
-具体来说，Shapash提供易于阅读的可视化和一个[Web应用程序](https://shapash-demo.ossbymaif.fr/)。Shapash使用适当的措辞（预处理逆/后处理）展示结果。在操作环境中，Shapash非常有用，因为它使数据科学家能够从探索到生产中使用可解释性：你可以轻松地在生产中部署局部可解释性，为每个预测/推荐附上局部可解释性的摘要。
+具体来说，Shapash 提供易于阅读的可视化和一个[Web 应用程序](https://shapash-demo.ossbymaif.fr/)。Shapash 使用适当的措辞（预处理逆/后处理）展示结果。在操作环境中，Shapash 非常有用，因为它使数据科学家能够从探索到生产中使用可解释性：你可以轻松地在生产中部署局部可解释性，为每个预测/推荐附上局部可解释性的摘要。
 
-在这篇文章中，我们将介绍Shapash的主要特性以及它的运作方式。我们将通过一个具体的案例来说明这个库的实现。
+在这篇文章中，我们将介绍 Shapash 的主要特性以及它的运作方式。我们将通过一个具体的案例来说明这个库的实现。
 
 ### 背景元素
 
@@ -32,7 +32,7 @@
 
 在这一步骤中，数据科学家和业务分析师讨论所面临的关键问题，并定义他们将整合到项目中的核心数据。这需要对主题和我们建模的问题的主要驱动因素有深入的理解。
 
-为此，数据科学家研究全局可解释性、特征重要性以及模型的主要特征所扮演的角色。他们还可以局部查看一些个体，特别是异常值。在这个阶段，Web应用程序很有趣，因为他们需要查看可视化和图形。与业务分析师讨论这些结果是有意义的，因为这有助于挑战方法并验证模型。
+为此，数据科学家研究全局可解释性、特征重要性以及模型的主要特征所扮演的角色。他们还可以局部查看一些个体，特别是异常值。在这个阶段，Web 应用程序很有趣，因为他们需要查看可视化和图形。与业务分析师讨论这些结果是有意义的，因为这有助于挑战方法并验证模型。
 
 **在生产环境中部署模型**
 
@@ -40,44 +40,44 @@
 
 +   透明性带来信任：用户会信任模型，如果他们理解模型。
 
-+   人类保持控制：没有模型是100%可靠的。当用户可以理解算法的输出时，如果他们认为算法建议基于不正确的数据，他们可以推翻这些建议。
++   人类保持控制：没有模型是 100%可靠的。当用户可以理解算法的输出时，如果他们认为算法建议基于不正确的数据，他们可以推翻这些建议。
 
-Shapash已被开发用来帮助数据科学家满足这些需求。
+Shapash 已被开发用来帮助数据科学家满足这些需求。
 
-![](../Images/fecdf3e40f045d5ad620d22a65d0dab2.png)
+![](img/fecdf3e40f045d5ad620d22a65d0dab2.png)
 
-### Shapash的关键特性
+### Shapash 的关键特性
 
 +   易于阅读的可视化，适合所有人。
 
 +   一个网页应用：要理解模型的工作原理，你需要查看多个图表、特征重要性和特征对模型的全局贡献。网页应用是一个有用的工具。
 
-+   多种方法展示结果并使用适当的措辞（预处理逆转，后处理）。你可以轻松添加数据字典，*category-encoders*对象，或sklearn *ColumnTransformer*以获得更明确的输出。
++   多种方法展示结果并使用适当的措辞（预处理逆转，后处理）。你可以轻松添加数据字典，*category-encoders*对象，或 sklearn *ColumnTransformer*以获得更明确的输出。
 
 +   函数可以轻松保存*Pickle*文件并将结果导出为表格。
 
 +   可解释性总结：总结是可配置的，以适应你的需求并关注局部可解释性的关键点。
 
-+   能够轻松部署到生产环境中，并为每个操作应用（批处理或API）提供局部可解释性总结。
++   能够轻松部署到生产环境中，并为每个操作应用（批处理或 API）提供局部可解释性总结。
 
-+   Shapash有多种使用方式：它可以用来轻松访问结果或改进措辞。显示结果只需很少的参数。但是，你对数据集进行清理和文档记录的工作越多，结果对最终用户就会越清晰。
++   Shapash 有多种使用方式：它可以用来轻松访问结果或改进措辞。显示结果只需很少的参数。但是，你对数据集进行清理和文档记录的工作越多，结果对最终用户就会越清晰。
 
-Shapash适用于回归、二分类或多分类问题。它兼容许多模型：*Catboost*、*Xgboost*、*LightGBM*、*Sklearn Ensemble*、*线性模型*、*SVM*。
+Shapash 适用于回归、二分类或多分类问题。它兼容许多模型：*Catboost*、*Xgboost*、*LightGBM*、*Sklearn Ensemble*、*线性模型*、*SVM*。
 
-Shapash基于使用Shap（Shapley值）、Lime或任何允许计算可加局部贡献的技术的局部贡献。
+Shapash 基于使用 Shap（Shapley 值）、Lime 或任何允许计算可加局部贡献的技术的局部贡献。
 
 ### 安装
 
-你可以通过pip安装这个包：
+你可以通过 pip 安装这个包：
 
 ```py
 $pip install shapash
 
 ```
 
-### Shapash演示
+### Shapash 演示
 
-让我们在一个具体的数据集上使用Shapash。在本文的其余部分，我们将展示Shapash如何探索模型。
+让我们在一个具体的数据集上使用 Shapash。在本文的其余部分，我们将展示 Shapash 如何探索模型。
 
 我们将使用来自[Kaggle](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)的著名“房价”数据集来拟合回归模型并预测房价！让我们开始加载数据集：
 
@@ -92,7 +92,7 @@ house_df.head(3)
 
 ```
 
-![](../Images/20e1aaad4f5cddcee1e4273d8f4aa92d.png)
+![](img/20e1aaad4f5cddcee1e4273d8f4aa92d.png)
 
 编码分类特征：
 
@@ -123,25 +123,25 @@ y_pred = pd.DataFrame(reg.predict(Xtest), columns=['pred'], index=Xtest.index)
 
 ```
 
-### 让我们发现并使用Shapash SmartExplainer。
+### 让我们发现并使用 Shapash SmartExplainer。
 
-*第1步 — 导入*
+*第 1 步 — 导入*
 
 ```py
 from shapash.explainer.smart_explainer import SmartExplainer
 
 ```
 
-*第2步 — 初始化SmartExplainer对象*
+*第 2 步 — 初始化 SmartExplainer 对象*
 
 ```py
 xpl = SmartExplainer(features_dict=house_dict) # Optional parameter 
 
 ```
 
-+   features_dict：字典，指定x pd.DataFrame中每个列名的含义。
++   features_dict：字典，指定 x pd.DataFrame 中每个列名的含义。
 
-*第3步 — 编译*
+*第 3 步 — 编译*
 
 ```py
 xpl.compile(
@@ -168,7 +168,7 @@ Web 应用链接出现在 Jupyter 输出中（访问演示 [这里](https://shap
 
 **这个 Web 应用有四个部分:**
 
-![](../Images/fed8547ee11acd20063b0ea415d750eb.png)
+![](img/fed8547ee11acd20063b0ea415d750eb.png)
 
 每个图表都可以帮助轻松探索模型。
 
@@ -222,7 +222,7 @@ xpl.plot.features_importance(selection=subset)
 
 ```
 
-![](../Images/63a1ec40bd82fef446f805462e1b6c03.png)
+![](img/63a1ec40bd82fef446f805462e1b6c03.png)
 
 **贡献图**
 
@@ -237,15 +237,15 @@ xpl.plot.contribution_plot("OverallQual")
 
 ```
 
-![](../Images/d361f2b143a435b2e754e9f26f978b40.png)
+![](img/d361f2b143a435b2e754e9f26f978b40.png)
 
 应用于连续特征的贡献图。
 
 分类案例：泰坦尼克号分类器——应用于分类特征的贡献图。
 
-![](../Images/8e8f2b9b10e345aaf31c24e2f09765e6.png)
+![](img/8e8f2b9b10e345aaf31c24e2f09765e6.png)
 
-![](../Images/dc03bafa2582a69592c94f8d65ff3311.png)
+![](img/dc03bafa2582a69592c94f8d65ff3311.png)
 
 **局部图**
 
@@ -275,7 +275,7 @@ xpl.plot.local_plot(index=560)
 
 ```
 
-![](../Images/d03e113c530d150bab918467be11a2ff.png)
+![](img/d03e113c530d150bab918467be11a2ff.png)
 
 导出到 pandas DataFrame：
 
@@ -286,20 +286,20 @@ summary_df.head()
 
 ```
 
-![](../Images/61069feea112c819793560776973a889.png)
+![](img/61069feea112c819793560776973a889.png)
 
 **比较图**
 
-使用*compare_plot()*方法，SmartExplainer对象使得理解为什么两个或更多个体的预测值不同成为可能。最具决定性的标准出现在图表的顶部。
+使用*compare_plot()*方法，SmartExplainer 对象使得理解为什么两个或更多个体的预测值不同成为可能。最具决定性的标准出现在图表的顶部。
 
 ```py
 xpl.plot.compare_plot(row_num=[0, 1, 2, 3, 4], max_features=8)
 
 ```
 
-![](../Images/5ebef70c948abff403a8f237c1017e12.png)
+![](img/5ebef70c948abff403a8f237c1017e12.png)
 
-我们希望Shapash在建立对人工智能的信任方面有所帮助。感谢所有给予反馈和建议的人……Shapash是开源的！欢迎通过评论此帖或直接在[GitHub讨论](https://github.com/MAIF/shapash/discussions)中贡献。
+我们希望 Shapash 在建立对人工智能的信任方面有所帮助。感谢所有给予反馈和建议的人……Shapash 是开源的！欢迎通过评论此帖或直接在[GitHub 讨论](https://github.com/MAIF/shapash/discussions)中贡献。
 
 [原文](https://pub.towardsai.net/shapash-making-ml-models-understandable-by-everyone-8f96ad469eb3)。经许可转载。
 
@@ -309,30 +309,30 @@ xpl.plot.compare_plot(row_num=[0, 1, 2, 3, 4], max_features=8)
 
 +   [深度学习不必是黑箱](https://www.kdnuggets.com/2021/02/deep-learning-not-black-box.html)
 
-+   [解释可解释的人工智能：2阶段方法](https://www.kdnuggets.com/2020/10/explaining-explainable-ai.html)
++   [解释可解释的人工智能：2 阶段方法](https://www.kdnuggets.com/2020/10/explaining-explainable-ai.html)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学以寻找目标，并找到目标去……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
 +   [数据科学学习统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

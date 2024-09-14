@@ -1,22 +1,22 @@
 # 如何计算算法效率
 
-> 原文：[https://www.kdnuggets.com/2022/09/calculate-algorithm-efficiency.html](https://www.kdnuggets.com/2022/09/calculate-algorithm-efficiency.html)
+> 原文：[`www.kdnuggets.com/2022/09/calculate-algorithm-efficiency.html`](https://www.kdnuggets.com/2022/09/calculate-algorithm-efficiency.html)
 
-![如何计算算法效率](../Images/81f2044792ac245d60f88e2c0c319390.png)
+![如何计算算法效率](img/81f2044792ac245d60f88e2c0c319390.png)
 
 图片由[DeepMind](https://unsplash.com/@deepmind?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)提供，来源于[Unsplash](https://unsplash.com/s/photos/ai?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-几乎所有形式的技术都使用算法来执行复杂的功能，从搜索引擎到移动应用程序，再到视频游戏和社交媒体。然而，在[创建算法](/2019/03/designing-ethical-algorithms.html)时，重要的是使其尽可能简化，以免对运行它的软件或设备造成负担。
+几乎所有形式的技术都使用算法来执行复杂的功能，从搜索引擎到移动应用程序，再到视频游戏和社交媒体。然而，在创建算法时，重要的是使其尽可能简化，以免对运行它的软件或设备造成负担。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -60,7 +60,7 @@ S(a) = c（固定部分）+ v(i)（依赖于实例特征 i 的变量部分）
 
 ## 时间复杂度
 
-时间复杂度是[执行算法所需的总时间](/2020/06/time-complexity-measure-efficiency-algorithms.html)，它依赖于与空间复杂度相同的所有因素，但这些因素被分解成数值函数。
+时间复杂度是执行算法所需的总时间，它依赖于与空间复杂度相同的所有因素，但这些因素被分解成数值函数。
 
 当比较不同算法时，这一度量方法非常有用，特别是在处理大量数据时。然而，如果数据量较小，比较算法性能时需要更详细的估算。当算法使用并行处理时，时间复杂度的效果较差。
 
@@ -68,7 +68,7 @@ S(a) = c（固定部分）+ v(i)（依赖于实例特征 i 的变量部分）
 
 ## 算法时间复杂度情况
 
-算法的复杂度由一些关键标准定义，即数据的移动和键的比较——例如，[数据的移动次数](/2021/06/overcoming-simplicity-illusion-data-migration.html)和键的比较次数。测量算法复杂度时，我们使用三种情况：
+算法的复杂度由一些关键标准定义，即数据的移动和键的比较——例如，数据的移动次数和键的比较次数。测量算法复杂度时，我们使用三种情况：
 
 +   最佳情况的时间复杂度
 
@@ -82,9 +82,9 @@ S(a) = c（固定部分）+ v(i)（依赖于实例特征 i 的变量部分）
 
 ## 理论分析
 
-与算法相关的理论分析通常是以渐近方式估计算法复杂度的过程（接近一个值或曲线）。描述算法使用的资源数量最常用的方法是使用Donald Knuth的“大O符号”。
+与算法相关的理论分析通常是以渐近方式估计算法复杂度的过程（接近一个值或曲线）。描述算法使用的资源数量最常用的方法是使用 Donald Knuth 的“大 O 符号”。
 
-使用[大O符号](https://triplebyte.com/blog/counterpoint-stop-trying-to-force-big-o-into-software-development)，程序员可以测量算法以确保其在不同输入数据规模下都能高效扩展。
+使用[大 O 符号](https://triplebyte.com/blog/counterpoint-stop-trying-to-force-big-o-into-software-development)，程序员可以测量算法以确保其在不同输入数据规模下都能高效扩展。
 
 ## 基准测试（性能测量）
 
@@ -96,13 +96,13 @@ S(a) = c（固定部分）+ v(i)（依赖于实例特征 i 的变量部分）
 
 # 实施挑战
 
-实现新算法有时可能会影响其整体效率。这可能与选择的[编程语言](/2021/05/top-programming-languages.html)、使用的编译器选项、操作系统或算法的编写方式有关。特别是，特定语言使用的编译器可能会对速度产生重大影响。
+实现新算法有时可能会影响其整体效率。这可能与选择的编程语言、使用的编译器选项、操作系统或算法的编写方式有关。特别是，特定语言使用的编译器可能会对速度产生重大影响。
 
 在测量空间和时间复杂度时，并非所有因素都由程序员决定。诸如缓存局部性和一致性、数据对齐和粒度、多线程以及同时多任务等问题都会影响性能，无论使用何种编程语言或算法编写方式。
 
 运行软件的处理器也可能引发问题；一些处理器可能支持向量或并行处理，而另一些则不支持。在某些情况下，利用这些能力可能并不总是可行，这使得算法效率降低，并需要一些重新配置。
 
-最后，[处理器使用的指令集](/2020/05/tops-just-hype-dark-ai-silicon-disguise.html)（例如，ARM或x86-64）可能会影响指令在各种设备上的处理速度。这使得优化编译器变得困难，因为需要考虑的硬件组合非常多。
+最后，处理器使用的指令集（例如，ARM 或 x86-64）可能会影响指令在各种设备上的处理速度。这使得优化编译器变得困难，因为需要考虑的硬件组合非常多。
 
 # 结论
 

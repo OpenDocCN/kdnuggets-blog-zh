@@ -1,8 +1,8 @@
 # Python 元组和元组方法
 
-> 原文：[https://www.kdnuggets.com/2019/11/python-tuples-methods.html](https://www.kdnuggets.com/2019/11/python-tuples-methods.html)
+> 原文：[`www.kdnuggets.com/2019/11/python-tuples-methods.html`](https://www.kdnuggets.com/2019/11/python-tuples-methods.html)
 
-[评论](#comments)
+评论
 
 **由 [Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -44,7 +44,7 @@ z = (3, 7, 4, 2)# way 2 (tuples can also can be created without parenthesis)
 z = 3, 7, 4, 2
 ```
 
-![图](../Images/a3d746cf6f81268eed65f347dfed151a.png)
+![图](img/a3d746cf6f81268eed65f347dfed151a.png)
 
 你可以使用或不使用括号初始化元组。
 
@@ -59,11 +59,11 @@ notTuple = ('Michael')
 
 ### 访问元组中的值
 
-![图](../Images/8382596d021921d96439c5fbb9cf76b7.png)
+![图](img/8382596d021921d96439c5fbb9cf76b7.png)
 
 你可以使用或不使用括号初始化元组。
 
-元组中的每个值都有一个指定的索引值。重要的是要注意 Python 是零索引的语言。这意味着元组中的第一个值在索引0处。
+元组中的每个值都有一个指定的索引值。重要的是要注意 Python 是零索引的语言。这意味着元组中的第一个值在索引 0 处。
 
 ```py
 # Initialize a tuple
@@ -71,34 +71,34 @@ z = (3, 7, 4, 2)*# Access the first item of a tuple at index 0*
 print(z[0])
 ```
 
-![图](../Images/de0d8279adf460814a61e3f984117e3b.png)
+![图](img/de0d8279adf460814a61e3f984117e3b.png)
 
-访问索引0处项的输出。
+访问索引 0 处项的输出。
 
 Python 还支持负索引。负索引从元组的末尾开始。使用负索引获取元组中的最后一项有时更方便，因为你不需要知道元组的长度来访问最后一项。
 
-![](../Images/e605c64ec60f1b09b1f014ac7c63d1e8.png)
+![](img/e605c64ec60f1b09b1f014ac7c63d1e8.png)
 
 ```py
 *# print last item in the tuple*
 print(z[-1])
 ```
 
-![图](../Images/5fa58fedffb2db5edf1caa8fc1dd11ca.png)
+![图](img/5fa58fedffb2db5edf1caa8fc1dd11ca.png)
 
 访问元组中最后一项的输出
 
 提醒一下，你也可以使用正索引访问相同的项（如下所示）。
 
-![图](../Images/766c171028b8cc16db1429587fa28741.png)
+![图](img/766c171028b8cc16db1429587fa28741.png)
 
-另一种访问元组z中最后一项的方法
+另一种访问元组 z 中最后一项的方法
 
 ### 元组切片
 
-切片操作返回一个包含所请求项的新元组。切片适用于获取元组中的子集。对于下面的示例代码，它将返回一个包含从索引0到不包括索引2的项的元组。
+切片操作返回一个包含所请求项的新元组。切片适用于获取元组中的子集。对于下面的示例代码，它将返回一个包含从索引 0 到不包括索引 2 的项的元组。
 
-![图](../Images/632d8c9b040d7b2d3673d82249b1d7eb.png)
+![图](img/632d8c9b040d7b2d3673d82249b1d7eb.png)
 
 第一个索引是包含的（在 `:` 之前），最后一个（在 `:` 之后）则不包含
 
@@ -108,30 +108,30 @@ z = (3, 7, 4, 2)# first index is inclusive (before the :) and last (after the :)
 print(z[0:2])
 ```
 
-![图](../Images/25940bf82e76e9f553e6b5328a89ecec.png)
+![图](img/25940bf82e76e9f553e6b5328a89ecec.png)
 
 元组的切片语法
 
-![](../Images/72ccc13284b1b2a9a61a96dc508404b9.png)
+![](img/72ccc13284b1b2a9a61a96dc508404b9.png)
 
 ```py
 *# everything up to but not including index 3*
 print(z[:3])
 ```
 
-![图](../Images/64cc754b83c02e7ddbeab93fe9671483.png)
+![图](img/64cc754b83c02e7ddbeab93fe9671483.png)
 
 所有到达但不包括索引 3 的项
 
 你甚至可以使用负索引进行切片。
 
-![](../Images/72ccc13284b1b2a9a61a96dc508404b9.png)
+![](img/72ccc13284b1b2a9a61a96dc508404b9.png)
 
 ```py
 print(z[-4:-1])
 ```
 
-![](../Images/b976b41730fef6c9578b9d05c7cbc4a3.png)
+![](img/b976b41730fef6c9578b9d05c7cbc4a3.png)
 
 ### 元组是不可变的
 
@@ -141,7 +141,7 @@ print(z[-4:-1])
 z = (3, 7, 4, 2)z[1] = "fish"
 ```
 
-![](../Images/61e6821e4ca241d3c44c754e632eeb6c.png)
+![](img/61e6821e4ca241d3c44c754e632eeb6c.png)
 
 即使元组是不可变的，也可以取现有元组的部分来创建新的元组，如下例所示。
 
@@ -153,11 +153,11 @@ new_tuple = tup1 + tup2;
 print(new_tuple)
 ```
 
-![](../Images/15e778fe8f3fa8866e635013fc7f6a1c.png)
+![](img/15e778fe8f3fa8866e635013fc7f6a1c.png)
 
 ### 元组方法
 
-![](../Images/72bed4d6e3057c903bc486670227ccbd.png)
+![](img/72bed4d6e3057c903bc486670227ccbd.png)
 
 在开始本节之前，让我们先初始化一个元组。
 
@@ -174,7 +174,7 @@ index 方法返回值出现的第一个索引。
 print(animals.index('lama'))
 ```
 
-![](../Images/f53a0c42a43efe8d46b1fb48eca5e786.png)
+![](img/f53a0c42a43efe8d46b1fb48eca5e786.png)
 
 ### count 方法
 
@@ -184,7 +184,7 @@ count 方法返回元组中值出现的次数。
 print(animals.count('lama'))
 ```
 
-![图](../Images/2e716837fa632d7ec325db909e806c01.png)
+![图](img/2e716837fa632d7ec325db909e806c01.png)
 
 字符串‘lama’在元组 animals 中出现了两次
 
@@ -197,7 +197,7 @@ for item in ('lama', 'sheep', 'lama', 48):
    print(item)
 ```
 
-![](../Images/6d57a736a98fe39d148883676544e099.png)
+![](img/6d57a736a98fe39d148883676544e099.png)
 
 ### 元组解包
 
@@ -208,7 +208,7 @@ x, y = (7, 10);
 print("Value of x is {}, the value of y is {}.".format(x, y))
 ```
 
-![](../Images/b9e0696cb26e39ce28c7739cfdd9bc0f.png)
+![](img/b9e0696cb26e39ce28c7739cfdd9bc0f.png)
 
 ### 枚举
 
@@ -220,7 +220,7 @@ for index, friend in enumerate(friends):
     print(index,friend)
 ```
 
-![](../Images/2f4bd4d61fc781f3c1016fc2419d2e61.png)
+![](img/2f4bd4d61fc781f3c1016fc2419d2e61.png)
 
 ### 元组相对于列表的优点
 
@@ -234,21 +234,21 @@ for index, friend in enumerate(friends):
 import timeitprint(timeit.timeit('x=(1,2,3,4,5,6,7,8,9,10,11,12)', number=1000000))print(timeit.timeit('x=[1,2,3,4,5,6,7,8,9,10,11,12]', number=1000000))
 ```
 
-![](../Images/25403a0081081c815348efd09c0ab056.png)
+![](img/25403a0081081c815348efd09c0ab056.png)
 
 +   一些元组可以作为字典的键（特别是那些包含不可变值如字符串、数字和其他元组的元组）。列表不能用作字典键，因为列表是可变的（你可以在[这里](https://medium.com/@GalarnykMichael/python-basics-10-dictionaries-and-dictionary-methods-4e9efa70f5b9)了解字典）。
 
-![](../Images/e7d55a71e2e337a51d18d4d0b8e14a72.png)
+![](img/e7d55a71e2e337a51d18d4d0b8e14a72.png)
 
 +   元组可以作为集合中的值，而列表不行（你可以在[这里](https://towardsdatascience.com/python-sets-and-set-theory-2ace093d1607)了解更多关于集合的内容）。
 
-![](../Images/45d42882647c8c7e829e77b88204a788.png)
+![](img/45d42882647c8c7e829e77b88204a788.png)
 
 ### 结论
 
 如果你对教程有任何问题或想法，可以在下方评论区或通过[Twitter](https://twitter.com/GalarnykMichael)联系我。下一篇文章将回顾[Python 字典及字典方法](https://medium.com/@GalarnykMichael/python-basics-10-dictionaries-and-dictionary-methods-4e9efa70f5b9)。如果你想了解如何使用 Pandas、Matplotlib 或 Seaborn 库，请考虑参加我的[Python 数据可视化 LinkedIn 学习课程](https://www.linkedin.com/learning/python-for-data-visualization/value-of-data-visualization)。这里是[免费预览视频](https://youtu.be/BE8CVGJuftI)。
 
-![图示](../Images/f261c9188458bbbf828a24c78cba3ca6.png)
+![图示](img/f261c9188458bbbf828a24c78cba3ca6.png)
 
 [Python 字典教程](https://medium.com/@GalarnykMichael/python-basics-10-dictionaries-and-dictionary-methods-4e9efa70f5b9)
 
@@ -258,11 +258,11 @@ import timeitprint(timeit.timeit('x=(1,2,3,4,5,6,7,8,9,10,11,12)', number=100000
 
 **相关:**
 
-+   [Python 列表和列表操作](/2019/11/python-lists-list-manipulation.html)
++   Python 列表和列表操作
 
-+   [理解箱线图](/2019/11/understanding-boxplots.html)
++   理解箱线图
 
-+   [应用于 Pandas DataFrame 的集合操作](/2019/11/set-operations-applied-pandas-dataframes.html)
++   应用于 Pandas DataFrame 的集合操作
 
 ### 相关话题
 

@@ -1,8 +1,8 @@
 # CrowdFlower 2016 数据科学报告
 
-> 原文：[https://www.kdnuggets.com/2016/04/crowdflower-2016-data-science-repost.html](https://www.kdnuggets.com/2016/04/crowdflower-2016-data-science-repost.html)
+> 原文：[`www.kdnuggets.com/2016/04/crowdflower-2016-data-science-repost.html`](https://www.kdnuggets.com/2016/04/crowdflower-2016-data-science-repost.html)
 
-| ![CrowdFlower 2016 数据科学报告](../Images/d765cbc3527256606b6e9c61384ec111.png) |
+| ![CrowdFlower 2016 数据科学报告](img/d765cbc3527256606b6e9c61384ec111.png) |
 | --- |
 
 | 今年早些时候，我们对来自各种组织的数据科学家进行了调查。我们想了解什么最能促使他们成功，他们面临的最大挑战是什么，以及他们如何看待未来五年内该领域的发展。我们将所有这些内容汇总在一份便捷的免费报告中，你可以在这里下载。几个关键见解：
@@ -17,7 +17,7 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。 ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力！ ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。 ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力！ ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -29,10 +29,10 @@
 
 |
 
-| [![由 CrowdFlower 提供](../Images/37334953863e03aaac77e2865f3174d7.png)](http://www.crowdflower.com) |
+| ![由 CrowdFlower 提供](http://www.crowdflower.com) |
 | --- |
 
-&#124; [![facebook](../Images/7a5019a95df5a18187b1410a90da925c.png)](https://www.facebook.com/CrowdFlower) &#124; [![twitter](../Images/b4c7aa172df5102fcb0e9618dcc45b43.png)](https://twitter.com/CrowdFlower) &#124; [![linkedin](../Images/a87315ca93dc4027141abeb34c45da85.png)](https://www.linkedin.com/company/crowdflower) &#124;
+&#124; ![facebook](https://www.facebook.com/CrowdFlower) &#124; ![twitter](https://twitter.com/CrowdFlower) &#124; ![linkedin](https://www.linkedin.com/company/crowdflower) &#124;
 
 |
 

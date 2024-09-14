@@ -1,8 +1,8 @@
 # 使用 Python 自动化数据清理的 5 个简单步骤
 
-> 原文：[https://www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python](https://www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python)
+> 原文：[`www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python`](https://www.kdnuggets.com/5-simple-steps-to-automate-data-cleaning-with-python)
 
-![使用 Python 自动化数据清理的 5 个简单步骤管道。箱型图。](../Images/c8de18f3bbe0ef673f18b81f8365a312.png)
+![使用 Python 自动化数据清理的 5 个简单步骤管道。箱型图。](img/c8de18f3bbe0ef673f18b81f8365a312.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -98,7 +98,7 @@ Pandas 提供了 `.fillna()` 和 `.dropna()` 方法来有效处理这些缺失�
 
 其中 IQR 代表四分位距，Q1 和 Q3 分别是第一四分位数和第三四分位数。下面你可以看到所有之前的概念在箱线图中的展示。
 
-![XXX](../Images/ccec7a695870201416f09459b92ed277.png)
+![XXX](img/ccec7a695870201416f09459b92ed277.png)
 
 图片来源：作者
 

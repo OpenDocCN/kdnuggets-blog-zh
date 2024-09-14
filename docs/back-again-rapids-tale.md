@@ -1,10 +1,10 @@
 # 再回首… RAPIDS 故事
 
-> 原文：[https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
+> 原文：[`www.kdnuggets.com/2023/06/back-again-rapids-tale.html`](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
 
 由[Kris Manohar](https://www.linkedin.com/in/kris-manohar-phd-4b9117a/)和[Kevin Baboolal](https://www.linkedin.com/in/kevin-baboolal-b3313595/)撰写
 
-![再回首… RAPIDS 故事](../Images/0aaf39d85cdb9016557725d139bcb00e.png)
+![再回首… RAPIDS 故事](img/0aaf39d85cdb9016557725d139bcb00e.png)
 
 图片由编辑提供
 
@@ -12,19 +12,19 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-> **编辑备注：** 我们很高兴宣布这篇文章被选为KDnuggets & NVIDIA博客写作比赛的获奖者。
+> **编辑备注：** 我们很高兴宣布这篇文章被选为 KDnuggets & NVIDIA 博客写作比赛的获奖者。
 
 # 介绍
 
-机器学习通过利用大量数据彻底改变了各个领域。然而，在数据获取因成本或稀缺而变得困难的情况下，传统方法往往难以提供准确的预测。本文探讨了小数据集带来的限制，并揭示了TTLAB提出的一种创新解决方案，该方案利用了最近邻方法和专门的核函数。我们将深入探讨他们的算法、其优势以及GPU优化如何加速其执行。
+机器学习通过利用大量数据彻底改变了各个领域。然而，在数据获取因成本或稀缺而变得困难的情况下，传统方法往往难以提供准确的预测。本文探讨了小数据集带来的限制，并揭示了 TTLAB 提出的一种创新解决方案，该方案利用了最近邻方法和专门的核函数。我们将深入探讨他们的算法、其优势以及 GPU 优化如何加速其执行。
 
 # 有限数据的挑战
 
@@ -32,15 +32,15 @@
 
 # 克服数据稀缺
 
-尽管训练-测试拆分通常能缓解这些问题，但在处理较小数据集时仍然存在隐性问题。强迫算法根据较少的样本进行泛化可能会导致次优预测。即使算法能够运行，其预测也可能缺乏稳健性和准确性。由于成本或可用性限制，获取更多数据的简单解决方案并不总是可行。在这种情况下，TTLAB提出的创新方法被证明是稳健且准确的。
+尽管训练-测试拆分通常能缓解这些问题，但在处理较小数据集时仍然存在隐性问题。强迫算法根据较少的样本进行泛化可能会导致次优预测。即使算法能够运行，其预测也可能缺乏稳健性和准确性。由于成本或可用性限制，获取更多数据的简单解决方案并不总是可行。在这种情况下，TTLAB 提出的创新方法被证明是稳健且准确的。
 
-# TTLAB算法
+# TTLAB 算法
 
-TTLAB的算法应对了偏倚和有限数据集带来的挑战。他们的方法包括对训练数据集中的所有行进行加权平均，以预测测试样本中目标变量的值。关键在于根据参数化的非线性函数调整每个训练行的权重，这个函数计算特征空间中两个点之间的距离。虽然使用的加权函数有一个单一参数（训练样本与测试样本距离增加时影响衰减率），但优化这个参数的计算工作量可能很大。通过考虑整个训练数据集，该算法提供了稳健的预测。这种方法在提高随机森林和朴素贝叶斯等流行模型的性能方面取得了显著成功。随着算法的普及，正在努力进一步提升其效率。目前的实现涉及调整超参数kappa，这需要网格搜索。为了加快这一过程，正在探索连续二次近似法，这有望实现更快的参数优化。此外，正在进行的同行评审旨在验证和完善该算法，以便更广泛地采用。
+TTLAB 的算法应对了偏倚和有限数据集带来的挑战。他们的方法包括对训练数据集中的所有行进行加权平均，以预测测试样本中目标变量的值。关键在于根据参数化的非线性函数调整每个训练行的权重，这个函数计算特征空间中两个点之间的距离。虽然使用的加权函数有一个单一参数（训练样本与测试样本距离增加时影响衰减率），但优化这个参数的计算工作量可能很大。通过考虑整个训练数据集，该算法提供了稳健的预测。这种方法在提高随机森林和朴素贝叶斯等流行模型的性能方面取得了显著成功。随着算法的普及，正在努力进一步提升其效率。目前的实现涉及调整超参数 kappa，这需要网格搜索。为了加快这一过程，正在探索连续二次近似法，这有望实现更快的参数优化。此外，正在进行的同行评审旨在验证和完善该算法，以便更广泛地采用。
 
-实现TTLAG算法时，使用循环和numpy进行分类证明效率低下，导致运行时间非常长。展示在链接出版物中的CPU实现专注于分类问题，展示了方法的多功能性和有效性。 [https://arxiv.org/pdf/2205.14779.pdf](https://arxiv.org/pdf/2205.14779.pdf)。出版物还显示该算法从向量化中获益良多，暗示了通过使用CuPy进行GPU加速可以获得进一步的速度提升。事实上，对超参数调优和随机K折交叉验证的执行在测试的多个数据集上需要几周时间。通过利用GPU的强大计算能力，计算任务得到了有效分配，从而提升了性能。
+实现 TTLAG 算法时，使用循环和 numpy 进行分类证明效率低下，导致运行时间非常长。展示在链接出版物中的 CPU 实现专注于分类问题，展示了方法的多功能性和有效性。 [`arxiv.org/pdf/2205.14779.pdf`](https://arxiv.org/pdf/2205.14779.pdf)。出版物还显示该算法从向量化中获益良多，暗示了通过使用 CuPy 进行 GPU 加速可以获得进一步的速度提升。事实上，对超参数调优和随机 K 折交叉验证的执行在测试的多个数据集上需要几周时间。通过利用 GPU 的强大计算能力，计算任务得到了有效分配，从而提升了性能。
 
-# 使用GPU加速执行
+# 使用 GPU 加速执行
 
 即使有了像矢量化和 `.apply` 重构这样的优化，执行时间对于实际应用仍然不切实际。然而，通过 GPU 优化，运行时间显著减少，将执行时间从小时缩短到分钟。这种显著的加速打开了在需要快速结果的场景中使用算法的可能性。
 
@@ -55,7 +55,7 @@ train_df["part"] = train_df[target_col] * train_df["frac"]
 test_df.loc[index, "pred"] = train_df["part"].sum() / train_df["frac"].sum()
 ```
 
-在我们的探索中，我们需要依赖 NumPy 内核。这时，事情变得棘手。回顾一下为什么算法的预测如此可靠，因为每个预测都使用了训练数据框中的所有行。然而，NumPy 内核不支持传递 CuDF 数据框。目前，我们正在尝试一些在 Github 上建议的技巧来处理这种情况。 ([https://github.com/rapidsai/cudf/issues/13375](https://github.com/rapidsai/cudf/issues/13375))
+在我们的探索中，我们需要依赖 NumPy 内核。这时，事情变得棘手。回顾一下为什么算法的预测如此可靠，因为每个预测都使用了训练数据框中的所有行。然而，NumPy 内核不支持传递 CuDF 数据框。目前，我们正在尝试一些在 Github 上建议的技巧来处理这种情况。 ([`github.com/rapidsai/cudf/issues/13375`](https://github.com/rapidsai/cudf/issues/13375))
 
 现在，我们至少可以通过 `.apply_rows` 将原始计算传递给 NumPy 内核
 

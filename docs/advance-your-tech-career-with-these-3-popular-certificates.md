@@ -1,8 +1,8 @@
-# 用这3个热门证书提升你的技术职业生涯
+# 用这 3 个热门证书提升你的技术职业生涯
 
-> 原文：[https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates](https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates)
+> 原文：[`www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates`](https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates)
 
-![用这3个热门证书提升你的技术职业生涯](../Images/a61032a842c75ac2ccc9b49ce8041448.png)
+![用这 3 个热门证书提升你的技术职业生涯](img/a61032a842c75ac2ccc9b49ce8041448.png)
 
 作者提供的图片
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 随着技术行业的快速进步和增长，现在正是你提升职业生涯的最佳时机。
 
-不幸的是，技术行业目前正在经历许多裁员。这可能是由于经济因素或AI在我们日常生活中的使用。此时，你可以为自己做的最好的事情就是让自己在市场上更具吸引力。
+不幸的是，技术行业目前正在经历许多裁员。这可能是由于经济因素或 AI 在我们日常生活中的使用。此时，你可以为自己做的最好的事情就是让自己在市场上更具吸引力。
 
 你怎么做呢？
 
@@ -32,17 +32,17 @@
 
 ## 商业智能
 
-链接: [Google商业智能专业证书](https://www.coursera.org/professional-certificates/google-business-intelligence)
+链接: [Google 商业智能专业证书](https://www.coursera.org/professional-certificates/google-business-intelligence)
 
-据说，从2021年到2031年，商业智能分析师的职位市场将增长23%。随着技术行业竞争的加剧，大大小小的公司正在寻找更有效的支出方式，以增加投资回报。未来的商业智能分析师具备关注用户体验和最终客户的数据分析技能。
+据说，从 2021 年到 2031 年，商业智能分析师的职位市场将增长 23%。随着技术行业竞争的加剧，大大小小的公司正在寻找更有效的支出方式，以增加投资回报。未来的商业智能分析师具备关注用户体验和最终客户的数据分析技能。
 
-在Google提供的这一认证课程中，你将学习商业智能专业人员的角色和职责，然后实践使用提取、转换和加载（ETL）等过程进行数据建模，帮助你满足组织的需求。
+在 Google 提供的这一认证课程中，你将学习商业智能专业人员的角色和职责，然后实践使用提取、转换和加载（ETL）等过程进行数据建模，帮助你满足组织的需求。
 
 将你的发现转化为数据可视化，以帮助回答业务问题，以及一个可以帮助你将数据洞察传达给利益相关者的仪表盘。
 
-## AWS云解决方案架构师
+## AWS 云解决方案架构师
 
-链接: [AWS云解决方案架构师专业证书](https://www.coursera.org/professional-certificates/aws-cloud-solutions-architect)
+链接: [AWS 云解决方案架构师专业证书](https://www.coursera.org/professional-certificates/aws-cloud-solutions-architect)
 
 随着越来越多的企业迁移到云端，对 AWS 解决方案架构师的需求持续增长。AWS 目前占据了 33% 的 IaaS 市场，解决方案架构师的年薪平均为 100,000 美元，以满足这种需求。
 
@@ -72,12 +72,12 @@
 
 +   [提升你的数据科学职业到下一个层次](https://www.kdnuggets.com/2021/12/sas-advance-data-science-career-next-level.html)
 
-+   [5个数据科学社区助力你的职业发展](https://www.kdnuggets.com/5-data-science-communities-to-advance-your-career)
++   [5 个数据科学社区助力你的职业发展](https://www.kdnuggets.com/5-data-science-communities-to-advance-your-career)
 
 +   [通过排名第三的在线数据科学硕士课程提升你的职业发展](https://www.kdnuggets.com/2023/07/bay-path-advance-career-3rd-best-online-masters-data-science-program.html)
 
-+   [谷歌推出的5门AI课程助力你的职业发展](https://www.kdnuggets.com/5-ai-courses-from-google-to-advance-your-career)
++   [谷歌推出的 5 门 AI 课程助力你的职业发展](https://www.kdnuggets.com/5-ai-courses-from-google-to-advance-your-career)
 
 +   [适用于科技行业各个领域的热门谷歌认证](https://www.kdnuggets.com/popular-google-certification-for-all-areas-in-the-tech-industry)
 
-+   [7门哈佛大学免费课程提升你的技能](https://www.kdnuggets.com/7-free-harvard-university-courses-to-advance-your-skills)
++   [7 门哈佛大学免费课程提升你的技能](https://www.kdnuggets.com/7-free-harvard-university-courses-to-advance-your-skills)

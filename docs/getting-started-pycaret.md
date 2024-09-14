@@ -1,8 +1,8 @@
 # 开始使用 PyCaret
 
-> 原文：[https://www.kdnuggets.com/2022/11/getting-started-pycaret.html](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)
+> 原文：[`www.kdnuggets.com/2022/11/getting-started-pycaret.html`](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)
 
-![开始使用 PyCaret](../Images/b403b58cba8bf7b381305dbaec25bc74.png)
+![开始使用 PyCaret](img/b403b58cba8bf7b381305dbaec25bc74.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -26,13 +26,13 @@ PyCaret 是一个开源、低代码的数据科学 Python 包，通过自动化 
 
 它是围绕多个 ML 库和框架（如 scikit-learn、LightGBM/XGBoost/CatBoost 等提升库、spaCy、Hyperopt、Ray 等）构建的封装器，提供无缝且灵活的开发。
 
-![开始使用 PyCaret](../Images/9ae4aad3f147edd95c9ae591d61bacce.png)
+![开始使用 PyCaret](img/9ae4aad3f147edd95c9ae591d61bacce.png)
 
 图片由 [Pycaret](https://pycaret.gitbook.io/docs/) 提供
 
 PyCaret 简单易用，其操作按顺序存储在一个准备部署的管道中。PyCaret 自动处理预处理、特征工程以及超参数调优，全部开箱即用。
 
-![开始使用 PyCaret](../Images/47c78bf95dd7850540cf6c3c735836b8.png)
+![开始使用 PyCaret](img/47c78bf95dd7850540cf6c3c735836b8.png)
 
 图片由 [Moez Ali](https://moez-62905.medium.com/) 提供
 
@@ -76,7 +76,7 @@ data = get_data('boston')
 
 PyCaret 默认显示数据框的前五行。因此，你不需要显式调用 dataframe.head() 函数。
 
-![开始使用 PyCaret](../Images/08babd7779196ddbccc92c12e0a203ed.png)
+![开始使用 PyCaret](img/08babd7779196ddbccc92c12e0a203ed.png)
 
 数据集中的每一行代表波士顿地区的一个郊区或城镇。数据最初来自 1970 年的波士顿标准大都市统计区（SMSA），数据字典来源于 [这里](https://archive.ics.uci.edu/ml/machine-learning-databases/housing/housing.names)。
 
@@ -101,7 +101,7 @@ fig.show()
 
 图表显示了中位数住房价格与人口低社会经济地位之间的强负相关关系。这意味着人口的经济状况越弱，可支配收入越低，因此住房价格也会越低。
 
-![开始使用 PyCaret](../Images/288f1fd6211a27752247578bad4b05fa.png)
+![开始使用 PyCaret](img/288f1fd6211a27752247578bad4b05fa.png)
 
 RAD 值为 24 的数据拟合效果良好，排除了一些异常值，并且在记录数量方面有不错的支持。
 
@@ -112,7 +112,7 @@ fig = px.histogram(data, x=["medv"])
 fig.show()
 ```
 
-![开始使用 PyCaret](../Images/20394f59f0207bef5c8af3a5be666bc6.png)
+![开始使用 PyCaret](img/20394f59f0207bef5c8af3a5be666bc6.png)
 
 使用 setup 函数设置 PyCaret 实验非常简单。该函数使用以下参数作为输入——数据框、目标变量名称、一个用于记录实验结果的布尔值以及名称。
 
@@ -123,7 +123,7 @@ s = setup(data, target = 'medv', log_experiment = True,
 
 从 PyCaret 输出可以明显看出，它自动完成了许多任务，包括但不限于识别缺失值、连续和分类特征、变量的基数、划分训练集和测试集，并执行交叉验证，这些都需要相当的时间和资源。
 
-![开始使用 PyCaret](../Images/998f4ad330e5a5284d1145995f28434b.png)
+![开始使用 PyCaret](img/998f4ad330e5a5284d1145995f28434b.png)
 
 一旦实验设置完成，你需要运行 compare_models() 来对特定问题的多种算法进行实验。以下代码将最佳模型存储在一个变量中。
 
@@ -135,7 +135,7 @@ best_model = compare_models()
 
 值得注意的是，训练时间是基于使用所有 CPU 核心的，在不同机器上可能会有所不同。
 
-![开始使用 PyCaret](../Images/3aa9118b971fb14bb1483ea5a18ef80d.png)
+![开始使用 PyCaret](img/3aa9118b971fb14bb1483ea5a18ef80d.png)
 
 “get_params()” 方法用于检索最佳模型的超参数，在我们的例子中，这个最佳模型是 Extra Tree Regressor。
 
@@ -170,7 +170,7 @@ best_model.get_params()
 plot_model(best_model, plot = 'feature')
 ```
 
-![开始使用 PyCaret](../Images/c74b2a7788393bba5583faa47506b922.png)
+![开始使用 PyCaret](img/c74b2a7788393bba5583faa47506b922.png)
 
 该可视化使得识别前 n 个特征变得更容易，最重要的特征位于顶部。
 

@@ -1,8 +1,8 @@
 # 切换到数据科学职业时我犯的 5 个错误
 
-> 原文：[https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
+> 原文：[`www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html`](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
 
-![切换到数据科学职业时我犯的 5 个错误](../Images/932956594f51a792be21174285dd9f04.png)
+![切换到数据科学职业时我犯的 5 个错误](img/932956594f51a792be21174285dd9f04.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 维护
 
 * * *
 
@@ -38,9 +38,9 @@
 
 # 3\. 未记录我的工作
 
-尽管我参与了多个项目和Kaggle比赛，但我未能记录我的进展和成就。我花了一年时间才意识到记录项目和历程的重要性，这可以帮助我获得更好的职位机会并建立更强的作品集。回顾过去，我应该从一开始就通过LinkedIn和Medium分享我的历程。这样可以让我结识新的人脉，扩大影响力，增强职业作品集，并促进合作。
+尽管我参与了多个项目和 Kaggle 比赛，但我未能记录我的进展和成就。我花了一年时间才意识到记录项目和历程的重要性，这可以帮助我获得更好的职位机会并建立更强的作品集。回顾过去，我应该从一开始就通过 LinkedIn 和 Medium 分享我的历程。这样可以让我结识新的人脉，扩大影响力，增强职业作品集，并促进合作。
 
-> **解决方案：** 为了展示你的项目，最好在GitHub上分享项目元素和代码。你也可以在Medium上撰写博客文章，并在LinkedIn数据科学小组中分享。这将帮助你获得更多曝光。
+> **解决方案：** 为了展示你的项目，最好在 GitHub 上分享项目元素和代码。你也可以在 Medium 上撰写博客文章，并在 LinkedIn 数据科学小组中分享。这将帮助你获得更多曝光。
 
 # 4\. 我申请了错误的职位
 
@@ -52,11 +52,11 @@
 
 # 5\. 参与过多的比赛
 
-在发现一些关于机器学习的技巧后，我开始参加Kaggle的比赛。我变得上瘾，甚至在没有事先了解话题的情况下加入竞赛。我说服自己在向他人学习新技术，但实际上，我只是浪费了时间。
+在发现一些关于机器学习的技巧后，我开始参加 Kaggle 的比赛。我变得上瘾，甚至在没有事先了解话题的情况下加入竞赛。我说服自己在向他人学习新技术，但实际上，我只是浪费了时间。
 
-作为通过比赛学习机器学习的倡导者，我必须警告新手，赢得比赛是困难的。虽然我曾接近并经常进入前1%，但这并没有对我的职业生涯产生显著价值。相反，我应该专注于实际项目，或通过实习或工作获得经验。
+作为通过比赛学习机器学习的倡导者，我必须警告新手，赢得比赛是困难的。虽然我曾接近并经常进入前 1%，但这并没有对我的职业生涯产生显著价值。相反，我应该专注于实际项目，或通过实习或工作获得经验。
 
-> **解决方案：** 不要自欺欺人。始终保持目标在心中。与其通过参与过多的比赛而分散精力，不如考虑专注于一个复杂的开源项目，撰写Medium文章，建立你的作品集，并参与社区活动。
+> **解决方案：** 不要自欺欺人。始终保持目标在心中。与其通过参与过多的比赛而分散精力，不如考虑专注于一个复杂的开源项目，撰写 Medium 文章，建立你的作品集，并参与社区活动。
 
 # 最后的想法
 

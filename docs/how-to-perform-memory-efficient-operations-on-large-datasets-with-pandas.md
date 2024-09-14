@@ -1,28 +1,28 @@
-# 如何在大型数据集上使用Pandas执行内存高效的操作
+# 如何在大型数据集上使用 Pandas 执行内存高效的操作
 
-> 原文：[https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)
+> 原文：[`www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas`](https://www.kdnuggets.com/how-to-perform-memory-efficient-operations-on-large-datasets-with-pandas)
 
-![如何在大型数据集上执行内存高效的操作](../Images/2d5df1e34d710f034fb115f832b43dcb.png)
+![如何在大型数据集上执行内存高效的操作](img/2d5df1e34d710f034fb115f832b43dcb.png)
 
 图片由编辑提供 | Midjourney
 
-让我们学习如何在Pandas中对大型数据集进行操作。
+让我们学习如何在 Pandas 中对大型数据集进行操作。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ## 准备工作
 
-由于我们正在讨论Pandas包，你应该已经安装了它。此外，我们还会使用Numpy包。所以，请同时安装这两个包。
+由于我们正在讨论 Pandas 包，你应该已经安装了它。此外，我们还会使用 Numpy 包。所以，请同时安装这两个包。
 
 ```py
 pip install pandas numpy
@@ -30,11 +30,11 @@ pip install pandas numpy
 
 然后，让我们进入教程的核心部分。
 
-## 使用Pandas执行内存高效的操作
+## 使用 Pandas 执行内存高效的操作
 
-Pandas通常不以处理大型数据集而闻名，因为Pandas包的内存密集型操作可能会耗费大量时间甚至占满整个RAM。然而，有一些方法可以提高Pandas操作的效率。
+Pandas 通常不以处理大型数据集而闻名，因为 Pandas 包的内存密集型操作可能会耗费大量时间甚至占满整个 RAM。然而，有一些方法可以提高 Pandas 操作的效率。
 
-在本教程中，我们将向你展示如何提升在Pandas中处理大型数据集的体验。
+在本教程中，我们将向你展示如何提升在 Pandas 中处理大型数据集的体验。
 
 首先，尝试使用内存优化参数加载数据集。还要尝试更改数据类型，尤其是更改为内存友好的类型，并删除任何不必要的列。
 
@@ -46,7 +46,7 @@ df = pd.read_csv('some_large_dataset.csv', low_memory=True, dtype={'column': 'in
 
 将整数和浮点数转换为最小类型可以帮助减少内存占用。将具有少量唯一值的类别列转换为类别类型也有帮助。更小的列也有助于提高内存效率。
 
-接下来，我们可以使用分块处理来避免使用全部内存。如果迭代处理会更高效。例如，我们想要计算列的均值，但数据集太大了。我们可以每次处理100,000条数据，最后得到总结果。
+接下来，我们可以使用分块处理来避免使用全部内存。如果迭代处理会更高效。例如，我们想要计算列的均值，但数据集太大了。我们可以每次处理 100,000 条数据，最后得到总结果。
 
 ```py
 chunk_results = []
@@ -62,20 +62,20 @@ for chunk in pd.read_csv('some_large_dataset.csv', chunksize=chunksize):
 final_result = sum(chunk_results) / len(chunk_results) 
 ```
 
-此外，避免使用带有lambda函数的apply方法，因为这可能会占用大量内存。更好的做法是使用矢量化操作或带有普通函数的`.apply`方法。
+此外，避免使用带有 lambda 函数的 apply 方法，因为这可能会占用大量内存。更好的做法是使用矢量化操作或带有普通函数的`.apply`方法。
 
 ```py
 df['new_column'] = df['existing_column'] * 2
 ```
 
-对于Pandas中的条件操作，使用`np.where`通常比直接使用带有`.apply`的Lambda函数要快。
+对于 Pandas 中的条件操作，使用`np.where`通常比直接使用带有`.apply`的 Lambda 函数要快。
 
 ```py
 import numpy as np 
 df['new_column'] = np.where(df['existing_column'] > 0, 1, 0)
 ```
 
-然后，在许多Pandas操作中使用`inplace=True`比将其分配回DataFrame要节省更多内存。这种方法更高效，因为将其分配回DataFrame会在将它们放回同一个变量之前创建一个单独的DataFrame。
+然后，在许多 Pandas 操作中使用`inplace=True`比将其分配回 DataFrame 要节省更多内存。这种方法更高效，因为将其分配回 DataFrame 会在将它们放回同一个变量之前创建一个单独的 DataFrame。
 
 ```py
 df.drop(columns=['column_to_drop'], inplace=True)

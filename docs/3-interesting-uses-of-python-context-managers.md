@@ -1,22 +1,22 @@
 # 3 种有趣的 Python 上下文管理器用法
 
-> 原文：[https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)
+> 原文：[`www.kdnuggets.com/3-interesting-uses-of-python-context-managers`](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)
 
-![3 种有趣的 Python 上下文管理器用法](../Images/4634679c3b9355581de61827cbecda51.png)
+![3 种有趣的 Python 上下文管理器用法](img/4634679c3b9355581de61827cbecda51.png)
 
 图片来源 [Freepik](https://www.freepik.com/free-vector/young-programmer-working-laptop-computer-cartoon-character_33906144.htm#query=python%20programmer&position=7&from_view=search&track=ais&uuid=660bb4cc-54bf-4668-8bd8-114802f3425e) 的 johnstocker
 
-前一段时间，我写了一篇关于 [编写高效 Python 代码](/how-to-write-efficient-python-code-a-tutorial-for-beginners) 的教程。在其中，我讨论了如何使用上下文管理器和 with 语句高效地管理资源。
+前一段时间，我写了一篇关于 编写高效 Python 代码 的教程。在其中，我讨论了如何使用上下文管理器和 with 语句高效地管理资源。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -62,13 +62,13 @@ with some_context() as ctx:
 
 +   使用 `connect()` 函数建立与数据库的连接。
 
-![Python 上下文管理器的 3 个有趣用途](../Images/a78e3dbbd7547d349932a4affb886e73.png)
+![Python 上下文管理器的 3 个有趣用途](img/a78e3dbbd7547d349932a4affb886e73.png)
 
 连接到数据库 | 图片来自作者
 
 一旦你连接到数据库，你可以创建一个数据库来查询数据库。运行查询并使用 run 和 fetch 游标方法获取查询结果。
 
-![Python 上下文管理器的 3 个有趣用途](../Images/00ab54842a3ba36c0eaeb04eecef89e3.png)
+![Python 上下文管理器的 3 个有趣用途](img/00ab54842a3ba36c0eaeb04eecef89e3.png)
 
 查询数据库 | 图片来自作者
 

@@ -1,8 +1,8 @@
 # 掌握 SQL 数据科学的 7 个步骤 — 2019 年版
 
-> 原文：[https://www.kdnuggets.com/2019/05/7-steps-mastering-sql-data-science-2019-edition.html](https://www.kdnuggets.com/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)
+> 原文：[`www.kdnuggets.com/2019/05/7-steps-mastering-sql-data-science-2019-edition.html`](https://www.kdnuggets.com/2019/05/7-steps-mastering-sql-data-science-2019-edition.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 什么是结构化查询语言（SQL），为什么它对数据管理如此重要？
 
@@ -12,17 +12,17 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 这一次，我们的目标是再次制定通往 SQL 精通的路径。然而，我们要相对看待“精通”一词，不要期望在学习材料完成后就能达到数据库专家的水平。学习路径旨在帮助那些对数据库、编程、计算机科学概念和/或数据管理有一定理解的人，能够使用 SQL 来管理和查询自己的数据，并扩展到更大的系统中。
 
-![SQL](../Images/7b90faf67d8c5a9b93c5838add6004a0.png)
+![SQL](img/7b90faf67d8c5a9b93c5838add6004a0.png)
 
 与每个主题步骤（如视图和连接）拥有大量资源不同，我尝试选择一两个优质的阅读资源，以及一个覆盖特定主题的可访问视频。
 
@@ -64,13 +64,13 @@ SQL 和 RDBMS（关系数据库管理系统）的术语如此交织，以至于�
 
 +   **[更新记录](http://www.sqlcourse.com/update.html)**
 
-本教程，来自[Arachnoid](https://arachnoid.com)的**[MySQL教程1：概述、表、查询](https://arachnoid.com/MySQL/)**，涵盖了SQL基础知识以及初学者到中级查询，并对我们迄今所见的内容进行了全面复习，甚至更多。它从MySQL的角度呈现，但其中的内容并不局限于该平台的SQL实现。
+本教程，来自[Arachnoid](https://arachnoid.com)的**[MySQL 教程 1：概述、表、查询](https://arachnoid.com/MySQL/)**，涵盖了 SQL 基础知识以及初学者到中级查询，并对我们迄今所见的内容进行了全面复习，甚至更多。它从 MySQL 的角度呈现，但其中的内容并不局限于该平台的 SQL 实现。
 
-### 第4步：创建、删除、删除
+### 第 4 步：创建、删除、删除
 
 我们的第二组命令包括用于创建和删除表以及删除记录的命令。通过理解这一不断增长的命令集合，许多可以称之为常规数据管理和查询的操作突然变得可实现（当然需要实践）。
 
-通过[SQL课程](http://www.sqlcourse.com)再次尝试以下教程。
+通过[SQL 课程](http://www.sqlcourse.com)再次尝试以下教程。
 
 +   **[创建表](http://www.sqlcourse.com/create.html)**
 
@@ -78,29 +78,29 @@ SQL 和 RDBMS（关系数据库管理系统）的术语如此交织，以至于�
 
 +   **[删除记录](http://www.sqlcourse.com/delete.html)**
 
-### 第5步：视图和连接
+### 第 5 步：视图和连接
 
-进入一些稍微高级的SQL主题。
+进入一些稍微高级的 SQL 主题。
 
-首先，我们来看视图，它可以被看作是由查询结果填充的虚拟表，在包括应用开发、数据安全和简化数据共享等多个不同场景中都很有用。观看这段来自Socratica的视频以获得见解。
+首先，我们来看视图，它可以被看作是由查询结果填充的虚拟表，在包括应用开发、数据安全和简化数据共享等多个不同场景中都很有用。观看这段来自 Socratica 的视频以获得见解。
 
-连接有不同的类型，而在学习SQL时，理清它们可能是更复杂的主题之一。这实际上更能证明SQL的易用性，而不是学习连接的实际难度。通过这段Socratica视频获得对连接的更好理解。
+连接有不同的类型，而在学习 SQL 时，理清它们可能是更复杂的主题之一。这实际上更能证明 SQL 的易用性，而不是学习连接的实际难度。通过这段 Socratica 视频获得对连接的更好理解。
 
-查看来自[Code Project](http://www.codeproject.com)的**[SQL连接的可视化表示](http://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins)**。
+查看来自[Code Project](http://www.codeproject.com)的**[SQL 连接的可视化表示](http://www.codeproject.com/Articles/33052/Visual-Representation-of-SQL-Joins)**。
 
-![连接](../Images/0d5efa70866c8ba79b596ec40adda7dc.png)
+![连接](img/0d5efa70866c8ba79b596ec40adda7dc.png)
 
-本教程，来自[Arachnoid](https://arachnoid.com)的**[MySQL教程2：视图和连接](https://arachnoid.com/MySQL/views_joins.html)**，涵盖了视图和连接。它也从MySQL的角度呈现，但其中的内容并不局限于该平台的SQL实现。
+本教程，来自[Arachnoid](https://arachnoid.com)的**[MySQL 教程 2：视图和连接](https://arachnoid.com/MySQL/views_joins.html)**，涵盖了视图和连接。它也从 MySQL 的角度呈现，但其中的内容并不局限于该平台的 SQL 实现。
 
-### 第6步：高级SQL
+### 第 6 步：高级 SQL
 
-高级SQL可能意味着很多不同的东西，因此我们将缩小范围。
+高级 SQL 可能意味着很多不同的东西，因此我们将缩小范围。
 
-首先观看来自卡内基梅隆大学的Andy Pavlo教授的讲座，他讨论了聚合、独特聚合、分组、筛选、字符串操作、日期和时间操作、嵌套查询、表表达式等内容。
+首先观看来自卡内基梅隆大学的 Andy Pavlo 教授的讲座，他讨论了聚合、独特聚合、分组、筛选、字符串操作、日期和时间操作、嵌套查询、表表达式等内容。
 
-在了解了SQL的这些方面后，将注意力转向存储过程这一重要概念，并查看来自[MySQL Tutorial](http://www.mysqltutorial.org)的**[MySQL存储过程](http://www.mysqltutorial.org/mysql-stored-procedure-tutorial.aspx)**教程。
+在了解了 SQL 的这些方面后，将注意力转向存储过程这一重要概念，并查看来自[MySQL Tutorial](http://www.mysqltutorial.org)的**[MySQL 存储过程](http://www.mysqltutorial.org/mysql-stored-procedure-tutorial.aspx)**教程。
 
-### 第7步：查询优化
+### 第 7 步：查询优化
 
 一旦你知道如何编写查询，你将希望学习如何优化它们，以便在结果和运行时间上都达到最佳。这在大数据库上的复杂查询中尤其重要。
 
@@ -112,11 +112,11 @@ SQL 和 RDBMS（关系数据库管理系统）的术语如此交织，以至于�
 
 **相关**：
 
-+   [用 Python 掌握基础机器学习的 7 个步骤 — 2019 版](/2019/01/7-steps-mastering-basic-machine-learning-python.html)
++   用 Python 掌握基础机器学习的 7 个步骤 — 2019 版
 
-+   [SQL 案例研究：帮助初创公司 CEO 管理数据](/2018/09/sql-case-study-helping-startup-ceo-manage-data.html)
++   SQL 案例研究：帮助初创公司 CEO 管理数据
 
-+   [SQL 还是非 SQL：这是一个问题！](/2018/05/sql-not-sql-question.html)
++   SQL 还是非 SQL：这是一个问题！
 
 ### 更多相关内容
 

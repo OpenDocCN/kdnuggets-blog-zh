@@ -1,14 +1,14 @@
 # 2018 年数据科学和人工智能的 7 大 R 包
 
-> 原文：[https://www.kdnuggets.com/2019/01/vazquez-2018-top-7-r-packages.html/2](https://www.kdnuggets.com/2019/01/vazquez-2018-top-7-r-packages.html/2)
+> 原文：[`www.kdnuggets.com/2019/01/vazquez-2018-top-7-r-packages.html/2`](https://www.kdnuggets.com/2019/01/vazquez-2018-top-7-r-packages.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/01/vazquez-2018-top-7-r-packages.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### **4\. DataExplorer — 自动化数据探索和处理**
 
-![](../Images/b70fbc8fd8b2f0391876f0476d8b0b5a.png)
+![](img/b70fbc8fd8b2f0391876f0476d8b0b5a.png)
 
-[https://github.com/boxuancui/DataExplorer](https://github.com/boxuancui/DataExplorer)
+[`github.com/boxuancui/DataExplorer`](https://github.com/boxuancui/DataExplorer)
 
 [探索性数据分析 (EDA)](https://en.wikipedia.org/wiki/Exploratory_data_analysis) 是数据分析/预测建模的初步和重要阶段。在此过程中，分析师/建模者将首先查看数据，从而生成相关假设并决定下一步。然而，EDA 过程有时可能会很麻烦。这个 [R](https://cran.r-project.org/) 包旨在自动化大多数数据处理和可视化工作，以便用户可以专注于研究数据并提取洞见。
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -41,14 +41,14 @@ install.packages("DataExplorer")
 plot_intro(airquality)
 ```
 
-![](../Images/ade2b7ebe6303862a8871c5f11fc8a8f.png)
+![](img/ade2b7ebe6303862a8871c5f11fc8a8f.png)
 
 ```py
 ## View missing value distribution for airquality data
 plot_missing(airquality)
 ```
 
-![](../Images/ed2821df4556cd1876d1b0103b33c21c.png)
+![](img/ed2821df4556cd1876d1b0103b33c21c.png)
 
 ```py
 ## Left: frequency distribution of all discrete variables
@@ -57,14 +57,14 @@ plot_bar(diamonds)
 plot_bar(diamonds, with = "price")
 ```
 
-![](../Images/eadeb956b89232d7602fe8a8c4f57818.png)
+![](img/eadeb956b89232d7602fe8a8c4f57818.png)
 
 ```py
 ## View histogram of all continuous variables
 plot_histogram(diamonds)
 ```
 
-![](../Images/67d525294e26bc1e7705b0aeac1b8e04.png)
+![](img/67d525294e26bc1e7705b0aeac1b8e04.png)
 
 你可以在该包的官方网站上找到更多类似的内容：
 
@@ -80,9 +80,9 @@ plot_histogram(diamonds)
 
 ### **3\. Sparklyr — Apache Spark 的 R 接口**
 
-![](../Images/6ccb960fc883122f3420fb1289c4e773.png)
+![](img/6ccb960fc883122f3420fb1289c4e773.png)
 
-[https://github.com/rstudio/sparklyr](https://github.com/rstudio/sparklyr)
+[`github.com/rstudio/sparklyr`](https://github.com/rstudio/sparklyr)
 
 Sparklyr 使你能够：
 
@@ -94,21 +94,21 @@ Sparklyr 使你能够：
 
     分析和可视化。
 
-+   使用Spark的分布式[machine learning](http://spark.apache.org/docs/latest/mllib-guide.html)库从R中访问。
++   使用 Spark 的分布式[machine learning](http://spark.apache.org/docs/latest/mllib-guide.html)库从 R 中访问。
 
-+   创建[扩展](http://spark.rstudio.com/extensions.html)来调用完整的Spark API并提供
++   创建[扩展](http://spark.rstudio.com/extensions.html)来调用完整的 Spark API 并提供
 
-    与Spark包的接口。
+    与 Spark 包的接口。
 
 **安装**
 
-你可以按照以下方式从CRAN安装Sparklyr包：
+你可以按照以下方式从 CRAN 安装 Sparklyr 包：
 
 ```py
 install.packages("sparklyr")
 ```
 
-你还应该安装一个本地版本的Spark以便于开发：
+你还应该安装一个本地版本的 Spark 以便于开发：
 
 ```py
 library(sparklyr)
@@ -117,18 +117,18 @@ spark_install(version = "2.3.1")
 
 **使用**
 
-使用Spark的第一步始终是创建上下文并连接到本地或远程集群。
+使用 Spark 的第一步始终是创建上下文并连接到本地或远程集群。
 
-在这里，我们将通过[spark_connect](http://spark.rstudio.com/reference/sparklyr/latest/spark_connect.html)函数连接到Spark的本地实例：
+在这里，我们将通过[spark_connect](http://spark.rstudio.com/reference/sparklyr/latest/spark_connect.html)函数连接到 Spark 的本地实例：
 
 ```py
 library(sparklyr)
 sc <- spark_connect(master = "local")
 ```
 
-**将sparklyr与dplyr和ggplot2结合使用**
+**将 sparklyr 与 dplyr 和 ggplot2 结合使用**
 
-我们将通过将一些数据集从R复制到Spark集群开始（请注意，您可能需要安装nycflights13和Lahman包以执行此代码）：
+我们将通过将一些数据集从 R 复制到 Spark 集群开始（请注意，您可能需要安装 nycflights13 和 Lahman 包以执行此代码）：
 
 ```py
 install.packages(c("nycflights13", "Lahman"))
@@ -187,11 +187,11 @@ ggplot(delay, aes(dist, delay)) +
 ## `geom_smooth()` using method = 'gam'
 ```
 
-![](../Images/836878487b7fa929ff424f938a9a1bc8.png)
+![](img/836878487b7fa929ff424f938a9a1bc8.png)
 
-**使用Sparklyr进行机器学习**
+**使用 Sparklyr 进行机器学习**
 
-你可以通过Sparklyr中的[machine learning](http://spark.apache.org/docs/latest/mllib-guide.html)函数在Spark集群中编排机器学习算法。这些函数连接到建立在DataFrames之上的高层API，帮助你创建和调整机器学习工作流程。
+你可以通过 Sparklyr 中的[machine learning](http://spark.apache.org/docs/latest/mllib-guide.html)函数在 Spark 集群中编排机器学习算法。这些函数连接到建立在 DataFrames 之上的高层 API，帮助你创建和调整机器学习工作流程。
 
 这里是一个示例，我们使用[ml_linear_regression](http://spark.rstudio.com/reference/sparklyr/latest/ml_linear_regression.html)来拟合一个线性回归模型。我们将使用内置的`mtcars`数据集来查看是否可以根据汽车的重量(`wt`)和引擎的气缸数(`cyl`)预测汽车的燃油消耗(`mpg`)。我们将假设`mpg`与每个特征之间的关系是线性的。
 
@@ -219,7 +219,7 @@ fit
 ##   33.499452   -2.818463   -0.923187
 ```
 
-对于Spark生成的线性回归模型，我们可以使用`summary()`来了解我们的拟合质量以及每个预测变量的统计显著性。
+对于 Spark 生成的线性回归模型，我们可以使用`summary()`来了解我们的拟合质量以及每个预测变量的统计显著性。
 
 ```py
 summary(fit)
@@ -238,35 +238,35 @@ summary(fit)
 ## Root Mean Squared Error: 1.422
 ```
 
-Spark机器学习支持广泛的算法和特征变换，如上所示，使用dplyr管道轻松地将这些函数串联在一起。
+Spark 机器学习支持广泛的算法和特征变换，如上所示，使用 dplyr 管道轻松地将这些函数串联在一起。
 
-在这里了解更多关于使用sparklyr进行机器学习的信息：
+在这里了解更多关于使用 sparklyr 进行机器学习的信息：
 
 [**sparklyr**
 
-*一个R接口到Spark*spark.rstudio.com](http://spark.rstudio.com/mlib/)
+*一个 R 接口到 Spark*spark.rstudio.com](http://spark.rstudio.com/mlib/)
 
 更多关于该包和示例的信息请查看这里：
 
 [**sparklyr**
 
-*一个R接口到Spark*spark.rstudio.com](http://spark.rstudio.com/)
+*一个 R 接口到 Spark*spark.rstudio.com](http://spark.rstudio.com/)
 
-### **2. Drake — 一个专注于R的可重复性和高性能计算的管道工具包**
+### **2. Drake — 一个专注于 R 的可重复性和高性能计算的管道工具包**
 
-![](../Images/6b9ba89d2477424d0d7b60b61534175c.png)
+![](img/6b9ba89d2477424d0d7b60b61534175c.png)
 
-Drake编程
+Drake 编程
 
 不，开玩笑的。其实这个包的名字是`drake`！
 
-![](../Images/39f7a13a26de81d4b0fbd2972bc78a05.png)
+![](img/39f7a13a26de81d4b0fbd2972bc78a05.png)
 
-[https://github.com/ropensci/drake](https://github.com/ropensci/drake)
+[`github.com/ropensci/drake`](https://github.com/ropensci/drake)
 
 这是一个非常棒的包。我会创建一个单独的帖子来详细介绍它，所以敬请期待！
 
-![](../Images/b5f28e698aec4cec2403ffcc608e280f.png)
+![](img/b5f28e698aec4cec2403ffcc608e280f.png)
 
 `Drake` 是一个作为通用工作流管理器的包，用于数据驱动的任务。当其依赖项发生变化时，它会重新构建中间数据对象，并在结果已经最新时跳过工作。
 
@@ -286,7 +286,7 @@ Drake编程
 
 以及我写的一篇文章 :)
 
-[**用 MLflow 管理你的机器学习生命周期——第 1 部分。**
+[**用 MLflow 管理你的机器学习生命周期——第一部分。**
 
 *可重复性、良好的管理和实验跟踪对于轻松测试他人的工作以及…*towardsdatascience.com](https://towardsdatascience.com/manage-your-machine-learning-lifecycle-with-mlflow-part-1-a7252c859f72)
 
@@ -324,7 +324,7 @@ install_github("ropensci/drake")
 
 如果我们更改了一些函数或分析，当我们执行计划时， `drake` 会知道发生了什么变化，并且只会运行这些变化。它会创建一个图形，以便你可以看到发生了什么：
 
-![](../Images/cf6cd5f1b9b90e0c3c583eb996c6c167.png)
+![](img/cf6cd5f1b9b90e0c3c583eb996c6c167.png)
 
 分析图
 
@@ -334,9 +334,9 @@ install_github("ropensci/drake")
 
 ### **1\. DALEX——描述性机器学习解释**
 
-![](../Images/fbd41c9cd67b09c4fdd14c2e46ca1d45.png)
+![](img/fbd41c9cd67b09c4fdd14c2e46ca1d45.png)
 
-[https://github.com/pbiecek/DALEX](https://github.com/pbiecek/DALEX)
+[`github.com/pbiecek/DALEX`](https://github.com/pbiecek/DALEX)
 
 解释机器学习模型并不总是容易的。然而，对于各种商业应用来说，这一点非常重要。幸运的是，有一些很棒的库可以帮助我们完成这项任务。例如：
 
@@ -368,19 +368,19 @@ install.packages("DALEX")
 
 +   [如何与 xgboost 包一起使用 DALEX](https://rawgithub.com/pbiecek/DALEX_docs/master/vignettes/DALEX_and_xgboost.html)
 
-+   [如何用于教学的 DALEX。第 1 部分](https://rawgithub.com/pbiecek/DALEX_docs/master/vignettes/DALEX_teaching.html)
++   [如何用于教学的 DALEX。第一部分](https://rawgithub.com/pbiecek/DALEX_docs/master/vignettes/DALEX_teaching.html)
 
-+   [如何用于教学的 DALEX。第 2 部分](https://rawgit.com/pbiecek/DALEX_docs/master/examples/What%20they%20have%20learned%20-%20part%202.html)
++   [如何用于教学的 DALEX。第二部分](https://rawgit.com/pbiecek/DALEX_docs/master/examples/What%20they%20have%20learned%20-%20part%202.html)
 
 +   [breakDown 与 lime 与 shapleyR](https://rawgit.com/pbiecek/DALEX_docs/master/vignettes/Comparison_between_breakdown%2C_lime%2C_shapley.html)
 
 极好的备忘单：
 
-![](../Images/20ed42376fac4c5bcddf8f55b3d3410f.png)
+![](img/20ed42376fac4c5bcddf8f55b3d3410f.png)
 
-[https://github.com/pbiecek/DALEX](https://github.com/pbiecek/DALEX)![](../Images/f5ca6e0b3859b76ef3761cbc0f2648f8.png)
+[`github.com/pbiecek/DALEX`](https://github.com/pbiecek/DALEX)![](img/f5ca6e0b3859b76ef3761cbc0f2648f8.png)
 
-[https://github.com/pbiecek/DALEX](https://github.com/pbiecek/DALEX)
+[`github.com/pbiecek/DALEX`](https://github.com/pbiecek/DALEX)
 
 这里有一个互动笔记本，你可以在其中了解更多关于这个包的信息：
 
@@ -406,42 +406,42 @@ install.packages("DALEX")
 
 也感谢你阅读这篇文章。我希望你在这里找到了一些有趣的内容 :）。如果这些文章对你有帮助，请与朋友分享！
 
-如果你有问题，可以在Twitter上关注我：
+如果你有问题，可以在 Twitter 上关注我：
 
 [**法维奥·瓦斯克斯 (@FavioVaz) | Twitter**](https://twitter.com/faviovaz)
 
 *Favio Vázquez（@FavioVaz）的最新推文。数据科学家。物理学家和计算工程师。我有一个……* [twitter.com](https://twitter.com/faviovaz)
 
-以及LinkedIn：
+以及 LinkedIn：
 
 [**法维奥·瓦斯克斯 — 创始人 — Ciencia y Datos | LinkedIn**](https://www.linkedin.com/in/faviovazquez/)
 
-*查看法维奥·瓦斯克斯在LinkedIn上的资料，世界上最大的专业社区。法维奥在他们的……* [www.linkedin.com](https://www.linkedin.com/in/faviovazquez/)
+*查看法维奥·瓦斯克斯在 LinkedIn 上的资料，世界上最大的专业社区。法维奥在他们的……* [www.linkedin.com](https://www.linkedin.com/in/faviovazquez/)
 
 希望在那里见到你 :)
 
-**简历：[法维奥·瓦斯克斯](https://www.linkedin.com/in/faviovazquez/)** 是一名物理学家和计算机工程师，致力于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是Ciencia y Datos的创始人，这是一个西班牙语的数据科学出版物。他热衷于迎接新挑战，与优秀的团队合作，并解决有趣的问题。他参与了Apache Spark的合作，帮助开发MLlib、Core和文档。他喜欢将自己的知识和专业技能应用于科学、数据分析、可视化和自动学习，以帮助世界变得更美好。
+**简历：[法维奥·瓦斯克斯](https://www.linkedin.com/in/faviovazquez/)** 是一名物理学家和计算机工程师，致力于数据科学和计算宇宙学。他对科学、哲学、编程和音乐充满热情。他是 Ciencia y Datos 的创始人，这是一个西班牙语的数据科学出版物。他热衷于迎接新挑战，与优秀的团队合作，并解决有趣的问题。他参与了 Apache Spark 的合作，帮助开发 MLlib、Core 和文档。他喜欢将自己的知识和专业技能应用于科学、数据分析、可视化和自动学习，以帮助世界变得更美好。
 
 [原文](https://heartbeat.fritz.ai/top-7-libraries-and-packages-of-the-year-for-data-science-and-ai-python-r-6b7cca2bf000)。经许可转载。
 
 **相关：**
 
-+   [2018年数据科学和AI的7个顶级Python库](/2019/01/vazquez-2018-top-7-python-libraries.html)
++   2018 年数据科学和 AI 的 7 个顶级 Python 库
 
-+   [2018年数据科学的20个顶级R库](/2018/05/top-20-r-libraries-data-science-2018.html)
++   2018 年数据科学的 20 个顶级 R 库
 
-+   [我们最喜欢的5个免费可视化工具](/2018/07/5-favorite-open-source-visualization-tools.html)
++   我们最喜欢的 5 个免费可视化工具
 
 ### 更多相关内容
 
-+   [2023年必须了解的顶级数据 Python 包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
++   [2023 年必须了解的顶级数据 Python 包](https://www.kdnuggets.com/2023/01/top-data-python-packages-know-2023.html)
 
-+   [3个用于数据可视化的 Julia 包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
++   [3 个用于数据可视化的 Julia 包](https://www.kdnuggets.com/2023/02/3-julia-packages-data-visualization.html)
 
-+   [5个用于地理空间数据分析的Python包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
++   [5 个用于地理空间数据分析的 Python 包](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
 
-+   [2022年及以后顶级AI和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶级 AI 和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
-+   [KDnuggets™ 新闻 22:n03, 1月19日: 深入了解13个数据……](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03, 1 月 19 日: 深入了解 13 个数据……](https://www.kdnuggets.com/2022/n03.html)
 
-+   [KDnuggets新闻，12月7日：揭开数据科学的十大误区 • 4……](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭开数据科学的十大误区 • 4……](https://www.kdnuggets.com/2022/n47.html)

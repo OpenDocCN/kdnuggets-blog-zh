@@ -1,8 +1,8 @@
 # 通过参与比赛，使机器学习速度提高 4 倍
 
-> 原文：[https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)
+> 原文：[`www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html`](https://www.kdnuggets.com/2022/01/learn-machine-learning-4x-faster-participating-competitions.html)
 
-![通过参与比赛，使机器学习速度提高 4 倍](../Images/4f9d04e24bb1d662ae929feb9b92d845.png)
+![通过参与比赛，使机器学习速度提高 4 倍](img/4f9d04e24bb1d662ae929feb9b92d845.png)
 
 图片由作者提供
 
@@ -14,17 +14,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 有一种更好的学习机器学习（ML）的方法，就是理解基础知识后立即投入解决机器学习挑战。在这篇博客中，我将向你展示如何通过参与比赛来学习机器学习中的多个领域（NLP、计算机视觉、ASR、RL、GAN）。
 
-![通过参与比赛，使机器学习速度提高 4 倍](../Images/f62297b4d165ca4439acf177fe2ec5d9.png)
+![通过参与比赛，使机器学习速度提高 4 倍](img/f62297b4d165ca4439acf177fe2ec5d9.png)
 
 图片由作者提供 | [Kaggle](https://www.kaggle.com/kingabzpro)
 
@@ -52,9 +52,9 @@
 
 ## 协作学习
 
-所有的竞争平台都有讨论区，参与者可以在这里分享问题并一起寻找解决方案。这也意味着有3000+个团队参与解决同一个问题。协作学习还帮助你理解哪些方法对特定问题有效。你还能够跟上新趋势，并且最终，这将为你未来作为机器学习工程师的工作做好准备。
+所有的竞争平台都有讨论区，参与者可以在这里分享问题并一起寻找解决方案。这也意味着有 3000+个团队参与解决同一个问题。协作学习还帮助你理解哪些方法对特定问题有效。你还能够跟上新趋势，并且最终，这将为你未来作为机器学习工程师的工作做好准备。
 
-![通过参与比赛，机器学习速度提升4倍](../Images/cea747a69696b92fb7880de70d177091.png)
+![通过参与比赛，机器学习速度提升 4 倍](img/cea747a69696b92fb7880de70d177091.png)
 
 图片来源：[Kaggle](https://www.kaggle.com/c/nlp-getting-started/discussion)
 
@@ -64,17 +64,17 @@
 
 ## 排行榜和奖品
 
-排行榜、排名、奖牌和奖金是你参与的完美激励因素。这种竞争环境也帮助你突破界限，激励你努力工作以进入前十。当我开始在[AI4D Baamtu Datamation — WOLOF语音识别 — Zindi](https://zindi.africa/competitions/ai4d-baamtu-datamation-automatic-speech-recognition-in-wolof)上工作时，我完全不知道如何处理音频或如何在GPU上训练模型，但经过2个月通过博客、YouTube和GitHub项目学习，我成功达到了第一名。这让我意识到我可以学习任何东西。在此之后，我获得了足够的自信去尝试新事物并学习更多工具。如果我跟随[ASR](https://maelfabien.github.io/machinelearning/speech_reco/)的在线课程，可能需要四个月的时间来学习，再加上四个月才能熟练掌握。
+排行榜、排名、奖牌和奖金是你参与的完美激励因素。这种竞争环境也帮助你突破界限，激励你努力工作以进入前十。当我开始在[AI4D Baamtu Datamation — WOLOF 语音识别 — Zindi](https://zindi.africa/competitions/ai4d-baamtu-datamation-automatic-speech-recognition-in-wolof)上工作时，我完全不知道如何处理音频或如何在 GPU 上训练模型，但经过 2 个月通过博客、YouTube 和 GitHub 项目学习，我成功达到了第一名。这让我意识到我可以学习任何东西。在此之后，我获得了足够的自信去尝试新事物并学习更多工具。如果我跟随[ASR](https://maelfabien.github.io/machinelearning/speech_reco/)的在线课程，可能需要四个月的时间来学习，再加上四个月才能熟练掌握。
 
-说实话，你只需多一点努力就能赢得几千美元，那么为什么不在学习新的机器学习领域时赚些钱呢？为了激励你，我分享了Kaggle竞赛的奖金池。
+说实话，你只需多一点努力就能赢得几千美元，那么为什么不在学习新的机器学习领域时赚些钱呢？为了激励你，我分享了 Kaggle 竞赛的奖金池。
 
-![通过参与比赛，机器学习速度提升4倍](../Images/7868d5cfd15d5fd3d9d1652f52008f36.png)
+![通过参与比赛，机器学习速度提升 4 倍](img/7868d5cfd15d5fd3d9d1652f52008f36.png)
 
 [Kaggle 竞赛](https://www.kaggle.com/competitions)
 
 我的建议是从小做起，持续努力以达到顶级。达到顶级将教会你课程或教程中学不到的重要经验。
 
-![通过参与竞赛提高4倍机器学习学习速度](../Images/cc19eb4e0286f269e2a992146805aa95.png)
+![通过参与竞赛提高 4 倍机器学习学习速度](img/cc19eb4e0286f269e2a992146805aa95.png)
 
 图片来自 [Zindi](https://zindi.africa/competitions/ai4d-baamtu-datamation-automatic-speech-recognition-in-wolof/leaderboard)
 
@@ -100,7 +100,7 @@
 
 +   [生成学习](https://machinelearningmastery.com/what-are-generative-adversarial-networks-gans/)
 
-![通过参与竞赛提高4倍机器学习学习速度](../Images/3580f91cc310b790de16b809745f8db4.png)
+![通过参与竞赛提高 4 倍机器学习学习速度](img/3580f91cc310b790de16b809745f8db4.png)
 
 图片来源 [magora-systems](https://magora-systems.com/artificial-intelligence-vs-machine-learning-vs-deep-learning/)
 

@@ -1,22 +1,22 @@
 # 数据素养：使用苏格拉底方法
 
-> 原文：[https://www.kdnuggets.com/2019/06/data-literacy-socratic-method.html](https://www.kdnuggets.com/2019/06/data-literacy-socratic-method.html)
+> 原文：[`www.kdnuggets.com/2019/06/data-literacy-socratic-method.html`](https://www.kdnuggets.com/2019/06/data-literacy-socratic-method.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Aarzoo Sidhu](https://www.linkedin.com/in/thedatathinker/)，[The Data Thinker](https://thedatathinker.com/)**
 
-![](../Images/320cbba5c4c6104b6c23d60323206cbd.png)
+![](img/320cbba5c4c6104b6c23d60323206cbd.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -112,7 +112,7 @@
 
 +   时间范围是什么？
 
-+   图表显示了什么？x轴和y轴是如何标记的？标题/图例是否合适？
++   图表显示了什么？x 轴和 y 轴是如何标记的？标题/图例是否合适？
 
 #### 2\. 挑战假设的问题。
 
@@ -180,9 +180,9 @@
 
 +   这个对话如何总结？
 
-![](../Images/5472a3383a196e85609cef056ec18444.png)
+![](img/5472a3383a196e85609cef056ec18444.png)
 
-**简介**：Aarzoo Sidhu，具有生物统计学的正式教育背景和8年的数据管理与分析经验，[《数据思考者》](https://thedatathinker.com/)的作者，现在致力于超越数据科学，探索从数据到洞察的多条路径。
+**简介**：Aarzoo Sidhu，具有生物统计学的正式教育背景和 8 年的数据管理与分析经验，[《数据思考者》](https://thedatathinker.com/)的作者，现在致力于超越数据科学，探索从数据到洞察的多条路径。
 
 **相关：**
 
@@ -196,12 +196,12 @@
 
 +   [加入数据素养月 2022](https://www.kdnuggets.com/2022/09/datacamp-join-data-literacy-month-2022.html)
 
-+   [在Pandas数据框中使用apply()方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)
++   [在 Pandas 数据框中使用 apply()方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)
 
-+   [__getitem__简介：Python中的魔法方法](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)
++   [__getitem__ 简介：Python 中的魔法方法](https://www.kdnuggets.com/2023/03/introduction-getitem-magic-method-python.html)
 
-+   [黑客如何利用数据科学窃取数十亿的4种方式](https://www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html)
++   [黑客如何利用数据科学窃取数十亿的 4 种方式](https://www.kdnuggets.com/2022/02/4-ways-hackers-data-science-steal-billions.html)
 
 +   [利用数据科学使清洁能源更加公平](https://www.kdnuggets.com/2022/03/data-science-make-clean-energy-equitable.html)
 
-+   [如何通过使用自动EDA工具在数据科学评估测试中获得成功](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)
++   [如何通过使用自动 EDA 工具在数据科学评估测试中获得成功](https://www.kdnuggets.com/2022/04/ace-data-science-assessment-test-automatic-eda-tools.html)

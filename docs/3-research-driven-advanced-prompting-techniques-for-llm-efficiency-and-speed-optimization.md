@@ -1,8 +1,8 @@
 # 3 种基于研究的高级提示技术，以提高 LLM 的效率和速度优化
 
-> 原文：[https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
+> 原文：[`www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization`](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
 
-![3 种基于研究的高级提示技术，以提高 LLM 的效率和速度优化](../Images/d642c3b80a0d5f0ea0a540b7e50a7889.png)
+![3 种基于研究的高级提示技术，以提高 LLM 的效率和速度优化](img/d642c3b80a0d5f0ea0a540b7e50a7889.png)
 
 图片由 [Freepik](https://www.freepik.com/free-vector/hand-drawn-flat-design-npl-illustration_22112068.htm#query=ai%20prompting&position=20&from_view=search&track=ais&uuid=a658aa34-aa02-4ce1-a502-c03d3396f395) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -42,37 +42,37 @@
 
 所有这些都将帮助模型更好地理解你的需求，并增加获得令人满意答案的机会。
 
-下面是一个很好的例子，展示了如何使用上述所有提示来查询AI模型：
+下面是一个很好的例子，展示了如何使用上述所有提示来查询 AI 模型：
 
-> 提示 = “你是一个专家AI提示工程师。请生成关于提示生成最新进展的2句总结，重点关注幻觉的挑战以及使用高级提示技术解决这些挑战的潜力。输出应为Markdown格式。”
+> 提示 = “你是一个专家 AI 提示工程师。请生成关于提示生成最新进展的 2 句总结，重点关注幻觉的挑战以及使用高级提示技术解决这些挑战的潜力。输出应为 Markdown 格式。”
 
 然而，遵循这些前面讨论的基本技巧并不总能保证最佳结果，特别是当处理复杂任务时。
 
 # 可以在应用中实施的实践研究驱动的高级提示技术
 
-来自微软和谷歌等知名AI机构的领先研究人员已经投入了大量资源进行LLM优化，即积极研究幻觉的常见原因并寻找有效的方法来解决这些问题。以下提示技术已被发现能够为研究中的LLM提供更好的上下文感知指令，从而增加获得更好相关结果的机会，并减少获得不准确或荒谬信息的可能性。
+来自微软和谷歌等知名 AI 机构的领先研究人员已经投入了大量资源进行 LLM 优化，即积极研究幻觉的常见原因并寻找有效的方法来解决这些问题。以下提示技术已被发现能够为研究中的 LLM 提供更好的上下文感知指令，从而增加获得更好相关结果的机会，并减少获得不准确或荒谬信息的可能性。
 
 以下是一些研究驱动的高级提示技术示例：
 
 ## 1. 情感化说服提示
 
-[微软研究人员2023年的一项研究](https://arxiv.org/abs/2307.11760)发现，使用情感语言和说服性提示，即“EmotionPrompts”，可以将LLM性能提高超过10%。
+[微软研究人员 2023 年的一项研究](https://arxiv.org/abs/2307.11760)发现，使用情感语言和说服性提示，即“EmotionPrompts”，可以将 LLM 性能提高超过 10%。
 
 这种风格为给定的提示添加了个人化的情感元素，将请求转化为一个具有重要意义和显著后果的请求。它几乎像是在与人对话；使用情感角度有助于传达任务的重要性，激发更深的专注和承诺。这一策略对需要更高问题解决和创造力技能的任务非常有用。
 
 我们来看一个简单的例子，其中情感被用来增强提示：
 
-**基本提示：**“编写一个Python脚本来排序一个数字列表。”
+**基本提示：**“编写一个 Python 脚本来排序一个数字列表。”
 
-![3种研究驱动的高级提示技术用于LLM效率和速度优化](../Images/d485d3086d170a1022bce1a856679829.png)
+![3 种研究驱动的高级提示技术用于 LLM 效率和速度优化](img/d485d3086d170a1022bce1a856679829.png)
 
-**情感化的** **说服力：**“我很兴奋能提升我的Python技能，我需要写一个脚本来排序数字。这是我作为开发者职业生涯中的一个关键步骤。”
+**情感化的** **说服力：**“我很兴奋能提升我的 Python 技能，我需要写一个脚本来排序数字。这是我作为开发者职业生涯中的一个关键步骤。”
 
-![3种研究驱动的高级提示技术用于LLM效率和速度优化](../Images/203e3ecccd526968c1f6144eba846efd.png)
+![3 种研究驱动的高级提示技术用于 LLM 效率和速度优化](img/203e3ecccd526968c1f6144eba846efd.png)
 
 虽然两种提示变体产生了类似的代码结果，但“EmotionPrompts”技术帮助创建了更简洁的代码，并在生成的结果中提供了额外的解释。
 
-![3种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](../Images/a3b5f85dccc129633bf542b407a7be37.png)
+![3 种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](img/a3b5f85dccc129633bf542b407a7be37.png)
 
 [Finxter](https://blog.finxter.com/impact-of-monetary-incentives-on-the-performance-of-gpt-4-turbo-an-experimental-analysis/) 进行的另一项有趣实验发现，向 LLM 提供金钱奖励也可以提高其表现——几乎像是吸引人类的财务激励一样。
 
@@ -84,7 +84,7 @@
 
 **基本提示:** "为面向大城市小型企业主的金融应用制定一个数字营销计划。"
 
-![3种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](../Images/61811acb47438bc9ffe38cae1246c4b2.png)
+![3 种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](img/61811acb47438bc9ffe38cae1246c4b2.png)
 
 **Chain of Thought 提示:**
 
@@ -102,7 +102,7 @@
 
 Chain-of-Thought 提示技术从初步观察中生成了更精确和可操作的结果。
 
-![3种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](../Images/688617d5caaa8e2c7b0810c3ed4b3ad2.png)
+![3 种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](img/688617d5caaa8e2c7b0810c3ed4b3ad2.png)
 
 # 3\. Step-Back 提示
 
@@ -116,34 +116,34 @@ Chain-of-Thought 提示技术从初步观察中生成了更精确和可操作的
 
 ****基本提示**: "疫苗是如何工作的？"
 
-![3种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](../Images/790b4b0a7b05eb184c11093ae558be67.png)
+![3 种研究驱动的高级提示技术，用于提高 LLM 效率和速度优化](img/790b4b0a7b05eb184c11093ae558be67.png)
 
 **使用 Step-Back 技术的提示**
 
-1.  “哪些生物机制使疫苗能够防御疾病？”![3个基于研究的高级提示技术，提高LLM效率和速度优化](../Images/9dd8265721e63f404fd4313d0a410f1b.png)
+1.  “哪些生物机制使疫苗能够防御疾病？”![3 个基于研究的高级提示技术，提高 LLM 效率和速度优化](img/9dd8265721e63f404fd4313d0a410f1b.png)
 
-1.  “你能解释一下疫苗引发的身体免疫反应吗？”![3个基于研究的高级提示技术，提高LLM效率和速度优化](../Images/a3b5f85dccc129633bf542b407a7be37.png)
+1.  “你能解释一下疫苗引发的身体免疫反应吗？”![3 个基于研究的高级提示技术，提高 LLM 效率和速度优化](img/a3b5f85dccc129633bf542b407a7be37.png)
 
 虽然基本提示提供了令人满意的答案，但使用“后退一步”技巧提供了更深入、更技术性的回答。这对于你可能遇到的技术问题尤其有用。
 
-![3个基于研究的高级提示技术，提高LLM效率和速度优化](../Images/85428c9a7c933587587dbe8b3c82e1cb.png)
+![3 个基于研究的高级提示技术，提高 LLM 效率和速度优化](img/85428c9a7c933587587dbe8b3c82e1cb.png)
 
 # 结论
 
-随着开发者继续为现有的AI模型构建新颖的应用，对先进提示技术的需求也在增加，这些技术可以提升大型语言模型的能力，不仅理解我们的言语，还能理解其中的意图和情感，从而生成更准确和上下文相关的输出。
+随着开发者继续为现有的 AI 模型构建新颖的应用，对先进提示技术的需求也在增加，这些技术可以提升大型语言模型的能力，不仅理解我们的言语，还能理解其中的意图和情感，从而生成更准确和上下文相关的输出。
 
-**[Mahmud Adeleye](https://www.linkedin.com/in/mahmudadeleye/)**是一位拥有丰富经验的软件工程师，专注于设计AI驱动的软件应用。他还为JavaScript开发者提供了一个开源的AI课程： https://github.com/thestriver/ai-for-javascript-course。
+**[Mahmud Adeleye](https://www.linkedin.com/in/mahmudadeleye/)**是一位拥有丰富经验的软件工程师，专注于设计 AI 驱动的软件应用。他还为 JavaScript 开发者提供了一个开源的 AI 课程： https://github.com/thestriver/ai-for-javascript-course。
 
 ### 更多关于这个话题
 
-+   [5个提升数据效率和速度的Python技巧](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)
++   [5 个提升数据效率和速度的 Python 技巧](https://www.kdnuggets.com/5-python-tips-for-data-efficiency-and-speed)
 
-+   [提升LLM推理能力：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
++   [提升 LLM 推理能力：揭示代码链提示](https://www.kdnuggets.com/enhancing-llm-reasoning-unveiling-chain-of-code-prompting)
 
-+   [SQL查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
++   [SQL 查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
 
-+   [LLM手册：从业者的策略和技术](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
++   [LLM 手册：从业者的策略和技术](https://www.kdnuggets.com/llm-handbook-strategies-and-techniques-for-practitioners)
 
 +   [机器学习模型的高级特征选择技术](https://www.kdnuggets.com/2023/06/advanced-feature-selection-techniques-machine-learning-models.html)
 
-+   [10个高级Git技巧](https://www.kdnuggets.com/10-advanced-git-techniques)
++   [10 个高级 Git 技巧](https://www.kdnuggets.com/10-advanced-git-techniques)

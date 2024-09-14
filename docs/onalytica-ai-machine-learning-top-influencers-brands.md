@@ -1,10 +1,10 @@
 # 人工智能与机器学习：顶级影响者与品牌
 
-> 原文：[https://www.kdnuggets.com/2016/03/onalytica-ai-machine-learning-top-influencers-brands.html](https://www.kdnuggets.com/2016/03/onalytica-ai-machine-learning-top-influencers-brands.html)
+> 原文：[`www.kdnuggets.com/2016/03/onalytica-ai-machine-learning-top-influencers-brands.html`](https://www.kdnuggets.com/2016/03/onalytica-ai-machine-learning-top-influencers-brands.html)
 
-[Onalytica](http://www.onalytica.com/)是一家专注于社交网络分析和影响者关系软件的公司，最近发布了他们最新的[《人工智能与机器学习领域的前100名影响者与品牌报告》](http://www.onalytica.com/blog/posts/artificial-intelligence-machine-learning-top-100-influencers-and-brands/)。该报告列出了每个类别中的前100名，并通过图形化方式探索了它们之间的关系。
+[Onalytica](http://www.onalytica.com/)是一家专注于社交网络分析和影响者关系软件的公司，最近发布了他们最新的[《人工智能与机器学习领域的前 100 名影响者与品牌报告》](http://www.onalytica.com/blog/posts/artificial-intelligence-machine-learning-top-100-influencers-and-brands/)。该报告列出了每个类别中的前 100 名，并通过图形化方式探索了它们之间的关系。
 
-报告的网站分享了每个类别（影响者和品牌）的前50名名单，而[可下载的完整报告]( http://www.onalytica.com/forms/artificial-intelligence-machine-learning-top-100-influencers-brands/)则包含前100名。作为预览，这里是前20名影响者的名单：
+报告的网站分享了每个类别（影响者和品牌）的前 50 名名单，而可下载的完整报告则包含前 100 名。作为预览，这里是前 20 名影响者的名单：
 
 | 排名 | Twitter 账号 | 姓名 | 公司 | 影响者评分 |
 | --- | --- | --- | --- | --- |
@@ -29,25 +29,25 @@
 | 19 | [@guestrin](https://twitter.com/guestrin) | Carlos Guestrin | Dato | 11.57 |
 | 20 | [@willknight](https://twitter.com/willknight) | Will Knight | Technology Review | 9.73 |
 
-以下是顶级影响者之间关系的图示（Onalytica网站上也有类似的图示用于顶级品牌）。点击放大。
+以下是顶级影响者之间关系的图示（Onalytica 网站上也有类似的图示用于顶级品牌）。点击放大。
 
-[![顶级影响者关系图](../Images/d66f2408addc1fa6b7d6f321f0da9c09.png)](http://www.onalytica.com/wp-content/uploads/2016/03/Network-Map-Whole.png)
+![顶级影响者关系图](http://www.onalytica.com/wp-content/uploads/2016/03/Network-Map-Whole.png)
 
 *顶级影响者关系图（点击放大）。*
 
-Onalytica联系了一些顶级影响者，了解他们对人工智能和机器学习的看法，并在他们的帖子中包含了一些见解。 [Kirk Borne](https://twitter.com/KirkDBorne)，Booz Allen Hamilton的首席数据科学家以及排名第二的影响者，分享了以下观点：
+Onalytica 联系了一些顶级影响者，了解他们对人工智能和机器学习的看法，并在他们的帖子中包含了一些见解。 [Kirk Borne](https://twitter.com/KirkDBorne)，Booz Allen Hamilton 的首席数据科学家以及排名第二的影响者，分享了以下观点：
 
 > 我认为机器学习指的是一组基础的数学算法，这些算法学习描述数据中的模式和特征的模型，而数据挖掘则是应用这些算法从大数据集中发现知识，人工智能则是将这些算法应用于设备（如机器人）中以实现自主行动和决策。
 
-KDnuggets的Gregory Piatetsky-Shapiro表示：
+KDnuggets 的 Gregory Piatetsky-Shapiro 表示：
 
 > 过去那些声称人工智能不会击败人类棋手、或无法识别图像等“专家”们，已经被证明是错误的。人工智能和机器学习似乎没有任何成就的障碍。现在是认真对待人工智能的时候了，需要考虑其带来的巨大利益以及来自人类级别人工智能的巨大风险。
 
 而 [Randal Olson](https://twitter.com/randal_olson)，宾夕法尼亚大学生物医学信息学研究所的博士后研究员，分享了以下内容：
 
-> 随着DeepMind的AlphaGO挑战世界顶级围棋选手，Boston Dynamics的双足机器人（Atlas）进军机器人领域，以及更多的发展，2016年看起来将是人工智能和机器学习的突破性一年。
+> 随着 DeepMind 的 AlphaGO 挑战世界顶级围棋选手，Boston Dynamics 的双足机器人（Atlas）进军机器人领域，以及更多的发展，2016 年看起来将是人工智能和机器学习的突破性一年。
 
-以下是前20个品牌的名单：
+以下是前 20 个品牌的名单：
 
 | 排名 | Twitter 账号 | 名称 | 影响者评分 |
 | --- | --- | --- | --- |
@@ -76,34 +76,34 @@ KDnuggets的Gregory Piatetsky-Shapiro表示：
 
 **相关内容：**
 
-+   [2016年大数据：顶级影响者和品牌](/2016/02/big-data-top-influencers-brands.html)
++   2016 年大数据：顶级影响者和品牌
 
-+   [前100大大数据专家]( /2016/01/maptive-top-big-data-experts.html)
++   前 100 大大数据专家
 
-+   [数据科学领域的123位最具影响力人物](/2015/09/123-influential-people-data-science.html)
++   数据科学领域的 123 位最具影响力人物
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 ### 更多相关内容
 
-+   [KDnuggets 新闻，6月22日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要的监督学习算法](https://www.kdnuggets.com/2022/n25.html)
 
-+   [每位机器学习工程师应该掌握的5项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每位机器学习工程师应该掌握的 5 项机器学习技能](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的稳固计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 
-+   [数据科学、数据可视化和…的38个顶级Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [数据科学、数据可视化和…的 38 个顶级 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
 
-+   [前5名免费的机器学习课程](https://www.kdnuggets.com/2022/02/top-5-free-machine-learning-courses.html)
++   [前 5 名免费的机器学习课程](https://www.kdnuggets.com/2022/02/top-5-free-machine-learning-courses.html)

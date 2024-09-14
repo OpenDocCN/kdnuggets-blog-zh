@@ -1,8 +1,8 @@
 # 如何在 Python 中进行单元测试？
 
-> 原文：[https://www.kdnuggets.com/2023/01/perform-unit-testing-python.html](https://www.kdnuggets.com/2023/01/perform-unit-testing-python.html)
+> 原文：[`www.kdnuggets.com/2023/01/perform-unit-testing-python.html`](https://www.kdnuggets.com/2023/01/perform-unit-testing-python.html)
 
-![如何在 Python 中进行单元测试？](../Images/98908d51693ac5a07f9369da920cb465.png)
+![如何在 Python 中进行单元测试？](img/98908d51693ac5a07f9369da920cb465.png)
 
 图片由作者提供
 
@@ -130,11 +130,11 @@ FAILED (failures=1)
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -146,7 +146,7 @@ FAILED (failures=1)
 
 +   [如何使用 Python 进行运动检测](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)
 
-+   [KDnuggets 新闻，8月17日：如何进行动作检测…](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何进行动作检测…](https://www.kdnuggets.com/2022/n33.html)
 
 +   [介绍自然语言处理的测试库](https://www.kdnuggets.com/2023/04/introducing-testing-library-natural-language-processing.html)
 

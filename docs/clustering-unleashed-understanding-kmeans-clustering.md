@@ -1,8 +1,8 @@
 # 聚类释放：理解 K-Means 聚类
 
-> 原文：[https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
+> 原文：[`www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html`](https://www.kdnuggets.com/2023/07/clustering-unleashed-understanding-kmeans-clustering.html)
 
-![聚类释放：理解 K-Means 聚类](../Images/66880e0c8f8548f6be0b7d2d931f53d9.png)
+![聚类释放：理解 K-Means 聚类](img/66880e0c8f8548f6be0b7d2d931f53d9.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -26,9 +26,9 @@ K-Means 已成为机器学习和数据挖掘应用中的一种有用算法。在
 
 K-Means 算法用于解决属于无监督学习类别的聚类问题。借助这个算法，我们可以将观察数据分组到 K 个簇中。
 
-![聚类释放：理解 K-Means 聚类](../Images/3fce8286ad579115e729c3206deba503.png)
+![聚类释放：理解 K-Means 聚类](img/3fce8286ad579115e729c3206deba503.png)
 
-图1 K-Means 算法工作原理 | 图片来自 [Towards Data Science](https://towardsdatascience.com/k-means-a-complete-introduction-1702af9cd8c)
+图 1 K-Means 算法工作原理 | 图片来自 [Towards Data Science](https://towardsdatascience.com/k-means-a-complete-introduction-1702af9cd8c)
 
 这个算法内部使用向量量化，通过这种方式，我们可以将数据集中的每个观察值分配到距离最小的簇中，这是聚类算法的原型。这个聚类算法在数据挖掘和机器学习中常用于根据相似性度量将数据分区成 K 个簇。因此，在这个算法中，我们需要最小化观察值与其对应质心之间的平方和距离，这最终会产生明显且同质的簇。
 
@@ -65,7 +65,7 @@ import seaborn as sb
 
 问题的完整管道如下所示：
 
-![聚类释放：理解 K-Means 聚类](../Images/a4415f3a6364db07fa76ebb6441899aa.png)
+![聚类释放：理解 K-Means 聚类](img/a4415f3a6364db07fa76ebb6441899aa.png)
 
 图 2 项目管道 | 图片来源：作者
 
@@ -87,7 +87,7 @@ plt.scatter(df['cgpa'],df['iq'])
 
 **输出：**
 
-![聚类释放：理解 K-Means 聚类](../Images/90a547f7a440623335840f84b97b9c19.png)
+![聚类释放：理解 K-Means 聚类](img/90a547f7a440623335840f84b97b9c19.png)
 
 图 3 散点图 | 图片来源：作者
 
@@ -125,11 +125,11 @@ plt.plot(range(1,11),wcss)
 
 **输出：**
 
-![聚类释放：理解 K-Means 聚类](../Images/840c489675eb2a193d2e8a6cd89e7a2d.png)
+![聚类释放：理解 K-Means 聚类](img/840c489675eb2a193d2e8a6cd89e7a2d.png)
 
 图 4 肘部图 | 图片来源：作者
 
-从上述肘部图中，我们可以看到在 K=4 时，WCSS 的值有一个下降，这意味着如果我们将最佳值设置为4，那么聚类将提供良好的性能。
+从上述肘部图中，我们可以看到在 K=4 时，WCSS 的值有一个下降，这意味着如果我们将最佳值设置为 4，那么聚类将提供良好的性能。
 
 ## 6\. 使用最佳 K 值拟合 K-Means 算法
 
@@ -166,7 +166,7 @@ sum(y_means == y_means_new)
 
 ## 8\. 聚类的可视化
 
-为了可视化每个聚类，我们在坐标轴上绘制它们，并通过不同的颜色来区分，这样我们可以很容易地看到形成的4个聚类。
+为了可视化每个聚类，我们在坐标轴上绘制它们，并通过不同的颜色来区分，这样我们可以很容易地看到形成的 4 个聚类。
 
 ```py
 plt.scatter(X[y_means == 0,0],X[y_means == 0,1],color='blue')
@@ -177,13 +177,13 @@ plt.scatter(X[y_means == 3,0],X[y_means == 3,1],color='yellow')
 
 **输出：**
 
-![解放聚类：理解 K-Means 聚类](../Images/5789d75cccd74c1fb431834f38087f15.png)
+![解放聚类：理解 K-Means 聚类](img/5789d75cccd74c1fb431834f38087f15.png)
 
-图5 聚类形成的可视化 | 作者提供的图像
+图 5 聚类形成的可视化 | 作者提供的图像
 
 ## 9\. K-Means 在三维数据上的应用
 
-由于之前的数据集有2列，我们面临的是二维问题。现在，我们将使用相同的一组步骤处理三维问题，并尝试分析代码在 n 维数据上的可重复性。
+由于之前的数据集有 2 列，我们面临的是二维问题。现在，我们将使用相同的一组步骤处理三维问题，并尝试分析代码在 n 维数据上的可重复性。
 
 ```py
 # Create a synthetic dataset from sklearn
@@ -202,9 +202,9 @@ fig.show()
 
 **输出：**
 
-![解放聚类：理解 K-Means 聚类](../Images/ab42e68b97ffe2ecaebfba4ab68674b0.png)
+![解放聚类：理解 K-Means 聚类](img/ab42e68b97ffe2ecaebfba4ab68674b0.png)
 
-图6 三维数据集的散点图 | 作者提供的图像
+图 6 三维数据集的散点图 | 作者提供的图像
 
 ```py
 wcss = []
@@ -218,9 +218,9 @@ plt.plot(range(1,21),wcss)
 
 **输出：**
 
-![解放聚类：理解 K-Means 聚类](../Images/9cd48913fcd95ab7817869edb21e47f7.png)
+![解放聚类：理解 K-Means 聚类](img/9cd48913fcd95ab7817869edb21e47f7.png)
 
-图7 肘部图 | 作者提供的图像
+图 7 肘部图 | 作者提供的图像
 
 ```py
 # Fit the K-Means algorithm with the optimal value of K
@@ -242,9 +242,9 @@ fig.show()
 
 **输出：**
 
-![解放聚类：理解 K-Means 聚类](../Images/16d75ad310e31e75bd8103a69e4649cf.png)
+![解放聚类：理解 K-Means 聚类](img/16d75ad310e31e75bd8103a69e4649cf.png)
 
-图8\. 聚类可视化 | 作者提供的图像
+图 8\. 聚类可视化 | 作者提供的图像
 
 您可以在这里找到完整的代码 -  [Colab Notebook](https://colab.research.google.com/drive/1PyICZm_WyBGkbloEEyHBRCrfz-fG2e_5?usp=sharing)
 

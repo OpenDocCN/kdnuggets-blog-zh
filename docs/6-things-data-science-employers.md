@@ -1,10 +1,10 @@
-# 雇主不希望你知道的6件关于数据科学的事
+# 雇主不希望你知道的 6 件关于数据科学的事
 
-> 原文：[https://www.kdnuggets.com/2020/12/6-things-data-science-employers.html](https://www.kdnuggets.com/2020/12/6-things-data-science-employers.html)
+> 原文：[`www.kdnuggets.com/2020/12/6-things-data-science-employers.html`](https://www.kdnuggets.com/2020/12/6-things-data-science-employers.html)
 
-[评论](#comments)
+评论
 
-![](../Images/fe1484ff8040dfac2070bc8bc5b795a4.png)
+![](img/fe1484ff8040dfac2070bc8bc5b795a4.png)
 
 *照片由 [Kristina Flour](https://unsplash.com/@tinaflour?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/silence?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业发展。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业发展。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
 我想揭示一下作为数据科学家的*阴暗面*。这篇文章并不是为了打击你，但和其他任何工作一样，数据科学作为职业也有它的不足之处。我认为重要的是你要了解这些事情，这样当你在生活中遇到它们时，不会像我一样被击得措手不及！
 
-根据你的个性和兴趣，你可能不会觉得这些事情有多糟，这是一件好事！那么，话虽如此，这里是雇主不希望你知道的6件关于数据科学的事。
+根据你的个性和兴趣，你可能不会觉得这些事情有多糟，这是一件好事！那么，话虽如此，这里是雇主不希望你知道的 6 件关于数据科学的事。
 
 ### 1\. 一个模糊的术语，比如“数据科学”，意味着模糊的职责。
 
@@ -58,7 +58,7 @@
 
 现实世界并非如此。你不仅可能不会有我上面列出的任何问题，而且你可能一开始就没有可靠的数据。
 
-我写了一篇文章，标题为 [我必须处理的10个非常混乱的数据例子](https://towardsdatascience.com/10-examples-of-awful-data-that-i-had-to-work-with-as-a-data-scientist-10894cd35828)，但这里给出几个例子：
+我写了一篇文章，标题为 [我必须处理的 10 个非常混乱的数据例子](https://towardsdatascience.com/10-examples-of-awful-data-that-i-had-to-work-with-as-a-data-scientist-10894cd35828)，但这里给出几个例子：
 
 +   处理不同拼写的类别，例如，美国、USA、US、美利坚合众国。
 
@@ -70,7 +70,7 @@
 
 ### 4\. 很大一部分时间用于理解当前的业务问题。
 
-不论你愿意与否，数据科学家实际上就是一个业务分析师。为什么？因为你需要对你所从事的领域和当前的业务问题有全面的理解。没有这些，你将错过关键的关系、假设和变量，这可能是65%准确模型与95%准确模型之间的差别。
+不论你愿意与否，数据科学家实际上就是一个业务分析师。为什么？因为你需要对你所从事的领域和当前的业务问题有全面的理解。没有这些，你将错过关键的关系、假设和变量，这可能是 65%准确模型与 95%准确模型之间的差别。
 
 例如，如果你是市场部门的数据科学家，你必须完全了解每种营销渠道，包括它的目的、在营销漏斗中的位置、通常吸引的用户类型，以及用于评估该渠道的指标。
 
@@ -92,7 +92,7 @@
 
 ### 6\. 沟通技巧是你最好的朋友。
 
-这个点主要是针对那些认为成为数据科学家就是可以整天待在房间里建模的人。不管雇主怎么说，即便他们说你可以24/7在家工作或作为一个团队的一员工作，你仍然需要与其他利益相关者进行合作和沟通。
+这个点主要是针对那些认为成为数据科学家就是可以整天待在房间里建模的人。不管雇主怎么说，即便他们说你可以 24/7 在家工作或作为一个团队的一员工作，你仍然需要与其他利益相关者进行合作和沟通。
 
 即使你是一个团队中的唯一成员，你也将**不得不**与高层管理人员沟通你正在做的工作以及它所带来的实际业务影响。你还可能需要与其他团队和业务分析师合作，建立我们之前提到的领域知识。
 
@@ -104,20 +104,20 @@
 
 +   [数据科学家如何避免在与管理层沟通时“翻译丢失”综合症](https://www.kdnuggets.com/2020/11/data-scientists-communicating-management.html)
 
-+   [数据科学适合我吗？14个自我检验问题值得考虑](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
++   [数据科学适合我吗？14 个自我检验问题值得考虑](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
 
 +   [数据科学的历史和概述](https://www.kdnuggets.com/2020/11/data-science-history-overview.html)
 
 ### 更多相关主题
 
-+   [7件你不知道的低代码工具的功能](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [7 件你不知道的低代码工具的功能](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
 +   [想用你的数据技能解决全球问题？这里是…](https://www.kdnuggets.com/2022/04/jhu-want-data-skills-solve-global-problems.html)
 
-+   [如果你想成为数据分析师，这3门课程值得考虑](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
++   [如果你想成为数据分析师，这 3 门课程值得考虑](https://www.kdnuggets.com/3-courses-you-should-consider-if-you-want-to-become-a-data-analyst)
 
-+   [9个职业证书可以帮助你获得学位...如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个职业证书可以帮助你获得学位...如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
-+   [你不知道的关于SAS数据科学学院的3件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [你不知道的关于 SAS 数据科学学院的 3 件事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
 
-+   [2022年顶级行业和雇主招聘数据科学家](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
++   [2022 年顶级行业和雇主招聘数据科学家](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)

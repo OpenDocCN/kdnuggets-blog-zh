@@ -1,6 +1,6 @@
 # 数据科学入门（无数学）
 
-> 原文：[https://www.kdnuggets.com/2017/04/data-science-layman-no-math-added.html](https://www.kdnuggets.com/2017/04/data-science-layman-no-math-added.html)
+> 原文：[`www.kdnuggets.com/2017/04/data-science-layman-no-math-added.html`](https://www.kdnuggets.com/2017/04/data-science-layman-no-math-added.html)
 
 **作者：安娜琳·吴（剑桥大学）和肯尼斯·苏（斯坦福大学）**。
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -22,9 +22,9 @@
 
 我们的承诺：无数学内容。
 
-[![Numsense!](../Images/c57b9bffcf3e3f39c2bbd24dbf68116c.png)](http://getbook.at/numsense)
+![Numsense!](http://getbook.at/numsense)
 
-探索超过10种经典算法和方法的关键概念，包括：
+探索超过 10 种经典算法和方法的关键概念，包括：
 
 +   A/B 测试
 
@@ -64,11 +64,11 @@
 
 **别人怎么说？**
 
-> "... 熟悉Annalyn Ng和Kenneth Soo的工作已久，书中所承诺的内容自然也就不让人惊讶。这*确实*是面向外行的数据科学书籍，而书中描述的通常复杂的数学——以高层次呈现——故意没有详细讲解。但不要被误导：这并不意味着内容有任何削减。事实上，书中信息内容扎实，其优势在于它的精简和简洁。"
+> "... 熟悉 Annalyn Ng 和 Kenneth Soo 的工作已久，书中所承诺的内容自然也就不让人惊讶。这*确实*是面向外行的数据科学书籍，而书中描述的通常复杂的数学——以高层次呈现——故意没有详细讲解。但不要被误导：这并不意味着内容有任何削减。事实上，书中信息内容扎实，其优势在于它的精简和简洁。"
 
 马修·梅奥
 
-数据科学家及KDnuggets副编辑
+数据科学家及 KDnuggets 副编辑
 
 > "... *Numsense!* 是对关键数据科学算法的便捷图形描述，适合新数据科学家的入门、与分析师合作的商务人士的概述，或是任何想了解自己数据如何处理的人的刺激阅读。
 
@@ -92,8 +92,8 @@
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [成为伟大的数据科学家需要的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家需要的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)

@@ -1,58 +1,58 @@
 # Synapse CoR: ChatGPT with a Revolutionary Twist
 
-> 原文：[https://www.kdnuggets.com/synapse-cor-chatgpt-with-a-revolutionary-twist](https://www.kdnuggets.com/synapse-cor-chatgpt-with-a-revolutionary-twist)
+> 原文：[`www.kdnuggets.com/synapse-cor-chatgpt-with-a-revolutionary-twist`](https://www.kdnuggets.com/synapse-cor-chatgpt-with-a-revolutionary-twist)
 
-![Synapse CoR: ChatGPT with a Revolutionary Twist](../Images/a597c1059c64ddb6d0fd888cd1ed044d.png)
+![Synapse CoR: ChatGPT with a Revolutionary Twist](img/a597c1059c64ddb6d0fd888cd1ed044d.png)
 
 图片由作者提供
 
-使用大语言模型（LLMs），如ChatGPT，获取理想的提示结构可能很困难。你需要考虑许多不同的因素来创建理想的提示，例如角色、需要遵循的指南和背景类型，以实现你的目标。使用Synapse CoR系统提示，你不再需要这样做了。
+使用大语言模型（LLMs），如 ChatGPT，获取理想的提示结构可能很困难。你需要考虑许多不同的因素来创建理想的提示，例如角色、需要遵循的指南和背景类型，以实现你的目标。使用 Synapse CoR 系统提示，你不再需要这样做了。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-让我们介绍一下[Synapse CoR](https://github.com/ProfSynapse/Synapse_CoR)，这是由[Synaptic Labs](https://www.synapticlabs.ai/)推出的新系统提示。Synaptic Labs旨在通过教育和资源，使新兴技术和应用更广泛地为社区所用。
+让我们介绍一下[Synapse CoR](https://github.com/ProfSynapse/Synapse_CoR)，这是由[Synaptic Labs](https://www.synapticlabs.ai/)推出的新系统提示。Synaptic Labs 旨在通过教育和资源，使新兴技术和应用更广泛地为社区所用。
 
-# Synapse CoR是什么？
+# Synapse CoR 是什么？
 
-Synapse CoR是经过一些修饰的ChatGPT。ChatGPT将扮演‘教授Synapse’的角色，即专家代理的指挥者。这意味着ChatGPT将扮演教授Synapse的角色，并尝试更好地理解你作为用户试图实现的目标。
+Synapse CoR 是经过一些修饰的 ChatGPT。ChatGPT 将扮演‘教授 Synapse’的角色，即专家代理的指挥者。这意味着 ChatGPT 将扮演教授 Synapse 的角色，并尝试更好地理解你作为用户试图实现的目标。
 
 它是如何做到的？
 
-教授Synapse会问你一系列智力问题，以更好地了解你的最终目标。一旦获得所有必要的信息，它将指派专家来解决用户的任务。
+教授 Synapse 会问你一系列智力问题，以更好地了解你的最终目标。一旦获得所有必要的信息，它将指派专家来解决用户的任务。
 
-教授Synapse是提示的指挥者，具有3个具体的角色和职责：
+教授 Synapse 是提示的指挥者，具有 3 个具体的角色和职责：
 
 1.  **偏好和目标** - 通过收集信息和明确用户目标。
 
 1.  **召唤专家代理** - 利用针对特定使用案例量身定制的专家知识，并利用最佳实践进行提示工程。
 
-1.  **与用户互动** - 使用简单的命令，如/start、/save和/new，为用户提供可定制的互动体验。
+1.  **与用户互动** - 使用简单的命令，如/start、/save 和/new，为用户提供可定制的互动体验。
 
 ## 命令
 
 以下是最重要的命令列表：
 
-+   /start: 启动教授Synapse并开始一个新会话。
++   /start: 启动教授 Synapse 并开始一个新会话。
 
 +   /save: 总结进度，推荐下一步，并帮助扩展上下文限制。
 
 +   /new: 重置当前会话并忽略自定义指令。
 
-## 教授Synapse是如何工作的？
+## 教授 Synapse 是如何工作的？
 
-让我们进一步了解Synapse CoR的“大脑”…
+让我们进一步了解 Synapse CoR 的“大脑”…
 
-Synapse CoR结合了两个概念：
+Synapse CoR 结合了两个概念：
 
 1.  **思路链** - 使用逐步推理指南来实现用户的目标。
 
@@ -76,7 +76,7 @@ Professor Synapse 将通过提问来收集上下文和任何相关信息，以�
 
 有趣吧？是的，但我如何开始使用这个系统提示？
 
-根据你是否访问 ChatGPT-4，你的设置中将有一个左侧的部分称为‘[自定义说明](/2023/08/tailor-chatgpt-fit-needs-custom-instructions.html)’。
+根据你是否访问 ChatGPT-4，你的设置中将有一个左侧的部分称为‘自定义说明’。
 
 ChatGPT 会在自定义说明部分向你提出以下问题：
 

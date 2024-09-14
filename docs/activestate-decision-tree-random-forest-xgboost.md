@@ -1,20 +1,20 @@
 # 比较决策树算法：随机森林® vs. XGBoost
 
-> 原文：[https://www.kdnuggets.com/2019/08/activestate-decision-tree-random-forest-xgboost.html](https://www.kdnuggets.com/2019/08/activestate-decision-tree-random-forest-xgboost.html)
+> 原文：[`www.kdnuggets.com/2019/08/activestate-decision-tree-random-forest-xgboost.html`](https://www.kdnuggets.com/2019/08/activestate-decision-tree-random-forest-xgboost.html)
 
 赞助帖子。
 
-![图示](../Images/5a57efae26c893014b646b5c6fb7e08d.png)
+![图示](img/5a57efae26c893014b646b5c6fb7e08d.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 部门
 
 * * *
 
@@ -30,7 +30,7 @@
 
 了解袋装法和提升法的好处——并知道何时使用哪种技术——将使你的机器学习模型具有更小的方差、更低的偏差和更高的稳定性。自己试试吧！
 
-![按钮](../Images/63fdb05153bce2f6d70d3294b4281175.png)
+![按钮](img/63fdb05153bce2f6d70d3294b4281175.png)
 
 ### 了解更多相关话题
 

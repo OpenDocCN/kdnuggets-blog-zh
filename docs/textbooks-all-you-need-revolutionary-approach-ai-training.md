@@ -1,8 +1,8 @@
 # **教科书就是你所需的一切**：一种颠覆性的 AI 培训方法
 
-> 原文：[https://www.kdnuggets.com/2023/07/textbooks-all-you-need-revolutionary-approach-ai-training.html](https://www.kdnuggets.com/2023/07/textbooks-all-you-need-revolutionary-approach-ai-training.html)
+> 原文：[`www.kdnuggets.com/2023/07/textbooks-all-you-need-revolutionary-approach-ai-training.html`](https://www.kdnuggets.com/2023/07/textbooks-all-you-need-revolutionary-approach-ai-training.html)
 
-![教科书就是你所需的一切：一种颠覆性的 AI 培训方法](../Images/0d8f5143e382734bcb1df502380dac67.png)
+![教科书就是你所需的一切：一种颠覆性的 AI 培训方法](img/0d8f5143e382734bcb1df502380dac67.png)
 
 图片由作者使用 Midjourney 创建
 
@@ -58,19 +58,19 @@ Phi-1 模型拥有 13 亿个参数，相较于拥有 1750 亿个参数的 GPT-3 
 
 他们仅使用这本定制教材训练了一个名为 Phi-1 的较小模型，相比于像 GPT-3 这样的庞大模型，它的效果令人震惊。这表明，即使数据集规模较小，只要设计得当、质量高，也能训练出非常有效的 AI。
 
-关键在于花时间策划优秀的训练数据，就像你在教科书中看到的一样，而不仅仅是将模型喂入数TB的随机杂乱数据。这一切都是关于质量，而不是数量。
+关键在于花时间策划优秀的训练数据，就像你在教科书中看到的一样，而不仅仅是将模型喂入数 TB 的随机杂乱数据。这一切都是关于质量，而不是数量。
 
-这可能会改变人们对未来AI训练的看法。与其追求需要巨大数据集的越来越大模型，不如更多地关注创造最佳的训练教材，即使它们更小。这是一个引人入胜的想法，关键在于教材，而不仅仅是模型的扩展。
+这可能会改变人们对未来 AI 训练的看法。与其追求需要巨大数据集的越来越大模型，不如更多地关注创造最佳的训练教材，即使它们更小。这是一个引人入胜的想法，关键在于教材，而不仅仅是模型的扩展。
 
-**[马修·梅奥](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一名数据科学家，也是KDnuggets的总编辑，KDnuggets是重要的数据科学和机器学习在线资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过editor1 at kdnuggets[dot]com联系。
+**[马修·梅奥](https://www.linkedin.com/in/mattmayo13/)** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 是一名数据科学家，也是 KDnuggets 的总编辑，KDnuggets 是重要的数据科学和机器学习在线资源。他的兴趣包括自然语言处理、算法设计与优化、无监督学习、神经网络以及自动化机器学习方法。马修拥有计算机科学硕士学位和数据挖掘研究生文凭。他可以通过 editor1 at kdnuggets[dot]com 联系。
 
 ### 更多相关话题
 
-+   [Synapse CoR：具有革命性转折的ChatGPT](https://www.kdnuggets.com/synapse-cor-chatgpt-with-a-revolutionary-twist)
++   [Synapse CoR：具有革命性转折的 ChatGPT](https://www.kdnuggets.com/synapse-cor-chatgpt-with-a-revolutionary-twist)
 
-+   [今天所有营销分析和数据科学专业人士需要的5项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
++   [今天所有营销分析和数据科学专业人士需要的 5 项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
 
-+   [如果你想掌握生成性AI，忽略所有（但两个）工具](https://www.kdnuggets.com/if-you-want-to-master-generative-ai-ignore-all-but-two-tools)
++   [如果你想掌握生成性 AI，忽略所有（但两个）工具](https://www.kdnuggets.com/if-you-want-to-master-generative-ai-ignore-all-but-two-tools)
 
 +   [我们不需要数据科学家，我们需要数据工程师](https://www.kdnuggets.com/2021/02/dont-need-data-scientists-need-data-engineers.html)
 

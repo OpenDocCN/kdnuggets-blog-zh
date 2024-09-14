@@ -1,8 +1,8 @@
 # 人工智能、分析、机器学习、数据科学、深度学习研究 2019 年的主要发展及 2020 年的关键趋势
 
-> 原文：[https://www.kdnuggets.com/2019/12/predictions-ai-machine-learning-data-science-research.html](https://www.kdnuggets.com/2019/12/predictions-ai-machine-learning-data-science-research.html)
+> 原文：[`www.kdnuggets.com/2019/12/predictions-ai-machine-learning-data-science-research.html`](https://www.kdnuggets.com/2019/12/predictions-ai-machine-learning-data-science-research.html)
 
-[评论](#comments)
+评论
 
 又到年末了，这意味着是时候进行 KDnuggets 年度年终专家分析和预测。今年我们提出了这个问题：
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全领域的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全领域的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-回顾我们专家[一年前的预测](/2018/12/predictions-machine-learning-ai-2019.html)，我们看到了一些可以被视为自然技术进步的混合，以及一些更为雄心勃勃的预测。出现了一些普遍的主题，以及几个值得注意的单独预测。
+回顾我们专家一年前的预测，我们看到了一些可以被视为自然技术进步的混合，以及一些更为雄心勃勃的预测。出现了一些普遍的主题，以及几个值得注意的单独预测。
 
 尤其是，对人工智能的持续担忧被多次提及，这一预测确实似乎已经实现。有关自动化机器学习的进展的讨论普遍存在，但关于它是否有用还是会失败的观点意见不一。我认为这在一定程度上仍未定论，但当对技术的期望得到缓解时，它更容易被视为一种有用的补充，而不是一个即将取代的存在。增加善用人工智能也被特别提到，原因充分，且有大量例子可以证明这一预测的准确性。提出实用机器学习将迎来考验的观点，标志着趣味和游戏的时代即将结束，现在是机器学习需要有所作为的时候了。这一点确实符合实际，越来越多的从业者正在寻找这些机会。最后，提到对反乌托邦人工智能发展（包括监控、恐惧和操控）的担忧，可以通过对过去一年新闻的简单检查，自信地将其归入成功预测的类别。
 
@@ -28,15 +28,15 @@
 
 今年我们的专家名单包括 Imtiaz Adam、Xavier Amatriain、Anima Anandkumar、Andriy Burkov、Georgina Cosma、Pedro Domingos、Ajit Jaokar、Charles Martin、Ines Montani、Dipanjan Sarkar、Elena Sharova、Rosaria Silipo 和 Daniel Tunkelang。我们感谢他们从繁忙的年终日程中抽出时间为我们提供见解。
 
-这是未来一周中3篇类似文章的第一篇。虽然这些文章将分别涉及研究、部署和行业，但这些学科之间存在相当大的重叠，因此我们建议你在发布时查看所有3篇文章。
+这是未来一周中 3 篇类似文章的第一篇。虽然这些文章将分别涉及研究、部署和行业，但这些学科之间存在相当大的重叠，因此我们建议你在发布时查看所有 3 篇文章。
 
-![头像头图](../Images/9f6e43b0d15ebf298133fb8ea558c675.png)
+![头像头图](img/9f6e43b0d15ebf298133fb8ea558c675.png)
 
-不再耽搁，以下是今年专家组对2019年关键趋势和2020年预测的分析。
+不再耽搁，以下是今年专家组对 2019 年关键趋势和 2020 年预测的分析。
 
 **[Imtiaz Adam](https://www.linkedin.com/in/imtiaz-adam-7467528/) ([@DeepLearn007](https://twitter.com/deeplearn007)) 是一位人工智能与战略执行官。**
 
-2019年，各组织对数据科学中的伦理和多样性问题有了更高的意识。
+2019 年，各组织对数据科学中的伦理和多样性问题有了更高的意识。
 
 《彩票票假设》论文展示了用剪枝简化深度神经网络训练的潜力。《神经符号概念学习者》论文展示了将逻辑与深度学习结合起来，提升数据和记忆效率的潜力。
 
@@ -44,37 +44,37 @@ GANs 的研究获得了动力，深度强化学习尤其受到了大量研究关
 
 TensorFlow 2 带来了集成了 Keras 的 eager execution 默认模式。
 
-2020年，数据科学团队和商业团队将更加整合。5G 将成为智能物联网增长的催化剂，边缘的 AI 推理意味着 AI 将越来越多地进入物理世界。深度学习与增强现实的结合将改变客户体验。
+2020 年，数据科学团队和商业团队将更加整合。5G 将成为智能物联网增长的催化剂，边缘的 AI 推理意味着 AI 将越来越多地进入物理世界。深度学习与增强现实的结合将改变客户体验。
 
 **[Xavier Amatriain](https://www.linkedin.com/in/xamatriain/) ([@xamat](https://twitter.com/xamat)) 是 Curai 的联合创始人兼首席技术官。**
 
-我认为，很难争辩这一点：这一年确实是深度学习和自然语言处理的年份。更具体地说，是语言模型的年份。甚至更具体地说，是Transformers和GPT-2的年份。是的，可能很难相信，但自OpenAI首次~~发布~~谈论他们的[GPT-2语言模型](https://openai.com/blog/better-language-models/)已经不到一年。这篇博客文章引发了关于AI安全的大量讨论，因为OpenAI对发布该模型感到不安。从那时起，该模型被公开复制，并[最终发布](https://openai.com/blog/gpt-2-1-5b-release/)。然而，这并不是这一领域唯一的进展。我们看到Google发布了[AlBERT](https://arxiv.org/pdf/1909.11942.pdf)或[XLNET](https://arxiv.org/abs/1906.08237)，并谈论BERT是近年来对Google搜索的最大改进。从[Amazon](https://arxiv.org/abs/1904.09408)和[Microsoft](https://github.com/microsoft/dialogpt)到[Facebook](https://ai.facebook.com/blog/a-new-generative-qa-model-that-learns-to-answer-the-whole-question/)，每个人似乎都真正投身于语言模型革命中，我期待在2020年看到这一领域的令人印象深刻的进展，似乎我们越来越接近通过图灵测试。
+我认为，很难争辩这一点：这一年确实是深度学习和自然语言处理的年份。更具体地说，是语言模型的年份。甚至更具体地说，是 Transformers 和 GPT-2 的年份。是的，可能很难相信，但自 OpenAI 首次~~发布~~谈论他们的[GPT-2 语言模型](https://openai.com/blog/better-language-models/)已经不到一年。这篇博客文章引发了关于 AI 安全的大量讨论，因为 OpenAI 对发布该模型感到不安。从那时起，该模型被公开复制，并[最终发布](https://openai.com/blog/gpt-2-1-5b-release/)。然而，这并不是这一领域唯一的进展。我们看到 Google 发布了[AlBERT](https://arxiv.org/pdf/1909.11942.pdf)或[XLNET](https://arxiv.org/abs/1906.08237)，并谈论 BERT 是近年来对 Google 搜索的最大改进。从[Amazon](https://arxiv.org/abs/1904.09408)和[Microsoft](https://github.com/microsoft/dialogpt)到[Facebook](https://ai.facebook.com/blog/a-new-generative-qa-model-that-learns-to-answer-the-whole-question/)，每个人似乎都真正投身于语言模型革命中，我期待在 2020 年看到这一领域的令人印象深刻的进展，似乎我们越来越接近通过图灵测试。
 
-**[Anima Anandkumar](https://www.linkedin.com/in/anima-anandkumar/) ([@AnimaAnandkumar](https://twitter.com/AnimaAnandkumar)) 是NVIDIA的机器学习研究主任和加州理工学院的布伦教授。**
+**[Anima Anandkumar](https://www.linkedin.com/in/anima-anandkumar/) ([@AnimaAnandkumar](https://twitter.com/AnimaAnandkumar)) 是 NVIDIA 的机器学习研究主任和加州理工学院的布伦教授。**
 
-研究人员旨在更好地理解深度学习及其泛化特性和失败案例。减少对标记数据的依赖是关键焦点，自我训练等方法获得了关注。模拟变得在AI训练中更加相关，并在如自动驾驶和机器人学习等视觉领域变得更为逼真，包括在NVIDIA平台如DriveSIM和Isaac上。语言模型变得越来越庞大，例如NVIDIA的80亿参数Megatron模型在512个GPU上训练，并开始生成连贯的段落。然而，研究人员发现这些模型中存在虚假的相关性和不良的社会偏见。AI监管成为主流，许多知名政治家表示支持政府机构禁止面部识别。AI会议开始执行行为规范，并增加了提高多样性和包容性的努力，从去年NeurIPS更名开始。在即将到来的一年里，我预测将会有新的算法发展，而不仅仅是深度学习的肤浅应用。这将特别影响“科学中的AI”，如物理学、化学、材料科学和生物学等许多领域。
+研究人员旨在更好地理解深度学习及其泛化特性和失败案例。减少对标记数据的依赖是关键焦点，自我训练等方法获得了关注。模拟变得在 AI 训练中更加相关，并在如自动驾驶和机器人学习等视觉领域变得更为逼真，包括在 NVIDIA 平台如 DriveSIM 和 Isaac 上。语言模型变得越来越庞大，例如 NVIDIA 的 80 亿参数 Megatron 模型在 512 个 GPU 上训练，并开始生成连贯的段落。然而，研究人员发现这些模型中存在虚假的相关性和不良的社会偏见。AI 监管成为主流，许多知名政治家表示支持政府机构禁止面部识别。AI 会议开始执行行为规范，并增加了提高多样性和包容性的努力，从去年 NeurIPS 更名开始。在即将到来的一年里，我预测将会有新的算法发展，而不仅仅是深度学习的肤浅应用。这将特别影响“科学中的 AI”，如物理学、化学、材料科学和生物学等许多领域。
 
-**[Andriy Burkov](https://www.linkedin.com/in/andriyburkov/) ([@burkov](https://twitter.com/burkov)) 是Gartner的机器学习团队负责人，且是《百页机器学习书》的作者。**
+**[Andriy Burkov](https://www.linkedin.com/in/andriyburkov/) ([@burkov](https://twitter.com/burkov)) 是 Gartner 的机器学习团队负责人，且是《百页机器学习书》的作者。**
 
-主要的发展无疑是BERT，这种语言建模神经网络模型提高了几乎所有任务的自然语言处理质量。谷歌甚至将其作为相关性的主要信号之一——多年来最重要的更新。
+主要的发展无疑是 BERT，这种语言建模神经网络模型提高了几乎所有任务的自然语言处理质量。谷歌甚至将其作为相关性的主要信号之一——多年来最重要的更新。
 
-在我看来，关键趋势将是PyTorch在行业中的更广泛应用，对更快的神经网络训练方法和在便捷硬件上快速训练神经网络的研究增加。
+在我看来，关键趋势将是 PyTorch 在行业中的更广泛应用，对更快的神经网络训练方法和在便捷硬件上快速训练神经网络的研究增加。
 
 **[乔治娜·科斯马](https://www.linkedin.com/in/georginacosma/) ([@gcosma1](https://twitter.com/gcosma1)) 是拉夫堡大学的高级讲师。**
 
-在2019年，我们欣赏到深度学习模型的令人印象深刻的能力，例如YOLOv3，特别是在实时物体检测等各种复杂计算机视觉任务中。我们还看到生成对抗网络继续在深度学习社区中受到关注，尤其是在图像合成方面，如BigGAN模型在ImageNet生成中的应用，以及StyleGAN在人体图像合成中的应用。今年我们还意识到欺骗深度学习模型的容易程度，一些研究还表明深度神经网络容易受到对抗性示例的攻击。在2019年，我们还见证了偏见的AI决策模型被用于面部识别、招聘和法律应用中。2020年，我预计会看到多任务AI模型的发展，这些模型旨在通用且多功能，同时也期待看到对伦理AI模型的兴趣增加，因为AI正在改变健康、金融服务、汽车及其他许多领域的决策。
+在 2019 年，我们欣赏到深度学习模型的令人印象深刻的能力，例如 YOLOv3，特别是在实时物体检测等各种复杂计算机视觉任务中。我们还看到生成对抗网络继续在深度学习社区中受到关注，尤其是在图像合成方面，如 BigGAN 模型在 ImageNet 生成中的应用，以及 StyleGAN 在人体图像合成中的应用。今年我们还意识到欺骗深度学习模型的容易程度，一些研究还表明深度神经网络容易受到对抗性示例的攻击。在 2019 年，我们还见证了偏见的 AI 决策模型被用于面部识别、招聘和法律应用中。2020 年，我预计会看到多任务 AI 模型的发展，这些模型旨在通用且多功能，同时也期待看到对伦理 AI 模型的兴趣增加，因为 AI 正在改变健康、金融服务、汽车及其他许多领域的决策。
 
 **[佩德罗·多明戈斯](https://www.linkedin.com/in/pedro-domingos-77b183/) ([@pmddomingos](https://twitter.com/pmddomingos)) 是华盛顿大学计算机科学与工程系的教授。**
 
-2019年的主要发展：
+2019 年的主要发展：
 
-+   上下文嵌入的迅速传播。它们虽然不到两岁，但现在已主导了自然语言处理，谷歌已经在其搜索引擎中部署了这些嵌入，据报道改善了10%的搜索结果。从视觉到语言，先在大数据上预训练模型，然后针对特定任务进行调整，已成为标准做法。
++   上下文嵌入的迅速传播。它们虽然不到两岁，但现在已主导了自然语言处理，谷歌已经在其搜索引擎中部署了这些嵌入，据报道改善了 10%的搜索结果。从视觉到语言，先在大数据上预训练模型，然后针对特定任务进行调整，已成为标准做法。
 
 +   双重下降的发现。我们对过度参数化模型如何在完全拟合训练数据的同时进行良好泛化的理论理解显著提高，特别是对于观察到的现象的候选解释——与经典学习理论预测相反——即随着模型容量的增加，泛化误差先下降，再上升，然后再次下降。
 
-+   媒体和公众对AI进展的看法变得更加怀疑，对自动驾驶汽车和虚拟助手的期望降低，华而不实的演示也不再被轻信。
++   媒体和公众对 AI 进展的看法变得更加怀疑，对自动驾驶汽车和虚拟助手的期望降低，华而不实的演示也不再被轻信。
 
-2020年的关键趋势：
+2020 年的关键趋势：
 
 +   深度学习圈试图从低级感知任务如视觉和语音识别“爬升”到高级认知任务如语言理解和常识推理的速度将会加快。
 
@@ -84,23 +84,23 @@ TensorFlow 2 带来了集成了 Keras 的 eager execution 默认模式。
 
 **[Ajit Jaokar](https://www.linkedin.com/in/ajitjaokar/) ([@AjitJaokar](https://twitter.com/AjitJaokar)) 是牛津大学“人工智能：云和边缘实现”课程的课程主任。**
 
-在2019年，我们在牛津大学重新品牌了我们的课程，改为[人工智能：云和边缘实现](https://www.conted.ox.ac.uk/courses/artificial-intelligence-cloud-and-edge-implementations)。这也反映了我个人的观点，即2019年是云计算成熟的一年。这一年，我们所谈论的各种技术（大数据、人工智能、物联网等）在云计算的框架内汇聚在一起。这一趋势将继续——特别是对于企业。公司将进行“数字化转型”——他们将利用云作为统一的范式来转型由人工智能驱动的过程（有点像重新工程化企业2.0）。
+在 2019 年，我们在牛津大学重新品牌了我们的课程，改为[人工智能：云和边缘实现](https://www.conted.ox.ac.uk/courses/artificial-intelligence-cloud-and-edge-implementations)。这也反映了我个人的观点，即 2019 年是云计算成熟的一年。这一年，我们所谈论的各种技术（大数据、人工智能、物联网等）在云计算的框架内汇聚在一起。这一趋势将继续——特别是对于企业。公司将进行“数字化转型”——他们将利用云作为统一的范式来转型由人工智能驱动的过程（有点像重新工程化企业 2.0）。
 
-在2020年，我还看到自然语言处理的成熟（BERT、Megatron）。5G将继续部署。我们将在5G全面部署后看到物联网的更广泛应用（例如：自动驾驶汽车）。最后，在物联网方面，我关注一种叫做MCU（微控制器单元）的技术——特别是机器学习模型在MCU上的部署。
+在 2020 年，我还看到自然语言处理的成熟（BERT、Megatron）。5G 将继续部署。我们将在 5G 全面部署后看到物联网的更广泛应用（例如：自动驾驶汽车）。最后，在物联网方面，我关注一种叫做 MCU（微控制器单元）的技术——特别是机器学习模型在 MCU 上的部署。
 
 我相信人工智能是一个颠覆性的变化，每天我们都能看到令人着迷的人工智能应用实例。艾尔文·托夫勒在《未来冲击》中预测的许多情景今天已经发生——人工智能将如何进一步放大这些变化仍待观察！遗憾的是，人工智能的变化速度将让许多人被抛在后面。
 
-**[Charles Martin](https://www.linkedin.com/in/charlesmartin14/) 是人工智能科学家、顾问及Calculation Consulting的创始人。**
+**[Charles Martin](https://www.linkedin.com/in/charlesmartin14/) 是人工智能科学家、顾问及 Calculation Consulting 的创始人。**
 
-BERT、ELMO、GPT2等等！2019年的人工智能在自然语言处理领域取得了巨大进展。OpenAI发布了他们的大型GPT2模型——即文本的深度伪造。谷歌宣布使用BERT进行搜索——自Panda以来最大的一次变化。即使是我在加州大学伯克利分校的合作者也发布了（量化的）QBERT以适应低足迹硬件。现在每个人都在制作自己的文档嵌入。
+BERT、ELMO、GPT2 等等！2019 年的人工智能在自然语言处理领域取得了巨大进展。OpenAI 发布了他们的大型 GPT2 模型——即文本的深度伪造。谷歌宣布使用 BERT 进行搜索——自 Panda 以来最大的一次变化。即使是我在加州大学伯克利分校的合作者也发布了（量化的）QBERT 以适应低足迹硬件。现在每个人都在制作自己的文档嵌入。
 
-这对2020年意味着什么？根据搜索专家的说法，2020年将是相关性*(嗯，他们都在做什么？)*的年份。预计向量空间搜索将最终获得 traction，采用BERT风格的精细调优嵌入。
+这对 2020 年意味着什么？根据搜索专家的说法，2020 年将是相关性*(嗯，他们都在做什么？)*的年份。预计向量空间搜索将最终获得 traction，采用 BERT 风格的精细调优嵌入。
 
 在 2019 年，PyTorch 超过 Tensorflow 成为 AI 研究的首选。随着 TensorFlow 2.x 的发布（以及对 pytorch 的 TPU 支持），2020 年的 AI 编程将完全围绕急切执行展开。
 
 大公司在 AI 方面取得进展了吗？报告显示成功率为 1/10。不太理想。因此，AutoML 在 2020 年将会受到需求，尽管我个人认为，就像制作出色的搜索结果一样，成功的 AI 需要特定于业务的定制解决方案。
 
-![Wordcloud](../Images/2e68f321253503a8f95d564a77c808f4.png)
+![Wordcloud](img/2e68f321253503a8f95d564a77c808f4.png)
 
 **[伊内斯·蒙塔尼](https://ines.io/)（[@_inesmontani](https://twitter.com/_inesmontani)）是一位从事人工智能和自然语言处理技术的程序开发人员，并且是 Explosion 的联合创始人。**
 
@@ -112,23 +112,23 @@ BERT、ELMO、GPT2等等！2019年的人工智能在自然语言处理领域取�
 
 **[埃琳娜·沙罗娃](https://codefying.com/) 是 ITV 的高级数据科学家。**
 
-到目前为止，2019年最重要的机器学习进展是在玩游戏时使用深度强化学习，通过DeepMind的[DQN](https://deepmind.com/research/open-source/dqn)和[AlphaGo](https://deepmind.com/research/case-studies/alphago-the-story-so-far)实现的；这导致了[围棋冠军李世石的退休](https://www.thetimes.co.uk/article/go-world-champion-lee-sedol-retires-in-the-face-of-ai-grrf6t6wm)。另一个重要进展是在自然语言处理领域，Google开源了BERT（深度双向语言表示），而[微软领导了GLUE基准](https://blogs.msdn.microsoft.com/stevengu/2019/06/20/microsoft-achieves-human-performance-estimate-on-glue-benchmark/)并通过[开发和开源MT-DNN](https://github.com/namisan/mt-dnn)集成体用于发音分辨任务。
+到目前为止，2019 年最重要的机器学习进展是在玩游戏时使用深度强化学习，通过 DeepMind 的[DQN](https://deepmind.com/research/open-source/dqn)和[AlphaGo](https://deepmind.com/research/case-studies/alphago-the-story-so-far)实现的；这导致了[围棋冠军李世石的退休](https://www.thetimes.co.uk/article/go-world-champion-lee-sedol-retires-in-the-face-of-ai-grrf6t6wm)。另一个重要进展是在自然语言处理领域，Google 开源了 BERT（深度双向语言表示），而[微软领导了 GLUE 基准](https://blogs.msdn.microsoft.com/stevengu/2019/06/20/microsoft-achieves-human-performance-estimate-on-glue-benchmark/)并通过[开发和开源 MT-DNN](https://github.com/namisan/mt-dnn)集成体用于发音分辨任务。
 
-重要的是要强调欧洲委员会发布的[《可信AI伦理指南》](https://ec.europa.eu/digital-single-market/en/news/ethics-guidelines-trustworthy-ai)——这是首个设定合法、道德和稳健AI合理指南的官方出版物。
+重要的是要强调欧洲委员会发布的[《可信 AI 伦理指南》](https://ec.europa.eu/digital-single-market/en/news/ethics-guidelines-trustworthy-ai)——这是首个设定合法、道德和稳健 AI 合理指南的官方出版物。
 
-最后，我想和KDnuggets的读者分享的是，[PyData London 2019](https://pydata.org/london2019/)的所有主题演讲者都是女性——这是一个令人欢迎的发展！
+最后，我想和 KDnuggets 的读者分享的是，[PyData London 2019](https://pydata.org/london2019/)的所有主题演讲者都是女性——这是一个令人欢迎的发展！
 
-我预期2020年的主要机器学习发展趋势将继续集中在自然语言处理（NLP）和计算机视觉（computer vision）领域。采用机器学习（ML）和数据科学（DS）的行业已经认识到，他们在定义共享的最佳实践标准方面已经滞后，包括招聘和留住数据科学家、管理涉及DS和ML的项目复杂性，以及确保社区保持开放和合作。因此，我们应该会看到未来会更多关注这些标准。
+我预期 2020 年的主要机器学习发展趋势将继续集中在自然语言处理（NLP）和计算机视觉（computer vision）领域。采用机器学习（ML）和数据科学（DS）的行业已经认识到，他们在定义共享的最佳实践标准方面已经滞后，包括招聘和留住数据科学家、管理涉及 DS 和 ML 的项目复杂性，以及确保社区保持开放和合作。因此，我们应该会看到未来会更多关注这些标准。
 
-**[Rosaria Silipo](https://www.linkedin.com/in/rosaria/)（[@DMR_Rosaria](https://twitter.com/DMR_Rosaria)）是KNIME的首席数据科学家。**
+**[Rosaria Silipo](https://www.linkedin.com/in/rosaria/)（[@DMR_Rosaria](https://twitter.com/DMR_Rosaria)）是 KNIME 的首席数据科学家。**
 
-2019年最令人期待的成就是主动学习、强化学习和其他半监督学习程序的采用。半监督学习可能为处理目前充斥我们数据库的未标记数据带来希望。
+2019 年最令人期待的成就是主动学习、强化学习和其他半监督学习程序的采用。半监督学习可能为处理目前充斥我们数据库的未标记数据带来希望。
 
-另一个伟大的进展是将autoML概念中的“auto”纠正为“guided”。对于更复杂的数据科学问题，专家干预似乎是不可或缺的。
+另一个伟大的进展是将 autoML 概念中的“auto”纠正为“guided”。对于更复杂的数据科学问题，专家干预似乎是不可或缺的。
 
-在2020年，数据科学家将需要一个快速的解决方案来进行模型部署、持续模型监控和灵活的模型管理。真正的商业价值将来自数据科学生命周期的这三个最终部分。
+在 2020 年，数据科学家将需要一个快速的解决方案来进行模型部署、持续模型监控和灵活的模型管理。真正的商业价值将来自数据科学生命周期的这三个最终部分。
 
-我还相信，深度学习黑箱的更广泛应用将引发机器学习解释性（MLI）的问题。我们将在2020年底看到MLI算法是否能够应对解释深度学习模型内部运作的挑战。
+我还相信，深度学习黑箱的更广泛应用将引发机器学习解释性（MLI）的问题。我们将在 2020 年底看到 MLI 算法是否能够应对解释深度学习模型内部运作的挑战。
 
 **[Daniel Tunkelang](https://www.linkedin.com/in/dtunkelang/) ([@dtunkelang](https://twitter.com/dtunkelang)) 是一名独立顾问，专注于搜索、发现和机器学习/人工智能。**
 
@@ -144,11 +144,11 @@ OpenAI 宣布了 [GPT-2](https://openai.com/blog/better-language-models/https://
 
 **相关**：
 
-+   [2018 年机器学习与人工智能的主要发展及 2019 年的关键趋势](/2018/12/predictions-machine-learning-ai-2019.html)
++   2018 年机器学习与人工智能的主要发展及 2019 年的关键趋势
 
-+   [2018 年人工智能、数据科学、分析的主要发展及 2019 年的关键趋势](/2018/12/predictions-data-science-analytics-2019.html)
++   2018 年人工智能、数据科学、分析的主要发展及 2019 年的关键趋势
 
-+   [行业预测：2018 年人工智能、机器学习、分析与数据科学的主要发展及 2019 年的关键趋势](/2018/12/predictions-industry-2019.html)
++   行业预测：2018 年人工智能、机器学习、分析与数据科学的主要发展及 2019 年的关键趋势
 
 ### 更多相关话题
 

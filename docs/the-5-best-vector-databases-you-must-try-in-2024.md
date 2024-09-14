@@ -1,8 +1,8 @@
-# 2024年必试的5大最佳向量数据库
+# 2024 年必试的 5 大最佳向量数据库
 
-> 原文：[https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
+> 原文：[`www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024`](https://www.kdnuggets.com/the-5-best-vector-databases-you-must-try-in-2024)
 
-![2024年必试的5大最佳向量数据库](../Images/23d8039e2f3bc15dac7e87ceff65be33.png)
+![2024 年必试的 5 大最佳向量数据库](img/23d8039e2f3bc15dac7e87ceff65be33.png)
 
 使用 DALL-E 3 生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -24,21 +24,21 @@
 
 向量数据库在 AI 应用领域变得越来越重要，因为它们擅长处理高维数据和促进复杂的相似性搜索。
 
-在这篇博客中，我们将探讨你在2024年必须尝试的五大向量数据库。这些数据库是根据其可扩展性、多功能性和在处理向量数据方面的表现来挑选的。
+在这篇博客中，我们将探讨你在 2024 年必须尝试的五大向量数据库。这些数据库是根据其可扩展性、多功能性和在处理向量数据方面的表现来挑选的。
 
-![2024年必试的5大最佳向量数据库](../Images/34c9a680a8c4668f8bbb3cf71e8e0714.png)
+![2024 年必试的 5 大最佳向量数据库](img/34c9a680a8c4668f8bbb3cf71e8e0714.png)
 
 作者提供的图像
 
 # 1\. Qdrant
 
-[Qdrant](/2023/02/qdrant-open-source-vector-search-engine-managed-cloud-platform.html) 是一个开源向量相似性搜索引擎和向量数据库，提供了一个生产就绪的服务，带有便捷的 API。你可以存储、搜索和管理向量嵌入。Qdrant 支持扩展过滤，非常适合涉及神经网络或基于语义的匹配、分面搜索等各种应用。由于它是用可靠且快速的编程语言 Rust 编写的，Qdrant 可以高效处理高用户负载。
+Qdrant 是一个开源向量相似性搜索引擎和向量数据库，提供了一个生产就绪的服务，带有便捷的 API。你可以存储、搜索和管理向量嵌入。Qdrant 支持扩展过滤，非常适合涉及神经网络或基于语义的匹配、分面搜索等各种应用。由于它是用可靠且快速的编程语言 Rust 编写的，Qdrant 可以高效处理高用户负载。
 
 通过使用 Qdrant，你可以构建包含嵌入编码器的完整应用程序，用于匹配、搜索、推荐等任务。它也以 Qdrant Cloud 的形式提供，这是一种完全托管的版本，包括一个免费层，提供了一个方便的方式让用户在项目中利用其向量搜索能力。
 
 # 2\. Pinecone
 
-[Pinecone](/a-comprehensive-guide-to-pinecone-vector-databases) 是一个管理型向量数据库，专门设计用于解决与高维数据相关的挑战。凭借先进的索引和搜索功能，Pinecone 使数据工程师和数据科学家能够构建和部署能够高效处理和分析高维数据的大规模机器学习应用。
+Pinecone 是一个管理型向量数据库，专门设计用于解决与高维数据相关的挑战。凭借先进的索引和搜索功能，Pinecone 使数据工程师和数据科学家能够构建和部署能够高效处理和分析高维数据的大规模机器学习应用。
 
 Pinecone 的主要特点包括一个完全托管的服务，具有高度的可扩展性，支持实时数据摄取和低延迟搜索。Pinecone 还提供与 LangChain 的集成，以支持自然语言处理应用。凭借对高维数据的专业关注，Pinecone 提供了一个优化的平台，用于部署有影响力的机器学习项目。
 
@@ -66,7 +66,7 @@ Faiss 主要用 C++ 编写，但与 Python/NumPy 完全集成。关键算法可�
 
 向量数据库正在迅速成为现代 AI 应用的重要组成部分。正如我们在这篇博客文章中探讨的那样，在 2024 年选择向量数据库时，有几种引人注目的选项可以考虑。Qdrant 提供了多功能的开源能力，Pinecone 提供了为高维数据设计的托管服务，Weaviate 专注于可扩展性和灵活性，Milvus 在各种环境中提供一致的体验，而 Faiss 通过优化算法实现高效的相似性搜索。
 
-每个数据库根据你的使用案例和基础设施都有其自身的优势和好处。随着 AI 模型和语义搜索的不断进步，拥有合适的向量数据库来存储、索引和查询向量嵌入将是关键。你可以通过阅读 [什么是向量数据库及其对 LLMs 的重要性？](/2023/06/vector-databases-important-llms.html) 来了解更多关于向量数据库的信息。
+每个数据库根据你的使用案例和基础设施都有其自身的优势和好处。随着 AI 模型和语义搜索的不断进步，拥有合适的向量数据库来存储、索引和查询向量嵌入将是关键。你可以通过阅读 什么是向量数据库及其对 LLMs 的重要性？ 来了解更多关于向量数据库的信息。
 
 [](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为面临心理健康问题的学生打造一款 AI 产品。
 

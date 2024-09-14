@@ -1,20 +1,20 @@
 # LinkedIn 的 Pro-ML 架构总结了大规模构建机器学习的最佳实践
 
-> 原文：[https://www.kdnuggets.com/2020/09/linkedin-pro-ml-architecture-best-practices-building-machine-learning-scale.html](https://www.kdnuggets.com/2020/09/linkedin-pro-ml-architecture-best-practices-building-machine-learning-scale.html)
+> 原文：[`www.kdnuggets.com/2020/09/linkedin-pro-ml-architecture-best-practices-building-machine-learning-scale.html`](https://www.kdnuggets.com/2020/09/linkedin-pro-ml-architecture-best-practices-building-machine-learning-scale.html)
 
-[评论](#comments)![图](../Images/b5fbfb3d399014dacee1c3795e5915da.png)
+评论![图](img/b5fbfb3d399014dacee1c3795e5915da.png)
 
-来源: [https://solutionsreview.com/business-intelligence/machine-learning-linkedin-groups/](https://solutionsreview.com/business-intelligence/machine-learning-linkedin-groups/)
+来源: [`solutionsreview.com/business-intelligence/machine-learning-linkedin-groups/`](https://solutionsreview.com/business-intelligence/machine-learning-linkedin-groups/)
 
 > 我最近开始了一份专注于 AI 教育的新通讯。TheSequence 是一份不含虚假信息（即没有炒作，没有新闻等）的 AI 专注通讯，阅读时间为 5 分钟。目标是让您及时了解机器学习项目、研究论文和概念。请通过以下方式订阅试试看：
 
-![图片](../Images/f2aed90f956dea213be7c9bbf9cd7072.png)
+![图片](img/f2aed90f956dea213be7c9bbf9cd7072.png)
 
 在规模化构建机器学习解决方案仍然是大多数组织的一个活跃实验领域。虽然许多公司开始了初步的机器学习试点，但很少有公司拥有强大的战略来扩展机器学习工作流程。如果考虑到目前市场上，机器学习研究和开发框架的进展速度远远快于扩展机器学习程序所需的基础设施运行时，这个问题就尤为具有挑战性。由于关于如何在规模化下构建机器学习解决方案的指导非常有限，互联网巨头如 Uber、LinkedIn、Google、Netflix 或 Microsoft 的经验就显得尤为宝贵，因为它们的可扩展性要求远远复杂于大多数公司所面临的挑战。在 LinkedIn，提供大规模机器学习解决方案的障碍变得如此关键，以至于公司决定创建一个名为 Productive Machine Learning (Pro-ML) 的独立倡议来解决这一挑战。
 
 一个机器学习解决方案通常经历从模型训练到部署的一系列阶段。虽然在具有少量模型和小团队的机器学习解决方案中，结构化这些生命周期相对简单，但在跨越数十个数据科学团队和数千个机器学习模型时，规模化却是一场噩梦。在像 LinkedIn 这样的组织中，机器学习面临着许多著名的扩展挑战：
 
-![用于发布的图片](../Images/3f7284833fa24fc8b38ced9d0db6fdc4.png)
+![用于发布的图片](img/3f7284833fa24fc8b38ced9d0db6fdc4.png)
 
 ### 介绍 Pro-ML
 
@@ -32,9 +32,9 @@ LinkedIn 的 Pro-ML 倡议的目标是将机器学习工程师的工作效率提
 
 +   特征市场
 
-![图](../Images/9c61abdf9756b091f7c2b88f590c4a2a.png)
+![图](img/9c61abdf9756b091f7c2b88f590c4a2a.png)
 
-来源：[https://engineering.linkedin.com/blog/2019/01/scaling-machine-learning-productivity-at-linkedin](https://engineering.linkedin.com/blog/2019/01/scaling-machine-learning-productivity-at-linkedin)
+来源：[`engineering.linkedin.com/blog/2019/01/scaling-machine-learning-productivity-at-linkedin`](https://engineering.linkedin.com/blog/2019/01/scaling-machine-learning-productivity-at-linkedin)
 
 ### 探索与创作
 
@@ -78,21 +78,21 @@ Pro-ML 当前正在为不同的 LinkedIn 产品提供数百个机器学习模型
 
 **相关：**
 
-+   [深度学习梦想：在单一模型中实现准确性和可解释性](/2020/09/deep-learning-dream-accuracy-interpretability-single-model.html)
++   深度学习梦想：在单一模型中实现准确性和可解释性
 
-+   [阿根廷作家与匈牙利数学家如何教会我们机器学习的过拟合](/2020/09/what-argentine-writer-hungarian-mathematician-machine-learning-overfitting.html)
++   阿根廷作家与匈牙利数学家如何教会我们机器学习的过拟合
 
-+   [神经网络能否展现想象力？DeepMind 认为它们可以](/2020/09/deepmind-neural-networks-show-imagination.html)
++   神经网络能否展现想象力？DeepMind 认为它们可以
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -102,10 +102,10 @@ Pro-ML 当前正在为不同的 LinkedIn 产品提供数百个机器学习模型
 
 +   [您的文本分类任务的最佳架构：基准测试…](https://www.kdnuggets.com/2023/04/best-architecture-text-classification-task-benchmarking-options.html)
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何学习机器…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何学习机器…](https://www.kdnuggets.com/2022/n07.html)
 
-+   [KDnuggets 新闻，5月18日：5 个免费的机器…托管平台](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费的机器…托管平台](https://www.kdnuggets.com/2022/n20.html)
 
-+   [机器学习不像您的大脑 第 3 部分：基本架构](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)
++   [机器学习不像您的大脑 第三部分：基本架构](https://www.kdnuggets.com/2022/06/machine-learning-like-brain-part-3-fundamental-architecture.html)
 
 +   [LinkedIn 如何利用机器学习来排名您的信息流](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)

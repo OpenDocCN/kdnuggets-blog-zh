@@ -1,8 +1,8 @@
 # 在 Google Colab 上运行 Redis
 
-> 原文：[https://www.kdnuggets.com/2022/01/running-redis-google-colab.html](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)
+> 原文：[`www.kdnuggets.com/2022/01/running-redis-google-colab.html`](https://www.kdnuggets.com/2022/01/running-redis-google-colab.html)
 
-[Google Colab](/2020/06/google-colab-deep-learning.html) 是一个流行的基于浏览器的环境，用于在托管的 Jupyter 笔记本上执行 Python 代码和训练机器学习模型，包括免费访问 GPU！这是数据科学家和机器学习（ML）工程师学习和快速开发 Python 中的 ML 模型的绝佳平台。[Redis](https://hub.docker.com/_/redis) 是一个内存中的开源数据库，越来越多地用于机器学习——从缓存、消息传递和快速数据摄取，到语义搜索和 [在线特征存储](/2021/02/feature-store-foundation-machine-learning.html)。实际上，NoSQL 数据库——尤其是 Redis——被 Zynga 应用数据科学总监 Ben Weber 列为 2020 年他作为数据科学家学到的 [8 种新工具之一](/2021/01/8-new-tools-learned-data-scientist-2020.html)。
+Google Colab 是一个流行的基于浏览器的环境，用于在托管的 Jupyter 笔记本上执行 Python 代码和训练机器学习模型，包括免费访问 GPU！这是数据科学家和机器学习（ML）工程师学习和快速开发 Python 中的 ML 模型的绝佳平台。[Redis](https://hub.docker.com/_/redis) 是一个内存中的开源数据库，越来越多地用于机器学习——从缓存、消息传递和快速数据摄取，到语义搜索和 在线特征存储。实际上，NoSQL 数据库——尤其是 Redis——被 Zynga 应用数据科学总监 Ben Weber 列为 2020 年他作为数据科学家学到的 8 种新工具之一。
 
 ## 在 Colab 上使用 Redis 进行机器学习
 
@@ -10,17 +10,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 由于 Redis 在数据科学和机器学习中的使用越来越广泛，能够直接从 Google Colab 笔记本中运行 Redis 非常方便！然而，在 Google Colab 上运行 Redis 与在本地机器或使用 Docker 上的设置有所不同。下面我将向你展示如何通过两个简单的步骤，在 Colab 笔记本上直接从浏览器运行 Redis。
 
-![在 Google Colab 上运行 Redis](../Images/fe9fac2a42335c438f03197d92df2ef4.png)
+![在 Google Colab 上运行 Redis](img/fe9fac2a42335c438f03197d92df2ef4.png)
 
 图片由作者使用 Colab 标志创建（图片来源：[Medium](https://medium.com/@nanofaroque/google-colab-is-a-goldmine-for-machine-learning-or-deep-learning-enthusiast-894a80b4b349)）和 Redis 标志（[合理使用](https://redis.io/topics/trademark)）
 

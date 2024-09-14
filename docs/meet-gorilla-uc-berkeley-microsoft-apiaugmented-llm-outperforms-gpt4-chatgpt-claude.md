@@ -1,8 +1,8 @@
 # 了解 Gorilla：UC 伯克利和微软的 API 增强 LLM 超越 GPT-4、Chat-GPT 和 Claude
 
-> 原文：[https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
+> 原文：[`www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html`](https://www.kdnuggets.com/2023/06/meet-gorilla-uc-berkeley-microsoft-apiaugmented-llm-outperforms-gpt4-chatgpt-claude.html)
 
-![了解 Gorilla：UC 伯克利和微软的 API 增强 LLM 超越 GPT-4、Chat-GPT 和 Claude](../Images/e0e6aaffd58f0206cd7a019eacfc72f4.png)
+![了解 Gorilla：UC 伯克利和微软的 API 增强 LLM 超越 GPT-4、Chat-GPT 和 Claude](img/e0e6aaffd58f0206cd7a019eacfc72f4.png)
 
 图片来自 Adobe Firefly
 
@@ -10,11 +10,11 @@
 > 
 > ## 我们的三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 > 
 > * * *
 > 
@@ -24,7 +24,7 @@
 
 最近，UC Berkeley 和 Microsoft 的研究人员揭示了[Gorilla](https://shishirpatil.github.io/gorilla/)，这是一个专门为 API 调用设计的 LLaMA-7B 模型。Gorilla 依靠自我指导微调和检索技术，使 LLM 能够从一个大规模且不断发展的工具集合中准确选择，这些工具通过其 API 和文档表达出来。作者通过从主要模型库如 TorchHub、TensorHub 和 HuggingFace 中抓取机器学习 API，构建了一个名为 APIBench 的大型 API 语料库。使用自我指导，他们生成了指令和相应 API 的配对。微调过程涉及将数据转换为用户代理聊天风格的对话格式，并对基础 LLaMA-7B 模型进行标准指令微调。
 
-![认识 Gorilla：UC Berkeley 和 Microsoft 的 API 增强型 LLM 超越 GPT-4、Chat-GPT 和 Claude。](../Images/24a42ceed0c88615bcca7700eed61f53.png)
+![认识 Gorilla：UC Berkeley 和 Microsoft 的 API 增强型 LLM 超越 GPT-4、Chat-GPT 和 Claude。](img/24a42ceed0c88615bcca7700eed61f53.png)
 
 图片来源：UC Berkeley
 
@@ -42,7 +42,7 @@ Gorilla 引入了检索感知训练的概念，其中指令调优的数据集包
 
 在推理过程中，用户以自然语言提供提示。猩猩可以在两种模式下操作：零样本和检索。在零样本模式下，提示直接输入到猩猩 LLM 模型中，该模型返回推荐的 API 调用以完成任务或目标。在检索模式下，检索器（BM25 或 GPT-Index）从 API 数据库中检索最新的 API 文档。这些文档与用户提示一起连接，并附有指示 API 文档参考的消息。然后将连接的输入传递给猩猩，猩猩输出要调用的 API。在此系统中，除了连接步骤外，不会进行提示调整。
 
-![认识猩猩：UC 伯克利和微软的 API 增强型 LLM 超越 GPT-4、Chat-GPT 和 Claude。](../Images/d8de042dc35753c3f03d77c8e3b4cc49.png)
+![认识猩猩：UC 伯克利和微软的 API 增强型 LLM 超越 GPT-4、Chat-GPT 和 Claude。](img/d8de042dc35753c3f03d77c8e3b4cc49.png)
 
 图片来源：UC 伯克利
 
@@ -52,7 +52,7 @@ Gorilla 引入了检索感知训练的概念，其中指令调优的数据集包
 
 AST 子树匹配在识别数据集中被调用的具体 API 中扮演了至关重要的角色。由于 API 调用可能具有多个参数，因此每个参数都需要进行匹配。此外，考虑到 Python 允许默认参数，需要定义在数据库中每个 API 应匹配的参数。
 
-![认识猩猩：UC 伯克利和微软的 API 增强型 LLM 超越 GPT-4、Chat-GPT 和 Claude。](../Images/3290cfd852867ae81d5742ba3f6e27f6.png)
+![认识猩猩：UC 伯克利和微软的 API 增强型 LLM 超越 GPT-4、Chat-GPT 和 Claude。](img/3290cfd852867ae81d5742ba3f6e27f6.png)
 
 图片来源：UC 伯克利
 

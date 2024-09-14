@@ -1,20 +1,20 @@
 # 训练 sklearn 快速 100 倍
 
-> 原文：[https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html](https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html)
+> 原文：[`www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html`](https://www.kdnuggets.com/2019/09/train-sklearn-100x-faster.html)
 
-[评论](#comments)
+评论
 
 **作者：[Evan Harris](https://www.linkedin.com/in/evan-harris-387375b2/)，Ibotta, Inc. 机器学习与数据科学经理**
 
-在Ibotta，我们训练了大量的机器学习模型。这些模型驱动了我们的推荐系统、搜索引擎、定价优化引擎、数据质量等。它们为数百万用户提供预测，用户在使用我们的移动应用时会与这些模型互动。
+在 Ibotta，我们训练了大量的机器学习模型。这些模型驱动了我们的推荐系统、搜索引擎、定价优化引擎、数据质量等。它们为数百万用户提供预测，用户在使用我们的移动应用时会与这些模型互动。
 
-虽然我们用[Spark](https://spark.apache.org/)处理了很多数据，但我们首选的机器学习框架是[scikit-learn](https://scikit-learn.org/stable/)。随着计算成本的降低以及机器学习解决方案的市场时间变得越来越关键，我们探索了加速模型训练的选项。解决方案之一是将Spark和scikit-learn的元素结合成我们自己的混合解决方案。
+虽然我们用[Spark](https://spark.apache.org/)处理了很多数据，但我们首选的机器学习框架是[scikit-learn](https://scikit-learn.org/stable/)。随着计算成本的降低以及机器学习解决方案的市场时间变得越来越关键，我们探索了加速模型训练的选项。解决方案之一是将 Spark 和 scikit-learn 的元素结合成我们自己的混合解决方案。
 
 ### 介绍 sk-dist
 
-我们很高兴地宣布我们的开源项目[sk-dist](https://github.com/Ibotta/sk-dist)的上线。该项目的目标是提供一个通用框架，以便在Spark中分发scikit-learn元估计器。元估计器的例子包括决策树集成（[随机森林](https://en.wikipedia.org/wiki/Random_forest) 和 [额外随机树](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)）、[超参数调优器](https://scikit-learn.org/stable/modules/grid_search.html)（[网格搜索](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV) 和 [随机搜索](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV)）以及多类技术（[一对其余](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier) 和 [一对一](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier)）。
+我们很高兴地宣布我们的开源项目[sk-dist](https://github.com/Ibotta/sk-dist)的上线。该项目的目标是提供一个通用框架，以便在 Spark 中分发 scikit-learn 元估计器。元估计器的例子包括决策树集成（[随机森林](https://en.wikipedia.org/wiki/Random_forest) 和 [额外随机树](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.ExtraTreesClassifier.html)）、[超参数调优器](https://scikit-learn.org/stable/modules/grid_search.html)（[网格搜索](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html#sklearn.model_selection.GridSearchCV) 和 [随机搜索](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.RandomizedSearchCV.html#sklearn.model_selection.RandomizedSearchCV)）以及多类技术（[一对其余](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsRestClassifier.html#sklearn.multiclass.OneVsRestClassifier) 和 [一对一](https://scikit-learn.org/stable/modules/generated/sklearn.multiclass.OneVsOneClassifier.html#sklearn.multiclass.OneVsOneClassifier)）。
 
-![](../Images/4df608e27f8783fb241b1762eed6f489.png)
+![](img/4df608e27f8783fb241b1762eed6f489.png)
 
 我们的主要动机是填补传统机器学习模型分发选项中的空白。在神经网络和深度学习的领域之外，我们发现，训练模型的大部分计算时间并不是用来在单一数据集上训练单一模型。大部分时间用于在多个数据集的多个迭代上训练多个模型，使用像网格搜索或集成这样的元估计器。
 
@@ -62,7 +62,7 @@ Best score: 0.981450024203508
 
 这个例子说明了一个常见的场景，其中将数据适配到内存并训练单个分类器是微不足道的，但超参数调整所需的拟合次数很快就会增加。以下是使用 sk-dist 运行如上例的网格搜索问题的幕后分析：
 
-![图](../Images/282b2a6db0d1e7459055893272e39ba7.png)
+![图](img/282b2a6db0d1e7459055893272e39ba7.png)
 
 使用 sk-dist 的网格搜索
 
@@ -74,7 +74,7 @@ Best score: 0.981450024203508
 
 另一种现有解决方案是 [Spark ML](https://spark.apache.org/docs/latest/ml-guide.html)。这是 Spark 的原生机器学习库，支持许多与 scikit-learn 相同的分类和回归算法。它还具有像树集成和网格搜索这样的元估计器，并支持多类问题。虽然这听起来可能是一个足以分布式处理 scikit-learn 风格机器学习负载的解决方案，但它的分布式训练方式并未解决我们关心的并行性问题。
 
-![图](../Images/3fcf7a970a8832f2998bd8ca037f6870.png)
+![图](img/3fcf7a970a8832f2998bd8ca037f6870.png)
 
 在不同维度上的分布式
 
@@ -122,21 +122,21 @@ Best score: 0.981450024203508
 
 **相关:**
 
-+   [理解 Python 中的决策树分类](/2019/08/understanding-decision-trees-classification-python.html)
++   理解 Python 中的决策树分类
 
-+   [高级 Keras — 准确恢复训练过程](/2019/03/advanced-keras-accurately-resuming-training-process.html)
++   高级 Keras — 准确恢复训练过程
 
-+   [分布式人工智能：多智能体系统、基于代理的建模和群体智能简介](/2019/04/distributed-artificial-intelligence-multi-agent-systems-agent-based-modeling-swarm-intelligence.html)
++   分布式人工智能：多智能体系统、基于代理的建模和群体智能简介
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 服务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 服务
 
 * * *
 

@@ -1,8 +1,8 @@
-# 数据科学职业：7个期望与现实
+# 数据科学职业：7 个期望与现实
 
-> 原文：[https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
+> 原文：[`www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html`](https://www.kdnuggets.com/2022/06/data-science-career-7-expectations-reality.html)
 
-![数据科学职业：7个期望与现实](../Images/9797f73b424becb6f3ff2c199418a5ef.png)
+![数据科学职业：7 个期望与现实](img/9797f73b424becb6f3ff2c199418a5ef.png)
 
 在即将开始[数据科学职业路径](https://www.stratascratch.com/blog/a-complete-guide-to-data-scientist-career-path/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)的人们的[期望](https://www.stratascratch.com/blog/what-does-a-data-scientist-do/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)与[数据科学家实际做的事情](https://www.stratascratch.com/blog/what-does-a-data-scientist-do/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets)之间存在巨大差距。有些期望得到了满足，但许多新数据科学家发现他们的工作与他们预期的完全不同。
 
@@ -10,17 +10,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
 这部分是因为数据科学是一个快速发展的领域。今天的流行词汇可能在明天就变成过时技术。另一个原因是因为它是一个广泛的领域——数据科学家发现他们必须在工作中扮演许多角色。此外，面试阶段通常存在一些误导：雇主对员工的需求非常迫切，因此会过分美化职位描述。而且，数据科学领域如此广泛，它包括数据清理、整理、机器学习、基础统计和数据可视化。
 
-![数据科学职业：7个期望与现实](../Images/5014ab121f950338fc414f2ff03174f5.png)
+![数据科学职业：7 个期望与现实](img/5014ab121f950338fc414f2ff03174f5.png)
 
 来源：[什么是大数据 WordPress 博客](https://whatsthebigdata.files.wordpress.com/2015/01/data-scientist-what-i-do.jpg)
 
@@ -48,7 +48,7 @@
 
 ## 期望 #4：你可以在线学习所有你需要的知识。
 
-![数据科学职业：7个期望与现实](../Images/d9680136e502f3eb409c506871ff03c5.png)
+![数据科学职业：7 个期望与现实](img/d9680136e502f3eb409c506871ff03c5.png)
 
 有一种感觉是，训练营或 Coursera 课程将教会你成为 [数据科学家](https://www.stratascratch.com/blog/how-to-become-a-data-scientist-from-scratch/?utm_source=blog&utm_medium=click&utm_campaign=kdnuggets) 所需的一切。现实情况，如同几乎所有其他工作一样，是你需要在工作中进行大量学习。有一些沟通技巧和领导本能是你从 Coursera 课程中无法获得的。
 
@@ -64,21 +64,21 @@
 
 ## 期望 #6：你将被重视、理解和支持。
 
-正如许多数据科学家所知，工作的现实是没有指导、基础设施不足，而且对你实际做的事情了解甚少。“数据科学家可能是为了编写智能机器学习算法来推动洞察，但因为他们的第一份工作是整理数据基础设施和/或创建分析报告，所以做不到这一点，” [布鲁克斯-巴特利特](https://towardsdatascience.com/why-so-many-data-scientists-are-leaving-their-jobs-a1f0329d7ea4)写道。特别是如果你在创业公司工作，你通常需要做大量的预数据科学工作来完善你的工具、架构和技术。而且IT团队并不总是合作。
+正如许多数据科学家所知，工作的现实是没有指导、基础设施不足，而且对你实际做的事情了解甚少。“数据科学家可能是为了编写智能机器学习算法来推动洞察，但因为他们的第一份工作是整理数据基础设施和/或创建分析报告，所以做不到这一点，” [布鲁克斯-巴特利特](https://towardsdatascience.com/why-so-many-data-scientists-are-leaving-their-jobs-a1f0329d7ea4)写道。特别是如果你在创业公司工作，你通常需要做大量的预数据科学工作来完善你的工具、架构和技术。而且 IT 团队并不总是合作。
 
-此外，同事们会认为你能处理任何与“数据”相关的请求，无论当时流行的数据术语是什么。六七年前，数据科学家们会被要求用Hadoop存储和处理数据。C-suite级别的高管可能会要求你处理“深度学习”相关的工作。同时，你也会被要求发送一个带有简单VLOOKUP公式的Excel表格。
+此外，同事们会认为你能处理任何与“数据”相关的请求，无论当时流行的数据术语是什么。六七年前，数据科学家们会被要求用 Hadoop 存储和处理数据。C-suite 级别的高管可能会要求你处理“深度学习”相关的工作。同时，你也会被要求发送一个带有简单 VLOOKUP 公式的 Excel 表格。
 
-“最终，你不再像你想象的那样构建复杂的算法和预测模型。你现在花费所有时间来提升SQL和数据准备技能，从系统中提取数据并转换为不同格式，向利益相关者展示这些数据，以便他们可以利用这些数据做出商业决策，”[Natassha Selvaraj](https://2022/03/many-data-scientists-quitting-jobs.html)在讨论为什么这么多数据科学家离职时写道。
+“最终，你不再像你想象的那样构建复杂的算法和预测模型。你现在花费所有时间来提升 SQL 和数据准备技能，从系统中提取数据并转换为不同格式，向利益相关者展示这些数据，以便他们可以利用这些数据做出商业决策，”[Natassha Selvaraj](https://2022/03/many-data-scientists-quitting-jobs.html)在讨论为什么这么多数据科学家离职时写道。
 
 虽然数据科学家确实很抢手，但对这个角色的困惑如此之多，以至于你不总能获得完成工作的支持或基础设施。
 
 ## 期望 #7：你会热爱你的工作。
 
-正如Selvaraj所指出的，许多数据科学家正在离职，但许多人仍然享受他们的生活。Glassdoor [列出](https://www.glassdoor.com/List/Best-Jobs-in-America-LST_KQ0,20.htm)它为美国第3大最佳工作，工作满意度相对较高（5分中4.1分）。一项KDNuggets调查[发现](https://www.surveymonkey.com/results/SM-D9RWWV989/instant/)大多数数据科学家对他们的工作仍然感到满意。
+正如 Selvaraj 所指出的，许多数据科学家正在离职，但许多人仍然享受他们的生活。Glassdoor [列出](https://www.glassdoor.com/List/Best-Jobs-in-America-LST_KQ0,20.htm)它为美国第 3 大最佳工作，工作满意度相对较高（5 分中 4.1 分）。一项 KDNuggets 调查[发现](https://www.surveymonkey.com/results/SM-D9RWWV989/instant/)大多数数据科学家对他们的工作仍然感到满意。
 
 像任何工作一样，做数据科学家可能会很乏味。它可能伴随有意外的任务。它可能具有挑战性。但它也可能非常有趣。作为数据科学家，你将被要求突破你的极限，并有机会对你的公司产生真正的影响（即使你也需要做一些琐碎的工作）。
 
-一旦你度过了适应新角色的成长 pains，你将有权创建一个你喜欢的工作。“我处于一个可以只做数据科学的职位，”[BullCityPicker](https://www.reddit.com/r/datascience/comments/nsda9k/do_you_like_being_a_data_scientist/)在Reddit上写道，“极少的无聊会议，大量的‘别打扰我’时间，还有我选择有趣项目的自由。我为此得到很高的薪水。我有很多自主权，能够不断学习新东西，感到非常满意。”
+一旦你度过了适应新角色的成长 pains，你将有权创建一个你喜欢的工作。“我处于一个可以只做数据科学的职位，”[BullCityPicker](https://www.reddit.com/r/datascience/comments/nsda9k/do_you_like_being_a_data_scientist/)在 Reddit 上写道，“极少的无聊会议，大量的‘别打扰我’时间，还有我选择有趣项目的自由。我为此得到很高的薪水。我有很多自主权，能够不断学习新东西，感到非常满意。”
 
 ## 成为数据科学家的现实是什么？
 
@@ -88,7 +88,7 @@
 
 +   可能会影响最终结果——但如果你希望别人听你说话，你需要与他人友好相处。
 
-+   将从事前沿技术——同时做大量枯燥的SQL查询。
++   将从事前沿技术——同时做大量枯燥的 SQL 查询。
 
 +   仅通过在线学习就能做好准备——但你必须通过被扔进深水区来学习某些技能。
 
@@ -98,7 +98,7 @@
 
 +   会喜欢你的工作——如果它适合你的话。
 
-换句话说，数据科学家就像其他工作一样。这份工作与其他工作不同的是，数据科学也受到了被称为“21世纪最性感的工作”营销的影响。这导致你和你的雇主之间产生了很多误解和期望不匹配的问题。
+换句话说，数据科学家就像其他工作一样。这份工作与其他工作不同的是，数据科学也受到了被称为“21 世纪最性感的工作”营销的影响。这导致你和你的雇主之间产生了很多误解和期望不匹配的问题。
 
 如果你知道期望是什么，并且仍然感兴趣，那么这将是一个非常有回报的职业路径。
 

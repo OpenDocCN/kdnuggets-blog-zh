@@ -1,22 +1,22 @@
 # 数据科学流程初学者指南
 
-> 原文：[https://www.kdnuggets.com/2018/05/beginners-guide-data-science-pipeline.html](https://www.kdnuggets.com/2018/05/beginners-guide-data-science-pipeline.html)
+> 原文：[`www.kdnuggets.com/2018/05/beginners-guide-data-science-pipeline.html`](https://www.kdnuggets.com/2018/05/beginners-guide-data-science-pipeline.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **[Randy Lao](https://www.linkedin.com/in/randylaosat/)，机器学习助教**
 
-![](../Images/f6cbff076ee8ad88b7407500f0478a4e.png)
+![](img/f6cbff076ee8ad88b7407500f0478a4e.png)
 
 > * * *
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 > 
 > * * *
 > 
@@ -26,7 +26,7 @@
 
 一切都始于数据在走过一排排时，发现了一个奇怪但有趣的管道。管道一端是入口，另一端是出口。管道上还标有五个不同的字母：“**O.S.E.M.N.**”。出于好奇，数据决定进入管道。长话短说…… **数据进去了，见解出来了。**
 
-![](../Images/b743169b9abef9d870226c565053404c.png)
+![](img/b743169b9abef9d870226c565053404c.png)
 
 **提醒：** 本文将简要介绍典型数据科学流程的高级概述。从框定业务问题到创建可操作的见解。*别担心，这将是一次轻松的阅读！*
 
@@ -34,7 +34,7 @@
 
 **你很棒。我很棒。数据科学是** **OSEMN**。你可能会问，为什么数据科学是“棒”的？好吧，作为一个有抱负的数据科学家，你有机会锻炼你作为**巫师**和**侦探**的能力。所谓巫师，是指拥有自动预测的能力！而侦探则是指发现数据中未知模式和趋势的能力！
 
-![](../Images/959917627257ac9d0411847c0327f6a7.png)
+![](img/959917627257ac9d0411847c0327f6a7.png)
 
 了解数据科学流程的典型工作流程是商业理解和解决问题的重要步骤。**如果你对数据科学流程感到困惑，那就别再担心了。本文正是为你准备的！** 我找到一个非常简单的缩写，来自**希拉里·梅森和克里斯·威金斯**，你可以在整个数据科学流程中使用。那个缩写就是**O.S.E.M.N.**
 
@@ -68,7 +68,7 @@
 
 > “给我钱！”
 
-![](../Images/993125fd8c7634baac6a989e5ef5d398.png)
+![](img/993125fd8c7634baac6a989e5ef5d398.png)
 
 了解这个基本概念会让你走得更远，并在成为“数据科学家”之路上取得更大成功（这是我认为的…对不起我不是！）不过，这仍然是你必须做的重要一步！无论你的模型预测得多么准确，无论你获得了多少数据，无论你的流程有多么**OSEMN**…**你的解决方案或可操作的见解仅仅取决于你设定的问题。**
 
@@ -78,7 +78,7 @@
 
 作为数据科学家，你无法在没有数据的情况下进行任何操作。通常来说，在获取数据时需要考虑一些因素。你必须**识别**所有可用的数据集（这些数据集可以来自互联网或外部/内部数据库）。你还必须将数据提取到**可用格式**（.csv、json、xml 等）。
 
-![](../Images/2a9b74497800689bc37e32dea810e9f9.png)
+![](img/2a9b74497800689bc37e32dea810e9f9.png)
 
 **所需技能**：
 
@@ -92,9 +92,9 @@
 
 ### 数据的**清理/清洗**
 
-清理第5列！**这个阶段应该需要最多的时间和精力。** 因为你的机器学习模型的结果和输出只与输入的数据质量相关。基本上，垃圾进垃圾出。
+清理第 5 列！**这个阶段应该需要最多的时间和精力。** 因为你的机器学习模型的结果和输出只与输入的数据质量相关。基本上，垃圾进垃圾出。
 
-![](../Images/fe6a01654b31662a28baa5128325ee8b.png)
+![](img/fe6a01654b31662a28baa5128325ee8b.png)
 
 **目标：**
 
@@ -118,7 +118,7 @@
 
 > “停泊在港湾的船是安全的——但那不是船只建造的目的。”——**约翰·A·谢德**
 
-![](../Images/d004e6a60e5604723ad02ae28ddbf060.png)
+![](img/d004e6a60e5604723ad02ae28ddbf060.png)
 
 **目标：**
 
@@ -146,11 +146,11 @@
 
 现在进入有趣的部分。模型在统计学上是一般规则。把机器学习模型看作是工具箱中的工具。你将有机会使用许多算法来实现不同的业务目标。你使用的特征越好，你的预测能力就会越强。在清理数据并找出最重要的特征后，将模型作为预测工具使用，只会增强你的业务**决策能力**。
 
-> 预测分析正逐渐成为变革者。它不仅仅是回顾分析“发生了什么？”，而是帮助高管回答“接下来会发生什么？”以及“我们应该怎么做？”（《福布斯杂志》，2010年4月1日）
+> 预测分析正逐渐成为变革者。它不仅仅是回顾分析“发生了什么？”，而是帮助高管回答“接下来会发生什么？”以及“我们应该怎么做？”（《福布斯杂志》，2010 年 4 月 1 日）
 
-![](../Images/c8e5006aa45ca72fc129155e8f3b9bf9.png)
+![](img/c8e5006aa45ca72fc129155e8f3b9bf9.png)
 
-**预测能力示例**：一个很好的例子可以在沃尔玛的供应链中看到。沃尔玛能够预测在某个店铺位置在飓风季节期间会售罄所有的**草莓口味的Pop-tarts**。通过数据挖掘，他们的历史数据表明，在飓风事件发生前，最受欢迎的商品是**Pop-tarts**。尽管听起来很疯狂，这是真实的故事，并强调了不要低估预测分析的力量。
+**预测能力示例**：一个很好的例子可以在沃尔玛的供应链中看到。沃尔玛能够预测在某个店铺位置在飓风季节期间会售罄所有的**草莓口味的 Pop-tarts**。通过数据挖掘，他们的历史数据表明，在飓风事件发生前，最受欢迎的商品是**Pop-tarts**。尽管听起来很疯狂，这是真实的故事，并强调了不要低估预测分析的力量。
 
 **目标：**
 
@@ -180,7 +180,7 @@
 
 **最佳实践：**我强烈建议的一个好的实践是反复排练你的数据故事。**如果你是家长，那么有好消息给你。**与其在孩子睡前读那些典型的**苏斯博士**的书，不如尝试用你的数据分析结果让他们入睡！**因为如果一个孩子能理解你的解释，那么任何人，尤其是你的老板，也都能理解！**
 
-![](../Images/17b6aad3e4d073a1c2adc781c6b89a1a.png)
+![](img/17b6aad3e4d073a1c2adc781c6b89a1a.png)
 
 > “如果你不能向一个六岁孩子解释它，你自己也不理解它。” — 阿尔伯特·爱因斯坦
 
@@ -236,7 +236,7 @@
 
 在 LinkedIn 上与我联系：
 
-[https://www.linkedin.com/in/randylaosat](https://www.linkedin.com/in/randylaosat)
+[`www.linkedin.com/in/randylaosat`](https://www.linkedin.com/in/randylaosat)
 
 **简介：[Randy Lao](https://www.linkedin.com/in/randylaosat/)** 是一名机器学习教学助理。如果机会不敲门，就自己造一扇门！
 
@@ -244,11 +244,11 @@
 
 **相关内容：**
 
-+   [使用 Scikit-learn 管道管理机器学习工作流 第 1 部分：温和的介绍](/2017/12/managing-machine-learning-workflows-scikit-learn-pipelines-part-1.html)
++   使用 Scikit-learn 管道管理机器学习工作流 第一部分：温和的介绍
 
-+   [命令行中的数据科学：探索数据](/2018/02/data-science-command-line-book-exploring-data.html)
++   命令行中的数据科学：探索数据
 
-+   [一小时内开始机器学习！](/2017/11/getting-started-machine-learning-one-hour.html)
++   一小时内开始机器学习！
 
 ### 更多相关内容
 

@@ -1,10 +1,10 @@
 # 3 个你应该知道的高级 Python 特性
 
-> 原文：[https://www.kdnuggets.com/2020/07/3-advanced-python-features.html](https://www.kdnuggets.com/2020/07/3-advanced-python-features.html)
+> 原文：[`www.kdnuggets.com/2020/07/3-advanced-python-features.html`](https://www.kdnuggets.com/2020/07/3-advanced-python-features.html)
 
-[评论](#comments)
+评论
 
-![](../Images/3558bedbb897e8956c59a41112d451d0.png)
+![](img/3558bedbb897e8956c59a41112d451d0.png)
 
 *照片由 [David Clode](https://unsplash.com/@davidclode?utm_source=medium&utm_medium=referral) 通过 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 提供。*
 
@@ -194,7 +194,7 @@ df = pd.DataFrame([
 
 数据框是
 
-![](../Images/a116a91303482d66adce66321b2f3da7.png)
+![](img/a116a91303482d66adce66321b2f3da7.png)
 
 现在，如果我们注意到，我们发现这里有一个特定的模式，即在名字后有一个逗号，而标题后有一个句号，我们可以使用 *list slicing* 从逗号到句号提取。
 
@@ -207,7 +207,7 @@ df['Title'] = df[0].apply(lambda a: a[a.find(',')+2: a.find('.')])
 
 在这里，我们使用 pandas 的 *.apply* 函数对 df[0] 应用，它是包含所有名字的列。在其中，我们传递一个 Lambda 表达式，该表达式接收每个名字并返回该名字的切片版本。这个切片版本就是该名字的标题。我们数据框的输出现在是
 
-![](../Images/ce7ed4504840075602bc1fc09d34eb27.png)
+![](img/ce7ed4504840075602bc1fc09d34eb27.png)
 
 在这里，我们可以看到我们是如何利用这个很清晰的技巧从名字中提取标题的。
 
@@ -282,17 +282,17 @@ list/dict/tuple(map(myFunction, myIterable))
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，4月13日：数据科学家应了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
++   [KDnuggets 新闻，4 月 13 日：数据科学家应了解的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
 +   [你必须了解的 10 个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 

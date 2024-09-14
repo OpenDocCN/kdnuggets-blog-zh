@@ -1,8 +1,8 @@
 # 10 个 Python 技能，训练营中不会教你
 
-> 原文：[https://www.kdnuggets.com/2020/12/10-python-skills-dont-teach-bootcamp.html](https://www.kdnuggets.com/2020/12/10-python-skills-dont-teach-bootcamp.html)
+> 原文：[`www.kdnuggets.com/2020/12/10-python-skills-dont-teach-bootcamp.html`](https://www.kdnuggets.com/2020/12/10-python-skills-dont-teach-bootcamp.html)
 
-[评论](#comments)![图像](../Images/3d7f5b23b52139faf90e6068dd2fd7cb.png)
+评论![图像](img/3d7f5b23b52139faf90e6068dd2fd7cb.png)
 
 图片由*[Sandy Torchon*](https://www.pexels.com/@sandy-torchon-2229511?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 在*[Pexels*](https://www.pexels.com/photo/people-riding-the-roller-coaster-3973555/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)上拍摄
 
@@ -10,7 +10,7 @@
 
 编程训练营的经历就像是去游乐园（虽然那里的一些陌生人可能会成为你的好朋友）。当过山车启动时，它要求你全神贯注。在一阵阵的紧张间隙中，你将有机会喘口气——交流故事、推荐和想法。
 
-通过这10个 Python 技能，重新体验学习新事物的兴奋感，这些技能在训练营中不会教你。
+通过这 10 个 Python 技能，重新体验学习新事物的兴奋感，这些技能在训练营中不会教你。
 
 ### #10 — 设置 DataFrame 显示选项
 
@@ -46,7 +46,7 @@ df = pd.concat(pd.read_excel('Ticket_Sales_Total.xlsx', sheet_name=**None**), ig
 
 另外，如果你想读取表单并保留一些来自表单名称的信息，可以使用下面的函数。
 
-在第15行，pandas 创建了一个新列（‘sheet’），其值为表单名称的最后一个单词。如果 Ticket_Sales_Total.xlsx 中的表单名称为 *Ticket Sales 2017*、*Ticket Sales 2018* 和 *Ticket Sales 2019*，那么 read_excel_sheets() 函数将为每一行附加来自表单名称的相关年份。
+在第 15 行，pandas 创建了一个新列（‘sheet’），其值为表单名称的最后一个单词。如果 Ticket_Sales_Total.xlsx 中的表单名称为 *Ticket Sales 2017*、*Ticket Sales 2018* 和 *Ticket Sales 2019*，那么 read_excel_sheets() 函数将为每一行附加来自表单名称的相关年份。
 
 *感谢*[*Colin Copland*](https://www.caktusgroup.com/blog/2019/08/13/import-multiple-excel-sheets-pandas/)*的这个小提示！*
 
@@ -66,7 +66,7 @@ df.sample(n)
 
 使用 pandas 将 2011 年的 i2b2 数据集重新格式化为 CoNLL 格式，以用于自然语言处理（NLP）。
 
-### 第6步 — 利用预测力评分代替相关性
+### 第 6 步 — 利用预测力评分代替相关性
 
 [预测力评分](https://github.com/8080labs/ppscore) 是由 [弗洛里安·维茨霍雷克](https://medium.com/u/6ed760f28120?source=post_page-----419e5e4c4d66--------------------------------) 和 [8080 Labs](https://8080labs.com/) 团队开发的，目的是改进相关性度量。
 
@@ -82,7 +82,7 @@ df.sample(n)
 
 关于数据战略中最有价值的培训的实用指南。
 
-### # 第5步 — 创建一个包
+### # 第 5 步 — 创建一个包
 
 模块有助于将可重用的代码，如 Python 函数、变量和类进行模块化。以这种方式进行组织可以使代码更易于理解和使用。
 
@@ -92,27 +92,27 @@ df.sample(n)
 
 第一步 — 创建一个名为 MyThemePark 的新文件夹。
 
-第2步——在MyThemepark内部创建一个名为mythemepark的子文件夹。
+第 2 步——在 MyThemepark 内部创建一个名为 mythemepark 的子文件夹。
 
-第3步——使用像[atom](https://atom.io/)这样的Python IDE，创建模块greet_visitors.py（用于提供欢迎游客进入公园的代码）、functions.py（提供操作各种游乐设施和游戏的代码）和classes.py（提供可以实例化新对象（如娱乐设施、商店、促销等）的模板）。
+第 3 步——使用像[atom](https://atom.io/)这样的 Python IDE，创建模块 greet_visitors.py（用于提供欢迎游客进入公园的代码）、functions.py（提供操作各种游乐设施和游戏的代码）和 classes.py（提供可以实例化新对象（如娱乐设施、商店、促销等）的模板）。
 
 备注：
 
-+   确保你使用这些[PEP8包和模块命名约定](https://www.python.org/dev/peps/pep-0008/#package-and-module-names)。
++   确保你使用这些[PEP8 包和模块命名约定](https://www.python.org/dev/peps/pep-0008/#package-and-module-names)。
 
-+   包曾经需要有一个__init__.py文件，但随着[命名空间包](https://www.python.org/dev/peps/pep-0420/#rationale)的引入，现在不再需要这样做。
++   包曾经需要有一个 __init__.py 文件，但随着[命名空间包](https://www.python.org/dev/peps/pep-0420/#rationale)的引入，现在不再需要这样做。
 
 ### #4— 检查包的大小
 
-在pip安装了运行主题公园所需的所有依赖项后，你的SSD可能会有些混乱。检查已安装包的大小将帮助你了解哪些包占用最多空间。然后，你可以决定哪些包“带来快乐”，并适当进行[KonMari](https://konmari.com/)整理。
+在 pip 安装了运行主题公园所需的所有依赖项后，你的 SSD 可能会有些混乱。检查已安装包的大小将帮助你了解哪些包占用最多空间。然后，你可以决定哪些包“带来快乐”，并适当进行[KonMari](https://konmari.com/)整理。
 
-要找到Linux机器上已安装包的路径，请输入：
+要找到 Linux 机器上已安装包的路径，请输入：
 
 ```py
 pip3 show "some_package" | grep "Location:"
 ```
 
-这将返回path/to/all/packages。类似于：/Users/yourname/opt/anaconda3/lib/python3.7/site-packages
+这将返回 path/to/all/packages。类似于：/Users/yourname/opt/anaconda3/lib/python3.7/site-packages
 
 将该文件路径插入到以下命令中：
 
@@ -126,15 +126,15 @@ du  -h  path/to/all/packages
 
 [**10 个被低估的 Python 技能**](https://towardsdatascience.com/10-underrated-python-skills-dfdff5741fdf)
 
-使用这些技巧提升你的数据科学技能，以改善Python编码以进行更好的EDA、目标分析、特征…
+使用这些技巧提升你的数据科学技能，以改善 Python 编码以进行更好的 EDA、目标分析、特征…
 
 ### #3 — 检查内存使用
 
-如同优化工作空间一样，检查[代码组件的内存使用](https://stackoverflow.com/questions/40993626/list-memory-usage-in-ipython-and-jupyter)也可能很有用。你可以使用Python的[sys.getsizeof](https://docs.python.org/3/library/sys.html#sys.getsizeof)方法，通过实现以下代码来做到这一点：
+如同优化工作空间一样，检查[代码组件的内存使用](https://stackoverflow.com/questions/40993626/list-memory-usage-in-ipython-and-jupyter)也可能很有用。你可以使用 Python 的[sys.getsizeof](https://docs.python.org/3/library/sys.html#sys.getsizeof)方法，通过实现以下代码来做到这一点：
 
 ### #2— 提升你的命令行工具
 
-[Click](https://click.palletsprojects.com/en/7.x/)是一个Python命令行工具，使你能够为bash shell创建直观的程序和接口。Click支持选项对话框、用户提示、确认请求、环境变量值等。
+[Click](https://click.palletsprojects.com/en/7.x/)是一个 Python 命令行工具，使你能够为 bash shell 创建直观的程序和接口。Click 支持选项对话框、用户提示、确认请求、环境变量值等。
 
 这是一个示例脚本，用于向游乐设施操作员请求密码：
 
@@ -146,11 +146,11 @@ Password:
 Repeat for confirmation:
 ```
 
-### #1 — 检查所有内容是否符合PEP8规范
+### #1 — 检查所有内容是否符合 PEP8 规范
 
-[nblint包](https://github.com/alexandercbooth/nblint)允许你在Jupyter Notebook中运行pycodestyle引擎。这将检查你的代码（即代码规范检查）使用pycodestyle引擎。
+[nblint 包](https://github.com/alexandercbooth/nblint)允许你在 Jupyter Notebook 中运行 pycodestyle 引擎。这将检查你的代码（即代码规范检查）使用 pycodestyle 引擎。
 
-Linting 突出显示你 Python 代码中的任何语法或风格问题，使其更不容易出错，并且对你的同事更具可读性。Linting 工具最早由1978年的沮丧调试者引入，这个做法确实得名于从干衣机中取出的衣物上去除小块杂布的行为。
+Linting 突出显示你 Python 代码中的任何语法或风格问题，使其更不容易出错，并且对你的同事更具可读性。Linting 工具最早由 1978 年的沮丧调试者引入，这个做法确实得名于从干衣机中取出的衣物上去除小块杂布的行为。
 
 ### 附加：清理 conda 缓存
 
@@ -220,21 +220,21 @@ Python 是增长最快、最受喜爱的编程语言。通过这些数据科学�
 
 **相关：**
 
-+   [10 个适合初学者的 Python 技能](/2020/12/10-python-skills-beginners.html)
++   10 个适合初学者的 Python 技能
 
-+   [10 个被低估的 Python 技能](/2020/10/10-underrated-python-skills.html)
++   10 个被低估的 Python 技能
 
-+   [你从未听说过的最佳数据科学认证](/2020/11/best-data-science-certification-never-heard.html)
++   你从未听说过的最佳数据科学认证
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

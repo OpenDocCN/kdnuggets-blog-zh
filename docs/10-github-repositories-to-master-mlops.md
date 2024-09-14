@@ -1,8 +1,8 @@
 # 十个 GitHub 仓库，助你掌握 MLOps
 
-> 原文：[https://www.kdnuggets.com/10-github-repositories-to-master-mlops](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
+> 原文：[`www.kdnuggets.com/10-github-repositories-to-master-mlops`](https://www.kdnuggets.com/10-github-repositories-to-master-mlops)
 
-![十个 GitHub 仓库，助你掌握 MLOps](../Images/75eefa573aa298eeafd2df2d57ca1f5b.png)
+![十个 GitHub 仓库，助你掌握 MLOps](img/75eefa573aa298eeafd2df2d57ca1f5b.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 服务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 服务
 
 * * *
 
@@ -72,7 +72,7 @@
 
 # 9\. MLOps ZoomCamp
 
-**GitHub 链接：** [DataTalksClub/mlops-zoomcamp](/the-only-free-course-you-need-to-become-a-mlops-engineer)
+**GitHub 链接：** DataTalksClub/mlops-zoomcamp
 
 这是我最喜欢的通过构建项目来学习新概念的课程之一。DataTalks.Club 的 MLOps 课程教授了将机器学习服务投入生产的实际方面，从训练和实验到模型部署和监控。课程旨在帮助数据科学家、ML 工程师、软件工程师和数据工程师学习如何实现机器学习工作流程。
 

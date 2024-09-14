@@ -1,8 +1,8 @@
 # 更多关于大语言模型的免费课程
 
-> 原文：[https://www.kdnuggets.com/2023/06/free-courses-large-language-models.html](https://www.kdnuggets.com/2023/06/free-courses-large-language-models.html)
+> 原文：[`www.kdnuggets.com/2023/06/free-courses-large-language-models.html`](https://www.kdnuggets.com/2023/06/free-courses-large-language-models.html)
 
-![更多关于大语言模型的免费课程](../Images/ab4dea39f88bf7f899b48134140634f2.png)
+![更多关于大语言模型的免费课程](img/ab4dea39f88bf7f899b48134140634f2.png)
 
 图片由作者提供
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
-在[上一篇文章](/2023/03/top-free-courses-large-language-models.html)中，我们列举了帮助你学习大语言模型的免费课程和资源。我们又策划了一份新的免费课程列表，帮助你提升技能。
+在上一篇文章中，我们列举了帮助你学习大语言模型的免费课程和资源。我们又策划了一份新的免费课程列表，帮助你提升技能。
 
 让我们开始吧！
 
@@ -32,7 +32,7 @@
 
 在这个过程中，你将有机会构建一个自定义聊天机器人，并学习使用 OpenAI API 处理常见用例，包括总结、推理、翻译、拼写和语法检查。
 
-还可以查看 Josep Ferrer 的[这篇详细的提示工程课程评测](/2023/06/art-prompt-engineering-decoding-chatgpt.html)。
+还可以查看 Josep Ferrer 的这篇详细的提示工程课程评测。
 
 # LangChain 用于 LLM 应用开发
 
@@ -114,7 +114,7 @@ Google Cloud 最近发布了专门的 [生成 AI 学习路径](https://www.cloud
 
 +   语言用户界面的 UX
 
-这里有一篇 [文章](/2023/06/free-full-stack-llm-bootcamp.html) 详细介绍了这个全栈 LLM 训练营的内容。
+这里有一篇 文章 详细介绍了这个全栈 LLM 训练营的内容。
 
 # 其他有用的资源
 
@@ -122,7 +122,7 @@ Google Cloud 最近发布了专门的 [生成 AI 学习路径](https://www.cloud
 
 +   [GPT 状态](https://youtu.be/bZQun8Y4L2A) 演讲：Andrej Karpathy 在微软 Build 2023 上的这次演讲提供了关于 GPT 助手训练流程的全面概述，包括标记化、预训练、微调和从人类反馈中强化学习。
 
-+   [实践深度学习教程，第 2 部分](https://course.fast.ai/Lessons/part2.html) 由 fast.ai 提供：关于 [注意力机制和变换器模型](https://course.fast.ai/Lessons/lesson24.html) 的课程可能会有所帮助。
++   [实践深度学习教程，第二部分](https://course.fast.ai/Lessons/part2.html) 由 fast.ai 提供：关于 [注意力机制和变换器模型](https://course.fast.ai/Lessons/lesson24.html) 的课程可能会有所帮助。
 
 +   [CS25: Transformers United V2](https://youtube.com/playlist?list=PLoROMvodv4rNiJRchCzutFw5ItR_Z27CM) 由斯坦福大学提供：一系列讲座涵盖了变换器的基础知识，以及大型语言模型的最新进展和应用——超越了常见的 NLP 任务。
 

@@ -1,8 +1,8 @@
 # 成为数据科学家的挑战
 
-> 原文：[https://www.kdnuggets.com/2022/02/data-scientist-challenges.html](https://www.kdnuggets.com/2022/02/data-scientist-challenges.html)
+> 原文：[`www.kdnuggets.com/2022/02/data-scientist-challenges.html`](https://www.kdnuggets.com/2022/02/data-scientist-challenges.html)
 
-![数据科学家：挑战](../Images/f3b71c9a255873c0bfaf11cc2b8e5c22.png)
+![数据科学家：挑战](img/f3b71c9a255873c0bfaf11cc2b8e5c22.png)
 
 [Christopher Gower](https://unsplash.com/@cgower) 通过 Unsplash
 
@@ -12,31 +12,31 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-[希捷](https://blog.seagate.com/business/enormous-growth-in-data-is-coming-how-to-prepare-for-it-and-prosper-from-it/) 预计到2025年，生成的数据量将达到163泽字节；是2017年数据量的十倍。因此，你可以想象数据科学家的需求会飙升。2012年，LinkedIn发布数据科学家的增长率达到650%。这一职业在最佳工作排名中名列前茅，并且薪资最高。
+[希捷](https://blog.seagate.com/business/enormous-growth-in-data-is-coming-how-to-prepare-for-it-and-prosper-from-it/) 预计到 2025 年，生成的数据量将达到 163 泽字节；是 2017 年数据量的十倍。因此，你可以想象数据科学家的需求会飙升。2012 年，LinkedIn 发布数据科学家的增长率达到 650%。这一职业在最佳工作排名中名列前茅，并且薪资最高。
 
-每个行业都能从数据科学中受益，因此没有理由让组织错过这一机会。[哈佛商业评论](https://www.hbs.edu/faculty/Pages/item.aspx?num=43110)将数据科学标记为21世纪“最性感”的职业。
+每个行业都能从数据科学中受益，因此没有理由让组织错过这一机会。[哈佛商业评论](https://www.hbs.edu/faculty/Pages/item.aspx?num=43110)将数据科学标记为 21 世纪“最性感”的职业。
 
-尽管这是21世纪“最性感”的职业，但每个职业都有其挑战。你可能会想，一个需求如此高的工作，挑战和问题应该会少一些，因为这些岗位在组织中至关重要。然而，按照[金融时报](https://www.ft.com/content/49e81ebe-cbc3-11e7-8536-d321d0d897a3)的说法，许多公司似乎未能创造出能够应对数据专家激增的职位。许多数据专家正在努力晋升或实现职业愿望。根据Stack Overflow的调查，[13.2%](https://www.ft.com/content/49e81ebe-cbc3-11e7-8536-d321d0d897a3)的数据科学家在寻找新的工作，因为他们对目前的角色不满意。
+尽管这是 21 世纪“最性感”的职业，但每个职业都有其挑战。你可能会想，一个需求如此高的工作，挑战和问题应该会少一些，因为这些岗位在组织中至关重要。然而，按照[金融时报](https://www.ft.com/content/49e81ebe-cbc3-11e7-8536-d321d0d897a3)的说法，许多公司似乎未能创造出能够应对数据专家激增的职位。许多数据专家正在努力晋升或实现职业愿望。根据 Stack Overflow 的调查，[13.2%](https://www.ft.com/content/49e81ebe-cbc3-11e7-8536-d321d0d897a3)的数据科学家在寻找新的工作，因为他们对目前的角色不满意。
 
 那么，为什么会这样？数据科学家面临的挑战是什么？
 
 ## 1\. 数据准备
 
-数据很少是完美或干净的，这导致数据科学家花费近80%的时间来清洗和准备数据，参考[Forbes](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/?sh=1f2053786f63)。这篇文章的标题是《最耗时、最不愉快的数据科学任务》，因此你可以想象为什么13.2%的数据科学家在寻找新工作。如果你大部分时间都花在提高数据质量，使其准确一致，然后再进行分析；这可能会变得非常疲惫、单调和耗时。
+数据很少是完美或干净的，这导致数据科学家花费近 80%的时间来清洗和准备数据，参考[Forbes](https://www.forbes.com/sites/gilpress/2016/03/23/data-preparation-most-time-consuming-least-enjoyable-data-science-task-survey-says/?sh=1f2053786f63)。这篇文章的标题是《最耗时、最不愉快的数据科学任务》，因此你可以想象为什么 13.2%的数据科学家在寻找新工作。如果你大部分时间都花在提高数据质量，使其准确一致，然后再进行分析；这可能会变得非常疲惫、单调和耗时。
 
-减少准备数据所花费的时间以及数据科学家缺乏动力的一个方法是采用新兴的AI驱动的数据科学技术，如增强分析。增强分析自动化手动数据清洗和准备任务，使数据科学家能够更高效地工作，并将时间花在他们更愿意做和喜欢做的分析等其他任务上。
+减少准备数据所花费的时间以及数据科学家缺乏动力的一个方法是采用新兴的 AI 驱动的数据科学技术，如增强分析。增强分析自动化手动数据清洗和准备任务，使数据科学家能够更高效地工作，并将时间花在他们更愿意做和喜欢做的分析等其他任务上。
 
 ## 2\. 数据安全
 
-![数据科学家：挑战](../Images/84aeee44eeed8a337918d3a1ff241161.png)
+![数据科学家：挑战](img/84aeee44eeed8a337918d3a1ff241161.png)
 
 [FLY:D](https://unsplash.com/@flyd2069) via Unsplash
 
@@ -76,9 +76,9 @@
 
 ### 更多相关主题
 
-+   [我如何在2个月内获得4个数据科学职位并将收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
++   [我如何在 2 个月内获得 4 个数据科学职位并将收入翻倍…](https://www.kdnuggets.com/2021/01/data-science-offers-doubled-income-2-months.html)
 
-+   [5个数据管理挑战及解决方案](https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html)
++   [5 个数据管理挑战及解决方案](https://www.kdnuggets.com/2023/04/5-data-management-challenges-solutions.html)
 
 +   [克服实际场景中的数据不平衡挑战](https://www.kdnuggets.com/2023/07/overcoming-imbalanced-data-challenges-realworld-scenarios.html)
 
@@ -86,4 +86,4 @@
 
 +   [企业中的机器学习：用例和挑战](https://www.kdnuggets.com/2022/08/dss-machine-learning-enterprise-cases-challenges.html)
 
-+   [如何应对3个常见的机器学习挑战](https://www.kdnuggets.com/2022/09/comet-tackle-3-common-machine-learning-challenges.html)
++   [如何应对 3 个常见的机器学习挑战](https://www.kdnuggets.com/2022/09/comet-tackle-3-common-machine-learning-challenges.html)

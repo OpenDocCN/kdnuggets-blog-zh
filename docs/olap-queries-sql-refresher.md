@@ -1,30 +1,30 @@
-# SQL中的OLAP查询：回顾
+# SQL 中的 OLAP 查询：回顾
 
-> 原文：[https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html](https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html)
+> 原文：[`www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html`](https://www.kdnuggets.com/2018/09/olap-queries-sql-refresher.html)
 
-[评论](#comments)
+评论
 
 **作者：[Wilfried Lemahieu](https://www.linkedin.com/in/wilfried-lemahieu-458397/)，[Seppe vanden Broucke](https://www.linkedin.com/in/seppevandenbroucke/)，[Bart Baesens](https://www.linkedin.com/in/bart-baesens-403bb83/)**
 
-![数据库管理原则](../Images/947e7a2cdbcea1f2005cffb1cb010457.png)
+![数据库管理原则](img/947e7a2cdbcea1f2005cffb1cb010457.png)
 
 * * *
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
 以下文章基于我们最近的书籍：《数据库管理原则 - 存储、管理和分析大数据与小数据的实用指南》（详见 [www.pdbmbook.com](http://www.pdbmbook.com)）。
 
-在这篇文章中，我们详细讲解了如何在SQL中实现OLAP查询。为了方便执行OLAP查询和数据聚合，SQL-99引入了对GROUP BY语句的三种扩展：CUBE、ROLLUP和GROUPING SETS操作符。
+在这篇文章中，我们详细讲解了如何在 SQL 中实现 OLAP 查询。为了方便执行 OLAP 查询和数据聚合，SQL-99 引入了对 GROUP BY 语句的三种扩展：CUBE、ROLLUP 和 GROUPING SETS 操作符。
 
-**CUBE**操作符计算指定属性类型每个子集上的GROUP BY的并集。其结果集表示基于源表的多维立方体。考虑以下SALES TABLE。
+**CUBE**操作符计算指定属性类型每个子集上的 GROUP BY 的并集。其结果集表示基于源表的多维立方体。考虑以下 SALES TABLE。
 
 | **产品** | **季度** | **地区** | **销售额** |
 | --- | --- | --- | --- |
@@ -45,7 +45,7 @@
 
 *示例 SALESTABLE。*
 
-我们现在可以制定以下SQL查询：
+我们现在可以制定以下 SQL 查询：
 
 ```py
 
@@ -55,7 +55,7 @@ GROUP BY CUBE (QUARTER, REGION)
 
 ```
 
-基本上，这个查询计算了SALESTABLE的2² = 4种分组的并集，分组为：{(quarter,region), (quarter), (region), ()}，其中()表示一个空的分组列表，代表整个SALESTABLE的总聚合。换句话说，由于quarter有4个值，region有2个值，结果多重集将包含4*2+4*1+1*2+1或15个元组，如表1所示。维度列Quarter和Region中已添加了NULL值以指示发生的聚合。如果需要，可以用更有意义的‘ALL’替换这些NULL值。更具体地说，我们可以添加2个CASE子句，如下所示：
+基本上，这个查询计算了 SALESTABLE 的 2² = 4 种分组的并集，分组为：{(quarter,region), (quarter), (region), ()}，其中()表示一个空的分组列表，代表整个 SALESTABLE 的总聚合。换句话说，由于 quarter 有 4 个值，region 有 2 个值，结果多重集将包含 4*2+4*1+1*2+1 或 15 个元组，如表 1 所示。维度列 Quarter 和 Region 中已添加了 NULL 值以指示发生的聚合。如果需要，可以用更有意义的‘ALL’替换这些 NULL 值。更具体地说，我们可以添加 2 个 CASE 子句，如下所示：
 
 ```py
 

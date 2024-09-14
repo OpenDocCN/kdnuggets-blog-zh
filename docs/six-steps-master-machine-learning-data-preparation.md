@@ -1,12 +1,12 @@
 # 精通数据准备的六个步骤
 
-> 原文：[https://www.kdnuggets.com/2018/12/six-steps-master-machine-learning-data-preparation.html](https://www.kdnuggets.com/2018/12/six-steps-master-machine-learning-data-preparation.html)
+> 原文：[`www.kdnuggets.com/2018/12/six-steps-master-machine-learning-data-preparation.html`](https://www.kdnuggets.com/2018/12/six-steps-master-machine-learning-data-preparation.html)
 
-[评论](#comments)
+评论
 
-**由[Paxata](https://www.paxata.com/)的副总裁David Levinger撰写**
+**由[Paxata](https://www.paxata.com/)的副总裁 David Levinger 撰写**
 
-![图示](../Images/2ef1edfb44a838a622d5e2efcfc49835.png)
+![图示](img/2ef1edfb44a838a622d5e2efcfc49835.png)
 
 [来源](https://medium.com/@theCADS.org/making-decisions-with-data-the-importance-of-data-preparation-d07ee9c12768)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -50,29 +50,29 @@
 
 ### **步骤 3：格式化数据以保持一致性**
 
-准备优秀数据的下一步是确保数据格式与机器学习模型最匹配。如果你从不同来源汇总数据，或如果数据集由多个利益相关者手动更新，你可能会发现数据格式上的异常（例如：USD5.50与$5.50）。同样，标准化列中的值（例如，可能会拼写或缩写的州名）将确保数据正确汇总。统一的数据格式可以消除这些错误，使整个数据集使用相同的输入格式协议。
+准备优秀数据的下一步是确保数据格式与机器学习模型最匹配。如果你从不同来源汇总数据，或如果数据集由多个利益相关者手动更新，你可能会发现数据格式上的异常（例如：USD5.50 与$5.50）。同样，标准化列中的值（例如，可能会拼写或缩写的州名）将确保数据正确汇总。统一的数据格式可以消除这些错误，使整个数据集使用相同的输入格式协议。
 
 ### **步骤 4：提高数据质量**
 
-在这里，首先要制定一个处理错误数据、缺失值、极端值和异常值的策略。如果自助数据准备工具内置了智能功能，可以帮助将来自不同数据集的数据属性匹配并智能地合并它们，那么这些工具可以提供帮助。例如，如果一个数据集中有“FIRST NAME”和“LAST NAME”列，而另一个数据集中有一个名为CUSTOMER的列，似乎包含了合并的FIRST和LAST NAME，智能算法应该能够确定一种匹配这些列并将数据集合并以获取客户单一视图的方法。
+在这里，首先要制定一个处理错误数据、缺失值、极端值和异常值的策略。如果自助数据准备工具内置了智能功能，可以帮助将来自不同数据集的数据属性匹配并智能地合并它们，那么这些工具可以提供帮助。例如，如果一个数据集中有“FIRST NAME”和“LAST NAME”列，而另一个数据集中有一个名为 CUSTOMER 的列，似乎包含了合并的 FIRST 和 LAST NAME，智能算法应该能够确定一种匹配这些列并将数据集合并以获取客户单一视图的方法。
 
 对于连续变量，确保使用直方图来查看数据的分布并减少偏斜。务必检查超出接受范围的记录。这些“异常值”可能是输入错误，也可能是真实且有意义的结果，因为重复或类似的值可能携带相同的信息，应该被消除。同样，在自动删除所有缺失值的记录之前要小心，因为过多的删除可能会使数据集失真，不再反映现实世界的情况。
 
-### **第5步：特征工程**
+### **第 5 步：特征工程**
 
 这一步涉及将原始数据转化为更好地代表模式的特征的艺术与科学。例如，可以将数据分解成多个部分以捕捉更具体的关系，例如按周几分析销售表现，而不仅仅是按月或年。在这种情况下，将日期中的“周一; 06.19.2017”作为一个单独的分类值可能会为算法提供更相关的信息。
 
-### **第6步：将数据拆分为训练集和评估集**
+### **第 6 步：将数据拆分为训练集和评估集**
 
 最后的步骤是将数据拆分为两个集合：一个用于训练算法，另一个用于评估目的。确保选择不重叠的数据子集作为训练集和评估集，以确保适当的测试。投资于提供版本控制和目录功能的工具，这些工具不仅包括原始源数据，还包括用于机器学习算法的准备数据及其之间的关系。这样，你可以追溯预测结果到输入数据，以便随着时间的推移精炼和优化你的模型。
 
 ### **加速业务绩效 – 数据准备如何支持机器学习并解决数据挑战**
 
-数据准备长期以来被认可为帮助商业领导者和分析师准备和处理用于分析、操作和合规要求的数据。运行在Amazon Web Services (AWS)和Azure上的自助数据准备工具通过利用云环境的众多有价值的属性，将其提升到一个新的水平。
+数据准备长期以来被认可为帮助商业领导者和分析师准备和处理用于分析、操作和合规要求的数据。运行在 Amazon Web Services (AWS)和 Azure 上的自助数据准备工具通过利用云环境的众多有价值的属性，将其提升到一个新的水平。
 
-结果是，最接近数据且最了解其业务背景的业务用户，可以利用内置智能和智能算法快速准确地准备数据集。他们可以在一个直观的、可视化的应用程序中进行数据访问、探索、塑造、协作和发布，通过点击而非编写代码来完成，并且具备完整的治理和安全性。IT专业人员能够维护企业和云数据源中数据量和种类的规模，以支持即时和可重复的数据服务需求。
+结果是，最接近数据且最了解其业务背景的业务用户，可以利用内置智能和智能算法快速准确地准备数据集。他们可以在一个直观的、可视化的应用程序中进行数据访问、探索、塑造、协作和发布，通过点击而非编写代码来完成，并且具备完整的治理和安全性。IT 专业人员能够维护企业和云数据源中数据量和种类的规模，以支持即时和可重复的数据服务需求。
 
-像DP这样的解决方案解决了许多数据挑战，并启用增强应用程序的机器智能的ML和数据科学工作流。更重要的是，它使他们能够按需将数据转化为信息，赋能组织中的每个人、每个过程和每个系统，以提高智能水平。
+像 DP 这样的解决方案解决了许多数据挑战，并启用增强应用程序的机器智能的 ML 和数据科学工作流。更重要的是，它使他们能够按需将数据转化为信息，赋能组织中的每个人、每个过程和每个系统，以提高智能水平。
 
 **简历: [David Levinger](https://www.paxata.com/)** 是 [Paxata](https://www.paxata.com/) 的副总裁，负责开发和云操作，[Paxata](https://www.paxata.com/) 是企业级自助数据准备分析的开创者和领导者。欲了解更多信息，请访问 [www.paxata.com](https://www.paxata.com/) 或在 [Twitter](https://twitter.com/Paxata)、[LinkedIn](http://linkedin.com/company/paxata)、[Facebook](https://www.facebook.com/paxata) 或 [YouTube](https://www.youtube.com/PaxataTV) 上与公司互动。
 
@@ -80,11 +80,11 @@
 
 **相关：**
 
-+   [掌握数据准备与Python的7个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握数据准备与 Python 的 7 个步骤
 
-+   [掌握机器学习与Python的7个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握机器学习与 Python 的 7 个步骤
 
-+   [掌握机器学习与Python的更多7个步骤](/2017/03/seven-more-steps-machine-learning-python.html)
++   掌握机器学习与 Python 的更多 7 个步骤
 
 ### 更多相关主题
 
@@ -94,8 +94,8 @@
 
 +   [我数据科学六个月的成功故事](https://www.kdnuggets.com/2023/04/data-science-six-months-success-story.html)
 
-+   [SQL数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 数据准备备忘单](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
-+   [R语言数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
++   [R 语言数据准备备忘单](https://www.kdnuggets.com/2021/10/data-preparation-r-dplyr-cheat-sheet.html)
 
-+   [掌握数据讲故事艺术的7个步骤](https://www.kdnuggets.com/7-steps-to-master-the-art-of-data-storytelling)
++   [掌握数据讲故事艺术的 7 个步骤](https://www.kdnuggets.com/7-steps-to-master-the-art-of-data-storytelling)

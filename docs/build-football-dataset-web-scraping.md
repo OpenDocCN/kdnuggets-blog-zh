@@ -1,12 +1,12 @@
 # 如何通过网络抓取构建足球数据集
 
-> 原文：[https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html](https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html)
+> 原文：[`www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html`](https://www.kdnuggets.com/2020/11/build-football-dataset-web-scraping.html)
 
-[评论](#comments)
+评论
 
 **由 [Otávio Simões Silveira](https://www.linkedin.com/in/otavioss28/)，经济学家，志向成为数据科学家**
 
-![图像](../Images/be7c4298589981b19ff9ac0c107a06fe.png)
+![图像](img/be7c4298589981b19ff9ac0c107a06fe.png)
 
 由 [Bermix Studio](https://unsplash.com/@bermixstudio?utm_source=medium&utm_medium=referral) 在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral) 上提供的照片
 
@@ -87,7 +87,7 @@
 
 最后，这就是抓取的数据：
 
-![图片](../Images/ef53bd9eafda232575c9ba59d8e9074c.png)
+![图片](img/ef53bd9eafda232575c9ba59d8e9074c.png)
 
 图片由作者提供
 
@@ -109,21 +109,21 @@
 
 **相关内容:**
 
-+   [Python, Selenium & Google 用于地理编码自动化: 免费与付费](/2019/11/automate-geocoding-free-paid-python-selenium-google.html)
++   Python, Selenium & Google 用于地理编码自动化: 免费与付费
 
-+   [用任务调度程序自动化你的 Python 脚本: 使用 Windows 任务调度程序抓取替代数据](/2019/09/automate-python-scripts-task-scheduler.html)
++   用任务调度程序自动化你的 Python 脚本: 使用 Windows 任务调度程序抓取替代数据
 
-+   [创建真实数据科学项目组合的逐步指南](/2020/10/guide-authentic-data-science-portfolio-project.html)
++   创建真实数据科学项目组合的逐步指南
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 

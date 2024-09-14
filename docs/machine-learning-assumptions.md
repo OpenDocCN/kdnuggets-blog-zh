@@ -1,8 +1,8 @@
 # 机器学习——一切都关于假设
 
-> 原文：[https://www.kdnuggets.com/2021/02/machine-learning-assumptions.html](https://www.kdnuggets.com/2021/02/machine-learning-assumptions.html)
+> 原文：[`www.kdnuggets.com/2021/02/machine-learning-assumptions.html`](https://www.kdnuggets.com/2021/02/machine-learning-assumptions.html)
 
-[评论](#comments)
+评论
 
 **由 [Vishal Mendekar](https://www.linkedin.com/in/connect-to-vishal-mendekar/?originalSubdomain=in) 编写，精通 Python、机器学习和深度学习**。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
-![](../Images/b5c84345c9680db6de0b2ba8c9b892b0.png)
+![](img/b5c84345c9680db6de0b2ba8c9b892b0.png)
 
 *[来源](https://media.geeksforgeeks.org/wp-content/cdn-uploads/machineLearning3.png)*
 
@@ -52,7 +52,7 @@
 
 ### 1\. K-NN
 
-![](../Images/5d2ea4f6b2a9443d4b362ad04ad612b2.png)
+![](img/5d2ea4f6b2a9443d4b362ad04ad612b2.png)
 
 [*来源*](https://www.analyticsvidhya.com/wp-content/uploads/2014/10/scenario2.png)
 
@@ -88,7 +88,7 @@
 
 ### 2\. 逻辑回归
 
-![](../Images/7a345b87189aea8927db1cee0c7f435c.png)
+![](img/7a345b87189aea8927db1cee0c7f435c.png)
 
 *[来源](https://miro.medium.com/max/2400/1*RqXFpiNGwdiKBWyLJc_E7g.png)*
 
@@ -126,7 +126,7 @@
 
 ### 3\. 线性回归
 
-![](../Images/5a383d310756bac0319552e4cc066f5e.png)
+![](img/5a383d310756bac0319552e4cc066f5e.png)
 
 [*来源*](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Linear_regression.svg/1200px-Linear_regression.svg.png)
 
@@ -136,13 +136,13 @@
 
 1.  应该没有或只有很少的多重共线性。
 
-1.  同方差性：残差的方差对于任何X值应该是相同的。
+1.  同方差性：残差的方差对于任何 X 值应该是相同的。
 
 ***优点:***
 
 1.  当自变量和因变量之间存在线性关系时，表现非常好。
 
-1.  如果发生过拟合，可以通过L1或L2范数轻松减少过拟合。
+1.  如果发生过拟合，可以通过 L1 或 L2 范数轻松减少过拟合。
 
 ***缺点:***
 
@@ -154,7 +154,7 @@
 
 ### 4\. 支持向量机
 
-![](../Images/48025301085f8e650c07f24a9688b871.png)
+![](img/48025301085f8e650c07f24a9688b871.png)
 
 [*来源*](https://www.researchgate.net/publication/304611323/figure/fig8/AS:668377215406089@1536364954428/Classification-of-data-by-support-vector-machine-SVM.png)
 
@@ -182,7 +182,7 @@
 
 ### 5. 决策树
 
-![](../Images/f7683f6b26d0be5977404325a83133ec.png)
+![](img/f7683f6b26d0be5977404325a83133ec.png)
 
 [*来源*](https://miro.medium.com/max/3840/1*jojTznh4HOX_8cGw_04ODA.png)
 
@@ -200,7 +200,7 @@
 
 1.  缺失值在一定程度上不会严重影响其性能。
 
-1.  非常直观，可以解释为if-else条件。
+1.  非常直观，可以解释为 if-else 条件。
 
 ***缺点:***
 
@@ -214,7 +214,7 @@
 
 ### 6. 朴素贝叶斯
 
-![](../Images/927a2b219e069740423399c4bacc6e1d.png)
+![](img/927a2b219e069740423399c4bacc6e1d.png)
 
 [*来源*](https://www.kdnuggets.com/wp-content/uploads/bayes-nagesh-0.jpg)
 
@@ -240,7 +240,7 @@
 
 ### 7. 随机森林
 
-![](../Images/5233b8abcffd53204f85049121147567.png)
+![](img/5233b8abcffd53204f85049121147567.png)
 
 [*来源*](https://www.researchgate.net/publication/316982197/figure/fig5/AS:559887665303554@1510499029585/The-structure-of-random-forest-algorithm-The-random-forest-is-composed-of-the-generated.png)
 
@@ -266,7 +266,7 @@
 
 ### 8. XGBoost
 
-![](../Images/6c10ea8d51895b9b7e32571177b5cbb0.png)
+![](img/6c10ea8d51895b9b7e32571177b5cbb0.png)
 
 [*来源*](https://miro.medium.com/max/4000/1*IWBGb4PC7F2q0fszK-Iplw.png)
 
@@ -296,7 +296,7 @@
 
 **相关:**
 
-+   [2021年你应该知道的所有机器学习算法](https://www.kdnuggets.com/2021/01/machine-learning-algorithms-2021.html)
++   [2021 年你应该知道的所有机器学习算法](https://www.kdnuggets.com/2021/01/machine-learning-algorithms-2021.html)
 
 +   [关键数据科学算法解析：从 k-means 到 k-medoids 聚类](https://www.kdnuggets.com/2020/12/algorithms-explained-k-means-k-medoids-clustering.html)
 
@@ -314,4 +314,4 @@
 
 +   [超级巴德：能做所有事且更好的人工智能](https://www.kdnuggets.com/2023/05/super-bard-ai-better.html)
 
-+   [今天所有营销分析和数据科学专家需要的5项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)
++   [今天所有营销分析和数据科学专家需要的 5 项技能](https://www.kdnuggets.com/2023/08/mads-5-skills-marketing-analytics-data-science-pros-need-today.html)

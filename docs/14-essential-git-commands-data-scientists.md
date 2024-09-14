@@ -1,50 +1,50 @@
-# 数据科学家的14个必备Git命令
+# 数据科学家的 14 个必备 Git 命令
 
-> 原文：[https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html`](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
 
-![数据科学家的14个必备Git命令](../Images/bc1e96a6b7d20a1e9400824cd14e2479.png)
+![数据科学家的 14 个必备 Git 命令](img/bc1e96a6b7d20a1e9400824cd14e2479.png)
 
 图片由[RealToughCandy.com](https://www.pexels.com/photo/man-love-people-woman-11035539/)提供
 
-历史上，大多数数据科学家对软件开发实践和工具（如版本控制系统）不太了解。但这种情况正在改变，数据科学项目正在采纳软件工程的最佳实践，Git已成为文件和数据版本控制的重要工具。现代数据团队利用它来协作处理代码库项目，并更快地解决冲突。
+历史上，大多数数据科学家对软件开发实践和工具（如版本控制系统）不太了解。但这种情况正在改变，数据科学项目正在采纳软件工程的最佳实践，Git 已成为文件和数据版本控制的重要工具。现代数据团队利用它来协作处理代码库项目，并更快地解决冲突。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
-在这篇文章中，我们将学习14个必备的Git命令，这些命令将帮助你初始化项目、创建和合并分支、版本控制文件、与远程服务器同步以及监控变更。
+在这篇文章中，我们将学习 14 个必备的 Git 命令，这些命令将帮助你初始化项目、创建和合并分支、版本控制文件、与远程服务器同步以及监控变更。
 
-> **注意：** 请确保你已从[官方站点](https://git-scm.com/downloads)正确安装Git。
+> **注意：** 请确保你已从[官方站点](https://git-scm.com/downloads)正确安装 Git。
 
 # 1\. 初始化
 
-你可以通过输入以下命令在当前目录中初始化Git版本控制系统：
+你可以通过输入以下命令在当前目录中初始化 Git 版本控制系统：
 
 ```py
 git init
 ```
 
-或者你可以在特定目录中初始化Git。
+或者你可以在特定目录中初始化 Git。
 
 ```py
 git init <directory>
 ```
 
-![在特定目录中初始化Git](../Images/134072b98208116d3c05193c0944db4b.png)
+![在特定目录中初始化 Git](img/134072b98208116d3c05193c0944db4b.png)
 
 # 2\. 克隆
 
 **clone**命令将从远程服务器复制所有项目文件到本地计算机。它还会将远程名称添加为`origin`以便与远程服务器同步文件。
 
-Git clone 需要HTTPS链接，安全连接需要SSH链接。
+Git clone 需要 HTTPS 链接，安全连接需要 SSH 链接。
 
 ```py
 git clone <HTTPS/SSH>
@@ -52,13 +52,13 @@ git clone <HTTPS/SSH>
 
 # 3\. 添加远程
 
-你可以通过添加远程名称和HTTPS/SSH地址来连接到一个或多个远程服务器。
+你可以通过添加远程名称和 HTTPS/SSH 地址来连接到一个或多个远程服务器。
 
 ```py
 git remote add <remote name> <HTTPS/SSH>
 ```
 
-> **注意：** 从GitHub或任何远程服务器克隆一个仓库会自动将远程添加为`origin`。
+> **注意：** 从 GitHub 或任何远程服务器克隆一个仓库会自动将远程添加为`origin`。
 
 # 4\. 创建分支
 
@@ -82,7 +82,7 @@ git switch -c <branch-name>
 git branch <branch-name>
 ```
 
-![创建Git分支](../Images/e833ec961b40fe368ba8d4715abfd220.png)
+![创建 Git 分支](img/e833ec961b40fe368ba8d4715abfd220.png)
 
 # 5\. 切换分支
 
@@ -108,7 +108,7 @@ git pull
 git pull <remote name> <branch> 
 ```
 
-默认情况下，pull命令会获取更改并将它们与当前分支合并。要进行变基，你可以在远程名称和分支之前添加`--rebase`标志。
+默认情况下，pull 命令会获取更改并将它们与当前分支合并。要进行变基，你可以在远程名称和分支之前添加`--rebase`标志。
 
 ```py
 git pull --rebase origin master
@@ -138,7 +138,7 @@ git add .
 git commit -m "Title" -m "Description"
 ```
 
-![Git Commit](../Images/d4b0dfc7e8867355a9925c38126285c6.png)
+![Git Commit](img/d4b0dfc7e8867355a9925c38126285c6.png)
 
 > **注意：** 在提交更改之前，请确保你已经配置了**用户名**和**电子邮件**。
 
@@ -172,7 +172,7 @@ git revert <commit>
 git reset <commit>
 ```
 
-> **注意：** 使用reset命令是不推荐的，因为它会修改你的git日志历史记录。
+> **注意：** 使用 reset 命令是不推荐的，因为它会修改你的 git 日志历史记录。
 
 # 11\. 合并
 
@@ -190,7 +190,7 @@ git merge <branch>
 
 要显示最近的日志，你可以添加`-`后跟数字，它将显示有限数量的最近提交历史。
 
-例如，将日志限制为5条：
+例如，将日志限制为 5 条：
 
 ```py
 git log -5
@@ -202,9 +202,9 @@ git log -5
 git log --author=”<pattern>”
 ```
 
-> **注意：** git log有多个标志可以过滤特定类型的提交。查看完整的[文档](https://www.git-scm.com/docs/git-log)。
+> **注意：** git log 有多个标志可以过滤特定类型的提交。查看完整的[文档](https://www.git-scm.com/docs/git-log)。
 
-![Git log](../Images/65d38b967464f4a3e64922c1f6c7c1df.png)
+![Git log](img/65d38b967464f4a3e64922c1f6c7c1df.png)
 
 # 13\. 差异
 
@@ -240,14 +240,14 @@ git status
 
 ### 更多相关话题
 
-+   [数据科学的16个基本DVC命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
++   [数据科学的 16 个基本 DVC 命令](https://www.kdnuggets.com/2022/07/16-essential-dvc-commands-data-science.html)
 
-+   [数据科学的10个基本SQL命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
++   [数据科学的 10 个基本 SQL 命令](https://www.kdnuggets.com/2022/10/10-essential-sql-commands-data-science.html)
 
-+   [Streamlit的12个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
++   [Streamlit 的 12 个基本命令](https://www.kdnuggets.com/2023/01/12-essential-commands-streamlit.html)
 
-+   [KDnuggets 新闻，6月29日：数据科学的20个基本Linux命令…](https://www.kdnuggets.com/2022/n26.html)
++   [KDnuggets 新闻，6 月 29 日：数据科学的 20 个基本 Linux 命令…](https://www.kdnuggets.com/2022/n26.html)
 
-+   [每个数据科学家都应该知道的12个Docker命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)
++   [每个数据科学家都应该知道的 12 个 Docker 命令](https://www.kdnuggets.com/2023/01/12-docker-commands-every-data-scientist-know.html)
 
-+   [数据科学初学者的20个基本Linux命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)
++   [数据科学初学者的 20 个基本 Linux 命令](https://www.kdnuggets.com/2022/06/20-basic-linux-commands-data-science-beginners.html)

@@ -1,8 +1,8 @@
 # 正态分布的综合指南
 
-> 原文：[https://www.kdnuggets.com/2021/01/comprehensive-guide-normal-distribution.html](https://www.kdnuggets.com/2021/01/comprehensive-guide-normal-distribution.html)
+> 原文：[`www.kdnuggets.com/2021/01/comprehensive-guide-normal-distribution.html`](https://www.kdnuggets.com/2021/01/comprehensive-guide-normal-distribution.html)
 
-[评论](#comments)![图](../Images/8c553d9318441d8fecf2313d04e18137.png)
+评论![图](img/8c553d9318441d8fecf2313d04e18137.png)
 
 照片由 [Cameron Casey](https://www.pexels.com/@camcasey?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels) 提供，来源于 [Pexels](https://www.pexels.com/photo/action-adult-balance-dusk-1152854/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels)
 
@@ -18,7 +18,7 @@
 
 数据分布在统计学中非常重要，因为我们几乎总是在从一个总体中抽样，而这个总体的完整分布是未知的。样本的分布可能会限制我们可用的统计技术。
 
-![图](../Images/e8de940854969e29359adb6e1caa4b93.png)
+![图](img/e8de940854969e29359adb6e1caa4b93.png)
 
 正态分布，其中 f(x) = 概率密度函数，σ = 标准差，μ = 均值
 
@@ -28,7 +28,7 @@
 
 +   线性最小二乘回归
 
-+   基于样本均值的推断（例如，t检验）
++   基于样本均值的推断（例如，t 检验）
 
 在某些情况下，将偏斜的数据集转换为符合正态分布是有益的，从而解锁这一统计技术的使用。当你的数据几乎是正态分布的，只是有一些扭曲时，这尤其相关。稍后会详细讨论这个问题。
 
@@ -38,13 +38,13 @@
 
 +   均值和中位数相等（在分布的中心）
 
-+   ≈68%的数据落在均值的1个标准差以内
++   ≈68%的数据落在均值的 1 个标准差以内
 
-+   ≈95%的数据落在均值的2个标准差以内
++   ≈95%的数据落在均值的 2 个标准差以内
 
-+   ≈99.7%的数据落在均值的3个标准差以内
++   ≈99.7%的数据落在均值的 3 个标准差以内
 
-![图](../Images/91fce44aff5b111e2418c25f9be8b960.png)
+![图](img/91fce44aff5b111e2418c25f9be8b960.png)
 
 [M.W. Toews](https://commons.wikimedia.org/wiki/User:Mwtoews) 通过 [维基百科](https://en.wikipedia.org/wiki/Normal_distribution#/media/File:Standard_deviation_diagram.svg)
 
@@ -72,7 +72,7 @@
 
 偏度是相对于均值的非对称度量。以下是一个**左偏分布**的图示。
 
-![图示](../Images/aa79b8c873df0fec7b0b66cc8fca4068.png)
+![图示](img/aa79b8c873df0fec7b0b66cc8fca4068.png)
 
 [Rodolfo Hermans](https://en.wikipedia.org/wiki/User:Rodolfo_Hermans) 通过 [Wikipedia](https://en.wikipedia.org/wiki/Skewness#/media/File:Negative_and_positive_skew_diagrams_(English).svg)
 
@@ -82,7 +82,7 @@
 
 理解偏度很重要，因为它是模型性能的关键因素。要测量偏度，可以使用`[skew](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)`[ 来自](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)`[scipy.stats](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)`[ 模块](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)。
 
-![图示](../Images/9e568997e25d029c332c81cd0ce3aa11.png)
+![图示](img/9e568997e25d029c332c81cd0ce3aa11.png)
 
 通过 [SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.skew.html)
 
@@ -90,9 +90,9 @@
 
 ### 峰度
 
-源自希腊文*kurtos*，意为“弯曲”，峭度是衡量分布尾部厚度的一个指标。峭度通常相对于0来衡量，即正态分布的峭度值，使用[Fisher’s definition](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)来定义。正的峭度值表示尾部更“肥”（即更瘦的钟形曲线和更多的异常值）。
+源自希腊文*kurtos*，意为“弯曲”，峭度是衡量分布尾部厚度的一个指标。峭度通常相对于 0 来衡量，即正态分布的峭度值，使用[Fisher’s definition](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)来定义。正的峭度值表示尾部更“肥”（即更瘦的钟形曲线和更多的异常值）。
 
-![图像](../Images/a240fcc76bd15aa959e0c6869b0b4aed.png)
+![图像](img/a240fcc76bd15aa959e0c6869b0b4aed.png)
 
 拉普拉斯分布的峭度> 0。通过[John D. Cook Consulting](https://www.johndcook.com/blog/2019/02/05/normal-approximation-to-laplace-distribution/)。
 
@@ -100,7 +100,7 @@
 
 理解峭度可以提供对数据集中异常值存在的洞察。要测量峭度，请使用`[kurtosis](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)`[来自](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)`[scipy.stats](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)`[模块](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)。
 
-![图像](../Images/47145722fa21b8e14b73227e508cc3c7.png)
+![图像](img/47145722fa21b8e14b73227e508cc3c7.png)
 
 通过[SciPy](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.kurtosis.html)
 
@@ -126,13 +126,13 @@
 
 [**如何使用聚类创建邻里探索工具**](https://towardsdatascience.com/neighborhood-explorer-a7f374e8527d)
 
-使用sklearn的聚类算法创建一个城市互动仪表板的逐步指南。
+使用 sklearn 的聚类算法创建一个城市互动仪表板的逐步指南。
 
-[**应对新常态的数据科学——来自一个14亿美元初创公司的经验教训**](https://towardsdatascience.com/data-science-new-normal-ca34bcbad8f0)
+[**应对新常态的数据科学——来自一个 14 亿美元初创公司的经验教训**](https://towardsdatascience.com/data-science-new-normal-ca34bcbad8f0)
 
 后疫情时代，机器学习对商业成功的作用越来越重要。
 
-[**他们在训练营中没有教的10个Python技能**](https://towardsdatascience.com/10-python-skills-419e5e4c4d66)
+[**他们在训练营中没有教的 10 个 Python 技能**](https://towardsdatascience.com/10-python-skills-419e5e4c4d66)
 
 通过这份编码技巧列表，攀登数据科学和机器学习的新高度。
 
@@ -142,21 +142,21 @@
 
 **相关内容：**
 
-+   [数据分布概述](/2020/06/overview-data-distributions.html)
++   数据分布概述
 
-+   [数据科学的基础数学：泊松分布](/2020/12/introduction-poisson-distribution-data-science.html)
++   数据科学的基础数学：泊松分布
 
-+   [正常（或近似正常）分布](/2020/05/looking-normally-distributed.html)
++   正常（或近似正常）分布
 
 * * *
 
-## 我们的3个顶级课程推荐
+## 我们的 3 个顶级课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 
@@ -166,10 +166,10 @@
 
 +   [事情并不总是正常的：一些“其他”分布](https://www.kdnuggets.com/2023/01/things-arent-always-normal-distributions.html)
 
-+   [如何使用Python确定最佳数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)
++   [如何使用 Python 确定最佳数据分布](https://www.kdnuggets.com/2021/09/determine-best-fitting-data-distribution-python.html)
 
-+   [MLOps全面指南](https://www.kdnuggets.com/2023/08/comprehensive-guide-mlops.html)
++   [MLOps 全面指南](https://www.kdnuggets.com/2023/08/comprehensive-guide-mlops.html)
 
-+   [NLP、NLU和NLG：有什么区别？全面指南](https://www.kdnuggets.com/2022/06/nlp-nlu-nlg-difference-comprehensive-guide.html)
++   [NLP、NLU 和 NLG：有什么区别？全面指南](https://www.kdnuggets.com/2022/06/nlp-nlu-nlg-difference-comprehensive-guide.html)
 
 +   [卷积神经网络全面指南](https://www.kdnuggets.com/2023/06/comprehensive-guide-convolutional-neural-networks.html)

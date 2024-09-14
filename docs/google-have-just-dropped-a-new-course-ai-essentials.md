@@ -1,8 +1,8 @@
 # 谷歌刚刚推出了一门新课程：AI 基础
 
-> 原文：[https://www.kdnuggets.com/google-have-just-dropped-a-new-course-ai-essentials](https://www.kdnuggets.com/google-have-just-dropped-a-new-course-ai-essentials)
+> 原文：[`www.kdnuggets.com/google-have-just-dropped-a-new-course-ai-essentials`](https://www.kdnuggets.com/google-have-just-dropped-a-new-course-ai-essentials)
 
-![谷歌 AI 课程](../Images/c536516dc58f26260f7b767fbab8089f.png)
+![谷歌 AI 课程](img/c536516dc58f26260f7b767fbab8089f.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

@@ -1,8 +1,8 @@
 # 广义且可扩展的最佳稀疏决策树 (GOSDT)
 
-> 原文：[https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)
+> 原文：[`www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html`](https://www.kdnuggets.com/2023/02/generalized-scalable-optimal-sparse-decision-treesgosdt.html)
 
-![广义且可扩展的最佳稀疏决策树 (GOSDT)](../Images/f314c76c07388670f39e82fba455f7ea.png)
+![广义且可扩展的最佳稀疏决策树 (GOSDT)](img/f314c76c07388670f39e82fba455f7ea.png)
 
 图片来源 [fabrikasimf](https://www.freepik.com/free-photo/network-with-pins_20988125.htm#query=Decision%20Trees&position=49&from_view=search&track=ais) 在 Freepik
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT
 
 * * *
 

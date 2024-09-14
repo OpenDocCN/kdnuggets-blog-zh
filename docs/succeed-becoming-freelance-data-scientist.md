@@ -1,10 +1,10 @@
 # 如何成功成为一名自由职业数据科学家
 
-> 原文：[https://www.kdnuggets.com/2021/03/succeed-becoming-freelance-data-scientist.html](https://www.kdnuggets.com/2021/03/succeed-becoming-freelance-data-scientist.html)
+> 原文：[`www.kdnuggets.com/2021/03/succeed-becoming-freelance-data-scientist.html`](https://www.kdnuggets.com/2021/03/succeed-becoming-freelance-data-scientist.html)
 
-[评论](#comments)![图示](../Images/db3b4c3bc2121221bbff8219f9db0fe2.png)
+评论![图示](img/db3b4c3bc2121221bbff8219f9db0fe2.png)
 
-图片由 [Icons8团队](https://unsplash.com/@icons8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](/s/photos/freelance?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
+图片由 [Icons8 团队](https://unsplash.com/@icons8?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 Unsplash
 
 数据科学是一个不断扩展的领域。越来越多的行业依赖技术来收集和处理重要信息，数据科学家需求量很大。然而，找到适合你的工作的确可能是一项挑战。在这种情况下，你可以转向自由职业。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -24,13 +24,13 @@
 
 ### **1\. 建立个人影响力**
 
-过程的第一步是建立和整理一个强大的在线影响力。你需要一个网站、职位列表和LinkedIn页面。
+过程的第一步是建立和整理一个强大的在线影响力。你需要一个网站、职位列表和 LinkedIn 页面。
 
 使用你的网站展示你的技能。以最佳状态进行市场宣传。展示你相关的工作经验组合，并随着成功帮助更多客户而不断更新。记住，网站必须易于导航，否则人们会点击离开。让人们容易联系到你并获取他们需要的信息。
 
-在Google上，你可以开设 [Google我的商家列表](https://www.google.com/business/) 并连接你的网站和详细信息。这样，快速搜索数据科学自由职业者时，你的业务就会出现。考虑一下你希望营业的时间以及潜在客户应该如何与你联系。
+在 Google 上，你可以开设 [Google 我的商家列表](https://www.google.com/business/) 并连接你的网站和详细信息。这样，快速搜索数据科学自由职业者时，你的业务就会出现。考虑一下你希望营业的时间以及潜在客户应该如何与你联系。
 
-然后，更新你的LinkedIn，并使用新的市场功能将自己作为自由职业者进行宣传。最后这一举动将帮助你吸引寻找数据科学家的企业或个人。
+然后，更新你的 LinkedIn，并使用新的市场功能将自己作为自由职业者进行宣传。最后这一举动将帮助你吸引寻找数据科学家的企业或个人。
 
 ### **2\. 发展新技能**
 
@@ -80,11 +80,11 @@
 
 **相关内容：**
 
-+   [5 种支持技能可以帮助你找到数据科学工作](/2021/02/5-supporting-skills-data-science-job.html)
++   5 种支持技能可以帮助你找到数据科学工作
 
-+   [自动化如何改善数据科学家的角色](/2020/10/automation-improving-data-scientists.html)
++   自动化如何改善数据科学家的角色
 
-+   [成为数据工程师所需的 9 项技能](/2021/03/9-skills-become-data-engineer.html)
++   成为数据工程师所需的 9 项技能
 
 ### 更多相关主题
 

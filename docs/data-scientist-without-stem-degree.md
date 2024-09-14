@@ -1,10 +1,10 @@
 # 如何成为没有 STEM 学位的数据科学家
 
-> 原文：[https://www.kdnuggets.com/2021/09/data-scientist-without-stem-degree.html](https://www.kdnuggets.com/2021/09/data-scientist-without-stem-degree.html)
+> 原文：[`www.kdnuggets.com/2021/09/data-scientist-without-stem-degree.html`](https://www.kdnuggets.com/2021/09/data-scientist-without-stem-degree.html)
 
-[评论](#comments)
+评论
 
-![](../Images/92926af809534079a95b92b9346e1a36.png)
+![](img/92926af809534079a95b92b9346e1a36.png)
 
 ## 1. 学习数据科学所有支柱的基础
 
@@ -60,13 +60,13 @@ Pandas 是一个用于数据操作和分析的 Python 库。我个人在 Jupyter
 
 +   [机器学习 — 斯坦福大学（Coursera）](https://www.coursera.org/learn/machine-learning)
 
-## 2. 完成1-3个个人数据科学项目
+## 2. 完成 1-3 个个人数据科学项目
 
 一旦你打下了基础，加速学习的最佳方式就是完成一些数据科学项目。最简单的方法是去[Kaggle](https://www.kaggle.com/)，选择一个数据集，创建一个预测模型或一些数据可视化。记住，你的前几个项目不会很出色！但重要的是你随着时间的推移如何进步。
 
 这里有一些我过去完成的数据科学项目，你可以用来获得灵感！
 
-+   [使用Plotly进行的冠状病毒数据可视化](https://towardsdatascience.com/coronavirus-data-visualizations-using-plotly-cfbdb8fcfc3d)
++   [使用 Plotly 进行的冠状病毒数据可视化](https://towardsdatascience.com/coronavirus-data-visualizations-using-plotly-cfbdb8fcfc3d)
 
 +   [使用随机森林预测二手车价格](https://towardsdatascience.com/a-machine-learning-project-predicting-used-car-prices-efbc4d2a4998)
 
@@ -86,7 +86,7 @@ Pandas 是一个用于数据操作和分析的 Python 库。我个人在 Jupyter
 
 ### 参加比赛
 
-在我看来，没有比通过比赛展示你已经准备好从事数据科学工作更好的方式了。Kaggle举办了各种比赛，涉及构建模型以优化某些指标。
+在我看来，没有比通过比赛展示你已经准备好从事数据科学工作更好的方式了。Kaggle 举办了各种比赛，涉及构建模型以优化某些指标。
 
 你现在可以尝试的两个比赛是：
 
@@ -94,11 +94,11 @@ Pandas 是一个用于数据操作和分析的 Python 库。我个人在 Jupyter
 
 1.  [房价：高级回归技术](https://www.kaggle.com/c/house-prices-advanced-regression-techniques)
 
-### 在Medium上开设博客
+### 在 Medium 上开设博客
 
-是的，我有些偏颇，但请听我说。你会惊讶于Medium上有多少数据相关的专业人士。他们喜欢看到信息丰富、有见地和有趣的内容。利用Medium来撰写你的学习心得，解释复杂的话题，或者展示你的数据科学项目吧！
+是的，我有些偏颇，但请听我说。你会惊讶于 Medium 上有多少数据相关的专业人士。他们喜欢看到信息丰富、有见地和有趣的内容。利用 Medium 来撰写你的学习心得，解释复杂的话题，或者展示你的数据科学项目吧！
 
-我特别建议你为出版物Towards Data Science撰写文章，因为他们目前拥有近500,000名关注者。
+我特别建议你为出版物 Towards Data Science 撰写文章，因为他们目前拥有近 500,000 名关注者。
 
 如果你需要一些灵感，可以查看我的项目演示，[葡萄酒质量预测](https://towardsdatascience.com/predicting-wine-quality-with-several-classification-techniques-179038ea6434)。
 
@@ -132,23 +132,23 @@ Pandas 是一个用于数据操作和分析的 Python 库。我个人在 Jupyter
 
 1.  如果你想同时工作和学习，它有一个在线项目。
 
-1.  整个项目只需$10K美元。
+1.  整个项目只需$10K 美元。
 
 尽管如此，市场上有几个选项，我强烈建议你在做出决定之前花时间探索所有选项！
 
 **相关：**
 
-+   [2021年招聘数据科学家的顶级行业](https://www.kdnuggets.com/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html)
++   [2021 年招聘数据科学家的顶级行业](https://www.kdnuggets.com/2021/08/top-industries-hiring-data-scientists-2021the-top-industries-hiring-data-scientists-in-2021.html)
 
-+   [我在数据科学候选人中寻找的15个特征](https://www.kdnuggets.com/2021/08/15-things-data-science-candidates.html)
++   [我在数据科学候选人中寻找的 15 个特征](https://www.kdnuggets.com/2021/08/15-things-data-science-candidates.html)
 
 +   [如何获得实际的数据科学经验以备职业准备](https://www.kdnuggets.com/2021/07/practical-data-science-experience-career-ready.html)
 
 ### 更多相关话题
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目的，并通过找到目的来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

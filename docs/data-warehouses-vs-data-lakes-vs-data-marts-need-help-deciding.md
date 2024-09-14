@@ -1,8 +1,8 @@
 # 数据仓库与数据湖与数据集市：需要帮助决定吗？
 
-> 原文：[https://www.kdnuggets.com/data-warehouses-vs-data-lakes-vs-data-marts-need-help-deciding](https://www.kdnuggets.com/data-warehouses-vs-data-lakes-vs-data-marts-need-help-deciding)
+> 原文：[`www.kdnuggets.com/data-warehouses-vs-data-lakes-vs-data-marts-need-help-deciding`](https://www.kdnuggets.com/data-warehouses-vs-data-lakes-vs-data-marts-need-help-deciding)
 
-![数据仓库与数据湖与数据集市：需要帮助决定吗？](../Images/c54084e2f7575d14774d49039d7d8ac9.png)
+![数据仓库与数据湖与数据集市：需要帮助决定吗？](img/c54084e2f7575d14774d49039d7d8ac9.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在IT方面的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 方面的组织
 
 * * *
 
@@ -30,7 +30,7 @@
 
 数据仓库是现代数据管理系统的基础组件，旨在促进结构化数据的高效存储、组织和检索，以用于分析目的。
 
-![数据仓库与数据湖与数据集市：需要帮助决定吗？](../Images/56f585c7bac3603d55c34cf0410ee4f1.png)
+![数据仓库与数据湖与数据集市：需要帮助决定吗？](img/56f585c7bac3603d55c34cf0410ee4f1.png)
 
 图片来源：作者
 
@@ -78,7 +78,7 @@
 
 数据湖代表了一种灵活且可扩展的数据存储和管理方法，满足现代组织的多样化需求。
 
-![数据仓库 vs. 数据湖 vs. 数据集市：需要帮助决策？](../Images/c4fe3592a824ac87a46015c2d4dac92b.png)
+![数据仓库 vs. 数据湖 vs. 数据集市：需要帮助决策？](img/c4fe3592a824ac87a46015c2d4dac92b.png)
 
 作者提供的图片
 
@@ -90,7 +90,7 @@
 
 +   数据湖保留数据的原始和本地形式。
 
-+   数据湖支持广泛的使用案例，从传统的分析到高级机器学习和AI应用。
++   数据湖支持广泛的使用案例，从传统的分析到高级机器学习和 AI 应用。
 
 +   用户可以在不预定义数据结构或模式的情况下探索和分析数据。
 
@@ -98,7 +98,7 @@
 
 ## 数据类型、访问模式和优势
 
-数据湖能够存储多种数据类型，包括来自关系数据库的结构化数据、如JSON、XML的半结构化数据以及文本文件、图像和视频等非结构化数据。这使得数据湖适合处理原始和本地形式的数据。
+数据湖能够存储多种数据类型，包括来自关系数据库的结构化数据、如 JSON、XML 的半结构化数据以及文本文件、图像和视频等非结构化数据。这使得数据湖适合处理原始和本地形式的数据。
 
 ## 数据集成
 
@@ -124,7 +124,7 @@
 
 数据集市是企业数据仓库的子集，专门服务于组织内的特定业务单元或职能。
 
-![数据仓库 vs. 数据湖 vs. 数据集市：需要帮助决定吗？](../Images/7c1e0b321dcd3571d59c31126f9cae62.png)
+![数据仓库 vs. 数据湖 vs. 数据集市：需要帮助决定吗？](img/7c1e0b321dcd3571d59c31126f9cae62.png)
 
 作者提供的图片
 

@@ -1,12 +1,12 @@
 # 日期时间变量的特征工程用于数据科学和机器学习
 
-> 原文：[https://www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html](https://www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html`](https://www.kdnuggets.com/2021/04/feature-engineering-datetime-variables-data-science-machine-learning.html)
 
-[评论](#comments)
+评论
 
 **作者 [Samarth Agrawal](https://www.linkedin.com/in/samarth-agrawal-2501/)，丰田数据科学家**
 
-![](../Images/4ed1b796931f51585f4049a3784eeaff.png)
+![](img/4ed1b796931f51585f4049a3784eeaff.png)
 
 日期时间变量的特征工程。图像由作者提供。
 
@@ -16,21 +16,21 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
-日期时间字段需要[特征工程](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)来将它们从数据转变为可供机器学习模型使用的有洞察力的信息。本文分为3部分和一个额外的奖励部分，我们将使用内置的pandas和NumPy函数以及我们的函数来提取有用的特征。
+日期时间字段需要[特征工程](https://www.kdnuggets.com/2018/12/feature-engineering-explained.html)来将它们从数据转变为可供机器学习模型使用的有洞察力的信息。本文分为 3 部分和一个额外的奖励部分，我们将使用内置的 pandas 和 NumPy 函数以及我们的函数来提取有用的特征。
 
-+   第1部分 — 提取日期/时间组件
++   第一部分 — 提取日期/时间组件
 
-+   第2部分 — 创建布尔标志
++   第二部分 — 创建布尔标志
 
-+   第3部分 — 计算日期/时间差异
++   第三部分 — 计算日期/时间差异
 
 +   奖励 — 使用`fast_ml`两行代码进行特征工程
 
@@ -70,7 +70,7 @@
 
 现在，为了回答这些问题，你需要回到数据中去工程化这些日期时间字段。然后就可以发现大量的模式。
 
-本文的**第 1 部分**将提供特征工程步骤，以回答类似于第 1、2 和 3 问题的问题
+本文的**第一部分**将提供特征工程步骤，以回答类似于第 1、2 和 3 问题的问题
 
 +   **答案 1** — 什么时候您看到最多的购物车被创建？***每月的第一周***
 
@@ -78,13 +78,13 @@
 
 +   **答案 3** — 什么时候您看到最多的欺诈交易？***星期五-深夜***
 
-本文的**第 2 部分**将提供特征工程步骤，以回答类似于第 4 和第 5 问题的问题
+本文的**第二部分**将提供特征工程步骤，以回答类似于第 4 和第 5 问题的问题
 
 +   **答案 4** — 什么时候最多用户订阅？***在年初***
 
 +   **答案 5** — 某些物品最常在何时购买？***在月初***
 
-本文的**第 3 部分**将提供特征工程步骤，以回答类似于第 6 和第 7 问题的问题
+本文的**第三部分**将提供特征工程步骤，以回答类似于第 6 和第 7 问题的问题
 
 +   **答案 6** — 注册后经过多少天/小时用户会下第一个订单？***在 2 小时内***
 
@@ -110,7 +110,7 @@ df['date_issued'] = pd.to_datetime(df['date_issued'],
                                    errors = 'coerce')
 ```
 
-### 第 1 部分。提取日期/时间组件
+### 第一部分。提取日期/时间组件
 
 如上例所示，我们可以从给定的日期时间变量中提取日期时间部分的组件（`year`，`quarter`，`month`，`day`，`day_of_week`，`day_of_year`，`week_of_year`，`time`，`hour`，`minute`，`second`，`day_part`）。下面的列表提供了使用 pandas 内置函数可以提取的多个这样的组件。
 
@@ -118,7 +118,7 @@ df['date_issued'] = pd.to_datetime(df['date_issued'],
 
 我们可以使用 `.dt` 访问器提取所有这些组件。[在这里阅读有关日期访问器的更多信息](https://pandas.pydata.org/pandas-docs/stable/user_guide/basics.html#basics-dt-accessors)
 
-![](../Images/865a594fd09fdc507e55080c852fbd2d.png)
+![](img/865a594fd09fdc507e55080c852fbd2d.png)
 
 从日期时间变量 issued_date 中提取的组件。图片由作者提供
 
@@ -169,11 +169,11 @@ def day_part(hour):
 df['date_issued:day_part'] = df['date_issued:hour'].apply(day_part)df.head()
 ```
 
-![](../Images/52e9229dcc9bf851d292a6ec9fc75fff.png)
+![](img/52e9229dcc9bf851d292a6ec9fc75fff.png)
 
 为日期时间变量 issued_date 创建日部分。图片由作者提供
 
-### 第 2 部分。创建布尔标志
+### 第二部分。创建布尔标志
 
 如上例所示，我们可以从给定的日期时间变量中提取许多布尔标志（`is_month_start`、`is_month_end`、`is_quarter_start`、`is_quarter_end`、`is_year_start`、`is_year_end`、`is_weekend`）。下面的列表提供了几种可以使用 pandas 内置函数提取的组件，以及通过创建一些我们自己的函数来实现。
 
@@ -181,7 +181,7 @@ df['date_issued:day_part'] = df['date_issued:hour'].apply(day_part)df.head()
 
 再次，我们可以使用 `.dt` 访问器提取许多布尔标志。
 
-![](../Images/aa41450da8348b1993205f0ca49b54ef.png)
+![](img/aa41450da8348b1993205f0ca49b54ef.png)
 
 从 datetime 变量 issued_date 中提取的布尔标志。图像由作者提供。
 
@@ -195,11 +195,11 @@ df['date_issued:is_month_end'] = df['date_issued'].dt.is_month_end
 
 ### 创建周末标志：
 
-![](../Images/4ce3c583bb90f829bdf179decda50834.png)
+![](img/4ce3c583bb90f829bdf179decda50834.png)
 
 为 datetime 变量 issued_date 创建周末标志。图像由作者提供。
 
-如果我们查看日历，会看到2013年10月26日是一个星期六——周末。
+如果我们查看日历，会看到 2013 年 10 月 26 日是一个星期六——周末。
 
 ```py
 df['date_issued:is_weekend'] = np.where(df['date_issued:day_of_week'].isin([5,6]), 1,0)
@@ -219,7 +219,7 @@ df['date_issued:is_weekend'] = np.where(df['date_issued:day_of_week'].isin([5,6]
 
 在我们的示例数据集中，我们有两个列 date_last_payment 和 date_issued。让我们看看当我们仅仅计算这两个列的差异时会发生什么。
 
-![](../Images/d4e4299913fdc2c2cf1b5cf9afe22449.png)
+![](img/d4e4299913fdc2c2cf1b5cf9afe22449.png)
 
 在 pandas 中计算时间差异。图像由作者提供。
 
@@ -231,13 +231,13 @@ Pandas 默认提供以‘天’为单位的差异。注意 `dtype: timedelta64[n
 
 现在，如果我们只想要数字部分而不是整个字符串 `947 days`，我们可以使用 .dt 访问器做到这一点。
 
-![](../Images/607f87dc7013020fc7590929cb9f4d81.png)
+![](img/607f87dc7013020fc7590929cb9f4d81.png)
 
 使用 .dt 访问器在 pandas 中计算时间差异。图像由作者提供。
 
 不幸的是，我们不能以类似的方式获取月份。
 
-![](../Images/bc4f9ebfcbfe10a6861580b07f57cc81.png)
+![](img/bc4f9ebfcbfe10a6861580b07f57cc81.png)
 
 使用 .dt 访问器在 pandas 中计算时间差异是不具扩展性的。图像由作者提供。
 
@@ -247,7 +247,7 @@ Pandas 默认提供以‘天’为单位的差异。注意 `dtype: timedelta64[n
 
 为了获取发放贷款日期和最后支付日期之间的月份数，我们将编写如下代码：
 
-![](../Images/6e671aa2cc1f5543a911f1572b1fe269.png)
+![](img/6e671aa2cc1f5543a911f1572b1fe269.png)
 
 使用 NumPy timedelta64 在 pandas 中计算时间差异。图像由作者提供。
 
@@ -300,7 +300,7 @@ df = dt_fe.transform(df)
 df.head()
 ```
 
-![](../Images/77c4c459ae7774e8713ba134f540f00f.png)
+![](img/77c4c459ae7774e8713ba134f540f00f.png)
 
 使用 Fast_ml 进行日期时间变量的特征工程。图片来源：作者。
 
@@ -339,11 +339,11 @@ Notebook 可以在以下位置获得，包含完整功能的代码：
 
 **相关：**
 
-+   [使用 fast.ai 进行快速特征工程](/2018/03/feature-engineering-dates-fastai.html)
++   使用 fast.ai 进行快速特征工程
 
-+   [数值数据的特征工程](/2020/09/feature-engineering-numerical-data.html)
++   数值数据的特征工程
 
-+   [数据科学 101：归一化、标准化与正则化](/2021/04/data-science-101-normalization-standardization-regularization.html)
++   数据科学 101：归一化、标准化与正则化
 
 ### 相关主题
 

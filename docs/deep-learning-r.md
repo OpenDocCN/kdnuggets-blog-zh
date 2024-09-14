@@ -1,8 +1,8 @@
 # 使用 R 进行深度学习
 
-> 原文：[https://www.kdnuggets.com/2023/05/deep-learning-r.html](https://www.kdnuggets.com/2023/05/deep-learning-r.html)
+> 原文：[`www.kdnuggets.com/2023/05/deep-learning-r.html`](https://www.kdnuggets.com/2023/05/deep-learning-r.html)
 
-![使用 R 进行深度学习](../Images/a12e3fec2c14e7244e1ca348fa621207.png)
+![使用 R 进行深度学习](img/a12e3fec2c14e7244e1ca348fa621207.png)
 
 图片来源于 Bing 图片创作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -38,7 +38,7 @@
 
 下面的图示将帮助展示这些关系。
 
-![R中的深度学习](../Images/8a21ab290890dfba333613947867f24f.png)
+![R 中的深度学习](img/8a21ab290890dfba333613947867f24f.png)
 
 关于深度学习，有两个关键点需要注意：
 
@@ -50,19 +50,19 @@
 
 这些是深度学习模型的构建块。正如名称所示，神经一词来源于神经元，就像人脑中的神经元一样。实际上，深度神经网络的结构灵感来自于人脑的结构。
 
-一个神经网络有一个输入层、一个隐藏层和一个输出层。这个网络被称为浅层神经网络。当我们有多个隐藏层时，它就成为了深层神经网络，其中层数可以多达100层。
+一个神经网络有一个输入层、一个隐藏层和一个输出层。这个网络被称为浅层神经网络。当我们有多个隐藏层时，它就成为了深层神经网络，其中层数可以多达 100 层。
 
 下图展示了神经网络的样子。
 
-![R中的深度学习](../Images/fad2d6bb6d4d335f1f11aa3f711f9608.png)
+![R 中的深度学习](img/fad2d6bb6d4d335f1f11aa3f711f9608.png)
 
-这就引出了一个问题：如何在R中构建深度学习模型？答案是kera！
+这就引出了一个问题：如何在 R 中构建深度学习模型？答案是 kera！
 
-[Keras](https://saturncloud.io/glossary/Keras)是一个开源深度学习库，使得在机器学习中使用神经网络变得简单。这个库是一个包装器，使用[TensorFlow](https://saturncloud.io/glossary/tensorflow/)作为后端引擎。然而，也有其他后端选项，如Theano或CNTK。
+[Keras](https://saturncloud.io/glossary/Keras)是一个开源深度学习库，使得在机器学习中使用神经网络变得简单。这个库是一个包装器，使用[TensorFlow](https://saturncloud.io/glossary/tensorflow/)作为后端引擎。然而，也有其他后端选项，如 Theano 或 CNTK。
 
-现在让我们安装[TensorFlow](https://saturncloud.io/glossary/tensorflow)和Keras。
+现在让我们安装[TensorFlow](https://saturncloud.io/glossary/tensorflow)和 Keras。
 
-从使用reticulate创建虚拟环境开始
+从使用 reticulate 创建虚拟环境开始
 
 ```py
 library(reticulate)
@@ -88,9 +88,9 @@ tf$constant("Hello TensorFlow!")
 
 # 数据简介
 
-我将用于本教程的数据来自一个正在进行的薪资调查，该调查由[https://www.askamanager.org](https://www.askamanager.org/)进行。
+我将用于本教程的数据来自一个正在进行的薪资调查，该调查由[`www.askamanager.org`](https://www.askamanager.org/)进行。
 
-表单中主要询问的是你赚多少钱，另外还有一些细节，比如行业、年龄、工作经验年数等。这些细节被收集到一个Google表单中，我从中获取了数据。
+表单中主要询问的是你赚多少钱，另外还有一些细节，比如行业、年龄、工作经验年数等。这些细节被收集到一个 Google 表单中，我从中获取了数据。
 
 我们希望解决的问题是能够构建一个深度学习模型，该模型可以根据年龄、性别、工作经验年数和最高学历等信息预测某人的潜在收入。
 
@@ -118,7 +118,7 @@ salary_data <- salary_data %>% select(age,professional_experience_years,gender,h
 
 # 数据清理
 
-还记得计算机科学中的GIGO概念吗？（垃圾进，垃圾出）。这个概念在这里同样适用，就像在其他领域一样。我们的训练结果在很大程度上依赖于我们使用的数据质量。这就是为什么数据清理和转换在任何[数据科学](https://saturncloud.io/glossary/data-science)项目中都至关重要。
+还记得计算机科学中的 GIGO 概念吗？（垃圾进，垃圾出）。这个概念在这里同样适用，就像在其他领域一样。我们的训练结果在很大程度上依赖于我们使用的数据质量。这就是为什么数据清理和转换在任何[数据科学](https://saturncloud.io/glossary/data-science)项目中都至关重要。
 
 数据清理旨在解决的一些关键问题包括；一致性、缺失值、拼写问题、异常值和数据类型。我不会详细讲解这些问题是如何处理的，这只是为了避免偏离本文的主题。因此，我将使用清理后的数据版本，但如果你有兴趣了解清理的处理方法，可以查看这篇文章。
 
@@ -272,7 +272,7 @@ model %>% predict(as.matrix(x_test))
 
 +   [15 本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
 
-+   [KDnuggets 新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
 
 +   [15 本更多免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
 

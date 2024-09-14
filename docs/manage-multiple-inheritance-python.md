@@ -1,22 +1,22 @@
 # 如何管理 Python 中的多重继承
 
-> 原文：[https://www.kdnuggets.com/2022/03/manage-multiple-inheritance-python.html](https://www.kdnuggets.com/2022/03/manage-multiple-inheritance-python.html)
+> 原文：[`www.kdnuggets.com/2022/03/manage-multiple-inheritance-python.html`](https://www.kdnuggets.com/2022/03/manage-multiple-inheritance-python.html)
 
-![如何管理 Python 中的多重继承](../Images/113c4ec2bfab26d5c9db691de1e5d6ba.png)
+![如何管理 Python 中的多重继承](img/113c4ec2bfab26d5c9db691de1e5d6ba.png)
 
 图片由 [Hitesh Choudhary](https://unsplash.com/@hiteshchoudhary?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 在 [Unsplash](https://unsplash.com/s/photos/python-code?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供
 
-高级 [面向对象编程语言](/2020/12/object-oriented-programming-explained-simply-data-scientists.html) 如 C# 和 Java 不支持多重继承。这也是有原因的。它避免了模糊性，促进了强类型和封装。这最终导致了更清晰的代码和更少令人困惑的类/对象模型结构。然而，多重继承允许更多灵活的设计模式。
+高级 面向对象编程语言 如 C# 和 Java 不支持多重继承。这也是有原因的。它避免了模糊性，促进了强类型和封装。这最终导致了更清晰的代码和更少令人困惑的类/对象模型结构。然而，多重继承允许更多灵活的设计模式。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -52,7 +52,7 @@ class Child(Parent1, Parent2):
 
 与大多数面向对象编程语言一样，[Python 具有多级继承](https://www.educba.com/multilevel-inheritance-in-python/)。如果你的子类是从一个继承了另一个类特性的类派生的，它将继承两个类的所有特性。
 
-![如何管理 Python 中的多重继承](../Images/23d1cbf53e3b8b7ffe9b841e11e26732.png)
+![如何管理 Python 中的多重继承](img/23d1cbf53e3b8b7ffe9b841e11e26732.png)
 
 图 1
 
@@ -81,7 +81,7 @@ class D(B,C):
 
 类 C 也是类 A 的子类，并定义了一个类对象属性，该属性与类 A 中定义的一个属性同名。类 D 从 D 和 C 继承，但没有定义自己的属性。关系看起来像这样：
 
-![如何管理 Python 中的多重继承](../Images/0ca1e3b46acfce3a54a96978ba6ffa86.png)
+![如何管理 Python 中的多重继承](img/0ca1e3b46acfce3a54a96978ba6ffa86.png)
 
 图 2
 
@@ -107,19 +107,19 @@ MRO 从当前类开始进行属性搜索，然后移动到父类。如果有多�
 
 再次翻译为：D -> B -> C -> A -> object 类。然而，对于如上所述的简单钻石问题，这很容易理解。然而，如果你得到：
 
-![如何管理 Python 中的多重继承](../Images/5a13f2b6f70969e01118ee4cbea21812.png)
+![如何管理 Python 中的多重继承](img/5a13f2b6f70969e01118ee4cbea21812.png)
 
 图 3（来源：[维基媒体公用领域 (CC) 许可](https://upload.wikimedia.org/wikipedia/commons/4/47/C3_linearization_example.svg)）
 
 MRO 使用称为深度优先搜索的算法来解析所有方法和属性调用。Python 的最新版本修订了 MRO 的工作方式。目前还不确定 Python 的类路径规则和 MRO 是否会在未来的版本中得到完善。因此，许多开发者（包括我自己）建议你避免构建过多的多重和多层次继承的程序或算法。
 
-如果你编写的代码具有类似于上述图示的依赖结构，可以认为你写了[坏代码](/2019/02/4-reasons-machine-learning-code-probably-bad.html)。实际上，这个指南中的示例几乎没有类之间的真实功能代码。然而，这些结构仍然令人困惑。现在，假设你定义了具有相同结构的方法和属性并开始调用它们……
+如果你编写的代码具有类似于上述图示的依赖结构，可以认为你写了坏代码。实际上，这个指南中的示例几乎没有类之间的真实功能代码。然而，这些结构仍然令人困惑。现在，假设你定义了具有相同结构的方法和属性并开始调用它们……
 
 ## 结论
 
 虽然 MRO 存在并且每个 Python 开发者都应该理解它，但你的代码不应该像图 3 那样结构化。然而，作为开发者（特别是从事机器学习的开发者），你很可能会遇到具有复杂依赖关系的类结构。使用*mro()*方法应有助于你调试、解开和理解你可能没有编写的代码。
 
-Python 相对于其他面向对象编程语言的主要优势在于其灵活性和自由度。然而，这种流动性也可能被视为一个劣势。错误和低效代码的空间过大。因此，程序员，特别是那些从事机器学习和深度学习的程序员，应学习和应用最[优化的设计模式](/2020/11/deep-learning-design-patterns.html)。尽管如此，为了安全起见，你可以选择完全避免在代码中使用多重继承。然而，如果你决定实现它，请谨慎且节俭地使用。
+Python 相对于其他面向对象编程语言的主要优势在于其灵活性和自由度。然而，这种流动性也可能被视为一个劣势。错误和低效代码的空间过大。因此，程序员，特别是那些从事机器学习和深度学习的程序员，应学习和应用最优化的设计模式。尽管如此，为了安全起见，你可以选择完全避免在代码中使用多重继承。然而，如果你决定实现它，请谨慎且节俭地使用。
 
 **[Nahla Davies](http://nahlawrites.com/)** 是一位软件开发者和技术写作专家。在全职投入技术写作之前，她曾担任一家 Inc. 5000 体验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 

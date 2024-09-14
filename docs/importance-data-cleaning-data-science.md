@@ -1,22 +1,22 @@
 # 数据科学中数据清洗的重要性
 
-> 原文：[https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html](https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html`](https://www.kdnuggets.com/2023/08/importance-data-cleaning-data-science.html)
 
-![数据科学中数据清洗的重要性](../Images/15e040078d2f4f18c16c97412c1f2d88.png)
+![数据科学中数据清洗的重要性](img/15e040078d2f4f18c16c97412c1f2d88.png)
 
 编辑者提供的图片
 
-在 [数据科学](/2023/07/first-half-2023-data-science-ai-developments.html)中，预测模型的准确性至关重要，以确保避免任何高昂的错误，并且每个方面都能达到其**最佳水平**。数据在选择和格式化后，需要进行清洗，这是模型开发过程中的一个关键阶段。
+在 数据科学中，预测模型的准确性至关重要，以确保避免任何高昂的错误，并且每个方面都能达到其**最佳水平**。数据在选择和格式化后，需要进行清洗，这是模型开发过程中的一个关键阶段。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -26,7 +26,7 @@
 
 在数据科学中，数据清洗是识别错误数据并修复错误的过程，以使最终的数据集准备好使用。错误可能包括重复字段、格式不正确、不完整字段、无关或不准确的数据以及损坏的数据。
 
-![数据科学中数据清洗的重要性](../Images/dd67781f627cb4da75af98a8cebd011d.png)
+![数据科学中数据清洗的重要性](img/dd67781f627cb4da75af98a8cebd011d.png)
 
 [来源](https://anchorcomputersoftware.com/solutions/data-quality/data-cleansing)
 
@@ -36,7 +36,7 @@
 
 数据很少以易于使用的形式到达；实际上，可以肯定地说数据从未是完美的。当从不同的来源和实际环境中收集数据时，数据必然包含大量错误，并采用不同的格式。因此，数据清洗的重要性便体现出来了——将数据变得无误、相关且易于模型吸收。
 
-在处理来自多个来源的大型数据集时，可能会出现错误，包括重复或错误分类。这些错误严重影响算法的准确性。值得注意的是，数据清理和组织可能会消耗 [数据科学家高达80%的时间](https://www.projectpro.io/article/why-data-preparation-is-an-important-part-of-data-science/242)，突显了其在数据处理流程中的关键作用。
+在处理来自多个来源的大型数据集时，可能会出现错误，包括重复或错误分类。这些错误严重影响算法的准确性。值得注意的是，数据清理和组织可能会消耗 [数据科学家高达 80%的时间](https://www.projectpro.io/article/why-data-preparation-is-an-important-part-of-data-science/242)，突显了其在数据处理流程中的关键作用。
 
 ## 数据清理的示例
 
@@ -56,7 +56,7 @@
 
 在数据集中，某些数据点可能与其他数据点没有实质性的关联（例如，在数值或行为方面）。因此，在数据分析过程中，这些异常值有可能显著扭曲结果，导致误导性的预测和有缺陷的决策。然而，通过实施各种数据清理技术，可以识别并消除这些异常值，从而确保数据集的完整性和相关性。
 
-![数据科学中数据清理的重要性](../Images/50b55e1385e359bbeef572c9203af60d.png)
+![数据科学中数据清理的重要性](img/50b55e1385e359bbeef572c9203af60d.png)
 
 [来源](https://medium.com/donato-story/improving-data-quality-with-outlier-detection-techniques-a-crisp-dm-approach-to-data-preparation-5a04a9eef844)
 
@@ -66,7 +66,7 @@
 
 +   **准确性** - 使用数据清理工具和技术可以显著减少数据集中的错误和不准确之处。这对于数据分析至关重要，有助于创建能够做出准确预测的模型。
 
-+   **可用性** - 一旦数据被清理并正确格式化，它可以应用于多个用例，使其变得更加[可访问](/2023/07/mostly-data-access-severely-lacking-synthetic-data-help.html)，从而可以用于各种项目类型。
++   **可用性** - 一旦数据被清理并正确格式化，它可以应用于多个用例，使其变得更加可访问，从而可以用于各种项目类型。
 
 +   **分析** - 清洁的数据使得分析阶段更加有效，允许分析师获得更深入的见解并提供更可靠的结果。
 
@@ -74,7 +74,7 @@
 
 +   **治理** - 数据清理可以帮助组织遵守严格的法规和数据治理，保护个人隐私并避免处罚。最近几个月出台了更多的数据合规法律。例如，最近的[德克萨斯州消费者隐私法（TDPSA）](https://www.ipvanish.com/blog/tdpsa-texas-consumer-privacy-law/)，禁止某些数据实践，如收集不为收集目的合理必要的个人客户数据。
 
-# 数据清理过程：8个步骤
+# 数据清理过程：8 个步骤
 
 数据管道的数据清理阶段由八个常见步骤组成：
 
@@ -108,7 +108,7 @@
 
 ## 4\. 数据类型转换
 
-在使用Python处理CSV数据时，分析师通常依赖于Pandas这一数据分析库。然而，有时Pandas在有效处理数据类型方面会有所不足。为了保证数据转换的准确性，分析师采用清理技术。这确保了在应用于实际项目时，正确的数据能够被轻松识别。
+在使用 Python 处理 CSV 数据时，分析师通常依赖于 Pandas 这一数据分析库。然而，有时 Pandas 在有效处理数据类型方面会有所不足。为了保证数据转换的准确性，分析师采用清理技术。这确保了在应用于实际项目时，正确的数据能够被轻松识别。
 
 ## 5\. 异常值处理
 
@@ -132,7 +132,7 @@
 
 在数据清理阶段需要纠正的常见错误包括重复数据、缺失值、不相关数据、异常值以及将多种数据类型或语言转换为单一形式。
 
-**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她还曾担任过各种有趣的角色，包括在一家Inc. 5,000 体验品牌机构担任首席程序员，该机构的客户包括三星、时代华纳、Netflix和索尼。
+**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她还曾担任过各种有趣的角色，包括在一家 Inc. 5,000 体验品牌机构担任首席程序员，该机构的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 更多相关主题
 

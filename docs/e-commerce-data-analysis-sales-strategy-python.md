@@ -1,14 +1,14 @@
 # 使用 Python 进行的电子商务数据分析以制定销售策略
 
-> 原文：[https://www.kdnuggets.com/2021/04/e-commerce-data-analysis-sales-strategy-python.html](https://www.kdnuggets.com/2021/04/e-commerce-data-analysis-sales-strategy-python.html)
+> 原文：[`www.kdnuggets.com/2021/04/e-commerce-data-analysis-sales-strategy-python.html`](https://www.kdnuggets.com/2021/04/e-commerce-data-analysis-sales-strategy-python.html)
 
-[评论](#comments)
+评论
 
 **由 [Juhi Sharma](https://www.linkedin.com/in/juhi-sharma-ds/<code>)，产品分析师**
 
-![图](../Images/bf7dd9db63df30276ccbe6a200ef0e48.png)
+![图](img/bf7dd9db63df30276ccbe6a200ef0e48.png)
 
-来源 — [https://www.wvgazettemail.com/](https://www.wvgazettemail.com/)
+来源 — [`www.wvgazettemail.com/`](https://www.wvgazettemail.com/)
 
 ### 介绍
 
@@ -16,23 +16,23 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
-Kmart 是美国领先的在线零售商，作为其年度销售回顾会议的一部分，他们需要根据2019年的销售数据洞察来决定2020年的销售策略。
+Kmart 是美国领先的在线零售商，作为其年度销售回顾会议的一部分，他们需要根据 2019 年的销售数据洞察来决定 2020 年的销售策略。
 
-数据与2019年每个月的销售有关，任务是生成关键洞察，以帮助 Kmart 的**销售团队**做出有关优化销售策略的重要业务决策。
+数据与 2019 年每个月的销售有关，任务是生成关键洞察，以帮助 Kmart 的**销售团队**做出有关优化销售策略的重要业务决策。
 
 ### 数据理解
 
 1.  数据属于 Kmart - 美国领先的在线零售商。
 
-1.  时间范围 — 2019年1月 — 2019年12月
+1.  时间范围 — 2019 年 1 月 — 2019 年 12 月
 
 1.  唯一产品 — 19
 
@@ -42,7 +42,7 @@ Kmart 是美国领先的在线零售商，作为其年度销售回顾会议的�
 
 1.  KPI’s — 总销售额，总销售产品数
 
-![](../Images/fc97de29a2918a55e5979a4c211b07d1.png)
+![](img/fc97de29a2918a55e5979a4c211b07d1.png)
 
 来源 — 作者
 
@@ -60,7 +60,7 @@ Kmart 是美国领先的在线零售商，作为其年度销售回顾会议的�
 
 1.  加载了每个月的数据，并使用 pandas 制作了数据框
 
-1.  合并数据集以制作一个2019年销售数据的数据集。
+1.  合并数据集以制作一个 2019 年销售数据的数据集。
 
 1.  处理空值和垃圾数据。
 
@@ -110,7 +110,7 @@ for i in list:
     print(i.shape)
 ```
 
-![](../Images/e593956194ad706c433425d6f21d21b0.png)
+![](img/e593956194ad706c433425d6f21d21b0.png)
 
 来源 — 作者
 
@@ -120,7 +120,7 @@ for i in list:
 frame=pd.concat(list)
 ```
 
-![](../Images/c6906550d4a1c87636dde07e8be87d14.png)
+![](img/c6906550d4a1c87636dde07e8be87d14.png)
 
 来源 — 作者
 
@@ -130,7 +130,7 @@ frame=pd.concat(list)
 frame.columns
 ```
 
-![](../Images/f9318bf578a2311a67f37443c0eaf3f8.png)
+![](img/f9318bf578a2311a67f37443c0eaf3f8.png)
 
 来源 — 作者
 
@@ -140,7 +140,7 @@ frame.columns
 frame.info()
 ```
 
-![](../Images/033d03f8b338ad6e93c10eb2cc7bb108.png)
+![](img/033d03f8b338ad6e93c10eb2cc7bb108.png)
 
 来源 — 作者
 
@@ -150,7 +150,7 @@ frame.info()
 frame.isnull().sum() # there are 545 null values in each column except month
 ```
 
-![](../Images/4d315872e6e2a94f5d20d4737352f10e.png)
+![](img/4d315872e6e2a94f5d20d4737352f10e.png)
 
 来源-作者
 
@@ -158,7 +158,7 @@ frame.isnull().sum() # there are 545 null values in each column except month
 (frame.isnull().sum().sum())/len(frame)*100  # we have 1.75 percent null values , so we can drop them
 ```
 
-![](../Images/5de95e180d7ec9acfbf22ecd9867e9a1.png)
+![](img/5de95e180d7ec9acfbf22ecd9867e9a1.png)
 
 来源-作者
 
@@ -169,19 +169,19 @@ frame=frame.dropna()
 frame.isnull().sum()
 ```
 
-![](../Images/18e2c353cb15e087a1821e2c6e52b886.png)
+![](img/18e2c353cb15e087a1821e2c6e52b886.png)
 
 来源-作者
 
 ### 9\. 删除垃圾数据
 
-我们观察到有355列中的行值与标题相同，因此创建一个新的数据框，将这些值排除在外。
+我们观察到有 355 列中的行值与标题相同，因此创建一个新的数据框，将这些值排除在外。
 
 ```py
 frame[frame['Quantity Ordered'] == "Quantity Ordered"]
 ```
 
-![](../Images/228929931269f8362444b6a4834b9334.png)
+![](img/228929931269f8362444b6a4834b9334.png)
 
 ```py
 df_filtered = frame[frame['Quantity Ordered'] != "Quantity Ordered"] 
@@ -189,7 +189,7 @@ df_filtered.head(15)
 df_filtered.shape
 ```
 
-![](../Images/7da3808b46bae01f931117ed513eb33e.png)
+![](img/7da3808b46bae01f931117ed513eb33e.png)
 
 来源-作者
 
@@ -202,7 +202,7 @@ df_filtered["Quantity Ordered"]=df_filtered["Quantity Ordered"].astype("float")
 df_filtered["Price Each"]=df_filtered["Price Each"].astype("float")# Creating Sales Column By multiplying Quantity Ordered and Price of Each Productdf_filtered["sales"]=df_filtered["Quantity Ordered"]*df_filtered["Price Each"]
 ```
 
-![](../Images/ec137ea3ef442afd506b66b0670c7049.png)
+![](img/ec137ea3ef442afd506b66b0670c7049.png)
 
 来源-作者
 
@@ -219,13 +219,13 @@ plt.title("Month wise Sale")
 plt.show()
 ```
 
-![](../Images/1bcf676c7f980fdb4a880486c2e094b3.png)
+![](img/1bcf676c7f980fdb4a880486c2e094b3.png)
 
 来源-作者
 
-销售最佳的月份是12月。
+销售最佳的月份是 12 月。
 
-12月的总销售额为 $ 4619297。
+12 月的总销售额为 $ 4619297。
 
 **Q 2\. 哪个城市的销售额最高？**
 
@@ -238,7 +238,7 @@ dftemp['City'] = list_city
 dftemp.head()
 ```
 
-![](../Images/7ff44c98c75e2ee64708515d4e5c09ab.png)
+![](img/7ff44c98c75e2ee64708515d4e5c09ab.png)
 
 来源-作者
 
@@ -248,7 +248,7 @@ df_city=df_city.to_frame()
 df_city
 ```
 
-![](../Images/da07bec9025e8b5ba27158194000439f.png)
+![](img/da07bec9025e8b5ba27158194000439f.png)
 
 来源-作者
 
@@ -264,7 +264,7 @@ plt.title("City wise Sales")
 plt.show()
 ```
 
-![](../Images/3a96717d8e5cc881c14304f949689d60.png)
+![](img/3a96717d8e5cc881c14304f949689d60.png)
 
 来源-作者
 
@@ -277,7 +277,7 @@ print(df_filtered["Product"].unique())
 print(df_filtered["Product"].nunique())
 ```
 
-![](../Images/c231220300186229151ac418984d1423.png)
+![](img/c231220300186229151ac418984d1423.png)
 
 来源-作者
 
@@ -287,7 +287,7 @@ df_p=df_p.to_frame()
 df_p
 ```
 
-![](../Images/4c1ad0466d355bc86f233ca28bc848de.png)
+![](img/4c1ad0466d355bc86f233ca28bc848de.png)
 
 来源-作者
 
@@ -303,11 +303,11 @@ plt.title("Prouct and Quantity Ordered")
 plt.show()
 ```
 
-![](../Images/8ed745c019b7bb0ecd24417dd66b02da.png)
+![](img/8ed745c019b7bb0ecd24417dd66b02da.png)
 
 来源-作者
 
-一年内销售了31017.0数量的AAA电池（4包）。它销量最大，因为它是最便宜的产品。
+一年内销售了 31017.0 数量的 AAA 电池（4 包）。它销量最大，因为它是最便宜的产品。
 
 **Q 4 什么时候展示广告最合适，以最大化客户购买产品的可能性？**
 
@@ -320,7 +320,7 @@ dftime['Time'] = list_time
 dftime.head()
 ```
 
-![](../Images/fac960006954ebce29b86097355cc91a.png)
+![](img/fac960006954ebce29b86097355cc91a.png)
 
 来源-作者
 
@@ -330,7 +330,7 @@ df_t=df_t.to_frame()
 df_t
 ```
 
-![](../Images/dff4673b462152af0d0e07c02c24a917.png)
+![](img/dff4673b462152af0d0e07c02c24a917.png)
 
 来源-作者
 
@@ -338,7 +338,7 @@ df_t
 df_t.columns
 ```
 
-![](../Images/089001f2000239da1697df648ea01488.png)
+![](img/089001f2000239da1697df648ea01488.png)
 
 来源-作者
 
@@ -346,25 +346,25 @@ df_t.columns
 
 *感谢阅读！如果你想联系我，请随时通过 jsc1534@gmail.com 或我的*[*LinkedIn 个人资料*](http://www.linkedin.com/in/juhi-sharma-ds)*与我联系。你还可以在我的*[*GitHub*](https://github.com/jsc1535/K-Mart-Data-Analysis)*账户上找到这篇文章的代码以及一些非常有用的数据科学项目。*
 
-**简介: [Juhi Sharma](https://www.linkedin.com/in/juhi-sharma-ds/)** ([Medium](https://juhi95.medium.com/), [GitHub](https://github.com/jsc1535)) 具有2年以上分析师工作经验，涉及项目管理、业务分析和客户处理。目前，Juhi在一家产品公司担任数据分析师。Juhi拥有分析数据集、创建机器学习和深度学习模型的实际经验。Juhi热衷于通过数据驱动的方法解决商业问题。
+**简介: [Juhi Sharma](https://www.linkedin.com/in/juhi-sharma-ds/)** ([Medium](https://juhi95.medium.com/), [GitHub](https://github.com/jsc1535)) 具有 2 年以上分析师工作经验，涉及项目管理、业务分析和客户处理。目前，Juhi 在一家产品公司担任数据分析师。Juhi 拥有分析数据集、创建机器学习和深度学习模型的实际经验。Juhi 热衷于通过数据驱动的方法解决商业问题。
 
 [原文](https://pub.towardsai.net/ecommerce-data-analysis-for-sales-strategy-using-python-5b026fd36a6e). 经许可转载。
 
 **相关内容：**
 
-+   [Pandas Profiling: 一行代码的魔法数据分析](/2021/02/pandas-profiling-one-line-magical-code-eda.html)
++   Pandas Profiling: 一行代码的魔法数据分析
 
-+   [让你的数据项目更有价值的问题](/2021/03/one-question-makes-data-project-more-valuable.html)
++   让你的数据项目更有价值的问题
 
-+   [如何构建正确的问题以通过数据回答](/2021/03/right-questions-answered-using-data.html)
++   如何构建正确的问题以通过数据回答
 
 ### 更多相关话题
 
-+   [掌握数据战略的15本顶级书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据战略的 15 本顶级书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
 
-+   [KDnuggets新闻，6月22日：主要的监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要的监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
-+   [GenAI时代的人工智能转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
++   [GenAI 时代的人工智能转型战略](https://www.kdnuggets.com/the-ai-transformation-strategy-in-the-genai-era)
 
 +   [如何创建有效的人工智能战略](https://www.kdnuggets.com/2022/11/create-effective-ai-strategy.html)
 

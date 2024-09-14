@@ -1,22 +1,22 @@
 # 深度学习是银弹吗？
 
-> 原文：[https://www.kdnuggets.com/2017/02/deep-learning-silver-bullet.html](https://www.kdnuggets.com/2017/02/deep-learning-silver-bullet.html)
+> 原文：[`www.kdnuggets.com/2017/02/deep-learning-silver-bullet.html`](https://www.kdnuggets.com/2017/02/deep-learning-silver-bullet.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由丹尼尔·勒梅尔，魁北克大学撰写。**
 
-在2016年，我们看到了涉及人工智能的广泛突破，特别是[深度学习](https://www.wired.com/2016/12/2016-year-deep-learning-took-internet/)。谷歌、脸书和百度宣布了几个使用深度学习的突破。谷歌还击败了围棋。
+在 2016 年，我们看到了涉及人工智能的广泛突破，特别是[深度学习](https://www.wired.com/2016/12/2016-year-deep-learning-took-internet/)。谷歌、脸书和百度宣布了几个使用深度学习的突破。谷歌还击败了围棋。
 
 [深度学习](https://en.wikipedia.org/wiki/Deep_learning)是一类特定的机器学习算法。它有着悠久的历史，起源于计算机科学的早期阶段。然而，并非所有的机器学习都是深度学习。
 
-![](../Images/b786a3f8b3f54c15672760b73c682dc3.png)
+![](img/b786a3f8b3f54c15672760b73c682dc3.png)
 
-我们现在是2017年，刚刚1月，人工智能领域的突破不断被宣布。这些天，我们听说[顶级人类扑克玩家被击败](https://www.technologyreview.com/s/603342/poker-is-the-latest-game-to-fold-against-artificial-intelligence/)。
+我们现在是 2017 年，刚刚 1 月，人工智能领域的突破不断被宣布。这些天，我们听说[顶级人类扑克玩家被击败](https://www.technologyreview.com/s/603342/poker-is-the-latest-game-to-fold-against-artificial-intelligence/)。
 
 特别是，卡内基梅隆大学的一个系统叫做[Libratus](https://en.wikipedia.org/wiki/Libratus)似乎取得了很多成功。
 
-关于Libratus的详细信息很少。引起我注意的是提到它使用了“反事实遗憾最小化”，这是一种传统的机器学习方法，并非深度学习的一种形式。
+关于 Libratus 的详细信息很少。引起我注意的是提到它使用了“反事实遗憾最小化”，这是一种传统的机器学习方法，并非深度学习的一种形式。
 
 鉴于对深度学习的所有炒作，我发现这几乎让人惊讶……真的还有人工智能研究者在研究深度学习之外的技术吗？（我半开玩笑地说。）
 
@@ -54,21 +54,21 @@
 
 **相关：**
 
-+   [数据科学难题，回顾](/2017/01/data-science-puzzle-revisited.html)
++   数据科学难题，回顾
 
-+   [2026年人工智能中的常识？](/2016/08/common-sense-artificial-intelligence-2026.html)
++   2026 年人工智能中的常识？
 
-+   [创建好奇的机器：构建信息搜寻代理](/2017/01/maluuba-creating-curious-machines-information-seeking-agents.html)
++   创建好奇的机器：构建信息搜寻代理
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -82,6 +82,6 @@
 
 +   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [一个90亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [成功数据科学家的五个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

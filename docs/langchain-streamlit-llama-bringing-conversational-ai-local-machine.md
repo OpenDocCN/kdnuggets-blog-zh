@@ -1,8 +1,8 @@
 # LangChain + Streamlit + Llama：将对话 AI 带到你的本地机器
 
-> 原文：[https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
+> 原文：[`www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html`](https://www.kdnuggets.com/2023/08/langchain-streamlit-llama-bringing-conversational-ai-local-machine.html)
 
-![LangChain + Streamlit + Llama：将对话 AI 带到你的本地机器](../Images/27ddeaf200b7c811937a171c487ffd39.png)
+![LangChain + Streamlit + Llama：将对话 AI 带到你的本地机器](img/27ddeaf200b7c811937a171c487ffd39.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 大型语言模型（LLMs）是指能够生成类似人类语言的文本并以自然方式理解提示的机器学习模型。这些模型通过使用包含书籍、文章、网站和其他来源的大型数据集进行训练。通过分析数据中的统计模式，LLMs 预测最可能跟随给定输入的词或短语。
 
-![LangChain + Streamlit + Llama：将对话 AI 带到你的本地机器](../Images/e991e62406a4b0d7a08a09757b8f64d8.png)
+![LangChain + Streamlit + Llama：将对话 AI 带到你的本地机器](img/e991e62406a4b0d7a08a09757b8f64d8.png)
 
 **近几年 LLM 的时间轴：**[**大型语言模型的调研**](https://arxiv.org/abs/2303.18223)
 
@@ -42,7 +42,7 @@ LangChain 彻底改变了各种应用程序的开发过程，包括聊天机器�
 
 # 动机？
 
-![LangChain + Streamlit + Llama: 将对话式 AI 带到本地机器](../Images/76904d8d6b7759d86c1d9c30d6e1e002.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到本地机器](img/76904d8d6b7759d86c1d9c30d6e1e002.png)
 
 **作者提供的图片**
 
@@ -60,13 +60,13 @@ LangChain 彻底改变了各种应用程序的开发过程，包括聊天机器�
 
 1.  `**使用 Streamlit 构建应用程序**`
 
-# 第1节：设置虚拟环境和创建文件结构
+# 第一部分：设置虚拟环境和创建文件结构
 
 设置虚拟环境提供了一个受控且隔离的环境来运行应用程序，确保其依赖项与其他系统范围的包分开。这种方法简化了依赖项的管理，并有助于在不同环境中保持一致性。
 
 为了设置这个应用程序的虚拟环境，我将在我的 GitHub 仓库中提供 pip 文件。首先，让我们创建图中所示的必要文件结构。或者，你也可以直接克隆仓库以获取所需文件。
 
-![LangChain + Streamlit + Llama: 将对话式 AI 带到本地机器](../Images/a4c8b4dc938d177ac3e69737c4730181.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到本地机器](img/a4c8b4dc938d177ac3e69737c4730181.png)
 
 **作者提供的图片：文件结构**
 
@@ -74,33 +74,33 @@ LangChain 彻底改变了各种应用程序的开发过程，包括聊天机器�
 
 为了创建虚拟环境并安装其中的所有依赖项，我们可以使用 `**pipenv install**`命令，或者直接运行`**setup_env.bat**`批处理文件，它将从 `**pipfile**`中安装所有依赖项。这将确保在虚拟环境中安装所有必要的软件包和库。一旦依赖项成功安装，我们可以继续进行下一步，即下载所需的模型。这里是[仓库](https://github.com/afaqueumer/DocQA)。
 
-# 第2节：在本地机器上获取 LLaMA
+# 第二部分：在本地机器上获取 LLaMA
 
 ## 什么是 LLaMA？
 
-LLaMA是Meta AI设计的新型大型语言模型，Meta是Facebook的母公司。LLaMA拥有从70亿到650亿参数的多种模型，是现有的最全面的语言模型之一。2023年2月24日，Meta将LLaMA模型公开发布，展示了其对开放科学的承诺。
+LLaMA 是 Meta AI 设计的新型大型语言模型，Meta 是 Facebook 的母公司。LLaMA 拥有从 70 亿到 650 亿参数的多种模型，是现有的最全面的语言模型之一。2023 年 2 月 24 日，Meta 将 LLaMA 模型公开发布，展示了其对开放科学的承诺。
 
-![LangChain + Streamlit + Llama: 将对话式AI带到你的本地机器](../Images/821f71d5744b7f82f05e5a4e844c6461.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](img/821f71d5744b7f82f05e5a4e844c6461.png)
 
 图片来源: [LLaMA](https://research.facebook.com/publications/llama-open-and-efficient-foundation-language-models/)
 
-考虑到LLaMA的卓越能力，我们选择使用这个强大的语言模型来满足我们的需求。具体来说，我们将使用LLaMA的最小版本，即LLaMA 7B。即便在这个较小的规模下，LLaMA 7B仍提供显著的语言处理能力，使我们能够高效且有效地实现所需的结果。
+考虑到 LLaMA 的卓越能力，我们选择使用这个强大的语言模型来满足我们的需求。具体来说，我们将使用 LLaMA 的最小版本，即 LLaMA 7B。即便在这个较小的规模下，LLaMA 7B 仍提供显著的语言处理能力，使我们能够高效且有效地实现所需的结果。
 
 > ***官方研究论文* : **`[**LLaMA: 开放且高效的基础语言模型**](https://research.facebook.com/publications/llama-open-and-efficient-foundation-language-models/)`
 
-要在本地CPU上运行LLM，我们需要一个GGML格式的本地模型。有几种方法可以实现这一点，但最简单的方法是直接从[**Hugging Face模型库**](https://huggingface.co/models)下载bin文件。在我们的案例中，我们将下载Llama 7B模型。这些模型是开源的，可以自由下载。
+要在本地 CPU 上运行 LLM，我们需要一个 GGML 格式的本地模型。有几种方法可以实现这一点，但最简单的方法是直接从[**Hugging Face 模型库**](https://huggingface.co/models)下载 bin 文件。在我们的案例中，我们将下载 Llama 7B 模型。这些模型是开源的，可以自由下载。
 
-如果你想节省时间和精力，不用担心——我已经为你准备好了。这里是直接下载模型的链接[?](https://huggingface.co/TheBloke/LLaMa-7B-GGML)。只需下载任何一个版本，然后将文件移动到我们根目录中的models目录下。这样，你就能方便地使用这个模型。
+如果你想节省时间和精力，不用担心——我已经为你准备好了。这里是直接下载模型的链接[?](https://huggingface.co/TheBloke/LLaMa-7B-GGML)。只需下载任何一个版本，然后将文件移动到我们根目录中的 models 目录下。这样，你就能方便地使用这个模型。
 
-## 什么是GGML？为什么选择GGML？如何使用GGML？LLaMA CPP
+## 什么是 GGML？为什么选择 GGML？如何使用 GGML？LLaMA CPP
 
-GGML是一个用于机器学习的Tensor库，它只是一个C++库，允许你在CPU或CPU+GPU上运行LLMs。它定义了一种用于分发大型语言模型（LLMs）的二进制格式。GGML利用了一种叫做***量化***的技术，使大型语言模型可以在消费者硬件上运行。
+GGML 是一个用于机器学习的 Tensor 库，它只是一个 C++库，允许你在 CPU 或 CPU+GPU 上运行 LLMs。它定义了一种用于分发大型语言模型（LLMs）的二进制格式。GGML 利用了一种叫做***量化***的技术，使大型语言模型可以在消费者硬件上运行。
 
 ## 那么，什么是量化？
 
-LLM的权重是浮点（十进制）数字。就像表示一个大整数（例如1000）比表示一个小整数（例如1）需要更多空间一样，表示一个高精度浮点数（例如0.0001）也比表示一个低精度浮点数（例如0.1）需要更多空间。对大型语言模型进行***量化***的过程涉及减少权重表示的精度，以减少使用模型所需的资源。GGML支持多种量化策略（例如4-bit、5-bit和8-bit量化），每种策略在效率和性能之间提供了不同的权衡。
+LLM 的权重是浮点（十进制）数字。就像表示一个大整数（例如 1000）比表示一个小整数（例如 1）需要更多空间一样，表示一个高精度浮点数（例如 0.0001）也比表示一个低精度浮点数（例如 0.1）需要更多空间。对大型语言模型进行***量化***的过程涉及减少权重表示的精度，以减少使用模型所需的资源。GGML 支持多种量化策略（例如 4-bit、5-bit 和 8-bit 量化），每种策略在效率和性能之间提供了不同的权衡。
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到您的本地机器](../Images/1c2bbc0d51b28e1de91c6ef15b2ec866.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到您的本地机器](img/1c2bbc0d51b28e1de91c6ef15b2ec866.png)
 
 Llama 的量化大小
 
@@ -114,13 +114,13 @@ Llama 的量化大小
 
 这时 Python 绑定就派上用场了。绑定指的是为我们 Python 和 C++ 之间创建桥梁或接口的过程。我们将使用 `**llama-cpp-python**`，这是 `**llama.cpp**` 的 Python 绑定，充当 LLaMA 模型在纯 C/C++ 中的推理。`**llama.cpp**` 的主要目标是使用 4 位整数量化运行 LLaMA 模型。这种集成允许我们有效地利用 LLaMA 模型，结合 C/C++ 实现的优势和 4 位整数量化的好处。
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到您的本地机器](../Images/36db440161ec441ebaedf10dddfeb864.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到您的本地机器](img/36db440161ec441ebaedf10dddfeb864.png)
 
 llama.cpp 支持的模型： [来源](https://github.com/ggerganov/llama.cpp)
 
 准备好 GGML 模型并且所有依赖项到位（感谢 pipfile）之后，是时候开始我们的 LangChain 之旅了。但在深入 LangChain 的精彩世界之前，让我们先从惯例 **“Hello World”** 仪式开始 — 这是我们每次探索新语言或框架时遵循的传统，毕竟 LLM 也是一种语言模型。
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到您的本地机器](../Images/7cb74721780631998d742ea12e5c5e43.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到您的本地机器](img/7cb74721780631998d742ea12e5c5e43.png)
 
 作者提供的图片：在 CPU 上与 LLM 互动
 
@@ -140,21 +140,21 @@ llama.cpp 支持的模型： [来源](https://github.com/ggerganov/llama.cpp)
 
 为了与 LLM 提供无缝互动，LangChain 提供了多个类和函数，通过使用提示模板，使构造和处理提示变得简单。这是一种可重复的生成提示的方式。它包含一个文本字符串**模板**，可以接收来自最终用户的一组参数并生成提示。让我们看几个例子。
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](../Images/5a8edcd9f81501a0e08b0070b2bf93fd.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](img/5a8edcd9f81501a0e08b0070b2bf93fd.png)
 
 作者提供的图片：没有输入变量的提示
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](../Images/8be0c291e1eeb6878ebd2a97aff72294.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](img/8be0c291e1eeb6878ebd2a97aff72294.png)
 
 作者提供的图片：使用单一输入变量的提示
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](../Images/a2765b9f4326d4810b39972bcfa3f5ad.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](img/a2765b9f4326d4810b39972bcfa3f5ad.png)
 
 作者提供的图片：使用多个输入变量的提示
 
 我希望之前的解释已经让你对提示的概念有了更清晰的理解。现在，让我们继续对 LLM 进行提示。
 
-![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](../Images/27412fb10867abc0e375460b956ed473.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](img/27412fb10867abc0e375460b956ed473.png)
 
 作者提供的图片：通过 Langchain LLM 进行提示
 
@@ -164,7 +164,7 @@ LangChain 提供了 Chain 接口用于此类**链式**应用。我们非常泛�
 
 为了理解其中一个，让我们创建一个非常简单的**链**，它将接受用户输入，用它格式化提示，然后使用我们已经创建的上述单独组件将其发送给 LLM。
 
-![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](../Images/d0aef0755947767e82235ed12042833a.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](img/d0aef0755947767e82235ed12042833a.png)
 
 作者提供的图像：LangChain 中的链式操作
 
@@ -174,7 +174,7 @@ LangChain 提供了 Chain 接口用于此类**链式**应用。我们非常泛�
 
 在众多 LLM 应用中，需要用户特定的数据，这些数据未包含在模型的训练集中。LangChain 为你提供了加载、转换、存储和查询数据的基本组件。
 
-![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](../Images/f43a713bee756508b0a6b149f7f224a2.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](img/f43a713bee756508b0a6b149f7f224a2.png)
 
 LangChain 中的数据连接：来源
 
@@ -190,7 +190,7 @@ LangChain 中的数据连接：来源
 
 1.  **检索器：** 它用于检索与查询最相似的一组/组向量，这些向量以与查询嵌入在同一潜在空间中的向量形式存在。
 
-![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](../Images/6a911e0e7b279f2a0f0b85b8d52ad652.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](img/6a911e0e7b279f2a0f0b85b8d52ad652.png)
 
 文档检索/问答循环
 
@@ -198,17 +198,17 @@ LangChain 中的数据连接：来源
 
 然而，在进一步进行之前，我们需要准备一个文本以执行上述任务。为了这个虚构的测试，我从维基百科复制了一段关于一些受欢迎的 DC 超级英雄的文本。以下是文本：
 
-![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](../Images/46d8e1d9012cf4743545a981ede46510.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到你的本地机器](img/46d8e1d9012cf4743545a981ede46510.png)
 
 作者提供的图像：用于测试的原始文本
 
 ## 加载与转换文档
 
-首先，让我们创建一个文档对象。在这个示例中，我们将使用文本加载器。然而，LangChain支持多种文档，因此根据你的具体文档，你可以使用不同的加载器。接下来，我们将使用`**load**`方法从预配置的源中检索数据并将其加载为文档。
+首先，让我们创建一个文档对象。在这个示例中，我们将使用文本加载器。然而，LangChain 支持多种文档，因此根据你的具体文档，你可以使用不同的加载器。接下来，我们将使用`**load**`方法从预配置的源中检索数据并将其加载为文档。
 
-一旦文档被加载，我们可以通过将其分成较小的块来继续转换过程。为此，我们将使用TextSplitter。默认情况下，分割器在‘\n\n’分隔符处分隔文档。然而，如果你将分隔符设置为null并定义特定的块大小，每个块将具有指定的长度。因此，结果列表的长度将等于文档的长度除以块大小。总之，它将类似于`**list length = length of doc / chunk size**`。让我们实践一下。
+一旦文档被加载，我们可以通过将其分成较小的块来继续转换过程。为此，我们将使用 TextSplitter。默认情况下，分割器在‘\n\n’分隔符处分隔文档。然而，如果你将分隔符设置为 null 并定义特定的块大小，每个块将具有指定的长度。因此，结果列表的长度将等于文档的长度除以块大小。总之，它将类似于`**list length = length of doc / chunk size**`。让我们实践一下。
 
-![LangChain + Streamlit + Llama: 将对话式AI带到本地机器](../Images/c370b5096a0c441ef7de81ca1cf84cca.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到本地机器](img/c370b5096a0c441ef7de81ca1cf84cca.png)
 
 作者提供的图像：加载和转换文档
 
@@ -220,13 +220,13 @@ LangChain 中的数据连接：来源
 
 当我们谈论检索时，我们指的是检索与查询最相似的一组向量，这些向量以嵌入在相同潜在空间中的形式存在。
 
-LangChain中的基础嵌入类暴露了两个方法：一个用于嵌入文档，另一个用于嵌入查询。前者接受多个文本作为输入，而后者接受单个文本。
+LangChain 中的基础嵌入类暴露了两个方法：一个用于嵌入文档，另一个用于嵌入查询。前者接受多个文本作为输入，而后者接受单个文本。
 
-![LangChain + Streamlit + Llama: 将对话式AI带到本地机器](../Images/e907d5209ef2487d1333684af40c818a.png)
+![LangChain + Streamlit + Llama: 将对话式 AI 带到本地机器](img/e907d5209ef2487d1333684af40c818a.png)
 
 作者提供的图像：嵌入
 
-为了全面理解嵌入，我强烈建议深入了解基础知识，因为它们构成了神经网络处理文本数据的核心。我在我的一篇博客中广泛讨论了这个主题，使用了TensorFlow。这里是链接。
+为了全面理解嵌入，我强烈建议深入了解基础知识，因为它们构成了神经网络处理文本数据的核心。我在我的一篇博客中广泛讨论了这个主题，使用了 TensorFlow。这里是链接。
 
 ## 词嵌入——神经网络的文本表示
 
@@ -234,27 +234,27 @@ LangChain中的基础嵌入类暴露了两个方法：一个用于嵌入文档�
 
 向量存储高效地管理嵌入数据的存储，并代表你执行向量搜索操作。嵌入和存储生成的嵌入向量是一种存储和搜索非结构化数据的常见方法。在查询时，非结构化查询也会被嵌入，并检索出与嵌入查询具有最高相似度的嵌入向量。这种方法能够有效地从向量存储中检索相关信息。
 
-在这里，我们将使用Chroma，一个专门为简化AI应用程序开发而设计的嵌入数据库和向量存储。它提供了一整套内置工具和功能来简化你的初始设置，所有这些都可以通过执行简单的`**pip install chromadb**`命令方便地安装在本地机器上。
+在这里，我们将使用 Chroma，一个专门为简化 AI 应用程序开发而设计的嵌入数据库和向量存储。它提供了一整套内置工具和功能来简化你的初始设置，所有这些都可以通过执行简单的`**pip install chromadb**`命令方便地安装在本地机器上。
 
-![LangChain + Streamlit + Llama: 将对话AI带到你的本地机器](../Images/edd0230ac4a9b9ce09f964137857ea7d.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](img/edd0230ac4a9b9ce09f964137857ea7d.png)
 
 图片由作者提供：创建向量存储
 
-到目前为止，我们已经见证了嵌入和向量存储在从大量文档集合中检索相关片段方面的显著能力。现在，时机已到，我们将把这个检索到的片段与查询一起作为上下文呈现给LLM。挥动它的魔法棒，我们将请求LLM基于我们提供的信息生成答案。关键在于提示结构。
+到目前为止，我们已经见证了嵌入和向量存储在从大量文档集合中检索相关片段方面的显著能力。现在，时机已到，我们将把这个检索到的片段与查询一起作为上下文呈现给 LLM。挥动它的魔法棒，我们将请求 LLM 基于我们提供的信息生成答案。关键在于提示结构。
 
-然而，必须强调结构良好的提示的重要性。通过制定精心设计的提示，我们可以减轻LLM在面对不确定性时可能出现的**幻觉**——即它可能发明事实。
+然而，必须强调结构良好的提示的重要性。通过制定精心设计的提示，我们可以减轻 LLM 在面对不确定性时可能出现的**幻觉**——即它可能发明事实。
 
-在不再拖延的情况下，让我们进入最后阶段，看看我们的LLM是否能够生成引人注目的答案。时刻来临，见证我们的努力成果并揭示结果吧。我们出发了？
+在不再拖延的情况下，让我们进入最后阶段，看看我们的 LLM 是否能够生成引人注目的答案。时刻来临，见证我们的努力成果并揭示结果吧。我们出发了？
 
-![LangChain + Streamlit + Llama: 将对话AI带到你的本地机器](../Images/944a48f62adf73996e3ea293794b3a81.png)
+![LangChain + Streamlit + Llama: 将对话 AI 带到你的本地机器](img/944a48f62adf73996e3ea293794b3a81.png)
 
 图片由作者提供：与文档的问答
 
-这是我们一直期待的时刻！我们成功了！我们刚刚构建了我们自己的问答机器人，利用本地运行的LLM。
+这是我们一直期待的时刻！我们成功了！我们刚刚构建了我们自己的问答机器人，利用本地运行的 LLM。
 
-# 第5部分：使用Streamlit链式操作
+# 第五部分：使用 Streamlit 链式操作
 
-这一部分完全是可选的，因为它并不是Streamlit的全面指南。我不会深入探讨这一部分；相反，我会展示一个基本应用，允许用户上传任何文本文件。然后，他们可以通过文本输入提问。幕后功能将与我们在上一部分中讨论的保持一致。
+这一部分完全是可选的，因为它并不是 Streamlit 的全面指南。我不会深入探讨这一部分；相反，我会展示一个基本应用，允许用户上传任何文本文件。然后，他们可以通过文本输入提问。幕后功能将与我们在上一部分中讨论的保持一致。
 
 然而，在 Streamlit 中处理文件上传时有一个警告。为了防止潜在的内存不足错误，特别是考虑到 LLM 的内存密集型特性，我将简单地读取文档并将其写入我们文件结构中的临时文件夹，命名为`**raw.txt.**`。这样，无论文档的原始名称是什么，Textloader 将在未来无缝处理它。
 
@@ -264,7 +264,7 @@ LangChain中的基础嵌入类暴露了两个方法：一个用于嵌入文档�
 
 这是 streamlit 应用程序的外观。
 
-![LangChain + Streamlit + Llama：将对话式 AI 带到本地机器](../Images/53f1d5576ae768ec3ddedd9e447eb1d3.png)
+![LangChain + Streamlit + Llama：将对话式 AI 带到本地机器](img/53f1d5576ae768ec3ddedd9e447eb1d3.png)
 
 这次我提供了从 Wiki 复制的**《黑暗骑士》**的情节，并仅仅问了**“谁的脸被严重烧伤？”**，LLM 回复了——**哈维·丹特**。
 

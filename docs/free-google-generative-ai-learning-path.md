@@ -1,8 +1,8 @@
 # 来自谷歌的免费：生成式 AI 学习路径
 
-> 原文：[https://www.kdnuggets.com/2023/07/free-google-generative-ai-learning-path.html](https://www.kdnuggets.com/2023/07/free-google-generative-ai-learning-path.html)
+> 原文：[`www.kdnuggets.com/2023/07/free-google-generative-ai-learning-path.html`](https://www.kdnuggets.com/2023/07/free-google-generative-ai-learning-path.html)
 
-![来自谷歌的免费：生成式 AI 学习路径](../Images/2ebf5e388ae81b297ce6dea0939cf496.png)
+![来自谷歌的免费：生成式 AI 学习路径](img/2ebf5e388ae81b297ce6dea0939cf496.png)
 
 作者插图
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -44,17 +44,17 @@
 
 课程链接：[大型语言模型简介](https://www.cloudskillsboost.google/course_templates/539)
 
-第二个课程旨在从高层次介绍语言模型是什么。特别是，它给出了LLM应用的例子，如文本分类、问题回答和文档摘要。最后，它展示了Google生成AI开发工具的潜力，可以在无需代码的情况下构建你的应用程序。
+第二个课程旨在从高层次介绍语言模型是什么。特别是，它给出了 LLM 应用的例子，如文本分类、问题回答和文档摘要。最后，它展示了 Google 生成 AI 开发工具的潜力，可以在无需代码的情况下构建你的应用程序。
 
-**视频时长：** 15分钟
+**视频时长：** 15 分钟
 
 **讲师：** John Ewald
 
 **建议阅读：**
 
-+   [NLP的ImageNet时刻已到](https://thegradient.pub/nlp-imagenet/)
++   [NLP 的 ImageNet 时刻已到](https://thegradient.pub/nlp-imagenet/)
 
-+   [Google Cloud通过大型语言模型强化NLP](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-supercharges-nlp-with-large-language-models)
++   [Google Cloud 通过大型语言模型强化 NLP](https://cloud.google.com/blog/products/ai-machine-learning/google-cloud-supercharges-nlp-with-large-language-models)
 
 +   [LaMDA: 我们突破性的对话技术](https://blog.google/technology/ai/lamda/)
 
@@ -66,7 +66,7 @@
 
 它还展示了可以分为两种类型的使用案例：无条件生成和有条件生成。前者包括人脸合成和超分辨率作为应用，而有条件生成的例子包括从文本提示生成图像、图像修复和文本引导的图像到图像。
 
-**视频时长：** 9分钟
+**视频时长：** 9 分钟
 
 **讲师：** Kyle Steckler
 
@@ -76,19 +76,19 @@
 
 在这个简短的课程中，你将深入了解注意力机制，这是变换器和大型语言模型背后的一个非常重要的概念。它使得诸如机器翻译、文本摘要和问题回答等任务得以改进。特别是，它展示了注意力机制如何在解决机器翻译时发挥作用。
 
-**视频时长：** 5分钟
+**视频时长：** 5 分钟
 
 **讲师：** Sanjana Reddy
 
-# 5\. 变换器模型和BERT模型
+# 5\. 变换器模型和 BERT 模型
 
-课程链接：[变换器模型和BERT模型](https://www.cloudskillsboost.google/course_templates/538)
+课程链接：[变换器模型和 BERT 模型](https://www.cloudskillsboost.google/course_templates/538)
 
-该课程涵盖了变换器架构，这是BERT模型背后的基本概念。在解释了变换器之后，它概述了BERT以及如何应用于解决不同任务，如单句分类和问题回答。
+该课程涵盖了变换器架构，这是 BERT 模型背后的基本概念。在解释了变换器之后，它概述了 BERT 以及如何应用于解决不同任务，如单句分类和问题回答。
 
-与之前的课程不同，这个理论课程配有一个实验室，需要具备Python和TensorFlow的基础知识。
+与之前的课程不同，这个理论课程配有一个实验室，需要具备 Python 和 TensorFlow 的基础知识。
 
-**视频时长：** 22分钟
+**视频时长：** 22 分钟
 
 **讲师：** Sanjana Reddy
 
@@ -136,10 +136,10 @@
 
 +   [Google 的免费生成式 AI 课程](https://www.kdnuggets.com/2023/07/free-generative-ai-courses-google.html)
 
-+   [谷歌通过在Docs和Gmail中添加生成性AI回应ChatGPT](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
++   [谷歌通过在 Docs 和 Gmail 中添加生成性 AI 回应 ChatGPT](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
 
 +   [作为数据科学家，你的职业路径可以期待什么](https://www.kdnuggets.com/2022/01/expect-career-path-data-scientist.html)
 
-+   [数据科学面试中的21个必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
++   [数据科学面试中的 21 个必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
 
 +   [从数据分析师到数据战略师：影响力职业路径](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)

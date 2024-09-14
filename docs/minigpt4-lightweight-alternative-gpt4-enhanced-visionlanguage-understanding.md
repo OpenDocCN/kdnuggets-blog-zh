@@ -1,22 +1,22 @@
 # MiniGPT-4：一种轻量级的 GPT-4 替代方案，增强视觉-语言理解
 
-> 原文：[https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)
+> 原文：[`www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html`](https://www.kdnuggets.com/2023/04/minigpt4-lightweight-alternative-gpt4-enhanced-visionlanguage-understanding.html)
 
-![MiniGPT-4：一种轻量级的 GPT-4 替代方案，增强视觉-语言理解](../Images/a8065b229bd81d10ac5915b9cbd4dd3a.png)
+![MiniGPT-4：一种轻量级的 GPT-4 替代方案，增强视觉-语言理解](img/a8065b229bd81d10ac5915b9cbd4dd3a.png)
 
 作者提供的图片
 
-我们看到 ChatGPT 的 [开源替代品](/2023/04/8-opensource-alternative-chatgpt-bard.html) 发展迅速，但没有人专注于提供多模态能力的 GPT-4 替代品。GPT-4 是一种先进且强大的多模态模型，能够接受图像和文本输入并输出文本响应。它可以更准确地解决复杂问题并从错误中学习。
+我们看到 ChatGPT 的 开源替代品 发展迅速，但没有人专注于提供多模态能力的 GPT-4 替代品。GPT-4 是一种先进且强大的多模态模型，能够接受图像和文本输入并输出文本响应。它可以更准确地解决复杂问题并从错误中学习。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业之路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -28,7 +28,7 @@
 
 你可以通过尝试演示来亲身体验：[MiniGPT-4 - 由 Vision-CAIR 提供的 Hugging Face 空间](https://huggingface.co/spaces/Vision-CAIR/minigpt4)。
 
-![MiniGPT-4：一种轻量级的 GPT-4 替代方案，增强视觉-语言理解](../Images/e8ba20ea87bdaa0b5c63e9e15eb48ec3.png)
+![MiniGPT-4：一种轻量级的 GPT-4 替代方案，增强视觉-语言理解](img/e8ba20ea87bdaa0b5c63e9e15eb48ec3.png)
 
 作者提供的图片 | MiniGPT-4 演示
 
@@ -40,7 +40,7 @@ MiniGPT-4 模型在计算上非常高效，因为他们仅训练了一个投影�
 
 MiniGPT-4 将一个冻结的视觉编码器与一个名为 Vicuna 的冻结 LLM 对齐，使用的只是一个投影层。视觉编码器由预训练的 ViT 和 Q-Former 模型组成，这些模型通过一个线性投影层与先进的 Vicuna 大型语言模型连接。
 
-![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](../Images/3ffbd6cd020c6ce173649aeaadc957c4.png)
+![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](img/3ffbd6cd020c6ce173649aeaadc957c4.png)
 
 作者提供的图片 | MiniGPT-4 的架构。
 
@@ -50,7 +50,7 @@ MiniGPT-4 仅需训练线性层即可将视觉特征与 Vicuna 对齐。因此�
 
 如果你查看 [minigpt-4.github.io](https://minigpt-4.github.io/##Results:~:text=of%20MiniGPT%2D4.-,Results,-Acknowledgement) 的官方结果，你会看到作者通过上传手绘 UI 并要求其生成 HTML/JS 网站创建了一个网站。MiniGPT-4 理解了上下文，并生成了 HTML、CSS 和 JS 代码。这真是令人惊叹。
 
-![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](../Images/b9659591239a34c0a4fd206ffaf4b638.png)![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](../Images/66fe0efa5e05d4ffef73526e5b0bde17.png)
+![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](img/b9659591239a34c0a4fd206ffaf4b638.png)![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](img/66fe0efa5e05d4ffef73526e5b0bde17.png)
 
 图片来源于 [minigpt-4.github.io](https://minigpt-4.github.io/##Results:~:text=of%20MiniGPT%2D4.-,Results,-Acknowledgement)
 
@@ -60,19 +60,19 @@ MiniGPT-4 仅需训练线性层即可将视觉特征与 Vicuna 对齐。因此�
 
 故事是连贯的。
 
-![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](../Images/4100135b4ad29364b00cfea1c211ff08.png)
+![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](img/4100135b4ad29364b00cfea1c211ff08.png)
 
 作者提供的图片 | MiniGPT-4 演示
 
 我想了解更多，因此我让它继续写作，就像一个 AI 聊天机器人一样，它不断编写情节。
 
-![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](../Images/19adcb1a7ff0d2012b34a246a782cabd.png)
+![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](img/19adcb1a7ff0d2012b34a246a782cabd.png)
 
 作者提供的图片 | MiniGPT-4 演示
 
 在第二个例子中，我让它帮助我改进图像设计，然后要求它为博客生成图像字幕。
 
-![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](../Images/9878fc323da686c9292cde6507b7bc2b.png)
+![MiniGPT-4: A Lightweight Alternative to GPT-4 for Enhanced Vision-language Understanding](img/9878fc323da686c9292cde6507b7bc2b.png)
 
 作者提供的图片 | MiniGPT-4 演示
 

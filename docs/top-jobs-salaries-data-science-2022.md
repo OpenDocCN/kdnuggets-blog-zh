@@ -1,8 +1,8 @@
-# 2022年数据科学领域的顶级工作和薪资
+# 2022 年数据科学领域的顶级工作和薪资
 
-> 原文：[https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html](https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html)
+> 原文：[`www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html`](https://www.kdnuggets.com/2022/05/top-jobs-salaries-data-science-2022.html)
 
-![2022年数据科学领域的顶级工作和薪资](../Images/49b0e5f2a39cb83d297c63f62df9e1cb.png)
+![2022 年数据科学领域的顶级工作和薪资](img/49b0e5f2a39cb83d297c63f62df9e1cb.png)
 
 [Shridhar Gupta](https://unsplash.com/@shridhar) 通过 Unsplash
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 如果你已经在这个领域工作，你可能在寻找能提升你的知识、技能和工资的机会。如果你想进入这个领域，你可能希望找到既让你感兴趣又能获得良好薪资的工作。
 
-我将介绍数据科学领域的顶级工作及其薪资。这些薪资数据取自 [Indeed薪资](https://www.indeed.com/career/salaries)。
+我将介绍数据科学领域的顶级工作及其薪资。这些薪资数据取自 [Indeed 薪资](https://www.indeed.com/career/salaries)。
 
 # 数据科学家
 
@@ -66,9 +66,9 @@
 
 # 商业智能分析师
 
-BI分析师分析对业务重要的数据。他们收集数据、清理数据并分析数据，以提供有关收入、销售、客户互动和市场信息的见解。BI分析师识别这些模式和趋势，从而发现业务机会。
+BI 分析师分析对业务重要的数据。他们收集数据、清理数据并分析数据，以提供有关收入、销售、客户互动和市场信息的见解。BI 分析师识别这些模式和趋势，从而发现业务机会。
 
-BI分析师通常拥有计算机科学、经济学、工商管理等学位。
+BI 分析师通常拥有计算机科学、经济学、工商管理等学位。
 
 +   低薪资：$56,950
 
@@ -94,7 +94,7 @@ BI分析师通常拥有计算机科学、经济学、工商管理等学位。
 
 统计学家负责收集、分析和解释数据，以帮助识别趋势和模式。他们随后将这些发现传达给利益相关者，以帮助决策过程和未来策略。
 
-他们对统计理论有很好的理解，以提供有价值的见解并为数据工程师创建新的方法论。他们还精通SQL、数据挖掘和机器学习工具。
+他们对统计理论有很好的理解，以提供有价值的见解并为数据工程师创建新的方法论。他们还精通 SQL、数据挖掘和机器学习工具。
 
 +   低薪资：$60,834
 
@@ -104,7 +104,7 @@ BI分析师通常拥有计算机科学、经济学、工商管理等学位。
 
 # 数据库管理
 
-由于世界上有大量数据，你需要一个能够管理、监控和优化数据库的人。他们与IT团队紧密合作，以确保数据安全。他们还构建新数据库、备份和恢复数据，以及对数据库进行修改。
+由于世界上有大量数据，你需要一个能够管理、监控和优化数据库的人。他们与 IT 团队紧密合作，以确保数据安全。他们还构建新数据库、备份和恢复数据，以及对数据库进行修改。
 
 数据库管理员通常拥有信息科学或计算机科学学位。
 
@@ -138,10 +138,10 @@ BI分析师通常拥有计算机科学、经济学、工商管理等学位。
 
 +   [2023 数据科学家薪资](https://www.kdnuggets.com/2023/07/2023-data-scientists-salaries.html)
 
-+   [2022年及以后顶尖人工智能和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
++   [2022 年及以后顶尖人工智能和数据科学工具与技术](https://www.kdnuggets.com/2022/03/nvidia-0317-top-ai-data-science-tools-techniques-2022-beyond.html)
 
-+   [2022年顶尖行业及雇主招聘数据科学家](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
++   [2022 年顶尖行业及雇主招聘数据科学家](https://www.kdnuggets.com/2022/06/top-industries-employers-hiring-data-scientists-2022.html)
 
-+   [2022年顶尖数据科学工具](https://www.kdnuggets.com/2022/03/top-data-science-tools-2022.html)
++   [2022 年顶尖数据科学工具](https://www.kdnuggets.com/2022/03/top-data-science-tools-2022.html)
 
-+   [2022年顶尖数据科学播客](https://www.kdnuggets.com/2022/06/top-data-science-podcasts-2022.html)
++   [2022 年顶尖数据科学播客](https://www.kdnuggets.com/2022/06/top-data-science-podcasts-2022.html)

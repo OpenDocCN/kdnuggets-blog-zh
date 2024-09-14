@@ -1,10 +1,10 @@
 # 探索 Python 基础
 
-> 原文：[https://www.kdnuggets.com/2019/01/exploring-python-basics.html](https://www.kdnuggets.com/2019/01/exploring-python-basics.html)
+> 原文：[`www.kdnuggets.com/2019/01/exploring-python-basics.html`](https://www.kdnuggets.com/2019/01/exploring-python-basics.html)
 
 赞助帖子。
 
-[![Manning 探索 Python](../Images/55df9e134b6893ef782d99d6b9e9b35f.png)](http://bit.ly/2HMaBOq)
+![Manning 探索 Python](http://bit.ly/2HMaBOq)
 
 面对现实吧。学习计算机编程唯一的方法就是实践。不管你是想提升技能以准备下一次面试，还是仅仅完成一些个人项目，编程都是一个很棒的工具。Python 对初学者尤其是一个很好的工具，它也是一个会随着你成长的语言。通过利用 Python 的大量框架和工具包，你可以将其用于从网页开发到数据科学的各种任务。掌握 Python 基础，你几乎可以在编程世界的任何地方前进！
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织的 IT 需求
 
 * * *
 

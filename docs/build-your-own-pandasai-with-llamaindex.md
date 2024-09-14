@@ -1,8 +1,8 @@
 # 使用 LlamaIndex 构建自己的 PandasAI
 
-> 原文：[https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)
+> 原文：[`www.kdnuggets.com/build-your-own-pandasai-with-llamaindex`](https://www.kdnuggets.com/build-your-own-pandasai-with-llamaindex)
 
-![使用 LlamaIndex 构建自己的 PandasAI](../Images/b773ccebd8917fcf2dbd786cd5f0c3b5.png)
+![使用 LlamaIndex 构建自己的 PandasAI](img/b773ccebd8917fcf2dbd786cd5f0c3b5.png)
 
 图片作者
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您所在的组织的 IT 工作
 
 * * *
 
-[Pandas AI](/2023/05/pandas-ai-generative-ai-python-library.html) 是一个 Python 库，利用生成 AI 的力量来增强 Pandas——这一流行的数据分析库。只需一个简单的提示，Pandas AI 就能执行复杂的数据清理、分析和可视化，这些以前需要许多行代码。
+Pandas AI 是一个 Python 库，利用生成 AI 的力量来增强 Pandas——这一流行的数据分析库。只需一个简单的提示，Pandas AI 就能执行复杂的数据清理、分析和可视化，这些以前需要许多行代码。
 
 除了处理数据外，Pandas AI 还理解自然语言。你可以用简单的英语提问数据，它会用日常语言提供总结和见解，免去你解读复杂图表和表格的麻烦。
 
@@ -30,7 +30,7 @@
 pandas_ai.run(df, prompt='Plot the bar chart of type of media for each year release, using different colors.')
 ```
 
-![使用 LlamaIndex 构建自己的 PandasAI](../Images/6d253faf420a1db7b2c9ec5c53b15609.png)
+![使用 LlamaIndex 构建自己的 PandasAI](img/6d253faf420a1db7b2c9ec5c53b15609.png)
 
 > **注意：** 代码示例来自 [Pandas AI: 生成 AI 驱动的数据分析指南](https://www.datacamp.com/blog/an-introduction-to-pandas-ai) 教程。
 
@@ -198,7 +198,7 @@ eval("df.nlargest(10, 'subscribers')[['Youtuber', 'subscribers']].plot(kind='bar
 > Pandas Output: AxesSubplot(0.125,0.11;0.775x0.77)
 ```
 
-![使用 LlamaIndex 构建自己的 PandasAI](../Images/4d76461fb137d8d1fd413fda40f3fb79.png)
+![使用 LlamaIndex 构建自己的 PandasAI](img/4d76461fb137d8d1fd413fda40f3fb79.png)
 
 通过简单的提示和查询引擎，我们可以自动化数据分析并执行复杂任务。LamaIndex 还有更多功能。我强烈建议你阅读 [官方文档](https://gpt-index.readthedocs.io/en/stable/index.html) 并尝试构建一些惊人的东西。
 

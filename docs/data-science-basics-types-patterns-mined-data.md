@@ -1,8 +1,8 @@
 # 数据科学基础：从数据中可以挖掘出哪些类型的模式？
 
-> 原文：[https://www.kdnuggets.com/2016/12/data-science-basics-types-patterns-mined-data.html](https://www.kdnuggets.com/2016/12/data-science-basics-types-patterns-mined-data.html)
+> 原文：[`www.kdnuggets.com/2016/12/data-science-basics-types-patterns-mined-data.html`](https://www.kdnuggets.com/2016/12/data-science-basics-types-patterns-mined-data.html)
 
-记住，数据科学可以被认为是根植于科学原理的数据相关任务的集合。虽然对于数据科学的确切定义或范围没有共识，但我谦虚地提供了[我自己的尝试](/2016/03/data-science-puzzle-explained.html/2)进行解释：
+记住，数据科学可以被认为是根植于科学原理的数据相关任务的集合。虽然对于数据科学的确切定义或范围没有共识，但我谦虚地提供了我自己的尝试进行解释：
 
 > 数据科学是一个多方面的学科，涵盖了机器学习和其他分析过程、统计学及相关数学分支，越来越多地借鉴高性能科学计算，最终目的是从数据中提取洞察，并利用这些新获得的信息讲述故事。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -24,19 +24,19 @@
 
 **分类**
 
-分类是监督学习的主要方法之一，涉及到如何对带有类别标签的数据进行预测。分类包括寻找一个描述数据类别的模型，然后用这个模型对未知数据进行分类。概念上的[训练数据与测试数据](/2016/09/data-science-basics-3-insights-beginners.html)对分类至关重要。
+分类是监督学习的主要方法之一，涉及到如何对带有类别标签的数据进行预测。分类包括寻找一个描述数据类别的模型，然后用这个模型对未知数据进行分类。概念上的训练数据与测试数据对分类至关重要。
 
 流行的分类算法用于模型构建，以及呈现分类器模型的方式，包括（但不限于）：
 
-+   [决策树](/2016/10/decision-trees-concise-technical-overview.html)
++   决策树
 
-+   [支持向量机](/2016/09/support-vector-machines-concise-technical-overview.html)
++   支持向量机
 
 +   神经网络
 
 +   最近邻
 
-![天气数据集决策树](../Images/2e474b884be0db3ef2401b0e7ac0b97e.png)
+![天气数据集决策树](img/2e474b884be0db3ef2401b0e7ac0b97e.png)
 
 分类的例子比比皆是。一些这样的机会包括：
 
@@ -50,7 +50,7 @@
 
 **回归**
 
-回归类似于分类，因为它也是一种主流的监督学习形式，并且对于预测分析很有用。它们的区别在于，分类用于预测具有明确有限类别的数据，而回归用于预测连续的数值数据。作为监督学习的一种形式，回归中的训练/测试数据也是一个重要概念。[线性回归](/2016/11/linear-regression-least-squares-matrix-multiplication-concise-technical-overview.html)是一种常见的回归“挖掘”形式。
+回归类似于分类，因为它也是一种主流的监督学习形式，并且对于预测分析很有用。它们的区别在于，分类用于预测具有明确有限类别的数据，而回归用于预测连续的数值数据。作为监督学习的一种形式，回归中的训练/测试数据也是一个重要概念。线性回归是一种常见的回归“挖掘”形式。
 
 回归有什么用？像分类一样，其潜力是无限的。一些具体的例子包括：
 
@@ -64,7 +64,7 @@
 
 **聚类分析**
 
-[聚类分析](/2016/09/comparing-clustering-techniques-concise-technical-overview.html)用于分析不包含预先标记类别的数据。数据实例通过最大化类内相似性和最小化不同类别之间的相似性来进行分组。这意味着聚类算法会识别并分组非常相似的实例，而不是分组那些彼此不太相似的实例。由于聚类不需要预先标记类别，它是一种无监督学习形式。
+聚类分析用于分析不包含预先标记类别的数据。数据实例通过最大化类内相似性和最小化不同类别之间的相似性来进行分组。这意味着聚类算法会识别并分组非常相似的实例，而不是分组那些彼此不太相似的实例。由于聚类不需要预先标记类别，它是一种无监督学习形式。
 
 *k*-均值聚类可能是最著名的聚类算法示例，但并非唯一。存在不同的聚类方案，包括层次聚类、模糊聚类和密度聚类，还有不同的质心风格聚类方法（*k*-均值所属的家族）。
 
@@ -74,7 +74,7 @@
 
 **频繁模式挖掘**
 
-[频繁模式挖掘](/2016/10/association-rule-learning-concise-technical-overview.html)是一个已经使用了很长时间的概念，用来描述数据挖掘的一个方面，许多人认为这正是数据挖掘的精髓所在：对一组数据应用统计方法，以寻找该数据集中有趣且之前未知的模式。我们并不是要对实例进行分类或执行实例聚类；我们只是想学习在数据集和实例中出现的子集模式，哪些模式经常出现，哪些项目是关联的，哪些项目与其他项目相关。很容易看出为什么上述术语会混淆。
+频繁模式挖掘是一个已经使用了很长时间的概念，用来描述数据挖掘的一个方面，许多人认为这正是数据挖掘的精髓所在：对一组数据应用统计方法，以寻找该数据集中有趣且之前未知的模式。我们并不是要对实例进行分类或执行实例聚类；我们只是想学习在数据集和实例中出现的子集模式，哪些模式经常出现，哪些项目是关联的，哪些项目与其他项目相关。很容易看出为什么上述术语会混淆。
 
 频繁模式挖掘最接近于市场篮分析，这是一种识别有限产品超集的子集，这些子集以一定的绝对频率和相关频率一起购买。这个概念可以推广到购买项目之外；然而，项目子集的基本原则保持不变。
 
@@ -84,30 +84,30 @@
 
 首先，也是本讨论中最重要的一点，异常值分析并不像上述其他问题那样是独立的数据挖掘方法，而是可以利用上述方法来实现其自身目标（它是一种终极目标，而非手段）。其次，异常值分析也可以被视为描述性统计的一个练习，有些人认为这根本不是数据挖掘（认为数据挖掘按定义是预测统计方法）。然而，为了全面性，这里也包括了它。
 
-![异常值](../Images/83f05baa9ceceac3e6681aadf81698c0.png)
+![异常值](img/83f05baa9ceceac3e6681aadf81698c0.png)
 
 [异常值](https://en.wikipedia.org/wiki/Outlier)是指那些看起来与剩余数据或结果模型行为不太一致的数据实例。虽然许多数据挖掘算法故意不考虑异常值，或可以被修改以明确排除它们，但有时异常值本身可能就是重点。
 
-这在欺诈检测中尤为明显，欺诈检测利用异常值来识别欺诈活动。如果你在纽约及其周边地区和在线频繁使用信用卡，主要用于微不足道的购买？今天上午在Soho的咖啡馆用了，晚上在上西区吃了饭，但在此期间在巴黎的实体店花费了几千美元购买电子设备？这就是你的异常值，这些数据会通过各种挖掘和简单的描述性技术被不懈追踪。
+这在欺诈检测中尤为明显，欺诈检测利用异常值来识别欺诈活动。如果你在纽约及其周边地区和在线频繁使用信用卡，主要用于微不足道的购买？今天上午在 Soho 的咖啡馆用了，晚上在上西区吃了饭，但在此期间在巴黎的实体店花费了几千美元购买电子设备？这就是你的异常值，这些数据会通过各种挖掘和简单的描述性技术被不懈追踪。
 
 **相关：**
 
-+   [数据科学基础：初学者的3个见解](/2016/09/data-science-basics-3-insights-beginners.html)
++   数据科学基础：初学者的 3 个见解
 
 +   [数据科学基础：数据挖掘与统计学](https://www.kdnuggets.com/2016/09/data-science-basics-data-mining-statistics.html)
 
-+   [数据科学基础：集成学习者简介](/2016/11/data-science-basics-intro-ensemble-learners.html)
++   数据科学基础：集成学习者简介
 
 ### 更多相关主题
 
-+   [Python基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
++   [Python 基础：语法、数据类型和控制结构](https://www.kdnuggets.com/python-basics-syntax-data-types-and-control-structures)
 
-+   [MLOps中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
++   [MLOps 中的机器学习设计模式](https://www.kdnuggets.com/2022/02/design-patterns-machine-learning-mlops.html)
 
 +   [揭示隐藏模式：分层聚类简介](https://www.kdnuggets.com/unveiling-hidden-patterns-an-introduction-to-hierarchical-clustering)
 
-+   [优化数据存储：探索SQL中的数据类型和规范化](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
++   [优化数据存储：探索 SQL 中的数据类型和规范化](https://www.kdnuggets.com/optimizing-data-storage-exploring-data-types-and-normalization-in-sql)
 
 +   [可视化框架的类型](https://www.kdnuggets.com/types-of-visualization-frameworks)
 
-+   [回到基础第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [回到基础第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)

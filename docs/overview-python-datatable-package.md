@@ -1,50 +1,50 @@
-# Python的Datatable包概述
+# Python 的 Datatable 包概述
 
-> 原文：[https://www.kdnuggets.com/2019/08/overview-python-datatable-package.html](https://www.kdnuggets.com/2019/08/overview-python-datatable-package.html)
+> 原文：[`www.kdnuggets.com/2019/08/overview-python-datatable-package.html`](https://www.kdnuggets.com/2019/08/overview-python-datatable-package.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由[Parul Pandey](https://www.linkedin.com/in/parul-pandey-a5498975/)**
 
-![figure-name](../Images/7481a0bbd700ed4cf33ab74b776fecc3.png)照片由[Johannes Groll](https://unsplash.com/@followhansi?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
+![figure-name](img/7481a0bbd700ed4cf33ab74b776fecc3.png)照片由[Johannes Groll](https://unsplash.com/@followhansi?utm_source=medium&utm_medium=referral)提供，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
 > * * *
 > 
 > ## 我们的前三大课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 > 
 > * * *
 > 
-> ***“在文明的曙光到2003年之间创建了5 Exabytes的信息，而现在每2天就会创建这么多信息”：Eric Schmidt***
+> ***“在文明的曙光到 2003 年之间创建了 5 Exabytes 的信息，而现在每 2 天就会创建这么多信息”：Eric Schmidt***
 
-如果你是R用户，你可能已经在使用`data.table`包。`[Data.table](https://cran.r-project.org/web/packages/data.table/data.table.pdf)`是R中的`[data.frame](https://www.rdocumentation.org/packages/base/versions/3.6.0/topics/data.frame)`包的扩展。它也是R用户在快速聚合大型数据（包括100GB内存）时的首选包。
+如果你是 R 用户，你可能已经在使用`data.table`包。`[Data.table](https://cran.r-project.org/web/packages/data.table/data.table.pdf)`是 R 中的`[data.frame](https://www.rdocumentation.org/packages/base/versions/3.6.0/topics/data.frame)`包的扩展。它也是 R 用户在快速聚合大型数据（包括 100GB 内存）时的首选包。
 
-R的`data.table`包因其易用性、便利性和编程速度而非常多功能且高性能。它在R社区中相当著名，每月下载量超过40万次，几乎有650个CRAN和Bioconductor包在使用它([source](https://github.com/Rdatatable/data.table/wiki))。
+R 的`data.table`包因其易用性、便利性和编程速度而非常多功能且高性能。它在 R 社区中相当著名，每月下载量超过 40 万次，几乎有 650 个 CRAN 和 Bioconductor 包在使用它([source](https://github.com/Rdatatable/data.table/wiki))。
 
-那么，对于Python用户来说有什么好处呢？好消息是，`data.table`包在Python中也有一个对应的包叫做`datatable`，它明确关注大数据支持、高性能、内存和外存数据集，以及多线程算法。从某种程度上来说，它可以被称为[***data.table***](https://github.com/Rdatatable/data.table)***的***“小弟弟”。
+那么，对于 Python 用户来说有什么好处呢？好消息是，`data.table`包在 Python 中也有一个对应的包叫做`datatable`，它明确关注大数据支持、高性能、内存和外存数据集，以及多线程算法。从某种程度上来说，它可以被称为[***data.table***](https://github.com/Rdatatable/data.table)***的***“小弟弟”。
 
 ### Datatable
 
-![figure-name](../Images/0763f680ee28628fdab89ac81a193692.png)
+![figure-name](img/0763f680ee28628fdab89ac81a193692.png)
 
-现代机器学习应用需要处理大量数据并生成多个特征。这是为了构建更高准确性的模型。Python的`datatable`模块就是为了解决这个问题而创建的。它是一个在单节点机器上以最大可能速度执行大数据（最多100GB）操作的工具包。datatable的开发得到了[H2O.ai](https://www.h2o.ai/)的赞助，`datatable`的首个用户是[Driverless.ai](https://www.h2o.ai/driverless-ai/)。
+现代机器学习应用需要处理大量数据并生成多个特征。这是为了构建更高准确性的模型。Python 的`datatable`模块就是为了解决这个问题而创建的。它是一个在单节点机器上以最大可能速度执行大数据（最多 100GB）操作的工具包。datatable 的开发得到了[H2O.ai](https://www.h2o.ai/)的赞助，`datatable`的首个用户是[Driverless.ai](https://www.h2o.ai/driverless-ai/)。
 
-这个工具包与[pandas](https://github.com/pandas-dev/pandas)非常相似，但更注重速度和大数据支持。Python的`datatable`也致力于实现良好的用户体验、实用的错误信息和强大的API。在本文中，我们将探讨如何使用datatable，以及在处理大型数据集时它相较于pandas的优势。
+这个工具包与[pandas](https://github.com/pandas-dev/pandas)非常相似，但更注重速度和大数据支持。Python 的`datatable`也致力于实现良好的用户体验、实用的错误信息和强大的 API。在本文中，我们将探讨如何使用 datatable，以及在处理大型数据集时它相较于 pandas 的优势。
 
 ### 安装
 
-在MacOS上，可以通过pip轻松安装datatable：
+在 MacOS 上，可以通过 pip 轻松安装 datatable：
 
 ```py
 pip install datatable
 ```
 
-在Linux上，安装可以通过以下二进制发行版完成：
+在 Linux 上，安装可以通过以下二进制发行版完成：
 
 ```py
 # If you have Python 3.5
@@ -52,17 +52,17 @@ pip install https://s3.amazonaws.com/h2o-release/datatable/stable/datatable-0.8.
 pip install https://s3.amazonaws.com/h2o-release/datatable/stable/datatable-0.8.0/datatable-0.8.0-cp36-cp36m-linux_x86_64.whl
 ```
 
-*目前，datatable在Windows上不可用，但正在进行工作以添加对Windows的支持。*
+*目前，datatable 在 Windows 上不可用，但正在进行工作以添加对 Windows 的支持。*
 
 欲了解更多信息，请参阅[构建说明](https://datatable.readthedocs.io/en/latest/install.html)。
 
-本文的代码可以从关联的[Github存储库](https://github.com/parulnith/An-Overview-of-Python-s-Datatable-package)访问，或通过点击下面的图像在我的binder上查看。
+本文的代码可以从关联的[Github 存储库](https://github.com/parulnith/An-Overview-of-Python-s-Datatable-package)访问，或通过点击下面的图像在我的 binder 上查看。
 
-![figure-name](../Images/983e69bc5a6820ce52e8678f39635e95.png)
+![figure-name](img/983e69bc5a6820ce52e8678f39635e95.png)
 
 ### 读取数据
 
-使用的数据集来自Kaggle，属于[*Lending Club Loan Data Dataset*](https://www.kaggle.com/wendykan/lending-club-loan-data#loan.csv)*。*数据集包含了2007-2015年间所有贷款的完整信息，包括当前的贷款状态（当前、逾期、已还清等）和最新的支付信息。文件包含**226万行**和**145列**。数据规模非常适合展示datatable库的能力。
+使用的数据集来自 Kaggle，属于[*Lending Club Loan Data Dataset*](https://www.kaggle.com/wendykan/lending-club-loan-data#loan.csv)*。*数据集包含了 2007-2015 年间所有贷款的完整信息，包括当前的贷款状态（当前、逾期、已还清等）和最新的支付信息。文件包含**226 万行**和**145 列**。数据规模非常适合展示 datatable 库的能力。
 
 ```py
 # Importing necessary Librariesimport numpy as np
@@ -71,9 +71,9 @@ import datatable as dt
 
 ```
 
-让我们将数据加载到`Frame`对象中。在datatable中，`Frame`是基本的分析单元。这与pandas的DataFrame或SQL表相同：数据以二维数组的形式排列，具有行和列。
+让我们将数据加载到`Frame`对象中。在 datatable 中，`Frame`是基本的分析单元。这与 pandas 的 DataFrame 或 SQL 表相同：数据以二维数组的形式排列，具有行和列。
 
-**使用datatable**
+**使用 datatable**
 
 ```py
 %%time
@@ -82,9 +82,9 @@ ____________________________________________________________________CPU times: u
 Wall time: 23.6 s
 ```
 
-上面的`fread()`函数既强大又极快。它可以自动检测和解析大多数文本文件的参数，从.zip归档或URL加载数据，读取Excel文件，等等。
+上面的`fread()`函数既强大又极快。它可以自动检测和解析大多数文本文件的参数，从.zip 归档或 URL 加载数据，读取 Excel 文件，等等。
 
-此外，datatable解析器：
+此外，datatable 解析器：
 
 +   可以自动检测分隔符、标题、列类型、引号规则等。
 
@@ -96,7 +96,7 @@ Wall time: 23.6 s
 
 +   可以读取[RFC4180](https://tools.ietf.org/html/rfc4180)合规和不合规的文件。
 
-**使用pandas**
+**使用 pandas**
 
 现在，让我们计算 pandas 读取相同文件所花费的时间。
 
@@ -153,7 +153,7 @@ ______________________________________________________________(2260668, 145)('id
 datatable_df.head(10)
 ```
 
-![figure-name](../Images/babf69d7f56dac36df2a78e6ec46e712.png)datatable 数据框前 10 行的快照
+![figure-name](img/babf69d7f56dac36df2a78e6ec46e712.png)datatable 数据框前 10 行的快照
 
 颜色表示数据类型，其中 **红色** 表示字符串，**绿色** 表示整数，**蓝色** 表示浮点数。
 
@@ -194,7 +194,7 @@ Throws memory error.
 
 数据表（如数据框）是列式数据结构。在 datatable 中，所有这些操作的主要工具是 **方括号符号**，灵感来自传统的矩阵索引，但具有更多功能。
 
-![figure-name](../Images/980feab7a7cfe86abd29322e4b493f21.png)datatable 的 **方括号符号**
+![figure-name](img/980feab7a7cfe86abd29322e4b493f21.png)datatable 的 **方括号符号**
 
 相同的 DT[i, j] 符号在数学中用于索引矩阵，在 C/C++、R、pandas、numpy 等中也使用。让我们看看如何使用 datatable 执行常见的数据操作活动：
 
@@ -206,7 +206,7 @@ Throws memory error.
 datatable_df[:,'funded_amnt']
 ```
 
-![figure-name](../Images/9e3b3de577f99c31b9929fa9cc65e524.png)
+![figure-name](img/9e3b3de577f99c31b9929fa9cc65e524.png)
 
 以下是选择前 5 行和 3 列的方法
 
@@ -214,7 +214,7 @@ datatable_df[:,'funded_amnt']
 datatable_df[:5,:3]
 ```
 
-![figure-name](../Images/6ca189ee0c88fce7688e515eae1ffdab.png)
+![figure-name](img/6ca189ee0c88fce7688e515eae1ffdab.png)
 
 ### #排序数据框
 
@@ -316,11 +316,11 @@ datatable_df.to_csv('output.csv')
 
 **相关内容:**
 
-+   [25 个 Pandas 技巧](/2019/08/25-tricks-pandas.html)
++   25 个 Pandas 技巧
 
-+   [10 个简单技巧加速 Python 数据分析](/2019/07/10-simple-hacks-speed-data-analysis-python.html)
++   10 个简单技巧加速 Python 数据分析
 
-+   [成为 Pandas 专家，Python 的数据处理库](/2019/06/pro-pandas-python-library.html)
++   成为 Pandas 专家，Python 的数据处理库
 
 ### 相关主题
 

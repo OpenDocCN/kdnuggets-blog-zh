@@ -1,6 +1,6 @@
 # 异常检测简介
 
-> 原文：[https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html](https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html)
+> 原文：[`www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html`](https://www.kdnuggets.com/2017/04/datascience-introduction-anomaly-detection.html)
 
 **由 [DataScience.com](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials) 提供赞助。**
 
@@ -12,7 +12,7 @@
 
 本概述将涵盖几种检测异常的方法，以及如何使用简单移动平均（SMA）或低通滤波器在 Python 中构建检测器。
 
-[![](../Images/1ff5523f9fb1df59f1b2a666d68c0ee2.png)](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)
+![](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)
 
 图 1\. 太阳黑子的异常
 
@@ -32,7 +32,7 @@
 
 **简单统计方法**
 
-识别数据异常的最简单方法是标记那些偏离分布的常见统计属性的数据点，包括均值、中位数、众数和分位数。假设异常数据点的定义是偏离均值一定标准差的数据点。遍历时间序列数据的均值并不完全简单，因为它不是静态的。你需要一个滚动窗口来计算数据点的平均值。从技术上讲，这叫做滚动平均或移动平均，旨在平滑短期波动并突出长期波动。从数学上讲，n期简单移动平均也可以定义为“低通滤波器”。（卡尔曼滤波器是这种度量的更复杂版本；你可以在[这里](http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/)找到一个非常直观的解释。）
+识别数据异常的最简单方法是标记那些偏离分布的常见统计属性的数据点，包括均值、中位数、众数和分位数。假设异常数据点的定义是偏离均值一定标准差的数据点。遍历时间序列数据的均值并不完全简单，因为它不是静态的。你需要一个滚动窗口来计算数据点的平均值。从技术上讲，这叫做滚动平均或移动平均，旨在平滑短期波动并突出长期波动。从数学上讲，n 期简单移动平均也可以定义为“低通滤波器”。（卡尔曼滤波器是这种度量的更复杂版本；你可以在[这里](http://www.bzarg.com/p/how-a-kalman-filter-works-in-pictures/)找到一个非常直观的解释。）
 
 **挑战** 低通滤波器可以帮助你在简单用例中识别异常，但在某些情况下，这种技术可能不起作用。以下是一些例子：
 
@@ -48,13 +48,13 @@
 
 **基于密度的异常检测**
 
-基于密度的异常检测基于k最近邻算法。
+基于密度的异常检测基于 k 最近邻算法。
 
 *假设：* 正常数据点通常位于密集的邻域中，而异常数据点则远离这些邻域。
 
 使用评分评估最近的数据点，这个评分可能是欧氏距离或依赖于数据类型（分类或数值）的类似度量。它们可以大致分为两种算法：
 
-1.  [k最近邻](http://www.scholarpedia.org/article/K-nearest_neighbor)：k-NN是一种简单的非参数懒惰学习技术，用于根据距离度量（如欧氏距离、曼哈顿距离、闵可夫斯基距离或汉明距离）的相似性来分类数据。
+1.  [k 最近邻](http://www.scholarpedia.org/article/K-nearest_neighbor)：k-NN 是一种简单的非参数懒惰学习技术，用于根据距离度量（如欧氏距离、曼哈顿距离、闵可夫斯基距离或汉明距离）的相似性来分类数据。
 
 1.  数据的相对密度：这通常被称为[局部离群因子](http://link.springer.com/article/10.1007%2Fs10618-012-0300-z)（LOF）。这个概念基于一种叫做可达距离的距离度量。
 
@@ -81,19 +81,19 @@ wget -c -b www-personal.umich.edu/~mejn/cp/data/sunspots.txt
 
 ```
 
-该文件包含3,143行数据，包含1749-1984年间收集的太阳黑子信息。太阳黑子定义为太阳表面上的黑点。研究太阳黑子有助于科学家理解太阳在一段时间内的性质，特别是其磁性特性。
+该文件包含 3,143 行数据，包含 1749-1984 年间收集的太阳黑子信息。太阳黑子定义为太阳表面上的黑点。研究太阳黑子有助于科学家理解太阳在一段时间内的性质，特别是其磁性特性。
 
-阅读本教程的其余部分，包括[**DataScience.com网站**](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)上的Python代码。
+阅读本教程的其余部分，包括[**DataScience.com 网站**](https://www.datascience.com/blog/intro-to-anomaly-detection-learn-data-science-tutorials)上的 Python 代码。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -107,6 +107,6 @@ wget -c -b www-personal.umich.edu/~mejn/cp/data/sunspots.txt
 
 +   [使用 Hugging Face Transformers 进行文本情感检测](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
 
-+   [KDnuggets 新闻，8月17日：如何执行运动检测…](https://www.kdnuggets.com/2022/n33.html)
++   [KDnuggets 新闻，8 月 17 日：如何执行运动检测…](https://www.kdnuggets.com/2022/n33.html)
 
 +   [功能数据中用于异常检测的密度核深度](https://www.kdnuggets.com/density-kernel-depth-for-outlier-detection-in-functional-data)

@@ -1,20 +1,20 @@
 # 一种美味的数据科学方法
 
-> 原文：[https://www.kdnuggets.com/2017/01/foodpairing-tasty-approach-data-science.html](https://www.kdnuggets.com/2017/01/foodpairing-tasty-approach-data-science.html)
+> 原文：[`www.kdnuggets.com/2017/01/foodpairing-tasty-approach-data-science.html`](https://www.kdnuggets.com/2017/01/foodpairing-tasty-approach-data-science.html)
 
 **作者：Natalia Hernandez，[Foodpairing](http://www.foodpairing.com/en/home)。**
 
-当品牌准备创建新风味时，总会有一个构思阶段，开发者会问自己“我们接下来可以创造什么？”在Foodpairing，我们通过结合消费者行为数据和科学分析的混合方法帮助品牌回答这个问题。
+当品牌准备创建新风味时，总会有一个构思阶段，开发者会问自己“我们接下来可以创造什么？”在 Foodpairing，我们通过结合消费者行为数据和科学分析的混合方法帮助品牌回答这个问题。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -26,7 +26,7 @@
 
 ### 方法
 
-消费者行为数据是CFI核心要素之一，因为它提供了关于消费者对新风味和口味期望的大量洞察。
+消费者行为数据是 CFI 核心要素之一，因为它提供了关于消费者对新风味和口味期望的大量洞察。
 
 我们在注意到公司面临三大日益严重的挑战以开发新风味线后，开发了这种方法。
 
@@ -40,7 +40,7 @@
 
 我们的数据科学家挖掘公共在线数据，这为我们提供了总体趋势洞察。然后，我们使用分子方法对食品进行分析。在这里，我们分析气味并测量其与其他风味的兼容性。我们还进行品牌分析，使用定性方法描述品牌本身，包括其视觉识别和语调，以及特定产品的属性，如质地和口味。然后，我们可以根据品牌身份分析对风味选项进行评分。
 
-![食品搭配：番茄酱和咖啡](../Images/b02694efbc6a8380e68c0cc0da19762d.png)
+![食品搭配：番茄酱和咖啡](img/b02694efbc6a8380e68c0cc0da19762d.png)
 
 **图 1：Foodpairing 如何可视化其匹配食材的方法**。他们的分析识别出潜在的气味（如水果味、蔬菜味等）及其在成分中的主导程度。然后，他们可以将其与具有互补成分的其他成分连接起来。
 
@@ -64,9 +64,9 @@
 
 **相关：**
 
-+   [**WCAI 研究机会，4月24日：他说，她买了——用户生成的评论和购买行为**](/2015/04/wcai-bazaarvoice-research-user-reviews-purchase-behavior.html)
++   **WCAI 研究机会，4 月 24 日：他说，她买了——用户生成的评论和购买行为**
 
-+   [**营养与主成分分析：教程**](/2016/06/nutrition-principal-component-analysis-tutorial.html "营养与主成分分析：教程")
++   **营养与主成分分析：教程**
 
 ### 更多相关内容
 

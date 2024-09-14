@@ -1,8 +1,8 @@
 # Python 中的动画条形图竞赛
 
-> 原文：[https://www.kdnuggets.com/2021/05/animated-race-bar-charts-python.html](https://www.kdnuggets.com/2021/05/animated-race-bar-charts-python.html)
+> 原文：[`www.kdnuggets.com/2021/05/animated-race-bar-charts-python.html`](https://www.kdnuggets.com/2021/05/animated-race-bar-charts-python.html)
 
-[评论](#comments)
+评论
 
 **作者 [Shelvi Garg](https://www.linkedin.com/in/shelvi-garg-3a7421108/), 数据科学家**
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 *与其他允许使用预加载 bcr 数据集的教程不同，我们将处理和清理自己的数据集以制作竞赛图表*
 
-![](../Images/e5b01235e53eaa0b9f0f21690a753739.png)
+![](img/e5b01235e53eaa0b9f0f21690a753739.png)
 
 输出结果：作者提供的图像
 
@@ -58,21 +58,21 @@
 
 *serious_or_critical: 表示观察到的国家中处于严重或危急状态的病例的估计数量。*
 
-*total_cases_per_1m_population: 指定了每100万人口中总病例的数量。*
+*total_cases_per_1m_population: 指定了每 100 万人口中总病例的数量。*
 
-*total_deaths_per_1m_population: 指定了每100万人口中总死亡人数的数量。*
+*total_deaths_per_1m_population: 指定了每 100 万人口中总死亡人数的数量。*
 
 *total_tests: 指定了在观察国家中完成的总测试数量。*
 
-*total_tests_per_1m_population: 指定了每100万人口中完成的总测试数量。*
+*total_tests_per_1m_population: 指定了每 100 万人口中完成的总测试数量。*
 
 *population: 指定了观察国家中的人口数量。*
 
 ### 数据集致谢
 
-本数据集中所有数据均从worldometers.info抓取。
+本数据集中所有数据均从 worldometers.info 抓取。
 
-你可以在我的Jupyter笔记本上找到完整的清洁代码：[*https://github.com/shelvi31/Animated-Bar-Graph/blob/main/Animated%20Bar%20Graph.ipynb*](https://github.com/shelvi31/Animated-Bar-Graph/blob/main/Animated%20Bar%20Graph.ipynb)
+你可以在我的 Jupyter 笔记本上找到完整的清洁代码：[*https://github.com/shelvi31/Animated-Bar-Graph/blob/main/Animated%20Bar%20Graph.ipynb*](https://github.com/shelvi31/Animated-Bar-Graph/blob/main/Animated%20Bar%20Graph.ipynb)
 
 ### 加载库
 
@@ -93,13 +93,13 @@ df = pd.read_csv("worldometer_coronavirus_daily_data.csv")
 df.head()
 ```
 
-![png](../Images/e20e9163011564858439630850539d57.png)
+![png](img/e20e9163011564858439630850539d57.png)
 
 ```py
 df.shape(95289, 7)df.tail()
 ```
 
-![png](../Images/9ed695a4aa5df7fa46ea404037eca0ef.png)
+![png](img/9ed695a4aa5df7fa46ea404037eca0ef.png)
 
 由于国家众多，我们需要选择一些特定国家进行分析。
 
@@ -109,7 +109,7 @@ Output:
 (435, 7)
 ```
 
-因此，我们为每个国家都有大约450天的数据。
+因此，我们为每个国家都有大约 450 天的数据。
 
 ```py
 df.isnull().sum()Output:
@@ -125,13 +125,13 @@ dtype: int64
 
 ### 选择用于条形图的国家
 
-选择累积总病例列作为系列，并按国家名称对其进行分组。我将选择8个国家，最人口众多的以及我们的邻国进行评估
+选择累积总病例列作为系列，并按国家名称对其进行分组。我将选择 8 个国家，最人口众多的以及我们的邻国进行评估
 
-![](../Images/c0e0f207b16873a6d01c6fa50fe81475.png)
+![](img/c0e0f207b16873a6d01c6fa50fe81475.png)
 
 代码，作者提供的图像
 
-我们为所有国家的数据只有435行。因此，中国的数据也只取435行。
+我们为所有国家的数据只有 435 行。因此，中国的数据也只取 435 行。
 
 ### 处理中国的数据
 
@@ -147,9 +147,9 @@ for i in range(0,435):
 china = pd.Series(CHINA)china.shapeOutput:(435,)
 ```
 
-### 太好了！现在我们所有列的长度都是相同的 - 435天。
+### 太好了！现在我们所有列的长度都是相同的 - 435 天。
 
-我们还需要选择日期列。由于日期在国家之间重复，我们只能检索前459个值，所有国家的数据最大天数为435天。
+我们还需要选择日期列。由于日期在国家之间重复，我们只能检索前 459 个值，所有国家的数据最大天数为 435 天。
 
 ### 处理日期列
 
@@ -182,7 +182,7 @@ data = {"UK": uk,
        }corona = pd.concat(data,axis = 1)corona.set_index("Date", inplace = True)corona.head()
 ```
 
-![png](../Images/1bc31eb460e6a2a1a22723ec83cecd59.png)
+![png](img/1bc31eb460e6a2a1a22723ec83cecd59.png)
 
 ```py
 corona.shapeOutput:(435, 8)
@@ -217,7 +217,7 @@ corona.index = pd.to_datetime(corona.index)
 corona
 ```
 
-![png](../Images/70e90871cdd6648828b89620481f2b7a.png)
+![png](img/70e90871cdd6648828b89620481f2b7a.png)
 
 ```py
 corona.to_csv("corona_dataset",header=True,index=True)
@@ -243,19 +243,19 @@ import bar_chart_race as bcr
 bcr.bar_chart_race(df=corona,filename=None,title= "Covid Cases Country-wise from Feb 2020 to April 2021")
 ```
 
-![](../Images/199b7a4fce1498ce7e01b000b032f896.png)
+![](img/199b7a4fce1498ce7e01b000b032f896.png)
 
 输出，作者提供的图像
 
-令人非常遗憾的是，注意到印度的病例在4月迅速增加，这导致了极大的恐慌、混乱和在我撰写这篇博客时的生命损失。
+令人非常遗憾的是，注意到印度的病例在 4 月迅速增加，这导致了极大的恐慌、混乱和在我撰写这篇博客时的生命损失。
 
-![](../Images/e5b01235e53eaa0b9f0f21690a753739.png)
+![](img/e5b01235e53eaa0b9f0f21690a753739.png)
 
 输出：作者提供的图片
 
-如果你遇到任何与FFmpeg相关的错误：这里是解决该问题的逐步链接：
+如果你遇到任何与 FFmpeg 相关的错误：这里是解决该问题的逐步链接：
 
-[https://www.wikihow.com/Install-FFmpeg-on-Windows](https://www.wikihow.com/Install-FFmpeg-on-Windows)
+[`www.wikihow.com/Install-FFmpeg-on-Windows`](https://www.wikihow.com/Install-FFmpeg-on-Windows)
 
 ### 保存赛道条形图
 
@@ -263,11 +263,11 @@ bcr.bar_chart_race(df=corona,filename=None,title= "Covid Cases Country-wise from
 
 ### **参考文献**
 
-+   [https://pypi.org/project/bar-chart-race/](https://pypi.org/project/bar-chart-race/)
++   [`pypi.org/project/bar-chart-race/`](https://pypi.org/project/bar-chart-race/)
 
-+   [https://www.youtube.com/watch?v=Dawp5XOSEuk&t=350s](https://www.youtube.com/watch?v=Dawp5XOSEuk&t=350s)
++   [`www.youtube.com/watch?v=Dawp5XOSEuk&t=350s`](https://www.youtube.com/watch?v=Dawp5XOSEuk&t=350s)
 
-+   [https://www.worldometers.info/](https://www.worldometers.info/)
++   [`www.worldometers.info/`](https://www.worldometers.info/)
 
 **个人简介：[Shelvi Garg](https://www.linkedin.com/in/shelvi-garg-3a7421108/)** 是一名数据科学家。兴趣和学习无边界。
 
@@ -275,22 +275,22 @@ bcr.bar_chart_race(df=corona,filename=None,title= "Covid Cases Country-wise from
 
 **相关：**
 
-+   [一个简单的静态可视化通常是最佳方法](/2021/05/simple-static-visualization-often-best-approach.html)
++   一个简单的静态可视化通常是最佳方法
 
-+   [11个完整EDA（探索性数据分析）的基本代码块](/2021/03/11-essential-code-blocks-exploratory-data-analysis.html)
++   11 个完整 EDA（探索性数据分析）的基本代码块
 
-+   [2021年数据科学家应了解的前10大Python库](/2021/03/top-10-python-libraries-2021.html)
++   2021 年数据科学家应了解的前 10 大 Python 库
 
 ### 更多相关内容
 
-+   [通过《快速Python数据科学》提升你的Python技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
++   [通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
 
-+   [优化Python代码性能：深入探讨Python分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
++   [优化 Python 代码性能：深入探讨 Python 分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
 
-+   [Python枚举：如何在Python中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)
++   [Python 枚举：如何在 Python 中构建枚举](https://www.kdnuggets.com/python-enum-how-to-build-enumerations-in-python)
 
-+   [用Python和Scikit-learn简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
++   [用 Python 和 Scikit-learn 简化决策树的可解释性](https://www.kdnuggets.com/2017/05/simplifying-decision-tree-interpretation-decision-rules-python.html)
 
-+   [Python中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
++   [Python 中的稀疏矩阵表示](https://www.kdnuggets.com/2020/05/sparse-matrix-representation-python.html)
 
-+   [数据科学、数据可视化和…的前38大Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)
++   [数据科学、数据可视化和…的前 38 大 Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)

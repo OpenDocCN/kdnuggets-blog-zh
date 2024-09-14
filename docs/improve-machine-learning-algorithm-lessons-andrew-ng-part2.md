@@ -1,10 +1,10 @@
-# 如何改进机器学习算法？吴恩达的课程，第2部分
+# 如何改进机器学习算法？吴恩达的课程，第二部分
 
-> 原文：[https://www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html](https://www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html)
+> 原文：[`www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html`](https://www.kdnuggets.com/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2017/12/improve-machine-learning-algorithm-lessons-andrew-ng-part2.html/#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-欢迎来到第二章，来自吴恩达的机器学习课程的经验。这一章会比较简短，我们将讨论**人类水平的表现**与**可避免的偏差**。如果你还没读第一章，这里是[链接](https://towardsdatascience.com/how-to-improve-my-ml-algorithm-lessons-from-andrew-ngs-experience-i-551ca1a32634)。我们开始吧！哦，还有一件事，这个系列完全基于吴恩达在Coursera上的最新[课程](https://www.coursera.org/learn/machine-learning-projects/home/welcome)。
+欢迎来到第二章，来自吴恩达的机器学习课程的经验。这一章会比较简短，我们将讨论**人类水平的表现**与**可避免的偏差**。如果你还没读第一章，这里是[链接](https://towardsdatascience.com/how-to-improve-my-ml-algorithm-lessons-from-andrew-ngs-experience-i-551ca1a32634)。我们开始吧！哦，还有一件事，这个系列完全基于吴恩达在 Coursera 上的最新[课程](https://www.coursera.org/learn/machine-learning-projects/home/welcome)。
 
 **与人类水平表现的比较**
 
@@ -14,9 +14,9 @@
 
 1.  此外，当你尝试做一些人类也能做到的事情时，设计和构建机器学习系统的工作流程会更加高效。
 
-随着时间的推移，当你不断训练你的算法时，它会迅速改进，直到超过人类水平的表现。之后，它的进步会变得缓慢。虽然在任何情况下它都不能超过某个理论极限，称为[贝叶斯最优误差](https://en.wikipedia.org/wiki/Bayes_error_rate)，这是最好的可能误差。换句话说，任何函数从x到y的映射不能超过某个准确度水平。
+随着时间的推移，当你不断训练你的算法时，它会迅速改进，直到超过人类水平的表现。之后，它的进步会变得缓慢。虽然在任何情况下它都不能超过某个理论极限，称为[贝叶斯最优误差](https://en.wikipedia.org/wiki/Bayes_error_rate)，这是最好的可能误差。换句话说，任何函数从 x 到 y 的映射不能超过某个准确度水平。
 
-![](../Images/c18fa0b462b1e509fb2eedc8bd7391c5.png)
+![](img/c18fa0b462b1e509fb2eedc8bd7391c5.png)
 
 通常，人类错误和贝叶斯错误非常接近，尤其是对于自然感知问题，超越人类水平表现后改进的空间很小，因此学习速度显著减缓。
 
@@ -28,7 +28,7 @@
 
 +   更好地分析偏差/方差
 
-![](../Images/721cf3d280a335074302e0a041552a44.png)
+![](img/721cf3d280a335074302e0a041552a44.png)
 
 **可避免的偏差**
 
@@ -36,7 +36,7 @@
 
 示例：分类。
 
-![](../Images/9565e3ba027d168aea9993f4a2a61424.png)
+![](img/9565e3ba027d168aea9993f4a2a61424.png)
 
 通过将人类水平表现作为贝叶斯误差的代理（例如在图像识别中），我们可以知道是否需要关注偏差或方差的回避策略，以改善系统的性能。
 
@@ -44,15 +44,15 @@
 
 差异（开发误差，训练误差） = 方差**
 
-![](../Images/6b59b2603bcfaad3669c9387cfadc69a.png)
+![](img/6b59b2603bcfaad3669c9387cfadc69a.png)
 
 ***场景 A：***
 
-算法在训练集上的拟合不佳，因为目标约为1%，而偏差为7%。**使用减少偏差的技术**，例如训练更大的神经网络，延长训练集时间，或训练更好的优化算法（例如 Adam），或更改神经网络架构（使用 CNN、RNN 等）。
+算法在训练集上的拟合不佳，因为目标约为 1%，而偏差为 7%。**使用减少偏差的技术**，例如训练更大的神经网络，延长训练集时间，或训练更好的优化算法（例如 Adam），或更改神经网络架构（使用 CNN、RNN 等）。
 
 ***场景 B：***
 
-此处的重点应是减少方差，因为方差为2%，而可避免的偏差仅为0.5%。**使用方差减少技术**，例如正则化，或拥有更大的训练集，相应地调整超参数等。
+此处的重点应是减少方差，因为方差为 2%，而可避免的偏差仅为 0.5%。**使用方差减少技术**，例如正则化，或拥有更大的训练集，相应地调整超参数等。
 
 ***注 1：*** 人类水平误差的定义取决于分析的目的。例如，在医学图像分类中，输入是放射学图像，输出是诊断分类决策。典型的人的误差为 x%，医生的误差为 (x-y)%，一组医生的误差为 (x-y-z)%。在代理贝叶斯误差时，你必须将 (x-y-z) 作为误差百分比。
 
@@ -76,17 +76,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，9月28日：Python 免费算法课程•…](https://www.kdnuggets.com/2022/n38.html)
++   [KDnuggets 新闻，9 月 28 日：Python 免费算法课程•…](https://www.kdnuggets.com/2022/n38.html)
 
 +   [7 种方法提升你的机器学习模型](https://www.kdnuggets.com/7-ways-to-improve-your-machine-learning-models)
 

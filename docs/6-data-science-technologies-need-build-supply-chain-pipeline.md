@@ -1,10 +1,10 @@
-# 你需要的6种数据科学技术来构建你的供应链管道
+# 你需要的 6 种数据科学技术来构建你的供应链管道
 
-> 原文：[https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
+> 原文：[`www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html`](https://www.kdnuggets.com/2022/01/6-data-science-technologies-need-build-supply-chain-pipeline.html)
 
 供应链管道是将不同过程组合在一起，以生产和分发产品和服务给客户的系统。供应链中包含了各种各样的活动。下图展示了供应链管道的鸟瞰图：
 
-![你需要的6种数据科学技术来构建你的供应链管道](../Images/8f0090181efd6e1c77e76e3f835be8f8.png)
+![你需要的 6 种数据科学技术来构建你的供应链管道](img/8f0090181efd6e1c77e76e3f835be8f8.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 1.  **真实性：** 生成数据的质量。
 
-一旦你涵盖了这四个领域，你可以使用基于云的解决方案来处理、存储和分析数据。例如，Amazon Simple Storage Service（Amazon S3）可以存储可扩展、安全且高效的数据。之后，你可以将这些数据源接入其他服务，如Amazon QuickSight，以创建互动式商业智能仪表盘。还有其他云服务提供商和服务提供类似的产品。公司可以根据现有技术选择服务提供商，这将帮助他们实现更容易的集成。
+一旦你涵盖了这四个领域，你可以使用基于云的解决方案来处理、存储和分析数据。例如，Amazon Simple Storage Service（Amazon S3）可以存储可扩展、安全且高效的数据。之后，你可以将这些数据源接入其他服务，如 Amazon QuickSight，以创建互动式商业智能仪表盘。还有其他云服务提供商和服务提供类似的产品。公司可以根据现有技术选择服务提供商，这将帮助他们实现更容易的集成。
 
 ## 2\. 机器学习
 
@@ -52,23 +52,23 @@
 
 ## 4\. 云计算
 
-云计算允许企业部署其供应链管道软件，如客户关系管理（CRM）。云计算的好处是无穷无尽的。它们可以根据流量进行扩展。此外，根据服务水平协议（SLA），应用程序将有保证的正常运行时间（高可用性）。像AWS这样的云平台使其服务可靠、安全且具有成本效益。此外，按需付费模式帮助企业节省开支。
+云计算允许企业部署其供应链管道软件，如客户关系管理（CRM）。云计算的好处是无穷无尽的。它们可以根据流量进行扩展。此外，根据服务水平协议（SLA），应用程序将有保证的正常运行时间（高可用性）。像 AWS 这样的云平台使其服务可靠、安全且具有成本效益。此外，按需付费模式帮助企业节省开支。
 
-不仅是面向客户的应用，企业还可以部署其他应用来跟踪和监控库存系统。此外，BI仪表盘可以提高公司的可见性。
+不仅是面向客户的应用，企业还可以部署其他应用来跟踪和监控库存系统。此外，BI 仪表盘可以提高公司的可见性。
 
-## 5\. 类似JavaScript的语言
+## 5\. 类似 JavaScript 的语言
 
-上述应用程序可以根据需要强大，但需要一个前端才能使用。这个交互式用户界面可以使用JavaScript构建。前端数据验证可以帮助确保数据的真实性。
+上述应用程序可以根据需要强大，但需要一个前端才能使用。这个交互式用户界面可以使用 JavaScript 构建。前端数据验证可以帮助确保数据的真实性。
 
-现在，有许多工具可以使用JavaScript更快地构建应用程序，例如 [Webpack](https://webpack.js.org/)、[Babel](https://babeljs.io/) 和 [NPM](https://www.npmjs.com/)，等。Webpack允许将JavaScript应用程序进行打包。Babel用于将JSX转换为纯JavaScript。NPM注册库包含了许多构建企业级应用程序的库。
+现在，有许多工具可以使用 JavaScript 更快地构建应用程序，例如 [Webpack](https://webpack.js.org/)、[Babel](https://babeljs.io/) 和 [NPM](https://www.npmjs.com/)，等。Webpack 允许将 JavaScript 应用程序进行打包。Babel 用于将 JSX 转换为纯 JavaScript。NPM 注册库包含了许多构建企业级应用程序的库。
 
 企业可以与其他第三方供应商集成，以提供诸如身份验证（auth0）、短信（twilio）、分析（powerbi）、消息传递（intercom）、文档（confluence）等服务。
 
-## 6\. 类似React的框架
+## 6\. 类似 React 的框架
 
-React 是一个开源的JavaScript库，用于构建可组合的用户界面，它提供了构建企业级应用程序的最先进功能。诸如可重用组件、虚拟DOM、JSX等功能使得React成为一个优秀的JavaScript库。React的懒加载功能可以动态加载组件，从而提高应用程序的性能。由于React是从CDN提供的，因此服务成本较低。此外，还有数以千计的NPM模块可以用于更快地构建应用程序。它提供了开箱即用的库，如 [compromise](https://www.npmjs.com/package/compromise)。它可以用于进行自然语言处理。此外，企业还可以使用React Native创建跨平台的移动应用程序。
+React 是一个开源的 JavaScript 库，用于构建可组合的用户界面，它提供了构建企业级应用程序的最先进功能。诸如可重用组件、虚拟 DOM、JSX 等功能使得 React 成为一个优秀的 JavaScript 库。React 的懒加载功能可以动态加载组件，从而提高应用程序的性能。由于 React 是从 CDN 提供的，因此服务成本较低。此外，还有数以千计的 NPM 模块可以用于更快地构建应用程序。它提供了开箱即用的库，如 [compromise](https://www.npmjs.com/package/compromise)。它可以用于进行自然语言处理。此外，企业还可以使用 React Native 创建跨平台的移动应用程序。
 
-如果您的企业有多个软件团队在开发应用程序，他们可以使用模块联邦构建微前端，而不是构建一个单体应用程序。这将提供完全的自由来独立设计和构建，而不会破坏整个应用程序。例如，N个微前端可以提供跟踪、分析、身份验证、报告等服务。
+如果您的企业有多个软件团队在开发应用程序，他们可以使用模块联邦构建微前端，而不是构建一个单体应用程序。这将提供完全的自由来独立设计和构建，而不会破坏整个应用程序。例如，N 个微前端可以提供跟踪、分析、身份验证、报告等服务。
 
 随着技术的进步，SCPs 已经采用了一些尖端技术，以优化和增强几乎每个人都依赖的管道。这些曾经新颖的六种技术，现在已成为供应链管道的关键部分。供应链经理应当关注这些数据科学技术，并尽早开始整合它们。这将帮助企业建立一个高效且具有成本效益的供应链管道，提高客户满意度。
 
@@ -76,11 +76,11 @@ React 是一个开源的JavaScript库，用于构建可组合的用户界面，�
 
 ### 了解更多相关话题
 
-+   [5种使用AI进行供应链管理的方法](https://www.kdnuggets.com/2022/02/5-ways-ai-supply-chain-management.html)
++   [5 种使用 AI 进行供应链管理的方法](https://www.kdnuggets.com/2022/02/5-ways-ai-supply-chain-management.html)
 
-+   [ETL与ELT：哪个更适合您的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
++   [ETL 与 ELT：哪个更适合您的数据管道？](https://www.kdnuggets.com/2023/03/etl-elt-one-right-data-pipeline.html)
 
-+   [使用Bash构建您的第一个ETL管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
++   [使用 Bash 构建您的第一个 ETL 管道](https://www.kdnuggets.com/building-your-first-etl-pipeline-with-bash)
 
 +   [提升数据科学技能：你需要的关键 SQL 认证](https://www.kdnuggets.com/boost-your-data-science-skills-the-essential-sql-certifications-you-need)
 

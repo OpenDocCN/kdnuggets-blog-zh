@@ -1,22 +1,22 @@
 # dbt 数据转换 – 实操教程
 
-> 原文：[https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html](https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html)
+> 原文：[`www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html`](https://www.kdnuggets.com/2021/07/dbt-data-transformation-tutorial.html)
 
-[评论](#comments)
+评论
 
 **[Essi Alizadeh](https://www.linkedin.com/in/alizadehesmaeil/) 是一名工程师和高级数据科学家，处于永久测试状态**。
 
-![](../Images/570cfd46355d3e26b449a45bfa4b1b3f.png)
+![](img/570cfd46355d3e26b449a45bfa4b1b3f.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -68,27 +68,27 @@ dbt 不提取或加载数据，但它在转换已存在于数据库中的数据�
 
 一个 dbt 项目是一个包含 *.sql* 和 *.yml* 文件的目录。所需的最低文件包括：
 
-+   一个名为*dbt_project.yml*的项目文件：该文件包含dbt项目的配置。
++   一个名为*dbt_project.yml*的项目文件：该文件包含 dbt 项目的配置。
 
-+   模型（*.sql*文件）：dbt中的模型只是一个包含**单个** ***select*** **语句**的*.sql*文件。
++   模型（*.sql*文件）：dbt 中的模型只是一个包含**单个** ***select*** **语句**的*.sql*文件。
 
-每个dbt项目都需要一个*dbt_project.yml*文件——这是dbt识别目录是否为dbt项目的方式。它还包含重要的信息，告诉dbt如何操作你的项目。
+每个 dbt 项目都需要一个*dbt_project.yml*文件——这是 dbt 识别目录是否为 dbt 项目的方式。它还包含重要的信息，告诉 dbt 如何操作你的项目。
 
-你可以在[这里](https://docs.getdbt.com/docs/introduction#dbt-projects)找到更多关于dbt项目的信息。
+你可以在[这里](https://docs.getdbt.com/docs/introduction#dbt-projects)找到更多关于 dbt 项目的信息。
 
-> 一个**dbt模型**基本上是一个*.sql*文件，包含一个**SELECT**语句。
+> 一个**dbt 模型**基本上是一个*.sql*文件，包含一个**SELECT**语句。
 
-### dbt命令
+### dbt 命令
 
-dbt命令以*dbt*开头，可以通过以下方式之一执行：
+dbt 命令以*dbt*开头，可以通过以下方式之一执行：
 
-+   dbt Cloud（在dbt Cloud仪表板底部的命令部分），
++   dbt Cloud（在 dbt Cloud 仪表板底部的命令部分），
 
 +   dbt CLI
 
-一些命令只能在dbt CLI中使用，如*dbt init*。在这篇文章中我们将使用的一些dbt命令包括
+一些命令只能在 dbt CLI 中使用，如*dbt init*。在这篇文章中我们将使用的一些 dbt 命令包括
 
-+   *dbt init*（仅在dbt CLI中）
++   *dbt init*（仅在 dbt CLI 中）
 
 +   *dbt run*
 
@@ -96,9 +96,9 @@ dbt命令以*dbt*开头，可以通过以下方式之一执行：
 
 +   *dbt docs generate*
 
-## dbt项目设置
+## dbt 项目设置
 
-### 第一步：使用dbt CLI初始化一个dbt项目（示例文件）
+### 第一步：使用 dbt CLI 初始化一个 dbt 项目（示例文件）
 
 你可以使用[dbt init](https://docs.getdbt.com/reference/commands/init)来生成示例文件/文件夹。特别是，*dbt init project_name*将创建以下内容：
 
@@ -106,11 +106,11 @@ dbt命令以*dbt*开头，可以通过以下方式之一执行：
 
 +   一个名为*[project_name]*的新文件夹
 
-+   必要的目录和示例文件，以便开始使用dbt
++   必要的目录和示例文件，以便开始使用 dbt
 
 > **注意**：由于*dbt init*生成一个名为*project_name*的目录，为避免任何冲突，你应该*没有任何具有相同名称的现有文件夹*。
 
-![](../Images/d65e97387ef5c3e9288422b2cb3d5ecb.png)
+![](img/d65e97387ef5c3e9288422b2cb3d5ecb.png)
 
 *dbt init <project_name>*
 
@@ -146,9 +146,9 @@ sample_dbt_project
 
 ```
 
-### 第二步：设置Git代码库
+### 第二步：设置 Git 代码库
 
-你可以使用现有的代码库，如设置过程中所述。你可以通过查看dbt文档[这里](https://docs.getdbt.com/docs/dbt-cloud/cloud-configuring-dbt-cloud/cloud-configuring-repositories)来配置代码库。
+你可以使用现有的代码库，如设置过程中所述。你可以通过查看 dbt 文档[这里](https://docs.getdbt.com/docs/dbt-cloud/cloud-configuring-dbt-cloud/cloud-configuring-repositories)来配置代码库。
 
 **或者，如果你想创建一个新的代码库...**
 
@@ -163,9 +163,9 @@ git push -u origin master
 
 ```
 
-### 第三步：在dbt Cloud仪表板上设置新项目
+### 第三步：在 dbt Cloud 仪表板上设置新项目
 
-在前一步中，我们创建了一个包含示例模型和配置的示例dbt项目。现在，我们想创建一个新项目，并在dbt Cloud仪表板上连接我们的数据库和代码库。
+在前一步中，我们创建了一个包含示例模型和配置的示例 dbt 项目。现在，我们想创建一个新项目，并在 dbt Cloud 仪表板上连接我们的数据库和代码库。
 
 在继续之前，你应该已经拥有
 
@@ -173,7 +173,7 @@ git push -u origin master
 
 +   一个包含前一步生成的文件的代码库
 
-你可以按照下面的步骤在dbt Cloud中设置一个新项目（请记住，这一步与前一步不同，因为我们仅生成了一些示例文件）。
+你可以按照下面的步骤在 dbt Cloud 中设置一个新项目（请记住，这一步与前一步不同，因为我们仅生成了一些示例文件）。
 
 我们项目的*dbt_project.yml*文件如下所示（你可以在[GitHub repo](https://github.com/e-alizadeh/sample_dbt_project.git)中找到完整版本）。
 
@@ -195,41 +195,41 @@ profile: 'default'
 
 *dbt_project.yml*
 
-## dbt模型和功能
+## dbt 模型和功能
 
-### dbt模型
+### dbt 模型
 
-让我们创建一些简单的dbt模型来检索表中的几个列。
+让我们创建一些简单的 dbt 模型来检索表中的几个列。
 
 ```py
 select "iso_code", "total_cases", "new_cases" from covid_latest
 
 ```
 
-***covid19_latest_stats** dbt模型（models/covid19_latest_stats.sql）*
+***covid19_latest_stats** dbt 模型（models/covid19_latest_stats.sql）*
 
 ```py
 select "code", "year", "continent", "total_population" from population_prosperity
 
 ```
 
-***population** dbt模型（models/population.sql）*
+***population** dbt 模型（models/population.sql）*
 
-> **注意：** dbt模型名称是*models*目录下sql文件的文件名。模型名称可能与数据库中的表名不同。例如，在上述示例中，dbt模型*population*是对数据库中*population_prosperity*表的*SELECT*语句的结果。
+> **注意：** dbt 模型名称是*models*目录下 sql 文件的文件名。模型名称可能与数据库中的表名不同。例如，在上述示例中，dbt 模型*population*是对数据库中*population_prosperity*表的*SELECT*语句的结果。
 
 ### 运行模型
 
-你可以通过执行*dbt run*来运行dbt项目中的所有模型。下面显示了一个示例dbt运行输出。你可以查看运行所有dbt模型的摘要或详细日志。这对于调试查询中的任何问题非常有帮助。例如，你可以看到一个抛出Postgres错误的失败模型。
+你可以通过执行*dbt run*来运行 dbt 项目中的所有模型。下面显示了一个示例 dbt 运行输出。你可以查看运行所有 dbt 模型的摘要或详细日志。这对于调试查询中的任何问题非常有帮助。例如，你可以看到一个抛出 Postgres 错误的失败模型。
 
-![](../Images/5afcff8ce22f5e73cb4b0bc0374d7436.png)
+![](img/5afcff8ce22f5e73cb4b0bc0374d7436.png)
 
 *详细记录失败的**jinja_and_variable_usage** dbt 模型。*
 
 ### Jinja & 宏
 
-dbt 使用了[Jinja](https://jinja.palletsprojects.com/)模板语言，这使得dbt项目成为一个理想的SQL编程环境。通过Jinja，你可以进行SQL中通常不可能的转换，例如使用环境变量或宏——抽象的SQL片段，类似于大多数编程语言中的函数。每当你看到*{{ ... }}*时，你实际上是在使用Jinja。有关Jinja及额外定义的Jinja风格函数的更多信息，请查看[dbt 文档](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros/)。
+dbt 使用了[Jinja](https://jinja.palletsprojects.com/)模板语言，这使得 dbt 项目成为一个理想的 SQL 编程环境。通过 Jinja，你可以进行 SQL 中通常不可能的转换，例如使用环境变量或宏——抽象的 SQL 片段，类似于大多数编程语言中的函数。每当你看到*{{ ... }}*时，你实际上是在使用 Jinja。有关 Jinja 及额外定义的 Jinja 风格函数的更多信息，请查看[dbt 文档](https://docs.getdbt.com/docs/building-a-dbt-project/jinja-macros/)。
 
-在这篇文章的后面，我们将介绍由dbt定义的自定义宏。
+在这篇文章的后面，我们将介绍由 dbt 定义的自定义宏。
 
 ### 使用变量
 
@@ -252,15 +252,15 @@ vars:
 
 **使用变量**
 
-你可以通过[*var()*](https://docs.getdbt.com/reference/dbt-jinja-functions/var) Jinja函数（*{{ var("var_key_name") }}*）在dbt模型中使用变量。
+你可以通过[*var()*](https://docs.getdbt.com/reference/dbt-jinja-functions/var) Jinja 函数（*{{ var("var_key_name") }}*）在 dbt 模型中使用变量。
 
 ### 宏
 
 在*dbt_utils*中有许多有用的转换和宏可以在你的项目中使用。有关所有可用宏的列表，你可以查看它们的[GitHub 仓库](https://hub.getdbt.com/dbt-labs/dbt_utils/latest/)。
 
-现在，让我们按照以下步骤将dbt_utils添加到我们的项目中并安装：
+现在，让我们按照以下步骤将 dbt_utils 添加到我们的项目中并安装：
 
-1.  将dbt_utils宏添加到你的*packages.yml*文件中，如下所示：
+1.  将 dbt_utils 宏添加到你的*packages.yml*文件中，如下所示：
 
 ```py
 packages:
@@ -269,15 +269,15 @@ packages:
 
 ```
 
-*将**dbt_utils**包添加到packages.yml中。*
+*将**dbt_utils**包添加到 packages.yml 中。*
 
 1.  运行*dbt deps*以安装包。
 
-![](../Images/2028a0e2a0e1b6af8f7bc1f4f7dde969.png)
+![](img/2028a0e2a0e1b6af8f7bc1f4f7dde969.png)
 
 *使用**dbt deps**安装包。*
 
-### 复杂的dbt模型
+### 复杂的 dbt 模型
 
 模型（选择）通常是相互堆叠的。为了构建更复杂的模型，你需要使用 [ref()](https://docs.getdbt.com/reference/dbt-jinja-functions/ref) 宏。*ref()* 是 dbt 中最重要的函数，因为它允许你引用其他模型。例如，你可能有一个模型（即 SELECT 查询），它执行多个操作，但你不希望在其他模型中使用它。如果不使用之前介绍的宏，将很难构建复杂模型。
 
@@ -306,13 +306,13 @@ where code='{{ var("selected_country") }}' AND year='{{ var("selected_year") }}'
 
 上述代码片段将人口和 covid19_latest_stats 模型的数据按国家代码连接起来，并根据 selected_country=USA 和 selected_year=2019 进行筛选。模型的输出如下所示。
 
-![](../Images/536bc58271b80fed3154adcbe66cc106.png)
+![](img/536bc58271b80fed3154adcbe66cc106.png)
 
 * **jinja_and_variable_usage** dbt 模型的输出。*
 
 你也可以通过点击**compile sql**按钮查看编译后的 SQL 代码片段。这非常有用，特别是如果你想在 dbt 工具之外运行查询时。
 
-![](../Images/e65cf74e2b860e338dcbf5376561fd6d.png)
+![](img/e65cf74e2b860e338dcbf5376561fd6d.png)
 
 *编译后的 SQL 代码用于 **jinja_and_variable_usage** dbt 模型。*
 
@@ -378,7 +378,7 @@ models:
 
 你可以通过 *dbt test* 运行测试。你可以看到下面的输出。
 
-![](../Images/15b74802bbc411868a0a0777cc846927.png)
+![](img/15b74802bbc411868a0a0777cc846927.png)
 
 *在 dbt Cloud 仪表板上运行 dbt 测试的结果。*
 
@@ -388,7 +388,7 @@ models:
 
 你可以通过在命令部分简单地运行 *dbt docs generate* 来生成你的 dbt 项目的文档，如下所示。
 
-![](../Images/a58d67a7303b580ee42a5ccf732e536b.png)
+![](img/a58d67a7303b580ee42a5ccf732e536b.png)
 
 *为 dbt 项目生成文档。*
 
@@ -448,22 +448,22 @@ dbt 是一个非常值得尝试的好工具，因为它可能简化你的数据 
 
 **相关内容：**
 
-+   [介绍dbt，ETL和ELT的颠覆者](https://www.kdnuggets.com/2021/03/dbt-etl-elt-disrupter.html)
++   [介绍 dbt，ETL 和 ELT 的颠覆者](https://www.kdnuggets.com/2021/03/dbt-etl-elt-disrupter.html)
 
-+   [前4名数据提取工具](https://www.kdnuggets.com/2021/05/top-4-data-extraction-tools.html)
++   [前 4 名数据提取工具](https://www.kdnuggets.com/2021/05/top-4-data-extraction-tools.html)
 
-+   [SQL中的数据准备，附备忘单！](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
++   [SQL 中的数据准备，附备忘单！](https://www.kdnuggets.com/2021/05/data-preparation-sql-cheat-sheet.html)
 
 ### 更多相关话题
 
-+   [动手强化学习课程第3部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
++   [动手强化学习课程第三部分：SARSA](https://www.kdnuggets.com/2022/01/handson-reinforcement-learning-course-part-3-sarsa.html)
 
-+   [动手强化学习课程，第1部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
++   [动手强化学习课程，第一部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-course-part-1.html)
 
-+   [动手强化学习课程，第2部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
++   [动手强化学习课程，第二部分](https://www.kdnuggets.com/2021/12/hands-on-reinforcement-learning-part-2.html)
 
-+   [大型语言模型生成式AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
++   [大型语言模型生成式 AI：动手培训](https://www.kdnuggets.com/2023/07/generative-ai-large-language-models-handson-training.html)
 
 +   [动手实践监督学习：线性回归](https://www.kdnuggets.com/handson-with-supervised-learning-linear-regression)
 
-+   [动手实践无监督学习：K-Means聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)
++   [动手实践无监督学习：K-Means 聚类](https://www.kdnuggets.com/handson-with-unsupervised-learning-kmeans-clustering)

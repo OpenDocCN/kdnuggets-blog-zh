@@ -1,12 +1,12 @@
 # 用 Rmd 文件在 Python 和 R 中编排动态报告
 
-> 原文：[https://www.kdnuggets.com/2019/11/orchestrating-dynamic-reports-python-r-rmd-files.html](https://www.kdnuggets.com/2019/11/orchestrating-dynamic-reports-python-r-rmd-files.html)
+> 原文：[`www.kdnuggets.com/2019/11/orchestrating-dynamic-reports-python-r-rmd-files.html`](https://www.kdnuggets.com/2019/11/orchestrating-dynamic-reports-python-r-rmd-files.html)
 
-[评论](#comments)
+评论
 
 **由 [Marija Ilic](https://www.linkedin.com/in/marija-ilić-65b8a53)，数据分析师/科学家**
 
-![图像](../Images/5c2258e25bcfe24c68809d146abdad7d.png)
+![图像](img/5c2258e25bcfe24c68809d146abdad7d.png)
 
 ### **Python 和 R 互相嵌套**
 
@@ -28,11 +28,11 @@ In Rmd files, Python code chunks are similar to R chunks: Python code is placed 
 
 Here’s a simple R markdown with embedded Python code:
 
-![](../Images/c3be788ab84d38fdb1fd17dbd3ef6028.png)
+![](img/c3be788ab84d38fdb1fd17dbd3ef6028.png)
 
 In the example above the csv is loaded with the help of the pandas library, a column is renamed, and the first rows are printed. In the file heading, the report is defined with ### and a single author comment is printed. Here’s the result when we run the Rmd:
 
-![](../Images/5d86bbd6c4c669b245ea6a44398a5591.png)
+![](img/5d86bbd6c4c669b245ea6a44398a5591.png)
 
 Beside the code and output, the heading and author comment prints. Now that the data has been loaded using Python, it can be used inside R:
 
@@ -40,13 +40,13 @@ The R code starts with ```{r} 包围的 R 代码块的文本文件，文件以 `
 
 输出效果如下：
 
-![](../Images/e79ee6da0e91603cbfa1355b16d54d05.png)
+![](img/e79ee6da0e91603cbfa1355b16d54d05.png)
 
 现在我们将继续使用 R 并创建一个交易者常用的可视化：烛台图。以下是使用 [plotly](https://plot.ly/r/candlestick-charts/) 库编写的 [Candlestick](https://en.wikipedia.org/wiki/Candlestick_chart) 图表的 R 代码：
 
 这应该显示如下内容：
 
-![](../Images/44785a783d26575e45f404bf58bc22d9.png)
+![](img/44785a783d26575e45f404bf58bc22d9.png)
 
 这个简单的例子演示了如何将 Python 和 R 用于报告创建。流行的 Python pandas 库用于加载和数据准备。然后，R 被用于可视化。
 
@@ -60,19 +60,19 @@ R 和 Python 课程在多个流行平台上均可用（例如：Coursera、Udemy
 
 1.  在 Coursera 上，有一个很棒的关于可重复研究和 R markdown 基础的课程：
 
-    [https://www.coursera.org/lecture/reproducible-research/r-markdown-5NzHN](https://www.coursera.org/lecture/reproducible-research/r-markdown-5NzHN)
+    [`www.coursera.org/lecture/reproducible-research/r-markdown-5NzHN`](https://www.coursera.org/lecture/reproducible-research/r-markdown-5NzHN)
 
 1.  如果你对 R 不太熟悉，Data Camp 提供了一个很好的入门课程：
 
-    [https://www.datacamp.com/courses/free-introduction-to-r](https://www.datacamp.com/courses/free-introduction-to-r)
+    [`www.datacamp.com/courses/free-introduction-to-r`](https://www.datacamp.com/courses/free-introduction-to-r)
 
 1.  作为 Vertabelo Academy 的作者，我个人推荐我们的 Python 和 R 课程。它们特别适合那些来自商业背景的人士：
 
-    [https://academy.vertabelo.com/course/python-data-science](https://academy.vertabelo.com/course/python-data-science)
+    [`academy.vertabelo.com/course/python-data-science`](https://academy.vertabelo.com/course/python-data-science)
 
-    [https://academy.vertabelo.com/course/data-visualization-101](https://academy.vertabelo.com/course/data-visualization-101)
+    [`academy.vertabelo.com/course/data-visualization-101`](https://academy.vertabelo.com/course/data-visualization-101)
 
-1.  Edx 提供了许多 Python 和 R 课程，包括来自哈佛、IBM、微软的课程。对于 Python 初学者，可以尝试这个 IBM 课程：[https://www.edx.org/course/python-basics-for-data-science-2](https://www.edx.org/course/python-basics-for-data-science-2)
+1.  Edx 提供了许多 Python 和 R 课程，包括来自哈佛、IBM、微软的课程。对于 Python 初学者，可以尝试这个 IBM 课程：[`www.edx.org/course/python-basics-for-data-science-2`](https://www.edx.org/course/python-basics-for-data-science-2)
 
 ### **总结**
 
@@ -82,21 +82,21 @@ Python 和 R 是当前最热门的数据科学语言。熟悉这两种语言是�
 
 **相关：**
 
-+   [应用于 Pandas DataFrames 的集合操作](/2019/11/set-operations-applied-pandas-dataframes.html)
++   应用于 Pandas DataFrames 的集合操作
 
-+   [你可能不知道的 R 中的十个随机有用的东西](/2019/07/ten-more-random-useful-things-r.html)
++   你可能不知道的 R 中的十个随机有用的东西
 
-+   [R 用户的客户细分](/2019/09/customer-segmentation-r-users.html)
++   R 用户的客户细分
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -106,10 +106,10 @@ Python 和 R 是当前最热门的数据科学语言。熟悉这两种语言是�
 
 +   [最先进的深度学习下的可解释预测与实时预测](https://www.kdnuggets.com/2021/12/sota-explainable-forecasting-and-nowcasting.html)
 
-+   [使用Python的Pathlib组织、搜索和备份文件](https://www.kdnuggets.com/organize-search-and-back-up-files-with-pythons-pathlib)
++   [使用 Python 的 Pathlib 组织、搜索和备份文件](https://www.kdnuggets.com/organize-search-and-back-up-files-with-pythons-pathlib)
 
-+   [处理CSV文件的3种方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
++   [处理 CSV 文件的 3 种方法](https://www.kdnuggets.com/2022/10/3-ways-process-csv-files-python.html)
 
-+   [如何在Bash中管理文件和目录](https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash)
++   [如何在 Bash 中管理文件和目录](https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash)
 
 +   [停止在数据科学项目中硬编码 - 改用配置文件](https://www.kdnuggets.com/2023/06/stop-hard-coding-data-science-project-config-files-instead.html)

@@ -1,12 +1,12 @@
 # Python 中的轻松 AutoML
 
-> 原文：[https://www.kdnuggets.com/2021/04/easy-automl-python.html](https://www.kdnuggets.com/2021/04/easy-automl-python.html)
+> 原文：[`www.kdnuggets.com/2021/04/easy-automl-python.html`](https://www.kdnuggets.com/2021/04/easy-automl-python.html)
 
-[评论](#comments)
+评论
 
 **作者：[迪伦·谢里](https://www.linkedin.com/in/dylansherry/)，EvalML 团队负责人**
 
-![使用 EvalML 在 Python 中轻松实现开源 AutoML](../Images/bc5d64a495185d869d33f09fede4dc34.png)
+![使用 EvalML 在 Python 中轻松实现开源 AutoML](img/bc5d64a495185d869d33f09fede4dc34.png)
 
 Alteryx 托管两个开源建模项目。
 
@@ -38,7 +38,7 @@ best_pipeline = automl.best_pipeline
 best_pipeline.predict(X_test)
 ```
 
-![图](../Images/1319ed30bec469e3b669a661f0796aa2.png)
+![图](img/1319ed30bec469e3b669a661f0796aa2.png)
 
 EvalML 的 AutoML 搜索实操
 
@@ -54,7 +54,7 @@ EvalML 由 AutoML 生成的管道包括开箱即用的预处理和特征工程�
 
 EvalML 设计时考虑了与 [Featuretools](https://featuretools.com/?__hstc=142826602.43730bd3179999cf11c14fbc47b01062.1613430843886.1613430843886.1613430843886.1&__hssc=142826602.1.1613430843886&__hsfp=264117289) 的良好兼容性，Featuretools 能够集成来自多个表的数据并生成特征，从而提升 ML 模型的性能，还兼容 [Compose](https://compose.alteryx.com/)，这是一个用于标签工程和时间序列聚合的工具。EvalML 用户可以轻松控制 EvalML 如何处理每个输入的特征，如数值特征、分类特征、文本、日期时间等。
 
-![图](../Images/3dda01534486e96ea72c50211ccece51.png)
+![图](img/3dda01534486e96ea72c50211ccece51.png)
 
 你可以将 Compose 和 Featuretools 与 EvalML 一起使用来构建机器学习模型。
 
@@ -72,7 +72,7 @@ EvalML 文档提供了 [自定义目标示例](https://evalml.alteryx.com/en/v0.
 
 EvalML 提供了多种模型和工具用于模型理解。目前支持的功能包括特征重要性和置换重要性、部分依赖、精确率-召回率、混淆矩阵、ROC 曲线、预测解释和二分类器阈值优化。
 
-![图](../Images/f690d8e7a632fbd3dc20f0e0028d4814.png)
+![图](img/f690d8e7a632fbd3dc20f0e0028d4814.png)
 
 来自 [EvalML 文档](https://evalml.alteryx.com/en/v0.18.1/user_guide/model_understanding.html#Partial-Dependence-Plots) 的部分依赖示例
 
@@ -80,11 +80,11 @@ EvalML 提供了多种模型和工具用于模型理解。目前支持的功能�
 
 EvalML 的数据检查可以在建模之前捕捉到数据中的常见问题，防止它们导致模型质量问题或神秘的错误和堆栈跟踪。当前的数据检查包括检测 [目标泄漏](https://en.wikipedia.org/wiki/Leakage_(machine_learning)) 的简单方法，其中模型在训练期间获得了在预测时不可用的信息，检测无效数据类型、高类别不平衡、高空值列、常量列以及可能是 ID 且对建模无用的列。
 
-![](../Images/fa9ebf5142aba2215d86fd04304a7515.png)
+![](img/fa9ebf5142aba2215d86fd04304a7515.png)
 
 ### 开始使用 EvalML
 
-你可以通过访问 [我们的文档页面](http://evalml.alteryx.com/)来开始使用 EvalML，我们提供了 [安装说明](https://evalml.alteryx.com/en/stable/install.html)以及 [教程](https://evalml.alteryx.com/en/stable/tutorials.html)，这些教程展示了如何使用 EvalML 的示例，还有 [用户指南](https://evalml.alteryx.com/en/stable/user_guide.html)介绍 EvalML 的组件和核心概念， [API 参考](https://evalml.alteryx.com/en/stable/api_reference.html)等。EvalML 代码库位于 [https://github.com/alteryx/evalml](https://github.com/alteryx/evalml)。如需与团队联系，请查看我们的 [开源 Slack](https://join.slack.com/t/alteryx-oss/shared_invite/zt-6inxevps-RSbpr9lsACE1kObXz4rIuA)。我们正在积极维护代码库，并会对你提交的问题作出回应。
+你可以通过访问 [我们的文档页面](http://evalml.alteryx.com/)来开始使用 EvalML，我们提供了 [安装说明](https://evalml.alteryx.com/en/stable/install.html)以及 [教程](https://evalml.alteryx.com/en/stable/tutorials.html)，这些教程展示了如何使用 EvalML 的示例，还有 [用户指南](https://evalml.alteryx.com/en/stable/user_guide.html)介绍 EvalML 的组件和核心概念， [API 参考](https://evalml.alteryx.com/en/stable/api_reference.html)等。EvalML 代码库位于 [`github.com/alteryx/evalml`](https://github.com/alteryx/evalml)。如需与团队联系，请查看我们的 [开源 Slack](https://join.slack.com/t/alteryx-oss/shared_invite/zt-6inxevps-RSbpr9lsACE1kObXz4rIuA)。我们正在积极维护代码库，并会对你提交的问题作出回应。
 
 ### 接下来是什么？
 
@@ -98,21 +98,21 @@ EvalML 有一个活跃的功能发展路线图，包括时间序列建模、Auto
 
 **相关内容:**
 
-+   [Uber 开源 Ludwig 的第三个版本，它是一个无代码机器学习平台](/2020/10/uber-open-source-ludwig-code-free-machine-learning-platform.html)
++   Uber 开源 Ludwig 的第三个版本，它是一个无代码机器学习平台
 
-+   [高级超参数优化/调整算法](/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)
++   高级超参数优化/调整算法
 
-+   [使用 PyCaret 2.0 构建你自己的 AutoML](/2020/08/build-automl-pycaret.html)
++   使用 PyCaret 2.0 构建你自己的 AutoML
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
 
 * * *
 

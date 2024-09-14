@@ -1,12 +1,12 @@
 # 数据工程师最重要的工具
 
-> 原文：[https://www.kdnuggets.com/2021/08/most-important-tool-data-engineers.html](https://www.kdnuggets.com/2021/08/most-important-tool-data-engineers.html)
+> 原文：[`www.kdnuggets.com/2021/08/most-important-tool-data-engineers.html`](https://www.kdnuggets.com/2021/08/most-important-tool-data-engineers.html)
 
-[评论](#comments)
+评论
 
 **由[Leo Godin](https://www.linkedin.com/in/leo-godin-2942852/)，高级数据工程师**
 
-![混凝土房间里充满涂鸦的霓虹问号。](../Images/c9b1968b0d5558903d28d6679b442489.png)
+![混凝土房间里充满涂鸦的霓虹问号。](img/c9b1968b0d5558903d28d6679b442489.png)
 
 图片来源于[Emily Morter](https://unsplash.com/@emilymorter?utm_source=medium&utm_medium=referral) 在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,19 +14,19 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
-最优秀的技术专家如果解决错误的问题，就注定会遭遇挫折和失败。然而，我们常常看到优秀的Python开发者和SQL专家创造了极好的技术，却对业务几乎没有价值。在某些情况下，更糟糕的是，这些解决方案不仅没有争议的价值，反而消耗资源并混乱业务流程。作为数据工程师，我们有责任充分理解我们解决方案所支持的业务流程。
+最优秀的技术专家如果解决错误的问题，就注定会遭遇挫折和失败。然而，我们常常看到优秀的 Python 开发者和 SQL 专家创造了极好的技术，却对业务几乎没有价值。在某些情况下，更糟糕的是，这些解决方案不仅没有争议的价值，反而消耗资源并混乱业务流程。作为数据工程师，我们有责任充分理解我们解决方案所支持的业务流程。
 
 作为高级数据工程师，我们应该对业务有深刻的理解，以至于能够推荐工作中的效率和改进。这是一个大胆的声明，但我将坚定地坚持这一点，并与任何不同意见的人作斗争。当然是比喻的，因为我没有剑，更偏爱和平而非战斗。重点是，我们需要理解业务，有一个关键工具可以帮助我们做到这一点。
 
-在此之前，请阅读这句来自Julien Kervizic的精彩引用， [简明扼要地指出了问题](https://medium.com/analytics-and-data/the-lost-art-of-data-modeling-1118e88d9d7a)：
+在此之前，请阅读这句来自 Julien Kervizic 的精彩引用， [简明扼要地指出了问题](https://medium.com/analytics-and-data/the-lost-art-of-data-modeling-1118e88d9d7a)：
 
 “通过对底层数据及其相关业务过程的理解来塑造数据，如今似乎不如能够移动数据那样重要。”
 
@@ -58,19 +58,19 @@
 
 **相关内容:**
 
-+   [2021年数据工程师最需要的技能](/2021/05/most-demand-skills-data-engineers-2021.html)
++   2021 年数据工程师最需要的技能
 
-+   [数据科学家、数据工程师及其他数据职业解析](/2021/05/data-scientist-data-engineer-data-careers-explained.html)
++   数据科学家、数据工程师及其他数据职业解析
 
-+   [分析工程无处不在](/2021/06/analytics-engineering-everywhere.html)
++   分析工程无处不在
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，8月3日：10个最常用的 Tableau 函数 • 是否…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是否…](https://www.kdnuggets.com/2022/n31.html)
 
 +   [Nota AI 发布了 NetPresso 模型搜索的 beta 版本，他们的…](https://www.kdnuggets.com/2022/04/nota-ai-releases-beta-version-netpresso-model-search-hardwareaware-automl-tool.html)
 
-+   [你不知道的低代码工具的7个功能](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
++   [你不知道的低代码工具的 7 个功能](https://www.kdnuggets.com/2022/09/7-things-didnt-know-could-low-code-tool.html)
 
 +   [RAG 与 Finetuning: 哪个是提升你的 LLM 应用的最佳工具？](https://www.kdnuggets.com/rag-vs-finetuning-which-is-the-best-tool-to-boost-your-llm-application)
 

@@ -1,8 +1,8 @@
 # 用户生成的数据标记的兴起
 
-> 原文：[https://www.kdnuggets.com/2019/12/rise-user-generated-data-labeling.html](https://www.kdnuggets.com/2019/12/rise-user-generated-data-labeling.html)
+> 原文：[`www.kdnuggets.com/2019/12/rise-user-generated-data-labeling.html`](https://www.kdnuggets.com/2019/12/rise-user-generated-data-labeling.html)
 
-[评论](#comments)
+评论
 
 **作者 [Nandhini TS](https://www.linkedin.com/in/nandhini-ts-75a7bb133/)，Xtract.io**
 
@@ -12,25 +12,25 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
-就像训练数据集以创建一个出色的AI模型一样。它们会被不断训练和教导，直到能够独立操作。神奇的猎豹物种也经历了类似的过程，直到它能够预测各种猎物的逃跑策略，并调整其速度以实现快速转弯——而不仅仅依靠灵活性和速度。认知是通过大量训练获得的，这一过程的核心是[数据标记](/2019/10/data-labeling-facilitates-ai-models.html)。
+就像训练数据集以创建一个出色的 AI 模型一样。它们会被不断训练和教导，直到能够独立操作。神奇的猎豹物种也经历了类似的过程，直到它能够预测各种猎物的逃跑策略，并调整其速度以实现快速转弯——而不仅仅依靠灵活性和速度。认知是通过大量训练获得的，这一过程的核心是数据标记。
 
 这是一个重要的前提，它帮助你的机器学习算法根据标记的输入进行“学习”。现在，有几种方法可以做到这一点——自主管理的人力劳动、外包给个人/公司、第三方管理的标记服务提供商等等。
 
 不过，假设你的项目庞大且需要持续进行数据标记——无论你在移动中、睡觉还是吃饭时。这时候你需要免费完成这些任务。当然，它可以外包，但如果你考虑成本、覆盖概率和准确性，我相信你会欣赏***用户生成的数据标记***。
 
-我有6个有趣的例子来帮助你理解这个，我们直接深入吧！
+我有 6 个有趣的例子来帮助你理解这个，我们直接深入吧！
 
 ### **1\. Netflix 标注了缩略图，你知道吗？**
 
-数据科学在像Netflix这样的平台上的一个简单应用当然是他们的推荐引擎如何处理隐式数据。假设用户“A”在4天内连续观看了一个节目，比如“处女的秘密”（所有季节），隐式数据就是你喜欢这个节目，因为你显然牺牲了大量的睡眠来观看它。行为数据与成千上万其他数据点结合，是Netflix机器学习算法实际运作的基础。
+数据科学在像 Netflix 这样的平台上的一个简单应用当然是他们的推荐引擎如何处理隐式数据。假设用户“A”在 4 天内连续观看了一个节目，比如“处女的秘密”（所有季节），隐式数据就是你喜欢这个节目，因为你显然牺牲了大量的睡眠来观看它。行为数据与成千上万其他数据点结合，是 Netflix 机器学习算法实际运作的基础。
 
 Netflix 产品创新副总裁 Todd Yellin [表示](https://www.wired.co.uk/article/how-do-netflixs-algorithms-work-machine-learning-helps-to-predict-what-viewers-will-like)，他们考虑的数据是 *“我们从这些资料中看到的数据类型 – 人们观看什么，他们之后观看了什么，他们之前观看了什么，他们一年前观看了什么，他们最近观看了什么，以及一天中的时间”*。
 
@@ -38,7 +38,7 @@ Netflix 产品创新副总裁 Todd Yellin [表示](https://www.wired.co.uk/artic
 
 现在，Netflix 基于类似的兴趣对节目和电影进行分类和推荐，并且在此基础上更进一步（以提高点击率），采用了一种称为缩略图个性化的概念。这些基本上是 Netflix 从电影或节目的视频帧中标注的图像。
 
-![图示](../Images/0869c0cb7539f91c2eddff8ce043dda9.png)
+![图示](img/0869c0cb7539f91c2eddff8ce043dda9.png)
 
 *图片来源**:* [*Becominghuman.ai*](https://becominghuman.ai/how-netflix-uses-ai-and-machine-learning-a087614630fe)
 
@@ -54,13 +54,13 @@ Netflix 产品创新副总裁 Todd Yellin [表示](https://www.wired.co.uk/artic
 
 为了帮助你更好地理解：我被要求画一个月亮。虽然对自己的绘画技能感到尴尬，我还是会展示我画的图来帮助你理解这个概念！
 
-![图示](../Images/cf9fb169c74a79076dbef30a9a399193.png)
+![图示](img/cf9fb169c74a79076dbef30a9a399193.png)
 
 好吧，图像明显显示神经网络没有识别出它（我不是毕加索，对吧？）无论如何，游戏只有在用户感到自己战胜了神经网络时才会变得有趣，因为神经网络能够识别他们如何构思和表现被要求绘制的内容。这正是这个概念的成功之处。但由于有数百万种不同的可能性以及像我这样适合玩画图游戏（在空气中绘画）的人所具备的技能，这个模型利用了用户生成的数据。
 
 现在，我那幅可怜的月亮图被作为标记为“moon”的训练数据集用来帮助提高准确性。这里是神经网络识别为月亮的图像以及它如何学会识别它的情况。
 
-![图像](../Images/ae07e72884d03bf2ba8b19ac28f193da.png)
+![图像](img/ae07e72884d03bf2ba8b19ac28f193da.png)
 
 ### **3\. Grammarly 需要你的帮助来确认你是否正确**
 
@@ -70,7 +70,7 @@ Netflix 产品创新副总裁 Todd Yellin [表示](https://www.wired.co.uk/artic
 
 但，从逻辑和语法上讲，使用“are”可能是正确的。不过，超越语法，写作需要连贯，最重要的是你的句子需要读起来顺畅。在这个例子中，我使用了“is”因为这个过程仍在进行，因此使用现在进行时。然而，Grammarly 有其他的想法。所以，作为用户，我帮助 Grammarly 对其进行标记，以更好地适应上下文，并忽略了将其修改得更聪明的建议。
 
-![图像](../Images/9563493d4c4a1d0d4aff5f9d178a31e3.png)
+![图像](img/9563493d4c4a1d0d4aff5f9d178a31e3.png)
 
 ### **4\. Google 套件中的一些产品，它们是最好的，对吧？**
 
@@ -78,7 +78,7 @@ Netflix 产品创新副总裁 Todd Yellin [表示](https://www.wired.co.uk/artic
 
 Google 的 Smart Compose 显然依靠人工智能。其确切功能是通过使用 [词袋语言模型](https://www.theregister.co.uk/2018/05/19/ai_roundup_may18/) 与递归神经网络。它基本上利用主题行和之前的电子邮件进行学习，并将这些内容编码为词嵌入，并转换为向量。这里有一个示例，Grammarly 正在检测语气！
 
-![图像](../Images/56e7bd61fb27ae89c78cb05165260dac.png)
+![图像](img/56e7bd61fb27ae89c78cb05165260dac.png)
 
 **b. Google 地图变得更聪明**
 
@@ -102,7 +102,7 @@ Kevin Systrom（Instagram 的首席执行官）表示，*“机器学习的整�
 
 正是这种风险因素，Instagram 最近推出了一个选项，如果用户确定要发布评论，会使用 AI 驱动的技术进行提醒，实际测试鼓励用户后退。
 
-![图示](../Images/5d7dfbe5983c2320e52fcaeeecd5af12.png)
+![图示](img/5d7dfbe5983c2320e52fcaeeecd5af12.png)
 
 要让一个 AI 模型如此智能（分类哪些是攻击性的，哪些不是），它确实需要基于用户贡献的持续训练，不是吗？
 
@@ -114,9 +114,9 @@ Bigbasket 的分析负责人 Subramanai 在 [一次采访](https://yourstory.com
 
 AI 在 Bigbasket 的多个案例中都有应用，例如他们如何分析当前流量数据并将其与交付承诺进行映射。另一个是 Smartbasket——这是非常有趣的。Smartbasket 的引入旨在为客户创建个性化的购物篮。
 
-“通常，客户的最终订单中有90%已经包含在 Smartbasket 中。我们的数据表明，这些客户现在花费的时间只有他们通常的一半，” 数据分析负责人表示。
+“通常，客户的最终订单中有 90%已经包含在 Smartbasket 中。我们的数据表明，这些客户现在花费的时间只有他们通常的一半，” 数据分析负责人表示。
 
-他们的机器学习算法也在变得更智能，其中客户将40%的推荐产品添加到购物车中。
+他们的机器学习算法也在变得更智能，其中客户将 40%的推荐产品添加到购物车中。
 
 因此，如果我们深入探讨推荐引擎和 Smartbasket 概念，从客户收集的数据——行为分析、偏好、购买历史、对同一产品的社区行为以及其他数千条信息，都会作为训练数据输入推荐引擎。点击量随着模式的智能化而提升，这一过程基于每次用户对推荐类型的反馈。
 
@@ -132,11 +132,11 @@ AI 在 Bigbasket 的多个案例中都有应用，例如他们如何分析当前
 
 **相关内容：**
 
-+   [数据标注如何促进 AI 模型](/2019/10/data-labeling-facilitates-ai-models.html)
++   数据标注如何促进 AI 模型
 
-+   [机器学习数据准备 101：为什么重要以及如何进行](/2019/10/data-preparation-machine-learning-101.html)
++   机器学习数据准备 101：为什么重要以及如何进行
 
-+   [数据科学项目准备的奇妙四步](/2019/07/fantastic-four-data-science-project-preparation.html)
++   数据科学项目准备的奇妙四步
 
 ### 更多相关话题
 

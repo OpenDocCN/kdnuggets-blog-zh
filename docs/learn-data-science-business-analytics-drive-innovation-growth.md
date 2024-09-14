@@ -1,8 +1,8 @@
 # 学习数据科学和商业分析以推动创新和增长
 
-> 原文：[https://www.kdnuggets.com/2023/08/learn-data-science-business-analytics-drive-innovation-growth.html](https://www.kdnuggets.com/2023/08/learn-data-science-business-analytics-drive-innovation-growth.html)
+> 原文：[`www.kdnuggets.com/2023/08/learn-data-science-business-analytics-drive-innovation-growth.html`](https://www.kdnuggets.com/2023/08/learn-data-science-business-analytics-drive-innovation-growth.html)
 
-![学习数据科学和商业分析以推动创新和增长](../Images/bbd42cdbd8ded8286b3d4b752d1b21fd.png)
+![学习数据科学和商业分析以推动创新和增长](img/bbd42cdbd8ded8286b3d4b752d1b21fd.png)
 
 你想知道任何企业如何能够长期生存吗？答案很简单——那就是增长。公司的增长对业务表现和利润至关重要。它还促进资产获取、投资融资和人才吸引。
 
@@ -10,17 +10,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 商业分析和数据科学对推动创新和业务增长至关重要。数据科学可以被企业利用来缓解不利趋势。例如，零售和金融服务公司可以利用数据科学来应对如破产、裁员或即将关闭等挑战。通过应用数据驱动的洞察和分析，这些公司可以做出明智的决策，并采取主动措施来解决这些问题。
 
-此外，数据可以引导你的公司走向成功，你只需正确使用它。换句话说，数据是你业务分析的基础，以及你可以用它做的事情。为了启动你的业务并装备自己，以在竞争激烈的环境中脱颖而出，探索像Great Learning提供的[最佳数据科学课程](https://www.mygreatlearning.com/data-science/courses)可能会带来终极变化。这些课程提供了全面和实践的数据分析、机器学习和人工智能培训，使你具备利用数据驱动洞察力的专业知识。
+此外，数据可以引导你的公司走向成功，你只需正确使用它。换句话说，数据是你业务分析的基础，以及你可以用它做的事情。为了启动你的业务并装备自己，以在竞争激烈的环境中脱颖而出，探索像 Great Learning 提供的[最佳数据科学课程](https://www.mygreatlearning.com/data-science/courses)可能会带来终极变化。这些课程提供了全面和实践的数据分析、机器学习和人工智能培训，使你具备利用数据驱动洞察力的专业知识。
 
 此外，在今天快速发展的商业环境中，投资于持续学习和技能提升变得至关重要。其他一些在线平台和教育机构也提供有价值的课程和资源，旨在提升业务增长和数据驱动决策。例如，[Coursera](https://www.coursera.org/)提供了来自知名大学和行业专家的各种数据科学和商业分析课程，使学习者能够跟上前沿的方法论。
 
@@ -50,25 +50,25 @@
 
 让我们了解数据科学和商业分析在业务增长中的好处。
 
-![学习数据科学和商业分析以推动创新和增长](../Images/e233d4bda800a2fd883b152ee2874b04.png)
+![学习数据科学和商业分析以推动创新和增长](img/e233d4bda800a2fd883b152ee2874b04.png)
 
-图片来源：[https://blog.athenagt.com/wp-content/uploads/2018/09/Blog-info_1074698057-1.png](https://blog.athenagt.com/wp-content/uploads/2018/09/Blog-info_1074698057-1.png)
+图片来源：[`blog.athenagt.com/wp-content/uploads/2018/09/Blog-info_1074698057-1.png`](https://blog.athenagt.com/wp-content/uploads/2018/09/Blog-info_1074698057-1.png)
 
 ## 考虑两个具有说服力的案例研究，这些研究反映了数据科学和商业分析对业务增长的影响。
 
-+   在**案例研究 1**中，采用的策略是构建一个多项式回归模型，以确定市场水平目标对竞标成功的影响。通过使用线性和非线性方程，识别出显著影响赢得或保留现有客户概率的预测变量。这个模型证明了成功，因为它使客户获取率提高了30%，客户保留率提高了40%。
++   在**案例研究 1**中，采用的策略是构建一个多项式回归模型，以确定市场水平目标对竞标成功的影响。通过使用线性和非线性方程，识别出显著影响赢得或保留现有客户概率的预测变量。这个模型证明了成功，因为它使客户获取率提高了 30%，客户保留率提高了 40%。
 
 这种方法可以应用于各种行业或企业，调整因素和变量以满足具体需求。这意味着通过识别和正确利用关键市场指标或预测因素，企业可以显著提高其客户获取和保留率。
 
-![学习数据科学和商业分析以推动创新和增长](../Images/55a6165d92d82e9d6d2486b0f4d3524b.png)
+![学习数据科学和商业分析以推动创新和增长](img/55a6165d92d82e9d6d2486b0f4d3524b.png)
 
 图片来源: https://www.baselismail.com/wp-content/uploads/2019/03/2019-03-05-16_12_23-Basel-Ismail-Case-Studies.pptx-PowerPoint-1536x1002.png
 
-+   在**案例研究 2**中，创建了一个销售激励模型以提高销售业绩。这个模型是通过多变量模型构建的，输入包括市场因素和前几年对应的政策数据。研究发现，设定的销售团队目标与其盈利完成交易的能力之间存在正相关。这一模型使销售业绩实现了45%的年增长。
++   在**案例研究 2**中，创建了一个销售激励模型以提高销售业绩。这个模型是通过多变量模型构建的，输入包括市场因素和前几年对应的政策数据。研究发现，设定的销售团队目标与其盈利完成交易的能力之间存在正相关。这一模型使销售业绩实现了 45%的年增长。
 
 该策略强调了适当地激励销售团队和设定具有竞争力的市场特定目标以提升销售业绩的重要性。通过正确理解激励结构与销售业绩之间的关系，公司可以更好地激励销售团队并优化销售结果。
 
-![学习数据科学和商业分析以推动创新和增长](../Images/a286b32d575b542ee55a8b9b7c776c18.png)
+![学习数据科学和商业分析以推动创新和增长](img/a286b32d575b542ee55a8b9b7c776c18.png)
 
 图片来源: https://www.baselismail.com/wp-content/uploads/2019/03/2019-03-05-16_18_30-Basel-Ismail-Case-Studies.pptx-PowerPoint-1536x968.png
 
@@ -116,7 +116,7 @@
 
 在可预见的未来，数据将继续是任何公司运营不可或缺的部分。数据代表了可操作的知识，能显著影响公司成功与失败的差异。正如俗话所说，知识就是力量。
 
-**[Erika Balla](https://www.linkedin.com/in/erika-balla-56870a216/)** 是一位来自罗马尼亚的匈牙利内容写作专家，专注于AI和数据科学主题。她的目标是帮助企业简化复杂信息，让数据科学更广泛地为受众所用，凭借她在写作和先进技术知识方面的专长。
+**[Erika Balla](https://www.linkedin.com/in/erika-balla-56870a216/)** 是一位来自罗马尼亚的匈牙利内容写作专家，专注于 AI 和数据科学主题。她的目标是帮助企业简化复杂信息，让数据科学更广泛地为受众所用，凭借她在写作和先进技术知识方面的专长。
 
 ### 更多相关话题
 
@@ -126,8 +126,8 @@
 
 +   [如何更好地利用数据科学推动业务增长](https://www.kdnuggets.com/2022/08/better-leverage-data-science-business-growth.html)
 
-+   [BigQuery中的异常检测：揭示隐藏的洞察并推动行动](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)
++   [BigQuery 中的异常检测：揭示隐藏的洞察并推动行动](https://www.kdnuggets.com/anomaly-detection-in-bigquery-uncover-hidden-insights-and-drive-action)
 
-+   [基于LLM的自主代理背后的增长](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
++   [基于 LLM 的自主代理背后的增长](https://www.kdnuggets.com/the-growth-behind-llmbased-autonomous-agents)
 
-+   [微软工程师的AI创新与领导力指南](https://www.kdnuggets.com/a-microsoft-engineer-guide-to-ai-innovation-and-leadership)
++   [微软工程师的 AI 创新与领导力指南](https://www.kdnuggets.com/a-microsoft-engineer-guide-to-ai-innovation-and-leadership)

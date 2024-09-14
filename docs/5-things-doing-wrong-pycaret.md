@@ -1,12 +1,12 @@
 # 你在 PyCaret 中做错的 5 件事
 
-> 原文：[https://www.kdnuggets.com/2020/11/5-things-doing-wrong-pycaret.html](https://www.kdnuggets.com/2020/11/5-things-doing-wrong-pycaret.html)
+> 原文：[`www.kdnuggets.com/2020/11/5-things-doing-wrong-pycaret.html`](https://www.kdnuggets.com/2020/11/5-things-doing-wrong-pycaret.html)
 
-[评论](#comments)
+评论
 
 **由 [Moez Ali](https://www.linkedin.com/in/profile-moez/)，PyCaret 的创始人及作者**
 
-![图](../Images/6fd3bbe1eed3087171efe5233e63e86b.png)
+![图](img/6fd3bbe1eed3087171efe5233e63e86b.png)
 
 照片由 [Ben White](https://unsplash.com/@benwhitephotography?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,11 +28,11 @@ PyCaret 是一个开源的低代码机器学习库，能够自动化机器学习
 
 与其他开源机器学习库相比，PyCaret 是一个低代码的替代库，可以用几行代码替代数百行代码。这使得实验变得指数级地快速和高效。
 
-官方网站: [https://www.pycaret.org](https://www.pycaret.org/)
+官方网站: [`www.pycaret.org`](https://www.pycaret.org/)
 
-文档: [https://pycaret.readthedocs.io/en/latest/](https://pycaret.readthedocs.io/en/latest/)
+文档: [`pycaret.readthedocs.io/en/latest/`](https://pycaret.readthedocs.io/en/latest/)
 
-Git: [https://www.github.com/pycaret/pycaret](https://www.github.com/pycaret/pycaret)
+Git: [`www.github.com/pycaret/pycaret`](https://www.github.com/pycaret/pycaret)
 
 ### ???? compare_models 比你想象的要做得更多
 
@@ -40,75 +40,75 @@ Git: [https://www.github.com/pycaret/pycaret](https://www.github.com/pycaret/pyc
 
 这个行为在版本 2.0 中有所改变。**compare_models** 现在返回基于**n_select**参数的最佳模型，该参数默认设置为 1，这意味着它会返回最佳模型（默认情况下）。
 
-![图](../Images/2f64f64a52336071f10bd0aa449bc957.png)
+![图](img/2f64f64a52336071f10bd0aa449bc957.png)
 
 compare_models(n_select = 1)
 
 通过将默认的**n_select**参数更改为 3，你可以获得前 3 个模型的列表。例如：
 
-![图](../Images/1e8aa7356f9bd812c66f347418a27077.png)
+![图](img/1e8aa7356f9bd812c66f347418a27077.png)
 
 compare_models(n_select = 3)
 
 返回的对象是训练好的模型，你实际上不需要再次调用**create_model**来训练它们。你可以使用这些模型来生成诊断图或进行预测，例如：
 
-![图像](../Images/561308d029c10707f2b8796d963a5e44.png)
+![图像](img/561308d029c10707f2b8796d963a5e44.png)
 
 **predict_model**函数
 
-### ???? 你认为你只能使用scikit-learn模型
+### ???? 你认为你只能使用 scikit-learn 模型
 
-我们收到很多请求，要求在模型库中包括非*scikit-learn*模型。许多人没有意识到，你不仅限于默认模型。**create_model**函数除了接受模型库中模型的ID外，还接受未训练的模型对象。只要你的对象与*scikit-learn* fit/predict API兼容，它就会正常工作。例如，在这里我们通过简单地导入未训练的NGBClassifier，训练并评估了来自[ngboost](https://github.com/stanfordmlgroup/ngboost)库的***NGBClassifier***：
+我们收到很多请求，要求在模型库中包括非*scikit-learn*模型。许多人没有意识到，你不仅限于默认模型。**create_model**函数除了接受模型库中模型的 ID 外，还接受未训练的模型对象。只要你的对象与*scikit-learn* fit/predict API 兼容，它就会正常工作。例如，在这里我们通过简单地导入未训练的 NGBClassifier，训练并评估了来自[ngboost](https://github.com/stanfordmlgroup/ngboost)库的***NGBClassifier***：
 
-![图像](../Images/f7e2bf067b1dd47cf059ecbc8a29f37f.png)
+![图像](img/f7e2bf067b1dd47cf059ecbc8a29f37f.png)
 
-使用外部模型的create_model
+使用外部模型的 create_model
 
 你也可以将未训练的模型传递给**compare_models**的**include**参数，它将正常工作。
 
-![图像](../Images/dd119e114d11c91320af98c831c196f2.png)
+![图像](img/dd119e114d11c91320af98c831c196f2.png)
 
-使用未训练对象的compare_models
+使用未训练对象的 compare_models
 
-请注意，包括的参数包括模型库中三个未训练的模型的ID，即逻辑回归、决策树和K邻近，以及ngboost库中的一个未训练对象。此外，请注意索引表示在include参数中输入的模型的位置。
+请注意，包括的参数包括模型库中三个未训练的模型的 ID，即逻辑回归、决策树和 K 邻近，以及 ngboost 库中的一个未训练对象。此外，请注意索引表示在 include 参数中输入的模型的位置。
 
-### ???? 你不了解pull()函数
+### ???? 你不了解 pull()函数
 
-PyCaret中的所有训练函数（create_model、tune_model、ensemble_model等）显示一个分数网格，但不返回分数网格。因此，你无法将分数网格存储在像pandas.DataFrame这样的对象中。然而，有一个叫做**pull**的函数可以实现。例如：
+PyCaret 中的所有训练函数（create_model、tune_model、ensemble_model 等）显示一个分数网格，但不返回分数网格。因此，你无法将分数网格存储在像 pandas.DataFrame 这样的对象中。然而，有一个叫做**pull**的函数可以实现。例如：
 
-![图像](../Images/8f33d9987a20793c5236c7ae391a2a72.png)
+![图像](img/8f33d9987a20793c5236c7ae391a2a72.png)
 
-使用create_model的pull函数
+使用 create_model 的 pull 函数
 
-这也适用于使用**predict_model**函数的holdout分数网格。
+这也适用于使用**predict_model**函数的 holdout 分数网格。
 
-![图像](../Images/f976d7fe434f039d8400949177f29d1b.png)
+![图像](img/f976d7fe434f039d8400949177f29d1b.png)
 
 使用**predict_model**函数拉取
 
-现在你可以将指标作为pandas.DataFrame访问，你可以做很多事情。例如，你可以创建一个循环来训练不同参数的模型，并用这段简单的代码创建比较表：
+现在你可以将指标作为 pandas.DataFrame 访问，你可以做很多事情。例如，你可以创建一个循环来训练不同参数的模型，并用这段简单的代码创建比较表：
 
-![图像](../Images/d4cf0da30cc625e0751b2652c1326950.png)
+![图像](img/d4cf0da30cc625e0751b2652c1326950.png)
 
-create_model和pull函数
+create_model 和 pull 函数
 
-### ???? 你认为PyCaret是一个黑箱，但它不是。
+### ???? 你认为 PyCaret 是一个黑箱，但它不是。
 
 另一个常见的误解是所有的预处理操作都在后台进行，用户无法访问。因此，你无法审计运行**setup**函数时发生了什么。这是不对的。
 
-PyCaret中有两个函数**get_config**和**set_config**，它们允许你访问和更改后台的所有内容，从你的训练集到模型的随机状态。你可以通过调用**help(get_config)**来查看可以访问哪些变量：
+PyCaret 中有两个函数**get_config**和**set_config**，它们允许你访问和更改后台的所有内容，从你的训练集到模型的随机状态。你可以通过调用**help(get_config)**来查看可以访问哪些变量：
 
-![图像](../Images/0d548afe8b03e65615731b5a1f30fcb3.png)
+![图像](img/0d548afe8b03e65615731b5a1f30fcb3.png)
 
 help(get_config)
 
 你可以通过在**get_config**函数内部调用变量来访问它。例如，要访问**X_train**转化后的数据集，你可以这样写：
 
-![图示](../Images/7ed5d7408642944630557ab823afdb22.png)
+![图示](img/7ed5d7408642944630557ab823afdb22.png)
 
 get_config(‘X_train’)
 
-你可以使用**set_config**函数来更改环境变量。根据你目前对**pull、get_config**和**set_config**函数的了解，你可以创建一些非常复杂的工作流。例如，你可以对保留集进行***N次***重采样，以评估平均性能指标，而不是依赖于一个保留集：
+你可以使用**set_config**函数来更改环境变量。根据你目前对**pull、get_config**和**set_config**函数的了解，你可以创建一些非常复杂的工作流。例如，你可以对保留集进行***N 次***重采样，以评估平均性能指标，而不是依赖于一个保留集：
 
 ```py
 import numpy as npXtest = get_config('X_test')
@@ -123,9 +123,9 @@ ytest = get_config('y_test')AUC = []for i in np.random.randint(0,1000,size=10):
 
 ### 你还没有记录你的实验
 
-如果你没有记录你的实验，现在就应该开始记录。无论你是否打算使用MLFlow后台服务器，你都应该记录所有的实验。当你进行任何实验时，你会生成大量的元数据，这些数据很难手动追踪。
+如果你没有记录你的实验，现在就应该开始记录。无论你是否打算使用 MLFlow 后台服务器，你都应该记录所有的实验。当你进行任何实验时，你会生成大量的元数据，这些数据很难手动追踪。
 
-PyCaret的日志记录功能在你使用**get_logs**函数时会生成一个漂亮、轻量、易于理解的Excel电子表格。例如：
+PyCaret 的日志记录功能在你使用**get_logs**函数时会生成一个漂亮、轻量、易于理解的 Excel 电子表格。例如：
 
 ```py
 **# loading dataset**
@@ -136,17 +136,17 @@ best = compare_models()**# generate logs**
 get_logs()
 ```
 
-![图示](../Images/7f9e5823e3551fa6be2cd756b1b4f324.png)
+![图示](img/7f9e5823e3551fa6be2cd756b1b4f324.png)
 
 get_logs()
 
-在这个非常简短的实验中，我们生成了3000多个元数据点（指标、超参数、运行时间等）。想象一下你将如何手动跟踪这些数据点？也许，这在实际操作中是不可能的。幸运的是，PyCaret提供了一种简单的方法来实现。只需在**setup**函数中将**log_experiment**设置为True即可。
+在这个非常简短的实验中，我们生成了 3000 多个元数据点（指标、超参数、运行时间等）。想象一下你将如何手动跟踪这些数据点？也许，这在实际操作中是不可能的。幸运的是，PyCaret 提供了一种简单的方法来实现。只需在**setup**函数中将**log_experiment**设置为 True 即可。
 
-使用Python中的轻量级工作流自动化库，你可以实现无限的可能性。如果你觉得这些内容有用，请不要忘记在我们的[GitHub 仓库](https://www.github.com/pycaret/pycaret/)上给我们⭐️。
+使用 Python 中的轻量级工作流自动化库，你可以实现无限的可能性。如果你觉得这些内容有用，请不要忘记在我们的[GitHub 仓库](https://www.github.com/pycaret/pycaret/)上给我们⭐️。
 
-想了解更多关于PyCaret的内容，请关注我们的[LinkedIn](https://www.linkedin.com/company/pycaret/)和[Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)。
+想了解更多关于 PyCaret 的内容，请关注我们的[LinkedIn](https://www.linkedin.com/company/pycaret/)和[Youtube](https://www.youtube.com/channel/UCxA1YTYJ9BEeo50lxyI_B3g)。
 
-要了解更多关于PyCaret 2.2的更新，请查看[发行说明](https://github.com/pycaret/pycaret/releases)或阅读此[公告](https://towardsdatascience.com/pycaret-2-2-is-here-whats-new-ad7612ca63b)。
+要了解更多关于 PyCaret 2.2 的更新，请查看[发行说明](https://github.com/pycaret/pycaret/releases)或阅读此[公告](https://towardsdatascience.com/pycaret-2-2-is-here-whats-new-ad7612ca63b)。
 
 ### 重要链接
 
@@ -178,11 +178,11 @@ get_logs()
 
 **相关内容：**
 
-+   [你对 PyCaret 不了解的 5 件事](/2020/07/5-things-pycaret.html)
++   你对 PyCaret 不了解的 5 件事
 
-+   [使用 Docker 容器将机器学习管道部署到云端](/2020/06/deploy-machine-learning-pipeline-cloud-docker.html)
++   使用 Docker 容器将机器学习管道部署到云端
 
-+   [GitHub 是你所需的最佳 AutoML 工具](/2020/08/github-best-automl-ever-need.html)
++   GitHub 是你所需的最佳 AutoML 工具
 
 ### 了解更多相关内容
 

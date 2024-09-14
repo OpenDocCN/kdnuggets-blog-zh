@@ -1,6 +1,6 @@
 # 了解为什么 ODSC 是最推荐的应用数据科学会议
 
-> 原文：[https://www.kdnuggets.com/2018/10/odsc-understand-most-recommended-conference-applied-data-science.html](https://www.kdnuggets.com/2018/10/odsc-understand-most-recommended-conference-applied-data-science.html)
+> 原文：[`www.kdnuggets.com/2018/10/odsc-understand-most-recommended-conference-applied-data-science.html`](https://www.kdnuggets.com/2018/10/odsc-understand-most-recommended-conference-applied-data-science.html)
 
 赞助帖子。
 
@@ -10,7 +10,7 @@
 
 &#124;
 
-&#124; [![](../Images/968d8573a956c584b7252bbb9cc13cb7.png)](https://odsc.com/california)  &#124;
+&#124; ![](https://odsc.com/california)  &#124;
 
 &#124;
 
@@ -22,7 +22,7 @@
 
 &#124; **节省 20%** 的优惠活动将于**明天**结束。 [注册](http://bit.ly/2xJXJ3F)[ ](http://bit.ly/2xJXJ3F)[在这里](http://bit.ly/2xJXJ3F)
 
-在超过4,500名与会者的情况下，[开放数据科学大会（ODSC West）](http://bit.ly/2MAamYJ)已经大幅增长，成为专注于数据科学实际应用的领先活动。
+在超过 4,500 名与会者的情况下，[开放数据科学大会（ODSC West）](http://bit.ly/2MAamYJ)已经大幅增长，成为专注于数据科学实际应用的领先活动。
 
 当我们询问新参会者如何听说 ODSC 时，大多数人选择**朋友或同事推荐**。参会者离开 ODSC 后，扩展了他们的网络，了解了数据科学领域最新的模型、框架和突破。 ODCS 大会为期 4 天，包含 40 场培训课程、50 场研讨会和超过 200 位讲者，提供了无与伦比的**深度**和**广度**，涵盖深度学习、机器学习和其他数据科学话题。
 

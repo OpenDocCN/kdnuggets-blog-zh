@@ -1,8 +1,8 @@
 # 构建 GPU 机器与使用 GPU 云
 
-> 原文：[https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)
+> 原文：[`www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud`](https://www.kdnuggets.com/building-a-gpu-machine-vs-using-the-gpu-cloud)
 
-![构建 GPU 机器与使用 GPU 云](../Images/387f75aa5996018e4a05b6596babc6fc.png)
+![构建 GPU 机器与使用 GPU 云](img/387f75aa5996018e4a05b6596babc6fc.png)
 
 编辑图片
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
-GPUs 提供了强大的计算能力，能够执行涉及 AI、[机器学习](/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html) 和 3D 渲染等技术的复杂任务。
+GPUs 提供了强大的计算能力，能够执行涉及 AI、机器学习 和 3D 渲染等技术的复杂任务。
 
 然而，在利用这种大量计算能力时，科技界在理想解决方案上面临十字路口。你应该构建一个专用的 GPU 机器还是利用 GPU 云？
 
@@ -58,7 +58,7 @@ GPU 可以通过更高的并行处理增强这些模型在深度学习网络中�
 
 # 构建 GPU 机器
 
-许多企业，特别是初创公司，选择自己构建 GPU 机器，因为它们具有成本效益，同时提供与[GPU 云解决方案](/2021/05/super-charge-python-pandas-gpus-saturn-cloud.html)相同的性能。然而，这并不是说这样的项目没有挑战。
+许多企业，特别是初创公司，选择自己构建 GPU 机器，因为它们具有成本效益，同时提供与 GPU 云解决方案相同的性能。然而，这并不是说这样的项目没有挑战。
 
 在这一部分，我们将讨论构建 GPU 机器的利弊，包括预期的成本以及机器管理，这可能会影响安全性和可扩展性等因素。
 
@@ -74,47 +74,47 @@ GPU 可以通过更高的并行处理增强这些模型在深度学习网络中�
 
 如果一个组织正在为人工智能和机器学习项目开发一个大型数据集的深度神经网络，那么运营成本有时可能飙升。这可能阻碍开发者在模型训练期间交付预期结果，并限制项目的可扩展性。因此，财务影响可能导致产品缩减，甚至是一个不适合目的的模型。
 
-建设一个现场自管理的GPU机器可以大幅降低成本，为开发者和数据工程师提供他们在广泛迭代、测试和实验中所需的资源。
+建设一个现场自管理的 GPU 机器可以大幅降低成本，为开发者和数据工程师提供他们在广泛迭代、测试和实验中所需的资源。
 
-然而，这只是触及了本地构建和运行的GPU机器的表面，尤其是对于开源LLM而言，[这些LLM越来越受欢迎](https://deepgram.com/learn/llama-2-paper-explained)。随着实际用户界面的出现，你可能很快会看到你友好的邻居牙医在后台[运行几台4090](https://lambdalabs.com/blog/nvidia-rtx-4090-vs-rtx-3090-deep-learning-benchmark)，用于[如保险验证](https://www.getweave.com/weave-insurance-verification/)、日程安排、数据交叉引用等任务。
+然而，这只是触及了本地构建和运行的 GPU 机器的表面，尤其是对于开源 LLM 而言，[这些 LLM 越来越受欢迎](https://deepgram.com/learn/llama-2-paper-explained)。随着实际用户界面的出现，你可能很快会看到你友好的邻居牙医在后台[运行几台 4090](https://lambdalabs.com/blog/nvidia-rtx-4090-vs-rtx-3090-deep-learning-benchmark)，用于[如保险验证](https://www.getweave.com/weave-insurance-verification/)、日程安排、数据交叉引用等任务。
 
 ### 性能
 
-大规模深度学习和机器学习训练模型/算法需要大量资源，这意味着它们需要极高性能的处理能力。对于需要渲染高质量视频的组织来说也是如此，员工可能需要[多个基于GPU的系统](/2021/09/speeding-neural-network-training-multiple-gpus-dask.html)或最先进的GPU服务器。
+大规模深度学习和机器学习训练模型/算法需要大量资源，这意味着它们需要极高性能的处理能力。对于需要渲染高质量视频的组织来说也是如此，员工可能需要多个基于 GPU 的系统或最先进的 GPU 服务器。
 
-自建的GPU系统推荐用于生产规模的数据模型及其训练，一些GPU能够提供双精度，这一特性[使用64位表示数字](https://blogs.nvidia.com/blog/2020/05/14/double-precision-tensor-cores/)，提供更大的数值范围和更好的小数精度。然而，这种功能仅在依赖非常高精度的模型中才是必需的。推荐的双精度系统选项是Nvidia的本地Titan系列GPU服务器。
+自建的 GPU 系统推荐用于生产规模的数据模型及其训练，一些 GPU 能够提供双精度，这一特性[使用 64 位表示数字](https://blogs.nvidia.com/blog/2020/05/14/double-precision-tensor-cores/)，提供更大的数值范围和更好的小数精度。然而，这种功能仅在依赖非常高精度的模型中才是必需的。推荐的双精度系统选项是 Nvidia 的本地 Titan 系列 GPU 服务器。
 
 ### 操作
 
-许多组织缺乏管理本地GPU机器和服务器的专业知识和能力。这是因为内部IT团队需要能够配置基于GPU的基础设施以实现最高性能的专家。
+许多组织缺乏管理本地 GPU 机器和服务器的专业知识和能力。这是因为内部 IT 团队需要能够配置基于 GPU 的基础设施以实现最高性能的专家。
 
 此外，缺乏专业知识可能导致安全性不足，从而出现被网络犯罪分子利用的漏洞。未来可能需要扩展系统也可能带来挑战。
 
-# 使用GPU云
+# 使用 GPU 云
 
-本地GPU机器在性能和成本效益方面提供了明显的优势，但前提是组织拥有必要的内部专家。这就是为什么许多组织选择使用GPU云服务，如Saturn Cloud，它提供了完全托管的服务以增加简便性和安心。
+本地 GPU 机器在性能和成本效益方面提供了明显的优势，但前提是组织拥有必要的内部专家。这就是为什么许多组织选择使用 GPU 云服务，如 Saturn Cloud，它提供了完全托管的服务以增加简便性和安心。
 
-云GPU解决方案使深度学习项目对更广泛的组织和行业变得更加可及，许多系统能够匹配自建GPU机器的性能水平。GPU云解决方案的出现是人们[越来越多地投资于AI开发](https://bluetree.ai/best-ai-app-development-companies/)的主要原因之一，尤其是[像Mistral这样的开源模型](https://www.businessinsider.com/mistral-in-talks-to-raise-funding-at-2-billion-valuation-2023-11)，其开源特性非常适合“可租用的vRAM”，并在无需依赖大型供应商（如OpenAI或Anthropic）的情况下运行LLM。
+云 GPU 解决方案使深度学习项目对更广泛的组织和行业变得更加可及，许多系统能够匹配自建 GPU 机器的性能水平。GPU 云解决方案的出现是人们[越来越多地投资于 AI 开发](https://bluetree.ai/best-ai-app-development-companies/)的主要原因之一，尤其是[像 Mistral 这样的开源模型](https://www.businessinsider.com/mistral-in-talks-to-raise-funding-at-2-billion-valuation-2023-11)，其开源特性非常适合“可租用的 vRAM”，并在无需依赖大型供应商（如 OpenAI 或 Anthropic）的情况下运行 LLM。
 
 ## 成本
 
-根据组织的需求或正在训练的模型，[云GPU解决方案](/2018/11/deep-learning-cloud-providers-cpu-gpu-tpu.html)可能会更便宜，只要每周所需的小时数是合理的。对于较小、数据量较少的项目，可能不需要投资昂贵的H100对，GPU云解决方案提供按合同基础以及各种月度计划的形式，从爱好者到企业都能满足需求。
+根据组织的需求或正在训练的模型，云 GPU 解决方案可能会更便宜，只要每周所需的小时数是合理的。对于较小、数据量较少的项目，可能不需要投资昂贵的 H100 对，GPU 云解决方案提供按合同基础以及各种月度计划的形式，从爱好者到企业都能满足需求。
 
 ## 性能
 
-有一系列的CPU云选项能够匹配DIY GPU机器的性能水平，提供最佳平衡的处理器、准确的内存、高性能磁盘和每实例八个GPU来处理各自的工作负载。当然，这些解决方案可能会有一定费用，但组织可以安排按小时计费，以确保只为使用的部分付费。
+有一系列的 CPU 云选项能够匹配 DIY GPU 机器的性能水平，提供最佳平衡的处理器、准确的内存、高性能磁盘和每实例八个 GPU 来处理各自的工作负载。当然，这些解决方案可能会有一定费用，但组织可以安排按小时计费，以确保只为使用的部分付费。
 
 ## 操作
 
-云GPU相对于自建GPU的关键优势在于其操作，专家团队随时准备协助解决任何问题并提供技术支持。自建GPU机器或服务器需要内部管理，或者需要第三方公司远程管理，这会产生额外费用。
+云 GPU 相对于自建 GPU 的关键优势在于其操作，专家团队随时准备协助解决任何问题并提供技术支持。自建 GPU 机器或服务器需要内部管理，或者需要第三方公司远程管理，这会产生额外费用。
 
-使用GPU云服务，任何如网络故障、软件更新、电力中断、设备故障或磁盘空间不足的问题都能快速解决。实际上，借助完全托管的解决方案，这些问题几乎不会发生，因为GPU服务器会被最佳配置，以避免任何过载和系统故障。这意味着IT团队可以专注于业务的核心需求。
+使用 GPU 云服务，任何如网络故障、软件更新、电力中断、设备故障或磁盘空间不足的问题都能快速解决。实际上，借助完全托管的解决方案，这些问题几乎不会发生，因为 GPU 服务器会被最佳配置，以避免任何过载和系统故障。这意味着 IT 团队可以专注于业务的核心需求。
 
 # 结论
 
-在选择自建GPU机器还是使用GPU云时，取决于具体的使用案例，大型数据密集型项目需要额外的性能而不产生显著的成本。在这种情况下，自建系统可能提供所需的性能而不会有高额的月度费用。
+在选择自建 GPU 机器还是使用 GPU 云时，取决于具体的使用案例，大型数据密集型项目需要额外的性能而不产生显著的成本。在这种情况下，自建系统可能提供所需的性能而不会有高额的月度费用。
 
-另外，对于缺乏内部专业知识或不需要顶级性能的组织，托管的云GPU解决方案可能更为合适，由提供商负责机器的管理和维护。
+另外，对于缺乏内部专业知识或不需要顶级性能的组织，托管的云 GPU 解决方案可能更为合适，由提供商负责机器的管理和维护。
 
 [Nahla Davies](http://nahlawrites.com/)****是一名软件开发者和技术写作人。在将全部精力投入技术写作之前，她曾管理过—在许多其他有趣的事情中—担任一家 Inc. 5000 实验品牌组织的首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 

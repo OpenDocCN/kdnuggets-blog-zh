@@ -1,8 +1,8 @@
 # 使用 Python 进行文本相似性检测的简单问答（QA）系统
 
-> 原文：[https://www.kdnuggets.com/2020/04/simple-question-answering-systems-text-similarity-python.html](https://www.kdnuggets.com/2020/04/simple-question-answering-systems-text-similarity-python.html)
+> 原文：[`www.kdnuggets.com/2020/04/simple-question-answering-systems-text-similarity-python.html`](https://www.kdnuggets.com/2020/04/simple-question-answering-systems-text-similarity-python.html)
 
-[评论](#comments)
+评论
 
 **由 [Andrew Zola](https://www.linkedin.com/in/andrew-zola/)，Artmotion 的内容经理**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -36,7 +36,7 @@ QA 系统可以被描述为 [一种提供正确简短回答的技术，而不是
 
 为了提高效率和准确性，NLP 程序还使用推理和概率来猜测正确答案。随着时间的推移，它们在这方面变得非常擅长！
 
-对于企业来说，部署QA系统的好处在于它们非常用户友好。一旦企业QA系统构建完成，任何人都可以使用。实际上，如果你曾经与 Alexa 互动或使用过 Google Translate，你就体验过 NLP 的实际应用。
+对于企业来说，部署 QA 系统的好处在于它们非常用户友好。一旦企业 QA 系统构建完成，任何人都可以使用。实际上，如果你曾经与 Alexa 互动或使用过 Google Translate，你就体验过 NLP 的实际应用。
 
 在企业环境中，它们可以用于远超聊天机器人和语音助手的功能。例如，可以训练智能算法执行以下任务：
 
@@ -48,15 +48,15 @@ QA 系统可以被描述为 [一种提供正确简短回答的技术，而不是
 
 但回到当前话题，让我们看看它是如何工作的。
 
-### **如何构建一个可靠的QA系统？**
+### **如何构建一个可靠的 QA 系统？**
 
-为了以技术性和易于理解的方式回答问题，我将向你展示如何基于字符串相似度测量构建一个简单的QA系统，并使用封闭域进行数据源。
+为了以技术性和易于理解的方式回答问题，我将向你展示如何基于字符串相似度测量构建一个简单的 QA 系统，并使用封闭域进行数据源。
 
 以下示例基于 Ojokoh 和 Ayokunle 的研究，[基于模糊的答案排名在问答社区](https://www.researchgate.net/publication/272093801_Fuzzy-Based_Answer_Ranking_in_Question_Answering_Communities)。
 
-具有近似匹配功能的QA系统很简单，如下：
+具有近似匹配功能的 QA 系统很简单，如下：
 
-![图示](../Images/16df69a55cefbfdcb50ab60bb5fbbcf0.png)
+![图示](img/16df69a55cefbfdcb50ab60bb5fbbcf0.png)
 
 在这种情况下，我们将使用一个包含问题-答案对的小数据集，存储在一个[CSV 文件](https://github.com/jupyter/notebook)中。在实际应用中，企业将使用[高度专业化的数据库](https://leaderboard.techqa.us-east.containers.appdomain.cloud)，其中包含数十万个样本。
 
@@ -73,7 +73,7 @@ QA 系统可以被描述为 [一种提供正确简短回答的技术，而不是
 | 谁确定了沸点的依赖性？ | 安德斯·摄尔修斯 |
 | 甲虫是昆虫吗？ | 是的 |
 | 加拿大的两种官方语言是英语和法语吗？ | 是的 |
-| 埃及的人口是多少？ | 超过7800万 |
+| 埃及的人口是多少？ | 超过 7800 万 |
 | 芬兰最大城市是什么？ | 大赫尔辛基 |
 | 列支敦士登的国家货币是什么？ | 瑞士法郎 |
 | 北极熊能在红外摄影下被看到吗？ | 北极熊在红外线下几乎不可见 |
@@ -81,13 +81,13 @@ QA 系统可以被描述为 [一种提供正确简短回答的技术，而不是
 | 小提琴是用什么材料制成的？ | 不同类型的木材 |
 | 豹子的尾巴有多长？ | 60 到 110 厘米 |
 
-在最简单的形式下，QA系统只能在问题和答案完全匹配时回答问题。
+在最简单的形式下，QA 系统只能在问题和答案完全匹配时回答问题。
 
 ```py` ``` 导入 re  定义 getNaiveAnswer(q):      *# 正则表达式帮助处理一些标点符号*      row = data.loc[data['Question'].str.contains(re.sub(r"[^\w'\s)]+", "", q),case=False)]      如果 len(row) > 0:          返回 row["Answer"].values[0], 1, row["Question"].values[0]      返回 "对不起，我没听懂你说的。", 0, ""  getResults(test_data, getNaiveAnswer) ```py ````
 
 |  | **Q** | **预测** | **A** | **分数** |
 | --- | --- | --- | --- | --- |
-| 1 | 埃及的人口是多少？ | 埃及的人口是多少？ | 超过7800万 | 1 |
+| 1 | 埃及的人口是多少？ | 埃及的人口是多少？ | 超过 7800 万 | 1 |
 | 2 | 埃及的人口是多少 |  | 对不起，我没听懂你说的。 | 0 |
 | 3 | 豹子的尾巴有多长？ | 豹子的尾巴有多长？ | 60 到 110 厘米 | 1 |
 | 4 | 你知道豹子的尾巴有多长吗？ |  | 对不起，我没听懂你说的。 | 0 |
@@ -109,26 +109,26 @@ QA 系统可以被描述为 [一种提供正确简短回答的技术，而不是
 
 |  | **Q** | **预测** | **A** | **得分** |
 | --- | --- | --- | --- | --- |
-| 1 | 埃及的人口是多少？ | 埃及的人口是多少？ | 超过7800万 | 1.000000 |
-| 2 | 埃及的人口是多少 | 埃及的人口是多少？ | 超过7800万 | 0.935484 |
-| 3 | 豹子的尾巴有多长？ | 豹子的尾巴有多长？ | 60到110厘米 | 1.000000 |
+| 1 | 埃及的人口是多少？ | 埃及的人口是多少？ | 超过 7800 万 | 1.000000 |
+| 2 | 埃及的人口是多少 | 埃及的人口是多少？ | 超过 7800 万 | 0.935484 |
+| 3 | 豹子的尾巴有多长？ | 豹子的尾巴有多长？ | 60 到 110 厘米 | 1.000000 |
 | 4 | 你知道豹子的尾巴长吗？ | 豹子的尾巴有多长？ | 对不起，我没听懂。 | 0.657143 |
 | 5 | 北极熊什么时候会变得隐形？ | 北极熊在红外线摄影下能否被看到... | 对不起，我没听懂。 | 0.517647 |
 | 6 | 我能看到北极动物吗？ | 芬兰的哪个城市最大？ | 对不起，我没听懂。 | 0.426230 |
 | 7 | 芬兰的哪个城市最大？ | 对不起，我没听懂。 | 0.642857 |
 
-从上述内容可以看出，即使是小的语法错误也能生成正确的答案（得分低于1.0也是完全可以接受的）。
+从上述内容可以看出，即使是小的语法错误也能生成正确的答案（得分低于 1.0 也是完全可以接受的）。
 
-为了使我们的QA系统更好，继续调整我们函数的max_score系数以便更具包容性。
+为了使我们的 QA 系统更好，继续调整我们函数的 max_score 系数以便更具包容性。
 
 ```py` ``` 从 Levenshtein 导入 ratio  def getApproximateAnswer2(q):      max_score = 0      answer = ""      prediction = ""      for idx, row in data.iterrows():          score = ratio(row["Question"], q)          if score >= 0.9: *# 我确定，停在这里*              return row["Answer"], score, row["Question"]          elif score > max_score: *# 我不确定，继续*              max_score = score              answer = row["Answer"]              prediction = row["Question"]      if max_score > 0.3: *# 阈值降低*          return answer, max_score, prediction      return "对不起，我没听懂。", max_score, prediction  getResults(test_data, getApproximateAnswer2) ```py ````
 
 |  | **Q** | **预测** | **A** | **得分** |
 | --- | --- | --- | --- | --- |
-| **0** | 埃及的人口是多少？ | 埃及的人口是多少？ | 超过7800万 | 1.000000 |
-| **1** | 埃及的人口是多少 | 埃及的人口是多少？ | 超过7800万 | 0.935484 |
-| **2** | 豹子的尾巴有多长？ | 豹子的尾巴有多长？ | 60到110厘米 | 1.000000 |
-| **3** | 你知道豹子的尾巴长吗？ | 豹子的尾巴有多长？ | 60到110厘米 | 0.657143 |
+| **0** | 埃及的人口是多少？ | 埃及的人口是多少？ | 超过 7800 万 | 1.000000 |
+| **1** | 埃及的人口是多少 | 埃及的人口是多少？ | 超过 7800 万 | 0.935484 |
+| **2** | 豹子的尾巴有多长？ | 豹子的尾巴有多长？ | 60 到 110 厘米 | 1.000000 |
+| **3** | 你知道豹子的尾巴长吗？ | 豹子的尾巴有多长？ | 60 到 110 厘米 | 0.657143 |
 | **4** | 北极熊何时可以隐形？ | 北极熊在红外摄影下是否能被看到... | 北极熊在红外线下几乎看不见... | 0.517647 |
 | **5** | 我能看到北极动物吗？ | 芬兰最大的城市是什么？ | 大赫尔辛基 | 0.426230 |
 | **6** | 芬兰的某个城市 | 芬兰最大的城市是什么？ | 大赫尔辛基 | 0.642857 |
@@ -149,11 +149,11 @@ QA 系统可以被描述为 [一种提供正确简短回答的技术，而不是
 
 **相关：**
 
-+   [这款微软神经网络能以最少的训练回答有关风景图片的问题](/2019/10/microsoft-neural-network-answer-questions-scenic-images-minimum-training.html)
++   这款微软神经网络能以最少的训练回答有关风景图片的问题
 
-+   [Salesforce 开源一个使用 Wikipedia 进行开放域问答的框架](/2020/03/salesforce-open-sources-framework-question-answering-wikipedia.html)
++   Salesforce 开源一个使用 Wikipedia 进行开放域问答的框架
 
-+   [为什么你不应该使用 MS MARCO 来评估语义搜索](/2020/04/ms-marco-evaluate-semantic-search.html)
++   为什么你不应该使用 MS MARCO 来评估语义搜索
 
 ### 更多相关话题
 

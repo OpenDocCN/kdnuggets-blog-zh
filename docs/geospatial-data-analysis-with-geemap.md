@@ -1,8 +1,8 @@
 # 使用 Geemap 进行地理空间数据分析
 
-> 原文：[https://www.kdnuggets.com/geospatial-data-analysis-with-geemap](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)
+> 原文：[`www.kdnuggets.com/geospatial-data-analysis-with-geemap`](https://www.kdnuggets.com/geospatial-data-analysis-with-geemap)
 
-![使用 Geemap 进行地理空间数据分析](../Images/fdd86f32abfe8644d0fab2609ecf165a.png)
+![使用 Geemap 进行地理空间数据分析](img/fdd86f32abfe8644d0fab2609ecf165a.png)
 
 作者插图
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,13 +26,13 @@
 
 ## 什么是 Google Earth Engine？
 
-![使用 Geemap 进行地理空间数据分析](../Images/9a219e73d1df8fa6f953308cca53c4ad.png)
+![使用 Geemap 进行地理空间数据分析](img/9a219e73d1df8fa6f953308cca53c4ad.png)
 
 作者截图。Google Earth Engine 的主页。
 
 在开始使用 Python 库之前，我们需要了解 [Google Earth Engine](https://earthengine.google.com/) 的潜力。这个基于云的平台由 Google Cloud 平台提供支持，提供了用于学术、非营利和商业目的的公共和免费地理空间数据集。
 
-![使用 Geemap 进行地理空间数据分析](../Images/e777299d4a59135ab3b63656af0545bd.png)
+![使用 Geemap 进行地理空间数据分析](img/e777299d4a59135ab3b63656af0545bd.png)
 
 作者截图。Earth Engine 数据目录概述。
 
@@ -40,7 +40,7 @@
 
 ## 什么是 Geemap？
 
-![使用 Geemap 进行地理空间数据分析](../Images/a8c3acbb1d4eee052e472a7b620232fc.png)
+![使用 Geemap 进行地理空间数据分析](img/a8c3acbb1d4eee052e472a7b620232fc.png)
 
 作者插图。Geemap 库。
 
@@ -78,25 +78,25 @@ m
 
 你需要点击这行代码返回的 URL，这将生成授权码。首先，选择云项目，然后点击“生成令牌”按钮。
 
-![使用 Geemap 进行地理空间数据分析](../Images/96ed43aeaa04593e888f9b1a556f6e98.png)
+![使用 Geemap 进行地理空间数据分析](img/96ed43aeaa04593e888f9b1a556f6e98.png)
 
 作者截图。笔记本认证器。
 
 然后，它会要求你选择账户。如果你正在使用 Google Colab，建议选择相同的账户。
 
-![使用 Geemap 进行地理空间数据分析](../Images/aeff3767ec10d583600e80c0ecde1df4.png)
+![使用 Geemap 进行地理空间数据分析](img/aeff3767ec10d583600e80c0ecde1df4.png)
 
 作者截图。选择一个账户。
 
 然后，点击“全选”旁边的复选框，按下“继续”按钮。简而言之，这一步允许笔记本客户端访问 Earth Engine 账户。
 
-![使用 Geemap 进行地理空间数据分析](../Images/5cb854a623a8a55727a8aede0d479331.png)
+![使用 Geemap 进行地理空间数据分析](img/5cb854a623a8a55727a8aede0d479331.png)
 
 作者截图。允许笔记本客户端访问你的 Earth Engine 账户。
 
 在此操作后，将生成认证代码，你可以将其粘贴到笔记本单元格中。
 
-![使用 Geemap 进行地理空间数据分析](../Images/864d3d05391a2529cd8b220da3a93ba3.png)
+![使用 Geemap 进行地理空间数据分析](img/864d3d05391a2529cd8b220da3a93ba3.png)
 
 作者截图。复制认证码。
 
@@ -107,7 +107,7 @@ m = geemap.Map()
 m
 ```
 
-![使用 Geemap 进行地理空间数据分析](../Images/40fe62fdbd61b27232283a8122c7e47e.png)
+![使用 Geemap 进行地理空间数据分析](img/40fe62fdbd61b27232283a8122c7e47e.png)
 
 现在，你只是观察 ipyleaflet 上的基础地图，ipyleaflet 是一个 Python 包，能够在 Jupyter Notebook 中可视化交互式地图。
 
@@ -120,7 +120,7 @@ m = geemap.Map(center=[41, 12], zoom=6, height=600)
 m
 ```
 
-![地理空间数据分析与Geemap](../Images/c6b9936c15afec53377ea11e2bb55802.png)
+![地理空间数据分析与 Geemap](img/c6b9936c15afec53377ea11e2bb55802.png)
 
 如果我们想更改底图，有两种可能的方法。第一种方法是编写并运行以下代码行：
 
@@ -129,13 +129,13 @@ m.add_basemap("ROADMAP")
 m
 ```
 
-![地理空间数据分析与Geemap](../Images/5c79bae859f7198e2068872a3bc2ab26.png)
+![地理空间数据分析与 Geemap](img/5c79bae859f7198e2068872a3bc2ab26.png)
 
 另外，你可以通过点击右侧的环形扳手图标手动更改底图。
 
-![地理空间数据分析与Geemap](../Images/7bf76b7c9384415c1e2670521ea105ca.png)
+![地理空间数据分析与 Geemap](img/7bf76b7c9384415c1e2670521ea105ca.png)
 
-此外，我们看到Geemap提供的底图列表：
+此外，我们看到 Geemap 提供的底图列表：
 
 ```py
 basemaps = geemap.basemaps.keys()
@@ -157,13 +157,13 @@ NLCD 2019 CONUS Land Cover
 ...
 ```
 
-如你所见，有一长串底图，大多数是通过OpenStreetMap、ESRI和USGS提供的。
+如你所见，有一长串底图，大多数是通过 OpenStreetMap、ESRI 和 USGS 提供的。
 
 ## 地球引擎数据类型
 
-在展示Geemap的全部潜力之前，了解地球引擎中的两种主要数据类型是很重要的。有关更多细节，请查看[Google Earth Engine文档](https://developers.google.com/earth-engine/guides)。
+在展示 Geemap 的全部潜力之前，了解地球引擎中的两种主要数据类型是很重要的。有关更多细节，请查看[Google Earth Engine 文档](https://developers.google.com/earth-engine/guides)。
 
-![地理空间数据分析与Geemap](../Images/08779ab81727e35f1aaf05c2cb1209e2.png)
+![地理空间数据分析与 Geemap](img/08779ab81727e35f1aaf05c2cb1209e2.png)
 
 作者插图。矢量数据类型的示例：几何、特征和特征集合。
 
@@ -171,23 +171,23 @@ NLCD 2019 CONUS Land Cover
 
 +   **几何**存储绘制矢量数据在地图上所需的坐标。地球引擎支持三种主要的几何类型：点、线段和多边形。
 
-+   **特征**本质上是一行，结合了几何和非地理属性。它非常类似于GeoPandas的GeoSeries类。
++   **特征**本质上是一行，结合了几何和非地理属性。它非常类似于 GeoPandas 的 GeoSeries 类。
 
-+   **FeatureCollection**是一个包含一组特征的表格数据结构。FeatureCollection和GeoDataFrame在概念上几乎是相同的。
++   **FeatureCollection**是一个包含一组特征的表格数据结构。FeatureCollection 和 GeoDataFrame 在概念上几乎是相同的。
 
-![地理空间数据分析与Geemap](../Images/d348d2f6b82c37badc24c92b6b9dc67c.png)
+![地理空间数据分析与 Geemap](img/d348d2f6b82c37badc24c92b6b9dc67c.png)
 
 作者截图。图像数据类型的示例。它显示了澳大利亚平滑数字高程模型（[DEM-S](https://developers.google.com/earth-engine/datasets/catalog/AU_GA_DEM_1SEC_v10_DEM-S)）
 
-在光栅数据的世界中，我们关注**Image**对象。Google Earth Engine的图像由一个或多个波段组成，每个波段具有特定名称、估计的最小值和最大值，以及描述。
+在光栅数据的世界中，我们关注**Image**对象。Google Earth Engine 的图像由一个或多个波段组成，每个波段具有特定名称、估计的最小值和最大值，以及描述。
 
 如果我们有一系列图像或时间序列，**ImageCollection**作为数据类型更为合适。
 
-![地理空间数据分析与Geemap](../Images/546e14c9de62d692854a6f945fc5f0ec.png)
+![地理空间数据分析与 Geemap](img/546e14c9de62d692854a6f945fc5f0ec.png)
 
-作者截图。 [Copernicus CORINE土地覆盖](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_CORINE_V20_100m)。
+作者截图。 [Copernicus CORINE 土地覆盖](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_CORINE_V20_100m)。
 
-我们可视化了显示欧洲土地覆盖图的卫星影像。该数据集提供了1986年到2018年的变化。
+我们可视化了显示欧洲土地覆盖图的卫星影像。该数据集提供了 1986 年到 2018 年的变化。
 
 首先，我们使用 ee.Image 加载图像，然后选择“landcover”波段。最后，通过将加载的数据集添加到地图上作为图层，使用 Map.addLayer 来可视化图像。
 
@@ -200,13 +200,13 @@ Map.addLayer(landCover, {}, 'Land Cover')
 Map
 ```
 
-![使用 Geemap 的地理空间数据分析](../Images/7ca4aa94a6487c62f2378da8c594eefd.png)
+![使用 Geemap 的地理空间数据分析](img/7ca4aa94a6487c62f2378da8c594eefd.png)
 
 作者截图。
 
 同样，我们可以对加载和可视化显示欧洲土地覆盖地图的卫星影像做相同的操作。该数据集提供了 1986 年至 2018 年间的变化情况。
 
-![使用 Geemap 的地理空间数据分析](../Images/4febb7bc939c27f681d06b16d47979e8.png)
+![使用 Geemap 的地理空间数据分析](img/4febb7bc939c27f681d06b16d47979e8.png)
 
 作者截图。 [甲烷浓度的离线高分辨率影像](https://developers.google.com/earth-engine/datasets/catalog/COPERNICUS_S5P_OFFL_L3_CH4)。
 
@@ -226,7 +226,7 @@ Map.setCenter(0.0, 0.0, 2)
 Map
 ```
 
-![使用 Geemap 的地理空间数据分析](../Images/d4a278bcb3e91f9459828dc6fedd0781.png)
+![使用 Geemap 的地理空间数据分析](img/d4a278bcb3e91f9459828dc6fedd0781.png)
 
 作者截图。
 
@@ -262,4 +262,4 @@ Map
 
 +   [数据科学家的探索性数据分析必备指南](https://www.kdnuggets.com/2023/06/data-scientist-essential-guide-exploratory-data-analysis.html)
 
-+   [SQL中的数据清理：如何准备混乱数据进行分析](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)
++   [SQL 中的数据清理：如何准备混乱数据进行分析](https://www.kdnuggets.com/data-cleaning-in-sql-how-to-prepare-messy-data-for-analysis)

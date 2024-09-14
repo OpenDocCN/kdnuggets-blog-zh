@@ -1,8 +1,8 @@
 # 如何使用 NumPy 解决非线性方程组
 
-> 原文：[https://www.kdnuggets.com/how-to-use-numpy-to-solve-systems-of-nonlinear-equations](https://www.kdnuggets.com/how-to-use-numpy-to-solve-systems-of-nonlinear-equations)
+> 原文：[`www.kdnuggets.com/how-to-use-numpy-to-solve-systems-of-nonlinear-equations`](https://www.kdnuggets.com/how-to-use-numpy-to-solve-systems-of-nonlinear-equations)
 
-![如何使用 NumPy 解决非线性方程组](../Images/438919ca72831b7d6f15c3b444146298.png)
+![如何使用 NumPy 解决非线性方程组](img/438919ca72831b7d6f15c3b444146298.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
@@ -124,7 +124,7 @@ print(f"f1(x, y) = {x**2 + y**2 - 4:.2f}")
 print(f"f2(x, y) = {x**2 - y - 1:.2f}")
 ```
 
-![结果显示值接近零。](../Images/f91b4781e8306558b22ab73f66f7cb0b.png)
+![结果显示值接近零。](img/f91b4781e8306558b22ab73f66f7cb0b.png)
 
 这段代码打印出解，并通过将值代入原始方程来验证，以确保它们接近零。
 
@@ -166,8 +166,8 @@ Z2 = X**2 - Y - 1
 
 # Plot the contours
 plt.figure(figsize=(8, 6))
-plt.contour(X, Y, Z1, levels=[0], colors='blue', label='x^2 + y^2 - 4')
-plt.contour(X, Y, Z2, levels=[0], colors='red', label='x^2 - y - 1')
+plt.contour(X, Y, Z1, levels=[0], colors='blue', label='x² + y² - 4')
+plt.contour(X, Y, Z2, levels=[0], colors='red', label='x² - y - 1')
 plt.plot(x_sol, y_sol, 'go', label='Solution')
 plt.xlabel('x')
 plt.ylabel('y')
@@ -179,7 +179,7 @@ plt.show()
 
 这是输出结果：
 
-![2D 可视化](../Images/5b7cb4d03f8fa4b5d6a93059988920cf.png)
+![2D 可视化](img/5b7cb4d03f8fa4b5d6a93059988920cf.png)
 
 图中的蓝色和红色轮廓表示每个方程为零的曲线。绿色点显示了这些曲线交点的解。
 
@@ -228,7 +228,7 @@ plt.show()
 
 输出：
 
-![3D 可视化](../Images/18fbad2925ad9eacd975313bff44e6ad.png)
+![3D 可视化](img/18fbad2925ad9eacd975313bff44e6ad.png)
 
 在这个 3D 图中，蓝色和红色表面表示方程的解，而绿色点显示了 3D 空间中的解。
 
@@ -248,7 +248,7 @@ plt.show()
 
 +   [数据科学项目，帮助你解决现实世界问题](https://www.kdnuggets.com/2022/11/data-science-projects-help-solve-real-world-problems.html)
 
-+   [HuggingGPT：解决复杂AI任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
++   [HuggingGPT：解决复杂 AI 任务的秘密武器](https://www.kdnuggets.com/2023/05/hugginggpt-secret-weapon-solve-complex-ai-tasks.html)
 
 +   [人工智能系统中的不确定性量化](https://www.kdnuggets.com/2022/04/uncertainty-quantification-artificial-intelligencebased-systems.html)
 

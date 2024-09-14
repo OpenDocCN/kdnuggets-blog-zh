@@ -1,8 +1,8 @@
-# 使用敏捷方法掌握数据科学项目管理的7个步骤
+# 使用敏捷方法掌握数据科学项目管理的 7 个步骤
 
-> 原文：[https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
+> 原文：[`www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html`](https://www.kdnuggets.com/2023/07/7-steps-mastering-data-science-project-management-agile.html)
 
-![使用敏捷方法掌握数据科学项目管理的7个步骤](../Images/fe58f11aff2596179d5d1866eb3f6d2b.png)
+![使用敏捷方法掌握数据科学项目管理的 7 个步骤](img/fe58f11aff2596179d5d1866eb3f6d2b.png)
 
 图片来源：作者
 
@@ -12,31 +12,31 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
-[敏捷方法论](https://agilemanifesto.org/)是在2001年初，当17人聚在一起讨论软件开发的未来时发现的。它基于4个核心价值观和12条原则。
+[敏捷方法论](https://agilemanifesto.org/)是在 2001 年初，当 17 人聚在一起讨论软件开发的未来时发现的。它基于 4 个核心价值观和 12 条原则。
 
 它在快节奏、不断变化的科技行业中非常受欢迎，这很好地反映了它的特点。作为一种完美的数据科学项目管理方法，它允许团队成员在项目增长的过程中不断审查项目要求，来回调整，并进行更多的沟通。该模型随着用户导向的结果而发展，节省了时间、金钱和精力。
 
-在数据科学生命周期的不同阶段做出关于更改的决定，比在项目完成后再做决定要好。让我们谈谈你可以采取的2个步骤，以启动你的敏捷数据科学项目管理。
+在数据科学生命周期的不同阶段做出关于更改的决定，比在项目完成后再做决定要好。让我们谈谈你可以采取的 2 个步骤，以启动你的敏捷数据科学项目管理。
 
 ## Scrum
 
-一种敏捷方法的例子是**Scrum**。Scrum方法使用一个框架，通过一系列的价值观、原则和实践来帮助团队创建结构。
+一种敏捷方法的例子是**Scrum**。Scrum 方法使用一个框架，通过一系列的价值观、原则和实践来帮助团队创建结构。
 
-例如，使用Scrum，数据科学项目可以将其较大的项目拆分为一系列较小的项目。这些迷你项目将被称为sprint，并包括sprint计划，以定义目标、要求、责任等。
+例如，使用 Scrum，数据科学项目可以将其较大的项目拆分为一系列较小的项目。这些迷你项目将被称为 sprint，并包括 sprint 计划，以定义目标、要求、责任等。
 
-为什么这有益？因为它帮助团队的不同成员对自己的任务负责，以完成一个sprint。已完成的sprints在业务的最终目标中扮演重要角色，例如推出新产品。
+为什么这有益？因为它帮助团队的不同成员对自己的任务负责，以完成一个 sprint。已完成的 sprints 在业务的最终目标中扮演重要角色，例如推出新产品。
 
-员工通过能够发现解决挑战的方案来专注于为最终用户提供价值，这些挑战可能会在sprints中遇到。
+员工通过能够发现解决挑战的方案来专注于为最终用户提供价值，这些挑战可能会在 sprints 中遇到。
 
-Scrum工具包括：
+Scrum 工具包括：
 
 +   [Monday.com](https://monday.com/)
 
@@ -102,7 +102,7 @@ Kanban 的工具包括：
 
 确保你拥有成功进行敏捷数据科学项目管理所需的正确工具是一回事。但能够从每个阶段中获得最大收益则更为重要。沟通很重要，你现在已经知道这一点了，因为我提到了无数次。但为了获得回报，你必须努力工作，这需要大量的沟通。
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家和KDnuggets的社区经理。她特别感兴趣于提供数据科学职业建议或教程及理论知识。她还希望探索人工智能如何有益于人类寿命的不同方式。作为一名热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助引导他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家和 KDnuggets 的社区经理。她特别感兴趣于提供数据科学职业建议或教程及理论知识。她还希望探索人工智能如何有益于人类寿命的不同方式。作为一名热衷学习者，她寻求拓宽自己的技术知识和写作技能，同时帮助引导他人。
 
 ### 更多相关内容
 

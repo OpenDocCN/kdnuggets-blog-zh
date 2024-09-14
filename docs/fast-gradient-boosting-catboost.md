@@ -1,12 +1,12 @@
 # 使用 CatBoost 进行快速梯度提升
 
-> 原文：[https://www.kdnuggets.com/2020/10/fast-gradient-boosting-catboost.html](https://www.kdnuggets.com/2020/10/fast-gradient-boosting-catboost.html)
+> 原文：[`www.kdnuggets.com/2020/10/fast-gradient-boosting-catboost.html`](https://www.kdnuggets.com/2020/10/fast-gradient-boosting-catboost.html)
 
-[评论](#comments)
+评论
 
 在梯度提升中，预测是通过一组弱学习器进行的。与为每个样本创建决策树的随机森林不同，梯度提升中树是一个接一个地创建的。模型中的前一棵树不会被更改。前一棵树的结果用于改进下一棵树。在本文中，我们将更详细地了解一种称为 CatBoost 的梯度提升库。
 
-![图示](../Images/94e889b5133e25e115ddeb1ea1e6afd7.png)
+![图示](img/94e889b5133e25e115ddeb1ea1e6afd7.png)
 
 [来源](https://catboost.ai/news/catboost-enables-fast-gradient-boosting-on-decision-trees-using-gpus)
 
@@ -14,17 +14,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 [CatBoost](https://github.com/catboost) 是由 [Yandex](https://yandex.com/company/) 开发的深度梯度提升库。它使用无感知决策树来生成平衡树。在树的每一层中，使用相同的特征来进行左右分裂。
 
-![图示](../Images/22cec580000a5a651f8a7b907b81bca5.png)
+![图示](img/22cec580000a5a651f8a7b907b81bca5.png)
 
 [来源](https://catboost.ai/news/catboost-enables-fast-gradient-boosting-on-decision-trees-using-gpus)
 
@@ -62,15 +62,15 @@
 
 +   `eval_metric` — 用于检测过拟合的指标。
 
-+   `iterations` — 要构建的最大树数量，默认为1000。别名有 `num_boost_round`、`n_estimators` 和 `num_trees`。
++   `iterations` — 要构建的最大树数量，默认为 1000。别名有 `num_boost_round`、`n_estimators` 和 `num_trees`。
 
-+   `learning_rate` 别名 `eta` — 确定模型学习速度的学习率。默认值通常为0.03。
++   `learning_rate` 别名 `eta` — 确定模型学习速度的学习率。默认值通常为 0.03。
 
 +   `random_seed` 别名 `random_state` — 用于训练的随机种子。
 
-+   `l2_leaf_reg` 别名 `reg_lambda` — 成本函数L2正则化项的系数。默认值为3.0。
++   `l2_leaf_reg` 别名 `reg_lambda` — 成本函数 L2 正则化项的系数。默认值为 3.0。
 
-+   `bootstrap_type` — 确定对象权重的抽样方法，例如贝叶斯（Bayesian）、伯努利（Bernoulli）、MVS和泊松（Poisson）。
++   `bootstrap_type` — 确定对象权重的抽样方法，例如贝叶斯（Bayesian）、伯努利（Bernoulli）、MVS 和泊松（Poisson）。
 
 +   `depth` — 树的深度。
 
@@ -84,7 +84,7 @@
 
 +   `nan_mode` — 处理缺失值的方法。选项有 `Forbidden`、`Min` 和 `Max`。默认值为 `Min`。使用 `Forbidden` 时，缺失值的存在会导致错误。使用 `Min` 时，缺失值被视为该特征的最小值。在 `Max` 中，缺失值被视为该特征的最大值。
 
-+   `leaf_estimation_method` — 用于计算叶子值的方法。在分类中，使用10次 `Newton` 迭代。回归问题使用分位数或MAE损失则使用一次 `Exact` 迭代。多分类使用一次 `Newton` 迭代。
++   `leaf_estimation_method` — 用于计算叶子值的方法。在分类中，使用 10 次 `Newton` 迭代。回归问题使用分位数或 MAE 损失则使用一次 `Exact` 迭代。多分类使用一次 `Newton` 迭代。
 
 +   `leaf_estimation_backtracking` — 在梯度下降过程中使用的回溯类型。默认值是 `AnyImprovement`。`AnyImprovement` 减少下降步长，直到损失函数值小于上次迭代中的值。`Armijo` 减少下降步长，直到满足 [Armijo 条件](https://en.wikipedia.org/wiki/Wolfe_conditions#Armijo_rule_and_curvature)。
 
@@ -121,15 +121,15 @@ cat = CatBoostRegressor()
 cat.fit(X_train,y_train,verbose=False, plot=True)
 ```
 
-![发布图像](../Images/b7a07bcc879003b93fae2c1c40b964b5.png)
+![发布图像](img/b7a07bcc879003b93fae2c1c40b964b5.png)
 
 它还允许你执行交叉验证并可视化过程：
 
-![发布图像](../Images/cc4a7d964a02c88e7ad3997232ab4d69.png)
+![发布图像](img/cc4a7d964a02c88e7ad3997232ab4d69.png)
 
 同样，你也可以执行网格搜索并进行可视化：
 
-![发布图像](../Images/2abad5ea87a4baf9e06c9f175d29840a.png)
+![发布图像](img/2abad5ea87a4baf9e06c9f175d29840a.png)
 
 我们还可以使用 CatBoost 绘制树。这里的图是第一棵树的绘图。正如你从树中看到的，每一层的叶子都在相同条件下进行分裂——例如 297，值 >0.5。
 
@@ -137,7 +137,7 @@ cat.fit(X_train,y_train,verbose=False, plot=True)
 cat.plot_tree(tree_idx=0)
 ```
 
-![发布图像](../Images/1bf072864f605a5db714f0a388c18dd4.png)
+![发布图像](img/1bf072864f605a5db714f0a388c18dd4.png)
 
 CatBoost 还为我们提供了一个包含所有模型参数的字典。我们可以通过遍历字典来打印它们。
 
@@ -146,7 +146,7 @@ for key,value in cat.get_all_params().items():
  print(‘{}, {}’.format(key,value))
 ```
 
-![发布图像](../Images/33f889fb3e9caa39f98841f2938006c5.png)
+![发布图像](img/33f889fb3e9caa39f98841f2938006c5.png)
 
 ### 最终想法
 
@@ -166,11 +166,11 @@ CatBoost 是一种决策树上的梯度提升算法。它由 Yandex 的研究人
 
 **相关：**
 
-+   [LightGBM：高效的梯度提升决策树](/2020/06/lightgbm-gradient-boosting-decision-tree.html)
++   LightGBM：高效的梯度提升决策树
 
-+   [理解梯度提升机](/2019/02/understanding-gradient-boosting-machines.html)
++   理解梯度提升机
 
-+   [在 Google Colaboratory 上使用免费 GPU 掌握快速梯度提升](/2019/03/mastering-fast-gradient-boosting-google-colaboratory-free-gpu.html)
++   在 Google Colaboratory 上使用免费 GPU 掌握快速梯度提升
 
 ### 相关主题
 

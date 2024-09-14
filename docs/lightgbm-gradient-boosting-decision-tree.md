@@ -1,8 +1,8 @@
 # LightGBM：一种高效的梯度提升决策树
 
-> 原文：[https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html](https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html)
+> 原文：[`www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html`](https://www.kdnuggets.com/2020/06/lightgbm-gradient-boosting-decision-tree.html)
 
-[评论](#comments)
+评论
 
 LightGBM 算法的威力不可小觑（有意双关）。LightGBM 是一个分布式且高效的[梯度提升框架](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.GradientBoostingClassifier.html)，它使用[基于树的学习](https://www.analyticsvidhya.com/blog/2016/04/tree-based-algorithms-complete-tutorial-scratch-in-python/)。它是[基于直方图的](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html)，将连续值放入离散的箱子中，这导致更快的训练和更高效的内存使用。在这篇文章中，我们将深入探讨 LightGBM。
 
@@ -12,11 +12,11 @@ LightGBM 算法的威力不可小觑（有意双关）。LightGBM 是一个分�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -36,9 +36,9 @@ LightGBM 算法的威力不可小觑（有意双关）。LightGBM 是一个分�
 
 该框架使用了叶子优先的树生长算法，这不同于许多其他基于树的算法使用的深度优先生长。叶子优先树生长算法通常比深度优先算法收敛更快，但更容易过拟合。
 
-![图示](../Images/56ad54fca4c0ecc23b36a5ca30e21996.png)
+![图示](img/56ad54fca4c0ecc23b36a5ca30e21996.png)
 
-[来源](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)![图示](../Images/008a899a4e51dafd9da8c073fcc560db.png)
+[来源](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)![图示](img/008a899a4e51dafd9da8c073fcc560db.png)
 
 [来源](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#other-features)
 
@@ -236,11 +236,11 @@ LightGBM 是一个使用基于树的学习算法的梯度提升框架。它设�
 
 **相关：**
 
-+   [研究指南：机器学习模型的高级损失函数](/2019/11/research-guide-advanced-loss-functions-machine-learning-models.html)
++   研究指南：机器学习模型的高级损失函数
 
-+   [Python 中的自动化机器学习](/2019/01/automated-machine-learning-python.html)
++   Python 中的自动化机器学习
 
-+   [联邦学习：简介](/2020/04/federated-learning-introduction.html)
++   联邦学习：简介
 
 ### 更多相关主题
 

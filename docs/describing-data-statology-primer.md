@@ -1,28 +1,28 @@
-# 描述数据：Statology入门
+# 描述数据：Statology 入门
 
-> 原文：[https://www.kdnuggets.com/describing-data-statology-primer](https://www.kdnuggets.com/describing-data-statology-primer)
+> 原文：[`www.kdnuggets.com/describing-data-statology-primer`](https://www.kdnuggets.com/describing-data-statology-primer)
 
-[![描述数据：Statology入门](../Images/10ba2baf43a65d48553d9181c202bfcb.png)](https://www.statology.org/)
+![描述数据：Statology 入门](https://www.statology.org/)
 
 图片来源 | Midjourney & Canva
 
-KDnuggets的姊妹网站，[**Statology**](https://www.statology.org/)，拥有由专家编写的大量统计学相关内容，这些内容在短短几年内积累而成。我们决定通过整理并分享一些精彩教程，帮助我们的读者了解这一宝贵的统计、数学、数据科学和编程资源。
+KDnuggets 的姊妹网站，[**Statology**](https://www.statology.org/)，拥有由专家编写的大量统计学相关内容，这些内容在短短几年内积累而成。我们决定通过整理并分享一些精彩教程，帮助我们的读者了解这一宝贵的统计、数学、数据科学和编程资源。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在IT领域支持你的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 在 IT 领域支持你的组织
 
 * * *
 
 > 学习统计学可能很困难。它可能令人沮丧。而且，最重要的是，它可能令人困惑。这就是为什么[**Statology**](https://www.statology.org/)在这里提供帮助。
 
-这一系列教程涉及描述数据这一永恒重要的话题。每当我们试图理解数据时，能够以特定方式描述数据是很重要的。这些描述工具也有助于与他人分享数据的总结性方面。掌握以下常见的数据描述方法是理解数据的关键，同时也能帮助你更好地理解Statology上的其他内容。
+这一系列教程涉及描述数据这一永恒重要的话题。每当我们试图理解数据时，能够以特定方式描述数据是很重要的。这些描述工具也有助于与他人分享数据的总结性方面。掌握以下常见的数据描述方法是理解数据的关键，同时也能帮助你更好地理解 Statology 上的其他内容。
 
 #### [**集中趋势度量：定义与示例**](https://www.statology.org/measures-central-tendency/)
 

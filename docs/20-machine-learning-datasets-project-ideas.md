@@ -1,8 +1,8 @@
 # 21 个机器学习项目 - 包含数据集
 
-> 原文：[https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)
+> 原文：[`www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html`](https://www.kdnuggets.com/2020/03/20-machine-learning-datasets-project-ideas.html)
 
-[评论](#comments)
+评论
 
 **由 [Shivashish Thakur](https://www.linkedin.com/in/shivashish-thakur-55153313b/)，数字营销，DataFlair**。
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 向下滚动查看 20 多个机器学习和数据科学数据集以及项目想法，以便你可以用来练习和提升技能。
 
-![](../Images/d0ea8a676ed4049a474241d6f0d99b5e.png)
+![](img/d0ea8a676ed4049a474241d6f0d99b5e.png)
 
 ## 机器学习项目：
 
@@ -90,29 +90,29 @@ ImageNet 是一个大型图像数据库，按照 WordNet 层级组织。它拥�
 
 ### 8. 谷歌趋势数据门户
 
-谷歌趋势数据可用于以视觉方式检查和分析数据。你也可以通过简单点击将数据集下载为CSV文件。我们可以发现当前的趋势和人们在搜索什么。
+谷歌趋势数据可用于以视觉方式检查和分析数据。你也可以通过简单点击将数据集下载为 CSV 文件。我们可以发现当前的趋势和人们在搜索什么。
 
 **数据链接：** [谷歌趋势数据集](https://trends.google.com/trends/)
 
 ### 9. 波士顿住房数据集
 
-这是一个在模式识别中常用的数据集。它包含了有关波士顿不同房屋的信息，如犯罪率、税收、房间数量等。它有506行和14个不同的变量列。你可以使用该数据集来预测房价。
+这是一个在模式识别中常用的数据集。它包含了有关波士顿不同房屋的信息，如犯罪率、税收、房间数量等。它有 506 行和 14 个不同的变量列。你可以使用该数据集来预测房价。
 
 **数据链接：** [波士顿数据集](https://www.cs.toronto.edu/~delve/data/boston/bostonDetail.html)
 
 **机器学习项目创意：** 使用线性回归预测新房的房价。线性回归用于预测数据中的未知输入值，当数据具有输入和输出变量之间的线性关系时。
 
-### 10. Uber接送数据集
+### 10. Uber 接送数据集
 
-该数据集包含了从2014年4月到2014年9月的450万次Uber接送记录，以及从2015年1月到2015年6月的1400万次记录。用户可以进行数据分析并从数据中获得见解。
+该数据集包含了从 2014 年 4 月到 2014 年 9 月的 450 万次 Uber 接送记录，以及从 2015 年 1 月到 2015 年 6 月的 1400 万次记录。用户可以进行数据分析并从数据中获得见解。
 
-**数据链接：** [Uber接送数据集](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city)
+**数据链接：** [Uber 接送数据集](https://www.kaggle.com/fivethirtyeight/uber-pickups-in-new-york-city)
 
 **机器学习项目创意：** 分析客户骑行数据，并可视化数据以寻找有助于改善业务的见解。数据分析和可视化是数据科学的重要组成部分。它们用于从数据中获取见解，通过可视化，你可以从数据中快速获取信息。
 
 ### 11. 推荐系统数据集
 
-这是一个到丰富数据集的门户，这些数据集曾用于UCSD的实验室研究项目。它包含了来自流行网站的各种数据集，如Goodreads书评、亚马逊产品评论、调酒数据、社交媒体数据等，这些数据用于构建推荐系统。
+这是一个到丰富数据集的门户，这些数据集曾用于 UCSD 的实验室研究项目。它包含了来自流行网站的各种数据集，如 Goodreads 书评、亚马逊产品评论、调酒数据、社交媒体数据等，这些数据用于构建推荐系统。
 
 **数据链接：** [推荐系统数据集](https://cseweb.ucsd.edu/~jmcauley/datasets.html)
 
@@ -120,9 +120,9 @@ ImageNet 是一个大型图像数据库，按照 WordNet 层级组织。它拥�
 
 **源代码：** [电影推荐系统项目](https://bit.ly/37iBDEp)
 
-### 12. UCI垃圾邮件数据集
+### 12. UCI 垃圾邮件数据集
 
-将电子邮件分类为垃圾邮件或非垃圾邮件是非常常见和有用的任务。该数据集包含4601封电子邮件及其57条元信息。你可以构建模型来过滤垃圾邮件。
+将电子邮件分类为垃圾邮件或非垃圾邮件是非常常见和有用的任务。该数据集包含 4601 封电子邮件及其 57 条元信息。你可以构建模型来过滤垃圾邮件。
 
 **数据链接**: [UCI 垃圾邮件数据集](https://archive.ics.uci.edu/ml/datasets/Spambase)
 
@@ -170,37 +170,37 @@ IMDB-Wiki 数据集是最大的开源面部图像数据集之一，带有标记�
 
 **机器学习项目创意**：可以使用颜色数据集制作一个颜色检测应用，其中可以从图像中选择颜色，应用程序将显示颜色的名称。
 
-**源代码**： [颜色检测Python项目](https://bit.ly/2SeHqqi)
+**源代码**： [颜色检测 Python 项目](https://bit.ly/2SeHqqi)
 
-### 18\. 城市声音8K数据集
+### 18\. 城市声音 8K 数据集
 
-城市声音数据集包含来自10个类别的8732种城市声音，如空调、狗吠、钻孔声、警报声、街头音乐等。该数据集在城市声音分类问题中非常受欢迎。
+城市声音数据集包含来自 10 个类别的 8732 种城市声音，如空调、狗吠、钻孔声、警报声、街头音乐等。该数据集在城市声音分类问题中非常受欢迎。
 
-**数据链接**： [城市声音8K数据集](https://urbansounddataset.weebly.com/urbansound8k.html)
+**数据链接**： [城市声音 8K 数据集](https://urbansounddataset.weebly.com/urbansound8k.html)
 
 **机器学习项目创意**：我们可以建立一个声音分类系统，以检测背景中播放的城市声音类型。这将帮助你入门音频数据，并理解如何处理非结构化数据。
 
-### 19\. Librispeech数据集
+### 19\. Librispeech 数据集
 
-该数据集包含大量来自LibriVox项目的英文演讲。它包含1000小时的各种口音的英文朗读。它用于语音识别项目。
+该数据集包含大量来自 LibriVox 项目的英文演讲。它包含 1000 小时的各种口音的英文朗读。它用于语音识别项目。
 
-**数据链接**： [Librispeech数据集](http://www.openslr.org/12)
+**数据链接**： [Librispeech 数据集](http://www.openslr.org/12)
 
 **机器学习项目创意**：建立一个语音识别模型，以检测说了什么并将其转换为文本。语音识别的目标是自动识别音频中的内容。
 
 ### 20\. 乳腺组织病理图像数据集
 
-该数据集包含从162张乳腺癌标本的切片图像中提取的277,524张50×50大小的图像。包括198,738个阴性测试和78,786个带有IDC的阳性测试。
+该数据集包含从 162 张乳腺癌标本的切片图像中提取的 277,524 张 50×50 大小的图像。包括 198,738 个阴性测试和 78,786 个带有 IDC 的阳性测试。
 
 **数据链接**： [乳腺组织病理数据集](https://www.kaggle.com/paultimothymooney/breast-histopathology-images)
 
 **机器学习项目创意**：建立一个可以分类乳腺癌的模型。你可以使用卷积神经网络构建图像分类模型。
 
-**源代码**： [乳腺癌分类Python项目](https://bit.ly/2vkI8cw)
+**源代码**： [乳腺癌分类 Python 项目](https://bit.ly/2vkI8cw)
 
 ### 21\. Youtube 8M 数据集
 
-Youtube 8M数据集是一个大规模标注的视频数据集，包含610万个Youtube视频ID，35万小时的视频，26亿个音频/视觉特征，3862个类别，以及每个视频平均3个标签。它用于视频分类目的。
+Youtube 8M 数据集是一个大规模标注的视频数据集，包含 610 万个 Youtube 视频 ID，35 万小时的视频，26 亿个音频/视觉特征，3862 个类别，以及每个视频平均 3 个标签。它用于视频分类目的。
 
 **数据链接**： [Youtube 8M](https://research.google.com/youtube8m/)
 
@@ -208,7 +208,7 @@ Youtube 8M数据集是一个大规模标注的视频数据集，包含610万个Y
 
 ### 参考文献
 
-在这篇文章中，我们看到超过20个机器学习数据集，你可以用来练习机器学习或数据科学。创建自己的数据集很昂贵，所以我们可以使用其他人的数据集来完成工作。但我们应该仔细阅读数据集的文档，因为有些数据集是免费的，而有些数据集则需要根据其要求给予所有者信用。
+在这篇文章中，我们看到超过 20 个机器学习数据集，你可以用来练习机器学习或数据科学。创建自己的数据集很昂贵，所以我们可以使用其他人的数据集来完成工作。但我们应该仔细阅读数据集的文档，因为有些数据集是免费的，而有些数据集则需要根据其要求给予所有者信用。
 
 **简介：** [Shivashish Thaku](https://www.linkedin.com/in/shivashish-thakur-55153313b/) 是一位分析师和技术内容作家。他是一位技术爱好者，喜欢撰写有关最新前沿技术的文章，这些技术正在改变世界。他也是一位体育迷，喜欢踢足球和观看足球比赛。
 

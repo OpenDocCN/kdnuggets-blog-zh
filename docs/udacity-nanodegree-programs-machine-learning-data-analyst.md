@@ -1,12 +1,12 @@
 # Udacity 纳米学位课程：机器学习、数据分析师等
 
-> 原文：[https://www.kdnuggets.com/2016/06/udacity-nanodegree-programs-machine-learning-data-analyst.html](https://www.kdnuggets.com/2016/06/udacity-nanodegree-programs-machine-learning-data-analyst.html)
+> 原文：[`www.kdnuggets.com/2016/06/udacity-nanodegree-programs-machine-learning-data-analyst.html`](https://www.kdnuggets.com/2016/06/udacity-nanodegree-programs-machine-learning-data-analyst.html)
 
-![Udacity logo](../Images/9bbe9d51be1c85740375bb892f56f9fb.png)
+![Udacity logo](img/9bbe9d51be1c85740375bb892f56f9fb.png)
 
 通过 Udacity 的纳米学位课程，您将构建和设计惊人的项目，向硅谷顶级公司的专家学习，并在技术领域找到梦想中的工作。
 
-报名参加纳米学位课程，12个月内毕业，还可以获得50%的学费退款！
+报名参加纳米学位课程，12 个月内毕业，还可以获得 50%的学费退款！
 
 **探索 Udacity 的纳米学位课程**：
 
@@ -34,7 +34,7 @@
 
 **找工作或退还学费！**
 
-通过 Udacity 的 [纳米学位 Plus 计划](https://www.udacity.com/nanodegree/plus?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-nano-plus)，您将在毕业后的6个月内找到工作，否则我们将全额退款。
+通过 Udacity 的 [纳米学位 Plus 计划](https://www.udacity.com/nanodegree/plus?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-nano-plus)，您将在毕业后的 6 个月内找到工作，否则我们将全额退款。
 
 Udacity 为以下课程提供纳米学位 Plus 选项：
 
@@ -42,9 +42,9 @@ Udacity 为以下课程提供纳米学位 Plus 选项：
 
 [数据分析师纳米学位](https://www.udacity.com/course/data-analyst-nanodegree--nd002?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-data-analyst)
 
-[Android开发者纳米学位](https://www.udacity.com/course/beginning-android-app-development--nd803?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-android)
+[Android 开发者纳米学位](https://www.udacity.com/course/beginning-android-app-development--nd803?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-android)
 
-[iOS开发者纳米学位](https://www.udacity.com/course/ios-developer-nanodegree--nd003?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-ios)
+[iOS 开发者纳米学位](https://www.udacity.com/course/ios-developer-nanodegree--nd003?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-ios)
 
 [高级网页开发者纳米学位](https://www.udacity.com/course/senior-web-developer-nanodegree--nd802?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-senior-web-dev)
 
@@ -52,7 +52,7 @@ Udacity 为以下课程提供纳米学位 Plus 选项：
 
 **推荐课程：机器学习工程师纳米学位项目**
 
-![](../Images/7cba3c2ac398642b168901f01b9991fa.png)
+![](img/7cba3c2ac398642b168901f01b9991fa.png)
 
 深入学习机器学习和人工智能的技能，获得未来机器人、交通和医疗等领域最热门的工作。你今天会建造什么？
 
@@ -60,17 +60,17 @@ Udacity 为以下课程提供纳米学位 Plus 选项：
 
 该纳米学位由谷歌共同创建。
 
-[立即开始为期1周的免费试用。](https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-machine-learning)
+[立即开始为期 1 周的免费试用。](https://www.udacity.com/course/machine-learning-engineer-nanodegree--nd009?utm_source=kdnuggets&utm_medium=ads&utm_campaign=2016-06-kdnuggets-network-machine-learning)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -78,9 +78,9 @@ Udacity 为以下课程提供纳米学位 Plus 选项：
 
 +   [托马斯·米勒博士探讨西北大学的在线…](https://www.kdnuggets.com/2024/05/nwu/thomas-miller-phd-explores-northwestern-universitys-online-graduate-programs-in-data-science)
 
-+   [15本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
++   [15 本免费机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
 
-+   [为什么越来越多的开发者在机器学习项目中使用Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
++   [为什么越来越多的开发者在机器学习项目中使用 Python？](https://www.kdnuggets.com/2022/01/developers-python-machine-learning-projects.html)
 
 +   [ChatGPT、GPT-4 及更多生成性人工智能新闻](https://www.kdnuggets.com/2023/02/chatgpt-gpt4-generative-ai-news.html)
 

@@ -1,8 +1,8 @@
-# 25个高级SQL面试问题
+# 25 个高级 SQL 面试问题
 
-> 原文：[https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html`](https://www.kdnuggets.com/2022/10/25-advanced-sql-interview-questions-data-scientists.html)
 
-![25个高级SQL面试问题](../Images/d05a8029eb726261d787ff39b89b1ce9.png)
+![25 个高级 SQL 面试问题](img/d05a8029eb726261d787ff39b89b1ce9.png)
 
 图片由 [Freepik](https://www.freepik.com/free-vector/abstract-technology-sql-illustration_21743432.htm#query=SQL&position=32&from_view=search&track=sph) 提供
 
@@ -12,55 +12,55 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 所有数据库使用的标准语言是结构化查询语言（SQL）。
 
-它在从数据库中获取需求数据方面起着关键作用。所有大型数据平台，如Hadoop和Spark，都使用SQL作为其组织的高级语言。
+它在从数据库中获取需求数据方面起着关键作用。所有大型数据平台，如 Hadoop 和 Spark，都使用 SQL 作为其组织的高级语言。
 
 数据科学是唯一的研究和分析数据的领域。数据结果应准确无误，以便进行调查。
 
-这就是SQL如何与数据科学结合的原因。虽然某些组织已转向 [**NoSQL**](/2020/12/nosql-beginners.html)，但基础仍在于SQL。
+这就是 SQL 如何与数据科学结合的原因。虽然某些组织已转向 **NoSQL**，但基础仍在于 SQL。
 
 准备好迎接数据科学面试了吗？
 
-# 25个高级SQL面试问题
+# 25 个高级 SQL 面试问题
 
-这里有一些关于SQL的必要面试问题及答案，你必须学习。
+这里有一些关于 SQL 的必要面试问题及答案，你必须学习。
 
 ## 1\. 解释规范化是什么？
 
 规范化是一种组织数据库中数据的方法，以最小化冗余。通过使用规范形式的概念对关系进行规范化。
 
-+   1NF：如果一个关系具有原子值，则它处于1NF。
++   1NF：如果一个关系具有原子值，则它处于 1NF。
 
-+   2NF：一个关系要处于2NF，它应该处于1NF，并且所有非键属性完全依赖于主键。
++   2NF：一个关系要处于 2NF，它应该处于 1NF，并且所有非键属性完全依赖于主键。
 
-+   3NF：一个关系要处于3NF，它应该处于2NF，并且没有过渡依赖关系。
++   3NF：一个关系要处于 3NF，它应该处于 2NF，并且没有过渡依赖关系。
 
-+   BCNF：Boy Codd的规范形式是3NF的强表示。
++   BCNF：Boy Codd 的规范形式是 3NF 的强表示。
 
-## 2\. 解释DDL和DML之间的区别？
+## 2\. 解释 DDL 和 DML 之间的区别？
 
-+   DDL代表数据定义语言，而DML称为数据操作语言。
++   DDL 代表数据定义语言，而 DML 称为数据操作语言。
 
-+   DDL创建一个带有约束的模式。DML在该模式中添加、检索或更新数据。
++   DDL 创建一个带有约束的模式。DML 在该模式中添加、检索或更新数据。
 
-+   DDL定义表的列属性。DML提供表的行属性。
++   DDL 定义表的列属性。DML 提供表的行属性。
 
-+   DDL命令的例子包括创建、修改、删除、重命名等，而DML命令的例子包括合并、更新、插入等。
++   DDL 命令的例子包括创建、修改、删除、重命名等，而 DML 命令的例子包括合并、更新、插入等。
 
-+   WHERE子句不用于DDL，但用于DML。
++   WHERE 子句不用于 DDL，但用于 DML。
 
-## 3\. SQL中的ACID属性是什么？
+## 3\. SQL 中的 ACID 属性是什么？
 
-ACID属性如下：
+ACID 属性如下：
 
 +   原子性 - 数据的更改必须像一个单一的操作一样。
 
@@ -74,9 +74,9 @@ ACID属性如下：
 
 在一般情况下，查找表中所有重复项的方法如下：
 
-+   使用GROUP BY命令按目标列分组所有行。这里的目标列是你可以检查重复项的列。
++   使用 GROUP BY 命令按目标列分组所有行。这里的目标列是你可以检查重复项的列。
 
-+   使用HAVING命令并结合COUNT函数来检查是否有任何组的条目超过一个。
++   使用 HAVING 命令并结合 COUNT 函数来检查是否有任何组的条目超过一个。
 
 ## 5\. 聚集索引和非聚集索引之间的区别是什么？
 
@@ -94,7 +94,7 @@ ACID属性如下：
 
 ## 7\. 什么是排序规则？
 
-在SQL服务器中，排序规则提供了数据的排序规则、重音和大小写敏感性属性。它通过定义排序规则来表示数据库中的每个字符的位模式。
+在 SQL 服务器中，排序规则提供了数据的排序规则、重音和大小写敏感性属性。它通过定义排序规则来表示数据库中的每个字符的位模式。
 
 一些排序规则级别如下：
 
@@ -126,17 +126,17 @@ ACID属性如下：
 
 以下是连接和联合之间的区别：
 
-+   连接从表中检索匹配的记录，而联合则用于合并两个不同SELECT语句的集合。
++   连接从表中检索匹配的记录，而联合则用于合并两个不同 SELECT 语句的集合。
 
 +   连接不会删除重复数据，而联合会从选定的语句中删除重复数据（行）。
 
-## 10\. 解释UNION和UNION ALL之间的区别？
+## 10\. 解释 UNION 和 UNION ALL 之间的区别？
 
 联合保留唯一记录，而联合所有保留所有记录，包括所有重复项。此外，联合在返回数据之前会进行去重步骤，而联合所有打印连接结果。
 
 ## 11\. 编写一个查询以打印表中最高的薪水？
 
-考虑一个表，数据如下，表名为EMP-
+考虑一个表，数据如下，表名为 EMP-
 
 **姓名    薪水**
 
@@ -252,7 +252,7 @@ B 树被定义为一种自平衡搜索树，其中所有叶子节点都处于同
 
 但在线事务处理（OLTP）提供了面向事务的应用程序，这些应用程序在 3 层架构中进行分类。
 
-![25 Advanced SQL Interview Questions for Data Scientists](../Images/244348e7d41bbc66c076fe727a82416d.png)
+![25 Advanced SQL Interview Questions for Data Scientists](img/244348e7d41bbc66c076fe727a82416d.png)
 
 来源: [InterviewBit](https://www.interviewbit.com/sql-interview-questions/)
 
@@ -270,7 +270,7 @@ SQL 用于查询数据库和修改大型数据集中的值。它还提供了一�
 
 在这种情况下，你可以使用 CASE WHEN 语句查询数据库。
 
-CASE WHEN 语句类似于编程语言中的 If/else 条件，比如 C、C++、[Python](/2022/09/free-python-data-science-course.html) 等。
+CASE WHEN 语句类似于编程语言中的 If/else 条件，比如 C、C++、Python 等。
 
 CASE 语句后面跟随一对 WHEN 和 THEN 语句。然而，你可以根据需要添加嵌套语句。
 
@@ -367,7 +367,7 @@ SQL 将嵌套触发器分为两个主要类别——AFTER 触发器和 INSTEAD O
 
 如果你是初学者，可以从以下资源学习 SQL：
 
-1.  [Matthew Mayo 的 4 小时 SQL 完整课程](/2022/09/free-sql-database-course.html)
+1.  Matthew Mayo 的 4 小时 SQL 完整课程
 
 1.  [SQL 维基百科](https://en.wikipedia.org/wiki/SQL)
 
@@ -377,13 +377,13 @@ SQL 将嵌套触发器分为两个主要类别——AFTER 触发器和 INSTEAD O
 
 ## 额外资源
 
-1.  [为什么 SQL 将继续是数据科学家的最佳朋友](/2022/07/sql-remain-data-scientist-best-friend.html)
+1.  为什么 SQL 将继续是数据科学家的最佳朋友
 
-1.  [SQL 数据准备备忘单](/2021/05/data-preparation-sql-cheat-sheet.html)
+1.  SQL 数据准备备忘单
 
-1.  [掌握数据科学 SQL 的 7 个步骤](/2022/04/7-steps-mastering-sql-data-science.html)
+1.  掌握数据科学 SQL 的 7 个步骤
 
-1.  [数据科学面试中你应该知道的五大 SQL 窗口函数](/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
+1.  数据科学面试中你应该知道的五大 SQL 窗口函数
 
 **[Vaishnavi Amira Yada](https://www.linkedin.com/in/vaishnavi-amira-yada/)** 是一位技术内容撰稿人。她掌握 Python、Java、数据结构与算法（DSA）、C 等知识。她发现自己对写作情有独钟，并且热爱写作。
 

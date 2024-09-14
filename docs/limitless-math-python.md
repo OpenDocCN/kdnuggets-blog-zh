@@ -1,10 +1,10 @@
 # 如何在 Python 中进行“无限制”数学运算
 
-> 原文：[https://www.kdnuggets.com/2021/10/limitless-math-python.html](https://www.kdnuggets.com/2021/10/limitless-math-python.html)
+> 原文：[`www.kdnuggets.com/2021/10/limitless-math-python.html`](https://www.kdnuggets.com/2021/10/limitless-math-python.html)
 
-[评论](#comments)
+评论
 
-![](../Images/418f1da603edd720a002262c0db00ee0.png)
+![](img/418f1da603edd720a002262c0db00ee0.png)
 
 **图片来源**: [Pixabay](https://pixabay.com/photos/steelwool-fire-infinite-firespin-458842/)（免费使用）
 
@@ -14,13 +14,13 @@
 
 这是一个快速的例子。
 
-![](../Images/38b45d0cdc8ef9f67786e226adfd4fe6.png)
+![](img/38b45d0cdc8ef9f67786e226adfd4fe6.png)
 
 如果你直接从 Python 的标准 `math` 模块中导入，你将获得平方根 2 的值。
 
 你可以使用 Numpy 来选择结果是 32 位还是 64 位浮点数。
 
-![](../Images/518f161f6fbca038f07629993195c0d4.png)
+![](img/518f161f6fbca038f07629993195c0d4.png)
 
 但如果你想要精确到 25 位小数的结果呢…
 
@@ -82,11 +82,11 @@ pip install mpmath
 
 我将向你展示在工作中设置精度的快捷方法。
 
-![](../Images/f731fd70fab5a4f8a23193bfd8ef6726.png)
+![](img/f731fd70fab5a4f8a23193bfd8ef6726.png)
 
 你可以随时打印 `mp` 上下文以查看当前的全局精度设置。`mp.prec` 显示的是位精度，`mp.dps` 显示的是小数精度。
 
-![](../Images/a8839e3bc1ad8113bfe8e9654f7623c7.png)
+![](img/a8839e3bc1ad8113bfe8e9654f7623c7.png)
 
 ## 使用 ``mpf`` 实例代替普通浮点数
 
@@ -94,9 +94,9 @@ pip install mpmath
 
 你应该使用字符串（而不是 Python 浮点数）来定义 `mpf` ，以获得真正的准确性。你也可以将 `mp.pretty` 设置为 `True` 来进行舍入而不失去内部准确性。
 
-![](../Images/be7d7c7fa4663b3f81d27aeb4c9c7f82.png)
+![](img/be7d7c7fa4663b3f81d27aeb4c9c7f82.png)
 
-![](../Images/7108f7ae37a7395070b9181bd836683d.png)
+![](img/7108f7ae37a7395070b9181bd836683d.png)
 
 ## 现在有些魔法！阶乘计算速度提升 11,000 倍
 
@@ -104,13 +104,13 @@ pip install mpmath
 
 当我们尝试计算 100,000 的阶乘时，发生了什么。`mpmath` 的速度是**11,333 倍**。
 
-![](../Images/6cef4d5219e16dc5e367ec78b38e050d.png)
+![](img/6cef4d5219e16dc5e367ec78b38e050d.png)
 
 ## 有理数和复数是原生支持的
 
 我们可以像处理浮点数一样轻松地将有理数或复数混入计算中。为此，我们需要使用一个神奇的函数 `**mpmathify**` ，它与 `**sympy**` 内部配合工作来解释这些量。
 
-![](../Images/63db5f296a89cb4e3b382a59092b2446.png)
+![](img/63db5f296a89cb4e3b382a59092b2446.png)
 
 我们不必导入像 `[**fraction**](https://docs.python.org/3/library/fractions.html)` 或 `[**cmath**](https://docs.python.org/3/library/cmath.html)` 这样的 Python 模块来处理这些量，以选择我们需要的精度。
 
@@ -122,23 +122,23 @@ pip install mpmath
 
 这是一个单行代码示例，
 
-![](../Images/9cdc119df497a054554836b11075afe5.png)
+![](img/9cdc119df497a054554836b11075afe5.png)
 
 **图片来源**：由作者生成
 
 另一个例子是 [Fresnel 函数](https://en.wikipedia.org/wiki/Fresnel_integral)，
 
-![](../Images/9d7383e601178bd033d5d79d0e7be8b7.png)
+![](img/9d7383e601178bd033d5d79d0e7be8b7.png)
 
 **图片来源**：由作者生成
 
 复数量可以通过 `cplot` 轻松绘制。默认情况下，复数参数（相位）显示为颜色（色调），而幅度显示为亮度。
 
-![](../Images/0e600123b97fa9d5021df5db1212ac48.png)![](../Images/efc1545296ece318cf8e9a04fd9eeed0.png)**图片来源**：作者生成
+![](img/0e600123b97fa9d5021df5db1212ac48.png)![](img/efc1545296ece318cf8e9a04fd9eeed0.png)**图片来源**：作者生成
 
 表面图也是一个好选择，
 
-![](../Images/d936db770139f81e14bdd6da30c38581.png)
+![](img/d936db770139f81e14bdd6da30c38581.png)
 
 **图片来源**：作者生成
 
@@ -146,11 +146,11 @@ pip install mpmath
 
 `mpmath` 支持数百种特殊函数。以下是该列表的部分截图。有关详细信息，请参阅此文档。
 
-![](../Images/5bb0d1bfbd8ebf4bcd96093dd493696b.png)
+![](img/5bb0d1bfbd8ebf4bcd96093dd493696b.png)
 
-![](../Images/2937704eaefc538e246628f69b258538.png)
+![](img/2937704eaefc538e246628f69b258538.png)
 
-![](../Images/f86daf22f90b8e6b1eb813960f3fb25e.png)
+![](img/f86daf22f90b8e6b1eb813960f3fb25e.png)
 
 **图片来源**：作者生成
 
@@ -158,29 +158,29 @@ pip install mpmath
 
 使用 `binomial` 函数快速而轻松地计算统计学和组合数学中的二项式系数，
 
-![](../Images/67608c71757f619c61f0713f340834f0.png)
+![](img/67608c71757f619c61f0713f340834f0.png)
 
-![](../Images/2d619ef98c4b0913498d584de3b5cbec.png)
+![](img/2d619ef98c4b0913498d584de3b5cbec.png)
 
 这个函数支持 **巨大的参数，这正是它真正出色的地方**。Scipy 的计算速度更快，但对于大数字，Scipy 甚至无法运行！
 
-![](../Images/f71a76a939b65c7358f2be5d4a3f6a6d.png)
+![](img/f71a76a939b65c7358f2be5d4a3f6a6d.png)
 
 而且，扩展到非整数和负参数是自然的（使用 Gamma 函数），
 
-![](../Images/b8adf27f87e432e8768bc84649e8d3ee.png)
+![](img/b8adf27f87e432e8768bc84649e8d3ee.png)
 
-![](../Images/bb9454a828a3c7119ff0ae06499c65b0.png)
+![](img/bb9454a828a3c7119ff0ae06499c65b0.png)
 
 ## 超阶乘
 
 对于整数，超阶乘定义为，
 
-![](../Images/65bf3558a90616d6434a19f7cded40ac.png)
+![](img/65bf3558a90616d6434a19f7cded40ac.png)
 
 它们非常大。你能想到一种简单的方法来计算这种数字吗？
 
-![](../Images/8853e4e7575bdfe3f3ecb0e0bf7c1725.png)
+![](img/8853e4e7575bdfe3f3ecb0e0bf7c1725.png)
 
 这个数字是 1.1425…后面跟着 41908 个零！为了理解这一点，可以考虑这个事实——宇宙中大约有 [10⁸⁰ 个原子](https://www.thoughtco.com/number-of-atoms-in-the-universe-603795)，即 1 后面跟着 80 个零。
 
@@ -192,35 +192,35 @@ pip install mpmath
 
 然而，使用大参数或非整数（甚至复数）参数计算近似解对于 `mpmath` 来说是自然且简单的。这在使用原生 Python 编码时并不那么简单。
 
-![](../Images/d621a23a7d0264ebc8f91298d003658d.png)
+![](img/d621a23a7d0264ebc8f91298d003658d.png)
 
 多项式评估和根
 
 使用 `polyeval` 和 `polyroots` 函数快速且轻松地评估任意阶数的多项式并求解根。当然，`polyroots` 可以一次性评估所有实数和复数根。
 
-![](../Images/4e47e25465d0fae02a57739228b119a6.png)
+![](img/4e47e25465d0fae02a57739228b119a6.png)
 
 ## 任意函数的根求解
 
 我们可以使用 `rootfind` 函数来搜索任何任意函数的根。这里是一个例子，
 
-![](../Images/37a1dfab44e93c99922c8fce069c15a2.png)
+![](img/37a1dfab44e93c99922c8fce069c15a2.png)
 
 **图片来源**：作者生成
 
 然后，我们在 -2 到 5 之间寻找所有整数附近的解，发现多个解对应于函数过零的所有 x 值。
 
-![](../Images/38d0ed8ab7cb18156d98355b2b019a00.png)
+![](img/38d0ed8ab7cb18156d98355b2b019a00.png)
 
 ## 数值微积分
 
 计算任何阶数和任何函数的导数，
 
-![](../Images/610ea28d82304333574bf52b5b7eaa81.png)
+![](img/610ea28d82304333574bf52b5b7eaa81.png)
 
 偏导数很简单，
 
-![](../Images/72fef53fb77c38febf39fa09dd374c9c.png)
+![](img/72fef53fb77c38febf39fa09dd374c9c.png)
 
 查看[这个参考资料](https://mpmath.org/doc/current/calculus/differentiation.html)以了解其他与导数相关的高级示例和函数。
 
@@ -228,13 +228,13 @@ pip install mpmath
 
 简单快速的任意精度评估，
 
-![](../Images/662bdb6ffaaedc141262138212378317.png)
+![](img/662bdb6ffaaedc141262138212378317.png)
 
 ## 2-D 或 3-D 积分
 
 二维或三维积分也可以处理！
 
-![](../Images/f078a7c0d85a8bdfa994fdb42f52e40d.png)
+![](img/f078a7c0d85a8bdfa994fdb42f52e40d.png)
 
 阅读更多[详细信息](https://mpmath.org/doc/current/calculus/integration.html)。
 
@@ -242,11 +242,11 @@ pip install mpmath
 
 我们可以使用`odefun`来求解已知边界条件的常微分方程。
 
-![](../Images/ca6855e9b70af69d2a87803d8dc25931.png)
+![](img/ca6855e9b70af69d2a87803d8dc25931.png)
 
 或者，更困难一些，
 
-![](../Images/af3bfcab740e3e1ec6837cce2ce1464e.png)
+![](img/af3bfcab740e3e1ec6837cce2ce1464e.png)
 
 ## 矩阵和线性代数
 
@@ -254,35 +254,35 @@ pip install mpmath
 
 ## 总结
 
-在这篇文章中，我们展示了一个强大的Python库及其执行任意精度数值计算的能力，涉及各种数字和函数。基本上，这个库的主要优点是它涵盖了非常广泛的数学领域（代数、数论、微积分、特殊函数等），而且**一切都在一个屋檐下，不需要加载多个库**。
+在这篇文章中，我们展示了一个强大的 Python 库及其执行任意精度数值计算的能力，涉及各种数字和函数。基本上，这个库的主要优点是它涵盖了非常广泛的数学领域（代数、数论、微积分、特殊函数等），而且**一切都在一个屋檐下，不需要加载多个库**。
 
 这个库的许多应用领域涉及复杂的科学/技术领域，如有限元模拟或密码学，但作为一个数字爱好者，你总能从这个包中挑选出对你的数据科学或机器学习工作有用的函数。
 
-再次，这里是[本文中展示的所有代码的Notebook](https://github.com/tirthajyoti/Stats-Maths-with-Python/blob/master/mpmath-1.ipynb)。
+再次，这里是[本文中展示的所有代码的 Notebook](https://github.com/tirthajyoti/Stats-Maths-with-Python/blob/master/mpmath-1.ipynb)。
 
 祝你数据处理愉快！
 
-你可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)**库**，以获取机器学习和数据科学方面的代码、创意和资源。如果你和我一样，对AI/机器学习/数据科学充满热情，请随时[在LinkedIn上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[在Twitter上关注我](https://twitter.com/tirthajyotiS)。
+你可以查看作者的[**GitHub**](https://github.com/tirthajyoti?tab=repositories)**库**，以获取机器学习和数据科学方面的代码、创意和资源。如果你和我一样，对 AI/机器学习/数据科学充满热情，请随时[在 LinkedIn 上添加我](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)或[在 Twitter 上关注我](https://twitter.com/tirthajyotiS)。
 
 **简介: [Tirthajyoti Sarkar](https://www.linkedin.com/in/tirthajyoti-sarkar-2127aa7/)** 是 Adapdix Corp 的数据科学/机器学习经理。他定期为 KDnuggets 和 TDS 等出版物撰写有关数据科学和机器学习的多样化话题。他编著了数据科学书籍，并参与开源软件开发。Tirthajyoti 拥有电气工程博士学位，并正在攻读计算数据分析硕士学位。可以通过 tirthajyoti at gmail[dot]com 联系他。
 
 **相关：**
 
-+   [数据科学中的基础数学：‘为什么’和‘如何’](/2018/09/essential-math-data-science.html)
++   数据科学中的基础数学：‘为什么’和‘如何’
 
-+   [为什么以及如何学习“高效的数据科学”？](/2021/07/learn-productive-data-science.html)
++   为什么以及如何学习“高效的数据科学”？
 
-+   [教AI分类时间序列模式的合成数据](/2021/10/teaching-ai-classify-time-series-patterns-synthetic-data.html)
++   教 AI 分类时间序列模式的合成数据
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -298,4 +298,4 @@ pip install mpmath
 
 +   [如何为机器学习学习数学](https://www.kdnuggets.com/2022/02/learn-math-machine-learning.html)
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何为机器学习学习数学](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何为机器学习学习数学](https://www.kdnuggets.com/2022/n07.html)

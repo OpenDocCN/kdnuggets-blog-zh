@@ -1,16 +1,16 @@
 # 从机器学习错误中学习
 
-> 原文：[https://www.kdnuggets.com/2021/03/learning-from-machine-learning-mistakes.html](https://www.kdnuggets.com/2021/03/learning-from-machine-learning-mistakes.html)
+> 原文：[`www.kdnuggets.com/2021/03/learning-from-machine-learning-mistakes.html`](https://www.kdnuggets.com/2021/03/learning-from-machine-learning-mistakes.html)
 
-[评论](#comments)
+评论
 
-**由[Emeli Dral](https://twitter.com/EmeliDral)，Evidently AI的CTO和联合创始人**
+**由[Emeli Dral](https://twitter.com/EmeliDral)，Evidently AI 的 CTO 和联合创始人**
 
-![机器学习错误](../Images/5a7d435aef231208397a3694ddd82b7b.png)
+![机器学习错误](img/5a7d435aef231208397a3694ddd82b7b.png)
 
 图片由作者提供
 
-当我们分析机器学习模型性能时，我们通常关注单一质量指标。对于回归问题，这可能是MAE、MAPE、RMSE，或者其他最适合问题领域的指标。
+当我们分析机器学习模型性能时，我们通常关注单一质量指标。对于回归问题，这可能是 MAE、MAPE、RMSE，或者其他最适合问题领域的指标。
 
 在训练实验中优化单一指标绝对是有意义的。这样，我们可以比较不同的模型运行，并选择最佳的那个。
 
@@ -28,9 +28,9 @@
 
 想象一下你在为一家超市连锁进行需求预测。一些产品是易腐品，根据错误的预测交付过多会导致浪费。高估有明显的成本需要考虑。
 
-![机器学习错误](../Images/738804148278e5716d0fdbe6cb5857f2.png)
+![机器学习错误](img/738804148278e5716d0fdbe6cb5857f2.png)
 
-图片由作者提供。图片来源于Unsplash: [1](https://unsplash.com/photos/7n6hNFagvhg), [2](https://unsplash.com/photos/gXnvxmqG2lE)。
+图片由作者提供。图片来源于 Unsplash: [1](https://unsplash.com/photos/7n6hNFagvhg), [2](https://unsplash.com/photos/gXnvxmqG2lE)。
 
 **除了经典的误差分析外，我们可能还需要追踪这种误差偏斜**（高估或低估的倾向）及其随时间的变化。这在分析模型验证和生产监控时都很有意义。
 
@@ -46,13 +46,13 @@
 
 **在训练中的参考性能和当前生产性能之间，我们可以看到误差的显著增加。**
 
-![机器学习错误](../Images/fda9b0e3a1d70a02cf982affcd263067.png)
+![机器学习错误](img/fda9b0e3a1d70a02cf982affcd263067.png)
 
 截图来自 [明显](https://github.com/evidentlyai/evidently) 报告。
 
 **为了更好地理解质量，我们可以查看误差分布。** 这确认了我们已经知道的：误差增加了。也有一些偏向过度估计的偏差。
 
-![机器学习错误](../Images/f59ee874f25df209f44b7b62ffcbd48d.png)
+![机器学习错误](img/f59ee874f25df209f44b7b62ffcbd48d.png)
 
 截图来自 [明显](https://github.com/evidentlyai/evidently) 报告。
 
@@ -74,13 +74,13 @@
 
 +   **低估。** 模型预测的值低于实际值的情况。
 
-我们限制每组的大小，只选择5%误差最大的极端例子。这样，我们得到了模型过度估计的前5%预测和模型低估的前5%预测。
+我们限制每组的大小，只选择 5%误差最大的极端例子。这样，我们得到了模型过度估计的前 5%预测和模型低估的前 5%预测。
 
-剩余的90%预测是“多数”。这一组的误差应该接近均值。
+剩余的 90%预测是“多数”。这一组的误差应该接近均值。
 
 这就是我们如何可视化建议的细分。我们希望看到的情况是：大多数预测接近实际值。分析离群值可以带来有意义的洞见。
 
-![机器学习错误](../Images/1985b93335e61b2d580cda9ecaf5a1b2.png)
+![机器学习错误](img/1985b93335e61b2d580cda9ecaf5a1b2.png)
 
 作者提供的图像。
 
@@ -96,19 +96,19 @@
 
 在我们的案例中，我们可以看到，过高估计和低估组的错误都显著高于“主要”组的错误。
 
-![机器学习错误](../Images/1fe3e7d1be5219ccd6404893b0d25f9f.png)
+![机器学习错误](img/1fe3e7d1be5219ccd6404893b0d25f9f.png)
 
 来自[Evidently](https://github.com/evidentlyai/evidently)报告的截图。
 
 然后我们可以尝试调查和探索新的模式。
 
-为了做到这一点，我们查看5%-组中的对象，并查看对应的特征值。逐个特征，如果可能的话。
+为了做到这一点，我们查看 5%-组中的对象，并查看对应的特征值。逐个特征，如果可能的话。
 
 **我们的目标是确定特定特征值与高错误之间是否存在关系。**为了深入了解，我们还需要区分过高估计或低估。
 
 想象一下，我们预测医疗成本，并且始终高估某些人口统计特征的患者的价格？或者，错误是无偏的但很大，我们的模型在特定段上失败了？这就是我们想要找到的洞察。
 
-![机器学习错误](../Images/565675d69b0486675b3e7d8df1d80b76.png)
+![机器学习错误](img/565675d69b0486675b3e7d8df1d80b76.png)
 
 作者提供的图片。
 
@@ -116,17 +116,17 @@
 
 **我们如何做到这一点？让我们绘制特征分布和目标需求，并用颜色标记我们犯高错误的示例。**
 
-在我们的自行车需求预测用例中，我们已经可以得到一些见解。如果我们绘制“湿度”特征，我们可以注意到，当湿度值在60到80之间时，我们的模型现在显著高估需求（右侧绘制）。
+在我们的自行车需求预测用例中，我们已经可以得到一些见解。如果我们绘制“湿度”特征，我们可以注意到，当湿度值在 60 到 80 之间时，我们的模型现在显著高估需求（右侧绘制）。
 
 我们在训练数据集中看到了这些值（左侧绘制），但错误在整个范围内都是无偏的和相似的。
 
-![机器学习错误](../Images/21d3fa8efd7f5fd20964e1835cfe390e.png)
+![机器学习错误](img/21d3fa8efd7f5fd20964e1835cfe390e.png)
 
 来自[Evidently](https://github.com/evidentlyai/evidently)报告的截图。
 
-我们也可以注意到其他模式。例如，在温度方面。当温度高于30°C时，模型也会高估需求。
+我们也可以注意到其他模式。例如，在温度方面。当温度高于 30°C 时，模型也会高估需求。
 
-![机器学习错误](../Images/6e33ffbcebb718f57f3b3532502a91c9.png)
+![机器学习错误](img/6e33ffbcebb718f57f3b3532502a91c9.png)
 
 来自[Evidently](https://github.com/evidentlyai/evidently)报告的截图。
 
@@ -136,11 +136,11 @@
 
 ### 如何对我的模型做同样的事情？
 
-我们在[Evidently](https://github.com/evidentlyai/evidently)开源库中实现了这种方法。要使用它，你应该将模型应用数据准备为pandas DataFrame，包括模型特征、预测和实际（目标）值。
+我们在[Evidently](https://github.com/evidentlyai/evidently)开源库中实现了这种方法。要使用它，你应该将模型应用数据准备为 pandas DataFrame，包括模型特征、预测和实际（目标）值。
 
-该库可以与单个DataFrame或两个DataFrame一起使用——如果你想比较模型在生产环境中的表现与训练数据或其他过去的时间段。
+该库可以与单个 DataFrame 或两个 DataFrame 一起使用——如果你想比较模型在生产环境中的表现与训练数据或其他过去的时间段。
 
-![机器学习错误](../Images/2d7e4b0deb1eab0725a55fa4e5f797d6.png)
+![机器学习错误](img/2d7e4b0deb1eab0725a55fa4e5f797d6.png)
 
 图片来源：作者。
 
@@ -154,7 +154,7 @@
 
 我们相信这种分析在你的模型生命周期中多次使用会很有帮助。你可以用它：
 
-1.  **分析模型测试结果。**例如，一旦你对模型进行了离线测试，或者进行了A/B测试或影子部署后。
+1.  **分析模型测试结果。**例如，一旦你对模型进行了离线测试，或者进行了 A/B 测试或影子部署后。
 
 1.  **进行生产环境中模型的持续监控。**你可以在每次运行批量模型时执行此操作，也可以将其安排为定期任务。
 
@@ -162,42 +162,42 @@
 
 1.  **调试生产环境中的模型。**如果模型质量出现问题，你可以发现模型表现不佳的细分，并决定如何解决。例如，你可能会为低性能的细分提供更多数据，重建模型或在模型上添加业务规则。
 
-如果你需要一个实际示例，这里有一个[tutorial](https://towardsdatascience.com/how-to-break-a-model-in-20-days-a-tutorial-on-production-model-analytics-25497e2eab9c)关于如何在生产环境中调试机器学习模型性能的教程：“如何在20天内破坏一个模型”。
+如果你需要一个实际示例，这里有一个[tutorial](https://towardsdatascience.com/how-to-break-a-model-in-20-days-a-tutorial-on-production-model-analytics-25497e2eab9c)关于如何在生产环境中调试机器学习模型性能的教程：“如何在 20 天内破坏一个模型”。
 
-**简介：[Emeli Dral](https://twitter.com/EmeliDral)** 是Evidently AI的联合创始人兼首席技术官，她创建了分析和监控机器学习模型的工具。她曾共同创办一家工业AI初创公司，并担任Yandex Data Factory的首席数据科学家。她是Coursera上机器学习和数据分析课程的共同作者，该课程有超过100,000名学生。
+**简介：[Emeli Dral](https://twitter.com/EmeliDral)** 是 Evidently AI 的联合创始人兼首席技术官，她创建了分析和监控机器学习模型的工具。她曾共同创办一家工业 AI 初创公司，并担任 Yandex Data Factory 的首席数据科学家。她是 Coursera 上机器学习和数据分析课程的共同作者，该课程有超过 100,000 名学生。
 
 [原文](https://evidentlyai.com/blog/tutorial-1-model-analytics-in-production)。经许可转载。
 
 **相关：**
 
-+   [机器学习模型监控清单：需要跟踪的7个事项](/2021/03/machine-learning-model-monitoring-checklist.html)
++   机器学习模型监控清单：需要跟踪的 7 个事项
 
-+   [MLOps：模型监控101](/2021/01/mlops-model-monitoring-101.html)
++   MLOps：模型监控 101
 
-+   [使用平均精度评估目标检测模型](/2021/03/evaluating-object-detection-models-using-mean-average-precision.html)
++   使用平均精度评估目标检测模型
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 ### 更多相关话题
 
-+   [软件错误及权衡：Tomasz Lelek的新书及…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
++   [软件错误及权衡：Tomasz Lelek 的新书及…](https://www.kdnuggets.com/2021/12/manning-software-mistakes-tradeoffs-book.html)
 
 +   [新手数据科学家应避免的错误](https://www.kdnuggets.com/2022/06/mistakes-newbie-data-scientists-avoid.html)
 
-+   [可能影响你数据分析准确性的3个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
++   [可能影响你数据分析准确性的 3 个错误](https://www.kdnuggets.com/2023/03/3-mistakes-could-affecting-accuracy-data-analytics.html)
 
-+   [我在转行数据科学时犯的5个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
++   [我在转行数据科学时犯的 5 个错误](https://www.kdnuggets.com/2023/07/5-mistakes-made-switching-data-science-career.html)
 
-+   [避免这5个每个AI新手常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
++   [避免这 5 个每个 AI 新手常犯的错误](https://www.kdnuggets.com/avoid-these-5-common-mistakes-every-novice-in-ai-makes)
 
-+   [5个常见的数据科学错误及如何避免它们](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)
++   [5 个常见的数据科学错误及如何避免它们](https://www.kdnuggets.com/5-common-data-science-mistakes-and-how-to-avoid-them)

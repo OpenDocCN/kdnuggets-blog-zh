@@ -1,6 +1,6 @@
 # [下载] 真实案例机器学习示例 + 笔记本
 
-> 原文：[https://www.kdnuggets.com/2018/11/databricks-ebook-machine-learning-use-cases.html](https://www.kdnuggets.com/2018/11/databricks-ebook-machine-learning-use-cases.html)
+> 原文：[`www.kdnuggets.com/2018/11/databricks-ebook-machine-learning-use-cases.html`](https://www.kdnuggets.com/2018/11/databricks-ebook-machine-learning-use-cases.html)
 
 赞助帖子。
 
@@ -12,17 +12,17 @@
 
 &#124;
 
-[![CIO-Report-Email-header@2.jpg](../Images/d8348a18ef3735e2e855d8dd2fbdf8fa.png)](https://pages.databricks.com/reallife-ml-usecases.html?utm_source=KDNuggets&utm_medium=Email&utm_campaign=70161000001ps5EAAQ)
+![CIO-Report-Email-header@2.jpg](https://pages.databricks.com/reallife-ml-usecases.html?utm_source=KDNuggets&utm_medium=Email&utm_campaign=70161000001ps5EAAQ)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -56,19 +56,19 @@ Databricks 团队 &#124;
 
 &#124;
 
-[![Twitter](../Images/370e94aa2f6504dbef19829f3a12296a.png "Twitter")](https://twitter.com/databricks)
+![Twitter](https://twitter.com/databricks)
 
 &#124;
 
-[![LinkedIn](../Images/6200fdfe9795f133d4c8a00f8932b84d.png "LinkedIn")](https://www.linkedin.com/company/databricks)
+![LinkedIn](https://www.linkedin.com/company/databricks)
 
 &#124;
 
-[![Facebook](../Images/66b0f6ae4ff7aff6d3f7afe10e97e061.png "Facebook")](https://www.facebook.com/pages/Databricks/560203607379694)
+![Facebook](https://www.facebook.com/pages/Databricks/560203607379694)
 
 &#124;
 
-[![RSS](../Images/3b005d3100b1fff9781b8d37951b580a.png "RSS")](https://databricks.com/feed)
+![RSS](https://databricks.com/feed)
 
 &#124;
 
@@ -92,11 +92,11 @@ Spark 标志是**[Apache 软件基金会](http://www.apache.org/)**的商标。
 
 ### 更多相关话题
 
-+   [2022年排名前5的免费云笔记本](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
++   [2022 年排名前 5 的免费云笔记本](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
 
 +   [Anaconda 最新动态！数据科学培训与云托管笔记本](https://www.kdnuggets.com/2022/11/anaconda-new-anaconda-data-science-training-cloud-hosted-notebooks.html)
 
-+   [数据科学的前7款免费云笔记本](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)
++   [数据科学的前 7 款免费云笔记本](https://www.kdnuggets.com/top-7-free-cloud-notebooks-for-data-science)
 
 +   [SQL LIKE 运算符示例](https://www.kdnuggets.com/2022/09/sql-like-operator-examples.html)
 

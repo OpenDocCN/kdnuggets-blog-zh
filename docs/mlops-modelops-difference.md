@@ -1,16 +1,16 @@
 # MLOps 和 ModelOps：区别是什么，为什么重要
 
-> 原文：[https://www.kdnuggets.com/2021/09/mlops-modelops-difference.html](https://www.kdnuggets.com/2021/09/mlops-modelops-difference.html)
+> 原文：[`www.kdnuggets.com/2021/09/mlops-modelops-difference.html`](https://www.kdnuggets.com/2021/09/mlops-modelops-difference.html)
 
-[评论](#comments)
+评论
 
 **作者：[Stu Bailey](https://www.linkedin.com/in/stubaileyblox/)，ModelOp 联合创始人及首席企业 AI 架构师**。
 
 你知道吗，约有一半开发的 AI 模型实际上并没有投入生产？如果你想了解原因，并防止数据科学家的时间和其他资源在你的组织中被浪费，那么了解 MLOps 和 ModelOps 之间的区别是很重要的。这两个术语并不相同，但常常被互换使用。对 MLOps 和 ModelOps 特定角色和价值的不了解削弱了企业 AI 项目的价值。了解 MLOps 和 ModelOps 之间的区别很重要，因为它们各有其独特的作用，并不能相互替代。
 
-![MLOps 与 ModelOps 的区别，上半部分](../Images/b121b476395c9bf707e20e04423688da.png)
+![MLOps 与 ModelOps 的区别，上半部分](img/b121b476395c9bf707e20e04423688da.png)
 
-![MLOps 与 ModelOps 的区别，下半部分](../Images/89653693ac839586d68c8469630d7866.png)
+![MLOps 与 ModelOps 的区别，下半部分](img/89653693ac839586d68c8469630d7866.png)
 
 本博客解决以下问题：
 
@@ -32,7 +32,7 @@ MLOps 帮助**数据科学家**在数据科学过程中快速实验和部署 ML 
 
 ModelOps 是针对所有生产中的 AI 和分析模型的企业操作和治理，确保所有模型的独立验证和问责，以便无论这些模型如何创建，都能进行对业务产生影响的决策。[ModelOp Center](http://www.modelop.com/) 等 ModelOps 平台自动化了模型操作的各个方面，无论模型的类型、开发方式或模型的运行位置如何。
 
-![](../Images/6395e867cd0fa3f105e9390d1d13caa6.png)
+![](img/6395e867cd0fa3f105e9390d1d13caa6.png)
 
 ### 各自的用途及使用者
 
@@ -62,11 +62,11 @@ ModelOps 平台自动化模型的风险、监管和操作方面，并确保模�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

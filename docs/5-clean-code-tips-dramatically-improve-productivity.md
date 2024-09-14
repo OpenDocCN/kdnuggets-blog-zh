@@ -1,10 +1,10 @@
 # 5 个“清洁代码”技巧将显著提高你的生产力
 
-> 原文：[https://www.kdnuggets.com/2018/10/5-clean-code-tips-dramatically-improve-productivity.html](https://www.kdnuggets.com/2018/10/5-clean-code-tips-dramatically-improve-productivity.html)
+> 原文：[`www.kdnuggets.com/2018/10/5-clean-code-tips-dramatically-improve-productivity.html`](https://www.kdnuggets.com/2018/10/5-clean-code-tips-dramatically-improve-productivity.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [注释](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 注释
 
-![Header image](../Images/ab00e67ab5eb926a175bae5a4420ce63.png)
+![Header image](img/ab00e67ab5eb926a175bae5a4420ce63.png)
 
 高质量的代码。很多人谈论这个，但很少有人真正做到这一点。
 
@@ -30,11 +30,11 @@
 
 ### **类和函数应该小且遵守单一职责原则（SRP）**
 
-小的类和函数使代码的可读性大约提高了9832741892374倍……
+小的类和函数使代码的可读性大约提高了 9832741892374 倍……
 
 但说真的，它们真的很重要。首先，它们允许非常独立的单元测试。如果你测试的代码片段很小，那么在测试或部署过程中出现的任何问题都很容易追踪和调试。小的类和函数也有助于提高可读性。与其有一个包含许多循环和变量的大块代码，不如将其减少到一个运行多个*较小*函数的函数。然后你可以根据这些函数的功能给它们命名，结果就是人类可读的代码！
 
-SRP带来类似的好处。一个职责意味着你只需测试少量边缘情况，这些情况相对容易调试。此外，命名函数也很简单，因为它具有现实意义。由于它只有一个单一目的，所以它的名称将直接与其目的相关，而不是尝试给一个试图完成多种不同任务的函数命名。
+SRP 带来类似的好处。一个职责意味着你只需测试少量边缘情况，这些情况相对容易调试。此外，命名函数也很简单，因为它具有现实意义。由于它只有一个单一目的，所以它的名称将直接与其目的相关，而不是尝试给一个试图完成多种不同任务的函数命名。
 
 ### 捕获并处理异常，即使你觉得不需要这样做。
 
@@ -74,21 +74,21 @@ SRP带来类似的好处。一个职责意味着你只需测试少量边缘情�
 
 **相关：**
 
-+   [使用 Python 和代码创建的 5 种快速简易数据可视化](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   使用 Python 和代码创建的 5 种快速简易数据可视化
 
-+   [数据科学家需要了解的 5 种聚类算法](/2018/06/5-clustering-algorithms-data-scientists-need-know.html)
++   数据科学家需要了解的 5 种聚类算法
 
-+   [为回归问题选择最佳机器学习算法](/2018/08/selecting-best-machine-learning-algorithm-regression-problem.html)
++   为回归问题选择最佳机器学习算法
 
 * * *
 
 ## 我们的 3 大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速你的网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 

@@ -1,22 +1,22 @@
 # 帮助准确确定分析工程项目范围的四个问题
 
-> 原文：[https://www.kdnuggets.com/2019/10/four-questions-scope-analytics-engineering-project.html](https://www.kdnuggets.com/2019/10/four-questions-scope-analytics-engineering-project.html)
+> 原文：[`www.kdnuggets.com/2019/10/four-questions-scope-analytics-engineering-project.html`](https://www.kdnuggets.com/2019/10/four-questions-scope-analytics-engineering-project.html)
 
-[评论](#comments)
+评论
 
 **由 [Tristan Handy](https://twitter.com/jthandy)，Fishtown Analytics 创始人兼首席执行官**。
 
-![](../Images/c146259e897cff471b4a8235b3db6b2b.png)
+![](img/c146259e897cff471b4a8235b3db6b2b.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT。
 
 * * *
 
@@ -58,19 +58,19 @@
 
 根据[Kimball](https://www.kimballgroup.com/2007/07/keep-to-the-grain-in-dimensional-modeling/)，重要的是“坚持使用与原始来源和收集过程紧密相关的丰富、表达性强的原子级数据。” 我完全同意：细粒度数据给你更多的*选择*，而汇总数据则有限制。
 
-实践中最常见的一个例子是Google Analytics通过API导出的数据与Google Analytics 360自动加载到Bigquery中的数据之间的差异。通过API，GA只会提供汇总指标，而GA 360会将每一个会话和每一个事件导出到Bigquery中。汇总数据仅在创建极高层次的分析时有用，例如页面浏览量或独立访客的趋势线。利用细粒度数据，你可以回答任何问题——多触点归因、漏斗分析、A/B测试等。
+实践中最常见的一个例子是 Google Analytics 通过 API 导出的数据与 Google Analytics 360 自动加载到 Bigquery 中的数据之间的差异。通过 API，GA 只会提供汇总指标，而 GA 360 会将每一个会话和每一个事件导出到 Bigquery 中。汇总数据仅在创建极高层次的分析时有用，例如页面浏览量或独立访客的趋势线。利用细粒度数据，你可以回答任何问题——多触点归因、漏斗分析、A/B 测试等。
 
 理想情况下，你希望能访问来源数据系统中绝对最细粒度的数据。在这个早期阶段，你还不知道将来会被要求调查的所有后续问题，你希望能够跟踪任何可能的线索。即使你的顶层问题可以通过汇总导出得到答案，你的后续问题几乎肯定无法回答。
 
 实际上了解你所交互的数据源系统非常重要。
 
-+   **如果是SaaS产品**，阅读API文档。API会提供什么数据？好的API会提供你所需的所有对象；*优秀*的API会在这些对象上提供变更跟踪。例如，Salesforce API会提供一个包含所有机会及其状态变化的历史表。这表明，机会历史表对Salesforce管道报告的一个大部分至关重要。
++   **如果是 SaaS 产品**，阅读 API 文档。API 会提供什么数据？好的 API 会提供你所需的所有对象；*优秀*的 API 会在这些对象上提供变更跟踪。例如，Salesforce API 会提供一个包含所有机会及其状态变化的历史表。这表明，机会历史表对 Salesforce 管道报告的一个大部分至关重要。
 
 +   **如果是内部产品数据库**，请阅读所有可用的内部文档或与有经验的工程师坐下来了解产品中存储的数据。
 
 总体来说，你离事件越近，情况就越好。如果你拥有一个系统的所有状态变更，你总是可以在任何给定时间点重建该状态——这是一种非常强大的状态。例如，你实际需要的唯一 Stripe API 端点是事件端点：从那个单一端点，你可以在任何时间点推导出所有其他端点的输出。你可以用类似的方式使用 Mailchimp 的事件表来分析电子邮件营销表现。
 
-幸运的是，大多数 Stitch 和 Fivetran 集成默认会提取最大粒度的数据——这两个产品都是为现代分析栈构建的，旨在给予你完全的控制。然而，还是需要自己进行检查。前不久，我在与客户制定销售管道报告的计划时，发现Stitch Close.io集成（这是社区支持的）不包含机会历史端点。这显著改变了项目的范围，因为我们实际上无法在不将该额外端点添加到集成中的情况下进行所需的分析。最好在一开始就发现这个问题。
+幸运的是，大多数 Stitch 和 Fivetran 集成默认会提取最大粒度的数据——这两个产品都是为现代分析栈构建的，旨在给予你完全的控制。然而，还是需要自己进行检查。前不久，我在与客户制定销售管道报告的计划时，发现 Stitch Close.io 集成（这是社区支持的）不包含机会历史端点。这显著改变了项目的范围，因为我们实际上无法在不将该额外端点添加到集成中的情况下进行所需的分析。最好在一开始就发现这个问题。
 
 ### 3\. 这个数据集以前用过吗？
 
@@ -80,7 +80,7 @@
 
 +   **意外的加载行为。**有时，加载发生的方式是你意想不到的。例如，Stitch 将许多它称之为“报告表”的表作为不可变日志进行加载，然后提供如何从这些表中查询的具体指示。如果你不阅读它们的指示，而是直接开始编写查询，你会得到令人困惑的错误数据。
 
-这两种类型的错误都可以通过在建立关键任务分析之前对新数据集进行*数据审计*来捕捉。审计数据集究竟意味着什么？对我们来说，这意味着在表格上生成直观的指标，并将这些指标与另一个系统（通常是数据提取自的系统）中的输出进行比较。例如，我们经常计算订单和收入，并将这些指标与我们在Shopify中本地获得的结果进行比较。这些指标计算起来非常简单，如果数字匹配，你可以立即对数据集的状态有很高的信心。
+这两种类型的错误都可以通过在建立关键任务分析之前对新数据集进行*数据审计*来捕捉。审计数据集究竟意味着什么？对我们来说，这意味着在表格上生成直观的指标，并将这些指标与另一个系统（通常是数据提取自的系统）中的输出进行比较。例如，我们经常计算订单和收入，并将这些指标与我们在 Shopify 中本地获得的结果进行比较。这些指标计算起来非常简单，如果数字匹配，你可以立即对数据集的状态有很高的信心。
 
 原始数据的问题通常是跨切的：它们会影响表中的所有记录或某个日期范围内的所有记录。如果你审核 2-3 个指标，你通常可以对数据质量感到相当满意。
 
@@ -106,21 +106,21 @@
 
 +   你想跟踪整个漏斗中的客户获取成本（CAC），从广告支出开始。但当你整合来自各种广告来源的数据时，你意识到市场团队没有在他们使用的链接中添加 URL 参数！没有这些参数，你就无法将来自你仓库其余部分的数据与广告成本数据连接起来。
 
-这种情况*经常*发生，知道在哪里寻找问题至关重要。如果两个系统之间缺少一个密钥，可能会使整个分析项目陷入停滞，因为通常a) 添加密钥涉及从组织的其他部分引入利益相关者，b) 没有办法追溯获取数据。
+这种情况*经常*发生，知道在哪里寻找问题至关重要。如果两个系统之间缺少一个密钥，可能会使整个分析项目陷入停滞，因为通常 a) 添加密钥涉及从组织的其他部分引入利益相关者，b) 没有办法追溯获取数据。
 
 确保在深入之前检查你的密钥。如果缺少密钥，请与利益相关者合作创建它们。这种“过程仪表化”是优秀分析工程师的关键部分：你不能总是指望业务流程自然输出所需的数据，有时你需要卷起袖子确保数据被收集。
 
 ### 在深入之前了解答案
 
-作为顾问，我必须有一个强有力的流程：如果我对一个迭代范围估算错误，这可能意味着接下来的两周我将没有足够的睡眠。或者这可能意味着我们在项目上亏损——风险是真实的。这就是为什么我（以及Fishtown的每个人）如此专注于精确范围估算。
+作为顾问，我必须有一个强有力的流程：如果我对一个迭代范围估算错误，这可能意味着接下来的两周我将没有足够的睡眠。或者这可能意味着我们在项目上亏损——风险是真实的。这就是为什么我（以及 Fishtown 的每个人）如此专注于精确范围估算。
 
-在内部数据团队中，风险同样很高，但反馈通常不如外部那样明确或即时。你的利益相关者会注意到如果你持续错过截止日期或未能交付关键结果，*他们可能不会直接告诉你*。给同事直接反馈往往很困难——你上次说“你们团队错过了那个截止日期导致我错过了季度承诺的OKR，我很生气”是什么时候？
+在内部数据团队中，风险同样很高，但反馈通常不如外部那样明确或即时。你的利益相关者会注意到如果你持续错过截止日期或未能交付关键结果，*他们可能不会直接告诉你*。给同事直接反馈往往很困难——你上次说“你们团队错过了那个截止日期导致我错过了季度承诺的 OKR，我很生气”是什么时候？
 
 即使没有明确说明，数据团队一致未能交付可预测的结果也会损害信任，从而影响团队对更大组织的影响力。通过在项目范围确定阶段识别问题，并与利益相关者沟通你的方法的局限性，避免这种结果。
 
 [原文](https://blog.getdbt.com/4-questions-to-help-you-more-accurately-scope-analytics-engineering-projects/)。经许可转载。
 
-**简介：** [Tristan Handy](https://twitter.com/jthandy)目前正在构建Fishtown Analytics，以帮助获得风险投资的公司通过构建工具来实施先进的分析，从而促进一种有主见的分析工作流程。
+**简介：** [Tristan Handy](https://twitter.com/jthandy)目前正在构建 Fishtown Analytics，以帮助获得风险投资的公司通过构建工具来实施先进的分析，从而促进一种有主见的分析工作流程。
 
 **相关：**
 
@@ -138,8 +138,8 @@
 
 +   [数据分析：四种数据分析方法及其有效应用](https://www.kdnuggets.com/2023/04/data-analytics-four-approaches-analyzing-data-effectively.html)
 
-+   [四周掌握Python：路线图](https://www.kdnuggets.com/2023/02/learning-python-four-weeks-roadmap.html)
++   [四周掌握 Python：路线图](https://www.kdnuggets.com/2023/02/learning-python-four-weeks-roadmap.html)
 
 +   [掌握数据工程的项目创意](https://www.kdnuggets.com/project-ideas-to-master-data-engineering)
 
-+   [7个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)
++   [7 个数据分析面试问题及答案](https://www.kdnuggets.com/2022/09/7-data-analytics-interview-questions-answers.html)

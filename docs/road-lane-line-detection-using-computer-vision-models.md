@@ -1,8 +1,8 @@
 # 使用计算机视觉模型进行道路车道线检测
 
-> 原文：[https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html/2](https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html/2)
+> 原文：[`www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html/2`](https://www.kdnuggets.com/2017/07/road-lane-line-detection-using-computer-vision-models.html/2)
 
-![](../Images/ea9c916ec7097bd41c50b754c209edfd.png)
+![](img/ea9c916ec7097bd41c50b754c209edfd.png)
 
 ***图. 霍夫变换识别图像中的车道线***
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 工作
 
 * * *
 
@@ -96,7 +96,7 @@ def draw_lines(img, lines, color=[255, 0, 0], thickness=2):
 ---------------------------------------------------------------------------
 ```
 
-![](../Images/16dc937a2130155cb07452636d69d1b1.png)
+![](img/16dc937a2130155cb07452636d69d1b1.png)
 
 ***图. 外推车道线***
 
@@ -132,7 +132,7 @@ colored_image = weighted_img(houged, image)
 ---------------------------------------------------------------------------
 ```
 
-![](../Images/33819c112302ac07f6491d7a0c59d324.png)
+![](img/33819c112302ac07f6491d7a0c59d324.png)
 
 ***图. 叠加在输入图像上的车道线***
 
@@ -200,26 +200,26 @@ white_clip = clip1.fl_image(process_image)
 
 [原文](https://github.com/vijay120/KDNuggets/blob/master/2016-12-04-detecting-car-lane-lines-using-computer-vision.md)。经许可转载。
 
-**个人简介：** [Vijay Ramakrishnan](https://www.linkedin.com/in/viramakrishnan/) 是Mindmeld Inc的机器学习工程师，该公司是一家Cisco于2017年收购的对话AI公司。曾担任Qualcomm的项目经理和Google的数据工程师。喜欢扩展机器学习系统、开发自动驾驶技术和对话AI产品。
+**个人简介：** [Vijay Ramakrishnan](https://www.linkedin.com/in/viramakrishnan/) 是 Mindmeld Inc 的机器学习工程师，该公司是一家 Cisco 于 2017 年收购的对话 AI 公司。曾担任 Qualcomm 的项目经理和 Google 的数据工程师。喜欢扩展机器学习系统、开发自动驾驶技术和对话 AI 产品。
 
 **相关内容：**
 
-+   [理解计算机视觉的7个步骤](/2016/08/seven-steps-understanding-computer-vision.html)
++   理解计算机视觉的 7 个步骤
 
-+   [漫画：史上首个自动驾驶深度学习烧烤架](/2017/07/cartoon-self-driving-grill.html)
++   漫画：史上首个自动驾驶深度学习烧烤架
 
-+   [获取自动驾驶车辆入门的5个免费资源](/2017/07/5-free-resources-getting-started-self-driving-vehicles.html)
++   获取自动驾驶车辆入门的 5 个免费资源
 
 ### 更多相关话题
 
-+   [DINOv2：Meta AI的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
++   [DINOv2：Meta AI 的自监督计算机视觉模型](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
 
-+   [TensorFlow用于计算机视觉 - 转移学习变得简单](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 用于计算机视觉 - 转移学习变得简单](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
-+   [探索计算机视觉的世界：介绍MLM的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
++   [探索计算机视觉的世界：介绍 MLM 的最新…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
 
-+   [计算机视觉的5个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
++   [计算机视觉的 5 个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
 
-+   [关于数据管理和其重要性你需要知道的6件事…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理和其重要性你需要知道的 6 件事…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets新闻 2022年3月9日：5步构建机器学习Web应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：5 步构建机器学习 Web 应用](https://www.kdnuggets.com/2022/n10.html)

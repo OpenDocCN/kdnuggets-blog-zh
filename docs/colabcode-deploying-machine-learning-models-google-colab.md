@@ -1,12 +1,12 @@
 # ColabCode：从 Google Colab 部署机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2021/07/colabcode-deploying-machine-learning-models-google-colab.html](https://www.kdnuggets.com/2021/07/colabcode-deploying-machine-learning-models-google-colab.html)
+> 原文：[`www.kdnuggets.com/2021/07/colabcode-deploying-machine-learning-models-google-colab.html`](https://www.kdnuggets.com/2021/07/colabcode-deploying-machine-learning-models-google-colab.html)
 
-[评论](#comments)
+评论
 
 **作者 [Kaustubh Gupta](https://www.linkedin.com/in/kaustubh-gupta/)，Python 开发者**
 
-![](../Images/913a9bd8496fbc48e89ddc7abc34c8cb.png)
+![](img/913a9bd8496fbc48e89ddc7abc34c8cb.png)
 
 照片由 [Niclas Illg](https://unsplash.com/@nicklbaert?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -78,7 +78,7 @@ server.run_app(app=app)
 
 就这样！你将获得一个 ngrok URL，可以与社区、团队或任何人分享。该链接将在你终止单元格进程后立即过期，如果你不终止，Google Colab 会在一段时间后终止它。下面展示了这个过程的示例 GIF：
 
-![](../Images/ccd77565013f6a536b44e41de4fe72ee.png)
+![](img/ccd77565013f6a536b44e41de4fe72ee.png)
 
 作者提供的 GIF
 
@@ -97,7 +97,7 @@ ColabCode()
 
 你将看到一个 ngrok URL 提示，加载完成后，你将会看到类似于以下的 VS Code 运行在你的网页浏览器中：
 
-![](../Images/18aa268c74ef511ed231ae8d385a4adc.png)
+![](img/18aa268c74ef511ed231ae8d385a4adc.png)
 
 作者提供的图片
 
@@ -110,7 +110,7 @@ ColabCode(code=False, lab=True)
 
 你将获得一个 URL 和一个用于服务器身份验证的令牌。输入令牌并点击登录，将会看到类似于以下的屏幕：
 
-![](../Images/1479a9c7c69c006a302cf9379faa7f59.png)
+![](img/1479a9c7c69c006a302cf9379faa7f59.png)
 
 作者提供的图片
 
@@ -146,11 +146,11 @@ JavaScript 等效的 Python 脚本
 
 **相关：**
 
-+   [如何通过 API 创建和部署简单的情感分析应用](/2021/06/create-deploy-sentiment-analysis-app-api.html)
++   如何通过 API 创建和部署简单的情感分析应用
 
-+   [多语言 CLIP 与 Huggingface + PyTorch Lightning](/2021/03/multilingual-clip--huggingface-pytorch-lightning.html)
++   多语言 CLIP 与 Huggingface + PyTorch Lightning
 
-+   [何时重新训练机器学习模型？运行这 5 个检查以决定时间表](/2021/07/retrain-machine-learning-model-5-checks-decide-schedule.html)
++   何时重新训练机器学习模型？运行这 5 个检查以决定时间表
 
 ### 更多相关话题
 

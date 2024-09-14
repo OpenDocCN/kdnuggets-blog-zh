@@ -1,36 +1,36 @@
-# DINOv2：Meta AI的自监督计算机视觉模型
+# DINOv2：Meta AI 的自监督计算机视觉模型
 
-> 原文：[https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
+> 原文：[`www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html`](https://www.kdnuggets.com/2023/05/dinov2-selfsupervised-computer-vision-models-meta-ai.html)
 
-![DINOv2：Meta AI的自监督计算机视觉模型](../Images/4aed096f2f8f55aecaf8fd2ae15116b7.png)
+![DINOv2：Meta AI 的自监督计算机视觉模型](img/4aed096f2f8f55aecaf8fd2ae15116b7.png)
 
-图片来自Bing图片创作者
+图片来自 Bing 图片创作者
 
-Meta AI刚刚发布了开源的**DINOv2模型**，这是第一个利用自监督学习来训练计算机视觉模型的方法。DINOv2模型实现了与该领域标准方法和模型相匹配甚至更优的结果。
+Meta AI 刚刚发布了开源的**DINOv2 模型**，这是第一个利用自监督学习来训练计算机视觉模型的方法。DINOv2 模型实现了与该领域标准方法和模型相匹配甚至更优的结果。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
-这些模型在无需微调的情况下取得了强大的性能，使其成为许多不同计算机视觉任务和应用的理想选择。由于自监督训练方法，DINOv2可以从各种图像和特征集合中学习，例如深度估计，而无需显式的训练。
+这些模型在无需微调的情况下取得了强大的性能，使其成为许多不同计算机视觉任务和应用的理想选择。由于自监督训练方法，DINOv2 可以从各种图像和特征集合中学习，例如深度估计，而无需显式的训练。
 
-![DINOv2：Meta AI的自监督计算机视觉模型](../Images/e00ff5643fe40dad69f9071451809fbf.png)
+![DINOv2：Meta AI 的自监督计算机视觉模型](img/e00ff5643fe40dad69f9071451809fbf.png)
 
-图1：DINOv2：Meta AI的自监督计算机视觉模型
+图 1：DINOv2：Meta AI 的自监督计算机视觉模型
 
 # 1\. 自监督学习的需求
 
 ## 1.1\. 无需微调
 
-自监督学习是一种强大的方法，用于在没有大量标记数据的情况下训练机器学习模型。DINOv2模型可以在图像语料库上进行训练，而不需要相关的元数据、特定的标签或图像标题。与几种最近的自监督学习方法不同，DinoV2模型不需要微调，因此能够为不同的计算机视觉应用提供高性能的特征。
+自监督学习是一种强大的方法，用于在没有大量标记数据的情况下训练机器学习模型。DINOv2 模型可以在图像语料库上进行训练，而不需要相关的元数据、特定的标签或图像标题。与几种最近的自监督学习方法不同，DinoV2 模型不需要微调，因此能够为不同的计算机视觉应用提供高性能的特征。
 
 ## 1.2\. 克服人工注释的局限性
 
@@ -38,7 +38,7 @@ Meta AI刚刚发布了开源的**DINOv2模型**，这是第一个利用自监督
 
 此外，对人工标签和注释的需求将限制我们收集数据以训练模型的数量。这在某些应用中变得更加困难，例如，注释细胞需要一定水平的人类专业知识，而这种专业知识在所需规模上无法获得。对细胞图像使用自监督训练方法，为基础模型的进一步发展打开了途径，从而改善了[生物发现](https://arxiv.org/pdf/2209.07819.pdf)。同样，类似的高级领域，如[动物密度估计](https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.sciencedirect.com%2Fscience%2Farticle%2Fabs%2Fpii%2FS1574954122001844&h=AT2tgMG2np9tKP9LiOPVXwDdkQAlcdDjdBj3xzNdDNvurZkHdzEwyCtKds5-08oeQcJISJklzVm6wKOElXMj9jnYGtK8GAmLPJtKJ4NNNF31w2aj0Nnl5hLcOrMZWWZpZyM)也适用。
 
-从DINO到DINOv2的过渡需要克服多个挑战，如
+从 DINO 到 DINOv2 的过渡需要克服多个挑战，如
 
 +   创建一个大型且经过整理的训练数据集
 
@@ -46,15 +46,15 @@ Meta AI刚刚发布了开源的**DINOv2模型**，这是第一个利用自监督
 
 +   设计一个有效的蒸馏流程。
 
-# 2\. 从DINO到DINOv2
+# 2\. 从 DINO 到 DINOv2
 
-![DINOv2: Meta AI的自监督计算机视觉模型](../Images/6fab47982db50fa2316c10a565e7eb3c.png)
+![DINOv2: Meta AI 的自监督计算机视觉模型](img/6fab47982db50fa2316c10a565e7eb3c.png)
 
-图2：DINO v1与v2在分割精度上的比较
+图 2：DINO v1 与 v2 在分割精度上的比较
 
 ## 2.1\. 创建一个大型、整理过的、多样化的图像数据集
 
-构建DINOv2的主要步骤之一是训练更大的架构和模型，以提升模型的性能。然而，更大的模型需要大量的数据集才能高效训练。由于没有满足要求的大型数据集，研究人员利用公开抓取的网络数据，建立了一个只选择有用数据的流程，如在[LASER](https://ai.facebook.com/blog/laser-multilingual-sentence-embeddings/)中所示。
+构建 DINOv2 的主要步骤之一是训练更大的架构和模型，以提升模型的性能。然而，更大的模型需要大量的数据集才能高效训练。由于没有满足要求的大型数据集，研究人员利用公开抓取的网络数据，建立了一个只选择有用数据的流程，如在[LASER](https://ai.facebook.com/blog/laser-multilingual-sentence-embeddings/)中所示。
 
 然而，为了能够使用这些数据集，需要完成两个主要任务：
 
@@ -62,7 +62,7 @@ Meta AI刚刚发布了开源的**DINOv2模型**，这是第一个利用自监督
 
 +   删除无关的图像
 
-由于这个任务可以手动完成，他们从大约25个第三方数据集中整理出了一组种子图像，并通过获取与这些种子图像紧密相关的图像来扩展它。这个方法使他们能够从12亿张图像中生成总共1.42亿张相关图像的数据集。
+由于这个任务可以手动完成，他们从大约 25 个第三方数据集中整理出了一组种子图像，并通过获取与这些种子图像紧密相关的图像来扩展它。这个方法使他们能够从 12 亿张图像中生成总共 1.42 亿张相关图像的数据集。
 
 ## 2.2\. 算法和技术改进
 
@@ -98,7 +98,7 @@ DINOv2 的训练过程整合了最新的混合精度和分布式训练实现，�
 
 代码由作者提供
 
-总结来说，Meta AI发布的DINOv2模型标志着一个重要的里程碑。DINOv2模型采用的自监督学习方法提供了一种强大的方式来训练机器学习模型，无需大量标记数据。通过在不需要精调的情况下实现高准确率，这些模型适用于各种计算机视觉任务和应用。此外，DINOv2可以从不同的图像集合中学习，并且可以从诸如深度估计等特征中学习，而无需明确的训练。DINOv2作为开源模型的可用性为研究人员和开发者探索计算机视觉任务和应用的新可能性打开了大门。
+总结来说，Meta AI 发布的 DINOv2 模型标志着一个重要的里程碑。DINOv2 模型采用的自监督学习方法提供了一种强大的方式来训练机器学习模型，无需大量标记数据。通过在不需要精调的情况下实现高准确率，这些模型适用于各种计算机视觉任务和应用。此外，DINOv2 可以从不同的图像集合中学习，并且可以从诸如深度估计等特征中学习，而无需明确的训练。DINOv2 作为开源模型的可用性为研究人员和开发者探索计算机视觉任务和应用的新可能性打开了大门。
 
 ## 参考资料
 
@@ -106,18 +106,18 @@ DINOv2 的训练过程整合了最新的混合精度和分布式训练实现，�
 
 +   [DINOv2：无监督学习鲁棒视觉特征](https://arxiv.org/abs/2304.07193)
 
-**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一位计算机视觉研究员和数据科学家。他的研究重点是为医疗保健应用开发实时计算机视觉算法。他还在市场营销、金融和医疗保健领域担任数据科学家超过3年。
+**[Youssef Rafaat](https://www.linkedin.com/in/youssef-hosni-b2960b135)** 是一位计算机视觉研究员和数据科学家。他的研究重点是为医疗保健应用开发实时计算机视觉算法。他还在市场营销、金融和医疗保健领域担任数据科学家超过 3 年。
 
 ### 更多相关话题
 
-+   [TensorFlow在计算机视觉中的应用 - 转移学习简化](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
++   [TensorFlow 在计算机视觉中的应用 - 转移学习简化](https://www.kdnuggets.com/2022/01/tensorflow-computer-vision-transfer-learning-made-easy.html)
 
-+   [探索计算机视觉的世界：介绍MLM最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
++   [探索计算机视觉的世界：介绍 MLM 最新的…](https://www.kdnuggets.com/2024/01/mlm-discover-the-world-of-computer-vision-ebook)
 
-+   [计算机视觉的5个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
++   [计算机视觉的 5 个应用](https://www.kdnuggets.com/2022/03/5-applications-computer-vision.html)
 
-+   [关于数据管理的6件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [关于数据管理的 6 件事及其重要性…](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [KDnuggets 新闻 2022年3月9日：5分钟内构建机器学习网络应用…](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：5 分钟内构建机器学习网络应用…](https://www.kdnuggets.com/2022/n10.html)
 
 +   [Meta 新的数据分析师专业认证已推出！](https://www.kdnuggets.com/metas-new-data-analyst-professional-certification-has-dropped)

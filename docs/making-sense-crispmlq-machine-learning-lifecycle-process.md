@@ -1,10 +1,10 @@
 # 机器学习生命周期
 
-> 原文：[https://www.kdnuggets.com/2022/06/making-sense-crispmlq-machine-learning-lifecycle-process.html](https://www.kdnuggets.com/2022/06/making-sense-crispmlq-machine-learning-lifecycle-process.html)
+> 原文：[`www.kdnuggets.com/2022/06/making-sense-crispmlq-machine-learning-lifecycle-process.html`](https://www.kdnuggets.com/2022/06/making-sense-crispmlq-machine-learning-lifecycle-process.html)
 
 构建和管理机器学习（ML）应用程序没有标准实践。因此，机器学习项目往往组织不善，缺乏可重复性，并且长期内容易完全失败。我们需要一个模型来帮助我们在整个机器学习生命周期中维持质量、可持续性、鲁棒性和成本管理。
 
-![解读 CRISP-ML(Q)：机器学习生命周期过程](../Images/e3ff09a2eb03c38b13452513554045f4.png)
+![解读 CRISP-ML(Q)：机器学习生命周期过程](img/e3ff09a2eb03c38b13452513554045f4.png)
 
 作者提供的图像 | 机器学习开发生命周期过程
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -38,7 +38,7 @@
 
 这些阶段需要不断的迭代和探索，以构建更好的解决方案。尽管框架中有一个顺序，但后期阶段的输出可以决定我们是否需要重新审视前期阶段。
 
-![各阶段的质量保证](../Images/8feed508da0dd5833fb6d8b5a3cd79fe.png)
+![各阶段的质量保证](img/8feed508da0dd5833fb6d8b5a3cd79fe.png)
 
 作者提供的图像 | 各阶段的质量保证
 
@@ -48,13 +48,13 @@
 
 # 业务和数据理解
 
-在开发过程开始时，我们需要确定项目的范围、成功标准和ML应用的可行性。之后，我们开始数据收集和质量验证的过程。这一过程漫长且具有挑战性。
+在开发过程开始时，我们需要确定项目的范围、成功标准和 ML 应用的可行性。之后，我们开始数据收集和质量验证的过程。这一过程漫长且具有挑战性。
 
 **范围：** 我们希望通过机器学习过程实现什么？是保留客户还是通过自动化减少运营成本。
 
 **成功标准：**我们必须定义清晰且可衡量的业务、机器学习（统计指标）和经济（KPI）成功指标。
 
-**可行性：**我们需要确保数据的可用性、ML应用的适用性、法律约束、稳健性、可扩展性、可解释性和资源需求。
+**可行性：**我们需要确保数据的可用性、ML 应用的适用性、法律约束、稳健性、可扩展性、可解释性和资源需求。
 
 **数据收集：** 收集数据，为可重复性进行版本控制，并确保不断获得真实和生成的数据。
 
@@ -94,7 +94,7 @@
 
 为了确保质量和可重复性，我们将存储和版本化模型元数据，如模型架构、训练和验证数据、超参数和环境描述。
 
-最后，我们将跟踪ML实验并创建ML管道，以建立可重复的训练过程。
+最后，我们将跟踪 ML 实验并创建 ML 管道，以建立可重复的训练过程。
 
 # 模型评估
 
@@ -112,7 +112,7 @@
 
 # 模型部署
 
-模型部署是一个将机器学习模型集成到现有系统中的阶段。模型可以部署在服务器、浏览器、软件和边缘设备上。模型的预测结果可以用于BI仪表板、API、Web应用程序和插件中。
+模型部署是一个将机器学习模型集成到现有系统中的阶段。模型可以部署在服务器、浏览器、软件和边缘设备上。模型的预测结果可以用于 BI 仪表板、API、Web 应用程序和插件中。
 
 **模型部署流程：**
 
@@ -136,35 +136,35 @@
 
 # 结论
 
-训练和验证模型只是机器学习应用的一小部分。将初始想法转化为现实涉及多个过程。在这篇文章中，我们了解了CRISP-ML(Q)及其如何强调风险评估和质量保证。
+训练和验证模型只是机器学习应用的一小部分。将初始想法转化为现实涉及多个过程。在这篇文章中，我们了解了 CRISP-ML(Q)及其如何强调风险评估和质量保证。
 
 我们首先定义业务目标，收集和清理数据，构建模型，在测试数据集上进行验证，然后将其部署到生产环境中。
 
 这个框架的关键组成部分是持续监控和维护。我们将监控数据、软件和硬件指标，以决定是否需要重新训练模型或升级系统。
 
-![机器学习生命周期](../Images/f6580ab430cb31b8f47197123fb71f47.png)
+![机器学习生命周期](img/f6580ab430cb31b8f47197123fb71f47.png)
 
 图片作者
 
-如果你对机器学习运维不太熟悉，想了解更多，可以阅读DataTalks.Club的免费[MLOps课程](/2022/06/learn-mlops-free-course.html)的评论。你将获得所有6个阶段的实践经验，并了解CRISP-ML的实际应用。
+如果你对机器学习运维不太熟悉，想了解更多，可以阅读 DataTalks.Club 的免费 MLOps 课程的评论。你将获得所有 6 个阶段的实践经验，并了解 CRISP-ML 的实际应用。
 
 ## 参考
 
-1.  [迈向CRISP-ML(Q)：带有质量保证方法论的机器学习过程模型 (arxiv.org)](https://arxiv.org/pdf/2003.05155.pdf)
+1.  [迈向 CRISP-ML(Q)：带有质量保证方法论的机器学习过程模型 (arxiv.org)](https://arxiv.org/pdf/2003.05155.pdf)
 
 1.  [CRISP-ML(Q) (ml-ops.org)](https://ml-ops.org/content/crisp-ml)
 
-1.  [文章评审：迈向CRISP-ML(Q)](https://laszlo.substack.com/p/article-review-towards-crisp-mlq?s=r)
+1.  [文章评审：迈向 CRISP-ML(Q)](https://laszlo.substack.com/p/article-review-towards-crisp-mlq?s=r)
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络开发一种人工智能产品，帮助面临心理健康问题的学生。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一名认证的数据科学专业人士，热衷于构建机器学习模型。目前，他专注于内容创作，并撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络开发一种人工智能产品，帮助面临心理健康问题的学生。
 
 ### 更多相关话题
 
-+   [优化和管理机器学习生命周期的十大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化和管理机器学习生命周期的十大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
 
-+   [每个机器学习工程师都应该掌握的5项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该掌握的 5 项机器学习技能……](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [KDnuggets新闻，12月14日：3个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程……](https://www.kdnuggets.com/2022/n48.html)
 
 +   [学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 

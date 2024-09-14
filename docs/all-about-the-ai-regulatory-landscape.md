@@ -1,8 +1,8 @@
 # 关于 AI 监管环境的所有信息
 
-> 原文：[https://www.kdnuggets.com/all-about-the-ai-regulatory-landscape](https://www.kdnuggets.com/all-about-the-ai-regulatory-landscape)
+> 原文：[`www.kdnuggets.com/all-about-the-ai-regulatory-landscape`](https://www.kdnuggets.com/all-about-the-ai-regulatory-landscape)
 
-![关于 AI 监管环境的所有信息](../Images/d5a70b3e996280948672c6801052a44a.png)
+![关于 AI 监管环境的所有信息](img/d5a70b3e996280948672c6801052a44a.png)
 
 图片来自 Canva
 
@@ -12,11 +12,11 @@ AI 正在以加速的速度发展，尽管可能性令人惊叹，但伴随而�
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -36,7 +36,7 @@ AI 正在以加速的速度发展，尽管可能性令人惊叹，但伴随而�
 
 这引导我们讨论欧盟 (EU) AI 法案——这一历史性举措涵盖了一整套规则，旨在促进值得信赖的 AI。
 
-![关于 AI 监管环境的所有信息](../Images/bb9be4457ae5b9f0f572acd736368043.png)
+![关于 AI 监管环境的所有信息](img/bb9be4457ae5b9f0f572acd736368043.png)
 
 图片来自 Canva
 
@@ -46,7 +46,7 @@ AI 正在以加速的速度发展，尽管可能性令人惊叹，但伴随而�
 
 ### 时间线
 
-为了论证为何制定法规需要较长时间，我们来看一下《人工智能法案》的时间线，该法案首次由欧盟委员会于2021年4月提出，随后在2022年12月被欧盟理事会采纳。三大立法机构——欧盟委员会、理事会和议会的三方会谈已于2024年3月完成，预计《法案》将于2024年5月生效。
+为了论证为何制定法规需要较长时间，我们来看一下《人工智能法案》的时间线，该法案首次由欧盟委员会于 2021 年 4 月提出，随后在 2022 年 12 月被欧盟理事会采纳。三大立法机构——欧盟委员会、理事会和议会的三方会谈已于 2024 年 3 月完成，预计《法案》将于 2024 年 5 月生效。
 
 ### 关切谁？
 
@@ -82,14 +82,14 @@ AI 正在以加速的速度发展，尽管可能性令人惊叹，但伴随而�
 
 ### 更多相关主题
 
-+   [数据掩码：确保GDPR和其他监管合规性的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
++   [数据掩码：确保 GDPR 和其他监管合规性的核心](https://www.kdnuggets.com/2023/05/data-masking-core-ensuring-gdpr-regulatory-compliance-strategies.html)
 
-+   [8篇创新的BERT知识蒸馏论文改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
++   [8 篇创新的 BERT 知识蒸馏论文改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
 
-+   [如何使用AIOps管理复杂的IT环境](https://www.kdnuggets.com/2022/05/manage-complex-landscape-aiops.html)
++   [如何使用 AIOps 管理复杂的 IT 环境](https://www.kdnuggets.com/2022/05/manage-complex-landscape-aiops.html)
 
 +   [首个机器学习价值链景观](https://www.kdnuggets.com/2022/10/first-ml-value-chain-landscape-sequence.html)
 
-+   [AI驱动世界中的数据工程景观](https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html)
++   [AI 驱动世界中的数据工程景观](https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html)
 
 +   [数据景观的演变](https://www.kdnuggets.com/2023/06/evolution-data-landscape.html)

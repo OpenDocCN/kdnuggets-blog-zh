@@ -1,8 +1,8 @@
 # 使用 Scikit-Learn 的主成分分析（PCA）
 
-> 原文：[https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
+> 原文：[`www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html`](https://www.kdnuggets.com/2023/05/principal-component-analysis-pca-scikitlearn.html)
 
-![主成分分析（PCA）与 Scikit-Learn](../Images/6ada0542366997aba9e0f4fd17cb4e29.png)
+![主成分分析（PCA）与 Scikit-Learn](img/6ada0542366997aba9e0f4fd17cb4e29.png)
 
 图片作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -38,15 +38,15 @@
 
 如果特征均值为零，则协方差矩阵为 X.T X。这里，X.T 是矩阵 X 的转置。如果特征最初不都是零均值，我们可以从每一列的每个条目中减去该列的均值，然后计算协方差矩阵。可以简单地看出，协方差矩阵是一个**num_features**阶的方阵。
 
-![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/b0e66c9e00d376e00349327e28a9a6da.png)
+![使用 Scikit-Learn 的主成分分析 (PCA)](img/b0e66c9e00d376e00349327e28a9a6da.png)
 
 作者图片
 
-前`k`个主成分是对应于*k个最大特征值*的*特征向量*。
+前`k`个主成分是对应于*k 个最大特征值*的*特征向量*。
 
 因此，PCA 的步骤可以总结如下：
 
-![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/f35220082c4d4abe69a4f216416d5acf.png)
+![使用 Scikit-Learn 的主成分分析 (PCA)](img/f35220082c4d4abe69a4f216416d5acf.png)
 
 作者图片
 
@@ -64,15 +64,15 @@ X.T X = D Λ D.T
 
 因此，X 的协方差矩阵的 SVD 表示为：
 
-![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/7dc90d17b68d09a19669fea36b87f4b8.png)
+![使用 Scikit-Learn 的主成分分析 (PCA)](img/7dc90d17b68d09a19669fea36b87f4b8.png)
 
 比较这两种矩阵分解的等效性：
 
-![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/51544d8bf32a2031dd8b91a03f1625b2.png)
+![使用 Scikit-Learn 的主成分分析 (PCA)](img/51544d8bf32a2031dd8b91a03f1625b2.png)
 
 我们有以下内容：
 
-![使用 Scikit-Learn 的主成分分析 (PCA)](../Images/85586a8362860c0358432f10e3217dba.png)
+![使用 Scikit-Learn 的主成分分析 (PCA)](img/85586a8362860c0358432f10e3217dba.png)
 
 计算矩阵的 SVD 有计算效率高的算法。scikit-learn 实现的 PCA 在内部也使用 SVD 来计算主成分。
 
@@ -223,11 +223,11 @@ plt.title('n_components vs. Explained Variance Ratio')
 
 在这个例子中，我们看到使用 6 个主成分可以捕获输入数据集中超过 80% 的方差。
 
-![使用 Scikit-Learn 进行主成分分析 (PCA)](../Images/42f9e084065da5c276ff87857d172689.png)
+![使用 Scikit-Learn 进行主成分分析 (PCA)](img/42f9e084065da5c276ff87857d172689.png)
 
 # 结论
 
-希望你已经学会了如何使用 scikit-learn 库中的内置功能执行主成分分析。接下来，你可以尝试在你选择的数据集上实现 PCA。如果你在寻找好的数据集进行实验，可以查看这个[数据科学项目数据集网站列表](/2023/04/10-websites-get-amazing-data-data-science-projects.html)。
+希望你已经学会了如何使用 scikit-learn 库中的内置功能执行主成分分析。接下来，你可以尝试在你选择的数据集上实现 PCA。如果你在寻找好的数据集进行实验，可以查看这个数据科学项目数据集网站列表。
 
 # 进一步阅读
 

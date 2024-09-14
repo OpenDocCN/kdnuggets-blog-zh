@@ -1,10 +1,10 @@
-# 使用 Python 进行基础图像数据分析 – 第3部分
+# 使用 Python 进行基础图像数据分析 – 第三部分
 
-> 原文：[https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
+> 原文：[`www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html`](https://www.kdnuggets.com/2018/09/image-data-analysis-python-p3.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Python 图像分析图 1](../Images/83d60005fe08b263cf8c69bbe8998971.png)
+![Python 图像分析图 1](img/83d60005fe08b263cf8c69bbe8998971.png)
 
 之前我们已经看过一些在 Python 中非常基础的图像分析操作。在这最后一部分基础图像分析中，我们将讨论以下一些内容。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 我原本想将这个系列分成两部分，但由于内容的吸引力和多样性，我不得不将其拆分成太多部分。然而，您可以在我的主页上找到整个系列的两部分，链接如下。
 
-**查找完整系列：** [**第1部分**](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)**,** [**第2部分**](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html) **所有源代码：** [**GitHub-图像处理-Python**](https://github.com/iphton/Image-Processing-in-Python)
+**查找完整系列：** [**第一部分**](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)**,** [**第二部分**](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html) **所有源代码：** [**GitHub-图像处理-Python**](https://github.com/iphton/Image-Processing-in-Python)
 
 如果你不想跳转，请继续在这里阅读。在上一篇文章中，我们讨论了一些基本操作。为了跟上今天的内容，持续阅读是非常重要的。
 
@@ -61,7 +61,7 @@ plt.imshow(pic);
 plt.axis('off');
 ```
 
-![Python 图像分析图 2](../Images/f53b2232b2f9c48c4f39496b7094396b.png)
+![Python 图像分析图 2](img/f53b2232b2f9c48c4f39496b7094396b.png)
 
 ### 图像负片
 
@@ -71,9 +71,9 @@ plt.axis('off');
 S = T(r)
 ```
 
-其中r是输入图像的像素，s是输出图像的像素。T是一个变换函数，将每个r值映射到每个s值。
+其中 r 是输入图像的像素，s 是输出图像的像素。T 是一个变换函数，将每个 r 值映射到每个 s 值。
 
-负片变换，这是身份变换的反向。在负片变换中，输入图像的每个值从L−1中减去，并映射到输出图像上。
+负片变换，这是身份变换的反向。在负片变换中，输入图像的每个值从 L−1 中减去，并映射到输出图像上。
 
 在这种情况下，进行了以下转换：
 
@@ -93,7 +93,7 @@ plt.axis('off');
 
 ```
 
-![Python 图像分析图 3](../Images/5a34fa6e0801651033e3ff1d87292f9b.png)
+![Python 图像分析图 3](img/5a34fa6e0801651033e3ff1d87292f9b.png)
 
 ### 对数变换
 
@@ -103,11 +103,11 @@ plt.axis('off');
 s=c∗log(r+1)
 ```
 
-其中s和r是输出图像和输入图像的像素值，c是常数。对输入图像的每个像素值加上1，因为如果图像中有像素强度为0，则**log(0)**等于无穷大。因此，加1使得最小值至少为1。
+其中 s 和 r 是输出图像和输入图像的像素值，c 是常数。对输入图像的每个像素值加上 1，因为如果图像中有像素强度为 0，则**log(0)**等于无穷大。因此，加 1 使得最小值至少为 1。
 
 在对数变换过程中，图像中的暗像素相对于较高像素值被扩展。较高的像素值在对数变换中被压缩。这会导致以下图像增强效果。
 
-对数变换中的c值调整我们所寻求的增强类型。
+对数变换中的 c 值调整我们所寻求的增强类型。
 
 ```py
 
@@ -141,7 +141,7 @@ plt.axis('off');
 
 ```
 
-![Python 图像分析图 4](../Images/dd918a573ffe99b82543baa0d954bd8d.png)
+![Python 图像分析图 4](img/dd918a573ffe99b82543baa0d954bd8d.png)
 
 ### 伽玛校正
 
@@ -153,9 +153,9 @@ Vo  = V^(1/G)
 
 其中**Vi**是我们的输入图像，**G**是我们的伽玛值。输出图像**Vo**随后被缩放回范围**0-255**。
 
-伽玛值，**G < 1**有时称为**编码伽玛**，使用这种压缩幂律非线性进行编码的过程称为**伽玛压缩**；伽玛值< 1会将图像向光谱的较暗端移动。
+伽玛值，**G < 1**有时称为**编码伽玛**，使用这种压缩幂律非线性进行编码的过程称为**伽玛压缩**；伽玛值< 1 会将图像向光谱的较暗端移动。
 
-相反，伽玛值**G > 1**称为**解码伽玛**，应用扩展的幂律非线性称为**伽玛扩展**。伽玛值> 1会使图像看起来更亮。伽玛值**G = 1**不会对输入图像产生影响：
+相反，伽玛值**G > 1**称为**解码伽玛**，应用扩展的幂律非线性称为**伽玛扩展**。伽玛值> 1 会使图像看起来更亮。伽玛值**G = 1**不会对输入图像产生影响：
 
 ```py
 
@@ -173,7 +173,7 @@ plt.axis('off');
 
 ```
 
-![Python 图像分析图 5](../Images/866cd402d5d49c45b3d747564db2fca5.png)
+![Python 图像分析图 5](img/866cd402d5d49c45b3d747564db2fca5.png)
 
 ### **伽玛校正的原因**
 
@@ -199,7 +199,7 @@ plt.axis('off');
 
 现在，让我们将过滤器移动到左上角。当过滤器滑动或**卷积**输入图像时，它会将过滤器中的值与图像的原始像素值相乘（即计算逐元素乘法）。这些乘法结果会被求和。因此我们得到一个单一的数字。请记住，这个数字仅代表过滤器在图像的左上角时的值。现在，我们对输入体积的每个位置重复这个过程。下一步是将过滤器向右移动一个**步幅**或**步长** 1 单位，再向右移动一个**步幅** 1，依此类推。输入体积上的每个唯一位置都会产生一个数字。我们也可以选择步幅或步长为 2 或更多，但必须注意它是否适合输入图像。
 
-![Python 图像分析图 6](../Images/888bb82ac03be1227141c2fba72b3c81.png)
+![Python 图像分析图 6](img/888bb82ac03be1227141c2fba72b3c81.png)
 
 在滑动过滤器覆盖所有位置后，我们会发现，剩下的是一个 30 x 30 x 1 的数字数组，我们称之为**激活图**或**特征图**。我们得到 30 x 30 数组的原因是 3 x 3 过滤器可以适配在 32 x 32 输入图像的 900 个不同位置。这 900 个数字被映射到 30 x 30 数组。我们可以通过以下步骤计算卷积后的图像：
 
@@ -217,7 +217,7 @@ Convolved: (N−F)/S+1
 
 让我们从视觉上看一下，
 
-![Python 图像分析图 7](../Images/3bc29603afbe93b6c007a8621ee94991.png)
+![Python 图像分析图 7](img/3bc29603afbe93b6c007a8621ee94991.png)
 
 此外，我们实际上使用了更多的过滤器而不是一个。然后我们的输出体积将是 28x28xn（其中 n 是**激活图**的数量）。
 
@@ -260,7 +260,7 @@ Wall time: 43.5 s
 
 ```
 
-![Python 图像分析图 8](../Images/694f2bde257965d4b73bb74db3b180aa.png)
+![Python 图像分析图 8](img/694f2bde257965d4b73bb74db3b180aa.png)
 
 请查看更多内容[这里](https://iphton.github.io/iphton.github.io/Image-Processing-in-Python-Part-2/#4-bullet)。我在其中深入讨论了各种类型的内核，并展示了它们的区别。
 
@@ -268,9 +268,9 @@ Wall time: 43.5 s
 
 **相关：**
 
-+   [基本图像数据分析使用 Numpy 和 OpenCV – 第 1 部分](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
++   [基本图像数据分析使用 Numpy 和 OpenCV – 第一部分](https://www.kdnuggets.com/2018/07/basic-image-data-analysis-numpy-opencv-p1.html)
 
-+   [Python 中的基本图像处理，第 2 部分](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html)
++   [Python 中的基本图像处理，第二部分](https://www.kdnuggets.com/2018/07/image-data-analysis-numpy-opencv-p2.html)
 
 +   [仅用 Numpy：使用 Numpy 实现 GAN 和 Adam 优化器](https://www.kdnuggets.com/2018/08/only-numpy-implementing-gans-adam-optimizer.html)
 
@@ -284,6 +284,6 @@ Wall time: 43.5 s
 
 +   [我如何使用 Grounding DINO 进行自动图像标记](https://www.kdnuggets.com/2023/05/automatic-image-labeling-grounding-dino.html)
 
-+   [如何使用 LangChain 实现 Agentic RAG：第 1 部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)
++   [如何使用 LangChain 实现 Agentic RAG：第一部分](https://www.kdnuggets.com/how-to-implement-agentic-rag-using-langchain-part-1)
 
 +   [数据科学中的 8 个基本统计概念](https://www.kdnuggets.com/2020/06/8-basic-statistics-concepts.html)

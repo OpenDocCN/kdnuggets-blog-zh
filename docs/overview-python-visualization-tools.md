@@ -1,6 +1,6 @@
 # Python 可视化工具概述
 
-> 原文：[https://www.kdnuggets.com/2015/11/overview-python-visualization-tools.html](https://www.kdnuggets.com/2015/11/overview-python-visualization-tools.html)
+> 原文：[`www.kdnuggets.com/2015/11/overview-python-visualization-tools.html`](https://www.kdnuggets.com/2015/11/overview-python-visualization-tools.html)
 
 **作者 [Chris Moffitt](http://pbpython.com/author/chris-moffitt.html)**。
 
@@ -68,7 +68,7 @@
 
 这里是其样子（截断以保持文章长度适中）：
 
-![Pandas image](../Images/9a85d90b9d744494b5e25628696021c3.png)
+![Pandas image](img/9a85d90b9d744494b5e25628696021c3.png)
 
 基本效果看起来非常好。理想情况下，我希望对 y 轴进行更多的格式化，但这需要进行一些 matplotlib 的操作。这是一个完全可以使用的可视化，但仅通过 pandas 很难进行更多的自定义。
 
@@ -84,7 +84,7 @@
 
 `sns.set_style("darkgrid") bar_plot = sns.barplot(x=budget["detail"],y=budget["amount"], palette="muted", x_order=budget["detail"].tolist()) plt.xticks(rotation=>90) plt.show()`
 
-![Pandas image](../Images/21b021e7e23ea41286f0a1bdd838c967.png)
+![Pandas image](img/21b021e7e23ea41286f0a1bdd838c967.png)
 
 如你所见，我不得不使用 matplotlib 旋转 x 轴标题，以便能够实际读取它们。在视觉上，显示效果很好。理想情况下，我希望格式化 y 轴上的刻度，但我无法在不使用 matplotlib 的 `plt.yticks` 的情况下做到这一点。
 
@@ -100,23 +100,23 @@
 
 `p = ggplot(budget, aes(x="detail",y="amount")) + \ geom_bar(stat="bar", labels=budget["detail"].tolist()) +\ ggtitle("MN Capital Budget - 2014") + \ xlab("Spending Detail") + \ ylab("Amount") + scale_y_continuous(labels='millions') + \ theme(axis_text_x=element_text(angle=>90)) print p`
 
-这似乎有点奇怪——特别是使用`print p`来显示图表。然而，我发现弄清楚这点相对简单。确实花了一些时间弄明白如何将文本旋转90度，以及如何排列x轴上的标签。我发现的最酷的功能是`scale_y_continous`，它使标签显示得更加美观。如果你想保存图像，使用`ggsave`很简单：
+这似乎有点奇怪——特别是使用`print p`来显示图表。然而，我发现弄清楚这点相对简单。确实花了一些时间弄明白如何将文本旋转 90 度，以及如何排列 x 轴上的标签。我发现的最酷的功能是`scale_y_continous`，它使标签显示得更加美观。如果你想保存图像，使用`ggsave`很简单：
 
 `ggsave(p, "mn-budget-capital-ggplot.png")`
 
 这是最终的图像。我知道这是一大片灰度。我本可以给它上色，但没有花时间去做。
 
-![Pandas 图像](../Images/07a6a2614bd0dd12f908e56d78acb594.png)
+![Pandas 图像](img/07a6a2614bd0dd12f908e56d78acb594.png)
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -124,9 +124,9 @@
 
 +   [机器学习的数据标注：市场概览、方法和工具](https://www.kdnuggets.com/2021/12/data-labeling-ml-overview-and-tools.html)
 
-+   [2023年前十名开源数据科学工具的比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
++   [2023 年前十名开源数据科学工具的比较概述](https://www.kdnuggets.com/a-comparative-overview-of-the-top-10-open-source-data-science-tools-in-2023)
 
-+   [5种SQL可视化工具推荐给数据工程师](https://www.kdnuggets.com/2023/02/5-sql-visualization-tools-data-engineers.html)
++   [5 种 SQL 可视化工具推荐给数据工程师](https://www.kdnuggets.com/2023/02/5-sql-visualization-tools-data-engineers.html)
 
 +   [文本摘要方法概述](https://www.kdnuggets.com/2019/01/approaches-text-summarization-overview.html)
 

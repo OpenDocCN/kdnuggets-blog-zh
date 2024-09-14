@@ -1,18 +1,18 @@
 # 初学者的十大机器学习算法
 
-> 原文：[https://www.kdnuggets.com/2017/10/top-10-machine-learning-algorithms-beginners.html](https://www.kdnuggets.com/2017/10/top-10-machine-learning-algorithms-beginners.html)
+> 原文：[`www.kdnuggets.com/2017/10/top-10-machine-learning-algorithms-beginners.html`](https://www.kdnuggets.com/2017/10/top-10-machine-learning-algorithms-beginners.html)
 
-![](../Images/c9c27633e28613cfa8923640c7a1149f.png)
+![](img/c9c27633e28613cfa8923640c7a1149f.png)
 
 ### I. 介绍
 
-对[机器学习算法](https://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html)的研究在《哈佛商业评论》[文章](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)称数据科学家为“21世纪最性感的职业”之后，获得了极大的关注。因此，为了帮助那些刚入门机器学习领域的人，我们决定重新编排我们极受欢迎的金牌博客[机器学习工程师需要了解的10种算法](/2016/08/10-algorithms-machine-learning-engineers.html)——尽管这篇文章面向的是初学者。
+对[机器学习算法](https://www.kdnuggets.com/2016/08/10-algorithms-machine-learning-engineers.html)的研究在《哈佛商业评论》[文章](https://hbr.org/2012/10/data-scientist-the-sexiest-job-of-the-21st-century)称数据科学家为“21 世纪最性感的职业”之后，获得了极大的关注。因此，为了帮助那些刚入门机器学习领域的人，我们决定重新编排我们极受欢迎的金牌博客机器学习工程师需要了解的 10 种算法——尽管这篇文章面向的是初学者。
 
 机器学习算法是能够从数据中学习并通过经验改进的算法，无需人工干预。学习任务可能包括学习将输入映射到输出的函数，学习无标记数据中的隐藏结构；或者是‘基于实例的学习’，在这种学习中，通过将新的实例（行）与存储在内存中的训练数据实例进行比较，为新的实例生成类别标签。‘基于实例的学习’不会从特定实例中创建抽象。
 
 ### II. 机器学习算法的类型
 
-机器学习算法有3种类型：
+机器学习算法有 3 种类型：
 
 **1\. 监督学习：**
 
@@ -26,9 +26,9 @@
 
 *b. 回归*：预测给定样本的结果，其中输出变量以实际值的形式出现。例子包括表示降雨量、人的身高的实际值标签。
 
-我们在本博客中讨论的前5种算法——线性回归、逻辑回归、CART、朴素贝叶斯、KNN是监督学习的例子。
+我们在本博客中讨论的前 5 种算法——线性回归、逻辑回归、CART、朴素贝叶斯、KNN 是监督学习的例子。
 
-集成学习是一种监督学习。它指的是将多个不同的弱机器学习模型的预测结果结合起来，以对新的样本进行预测。我们讨论的算法9-10——使用随机森林的袋装方法、使用XGBoost的提升方法就是集成技术的例子。
+集成学习是一种监督学习。它指的是将多个不同的弱机器学习模型的预测结果结合起来，以对新的样本进行预测。我们讨论的算法 9-10——使用随机森林的袋装方法、使用 XGBoost 的提升方法就是集成技术的例子。
 
 **2\. 无监督学习：**
 
@@ -36,13 +36,13 @@
 
 无监督学习问题可以分为两类：
 
-*a. 关联*：发现集合中项的共现概率。这在市场篮子分析中被广泛使用。例如：如果一个顾客购买了面包，他有80%的可能性也会购买鸡蛋。
+*a. 关联*：发现集合中项的共现概率。这在市场篮子分析中被广泛使用。例如：如果一个顾客购买了面包，他有 80%的可能性也会购买鸡蛋。
 
 *b. 聚类*：将样本分组，使得同一簇内的对象彼此之间的相似度高于与其他簇中的对象之间的相似度。
 
-*c. 降维*：顾名思义，降维意味着减少数据集中的变量数量，同时确保重要信息仍然被传达。降维可以通过特征提取方法和特征选择方法来完成。特征选择从原始变量中选择一个子集。特征提取则将数据从高维空间转换到低维空间。例如：PCA算法是一种特征提取方法。
+*c. 降维*：顾名思义，降维意味着减少数据集中的变量数量，同时确保重要信息仍然被传达。降维可以通过特征提取方法和特征选择方法来完成。特征选择从原始变量中选择一个子集。特征提取则将数据从高维空间转换到低维空间。例如：PCA 算法是一种特征提取方法。
 
-我们在这里讨论的算法6-8 - Apriori、K-means、PCA 是无监督学习的例子。
+我们在这里讨论的算法 6-8 - Apriori、K-means、PCA 是无监督学习的例子。
 
 **3\. 强化学习：**
 
@@ -52,9 +52,9 @@
 
 ### III. 量化机器学习算法的受欢迎程度
 
-调查论文[如这些](http://www.cs.uvm.edu/~icdm/algorithms/10Algorithms-08.pdf)已经量化了10种最受欢迎的数据挖掘算法。然而，这些列表是主观的，正如引用的论文所示，参与者的样本量非常狭窄，主要是数据挖掘的高级从业者。受访者包括ACM KDD创新奖和IEEE ICDM研究贡献奖的获奖者；KDD-06、ICDM’06和SDM’06的程序委员会成员；以及ICDM’06的145名与会者。
+调查论文[如这些](http://www.cs.uvm.edu/~icdm/algorithms/10Algorithms-08.pdf)已经量化了 10 种最受欢迎的数据挖掘算法。然而，这些列表是主观的，正如引用的论文所示，参与者的样本量非常狭窄，主要是数据挖掘的高级从业者。受访者包括 ACM KDD 创新奖和 IEEE ICDM 研究贡献奖的获奖者；KDD-06、ICDM’06 和 SDM’06 的程序委员会成员；以及 ICDM’06 的 145 名与会者。
 
-本博客中的前10种算法旨在为初学者提供帮助，主要是我在孟买大学计算机工程本科阶段从‘数据仓储与挖掘’（DWM）课程中学到的。这门课程是了解机器学习算法领域的绝佳入门。最后两种算法（集成方法）是根据它们在[Kaggle竞赛中获胜的普遍性](http://www.datasciencecentral.com/profiles/blogs/want-to-win-at-kaggle-pay-attention-to-your-ensembles)特别列出的。希望你喜欢这篇文章！
+本博客中的前 10 种算法旨在为初学者提供帮助，主要是我在孟买大学计算机工程本科阶段从‘数据仓储与挖掘’（DWM）课程中学到的。这门课程是了解机器学习算法领域的绝佳入门。最后两种算法（集成方法）是根据它们在[Kaggle 竞赛中获胜的普遍性](http://www.datasciencecentral.com/profiles/blogs/want-to-win-at-kaggle-pay-attention-to-your-ensembles)特别列出的。希望你喜欢这篇文章！
 
 ### IV. 监督学习算法
 
@@ -62,7 +62,7 @@
 
 在机器学习中，我们有一组输入变量（x），用于确定输出变量（y）。输入变量和输出变量之间存在一种关系。机器学习的目标是量化这种关系。
 
-![](../Images/a1ae8980334e4a697589004f968e799e.png)
+![](img/a1ae8980334e4a697589004f968e799e.png)
 
 图 1：线性回归表示为形式为 y = a + bx 的直线。[来源](http://bhagyeshvikani.blogspot.ca/2015/10/linear-regression.html) 在线性回归中，输入变量（x）和输出变量（y）之间的关系被表示为形式为 y = a + bx 的方程。因此，线性回归的目标是找出系数 a 和 b 的值。这里，a 是截距，b 是直线的斜率。
 
@@ -76,7 +76,7 @@
 
 在逻辑回归中，输出是默认类别的概率（与线性回归直接产生输出不同）。由于它是概率，输出范围在 0-1 之间。输出（y 值）是通过对 x 值进行对数转换，使用逻辑函数 h(x)= 1/ (1 + e^ -x) 得到的。然后应用阈值将这个概率强制转换为二分类。
 
-![](../Images/4c145ea1c19f29d1a5af2933df8d96f1.png)
+![](img/4c145ea1c19f29d1a5af2933df8d96f1.png)
 
 图 2：逻辑回归用于判断肿瘤是恶性还是良性。如果概率 h(x)>= 0.5，则分类为恶性。[来源](https://athemathmo.github.io/2016/03/07/rusty-machine.html) 在图 2 中，为了判断肿瘤是否恶性，默认变量为 y=1（肿瘤=恶性）；x 变量可以是肿瘤的测量值，比如肿瘤的大小。如图所示，逻辑函数将数据集中各种实例的 x 值转换到 0 到 1 的范围内。如果概率超过 0.5 的阈值（由水平线表示），则将肿瘤分类为恶性。
 
@@ -92,7 +92,7 @@
 
 图 3 中的决策树根据一个人的年龄和婚姻状况来分类其是否会购买跑车或小型货车。如果该人超过 30 岁且未婚，我们按以下方式走树：‘超过 30 岁？’ -> 是 -> ‘已婚？’ -> 否。因此，模型输出的是跑车。
 
-![](../Images/b6949b5859022506961fc0ced7a7b482.png)
+![](img/b6949b5859022506961fc0ced7a7b482.png)
 
 图 3：决策树的部分。 [来源](http://www.hypertextbookshop.com/dataminingbook/public_version/contents/chapters/chapter001/section002/green/page001.html)
 
@@ -114,7 +114,7 @@ where
 
 这个算法被称为‘naive’（朴素的），因为它假设所有变量相互独立，这在实际例子中是一个朴素的假设。
 
-![](../Images/f2dc03a423162be40bd2e9876237bb27.png)
+![](img/f2dc03a423162be40bd2e9876237bb27.png)
 
 图 4：使用朴素贝叶斯预测‘play’的状态，变量为‘weather’。以图 4 为例，如果天气 = ‘sunny’，结果是什么？
 
@@ -146,11 +146,11 @@ K 最近邻算法使用整个数据集作为训练集，而不是将数据集拆
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 

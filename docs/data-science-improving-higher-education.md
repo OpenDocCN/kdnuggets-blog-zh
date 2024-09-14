@@ -1,10 +1,10 @@
 # 数据科学如何改善高等教育
 
-> 原文：[https://www.kdnuggets.com/2018/11/data-science-improving-higher-education.html](https://www.kdnuggets.com/2018/11/data-science-improving-higher-education.html)
+> 原文：[`www.kdnuggets.com/2018/11/data-science-improving-higher-education.html`](https://www.kdnuggets.com/2018/11/data-science-improving-higher-education.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![图片](../Images/d776b5952b1118ff53b4f09aa0668369.png)
+![图片](img/d776b5952b1118ff53b4f09aa0668369.png)
 
 大数据为高等教育提供了巨大的机会。越来越多的高校以及政府正在使用数据科学来改进教育机构在招聘、学生互动和预算等方面的方式。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全领域的快速通道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加入网络安全领域的快速通道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -30,7 +30,7 @@
 
 费城的天普大学一直在使用数据来提高其毕业率。它发现那些收入适中并获得部分佩尔助学金的学生最有可能辍学，即使与那些获得全额佩尔助学金的最低收入学生相比也是如此。它还发现，拥有四年高中外语学习经历的学生较不容易辍学。
 
-使用这些数据，天普大学向处于风险中的学生提供了经济援助，并启动了帮助改善学生校园归属感的举措。该校的四年毕业率已从20%上升到44%，六年毕业率从59%上升到70%。
+使用这些数据，天普大学向处于风险中的学生提供了经济援助，并启动了帮助改善学生校园归属感的举措。该校的四年毕业率已从 20%上升到 44%，六年毕业率从 59%上升到 70%。
 
 ### **2\. 改进招聘策略**
 
@@ -38,7 +38,7 @@
 
 为了寻找潜在学生，许多学校会分析当前年份的学生特征，然后针对具有相似特质的高中生。学校还可以分析哪些学生毕业并取得了最成功的成绩，以确定哪些类型的人可能最适合该大学。
 
-例如，[圣路易斯大学意识到需要扩大其地理覆盖范围](https://www.theatlantic.com/education/archive/2017/04/how-colleges-find-their-students/522516/)，这是基于其学生通常来自的地区高中毕业生数量预计将下降。它使用了高中生在注册SAT或ACT时填写的大学偏好问卷中的信息。
+例如，[圣路易斯大学意识到需要扩大其地理覆盖范围](https://www.theatlantic.com/education/archive/2017/04/how-colleges-find-their-students/522516/)，这是基于其学生通常来自的地区高中毕业生数量预计将下降。它使用了高中生在注册 SAT 或 ACT 时填写的大学偏好问卷中的信息。
 
 它寻找那些适合该大学的学生，并表明他们愿意为上学而旅行。
 
@@ -46,7 +46,7 @@
 
 当学校追踪支出并努力计算各种投资的回报时，它们会生成大量的数据点，用于优化支出。通过结合来自多个学校的数据，国家教学成本与生产力研究，也称为德拉华成本研究，帮助学校发现更有价值的见解。
 
-[大约700所大学和学院参与](https://ire.udel.edu/descriptive-summary/)德拉华成本研究，该研究使学校能够将其提供一个小时的教学成本与其他机构的成本进行比较。它还提供了其他方面的数据，如教学负担以及常规教员进行的教学量。
+[大约 700 所大学和学院参与](https://ire.udel.edu/descriptive-summary/)德拉华成本研究，该研究使学校能够将其提供一个小时的教学成本与其他机构的成本进行比较。它还提供了其他方面的数据，如教学负担以及常规教员进行的教学量。
 
 德拉华成本研究项目允许参与的机构定义其同伴群体，以获取最符合其目标的比较。以这种清晰定义的方式访问个性化数据，[使信息更具实用性](https://www.watermarkinsights.com/blog/strategies-for-assessment-professionals-for-effective-data-sharing/)和可操作性。教育机构可以利用这些数据优化成本，提高与其他大学的竞争力。
 
@@ -78,22 +78,22 @@
 
 **相关:**
 
-+   [你是否应该无偿提供你的数据技能？](/2018/03/ever-volunteer-data-skills-free.html)
++   你是否应该无偿提供你的数据技能？
 
-+   [在两年内提高你的数据科学技能的8种方法](/2017/11/8-ways-improve-data-science-skills-2-years.html)
++   在两年内提高你的数据科学技能的 8 种方法
 
-+   [你在R中应该知道的7种简单数据可视化](https://www.kdnuggets.com/2018/06/7-simple-data-visualizations-should-know-r.html)
++   [你在 R 中应该知道的 7 种简单数据可视化](https://www.kdnuggets.com/2018/06/7-simple-data-visualizations-should-know-r.html)
 
 ### 更多相关内容
 
-+   [超越准确性：使用NLP测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
++   [超越准确性：使用 NLP 测试库评估和改进模型](https://www.kdnuggets.com/2023/04/john-snow-beyond-accuracy-nlp-test-library.html)
 
-+   [提高SQL查询性能的5个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
++   [提高 SQL 查询性能的 5 个技巧](https://www.kdnuggets.com/5-tips-for-improving-sql-query-performance)
 
-+   [2023年人工智能对STEM教育的影响的5种方式](https://www.kdnuggets.com/2023/04/5-ways-ai-impacting-stem-education-2023.html)
++   [2023 年人工智能对 STEM 教育的影响的 5 种方式](https://www.kdnuggets.com/2023/04/5-ways-ai-impacting-stem-education-2023.html)
 
 +   [人工智能教育差距及如何弥补](https://www.kdnuggets.com/2022/11/ai-education-gap-close.html)
 
-+   [教育中的ChatGPT：朋友还是敌人？](https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html)
++   [教育中的 ChatGPT：朋友还是敌人？](https://www.kdnuggets.com/2023/05/chatgpt-education-friend-foe.html)
 
 +   [停止学习数据科学以寻找目的，而是为了…寻找目的](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

@@ -1,12 +1,12 @@
 # 使用 Wav2Vec 2.0 进行语音转文本
 
-> 原文：[https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html](https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html)
+> 原文：[`www.kdnuggets.com/2021/03/speech-text-wav2vec.html`](https://www.kdnuggets.com/2021/03/speech-text-wav2vec.html)
 
-[评论](#comments)
+评论
 
 **由 [Dhilip Subramanian](https://medium.com/@sdhilip)，数据科学家和 AI 爱好者**
 
-![图示](../Images/f1afdce2c2ee8cce809cd1a6f89536a7.png)
+![图示](img/f1afdce2c2ee8cce809cd1a6f89536a7.png)
 
 来源于 [Wav2vec 2.0: 从原始音频学习语音结构](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)
 
@@ -130,9 +130,9 @@ print(transcription)
 
 ### 参考
 
-1.  [https://huggingface.co/transformers/model_doc/wav2vec2.html](https://huggingface.co/transformers/model_doc/wav2vec2.html)
+1.  [`huggingface.co/transformers/model_doc/wav2vec2.html`](https://huggingface.co/transformers/model_doc/wav2vec2.html)
 
-1.  [https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)
+1.  [`ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/`](https://ai.facebook.com/blog/wav2vec-20-learning-the-structure-of-speech-from-raw-audio/)
 
 **简介：[Dhilip Subramanian](https://medium.com/@sdhilip)** 是一名机械工程师，已完成分析学硕士学位。他在数据相关的多个领域拥有 9 年的经验，包括 IT、市场营销、银行、电力和制造业。他对 NLP 和机器学习充满热情。他是[SAS 社区](https://communities.sas.com/t5/user/viewprofilepage/user-id/271305)的贡献者，喜欢在 Medium 平台上撰写有关数据科学各个方面的技术文章。
 
@@ -140,21 +140,21 @@ print(transcription)
 
 **相关：**
 
-+   [使用 Python 进行简单的语音转文本](/2020/06/easy-speech-text-python.html)
++   使用 Python 进行简单的语音转文本
 
-+   [入门 5 个必备的自然语言处理库](/2021/02/getting-started-5-essential-nlp-libraries.html)
++   入门 5 个必备的自然语言处理库
 
-+   [Hugging Face Transformers 包 – 这是什么，如何使用](/2021/02/hugging-face-transformer-basics.html)
++   Hugging Face Transformers 包 – 这是什么，如何使用
 
 * * *
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 

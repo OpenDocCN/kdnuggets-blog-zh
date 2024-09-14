@@ -1,38 +1,38 @@
-# PyCharm针对数据科学家的功能
+# PyCharm 针对数据科学家的功能
 
-> 原文：[https://www.kdnuggets.com/2019/05/pycharm-data-scientists.html](https://www.kdnuggets.com/2019/05/pycharm-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2019/05/pycharm-data-scientists.html`](https://www.kdnuggets.com/2019/05/pycharm-data-scientists.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-**由[迪利普·库马尔](https://www.linkedin.com/in/dileep-kumar-a747371b/)，Target的首席工程师**
+**由[迪利普·库马尔](https://www.linkedin.com/in/dileep-kumar-a747371b/)，Target 的首席工程师**
 
-我最近开始使用PyCharm作为Spyder的替代品，非常喜欢它。本文讨论了一些PyCharm的功能，这些功能使我完全从Spyder转移到PyCharm。以下功能是与Spyder的比较，而非通用IDE。
+我最近开始使用 PyCharm 作为 Spyder 的替代品，非常喜欢它。本文讨论了一些 PyCharm 的功能，这些功能使我完全从 Spyder 转移到 PyCharm。以下功能是与 Spyder 的比较，而非通用 IDE。
 
-![图](../Images/c4c2a98fb87a8a5c7f7e9ffe377d0c8d.png)
+![图](img/c4c2a98fb87a8a5c7f7e9ffe377d0c8d.png)
 
-PyCharm配备了美丽的‘Dracula’主题
+PyCharm 配备了美丽的‘Dracula’主题
 
 * * *
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
-1.  终端：你可以在IDE中获得一个shell脚本，这有助于轻松访问多个功能，例如从命令行测试你的脚本、从gs/aws下载数据文件、git交互。
+1.  终端：你可以在 IDE 中获得一个 shell 脚本，这有助于轻松访问多个功能，例如从命令行测试你的脚本、从 gs/aws 下载数据文件、git 交互。
 
-1.  Git：谈到git，PyCharm提供了git集成。从IDE中，你可以添加需要加入gitignore的文件、添加和提交。你可以随时查看你所在的分支、哪些文件处于修改、添加、提交状态（根据项目视图中的颜色）等。我提到过我们可以直接从IDE内部的终端进行git push吗？
+1.  Git：谈到 git，PyCharm 提供了 git 集成。从 IDE 中，你可以添加需要加入 gitignore 的文件、添加和提交。你可以随时查看你所在的分支、哪些文件处于修改、添加、提交状态（根据项目视图中的颜色）等。我提到过我们可以直接从 IDE 内部的终端进行 git push 吗？
 
-1.  版本控制：你可以在IDE内部查看你的git变更日志。你还可以将你的文件与最新的git提交文件进行比较，以查看你的更改。
+1.  版本控制：你可以在 IDE 内部查看你的 git 变更日志。你还可以将你的文件与最新的 git 提交文件进行比较，以查看你的更改。
 
-1.  插件：PyCharm还提供了许多插件来支持非Python文件。因此，当你处理配置文件（如yaml/json/ini）、shell脚本或sql/html/css文件时，IDE知道预期的格式并自动进行缩进、关键词高亮等。你甚至可以使用iPython笔记本，尽管坦白说，它看起来有些混乱，我会选择Jupyter来处理笔记本。其他一些值得注意的插件包括git、flask、vim等。
+1.  插件：PyCharm 还提供了许多插件来支持非 Python 文件。因此，当你处理配置文件（如 yaml/json/ini）、shell 脚本或 sql/html/css 文件时，IDE 知道预期的格式并自动进行缩进、关键词高亮等。你甚至可以使用 iPython 笔记本，尽管坦白说，它看起来有些混乱，我会选择 Jupyter 来处理笔记本。其他一些值得注意的插件包括 git、flask、vim 等。
 
-1.  项目维护：当你在处理大型项目时，有几个最佳实践需要遵循，例如创建readme文件、使用虚拟环境、管理需求文件等。所有这些都可以通过PyCharm轻松处理。你还可以很容易地进行代码重构，检查对象的依赖关系，追踪对象的源头等。
+1.  项目维护：当你在处理大型项目时，有几个最佳实践需要遵循，例如创建 readme 文件、使用虚拟环境、管理需求文件等。所有这些都可以通过 PyCharm 轻松处理。你还可以很容易地进行代码重构，检查对象的依赖关系，追踪对象的源头等。
 
 1.  调试器：Spyder 中也有这个功能，但我从未在 Spyder 中使用过它。你可以创建调试点，并检查代码在这些点的行为。
 
@@ -54,11 +54,11 @@ PyCharm配备了美丽的‘Dracula’主题
 
 **相关：**
 
-+   [这里是最受欢迎的 Python IDE / 编辑器](/2018/12/most-popular-python-ide-editor.html)
++   这里是最受欢迎的 Python IDE / 编辑器
 
-+   [数据科学家常犯的10个编码错误](/2019/04/top-10-coding-mistakes-data-scientists.html)
++   数据科学家常犯的 10 个编码错误
 
-+   [你的机器学习代码可能很糟糕的4个原因](/2019/02/4-reasons-machine-learning-code-probably-bad.html)
++   你的机器学习代码可能很糟糕的 4 个原因
 
 ### 更多相关话题
 
@@ -72,4 +72,4 @@ PyCharm配备了美丽的‘Dracula’主题
 
 +   [掌握数据讲故事的艺术：数据科学家的指南](https://www.kdnuggets.com/2023/06/mastering-art-data-storytelling-guide-data-scientists.html)
 
-+   [KDnuggets 新闻，7月5日：一个糟糕的数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 人工智能…](https://www.kdnuggets.com/2023/n24.html)

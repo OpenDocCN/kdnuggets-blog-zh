@@ -1,8 +1,8 @@
 # 机器学习工程师的一天
 
-> 原文：[https://www.kdnuggets.com/2022/10/day-life-machine-learning-engineer.html](https://www.kdnuggets.com/2022/10/day-life-machine-learning-engineer.html)
+> 原文：[`www.kdnuggets.com/2022/10/day-life-machine-learning-engineer.html`](https://www.kdnuggets.com/2022/10/day-life-machine-learning-engineer.html)
 
-![机器学习工程师的一天](../Images/1ed418484d5a18f50ea5d32f674798ca.png)
+![机器学习工程师的一天](img/1ed418484d5a18f50ea5d32f674798ca.png)
 
 图片由 [Sigmund](https://unsplash.com/@sigmund?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来自 [Unsplash](https://unsplash.com/s/photos/data-scientist?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
@@ -14,9 +14,9 @@
 
 # 介绍
 
-[易卜拉欣·穆赫吉](https://www.linkedin.com/in/ibrahim-mukherjee-7b544b242/) 是一名伦敦政治经济学院（LSE）管理学（荣誉）学士毕业生以及数据科学家。在2008年毕业后，易卜拉欣加入了石油和天然气行业，担任金融分析师，工作地点包括特立尼达、新加坡、英国（阿伯丁、雷丁、伦敦）、挪威、马来西亚、突尼斯和罗马尼亚。
+[易卜拉欣·穆赫吉](https://www.linkedin.com/in/ibrahim-mukherjee-7b544b242/) 是一名伦敦政治经济学院（LSE）管理学（荣誉）学士毕业生以及数据科学家。在 2008 年毕业后，易卜拉欣加入了石油和天然气行业，担任金融分析师，工作地点包括特立尼达、新加坡、英国（阿伯丁、雷丁、伦敦）、挪威、马来西亚、突尼斯和罗马尼亚。
 
-![机器学习工程师的一天](../Images/db4f703398704a79301a871407c030f9.png)
+![机器学习工程师的一天](img/db4f703398704a79301a871407c030f9.png)
 
 易卜拉欣·穆赫吉
 
@@ -32,7 +32,7 @@
 
 1.  收集数据
 
-1.  基于1和2提供切实可行的商业问题解决方案
+1.  基于 1 和 2 提供切实可行的商业问题解决方案
 
 虽然这些任务听起来相对简单，但随着你所在组织的规模扩大，收集的数据复杂性以及生成的结果也会增加。
 
@@ -54,7 +54,7 @@
 
 一位出生于匈牙利的数学家**亚伯拉罕·瓦尔德**有不同的看法。他建议加强那些没有子弹孔的飞机部位。原因是，受损这些部位的飞机往往无法返回，它们已经被击落。
 
-![机器学习工程师的一天](../Images/1d11d989e8a7f426b0dddc3abc8a8454.png)
+![机器学习工程师的一天](img/1d11d989e8a7f426b0dddc3abc8a8454.png)
 
 来自[维基百科](https://en.wikipedia.org/wiki/Survivorship_bias#/media/File:Survivorship-bias.svg)的生存偏差文章中的飞机
 
@@ -66,13 +66,13 @@
 
 企业最终是资本主义框架下的赚钱提案。如果分析不能提供节省钱或赚钱的途径——那就没有价值。那是不被允许的。这一点对数据科学的整个提案至关重要。它应该为管理层和/或利益相关者提供关键行动点或方向，以创造货币价值增值——无论是直接节省成本或赚取更多利润，还是以“软性”方式如市场营销或企业社会责任。
 
-数据科学家还必须是讲故事者。正如Steve Jobs所说——“世界上最强大的人是讲故事者”。能够沟通对业务创造的价值是至关重要的。除非利益相关者“看到”价值，否则分析所创造的价值几乎没有意义，因为他们可能无法或不愿付诸实践。
+数据科学家还必须是讲故事者。正如 Steve Jobs 所说——“世界上最强大的人是讲故事者”。能够沟通对业务创造的价值是至关重要的。除非利益相关者“看到”价值，否则分析所创造的价值几乎没有意义，因为他们可能无法或不愿付诸实践。
 
 因此，讲述价值主张与创造价值同样重要。数据科学家必须非常擅长传达这些见解。
 
 # 总结
 
-我想感谢Ibrahim Mukherjee花时间向我们解释作为机器学习工程师的一天。了解人们对职业的不同方法及其与自己或其他人的不同，是提升和改善职业生涯的重要因素。
+我想感谢 Ibrahim Mukherjee 花时间向我们解释作为机器学习工程师的一天。了解人们对职业的不同方法及其与自己或其他人的不同，是提升和改善职业生涯的重要因素。
 
 希望这对你有帮助！再次感谢，Ibrahim Mukherjee！
 
@@ -82,11 +82,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -94,12 +94,12 @@
 
 +   [数据科学家的日常生活：专家与初学者](https://www.kdnuggets.com/2022/09/day-life-data-scientist-expert-beginner.html)
 
-+   [KDnuggets新闻，10月5日：初学者最佳免费Git GUI客户端•…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者最佳免费 Git GUI 客户端•…](https://www.kdnuggets.com/2022/n39.html)
 
-+   [我每天使用ChatGPT五个月。这些是一些隐藏的宝藏…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
++   [我每天使用 ChatGPT 五个月。这些是一些隐藏的宝藏…](https://www.kdnuggets.com/2023/07/used-chatgpt-every-day-5-months-hidden-gems-change-life.html)
 
 +   [从工程师到机器学习工程师：使用声明式机器学习](https://www.kdnuggets.com/2023/05/predibase-go-engineer-ml-engineer-declarative-ml.html)
 
-+   [每个机器学习工程师应掌握的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师应掌握的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
-+   [如何处理每天150亿条日志并将大查询保持在1秒内](https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second)
++   [如何处理每天 150 亿条日志并将大查询保持在 1 秒内](https://www.kdnuggets.com/how-to-digest-15-billion-logs-per-day-and-keep-big-queries-within-1-second)

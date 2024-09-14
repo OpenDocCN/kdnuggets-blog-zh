@@ -1,8 +1,8 @@
 # 7 个 Pandas 绘图函数用于快速数据可视化
 
-> 原文：[https://www.kdnuggets.com/7-pandas-plotting-functions-for-quick-data-visualization](https://www.kdnuggets.com/7-pandas-plotting-functions-for-quick-data-visualization)
+> 原文：[`www.kdnuggets.com/7-pandas-plotting-functions-for-quick-data-visualization`](https://www.kdnuggets.com/7-pandas-plotting-functions-for-quick-data-visualization)
 
-![7 个 Pandas 绘图函数用于快速数据可视化](../Images/3e5b1bb0051d3fde4d5534fed4592514.png)
+![7 个 Pandas 绘图函数用于快速数据可视化](img/3e5b1bb0051d3fde4d5534fed4592514.png)
 
 使用 Segmind SSD-1B 模型生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -72,7 +72,7 @@ df_employees.head(10)
 
 这是数据框的前几条记录：
 
-![7 个 Pandas 绘图函数用于快速数据可视化](../Images/32a580373c2c424b12b475a8fb119b1a.png)
+![7 个 Pandas 绘图函数用于快速数据可视化](img/32a580373c2c424b12b475a8fb119b1a.png)
 
 df_employees.head(10) 的输出
 
@@ -89,7 +89,7 @@ df_employees.head(10) 的输出
 df_employees.plot.scatter(x='Age', y='Salary', title='Scatter Plot: Age vs Salary', xlabel='Age', ylabel='Salary', grid=True)
 ```
 
-![7 个 Pandas 绘图函数用于快速数据可视化](../Images/83bb784b889b0b3499b4a1e70377fba3.png)
+![7 个 Pandas 绘图函数用于快速数据可视化](img/83bb784b889b0b3499b4a1e70377fba3.png)
 
 对于这个示例数据框，我们没有看到员工年龄与薪资之间的相关性。
 
@@ -109,7 +109,7 @@ df_employees['AverageSalaryByExperience'] = df_employees['YearsWithCompany'].map
 df_employees.plot.line(x='YearsWithCompany', y='AverageSalaryByExperience', marker='o', linestyle='-', title='Average Salary Trend Over Years of Experience', xlabel='Years With Company', ylabel='Average Salary', legend=False, grid=True)
 ```
 
-![7 Pandas 绘图函数用于快速数据可视化](../Images/86035fa5eaae14364f69be0a5bcf1c36.png)
+![7 Pandas 绘图函数用于快速数据可视化](img/86035fa5eaae14364f69be0a5bcf1c36.png)
 
 由于我们选择使用员工在公司工作的年数与薪资之间的线性关系来填充薪资字段，因此我们看到折线图反映了这一点。
 
@@ -124,7 +124,7 @@ df_employees.plot.line(x='YearsWithCompany', y='AverageSalaryByExperience', mark
 df_employees['Age'].plot.hist(title='Age Distribution', bins=15)
 ```
 
-![7 Pandas 绘图函数用于快速数据可视化](../Images/7e0fe783a846f4843073bd9b99e7a105.png)
+![7 Pandas 绘图函数用于快速数据可视化](img/7e0fe783a846f4843073bd9b99e7a105.png)
 
 # 4\. 箱线图
 
@@ -141,7 +141,7 @@ df_employees['Age'].plot.hist(title='Age Distribution', bins=15)
 df_employees.boxplot(column='Salary', by='Department', grid=True, vert=False)
 ```
 
-![7 Pandas 绘图函数用于快速数据可视化](../Images/0ce554de96f318b28eabd34d7c8a9c8e.png)
+![7 Pandas 绘图函数用于快速数据可视化](img/0ce554de96f318b28eabd34d7c8a9c8e.png)
 
 从箱线图中，我们可以看到某些部门的薪资分布范围比其他部门更广。
 
@@ -156,7 +156,7 @@ df_employees.boxplot(column='Salary', by='Department', grid=True, vert=False)
 df_employees['Department'].value_counts().plot.bar(title='Employee Count by Department')
 ```
 
-![7 Pandas 绘图函数用于快速数据可视化](../Images/baea44d00f91ad9d47d34c4c02b04bdc.png)
+![7 Pandas 绘图函数用于快速数据可视化](img/baea44d00f91ad9d47d34c4c02b04bdc.png)
 
 # 6\. 面积图
 
@@ -176,7 +176,7 @@ df_employees['CumulativeSalaryByAgeGroup'] = cumulative_salary_by_age_group
 df_employees.plot.area(x='AgeGroup', y='CumulativeSalaryByAgeGroup', title='Cumulative Salary Distribution Over Age Groups', xlabel='Age Group', ylabel='Cumulative Salary', legend=False, grid=True)
 ```
 
-![7 Pandas 绘图函数用于快速数据可视化](../Images/55a61425cdc8f75ad10e0ce72eadf629.png)
+![7 Pandas 绘图函数用于快速数据可视化](img/55a61425cdc8f75ad10e0ce72eadf629.png)
 
 # 7\. 饼图
 
@@ -191,7 +191,7 @@ df_employees.plot.area(x='AgeGroup', y='CumulativeSalaryByAgeGroup', title='Cumu
 df_employees.groupby('Department')['Salary'].sum().plot.pie(title='Department-wise Salary Distribution', autopct='%1.1f%%')
 ```
 
-![7 个 Pandas 绘图函数用于快速数据可视化](../Images/0eb311bb82cf7a6262a8aca2d0ee211e.png)
+![7 个 Pandas 绘图函数用于快速数据可视化](img/0eb311bb82cf7a6262a8aca2d0ee211e.png)
 
 # 总结
 

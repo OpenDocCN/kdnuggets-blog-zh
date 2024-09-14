@@ -1,8 +1,8 @@
-# 一个能让你在2022年获得工作的数据科学作品集
+# 一个能让你在 2022 年获得工作的数据科学作品集
 
-> 原文：[https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
+> 原文：[`www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html`](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
 
-![一个能让你在2022年获得工作的数据科学作品集](../Images/4ac9b973412c9a0e7068e0f95edac244.png)
+![一个能让你在 2022 年获得工作的数据科学作品集](img/4ac9b973412c9a0e7068e0f95edac244.png)
 
 图片来源：编辑
 
@@ -10,7 +10,7 @@
 
 1.  你没有数据科学硕士学位，也没有相关领域的经验。
 
-1.  每个你遇到的数据科学职位招聘信息都要求至少2-3年的相关经验。但如果没有经验，没人愿意雇佣你，你怎么获得经验呢？
+1.  每个你遇到的数据科学职位招聘信息都要求至少 2-3 年的相关经验。但如果没有经验，没人愿意雇佣你，你怎么获得经验呢？
 
 1.  你已经参加了无数的数据科学在线课程，它们都教给你类似的内容。你最终陷入了一个陷阱，你并没有真正学到新的东西，只是觉得自己在学习。
 
@@ -20,11 +20,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -50,15 +50,15 @@
 
 由于其简单性，这些是大多数人在学习数据科学时创建的第一个项目。如果你将这些项目添加到简历中，你是在告诉雇主你缺乏经验和创造力。
 
-其他数百名申请者已经创建了相同的项目并在他们的作品集中提到这些项目。既然你的简历与80%的其他数据科学 aspirants没有区别，为什么你会获得工作邀请？
+其他数百名申请者已经创建了相同的项目并在他们的作品集中提到这些项目。既然你的简历与 80%的其他数据科学 aspirants 没有区别，为什么你会获得工作邀请？
 
 ## 相反，你应该这样做
 
-创建展示各种技能的数据科学项目，例如数据分析、机器学习和数据预处理。如果你需要灵感来创建独特的项目，可以查看[我最好的5个数据科学作品集项目](https://towardsdatascience.com/5-of-my-best-data-science-portfolio-projects-8cd7f81f1b1)。
+创建展示各种技能的数据科学项目，例如数据分析、机器学习和数据预处理。如果你需要灵感来创建独特的项目，可以查看[我最好的 5 个数据科学作品集项目](https://towardsdatascience.com/5-of-my-best-data-science-portfolio-projects-8cd7f81f1b1)。
 
-现实世界的数据通常是脏的，需要从外部来源收集，而不像Kaggle数据集那样已经结构化和预处理。
+现实世界的数据通常是脏的，需要从外部来源收集，而不像 Kaggle 数据集那样已经结构化和预处理。
 
-创建一个端到端的数据科学项目是个好主意，涉及通过API或[网络抓取](/2022/02/build-web-scraper-python-5-minutes.html)技术收集数据。
+创建一个端到端的数据科学项目是个好主意，涉及通过 API 或网络抓取技术收集数据。
 
 这向雇主展示了你的编程技能足够强大，可以处理现实世界的数据科学用例。
 
@@ -82,7 +82,7 @@
 
 然后，尝试创建与该行业相关的项目。这告诉招聘经理你会为他们增值，因为你已经做过类似他们用例的项目。
 
-你甚至可以更进一步，联系那些已经在你想加入的公司工作的数据科学家。通过LinkedIn或电子邮件与他们联系，尝试了解他们参与的项目类型。
+你甚至可以更进一步，联系那些已经在你想加入的公司工作的数据科学家。通过 LinkedIn 或电子邮件与他们联系，尝试了解他们参与的项目类型。
 
 然后，你可以创建一些相关的项目，以使你的简历在其他申请者中脱颖而出。
 
@@ -92,11 +92,11 @@
 
 我审阅了她的简历，并立即意识到问题所在。
 
-这位申请者来自市场营销背景，只参加过一次数据科学Bootcamp。
+这位申请者来自市场营销背景，只参加过一次数据科学 Bootcamp。
 
 她在简历中突出的技能包括编程、机器学习和统计。
 
-任何阅读到那份简历的雇主都能看出她在上述科目上的知识有限，因为从三个月的Bootcamp中能学到的知识是有限的。
+任何阅读到那份简历的雇主都能看出她在上述科目上的知识有限，因为从三个月的 Bootcamp 中能学到的知识是有限的。
 
 ## 她应该这样做
 
@@ -106,7 +106,7 @@
 
 大多数市场营销专家无法处理大量数据。他们缺乏技术和分析技能。
 
-由于她已经拥有市场营销领域的专业知识，她只需掌握一些Python、Excel和SQL技能。然后，她应该使用这些工具创建一些市场营销数据分析项目，并将它们包含在她的作品集中。
+由于她已经拥有市场营销领域的专业知识，她只需掌握一些 Python、Excel 和 SQL 技能。然后，她应该使用这些工具创建一些市场营销数据分析项目，并将它们包含在她的作品集中。
 
 这本来可以很容易地为她在分析领域找到一份工作。
 
@@ -128,7 +128,7 @@
 
 然后，我在简历上包含了我的网站和博客链接。我在简历的“项目”部分突出了一些我最好的项目，并写了几行说明。
 
-在获得我的第一个实际数据科学职位后，我积累了一些该领域的经验，这帮助我创建了更大、更有趣的项目。随着我继续在线发布我的工作，雇主们开始联系我进行 [自由项目](/2022/02/become-successful-data-science-freelancer-2022.html)。
+在获得我的第一个实际数据科学职位后，我积累了一些该领域的经验，这帮助我创建了更大、更有趣的项目。随着我继续在线发布我的工作，雇主们开始联系我进行 自由项目。
 
 我被聘请来为公司收集大量数据，建立机器学习模型，进行市场研究，并参与自由写作项目。所有这些任务都在我的数据科学家日常工作之上。
 
@@ -138,14 +138,14 @@
 
 ### 更多相关话题
 
-+   [能让你在2022年获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [能让你在 2022 年获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [KDnuggets 新闻，6月1日: 数据科学的完整收藏…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日: 数据科学的完整收藏…](https://www.kdnuggets.com/2022/n22.html)
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 掌握机器学习的7个步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 掌握机器学习的 7 个步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [3个保证能让你获得工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
++   [3 个保证能让你获得工作的数据科学项目](https://www.kdnuggets.com/3-data-science-projects-guaranteed-to-land-you-that-job)
 
-+   [7个你在找数据科学职位时挣扎的原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
++   [7 个你在找数据科学职位时挣扎的原因](https://www.kdnuggets.com/7-reasons-why-youre-struggling-to-land-a-data-science-job)
 
 +   [无法获得数据科学职位？这就是原因](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)

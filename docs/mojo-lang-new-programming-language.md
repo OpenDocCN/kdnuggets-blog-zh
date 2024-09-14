@@ -1,8 +1,8 @@
 # Mojo Lang：新编程语言
 
-> 原文：[https://www.kdnuggets.com/2023/05/mojo-lang-new-programming-language.html](https://www.kdnuggets.com/2023/05/mojo-lang-new-programming-language.html)
+> 原文：[`www.kdnuggets.com/2023/05/mojo-lang-new-programming-language.html`](https://www.kdnuggets.com/2023/05/mojo-lang-new-programming-language.html)
 
-![Mojo Lang：新编程语言](../Images/c109f51f211324926cfb1ab901422d95.png)
+![Mojo Lang：新编程语言](img/c109f51f211324926cfb1ab901422d95.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -84,7 +84,7 @@ Mojo Lang 还有更多功能，要了解其工作原理，请观看这个由 Jer
 
 你已经对新的 Mojo Lang 编程语言及其特点有所了解。Mojo Lang 是不是只是 Python++，还是说它会完全取代所有 Python 用户？
 
-**[妮莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何有助于人类寿命的延续。她是一位热衷学习的个人，寻求拓宽技术知识和写作技能，同时帮助指导他人。
+**[妮莎·阿里亚](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程，以及围绕数据科学的理论知识。她还希望探索人工智能如何有助于人类寿命的延续。她是一位热衷学习的个人，寻求拓宽技术知识和写作技能，同时帮助指导他人。
 
 ### 更多相关主题
 
@@ -92,10 +92,10 @@ Mojo Lang 还有更多功能，要了解其工作原理，请观看这个由 Jer
 
 +   [Python：机器学习的编程语言](https://www.kdnuggets.com/2022/06/mlm-python-programming-language-machine-learning.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
 +   [为什么你需要学习多于一种编程语言！](https://www.kdnuggets.com/2022/06/need-learn-one-programming-language.html)
 
-+   [数据科学与Go编程语言](https://www.kdnuggets.com/2024/03/nwu-data-science-go-programming-language)
++   [数据科学与 Go 编程语言](https://www.kdnuggets.com/2024/03/nwu-data-science-go-programming-language)
 
-+   [自然语言处理中的N-gram语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)
++   [自然语言处理中的 N-gram 语言建模](https://www.kdnuggets.com/2022/06/ngram-language-modeling-natural-language-processing.html)

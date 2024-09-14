@@ -1,6 +1,6 @@
 # 常见的机器学习障碍
 
-> 原文：[https://www.kdnuggets.com/2019/09/mathworks-common-machine-learning-obstacles.html](https://www.kdnuggets.com/2019/09/mathworks-common-machine-learning-obstacles.html)
+> 原文：[`www.kdnuggets.com/2019/09/mathworks-common-machine-learning-obstacles.html`](https://www.kdnuggets.com/2019/09/mathworks-common-machine-learning-obstacles.html)
 
 赞助文章。
 
@@ -10,7 +10,7 @@
 
 分类模型根据特定特征集将项目分配到离散组或类别。由于每个数据集的独特性和期望结果，确定最佳分类模型通常会遇到困难。过拟合发生在模型与可能包含噪声或错误的有限训练数据过于贴合时。过拟合的模型无法很好地推广到训练集之外的数据，限制了其在生产系统中的实用性。
 
-![Mathworks 分类学习器](../Images/1b6273cf4cc4d5907dee60a5dd1c8422.png)
+![Mathworks 分类学习器](img/1b6273cf4cc4d5907dee60a5dd1c8422.png)
 
 图 1：分类学习器应用程序用于训练和比较各种分类器。© 1984–2019 The MathWorks, Inc.
 
@@ -34,7 +34,7 @@
 
 +   [逻辑回归](https://www.mathworks.com/help/stats/mnrfit.html?s_eid=PEP_22192)：由于其简单性，这个模型通常被用作基准。它用于数据可以被分类为两个可能类别的问题。逻辑回归模型返回每个数据点属于各个类别的概率。
 
-+   [*k*-最近邻 (kNN)](https://www.mathworks.com/help/stats/classificationknn.html?s_eid=PEP_22192)：这种简单而有效的分类方法根据数据点与训练数据集中其他点的距离来对数据点进行分类。kNN的训练时间较短，但除非对数据应用权重，否则该模型可能会将无关属性误认为重要属性，特别是在数据点数量增加时。
++   [*k*-最近邻 (kNN)](https://www.mathworks.com/help/stats/classificationknn.html?s_eid=PEP_22192)：这种简单而有效的分类方法根据数据点与训练数据集中其他点的距离来对数据点进行分类。kNN 的训练时间较短，但除非对数据应用权重，否则该模型可能会将无关属性误认为重要属性，特别是在数据点数量增加时。
 
 +   [决策树](https://www.mathworks.com/help/stats/decision-trees.html?s_eid=PEP_22192)：这些模型通过视觉方式预测响应，从根到叶的决策路径相对容易跟随。当展示结论如何得出时，这种类型的模型特别有用。
 
@@ -44,7 +44,7 @@
 
 工程师和科学家可以通过使用可扩展的软件工具来简化决策过程，以确定哪个模型最适合一组特征，评估分类器性能，比较和提高模型准确性，并最终导出最佳模型。这些工具还帮助用户探索数据，选择特征，指定验证方案，并训练多个模型。
 
-![Mathworks 神经网络训练](../Images/aca20b484ecfc951a761b8a69a0082a8.png)
+![Mathworks 神经网络训练](img/aca20b484ecfc951a761b8a69a0082a8.png)
 
 图 2：深度神经网络的训练进度，显示训练集和验证集的准确性和损失。© 1984–2019 The MathWorks, Inc.
 
@@ -72,11 +72,11 @@
 
 机器学习的老手和初学者在分类和过拟合方面都可能遇到问题。尽管机器学习中的挑战可能显得令人生畏，但利用正确的工具和使用本文介绍的验证方法将帮助工程师和科学家更轻松地将机器学习应用于现实世界的项目中。
 
-要了解更多关于分类建模和过拟合的信息，以及MATLAB如何帮助克服这一机器学习挑战，请参见下面的链接或通过电子邮件联系我 [sdeland@mathworks.com](mailto:sdeland@mathworks.com)。
+要了解更多关于分类建模和过拟合的信息，以及 MATLAB 如何帮助克服这一机器学习挑战，请参见下面的链接或通过电子邮件联系我 sdeland@mathworks.com。
 
-+   [试用分类学习器应用程序](https://www.mathworks.com/campaigns/offers/machine-learning-try-in-browser.html?s_eid=PEP_22192): 通过在浏览器中运行MATLAB来创建和训练机器学习模型。
++   [试用分类学习器应用程序](https://www.mathworks.com/campaigns/offers/machine-learning-try-in-browser.html?s_eid=PEP_22192): 通过在浏览器中运行 MATLAB 来创建和训练机器学习模型。
 
-+   [分类示例](https://www.mathworks.com/help/stats/examples.html?category=classification&s_tid=CRUX_classification?s_eid=PEP_22192): 查看这些25个分类示例，包括判别分析和朴素贝叶斯。
++   [分类示例](https://www.mathworks.com/help/stats/examples.html?category=classification&s_tid=CRUX_classification?s_eid=PEP_22192): 查看这些 25 个分类示例，包括判别分析和朴素贝叶斯。
 
 +   [提高浅层神经网络的泛化能力并避免过拟合](https://www.mathworks.com/help/deeplearning/ug/improve-neural-network-generalization-and-avoid-overfitting.html?s_eid=PEP_22192): 这是一个过拟合的示例。
 
@@ -84,11 +84,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面的工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面的工作
 
 * * *
 

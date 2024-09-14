@@ -1,8 +1,8 @@
 # 使用 Python 进行深度学习的音频数据分析（第一部分）
 
-> 原文：[https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-1.html](https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-1.html)
+> 原文：[`www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-1.html`](https://www.kdnuggets.com/2020/02/audio-data-analysis-deep-learning-python-part-1.html)
 
-[评论](#comments)
+评论
 
 ### 介绍
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -48,9 +48,9 @@
 > 
 > **在信号处理中，采样是将连续信号减少为一系列离散值。采样频率或速率是指在某一固定时间段内采样的数量。高采样频率会减少信息损失但计算开销较高，而低采样频率则信息损失较大但计算速度快且便宜。**
 
-![图示](../Images/0ae42a89ddb41474f12e1a201e47e5fc.png)
+![图示](img/0ae42a89ddb41474f12e1a201e47e5fc.png)
 
-一种声音波形，以红色表示，数字化后以蓝色表示（经过采样和4位量化），结果数组显示在右侧。原始 © Aquegg | 维基媒体公用资源
+一种声音波形，以红色表示，数字化后以蓝色表示（经过采样和 4 位量化），结果数组显示在右侧。原始 © Aquegg | 维基媒体公用资源
 
 ### 音频处理的应用
 
@@ -68,7 +68,7 @@
 
 声音以**音频**信号的形式表示，具有如频率、带宽、分贝等参数。典型的音频信号可以表示为振幅和时间的函数。
 
-![图示](../Images/ab5d5b6e3239dee7c36f1c2ddf06f771.png)
+![图示](img/ab5d5b6e3239dee7c36f1c2ddf06f771.png)
 
 [来源](https://commons.wikimedia.org/wiki/File:FFT-Time-Frequency-View.png)
 
@@ -121,7 +121,7 @@ x , sr = librosa.load(audio_data)
 print(type(x), type(sr))#<class 'numpy.ndarray'> <class 'int'>print(x.shape, sr)#(94316,) 22050
 ```
 
-这将返回一个音频时间序列，作为默认采样率(sr)为22KHZ的numpy数组。我们可以通过以44.1KHz重采样来更改此行为。
+这将返回一个音频时间序列，作为默认采样率(sr)为 22KHZ 的 numpy 数组。我们可以通过以 44.1KHz 重采样来更改此行为。
 
 ```py
 librosa.load(audio_data, sr=44100)
@@ -133,11 +133,11 @@ librosa.load(audio_data, sr=44100)
 librosa.load(audio_path, sr=None)
 ```
 
-采样**率**是每秒传输的音频样本数，以Hz或kHz为单位。
+采样**率**是每秒传输的音频样本数，以 Hz 或 kHz 为单位。
 
 **播放音频：**
 
-使用`**IPython.display.Audio**`，你可以在你的jupyter notebook中播放音频。
+使用`**IPython.display.Audio**`，你可以在你的 jupyter notebook 中播放音频。
 
 ```py
 import IPython.display as ipd
@@ -146,7 +146,7 @@ ipd.Audio(audio_data)
 
 这将返回一个音频小部件：
 
-![](../Images/9ebc840c4cc68c9e19cfcbf4919a8526.png)
+![](img/9ebc840c4cc68c9e19cfcbf4919a8526.png)
 
 **可视化音频：**
 
@@ -160,17 +160,17 @@ plt.figure(figsize=(14, 5))
 librosa.display.waveplot(x, sr=sr)
 ```
 
-![](../Images/f2266fe0df29e0c49b39b1bfd897d8ad.png)
+![](img/f2266fe0df29e0c49b39b1bfd897d8ad.png)
 
 这里，我们有一个波形的幅度包络图。
 
-![图示](../Images/d67fa2958bec711253eb0bddc6f53994.png)
+![图示](img/d67fa2958bec711253eb0bddc6f53994.png)
 
 [什么是信号中的幅度、波长和相位？](https://gfycat.com/ickyfilthybobolink)
 
 ### 声谱图
 
-声谱图是一种可视化表示信号强度或“**响度**”的方式，显示了在特定波形中各种频率随时间的变化情况。人们不仅可以看到，例如，2 Hz与10 Hz之间的能量多寡，还可以看到能量水平随时间的变化。
+声谱图是一种可视化表示信号强度或“**响度**”的方式，显示了在特定波形中各种频率随时间的变化情况。人们不仅可以看到，例如，2 Hz 与 10 Hz 之间的能量多寡，还可以看到能量水平随时间的变化。
 
 声谱图通常被描绘为一个[热图](https://en.wikipedia.org/wiki/Heat_map)，即通过变化的颜色或亮度显示强度的图像。
 
@@ -184,18 +184,18 @@ librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='hz')
 plt.colorbar()
 ```
 
-`.stft()`将数据转换为短时傅里叶变换。 [STFT](https://www.youtube.com/watch?v=g1_wcbGUcDY)将信号转换，使我们能够知道在给定时间的给定频率的幅度。使用STFT，我们可以确定音频信号在给定时间播放的各种频率的幅度。`.specshow`用于显示声谱图。
+`.stft()`将数据转换为短时傅里叶变换。 [STFT](https://www.youtube.com/watch?v=g1_wcbGUcDY)将信号转换，使我们能够知道在给定时间的给定频率的幅度。使用 STFT，我们可以确定音频信号在给定时间播放的各种频率的幅度。`.specshow`用于显示声谱图。
 
-![](../Images/89fec857ffdd44f2d7965ca58289f224.png)
+![](img/89fec857ffdd44f2d7965ca58289f224.png)
 
-垂直轴显示频率（从0到10kHz），水平轴显示剪辑的时间。由于我们看到所有的动作都发生在频谱的底部，我们可以将频率轴转换为对数轴。
+垂直轴显示频率（从 0 到 10kHz），水平轴显示剪辑的时间。由于我们看到所有的动作都发生在频谱的底部，我们可以将频率轴转换为对数轴。
 
 ```py
 librosa.display.specshow(Xdb, sr=sr, x_axis='time', y_axis='log')
 plt.colorbar()
 ```
 
-![](../Images/c787dbd0b0a36b2375823227de8a1e86.png)
+![](img/c787dbd0b0a36b2375823227de8a1e86.png)
 
 **创建音频信号：**
 
@@ -215,15 +215,15 @@ librosa.output.write_wav('tone_220.wav', x, sr)
 
 每个音频信号由许多特征组成。然而，我们必须提取与我们试图解决的问题相关的特征。提取特征以用于分析的过程称为特征提取。让我们详细研究一些特征。
 
-**频谱特征**（基于频率的**特征**），通过将时间信号转换到频域获得，例如基本频率、频率成分、**频谱**质心、**频谱**流量、**频谱**密度、**频谱**roll-off等。
+**频谱特征**（基于频率的**特征**），通过将时间信号转换到频域获得，例如基本频率、频率成分、**频谱**质心、**频谱**流量、**频谱**密度、**频谱**roll-off 等。
 
 **1\. 频谱质心**
 
 **频谱质心**指示频谱能量的中心频率，换句话说，它表示声音的“质心”位置。这类似于加权平均：
 
-![](../Images/e4ceac912fc48f96751392968eba12a0.png)
+![](img/e4ceac912fc48f96751392968eba12a0.png)
 
-其中S(k)是频率bin k处的频谱幅度，f(k)是bin k处的频率。
+其中 S(k)是频率 bin k 处的频谱幅度，f(k)是 bin k 处的频率。
 
 `[**librosa.feature.spectral_centroid**](https://librosa.github.io/librosa/generated/librosa.feature.spectral_centroid.html#librosa.feature.spectral_centroid)`计算信号中每一帧的频谱质心：
 
@@ -245,15 +245,15 @@ plt.plot(t, normalize(spectral_centroids), color='b')
 
 `.spectral_centroid`将返回一个数组，其列数等于样本中存在的帧数。
 
-![](../Images/1a685695a87a8eb9d92b23d9923c0954.png)
+![](img/1a685695a87a8eb9d92b23d9923c0954.png)
 
 频谱质心在开始时有上升。
 
-**2\. 频谱roll-off**
+**2\. 频谱 roll-off**
 
-这是信号形状的度量。它表示高频率衰减至0的频率。为了获得它，我们必须计算在功率谱中85%功率位于低频的频带的比例。
+这是信号形状的度量。它表示高频率衰减至 0 的频率。为了获得它，我们必须计算在功率谱中 85%功率位于低频的频带的比例。
 
-`[**librosa.feature.spectral_rolloff**](https://librosa.github.io/librosa/generated/librosa.feature.spectral_rolloff.html#librosa.feature.spectral_rolloff)`计算信号中每一帧的roll-off频率：
+`[**librosa.feature.spectral_rolloff**](https://librosa.github.io/librosa/generated/librosa.feature.spectral_rolloff.html#librosa.feature.spectral_rolloff)`计算信号中每一帧的 roll-off 频率：
 
 ```py
 spectral_rolloff = librosa.feature.spectral_rolloff(x+0.01, sr=sr)[0]
@@ -261,15 +261,15 @@ plt.figure(figsize=(12, 4))librosa.display.waveplot(x, sr=sr, alpha=0.4)
 plt.plot(t, normalize(spectral_rolloff), color='r')
 ```
 
-![](../Images/e97b4739cade77bd6cede12340dfb1a1.png)
+![](img/e97b4739cade77bd6cede12340dfb1a1.png)
 
 **3\. 频谱带宽**
 
-频谱带宽定义为光带在峰值最大值一半处的宽度（或半峰宽[全宽半最大值 FWHM]），由两条垂直红线和波长轴上的λSB表示。
+频谱带宽定义为光带在峰值最大值一半处的宽度（或半峰宽[全宽半最大值 FWHM]），由两条垂直红线和波长轴上的λSB 表示。
 
-![](../Images/c030a5676e009ed654935cebf7bb7958.png)
+![](img/c030a5676e009ed654935cebf7bb7958.png)
 
-`[**librosa.feature.spectral_bandwidth**](https://librosa.github.io/librosa/generated/librosa.feature.spectral_bandwidth.html#librosa.feature.spectral_bandwidth)`计算顺序-p频谱带宽：
+`[**librosa.feature.spectral_bandwidth**](https://librosa.github.io/librosa/generated/librosa.feature.spectral_bandwidth.html#librosa.feature.spectral_bandwidth)`计算顺序-p 频谱带宽：
 
 ```py
 spectral_bandwidth_2 = librosa.feature.spectral_bandwidth(x+0.01, sr=sr)[0]
@@ -282,13 +282,13 @@ plt.plot(t, normalize(spectral_bandwidth_4), color='y')
 plt.legend(('p = 2', 'p = 3', 'p = 4'))
 ```
 
-![](../Images/09b986ff36d794546a104b828a9f264a.png)
+![](img/09b986ff36d794546a104b828a9f264a.png)
 
 **4\. 过零率**
 
-测量信号平滑性的一种非常简单的方法是计算信号片段内的过零次数。声音信号缓慢振荡——例如，100 Hz的信号每秒将经过零100次——而一个无声擦音每秒可以有3000次过零。
+测量信号平滑性的一种非常简单的方法是计算信号片段内的过零次数。声音信号缓慢振荡——例如，100 Hz 的信号每秒将经过零 100 次——而一个无声擦音每秒可以有 3000 次过零。
 
-![](../Images/9a26544369f50a94654bfcd693fed828.png)
+![](img/9a26544369f50a94654bfcd693fed828.png)
 
 对于金属和摇滚等高打击音，通常值较高。现在让我们可视化一下，看看如何计算过零率。
 
@@ -305,7 +305,7 @@ plt.plot(x[n0:n1])
 plt.grid()
 ```
 
-![](../Images/d77c25e3494c1bfa84e9ab63d00f25fe.png)
+![](img/d77c25e3494c1bfa84e9ab63d00f25fe.png)
 
 放大
 
@@ -317,18 +317,18 @@ plt.plot(x[n0:n1])
 plt.grid()
 ```
 
-![](../Images/6d1e80fd1036c14acab145ce003597ab.png)
+![](img/6d1e80fd1036c14acab145ce003597ab.png)
 
-似乎有16个过零点。我们来用Librosa验证一下。
+似乎有 16 个过零点。我们来用 Librosa 验证一下。
 
 ```py
 zero_crossings = librosa.zero_crossings(x[n0:n1], pad=False)
 print(sum(zero_crossings))#16
 ```
 
-**5\. Mel频率倒谱系数（MFCCs）**
+**5\. Mel 频率倒谱系数（MFCCs）**
 
-信号的梅尔频率倒谱系数（MFCCs）是一组小特征（通常约10-20个），它们简洁地描述了频谱包络的整体形状。它模拟了人类声音的特征。
+信号的梅尔频率倒谱系数（MFCCs）是一组小特征（通常约 10-20 个），它们简洁地描述了频谱包络的整体形状。它模拟了人类声音的特征。
 
 ```py
 mfccs = librosa.feature.mfcc(x, sr=fs)
@@ -339,11 +339,11 @@ plt.figure(figsize=(15, 7))
 librosa.display.specshow(mfccs, sr=sr, x_axis='time')
 ```
 
-![](../Images/565a91d01bcff556f0ba6c0c790712d5.png)
+![](img/565a91d01bcff556f0ba6c0c790712d5.png)
 
 **6. 色度特征**
 
-**色度特征或向量**通常是一个12维的特征向量，表示信号中每个音高类别{C, C#, D, D#, E, …, B}的能量含量。简而言之，它提供了一种强有力的方式来描述音乐片段之间的相似度。
+**色度特征或向量**通常是一个 12 维的特征向量，表示信号中每个音高类别{C, C#, D, D#, E, …, B}的能量含量。简而言之，它提供了一种强有力的方式来描述音乐片段之间的相似度。
 
 `[librosa.feature.chroma_stft](https://librosa.github.io/librosa/generated/librosa.feature.chroma_stft.html#librosa.feature.chroma_stft)`用于计算色度特征。
 
@@ -353,23 +353,23 @@ plt.figure(figsize=(15, 5))
 librosa.display.specshow(chromagram, x_axis='time', y_axis='chroma', hop_length=hop_length, cmap='coolwarm')
 ```
 
-![](../Images/70f36608314cae8c29f98b34b7a505af.png)
+![](img/70f36608314cae8c29f98b34b7a505af.png)
 
-现在我们了解了如何使用Python处理音频数据并提取重要特征。在接下来的部分中，我们将使用这些特征构建一个ANN模型用于音乐流派分类。
+现在我们了解了如何使用 Python 处理音频数据并提取重要特征。在接下来的部分中，我们将使用这些特征构建一个 ANN 模型用于音乐流派分类。
 
-### 使用ANN进行音乐流派分类
+### 使用 ANN 进行音乐流派分类
 
-![图](../Images/b7aba595d99d5b06b0973e10f0a11ee1.png)
+![图](img/b7aba595d99d5b06b0973e10f0a11ee1.png)
 
 [鸣谢](http://bestanimations.com/Music/Music.html)
 
-该数据集用于G. Tzanetakis和P. Cook在IEEE Transactions on Audio and Speech Processing 2002中发表的著名论文《音频信号的音乐流派分类》。
+该数据集用于 G. Tzanetakis 和 P. Cook 在 IEEE Transactions on Audio and Speech Processing 2002 中发表的著名论文《音频信号的音乐流派分类》。
 
-数据集包含1000个每个30秒长的音频轨道。它包含10种流派，每种流派由100个轨道组成。这些轨道都是22050 Hz单声道16位音频文件，格式为.wav。
+数据集包含 1000 个每个 30 秒长的音频轨道。它包含 10 种流派，每种流派由 100 个轨道组成。这些轨道都是 22050 Hz 单声道 16 位音频文件，格式为.wav。
 
-数据集可以从[marsyas网站](http://marsyas.info/downloads/datasets.html)下载。
+数据集可以从[marsyas 网站](http://marsyas.info/downloads/datasets.html)下载。
 
-数据集包含10种流派，即
+数据集包含 10 种流派，即
 
 +   蓝调
 
@@ -391,25 +391,25 @@ librosa.display.specshow(chromagram, x_axis='time', y_axis='chroma', hop_length=
 
 +   摇滚
 
-每种流派包含100首歌曲。总数据集：1000首歌曲。
+每种流派包含 100 首歌曲。总数据集：1000 首歌曲。
 
-在继续之前，我建议使用[Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)来处理与神经网络相关的所有任务，因为它是**免费的**，并且提供GPU和TPU作为运行环境。
+在继续之前，我建议使用[Google Colab](https://colab.research.google.com/notebooks/intro.ipynb#recent=true)来处理与神经网络相关的所有任务，因为它是**免费的**，并且提供 GPU 和 TPU 作为运行环境。
 
 **路线图：**
 
-首先，我们需要将音频文件转换为PNG格式图像（频谱图）。从这些频谱图中，我们需要提取有意义的特征，即MFCCs、频谱质心、零交叉率、色度频率、频谱滚降。
+首先，我们需要将音频文件转换为 PNG 格式图像（频谱图）。从这些频谱图中，我们需要提取有意义的特征，即 MFCCs、频谱质心、零交叉率、色度频率、频谱滚降。
 
-一旦特征提取完成，它们可以被附加到CSV文件中，以便ANN可以用于分类。
+一旦特征提取完成，它们可以被附加到 CSV 文件中，以便 ANN 可以用于分类。
 
-如果我们想处理图像数据而不是CSV，我们将使用CNN（第2部分的范围）。
+如果我们想处理图像数据而不是 CSV，我们将使用 CNN（第二部分的范围）。
 
 那么我们开始吧。
 
-1. 提取并加载数据到Google Drive，然后在Colab中挂载驱动器。
+1. 提取并加载数据到 Google Drive，然后在 Colab 中挂载驱动器。
 
-![图](../Images/4e737bdbf344ad6cf3f75005ab0e2d45.png)
+![图](img/4e737bdbf344ad6cf3f75005ab0e2d45.png)
 
-数据加载后的Google Colab目录结构。
+数据加载后的 Google Colab 目录结构。
 
 2. 导入所有所需的库。
 
@@ -431,7 +431,7 @@ from keras.models import Sequential****import** **warnings**
 warnings.filterwarnings('ignore')
 ```
 
-3. 现在将音频数据文件转换为PNG格式图像，或者基本上为每个音频提取频谱图。
+3. 现在将音频数据文件转换为 PNG 格式图像，或者基本上为每个音频提取频谱图。
 
 ```py
 cmap = plt.get_cmap('inferno')
@@ -450,7 +450,7 @@ for g in genres:
 
 一首具有蓝调流派的歌曲的频谱图样本。
 
-![图示](../Images/5cfb7af68d6c514db34bdb08572995ac.png)
+![图示](img/5cfb7af68d6c514db34bdb08572995ac.png)
 
 一首蓝调风格的歌曲的谱图
 
@@ -534,13 +534,13 @@ classifier = model.fit(X_train,
 
 ### 结论
 
-好了，第 1 部分到此结束。在本文中，我们对音频数据进行了相当好的分析。我们了解了如何提取重要特征，并实现了人工神经网络 (ANN) 来分类音乐类型。
+好了，第一部分到此结束。在本文中，我们对音频数据进行了相当好的分析。我们了解了如何提取重要特征，并实现了人工神经网络 (ANN) 来分类音乐类型。
 
-在第 2 部分，我们将直接在谱图上使用卷积神经网络进行相同的操作。
+在第二部分，我们将直接在谱图上使用卷积神经网络进行相同的操作。
 
 我希望你们喜欢阅读。请在评论区分享你的想法或疑问。
 
-[**使用 Python 深度学习进行音频数据分析（第 2 部分）**](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-with-python-part-2-4a1f40d3708d)
+[**使用 Python 深度学习进行音频数据分析（第二部分）**](https://levelup.gitconnected.com/audio-data-analysis-using-deep-learning-with-python-part-2-4a1f40d3708d)
 
 -   感谢阅读。
 
@@ -550,11 +550,11 @@ classifier = model.fit(X_train,
 
 **相关：**
 
-+   [音频文件处理：使用 Python 处理 ECG 音频](/2020/02/audio-file-processing-ecg-audio-python.html)
++   音频文件处理：使用 Python 处理 ECG 音频
 
-+   [R 中音频文件处理基础](/2020/02/basics-audio-file-processing-r.html)
++   R 中音频文件处理基础
 
-+   [2020 年要读的人工智能书籍](/2020/01/artificial-intelligence-books-read-2020.html)
++   2020 年要读的人工智能书籍
 
 ### 更多相关话题
 

@@ -1,8 +1,8 @@
 # 5 个免费大学课程来学习机器学习
 
-> 原文：[https://www.kdnuggets.com/5-free-university-courses-to-learn-machine-learning](https://www.kdnuggets.com/5-free-university-courses-to-learn-machine-learning)
+> 原文：[`www.kdnuggets.com/5-free-university-courses-to-learn-machine-learning`](https://www.kdnuggets.com/5-free-university-courses-to-learn-machine-learning)
 
-![bala-uni-ml](../Images/7c699d5139ea17cfa4cec8c3b94b0348.png)
+![bala-uni-ml](img/7c699d5139ea17cfa4cec8c3b94b0348.png)
 
 图片由作者提供
 
@@ -12,21 +12,21 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-为帮助你入门机器学习，我们整理了一些来自MIT、哈佛、斯坦福和UMich等大学的免费课程列表。我建议你浏览这些课程的内容，以了解它们所涵盖的内容。然后根据你感兴趣的学习内容，你可以选择一个或多个课程进行学习。
+为帮助你入门机器学习，我们整理了一些来自 MIT、哈佛、斯坦福和 UMich 等大学的免费课程列表。我建议你浏览这些课程的内容，以了解它们所涵盖的内容。然后根据你感兴趣的学习内容，你可以选择一个或多个课程进行学习。
 
 让我们开始吧！
 
 ## 1\. 机器学习导论 – MIT
 
-MIT 的 [机器学习导论](https://openlearninglibrary.mit.edu/courses/course-v1:MITx+6.036+1T2019/course/) 课程深入涵盖了多个机器学习主题。你可以在MIT开放学习图书馆免费访问包括练习和实践实验室在内的课程内容。
+MIT 的 [机器学习导论](https://openlearninglibrary.mit.edu/courses/course-v1:MITx+6.036+1T2019/course/) 课程深入涵盖了多个机器学习主题。你可以在 MIT 开放学习图书馆免费访问包括练习和实践实验室在内的课程内容。
 
 从机器学习基础到卷积神经网络和推荐系统，这里列出了一些该课程所涵盖的主题：
 
@@ -144,24 +144,24 @@ MIT 的 [机器学习导论](https://openlearninglibrary.mit.edu/courses/course-
 
 这里有几个相关的资源你可能会觉得有用：
 
-+   [5门免费课程掌握机器学习](https://www.kdnuggets.com/5-free-courses-to-master-machine-learning)
++   [5 门免费课程掌握机器学习](https://www.kdnuggets.com/5-free-courses-to-master-machine-learning)
 
-+   [统计学习导论，Python版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
++   [统计学习导论，Python 版：免费书籍](https://www.kdnuggets.com/2023/07/introduction-statistical-learning-python-edition-free-book.html)
 
 祝学习愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过撰写教程、操作指南、观点文章等方式学习并与开发者社区分享知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关话题
 
-+   [5门免费大学课程学习Python](https://www.kdnuggets.com/5-free-university-courses-to-learn-python)
++   [5 门免费大学课程学习 Python](https://www.kdnuggets.com/5-free-university-courses-to-learn-python)
 
-+   [5门免费大学课程学习数据科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
++   [5 门免费大学课程学习数据科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-data-science)
 
-+   [5门免费大学课程学习数据库和SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
++   [5 门免费大学课程学习数据库和 SQL](https://www.kdnuggets.com/5-free-university-courses-to-learn-databases-and-sql)
 
-+   [5门免费大学课程学习计算机科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
++   [5 门免费大学课程学习计算机科学](https://www.kdnuggets.com/5-free-university-courses-to-learn-computer-science)
 
-+   [5门免费大学课程学习数据科学编程](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
++   [5 门免费大学课程学习数据科学编程](https://www.kdnuggets.com/5-free-university-courses-to-learn-coding-for-data-science)
 
-+   [5门斯坦福大学免费课程学习数据科学](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)
++   [5 门斯坦福大学免费课程学习数据科学](https://www.kdnuggets.com/5-free-stanford-university-courses-to-learn-data-science)

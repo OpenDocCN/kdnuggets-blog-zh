@@ -1,10 +1,10 @@
 # 数据科学中最常用、最令人困惑和滥用的术语
 
-> 原文：[https://www.kdnuggets.com/2015/02/data-science-confusing-jargon-abused.html](https://www.kdnuggets.com/2015/02/data-science-confusing-jargon-abused.html)
+> 原文：[`www.kdnuggets.com/2015/02/data-science-confusing-jargon-abused.html`](https://www.kdnuggets.com/2015/02/data-science-confusing-jargon-abused.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-大数据正当红。全球网络设备系统每秒产生数TB的数据。负担得起的存储使得记录看似任意数量的信息成为可能。机器学习算法以及分布式计算，越来越能够从这些信息中提取可操作的智能。但“**大数据**”究竟意味着什么？
+大数据正当红。全球网络设备系统每秒产生数 TB 的数据。负担得起的存储使得记录看似任意数量的信息成为可能。机器学习算法以及分布式计算，越来越能够从这些信息中提取可操作的智能。但“**大数据**”究竟意味着什么？
 
 随着数据科学重要性的提升，与之相关的术语体系也在不断扩展。虽然许多术语定义明确，但其他术语则是流行词汇，在媒体中无处不在，却缺乏具体意义。
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 在这篇文章中，我将从多个角度， namely 理论家、实证数据科学家和新闻稿的夸张表述，提供对数据科学流行词的看法，这些表述往往被主流媒体盲目重复。
 
-![data-brain](../Images/e72822926969d633999c4c5b61921761.png)
+![data-brain](img/e72822926969d633999c4c5b61921761.png)
 
 **大数据**
 
@@ -36,7 +36,7 @@
 
 **理论家：** 云指的是远程计算。幸运的是，对分布式系统的兴趣激发了对可并行算法的关注。
 
-**数据科学家：** 分布式计算资源的可用性大大扩展了数据科学社区的能力。我们可以在数十台或数百台虚拟机上同时训练模型。我们可以使用Hadoop等工具分配计算资源。所有这些都无需在硬件上进行重大前期资本投资。
+**数据科学家：** 分布式计算资源的可用性大大扩展了数据科学社区的能力。我们可以在数十台或数百台虚拟机上同时训练模型。我们可以使用 Hadoop 等工具分配计算资源。所有这些都无需在硬件上进行重大前期资本投资。
 
 **新闻稿：** 云。服务。平台。谷歌，亚马逊，脸书，Azure。云无处不在。一切都在向云端迁移。一切都生活在云端。甚至云本身也在云端。公共云，私人云，元云。你的业务有云战略吗？
 
@@ -48,7 +48,7 @@
 
 **新闻稿：** 深度学习是一项激进的新技术，利用大脑的力量赋予机器类人的智能。这项变革性技术可能加速奇点的到来，催生出能够思考、感受、吸收人类知识总和并殖民半人马座α星的类人机器人一代。
 
-![深度神经网络的轰动性主张类人智能数据情感芯片](../Images/45d90efc38b89ac13e936cd56868e8d0.png)
+![深度神经网络的轰动性主张类人智能数据情感芯片](img/45d90efc38b89ac13e936cd56868e8d0.png)
 
 **隐私**
 
@@ -56,9 +56,9 @@
 
 **数据科学家：** 在互联网上，很可能没有人正在做任何保护你隐私的工作。我们是为了从数据库中提取信息而获得报酬的，而不是为了防止信息泄露而加固它们。为什么要在数据中添加噪音呢？这会使我们的算法性能看起来更差。隐私并不存在。
 
-**新闻稿：** 你的信息经过四重加密，采用银行级的Fort Knox安全保护！没有人，甚至我们的CEO都无法查看你的私人信息。使用我们的产品，知道隐私是我们的首要任务！
+**新闻稿：** 你的信息经过四重加密，采用银行级的 Fort Knox 安全保护！没有人，甚至我们的 CEO 都无法查看你的私人信息。使用我们的产品，知道隐私是我们的首要任务！
 
-![互联网隐私在大数据时代](../Images/8102a8a123bca816fc9021ebc950e323.png)
+![互联网隐私在大数据时代](img/8102a8a123bca816fc9021ebc950e323.png)
 
 **预测编码 / 数据分析**
 
@@ -68,23 +68,23 @@
 
 **新闻稿：** 预测编码代表了人工智能与法律工作流程之间的变革性协同，以前所未有的规模为客户带来成功。最先进的预测编码数据分析将使你的竞争对手过时。
 
-![Zachary Chase Lipton](../Images/240b273c667af1a53a99fd93d1fd39ce.png) **[Zachary Chase Lipton](http://zacklipton.com)** 是加州大学圣地亚哥分校计算机科学工程系的博士生。在[生物医学信息学部](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx)资助下，他对机器学习的理论基础和应用都感兴趣。除了在UCSD的工作外，他还曾在微软研究院实习。
+![Zachary Chase Lipton](img/240b273c667af1a53a99fd93d1fd39ce.png) **[Zachary Chase Lipton](http://zacklipton.com)** 是加州大学圣地亚哥分校计算机科学工程系的博士生。在[生物医学信息学部](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx)资助下，他对机器学习的理论基础和应用都感兴趣。除了在 UCSD 的工作外，他还曾在微软研究院实习。
 
 **相关：**
 
-+   [(深度学习的深层缺陷)’s 深层缺陷](/2015/01/deep-learning-flaws-universal-machine-learning.html)
++   (深度学习的深层缺陷)’s 深层缺陷
 
-+   [差分隐私：如何使隐私与数据挖掘兼容](/2015/01/differential-privacy-data-mining-compatible.html)
++   差分隐私：如何使隐私与数据挖掘兼容
 
-+   [Geoff Hinton AMA：神经网络、大脑和机器学习](/2014/12/geoff-hinton-ama-neural-networks-brain-machine-learning.html)
++   Geoff Hinton AMA：神经网络、大脑和机器学习
 
 ### 了解更多
 
 +   [10 个最常用的 Tableau 函数](https://www.kdnuggets.com/2022/08/10-used-tableau-functions.html)
 
-+   [KDnuggets 新闻，8月3日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
++   [KDnuggets 新闻，8 月 3 日：10 个最常用的 Tableau 函数 • 是…](https://www.kdnuggets.com/2022/n31.html)
 
-+   [KDnuggets 新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
 +   [Python 如何用于数据可视化？](https://www.kdnuggets.com/2022/12/python-used-data-visualization.html)
 

@@ -1,10 +1,10 @@
 # 3 个必备的 Google Colaboratory 小贴士和技巧
 
-> 原文：[https://www.kdnuggets.com/2018/02/essential-google-colaboratory-tips-tricks.html](https://www.kdnuggets.com/2018/02/essential-google-colaboratory-tips-tricks.html)
+> 原文：[`www.kdnuggets.com/2018/02/essential-google-colaboratory-tips-tricks.html`](https://www.kdnuggets.com/2018/02/essential-google-colaboratory-tips-tricks.html)
 
-[评论](#comments)
+评论
 
-![Colab](../Images/f3650b489aafa1c3f9b2aaeda387cb9f.png)
+![Colab](img/f3650b489aafa1c3f9b2aaeda387cb9f.png)
 
 像你们中的许多人一样，我对 Google 的 Colaboratory 项目感到非常兴奋。虽然它并不完全是新的，但最近的公开发布引起了对这个协作平台的许多新的兴趣。
 
@@ -18,7 +18,7 @@
 
 选择“运行时”，“更改运行时类型”，这就是你看到的弹出窗口：
 
-![Colab](../Images/eeea38f5207a70f5cb4e9b770a37ac23.png)
+![Colab](img/eeea38f5207a70f5cb4e9b770a37ac23.png)
 
 确保“硬件加速器”设置为 GPU（默认是 CPU）。之后，确保你已连接到运行时（菜单带子中“连接”旁有一个绿色勾号）。
 
@@ -40,7 +40,7 @@ Found GPU at: /device:GPU:0
 
 另外，供需问题可能导致以下情况：
 
-![Colab GPU fail](../Images/5a4018b87b235bac206921d97cb58c64.png)
+![Colab GPU fail](img/5a4018b87b235bac206921d97cb58c64.png)
 
 就这样。这允许你一次使用免费 GPU 最长达 12 小时。
 
@@ -65,7 +65,7 @@ import keras
 
 ```
 
-![Colab](../Images/82cb326adb51d7ee808c6827c1273181.png)
+![Colab](img/82cb326adb51d7ee808c6827c1273181.png)
 
 ### **3\. 上传和使用数据文件**
 
@@ -95,7 +95,7 @@ for fn in uploaded.keys():
 User uploaded file "iris.csv" with length 3716 bytes
 ```
 
-现在，使用以下方法将文件内容加载到Pandas DataFrame中：
+现在，使用以下方法将文件内容加载到 Pandas DataFrame 中：
 
 ```py
 import pandas as pd
@@ -107,27 +107,27 @@ print(df)
 
 就这样。虽然还有其他方法可以达到相同的目的，上传和使用数据文件，但我发现这种方法最直接、最简单。
 
-Google Colab让我兴奋地尝试以类似于使用Jupyter笔记本的方式进行机器学习，但设置和管理更少。无论如何，这就是我们的想法；我们拭目以待。
+Google Colab 让我兴奋地尝试以类似于使用 Jupyter 笔记本的方式进行机器学习，但设置和管理更少。无论如何，这就是我们的想法；我们拭目以待。
 
-如果你有任何有用的Colab技巧或窍门，请在下面的评论中留下。
+如果你有任何有用的 Colab 技巧或窍门，请在下面的评论中留下。
 
 **相关内容**：
 
-+   [Fast.ai 第1课在Google Colab（免费GPU）](/2018/02/fast-ai-lesson-1-google-colab-free-gpu.html)
++   Fast.ai 第 1 课在 Google Colab（免费 GPU）
 
-+   [从笔记本到JupyterLab——数据科学IDE的演变](/2017/08/continuum-notebooks-jupyterlab-evolution-data-science-ides.html)
++   从笔记本到 JupyterLab——数据科学 IDE 的演变
 
-+   [Python中的探索性数据分析](/2017/07/exploratory-data-analysis-python.html)
++   Python 中的探索性数据分析
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
@@ -135,12 +135,12 @@ Google Colab让我兴奋地尝试以类似于使用Jupyter笔记本的方式进�
 
 +   [建立一个坚实的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败，经过审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，经过审查](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)

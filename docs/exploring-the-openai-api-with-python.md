@@ -1,8 +1,8 @@
 # 使用 Python 探索 OpenAI API
 
-> 原文：[https://www.kdnuggets.com/exploring-the-openai-api-with-python](https://www.kdnuggets.com/exploring-the-openai-api-with-python)
+> 原文：[`www.kdnuggets.com/exploring-the-openai-api-with-python`](https://www.kdnuggets.com/exploring-the-openai-api-with-python)
 
-![使用 Python 探索 OpenAI API](../Images/b571bd0ec99162294767154f74f124b7.png)
+![使用 Python 探索 OpenAI API](img/b571bd0ec99162294767154f74f124b7.png)
 
 图片由 [Ideogram.ai](http://ideogram.ai) 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -85,7 +85,7 @@ print(completion.choices[0].message.content)
 
 对于模型，你可以查看相关模型页面上可以使用的模型列表。
 
-关于消息，我们传递一个包含两个对的字典：角色和内容。角色键指定了对话模型中的角色发送者。有3种不同的角色：系统、用户和助手。
+关于消息，我们传递一个包含两个对的字典：角色和内容。角色键指定了对话模型中的角色发送者。有 3 种不同的角色：系统、用户和助手。
 
 使用消息中的角色，我们可以帮助设置模型行为，并提供一个模型应该如何回答我们提示的示例。
 
@@ -186,7 +186,7 @@ image_url = response.data[0].url
 Image(url=image_url)
 ```
 
-![使用 Python 探索 OpenAI API](../Images/5e5a575cfd9d1d1bb026126983be456d.png)
+![使用 Python 探索 OpenAI API](img/5e5a575cfd9d1d1bb026126983be456d.png)
 
 使用 DALL·E 3 生成的图像
 
@@ -357,7 +357,7 @@ translate = client.audio.translations.create(
 
 我们已经深入了解了 OpenAI 提供的几种模型服务，包括文本生成、图像生成、音频生成、视觉和文本转语音模型。每种模型都有其 API 参数和规范，你需要在使用之前学习。
 
-**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于安联印度尼西亚期间，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius涉及各种人工智能和机器学习话题。
+**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是一名数据科学助理经理和数据撰稿人。在全职工作于安联印度尼西亚期间，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 涉及各种人工智能和机器学习话题。
 
 ### 更多相关主题
 

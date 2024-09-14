@@ -1,8 +1,8 @@
-# 成为机器学习工程师的7个免费Google课程
+# 成为机器学习工程师的 7 个免费 Google 课程
 
-> 原文：[https://www.kdnuggets.com/7-free-google-courses-to-become-a-machine-learning-engineer](https://www.kdnuggets.com/7-free-google-courses-to-become-a-machine-learning-engineer)
+> 原文：[`www.kdnuggets.com/7-free-google-courses-to-become-a-machine-learning-engineer`](https://www.kdnuggets.com/7-free-google-courses-to-become-a-machine-learning-engineer)
 
-![成为机器学习工程师的7个免费Google课程](../Images/41fd1fbf92c1d6723cfaf1a42ab0d73f.png)
+![成为机器学习工程师的 7 个免费 Google 课程](img/41fd1fbf92c1d6723cfaf1a42ab0d73f.png)
 
 图片来源：作者
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-这份来自Google的免费课程合集将帮助你从机器学习新手成长为能够理解和框架现实世界问题的熟练ML工程师，这些问题可以用机器学习来解决。这些课程还将帮助你学习先进的机器学习技术，以及设计、测试和调试机器学习管道。
+这份来自 Google 的免费课程合集将帮助你从机器学习新手成长为能够理解和框架现实世界问题的熟练 ML 工程师，这些问题可以用机器学习来解决。这些课程还将帮助你学习先进的机器学习技术，以及设计、测试和调试机器学习管道。
 
 让我们开始吧。
 
@@ -40,7 +40,7 @@
 
 # 2\. 机器学习速成课程
 
-[机器学习速成课程](https://developers.google.com/machine-learning/crash-course)是一个使用TensorFlow框架的实践入门课程。你将学习机器学习算法是如何工作的以及如何在TensorFlow中实现它们。
+[机器学习速成课程](https://developers.google.com/machine-learning/crash-course)是一个使用 TensorFlow 框架的实践入门课程。你将学习机器学习算法是如何工作的以及如何在 TensorFlow 中实现它们。
 
 这门课程分为以下几个部分：
 
@@ -112,7 +112,7 @@
 
 +   定义相似性
 
-+   K均值聚类
++   K 均值聚类
 
 +   评估聚类算法的结果
 
@@ -120,7 +120,7 @@
 
 # 7\. 推荐系统
 
-从亚马逊和其他在线购物网站的推荐到Netflix上的系列推荐，推荐系统在我们的日常生活中非常相关。
+从亚马逊和其他在线购物网站的推荐到 Netflix 上的系列推荐，推荐系统在我们的日常生活中非常相关。
 
 [推荐系统](https://developers.google.com/machine-learning/recommendation)课程将教你推荐系统的组成部分以及如何构建你自己的应用程序。以下是你将学习的内容概述：
 
@@ -128,7 +128,7 @@
 
 +   嵌入
 
-+   TensorFlow实现的推荐算法
++   TensorFlow 实现的推荐算法
 
 链接: [推荐系统](https://developers.google.com/machine-learning/recommendation)
 
@@ -138,18 +138,18 @@
 
 因此，尝试构建你自己的项目，以应用你在课程中所学到的知识。这将有助于你巩固理解，并建立你的项目组合。祝学习和编码愉快！
 
-**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术写作者。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、指南、观点文章等来学习并与开发者社区分享她的知识。Bala还创建了引人入胜的资源概述和编码教程。
+**[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)**** 是来自印度的开发者和技术写作者。她喜欢在数学、编程、数据科学和内容创作的交集处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和咖啡！目前，她正在通过撰写教程、指南、观点文章等来学习并与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。
 
 ### 更多相关主题
 
-+   [5门免费Google课程，助你成为软件工程师](https://www.kdnuggets.com/5-free-google-courses-to-become-a-software-engineer)
++   [5 门免费 Google 课程，助你成为软件工程师](https://www.kdnuggets.com/5-free-google-courses-to-become-a-software-engineer)
 
 +   [成为专业数据工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-professional-data-engineer)
 
-+   [成为MLOps工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
++   [成为 MLOps 工程师所需的唯一免费课程](https://www.kdnuggets.com/the-only-free-course-you-need-to-become-a-mlops-engineer)
 
 +   [如何成为机器学习工程师](https://www.kdnuggets.com/2022/05/become-machine-learning-engineer.html)
 
-+   [成为SAS认证机器学习工程师所需的一切](https://www.kdnuggets.com/2023/11/sas-everything-need-become-sas-certified-machine-learning-engineer)
++   [成为 SAS 认证机器学习工程师所需的一切](https://www.kdnuggets.com/2023/11/sas-everything-need-become-sas-certified-machine-learning-engineer)
 
-+   [成为数据工程师所需的9项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)
++   [成为数据工程师所需的 9 项技能](https://www.kdnuggets.com/2021/03/9-skills-become-data-engineer.html)

@@ -1,10 +1,10 @@
 # 自动化机器学习简介
 
-> 原文：[https://www.kdnuggets.com/2021/09/introduction-automated-machine-learning.html](https://www.kdnuggets.com/2021/09/introduction-automated-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/09/introduction-automated-machine-learning.html`](https://www.kdnuggets.com/2021/09/introduction-automated-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![intro-to-automl-spc.png](../Images/7a5bcc2c1448536e9fd3c2a3f2fbbf22.png)
+![intro-to-automl-spc.png](img/7a5bcc2c1448536e9fd3c2a3f2fbbf22.png)
 
 ## 什么是 AutoML 系统？
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -42,9 +42,9 @@
 
 +   以严格的方式检查验证集性能，
 
-+   应用额外的判断（内存和CPU占用）以选择适合最终应用的最佳模型。
++   应用额外的判断（内存和 CPU 占用）以选择适合最终应用的最佳模型。
 
-在很大程度上，AutoML系统为数据科学家或分析师完成了所有这些**繁重的工作**，并自动化或简化了生产就绪使用的高度优化训练机器学习模型的生成。
+在很大程度上，AutoML 系统为数据科学家或分析师完成了所有这些**繁重的工作**，并自动化或简化了生产就绪使用的高度优化训练机器学习模型的生成。
 
 因此，这些系统在广泛使用数据科学的组织中越来越受欢迎，因为它们：
 
@@ -54,23 +54,23 @@
 
 +   减少相对高性能标准下的机器学习驱动应用程序的市场推出时间。
 
-就市场推出时间而言，有人可能会争辩说，AutoML系统生成的最终结果可能不如由专家ML工程师（使用手工特征工程或深度学习调优）设计的结果表现优异或优化得好。
+就市场推出时间而言，有人可能会争辩说，AutoML 系统生成的最终结果可能不如由专家 ML 工程师（使用手工特征工程或深度学习调优）设计的结果表现优异或优化得好。
 
-然而，这种手动调整通常是一个耗时的过程，在大多数情况下，与其浪费时间去生产绝对最佳表现的模型，不如在较短时间内使模型达到生产准备状态对组织更为关键。AutoML系统帮助组织实现这一关键业务目标，因此越来越受欢迎并广泛采用。
+然而，这种手动调整通常是一个耗时的过程，在大多数情况下，与其浪费时间去生产绝对最佳表现的模型，不如在较短时间内使模型达到生产准备状态对组织更为关键。AutoML 系统帮助组织实现这一关键业务目标，因此越来越受欢迎并广泛采用。
 
-现在组织可以简单地为其员工购买[定制化机器学习工作站](https://www.sabrepc.com/Deep-Learning-GPU-Workstations)，安装像AutoML这样的工具，以快速启动一个基于机器学习的系统，并继续进行AI准备生产的下一步，从而比以往更快地将成果推向市场。
+现在组织可以简单地为其员工购买[定制化机器学习工作站](https://www.sabrepc.com/Deep-Learning-GPU-Workstations)，安装像 AutoML 这样的工具，以快速启动一个基于机器学习的系统，并继续进行 AI 准备生产的下一步，从而比以往更快地将成果推向市场。
 
-## AutoML系统类型及一些著名示例
+## AutoML 系统类型及一些著名示例
 
-有许多不同类型的AutoML系统，因为它们满足数据科学或机器学习工作流程中不同任务的需求。
+有许多不同类型的 AutoML 系统，因为它们满足数据科学或机器学习工作流程中不同任务的需求。
 
-一些类型的AutoML系统包括：
+一些类型的 AutoML 系统包括：
 
-+   用于自动化参数调优的AutoML（一个相对基础的类型）
++   用于自动化参数调优的 AutoML（一个相对基础的类型）
 
-+   非深度学习的AutoML，例如**Auto-Sklearn**。这类系统主要应用于数据预处理、自动特征分析、自动特征检测、自动特征选择和自动模型选择。
++   非深度学习的 AutoML，例如**Auto-Sklearn**。这类系统主要应用于数据预处理、自动特征分析、自动特征检测、自动特征选择和自动模型选择。
 
-+   深度学习/神经网络的AutoML，包括专门为神经网络架构搜索（NAS）设计的系统，以及像**AutoKeras**这样构建在流行的深度学习框架之上的实用工具包。
++   深度学习/神经网络的 AutoML，包括专门为神经网络架构搜索（NAS）设计的系统，以及像**AutoKeras**这样构建在流行的深度学习框架之上的实用工具包。
 
 ### **Auto-Sklearn**
 
@@ -80,7 +80,7 @@
 
 它包括特征工程方法，如 [独热编码](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html)、数字特征标准化和主成分分析（PCA）。该库核心使用 scikit-learn 估计器来处理分类和回归问题。
 
-![图示](../Images/074d8c81b28f478488124e78f219a941.png)
+![图示](img/074d8c81b28f478488124e78f219a941.png)
 
 *Auto-Sklearn 工作流程和图示*
 
@@ -116,7 +116,7 @@ if __name__ == "__main__":
 
 ### MLBox
 
-![](../Images/b596e74e3e590571adae1e059e8d9301.png)
+![](img/b596e74e3e590571adae1e059e8d9301.png)
 
 MLBox 是一个强大的自动化机器学习 Python 库。根据官方文档，它提供以下功能：
 
@@ -134,13 +134,13 @@ MLBox 是一个强大的自动化机器学习 Python 库。根据官方文档，
 
 ### TPOT
 
-![TPOT AutoML](../Images/958256004b67c4c801dfee6a22988536.png)
+![TPOT AutoML](img/958256004b67c4c801dfee6a22988536.png)
 
 TPOT 是一个 Python 自动化机器学习工具，通过遗传编程优化机器学习流水线。它也构建在 scikit-learn 之上。
 
-![图示](../Images/0507d7866679d6a5e34aff51a54166ce.png)
+![图示](img/0507d7866679d6a5e34aff51a54166ce.png)
 
-*示例 TPOT 流水线（来自 [https://epistasislab.github.io/tpot/](https://epistasislab.github.io/tpot/)）*
+*示例 TPOT 流水线（来自 [`epistasislab.github.io/tpot/`](https://epistasislab.github.io/tpot/)）*
 
 **文档**：这是 [文档链接](https://epistasislab.github.io/tpot/)。
 
@@ -164,13 +164,13 @@ tpot.export('tpot_iris_pipeline.py')
 
 ### **AutoKeras**
 
-AutoKeras是由[德州A&M大学数据实验室](http://people.tamu.edu/~guangzhou92/Data_Lab/)开发的自动化机器学习开源软件库。基于深度学习框架**Keras**，AutoKeras提供了自动搜索深度学习模型架构和超参数的功能。
+AutoKeras 是由[德州 A&M 大学数据实验室](http://people.tamu.edu/~guangzhou92/Data_Lab/)开发的自动化机器学习开源软件库。基于深度学习框架**Keras**，AutoKeras 提供了自动搜索深度学习模型架构和超参数的功能。
 
-AutoKeras遵循经典的scikit-learn API设计，因此易于使用。该框架的目标是通过使用自动化的**神经网络架构搜索（NAS）**算法来简化机器学习实践和研究。
+AutoKeras 遵循经典的 scikit-learn API 设计，因此易于使用。该框架的目标是通过使用自动化的**神经网络架构搜索（NAS）**算法来简化机器学习实践和研究。
 
 **文档**：这里是详细的[文档链接](https://autokeras.com/)。
 
-**代码示例：** 这里是一个用于MNIST图像分类任务的示例代码。
+**代码示例：** 这里是一个用于 MNIST 图像分类任务的示例代码。
 
 ```py
 import numpy as np
@@ -194,36 +194,36 @@ print(predicted_y)
 print(clf.evaluate(x_test, y_test))
 ```
 
-## AutoML系统及其重要性的总结
+## AutoML 系统及其重要性的总结
 
-在本文中，我们首先解释了自动化机器学习框架或所谓的AutoML系统背后的核心思想。我们描述了它们的实用性以及为何它们在各种商业和技术组织中越来越受欢迎。我们还展示了一些突出的AutoML库和框架，并提供了相关的代码示例和架构图解。
+在本文中，我们首先解释了自动化机器学习框架或所谓的 AutoML 系统背后的核心思想。我们描述了它们的实用性以及为何它们在各种商业和技术组织中越来越受欢迎。我们还展示了一些突出的 AutoML 库和框架，并提供了相关的代码示例和架构图解。
 
 了解这些强大的框架将对任何即将成为数据科学家的人员有益，因为它们将继续在能力和广泛应用方面发展。
 
 请通过在下方留言告知我们您感兴趣的任何话题，或者随时通过[联系我们](https://www.sabrepc.com/Contact-Us)提出您的问题。
 
-**简历：[Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 管理Exxact Corp博客，并与许多才华横溢的作者合作，这些作者撰写有关深度学习不同方面的文章。
+**简历：[Kevin Vu](https://www.kdnuggets.com/author/kevin-vu)** 管理 Exxact Corp 博客，并与许多才华横溢的作者合作，这些作者撰写有关深度学习不同方面的文章。
 
 [原文](https://www.sabrepc.com/blog/Deep-Learning-and-AI/introduction-to-automl)。已获许可转载。
 
 **相关：**
 
-+   [如何创建AutoML管道优化沙箱](/2021/09/automl-pipeline-optimization-sandbox.html)
++   如何创建 AutoML 管道优化沙箱
 
-+   [使用FLAML + Ray Tune进行快速AutoML](/2021/09/fast-automl-flaml-ray-tune.html)
++   使用 FLAML + Ray Tune 进行快速 AutoML
 
-+   [前18名低代码和无代码机器学习平台](/2021/09/top-18-low-code-no-code-machine-learning-platforms.html)
++   前 18 名低代码和无代码机器学习平台
 
 ### 更多相关话题
 
-+   [使用Streamlit构建DIY自动化机器学习]（https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html）
++   [使用 Streamlit 构建 DIY 自动化机器学习]（https://www.kdnuggets.com/2021/11/diy-automated-machine-learning-app.html）
 
-+   [使用Python的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
++   [使用 Python 的自动化机器学习：案例研究](https://www.kdnuggets.com/2023/04/automated-machine-learning-python-case-study.html)
 
-+   [使用Python的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
++   [使用 Python 的自动化机器学习：不同方法的比较…](https://www.kdnuggets.com/2023/03/automated-machine-learning-python-comparison-different-approaches.html)
 
 +   [入门自动化文本摘要]（https://www.kdnuggets.com/2019/11/getting-started-automated-text-summarization.html）
 
-+   [利用ChatGPT进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)
++   [利用 ChatGPT 进行自动化数据清理和预处理](https://www.kdnuggets.com/2023/08/harnessing-chatgpt-automated-data-cleaning-preprocessing.html)
 
 +   [AI-自动化网络安全：自动化什么？](https://www.kdnuggets.com/ai-automated-cybersecurity-what-to-automate)

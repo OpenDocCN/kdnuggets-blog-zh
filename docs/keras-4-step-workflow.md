@@ -1,12 +1,12 @@
 # Keras 4 步骤工作流程
 
-> 原文：[https://www.kdnuggets.com/2018/06/keras-4-step-workflow.html](https://www.kdnuggets.com/2018/06/keras-4-step-workflow.html)
+> 原文：[`www.kdnuggets.com/2018/06/keras-4-step-workflow.html`](https://www.kdnuggets.com/2018/06/keras-4-step-workflow.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 Francois Chollet 在他的书《[使用 Python 的深度学习](https://www.amazon.com/Deep-Learning-Python-Francois-Chollet/dp/1617294438)》中，早早地概述了使用 Keras 开发神经网络的总体概况。从书中早期的一个简单的 MNIST 示例出发，Chollet 简化了与 Keras 直接相关的网络构建过程，将其总结为 4 个主要步骤。
 
-![图像](../Images/18ac70fa7c1744a26764009b05f2135f.png)
+![图像](img/18ac70fa7c1744a26764009b05f2135f.png)
 
 这不是一个机器学习工作流程，也不是一个完整的深度学习问题解决框架。这四个步骤仅涉及你整体神经网络机器学习工作流程中 Keras 相关的部分。这些步骤如下：
 
@@ -18,7 +18,7 @@ Francois Chollet 在他的书《[使用 Python 的深度学习](https://www.amaz
 
 1.  训练模型
 
-[![图像](../Images/61726ecd071b690280edc20163c2a3b8.png)](https://www.kdnuggets.com/wp-content/uploads/keras-4-step-workflow.png)
+![图像](https://www.kdnuggets.com/wp-content/uploads/keras-4-step-workflow.png)
 
 虽然 Chollet 接下来花费了他书中的其余部分来充分填充使用这些数据所需的详细信息，但让我们通过一个示例初步了解工作流程。
 
@@ -64,7 +64,7 @@ model.add(layers.Dense(5, activation='softmax'))
 
 通过这些几行代码，我们的 Keras 模型已定义。Sequential 类的 `summary()` 方法提供了对我们模型的以下洞察：
 
-![Image](../Images/8691ad64fbe304b926ac0671b5dad127.png)
+![Image](img/8691ad64fbe304b926ac0671b5dad127.png)
 
 **3\. 配置学习过程**
 
@@ -99,29 +99,29 @@ model.fit(X_train, y_train,
 
 ```
 
-![Image](../Images/7d31c85a14ad387591639acb14695904.png)
+![Image](img/7d31c85a14ad387591639acb14695904.png)
 
 请注意，epoch 准确率并不特别令人满意，这也很合理，因为使用了随机数据。
 
-希望这能帮助你了解Keras如何通过库作者规定的简单4步过程解决传统分类问题。
+希望这能帮助你了解 Keras 如何通过库作者规定的简单 4 步过程解决传统分类问题。
 
 **相关：**
 
-+   [接近机器学习过程的框架](/2018/05/general-approaches-machine-learning-process.html)
++   接近机器学习过程的框架
 
-+   [掌握Keras深度学习的7个步骤](/2017/10/seven-steps-deep-learning-keras.html)
++   掌握 Keras 深度学习的 7 个步骤
 
-+   [使用遗传算法优化递归神经网络](/2018/01/genetic-algorithm-optimizing-recurrent-neural-network.html)
++   使用遗传算法优化递归神经网络
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 工作
 
 * * *
 
@@ -129,12 +129,12 @@ model.fit(X_train, y_train,
 
 +   [停止学习数据科学以寻找目的，然后找到目的去…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [9亿美元AI失败的审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元 AI 失败的审视](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [数据科学学习统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

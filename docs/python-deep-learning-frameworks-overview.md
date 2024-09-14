@@ -1,12 +1,12 @@
 # Python 深度学习框架概述
 
-> 原文：[https://www.kdnuggets.com/2017/02/python-deep-learning-frameworks-overview.html](https://www.kdnuggets.com/2017/02/python-deep-learning-frameworks-overview.html)
+> 原文：[`www.kdnuggets.com/2017/02/python-deep-learning-frameworks-overview.html`](https://www.kdnuggets.com/2017/02/python-deep-learning-frameworks-overview.html)
 
 **由 Madison May， [indico](https://indico.io/)**。
 
 我最近发现了我在 Data Science Stack Exchange 上关于 [“最佳 Python 神经网络库”](http://datascience.stackexchange.com/a/695/684) 的一个旧回答，这让我意识到在过去 2.5 年里 Python 深度学习生态系统的巨大变化。我在 2014 年 7 月推荐的库 `pylearn2` 已不再积极开发或维护，但许多深度学习库已崛起取而代之。每个库都有其自身的优缺点。我们在 indico 的生产或开发中使用了大多数列表中的技术，但对于少数未使用的，我将借鉴他人的经验，以帮助提供 2017 年 Python 深度学习生态系统的清晰全面的图景。
 
-![Python](../Images/0622f9b73303760e290a3a006164b0bb.png)
+![Python](img/0622f9b73303760e290a3a006164b0bb.png)
 
 特别是，我们将关注：
 
@@ -32,7 +32,7 @@ Theano 是一个 Python 库，允许你高效地定义、优化和评估涉及�
 
 **文档：**
 
-[http://deeplearning.net/software/theano/](http://deeplearning.net/software/theano/)
+[`deeplearning.net/software/theano/`](http://deeplearning.net/software/theano/)
 
 **总结：**
 
@@ -68,21 +68,21 @@ Theano 是驱动我们列表中许多其他深度学习框架的数值计算工�
 
 **描述：**
 
-一个用于在Theano中构建和训练神经网络的轻量级库。
+一个用于在 Theano 中构建和训练神经网络的轻量级库。
 
 **文档：**
 
-[http://lasagne.readthedocs.org/](http://lasagne.readthedocs.org/)
+[`lasagne.readthedocs.org/`](http://lasagne.readthedocs.org/)
 
 **总结：**
 
-由于Theano主要旨在成为一个符号数学库，Lasagne在Theano之上提供了更适合深度学习的抽象。它主要由DeepMind的研究科学家Sander Dieleman编写和维护。Lasagne允许用户从`Layer`层面进行思考，提供像“Conv2DLayer”和“DropoutLayer”等构建块来进行操作，而无需在符号变量之间指定函数关系。Lasagne在提供丰富的常见组件以帮助层定义、层初始化、模型正则化、模型监控和模型训练的同时，几乎没有牺牲灵活性。
+由于 Theano 主要旨在成为一个符号数学库，Lasagne 在 Theano 之上提供了更适合深度学习的抽象。它主要由 DeepMind 的研究科学家 Sander Dieleman 编写和维护。Lasagne 允许用户从`Layer`层面进行思考，提供像“Conv2DLayer”和“DropoutLayer”等构建块来进行操作，而无需在符号变量之间指定函数关系。Lasagne 在提供丰富的常见组件以帮助层定义、层初始化、模型正则化、模型监控和模型训练的同时，几乎没有牺牲灵活性。
 
 **优点：**
 
 +   仍然非常灵活
 
-+   比Theano更高层次的抽象
++   比 Theano 更高层次的抽象
 
 +   文档和代码包含各种意大利面梗
 
@@ -92,33 +92,33 @@ Theano 是驱动我们列表中许多其他深度学习框架的数值计算工�
 
 **资源：**
 
-+   [官方GitHub页面](https://github.com/Lasagne/Lasagne)
++   [官方 GitHub 页面](https://github.com/Lasagne/Lasagne)
 
 +   [官方安装指南](http://lasagne.readthedocs.io/en/latest/user/installation.html)
 
-+   [官方Lasagne教程](http://lasagne.readthedocs.io/en/latest/user/tutorial.html)
++   [官方 Lasagne 教程](http://lasagne.readthedocs.io/en/latest/user/tutorial.html)
 
-+   [示例Lasagne代码](https://github.com/Lasagne/Lasagne/tree/master/examples)
++   [示例 Lasagne 代码](https://github.com/Lasagne/Lasagne/tree/master/examples)
 
 ### [Blocks](https://github.com/mila-udem/blocks)
 
 **描述：**
 
-一个用于构建和训练神经网络的Theano框架。
+一个用于构建和训练神经网络的 Theano 框架。
 
 **文档：**
 
-[http://blocks.readthedocs.io/en/latest/](http://blocks.readthedocs.io/en/latest/)
+[`blocks.readthedocs.io/en/latest/`](http://blocks.readthedocs.io/en/latest/)
 
 **总结：**
 
-类似于Lasagne，Blocks试图在Theano之上添加一层抽象，以便比编写原始Theano代码更清晰、更简单、更标准化地定义深度学习模型。它由蒙特利尔大学的实验室MILA编写——这些人中有一些参与了Theano及其第一个高层接口PyLearn2的构建。它比Lasagne灵活一些，但有效使用的学习曲线稍微困难一些。Blocks对递归神经网络架构有很好的支持，如果你对探索这类模型感兴趣，它值得一看。与TensorFlow并列，Blocks是我们在indico生产环境中部署的许多API的首选库。
+类似于 Lasagne，Blocks 试图在 Theano 之上添加一层抽象，以便比编写原始 Theano 代码更清晰、更简单、更标准化地定义深度学习模型。它由蒙特利尔大学的实验室 MILA 编写——这些人中有一些参与了 Theano 及其第一个高层接口 PyLearn2 的构建。它比 Lasagne 灵活一些，但有效使用的学习曲线稍微困难一些。Blocks 对递归神经网络架构有很好的支持，如果你对探索这类模型感兴趣，它值得一看。与 TensorFlow 并列，Blocks 是我们在 indico 生产环境中部署的许多 API 的首选库。
 
 **优点：**
 
 +   仍然非常灵活
 
-+   比Theano更高层次的抽象
++   比 Theano 更高层次的抽象
 
 +   经过非常充分的测试
 
@@ -132,13 +132,13 @@ Theano 是驱动我们列表中许多其他深度学习框架的数值计算工�
 
 +   [官方安装指南](http://blocks.readthedocs.io/en/latest/setup.html)
 
-+   [关于Blocks库设计的Arxiv论文](https://arxiv.org/pdf/1506.00619.pdf)
++   [关于 Blocks 库设计的 Arxiv 论文](https://arxiv.org/pdf/1506.00619.pdf)
 
-+   [关于Blocks和Lasagne之间差异的Reddit讨论](https://www.reddit.com/r/MachineLearning/comments/4kpztm/lasagne_vs_blocks_for_deep_learning/)
++   [关于 Blocks 和 Lasagne 之间差异的 Reddit 讨论](https://www.reddit.com/r/MachineLearning/comments/4kpztm/lasagne_vs_blocks_for_deep_learning/)
 
 +   [Block 的数据管道姊妹库 Fuel](https://github.com/mila-udem/fuel)
 
-![TensorFlow](../Images/b59569d0e75188dad1b6e6f9b36d2268.png)
+![TensorFlow](img/b59569d0e75188dad1b6e6f9b36d2268.png)
 
 ### [TensorFlow](https://github.com/tensorflow/tensorflow)
 
@@ -148,7 +148,7 @@ Theano 是驱动我们列表中许多其他深度学习框架的数值计算工�
 
 **文档：**
 
-[https://www.tensorflow.org/api_docs/python/](https://www.tensorflow.org/api_docs/python/)
+[`www.tensorflow.org/api_docs/python/`](https://www.tensorflow.org/api_docs/python/)
 
 **摘要：**
 
@@ -196,7 +196,7 @@ Python 的深度学习库。卷积神经网络、递归神经网络等。可以�
 
 **文档：**
 
-[https://keras.io/](https://keras.io/)
+[`keras.io/`](https://keras.io/)
 
 **摘要：**
 
@@ -234,7 +234,7 @@ MXNet 是一个旨在兼顾效率和灵活性的深度学习框架。
 
 **文档：**
 
-[http://mxnet.io/api/python/index.html#python-api-reference](http://mxnet.io/api/python/index.html#python-api-reference)
+[`mxnet.io/api/python/index.html#python-api-reference`](http://mxnet.io/api/python/index.html#python-api-reference)
 
 **总结：**
 
@@ -272,7 +272,7 @@ Python 中具有强大 GPU 加速的张量和动态神经网络。
 
 **文档：**
 
-[http://pytorch.org/docs/](http://pytorch.org/docs/)
+[`pytorch.org/docs/`](http://pytorch.org/docs/)
 
 **总结：**
 
@@ -308,21 +308,21 @@ PyTorch 刚刚发布了一周多，它是我们 Python 深度学习框架列表�
 
 **相关：**
 
-+   [深度学习、人工直觉与 AGI 的追求](/2017/02/deep-learning-artificial-intelligence-quest-agi.html)
++   深度学习、人工直觉与 AGI 的追求
 
-+   [深度学习为何与机器学习截然不同](/2016/12/deep-learning-radically-different-machine-learning.html)
++   深度学习为何与机器学习截然不同
 
-+   [深度学习是灵丹妙药吗？](/2017/02/deep-learning-silver-bullet.html)
++   深度学习是灵丹妙药吗？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的信息技术
 
 * * *
 
@@ -334,7 +334,7 @@ PyTorch 刚刚发布了一周多，它是我们 Python 深度学习框架列表�
 
 +   [是什么让 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该了解的三大R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三大 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学，去寻找目的，找到目的后…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 

@@ -1,8 +1,8 @@
 # 为什么数据科学家期望谷歌 Bard 提供有缺陷的建议
 
-> 原文：[https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
+> 原文：[`www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html`](https://www.kdnuggets.com/2023/02/data-scientists-expect-flawed-advice-google-bard.html)
 
-![为什么数据科学家期望谷歌 Bard 提供有缺陷的建议](../Images/0310c0471a6c2e5866044ead9d967a3d.png)
+![为什么数据科学家期望谷歌 Bard 提供有缺陷的建议](img/0310c0471a6c2e5866044ead9d967a3d.png)
 
 图片由编辑提供
 
@@ -50,27 +50,27 @@ Bard 还可以在销售团队培训中提供帮助，在你招待挑剔食客时
 
 ## 自动化常规任务
 
-谷歌已经与市场整合，使你可以直接从其界面购买商品和进行预订。谷歌Bard可能允许你通过对话实现这一点。Alexa可能能启动你的Spotify播放列表，但想象一下与AI协作，为你的下一次公路旅行策划配乐，同时你开车上班。
+谷歌已经与市场整合，使你可以直接从其界面购买商品和进行预订。谷歌 Bard 可能允许你通过对话实现这一点。Alexa 可能能启动你的 Spotify 播放列表，但想象一下与 AI 协作，为你的下一次公路旅行策划配乐，同时你开车上班。
 
 ## 参与社区对话
 
-社交网络往往助长在线争论，奖励有争议的观点，并为网络喷子提供额外曝光。这导致许多人放弃了2010年代流行的平台。谷歌Bard可以为小众社区策划对话，连接好奇的头脑，同时过滤掉仇恨言论和虚假信息。
+社交网络往往助长在线争论，奖励有争议的观点，并为网络喷子提供额外曝光。这导致许多人放弃了 2010 年代流行的平台。谷歌 Bard 可以为小众社区策划对话，连接好奇的头脑，同时过滤掉仇恨言论和虚假信息。
 
-## 使用谷歌Bard的潜在陷阱
+## 使用谷歌 Bard 的潜在陷阱
 
 不足为奇的是，这个新聊天机器人引起了很多关注，至少部分原因是它广泛的应用潜力。对棋盘游戏爱好者和项目经理来说，它的吸引力是一样的。皮查伊在新闻稿中遗漏了一些重要点，这些点在最近的非凡太空摄影误归属事件中变得更加明显。这里还有一些需要考虑的点。
 
 ## 聊天机器人不必讲真话
 
-像ChatGPT这样的流行对话代理内置了伦理指导。例如，它不应讲冷笑话或故意误导你。但这并不总是适用于AI聊天系统。
+像 ChatGPT 这样的流行对话代理内置了伦理指导。例如，它不应讲冷笑话或故意误导你。但这并不总是适用于 AI 聊天系统。
 
-查看这项关于[人工智能在棋盘游戏外交中的应用](https://www.nature.com/articles/s41467-022-34473-5)的最新研究，重点关注谈判和形成联盟的能力。研究还强调了对任何违背承诺的方实施处罚。看到团队专注于构建促进可信沟通的AI策略令人鼓舞，但请考虑这对不慎的数据科学家意味着什么。
+查看这项关于[人工智能在棋盘游戏外交中的应用](https://www.nature.com/articles/s41467-022-34473-5)的最新研究，重点关注谈判和形成联盟的能力。研究还强调了对任何违背承诺的方实施处罚。看到团队专注于构建促进可信沟通的 AI 策略令人鼓舞，但请考虑这对不慎的数据科学家意味着什么。
 
 随着聊天机器人技术的发展，我们应当更多考虑提供服务者的动机。在进行谈判（金融服务、交易、薪资谈判）时，聊天机器人可能会故意误导用户。
 
 ## 机器学习并不能消除偏见
 
-数据科学社区已经很清楚[机器学习中的偏见](/2019/08/types-bias-machine-learning.html)。像他们的人类同行一样，对话聊天机器人经常表现出确认偏见和偏见偏见。谷歌Bard无疑会考虑到这些问题中的一些，但我们应当对新发布的第三方应用保持警惕。
+数据科学社区已经很清楚机器学习中的偏见。像他们的人类同行一样，对话聊天机器人经常表现出确认偏见和偏见偏见。谷歌 Bard 无疑会考虑到这些问题中的一些，但我们应当对新发布的第三方应用保持警惕。
 
 虽然谷歌聘请了一些世界上最优秀的数据科学家，但这家科技巨头也并非没有缺陷。记得那位提出一些[令人不便的问题](https://www.technologyreview.com/2020/12/04/1013294/google-ai-ethics-research-paper-forced-out-timnit-gebru/)的伦理学研究者吗？她表达了对环境成本、难以理解的模型、错误导向的研究努力以及传播虚假信息潜在风险的担忧。
 
@@ -80,15 +80,15 @@ Bard 还可以在销售团队培训中提供帮助，在你招待挑剔食客时
 
 [引用乔治·博克斯](https://en.wikipedia.org/wiki/All_models_are_wrong)的话：“. . . 没有必要问‘模型是否真实？’ 如果‘真实’是指‘全部真实’，答案必须是‘不’。唯一感兴趣的问题是‘模型是否具有启发性和实用性？’”
 
-## 如何访问谷歌Bard
+## 如何访问谷歌 Bard
 
-谷歌已经向“受信任的测试者”提供了Bard，但公司承诺在几周内进行更广泛的发布。这意味着开发者应该在密歇根州上半岛的雪融化之前获得谷歌的轻量级版本。
+谷歌已经向“受信任的测试者”提供了 Bard，但公司承诺在几周内进行更广泛的发布。这意味着开发者应该在密歇根州上半岛的雪融化之前获得谷歌的轻量级版本。
 
-这对谷歌搜索的更新意味着什么？我们还得拭目以待。谷歌已经在使用人工智能来改进[视觉搜索结果](https://blog.google/products/search/visual-search-ai/)。我预计今年和明年会有很多变化。我期待着探索Bard作为商业工具的潜力。
+这对谷歌搜索的更新意味着什么？我们还得拭目以待。谷歌已经在使用人工智能来改进[视觉搜索结果](https://blog.google/products/search/visual-search-ai/)。我预计今年和明年会有很多变化。我期待着探索 Bard 作为商业工具的潜力。
 
-## 如何开始使用Bard进行数据科学？
+## 如何开始使用 Bard 进行数据科学？
 
-如果你想入门数据科学，我们列出了我们的一些[推荐课程](https://hackr.io/blog/data-science-courses)。这些课程在深度和范围上各不相同，所以一定要找到适合你技能水平的选项。那些考虑转行的人可以从头开始学习这个行业，虽然许多人选择学习像Python这样的编程语言作为进入该领域的起点。
+如果你想入门数据科学，我们列出了我们的一些[推荐课程](https://hackr.io/blog/data-science-courses)。这些课程在深度和范围上各不相同，所以一定要找到适合你技能水平的选项。那些考虑转行的人可以从头开始学习这个行业，虽然许多人选择学习像 Python 这样的编程语言作为进入该领域的起点。
 
 ## 从零开始学习数据科学
 
@@ -96,7 +96,7 @@ Bard 还可以在销售团队培训中提供帮助，在你招待挑剔食客时
 
 ## 作为数据科学家学习编程
 
-数据科学涵盖了企业的各种功能，因此数据科学家需要学习多种语言。常见技能包括Python、R、Hadoop、SQL和Apache Spark。为了深入了解这个主题，我们还讨论了[如何学习数据科学](https://hackr.io/blog/how-to-learn-data-science)。
+数据科学涵盖了企业的各种功能，因此数据科学家需要学习多种语言。常见技能包括 Python、R、Hadoop、SQL 和 Apache Spark。为了深入了解这个主题，我们还讨论了[如何学习数据科学](https://hackr.io/blog/how-to-learn-data-science)。
 
 ## 作为专业人士实施人工智能
 
@@ -104,20 +104,20 @@ Bard 还可以在销售团队培训中提供帮助，在你招待挑剔食客时
 
 ## 总结思考
 
-如果你对Google Bard感到兴奋，你并不孤单。如果你对它感到紧张、害怕或困惑，你也并不孤单。数据爱好者们了解聊天机器人如何提供建议，我们可以预期未来任何基于大型语言模型的技术都会出现类似的错误。
+如果你对 Google Bard 感到兴奋，你并不孤单。如果你对它感到紧张、害怕或困惑，你也并不孤单。数据爱好者们了解聊天机器人如何提供建议，我们可以预期未来任何基于大型语言模型的技术都会出现类似的错误。
 
-**[Jim Markus](https://www.linkedin.com/in/jimmarkus/)** 管理Hackr.io及VentureKite旗下的网站组合。他主持了热门财经播客《节俭生活》，并共同创办了《墨与血决斗社》，这是一个在美国各大会议上出现的戏剧写作活动。他还是一位获奖的游戏设计师。
+**[Jim Markus](https://www.linkedin.com/in/jimmarkus/)** 管理 Hackr.io 及 VentureKite 旗下的网站组合。他主持了热门财经播客《节俭生活》，并共同创办了《墨与血决斗社》，这是一个在美国各大会议上出现的戏剧写作活动。他还是一位获奖的游戏设计师。
 
 ### 更多相关话题
 
-+   [什么是Google AI Bard？](https://www.kdnuggets.com/2023/03/google-ai-bard.html)
++   [什么是 Google AI Bard？](https://www.kdnuggets.com/2023/03/google-ai-bard.html)
 
-+   [ChatGPT与Google Bard：技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
++   [ChatGPT 与 Google Bard：技术差异比较](https://www.kdnuggets.com/2023/03/chatgpt-google-bard-comparison-technical-differences.html)
 
-+   [如何获得机器学习职位：来自Meta、Google Brain和SAP工程师的建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
++   [如何获得机器学习职位：来自 Meta、Google Brain 和 SAP 工程师的建议](https://www.kdnuggets.com/2022/08/corise-land-ml-job-advice-engineers-meta-google-brain-sap.html)
 
 +   [数据科学家的职业路径展望](https://www.kdnuggets.com/2022/01/expect-career-path-data-scientist.html)
 
-+   [Bard数据科学备忘单](https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html)
++   [Bard 数据科学备忘单](https://www.kdnuggets.com/2023/05/bard-data-science-cheat-sheet.html)
 
-+   [2023年AI质量趋势展望](https://www.kdnuggets.com/2022/11/expect-ai-quality-trends-2023.html)
++   [2023 年 AI 质量趋势展望](https://www.kdnuggets.com/2022/11/expect-ai-quality-trends-2023.html)

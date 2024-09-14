@@ -1,6 +1,6 @@
 # 用 Python 在 5 分钟内构建网络爬虫
 
-> 原文：[https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
+> 原文：[`www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html`](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
 
 数据科学家通常需要收集大量数据，以便在组织中提取业务价值。不幸的是，这是一项经常被忽视的技能，因为大多数数据科学课程并不教授如何收集外部数据。相反，大多注重于模型构建和训练。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 完成后，让我们查看一下我们想要抓取的网站，并决定要从中提取的数据点。
 
-![用 Python 在 5 分钟内构建网络爬虫](../Images/36c24272426adc420668875de0036904.png)
+![用 Python 在 5 分钟内构建网络爬虫](img/36c24272426adc420668875de0036904.png)
 
 这个网站包含了名人名言的列表。页面上显示了三项主要信息——名言、作者及其相关的几个标签。
 
@@ -53,7 +53,7 @@ import requests
 然后，使用 *requests* 库，我们将获取我们想抓取的页面并提取其 HTML：
 
 ```py
-f = requests.get('[http://quotes.toscrape.com/'](http://quotes.toscrape.com/'))
+f = requests.get('[`quotes.toscrape.com/'`](http://quotes.toscrape.com/'))
 ```
 
 接下来，我们将把网站的 HTML 文本传递给 BeautifulSoup，它将解析这些原始数据，以便轻松进行抓取：
@@ -74,7 +74,7 @@ print(soup.get_text())
 
 现在，让我们开始抓取网站上列出的引用。右键点击任何一个引用，选择 "*检查元素*"。Chrome 开发者工具将会出现在你的屏幕上：
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/dbecc5467aba59a027d53cffc15711b0.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/dbecc5467aba59a027d53cffc15711b0.png)
 
 BeautifulSoup 具有像 find() 和 findAll() 这样的函数，你可以用它们从网页中提取特定的 HTML 标签。
 
@@ -89,7 +89,7 @@ for i in soup.findAll("div",{"class":"quote"}):
 
 一旦你运行上述代码，将会生成以下输出：
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/b883a12a11853b13a2ce2a158532a465.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/b883a12a11853b13a2ce2a158532a465.png)
 
 网页上有十个引用，我们的抓取器已经成功地收集了所有这些引用。太棒了！
 
@@ -97,7 +97,7 @@ for i in soup.findAll("div",{"class":"quote"}):
 
 如果你右键点击网页上的任何一个作者名字并选择检查，你会看到它们都包含在 `<small>` 标签内，且类名为 *author*。
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/800935a2cbaf6e535af7d66350f45f26.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/800935a2cbaf6e535af7d66350f45f26.png)
 
 我们将使用 find() 和 findAll() 函数来提取这个标签内的所有作者名字。
 
@@ -108,7 +108,7 @@ for i in soup.findAll("div",{"class":"quote"}):
 
 以下输出将被渲染：
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/d1cd7739f696412e760b686fbd3e3351.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/d1cd7739f696412e760b686fbd3e3351.png)
 
 再次，我们成功地抓取了页面上列出的所有作者。我们快完成了！
 
@@ -116,7 +116,7 @@ for i in soup.findAll("div",{"class":"quote"}):
 
 如果你右键点击任何一个标签并选择检查元素，你会看到它们都包含在 `<meta>` 标签内，并用逗号分隔：
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/afc734bb6922cf0859f71bad101fba65.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/afc734bb6922cf0859f71bad101fba65.png)
 
 同时，请注意 `<meta>` 标签被一个父 `<div>` 标签包裹，且类名为 *tags*。
 
@@ -129,7 +129,7 @@ for i in soup.findAll("div",{"class":"tags"}):
 
 屏幕上的输出将如下所示：
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/cf53e9316d48061b958451244b178027.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/cf53e9316d48061b958451244b178027.png)
 
 我们现在已经成功地抓取了网站单页上的所有数据。
 
@@ -146,7 +146,7 @@ tags = []
 现在，我们将创建一个范围从 1 到 10 的循环，并遍历网站上的每一页。我们将运行之前创建的完全相同的代码行。唯一的区别是，我们现在将其附加到数组中，而不是打印输出。
 
 ```py
-for pages in range(1,10):    f = requests.get('[http://quotes.toscrape.com/page/'+str(pages))](http://quotes.toscrape.com/page/'+str(pages)))
+for pages in range(1,10):    f = requests.get('[`quotes.toscrape.com/page/'+str(pages))`](http://quotes.toscrape.com/page/'+str(pages)))
     soup = BeautifulSoup(f.text)    for i in soup.findAll("div",{"class":"quote"}):
         quotes.append((i.find("span",{"class":"text"})).text)  
 
@@ -169,7 +169,7 @@ finaldf = pd.DataFrame(
 
 查看最终数据框的开头，我们可以看到所有抓取到的数据都已被整理到三列中：
 
-![用 Python 在 5 分钟内构建网页抓取器](../Images/e2bfa793c4fc716c3e3fe8f06cb232a3.png)
+![用 Python 在 5 分钟内构建网页抓取器](img/e2bfa793c4fc716c3e3fe8f06cb232a3.png)
 
 这就是本教程的全部内容！
 
@@ -189,9 +189,9 @@ finaldf = pd.DataFrame(
 
 ### 更多相关内容
 
-+   [5分钟构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
++   [5 分钟构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets 新闻 2022年3月9日：用 5 分钟构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：用 5 分钟构建机器学习网页应用](https://www.kdnuggets.com/2022/n10.html)
 
 +   [FastAPI 教程：用 Python 分钟构建 API](https://www.kdnuggets.com/fastapi-tutorial-build-apis-with-python-in-minutes)
 

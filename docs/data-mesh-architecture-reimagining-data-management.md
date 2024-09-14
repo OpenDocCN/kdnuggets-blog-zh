@@ -1,10 +1,10 @@
 # 数据网格架构：重新定义数据管理
 
-> 原文：[https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)
+> 原文：[`www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html`](https://www.kdnuggets.com/2022/05/data-mesh-architecture-reimagining-data-management.html)
 
-![数据网格架构：重新定义数据管理](../Images/9197a090f9fa896cfd17a7daaf1a81c5.png)
+![数据网格架构：重新定义数据管理](img/9197a090f9fa896cfd17a7daaf1a81c5.png)
 
-[由GarryKillian创建的连接点矢量 - www.freepik.com](https://www.freepik.com/vectors/connect-dot)
+[由 GarryKillian 创建的连接点矢量 - www.freepik.com](https://www.freepik.com/vectors/connect-dot)
 
 # 介绍
 
@@ -12,15 +12,15 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
-数据被视为推动业务创新的驱动力。因此，企业不断探索数据的潜力，以使业务流程更直观，并为客户提供超个性化的体验。随着驱动型企业在当今数字世界中取得成功，对数据分析市场的投资[预计到2023年将达到1030亿美元](https://techjury.net/blog/big-data-statistics/#gref)。随着企业急于从数据中获取更有价值和可操作的洞察，数据量和数据来源的增加也在快速增长和扩展。继续将来自不同来源的数据整合到一个集中位置（即数据湖或数据仓库）的数据管理策略变得越来越复杂，因为集中在数据仓库或数据湖中的数据需要由专业团队进行分析。
+数据被视为推动业务创新的驱动力。因此，企业不断探索数据的潜力，以使业务流程更直观，并为客户提供超个性化的体验。随着驱动型企业在当今数字世界中取得成功，对数据分析市场的投资[预计到 2023 年将达到 1030 亿美元](https://techjury.net/blog/big-data-statistics/#gref)。随着企业急于从数据中获取更有价值和可操作的洞察，数据量和数据来源的增加也在快速增长和扩展。继续将来自不同来源的数据整合到一个集中位置（即数据湖或数据仓库）的数据管理策略变得越来越复杂，因为集中在数据仓库或数据湖中的数据需要由专业团队进行分析。
 
 [数据网格是一种新的](https://www.k2view.com/what-is-data-mesh) 去中心化数据策略，将所有权归于每个业务领域，例如销售或客户支持。
 
@@ -66,11 +66,11 @@
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，5月18日：5个免费机器学习托管平台…](https://www.kdnuggets.com/2022/n20.html)
++   [KDnuggets 新闻，5 月 18 日：5 个免费机器学习托管平台…](https://www.kdnuggets.com/2022/n20.html)
 
 +   [数据网格与其分布式数据架构](https://www.kdnuggets.com/2022/02/data-mesh-distributed-data-architecture.html)
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何为机器学习学习数学…](https://www.kdnuggets.com/2022/n07.html)
 
 +   [探索数据网格：数据架构的范式转变](https://www.kdnuggets.com/exploring-data-mesh-a-paradigm-shift-in-data-architecture)
 

@@ -1,6 +1,6 @@
-# 如何编写更好的 SQL 查询：权威指南 – 第1部分
+# 如何编写更好的 SQL 查询：权威指南 – 第一部分
 
-> 原文：[https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2)
+> 原文：[`www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2`](https://www.kdnuggets.com/2017/08/write-better-sql-queries-definitive-guide-part-1.html/2)
 
 ### 3\. 不要让查询变得比需要的更复杂
 
@@ -114,11 +114,11 @@ WHERE year = 1970;
 
 +   **连接中的冗余条件**
 
-当你为连接添加过多条件时，你基本上强迫SQL选择某条路径。然而，这条路径可能并不总是性能最优的。
+当你为连接添加过多条件时，你基本上强迫 SQL 选择某条路径。然而，这条路径可能并不总是性能最优的。
 
 **`HAVING`子句**
 
-`HAVING`子句最初是因为`WHERE`关键字不能与聚合函数一起使用而添加到SQL中的。`HAVING`通常与`GROUP BY`子句一起使用，以将返回的行组限制为仅符合某些条件的组。然而，如果你在查询中使用这个子句，索引将不会被使用，正如你已经知道的，这可能会导致查询的性能不佳。
+`HAVING`子句最初是因为`WHERE`关键字不能与聚合函数一起使用而添加到 SQL 中的。`HAVING`通常与`GROUP BY`子句一起使用，以将返回的行组限制为仅符合某些条件的组。然而，如果你在查询中使用这个子句，索引将不会被使用，正如你已经知道的，这可能会导致查询的性能不佳。
 
 如果你在寻找替代方案，可以考虑使用`WHERE`子句。考虑以下查询：
 
@@ -154,21 +154,21 @@ ORDER BY state
 
 **相关：**
 
-+   [掌握数据科学的 SQL 七步法](/2016/06/seven-steps-mastering-sql-data-science.html)
++   掌握数据科学的 SQL 七步法
 
-+   [SQL 中最被低估的函数](/2017/03/most-underutilized-function-sql.html)
++   SQL 中最被低估的函数
 
-+   [使用 SQL 进行统计分析](/2016/08/doing-statistics-sql.html)
++   使用 SQL 进行统计分析
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -184,4 +184,4 @@ ORDER BY state
 
 +   [如何在原生 Python 中编写 SQL](https://www.kdnuggets.com/2022/02/easy-sql-native-python.html)
 
-+   [KDnuggets 新闻，12月7日：破解数据科学十大迷思 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：破解数据科学十大迷思 • 4…](https://www.kdnuggets.com/2022/n47.html)

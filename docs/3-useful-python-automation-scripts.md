@@ -1,10 +1,10 @@
 # 3 个实用的 Python 自动化脚本
 
-> 原文：[https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
+> 原文：[`www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html`](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
 
 无论是十分钟的送餐服务还是随时随地可用的内容，我们都习惯于在指尖完成任务。世界一直在自动化某些东西，无论是使用简单的机器、流水线、机器人，还是计算机处理交易。人类通过自动化和将日常任务委派给机器，获得了显著的好处并享受了便利。
 
-![3 个实用的 Python 自动化脚本](../Images/6205c665caf2cb3f4bf1ddf4114a9211.png)
+![3 个实用的 Python 自动化脚本](img/6205c665caf2cb3f4bf1ddf4114a9211.png)
 
 图片由 [olia danilevich](https://www.pexels.com/photo/two-men-looking-at-a-laptop-4974920/) 提供
 
@@ -58,7 +58,7 @@ pag.write('This Desktop is Automated!', interval=0.25)
 
 事件序列如下图 GIF 所示。
 
-![3 Useful Python Automation Scripts](../Images/a6d4225f87107496eecb65f2a812052b.png)
+![3 Useful Python Automation Scripts](img/a6d4225f87107496eecb65f2a812052b.png)
 
 Pyautogui 还允许你移动文件、保存文件、选择和复制文本以及截取屏幕截图，从而使其成为桌面自动化的多功能选项。
 
@@ -75,7 +75,7 @@ while distance > 0:
     pyautogui.drag(0, -distance, duration=0.5)
 ```
 
-![3 Useful Python Automation Scripts](../Images/bc7efaeb92ed56c6e5770d9d6a72400f.png)
+![3 Useful Python Automation Scripts](img/bc7efaeb92ed56c6e5770d9d6a72400f.png)
 
 来源：[Pyautogui 官方文档](https://pyautogui.readthedocs.io/en/latest/)
 
@@ -104,7 +104,7 @@ Success: The file is downloaded.
 
 你可以在下载文件夹中看到下载的文件。
 
-![3 Useful Python Automation Scripts](../Images/d3cb1a904a86125ee666c28168fe9025.png)
+![3 Useful Python Automation Scripts](img/d3cb1a904a86125ee666c28168fe9025.png)
 
 # 附加参考
 
@@ -112,18 +112,18 @@ Success: The file is downloaded.
 
 > *我希望你喜欢 Python 在自动化简单桌面任务（如清理文件夹、下载 YouTube 视频和自动化桌面）中的三个应用。如果你有更多使用 Python 自动化任务的建议，欢迎在下面的评论区留言。*
 
-**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位AI战略家和数字化转型领导者，她在产品、科学和工程交汇处工作，致力于构建可扩展的机器学习系统。她是一位获奖的创新领袖、作者和国际演讲者。她的使命是使机器学习民主化，并打破术语，让每个人都能参与这一转型。
+**[Vidhi Chugh](https://vidhi-chugh.medium.com/)** 是一位 AI 战略家和数字化转型领导者，她在产品、科学和工程交汇处工作，致力于构建可扩展的机器学习系统。她是一位获奖的创新领袖、作者和国际演讲者。她的使命是使机器学习民主化，并打破术语，让每个人都能参与这一转型。
 
 ### 更多相关内容
 
-+   [5个真正有用的数据科学Bash脚本](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
++   [5 个真正有用的数据科学 Bash 脚本](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)
 
-+   [免费Python自动化课程](https://www.kdnuggets.com/2022/07/free-automate-python-course.html)
++   [免费 Python 自动化课程](https://www.kdnuggets.com/2022/07/free-automate-python-course.html)
 
 +   [数据科学工作流中的自动化](https://www.kdnuggets.com/2023/03/automation-data-science-workflows.html)
 
-+   [数据科学中的4个有用的中级SQL查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
++   [数据科学中的 4 个有用的中级 SQL 查询](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 
-+   [KDnuggets新闻，12月7日：揭示十大数据科学误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭示十大数据科学误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
 
-+   [Kaggle竞赛对现实世界问题有用吗？](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)
++   [Kaggle 竞赛对现实世界问题有用吗？](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)

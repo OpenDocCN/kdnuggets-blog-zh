@@ -1,22 +1,22 @@
 # 机器学习适合每个人！
 
-> 原文：[https://www.kdnuggets.com/2022/10/machine-learning-everybody.html](https://www.kdnuggets.com/2022/10/machine-learning-everybody.html)
+> 原文：[`www.kdnuggets.com/2022/10/machine-learning-everybody.html`](https://www.kdnuggets.com/2022/10/machine-learning-everybody.html)
 
-![机器学习适合每个人！](../Images/c000ed60962c737f1f8c46e0735f3ea8.png)
+![机器学习适合每个人！](img/c000ed60962c737f1f8c46e0735f3ea8.png)
 
 [机器学习适合每个人](https://www.youtube.com/watch?v=i_LwzRVP7bg)的截屏
 
-现在是2022年。机器学习适合谁呢？
+现在是 2022 年。机器学习适合谁呢？
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的信息技术
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的信息技术
 
 * * *
 
@@ -42,9 +42,9 @@
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，12月14日：3个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
-+   [每个机器学习工程师都应该具备的5项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
++   [每个机器学习工程师都应该具备的 5 项机器学习技能…](https://www.kdnuggets.com/2023/03/5-machine-learning-skills-every-machine-learning-engineer-know-2023.html)
 
 +   [学习数据科学、机器学习和深度学习的可靠计划](https://www.kdnuggets.com/2023/01/mwiti-solid-plan-learning-data-science-machine-learning-deep-learning.html)
 

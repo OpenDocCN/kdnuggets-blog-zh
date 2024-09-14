@@ -1,10 +1,10 @@
-# 轻松将LLMs集成到你的Scikit-learn工作流中，使用Scikit-LLM
+# 轻松将 LLMs 集成到你的 Scikit-learn 工作流中，使用 Scikit-LLM
 
-> 原文：[https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)
+> 原文：[`www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm`](https://www.kdnuggets.com/easily-integrate-llms-into-your-scikit-learn-workflow-with-scikit-llm)
 
-![轻松将LLMs集成到你的Scikit-learn工作流中，使用Scikit-LLM](../Images/7489bc85903354e9c06f7505fa5a3cf7.png)
+![轻松将 LLMs 集成到你的 Scikit-learn 工作流中，使用 Scikit-LLM](img/7489bc85903354e9c06f7505fa5a3cf7.png)
 
-由DALL-E 2生成的图像
+由 DALL-E 2 生成的图像
 
 文本分析任务已经存在了一段时间，因为需求始终存在。研究从简单的描述统计到文本分类和高级文本生成已经取得了很大进展。随着大型语言模型的加入，我们的工作任务变得更加轻松。
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-Scikit-LLM是一个为文本分析活动开发的Python软件包，利用LLM的强大功能。这个软件包之所以突出，是因为我们可以将标准的Scikit-Learn管道与Scikit-LLM集成。
+Scikit-LLM 是一个为文本分析活动开发的 Python 软件包，利用 LLM 的强大功能。这个软件包之所以突出，是因为我们可以将标准的 Scikit-Learn 管道与 Scikit-LLM 集成。
 
 那么，这个软件包是关于什么的？它是如何工作的？让我们深入了解。
 
 # Scikit-LLM
 
-[Scikit-LLM](https://github.com/iryna-kondr/scikit-llm)是一个通过LLM增强文本数据分析任务的Python软件包。它由[Beatsbyte](https://beastbyte.ai/)开发，旨在帮助桥接标准的Scikit-Learn库和语言模型的强大功能。Scikit-LLM创建了类似于SKlearn库的API，因此我们使用起来不会太麻烦。
+[Scikit-LLM](https://github.com/iryna-kondr/scikit-llm)是一个通过 LLM 增强文本数据分析任务的 Python 软件包。它由[Beatsbyte](https://beastbyte.ai/)开发，旨在帮助桥接标准的 Scikit-Learn 库和语言模型的强大功能。Scikit-LLM 创建了类似于 SKlearn 库的 API，因此我们使用起来不会太麻烦。
 
 ## 安装
 
@@ -36,13 +36,13 @@ Scikit-LLM是一个为文本分析活动开发的Python软件包，利用LLM的�
 pip install scikit-llm
 ```
 
-在撰写本文时，Scikit-LLM仅与一些OpenAI和GPT4ALL模型兼容。这就是为什么我们只会使用OpenAI模型的原因。不过，你可以通过首先安装组件来使用GPT4ALL模型。
+在撰写本文时，Scikit-LLM 仅与一些 OpenAI 和 GPT4ALL 模型兼容。这就是为什么我们只会使用 OpenAI 模型的原因。不过，你可以通过首先安装组件来使用 GPT4ALL 模型。
 
 ```py
 pip install scikit-llm[gpt4all]
 ```
 
-安装后，你必须设置OpenAI密钥以访问LLM模型。
+安装后，你必须设置 OpenAI 密钥以访问 LLM 模型。
 
 ```py
 from skllm.config import SKLLMConfig
@@ -51,9 +51,9 @@ SKLLMConfig.set_openai_key("<your_key>")
 SKLLMConfig.set_openai_org("<your_organisation>")</your_organisation></your_key>
 ```
 
-## 尝试使用Scikit-LLM
+## 尝试使用 Scikit-LLM
 
-让我们在环境设置好后尝试一些Scikit-LLM的功能。LLMs的一项能力是执行文本分类而无需重新训练，这被称为Zero-Shot。然而，我们将首先使用样本数据尝试Few-Shot文本分类。
+让我们在环境设置好后尝试一些 Scikit-LLM 的功能。LLMs 的一项能力是执行文本分类而无需重新训练，这被称为 Zero-Shot。然而，我们将首先使用样本数据尝试 Few-Shot 文本分类。
 
 ```py
 from skllm import ZeroShotGPTClassifier
@@ -68,7 +68,7 @@ clf.fit(X, y)
 labels = clf.predict(X)
 ```
 
-你只需在X变量中提供文本数据，在数据集中提供标签y。在这种情况下，标签包括情感，可能是Positive、Neutral或Negative。
+你只需在 X 变量中提供文本数据，在数据集中提供标签 y。在这种情况下，标签包括情感，可能是 Positive、Neutral 或 Negative。
 
 如你所见，这个过程类似于使用 Scikit-Learn 包中的拟合方法。然而，我们已经知道 Zero-Shot 并不一定需要训练数据集。这就是为什么我们可以在没有训练数据的情况下提供标签。
 

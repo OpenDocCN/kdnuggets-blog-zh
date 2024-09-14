@@ -1,8 +1,8 @@
 # 数据科学学位与课程：价值判断
 
-> 原文：[https://www.kdnuggets.com/data-science-degrees-vs-courses-the-value-verdict](https://www.kdnuggets.com/data-science-degrees-vs-courses-the-value-verdict)
+> 原文：[`www.kdnuggets.com/data-science-degrees-vs-courses-the-value-verdict`](https://www.kdnuggets.com/data-science-degrees-vs-courses-the-value-verdict)
 
-![数据科学学位与课程](../Images/214a810a848571497fddec472b60b056.png)
+![数据科学学位与课程](img/214a810a848571497fddec472b60b056.png)
 
 作者提供的图片
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -32,7 +32,7 @@
 
 这样广泛而深入的学习意味着你真正理解了基础知识。你不仅仅是一个代码工蜂；你明白如何以及何时使用特定的统计工具或进行特定的分析。
 
-不仅如此，学位还具有分量。许多大学就像品牌名称，雇主会认可并钦佩。例如，拥有MIT数学学位的求职者会以积极的方式脱颖而出。
+不仅如此，学位还具有分量。许多大学就像品牌名称，雇主会认可并钦佩。例如，拥有 MIT 数学学位的求职者会以积极的方式脱颖而出。
 
 不过，正如我之前提到的，学位通常需要四年时间，尽管也有更短、更专注的选项。例如，如果四年太长，你可以选择一个加速课程或一个专注于数据科学的硕士学位，这通常需要一到两年时间。
 
@@ -44,23 +44,23 @@
 
 一种方法是通过结合在线课程、证书和训练营来做到这一点。这条路径更加灵活。你甚至可以兼职进行，同时进行现有工作。
 
-与标准学位相比，这些课程的课程设置更具实用性，并根据当前的就业市场需求进行设计。它们包括类似实际数据科学工作的动手项目，教授你在标准职位描述中可能会看到的具体技能，如Python、R、机器学习算法和数据可视化工具的熟练使用。这种方法对那些喜欢直接应用而非坐在讲堂里的学习者尤其有用。
+与标准学位相比，这些课程的课程设置更具实用性，并根据当前的就业市场需求进行设计。它们包括类似实际数据科学工作的动手项目，教授你在标准职位描述中可能会看到的具体技能，如 Python、R、机器学习算法和数据可视化工具的熟练使用。这种方法对那些喜欢直接应用而非坐在讲堂里的学习者尤其有用。
 
 许多训练营只持续几个月，通常在结束时提供某种工作安置机会。它们很昂贵，有时达到数万美元，但如果它们能帮助你在不到一年内找到六位数的工作，这可能会有很高的投资回报率。
 
 问题在于，这条路线并没有提供完整的、整体的视角。你可能能够用优秀的项目充实你的简历，但在面试中可能会因为被问到训练营未涵盖的基础问题而表现不佳。
 
-![数据科学学位与课程](../Images/406b3027177af717e0cfad520489a55f.png)
+![数据科学学位与课程](img/406b3027177af717e0cfad520489a55f.png)
 
 作者通过 [supermeme.ai](https://www.supermeme.ai/) 创建
 
-这就是为什么单一的训练营不够；你通常需要通过审计（或支付）Coursera或EdX课程，或者进行自学、研究和实践来补充。
+这就是为什么单一的训练营不够；你通常需要通过审计（或支付）Coursera 或 EdX 课程，或者进行自学、研究和实践来补充。
 
 ## **填补空白**
 
 学位无疑提供了无与伦比的深度和声望。但是，通过课程和训练营获得的敏捷性和实用技能不仅是一个值得的替代方案，而且实际上可能使你更好地为职场做准备。虽然学位是传统的，但它们也具有更大的惯性——课程和训练营可以比学位更快地响应不断变化的就业市场。此外，学位课程更加注重理论，对诸如面试准备等技能的重视较少。
 
-![数据科学学位与课程](../Images/89ce14c29181f2fce0d6c5c9d46c99d0.png)
+![数据科学学位与课程](img/89ce14c29181f2fce0d6c5c9d46c99d0.png)
 
 作者创建于 [supermeme.ai](https://www.supermeme.ai/)
 
@@ -86,7 +86,7 @@
 
 如你所知，仅仅在简历上写“精通统计学”并不够，还需付出更多努力。
 
-![数据科学学位与课程](../Images/b08413d4bfcb3eaab7dfb738cc374d0b.png)
+![数据科学学位与课程](img/b08413d4bfcb3eaab7dfb738cc374d0b.png)
 
 作者创建于 [supermeme.ai](https://www.supermeme.ai/)
 
@@ -102,7 +102,7 @@
 
 无论你选择了学位还是训练营，你都需要在面试中表现出色才能获得工作。你应该准备数据科学工作面试，关注技术问题以及展示你的项目工作。以下是一些资源：
 
-+   [StrataScratch](https://www.stratascratch.com/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+degrees+vs+courses): 曾经希望你能提前知道面试官会问你什么吗？StrataScratch（我创办的）收集了1000多个真实的面试问题，包括编码和非编码问题，以及最佳答案，让你能够练习和准备面试官可能问你的任何问题。
++   [StrataScratch](https://www.stratascratch.com/?utm_source=blog&utm_medium=click&utm_campaign=kdn+ds+degrees+vs+courses): 曾经希望你能提前知道面试官会问你什么吗？StrataScratch（我创办的）收集了 1000 多个真实的面试问题，包括编码和非编码问题，以及最佳答案，让你能够练习和准备面试官可能问你的任何问题。
 
 +   会议和研讨会：建立联系和网络的重要性不可低估。参加这些活动，无论是亲自还是虚拟，了解最新趋势，与专业人士建立联系，甚至可能找到可以提供建议和面试见解的导师。
 

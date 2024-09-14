@@ -1,8 +1,8 @@
 # 如何作为初学者建立强大的数据科学作品集
 
-> 原文：[https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html](https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html)
+> 原文：[`www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html`](https://www.kdnuggets.com/2021/10/strong-data-science-portfolio-as-beginner.html)
 
-![](../Images/7698ceccf2e9d5dbf9ea94d570fb905b.png)
+![](img/7698ceccf2e9d5dbf9ea94d570fb905b.png)
 
 图片来源：作者 | 元素来自 [Free Vector | 统计概念插图](https://www.freepik.com/free-vector/statistics-concept-illustration_5426309.htm#page=1&query=data&position=46)
 
@@ -10,11 +10,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在组织中的 IT
 
 * * *
 
@@ -32,15 +32,15 @@
 
 # GitHub
 
-让我澄清一下数据科学家之间的误解。是的，[GitHub](https://github.com/)是必要的，我们都应该学习[git](https://git-scm.com/)。作为数据科学家，我每天使用GitHub，在这里寻找有趣的数据集和项目。这是开发者中最受欢迎的平台，老实说，招聘人员在邀请你面试之前确实会查看你的GitHub个人资料。
+让我澄清一下数据科学家之间的误解。是的，[GitHub](https://github.com/)是必要的，我们都应该学习[git](https://git-scm.com/)。作为数据科学家，我每天使用 GitHub，在这里寻找有趣的数据集和项目。这是开发者中最受欢迎的平台，老实说，招聘人员在邀请你面试之前确实会查看你的 GitHub 个人资料。
 
-![](../Images/d6338457a9b507aed54f81bdd5b3b22b.png)
+![](img/d6338457a9b507aed54f81bdd5b3b22b.png)
 
 作者提供的图片 | [github](https://github.com/kingabzpro/Image-Classification-FastAI.jl)
 
-GitHub是一个全球协作平台，人们在这里分享和合作项目。正如你在我的个人资料中看到的，我不仅为其他人的项目做出了贡献，也在自己项目上进行工作。
+GitHub 是一个全球协作平台，人们在这里分享和合作项目。正如你在我的个人资料中看到的，我不仅为其他人的项目做出了贡献，也在自己项目上进行工作。
 
-![](../Images/2a0caad75b74309e876eff5748768904.png)
+![](img/2a0caad75b74309e876eff5748768904.png)
 
 作者提供的图片 | [kingabzpro](https://github.com/kingabzpro)
 
@@ -50,31 +50,31 @@ GitHub是一个全球协作平台，人们在这里分享和合作项目。正�
 
 1.  用链接、封面图片和详细描述记录每个项目。
 
-1.  Fork你最喜欢的项目，并发送你的第一个拉取请求 ([freecodecamp.org](https://www.freecodecamp.org/news/how-to-make-your-first-pull-request-on-github-3/))。
+1.  Fork 你最喜欢的项目，并发送你的第一个拉取请求 ([freecodecamp.org](https://www.freecodecamp.org/news/how-to-make-your-first-pull-request-on-github-3/))。
 
 1.  在这个平台上积极参与，包括贡献代码、报告漏洞和推进当前项目。
 
 # Deepnote
 
-[Deepnote](https://deepnote.com/)比GitHub简单得多，也很适合初学者。如果你熟悉[Jupyter notebook](https://jupyter.org/)，那么发布你的第一个项目将变得非常简单。我对Deepnote的体验绝对惊人，因为该平台提供了GitHub的所有功能，但更加简单，并专注于数据科学社区。
+[Deepnote](https://deepnote.com/)比 GitHub 简单得多，也很适合初学者。如果你熟悉[Jupyter notebook](https://jupyter.org/)，那么发布你的第一个项目将变得非常简单。我对 Deepnote 的体验绝对惊人，因为该平台提供了 GitHub 的所有功能，但更加简单，并专注于数据科学社区。
 
-![](../Images/f3ba6fb0bec39f134b6aa28fcb19d48f.png)
+![](img/f3ba6fb0bec39f134b6aa28fcb19d48f.png)
 
 作者提供的图片 | [Pakistan Vaccination Progress](https://deepnote.com/@abid/Pakistan-Vaccination-Progress-sgGprLfPSHuLyI5XTrYiqQ)
 
-最近，他们推出了一个Deepnote个人资料功能，可以展示你发布的所有笔记本以及你的信息和个人照片。
+最近，他们推出了一个 Deepnote 个人资料功能，可以展示你发布的所有笔记本以及你的信息和个人照片。
 
-![](../Images/cd5b4ed3a97e5e09ec4f863ab19faead.png)
+![](img/cd5b4ed3a97e5e09ec4f863ab19faead.png)
 
 作者提供的图片 | [Deepnote](https://deepnote.com/@abid)
 
-就像[GitHub Gist](https://gist.github.com/)一样，你可以与团队或公众分享代码片段。我在所有Medium出版物和社交媒体平台上使用了Deepnote单元。你可以查看我之前的[文章](https://towardsdatascience.com/deploying-your-first-machine-learning-api-1649236c695e)来了解如何实现Deepnote单元。使用带有输出的代码片段使你能够在多个平台上分享项目。
+就像[GitHub Gist](https://gist.github.com/)一样，你可以与团队或公众分享代码片段。我在所有 Medium 出版物和社交媒体平台上使用了 Deepnote 单元。你可以查看我之前的[文章](https://towardsdatascience.com/deploying-your-first-machine-learning-api-1649236c695e)来了解如何实现 Deepnote 单元。使用带有输出的代码片段使你能够在多个平台上分享项目。
 
 我更喜欢 Deepnote 内嵌单元格而不是 GitHub Gist，因为它不仅提供静态输出，还有互动功能。
 
 你可以使用 Plotly 并在 Medium 文章中展示你的图表：
 
-![](../Images/9a3fd42cd2d5e10fbd4390870a4a9083.png)
+![](img/9a3fd42cd2d5e10fbd4390870a4a9083.png)
 
 **创建扎实个人资料的技巧：**
 
@@ -98,13 +98,13 @@ DAGsHub 允许你分享你的 GitHub 仓库，并创建你的数据科学项目�
 > 
 > — [Dean](https://www.linkedin.com/in/deanpleban/)
 
-![](../Images/7f4793d5bede5be5490631d2a8cd4e08.png)
+![](img/7f4793d5bede5be5490631d2a8cd4e08.png)
 
 Dean 图片 | [dagshub](https://dagshub.com/Dean/DHEERAJKU)
 
 我的个人资料还很新，但我喜欢这个平台，因为它为我提供了完整的机器学习生态系统。我认为在功能和用户界面简洁性方面，我更喜欢它而不是 GitHub。
 
-![](../Images/df9da288adb6d69ec072413da66d8c33.png)
+![](img/df9da288adb6d69ec072413da66d8c33.png)
 
 作者图片 | [DAGsHub](https://dagshub.com/kingabzpro)
 
@@ -120,19 +120,19 @@ Dean 图片 | [dagshub](https://dagshub.com/Dean/DHEERAJKU)
 
 1.  通过参与开源项目和推动个人项目来保持活跃的个人资料。你可以使用 [fds](https://github.com/DAGsHub/fds) cli 来简化工作并避免错误。
 
-1.  充分利用DVC，将你的数据和模型上传到远程服务器。招聘者对了解从数据获取到仪表盘完整数据科学周期的候选人感兴趣。
+1.  充分利用 DVC，将你的数据和模型上传到远程服务器。招聘者对了解从数据获取到仪表盘完整数据科学周期的候选人感兴趣。
 
 # Kaggle
 
-如果你想在数据科学领域更快地被注意到，你应该创建一个[Kaggle](https://www.kaggle.com/)账户，并开始参与竞赛、数据集、笔记本和讨论。当你成为大师时，人们会尊敬你，并为你提供更好的职业机会。如果你问我，我建议你在学习基础知识时创建一个Kaggle个人资料。向专家学习，发现你的专长。我非常喜欢这个平台，因为它为初学者提供了竞争和为各行各业开发创新解决方案的支持。它是AI研究的核心。
+如果你想在数据科学领域更快地被注意到，你应该创建一个[Kaggle](https://www.kaggle.com/)账户，并开始参与竞赛、数据集、笔记本和讨论。当你成为大师时，人们会尊敬你，并为你提供更好的职业机会。如果你问我，我建议你在学习基础知识时创建一个 Kaggle 个人资料。向专家学习，发现你的专长。我非常喜欢这个平台，因为它为初学者提供了竞争和为各行各业开发创新解决方案的支持。它是 AI 研究的核心。
 
-![](../Images/fac075e8a69a83ae9a867a31c73228e8.png)
+![](img/fac075e8a69a83ae9a867a31c73228e8.png)
 
 图片由作者提供 | [Kaggle](https://www.kaggle.com/kingabzpro/evolution-of-digital-learning-during-covid19)
 
 你可以查看我下面的个人资料，因为从一开始我就在各种类别中贡献，以获得排名。目前，我是专家，但凭借一枚金牌和一枚银牌，我将成为大师，这并不容易，老实说，我尊敬大师们，因为他们证明了自己在其他数据从业者中是最优秀的。
 
-![](../Images/bc14514f946ff3b6852f2c4b9d3031bf.png)
+![](img/bc14514f946ff3b6852f2c4b9d3031bf.png)
 
 图片由作者提供 | [Kaggle](https://www.kaggle.com/kingabzpro)
 
@@ -152,9 +152,9 @@ Dean 图片 | [dagshub](https://dagshub.com/Dean/DHEERAJKU)
 
 # 博客
 
-撰写博客是创建项目后要做的下一步。如果你想扩大受众，我强烈建议你从[Medium](https://medium.com/)开始。写博客不是必需的，但你会从各个领域获得更多关注。Medium平台允许你创建个人资料，并在各种出版物下发布你的文章，例如[Towards Data Science](https://towardsdatascience.com/)和[Towards AI](https://pub.towardsai.net/)。你可以开发自己的博客网站或使用其他类似平台，如[Analytics Vidhya](https://www.analyticsvidhya.com/)。
+撰写博客是创建项目后要做的下一步。如果你想扩大受众，我强烈建议你从[Medium](https://medium.com/)开始。写博客不是必需的，但你会从各个领域获得更多关注。Medium 平台允许你创建个人资料，并在各种出版物下发布你的文章，例如[Towards Data Science](https://towardsdatascience.com/)和[Towards AI](https://pub.towardsai.net/)。你可以开发自己的博客网站或使用其他类似平台，如[Analytics Vidhya](https://www.analyticsvidhya.com/)。
 
-![](../Images/6465804400de9cbb7450f27acd7b8899.png)
+![](img/6465804400de9cbb7450f27acd7b8899.png)
 
 图片由作者提供 | [Medium](https://medium.com/@kingabzpro)
 
@@ -178,7 +178,7 @@ Dean 图片 | [dagshub](https://dagshub.com/Dean/DHEERAJKU)
 
 我的作品集网站包括来自所有平台的项目，附有简短描述和子类别。我花了三天时间创建整个网站并将其部署到 GitHub Pages 上。
 
-![](../Images/2e14ed3ebbaf4595219b760c93bdabbc.png)
+![](img/2e14ed3ebbaf4595219b760c93bdabbc.png)
 
 图片来源：作者 | [Portfolio](https://abidaliawan.me/)
 
@@ -200,13 +200,13 @@ Dean 图片 | [dagshub](https://dagshub.com/Dean/DHEERAJKU)
 
 [Ayush](https://wandb.ai/ayush-thakur) 的个人资料给我留下了深刻印象，因为他在撰写有关机器学习的博客的同时，也为其他组织做出贡献。
 
-![](../Images/aad7f36a432f4242d1842bf45d270742.png)
+![](img/aad7f36a432f4242d1842bf45d270742.png)
 
 图片来源：Ayush | [Weights & Biases](https://wandb.ai/ayush-thakur)
 
 W&B 项目具有模型性能指标，如下所示。
 
-![](../Images/3fd7d898f9ca703a0fbbe11d82961c2c.png)
+![](img/3fd7d898f9ca703a0fbbe11d82961c2c.png)
 
 图片来源：作者 | [kaggle-seti](https://wandb.ai/ayush-thakur/kaggle-seti-exp2?workspace=user-kingabzpro)
 

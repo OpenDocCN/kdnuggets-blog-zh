@@ -1,8 +1,8 @@
 # **首个机器学习价值链全景**
 
-> 原文：[https://www.kdnuggets.com/2022/10/first-ml-value-chain-landscape-sequence.html](https://www.kdnuggets.com/2022/10/first-ml-value-chain-landscape-sequence.html)
+> 原文：[`www.kdnuggets.com/2022/10/first-ml-value-chain-landscape-sequence.html`](https://www.kdnuggets.com/2022/10/first-ml-value-chain-landscape-sequence.html)
 
-![首个机器学习价值链全景](../Images/39a25836e5d8dc65d8a3d43f4b1f4730.png)
+![首个机器学习价值链全景](img/39a25836e5d8dc65d8a3d43f4b1f4730.png)
 
 来源：[TheSequence](https://thesequence.substack.com/)
 
@@ -12,7 +12,7 @@
 
 # **首个机器学习链全景**
 
-2022年10月12日，TheSequence [发布了首个机器学习链全景](https://thesequence.substack.com/p/mlvaluechain)，由数据科学家塑造。这源于 TheSequence 希望创建一个能够涵盖整个机器学习价值链的新全景，这是一个全面但非常有价值的项目。
+2022 年 10 月 12 日，TheSequence [发布了首个机器学习链全景](https://thesequence.substack.com/p/mlvaluechain)，由数据科学家塑造。这源于 TheSequence 希望创建一个能够涵盖整个机器学习价值链的新全景，这是一个全面但非常有价值的项目。
 
 **该项目分为两个部分：**
 
@@ -20,7 +20,7 @@
 
 1.  涉及社区成员来评估和重塑价值链
 
-**典型机器学习过程的6个阶段包括：**
+**典型机器学习过程的 6 个阶段包括：**
 
 1.  数据收集
 
@@ -40,15 +40,15 @@ TheSequence 联合创始人 Ksenia Se 说：
 
 从下图来看，TheSequence 制作的机器学习价值链全景告诉我们，不幸的是，目前没有一个市场解决方案覆盖链中的所有六个阶段。
 
-涵盖至少5个阶段的供应商包括H2O、Dataiku、Clear ML、Vertex AI、Scale AI、Toloka AI和Abacus.AI。
+涵盖至少 5 个阶段的供应商包括 H2O、Dataiku、Clear ML、Vertex AI、Scale AI、Toloka AI 和 Abacus.AI。
 
-[![首个机器学习价值链全景](../Images/6460ab64a59cd58c1b6ad5abf6f297dd.png)](https://www.kdnuggets.com/wp-content/uploads/arya_first_ml_value_chain_landscape_sequence_1.png)
+![首个机器学习价值链全景](https://www.kdnuggets.com/wp-content/uploads/arya_first_ml_value_chain_landscape_sequence_1.png)
 
 点击放大
 
 该全景揭示了：
 
-## 大约50%的数据处理和模型监控是困难的
+## 大约 50%的数据处理和模型监控是困难的
 
 这通常从生产的早期阶段开始，挑战会持续到后期部署。机器学习项目成功的重要方面还包括数据收集和数据标注的有效性。
 
@@ -74,7 +74,7 @@ Ksenia 说：
 
 # 想了解更多？
 
-如果你想保持对机器学习、人工智能和数据科学世界动态的了解 - 确保点击这个[链接](https://thesequence.substack.com/p/mlvaluechain)订阅TheSequence。
+如果你想保持对机器学习、人工智能和数据科学世界动态的了解 - 确保点击这个[链接](https://thesequence.substack.com/p/mlvaluechain)订阅 TheSequence。
 
 **[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家和自由职业技术作家。她特别感兴趣于提供数据科学职业建议或教程和理论知识。她还希望探索人工智能如何/可以促进人类寿命的不同方式。她是一个热衷学习者，寻求拓宽她的技术知识和写作技能，同时帮助指导他人。
 
@@ -82,21 +82,21 @@ Ksenia 说：
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
 ### 更多相关主题
 
-+   [如何通过AIOps管理复杂的IT环境](https://www.kdnuggets.com/2022/05/manage-complex-landscape-aiops.html)
++   [如何通过 AIOps 管理复杂的 IT 环境](https://www.kdnuggets.com/2022/05/manage-complex-landscape-aiops.html)
 
-+   [8篇创新的BERT知识蒸馏论文如何改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
++   [8 篇创新的 BERT 知识蒸馏论文如何改变了…](https://www.kdnuggets.com/2022/09/eight-innovative-bert-knowledge-distillation-papers-changed-nlp-landscape.html)
 
-+   [AI驱动世界中的数据工程格局](https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html)
++   [AI 驱动世界中的数据工程格局](https://www.kdnuggets.com/2023/05/data-engineering-landscape-aidriven-world.html)
 
 +   [数据格局的演变](https://www.kdnuggets.com/2023/06/evolution-data-landscape.html)
 

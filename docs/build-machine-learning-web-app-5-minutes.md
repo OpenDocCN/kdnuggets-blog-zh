@@ -1,6 +1,6 @@
 # 在 5 分钟内构建机器学习网页应用
 
-> 原文：[https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
+> 原文：[`www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html`](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
 # 介绍
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -36,7 +36,7 @@
 
 这个网页应用将接受用户的人口统计数据和健康指标作为输入，并生成一个预测，判断他们在未来十年是否会发展成心脏病：
 
-![在 5 分钟内构建机器学习网页应用](../Images/045541431656df653f751f03a8c11eaf.png)
+![在 5 分钟内构建机器学习网页应用](img/045541431656df653f751f03a8c11eaf.png)
 
 ## 步骤 1：背景
 
@@ -46,15 +46,15 @@ Framingham 心脏研究是对马萨诸塞州 Framingham 居民进行的长期心
 
 在本教程中，我们将使用来自 [Framingham Heart Study](https://github.com/Natassha/streamlit_fhs/blob/main/framingham.csv) 的 [数据集](https://github.com/Natassha/streamlit_fhs/blob/main/framingham.csv)，预测研究中的患者在十年内是否会发展心脏病。可以从 [BioLincc 网站](https://biolincc.nhlbi.nih.gov/studies/framcohort/) 请求获得，数据集包含约 3600 名患者的风险因素。
 
-## 第2步：前提条件
+## 第 2 步：前提条件
 
 你需要在设备上安装一个 Python IDE。如果你通常在 Jupyter Notebook 中工作，请确保安装其他 IDE 或文本编辑器。我们将使用 Streamlit 创建一个 Web 应用程序，而使用 notebook 无法运行它。
 
-我建议在 Jupyter 中编写代码以构建和保存模型（第3步和第4步）。然后，切换到其他 IDE 加载模型并运行应用程序（第5步）。
+我建议在 Jupyter 中编写代码以构建和保存模型（第 3 步和第 4 步）。然后，切换到其他 IDE 加载模型并运行应用程序（第 5 步）。
 
 如果你尚未安装，请选择以下一些选项： [Visual Studio Code](https://code.visualstudio.com/docs/python/python-tutorial)， [Pycharm](https://www.jetbrains.com/help/pycharm/installation-guide.html)， [Atom](https://atom.io/)， [Eclipse](https://www.eclipse.org/)。
 
-## 第3步：模型构建
+## 第 3 步：模型构建
 
 确保下载 [这个](https://github.com/Natassha/streamlit_fhs/blob/main/framingham.csv) 数据集。然后，导入 Pandas 库并加载数据框。
 
@@ -65,7 +65,7 @@ framingham = framingham.dropna()
 framingham.head()
 ```
 
-![在5分钟内构建机器学习 Web 应用程序](../Images/a2a31618917370464105e45ff450f371.png)
+![在 5 分钟内构建机器学习 Web 应用程序](img/a2a31618917370464105e45ff450f371.png)
 
 查看数据框的前几行，可以看到有 15 个风险因素。这些是我们的自变量，我们将使用它们来预测十年内心脏病的发生（*TenYearCHD*）。
 
@@ -102,7 +102,7 @@ print(accuracy_score(y_test,preds))
 
 我们模型的最终准确率大约为 0.85。
 
-## 第4步：保存模型
+## 第 4 步：保存模型
 
 让我们保存刚刚构建的随机森林分类器。我们将使用 [Joblib](https://joblib.readthedocs.io/en/latest/installing.html) 库来完成此操作，因此请确保已安装该库。
 
@@ -113,17 +113,17 @@ joblib.dump(rf, 'fhs_rf_model.pkl')
 
 这个模型可以在不同的环境中轻松访问，并可以用于对外部数据进行预测。
 
-## 第5步：构建 Web 应用程序
+## 第 5 步：构建 Web 应用程序
 
 **a) 创建用户界面**
 
 最后，我们可以开始使用上述创建的模型构建 Web 应用程序。开始之前，请确保安装了 [Streamlit](https://docs.streamlit.io/library/get-started/installation) 库。
 
-如果你之前使用的是Jupyter Notebook来构建分类器，你现在需要转到不同的Python IDE。创建一个名为*streamlit_fhs.py*的文件。
+如果你之前使用的是 Jupyter Notebook 来构建分类器，你现在需要转到不同的 Python IDE。创建一个名为*streamlit_fhs.py*的文件。
 
 你的目录应包含以下文件：
 
-![5分钟内构建一个机器学习网页应用](../Images/609726e154e6e6681ff3b89bb48e48d6.png)
+![5 分钟内构建一个机器学习网页应用](img/609726e154e6e6681ff3b89bb48e48d6.png)
 
 然后，在你的 *.py *文件中导入以下库：
 
@@ -139,31 +139,31 @@ import pandas as pd
 st.write("# 10 Year Heart Disease Prediction")
 ```
 
-要运行Streamlit应用，请在终端中输入以下命令：
+要运行 Streamlit 应用，请在终端中输入以下命令：
 
 ```py
 streamlit run streamlit_fhs.py
 ```
 
-现在，导航到 [http://localhost:8501](http://localhost:8501/) 你可以看到你的应用所在的页面。你应该会看到如下页面：
+现在，导航到 [`localhost:8501`](http://localhost:8501/) 你可以看到你的应用所在的页面。你应该会看到如下页面：
 
-![5分钟内构建一个机器学习网页应用](../Images/abc547aa03901db5995eedc635d234c5.png)
+![5 分钟内构建一个机器学习网页应用](img/abc547aa03901db5995eedc635d234c5.png)
 
 太棒了！这意味着一切正常。
 
 现在，让我们为用户创建输入框，以便他们输入他们的数据（年龄、性别、血压等）。
 
-这是如何在Streamlit中创建一个多选下拉框，让用户选择他们的性别的示例代码（*这是示例代码。运行后请删除这一行，完整示例请见下方*）：
+这是如何在 Streamlit 中创建一个多选下拉框，让用户选择他们的性别的示例代码（*这是示例代码。运行后请删除这一行，完整示例请见下方*）：
 
 ```py
 gender = st.selectbox("Enter your gender",["Male", "Female"])
 ```
 
-再次导航到你的Streamlit应用并刷新页面。你会看到屏幕上出现这个下拉框：
+再次导航到你的 Streamlit 应用并刷新页面。你会看到屏幕上出现这个下拉框：
 
-![5分钟内构建一个机器学习网页应用](../Images/441bb801f8a16b754ca03e2416cf3a91.png)
+![5 分钟内构建一个机器学习网页应用](img/441bb801f8a16b754ca03e2416cf3a91.png)
 
-记住，我们需要从用户那里收集15个独立变量。
+记住，我们需要从用户那里收集 15 个独立变量。
 
 运行以下代码行以创建输入框，供用户输入数据。我们将页面分成三列，以使应用更具视觉吸引力。
 
@@ -202,7 +202,7 @@ glucose = col3.number_input("Enter your glucose level")
 
 再次刷新应用以查看更改：
 
-![5分钟内构建一个机器学习网页应用](../Images/9fc6edbe5dcdcc690c1914a25dffdfb9.png)
+![5 分钟内构建一个机器学习网页应用](img/9fc6edbe5dcdcc690c1914a25dffdfb9.png)
 
 最后，我们需要在页面底部添加一个‘*预测*’按钮。用户点击这个按钮后，将显示输出结果。
 
@@ -269,13 +269,13 @@ if st.button('Predict'):
         st.write('<p class="big-font">You are likely to develop heart disease in 10 years.</p>',unsafe_allow_html=True)
 ```
 
-这些更改已被添加，以便只有当用户点击“预测”按钮后才显示输出结果。同时，我们希望向用户显示文本，而不仅仅是显示预测值（0和1）。
+这些更改已被添加，以便只有当用户点击“预测”按钮后才显示输出结果。同时，我们希望向用户显示文本，而不仅仅是显示预测值（0 和 1）。
 
 保存你所有的代码并刷新页面，你将看到屏幕上的完整应用程序。输入随机数字并点击预测按钮，确保一切正常：
 
-![5分钟内构建机器学习Web应用](../Images/507ef4f898fa003865eb903d9edd9c2c.png)
+![5 分钟内构建机器学习 Web 应用](img/507ef4f898fa003865eb903d9edd9c2c.png)
 
-如果你完成了整个教程，恭喜你！你已经成功构建了一个能够与终端用户交互的Streamlit ML Web应用。
+如果你完成了整个教程，恭喜你！你已经成功构建了一个能够与终端用户交互的 Streamlit ML Web 应用。
 
 下一步，你可以考虑部署应用程序，使其能够被互联网用户访问。可以使用像[Heroku](https://devcenter.heroku.com/categories/reference)、[GCP](https://towardsdatascience.com/deploying-streamlit-apps-to-gcp-79ad5933013e)和[AWS](https://towardsdatascience.com/how-to-deploy-a-streamlit-app-using-an-amazon-free-ec2-instance-416a41f69dc3)这样的工具来完成这项工作。
 
@@ -283,14 +283,14 @@ if st.button('Predict'):
 
 ### 更多相关信息
 
-+   [KDnuggets 新闻 2022年3月9日：在5分钟内构建机器学习Web应用…](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习 Web 应用…](https://www.kdnuggets.com/2022/n10.html)
 
-+   [用Python在5分钟内构建网络抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
++   [用 Python 在 5 分钟内构建网络抓取器](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
 
-+   [使用Heroku部署机器学习Web应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)
++   [使用 Heroku 部署机器学习 Web 应用](https://www.kdnuggets.com/2022/04/deploy-machine-learning-web-app-heroku.html)
 
-+   [用Python在7个简单步骤中构建命令行应用](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
++   [用 Python 在 7 个简单步骤中构建命令行应用](https://www.kdnuggets.com/build-a-command-line-app-with-python-in-7-easy-steps)
 
-+   [用Python在5分钟内构建文本转语音转换器](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)
++   [用 Python 在 5 分钟内构建文本转语音转换器](https://www.kdnuggets.com/2022/09/build-texttospeech-converter-python-5-minutes.html)
 
-+   [用Hugging Face和Gradio在5分钟内构建AI聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)
++   [用 Hugging Face 和 Gradio 在 5 分钟内构建 AI 聊天机器人](https://www.kdnuggets.com/2023/06/build-ai-chatbot-5-minutes-hugging-face-gradio.html)

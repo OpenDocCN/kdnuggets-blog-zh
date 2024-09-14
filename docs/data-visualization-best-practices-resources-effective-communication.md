@@ -1,8 +1,8 @@
 # 数据可视化最佳实践与有效沟通资源
 
-> 原文：[https://www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html](https://www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html)
+> 原文：[`www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html`](https://www.kdnuggets.com/2023/04/data-visualization-best-practices-resources-effective-communication.html)
 
-![数据可视化最佳实践与有效沟通资源](../Images/8ad3598c257a37a42529fe63f8ce5d57.png)
+![数据可视化最佳实践与有效沟通资源](img/8ad3598c257a37a42529fe63f8ce5d57.png)
 
 作者提供的图像
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 我们都见过糟糕的图表，并且能够客观地说那个图表很差。同样，我们也见过令人惊叹的数据可视化作品，它们简明而巧妙地传达了复杂的话题。
 
-这是我[最喜欢的之一](https://en.wikipedia.org/wiki/John_Snow#/media/File:Snow-cholera-map-1.jpg)，仅作为优秀数据可视化的一个例子。这是一张1854年霍乱爆发的地图。通过这个简陋的点图，医生约翰·斯诺能够看到死亡率最高的区域，并最终找出霍乱的原因——一个被污染的水井。今天看来这很简单，但在1854年是突破性的。
+这是我[最喜欢的之一](https://en.wikipedia.org/wiki/John_Snow#/media/File:Snow-cholera-map-1.jpg)，仅作为优秀数据可视化的一个例子。这是一张 1854 年霍乱爆发的地图。通过这个简陋的点图，医生约翰·斯诺能够看到死亡率最高的区域，并最终找出霍乱的原因——一个被污染的水井。今天看来这很简单，但在 1854 年是突破性的。
 
 这很有趣，它内容丰富，吸引进一步调查，并且确定了一个趋势。即使没有流行病学知识，你也可以直观地感受到这里发生了什么。换句话说，这是一项优秀的数据可视化。
 
-![数据可视化最佳实践与有效沟通资源](../Images/09788974b0c5d9e358beb7aff4171119.png)
+![数据可视化最佳实践与有效沟通资源](img/09788974b0c5d9e358beb7aff4171119.png)
 
 图片来自[维基百科](https://en.wikipedia.org/wiki/John_Snow#/media/File:Snow-cholera-map-1.jpg)
 
@@ -34,7 +34,7 @@
 
 这很糟糕。你无法理解我在说什么；它没有帮助发现任何趋势或模式。只需一眼，你就可以说，“是的，Nate，这需要改进。”
 
-![数据可视化最佳实践与有效沟通资源](../Images/d8cf965cc30febc0fe6c7e22c831fcff.png)
+![数据可视化最佳实践与有效沟通资源](img/d8cf965cc30febc0fe6c7e22c831fcff.png)
 
 作者提供的图像
 
@@ -58,7 +58,7 @@
 
 ## 传达复杂信息
 
-想象一下你是1854年的约翰·斯诺。你的病人正在死亡。你知道这是一个模式，你知道这与一个特定的受污染的水井有关。你试图向疲惫不堪、持怀疑态度的城市官员解释这一点，他们并不真正相信疾病会以这种方式传播。
+想象一下你是 1854 年的约翰·斯诺。你的病人正在死亡。你知道这是一个模式，你知道这与一个特定的受污染的水井有关。你试图向疲惫不堪、持怀疑态度的城市官员解释这一点，他们并不真正相信疾病会以这种方式传播。
 
 你能想象试图向某人描述那个霍乱图表吗？你会怎么做？这几乎是不可能的。
 
@@ -68,9 +68,9 @@
 
 假设你是一个在医疗公司工作的数据科学家。你正在尝试分析病人数据以改善护理，所以你在查看病人统计数据、病史和治疗结果。
 
-当你进行典型的统计分析时，你不会注意到任何突出的模式。然而，当你将死亡率和年龄放在散点图上时，你会发现65岁以上的病人死亡率急剧上升。
+当你进行典型的统计分析时，你不会注意到任何突出的模式。然而，当你将死亡率和年龄放在散点图上时，你会发现 65 岁以上的病人死亡率急剧上升。
 
-![数据可视化最佳实践与有效沟通的资源](../Images/f965452e8b02b64f67b9c1b7cf5f58f5.png)
+![数据可视化最佳实践与有效沟通的资源](img/f965452e8b02b64f67b9c1b7cf5f58f5.png)
 
 图片由作者提供
 
@@ -84,19 +84,19 @@
 
 这是最重要的一步。你为谁创建这个数据可视化？他们感兴趣什么？他们已经具备什么基本理解？他们需要这个数据可视化做什么？
 
-例如，假设你是一名数据分析师，试图向CTO解释电子邮件营销活动对品牌各个受众细分的有效性。此次会议的结果将决定下一个季度的整个电子邮件营销策略。
+例如，假设你是一名数据分析师，试图向 CTO 解释电子邮件营销活动对品牌各个受众细分的有效性。此次会议的结果将决定下一个季度的整个电子邮件营销策略。
 
-但你忘记了，对你来说是第二天性——如CTR、CTA和像“细分A”这样的细分名称——对于非专家来说并不容易理解。
+但你忘记了，对你来说是第二天性——如 CTR、CTA 和像“细分 A”这样的细分名称——对于非专家来说并不容易理解。
 
 你展示了以下这种糟糕的效果，并且不得不花整个会议时间重新沟通所有术语和细分名称的具体含义。CTO 感到困惑、不满意，无法做出决策。
 
-![数据可视化最佳实践与有效沟通的资源](../Images/08b25bb0252702396f58c6fa3d88e438.png)
+![数据可视化最佳实践与有效沟通的资源](img/08b25bb0252702396f58c6fa3d88e438.png)
 
 图片由作者提供
 
 相反，你应该将其简化为决策者做出决策所需的主要关键因素，并确保一切对该受众来说都是有意义的。这是一个好的数据可视化版本可能的样子：
 
-![数据可视化最佳实践与有效沟通的资源](../Images/46d290b076863c2f60ef5661296e61ae.png)
+![数据可视化最佳实践与有效沟通的资源](img/46d290b076863c2f60ef5661296e61ae.png)
 
 图片由作者提供
 
@@ -104,13 +104,13 @@
 
 ## 保持简洁
 
-你知道，当你现在观看 [星球大战](https://makeagif.com/i/6kEv8G) 时，它感觉有点像电影制片人最近发现了所有可以使用的PowerPoint过渡效果，并且仅仅因为乐趣和新奇而使用了每一个？
+你知道，当你现在观看 [星球大战](https://makeagif.com/i/6kEv8G) 时，它感觉有点像电影制片人最近发现了所有可以使用的 PowerPoint 过渡效果，并且仅仅因为乐趣和新奇而使用了每一个？
 
 这是一种不良的数据可视化实践。好的数据可视化实践是尽可能保持简单。
 
-例如，几年前有一个做3D图表的流行趋势。这并没有增加任何传递的信息。但它很花哨，所以人们喜欢它。
+例如，几年前有一个做 3D 图表的流行趋势。这并没有增加任何传递的信息。但它很花哨，所以人们喜欢它。
 
-![数据可视化最佳实践与有效沟通的资源](../Images/af7929d75946b71c401a6f2e028f61ec.png)
+![数据可视化最佳实践与有效沟通的资源](img/af7929d75946b71c401a6f2e028f61ec.png)
 
 图片来源于 [语义学者](https://www.semanticscholar.org/paper/A-gene-hypermethylation-profile-of-human-cancer.-Esteller-Corn/ac5ea7102ec637690014716104946fe79a29c195)
 
@@ -124,7 +124,7 @@
 
 供参考，正确的答案是折线图。将时间放在 x 轴上，将你所测量的其他因素放在 y 轴上。
 
-![数据可视化最佳实践与有效沟通资源](../Images/773da1771338565989c7380f5b33f9f0.png)
+![数据可视化最佳实践与有效沟通资源](img/773da1771338565989c7380f5b33f9f0.png)
 
 作者提供的图片
 
@@ -150,7 +150,7 @@
 
 看这个例子了解不该做什么：
 
-![数据可视化最佳实践与有效沟通资源](../Images/c632c7a0a4bd19647344664073cc82de.png)
+![数据可视化最佳实践与有效沟通资源](img/c632c7a0a4bd19647344664073cc82de.png)
 
 图片来源于 [Tableau](http://public.tableausoftware.com/views/MLSSalaries/MLSPUDashboard?:embed=y&:display_count=no)
 
@@ -168,15 +168,15 @@
 
 首先，你应该扎根于数据可视化的基础。我推荐以下资源：
 
-+   我喜欢David McCandless的[YouTube讲座](https://www.youtube.com/watch?v=5Zg-C8AAIGg)，作为数据可视化之美的起点。
++   我喜欢 David McCandless 的[YouTube 讲座](https://www.youtube.com/watch?v=5Zg-C8AAIGg)，作为数据可视化之美的起点。
 
-+   [Greg Martin的数据可视化介绍](https://www.youtube.com/watch?v=7eSgGWq6o3I)也是一个很好的入门视频。
++   [Greg Martin 的数据可视化介绍](https://www.youtube.com/watch?v=7eSgGWq6o3I)也是一个很好的入门视频。
 
-+   Simplilearn在YouTube上有一个[27分钟的微型教程](https://www.youtube.com/watch?v=MiiANxRHSv4)。
++   Simplilearn 在 YouTube 上有一个[27 分钟的微型教程](https://www.youtube.com/watch?v=MiiANxRHSv4)。
 
-+   [IBM的Python数据可视化课程](https://coursera.pxf.io/c/3311133/1213620/14726?subId1=dvibmpython&u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fpython-for-data-visualization&partnerpropertyid=3245039) 是一个不错的下一个步骤，由Coursera主办。它是免费的。
++   [IBM 的 Python 数据可视化课程](https://coursera.pxf.io/c/3311133/1213620/14726?subId1=dvibmpython&u=https%3A%2F%2Fwww.coursera.org%2Flearn%2Fpython-for-data-visualization&partnerpropertyid=3245039) 是一个不错的下一个步骤，由 Coursera 主办。它是免费的。
 
-## DIY风格
+## DIY 风格
 
 一旦你完成了听、看和学习的过程，是时候应用你所知道的内容了。获取来自以下来源的可靠数据：
 
@@ -192,7 +192,7 @@
 
 我还建议你查看一下真实面试官在数据科学面试中提出的问题。像[StrataScratch](https://www.stratascratch.com/?utm_source=blog&utm_medium=click&utm_campaign=kdn+data+viz+best+practices)这样的平台可以帮助你在实际案例中练习数据可视化技能。
 
-想要更多？[掌握数据可视化的30个资源](/2022/11/30-resources-mastering-data-visualization.html) 是一个很好的数据可视化资源汇总列表。
+想要更多？掌握数据可视化的 30 个资源 是一个很好的数据可视化资源汇总列表。
 
 # 良好数据可视化沟通的最佳实践
 
@@ -208,14 +208,14 @@
 
 ### 更多相关主题
 
-+   [提示工程101：掌握有效的LLM沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
++   [提示工程 101：掌握有效的 LLM 沟通](https://www.kdnuggets.com/prompt-engineering-101-mastering-effective-llm-communication)
 
-+   [掌握数据可视化的30个资源](https://www.kdnuggets.com/2022/11/30-resources-mastering-data-visualization.html)
++   [掌握数据可视化的 30 个资源](https://www.kdnuggets.com/2022/11/30-resources-mastering-data-visualization.html)
 
-+   [数据仓储和ETL最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
++   [数据仓储和 ETL 最佳实践](https://www.kdnuggets.com/2023/02/data-warehousing-etl-best-practices.html)
 
-+   [云计算和数据迁移到 AWS 云的11个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
++   [云计算和数据迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
 +   [将 ChatGPT 集成到数据科学工作流程中：技巧和最佳实践](https://www.kdnuggets.com/2023/05/integrating-chatgpt-data-science-workflows-tips-best-practices.html)
 
-+   [数据科学团队协作的5个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)
++   [数据科学团队协作的 5 个最佳实践](https://www.kdnuggets.com/2023/06/5-best-practices-data-science-team-collaboration.html)

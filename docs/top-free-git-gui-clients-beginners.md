@@ -1,8 +1,8 @@
 # 适合初学者的顶级免费 Git GUI 客户端
 
-> 原文：[https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
+> 原文：[`www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html`](https://www.kdnuggets.com/2022/10/top-free-git-gui-clients-beginners.html)
 
-![适合初学者的顶级免费 Git GUI 客户端](../Images/414aae24c1f730eb2d3a6a567b9bedf9.png)
+![适合初学者的顶级免费 Git GUI 客户端](img/414aae24c1f730eb2d3a6a567b9bedf9.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@ Git 是基于终端的软件，让我们能够对文件进行版本控制、与�
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
@@ -32,7 +32,7 @@ Git 是基于终端的软件，让我们能够对文件进行版本控制、与�
 
 ## 1\. GitHub Desktop
 
-![适合初学者的顶级免费 Git GUI 客户端](../Images/7673f1abd26e535502c8611c6cf37485.png)
+![适合初学者的顶级免费 Git GUI 客户端](img/7673f1abd26e535502c8611c6cf37485.png)
 
 图片来源：作者
 
@@ -62,7 +62,7 @@ Git 是基于终端的软件，让我们能够对文件进行版本控制、与�
 
 ## 2\. GitKraken
 
-![适合初学者的顶级免费 Git GUI 客户端](../Images/d2326b4fafabcfc8efceb64a9c9dfdae.png)
+![适合初学者的顶级免费 Git GUI 客户端](img/d2326b4fafabcfc8efceb64a9c9dfdae.png)
 
 作者提供的图像
 
@@ -104,7 +104,7 @@ Git 是基于终端的软件，让我们能够对文件进行版本控制、与�
 
 ## 3. Sourcetree
 
-![初学者的顶级免费 Git GUI 客户端](../Images/62affb73caeb90cd7e355a7fd420e324.png)
+![初学者的顶级免费 Git GUI 客户端](img/62affb73caeb90cd7e355a7fd420e324.png)
 
 作者提供的图像
 

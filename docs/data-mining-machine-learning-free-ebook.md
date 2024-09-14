@@ -1,14 +1,14 @@
 # 数据挖掘与机器学习：基础概念与算法：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2020/07/data-mining-machine-learning-free-ebook.html](https://www.kdnuggets.com/2020/07/data-mining-machine-learning-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2020/07/data-mining-machine-learning-free-ebook.html`](https://www.kdnuggets.com/2020/07/data-mining-machine-learning-free-ebook.html)
 
-[评论](#comments)
+评论
 
 **作者：Mohammed J. Zaki 和 Wagner Meira, Jr.**
 
-我们很高兴地宣布我们书籍的第二版 **[《数据挖掘与机器学习：基础概念与算法（第二版）》](https://dataminingbook.info)**，由Mohammed J. Zaki 和 Wagner Meira, Jr. 编著，剑桥大学出版社出版，2020年。
+我们很高兴地宣布我们书籍的第二版 **[《数据挖掘与机器学习：基础概念与算法（第二版）》](https://dataminingbook.info)**，由 Mohammed J. Zaki 和 Wagner Meira, Jr. 编著，剑桥大学出版社出版，2020 年。
 
-[![图片](../Images/c517bf77f62d942f004e376ddc0d1195.png)](https://dataminingbook.info)
+![图片](https://dataminingbook.info)
 
 整本书[可以在线免费阅读](https://dataminingbook.info)，网站还包括视频讲座和其他资源。
 
@@ -22,21 +22,21 @@
 
 **相关：**
 
-+   [数据科学基础：免费电子书](/2020/07/foundations-data-science-free-ebook.html)
++   数据科学基础：免费电子书
 
-+   [理解机器学习：免费电子书](/2020/06/understanding-machine-learning-free-ebook.html)
++   理解机器学习：免费电子书
 
-+   [统计学习导论：免费电子书](/2020/06/introduction-statistical-learning-free-ebook.html)
++   统计学习导论：免费电子书
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 

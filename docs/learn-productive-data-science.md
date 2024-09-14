@@ -1,10 +1,10 @@
 # 你为什么以及如何学习“高效的数据科学”？
 
-> 原文：[https://www.kdnuggets.com/2021/07/learn-productive-data-science.html](https://www.kdnuggets.com/2021/07/learn-productive-data-science.html)
+> 原文：[`www.kdnuggets.com/2021/07/learn-productive-data-science.html`](https://www.kdnuggets.com/2021/07/learn-productive-data-science.html)
 
-[评论](#comments)
+评论
 
-![](../Images/ba1cf913085757412b6dff9f9a5f79e1.png)
+![](img/ba1cf913085757412b6dff9f9a5f79e1.png)
 
 **图片来源**：[Pixabay](https://pixabay.com/illustrations/productivity-work-businessman-1995786/)（免费图片）
 
@@ -24,7 +24,7 @@
 
 +   轻松的 web 应用部署
 
-![](../Images/8ada2b0b9f53bbc3ba0342340780e507.png)
+![](img/8ada2b0b9f53bbc3ba0342340780e507.png)
 
 **图片来源**：[Pixabay](https://pixabay.com/photos/time-businessman-tablet-gears-2676366/)（免费图片）
 
@@ -42,7 +42,7 @@
 
 让我们假设有人在教授一个“*高效的数据科学*”课程或编写一本相关书籍——使用 Python 作为语言框架。那么，针对这样一个课程或书籍，通常应该有什么期望？
 
-![](../Images/1f525b6c773a355711df3464d5cc0879.png)
+![](img/1f525b6c773a355711df3464d5cc0879.png)
 
 **图片来源**：[Pixabay](https://pixabay.com/vectors/books-education-female-girl-1297707/)（免费图片）
 
@@ -56,11 +56,11 @@
 
 相反，它应该专注于有用的技术，比如如何**测量 ML 模型的内存占用和执行速度**，**质量测试**数据科学流程，**模块化**数据科学流程以进行应用开发等。它还应涵盖一些在**自动化**和**加速**数据科学家日常任务中非常有用的 Python 库。
 
-此外，还应涉及帮助数据科学家**处理大型和复杂数据集**的工具和包，以比遵循标准Python数据科学技术智慧更优的方式
+此外，还应涉及帮助数据科学家**处理大型和复杂数据集**的工具和包，以比遵循标准 Python 数据科学技术智慧更优的方式
 
 ### 一些需要掌握的具体技能
 
-![](../Images/1a6cacd7eb37e39dc769148d99ebb7bd.png)
+![](img/1a6cacd7eb37e39dc769148d99ebb7bd.png)
 
 **图片来源**: [Pixabay](https://pixabay.com/illustrations/training-businessman-suit-manager-2874597/) (免费图片)
 
@@ -74,13 +74,13 @@
 
 1.  如何高效处理大型和复杂的数据集（这在传统数据科学工具下会很困难）
 
-1.  如何充分利用GPU和多核处理器进行各种数据科学和分析任务，而不仅仅是专门的深度学习建模（[**请参见这篇文章**](https://medium.com/dataseries/gpu-powered-data-science-not-deep-learning-with-rapids-29f9ed8d51f3)）
+1.  如何充分利用 GPU 和多核处理器进行各种数据科学和分析任务，而不仅仅是专门的深度学习建模（[**请参见这篇文章**](https://medium.com/dataseries/gpu-powered-data-science-not-deep-learning-with-rapids-29f9ed8d51f3)）
 
-1.  如何快速制作GUI应用程序以演示数据科学/机器学习想法或模型调优（[**请参见这篇文章**](https://towardsdatascience.com/building-data-science-gui-apps-with-pysimplegui-179db54a9a15)），或如何轻松（且快速）地在应用级别部署机器学习模型和数据分析代码（[**请参见这篇文章**](https://towardsdatascience.com/pywebio-write-interactive-web-app-in-script-way-using-python-14f50155af4e)）
+1.  如何快速制作 GUI 应用程序以演示数据科学/机器学习想法或模型调优（[**请参见这篇文章**](https://towardsdatascience.com/building-data-science-gui-apps-with-pysimplegui-179db54a9a15)），或如何轻松（且快速）地在应用级别部署机器学习模型和数据分析代码（[**请参见这篇文章**](https://towardsdatascience.com/pywebio-write-interactive-web-app-in-script-way-using-python-14f50155af4e)）
 
 ### 关于这一主题的理想书籍将会……
 
-![](../Images/c06ab1740234b0a79454e47a719a9d8c.png)
+![](img/c06ab1740234b0a79454e47a719a9d8c.png)
 
 **图片来源**: [Pixabay](https://pixabay.com/illustrations/fairy-tale-fantasy-dream-night-1077863/) (免费图片)
 
@@ -100,19 +100,19 @@
 
 例如，[**RAPIDS 软件库和 API 套件**](https://rapids.ai/)为你——一位普通的数据科学家（而不一定是深度学习从业者）——提供了完全在 GPU 上执行**端到端数据科学和分析管道**的选项和灵活性。
 
-![](../Images/0829816c3ae29c222246fdfa91aae184.png)
+![](img/0829816c3ae29c222246fdfa91aae184.png)
 
 **图片来源**：作者创建的拼贴
 
 即使使用中等规格的 GPU，这些库在速度上也显示出相对于其常规 Python 对应物的显著提升。自然地，我们应该在可能的情况下采纳这些，以实现*高效数据科学*工作流。
 
-![](../Images/d786b1ea054a46cf0cd66a2605704ceb.png)
+![](img/d786b1ea054a46cf0cd66a2605704ceb.png)
 
-![](../Images/07701b247ae51d3eb20313ba2cb684c2.png)
+![](img/07701b247ae51d3eb20313ba2cb684c2.png)
 
 同样，也有出色的开源机会可以超越 Python 语言的单核限制，并采用并行计算范式，而无需改变数据科学家的核心身份。
 
-![](../Images/a4e4c8b5bcb1c126d6cd23a5029e6698.png)
+![](img/a4e4c8b5bcb1c126d6cd23a5029e6698.png)
 
 **图片来源**：作者创建的拼贴
 
@@ -126,22 +126,22 @@
 
 **相关内容：**
 
-+   [如何让自己从数百名其他数据科学候选人中脱颖而出？](/2021/07/distinguish-yourself-hundreds-other-data-science-candidates.html)
++   如何让自己从数百名其他数据科学候选人中脱颖而出？
 
-+   [你的机器学习代码消耗了多少内存？](/2021/07/memory-machine-learning-code-consuming.html)
++   你的机器学习代码消耗了多少内存？
 
-+   [一个错误如何浪费了我3年的数据科学之旅](/2021/06/single-mistake-wasted-3-years-data-science.html)
++   一个错误如何浪费了我 3 年的数据科学之旅
 
 ### 更多相关主题
 
-+   [每位初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每位初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [成为出色数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为出色数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [每位数据科学家都应了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每位数据科学家都应了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并通过目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败案例，详解](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例，详解](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)

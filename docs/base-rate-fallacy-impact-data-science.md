@@ -1,8 +1,8 @@
 # 基础率谬误及其对数据科学的影响
 
-> 原文：[https://www.kdnuggets.com/2023/04/base-rate-fallacy-impact-data-science.html](https://www.kdnuggets.com/2023/04/base-rate-fallacy-impact-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/04/base-rate-fallacy-impact-data-science.html`](https://www.kdnuggets.com/2023/04/base-rate-fallacy-impact-data-science.html)
 
-![基础率谬误及其对数据科学的影响](../Images/8c1dccfc0b79f71cb599f0f8b4fcf265.png)
+![基础率谬误及其对数据科学的影响](img/8c1dccfc0b79f71cb599f0f8b4fcf265.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -24,9 +24,9 @@
 
 在统计学中，基础率可以视为与“特征证据”无关的类别概率。你可以将基础率视为你的先验概率假设。
 
-基础率是研究中的重要工具。例如，如果我们是一家制药公司，并且正在开发和推出一种新疫苗，我们希望了解这种治疗的成功率。如果我们有4000人愿意接种这种疫苗，而我们的基础率是1/25。
+基础率是研究中的重要工具。例如，如果我们是一家制药公司，并且正在开发和推出一种新疫苗，我们希望了解这种治疗的成功率。如果我们有 4000 人愿意接种这种疫苗，而我们的基础率是 1/25。
 
-这意味着在4000人中只有160人会通过这种治疗获得成功。在制药界，这是一个非常低的成功率。这就是基础率如何用于提高研究的准确性，并确保产品能够表现良好。
+这意味着在 4000 人中只有 160 人会通过这种治疗获得成功。在制药界，这是一个非常低的成功率。这就是基础率如何用于提高研究的准确性，并确保产品能够表现良好。
 
 # 什么是基础率谬误？
 
@@ -64,7 +64,7 @@
 
 +   假阴性（FN） - 你的模型预测为阴性且实际为阳性
 
-混淆矩阵可以计算5个不同的指标，以帮助我们衡量模型的有效性：
+混淆矩阵可以计算 5 个不同的指标，以帮助我们衡量模型的有效性：
 
 1.  错误分类 = (FP + FN) / (TP + TN + FP + FN)
 
@@ -78,7 +78,7 @@
 
 为了更好地理解混淆矩阵，最好查看一个可视化图：
 
-![基础率谬误及其对数据科学的影响](../Images/9f92c0f3b9f027b6aa3d885eeeb72b6a.png)
+![基础率谬误及其对数据科学的影响](img/9f92c0f3b9f027b6aa3d885eeeb72b6a.png)
 
 作者提供的图片
 
@@ -108,7 +108,7 @@
 
 +   [伯克森-杰克尔悖论及其对数据科学的重要性](https://www.kdnuggets.com/2023/03/berksonjekel-paradox-importance-data-science.html)
 
-+   [IMPACT：数据可观测性峰会将于11月8日重返…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观测性峰会将于 11 月 8 日重返…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
 
 +   [如何利用数据可视化提升工作报告的影响力…](https://www.kdnuggets.com/2022/08/data-visualization-add-impact-work-reports-presentations.html)
 

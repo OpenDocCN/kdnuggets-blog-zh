@@ -1,8 +1,8 @@
-# 5种机器学习模型在5分钟内解释
+# 5 种机器学习模型在 5 分钟内解释
 
-> 原文：[https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
+> 原文：[`www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes`](https://www.kdnuggets.com/5-machine-learning-models-explained-in-5-minutes)
 
-![5种机器学习模型在5分钟内解释](../Images/3bf1e32d073592dd2b0825b7239b8ae1.png)
+![5 种机器学习模型在 5 分钟内解释](img/3bf1e32d073592dd2b0825b7239b8ae1.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -24,11 +24,11 @@
 
 实际上，从你早上醒来到晚上睡觉，你可能已经与数十个机器学习模型互动而未曾意识到。
 
-预计机器学习行业将在2024年至2030年间增长超过36%。
+预计机器学习行业将在 2024 年至 2030 年间增长超过 36%。
 
 鉴于几乎每个大型组织都在积极投资于人工智能，你只会从提升机器学习技能中受益。
 
-无论你是数据科学爱好者、开发者，还是想提升该领域知识的普通人，以下是5种你应该了解的常用机器学习模型：
+无论你是数据科学爱好者、开发者，还是想提升该领域知识的普通人，以下是 5 种你应该了解的常用机器学习模型：
 
 ## 1\. 线性回归
 
@@ -38,19 +38,19 @@
 
 例如，如果你被要求根据房屋大小预测房价，你会使用线性回归。
 
-在这种情况下，房屋大小是你的自变量X，用于预测房价，房价是因变量。
+在这种情况下，房屋大小是你的自变量 X，用于预测房价，房价是因变量。
 
-这是通过拟合一个线性方程来建模X与y之间的关系，表示为y=mX+c。
+这是通过拟合一个线性方程来建模 X 与 y 之间的关系，表示为 y=mX+c。
 
 这里是一个表示线性回归的图示，用于建模房价与房屋大小之间的关系：
 
-![线性回归的视觉表现](../Images/c083de083144545cfd9f050fbf62edb6.png)
+![线性回归的视觉表现](img/c083de083144545cfd9f050fbf62edb6.png)
 
 图片由作者提供
 
 **学习资源**
 
-要了解更多关于线性回归的直觉以及它如何在数学上运作，我推荐观看[Krish Naik的YouTube教程](https://youtu.be/1-OGRohmH2s?si=GY_8m59v-QNk310w)。
+要了解更多关于线性回归的直觉以及它如何在数学上运作，我推荐观看[Krish Naik 的 YouTube 教程](https://youtu.be/1-OGRohmH2s?si=GY_8m59v-QNk310w)。
 
 ## 2\. 逻辑回归
 
@@ -60,23 +60,23 @@
 
 这里是展示逻辑回归如何工作的图表：
 
-![逻辑曲线的可视化表示](../Images/e9e72416be152eef3cd96c4d3cce3e3c.png)
+![逻辑曲线的可视化表示](img/e9e72416be152eef3cd96c4d3cce3e3c.png)
 
 作者提供的图片
 
-注意，与表示直线的线性回归不同，逻辑回归被建模为S形曲线。
+注意，与表示直线的线性回归不同，逻辑回归被建模为 S 形曲线。
 
 正如上面的曲线所示，负面关键词的数量增加时，消息被分类为垃圾邮件的概率也增加。
 
-此曲线的x轴表示负面关键词的数量，y轴显示邮件被标记为垃圾邮件的概率。
+此曲线的 x 轴表示负面关键词的数量，y 轴显示邮件被标记为垃圾邮件的概率。
 
-通常，在逻辑回归中，0.5或更高的概率表示正面结果——在这种情况下，这意味着消息是垃圾邮件。
+通常，在逻辑回归中，0.5 或更高的概率表示正面结果——在这种情况下，这意味着消息是垃圾邮件。
 
-相反，低于0.5的概率表示负面结果，意味着消息不是垃圾邮件。
+相反，低于 0.5 的概率表示负面结果，意味着消息不是垃圾邮件。
 
 **学习资源**
 
-如果你想了解更多关于逻辑回归的内容，[StatQuest的逻辑回归教程](https://youtu.be/yIYKR4sgzI8?si=p8j-zl4IzBe6l-dQ)是一个很好的起点。
+如果你想了解更多关于逻辑回归的内容，[StatQuest 的逻辑回归教程](https://youtu.be/yIYKR4sgzI8?si=p8j-zl4IzBe6l-dQ)是一个很好的起点。
 
 ## 3. 决策树
 
@@ -88,7 +88,7 @@
 
 这里是一个简单决策树的示例，用于确定一个人在某一天是否应该吃冰淇淋：
 
-![决策树的可视化表示](../Images/2ad21c6375275ed2cbed7f8b5e141321.png)
+![决策树的可视化表示](img/2ad21c6375275ed2cbed7f8b5e141321.png)
 
 作者提供的图片
 
@@ -104,7 +104,7 @@
 
 **学习资源**
 
-要了解更多关于决策树的内容，我建议观看[StatsQuest的视频教程](https://youtu.be/_L39rN6gz7Y?si=GRUk4fUta-UkbtSj)。
+要了解更多关于决策树的内容，我建议观看[StatsQuest 的视频教程](https://youtu.be/_L39rN6gz7Y?si=GRUk4fUta-UkbtSj)。
 
 ## 4. 随机森林
 
@@ -140,7 +140,7 @@ K-Means 聚类是一种非监督学习模型，基本上处理未标记的数据
 
 这里是 K-Means 聚类模型的可视化表示：
 
-![K-Means 聚类的可视化表示](../Images/264d5a3001acd129d03bca67aea98218.png)
+![K-Means 聚类的可视化表示](img/264d5a3001acd129d03bca67aea98218.png)
 
 作者提供的图片
 
@@ -154,7 +154,7 @@ K-Means 聚类是一种非监督学习模型，基本上处理未标记的数据
 
 这里是肘部法的可视化表示：
 
-![肘部法的可视化表示](../Images/c8870f7ba6873f85332eafd421f343df.png)
+![肘部法的可视化表示](img/c8870f7ba6873f85332eafd421f343df.png)
 
 作者提供的图片
 
@@ -164,7 +164,7 @@ K-Means 聚类是一种非监督学习模型，基本上处理未标记的数据
 
 如果你想了解更多关于该主题的信息，StatQuest 提供了一个
 
-[8分钟视频](https://youtu.be/4b5d3muPQmA?si=QovwM1R8yAIGaATd)清晰地解释了 K-Means 聚类的工作原理。
+[8 分钟视频](https://youtu.be/4b5d3muPQmA?si=QovwM1R8yAIGaATd)清晰地解释了 K-Means 聚类的工作原理。
 
 ## 下一步
 
@@ -174,7 +174,7 @@ K-Means 聚类是一种非监督学习模型，基本上处理未标记的数据
 
 但旅程并未结束。
 
-为了巩固你对机器学习模型的理解，并能够将它们应用于实际应用，我建议学习一种编程语言，如Python或R。
+为了巩固你对机器学习模型的理解，并能够将它们应用于实际应用，我建议学习一种编程语言，如 Python 或 R。
 
 Freecodecamp 的 [初学者 Python 课程](https://youtu.be/rfscVS0vtbw?si=jWWytrkcy_-b4reH)
 
@@ -188,14 +188,14 @@ Freecodecamp 的 [初学者 Python 课程](https://youtu.be/rfscVS0vtbw?si=jWWyt
 
 ### 更多相关内容
 
-+   [在5分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
++   [在 5 分钟内构建机器学习网页应用](https://www.kdnuggets.com/2022/03/build-machine-learning-web-app-5-minutes.html)
 
-+   [KDnuggets 新闻 2022年3月9日：在5分钟内构建机器学习网页应用…](https://www.kdnuggets.com/2022/n10.html)
++   [KDnuggets 新闻 2022 年 3 月 9 日：在 5 分钟内构建机器学习网页应用…](https://www.kdnuggets.com/2022/n10.html)
 
 +   [三种难度级别解释大型语言模型](https://www.kdnuggets.com/large-language-models-explained-in-3-levels-of-difficulty)
 
 +   [多模态模型解释](https://www.kdnuggets.com/2023/03/multimodal-models-explained.html)
 
-+   [3分钟理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
++   [3 分钟理解偏差-方差权衡](https://www.kdnuggets.com/2020/09/understanding-bias-variance-trade-off-3-minutes.html)
 
-+   [在5分钟内用 Python 构建一个网页爬虫](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)
++   [在 5 分钟内用 Python 构建一个网页爬虫](https://www.kdnuggets.com/2022/02/build-web-scraper-python-5-minutes.html)

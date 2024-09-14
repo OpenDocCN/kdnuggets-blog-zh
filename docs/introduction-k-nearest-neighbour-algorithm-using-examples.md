@@ -1,22 +1,22 @@
 # K-最近邻算法介绍及示例
 
-> 原文：[https://www.kdnuggets.com/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html](https://www.kdnuggets.com/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html)
+> 原文：[`www.kdnuggets.com/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html`](https://www.kdnuggets.com/2020/04/introduction-k-nearest-neighbour-algorithm-using-examples.html)
 
-[评论](#comments)
+评论
 
 **由 [Ranvir Singh](https://ranvir.xyz/) 提供，开源爱好者**
 
-![KNN 算法 Python](../Images/9904c91821787cffd5c0365e7a03a07e.png)
+![KNN 算法 Python](img/9904c91821787cffd5c0365e7a03a07e.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -24,13 +24,13 @@
 
 > 它尝试估计在给定 `X` 的情况下 `Y` 的条件分布，并将给定的观察值（测试值）分类到具有最高估计概率的类别中。
 
-它首先识别训练数据中离 `测试值` 最近的 `k` 个点，并计算这些类别之间的距离。测试值将归属于距离最小的类别。![KNN 算法距离](../Images/bab96a13fc6221a835a48218c68dacf3.png)
+它首先识别训练数据中离 `测试值` 最近的 `k` 个点，并计算这些类别之间的距离。测试值将归属于距离最小的类别。![KNN 算法距离](img/bab96a13fc6221a835a48218c68dacf3.png)
 
 ### KNN 中测试值分类的概率
 
 它使用此函数计算测试值属于类别 `j` 的概率
 
-![图示](../Images/94c277b5f05dafe4a4924438759b7895.png)
+![图示](img/94c277b5f05dafe4a4924438759b7895.png)
 
 ### KNN 中计算距离的方法
 
@@ -48,11 +48,11 @@
 
 ### KNN 的过程及示例
 
-假设我们有一个数据集，其中包含标记明确的狗和马的身高和体重。我们将使用所有条目的体重和身高来创建一个图表。现在，每当有新的条目进来时，我们将选择一个`k`值。为了本示例的方便，假设我们选择`4`作为`k`的值。我们将找到最近的四个值的距离，距离最小的那个将具有更高的概率，并被认为是赢家。![KNN算法示例](../Images/d5ed5cee01cf2aad966a1e23d1318165.png)
+假设我们有一个数据集，其中包含标记明确的狗和马的身高和体重。我们将使用所有条目的体重和身高来创建一个图表。现在，每当有新的条目进来时，我们将选择一个`k`值。为了本示例的方便，假设我们选择`4`作为`k`的值。我们将找到最近的四个值的距离，距离最小的那个将具有更高的概率，并被认为是赢家。![KNN 算法示例](img/d5ed5cee01cf2aad966a1e23d1318165.png)
 
 ### KneighborsClassifier: KNN Python 示例
 
-GitHub 仓库: [KNN GitHub 仓库](https://github.com/singh1114/ml/blob/master/datascience/Machine%20learning/knn/knn.ipynb) 数据源使用: [数据源的GitHub](https://github.com/singh1114/ml/blob/master/datascience/Machine%20learning/knn/KNN_Project_Data) 在K-最近邻算法中，大多数时候你实际上并不知道输入参数或分类类别的含义。在面试的情况下，这样做是为了隐藏真实的客户数据。
+GitHub 仓库: [KNN GitHub 仓库](https://github.com/singh1114/ml/blob/master/datascience/Machine%20learning/knn/knn.ipynb) 数据源使用: [数据源的 GitHub](https://github.com/singh1114/ml/blob/master/datascience/Machine%20learning/knn/KNN_Project_Data) 在 K-最近邻算法中，大多数时候你实际上并不知道输入参数或分类类别的含义。在面试的情况下，这样做是为了隐藏真实的客户数据。
 
 ```py
  # Import everything
@@ -70,13 +70,13 @@ df = pd.read_csv('KNN_Project_Data')
 df.head() 
 ```
 
-![KNN算法数据框头](../Images/943f8d030780af21e4937ec3bf668a36.png)
+![KNN 算法数据框头](img/943f8d030780af21e4937ec3bf668a36.png)
 
 数据的头部清楚地表明我们有一些变量和一个包含不同类别的目标类。
 
-### 为什么对KNN进行变量归一化/标准化
+### 为什么对 KNN 进行变量归一化/标准化
 
-如我们所见，数据框中的数据尚未标准化。如果不对数据进行归一化，结果会大相径庭，且可能无法获得正确的结果。这是因为某些特征的偏差很大（值范围从1到1000）。这将导致非常糟糕的图表，并在模型中产生大量缺陷。有关归一化的更多信息，请查看[stack exchange](https://stats.stackexchange.com/a/287439)上的回答。Sklearn提供了一种非常简单的方式来标准化数据。
+如我们所见，数据框中的数据尚未标准化。如果不对数据进行归一化，结果会大相径庭，且可能无法获得正确的结果。这是因为某些特征的偏差很大（值范围从 1 到 1000）。这将导致非常糟糕的图表，并在模型中产生大量缺陷。有关归一化的更多信息，请查看[stack exchange](https://stats.stackexchange.com/a/287439)上的回答。Sklearn 提供了一种非常简单的方式来标准化数据。
 
 ```py
 from sklearn.preprocessing import StandardScaler
@@ -90,11 +90,11 @@ sc_df = pd.DataFrame(sc_transform)
 sc_df.head() 
 ```
 
-![KNN算法归一化数据框](../Images/8e89f347796245cfc68040ed56805082.png)
+![KNN 算法归一化数据框](img/8e89f347796245cfc68040ed56805082.png)
 
-### 使用sklearn进行测试/训练拆分
+### 使用 sklearn 进行测试/训练拆分
 
-我们可以简单地[使用sklearn拆分数据](https://ranvir.xyz/blog/how-to-evaluate-your-machine-learning-model-like-a-pro-metrics/#test-train-split-using-sklearn)。
+我们可以简单地[使用 sklearn 拆分数据](https://ranvir.xyz/blog/how-to-evaluate-your-machine-learning-model-like-a-pro-metrics/#test-train-split-using-sklearn)。
 
 ```py
 from sklearn.model_selection import train_test_split
@@ -104,9 +104,9 @@ y = df['TARGET CLASS']
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3) 
 ```
 
-### 使用KNN并找到最佳的k值
+### 使用 KNN 并找到最佳的 k 值
 
-选择一个合适的`k`值可能是一项艰巨的任务。我们将使用Python来自动化这个任务。我们能够找到一个合适的`k`值，从而最小化模型中的错误率。
+选择一个合适的`k`值可能是一项艰巨的任务。我们将使用 Python 来自动化这个任务。我们能够找到一个合适的`k`值，从而最小化模型中的错误率。
 
 ```py
 # Initialize an array that stores the error rates.
@@ -129,7 +129,7 @@ plt.xlabel('K')
 plt.ylabel('Error Rate') 
 ```
 
-![找到最佳k值](../Images/df8207c791896b95d54c50ca55e2e4b5.png) 从图表中可以看到，`k=30`给出了非常理想的错误率值。
+![找到最佳 k 值](img/df8207c791896b95d54c50ca55e2e4b5.png) 从图表中可以看到，`k=30`给出了非常理想的错误率值。
 
 ```py
 k = 30
@@ -138,7 +138,7 @@ knn.fit(X_train, y_train)
 preds = knn.predict(X_test) 
 ```
 
-### 评估KNN模型
+### 评估 KNN 模型
 
 阅读以下帖子以了解更多关于评估机器学习模型的内容。
 
@@ -149,11 +149,11 @@ print(confusion_matrix(y_test, preds))
 print(classification_report(y_test, preds)) 
 ```
 
-![混淆矩阵和分类报告](../Images/c6a18e3d0f4c354f208bcd472999ddcc.png)
+![混淆矩阵和分类报告](img/c6a18e3d0f4c354f208bcd472999ddcc.png)
 
-### 使用KNN算法的好处
+### 使用 KNN 算法的好处
 
-+   KNN算法因其简单易用而广泛用于各种学习任务。
++   KNN 算法因其简单易用而广泛用于各种学习任务。
 
 +   在算法中只需提供两个指标：`k`的值和`distance metric`。
 
@@ -179,11 +179,11 @@ print(classification_report(y_test, preds))
 
 **相关：**
 
-+   [最新 Scikit-learn 版本中的 5 个新特性](/2019/12/5-features-scikit-learn-release-highlights.html)。
++   最新 Scikit-learn 版本中的 5 个新特性。
 
-+   [掌握中级机器学习的 7 个步骤 — 2019 版](/2019/06/7-steps-mastering-intermediate-machine-learning-python.html)。
++   掌握中级机器学习的 7 个步骤 — 2019 版。
 
-+   [为数据集选择合适的聚类算法](/2019/10/right-clustering-algorithm.html)。
++   为数据集选择合适的聚类算法。
 
 ### 相关主题更多。
 

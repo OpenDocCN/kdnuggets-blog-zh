@@ -1,26 +1,26 @@
-# 是否存在弥合MLOps工具差距的方法？
+# 是否存在弥合 MLOps 工具差距的方法？
 
-> 原文：[https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)
+> 原文：[`www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html`](https://www.kdnuggets.com/2022/08/way-bridge-mlops-tools-gap.html)
 
-![是否存在弥合MLOps工具差距的方法？](../Images/3f87c908f7b842eb33ab15c5996423ef.png)
+![是否存在弥合 MLOps 工具差距的方法？](img/3f87c908f7b842eb33ab15c5996423ef.png)
 
 图片来源：[Pavel Danilyuk](https://www.pexels.com/photo/a-robot-holding-a-flower-8438979/)
 
-交互式笔记本，如 [Jupyter](https://jupyter.org)，对于人工智能/机器学习（AI/ML）开发至关重要，但不适合生产环境。因此，将笔记本转换为设计良好的软件系统是每个ML项目中的强制步骤。但在这种转换过程中，除了基本的 [nbconvert](https://nbconvert.readthedocs.io/en/latest/) 实用工具外，显著缺乏辅助开发者的工具。
+交互式笔记本，如 [Jupyter](https://jupyter.org)，对于人工智能/机器学习（AI/ML）开发至关重要，但不适合生产环境。因此，将笔记本转换为设计良好的软件系统是每个 ML 项目中的强制步骤。但在这种转换过程中，除了基本的 [nbconvert](https://nbconvert.readthedocs.io/en/latest/) 实用工具外，显著缺乏辅助开发者的工具。
 
 # 笔记本是数据科学的首选集成开发环境（IDE）
 
-即使在Jupyter开发之前，数学家、研究人员和分析师也使用交互式“笔记本风格”的开发环境（例如 [Mathematica](https://www.wolfram.com/mathematica/)）。对于数据探索和统计分析，即时反馈和可视化对于了解特定工作流程是否会导致有效模型至关重要。
+即使在 Jupyter 开发之前，数学家、研究人员和分析师也使用交互式“笔记本风格”的开发环境（例如 [Mathematica](https://www.wolfram.com/mathematica/)）。对于数据探索和统计分析，即时反馈和可视化对于了解特定工作流程是否会导致有效模型至关重要。
 
-数据科学家在尝试将模型转变为生产就绪的ML原型时常遇到三个问题：
+数据科学家在尝试将模型转变为生产就绪的 ML 原型时常遇到三个问题：
 
-1.  在常规的定时间隔内运行ML代码（[cron服务](https://en.wikipedia.org/wiki/Cron)）或一个具有弹性和可扩展性的网络服务；
+1.  在常规的定时间隔内运行 ML 代码（[cron 服务](https://en.wikipedia.org/wiki/Cron)）或一个具有弹性和可扩展性的网络服务；
 
 1.  在笔记本中将代码应用于无法在单一计算节点上容纳的大数据集（分布式计算）；并且
 
-1.  寻找适合开发大型代码库的IDE便利功能。Jupyter自身缺乏许多现代开发友好IDE的“舒适功能”。
+1.  寻找适合开发大型代码库的 IDE 便利功能。Jupyter 自身缺乏许多现代开发友好 IDE 的“舒适功能”。
 
-最近出现了一大波工具来解决这些问题——从强大的Jupyter替代笔记本，如 [Deepnote](https://deepnote.com) 和 [Hex](https://hex.tech)；到cron调度器，如 [PaperMill](https://papermill.readthedocs.io/en/latest/)；以及全功能的云服务设置，如Databricks。然而，这些工具有一个共同点：它们围绕笔记本构建，并协助*在生产环境中使用*笔记本。当使用这些工具时，你会遇到两个问题：1.) 笔记本中的代码结构相同（通常是维护困难的“意大利面条代码”），2.) 笔记本被安排运行的环境是笔记本内核（编程语言解释器，优化了开发者的互动而非运行时效率）。
+最近出现了一大波工具来解决这些问题——从强大的 Jupyter 替代笔记本，如 [Deepnote](https://deepnote.com) 和 [Hex](https://hex.tech)；到 cron 调度器，如 [PaperMill](https://papermill.readthedocs.io/en/latest/)；以及全功能的云服务设置，如 Databricks。然而，这些工具有一个共同点：它们围绕笔记本构建，并协助*在生产环境中使用*笔记本。当使用这些工具时，你会遇到两个问题：1.) 笔记本中的代码结构相同（通常是维护困难的“意大利面条代码”），2.) 笔记本被安排运行的环境是笔记本内核（编程语言解释器，优化了开发者的互动而非运行时效率）。
 
 # 但将笔记本投入生产环境是否是一个好主意？
 
@@ -56,11 +56,11 @@ LineaPy 这样的工具的存在表明，在尊重关注点分离的同时，仍
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -72,8 +72,8 @@ LineaPy 这样的工具的存在表明，在尊重关注点分离的同时，仍
 
 +   [弥合人类理解与机器学习之间的差距：…](https://www.kdnuggets.com/2023/06/closing-gap-human-understanding-machine-learning-explainable-ai-solution.html)
 
-+   [回到过去……一个RAPIDS的故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
++   [回到过去……一个 RAPIDS 的故事](https://www.kdnuggets.com/2023/06/back-again-rapids-tale.html)
 
-+   [优化和管理机器学习生命周期的十大MLOps工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
++   [优化和管理机器学习生命周期的十大 MLOps 工具](https://www.kdnuggets.com/2022/10/top-10-mlops-tools-optimize-manage-machine-learning-lifecycle.html)
 
-+   [5个最佳端到端开源MLOps工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)
++   [5 个最佳端到端开源 MLOps 工具](https://www.kdnuggets.com/5-best-end-to-end-open-source-mlops-tools)

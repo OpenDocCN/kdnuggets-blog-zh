@@ -1,12 +1,12 @@
 # 如何展示你的数据科学工作的影响
 
-> 原文：[https://www.kdnuggets.com/2019/07/showcase-impact-data-science-work.html](https://www.kdnuggets.com/2019/07/showcase-impact_data_science_work.html)
+> 原文：[`www.kdnuggets.com/2019/07/showcase-impact-data-science-work.html`](https://www.kdnuggets.com/2019/07/showcase-impact_data_science_work.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 无论你现在是数据科学家，还是试图进入这一领域，学习如何向他人——如潜在雇主——传达你的技能影响至关重要。
 
-![](../Images/29c19480880573b7785255f9c3f118bb.png)
+![](img/29c19480880573b7785255f9c3f118bb.png)
 
 ##### [图片来源。](https://www.pexels.com/photo/photo-of-group-of-people-in-a-meeting-1661004/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -94,6 +94,6 @@
 
 +   [如何在没有工作经验的情况下获得你的第一份数据科学工作](https://www.kdnuggets.com/2021/02/first-job-data-science-without-work-experience.html)
 
-+   [IMPACT 2022：数据可观测性峰会，10月25-26日](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)
++   [IMPACT 2022：数据可观测性峰会，10 月 25-26 日](https://www.kdnuggets.com/2022/09/monte-carlo-impact-2022-data-observability-summit.html)
 
-+   [IMPACT：数据可观测性峰会将于11月8日回归，更多详情…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)
++   [IMPACT：数据可观测性峰会将于 11 月 8 日回归，更多详情…](https://www.kdnuggets.com/2023/10/monte-carlo-impact-the-data-observability-summit-is-back)

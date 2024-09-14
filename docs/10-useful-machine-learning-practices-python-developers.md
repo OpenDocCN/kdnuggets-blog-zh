@@ -1,10 +1,10 @@
-# 10个对Python开发者有用的机器学习实践
+# 10 个对 Python 开发者有用的机器学习实践
 
-> 原文：[https://www.kdnuggets.com/2020/05/10-useful-machine-learning-practices-python-developers.html](https://www.kdnuggets.com/2020/05/10-useful-machine-learning-practices-python-developers.html)
+> 原文：[`www.kdnuggets.com/2020/05/10-useful-machine-learning-practices-python-developers.html`](https://www.kdnuggets.com/2020/05/10-useful-machine-learning-practices-python-developers.html)
 
-[评论](#comments)
+评论
 
-**由[Pratik Bhavsar](https://www.linkedin.com/in/bhavsarpratik/)，远程NLP工程师**。
+**由[Pratik Bhavsar](https://www.linkedin.com/in/bhavsarpratik/)，远程 NLP 工程师**。
 
 有时作为数据科学家，我们会忘记我们是因为什么而被雇佣的。我们主要是开发者，然后是研究人员，再然后可能是数学家。我们的首要责任是快速开发无错误的解决方案。
 
@@ -12,21 +12,21 @@
 > 
 > ## 我们的前三个课程推荐
 > ## 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 > 
-> ![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+> ![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 > 
-> ![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT
+> ![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 > 
 > * * *
 > 
 > 仅仅因为我们能创建模型，并不意味着我们是神。这并不赋予我们编写糟糕代码的自由。
 
-自从开始以来，我犯了许多错误，并想分享我认为**ML工程**中最常见的技能。在我看来，这也是当前行业中***最缺乏的技能***。
+自从开始以来，我犯了许多错误，并想分享我认为**ML 工程**中最常见的技能。在我看来，这也是当前行业中***最缺乏的技能***。
 
-*我称他们为**软件文盲**数据科学家，因为很多人是非计算机科学专业的Coursera培训工程师。而我自己也曾是那样的人。* *????*
+*我称他们为**软件文盲**数据科学家，因为很多人是非计算机科学专业的 Coursera 培训工程师。而我自己也曾是那样的人。* *????*
 
-如果要在一位出色的数据科学家和一位出色的ML工程师之间选择，我会选择后者。
+如果要在一位出色的数据科学家和一位出色的 ML 工程师之间选择，我会选择后者。
 
 让我们开始吧。
 
@@ -42,13 +42,13 @@
 
 如果你的数据过大，并且你在代码的后期部分工作，比如清洗数据或建模，使用**nrows**来避免每次都加载大量数据。当你只想测试代码而不是实际运行整个程序时，使用这个选项。
 
-*这在你的本地PC配置不足以处理数据量时非常适用，但你仍然喜欢在本地使用Jupyter/VS code/Atom进行开发。*
+*这在你的本地 PC 配置不足以处理数据量时非常适用，但你仍然喜欢在本地使用 Jupyter/VS code/Atom 进行开发。*
 
 > df_train = pd.read_csv(‘train.csv’，***nrows=1000****)*
 
 ### 4. 预期失败（成熟开发者的标志）
 
-始终检查数据中的NA，因为这些会在以后导致问题。即使当前数据中没有，也不意味着未来的重训练循环中不会出现。因此，仍然要保持检查。????
+始终检查数据中的 NA，因为这些会在以后导致问题。即使当前数据中没有，也不意味着未来的重训练循环中不会出现。因此，仍然要保持检查。????
 
 > *print(len(df))*
 > 
@@ -62,15 +62,15 @@
 
 当你处理大数据时，知道处理所需的时间以及我们在整个处理中的进展是很好的。
 
-选项1 — tqdm
+选项 1 — tqdm
 
-选项2 — fastprogress
+选项 2 — fastprogress
 
-![](../Images/8fffa61e7c05e72079c7455b78f715ef.png)
+![](img/8fffa61e7c05e72079c7455b78f715ef.png)
 
-### 6\. Pandas可能会很慢
+### 6\. Pandas 可能会很慢
 
-如果你使用过pandas，你知道它有时会很慢——尤其是groupby。与其绞尽脑汁寻找‘优秀’的加速方案，不如通过改变一行代码直接使用modin。
+如果你使用过 pandas，你知道它有时会很慢——尤其是 groupby。与其绞尽脑汁寻找‘优秀’的加速方案，不如通过改变一行代码直接使用 modin。
 
 > *import modin.pandas as pd*
 
@@ -100,21 +100,21 @@
 
 反正，管理层喜欢报告，对吧？????
 
-### 10\. 编写出色的API
+### 10\. 编写出色的 API
 
 一切以坏结局收尾的都是坏的。
 
-你可以做很好的数据清洗和建模，但最终仍然可能造成巨大的混乱。我与许多人的经验告诉我，很多人对如何编写好的API、文档和服务器设置不清楚。
+你可以做很好的数据清洗和建模，但最终仍然可能造成巨大的混乱。我与许多人的经验告诉我，很多人对如何编写好的 API、文档和服务器设置不清楚。
 
-*下面是经典机器学习和深度学习部署在负载不高的情况下的一个好方法——比如1000/min。*
+*下面是经典机器学习和深度学习部署在负载不高的情况下的一个好方法——比如 1000/min。*
 
 组合见 — Fastapi + uvicorn
 
-+   **最快**— 使用**fastapi**编写API，因为它在I/O绑定方面是最快的，如 [this](https://www.techempower.com/benchmarks/#section=test&runid=7464e520-0dc2-473d-bd34-dbdfd7e85911&hw=ph&test=query&l=zijzen-7)所示，原因在 [这里](https://fastapi.tiangolo.com/benchmarks/)中解释。
++   **最快**— 使用**fastapi**编写 API，因为它在 I/O 绑定方面是最快的，如 [this](https://www.techempower.com/benchmarks/#section=test&runid=7464e520-0dc2-473d-bd34-dbdfd7e85911&hw=ph&test=query&l=zijzen-7)所示，原因在 [这里](https://fastapi.tiangolo.com/benchmarks/)中解释。
 
-+   **文档**— 使用fastapi编写API为我们提供了**免费文档**，并且测试端点位于 http:url/docs → 随着代码的更改，由fastapi自动生成和更新
++   **文档**— 使用 fastapi 编写 API 为我们提供了**免费文档**，并且测试端点位于 http:url/docs → 随着代码的更改，由 fastapi 自动生成和更新
 
-+   **工作者**— 使用**uvicorn**部署API
++   **工作者**— 使用**uvicorn**部署 API
 
 运行这些命令以使用 4 个工作进程进行部署。通过负载测试优化工作进程的数量。
 
@@ -122,7 +122,7 @@
 > 
 > *uvicorn main:app --workers 4 --host 0.0.0.0 --port 8000*
 
-![](../Images/adfb99e05cdbe7f2c47a07e63475684e.png)
+![](img/adfb99e05cdbe7f2c47a07e63475684e.png)
 
 [原文](https://medium.com/modern-nlp/10-great-ml-practices-for-python-developers-b089eefc18fc)。经许可转载。
 
@@ -144,6 +144,6 @@
 
 +   [4 个有用的中级 SQL 查询用于数据科学](https://www.kdnuggets.com/2022/12/4-useful-intermediate-sql-queries-data-science.html)
 
-+   [KDnuggets 新闻，12月7日：揭示十大数据科学误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：揭示十大数据科学误区 • 4…](https://www.kdnuggets.com/2022/n47.html)
 
 +   [5 个真正有用的 Bash 脚本用于数据科学](https://www.kdnuggets.com/2023/02/bash-scripts-data-science.html)

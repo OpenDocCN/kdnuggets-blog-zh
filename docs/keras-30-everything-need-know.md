@@ -1,8 +1,8 @@
 # Keras 3.0：你需要知道的一切
 
-> 原文：[https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)
+> 原文：[`www.kdnuggets.com/2023/07/keras-30-everything-need-know.html`](https://www.kdnuggets.com/2023/07/keras-30-everything-need-know.html)
 
-![Keras 3.0：你需要知道的一切](../Images/7b824424c35c725d8c30d2656e25f025.png)
+![Keras 3.0：你需要知道的一切](img/7b824424c35c725d8c30d2656e25f025.png)
 
 作者通过 Playground AI 创建的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈向网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速迈向网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -30,29 +30,29 @@
 
 # Keras 3.0 的显著特点
 
-Keras 3.0使你能够与团队有效协作。你可以通过结合TensorFlow、JAX和PyTorch的优点来开发复杂的模型。以下是Keras 3.0被认为是绝对改变游戏规则的一些特性：
+Keras 3.0 使你能够与团队有效协作。你可以通过结合 TensorFlow、JAX 和 PyTorch 的优点来开发复杂的模型。以下是 Keras 3.0 被认为是绝对改变游戏规则的一些特性：
 
 ## 1\. 多后端支持
 
-Keras 3.0充当超级连接器，实现了TensorFlow、JAX和PyTorch的无缝使用。开发者可以自由地混合和匹配最适合特定任务的工具，而无需更改代码。
+Keras 3.0 充当超级连接器，实现了 TensorFlow、JAX 和 PyTorch 的无缝使用。开发者可以自由地混合和匹配最适合特定任务的工具，而无需更改代码。
 
 ## 2\. 性能优化
 
-性能优化是Keras 3.0的关键特性。默认情况下，Keras 3.0利用XLA（加速线性代数）编译。XLA编译优化你的数学计算，使它们在GPU和TPU等硬件上运行得更快。它还允许你动态选择最佳的后端，以确保最佳效率。这些性能优化功能大大加快了训练速度，使你能够训练更多模型，进行更多实验，并更快地获得结果。
+性能优化是 Keras 3.0 的关键特性。默认情况下，Keras 3.0 利用 XLA（加速线性代数）编译。XLA 编译优化你的数学计算，使它们在 GPU 和 TPU 等硬件上运行得更快。它还允许你动态选择最佳的后端，以确保最佳效率。这些性能优化功能大大加快了训练速度，使你能够训练更多模型，进行更多实验，并更快地获得结果。
 
 ## 3\. 扩展的生态系统表面
 
-你的Keras模型可以作为PyTorch模块、TensorFlow SavedModels或JAX大规模TPU训练基础设施的一部分使用。这意味着你可以利用每个框架的优势。因此，凭借Keras 3.0扩展的生态系统，你不会被锁定在单一的生态系统中。这就像一个通用适配器，让你可以将喜欢的设备连接到任何机器上。
+你的 Keras 模型可以作为 PyTorch 模块、TensorFlow SavedModels 或 JAX 大规模 TPU 训练基础设施的一部分使用。这意味着你可以利用每个框架的优势。因此，凭借 Keras 3.0 扩展的生态系统，你不会被锁定在单一的生态系统中。这就像一个通用适配器，让你可以将喜欢的设备连接到任何机器上。
 
 ## 4\. 跨框架底层语言
 
-**keras_core.ops**命名空间的引入是一个突破性特征，它允许你一次性编写自定义操作，并在不同的深度学习框架中轻松使用。**keras_core.ops**提供了一组工具和函数，类似于流行的NumPy API，NumPy是Python中广泛使用的数值计算库。这种跨框架的兼容性促进了代码的重用，并鼓励了协作。
+**keras_core.ops**命名空间的引入是一个突破性特征，它允许你一次性编写自定义操作，并在不同的深度学习框架中轻松使用。**keras_core.ops**提供了一组工具和函数，类似于流行的 NumPy API，NumPy 是 Python 中广泛使用的数值计算库。这种跨框架的兼容性促进了代码的重用，并鼓励了协作。
 
 ## 5\. 复杂性的渐进揭示
 
-Keras 3.0的设计方法使其与其他深度学习框架不同。假设你是一个初学者，想使用Keras 3.0构建一个简单的神经网络。它在开始时为你提供了最简单的工作流程。一旦你熟悉了基础知识，你可以访问所有高级功能和底层功能。它不限制你只使用预定义的工作流程。这种方法的魅力在于其适应性，既欢迎初学者，也适合经验丰富的深度学习从业者。
+Keras 3.0 的设计方法使其与其他深度学习框架不同。假设你是一个初学者，想使用 Keras 3.0 构建一个简单的神经网络。它在开始时为你提供了最简单的工作流程。一旦你熟悉了基础知识，你可以访问所有高级功能和底层功能。它不限制你只使用预定义的工作流程。这种方法的魅力在于其适应性，既欢迎初学者，也适合经验丰富的深度学习从业者。
 
-## 6\. 层、模型、指标和优化器的无状态API
+## 6\. 层、模型、指标和优化器的无状态 API
 
 在深度学习的背景下，状态指的是在训练过程中变化的内部变量和参数。然而，JAX 的工作原理是无状态的，这意味着函数没有可变变量或内部状态。Keras 3.0 通过**无状态 API**拥抱 JAX 的无状态性。它允许深度学习的核心组件，即层、模型、度量标准和优化器以无状态的方式进行设计。这种独特的兼容性使 Keras 3.0 成为现代 AI 开发中不可或缺的工具。
 
@@ -135,6 +135,6 @@ import keras_core as keras
 
 +   [关于数据湖屋的所有信息](https://www.kdnuggets.com/2022/09/everything-need-know-data-lakehouses.html)
 
-+   [关于MLOps的所有信息：KDnuggets技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
++   [关于 MLOps 的所有信息：KDnuggets 技术简报](https://www.kdnuggets.com/tech-brief-everything-you-need-to-know-about-mlops)
 
 +   [ChatGPT：你需要知道的一切](https://www.kdnuggets.com/2023/01/chatgpt-everything-need-know.html)

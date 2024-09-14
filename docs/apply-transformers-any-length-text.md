@@ -1,8 +1,8 @@
 # 如何将变压器应用于任何长度的文本
 
-> 原文：[https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html](https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html)
+> 原文：[`www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html`](https://www.kdnuggets.com/2021/04/apply-transformers-any-length-text.html)
 
-[评论](#comments)
+评论
 
 **由[James Briggs](https://youtube.com/c/JamesBriggs)，数据科学家**
 
@@ -10,9 +10,9 @@
 
 然而，许多这些模型（这个问题不仅仅限于变压器模型）面临的问题是我们**不能**处理长篇文本。
 
-我在Medium上写的几乎每一篇文章都包含1000多个单词，当这些单词被用于像BERT这样的变压器模型时，会生成1000多个标记。BERT（和许多其他变压器模型）最多接受**512个标记**——超出这个长度的内容将被截断。
+我在 Medium 上写的几乎每一篇文章都包含 1000 多个单词，当这些单词被用于像 BERT 这样的变压器模型时，会生成 1000 多个标记。BERT（和许多其他变压器模型）最多接受**512 个标记**——超出这个长度的内容将被截断。
 
-尽管我认为你可能会发现处理我的Medium文章的价值不大，但这同样适用于许多有用的数据来源——如新闻文章或Reddit帖子。
+尽管我认为你可能会发现处理我的 Medium 文章的价值不大，但这同样适用于许多有用的数据来源——如新闻文章或 Reddit 帖子。
 
 我们将探讨如何绕过这个限制。在本文中，我们将找出来自*/r/investing*子版块的长帖子中的情感。这篇文章将涵盖：
 
@@ -32,15 +32,15 @@
 
 计算长篇文本情感的逻辑实际上非常简单。
 
-我们将把文本（例如1361个标记）分解成每个不超过512个标记的块。
+我们将把文本（例如 1361 个标记）分解成每个不超过 512 个标记的块。
 
-![](../Images/14b47a652ba55c759d07ea03746fb0c7.png)
+![](img/14b47a652ba55c759d07ea03746fb0c7.png)
 
-一个包含1361个标记的张量可以被拆分成三个较小的张量。前两个张量每个包含512个标记，而最后一个张量包含剩余的337个标记。
+一个包含 1361 个标记的张量可以被拆分成三个较小的张量。前两个张量每个包含 512 个标记，而最后一个张量包含剩余的 337 个标记。
 
-一旦我们有了这些块并将其转换为可以被BERT（稍后会详细说明）处理的格式——我们将它们传递给我们的模型，并检索每个块的情感得分。
+一旦我们有了这些块并将其转换为可以被 BERT（稍后会详细说明）处理的格式——我们将它们传递给我们的模型，并检索每个块的情感得分。
 
-最后，对每个情感类别取平均——为我们提供整个文本（所有1361个标记）的总体情感预测。
+最后，对每个情感类别取平均——为我们提供整个文本（所有 1361 个标记）的总体情感预测。
 
 现在，解释高级方法是一回事。编写代码则是另一回事。所以让我们开始通过一个示例来工作。
 
@@ -48,7 +48,7 @@
 
 ### 数据
 
-首先，我们需要一些数据进行处理。我在/r/investing上找到了这个相当长的帖子：
+首先，我们需要一些数据进行处理。我在/r/investing 上找到了这个相当长的帖子：
 
 ```py
 I would like to get your all  thoughts on the bond yield increase this week.  I am not worried about the market downturn but the sudden increase in yields. On 2/16 the 10 year bonds yields increased by almost  9 percent and on 2/19 the yield increased by almost 5 percent.
@@ -114,11 +114,11 @@ He argued that the steepening yield curve is “typical at the early stages of t
 
 ### 初始化
 
-下一步是初始化我们的模型和分词器。我们将使用PyTorch和HuggingFace变压器库来完成所有任务。
+下一步是初始化我们的模型和分词器。我们将使用 PyTorch 和 HuggingFace 变压器库来完成所有任务。
 
-幸运的是，使用变压器库进行初始化非常简单。我们将使用BERT模型进行序列分类和相应的BERT分词器，所以我们写：
+幸运的是，使用变压器库进行初始化非常简单。我们将使用 BERT 模型进行序列分类和相应的 BERT 分词器，所以我们写：
 
-因为我们处理的是金融相关的语言，我们加载了`ProsusAI/finbert`模型——一个更懂金融的BERT [1]。你可以在[这里](https://huggingface.co/ProsusAI/finbert)找到模型的详细信息。
+因为我们处理的是金融相关的语言，我们加载了`ProsusAI/finbert`模型——一个更懂金融的 BERT [1]。你可以在[这里](https://huggingface.co/ProsusAI/finbert)找到模型的详细信息。
 
 ### 分词
 
@@ -158,7 +158,7 @@ txt = "<this is the large post included above>"tokens = tokenizer.encode_plus(
 
 ### 准备块
 
-现在我们有了标记化的张量；我们需要将其分解为不超过**510**个标记的块。我们选择510而不是512，以保留两个位置用于添加我们的*[CLS]*和*[SEP]*标记。
+现在我们有了标记化的张量；我们需要将其分解为不超过**510**个标记的块。我们选择 510 而不是 512，以保留两个位置用于添加我们的*[CLS]*和*[SEP]*标记。
 
 ### 分割
 
@@ -180,29 +180,29 @@ txt = "<this is the large post included above>"tokens = tokenizer.encode_plus(
 
 ### 填充
 
-我们需要向张量块中添加填充，以确保它们满足BERT要求的512张量长度。
+我们需要向张量块中添加填充，以确保它们满足 BERT 要求的 512 张量长度。
 
 我们的前两个块不需要填充，因为它们已经满足了这个长度要求，但最后的块需要填充。
 
-为了检查一个块是否需要填充，我们添加了一个检查张量长度的if语句。如果张量短于512个令牌，我们使用`torch.cat`函数进行填充。
+为了检查一个块是否需要填充，我们添加了一个检查张量长度的 if 语句。如果张量短于 512 个令牌，我们使用`torch.cat`函数进行填充。
 
-我们应该将此语句添加到添加* [CLS]*和*[SEP]*令牌的相同for循环中——如果你需要帮助，我已经在文章末尾附上了完整的脚本。
+我们应该将此语句添加到添加* [CLS]*和*[SEP]*令牌的相同 for 循环中——如果你需要帮助，我已经在文章末尾附上了完整的脚本。
 
-### 为BERT重新格式化
+### 为 BERT 重新格式化
 
-我们有了我们的块，但现在需要将它们重新格式化为单个张量，并将其添加到BERT的输入字典中。
+我们有了我们的块，但现在需要将它们重新格式化为单个张量，并将其添加到 BERT 的输入字典中。
 
 将所有张量堆叠在一起是通过`torch.stack`函数完成的。
 
-然后，我们将这些格式化为输入字典，并将输入ID张量的数据类型更改为`long`，将注意力掩码张量的数据类型更改为`int`——这是BERT所要求的。
+然后，我们将这些格式化为输入字典，并将输入 ID 张量的数据类型更改为`long`，将注意力掩码张量的数据类型更改为`int`——这是 BERT 所要求的。
 
-这样，我们的数据就准备好传递给BERT了！
+这样，我们的数据就准备好传递给 BERT 了！
 
 ### 做出预测
 
 做出预测是容易的部分。我们将`input_dict`作为`**kwargs`参数传递给我们的`model`——***kwargs*允许模型将`input_ids`和`attention_mask`关键字匹配到模型中的变量。
 
-从这里，我们可以看到每个块得到一组三个激活值。这些激活值还不是我们的输出概率。要将其转化为输出概率，我们必须对输出张量应用softmax函数。
+从这里，我们可以看到每个块得到一组三个激活值。这些激活值还不是我们的输出概率。要将其转化为输出概率，我们必须对输出张量应用 softmax 函数。
 
 最后，我们对每个类别（或列）的值进行`mean`计算，以获得最终的正面、负面或中性情感概率。
 
@@ -210,7 +210,7 @@ txt = "<this is the large post included above>"tokens = tokenizer.encode_plus(
 
 这样，我们就得到了对更长文本的情感预测！
 
-我们将一段包含1000多个令牌的长文本分解成块，手动添加了特殊令牌，并计算了所有块的平均情感。
+我们将一段包含 1000 多个令牌的长文本分解成块，手动添加了特殊令牌，并计算了所有块的平均情感。
 
 大多数时候，查看文本的完整长度是理解讨论主题情感的绝对必要的。我们建立了一种方法来实现这一点，并绕过了典型的文本大小限制。
 
@@ -234,7 +234,7 @@ txt = "<this is the large post included above>"tokens = tokenizer.encode_plus(
 
 [将前沿变换器模型应用于你的语言问题](https://betterprogramming.pub/build-a-natural-language-classifier-with-bert-and-tensorflow-4770d4442d41)
 
-**个人简介：[James Briggs](https://youtube.com/c/JamesBriggs)** 是一名数据科学家，专注于自然语言处理，工作于英国伦敦的金融行业。他还是一名自由职业导师、作家和内容创作者。你可以通过电子邮件联系作者（[jamescalam94@gmail.com](mailto:jamescalam94@gmail.com)）。
+**个人简介：[James Briggs](https://youtube.com/c/JamesBriggs)** 是一名数据科学家，专注于自然语言处理，工作于英国伦敦的金融行业。他还是一名自由职业导师、作家和内容创作者。你可以通过电子邮件联系作者（jamescalam94@gmail.com）。
 
 [原文](https://towardsdatascience.com/how-to-apply-transformers-to-any-length-of-text-a5601410af7f)。转载经许可。
 
@@ -242,19 +242,19 @@ txt = "<this is the large post included above>"tokens = tokenizer.encode_plus(
 
 +   [Hugging Face Transformers 包 – 它是什么以及如何使用](https://www.kdnuggets.com/using-hugging-face-transformers-for-emotion-detection-in-text)
 
-+   [使用 Wav2Vec 2.0 进行语音转文本](/2021/03/speech-text-wav2vec.html)
++   使用 Wav2Vec 2.0 进行语音转文本
 
-+   [使用 BERT 进行主题建模](/2020/11/topic-modeling-bert.html)
++   使用 BERT 进行主题建模
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 

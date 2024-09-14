@@ -1,8 +1,8 @@
 # 扩展您的网络数据驱动产品时需要了解的事项
 
-> 原文：[https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
+> 原文：[`www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html`](https://www.kdnuggets.com/2023/08/things-know-scaling-web-datadriven-product.html)
 
-![扩展您的网络数据驱动产品时需要了解的事项](../Images/ad89dc13254ab8270d220b909695dbb5.png)
+![扩展您的网络数据驱动产品时需要了解的事项](img/ad89dc13254ab8270d220b909695dbb5.png)
 
 图片由 Getty Images 提供，来自 Unsplash+
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -66,11 +66,11 @@
 
 假设你正在运行一个招聘平台。随着平台的增长，越来越多的公司和求职者加入，你将不得不获取和管理更多的职位发布数据和员工数据。
 
-在这种情况下，基于AI的匹配算法可能是你扩展的关键。该算法将分析职位描述、技能要求和候选人档案，提供准确的匹配建议。
+在这种情况下，基于 AI 的匹配算法可能是你扩展的关键。该算法将分析职位描述、技能要求和候选人档案，提供准确的匹配建议。
 
 随着更多数据的加入，算法会学习和改进，提供更好的匹配结果。
 
-一个例子是像LinkedIn这样的平台如何利用数据来优化其“你可能感兴趣的职位”功能。
+一个例子是像 LinkedIn 这样的平台如何利用数据来优化其“你可能感兴趣的职位”功能。
 
 ## 潜在客户生成平台
 
@@ -136,6 +136,6 @@
 
 +   [KDnuggets 新闻，4 月 13 日：数据科学家应该知道的 Python 库…](https://www.kdnuggets.com/2022/n15.html)
 
-+   [你需要了解的6件数据管理的事以及为什么它很重要……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
++   [你需要了解的 6 件数据管理的事以及为什么它很重要……](https://www.kdnuggets.com/2022/05/6-things-need-know-data-management-matters-computer-vision.html)
 
-+   [关于SAS数据科学学院的3件你不知道的事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)
++   [关于 SAS 数据科学学院的 3 件你不知道的事](https://www.kdnuggets.com/2022/07/sas-3-things-didnt-know-sas-academy-data-science.html)

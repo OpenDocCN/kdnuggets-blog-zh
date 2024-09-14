@@ -1,8 +1,8 @@
-# 如何使用Python进行运动检测
+# 如何使用 Python 进行运动检测
 
-> 原文：[https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)
+> 原文：[`www.kdnuggets.com/2022/08/perform-motion-detection-python.html`](https://www.kdnuggets.com/2022/08/perform-motion-detection-python.html)
 
-![如何使用Python进行运动检测](../Images/5053c787968912836a8329d985b4b3a5.png)
+![如何使用 Python 进行运动检测](img/5053c787968912836a8329d985b4b3a5.png)
 
 来源：[gfycat](https://gfycat.com/ediblepresentclam)
 
@@ -12,33 +12,33 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-使用Python进行运动检测很简单，因为Python编程语言提供了多种开源库。运动检测有许多现实世界的应用。例如，它可以用于在线考试监控或用于商店、银行等的安全目的。
+使用 Python 进行运动检测很简单，因为 Python 编程语言提供了多种开源库。运动检测有许多现实世界的应用。例如，它可以用于在线考试监控或用于商店、银行等的安全目的。
 
 # 介绍
 
-Python编程语言是一个富含开源库的语言，为用户提供了大量应用，并且拥有众多用户。因此，它在市场上迅速增长。由于其简单的语法、易于发现错误和快速的调试过程，使得Python语言更具用户友好性，其优点无穷无尽。
+Python 编程语言是一个富含开源库的语言，为用户提供了大量应用，并且拥有众多用户。因此，它在市场上迅速增长。由于其简单的语法、易于发现错误和快速的调试过程，使得 Python 语言更具用户友好性，其优点无穷无尽。
 
-**为什么你应该学习Python？图示：**
+**为什么你应该学习 Python？图示：**
 
-![如何使用Python进行运动检测](../Images/c9dac6fa12aece182ef615c009b4cdc4.png)
+![如何使用 Python 进行运动检测](img/c9dac6fa12aece182ef615c009b4cdc4.png)
 
 来源：[Scaler Topics](https://www.scaler.com/topics/python/what-is-python-programming/)
 
-Python于1991年设计，由Python软件基金会开发。Python有许多版本，其中python2和python3最为著名。目前，python3被广泛使用，python3的用户正在迅速增加。在这个项目或脚本中，我们将使用python3。
+Python 于 1991 年设计，由 Python 软件基金会开发。Python 有许多版本，其中 python2 和 python3 最为著名。目前，python3 被广泛使用，python3 的用户正在迅速增加。在这个项目或脚本中，我们将使用 python3。
 
 # 什么是运动检测？
 
 根据物理学，当物体静止且没有速度时，它被认为处于静止状态；相反，当物体没有完全静止，并在某个方向上有一定的运动或速度时，无论是左右、前后还是上下，它就被认为处于运动状态。在这篇文章中，我们将尝试检测这一点。
 
-![如何使用Python进行运动检测](../Images/f849ddbe546921847efd174c9f645365.png)
+![如何使用 Python 进行运动检测](img/f849ddbe546921847efd174c9f645365.png)
 
 来源：[gtycat](https://gfycat.com/ediblepresentclam)
 
@@ -442,13 +442,13 @@ cv2.destroyAllWindows()
 
 运行上述代码后得出的结果将类似于下面所示的内容。
 
-![如何使用 Python 进行运动检测](../Images/369106b7da4522ab7ac92bc98f835906.png)
+![如何使用 Python 进行运动检测](img/369106b7da4522ab7ac92bc98f835906.png)
 
 在这里，我们可以看到视频中男子的动作已被跟踪。因此，输出可以相应地显示出来。
 
 然而，在这段代码中，跟踪将通过围绕移动物体的矩形框进行，类似于下面所示的内容。值得注意的是，视频是安全摄像头的录像，检测已在其上完成。
 
-![如何使用 Python 进行运动检测](../Images/e17119e77f0d49978e6fb31e601d3b4f.png)
+![如何使用 Python 进行运动检测](img/e17119e77f0d49978e6fb31e601d3b4f.png)
 
 # 结论
 

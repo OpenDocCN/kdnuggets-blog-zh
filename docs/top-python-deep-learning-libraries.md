@@ -1,42 +1,42 @@
-# 前13名Python深度学习库
+# 前 13 名 Python 深度学习库
 
-> 原文：[https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html](https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html)
+> 原文：[`www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html`](https://www.kdnuggets.com/2018/11/top-python-deep-learning-libraries.html)
 
-[评论](#comments)
+评论
 
-Python在机器学习、人工智能、深度学习和数据科学任务中继续引领潮流。根据builtwith.com的数据，45%的科技公司更喜欢使用Python来实现人工智能和机器学习。
+Python 在机器学习、人工智能、深度学习和数据科学任务中继续引领潮流。根据 builtwith.com 的数据，45%的科技公司更喜欢使用 Python 来实现人工智能和机器学习。
 
-因此，我们决定开始一系列调查不同类别的[Python库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)：
+因此，我们决定开始一系列调查不同类别的[Python 库](https://www.kdnuggets.com/2020/11/top-python-libraries-data-science-data-visualization-machine-learning.html)：
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
-[**前8名Python机器学习库**](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html) **✅**
+[**前 8 名 Python 机器学习库**](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html) **✅**
 
-**前13名Python深度学习库 ✅** - 本文
+**前 13 名 Python 深度学习库 ✅** - 本文
 
-X大Python强化学习和进化计算库 – 敬请期待！
+X 大 Python 强化学习和进化计算库 – 敬请期待！
 
-X大Python数据科学库 – 敬请期待！
+X 大 Python 数据科学库 – 敬请期待！
 
-当然，这些列表完全是主观的，因为许多库可以轻松地归入多个类别。例如，TensorFlow包含在此列表中，但Keras被省略，出现在[机器学习库集合](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)中。这是因为Keras更像是一个‘最终用户’库，如SKLearn，而TensorFlow更受研究人员和机器学习工程师类型的欢迎。
+当然，这些列表完全是主观的，因为许多库可以轻松地归入多个类别。例如，TensorFlow 包含在此列表中，但 Keras 被省略，出现在[机器学习库集合](https://www.kdnuggets.com/2018/10/top-python-machine-learning-libraries.html)中。这是因为 Keras 更像是一个‘最终用户’库，如 SKLearn，而 TensorFlow 更受研究人员和机器学习工程师类型的欢迎。
 
 一如既往，请随时在下方评论区表达您的挫折/异议/烦恼！
 
-![前Python深度学习](../Images/2b0972d63d92c72736ab85154f0e1459.png)
+![前 Python 深度学习](img/2b0972d63d92c72736ab85154f0e1459.png)
 
-**图1：按提交和贡献者排名的前13名Python深度学习库。** 圆圈大小与星级数量成正比。
+**图 1：按提交和贡献者排名的前 13 名 Python 深度学习库。** 圆圈大小与星级数量成正比。
 
-现在，让我们来看一下名单（截至2018年10月23日的GitHub数据）：
+现在，让我们来看一下名单（截至 2018 年 10 月 23 日的 GitHub 数据）：
 
 **1\. [TensorFlow](https://github.com/tensorflow/tensorflow)（贡献者 – 1700，提交 – 42256，星级 – 112591）**
 
@@ -70,7 +70,7 @@ fastai 库通过现代最佳实践简化了快速而准确的神经网络训练�
 
 **7\. [CNTK](https://github.com/Microsoft/CNTK)（贡献者 – 189，提交 – 15979，星标 – 15281）**
 
-“微软认知工具包 ([https://cntk.ai](https://cntk.ai/)) 是一个统一的深度学习工具包，它通过有向图描述神经网络。在这个有向图中，叶节点表示输入值或网络参数，而其他节点表示对其输入的矩阵操作。CNTK 允许用户轻松实现和组合流行的模型类型，如前馈 DNN、卷积网络（CNN）和递归网络（RNN/LSTM）。”
+“微软认知工具包 ([`cntk.ai`](https://cntk.ai/)) 是一个统一的深度学习工具包，它通过有向图描述神经网络。在这个有向图中，叶节点表示输入值或网络参数，而其他节点表示对其输入的矩阵操作。CNTK 允许用户轻松实现和组合流行的模型类型，如前馈 DNN、卷积网络（CNN）和递归网络（RNN/LSTM）。”
 
 **8\. [TFLearn](https://github.com/tflearn/tflearn)（贡献者 – 118，提交次数 – 599，星标 – 8632）**
 

@@ -1,20 +1,20 @@
 # Apache Druid 的演变
 
-> 原文：[https://www.kdnuggets.com/2022/07/evolution-apache-druid.html](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)
+> 原文：[`www.kdnuggets.com/2022/07/evolution-apache-druid.html`](https://www.kdnuggets.com/2022/07/evolution-apache-druid.html)
 
 近年来，包括 Netflix、Confluent、Target 和 Salesforce 在内的数千家公司的软件开发人员都转向 Apache Druid 以推动他们的分析应用程序。Druid 因其能够提供交互式数据体验而成为首选数据库，且没有数据量或并发要求的限制。
 
-Apache Druid 在任何规模下对多维、高基数数据进行交互式切片和切块方面表现卓越。它被设计来支持快速移动、大量数据，适用于任何数量的用户，并且可以在灵活的分布式架构中从单个节点轻松扩展到数千个节点。最大的 Druid 安装可以扩展到数PB的数据，由数千台数据服务器提供服务，并能够在不到一秒的时间内返回数十亿行的数据查询结果。
+Apache Druid 在任何规模下对多维、高基数数据进行交互式切片和切块方面表现卓越。它被设计来支持快速移动、大量数据，适用于任何数量的用户，并且可以在灵活的分布式架构中从单个节点轻松扩展到数千个节点。最大的 Druid 安装可以扩展到数 PB 的数据，由数千台数据服务器提供服务，并能够在不到一秒的时间内返回数十亿行的数据查询结果。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -32,7 +32,7 @@ Druid 的查询引擎使用“散布/聚合”技术来执行查询：它迅速�
 
 每个数据服务器可能处理数十亿行数据，但由于下推的过滤器、聚合和限制，返回给 Broker 的部分结果集要小得多。因此，Broker 通常处理相对较少的数据。这种设计意味着单个 Broker 可以处理跨越数千个数据服务器和万亿行的数据的查询。
 
-![Druid 查询执行现状](../Images/9b6eedebaa682176d81283d566ab7ba3.png)
+![Druid 查询执行现状](img/9b6eedebaa682176d81283d566ab7ba3.png)
 
 散布/聚合对分析应用中使用的查询类型非常高效且性能卓越。但是，该技术有一个 Achilles’ heel：当查询结果非常庞大，或查询结构需要对数据进行多次访问时，Broker 可能成为瓶颈。
 
@@ -42,21 +42,21 @@ Druid 的查询引擎使用“散布/聚合”技术来执行查询：它迅速�
 
 为了实现这一点，我们正在构建一个多阶段查询引擎，它接入了 Druid 标准查询引擎的现有数据处理流程，因此它将拥有所有相同的查询能力和数据服务器性能。除此之外，我们还在其上添加了一个系统，将查询拆分成多个阶段，并使数据能够在阶段之间通过洗牌网格进行交换。每个阶段都被并行化，以便同时在多个数据服务器上运行。不需要任何调优：Druid 将能够使用抗偏斜的洗牌和协作调度自动运行这一过程。
 
-![新的多阶段查询引擎](../Images/2f37f8118c4ba390dbc024ef7180610c.png)
+![新的多阶段查询引擎](img/2f37f8118c4ba390dbc024ef7180610c.png)
 
 通过允许多阶段查询的每个阶段在整个集群上分布式运行，我们可以有效地处理所有阶段中的任何数量的数据，而不需要在底层处理大部分数据。
 
 # 分析数据库的新标准
 
-一旦我们开始深入思考，我们意识到我们可以做的远不止处理复杂查询。我们可以通过一个系统和一个SQL语言来实现查询和摄取的功能。我们可以摆脱对分开操作模型的需求。我们可以支持外部数据查询，并启用分离存储和计算的部署模式。
+一旦我们开始深入思考，我们意识到我们可以做的远不止处理复杂查询。我们可以通过一个系统和一个 SQL 语言来实现查询和摄取的功能。我们可以摆脱对分开操作模型的需求。我们可以支持外部数据查询，并启用分离存储和计算的部署模式。
 
-通过这项工作，我们正在建立一个平台，将实时分析数据库的性能与传统SQL关系数据库管理系统相关的功能和能力相结合。我对这个项目的方向感到非常兴奋。如今，Druid是最具吸引力的大规模实时分析数据库。随着Druid逐渐获得这些新功能，它将成为最具吸引力的分析数据库*绝对*。 
+通过这项工作，我们正在建立一个平台，将实时分析数据库的性能与传统 SQL 关系数据库管理系统相关的功能和能力相结合。我对这个项目的方向感到非常兴奋。如今，Druid 是最具吸引力的大规模实时分析数据库。随着 Druid 逐渐获得这些新功能，它将成为最具吸引力的分析数据库*绝对*。 
 
-**[贾恩·梅尔利诺](https://www.linkedin.com/in/gianmerlino/)** 是开源Apache Druid项目的联合作者，并且是Imply的共同创始人和CTO。贾恩还担任Apache Druid委员会（PMC）主席。之前，贾恩曾在Metamarkets领导数据摄取团队，并在Yahoo担任高级工程职位。他拥有加州理工学院计算机科学学士学位。
+**[贾恩·梅尔利诺](https://www.linkedin.com/in/gianmerlino/)** 是开源 Apache Druid 项目的联合作者，并且是 Imply 的共同创始人和 CTO。贾恩还担任 Apache Druid 委员会（PMC）主席。之前，贾恩曾在 Metamarkets 领导数据摄取团队，并在 Yahoo 担任高级工程职位。他拥有加州理工学院计算机科学学士学位。
 
 ### 更多相关内容
 
-+   [从Oracle到AI数据库：数据存储的演变](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)
++   [从 Oracle 到 AI 数据库：数据存储的演变](https://www.kdnuggets.com/2022/02/oracle-databases-ai-evolution-data-storage.html)
 
 +   [分析未来成功概率与智能…](https://www.kdnuggets.com/2022/02/analyzing-probability-future-success-intelligence-node-attributes-evolution-model.html)
 
@@ -64,6 +64,6 @@ Druid 的查询引擎使用“散布/聚合”技术来执行查询：它迅速�
 
 +   [语音识别指标的演变](https://www.kdnuggets.com/2022/10/evolution-speech-recognition-metrics.html)
 
-+   [深入探讨GPT模型：演变与性能比较](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)
++   [深入探讨 GPT 模型：演变与性能比较](https://www.kdnuggets.com/2023/05/deep-dive-gpt-models.html)
 
 +   [数据领域的演变](https://www.kdnuggets.com/2023/06/evolution-data-landscape.html)

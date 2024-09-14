@@ -1,22 +1,22 @@
 # SQL 中的可扩展随机行选择
 
-> 原文：[https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html](https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html)
+> 原文：[`www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html`](https://www.kdnuggets.com/2018/04/scalable-select-random-rows-sql.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：Pavel Tiunov，[Statsbot](https://statsbot.co/)**
 
-![标题图像](../Images/65a6d842e8e568f47b9eef4a27cf66c3.png)
+![标题图像](img/65a6d842e8e568f47b9eef4a27cf66c3.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 部门
 
 * * *
 
@@ -68,7 +68,7 @@ select ABS(MOD(user_id, 10)), count(distinct user_id) from events GROUP BY 1
 
 让我们考虑这个查询的一些示例结果：
 
-![](../Images/c62f4fe96b983935965418997009139e.png)
+![](img/c62f4fe96b983935965418997009139e.png)
 
 我们可以计算这些采样桶大小的 alpha 系数为 0.01 的均值和置信区间。该 [置信区间](https://en.wikipedia.org/wiki/Confidence_interval#Basic_steps) 将等于采样桶平均大小的 0.01%。这意味着有 99% 的概率，采样桶大小的差异不超过 0.01%。不同的度量值与这些采样桶计算的统计数据相关联但并不继承它。因此，为了计算事件计数估计的精度，你可以计算每个样本的事件计数如下：
 
@@ -114,11 +114,11 @@ select ABS(MOD(FARM_FINGERPRINT(string_user_id), 10)), count(distinct string_use
 
 **相关：**
 
-+   [计算客户终生价值：SQL 示例](/2018/02/calculating-customer-lifetime-value-sql-example.html)
++   计算客户终生价值：SQL 示例
 
-+   [业务分析的 SQL 窗口函数教程](/2017/12/sql-window-functions-tutorial-business-analytics.html)
++   业务分析的 SQL 窗口函数教程
 
-+   [SQL 客户保留分析指南](/2017/12/guide-customer-retention-analysis-sql.html)
++   SQL 客户保留分析指南
 
 ### 更多相关主题
 

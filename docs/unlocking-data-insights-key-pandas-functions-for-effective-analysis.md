@@ -1,8 +1,8 @@
 # 解锁数据洞察：关键 Pandas 函数用于有效分析
 
-> 原文：[https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
+> 原文：[`www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis`](https://www.kdnuggets.com/unlocking-data-insights-key-pandas-functions-for-effective-analysis)
 
-![解锁数据洞察：关键 Pandas 函数用于有效分析](../Images/635370e173001e5f17673fc95f67ba04.png)
+![解锁数据洞察：关键 Pandas 函数用于有效分析](img/635370e173001e5f17673fc95f67ba04.png)
 
 作者提供的图片 | Midjourney 和 Canva
 
@@ -12,11 +12,11 @@ Pandas 提供了多种函数，使用户能够清理和分析数据。在本文�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

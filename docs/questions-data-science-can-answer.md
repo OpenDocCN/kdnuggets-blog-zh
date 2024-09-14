@@ -1,6 +1,6 @@
 # 数据科学可以回答什么类型的问题
 
-> 原文：[https://www.kdnuggets.com/2015/09/questions-data-science-can-answer.html/2](https://www.kdnuggets.com/2015/09/questions-data-science-can-answer.html/2)
+> 原文：[`www.kdnuggets.com/2015/09/questions-data-science-can-answer.html/2`](https://www.kdnuggets.com/2015/09/questions-data-science-can-answer.html/2)
 
 **多分类作为回归**
 
@@ -8,23 +8,23 @@
 
 +   “我的车队中哪辆车最需要维修？”可以改述为“我车队中的每辆车需要维修的程度有多严重？”
 
-+   “我的哪5%客户将在明年离开我的业务去找竞争对手？”可以改述为“我的每个客户在明年离开我的业务去找竞争对手的可能性有多大？”
++   “我的哪 5%客户将在明年离开我的业务去找竞争对手？”可以改述为“我的每个客户在明年离开我的业务去找竞争对手的可能性有多大？”
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 **二分类作为回归**
 
-二分类问题也可以改述为回归问题，这可能并不令人惊讶。（事实上，一些算法在底层会将*每个*二分类问题改述为回归。）当一个示例可以同时属于A和B部分，或有可能朝两个方向发展时，这尤其有用。当一个答案可以部分是肯定的也可以是否定的，可能是开启的也可能是关闭的，那么回归可以反映这一点。这类问题通常以“可能性有多大……”或“比例是多少……”开始。
+二分类问题也可以改述为回归问题，这可能并不令人惊讶。（事实上，一些算法在底层会将*每个*二分类问题改述为回归。）当一个示例可以同时属于 A 和 B 部分，或有可能朝两个方向发展时，这尤其有用。当一个答案可以部分是肯定的也可以是否定的，可能是开启的也可能是关闭的，那么回归可以反映这一点。这类问题通常以“可能性有多大……”或“比例是多少……”开始。
 
 +   这个用户点击我的广告的可能性有多大？
 
@@ -56,7 +56,7 @@
 
 另一类无监督学习算法被称为**降维**技术。降维是简化数据的另一种方式，使数据更易于沟通、计算更快、存储更方便。
 
-从本质上讲，降维就是创建一种描述数据点的简写方式。一个简单的例子是GPA。大学生的学术实力通过数十门课程、数百次考试和数千项作业来衡量。每项作业都反映了学生对课程材料的理解程度，但完整的列表对任何招聘人员来说都太庞大了。幸运的是，你可以通过将所有分数平均来创建一个简写。你可以通过这种大幅简化来解决问题，因为在某项作业或课程中表现非常好的学生通常在其他课程中也表现很好。使用GPA而不是完整的作品集虽然会失去丰富性，例如你无法知道学生在数学方面是否比英语强，或者她在家庭编程作业中的成绩是否优于课堂小测。但你获得的是简单性，这使得谈论和比较学生的能力变得更容易。
+从本质上讲，降维就是创建一种描述数据点的简写方式。一个简单的例子是 GPA。大学生的学术实力通过数十门课程、数百次考试和数千项作业来衡量。每项作业都反映了学生对课程材料的理解程度，但完整的列表对任何招聘人员来说都太庞大了。幸运的是，你可以通过将所有分数平均来创建一个简写。你可以通过这种大幅简化来解决问题，因为在某项作业或课程中表现非常好的学生通常在其他课程中也表现很好。使用 GPA 而不是完整的作品集虽然会失去丰富性，例如你无法知道学生在数学方面是否比英语强，或者她在家庭编程作业中的成绩是否优于课堂小测。但你获得的是简单性，这使得谈论和比较学生的能力变得更容易。
 
 与降维相关的问题通常涉及那些一起变化的因素。
 
@@ -72,7 +72,7 @@
 
 **我现在该怎么办？**
 
-机器学习算法的第三个扩展家族专注于采取行动。这些被称为**强化学习**（RL）算法。它们与监督学习和无监督学习算法略有不同。回归算法可能预测明天的高温将达到98度，但它不会决定如何处理这个结果。而RL算法则进一步采取行动，例如在白天气温仍然较低时预先为办公楼的上层制冷。
+机器学习算法的第三个扩展家族专注于采取行动。这些被称为**强化学习**（RL）算法。它们与监督学习和无监督学习算法略有不同。回归算法可能预测明天的高温将达到 98 度，但它不会决定如何处理这个结果。而 RL 算法则进一步采取行动，例如在白天气温仍然较低时预先为办公楼的上层制冷。
 
 强化学习算法最初受到老鼠和人类大脑如何对惩罚和奖励做出反应的启发。它们选择行动，努力选择能够获得最大奖励的行动。你需要为它们提供一系列可能的行动，并且它们需要在每次行动后获得反馈，以了解该行动是好、一般还是严重错误。
 
@@ -94,25 +94,25 @@
 
 布兰登
 
-关注我 [Twitter](https://twitter.com/_brohrer_) 或在LinkedIn上联系我。
+关注我 [Twitter](https://twitter.com/_brohrer_) 或在 LinkedIn 上联系我。
 
 [原文](http://blogs.technet.com/b/machinelearning/archive/2015/08/27/what-types-of-questions-can-data-science-answer.aspx)。
 
 **相关：**
 
-+   [分析、数据挖掘、数据科学的应用]( /2014/12/where-analytics-data-mining-data-science-applied.html)
++   分析、数据挖掘、数据科学的应用
 
-+   [入门级分析专业人员的 10 个关键技巧](/2015/07/10-key-tips-entry-level-analytics-professionals.html)
++   入门级分析专业人员的 10 个关键技巧
 
-+   [采访：Ali Vanderveld，Groupon 讨论数据科学如何改变全球电子商务市场](/2015/07/interview-ali-vanderveld-groupon-ecommerce-marketplace.html)
++   采访：Ali Vanderveld，Groupon 讨论数据科学如何改变全球电子商务市场
 
-+   [Reiner Kappenberger，HP Security Voltage 讨论如何保护数据传输中的安全](/2015/07/interview-reiner-kappenberger-hp-security-voltage-data-in-motion.html)
++   Reiner Kappenberger，HP Security Voltage 讨论如何保护数据传输中的安全
 
 ### 更多相关主题
 
 +   [如何回答数据科学编程面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 
-+   [你必须知道的前10个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
++   [你必须知道的前 10 个高级数据科学 SQL 面试问题…](https://www.kdnuggets.com/2023/01/top-10-advanced-data-science-sql-interview-questions-must-know-answer.html)
 
 +   [谷歌通过将生成 AI 添加到 Docs 和 Gmail 中来回应 ChatGPT](https://www.kdnuggets.com/2023/03/google-answer-chatgpt-adding-generative-ai-docs-gmail.html)
 

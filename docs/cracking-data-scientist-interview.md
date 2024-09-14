@@ -1,28 +1,28 @@
 # 破解数据科学家面试
 
-> 原文：[https://www.kdnuggets.com/2019/01/cracking-data-scientist-interview.html](https://www.kdnuggets.com/2019/01/cracking-data-scientist-interview.html)
+> 原文：[`www.kdnuggets.com/2019/01/cracking-data-scientist-interview.html`](https://www.kdnuggets.com/2019/01/cracking-data-scientist-interview.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **作者：[Ajit Samudrala](https://www.linkedin.com/in/ajitsamudrala/)，Symantec 数据科学家**
 
-在2018年8月完成了我在Sirius的数据科学实习后，我开始寻找全职数据科学职位。我的初始搜索非常随意，简历和Linkedin个人资料也只是平庸。毫无意外地，我花了一个月才开始取得进展。经过40天的搜索，我收到了Google针对数据科学家的职位的首个回应。我激动不已，因为我甚至在最疯狂的梦想中都没想到会收到Google的电话。虽然我未能进入现场面试，但这是一次很好的学习经历。之后，我还与Apple、SAP、Visa、Walmart、Nielsen、Symantec、Swiss Re、AppNexus、Catalina、Cerego和另外40家公司进行数据科学家/机器学习工程师的面试。最终，我加入了Symantec在Mountain View的总部。我将以问答的形式总结我的经历，并试图揭穿初学者在成为数据科学家过程中可能存在的任何误解。
+在 2018 年 8 月完成了我在 Sirius 的数据科学实习后，我开始寻找全职数据科学职位。我的初始搜索非常随意，简历和 Linkedin 个人资料也只是平庸。毫无意外地，我花了一个月才开始取得进展。经过 40 天的搜索，我收到了 Google 针对数据科学家的职位的首个回应。我激动不已，因为我甚至在最疯狂的梦想中都没想到会收到 Google 的电话。虽然我未能进入现场面试，但这是一次很好的学习经历。之后，我还与 Apple、SAP、Visa、Walmart、Nielsen、Symantec、Swiss Re、AppNexus、Catalina、Cerego 和另外 40 家公司进行数据科学家/机器学习工程师的面试。最终，我加入了 Symantec 在 Mountain View 的总部。我将以问答的形式总结我的经历，并试图揭穿初学者在成为数据科学家过程中可能存在的任何误解。
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 **1\. 整个求职过程中最困难的部分是什么？**
 
-面试的反复无常。数据科学家是一个非常泛泛的术语；在我的求职过程中，我见过几种不同的类型。例如，我面试的Google职位主要集中在统计建模和实验设计。而与Cerego的面试则主要基于深度学习和自然语言处理。有些公司对软件开发和编码的重视程度与数据科学相当。我发现深度学习角色通常要求有相当的软件开发知识。
+面试的反复无常。数据科学家是一个非常泛泛的术语；在我的求职过程中，我见过几种不同的类型。例如，我面试的 Google 职位主要集中在统计建模和实验设计。而与 Cerego 的面试则主要基于深度学习和自然语言处理。有些公司对软件开发和编码的重视程度与数据科学相当。我发现深度学习角色通常要求有相当的软件开发知识。
 
 面试各种角色的问题在于，可能会变成一个无所不通但无所精通的人。我就经历过这种情况；我发现自己有时专注于统计学，一天后又转向机器学习/深度学习。虽然学习两个领域是好事，但要同时掌握这两个领域需要更长的时间。
 
@@ -46,17 +46,17 @@
 
 **6\. 如何在家庭作业和案例研究中表现出色？**
 
-![](../Images/599033d6e9bc296f753aaef58dc6b8c5.png)
+![](img/599033d6e9bc296f753aaef58dc6b8c5.png)
 
 大多数面试官更关注你的方法而非家庭作业的结果。所以，创造性和失败是可以接受的。
 
-准备一个包含所有可重用函数的机器学习模板。在Scikit-Learn和Matplotlib上构建一个API，以便你可以快速进行探索性数据分析（EDA）和构建基本模型。一旦完成了基本模型，你可以通过堆叠不同的模型、使用一个模型的预测来改善另一个模型，或其他任何可能引起面试官兴趣的疯狂尝试来开始发挥创意。如果成功了，那很好。如果失败了，你仍然会因为尝试不同的方法而获得好评。
+准备一个包含所有可重用函数的机器学习模板。在 Scikit-Learn 和 Matplotlib 上构建一个 API，以便你可以快速进行探索性数据分析（EDA）和构建基本模型。一旦完成了基本模型，你可以通过堆叠不同的模型、使用一个模型的预测来改善另一个模型，或其他任何可能引起面试官兴趣的疯狂尝试来开始发挥创意。如果成功了，那很好。如果失败了，你仍然会因为尝试不同的方法而获得好评。
 
-关于案例研究，我认为最佳来源是Google、Facebook、Twitter、eBay、Zillow等公司的官方数据科学博客。通过阅读这些博客，你可以了解这些公司如何用机器学习/统计建模解决业务问题以及他们在过程中遇到的挑战。
+关于案例研究，我认为最佳来源是 Google、Facebook、Twitter、eBay、Zillow 等公司的官方数据科学博客。通过阅读这些博客，你可以了解这些公司如何用机器学习/统计建模解决业务问题以及他们在过程中遇到的挑战。
 
 **7\. 如何从人群中脱颖而出？**
 
-![](../Images/f60c696dfbbcf0c44e52dc68c6e7325f.png)
+![](img/f60c696dfbbcf0c44e52dc68c6e7325f.png)
 
 你可以用几种不同的方法来实现这一点。在我看来，培养阅读、消化和实施研究论文的能力会让你在众人中脱颖而出。尽管对初学者来说这是一个艰巨的任务，但从实现简单的组件的论文开始是一个不错的起点。起初，我曾经很难阅读研究论文，但几个月后，我至少能够从中实现基本的组件。
 
@@ -68,15 +68,15 @@
 
 **9\. 我是否应该申请技能要求过高的职位？**
 
-是的，你应该这样做。我曾收到一些职位的电话，这些职位的JD包含了一些不常见的术语，如VAEs、GANs、Transformers、NLU、RF学习、C++等。尽管破解这些可能很困难，但你仍然可以获得很好的学习经验。
+是的，你应该这样做。我曾收到一些职位的电话，这些职位的 JD 包含了一些不常见的术语，如 VAEs、GANs、Transformers、NLU、RF 学习、C++等。尽管破解这些可能很困难，但你仍然可以获得很好的学习经验。
 
 **10\. 我是否应该做一些认证或投资时间学习一些工具？**
 
-虽然获得认证是好的，但我认为这在数据科学中不会给你的申请增加实质性的价值。关于工具，了解流行的部署工具是有益的。除此之外，花时间掌握开源框架，如Hive、Kafka、Spark等，是一种好方法。
+虽然获得认证是好的，但我认为这在数据科学中不会给你的申请增加实质性的价值。关于工具，了解流行的部署工具是有益的。除此之外，花时间掌握开源框架，如 Hive、Kafka、Spark 等，是一种好方法。
 
 **11\. 我的未来计划是什么？**
 
-我将继续从我的工作和才华横溢的同事那里学习。此外，我计划学习RF学习和Java。如果有好的课程或书籍，请告诉我。我还会尽量在Medium上活跃，发布我的学习成果。
+我将继续从我的工作和才华横溢的同事那里学习。此外，我计划学习 RF 学习和 Java。如果有好的课程或书籍，请告诉我。我还会尽量在 Medium 上活跃，发布我的学习成果。
 
 **12\. 随机提示**
 
@@ -102,11 +102,11 @@
 
 **相关：**
 
-+   [在接受那份华丽的数据科学工作之前再三思考](/2018/12/think-twice-before-accept-fancy-data-science-job.html)
++   在接受那份华丽的数据科学工作之前再三思考
 
-+   [为什么你不应该成为数据科学通才](/2018/12/why-shouldnt-data-science-generalist.html)
++   为什么你不应该成为数据科学通才
 
-+   [Netflix 数据科学面试问题： 如何通过 AI 面试](/2018/06/netflix-data-science-interview-questions-acing-the-ai-interview.html)
++   Netflix 数据科学面试问题： 如何通过 AI 面试
 
 ### 更多相关内容
 
@@ -114,7 +114,7 @@
 
 +   [Interview Kickstart 数据科学面试课程——它的独特之处](https://www.kdnuggets.com/2022/10/interview-kickstart-data-science-interview-course-makes-different.html)
 
-+   [KDnuggets 新闻，5月4日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
++   [KDnuggets 新闻，5 月 4 日：9 门免费哈佛课程学习数据…](https://www.kdnuggets.com/2022/n18.html)
 
 +   [如何回答数据科学编码面试问题](https://www.kdnuggets.com/2022/01/answer-data-science-coding-interview-questions.html)
 

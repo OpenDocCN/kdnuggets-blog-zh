@@ -1,28 +1,28 @@
-# 获取数据科学项目的10个精彩网站
+# 获取数据科学项目的 10 个精彩网站
 
-> 原文：[https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)
+> 原文：[`www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html`](https://www.kdnuggets.com/2023/04/10-websites-get-amazing-data-data-science-projects.html)
 
-![获取数据科学项目的10个精彩网站](../Images/644f17714f0cd549f139e1eeec910389.png)
+![获取数据科学项目的 10 个精彩网站](img/644f17714f0cd549f139e1eeec910389.png)
 
 作者提供的图片
 
-“有人真的会关心花萼长度吗？”几天前，我的朋友在喝咖啡时向我抱怨。她指的是R语言中内置的`iris`数据集，这个数据集早在1936年就首次出现了。“为什么大学教授总是用糟糕、无聊、毫无意义的数据来教我们数据科学，而外面有这么多很棒的数据适合数据科学项目呢？”
+“有人真的会关心花萼长度吗？”几天前，我的朋友在喝咖啡时向我抱怨。她指的是 R 语言中内置的`iris`数据集，这个数据集早在 1936 年就首次出现了。“为什么大学教授总是用糟糕、无聊、毫无意义的数据来教我们数据科学，而外面有这么多很棒的数据适合数据科学项目呢？”
 
 * * *
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作
 
 * * *
 
 她说得对。当你的数据对你来说无聊或毫无意义时，确实很难激励自己学习数据科学，或者进行[数据科学项目](https://www.stratascratch.com/blog/19-data-science-project-ideas-for-beginners/?utm_source=blog&utm_medium=click&utm_campaign=kdn+data+for+ds+projects)。我知道在找到一些吸引我的有趣数据之前，我也曾很难激励自己学习数据科学。
 
-在这篇文章中，我将详细介绍10个出色的网站，你可以从中获取一些非常棒的数据用于数据科学项目。目的是展示各种可能吸引你的数据。最终，这些网站应该能帮助你找到感兴趣的数据，完成一个酷炫的数据科学项目，并用它来获得一份工作。
+在这篇文章中，我将详细介绍 10 个出色的网站，你可以从中获取一些非常棒的数据用于数据科学项目。目的是展示各种可能吸引你的数据。最终，这些网站应该能帮助你找到感兴趣的数据，完成一个酷炫的数据科学项目，并用它来获得一份工作。
 
 # 我是如何审查这些数据来源的？
 
@@ -36,16 +36,16 @@
 
 +   相对干净。你将有机会练习数据科学的有趣部分——分析、可视化、共享等。
 
-+   语言无关。你可以用Python、R、SQL或任何你喜欢的语言来挖掘这些数据。
++   语言无关。你可以用 Python、R、SQL 或任何你喜欢的语言来挖掘这些数据。
 
-# 获取你数据科学项目的超赞数据的10个网站
+# 获取你数据科学项目的超赞数据的 10 个网站
 
 让我们深入探讨一下找到你真正关心并希望用数据科学进行探索的最佳网站。
 
 | Google 数据集搜索 | 范围广泛，质量参差不齐 |
 | --- | --- |
 | Kaggle | 更有限，但有大量背景和社区支持 |
-| KDNuggets | 专门针对AI、机器学习、数据科学 |
+| KDNuggets | 专门针对 AI、机器学习、数据科学 |
 | 政府网站 | 种类繁多，学习资源 |
 | Pudding.cool | 流行文化，论文 |
 | 538 | 体育，政治，干净的数据 |
@@ -60,9 +60,9 @@
 
 Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 Google，但用于数据集。你输入查询，Google 就会返回所有相关的数据显示。
 
-例如，搜索“猫”会带来超过一百个数据集，包括一个 [数据集](https://www.kaggle.com/datasets/crawford/cat-dataset) 含有超过9,000张猫的图片。
+例如，搜索“猫”会带来超过一百个数据集，包括一个 [数据集](https://www.kaggle.com/datasets/crawford/cat-dataset) 含有超过 9,000 张猫的图片。
 
-![获取数据科学项目的绝佳数据的10个网站](../Images/991d47518760898364cf5dcce73e44c2.png)
+![获取数据科学项目的绝佳数据的 10 个网站](img/991d47518760898364cf5dcce73e44c2.png)
 
 来源: [Google 数据集搜索](https://datasetsearch.research.google.com/search?src=0&query=cats&docid=L2cvMTFqY2tkNTI3MQ%3D%3D)
 
@@ -86,7 +86,7 @@ Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 
 
 这使你能够根据你的特定兴趣进行筛选。例如，如果我用“计算机视觉”过滤器搜索“猫”，我可以找到那个相同的猫数据集。
 
-![获取数据科学项目的绝佳数据的10个网站](../Images/f1d66a29e6dc26fb3e188fe65564c850.png)
+![获取数据科学项目的绝佳数据的 10 个网站](img/f1d66a29e6dc26fb3e188fe65564c850.png)
 
 来源: [Kaggle 数据集](https://www.kaggle.com/datasets?search=cats&tags=13207-Computer+Vision)
 
@@ -104,9 +104,9 @@ Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 
 
 这些网站中许多并不是 KDNuggets 独有的，但这是一个值得浏览的好列表。值得注意的是，当你注册成为 KDNuggets 的电子邮件订阅者时，你还可以访问 [World Data AI](https://worlddata.ai/partners/kdnuggets)，它包含 35 亿个数据集。
 
-![10 个网站获取惊人的数据用于数据科学项目](../Images/996cc165882611f7bc344eb8419c6dd3.png)
+![10 个网站获取惊人的数据用于数据科学项目](img/996cc165882611f7bc344eb8419c6dd3.png)
 
-来源: [KDnuggets 数据集](/datasets/index.html)
+来源: KDnuggets 数据集
 
 我喜欢这个网站的原因：
 
@@ -118,17 +118,17 @@ Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 
 
 我可以很容易地将这个获取数据集的网站列表扩展到大约一百万个，只需逐一列出我喜欢用来获取数据的政府网站。我不会这样做。相反，我会在这里提供一个小列表：
 
-+   [http://datasf.org/](http://datasf.org/)
++   [`datasf.org/`](http://datasf.org/)
 
-+   [http://data.gov.uk](http://data.gov.uk/)
++   [`data.gov.uk`](http://data.gov.uk/)
 
-+   [https://www.usa.gov/About/developer-resources/1usagov.shtml](https://www.usa.gov/About/developer-resources/1usagov.shtml)
++   [`www.usa.gov/About/developer-resources/1usagov.shtml`](https://www.usa.gov/About/developer-resources/1usagov.shtml)
 
-+   [https://www.census.gov/data/datasets.html](http://www.census.gov/)
++   [`www.census.gov/data/datasets.html`](http://www.census.gov/)
 
 各国政府不断收集数据以进行研究，许多政府会将这些数据在线发布。
 
-![10 个网站获取惊人的数据用于数据科学项目](../Images/2736295bbc7172bc2d99146b3baf5d2d.png)
+![10 个网站获取惊人的数据用于数据科学项目](img/2736295bbc7172bc2d99146b3baf5d2d.png)
 
 来源: [美国人口普查局](https://www.census.gov/data.html)
 
@@ -150,7 +150,7 @@ Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 
 
 这更像是一个数字杂志，撰写关于文化的长篇文章，同时展示大量数据。我把它包括在这里，因为他们讲述了很棒的故事，并[分享他们的数据](https://github.com/the-pudding/data)。
 
-![10 Websites to Get Amazing Data for Data Science Projects](../Images/fe5b35eb9f1fa2190120282a2b7559aa.png)![10 Websites to Get Amazing Data for Data Science Projects](../Images/0499ede6b9e8fdc7efe685b975b4a1bb.png)
+![10 Websites to Get Amazing Data for Data Science Projects](img/fe5b35eb9f1fa2190120282a2b7559aa.png)![10 Websites to Get Amazing Data for Data Science Projects](img/0499ede6b9e8fdc7efe685b975b4a1bb.png)
 
 来源：[The Pudding](https://pudding.cool/2023/01/lit-canon/)
 
@@ -166,7 +166,7 @@ Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 
 
 另一个以论文为驱动的流行文化网站，提供[自由获取的数据](https://data.fivethirtyeight.com/)供你挖掘。他们更多关注体育和政治。虽然数据驱动性较少，但我将其列入这个名单，因为它仍然策划和分享数据集。
 
-![10 Websites to Get Amazing Data for Data Science Projects](../Images/f0450670e7a3db4401e196d36a8ee06b.png)
+![10 Websites to Get Amazing Data for Data Science Projects](img/f0450670e7a3db4401e196d36a8ee06b.png)
 
 来源：[FiveThirtyEight Data](https://data.fivethirtyeight.com/)
 
@@ -184,7 +184,7 @@ Google 的 [数据集搜索](https://datasetsearch.research.google.com/) 就像 
 
 每周都有新的数据集发布。参与者被鼓励在 GitHub 和 Twitter 上分享他们的清理技术和可视化成果。
 
-![10 Websites to Get Amazing Data for Data Science Projects](../Images/25af76dd949d9edfc8661c0c5a0c2d0d.png)
+![10 Websites to Get Amazing Data for Data Science Projects](img/25af76dd949d9edfc8661c0c5a0c2d0d.png)
 
 来源：[TidyTuesday GitHub](https://github.com/z3tt/TidyTuesday)
 
@@ -202,7 +202,7 @@ GitHub 是大量数据的家园。你可以轻松搜索、筛选和下载数据�
 
 尽管如此，我觉得这些好处弥补了这些缺点。
 
-![10 Websites to Get Amazing Data for Data Science Projects](../Images/222068f7954301169d2d49cce1b24828.png)
+![10 Websites to Get Amazing Data for Data Science Projects](img/222068f7954301169d2d49cce1b24828.png)
 
 来源：[GitHub Cat Data](https://github.com/search?q=cat+data)
 
@@ -220,7 +220,7 @@ Buzzfeed 不仅仅是通过让你制作沙拉来评论人类状况的测验。�
 
 一切都是开源的。
 
-![10 个获取惊人数据的网站](../Images/42bc2d7f1c6274748f2bffd92d1949a5.png)
+![10 个获取惊人数据的网站](img/42bc2d7f1c6274748f2bffd92d1949a5.png)
 
 来源：[BuzzFeed News GitHub](https://github.com/BuzzFeedNews/everything#data-and-analyses)
 
@@ -234,7 +234,7 @@ Buzzfeed 不仅仅是通过让你制作沙拉来评论人类状况的测验。�
 
 我将以一个相当自解释的标题结束这份列表：[极好的公开数据集](https://github.com/awesomedata/awesome-public-datasets)。这个仓库在 GitHub 上，包含（主要是）免费的数据集供你探索。它们来自在线数据集、用户建议和研究论文。
 
-![10 个获取惊人数据的网站](../Images/7b1bb9860760df39f5ffc086255c55c3.png)
+![10 个获取惊人数据的网站](img/7b1bb9860760df39f5ffc086255c55c3.png)
 
 来源：[极好的公开数据集 GitHub](https://github.com/awesomedata/awesome-public-datasets/blob/master/README.rst)
 

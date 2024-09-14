@@ -1,8 +1,8 @@
 # Mercury 概述：创建数据科学作品集和基于 notebook 的网页应用
 
-> 原文：[https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
+> 原文：[`www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html`](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
 
-![Mercury 概述：创建数据科学作品集和基于 notebook 的网页应用](../Images/d2a151772b8f2208d087518a95f21f0e.png)
+![Mercury 概述：创建数据科学作品集和基于 notebook 的网页应用](img/d2a151772b8f2208d087518a95f21f0e.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -50,7 +50,7 @@ Mercury 的开源版本包含了诸如多个网页应用、欢迎页面编辑和
 
 最重要的是为 Jupyter notebook 添加一个头部。你需要在顶部创建一个新单元格，并将其更改为 Raw `NBConvert`。然后，添加 YAML 代码以修改参数。
 
-![YAML 参数](../Images/89736cc9dce81967d6567e3f4103ca50.png)
+![YAML 参数](img/89736cc9dce81967d6567e3f4103ca50.png)
 
 来自 [Mercury](https://mljar.com/mercury/) 的 Gif
 
@@ -62,9 +62,9 @@ Mercury 的开源版本包含了诸如多个网页应用、欢迎页面编辑和
 
 +   **描述**：添加网络应用程序的详细描述。
 
-+   **显示代码**：隐藏或显示python代码。
++   **显示代码**：隐藏或显示 python 代码。
 
-+   **显示提示**：隐藏或显示jupyter单元格的提示信息。
++   **显示提示**：隐藏或显示 jupyter 单元格的提示信息。
 
 +   **共享**：与公众、私有或特定组共享网络应用程序。
 
@@ -74,7 +74,7 @@ Mercury 的开源版本包含了诸如多个网页应用、欢迎页面编辑和
 
 小部件是你应用程序的交互式输入。你可以添加文本、整数、滑块、复选框、范围、多个选项，甚至上传文件用于你的机器学习演示。
 
-下面的示例代码演示了如何将一个小部件（滑块）添加到Python变量（my_variable）中。
+下面的示例代码演示了如何将一个小部件（滑块）添加到 Python 变量（my_variable）中。
 
 ```py
 params:
@@ -87,23 +87,23 @@ params:
 
 ```
 
-![小部件](../Images/cbd459c97db006293092557792bbf406.png)
+![小部件](img/cbd459c97db006293092557792bbf406.png)
 
-图片由Mercury提供
+图片由 Mercury 提供
 
 # 欢迎页面
 
-你可以使用Markdown创建自定义首页。如果问我，这是创建数据科学作品集的最简单方法，其中包括你的简历、成就和通过网络应用程序了解的项目。要创建首页，请添加**welcome.md**文件并使用Markdown添加信息。
+你可以使用 Markdown 创建自定义首页。如果问我，这是创建数据科学作品集的最简单方法，其中包括你的简历、成就和通过网络应用程序了解的项目。要创建首页，请添加**welcome.md**文件并使用 Markdown 添加信息。
 
 要获取灵感，请查看由作者（Piotr Płoński）创建的[数据科学作品集](https://github.com/pplonski/data-science-portfolio)。
 
-![欢迎页面](../Images/af52e05b4af02945259fd59589d2b1a4.png)
+![欢迎页面](img/af52e05b4af02945259fd59589d2b1a4.png)
 
-图片来自[Mercury文档](https://mercury-docs.readthedocs.io/en/latest/welcome/)
+图片来自[Mercury 文档](https://mercury-docs.readthedocs.io/en/latest/welcome/)
 
 # 嵌入
 
-你也可以通过使用iframe将你的网络应用程序添加到博客或WordPress网站中。只需复制你的网络应用程序的链接，并在iframe脚本中添加“/embed”，如下面所示。
+你也可以通过使用 iframe 将你的网络应用程序添加到博客或 WordPress 网站中。只需复制你的网络应用程序的链接，并在 iframe 脚本中添加“/embed”，如下面所示。
 
 ```py
 <iframe src="https://mercury.mljar.com/app/5/embed" height="700px" width="1200px"/&gt
@@ -112,19 +112,19 @@ params:
 
 这个功能很特别，因为没有其他网络应用程序提供嵌入功能。
 
-![嵌入](../Images/e5215096814b5df022ff5a8fdd43faf0.png)
+![嵌入](img/e5215096814b5df022ff5a8fdd43faf0.png)
 
 # 管理员和认证
 
-如果你想限制谁可以查看你的笔记本，请将你的应用程序设置为私有。要访问Mercury网络应用程序，你需要提供用户名和密码。你可以在YAML头部的`share`参数中列出用户或组。你可以使用管理面板来管理笔记本、任务、用户和组。添加、删除和更新用户或组需要**专业版**。
+如果你想限制谁可以查看你的笔记本，请将你的应用程序设置为私有。要访问 Mercury 网络应用程序，你需要提供用户名和密码。你可以在 YAML 头部的`share`参数中列出用户或组。你可以使用管理面板来管理笔记本、任务、用户和组。添加、删除和更新用户或组需要**专业版**。
 
-![管理员和认证](../Images/bc429c24599de1237b43fd750e2a9b98.png)
+![管理员和认证](img/bc429c24599de1237b43fd750e2a9b98.png)
 
-Gif由Mercury提供
+Gif 由 Mercury 提供
 
-# Heroku上的部署
+# Heroku 上的部署
 
-对我来说，fork一个仓库并将其部署到[Heroku](https://www.heroku.com/home)服务器上相当简单。你可以查看我的[项目](https://github.com/kingabzpro/dashboard-from-jupyter-with-mercury)，了解我是如何在不写一行代码的情况下部署GitHub仓库的。要访问我部署的网络应用程序，请点击[这里](https://mercury-dashboard-abid.herokuapp.com/)。同样，你也可以轻松地在AWS或Google Cloud上部署你的应用程序。确保你已经添加了环境变量：
+对我来说，fork 一个仓库并将其部署到[Heroku](https://www.heroku.com/home)服务器上相当简单。你可以查看我的[项目](https://github.com/kingabzpro/dashboard-from-jupyter-with-mercury)，了解我是如何在不写一行代码的情况下部署 GitHub 仓库的。要访问我部署的网络应用程序，请点击[这里](https://mercury-dashboard-abid.herokuapp.com/)。同样，你也可以轻松地在 AWS 或 Google Cloud 上部署你的应用程序。确保你已经添加了环境变量：
 
 +   NOTEBOOKS= *.ipynb
 

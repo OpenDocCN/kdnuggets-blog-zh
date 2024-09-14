@@ -1,10 +1,10 @@
-# 2024年值得阅读的5篇机器学习论文
+# 2024 年值得阅读的 5 篇机器学习论文
 
-> 原文：[https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024](https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024)
+> 原文：[`www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024`](https://www.kdnuggets.com/5-machine-learning-papers-to-read-in-2024)
 
-![2024年值得阅读的5篇机器学习论文](../Images/cfbdb31e9704a2fad133a5ec2a989901.png)
+![2024 年值得阅读的 5 篇机器学习论文](img/cfbdb31e9704a2fad133a5ec2a989901.png)
 
-使用DALL-E 3生成的图像
+使用 DALL-E 3 生成的图像
 
 机器学习是人工智能的一个子集，它通过提供效率和预测性洞察来为企业带来价值。它是任何企业的宝贵工具。
 
@@ -12,33 +12,33 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
 我们知道去年充满了机器学习的突破，今年也不例外。需要学习的内容实在太多了。
 
-在如此多的学习内容中，我挑选了2024年几篇值得阅读的论文，以提升您的知识。
+在如此多的学习内容中，我挑选了 2024 年几篇值得阅读的论文，以提升您的知识。
 
 这些论文是什么？让我们深入了解一下。
 
 ## HyperFast：表格数据的即时分类
 
-HyperFast是由[Bonet *et al.* (2024)](https://arxiv.org/pdf/2402.14335v1.pdf)研究开发的一个元训练超网络模型。它旨在提供一个能够在一次前向传递中即时分类表格数据的分类模型。
+HyperFast 是由[Bonet *et al.* (2024)](https://arxiv.org/pdf/2402.14335v1.pdf)研究开发的一个元训练超网络模型。它旨在提供一个能够在一次前向传递中即时分类表格数据的分类模型。
 
-作者表示，HyperFast可以生成一个任务特定的神经网络，用于未见数据集的分类预测，且无需训练模型。这种方法可以显著减少计算需求和部署机器学习模型所需的时间。
+作者表示，HyperFast 可以生成一个任务特定的神经网络，用于未见数据集的分类预测，且无需训练模型。这种方法可以显著减少计算需求和部署机器学习模型所需的时间。
 
-HyperFast框架展示了输入数据通过标准化和降维处理，然后经过一系列超网络生成网络层的权重，这些权重包括基于最近邻的分类偏差。
+HyperFast 框架展示了输入数据通过标准化和降维处理，然后经过一系列超网络生成网络层的权重，这些权重包括基于最近邻的分类偏差。
 
-总的来说，结果显示HyperFast表现出色。它比许多经典方法更快，无需微调。论文总结道，HyperFast可能成为一种可以应用于许多实际案例的新方法。
+总的来说，结果显示 HyperFast 表现出色。它比许多经典方法更快，无需微调。论文总结道，HyperFast 可能成为一种可以应用于许多实际案例的新方法。
 
 ## EasyRL4Rec：一个用户友好的基于强化学习的推荐系统代码库
 
-接下来的论文讨论的是由[Yu *et al.* (2024)](https://arxiv.org/pdf/2402.15164v1.pdf)提出的新库EasyRL4Rec。这篇论文的重点是一个旨在开发和测试基于强化学习（RL）的推荐系统（RSs）的用户友好型代码库，名为EasyRL4Rec。
+接下来的论文讨论的是由[Yu *et al.* (2024)](https://arxiv.org/pdf/2402.15164v1.pdf)提出的新库 EasyRL4Rec。这篇论文的重点是一个旨在开发和测试基于强化学习（RL）的推荐系统（RSs）的用户友好型代码库，名为 EasyRL4Rec。
 
 该库提供了一个具有四个核心模块（环境、策略、状态跟踪器和收集器）的模块化结构，每个模块处理强化学习过程的不同阶段。
 
@@ -106,6 +106,6 @@ AutoCodeRover 的工作有两个主要阶段：上下文检索阶段和补丁生
 
 +   [你应该阅读的生成式智能体研究论文](https://www.kdnuggets.com/generative-agent-research-papers-you-should-read)
 
-+   [2022年你需要阅读的机器学习书籍](https://www.kdnuggets.com/2022/04/machine-learning-books-need-read-2022.html)
++   [2022 年你需要阅读的机器学习书籍](https://www.kdnuggets.com/2022/04/machine-learning-books-need-read-2022.html)
 
 +   [关于论文与代码的简要介绍](https://www.kdnuggets.com/2022/04/brief-introduction-papers-code.html)

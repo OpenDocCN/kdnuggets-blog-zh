@@ -1,6 +1,6 @@
-# 3个工具来跟踪和可视化你的Python代码执行
+# 3 个工具来跟踪和可视化你的 Python 代码执行
 
-> 原文：[https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
+> 原文：[`www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html`](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
 
 # 动机
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -32,13 +32,13 @@ ZeroDivisionError: division by zero
 
 并希望输出能像这里所示的那样更容易理解？
 
-![3个工具来跟踪和可视化你的Python代码执行](../Images/962accaf97a22ca097cf2d14df1e8603.png)
+![3 个工具来跟踪和可视化你的 Python 代码执行](img/962accaf97a22ca097cf2d14df1e8603.png)
 
 作者的图片
 
 你可能还希望实时可视化哪些代码行正在执行以及它们被执行了多少次：
 
-![3个工具来跟踪和可视化你的Python代码执行](../Images/25971c2f33939d70ea82d74d5f274160.png)
+![3 个工具来跟踪和可视化你的 Python 代码执行](img/25971c2f33939d70ea82d74d5f274160.png)
 
 作者的 GIF
 
@@ -48,21 +48,21 @@ ZeroDivisionError: division by zero
 
 +   snoop — 打印函数中正在执行的代码行
 
-+   heartrate — 实时可视化Python程序的执行
++   heartrate — 实时可视化 Python 程序的执行
 
 使用这些工具只需要一行代码！
 
 # Loguru — 打印更好的异常
 
-[Loguru](https://github.com/Delgan/loguru) 是一个旨在让Python日志记录变得愉快的库。Loguru 提供了许多有趣的功能，但我发现最有用的功能是**捕捉意外错误**并**显示导致代码失败的变量值**。
+[Loguru](https://github.com/Delgan/loguru) 是一个旨在让 Python 日志记录变得愉快的库。Loguru 提供了许多有趣的功能，但我发现最有用的功能是**捕捉意外错误**并**显示导致代码失败的变量值**。
 
-要安装Loguru，输入
+要安装 Loguru，输入
 
 ```py
 pip install loguru
 ```
 
-要理解Loguru的有用性，假设你有2个函数`division`和`divide_numbers`，并且函数`divide_numbers`被执行。
+要理解 Loguru 的有用性，假设你有 2 个函数`division`和`divide_numbers`，并且函数`divide_numbers`被执行。
 
 注意`combinations([2,1,0], 2)`返回`[(2, 1), (2, 0), (1, 0)]`。在运行上述代码后，我们遇到了这个错误：
 
@@ -78,11 +78,11 @@ Traceback (most recent call last):
 ZeroDivisionError: division by zero
 ```
 
-从输出结果中，我们知道`return num1/num2`是错误发生的地方，但我们不知道`num1`和`num2`的哪些值导致了错误。幸运的是，通过添加Loguru的`logger.catch`装饰器，这可以很容易地追踪：
+从输出结果中，我们知道`return num1/num2`是错误发生的地方，但我们不知道`num1`和`num2`的哪些值导致了错误。幸运的是，通过添加 Loguru 的`logger.catch`装饰器，这可以很容易地追踪：
 
 输出：
 
-![3个工具来跟踪和可视化你的Python代码执行](../Images/ce4f69f8803361d1611d2677959da0ca.png)
+![3 个工具来跟踪和可视化你的 Python 代码执行](img/ce4f69f8803361d1611d2677959da0ca.png)
 
 作者的图片
 
@@ -90,11 +90,11 @@ ZeroDivisionError: division by zero
 
 # snoop — 打印正在执行的代码行
 
-如果代码没有错误，但我们想了解代码中发生了什么，这时snoop就派上用场了。
+如果代码没有错误，但我们想了解代码中发生了什么，这时 snoop 就派上用场了。
 
-[snoop](https://github.com/alexmojaki/snoop)是一个Python包，它通过添加一个装饰器打印被执行的代码行及每个变量的值。
+[snoop](https://github.com/alexmojaki/snoop)是一个 Python 包，它通过添加一个装饰器打印被执行的代码行及每个变量的值。
 
-要安装snoop，请输入：
+要安装 snoop，请输入：
 
 ```py
 pip install snoop
@@ -112,17 +112,17 @@ The factorial of 5 is 120
 
 输出：
 
-![3 Tools to Track and Visualize the Execution of Your Python Code](../Images/c35264b221cf1e5eaf66c3a639bf5ca0.png)
+![3 Tools to Track and Visualize the Execution of Your Python Code](img/c35264b221cf1e5eaf66c3a639bf5ca0.png)
 
 图片由作者提供
 
 在上面的输出中，我们可以查看变量的值以及哪些代码行被执行。现在我们可以更好地理解递归是如何工作的！
 
-# heartrate — 实时可视化Python程序的执行
+# heartrate — 实时可视化 Python 程序的执行
 
-如果你想可视化哪些行被执行以及执行了多少次，可以尝试使用heartrate。
+如果你想可视化哪些行被执行以及执行了多少次，可以尝试使用 heartrate。
 
-[heartrate](https://github.com/alexmojaki/heartrate)也是snoop的创建者开发的。要安装heartrate，请输入：
+[heartrate](https://github.com/alexmojaki/heartrate)也是 snoop 的创建者开发的。要安装 heartrate，请输入：
 
 ```py
 pip install heartrate
@@ -130,9 +130,9 @@ pip install heartrate
 
 现在让我们将`heartrate.trace(browser=True)`添加到之前的代码中。这将打开一个浏览器窗口，显示调用`trace()`的文件的可视化图。
 
-运行上述代码时应该会弹出一个新的浏览器窗口。如果没有，请访问[http://localhost:9999](http://localhost:9999/file/?filename=heartrate_example.py)。你应该会看到如下输出：
+运行上述代码时应该会弹出一个新的浏览器窗口。如果没有，请访问[`localhost:9999`](http://localhost:9999/file/?filename=heartrate_example.py)。你应该会看到如下输出：
 
-![3 Tools to Track and Visualize the Execution of Your Python Code](../Images/cf6f9946252fc1264116a11f4fb7f19f.png)
+![3 Tools to Track and Visualize the Execution of Your Python Code](img/cf6f9946252fc1264116a11f4fb7f19f.png)
 
 图片由作者提供
 
@@ -140,25 +140,25 @@ pip install heartrate
 
 从上面的输出中，我们可以看到程序执行了：
 
-+   `if x==1` 5次
++   `if x==1` 5 次
 
 +   `return 1` 一次
 
-+   `return (x * factorial(x-1))` 4次
++   `return (x * factorial(x-1))` 4 次
 
-输出是有意义的，因为`x`的初始值为5，并且函数会重复调用，直到`x`等于`1`。
+输出是有意义的，因为`x`的初始值为 5，并且函数会重复调用，直到`x`等于`1`。
 
-现在让我们看看使用heartrate实时可视化Python程序的执行是什么样的。让我们添加`sleep(0.5)`，使程序运行得稍慢一点，并将`num`增加到`20`。
+现在让我们看看使用 heartrate 实时可视化 Python 程序的执行是什么样的。让我们添加`sleep(0.5)`，使程序运行得稍慢一点，并将`num`增加到`20`。
 
-![3 Tools to Track and Visualize the Execution of Your Python Code](../Images/25971c2f33939d70ea82d74d5f274160.png)
+![3 Tools to Track and Visualize the Execution of Your Python Code](img/25971c2f33939d70ea82d74d5f274160.png)
 
-GIF由作者提供
+GIF 由作者提供
 
 太棒了！我们可以实时看到哪些代码行正在执行，以及每行代码的执行次数。
 
 # 结论
 
-恭喜！你刚刚学习了跟踪和可视化Python代码执行的3个工具。我希望使用这3个工具时调试会变得不那么痛苦。既然这些工具只需要一行代码，何不尝试一下，看看它们有多么有用？
+恭喜！你刚刚学习了跟踪和可视化 Python 代码执行的 3 个工具。我希望使用这 3 个工具时调试会变得不那么痛苦。既然这些工具只需要一行代码，何不尝试一下，看看它们有多么有用？
 
 随意玩耍并[在这里叉开这篇文章的源代码](https://github.com/khuyentran1401/Data-science/tree/master/python/debug_tools)。
 
@@ -170,7 +170,7 @@ GIF由作者提供
 
 ### 更多相关主题
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日: 追踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日: 追踪和可视化的 3 个工具…](https://www.kdnuggets.com/2022/n01.html)
 
 +   [SQL 执行顺序的基本指南](https://www.kdnuggets.com/the-essential-guide-to-sql-execution-order)
 

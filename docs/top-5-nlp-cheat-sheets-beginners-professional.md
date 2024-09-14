@@ -1,22 +1,22 @@
-# 初学者到专业人士的前5大NLP备忘单
+# 初学者到专业人士的前 5 大 NLP 备忘单
 
-> 原文：[https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html](https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html)
+> 原文：[`www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html`](https://www.kdnuggets.com/2022/12/top-5-nlp-cheat-sheets-beginners-professional.html)
 
-![初学者到专业人士的前5大NLP备忘单](../Images/33d150cce6ede770c60347b29a3634c1.png)
+![初学者到专业人士的前 5 大 NLP 备忘单](img/33d150cce6ede770c60347b29a3634c1.png)
 
 作者提供的图片
 
-备忘单在复习遗忘的概念或准备技术NLP面试时至关重要。它曾经帮助过我，现在我将与您分享NLP的最佳资源。
+备忘单在复习遗忘的概念或准备技术 NLP 面试时至关重要。它曾经帮助过我，现在我将与您分享 NLP 的最佳资源。
 
-通过查看前5大NLP备忘单，你将了解NLP算法、模型、Python库、任务、分析技术、性能指标和框架。
+通过查看前 5 大 NLP 备忘单，你将了解 NLP 算法、模型、Python 库、任务、分析技术、性能指标和框架。
 
-# NLP入门工具包备忘单
+# NLP 入门工具包备忘单
 
-[NLP入门工具包](https://github.com/janlukasschroeder/nlp-cheat-sheet-python) 是一个基于Markdown的备忘单，介绍了NLP Python库、任务、框架、数据集、算法和基准。你将通过代码示例了解算法背后的概念。
+[NLP 入门工具包](https://github.com/janlukasschroeder/nlp-cheat-sheet-python) 是一个基于 Markdown 的备忘单，介绍了 NLP Python 库、任务、框架、数据集、算法和基准。你将通过代码示例了解算法背后的概念。
 
-NLP入门工具包涵盖了从简单的文本分类到变换器的所有基础知识。此外，你还将学习各种分析技术，以了解数据集。
+NLP 入门工具包涵盖了从简单的文本分类到变换器的所有基础知识。此外，你还将学习各种分析技术，以了解数据集。
 
-![初学者到专业人士的前5大NLP备忘单](../Images/6d513a4e99c81884b15a04c274145418.png)
+![初学者到专业人士的前 5 大 NLP 备忘单](img/6d513a4e99c81884b15a04c274145418.png)
 
 图片来自[备忘单](https://github.com/janlukasschroeder/nlp-cheat-sheet-python)
 
@@ -58,11 +58,11 @@ NLP入门工具包涵盖了从简单的文本分类到变换器的所有基础�
 
 1.  以及更多
 
-# spaCy备忘单
+# spaCy 备忘单
 
-[spaCy备忘单](https://www.datacamp.com/cheat-sheet/spacy-cheat-sheet-advanced-nlp-in-python)涵盖了使用spaCy Python包的重要NLP概念和特性。SpaCy是一个高级开源NLP工具，专门设计用于生产环境，以理解更大量的文本。
+[spaCy 备忘单](https://www.datacamp.com/cheat-sheet/spacy-cheat-sheet-advanced-nlp-in-python)涵盖了使用 spaCy Python 包的重要 NLP 概念和特性。SpaCy 是一个高级开源 NLP 工具，专门设计用于生产环境，以理解更大量的文本。
 
-![初学者到专业人士的前5大NLP备忘单](../Images/44e86e7264c3495808b47200709820e4.png)
+![初学者到专业人士的前 5 大 NLP 备忘单](img/44e86e7264c3495808b47200709820e4.png)
 
 图片来自[备忘单](https://www.datacamp.com/cheat-sheet/spacy-cheat-sheet-advanced-nlp-in-python)
 
@@ -88,11 +88,11 @@ NLP入门工具包涵盖了从简单的文本分类到变换器的所有基础�
 
 1.  基于规则的匹配
 
-# NLP与NLTK备忘单
+# NLP 与 NLTK 备忘单
 
-[NLP与NLTK备忘单](https://cheatography.com/murenei/cheat-sheets/natural-language-processing-with-python-and-nltk/) 为你提供了一个关于使用主要是NLTK包的Python中基本NLP任务的参考指南。你将学习到POS标注、词形还原、句子解析和文本分类。
+[NLP 与 NLTK 备忘单](https://cheatography.com/murenei/cheat-sheets/natural-language-processing-with-python-and-nltk/) 为你提供了一个关于使用主要是 NLTK 包的 Python 中基本 NLP 任务的参考指南。你将学习到 POS 标注、词形还原、句子解析和文本分类。
 
-![初学者到专业人士的前5大NLP备忘单](../Images/97aaba9674aa6051a37bd7514a4ed1cf.png)
+![初学者到专业人士的前 5 大 NLP 备忘单](img/97aaba9674aa6051a37bd7514a4ed1cf.png)
 
 图像来自 [备忘单](https://cheatography.com/murenei/cheat-sheets/natural-language-processing-with-python-and-nltk/)
 
@@ -120,7 +120,7 @@ NLP入门工具包涵盖了从简单的文本分类到变换器的所有基础�
 
 [Hugging Face Transformers 文档](https://huggingface.co/docs/transformers/index)是理解解决 NLP 问题的有效方式。你可以使用该文档学习 API 并在几分钟内训练大型语言模型。它支持 PyTorch、TensorFlow 和 Jax 框架。
 
-![初学者到专业人士的前 5 大 NLP 备忘单](../Images/9202495ec1a96da943c75d54374b4684.png)
+![初学者到专业人士的前 5 大 NLP 备忘单](img/9202495ec1a96da943c75d54374b4684.png)
 
 图像来自 [文档](https://huggingface.co/docs/transformers/index)
 
@@ -150,7 +150,7 @@ NLP入门工具包涵盖了从简单的文本分类到变换器的所有基础�
 
 [NLP 备忘单](https://www.kaggle.com/code/rftexas/nlp-cheatsheet-master-nlp)涵盖了自然语言处理的各个方面。你将学习构建语言模型、处理序列输入和大词汇量以及上下文嵌入。这个备忘单适合希望深入学习和准备面试的专业人士。
 
-![初学者到专业人士的前 5 大 NLP 备忘单](../Images/ea853dbe6f2e4c1c4a1cf6e75f5c8ad4.png)
+![初学者到专业人士的前 5 大 NLP 备忘单](img/ea853dbe6f2e4c1c4a1cf6e75f5c8ad4.png)
 
 图像来自 [备忘单](https://www.kaggle.com/code/rftexas/nlp-cheatsheet-master-nlp)
 
@@ -172,7 +172,7 @@ NLP入门工具包涵盖了从简单的文本分类到变换器的所有基础�
 
 NLP 备忘单提供了简洁的信息，以复习遗忘的概念，并帮助我们在机器学习面试中取得成功。
 
-我多次使用 NLP 备忘单，主要是在公司寻找具有 NLP 专长的机器学习工程师时。此外，我使用 [带代码的论文](/2022/04/brief-introduction-papers-code.html)来了解最新趋势。
+我多次使用 NLP 备忘单，主要是在公司寻找具有 NLP 专长的机器学习工程师时。此外，我使用 带代码的论文来了解最新趋势。
 
 希望你喜欢这些备忘单。别忘了关注我在 [Twitter](https://www.linkedin.com/in/1abidaliawan/) 和 [LinkedIn](https://twitter.com/1abidaliawan)上的动态，我会发布关于数据科学的精彩博客。
 
@@ -182,17 +182,17 @@ NLP 备忘单提供了简洁的信息，以复习遗忘的概念，并帮助我�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，6月8日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
++   [KDnuggets 新闻，6 月 8 日：21 个数据科学备忘单…](https://www.kdnuggets.com/2022/n23.html)
 
 +   [顶级 7 个必备备忘单，助你轻松通过数据科学面试](https://www.kdnuggets.com/top-7-essential-cheat-sheets-to-ace-your-data-science-interview)
 
@@ -202,4 +202,4 @@ NLP 备忘单提供了简洁的信息，以复习遗忘的概念，并帮助我�
 
 +   [21 个数据科学面试必备备忘单：解锁…](https://www.kdnuggets.com/2022/06/21-cheat-sheets-data-science-interviews.html)
 
-+   [KDnuggets™ 新闻 22:n06，2月9日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)
++   [KDnuggets™ 新闻 22:n06，2 月 9 日：数据科学编程…](https://www.kdnuggets.com/2022/n06.html)

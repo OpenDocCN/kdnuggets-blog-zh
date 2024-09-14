@@ -1,8 +1,8 @@
 # 使用 PuLP 进行线性规划和离散优化
 
-> 原文：[https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2)
+> 原文：[`www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2`](https://www.kdnuggets.com/2019/05/linear-programming-discrete-optimization-python-pulp.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](/2019/05/linear-programming-discrete-optimization-python-pulp.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 解决问题并打印解决方案
 
@@ -38,7 +38,7 @@ for v in prob.variables():
 
 所以，最优解决方案是吃 6.923 份冷冻西兰花、6.06 份炒鸡蛋和 1.08 份烤土豆！
 
-![figure-name](../Images/8c51d2b4285256094b43f79f0c1255ab.png)
+![figure-name](img/8c51d2b4285256094b43f79f0c1255ab.png)
 
 欢迎下载整个笔记本、数据文件，并尝试各种约束来更改您的饮食计划。[代码在我的 GitHub 仓库中](https://github.com/tirthajyoti/Optimization-Python)。
 
@@ -84,11 +84,11 @@ Food__Baked_Potatoes = 1.0
 
 ```
 
-整数规划的一个酷应用是解决[**司机调度问题**](https://en.wikipedia.org/wiki/Driver_scheduling_problem)，这可能是一个[NP难题](https://en.wikipedia.org/wiki/NP-hardness)问题。请参阅这篇文章（也注意文章中他们如何计算各种操作的成本并将其用于优化问题），
+整数规划的一个酷应用是解决[**司机调度问题**](https://en.wikipedia.org/wiki/Driver_scheduling_problem)，这可能是一个[NP 难题](https://en.wikipedia.org/wiki/NP-hardness)问题。请参阅这篇文章（也注意文章中他们如何计算各种操作的成本并将其用于优化问题），
 
 [**工程师的整数规划入门：简化的公交调度**
 
-*这篇文章是Remix关于我们面临的软件工程问题系列的一部分。在这一篇中，Remix…*blog.remix.com](https://blog.remix.com/an-intro-to-integer-programming-for-engineers-simplified-bus-scheduling-bd3d64895e92)
+*这篇文章是 Remix 关于我们面临的软件工程问题系列的一部分。在这一篇中，Remix…*blog.remix.com](https://blog.remix.com/an-intro-to-integer-programming-for-engineers-simplified-bus-scheduling-bd3d64895e92)
 
 ### 如何在一个线性规划问题中纳入二进制决策？
 
@@ -98,19 +98,19 @@ Food__Baked_Potatoes = 1.0
 
 我们如何在这个框架中表示这样的决策逻辑？
 
-![figure-name](../Images/0ff0686336587e9951a2deb8ee9d14e4.png)
+![figure-name](img/0ff0686336587e9951a2deb8ee9d14e4.png)
 
 结果是，对于这种逻辑，你需要引入另一种类型的变量，称为**指示变量**。它们是二进制的，可以指示最优解中变量的存在或缺失。
 
-[**在LP问题中将指示函数作为约束**
+[**在 LP 问题中将指示函数作为约束**
 
-*感谢你为Mathematics Stack Exchange贡献了答案！请务必回答这个问题。提供详细信息…*math.stackexchange.com](https://math.stackexchange.com/questions/2220355/involving-indicator-function-as-a-constraint-in-a-lp-problem)
+*感谢你为 Mathematics Stack Exchange 贡献了答案！请务必回答这个问题。提供详细信息…*math.stackexchange.com](https://math.stackexchange.com/questions/2220355/involving-indicator-function-as-a-constraint-in-a-lp-problem)
 
-但对于这个特定的问题，使用指示变量存在一个明显的问题。理想情况下，如果指示变量为1，你希望将食物项的成本/营养价值包含在约束方程中；如果为0，则忽略它。从数学上讲，将其写为**原始项（涉及食物项）与指示变量的乘积**是直观的。但一旦你这样做，你就是在乘以两个变量，使问题变得非线性！在这种情况下，它属于[**二次规划**](https://en.wikipedia.org/wiki/Quadratic_programming)（QP）的范畴（*二次*因为项现在是两个线性项的乘积）。
+但对于这个特定的问题，使用指示变量存在一个明显的问题。理想情况下，如果指示变量为 1，你希望将食物项的成本/营养价值包含在约束方程中；如果为 0，则忽略它。从数学上讲，将其写为**原始项（涉及食物项）与指示变量的乘积**是直观的。但一旦你这样做，你就是在乘以两个变量，使问题变得非线性！在这种情况下，它属于[**二次规划**](https://en.wikipedia.org/wiki/Quadratic_programming)（QP）的范畴（*二次*因为项现在是两个线性项的乘积）。
 
 > 流行的机器学习技术支持向量机本质上解决了一个二次规划问题。
 
-[**什么是二次规划的直观解释？在SVM中如何定义它？**
+[**什么是二次规划的直观解释？在 SVM 中如何定义它？**
 
 *答案：二次规划涉及最小化一个在未知向量组件中是二次形式的目标函数……* [www.quora.com](https://www.quora.com/What-is-an-intuitive-explanation-of-quadratic-programming-and-how-is-it-defined-in-SVM)
 
@@ -118,7 +118,7 @@ Food__Baked_Potatoes = 1.0
 
 结果发现，有一个巧妙的技巧可以将这种二进制逻辑融入到这个线性规划中，而不会使其变成一个二次规划问题。
 
-我们可以将二进制变量表示为 `food_chosen` 并将其实例化为 `Integer`，下限和上限为0和1。
+我们可以将二进制变量表示为 `food_chosen` 并将其实例化为 `Integer`，下限和上限为 0 和 1。
 
 ```py
 food_chosen = LpVariable.dicts("Chosen",food_items,0,1,cat='Integer')
@@ -133,7 +133,7 @@ for f in food_items:
 
 ```
 
-如果你长时间盯着代码看，你会意识到这实际上意味着只有在相应的 `food_chosen` 指示变量为1时，我们才会给予 `food_vars` 重要性。但这样我们避免了直接乘法，保持了问题结构的线性。
+如果你长时间盯着代码看，你会意识到这实际上意味着只有在相应的 `food_chosen` 指示变量为 1 时，我们才会给予 `food_vars` 重要性。但这样我们避免了直接乘法，保持了问题结构的线性。
 
 为了包含西兰花和冰山生菜的“或”条件，我们只需写一段简单的代码，
 
@@ -142,7 +142,7 @@ prob += food_chosen['Frozen Broccoli']+food_chosen['Raw Iceberg Lettuce']<=1
 
 ```
 
-这确保了这两个二进制变量的和至多为1，这意味着在最优解中只能包含其中一个，但不能同时包含两个。
+这确保了这两个二进制变量的和至多为 1，这意味着在最优解中只能包含其中一个，但不能同时包含两个。
 
 ### 线性/整数规划的更多应用
 
@@ -178,21 +178,21 @@ prob += food_chosen['Frozen Broccoli']+food_chosen['Raw Iceberg Lettuce']<=1
 
 **相关：**
 
-+   [优化如何运作](/2019/04/how-optimization-works.html)
++   优化如何运作
 
-+   [使用 R 进行优化](/2018/05/optimization-using-r.html)
++   使用 R 进行优化
 
-+   [机器学习中的优化：鲁棒性还是全局最小值？](/2017/06/robust-global-minimum.html)
++   机器学习中的优化：鲁棒性还是全局最小值？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 维护
 
 * * *
 
@@ -202,10 +202,10 @@ prob += food_chosen['Frozen Broccoli']+food_chosen['Raw Iceberg Lettuce']<=1
 
 +   [超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)
 
-+   [基于研究的高级提示技术提升LLM效率](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
++   [基于研究的高级提示技术提升 LLM 效率](https://www.kdnuggets.com/3-research-driven-advanced-prompting-techniques-for-llm-efficiency-and-speed-optimization)
 
-+   [使用TPOT进行机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)
++   [使用 TPOT 进行机器学习管道优化](https://www.kdnuggets.com/2021/05/machine-learning-pipeline-optimization-tpot.html)
 
-+   [SQL查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
++   [SQL 查询优化技术](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
 
-+   [数据库优化：探索SQL中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)
++   [数据库优化：探索 SQL 中的索引](https://www.kdnuggets.com/2023/07/database-optimization-exploring-indexes-sql.html)

@@ -1,8 +1,8 @@
-# 2022年五大免费云笔记本
+# 2022 年五大免费云笔记本
 
-> 原文：[https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
+> 原文：[`www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html`](https://www.kdnuggets.com/2022/04/top-5-free-cloud-notebooks-2022.html)
 
-![2022年五大免费云笔记本](../Images/067c3da79cc7f11de903cba3e8bddc39.png)
+![2022 年五大免费云笔记本](img/067c3da79cc7f11de903cba3e8bddc39.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 # 1\. Kaggle
 
-![Kaggle](../Images/f7bb4ab5764881b22193b637e73b5bcc.png)
+![Kaggle](img/f7bb4ab5764881b22193b637e73b5bcc.png)
 
 图片来自 [Kaggle](https://www.kaggle.com/)
 
@@ -48,73 +48,73 @@
 
 # 2\. Deepnote
 
-![Deepnote](../Images/cc0361fa0e0c206f58e1970604b36df7.png)
+![Deepnote](img/cc0361fa0e0c206f58e1970604b36df7.png)
 
 图片来自 [Deepnote](https://deepnote.com)
 
-[Deepnote](https://deepnote.com/) 是我喜爱的工具。我在上面完成所有工作任务。它是任何类型的数据科学项目的最佳云笔记本平台。我将它排在第二，因为该平台仅提供免费的CPU。Kaggle和Deepnote都在不断改善UI和添加功能，因此我很难决定第一个。Deepnote是一个基于项目的笔记本平台，提供多种数据库集成和各种关键功能以改善用户体验。你可以在数据科学项目上进行实验，创建自定义环境，实时协作，并发布你的工作。Deepnote是你所有数据科学项目的一站式服务。
+[Deepnote](https://deepnote.com/) 是我喜爱的工具。我在上面完成所有工作任务。它是任何类型的数据科学项目的最佳云笔记本平台。我将它排在第二，因为该平台仅提供免费的 CPU。Kaggle 和 Deepnote 都在不断改善 UI 和添加功能，因此我很难决定第一个。Deepnote 是一个基于项目的笔记本平台，提供多种数据库集成和各种关键功能以改善用户体验。你可以在数据科学项目上进行实验，创建自定义环境，实时协作，并发布你的工作。Deepnote 是你所有数据科学项目的一站式服务。
 
 **特点**
 
-+   免费CPU和存储
++   免费 CPU 和存储
 
 +   计划中的笔记本运行
 
-+   Python、R和自定义环境
++   Python、R 和自定义环境
 
 +   数据库集成
 
-+   用于运行Streamlit、Tensorboard等的Web服务器
++   用于运行 Streamlit、Tensorboard 等的 Web 服务器
 
 +   实时协作
 
 +   发布和共享笔记本
 
-+   笔记本单元到Web应用
++   笔记本单元到 Web 应用
 
 +   版本控制
 
 # 3. Google Colab
 
-![Google Colab](../Images/617433db4388b74308b0e9567c53cd19.png)
+![Google Colab](img/617433db4388b74308b0e9567c53cd19.png)
 
 图片来自[Colab](https://colab.research.google.com/)
 
-[Google Colab](https://colab.research.google.com/) 在机器学习研究者和数据科学家中非常受欢迎。它简单且提供免费的GPU和TPU。我使用Colab进行快速代码运行或尝试其他人的研究工作。大多数代码库或研究论文附有Google Colab的链接以测试和验证结果。我认为简单性和强大的计算能力使它非常吸引人，适合人们共享和实验机器学习项目。你获得临时存储、免费的但不可靠的GPU和TPU，以及与Google云产品（如Drive）的集成。
+[Google Colab](https://colab.research.google.com/) 在机器学习研究者和数据科学家中非常受欢迎。它简单且提供免费的 GPU 和 TPU。我使用 Colab 进行快速代码运行或尝试其他人的研究工作。大多数代码库或研究论文附有 Google Colab 的链接以测试和验证结果。我认为简单性和强大的计算能力使它非常吸引人，适合人们共享和实验机器学习项目。你获得临时存储、免费的但不可靠的 GPU 和 TPU，以及与 Google 云产品（如 Drive）的集成。
 
 **特点**
 
-+   免费CPU、GPU和TPU
++   免费 CPU、GPU 和 TPU
 
 +   免费临时存储
 
-+   仅支持Python
++   仅支持 Python
 
-+   Google云集成
++   Google 云集成
 
-+   改进的Jupyter UI
++   改进的 Jupyter UI
 
 +   快速加载
 
-# 4. 亚马逊SageMaker Studio Lab
+# 4. 亚马逊 SageMaker Studio Lab
 
-![Amazon SageMaker Studio Lab](../Images/ef72b1357ff842a7f46a3fe2aa264244.png)
+![Amazon SageMaker Studio Lab](img/ef72b1357ff842a7f46a3fe2aa264244.png)
 
 图片来自[Studiolab](https://studiolab.sagemaker.aws/)
 
-亚马逊SageMaker [Studio Lab](https://studiolab.sagemaker.aws/) 是一个新的竞争者，它是一款高质量的产品。该平台非常容易使用。每个会话提供12小时的免费CPU和4小时的GPU。Studio Lab的架构和界面基于亚马逊SageMaker Studio，但功能有限。你只能获得免费的计算、存储以及Jupyter lab及其扩展的所有功能。
+亚马逊 SageMaker [Studio Lab](https://studiolab.sagemaker.aws/) 是一个新的竞争者，它是一款高质量的产品。该平台非常容易使用。每个会话提供 12 小时的免费 CPU 和 4 小时的 GPU。Studio Lab 的架构和界面基于亚马逊 SageMaker Studio，但功能有限。你只能获得免费的计算、存储以及 Jupyter lab 及其扩展的所有功能。
 
 **特点**
 
-+   免费CPU和GPU
++   免费 CPU 和 GPU
 
 +   免费有限存储
 
-+   仅支持Python和自定义环境
++   仅支持 Python 和自定义环境
 
-+   快速简洁的UI
++   快速简洁的 UI
 
-+   Jupyter扩展
++   Jupyter 扩展
 
 +   高内存
 
@@ -122,7 +122,7 @@
 
 # 5. Paperspace Gradient
 
-![Paperspace Gradient](../Images/f210359d5906a4f6ac7c4922ab7b9fac.png)
+![Paperspace Gradient](img/f210359d5906a4f6ac7c4922ab7b9fac.png)
 
 图片来自[Gradient](https://gradient.run/)
 
@@ -144,7 +144,7 @@
 
 # 附加信息
 
-![DataCamp 工作区](../Images/b98835debb62dcd512c869de1c79f02e.png)
+![DataCamp 工作区](img/b98835debb62dcd512c869de1c79f02e.png)
 
 来源于 [DataCamp 工作区](https://app.datacamp.com/workspace) 的图片
 
@@ -176,6 +176,6 @@ DataCamp [工作区](https://app.datacamp.com/workspace)是云笔记本市场中
 
 +   [迁移到 AWS 云的 11 个最佳实践](https://www.kdnuggets.com/2023/04/11-best-practices-cloud-data-migration-aws-cloud.html)
 
-+   [2022年ODSC东部大会上的15场热门MLOps讲座，免费访问](https://www.kdnuggets.com/2022/04/odsc-15-trending-mlops-talks-access-free-odsc-east-2022.html)
++   [2022 年 ODSC 东部大会上的 15 场热门 MLOps 讲座，免费访问](https://www.kdnuggets.com/2022/04/odsc-15-trending-mlops-talks-access-free-odsc-east-2022.html)
 
-+   [2022年特征存储峰会：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)
++   [2022 年特征存储峰会：关于特征工程的免费会议](https://www.kdnuggets.com/2022/10/hopsworks-feature-store-summit-2022-free-conference-feature-engineering.html)

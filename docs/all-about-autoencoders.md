@@ -1,8 +1,8 @@
 # 神经网络 201：自编码器全解
 
-> 原文：[https://www.kdnuggets.com/2019/11/all-about-autoencoders.html](https://www.kdnuggets.com/2019/11/all-about-autoencoders.html)
+> 原文：[`www.kdnuggets.com/2019/11/all-about-autoencoders.html`](https://www.kdnuggets.com/2019/11/all-about-autoencoders.html)
 
-[评论](#comments)
+评论
 
 **由 [Zak Jost](https://blog.zakjost.com)，亚马逊网络服务研究科学家**。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -36,9 +36,9 @@
 
 ### 相关主题
 
-+   [在神经网络之前尝试的10个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
++   [在神经网络之前尝试的 10 个简单方法](https://www.kdnuggets.com/2021/12/10-simple-things-try-neural-networks.html)
 
-+   [使用PyTorch的可解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
++   [使用 PyTorch 的可解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
 
 +   [深度神经网络不会引导我们走向通用人工智能（AGI）](https://www.kdnuggets.com/2021/12/deep-neural-networks-not-toward-agi.html)
 

@@ -1,52 +1,52 @@
-# 提高你在Snowflake上的生产力的6大工具
+# 提高你在 Snowflake 上的生产力的 6 大工具
 
-> 原文：[https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)
+> 原文：[`www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html`](https://www.kdnuggets.com/2023/08/top-6-tools-improve-productivity-snowflake.html)
 
-![提高你在Snowflake上的生产力的6大工具](../Images/cdf99902fa4327011ae5d676dfc0c199.png)
+![提高你在 Snowflake 上的生产力的 6 大工具](img/cdf99902fa4327011ae5d676dfc0c199.png)
 
 编辑者提供的图片
 
-Snowflake彻底改变了企业存储、处理和分析数据的方式，提供了无与伦比的灵活性、可扩展性和性能。但像任何强大技术一样，为了真正利用其潜力，拥有合适的工具至关重要。
+Snowflake 彻底改变了企业存储、处理和分析数据的方式，提供了无与伦比的灵活性、可扩展性和性能。但像任何强大技术一样，为了真正利用其潜力，拥有合适的工具至关重要。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-本文是你在使用Snowflake时提升生产力的6大工具指南。无论你是在处理数据、整合各种数据源、创建精美可视化还是得出可操作的见解，这些工具都能提升你的效率和效果。
+本文是你在使用 Snowflake 时提升生产力的 6 大工具指南。无论你是在处理数据、整合各种数据源、创建精美可视化还是得出可操作的见解，这些工具都能提升你的效率和效果。
 
-因此，让我们深入探索这些能将你的Snowflake操作提升到新水平的生产力工具。
+因此，让我们深入探索这些能将你的 Snowflake 操作提升到新水平的生产力工具。
 
 # 数据准备工具
 
 ## 1\. Datameer
 
-![提高你在Snowflake上的生产力的6大工具](../Images/1903c0d0e7587cc9020290a8d7cefb9f.png)
+![提高你在 Snowflake 上的生产力的 6 大工具](img/1903c0d0e7587cc9020290a8d7cefb9f.png)
 
 图片来自[Datameer](https://www.datameer.com/demo-center/the-datameer-interface/)
 
-Datameer是一个自助数据准备工具，旨在使处理大数据变得更加可管理。它致力于简化过程并节省时间。
+Datameer 是一个自助数据准备工具，旨在使处理大数据变得更加可管理。它致力于简化过程并节省时间。
 
 **特点：**
 
-+   *数据发现：* Datameer提供了一个可视化界面，使你更容易探索和理解数据。它的目的是将复杂的内容转变为更易于消化的形式。
++   *数据发现：* Datameer 提供了一个可视化界面，使你更容易探索和理解数据。它的目的是将复杂的内容转变为更易于消化的形式。
 
-+   *数据准备：* 使用Datameer，你可以清理、转换和丰富你的数据，为分析做好准备。最棒的是，你不需要深入复杂的编码或脚本。
++   *数据准备：* 使用 Datameer，你可以清理、转换和丰富你的数据，为分析做好准备。最棒的是，你不需要深入复杂的编码或脚本。
 
-+   *数据探索：* Datameer提供了一系列数据可视化工具，允许你与数据互动。其目的是快速有效地获得洞察。
++   *数据探索：* Datameer 提供了一系列数据可视化工具，允许你与数据互动。其目的是快速有效地获得洞察。
 
-+   *集成：* Datameer可以连接到各种数据源，从传统数据库到复杂的云数据湖。它的目的是将你的所有数据集中在一个地方。
++   *集成：* Datameer 可以连接到各种数据源，从传统数据库到复杂的云数据湖。它的目的是将你的所有数据集中在一个地方。
 
 **优点：**
 
-+   Datameer的用户友好界面简化了数据发现、准备和探索过程。
++   Datameer 的用户友好界面简化了数据发现、准备和探索过程。
 
 +   其数据准备功能允许你清理、转换和丰富数据，而无需复杂的编码。
 
@@ -72,7 +72,7 @@ Datameer是一个自助数据准备工具，旨在使处理大数据变得更加
 
 ## 2\. Tableau
 
-![提高你在 Snowflake 上生产力的前 6 种工具](../Images/570cba4b243b51ca9994572df3da0f9e.png)
+![提高你在 Snowflake 上生产力的前 6 种工具](img/570cba4b243b51ca9994572df3da0f9e.png)
 
 [Tableau](https://www.tableau.com/) 是数据可视化领域的领先工具。它直观的界面和拖放功能使其成为技术用户和非技术用户的友好选择。
 
@@ -110,7 +110,7 @@ Tableau 拥有一个庞大且活跃的用户社区，总是随时准备提供帮
 
 ## 3\. Fivetran
 
-![提升你在 Snowflake 上生产力的 6 大工具](../Images/b6c6abe4aef6fd1ce9999d6feddf6be3.png)
+![提升你在 Snowflake 上生产力的 6 大工具](img/b6c6abe4aef6fd1ce9999d6feddf6be3.png)
 
 图片来自 [fivetran](https://www.fivetran.com/blog/fivetran-gives-analysts-a-new-way-to-transform-data)
 
@@ -146,7 +146,7 @@ Fivetran 的定价是 [按使用计费](https://www.fivetran.com/pricing)，意�
 
 ## 4\. Looker
 
-![提升你在 Snowflake 上生产力的 6 大工具](../Images/989957a1ac301d2198e97fe4b009067c.png)
+![提升你在 Snowflake 上生产力的 6 大工具](img/989957a1ac301d2198e97fe4b009067c.png)
 
 图片来自 [getapp](https://www.getapp.com/business-intelligence-analytics-software/a/looker/)
 
@@ -182,7 +182,7 @@ Looker 的用户友好界面和强大的数据建模能力使其成为希望民�
 
 ## 5\. Collibra
 
-![提升你在 Snowflake 上生产力的前 6 款工具](../Images/d39dc538f6c7d90856506471ab7485d4.png)
+![提升你在 Snowflake 上生产力的前 6 款工具](img/d39dc538f6c7d90856506471ab7485d4.png)
 
 图片来自 [productresources](https://productresources.collibra.com/docs/collibra/latest/Content/Console/ref_console-ui.htm)
 
@@ -194,7 +194,7 @@ Collibra 的定价未在其网站上公开，但你可以 [直接联系他们](h
 
 ## 6\. Informatica
 
-![提升你在 Snowflake 上生产力的前 6 款工具](../Images/f8c1024dd25a676c5624ef0a67681061.png)
+![提升你在 Snowflake 上生产力的前 6 款工具](img/f8c1024dd25a676c5624ef0a67681061.png)
 
 图片来自 [firsteigen](https://firsteigen.com/blog/data-governance-tools/)
 

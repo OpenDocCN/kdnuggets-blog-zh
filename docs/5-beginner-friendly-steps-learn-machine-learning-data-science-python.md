@@ -1,12 +1,12 @@
 # 5 个适合初学者的步骤，使用 Python 学习机器学习和数据科学
 
-> 原文：[https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html](https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html)
+> 原文：[`www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html`](https://www.kdnuggets.com/2019/09/5-beginner-friendly-steps-learn-machine-learning-data-science-python.html)
 
-[评论](#comments)
+评论
 
-**由[丹尼尔·博克](www.mrdbourke.com)，机器学习工程师**
+**由丹尼尔·博克，机器学习工程师**
 
-![图示](../Images/f1cb42e8c9981b0cd4d9b32226e1e291.png)
+![图示](img/f1cb42e8c9981b0cd4d9b32226e1e291.png)
 
 照片由[山姆·博克](https://www.instagram.com/sam_bourkestudios/)提供。谢谢你，山姆。
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -48,17 +48,17 @@
 
 **学习资源**
 
-1.  [AI要素](https://www.elementsofai.com/)— 主要人工智能和机器学习概念的概述。
+1.  [AI 要素](https://www.elementsofai.com/)— 主要人工智能和机器学习概念的概述。
 
-1.  [Coursera上的Python for Everybody](https://bit.ly/pythoneverybodycoursera)— 从零开始学习 Python。
+1.  [Coursera 上的 Python for Everybody](https://bit.ly/pythoneverybodycoursera)— 从零开始学习 Python。
 
-1.  [freeCodeCamp的Python学习](https://youtu.be/rfscVS0vtbw)— 一个视频中讲解所有主要的 Python 概念。
+1.  [freeCodeCamp 的 Python 学习](https://youtu.be/rfscVS0vtbw)— 一个视频中讲解所有主要的 Python 概念。
 
-1.  [Corey Schafer的Anaconda教程](https://youtu.be/YJC6ldI3hWk)— 在一个视频中学习 Anaconda（你将用来为数据科学和机器学习设置计算机）。
+1.  [Corey Schafer 的 Anaconda 教程](https://youtu.be/YJC6ldI3hWk)— 在一个视频中学习 Anaconda（你将用来为数据科学和机器学习设置计算机）。
 
-1.  [Dataquest的Jupyter Notebook入门教程](https://www.dataquest.io/blog/jupyter-notebook-tutorial/)— 在一篇文章中快速入门 Jupyter Notebooks。
+1.  [Dataquest 的 Jupyter Notebook 入门教程](https://www.dataquest.io/blog/jupyter-notebook-tutorial/)— 在一篇文章中快速入门 Jupyter Notebooks。
 
-1.  [Corey Schafer的Jupyter Notebook教程](https://www.youtube.com/watch?v=HW29067qVWk)— 在一个视频中学习如何使用 Jupyter Notebooks。
+1.  [Corey Schafer 的 Jupyter Notebook 教程](https://www.youtube.com/watch?v=HW29067qVWk)— 在一个视频中学习如何使用 Jupyter Notebooks。
 
 ### 2\. 学习 Pandas、NumPy 和 Matplotlib 的数据分析、操控与可视化
 
@@ -74,15 +74,15 @@ Matplotlib 将帮助你制作图表和数据可视化。理解表格中的大量
 
 **学习资源**
 
-1.  [Coursera上的应用数据科学与Python](http://bit.ly/courseraDS)— 开始将你的 Python 技能应用于数据科学。
+1.  [Coursera 上的应用数据科学与 Python](http://bit.ly/courseraDS)— 开始将你的 Python 技能应用于数据科学。
 
 1.  [pandas in 10-minutes](https://pandas.pydata.org/pandas-docs/stable/gettingstarted/10min.html)— pandas 库及其一些最有用功能的快速概述。
 
-1.  [Codebasics的Python Pandas教程](https://youtu.be/CmorAWRsCAw)— YouTube 系列，讲解 pandas 的所有主要功能。
+1.  [Codebasics 的 Python Pandas 教程](https://youtu.be/CmorAWRsCAw)— YouTube 系列，讲解 pandas 的所有主要功能。
 
-1.  [NumPy教程 by freeCodeCamp](https://youtu.be/QUT1VHiLmmI)— 在一个 YouTube 视频中学习 NumPy。
+1.  [NumPy 教程 by freeCodeCamp](https://youtu.be/QUT1VHiLmmI)— 在一个 YouTube 视频中学习 NumPy。
 
-1.  [Sentdex的Matplotlib教程](https://www.youtube.com/watch?v=q7Bo_J8x_dw&list=PLQVvvaa0QuDfefDfXb9Yf0la1fPDKluPF)— YouTube 系列，教授 Matplotlib 的所有最有用特性。
+1.  [Sentdex 的 Matplotlib 教程](https://www.youtube.com/watch?v=q7Bo_J8x_dw&list=PLQVvvaa0QuDfefDfXb9Yf0la1fPDKluPF)— YouTube 系列，教授 Matplotlib 的所有最有用特性。
 
 ### 3\. 使用 scikit-learn 学习机器学习
 
@@ -134,11 +134,11 @@ scikit-learn 是一个包含许多有用机器学习算法的 Python 库，随�
 
 1.  [Andrew Trask 的《Grokking Deep Learning》](https://amzn.to/2H497My)——这本书将教你如何从零开始构建神经网络以及你为何需要了解这一过程。
 
-1.  [这些书籍将帮助你学习机器学习，作者：Daniel Bourke](https://www.youtube.com/watch?v=7R08MPXxiFQ)——YouTube视频讲解一些最佳的机器学习书籍。
+1.  [这些书籍将帮助你学习机器学习，作者：Daniel Bourke](https://www.youtube.com/watch?v=7R08MPXxiFQ)——YouTube 视频讲解一些最佳的机器学习书籍。
 
 ### 每一步需要多长时间？
 
-你可能会在每一部分上花费6个月或更长时间。不要急于求成。学习新事物需要时间。作为数据科学家或机器学习工程师，你主要是在培养提问的能力，然后使用你的工具尝试找到答案。
+你可能会在每一部分上花费 6 个月或更长时间。不要急于求成。学习新事物需要时间。作为数据科学家或机器学习工程师，你主要是在培养提问的能力，然后使用你的工具尝试找到答案。
 
 有些日子你会觉得自己什么都没学到，甚至在倒退。忽略它。不要逐日比较你的进展。要逐年比较进展。
 
@@ -150,7 +150,7 @@ scikit-learn 是一个包含许多有用机器学习算法的 Python 库，随�
 
 记住，作为数据科学家或机器学习工程师的一部分工作就是解决问题。把你的第一个任务当作了解每一步的更多内容，并创建自己的课程来帮助你学习它们。
 
-如果你想了解一个自创的机器学习课程样例，请查看我的[自创AI硕士学位](https://bit.ly/aimastersdegree)。这是我从零编码到成为机器学习工程师的9个月使用的课程。虽然不完美，但这是我的，所以它有效。
+如果你想了解一个自创的机器学习课程样例，请查看我的[自创 AI 硕士学位](https://bit.ly/aimastersdegree)。这是我从零编码到成为机器学习工程师的 9 个月使用的课程。虽然不完美，但这是我的，所以它有效。
 
 ### 那统计学呢？那数学呢？那概率学呢？
 
@@ -166,9 +166,9 @@ scikit-learn 是一个包含许多有用机器学习算法的 Python 库，随�
 
 通过上述课程和资源建立基础知识，然后通过自己的项目建立特定知识（那些无法通过教学获得的知识）。
 
-如果你有问题，请在下面留言，以便其他人也能看到。否则，随时[联系我](mailto:daniel@mrdbourke.com)。在可能的情况下使用了附属链接，更多关于我合作伙伴的信息请[点击这里](https://mrdbourke.com/partnerships)。
+如果你有问题，请在下面留言，以便其他人也能看到。否则，随时联系我。在可能的情况下使用了附属链接，更多关于我合作伙伴的信息请[点击这里](https://mrdbourke.com/partnerships)。
 
-你可以在[YouTube上找到这篇文章的视频版本](https://youtu.be/IMMDPzECrf0)。
+你可以在[YouTube 上找到这篇文章的视频版本](https://youtu.be/IMMDPzECrf0)。
 
 **简介：[Daniel Bourke](http://www.mrdbourke.com)** 在技术、健康和艺术的交汇处活动。每日文章请访问：[www.mrdbourke.com](http://www.mrdbourke.com)
 
@@ -176,22 +176,22 @@ scikit-learn 是一个包含许多有用机器学习算法的 Python 库，随�
 
 **相关链接：**
 
-+   [我作为机器学习工程师的第一年学到的12件事](/2019/07/12-things-learned-machine-learning-engineer.html)
++   我作为机器学习工程师的第一年学到的 12 件事
 
-+   [新数据科学家的建议](/2019/04/advice-new-data-scientists.html)
++   新数据科学家的建议
 
-+   [数据科学入门](/2019/08/getting-started-data-science.html)
++   数据科学入门
 
 ### 更多相关话题
 
-+   [有趣的初学者友好的Python项目！](https://www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html)
++   [有趣的初学者友好的 Python 项目！](https://www.kdnuggets.com/2022/10/beginner-friendly-python-projects-fun.html)
 
-+   [7个适合初学者的项目，帮助你入门ChatGPT](https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html)
++   [7 个适合初学者的项目，帮助你入门 ChatGPT](https://www.kdnuggets.com/2023/08/7-beginnerfriendly-projects-get-started-chatgpt.html)
 
-+   [Python机器学习初学者指南](https://www.kdnuggets.com/beginners-guide-to-machine-learning-with-python)
++   [Python 机器学习初学者指南](https://www.kdnuggets.com/beginners-guide-to-machine-learning-with-python)
 
-+   [每个初学者都应该学习的10个必备DevOps工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)
++   [每个初学者都应该学习的 10 个必备 DevOps 工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)
 
-+   [5个简单步骤系列：掌握Python、SQL、Scikit-learn、PyTorch等](https://www.kdnuggets.com/5-simple-steps-series-master-python-sql-scikit-learn-pytorch-google-cloud)
++   [5 个简单步骤系列：掌握 Python、SQL、Scikit-learn、PyTorch 等](https://www.kdnuggets.com/5-simple-steps-series-master-python-sql-scikit-learn-pytorch-google-cloud)
 
-+   [AI和机器学习职业的初学者指南](https://www.kdnuggets.com/beginners-guide-to-careers-in-ai-and-machine-learning)
++   [AI 和机器学习职业的初学者指南](https://www.kdnuggets.com/beginners-guide-to-careers-in-ai-and-machine-learning)

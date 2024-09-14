@@ -1,12 +1,12 @@
 # 可解释人工智能（XAI）和可解释增强机器（EBM）介绍
 
-> 原文：[https://www.kdnuggets.com/2021/06/explainable-ai-xai-explainable-boosting-machines-ebm.html](https://www.kdnuggets.com/2021/06/explainable-ai-xai-explainable-boosting-machines-ebm.html)
+> 原文：[`www.kdnuggets.com/2021/06/explainable-ai-xai-explainable-boosting-machines-ebm.html`](https://www.kdnuggets.com/2021/06/explainable-ai-xai-explainable-boosting-machines-ebm.html)
 
-[评论](#comments)
+评论
 
 **由 [Chaitanya Krishna Kasaraneni](https://chaitanya-kasaraneni.medium.com/)，Predmatic AI 的数据科学实习生**。
 
-![机器人](../Images/92c068288f90d97b1434d25654c75827.png)
+![机器人](img/92c068288f90d97b1434d25654c75827.png)
 
 *照片由 [Rock’n Roll Monkey](https://unsplash.com/@rocknrollmonkey?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText) 提供，来源于 [Unsplash](https://unsplash.com/s/photos/artificial-intelligence?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -22,9 +22,9 @@
 
 **可解释人工智能如何不同于人工智能？**
 
-![AI 过程 5 个问题](../Images/6eb762743cef3ed7230454c3c62cfa56.png)
+![AI 过程 5 个问题](img/6eb762743cef3ed7230454c3c62cfa56.png)
 
-![XAI 过程 5 个陈述](../Images/023db49bccdcea5df635cf0e503d679d.png)
+![XAI 过程 5 个陈述](img/023db49bccdcea5df635cf0e503d679d.png)
 
 *AI 和 XAI 之间的区别。*
 
@@ -64,7 +64,7 @@ SHAP 值适用于连续或二元目标变量的情况。
 
 变量重要性图按降序列出最重要的变量。排名靠前的变量对模型的贡献大于排名靠后的变量，因此具有较高的预测能力。有关代码，请参阅此 [笔记本](https://nbviewer.jupyter.org/github/chaitanyakasaraneni/SHAP_EBM_Examples/blob/main/SHAP%20Example.ipynb)。
 
-![](../Images/a24a19e60535025b430d3bd0c44228eb.png)
+![](img/a24a19e60535025b430d3bd0c44228eb.png)
 
 *使用 SHAP 的变量重要性图。*
 
@@ -74,7 +74,7 @@ SHAP 值适用于连续或二元目标变量的情况。
 
 SHAP 值图进一步展示了预测变量与目标变量之间的正负关系。
 
-![](../Images/358189896a588348df58aba92b190874.png)
+![](img/358189896a588348df58aba92b190874.png)
 
 *总结图。*
 
@@ -100,7 +100,7 @@ EBM 算法是 GA²M 算法的快速实现。反过来，GA²M 算法是 GAM 算�
 
 GAM 代表广义加法模型。它比逻辑回归更灵活，但仍然具有可解释性。GAM 的假设函数如下所示：
 
-![](../Images/bd07a8265307454aaf50fba70ef87f5e.png)
+![](img/bd07a8265307454aaf50fba70ef87f5e.png)
 
 需要注意的关键部分是，特征的线性项 ????ixi 现在被替换为函数 fi(xi)。稍后我们会回到如何在 EBM 中计算这个函数。
 
@@ -110,7 +110,7 @@ GAM 的一个限制是每个特征函数是独立学习的。这阻碍了模型�
 
 GA²M 旨在改善这一点。为此，它除了考虑每个特征学习到的函数外，还考虑了一些成对交互项。这不是一个容易解决的问题，因为需要考虑的交互对的数量更多，这会大幅增加计算时间。在 GA²M 中，他们使用 FAST 算法高效地选择有用的交互项。这是 GA²M 的假设函数。注意额外的成对交互项。
 
-![](../Images/4cd867d7302fdbfeb77ee56eeafa4edb.png)
+![](img/4cd867d7302fdbfeb77ee56eeafa4edb.png)
 
 通过添加成对交互项，我们得到了一个更强的模型，同时仍然保持可解释性。这是因为可以使用热图清晰地可视化两个特征在二维空间中的影响及其对输出的作用。
 
@@ -122,9 +122,9 @@ GA²M 旨在改善这一点。为此，它除了考虑每个特征学习到的�
 
 **训练 EBM**
 
-EBM训练部分使用了增强树和袋装的组合。一个好的定义可能是*袋装的增强袋装浅层树*。
+EBM 训练部分使用了增强树和袋装的组合。一个好的定义可能是*袋装的增强袋装浅层树*。
 
-浅层树以增强的方式进行训练。这些是微小的树（默认最多有3片叶子）。此外，增强过程是特定的：每棵树仅在一个特征上进行训练。在每次增强轮次中，树会逐个对每个特征进行训练。这确保了：
+浅层树以增强的方式进行训练。这些是微小的树（默认最多有 3 片叶子）。此外，增强过程是特定的：每棵树仅在一个特征上进行训练。在每次增强轮次中，树会逐个对每个特征进行训练。这确保了：
 
 +   模型是可加的。
 
@@ -144,39 +144,39 @@ EBM训练部分使用了增强树和袋装的组合。一个好的定义可能�
 
 ### 使用 Python 的 EBM
 
-我们将使用相同的[红酒质量数据](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009)来理解InterpretML。代码可以通过这个[GitHub 链接](https://github.com/chaitanyakasaraneni/SHAP_EBM_Examples)找到。
+我们将使用相同的[红酒质量数据](https://www.kaggle.com/uciml/red-wine-quality-cortez-et-al-2009)来理解 InterpretML。代码可以通过这个[GitHub 链接](https://github.com/chaitanyakasaraneni/SHAP_EBM_Examples)找到。
 
 **探索数据**
 
 “总结”中的训练数据显示了目标变量的直方图。
 
-![](../Images/dcd538236c0981bc12596139a1cc4112.png)
+![](img/dcd538236c0981bc12596139a1cc4112.png)
 
 *总结显示目标的直方图。*
 
 当选择单个特征（这里是固定酸度）时，图表显示了该特征与目标的皮尔逊相关性。同时，所选特征的直方图以蓝色显示，相对于目标变量的直方图以红色显示。
 
-![](../Images/19ea16427ab8add173778630dcc08f8b.png)
+![](img/19ea16427ab8add173778630dcc08f8b.png)
 
 *单个特征与目标对比。*
 
 **训练解释性提升机（EBM）**
 
-这里使用的是InterpretML库中的*ExplainableBoostingRegressor()*模型，采用默认超参数。*RegressionTree()*和*LinearRegression()*也被训练用于对比。
+这里使用的是 InterpretML 库中的*ExplainableBoostingRegressor()*模型，采用默认超参数。*RegressionTree()*和*LinearRegression()*也被训练用于对比。
 
-![](../Images/6b6a60ef8a3cdee9dc55d372abd4f873.png)
+![](img/6b6a60ef8a3cdee9dc55d372abd4f873.png)
 
 *解释性提升回归模型。*
 
-**解释EBM性能**
+**解释 EBM 性能**
 
-*RegressionPerf()*用于评估每个模型在测试数据上的表现。EBM的R平方值为0.37，优于线性回归和回归树模型的R平方误差。
+*RegressionPerf()*用于评估每个模型在测试数据上的表现。EBM 的 R 平方值为 0.37，优于线性回归和回归树模型的 R 平方误差。
 
-![](../Images/9e06bd3c3bac680be5d10be4bd7bfc98.png)
+![](img/9e06bd3c3bac680be5d10be4bd7bfc98.png)
 
-![](../Images/7b2b346deddab8e053b3a79928cedf19.png)
+![](img/7b2b346deddab8e053b3a79928cedf19.png)
 
-![](../Images/772a3475eb7a159a7909d1a3861b43a3.png)
+![](img/772a3475eb7a159a7909d1a3861b43a3.png)
 
 *（a）EBM，（b）线性回归，以及（c）回归树的性能。*
 
@@ -186,7 +186,7 @@ InterpretML 还提供了一个功能，可以将所有内容结合起来并生�
 
 ### 结论
 
-随着对可解释性要求的增加以及现有XAI模型的不足，选择准确性和可解释性之间的时代早已过去。EBM可以像提升树一样高效，同时又像逻辑回归一样容易解释。
+随着对可解释性要求的增加以及现有 XAI 模型的不足，选择准确性和可解释性之间的时代早已过去。EBM 可以像提升树一样高效，同时又像逻辑回归一样容易解释。
 
 [原文](https://chaitanya-kasaraneni.medium.com/understanding-xai-and-ebm-5482da5cb1d0). 经授权转载。
 
@@ -202,11 +202,11 @@ InterpretML 还提供了一个功能，可以将所有内容结合起来并生�
 
 ## 我们的三大推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 需求
 
 * * *
 

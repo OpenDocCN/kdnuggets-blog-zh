@@ -1,8 +1,8 @@
 # 将您的笔记本电脑变成一个个人分析引擎，使用 DuckDB 和 MotherDuck
 
-> 原文：[https://www.kdnuggets.com/turn-your-laptop-into-a-personal-analytics-engine-with-duckdb-and-motherduck](https://www.kdnuggets.com/turn-your-laptop-into-a-personal-analytics-engine-with-duckdb-and-motherduck)
+> 原文：[`www.kdnuggets.com/turn-your-laptop-into-a-personal-analytics-engine-with-duckdb-and-motherduck`](https://www.kdnuggets.com/turn-your-laptop-into-a-personal-analytics-engine-with-duckdb-and-motherduck)
 
-![将您的笔记本电脑变成一个个人分析引擎，使用 DuckDB 和 MotherDuck](../Images/dab672c2defb0da74ca87ccc8f5b6b4c.png)
+![将您的笔记本电脑变成一个个人分析引擎，使用 DuckDB 和 MotherDuck](img/dab672c2defb0da74ca87ccc8f5b6b4c.png)
 
 图像由 DALL-E 生成
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -56,11 +56,11 @@ GROUP BY job_title
 ORDER BY job_title
 ```
 
-![将你的笔记本电脑转变为个人分析引擎，使用 DuckDB 和 MotherDuck](../Images/4aa1cc96d5c0b1fc3502fa59a49547af.png)
+![将你的笔记本电脑转变为个人分析引擎，使用 DuckDB 和 MotherDuck](img/4aa1cc96d5c0b1fc3502fa59a49547af.png)
 
 你可以在单元格中执行查询，表格结果将类似于下图所示。
 
-![将你的笔记本电脑转变为个人分析引擎，使用 DuckDB 和 MotherDuck](../Images/609a640c93a5f33fb63e385349de723d.png)
+![将你的笔记本电脑转变为个人分析引擎，使用 DuckDB 和 MotherDuck](img/609a640c93a5f33fb63e385349de723d.png)
 
 你可以过滤数据、透视表格，或使用 UI 中的选择按钮下载结果。
 
@@ -159,14 +159,14 @@ DuckDB 是一个开源数据库系统，专门为数据分析而开发。该系�
 
 ### 更多相关内容
 
-+   [构建视觉搜索引擎 - 第2部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
++   [构建视觉搜索引擎 - 第二部分：搜索引擎](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-2.html)
 
-+   [为什么DuckDB越来越受欢迎？](https://www.kdnuggets.com/2023/07/duckdb-getting-popular.html)
++   [为什么 DuckDB 越来越受欢迎？](https://www.kdnuggets.com/2023/07/duckdb-getting-popular.html)
 
-+   [通过openplayground轻松探索笔记本电脑上的LLMs](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)
++   [通过 openplayground 轻松探索笔记本电脑上的 LLMs](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)
 
-+   [在笔记本电脑上使用LLMs的5种方法](https://www.kdnuggets.com/5-ways-to-use-llms-on-your-laptop)
++   [在笔记本电脑上使用 LLMs 的 5 种方法](https://www.kdnuggets.com/5-ways-to-use-llms-on-your-laptop)
 
-+   [Inflection-1：个人AI的下一前沿](https://www.kdnuggets.com/2023/08/inflection1-next-frontier-personal-ai.html)
++   [Inflection-1：个人 AI 的下一前沿](https://www.kdnuggets.com/2023/08/inflection1-next-frontier-personal-ai.html)
 
-+   [通过Uplimit的“搜索与机器学习”课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)
++   [通过 Uplimit 的“搜索与机器学习”课程提升你的搜索引擎技能！](https://www.kdnuggets.com/2023/10/uplimit-elevate-your-search-engine-skills-search-with-ml-course)

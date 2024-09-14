@@ -1,10 +1,10 @@
 # 为什么你不应该成为数据科学通才
 
-> 原文：[https://www.kdnuggets.com/2018/12/why-shouldnt-data-science-generalist.html](https://www.kdnuggets.com/2018/12/why-shouldnt-data-science-generalist.html)
+> 原文：[`www.kdnuggets.com/2018/12/why-shouldnt-data-science-generalist.html`](https://www.kdnuggets.com/2018/12/why-shouldnt-data-science-generalist.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-![Header image](../Images/4864534e81709d1c88adcbe1c5d2200f.png)
+![Header image](img/4864534e81709d1c88adcbe1c5d2200f.png)
 
 我在一个[data science mentorship startup](http://sharpestminds.com/)工作，我发现有一个建议我一再给有抱负的学员。这实际上是我没有预料到的。
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -106,7 +106,7 @@
 
 考虑一下你希望帮助公司建立什么样的价值，并在提供这种价值方面做到出色。这比其他任何事情更能帮助你获得机会。
 
-哦，如果你想聊天，可以随时在Twitter上私信我[@**jeremiecharris**](https://twitter.com/jeremiecharris)！
+哦，如果你想聊天，可以随时在 Twitter 上私信我[@**jeremiecharris**](https://twitter.com/jeremiecharris)！
 
 **简介**： [Jeremie Harris](https://twitter.com/jeremiecharris) 是 [@SharpestMindsAI](https://twitter.com/SharpestMindsAI) 的联合创始人，对物理学、机器学习、哲学和初创公司充满兴趣。
 
@@ -114,22 +114,22 @@
 
 **相关内容：**
 
-+   [要想成为数据科学家，别随大流](/2018/11/get-hired-as-data-scientist.html)
++   要想成为数据科学家，别随大流
 
-+   [大数据和数据科学中的5种职业路径，详解](/2017/02/5-career-paths-data-science-big-data-explained.html)
++   大数据和数据科学中的 5 种职业路径，详解
 
-+   [你应该成为数据科学家吗？](/2018/12/should-i-become-a-data-scientist.html)
++   你应该成为数据科学家吗？
 
 ### 更多相关主题
 
 +   [建立一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [7个你不应该成为数据科学家的理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
++   [7 个你不应该成为数据科学家的理由](https://www.kdnuggets.com/7-reasons-why-you-shouldnt-become-a-data-scientist)
 
-+   [你不应该使用机器学习的4个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
++   [你不应该使用机器学习的 4 个理由](https://www.kdnuggets.com/2021/12/4-reasons-shouldnt-machine-learning.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目的，并找到目的后再……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

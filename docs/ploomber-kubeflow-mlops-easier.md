@@ -1,6 +1,6 @@
 # Ploomber 与 Kubeflow：让 MLOps 更简单
 
-> 原文：[https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
+> 原文：[`www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html`](https://www.kdnuggets.com/2022/02/ploomber-kubeflow-mlops-easier.html)
 
 在这篇简短的文章中，我将尝试总结 MLops 工具[Ploomber](https://ploomber.io/)和[Kubeflow](http://kubeflow.org)之间的主要区别。我们将讨论 Ploomber、Kubeflow 管道的背景信息，以及为什么我们需要这些工具来让我们的生活更轻松。
 
@@ -20,7 +20,7 @@
 
 通常，当一个组织拥有数据并希望从中产生见解或预测（以推动业务结果）时，他们会聘请数据科学家或机器学习工程师来探索数据、准备数据并生成模型。这 3 项任务随后可以统一成一个数据管道，其中包括相关的任务：获取数据、清洗数据和训练模型。这种架构对数据管道来说相当基础，我们将为每个任务设定输入和输出，这就是定义管道内依赖关系的方式。
 
-![Ploomber vs Kubeflow：让 MLOps 更简单](../Images/5d2d12756e30ab30e9acc55f3f888075.png)
+![Ploomber vs Kubeflow：让 MLOps 更简单](img/5d2d12756e30ab30e9acc55f3f888075.png)
 
 **ML-Basic 架构**：我们运行的所有任务的示例（获取数据、工程化特征、合并数据），以适应我们的模型。（我发现用图表来解释要比深入代码更容易，“一图胜千言”）
 
@@ -46,7 +46,7 @@
 
 由于 Kubeflow（或者至少是我运行的 MiniKF）运行在云集群上，并且代码在容器内运行，因此调试和测试代码相当困难。我在他们的文档中找不到如何登录到容器并开始调试会话的说明。这使得测试代码非常困难。除此之外，由于无法登录到运行环境中查看当前的数据帧和不同的工件，因此几乎不可能重现每次运行。另一方面，在 Ploomber 中，不仅可以立即开始调试会话，而且还可以登录到你的 Docker 容器中，了解依赖关系。当代码是模块化的时，测试起来要容易得多，你不需要等待整个管道运行完成。
 
-![Ploomber vs Kubeflow: Making MLOps Easier](../Images/ac2ace82ae0465d2664ca4defef26b4d.png)
+![Ploomber vs Kubeflow: Making MLOps Easier](img/ac2ace82ae0465d2664ca4defef26b4d.png)
 
 在 Jupyter 实例内部的交互式会话示例中，查看 dag 及其任务与远程运行的黑箱相比。
 
@@ -66,11 +66,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
@@ -84,6 +84,6 @@
 
 +   [数据质量在成功构建机器学习模型中的重要性](https://www.kdnuggets.com/2022/03/significance-data-quality-making-successful-machine-learning-model.html)
 
-+   [让智能文档处理更智能：第 1 部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
++   [让智能文档处理更智能：第一部分](https://www.kdnuggets.com/2023/02/making-intelligent-document-processing-smarter-part-1.html)
 
 +   [从数据分析师到数据策略师：如何通过职业生涯产生影响](https://www.kdnuggets.com/2023/05/data-analyst-data-strategist-career-path-making-impact.html)

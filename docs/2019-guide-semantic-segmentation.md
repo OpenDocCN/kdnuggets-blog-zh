@@ -1,8 +1,8 @@
 # 2019 年语义分割指南
 
-> 原文：[https://www.kdnuggets.com/2019/08/2019-guide-semantic-segmentation.html/2](https://www.kdnuggets.com/2019/08/2019-guide-semantic-segmentation.html/2)
+> 原文：[`www.kdnuggets.com/2019/08/2019-guide-semantic-segmentation.html/2`](https://www.kdnuggets.com/2019/08/2019-guide-semantic-segmentation.html/2)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](https://www.kdnuggets.com/2019/08/2019-guide-semantic-segmentation.html?page=2#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) [评论](https://www.kdnuggets.com/2019/08/2019-guide-semantic-segmentation.html?page=2#comments)
 
 ### 多尺度上下文聚合通过空洞卷积（ICLR, 2016）
 
@@ -14,13 +14,13 @@
 
 该模块在 Pascal VOC 2012 数据集上进行了测试。结果证明，向现有的语义分割架构中添加上下文模块可以提高它们的准确性。
 
-![Figure](../Images/7b31b59519ee3e707e8990ce830359c1.png)
+![Figure](img/7b31b59519ee3e707e8990ce830359c1.png)
 
 [来源](https://arxiv.org/abs/1511.07122)
 
 在实验中训练的前端模块在 VOC-2012 验证集上达到了 69.8% 的平均 IoU，在测试集上达到了 71.3% 的平均 IoU。该模型在不同物体上的预测准确性如下所示
 
-![Figure](../Images/69426a7b1e59ea33190b47e6bbf40b28.png)
+![Figure](img/69426a7b1e59ea33190b47e6bbf40b28.png)
 
 [来源](https://arxiv.org/abs/1511.07122)
 
@@ -40,7 +40,7 @@
 
 论文提出的 DeepLab 系统在 PASCAL VOC-2012 语义图像分割任务中达到了 79.7% 的 mIOU。
 
-![Figure](../Images/01f79fab4b9e140c47232232a501d9ac.png)
+![Figure](img/01f79fab4b9e140c47232232a501d9ac.png)
 
 [来源](https://arxiv.org/abs/1606.00915)
 
@@ -52,13 +52,13 @@
 
 +   由于 DCNN 的不变性导致的定位准确度降低，因为以物体为中心的分类器需要对空间变换具有不变性。
 
-![图](../Images/0b565a8a78333d41537f308caabde165.png)
+![图](img/0b565a8a78333d41537f308caabde165.png)
 
 [来源](https://arxiv.org/abs/1606.00915)
 
-Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀疏地采样输入特征图。第二种方法涉及将输入特征图按 atrous 卷积率 r 进行子采样，并对其进行解交错以生成 r^2 分辨率降低的图像，每个图像对应 r×r 的可能偏移。之后，对立即特征图应用标准卷积，将其与图像的原始分辨率进行交错。
+Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀疏地采样输入特征图。第二种方法涉及将输入特征图按 atrous 卷积率 r 进行子采样，并对其进行解交错以生成 r² 分辨率降低的图像，每个图像对应 r×r 的可能偏移。之后，对立即特征图应用标准卷积，将其与图像的原始分辨率进行交错。
 
-![图](../Images/378c73a5645fb156805f9e89ebeb46e4.png)
+![图](img/378c73a5645fb156805f9e89ebeb46e4.png)
 
 [来源](https://arxiv.org/abs/1606.00915)
 
@@ -72,13 +72,13 @@ Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀�
 
 为了解决第一个问题，论文建议使用 atrous 卷积，也称为扩张卷积。它提出使用 atrous 卷积来解决第二个问题，以扩大视野范围，从而包含多尺度上下文。
 
-![图](../Images/3c33eb86cdc88eede6b9bd18d33b2e50.png)
+![图](img/3c33eb86cdc88eede6b9bd18d33b2e50.png)
 
 [来源](https://arxiv.org/pdf/1706.05587.pdf)
 
 论文中的“DeepLabv3”在 PASCAL VOC 2012 测试集上取得了 85.7% 的表现，无需 DenseCRF 后处理。
 
-![图](../Images/e2214bef39b3eb6d6164ee06edb8551d.png)
+![图](img/e2214bef39b3eb6d6164ee06edb8551d.png)
 
 [来源](https://arxiv.org/pdf/1706.05587.pdf)
 
@@ -90,13 +90,13 @@ Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀�
 
 *???? 在 PASCAL VOC 2012 上的语义分割 SOTA (平均 IoU 评估指标)*
 
-![图](../Images/bb5dce103215c636b6e086a85413794f.png)
+![图](img/bb5dce103215c636b6e086a85413794f.png)
 
 [来源](https://arxiv.org/pdf/1802.02611v3.pdf)
 
 论文实现了两种使用空间金字塔池化模块进行语义分割的神经网络。一种通过在不同分辨率下池化特征来捕捉上下文信息，而另一种则获得清晰的对象边界。
 
-![图](../Images/2d03bc0ce0b093742ea7c906dc1fc8f7.png)
+![图](img/2d03bc0ce0b093742ea7c906dc1fc8f7.png)
 
 [来源](https://arxiv.org/pdf/1802.02611v3.pdf)
 
@@ -106,17 +106,17 @@ Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀�
 
 [**Papers With Code : FastFCN: 重新思考语义分割骨干中的膨胀卷积**](https://paperswithcode.com/paper/fastfcn-rethinking-dilated-convolution-in-the?source=post_page---------------------------)
 
-*???? PASCAL Context上的语义分割SOTA（mIoU指标）*
+*???? PASCAL Context 上的语义分割 SOTA（mIoU 指标）*
 
-该方法在Pascal Context数据集上实现了53.13%的mIoU性能，并且运行速度快了3倍。
+该方法在 Pascal Context 数据集上实现了 53.13%的 mIoU 性能，并且运行速度快了 3 倍。
 
-![图示](../Images/e0703ffa8618c145755c0fc9dab0e42d.png)
+![图示](img/e0703ffa8618c145755c0fc9dab0e42d.png)
 
 [源文档](https://arxiv.org/pdf/1903.11816v1.pdf)
 
-该方法将全连接网络（FCN）作为骨干，同时应用JPU对低分辨率的最终特征图进行上采样，从而生成高分辨率的特征图。用JPU替代膨胀卷积不会导致性能损失。
+该方法将全连接网络（FCN）作为骨干，同时应用 JPU 对低分辨率的最终特征图进行上采样，从而生成高分辨率的特征图。用 JPU 替代膨胀卷积不会导致性能损失。
 
-![图示](../Images/410cb503d4162b164e84717edb16b04a.png)
+![图示](img/410cb503d4162b164e84717edb16b04a.png)
 
 [源文档](https://arxiv.org/pdf/1903.11816v1.pdf)
 
@@ -128,15 +128,15 @@ Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀�
 
 [**Papers With Code : 通过视频传播和标签松弛改进语义分割**](https://paperswithcode.com/paper/improving-semantic-segmentation-via-video?source=post_page---------------------------)
 
-*???? Cityscapes上的语义分割SOTA（平均IoU指标）*
+*???? Cityscapes 上的语义分割 SOTA（平均 IoU 指标）*
 
-![图示](../Images/4deeb32092f38d2a5da84d20ff655615.png)
+![图示](img/4deeb32092f38d2a5da84d20ff655615.png)
 
 [源文档](https://arxiv.org/pdf/1812.01593v3.pdf)
 
-论文表明，在合成数据集上训练分割网络可以提高预测准确性。本文提出的方法在 [Cityscapes](https://www.cityscapes-dataset.com/) 上实现了83.5%的mIoU，在 [CamVid](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/) 上实现了82.9%的mIoU。
+论文表明，在合成数据集上训练分割网络可以提高预测准确性。本文提出的方法在 [Cityscapes](https://www.cityscapes-dataset.com/) 上实现了 83.5%的 mIoU，在 [CamVid](http://mi.eng.cam.ac.uk/research/projects/VideoRec/CamVid/) 上实现了 82.9%的 mIoU。
 
-![图示](../Images/7cf5ebc3ee5d35ffef467de891ea805c.png)
+![图示](img/7cf5ebc3ee5d35ffef467de891ea805c.png)
 
 [源文档](https://arxiv.org/pdf/1812.01593v3.pdf)
 
@@ -148,27 +148,27 @@ Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀�
 
 论文有三个主要建议：利用视频预测模型将标签传播到相邻帧，引入联合图像-标签传播来解决对齐问题，以及通过最大化边界上类别概率的联合可能性来放宽单热标签训练。
 
-![图示](../Images/d6168cf5a46fda0f9565c98783d0acd6.png)
+![图示](img/d6168cf5a46fda0f9565c98783d0acd6.png)
 
 [来源](https://arxiv.org/pdf/1812.01593v3.pdf)
 
-### Gated-SCNN: 用于语义分割的门控形状CNN（2019）
+### Gated-SCNN: 用于语义分割的门控形状 CNN（2019）
 
-这篇论文是语义分割领域的新星。作者提出了一种双流CNN架构。在这个架构中，形状信息作为一个单独的分支处理。这个形状流只处理与边界相关的信息。这由模型的门控卷积层（GCL）和局部监督来强制执行。
+这篇论文是语义分割领域的新星。作者提出了一种双流 CNN 架构。在这个架构中，形状信息作为一个单独的分支处理。这个形状流只处理与边界相关的信息。这由模型的门控卷积层（GCL）和局部监督来强制执行。
 
-[**Gated-SCNN: 用于语义分割的门控形状CNN**](https://arxiv.org/abs/1907.05740?source=post_page---------------------------)
+[**Gated-SCNN: 用于语义分割的门控形状 CNN**](https://arxiv.org/abs/1907.05740?source=post_page---------------------------)
 
 *当前最先进的图像分割方法形成了一个密集的图像表示，其中包括颜色、形状等...*
 
-![图示](../Images/e0c0fa9198af1bb5c32cd5ac5e5f2c1f.png)
+![图示](img/e0c0fa9198af1bb5c32cd5ac5e5f2c1f.png)
 
 [来源](https://arxiv.org/abs/1907.05740)
 
-该模型在mIoU上比DeepLab-v3+提高了1.5%，在F-boundary分数上提高了4%。该模型已使用Cityscapes基准进行评估。在较小和较薄的物体上，该模型在IoU上提高了7%。
+该模型在 mIoU 上比 DeepLab-v3+提高了 1.5%，在 F-boundary 分数上提高了 4%。该模型已使用 Cityscapes 基准进行评估。在较小和较薄的物体上，该模型在 IoU 上提高了 7%。
 
-下表展示了Gated-SCNN与其他模型的性能比较。
+下表展示了 Gated-SCNN 与其他模型的性能比较。
 
-![图示](../Images/bab352e5f44b2d7a50f1d9f0aac5364f.png)
+![图示](img/bab352e5f44b2d7a50f1d9f0aac5364f.png)
 
 [来源](https://arxiv.org/abs/1907.05740)
 
@@ -178,27 +178,27 @@ Atrous 卷积的应用包括通过插入零进行滤波器的上采样，或稀�
 
 上述论文/摘要也包含了其代码实现的链接。我们很乐意看到你在测试后获得的结果。
 
-**简介： [德里克·穆伊提](https://derrickmwiti.com/)** 是数据分析师、作家和导师。他致力于在每项任务中取得出色成果，并且是Lapid Leaders Africa的导师。
+**简介： [德里克·穆伊提](https://derrickmwiti.com/)** 是数据分析师、作家和导师。他致力于在每项任务中取得出色成果，并且是 Lapid Leaders Africa 的导师。
 
 [原文](https://heartbeat.fritz.ai/a-2019-guide-to-semantic-segmentation-ca8242f5a7fc)。已获得许可转载。
 
 **相关：**
 
-+   [2019年目标检测指南](/2019/08/2019-guide-object-detection.html)
++   2019 年目标检测指南
 
-+   [使用Luminoth进行目标检测](/2019/03/object-detection-luminoth.html)
++   使用 Luminoth 进行目标检测
 
-+   [Python中的自动化机器学习](/2019/01/automated-machine-learning-python.html)
++   Python 中的自动化机器学习
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 事务
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 事务
 
 * * *
 

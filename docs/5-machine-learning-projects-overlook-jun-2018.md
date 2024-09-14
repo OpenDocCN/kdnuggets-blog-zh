@@ -1,8 +1,8 @@
 # 不容错过的 5 个机器学习项目，2018 年 6 月
 
-> 原文：[https://www.kdnuggets.com/2018/06/5-machine-learning-projects-overlook-jun-2018.html](https://www.kdnuggets.com/2018/06/5-machine-learning-projects-overlook-jun-2018.html)
+> 原文：[`www.kdnuggets.com/2018/06/5-machine-learning-projects-overlook-jun-2018.html`](https://www.kdnuggets.com/2018/06/5-machine-learning-projects-overlook-jun-2018.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 我们回来了。又一次。“Overlook...” 的帖子已经沉寂了几个月，但不用担心，这里有另一篇文章。我们继续着这个谦逊的任务，将强大的、不太为人知的机器学习项目展示给更多的眼睛。
 
@@ -12,7 +12,7 @@
 
 **1\. [实时损失图](https://github.com/stared/livelossplot/)**
 
-![图片](../Images/aeddfc89eda81fedaa3556dbfe935af9.png)
+![图片](img/aeddfc89eda81fedaa3556dbfe935af9.png)
 
 > 不要盲目训练深度学习模型！要有耐心，查看你训练的每个周期！
 > 
@@ -39,7 +39,7 @@ model.fit(X_train, Y_train,
 > 
 > 导入后，你可以自由使用 bestFit() 或其他函数。
 
-![图片](../Images/6703a06d02126df5b83ae419d3e4faa9.png)
+![图片](img/6703a06d02126df5b83ae419d3e4faa9.png)
 
 一个代码示例：
 
@@ -77,7 +77,7 @@ Yellowbrick 是“用于机器学习模型选择的视觉分析和诊断工具�
 
 > Yellowbrick 是一套被称为“可视化工具”的视觉诊断工具，它扩展了 scikit-learn API，以允许人工引导模型选择过程。简而言之，Yellowbrick 将 scikit-learn 与 matplotlib 结合在一起，延续了 scikit-learn 文档的最佳传统，但用于生成模型的可视化！
 
-![图片](../Images/7b7e19ec86cf290544af2130d0e3262c.png)
+![图片](img/7b7e19ec86cf290544af2130d0e3262c.png)
 
 查看 Github 仓库中的示例，以及 [文档以获取更多信息](http://www.scikit-yb.org/en/latest/)。
 
@@ -111,7 +111,7 @@ textgen.generate()
 
 ```
 
-![Image](../Images/3a6f3be912e5a4539fd928aa037c9849.png)
+![Image](img/3a6f3be912e5a4539fd928aa037c9849.png)
 
 你可以在上述链接的 Github 仓库中找到更多信息和示例。
 
@@ -137,21 +137,21 @@ Github 仓库里充满了更多信息，包括使用这个简化的预训练词�
 
 **相关**：
 
-+   [5 个你不应忽视的机器学习项目，2018年2月](/2018/02/5-machine-learning-projects-overlook-feb-2018.html)
++   5 个你不应忽视的机器学习项目，2018 年 2 月
 
-+   [5 个你再也不能忽视的机器学习项目](/2016/05/five-machine-learning-projects-cant-overlook.html)
++   5 个你再也不能忽视的机器学习项目
 
-+   [5 个你再也不能忽视的机器学习项目（续）](/2016/06/five-more-machine-learning-projects-cant-overlook.html)
++   5 个你再也不能忽视的机器学习项目（续）
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 
@@ -163,8 +163,8 @@ Github 仓库里充满了更多信息，包括使用这个简化的预训练词�
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [一个90亿美元的AI失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败，探讨](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功的数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功的数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么使Python成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

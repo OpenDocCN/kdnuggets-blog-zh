@@ -1,8 +1,8 @@
 # 数据科学免费课程完整合集 – 第二部分
 
-> 原文：[https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html)
+> 原文：[`www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html`](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html)
 
-![数据科学免费课程完整合集 - 第二部分](../Images/a81001a3c80d3dcc9ec42b4557e7033a.png)
+![数据科学免费课程完整合集 - 第二部分](img/a81001a3c80d3dcc9ec42b4557e7033a.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -100,9 +100,9 @@ DALLE.2 和 Stable Diffusion 2.0 是生成算法，它们结合了计算机视�
 
 第二部分中的一些课程确实是瑰宝。如果问我，它们比付费课程还要好。这些课程旨在让你为现代世界做好准备。你将学习最新的算法、技术、软件和技术。
 
-我强烈推荐你参加DataTalksClub和fast.ai课程，开始你的机器学习和数据工程职业生涯。
+我强烈推荐你参加 DataTalksClub 和 fast.ai 课程，开始你的机器学习和数据工程职业生涯。
 
-在第二部分中，我们查看了关于机器学习、深度学习、计算机视觉、自然语言处理、数据工程和MLOps的顶级免费课程。
+在第二部分中，我们查看了关于机器学习、深度学习、计算机视觉、自然语言处理、数据工程和 MLOps 的顶级免费课程。
 
 希望你喜欢我的列表，如果你有免费课程建议，请在评论区写下。谢谢。
 
@@ -122,30 +122,30 @@ DALLE.2 和 Stable Diffusion 2.0 是生成算法，它们结合了计算机视�
 
 1.  时间序列
 
-**这是该系列的第6版，查看：**
+**这是该系列的第 6 版，查看：**
 
-1.  数据科学备忘单完整合集 – [第1部分](/2022/02/complete-collection-data-science-cheat-sheets-part-1.html) 和 [第2部分](/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
+1.  数据科学备忘单完整合集 – 第一部分 和 第二部分
 
-1.  数据库完整合集 – [第1部分](/2022/04/complete-collection-data-repositories-part-1.html) 和 [第2部分](/2022/04/complete-collection-data-repositories-part-2.html)
+1.  数据库完整合集 – 第一部分 和 第二部分
 
-1.  数据科学书籍完整合集 – [第1部分](/2022/05/complete-collection-data-science-books-part-1.html) 和 [第2部分](/2022/05/complete-collection-data-science-books-part-2.html)
+1.  数据科学书籍完整合集 – 第一部分 和 第二部分
 
-1.  数据科学面试完整合集 – [第1部分](/2022/06/complete-collection-data-science-interviews-part-1.html) 和 [第2部分](/2022/06/complete-collection-data-science-interviews-part-2.html)
+1.  数据科学面试完整合集 – 第一部分 和 第二部分
 
-数据科学项目完整合集 – [第1部分](/2022/08/complete-collection-data-science-projects-part-1.html) 和 [第2部分](/2022/08/complete-collection-data-science-projects-part-2.html)
+数据科学项目完整合集 – 第一部分 和 第二部分
 
-**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为挣扎于心理疾病的学生构建一个AI产品。
+**[Abid Ali Awan](https://www.polywork.com/kingabzpro)** ([@1abidaliawan](https://twitter.com/1abidaliawan)) 是一位认证的数据科学专业人士，喜欢构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是利用图神经网络为挣扎于心理疾病的学生构建一个 AI 产品。
 
 ### 更多相关话题
 
-+   [KDnuggets新闻，4月6日：8门免费MIT课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 课程学习数据科学…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学免费课程完整合集 - 第1部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-1.html)
++   [数据科学免费课程完整合集 - 第一部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-1.html)
 
-+   [数据科学速查表完整合集 - 第1部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学速查表完整合集 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [数据科学速查表完整合集 - 第2部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学速查表完整合集 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [数据科学书籍完整合集 - 第1部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
++   [数据科学书籍完整合集 - 第一部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
 
-+   [数据科学书籍完整合集 - 第2部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
++   [数据科学书籍完整合集 - 第二部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)

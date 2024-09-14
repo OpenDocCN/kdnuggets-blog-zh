@@ -1,8 +1,8 @@
 # 使用 Scikit-learn 的 5 个步骤入门
 
-> 原文：[https://www.kdnuggets.com/5-steps-getting-started-scikit-learn](https://www.kdnuggets.com/5-steps-getting-started-scikit-learn)
+> 原文：[`www.kdnuggets.com/5-steps-getting-started-scikit-learn`](https://www.kdnuggets.com/5-steps-getting-started-scikit-learn)
 
-![使用 Scikit-learn 的 5 个步骤入门](../Images/1d3ecbf678f59808a4d9eb7d90d3f39b.png)
+![使用 Scikit-learn 的 5 个步骤入门](img/1d3ecbf678f59808a4d9eb7d90d3f39b.png)
 
 # Scikit-learn 简介
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -83,7 +83,7 @@ digits = datasets.load_digits()
 
 数字数据集包含手写数字的图像及其标签。我们可以利用这些示例数据集来熟悉 Scikit-learn，然后再转向实际数据。
 
-# 第2步：数据预处理
+# 第 2 步：数据预处理
 
 ## 数据预处理的重要性
 

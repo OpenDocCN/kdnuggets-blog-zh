@@ -1,10 +1,10 @@
-# A/B 测试：数据科学面试中的 7 个常见问题及答案（第 2 部分）
+# A/B 测试：数据科学面试中的 7 个常见问题及答案（第二部分）
 
-> 原文：[https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html](https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html)
+> 原文：[`www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html`](https://www.kdnuggets.com/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-2.html)
 
-[评论](#comments)
+评论
 
-**注意**：这是本文的第二部分。你可以在 [这里](/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-1.html) 阅读第一部分。
+**注意**：这是本文的第二部分。你可以在 这里 阅读第一部分。
 
 ### 分析测试结果
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
-![](../Images/ba0fb626475d727e8ad4e9abf3d7b835.png)
+![](img/ba0fb626475d727e8ad4e9abf3d7b835.png)
 
 图片由 [Scott Graham](https://unsplash.com/@sctgrhm?utm_source=medium&utm_medium=referral) 提供，来自 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -58,11 +58,11 @@ Pr(FP >= 1) = 1 — Pr(FP = 0) = 0.143
 
 FDR = E[# 的虚假正例 / # 的拒绝]
 
-这衡量了所有原假设的拒绝，即所有声明具有统计显著差异的指标。实际存在差异的有多少，与假阳性的有多少。这仅在你有**大量的指标**时才有意义，比如几百个。假设我们有200个指标，并将FDR上限设为0.05。这意味着我们接受5%的假阳性。我们将在这200个指标中每次观察到至少10个假阳性。
+这衡量了所有原假设的拒绝，即所有声明具有统计显著差异的指标。实际存在差异的有多少，与假阳性的有多少。这仅在你有**大量的指标**时才有意义，比如几百个。假设我们有 200 个指标，并将 FDR 上限设为 0.05。这意味着我们接受 5%的假阳性。我们将在这 200 个指标中每次观察到至少 10 个假阳性。
 
 ### 做决策
 
-![](../Images/383fec710c8c2560b462536873c210b6.png)
+![](img/383fec710c8c2560b462536873c210b6.png)
 
 照片由 [You X Ventures](https://unsplash.com/@youxventures?utm_source=medium&utm_medium=referral) 提供，发布在 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -76,23 +76,23 @@ FDR = E[# 的虚假正例 / # 的拒绝]
 
 ### 资源
 
-最后，我想推荐两个资源，帮助你更好地了解A/B测试。
+最后，我想推荐两个资源，帮助你更好地了解 A/B 测试。
 
-+   [Udacity的免费A/B测试课程](https://www.udacity.com/course/ab-testing--ud257) 涵盖了A/B测试的所有基础知识。
++   [Udacity 的免费 A/B 测试课程](https://www.udacity.com/course/ab-testing--ud257) 涵盖了 A/B 测试的所有基础知识。
 
-+   [值得信赖的在线对照实验——A/B测试实用指南](https://www.amazon.com/Trustworthy-Online-Controlled-Experiments-Practical/dp/1108724264) 由Ron Kohavi、Diane Tang和Ya Xu编写。它深入探讨了如何在行业中进行A/B测试、潜在的陷阱以及解决方案。书中包含了许多有用的内容，所以我实际上计划写一篇文章总结这本书的内容。如果你感兴趣，请继续关注！
++   [值得信赖的在线对照实验——A/B 测试实用指南](https://www.amazon.com/Trustworthy-Online-Controlled-Experiments-Practical/dp/1108724264) 由 Ron Kohavi、Diane Tang 和 Ya Xu 编写。它深入探讨了如何在行业中进行 A/B 测试、潜在的陷阱以及解决方案。书中包含了许多有用的内容，所以我实际上计划写一篇文章总结这本书的内容。如果你感兴趣，请继续关注！
 
-**简介: [Emma Ding](https://www.youtube.com/c/DataInterviewPro)** 是Airbnb的数据科学家和软件工程师。
+**简介: [Emma Ding](https://www.youtube.com/c/DataInterviewPro)** 是 Airbnb 的数据科学家和软件工程师。
 
 [原文](https://medium.com/@emmading/48df1844ae4c) 已获得许可重新发布。
 
 **相关：**
 
-+   [A/B测试：数据科学面试中的7个常见问题与答案，第1部分](/2021/04/ab-testing-7-common-questions-answers-data-science-interviews-1.html)
++   A/B 测试：数据科学面试中的 7 个常见问题与答案，第一部分
 
-+   [关于 A/B 测试的 5 件事](/2018/09/5-things-know-about-ab-testing.html)
++   关于 A/B 测试的 5 件事
 
-+   [如何获得数据科学面试机会：寻找工作、联系关卡人员以及获取推荐](/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html)
++   如何获得数据科学面试机会：寻找工作、联系关卡人员以及获取推荐
 
 ### 了解更多相关话题
 

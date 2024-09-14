@@ -1,34 +1,34 @@
 # 5 件你需要知道的关于机器学习的事
 
-> 原文：[https://www.kdnuggets.com/2018/03/5-things-know-about-machine-learning.html](https://www.kdnuggets.com/2018/03/5-things-know-about-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2018/03/5-things-know-about-machine-learning.html`](https://www.kdnuggets.com/2018/03/5-things-know-about-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-在任何快速发展的领域总有新的东西可以学习，机器学习也不例外。这篇文章将指出5件你可能不知道的、可能不曾意识到的，或曾经知道但现在已忘记的关于机器学习的事。
+在任何快速发展的领域总有新的东西可以学习，机器学习也不例外。这篇文章将指出 5 件你可能不知道的、可能不曾意识到的，或曾经知道但现在已忘记的关于机器学习的事。
 
-请注意，这篇文章的标题不是“最重要的5件事...”或“关于机器学习的前5件事...”；它*只是*“5件事”。这不是权威或详尽的，而是5件可能有用的事情的集合。
-
-* * *
-
-## 我们的前3个课程推荐
-
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
-
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
-
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT工作
+请注意，这篇文章的标题不是“最重要的 5 件事...”或“关于机器学习的前 5 件事...”；它*只是*“5 件事”。这不是权威或详尽的，而是 5 件可能有用的事情的集合。
 
 * * *
 
-### 1\. 数据准备占机器学习的80%，所以...
+## 我们的前 3 个课程推荐
+
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 工作
+
+* * *
+
+### 1\. 数据准备占机器学习的 80%，所以...
 
 数据准备在机器学习任务中确实占用了不成比例的时间。或者说，**看起来**占用了不成比例的时间。
 
 在这些讨论中，除了执行数据准备的具体细节和其重要性原因外，常常缺乏的是*为什么你应该关心数据准备*。我指的不仅仅是为了获得合规的数据，而更像是哲学上的讨论，为什么你应该接受数据准备。活在数据准备中，与数据准备融为一体。
 
-![CRISP-DM中的数据准备](../Images/46d01de23b57f7116bef588b1995aa70.png)
+![CRISP-DM 中的数据准备](img/46d01de23b57f7116bef588b1995aa70.png)
 
-在[CRISP-DM模型](https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining)中的数据准备。
+在[CRISP-DM 模型](https://en.wikipedia.org/wiki/Cross_Industry_Standard_Process_for_Data_Mining)中的数据准备。
 
 我能想到的一些最佳机器学习建议是，因为你最终注定会花费大量时间准备数据以迎接大场面，所以决心成为最优秀的数据准备专业人士是一个相当不错的目标。由于这不仅耗时且对后续步骤（垃圾进，垃圾出）极为重要，拥有一个出色的数据准备者的声誉也不会是世界上最糟糕的事情。
 
@@ -36,9 +36,9 @@
 
 若要获取更多关于数据准备的实用见解，可以从以下几个地方开始：
 
-+   [掌握 Python 数据准备的 7 个步骤](/2017/06/7-steps-mastering-data-preparation-python.html)
++   掌握 Python 数据准备的 7 个步骤
 
-+   [从零开始的 Python 机器学习工作流 第 1 部分：数据准备](/2017/05/machine-learning-workflows-python-scratch-part-1.html)
++   从零开始的 Python 机器学习工作流 第一部分：数据准备
 
 ### 2\. 性能基准的价值
 
@@ -66,7 +66,7 @@
 
 当我们构建机器学习模型时，我们使用 *训练数据* 进行训练。当我们测试结果模型时，我们使用 *测试数据*。那么验证在哪里呢？
 
-[Rachel Thomas](https://twitter.com/math_rachel) 在 [fast.ai](http://www.fast.ai/) 最近写了一篇关于 [如何及为何创建良好验证集]( /2017/11/create-good-validation-set.html) 的深入文章。在其中，她介绍了这三种数据类型：
+[Rachel Thomas](https://twitter.com/math_rachel) 在 [fast.ai](http://www.fast.ai/) 最近写了一篇关于 如何及为何创建良好验证集 的深入文章。在其中，她介绍了这三种数据类型：
 
 > +   训练集用于训练给定模型
 > +   
@@ -74,7 +74,7 @@
 > +   
 > +   测试集告诉你你的表现如何。如果你尝试了很多不同的模型，你可能会偶然间得到一个在验证集上表现良好的模型，而有一个测试集有助于确保这不是偶然的。
 
-![欠拟合和过拟合](../Images/628c051fa81b348e055c44294678c8d2.png)
+![欠拟合和过拟合](img/628c051fa81b348e055c44294678c8d2.png)
 
 来源：斯坦福大学 Andrew Ng 的机器学习课程
 
@@ -98,7 +98,7 @@
 
 **Bagging** 的操作原理很简单：构建多个模型，观察这些模型的结果，然后选择多数结果。我最近在车的后轴组件上遇到了问题：我对经销商的诊断不太信服，于是把车送到了另外 2 家车库，这两家车库都认为问题与经销商所说的不同。*瞧*。Bagging 在实际应用中。随机森林基于修改过的 bagging 技术。
 
-![Bagging](../Images/da14f46784242ccf6a49c3d7ea114504.png)
+![Bagging](img/da14f46784242ccf6a49c3d7ea114504.png)
 
 Bagging，或*自助聚合*。
 
@@ -110,7 +110,7 @@ Bagging，或*自助聚合*。
 
 随后，训练一个组合算法来利用其他算法的预测做出最终预测。这个组合器可以是任何集成技术，但逻辑回归通常被发现是一种有效且简单的组合算法。除了分类，堆叠也可以应用于无监督学习任务，如密度估计。
 
-了解更多细节，[请阅读这篇关于集成学习者的介绍](/2016/11/data-science-basics-intro-ensemble-learners.html)。你可以在[这篇非常详尽的教程](/2018/02/introduction-python-ensembles.html)中阅读更多关于在 Python 中实现集成学习的内容。
+了解更多细节，请阅读这篇关于集成学习者的介绍。你可以在这篇非常详尽的教程中阅读更多关于在 Python 中实现集成学习的内容。
 
 ### 5\. Google Colab？
 
@@ -120,15 +120,15 @@ Colaboratory 预配置了许多流行的 Python 库，并且可以在 Notebook �
 
 在可能是最好的消息中，如果你正在使用神经网络，你可以免费使用 GPU 硬件加速进行训练，每次最长可达 12 小时。这并不是一剂灵丹妙药，但它是一个额外的好处，也是实现 GPU 访问民主化的良好开端。
 
-阅读 [3 个必备的 Google Colaboratory 提示与技巧](/2018/02/essential-google-colaboratory-tips-tricks.html) 了解如何充分利用 Colaboratory 的云端笔记本。
+阅读 3 个必备的 Google Colaboratory 提示与技巧 了解如何充分利用 Colaboratory 的云端笔记本。
 
 **相关**：
 
-+   [数据科学你需要知道的 5 件事](/2018/02/5-things-about-data-science.html)
++   数据科学你需要知道的 5 件事
 
-+   [掌握 Python 机器学习的 7 个步骤](/2015/11/seven-steps-machine-learning-python.html)
++   掌握 Python 机器学习的 7 个步骤
 
-+   [你可能不知道的 4 个机器学习和人工智能的应用](/2018/02/4-things-machine-learning-ai.html)
++   你可能不知道的 4 个机器学习和人工智能的应用
 
 ### 相关主题
 

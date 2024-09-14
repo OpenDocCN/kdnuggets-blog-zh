@@ -1,8 +1,8 @@
 # 使用 Python 自动化 Microsoft Excel 和 Word
 
-> 原文：[https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)
+> 原文：[`www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html`](https://www.kdnuggets.com/2021/08/automate-microsoft-excel-word-python.html)
 
-![](../Images/3da70b1153fb84477014c33753751857.png)
+![](img/3da70b1153fb84477014c33753751857.png)
 
 照片由 [Isaac Smith](https://unsplash.com/@isaacmsmith?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -31,7 +31,7 @@ workbook = xl.load_workbook('Book1.xlsx')
 sheet_1 = workbook['Sheet1']
 ```
 
-![](../Images/52f4ba3dd0aade877b8554f81494495b.png)
+![](img/52f4ba3dd0aade877b8554f81494495b.png)
 
 图片由作者提供。
 
@@ -58,13 +58,13 @@ sheet_1.add_chart(chart, 'e2')
 workbook.save('Book1.xlsx')
 ```
 
-![](../Images/22ae0f23a3d6984b894822a78cbea668.png)
+![](img/22ae0f23a3d6984b894822a78cbea668.png)
 
-自动生成的Excel电子表格。图片由作者提供。
+自动生成的 Excel 电子表格。图片由作者提供。
 
 ## 提取图表
 
-现在我们生成了图表，我们需要将其提取为图像，以便在我们的Word报告中使用。首先，我们将声明Excel文件的确切位置以及输出图表图像应该保存的位置：
+现在我们生成了图表，我们需要将其提取为图像，以便在我们的 Word 报告中使用。首先，我们将声明 Excel 文件的确切位置以及输出图表图像应该保存的位置：
 
 ```py
 input_file = "C:/Users/.../Book1.xlsx"
@@ -92,13 +92,13 @@ for x, chart in enumerate(sheet_2.Shapes):
 operation.Quit()
 ```
 
-## Microsoft Word自动化
+## Microsoft Word 自动化
 
-现在我们生成了图表图片，我们必须创建一个模板文档，这个文档基本上是一个正常的Microsoft Word文档（.docx），按照我们希望报告的样子进行格式化，包括字体、字号、格式和页面结构。然后，我们只需创建自动内容的占位符，即表格值和图片，并用变量名声明，如下所示。
+现在我们生成了图表图片，我们必须创建一个模板文档，这个文档基本上是一个正常的 Microsoft Word 文档（.docx），按照我们希望报告的样子进行格式化，包括字体、字号、格式和页面结构。然后，我们只需创建自动内容的占位符，即表格值和图片，并用变量名声明，如下所示。
 
-![](../Images/1a3c67ea6dd71be4518c41b89adbc7e2.png)
+![](img/1a3c67ea6dd71be4518c41b89adbc7e2.png)
 
-Microsoft Word文档模板。图片由作者提供。
+Microsoft Word 文档模板。图片由作者提供。
 
 任何自动生成的内容都可以放在一对双大括号{{*variable_name*}}内，包括文本和图片。对于表格，你需要创建一个包含所有列的模板行，然后你需要在上面和下面各追加一行，使用以下标记：
 
@@ -116,13 +116,13 @@ Microsoft Word文档模板。图片由作者提供。
 
 在上图中，变量名是
 
-+   *table_contents*用于存储我们的表格数据的Python字典
++   *table_contents*用于存储我们的表格数据的 Python 字典
 
 +   *索引*用于字典键（第一列）
 
 +   *功率、电流和电压*用于字典值（第二、第三和第四列）
 
-然后我们将模板文档导入Python，并创建一个字典来存储我们表格的值：
+然后我们将模板文档导入 Python，并创建一个字典来存储我们表格的值：
 
 ```py
 template = DocxTemplate('template.docx')
@@ -135,7 +135,7 @@ table_contents = []for i in range(2, sheet_1.max_row + 1):
         })
 ```
 
-接下来我们将导入先前由Excel生成的图表图片，并创建另一个字典来实例化模板文档中声明的所有占位符变量：
+接下来我们将导入先前由 Excel 生成的图表图片，并创建另一个字典来实例化模板文档中声明的所有占位符变量：
 
 ```py
 image = InlineImage(template,'chart.png',Cm(10))context = {
@@ -157,15 +157,15 @@ template.save('Automated_report.docx')
 
 ## 结果
 
-就这样，一个自动生成的Microsoft Word报告，其中包含数字和在Microsoft Excel中创建的图表。这样，你就有了一个完全自动化的管道，可以用来创建你可能需要的任何数量的表格、图表和文档。
+就这样，一个自动生成的 Microsoft Word 报告，其中包含数字和在 Microsoft Excel 中创建的图表。这样，你就有了一个完全自动化的管道，可以用来创建你可能需要的任何数量的表格、图表和文档。
 
-![](../Images/51cb8d13e890c7eb47fc3eb40aaa4a49.png)
+![](img/51cb8d13e890c7eb47fc3eb40aaa4a49.png)
 
 自动生成的报告。图片由作者提供。
 
 ## 源代码
 
-如果你想了解更多关于数据可视化和Python的内容，可以查看以下（附属链接的）课程：
+如果你想了解更多关于数据可视化和 Python 的内容，可以查看以下（附属链接的）课程：
 
 [****用 Python 进行数据可视化****](https://www.coursera.org/learn/python-for-data-visualization?ranMID=40328&ranEAID=hOGDdF2uhHQ&ranSiteID=hOGDdF2uhHQ-gyVyBrINeBGN.FkaHKhFYw&siteID=hOGDdF2uhHQ-gyVyBrINeBGN.FkaHKhFYw&utm_content=10&utm_medium=partners&utm_source=linkshare&utm_campaign=hOGDdF2uhHQ)
 
@@ -185,11 +185,11 @@ template.save('Automated_report.docx')
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT
 
 * * *
 

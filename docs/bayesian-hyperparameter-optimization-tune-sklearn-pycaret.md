@@ -1,22 +1,22 @@
-# 使用PyCaret中的tune-sklearn进行贝叶斯超参数优化
+# 使用 PyCaret 中的 tune-sklearn 进行贝叶斯超参数优化
 
-> 原文：[https://www.kdnuggets.com/2021/03/bayesian-hyperparameter-optimization-tune-sklearn-pycaret.html](https://www.kdnuggets.com/2021/03/bayesian-hyperparameter-optimization-tune-sklearn-pycaret.html)
+> 原文：[`www.kdnuggets.com/2021/03/bayesian-hyperparameter-optimization-tune-sklearn-pycaret.html`](https://www.kdnuggets.com/2021/03/bayesian-hyperparameter-optimization-tune-sklearn-pycaret.html)
 
-[评论](#comments)
+评论
 
-**由[Antoni Baum](https://www.linkedin.com/in/yard1/)，PyCaret的核心贡献者及Ray Tune的贡献者**
+**由[Antoni Baum](https://www.linkedin.com/in/yard1/)，PyCaret 的核心贡献者及 Ray Tune 的贡献者**
 
-![帖子图片](../Images/6d8d95a8fe51f5d25a1b7858b0b0be43.png)
+![帖子图片](img/6d8d95a8fe51f5d25a1b7858b0b0be43.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
@@ -36,11 +36,11 @@ best_model = compare_models()
 tuned_best_model = tune_model(best_model)
 ```
 
-(如果你想了解更多关于PyCaret的信息——这是一个开源的低代码Python机器学习库，[这个指南](https://pycaret.org/guide/)是一个很好的起点。)
+(如果你想了解更多关于 PyCaret 的信息——这是一个开源的低代码 Python 机器学习库，[这个指南](https://pycaret.org/guide/)是一个很好的起点。)
 
-默认情况下，`tune_model()`使用的是经过验证的`RandomizedSearchCV`，来自scikit-learn。然而，并非所有人都知道`tune_model()`提供的各种高级选项。
+默认情况下，`tune_model()`使用的是经过验证的`RandomizedSearchCV`，来自 scikit-learn。然而，并非所有人都知道`tune_model()`提供的各种高级选项。
 
-在这篇文章中，我将向你展示如何利用[tune-sklearn](https://github.com/ray-project/tune-sklearn/)，这是一个用于scikit-learn模型选择模块的替代品，提供了前沿的超参数调优技术，来轻松使用其他最先进的算法。我还将报告一系列基准测试结果，展示tune-sklearn如何轻松提升分类模型的性能。
+在这篇文章中，我将向你展示如何利用[tune-sklearn](https://github.com/ray-project/tune-sklearn/)，这是一个用于 scikit-learn 模型选择模块的替代品，提供了前沿的超参数调优技术，来轻松使用其他最先进的算法。我还将报告一系列基准测试结果，展示 tune-sklearn 如何轻松提升分类模型的性能。
 
 ### 随机搜索与贝叶斯优化
 
@@ -60,7 +60,7 @@ tune-sklearn 由[Ray Tune](https://docs.ray.io/en/latest/tune/index.html)驱动�
 
 为了更简单，从版本 2.2.0 开始，tune-sklearn 已集成到 PyCaret 中。你只需执行`pip install "pycaret[full]"`，所有可选依赖项将自动处理。
 
-![文章图片](../Images/76a744240ca14371222bc358c86aa1d9.png)
+![文章图片](img/76a744240ca14371222bc358c86aa1d9.png)
 
 如何协同工作
 
@@ -154,32 +154,32 @@ tune_model(rf, search_library = "tune-sklearn", search_algorithm="optuna", optim
 
 为了加快 PyCaret 中的超参数优化，你只需安装所需的库并更改 `tune_model()` 中的两个参数——多亏了内置的 tune-sklearn 支持，你可以轻松利用 Ray 的分布式计算，超越本地机器的限制。
 
-请务必查看[PyCaret](https://pycaret.readthedocs.io/)、[Ray Tune](https://docs.ray.io/en/latest/tune/index.html)和[tune-sklearn](https://docs.ray.io/en/latest/tune/api_docs/sklearn.html)的文档，以及[PyCaret](https://github.com/pycaret/pycaret)和[tune-sklearn](https://github.com/ray-project/tune-sklearn)的GitHub仓库。最后，如果你有任何问题或想与社区联系，请加入[PyCaret的Slack](https://pycaret.slack.com/)和[Ray的Discourse](https://discuss.ray.io/)。
+请务必查看[PyCaret](https://pycaret.readthedocs.io/)、[Ray Tune](https://docs.ray.io/en/latest/tune/index.html)和[tune-sklearn](https://docs.ray.io/en/latest/tune/api_docs/sklearn.html)的文档，以及[PyCaret](https://github.com/pycaret/pycaret)和[tune-sklearn](https://github.com/ray-project/tune-sklearn)的 GitHub 仓库。最后，如果你有任何问题或想与社区联系，请加入[PyCaret 的 Slack](https://pycaret.slack.com/)和[Ray 的 Discourse](https://discuss.ray.io/)。
 
-*感谢Richard Liaw和Moez Ali的校对和建议。*
+*感谢 Richard Liaw 和 Moez Ali 的校对和建议。*
 
-**个人简介: [Antoni Baum](https://www.linkedin.com/in/yard1/)** 是计算机科学与计量经济学硕士生，同时也是PyCaret的核心贡献者和Ray Tune的贡献者。
+**个人简介: [Antoni Baum](https://www.linkedin.com/in/yard1/)** 是计算机科学与计量经济学硕士生，同时也是 PyCaret 的核心贡献者和 Ray Tune 的贡献者。
 
 [原文](https://medium.com/distributed-computing-with-ray/bayesian-hyperparameter-optimization-with-tune-sklearn-in-pycaret-a33b1592662f)。经许可转载。
 
 **相关:**
 
-+   [高级超参数优化/调优算法](/2020/11/algorithms-for-advanced-hyper-parameter-optimization-tuning.html)
++   高级超参数优化/调优算法
 
-+   [轻松的数据科学的5种工具](/2021/01/5-tools-effortless-data-science.html)
++   轻松的数据科学的 5 种工具
 
-+   [你在PyCaret中做错的5件事](/2020/11/5-things-doing-wrong-pycaret.html)
++   你在 PyCaret 中做错的 5 件事
 
 ### 更多相关内容
 
-+   [超参数优化：10个顶级Python库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)
++   [超参数优化：10 个顶级 Python 库](https://www.kdnuggets.com/2023/01/hyperparameter-optimization-10-top-python-libraries.html)
 
-+   [使用PyCaret进行二分类简介](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
++   [使用 PyCaret 进行二分类简介](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
 
-+   [使用PyCaret进行Python聚类简介](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
++   [使用 PyCaret 进行 Python 聚类简介](https://www.kdnuggets.com/2021/12/introduction-clustering-python-pycaret.html)
 
-+   [宣布PyCaret 3.0：Python中的开源、低代码机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
++   [宣布 PyCaret 3.0：Python 中的开源、低代码机器学习](https://www.kdnuggets.com/2023/03/announcing-pycaret-30-opensource-lowcode-machine-learning-python.html)
 
-+   [开始使用PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)
++   [开始使用 PyCaret](https://www.kdnuggets.com/2022/11/getting-started-pycaret.html)
 
-+   [使用网格搜索和随机搜索进行Python中的超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)
++   [使用网格搜索和随机搜索进行 Python 中的超参数调优](https://www.kdnuggets.com/2022/10/hyperparameter-tuning-grid-search-random-search-python.html)

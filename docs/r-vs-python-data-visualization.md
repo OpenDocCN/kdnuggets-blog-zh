@@ -1,8 +1,8 @@
 # R 与 Python 数据可视化
 
-> 原文：[https://www.kdnuggets.com/2019/03/r-vs-python-data-visualization.html](https://www.kdnuggets.com/2019/03/r-vs-python-data-visualization.html)
+> 原文：[`www.kdnuggets.com/2019/03/r-vs-python-data-visualization.html`](https://www.kdnuggets.com/2019/03/r-vs-python-data-visualization.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)![图像名称](../Images/fe68e9c1a794ebf6ac60a5f9d083dfdc.png)ggplot2 vs seaborn
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论![图像名称](img/fe68e9c1a794ebf6ac60a5f9d083dfdc.png)ggplot2 vs seaborn
 
 R 和 Python 使我们能够生成复杂且吸引人的统计图形，以便获得见解和探索数据。两者都能处理数百万的数据点（可能取决于平台，甚至数十亿）。
 
@@ -10,11 +10,11 @@ R 和 Python 使我们能够生成复杂且吸引人的统计图形，以便获�
 
 ## 我们的前三推荐课程
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -81,7 +81,7 @@ Seaborn 建立在 Matplotlib 之上，语法和结构相对简单。
 
 ```
 
-![figure-name](../Images/b27016c26864a2941fd95d362e2d8a21.png)Seaborn：mtcars 散点图
+![figure-name](img/b27016c26864a2941fd95d362e2d8a21.png)Seaborn：mtcars 散点图
 
 正如我们所见，该图形与 ggplot2 创建的图形非常相似。对于对这个图进行分面处理，Seaborn 是 Matplotlib 的一个更简单的替代方案。
 
@@ -119,7 +119,7 @@ Seaborn 建立在 Matplotlib 之上，语法和结构相对简单。
 
 ```
 
-![figure-name](../Images/0c776efeb28b7f1b013d98d5d18ca611.png)Seaborn：mtcars 分面散点图
+![figure-name](img/0c776efeb28b7f1b013d98d5d18ca611.png)Seaborn：mtcars 分面散点图
 
 ### 在 R 中可视化数据
 
@@ -183,7 +183,7 @@ Seaborn 建立在 Matplotlib 之上，语法和结构相对简单。
 
 ```
 
-![](../Images/552abdef0c06ea1c173f6e3b00afff86.png)
+![](img/552abdef0c06ea1c173f6e3b00afff86.png)
 
 ggplot: mtcars 散点图
 
@@ -198,36 +198,36 @@ ggplot2 的另一个优点是其 **能够在一行代码中对数据进行分面
 
 ```
 
-![](../Images/bea7dacd109dcf7417fa2129f2ed95b8.png)
+![](img/bea7dacd109dcf7417fa2129f2ed95b8.png)
 
-ggplot: mtcars分面散点图
+ggplot: mtcars 分面散点图
 
 ### 结论
 
-我认为主要的区别之一是，Seaborn绘图的默认分辨率优于ggplot2图形，所需的语法也可能少得多（但这取决于具体情况）。Seaborn使用编程方法，用户可以访问Seaborn和Matplotlib中的类来操作图形。ggplot2使用分层方法，用户可以以任意顺序添加美学和格式来创建图形（尽管所需的代码量更多，我认为这种方法可能更简单）。大多数人不会注意到这一点，而这对某些人可能比其他人更为重要，Python图形在保存为图像时占用的磁盘空间显著大于R生成的图形。在本文中的图形中，Seaborn/Matplotlib图形占用的磁盘空间约为ggplot2图形的6倍。
+我认为主要的区别之一是，Seaborn 绘图的默认分辨率优于 ggplot2 图形，所需的语法也可能少得多（但这取决于具体情况）。Seaborn 使用编程方法，用户可以访问 Seaborn 和 Matplotlib 中的类来操作图形。ggplot2 使用分层方法，用户可以以任意顺序添加美学和格式来创建图形（尽管所需的代码量更多，我认为这种方法可能更简单）。大多数人不会注意到这一点，而这对某些人可能比其他人更为重要，Python 图形在保存为图像时占用的磁盘空间显著大于 R 生成的图形。在本文中的图形中，Seaborn/Matplotlib 图形占用的磁盘空间约为 ggplot2 图形的 6 倍。
 
-尽管有些细微的差别，但使用Seaborn和ggplot2重新创建相同的图形是非常可能的。虽然工具不同，但仍然可以用它们创建相同的对象。
+尽管有些细微的差别，但使用 Seaborn 和 ggplot2 重新创建相同的图形是非常可能的。虽然工具不同，但仍然可以用它们创建相同的对象。
 
 **相关：**
 
-+   [Python图形画廊](/2017/11/python-graph-gallery.html)
++   Python 图形画廊
 
-+   [五大最佳数据可视化库](/2019/01/five-best-data-visualization-libraries.html)
++   五大最佳数据可视化库
 
-+   [数据可视化备忘单](/2018/08/data-visualization-cheatsheet.html)
++   数据可视化备忘单
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 ### 更多相关话题
 
-+   [成为优秀数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为优秀数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

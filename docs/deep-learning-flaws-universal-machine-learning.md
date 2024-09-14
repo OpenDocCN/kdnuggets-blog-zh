@@ -1,8 +1,8 @@
 # (深度学习的深层缺陷)的深层缺陷
 
-> 原文：[https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html](https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html`](https://www.kdnuggets.com/2015/01/deep-learning-flaws-universal-machine-learning.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 一些近期广泛报道的论文已经缓解了围绕深度学习的炒作。这些论文指出，图像可以被微妙地修改以引起错误分类，并且可以轻易生成看似随机的垃圾图像，这些图像会得到高度的信心分类。新闻界对这一消息进行了 sensationalized 的报道。几个博客帖子、一个 YouTube 视频以及其他媒体都放大并偶尔扭曲了结果，宣称深度网络的轻信性。
 
@@ -20,39 +20,39 @@
 
 对于神经网络而言，这种病态案例在某些方面是不同的。其中一个关键区别是像素的取值是受到约束的。然而，鉴于几乎任何具有许多特征和自由度的机器学习模型，都容易工程化病态的对抗示例。这对于那些更简单、理解更透彻并且有理论保证的模型也是真的。也许，我们不应该对深度学习也易受对抗性选择示例的影响感到惊讶。
 
-第二篇论文，来自怀俄明大学的Anh Nguyen所著的《["深度网络容易被欺骗"](http://arxiv.org/pdf/1412.1897v2.pdf)》，似乎做出了更大胆的声明。引用了Szegedy等人的工作，他们着手研究反向问题，即如何制造一个看似无意义的例子，尽管它明显缺乏内容，但仍然获得了高置信度的分类。作者使用梯度上升法来训练一些无法被人眼识别的胡言乱语图像，这些图像被强烈分类到一些明显错误的对象类别中。
+第二篇论文，来自怀俄明大学的 Anh Nguyen 所著的《["深度网络容易被欺骗"](http://arxiv.org/pdf/1412.1897v2.pdf)》，似乎做出了更大胆的声明。引用了 Szegedy 等人的工作，他们着手研究反向问题，即如何制造一个看似无意义的例子，尽管它明显缺乏内容，但仍然获得了高置信度的分类。作者使用梯度上升法来训练一些无法被人眼识别的胡言乱语图像，这些图像被强烈分类到一些明显错误的对象类别中。
 
-![卷积神经网络的第二层可视化](../Images/8c12470a515a5f24014c9325e7204a14.png)
+![卷积神经网络的第二层可视化](img/8c12470a515a5f24014c9325e7204a14.png)
 
 从数学直觉的角度来看，这正是我们应该预期的。在之前的情况中，修改后的图像被限制为与某个源图像不可区分。在这里，图像的限制只是不能看起来像任何东西！在所有可能的图像空间中，实际可识别的图像只是一个微小的子集，几乎整个向量空间都是开放的。此外，在几乎所有其他机器学习方法中，都很容易找到相应的问题。给定任何线性分类器，都可以找到一个既远离决策边界又远离任何曾见过的数据点的位置。给定一个主题模型，可以创建一个毫无意义的随机词序列，它似乎获得了与某个选定的真实文档相同的推断主题分布。
 
-这个结果可能令人惊讶的主要原因是卷积神经网络在物体检测任务中的表现已经能够与人类能力相媲美。在这种意义上，区分CNN的能力和人类能力可能是重要的。作者从一开始就提出了这一点，这个论点是合理的。
+这个结果可能令人惊讶的主要原因是卷积神经网络在物体检测任务中的表现已经能够与人类能力相媲美。在这种意义上，区分 CNN 的能力和人类能力可能是重要的。作者从一开始就提出了这一点，这个论点是合理的。
 
-正如Michael I. Jordan和Geoff Hinton最近讨论的那样，深度学习的巨大成功吸引了一波炒作。最近的负面宣传表明这种炒作有两面性。深度学习的成功确实使许多人愿意审视其缺陷。然而，值得记住的是，许多问题在大多数机器学习环境中都是普遍存在的。或许对对抗性示例鲁棒的算法的更广泛兴趣可以使整个机器学习社区受益。
+正如 Michael I. Jordan 和 Geoff Hinton 最近讨论的那样，深度学习的巨大成功吸引了一波炒作。最近的负面宣传表明这种炒作有两面性。深度学习的成功确实使许多人愿意审视其缺陷。然而，值得记住的是，许多问题在大多数机器学习环境中都是普遍存在的。或许对对抗性示例鲁棒的算法的更广泛兴趣可以使整个机器学习社区受益。
 
-![Zachary Chase Lipton](../Images/240b273c667af1a53a99fd93d1fd39ce.png)
+![Zachary Chase Lipton](img/240b273c667af1a53a99fd93d1fd39ce.png)
 
-**[Zachary Chase Lipton](http://zacklipton.com)** 是加州大学圣地亚哥分校计算机科学工程系的博士生。在[生物医学信息学部门](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx)资助下，他对机器学习的理论基础和应用都感兴趣。除了在UCSD的工作，他还曾在微软研究院实习。
+**[Zachary Chase Lipton](http://zacklipton.com)** 是加州大学圣地亚哥分校计算机科学工程系的博士生。在[生物医学信息学部门](http://healthsciences.ucsd.edu/som/medicine/divisions/dbmi/pages/default.aspx)资助下，他对机器学习的理论基础和应用都感兴趣。除了在 UCSD 的工作，他还曾在微软研究院实习。
 
 **相关：**
 
-+   [Geoff Hinton AMA：神经网络、大脑和机器学习](/2014/12/geoff-hinton-ama-neural-networks-brain-machine-learning.html)
++   Geoff Hinton AMA：神经网络、大脑和机器学习
 
-+   [深度学习是否存在深层缺陷？](/2014/06/deep-learning-deep-flaws.html)
++   深度学习是否存在深层缺陷？
 
-+   [深度学习可以轻易被愚弄](/2015/01/deep-learning-can-be-easily-fooled.html)
++   深度学习可以轻易被愚弄
 
-+   [差分隐私：如何使隐私与数据挖掘兼容](/2015/01/differential-privacy-data-mining-compatible.html)
++   差分隐私：如何使隐私与数据挖掘兼容
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的捷径。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
@@ -64,7 +64,7 @@
 
 +   [15 本免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/10/15-free-machine-learning-deep-learning-books.html)
 
-+   [KDnuggets 新闻，11月2日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
++   [KDnuggets 新闻，11 月 2 日：数据科学的现状…](https://www.kdnuggets.com/2022/n43.html)
 
 +   [15 本免费的机器学习和深度学习书籍](https://www.kdnuggets.com/2022/11/15-free-machine-learning-deep-learning-books.html)
 

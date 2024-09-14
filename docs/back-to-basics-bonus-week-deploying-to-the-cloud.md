@@ -1,56 +1,56 @@
 # 回到基础奖励周: 部署到云端
 
-> 原文：[https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)
+> 原文：[`www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud`](https://www.kdnuggets.com/back-to-basics-bonus-week-deploying-to-the-cloud)
 
-![回到基础奖励周: 部署到云端](../Images/2a0d6c690ff91fe860febde5033d11fd.png)
+![回到基础奖励周: 部署到云端](img/2a0d6c690ff91fe860febde5033d11fd.png)
 
 图片由作者提供
 
-KDnuggets团队希望您享受‘回到基础’系列课程。为了结束这一系列，我们为那些愿意额外努力、扩展知识的人准备了一个奖励周。
+KDnuggets 团队希望您享受‘回到基础’系列课程。为了结束这一系列，我们为那些愿意额外努力、扩展知识的人准备了一个奖励周。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 工作
 
 * * *
 
 如果您还没看过，请查看：
 
-+   第1周: [Python编程与数据科学基础](/back-to-basics-week-1-python-programming-data-science-foundations)
++   第 1 周: Python 编程与数据科学基础
 
-+   第2周: [数据库、SQL、数据管理和统计概念](/back-to-basics-week-2-database-sql-data-management-and-statistical-concepts)
++   第 2 周: 数据库、SQL、数据管理和统计概念
 
-+   第3周: [回到基础第3周: 机器学习入门](/back-to-basics-week-3-introduction-to-machine-learning)
++   第 3 周: 回到基础第 3 周: 机器学习入门
 
-+   第4周: [高级主题与部署](/back-to-basics-week-4-advanced-topics-and-deployment)
++   第 4 周: 高级主题与部署
 
 进入奖励周，
 
-+   奖励1: 5步入门Google Platform
++   奖励 1: 5 步入门 Google Platform
 
-+   奖励2: 将您的机器学习模型部署到AWS云端生产环境
++   奖励 2: 将您的机器学习模型部署到 AWS 云端生产环境
 
-# 5步入门Google Platform
+# 5 步入门 Google Platform
 
-奖励周 - 第1部分: [5步入门Google Cloud Platform](/5-steps-google-cloud-platform)
+奖励周 - 第一部分: 5 步入门 Google Cloud Platform
 
-探索Google Cloud Platform的基础知识，从账户设置到模型部署，结合实际项目示例。
+探索 Google Cloud Platform 的基础知识，从账户设置到模型部署，结合实际项目示例。
 
-本文旨在提供一个逐步概述，帮助您入门 [Google Cloud Platform](https://cloud.google.com/) (GCP) 以进行数据科学和机器学习。我们将概述GCP及其关键分析功能，演示账户设置，探索诸如 [BigQuery](https://cloud.google.com/bigquery) 和 [Cloud Storage](https://cloud.google.com/storage) 等重要服务，构建一个示例数据项目，并使用GCP进行机器学习。
+本文旨在提供一个逐步概述，帮助您入门 [Google Cloud Platform](https://cloud.google.com/) (GCP) 以进行数据科学和机器学习。我们将概述 GCP 及其关键分析功能，演示账户设置，探索诸如 [BigQuery](https://cloud.google.com/bigquery) 和 [Cloud Storage](https://cloud.google.com/storage) 等重要服务，构建一个示例数据项目，并使用 GCP 进行机器学习。
 
-无论您是GCP新手还是需要快速复习，请继续阅读，了解基础知识，迅速上手Google Cloud。
+无论您是 GCP 新手还是需要快速复习，请继续阅读，了解基础知识，迅速上手 Google Cloud。
 
-# 将您的机器学习模型部署到AWS云端生产环境
+# 将您的机器学习模型部署到 AWS 云端生产环境
 
-奖励周 - 第2部分: [将您的机器学习模型部署到云端生产环境](/deploying-your-ml-model-to-production-in-the-cloud)
+奖励周 - 第二部分: 将您的机器学习模型部署到云端生产环境
 
-学习一种简单的方法，将模型实时托管在AWS上。
+学习一种简单的方法，将模型实时托管在 AWS 上。
 
 [AWS](https://aws.amazon.com/)，即亚马逊网络服务，是许多企业用于存储、分析、应用、部署服务等的云计算服务平台。它利用多个服务以无服务器的方式支持业务，并采用按需付费方案。
 

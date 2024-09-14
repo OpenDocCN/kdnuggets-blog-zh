@@ -1,8 +1,8 @@
 # 使用简单的 Python 包拉取和分析金融数据
 
-> 原文：[https://www.kdnuggets.com/2020/07/pull-analyze-financial-data-simple-python-package.html](https://www.kdnuggets.com/2020/07/pull-analyze-financial-data-simple-python-package.html)
+> 原文：[`www.kdnuggets.com/2020/07/pull-analyze-financial-data-simple-python-package.html`](https://www.kdnuggets.com/2020/07/pull-analyze-financial-data-simple-python-package.html)
 
-[评论](#comments)![图示](../Images/8eb5ea4bc9e1624d6a2a5adc0245eb21.png)
+评论![图示](img/8eb5ea4bc9e1624d6a2a5adc0245eb21.png)
 
 图片来源：[Pixabay（商业用途免费）](https://pixabay.com/photos/entrepreneur-idea-competence-vision-1340649/)
 
@@ -12,21 +12,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 股票市场分析和良好的投资（为了长期增长）需要[仔细审查财务数据](https://finance.zacks.com/evaluate-stock-investments-using-financial-statement-analysis-8024.html)。各种[指标和比率](https://www.investopedia.com/financial-edge/0910/6-basic-financial-ratios-and-what-they-tell-you.aspx)通常用于这种分析，即**评估股票的固有质量**。你可能在财务和投资专家的讨论中听说过其中的一些。
 
-例如，[**市盈率**](https://www.investopedia.com/investing/use-pe-ratio-and-peg-to-tell-stocks-future/)或**PE比率**。它是股价与年收益/每股的比率。
+例如，[**市盈率**](https://www.investopedia.com/investing/use-pe-ratio-and-peg-to-tell-stocks-future/)或**PE 比率**。它是股价与年收益/每股的比率。
 
 或者，[**每股账面价值**](https://www.investopedia.com/terms/b/bookvaluepercommon.asp)。它是公司普通股权益与其流通股数的比率。当一只股票被低估时，它的每股账面价值相对于市场上当前的股价会更高。
 
-**利用市盈率和PEG评估股票的未来**
+**利用市盈率和 PEG 评估股票的未来**
 
 市盈率（P/E）是投资者和分析师用于确定股票的最广泛使用的指标之一……
 
@@ -38,7 +38,7 @@
 
 然而，许多微服务存在，它们通过简单的 API 调用提供这些数据。为了利用这一点，我们在本文中展示了如何编写一个简单的 Python 类脚本，以接口连接到**[金融数据微服务](https://financialmodelingprep.com/)**。
 
-![图像](../Images/12218ac819aeba9f5d991cd176a44ce1.png)
+![图像](img/12218ac819aeba9f5d991cd176a44ce1.png)
 
 图像来源：作者截屏（[网站](https://financialmodelingprep.com/developer/docs/)）
 
@@ -64,7 +64,7 @@
 
 我们首先导入常规库和类对象。
 
-![帖子图像](../Images/0df4771a31243e944c8f15dff45c4863.png)
+![帖子图像](img/0df4771a31243e944c8f15dff45c4863.png)
 
 ### 从文件中读取秘密 API 密钥并注册
 
@@ -72,35 +72,35 @@
 
 **在这里注册：**[**https://financialmodelingprep.com/login**](https://financialmodelingprep.com/login)
 
-![帖子图像](../Images/601533e967226e0fbf84ba0512481ab8.png)
+![帖子图像](img/601533e967226e0fbf84ba0512481ab8.png)
 
 ### 创建一个类实例
 
-![帖子图像](../Images/11d6718391c4c8dc13038a833919a7fe.png)
+![帖子图像](img/11d6718391c4c8dc13038a833919a7fe.png)
 
 ### 它有一个描述
 
-![帖子图像](../Images/cdea76466c64d524d28614254fb25c7c.png)
+![帖子图像](img/cdea76466c64d524d28614254fb25c7c.png)
 
 ### 没有注册密钥，我们无法访问数据
 
 我们肯定想要开始提取数据。假设我们想为公司 Apple（股票代码为‘AAPL’）构建一个数据字典。我们可以尝试，但不会成功，因为我们还没有用类对象注册秘密密钥。
 
-![帖子图像](../Images/7ebf7c03231154339d9f01d19bc60727.png)
+![帖子图像](img/7ebf7c03231154339d9f01d19bc60727.png)
 
 ### 所以，我们注册了秘密密钥
 
-![帖子图像](../Images/aeadb305e7a25d0d3ec8e3419d7abc1a.png)
+![帖子图像](img/aeadb305e7a25d0d3ec8e3419d7abc1a.png)
 
 ### 让我们现在构建一个数据字典
 
 对于该类中的所有方法，我们必须传递公司（在美国金融市场上的）股票代码。例如，Apple Inc 的代码是‘AAPL’。
 
-![帖子图像](../Images/b563db4bf793c27b1a43bf156ebe3a05.png)
+![帖子图像](img/b563db4bf793c27b1a43bf156ebe3a05.png)
 
 如果我们检查这个字典，会发现从 API 端点拉取了大量数据。下面提供了部分截图。
 
-![帖子图像](../Images/8f24896ab64c6077ed18ebf298035131.png)
+![帖子图像](img/8f24896ab64c6077ed18ebf298035131.png)
 
 ### 用多个公司的数据构建一个 DataFrame
 
@@ -120,21 +120,21 @@
 
 +   Salesforce
 
-![帖子图片](../Images/24e604e6fbff0307ef501618ead17d46.png)
+![帖子图片](img/24e604e6fbff0307ef501618ead17d46.png)
 
 一份格式良好的 DataFrame 准备好了！
 
-![帖子图片](../Images/ab4bbbc226baff5ebbcc5fae98b79ebf.png)
+![帖子图片](img/ab4bbbc226baff5ebbcc5fae98b79ebf.png)
 
 ### 究竟有哪些数据可用？
 
 我们可以轻松检查从 API 服务中提取的数据类型。注意，我们传递参数‘profile’，‘metrics’ 或 ‘ration’，并返回相应的数据项列表。
 
-![帖子图片](../Images/1d4feb387508dd7f54998abbb63cbb6a.png)
+![帖子图片](img/1d4feb387508dd7f54998abbb63cbb6a.png)
 
-![帖子图片](../Images/feefc3c3372715e98d26e98c71a3b47d.png)
+![帖子图片](img/feefc3c3372715e98d26e98c71a3b47d.png)
 
-![帖子图片](../Images/91e11643267026eba4557f9b33bb8589.png)
+![帖子图片](img/91e11643267026eba4557f9b33bb8589.png)
 
 ### 绘图 — 可视化分析
 
@@ -142,17 +142,17 @@
 
 查看各种指标和财务比率在简单条形图中的表现通常是有帮助的。为此，只需传递您想绘制的变量名称。您还可以包括常见的 Matplotlib 关键字参数，例如颜色和透明度（alpha）。
 
-![帖子图片](../Images/a120fe5f526e835a20508b4a771151be.png)
+![帖子图片](img/a120fe5f526e835a20508b4a771151be.png)
 
-![帖子图片](../Images/8f901f301791e2beece5c53e87f72ce5.png)
+![帖子图片](img/8f901f301791e2beece5c53e87f72ce5.png)
 
 您还可以绘制简单的散点图来直观分析财务指标之间的关系。
 
-![帖子图片](../Images/da885848a19c315a9e40dd1fcc327485.png)
+![帖子图片](img/da885848a19c315a9e40dd1fcc327485.png)
 
 您还可以传递第三个变量用于调整散点图中标记的大小。这在间接上有助于在二维图中可视化超过两个变量。例如，我们在下面的代码中将股价参数作为第三个变量传递。
 
-![帖子图片](../Images/92c76edfbd64043d746a3e52572d44aa.png)
+![帖子图片](img/92c76edfbd64043d746a3e52572d44aa.png)
 
 ### 自定义分析与底层 DataFrame
 
@@ -164,11 +164,11 @@
 
 这样，我们就无需再次从 API 请求数据。**我们应该尽量避免读取数据，因为免费 API 密钥的读取数据量有限。**
 
-![帖子图片](../Images/882d6725bfdb6fa2fa2db07021e92947.png)
+![帖子图片](img/882d6725bfdb6fa2fa2db07021e92947.png)
 
 然后我们根据这个自定义 DataFrame（嵌入在自定义类对象中）绘制条形图。
 
-![帖子图片](../Images/23157d08fc421020ba078a9b320d31e4.png)
+![帖子图片](img/23157d08fc421020ba078a9b320d31e4.png)
 
 ### 摘要
 
@@ -180,7 +180,7 @@
 
 作为数据科学家，你可能经常需要编写自定义的类/包以从微服务 API 中提取和分析数据，希望这篇文章（及相关代码库）能为你提供一个简单但有效的入门介绍。
 
-![图示](../Images/f4f3590523f10171ca57de1da244ac3b.png)
+![图示](img/f4f3590523f10171ca57de1da244ac3b.png)
 
 图片来源：[Pixabay（可商用免费）](https://pixabay.com/photos/money-coin-investment-business-2724241/)
 
@@ -190,11 +190,11 @@
 
 **相关：**
 
-+   [时间序列分类：合成与真实金融时间序列](/2020/03/time-series-classification-synthetic-real-financial-time-series.html)
++   时间序列分类：合成与真实金融时间序列
 
-+   [数据科学家免费的经济学与金融课程](/2020/06/free-economics-finance-courses-data-scientists.html)
++   数据科学家免费的经济学与金融课程
 
-+   [在金融服务中应用 NLP 的四种方法](/2020/06/four-ways-apply-nlp-financial-services.html)
++   在金融服务中应用 NLP 的四种方法
 
 ### 更多相关话题
 

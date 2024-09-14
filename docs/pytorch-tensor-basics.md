@@ -1,10 +1,10 @@
 # PyTorch 张量基础
 
-> 原文：[https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html](https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html)
+> 原文：[`www.kdnuggets.com/2018/05/pytorch-tensor-basics.html`](https://www.kdnuggets.com/2018/05/pytorch-tensor-basics.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
-现在我们知道了 [张量是什么](/2018/05/wtf-tensor.html)，并了解了 Numpy 的 `ndarray` 如何用来表示它们，接下来我们来看看它们在 PyTorch 中是如何表示的。
+现在我们知道了 张量是什么，并了解了 Numpy 的 `ndarray` 如何用来表示它们，接下来我们来看看它们在 PyTorch 中是如何表示的。
 
 [PyTorch](https://pytorch.org/) 自 Facebook 在 2017 年初开源以来，在机器学习领域产生了令人印象深刻的影响。它可能没有 TensorFlow 那样广泛的采用——TensorFlow 最初发布的时间早了一年多，得到了 Google 的支持，并且在神经网络工具新潮流兴起时奠定了黄金标准——但 PyTorch 在研究界获得的关注确实非常真实。这种关注很大程度上来自于其与 [Torch proper](http://torch.ch/) 的关系，以及其动态计算图。
 
@@ -12,15 +12,15 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
-![头图](../Images/27f79394bcc1a8c8b2bdb92a788b8013.png)
+![头图](img/27f79394bcc1a8c8b2bdb92a788b8013.png)
 
 [图片来源](http://noaxiom.org/tensor) 尽管我最近对 PyTorch 的关注充满了兴奋，但这实际上并不是一个 *PyTorch* 教程；它更像是对 PyTorch 的 [`Tensor`](https://pytorch.org/docs/master/tensors.html) 类的介绍，该类与 Numpy 的 `ndarray` 类似。
 
@@ -151,7 +151,7 @@ Tensor type: torch.FloatTensor
 
 除了数学概念之外，`ndarray` 和 `Tensor` 实现之间还存在许多编程和实例化上的相似之处，这一点也应该显而易见。
 
-你可以像切片`ndarrays`一样切片PyTorch张量，这对使用其他Python结构的人来说应该很熟悉：
+你可以像切片`ndarrays`一样切片 PyTorch 张量，这对使用其他 Python 结构的人来说应该很熟悉：
 
 ```py
 # Slicing
@@ -231,7 +231,7 @@ tensor([[-0.1746, -2.4118,  0.4688, -0.0517, -0.2706],
 
 **基本张量操作**
 
-这里有几个张量操作，你可以与Numpy实现进行比较以增添乐趣。首先是叉积：
+这里有几个张量操作，你可以与 Numpy 实现进行比较以增添乐趣。首先是叉积：
 
 ```py
 # Compute cross product
@@ -276,9 +276,9 @@ tensor([[  1.,   4.],
         [  9.,  16.]])
 ```
 
-**关于GPU的一些话**
+**关于 GPU 的一些话**
 
-PyTorch张量具有内置的GPU支持。指定使用GPU内存和CUDA核心来存储和执行张量计算非常简单；[`cuda`](https://pytorch.org/docs/master/cuda.html)包可以帮助确定是否有可用的GPU，而该包的`cuda()`方法将张量分配给GPU。
+PyTorch 张量具有内置的 GPU 支持。指定使用 GPU 内存和 CUDA 核心来存储和执行张量计算非常简单；[`cuda`](https://pytorch.org/docs/master/cuda.html)包可以帮助确定是否有可用的 GPU，而该包的`cuda()`方法将张量分配给 GPU。
 
 ```py
 # Is CUDA GPU available?
@@ -294,22 +294,22 @@ t.cuda()
 
 **相关**：
 
-+   [什么是张量?!?](/2018/05/wtf-tensor.html)
++   什么是张量?!?
 
-+   [PyTorch入门第1部分：了解自动微分的工作原理](/2018/04/getting-started-pytorch-understanding-automatic-differentiation.html)
++   PyTorch 入门第一部分：了解自动微分的工作原理
 
-+   [构建神经网络的简单入门指南](/2018/02/simple-starter-guide-build-neural-network.html)
++   构建神经网络的简单入门指南
 
 ### 更多相关话题
 
 +   [停止学习数据科学以寻找目标并找到目标…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
 +   [学习数据科学统计学的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)

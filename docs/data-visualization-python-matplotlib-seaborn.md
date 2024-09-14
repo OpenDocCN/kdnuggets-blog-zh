@@ -1,8 +1,8 @@
 # Python 中的数据可视化：Matplotlib 与 Seaborn
 
-> 原文：[https://www.kdnuggets.com/2019/04/data-visualization-python-matplotlib-seaborn.html](https://www.kdnuggets.com/2019/04/data-visualization-python-matplotlib-seaborn.html)
+> 原文：[`www.kdnuggets.com/2019/04/data-visualization-python-matplotlib-seaborn.html`](https://www.kdnuggets.com/2019/04/data-visualization-python-matplotlib-seaborn.html)
 
-[评论](#comments)![matplotlib-vs-seaborn](../Images/46cbf075d0af69589d9b5b1f6db550f1.png)
+评论![matplotlib-vs-seaborn](img/46cbf075d0af69589d9b5b1f6db550f1.png)
 
 Python 提供了多种数据绘图包。本教程将使用以下包来演示 Python 的绘图功能：
 
@@ -16,11 +16,11 @@ Python 提供了多种数据绘图包。本教程将使用以下包来演示 Pyt
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -50,7 +50,7 @@ plt.xlabel('Normalized Temperature', fontsize='large')
 plt.ylabel('Count of Total Bike Rentals', fontsize='large');
 ```
 
-![matplotlib-scatterplot](../Images/a237310524eecb5772508a747c5001e2.png)
+![matplotlib-scatterplot](img/a237310524eecb5772508a747c5001e2.png)
 
 让我们看看它显示了哪些信息：
 
@@ -98,7 +98,7 @@ plt.xlabel("Normalized temperature", fontdict=fontdictx)
 plt.ylabel("Count of Total Rental Bikes", fontdict=fontdicty);
 ```
 
-![matplotlib-scatterplot-2](../Images/ead72af98b85416fe378d8513bddccf2.png)
+![matplotlib-scatterplot-2](img/ead72af98b85416fe378d8513bddccf2.png)
 
 +   `plt.rcParams['figure.figsize'] = [15, 10]` 允许控制整个图的大小。这对应于一个*15∗10（长度∗宽度）*的图。
 
@@ -130,9 +130,9 @@ plt.ylabel("Count of Total Rental Bikes", fontdict=fontdicty);
 
 ***分面*** 是创建多个共享相同坐标轴的图表的过程。分面是数据可视化中最具多样性的技术之一。分面图可以在多个维度上传达信息，并能揭示以前隐藏的信息。
 
-+   `plt.figure()`将用于创建一个空的绘图画布，如前所述。它被保存为fig。
++   `plt.figure()`将用于创建一个空的绘图画布，如前所述。它被保存为 fig。
 
-+   `fig.add_subplot()`将重复4次，以对应各自的季节。参数对应于`nrows`、`ncols`和索引。例如在`ax1`中，它对应于图形的第一个绘图（索引从左上角开始为1，向右增加）。
++   `fig.add_subplot()`将重复 4 次，以对应各自的季节。参数对应于`nrows`、`ncols`和索引。例如在`ax1`中，它对应于图形的第一个绘图（索引从左上角开始为 1，向右增加）。
 
 +   其余的函数调用要么是自解释的，要么已在前面讲解过。
 
@@ -180,7 +180,7 @@ ax4.set_xlabel("Normalized temperature", fontdict=fontdictx, position=(-0.1,0));
 
 ```
 
-![scatterplot-facet-matplotlib-subplot](../Images/49ac0e0f067f2c92418c8e2560bd6d23.png)
+![scatterplot-facet-matplotlib-subplot](img/49ac0e0f067f2c92418c8e2560bd6d23.png)
 
 现在我们可以更有效地独立分析每组数据。首先，我们应该注意的是温度与自行车租赁量的关系在不同季节间有所不同：
 
@@ -234,9 +234,9 @@ ax4.set_xlabel("Normalized temperature", fontdict=fontdictx);
 
 ```
 
-![scatterplot-facet-subplots-sharex](../Images/504f53d184b6c9740a5a9194f8b63ad6.png)
+![scatterplot-facet-subplots-sharex](img/504f53d184b6c9740a5a9194f8b63ad6.png)
 
-现在这个图表网格已调整为与夏季共享相同的x轴，因为它的温度范围更宽。现在有趣的是，这些数据给我们提供了一些新的见解：
+现在这个图表网格已调整为与夏季共享相同的 x 轴，因为它的温度范围更宽。现在有趣的是，这些数据给我们提供了一些新的见解：
 
 **   春季的温度最低。
 
@@ -288,11 +288,11 @@ ax4.set_xlabel("Normalized temperature", fontdict=fontdictx, position=(-1.5,0));
 
 ```
 
-![scatterplot-facet-subplots-sharey](../Images/8e883df36b98acc495ecffa2249c253d.png)
+![scatterplot-facet-subplots-sharey](img/8e883df36b98acc495ecffa2249c253d.png)
 
 重新调整/对比这些图表现在显示了另一个视角：
 
-**   所有季节在某个时间点的自行车租赁量都超过了8000。
+**   所有季节在某个时间点的自行车租赁量都超过了 8000。
 
 +   与其他季节相比，秋季和春季的聚类现象明显。
 
@@ -300,7 +300,7 @@ ax4.set_xlabel("Normalized temperature", fontdict=fontdictx, position=(-1.5,0));
 
 ***不要试图从这个角度解读变量之间的关系。这可能会再次误导你，因为现在看起来春季和夏季的自行车租赁量与温度之间存在负线性关系，而我们之前看到的并非如此。***
 
-这里是一个由[Real Python关于使用Matplotlib的直观教程](https://realpython.com/python-matplotlib-guide/)的链接。
+这里是一个由[Real Python 关于使用 Matplotlib 的直观教程](https://realpython.com/python-matplotlib-guide/)的链接。
 
 ### Seaborn
 
@@ -342,7 +342,7 @@ plt.xlabel('x-axis', fontsize=14)
 plt.ylabel('yaxis', fontsize=14);
 ```
 
-![seaborn-python-titlefix](../Images/79df64d4b5230d57c1b58a7402c24595.png)
+![seaborn-python-titlefix](img/79df64d4b5230d57c1b58a7402c24595.png)
 
 ***深入了解 seaborn，我们可以用更少的代码行和类似的语法重现来自 Bike Rentals 数据集的上述可视化。Seaborn 仍然使用 Matplotlib 语法来执行 seaborn 图表，具有相对较小但明显的语法差异。***
 
@@ -386,7 +386,7 @@ plt.title('Bike Rentals at Different Temperatures\nBy Season', fontdict=fontdict
          position=(0.5,1));
 ```
 
-![seaborn-scatterplot-talk-ticks](../Images/3963b42dd222399f624bd4eeb0ffac9a.png)
+![seaborn-scatterplot-talk-ticks](img/3963b42dd222399f624bd4eeb0ffac9a.png)
 
 现在让我们来看一下相同的图表，但使用 `sns.set_context('paper', font_scale=2)` 和 `sns.set_style('white')`
 
@@ -415,9 +415,9 @@ plt.title('Bike Rentals at Different Temperatures\nBy Season', fontdict=fontdict
          position=(0.5,1));
 ```
 
-![seaborn-scatterplot-paper-white](../Images/d39f0d78ac0047837a939bd78cbc7cf3.png)
+![seaborn-scatterplot-paper-white](img/d39f0d78ac0047837a939bd78cbc7cf3.png)
 
-现在我们终于用**更少的代码行**和**更好的分辨率**使用Seaborn重新创建了之前的matplotlib样式图。让我们再进一步，对图进行分面处理以完成：
+现在我们终于用**更少的代码行**和**更好的分辨率**使用 Seaborn 重新创建了之前的 matplotlib 样式图。让我们再进一步，对图进行分面处理以完成：
 
 ```py
 
@@ -433,9 +433,9 @@ g.set_xlabels("Normalized Temperature",fontweight='bold', size=15)
 g.set_ylabels("Count of Total Bike Rentals",fontweight='bold', size=20);
 ```
 
-![seaborn-scatterplot-talk-ticks-facet](../Images/8fc662673c2eae7da534dae2f56e8af0.png)
+![seaborn-scatterplot-talk-ticks-facet](img/8fc662673c2eae7da534dae2f56e8af0.png)
 
-要更改图形的形状，需要调整`aspect`参数。增加此处的aspect值将创建一个更方形的图形。它与`height`配合使用，所以可以通过这两个参数实验不同的大小。
+要更改图形的形状，需要调整`aspect`参数。增加此处的 aspect 值将创建一个更方形的图形。它与`height`配合使用，所以可以通过这两个参数实验不同的大小。
 
 要更改行和列的数量，请使用`col_wrap`参数。它与`col`参数配合使用。它检测类别的数量并相应分配。
 
@@ -453,28 +453,28 @@ g.set_xlabels("Normalized Temperature",fontweight='bold', size=15)
 g.set_ylabels("Count of\nTotal Bike Rentals",fontweight='bold', size=20);
 ```
 
-![figure-name](../Images/570390be3c0eace90dcebfda7cd49703.png)
+![figure-name](img/570390be3c0eace90dcebfda7cd49703.png)
 
 ***注意：本教程的部分内容曾用于我为[维多利亚理工学院](https://www.vit.edu.au/)准备的教程中***
 
 **相关：**
 
-+   [6个数据可视化灾难 – 如何避免](/2019/02/data-visualization-disasters-avoid.html)
++   6 个数据可视化灾难 – 如何避免
 
-+   [5个用Python和代码快速简便的数据可视化](/2018/07/5-quick-easy-data-visualizations-python-code.html)
++   5 个用 Python 和代码快速简便的数据可视化
 
-+   [10个适用于任何学科的有用Python数据可视化库](/2016/06/python-data-visualization-libraries.html)
++   10 个适用于任何学科的有用 Python 数据可视化库
 
 ### 更多相关话题
 
-+   [使用Matplotlib和Seaborn创建可视化]（https://www.kdnuggets.com/creating-visuals-with-matplotlib-and-seaborn）
++   [使用 Matplotlib 和 Seaborn 创建可视化]（https://www.kdnuggets.com/creating-visuals-with-matplotlib-and-seaborn）
 
-+   [KDnuggets新闻 22:n16，4月20日：顶级YouTube学习频道…](https://www.kdnuggets.com/2022/n16.html)
++   [KDnuggets 新闻 22:n16，4 月 20 日：顶级 YouTube 学习频道…](https://www.kdnuggets.com/2022/n16.html)
 
-+   [使用Seaborn进行Python数据可视化](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
++   [使用 Seaborn 进行 Python 数据可视化](https://www.kdnuggets.com/2022/04/data-visualization-python-seaborn.html)
 
-+   [每个数据科学家都应该知道的三种R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三种 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [是什么使Python成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创企业理想的编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
 
-+   [Matplotlib数据可视化简介](https://www.kdnuggets.com/2022/12/introduction-data-visualization-matplotlib.html)
++   [Matplotlib 数据可视化简介](https://www.kdnuggets.com/2022/12/introduction-data-visualization-matplotlib.html)

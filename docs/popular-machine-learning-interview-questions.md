@@ -1,14 +1,14 @@
 # 流行的机器学习面试问题
 
-> 原文：[https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions.html](https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions.html)
+> 原文：[`www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions.html`](https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions.html)
 
-[评论](#comments)
+评论
 
 **由[Mo Daoud](https://mohamed-daoud214.medium.com/)提供，科技工作者，AI 爱好者**。
 
 面试足够困难和压力重重，我在这里的目标是帮助你为机器学习面试做好准备。这份清单并不包括所有面试问题，也不能保证帮助你通过面试。它基本上是一份我从担任面试官时收集的面试问题列表。
 
-![](../Images/f49eb31594a18f38363ff2867a3a3e50.png)
+![](img/f49eb31594a18f38363ff2867a3a3e50.png)
 
 *照片由[Clem Onojeghuo](https://unsplash.com/@clemono?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)上提供。*
 
@@ -24,7 +24,7 @@
 
 ### *Q2\. 给我一个监督学习的例子，以及一个无监督学习的例子？*
 
-在这里，我通常期望听到3个词：**分类**、**回归**和**聚类**。这些是机器学习的一些最流行和基础的用法。
+在这里，我通常期望听到 3 个词：**分类**、**回归**和**聚类**。这些是机器学习的一些最流行和基础的用法。
 
 分类和回归主要使用监督学习，候选人可以举例说明如何使用历史数据来训练模型。
 
@@ -50,7 +50,7 @@
 
 **高偏差**意味着模型很简单，在训练阶段无法捕捉许多特征，也就是欠拟合模型。**高方差**意味着模型很复杂，不仅捕捉了特征，还学习了除了那些特定训练集特征之外的其他内容，这也被称为过拟合。
 
-![](../Images/1405d7cd027c2b6a521a8ab305bced4a.png)
+![](img/1405d7cd027c2b6a521a8ab305bced4a.png)
 
 *图像来源：作者。*
 
@@ -64,7 +64,7 @@
 
 混淆矩阵仅用于评估监督学习模型的性能，不能用于无监督模型。
 
-![](../Images/89a8731e06ac36a6c7f326f945c1c3a1.png)
+![](img/89a8731e06ac36a6c7f326f945c1c3a1.png)
 
 *混淆矩阵。来源：[你想知道的机器学习知识但又太害怕去问的事](https://medium.com/swlh/everything-you-wanted-to-know-about-machine-learning-but-were-too-afraid-to-ask-d7d92021038).*
 
@@ -78,7 +78,7 @@
 
 学习率是一个调整参数，它决定了每次迭代（epoch）的步长。步长是指你在估计错误后更新神经元权重的速度。模型权重通过反向传播错误方法进行更新。因此，输入会从模型的输入节点流经神经元到输出节点，然后确定错误并反向传播以更新神经元（模型）权重。更新这些神经元权重的速度就是学习率。
 
-![](../Images/9f2391a298b360d81443d7746c588095.png)
+![](img/9f2391a298b360d81443d7746c588095.png)
 
 *图片作者。*
 
@@ -106,13 +106,13 @@
 
 **准确率**：这是指在所有模型预测为正的情况下，有多少实际是正的。当假阳性对你的输出很重要时，你需要关注准确率。
 
-![](../Images/13c8ee1afea09113fc5bddc49c9bfbaa.png)
+![](img/13c8ee1afea09113fc5bddc49c9bfbaa.png)
 
 *准确率。*
 
 假设你是一个小公司，你向潜在的客户发送样品，这些客户可能会购买你的产品。你不想将样品发送给那些无论如何都不会购买你产品的客户。那些收到样品但不购买你产品的客户是假阳性，因为你预测他们会购买你的产品（预测 = 1），但实际上他们永远不会（实际 = 0）。在这种情况下，你希望尽可能减少假阳性，以获得高准确率。
 
-![](../Images/46d5a3828cce992e3ba3227639559ec4.png)
+![](img/46d5a3828cce992e3ba3227639559ec4.png)
 
 *召回率。*
 
@@ -136,7 +136,7 @@ PCA 是一种无监督机器学习算法，旨在降低数据集中维度（特�
 
 [原文](https://towardsdatascience.com/popular-machine-learning-interview-questions-91d569afe147)。经许可转载。
 
-*准备好更多面试问题了吗？查看**[本文第 2 部分](https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions-part2.html)**！*
+*准备好更多面试问题了吗？查看**[本文第二部分](https://www.kdnuggets.com/2021/01/popular-machine-learning-interview-questions-part2.html)**！*
 
 **相关：**
 
@@ -150,11 +150,11 @@ PCA 是一种无监督机器学习算法，旨在降低数据集中维度（特�
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 

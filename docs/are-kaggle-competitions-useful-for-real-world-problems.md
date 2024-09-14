@@ -1,8 +1,8 @@
 # Kaggle 竞赛对现实世界问题有用吗？
 
-> 原文：[https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)
+> 原文：[`www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems`](https://www.kdnuggets.com/are-kaggle-competitions-useful-for-real-world-problems)
 
-![Kaggle 竞赛对现实世界问题有用吗？](../Images/5f008ed1d328cb180c019ae1ad6457e4.png)
+![Kaggle 竞赛对现实世界问题有用吗？](img/5f008ed1d328cb180c019ae1ad6457e4.png)
 
 图片来源：作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -30,13 +30,13 @@ Quora 上提出了一个问题：[我应该投资时间参加 Kaggle 竞赛还�
 
 尽管有各种各样的回应，但正如你在下面的截图中看到的那样，解释了你的问题的答案。
 
-![Kaggle 竞赛对现实世界问题有用吗？](../Images/fb3868e36f5270877a566e9bcd5913ba.png)
+![Kaggle 竞赛对现实世界问题有用吗？](img/fb3868e36f5270877a566e9bcd5913ba.png)
 
 让我们探讨一下 Kaggle 竞赛是否对现实世界的问题有用。
 
 # Kaggle 与现实世界
 
-我们已经讨论了Kaggle竞赛如何帮助你的学习旅程，以及它的某些方面如何反映现实世界的情况。但它对现实世界的问题有用吗？总体答案是否定的。让我从不同方面解释一下原因。
+我们已经讨论了 Kaggle 竞赛如何帮助你的学习旅程，以及它的某些方面如何反映现实世界的情况。但它对现实世界的问题有用吗？总体答案是否定的。让我从不同方面解释一下原因。
 
 ## 确定问题
 

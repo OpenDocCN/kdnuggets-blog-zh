@@ -1,8 +1,8 @@
 # 使用 SQL 与 Python: SQLAlchemy 和 Pandas
 
-> 原文：[https://www.kdnuggets.com/using-sql-with-python-sqlalchemy-and-pandas](https://www.kdnuggets.com/using-sql-with-python-sqlalchemy-and-pandas)
+> 原文：[`www.kdnuggets.com/using-sql-with-python-sqlalchemy-and-pandas`](https://www.kdnuggets.com/using-sql-with-python-sqlalchemy-and-pandas)
 
-![使用 SQL 与 Python: SQLAlchemy 和 Pandas 封面图](../Images/514e8ddb11081ab64e092520e5706977.png)
+![使用 SQL 与 Python: SQLAlchemy 和 Pandas 封面图](img/514e8ddb11081ab64e092520e5706977.png)
 
 作者提供的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -68,7 +68,7 @@ data.to_sql('countries_poluation', engine, if_exists='replace')
 
 结果是，你的 SQLite 数据库保存在你的文件目录中。
 
-![Deepnote 文件管理器](../Images/421fd28094b44ace698fb0faef8e6223.png)
+![Deepnote 文件管理器](img/421fd28094b44ace698fb0faef8e6223.png)
 
 > **注意：** 我在本教程中使用 Deepnote 来无缝运行 Python 代码。Deepnote 是一个免费的 AI 云笔记本，它将帮助你快速运行任何数据科学代码。
 
@@ -103,7 +103,7 @@ table_df.head()
 
 SQL 表已成功加载为数据框。这意味着你现在可以使用流行的 Python 包，如 Seaborn、Matplotlib、Scipy、Numpy 等来进行数据分析和可视化。
 
-![国家空气污染 pandas 数据框](../Images/334a7809a6841a54b9db56493b4f5a3e.png)
+![国家空气污染 pandas 数据框](img/334a7809a6841a54b9db56493b4f5a3e.png)
 
 ## 3\. 使用 Pandas 运行 SQL 查询
 
@@ -153,13 +153,13 @@ The average of top 5 cities: 94.06
 sql_df.plot(x="city",y="2023",kind = "barh");
 ```
 
-![使用 pandas 进行数据可视化](../Images/641625a7e2204e9360c907cfbf20ba18.png)
+![使用 pandas 进行数据可视化](img/641625a7e2204e9360c907cfbf20ba18.png)
 
 ## 结论
 
 使用 SQLAlchemy 与 Pandas 的可能性是无限的。你可以使用 SQL 查询进行简单的数据分析，但要可视化结果或甚至训练机器学习模型，你必须将其转换为 Pandas 数据框。
 
-在本教程中，我们学习了如何将 SQL 数据库加载到 Python 中，进行数据分析，并创建可视化。如果你喜欢本指南，你还会喜欢 '[在 Python 中使用 SQLite 数据库的指南](/a-guide-to-working-with-sqlite-databases-in-python)'，该指南深入探讨了如何使用 Python 的内置 sqlite3 模块。
+在本教程中，我们学习了如何将 SQL 数据库加载到 Python 中，进行数据分析，并创建可视化。如果你喜欢本指南，你还会喜欢 '在 Python 中使用 SQLite 数据库的指南'，该指南深入探讨了如何使用 Python 的内置 sqlite3 模块。
 
 [](https://www.polywork.com/kingabzpro)****[Abid Ali Awan](https://www.polywork.com/kingabzpro)**** ([@1abidaliawan](https://www.linkedin.com/in/1abidaliawan)) 是一位认证数据科学专家，热衷于构建机器学习模型。目前，他专注于内容创作和撰写关于机器学习和数据科学技术的技术博客。Abid 拥有技术管理硕士学位和电信工程学士学位。他的愿景是使用图神经网络为面临心理健康问题的学生开发人工智能产品。
 
@@ -175,4 +175,4 @@ sql_df.plot(x="city",y="2023",kind = "barh");
 
 +   [在 Pandas 数据框中使用 apply() 方法](https://www.kdnuggets.com/2022/07/apply-method-pandas-dataframes.html)
 
-+   [如何使用插值技术处理Pandas中的缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)
++   [如何使用插值技术处理 Pandas 中的缺失数据](https://www.kdnuggets.com/how-to-deal-with-missing-data-using-interpolation-techniques-in-pandas)

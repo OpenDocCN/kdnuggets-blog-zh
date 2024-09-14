@@ -1,8 +1,8 @@
 # 利用 BigQuery ML 为数据分析师简化机器学习
 
-> 原文：[https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)
+> 原文：[`www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml`](https://www.kdnuggets.com/machine-learning-made-simple-for-data-analysts-with-bigquery-ml)
 
-![利用 BigQuery ML 为数据分析师简化机器学习](../Images/8badc466f2a74333c9f3a3900f93d8e7.png)
+![利用 BigQuery ML 为数据分析师简化机器学习](img/8badc466f2a74333c9f3a3900f93d8e7.png)
 
 图片由 [freepik](https://www.freepik.com/free-vector/hand-drawn-flat-design-npl-illustration_22379566.htm#fromView=search&page=1&position=21&uuid=c879c91c-0a8c-48ea-b9e8-91f99bccee38) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 

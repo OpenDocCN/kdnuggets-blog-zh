@@ -1,28 +1,28 @@
 # 我的机器学习模型无法学习。我该怎么办？
 
-> 原文：[https://www.kdnuggets.com/2021/02/machine-learning-model-not-learn.html](https://www.kdnuggets.com/2021/02/machine-learning-model-not-learn.html)
+> 原文：[`www.kdnuggets.com/2021/02/machine-learning-model-not-learn.html`](https://www.kdnuggets.com/2021/02/machine-learning-model-not-learn.html)
 
-[comments](#comments)
+comments
 
 **由 [Rosaria Silipo](https://www.linkedin.com/in/rosaria/)、KNIME 和 [Diego Arenas](https://www.linkedin.com/in/darenasc/)、圣安德鲁斯大学，英国**
 
-![Image](../Images/78fac14fdb121750cf2091a531a51dd1.png)
+![Image](img/78fac14fdb121750cf2091a531a51dd1.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
 如果你一般处理数据，特别是机器学习算法，你可能会对模型真的不愿意学习当前任务感到沮丧。你已经尝试了所有方法，但准确性指标就是无法提高。接下来怎么办？问题出在哪里？这是一个无法解决的任务还是有你未意识到的解决方案？
 
-首先，不要担心。这种迷茫和不知道如何继续的感觉曾经发生过——并且仍然会发生——在所有人身上，即使是最有经验的机器学习专家也是如此。人工智能（AI）、数据科学或预测分析——无论名称如何——都比一系列预定义的步骤要复杂得多。选择合适的模型、成功的架构、最佳的超参数，强烈依赖于任务、数据领域和可用数据集。获得一个可行的AI模型仍然需要大量的手工调整，这部分解释了为什么一些数据科学家对许多宣称能够训练成功数据科学模型的自动化应用感到反感。
+首先，不要担心。这种迷茫和不知道如何继续的感觉曾经发生过——并且仍然会发生——在所有人身上，即使是最有经验的机器学习专家也是如此。人工智能（AI）、数据科学或预测分析——无论名称如何——都比一系列预定义的步骤要复杂得多。选择合适的模型、成功的架构、最佳的超参数，强烈依赖于任务、数据领域和可用数据集。获得一个可行的 AI 模型仍然需要大量的手工调整，这部分解释了为什么一些数据科学家对许多宣称能够训练成功数据科学模型的自动化应用感到反感。
 
 现在我们希望让你冷静下来，让我们看看你可以做些什么来解决这个困境。我们在这里提出了一些我们在模型训练似乎失控时使用的技巧。
 
@@ -52,7 +52,7 @@
 
 +   模型不会对数据进行过拟合。
 
-+   性能不好。对那些准确率为100%或误差为0%的模型要保持怀疑：这可能是模型存在问题的红旗，很可能数据集中包含了与你试图预测的目标变量同义的变量。
++   性能不好。对那些准确率为 100%或误差为 0%的模型要保持怀疑：这可能是模型存在问题的红旗，很可能数据集中包含了与你试图预测的目标变量同义的变量。
 
 +   最后，你确定自己真的卡住了吗？有时，模型表现得很好，或者至少表现得相当好，而我们缺少的只是下一步。
 
@@ -138,11 +138,11 @@
 
 **相关：**
 
-+   [生产机器学习监控：异常值、漂移、解释器和统计性能](/2020/12/production-machine-learning-monitoring-outliers-drift-explainers-statistical-performance.html)
++   生产机器学习监控：异常值、漂移、解释器和统计性能
 
-+   [2021年你应该了解的所有机器学习算法](/2021/01/machine-learning-algorithms-2021.html)
++   2021 年你应该了解的所有机器学习算法
 
-+   [MLOps：模型监控基础](/2021/01/mlops-model-monitoring-101.html)
++   MLOps：模型监控基础
 
 ### 更多主题
 

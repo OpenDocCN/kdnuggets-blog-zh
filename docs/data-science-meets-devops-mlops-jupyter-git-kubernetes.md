@@ -1,8 +1,8 @@
 # 数据科学与 DevOps 相遇：使用 Jupyter、Git 和 Kubernetes 的 MLOps
 
-> 原文：[https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
+> 原文：[`www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html`](https://www.kdnuggets.com/2020/08/data-science-meets-devops-mlops-jupyter-git-kubernetes.html)
 
-[评论](#comments)
+评论
 
 **作者：[Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/)，谷歌软件工程师 & [Hamel Husain](https://hamel.dev/)，GitHub 高级机器学习工程师**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 由于 Kubeflow 的爆炸性流行，我们接收了大量的 GitHub 问题，这些问题必须被分类并转交给合适的主题专家。下图展示了过去一年中新开启的问题数量：
 
-![图](../Images/ca21ec3fd9d9af4779955e596f179893.png)
+![图](img/ca21ec3fd9d9af4779955e596f179893.png)
 
 **图 1:** Kubeflow 问题数量
 
@@ -70,7 +70,7 @@
 
 +   Kubernetes 和托管云服务用于基础设施。
 
-![图](../Images/931ec07d5c7eb19b1e7c4ea2d126b568.png)
+![图](img/931ec07d5c7eb19b1e7c4ea2d126b568.png)
 
 **图 2:** 展示了我们如何进行 CI/CD。我们目前的管道由两个独立操作的控制器组成。我们通过描述我们希望存在的模型（即我们的模型“新鲜”的含义）来配置 Trainer（左侧）。Trainer 定期检查训练模型是否足够新鲜，如果不够新鲜则训练一个新模型。同样地，我们配置 Deployer（右侧）来定义部署模型与训练模型集合同步的含义。如果未部署正确的模型，它将部署一个新模型。
 
@@ -82,7 +82,7 @@
 
 协调器是一种被证明对构建弹性系统极其有用的控制模式。协调模式 [是 Kubernetes 工作原理的核心](https://book.kubebuilder.io/cronjob-tutorial/controller-overview.html)。图 3 展示了协调器的工作原理。协调器通过首先观察世界的状态来工作；例如，当前部署了什么模型。然后协调器将其与世界的期望状态进行比较并计算差异；例如，标签为“version=20200724”的模型应该被部署，但当前部署的模型标签为“version=20200700”。协调器随后采取必要的行动将世界驱动到期望状态；例如，打开一个拉取请求以更改部署的模型。
 
-![图](../Images/d8e6c56c244863ca835a1cfa7e1ad079.png)
+![图](img/d8e6c56c244863ca835a1cfa7e1ad079.png)
 
 **图 3.** 我们的部署器应用的 Reconciler 模式示意图。
 
@@ -92,7 +92,7 @@ Reconciler 已被证明在构建弹性系统方面极为有用，因为一个良
 
 控制器的声明性特征意味着数据可以通过一系列控制器流动，而无需显式创建 DAG。与其使用 DAG，不如将一系列数据处理步骤表示为一组期望的状态，如下图 4 所示：
 
-![图](../Images/1c53e020082053494462bff18c544df7.png)
+![图](img/1c53e020082053494462bff18c544df7.png)
 
 **图 4:** 说明了管道如何从独立的控制器中产生，而无需明确编码一个有向无环图（DAG）。这里我们有两个完全独立的控制器。第一个控制器确保每个元素 a[i] 都应该有一个元素 b[i]。第二个控制器确保每个元素 b[i] 都应该有一个元素 c[i]。
 
@@ -108,7 +108,7 @@ Reconciler 已被证明在构建弹性系统方面极为有用，因为一个良
 
 GitOps，如图 5 所示，是一种管理基础设施的模式。GitOps 的核心思想是源代码控制（不一定是 git）应当是描述基础设施配置文件的真实来源。然后，控制器可以监视源代码控制并在配置更改时自动更新你的基础设施。这意味着要进行更改（或撤销更改），你只需打开一个拉取请求。
 
-![图](../Images/adfb35bbfe035929d945819692faca86.png)
+![图](img/adfb35bbfe035929d945819692faca86.png)
 
 **图 5:** 要推送 Label Bot 的新模型，我们创建一个 PR 更新配置映射，以存储我们想要使用的 Auto ML 模型的 ID。当 PR 被合并后， [Anthos Config Management(ACM)](https://cloud.google.com/anthos-config-management/docs) 会自动将这些更改部署到我们的 GKE 集群。因此，后续的预测将使用新模型。 （图片由 [Weaveworks](https://www.weave.works/blog/automate-kubernetes-with-gitops) 提供）
 
@@ -256,7 +256,7 @@ spec:
 
 由于我们没有明确的 DAG 表示 CI/CD 流水线中的步骤顺序，因此理解我们的模型的血统可能会很具挑战性。幸运的是，Kubeflow Metadata 通过使每个步骤记录其生成的输出所使用的代码和输入的信息变得容易，解决了这个问题。Kubeflow 元数据可以轻松恢复和绘制血统图。下图展示了我们 [xgboost 示例](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb) 的血统图示例。
 
-![图](../Images/f326e5bb68979f485160afc1ff4f5995.png)
+![图](img/f326e5bb68979f485160afc1ff4f5995.png)
 
 **图 6：** 我们 [xgboost 示例](https://github.com/kubeflow/examples/blob/master/xgboost_synthetic/build-train-deploy.ipynb) 的血统跟踪 UI 截图。
 
@@ -264,48 +264,48 @@ spec:
 
 ### 结论
 
-![alt_text](../Images/5fbf922ac3998192a63305b57198a28c.png)
+![alt_text](img/5fbf922ac3998192a63305b57198a28c.png)
 
-构建ML产品是团队合作的成果。为了将模型从概念验证阶段转变为已发布的产品，数据科学家和DevOps工程师需要协作。为了促进这种协作，我们认为允许数据科学家和DevOps工程师使用他们首选的工具非常重要。具体来说，我们希望支持以下工具：数据科学家、DevOps工程师和 [SRE](https://en.wikipedia.org/wiki/Site_Reliability_Engineering)。
+构建 ML 产品是团队合作的成果。为了将模型从概念验证阶段转变为已发布的产品，数据科学家和 DevOps 工程师需要协作。为了促进这种协作，我们认为允许数据科学家和 DevOps 工程师使用他们首选的工具非常重要。具体来说，我们希望支持以下工具：数据科学家、DevOps 工程师和 [SRE](https://en.wikipedia.org/wiki/Site_Reliability_Engineering)。
 
-+   Jupyter笔记本用于模型开发。
++   Jupyter 笔记本用于模型开发。
 
-+   GitOps用于持续集成和部署。
++   GitOps 用于持续集成和部署。
 
-+   Kubernetes和托管云服务作为基础设施。
++   Kubernetes 和托管云服务作为基础设施。
 
-为了最大限度地提高每个团队的自主性并减少对工具的依赖，我们的CI/CD过程采用了去中心化的方法。我们的方法不是明确地定义一个连接步骤的DAG，而是依赖于一系列可以独立定义和管理的控制器。我们认为这自然适用于责任可能在团队之间分配的企业；数据工程团队可能负责将网络日志转换为特征，建模团队可能负责从特征中生成模型，而部署团队可能负责将这些模型推向生产环境。
+为了最大限度地提高每个团队的自主性并减少对工具的依赖，我们的 CI/CD 过程采用了去中心化的方法。我们的方法不是明确地定义一个连接步骤的 DAG，而是依赖于一系列可以独立定义和管理的控制器。我们认为这自然适用于责任可能在团队之间分配的企业；数据工程团队可能负责将网络日志转换为特征，建模团队可能负责从特征中生成模型，而部署团队可能负责将这些模型推向生产环境。
 
 ### 深入阅读
 
-如果你想了解更多关于GitOps的内容，我们建议你查看Weaveworks的这个[指南](https://www.weave.works/technologies/gitops/)。
+如果你想了解更多关于 GitOps 的内容，我们建议你查看 Weaveworks 的这个[指南](https://www.weave.works/technologies/gitops/)。
 
-要学习如何构建自己的Kubernetes控制器， [kubebuilder书籍](https://book.kubebuilder.io/) 提供了一个端到端的示例。
+要学习如何构建自己的 Kubernetes 控制器， [kubebuilder 书籍](https://book.kubebuilder.io/) 提供了一个端到端的示例。
 
 **[Jeremy Lewi](https://www.linkedin.com/in/jeremy-lewi-600aaa8/)** 是谷歌的软件工程师。
 
-**[Hamel Husain](https://hamel.dev/)** 是GitHub的高级机器学习工程师。
+**[Hamel Husain](https://hamel.dev/)** 是 GitHub 的高级机器学习工程师。
 
 [原文](https://blog.kubeflow.org/mlops/)。已获得许可转载。
 
 **相关：**
 
-+   [我从200种机器学习工具中学到的东西](/2020/07/200-machine-learning-tools.html)
++   我从 200 种机器学习工具中学到的东西
 
-+   [在边缘设备上实施MLOps](/2020/08/implementing-mlops-edge-device.html)
++   在边缘设备上实施 MLOps
 
-+   [端到端机器学习平台的概览](/2020/07/tour-end-to-end-machine-learning-platforms.html)
++   端到端机器学习平台的概览
 
 ### 更多相关内容
 
-+   [Kubernetes实战：第二版](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)
++   [Kubernetes 实战：第二版](https://www.kdnuggets.com/2022/03/manning-kubernetes-action-second-edition.html)
 
-+   [Kubernetes中的高可用SQL Server Docker容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
++   [Kubernetes 中的高可用 SQL Server Docker 容器](https://www.kdnuggets.com/2022/04/high-availability-sql-server-docker-containers-kubernetes.html)
 
-+   [数据科学中的Git速查表](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
++   [数据科学中的 Git 速查表](https://www.kdnuggets.com/2022/11/git-data-science-cheatsheet.html)
 
-+   [通过这个免费的DevOps速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
++   [通过这个免费的 DevOps 速成课程释放你的潜力](https://www.kdnuggets.com/2023/03/corise-unlock-potential-with-this-free-devops-crash-course.html)
 
-+   [每个初学者应该学习的10个必备DevOps工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)
++   [每个初学者应该学习的 10 个必备 DevOps 工具](https://www.kdnuggets.com/10-essential-devops-tools-every-beginner-should-learn)
 
-+   [数据科学家必备的14条Git命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)
++   [数据科学家必备的 14 条 Git 命令](https://www.kdnuggets.com/2022/06/14-essential-git-commands-data-scientists.html)

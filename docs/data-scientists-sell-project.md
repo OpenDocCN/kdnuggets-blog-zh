@@ -1,12 +1,12 @@
 # 数据科学家：如何推销你的项目和你自己
 
-> 原文：[https://www.kdnuggets.com/2021/11/data-scientists-sell-project.html](https://www.kdnuggets.com/2021/11/data-scientists-sell-project.html)
+> 原文：[`www.kdnuggets.com/2021/11/data-scientists-sell-project.html`](https://www.kdnuggets.com/2021/11/data-scientists-sell-project.html)
 
-[评论](#comments)
+评论
 
 **由 [Ilro Lee](https://www.linkedin.com/in/ilrolee/)，NSW 客户服务部高级分析单元经理**
 
-![](../Images/1ddc96abe7aefa4d294ac0bbf1ec2782.png)
+![](img/1ddc96abe7aefa4d294ac0bbf1ec2782.png)
 
 照片由 [JohnnyGreig](https://www.canva.com/p/gettysignature/) 提供，拍摄于 [Canva](https://www.canva.com/photos/MAEI-Qap3KE-mid-30s-businessman-explaining-merits-of-plan-to-colleague/)
 
@@ -14,11 +14,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 管理
 
 * * *
 
@@ -78,9 +78,9 @@
 
 **我们的应用程序是一款** 新型调查产品
 
-**它提供** 在24小时内设计、实施并获得结果的能力。
+**它提供** 在 24 小时内设计、实施并获得结果的能力。
 
-**与** 其他需要超过5天才能完成的传统调查产品不同，
+**与** 其他需要超过 5 天才能完成的传统调查产品不同，
 
 **我们已经组装了** 一款快速、经济且相对准确的调查产品。
 
@@ -100,28 +100,28 @@
 
 这些是我使用过的真实案例。它有效，并且肯定能引起他们的注意。告诉我你的看法。
 
-**简历：[Ilro Lee](https://www.linkedin.com/in/ilrolee/)** 是NSW顾客服务部高级分析单元的经理。
+**简历：[Ilro Lee](https://www.linkedin.com/in/ilrolee/)** 是 NSW 顾客服务部高级分析单元的经理。
 
 [原文](https://towardsdatascience.com/data-scientists-how-to-sell-your-project-and-yourself-41e44685cfc0)。经许可转载。
 
 **相关：**
 
-+   [5件事让数据科学家与其他职业区别开来](/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   5 件事让数据科学家与其他职业区别开来
 
-+   [不要浪费时间建立你的数据科学网络](/2021/11/waste-time-building-data-science-network.html)
++   不要浪费时间建立你的数据科学网络
 
-+   [数据科学家职业路径：从新手到首份工作](/2021/11/data-scientist-career-path-first-job.html)
++   数据科学家职业路径：从新手到首份工作
 
 ### 相关话题
 
 +   [为何谦虚会提升你的数据科学技能](https://www.kdnuggets.com/2022/01/humbling-improve-data-science-skills.html)
 
-+   [如何通过数据驱动AI使自己与其他申请者区别开来](https://www.kdnuggets.com/2022/12/set-apart-applicants-datacentric-ai.html)
++   [如何通过数据驱动 AI 使自己与其他申请者区别开来](https://www.kdnuggets.com/2022/12/set-apart-applicants-datacentric-ai.html)
 
-+   [KDnuggets新闻，7月5日：一个糟糕的数据科学项目 • 10个AI…](https://www.kdnuggets.com/2023/n24.html)
++   [KDnuggets 新闻，7 月 5 日：一个糟糕的数据科学项目 • 10 个 AI…](https://www.kdnuggets.com/2023/n24.html)
 
 +   [如何为你的数据项目制定采样计划](https://www.kdnuggets.com/2022/11/create-sampling-plan-data-project.html)
 
 +   [构建一个可重复和可维护的数据科学项目：一本免费…](https://www.kdnuggets.com/2022/08/free-book-build-reproducible-maintainable-data-science-project.html)
 
-+   [从数据收集到模型部署：数据科学项目的6个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)
++   [从数据收集到模型部署：数据科学项目的 6 个阶段](https://www.kdnuggets.com/2023/01/data-collection-model-deployment-6-stages-data-science-project.html)

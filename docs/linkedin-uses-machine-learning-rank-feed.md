@@ -1,20 +1,20 @@
-# LinkedIn如何使用机器学习来排名你的动态
+# LinkedIn 如何使用机器学习来排名你的动态
 
-> 原文：[https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)
+> 原文：[`www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html`](https://www.kdnuggets.com/2022/11/linkedin-uses-machine-learning-rank-feed.html)
 
-LinkedIn动态是该网站上数百万用户的起点，它为用户建立了第一印象，这种印象，正如你所知，将会持久。为每个用户提供一个有趣的个性化动态，将传达LinkedIn最重要的核心价值，即让用户与他们的网络和活动保持联系，并建立专业身份和网络。
+LinkedIn 动态是该网站上数百万用户的起点，它为用户建立了第一印象，这种印象，正如你所知，将会持久。为每个用户提供一个有趣的个性化动态，将传达 LinkedIn 最重要的核心价值，即让用户与他们的网络和活动保持联系，并建立专业身份和网络。
 
-LinkedIn的个性化动态为用户提供了能够快速、有效且准确地查看连接更新的便利。除此之外，它还过滤掉垃圾、非专业和无关的内容，以保持用户的参与。为此，LinkedIn通过实时应用一系列规则来确定哪些内容符合要求，这些规则基于一系列可操作的指标和预测信号。这一解决方案由机器学习和深度学习算法驱动。
+LinkedIn 的个性化动态为用户提供了能够快速、有效且准确地查看连接更新的便利。除此之外，它还过滤掉垃圾、非专业和无关的内容，以保持用户的参与。为此，LinkedIn 通过实时应用一系列规则来确定哪些内容符合要求，这些规则基于一系列可操作的指标和预测信号。这一解决方案由机器学习和深度学习算法驱动。
 
-在这篇文章中，我们将讨论LinkedIn如何使用机器学习来排序用户的动态。我们将遵循在之前两篇文章中介绍的传统机器学习项目的工作流程。
+在这篇文章中，我们将讨论 LinkedIn 如何使用机器学习来排序用户的动态。我们将遵循在之前两篇文章中介绍的传统机器学习项目的工作流程。
 
-+   [端到端机器学习工作流程 [第1部分]](https://medium.com/mlearning-ai/end-to-end-machine-learning-workflow-part-1-b5aa2e3d30e2)
++   [端到端机器学习工作流程 [第一部分]](https://medium.com/mlearning-ai/end-to-end-machine-learning-workflow-part-1-b5aa2e3d30e2)
 
-+   [端到端机器学习工作流程 [第2部分]](https://medium.com/mlearning-ai/end-to-end-machine-learning-workflow-part-2-e7b6d3fb1d53)
++   [端到端机器学习工作流程 [第二部分]](https://medium.com/mlearning-ai/end-to-end-machine-learning-workflow-part-2-e7b6d3fb1d53)
 
-机器学习项目的工作流程从业务问题陈述和定义约束开始。接着是数据收集和数据准备，然后是建模部分，最后是部署和将模型投入生产。这些步骤将以排名LinkedIn动态的背景进行讨论。
+机器学习项目的工作流程从业务问题陈述和定义约束开始。接着是数据收集和数据准备，然后是建模部分，最后是部署和将模型投入生产。这些步骤将以排名 LinkedIn 动态的背景进行讨论。
 
-![LinkedIn如何使用机器学习来排名你的动态](../Images/d6750473ec120950125827d456e005ec.png)
+![LinkedIn 如何使用机器学习来排名你的动态](img/d6750473ec120950125827d456e005ec.png)
 
 LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -22,7 +22,7 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 ## 1.1\. 问题陈述
 
-设计个性化的LinkedIn动态，以最大化用户的长期参与度。由于LinkedIn动态应该为每个用户提供有益的专业内容，以增加他们的长期参与。因此，开发能够剔除低质量内容并保留高质量专业内容的模型至关重要。然而，重要的是不要过度过滤动态内容，否则会产生大量的假阳性。因此，我们应该针对分类模型追求高精度和高召回率。
+设计个性化的 LinkedIn 动态，以最大化用户的长期参与度。由于 LinkedIn 动态应该为每个用户提供有益的专业内容，以增加他们的长期参与。因此，开发能够剔除低质量内容并保留高质量专业内容的模型至关重要。然而，重要的是不要过度过滤动态内容，否则会产生大量的假阳性。因此，我们应该针对分类模型追求高精度和高召回率。
 
 我们可以通过测量点击概率，也就是**点击率**（CTR），来衡量用户的参与度。在 LinkedIn 动态中，有不同的活动，每种活动的 CTR 不同；在收集数据和训练模型时应考虑这些因素。主要有五种活动类型：
 
@@ -44,7 +44,7 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 最大化 CTR 可以形式化为训练一个有监督的二分类模型。因此，对于离线指标，可以使用归一化交叉熵，因为它有助于模型对背景 CTR 的敏感度降低：
 
-![LinkedIn 如何利用机器学习排名你的动态](../Images/08da4321ad35887c52d4e6ddfc4cde0f.png)
+![LinkedIn 如何利用机器学习排名你的动态](img/08da4321ad35887c52d4e6ddfc4cde0f.png)
 
 ### 在线指标
 
@@ -62,7 +62,7 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 +   **可扩展性：**能够为超过 3 亿用户提供定制化的用户动态。
 
-+   **延迟：** 确保延迟时间短，以便在250毫秒内为用户提供排名的动态内容是很重要的。由于多个管道需要从多个来源提取数据，然后将活动输入到排名模型中，因此所有这些步骤需要在200毫秒内完成。因此，
++   **延迟：** 确保延迟时间短，以便在 250 毫秒内为用户提供排名的动态内容是很重要的。由于多个管道需要从多个来源提取数据，然后将活动输入到排名模型中，因此所有这些步骤需要在 200 毫秒内完成。因此，
 
 +   **数据新鲜度**：模型必须知道用户已经看到什么，否则动态内容将显示重复内容，这会减少用户参与度。因此，数据需要运行得非常快。
 
@@ -70,9 +70,9 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 主要有四个技术挑战：
 
-+   **可扩展性：** 主要的技术挑战之一是系统的**可扩展性**。由于需要服务的LinkedIn用户数量极大，大约3亿用户。每个用户平均每次访问时看到40个活动，每月平均访问10次。因此，我们有大约1200亿次观察或样本。
++   **可扩展性：** 主要的技术挑战之一是系统的**可扩展性**。由于需要服务的 LinkedIn 用户数量极大，大约 3 亿用户。每个用户平均每次访问时看到 40 个活动，每月平均访问 10 次。因此，我们有大约 1200 亿次观察或样本。
 
-+   **存储：** 另一个技术挑战是数据量巨大。假设点击率每月为1%。因此，收集到的正面数据将约为10亿条数据点，负面标签将为1100亿个。我们可以假设每个数据点有500个特征，为了简化计算，我们可以假设每行特征需要500字节来存储。因此，一个月的数据将为1200亿行，每行500字节，总大小将为60TB。因此，我们只需在数据湖中保留最近六个月或一年的数据，其余的存档到冷存储中。
++   **存储：** 另一个技术挑战是数据量巨大。假设点击率每月为 1%。因此，收集到的正面数据将约为 10 亿条数据点，负面标签将为 1100 亿个。我们可以假设每个数据点有 500 个特征，为了简化计算，我们可以假设每行特征需要 500 字节来存储。因此，一个月的数据将为 1200 亿行，每行 500 字节，总大小将为 60TB。因此，我们只需在数据湖中保留最近六个月或一年的数据，其余的存档到冷存储中。
 
 +   **个性化：** 另一个技术挑战是**个性化**，因为你需要为不同兴趣的用户提供服务，因此需要确保模型针对每个用户进行个性化。
 
@@ -80,7 +80,7 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 # 2\. 数据收集
 
-在训练机器学习分类器之前，我们首先需要收集标记数据，以便对模型进行训练和评估。数据收集是数据科学项目中的关键步骤，因为我们需要收集代表我们要解决的问题的样本数据，并且与模型投入生产后预期看到的情况相似。在本案例研究中，目标是收集大量不同类型的帖子和内容数据，如第1.1节所述。
+在训练机器学习分类器之前，我们首先需要收集标记数据，以便对模型进行训练和评估。数据收集是数据科学项目中的关键步骤，因为我们需要收集代表我们要解决的问题的样本数据，并且与模型投入生产后预期看到的情况相似。在本案例研究中，目标是收集大量不同类型的帖子和内容数据，如第 1.1 节所述。
 
 我们希望收集的标记数据是用户动态中的点击或未点击标记数据。收集点击和未点击数据有三种主要方法：
 
@@ -108,19 +108,19 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 +   **意见特征：**这些特征代表用户对帖子、文章、图片、工作变动和其他活动的喜欢/评论。
 
-由于CTR通常很小（少于1%），这会导致数据集不平衡。因此，数据预处理阶段的一个关键步骤是确保数据平衡。因此，我们需要对数据进行重新采样，以增加欠代表的类别。
+由于 CTR 通常很小（少于 1%），这会导致数据集不平衡。因此，数据预处理阶段的一个关键步骤是确保数据平衡。因此，我们需要对数据进行重新采样，以增加欠代表的类别。
 
 **然而，这只应在训练集上进行，而不应在验证集和测试集上进行，因为它们应代表生产环境中预期看到的数据。**
 
 # 4. 建模
 
-现在数据已准备好进行建模部分，是时候选择和训练模型了。如前所述，这是一个分类问题，在这个分类问题中的目标值是点击。我们可以使用逻辑回归模型来完成这个分类任务。由于数据量非常大，因此我们可以在Spark中使用分布式训练的逻辑回归或使用乘法器方法。
+现在数据已准备好进行建模部分，是时候选择和训练模型了。如前所述，这是一个分类问题，在这个分类问题中的目标值是点击。我们可以使用逻辑回归模型来完成这个分类任务。由于数据量非常大，因此我们可以在 Spark 中使用分布式训练的逻辑回归或使用乘法器方法。
 
-我们还可以在分布式设置中使用深度学习模型。在这种情况下，将使用全连接层，并在最终层应用sigmoid激活函数。
+我们还可以在分布式设置中使用深度学习模型。在这种情况下，将使用全连接层，并在最终层应用 sigmoid 激活函数。
 
 对于评估，我们可以采用两种方法，第一种是将数据传统地拆分为训练集和验证集。另一种避免离线评估偏差的方法是使用重放评估，如下所示：
 
-+   假设我们有截止时间点T的训练数据。验证数据将从T+1开始，我们将使用训练好的模型对其进行排序。
++   假设我们有截止时间点 T 的训练数据。验证数据将从 T+1 开始，我们将使用训练好的模型对其进行排序。
 
 +   然后将模型的输出与实际点击进行比较，并计算匹配的预测点击数量。
 
@@ -128,11 +128,11 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 # 5. 高级设计
 
-我们可以用图1中所示的高级设计来总结整个提要排序过程。
+我们可以用图 1 中所示的高级设计来总结整个提要排序过程。
 
 我们来看看下面图示中排序流程是如何进行的：
 
-+   当用户访问LinkedIn主页时，请求将被发送到**应用服务器**以获取提要。
++   当用户访问 LinkedIn 主页时，请求将被发送到**应用服务器**以获取提要。
 
 +   **应用服务器**将提要请求发送到**Feed 服务**。
 
@@ -148,13 +148,13 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 +   该模型将返回按 CTR 可能性排序的信息流，然后返回给**应用服务器**。
 
-![LinkedIn 如何利用机器学习来排名你的信息流](../Images/b07f927355f906a92f7f123f78f1dcf2.png)
+![LinkedIn 如何利用机器学习来排名你的信息流](img/b07f927355f906a92f7f123f78f1dcf2.png)
 
 图 1\. LinkedIn 信息流排名的高层设计。
 
 为了扩展信息流排名系统，我们可以在**负载均衡器**前放置**应用服务器**。这将平衡和分配系统中多个应用服务器的负载。
 
-![LinkedIn 如何利用机器学习来排名你的信息流](../Images/ad8ddcaa47b7b4c3ae2e1a64cbbfdfa7.png)
+![LinkedIn 如何利用机器学习来排名你的信息流](img/ad8ddcaa47b7b4c3ae2e1a64cbbfdfa7.png)
 
 图 2\. 扩展后的 LinkedIn 信息流排名高层设计。
 
@@ -172,21 +172,21 @@ LinkedIn / 照片由[Alexander Shatov](https://unsplash.com/@alexbemore?utm_sour
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 为你的组织提供 IT 支持
 
 * * *
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，11月16日：LinkedIn 如何利用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
++   [KDnuggets 新闻，11 月 16 日：LinkedIn 如何利用机器学习 •…](https://www.kdnuggets.com/2022/n45.html)
 
 +   [顶级编程语言及其用途](https://www.kdnuggets.com/2021/05/top-programming-languages.html)
 
-+   [KDnuggets™ 新闻 22:n04，1月26日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
++   [KDnuggets™ 新闻 22:n04，1 月 26 日：高薪副业…](https://www.kdnuggets.com/2022/n04.html)
 
 +   [Python 上下文管理器的 3 个有趣用途](https://www.kdnuggets.com/3-interesting-uses-of-python-context-managers)
 

@@ -1,8 +1,8 @@
 # 轻松在笔记本电脑上探索 LLMs
 
-> 原文：[https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)
+> 原文：[`www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html`](https://www.kdnuggets.com/2023/04/explore-llms-easily-laptop-openplayground.html)
 
-![轻松在笔记本电脑上探索 LLMs](../Images/6d83d688dc601a06e09c9ccee5ecdfe9.png)
+![轻松在笔记本电脑上探索 LLMs](img/6d83d688dc601a06e09c9ccee5ecdfe9.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -42,13 +42,13 @@ openplayground run
 
 在终端中，你将获得以下信息。
 
-![轻松在笔记本电脑上探索 LLMs](../Images/3d8b0ffcc611b8ea4b7ad6e30c012f28.png)
+![轻松在笔记本电脑上探索 LLMs](img/3d8b0ffcc611b8ea4b7ad6e30c012f28.png)
 
 图片由作者提供
 
 openplayground 正在运行，你必须访问本地主机以使用游乐场用户界面。
 
-![轻松在笔记本电脑上探索 LLMs](../Images/8f133023b6ca00080a0861d1f5172ea9.png)
+![轻松在笔记本电脑上探索 LLMs](img/8f133023b6ca00080a0861d1f5172ea9.png)
 
 图片由作者提供
 
@@ -56,25 +56,25 @@ openplayground 正在运行，你必须访问本地主机以使用游乐场用�
 
 当你打开设置时，会有一个“提供者”部分供你选择。对于本文示例，我们将使用来自 OpenAI 的提供者。点击 OpenAI 并提供 API 密钥，以便所有模型都可以在 openplayground 中访问，如下图所示。
 
-![在你的笔记本电脑上轻松探索 LLM](../Images/b5ef904e34fd1b85f9eb733d6ad5b39e.png)
+![在你的笔记本电脑上轻松探索 LLM](img/b5ef904e34fd1b85f9eb733d6ad5b39e.png)
 
 图片来源：作者
 
 启用你想要的模型，然后返回到 Playground 标签页。当你已经选择了一个模型时，右侧会有额外的参数可以调整。
 
-![在你的笔记本电脑上轻松探索 LLM](../Images/78cb08bab1b0cfaf2cc6a3851d452a36.png)
+![在你的笔记本电脑上轻松探索 LLM](img/78cb08bab1b0cfaf2cc6a3851d452a36.png)
 
 图片来源：作者
 
 这些参数使我们可以轻松地探索和实验 LLM 模型的结果。让我们尝试一个简单的提示：“给我创建一个关于公主和魔法王国的短篇故事。”
 
-![在你的笔记本电脑上轻松探索 LLM](../Images/2fed5954c832d0893deff961d064bc9c.png)
+![在你的笔记本电脑上轻松探索 LLM](img/2fed5954c832d0893deff961d064bc9c.png)
 
 图片来源：作者
 
 生成的文本会显示为绿色。如果启用“显示概率”，你可以获取令牌生成的概率（如果模型允许）。例如，‘text-DaVinci-03’ 模型可以显示这些概率。让我们再次提交提示，并查看结果。
 
-![在你的笔记本电脑上轻松探索 LLM](../Images/1b3a0a1f5aaa03c91998c9602fec19d1.png)
+![在你的笔记本电脑上轻松探索 LLM](img/1b3a0a1f5aaa03c91998c9602fec19d1.png)
 
 图片来源：作者
 
@@ -82,7 +82,7 @@ openplayground 正在运行，你必须访问本地主机以使用游乐场用�
 
 进入“比较”标签页，我们可以比较使用相同参数生成的各种 LLM 模型文本。让我们尝试使用与之前示例相同的提示。
 
-![在你的笔记本电脑上轻松探索 LLM](../Images/fca9a2ab591eca49cc5cef0150d4cf49.png)
+![在你的笔记本电脑上轻松探索 LLM](img/fca9a2ab591eca49cc5cef0150d4cf49.png)
 
 图片来源：作者
 

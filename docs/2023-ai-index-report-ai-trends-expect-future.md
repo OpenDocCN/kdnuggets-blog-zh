@@ -1,8 +1,8 @@
 # 2023 AI 指数报告：未来我们可以预期的 AI 趋势
 
-> 原文：[https://www.kdnuggets.com/2023/06/2023-ai-index-report-ai-trends-expect-future.html](https://www.kdnuggets.com/2023/06/2023-ai-index-report-ai-trends-expect-future.html)
+> 原文：[`www.kdnuggets.com/2023/06/2023-ai-index-report-ai-trends-expect-future.html`](https://www.kdnuggets.com/2023/06/2023-ai-index-report-ai-trends-expect-future.html)
 
-![XXXXX](../Images/cd567e3a95c5d26a99612065ad715d14.png)
+![XXXXX](img/cd567e3a95c5d26a99612065ad715d14.png)
 
 图片由 [rawpixel.com](https://www.freepik.com/free-photo/technology-human-touch-background-modern-remake-creation-adam_17851045.htm#query=artificial%20intelligence&position=1&from_view=search&track=ais) 提供，来源于 [Freepik](https://www.freepik.com/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
@@ -34,7 +34,7 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 2022 年发布了 38 个重要的机器学习系统，但其中 32 个是由行业生产的。我们可以参考下面的图表，查看 2022 年的趋势相对于 2014 年的变化。
 
-![XXXXX](../Images/9dc562e8be5eaf856847e16a7c2b1c46.png)
+![XXXXX](img/9dc562e8be5eaf856847e16a7c2b1c46.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
@@ -44,7 +44,7 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 然而，每年的性能提升幅度变得越来越小，并被认为已达到平台期。下图显示了许多基准测试的年度改善幅度低于 5%。
 
-![XXXXX](../Images/1ca35425eba6b45db259d225a50481d1.png)
+![XXXXX](img/1ca35425eba6b45db259d225a50481d1.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
@@ -54,7 +54,7 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 最近的研究表明，某些大型语言模型可能会通过排放碳排放量，对环境产生负面影响，这比任何其他人类活动的碳排放量都要高。下图显示了 GPT-3 模型的碳排放量几乎是一个乘客常规航空旅行的 500 倍。
 
-![XXXXX](../Images/17cedceab9040ec80ea2a0943d30083b.png)
+![XXXXX](img/17cedceab9040ec80ea2a0943d30083b.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
@@ -70,57 +70,57 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 1.  [Nvidia](https://developer.nvidia.com/blog/designing-arithmetic-circuits-with-deep-reinforcement-learning/) 发现了一种通过让 AI 使用强化学习设计系统来改进芯片系统的新方法。
 
-1.  [Shanehsazzadeh 等 (2023)](https://www.biorxiv.org/content/10.1101/2023.01.08.523187v1) 使用零样本生成AI开发了新的 de novo 抗体发现系统。
+1.  [Shanehsazzadeh 等 (2023)](https://www.biorxiv.org/content/10.1101/2023.01.08.523187v1) 使用零样本生成 AI 开发了新的 de novo 抗体发现系统。
 
-## AI滥用事件数量的增加
+## AI 滥用事件数量的增加
 
-随着AI的新发展，滥用数量预计将增加。根据AIAAIC数据库，2021年的事件数量是2012年的26倍。趋势可以在下方的图像中查看。
+随着 AI 的新发展，滥用数量预计将增加。根据 AIAAIC 数据库，2021 年的事件数量是 2012 年的 26 倍。趋势可以在下方的图像中查看。
 
-![XXXXX](../Images/ac3cf41116235c933c3291860f87ea53.png)
+![XXXXX](img/ac3cf41116235c933c3291860f87ea53.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
 争议案例包括乌克兰总统泽连斯基的[假冒投降案例](https://www.aiaaic.org/aiaaic-repository/ai-and-algorithmic-incidents-and-controversies/president-zelenskyy-deepfake-surrender)以及英特尔开发的[学生情感监测系统](https://www.protocol.com/enterprise/emotion-ai-school-intel-edutech)。
 
-上升的案例还表明人们的意识比以前更高，从而改进了对AI滥用的跟踪。
+上升的案例还表明人们的意识比以前更高，从而改进了对 AI 滥用的跟踪。
 
-## 对AI相关专业技能的需求正在增加。
+## 对 AI 相关专业技能的需求正在增加。
 
-对AI相关技能的需求在职位发布中逐年增加，并且在各国之间有所体现。这表明许多公司对在组织内部实施AI表现出更多兴趣。下方来自 [Lightcast](https://lightcast.io/) 的数据表明，带有AI相关技能的职位发布数量呈上升趋势。
+对 AI 相关技能的需求在职位发布中逐年增加，并且在各国之间有所体现。这表明许多公司对在组织内部实施 AI 表现出更多兴趣。下方来自 [Lightcast](https://lightcast.io/) 的数据表明，带有 AI 相关技能的职位发布数量呈上升趋势。
 
-![XXXXX](../Images/af605ceffb5077399b3cfc0bac648f61.png)
-
-图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
-
-上述数据还显示，美国在需要AI技能的国家中比例最高，而新西兰最低。尽管数据仅限于所选国家，因此请谨慎对待。
-
-## 2022年显示AI私人投资减少。
-
-2022年，AI相关投资达到了919亿美元。根据 [NetBase Quid](https://netbasequid.com/) 的数据，这一数字较2021年有所减少，尽管仍是2013年的18倍。数据可以在下方的图表中查看。
-
-![XXXXX](../Images/4166c8f9e6c7a4da22b070f9fb6b1d5f.png)
+![XXXXX](img/af605ceffb5077399b3cfc0bac648f61.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
-这是一个短期的下降趋势，但从长远来看趋势依然在上升。这表明许多公司仍然愿意投资于AI发展。
+上述数据还显示，美国在需要 AI 技能的国家中比例最高，而新西兰最低。尽管数据仅限于所选国家，因此请谨慎对待。
 
-尽管采用AI的公司比例已趋于平稳，但这些公司继续领先。
+## 2022 年显示 AI 私人投资减少。
 
-## 尽管AI采纳率趋于平稳，但已经采纳AI的公司仍在不断进步。
+2022 年，AI 相关投资达到了 919 亿美元。根据 [NetBase Quid](https://netbasequid.com/) 的数据，这一数字较 2021 年有所减少，尽管仍是 2013 年的 18 倍。数据可以在下方的图表中查看。
 
-根据 [McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2022-and-a-half-decade-in-review) 报告，截至2022年，约50%的受访公司在其业务职能中采纳了人工智能。下图显示，自2019年以来，采纳率在50-60%左右平稳，尽管这一数字比2017年要高得多。
-
-![XXXXX](../Images/23203bc288da17804e243290a6df16a2.png)
+![XXXXX](img/4166c8f9e6c7a4da22b070f9fb6b1d5f.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
-研究结果表明，尽管这一数字可能会在未来几年保持在50%左右，公司仍然愿意在其业务和组织中采纳人工智能。
+这是一个短期的下降趋势，但从长远来看趋势依然在上升。这表明许多公司仍然愿意投资于 AI 发展。
+
+尽管采用 AI 的公司比例已趋于平稳，但这些公司继续领先。
+
+## 尽管 AI 采纳率趋于平稳，但已经采纳 AI 的公司仍在不断进步。
+
+根据 [McKinsey](https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai-in-2022-and-a-half-decade-in-review) 报告，截至 2022 年，约 50%的受访公司在其业务职能中采纳了人工智能。下图显示，自 2019 年以来，采纳率在 50-60%左右平稳，尽管这一数字比 2017 年要高得多。
+
+![XXXXX](img/23203bc288da17804e243290a6df16a2.png)
+
+图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
+
+研究结果表明，尽管这一数字可能会在未来几年保持在 50%左右，公司仍然愿意在其业务和组织中采纳人工智能。
 
 ## 政策制定者对人工智能的兴趣呈上升趋势
 
-根据AI Index对127个国家立法机构关于人工智能的研究，31个国家已通过了与人工智能相关的法案，这31个国家总共有123个与人工智能相关的法案。2022年有37个与人工智能相关的法案，而2016年仅有1个法案通过。这一趋势可以在下图中看到。
+根据 AI Index 对 127 个国家立法机构关于人工智能的研究，31 个国家已通过了与人工智能相关的法案，这 31 个国家总共有 123 个与人工智能相关的法案。2022 年有 37 个与人工智能相关的法案，而 2016 年仅有 1 个法案通过。这一趋势可以在下图中看到。
 
-![XXXXX](../Images/90eb64b6e3a15aeb6aa3f566e15471ed.png)
+![XXXXX](img/90eb64b6e3a15aeb6aa3f566e15471ed.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
@@ -128,9 +128,9 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 ## 全球范围内，人们已开始看到人工智能采纳的好处
 
-根据 [IPSOS](https://www.ipsos.com/sites/default/files/ct/news/documents/2022-01/Global-opinions-and-expectations-about-AI-2022.pdf) 对28个国家19504名不同年龄成人的调查，超过50%的人了解人工智能的工作原理，并相信人工智能将在未来3-5年内改变日常生活。完整的数据可以在下图中看到。
+根据 [IPSOS](https://www.ipsos.com/sites/default/files/ct/news/documents/2022-01/Global-opinions-and-expectations-about-AI-2022.pdf) 对 28 个国家 19504 名不同年龄成人的调查，超过 50%的人了解人工智能的工作原理，并相信人工智能将在未来 3-5 年内改变日常生活。完整的数据可以在下图中看到。
 
-![XXXXX](../Images/c9c3d29a0a799b51727d4b946a17e982.png)
+![XXXXX](img/c9c3d29a0a799b51727d4b946a17e982.png)
 
 图片改编自 [AI Index Report 2023](https://aiindex.stanford.edu/wp-content/uploads/2023/04/HAI_AI-Index-Report_2023.pdf)
 
@@ -138,7 +138,7 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 # 结论
 
-人工智能趋势正在上升，并可能在未来几年保持这种状态。这一趋势得到了AI Index Report的证实，其中显示了关键发现：
+人工智能趋势正在上升，并可能在未来几年保持这种状态。这一趋势得到了 AI Index Report 的证实，其中显示了关键发现：
 
 - 行业领先于学术界
 
@@ -152,7 +152,7 @@ AI 指数报告 2023 是第六版报告，主要关注 AI 发展及其对人类�
 
 - 对人工智能相关专业技能的需求在增加
 
-- 2022年显示人工智能私人投资有所减少
+- 2022 年显示人工智能私人投资有所减少
 
 - 尽管人工智能采纳率趋于平稳，但已采纳人工智能的公司仍在不断进步
 

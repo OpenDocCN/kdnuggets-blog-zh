@@ -1,6 +1,6 @@
 # 如何识别时间序列数据集中的缺失数据
 
-> 原文：[https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)
+> 原文：[`www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets`](https://www.kdnuggets.com/how-to-identify-missing-data-in-timeseries-datasets)
 
 时间序列数据，几乎每秒钟从多个来源收集，通常会面临[若干数据质量问题](https://towardsdatascience.com/how-to-do-an-eda-for-time-series-cbb92b3b1913)，其中包括缺失数据。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -26,17 +26,17 @@
 
 因此，进行彻底的探索性数据分析和数据概况分析不仅对理解数据特征至关重要，而且对如何最佳准备数据以进行分析做出明智决策也不可或缺。
 
-在这个实操教程中，我们将探索[ydata-profiling](https://github.com/ydataai/ydata-profiling)如何通过新版本中最近引入的功能帮助我们解决这些问题。我们将使用[美国污染数据集](https://data.world/data-society/us-air-pollution-data)，该数据集可在[Kaggle](https://www.kaggle.com/datasets/sogun3/uspollution?resource=download)（许可证[DbCL v1.0](https://opendatacommons.org/licenses/dbcl/1-0/)）中获取，详细描述了美国各州NO2、O3、SO2和CO污染物的信息。
+在这个实操教程中，我们将探索[ydata-profiling](https://github.com/ydataai/ydata-profiling)如何通过新版本中最近引入的功能帮助我们解决这些问题。我们将使用[美国污染数据集](https://data.world/data-society/us-air-pollution-data)，该数据集可在[Kaggle](https://www.kaggle.com/datasets/sogun3/uspollution?resource=download)（许可证[DbCL v1.0](https://opendatacommons.org/licenses/dbcl/1-0/)）中获取，详细描述了美国各州 NO2、O3、SO2 和 CO 污染物的信息。
 
 # 实操教程：对美国污染数据集的分析
 
-为了启动我们的教程，我们首先需要安装ydata-profiling的最新版本：
+为了启动我们的教程，我们首先需要安装 ydata-profiling 的最新版本：
 
 ```py
 pip install ydata-profiling==4.5.1
 ```
 
-然后，我们可以加载数据，去除不必要的特征，集中关注我们要调查的内容。为了这个示例，我们将专注于亚利桑那州Maricopa Scottsdale站点的空气污染物测量的特定行为：
+然后，我们可以加载数据，去除不必要的特征，集中关注我们要调查的内容。为了这个示例，我们将专注于亚利桑那州 Maricopa Scottsdale 站点的空气污染物测量的特定行为：
 
 ```py
 import pandas as pd
@@ -48,7 +48,7 @@ data = data.drop('Unnamed: 0', axis = 1) # dropping unnecessary index
 data_scottsdale = data[data['Site Num'] == 3003].reset_index(drop=True)
 ```
 
-现在，我们准备开始对数据集进行概况分析了！请记住，要使用时间序列分析，我们需要传递参数`tsmode=True`，以便ydata-profiling可以识别时间相关特征：
+现在，我们准备开始对数据集进行概况分析了！请记住，要使用时间序列分析，我们需要传递参数`tsmode=True`，以便 ydata-profiling 可以识别时间相关特征：
 
 ```py
 # Change 'Data Local' to datetime
@@ -63,15 +63,15 @@ profile_scottsdale.to_file('profile_scottsdale.html')
 
 输出报告将与我们已经了解的内容相似，但体验有所改进，并且为时间序列数据提供了新的总结统计数据：
 
-![XXXXX](../Images/8faa4792b0d13bde077357a8d7c6dd57.png)
+![XXXXX](img/8faa4792b0d13bde077357a8d7c6dd57.png)
 
 从概览中，我们可以通过查看提供的总结统计数据对数据集有一个整体了解：
 
-+   它包含14个不同的时间序列，每个序列有8674个记录值；
++   它包含 14 个不同的时间序列，每个序列有 8674 个记录值；
 
-+   数据集报告了从2000年1月到2010年12月的10年数据；
++   数据集报告了从 2000 年 1 月到 2010 年 12 月的 10 年数据；
 
-+   时间序列的平均周期是11小时和（接近）7分钟。这意味着平均而言，我们每11小时进行一次测量。
++   时间序列的平均周期是 11 小时和（接近）7 分钟。这意味着平均而言，我们每 11 小时进行一次测量。
 
 我们还可以获得数据中所有系列的概览图，无论是原始值还是缩放值：我们可以轻松把握序列的整体变化，以及被测量的组件（NO2、O3、SO2、CO）和特征（均值、首次最大值、首次最大小时、AQI）。
 
@@ -83,9 +83,9 @@ profile_scottsdale.to_file('profile_scottsdale.html')
 
 一件立即显现的事情是所有时间序列都呈现的波动模式，其中某些“跳跃”似乎发生在连续的测量之间。这表明存在缺失数据（“缺失信息的差距”），需要更详细地研究。以`S02 Mean`为例。
 
-![XXXXX](../Images/d380f53de2d6d5aa0e954d88f9d0fa24.png)![XXXXX](../Images/7100b2379969401e5d718e4401ed80b6.png)
+![XXXXX](img/d380f53de2d6d5aa0e954d88f9d0fa24.png)![XXXXX](img/7100b2379969401e5d718e4401ed80b6.png)
 
-在调查Gap Analysis中提供的细节时，我们得到了一些关于识别出差距特征的信息。总体来说，时间序列中存在25个差距，最短为4天，最长为32周，平均为10周。
+在调查 Gap Analysis 中提供的细节时，我们得到了一些关于识别出差距特征的信息。总体来说，时间序列中存在 25 个差距，最短为 4 天，最长为 32 周，平均为 10 周。
 
 从展示的可视化中，我们注意到一些“随机”的差距由较细的条纹表示，而较大的差距似乎遵循重复的模式。这表明我们似乎在数据集中有两种不同的缺失数据模式。
 
@@ -119,7 +119,7 @@ for year in df["Date Local"].dt.year.unique():
 # Year 2010 is missing month 8.
 ```
 
-如预期所示，时间序列中存在一些较大的信息差距，这些差距似乎是重复的，甚至是季节性的：在大多数年份中，数据在5月到8月（第5至8个月）之间未被收集。这可能是由于不可预测的原因，或已知的商业决策，例如与削减成本有关，或者只是与天气模式、温度、湿度和大气条件相关的污染物季节性变化有关。
+如预期所示，时间序列中存在一些较大的信息差距，这些差距似乎是重复的，甚至是季节性的：在大多数年份中，数据在 5 月到 8 月（第 5 至 8 个月）之间未被收集。这可能是由于不可预测的原因，或已知的商业决策，例如与削减成本有关，或者只是与天气模式、温度、湿度和大气条件相关的污染物季节性变化有关。
 
 基于这些发现，我们可以进一步调查为什么会发生这种情况，是否需要采取措施以防止未来发生类似情况，以及如何处理我们目前拥有的数据。
 

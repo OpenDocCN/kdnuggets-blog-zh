@@ -1,8 +1,8 @@
 # 免费 ChatGPT 课程：使用 OpenAI API 编写 5 个项目
 
-> 原文：[https://www.kdnuggets.com/2023/05/free-chatgpt-course-openai-api-code-5-projects.html](https://www.kdnuggets.com/2023/05/free-chatgpt-course-openai-api-code-5-projects.html)
+> 原文：[`www.kdnuggets.com/2023/05/free-chatgpt-course-openai-api-code-5-projects.html`](https://www.kdnuggets.com/2023/05/free-chatgpt-course-openai-api-code-5-projects.html)
 
-![免费 ChatGPT 课程：使用 OpenAI API 编写 5 个项目](../Images/2ab1b2ea3e8306688f3a3055de03391d.png)
+![免费 ChatGPT 课程：使用 OpenAI API 编写 5 个项目](img/2ab1b2ea3e8306688f3a3055de03391d.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -28,7 +28,7 @@ ChatGPT 完全改变了我们工作和学习的方式。人工智能领域正在
 
 # 课程详情
 
-FreeCodeCamp 最近与 Ania Kubow 合作推出了 [ChatGPT 课程 – 使用 OpenAI API 编写 5 个项目](https://youtu.be/uRQH2CFvedY)。她是一位著名的软件开发者和课程创建者。你也可以在这里找到她的 YouTube 频道：[与 Ania Kubów 一起编程](https://www.youtube.com/@AniaKubow)。这个**5小时**的课程深入探讨了 OpenAI API 的迷人世界。它提供了对 OpenAI API 的有见地的介绍及其应用，然后转到创建 5 个项目。
+FreeCodeCamp 最近与 Ania Kubow 合作推出了 [ChatGPT 课程 – 使用 OpenAI API 编写 5 个项目](https://youtu.be/uRQH2CFvedY)。她是一位著名的软件开发者和课程创建者。你也可以在这里找到她的 YouTube 频道：[与 Ania Kubów 一起编程](https://www.youtube.com/@AniaKubow)。这个**5 小时**的课程深入探讨了 OpenAI API 的迷人世界。它提供了对 OpenAI API 的有见地的介绍及其应用，然后转到创建 5 个项目。
 
 课程的详细大纲如下：
 

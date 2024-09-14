@@ -1,26 +1,26 @@
 # 如何获得数据科学面试机会：寻找工作、联系关卡管理者和获取推荐
 
-> 原文：[https://www.kdnuggets.com/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html](https://www.kdnuggets.com/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html)
+> 原文：[`www.kdnuggets.com/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html`](https://www.kdnuggets.com/2021/02/data-science-interviews-finding-jobs-reaching-gatekeepers-getting-referrals.html)
 
-[评论](#comments)
+评论
 
-获得面试机会对许多工作岗位来说自然至关重要，数据科学岗位也不例外。虽然关于这一话题的资源肯定不乏，但实用且可操作的建议却很少。在我开始求职时，我知道超过70%的求职者通过某种形式的网络关系找到工作。我知道我应该“*联系招聘人员并建立我的网络以进入这个领域*”。但即便知道了这些，我仍然面临一个重要问题：**怎么做**？
+获得面试机会对许多工作岗位来说自然至关重要，数据科学岗位也不例外。虽然关于这一话题的资源肯定不乏，但实用且可操作的建议却很少。在我开始求职时，我知道超过 70%的求职者通过某种形式的网络关系找到工作。我知道我应该“*联系招聘人员并建立我的网络以进入这个领域*”。但即便知道了这些，我仍然面临一个重要问题：**怎么做**？
 
-我第一次寻找数据科学工作是在2017年2月快要完成研究生学业的时候。我尝试了所有可能获得面试机会的方法，包括……
+我第一次寻找数据科学工作是在 2017 年 2 月快要完成研究生学业的时候。我尝试了所有可能获得面试机会的方法，包括……
 
-+   在LinkedIn、GlassDoor和Indeed上提交了数百份申请
++   在 LinkedIn、GlassDoor 和 Indeed 上提交了数百份申请
 
 +   在所有社交网络上联系（校友、共同朋友）的人以获取推荐
 
-+   在Google上进行研究，并尝试了所有推荐的内容（除了创建自己的数据科学职位），比如“*获得数据科学面试的十大方法*”、“*获取数据科学工作的5个技巧*”和“*如何获得数据科学工作：一个极其具体的指南*”。
++   在 Google 上进行研究，并尝试了所有推荐的内容（除了创建自己的数据科学职位），比如“*获得数据科学面试的十大方法*”、“*获取数据科学工作的 5 个技巧*”和“*如何获得数据科学工作：一个极其具体的指南*”。
 
 +   花费了大量时间创建、格式化和完善我的简历
 
-在以全职工作的投入（即每天至少花费8小时）进行三个月的求职之后，我终于通过AngelList获得了第一次面试机会。
+在以全职工作的投入（即每天至少花费 8 小时）进行三个月的求职之后，我终于通过 AngelList 获得了第一次面试机会。
 
-我第二次寻找数据科学工作的时间是在2018年12月被当时的初创公司裁员之后。这一次，我使用50份申请和18个推荐，在一个月内获得了**10次面试机会**（总共花费了不到30小时）。这种巨大的差异并不是因为我有更多的工作经验。实际上，我第二次的市场竞争力并没有明显提高。这种剧烈的变化是因为我第一次做得完全错误！这不是因为关于获得数据科学面试的文章具有误导性或不准确，而是它们只告诉我应该做什么，而没有告诉我如何去做。
+我第二次寻找数据科学工作的时间是在 2018 年 12 月被当时的初创公司裁员之后。这一次，我使用 50 份申请和 18 个推荐，在一个月内获得了**10 次面试机会**（总共花费了不到 30 小时）。这种巨大的差异并不是因为我有更多的工作经验。实际上，我第二次的市场竞争力并没有明显提高。这种剧烈的变化是因为我第一次做得完全错误！这不是因为关于获得数据科学面试的文章具有误导性或不准确，而是它们只告诉我应该做什么，而没有告诉我如何去做。
 
-在这篇文章中，我不仅会分享应该做什么（只有3种方式而不是10种），还会分享**如何有效地执行这些方式以获得面试机会**。你将在这篇文章中找到策略、脚本和其他免费资源，这些将帮助你在求职过程中保持条理和有序。具体来说，这个博客解答了以下问题：
+在这篇文章中，我不仅会分享应该做什么（只有 3 种方式而不是 10 种），还会分享**如何有效地执行这些方式以获得面试机会**。你将在这篇文章中找到策略、脚本和其他免费资源，这些将帮助你在求职过程中保持条理和有序。具体来说，这个博客解答了以下问题：
 
 +   我应该在哪里寻找数据科学工作？
 
@@ -30,13 +30,13 @@
 
 +   什么样的数据科学简历才算优秀？
 
-在我们开始之前，你是否更喜欢看视频？可以观看这个YouTube视频，而不是阅读。
+在我们开始之前，你是否更喜欢看视频？可以观看这个 YouTube 视频，而不是阅读。
 
 ### **三种方法**
 
 获得面试的三种方式是：**原始申请**、**联系守门人**和**获取推荐**。原始申请就是简单地将你的简历提交到职位空缺上。虽然这是一个简单的方法，但效率通常较低。联系守门人可能更有效，但需要更多的努力。获得推荐是最有效的方法，但也需要最多的时间和精力（假设你还没有认识愿意推荐你的人）。下面的图示展示了这三种方法在努力/时间和效果方面的视觉效果。
 
-![图示](../Images/608d4f15d84a0435c1a217e32c7331fa.png)
+![图示](img/608d4f15d84a0435c1a217e32c7331fa.png)
 
 图片由[Emma Ding](https://medium.com/@emmading)提供 | 获得面试的三种方式
 
@@ -52,7 +52,7 @@
 
 +   [Kaggle 职位](https://www.kaggle.com/jobs)
 
-+   [KDnuggets 工作](//jobs/index.html)
++   KDnuggets 工作
 
 +   [数据科学中心 — 分析人才](https://www.analytictalent.datasciencecentral.com/)（以美国为中心）
 
@@ -84,7 +84,7 @@
 
 ### **联系门卫：迎接更多面试机会**
 
-![图像](../Images/69762c026cd6b07c034d69161a004d22.png)
+![图像](img/69762c026cd6b07c034d69161a004d22.png)
 
 照片由 [Austin Distel](https://unsplash.com/@austindistel?utm_source=medium&utm_medium=referral) 提供，来源于 [Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)
 
@@ -104,35 +104,35 @@
 
 邮件提案应**简洁而完整**。你的邮件可能会被转发到其他人那里，没有人会为你复制和粘贴多个邮件，所以提案需要涵盖所有内容。一个好的邮件提案包括两个部分：
 
-+   第一部分是简短的介绍（2~3句话），包括你的意图、对你经验的简要描述以及你对公司的兴趣。再次强调，对公司进行一些研究将大大帮助你以具体的方式表达兴趣。
++   第一部分是简短的介绍（2~3 句话），包括你的意图、对你经验的简要描述以及你对公司的兴趣。再次强调，对公司进行一些研究将大大帮助你以具体的方式表达兴趣。
 
 +   第二部分是关于你最有影响力的项目。确保这部分内容有趣、易读且易于分享。
 
 为了简化问题，这里有一个模板。
 
-![图像](../Images/bbd1d338254f469e2209ef543aea28cf.png)
+![图像](img/bbd1d338254f469e2209ef543aea28cf.png)
 
-*这个邮件模板更新自*[*通过艰难的方式学到的教训：破解数据科学面试*](https://youtu.be/3BRLGRqj8ps)*，作者是Greg Kamradt*
+*这个邮件模板更新自*[*通过艰难的方式学到的教训：破解数据科学面试*](https://youtu.be/3BRLGRqj8ps)*，作者是 Greg Kamradt*
 
 如果你在几天内收到回复，那很好！但如果在一周左右没有收到回复，给门卫发一封**跟进邮件**。根据我和我朋友的经验，跟进邮件的回复率高于第一次发送的邮件。这是我用来发送跟进邮件的模板：
 
-![图片](../Images/d2afeb5e0a3ebe0e4bb32c46482af7ea.png)
+![图片](img/d2afeb5e0a3ebe0e4bb32c46482af7ea.png)
 
-*这个邮件模板更新自*[*如何跟进求职申请：邮件模板*](https://www.themuse.com/advice/how-to-follow-up-on-a-job-application-an-email-template)*，作者是Alex Cavoulacos*
+*这个邮件模板更新自*[*如何跟进求职申请：邮件模板*](https://www.themuse.com/advice/how-to-follow-up-on-a-job-application-an-email-template)*，作者是 Alex Cavoulacos*
 
 虽然你可以使用这两个模板作为起点，但**不要**直接复制。如果门卫看到完全相同的邮件模板，会留下负面印象。你可以更改内容，可以让它更长或更短。只要记住，主要目的是展示你的兴趣并发送所有必要的信息。
 
 ### **获取推荐：在你梦想公司面试的最佳方式**
 
-![图片](../Images/fb77bdf3f15c25fef55a7ecac405aabd.png)
+![图片](img/fb77bdf3f15c25fef55a7ecac405aabd.png)
 
 图片由[Christina @ wocintechchat.com](https://unsplash.com/@wocintechchat?utm_source=medium&utm_medium=referral)在[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)提供
 
 在第一次找工作时，我联系了校友、拥有共同朋友的人，甚至是随机的人以获取推荐。然而，最终没有得到任何推荐。相比之下，在第二次找工作时，我的网络中的人们在我还没有请求之前就主动告诉我他们愿意推荐我。
 
-随着时间的推移，我了解了一些关于请求推荐的误解。获取推荐是**让某个熟悉你工作的人给他们的公司提供一个热情的推荐**。这**不是**去烦扰你在LinkedIn或其他地方找到的陌生人。此外，大多数情况下，后者的方法并不起作用。
+随着时间的推移，我了解了一些关于请求推荐的误解。获取推荐是**让某个熟悉你工作的人给他们的公司提供一个热情的推荐**。这**不是**去烦扰你在 LinkedIn 或其他地方找到的陌生人。此外，大多数情况下，后者的方法并不起作用。
 
-获取推荐与联系门卫的不同之处在于，它**从与技术公司员工建立关系**开始，无论他们的职业是什么。无论他们是产品经理、软件工程师、产品设计师，还是其他任何职位。建立关系是非常重要的。Haseeb Qureshi有一篇[很棒的博客文章](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)讲述了如何打入科技行业。特别是在网络建设方面的部分非常精彩。Qureshi说……
+获取推荐与联系门卫的不同之处在于，它**从与技术公司员工建立关系**开始，无论他们的职业是什么。无论他们是产品经理、软件工程师、产品设计师，还是其他任何职位。建立关系是非常重要的。Haseeb Qureshi 有一篇[很棒的博客文章](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)讲述了如何打入科技行业。特别是在网络建设方面的部分非常精彩。Qureshi 说……
 
 > *……人们****讨厌**当你要求他们给你一份工作。*
 > 
@@ -142,9 +142,9 @@
 > 
 > *如果你持续这样做，人们会看到你的好奇心和真诚。他们会相信你的故事，并且****愿意****推荐你。*
 
-这可能听起来工作量很大，特别是当你之前没有做过的时候，但实际上只需要4个步骤来正确建立关系：
+这可能听起来工作量很大，特别是当你之前没有做过的时候，但实际上只需要 4 个步骤来正确建立关系：
 
-+   **请人喝咖啡**。在疫情期间这可能不容易做到，因此你可以请求一个简短的Zoom聊天。
++   **请人喝咖啡**。在疫情期间这可能不容易做到，因此你可以请求一个简短的 Zoom 聊天。
 
 +   **进行信息性面谈**。你需要展示对对方及其工作以及他们公司的兴趣。
 
@@ -152,19 +152,19 @@
 
 +   一旦有人愿意推荐你，你需要**使推荐过程顺利进行**。不要问“你们公司有没有职位空缺”，而是自己查看公司网站，找到最适合你的职位。然后准备一封电子邮件，附上你的简历、职位链接、你经验的描述，以及你为何适合该职位的解释。
 
-这些具体的步骤使我在第二次求职时获得了**18个推荐**。如果你遵循所有这些步骤，你将会获得强有力的推荐！这不仅会帮助你在第一次求职时，还会对未来的求职有帮助。
+这些具体的步骤使我在第二次求职时获得了**18 个推荐**。如果你遵循所有这些步骤，你将会获得强有力的推荐！这不仅会帮助你在第一次求职时，还会对未来的求职有帮助。
 
 下面是一个冷邮件模板，你可以用作首次联系的参考。这里的重点是让邮件变得个性化，展示你的真实兴趣。
 
-![图示](../Images/ed7e62551f9804b9838146c386f879e3.png)
+![图示](img/ed7e62551f9804b9838146c386f879e3.png)
 
-这个邮件模板更新自[如何进入科技行业](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)由Haseeb Qureshi提供。
+这个邮件模板更新自[如何进入科技行业](https://haseebq.com/how-to-break-into-tech-job-hunting-and-interviews/)由 Haseeb Qureshi 提供。
 
 再次强调，世界很小。**不要照搬完全相同的脚本**。花时间定制你的信息，因为从长远来看，这样的努力是值得的。
 
 ### **优秀简历的特点**
 
-![图示](../Images/4835d2a079e049372d2eb9eef8272448.png)
+![图示](img/4835d2a079e049372d2eb9eef8272448.png)
 
 图片由[Scott Graham](https://unsplash.com/@sctgrhm?utm_source=medium&utm_medium=referral)提供，来自[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。
 
@@ -176,7 +176,7 @@
 
 ### 避免红旗：
 
-+   **一份好的简历始终保持在1页长。** 招聘人员和招聘经理每天收到很多简历，他们通常只有不到一分钟的时间浏览一份简历并做出决定。如果你的简历有多页，他们可能甚至不会看第二页。
++   **一份好的简历始终保持在 1 页长。** 招聘人员和招聘经理每天收到很多简历，他们通常只有不到一分钟的时间浏览一份简历并做出决定。如果你的简历有多页，他们可能甚至不会看第二页。
 
 +   **不要有拼写错误。** 让朋友进行同行评审，确保在发送之前没有拼写错误或语法错误。
 
@@ -200,29 +200,29 @@
 
 如果你喜欢这篇文章并想支持我……
 
-+   *订阅我的*[*YouTube频道*](https://www.youtube.com/channel/UCAWsBMQY4KSuOuGODki-l7A)*！*
++   *订阅我的*[*YouTube 频道*](https://www.youtube.com/channel/UCAWsBMQY4KSuOuGODki-l7A)*！*
 
 +   *关注我在*[*Medium*](https://medium.com/@emmading)*上！*
 
 +   *在*[*Linkedin*](https://www.linkedin.com/in/wzding/)*上联系！*
 
-+   *是什么激励我开始使用Medium和YouTube？请看下面的答案（剧透：一次裁员！）*
++   *是什么激励我开始使用 Medium 和 YouTube？请看下面的答案（剧透：一次裁员！）*
 
 [**我如何在被解雇后两个月获得四个数据科学职位并翻倍收入**](https://towardsdatascience.com/how-i-got-4-data-science-offers-and-doubled-my-income-2-months-after-being-laid-off-b3b6d2de6938)
 
-获得100%面试到录用率的秘诀
+获得 100%面试到录用率的秘诀
 
-**简介: [Emma Ding](https://www.youtube.com/c/DataInterviewPro)** 是Airbnb的数据科学家和软件工程师。
+**简介: [Emma Ding](https://www.youtube.com/c/DataInterviewPro)** 是 Airbnb 的数据科学家和软件工程师。
 
 [原文](https://towardsdatascience.com/how-to-get-data-science-interviews-finding-jobs-reaching-gatekeepers-and-getting-referrals-63a51c0078af)。经许可转载。
 
 **相关内容:**
 
-+   [我如何在失业两个月后获得4份数据科学职位的录用，并使收入翻倍](/2021/01/data-science-offers-doubled-income-2-months.html)
++   我如何在失业两个月后获得 4 份数据科学职位的录用，并使收入翻倍
 
-+   [如何获得数据科学家的工作](/2021/01/get-job-data-scientist.html)
++   如何获得数据科学家的工作
 
-+   [如何在没有任何工作经验的情况下获得第一份数据科学工作](/2021/02/first-job-data-science-without-work-experience.html)
++   如何在没有任何工作经验的情况下获得第一份数据科学工作
 
 ### 更多相关主题
 
@@ -230,10 +230,10 @@
 
 +   [学习数据科学统计的最佳资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的AI失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的 AI 失败案例分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

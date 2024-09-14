@@ -1,10 +1,10 @@
-# 数据科学MOOC过于肤浅
+# 数据科学 MOOC 过于肤浅
 
-> 原文：[https://www.kdnuggets.com/2020/07/data-science-moocs-superficial.html](https://www.kdnuggets.com/2020/07/data-science-moocs-superficial.html)
+> 原文：[`www.kdnuggets.com/2020/07/data-science-moocs-superficial.html`](https://www.kdnuggets.com/2020/07/data-science-moocs-superficial.html)
 
-[评论](#comments)
+评论
 
-![](../Images/a7da7f9c0ffc2f36fc06a69e4814b6b2.png)
+![](img/a7da7f9c0ffc2f36fc06a69e4814b6b2.png)
 
 ### I. 介绍
 
@@ -12,35 +12,35 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 领域
 
 * * *
 
-数据科学、机器学习和分析被认为是最热门的职业路径之一。行业、学术界和政府对熟练的数据科学从业者的需求迅速增长。因此，持续的“*数据热潮*”吸引了来自物理学、数学、统计学、经济学和工程学等多种背景的专业人士。数据科学家的就业前景非常乐观。 [IBM预测](https://www.forbes.com/sites/louiscolumbus/2017/05/13/ibm-predicts-demand-for-data-scientists-will-soar-28-by-2020/#7916f3057e3b) 数据科学家的需求将于2020年激增28%。
+数据科学、机器学习和分析被认为是最热门的职业路径之一。行业、学术界和政府对熟练的数据科学从业者的需求迅速增长。因此，持续的“*数据热潮*”吸引了来自物理学、数学、统计学、经济学和工程学等多种背景的专业人士。数据科学家的就业前景非常乐观。 [IBM 预测](https://www.forbes.com/sites/louiscolumbus/2017/05/13/ibm-predicts-demand-for-data-scientists-will-soar-28-by-2020/#7916f3057e3b) 数据科学家的需求将于 2020 年激增 28%。
 
-对数据科学从业者需求的不断增长催生了大规模开放在线课程（MOOC）的激增。最受欢迎的MOOC提供商包括以下几个：
+对数据科学从业者需求的不断增长催生了大规模开放在线课程（MOOC）的激增。最受欢迎的 MOOC 提供商包括以下几个：
 
-a) **edx**: [https://www.edx.org/](https://www.edx.org/)
+a) **edx**: [`www.edx.org/`](https://www.edx.org/)
 
-b) **Coursera**: [https://www.coursera.org/](https://www.coursera.org/)
+b) **Coursera**: [`www.coursera.org/`](https://www.coursera.org/)
 
-c) **DataCamp**: [https://www.datacamp.com/](https://www.datacamp.com/)
+c) **DataCamp**: [`www.datacamp.com/`](https://www.datacamp.com/)
 
-d) **Udemy**: [https://www.udemy.com/](https://www.udemy.com/)
+d) **Udemy**: [`www.udemy.com/`](https://www.udemy.com/)
 
-e) **Udacity**: [https://www.udacity.com/](https://www.udacity.com/)
+e) **Udacity**: [`www.udacity.com/`](https://www.udacity.com/)
 
-f) **Lynda**: [https://www.lynda.com/](https://www.lynda.com/)
+f) **Lynda**: [`www.lynda.com/`](https://www.lynda.com/)
 
-由于MOOC越来越受欢迎，每个数据科学 aspirant 自然应该问自己这样一个问题：***数据科学MOOC适合我吗？***
+由于 MOOC 越来越受欢迎，每个数据科学 aspirant 自然应该问自己这样一个问题：***数据科学 MOOC 适合我吗？***
 
-为了回答这个问题，让我们探讨一下MOOC的优缺点。
+为了回答这个问题，让我们探讨一下 MOOC 的优缺点。
 
-### II. MOOC的优势
+### II. MOOC 的优势
 
 大多数 MOOC 是免费的在线课程，任何人都可以报名。MOOC 提供了一种经济实惠且灵活的学习新技能的方式。MOOC 涵盖了领导力、分析学、数据科学、机器学习、职业技能、工程学、商业与管理、人文学科、计算机科学等广泛的在线课程。这些课程通常由全球顶尖大学提供，如 MIT、哈佛大学、加州大学伯克利分校、密歇根大学、洛桑联邦理工学院、香港理工大学、昆士兰大学等。有些课程也由大型企业如 IBM、谷歌和微软提供。MOOC 的最大优势是能够向领导者和专家学习，以及有机会参加世界顶尖大学的课程。
 
@@ -50,7 +50,7 @@ f) **Lynda**: [https://www.lynda.com/](https://www.lynda.com/)
 
 a) [数据科学专业证书（HarvardX，通过 edX）](https://www.edx.org/professional-certificate/harvardx-data-science)
 
-b) [分析学：基本工具与方法（乔治亚理工X，通过 edX）](https://www.edx.org/micromasters/analytics-essential-tools-methods)
+b) [分析学：基本工具与方法（乔治亚理工 X，通过 edX）](https://www.edx.org/micromasters/analytics-essential-tools-methods)
 
 c) [应用数据科学与 Python 专业课程（密歇根大学，通过 Coursera）](https://www.coursera.org/specializations/data-science-python)
 
@@ -78,7 +78,7 @@ c) [应用数据科学与 Python 专业课程（密歇根大学，通过 Courser
 
 **额外的数据科学/机器学习资源**
 
-[数据科学基础：你需要知道的10项关键技能](https://towardsdatascience.com/data-science-minimum-10-essential-skills-you-need-to-know-to-start-doing-data-science-e5a5a9be5991)
+[数据科学基础：你需要知道的 10 项关键技能](https://towardsdatascience.com/data-science-minimum-10-essential-skills-you-need-to-know-to-start-doing-data-science-e5a5a9be5991)
 
 [数据科学课程](https://medium.com/towards-artificial-intelligence/data-science-curriculum-bf3bb6805576)
 

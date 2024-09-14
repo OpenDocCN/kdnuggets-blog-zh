@@ -1,8 +1,8 @@
 # 数据科学家和数据分析师之间的区别是什么？
 
-> 原文：[https://www.kdnuggets.com/2021/11/difference-data-scientist-data-analyst.html](https://www.kdnuggets.com/2021/11/difference-data-scientist-data-analyst.html)
+> 原文：[`www.kdnuggets.com/2021/11/difference-data-scientist-data-analyst.html`](https://www.kdnuggets.com/2021/11/difference-data-scientist-data-analyst.html)
 
-[评论](#comments)![](../Images/94c403ead3455936248907bdc7664b2c.png)
+评论![](img/94c403ead3455936248907bdc7664b2c.png)
 
 > “数据科学家是被雇佣来分析和解释复杂数字数据的人，例如网站的使用统计信息，特别是为了帮助企业做出决策。”
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 既然我们有了定义，我认为真正理解两者之间差异的最佳方法是进行比较。
 
-![](../Images/b1ad8b6948d8eb853e8c17872dc5a074.png)
+![](img/b1ad8b6948d8eb853e8c17872dc5a074.png)
 
 * 这是推荐的。成为数据科学家/分析师还有其他途径。[查看我之前的文章](https://www.aitimejournal.com/@nisha.arya.ahmed/how-to-get-into-data-science)。
 
@@ -72,11 +72,11 @@
 
 **相关：**
 
-+   [从新手到第一份工作的数据科学家职业路径](/2021/11/data-scientist-career-path-first-job.html)
++   从新手到第一份工作的数据科学家职业路径
 
-+   [区分数据科学家的五个要素](/2021/11/5-things-set-data-scientist-apart-other-professions.html)
++   区分数据科学家的五个要素
 
-+   [别浪费时间建立你的数据科学网络](/2021/11/waste-time-building-data-science-network.html)
++   别浪费时间建立你的数据科学网络
 
 ### 相关话题
 
@@ -86,8 +86,8 @@
 
 +   [效率决定了生物神经元与…之间的区别](https://www.kdnuggets.com/2022/11/efficiency-spells-difference-biological-neurons-artificial-counterparts.html)
 
-+   [SQL和对象关系映射（ORM）之间的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
++   [SQL 和对象关系映射（ORM）之间的区别是什么？](https://www.kdnuggets.com/2022/02/difference-sql-object-relational-mapping-orm.html)
 
-+   [L1正则化和L2正则化的区别](https://www.kdnuggets.com/2022/08/difference-l1-l2-regularization.html)
++   [L1 正则化和 L2 正则化的区别](https://www.kdnuggets.com/2022/08/difference-l1-l2-regularization.html)
 
-+   [GBM和XGBoost之间的区别到底是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)
++   [GBM 和 XGBoost 之间的区别到底是什么？](https://www.kdnuggets.com/wtf-is-the-difference-between-gbm-and-xgboost)

@@ -1,6 +1,6 @@
 # 50 个有用的机器学习与预测 API
 
-> 原文：[https://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html/2](https://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html/2)
+> 原文：[`www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html/2`](https://www.kdnuggets.com/2015/12/machine-learning-data-science-apis.html/2)
 
 ### 面部和图像识别
 
@@ -52,43 +52,43 @@
 
 +   [Text Processing:](http://www.programmableweb.com/api/fasilkom-text-processing) 提供包括总结文档、标记文档、词干化、去除停用词、标记词性（POS）、从印尼语翻译成英语和检索词汇定义等功能。
 
-+   [MeaningCloud 文本分类](http://www.programmableweb.com/api/meaningcloud-text-classification)：文本分类API执行预分类任务，如：提取文本、分词、去除停用词和词形还原。使用基于规则的过滤和统计文档分类，该API可以在广泛的环境中进行准确的分类。
++   [MeaningCloud 文本分类](http://www.programmableweb.com/api/meaningcloud-text-classification)：文本分类 API 执行预分类任务，如：提取文本、分词、去除停用词和词形还原。使用基于规则的过滤和统计文档分类，该 API 可以在广泛的环境中进行准确的分类。
 
 ### 翻译
 
-+   [Google Translate](http://www.programmableweb.com/api/google-translate)：目前为第二版，Google Translate 为自动机器翻译领域的研究人员提供工具，以帮助比较、对比，并在Google的统计机器翻译系统基础上进行构建。
++   [Google Translate](http://www.programmableweb.com/api/google-translate)：目前为第二版，Google Translate 为自动机器翻译领域的研究人员提供工具，以帮助比较、对比，并在 Google 的统计机器翻译系统基础上进行构建。
 
 +   [LangId](http://www.programmableweb.com/api/langid)：快速检索有关任何语言的信息，而无需指定语言。
 
-+   [MotaWord](http://www.programmableweb.com/api/motaword)：提供70多种语言的翻译。该API还允许开发者获取每个翻译的报价，提交翻译项目及文档和风格指南，跟踪翻译项目的进度，并实时获取活动动态。
++   [MotaWord](http://www.programmableweb.com/api/motaword)：提供 70 多种语言的翻译。该 API 还允许开发者获取每个翻译的报价，提交翻译项目及文档和风格指南，跟踪翻译项目的进度，并实时获取活动动态。
 
-+   [WritePath 翻译](http://www.programmableweb.com/api/writepath-translation)：API 允许开发者访问并将 WritePath 的功能与其他应用程序集成。一些示例API方法包括检索字数、提交翻译文档以及获取翻译后的文档和文本。
++   [WritePath 翻译](http://www.programmableweb.com/api/writepath-translation)：API 允许开发者访问并将 WritePath 的功能与其他应用程序集成。一些示例 API 方法包括检索字数、提交翻译文档以及获取翻译后的文档和文本。
 
 +   [IBM Watson 语言翻译](http://www.programmableweb.com/api/ibm-watson-language-translation)：使用统计机器翻译技术提供特定领域的翻译。他们目前提供三个领域（对话、专利和新闻），可以在总共七种语言之间进行翻译。
 
 参考资料：[Mashape 博客](http://blog.mashape.com/list-of-20-sentiment-analysis-apis/) & [Programmable Web](http://www.programmableweb.com/news/top-10-machine-learning-apis-att-speech-ibm-watson-google-prediction/analysis/2015/08/03)
 
-**我们是否遗漏了您最喜欢的API？我们将继续更新列表！在评论中告诉我们您的想法。**
+**我们是否遗漏了您最喜欢的 API？我们将继续更新列表！在评论中告诉我们您的想法。**
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速开启网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 **相关：**
 
-+   [5 个最佳机器学习 API 用于数据科学](/2015/11/machine-learning-apis-data-science.html)
++   5 个最佳机器学习 API 用于数据科学
 
-+   [预测和机器学习的 API：投票结果和分析](/2015/09/api-prediction-machine-learning-poll-results.html "预测和机器学习的 API：投票结果和分析")
++   预测和机器学习的 API：投票结果和分析
 
-+   [预测分析培训资源热榜](/2015/07/sameer-chopra-training-resources-predictive-analytics.html)
++   预测分析培训资源热榜
 
 ### 相关内容
 
@@ -102,4 +102,4 @@
 
 +   [3 个有用的 Python 自动化脚本](https://www.kdnuggets.com/2022/11/3-useful-python-automation-scripts.html)
 
-+   [KDnuggets 新闻，12月7日：破解前10大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)
++   [KDnuggets 新闻，12 月 7 日：破解前 10 大数据科学神话 • 4…](https://www.kdnuggets.com/2022/n47.html)

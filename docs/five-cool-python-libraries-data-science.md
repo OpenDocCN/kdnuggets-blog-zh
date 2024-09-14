@@ -1,8 +1,8 @@
 # 五个酷炫的 Python 数据科学库
 
-> 原文：[https://www.kdnuggets.com/2020/04/five-cool-python-libraries-data-science.html](https://www.kdnuggets.com/2020/04/five-cool-python-libraries-data-science.html)
+> 原文：[`www.kdnuggets.com/2020/04/five-cool-python-libraries-data-science.html`](https://www.kdnuggets.com/2020/04/five-cool-python-libraries-data-science.html)
 
-[评论](#comments)
+评论
 
 **作者 [Dhilip Subramanian](https://medium.com/@sdhilip)，数据科学家和人工智能爱好者**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 支持
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持您的组织进行 IT 支持
 
 * * *
 
@@ -45,7 +45,7 @@ print(numerize(‘Three hundred billion’))
 
 **输出**
 
-![](../Images/8d9f0d7472e7bcf1d99286d07ccb35ee.png)
+![](img/8d9f0d7472e7bcf1d99286d07ccb35ee.png)
 
 ### 2\. Missingo
 
@@ -69,7 +69,7 @@ data = pd.read_excel(“dummy.xlsx”)
 data.isnull().sum() 
 ```
 
-![](../Images/36f99c7371d79935b2adb5ae3b7622ff.png)
+![](img/36f99c7371d79935b2adb5ae3b7622ff.png)
 
 虚拟数据集包含 11 行和 4 列。缺失值出现在 Min、Temp 和 city 变量中。我们可以使用条形图和矩阵进行可视化。它还支持热图、树状图。有关更多细节，请查看这个 [Github 仓库](https://github.com/ResidentMario/missingno)。
 
@@ -83,9 +83,9 @@ mi.matrix(data, figsize = (10,5))
 
 **输出**
 
-![](../Images/c2bdc878491cfaf7769bd3fb5a9bb026.png)
+![](img/c2bdc878491cfaf7769bd3fb5a9bb026.png)
 
-![](../Images/ec570b5041a7c02e85579578d1825eb6.png)
+![](img/ec570b5041a7c02e85579578d1825eb6.png)
 
 我们可以从上面的条形图和矩阵中看到 temp、min 和 city 的缺失值。
 
@@ -122,7 +122,7 @@ print(fake.random_number())
 
 **输出**
 
-![](../Images/2acec7dfc205375056ba2f8f85417dc3.png)
+![](img/2acec7dfc205375056ba2f8f85417dc3.png)
 
 它为各种类别生成虚拟数据，请查看此链接以获取更多 [详细信息](https://faker.readthedocs.io/en/latest/providers/faker.providers.geo.html)。
 
@@ -201,7 +201,7 @@ data = chartify.examples.example_data()
 data.head()
 ```
 
-![](../Images/a816d0706efe8ee697bdb3bebe0018f6.png)
+![](img/a816d0706efe8ee697bdb3bebe0018f6.png)
 
 ```py
 # Calculating total quanity for each fruits
@@ -218,7 +218,7 @@ ch.show()
 
 **输出**
 
-![](../Images/28eb3e9b4532aac2ebceaf1d554a4530.png)
+![](img/28eb3e9b4532aac2ebceaf1d554a4530.png)
 
 你可以通过点击图表右上角的保存图标来保存图表。
 
@@ -230,11 +230,11 @@ ch.show()
 
 **相关：**
 
-+   [宣布 PyCaret 1.0.0](/2020/04/announcing-pycaret.html)
++   宣布 PyCaret 1.0.0
 
-+   [停止伤害你的 Pandas!](/2020/04/stop-hurting-pandas.html)
++   停止伤害你的 Pandas!
 
-+   [深度学习的四大最佳 Jupyter Notebook 环境](/2020/03/4-best-jupyter-notebook-environments-deep-learning.html)
++   深度学习的四大最佳 Jupyter Notebook 环境
 
 ### 更多相关主题
 
@@ -244,8 +244,8 @@ ch.show()
 
 +   [每个初学者数据科学家都应该掌握的六种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
 +   [停止学习数据科学，寻找目标，再找到目标去……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)

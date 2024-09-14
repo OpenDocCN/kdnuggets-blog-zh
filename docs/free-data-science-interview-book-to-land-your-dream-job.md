@@ -1,8 +1,8 @@
 # 免费数据科学面试书，助你获得理想工作
 
-> 原文：[https://www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job](https://www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job)
+> 原文：[`www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job`](https://www.kdnuggets.com/free-data-science-interview-book-to-land-your-dream-job)
 
-![免费数据科学面试书，助你获得理想工作](../Images/3962e89d800306baf402d1a0a1d7cf09.png)
+![免费数据科学面试书，助你获得理想工作](img/3962e89d800306baf402d1a0a1d7cf09.png)
 
 作者提供的图片
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
 这本免费提供的在线书籍涵盖了你在数据科学面试中需要了解的所有基本主题，从统计学和模型构建到算法、神经网络和商业智能。但与其他资源不同的是，它专注于提供仅有的相关信息，以帮助你为面试做好准备。这使得它成为忙碌的数据科学家快速复习广泛概念的完美资源。我认为这本书的独特之处在于：
 
-1.  **实际面试问题：** 本书包括来自Google、DoorDash和Airbnb等公司的实际面试问题，并附有详细的解决方案和案例研究。
+1.  **实际面试问题：** 本书包括来自 Google、DoorDash 和 Airbnb 等公司的实际面试问题，并附有详细的解决方案和案例研究。
 
 1.  **更新内容：** 这本书会不断更新，增加新章节、问题和更丰富的内容。
 
@@ -34,7 +34,7 @@
 
 ## 1\. 统计学
 
-本节涵盖了统计学基础，这对于数据分析和模型构建至关重要。主题包括概率基础、概率分布、中心极限定理、贝叶斯与频率论推理、假设检验和A/B测试。
+本节涵盖了统计学基础，这对于数据分析和模型构建至关重要。主题包括概率基础、概率分布、中心极限定理、贝叶斯与频率论推理、假设检验和 A/B 测试。
 
 ## 2\. 模型构建
 
@@ -62,34 +62,34 @@ Python 是一种多功能语言，用于数据科学中的各种任务。本节�
 
 ## 6\. 分析思维
 
-虽然这本书包含了多个持续更新的部分，如Excel、神经网络、自然语言处理、机器学习框架、商业智能等，但我特别想突出这一部分。我认为它很独特，因为它涉及了商业场景和行为管理相关的问题，这在数据科学面试中越来越重要。公司不仅仅寻找技术专长，还希望找到能够战略性思考和有效沟通的候选人。
+虽然这本书包含了多个持续更新的部分，如 Excel、神经网络、自然语言处理、机器学习框架、商业智能等，但我特别想突出这一部分。我认为它很独特，因为它涉及了商业场景和行为管理相关的问题，这在数据科学面试中越来越重要。公司不仅仅寻找技术专长，还希望找到能够战略性思考和有效沟通的候选人。
 
-例如，这是Salesforce在其一次面试中提出的一个问题：
+例如，这是 Salesforce 在其一次面试中提出的一个问题：
 
-*“作为Salesforce的数据科学家，你在与一位产品经理交谈，他想了解Salesforce的用户基础。你的方法是什么？”*
+*“作为 Salesforce 的数据科学家，你在与一位产品经理交谈，他想了解 Salesforce 的用户基础。你的方法是什么？”*
 
 通过审视这些基于场景的问题，你将为面试做好充分准备。
 
 ## 7\. 备忘单
 
-与其花费数小时在线搜索备忘单，你可以在一个地方找到关于Numpy、Pandas、SQL、统计学、RegEx、Git、PowerBI、Python基础、Keras和R基础的快速而全面的指南。这些指南非常适合在面试前快速复习或在编码挑战中参考。
+与其花费数小时在线搜索备忘单，你可以在一个地方找到关于 Numpy、Pandas、SQL、统计学、RegEx、Git、PowerBI、Python 基础、Keras 和 R 基础的快速而全面的指南。这些指南非常适合在面试前快速复习或在编码挑战中参考。
 
 # 结论
 
 我完全理解拥有一个可靠且全面的资源以准备面试的重要性，我相信这本书正符合这一要求。我相信它将帮助你成功。祝你在数据科学准备之旅中一切顺利！如有任何问题，请随时与我联系。
 
-**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal是一位机器学习工程师和技术作家，对数据科学以及人工智能与医学的交汇处充满深厚的热情。她合著了电子书《利用ChatGPT最大化生产力》。作为2022年APAC地区的Google Generation学者，她倡导多样性和学术卓越。她还被认可为Teradata多样性技术学者、Mitacs Globalink研究学者和Harvard WeCode学者。Kanwal是变革的积极倡导者，创立了FEMCodes以赋能女性在STEM领域的发展。
+**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)**** Kanwal 是一位机器学习工程师和技术作家，对数据科学以及人工智能与医学的交汇处充满深厚的热情。她合著了电子书《利用 ChatGPT 最大化生产力》。作为 2022 年 APAC 地区的 Google Generation 学者，她倡导多样性和学术卓越。她还被认可为 Teradata 多样性技术学者、Mitacs Globalink 研究学者和 Harvard WeCode 学者。Kanwal 是变革的积极倡导者，创立了 FEMCodes 以赋能女性在 STEM 领域的发展。
 
 ### 更多相关话题
 
-+   [5个免费的认证课程，助你获得首个开发者职位](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
++   [5 个免费的认证课程，助你获得首个开发者职位](https://www.kdnuggets.com/5-free-certifications-to-land-your-first-developer-job)
 
-+   [2024年数据分析师面试问题的10个关键](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
++   [2024 年数据分析师面试问题的 10 个关键](https://www.kdnuggets.com/10-data-analyst-interview-questions-to-land-a-job-in-2024)
 
 +   [无法获得数据科学工作？这就是原因](https://www.kdnuggets.com/2022/01/unable-land-data-science-job.html)
 
-+   [KDnuggets™ 新闻 22:n05, 2月2日: 7个掌握机器学习的步骤…](https://www.kdnuggets.com/2022/n05.html)
++   [KDnuggets™ 新闻 22:n05, 2 月 2 日: 7 个掌握机器学习的步骤…](https://www.kdnuggets.com/2022/n05.html)
 
-+   [2022年让你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
++   [2022 年让你获得工作的数据科学项目](https://www.kdnuggets.com/2022/05/data-science-projects-land-job-2022.html)
 
-+   [2022年让你获得工作的数据科学投资组合](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)
++   [2022 年让你获得工作的数据科学投资组合](https://www.kdnuggets.com/2022/10/data-science-portfolio-land-job-2022.html)

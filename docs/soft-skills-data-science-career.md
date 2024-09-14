@@ -1,8 +1,8 @@
 # 这些软技能可以决定你数据科学职业的成败
 
-> 原文：[https://www.kdnuggets.com/2021/05/soft-skills-data-science-career.html](https://www.kdnuggets.com/2021/05/soft-skills-data-science-career.html)
+> 原文：[`www.kdnuggets.com/2021/05/soft-skills-data-science-career.html`](https://www.kdnuggets.com/2021/05/soft-skills-data-science-career.html)
 
-[评论](#comments)
+评论
 
 **作者 [Stefan Maraj](https://www.linkedin.com/in/stefan-maraj-86b0961bb)，网络安全顾问**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -24,7 +24,7 @@
 
 在本文中，我们将带你了解数据科学家最重要的五种软技能，并展示如何培养这些技能。
 
-![](../Images/4a9d37c83112a7671ef40c34bd99051b.png)
+![](img/4a9d37c83112a7671ef40c34bd99051b.png)
 
 *使用 [Pixabay](https://pixabay.com/) 的图片。*
 
@@ -42,11 +42,11 @@
 
 能够将与当前话题相关的大量数据汇总、分析和复述给一群科学家是一回事，但能够将其精髓传达给那些可能能帮助你实现职业上升的人的能力则是另一回事。
 
-假设你在午餐室遇到公司的首席执行官。她正开心地在手机上浏览，谷歌着这个、那个以及其他所有东西。由于IT部门每天都在提醒你网络安全的重要性，你随口提到使用全球最受欢迎的搜索引擎是[一种糟糕的主意](https://restoreprivacy.com/google-alternatives/)，除非你喜欢你的每一次在线活动都被跟踪和存储。对话开始了。首席执行官对你的聪明才智和愿意帮助的态度印象深刻。下一次她参加董事会会议时，当C-Suite团队在审查提升哪个员工或将哪个员工送往西伯利亚时，你的名字会在她的记忆中浮现，作为一个有帮助的人。
+假设你在午餐室遇到公司的首席执行官。她正开心地在手机上浏览，谷歌着这个、那个以及其他所有东西。由于 IT 部门每天都在提醒你网络安全的重要性，你随口提到使用全球最受欢迎的搜索引擎是[一种糟糕的主意](https://restoreprivacy.com/google-alternatives/)，除非你喜欢你的每一次在线活动都被跟踪和存储。对话开始了。首席执行官对你的聪明才智和愿意帮助的态度印象深刻。下一次她参加董事会会议时，当 C-Suite 团队在审查提升哪个员工或将哪个员工送往西伯利亚时，你的名字会在她的记忆中浮现，作为一个有帮助的人。
 
 你获得了大幅加薪和一个带窗户的角落办公室。这一切都因为你能够超越硬数据科学技能的局限，作为一个人进行沟通。
 
-![](../Images/98d8fcc96dfbc6621db0e84d04516957.png)
+![](img/98d8fcc96dfbc6621db0e84d04516957.png)
 
 *感谢 [维基共享资源](https://commons.wikimedia.org/wiki/Main_Page)。*
 
@@ -86,20 +86,20 @@
 
 +   [如何成为数据科学家的指南（逐步方法）](https://www.kdnuggets.com/2021/05/guide-become-data-scientist.html)
 
-+   [15个我从高效数据科学家那里学到的习惯](https://www.kdnuggets.com/2021/03/15-habits-learned-from-highly-effective-data-scientists.html)
++   [15 个我从高效数据科学家那里学到的习惯](https://www.kdnuggets.com/2021/03/15-habits-learned-from-highly-effective-data-scientists.html)
 
-+   [5项支持技能帮助你获得数据科学工作](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
++   [5 项支持技能帮助你获得数据科学工作](https://www.kdnuggets.com/2021/02/5-supporting-skills-data-science-job.html)
 
 ### 更多相关话题
 
-+   [远程工作的数据科学家需要的6项软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
++   [远程工作的数据科学家需要的 6 项软技能](https://www.kdnuggets.com/2022/05/6-soft-skills-data-scientists-working-remotely.html)
 
 +   [每个数据科学家都需要的软技能](https://www.kdnuggets.com/soft-skills-every-data-scientist-needs)
 
-+   [想成为数据科学家？第二部分：你需要的10项软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
++   [想成为数据科学家？第二部分：你需要的 10 项软技能](https://www.kdnuggets.com/want-to-become-a-data-scientist-part-2-10-soft-skills-you-need)
 
-+   [5门免费课程助你进入数据分析领域](https://www.kdnuggets.com/5-free-courses-to-break-into-data-analytics)
++   [5 门免费课程助你进入数据分析领域](https://www.kdnuggets.com/5-free-courses-to-break-into-data-analytics)
 
-+   [通过这3个热门证书提升你的技术职业](https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates)
++   [通过这 3 个热门证书提升你的技术职业](https://www.kdnuggets.com/advance-your-tech-career-with-these-3-popular-certificates)
 
-+   [2024年可以提升数据科学职业的认证](https://www.kdnuggets.com/certifications-that-can-boost-your-data-science-career-in-2024)
++   [2024 年可以提升数据科学职业的认证](https://www.kdnuggets.com/certifications-that-can-boost-your-data-science-career-in-2024)

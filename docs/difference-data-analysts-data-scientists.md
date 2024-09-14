@@ -1,26 +1,26 @@
 # 数据分析师与数据科学家的区别
 
-> 原文：[https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html`](https://www.kdnuggets.com/2022/03/difference-data-analysts-data-scientists.html)
 
-![数据分析师与数据科学家的区别](../Images/64176f4fbd0eeb18f000c2b8e5a3f8f7.png)
+![数据分析师与数据科学家的区别](img/64176f4fbd0eeb18f000c2b8e5a3f8f7.png)
 
 图片来源：[Alexander Sinn](https://unsplash.com/@swimstaralex?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)于[Unsplash](https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)
 
-数据科学家和数据分析师是2022年最受欢迎且薪资最高的职业之一。随着数据的不断增加，数据驱动的洞察也在不断增长。能够筛选、分析和解释大量信息的数据专业人员在今天至关重要。虽然数据分析师和数据科学家都处理数据，但有时不清楚二者之间的区别。主要的区别之一在于他们对处理的数据的不同用途。
+数据科学家和数据分析师是 2022 年最受欢迎且薪资最高的职业之一。随着数据的不断增加，数据驱动的洞察也在不断增长。能够筛选、分析和解释大量信息的数据专业人员在今天至关重要。虽然数据分析师和数据科学家都处理数据，但有时不清楚二者之间的区别。主要的区别之一在于他们对处理的数据的不同用途。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-数据分析师通常使用结构化数据来解决特定的业务问题。数据分析师最常使用SQL、R、Python等工具。他们还使用[数据可视化软件](/software/visualization.html)和统计分析。
+数据分析师通常使用结构化数据来解决特定的业务问题。数据分析师最常使用 SQL、R、Python 等工具。他们还使用数据可视化软件和统计分析。
 
 相比之下，数据科学家处理的是未知的数据，并使用更先进的数据分析技术来预测未来。数据科学家构建自动化机器学习算法，开发能够处理结构化和非结构化数据的预测建模技术。通常，这个角色被认为是数据分析师的更高级版本。不过，这还不是全部。
 
@@ -28,7 +28,7 @@
 
 # 什么是数据科学？
 
-在深入了解数据分析师和数据科学家之前，了解一些关键术语是很重要的。虽然“数据科学”的定义没有统一标准，但谷歌决策智能负责人Cassie Kozyrkov表示：“数据科学是使数据变得有用的学科。”
+在深入了解数据分析师和数据科学家之前，了解一些关键术语是很重要的。虽然“数据科学”的定义没有统一标准，但谷歌决策智能负责人 Cassie Kozyrkov 表示：“数据科学是使数据变得有用的学科。”
 
 另一个重要的术语是[数据挖掘](https://www.ibm.com/cloud/learn/data-mining)和描述性分析。数据挖掘是识别数据中的模式并提出关于这些模式成因的假设的过程。这一步骤专注于通过数据寻找趋势。
 
@@ -46,7 +46,7 @@
 
 # 行业工具
 
-一旦数据专业人士获取了数据，他们需要将其投入使用。然而，选择[正确的工具](/2022/03/top-data-science-tools-2022.html)进行数据分析很重要。由于工作的性质，数据分析师和数据科学家往往会使用相同的工具，但使用方式不同。
+一旦数据专业人士获取了数据，他们需要将其投入使用。然而，选择正确的工具进行数据分析很重要。由于工作的性质，数据分析师和数据科学家往往会使用相同的工具，但使用方式不同。
 
 通常工具可以分为五类：
 
@@ -74,7 +74,7 @@
 
 +   机器学习
 
-    +   FastAI 是一个[适合初学者的编程库](/2021/01/best-python-ide-code-editors.html)，用于构建机器学习性能。
+    +   FastAI 是一个适合初学者的编程库，用于构建机器学习性能。
 
     +   Scikit-learn 用于数据处理和机器学习任务。
 
@@ -130,7 +130,7 @@
 
     +   数据科学家：数据建模、机器学习
 
-这些只是基础，但一般来说，数据分析师是成为数据科学家的入门点，通常需要经过广泛的培训和教育。许多在线平台提供[数据科学免费课程](/courses/index.html)和数据分析课程，如果你想深入了解。
+这些只是基础，但一般来说，数据分析师是成为数据科学家的入门点，通常需要经过广泛的培训和教育。许多在线平台提供数据科学免费课程和数据分析课程，如果你想深入了解。
 
 # 数据专业人员在商业中的角色
 

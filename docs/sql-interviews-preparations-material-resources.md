@@ -1,8 +1,8 @@
 # SQL 面试准备材料资源
 
-> 原文：[https://www.kdnuggets.com/2023/02/sql-interviews-preparations-material-resources.html](https://www.kdnuggets.com/2023/02/sql-interviews-preparations-material-resources.html)
+> 原文：[`www.kdnuggets.com/2023/02/sql-interviews-preparations-material-resources.html`](https://www.kdnuggets.com/2023/02/sql-interviews-preparations-material-resources.html)
 
-![SQL 面试准备材料资源](../Images/99bef6d7704e7cd7a4494076364119c1.png)
+![SQL 面试准备材料资源](img/99bef6d7704e7cd7a4494076364119c1.png)
 
 图片由 [Freepik](https://www.freepik.com/free-vector/flat-design-sql-illustration_21695612.htm#query=sql&position=2&from_view=search&track=sph) 提供
 
@@ -12,11 +12,11 @@ SQL，即结构化查询语言，是一种用于操作关系型数据库的编�
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你在 IT 领域的组织
 
 * * *
 
@@ -138,7 +138,7 @@ Great Learning 的面试材料主要针对开发人员职位。然而，它仍�
 
 +   [你应该了解的数据科学面试中前五个 SQL 窗口函数](https://www.kdnuggets.com/2022/01/top-five-sql-window-functions-know-data-science-interviews.html)
 
-+   [KDnuggets™ 新闻 22:n03，1月 19：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
++   [KDnuggets™ 新闻 22:n03，1 月 19：深入了解 13 个数据…](https://www.kdnuggets.com/2022/n03.html)
 
 +   [在数据科学面试中进行精彩的演讲](https://www.kdnuggets.com/2022/01/deliver-killer-presentation-data-science-interviews.html)
 

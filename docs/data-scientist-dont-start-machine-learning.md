@@ -1,10 +1,10 @@
 # 想成为数据科学家？不要从机器学习开始
 
-> 原文：[https://www.kdnuggets.com/2021/01/data-scientist-dont-start-machine-learning.html](https://www.kdnuggets.com/2021/01/data-scientist-dont-start-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2021/01/data-scientist-dont-start-machine-learning.html`](https://www.kdnuggets.com/2021/01/data-scientist-dont-start-machine-learning.html)
 
-[评论](#comments)
+评论
 
-![](../Images/713e5efad96a4e60e0b5429a2754fe4b.png)
+![](img/713e5efad96a4e60e0b5429a2754fe4b.png)
 
 *照片由[Will Porada](https://unsplash.com/@will0629?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)拍摄，来自[Unsplash](https://unsplash.com/s/photos/stop?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText)。*
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -34,13 +34,13 @@
 
 **1. 机器学习只是数据科学家工作的一部分（而且这一部分非常小）。**
 
-![](../Images/de89a70188c6d6d0dd4206512e51b7d7.png)
+![](img/de89a70188c6d6d0dd4206512e51b7d7.png)
 
 *图片由作者创建。*
 
 数据科学和机器学习就像是正方形和矩形。机器学习是（数据科学的一部分），但数据科学不一定是机器学习，就像正方形是矩形，但矩形不一定是正方形。
 
-实际上，我认为机器学习建模仅占数据科学家工作的大约5-10%，大部分时间是在其他方面度过的，这一点我会在后面详细说明。
+实际上，我认为机器学习建模仅占数据科学家工作的大约 5-10%，大部分时间是在其他方面度过的，这一点我会在后面详细说明。
 
 TLDR: 如果你首先专注于机器学习，你将投入大量时间和精力，却收获甚微。
 
@@ -64,7 +64,7 @@ TLDR: 如果你首先专注于机器学习，你将投入大量时间和精力�
 
 但并非每个“数据科学”问题都需要一个机器学习模型。
 
-在某些情况下，使用Excel或Pandas进行简单分析就足以解决当前问题。
+在某些情况下，使用 Excel 或 Pandas 进行简单分析就足以解决当前问题。
 
 在其他情况下，问题可能与机器学习完全无关。你可能需要使用脚本清理和处理数据，构建数据管道，或创建互动仪表板，这些都不需要机器学习。
 
@@ -82,7 +82,7 @@ TLDR: 如果你首先专注于机器学习，你将投入大量时间和精力�
 
 1.  **从统计学开始**。在这三个基础模块中，我认为统计学是最重要的。如果你对统计学感到畏惧，数据科学可能不适合你。我建议查看乔治亚理工学院的课程[统计方法](https://mediaspace.gatech.edu/playlist/dedicated/74258101/1_g5xwvbde/1_iw8fk73m)或[可汗学院的视频系列](https://www.khanacademy.org/math/statistics-probability)。
 
-1.  **学习Python和SQL**。如果你更喜欢R，那也可以。我个人从未使用过R，所以没有意见。你对Python和SQL的掌握越好，数据收集、处理和实施将会越轻松。我也建议你熟悉Python库，如Pandas、NumPy和Scikit-learn。我还推荐你学习二叉树，因为它是许多高级机器学习算法（如XGBoost）的基础。
+1.  **学习 Python 和 SQL**。如果你更喜欢 R，那也可以。我个人从未使用过 R，所以没有意见。你对 Python 和 SQL 的掌握越好，数据收集、处理和实施将会越轻松。我也建议你熟悉 Python 库，如 Pandas、NumPy 和 Scikit-learn。我还推荐你学习二叉树，因为它是许多高级机器学习算法（如 XGBoost）的基础。
 
 1.  **学习线性代数基础。** 当你处理任何与矩阵相关的工作时，线性代数变得非常重要。这在推荐系统和深度学习应用中很常见。如果这些内容是你未来想学习的内容，不要跳过这一步。
 
@@ -100,20 +100,20 @@ TLDR: 如果你首先专注于机器学习，你将投入大量时间和精力�
 
 +   [到目前为止，我的数据科学学习之旅](https://www.kdnuggets.com/2021/01/data-science-learning-journey.html)
 
-+   [关于数据科学的6件事，雇主不希望你知道](https://www.kdnuggets.com/2020/12/6-things-data-science-employers.html)
++   [关于数据科学的 6 件事，雇主不希望你知道](https://www.kdnuggets.com/2020/12/6-things-data-science-employers.html)
 
-+   [数据科学适合我吗？14个自我检视问题](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
++   [数据科学适合我吗？14 个自我检视问题](https://www.kdnuggets.com/2020/11/data-science-14-self-examination-questions.html)
 
 ### 相关话题更多内容
 
-+   [成为伟大的数据科学家所需的5项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
++   [成为伟大的数据科学家所需的 5 项关键技能](https://www.kdnuggets.com/2021/12/5-key-skills-needed-become-great-data-scientist.html)
 
-+   [每个初学者数据科学家都应该掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家都应该掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来……](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)

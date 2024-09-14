@@ -1,8 +1,8 @@
 # 笔记本反模式
 
-> 原文：[https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html](https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html)
+> 原文：[`www.kdnuggets.com/2019/11/notebook-anti-pattern.html`](https://www.kdnuggets.com/2019/11/notebook-anti-pattern.html)
 
-[评论](#comments)
+评论
 
 **作者：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)，高级数据科学家**
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的快车道
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯的快车道
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -26,9 +26,9 @@
 
 笔记本是允许用户创建包含代码、可视化和文本的文档的 web 界面。它们如下所示：
 
-![图示](../Images/6d91b303d6dd5a0c6297a07a3b9b8823.png)
+![图示](img/6d91b303d6dd5a0c6297a07a3b9b8823.png)
 
-图片来源：[http://arogozhnikov.github.io/2016/09/10/jupyter-features.html](http://arogozhnikov.github.io/2016/09/10/jupyter-features.html)
+图片来源：[`arogozhnikov.github.io/2016/09/10/jupyter-features.html`](http://arogozhnikov.github.io/2016/09/10/jupyter-features.html)
 
 ### 笔记本适合做什么？
 
@@ -68,9 +68,9 @@
 
 一想到笔记本在生产环境中的应用，我总会想到连体漫画的实用性——*看起来美观，但在某些情况下非常不实用。*
 
-![图像](../Images/5b3abe314b728cec151d81f95a64e0b2.png)
+![图像](img/5b3abe314b728cec151d81f95a64e0b2.png)
 
-图片来源：[https://twitter.com/lorynbrantz/status/765220720595066880](https://twitter.com/lorynbrantz/status/765220720595066880)
+图片来源：[`twitter.com/lorynbrantz/status/765220720595066880`](https://twitter.com/lorynbrantz/status/765220720595066880)
 
 现在我们知道了笔记本的优势，让我们在接下来的章节中探讨它们的不足之处。
 
@@ -82,11 +82,11 @@
 
 笔记本不可测试，这是我对它们的主要痛点之一。没有围绕这些笔记本创建的测试框架，因为它们的目的是作为游乐场，而不是生产系统。与普遍的看法相反，数据产品中的测试和其他软件产品中的测试一样重要且可能。为了测试一个笔记本，必须将笔记本中的代码提取到脚本中，这意味着笔记本本身无用。它需要维护以匹配提取脚本中的代码，或者分叉成更多未经测试的混乱。
 
-如果你想了解更多关于测试ML管道的内容，可以查看这篇文章： [测试你的ML管道](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/)。
+如果你想了解更多关于测试 ML 管道的内容，可以查看这篇文章： [测试你的 ML 管道](https://intothedepthsofdataengineering.wordpress.com/2019/07/18/testing-your-machine-learning-ml-pipelines/)。
 
 **版本控制**
 
-如果你曾经把笔记本放到git或任何其他版本控制系统中并打开了一个拉取请求，你可能会注意到这个拉取请求完全无法阅读。这是因为笔记本需要跟踪单元格的状态，因此在运行笔记本以生成你美丽的HTML视图时，后台会发生很多更改。这些更改也需要被版本化，导致视图不可读。
+如果你曾经把笔记本放到 git 或任何其他版本控制系统中并打开了一个拉取请求，你可能会注意到这个拉取请求完全无法阅读。这是因为笔记本需要跟踪单元格的状态，因此在运行笔记本以生成你美丽的 HTML 视图时，后台会发生很多更改。这些更改也需要被版本化，导致视图不可读。
 
 当然，你可能在一个使用配对而不是拉取请求的团队中，所以你可能不关心拉取请求不可读。然而，你通过这种可读性的降低失去了版本控制的另一个优势：在恢复代码或查看旧版本以查找可能引入或修复问题的更改时，你需要完全依赖提交信息并手动回退以检查更改。
 
@@ -128,15 +128,15 @@
 
 ### 那我们该怎么做呢？
 
-![图示](../Images/d42284356b88cdb8461f72162b5ca23c.png)
+![图示](img/d42284356b88cdb8461f72162b5ca23c.png)
 
-图片来源 [https://theverybesttop10.com/animal-imposters/](https://theverybesttop10.com/animal-imposters/)
+图片来源 [`theverybesttop10.com/animal-imposters/`](https://theverybesttop10.com/animal-imposters/)
 
 很好，现在我们知道为什么生产环境中的笔记本是个坏主意，也知道为什么我们需要停止将实验工具伪装成生产化工具。那么这使我们处于何种境地呢？这取决于你团队的技能和结构。你的团队很可能由以下两种人组成：
 
 +   具有工程技能的数据科学家
 
-+   或者，专注于实验的数据科学家和将模型投入生产的ML/数据工程师
++   或者，专注于实验的数据科学家和将模型投入生产的 ML/数据工程师
 
 那么我们来看一下下面这两种情境。
 
@@ -206,28 +206,28 @@
 
     +   可扩展性
 
-**简历：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)** 是BCG Digital Ventures的高级数据科学家。她曾在SoundCloud担任推荐团队的后端和数据工程师。她的工作经历包括咨询和研究。她曾在各种技术领域担任过后端、Web和移动开发人员。
+**简历：[Kristina Young](https://www.linkedin.com/in/kristina-georgieva/)** 是 BCG Digital Ventures 的高级数据科学家。她曾在 SoundCloud 担任推荐团队的后端和数据工程师。她的工作经历包括咨询和研究。她曾在各种技术领域担任过后端、Web 和移动开发人员。
 
 [原始文章](https://intothedepthsofdataengineering.wordpress.com/2019/10/21/the-notebook-anti-pattern/)。已获得转载许可。
 
 **相关内容：**
 
-+   [测试你的机器学习管道](/2019/11/testing-machine-learning-pipelines.html)
++   测试你的机器学习管道
 
-+   [数据科学家的自动版本控制](/2019/09/automatic-version-control-data-scientists.html)
++   数据科学家的自动版本控制
 
-+   [简易一键Jupyter Notebook](/2019/07/easy-one-click-jupyter-notebooks.html)
++   简易一键 Jupyter Notebook
 
 ### 更多相关话题
 
-+   [Mercury概述：创建数据科学作品集和…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
++   [Mercury 概述：创建数据科学作品集和…](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
 
-+   [如何在Jupyter Notebook中设置Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
++   [如何在 Jupyter Notebook 中设置 Julia](https://www.kdnuggets.com/2022/11/setup-julia-jupyter-notebook.html)
 
-+   [数据科学家的10个Jupyter Notebook技巧和窍门](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
++   [数据科学家的 10 个 Jupyter Notebook 技巧和窍门](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
 
-+   [Jupyter Notebook魔法方法备忘单](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)
++   [Jupyter Notebook 魔法方法备忘单](https://www.kdnuggets.com/jupyter-notebook-magic-methods-cheat-sheet)
 
-+   [金融中的Python：在Jupyter Notebook内实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)
++   [金融中的 Python：在 Jupyter Notebook 内实时数据流](https://www.kdnuggets.com/python-in-finance-real-time-data-streaming-within-jupyter-notebook)
 
-+   [5个免费的数据科学项目模板在Jupyter Notebook](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)
++   [5 个免费的数据科学项目模板在 Jupyter Notebook](https://www.kdnuggets.com/5-free-templates-for-data-science-projects-on-jupyter-notebook)

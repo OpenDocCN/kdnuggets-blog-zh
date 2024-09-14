@@ -1,8 +1,8 @@
 # 数据清洗：任何数据科学项目成功的秘密成分
 
-> 原文：[https://www.kdnuggets.com/2020/07/data-cleaning-secret-ingredient-success-data-science-project.html](https://www.kdnuggets.com/2020/07/data-cleaning-secret-ingredient-success-data-science-project.html)
+> 原文：[`www.kdnuggets.com/2020/07/data-cleaning-secret-ingredient-success-data-science-project.html`](https://www.kdnuggets.com/2020/07/data-cleaning-secret-ingredient-success-data-science-project.html)
 
-[评论](#comments)
+评论
 
 **由[瑜吉塔·金哈](http://www.linkedin.com/in/yogita-kinha)，顾问和博主**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 方面
 
 * * *
 
@@ -36,13 +36,13 @@
 
 正如在[博客](https://www.edvancer.in/descriptive-statistics-for-data-science/)中讨论的，运行基础的描述性统计测试可以初步检查数据的缺失值、特征的变异性、特征的基数。
 
-![图示](../Images/e7bb83d958d105a5f3e49cd632f93414.png)
+![图示](img/e7bb83d958d105a5f3e49cd632f93414.png)
 
-图1：汇总统计![图示](../Images/876efe3cd9b8fd9d9a83994628019540.png)
+图 1：汇总统计![图示](img/876efe3cd9b8fd9d9a83994628019540.png)
 
-图2：检查空值![图示](../Images/0e6cec8a13ce3ae95441ffce6edb5cae.png)  ![图示](../Images/acb703c0a15111cc1258f8121099d9e4.png)
+图 2：检查空值![图示](img/0e6cec8a13ce3ae95441ffce6edb5cae.png)  ![图示](img/acb703c0a15111cc1258f8121099d9e4.png)
 
-图3：异常值用红色突出显示
+图 3：异常值用红色突出显示
 
 ### 识别相关数据并移除不相关数据
 
@@ -52,21 +52,21 @@
 
 数据通常从多个来源收集并合并形成一个数据集。这可能导致观察值的重复。如果观察值（数量较少）重复几次可能不会有问题，但如果观察值重复过多，可能会导致错误行为。因此，最好删除重复的观察值，以获得更干净的数据集。
 
-![](../Images/a2a37ebf643b454a09af5c24cb209f39.png)
+![](img/a2a37ebf643b454a09af5c24cb209f39.png)
 
 **2\. 无关观察值**
 
 数据集中可能包含对特定任务没有用的观察值。例如，如果你分析的是女性的购物行为，你将不需要数据集中男性的观察值——按行处理。
 
-同样，你的数据可能有一个员工ID或姓名的列，这对预测帮助不大，可以删除——按列处理。
+同样，你的数据可能有一个员工 ID 或姓名的列，这对预测帮助不大，可以删除——按列处理。
 
 ### 修复不规则的基数和结构性错误
 
-1.  删除具有1个基数的列（对于类别特征），或方差为零或非常低的列（对于连续特征）。这些特征提供的信息有限，对于构建预测模型不够有用。
+1.  删除具有 1 个基数的列（对于类别特征），或方差为零或非常低的列（对于连续特征）。这些特征提供的信息有限，对于构建预测模型不够有用。
 
-1.  类别列可能由于拼写错误或不一致的大小写而具有许多类。例如，性别列可能有许多类，如male、female、m、f、M和F，这些仅代表两个水平——男性和女性。这些类应映射到适当的水平，其他水平应删除。条形图可用于突出显示此类问题。
+1.  类别列可能由于拼写错误或不一致的大小写而具有许多类。例如，性别列可能有许多类，如 male、female、m、f、M 和 F，这些仅代表两个水平——男性和女性。这些类应映射到适当的水平，其他水平应删除。条形图可用于突出显示此类问题。
 
-1.  确保数据以正确的数据类型表示，即数字以int/float存储，日期作为日期对象。
+1.  确保数据以正确的数据类型表示，即数字以 int/float 存储，日期作为日期对象。
 
 可能存在许多问题，如特征值中的空格，特征中的数据可能有混合的数据类型，例如一个数值列中可能有一些数字是数字格式，有些是字符串或对象。修复这些错误将导致数据集更加干净、易于解释和使用。
 
@@ -76,9 +76,9 @@
 
 1.  高于**Q3 + 1.5*IQR**或低于**Q1 - 1.5*IQR**，如果数据遵循非高斯分布
 
-1.  如果数据遵循高斯分布，则离特征均值2或3个标准差（z-score）。
+1.  如果数据遵循高斯分布，则离特征均值 2 或 3 个标准差（z-score）。
 
-1.  通过绘制箱线图、直方图或散点图（如图3所示）可视化单变量变量。
+1.  通过绘制箱线图、直方图或散点图（如图 3 所示）可视化单变量变量。
 
 这些方法适用于对单变量或双变量（散点图）变量的初步分析，但对多变量数据或高维数据的价值不大。在这种情况下，应该利用先进的方法，如聚类、主成分分析（PCA）、局部离群因子（LOF）和高对比度子空间（HiCS）用于基于密度的离群值排名。
 
@@ -88,13 +88,13 @@
 
 我们不应随意丢弃任何观察数据，因为这些信息可能对理解数据中的异常行为或异常现象非常有价值，除非我们确定这些离群点可能是由于测量误差，或者这些离群点的存在影响了模型的拟合。
 
-![图示](../Images/9132fa1f30745f3d2f86e7c37bb4908c.png)
+![图示](img/9132fa1f30745f3d2f86e7c37bb4908c.png)
 
 图 4：在有离群点的情况下（左图），回归线似乎受到顶部极端点的影响。而在没有离群点的情况下（右图），回归线在去除极端点后更好地拟合了数据。
 
 **2. Winsorising 或修剪转换：** Winsorising 用最近的非怀疑数据替换离群点。这也被称为修剪转换，因为我们将所有高于上限和低于下限的值修剪为这些阈值，从而限制离群点的值：
 
-![](../Images/2143b51028612d841c6794a52e49c023.png)
+![](img/2143b51028612d841c6794a52e49c023.png)
 
 其中 *fi* 是特征 *f* 的具体值，lower 和 upper 是下限和上限，由上文讨论的 IQR 方法或 z-score 给出。
 
@@ -112,9 +112,9 @@
 
 **参考文献：**
 
-[https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/](https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/)
+[`www.r-bloggers.com/outlier-detection-and-treatment-with-r/`](https://www.r-bloggers.com/outlier-detection-and-treatment-with-r/)
 
-*最初发布于* [*https://www.edvancer.in*](https://www.edvancer.in/data-cleaning) *2019年6月26日。*
+*最初发布于* [*https://www.edvancer.in*](https://www.edvancer.in/data-cleaning) *2019 年 6 月 26 日。*
 
 **简介：[Yogita Kinha](http://www.linkedin.com/in/yogita-kinha)** 是一位在 R、Python、机器学习以及统计计算和图形软件环境方面拥有经验的专业人士，具有 Hadoop 生态系统的实际操作经验，并在软件测试领域有测试与报告的经验。
 
@@ -122,11 +122,11 @@
 
 **相关：**
 
-+   [如何处理数据集中的缺失值](/2020/06/missing-values-dataset.html)
++   如何处理数据集中的缺失值
 
-+   [如何准备你的数据](/2020/06/how-prepare-your-data.html)
++   如何准备你的数据
 
-+   [选择合适机器学习算法的简易指南](/2020/05/guide-choose-right-machine-learning-algorithm.html)
++   选择合适机器学习算法的简易指南
 
 ### 更多相关主题
 

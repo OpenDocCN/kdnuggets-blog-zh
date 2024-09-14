@@ -1,8 +1,8 @@
 # 5 本便宜的机器学习入门书籍
 
-> 原文：[https://www.kdnuggets.com/5-cheap-books-to-master-machine-learning](https://www.kdnuggets.com/5-cheap-books-to-master-machine-learning)
+> 原文：[`www.kdnuggets.com/5-cheap-books-to-master-machine-learning`](https://www.kdnuggets.com/5-cheap-books-to-master-machine-learning)
 
-![5 本便宜的机器学习入门书籍](../Images/b5276c90b14703e90b72b0385555fabe.png)
+![5 本便宜的机器学习入门书籍](img/b5276c90b14703e90b72b0385555fabe.png)
 
 由 DALL-E 3 生成的图像
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -68,15 +68,15 @@
 
 # 《Python 机器学习精通》
 
-让我们来看看那本能够帮助你自信掌握机器学习的书。《[用Python进行机器学习的精通](https://machinelearningmastery.com/machine-learning-with-python/)》是一本大电子书，包含了逐步指导和端到端的机器学习项目，旨在使你成为专业人士。这是一本完整的书籍，无论你的机器学习知识水平如何都非常适合。
+让我们来看看那本能够帮助你自信掌握机器学习的书。《[用 Python 进行机器学习的精通](https://machinelearningmastery.com/machine-learning-with-python/)》是一本大电子书，包含了逐步指导和端到端的机器学习项目，旨在使你成为专业人士。这是一本完整的书籍，无论你的机器学习知识水平如何都非常适合。
 
-由杰森·布朗利撰写的书籍包含了你应用Python进行机器学习所需了解的一切，包括：
+由杰森·布朗利撰写的书籍包含了你应用 Python 进行机器学习所需了解的一切，包括：
 
 +   机器学习基础
 
-+   《用Python进行机器学习》
++   《用 Python 进行机器学习》
 
-+   如何使用机器学习Python包
++   如何使用机器学习 Python 包
 
 +   我们如何预处理数据
 
@@ -88,19 +88,19 @@
 
 +   以及更多
 
-以$47的价格，这本书将为你提供16个步骤的课程、178页的内容以及3个端到端的项目。此外，你还将获得74个完全可用的Python脚本。
+以$47 的价格，这本书将为你提供 16 个步骤的课程、178 页的内容以及 3 个端到端的项目。此外，你还将获得 74 个完全可用的 Python 脚本。
 
 # 《终极算法：对终极学习机器的追寻将如何重塑我们的世界》
 
 让我们从技术基础出发，转向更概念化的机器学习讨论。我们可以快速构建机器学习模型，但模型的使用场景以及模型将引导我们到何处也是至关重要的。这正是这本书要带给我们的。
 
-这本书可能稍显陈旧，因为它是在2015年发布的。然而，[佩德罗·多明戈斯的书](https://www.amazon.com/Master-Algorithm-Ultimate-Learning-Machine/dp/0465065708)将引导我们深入思考机器学习概念，并广泛探索机器学习将带我们去何处。
+这本书可能稍显陈旧，因为它是在 2015 年发布的。然而，[佩德罗·多明戈斯的书](https://www.amazon.com/Master-Algorithm-Ultimate-Learning-Machine/dp/0465065708)将引导我们深入思考机器学习概念，并广泛探索机器学习将带我们去何处。
 
 了解我们的社会在面对机器学习时将会处于何种地位，以及你为何应该学习算法，费用仅为$10。
 
 # 《人工智能与商业中的机器学习：无废话的数据驱动技术指南》
 
-在更高级的版本中，这本书将讨论AI和机器学习在商业行业中的应用。这本书试图以尽可能少的技术术语来教育读者关于技术进步，因为本书的目标读者是普通读者。这也是为什么这本书非常适合那些作为经理或非技术领导者，并希望了解机器学习影响的人。
+在更高级的版本中，这本书将讨论 AI 和机器学习在商业行业中的应用。这本书试图以尽可能少的技术术语来教育读者关于技术进步，因为本书的目标读者是普通读者。这也是为什么这本书非常适合那些作为经理或非技术领导者，并希望了解机器学习影响的人。
 
 [史蒂文·芬莱的书](https://www.amazon.com/Artificial-Intelligence-Machine-Learning-Business-dp-1999325389/dp/1999325389)架起了一座桥梁，连接了对社会来说重要的机器学习知识。这本书更注重实际应用以及如何与数据科学家合作以最大化机器学习的价值。
 
@@ -110,9 +110,9 @@
 
 机器学习是现代社会中的一项重要技能。无论你的职业是什么，我们的工作都会以某种方式与机器学习交织在一起。这就是为什么这五本便宜的书会帮助你掌握机器学习。这些书包括：
 
-1.  《绝对初学者的机器学习：数据科学的Python》
+1.  《绝对初学者的机器学习：数据科学的 Python》
 
-1.  《用Python掌握机器学习》
+1.  《用 Python 掌握机器学习》
 
 1.  《傻瓜的机器学习》
 
@@ -120,18 +120,18 @@
 
 1.  《商业中的人工智能与机器学习：无废话的数据驱动技术指南》
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)****是一名数据科学助理经理和数据编写员。在全职工作于Allianz Indonesia期间，他喜欢通过社交媒体和写作分享Python和数据技巧。Cornellius撰写了各种人工智能和机器学习主题的文章。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)****是一名数据科学助理经理和数据编写员。在全职工作于 Allianz Indonesia 期间，他喜欢通过社交媒体和写作分享 Python 和数据技巧。Cornellius 撰写了各种人工智能和机器学习主题的文章。
 
 ### 更多相关内容
 
-+   [5本便宜的书籍掌握数据科学](https://www.kdnuggets.com/5-cheap-books-to-master-data-science)
++   [5 本便宜的书籍掌握数据科学](https://www.kdnuggets.com/5-cheap-books-to-master-data-science)
 
-+   [它活过来了！使用Python和一些便宜的基本组件构建你的第一个机器人…](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
++   [它活过来了！使用 Python 和一些便宜的基本组件构建你的第一个机器人…](https://www.kdnuggets.com/2023/06/manning-build-first-robots-python-cheap-basic-components.html)
 
-+   [KDnuggets新闻，6月22日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
++   [KDnuggets 新闻，6 月 22 日：主要监督学习算法…](https://www.kdnuggets.com/2022/n25.html)
 
-+   [5本免费书籍掌握机器学习](https://www.kdnuggets.com/5-free-books-to-master-machine-learning)
++   [5 本免费书籍掌握机器学习](https://www.kdnuggets.com/5-free-books-to-master-machine-learning)
 
-+   [25本免费书籍掌握SQL、Python、数据科学、机器学习和自然语言处理](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍掌握 SQL、Python、数据科学、机器学习和自然语言处理](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [掌握数据策略的15本顶级书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)
++   [掌握数据策略的 15 本顶级书籍](https://www.kdnuggets.com/2022/06/top-15-books-master-data-strategy.html)

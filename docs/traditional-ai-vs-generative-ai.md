@@ -1,12 +1,12 @@
 # 传统人工智能与生成式人工智能
 
-> 原文：[https://www.kdnuggets.com/traditional-ai-vs-generative-ai](https://www.kdnuggets.com/traditional-ai-vs-generative-ai)
+> 原文：[`www.kdnuggets.com/traditional-ai-vs-generative-ai`](https://www.kdnuggets.com/traditional-ai-vs-generative-ai)
 
-![传统人工智能与生成式人工智能](../Images/acd97f373a72748a0ade26ad3d820639.png)
+![传统人工智能与生成式人工智能](img/acd97f373a72748a0ade26ad3d820639.png)
 
 作者提供的图像
 
-‘生成式人工智能’是目前流行的下一个热词。不论你工作在哪个领域，你一定听说过这个词。仅在过去6个月中，它已经向我们展示了人工智能（AI）的重大进展。它重塑了各个行业，每个人都想涉足其中。
+‘生成式人工智能’是目前流行的下一个热词。不论你工作在哪个领域，你一定听说过这个词。仅在过去 6 个月中，它已经向我们展示了人工智能（AI）的重大进展。它重塑了各个行业，每个人都想涉足其中。
 
 对于你们中的一些人来说，你可能不太了解人工智能的不同子集，而这正是本文的重点。
 
@@ -16,7 +16,7 @@
 
 传统人工智能——大多数非技术人员熟知的一部分人工智能。也被称为狭义人工智能或弱人工智能，传统形式的人工智能专注于以智能方式执行特定任务。
 
-我们所知的传统人工智能是语音助手，如Siri和Alexa，它们被设计成响应输入并产生输出。这一切之所以可行，是因为这些人工智能系统通过学习数据、特征等来做出决策和预测。
+我们所知的传统人工智能是语音助手，如 Siri 和 Alexa，它们被设计成响应输入并产生输出。这一切之所以可行，是因为这些人工智能系统通过学习数据、特征等来做出决策和预测。
 
 想象一下你在玩计算机棋类游戏时。计算机并不是在随意制定规则，它知道所有的规则，并利用这些规则来制定下一步的动作。这是一种预定义的策略。
 
@@ -34,7 +34,7 @@
 
 到目前为止，你可以使用生成式人工智能来创建不同形式的输出，如文本、图像和音乐，并且还可以用它来帮助你完成如代码补全等任务。
 
-生成式人工智能的例子包括GPT、Soundful、Synthesia和DALL-E 2。
+生成式人工智能的例子包括 GPT、Soundful、Synthesia 和 DALL-E 2。
 
 # 区别
 
@@ -54,11 +54,11 @@
 
 你现在已经理解了这两者的独特能力，并将在它们继续创新的过程中享受其中的乐趣。
 
-**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家以及KDnuggets的社区经理。她特别关注提供数据科学职业建议或教程，以及数据科学的理论知识。她还希望探索人工智能如何能提升人类寿命的不同方式。她是一个热衷学习者，致力于拓宽她的技术知识和写作技能，同时帮助他人。
+**[Nisha Arya](https://www.linkedin.com/in/nisha-arya-ahmed/)** 是一名数据科学家、自由技术作家以及 KDnuggets 的社区经理。她特别关注提供数据科学职业建议或教程，以及数据科学的理论知识。她还希望探索人工智能如何能提升人类寿命的不同方式。她是一个热衷学习者，致力于拓宽她的技术知识和写作技能，同时帮助他人。
 
 ### 更多相关主题
 
-+   [ChatGPT、GPT-4及更多生成性人工智能新闻](https://www.kdnuggets.com/2023/02/chatgpt-gpt4-generative-ai-news.html)
++   [ChatGPT、GPT-4 及更多生成性人工智能新闻](https://www.kdnuggets.com/2023/02/chatgpt-gpt4-generative-ai-news.html)
 
 +   [在生成性人工智能时代，数据科学家还需要吗？](https://www.kdnuggets.com/2023/06/data-scientists-still-needed-age-generative-ai.html)
 
@@ -68,4 +68,4 @@
 
 +   [谁负责让生成性人工智能正确？](https://www.kdnuggets.com/2023/08/whose-responsibility-get-generative-ai-right.html)
 
-+   [本周人工智能，8月7日：生成式AI来到了Jupyter & Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)
++   [本周人工智能，8 月 7 日：生成式 AI 来到了 Jupyter & Stack…](https://www.kdnuggets.com/2023/mm/this-week-ai-2023-08-07.html)

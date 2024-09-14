@@ -1,6 +1,6 @@
 # 数据科学基础：集成学习器简介
 
-> 原文：[https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html](https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html)
+> 原文：[`www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html`](https://www.kdnuggets.com/2016/11/data-science-basics-intro-ensemble-learners.html)
 
 算法选择对机器学习新手来说可能具有挑战性。构建分类器时，尤其是对初学者来说，通常采用考虑单一算法实例的解决方案方法。
 
@@ -10,21 +10,21 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
-本文将提供自助聚合、提升和堆叠的概述，这些方法可以说是最常用和最知名的基本集成方法。然而，它们并不是**唯一**的选项。[随机森林](/tag/random-forests)是另一种集成学习器的例子，它在单一预测模型中使用大量决策树，通常被忽视并被视为一种“常规”算法。还有其他选择有效算法的方法，下面会介绍。
+本文将提供自助聚合、提升和堆叠的概述，这些方法可以说是最常用和最知名的基本集成方法。然而，它们并不是**唯一**的选项。随机森林是另一种集成学习器的例子，它在单一预测模型中使用大量决策树，通常被忽视并被视为一种“常规”算法。还有其他选择有效算法的方法，下面会介绍。
 
 **自助聚合**
 
 自助聚合的运作概念非常简单：建立多个模型，观察这些模型的结果，然后确定大多数结果。我最近在我的车的后轴组件上遇到了问题：我对经销商的诊断不太信服，因此我将车送到另外两个车库，他们都同意问题与经销商所建议的不同。*瞧*。自助聚合的实际应用。
 
-我在这个例子中只访问了3个车库，但你可以想象如果我访问了几十个或几百个车库，准确性可能会提高，尤其是当我的车的问题非常复杂时。这对于自助聚合也适用，自助聚合的分类器通常比单一的组成分类器更准确。同时请注意，所使用的组成分类器类型并不重要；结果模型可以由任何单一分类器类型组成。
+我在这个例子中只访问了 3 个车库，但你可以想象如果我访问了几十个或几百个车库，准确性可能会提高，尤其是当我的车的问题非常复杂时。这对于自助聚合也适用，自助聚合的分类器通常比单一的组成分类器更准确。同时请注意，所使用的组成分类器类型并不重要；结果模型可以由任何单一分类器类型组成。
 
 自助聚合是*bootstrap aggregation*的缩写，之所以这样命名是因为它从数据集中抽取多个样本，每个样本集被视为一个自助样本。这些自助样本的结果随后被聚合。
 
@@ -42,7 +42,7 @@
 
 +   Bagging 通过引入人为的变异性来可能损害稳定模型，从而得出不准确的结论
 
-![Bagging](../Images/da14f46784242ccf6a49c3d7ea114504.png)
+![Bagging](img/da14f46784242ccf6a49c3d7ea114504.png)
 
 **Boosting**
 
@@ -68,7 +68,7 @@ Boosting 简而言之：
 
 +   [LogitBoost](https://en.wikipedia.org/wiki/LogitBoost)（源自 AdaBoost）是另一种方法，它使用加性逻辑回归，并处理多类问题
 
-![Boosting](../Images/658f99083c93080b92c1f86c7f94ecf7.png)
+![Boosting](img/658f99083c93080b92c1f86c7f94ecf7.png)
 
 **Stacking**
 
@@ -78,7 +78,7 @@ Stacking 与之前的两种技术略有不同，因为它训练多个单一分�
 
 Stacking 简而言之：
 
-+   训练多个学习者（与训练单个学习者的bagging/boosting相对）
++   训练多个学习者（与训练单个学习者的 bagging/boosting 相对）
 
 +   每个学习者使用数据的子集
 
@@ -96,7 +96,7 @@ Stacking 简而言之：
 
 +   用于基本模型的最佳算法是平滑的全局学习者
 
-![堆叠](../Images/2f18adb49b096f6887425f5b3aa4d528.png)
+![堆叠](img/2f18adb49b096f6887425f5b3aa4d528.png)
 
 虽然上述集成学习者可能是最知名和最常用的，但还有许多其他选项。除了堆叠，还有各种其他的元学习者。
 
@@ -104,11 +104,11 @@ Stacking 简而言之：
 
 **相关**：
 
-+   [数据科学基础：数据挖掘与统计学](/2016/09/data-science-basics-data-mining-statistics.html)
++   数据科学基础：数据挖掘与统计学
 
-+   [数据科学基础：初学者的3个见解](/2016/09/data-science-basics-3-insights-beginners.html)
++   数据科学基础：初学者的 3 个见解
 
-+   [机器学习关键术语解释](/2016/05/machine-learning-key-terms-explained.html)
++   机器学习关键术语解释
 
 ### 更多相关主题
 
@@ -116,10 +116,10 @@ Stacking 简而言之：
 
 +   [集成学习示例](https://www.kdnuggets.com/2022/10/ensemble-learning-examples.html)
 
-+   [集成学习技术：Python中随机森林的详细讲解](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
++   [集成学习技术：Python 中随机森林的详细讲解](https://www.kdnuggets.com/ensemble-learning-techniques-a-walkthrough-with-random-forests-in-python)
 
-+   [基础回顾第3周：机器学习介绍](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
++   [基础回顾第 3 周：机器学习介绍](https://www.kdnuggets.com/back-to-basics-week-3-introduction-to-machine-learning)
 
-+   [基础回顾第1周：Python编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [基础回顾第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
-+   [掌握数据科学中的Python：超越基础](https://www.kdnuggets.com/mastering-python-for-data-science-beyond-the-basics)
++   [掌握数据科学中的 Python：超越基础](https://www.kdnuggets.com/mastering-python-for-data-science-beyond-the-basics)

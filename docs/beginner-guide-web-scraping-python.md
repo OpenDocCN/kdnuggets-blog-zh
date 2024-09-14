@@ -1,26 +1,26 @@
-# Python网页抓取初学者指南
+# Python 网页抓取初学者指南
 
-> 原文：[https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)
+> 原文：[`www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html`](https://www.kdnuggets.com/2022/10/beginner-guide-web-scraping-python.html)
 
-![Python网页抓取初学者指南](../Images/637ee3ccbed5ab43272fcd76953ae22d.png)
+![Python 网页抓取初学者指南](img/637ee3ccbed5ab43272fcd76953ae22d.png)
 
-[图片来自 jemastock](https://www.freepik.com/free-vector/cleaners-with-cleaning-products-housekeeping-service_4887688.htm#query=cleaning&position=3&from_view=search&track=sph) 来自Freepik
+[图片来自 jemastock](https://www.freepik.com/free-vector/cleaners-with-cleaning-products-housekeeping-service_4887688.htm#query=cleaning&position=3&from_view=search&track=sph) 来自 Freepik
 
-有时需要从网站上[收集大量信息](/2020/02/passive-data-collection-actionable-results.html)，以便用于各种目的。这就是网页抓取，可以通过多种方式实现。一个有效的网页抓取方法是使用一种名为Python的编程语言。
+有时需要从网站上收集大量信息，以便用于各种目的。这就是网页抓取，可以通过多种方式实现。一个有效的网页抓取方法是使用一种名为 Python 的编程语言。
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT 需求
 
 * * *
 
-本文作为使用Python进行网页抓取的初学者指南，介绍了可以使用的不同框架和方法，内容简单明了。
+本文作为使用 Python 进行网页抓取的初学者指南，介绍了可以使用的不同框架和方法，内容简单明了。
 
 # 什么是网页抓取？
 
@@ -44,7 +44,7 @@
 
 +   当前股票价格、加密货币价格和其他财务数据
 
-+   来自eBay和Amazon等网站的产品数据
++   来自 eBay 和 Amazon 等网站的产品数据
 
 +   赌博网站和幻想联盟的体育统计数据
 
@@ -74,7 +74,7 @@ Python 可以是动态类型的，这意味着你不需要为 Python 中的变�
 
 ### 4\. Python 只需少量代码即可完成复杂任务
 
-网络爬虫的目标是节省时间并[快速收集数据](/2022/04/design-experiments-data-collection.html)，但如果编写代码的过程很长，这个目标也没多大意义。然而，Python 是精简的，只需少量代码即可实现用户的目标。
+网络爬虫的目标是节省时间并快速收集数据，但如果编写代码的过程很长，这个目标也没多大意义。然而，Python 是精简的，只需少量代码即可实现用户的目标。
 
 ### 5\. Python 语法可以快速学习
 
@@ -90,7 +90,7 @@ Python 可以是动态类型的，这意味着你不需要为 Python 中的变�
 
 +   **Beautiful Soup** - Beautiful Soup 框架用于解析 XML 和 HTML 文件以提取数据。在抓取网站时，必须使用 requests 库发送网站请求并接收响应。然后提取 HTML 并传递给 Beautiful Soup 对象进行解析。
 
-+   **Scrapy** - Scrapy 是 Python 使用的顶级 [网络爬虫和抓取框架](/2020/10/guide-authentic-data-science-portfolio-project.html)之一，能够有效地爬取网站并提取结构化数据。它可用于许多任务，包括数据挖掘、网站监控和自动化测试。Scrapy 专注于 HTML，通过简单地指定一个 URL 来工作。
++   **Scrapy** - Scrapy 是 Python 使用的顶级 网络爬虫和抓取框架之一，能够有效地爬取网站并提取结构化数据。它可用于许多任务，包括数据挖掘、网站监控和自动化测试。Scrapy 专注于 HTML，通过简单地指定一个 URL 来工作。
 
 +   **Selenium** - Selenium 框架抓取加载动态内容的网站（例如 Facebook、Twitter 和其他社交媒体网站）。它也可以抓取需要登录或注册的网站。
 
@@ -114,7 +114,7 @@ Python 可以是动态类型的，这意味着你不需要为 Python 中的变�
 
 接下来，你应该检查你选择的页面并查看其页面源代码。你寻找的数据通常会在标签内，因此你必须首先确定你想抓取的信息在页面代码中的位置。
 
-在 Google Chrome 中，右键点击网页中的任何元素并点击检查。然后你可以查看页面元素。要查找你的 [数据位置](/2020/04/best-sites-datasets-data-science.html)，通过右键点击图像或价格然后选择‘查看页面源代码’。
+在 Google Chrome 中，右键点击网页中的任何元素并点击检查。然后你可以查看页面元素。要查找你的 数据位置，通过右键点击图像或价格然后选择‘查看页面源代码’。
 
 ## 第三步
 
@@ -198,7 +198,7 @@ df.to_csv('products.csv', index = False, encoding = 'utf-8')
 
 正如您所见，通过安装正确的工具并了解简单的命令，网站可以轻松地使用 Python 进行抓取。我们希望您觉得这份指南有用，并能够将上述一些技巧应用到您的下一个网页抓取项目中。
 
-**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她在一家Inc. 5,000的体验品牌组织中担任首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
+**[Nahla Davies](http://nahlawrites.com/)** 是一名软件开发人员和技术作家。在全职从事技术写作之前，她在一家 Inc. 5,000 的体验品牌组织中担任首席程序员，该组织的客户包括三星、时代华纳、Netflix 和索尼。
 
 ### 了解更多相关主题
 

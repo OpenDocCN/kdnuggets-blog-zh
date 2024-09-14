@@ -1,8 +1,8 @@
 # 学术界是否在方法论的代价下迷恋于方法论而忽视真正的洞察力？
 
-> 原文：[https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)
+> 原文：[`www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights`](https://www.kdnuggets.com/is-academia-obsessing-over-methodology-at-the-cost-of-true-insights)
 
-![学术界是否在方法论的代价下迷恋于方法论而忽视真正的洞察力？](../Images/57af72f159467e687da0109126d1dc8e.png)
+![学术界是否在方法论的代价下迷恋于方法论而忽视真正的洞察力？](img/57af72f159467e687da0109126d1dc8e.png)
 
 图片来源：[Kampus Production](https://www.pexels.com/photo/focused-multiethnic-students-doing-research-together-5940839/)
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -30,13 +30,13 @@
 
 # 学术界的洞察
 
-正如你所看到的，随着AI系统的兴起，洞察力向我们展示了很多我们无法想象的东西。洞察力关注的是从所有研究中出现的发现，这些发现后来被用于创新、解决问题，并为我们创造一种不同的未来。
+正如你所看到的，随着 AI 系统的兴起，洞察力向我们展示了很多我们无法想象的东西。洞察力关注的是从所有研究中出现的发现，这些发现后来被用于创新、解决问题，并为我们创造一种不同的未来。
 
 可以想象，在这个时代，更多的组织关注从洞察力中获得的价值，而不是方法论。
 
 ## 方法论与洞察
 
-在过去的10年里，技术的发展如此迅猛，你是否认为洞察力比方法论更有用？
+在过去的 10 年里，技术的发展如此迅猛，你是否认为洞察力比方法论更有用？
 
 但也有人可能会说，如果没有方法论，洞察力将永远不会产生。
 

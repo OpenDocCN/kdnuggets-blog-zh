@@ -1,8 +1,8 @@
 # 处理机器学习模型中的稀疏特征
 
-> 原文：[https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)
+> 原文：[`www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html`](https://www.kdnuggets.com/2021/01/sparse-features-machine-learning-models.html)
 
-![处理机器学习模型中的稀疏特征](../Images/7f747479b334d4238006a6e68aa9c702.png)
+![处理机器学习模型中的稀疏特征](img/7f747479b334d4238006a6e68aa9c702.png)
 
 # 什么是稀疏特征？
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -24,11 +24,11 @@
 
 当数据缺失时，意味着许多数据点是未知的。另一方面，如果数据是稀疏的，则所有数据点都是已知的，但其中大多数值为零。
 
-为了说明这一点，有两种特征类型。稀疏数据的特征有已知的值（= 0），但缺失数据的特征有未知的值（= null）。无法知道应该在null值的行中填入什么值。
+为了说明这一点，有两种特征类型。稀疏数据的特征有已知的值（= 0），但缺失数据的特征有未知的值（= null）。无法知道应该在 null 值的行中填入什么值。
 
-![处理机器学习模型中的稀疏特征](../Images/6ab5e253aa11118fb9d29ea207493c80.png)
+![处理机器学习模型中的稀疏特征](img/6ab5e253aa11118fb9d29ea207493c80.png)
 
-表1\. 两种特征类型的示例数据。
+表 1\. 两种特征类型的示例数据。
 
 # 为什么稀疏特征使机器学习变得困难？
 

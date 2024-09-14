@@ -1,38 +1,38 @@
-# 通过通用API分享您的机器学习模型
+# 通过通用 API 分享您的机器学习模型
 
-> 原文：[https://www.kdnuggets.com/2020/02/sharing-machine-learning-models-common-api.html](https://www.kdnuggets.com/2020/02/sharing-machine-learning-models-common-api.html)
+> 原文：[`www.kdnuggets.com/2020/02/sharing-machine-learning-models-common-api.html`](https://www.kdnuggets.com/2020/02/sharing-machine-learning-models-common-api.html)
 
-[评论](#comments)
+评论
 
 **作者 [Álvaro López García](https://alvarolopez.github.io/)，西班牙国家研究委员会（CSIC）**
 
-![图示](../Images/8a404df0196b49ebc2f6e08719d438ee.png)
+![图示](img/8a404df0196b49ebc2f6e08719d438ee.png)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 
 构建机器学习模型的数据科学家没有简单且通用的方法与同事或任何感兴趣的使用者分享他们开发的应用。整个模型（即代码和所需的任何配置资源）可以被分享，但这要求接收者具备足够的知识来执行它。在大多数情况下，我们只是想分享模型以展示其功能（给其他同事或对我们预测模型感兴趣的公司），因此没有必要分享整个实验。
 
-正如已经在[KDnuggets](https://www.kdnuggets.com/2019/01/build-api-machine-learning-model-using-flask.html)中展示的那样，在我们共同工作的互联世界中，最直接的方法是通过HTTP端点公开模型，以便潜在用户可以通过网络远程访问。这可能听起来很简单，但开发一个合适且正确的REST API并不是一项容易的任务。数据科学家需要掌握API编程、网络、REST语义、安全性等知识。此外，如果每个科学家都提出一个实现，我们将得到大量不同且不可互操作的API，这些API大致上完成相同的工作，导致生态系统碎片化。
+正如已经在[KDnuggets](https://www.kdnuggets.com/2019/01/build-api-machine-learning-model-using-flask.html)中展示的那样，在我们共同工作的互联世界中，最直接的方法是通过 HTTP 端点公开模型，以便潜在用户可以通过网络远程访问。这可能听起来很简单，但开发一个合适且正确的 REST API 并不是一项容易的任务。数据科学家需要掌握 API 编程、网络、REST 语义、安全性等知识。此外，如果每个科学家都提出一个实现，我们将得到大量不同且不可互操作的 API，这些 API 大致上完成相同的工作，导致生态系统碎片化。
 
-介绍[DEEPaaS API](https://deepaas.readthedocs.io/): 一个基于[aiohttp](https://docs.aiohttp.org/)构建的机器学习、深度学习和人工智能REST API框架。DEEPaaS是一个软件组件，允许通过HTTP端点公开Python模型的功能（使用您选择的框架实现）。它不需要对原始代码进行修改，并提供自定义选项（输入参数、预期输出等）供科学家选择。
+介绍[DEEPaaS API](https://deepaas.readthedocs.io/): 一个基于[aiohttp](https://docs.aiohttp.org/)构建的机器学习、深度学习和人工智能 REST API 框架。DEEPaaS 是一个软件组件，允许通过 HTTP 端点公开 Python 模型的功能（使用您选择的框架实现）。它不需要对原始代码进行修改，并提供自定义选项（输入参数、预期输出等）供科学家选择。
 
-DEEPaaS API遵循[OpenAPI规范（OAS）](https://www.openapis.org/)，因此它允许人类和计算机发现并理解底层模型的能力、输入参数和输出值，而无需检查模型的源代码。
+DEEPaaS API 遵循[OpenAPI 规范（OAS）](https://www.openapis.org/)，因此它允许人类和计算机发现并理解底层模型的能力、输入参数和输出值，而无需检查模型的源代码。
 
 让我们通过一个演示示例来看一下它是如何工作的。
 
-### 将模型插入DEEPaaS
+### 将模型插入 DEEPaaS
 
-为了更好地说明如何将模型与DEEPaaS集成，我们将使用[scikit-learn](https://scikit-learn.org/)中最知名的示例之一：一个针对[IRIS数据集](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html#sphx-glr-auto-examples-datasets-plot-iris-dataset-py)训练的[支持向量机](https://scikit-learn.org/stable/modules/svm.html)。在这个简单的示例中，我们定义了两个不同的函数，一个用于训练，一个用于执行预测，如下所示：
+为了更好地说明如何将模型与 DEEPaaS 集成，我们将使用[scikit-learn](https://scikit-learn.org/)中最知名的示例之一：一个针对[IRIS 数据集](https://scikit-learn.org/stable/auto_examples/datasets/plot_iris_dataset.html#sphx-glr-auto-examples-datasets-plot-iris-dataset-py)训练的[支持向量机](https://scikit-learn.org/stable/modules/svm.html)。在这个简单的示例中，我们定义了两个不同的函数，一个用于训练，一个用于执行预测，如下所示：
 
 ```py
 from joblib import dump, load                                                      
@@ -53,7 +53,7 @@ def predict(data):
     return {"labels": prediction.tolist()} 
 ```
 
-如你所见，训练函数会将训练好的模型持久化到磁盘，遵循[scikit-learn的教程](https://scikit-learn.org/stable/tutorial/basic/tutorial.html#model-persistence)。接下来的操作是定义训练和预测调用的输入参数。由于这个示例相当简单，我们仅定义预测调用的输入参数。通常，你需要在一个不同的文件中完成这项工作，以避免干扰你的代码，但为了简化，我们将这个特殊函数与我们的IRIS SVM一同添加：
+如你所见，训练函数会将训练好的模型持久化到磁盘，遵循[scikit-learn 的教程](https://scikit-learn.org/stable/tutorial/basic/tutorial.html#model-persistence)。接下来的操作是定义训练和预测调用的输入参数。由于这个示例相当简单，我们仅定义预测调用的输入参数。通常，你需要在一个不同的文件中完成这项工作，以避免干扰你的代码，但为了简化，我们将这个特殊函数与我们的 IRIS SVM 一同添加：
 
 ```py
 from joblib import dump, load                                                      
@@ -88,7 +88,7 @@ def get_predict_args():
     return args
 ```
 
-最后一步是为了将其与DEEPaaS API集成，你需要使其可安装（你应该这样做）并使用[Python的setuptools](https://docs.python.org/3.8/distutils/setupscript.html)定义一个入口点。这个入口点将被DEEPaaS用来了解如何加载以及如何将不同的函数连接到定义的端点。我们当前使用`deepaas.model.v2`入口点命名空间，因此我们可以按如下方式创建`setup.py`文件：
+最后一步是为了将其与 DEEPaaS API 集成，你需要使其可安装（你应该这样做）并使用[Python 的 setuptools](https://docs.python.org/3.8/distutils/setupscript.html)定义一个入口点。这个入口点将被 DEEPaaS 用来了解如何加载以及如何将不同的函数连接到定义的端点。我们当前使用`deepaas.model.v2`入口点命名空间，因此我们可以按如下方式创建`setup.py`文件：
 
 ```py
 from distutils.core import setup                                                   
@@ -107,9 +107,9 @@ setup(
 ) 
 ```
 
-### 安装和运行DEEPaaS
+### 安装和运行 DEEPaaS
 
-一旦你的代码准备好，你只需安装你的模块和DEEPaaS API，以便它能够检测到并通过API暴露其功能。为了简化操作，我们可以创建一个虚拟环境并在其中安装所有内容：
+一旦你的代码准备好，你只需安装你的模块和 DEEPaaS API，以便它能够检测到并通过 API 暴露其功能。为了简化操作，我们可以创建一个虚拟环境并在其中安装所有内容：
 
 ```py
 $ virtualenv env --python=python3
@@ -143,11 +143,11 @@ or you can use any of our endpoints.
 2020-02-04 13:10:50.231 21186 INFO deepaas.api [-] Serving loaded V2 models: ['iris-deepaas']
 ```
 
-### 访问API并进行训练和预测
+### 访问 API 并进行训练和预测
 
-如果一切顺利，你现在应该能够将浏览器指向控制台中打印的URL（`http://127.0.0.1:5000/ui`），并看到一个美观的[Swagger UI](https://swagger.io/tools/swagger-ui/)，它将允许你与模型进行交互。
+如果一切顺利，你现在应该能够将浏览器指向控制台中打印的 URL（`http://127.0.0.1:5000/ui`），并看到一个美观的[Swagger UI](https://swagger.io/tools/swagger-ui/)，它将允许你与模型进行交互。
 
-由于这是一个简单的示例，我们没有提供训练好的模型，因此首先需要进行训练。这将调用`train()`函数并保存训练好的SVM以备后用。你可以通过UI进行此操作，或者通过命令行：
+由于这是一个简单的示例，我们没有提供训练好的模型，因此首先需要进行训练。这将调用`train()`函数并保存训练好的 SVM 以备后用。你可以通过 UI 进行此操作，或者通过命令行：
 
 ```py
 curl -s -X POST "http://127.0.0.1:5000/v2/models/iris-deepaas/train/" -H  "accept: application/json" | python -mjson.tool
@@ -158,7 +158,7 @@ curl -s -X POST "http://127.0.0.1:5000/v2/models/iris-deepaas/train/" -H  "accep
 }
 ```
 
-训练将异步进行，以便API不会阻塞。你可以从UI检查其状态，或者使用以下调用：
+训练将异步进行，以便 API 不会阻塞。你可以从 UI 检查其状态，或者使用以下调用：
 
 ```py
 curl -s -X GET "http://127.0.0.1:5000/v2/models/iris-deepaas/train/" | python -mjson.tool
@@ -195,9 +195,9 @@ curl -s -X POST "http://127.0.0.1:5000/v2/models/iris-deepaas/predict/?data=5.1&
 
 **相关：**
 
-+   [如何在 5 分钟内使用 Flask 构建机器学习模型 API](/2019/01/build-api-machine-learning-model-using-flask.html)
++   如何在 5 分钟内使用 Flask 构建机器学习模型 API
 
-+   [构建一个 Flask API 来自动提取命名实体使用 SpaCy](/2019/04/building-flask-api-automatically-extract-named-entities-spacy.html)
++   构建一个 Flask API 来自动提取命名实体使用 SpaCy
 
 +   [谷歌、Uber 和 Facebook 的开源项目：数据科学和 AI](https://www.kdnuggets.com/2019/11/open-source-projects-google-uber-facebook-data-science-ai.html)
 

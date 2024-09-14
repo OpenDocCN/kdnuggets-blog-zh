@@ -1,8 +1,8 @@
 # Noteable 插件：自动化数据分析的 ChatGPT 插件
 
-> 原文：[https://www.kdnuggets.com/2023/06/noteable-plugin-chatgpt-plugin-automates-data-analysis.html](https://www.kdnuggets.com/2023/06/noteable-plugin-chatgpt-plugin-automates-data-analysis.html)
+> 原文：[`www.kdnuggets.com/2023/06/noteable-plugin-chatgpt-plugin-automates-data-analysis.html`](https://www.kdnuggets.com/2023/06/noteable-plugin-chatgpt-plugin-automates-data-analysis.html)
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/eb0b594c0ee32bc99d52428754e02c03.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/eb0b594c0ee32bc99d52428754e02c03.png)
 
 图片来源：编辑
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -36,31 +36,31 @@ Noteable 的一个增强功能是[ChatGPT Noteable 插件](https://noteable.io/c
 
 成为 Plus 用户后，前往设置并激活插件选择。目前，插件处于 Beta 阶段，因此它会在 Beta 功能部分中。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/a61a2d09195412505a82d7e31e8626d5.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/a61a2d09195412505a82d7e31e8626d5.png)
 
 图片来源：作者
 
 一旦激活插件，你将在 ChatGPT 平台的 GPT-4 模型下看到插件选择。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/e5e7a6e1c872ded26cb1b7c8baeccda1.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/e5e7a6e1c872ded26cb1b7c8baeccda1.png)
 
 图片由作者提供
 
 选择插件并找到插件商店。搜索 Noteable 并安装插件。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/73cab772f184def3594a27abd13e60fa.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/73cab772f184def3594a27abd13e60fa.png)
 
 图片由作者提供
 
 安装完成后，从所有已安装的 Noteable 插件中找到 Noteable 插件并启用它们。现在我们可以使用插件了。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/593ac9259ea6d0a2cbfb2d324e6c46cd.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/593ac9259ea6d0a2cbfb2d324e6c46cd.png)
 
 图片由作者提供
 
 首先，我会提供提示：“你能给我一个用于 Titanic 数据集的简单 EDA 吗？”
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/3be5d436535e830677961532f95e8995.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/3be5d436535e830677961532f95e8995.png)
 
 图片由作者提供
 
@@ -68,43 +68,43 @@ ChatGPT 会提示我们在 Noteable 中没有设置默认项目。这意味着�
 
 登录 Noteable 后，选择“创建”按钮和“项目”。之后，为你的项目命名并复制 URL 链接。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/3e91e950b9f678eabb906a7734d5b02a.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/3e91e950b9f678eabb906a7734d5b02a.png)
 
 图片由作者提供
 
 有了项目 URL，将其传递给 ChatGPT，并使用类似于下面图片的提示。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/ff085225aea344d272eb3e60c822233d.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/ff085225aea344d272eb3e60c822233d.png)
 
 图片由作者提供
 
 现在我们准备好让 ChatGPT 自动执行分析。一旦你输入上述提示，Noteable 插件将尝试找到数据并提供 EDA。结果会显示在你的 ChatGPT 中。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/34fecbe416d0eac3004392fbf9c5c633.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/34fecbe416d0eac3004392fbf9c5c633.png)
 
 图片由作者提供
 
 不仅限于 ChatGPT 的结果，包含数据分析代码的笔记本也将在你的 Noteable 项目中准备好。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/9213de38622d7273cc118ba48846e4a8.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/9213de38622d7273cc118ba48846e4a8.png)
 
 图片由作者提供
 
 如果你愿意，可以在 ChatGPT 中继续分析；例如，我要求 ChatGPT 提供一个试图预测幸存者的机器学习模型，
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/3f586cc1e6136a86f03450241f0c8b02.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/3f586cc1e6136a86f03450241f0c8b02.png)
 
 图片由作者提供
 
 我还要求 ChatGPT 将模型保存为 pickle 对象。输出还展示了如果需要如何部署模型。
 
-![Noteable 插件：自动化数据分析的 ChatGPT 插件](../Images/accf7d019b442fe9a14481581830d7b6.png)
+![Noteable 插件：自动化数据分析的 ChatGPT 插件](img/accf7d019b442fe9a14481581830d7b6.png)
 
 图片由作者提供
 
 如果我们查看 Noteable 项目，其中包含了由 ChatGPT 生成的分析模型对象。
 
-![Noteable 插件：ChatGPT 插件自动化数据分析](../Images/ba7922596a9deeb96f79b33ff5c23023.png)
+![Noteable 插件：ChatGPT 插件自动化数据分析](img/ba7922596a9deeb96f79b33ff5c23023.png)
 
 作者提供的图片
 

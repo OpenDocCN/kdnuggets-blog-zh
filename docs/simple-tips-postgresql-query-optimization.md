@@ -1,12 +1,12 @@
 # PostgreSQL 查询优化的简单技巧
 
-> 原文：[https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html](https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html)
+> 原文：[`www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html`](https://www.kdnuggets.com/2018/06/simple-tips-postgresql-query-optimization.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 Pavel Tiunov 撰写，[Statsbot](https://statsbot.co/)**
 
-![图片](../Images/96ce8e920837a63f0a217c54b00279dd.png)
+![图片](img/96ce8e920837a63f0a217c54b00279dd.png)
 
 单个查询优化技巧可以将你的数据库性能提升 100 倍。曾经我们建议一位拥有 10TB 数据库的客户使用基于日期的多列索引。结果，他们的日期范围查询速度提升了 112 倍。在这篇文章中，我们分享了五个简单但仍然强大的 PostgreSQL 查询优化技巧。
 
@@ -158,21 +158,21 @@ Execution time: 0.072 ms
 
 **相关：**
 
-+   [SQL 中的随机行可扩展选择](/2018/04/scalable-select-random-rows-sql.html)
++   SQL 中的随机行可扩展选择
 
-+   [SQL 窗口函数商业分析教程](/2017/12/sql-window-functions-tutorial-business-analytics.html)
++   SQL 窗口函数商业分析教程
 
-+   [计算客户生命周期价值：SQL 示例](/2018/02/calculating-customer-lifetime-value-sql-example.html)
++   计算客户生命周期价值：SQL 示例
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求。
 
 * * *
 

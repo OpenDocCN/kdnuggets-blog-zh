@@ -1,8 +1,8 @@
 # 自动化您的模型超参数调整
 
-> 原文：[https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html](https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html)
+> 原文：[`www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html`](https://www.kdnuggets.com/2019/09/automate-hyperparameter-tuning-models.html)
 
-[评论](#comments)![图](../Images/200b7b1476e3bfd5eb1b787f0bf77e0c.png)
+评论![图](img/200b7b1476e3bfd5eb1b787f0bf77e0c.png)
 
 照片由[Marcin Nowak](https://unsplash.com/@marcin?utm_source=medium&utm_medium=referral)拍摄，来源于[Unsplash](https://unsplash.com/?utm_source=medium&utm_medium=referral)。
 
@@ -12,19 +12,19 @@
 
 ***所以这就引出了终极问题：我们能否自动化这个过程？***
 
-不久前，我在[**“如何赢得数据科学竞赛”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)Coursera课程中的一次课堂竞赛中工作。学到了很多新东西，其中之一就是Hyperopt——一个贝叶斯参数调整框架。
+不久前，我在[**“如何赢得数据科学竞赛”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0)Coursera 课程中的一次课堂竞赛中工作。学到了很多新东西，其中之一就是 Hyperopt——一个贝叶斯参数调整框架。
 
-我感到惊讶。我把Mac和Hyperopt留在了晚上，早晨醒来时得到了结果。这太棒了，我避免了很多尝试和错误。
+我感到惊讶。我把 Mac 和 Hyperopt 留在了晚上，早晨醒来时得到了结果。这太棒了，我避免了很多尝试和错误。
 
 ***这篇文章关于自动化超参数调整，因为我们的时间比机器更重要。***
 
-### 那么，Hyperopt是什么？
+### 那么，Hyperopt 是什么？
 
-![](../Images/07b5068358f10c44c9bb605f14d5de08.png)
+![](img/07b5068358f10c44c9bb605f14d5de08.png)
 
-来自Hyperopt网站：
+来自 Hyperopt 网站：
 
-> *Hyperopt是一个用于在尴尬搜索空间上进行串行和并行优化的Python库，这些空间可能包括实值、离散和条件维度*
+> *Hyperopt 是一个用于在尴尬搜索空间上进行串行和并行优化的 Python 库，这些空间可能包括实值、离散和条件维度*
 
 ***简单来说，这意味着我们得到一个优化器，它可以为我们最小化/最大化任何函数。*** 例如，我们可以用它来最小化对数损失或最大化准确率。
 
@@ -32,29 +32,29 @@
 
 网格搜索逐个检查参数，而随机搜索随机检查参数。
 
-***Hyperopt以一组超参数作为输入空间，在其中进行搜索，并根据过去试验的结果进行移动。***
+***Hyperopt 以一组超参数作为输入空间，在其中进行搜索，并根据过去试验的结果进行移动。***
 
-> 因此，Hyperopt的目标是以一种有信息的方式搜索参数空间。
+> 因此，Hyperopt 的目标是以一种有信息的方式搜索参数空间。
 
-我不会详细讲解。但如果你想了解更多关于它的工作原理，可以看看J Bergstra的[**论文**](https://conference.scipy.org/proceedings/scipy2013/pdfs/bergstra_hyperopt.pdf)。这是Github上的[**文档**](https://github.com/hyperopt/hyperopt/wiki/FMin)。
+我不会详细讲解。但如果你想了解更多关于它的工作原理，可以看看 J Bergstra 的[**论文**](https://conference.scipy.org/proceedings/scipy2013/pdfs/bergstra_hyperopt.pdf)。这是 Github 上的[**文档**](https://github.com/hyperopt/hyperopt/wiki/FMin)。
 
 ### 我们的数据集
 
-为了说明Hyperopt的工作原理，我将使用[heart dataset](https://www.kaggle.com/ronitf/heart-disease-uci)来自UCI，因为它是一个简单的数据集。为什么不利用数据科学做一些有益的事情，而不仅仅是创造利润呢？
+为了说明 Hyperopt 的工作原理，我将使用[heart dataset](https://www.kaggle.com/ronitf/heart-disease-uci)来自 UCI，因为它是一个简单的数据集。为什么不利用数据科学做一些有益的事情，而不仅仅是创造利润呢？
 
 这个数据集根据一些变量预测心脏病的存在。
 
 这是数据集的快照：
 
-![](../Images/057cd48bf889d086004ebb786b499a86.png)
+![](img/057cd48bf889d086004ebb786b499a86.png)
 
 这就是目标分布的样子：
 
-![](../Images/6f1c997ab22f29cc5774fceb761f2579.png)
+![](img/6f1c997ab22f29cc5774fceb761f2579.png)
 
 ### Hyperopt 分步指南
 
-![](../Images/ab215cfc8f835d6a47aca674397034eb.png)
+![](img/ab215cfc8f835d6a47aca674397034eb.png)
 
 所以，在尝试运行 hyperopt 时，我们需要创建两个 Python 对象：
 
@@ -80,7 +80,7 @@
 
 ### 2\. 为你的分类器创建空间
 
-![](../Images/b52692275b5b808df484cd14136ac7f2.png)
+![](img/b52692275b5b808df484cd14136ac7f2.png)
 
 现在，我们 ***为我们的分类器创建超参数搜索空间***
 
@@ -104,11 +104,11 @@
 
 ### 3\. 最后，运行 Hyperopt
 
-![](../Images/55ef6dc9486792af8b3673d1003e49ec.png)
+![](img/55ef6dc9486792af8b3673d1003e49ec.png)
 
-一旦我们运行这个，就能得到我们模型的最佳参数。结果显示，我们通过这样做达到了90%的准确率。
+一旦我们运行这个，就能得到我们模型的最佳参数。结果显示，我们通过这样做达到了 90%的准确率。
 
-[![](../Images/5abf6661a5d63b7b4a5ec8d44a2669cd.png)](https://miro.medium.com/max/2544/1*1cYghbkmt3-pBqv8LNcwhQ.png)
+![](https://miro.medium.com/max/2544/1*1cYghbkmt3-pBqv8LNcwhQ.png)
 
 ***现在我们可以用这些最佳参数重新训练我们的 XGboost 算法，然后就完成了。***
 
@@ -124,7 +124,7 @@
 
 ### 继续学习
 
-如果你想了解更多关于实用数据科学的内容，可以看看 [**“如何赢得数据科学比赛”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera课程。从这门由一位最富盛名的 Kaggle 竞赛选手讲授的课程中学到了很多新东西。
+如果你想了解更多关于实用数据科学的内容，可以看看 [**“如何赢得数据科学比赛”**](https://www.coursera.org/specializations/aml?siteID=lVarvwc5BD0-BShznKdc3CUauhfsM7_8xw&utm_content=2&utm_medium=partners&utm_source=linkshare&utm_campaign=lVarvwc5BD0) Coursera 课程。从这门由一位最富盛名的 Kaggle 竞赛选手讲授的课程中学到了很多新东西。
 
 感谢阅读。我将来也会写更多面向初学者的文章。请在 [**Medium**](https://medium.com/@rahul_agarwal?source=post_page---------------------------) 关注我，或订阅我的 [**博客**](http://eepurl.com/dbQnuX?source=post_page---------------------------) 以获取最新信息。一直以来，我欢迎反馈和建设性的批评，可以通过 Twitter 联系我 [@mlwhiz](https://twitter.com/MLWhiz?source=post_page---------------------------)。
 
@@ -136,21 +136,21 @@
 
 **相关:**
 
-+   [如何自动化超参数优化](/2019/06/automate-hyperparameter-optimization.html)
++   如何自动化超参数优化
 
-+   [在Google Colab中使用Hyperas进行Keras超参数调优](/2018/12/keras-hyperparameter-tuning-google-colab-hyperas.html)
++   在 Google Colab 中使用 Hyperas 进行 Keras 超参数调优
 
-+   [自动化机器学习: 到底有多少？](/2019/09/automated-machine-learning-just-how-much.html)
++   自动化机器学习: 到底有多少？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 

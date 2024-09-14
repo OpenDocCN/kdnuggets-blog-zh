@@ -1,6 +1,6 @@
 # 机器学习中的合成数据
 
-> 原文：[https://www.kdnuggets.com/synthetic-data-for-machine-learning](https://www.kdnuggets.com/synthetic-data-for-machine-learning)
+> 原文：[`www.kdnuggets.com/synthetic-data-for-machine-learning`](https://www.kdnuggets.com/synthetic-data-for-machine-learning)
 
 众所周知，监督学习模型需要在高质量的标注数据集上进行训练。然而，收集足够的高质量标注数据可能是一个重大挑战，尤其是在隐私和数据可用性是主要问题的情况下。幸运的是，这个问题可以通过合成数据得到缓解。合成数据是人工生成的，而不是从现实世界事件中收集的。这些数据可以用来增强真实数据，或者用作真实数据的替代品。它可以通过多种方式创建，包括使用统计数据、数据增强/计算机生成图像（CGI）或生成性人工智能，具体取决于使用案例。在这篇文章中，我们将探讨：
 
@@ -16,11 +16,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT 需求
 
 * * *
 
@@ -28,11 +28,11 @@
 
 ## 隐私问题
 
-![机器学习中的合成数据](../Images/2a83944dc98e967df1d2c191d1c715e5.png)
+![机器学习中的合成数据](img/2a83944dc98e967df1d2c191d1c715e5.png)
 
 图片由 [谷歌研究](https://blog.research.google/2022/12/ehr-safe-generating-high-fidelity-and.html) 提供
 
-医疗数据通常具有隐私限制。例如，尽管将电子健康记录（EHR）纳入机器学习应用程序可能会改善患者结果，但在遵守如HIPAA这样的患者隐私规定的同时进行这样的操作是困难的。即使是数据匿名化技术也不完美。对此，谷歌的研究人员提出了EHR-Safe，这是一个生成逼真且保护隐私的合成EHR的框架。
+医疗数据通常具有隐私限制。例如，尽管将电子健康记录（EHR）纳入机器学习应用程序可能会改善患者结果，但在遵守如 HIPAA 这样的患者隐私规定的同时进行这样的操作是困难的。即使是数据匿名化技术也不完美。对此，谷歌的研究人员提出了 EHR-Safe，这是一个生成逼真且保护隐私的合成 EHR 的框架。
 
 ## 安全问题
 
@@ -44,11 +44,11 @@
 
 ## 真实数据的手动标注有时可能非常困难甚至不可能
 
-![用于机器学习的合成数据](../Images/9e3c491863b9a07d56816cf123a5c9b1.png)
+![用于机器学习的合成数据](img/9e3c491863b9a07d56816cf123a5c9b1.png)
 
-稀疏真实世界数据KITTI（左）和Parallel Domain生成的合成数据（右）的光流标签。颜色表示流动的方向和幅度。图片由作者提供。
+稀疏真实世界数据 KITTI（左）和 Parallel Domain 生成的合成数据（右）的光流标签。颜色表示流动的方向和幅度。图片由作者提供。
 
-在自动驾驶中，估计视频帧之间的每像素运动（也称为光流）在真实数据中具有挑战性。真实数据标注只能通过使用LiDAR信息来估计物体的运动，无论是动态的还是静态的，基于自主车辆的轨迹。由于LiDAR扫描是稀疏的，极少数的公共光流数据集也很稀疏。这是一些光流合成数据已被证明能大幅提高光流任务性能的原因之一。
+在自动驾驶中，估计视频帧之间的每像素运动（也称为光流）在真实数据中具有挑战性。真实数据标注只能通过使用 LiDAR 信息来估计物体的运动，无论是动态的还是静态的，基于自主车辆的轨迹。由于 LiDAR 扫描是稀疏的，极少数的公共光流数据集也很稀疏。这是一些光流合成数据已被证明能大幅提高光流任务性能的原因之一。
 
 # 边缘情况的合成数据
 
@@ -80,13 +80,13 @@
 
 ## 数据增强/CGI
 
-提高训练数据的多样性和数量的一种常见策略是通过修改现有数据来创建合成数据。数据增强在图像处理领域被广泛使用。这可能意味着翻转图像、裁剪图像或调整亮度。只要确保数据增强策略对相关项目有意义即可。例如，对于自动驾驶应用，将图像旋转180度，使得道路位于图像顶部而天空位于底部，这种做法是没有意义的。
+提高训练数据的多样性和数量的一种常见策略是通过修改现有数据来创建合成数据。数据增强在图像处理领域被广泛使用。这可能意味着翻转图像、裁剪图像或调整亮度。只要确保数据增强策略对相关项目有意义即可。例如，对于自动驾驶应用，将图像旋转 180 度，使得道路位于图像顶部而天空位于底部，这种做法是没有意义的。
 
-[Multiformer 推理](https://natecibik.medium.com/multiformer-51b81df826b7)在合成SHIFT数据集上的城市场景中进行。与其修改现有数据以用于自动驾驶应用，不如使用计算机生成图像（CGI）来精确生成各种图像或视频，这些图像或视频在现实世界中可能不易获得。这可以包括稀有或危险的场景、特定的光照条件或车辆类型。这种方法的一些缺点是创建高质量CGI需要大量计算资源、专业软件和技术团队。
+[Multiformer 推理](https://natecibik.medium.com/multiformer-51b81df826b7)在合成 SHIFT 数据集上的城市场景中进行。与其修改现有数据以用于自动驾驶应用，不如使用计算机生成图像（CGI）来精确生成各种图像或视频，这些图像或视频在现实世界中可能不易获得。这可以包括稀有或危险的场景、特定的光照条件或车辆类型。这种方法的一些缺点是创建高质量 CGI 需要大量计算资源、专业软件和技术团队。
 
 ## 生成性人工智能
 
-一种常用的生成模型来创建合成数据是生成对抗网络（GANs）。GANs包括两个网络，一个生成器和一个鉴别器，它们同时进行训练。生成器创建新样本，而鉴别器试图区分真实样本和生成样本。这些模型共同学习，生成器提高了创建真实数据的能力，鉴别器则变得更擅长检测合成数据。如果你想尝试用PyTorch实现GAN，[可以查看这篇TDS博客文章](https://towardsdatascience.com/generative-ai-synthetic-data-generation-with-gans-using-pytorch-2e4dde8a17dd)。
+一种常用的生成模型来创建合成数据是生成对抗网络（GANs）。GANs 包括两个网络，一个生成器和一个鉴别器，它们同时进行训练。生成器创建新样本，而鉴别器试图区分真实样本和生成样本。这些模型共同学习，生成器提高了创建真实数据的能力，鉴别器则变得更擅长检测合成数据。如果你想尝试用 PyTorch 实现 GAN，[可以查看这篇 TDS 博客文章](https://towardsdatascience.com/generative-ai-synthetic-data-generation-with-gans-using-pytorch-2e4dde8a17dd)。
 
 这些方法对复杂数据集效果很好，可以生成非常逼真、高质量的数据。然而，正如上图所示，控制生成对象的特定属性，如颜色、文本或大小，并非总是容易的。
 
@@ -102,9 +102,9 @@
 
 +   [高保真合成数据：数据工程师和数据科学家的共同需求](https://www.kdnuggets.com/2022/tonic-high-fidelity-synthetic-data-engineers-scientists-alike.html)
 
-+   [如何利用AI生成的合成数据普及AI/ML和数据科学](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)
++   [如何利用 AI 生成的合成数据普及 AI/ML 和数据科学](https://www.kdnuggets.com/2022/11/mostly-ai-democratize-aiml-data-science-aigenerated-synthetic-data.html)
 
-+   [合成数据平台：解锁生成AI在结构化数据中的力量](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
++   [合成数据平台：解锁生成 AI 在结构化数据中的力量](https://www.kdnuggets.com/2023/07/synthetic-data-platforms-unlocking-power-generative-ai-structured-data.html)
 
 +   [数据访问在大多数公司中严重不足，71%的人认为…](https://www.kdnuggets.com/2023/07/mostly-data-access-severely-lacking-synthetic-data-help.html)
 

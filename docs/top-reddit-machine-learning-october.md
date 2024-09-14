@@ -1,8 +1,8 @@
 # Top /r/MachineLearning 帖子，十月：不适合工作场所的图像识别、可微分神经计算机、Hinton 在 Coursera 上
 
-> 原文：[https://www.kdnuggets.com/2016/11/top-reddit-machine-learning-october.html](https://www.kdnuggets.com/2016/11/top-reddit-machine-learning-october.html)
+> 原文：[`www.kdnuggets.com/2016/11/top-reddit-machine-learning-october.html`](https://www.kdnuggets.com/2016/11/top-reddit-machine-learning-october.html)
 
-![Reddit MXLearn](../Images/c24b735bc2cc57b3b822be13bd5d29b1.png) 在十月的 [/r/MachineLearning](https://www.reddit.com/r/MachineLearning/) 上，事情变得不适合工作场所，DeepMind 继续创新，Hinton 再次成为头条，AI 开放网络被介绍，Stuart Little 拥有了一辆自主驾驶的汽车。
+![Reddit MXLearn](img/c24b735bc2cc57b3b822be13bd5d29b1.png) 在十月的 [/r/MachineLearning](https://www.reddit.com/r/MachineLearning/) 上，事情变得不适合工作场所，DeepMind 继续创新，Hinton 再次成为头条，AI 开放网络被介绍，Stuart Little 拥有了一辆自主驾驶的汽车。
 
 过去一个月**/r/MachineLearning** 的前五名帖子（不包括子版块的元讨论）是：
 
@@ -12,11 +12,11 @@
 
 **警告：此帖子包含抽象的裸体描绘，可能不适合工作场所**
 
-![不适合工作场所？](../Images/c8eef58055f488b6c49b3204712afbc6.png)
+![不适合工作场所？](img/c8eef58055f488b6c49b3204712afbc6.png)
 
 这个在 GitLab 上的项目探讨了 Yahoo 的 [open_nsfw](https://github.com/yahoo/open_nsfw)，一个用于“工作不适宜（NSFW）分类的深度神经网络，使用深度神经网络 Caffe 模型。”帖子解释了：
 
-> Yahoo 最近开源的神经网络 open_nsfw 是一个精调的残差网络，根据其在工作场所使用的适宜性对图像进行0到1的评分。在文档中，Yahoo 说明：
+> Yahoo 最近开源的神经网络 open_nsfw 是一个精调的残差网络，根据其在工作场所使用的适宜性对图像进行 0 到 1 的评分。在文档中，Yahoo 说明：
 > 
 > “定义 NSFW 材料是主观的，识别这些图像的任务并不简单。此外，在一个环境中令人反感的内容在另一个环境中可能是适合的。”
 
@@ -40,7 +40,7 @@ Geoffrey Hinton 的《机器学习中的神经网络》在 Coursera 上重新开
 
 **4\. [介绍 AI 开放网络：一个 100% 开源的 AI 研究社区](http://ai-on.org/)**
 
-![AI Open Network](../Images/be081567f3f5bab5de199405f2e5562d.png)
+![AI Open Network](img/be081567f3f5bab5de199405f2e5562d.png)
 
 直接来自 AI•ON 网站：
 
@@ -64,21 +64,21 @@ Geoffrey Hinton 的《机器学习中的神经网络》在 Coursera 上重新开
 
 **相关：**
 
-+   [顶级 /r/MachineLearning 帖子，九月：开放图像数据集；巨额深度学习资助；高级 ML 课程资料](/2016/10/top-reddit-machine-learning-september.html)
++   顶级 /r/MachineLearning 帖子，九月：开放图像数据集；巨额深度学习资助；高级 ML 课程资料
 
-+   [顶级 /r/MachineLearning 帖子，八月：Google Brain AMA，使用 TensorFlow 的图像完成，日本黄瓜种植](/2016/09/top-reddit-machine-learning-august.html)
++   顶级 /r/MachineLearning 帖子，八月：Google Brain AMA，使用 TensorFlow 的图像完成，日本黄瓜种植
 
-+   [顶级 /r/MachineLearning 帖子，七月：Google Brain AMA，Geoff Hinton 获得 IEEE 奖章，Hinton ANN 课程上线！](/2016/08/top-reddit-machine-learning-july.html)
++   顶级 /r/MachineLearning 帖子，七月：Google Brain AMA，Geoff Hinton 获得 IEEE 奖章，Hinton ANN 课程上线！
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在的组织进行 IT 工作
 
 * * *
 
@@ -94,4 +94,4 @@ Geoffrey Hinton 的《机器学习中的神经网络》在 Coursera 上重新开
 
 +   [使用卷积神经网络 (CNN) 进行图像分类](https://www.kdnuggets.com/2022/05/image-classification-convolutional-neural-networks-cnns.html)
 
-+   [KDnuggets 新闻，10月5日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)
++   [KDnuggets 新闻，10 月 5 日：初学者的顶级免费 Git GUI 客户端 •…](https://www.kdnuggets.com/2022/n39.html)

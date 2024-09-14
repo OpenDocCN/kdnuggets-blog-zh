@@ -1,8 +1,8 @@
 # 一种简单且可解释的二分类器性能测量方法
 
-> 原文：[https://www.kdnuggets.com/2020/03/interpretable-performance-measure-binary-classifier.html](https://www.kdnuggets.com/2020/03/interpretable-performance-measure-binary-classifier.html)
+> 原文：[`www.kdnuggets.com/2020/03/interpretable-performance-measure-binary-classifier.html`](https://www.kdnuggets.com/2020/03/interpretable-performance-measure-binary-classifier.html)
 
-[评论](#comments)
+评论
 
 **由 [Mehmet Suzen](https://msuzen.github.io/) 提供，理论物理学家和研究科学家**。
 
@@ -12,21 +12,21 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您组织的 IT
 
 * * *
 
 ### 为什么 ROC-AUC 不具有可解释性？
 
-![](../Images/28e43caacaab3e2c0e52240c83b9e599.png)
+![](img/28e43caacaab3e2c0e52240c83b9e599.png)
 
 *不同阈值产生不同的混淆矩阵（维基百科）。*
 
-报告分类器性能的事实标准是使用[接收器操作特性](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) (ROC) - 曲线下面积 (AUC) 测量。它起源于1940年代美国海军在雷达的开发过程中，用于测量探测性能。 至少有5种不同的 ROC-AUC 定义，即使你拥有机器学习博士学位，人们也很难解释 AUC 作为性能度量的意义。由于几乎所有库中都有 AUC 功能，它几乎成为机器学习论文中分类性能的宗教仪式。然而，除了其荒谬的比较问题外，解释起来并不容易，请参见[hmeasure](http://www.hmeasure.net/)。AUC 衡量的是从[混淆矩阵](https://en.wikipedia.org/wiki/Confusion_matrix)提取的真实正率 (TPR) 曲线下的面积，作为假阳性率 (FPR) 的函数，不同阈值下的结果。
+报告分类器性能的事实标准是使用[接收器操作特性](https://en.wikipedia.org/wiki/Receiver_operating_characteristic) (ROC) - 曲线下面积 (AUC) 测量。它起源于 1940 年代美国海军在雷达的开发过程中，用于测量探测性能。 至少有 5 种不同的 ROC-AUC 定义，即使你拥有机器学习博士学位，人们也很难解释 AUC 作为性能度量的意义。由于几乎所有库中都有 AUC 功能，它几乎成为机器学习论文中分类性能的宗教仪式。然而，除了其荒谬的比较问题外，解释起来并不容易，请参见[hmeasure](http://www.hmeasure.net/)。AUC 衡量的是从[混淆矩阵](https://en.wikipedia.org/wiki/Confusion_matrix)提取的真实正率 (TPR) 曲线下的面积，作为假阳性率 (FPR) 的函数，不同阈值下的结果。
 
 *f(x) = y*
 
@@ -48,11 +48,11 @@ PCC 告诉我们分类器在检测任一类别时的效果，它是一个概率�
 
 ### 生产问题
 
-直接的问题是如何选择生成混淆矩阵的阈值？一种选择是选择一个能够最大化PCC的阈值，用于在测试集上进行生产。为了提高PCC的估计，可以在测试集上进行重采样，以获得良好的不确定性。
+直接的问题是如何选择生成混淆矩阵的阈值？一种选择是选择一个能够最大化 PCC 的阈值，用于在测试集上进行生产。为了提高 PCC 的估计，可以在测试集上进行重采样，以获得良好的不确定性。
 
 ### 结论
 
-我们尝试通过引入PCC，或平衡准确率，作为二分类器的简单而可解释的性能指标，来规避报告AUC的问题。这对于非技术观众来说很容易解释。可以引入一种改进的PCC，考虑更好的估计特性，但主要的解释仍然是*正确分类的概率。*
+我们尝试通过引入 PCC，或平衡准确率，作为二分类器的简单而可解释的性能指标，来规避报告 AUC 的问题。这对于非技术观众来说很容易解释。可以引入一种改进的 PCC，考虑更好的估计特性，但主要的解释仍然是*正确分类的概率。*
 
 [原文](https://memosisland.blogspot.com/2020/02/a-simple-and-interpretable-performance.html)。经许可转载。
 
@@ -60,20 +60,20 @@ PCC 告诉我们分类器在检测任一类别时的效果，它是一个概率�
 
 +   [你信任并理解你的预测模型吗？](https://www.kdnuggets.com/2020/02/h2o-trust-understand-predictive-models.html)
 
-+   [接收器操作特征曲线揭秘（Python版）](https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
++   [接收器操作特征曲线揭秘（Python 版）](https://www.kdnuggets.com/2018/07/receiver-operating-characteristic-curves-demystified-python.html)
 
-+   [选择正确的指标来评估机器学习模型——第2部分](https://www.kdnuggets.com/2018/06/right-metric-evaluating-machine-learning-models-2.html)
++   [选择正确的指标来评估机器学习模型——第二部分](https://www.kdnuggets.com/2018/06/right-metric-evaluating-machine-learning-models-2.html)
 
 ### 更多相关主题
 
-+   [使用PyCaret进行二分类介绍](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
++   [使用 PyCaret 进行二分类介绍](https://www.kdnuggets.com/2021/12/introduction-binary-classification-pycaret.html)
 
-+   [学习如何设计、测量和实施可靠的A/B测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
++   [学习如何设计、测量和实施可靠的 A/B 测试…](https://www.kdnuggets.com/2023/01/sphere-design-measure-implement-trustworthy-ab-tests-ronny-kohavi.html)
 
-+   [使用PyTorch的可解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
++   [使用 PyTorch 的可解释神经网络](https://www.kdnuggets.com/2022/01/interpretable-neural-networks-pytorch.html)
 
-+   [从理论到实践：构建k-近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
++   [从理论到实践：构建 k-近邻分类器](https://www.kdnuggets.com/2023/06/theory-practice-building-knearest-neighbors-classifier.html)
 
-+   [优化你的LLM以提高性能和可扩展性](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)
++   [优化你的 LLM 以提高性能和可扩展性](https://www.kdnuggets.com/optimizing-your-llm-for-performance-and-scalability)
 
 +   [优化性能和成本的策略，适用于大型…](https://www.kdnuggets.com/strategies-for-optimizing-performance-and-costs-when-using-large-language-models-in-the-cloud)

@@ -1,12 +1,12 @@
 # 自然语言处理管道，详细解释
 
-> 原文：[https://www.kdnuggets.com/2021/03/natural-language-processing-pipelines-explained.html](https://www.kdnuggets.com/2021/03/natural-language-processing-pipelines-explained.html)
+> 原文：[`www.kdnuggets.com/2021/03/natural-language-processing-pipelines-explained.html`](https://www.kdnuggets.com/2021/03/natural-language-processing-pipelines-explained.html)
 
-[评论](#comments)
+评论
 
-**由 [Ram Tavva](https://www.linkedin.com/in/ram-tavva/)，高级数据科学家，ExcelR Solutions董事**
+**由 [Ram Tavva](https://www.linkedin.com/in/ram-tavva/)，高级数据科学家，ExcelR Solutions 董事**
 
-![图片](../Images/afd1ffa1e75d2918803dbc264e084524.png)
+![图片](img/afd1ffa1e75d2918803dbc264e084524.png)
 
 ### 介绍
 
@@ -14,11 +14,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -26,35 +26,35 @@
 
 这很不幸，数据库中存在大量未结构化的数据。但你是否曾考虑过计算机如何处理这些未结构化数据？
 
-是的，虽然有许多解决方案，但NLP始终是改变游戏规则的技术。
+是的，虽然有许多解决方案，但 NLP 始终是改变游戏规则的技术。
 
-让我们详细了解NLP…
+让我们详细了解 NLP…
 
-### 什么是NLP？
+### 什么是 NLP？
 
-NLP代表[**自然语言处理**](https://www.excelr.com/blog/data-science/natural-language-processing/implementation-of-bag-of-words-using-python)，它自动操作自然语言，例如应用程序和软件中的语音和文本。
+NLP 代表[**自然语言处理**](https://www.excelr.com/blog/data-science/natural-language-processing/implementation-of-bag-of-words-using-python)，它自动操作自然语言，例如应用程序和软件中的语音和文本。
 
 语音可以是算法接收的任何文本，算法测量准确性，运行自我和半监督模型，然后在输入数据后以语音或文本的形式给我们期望的输出。
 
-NLP是最受欢迎的技术之一，它使人与计算机之间的沟通变得更加容易。如果你使用Windows系统，可以使用微软Cortana；如果你使用macOS系统，Siri就是你的虚拟助手。
+NLP 是最受欢迎的技术之一，它使人与计算机之间的沟通变得更加容易。如果你使用 Windows 系统，可以使用微软 Cortana；如果你使用 macOS 系统，Siri 就是你的虚拟助手。
 
 最棒的是，即使是搜索引擎也配备了虚拟助手。例如：谷歌搜索引擎。
 
-使用NLP，你可以输入任何你想搜索的内容，或者点击麦克风选项说出来，你就能获得想要的结果。看看NLP如何使人与计算机之间的沟通变得更容易。当你看到这一点时，难道不是很惊奇吗？
+使用 NLP，你可以输入任何你想搜索的内容，或者点击麦克风选项说出来，你就能获得想要的结果。看看 NLP 如何使人与计算机之间的沟通变得更容易。当你看到这一点时，难道不是很惊奇吗？
 
-无论你是想了解天气情况还是互联网的最新消息，或是周末目的地的路线，NLP都能满足你的所有需求。
+无论你是想了解天气情况还是互联网的最新消息，或是周末目的地的路线，NLP 都能满足你的所有需求。
 
-### 自然语言处理管道（NLP管道）
+### 自然语言处理管道（NLP 管道）
 
-当你在文本或语音上调用NLP时，它将整个数据转换成字符串，然后主字符串经过多个步骤（称为处理管道的过程）。它使用训练好的管道来监督你的输入数据，并根据语音语调或句子长度重构整个字符串。
+当你在文本或语音上调用 NLP 时，它将整个数据转换成字符串，然后主字符串经过多个步骤（称为处理管道的过程）。它使用训练好的管道来监督你的输入数据，并根据语音语调或句子长度重构整个字符串。
 
 对于每个管道，组件返回到主字符串，然后传递给下一个组件。功能和效率依赖于组件、它们的模型和训练。
 
-### NLP如何使人与计算机之间的沟通变得简单
+### NLP 如何使人与计算机之间的沟通变得简单
 
-NLP使用语言处理管道来读取、解码和理解人类语言。这些管道由六个主要过程组成。这些过程将整个语音或文本拆分成小块，重构、分析并处理，以从搜索引擎结果页面中获取最相关的数据。
+NLP 使用语言处理管道来读取、解码和理解人类语言。这些管道由六个主要过程组成。这些过程将整个语音或文本拆分成小块，重构、分析并处理，以从搜索引擎结果页面中获取最相关的数据。
 
-### 这是帮助计算机理解人类语言的6个NLP管道内部步骤
+### 这是帮助计算机理解人类语言的 6 个 NLP 管道内部步骤
 
 ### 句子分割
 
@@ -174,7 +174,7 @@ for i in tokenized:
 
 这一步骤会进入词汇的根本层面，找出所有可用词汇的基本形式。它们有普通的规则来处理这些词汇，而大多数人对此并不知晓。
 
-![图片](../Images/9fe4a7690354d7277fa58b51805a62a3.png)
+![图片](img/9fe4a7690354d7277fa58b51805a62a3.png)
 
 ### 识别停用词
 
@@ -234,11 +234,11 @@ print(tokens_without_sw)
 
 **相关:**
 
-+   [每个数据科学家都应该知道的 6 种 NLP 技术](/2021/02/6-nlp-techniques.html)
++   每个数据科学家都应该知道的 6 种 NLP 技术
 
-+   [使用 NLP 改进你的简历](/2021/02/nlp-improve-resume.html)
++   使用 NLP 改进你的简历
 
-+   [Hugging Face Transformers 包 – 这是什么以及如何使用它](/2021/02/hugging-face-transformer-basics.html)
++   Hugging Face Transformers 包 – 这是什么以及如何使用它
 
 ### 相关主题
 

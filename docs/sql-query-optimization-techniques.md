@@ -1,8 +1,8 @@
 # SQL 查询优化技术
 
-> 原文：[https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
+> 原文：[`www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html`](https://www.kdnuggets.com/2023/03/sql-query-optimization-techniques.html)
 
-![SQL 查询优化技术](../Images/41f30feb0f08d02cc4e3508fc8274d43.png)
+![SQL 查询优化技术](img/41f30feb0f08d02cc4e3508fc8274d43.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 工作
 
 * * *
 

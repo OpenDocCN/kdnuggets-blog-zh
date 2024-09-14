@@ -1,16 +1,16 @@
 # 如何像数据科学家一样思考以成为数据科学家
 
-> 原文：[https://www.kdnuggets.com/2017/03/think-like-data-scientist-become-one.html](https://www.kdnuggets.com/2017/03/think-like-data-scientist-become-one.html)
+> 原文：[`www.kdnuggets.com/2017/03/think-like-data-scientist-become-one.html`](https://www.kdnuggets.com/2017/03/think-like-data-scientist-become-one.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png)[评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png)评论
 
 我们都读过头条新闻——*数据科学家是最性感的工作，数量不足，薪资非常高*。这个角色被销售得非常成功，以至于数据科学课程和大学项目的数量疯狂增长。在我之前的博客文章之后，我收到了很多人询问如何成为数据科学家——哪些课程最好，应该采取哪些步骤，最快的获得数据科学工作的方式是什么？
 
-我尝试深入思考这个问题，并回顾了我的个人经历——我怎么来到这里？我如何成为一名数据科学家？**我** 是数据科学家吗？我的经历非常复杂——我起初是一个证券分析师，在一家投资公司主要使用Excel。随后，我逐渐转向银行业的商业智能和多个咨询项目，最终做到了真正的“数据科学”——建立预测模型，处理大数据，处理大量数据并编写代码进行数据分析和机器学习——这在早期被称为“数据挖掘”。
+我尝试深入思考这个问题，并回顾了我的个人经历——我怎么来到这里？我如何成为一名数据科学家？**我** 是数据科学家吗？我的经历非常复杂——我起初是一个证券分析师，在一家投资公司主要使用 Excel。随后，我逐渐转向银行业的商业智能和多个咨询项目，最终做到了真正的“数据科学”——建立预测模型，处理大数据，处理大量数据并编写代码进行数据分析和机器学习——这在早期被称为“数据挖掘”。
 
 当数据科学的热潮开始时，我试图理解它与我迄今为止所做的有什么不同。我是否应该学习新技能，成为数据科学家，而不是一个在“分析”领域工作的人？
 
-![data_science-venn-diagram](../Images/3a3bbb5415d8d2453ef6b50067935d6a.png)
+![data_science-venn-diagram](img/3a3bbb5415d8d2453ef6b50067935d6a.png)
 
 像每个对它着迷的人一样，我开始参加多个课程，阅读数据书籍，进行数据科学专业化（但没有完成……），大量编写代码——我想成为那张（不）著名的数据科学维恩图的中间交集中的**那一个**。我学到的现实是，这些“数据科学”独角兽（*维恩图中传奇般的人物*）很少存在，即使存在——他们通常是对这些领域都有了解的通才，但却是“样样通，样样松”。
 
@@ -42,29 +42,29 @@
 
 感谢阅读！订阅我的博客 [www.cyborgus.com](http://www.cyborgus.com) 并获取最新更新：
 
-在Facebook上关注我的博客更新 – [https://www.facebook.com/cyborguscom/](https://www.facebook.com/cyborguscom/)
+在 Facebook 上关注我的博客更新 – [`www.facebook.com/cyborguscom/`](https://www.facebook.com/cyborguscom/)
 
-在LinkedIn上查找我 – [https://www.linkedin.com/in/karolisurbonas/](https://www.linkedin.com/in/karolisurbonas/)
+在 LinkedIn 上查找我 – [`www.linkedin.com/in/karolisurbonas/`](https://www.linkedin.com/in/karolisurbonas/)
 
 **个人简介：** **[Karolis Urbonas](https://www.linkedin.com/in/karolisurbonas/)**，是亚马逊数据科学部负责人，是一位充满活力的数据高管，拥有建立高绩效数据科学团队和交付战略分析项目的丰富经验。他的博客地址是 [cyborgus.com](http://cyborgus.com/)。
 
 **相关：**
 
-+   [数据科学家的思维 – 第1部分](/2016/10/mind-data-scientist-part-1.html)
++   数据科学家的思维 – 第一部分
 
-+   [如何成为数据科学家 – 第1部分](/2016/08/become-data-scientist-part-1.html)
++   如何成为数据科学家 – 第一部分
 
-+   [追求卓越的数据科学学习，而不仅仅是为了考试](/2016/10/learn-datascience-for-excellence)
++   追求卓越的数据科学学习，而不仅仅是为了考试
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT 需求
 
 * * *
 
@@ -74,7 +74,7 @@
 
 +   [SQL LIKE 操作符示例](https://www.kdnuggets.com/2022/09/sql-like-operator-examples.html)
 
-+   [用这些课程构建一个类似ChatGPT的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
++   [用这些课程构建一个类似 ChatGPT 的聊天机器人](https://www.kdnuggets.com/2023/05/build-chatgptlike-chatbot-courses.html)
 
 +   [机器学习不像你的大脑 第二部分：感知器与神经元](https://www.kdnuggets.com/2022/05/machine-learning-like-brain-part-two-perceptrons-neurons.html)
 

@@ -1,8 +1,8 @@
 # 如何为机器学习学习数学
 
-> 原文：[https://www.kdnuggets.com/2022/02/learn-math-machine-learning.html](https://www.kdnuggets.com/2022/02/learn-math-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2022/02/learn-math-machine-learning.html`](https://www.kdnuggets.com/2022/02/learn-math-machine-learning.html)
 
-![如何为机器学习学习数学](../Images/de2f4331a3a5dd98bd0f14805f96fb64.png)
+![如何为机器学习学习数学](img/de2f4331a3a5dd98bd0f14805f96fb64.png)
 
 图片由 [geralt 在 Pixabay](https://pixabay.com/users/geralt-9301/) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -52,13 +52,13 @@
 
 ### 微积分
 
-我推荐两个学习机器学习所需微积分的课程。[微积分精髓](https://www.youtube.com/watch?v=WUvTyaaNkzM)是3Blue1Brown提供的很棒的微积分入门课程。这也将为你提供微积分概念的直观理解，并深入解释公式背后的意义，而不仅仅是让你记住它们。
+我推荐两个学习机器学习所需微积分的课程。[微积分精髓](https://www.youtube.com/watch?v=WUvTyaaNkzM)是 3Blue1Brown 提供的很棒的微积分入门课程。这也将为你提供微积分概念的直观理解，并深入解释公式背后的意义，而不仅仅是让你记住它们。
 
-接下来，你可以参加3Blue1Brown的[神经网络](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)系列。如果你知道如何使用 Keras 等库实现神经网络，但不太了解这些模型的工作原理，你应该参加这个课程。它提供了梯度下降算法的全面解释，以及其背后的微积分概念。
+接下来，你可以参加 3Blue1Brown 的[神经网络](https://www.youtube.com/watch?v=aircAruvnKk&list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi)系列。如果你知道如何使用 Keras 等库实现神经网络，但不太了解这些模型的工作原理，你应该参加这个课程。它提供了梯度下降算法的全面解释，以及其背后的微积分概念。
 
-![如何为机器学习学习数学](../Images/a4eec67167b15d05b0121c2c54e124cd.png)
+![如何为机器学习学习数学](img/a4eec67167b15d05b0121c2c54e124cd.png)
 
-《简易微积分》（第二版，1914年，第1章）（由文章作者编辑以删除非包容性语言）。
+《简易微积分》（第二版，1914 年，第一章）（由文章作者编辑以删除非包容性语言）。
 
 ### 统计学
 
@@ -94,7 +94,7 @@
 
 +   [如何克服数学恐惧并学习数据科学中的数学](https://www.kdnuggets.com/2021/03/overcome-fear-learn-math-data-science.html)
 
-+   [KDnuggets™ 新闻 22:n07，2月16日：如何学习机器学习数学…](https://www.kdnuggets.com/2022/n07.html)
++   [KDnuggets™ 新闻 22:n07，2 月 16 日：如何学习机器学习数学…](https://www.kdnuggets.com/2022/n07.html)
 
 +   [5 门免费 MIT 课程，学习数据科学数学](https://www.kdnuggets.com/5-free-mit-courses-to-learn-math-for-data-science)
 

@@ -1,6 +1,6 @@
 # 5 个用于地理空间数据分析的 Python 包
 
-> 原文：[https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
+> 原文：[`www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html`](https://www.kdnuggets.com/2023/08/5-python-packages-geospatial-data-analysis.html)
 
 # 介绍
 
@@ -8,11 +8,11 @@
 
 ## 我们的前三课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -81,7 +81,7 @@ usa.plot();
 
 上述代码打印了子集数据框的地图：
 
-![5 Python Packages For Geospatial Data Analysis](../Images/e34bd9f457baa33cb991406c8b393f51.png)
+![5 Python Packages For Geospatial Data Analysis](img/e34bd9f457baa33cb991406c8b393f51.png)
 
 # 2\. Folium
 
@@ -111,7 +111,7 @@ folium.Marker([0, 0]).add_to(map)
 map
 ```
 
-![5 个用于地理空间数据分析的 Python 包](../Images/515d5f8016ae96379d3a138e4de5da0b.png)
+![5 个用于地理空间数据分析的 Python 包](img/515d5f8016ae96379d3a138e4de5da0b.png)
 
 这个地图可以通过添加标记、图层或根据特定地理空间数据进行样式调整来进一步自定义。
 
@@ -144,7 +144,7 @@ m.add_layer(marker)
 
 以下是代码的输出：
 
-![5 个用于地理空间数据分析的 Python 包](../Images/42c6d309973506e85321f8cf3163f72b.png)
+![5 个用于地理空间数据分析的 Python 包](img/42c6d309973506e85321f8cf3163f72b.png)
 
 # 4\. Rasterio
 
@@ -178,7 +178,7 @@ show((src), ax=axg, cmap='viridis', title='original image')
 plt.show()
 ```
 
-![5 个用于地理空间数据分析的 Python 包](../Images/7c152411d92cc1c4cfc98f719f5075c1.png)
+![5 个用于地理空间数据分析的 Python 包](img/7c152411d92cc1c4cfc98f719f5075c1.png)
 
 原始 GeoTIFF 图像（右）来源：[kaggle.com](https://www.kaggle.com/datasets/abireltaief/highresolution-geotiff-images-of-climatic-data)
 
@@ -205,7 +205,7 @@ asia = world.query("continent == 'Asia'")
 geoplot.choropleth(asia, hue = "pop_est", cmap = "icefire",legend=True, figsize = (10, 5));
 ```
 
-![5 个用于地理空间数据分析的 Python 包](../Images/7d93f60dc3ef8ef9d02f8d2d59c2c0cd.png)
+![5 个用于地理空间数据分析的 Python 包](img/7d93f60dc3ef8ef9d02f8d2d59c2c0cd.png)
 
 例如，geoplot 包可以创建人口密度的分层地图，绘制犯罪事件的空间模式，展示环境因素的分布，并基于地理数据分析疾病的传播。
 

@@ -1,8 +1,8 @@
 # 5 本免费书籍帮助你掌握 Python
 
-> 原文：[https://www.kdnuggets.com/5-free-books-to-help-you-master-python](https://www.kdnuggets.com/5-free-books-to-help-you-master-python)
+> 原文：[`www.kdnuggets.com/5-free-books-to-help-you-master-python`](https://www.kdnuggets.com/5-free-books-to-help-you-master-python)
 
-![5 本免费书籍帮助你掌握 Python](../Images/36e42b82c737bcb91afbc99a48c0e0ae.png)
+![5 本免费书籍帮助你掌握 Python](img/36e42b82c737bcb91afbc99a48c0e0ae.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 需求
 
 * * *
 
@@ -62,7 +62,7 @@
 
 [使用 Python 自动化枯燥的任务](https://automatetheboringstuff.com/) 由 Al Sweigart 编写，是另一个非常适合初学者的资源，可以学习基础到中级的 Python 概念。
 
-你将学习基础知识，如内置数据结构、控制流和异常处理。此外，你将学习编写Python脚本以自动化任务，如搜索文件、从网络下载文件、处理PDF等。
+你将学习基础知识，如内置数据结构、控制流和异常处理。此外，你将学习编写 Python 脚本以自动化任务，如搜索文件、从网络下载文件、处理 PDF 等。
 
 这是本书涵盖的一些主题概述（除了基础知识）：
 
@@ -76,25 +76,25 @@
 
 +   网络爬虫
 
-+   在Python中处理电子表格、PDF、CSV和JSON
++   在 Python 中处理电子表格、PDF、CSV 和 JSON
 
 +   任务调度
 
 +   图像处理
 
-+   GUI自动化
++   GUI 自动化
 
-开始阅读： [用Python自动化无聊的事情](https://automatetheboringstuff.com/)
+开始阅读： [用 Python 自动化无聊的事情](https://automatetheboringstuff.com/)
 
-# 3\. Python 3模式、配方与习语
+# 3\. Python 3 模式、配方与习语
 
-[Python 3模式、配方与习语](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/index.html)是一本适合中级Python程序员的书籍，他们已经熟悉语言的特性并希望进一步提升。
+[Python 3 模式、配方与习语](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/index.html)是一本适合中级 Python 程序员的书籍，他们已经熟悉语言的特性并希望进一步提升。
 
-这本书从Python函数和类的回顾开始，涵盖了以下内容：
+这本书从 Python 函数和类的回顾开始，涵盖了以下内容：
 
 +   实例的初始化和清理
 
-+   Python中的单元测试和测试驱动开发
++   Python 中的单元测试和测试驱动开发
 
 +   装饰器
 
@@ -102,33 +102,33 @@
 
 +   生成器、迭代器、itertools
 
-+   Python中的设计模式和模式重构
++   Python 中的设计模式和模式重构
 
-开始阅读： [Python 3模式、配方与习语](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/index.html)
+开始阅读： [Python 3 模式、配方与习语](https://python-3-patterns-idioms-test.readthedocs.io/en/latest/index.html)
 
-# 4\. Python中的清晰架构
+# 4\. Python 中的清晰架构
 
-当你超越简单的Python脚本，开始构建应用程序时，你需要理解清晰架构并构建生产就绪的应用程序。
+当你超越简单的 Python 脚本，开始构建应用程序时，你需要理解清晰架构并构建生产就绪的应用程序。
 
-[《Python中的清晰架构》](https://leanpub.com/clean-architectures-in-python)由Leonardo Giordani编写，是一本免费的书籍，内容包括：
+[《Python 中的清晰架构》](https://leanpub.com/clean-architectures-in-python)由 Leonardo Giordani 编写，是一本免费的书籍，内容包括：
 
 +   清晰架构基础
 
 +   清晰架构的组件
 
-+   与外部系统集成（Postgres和MongoDB）
++   与外部系统集成（Postgres 和 MongoDB）
 
 +   运行生产就绪的系统
 
-开始阅读：[《Python中的清晰架构》](https://leanpub.com/clean-architectures-in-python)
+开始阅读：[《Python 中的清晰架构》](https://leanpub.com/clean-architectures-in-python)
 
-# 5\. Python数据科学手册
+# 5\. Python 数据科学手册
 
-你已经对核心Python和内置模块的功能有所了解。你也知道编写干净Python代码的最佳实践。那么接下来是什么？
+你已经对核心 Python 和内置模块的功能有所了解。你也知道编写干净 Python 代码的最佳实践。那么接下来是什么？
 
-如果你想开始数据科学，你还需要添加一些Python数据科学库。[Python数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)是一本全面的资源，可以帮助你掌握清理、分析和处理数据的基础。
+如果你想开始数据科学，你还需要添加一些 Python 数据科学库。[Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)是一本全面的资源，可以帮助你掌握清理、分析和处理数据的基础。
 
-本书涵盖了Python的概念，如Python魔法命令、调试和代码分析。它还涵盖了足够的内容，以帮助你开始使用Python数据科学库和构建机器学习模型。以下是概述：
+本书涵盖了 Python 的概念，如 Python 魔法命令、调试和代码分析。它还涵盖了足够的内容，以帮助你开始使用 Python 数据科学库和构建机器学习模型。以下是概述：
 
 +   NumPy
 
@@ -138,7 +138,7 @@
 
 +   机器学习
 
-开始阅读： [Python数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)
+开始阅读： [Python 数据科学手册](https://jakevdp.github.io/PythonDataScienceHandbook/)
 
 # 总结与下一步
 
@@ -146,18 +146,18 @@
 
 当你开始构建应用程序时，可能会在代码中引入一些微妙的反模式。因此，无论你使用什么编程语言，务必阅读 [《代码整洁之道》](https://www.oreilly.com/library/view/clean-code-a/9780136083238/) 和 [《程序员修炼之道》](https://pragprog.com/titles/tpp20/the-pragmatic-programmer-20th-anniversary-edition/) 以构建更好的应用程序。
 
-**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、评论文章等，学习并与开发者社区分享她的知识。
+**[Bala Priya C](https://www.linkedin.com/in/bala-priya/)** 是来自印度的开发者和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇点上工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编程和喝咖啡！目前，她正在通过编写教程、操作指南、评论文章等，学习并与开发者社区分享她的知识。
 
 ### 更多相关话题
 
-+   [免费Python资源，助你成为专业人士](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
++   [免费 Python 资源，助你成为专业人士](https://www.kdnuggets.com/free-python-resources-that-can-help-you-become-a-pro)
 
-+   [25本免费书籍掌握SQL、Python、数据科学、机器学习…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
++   [25 本免费书籍掌握 SQL、Python、数据科学、机器学习…](https://www.kdnuggets.com/25-free-books-to-master-sql-python-data-science-machine-learning-and-natural-language-processing)
 
-+   [5本免费书籍掌握SQL](https://www.kdnuggets.com/5-free-books-to-master-sql)
++   [5 本免费书籍掌握 SQL](https://www.kdnuggets.com/5-free-books-to-master-sql)
 
-+   [5本免费书籍掌握数据科学](https://www.kdnuggets.com/5-free-books-to-master-data-science)
++   [5 本免费书籍掌握数据科学](https://www.kdnuggets.com/5-free-books-to-master-data-science)
 
-+   [5本免费书籍掌握机器学习](https://www.kdnuggets.com/5-free-books-to-master-machine-learning)
++   [5 本免费书籍掌握机器学习](https://www.kdnuggets.com/5-free-books-to-master-machine-learning)
 
-+   [5本免费书籍掌握数据科学中的统计学](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
++   [5 本免费书籍掌握数据科学中的统计学](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)

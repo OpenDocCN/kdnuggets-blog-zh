@@ -1,6 +1,6 @@
 # 朴素贝叶斯：机器学习分类性能的基准模型
 
-> 原文：[https://www.kdnuggets.com/2019/04/naive-bayes-baseline-model-machine-learning-classification-performance.html/2](https://www.kdnuggets.com/2019/04/naive-bayes-baseline-model-machine-learning-classification-performance.html/2)
+> 原文：[`www.kdnuggets.com/2019/04/naive-bayes-baseline-model-machine-learning-classification-performance.html/2`](https://www.kdnuggets.com/2019/04/naive-bayes-baseline-model-machine-learning-classification-performance.html/2)
 
 ### 多项式朴素贝叶斯
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT 需求
 
 * * *
 
@@ -173,7 +173,7 @@ diabetes.hist(figsize=(20, 10));
 
 ```
 
-![pima-diabetes-histogram](../Images/1f931e10b3854819507e2bba3e123b3b.png)
+![pima-diabetes-histogram](img/1f931e10b3854819507e2bba3e123b3b.png)
 
 Pima 糖尿病特征的直方图
 
@@ -220,9 +220,9 @@ print('The Recall of the Gaussian model is', recall)
  The Recall of the Gaussian model is 0.6162790697674418 
 ```
 
-我使用`average='binary'`因为我们的目标变量是二元目标（0和1）。
+我使用`average='binary'`因为我们的目标变量是二元目标（0 和 1）。
 
-模型给出了62%的真正率（召回率）。
+模型给出了 62%的真正率（召回率）。
 
 我在获取模型的准确率时遇到困难，所以我们可以手动计算：
 
@@ -237,7 +237,7 @@ print('The accuracy of the Gaussian model is', accuracy)
  The accuracy of the Gaussian model is 0.7440944881889764 
 ```
 
-高斯模型给出了74%的准确率。
+高斯模型给出了 74%的准确率。
 
 ### 朴素贝叶斯的优点
 
@@ -303,11 +303,11 @@ print('The accuracy of the Gaussian model is', accuracy)
 
 **相关内容：**
 
-+   [仅使用 Python 实现的朴素贝叶斯 – 无需复杂框架](/2018/10/naive-bayes-from-scratch-python.html)
++   仅使用 Python 实现的朴素贝叶斯 – 无需复杂框架
 
-+   [机器学习以 88% 的准确率发现“假新闻”](/2017/04/machine-learning-fake-news-accuracy.html)
++   机器学习以 88% 的准确率发现“假新闻”
 
-+   [从零开始展开朴素贝叶斯](/2018/09/unfolding-naive-bayes.html)
++   从零开始展开朴素贝叶斯
 
 ### 更多相关话题
 

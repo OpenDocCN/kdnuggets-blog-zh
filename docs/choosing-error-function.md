@@ -1,8 +1,8 @@
 # 选择误差函数
 
-> 原文：[https://www.kdnuggets.com/2019/06/choosing-error-function.html](https://www.kdnuggets.com/2019/06/choosing-error-function.html)
+> 原文：[`www.kdnuggets.com/2019/06/choosing-error-function.html`](https://www.kdnuggets.com/2019/06/choosing-error-function.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 关于所有内容，包括视频和代码，[访问建模工作原理课程页面](https://end-to-end-machine-learning.teachable.com/p/building-blocks-choosing-a-model)。
 
@@ -18,7 +18,7 @@
 
 想象我们的温度预测被用来设计一个温室。玻璃的厚度和基础的绝缘量被仔细选择，以创造一个理想的生长环境。温室里不会有任何加热器或空调来调节温度，只有由温室设计决定的被动热流。植物比较耐寒，可以容忍温度偏差几个度，但不会有灾难性的影响。然而，温度离理想值越远，对植物的影响就越严重，效果也会很快变得更加明显。这表明成本函数可能类似于偏差的平方。
 
-![](../Images/5f9607b83929b1a9661d4cdd3b8d187b.png)
+![](img/5f9607b83929b1a9661d4cdd3b8d187b.png)
 
 **用例：绝对偏差**
 
@@ -26,25 +26,25 @@
 
 在第一部分中拟合我们温度数据的所有模型都使用了绝对偏差误差函数。
 
-![](../Images/e8f75f5eaf48e29997ef130f7eecdff6.png)
+![](img/e8f75f5eaf48e29997ef130f7eecdff6.png)
 
 **用例：饱和度绝对偏差**
 
 我们的温度预测现在被用来决定何时对办公室建筑进行预热或预冷。夜间预热和预冷可以降低能源价格，为公司节省资金。任何偏差的成本就是白天高峰能源的额外成本。这与设备在白天运行的时间成正比，而设备运行时间又与预测误差直接成正比。然而，超过某个预测阈值后，任何时间的加热或冷却都无法完全弥补差距，因此成本有上限。设备全天运行。这表明一个具有饱和度的绝对偏差误差函数。
 
-![](../Images/7c79e363a80062f5a51acdd86cd605b0.png)
+![](img/7c79e363a80062f5a51acdd86cd605b0.png)
 
 **用例：带“无所谓”区域的平方偏差**
 
 现在我们的温度预测被用于电视天气预报。我们的观众并不期望预测完全准确，因此如果误差稍微大一点也没有惩罚。这给了我们一个“无所谓”的区域。错误小不会有成本。然而，如果温度偏差过大，那么观众会非常不满，可能会切换到其他电视台获取天气报告。一个二次曲线给我们提供了与此相关的急剧增加的成本。
 
-![](../Images/10384edf5fd49f9c95d870323d6f46da.png)
+![](img/10384edf5fd49f9c95d870323d6f46da.png)
 
 **用例：自定义误差函数**
 
 我们甚至可以处理更复杂的情况。假设我们一流的商业分析团队确定我们的能源成本与预测误差之间有复杂的关系，例如，像这样。
 
-![](../Images/c9604767fd2d6760ac09dd21e91e551f.png)
+![](img/c9604767fd2d6760ac09dd21e91e551f.png)
 
 这不是问题。我们可以像使用其他候选函数一样轻松地使用它。对我们误差函数的唯一真正限制是它不会随着距离零点的增加而减少。只要它始终增加或保持平坦，它可以遵循我们想要的任何模式。
 
@@ -52,27 +52,27 @@
 
 留意平方偏差作为误差函数。这是一个非常常见的选择。事实上，它如此常见，以至于经验不足的建模者可能会认为它是唯一的选择。它具有一些非常好的数学分析性质，因此在理论和学术工作中受到青睐。但除此之外，它并没有什么特别之处。它很可能不适合你的应用。如果你花时间仔细选择你的误差函数，你会很高兴这么做了。
 
-现在我们已经打下了坚实的基础，[第4部分](https://brohrer.github.io/how_modeling_works_4.html)将详细介绍如何将数据分成训练集和测试集。这比看起来更复杂。
+现在我们已经打下了坚实的基础，[第四部分](https://brohrer.github.io/how_modeling_works_4.html)将详细介绍如何将数据分成训练集和测试集。这比看起来更复杂。
 
 [原始](https://brohrer.github.io/how_modeling_works_3.html)。经许可转载。
 
 **相关：**
 
-+   [机器学习速成课程：第1部分](/2017/05/machine-learning-crash-course-part-1.html)
++   机器学习速成课程：第一部分
 
-+   [理解神经网络中的目标函数](/2017/11/understanding-objective-functions-neural-networks.html)
++   理解神经网络中的目标函数
 
-+   [标准模型拟合方法简要概述](/2016/05/concise-overview-model-fitting-methods.html)
++   标准模型拟合方法简要概述
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行IT管理
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT 管理
 
 * * *
 
@@ -82,10 +82,10 @@
 
 +   [为你的数据集选择正确的聚类算法](https://www.kdnuggets.com/2019/10/right-clustering-algorithm.html)
 
-+   [你应该了解的5个梯度下降和成本函数的概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
++   [你应该了解的 5 个梯度下降和成本函数的概念](https://www.kdnuggets.com/2020/05/5-concepts-gradient-descent-cost-function.html)
 
 +   [什么是函数？](https://www.kdnuggets.com/2022/11/function.html)
 
-+   [3个数据科学面试中SQL聚合函数的问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)
++   [3 个数据科学面试中 SQL 聚合函数的问题](https://www.kdnuggets.com/2023/01/3-sql-aggregate-function-interview-questions-data-science.html)
 
-+   [Python函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)
++   [Python 函数参数：权威指南](https://www.kdnuggets.com/2023/02/python-function-arguments-definitive-guide.html)

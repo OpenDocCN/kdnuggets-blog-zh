@@ -1,8 +1,8 @@
 # 免费电子书：10 个实用的 Python 编程技巧
 
-> 原文：[https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)
+> 原文：[`www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html`](https://www.kdnuggets.com/2023/04/free-ebook-10-practical-python-programming-tricks.html)
 
-[![免费电子书：10 个实用的 Python 编程技巧](../Images/0390a681057e0c16a71393c81dd65ecd.png)](https://bit.ly/10_Practical_Python_Programming_Tricks_Data_Science_Horizons)
+![免费电子书：10 个实用的 Python 编程技巧](https://bit.ly/10_Practical_Python_Programming_Tricks_Data_Science_Horizons)
 
 图片由 [fullvector](https://www.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_4102879.htm#query=programming&position=0&from_view=search&track=sph) 提供，来源于 Freepik
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织在 IT 领域
 
 * * *
 

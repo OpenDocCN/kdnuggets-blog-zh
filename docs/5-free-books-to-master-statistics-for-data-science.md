@@ -1,8 +1,8 @@
 # 5 本免费书籍掌握数据科学中的统计学
 
-> 原文：[https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
+> 原文：[`www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science`](https://www.kdnuggets.com/5-free-books-to-master-statistics-for-data-science)
 
-![5 本免费书籍掌握数据科学中的统计学](../Images/d6c868fe30ee0cea5a65d8633d083300.png)
+![5 本免费书籍掌握数据科学中的统计学](img/d6c868fe30ee0cea5a65d8633d083300.png)
 
 编辑图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织中的 IT
 
 * * *
 
@@ -166,7 +166,7 @@
 
 希望你觉得这些免费统计学书籍的汇总对你有帮助。理论和实践的结合应该能帮助你提升数据科学技能，并在处理大型真实数据集时做出更明智的决策。
 
-如果你喜欢通过免费课程学习或希望通过课程来补充阅读，请查看 [5 个免费课程掌握数据科学统计学](/5-free-courses-to-master-statistics-for-data-science)。
+如果你喜欢通过免费课程学习或希望通过课程来补充阅读，请查看 5 个免费课程掌握数据科学统计学。
 
 **[](https://twitter.com/balawc27)**[Bala Priya C](https://www.kdnuggets.com/wp-content/uploads/bala-priya-author-image-update-230821.jpg)** 是来自印度的开发人员和技术作家。她喜欢在数学、编程、数据科学和内容创作的交汇处工作。她的兴趣和专长领域包括 DevOps、数据科学和自然语言处理。她喜欢阅读、写作、编码和喝咖啡！目前，她正在通过撰写教程、使用指南、观点文章等，学习并与开发者社区分享她的知识。Bala 还创建了引人入胜的资源概述和编码教程。**
 

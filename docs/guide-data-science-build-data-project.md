@@ -1,22 +1,22 @@
 # 《外行人数据科学指南》。第二部分：如何构建数据项目
 
-> 原文：[https://www.kdnuggets.com/2020/04/guide-data-science-build-data-project.html](https://www.kdnuggets.com/2020/04/guide-data-science-build-data-project.html)
+> 原文：[`www.kdnuggets.com/2020/04/guide-data-science-build-data-project.html`](https://www.kdnuggets.com/2020/04/guide-data-science-build-data-project.html)
 
-[评论](#comments)
+评论
 
 **由 [Sciforce](https://sciforce.solutions/) 提供，基于科学驱动的信息技术的软件解决方案。**
 
-![](../Images/f4a9c428eb294a028035505ef01858e0.png)
+![](img/f4a9c428eb294a028035505ef01858e0.png)
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 我们在本指南的第一部分中已经讨论了[什么使一个优秀的数据科学家](https://www.kdnuggets.com/2019/10/good-data-scientist-beginner-guide.html)以及你在真正开始一个项目之前应该学习什么。在这篇文章中，我们将通过简单的步骤带你了解如何构建一个基础数据项目。
 
-![](../Images/9573d8a175564c497bf4d8c7d2b73fc1.png)
+![](img/9573d8a175564c497bf4d8c7d2b73fc1.png)
 
 *寻找一个想法背后的故事。*
 
@@ -34,7 +34,7 @@
 
 一种不错的方法是 [商业模式画布](https://en.wikipedia.org/wiki/Business_Model_Canvas)。它简单且便宜，你可以在一张纸上创建它。
 
-![](../Images/9596f265983c46f570e81bc665fa976c.png)
+![](img/9596f265983c46f570e81bc665fa976c.png)
 
 *准备数据。*
 
@@ -46,45 +46,45 @@
 
 最后，在收集和管理数据时，至关重要的是 [避免偏见](http://www.nytimes.com/interactive/2012/11/02/us/politics/paths-to-the-white-house.html?_r=0)，不要在数据的包含或排除上有选择性。这种选择性包括在数据是连续时使用离散值；处理缺失、离群和超出范围的值；任意时间范围；封顶值、体积、范围和区间。即使是有争议的影响，也应基于数据的实际情况，而不是你希望它所说的。
 
-![](../Images/9cd95b24349af0cd8d8b8c2a85564769.png)
+![](img/9cd95b24349af0cd8d8b8c2a85564769.png)
 
 *选择合适的工具。*
 
 要进行有效分析，你需要找到合适的工具。获取数据后，你需要选择合适的工具来探索它。为了做出选择，你可以列出你认为需要的分析功能，并比较现有工具。有时你可以使用用户友好的图形工具，如 Orange、Rapid Miner 或 Knime。在其他情况下，你将需要使用 Python 或 R 等语言自行编写分析。
 
-![](../Images/67743658fe6cad922a50a0c0b3009547.png)
+![](img/67743658fe6cad922a50a0c0b3009547.png)
 
 *验证你的理论。*
 
 利用现有的数据和工具，你可以验证你的理论。在数据科学中，理论是关于世界应该是怎样或实际怎样的陈述，它们源于对世界的假设或先前理论（[Das, 2013](https://srdas.github.io/Papers/DSA_Book.pdf)）。模型是理论的实现；在数据科学中，它们通常是基于理论的算法，这些算法在数据上运行。运行模型的结果会基于理论、模型和数据对世界有更深刻的理解。
 
-在初步评估你的理论时，结合更一般和传统的内容分析，你可以指出数据中存在的趋势。我们常用的一种方法是选择已报告的重要事件。然后你可以尝试创建一个分析过程来发现这些趋势。如果分析能够找到你指定的趋势，那么你就走在了正确的道路上。寻找分析发现的新趋势的实例。例如，可以通过搜索互联网来确认这些趋势。结果不可能100%可靠，因此你需要决定容忍多少错误报告的趋势（错误率）。
+在初步评估你的理论时，结合更一般和传统的内容分析，你可以指出数据中存在的趋势。我们常用的一种方法是选择已报告的重要事件。然后你可以尝试创建一个分析过程来发现这些趋势。如果分析能够找到你指定的趋势，那么你就走在了正确的道路上。寻找分析发现的新趋势的实例。例如，可以通过搜索互联网来确认这些趋势。结果不可能 100%可靠，因此你需要决定容忍多少错误报告的趋势（错误率）。
 
-![](../Images/401c43ffb6f3fa72c372d6b307bf5bb8.png)
+![](img/401c43ffb6f3fa72c372d6b307bf5bb8.png)
 
 *构建一个最小可行产品。*
 
 当你有了商业模型和验证过的理论，就该构建你的产品的第一个版本，即所谓的最小可行产品（MVP）。基本上，这可以是你提供给客户的第一个版本。由于最小可行产品（MVP）是一个具有足够功能以满足早期客户并提供未来开发反馈的产品，它应仅关注核心功能而没有任何花哨的解决方案。你应该坚持使用最初能正常工作的简单功能，并在后续扩展系统。在这个阶段，系统可能看起来像这样：
 
-![](../Images/03002524b564c55e4f4409120d2392e5.png)
+![](img/03002524b564c55e4f4409120d2392e5.png)
 
-![](../Images/4aa0460f936b81c257a55dae348884bd.png)
+![](img/4aa0460f936b81c257a55dae348884bd.png)
 
 *自动化你的系统。*
 
-原则上，你的重点应放在产品的未来发展上，而不是系统的运行。为此，你需要尽可能多地进行自动化：上传到S3，启动分析或数据存储。在[this article](https://medium.com/sciforce/automation-in-it-31550abbda41)中，我们详细讨论了自动化。
+原则上，你的重点应放在产品的未来发展上，而不是系统的运行。为此，你需要尽可能多地进行自动化：上传到 S3，启动分析或数据存储。在[this article](https://medium.com/sciforce/automation-in-it-31550abbda41)中，我们详细讨论了自动化。
 
-自动化的另一面是日志记录。当一切都被自动化时，你可能会感觉自己对系统的控制力减弱，不知道它的性能如何。此外，你需要知道接下来要开发什么，无论是新功能还是修复问题。为此，你需要建立一个系统来记录、监控和测量所有有意义的数据。例如，你应该记录数据的下载统计信息或将其上传到S3，分析过程的时间，以及用户的行为。
+自动化的另一面是日志记录。当一切都被自动化时，你可能会感觉自己对系统的控制力减弱，不知道它的性能如何。此外，你需要知道接下来要开发什么，无论是新功能还是修复问题。为此，你需要建立一个系统来记录、监控和测量所有有意义的数据。例如，你应该记录数据的下载统计信息或将其上传到 S3，分析过程的时间，以及用户的行为。
 
-有很多 [工具](https://stackify.com/best-log-management-tools/) 可以帮助你记录服务器统计数据，如CPU、RAM、网络、代码级性能和错误监控，其中许多工具都有用户友好的界面。
+有很多 [工具](https://stackify.com/best-log-management-tools/) 可以帮助你记录服务器统计数据，如 CPU、RAM、网络、代码级性能和错误监控，其中许多工具都有用户友好的界面。
 
-![](../Images/2f19315e0c6c8d35b89137def3d62481.png)
+![](img/2f19315e0c6c8d35b89137def3d62481.png)
 
 *重复和扩展。*
 
-你可能知道，人工智能、机器学习、数据科学及其他新发展都涉及重复和微调。因此，当你的MVP运行、自动化和监控就位后，你可以开始提升你的系统。这是时候摆脱弱点，优化整体性能和稳定性，并添加新功能。实施新功能还会让你提供新的服务或产品。
+你可能知道，人工智能、机器学习、数据科学及其他新发展都涉及重复和微调。因此，当你的 MVP 运行、自动化和监控就位后，你可以开始提升你的系统。这是时候摆脱弱点，优化整体性能和稳定性，并添加新功能。实施新功能还会让你提供新的服务或产品。
 
-![](../Images/f82ecba9d8ced30ecea8cab1a213351b.png)
+![](img/f82ecba9d8ced30ecea8cab1a213351b.png)
 
 *展示你的产品。*
 
@@ -106,7 +106,7 @@
 
 [原始](https://medium.com/sciforce/a-laymans-guide-to-data-science-part-2-how-to-build-a-data-project-58237a78860e)。转载已获许可。
 
-**简介：** [SciForce](https://sciforce.solutions) 是一家总部位于乌克兰的IT公司，专注于基于科学驱动的信息技术开发软件解决方案。我们在许多关键的人工智能技术领域具有广泛的专业知识，包括数据挖掘、数字信号处理、自然语言处理、机器学习、图像处理和计算机视觉。
+**简介：** [SciForce](https://sciforce.solutions) 是一家总部位于乌克兰的 IT 公司，专注于基于科学驱动的信息技术开发软件解决方案。我们在许多关键的人工智能技术领域具有广泛的专业知识，包括数据挖掘、数字信号处理、自然语言处理、机器学习、图像处理和计算机视觉。
 
 **相关：**
 
@@ -126,6 +126,6 @@
 
 +   [如何建立数据科学支持团队：完整指南](https://www.kdnuggets.com/2022/10/build-data-science-enablement-team-complete-guide.html)
 
-+   [数据科学面试指南 - 第2部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
++   [数据科学面试指南 - 第二部分：面试资源](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-2-interview-resources.html)
 
-+   [数据科学面试指南 - 第1部分：结构](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)
++   [数据科学面试指南 - 第一部分：结构](https://www.kdnuggets.com/2022/04/data-science-interview-guide-part-1-structure.html)

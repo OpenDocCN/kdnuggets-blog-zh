@@ -1,51 +1,51 @@
 # 分析、数据科学、机器学习和人工智能领域的顶级证书和认证
 
-> 原文：[https://www.kdnuggets.com/2019/07/top-certificates-analytics-data-science-machine-learning-ai.html](https://www.kdnuggets.com/2019/07/top-certificates-analytics-data-science-machine-learning-ai.html)
+> 原文：[`www.kdnuggets.com/2019/07/top-certificates-analytics-data-science-machine-learning-ai.html`](https://www.kdnuggets.com/2019/07/top-certificates-analytics-data-science-machine-learning-ai.html)
 
-[评论](#comments)最近，我们调查了[欧洲](/2019/04/best-masters-data-science-analytics-europe.html)、[美国/加拿大](/2019/05/best-masters-data-science-analytics-us-canada.html)和[在线](/2019/04/best-masters-data-science-analytics-online.html)的数据科学和分析领域的最佳硕士课程。
+评论最近，我们调查了欧洲、美国/加拿大和在线的数据科学和分析领域的最佳硕士课程。
 
-然而，硕士学位通常需要12到24个月，而在当今快节奏的世界中，许多潜在的数据科学家希望更早开始，并且对可以在几周内获得的数据科学/机器学习证书感兴趣。其他一些人已经工作了一段时间，但希望获得一个认证——一个证书——来验证他们在分析/数据科学方面的知识。
+然而，硕士学位通常需要 12 到 24 个月，而在当今快节奏的世界中，许多潜在的数据科学家希望更早开始，并且对可以在几周内获得的数据科学/机器学习证书感兴趣。其他一些人已经工作了一段时间，但希望获得一个认证——一个证书——来验证他们在分析/数据科学方面的知识。
 
 本博客展示了我们对分析、数据科学、机器学习和人工智能领域的顶级证书和认证的调查。
 
 > 注意：这篇文章的数据收集工作完全由[Dan Clark](https://www.kdnuggets.com/author/dan-clark)完成，我添加了可视化和介绍。所有数据在收集时都是最新的，但所有费用和其他信息显然可能会发生变化。
 
-我们使用[认证](https://en.wikipedia.org/wiki/Certification)来指代由专业协会（如INFORMS）或公司（如Microsoft）提供的评估。这通常证明一个人已达到较高的专业知识水平。一些公司将其证书称为“认证”，但我们将它们与其他证书一起列入下表2a和2b中。
+我们使用[认证](https://en.wikipedia.org/wiki/Certification)来指代由专业协会（如 INFORMS）或公司（如 Microsoft）提供的评估。这通常证明一个人已达到较高的专业知识水平。一些公司将其证书称为“认证”，但我们将它们与其他证书一起列入下表 2a 和 2b 中。
 
 证书通常由大学或其他教育机构在完成一个课程或一系列课程后颁发。
 
-**表1：专业协会和主要公司提供的认证**
+**表 1：专业协会和主要公司提供的认证**
 
 | 组织 | 类型（链接） | 描述 | 学习时长 | 成本（美元） | 备注 |
 | --- | --- | --- | --- | --- | --- |
-| CAP (INFORMS) | [认证分析师专业](https://www.certifiedanalytics.org/) | CAP 是一种独立的验证，证明你对整个分析过程有卓越的知识。 | 自学 | $695 | 常规价格为$695，但INFORMS会员价格为$495。 |
+| CAP (INFORMS) | [认证分析师专业](https://www.certifiedanalytics.org/) | CAP 是一种独立的验证，证明你对整个分析过程有卓越的知识。 | 自学 | $695 | 常规价格为$695，但 INFORMS 会员价格为$495。 |
 | 数字分析协会 | [网络分析师认证](https://www.digitalanalyticsassociation.org/certification) | 在展示其知识和能力后获得专业认可。 | 未说明 | $649 |  |
 | EMC Corporation | [数据科学与大数据分析认证](https://education.emc.com/guest/campaign/data_science.aspx) | 这项基于开放课程的培训和认证提供了一个实践者的视角，涵盖了大数据分析所需的技术和工具。 | 未说明 | $600 | $600（视频流），$5,000（讲师指导） |
-| Great Learning（与德克萨斯大学奥斯汀分校合作） | [PG项目 - 人工智能与机器学习](https://www.greatlearning.in/pg-program-online-artificial-intelligence-machine-learning?visitor_country=GB) | 通过结合实时互动在线课堂体验、支持和职业指导的辅导学习模型进行授课。 | 1年/450学习小时 | $5,500 | $5,500（预付），$7,500（按月分期付款） |
+| Great Learning（与德克萨斯大学奥斯汀分校合作） | [PG 项目 - 人工智能与机器学习](https://www.greatlearning.in/pg-program-online-artificial-intelligence-machine-learning?visitor_country=GB) | 通过结合实时互动在线课堂体验、支持和职业指导的辅导学习模型进行授课。 | 1 年/450 学习小时 | $5,500 | $5,500（预付），$7,500（按月分期付款） |
 | SAS | [大数据认证](https://www.sas.com/en_us/training/academy-data-science/big-data-certification.html) | 展示你使用处理大数据的工具和技术的能力。 | 未说明 | $2,250 | $299（每月），$2,250（每年） |
 | SAS | [数据科学认证](https://www.sas.com/en_us/training/academy-data-science/data-science-certification.html) | 让自己脱颖而出 - 无论你是想换工作、晋升还是提升当前技能。 | 未说明 | $2,250 | $299（每月），$2,250（每年） |
-| TDWI | [认证商业智能专家（CBIP）](https://tdwi.org/cbip) | 针对IS/IT领域的高级人员，特别是在数据管理和商业分析方面。 | 未说明 | $1,799 |
-| CAS Institute | [预测分析认证专家](https://thecasinstitute.org/credentials/predictive-analytics-and-data-science/) | 为分析专业人员及其雇主提供专门针对财产/意外保险应用的技能认证机会。 | 建议自学时间150小时 | 1320 | 包括在线课程、考试、课程指南、教材和SMART学习辅助工具 |
+| TDWI | [认证商业智能专家（CBIP）](https://tdwi.org/cbip) | 针对 IS/IT 领域的高级人员，特别是在数据管理和商业分析方面。 | 未说明 | $1,799 |
+| CAS Institute | [预测分析认证专家](https://thecasinstitute.org/credentials/predictive-analytics-and-data-science/) | 为分析专业人员及其雇主提供专门针对财产/意外保险应用的技能认证机会。 | 建议自学时间 150 小时 | 1320 | 包括在线课程、考试、课程指南、教材和 SMART 学习辅助工具 |
 
-接下来，我们展示了顶级大学的在线证书列表。我们使用了[2019年计算机科学/信息系统排名](https://www.topuniversities.com/university-rankings/university-subject-rankings/2019/computer-science-information-systems)作为排名依据。
+接下来，我们展示了顶级大学的在线证书列表。我们使用了[2019 年计算机科学/信息系统排名](https://www.topuniversities.com/university-rankings/university-subject-rankings/2019/computer-science-information-systems)作为排名依据。
 
-![人工智能、数据科学、机器学习的顶级证书](../Images/ac8612028ced1e450dc6b5032157972d.png)
+![人工智能、数据科学、机器学习的顶级证书](img/ac8612028ced1e450dc6b5032157972d.png)
 
-**图1：人工智能、分析、数据科学、机器学习及相关主题的证书
+**图 1：人工智能、分析、数据科学、机器学习及相关主题的证书
 
 顶级大学**
 
 以下表格更详细地展示了这些信息。
 
-**表2a：人工智能、分析、数据科学、机器学习及相关主题的证书
+**表 2a：人工智能、分析、数据科学、机器学习及相关主题的证书
 
 顶级大学**
 
 | 排名 | 大学/组织 | 项目名称 | 学习时长 | 成本 | 在线/校园 |
 | --- | --- | --- | --- | --- | --- |
-| 1 | edX/MIT | [统计与数据科学微硕士项目](https://www.edx.org/micromasters/mitx-statistics-and-data-science) | 1年（600-840小时的学习时间） | $1,350 | 在线 |
-| 1 | MIT | [机器学习与人工智能专业证书项目](https://professional.mit.edu/programs/short-programs/professional-certificate-program-machine-learning-AI) | 不同 | 325申请费 + 4门课程，每门$2500-$5500 | 在线 |
-| 2 | 斯坦福大学 | [机器学习](https://online.stanford.edu/courses/cs229-machine-learning) | 3个月 | $5,040 | 在线 |
+| 1 | edX/MIT | [统计与数据科学微硕士项目](https://www.edx.org/micromasters/mitx-statistics-and-data-science) | 1 年（600-840 小时的学习时间） | $1,350 | 在线 |
+| 1 | MIT | [机器学习与人工智能专业证书项目](https://professional.mit.edu/programs/short-programs/professional-certificate-program-machine-learning-AI) | 不同 | 325 申请费 + 4 门课程，每门$2500-$5500 | 在线 |
+| 2 | 斯坦福大学 | [机器学习](https://online.stanford.edu/courses/cs229-machine-learning) | 3 个月 | $5,040 | 在线 |
 | 4 | edX/ 伯克利 | [数据科学基础专业证书](https://www.edx.org/professional-certificate/berkeleyx-foundations-of-data-science) | 2-4 个月（64-96 小时的努力） | $267 | 在线 |
 | 7 | edX/ 哈佛 | [数据科学专业证书](https://www.edx.org/professional-certificate/harvardx-data-science) | 2-4 个月（102-184 小时的努力） | $442 | 在线 |
 | 7 | 哈佛扩展学院 | [数据科学证书](https://www.extension.harvard.edu/academics/professional-graduate-certificates/data-science-certificate) | 18 个月 | $11,000 | 在线 |
@@ -98,11 +98,11 @@
 
 **相关：**
 
-+   [欧洲最佳数据科学与分析硕士项目](/2019/04/best-masters-data-science-analytics-europe.html)
++   欧洲最佳数据科学与分析硕士项目
 
-+   [美国/加拿大最佳数据科学与分析硕士项目](/2019/05/best-masters-data-science-analytics-us-canada.html)，以及
++   美国/加拿大最佳数据科学与分析硕士项目，以及
 
-+   [最佳数据科学与分析在线硕士项目](/2019/04/best-masters-data-science-analytics-online.html).
++   最佳数据科学与分析在线硕士项目.
 
 ### 更多相关内容
 
@@ -110,10 +110,10 @@
 
 +   [停止学习数据科学以寻找目标，并通过寻找目标来…](https://www.kdnuggets.com/2021/12/stop-learning-data-science-find-purpose.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [每个数据科学家都应该知道的三个R语言库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该知道的三个 R 语言库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [一个90亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [一个 90 亿美元的人工智能失败，深度剖析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

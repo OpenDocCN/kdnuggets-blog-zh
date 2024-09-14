@@ -1,8 +1,8 @@
 # 如何轻松分析你的时间序列
 
-> 原文：[https://www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html](https://www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html)
+> 原文：[`www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html`](https://www.kdnuggets.com/2020/03/painlessly-analyze-time-series.html)
 
-[评论](#comments)
+评论
 
 **作者 [Andrew Van Benschoten](https://www.linkedin.com/in/andrewhvbs/)，Matrix Profile Foundation 联合创始人**
 
@@ -12,7 +12,7 @@
 
 此外，时间序列数据分析 notoriously 困难，而数据科学社区的爆炸性增长带来了对更多“黑箱”自动化解决方案的需求，这些解决方案可以被具有广泛技术背景的开发人员所利用。
 
-![图](../Images/346db31b632fe4278a72c26744bdae53.png)
+![图](img/346db31b632fe4278a72c26744bdae53.png)
 
 如何用一张图分析你的时间序列（图片来源：Matrix Profile Foundation）
 
@@ -28,7 +28,7 @@ Matrix Profile 的基本概念很简单：如果我拿一段数据并将其沿�
 
 然后，我们将每一个可能的片段滑过时间序列，建立起距离剖析的集合。通过取每个时间步长上所有距离剖析的最小值，我们可以建立最终的矩阵剖析。注意，矩阵剖析值谱的两个端点都是有用的。高值表示不常见的模式或异常事件；相反，低值突出可重复的模式，并为你的时间序列提供有价值的洞察。
 
-![图像](../Images/7913adf0d7c793e66eb67d40e2678cc1.png)
+![图像](img/7913adf0d7c793e66eb67d40e2678cc1.png)
 
 图片来源：矩阵剖析基金会
 
@@ -50,7 +50,7 @@ Matrix Profile 的基本概念很简单：如果我拿一段数据并将其沿�
 
 1.  计算（计算矩阵剖析）
 
-1.  发现（评估MP以寻找模式、异异常等）
+1.  发现（评估 MP 以寻找模式、异异常等）
 
 1.  可视化（通过基本图表展示结果）
 
@@ -62,13 +62,13 @@ Matrix Profile 的基本概念很简单：如果我拿一段数据并将其沿�
 
 作为示例，我们将使用 [MPA 的 Python 版本](https://github.com/matrix-profile-foundation/matrixprofile) 来分析下面显示的合成时间序列：
 
-```py` ``` from matplotlib import pyplot as plt  import numpy as np  import matrixprofile as mp    %matplotlib inline    data = pd.read_csv('rawdata.csv')  vals = data.data.values    fig,ax = plt.subplots(figsize=(20,10))  ax.plot(np.arange(len(vals)),vals, label = '测试数据') ```py ```` ![图像](../Images/077d379d2c747a12f13d32d204985afa.png)
+```py` ``` from matplotlib import pyplot as plt  import numpy as np  import matrixprofile as mp    %matplotlib inline    data = pd.read_csv('rawdata.csv')  vals = data.data.values    fig,ax = plt.subplots(figsize=(20,10))  ax.plot(np.arange(len(vals)),vals, label = '测试数据') ```py ```` ![图像](img/077d379d2c747a12f13d32d204985afa.png)
 
 图片来源：Matrix Profile Foundation
 
 视觉检查显示存在模式和不一致。然而，一个直接的问题是你选择的子序列长度将改变模式的数量和位置！在索引 0–500 之间只有两个正弦模式，还是每个周期都是该模式的一个实例？让我们看看 MPA 如何处理这个挑战：
 
-```py` ``` profile, figures = mp.analyze(vals) ```py ```` ![图像](../Images/346db31b632fe4278a72c26744bdae53.png)
+```py` ``` profile, figures = mp.analyze(vals) ```py ```` ![图像](img/346db31b632fe4278a72c26744bdae53.png)
 
 图片来源：Matrix Profile Foundation
 
@@ -76,15 +76,15 @@ Matrix Profile 的基本概念很简单：如果我拿一段数据并将其沿�
 
 PMP 本身很不错，但我们承诺提供一种简单的方式来理解你的时间序列。为此，`analyze` 将结合 PMP 和底层算法，从所有可能的窗口大小中选择合适的模式和异常值。`analyze` 创建的附加图表展示了前三个模式和前三个异常值，以及对应的窗口大小和在 Matrix Profile 中的位置（并且，扩展到你的时间序列）。
 
-![图示](../Images/86955e87759c0cd37366f19d7341a02d.png)
+![图示](img/86955e87759c0cd37366f19d7341a02d.png)
 
-图片来源：Matrix Profile Foundation![图示](../Images/2ba3b61bb0ac6e537d74e9707b8dfcf3.png)
+图片来源：Matrix Profile Foundation![图示](img/2ba3b61bb0ac6e537d74e9707b8dfcf3.png)
 
-图片来源：Matrix Profile Foundation![图示](../Images/de8f7a67b135280283a5af0c6e092540.png)
+图片来源：Matrix Profile Foundation![图示](img/de8f7a67b135280283a5af0c6e092540.png)
 
-图片来源：Matrix Profile Foundation![图示](../Images/9d8450c40c54daf033e1bceaa20777e1.png)
+图片来源：Matrix Profile Foundation![图示](img/9d8450c40c54daf033e1bceaa20777e1.png)
 
-图片来源：Matrix Profile Foundation![图示](../Images/45342715c29e4ab33523f1584281561a.png)
+图片来源：Matrix Profile Foundation![图示](img/45342715c29e4ab33523f1584281561a.png)
 
 图片来源：Matrix Profile Foundation
 
@@ -102,13 +102,13 @@ PMP 本身很不错，但我们承诺提供一种简单的方式来理解你的�
 
 **补充信息**
 
-1.  Matrix Profile 研究论文可以在 Eamonn Keogh 的 UCR 页面找到：[https://www.cs.ucr.edu/~eamonn/MatrixProfile.html](https://www.cs.ucr.edu/~eamonn/MatrixProfile.html)
+1.  Matrix Profile 研究论文可以在 Eamonn Keogh 的 UCR 页面找到：[`www.cs.ucr.edu/~eamonn/MatrixProfile.html`](https://www.cs.ucr.edu/~eamonn/MatrixProfile.html)
 
-1.  Matrix Profile 算法的 Python 实现可以在这里找到：[https://github.com/matrix-profile-foundation/matrixprofile](https://github.com/matrix-profile-foundation/matrixprofile)
+1.  Matrix Profile 算法的 Python 实现可以在这里找到：[`github.com/matrix-profile-foundation/matrixprofile`](https://github.com/matrix-profile-foundation/matrixprofile)
 
-1.  Matrix Profile 算法的 R 实现可以在这里找到：[https://github.com/matrix-profile-foundation/tsmp](https://github.com/matrix-profile-foundation/tsmp)
+1.  Matrix Profile 算法的 R 实现可以在这里找到：[`github.com/matrix-profile-foundation/tsmp`](https://github.com/matrix-profile-foundation/tsmp)
 
-1.  Matrix Profile 算法的 Golang 实现可以在这里找到：[https://github.com/matrix-profile-foundation/go-matrixprofile](https://github.com/matrix-profile-foundation/go-matrixprofile)
+1.  Matrix Profile 算法的 Golang 实现可以在这里找到：[`github.com/matrix-profile-foundation/go-matrixprofile`](https://github.com/matrix-profile-foundation/go-matrixprofile)
 
 **简历：[Andrew Van Benschoten](https://www.linkedin.com/in/andrewhvbs/)** 是一位数据科学领袖，拥有利用复杂信息生成有价值洞察的良好记录。擅长人员和项目管理，并且能够有效地向跨学科的利益相关者传达结果。
 
@@ -116,21 +116,21 @@ PMP 本身很不错，但我们承诺提供一种简单的方式来理解你的�
 
 **相关：**
 
-+   [时间序列分类：合成与真实金融时间序列](/2020/03/time-series-classification-synthetic-real-financial-time-series.html)
++   时间序列分类：合成与真实金融时间序列
 
-+   [利用 R、SQL 和 Tableau 进行地理时间序列预测介绍](/2020/02/introduction-geographical-time-series-crime-r-sql-tableau.html)
++   利用 R、SQL 和 Tableau 进行地理时间序列预测介绍
 
-+   [预测故事：这是季节性还是其他？](/2020/03/forecasting-stories-seasonality.html)
++   预测故事：这是季节性还是其他？
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT。
 
 * * *
 

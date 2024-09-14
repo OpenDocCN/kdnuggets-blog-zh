@@ -1,8 +1,8 @@
-# 2022年人工智能项目创意
+# 2022 年人工智能项目创意
 
-> 原文：[https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html](https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html)
+> 原文：[`www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html`](https://www.kdnuggets.com/2022/01/artificial-intelligence-project-ideas-2022.html)
 
-![2022年人工智能项目创意](../Images/efa1bfcb614a3d447734b689ad7d0cdf.png)
+![2022 年人工智能项目创意](img/efa1bfcb614a3d447734b689ad7d0cdf.png)
 
 [背景矢量图由 starline 创建 - www.freepik.com](https://www.freepik.com/vectors/background)
 

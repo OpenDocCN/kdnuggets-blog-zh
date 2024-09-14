@@ -1,8 +1,8 @@
 # 提升机器学习算法：概述
 
-> 原文：[https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)
+> 原文：[`www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html`](https://www.kdnuggets.com/2022/07/boosting-machine-learning-algorithms-overview.html)
 
-![提升机器学习算法：概述](../Images/33700d14b7b9b61945cb7546be324715.png)
+![提升机器学习算法：概述](img/33700d14b7b9b61945cb7546be324715.png)
 
 在解决问题时，结合各种机器学习算法通常会得到更好的结果。这些单独的算法被称为弱学习器。它们的组合形成了一个强学习器。弱学习器是指在分类问题中比随机预测或回归问题中的均值更有效的模型。
 
@@ -10,11 +10,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -100,7 +100,7 @@ model.score(X_test,y_test)
 
 [XGBoost](https://xgboost.readthedocs.io/en/latest/) 是一种流行的梯度提升算法。它使用弱回归树作为弱学习器。该算法还进行交叉验证并计算特征重要性。此外，它接受稀疏输入数据。
 
-XGBoost提供了[ DMatrix](https://xgboost.readthedocs.io/en/latest/search.html?q=DMatrix&check_keywords=yes&area=default)数据结构，提高了其性能和效率。XGBoost可用于[R](https://www.r-project.org/)、[Java](https://www.java.com/)、[C++](https://www.cplusplus.com/)和[Julia](https://julialang.org/)。
+XGBoost 提供了[ DMatrix](https://xgboost.readthedocs.io/en/latest/search.html?q=DMatrix&check_keywords=yes&area=default)数据结构，提高了其性能和效率。XGBoost 可用于[R](https://www.r-project.org/)、[Java](https://www.java.com/)、[C++](https://www.cplusplus.com/)和[Julia](https://julialang.org/)。
 
 ```py
 xg_reg = xgb.XGBRegressor(objective ='reg:linear', colsample_bytree = 0.3, learning_rate = 0.1, max_depth = 5, alpha = 10, n_estimators = 10)
@@ -110,7 +110,7 @@ xg_reg.fit(X_train,y_train)
 preds = xg_reg.predict(X_test)<
 ```
 
-XGBoost通过`plot_importance()`函数提供特征重要性。
+XGBoost 通过`plot_importance()`函数提供特征重要性。
 
 ```py
 import matplotlib.pyplot as plt
@@ -124,19 +124,19 @@ plt.show()
 
 ## LightGBM
 
-LightGBM是基于树的梯度提升算法，采用叶子-wise 树生长，而非深度-wise 生长。
+LightGBM 是基于树的梯度提升算法，采用叶子-wise 树生长，而非深度-wise 生长。
 
-![LightGBM](../Images/d55af5779baecced0915cb366849095d.png)
+![LightGBM](img/d55af5779baecced0915cb366849095d.png)
 
 [叶子-wise 树生长。](https://lightgbm.readthedocs.io/en/latest/Features.html?highlight=dart#leaf-wise-best-first-tree-growth)
 
-该算法可用于分类和回归问题。LightGBM通过`categorical_feature`参数支持分类特征。指定分类列后，无需进行独热编码。
+该算法可用于分类和回归问题。LightGBM 通过`categorical_feature`参数支持分类特征。指定分类列后，无需进行独热编码。
 
-LightGBM算法也能处理空值。通过设置`use_missing=false`可以禁用此功能。它使用NA表示空值。要使用零值，请设置`zero_as_missing=true`。
+LightGBM 算法也能处理空值。通过设置`use_missing=false`可以禁用此功能。它使用 NA 表示空值。要使用零值，请设置`zero_as_missing=true`。
 
 目标参数用于决定问题的类型。例如，`binary`用于二分类问题，`regression`用于回归问题，`multiclass`用于多分类问题。
 
-使用LightGBM时，你通常会先将数据转换为[LightGBM Dataset](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.Dataset.html?highlight=lgb.Dataset)格式。
+使用 LightGBM 时，你通常会先将数据转换为[LightGBM Dataset](https://lightgbm.readthedocs.io/en/latest/pythonapi/lightgbm.Dataset.html?highlight=lgb.Dataset)格式。
 
 ```py
 import lightgbm as lgb
@@ -146,7 +146,7 @@ lgb_train = lgb.Dataset(X_train, y_train)
 lgb_eval = lgb.Dataset(X_test, y_test, reference=lgb_train)
 ```
 
-LightGBM还允许你指定提升类型。可用选项包括随机森林和传统的梯度提升决策树。
+LightGBM 还允许你指定提升类型。可用选项包括随机森林和传统的梯度提升决策树。
 
 ```py
 params = {'boosting_type': 'gbdt',
@@ -176,13 +176,13 @@ valid_names=['train','valid'],
 
 ## CatBoost
 
-[CatBoost](https://catboost.ai/)是由[ Yandex](https://yandex.com/)开发的深度梯度提升库。在CatBoost中，使用不可知树生长平衡树。在这些类型的树中，进行左右分裂时使用相同的特征。
+[CatBoost](https://catboost.ai/)是由[ Yandex](https://yandex.com/)开发的深度梯度提升库。在 CatBoost 中，使用不可知树生长平衡树。在这些类型的树中，进行左右分裂时使用相同的特征。
 
-![CatBoost](../Images/beea2b8e36a2d499fa8aa5115efdd9a7.png)
+![CatBoost](img/beea2b8e36a2d499fa8aa5115efdd9a7.png)
 
 [使用相同特征进行左右分裂。](https://medium.com/p/38779b0d5d9a)
 
-与LightGBM类似，CatBoost支持分类特征、GPU训练和处理空值。CatBoost可用于[回归](https://catboost.ai/en/docs/concepts/python-reference_catboostregressor)和[分类](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier)问题。
+与 LightGBM 类似，CatBoost 支持分类特征、GPU 训练和处理空值。CatBoost 可用于[回归](https://catboost.ai/en/docs/concepts/python-reference_catboostregressor)和[分类](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier)问题。
 
 在训练时设置`plot=true`可以可视化训练过程。
 
@@ -212,7 +212,7 @@ cat.fit(X_train,y_train,verbose=False, plot=True)
 
 +   [集成学习指南](https://scikit-learn.org/stable/modules/ensemble.html)
 
-+   [Kaggle集成指南](https://web.archive.org/web/20150613065532/https://mlwave.com/kaggle-ensembling-guide/)
++   [Kaggle 集成指南](https://web.archive.org/web/20150613065532/https://mlwave.com/kaggle-ensembling-guide/)
 
 **[Derrick Mwiti](https://www.linkedin.com/in/mwitiderrick/)** 在数据科学、机器学习和深度学习方面经验丰富，并且对构建机器学习社区有着敏锐的洞察力。
 

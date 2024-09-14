@@ -1,6 +1,6 @@
-# 《使用 Python 矿工 Twitter 数据 第 1 部分：数据收集》
+# 《使用 Python 矿工 Twitter 数据 第一部分：数据收集》
 
-> 原文：[https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-1.html](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-1.html)
+> 原文：[`www.kdnuggets.com/2016/06/mining-twitter-data-python-part-1.html`](https://www.kdnuggets.com/2016/06/mining-twitter-data-python-part-1.html)
 
 **作者：Marco Bonzanini，独立数据科学顾问**。
 
@@ -10,29 +10,29 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 加速进入网络安全职业的快车道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
 这是一个系列文章的第一篇，专注于使用 Python 挖掘 Twitter 数据。在这一部分，我们将探讨从 Twitter 收集数据的不同选项。一旦我们建立了数据集，在接下来的文章中我们将讨论一些有趣的数据应用。
 
-![Twitter 横幅](../Images/3da5b4dea824ea453ca3ae25f3548634.png)
+![Twitter 横幅](img/3da5b4dea824ea453ca3ae25f3548634.png)
 
 ### 注册你的应用程序
 
 为了以编程方式访问 Twitter 数据，我们需要创建一个与 Twitter API 互动的应用程序。
 
-第一步是注册你的应用程序。具体来说，你需要将浏览器指向 [http://apps.twitter.com](http://apps.twitter.com/)，登录 Twitter（如果尚未登录）并注册一个新应用程序。你现在可以为你的应用程序选择一个名称和描述（例如“矿工演示”或类似名称）。你将收到一个 *consumer key* 和一个 *consumer secret*：这些是应用程序设置，应该始终保密。你还可以从应用程序的配置页面申请一个访问令牌和一个访问令牌秘密。与 consumer keys 类似，这些字符串也必须保密：它们提供应用程序代表你的账户访问 Twitter。默认权限是只读，这正是我们所需的，但如果你决定更改权限以提供写入功能，你必须协商一个新的访问令牌。
+第一步是注册你的应用程序。具体来说，你需要将浏览器指向 [`apps.twitter.com`](http://apps.twitter.com/)，登录 Twitter（如果尚未登录）并注册一个新应用程序。你现在可以为你的应用程序选择一个名称和描述（例如“矿工演示”或类似名称）。你将收到一个 *consumer key* 和一个 *consumer secret*：这些是应用程序设置，应该始终保密。你还可以从应用程序的配置页面申请一个访问令牌和一个访问令牌秘密。与 consumer keys 类似，这些字符串也必须保密：它们提供应用程序代表你的账户访问 Twitter。默认权限是只读，这正是我们所需的，但如果你决定更改权限以提供写入功能，你必须协商一个新的访问令牌。
 
 重要说明：使用 Twitter API 有速率限制，并且如果你想提供可下载的数据集也有限制，请参见：
 
-+   [https://dev.twitter.com/overview/terms/agreement-and-policy](https://dev.twitter.com/overview/terms/agreement-and-policy)
++   [`dev.twitter.com/overview/terms/agreement-and-policy`](https://dev.twitter.com/overview/terms/agreement-and-policy)
 
-+   [https://dev.twitter.com/rest/public/rate-limiting](https://dev.twitter.com/rest/public/rate-limiting)
++   [`dev.twitter.com/rest/public/rate-limiting`](https://dev.twitter.com/rest/public/rate-limiting)
 
 ### 访问数据
 
@@ -153,28 +153,28 @@ twitter_stream.filter(track=['#python'])
 
 一旦我们收集了一些数据，在分析应用方面的可能性是无穷无尽的。在接下来的章节中，我们将讨论一些选项。
 
-**简介： [Marco Bonzanini](https://twitter.com/marcobonzanini)** 是一位驻伦敦的数据科学家。活跃于 PyData 社区，他喜欢从事文本分析和数据挖掘应用。他是《"[用 Python 掌握社交媒体挖掘](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"》(Packt Publishing, 2016年7月)的作者。
+**简介： [Marco Bonzanini](https://twitter.com/marcobonzanini)** 是一位驻伦敦的数据科学家。活跃于 PyData 社区，他喜欢从事文本分析和数据挖掘应用。他是《"[用 Python 掌握社交媒体挖掘](https://www.amazon.com/Mastering-Social-Media-Mining-Python-ebook/dp/B01BFD2Z2Q)"》(Packt Publishing, 2016 年 7 月)的作者。
 
 [原文](https://marcobonzanini.com/2015/03/02/mining-twitter-data-with-python-part-1/)。经授权转载。
 
 **相关**：
 
-+   [数据觉醒：星球大战情感分析](/2016/01/data-awakens-star-wars-sentiment-analysis.html)
++   数据觉醒：星球大战情感分析
 
-+   [教程：构建 Twitter 情感分析过程](/2015/11/tutorial-twitter-sentiment-analysis.html)
++   教程：构建 Twitter 情感分析过程
 
-+   [通过大数据视角剖析大数据 Twitter 社区](/2015/09/dissecting-big-data-twitter-community.html)
++   通过大数据视角剖析大数据 Twitter 社区
 
 ### 更多相关话题
 
-+   [KDnuggets 新闻，4月6日：8 门免费 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学备忘单完整集合 - 第 1 部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
++   [数据科学备忘单完整集合 - 第一部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-1.html)
 
-+   [构建视觉搜索引擎 - 第 1 部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
++   [构建视觉搜索引擎 - 第一部分：数据探索](https://www.kdnuggets.com/2022/02/building-visual-search-engine-part-1.html)
 
-+   [数据科学备忘单完整集合 - 第 2 部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
++   [数据科学备忘单完整集合 - 第二部分](https://www.kdnuggets.com/2022/02/complete-collection-data-science-cheat-sheets-part-2.html)
 
-+   [数据存储库完整集合 - 第 1 部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)
++   [数据存储库完整集合 - 第一部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-1.html)
 
-+   [数据存储库完整集合 - 第 2 部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)
++   [数据存储库完整集合 - 第二部分](https://www.kdnuggets.com/2022/04/complete-collection-data-repositories-part-2.html)

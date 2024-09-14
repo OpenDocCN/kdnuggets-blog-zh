@@ -1,6 +1,6 @@
 # 如何加速 XGBoost 模型训练
 
-> 原文：[https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
+> 原文：[`www.kdnuggets.com/2021/12/speed-xgboost-model-training.html`](https://www.kdnuggets.com/2021/12/speed-xgboost-model-training.html)
 
 **作者：[Michael Galarnyk](https://www.linkedin.com/in/michaelgalarnyk/)，数据科学专业人士**
 
@@ -10,11 +10,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业领域。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -42,37 +42,37 @@ XGBoost 的 `tree_method` 参数允许你指定要使用的树构建算法。为
 
 [**hist**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)
 
-在 [LightGBM](https://lightgbm.readthedocs.io/en/latest/) 中使用的近似树方法，与 `approx` 的实现有些许不同（例如使用一些性能改进，如bins缓存）。这通常比 `approx` 更快。
+在 [LightGBM](https://lightgbm.readthedocs.io/en/latest/) 中使用的近似树方法，与 `approx` 的实现有些许不同（例如使用一些性能改进，如 bins 缓存）。这通常比 `approx` 更快。
 
 [**gpu_hist**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)
 
-由于GPU在许多机器学习应用中至关重要，XGBoost提供了一个支持外部内存的GPU实现的hist算法`gpu_hist`。 [它比hist快得多，并且使用的内存明显更少](https://xgboost.readthedocs.io/en/latest/gpu/index.html)。请注意，XGBoost在某些操作系统上没有**原生支持**GPU。
+由于 GPU 在许多机器学习应用中至关重要，XGBoost 提供了一个支持外部内存的 GPU 实现的 hist 算法`gpu_hist`。 [它比 hist 快得多，并且使用的内存明显更少](https://xgboost.readthedocs.io/en/latest/gpu/index.html)。请注意，XGBoost 在某些操作系统上没有**原生支持**GPU。
 
-![图像](../Images/95469c31b40f2c1610179db6491bf5f8.png)
+![图像](img/95469c31b40f2c1610179db6491bf5f8.png)
 
-[XGBoost文档](https://xgboost.readthedocs.io/en/latest/install.html#python)
+[XGBoost 文档](https://xgboost.readthedocs.io/en/latest/install.html#python)
 
 [**auto**](https://xgboost.readthedocs.io/en/stable/treemethod.html#approximated-solutions)
 
-这是参数的默认值。根据数据集的大小，XGBoost将选择“最快的方法”。对于小数据集，将使用exact。对于大数据集，将使用approx。请注意，尽管hist和gpu_hist通常更快，但在这种启发式方法中，它们并未被考虑。
+这是参数的默认值。根据数据集的大小，XGBoost 将选择“最快的方法”。对于小数据集，将使用 exact。对于大数据集，将使用 approx。请注意，尽管 hist 和 gpu_hist 通常更快，但在这种启发式方法中，它们并未被考虑。
 
-如果你运行这个 [代码](https://gist.github.com/mGalarnyk/16d15183f691594bc2c256505a4c42b1)，你将看到使用gpu_hist运行模型可以节省大量时间。在我的计算机上，处理一个相对较小的数据集（100,000行，1000个特征），将hist更改为gpu_hist将训练时间减少了约一半。
+如果你运行这个 [代码](https://gist.github.com/mGalarnyk/16d15183f691594bc2c256505a4c42b1)，你将看到使用 gpu_hist 运行模型可以节省大量时间。在我的计算机上，处理一个相对较小的数据集（100,000 行，1000 个特征），将 hist 更改为 gpu_hist 将训练时间减少了约一半。
 
 ## 利用云计算
 
-![图像](../Images/63ba4b59cda9c8aad2caed8c9f1a7a36.png)
+![图像](img/63ba4b59cda9c8aad2caed8c9f1a7a36.png)
 
-云计算不仅允许你使用比本地计算机更多的核心和内存，还可以让你访问像GPU这样的专业资源。
+云计算不仅允许你使用比本地计算机更多的核心和内存，还可以让你访问像 GPU 这样的专业资源。
 
-最后一部分主要讨论了选择更高效的算法，以更好地利用可用的计算资源。然而，有时可用的计算资源不够，你可能需要更多。例如，下面图片中的MacBook只有4个核心和16GB内存。此外，它运行在MacOS上，而在写作时，XGBoost尚未对其提供GPU支持。
+最后一部分主要讨论了选择更高效的算法，以更好地利用可用的计算资源。然而，有时可用的计算资源不够，你可能需要更多。例如，下面图片中的 MacBook 只有 4 个核心和 16GB 内存。此外，它运行在 MacOS 上，而在写作时，XGBoost 尚未对其提供 GPU 支持。
 
-![图像](../Images/3433f8727939e797b3baa086e57ff2a6.png)
+![图像](img/3433f8727939e797b3baa086e57ff2a6.png)
 
-对于本文的目的，你可以将上面的MacBook视为一个具有4个核心的单节点。
+对于本文的目的，你可以将上面的 MacBook 视为一个具有 4 个核心的单节点。
 
-解决这个问题的一种方法是利用更多的云资源。使用云服务提供商不是免费的，但它们通常允许你使用比本地计算机更多的核心和内存。此外，如果XGBoost不支持你的本地计算机，选择一个XGBoost支持GPU的实例类型也是很简单的。
+解决这个问题的一种方法是利用更多的云资源。使用云服务提供商不是免费的，但它们通常允许你使用比本地计算机更多的核心和内存。此外，如果 XGBoost 不支持你的本地计算机，选择一个 XGBoost 支持 GPU 的实例类型也是很简单的。
 
-如果你想尝试加速云端训练，以下是来自 [Jason Brownlee的文章](https://machinelearningmastery.com/train-xgboost-models-cloud-amazon-web-services/) 的步骤概览，介绍如何在AWS EC2实例上训练XGBoost模型：
+如果你想尝试加速云端训练，以下是来自 [Jason Brownlee 的文章](https://machinelearningmastery.com/train-xgboost-models-cloud-amazon-web-services/) 的步骤概览，介绍如何在 AWS EC2 实例上训练 XGBoost 模型：
 
 1\. 设置 AWS 账户（如有需要）
 
@@ -94,7 +94,7 @@ XGBoost 的 `tree_method` 参数允许你指定要使用的树构建算法。为
 
 [Ray](https://www.ray.io/) 是一个快速、简单的分布式执行框架，使得扩展应用程序和利用先进的机器学习库变得容易。使用 Ray，您可以将顺序运行的 Python 代码通过最小的代码更改转换为分布式应用程序。如果您想了解 Ray 和 [actor 模型](https://en.wikipedia.org/wiki/Actor_model)，可以在[这里](https://www.anyscale.com/blog/writing-your-first-distributed-python-application-with-ray)了解更多。
 
-![Figure](../Images/083311ce0dee8896c9f5d6e7e590e60a.png)
+![Figure](img/083311ce0dee8896c9f5d6e7e590e60a.png)
 
 虽然本教程探讨了 Ray 如何简化 XGBoost 代码的并行化和分布式处理，但需要注意的是，Ray 及其生态系统还简化了普通 Python 代码以及现有库的分布式处理，例如[scikit-learn](https://www.anyscale.com/blog/how-to-speed-up-scikit-learn-model-training)、[LightGBM](https://www.anyscale.com/blog/introducing-distributed-lightgbm-training-with-ray)、[PyTorch](https://medium.com/pytorch/getting-started-with-distributed-machine-learning-with-pytorch-and-ray-fd83c98fdead)等。
 
@@ -106,7 +106,7 @@ XGBoost 的 `tree_method` 参数允许你指定要使用的树构建算法。为
 
 由于与核心 XGBoost API 完全兼容，您只需进行少量代码更改即可将 XGBoost 训练从单台机器扩展到拥有数百个节点的集群。
 
-![Figure](../Images/c23814fc9e976d61881209a2f55c06f7.png)
+![Figure](img/c23814fc9e976d61881209a2f55c06f7.png)
 
 XGBoost-Ray 支持多节点/多 GPU 训练。在单台机器上，GPU 通过 NCCL 进行梯度通信。在节点之间，它们使用 Rabit 代替 ([了解更多](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray))。
 
@@ -144,13 +144,13 @@ print(pred_proba_ray)
 
 上述代码展示了使用 XGBoost-Ray 你需要对代码进行多小的修改。虽然你不需要 XGBoost-Ray 来训练乳腺癌数据集， [之前的一篇文章](https://www.anyscale.com/blog/distributed-xgboost-training-with-ray) 在不同数量的工作节点（1 到 8）上对几个数据集大小（约 1.5M 到 12M 行）进行了基准测试，以展示它在单节点上处理更大数据集的表现。
 
-![图示](../Images/265932e9cf9560e6c44b7ac24d546857.png)
+![图示](img/265932e9cf9560e6c44b7ac24d546857.png)
 
 单节点基准测试的训练时间（时间越少越好）。XGBoost-Ray 和 XGBoost-Dask 在单个 AWS m5.4xlarge 实例（具有 16 核心和 64 GB 内存）上表现相似。
 
 XGBoost-Ray 在多节点（分布式）设置下也表现出色，如下图所示。
 
-![图示](../Images/fc94371aa91631c47093678af8cd51e5.png)
+![图示](img/fc94371aa91631c47093678af8cd51e5.png)
 
 在几个合成数据集大小范围（约 400k 到 2B 行）上的多节点训练时间（时间越少越好）。XGBoost-Ray 和 XGBoost-Spark 表现相似。
 

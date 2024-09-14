@@ -1,22 +1,22 @@
 # 你应该了解的最佳 Python IDE 和代码编辑器
 
-> 原文：[https://www.kdnuggets.com/2021/01/best-python-ide-code-editors.html](https://www.kdnuggets.com/2021/01/best-python-ide-code-editors.html)
+> 原文：[`www.kdnuggets.com/2021/01/best-python-ide-code-editors.html`](https://www.kdnuggets.com/2021/01/best-python-ide-code-editors.html)
 
-[评论](#comments)
+评论
 
 **由 [Claire D. Costa](https://www.linkedin.com/in/claire-d-costa-a0379419b/)，Digitalogy LLC 的内容撰写者和策略师**。
 
-![](../Images/1710e934927b25d59ec911706d0987b2.png)
+![](img/1710e934927b25d59ec911706d0987b2.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
@@ -36,7 +36,7 @@
 
 ### 什么是集成开发环境（IDE）？
 
-IDE代表 [集成开发环境](https://press.rebus.community/programmingfundamentals/chapter/integrated-development-environment/#:~:text=An%20integrated%20development%20environment%20(IDE,IDEs%20have%20intelligent%20code%20completion.)，不仅包括用于管理代码的标准代码编辑器，还提供了一整套调试、执行和测试工具，这是软件开发的绝对必要条件。有些IDE还配备了内置的编译器和解释器。以下是一些**标准功能**，常见的IDE在单一专用环境中提供：
+IDE 代表 [集成开发环境](https://press.rebus.community/programmingfundamentals/chapter/integrated-development-environment/#:~:text=An%20integrated%20development%20environment%20(IDE,IDEs%20have%20intelligent%20code%20completion.)，不仅包括用于管理代码的标准代码编辑器，还提供了一整套调试、执行和测试工具，这是软件开发的绝对必要条件。有些 IDE 还配备了内置的编译器和解释器。以下是一些**标准功能**，常见的 IDE 在单一专用环境中提供：
 
 +   语法高亮
 
@@ -54,7 +54,7 @@ IDE代表 [集成开发环境](https://press.rebus.community/programmingfundame
 
 ### IDE 与代码编辑器
 
-代码编辑器或集成开发环境（IDE）是任何程序员最基本的软件，它是他们一天的开始和结束。为了实现其最大潜力，最佳的起点是一个可以基本支持Python的代码编辑器或IDE，但这还不全是。**许多 **[**编程语言**](https://towardsdatascience.com/top-programming-languages-for-ai-engineers-in-2020-33a9f16a80b0) **可以完全不依赖IDE，而有些则依赖IDE。**
+代码编辑器或集成开发环境（IDE）是任何程序员最基本的软件，它是他们一天的开始和结束。为了实现其最大潜力，最佳的起点是一个可以基本支持 Python 的代码编辑器或 IDE，但这还不全是。**许多 **[**编程语言**](https://towardsdatascience.com/top-programming-languages-for-ai-engineers-in-2020-33a9f16a80b0) **可以完全不依赖 IDE，而有些则依赖 IDE。**
 
 **代码编辑器 —** 代码编辑器是程序员用于应用开发的核心软件。可以将其视为一个简单的文本编辑器，但具有额外的编程特定的高级功能，例如：
 
@@ -72,15 +72,15 @@ IDE代表 [集成开发环境](https://press.rebus.community/programmingfundame
 
 +   轻量级
 
-**IDE —** 另一方面，IDE 配备了一套工具，这些工具不仅帮助开发应用程序，还帮助进行测试、调试、重构和构建自动化。不用说，在大多数情况下，IDE 可以提供代码编辑器的所有功能，但代码编辑器无法替代IDE。
+**IDE —** 另一方面，IDE 配备了一套工具，这些工具不仅帮助开发应用程序，还帮助进行测试、调试、重构和构建自动化。不用说，在大多数情况下，IDE 可以提供代码编辑器的所有功能，但代码编辑器无法替代 IDE。
 
 ### 2020 年最佳 Python IDE 和代码编辑器
 
-选择合适的工具至关重要。同样，在开始一个新项目时，作为程序员，你在选择完美的代码编辑器或IDE时有很多选择。市场上有许多 Python 的 IDE 和代码编辑器，在本节中，我们将讨论一些最佳的选项及其优缺点。
+选择合适的工具至关重要。同样，在开始一个新项目时，作为程序员，你在选择完美的代码编辑器或 IDE 时有很多选择。市场上有许多 Python 的 IDE 和代码编辑器，在本节中，我们将讨论一些最佳的选项及其优缺点。
 
 +   **PyCharm**
 
-![](../Images/9c98d51a5f121cbe7e344f63b1166ad0.png)
+![](img/9c98d51a5f121cbe7e344f63b1166ad0.png)
 
 *图像来源 — [PyCharm](https://www.jetbrains.com/pycharm/)。*
 
@@ -132,13 +132,13 @@ IDE代表 [集成开发环境](https://press.rebus.community/programmingfundame
 
 **参考截图**
 
-![](../Images/d59ceaad0d5dbf9437702c37a08efc04.png)
+![](img/d59ceaad0d5dbf9437702c37a08efc04.png)
 
 *图片来源 — [PyCharm](https://www.jetbrains.com/pycharm/)。*
 
 +   **Spyder**
 
-![](../Images/bce9d9f9dc74e14b8c45d3db1b854733.png)
+![](img/bce9d9f9dc74e14b8c45d3db1b854733.png)
 
 *图片来源 — [Spyder](https://www.spyder-ide.org/)。*
 
@@ -190,13 +190,13 @@ IDE代表 [集成开发环境](https://press.rebus.community/programmingfundame
 
 **参考截图**
 
-![](../Images/527a2f89ed1ef3f8614863ea0d451000.png)
+![](img/527a2f89ed1ef3f8614863ea0d451000.png)
 
 *图片来源 — [Spyder](https://www.spyder-ide.org/)。|* **[spyder-ide/spyder](https://github.com/spyder-ide/spyder)**
 
 +   **Eclipse + Pydev**
 
-![](../Images/1bc7404ebe07f97f9b129913384dd169.png)
+![](img/1bc7404ebe07f97f9b129913384dd169.png)
 
 +   **类别：**IDE
 
@@ -244,13 +244,13 @@ IDE代表 [集成开发环境](https://press.rebus.community/programmingfundame
 
 **参考截图**
 
-![](../Images/ac9f7e57b633658caaec97a06a696697.png)
+![](img/ac9f7e57b633658caaec97a06a696697.png)
 
 *图片来源 — [Pydev](https://www.pydev.org/)。*
 
 +   **IDLE**
 
-![](../Images/28bb233b2b1d2bf10b5e7c42df0aac03.png)
+![](img/28bb233b2b1d2bf10b5e7c42df0aac03.png)
 
 *图片来源 — [Python](https://www.python.org/)。*
 
@@ -296,13 +296,13 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **Wing**
 
-![](../Images/8cbd81ce3cc6f175c67b7006dc57aa9b.png)
+![](img/8cbd81ce3cc6f175c67b7006dc57aa9b.png)
 
 *图片来源 — [Wing](https://wingware.com/)。*
 
 +   **类别：**IDE
 
-+   **首次发布年份：**2000年9月7日
++   **首次发布年份：**2000 年 9 月 7 日
 
 +   **平台：** Windows、Linux 和 Mac
 
@@ -342,7 +342,7 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **Cloud9 IDE**
 
-![](../Images/3bb7329a170c5a8da0595186a903f68f.png)
+![](img/3bb7329a170c5a8da0595186a903f68f.png)
 
 *图片来源 — [AmazonCloud9](https://aws.amazon.com/cloud9/)。*
 
@@ -384,7 +384,7 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **Sublime Text 3**
 
-![](../Images/b5eb35270808fefd067cfdfbb33a2b87.png)
+![](img/b5eb35270808fefd067cfdfbb33a2b87.png)
 
 *图片来源 — [Sublime](https://www.sublimetext.com/3)。*
 
@@ -436,7 +436,7 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **Visual Studio Code**
 
-![](../Images/7c6398cfa71a9a3a524dd5534c9e804a.png)
+![](img/7c6398cfa71a9a3a524dd5534c9e804a.png)
 
 *图片来源 — [Visual Studio Code](https://code.visualstudio.com/)。*
 
@@ -486,7 +486,7 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 **参考截图**
 
-![](../Images/f7ee0871085975583748ff721588188f.png)
+![](img/f7ee0871085975583748ff721588188f.png)
 
 *图片来源 — [Visual Studio Code](https://code.visualstudio.com/)。*
 
@@ -494,7 +494,7 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **Atom**
 
-![](../Images/385034ae9fd8e403556d19d036e2370d.png)
+![](img/385034ae9fd8e403556d19d036e2370d.png)
 
 *图片来源 — [Atom](https://atom.io/)。*
 
@@ -542,13 +542,13 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **Jupyter**
 
-![](../Images/01d0ebab7711060035e9960cfc6a63d8.png)
+![](img/01d0ebab7711060035e9960cfc6a63d8.png)
 
 *图片来源 — [Jupyter](https://jupyter.org/install.html)。*
 
 +   **类别：**集成开发环境（IDE）
 
-+   **首次发布年份：**2015年2月
++   **首次发布年份：**2015 年 2 月
 
 +   **浏览器兼容性：**Chrome、Firefox、Safari
 
@@ -556,13 +556,13 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 +   **下载：**[Jupyter 下载链接](https://jupyter.org/install.html)
 
-+   **使用Jupyter Python IDE的知名公司 — **Google、Bloomberg、Microsoft、IBM和Soundcloud。
++   **使用 Jupyter Python IDE 的知名公司 — **Google、Bloomberg、Microsoft、IBM 和 Soundcloud。
 
-也被称为**Project Jupyter，**它是一个[**开源**](https://blog.digitalogy.co/open-source-technology/)**和跨平台的IDE**，许多数据科学家和分析师更倾向于使用它而不是其他工具。非常适合处理AI、ML、DL等技术以及包括Python在内的多种编程语言。Jupyter笔记本提供了无缝的代码、文本和方程式创建与共享，用于各种目的，包括分析、可视化和开发。**提供的功能包括：**
+也被称为**Project Jupyter，**它是一个[**开源**](https://blog.digitalogy.co/open-source-technology/)**和跨平台的 IDE**，许多数据科学家和分析师更倾向于使用它而不是其他工具。非常适合处理 AI、ML、DL 等技术以及包括 Python 在内的多种编程语言。Jupyter 笔记本提供了无缝的代码、文本和方程式创建与共享，用于各种目的，包括分析、可视化和开发。**提供的功能包括：**
 
 +   代码格式化和高亮
 
-+   通过电子邮件、Dropbox轻松分享
++   通过电子邮件、Dropbox 轻松分享
 
 +   生成交互式输出
 
@@ -578,17 +578,17 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 **劣势 —**
 
-+   缺乏经验的用户可能会觉得Jupyter复杂
++   缺乏经验的用户可能会觉得 Jupyter 复杂
 
 **参考截图**
 
-![](../Images/75569a57a0aa3430aa3bb505a630b7e2.png)
+![](img/75569a57a0aa3430aa3bb505a630b7e2.png)
 
 *图片来源 — [Jupyter](https://jupyter.org/install.html)。*
 
-### 如何为自己选择最佳Python IDE和代码编辑器
+### 如何为自己选择最佳 Python IDE 和代码编辑器
 
-选择正确的IDE或代码编辑器可能意味着在快速开发中节省时间，或者由于鲁莽的决策而浪费时间。我们在前一部分提到了许多IDE和代码编辑器及其一些显著的特性。如果您对选择哪个来进行下一个Python项目感到困惑，我们建议您快速阅读一下。毕竟，没有一套合适的IDE和代码编辑器，程序员会是什么样的呢？
+选择正确的 IDE 或代码编辑器可能意味着在快速开发中节省时间，或者由于鲁莽的决策而浪费时间。我们在前一部分提到了许多 IDE 和代码编辑器及其一些显著的特性。如果您对选择哪个来进行下一个 Python 项目感到困惑，我们建议您快速阅读一下。毕竟，没有一套合适的 IDE 和代码编辑器，程序员会是什么样的呢？
 
 **注意：**为了消除各种问题，我想提醒您，这篇文章只是我个人想要分享的意见，您有权与其不同意。
 
@@ -598,22 +598,22 @@ IDLE 的全称是**集成开发和学习环境**，已与 Python 一起捆绑使
 
 **相关：**
 
-+   [这里是最受欢迎的Python IDE/编辑器](https://www.kdnuggets.com/2020/10/most-popular-python-ides-editors.html)
++   [这里是最受欢迎的 Python IDE/编辑器](https://www.kdnuggets.com/2020/10/most-popular-python-ides-editors.html)
 
-+   [新调查：您在2020年使用最多的Python IDE/编辑器是什么？](https://www.kdnuggets.com/2020/09/poll-python-ide-editor.html)
++   [新调查：您在 2020 年使用最多的 Python IDE/编辑器是什么？](https://www.kdnuggets.com/2020/09/poll-python-ide-editor.html)
 
-+   [Netflix的Polynote是一个新的开源框架，用于构建更好的数据科学笔记本](https://www.kdnuggets.com/2020/08/netflix-polynote-open-source-framework-better-data-science-notebooks.html)
++   [Netflix 的 Polynote 是一个新的开源框架，用于构建更好的数据科学笔记本](https://www.kdnuggets.com/2020/08/netflix-polynote-open-source-framework-better-data-science-notebooks.html)
 
 ### 更多相关主题
 
-+   [使用管道编写干净的Python代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
++   [使用管道编写干净的 Python 代码](https://www.kdnuggets.com/2021/12/write-clean-python-code-pipes.html)
 
 +   [构建一个稳固的数据团队](https://www.kdnuggets.com/2021/12/build-solid-data-team.html)
 
-+   [每个数据科学家都应该了解的三个R库（即使你使用Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
++   [每个数据科学家都应该了解的三个 R 库（即使你使用 Python）](https://www.kdnuggets.com/2021/12/three-r-libraries-every-data-scientist-know-even-python.html)
 
-+   [每个初学者数据科学家应掌握的6种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
++   [每个初学者数据科学家应掌握的 6 种预测模型](https://www.kdnuggets.com/2021/12/6-predictive-models-every-beginner-data-scientist-master.html)
 
-+   [2021年最佳ETL工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
++   [2021 年最佳 ETL 工具](https://www.kdnuggets.com/2021/12/mozart-best-etl-tools-2021.html)
 
-+   [是什么让Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么让 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

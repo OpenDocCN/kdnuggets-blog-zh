@@ -1,22 +1,22 @@
 # 数据科学基础：免费电子书
 
-> 原文：[https://www.kdnuggets.com/2020/07/foundations-data-science-free-ebook.html](https://www.kdnuggets.com/2020/07/foundations-data-science-free-ebook.html)
+> 原文：[`www.kdnuggets.com/2020/07/foundations-data-science-free-ebook.html`](https://www.kdnuggets.com/2020/07/foundations-data-science-free-ebook.html)
 
-[评论](#comments)
+评论
 
-我们本周再次推出了新的免费电子书。这次我们将讨论一本名为**[数据科学基础](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf)**的书，作者是Avrim Blum、John Hopcroft和Ravindran Kannan。这本书的名字本身就表明了它的重要性。幸运的是，它的内容也确实支持了这一点。
+我们本周再次推出了新的免费电子书。这次我们将讨论一本名为**[数据科学基础](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf)**的书，作者是 Avrim Blum、John Hopcroft 和 Ravindran Kannan。这本书的名字本身就表明了它的重要性。幸运的是，它的内容也确实支持了这一点。
 
-[![封面"](../Images/9c4942acee8d23b4f33ea909c3eaf532.png)](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf)
+![封面"](https://www.cs.cornell.edu/jeh/book%20no%20so;utions%20March%202019.pdf)
 
 * * *
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你组织的 IT
 
 * * *
 
@@ -50,7 +50,7 @@
 
 矩阵分解、图论、核方法、聚类理论、流处理、梯度下降、数据采样；这些都是你在解决数据科学问题时将会大有裨益的概念，它们也是实现更复杂方法的基本构建块。如果没有梯度下降，你无法理解神经网络。如果没有图论，你不能分析社交媒体网络。如果你不能理解何时及为何从数据中采样，你构建的模型将毫无价值。
 
-与我们最近介绍的其他一些书籍（例如[统计学习的元素](/2020/05/elements-statistical-learning-free-ebook.html)和[理解机器学习](/2020/06/understanding-machine-learning-free-ebook.html)）类似，这本书无所顾忌地理论化。书中没有代码，没有依赖的 Python 库，也没有含糊其辞。只有深入的解释，帮助你理解这些不同的主题，只要你愿意花时间阅读。
+与我们最近介绍的其他一些书籍（例如统计学习的元素和理解机器学习）类似，这本书无所顾忌地理论化。书中没有代码，没有依赖的 Python 库，也没有含糊其辞。只有深入的解释，帮助你理解这些不同的主题，只要你愿意花时间阅读。
 
 作者撰写此书的动机在书籍介绍的这一摘录中得到了体现：
 
@@ -60,15 +60,15 @@
 
 **相关**：
 
-+   [统计学习入门：免费电子书](/2020/06/introduction-statistical-learning-free-ebook.html)
++   统计学习入门：免费电子书
 
-+   [理解机器学习：免费电子书](/2020/06/understanding-machine-learning-free-ebook.html)
++   理解机器学习：免费电子书
 
-+   [统计学习的元素：免费电子书](/2020/05/elements-statistical-learning-free-ebook.html)
++   统计学习的元素：免费电子书
 
 ### 更多相关话题
 
-+   [基础回顾第1周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
++   [基础回顾第 1 周：Python 编程与数据科学基础](https://www.kdnuggets.com/back-to-basics-week-1-python-programming-data-science-foundations)
 
 +   [学习一切基础的优秀资源…](https://www.kdnuggets.com/023/08/excellent-resource-learn-foundations-everything-underneath-chatgpt.html)
 

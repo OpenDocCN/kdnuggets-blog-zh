@@ -1,8 +1,8 @@
 # 如何更新 Python 字典
 
-> 原文：[https://www.kdnuggets.com/2023/02/update-python-dictionary.html](https://www.kdnuggets.com/2023/02/update-python-dictionary.html)
+> 原文：[`www.kdnuggets.com/2023/02/update-python-dictionary.html`](https://www.kdnuggets.com/2023/02/update-python-dictionary.html)
 
-![如何更新 Python 字典](../Images/e0b36acf7162dbca181ecbcf1a770693.png)
+![如何更新 Python 字典](img/e0b36acf7162dbca181ecbcf1a770693.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -40,7 +40,7 @@ more_books = {'Effective Python':40,
               'Think Python':29}
 ```
 
-![如何更新 Python 字典](../Images/5c4654fc03ae43fc6d7c8a3b25a9b12e.png)
+![如何更新 Python 字典](img/5c4654fc03ae43fc6d7c8a3b25a9b12e.png)
 
 作者提供的图片
 
@@ -127,17 +127,17 @@ print(books)
 }
 ```
 
-> **注意**：`update()`方法会原地更新原始字典。通常，使用`dict1.update(dict2)`会更新字典`dict1`（原地），而不会返回一个新的字典。因此，`update()`方法调用的返回类型是None。
+> **注意**：`update()`方法会原地更新原始字典。通常，使用`dict1.update(dict2)`会更新字典`dict1`（原地），而不会返回一个新的字典。因此，`update()`方法调用的返回类型是 None。
 
-## 使用其他可迭代对象的内容更新Python字典
+## 使用其他可迭代对象的内容更新 Python 字典
 
-接下来，让我们看看如何用另一个*非*字典的可迭代对象中的元素来更新Python字典。我们有一个名为`some_more_books`的书籍及其价格列表，示例如下。在每个元组中，索引0处的元素表示键，索引1处的元素对应值。
+接下来，让我们看看如何用另一个*非*字典的可迭代对象中的元素来更新 Python 字典。我们有一个名为`some_more_books`的书籍及其价格列表，示例如下。在每个元组中，索引 0 处的元素表示键，索引 1 处的元素对应值。
 
 ```py
 some_more_books = [('Python Cookbook',33),('Python Crash Course',41)]
 ```
 
-![如何更新Python字典](../Images/2cfb110da28a85642fadd35623d97dc6.png)
+![如何更新 Python 字典](img/2cfb110da28a85642fadd35623d97dc6.png)
 
 作者图片
 
@@ -163,7 +163,7 @@ print(books)
 
 ## 在存在重复键的情况下更新字典
 
-到目前为止，你已经用另一个字典和一个元组列表中的键值对更新了一个现有的Python字典。在我们考虑的例子中，这两个字典没有任何共同的键。
+到目前为止，你已经用另一个字典和一个元组列表中的键值对更新了一个现有的 Python 字典。在我们考虑的例子中，这两个字典没有任何共同的键。
 
 **当有一个或多个重复的键时会发生什么？** 字典中对应重复键的值将被覆盖。
 
@@ -173,11 +173,11 @@ print(books)
 and_some_more = [('Fluent Python',45),('Python for Everybody',30)]
 ```
 
-![如何更新Python字典](../Images/73ea88c3dc91d74583effaaf8db3cf58.png)
+![如何更新 Python 字典](img/73ea88c3dc91d74583effaaf8db3cf58.png)
 
 作者图片
 
-当你现在对`books`字典调用`update()`方法并传入`and_some_more`时，你会看到键‘Fluent Python’对应的值现在已经更新为45。
+当你现在对`books`字典调用`update()`方法并传入`and_some_more`时，你会看到键‘Fluent Python’对应的值现在已经更新为 45。
 
 ```py
 and_some_more = [('Fluent Python',45),('Python for Everybody',30)]
@@ -199,7 +199,7 @@ print(books)
 
 # 结论
 
-总结来说，Python的字典方法`update()`可以用另一个字典或其他可迭代对象中的键值对来更新一个Python字典。该方法会修改原始字典，并且返回类型为None。你也可以使用这个方法来合并两个Python字典。然而，如果你想要一个*新的*字典，包含两个字典的内容，则不能使用此方法。
+总结来说，Python 的字典方法`update()`可以用另一个字典或其他可迭代对象中的键值对来更新一个 Python 字典。该方法会修改原始字典，并且返回类型为 None。你也可以使用这个方法来合并两个 Python 字典。然而，如果你想要一个*新的*字典，包含两个字典的内容，则不能使用此方法。
 
 **[Bala Priya C](https://twitter.com/balawc27)** 是一位技术作家，喜欢创作长篇内容。她的兴趣领域包括数学、编程和数据科学。她通过撰写教程、操作指南等与开发者社区分享她的学习成果。
 
@@ -207,7 +207,7 @@ print(books)
 
 +   [数据科学、统计学和机器学习词典](https://www.kdnuggets.com/2022/05/data-science-statistics-machine-learning-dictionary.html)
 
-+   [通过《快速Python数据科学》提升你的Python技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
++   [通过《快速 Python 数据科学》提升你的 Python 技能！](https://www.kdnuggets.com/2022/06/manning-step-python-game-fast-python-data-science.html)
 
 +   [优化 Python 代码性能：深入探讨 Python 性能分析工具](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)
 

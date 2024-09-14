@@ -1,8 +1,8 @@
 # 数据科学中重新抽样技术的作用
 
-> 原文：[https://www.kdnuggets.com/2023/02/role-resampling-techniques-data-science.html](https://www.kdnuggets.com/2023/02/role-resampling-techniques-data-science.html)
+> 原文：[`www.kdnuggets.com/2023/02/role-resampling-techniques-data-science.html`](https://www.kdnuggets.com/2023/02/role-resampling-techniques-data-science.html)
 
-![数据科学中重新抽样技术的作用](../Images/cc93027d78ad9bad1bb5470f5a65ab78.png)
+![数据科学中重新抽样技术的作用](img/cc93027d78ad9bad1bb5470f5a65ab78.png)
 
 作者提供的图片
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 部门
 
 * * *
 
@@ -70,7 +70,7 @@
 
 1.  一个观察值可以出现多次，也可以完全不出现。
 
-你可能听说过集成技术——Bagging。它是Bootstrap Aggregation的缩写，将自助法和集成结合起来形成一个集成模型。它创建了多个原始训练数据集，然后将这些数据集汇总以得出最终预测。每个模型都学习前一个模型的错误。
+你可能听说过集成技术——Bagging。它是 Bootstrap Aggregation 的缩写，将自助法和集成结合起来形成一个集成模型。它创建了多个原始训练数据集，然后将这些数据集汇总以得出最终预测。每个模型都学习前一个模型的错误。
 
 自助法的一个优点是，与上述的训练-测试划分方法相比，它们的方差较低。
 
@@ -78,13 +78,13 @@
 
 当你反复随机划分数据集时，样本可能会出现在训练集或测试集中。这可能不幸地对你的模型造成不平衡的影响，影响预测的准确性。
 
-为了避免这种情况，你可以使用K折交叉验证来更有效地划分数据。在这个过程中，数据被分成k个相等的集合，其中一个集合定义为测试集，其余集合用于训练模型。这个过程将持续进行，直到每个集合都作为测试集并且所有集合都经过训练阶段。
+为了避免这种情况，你可以使用 K 折交叉验证来更有效地划分数据。在这个过程中，数据被分成 k 个相等的集合，其中一个集合定义为测试集，其余集合用于训练模型。这个过程将持续进行，直到每个集合都作为测试集并且所有集合都经过训练阶段。
 
 该过程包括：
 
-1.  数据被划分为k折。例如，将数据集划分为10折——10个相等的集合。
+1.  数据被划分为 k 折。例如，将数据集划分为 10 折——10 个相等的集合。
 
-1.  在第一次迭代中，模型在（k-1）个集合上进行训练，并在剩余的一个集合上进行测试。例如，模型在（10-1 = 9）个集合上进行训练，在剩下的1个集合上进行测试。
+1.  在第一次迭代中，模型在（k-1）个集合上进行训练，并在剩余的一个集合上进行测试。例如，模型在（10-1 = 9）个集合上进行训练，在剩下的 1 个集合上进行测试。
 
 1.  这个过程会重复进行，直到所有的折叠都充当了测试阶段的剩余 1 组。
 
@@ -112,4 +112,4 @@
 
 +   [人工智能在数字营销中的作用](https://www.kdnuggets.com/the-role-of-ai-in-digital-marketing)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图……](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图……](https://www.kdnuggets.com/2022/n35.html)

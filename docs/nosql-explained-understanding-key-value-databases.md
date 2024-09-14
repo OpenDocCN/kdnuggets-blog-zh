@@ -1,20 +1,20 @@
 # 键值数据库解释
 
-> 原文：[https://www.kdnuggets.com/2021/04/nosql-explained-understanding-key-value-databases.html](https://www.kdnuggets.com/2021/04/nosql-explained-understanding-key-value-databases.html)
+> 原文：[`www.kdnuggets.com/2021/04/nosql-explained-understanding-key-value-databases.html`](https://www.kdnuggets.com/2021/04/nosql-explained-understanding-key-value-databases.html)
 
-NoSQL在我们日常生活中变得越来越重要，一些最受欢迎的平台和服务依赖它们以闪电般的速度提供内容。当然，NoSQL涵盖了多种数据库类型，但最受欢迎的无疑是键值存储。
+NoSQL 在我们日常生活中变得越来越重要，一些最受欢迎的平台和服务依赖它们以闪电般的速度提供内容。当然，NoSQL 涵盖了多种数据库类型，但最受欢迎的无疑是键值存储。
 
-这种数据模型的极简设计使得它与关系数据库相比表现得极其迅速。不仅如此，由于它遵循可扩展的NoSQL设计理念，键值存储允许灵活性和快速启动。
+这种数据模型的极简设计使得它与关系数据库相比表现得极其迅速。不仅如此，由于它遵循可扩展的 NoSQL 设计理念，键值存储允许灵活性和快速启动。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 需求
 
 * * *
 
@@ -22,19 +22,19 @@ NoSQL在我们日常生活中变得越来越重要，一些最受欢迎的平台
 
 键值存储实际上非常简单。一个值（基本上可以是任何数据或信息）与一个标识其位置的键一起存储。事实上，这是几乎每种编程语言中存在的一种设计概念，如数组或映射对象。不同之处在于，它是持久化存储在数据库管理系统中的。
 
-![Image](../Images/febdc6331936def1b7f2881d9afe9599.png)
+![Image](img/febdc6331936def1b7f2881d9afe9599.png)
 
-键值存储之所以如此受欢迎，是因为信息的存储方式类似于一种不透明的块，而不是离散的数据。因此，实际上不需要对数据库进行索引来提高性能。相反，它由于其结构方式而自行提高性能。类似地，它没有自己的语言，而是依赖简单的get、put和delete命令。
+键值存储之所以如此受欢迎，是因为信息的存储方式类似于一种不透明的块，而不是离散的数据。因此，实际上不需要对数据库进行索引来提高性能。相反，它由于其结构方式而自行提高性能。类似地，它没有自己的语言，而是依赖简单的 get、put 和 delete 命令。
 
 当然，这也带来了一个缺点，即从请求中获取的信息没有经过过滤。这种对数据的控制缺失在某些情况下可能会成为问题，但大多数情况下，这种交换是值得的。由于键值存储速度快且可靠，大多数程序员会解决可能遇到的任何过滤/控制问题。
 
 # 键值存储的好处
 
-作为NoSQL [数据模型](https://hostingdata.co.uk/nosql-database/)中更受欢迎的形式之一，键值存储在构建数据库时有很多好处：
+作为 NoSQL [数据模型](https://hostingdata.co.uk/nosql-database/)中更受欢迎的形式之一，键值存储在构建数据库时有很多好处：
 
 **可扩展性**：与关系数据库相比，键值存储（如 NoSQL 一般）在水平扩展方面具有无限的可扩展性。与扩展是垂直和有限的关系数据库相比，这对于复杂和大型数据库来说是一个很大的优势。
 
-![图片](../Images/9c3bb706ad7bd8b3cb2a879d1c114e7e.png)
+![图片](img/9c3bb706ad7bd8b3cb2a879d1c114e7e.png)
 
 更具体地说，它通过分区和复制来管理这方面的工作。它还通过绕过低开销的服务器调用来最小化 ACID 保证。
 

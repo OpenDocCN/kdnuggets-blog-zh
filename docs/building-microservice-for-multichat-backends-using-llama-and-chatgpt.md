@@ -1,8 +1,8 @@
 # 使用 Llama 和 ChatGPT 构建多聊天后端的微服务
 
-> 原文：[https://www.kdnuggets.com/building-microservice-for-multichat-backends-using-llama-and-chatgpt](https://www.kdnuggets.com/building-microservice-for-multichat-backends-using-llama-and-chatgpt)
+> 原文：[`www.kdnuggets.com/building-microservice-for-multichat-backends-using-llama-and-chatgpt`](https://www.kdnuggets.com/building-microservice-for-multichat-backends-using-llama-and-chatgpt)
 
-![使用 Llama 和 ChatGPT 构建多聊天后端的微服务](../Images/96539f9eef41d5c2b771fbf02a8cb2c0.png)
+![使用 Llama 和 ChatGPT 构建多聊天后端的微服务](img/96539f9eef41d5c2b771fbf02a8cb2c0.png)
 
 微服务架构促进了灵活、独立服务的创建，并定义了明确的边界。这种可扩展的方法使开发人员能够单独维护和演化服务，而不会影响整个应用程序。然而，要实现微服务架构的全部潜力，尤其是在 AI 驱动的聊天应用中，需要与最新的大型语言模型（LLMs）如 Meta Llama V2 和 OpenAI 的 ChatGPT 以及基于每个应用场景发布的其他微调模型进行稳健的集成，以提供多模型方法以实现多样化解决方案。
 
@@ -10,11 +10,11 @@
 
 ## 我们的 top 3 课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -78,25 +78,25 @@ Replicate 提供了通过 API 密钥与 Llama V2 快速集成的路径，而 Int
 
 1- **SageMaker 服务：** 从您的 AWS 账户中选择 SageMaker 服务并点击域。
 
-![使用 Llama 和 ChatGPT 构建多聊天后端的微服务](../Images/fa908c1810c1c06b2a8da3ed6615f130.png)
+![使用 Llama 和 ChatGPT 构建多聊天后端的微服务](img/fa908c1810c1c06b2a8da3ed6615f130.png)
 
 aws 账户-选择 sagemaker
 
 **2- 创建 SageMaker 域**：首先在您的 AWS SageMaker 上创建一个新域。这一步骤为您的 SageMaker 操作建立一个受控空间。
 
-![使用 Llama 和 ChatGPT 构建多聊天后端的微服务](../Images/d3e4eb2c2fe35c765526b482edbe6478.png)
+![使用 Llama 和 ChatGPT 构建多聊天后端的微服务](img/d3e4eb2c2fe35c765526b482edbe6478.png)
 
 aws 账户-sagemaker 域
 
 **3- 部署 Llama 模型**：利用 SageMaker JumpStart 部署你计划集成的 Llama 模型。建议从 2B 模型开始，因为 70B 模型的运行费用较高。
 
-![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/3e897946137642e54a6d7f3d94056685.png)
+![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/3e897946137642e54a6d7f3d94056685.png)
 
 aws 账户-sagemaker 快速启动
 
 **4- 复制端点名称**：一旦你部署了模型，确保记下端点名称，这对后续步骤至关重要。
 
-![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/ad609dc12332f5d4c631826d65e4fcfe.png)
+![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/ad609dc12332f5d4c631826d65e4fcfe.png)
 
 aws 账户-sagemaker 端点
 
@@ -104,21 +104,21 @@ aws 账户-sagemaker 端点
 
 **6- 设置环境变量**：在你的 Lambda 中创建一个名为 llama_endpoint 的环境变量，值为 SageMaker 端点。
 
-![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/37275ac694fe83dc35855734bbe1b8d5.png)
+![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/37275ac694fe83dc35855734bbe1b8d5.png)
 
 aws 账户-lambda 设置
 
 **7- Intellinode Lambda 导入**：你需要导入准备好的 Lambda zip 文件，该文件建立了与 SageMaker Llama 部署的连接。该导出是一个 zip 文件，可以在 [lambda_llama_sagemaker](https://github.com/Barqawiz/IntelliNode/tree/main/samples/lambda_llama_sagemaker) 目录中找到。
 
-![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/1c7df03875aad3f7548ed5ebabc00313.png)
+![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/1c7df03875aad3f7548ed5ebabc00313.png)
 
 aws 账户-lambda 从 zip 文件上传
 
 **8- API 网关配置**：点击 Lambda 函数页面上的“添加触发器”选项，从可用触发器列表中选择“API 网关”。
 
-![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/427a4ab9401c1456a2da220ed802a700.png)
+![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/427a4ab9401c1456a2da220ed802a700.png)
 
-aws 账户-lambda 触发器 ![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/5fd367351cb4bf63c16a130be4171536.png)
+aws 账户-lambda 触发器 ![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/5fd367351cb4bf63c16a130be4171536.png)
 
 aws 账户-api 网关触发器
 
@@ -126,7 +126,7 @@ aws 账户-api 网关触发器
 
 点击角色名称以更新权限，并提供访问 SageMaker 的权限：
 
-![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](../Images/b6a23770eebd8848a4ea0fd4ec22e592.png)
+![使用 Llama 和 ChatGPT 构建多聊天后台的微服务](img/b6a23770eebd8848a4ea0fd4ec22e592.png)
 
 aws 账户-lambda 角色
 

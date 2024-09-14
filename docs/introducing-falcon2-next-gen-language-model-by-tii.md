@@ -1,8 +1,8 @@
 # 介绍 Falcon2：TII 的下一代语言模型
 
-> 原文：[https://www.kdnuggets.com/introducing-falcon2-next-gen-language-model-by-tii](https://www.kdnuggets.com/introducing-falcon2-next-gen-language-model-by-tii)
+> 原文：[`www.kdnuggets.com/introducing-falcon2-next-gen-language-model-by-tii`](https://www.kdnuggets.com/introducing-falcon2-next-gen-language-model-by-tii)
 
-![Falcon2](../Images/d2e9caefaf85567b2d00eb13c5cadc25.png)
+![Falcon2](img/d2e9caefaf85567b2d00eb13c5cadc25.png)
 
 图片来源于作者
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析能力
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 最近的 Falcon-2 语言模型拥有 110 亿个参数，并在来自 [falcon-refinedweb](https://huggingface.co/datasets/tiiuae/falcon-refinedweb) 数据集的 5.5 万亿个标记上进行了训练。更新的、更高效的模型与 Meta 最近的 Llama3 模型（拥有 80 亿个参数）竞争良好。结果汇总在下面由 TII 分享的表格中：
 
-![Falcon 2 结果](../Images/3be394b7d26dd694b77312d3b8ddb8a3.png)
+![Falcon 2 结果](img/3be394b7d26dd694b77312d3b8ddb8a3.png)
 
 图片来源于 [TII](https://falconllm.tii.ae/falcon-2.html)
 
@@ -113,7 +113,7 @@ instruction = "Write a long paragraph about this picture."
 prompt = f"""User:<image>\n{instruction} Falcon:"""
 ```
 
-提示模板本身是自解释的，我们需要按照它来获得VLM的最佳响应。我们将提示和图像传递给Llava图像处理器。它内部使用CLIP创建图像和提示的组合嵌入。
+提示模板本身是自解释的，我们需要按照它来获得 VLM 的最佳响应。我们将提示和图像传递给 Llava 图像处理器。它内部使用 CLIP 创建图像和提示的组合嵌入。
 
 ```py
 inputs = processor(
@@ -124,7 +124,7 @@ inputs = processor(
 ).to('cuda:0') 
 ```
 
-返回的张量嵌入作为生成模型的输入。我们传递这些嵌入，基于原始提供的图像和指令，使用基于变换器的Falcon-11B模型生成文本响应。
+返回的张量嵌入作为生成模型的输入。我们传递这些嵌入，基于原始提供的图像和指令，使用基于变换器的 Falcon-11B 模型生成文本响应。
 
 我们可以使用以下代码生成响应：
 
@@ -137,21 +137,21 @@ generated_captions = processor.decode(output[0], skip_special_tokens=True).strip
 
 ## 结果
 
-我们使用上述代码测试了各种图像，对其中一些图像的响应进行了总结，见下图。我们看到，Falcon-2模型对图像有很强的理解能力，并生成了清晰的答案，显示出其对图像场景的理解。它可以读取文本，还突出显示了整体信息。总之，模型在视觉任务上表现出色，可用于基于图像的对话。
+我们使用上述代码测试了各种图像，对其中一些图像的响应进行了总结，见下图。我们看到，Falcon-2 模型对图像有很强的理解能力，并生成了清晰的答案，显示出其对图像场景的理解。它可以读取文本，还突出显示了整体信息。总之，模型在视觉任务上表现出色，可用于基于图像的对话。
 
-![Falcon 2推理结果](../Images/69694f523f6c6f8effcbbe361ca41ddd.png)
+![Falcon 2 推理结果](img/69694f523f6c6f8effcbbe361ca41ddd.png)
 
 图片来源：作者 | 图片来自互联网。来源：[猫咪图片](http://images.cocodataset.org/val2017/000000039769.jpg)、[卡片图片](https://usa.visa.com/dam/VCOM/global/common-assets/cards/visa-prepaid-card-800x450.png)、[足球图片](https://static.theprint.in/wp-content/uploads/2020/07/football.jpg)
 
 ## 许可与合规
 
-除了开源外，这些模型还以Apache2.0许可证发布，使其可供公开访问。这允许对模型进行修改和分发，用于个人和商业用途。这意味着你现在可以使用Falcon-2模型来提升基于LLM的应用程序，并利用开源模型为用户提供多模态能力。
+除了开源外，这些模型还以 Apache2.0 许可证发布，使其可供公开访问。这允许对模型进行修改和分发，用于个人和商业用途。这意味着你现在可以使用 Falcon-2 模型来提升基于 LLM 的应用程序，并利用开源模型为用户提供多模态能力。
 
 ## 总结
 
-总体来说，新版Falcon-2模型显示了令人鼓舞的结果。但这还不是全部！TII已经在着手下一次迭代，以进一步提升性能。他们计划将专家混合（MoE）和其他机器学习能力整合到模型中，以提高准确性和智能性。如果Falcon-2看起来像是一个改进，请准备好迎接他们的下一个公告。
+总体来说，新版 Falcon-2 模型显示了令人鼓舞的结果。但这还不是全部！TII 已经在着手下一次迭代，以进一步提升性能。他们计划将专家混合（MoE）和其他机器学习能力整合到模型中，以提高准确性和智能性。如果 Falcon-2 看起来像是一个改进，请准备好迎接他们的下一个公告。
 
-**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)** Kanwal 是一位机器学习工程师和技术作家，对数据科学及AI与医学的交集充满深厚的热情。她共同撰写了电子书《使用ChatGPT最大化生产力》。作为2022年亚太地区的Google Generation学者，她倡导多样性和学术卓越。她还被认定为Teradata多样性技术学者、Mitacs Globalink研究学者和哈佛WeCode学者。Kanwal 是变革的坚定倡导者，她创立了FEMCodes，旨在赋能女性在STEM领域中的发展。
+**[](https://www.linkedin.com/in/kanwal-mehreen1/)**[Kanwal Mehreen](https://www.linkedin.com/in/kanwal-mehreen1/)** Kanwal 是一位机器学习工程师和技术作家，对数据科学及 AI 与医学的交集充满深厚的热情。她共同撰写了电子书《使用 ChatGPT 最大化生产力》。作为 2022 年亚太地区的 Google Generation 学者，她倡导多样性和学术卓越。她还被认定为 Teradata 多样性技术学者、Mitacs Globalink 研究学者和哈佛 WeCode 学者。Kanwal 是变革的坚定倡导者，她创立了 FEMCodes，旨在赋能女性在 STEM 领域中的发展。
 
 ### 更多相关主题
 

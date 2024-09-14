@@ -1,8 +1,8 @@
-# 5门免费课程助你掌握数据科学统计学
+# 5 门免费课程助你掌握数据科学统计学
 
-> 原文：[https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science](https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science)
+> 原文：[`www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science`](https://www.kdnuggets.com/5-free-courses-to-master-statistics-for-data-science)
 
-![5门免费课程助你掌握数据科学统计学](../Images/04adc6385d1c0550df3cbe8b1133e3a4.png)
+![5 门免费课程助你掌握数据科学统计学](img/04adc6385d1c0550df3cbe8b1133e3a4.png)
 
 图片由 [pch.vector 在 Freepik](https://www.freepik.com/free-vector/couple-professionals-analyzing-graphs_6974868.htm#query=statistics&position=49&from_view=search&track=sph&uuid=e1e232f6-22b5-46db-a5f5-2f86c065a66d) 提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT 工作
 
 * * *
 
@@ -24,7 +24,7 @@
 
 你不必完成所有这些课程才能在数据科学领域掌握统计学。因此，请随意查看你特别感兴趣的课程。开始吧！
 
-**注意**：你可以在Coursera上免费*旁听*以下所有课程。
+**注意**：你可以在 Coursera 上免费*旁听*以下所有课程。
 
 # 1\. 统计学导论
 
@@ -60,7 +60,7 @@
 
 # 2\. 基础统计学
 
-[基础统计学](https://www.coursera.org/learn/basic-statistics)课程来自阿姆斯特丹大学，这也是一个适合初学者的统计课程。该课程要求你对R编程有所了解，并涵盖以下主题：
+[基础统计学](https://www.coursera.org/learn/basic-statistics)课程来自阿姆斯特丹大学，这也是一个适合初学者的统计课程。该课程要求你对 R 编程有所了解，并涵盖以下主题：
 
 +   数据探索
 

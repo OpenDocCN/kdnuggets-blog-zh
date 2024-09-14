@@ -1,8 +1,8 @@
 # 前 7 大扩散基础应用及演示
 
-> 原文：[https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)
+> 原文：[`www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html`](https://www.kdnuggets.com/2022/10/top-7-diffusionbased-applications-demos.html)
 
-![前 7 大扩散基础应用及演示](../Images/e769949305f6220d5ba19d12bd779419.png)
+![前 7 大扩散基础应用及演示](img/e769949305f6220d5ba19d12bd779419.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google Cybersecurity Certificate](https://www.kdnuggets.com/google-cybersecurity) - 快速通道进入网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google Data Analytics Professional Certificate](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT Support Professional Certificate](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
@@ -30,7 +30,7 @@
 
 你甚至可以深入添加更多的线条和颜色，以获得更好的效果。
 
-![前 7 大扩散基础应用及演示](../Images/994e0fc785649c7206409d44327a9a54.png)
+![前 7 大扩散基础应用及演示](img/994e0fc785649c7206409d44327a9a54.png)
 
 图像来自 HuggingFace [Spaces](https://huggingface.co/spaces/huggingface-projects/diffuse-the-rest) 演示
 
@@ -40,7 +40,7 @@
 
 你可以在 [Hugging Face Space](https://huggingface.co/spaces/nateraw/stable-diffusion-for-videos)、[Replicate](https://replicate.com/nateraw/stable-diffusion-videos) 上测试，或者在 [Google Colab](https://colab.research.google.com/github/nateraw/stable-diffusion-videos/blob/main/stable_diffusion_videos.ipynb) 上运行。
 
-![前 7 名基于扩散的应用及演示](../Images/7ac6a5b4d1379b4ff441f1e17a278d06.png)
+![前 7 名基于扩散的应用及演示](img/7ac6a5b4d1379b4ff441f1e17a278d06.png)
 
 动图来自 [Replicate](https://replicate.com/nateraw/stable-diffusion-videos) 演示
 
@@ -48,7 +48,7 @@
 
 [Latent Diffusion](https://huggingface.co/spaces/multimodalart/latentdiffusion) 是另一种 OG 文本到图像的 Stable Diffusion 模型版本。演示提供了更多的配置能力，如图像大小、图像质量和多样性尺度。对于初学者，你需要写一个描述性的提示，以生成高质量的图像。
 
-![前 7 名基于扩散的应用及演示](../Images/19a1870c789d7840b1dad052a18b6fb3.png)
+![前 7 名基于扩散的应用及演示](img/19a1870c789d7840b1dad052a18b6fb3.png)
 
 图片来自 HuggingFace [Spaces](https://huggingface.co/spaces/multimodalart/latentdiffusion) 演示
 
@@ -60,7 +60,7 @@
 
 这只是一个单一示例。你还可以上传多张图像并尝试将它们融合。如果你在提示中什么也不写，它会自动填充该区域。
 
-![前 7 名基于扩散的应用及演示](../Images/69fee331317064391eee5c708e203e17.png)
+![前 7 名基于扩散的应用及演示](img/69fee331317064391eee5c708e203e17.png)
 
 动图来自 [lkwq007/stablediffusion-infinity](https://github.com/lkwq007/stablediffusion-infinity)
 
@@ -68,7 +68,7 @@
 
 一个 [Stable Diffusion Conceptualizer](https://huggingface.co/spaces/sd-concepts-library/stable-diffusion-conceptualizer) 使用提示和风格标签生成具有特定艺术风格的图像。你可以浏览所有不同的风格，将标签复制粘贴到你的提示中，创造出杰作。我玩各种艺术风格时乐趣无穷。
 
-![前 7 名基于扩散的应用及演示](../Images/4469fa783c6089eb901ce8f4811eb13f.png)
+![前 7 名基于扩散的应用及演示](img/4469fa783c6089eb901ce8f4811eb13f.png)
 
 图片来自 HuggingFace [Spaces](https://huggingface.co/spaces/sd-concepts-library/stable-diffusion-conceptualizer) 演示
 
@@ -78,7 +78,7 @@
 
 如你所见，我已经将男人的脸换成了狮子。效果很干净。你可以去掉帽子、替换鞋子，或者在图像中添加对象。图像编辑的可能性是无限的。
 
-![前 7 名基于扩散的应用及演示](../Images/1bd8c5a59e915ae5a516d239536c5fb2.png)
+![前 7 名基于扩散的应用及演示](img/1bd8c5a59e915ae5a516d239536c5fb2.png)
 
 图片来源于 HuggingFace [Spaces](https://huggingface.co/spaces/runwayml/stable-diffusion-inpainting) 演示
 
@@ -88,7 +88,7 @@
 
 不用编写长篇提示，你可以直接表达想法，它会为你生成高质量的图像。
 
-![前 7 个扩散基础应用及演示](../Images/9132c2ed4ba70894517795736034931e.png)
+![前 7 个扩散基础应用及演示](img/9132c2ed4ba70894517795736034931e.png)
 
 来自 HuggingFace [Spaces](https://huggingface.co/spaces/fffiloni/whisper-to-stable-diffusion) 演示的图像
 

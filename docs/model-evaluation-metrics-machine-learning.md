@@ -1,26 +1,26 @@
 # 机器学习中的模型评估指标
 
-> 原文：[https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html](https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html)
+> 原文：[`www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html`](https://www.kdnuggets.com/2020/05/model-evaluation-metrics-machine-learning.html)
 
-[评论](#comments)
+评论
 
 预测模型已成为许多企业值得信赖的顾问，原因很充分。这些模型能够“预见未来”，而且有许多不同的方法可供选择，这意味着任何行业都能找到适合其特定挑战的方法。
 
 当我们谈论预测模型时，我们讨论的要么是**回归模型**（连续输出），要么是**分类模型**（名义或二进制输出）。在分类问题中，我们使用两种类型的算法（依赖于生成的输出类型）：
 
-1.  **类别输出**：像SVM和KNN这样的算法会生成类别输出。例如，在一个二分类问题中，输出将是0或1。然而，如今我们有能够将这些类别输出转换为概率的算法。
+1.  **类别输出**：像 SVM 和 KNN 这样的算法会生成类别输出。例如，在一个二分类问题中，输出将是 0 或 1。然而，如今我们有能够将这些类别输出转换为概率的算法。
 
-1.  **概率输出**：像逻辑回归、随机森林、梯度提升、Adaboost等算法提供概率输出。将概率输出转换为类别输出只需创建一个阈值概率。
+1.  **概率输出**：像逻辑回归、随机森林、梯度提升、Adaboost 等算法提供概率输出。将概率输出转换为类别输出只需创建一个阈值概率。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织IT需求
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持您的组织 IT 需求
 
 * * *
 
@@ -44,9 +44,9 @@
 
 混淆矩阵本身相对简单易懂，但相关术语可能会令人困惑。
 
-![图示](../Images/238722baa8343d76a6f5ae4014af4dbe.png)
+![图示](img/238722baa8343d76a6f5ae4014af4dbe.png)
 
-带有2个类别标签的混淆矩阵。
+带有 2 个类别标签的混淆矩阵。
 
 每个预测结果可以是四种结果中的一种，具体取决于它与实际值的匹配情况：
 
@@ -86,9 +86,9 @@
 
 混淆矩阵的一个 Python 实现示例。
 
-![图示](../Images/32ef98a849a9bf9dadcf60b17ff8df47.png)
+![图示](img/32ef98a849a9bf9dadcf60b17ff8df47.png)
 
-带有3个类别标签的混淆矩阵。
+带有 3 个类别标签的混淆矩阵。
 
 对角线上的元素表示预测标签与真实标签相等的点的数量，而对角线之外的任何内容都被分类器误标记了。因此，混淆矩阵的对角线值越高越好，表示预测正确的数量多。
 
@@ -134,27 +134,27 @@
 
 就像准确率一样，精确率和召回率也很容易计算和理解，但需要阈值。此外，精确率和召回率仅考虑混淆矩阵的一半：
 
-![](../Images/91ec868e492267fb92b1daed648438bf.png)
+![](img/91ec868e492267fb92b1daed648438bf.png)
 
 ### 4\. F1 分数
 
-F1分数是[调和均值](https://en.wikipedia.org/wiki/Harmonic_mean)与[精确度和召回率](https://en.wikipedia.org/wiki/Precision_and_recall)的调和均值，F1分数在1（完美的精确度和召回率）时达到最佳值，在0时最差。
+F1 分数是[调和均值](https://en.wikipedia.org/wiki/Harmonic_mean)与[精确度和召回率](https://en.wikipedia.org/wiki/Precision_and_recall)的调和均值，F1 分数在 1（完美的精确度和召回率）时达到最佳值，在 0 时最差。
 
-![](../Images/77f68629d1a37e25bca6efa9b7204007.png)
+![](img/77f68629d1a37e25bca6efa9b7204007.png)
 
 ***为什么选择调和均值？*** 因为调和均值对列表中最小的元素有很强的偏斜，相较于算术均值，它倾向于减轻大异常值的影响，而加剧小异常值的影响。
 
-F1分数对极端值的惩罚更大。理想情况下，F1分数可以在以下分类场景中作为有效的评估指标：
+F1 分数对极端值的惩罚更大。理想情况下，F1 分数可以在以下分类场景中作为有效的评估指标：
 
-+   *当FP和FN的成本相等时——即它们错过真正的阳性或找到假阳性——两者对模型的影响几乎相同，如我们的癌症检测分类示例中所示*
++   *当 FP 和 FN 的成本相等时——即它们错过真正的阳性或找到假阳性——两者对模型的影响几乎相同，如我们的癌症检测分类示例中所示*
 
 +   *增加更多数据不会有效地改变结果*
 
-+   *TN很高（例如洪水预测、癌症预测等）*
++   *TN 很高（例如洪水预测、癌症预测等）*
 
-一个F1分数的Python示例实现。
+一个 F1 分数的 Python 示例实现。
 
-![](../Images/0386367949b03779167d8b46213b15b8.png)
+![](img/0386367949b03779167d8b46213b15b8.png)
 
 ### 5\. 特异性
 
@@ -166,27 +166,27 @@ F1分数对极端值的惩罚更大。理想情况下，F1分数可以在以下�
 
 请注意，特异性和敏感性一起考虑了完整的混淆矩阵：
 
-![](../Images/c1fa5a1519c294b00d3fe48bfcbf3574.png)
+![](img/c1fa5a1519c294b00d3fe48bfcbf3574.png)
 
 ### 6\. 接收者操作特性（ROC）曲线
 
-测量ROC曲线下的面积也是评估模型的一个非常有用的方法。通过绘制真正阳性率（敏感性）与假阳性率（1 — 特异性）的关系，我们得到**接收者操作特性**（**ROC**）**曲线**。该曲线使我们能够可视化真正阳性率与假阳性率之间的权衡。
+测量 ROC 曲线下的面积也是评估模型的一个非常有用的方法。通过绘制真正阳性率（敏感性）与假阳性率（1 — 特异性）的关系，我们得到**接收者操作特性**（**ROC**）**曲线**。该曲线使我们能够可视化真正阳性率与假阳性率之间的权衡。
 
-以下是一些好的ROC曲线的例子。虚线表示随机猜测（没有预测价值），作为基准；低于该线的则被认为比猜测更差。我们希望接近左上角：
+以下是一些好的 ROC 曲线的例子。虚线表示随机猜测（没有预测价值），作为基准；低于该线的则被认为比猜测更差。我们希望接近左上角：
 
-![](../Images/d04f5b222c9909d1cb36c50e47631161.png)
+![](img/d04f5b222c9909d1cb36c50e47631161.png)
 
-一个ROC曲线的Python示例实现。
+一个 ROC 曲线的 Python 示例实现。
 
-![](../Images/beff968a8224e5e7c16acd4fe6153e37.png)
+![](img/beff968a8224e5e7c16acd4fe6153e37.png)
 
-在上面的例子中，AUC相对接近1且大于0.5。完美的分类器将使ROC曲线沿Y轴，然后沿X轴延展。
+在上面的例子中，AUC 相对接近 1 且大于 0.5。完美的分类器将使 ROC 曲线沿 Y 轴，然后沿 X 轴延展。
 
 ### 对数损失
 
 对数损失是基于概率的最重要的分类指标。
 
-![图示](../Images/4525d39c13e7dc150aed104370ae1e9e.png)
+![图示](img/4525d39c13e7dc150aed104370ae1e9e.png)
 
 随着**预测概率**接近**真实类别**的**零**，**损失呈指数增加**
 
@@ -212,21 +212,21 @@ y = [0,0,0,0,0,1,1,1,1,1]
 y1 = [1,1,0,0,0,1,1,1,1,1]
 ```
 
-![](../Images/667302f21a8d59e942ab7771b3436eb0.png)
+![](img/667302f21a8d59e942ab7771b3436eb0.png)
 
 上面的维恩图展示了测试集的标签、预测标签及它们的交集和并集。
 
 Jaccard 指数或 Jaccard 相似度系数是一种用于理解样本集之间相似性的统计量。该测量方法强调有限样本集之间的相似性，正式定义为交集的大小除以两个标记集的并集的大小，公式如下 –
 
-![](../Images/ed169e327c593c70f7820fcb39920d2b.png)
+![](img/ed169e327c593c70f7820fcb39920d2b.png)
 
-![图](../Images/c2d7428abbdb789e23a8de8841b4db80.png)
+![图](img/c2d7428abbdb789e23a8de8841b4db80.png)
 
 [Jaccard 指数或交集并集 (IoU)](https://commons.wikimedia.org/wiki/File:Intersection_over_Union_-_visual_equation.png)
 
 因此，在我们的例子中，我们可以看到两个集合的交集等于 8（因为有八个值被正确预测），并且并集为 **10 + 10–8 = 12**。所以，Jaccard 指数给出的准确率为 –
 
-![](../Images/948566c9337719113a09c9a1547bce4b.png)
+![](img/948566c9337719113a09c9a1547bce4b.png)
 
 因此，根据 **Jaccard 指数**，我们的模型的准确率为 0.66，即 66%。
 
@@ -242,7 +242,7 @@ Jaccard Similarity Score : 0.375
 
 K-S 或 Kolmogorov-Smirnov 图表衡量分类模型的性能。更准确地说，K-S 是衡量正负分布之间分离程度的指标。
 
-![图](../Images/4f71119b16403ed7cdcec55d961cede5.png)
+![图](img/4f71119b16403ed7cdcec55d961cede5.png)
 
 [观察到的和假设的分布的累计频率与有序频率绘制在一起。垂直双箭头表示最大垂直差异](https://www.sciencedirect.com/topics/medicine-and-dentistry/kolmogorov-smirnov-test)。
 
@@ -250,15 +250,15 @@ K-S 或 Kolmogorov-Smirnov 图表衡量分类模型的性能。更准确地说�
 
 在大多数分类模型中，K-S 值会在 0 和 100 之间，且值越高，模型在分离正负样本的能力越强。
 
-K-S检验也可以用于测试两个一维概率分布是否不同。这是一种非常有效的方式来确定两个样本是否显著不同。
+K-S 检验也可以用于测试两个一维概率分布是否不同。这是一种非常有效的方式来确定两个样本是否显著不同。
 
-Kolmogorov-Smirnov的一个Python实现示例。
+Kolmogorov-Smirnov 的一个 Python 实现示例。
 
-![](../Images/d6746fe34f97779b5ade9c549dd64480.png)
+![](img/d6746fe34f97779b5ade9c549dd64480.png)
 
-这里使用的零假设假定数据遵循正态分布。它返回统计量和p值。如果**p值 < alpha**，我们将拒绝零假设。
+这里使用的零假设假定数据遵循正态分布。它返回统计量和 p 值。如果**p 值 < alpha**，我们将拒绝零假设。
 
-*Alpha定义为在零假设（H*0*）为真的情况下拒绝零假设的概率。对于大多数实际应用，alpha选择为0.05。*
+*Alpha 定义为在零假设（H*0*）为真的情况下拒绝零假设的概率。对于大多数实际应用，alpha 选择为 0.05。*
 
 ### 增益和提升图表
 
@@ -266,9 +266,9 @@ Kolmogorov-Smirnov的一个Python实现示例。
 
 提升越高（即离基线越远），模型越好。
 
-以下的增益图表，在验证集上运行，显示了使用50%的数据时，模型包含了90%的目标，增加更多的数据对模型中包含的目标百分比的增加几乎没有影响。
+以下的增益图表，在验证集上运行，显示了使用 50%的数据时，模型包含了 90%的目标，增加更多的数据对模型中包含的目标百分比的增加几乎没有影响。
 
-![图示](../Images/dddcc35be3fae9094d555ba1d1e2cf8a.png)
+![图示](img/dddcc35be3fae9094d555ba1d1e2cf8a.png)
 
 [增益/提升图表](https://www.datasciencecentral.com/profiles/blogs/comparing-model-evaluation-techniques-part-2)
 
@@ -278,31 +278,31 @@ Kolmogorov-Smirnov的一个Python实现示例。
 
 ### 基尼系数
 
-**基尼系数**或基尼指数是一个用于处理不平衡类别值的流行指标。该系数的范围从0到1，其中0表示完全平等，1表示完全不平等。在这里，如果一个指标的值更高，则数据将更加分散。
+**基尼系数**或基尼指数是一个用于处理不平衡类别值的流行指标。该系数的范围从 0 到 1，其中 0 表示完全平等，1 表示完全不平等。在这里，如果一个指标的值更高，则数据将更加分散。
 
-基尼系数可以通过以下公式从ROC曲线下的面积计算得出：
+基尼系数可以通过以下公式从 ROC 曲线下的面积计算得出：
 
 > 基尼系数 = (2 * ROC_curve) — 1
 
 ### 结论
 
-理解机器学习模型在未见数据上的表现如何是使用这些评估指标的最终目的。像准确率、精确率、召回率这样的指标适用于评估平衡数据集的分类模型，但如果数据不平衡且存在类别差异，则其他方法如ROC/AUC、基尼系数在评估模型性能方面表现更好。
+理解机器学习模型在未见数据上的表现如何是使用这些评估指标的最终目的。像准确率、精确率、召回率这样的指标适用于评估平衡数据集的分类模型，但如果数据不平衡且存在类别差异，则其他方法如 ROC/AUC、基尼系数在评估模型性能方面表现更好。
 
 好的，这就结束了这篇文章**。**希望大家喜欢阅读这篇文章，欢迎在评论区分享你的评论/想法/反馈。
 
 **感谢阅读！！！**
 
-**简历：[纳戈什·辛格·乔汉](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是CirrusLabs的大数据开发人员。他在电信、分析、销售、数据科学等各个领域拥有超过4年的工作经验，专注于各种大数据组件。
+**简历：[纳戈什·辛格·乔汉](https://www.linkedin.com/in/nagesh-singh-chauhan-6936bb13b/)** 是 CirrusLabs 的大数据开发人员。他在电信、分析、销售、数据科学等各个领域拥有超过 4 年的工作经验，专注于各种大数据组件。
 
 [原文](https://levelup.gitconnected.com/model-evaluation-metrics-in-machine-learning-8988739236fc)。已获授权转载。
 
 **相关：**
 
-+   [主成分分析（PCA）降维](/2020/05/dimensionality-reduction-principal-component-analysis.html)
++   主成分分析（PCA）降维
 
-+   [机器学习模型的超参数优化](/2020/05/hyperparameter-optimization-machine-learning-models.html)
++   机器学习模型的超参数优化
 
-+   [DBSCAN 聚类算法在机器学习中的应用](/2020/04/dbscan-clustering-algorithm-machine-learning.html)
++   DBSCAN 聚类算法在机器学习中的应用
 
 ### 更多相关话题
 
@@ -312,8 +312,8 @@ Kolmogorov-Smirnov的一个Python实现示例。
 
 +   [数据科学统计学习的顶级资源](https://www.kdnuggets.com/2021/12/springboard-top-resources-learn-data-science-statistics.html)
 
-+   [9亿美元人工智能失败的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
++   [9 亿美元人工智能失败的分析](https://www.kdnuggets.com/2021/12/9b-ai-failure-examined.html)
 
-+   [成功数据科学家的5个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
++   [成功数据科学家的 5 个特征](https://www.kdnuggets.com/2021/12/5-characteristics-successful-data-scientist.html)
 
-+   [是什么使Python成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)
++   [是什么使 Python 成为初创公司的理想编程语言](https://www.kdnuggets.com/2021/12/makes-python-ideal-programming-language-startups.html)

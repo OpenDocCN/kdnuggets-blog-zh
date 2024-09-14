@@ -1,8 +1,8 @@
 # 10 个 Jupyter Notebook 小技巧和窍门
 
-> 原文：[https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
+> 原文：[`www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html`](https://www.kdnuggets.com/2023/06/10-jupyter-notebook-tips-tricks-data-scientists.html)
 
-![10 个 Jupyter Notebook 小技巧和窍门](../Images/85e8a7853e673a63f605937b572ab719.png)
+![10 个 Jupyter Notebook 小技巧和窍门](img/85e8a7853e673a63f605937b572ab719.png)
 
 图片由作者提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -28,7 +28,7 @@
 
 访问命令的最简单和最流行的方法是类似于 VSCode 的命令面板。你可以按**Ctrl + Shift + P** 调出命令面板。它允许你搜索和执行命令，或滚动浏览所有命令以发现你想运行的命令。
 
-![10 个 Jupyter Notebook 小技巧和窍门](../Images/e043ed190771badd5dcc05a40198b306.png)
+![10 个 Jupyter Notebook 小技巧和窍门](img/e043ed190771badd5dcc05a40198b306.png)
 
 动图由作者提供
 
@@ -103,7 +103,7 @@ $\int \frac{1}{x} dx = \ln \left| x \right| + C$
 
 **输出：**
 
-![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](../Images/9da1a9309898fbbc43f627da39c1b316.png)
+![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](img/9da1a9309898fbbc43f627da39c1b316.png)
 
 # 5\. 为 Jupyter Notebook 安装其他内核
 
@@ -122,7 +122,7 @@ IRkernel::installspec()
 conda install -c r r-essentials
 ```
 
-对于 Julia 语言爱好者，我创建了一个简单的指南 [如何在 Jupyter Notebook 中设置 Julia](/2022/11/setup-julia-jupyter-notebook.html)。
+对于 Julia 语言爱好者，我创建了一个简单的指南 如何在 Jupyter Notebook 中设置 Julia。
 
 # 6\. 从不同内核运行代码
 
@@ -160,7 +160,7 @@ conda install -c r r-essentials
 
 **输出：**
 
-![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](../Images/3a7621c33853a6d4f034a296742bc574.png)
+![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](img/3a7621c33853a6d4f034a296742bc574.png)
 
 类似于 `!`，你可以使用 `%%script` 运行 Shell 脚本，这允许你运行安装在机器上的所有内核。例如，你可以运行 R 脚本。
 
@@ -181,7 +181,7 @@ print("KDnuggets")
 
 你可以使用多个光标来编辑多个变量和语法或添加多行代码。要创建多个光标，你需要在按住 **Alt** 键的同时点击并拖动鼠标。
 
-![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](../Images/043f93d8a84e70064674ef0bb87f96cf.png)
+![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](img/043f93d8a84e70064674ef0bb87f96cf.png)
 
 作者提供的 GIF
 
@@ -191,7 +191,7 @@ print("KDnuggets")
 
 你只需导入 `IPython.display` 即可获取图像、视频和音频功能。这在处理非结构化数据集和机器学习应用时非常有用。
 
-![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](../Images/f44688dadc402fa0a35953e1d4318f84.png)
+![数据科学家的 10 个 Jupyter Notebook 小贴士和技巧](img/f44688dadc402fa0a35953e1d4318f84.png)
 
 作者提供的图片
 

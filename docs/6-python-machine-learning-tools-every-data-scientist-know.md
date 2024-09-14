@@ -1,8 +1,8 @@
 # 每个数据科学家应该了解的 6 个 Python 机器学习工具
 
-> 原文：[https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
+> 原文：[`www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html`](https://www.kdnuggets.com/2022/05/6-python-machine-learning-tools-every-data-scientist-know.html)
 
-![每个数据科学家应该了解的 6 个 Python 机器学习工具](../Images/95eb482dc461eca74358cd0606e0f415.png)
+![每个数据科学家应该了解的 6 个 Python 机器学习工具](img/95eb482dc461eca74358cd0606e0f415.png)
 
 [由 svstudioart 创建的后端矢量 - www.freepik.com](https://www.freepik.com/vectors/backend)
 
@@ -12,17 +12,17 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织进行 IT
 
 * * *
 
 机器学习提供了巨大的优势。它可以迅速识别模式和趋势，自动化的概念通过机器学习变成现实。来自各个领域和行业的企业正快速采用机器学习，以现代化他们的用户界面、安全性和人工智能需求。
 
-对于机器学习，Python 被认为是最佳编程语言。它是一个用户友好的[编程语言](/2021/05/top-programming-languages.html)，并且有多种简单的方法来加载数据。许多工具使得 Python 机器学习对数据科学家变得简单。让我们来看一下每个数据科学家应该使用的六个必备工具。
+对于机器学习，Python 被认为是最佳编程语言。它是一个用户友好的编程语言，并且有多种简单的方法来加载数据。许多工具使得 Python 机器学习对数据科学家变得简单。让我们来看一下每个数据科学家应该使用的六个必备工具。
 
 # 1\. TensorFlow
 
@@ -48,7 +48,7 @@ Keras 非常适合那些希望快速开始 ML 工作的初学者。他们拥有�
 
 它是一个基于 Torch 的开源 ML 库，由 Facebook AI 研究实验室于 2016 年创建。
 
-我们可以将 PyTorch 视为 TensorFlow 的竞争对手，因为它能够与不同的编程语言配合使用，并作为一个[对 ML 有价值的工具](/2020/09/most-complete-guide-pytorch-data-scientists.html)和 DL 学习工具。它像许多 ML 库一样是开源的；像 TensorFlow 一样，PyTorch 也使用张量。此外，它还支持 Python 和 C++ 编程语言。
+我们可以将 PyTorch 视为 TensorFlow 的竞争对手，因为它能够与不同的编程语言配合使用，并作为一个对 ML 有价值的工具和 DL 学习工具。它像许多 ML 库一样是开源的；像 TensorFlow 一样，PyTorch 也使用张量。此外，它还支持 Python 和 C++ 编程语言。
 
 然而，由于 PyTorch 相对较新，还有很多改进的空间。好消息是它拥有强大的支持社区。它更友好于 Python，并支持 GPU 和 CPU。PyTorch 是一个易于调试的工具，具有简单的代码、强大的 API、更好的优化以及计算图支持的优势。
 
@@ -60,7 +60,7 @@ Keras 非常适合那些希望快速开始 ML 工作的初学者。他们拥有�
 
 Sickit-Learn 基于“数据建模”这一元素，与许多机器学习工具不同，优先考虑数据建模和数据可视化。它是一个开源商业库。与 Keras 类似，它也具有用户友好的界面，并且可以轻松与 Panda 和 Numpy 等其他库集成。
 
-预测、拟合和转换的简单命令可以通过简单的用户界面帮助调整、评估、[数据处理](/2021/07/python-tips-snippets-data-processing.html)和模型接口。由于界面，它在市场上作为标准库广泛使用，用于表格数据的机器学习。
+预测、拟合和转换的简单命令可以通过简单的用户界面帮助调整、评估、数据处理和模型接口。由于界面，它在市场上作为标准库广泛使用，用于表格数据的机器学习。
 
 # 5\. Theano
 
@@ -94,7 +94,7 @@ Pandas 提供了许多用于数据处理的功能，其中包括
 
 数据科学家需要能够简化工作的软件——他们的大脑中已经有复杂的方程和复杂的算法！每个数据科学家在使用 Python 开发机器学习算法时都有具体的需求和优先级。
 
-有许多 [Python 库](/2022/04/python-libraries-data-scientists-know-2022.html) 可用于机器学习算法。每种库都有不同的优缺点。开发者可以根据自己的需求选择合适的工具。
+有许多 Python 库 可用于机器学习算法。每种库都有不同的优缺点。开发者可以根据自己的需求选择合适的工具。
 
 深度学习和机器学习变得越来越容易理解，机器学习工具使编程任务更易管理、更高效、更及时。
 
@@ -102,13 +102,13 @@ Pandas 提供了许多用于数据处理的功能，其中包括
 
 ### 相关主题
 
-+   [KDnuggets 新闻，5月25日：每个…都应该知道的 6 个 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个…都应该知道的 6 个 Python 机器学习工具](https://www.kdnuggets.com/2022/n21.html)
 
 +   [每个数据科学家都应该知道的工具：实用指南](https://www.kdnuggets.com/tools-every-data-scientist-should-know-a-practical-guide)
 
 +   [每个 AI 工程师都应该知道的工具：实用指南](https://www.kdnuggets.com/tools-every-ai-engineer-should-know-a-practical-guide)
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日: 3 个跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日: 3 个跟踪和可视化工具…](https://www.kdnuggets.com/2022/n01.html)
 
 +   [每个数据科学家都应该知道的 10 个 Python 库](https://www.kdnuggets.com/10-python-libraries-every-data-scientist-should-know)
 

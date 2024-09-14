@@ -1,8 +1,8 @@
 # 将你的 PyTorch 模型部署到生产环境
 
-> 原文：[https://www.kdnuggets.com/2019/03/deploy-pytorch-model-production.html](https://www.kdnuggets.com/2019/03/deploy-pytorch-model-production.html)
+> 原文：[`www.kdnuggets.com/2019/03/deploy-pytorch-model-production.html`](https://www.kdnuggets.com/2019/03/deploy-pytorch-model-production.html)
 
-[评论](#comments)
+评论
 
 **由 [Nicolás Metallo](https://www.linkedin.com/in/nicolas-metallo/?originalSubdomain=uk)，Audatex**
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
@@ -41,7 +41,7 @@ import dill as dill
 torch.save(learner.model, PATH, pickle_module=dill)
 ```
 
-你可以在这篇 [文章](invalid#zSoyz) 中阅读有关 `pickle` 限制的更多信息。一个常见的 PyTorch 约定是使用 `.pt` 或 `.pth` 文件扩展名保存模型。
+你可以在这篇 文章 中阅读有关 `pickle` 限制的更多信息。一个常见的 PyTorch 约定是使用 `.pt` 或 `.pth` 文件扩展名保存模型。
 
 **加载模型**
 
@@ -255,7 +255,7 @@ launching the server...
 
 **就这些！** 现在我们可以从终端运行类似这样的命令（我正在运行一个 AWS 实例）。以这张图片为例。
 
-![](../Images/1bc93c133e36d2aa8f5cfd14033110ae.png)
+![](img/1bc93c133e36d2aa8f5cfd14033110ae.png)
 
 ```py
 
@@ -280,7 +280,7 @@ $ curl http://ec2-100-24-34-242.compute-1.amazonaws.com:8080/predict?url=https:/
 
 ### 1\. 使用 [Clipper](http://clipper.ai) 的图像分类示例
 
-在 [ClipperTutorials](invalid#zSoyz) GitHub 上有一个很棒的 `ipynb` 文件，你可以跟随它了解一切的基本工作原理。他们提供了一个 Docker 镜像，或者你可以直接运行他们的 Amazon AMI。遗憾的是，这仅适用于 PyTorch 0.4.0，这使得将其转换为最新预览版本的 PyTorch 和 Fastai 训练的模型变得非常麻烦。不过，它与示例预训练模型配合得很好。
+在 ClipperTutorials GitHub 上有一个很棒的 `ipynb` 文件，你可以跟随它了解一切的基本工作原理。他们提供了一个 Docker 镜像，或者你可以直接运行他们的 Amazon AMI。遗憾的是，这仅适用于 PyTorch 0.4.0，这使得将其转换为最新预览版本的 PyTorch 和 Fastai 训练的模型变得非常麻烦。不过，它与示例预训练模型配合得很好。
 
 **创建 ClipperConnection**
 
@@ -501,7 +501,7 @@ cd zeit
 
 **上传你的训练模型文件**
 
-将你的训练模型文件（例如 `stage-2.pth`）上传到 Google Drive 或 Dropbox 等云服务。复制该文件的下载链接。**注意：**下载链接是直接启动文件下载的链接，通常与提供下载视图的分享链接不同（如有需要，使用 [https://rawdownload.now.sh/](https://rawdownload.now.sh/)）。
+将你的训练模型文件（例如 `stage-2.pth`）上传到 Google Drive 或 Dropbox 等云服务。复制该文件的下载链接。**注意：**下载链接是直接启动文件下载的链接，通常与提供下载视图的分享链接不同（如有需要，使用 [`rawdownload.now.sh/`](https://rawdownload.now.sh/)）。
 
 **根据你的模型自定义应用**
 
@@ -557,7 +557,7 @@ traced_script_module.save("model-resnet18-jit.pt")
 
 **PyTorch, Libtorch, C++ 和 NodeJS**
 
-查看 [http://blog.christianperone.com/2018/10/pytorch-1-0-tracing-jit-and-libtorch-c-api-to-integrate-pytorch-into-nodejs/](http://blog.christianperone.com/2018/10/pytorch-1-0-tracing-jit-and-libtorch-c-api-to-integrate-pytorch-into-nodejs/)
+查看 [`blog.christianperone.com/2018/10/pytorch-1-0-tracing-jit-and-libtorch-c-api-to-integrate-pytorch-into-nodejs/`](http://blog.christianperone.com/2018/10/pytorch-1-0-tracing-jit-and-libtorch-c-api-to-integrate-pytorch-into-nodejs/)
 
 ### 结论
 

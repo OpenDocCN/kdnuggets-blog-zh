@@ -1,8 +1,8 @@
 # 如何在 Bash 中管理文件和目录
 
-> 原文：[https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash](https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash)
+> 原文：[`www.kdnuggets.com/how-to-manage-files-and-directories-in-bash`](https://www.kdnuggets.com/how-to-manage-files-and-directories-in-bash)
 
-![如何在 Bash 中管理文件和目录](../Images/f590d131e1aa939d9aa76bdb9e94d636.png)
+![如何在 Bash 中管理文件和目录](img/f590d131e1aa939d9aa76bdb9e94d636.png)
 
 图片由作者提供 | Midjourney & Canva
 
@@ -12,25 +12,25 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
-Bash，即Bourne-Again Shell，是一种命令行解释器，允许用户通过输入命令与操作系统交互。它通常用于Linux和macOS等基于Unix的系统，并提供了管理文件和目录的各种工具。
+Bash，即 Bourne-Again Shell，是一种命令行解释器，允许用户通过输入命令与操作系统交互。它通常用于 Linux 和 macOS 等基于 Unix 的系统，并提供了管理文件和目录的各种工具。
 
-要开始使用bash，你需要打开终端：
+要开始使用 bash，你需要打开终端：
 
 +   在**Linux**上，在应用程序菜单中查找终端应用程序。
 
-+   在**macOS**上，使用Spotlight搜索（Cmd + Space）并输入“Terminal”。
++   在**macOS**上，使用 Spotlight 搜索（Cmd + Space）并输入“Terminal”。
 
-+   在**Windows**上，你可以使用Git Bash或Windows子系统（WSL）。
++   在**Windows**上，你可以使用 Git Bash 或 Windows 子系统（WSL）。
 
-一旦你打开终端并可以使用，我们就准备好学习如何使用bash管理文件和目录。我们从一些基本的导航命令开始，然后转到管理目录和文件。
+一旦你打开终端并可以使用，我们就准备好学习如何使用 bash 管理文件和目录。我们从一些基本的导航命令开始，然后转到管理目录和文件。
 
 ## `pwd` - 打印工作目录
 
@@ -218,7 +218,7 @@ ls; rm file.txt
 | mv | mv <source> <destination> | 移动或重命名文件或目录 |
 | rm | rm <file_name> | 删除文件或目录 |
 
-[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的主编，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的贡献编辑，马修旨在使复杂的数据科学概念变得易于理解。他的职业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他的使命是使数据科学社区的知识民主化。马修从6岁开始编程。
+[](https://www.linkedin.com/in/mattmayo13/)****[马修·梅奥](https://www.kdnuggets.com/wp-content/uploads/./profile-pic.jpg)**** ([**@mattmayo13**](https://twitter.com/mattmayo13)) 拥有计算机科学硕士学位和数据挖掘研究生文凭。作为[KDnuggets](https://www.kdnuggets.com/)和[Statology](https://www.statology.org/)的主编，以及[Machine Learning Mastery](https://machinelearningmastery.com/)的贡献编辑，马修旨在使复杂的数据科学概念变得易于理解。他的职业兴趣包括自然语言处理、语言模型、机器学习算法以及探索新兴的人工智能。他的使命是使数据科学社区的知识民主化。马修从 6 岁开始编程。
 
 ### 更多相关内容
 

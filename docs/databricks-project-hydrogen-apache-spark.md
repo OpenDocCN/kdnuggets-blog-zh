@@ -1,12 +1,12 @@
 # 氢项目是基于 Apache Spark 的新倡议，旨在支持 AI 和数据科学
 
-> 原文：[https://www.kdnuggets.com/2018/08/databricks-project-hydrogen-apache-spark.html](https://www.kdnuggets.com/2018/08/databricks-project-hydrogen-apache-spark.html)
+> 原文：[`www.kdnuggets.com/2018/08/databricks-project-hydrogen-apache-spark.html`](https://www.kdnuggets.com/2018/08/databricks-project-hydrogen-apache-spark.html)
 
-![c](../Images/3d9c022da2d331bb56691a9617b91b90.png) [评论](#comments)
+![c](img/3d9c022da2d331bb56691a9617b91b90.png) 评论
 
 **由 [Reynold Xin](https://www.linkedin.com/in/reynoldxin/)，[Databricks](https://databricks.com/) 的联合创始人**
 
-![Databricks 氢项目](../Images/46d51fcbb59c8e0e38277f07a3ac25e0.png)
+![Databricks 氢项目](img/46d51fcbb59c8e0e38277f07a3ac25e0.png)
 
 ### **问题 #1 - 什么是氢项目？**
 
@@ -18,11 +18,11 @@
 
 ## 我们的前 3 名课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速入门网络安全职业。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升您的数据分析水平
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持组织的 IT
 
 * * *
 
@@ -34,33 +34,33 @@
 
 问题在于，大数据框架如 Spark 和分布式深度学习框架由于大数据任务执行方式与深度学习任务执行方式之间的差异，难以协同工作。例如，在 Spark 中，每个任务被分为多个相互独立的子任务。这被称为“极其并行”，这是一个大规模的数据处理方式，可以扩展到 PB 级别的数据。
 
-然而，深度学习框架使用不同的执行方案。它们假设任务之间有完全的协调和依赖。这意味着这种模式优化了常量通信，而不是大规模数据处理，以扩展到PB级数据。
+然而，深度学习框架使用不同的执行方案。它们假设任务之间有完全的协调和依赖。这意味着这种模式优化了常量通信，而不是大规模数据处理，以扩展到 PB 级数据。
 
 氢项目被定位为解决这个困境的潜在方案。
 
 ### **问题 #3 - 这个项目将为贡献者和用户提供什么？**
 
-氢项目引入了Spark的新调度原语——群组调度。
+氢项目引入了 Spark 的新调度原语——群组调度。
 
-在这种模式下，任务调度器采用“全或无”的方式。这意味着要么一次性调度所有任务，要么一个任务也不调度。这实际上解决了Spark与分布式ML框架需求之间的根本不兼容性。
+在这种模式下，任务调度器采用“全或无”的方式。这意味着要么一次性调度所有任务，要么一个任务也不调度。这实际上解决了 Spark 与分布式 ML 框架需求之间的根本不兼容性。
 
-现在用户可以使用一个简单的API来引入一个障碍函数。障碍函数指示Spark是否在机器学习管道的每个阶段使用令人尴尬的并行模式或群组调度器模式。
+现在用户可以使用一个简单的 API 来引入一个障碍函数。障碍函数指示 Spark 是否在机器学习管道的每个阶段使用令人尴尬的并行模式或群组调度器模式。
 
 例如，新的群组调度器模式可以用于使用分布式训练框架的模型训练，而令人尴尬的并行可以在数据准备之前使用，也可以在模型训练后用于模型推理。
 
 ### **问题 #4 - 你认为氢项目如何支持对分析和机器学习的广泛需求？**
 
-氢项目的目标是将所有分布式机器学习框架作为Spark上的一等公民。它真正将数据处理与机器学习统一，特别是Spark上的分布式训练。
+氢项目的目标是将所有分布式机器学习框架作为 Spark 上的一等公民。它真正将数据处理与机器学习统一，特别是 Spark 上的分布式训练。
 
-我们希望使其他框架在Spark上运行得像MLlib一样简单，无论是TensorFlow还是Horovod，或未来流行的ML框架。这大大扩展了可以在Spark上有效用于深度学习应用的ML框架生态系统。
+我们希望使其他框架在 Spark 上运行得像 MLlib 一样简单，无论是 TensorFlow 还是 Horovod，或未来流行的 ML 框架。这大大扩展了可以在 Spark 上有效用于深度学习应用的 ML 框架生态系统。
 
-新的API还不是最终版本，但预计将很快被添加到核心Apache Spark项目中。
+新的 API 还不是最终版本，但预计将很快被添加到核心 Apache Spark 项目中。
 
-### **问题 #5 - 你认为开发者在整合不同的数据集和开源项目方面做得如何？我们是否更接近于统一的分析理论，还是在使AI适应实际应用方面还有很多工作要做？**
+### **问题 #5 - 你认为开发者在整合不同的数据集和开源项目方面做得如何？我们是否更接近于统一的分析理论，还是在使 AI 适应实际应用方面还有很多工作要做？**
 
-人工智能（AI）具有推动颠覆性创新的巨大潜力，这些创新将影响地球上大多数企业。然而，大多数企业在AI方面的成功面临困难。为什么会这样？简单来说，AI和数据被孤立在不同的系统和组织中。
+人工智能（AI）具有推动颠覆性创新的巨大潜力，这些创新将影响地球上大多数企业。然而，大多数企业在 AI 方面的成功面临困难。为什么会这样？简单来说，AI 和数据被孤立在不同的系统和组织中。
 
-Apache Spark是第一个统一的分析引擎——它激发了这场革命，因为它是唯一一个真正将数据处理和机器学习结合在一起的引擎。通过氢项目，我们正在将Spark的内置优化扩展到MLlib之外，使开发者能够利用统一的数据处理和机器学习方法，使用Spark上的任何ML框架。
+Apache Spark 是第一个统一的分析引擎——它激发了这场革命，因为它是唯一一个真正将数据处理和机器学习结合在一起的引擎。通过氢项目，我们正在将 Spark 的内置优化扩展到 MLlib 之外，使开发者能够利用统一的数据处理和机器学习方法，使用 Spark 上的任何 ML 框架。
 
 机器学习框架的多样化在生产 AI 应用时带来了其他下游影响，例如实验共享和跟踪以及模型推向生产。因此，我们刚刚推出了 [MLflow](https://dbricks.co/2M0rzGD)，这是一个新的跨云开源框架，旨在简化端到端的机器学习生命周期。
 
@@ -82,7 +82,7 @@ https://databricks.com/session/databricks-keynote-2
 
 **相关内容:**
 
-+   [使用 MLflow 管理机器学习生命周期——第 1 部分](https://www.kdnuggets.com/2018/07/manage-machine-learning-lifecycle-mlflow.html)
++   [使用 MLflow 管理机器学习生命周期——第一部分](https://www.kdnuggets.com/2018/07/manage-machine-learning-lifecycle-mlflow.html)
 
 +   [Apache Spark 介绍](https://www.kdnuggets.com/2018/07/introduction-apache-spark.html)
 
@@ -94,7 +94,7 @@ https://databricks.com/session/databricks-keynote-2
 
 +   [AI for Ukraine 是 AI HOUSE 为支持乌克兰科技社区而推出的新教育项目……](https://www.kdnuggets.com/2022/08/ai-house-ai-ukraine-new-educational-project-support-ukrainian-tech-community.html)
 
-+   [Mercury概述：创建数据科学投资组合和……](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
++   [Mercury 概述：创建数据科学投资组合和……](https://www.kdnuggets.com/2022/05/overview-mercury-creating-data-science-portfolio-notebook-based-webapps.html)
 
 +   [支持向量机：一种直观的方法](https://www.kdnuggets.com/2022/08/support-vector-machines-intuitive-approach.html)
 

@@ -1,22 +1,22 @@
 # Pandas 不够用？这里有几个处理更大、更快数据的 Python 替代方案。
 
-> 原文：[https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html](https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
+> 原文：[`www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html`](https://www.kdnuggets.com/2021/07/pandas-alternatives-processing-larger-faster-data-python.html)
 
-[评论](#comments)
+评论
 
 **由 [DaurEd](https://daureducation.medium.com/) 提供优质且负担得起的教育**。
 
-![](../Images/d24ce366a64c6254e5b2a7776109a476.png)
+![](img/d24ce366a64c6254e5b2a7776109a476.png)
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能。
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT 工作。
 
 * * *
 
@@ -30,7 +30,7 @@
 
 数据的前 5 行：
 
-![](../Images/4f2b4bb786e1b0ded727a4008a1fd6be.png)
+![](img/4f2b4bb786e1b0ded727a4008a1fd6be.png)
 
 Pandas 设计为 *仅在单个核心上运行*，因此无法利用系统上可用的多核。
 
@@ -42,13 +42,13 @@ Dask 目前缺少 Modin 已实现的多个 pandas API。
 
 要了解如何通过参数 *num_cpus* 控制 Modin 使用的处理器数量，请查看：
 
-[https://github.com/Piyush-Kulkarni/ByeByePandas.git](https://github.com/Piyush-Kulkarni/ByeByePandas.git)
+[`github.com/Piyush-Kulkarni/ByeByePandas.git`](https://github.com/Piyush-Kulkarni/ByeByePandas.git)
 
 在 Windows 平台上，您可以在任务管理器 > 性能中检查系统的核心数。
 
-![](../Images/246f50035976fc036dc9310ea87cb0fa.png)
+![](img/246f50035976fc036dc9310ea87cb0fa.png)
 
-使用*num_cpu*超出系统可用核心数不会提升性能。实际上，它可能会降低性能。在我的案例中，超出系统提供的6个核心后，性能略有下降，如上述图表所示。
+使用*num_cpu*超出系统可用核心数不会提升性能。实际上，它可能会降低性能。在我的案例中，超出系统提供的 6 个核心后，性能略有下降，如上述图表所示。
 
 [原文](https://daureducation.medium.com/bye-bye-pandas-3808348c48f1)。已获许可转载。
 

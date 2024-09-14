@@ -1,22 +1,22 @@
 # 免费的数据科学学习路线图：适用于所有水平，提供 IBM
 
-> 原文：[https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
+> 原文：[`www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm`](https://www.kdnuggets.com/a-free-data-science-learning-roadmap-for-all-levels-with-ibm)
 
-![免费数据科学学习路线图：适用于所有水平，提供 IBM](../Images/2c0ea75223c53020e37a4aa17b2f2fbb.png)
+![免费数据科学学习路线图：适用于所有水平，提供 IBM](img/2c0ea75223c53020e37a4aa17b2f2fbb.png)
 
 编辑提供的图像
 
-2024年的目标继续进行，我希望所有把学习数据科学作为目标的人能看到这篇文章。你可以通过多种方式学习数据科学，从 YouTube 视频到回到大学。
+2024 年的目标继续进行，我希望所有把学习数据科学作为目标的人能看到这篇文章。你可以通过多种方式学习数据科学，从 YouTube 视频到回到大学。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织的 IT
 
 * * *
 
@@ -24,7 +24,7 @@
 
 如果你喜欢在一个平台上体验学习之旅，并且该平台遵循课程体系且组织有序 - 请继续阅读这篇博客。
 
-这里有4个不同的学习路线图，适用于4个不同的水平：
+这里有 4 个不同的学习路线图，适用于 4 个不同的水平：
 
 # 数据科学简介
 
@@ -34,7 +34,7 @@
 
 如果你想开始数据科学职业生涯或想从当前职业过渡到数据科学 - 首先需要了解数据科学的基础，以便明白它究竟是什么。
 
-通过这个，你将培养像数据科学家一样工作的思维方式，并了解可以用来解决不同类型数据科学问题的不同方法，系列课程包含4门课程：
+通过这个，你将培养像数据科学家一样工作的思维方式，并了解可以用来解决不同类型数据科学问题的不同方法，系列课程包含 4 门课程：
 
 +   [什么是数据科学？](http://imp.i384100.net/QyL7Ba)
 
@@ -44,7 +44,7 @@
 
 +   [使用 Python 进行数据科学的数据库和 SQL](http://imp.i384100.net/g1BYmg)
 
-如果你每周投入10小时，你将在1个月内完成这门课程。
+如果你每周投入 10 小时，你将在 1 个月内完成这门课程。
 
 # 使用 Python 和 SQL 的数据科学基础
 
@@ -138,6 +138,6 @@
 
 +   [311 呼叫中心表现：服务水平评级](https://www.kdnuggets.com/2023/03/boxplot-outlier-311-call-center-performance.html)
 
-+   [KDnuggets 新闻，12月14日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
++   [KDnuggets 新闻，12 月 14 日：3 个免费的机器学习课程…](https://www.kdnuggets.com/2022/n48.html)
 
-+   [KDnuggets 新闻，8月31日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)
++   [KDnuggets 新闻，8 月 31 日：完整的数据科学学习路线图…](https://www.kdnuggets.com/2022/n35.html)

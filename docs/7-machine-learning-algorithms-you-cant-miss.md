@@ -1,8 +1,8 @@
-# 7个你不能错过的机器学习算法
+# 7 个你不能错过的机器学习算法
 
-> 原文：[https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss](https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss)
+> 原文：[`www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss`](https://www.kdnuggets.com/7-machine-learning-algorithms-you-cant-miss)
 
-![7个你不能错过的机器学习算法](../Images/b5b53aae77d873680c1923cb74073127.png)
+![7 个你不能错过的机器学习算法](img/b5b53aae77d873680c1923cb74073127.png)
 
 图片由编辑提供
 
@@ -12,11 +12,11 @@
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -28,13 +28,13 @@
 
 ## 1\. 线性回归
 
-线性回归是基于连续变量的[最基本的预测模型](/handson-with-supervised-learning-linear-regression)。它假设两个变量之间存在线性关系，并利用这种关系根据给定的输入绘制结果。
+线性回归是基于连续变量的最基本的预测模型。它假设两个变量之间存在线性关系，并利用这种关系根据给定的输入绘制结果。
 
 在合适的数据集下，这些模型易于训练和实施且相对可靠。然而，现实世界中的关系通常不是线性的，因此在许多业务应用中相关性有限。它也无法很好地处理异常值，因此不适合大规模、多样化的数据集。
 
 ## 2\. 逻辑回归
 
-你应该了解的一个相似但不同的机器学习算法是逻辑回归。尽管名字与线性回归相似，[它是一个分类算法](/2022/11/comparing-linear-logistic-regression.html)，而不是估计算法。线性回归预测连续值，而逻辑回归预测数据落入给定类别的概率。
+你应该了解的一个相似但不同的机器学习算法是逻辑回归。尽管名字与线性回归相似，它是一个分类算法，而不是估计算法。线性回归预测连续值，而逻辑回归预测数据落入给定类别的概率。
 
 逻辑回归在预测客户流失、天气预报和产品成功率方面很常见。与线性回归类似，它易于实现和训练，但容易过拟合，并且在处理复杂关系时表现不佳。
 
@@ -80,14 +80,14 @@ K-means 聚类非常适合客户细分。这使得它对希望优化营销或加
 
 ### 更多相关话题
 
-+   [5张超实用的SQL备忘单你不能错过！](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
++   [5 张超实用的 SQL 备忘单你不能错过！](https://www.kdnuggets.com/5-super-helpful-sql-cheat-sheets-you-cant-miss)
 
-+   [2024年你不能错过的5大AI播客](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
++   [2024 年你不能错过的 5 大 AI 播客](https://www.kdnuggets.com/top-5-ai-podcasts-you-cant-miss-in-2024)
 
-+   [不要错过！在2023年结束前注册免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
++   [不要错过！在 2023 年结束前注册免费课程](https://www.kdnuggets.com/dont-miss-out-enroll-in-free-courses-before-2023-ends)
 
-+   [9个专业证书，能帮你迈向学位… 如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
++   [9 个专业证书，能帮你迈向学位… 如果…](https://www.kdnuggets.com/9-professional-certificates-that-can-take-you-onto-a-degree-if-you-really-want-to)
 
 +   [如何使用机器学习自动标记数据](https://www.kdnuggets.com/2022/02/machine-learning-automatically-label-data.html)
 
-+   [2024年你可以参加的5个顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)
++   [2024 年你可以参加的 5 个顶级机器学习课程](https://www.kdnuggets.com/5-top-machine-learning-courses-you-can-take-in-2024)

@@ -1,28 +1,28 @@
-# 数据科学书籍完整合集 – 第2部分
+# 数据科学书籍完整合集 – 第二部分
 
-> 原文：[https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
+> 原文：[`www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html`](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-2.html)
 
-![数据科学书籍完整合集 - 第2部分](../Images/87c70f4e2aebc9cfdaccc639ac2b4fd8.png)
+![数据科学书籍完整合集 - 第二部分](img/87c70f4e2aebc9cfdaccc639ac2b4fd8.png)
 
 图片来源于作者
 
-> **编辑注**：关于这一两部分系列中的数据科学书籍的完整范围，请参见[**数据科学书籍完整合集 – 第1部分**](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)。
+> **编辑注**：关于这一两部分系列中的数据科学书籍的完整范围，请参见[**数据科学书籍完整合集 – 第一部分**](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)。
 
 * * *
 
 ## 我们的前三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业轨道。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在IT方面
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织在 IT 方面
 
 * * *
 
-数据科学书籍在我的数据科学之旅中发挥了重要作用。[Deep Learning for Coders with Fastai and PyTorch](https://www.amazon.com/dp/1492045527/ref=emc_bcc_2_i) 让我从新的角度思考深度神经网络及我们如何处理几乎所有的机器学习问题。我爱上了NLP书籍及其附带的GitHub代码库、Jupyter笔记本练习和易于探索的选项。[Data Science at the Command Line](https://datascienceatthecommandline.com/2e/) 是一本现在可以在线访问（文档风格）的书籍，支持术语搜索、导航，并可以直接复制代码进行测试。它提供了免费的互动阅读体验。
+数据科学书籍在我的数据科学之旅中发挥了重要作用。[Deep Learning for Coders with Fastai and PyTorch](https://www.amazon.com/dp/1492045527/ref=emc_bcc_2_i) 让我从新的角度思考深度神经网络及我们如何处理几乎所有的机器学习问题。我爱上了 NLP 书籍及其附带的 GitHub 代码库、Jupyter 笔记本练习和易于探索的选项。[Data Science at the Command Line](https://datascienceatthecommandline.com/2e/) 是一本现在可以在线访问（文档风格）的书籍，支持术语搜索、导航，并可以直接复制代码进行测试。它提供了免费的互动阅读体验。
 
-在这两部分系列中，我将分享数据科学各子领域的最佳书籍。你可以购买纸质书籍，或仅仅获取在线版本，或下载PDF/EPub/Kindle版本。有些书籍基于网站，可以免费访问。
+在这两部分系列中，我将分享数据科学各子领域的最佳书籍。你可以购买纸质书籍，或仅仅获取在线版本，或下载 PDF/EPub/Kindle 版本。有些书籍基于网站，可以免费访问。
 
 **在第二部分中，我们将回顾以下书籍：**
 
@@ -40,7 +40,7 @@
 
 1.  物联网
 
-1.  AI产品管理
+1.  AI 产品管理
 
 1.  数据科学高管版
 
@@ -70,7 +70,7 @@
 
 +   [从头开始的深度学习：从第一原则用 Python 构建](https://www.amazon.com/Deep-Learning-Scratch-Building-Principles/dp/1492041416/ref=sr_1_17?crid=22V1IEL8WUZQ4&keywords=Deep+Learning&qid=1651511806&s=books&sprefix=deep+learning%2Cstripbooks-intl-ship%2C691&sr=1-17)
 
-![深度学习实践：使用 Fastai 和 PyTorch](../Images/e543c1b18c1f2f555fe22285633256c8.png)
+![深度学习实践：使用 Fastai 和 PyTorch](img/e543c1b18c1f2f555fe22285633256c8.png)
 
 详细训练循环 | [深度学习实践：使用 Fastai 和 PyTorch](https://www.amazon.com/dp/1492045527/ref=emc_bcc_2_i)
 
@@ -98,33 +98,33 @@
 
 +   [企业中的应用自然语言处理: 教机器阅读、写作和理解](https://www.amazon.com/_/dp/149206257X)
 
-![使用变换器的自然语言处理](../Images/f6d3e6d54c38bc4acfa0df55478e7e20.png)
+![使用变换器的自然语言处理](img/f6d3e6d54c38bc4acfa0df55478e7e20.png)
 
 变换器时间线 | [使用变换器的自然语言处理](https://www.amazon.com/_/dp/1098103246?tag=oreilly20-20)
 
 # MLOps
 
-你将学习创建机器学习流水线，将应用部署到云端，维护多个数据库，并学习自动化所有流程。机器学习运维由开发运维驱动，工程师自动化流程、监控指标和管理多个系统。如果你想变得面向未来，投资时间和金钱学习MLOps是值得的。
+你将学习创建机器学习流水线，将应用部署到云端，维护多个数据库，并学习自动化所有流程。机器学习运维由开发运维驱动，工程师自动化流程、监控指标和管理多个系统。如果你想变得面向未来，投资时间和金钱学习 MLOps 是值得的。
 
-+   [引入MLOps：如何在企业中扩展机器学习](https://www.amazon.com/Introducing-MLOps-Machine-Learning-Enterprise/dp/1492083291/ref=sr_1_4?crid=3Q6DCVF8BTBN0&keywords=MLOps&qid=1651509567&s=books&sprefix=mlops%2Cstripbooks-intl-ship%2C495&sr=1-4)
++   [引入 MLOps：如何在企业中扩展机器学习](https://www.amazon.com/Introducing-MLOps-Machine-Learning-Enterprise/dp/1492083291/ref=sr_1_4?crid=3Q6DCVF8BTBN0&keywords=MLOps&qid=1651509567&s=books&sprefix=mlops%2Cstripbooks-intl-ship%2C495&sr=1-4)
 
-+   [实用MLOps：机器学习模型的运维](https://www.amazon.com/Practical-MLOps-Operationalizing-Machine-Learning/dp/1098103017/ref=pd_rhf_dp_s_pd_crcd_sccl_1_27/137-5550312-9155521?pd_rd_w=oRrqt&pf_rd_p=cee83ff1-8fc1-4533-a3f5-bf3d998f4558&pf_rd_r=60NT8XECA1PM1MSE8TJF&pd_rd_r=9079b64d-efc0-4b47-b3ad-f5d31fa40f02&pd_rd_wg=9v2AE&pd_rd_i=1098103017&psc=1)
++   [实用 MLOps：机器学习模型的运维](https://www.amazon.com/Practical-MLOps-Operationalizing-Machine-Learning/dp/1098103017/ref=pd_rhf_dp_s_pd_crcd_sccl_1_27/137-5550312-9155521?pd_rd_w=oRrqt&pf_rd_p=cee83ff1-8fc1-4533-a3f5-bf3d998f4558&pf_rd_r=60NT8XECA1PM1MSE8TJF&pd_rd_r=9079b64d-efc0-4b47-b3ad-f5d31fa40f02&pd_rd_wg=9v2AE&pd_rd_i=1098103017&psc=1)
 
-+   [大规模MLOps工程](https://www.amazon.com/Cloud-Native-Machine-Learning-Osipov/dp/1617297763/ref=sr_1_1?crid=3Q6DCVF8BTBN0&keywords=MLOps&qid=1651509567&s=books&sprefix=mlops%2Cstripbooks-intl-ship%2C495&sr=1-1)
++   [大规模 MLOps 工程](https://www.amazon.com/Cloud-Native-Machine-Learning-Osipov/dp/1617297763/ref=sr_1_1?crid=3Q6DCVF8BTBN0&keywords=MLOps&qid=1651509567&s=books&sprefix=mlops%2Cstripbooks-intl-ship%2C495&sr=1-1)
 
-+   [机器学习设计模式：数据准备、模型构建和MLOps中的常见挑战解决方案](https://www.amazon.com/Machine-Learning-Design-Patterns-Preparation/dp/1098115783/ref=sr_1_5?crid=3Q6DCVF8BTBN0&keywords=MLOps&qid=1651509567&s=books&sprefix=mlops%2Cstripbooks-intl-ship%2C495&sr=1-5)
++   [机器学习设计模式：数据准备、模型构建和 MLOps 中的常见挑战解决方案](https://www.amazon.com/Machine-Learning-Design-Patterns-Preparation/dp/1098115783/ref=sr_1_5?crid=3Q6DCVF8BTBN0&keywords=MLOps&qid=1651509567&s=books&sprefix=mlops%2Cstripbooks-intl-ship%2C495&sr=1-5)
 
 # 机器人技术
 
-虽然它不是数据科学的核心部分，但它已经是人工智能的一部分很长时间了。你可以学习如何在Raspberry Pi上使用Python训练和开发你的机器学习模型，或创建边缘应用。机器人技术是未来，如果你想保持相关性，我强烈建议你至少学习基础知识。
+虽然它不是数据科学的核心部分，但它已经是人工智能的一部分很长时间了。你可以学习如何在 Raspberry Pi 上使用 Python 训练和开发你的机器学习模型，或创建边缘应用。机器人技术是未来，如果你想保持相关性，我强烈建议你至少学习基础知识。
 
-+   [学习机器人编程：使用Raspberry Pi和Python构建和控制AI驱动的自主机器人，第2版](https://www.amazon.com/Learn-Robotics-Programming-AI-enabled-autonomous/dp/1839218800)
++   [学习机器人编程：使用 Raspberry Pi 和 Python 构建和控制 AI 驱动的自主机器人，第 2 版](https://www.amazon.com/Learn-Robotics-Programming-AI-enabled-autonomous/dp/1839218800)
 
-+   [机器人流程自动化项目：使用UiPath和Automation Anywhere构建真实世界的RPA解决方案](https://www.amazon.com/Robotic-Process-Automation-Projects-real-world/dp/1839217359)
++   [机器人流程自动化项目：使用 UiPath 和 Automation Anywhere 构建真实世界的 RPA 解决方案](https://www.amazon.com/Robotic-Process-Automation-Projects-real-world/dp/1839217359)
 
-+   [机器人流程自动化手册：实施RPA系统指南](https://www.amazon.com/Robotic-Process-Automation-Handbook-Implementing/dp/1484257286)
++   [机器人流程自动化手册：实施 RPA 系统指南](https://www.amazon.com/Robotic-Process-Automation-Handbook-Implementing/dp/1484257286)
 
-+   [人工智能与机器人：使用AI技术构建执行人类任务的智能机器人](https://www.amazon.com/Artificial-Intelligence-Robotics-intelligent-techniques/dp/1788835441)
++   [人工智能与机器人：使用 AI 技术构建执行人类任务的智能机器人](https://www.amazon.com/Artificial-Intelligence-Robotics-intelligent-techniques/dp/1788835441)
 
 # 物联网
 
@@ -138,7 +138,7 @@
 
 +   [TinyML：在 Arduino 和超低功耗微控制器上使用 TensorFlow Lite 进行机器学习](https://www.amazon.com/TinyML-Learning-TensorFlow-Ultra-Low-Power-Microcontrollers/dp/1492052043/ref=pd_sbs_sccl_2_2/137-5550312-9155521?pd_rd_w=BoYOX&pf_rd_p=3676f086-9496-4fd7-8490-77cf7f43f846&pf_rd_r=YB5TQHH1DZ2B0BJRZKD8&pd_rd_r=eea75200-4f2f-4a14-8387-602548df47ef&pd_rd_wg=KZ1Tp&pd_rd_i=1492052043&psc=1)
 
-![实用物联网黑客技术-Fotios-Chantzis](../Images/554ef889c74c9bd9d61fea67858ee852.png)
+![实用物联网黑客技术-Fotios-Chantzis](img/554ef889c74c9bd9d61fea67858ee852.png)
 
 图片来源于 [实用物联网黑客](https://www.amazon.com/Practical-IoT-Hacking-Fotios-Chantzis/dp/1718500904/ref=sr_1_1?crid=3UZ7AWANV6BRS&keywords=iot&qid=1651509429&s=books&sprefix=iot%2Cstripbooks-intl-ship%2C297&sr=1-1)
 
@@ -150,9 +150,9 @@
 
 +   [揭秘企业中的人工智能](https://www.amazon.com/Demystifying-AI-Enterprise-Playbook-Transformation/dp/103214520X/ref=sr_1_1?crid=3MYZUTZXBPOQL&keywords=Demystifying+AI+for+the+Enterprise&qid=1651510236&s=books&sprefix=demystifying+ai+for+the+enterprise%2Cstripbooks-intl-ship%2C509&sr=1-1)
 
-+   [风险智能：人工智能如何变革风险管理（ERM未来系列第2本）电子书](https://www.amazon.com/Risk-Intelligence-Artificial-transform-Management-ebook/dp/B09GLC3617)
++   [风险智能：人工智能如何变革风险管理（ERM 未来系列第 2 本）电子书](https://www.amazon.com/Risk-Intelligence-Artificial-transform-Management-ebook/dp/B09GLC3617)
 
-+   [在企业中管理人工智能：成功实现人工智能项目和MLOps以构建可持续人工智能组织](https://www.amazon.com/Managing-Enterprise-Succeeding-Sustainable-Organizations/dp/1484278232)
++   [在企业中管理人工智能：成功实现人工智能项目和 MLOps 以构建可持续人工智能组织](https://www.amazon.com/Managing-Enterprise-Succeeding-Sustainable-Organizations/dp/1484278232)
 
 # 《高管数据科学》
 
@@ -194,12 +194,12 @@
 
 +   [数据科学书籍完整合集 - 第一部分](https://www.kdnuggets.com/2022/05/complete-collection-data-science-books-part-1.html)
 
-+   [KDnuggets 新闻，5月25日：每个人都需要的 6 种 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
++   [KDnuggets 新闻，5 月 25 日：每个人都需要的 6 种 Python 机器学习工具…](https://www.kdnuggets.com/2022/n21.html)
 
-+   [KDnuggets 新闻，6月1日：完整的数据科学书籍合集…](https://www.kdnuggets.com/2022/n22.html)
++   [KDnuggets 新闻，6 月 1 日：完整的数据科学书籍合集…](https://www.kdnuggets.com/2022/n22.html)
 
-+   [KDnuggets 新闻，4月6日：8 门免费 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
++   [KDnuggets 新闻，4 月 6 日：8 门免费 MIT 数据科学课程…](https://www.kdnuggets.com/2022/n14.html)
 
-+   [数据科学免费课程完整合集 - 第1部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-1.html)
++   [数据科学免费课程完整合集 - 第一部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-1.html)
 
-+   [数据科学免费课程完整合集 - 第2部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html)
++   [数据科学免费课程完整合集 - 第二部分](https://www.kdnuggets.com/2023/03/complete-collection-data-science-free-courses-part-2.html)

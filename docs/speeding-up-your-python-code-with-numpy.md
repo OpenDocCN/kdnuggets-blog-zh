@@ -1,8 +1,8 @@
 # 使用 NumPy 加速你的 Python 代码
 
-> 原文：[https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy](https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy)
+> 原文：[`www.kdnuggets.com/speeding-up-your-python-code-with-numpy`](https://www.kdnuggets.com/speeding-up-your-python-code-with-numpy)
 
-![使用 NumPy 加速你的 Python 代码](../Images/b64f632158a37d94ca844c89dd824ab7.png)[图片由 storyset 提供，来源于 Freepik](https://www.freepik.com/free-vector/market-launch-concept-illustration_7171502.htm#fromView=search&page=1&position=3&uuid=715fea93-5839-4794-b955-1691b8cf44f5)
+![使用 NumPy 加速你的 Python 代码](img/b64f632158a37d94ca844c89dd824ab7.png)[图片由 storyset 提供，来源于 Freepik](https://www.freepik.com/free-vector/market-launch-concept-illustration_7171502.htm#fromView=search&page=1&position=3&uuid=715fea93-5839-4794-b955-1691b8cf44f5)
 
 NumPy 是一个常用于数学和统计应用的 Python 包。然而，有些人仍然不知道 NumPy 可以帮助加速我们的 Python 代码执行。
 
@@ -10,11 +10,11 @@ NumPy 是一个常用于数学和统计应用的 Python 包。然而，有些人
 
 ## 我们的前 3 个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [谷歌网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全领域的职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [谷歌数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [谷歌 IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT 工作
 
 * * *
 
@@ -174,12 +174,12 @@ NumPy 是一个强大的数学和数值处理包。与标准 Python 内置函数
 
 +   [作为数据科学家管理你的可重用 Python 代码](https://www.kdnuggets.com/2021/06/managing-reusable-python-code-data-scientist.html)
 
-+   [追踪和可视化你的 Python 代码执行的3种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
++   [追踪和可视化你的 Python 代码执行的 3 种工具](https://www.kdnuggets.com/2021/12/3-tools-track-visualize-execution-python-code.html)
 
 +   [如何作为数据科学家注释你的 Python 代码](https://www.kdnuggets.com/how-to-comment-your-python-code-as-a-data-scientist)
 
-+   [KDnuggets™ 新闻 22:n01, 1月5日: 追踪和可视化的3种工具…](https://www.kdnuggets.com/2022/n01.html)
++   [KDnuggets™ 新闻 22:n01, 1 月 5 日: 追踪和可视化的 3 种工具…](https://www.kdnuggets.com/2022/n01.html)
 
-+   [加速你的 Python 代码的3种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
++   [加速你的 Python 代码的 3 种简单方法](https://www.kdnuggets.com/2022/10/3-simple-ways-speed-python-code.html)
 
 +   [优化 Python 代码性能: 深入分析 Python 性能分析器](https://www.kdnuggets.com/2023/02/optimizing-python-code-performance-deep-dive-python-profilers.html)

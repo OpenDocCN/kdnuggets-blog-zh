@@ -1,8 +1,8 @@
 # 如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM
 
-> 原文：[https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)
+> 原文：[`www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain`](https://www.kdnuggets.com/how-to-finetune-mistral-ai-7b-llm-with-hugging-face-autotrain)
 
-![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/b6981736e060f20b69ebe17ff9798b3c.png)
+![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](img/b6981736e060f20b69ebe17ff9798b3c.png)
 
 图片由编辑提供
 
@@ -12,17 +12,17 @@
 
 ## 我们的三大课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业生涯。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你的组织 IT
 
 * * *
 
 Mistral 7 B 的整体性能基准见下图。
 
-![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/f03b284e0c26fd081dbae259afb81539.png)
+![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](img/f03b284e0c26fd081dbae259afb81539.png)
 
 Mistral 7B 性能基准（[江等（2023）](https://arxiv.org/pdf/2310.06825.pdf)）
 
@@ -61,7 +61,7 @@ train = pd.DataFrame(train)
 
 上述代码将会抽取实际数据的百分之十的样本。我们在这个教程中只需要这么多，因为训练更大数据会花费更长时间。我们的数据样本如下图所示。
 
-![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/4cd0e21304bf8a7f1fbae7882f1ae4e6.png)
+![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](img/4cd0e21304bf8a7f1fbae7882f1ae4e6.png)
 
 作者提供的图片
 
@@ -119,7 +119,7 @@ train_chat.to_csv('train_chat.csv', index =False)
 
 我们将得到一个适合微调 Mistral 7B Instruct v0.1 模型的数据集。
 
-![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](../Images/7b1930b4a2f258cd2001cb658385c2e7.png)
+![如何使用 Hugging Face AutoTrain 微调 Mistral AI 7B LLM](img/7b1930b4a2f258cd2001cb658385c2e7.png)
 
 作者提供的图片
 
@@ -167,7 +167,7 @@ lora_alpha = 32
 lora_dropout = 0.045
 ```
 
-我们可以调整许多参数，但在本文中不会讨论它们。一些改进LLM微调的技巧包括使用较低的学习率以保持预先学习的表示，避免过拟合通过调整周期数，使用较大的批量大小以提高稳定性，或者在有内存问题时调整梯度累积。
+我们可以调整许多参数，但在本文中不会讨论它们。一些改进 LLM 微调的技巧包括使用较低的学习率以保持预先学习的表示，避免过拟合通过调整周期数，使用较大的批量大小以提高稳定性，或者在有内存问题时调整梯度累积。
 
 当所有信息准备好后，我们将设置环境以接受之前设置的所有信息。
 
@@ -193,7 +193,7 @@ os.environ["LORA_ALPHA"] = str(lora_alpha)
 os.environ["LORA_DROPOUT"] = str(lora_dropout)
 ```
 
-我们将使用以下命令在笔记本中运行AutoTrain。
+我们将使用以下命令在笔记本中运行 AutoTrain。
 
 ```py
 !autotrain llm \
@@ -244,9 +244,9 @@ print(predicted_text)
 
 1.  均衡饮食：确保饮食中包含大量水果、蔬菜、瘦蛋白和全谷物。这将帮助你获得保持健康和充满活力所需的营养。
 
-1.  定期锻炼：每天至少进行30分钟的中等强度运动，如快走或骑车。这将帮助你维持健康的体重，降低慢性疾病的风险，并改善整体身体和心理健康。
+1.  定期锻炼：每天至少进行 30 分钟的中等强度运动，如快走或骑车。这将帮助你维持健康的体重，降低慢性疾病的风险，并改善整体身体和心理健康。
 
-1.  充足的睡眠：每晚目标睡眠7-9小时。这将帮助你在白天感到更有休息感和警觉性，同时有助于维持健康的体重并降低慢性疾病的风险。
+1.  充足的睡眠：每晚目标睡眠 7-9 小时。这将帮助你在白天感到更有休息感和警觉性，同时有助于维持健康的体重并降低慢性疾病的风险。
 
 模型的输出与我们的训练数据的实际输出接近，如下图所示。
 
@@ -256,13 +256,13 @@ print(predicted_text)
 
 1.  充足的睡眠并保持一致的作息时间。
 
-Mistral模型确实因其体积小而强大，简单的微调已经显示出良好的结果。尝试你的数据集，以查看它是否适合你的工作。
+Mistral 模型确实因其体积小而强大，简单的微调已经显示出良好的结果。尝试你的数据集，以查看它是否适合你的工作。
 
 # 结论
 
-Mistral AI 7B系列模型是一个强大的LLM模型，性能优于LLaMA，并具有出色的适应性。由于该模型在Hugging Face上可用，我们可以使用HuggingFace AutoTrain来微调模型。目前，Hugging Face上有两个可微调的模型：Mistral 7B v0.1作为基础模型，以及Mistral 7B Instruct v0.1用于对话和问答。即使经过快速训练，微调结果也表现出良好的前景。
+Mistral AI 7B 系列模型是一个强大的 LLM 模型，性能优于 LLaMA，并具有出色的适应性。由于该模型在 Hugging Face 上可用，我们可以使用 HuggingFace AutoTrain 来微调模型。目前，Hugging Face 上有两个可微调的模型：Mistral 7B v0.1 作为基础模型，以及 Mistral 7B Instruct v0.1 用于对话和问答。即使经过快速训练，微调结果也表现出良好的前景。
 
-**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰写员。在全职工作于Allianz Indonesia的同时，他喜欢通过社交媒体和写作媒体分享Python和数据技巧。Cornellius在各种AI和机器学习主题上进行写作。
+**[](https://www.linkedin.com/in/cornellius-yudha-wijaya/)**[Cornellius Yudha Wijaya](https://www.linkedin.com/in/cornellius-yudha-wijaya/)** 是数据科学助理经理和数据撰写员。在全职工作于 Allianz Indonesia 的同时，他喜欢通过社交媒体和写作媒体分享 Python 和数据技巧。Cornellius 在各种 AI 和机器学习主题上进行写作。
 
 ### 相关话题
 

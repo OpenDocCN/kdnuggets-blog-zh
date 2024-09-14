@@ -1,32 +1,32 @@
 # 将你的数据科学职业生涯提升到新水平
 
-> 原文：[https://www.kdnuggets.com/2021/12/sas-advance-data-science-career-next-level.html](https://www.kdnuggets.com/2021/12/sas-advance-data-science-career-next-level.html)
+> 原文：[`www.kdnuggets.com/2021/12/sas-advance-data-science-career-next-level.html`](https://www.kdnuggets.com/2021/12/sas-advance-data-science-career-next-level.html)
 
 赞助广告。
 
-[![图片](../Images/baa4a5dbd0ddaad37d91f5556e34edeb.png)](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279873)
+![图片](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279873)
 
-数据科学职业路径的增长速度和吸引力空前强劲。事实上，自2012年以来，数据科学职位增长了 [650%](https://www.forbes.com/sites/louiscolumbus/2017/12/11/linkedins-fastest-growing-jobs-today-are-in-data-science-machine-learning/#6a7474ea51bd)。此外，[美国劳工统计局预测到2026年职位数量将增加约28%](https://towardsdatascience.com/is-data-science-still-a-rising-career-in-2021-722281f7074c#:~:text=The%20U.S.%20Bureau%20of%20Labor%20Statistics%20sees%20strong%20growth%20in,by%20about%2028%25%20through%202026.)，这相当于约**1150万**个新职位。你很难找到一个不将数据科学融入关键业务功能的行业。
+数据科学职业路径的增长速度和吸引力空前强劲。事实上，自 2012 年以来，数据科学职位增长了 [650%](https://www.forbes.com/sites/louiscolumbus/2017/12/11/linkedins-fastest-growing-jobs-today-are-in-data-science-machine-learning/#6a7474ea51bd)。此外，[美国劳工统计局预测到 2026 年职位数量将增加约 28%](https://towardsdatascience.com/is-data-science-still-a-rising-career-in-2021-722281f7074c#:~:text=The%20U.S.%20Bureau%20of%20Labor%20Statistics%20sees%20strong%20growth%20in,by%20about%2028%25%20through%202026.)，这相当于约**1150 万**个新职位。你很难找到一个不将数据科学融入关键业务功能的行业。
 
 * * *
 
 ## 我们的前三个课程推荐
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 1\. [Google 网络安全证书](https://www.kdnuggets.com/google-cybersecurity) - 快速进入网络安全职业道路。
 
-![](../Images/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
+![](img/e225c49c3c91745821c8c0368bf04711.png) 2\. [Google 数据分析专业证书](https://www.kdnuggets.com/google-data-analytics) - 提升你的数据分析技能
 
-![](../Images/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的IT
+![](img/0244c01ba9267c002ef39d4907e0b8fb.png) 3\. [Google IT 支持专业证书](https://www.kdnuggets.com/google-itsupport) - 支持你所在组织的 IT
 
 * * *
 
 无论你是刚刚起步还是经验丰富的专业人士，SAS 提供了广泛的实操课程，帮助数据科学专业人士在职业生涯中取得进步并保持领先：
 
-1.  [**SAS**^(**®**)**数据科学学院**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279873) 通过SAS的深入培训和专业认证掌握成为数据科学家的必要技能。利用 [**免费30天试用**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279875)**。**
+1.  [**SAS**^(**®**)**数据科学学院**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279873) 通过 SAS 的深入培训和专业认证掌握成为数据科学家的必要技能。利用 [**免费 30 天试用**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279875)**。**
 
 1.  [**数据策展专业人士**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279877)
 
-    专为数据科学家设计，该项目涵盖数据策展技术的SAS主题，包括使用Hadoop进行大数据准备。
+    专为数据科学家设计，该项目涵盖数据策展技术的 SAS 主题，包括使用 Hadoop 进行大数据准备。
 
 1.  [**高级分析专业人士**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279879)
 
@@ -42,7 +42,7 @@
 
 为了支持您的数据科学职业之旅，SAS 还提供了免费资源——从白皮书和文章到播客和视频教程，选择丰富。通过访问 [**数据科学资源中心**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279887) 开始，或在 [**数据科学家学习之旅**](https://www.sas.com/gms/redirect.jsp?detail=GMS201595_279889) 系列中注册免费网络研讨会。
 
-![广告](../Images/e5a885ba299ed8ce63c38ac0a7c344df.png)
+![广告](img/e5a885ba299ed8ce63c38ac0a7c344df.png)
 
 ### 更多相关话题
 
